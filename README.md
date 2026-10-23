@@ -153,7 +153,7 @@ valves and equipment.
 
 ### The rules in one minute
 
-1. **Sunlight makes sun-drops.** In daylight, two tall solar masts fill the **battery jar**. It holds 20 drops; extra
+1. **Sunlight makes sun-drops.** In daylight, two tall solar masts fill the **battery jar**. It holds 15 drops; extra
    drops spill and fade away.
 2. **Every room runs on drops:** Kai's heater, Amara's air maker and Mei's grow lamp. The base basics (CO₂ scrubbers,
    fans, radio) always take 1 drop.
@@ -206,7 +206,7 @@ The storm drill in shift 2 uses the same tasks, so nobody meets the controls for
 | Hard idea | How the game shows it | The real fact |
 |---|---|---|
 | Energy budgets | Sun-drops you count and move | Solar power only while the Sun is up |
-| Battery limits | The jar holds 20; extra drops spill | Turn spare sunlight into air and growth |
+| Battery limits | The jar holds 15; extra drops spill | Turn spare sunlight into air and growth |
 | The polar Sun | The Sun circles the horizon behind real mountains | Shackleton's rim: ~240 days of sunlight; the longest night is ~1.5 days |
 | Talking to Earth | Earth sinks and the radio turns to static | From the south pole, Earth is visible about half of each month |
 | Shielding | Sparks fizzle in the blue water wall | ~20 g/cm² of water makes a storm shelter |
@@ -239,9 +239,9 @@ Three stars, in the order of real mission priorities: **1. crew safe → 2. base
 | Ending | What happens |
 |---|---|
 | 🌟 **Golden Bloom** | Crew safe, lights on, and Alo bursts into a full golden cluster. Rare: the expert goal |
-| 🌸 **Bloom** | Crew safe and Alo alive. A tiny yellow flower opens at sunrise |
+| 🌸 **Bloom** | Alo alive at sunrise: a tiny yellow flower opens. The stars show how safe the crew and base were |
 | 🥀 **Alo lost** | The crew made it, but Alo didn't, just like the first Moon sprout in 2019. *Try again?* |
-| 📡 **Mission stopped** | The air ran out, and the flight rules call everyone home. *Try again?* |
+| 📡 **Mission stopped** | The air ran out, or the storm dose reached 6, and the flight rules call everyone home. *Try again?* |
 
 There are many ways to win. Every setting is useful in some winning plan; the point is informed trade-offs, not one
 right answer.
@@ -402,7 +402,13 @@ We will add the challenge's official datasets when they are released, and prefer
 **Status: concept stage.** As the Space Apps rules require, no game code was written before the hackathon. The game
 will be built during the event.
 
-- **Engine:** Godot 4.7 + GDScript, Windows offline first, on the Compatibility renderer for older classroom hardware.
+**Design documents:** [Game design](docs/GAME_DESIGN.md) (final story, rules and balanced numbers) ·
+[3D quality and performance](docs/TECH_ART.md) · [Cutscenes](docs/CUTSCENES.md) · [Asset tracker](docs/ASSETS.md).
+The game design document is the build spec: where it differs from this page, it wins.
+
+- **Engine:** Godot 4.7 + GDScript, Windows offline first. Forward+ renderer with Low / Medium / High presets
+  (30 fps locked on an Intel UHD 620 classroom laptop, 60 fps on a GTX 1650), baked lighting, and automatic
+  fallback to the Compatibility renderer on computers without Vulkan or Direct3D 12.
 - **Architecture:** the simulation is separate from the graphics: one authoritative state, a pure preview/step
   function, and every number in a data file tagged with its source.
 
@@ -442,8 +448,9 @@ The pitch video was made with these AI tools:
 |---|---|
 | [`LastLightAcademy_pitch_video.mp4`](LastLightAcademy_pitch_video.mp4) | The pitch video (Git LFS) |
 | [`LastLightAcademy_pitch_video.srt`](LastLightAcademy_pitch_video.srt) | Its English subtitles |
+| [`docs/`](docs/) | Game design, 3D quality and performance spec, cutscene plan, asset tracker |
 | `README.md` | This page |
-| `.gitattributes` | Stores the video with Git LFS |
+| `.gitattributes` | Stores video, 3D models, images and audio with Git LFS |
 
 ---
 
