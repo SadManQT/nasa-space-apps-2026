@@ -72,6 +72,25 @@ and thirst limits). It is available if the team wants to consider it, through ch
 Lowering Golden to H≥4 makes it about **30× more common** (857,832 plans, 1 in 616,000; 0.27% of ★★★ plans). That still
 fits "rare", so the pre-agreed fallback is reasonable.
 
+### F6 · Golden Bloom needs STACK
+
+Without the STACK choice, Golden is impossible (no plan reaches it). `GAME_PLAN_FINAL.md` §11 lists STACK as a
+*Should*, and its hour-24 rule cuts every Should. If STACK is cut, the Golden ending, its worked plan and its tests all
+break. *Fix:* make STACK a **Must**, or drop Golden from the hackathon build.
+
+### F7 · The radiation stop has no written number
+
+P-02 says "a crew exposure safety breach" stops the mission, and its completion trigger needs Z≤3, so the breach is
+Z>3 by implication. Other files disagree (the v7 table lets Z=4 finish; the test suite in
+`game-design/20_TESTING_AND_ACCEPTANCE.md` treats Z=4 as unsafe). *Fix:* write the number into P-02 (this check used
+Z>3), together with the F1 decision.
+
+### F8 · Partial PUMP / STACK results are always worse
+
+Assisted input is always allowed and gives the full result, so partial results (PUMP +1, STACK one crate) are only
+ever a penalty for players who skip assistance. *Fix:* keep the timed version as the fun default, but make assistance
+visible on the alarm panel so nobody is punished for slow hands.
+
 ### F5 · Out-of-date claims in `GAME_PLAN_FINAL.md` §5
 
 The v7 balance table predates the P-02 contract. Under P-02:

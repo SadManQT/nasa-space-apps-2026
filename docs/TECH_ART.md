@@ -46,8 +46,8 @@ The Moon is a gift for rendering: one hard light (the Sun), a black sky, no fog 
 
 | Area | Technique |
 |---|---|
-| **Station interior** | **Baked lighting** (LightmapGI) for walls, floors and static props: soft shadows and bounce light at almost no runtime cost. One ReflectionProbe per room. |
-| **Gameplay light changes** | A few dynamic lights on top of the bake: heater glow (orange), lamp (green-gold), alarm (red), frost (blue tint via material). At most **6 dynamic lights visible**, and only **2 casting shadows**. |
+| **Station interior** | **Baked lighting** (LightmapGI) for walls, floors and static props: soft shadows and bounce light at almost no runtime cost. One ReflectionProbe per room. Baking may need the editor running Forward+ or Mobile; the baked result then runs in Compatibility. Verify this on 4.7.2 in the first hour. |
+| **Gameplay light changes** | A few dynamic lights on top of the bake: heater glow (orange), lamp (green-gold), alarm (red), frost (blue tint via material). At most **6 dynamic lights visible**; shadows only from the Sun plus **1** other light on Low (each shadowed light is an extra render pass in Compatibility). |
 | **Exterior** | One DirectionalLight3D for the Sun (very low on the horizon, as at the pole: long, dramatic shadows), 2–4 shadow cascades by preset. Earthshine as a faint blue fill. |
 | **Day to night** | The time-lapse animates the Sun's direction and energy plus the emissive strength of the solar masts; the interior bake stays valid because the windows are small. |
 | **Not used** | SDFGI, VoxelGI and volumetric fog (not available in Compatibility, and lightmaps look better for this style). |
@@ -171,7 +171,8 @@ assets/
   characters/     chr_kai/, chr_amara/, chr_mei/, chr_rafi/, chr_alo/, chr_tara/
   environment/    env_room_power/, env_hub/, env_exterior/ ...
   props/          prp_battery_jar/, prp_valve_wheel/ ...
-  animations/     anm_*.fbx (Mixamo)
+  animations/     Godot animation libraries only (raw Mixamo FBX files stay out of the public repo: Adobe's terms
+                  do not allow redistributing them as standalone files)
   vfx/            textures for effects (noise, frost, gradients)
   ui/             icons, cards, badges, logo, map
   audio/          music/, sfx/, vo/en/, vo/bn/
@@ -183,5 +184,6 @@ docs/
 **Names:** lowercase with underscores, prefix by type: `chr_`, `env_`, `prp_`, `anm_`, `vfx_`, `ui_`, `mus_`, `sfx_`,
 `vo_<lang>_<speaker>_<id>`, `cs_`. Example: `vo_bn_kai_s1_03.ogg`.
 
-**Formats:** models `.glb`, textures `.png`, music `.ogg`, short sound effects `.wav`, cutscenes `.ogv` (Ogg Theora,
+**Formats:** models `.glb`, textures `.png`, music `.ogg`, short sound effects `.wav`, cutscenes `.ogv` at **720p, 24 fps** (Ogg Theora is decoded on the CPU, so 1080p can stutter on classroom laptops;
+the 1080p masters are for the videos only) (Ogg Theora,
 the video format Godot plays without plug-ins). All binary files are stored with **Git LFS** (see `.gitattributes`).

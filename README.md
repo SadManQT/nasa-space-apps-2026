@@ -414,7 +414,7 @@ will be built during the event.
 [3D gameplay and the Chapter 1 number contract](docs/GAMEPLAY_DESIGN_FINAL.md) · [Science and data](docs/SCIENCE_AND_DATA.md) ·
 [Detailed design folder](game-design/00_README.md) · [Competition rules](docs/competition-rules.md) ·
 [3D quality and performance](docs/TECH_ART.md) · [Cutscene plan](docs/CUTSCENES.md) · [Asset plan](docs/ASSETS.md) ·
-[P-02 balance check](docs/P02_BALANCE_CHECK.md).
+[P-02 balance check](docs/P02_BALANCE_CHECK.md) · [Review of 24 Oct](docs/REVIEW_2026-10-24.md).
 
 - **Engine:** Godot 4.7 + GDScript, Windows offline first, on the Compatibility renderer for older classroom hardware.
 - **Architecture:** the simulation is separate from the graphics: one authoritative state, a pure preview/step

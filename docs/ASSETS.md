@@ -125,7 +125,7 @@ and Seedance a clip in a few minutes, so the core set can be generated in the fi
 | PRP-04 | Grow lamp rig + switch | 4k | Switch, lamp head | | ⬜ |
 | PRP-05 | Pump station with valve wheel and gauge | 6k | Wheel, needle | | ⬜ |
 | PRP-06 | Water-wall panel (fill level shown by the shader at the event) | 4k | — | | ⬜ |
-| PRP-07 | Supply bundles / crates ×6 shapes (STACK puzzle) | 500–1k each | — | | ⬜ |
+| PRP-07 | Supply bundles ×4 (STACK puzzle, P-02: four bundles fill the bunk slots) | 500–1k each | — | | ⬜ |
 | PRP-08 | Radiation counter | 2k | Needle | | ⬜ |
 | PRP-09 | Radio / comm screen | 3k | Screen surface | | ⬜ |
 | PRP-10 | Mission Table (holographic) | 6k | Holo surface | | ⬜ |
@@ -173,9 +173,11 @@ and Seedance a clip in a few minutes, so the core set can be generated in the fi
 
 ## I. Cutscenes
 
+Tiers (Must / Should / Could) are in [CUTSCENES.md §2](CUTSCENES.md#2-priority-the-events-real-build-window-is-short).
+
 | ID | Asset | Length | Owner | Status |
 |---|---|:---:|---|:---:|
-| CS-C01 | 2019: the first sprout freezes | 20 s | | ⬜ |
+| CS-C01 | 2019: the first sprout does not survive the night | 20 s | | ⬜ |
 | CS-C02 | Aurora Station / title | 25 s | | ⬜ |
 | CS-C03 | Last Light | 15 s | | ⬜ |
 | CS-C04 | Earth-set | 20 s | | ⬜ |
@@ -198,6 +200,9 @@ and Seedance a clip in a few minutes, so the core set can be generated in the fi
 
 ## Made before the event (declaration log)
 
-| Asset ID | Tool(s) | Date | Who |
-|---|---|---|---|
-| — | — | — | — |
+The Bangladesh guide asks for every AI tool, **the prompts and the reasoning**, and where the team's own creative work
+went (competition-rules.md §E). Claude's specs and prompts count as AI use too.
+
+| Asset ID | Tool(s) | Prompt (or link to it) | Why AI was used | Team's own work | Date | Who | Licence / terms checked |
+|---|---|---|---|---|---|---|---|
+| — | — | — | — | — | — | — | — |

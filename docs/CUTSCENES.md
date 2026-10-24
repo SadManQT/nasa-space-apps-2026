@@ -33,7 +33,19 @@ event. Every clip is listed in the project page's **Use of AI** field with its p
    consistent design throughout, no deformation or drift"*, plus negatives: *"no text, no logos, no distortion, no
    extra limbs, no flicker"*.
 
-## 2. Shot list
+## 2. Priority (the event's real build window is short)
+
+Video 2 needs a working demo by 6:30 PM on 13 Nov, about 11.5 hours after the 7 AM start
+([competition-rules.md](competition-rules.md) §A and §B). So cutscenes are tiered, and the game must work without
+any of them (a title card and the in-engine camera can stand in):
+
+| Tier | Clips |
+|---|---|
+| **Must** | C04 Earth-set · C06-B First Light (Bloom) |
+| **Should** | C03 Last Light · C08 N.'s message · C06-G Golden Bloom |
+| **Could** | C01 2019 history · C02 Aurora Station · C05 alarm sting · C06-L · C07 Earth-rise · screen loops |
+
+## 3. Shot list
 
 ### C01 · 2019: the first sprout freezes (≈20 s)
 
@@ -137,7 +149,7 @@ Ferreira and Rao appear on the hub's radio screen. We make short **talking-head 
 smiling, serious, worried) from their approved portraits, plus one per key line if we want lip-sync. The game plays
 the loop and the voice line with subtitles.
 
-## 3. Production steps
+## 4. Production steps
 
 1. **Approve** this shot list against STORY_FINAL and the C1 script, and get the Local Lead's answer on pre-made assets.
 2. **Reference pack:** cadet sheets, Alo sheet, Ferreira/Rao/N. portraits, station exterior, Shackleton style frame.
@@ -147,11 +159,12 @@ the loop and the voice line with subtitles.
    submission unless the Local Lead approves pre-made assets).
 5. **Generate** (during the event unless approved earlier) each shot at 1080p, 16:9; two takes, pick the best; re-generate only shots that fail.
 6. **Edit:** assemble the shots, add music and sound effects, colour-match to the game's palette.
-7. **Export:** master `.mp4` (kept in `assets/source/`) and the game version `.ogv` (Ogg Theora) in
+7. **Export:** master `.mp4` (kept in `assets/source/`, used for Videos 2 and 3) and the game version `.ogv` (Ogg
+   Theora, **720p, 24 fps**, because Godot decodes it on the CPU) in
    `assets/cutscenes/`. Voices are separate files per language (`vo/en`, `vo/bn`); subtitles come from the game's
    translation files.
 
-## 4. Music cues (ElevenLabs Music)
+## 5. Music cues (ElevenLabs Music)
 
 | Cue | Use | Mood |
 |---|---|---|
