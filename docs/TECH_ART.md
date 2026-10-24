@@ -7,7 +7,8 @@ classroom laptops as well as gaming PCs.
 visible LOD popping, and fast loading. No game can promise zero lag on every computer, so we set budgets for every
 asset and test on the weakest laptop we plan to support, every week.
 
-Related: [Game design](GAME_DESIGN.md) · [Asset tracker](ASSETS.md) · [Cutscenes](CUTSCENES.md)
+Related: [Gameplay spec](GAMEPLAY_DESIGN_FINAL.md) (§11 sets the renderer and performance goals) ·
+[Asset plan](ASSETS.md) · [Cutscenes](CUTSCENES.md) · [Asset list](../game-design/14_ASSET_PRODUCTION_LIST.md)
 
 ---
 
@@ -17,7 +18,7 @@ Related: [Game design](GAME_DESIGN.md) · [Asset tracker](ASSETS.md) · [Cutscen
 |---|---|---|
 | **Example hardware** | Intel UHD 620 (8th-gen Core i5), 8 GB RAM | GTX 1650 / RX 6400 / Iris Xe, 8–16 GB RAM |
 | **Quality preset** | Low | High |
-| **Resolution** | 1080p output, 3D rendered at 720p and upscaled (FSR) | 1080p native |
+| **Resolution** | 720p (the team's stated goal), or 1080p UI with the 3D at about 67% scale | 1080p native (presentation PC) |
 | **Frame rate** | **30 fps locked**, even pacing (aim for 45+ headroom) | **60 fps locked** |
 | **Frame budget** | 33 ms (GPU ≤ 25 ms) | 16.6 ms (CPU ≤ 8 ms, GPU ≤ 12 ms) |
 | **VRAM** | ≤ 1 GB | ≤ 2 GB |
@@ -26,17 +27,18 @@ Related: [Game design](GAME_DESIGN.md) · [Asset tracker](ASSETS.md) · [Cutscen
 A third **Medium** preset sits between them. Players can change the preset in Settings; the game picks one on first
 launch from the GPU name.
 
-## 2. Engine and project settings (Godot 4.7)
+## 2. Engine and project settings (Godot 4.7.2, pinned by the team)
 
 | Setting | Choice | Why |
 |---|---|---|
-| **Renderer** | **Forward+** | Best image quality (SSAO, glow, good shadows, FSR 2) on any Vulkan or Direct3D 12 GPU, including Intel UHD 620. |
-| **Fallback** | Compatibility (OpenGL) on computers without Vulkan/D3D12 | Keeps very old laptops playable at reduced quality. We test it once a week; it is a safety net, not the main look. |
+| **Renderer** | **Compatibility** (the team's decision in GAMEPLAY_DESIGN_FINAL §11) | Fastest and most reliable on old classroom laptops, and the only renderer for a later web build. It looks professional for this style because the lighting is baked (§3). |
+| **What Compatibility lacks** | No SSAO, SSR, SDFGI, VoxelGI or volumetric fog | Bake ambient occlusion and bounce light into the lightmaps instead; paint contact shadows into textures where needed. |
+| **Optional** | A Forward+ export for the presentation PC only, if time allows | Never required; the same scenes must still look right in Compatibility. |
 | **Physics** | Jolt Physics, 60 ticks per second, **physics interpolation on** | Interpolation makes movement smooth on 75/120/144 Hz screens and when the frame rate dips. |
 | **V-Sync** | On (adaptive where supported), with a frame-rate cap per preset | Even frame pacing and no tearing. |
-| **Anti-aliasing** | High: MSAA 4× + SMAA · Low: FSR 2 (it includes anti-aliasing) | Clean edges on stylised shapes without TAA smearing. |
-| **Shader stutter** | Godot's ubershader and pipeline precompilation, plus a warm-up during the loading screen (every material is drawn once off-screen) | No hitch the first time frost, sparks or a new room appear. |
-| **Color** | Linear workflow, AgX tonemapper, one shared `WorldEnvironment` per area | Consistent colour between rooms and cutscene renders. |
+| **Anti-aliasing** | MSAA 2× (Low) to 4× (High) | Clean edges on stylised shapes without smearing. |
+| **Shader stutter** | A warm-up during the loading screen: every material and effect is drawn once off-screen, and few unique materials are used (§4) | No hitch the first time frost, sparks or a new room appear. |
+| **Color** | Linear workflow, one tonemapper and one shared `WorldEnvironment` per area | Consistent colour between rooms and cutscene renders. |
 
 ## 3. Lighting: the key to "professional and fast"
 
@@ -48,7 +50,7 @@ The Moon is a gift for rendering: one hard light (the Sun), a black sky, no fog 
 | **Gameplay light changes** | A few dynamic lights on top of the bake: heater glow (orange), lamp (green-gold), alarm (red), frost (blue tint via material). At most **6 dynamic lights visible**, and only **2 casting shadows**. |
 | **Exterior** | One DirectionalLight3D for the Sun (very low on the horizon, as at the pole: long, dramatic shadows), 2–4 shadow cascades by preset. Earthshine as a faint blue fill. |
 | **Day to night** | The time-lapse animates the Sun's direction and energy plus the emissive strength of the solar masts; the interior bake stays valid because the windows are small. |
-| **Not used** | SDFGI, VoxelGI and volumetric fog (expensive, and lightmaps look better for this style). |
+| **Not used** | SDFGI, VoxelGI and volumetric fog (not available in Compatibility, and lightmaps look better for this style). |
 
 ## 4. Asset budgets
 
@@ -158,7 +160,7 @@ Low and High presets, with the frame-time monitor open. See the rules note in [A
 - [ ] Switch cadets 20 times quickly: no hitch.
 - [ ] Run all 7 shifts: memory stays flat (no leak).
 - [ ] Recommended PC, High preset: 60 fps locked.
-- [ ] Compatibility fallback starts and is playable.
+- [ ] The exported Windows build starts offline on a laptop that has never run the game (no editor shader cache).
 - [ ] Cutscene playback: no audio drift, no dropped frames.
 
 ## 9. Repository layout and naming

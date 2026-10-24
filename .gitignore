@@ -1,0 +1,6 @@
+.DS_Store
+Thumbs.db
+# Godot (from 13 Nov)
+.godot/
+*.translation
+export/

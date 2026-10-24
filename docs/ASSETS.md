@@ -1,42 +1,58 @@
 # Last Light Academy · Asset Tracker
 
-Everything Chapter 1 needs, who makes it, its budget, and its status. Budgets are in [TECH_ART.md](TECH_ART.md);
-the story and rules are in [GAME_DESIGN.md](GAME_DESIGN.md); cutscene shots are in [CUTSCENES.md](CUTSCENES.md).
+Preparation tracker for Chapter 1 assets: who prepares each one, its budget, and its status. Budgets are in
+[TECH_ART.md](TECH_ART.md); the story is [STORY_FINAL.md](STORY_FINAL.md); the rules and numbers are the P-02
+contract in [GAMEPLAY_DESIGN_FINAL.md §6](GAMEPLAY_DESIGN_FINAL.md#6-chapter-1-numerical-contract); cutscene shots are in
+[CUTSCENES.md](CUTSCENES.md). The team's full list is [game-design/14_ASSET_PRODUCTION_LIST.md](../game-design/14_ASSET_PRODUCTION_LIST.md).
 
-**Status:** ⬜ to do · 🟨 in progress · 🔍 in review · ✅ done (in the repo, passes the checks in TECH_ART.md §5)
+**Status:** ⬜ to do · 📝 prompt/spec ready (Phase 0) · 🟨 generating · 🔍 in review · ✅ done (in the repo, passes the
+checks in TECH_ART.md §5)
 
 ---
 
-## ⚠️ Rules check first
+## ⚠️ Rules first: what may be made before 13 November
 
-The README says: *"As the Space Apps rules require, no game code was written before the hackathon."* Assets
-(models, textures, audio, video, text) are not code, but please confirm with the official Space Apps 2026 rules or
-your local organisers that assets made before the event are allowed, and how to declare them. Until then:
+The team's rules research ([competition-rules.md](competition-rules.md), section B) found two official lines:
 
-- We prepare **assets only**: no gameplay scripts, no simulation code, no shaders.
-- The look-dev scene (for checking assets) has **no scripts**.
-- Every asset made before the event is listed in this file with its tool and date, and the README will say so.
+- Global FAQ: *"Teams are not allowed to begin working on the challenges prior to the hackathon."*
+- Bangladesh guide: Video 1 is "concept only"; the team's reading is **keep everything before 13 Nov at concept level**.
+
+Making game-ready models, voice lines and cutscenes now could be read as starting the project early. So the plan has
+two phases, and one question for the Dhaka Local Lead (Mohammad Mahdee-uz Zaman, contact in competition-rules.md §G):
+*"May we prepare art and audio assets before 13 November if we declare them on the project page?"* Ask in writing and
+save the answer in this repository.
+
+| Phase | When | What is allowed |
+|---|---|---|
+| **0 · Concept and preparation** | Now → 12 Nov | Concept art and reference sheets, written specs and generation prompts, voice casting tests, one style test clip, the paper playtest, downloading raw NASA data, rehearsing the Tripo/Meshy → Godot pipeline on throwaway test objects that are **not** used in the game |
+| **1 · Production** | 13–14 Nov (Dhaka event) | Generating the final models, animations, voice lines, music, sound and cutscenes from the Phase 0 prompts, plus all code, shaders and data processing |
+| **1 early** | Only with the Local Lead's written yes | Phase 1 asset items may move into Phase 0, each logged in the declaration table at the end of this file |
+
+Phase 0 is what makes Phase 1 fast: with approved references and ready prompts, Tripo/Meshy produce a model in minutes
+and Seedance a clip in a few minutes, so the core set can be generated in the first hours of the event.
 
 ## How we work together
 
 1. **Spec and prompt.** For each asset, Claude writes the spec (budget, scale, parts) and the generation prompt.
 2. **Reference image.** We make the reference sheet (Claude can generate it in ElevenLabs with Nano Banana Pro or
    Seedream, or a team member makes it). The team approves it before any 3D work.
-3. **Generate.** A team member runs Tripo or Meshy with the settings in TECH_ART.md §5 and exports `.glb`.
+3. **Generate (Phase 1).** On 13 Nov (or earlier only with the Local Lead's written yes), a team member runs Tripo or
+   Meshy with the settings in TECH_ART.md §5 and exports `.glb`.
 4. **Upload.** Commit the file to `assets/<type>/<asset_id>/` on the working branch (Git LFS handles big files), or
    share it and Claude commits it.
 5. **Review.** Claude checks triangle count, materials, texture sizes, scale, orientation, bones and moving parts,
    and reports a short fix list.
-6. **Done.** When it passes, the status turns ✅ and the asset gets its "made before the event" entry.
+6. **Done.** When it passes, the status turns ✅. Anything made before 13 Nov gets an entry in the declaration log,
+   and every AI tool and prompt goes into the project page's **Use of AI** field.
 
-## Schedule (hackathon assumed 14–15 November 2026; please confirm the date)
+## Schedule (Dhaka event 13–14 November 2026; global window 14–15 November)
 
-| Week | Dates | Focus |
+| Week | Dates | Phase 0 focus (concept and preparation) |
 |---|---|---|
-| **1** | 24–30 Oct | Approve design · style frames · reference sheets · cadets and Alo in 3D · voices chosen |
-| **2** | 31 Oct – 6 Nov | Station rooms and modular kit · hero consoles · animations · exterior terrain · UI set |
-| **3** | 7–13 Nov | Cutscenes · music and sound effects · voice lines (EN + BN) · final look-dev and performance test |
-| **Event** | 14–15 Nov | Code, gameplay, shaders, data processing, assembly |
+| **1** | 24–30 Oct | Ask the Local Lead · style frames · reference sheets for the cadets, Alo and the station · voice casting tests |
+| **2** | 31 Oct – 6 Nov | Specs and prompts for every model, prop and cutscene · Tripo/Meshy → Godot rehearsal on throwaway objects · paper playtest |
+| **3** | 7–12 Nov | One Seedance style test · music and sound briefs · final prompt pack · download raw NASA data · team roles for the event |
+| **Event** | 13–14 Nov | Generate assets from the prompt pack (first ~8 hours), then code, shaders, data processing and assembly |
 
 ---
 
@@ -92,7 +108,7 @@ your local organisers that assets made before the event are allowed, and how to 
 | ENV-04 | Air room (cyan) | ≤ 80k | Kit + props | | ⬜ |
 | ENV-05 | Garden (green) with the big window | ≤ 80k | Kit + props | | ⬜ |
 | ENV-06 | Safe Room (purple) with bunks and water-wall tanks | ≤ 80k | Kit + props | | ⬜ |
-| ENV-07 | Airlock (locked door) | ≤ 40k | Kit | | ⬜ |
+| ENV-07 | Airlock: two doors, suit check, cycle controls (used for the Chapter 1 chamber inspection) | ≤ 40k | Kit | | ⬜ |
 | ENV-08 | Station exterior shell (seen from windows and in cutscenes) | ≤ 60k | Tripo / Meshy | | ⬜ |
 | ENV-09 | Alo's chamber (LEAF-like sealed plant chamber) | ≤ 15k | Tripo / Meshy | | ⬜ |
 | ENV-10 | Solar masts ×2 (NASA VSAT-like) | ≤ 15k each | Tripo / Meshy | | ⬜ |
@@ -103,7 +119,7 @@ your local organisers that assets made before the event are allowed, and how to 
 
 | ID | Asset | Budget | Moving parts | Owner | Status |
 |---|---|---|---|---|:---:|
-| PRP-01 | Battery jar (15 drop slots) + sun-drop mesh | 5k + 200 | Lid glow | | ⬜ |
+| PRP-01 | Battery jar (20 drop slots, P-02 cap) + sun-drop mesh | 5k + 200 | Lid glow | | ⬜ |
 | PRP-02 | Heater console with 3-position dial | 5k | Dial | | ⬜ |
 | PRP-03 | Air maker with bubble tank and lever | 6k | Lever | | ⬜ |
 | PRP-04 | Grow lamp rig + switch | 4k | Switch, lamp head | | ⬜ |
@@ -114,7 +130,7 @@ your local organisers that assets made before the event are allowed, and how to 
 | PRP-09 | Radio / comm screen | 3k | Screen surface | | ⬜ |
 | PRP-10 | Mission Table (holographic) | 6k | Holo surface | | ⬜ |
 | PRP-11 | Bunks ×4 | 3k each | — | | ⬜ |
-| PRP-12 | Plant trays (Veggie-style) ×3 | 2k each | — | | ⬜ |
+| PRP-12 | Edible-crop grow rack (food layer C) + plant trays ×3 | 4k + 2k each | Rack lights | | ⬜ |
 | PRP-13 | Seed packet (আলো, N.) | 300 | — | | ⬜ |
 | PRP-14 | Old computer terminal (N.'s message) | 3k | Screen surface | | ⬜ |
 | PRP-15 | Small clutter set: tablets, mugs, tools, cables, labels | 300–1k each | — | | ⬜ |
