@@ -1,0 +1,96 @@
+# M-0502 — Permission to Answer
+
+## Mission identity
+
+- **Chapter:** CH05 — Shooting Stars.
+- **Primary location:** LOC-01; exact movement is listed by scene below.
+- **Purpose:** Observe impact flashes, identify Noor and invite her reply.
+- **Active-play target:** 13 minutes, excluding freely extended dialogue reading and optional exploration.
+- **Prerequisite:** `zero_sequence=true`; only New Game establishes arrival_accepted; all later prerequisites require their owning mission to be COMPLETE. No optional collectible blocks this mission.
+- **Scenes:** SC-0504, SC-0505, SC-0506 — [chapter script](../06_SCENE_SCRIPTS/CHAPTER_05.md).
+- **Characters:** Use the physical/remote/archive roster of SC-0504, SC-0505, SC-0506; the scene roster is authoritative and includes anonymous recordings without exposing names in player UI.
+- **Puzzle:** [P-10](../08_PUZZLE_DESIGNS.md#p-10).
+- **Systems:** SYS-01,SYS-02,SYS-03,SYS-05,SYS-07,SYS-09; plus SYS-08 save, SYS-10 accessibility, SYS-11 UI, SYS-12 audio in every mission.
+- **Required assets:** A-01,A-02,A-03,A-04,A-07,A-09,A-10,A-11,A-14,A-38,A-40,A-41,A-61; plus shared A-48–A-61 from [asset manifest](../14_ASSET_PRODUCTION_LIST.md).
+
+## Starting situation and immediate objective
+
+The player opens the exterior camera’s impact-monitoring feed.
+
+Objective text: **Observe impact flashes, identify Noor and invite her reply.** Enter through LOC-01; selectable cadets are restricted to those physically present. The initial viewpoint uses the currently selected locally present cadet (Mei at campaign start); remote FER/RAO/NOO never becomes player-controlled.
+
+## Ordered player experience
+
+### Objective M-0502-O1
+
+- **Scene / time / location:** SC-0504 / Dec 14 night / LOC-01.
+- **Objective text:** Verify six impact flashes, reject detector artifacts and maintain the station.
+- **Required interactions:** Run P-10’s three observation/maintenance phases: verify at least six flashes, reject two fixed artifacts, clean dusty panels and patch/verify the isolated dome spur, or verify the owned protective upgrade. All eight flashes are optional mastery.
+- **Environmental result:** Cadets lean around the screen; no EVA during a meteor observation is required.
+- **Dialogue trigger:** entering the marked interaction zone within 2 m and choosing Inspect/Start queues DL-0504-01 onward; line order is fixed, interruptions follow dialogue contract. Scripted quake/alarm trigger only at the listed objective gate, never during optional dialogue.
+- **Exact completion:** Six genuine flashes verified AND both artifacts rejected AND dust and leak maintenance passed or upgrade-protected. Set SC-0504_done once; never on mere zone entry.
+- **Discovery:** Impact flashes offer a method for comparing old damage times, not proof of every historic failure.
+- **Journal copy:** The impact camera distinguishes changing flashes from a fixed detector artifact. There are no atmospheric meteor streaks here.
+
+### Objective M-0502-O2
+
+- **Scene / time / location:** SC-0505 / Dec 14 later / LOC-01.
+- **Objective text:** Match the signed manifest and send Noor an invitation.
+- **Required interactions:** Finish P-10 identity matching; choose one authored invitation and send the current garden photo; no wrong emotional choice.
+- **Environmental result:** Mei slides the photo beside the old portrait, leaving both intact.
+- **Dialogue trigger:** entering the marked interaction zone within 2 m and choosing Inspect/Start queues DL-0505-01 onward; line order is fixed, interruptions follow dialogue contract. Scripted quake/alarm trigger only at the listed objective gate, never during optional dialogue.
+- **Exact completion:** P-10 identity proof passed AND invitation sent; set noor_identity_revealed for captions/journal now, before the mission completion flag. Set SC-0505_done once; never on mere zone entry.
+- **Discovery:** N is Noor, alive and the Academy founder; Rao has forwarded every report.
+- **Journal copy:** N is Dr. Noor Rahman, the Academy founder. She is alive and has read every report forwarded by Rao.
+
+### Objective M-0502-O3
+
+- **Scene / time / location:** SC-0506 / Dec 15 → Jan 12 / LOC-03.
+- **Objective text:** Plant one approved cotton seed and retain eleven other vault specimens.
+- **Required interactions:** Plant one approved cotton seed in the indoor reference bay, record the eleven other specimens, pin Noor’s text; accept transition to eclipse preparation.
+- **Environmental result:** Mei waters the cassette; no instant cotton boll or flower appears.
+- **Dialogue trigger:** entering the marked interaction zone within 2 m and choosing Inspect/Start queues DL-0506-01 onward; line order is fixed, interruptions follow dialogue contract. Scripted quake/alarm trigger only at the listed objective gate, never during optional dialogue.
+- **Exact completion:** Cotton planted AND eleven unplanted vault specimens confirmed AND Noor reply read; commit M-0502. Set SC-0506_done once; never on mere zone entry.
+- **Discovery:** Cotton’s final survival is prepared months before the ending.
+- **Journal copy:** Noor replied to our invitation. We planted one cotton seed from the recovered lot and retained the other eleven vault specimens.
+
+## Puzzle mechanics included in this mission
+
+**Initial condition:** Three observation/maintenance phases; E14/20,A8/10,H6,C8,R18. Eight genuine transient examples and two persistent detector artifacts; six verified flashes satisfy the mission. Dust reduces solar income from 8 to 6 until cleaned; a micro-leak consumes 1 extra air per unresolved phase (0.5 with flexible seals). Dust Shield/Whipple bumper prevent the respective event and supply a verification task instead.
+
+**Interaction procedure:** Compare candidate frames; mark six genuine flashes and reject both fixed artifacts. First maintenance opportunity: clean the affected panel and clamp/patch the isolated dome spur from its safe side, then verify pressure. Run three phases with COZY heat, DIM light, O0; five-person breathing is 1.25 per full 7.2 h phase. With immediate maintenance, daylight income is 8 for all three phases. After evidence pass, match N.R. to Dr. Noor Rahman on the signed manifest and send any of the three invitations.
+
+**Accepted solution:** Six genuine events, both artifacts rejected; dust removed/prevented, leak sealed/prevented and pressure verified; signed identity matched and invitation sent. Witness E16,A4.25,H6,C8,R13.5,Z0 after three phases. All eight verified flashes with no false report satisfy the observation Golden criterion.
+
+**Pass predicate:** At least six verified flashes, both artifacts rejected, maintenance passed/protected, A>0, H>0, signed identity matched and invitation sent; set noor_identity_revealed.
+
+**Incorrect feedback:** A hot pixel remains fixed across frames. Mistags can be corrected without reaction speed scoring. Unrepaired faults stay visible in the next forecast. Noor’s connection is not inferred from nationality; the signed record supplies it.
+
+## State machine and triggers
+
+LOCKED → AVAILABLE when `zero_sequence` exists → ACTIVE when the first scene's Start/Inspect is accepted → OBJECTIVE_1_DONE on EV-0504 → OBJECTIVE_2_DONE on EV-0505 → READY_TO_COMPLETE on EV-0506 → COMPLETE when completion transaction persists the final scene and mission flag together. M-0502-O2 cannot complete before O1. O3 cannot complete before O2 even if its props were inspected earlier; earlier inspections may set evidence flags but never skip a mandatory reaction.
+
+Puzzle may span O1–O3 (notably storm, route and ending missions); require all declared subchecks, not only the central puzzle scene. A scene's “pending” flag is provisional inside the mission snapshot. `noor_known` is the committed campaign flag and is set only when all three scenes are complete. No next-mission gate reads a pending flag.
+
+Any unsafe confirmed operation enters RETRY_REVIEW; restore the last safe checkpoint on Retry. Only P-02 displays the four named local ending cards. Other missions use safe retry with an explanatory observation, never an alternate dead-end story. Failure cannot delete a clue, kill a required seed permanently, trap an NPC behind a locked hatch or skip the player's story.
+
+## Checkpoints and persistence
+
+Checkpoint on mission acceptance, after each scene gate and before each destructive/timed commitment. Save phase, scene gate, dialogue cursor, observations, plant lineage, tool state, valid route, all actor locations, mission time, puzzle state, inventory counts and temporary resources together. Saving mid-puzzle restores its exact reversible state. Retry restores the current commitment checkpoint, not a later resource total. A manual save may replace an exploration slot; keep the mission-start safe save separately. Final completion is atomic: `noor_known=true`, `M-0502=COMPLETE`, and `M-0601` AVAILABLE where applicable. Reload cannot grant duplicate seeds or repeat a time jump.
+
+## Player guidance
+
+- **Default interact:** Inspect [object], Read [label], Use [tool] or Confirm [operation]; hide unavailable destructive controls and show the unmet condition in text.
+- **Hint ladder:** Compare more than one frame. / A real flash changes; a detector fault stays. / Verify six transients, clean and patch or verify the protective upgrade, then match the signed manifest.
+- **Journal after objective 1:** `M-0502: The impact camera distinguishes changing flashes from a fixed detector artifact. There are no atmospheric meteor streaks here.`
+- **Journal after objective 2:** `M-0502: N is Dr. Noor Rahman, the Academy founder. She is alive and has read every report forwarded by Rao.`
+- **Journal after objective 3:** `M-0502: Noor replied to our invitation. We planted one cotton seed from the recovered lot and retained the other eleven vault specimens.`
+- **Completion entry:** “Observe impact flashes, identify Noor and invite her reply. Completed. Next: M-0601.” UI uses the next mission's human title as well as ID in debug views only.
+
+## Reward, transition and acceptance
+
+Reward is the discovery, changed environment and following mission; there is no XP or consumable currency. noor_known_pending; noor_contact_consented; noor_identity_revealed; cotton_release_authorised after sample inspection.
+
+Next mission: **M-0601**. Transition uses the exact scene time card; require explicit Continue before days/months pass. A fresh input release prevents accidentally accepting the next scene. Optional dialogue may be revisited from the journal without replaying physical rewards.
+
+Acceptance: a player can enter using only mandatory predecessor completion, perform every listed interaction with keyboard and controller, receive every essential spoken fact in captions, fail/retry without state loss, reload each checkpoint without duplicate rewards, and reach the next mission with no developer intervention. Verify the puzzle witness in [testing](../20_TESTING_AND_ACCEPTANCE.md).
