@@ -8,7 +8,7 @@ The project inventory contains 102 non-system files: the root navigation/package
 
 Use [STORY_FINAL.md](../docs/STORY_FINAL.md) for the plot and [CAMPAIGN_SEASON1.md](../docs/CAMPAIGN_SEASON1.md) for the season. [GAMEPLAY_DESIGN_FINAL.md](../docs/GAMEPLAY_DESIGN_FINAL.md) resolves ambiguous mechanics in [GAME_PLAN_FINAL.md](../docs/GAME_PLAN_FINAL.md); [SCIENCE_AND_DATA.md](../docs/SCIENCE_AND_DATA.md) supplies the evidence/data plan. The game-design folder elaborates these sources. An earlier adaptation, an absent film, or an instruction remembered from another session cannot override them.
 
-All 55 canonical `docs/` and archived `pitch-video/` files retain their original byte hashes. Root navigation and the game-design companion were edited. A pre-review snapshot was saved outside the project before changes.
+All 55 canonical `docs/` and archived `pitch-video/` files retain their original byte hashes. **Superseded 24 Oct 2026:** under the P0 update requirements, `docs/STORY_FINAL.md` and `docs/SCIENCE_AND_DATA.md` were edited for STORY-03 to 06 (claim labels, withdrawn site claims, ending closures). Plot, cast, endings, chapter order and every P-02 number are unchanged. Chapter 1 gained dialogue lines DL-0101-09 to 11, DL-0104-07 to 09, DL-0105-08 to 13 and DL-0106-07 to 10, mirrored in the dialogue master. See the evidence tables in the two root `README_*_UPDATE_REQUIREMENTS.md` files. Root navigation and the game-design companion were edited. A pre-review snapshot was saved outside the project before changes.
 
 ## Corrections made
 

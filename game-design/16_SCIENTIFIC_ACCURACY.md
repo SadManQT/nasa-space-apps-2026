@@ -23,6 +23,31 @@ Design consistency reviewed 24 October 2026 against the supplied story/science d
 | SCI-15 | Distant terrain, horizon and radio links need actual paths | About 120 km Malapert road and repeater alignment are fictional design distances, not derived from LOLA. Summit Earth visibility alone cannot relay Aurora; local chain is necessary | Surveyed within fiction; real route not computed |
 | SCI-16 | Noor recalls an earlier eclipse | Keep the memory without adding an exact deployment/eclipse date absent from the main story. Verify any dated archive image before release | Memory [F]; no new historical astronomy verification claimed |
 
+## Three evidence labels (STORY-04, GAME-06)
+
+Every scientifically significant display, debrief card, pitch line and subtitle uses exactly one label. The label is text plus an icon, never colour alone, and opens a source card.
+
+| Label | Means | Chapter 1 examples | Source card must show |
+|---|---|---|---|
+| **OBSERVED** | A traceable historical record or publication | DONKI 2017 flare/SEP timeline; CRaTER dose at the Moon; MSL RAD on Mars; LROC illumination map; published longest-night estimates | Product name, exact URL, retrieval date, time range, units, quality flags |
+| **COMPUTED** | Our processing of real data under stated assumptions | Horizon mask (LOLA), Sun/Earth paths (Horizons), dose curve scaled from CRaTER | All OBSERVED fields plus site coordinate, method, script version and limitations |
+| **SIMULATED** | Game rules, fiction or a training scenario | Sun-drops, air units, zaps, Alo health, Aurora Station, 2046 dates, the 36 h night and Earth-set until computed, storm effects on the base | The rule in plain words, its real-world basis if any, and "not a measurement" |
+
+A COMPUTED label is allowed only after the check in the register below is recorded; until then the same display shows SIMULATED · *training scenario*. The 2017 storm is shown as *Historical replay, re-dated to a fictional 2046 night*; Chapter 7 as *What if? Counterfactual replay of the July 2012 storm*.
+
+## Site-specific claim verification register (STORY-05)
+
+Nothing in this register has been verified yet: no site coordinate is chosen and no data is processed (that work starts at the hackathon). Until a row is filled in and signed off, the claim is presented as a **training scenario**. "No Sun. No Earth." stays as the dramatic scenario outcome, with the journal explaining that it is a scenario.
+
+| Claim as shown | Where | Coordinate | Date / time | Method | Source | Uncertainty | Reviewer | Status |
+|---|---|---|---|---|---|---|---|---|
+| Night lasts ≈ 36 h (5 dark shifts) | P-02, Kai card, SC-0105, pitch | TBD (Aurora rim point) | TBD (April 2046 window) | LOLA horizon mask + Horizons Sun elevation, pipeline step 4 | Mazarico 2011 (order of magnitude only) | Published rim nights ~1.5 d; site-dependent | TBD | Training scenario |
+| Rim sunlit "about 240 days in a row" | Removed from story/README 24 Oct | — | — | — | Not verified for Aurora | — | — | Withdrawn |
+| Earth sets at shift 4 and stays down all night | SC-0105, DL-0105-01 | TBD | TBD | Horizons Earth elevation vs horizon mask | JPL IPN 42-176 (general) | Libration ±6.7°, terrain | TBD | Training scenario |
+| Storm warning → alarm at shift 5; two storm shifts | P-02, SC-0105 | n/a | 2017-09-10 replay, re-dated | DONKI event times compressed into shifts [G] | NASA DONKI | Compression is a game choice | TBD | Historical replay, timing simplified |
+| 90 s action window; pump moves +2 W per alarm | P-02 alarm, README | n/a | n/a | Game abstraction | SCIENCE_AND_DATA row 8 | Not a real warning time | TBD | Simulated |
+| Dose 3/2/1/0 by shelter level | P-02, Safe Room UI | n/a | n/a | Game table; later scaled to CRaTER shape | Clowdsley (NTRS 20210009760) context | No score→mSv conversion | TBD | Simulated until calibrated |
+
 ## Primary and direct-attribution sources
 
 - **S01:** [NASA: Shackleton’s illuminated rim and shadowed interior](https://science.nasa.gov/resource/shackleton-craters-illuminated-rim-shadowed-interior/). Supports the general terrain/illumination setting, not the exact authored schedule.
@@ -41,6 +66,8 @@ Design consistency reviewed 24 October 2026 against the supplied story/science d
 SCI-TEXT-01: “Aurora is fictional. Real lunar terrain can place long-lit ridges beside permanent shadow.”
 
 SCI-TEXT-02: “These are game resource units. Their rules show trade-offs; they are not flight instructions.”
+
+SCI-TEXT-00 (debrief closing line; proposed, final wording after science review): “Inspired by real lunar science and historical space-weather data. You played a fictional training mission built from verified observations, reconstructed geometry, and clearly marked educational simulations.” Drop “reconstructed geometry” if no COMPUTED row above is signed off by release.
 
 SCI-TEXT-03: “Night One replays the September 2017 storm. The Great Storm asks what if the July 2012 event had hit the Moon. Aurora and the lunar impacts on its crew are fictional; source records and game rules are labelled separately.”
 

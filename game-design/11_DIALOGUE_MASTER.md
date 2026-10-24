@@ -8,6 +8,12 @@ Exact lines are maintained in the owning scene and mirrored here. The main story
 
 [Scene script](06_SCENE_SCRIPTS/CHAPTER_01.md#sc-0101)
 
+- **DL-0101-09 · AMA** (after AIR TANK)**:** Stored. Sunlight we can’t keep becomes air we can.
+
+- **DL-0101-10 · KAI** (after GARDEN BAY LAMP)**:** Warm light for the planting bay. Not wasted.
+
+- **DL-0101-11 · KAI** (after LET IT SPILL)**:** The jar was full. Those drops just… left.
+
 - **DL-0101-01 · FER:** You earned this place together. From this polar winter to the next: keep the habitat safe, and give a garden a future.
 
 - **DL-0101-02 · KAI:** Power’s mine!
@@ -72,6 +78,12 @@ Exact lines are maintained in the owning scene and mirrored here. The main story
 
 - **DL-0104-06 · RAO:** Say the plan out loud before you run it.
 
+- **DL-0104-07 · KAI** (shift 1, commission AIR)**:** Same trick as day one. Jar full? Make air.
+
+- **DL-0104-08 · KAI** (shift 1, commission LAMP)**:** Day one, the spare light went to the garden. Today the jar fills fast again. Spend what would spill.
+
+- **DL-0104-09 · KAI** (shift 1, commission SPILL)**:** Remember the drops we lost on day one? The jar fills again today. Let’s spend them before they spill.
+
 ### SC-0105 — No Sun. No Earth.
 
 [Scene script](06_SCENE_SCRIPTS/CHAPTER_01.md#sc-0105)
@@ -90,6 +102,18 @@ Exact lines are maintained in the owning scene and mirrored here. The main story
 
 - **DL-0105-07 · MEI:** Save the crew. Then bring that water back to Alo.
 
+- **DL-0105-08 · KAI** (shift 3)**:** Five dark shifts on one jar. If the heater runs COLD, it costs nothing.
+
+- **DL-0105-09 · MEI** (shift 3)**:** COLD costs Alo two health every shift. And the crops feel it too.
+
+- **DL-0105-10 · AMA** (shift 3)**:** Both worries are real. Preview both plans and compare the battery and Alo at sunrise.
+
+- **DL-0105-11 · RAF** (shift 3)**:** Whatever we pick, the wall needs water before the alarm. That water comes from the garden.
+
+- **DL-0105-12 · KAI** (shift 3)**:** Okay. We choose from the preview, not from guessing.
+
+- **DL-0105-13 · RAF** (shift 5, before the response panel)**:** Everyone into the Safe Room first. That part isn’t a choice. Then we pick how to shield it.
+
 ### SC-0106 — First Light, First Question
 
 [Scene script](06_SCENE_SCRIPTS/CHAPTER_01.md#sc-0106)
@@ -105,6 +129,16 @@ Exact lines are maintained in the owning scene and mirrored here. The main story
 - **DL-0106-05 · MEI:** She didn’t take a drill. She lived a night.
 
 - **DL-0106-06 · NOO:** If you’re hearing this, Alo bloomed. Good. Now Alo needs a friend. — N.
+
+- **DL-0106-07 · MEI** (Tara’s bay)**:** The second seed has a bud. Tara. Alo can’t make seeds alone.
+
+[Ending closures](06_SCENE_SCRIPTS/CHAPTER_01.md#sc-0106-endings)
+
+- **DL-0106-08 · KAI** (Alo lost, Tara’s bay)**:** Tara’s still growing. Her bud made it through the night indoors.
+
+- **DL-0106-09 · MEI** (Alo lost)**:** The cotton in 2019 didn’t make it either. People learned from it. So will we.
+
+- **DL-0106-10 · AMA** (Mission stopped)**:** The flight rules stopped us before anyone got hurt. That’s what they’re for.
 
 ## CH02 — Be the Bee
 

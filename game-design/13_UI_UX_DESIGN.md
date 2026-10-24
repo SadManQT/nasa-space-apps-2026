@@ -63,6 +63,53 @@ JOURNAL
 +---------------------------------------------------------------+
 ```
 
+## Chapter 1 onboarding and HUD disclosure (GAME-04)
+
+Loop shown to the player: **Observe → Discuss → Choose → Execute → See impact → Debrief/retry.**
+
+- **First decision inside the first minute:** the SC-0101 commissioning choice, before any long dialogue.
+- **Progressive emphasis, same model:** all eight P-02 values exist and are simulated from shift 1. The HUD *emphasises* only the ones in play and keeps the rest under an **All systems** expander, which is always one press away:
+
+| Moment | Emphasised | Introduced by |
+|---|---|---|
+| SC-0101 | Battery jar (E), spill counter | Commissioning choice |
+| Shift 1 | E, Air (A) | Kai and Amara cards |
+| Shift 2 (drill) | + Water wall (W), crates (K) | Drill, Rafi card |
+| Shift 3 | + Alo health (H), crop (C), heat | Mei card, DL-0105-08 to 12 |
+| Shift 5 | + Storm dose (Z) | Particle alarm |
+| Always under All systems | Rations (R) | Engineer Mode shows it inline |
+
+- **Every control shows its cost** as a chip before selection (“−2 drops”, “Alo −1”), with words as well as the icon.
+- **The preview uses the same simulation function as Commit** and shows exact deltas. Unknown future events show as “not known yet”, never as a hidden number.
+- **The commit point is explicit:** “Commit shift 3? Uses 3 drops. This can’t be undone. Retry restores this checkpoint.” Space, then a confirmation; no dialogue reply commits.
+- **Alarm response panel:** the first line, already ticked and locked, reads “Crew into Safe Room: required (flight rule)”. PUMP / STACK / WAIT follow, each with its cost and the previewed dose.
+- **Tutorial cards** are skippable and replayable from the journal and never change any value. In playtests, a novice should be able to say the current objective in their own words after shift 1 (recorded per GAME-09).
+
+## Evidence chips (GAME-06)
+
+Every science-bearing display carries one chip, **OBSERVED**, **COMPUTED** or **SIMULATED** (definitions and source-card fields in [scientific accuracy](16_SCIENTIFIC_ACCURACY.md#three-evidence-labels-story-04-game-06)). Chips use text plus icon, never colour alone, and open the source card on select.
+
+| Chapter 1 display | Chip |
+|---|---|
+| Storm timeline / Rafi forecast | OBSERVED · *Historical replay 2017, re-dated* |
+| Dose meter (zaps) | SIMULATED (until calibrated to CRaTER; then COMPUTED for the curve only) |
+| Battery, air, Alo, crop, rations | SIMULATED |
+| Horizon strip, Last Light, Earth-set countdown | SIMULATED · *training scenario* until the register row is signed off |
+| “Why here?” illumination map | OBSERVED (LROC) |
+| Debrief Moon/Mars radiation charts | OBSERVED (CRaTER, MSL RAD) when bundled; otherwise omitted, not faked |
+
+## Chapter 1 debrief (GAME-07)
+
+The same five panels appear for all four endings, in this order:
+
+1. **Outcome line:** crew safety, station status (blackout or not), Alo’s state, plus the named ending.
+2. **Most influential decision:** the single shift change that would most improve the outcome. It is found by re-running the real P-02 update with one shift altered at a time, and only safe alternatives are considered (crew sheltered, Z≤3). Shown as “Shift 4: FILL → HOLD would have left Alo +1.”
+3. **One trade-off, explained:** a cause→effect sentence plus an evidence chip, such as “The wall borrowed garden water; at 4 or more, Alo goes thirsty.”
+4. **Compare / retry:** “Try this change” replays from that checkpoint with the real rules, and the side-by-side result uses the same arithmetic as play. No suggestion ever drops crew shelter to gain flower health.
+5. **Who knew what:** card receipt, sharing and the shift-3 preview comparison, plus one sentence on where discussion changed the plan (GAME-05).
+
+Optional comprehension check: three questions answered by choosing an option, never scored against the ending. 1) Why make air in daylight? 2) Why does the shelter water hurt Alo? 3) Which label means “a real measurement”? Alo lost and Mission stopped use the same calm tone as a bloom. There are no grades and no blame words.
+
 ## Microcopy and feedback
 
 “Link unavailable: Earth is below Aurora's terrain horizon.” “Local radios connected.” “Open housing: isolate power first.” “Sample unverified: record the dry reference.” “Reserve too small for the return.” “Pause time before trying again.” Normal screens never display story flags, source file paths or implementation IDs. The science journal may display dataset names because the player deliberately asks for evidence.

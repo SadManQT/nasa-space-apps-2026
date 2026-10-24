@@ -151,6 +151,10 @@ Class mode is one running local game, four discussion groups and genuinely priva
 | Rafi / shift 2 | Labelled 2017 replay feed: sunspot 2673 fired a large flare; more activity is possible. | Team prepares shelter before the alarm. |
 | Mei / shift 3 | This scenario’s direct plant threats are frost and thirst; shielding borrows the garden reservoir. | Team protects temperature and returns borrowed water. |
 
+**Combined-evidence decision (GAME-05):** the shift 3–4 plan for *when to fill the wall and when to return the water* only becomes clear by combining two roles. Rafi's card says a storm is likely; Mei's says the shelter water is Alo's and thirst starts at W≥4. Kai's five-dark-shift budget and Amara's stored air decide what the team can afford meanwhile. DL-0105-08 to 12 stages this as a short disagreement, and the Mission Table's side-by-side Preview A/B settles it. The debrief names this decision when the shelter was ready before the alarm and the water was returned afterwards.
+
+**Solo without deadlocks:** switching cadet (keys 1–4) shows that cadet's card, and every delivered card also appears in the journal, so no information is reachable only through a person. **Local/classroom:** one device plus printed cards, as below. Network co-op is future work and is never shown as available.
+
 Solo receives all four role inboxes; Family/Class distribute the cards privately and share by discussion. Card receipt, acknowledgement, voluntary sharing and decisions are separate records. Reading every card is not a forced success gate. Badge evidence: communication (roles shared), situational awareness (shelter ready), decision making (no blackout), team care (safe crew and living Alo). Debrief shows who knew what, causal timeline, one-change replay and real source cards. Never claim ignoring any particular secret necessarily removes a star; the source 3D gameplay audit already corrected that balance assertion.
 
 ## Campaign progression and optional play

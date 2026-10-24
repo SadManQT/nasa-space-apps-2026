@@ -2,7 +2,7 @@
 
 # 🌙 Last Light Academy
 
-### *Keep Alo, a tiny mustard flower, alive through one real Moon night,<br>so it can become the first flower ever to bloom on the Moon.*
+### *Keep Alo, a tiny mustard flower, alive through one long Moon night,<br>so it can become the first flower ever to bloom on the Moon.*
 
 **NASA Space Apps Challenge 2026** · Challenge: **Build a Junior Astronaut Mission Trainer**<br>
 **Team The Last BrainCell** · Dhaka, Bangladesh 🇧🇩
@@ -55,8 +55,8 @@ The video is a concept visualization of the game we will build at the hackathon.
 > NASA plans to grow plants on the Moon again, including *Brassica rapa*: field mustard, the same yellow flower that
 > covers Bangladesh's fields every winter.
 >
-> Four young cadets. One mustard bud named Alo. One real Moon night: the Sun disappears for a day and a half, Earth
-> sinks below the horizon, and a real solar storm hits.
+> Four young cadets. One mustard bud named Alo. One Moon night built from real polar science: the Sun disappears for
+> a day and a half, Earth sinks below the horizon, and a replay of a real 2017 solar storm hits.
 >
 > Keep the crew safe. Keep the base running. And at sunrise, Alo blooms.
 
@@ -70,8 +70,9 @@ station at the Moon's south pole, and each controls one system:
 | 🌱 **Mei** | the garden, food and Alo |
 | 🛡️ **Rafi** | the Safe Room (radiation shelter) |
 
-Sunlight becomes **sun-drops** the team counts and shares. Each cadet gets a **secret** the others need. The sunlight,
-the Earth-set and the storm all come from **real NASA data**. At sunrise, Alo blooms… if the team talked.
+Sunlight becomes **sun-drops** the team counts and shares. Each cadet gets a **secret** the others need. The storm
+replays **real NASA records** from 2017, and the sunlight and Earth-set are built from NASA lunar science. Every number
+is labelled as observed, computed or simulated. At sunrise, Alo blooms… if the team talked.
 
 **Why it matters:**
 
@@ -88,7 +89,7 @@ Everything in the story starts from something true:
 | Year | What happened |
 |---|---|
 | **2016** | On the International Space Station, zinnias were dying of mould. NASA let astronaut **Scott Kelly** care for them on his own judgement instead of waiting for instructions from Earth. They **bloomed**. |
-| **2019** | A cotton seedling in China's **Chang'e-4** lander became the first plant ever to sprout on the Moon. It **froze on its first lunar night** (about −52 °C). |
+| **2019** | A cotton seedling in China's **Chang'e-4** lander became the first plant ever to sprout on the Moon. It **did not survive its first lunar night**. |
 | **Next** | NASA's **LEAF** experiment is a sealed plant-growth chamber for the lunar surface, planned for one of the first Artemis landings. One of its plants is ***Brassica rapa*** (field mustard): the classroom "Wisconsin Fast Plant", which goes from seed to flower in about 14 days, and the same species as Bangladesh's **Tori mustard (সরিষা)**. |
 
 One flower links NASA, classrooms around the world and the fields of Bangladesh. That flower is **Alo** (আলো), which
@@ -96,9 +97,9 @@ means *light* in Bangla.
 
 ## 🌒 The story: Chapter 1, *Night One*
 
-**1. Last Light.** Aurora Station sits on the rim of **Shackleton crater**, near the Moon's south pole. It is one of
-the sunniest places on the Moon: the Sun shines there for about **240 days in a row**. But tonight is its **longest
-night of the year**. Four cadets of Last Light Academy are running the base alone for the first time. Outside, in a
+**1. Last Light.** Aurora Station sits on the rim of **Shackleton crater**, near the Moon's south pole. Rim sites like
+this are among the best-lit places on the Moon, sunlit for most of the year. But tonight is its **longest night of the
+year**. Four cadets of Last Light Academy are running the base alone for the first time. Outside, in a
 small sealed chamber like NASA's LEAF, sits Alo. The Sun slides behind the far mountains, the solar masts go dark, and
 for the next **36 hours** the base lives on whatever is in the battery.
 
@@ -110,19 +111,26 @@ Ferreira. *"From here, you're on your own."* The radio hisses, then goes silent.
 
 **4. The Storm.** Rafi's radiation counter starts ticking: the first particles of a giant solar storm, a replay of the
 real storm of **10 September 2017**. The screen flips: **THIS IS NOT A DRILL.** There are 90 seconds to pump water
-into the shelter walls or stack crates. The catch: **the water that shields the crew is the water Alo drinks.** Alo can
-survive the radiation, because plants are tough, but not frost, and not thirst.
+into the shelter walls or stack crates. The crew goes into the Safe Room first; that part is never a choice. The catch:
+**the water that shields the crew is the water Alo drinks.** In this scenario the radiation is not what threatens Alo:
+frost and thirst are.
 
 **5. First Light.** After a day and a half, a sliver of Sun climbs over the crater rim. Light pours into Alo's
 chamber… and a tiny yellow flower opens: **the first flower ever to bloom on the Moon.** Days later, Earth rises again
 and Ferreira's voice crackles back: *"You didn't survive the Moon. You ran it."*
 
-**The twist, in the debrief: everything you just lived through was real.**
+**The reveal, in the debrief: what was real, what was computed, what was invented.**
 
-- The sunlight comes from NASA's Lunar Reconnaissance Orbiter (LRO).
-- Earth's slow sinking is the real view from the south pole.
-- The storm comes from NASA's DONKI records, and LRO's CRaTER instrument measured it at the Moon.
-- On Mars, the Curiosity rover measured the same storm.
+- **Observed:** the storm's timing comes from NASA's DONKI record of 10 September 2017, and LRO's CRaTER instrument
+  measured that storm at the Moon. On Mars, the Curiosity rover measured the same storm. LROC's polar map measured
+  how often each spot near the pole is sunlit.
+- **Computed** (once the team's processing is checked): Aurora's horizon and the Sun and Earth paths, from LOLA
+  terrain and JPL Horizons. Until then, the 36-hour night and the Earth-set are labelled *training scenario*.
+- **Simulated / fiction:** Aurora Station, the cadets, Alo, sun-drops, the 2046 dates, and what the storm does to
+  this base.
+
+Every ending closes Chapter 1 on its own. After a bloom, N.'s old recording plays and Mei finds Tara's bud: *Alo needs
+a friend*. If Alo is lost, the crew is safe, Tara is still growing, and a locked recording waits *for the first bloom*.
 
 ## 🎭 Characters
 
@@ -131,7 +139,7 @@ and Ferreira's voice crackles back: *"You didn't survive the Moon. You ran it."*
 | **Kai** | Power: sun-drops and heat | Hates switching things off; first to say "we need to save!" |
 | **Amara** | Air: oxygen | Loves exact numbers; turns power into air |
 | **Mei** | Garden: food and Alo | Talks to her plants. "The garden is not a side system." |
-| **Rafi** | Safe Room: radiation shield | Worries first, gets teased for it, and is right in the storm |
+| **Rafi** | Safe Room: radiation shield | Checks twice and warns early; his warnings get the shelter ready in time |
 | **Alo** (আলো, "light") | A field-mustard bud with a face | Shivers, gets thirsty, gets scared, and blooms |
 | **Commander Ferreira** | Instructor at Mission Control (Earth) | Calm and strict; only speaks while Earth is in the sky |
 | **Rao** | Flight controller (Earth) | Friendly; one hint per shift until Earth-set |
@@ -188,7 +196,7 @@ valves and equipment.
 |---|---|---|---|
 | ⚡ **Kai** | Night heater: COZY (2 drops) · COOL (1) · COLD (0) | "Tonight is the longest night of the year: about 36 hours without the Sun. Heat eats drops every night shift." | Warmth empties the jar; cold hurts Alo |
 | 🫧 **Amara** | Air maker: 0, 1 or 2 drops → +0, +1 or +2 air | "The jar can't hold all of today's sunlight. Make air now, and the tank keeps it for the night." | Air made at night eats night drops |
-| 🌱 **Mei** | Grow lamp: OFF · DIM (1) · FULL (2) | "Alo can handle radiation. But frost and thirst can kill it. Don't keep the wall full for long: that's Alo's water." | Light costs drops; frost and thirst cost Alo |
+| 🌱 **Mei** | Grow lamp: OFF · DIM (1) · FULL (2) | "In our scenario, radiation isn't Alo's danger. Frost and thirst are. Don't keep the wall full for long: that's Alo's water." | Light costs drops; frost and thirst cost Alo |
 | 🛡️ **Rafi** | Pumps: FILL (+2 water into the wall) · HOLD · DRAIN (−2) | "Sunspot 2673 just fired a giant flare. Another big one may come within about two days." | Fill too late and the crew is exposed; keep it full too long and Alo goes thirsty |
 
 ### The storm: three choices
@@ -207,11 +215,11 @@ The storm drill in shift 2 uses the same tasks, so nobody meets the controls for
 |---|---|---|
 | Energy budgets | Sun-drops you count and move | Solar power only while the Sun is up |
 | Battery limits | The jar holds 20; extra drops spill | Turn spare sunlight into air and growth |
-| The polar Sun | The Sun circles the horizon behind real mountains | Shackleton's rim: ~240 days of sunlight; the longest night is ~1.5 days |
-| Talking to Earth | Earth sinks and the radio turns to static | From the south pole, Earth is visible about half of each month |
+| The polar Sun | The Sun circles the horizon behind mountains | Rim sites are sunlit most of the year; published longest nights for Shackleton rim sites are ~1.5 days (Mazarico et al. 2011). Aurora's exact night is a training scenario |
+| Talking to Earth | Earth sinks and the radio turns to static | Earth's height above a polar horizon changes over the month, so when it is visible depends on the exact site and terrain |
 | Shielding | Sparks fizzle in the blue water wall | ~20 g/cm² of water makes a storm shelter |
 | Photosynthesis | Lamp OFF −1, DIM ±0, FULL +1 | Respiration and the light compensation point |
-| Plants vs radiation | The storm scares Alo but can't hurt it | Plants tolerate far more radiation than people |
+| Plants vs radiation | The storm scares Alo, but cold and thirst are the real danger | Plants generally tolerate much higher doses than people (not immunity) |
 | Shared resources | The shield water *is* Alo's water | Multi-use water, as in NASA's water-wall concepts |
 | Crew first | Running out of air ends the mission | Real flight rules |
 | Teamwork | Secrets and the Earth-set silence | Scott Kelly's zinnias; NASA team training |
@@ -241,7 +249,7 @@ Three stars, in the order of real mission priorities: **1. crew safe → 2. base
 | 🌟 **Golden Bloom** | Crew safe, lights on, and Alo bursts into a full golden cluster. Rare: the expert goal |
 | 🌸 **Bloom** | Crew safe and Alo alive. A tiny yellow flower opens at sunrise |
 | 🥀 **Alo lost** | The crew made it, but Alo didn't, just like the first Moon sprout in 2019. *Try again?* |
-| 📡 **Mission stopped** | The air ran out, and the flight rules call everyone home. *Try again?* |
+| 📡 **Mission stopped** | The air ran out or the crew's storm dose passed the limit, so the flight rules stop the night before anyone is hurt. *Try again?* |
 
 There are many ways to win. Every setting is useful in some winning plan; the point is informed trade-offs, not one
 right answer.
@@ -262,8 +270,8 @@ Then it shows:
 1. the night's timeline;
 2. **who knew what**, and when;
 3. **"what if"**: a replay with one change;
-4. **"it was all real"**: the real sunlight map, the storm timeline, the radiation chart measured at the Moon, and
-   Curiosity's chart from Mars.
+4. **"what was real"**: the measured sunlight map, the storm timeline and the radiation charts measured at the Moon
+   and by Curiosity on Mars, each labelled observed, computed or simulated.
 
 ## 🌼 Season 1: *The First Moon Garden*
 

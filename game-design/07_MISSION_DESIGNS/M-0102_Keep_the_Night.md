@@ -82,6 +82,7 @@ Checkpoint on mission acceptance, after each scene gate and before each destruct
 
 - **Default interact:** Inspect [object], Read [label], Use [tool] or Confirm [operation]; hide unavailable destructive controls and show the unmet condition in text.
 - **Hint ladder:** Store air while sunlight would overflow. / Prepare shielding before the alarm, then return the water. / Open the worked Bloom plan or Guided plan.
+- **Golden hints (after a first Bloom):** Golden needs Alo at 5 or more with no blackout, so every drop must reach the garden at exactly the right time. / Open the worked Golden plan. See the [Golden Bloom difficulty decision](../08_PUZZLE_DESIGNS.md#executed-chapter-1-arithmetic-witnesses).
 - **Journal after objective 1:** `M-0102: We rehearsed the shelter and stored oxygen while daylight power was available.`
 - **Journal after objective 2:** `M-0102: The Earth link went down, but our local radios worked. Shielding water had to return to the plants.`
 - **Journal after objective 3:** `M-0102: Alo bloomed at first light. Tagging the image triggered an old recording from N.`

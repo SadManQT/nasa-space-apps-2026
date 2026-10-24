@@ -51,6 +51,46 @@ This package receives document/link/ID/dependency/solution-arithmetic checks and
 - **Required systems:** SYS-01,SYS-02,SYS-03,SYS-04,SYS-05,SYS-07,SYS-09; common SYS-08/10/11/12.
 - **Retry/save:** Repeat negative action, load pre-commit checkpoint, run witness, verify next mission unlocks once and inventory/date remain exact.
 
+### P-02 contract test suite (GAME-02)
+
+To be built as the headless `P02Sim` suite on 13 November ([build plan](18_TECHNICAL_BLUEPRINT.md#hackathon-build-plan-from-13-november-game-01020308)). Every expected value below was traced by hand from the [P-02 contract](08_PUZZLE_DESIGNS.md#p-02-numeric-execution-contract); none comes from an executed program. If code and this table disagree, stop and check the arithmetic before changing either. Plans use the witness notation `heat/O/L/transfer` (heat 0/1/2 = COLD/COOL/COZY, light 0/1/2 = OFF/DIM/FULL); state is E/A/H/W/K/C/R/Z.
+
+**Reference plans and expected endings (also the GAME-01 manual test inputs):**
+
+| Plan | Shifts 1–7 | Final state | Ending |
+|---|---|---|---|
+| Bloom / WAIT | DAY/2/2/HOLD · DAY/0/2/HOLD · 2/0/0/FILL · 2/0/0/FILL · 2/0/0/WAIT · 2/0/0/DRAIN · 2/0/0/DRAIN | 2/1/1/0/0/3/3.6/2 | Bloom |
+| Golden | published witness | 0/1/5/0/0/9/3.6/2 | Golden Bloom |
+| PUMP | published witness | 0/1/1/6/0/7/3.6/2 | Bloom |
+| STACK | published witness | 0/3/1/0/0/6/3.6/2 | Bloom |
+| Alo lost | DAY/2/0/HOLD · DAY/2/0/HOLD · 0/0/0/FILL · 0/0/0/FILL · 0/0/0/WAIT · 0/0/0/HOLD · 0/0/0/DRAIN | 12/3/0/2/0/0/3.6/2 | Alo lost (crew safe) |
+| No shelter | as Bloom, but HOLD in shifts 3, 4, 6 and 7 | stops after shift 6: 5/2/4/0/0/6/4.8/6 | Mission stopped (exposure) |
+
+**Shift-by-shift trace, Bloom / WAIT** (E,A,H,W,K,C after each shift): (15,7,7,0,0,9) · (17,6,8,0,0,10) · (14,5,7,2,0,9) · (11,4,5,4,0,7) · (8,3,3,4,0,5) · (5,2,2,2,0,4) · (2,1,1,0,0,3). Overflow 2 in shift 1 and 3 in shift 2. A wrong step order fails this trace.
+
+**Ordering and boundary cases:**
+
+| Case | Start → input | Expected |
+|---|---|---|
+| Income clamps before spending | E18, shift 1, O0 L OFF | overflow 6, E19 |
+| Air clamps before breathing | A10, shift 1, O2 | A9 |
+| Shift-6 dose uses pre-drain shelter | W4 Z1, shift 6, DRAIN | shelter 4, dose 1, W2 |
+| Shift-5 dose uses post-alarm shelter | W2, shift 5, PUMP | W4, dose 1 |
+| Thirst uses post-transfer water | W2 H6, shift 3, COZY OFF FILL | H4 |
+| Exactly zero is not a blackout | E3, shift 3, COZY OFF | E0, no blackout |
+| Blackout penalties | E2 A6 H6 C8, shift 3, COZY OFF | blackout, E0 A3 H3 C5 |
+| STACK forces COOL/O0/OFF | start state, shift 5, STACK with COZY/O2/FULL requested | E12 A5 H4 K2 Z2 |
+| Partial alarm actions | shift 5 | PUMP partial W+1; STACK partial K1 |
+| Crates leave before shift 7 | K2, shift 7 | K0 |
+| Dead Alo stays dead | H0, FULL light | H0 |
+| Water clamps 0–6 | FILL at W6; DRAIN at W0; PUMP at W6 | 6; 0; 6 |
+| Forbidden actions | PUMP/STACK/WAIT outside shift 5; FILL/HOLD/DRAIN in shift 5; O=3; six shifts | rejected with a reason, state unchanged |
+| Crew not sheltered in a storm shift | Bloom plan, unsheltered at shift 5 | Mission stopped after shift 5 |
+| Determinism and retry | run any plan twice; restore pre-shift-4 checkpoint and replay | identical records; same final state as the uninterrupted run |
+| UI matches simulation | after every commit | every gauge equals the record's after-state |
+
+**Release record (GAME-08):** for each run of this suite and of QA-14, record the build version or commit, date, platform and result. A pass is not claimed without that record.
+
 ### QA-M-0201 — Borrow a Bee
 
 - **Prerequisite / result:** first_bloom → pollen_shared.
