@@ -1,0 +1,137 @@
+{
+  "title": "Last Light Academy — The First Moon Garden",
+  "edition": "Complete main-campaign story / 25 October 2026",
+  "entryPoint": "index.html",
+  "scope": {
+    "chapters": 8,
+    "requiredMissions": 32,
+    "scenes": 96,
+    "targetMinutes": 720,
+    "rangeMinutes": [
+      600,
+      840
+    ]
+  },
+  "files": [
+    {
+      "path": "app.compiled.js",
+      "bytes": 395953,
+      "sha256": "64cd4170586f8a87dc070e81ca0a5227f0c2fe6fa34a2867bc194b6ff4fe15c7"
+    },
+    {
+      "path": "app.js",
+      "bytes": 45216,
+      "sha256": "87c18e654f676395a34f596e81036bafb4ebab8e871d8dc90e13c3ca28931c44"
+    },
+    {
+      "path": "artwork.svg",
+      "bytes": 4810,
+      "sha256": "070d4a9f4855f245feff0a1d8ef3a56a9cca4f6660162e5a1f537fcca6d4af84"
+    },
+    {
+      "path": "audit-results.json",
+      "bytes": 263817,
+      "sha256": "dd7385ff0895a0d4a942abcbc1c7a9ca1ae3720165cc9537b2f926f14176632b"
+    },
+    {
+      "path": "AUDIT_REPORT.md",
+      "bytes": 5794,
+      "sha256": "8cb39d177f994a177ed76931b511602a3ebf3ebdc2b4a76cf8078a035f8afdb8"
+    },
+    {
+      "path": "build_story.py",
+      "bytes": 13830,
+      "sha256": "56a72a49031936605edd505296f118aa64505bb63b5e72dad5ab4327d002918f"
+    },
+    {
+      "path": "content/chapters-1-4-notes.md",
+      "bytes": 4324,
+      "sha256": "bb96885a448c81c587528fe17ca779a9635c4ef67f8ce34cefd69a825a53cc0c"
+    },
+    {
+      "path": "content/chapters-1-4.json",
+      "bytes": 202678,
+      "sha256": "6e66b6fae4ed52c0310ce81b7a8fe1f0ae7c1091bd3637c9eeae47dd2d431ef0"
+    },
+    {
+      "path": "content/chapters-5-8-notes.md",
+      "bytes": 4355,
+      "sha256": "93d013afe1e382c351a83000968c1c7fb31aa8513aa7f1eaf18078a2d8f30e7e"
+    },
+    {
+      "path": "content/chapters-5-8.json",
+      "bytes": 183616,
+      "sha256": "4dcf70e6a5b983bdfbbca0c1ba0e39fc8019d422ba1f8de8cc300548a06ec62c"
+    },
+    {
+      "path": "content/cross-review.md",
+      "bytes": 7044,
+      "sha256": "914f64d88d7d7e73453015f9e2034a691ae0038d44300d41da456af76e051226"
+    },
+    {
+      "path": "content/learning-and-continuity.json",
+      "bytes": 44237,
+      "sha256": "3855307a8b74e295061dacfcd864c486ca41c098afe34ea7bebab0dfb91f9b65"
+    },
+    {
+      "path": "content/learning-audit.md",
+      "bytes": 11629,
+      "sha256": "7f69dc23e8ba6758417b07be090eea5780d51bb270a2f55b2d43310c214d1609"
+    },
+    {
+      "path": "CONTRACT.md",
+      "bytes": 6878,
+      "sha256": "77ed46490d41a9076d44ea79808d1ae1f7674d90b69bedb3687a98bd7f2cce25"
+    },
+    {
+      "path": "css-check-results.json",
+      "bytes": 50,
+      "sha256": "f77ef973aa0706e6505c676cb577ce261fddb5098612f6d728b797e0dc8332e2"
+    },
+    {
+      "path": "dom-check-results.json",
+      "bytes": 4144,
+      "sha256": "af927ce7bc8a18f75e81baba86d819239ca5511ab8df61b4474192e2279e6284"
+    },
+    {
+      "path": "index.html",
+      "bytes": 430495,
+      "sha256": "f3895ca6bfb5c2039e6cd5b4e25635f43d6d9a41293db494e35550d48d5bb1c5"
+    },
+    {
+      "path": "package_story.py",
+      "bytes": 1696,
+      "sha256": "cf259d6e9918a75df44e00140e0c3302e49dcb96ad0e6d56de7378cd08d91919"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3509,
+      "sha256": "83e874cdee8ce996027e7d3855a1591b6d2eb0522303c383fd0be82eca378cd4"
+    },
+    {
+      "path": "story-data.json",
+      "bytes": 449364,
+      "sha256": "02fa2dee03d11d455f67406de28a4da3cee97b1f8f19fda2cee0e6c1e895a272"
+    },
+    {
+      "path": "STORY_FULL.md",
+      "bytes": 283316,
+      "sha256": "218e2d8c2ce8149f1255ac831525efdf78cfdf3a94cbc1ad0065493da89cb74d"
+    },
+    {
+      "path": "styles.css",
+      "bytes": 28310,
+      "sha256": "cc50eeb766ab116394f47631d832f6af574019cd0a715947f66caf380c995164"
+    },
+    {
+      "path": "template.html",
+      "bytes": 4950,
+      "sha256": "741c94880d0870b7071fbca60601ee34456662490841dd374c540db21af28624"
+    },
+    {
+      "path": "verify_dom.cjs",
+      "bytes": 8440,
+      "sha256": "fa96185401ac9e0c8ed2ce233d52a61de079f0bd4860b6ef78afcfe0723ba246"
+    }
+  ]
+}

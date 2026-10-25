@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 530" fill="none" aria-label="A mustard flower protected inside a lunar greenhouse, with Earth beyond the crater rim" role="img">
+<defs><linearGradient id="glass" x1="350" y1="170" x2="350" y2="475" gradientUnits="userSpaceOnUse"><stop stop-color="#b8d8c1" stop-opacity=".18"/><stop offset="1" stop-color="#b8d8c1" stop-opacity=".02"/></linearGradient><linearGradient id="ground" x1="300" y1="330" x2="300" y2="530" gradientUnits="userSpaceOnUse"><stop stop-color="#4d6159"/><stop offset="1" stop-color="#263a35"/></linearGradient><radialGradient id="light"><stop stop-color="#f6ca69" stop-opacity=".12"/><stop offset="1" stop-color="#f6ca69" stop-opacity="0"/></radialGradient><clipPath id="earth"><circle cx="469" cy="92" r="32"/></clipPath></defs>
+<circle cx="338" cy="315" r="245" fill="url(#light)"/>
+<g stroke="#92a99e" stroke-opacity=".17"><circle cx="347" cy="306" r="192" stroke-dasharray="2 8"/><circle cx="347" cy="306" r="230" stroke-dasharray="2 12"/><path d="M119 306h456M347 77v458" stroke-dasharray="2 12"/></g>
+<circle cx="469" cy="92" r="36" stroke="#9ac9d1" stroke-opacity=".2"/>
+<circle cx="469" cy="92" r="32" fill="#6a9eab"/>
+<g clip-path="url(#earth)" fill="#b6d2b9"><path d="m442 73 13-16 17 7 7 12-11 2 2 11-11 7-7-11-13-1Zm29 20 17-5 10 14-8 11-3 17-10-4-4-13-7-11Z"/><path d="m444 99 9 2 7 11-8 9-11-10Z"/></g>
+<path d="M469 60a32 32 0 0 1 0 64c18-22 15-45 0-64" fill="#172e36" opacity=".3"/>
+<g stroke="#c0cdb8" stroke-opacity=".4"><path d="M221 118h32m-16-16v32M533 213h16m-8-8v16M174 242h12m-6-6v12"/></g>
+<path d="m26 405 79-64 72 29 68-53 72 42 66-33 78 31 55-32 124 75v130H0Z" fill="#233b36"/>
+<path d="m-15 464 95-52 50 21 73-40 76 28 80-52 95 49 68-14 118 53v73H0Z" fill="url(#ground)"/>
+<path d="m77 413 52 20 74-40 77 28 80-52 94 49 68-14" stroke="#809382" stroke-opacity=".22"/>
+<ellipse cx="350" cy="469" rx="145" ry="24" fill="#0b1918" opacity=".6"/>
+<path d="M227 448V309a120 120 0 0 1 240 0v139Z" fill="url(#glass)" stroke="#9aafa0" stroke-width="2"/>
+<path d="M247 449V309c0-66 44-120 100-120s100 54 100 120v140M347 189v261M227 307h240" stroke="#b0c3a5" stroke-opacity=".26"/>
+<path d="M239 288c8-43 40-78 79-85" stroke="#c2d7b4" stroke-width="3" stroke-linecap="round" opacity=".24"/>
+<path d="M220 445h255v15H220Z" fill="#637a68"/><path d="M220 460h255l-12 10H232Z" fill="#2a4237"/>
+<path d="M316 422h65l-9 23h-47Z" fill="#657c58"/><path d="M315 419h67v8h-67Z" fill="#8d9b68"/><ellipse cx="348" cy="420" rx="29" ry="4" fill="#34422e"/>
+<path d="M348 419c1-42-7-83 3-128" stroke="#a7bd7a" stroke-width="4" stroke-linecap="round"/>
+<path d="M347 391c-26-1-40-17-41-34 27 0 39 14 41 34ZM348 371c25-4 40-21 39-38-26 2-38 16-39 38Z" fill="#849f60"/>
+<path d="M348 354c-19-4-29-17-29-29 19 0 29 10 29 29ZM349 329c16-1 27-13 27-26-18 1-25 11-27 26Z" fill="#a5bc73"/>
+<path d="M349 320c-3-15-16-23-23-36M351 313c7-21 20-25 28-32" stroke="#a7bd7a" stroke-width="2.5" stroke-linecap="round"/>
+<g fill="#f6ca69"><ellipse cx="352" cy="271" rx="7" ry="13"/><ellipse cx="352" cy="294" rx="7" ry="13"/><ellipse cx="340" cy="283" rx="13" ry="7"/><ellipse cx="364" cy="283" rx="13" ry="7"/><ellipse cx="326" cy="273" rx="4" ry="8"/><ellipse cx="326" cy="287" rx="4" ry="8"/><ellipse cx="319" cy="280" rx="8" ry="4"/><ellipse cx="333" cy="280" rx="8" ry="4"/><ellipse cx="380" cy="270" rx="4" ry="8"/><ellipse cx="380" cy="284" rx="4" ry="8"/><ellipse cx="373" cy="277" rx="8" ry="4"/><ellipse cx="387" cy="277" rx="8" ry="4"/></g>
+<g fill="#ac8245"><circle cx="352" cy="283" r="5"/><circle cx="326" cy="280" r="3"/><circle cx="380" cy="277" r="3"/></g>
+<path d="M282 447v-29h20v29" stroke="#829681" stroke-width="2"/><rect x="280" y="413" width="26" height="13" rx="2" fill="#254a40" stroke="#829681"/><path d="M285 418h14m-14 4h9" stroke="#b6ce9d" stroke-width="1.2"/>
+<path d="m107 446 58-27v-66l-58 27Z" fill="#233c3c" stroke="#8caaa0" stroke-width="1.5"/><path d="m112 383 48-23m-48 36 48-23m-48 36 48-23M126 372v64m19-73v64" stroke="#719b9a" stroke-opacity=".5"/>
+<path d="M137 435v26l55-1 0-13 27 2" stroke="#9bb497" stroke-width="2"/><path d="M108 455v-9m56-25v20" stroke="#91a28a" stroke-width="3"/>
+<path d="M483 465h45l12 9h-59ZM515 464v-51l-8-7v-20" stroke="#849989" stroke-width="2"/><circle cx="507" cy="380" r="6" stroke="#adc2a6"/>
+<g fill="#7c9183" opacity=".45"><ellipse cx="149" cy="485" rx="19" ry="4"/><ellipse cx="524" cy="496" rx="31" ry="5"/><ellipse cx="389" cy="504" rx="14" ry="3"/><path d="m53 468 11-7 17 7Z"/></g>
+<g stroke="#d3c995" stroke-opacity=".5"><path d="M262 237h-44v-30h-40M423 334h66v-20h30"/></g>
+<g fill="#b6c3ac" font-family="Segoe UI,Arial,sans-serif" font-size="8" letter-spacing="2"><text x="140" y="200">PRESSURISED HABITAT</text><text x="504" y="307">ALO / 01</text></g>
+</svg>

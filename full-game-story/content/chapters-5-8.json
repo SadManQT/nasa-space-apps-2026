@@ -1,0 +1,3405 @@
+[
+  {
+    "id": 5,
+    "coreMinutes": 85,
+    "title": "Shooting Stars",
+    "subtitle": "Evidence makes room for an honest conversation.",
+    "date": "12–15 December 2046",
+    "summary": "A physical handover leads to an investigation of Expedition Zero, accountable conversation, impact observation and maintenance. Consented records identify Noor as the living Academy founder. A respectful invitation leads to cotton planting and carefully separated seed ledgers.",
+    "emotionalArc": "Anticipation → discomfort → accountability → wonder → connection.",
+    "openingHook": "An unused fifth mug finally has someone to drink from it.",
+    "transitionOut": "Dated cotton care and a five-person handover lead to January's eclipse.",
+    "missions": [
+      {
+        "id": "EX-M0501",
+        "title": "The Engineer Comes Home",
+        "minutes": 20,
+        "goal": "Welcome Ferreira and reconstruct the evacuation."
+      },
+      {
+        "id": "EX-M0502",
+        "title": "The Parts We Left Unsaid",
+        "minutes": 20,
+        "goal": "Resolve biological and personal misunderstandings."
+      },
+      {
+        "id": "EX-M0503",
+        "title": "A Moon That Keeps Records",
+        "minutes": 25,
+        "goal": "Verify observations, maintain systems and bound claims."
+      },
+      {
+        "id": "EX-M0504",
+        "title": "Permission to Answer",
+        "minutes": 20,
+        "goal": "Identify Noor, invite contact and plant cotton."
+      }
+    ],
+    "learning": [
+      "Evidence and causation",
+      "Maintenance verification",
+      "Communication and inventory provenance"
+    ],
+    "continuity": [
+      "Ferreira arrives Dec 12; Rao and Noor remain on Earth.",
+      "Noor is identified here; no live Noor voice before CH08.",
+      "Cotton 1 planted +11 vault specimens retained; founder reserve 30 separate.",
+      "Alo remains a petal and lineage, never resurrected.",
+      "Dust Shield/Whipple pair is earned only after CH05; the chapter's cleaning and patching remain mandatory.",
+      "The 2034 trays contain young unflowered seedlings and curled leaves only; no flower buds or reproductive development."
+    ],
+    "production": [
+      "Camera-monitored safe landing.",
+      "Amplified impact flashes without meteor trails.",
+      "Correct stale source count to eleven retained specimens.",
+      "All twelve scenes are required; each has a player evidence gate.",
+      "The impact classification sequence is authored teaching content; do not label its individual flashes as imported historical observations without an actual dataset."
+    ],
+    "scenes": [
+      {
+        "id": "EX-CH05-S01",
+        "legacyScene": "SC-0501",
+        "mission": "EX-M0501",
+        "title": "The Fifth Mug",
+        "minutes": 6,
+        "location": "Landing camera and airlock",
+        "pointOfView": "Rafi",
+        "storyTime": "12 December 2046, scheduled arrival",
+        "prose": "The fifth mug has spent months clipped above the table. Kai polished it once and denied doing so. Now its owner is a small moving shape on the landing camera, waiting beside relief cargo until the pad is declared clear. The player stands with Rafi at the inner airlock control. A greeting is ready, but the open command waits for two agreeing checks.\n\nFerreira gives her name as if this were any other handover. Rafi asks her to repeat the seal indication. She does, without a joke about rank. Beyond the camera frame, the lander's dust has settled; nothing outside billows like smoke. Cargo passes through the transfer procedure before anyone removes a glove.\n\nInside, Ferreira reaches for a chair, sees the four cadets waiting, and takes the corridor watch instead. The player carries her mug to the table. The commander who used to be a voice has weight, tired shoulders and a place to sleep. Aurora must now support five people, and its next ledger must say so.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S01-L01",
+            "speaker": "Rafi",
+            "line": "Name and seal indication, please."
+          },
+          {
+            "id": "EX-CH05-S01-L02",
+            "speaker": "Ferreira",
+            "line": "Ferreira. Seal indication checked twice."
+          },
+          {
+            "id": "EX-CH05-S01-L03",
+            "speaker": "Kai",
+            "line": "Your mug passed inspection."
+          },
+          {
+            "id": "EX-CH05-S01-L04",
+            "speaker": "Amara",
+            "line": "We are revising the occupancy ledger."
+          }
+        ],
+        "playerActions": [
+          "Compare landing-clear indicators.",
+          "Verify cargo seals before entry.",
+          "Add Ferreira to the five-person roster."
+        ],
+        "choice": {
+          "prompt": "Which occupancy forecast can safely be committed after Ferreira arrives?",
+          "options": [
+            {
+              "label": "Keep the four-person forecast",
+              "consequence": "The preview shows the fifth person's demand omitted; revise before committing."
+            },
+            {
+              "label": "Recompute for five occupants",
+              "consequence": "The forecast includes the new occupant and passes the roster check."
+            }
+          ],
+          "convergence": "Five-person demand must reconcile before the entry handover is committed."
+        },
+        "learning": {
+          "concept": "Handover and occupancy",
+          "predict": "What changes with a fifth person?",
+          "observe": "Compare the two occupancy ledgers.",
+          "explain": "More people change consumption even in an unchanged habitat.",
+          "transfer": "Count people before budgeting shared supplies."
+        },
+        "exitCondition": "Clearance, seals and five-person roster verified.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH05-S02",
+        "legacyScene": "SC-0501",
+        "mission": "EX-M0501",
+        "title": "The Watch She Takes",
+        "minutes": 7,
+        "location": "Aurora corridor and atmosphere panel",
+        "pointOfView": "Amara",
+        "storyTime": "12 December, after arrival",
+        "prose": "Ferreira's first watch is uneventful, which makes Amara suspicious. On Earth, the commander always seemed to arrive at the moment a warning sounded. Here she checks a label, writes the time and waits for the next reading. The player follows her through the corridor that felt unfamiliar in April.\n\nA replacement relay controller sits in a sealed crate. Rafi reads its serial against the received manifest; Kai checks that the service diagram is stored locally. The spare does not fix anything simply by arriving. It needs a compatible housing, an isolation procedure and a crew who know where it is. They put those facts on the inventory board.\n\nAt the atmosphere panel, Amara finds a handwritten correction she made months earlier. Ferreira asks why it remains visible. Amara says the old number was wrong. The player compares the second gauge and signs the current reading. The panel becomes evidence of a checked mistake rather than embarrassment. Their meal begins after the handover, not after an invented emergency.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S02-L01",
+            "speaker": "Ferreira",
+            "line": "A good watch can be quiet."
+          },
+          {
+            "id": "EX-CH05-S02-L02",
+            "speaker": "Amara",
+            "line": "Quiet still needs a record."
+          },
+          {
+            "id": "EX-CH05-S02-L03",
+            "speaker": "Rafi",
+            "line": "Controller serial matches the manifest."
+          },
+          {
+            "id": "EX-CH05-S02-L04",
+            "speaker": "Kai",
+            "line": "The instructions stay here without Earth."
+          }
+        ],
+        "playerActions": [
+          "Match controller serial and service specification.",
+          "Save its procedure locally.",
+          "Reconcile independent atmosphere readings."
+        ],
+        "choice": {
+          "prompt": "How should the corrected label look?",
+          "options": [
+            {
+              "label": "Keep the correction visible",
+              "consequence": "Its date and reason remain beside the value."
+            },
+            {
+              "label": "Use a dated overlay",
+              "consequence": "The earlier reading remains in the log."
+            }
+          ],
+          "convergence": "Spare stored once, procedure available locally, readings reconciled."
+        },
+        "learning": {
+          "concept": "Traceable correction",
+          "predict": "Would a confident label prove correctness?",
+          "observe": "Compare two readings and a dated revision.",
+          "explain": "A correction is useful when its reason is visible.",
+          "transfer": "Keep an audit trail when changing a shared plan."
+        },
+        "exitCondition": "Spare stored once, procedure available locally, readings reconciled.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH05-S03",
+        "legacyScene": "SC-0502",
+        "mission": "EX-M0501",
+        "title": "The Order We Left In",
+        "minutes": 7,
+        "location": "Aurora mission table",
+        "pointOfView": "Amara",
+        "storyTime": "14 December, afternoon",
+        "prose": "Four records wait under transparent weights: a relay fault report, a greenhouse service note, an evacuation order and an ascent manifest. Ferreira puts them down without arranging them. She asks the player to reconstruct the order before asking what she remembers. The task begins with timestamps and signatures, not an accusation.\n\nOne note describes a power connector already degraded. Another records the relay failure. The player distinguishes a condition from the moment it became dangerous. A photograph of frozen trays supplies a consequence but cannot date the original fault. Wrong placements remain visible long enough for their contradiction to be understood; correcting them costs no survival resource.\n\nThe ascent manifest supplies the final check. Every listed crew member boarded. The player compares the roster with the boarding record instead of inferring a death from a sad photograph. Rafi exhales before anyone speaks. An unanswered question about the seeds remains, but it has changed shape. The mystery concerns what people carried home and what they hoped someone might find later.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S03-L01",
+            "speaker": "Ferreira",
+            "line": "First the records. Then my memories."
+          },
+          {
+            "id": "EX-CH05-S03-L02",
+            "speaker": "Amara",
+            "line": "A condition is not the failure time."
+          },
+          {
+            "id": "EX-CH05-S03-L03",
+            "speaker": "Rafi",
+            "line": "Every name has a boarding mark."
+          },
+          {
+            "id": "EX-CH05-S03-L04",
+            "speaker": "Mei",
+            "line": "The garden was left. The gardener was not."
+          }
+        ],
+        "playerActions": [
+          "Order the four primary records.",
+          "Separate earlier degradation from the incident.",
+          "Match roster and boarding signatures."
+        ],
+        "choice": {
+          "prompt": "What settles the boarding question?",
+          "options": [
+            {
+              "label": "Compare manifest and roster",
+              "consequence": "Every crew member is accounted for directly."
+            },
+            {
+              "label": "Read the departure summary",
+              "consequence": "Its conclusion is checked against the same roster."
+            }
+          ],
+          "convergence": "Supported sequence and all-crew-returned conclusion committed."
+        },
+        "learning": {
+          "concept": "Chronology and evidence",
+          "predict": "Does damage reveal its own date?",
+          "observe": "Compare timestamps and boarding records.",
+          "explain": "Sequence constrains an explanation without proving every cause.",
+          "transfer": "Use records before making a dramatic inference."
+        },
+        "exitCondition": "Supported sequence and all-crew-returned conclusion committed.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH05-S04",
+        "legacyScene": "SC-0502",
+        "mission": "EX-M0502",
+        "title": "A Garden That Had Not Flowered",
+        "minutes": 6,
+        "location": "Archive images at the mission table",
+        "pointOfView": "Mei",
+        "storyTime": "14 December, afternoon",
+        "prose": "Mei brings the frozen-garden photographs beside Alo's preserved petal. For months she has called the room below the hatch an old garden. Now that phrase seems to compete with their first bloom. If flowers were already there, what did Alo change? The player opens the growth sheet instead of accepting either flattering explanation.\n\nThe sheet records young seedlings, curled leaves and evacuation before flowering. Close images show why a curled frozen leaf is not evidence of a flower. Mei marks what is visible and leaves an uncertain patch unlabelled. Amara checks that the board describes the documented trial, rather than pretending a photograph proves every unseen moment.\n\nAlo's record stays separate: flower, compatible pollen from Tara, mature pods, dry-down and forty-two harvested seeds. The petal is not alive. The descendants in the present room are. By aligning two timelines, the player makes space for both expeditions without stealing either achievement. Ferreira watches Mei revise the caption. She does not ask her to make an unfinished trial sound successful.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S04-L01",
+            "speaker": "Mei",
+            "line": "I thought those shapes were flowers."
+          },
+          {
+            "id": "EX-CH05-S04-L02",
+            "speaker": "Amara",
+            "line": "Read the growth sheet beside the image."
+          },
+          {
+            "id": "EX-CH05-S04-L03",
+            "speaker": "Ferreira",
+            "line": "We left before reproduction."
+          },
+          {
+            "id": "EX-CH05-S04-L04",
+            "speaker": "Mei",
+            "line": "Then Alo finished a step they could not."
+          }
+        ],
+        "playerActions": [
+          "Compare growth stages and dates.",
+          "Identify young seedlings and curled leaves.",
+          "Keep founder harvest separate from later generations."
+        ],
+        "choice": {
+          "prompt": "Which interpretation is supported by the archived growth record?",
+          "options": [
+            {
+              "label": "The shapes show earlier flowers",
+              "consequence": "The growth sheet identifies young unflowered seedlings with curled leaves; revise the caption."
+            },
+            {
+              "label": "The trial ended before flowering",
+              "consequence": "Dated stage records support the conclusion without denying the trial's value."
+            }
+          ],
+          "convergence": "Archive interpretation must match the documented pre-flowering stage."
+        },
+        "learning": {
+          "concept": "Plant life stages",
+          "predict": "Can a frozen leaf resemble a flower?",
+          "observe": "Compare images, stage notes and dates.",
+          "explain": "A young seedling and a flowering plant are different stages; the old trial stopped before any flowering.",
+          "transfer": "Support a biological claim with more than appearance."
+        },
+        "exitCondition": "The old 2034 trial is documented as young unflowered seedlings only, without flower buds, pollination or seed production.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH05-S05",
+        "legacyScene": "SC-0503",
+        "mission": "EX-M0502",
+        "title": "What I Didn't Say",
+        "minutes": 7,
+        "location": "Aurora table, shared seating",
+        "pointOfView": "Mei",
+        "storyTime": "14 December, late afternoon",
+        "prose": "Ferreira sits where a commander would usually stand. Her hands rest without touching the records. She describes Expedition Zero's final equipment-recovery minutes: a seed drawer, a service annex already cooling, and a gardener who believed another crew would come. The vault had been placed during an earlier survey. Nobody drove into a crater while the ascent vehicle waited.\n\nThe player can ask about the retreat order or the saved seeds. Both lead to facts secured by the record. Ferreira helped the gardener board. The fault made continued habitation unsafe. Returning alive was the right action, and it still hurt to leave living work unfinished. She admits that avoiding this history made discovery feel like secrecy.\n\nMei does not respond by pretending the delay never mattered. She asks why the commander trusted them with equipment but not disappointment. Ferreira accepts the question. The player chooses a first response, then reads the other perspective too. This is not a forgiveness meter. A working crew can keep a disagreement visible and decide together what must happen next.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S05-L01",
+            "speaker": "Ferreira",
+            "line": "I was the engineer who could not fix the radio."
+          },
+          {
+            "id": "EX-CH05-S05-L02",
+            "speaker": "Mei",
+            "line": "You could have told us."
+          },
+          {
+            "id": "EX-CH05-S05-L03",
+            "speaker": "Ferreira",
+            "line": "Yes. I was afraid of how it would sound."
+          },
+          {
+            "id": "EX-CH05-S05-L04",
+            "speaker": "Kai",
+            "line": "Then we can ask before we guess."
+          }
+        ],
+        "playerActions": [
+          "Ask about the retreat order.",
+          "Ask about the seeds and earlier vault survey.",
+          "Record responsibility without inventing abandonment."
+        ],
+        "choice": {
+          "prompt": "What should Mei ask first?",
+          "options": [
+            {
+              "label": "Why did you wait?",
+              "consequence": "Ferreira acknowledges the cost of avoidance."
+            },
+            {
+              "label": "What came home?",
+              "consequence": "She describes people, records and another chance."
+            }
+          ],
+          "convergence": "Both factual topics acknowledged; all safety information remains available."
+        },
+        "learning": {
+          "concept": "Accountable communication",
+          "predict": "Can a necessary decision leave regret?",
+          "observe": "Compare the safe order with a personal account.",
+          "explain": "Emotional difficulty does not erase operational responsibility.",
+          "transfer": "Request missing context without inventing blame."
+        },
+        "exitCondition": "Both factual topics acknowledged; all safety information remains available.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH05-S06",
+        "legacyScene": "SC-0503",
+        "mission": "EX-M0502",
+        "title": "Two Kinds of Repair",
+        "minutes": 7,
+        "location": "Local records desk and spare locker",
+        "pointOfView": "Kai",
+        "storyTime": "14 December, before night observation",
+        "prose": "Kai opens the old relay diagram beside the new controller's service card. Their housings resemble one another, but he will not call them interchangeable from a picture. The player compares connector specification, isolation points and the actual spare serial. The controller remains packed. This investigation does not repair the present uplink, which is still working normally.\n\nAcross the table, Mei rewrites the unanswered question. It no longer asks whether the old expedition cared. It asks who wrote N., and whether that person wants to hear from them. The difference fits on one line and changes the conversation. Ferreira leaves the personal identity page with Rao for consented release later.\n\nThe player produces two separate products: a technical compatibility note and a respectful question for the gardener. Kai clips his note inside the crate. Mei keeps her question beside a current photograph. Neither replaces the other. Ferreira takes her mug back to the watch station. Before observation begins, the player verifies that the repair procedure opens without an Earth connection.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S06-L01",
+            "speaker": "Kai",
+            "line": "Matching shape is not matching specification."
+          },
+          {
+            "id": "EX-CH05-S06-L02",
+            "speaker": "Rafi",
+            "line": "Read the connector and isolation points."
+          },
+          {
+            "id": "EX-CH05-S06-L03",
+            "speaker": "Mei",
+            "line": "Our other question needs permission."
+          },
+          {
+            "id": "EX-CH05-S06-L04",
+            "speaker": "Ferreira",
+            "line": "Both kinds of repair deserve care."
+          }
+        ],
+        "playerActions": [
+          "Compare controller specifications.",
+          "Store the checked replacement procedure.",
+          "Prepare a respectful request for contact."
+        ],
+        "choice": {
+          "prompt": "Which specification comes first?",
+          "options": [
+            {
+              "label": "Connector and rating",
+              "consequence": "Electrical compatibility receives the first check."
+            },
+            {
+              "label": "Isolation and mounting",
+              "consequence": "Replacement safety receives the first check."
+            }
+          ],
+          "convergence": "Both comparisons complete; spare unused and present radio working."
+        },
+        "learning": {
+          "concept": "Appropriate evidence",
+          "predict": "Does a matching shell prove compatibility?",
+          "observe": "Compare service specifications, not appearance.",
+          "explain": "Technical fit and personal permission answer different questions.",
+          "transfer": "Choose evidence suited to the actual decision."
+        },
+        "exitCondition": "Both comparisons complete; spare unused and present radio working.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH05-S07",
+        "legacyScene": "SC-0504",
+        "mission": "EX-M0503",
+        "title": "Stars Without Streaks",
+        "minutes": 8,
+        "location": "Aurora impact-camera monitor",
+        "pointOfView": "Rafi",
+        "storyTime": "14 December, night observation",
+        "prose": "Kai asks where the shooting stars are. The monitor shows a dark plain and small flashes enlarged for inspection. There are no atmospheric trails above the surface. Rafi hands the player a frame-based observation log. Nobody must rush outside for a better view.\n\nThe first candidate stays at the same detector coordinate across several frames. Another appears briefly at a mapped surface location with a distinct onset. The player inspects neighbouring frames before classifying either. Amara requests a reason beside every accepted event; a lucky click cannot become a scientific report. Six genuine flashes must be verified in the teaching sequence, while two fixed artifacts are rejected.\n\nAs the list grows, the plain seems less empty. Mei says the Moon keeps marks too small to notice from their window. Ferreira reminds her that this is an amplified instrument view, not naked-eye fireworks. The player saves the sixth supported event and carries the observation clock into maintenance. Wonder has supplied a reason to look carefully, not permission to overstate what appeared.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S07-L01",
+            "speaker": "Kai",
+            "line": "No trails?"
+          },
+          {
+            "id": "EX-CH05-S07-L02",
+            "speaker": "Amara",
+            "line": "Not like meteors crossing Earth's air."
+          },
+          {
+            "id": "EX-CH05-S07-L03",
+            "speaker": "Rafi",
+            "line": "Check the frame before and after."
+          },
+          {
+            "id": "EX-CH05-S07-L04",
+            "speaker": "Mei",
+            "line": "A tiny flash can leave a mark."
+          }
+        ],
+        "playerActions": [
+          "Inspect candidate frames.",
+          "Reject two detector artifacts.",
+          "Log six supported genuine flashes."
+        ],
+        "choice": {
+          "prompt": "Which candidate belongs in the confirmed impact count?",
+          "options": [
+            {
+              "label": "The persistent detector-coordinate point",
+              "consequence": "Neighbouring frames expose a fixed artifact; it is rejected from the count."
+            },
+            {
+              "label": "The transient mapped-surface flash",
+              "consequence": "Onset and adjacent frames support an event; confirm it with the recorded evidence."
+            }
+          ],
+          "convergence": "Six genuine flashes and two rejected artifacts are needed, with reasons."
+        },
+        "learning": {
+          "concept": "Observation and artifacts",
+          "predict": "Is every bright pixel an impact?",
+          "observe": "Compare onset, persistence and position.",
+          "explain": "Instrument artifacts can resemble real events.",
+          "transfer": "Keep uncertain observations distinct from confirmed ones."
+        },
+        "exitCondition": "Six genuine flashes verified and both artifacts rejected.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH05-S08",
+        "legacyScene": "SC-0504",
+        "mission": "EX-M0503",
+        "title": "Dust Has a Cost",
+        "minutes": 9,
+        "location": "Maintenance console and isolated garden spur",
+        "pointOfView": "Amara",
+        "storyTime": "14 December, scheduled maintenance",
+        "prose": "The observation report is ready, but Amara does not let a completed screen become a completed watch. A panel trend shows less output than its reference. A separate pressure trace suggests a small isolated branch leak. The player separates the observations first; one convenient explanation cannot account for every change.\n\nNeither of the protective upgrades offered after this chapter has been earned yet. Scheduled cleaning must restore the panel's teaching profile, and the player must isolate and patch the damaged garden spur. A pressure-safe procedure keeps the living enclosure closed. The player predicts which trace each repair should change, then compares independent before-and-after records. A correct patch cannot be credited for an unrelated energy improvement.\n\nMei watches through the sealed enclosure. Nobody opens a greenhouse to vacuum to wipe a leaf. Kai jokes about dust keeping a diary, then labels the trends correctly. The crew earns a later choice of Dust Shield or Whipple protection because it now understands both failure mechanisms. Future equipment will change future maintenance; it cannot retroactively perform today's work.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S08-L01",
+            "speaker": "Amara",
+            "line": "Two symptoms. Check their causes separately."
+          },
+          {
+            "id": "EX-CH05-S08-L02",
+            "speaker": "Kai",
+            "line": "The dust kept a diary."
+          },
+          {
+            "id": "EX-CH05-S08-L03",
+            "speaker": "Mei",
+            "line": "Read it after the pressure check."
+          },
+          {
+            "id": "EX-CH05-S08-L04",
+            "speaker": "Ferreira",
+            "line": "Protection changes the job, not the check."
+          }
+        ],
+        "playerActions": [
+          "Predict which fault explains each independent trace.",
+          "Carry out the scheduled safe panel-cleaning procedure.",
+          "Isolate, patch and pressure-test the garden spur."
+        ],
+        "choice": {
+          "prompt": "Which explanation should be tested for the pressure trend?",
+          "options": [
+            {
+              "label": "Dust on the panel reduces pressure",
+              "consequence": "Panel cleaning changes output but not the isolated leak; the separate branch test is required."
+            },
+            {
+              "label": "The isolated spur has a small leak",
+              "consequence": "The branch test localises the leak; patch and retest it before committing."
+            }
+          ],
+          "convergence": "Both cleaning and isolated patch must pass their independent measurements."
+        },
+        "learning": {
+          "concept": "Controlled maintenance comparison",
+          "predict": "Could one fault explain both trends?",
+          "observe": "Compare independent before-and-after records.",
+          "explain": "A repair needs a measurement relevant to its purpose.",
+          "transfer": "Check what a maintenance action actually changed."
+        },
+        "exitCondition": "Both repairs verified by relevant measurements; protection upgrade not owned until chapter completion.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH05-S09",
+        "legacyScene": "SC-0504",
+        "mission": "EX-M0503",
+        "title": "What the Flashes Cannot Prove",
+        "minutes": 8,
+        "location": "Aurora evidence table",
+        "pointOfView": "Rafi",
+        "storyTime": "14 December, after maintenance",
+        "prose": "Rafi places tonight's observation record beside Expedition Zero's damage report. Their dates differ, and he leaves them that way. It is tempting to make an impressive flash explain the broken relay twelve years earlier. The player can draw a line only where the evidence supports one.\n\nThe same kind of hazard explains why impact monitoring matters. It cannot establish that a specific old fault was caused by an impact, particularly when the original report describes relay failure and degraded power hardware without a verified strike. The player moves that strong claim to unsupported. Its correction stays visible in the debrief so the missing connection has a reason.\n\nFerreira smiles at a report containing a blank. It is the first empty space all evening that makes her feel better. Rafi saves the report without apology. Candidate frames, maintenance traces and archive chronology now form one complete investigation: observe, test, explain the limits. The player carries that discipline into the identity question. A familiar initial can be a clue. A signed page must finish the proof.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S09-L01",
+            "speaker": "Rafi",
+            "line": "Tonight's flashes do not date the old fault."
+          },
+          {
+            "id": "EX-CH05-S09-L02",
+            "speaker": "Amara",
+            "line": "That blank is an honest result."
+          },
+          {
+            "id": "EX-CH05-S09-L03",
+            "speaker": "Ferreira",
+            "line": "Leave it blank until we know."
+          },
+          {
+            "id": "EX-CH05-S09-L04",
+            "speaker": "Mei",
+            "line": "An initial leads us. A record finishes it."
+          }
+        ],
+        "playerActions": [
+          "Separate direct and contextual evidence.",
+          "Reject the unsupported old-impact claim.",
+          "Save an explicitly bounded conclusion."
+        ],
+        "choice": {
+          "prompt": "Choose a supported report conclusion.",
+          "options": [
+            {
+              "label": "Impacts are monitored hazards",
+              "consequence": "It explains today's instrument work."
+            },
+            {
+              "label": "The old fault needs its own evidence",
+              "consequence": "It protects the archive from a false cause."
+            }
+          ],
+          "convergence": "Complete report excludes the unsupported historical impact claim."
+        },
+        "learning": {
+          "concept": "Causation and context",
+          "predict": "Does a similar hazard establish a past cause?",
+          "observe": "Compare original reports and distinct dates.",
+          "explain": "Plausible mechanisms do not replace case-specific evidence.",
+          "transfer": "Avoid making a coincidence into a confident cause."
+        },
+        "exitCondition": "Complete report excludes the unsupported historical impact claim.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH05-S10",
+        "legacyScene": "SC-0505",
+        "mission": "EX-M0504",
+        "title": "The Name on the Page",
+        "minutes": 6,
+        "location": "Mission table, live Earth data link",
+        "pointOfView": "Mei",
+        "storyTime": "14 December, later",
+        "prose": "Rao's call arrives with a signed page and a permission note. The player checks its signature against the recovered manifest. N.R. is no longer an invitation to guess a name. It is Dr. Noor Rahman, the botanist who left the seeds, returned to Bangladesh and founded Last Light Academy.\n\nRao says she has read the crew's transmitted reports. Transmitted matters: Noor did not see through April's Earth blackout and never watched private moments through an invisible camera. The player opens the receipt list, comparing creation times with delivery after contact returned. Mei finds the first bloom photograph and the forty-two-seed harvest entry. Support has an actual information path.\n\nFerreira explains that Noor wanted future crews to finish a garden her own expedition left unfinished. This does not make the cadets actors in a secret test. Their repairs and decisions belonged to them. The player places the signed page beside the anonymous packet image. Only after the shared reveal does the journal expand the initials into Noor's full name.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S10-L01",
+            "speaker": "Rao (live Earth link)",
+            "line": "She gave permission to share the page."
+          },
+          {
+            "id": "EX-CH05-S10-L02",
+            "speaker": "Ferreira",
+            "line": "Dr. Noor Rahman. Our gardener, from Bangladesh."
+          },
+          {
+            "id": "EX-CH05-S10-L03",
+            "speaker": "Mei",
+            "line": "She read the reports we sent?"
+          },
+          {
+            "id": "EX-CH05-S10-L04",
+            "speaker": "Rao (live Earth link)",
+            "line": "Every one that reached Earth."
+          }
+        ],
+        "playerActions": [
+          "Match identity records.",
+          "Check report delivery receipts.",
+          "Update shared journal knowledge."
+        ],
+        "choice": {
+          "prompt": "Open a report receipt.",
+          "options": [
+            {
+              "label": "First bloom",
+              "consequence": "It shows when Noor could see the photo."
+            },
+            {
+              "label": "Harvest forty-two",
+              "consequence": "It connects later knowledge with delivered evidence."
+            }
+          ],
+          "convergence": "Noor identity, survival and founder role established with consented evidence."
+        },
+        "learning": {
+          "concept": "Information provenance",
+          "predict": "What can someone know without a connection?",
+          "observe": "Compare creation and receipt timestamps.",
+          "explain": "Records can arrive later than their events.",
+          "transfer": "Check who received information before assuming shared knowledge."
+        },
+        "exitCondition": "Noor identity, survival and founder role established with consented evidence.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH05-S11",
+        "legacyScene": "SC-0505",
+        "mission": "EX-M0504",
+        "title": "An Invitation, Not an Answer Owed",
+        "minutes": 7,
+        "location": "Message composer at the mission table",
+        "pointOfView": "Mei",
+        "storyTime": "14 December, after the reveal",
+        "prose": "The composer offers a current garden photograph and a cursor. Mei spent months wanting an answer from N. Now that the name is known, the first sentence feels harder. Kai suggests sending every graph. Amara says the graphs can be attachments. The player decides what the invitation itself should ask.\n\nBoth authored invitations leave Noor a choice. One asks whether she would like to see the next stage. The other says a place for her work remains at their table. Neither demands a reply, accuses her of abandoning anyone or turns a private history into a puzzle prize. The camera stays on Mei's hands while the player checks the text.\n\nRao confirms delivery through the available Earth path. No immediate voice sounds from the speaker. The crew finishes its checked report while the new relationship waits at its own pace. Ferreira places her mug beside four familiar ones. The table has not gained a magical sixth occupant. It has gained a connection to someone who may choose a later conversation.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S11-L01",
+            "speaker": "Kai",
+            "line": "Should we send every graph?"
+          },
+          {
+            "id": "EX-CH05-S11-L02",
+            "speaker": "Amara",
+            "line": "Attachments can do that."
+          },
+          {
+            "id": "EX-CH05-S11-L03",
+            "speaker": "Mei",
+            "line": "The invitation should sound like one."
+          },
+          {
+            "id": "EX-CH05-S11-L04",
+            "speaker": "Ferreira",
+            "line": "Leave her room to answer."
+          }
+        ],
+        "playerActions": [
+          "Choose a respectful authored invitation.",
+          "Attach photo and checked report.",
+          "Send and retain the delivery receipt."
+        ],
+        "choice": {
+          "prompt": "How should the invitation begin?",
+          "options": [
+            {
+              "label": "Would you like to see what grows next?",
+              "consequence": "It offers a future conversation."
+            },
+            {
+              "label": "We kept a place for your work.",
+              "consequence": "It acknowledges contribution without demanding contact."
+            }
+          ],
+          "convergence": "Invitation delivered once; first live Noor voice remains reserved for Chapter 8."
+        },
+        "learning": {
+          "concept": "Respectful collaboration",
+          "predict": "Does a story entitle us to someone's answer?",
+          "observe": "Compare invitation with demand.",
+          "explain": "Participation can be invited without being forced.",
+          "transfer": "Ask clearly while leaving space for consent."
+        },
+        "exitCondition": "Invitation delivered once; first live Noor voice remains reserved for Chapter 8.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH05-S12",
+        "legacyScene": "SC-0506",
+        "mission": "EX-M0504",
+        "title": "One More Seed",
+        "minutes": 7,
+        "location": "Aurora indoor reference bay",
+        "pointOfView": "Mei",
+        "storyTime": "15 December; dated care into January",
+        "prose": "Noor replies in text the next day. She thanks the crew for asking and would like to see what grows next. Mei pins the message where a gardener can read it without bending over the console. The player opens the approved quarantine record, not the entire seed case.\n\nOne viable cotton specimen is cleared for the indoor reference bay. Eleven other vault specimens remain protected. Amara reads those quantities aloud, then closes that ledger before opening the separate founder reserve: thirty original Alo-by-Tara seeds, still sealed. No inventory gains a seed because an album picture was unlocked.\n\nPlanting repeats the opening game's gesture with better understanding. The player labels the cassette, checks the medium and closes the pressure-safe bay. No cotton flower appears on command. A dated montage shows leaves and repeated care over subsequent weeks while Alo's descendants continue nearby. Mei places the preserved petal beside the label. It remembers an individual; the living room continues a lineage. Kai has already begun marking the guide-light circuit for January's eclipse. At chapter completion, the player selects Dust Shield or Whipple protection for later chapters, with neither option required to solve today's maintenance.",
+        "dialogue": [
+          {
+            "id": "EX-CH05-S12-L01",
+            "speaker": "Noor (text)",
+            "line": "Thank you for asking. I would like to see what you grow next."
+          },
+          {
+            "id": "EX-CH05-S12-L02",
+            "speaker": "Amara",
+            "line": "Cotton planted. Eleven other vault specimens protected."
+          },
+          {
+            "id": "EX-CH05-S12-L03",
+            "speaker": "Rafi",
+            "line": "Founder reserve is a separate ledger."
+          },
+          {
+            "id": "EX-CH05-S12-L04",
+            "speaker": "Mei",
+            "line": "A new seed, not the old flower returning."
+          }
+        ],
+        "playerActions": [
+          "Plant one cleared cotton specimen.",
+          "Confirm eleven retained vault types and thirty founder seeds separately.",
+          "Record dated care before January."
+        ],
+        "choice": {
+          "prompt": "Which physical inventory closes after planting cotton?",
+          "options": [
+            {
+              "label": "One planted plus eleven other vault specimens",
+              "consequence": "The vault ledger reconciles 12 while the founder 30 stays separate."
+            },
+            {
+              "label": "Sixteen minus one equals fifteen stored",
+              "consequence": "Sixteen counts album entries; the mismatched physical ledger is rejected for correction."
+            }
+          ],
+          "convergence": "Cotton 1 + retainedvault 11 reconciles vault 12; founder 30 remains a distinct protected stock."
+        },
+        "learning": {
+          "concept": "Inventory and living continuity",
+          "predict": "Does an album entry create a seed?",
+          "observe": "Reconcile planted cotton, retained specimens and founder reserve.",
+          "explain": "Distinct inventories cannot be combined as one stock.",
+          "transfer": "Separate physical quantities from records and achievements."
+        },
+        "exitCondition": "Cotton planted Dec 15; eleven vault specimens and thirty founder seeds protected.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_05.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "coreMinutes": 85,
+    "title": "The Red Ring",
+    "subtitle": "Courage is a plan someone else can read.",
+    "date": "12 January–14 February 2047",
+    "summary": "Kai turns an old fear into a shared engineering plan. The crew rehearses a five-segment protected-service budget, records a labelled eclipse view, connects family within a valid path and receives Noor's known-sender text. A bounded camera fault is isolated and recovered without losing essentials. Dated care bridges to a genuinely new February warning.",
+    "emotionalArc": "Admission → preparation → shared wonder → interruption → supported action.",
+    "openingHook": "The same small lamp returns, but this time Kai puts it in the plan himself.",
+    "transitionOut": "A dated monitoring montage leads to a new shared February alert, not a month-ahead prediction.",
+    "missions": [
+      {
+        "id": "EX-M0601",
+        "title": "A Plan for Darkness",
+        "minutes": 20,
+        "goal": "Turn human needs and service dependencies into one checked allocation."
+      },
+      {
+        "id": "EX-M0602",
+        "title": "The Plan We Share",
+        "minutes": 25,
+        "goal": "Compare options, rehearse isolation and collect actual readiness reports."
+      },
+      {
+        "id": "EX-M0603",
+        "title": "All the Sunrises",
+        "minutes": 20,
+        "goal": "Observe with honest labels and communicate within a valid path."
+      },
+      {
+        "id": "EX-M0604",
+        "title": "The Light That Returns",
+        "minutes": 20,
+        "goal": "Restore the camera, account for recovery and hand over sustained monitoring."
+      }
+    ],
+    "learning": [
+      "Energy accounting with one model",
+      "Fault isolation and team checkbacks",
+      "Evidence labels, communication windows and forecast limits"
+    ],
+    "continuity": [
+      "Five lunar occupants; Noor and Rao remain Earth-based.",
+      "Five eclipse segments, seven-unit teaching allocation, never a duplicate duration charge.",
+      "Jan 12 eclipse date does not certify Aurora's local view or Bangladesh sunrise geometry.",
+      "Noor sends text; the earlier eclipse memory has no invented date.",
+      "Cotton grows through dated care; founder 30 and retainedvault 11 remain separate."
+    ],
+    "production": [
+      "Provide a filtered instrument feed or visibly conceptual fallback until local geometry is verified.",
+      "All voice and memory content has text parity.",
+      "Camera F2 fault leaves protected habitat services powered.",
+      "No cure-of-fear claim, unsafe solar viewing or assistance penalty."
+    ],
+    "scenes": [
+      {
+        "id": "EX-CH06-S01",
+        "legacyScene": "SC-0601",
+        "mission": "EX-M0601",
+        "title": "The Lamp Is Still Here",
+        "minutes": 6,
+        "location": "Power room, hand-light locker",
+        "pointOfView": "Kai",
+        "storyTime": "12 January 2047, before eclipse preparation",
+        "prose": "Kai remembers the locker without needing its label. Inside is the hand light Rafi left within reach during their first night. It is scratched now, and its battery needs a measured charge. The player picks it up instead of searching for a brighter replacement. Familiar equipment carries evidence of previous use.\n\nFerreira arrives at the doorway and waits while Kai checks the charge. He says plainly that he is still afraid of the dark. No one calls this a failure of training. Amara adds the lamp to the protected-service plan as a small, useful load. Rafi asks whether Kai wants company during the transfer. The player chooses a companion without changing anyone's assigned responsibility.\n\nThe room does not become frightening to prove his fear real. Its ordinary hum continues while the checklist fills. Kai clips the charged lamp where both hands can remain free. His first task is complete because he has identified a need and prepared for it, not because he has stopped feeling it.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S01-L01",
+            "speaker": "Kai",
+            "line": "The lamp still matters."
+          },
+          {
+            "id": "EX-CH06-S01-L02",
+            "speaker": "Rafi",
+            "line": "So does asking for company."
+          },
+          {
+            "id": "EX-CH06-S01-L03",
+            "speaker": "Ferreira",
+            "line": "Plan with the facts you have."
+          },
+          {
+            "id": "EX-CH06-S01-L04",
+            "speaker": "Amara",
+            "line": "Guide light goes on the protected list."
+          }
+        ],
+        "playerActions": [
+          "Check lamp charge.",
+          "Review the protected-service list.",
+          "Choose an available companion."
+        ],
+        "choice": {
+          "prompt": "Who stays beside Kai?",
+          "options": [
+            {
+              "label": "Rafi",
+              "consequence": "He supplies calm local checkbacks."
+            },
+            {
+              "label": "Amara",
+              "consequence": "She supplies the same checkbacks from the panel."
+            }
+          ],
+          "convergence": "Lamp charged and companion assigned."
+        },
+        "learning": {
+          "concept": "Human factors in planning",
+          "predict": "Does confidence eliminate the need for support?",
+          "observe": "Check equipment and name the support required.",
+          "explain": "Good planning includes predictable human needs.",
+          "transfer": "Prepare tools and ask for help before pressure rises."
+        },
+        "exitCondition": "Lamp charged and companion assigned.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH06-S02",
+        "legacyScene": "SC-0601",
+        "mission": "EX-M0601",
+        "title": "A Memory With a Switch",
+        "minutes": 7,
+        "location": "Power room, dated personal log",
+        "pointOfView": "Kai",
+        "storyTime": "12 January, calm planning interval",
+        "prose": "The player opens Kai's short memory beside the present circuit map. A childhood storm once left his home dark without warning. The log offers sounds and a text equivalent, not a forced frightening reenactment. Kai can stop the memory and keep every fact needed for the mission.\n\nWhat frightened him was not simply a missing bulb. It was not knowing when the light would return or who had a plan. On the table, the player separates those uncertainties into questions the crew can answer: which services remain powered, what the forecast covers, and how to signal a fault. The eclipse schedule is a source-informed scenario, with local timing still awaiting verified geometry.\n\nRafi points to a guide-light branch that appears on every segment. Kai traces it with one finger and checks the reserve once. The animation echoes his old double-checking habit without making caution the joke. He closes the memory himself. This time the room has a map, a companion and a way to ask what happens next.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S02-L01",
+            "speaker": "Kai",
+            "line": "I did not know when it would return."
+          },
+          {
+            "id": "EX-CH06-S02-L02",
+            "speaker": "Rafi",
+            "line": "This time we can read the plan."
+          },
+          {
+            "id": "EX-CH06-S02-L03",
+            "speaker": "Amara",
+            "line": "A forecast still has limits."
+          },
+          {
+            "id": "EX-CH06-S02-L04",
+            "speaker": "Kai",
+            "line": "Then label the limits too."
+          }
+        ],
+        "playerActions": [
+          "Read or skip the accessible memory.",
+          "Turn uncertainties into checkable questions.",
+          "Trace the guide-light supply."
+        ],
+        "choice": {
+          "prompt": "Which question starts the plan?",
+          "options": [
+            {
+              "label": "What stays powered?",
+              "consequence": "Kai traces protected services."
+            },
+            {
+              "label": "How do we report a fault?",
+              "consequence": "The crew rehearses the local call."
+            }
+          ],
+          "convergence": "Protected path and local fault-reporting method identified."
+        },
+        "learning": {
+          "concept": "Turning uncertainty into questions",
+          "predict": "Which uncertainty can the team reduce?",
+          "observe": "Connect each concern with a checkable plan item.",
+          "explain": "A plan supports action without promising perfect prediction.",
+          "transfer": "Name an uncertainty and find a relevant observation."
+        },
+        "exitCondition": "Protected path and local fault-reporting method identified.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH06-S03",
+        "legacyScene": "SC-0602",
+        "mission": "EX-M0601",
+        "title": "The Seven-Unit Promise",
+        "minutes": 7,
+        "location": "Power room, eclipse allocation board",
+        "pointOfView": "Kai",
+        "storyTime": "12 January, forecast rehearsal",
+        "prose": "Five segment cards spread across the board: precharge, ingress, totality, egress and recovery. Kai places essential services beneath every card. Air circulation, minimum heat, dim growth light and the guide light travel as a protected package. The player can expand the package to see its components without making four disconnected promises.\n\nThe current rehearsal uses a labelled teaching allocation. Five essential packages, one pump preparation and one camera preparation cost seven game units altogether. They are not kilowatt-hours, and the board does not add a second elapsed-time bill. Amara checks the arithmetic against the displayed jar and return margin. The verified-data version will replace this fallback as a single model, not stack another cost on it.\n\nKai asks the player to predict the result before running the rehearsal. A missing package makes a specific service warning appear in its segment. Fixing it changes the forecast immediately. A correct plan is a visible relationship between choices and outcomes, not a hidden combination copied from an answer key.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S03-L01",
+            "speaker": "Kai",
+            "line": "Five segments. Essentials in every one."
+          },
+          {
+            "id": "EX-CH06-S03-L02",
+            "speaker": "Amara",
+            "line": "Pump once. Camera once."
+          },
+          {
+            "id": "EX-CH06-S03-L03",
+            "speaker": "Rafi",
+            "line": "Seven game units, one accounting model."
+          },
+          {
+            "id": "EX-CH06-S03-L04",
+            "speaker": "Ferreira",
+            "line": "Show the forecast before committing."
+          }
+        ],
+        "playerActions": [
+          "Place essentials in five segments.",
+          "Allocate pump and camera readiness once.",
+          "Predict and compare the seven-unit total."
+        ],
+        "choice": {
+          "prompt": "Which allocation protects every required eclipse segment?",
+          "options": [
+            {
+              "label": "Five essentials plus pump once and camera once:7 units",
+              "consequence": "The forecast preserves all five packages and the disclosed margin."
+            },
+            {
+              "label": "Four essentials plus decorative floods",
+              "consequence": "The preview reveals an unprotected segment and wasted margin."
+            }
+          ],
+          "convergence": "Five-segment teaching allocation reconciled without duplicate charges."
+        },
+        "learning": {
+          "concept": "Finite energy accounting",
+          "predict": "What total should the displayed plan consume?",
+          "observe": "Compare component sum with the rehearsal result.",
+          "explain": "A budget counts each action once in one unit system.",
+          "transfer": "Check for omitted loads and double-counting."
+        },
+        "exitCondition": "Five-segment teaching allocation reconciled without duplicate charges.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH06-S04",
+        "legacyScene": "SC-0602",
+        "mission": "EX-M0602",
+        "title": "The Brightest Plan Is Not the Best Plan",
+        "minutes": 8,
+        "location": "Power room, side-by-side preview",
+        "pointOfView": "Kai",
+        "storyTime": "12 January, uncommitted rehearsal",
+        "prose": "Kai makes a deliberately comfortable proposal: keep the decorative floods on so the corridor never feels dark. The player puts that proposal beside the protected guide-light plan. Neither preview spends actual reserve. Both show the same forecast and equipment, so a change in one load has an interpretable consequence.\n\nThe floodlight plan consumes margin without helping scrubbers, return water or the filtered camera. Kai can see exactly what that brightness would cost the shared mission. Rafi does not tell him to stop wanting light. He moves the small guide light into the same corridor view. The player compares usefulness, power and the available path rather than treating every comfort as waste.\n\nAmara asks Kai to describe the chosen compromise to Mei. Explaining it makes the decision a team promise: the room can be dim while a reliable route remains visible. The player labels the guide-light branch and disables decorative floods in the proposed schedule. Both plans remain in the debrief, allowing a later learner to see why the quieter one worked.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S04-L01",
+            "speaker": "Kai",
+            "line": "I wanted the whole corridor bright."
+          },
+          {
+            "id": "EX-CH06-S04-L02",
+            "speaker": "Rafi",
+            "line": "You need a known way through it."
+          },
+          {
+            "id": "EX-CH06-S04-L03",
+            "speaker": "Mei",
+            "line": "Keep that way in the plan."
+          },
+          {
+            "id": "EX-CH06-S04-L04",
+            "speaker": "Kai",
+            "line": "Small light. Protected supply."
+          }
+        ],
+        "playerActions": [
+          "Compare one changed load in matched previews.",
+          "Inspect reserve consequences.",
+          "Label and retain protected guide lighting."
+        ],
+        "choice": {
+          "prompt": "Which plan meets Kai's need and preserves shared reserves?",
+          "options": [
+            {
+              "label": "Keep decorative floods throughout",
+              "consequence": "Matched preview shows reserve spent without added essential service."
+            },
+            {
+              "label": "Protect the small guide-light route",
+              "consequence": "The useful route remains lit while circulation, pump and camera keep their margin."
+            }
+          ],
+          "convergence": "Decorative floods shed; guide-light need and reserve both protected."
+        },
+        "learning": {
+          "concept": "Trade-offs and controlled comparison",
+          "predict": "What changes if only decorative lighting changes?",
+          "observe": "Compare matched previews.",
+          "explain": "A useful compromise can meet a need with less resource cost.",
+          "transfer": "Distinguish a service goal from one expensive way to meet it."
+        },
+        "exitCondition": "Decorative floods shed; guide-light need and reserve both protected.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH06-S05",
+        "legacyScene": "SC-0603",
+        "mission": "EX-M0602",
+        "title": "A Fault Before It Matters",
+        "minutes": 9,
+        "location": "Protected-bus test panel",
+        "pointOfView": "Amara",
+        "storyTime": "12 January, pre-observation test",
+        "prose": "Before the camera can observe anything, Amara offers the player a safe rehearsal fault. A test branch can be disconnected without touching the live habitat services. Its label is large enough to read and its status appears in text as well as colour. The player predicts which indicator should change before selecting the simulated disconnect.\n\nOnly the test branch drops. The protected essentials remain on, just as the diagram promised. If the player expected a complete blackout, the board traces the isolating boundary instead of merely announcing an incorrect answer. Kai reads the same route physically across the panel. Rafi rehearses the short local checkback they will use during an actual interruption.\n\nThe player restores the test branch through the approved sequence and verifies the return. The exercise ends in the same safe state in which it began. It has created no additional failure in the habitat. Ferreira checks that the rehearsal result and the actual mission readiness are distinct records. A successful simulation supports confidence, but the next scene still requires every real station check.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S05-L01",
+            "speaker": "Amara",
+            "line": "Predict the affected branch first."
+          },
+          {
+            "id": "EX-CH06-S05-L02",
+            "speaker": "Kai",
+            "line": "Essentials should stay on."
+          },
+          {
+            "id": "EX-CH06-S05-L03",
+            "speaker": "Rafi",
+            "line": "Local channel check. Here."
+          },
+          {
+            "id": "EX-CH06-S05-L04",
+            "speaker": "Ferreira",
+            "line": "A rehearsal pass does not sign the watch."
+          }
+        ],
+        "playerActions": [
+          "Predict the safe test fault.",
+          "Compare affected and protected branches.",
+          "Restore and verify the test branch."
+        ],
+        "choice": {
+          "prompt": "How should the boundary be inspected?",
+          "options": [
+            {
+              "label": "Trace the diagram",
+              "consequence": "The isolation edge is highlighted."
+            },
+            {
+              "label": "Inspect panel labels",
+              "consequence": "The same edge is checked on equipment."
+            }
+          ],
+          "convergence": "Test branch restored, protected services stable, rehearsal recorded separately."
+        },
+        "learning": {
+          "concept": "Fault isolation and redundancy",
+          "predict": "Will one branch fault remove every service?",
+          "observe": "Observe a bounded test interruption.",
+          "explain": "Isolation limits which systems a fault can affect.",
+          "transfer": "Identify dependencies before resetting equipment."
+        },
+        "exitCondition": "Test branch restored, protected services stable, rehearsal recorded separately.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH06-S06",
+        "legacyScene": "SC-0603",
+        "mission": "EX-M0602",
+        "title": "Ready Is a Shared Word",
+        "minutes": 8,
+        "location": "Aurora mission table and filtered camera",
+        "pointOfView": "Kai",
+        "storyTime": "12 January, ingress readiness",
+        "prose": "The player brings the checked schedule to the mission table. Mei has not watched the power rehearsal; she has been checking plants. Amara has atmosphere readings, and Rafi has the shelter and hand-light status. None of those observations becomes shared merely because they exist in different rooms.\n\nKai asks each role for a short report and repeats the part his schedule depends on. The player places the matching readiness token only after its observation is acknowledged. Five time segments remain visible above four role checks. The sequence cannot be completed by repeatedly pressing a single unlabelled confirmation.\n\nThe external camera's protective configuration is checked before its image appears. Nobody looks directly into a bright Sun to prove courage. If verified local geometry is not yet available in production, the screen clearly uses the source-informed scenario view and conceptual diagram. The same engineering decisions remain meaningful. Ferreira asks whose call it is. Kai looks around the occupied work positions before answering. Readiness belongs to the crew who checked the plan, not to the loudest person in the room.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S06-L01",
+            "speaker": "Mei",
+            "line": "Plants checked."
+          },
+          {
+            "id": "EX-CH06-S06-L02",
+            "speaker": "Amara",
+            "line": "Atmosphere checked."
+          },
+          {
+            "id": "EX-CH06-S06-L03",
+            "speaker": "Rafi",
+            "line": "Shelter, lamp and local channel checked."
+          },
+          {
+            "id": "EX-CH06-S06-L04",
+            "speaker": "Kai",
+            "line": "Ready means all of us."
+          }
+        ],
+        "playerActions": [
+          "Collect four actual role reports.",
+          "Acknowledge all five schedule segments.",
+          "Verify the camera's protective configuration."
+        ],
+        "choice": {
+          "prompt": "How should Kai close the readiness call?",
+          "options": [
+            {
+              "label": "Repeat dependencies",
+              "consequence": "Each role hears what the plan needs."
+            },
+            {
+              "label": "Read the final checklist together",
+              "consequence": "All roles confirm the same record."
+            }
+          ],
+          "convergence": "Four role checks, five segments and protected camera ready."
+        },
+        "learning": {
+          "concept": "Closed-loop team communication",
+          "predict": "Does a private observation help an uninformed teammate?",
+          "observe": "Compare delivered, acknowledged and shared reports.",
+          "explain": "Checkbacks establish a shared plan.",
+          "transfer": "Repeat essential information and invite correction."
+        },
+        "exitCondition": "Four role checks, five segments and protected camera ready.",
+        "evidenceTag": "Computed-pending",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH06-S07",
+        "legacyScene": "SC-0604",
+        "mission": "EX-M0603",
+        "title": "The Red Ring",
+        "minutes": 6,
+        "location": "Filtered remote-camera monitor",
+        "pointOfView": "Mei",
+        "storyTime": "12 January, authored eclipse observation window",
+        "prose": "A dark disc takes a growing bite from the camera's bright image. The player marks ingress against the displayed teaching timeline. The monitor frame stays visible; this is a protected instrument view, not an invitation to stare outside. A separate label distinguishes the verified eclipse calendar date from Aurora's still-unverified viewing geometry.\n\nAt the red-rim moment, the room becomes quiet without forcing the controls away. The player may hold the frame to inspect a conceptual Earth cross-section. Sunlight passes through the atmosphere around Earth's edge, providing the physical explanation for the colour. The diagram does not paint a geographically resolved stripe of Bangladesh onto the camera image.\n\nMei reaches for a poetic sentence about every sunrise and sunset. Amara leaves the sentence in the conversation, then adds the mechanism beside it. Wonder and explanation can occupy the same page. The player records the observation and checks which part is sourced astronomy, which part is a diagram, and which timing belongs to this fictional expedition. The ring becomes more interesting when its labels are honest.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S07-L01",
+            "speaker": "Mei",
+            "line": "Every sunrise and sunset at once."
+          },
+          {
+            "id": "EX-CH06-S07-L02",
+            "speaker": "Amara",
+            "line": "A picture for light passing through Earth's air."
+          },
+          {
+            "id": "EX-CH06-S07-L03",
+            "speaker": "Kai",
+            "line": "Home helps us understand the dark."
+          },
+          {
+            "id": "EX-CH06-S07-L04",
+            "speaker": "Rafi",
+            "line": "Keep the diagram separate from the camera."
+          }
+        ],
+        "playerActions": [
+          "Record ingress and ring observations.",
+          "Inspect the atmospheric-limb diagram.",
+          "Identify source fact and local scenario labels."
+        ],
+        "choice": {
+          "prompt": "Which explanation can be entered as checked science?",
+          "options": [
+            {
+              "label": "A geographically resolved Bangladesh sunrise stripe",
+              "consequence": "The conceptual inset cannot support that precise image claim."
+            },
+            {
+              "label": "Sunlight affected by Earth's atmospheric limb",
+              "consequence": "The diagram explains the red rim while local geometry remains qualified."
+            }
+          ],
+          "convergence": "Ingress and ring logged with their evidence labels."
+        },
+        "learning": {
+          "concept": "Eclipse geometry and atmospheric light",
+          "predict": "What can give the edge its colour?",
+          "observe": "Compare the image with the conceptual diagram.",
+          "explain": "Earth's atmosphere affects sunlight passing around its limb.",
+          "transfer": "Use a model to explain an observation without confusing them."
+        },
+        "exitCondition": "Ingress and ring logged with their evidence labels.",
+        "evidenceTag": "Computed-pending",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH06-S08",
+        "legacyScene": "SC-0604",
+        "mission": "EX-M0603",
+        "title": "A Call Within the Window",
+        "minutes": 7,
+        "location": "Mission table, Earth family audio link",
+        "pointOfView": "Kai",
+        "storyTime": "12 January, scenario-valid Earth-contact window",
+        "prose": "The contact panel shows a valid Earth path for the authored observation window. Kai's family message is waiting at its far end. The player connects the call only after the path check; the eclipse itself is not treated as a magic radio switch. If contact is interrupted, the recording buffer preserves words rather than inventing a continuous connection.\n\nKai describes the small light and the plan around it. He does not claim the dark is harmless everywhere or forever. His family asks whether someone is with him. Rafi answers with an ordinary greeting, then lets Kai speak. The mission remains a task shared by competent adults, while young players learn what support sounds like.\n\nThe player chooses one checked observation to send with the greeting. Either shows the same ring explanation and the same local-view qualification. A conceptual globe can mark Bangladesh as part of the Earth connection; it cannot certify an uncomputed local sunrise. When the window closes, the receipt identifies the delivered packet. Kai keeps working with a memory that now includes a plan and other voices.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S08-L01",
+            "speaker": "Family (Earth audio)",
+            "line": "Is someone there with you?"
+          },
+          {
+            "id": "EX-CH06-S08-L02",
+            "speaker": "Kai",
+            "line": "The whole crew. And a plan."
+          },
+          {
+            "id": "EX-CH06-S08-L03",
+            "speaker": "Rafi",
+            "line": "Hello from the lamp department."
+          },
+          {
+            "id": "EX-CH06-S08-L04",
+            "speaker": "Kai",
+            "line": "We know which light comes next."
+          }
+        ],
+        "playerActions": [
+          "Verify the communication path.",
+          "Connect and monitor the buffered call.",
+          "Send one labelled observation packet."
+        ],
+        "choice": {
+          "prompt": "Which checked observation goes home?",
+          "options": [
+            {
+              "label": "The ring diagram",
+              "consequence": "Its conceptual status travels with it."
+            },
+            {
+              "label": "The protected-service plan",
+              "consequence": "Its game-unit explanation travels with it."
+            }
+          ],
+          "convergence": "Family contact delivered or buffered through the valid path; observation qualifications retained."
+        },
+        "learning": {
+          "concept": "Communication windows",
+          "predict": "Does seeing an event guarantee a radio path?",
+          "observe": "Compare link status and delivery receipt.",
+          "explain": "Communication depends on a path independent of the story's emotion.",
+          "transfer": "Verify delivery when sharing important information."
+        },
+        "exitCondition": "Family contact delivered or buffered through the valid path; observation qualifications retained.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH06-S09",
+        "legacyScene": "SC-0604",
+        "mission": "EX-M0603",
+        "title": "A Name Signed Twice",
+        "minutes": 7,
+        "location": "Aurora message log and eclipse desk",
+        "pointOfView": "Mei",
+        "storyTime": "12 January, before feeder interruption",
+        "prose": "A text packet received through the checked Earth link carries a familiar signature: N. Noor writes that she watched a red ring from there once. Nobody treats the letter as a new identity puzzle. They know her name now. The player compares the old anonymous packet with the newly attributed text and updates its context, not its author.\n\nMei asks whether they should add an exact date for Noor's earlier eclipse. Amara opens the evidence field and leaves it unspecified. The memory supplies no checked observer geometry or deployment date. Inventing one would make the sentence look more scientific while making the record less true.\n\nThe player pins the note beside the present observation and labels it personal recollection. Ferreira reads it once, quietly. Her own memory of leaving the Moon does not answer every astronomical question either. Rafi saves the camera state before the next segment. This calm step matters: records are stored locally, so a later interruption cannot erase the experience or require the player to pretend to see it again.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S09-L01",
+            "speaker": "Noor (text)",
+            "line": "I watched a red ring from there once. — N."
+          },
+          {
+            "id": "EX-CH06-S09-L02",
+            "speaker": "Mei",
+            "line": "We know that name now."
+          },
+          {
+            "id": "EX-CH06-S09-L03",
+            "speaker": "Amara",
+            "line": "The earlier date stays unspecified."
+          },
+          {
+            "id": "EX-CH06-S09-L04",
+            "speaker": "Rafi",
+            "line": "Observation saved locally."
+          }
+        ],
+        "playerActions": [
+          "Read the known-sender text.",
+          "Leave unsupported earlier dates unfilled.",
+          "Save present observations locally."
+        ],
+        "choice": {
+          "prompt": "How should Noor's note be indexed?",
+          "options": [
+            {
+              "label": "Personal recollection",
+              "consequence": "Its source and uncertainty remain explicit."
+            },
+            {
+              "label": "Known correspondence",
+              "consequence": "It stays connected to the consented identity record."
+            }
+          ],
+          "convergence": "Known Noor text stored; no new identity reveal or live voice."
+        },
+        "learning": {
+          "concept": "Memory versus verified record",
+          "predict": "Does a memory supply exact geometry?",
+          "observe": "Compare the note with fields it cannot support.",
+          "explain": "A sincere recollection can matter without proving exact measurements.",
+          "transfer": "Leave missing details open instead of inventing precision."
+        },
+        "exitCondition": "Known Noor text stored; no new identity reveal or live voice.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH06-S10",
+        "legacyScene": "SC-0605",
+        "mission": "EX-M0604",
+        "title": "The Next Light",
+        "minutes": 6,
+        "location": "Power room, camera feeder F2",
+        "pointOfView": "Kai",
+        "storyTime": "12 January, protected transfer",
+        "prose": "The view screen drops. The guide light stays on. For a second Kai's hand closes around the lamp before he remembers to read the protected-service indicators. Atmosphere, circulation and garden minimums remain stable. The interruption belongs to camera feeder F2, not to the entire habitat.\n\nThe player calls the local checkback rehearsed earlier. Rafi answers. Amara points to the same isolation boundary used on the safe test board. The player isolates F2 and checks the cleared fault indication before resetting anything. A button pressed out of sequence offers the missing condition in words; it does not manufacture a lethal punishment.\n\nKai speaks the actions as they occur. The room never becomes bright enough to erase his fear, and it does not need to. After the protected sequence, he reconnects only the camera branch for its test. Ferreira remains nearby without taking over the player's task. A successful reset returns a view, but the important change is a repeatable method: stop, identify, isolate, verify and ask someone to stay on the channel.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S10-L01",
+            "speaker": "Kai",
+            "line": "Rafi, stay on the channel."
+          },
+          {
+            "id": "EX-CH06-S10-L02",
+            "speaker": "Rafi",
+            "line": "Here."
+          },
+          {
+            "id": "EX-CH06-S10-L03",
+            "speaker": "Amara",
+            "line": "Essentials hold. Isolate F2."
+          },
+          {
+            "id": "EX-CH06-S10-L04",
+            "speaker": "Kai",
+            "line": "Isolated. Check, then reset."
+          }
+        ],
+        "playerActions": [
+          "Identify F2 without shedding essentials.",
+          "Isolate and verify fault clearance.",
+          "Reset and reconnect the camera branch safely."
+        ],
+        "choice": {
+          "prompt": "Which response fits the bounded F2 fault?",
+          "options": [
+            {
+              "label": "Reset all habitat power",
+              "consequence": "The preview identifies unnecessary disruption to protected services; revise the procedure."
+            },
+            {
+              "label": "Isolate, verify and restore camera F2 only",
+              "consequence": "The affected branch returns while protected services remain powered."
+            }
+          ],
+          "convergence": "F2 safely restored in the approved sequence; protected services uninterrupted."
+        },
+        "learning": {
+          "concept": "Safe fault response",
+          "predict": "Which systems actually lost power?",
+          "observe": "Read protected and failed branch indicators.",
+          "explain": "A bounded fault requires a bounded response.",
+          "transfer": "Diagnose before resetting everything."
+        },
+        "exitCondition": "F2 safely restored in the approved sequence; protected services uninterrupted.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH06-S11",
+        "legacyScene": "SC-0605",
+        "mission": "EX-M0604",
+        "title": "Egress Is a Result",
+        "minutes": 7,
+        "location": "Restored camera and debrief board",
+        "pointOfView": "Kai",
+        "storyTime": "12 January, egress and recovery",
+        "prose": "The camera image returns before the last observation gate. The player checks its time label, records egress and compares the recovered view with the saved ingress and ring frames. The interruption remains visible in the record. There is no need to pretend the camera never failed in order to report a successful observation.\n\nAmara asks for the final energy check under the same teaching model. The player reconciles the one-time pump and camera allocations, the essential packages and the remaining margin. No extra fault penalty is silently charged for following the correct procedure. If an earlier setting needs revision, the checkpoint identifies that setting rather than demanding an entire chapter replay.\n\nKai places the lamp back in its clip without turning it into a trophy. He says he was afraid and completed the work anyway. Rafi repeats the part that made it possible: a plan, a known light and a crew who answered. The player saves the causal debrief, linking the protected design to the services that survived. Courage is recorded as supported action, not an emotion supposedly cured.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S11-L01",
+            "speaker": "Amara",
+            "line": "Keep the interruption in the record."
+          },
+          {
+            "id": "EX-CH06-S11-L02",
+            "speaker": "Kai",
+            "line": "I was afraid. I still followed the steps."
+          },
+          {
+            "id": "EX-CH06-S11-L03",
+            "speaker": "Rafi",
+            "line": "And we stayed on the channel."
+          },
+          {
+            "id": "EX-CH06-S11-L04",
+            "speaker": "Ferreira",
+            "line": "That is something you can repeat."
+          }
+        ],
+        "playerActions": [
+          "Record egress with correct timestamp.",
+          "Reconcile recovery reserve.",
+          "Save the fault-and-recovery causal debrief."
+        ],
+        "choice": {
+          "prompt": "What should Kai highlight in the report?",
+          "options": [
+            {
+              "label": "The protected design",
+              "consequence": "The stable services demonstrate its purpose."
+            },
+            {
+              "label": "The checkback sequence",
+              "consequence": "The crew's response remains reproducible."
+            }
+          ],
+          "convergence": "Egress recorded, reserve reconciled, interruption and recovery both documented."
+        },
+        "learning": {
+          "concept": "Resilience and honest reporting",
+          "predict": "Must a successful system never experience a fault?",
+          "observe": "Compare service continuity and recovery evidence.",
+          "explain": "Resilience includes detecting and recovering from bounded failure.",
+          "transfer": "Report interruptions and the reasons recovery worked."
+        },
+        "exitCondition": "Egress recorded, reserve reconciled, interruption and recovery both documented.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH06-S12",
+        "legacyScene": "SC-0606",
+        "mission": "EX-M0604",
+        "title": "Keep Watching",
+        "minutes": 7,
+        "location": "Aurora monitoring calendar and garden",
+        "pointOfView": "Rafi",
+        "storyTime": "13 January–14 February, explicit dated transition",
+        "prose": "The next morning's solar image contains an active region worth monitoring. Rafi pins it to the calendar, then stops the player from drawing a line straight to a February storm date. A region is a reason to watch. It is not a precise month-ahead prediction of the next chapter.\n\nThe player builds a monitoring handover that names instruments, observations and who checks the next report. Cotton has leaves now. The garden's current generation has its own dates, and the preserved petal remains in the archive rather than reappearing on a living stem. Amara reconciles the protected founder reserve and the eleven unplanted vault specimens before the calendar advances.\n\nA required montage moves through dated care, maintenance and ordinary meals. It shows what keeps an expedition alive between spectacular events without asking the player to wait through real weeks. Each short interaction checks a changed observation or hands over responsibility. February's alert arrives as new information after that work, not as proof of an impossible January forecast. The player opens the shared warning, with all five occupants present.",
+        "dialogue": [
+          {
+            "id": "EX-CH06-S12-L01",
+            "speaker": "Rafi",
+            "line": "That region needs watching."
+          },
+          {
+            "id": "EX-CH06-S12-L02",
+            "speaker": "Amara",
+            "line": "Watching is not an exact storm forecast."
+          },
+          {
+            "id": "EX-CH06-S12-L03",
+            "speaker": "Mei",
+            "line": "Cotton care stays on the calendar."
+          },
+          {
+            "id": "EX-CH06-S12-L04",
+            "speaker": "Kai",
+            "line": "So does the next handover."
+          }
+        ],
+        "playerActions": [
+          "Pin a bounded monitoring plan.",
+          "Check dated cotton and generation care.",
+          "Confirm reserves before the February transition."
+        ],
+        "choice": {
+          "prompt": "How should the watch be handed over?",
+          "options": [
+            {
+              "label": "By instrument",
+              "consequence": "Each source gets a named check."
+            },
+            {
+              "label": "By crew responsibility",
+              "consequence": "Each watcher states the observation they own."
+            }
+          ],
+          "convergence": "Monitoring ownership and care ledger checked; new February warning explicitly dated."
+        },
+        "learning": {
+          "concept": "Forecast limits and sustained care",
+          "predict": "What does an active-region image justify?",
+          "observe": "Compare new observations across dated records.",
+          "explain": "Monitoring supports readiness without proving a precise future event.",
+          "transfer": "Update a plan when fresh evidence arrives."
+        },
+        "exitCondition": "Monitoring ownership and care ledger checked; new February warning explicitly dated.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_06.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "coreMinutes": 105,
+    "title": "The Great Storm",
+    "subtitle": "Four specialists become one expedition.",
+    "date": "14 February–8 April 2047",
+    "summary": "A labelled 2012 counterfactual source informs an integrated five-person storm plan. The crew executes six checked steps, protects living crops and founder seeds, and hears the local historical log explaining the Academy's name. An external uplink failure is diagnosed without destroying local communications. Required stable-operation, fabrication and route tests bridge February to April before the teams separate.",
+    "emotionalArc": "Shared warning → systems conflict → practiced sheltering → meaning → bounded loss → prepared resolve.",
+    "openingHook": "Rafi gives the warning without an apology, and every observation reaches the same table.",
+    "transitionOut": "The checked home and rover ledgers carry the expedition into the 51-hour relay journey.",
+    "missions": [
+      {
+        "id": "EX-M0701",
+        "title": "Your Call, Cadets",
+        "minutes": 25,
+        "goal": "Distinguish source evidence and integrate the five-person forecast."
+      },
+      {
+        "id": "EX-M0702",
+        "title": "What Gets the Last Drop",
+        "minutes": 25,
+        "goal": "Protect founder stock, verify occupants and execute the first wave."
+      },
+      {
+        "id": "EX-M0703",
+        "title": "What We Carry",
+        "minutes": 30,
+        "goal": "Complete the remaining waves and diagnose the external failure."
+      },
+      {
+        "id": "EX-M0704",
+        "title": "The Days That Make a Journey",
+        "minutes": 25,
+        "goal": "Maintain stable local operations and physically prepare the relay bypass."
+      }
+    ],
+    "learning": [
+      "Integrated six-step planning and event order",
+      "Fault localisation and bounded claims",
+      "Long-duration care, supply continuity and two-leg networks"
+    ],
+    "continuity": [
+      "Five lunar occupants in every storm phase.",
+      "Six 7.2-hour steps=43.2 scenario hours; source 2012 counterfactual is not a measured 2047 Moon storm.",
+      "Founder 30 protected as 15+15; water and cargo retained through final exposure.",
+      "No live Earth response after uplink failure; local voices and telemetry survive.",
+      "Feb 16–Apr 7 includes required dated care, supply, fabrication and route work.",
+      "Finale team 3 rover/2 home; no unaccounted operator."
+    ],
+    "production": [
+      "Instrument-led storm presentation; no visible radiation projectiles.",
+      "Role sharing never hides a safety warning.",
+      "Use one chapter entry profile and apply earned modifiers only once.",
+      "Bench tests and route simulation remain distinct from actual field verification.",
+      "Three physical road repeaters create four surface hops: Aurora→R1→R2→R3→summit. Count sites separately from links."
+    ],
+    "scenes": [
+      {
+        "id": "EX-CH07-S01",
+        "legacyScene": "SC-0701",
+        "mission": "EX-M0701",
+        "title": "A Warning We Share",
+        "minutes": 8,
+        "location": "Aurora mission table",
+        "pointOfView": "Rafi",
+        "storyTime": "14 February 2047, before 06:00",
+        "prose": "Breakfast stops when the new warning arrives. This time Rafi does not soften it with a joke or an apology. He puts the observations where everyone can see them and asks each specialist to read the part the others need. The player opens the source label before opening the forecast.\n\nThe chapter uses a clearly identified counterfactual replay: what if the powerful July 2012 solar event had struck the Moon? Its historical measurements inform the scenario; the fictional expedition date, three playable waves and game exposure are not presented as observed lunar damage. Rafi sets the warning beside the breakfast bowls. His hand is steady as he asks the others what the new evidence changes.\n\nRao confirms the last pre-isolation packet through a working Earth link. Ferreira then moves her chair away from the head of the table. She assigns operational planning to the cadets while retaining command responsibility. Kai asks for every observation before touching a setting. The player's first decision is what the evidence justifies, not how dramatic the warning sounds.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S01-L01",
+            "speaker": "Rafi",
+            "line": "New observations. Everyone needs them."
+          },
+          {
+            "id": "EX-CH07-S01-L02",
+            "speaker": "Rao (live Earth link)",
+            "line": "Historical source received and labelled."
+          },
+          {
+            "id": "EX-CH07-S01-L03",
+            "speaker": "Ferreira",
+            "line": "Your plan, cadets. I retain command responsibility."
+          },
+          {
+            "id": "EX-CH07-S01-L04",
+            "speaker": "Kai",
+            "line": "Read every observation before we set anything."
+          }
+        ],
+        "playerActions": [
+          "Read source and counterfactual label.",
+          "Share four specialist observations.",
+          "State what the forecast can and cannot claim."
+        ],
+        "choice": {
+          "prompt": "Which statement belongs in the mission brief?",
+          "options": [
+            {
+              "label": "A measured 2012 storm hit Aurora in 2047",
+              "consequence": "The source/date mismatch is flagged; lunar damage is authored fiction."
+            },
+            {
+              "label": "Historical measurements inform a fictional Moon-strike scenario",
+              "consequence": "The brief distinguishes source evidence from game events."
+            }
+          ],
+          "convergence": "All current observations shared and counterfactual source correctly described."
+        },
+        "learning": {
+          "concept": "Counterfactual modelling",
+          "predict": "Can a historical source prove a future fictional strike?",
+          "observe": "Compare source date, scenario date and authored wave model.",
+          "explain": "Models can explore consequences without turning them into observations.",
+          "transfer": "Separate an evidence source from the situation built around it."
+        },
+        "exitCondition": "All current observations shared and counterfactual source correctly described.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH07-S02",
+        "legacyScene": "SC-0701",
+        "mission": "EX-M0701",
+        "title": "The Fifth Seat Changes the Sum",
+        "minutes": 8,
+        "location": "Life-support board and shelter roster",
+        "pointOfView": "Amara",
+        "storyTime": "14 February, forecast preparation",
+        "prose": "The old first-night card still lists four crew. Amara places it beside the present shelter roster, where Ferreira's name makes five. The player is asked to reuse only the rules that remain applicable. Keeping the old breathing total would be a smaller number, but it would no longer describe this expedition.\n\nA paused comparison forecast shows the difference across six equal scenario steps. Air and food draw follow the five-person profile. The plant chamber does not become an oxygen generator just because its leaves look healthy. Stored air, powered scrubbers and edible supplies remain explicit systems. Cotton and the current mustard generation need care; they do not replace a balanced crew ledger.\n\nRafi places five seat markers on the shelter diagram. A missing marker leaves the readiness board incomplete even if the energy arithmetic looks attractive. The player reconciles the occupancy and resource totals before moving to shielding. Amara repeats the correction without embarrassment. The record from April was useful for its own conditions. Good engineering means knowing when those conditions have changed.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S02-L01",
+            "speaker": "Amara",
+            "line": "April's card counted four."
+          },
+          {
+            "id": "EX-CH07-S02-L02",
+            "speaker": "Ferreira",
+            "line": "Today it must count me."
+          },
+          {
+            "id": "EX-CH07-S02-L03",
+            "speaker": "Mei",
+            "line": "Plants are not our whole life-support system."
+          },
+          {
+            "id": "EX-CH07-S02-L04",
+            "speaker": "Rafi",
+            "line": "Five names. Five places inside."
+          }
+        ],
+        "playerActions": [
+          "Compare four- and five-person forecasts.",
+          "Apply current air and food rates.",
+          "Match all five occupants to shelter positions."
+        ],
+        "choice": {
+          "prompt": "Which consumption profile should be tested?",
+          "options": [
+            {
+              "label": "Reuse the four-person profile",
+              "consequence": "The comparison exposes omitted fifth-person consumption."
+            },
+            {
+              "label": "Apply the five-person profile",
+              "consequence": "Air and food demand reconcile with the present roster."
+            }
+          ],
+          "convergence": "Five-person profile and complete shelter roster verified."
+        },
+        "learning": {
+          "concept": "Changing boundary conditions",
+          "predict": "Which old values stop applying after the roster changes?",
+          "observe": "Compare identical plans under two occupancies.",
+          "explain": "A valid model must match the system it describes.",
+          "transfer": "Recheck assumptions when people or conditions change."
+        },
+        "exitCondition": "Five-person profile and complete shelter roster verified.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH07-S03",
+        "legacyScene": "SC-0702",
+        "mission": "EX-M0701",
+        "title": "One Plan, Not Four Good Intentions",
+        "minutes": 9,
+        "location": "Integrated storm planning table",
+        "pointOfView": "Kai",
+        "storyTime": "14 February, uncommitted six-step forecast",
+        "prose": "Four proposed plans arrive at once. Kai wants power margin, Amara wants uninterrupted circulation, Mei wants warm roots, and Rafi wants complete shielding. Each sounds sensible alone. The player overlays them and finds the conflict: water borrowed for the shelter is water unavailable to the garden until the return operation.\n\nThe forecast shows six dark steps and no invented solar income. Current entry reserves belong to this chapter, after preparation costs; they are not April's old end-state copied forward. The player assembles one schedule using the established water, cargo and temperature rules. A complete baseline can protect five people, living crops and the thirty-seed reserve without an earned upgrade being a mandatory key.\n\nEach proposed change updates a specific forecast: dose before transfer, plant stress after care, or remaining energy. The player must explain a rejected alternative before committing the integrated version. Ferreira asks whose objective was left outside. The answer has to be nobody's. Their plan is ready only when every role can trace its own dependency through the same six steps.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S03-L01",
+            "speaker": "Kai",
+            "line": "Four good ideas can still collide."
+          },
+          {
+            "id": "EX-CH07-S03-L02",
+            "speaker": "Mei",
+            "line": "Say when the borrowed water returns."
+          },
+          {
+            "id": "EX-CH07-S03-L03",
+            "speaker": "Amara",
+            "line": "And keep circulation running meanwhile."
+          },
+          {
+            "id": "EX-CH07-S03-L04",
+            "speaker": "Rafi",
+            "line": "One schedule. Every dependency."
+          }
+        ],
+        "playerActions": [
+          "Overlay the four role plans.",
+          "Forecast six dark steps without solar income.",
+          "Compare a safe baseline with one changed allocation."
+        ],
+        "choice": {
+          "prompt": "What must be fixed in the combined forecast?",
+          "options": [
+            {
+              "label": "Drain shielding water before a later exposure",
+              "consequence": "The forecast shows reduced protection at the next sample."
+            },
+            {
+              "label": "Keep protection until its final exposure check",
+              "consequence": "The return operation follows exposure and preserves safety."
+            }
+          ],
+          "convergence": "One feasible six-step plan preserves crew, garden, circulation and reserve."
+        },
+        "learning": {
+          "concept": "Systems trade-offs and event order",
+          "predict": "Could individually good plans conflict?",
+          "observe": "Compare combined demand and exposure-before-transfer order.",
+          "explain": "Shared resources connect decisions across systems and time.",
+          "transfer": "Test a whole plan rather than isolated intentions."
+        },
+        "exitCondition": "One feasible six-step plan preserves crew, garden, circulation and reserve.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH07-S04",
+        "legacyScene": "SC-0702",
+        "mission": "EX-M0702",
+        "title": "What Gets the Last Drop",
+        "minutes": 8,
+        "location": "Shelter water wall and seed case",
+        "pointOfView": "Mei",
+        "storyTime": "14 February, final preparation",
+        "prose": "Mei carries the protected case to the shelter with both hands. Inside are two founder-reserve compartments of fifteen seeds each. The twelve planted from Alo's first harvest are already part of the garden's lineage. Neither the vault collection nor an album page belongs in this count. The player checks the seals against the thirty-seed record before latching the case.\n\nAt the wall, the forecast compares two water-return times. Draining early eases garden thirst but weakens a later exposure. Holding through the final sample preserves shielding, then returning the scheduled water protects the living plants. The player traces the order on a physical valve diagram before using the controls. Cargo bundles remain installed through the last exposure instead of disappearing under April's different shift schedule.\n\nRafi checks that every tool has a secured place. Mei touches the case once, then closes it. Protecting dry seeds and caring for living plants are related jobs with different conditions. The plan must do both. The player confirms the return-pump priority while the shelter remains open and preparation is still safe.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S04-L01",
+            "speaker": "Mei",
+            "line": "Fifteen and fifteen. Thirty founders."
+          },
+          {
+            "id": "EX-CH07-S04-L02",
+            "speaker": "Rafi",
+            "line": "Bundles stay through the last exposure."
+          },
+          {
+            "id": "EX-CH07-S04-L03",
+            "speaker": "Amara",
+            "line": "Return after the sample, not before."
+          },
+          {
+            "id": "EX-CH07-S04-L04",
+            "speaker": "Ferreira",
+            "line": "Name the valve, then touch it."
+          }
+        ],
+        "playerActions": [
+          "Reconcile both fifteen-seed compartments.",
+          "Compare early and after-exposure return schedules.",
+          "Latch case and secure shielding cargo."
+        ],
+        "choice": {
+          "prompt": "Choose the final-step operation order.",
+          "options": [
+            {
+              "label": "Drain, then sample exposure",
+              "consequence": "The preview shows protection removed before it is needed."
+            },
+            {
+              "label": "Sample exposure, then drain",
+              "consequence": "The preview retains protection before scheduled garden return."
+            }
+          ],
+          "convergence": "Founder 30 latched; shielding and after-exposure return order verified."
+        },
+        "learning": {
+          "concept": "Sequence and conservation",
+          "predict": "Why can identical actions in a different order change safety?",
+          "observe": "Compare the same water transfer before and after exposure.",
+          "explain": "Resources retain quantity while their location changes their function.",
+          "transfer": "Check event order as well as totals."
+        },
+        "exitCondition": "Founder 30 latched; shielding and after-exposure return order verified.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH07-S05",
+        "legacyScene": "SC-0703",
+        "mission": "EX-M0702",
+        "title": "Everyone Inside",
+        "minutes": 9,
+        "location": "Aurora Safe Room",
+        "pointOfView": "Rafi",
+        "storyTime": "14 February, first-wave readiness",
+        "prose": "The readiness panel reaches its preparation threshold. Rafi stops discussing plans and begins the roll call. The player locates five people in the shelter and confirms each response through the local channel. A chair icon alone is not proof that someone reached it; the name, position and answer must agree.\n\nMei checks the sealed founder case while Amara verifies the atmosphere indicator. Kai confirms the protected electrical branch and the scheduled isolation of exposed radio hardware. Ferreira answers her own roll-call entry like everyone else. She does not remain outside for a heroic last photograph. The garden's instruments continue reporting through the local network; their pressure-safe enclosure is not opened.\n\nThe player closes the hatch and compares its two indications. A mismatch holds the step clock while the relevant check is repeated. Reading, caption hold and assisted input do not spend hidden oxygen. Once the compartment and roster agree, the first forecast becomes the first committed step. The shelter is a place where preparation becomes observable behaviour, and all five people remain visibly part of that behaviour.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S05-L01",
+            "speaker": "Rafi",
+            "line": "Kai?"
+          },
+          {
+            "id": "EX-CH07-S05-L02",
+            "speaker": "Kai",
+            "line": "Here. Protected branch checked."
+          },
+          {
+            "id": "EX-CH07-S05-L03",
+            "speaker": "Amara",
+            "line": "Atmosphere checked. Mei is here."
+          },
+          {
+            "id": "EX-CH07-S05-L04",
+            "speaker": "Ferreira",
+            "line": "Ferreira here. Fifth position confirmed."
+          }
+        ],
+        "playerActions": [
+          "Reconcile names, positions and answers.",
+          "Verify both hatch indications.",
+          "Commit only after all five are sheltered."
+        ],
+        "choice": {
+          "prompt": "A seat indicator and roster disagree. What next?",
+          "options": [
+            {
+              "label": "Advance because the seat icon is green",
+              "consequence": "The readiness gate identifies the missing human confirmation."
+            },
+            {
+              "label": "Resolve the name and position",
+              "consequence": "The checkback confirms the actual occupant before time advances."
+            }
+          ],
+          "convergence": "Five occupants confirmed, both hatch checks agree, first step ready."
+        },
+        "learning": {
+          "concept": "Verification of people and states",
+          "predict": "Is a favourable icon enough to prove readiness?",
+          "observe": "Compare position, roster and direct response.",
+          "explain": "Different evidence channels should agree before commitment.",
+          "transfer": "Resolve a mismatch instead of ignoring the inconvenient reading."
+        },
+        "exitCondition": "Five occupants confirmed, both hatch checks agree, first step ready.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH07-S06",
+        "legacyScene": "SC-0704",
+        "mission": "EX-M0702",
+        "title": "The First Wave Has a Ledger",
+        "minutes": 8,
+        "location": "Safe Room local telemetry",
+        "pointOfView": "Amara",
+        "storyTime": "14 February 06:00 onward, steps 1–2",
+        "prose": "The first committed step changes the ledger exactly as previewed. The player checks energy, atmosphere, food and the garden's local telemetry against the forecast, then states which differences would require intervention. The storm is not shown as luminous stones flying into the greenhouse. Its danger is communicated by instruments, procedure and the room's restrained sound.\n\nA second step follows only after the player acknowledges the first. The chapter's six steps each represent seven-point-two scenario hours; the active gameplay does not ask anyone to sit still for that duration. A time card and changed system values communicate the interval. The main route spends its time on prediction, comparison and decision, not on an empty countdown.\n\nThe protected seed case remains sealed. One compartment indicator briefly invites inspection of its recorded sensor value, not opening it during exposure. Mei checks the local garden trace while Kai confirms the isolated exposed branch. Their reports meet at the same table. When the first wave ends, the player has a supported explanation for why the plan is holding.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S06-L01",
+            "speaker": "Amara",
+            "line": "Compare the result with the forecast."
+          },
+          {
+            "id": "EX-CH07-S06-L02",
+            "speaker": "Kai",
+            "line": "Protected branch matches."
+          },
+          {
+            "id": "EX-CH07-S06-L03",
+            "speaker": "Mei",
+            "line": "Living garden still on local telemetry."
+          },
+          {
+            "id": "EX-CH07-S06-L04",
+            "speaker": "Rafi",
+            "line": "First wave checked, not merely endured."
+          }
+        ],
+        "playerActions": [
+          "Predict and commit steps one and two.",
+          "Compare actual scenario state with forecast.",
+          "Keep reserve sealed while inspecting telemetry."
+        ],
+        "choice": {
+          "prompt": "Which response fits a normal first-step result?",
+          "options": [
+            {
+              "label": "Open the seed case to inspect it",
+              "consequence": "The interlock explains why sealed telemetry is the safe check."
+            },
+            {
+              "label": "Compare its sensor and seal records",
+              "consequence": "The protected stock stays closed while evidence is checked."
+            }
+          ],
+          "convergence": "Steps 1–2 committed, forecast comparison saved, founder case sealed."
+        },
+        "learning": {
+          "concept": "Prediction and feedback",
+          "predict": "Which readings would show that the model missed something?",
+          "observe": "Compare predicted and resulting state per step.",
+          "explain": "Execution should test a plan rather than replace observation.",
+          "transfer": "Check outcomes after acting, even when the plan was good."
+        },
+        "exitCondition": "Steps 1–2 committed, forecast comparison saved, founder case sealed.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH07-S07",
+        "legacyScene": "SC-0704",
+        "mission": "EX-M0703",
+        "title": "The Last Log",
+        "minutes": 10,
+        "location": "Safe Room archive player and forecast table",
+        "pointOfView": "Mei",
+        "storyTime": "First-wave lull, after step 2",
+        "prose": "In the lull, the player opens the final recovered recording. Its caption identifies a historical archive, already stored locally. Noor's voice does not cross the current storm or prove the Earth link is open. She is speaking from the old expedition's departure day.\n\nShe explains the name Alo: light left for someone who might bring it back. The Academy took its name from the last sunset she saw before leaving the Moon. The player places the log beside the first seed packet, the consented identity page and the current founder ledger. The mystery now has a complete chain, not one last invented password.\n\nMei holds Alo's pressed petal near its case without pretending it can hear. The reserve beside them contains descendants' possible futures, while the living garden contains present responsibilities. Kai asks what their own final report should say. The player selects a draft sentence, then supports it with an already checked action. Meaning cannot substitute for the remaining storm plan. When the log ends, the forecast still has four steps left, and the crew returns to them together.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S07-L01",
+            "speaker": "Noor (historical recording)",
+            "line": "I'm calling the seeds Alo, light."
+          },
+          {
+            "id": "EX-CH07-S07-L02",
+            "speaker": "Mei",
+            "line": "The name was a hope, not a prediction."
+          },
+          {
+            "id": "EX-CH07-S07-L03",
+            "speaker": "Kai",
+            "line": "Then our report needs more than a good line."
+          },
+          {
+            "id": "EX-CH07-S07-L04",
+            "speaker": "Amara",
+            "line": "It needs the next checked step."
+          }
+        ],
+        "playerActions": [
+          "Read or hear the labelled local archive.",
+          "Connect name, packet and Academy history.",
+          "Support a report sentence with checked evidence."
+        ],
+        "choice": {
+          "prompt": "Which draft claim can the crew support now?",
+          "options": [
+            {
+              "label": "We have already survived every wave",
+              "consequence": "The remaining four steps contradict that claim."
+            },
+            {
+              "label": "The first wave is complete and the reserve is protected",
+              "consequence": "The current ledger supports this bounded progress report."
+            }
+          ],
+          "convergence": "Final log understood; name and Academy origin resolved; bounded progress report saved."
+        },
+        "learning": {
+          "concept": "Progress claims and evidence",
+          "predict": "When is a mission finished enough to call complete?",
+          "observe": "Compare an inspiring sentence with the actual ledger.",
+          "explain": "A meaningful story still needs accurate statements of progress.",
+          "transfer": "Report the work completed, not the outcome hoped for."
+        },
+        "exitCondition": "Final log understood; name and Academy origin resolved; bounded progress report saved.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH07-S08",
+        "legacyScene": "SC-0704",
+        "mission": "EX-M0703",
+        "title": "The Highest Line on the Chart",
+        "minutes": 10,
+        "location": "Safe Room integrated control panel",
+        "pointOfView": "Kai",
+        "storyTime": "Steps 3–6;14 February–16 February 01:12",
+        "prose": "The peak arrives in steps three and four. On the chart, the game exposure multiplier rises, but the prepared shielding still performs the job predicted for it. The player checks the complete effective shield rather than judging safety from a frightening graph shape. No glowing radiation animation tells the player to run outside.\n\nKai confirms each essential load before commitment. Amara updates five-person air and food draw. Mei checks the living crops and keeps the founder reserve separate. Rafi verifies that shielding cargo remains installed. A player who proposes an early drain sees its consequence in preview and can revise locally before the next step.\n\nThe tail occupies steps five and six. Only after the sixth exposure is sampled does the scheduled drain return water toward the garden. The baseline result matches the established chapter contract; earned modifiers, when present, are applied once and shown. No extra income appears in the dark. By the final line, the player can explain which earlier decisions mattered and why the same water could protect different needs at different times.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S08-L01",
+            "speaker": "Rafi",
+            "line": "Peak on the chart. Check the shield."
+          },
+          {
+            "id": "EX-CH07-S08-L02",
+            "speaker": "Kai",
+            "line": "No new solar income."
+          },
+          {
+            "id": "EX-CH07-S08-L03",
+            "speaker": "Amara",
+            "line": "Five-person draw still applies."
+          },
+          {
+            "id": "EX-CH07-S08-L04",
+            "speaker": "Mei",
+            "line": "Final exposure first. Then return the water."
+          }
+        ],
+        "playerActions": [
+          "Forecast and execute steps three through six.",
+          "Check shield before each exposure.",
+          "Apply final drain after step-six sampling."
+        ],
+        "choice": {
+          "prompt": "The peak chart rises. Which action is supported?",
+          "options": [
+            {
+              "label": "Remove cargo to make room at the console",
+              "consequence": "The shield forecast shows the lost protection; revise before commitment."
+            },
+            {
+              "label": "Retain water and cargo through exposure",
+              "consequence": "The forecast preserves the established protection and return sequence."
+            }
+          ],
+          "convergence": "All six steps complete with crew, crops and founder 30 protected."
+        },
+        "learning": {
+          "concept": "Integrated execution under pressure",
+          "predict": "Does a high hazard line prove a prepared shelter failed?",
+          "observe": "Compare hazard, effective shield and resulting game exposure.",
+          "explain": "Risk depends on protection and exposure, not hazard display alone.",
+          "transfer": "Use the relevant model instead of reacting to visual alarm."
+        },
+        "exitCondition": "All six steps complete with crew, crops and founder 30 protected.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH07-S09",
+        "legacyScene": "SC-0705",
+        "mission": "EX-M0703",
+        "title": "A Different Silence",
+        "minutes": 10,
+        "location": "Aurora local network and uplink diagnostic",
+        "pointOfView": "Amara",
+        "storyTime": "16 February, after 01:12 through the separated clearance-reading interval",
+        "prose": "The storm steps end, but Rao does not answer. Kai hears Rafi clearly across the corridor, and the garden continues sending local data. The player must diagnose those facts before calling every radio broken. The failed path leads outward through the exposed Earth-uplink feedthrough.\n\nThe diagnostic compares local network pass, direct-dish path fail and feedthrough fail. A correct protected isolation did not guarantee that every exposed component would survive the authored incident. The game does not secretly blame the player for damage written into the chapter. Choosing a local-radio reset leaves the external failure unresolved; selecting the external branch directs the next test correctly.\n\nTravel remains blocked until two below-threshold scenario readings, separated by the required interval, clear later exterior preparation. One reassuring sample is not enough. Amara records the second result and saves the relay-bypass diagram. The stable habitat retains local control, stored procedures and the reserve it needs for continued operation. Silence has a defined boundary. The player can now plan a repair without pretending an unanswered message reached Earth.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S09-L01",
+            "speaker": "Kai",
+            "line": "I can hear Rafi. Earth cannot hear us."
+          },
+          {
+            "id": "EX-CH07-S09-L02",
+            "speaker": "Amara",
+            "line": "Local pass. External path failed."
+          },
+          {
+            "id": "EX-CH07-S09-L03",
+            "speaker": "Ferreira",
+            "line": "Correct isolation was still the right decision."
+          },
+          {
+            "id": "EX-CH07-S09-L04",
+            "speaker": "Rafi",
+            "line": "Two clear readings before outside preparation."
+          }
+        ],
+        "playerActions": [
+          "Compare local, dish and feedthrough tests.",
+          "Identify the external failed branch.",
+          "Obtain both required route-clear readings."
+        ],
+        "choice": {
+          "prompt": "Which fault hypothesis matches all observations?",
+          "options": [
+            {
+              "label": "The whole local network failed",
+              "consequence": "Local voice and garden telemetry contradict it."
+            },
+            {
+              "label": "The Earth-uplink feedthrough failed",
+              "consequence": "Independent branch tests support the diagnosis."
+            }
+          ],
+          "convergence": "External branch diagnosed; two route readings clear later work; no invented Earth reply."
+        },
+        "learning": {
+          "concept": "Localising faults through contrast",
+          "predict": "Which failure explains both what works and what does not?",
+          "observe": "Compare independent communication paths.",
+          "explain": "A diagnosis must fit successful as well as failed tests.",
+          "transfer": "Use unaffected systems to narrow a fault."
+        },
+        "exitCondition": "External branch diagnosed; two route readings clear later work; no invented Earth reply.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH07-S10",
+        "legacyScene": "SC-0706",
+        "mission": "EX-M0704",
+        "title": "A Base That Can Wait Safely",
+        "minutes": 8,
+        "location": "Aurora maintenance and care planning desk",
+        "pointOfView": "Mei",
+        "storyTime": "16 February–March, dated stable-operation gates",
+        "prose": "A radio repair cannot become an excuse to ignore the weeks before departure. Mei opens a required stable-operation board. The player must show how the station continues local care, planned food supply, atmosphere maintenance and scheduled observation while the direct Earth uplink remains unusable. This is not an unmentioned life-support emergency stretched across two months.\n\nDated records show which stores are available and which routine operations consume them. The long interval does not multiply April's seven-shift game recipe across every hour. It uses the campaign's explicit maintenance and ration ledger. The player rejects a draft that assumes an Earth reply delivered a missing instruction; that reply has never arrived. Stored procedures and local expertise supply the actual plan.\n\nCotton grows under its own recorded care. Current mustard plants carry generation labels rather than the original Alo's name alone. Amara checks the founder reserve without opening it, then compares the retained vault register. Three dated maintenance gates test changed observations before time advances. The player earns the calendar transition by accounting for stability, not by clicking through an unexplained montage.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S10-L01",
+            "speaker": "Mei",
+            "line": "The garden needs ordinary days too."
+          },
+          {
+            "id": "EX-CH07-S10-L02",
+            "speaker": "Amara",
+            "line": "Account for the interval, not just the climax."
+          },
+          {
+            "id": "EX-CH07-S10-L03",
+            "speaker": "Kai",
+            "line": "No reply from Earth is in this plan."
+          },
+          {
+            "id": "EX-CH07-S10-L04",
+            "speaker": "Ferreira",
+            "line": "We have local procedures and stores."
+          }
+        ],
+        "playerActions": [
+          "Reconcile care, ration and maintenance ledgers.",
+          "Replace a plan that assumes missing Earth guidance.",
+          "Pass three dated stable-operation gates."
+        ],
+        "choice": {
+          "prompt": "What supports continued local operation?",
+          "options": [
+            {
+              "label": "Wait for an Earth reply before maintaining systems",
+              "consequence": "The failed uplink makes this dependency unsupported."
+            },
+            {
+              "label": "Use stored procedures and verified local supplies",
+              "consequence": "The ledger accounts for continued care while repair preparation proceeds."
+            }
+          ],
+          "convergence": "Local stability and supplies reconciled through dated February-to-March gates."
+        },
+        "learning": {
+          "concept": "Continuity and long-duration planning",
+          "predict": "What must continue between major events?",
+          "observe": "Check dated stores, operations and local instructions.",
+          "explain": "An expedition needs a supported bridge between crises.",
+          "transfer": "Account for intervals that a dramatic narrative might skip."
+        },
+        "exitCondition": "Local stability and supplies reconciled through dated February-to-March gates.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH07-S11",
+        "legacyScene": "SC-0706",
+        "mission": "EX-M0704",
+        "title": "Make the Road Hear Us",
+        "minutes": 9,
+        "location": "Local fabrication bench and surveyed-route simulator",
+        "pointOfView": "Rafi",
+        "storyTime": "March–7 April, authored preparation",
+        "prose": "The spare controller from December comes out of its locker, still sealed and still carrying Kai's compatibility note. The player checks it against the Malapert service housing. A controller alone cannot connect a summit to a base hidden by terrain. The bypass needs an Aurora-to-summit path and a summit-to-Earth path.\n\nRafi lays three repeater sites along the surveyed road model. A straight line drawn over a ridge fails the simulator's obstruction check. The player adjusts the surveyed installation plan until neighbouring links are supported, while retaining the established safe road rather than inventing a shortcut. The final approach will test the actual chain again. A desktop plan is preparation, not proof of deployment.\n\nAt the bench, the player loads the spare battery, matches service connectors and runs a controlled known-content echo demonstration through the prepared local hardware. A wrong connector stays on the bench with an explanatory mismatch. Ferreira signs the isolation checklist; Kai labels the packed controller. The dated preparation ends with physical equipment and an intelligible route, so the finale will use things the player helped make ready.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S11-L01",
+            "speaker": "Rafi",
+            "line": "A high dish still needs to hear Aurora."
+          },
+          {
+            "id": "EX-CH07-S11-L02",
+            "speaker": "Kai",
+            "line": "Every neighbouring link, not one magic line."
+          },
+          {
+            "id": "EX-CH07-S11-L03",
+            "speaker": "Ferreira",
+            "line": "Check the housing before packing the spare."
+          },
+          {
+            "id": "EX-CH07-S11-L04",
+            "speaker": "Amara",
+            "line": "A bench pass is not field verification."
+          }
+        ],
+        "playerActions": [
+          "Test terrain-obstructed repeater placements.",
+          "Verify controller and battery compatibility.",
+          "Run and save a bench known-content echo demonstration."
+        ],
+        "choice": {
+          "prompt": "Which topology can bypass the failed path?",
+          "options": [
+            {
+              "label": "Summit dish points only toward Earth",
+              "consequence": "Aurora's signal has no verified way to reach it."
+            },
+            {
+              "label": "Local repeater chain plus Earth dish",
+              "consequence": "The simulation can test each required leg separately."
+            }
+          ],
+          "convergence": "Compatible spare, battery, three-site route and bench-test record packed; field checks still required."
+        },
+        "learning": {
+          "concept": "Networks and line of sight",
+          "predict": "Does a clear Earth view guarantee a base connection?",
+          "observe": "Compare terrain-obstructed and supported two-leg paths.",
+          "explain": "A relay needs verified connectivity at both ends.",
+          "transfer": "Trace every link in a network before trusting its endpoint."
+        },
+        "exitCondition": "Compatible spare, battery, three-site route and bench-test record packed; field checks still required.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH07-S12",
+        "legacyScene": "SC-0706",
+        "mission": "EX-M0704",
+        "title": "Who Stays With the Garden",
+        "minutes": 8,
+        "location": "Aurora departure board and rover loadout",
+        "pointOfView": "Mei",
+        "storyTime": "7 April to 8 April 00:00",
+        "prose": "Five names face two destination boards. Ferreira, Kai and Rafi take the rover. Mei and Amara remain at Aurora. The player assigns no invisible extra operator and sends no cadet to two places at once. Rafi reads the planned journey: twenty-four hours outward, three for repair, twenty-four back, with seventy-two hours of independent provisions.\n\nAmara opens the home-night ledger. For the first thirty-three dark hours, two people will breathe at the base. The three travellers return for the final three hours before dawn. The player checks that change before signing either team's plan. A flat four-person copy from April would count the wrong people twice.\n\nMei and Kai exchange duplicate route and shelter checklists. He asks for the small guide light, and she points to its existing place in the schedule. No promise requires wasteful brightness. The player confirms packed equipment, local check-in markers and the stable preparation record. The calendar reaches departure only after those checks. The two teams separate with a shared plan that can still be read when the Earth channel is silent.",
+        "dialogue": [
+          {
+            "id": "EX-CH07-S12-L01",
+            "speaker": "Ferreira",
+            "line": "Kai and Rafi with me. Mei and Amara hold Aurora."
+          },
+          {
+            "id": "EX-CH07-S12-L02",
+            "speaker": "Amara",
+            "line": "Two at home, then five for the last three hours."
+          },
+          {
+            "id": "EX-CH07-S12-L03",
+            "speaker": "Kai",
+            "line": "Keep the small guide light."
+          },
+          {
+            "id": "EX-CH07-S12-L04",
+            "speaker": "Mei",
+            "line": "It is already in the plan."
+          }
+        ],
+        "playerActions": [
+          "Assign exact rover and home teams.",
+          "Reconcile fifty-one-hour travel with seventy-two-hour supplies.",
+          "Check the two-to-five home occupancy transition."
+        ],
+        "choice": {
+          "prompt": "Which home-night occupancy model fits the plan?",
+          "options": [
+            {
+              "label": "Four occupants for the whole night",
+              "consequence": "It disagrees with both departure and return rosters."
+            },
+            {
+              "label": "Two for 33 hours, then five for 3 hours",
+              "consequence": "The explicit transition matches the planned return before dawn."
+            }
+          ],
+          "convergence": "Team assignments, travel provisions, home occupancy and dated preparation all signed."
+        },
+        "learning": {
+          "concept": "Multiple teams and changing occupancy",
+          "predict": "Who consumes each reserve at each time?",
+          "observe": "Compare location roster and time segments.",
+          "explain": "Resources follow actual people and transitions.",
+          "transfer": "Split a budget when the system's occupancy changes."
+        },
+        "exitCondition": "Team assignments, travel provisions, home occupancy and dated preparation all signed.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_07.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "coreMinutes": 120,
+    "title": "The Lighthouse",
+    "subtitle": "Getting a voice home means bringing everyone home.",
+    "date": "8–10 April 2047",
+    "summary": "A complete round-trip budget and three-repeater road take Ferreira, Kai and Rafi to Malapert while Mei and Amara maintain Aurora. The crew replaces a compatible controller, independently verifies local and Earth legs, checks exact data and restores voices. Noor's first live answer follows proof of the connection. After a dated 24-hour return, all five see the renewing garden and cotton alive at first light.",
+    "emotionalArc": "Separation → known-road confidence → parallel responsibility → exact repair → chosen reunion → shared homecoming.",
+    "openingHook": "Three seats leave the bay; two people stay to make sure there is a home to return to.",
+    "transitionOut": "The campaign is complete before any future-story image; Continue opens the safe final garden.",
+    "missions": [
+      {
+        "id": "EX-M0801",
+        "title": "The Long Road",
+        "minutes": 30,
+        "goal": "Provision the full round trip, validate terrain and reach the failed marker."
+      },
+      {
+        "id": "EX-M0802",
+        "title": "Two Teams, One Night",
+        "minutes": 30,
+        "goal": "Restore the road chain while the home team verifies its changing-occupancy plan."
+      },
+      {
+        "id": "EX-M0803",
+        "title": "Both Ends of the Light",
+        "minutes": 30,
+        "goal": "Replace the controller and prove both communication legs and exact data."
+      },
+      {
+        "id": "EX-M0804",
+        "title": "From Last Light to First Light",
+        "minutes": 30,
+        "goal": "Restore chosen human contact, return on time and verify the continuing garden."
+      }
+    ],
+    "learning": [
+      "Round-trip budgets and hard route constraints",
+      "Changing occupancy and current information",
+      "Safe replacement, two-leg communication and content integrity"
+    ],
+    "continuity": [
+      "Ferreira, Kai and Rafi rover; Mei and Amara Aurora.",
+      "120 kilometres each way,24 hours out+3 hours repair+24 hours back=51 hours; provisions 72 hours.",
+      "Depart 8 April 00:00, summit 9 April 00:00, return 9 April 03:00, home 10 April 03:00, dawn 10 April 06:00.",
+      "Base has two occupants for 33 dark hours, then five for 3 hours.",
+      "Founder 30, retainedvault 11 and plantedcotton 1 remain distinct.",
+      "First live Noor voice occurs only after verified dual-link checks.",
+      "MARS is only a post-credit future-story image, with no additional playable task."
+    ],
+    "production": [
+      "Explicit viewpoint cards prevent physical teleportation.",
+      "Local rover packets do not imply Earth was repaired early.",
+      "Scenario bearings remain labelled until geometry is verified.",
+      "No real-time 24-hour drive, forced dexterity clock or penalty for assisted controls.",
+      "Final garden exists before dawn; original Alo stays an archived petal and living lineage."
+    ],
+    "scenes": [
+      {
+        "id": "EX-CH08-S01",
+        "legacyScene": "SC-0801",
+        "mission": "EX-M0801",
+        "title": "Before the Road",
+        "minutes": 10,
+        "location": "Aurora rover bay and departure board",
+        "pointOfView": "Rafi",
+        "storyTime": "8 April 2047,00:00 departure",
+        "prose": "The rover waits with three occupied seats and two people outside its sealed cabin. The player reads every name against a destination: Ferreira, Kai and Rafi travel; Mei and Amara keep Aurora. The separation is visible before the door closes. Nobody will appear at the summit simply because the story needs another speaker.\n\nRafi reads the journey card aloud. The surveyed route is about one hundred and twenty kilometres each way, with twenty-four hours outward, three for repair and twenty-four back. Independent provisions cover seventy-two hours. The player checks actual packed equipment against the signed preparation record: compatible controller, battery spare, service diagram and three repeater checkpoints.\n\nMei passes Kai a duplicate home-night checklist. He cannot operate her panel from the rover; he can understand what she is protecting. The player confirms departure only after both destination boards agree. A short time card starts the fictional travel clock while active play moves into the first route problem. The story has earned its journey through the work that put people and equipment here.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S01-L01",
+            "speaker": "Rafi",
+            "line": "Twenty-four out. Three repair. Twenty-four back."
+          },
+          {
+            "id": "EX-CH08-S01-L02",
+            "speaker": "Amara",
+            "line": "Seventy-two hours of independent supplies."
+          },
+          {
+            "id": "EX-CH08-S01-L03",
+            "speaker": "Mei",
+            "line": "I have the garden."
+          },
+          {
+            "id": "EX-CH08-S01-L04",
+            "speaker": "Ferreira",
+            "line": "We have a road, not a heroic shortcut."
+          }
+        ],
+        "playerActions": [
+          "Assign exact three-and-two teams.",
+          "Compare packed hardware with the preparation manifest.",
+          "Verify seventy-two-hour provisions before departure."
+        ],
+        "choice": {
+          "prompt": "Which departure plan is complete?",
+          "options": [
+            {
+              "label": "Carry only enough for the outward leg",
+              "consequence": "The return and repair interval are missing; departure waits."
+            },
+            {
+              "label": "Provision the whole fifty-one-hour plan with margin",
+              "consequence": "The full route and repair interval fit within seventy-two hours."
+            }
+          ],
+          "convergence": "Correct teams, complete loadout and full-round-trip provisions verified."
+        },
+        "learning": {
+          "concept": "Whole-mission provisioning",
+          "predict": "Does arrival mean the journey is complete?",
+          "observe": "Compare outward, repair and return durations.",
+          "explain": "Supplies must cover the whole supported operation.",
+          "transfer": "Include getting home when planning an outward task."
+        },
+        "exitCondition": "Correct teams, complete loadout and full-round-trip provisions verified.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH08-S02",
+        "legacyScene": "SC-0801",
+        "mission": "EX-M0801",
+        "title": "The Return Is Already in the Battery",
+        "minutes": 10,
+        "location": "Rover route-planning console",
+        "pointOfView": "Kai",
+        "storyTime": "8 April, departure forecast before cruise",
+        "prose": "The route screen offers a shorter-looking line across steeper terrain. Its lower displayed energy cost makes it an attractive mistake. Rafi brings the slope map over the same line, and the player tests both routes under the rover's operating limits. The shortcut's unsupported slope is a hard boundary, not a challenge for more skilful driving.\n\nOn the surveyed road, the baseline rover starts with fourteen game units. Five cover outward travel and planned work, five cover the return, leaving four above the two-unit minimum. An earned long-range battery changes the entry capacity once and visibly. It never turns an unsafe slope into a permitted road or replaces the return check.\n\nThe player marks reserve that must remain unavailable for decorative loads. Kai points out that saving energy means little if the vehicle cannot safely reach the place where it will be spent. The forecast keeps distance, terrain and reserve on the same page. Only after the player explains the rejected shortcut does cruise begin along the supported route.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S02-L01",
+            "speaker": "Kai",
+            "line": "The shorter line looks cheaper."
+          },
+          {
+            "id": "EX-CH08-S02-L02",
+            "speaker": "Rafi",
+            "line": "Check what its slope permits."
+          },
+          {
+            "id": "EX-CH08-S02-L03",
+            "speaker": "Ferreira",
+            "line": "A reserve cannot rescue an impossible road."
+          },
+          {
+            "id": "EX-CH08-S02-L04",
+            "speaker": "Kai",
+            "line": "Then the return stays in the departure budget."
+          }
+        ],
+        "playerActions": [
+          "Compare surveyed and unsupported routes.",
+          "Reconcile baseline fourteen-minus-five-minus-five reserve.",
+          "Apply an earned battery modifier once if present."
+        ],
+        "choice": {
+          "prompt": "Which route can be committed?",
+          "options": [
+            {
+              "label": "Shorter steep shortcut",
+              "consequence": "Slope validation rejects it despite its attractive energy estimate."
+            },
+            {
+              "label": "Surveyed road with return reserve",
+              "consequence": "Terrain limits and the whole-mission budget both pass."
+            }
+          ],
+          "convergence": "Surveyed route and return reserve committed; unsafe shortcut rejected."
+        },
+        "learning": {
+          "concept": "Constraints and optimisation",
+          "predict": "Is the cheapest estimate always a feasible solution?",
+          "observe": "Compare slope validity and round-trip reserve.",
+          "explain": "Optimisation operates inside safety and feasibility constraints.",
+          "transfer": "Reject a low-cost plan that violates a hard requirement."
+        },
+        "exitCondition": "Surveyed route and return reserve committed; unsafe shortcut rejected.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH08-S03",
+        "legacyScene": "SC-0802",
+        "mission": "EX-M0801",
+        "title": "Markers in the Dark",
+        "minutes": 10,
+        "location": "Surveyed rover road, first repeater sector",
+        "pointOfView": "Rafi",
+        "storyTime": "8 April,00:00–10:00 represented by gated cruise",
+        "prose": "The first cruise transition ends at a real decision point rather than an empty stretch of driving. Rafi asks the player to match the next marker with the surveyed map and the local bearing. The black sky and long shadows provide scale, but they are not treated as a reliable compass by themselves.\n\nMarker one passes its adjacent-link test. The player sends a short local check-in to Aurora through the prepared chain. Mei's acknowledgement is local radio, not a repaired Earth connection. The packet includes a timestamp and position, so the home team can distinguish a new update from a stored one.\n\nAhead, marker two is dark. The console still shows a healthy surveyed pad, while an apparent bypass crosses an unsupported cliff route. Kai reaches toward the steering control and stops. The player compares the route record, the failed signal and the remaining reserve before braking at the service zone. The correct next action is a bounded repair on known ground. The crew's growth appears in that pause between seeing a shortcut and taking it.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S03-L01",
+            "speaker": "Rafi",
+            "line": "Match the marker, not the silhouette."
+          },
+          {
+            "id": "EX-CH08-S03-L02",
+            "speaker": "Mei (Aurora local radio)",
+            "line": "Position packet received."
+          },
+          {
+            "id": "EX-CH08-S03-L03",
+            "speaker": "Kai",
+            "line": "Marker two is dark."
+          },
+          {
+            "id": "EX-CH08-S03-L04",
+            "speaker": "Ferreira",
+            "line": "Stop at the surveyed pad."
+          }
+        ],
+        "playerActions": [
+          "Match map, marker and bearing.",
+          "Verify marker-one adjacent links.",
+          "Brake in marker-two's known service zone."
+        ],
+        "choice": {
+          "prompt": "What does a dark marker justify?",
+          "options": [
+            {
+              "label": "Leave the road for the visible bypass",
+              "consequence": "The terrain overlay shows an unsupported cliff route."
+            },
+            {
+              "label": "Inspect the known pad and local signal",
+              "consequence": "A stable service point permits a bounded diagnosis."
+            }
+          ],
+          "convergence": "Known marker-two pad reached with brake set; correct position packet saved."
+        },
+        "learning": {
+          "concept": "Navigation with independent references",
+          "predict": "Can appearance alone prove a safe route?",
+          "observe": "Compare surveyed map, bearing and marker condition.",
+          "explain": "Multiple references constrain a navigation decision.",
+          "transfer": "Pause when references disagree instead of inventing a shortcut."
+        },
+        "exitCondition": "Known marker-two pad reached with brake set; correct position packet saved.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH08-S04",
+        "legacyScene": "SC-0802",
+        "mission": "EX-M0802",
+        "title": "The Small Light That Carries a Voice",
+        "minutes": 10,
+        "location": "Marker-two service pad and repeater chain",
+        "pointOfView": "Kai",
+        "storyTime": "8 April,10:00–17:00 including compressed onward cruise",
+        "prose": "Kai checks the service drawing while Rafi verifies suit readiness and the tether point. Ferreira holds the cabin checklist. The player isolates the repeater before removing its battery, compares the replacement specification, then secures the closed housing before reconnecting. No bare-handed repair occurs in vacuum, and no exterior engine roar fills the silence.\n\nThe marker lights, but the task is not finished. The player tests the first-to-second and second-to-third paths separately. A bright indicator can mean local power without proving a communication link. When one test is run before the housing check, the panel names the missing condition and holds the procedure rather than allowing an unsafe completion.\n\nOnly after adjacent links pass does the rover continue to marker three and the hundred-kilometre approach. Kai repeats his old phrase about a small light and a known road. It now describes infrastructure he helped repair, not a charm against darkness. The final twenty kilometres remain on the route schedule. A time card holds the field position while control returns explicitly to Aurora.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S04-L01",
+            "speaker": "Kai",
+            "line": "Power isolated before the battery."
+          },
+          {
+            "id": "EX-CH08-S04-L02",
+            "speaker": "Rafi",
+            "line": "Tether and suit checked."
+          },
+          {
+            "id": "EX-CH08-S04-L03",
+            "speaker": "Ferreira",
+            "line": "A light is not yet a link."
+          },
+          {
+            "id": "EX-CH08-S04-L04",
+            "speaker": "Kai",
+            "line": "Test both neighbours. Then continue."
+          }
+        ],
+        "playerActions": [
+          "Perform isolated battery replacement.",
+          "Test adjacent links independently.",
+          "Verify marker three before the final approach."
+        ],
+        "choice": {
+          "prompt": "The marker lights. What completes verification?",
+          "options": [
+            {
+              "label": "Assume the whole chain works",
+              "consequence": "The local power result does not prove either neighbouring link."
+            },
+            {
+              "label": "Test both adjacent links",
+              "consequence": "The chain's actual communication function is checked."
+            }
+          ],
+          "convergence": "All three repeater sites and their four surface hops are verified through current adjacent-link tests."
+        },
+        "learning": {
+          "concept": "Function versus appearance",
+          "predict": "Does a lit device prove its network works?",
+          "observe": "Compare power indication with end-to-end packets.",
+          "explain": "A component can be powered and still fail its intended function.",
+          "transfer": "Test the service a device must provide."
+        },
+        "exitCondition": "All three repeater sites and their adjacent links verified; field team reaches the 100-kilometre approach at 17:00.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH08-S05",
+        "legacyScene": "SC-0803",
+        "mission": "EX-M0802",
+        "title": "Two at Home",
+        "minutes": 10,
+        "location": "Aurora garden and life-support console",
+        "pointOfView": "Mei",
+        "storyTime": "8 April 18:00, start of final 36-hour night",
+        "prose": "The viewpoint card names Aurora and Mei before the player regains movement. Kai is still on the road; no role-selection shortcut brings him into the room. Beside Mei, Amara checks the same independent gauge that once exposed the misleading leak indication. It is an ordinary check now, performed calmly.\n\nThe player sets the established home loop: minimum heat under the COOL profile, dim growth lamps and the water return open. Current plants are labelled descendants. Cotton grows in its indoor reference bay. The original petal remains preserved beside the founder record, rather than appearing on a miraculously restored Alo.\n\nThe Sun leaves at the scenario's stated gate. This night will last thirty-six fictional hours, not thirty-six hours of required player waiting. The home ledger counts two occupants for the first thirty-three hours and reserves the higher draw for the returning three. The player predicts the changed consumption before testing the schedule. Mei adjusts one crooked nameplate and leaves the small guide light exactly where it was planned. Keeping home is half the expedition's climax.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S05-L01",
+            "speaker": "Amara",
+            "line": "Same darkness. Different garden."
+          },
+          {
+            "id": "EX-CH08-S05-L02",
+            "speaker": "Mei",
+            "line": "Different us."
+          },
+          {
+            "id": "EX-CH08-S05-L03",
+            "speaker": "Amara",
+            "line": "Two here until the return."
+          },
+          {
+            "id": "EX-CH08-S05-L04",
+            "speaker": "Mei",
+            "line": "Then five for the last three hours."
+          }
+        ],
+        "playerActions": [
+          "Set COOL, DIM and return OPEN home loop.",
+          "Verify independent pressure readings.",
+          "Forecast the two-to-five occupancy transition."
+        ],
+        "choice": {
+          "prompt": "Which home forecast matches the signed journey?",
+          "options": [
+            {
+              "label": "Two occupants for the whole night",
+              "consequence": "It omits the returning three during the final hours."
+            },
+            {
+              "label": "Two for 33 hours, then five for 3 hours",
+              "consequence": "The consumption transition matches the dated roster."
+            }
+          ],
+          "convergence": "Home loop and segmented occupancy forecast valid; two people remain physically at Aurora."
+        },
+        "learning": {
+          "concept": "Time-dependent demand",
+          "predict": "Why is a single occupancy count insufficient?",
+          "observe": "Compare demand before and after the return.",
+          "explain": "Changing conditions require segmented accounting.",
+          "transfer": "Divide a plan at meaningful system transitions."
+        },
+        "exitCondition": "Home loop and segmented occupancy forecast valid; two people remain physically at Aurora.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH08-S06",
+        "legacyScene": "SC-0803",
+        "mission": "EX-M0802",
+        "title": "The Packet From the Summit",
+        "minutes": 10,
+        "location": "Aurora console and rover summit approach",
+        "pointOfView": "Amara then Rafi at labelled cut",
+        "storyTime": "8 April 18:00–9 April 00:00",
+        "prose": "At Aurora, the player watches the garden forecast meet the first checked result. Amara verifies air, temperature and the open return path before acknowledging any field message. A working relay later cannot compensate for a neglected home system now. The scene keeps both responsibilities visible without letting one player move characters between sites.\n\nA timestamped rover packet reports the final approach. The three road repeaters carry local traffic across the four required surface hops; the broken Earth uplink remains broken. The player checks sender, location and packet age. A stored earlier position is available as a comparison, making it possible to recognise why a stale acknowledgement would mislead the other team.\n\nThe viewpoint card then cuts to Rafi at the summit, exactly twenty-four scenario hours after departure. Ferreira and Kai are with him in the pressurised rover. The dark relay housing lies beyond the window. Rafi sends the arrival packet and waits for Aurora's local acknowledgement. The player has completed a complete outward leg and preserved home, not repaired Earth by implication. The next mission starts with a compatible spare and two explicit communication paths still to verify.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S06-L01",
+            "speaker": "Amara",
+            "line": "Home checks first. Then acknowledge."
+          },
+          {
+            "id": "EX-CH08-S06-L02",
+            "speaker": "Mei",
+            "line": "The packet says when and where."
+          },
+          {
+            "id": "EX-CH08-S06-L03",
+            "speaker": "Rafi (local radio)",
+            "line": "Summit reached. Three aboard."
+          },
+          {
+            "id": "EX-CH08-S06-L04",
+            "speaker": "Amara (Aurora local radio)",
+            "line": "Current arrival packet acknowledged."
+          }
+        ],
+        "playerActions": [
+          "Check home state against forecast.",
+          "Reject stale position as a new arrival.",
+          "Confirm timestamped summit arrival over local radio."
+        ],
+        "choice": {
+          "prompt": "Which packet can certify arrival?",
+          "options": [
+            {
+              "label": "The earlier approach packet",
+              "consequence": "Its location and timestamp cannot prove summit arrival."
+            },
+            {
+              "label": "The new summit packet",
+              "consequence": "Sender, position and time match the planned 24-hour leg."
+            }
+          ],
+          "convergence": "Summit reached 9 April 00:00; home checks and fresh local acknowledgement complete."
+        },
+        "learning": {
+          "concept": "Freshness and information integrity",
+          "predict": "Is an old correct message correct for the present question?",
+          "observe": "Compare sender, position and timestamp.",
+          "explain": "Evidence must be current enough for the decision it supports.",
+          "transfer": "Check the age of information as well as its content."
+        },
+        "exitCondition": "Summit reached 9 April 00:00; home checks and fresh local acknowledgement complete.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH08-S07",
+        "legacyScene": "SC-0804",
+        "mission": "EX-M0803",
+        "title": "The Spare Has a History",
+        "minutes": 10,
+        "location": "Malapert relay service bay",
+        "pointOfView": "Kai",
+        "storyTime": "9 April 00:00–00:45, repair window",
+        "prose": "The controller crate opens beside the service housing its diagram promised. Kai recognises the note he wrote in December. The player checks the actual connectors and serial once more because preparation does not excuse verification at the point of use. Ferreira braces the service door while Rafi controls the tether.\n\nThe first command isolates power. The second verifies zero before the damaged controller is removed. A tempting reset control remains visible but cannot certify a safe replacement. The player follows the sequence through removal, compatible insertion and closed housing. Only then is power reconnected. Each step has a direct physical change rather than another decorative inspection.\n\nNothing sparks theatrically in the vacuum. The score stays quiet enough for the local checkbacks to be understood. When the controller powers, the antenna panel wakes with two unverified channels. Kai does not announce success yet. Months of care, the delivered spare and the restored road have made this moment possible, but the device still has to connect Aurora with Earth. The player has repaired a component and created the conditions for testing a system.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S07-L01",
+            "speaker": "Ferreira",
+            "line": "Power isolated?"
+          },
+          {
+            "id": "EX-CH08-S07-L02",
+            "speaker": "Kai",
+            "line": "Isolated. Zero verified."
+          },
+          {
+            "id": "EX-CH08-S07-L03",
+            "speaker": "Rafi",
+            "line": "Tether set. Housing clear."
+          },
+          {
+            "id": "EX-CH08-S07-L04",
+            "speaker": "Kai",
+            "line": "Closed before reconnecting."
+          }
+        ],
+        "playerActions": [
+          "Verify actual compatible spare.",
+          "Isolate, test zero and replace.",
+          "Close housing before reconnecting power."
+        ],
+        "choice": {
+          "prompt": "Which action is safe before removal?",
+          "options": [
+            {
+              "label": "Reset the damaged controller while live",
+              "consequence": "The sequence blocks removal until isolation and zero are verified."
+            },
+            {
+              "label": "Isolate and verify zero",
+              "consequence": "The supported replacement procedure can proceed."
+            }
+          ],
+          "convergence": "Compatible controller installed, housing closed, power safely restored."
+        },
+        "learning": {
+          "concept": "Safe replacement sequence",
+          "predict": "Does having the correct spare remove electrical hazards?",
+          "observe": "Compare component compatibility and isolation state.",
+          "explain": "Correct parts and correct procedure are separate requirements.",
+          "transfer": "Verify safe state at the point of work."
+        },
+        "exitCondition": "Compatible controller installed, housing closed, power safely restored.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH08-S08",
+        "legacyScene": "SC-0804",
+        "mission": "EX-M0803",
+        "title": "A Lighthouse Needs Both Shores",
+        "minutes": 10,
+        "location": "Malapert local antenna and Earth dish controls",
+        "pointOfView": "Kai",
+        "storyTime": "9 April 00:45–01:45",
+        "prose": "Two signal panels appear, and only one points toward Earth. The player first tunes the local channel toward the restored road chain. An image of Earth above a ridge cannot prove that Aurora is audible below the terrain. The local test must pass on its own evidence.\n\nWith the first leg checked, the player adjusts the Earth dish. The displayed bearings are labelled scenario values until surveyed geometry is verified in production. Strength alone is insufficient when the path remains obstructed; the panel pairs signal with an explicit blockage indication. An assisted preset and tap-confirm offer the same engineering result as the dials, without taking away story access or rewards.\n\nThe upcoming Aurora Earth-set handover appears as a planned window, not a reason to force fast motor input. Reading and accessibility settings pause the pressure. Ferreira reads the two-channel checklist while Rafi confirms the local path remains stable. Kai touches each verified label once. The relay's useful achievement is not pointing at a distant object. It is maintaining a route that can carry a message between people.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S08-L01",
+            "speaker": "Kai",
+            "line": "Aurora first."
+          },
+          {
+            "id": "EX-CH08-S08-L02",
+            "speaker": "Rafi",
+            "line": "Road chain stable."
+          },
+          {
+            "id": "EX-CH08-S08-L03",
+            "speaker": "Ferreira",
+            "line": "Now the Earth leg. Check obstruction too."
+          },
+          {
+            "id": "EX-CH08-S08-L04",
+            "speaker": "Kai",
+            "line": "Both shores, not just the bright one."
+          }
+        ],
+        "playerActions": [
+          "Lock and verify the local repeater leg.",
+          "Tune the Earth leg using labelled scenario bearings.",
+          "Check obstruction and stability on both paths."
+        ],
+        "choice": {
+          "prompt": "Which result makes the relay useful to Aurora?",
+          "options": [
+            {
+              "label": "Earth signal strong, local leg unverified",
+              "consequence": "Aurora still has no checked path to the summit."
+            },
+            {
+              "label": "Local and Earth legs independently passed",
+              "consequence": "The intended two-leg route now exists."
+            }
+          ],
+          "convergence": "Local and Earth legs independently locked and stable before handover."
+        },
+        "learning": {
+          "concept": "End-to-end network reasoning",
+          "predict": "Can a relay work with only its distant leg?",
+          "observe": "Compare two independent path results.",
+          "explain": "A network service needs every necessary link.",
+          "transfer": "Trace a message from origin to destination."
+        },
+        "exitCondition": "Local and Earth legs independently locked and stable before handover.",
+        "evidenceTag": "Computed-pending",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH08-S09",
+        "legacyScene": "SC-0804",
+        "mission": "EX-M0803",
+        "title": "Forty-Two Comes Back Correctly",
+        "minutes": 10,
+        "location": "Relay data check and Aurora acknowledgement panel",
+        "pointOfView": "Rafi",
+        "storyTime": "9 April 01:45–02:15",
+        "prose": "The player sends ALO42 through the checked local path and waits for an exact response. The string carries no new seed quantity; it is a known-content test phrase chosen for the current session. A nearly matching reply is available in the diagnostic preview, and the player must distinguish resemblance from equality.\n\nA signal meter can be strong while content arrives incorrectly. Rafi checks that the returned characters match and that the acknowledgement belongs to this test rather than an old saved packet. The player then confirms the Earth channel separately. Two independent voice checks remain visible as required next steps, so a successful data echo does not silently stand in for a conversation.\n\nAt Aurora, Mei sees the verified route appear on the board. Her own garden forecast still needs its scheduled care; the radio did not refill the battery or reverse time. Amara sends a current telemetry packet, with the station's clock and five-person return plan attached. The network is now useful because the player can show where the information went and what came back. Only after that evidence does the transmit button invite a human voice.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S09-L01",
+            "speaker": "Rafi",
+            "line": "Strong is not the same as correct."
+          },
+          {
+            "id": "EX-CH08-S09-L02",
+            "speaker": "Kai",
+            "line": "ALO42 sent. Exact match returned."
+          },
+          {
+            "id": "EX-CH08-S09-L03",
+            "speaker": "Amara (Aurora local radio)",
+            "line": "Current telemetry follows."
+          },
+          {
+            "id": "EX-CH08-S09-L04",
+            "speaker": "Ferreira",
+            "line": "Now verify the voices at both ends."
+          }
+        ],
+        "playerActions": [
+          "Send and exactly compare ALO42.",
+          "Reject stale or mismatched acknowledgements.",
+          "Prepare separate Aurora and Earth voice checks."
+        ],
+        "choice": {
+          "prompt": "Which response passes the content check?",
+          "options": [
+            {
+              "label": "A similar-looking or older reply",
+              "consequence": "It fails the exact-current-match requirement."
+            },
+            {
+              "label": "The exact current ALO42 response",
+              "consequence": "The test demonstrates present content integrity."
+            }
+          ],
+          "convergence": "Exact current test phrase and both path records pass; voice verification remains explicit."
+        },
+        "learning": {
+          "concept": "Signal versus data integrity",
+          "predict": "Does a strong connection guarantee correct information?",
+          "observe": "Compare exact content and current test identifiers.",
+          "explain": "Connectivity and correct delivery need separate verification.",
+          "transfer": "Check both transport and meaning when information matters."
+        },
+        "exitCondition": "Exact current test phrase and both path records pass; voice verification remains explicit.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH08-S10",
+        "legacyScene": "SC-0805",
+        "mission": "EX-M0804",
+        "title": "Hello, Aurora",
+        "minutes": 10,
+        "location": "Relay rover cabin, Aurora and Noor's Earth rooftop",
+        "pointOfView": "Mei at Aurora through labelled cut",
+        "storyTime": "9 April 02:15–03:00",
+        "prose": "The transmit control waits until both path checks are visible. The player confirms Aurora's voice, then Earth's. Rao identifies the restored route and leaves room on the channel. Only now does Noor choose to speak live: Hello, Aurora. This is Noor.\n\nThe picture cuts among the pressurised summit cabin, Aurora's table and a rooftop in Bangladesh. The Earth shot belongs to the fictional scene; it makes no unsupported claim about exact Moon phase or local visibility. The crew leaves pauses for radio delay. Nobody talks continuously from an unprotected lunar exterior.\n\nMei sends current garden telemetry and the preserved lineage photograph. Noor sees what reached her through the working path, not everything that happened during the blackout. She says the crew did what she could not. Ferreira answers that the seeds and the Academy made their work possible. The player selects a supported report sentence and lets each contributor remain named. This is a shared achievement, not a replacement for Noor or a redemption purchased by one heroic rescue. Before the call ends, Rafi reads the return departure time.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S10-L01",
+            "speaker": "Noor (first live Earth voice)",
+            "line": "Hello, Aurora. This is Noor."
+          },
+          {
+            "id": "EX-CH08-S10-L02",
+            "speaker": "Mei",
+            "line": "We kept a place for you."
+          },
+          {
+            "id": "EX-CH08-S10-L03",
+            "speaker": "Ferreira",
+            "line": "You brought us the seeds."
+          },
+          {
+            "id": "EX-CH08-S10-L04",
+            "speaker": "Amara",
+            "line": "The garden has more than one gardener."
+          }
+        ],
+        "playerActions": [
+          "Complete Aurora and Earth voice checks.",
+          "Send current garden telemetry.",
+          "Confirm return departure after the call."
+        ],
+        "choice": {
+          "prompt": "Which report accurately describes the achievement?",
+          "options": [
+            {
+              "label": "The relay crew alone saved the garden",
+              "consequence": "The debrief shows missing home care and earlier contributions."
+            },
+            {
+              "label": "Both teams and earlier work kept the expedition connected",
+              "consequence": "The checked record credits preparation, repair and ongoing care."
+            }
+          ],
+          "convergence": "Both voices and telemetry acknowledged; Noor's first live call complete; return starts 03:00."
+        },
+        "learning": {
+          "concept": "Shared work and evidence of success",
+          "predict": "Who contributed while the player watched another team?",
+          "observe": "Compare home, field and earlier preparation records.",
+          "explain": "Complex achievements depend on linked visible contributions.",
+          "transfer": "Credit dependencies and collaborators accurately."
+        },
+        "exitCondition": "Both voices and telemetry acknowledged; Noor's first live call complete; return starts 03:00.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH08-S11",
+        "legacyScene": "SC-0805",
+        "mission": "EX-M0804",
+        "title": "The Same Road Home",
+        "minutes": 10,
+        "location": "Pressurised rover and Aurora arrival airlock",
+        "pointOfView": "Rafi then Amara at labelled arrival",
+        "storyTime": "9 April 03:00–10 April 03:00,24-hour return",
+        "prose": "The crew enters the rover before the return transition starts. Rafi checks the same surveyed road in reverse and reads the remaining provision margin. The player compares actual use with the whole-mission forecast, including the three-hour repair window. Arrival at Malapert never counted as the finish.\n\nThree short route checks show the restored repeaters still supporting communication. They test new return observations rather than asking the player to repeat the outward puzzle without change. A stale outward timestamp is rejected when the player confirms a homebound position. Guided cruise can compress travel while preserving those decisions and the full fictional duration.\n\nAt Aurora, Amara receives the approaching packet and prepares the actual arrival transition. The airlock does not open because a cinematic needs a reunion. The player verifies the three returning names and pressure procedure. At 03:00 on 10 April, five lunar crew are physically home. The home ledger changes consumption for the final three dark hours. Mei can finally put Ferreira's mug beside the others, while the player checks the margin that made this quiet return possible.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S11-L01",
+            "speaker": "Rafi",
+            "line": "Return is part of the mission."
+          },
+          {
+            "id": "EX-CH08-S11-L02",
+            "speaker": "Kai",
+            "line": "Same road. New timestamps."
+          },
+          {
+            "id": "EX-CH08-S11-L03",
+            "speaker": "Amara (Aurora local radio)",
+            "line": "Three arrivals expected and checked."
+          },
+          {
+            "id": "EX-CH08-S11-L04",
+            "speaker": "Mei",
+            "line": "Five home. Three hours to first light."
+          }
+        ],
+        "playerActions": [
+          "Compare actual round-trip use with forecast.",
+          "Verify current return packets at three route gates.",
+          "Complete arrival and change base occupancy tofive."
+        ],
+        "choice": {
+          "prompt": "When should home consumption increase?",
+          "options": [
+            {
+              "label": "When the rover leaves the summit",
+              "consequence": "Those people are still supplied by the rover."
+            },
+            {
+              "label": "When the three physically return at 03:00",
+              "consequence": "The base ledger changes at the actual location transition."
+            }
+          ],
+          "convergence": "All three return after 24 hours; five at Aurora 03:00; final 3-hour occupancy updated."
+        },
+        "learning": {
+          "concept": "Resource ownership and transitions",
+          "predict": "Which system supplies people during return travel?",
+          "observe": "Compare rover and base rosters over time.",
+          "explain": "Consumption belongs to the location actually supporting each person.",
+          "transfer": "Avoid counting people twice or omitting them between systems."
+        },
+        "exitCondition": "All three return after 24 hours; five at Aurora 03:00; final 3-hour occupancy updated.",
+        "evidenceTag": "Simulated",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      },
+      {
+        "id": "EX-CH08-S12",
+        "legacyScene": "SC-0806",
+        "mission": "EX-M0804",
+        "title": "What We Grew",
+        "minutes": 10,
+        "location": "Aurora pressurised garden",
+        "pointOfView": "Mei",
+        "storyTime": "10 April 06:00, first light and complete epilogue",
+        "prose": "The viewing shutter waits where the first bloom once appeared. Before touching it, the player verifies the final records: five people safely home, thirty founder seeds protected, eleven unplanted vault specimens retained, stable pressure and temperature, and cotton alive. The checks describe an established garden that survived another seasonal dark window. Dawn will reveal it, not create it instantly.\n\nMei opens the shutter. Mustard descendants flower inside the pressurised room. Alo's petal remains beside the lineage label, and Tara's contribution appears beside Alo's. Noor watches through the restored screen. Cotton stands by the window, continuing the historical beginning represented by the 2019 seedling without pretending this fictional plant rewrites that real experiment.\n\nThe player takes the shared photograph and chooses a dedication supported by the completed work. Credits name both teams and the people who made their first chance possible. All central questions have answers before the ending closes. A brief post-credit still may show the closed MARS drawer as a future-story image; it adds no quest, collectible or required activity to this campaign. Continue returns to the safe completed garden.",
+        "dialogue": [
+          {
+            "id": "EX-CH08-S12-L01",
+            "speaker": "Mei",
+            "line": "Temperature and pressure steady."
+          },
+          {
+            "id": "EX-CH08-S12-L02",
+            "speaker": "Amara",
+            "line": "Seeds protected. Everyone home."
+          },
+          {
+            "id": "EX-CH08-S12-L03",
+            "speaker": "Ferreira",
+            "line": "You did not just survive the Moon. You grew it."
+          },
+          {
+            "id": "EX-CH08-S12-L04",
+            "speaker": "Noor (live Earth link)",
+            "line": "Show me the cotton by the window."
+          }
+        ],
+        "playerActions": [
+          "Reconcile final people, seed and garden records.",
+          "Open shutter and save the shared photo.",
+          "Choose a dedication and complete the credits."
+        ],
+        "choice": {
+          "prompt": "Which dedication fits the completed evidence?",
+          "options": [
+            {
+              "label": "For every hand that kept the light",
+              "consequence": "The photo credits the whole linked expedition."
+            },
+            {
+              "label": "For the gardens we leave for others",
+              "consequence": "The lineage record connects care across generations."
+            }
+          ],
+          "convergence": "Final records, photo, dedication and credits complete; no extra task gates the ending."
+        },
+        "learning": {
+          "concept": "Sustained success and biological continuity",
+          "predict": "What makes this more than one lucky bloom?",
+          "observe": "Compare generations, protected reserve and survival through the next night.",
+          "explain": "A renewing system preserves conditions and future capacity.",
+          "transfer": "Define success across time rather than one impressive moment."
+        },
+        "exitCondition": "Final records, photo, dedication and credits complete; no extra task gates the ending.",
+        "evidenceTag": "Fiction",
+        "sourceRefs": [
+          "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+          "game-design/03_STORY_TIMELINE.md",
+          "game-design/08_PUZZLE_DESIGNS.md"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,528 @@
+{
+  "edition": "The First Moon Garden — complete expedition edition",
+  "reviewedOn": "2026-10-25",
+  "language": "English studio text; Bangla reader guidance supplied in the HTML",
+  "pacing": {
+    "scope": "One complete mandatory campaign. No side quests, collection grind, compulsory losses or repeat campaigns are counted toward the running time.",
+    "minimumMinutes": 600,
+    "targetMinutes": 720,
+    "maximumMinutes": 840,
+    "chapters": [
+      {
+        "chapter": 1,
+        "minimumMinutes": 63,
+        "targetMinutes": 75,
+        "maximumMinutes": 87
+      },
+      {
+        "chapter": 2,
+        "minimumMinutes": 62,
+        "targetMinutes": 75,
+        "maximumMinutes": 88
+      },
+      {
+        "chapter": 3,
+        "minimumMinutes": 71,
+        "targetMinutes": 85,
+        "maximumMinutes": 99
+      },
+      {
+        "chapter": 4,
+        "minimumMinutes": 75,
+        "targetMinutes": 90,
+        "maximumMinutes": 105
+      },
+      {
+        "chapter": 5,
+        "minimumMinutes": 71,
+        "targetMinutes": 85,
+        "maximumMinutes": 99
+      },
+      {
+        "chapter": 6,
+        "minimumMinutes": 71,
+        "targetMinutes": 85,
+        "maximumMinutes": 99
+      },
+      {
+        "chapter": 7,
+        "minimumMinutes": 87,
+        "targetMinutes": 105,
+        "maximumMinutes": 123
+      },
+      {
+        "chapter": 8,
+        "minimumMinutes": 100,
+        "targetMinutes": 120,
+        "maximumMinutes": 140
+      }
+    ],
+    "interpretation": "The same 32 missions and 96 scenes make up all three budgets. Guided operation and brisk reading target ten hours; standard first play targets twelve; deliberate investigation and discussion target fourteen. No important story is skipped to produce the shorter route. Reading, planning, pause and accessibility settings never secretly consume survival resources. These are design estimates requiring playtests, not measured completion times. Players may naturally take longer than fourteen hours.",
+    "antiPaddingRule": "Every required segment must change a plan, validate evidence, develop a relationship that affects teamwork, prepare a later solution, or show the consequence of an earlier decision. Travel and biological growth use explicit dated transitions after player confirmation; nobody waits real hours for a plant or a rover."
+  },
+  "canonChanges": [
+    {
+      "id": "ED-01",
+      "change": "The earlier approximately four-hour mandatory route and optional 10–14-hour completion model are superseded within this standalone edition. The new entire main campaign is budgeted at 10–14 hours, centered on twelve.",
+      "preserved": "Eight chapter names and order; the emotional journey from Alo's first bloom to an established renewing Moon garden."
+    },
+    {
+      "id": "ED-02",
+      "change": "Four required missions and twelve required scenes per chapter replace the earlier two-mission, six-scene pacing. New investigations expand setup, planning, evidence checking and consequences.",
+      "preserved": "Original engineering puzzle functions, hard safety rules, the 2017 replay and 2012 counterfactual, and their source boundaries."
+    },
+    {
+      "id": "ED-03",
+      "change": "Learning is part of the critical path, delivered through prediction, action, feedback and a short explanation instead of separate classroom errands.",
+      "preserved": "Every learning task contributes to the expedition. Assisted play reaches the same complete story and receives the same narrative respect."
+    },
+    {
+      "id": "ED-04",
+      "change": "New dialogue is marked as expansion writing; legacyScene identifies an original scene only where that scene is being elaborated.",
+      "preserved": "Noor's identity and personal-history connection become shared at Chapter 5. No first live Noor voice before Chapter 8."
+    },
+    {
+      "id": "ED-05",
+      "change": "The complete garden ending and credits resolve this campaign. The MARS drawer can be a short after-credits teaser.",
+      "preserved": "No Mars mission, sequel purchase, collection threshold or unresolved cliffhanger is needed to finish this story."
+    }
+  ],
+  "teachingPrinciples": [
+    "Let players make a prediction before operating a model; compare it with a visible result afterward.",
+    "Give instruments specific meanings. Oxygen supply, carbon-dioxide removal, pressure and ventilation are related but distinct.",
+    "Make teamwork causal: each role contributes a different observation to a plan that a single unshared observation cannot fully justify.",
+    "Use a model rehearsal to explore an unsafe proposal; never require the actual crew to perform a hazardous mistake to learn.",
+    "Give an incorrect prediction a useful explanation and a local retry. Do not frame curiosity, assistance, disability or reading speed as mission incompetence.",
+    "Reduce prompts across the campaign. The finale recombines already practiced tools instead of introducing an unexplained last-minute ability.",
+    "Keep emotional scenes brief and earned by actions. Let silence, an ordinary shared meal, and care for a drying plant matter without replacing playable work.",
+    "Assessment concerns evidence and explanation. No claim is made that playing the game certifies a child to operate real spacecraft."
+  ],
+  "chapters": [
+    {
+      "chapter": 1,
+      "question": "How can one crew keep people, a station and a living experiment safe when several systems share finite resources?",
+      "misconception": "A full battery solves every problem; making oxygen also removes carbon dioxide; a shelter can borrow water forever; a Moon night always has the same length.",
+      "predict": "Before sunset, the player marks which of two proposed schedules will retain a reserve and when the shelter water must return to irrigation. Each role adds one observation before the player commits.",
+      "test": "Compare two schedules on a paused model, store oxygen during daylight, perform the shelter drill and operate the seven authored shifts. At the alarm, choose a viable shelter response from the already practiced actions; all crew enter shelter first.",
+      "observe": "The display separates energy, stored air and water location. It shows why an apparently comfortable early choice can create a later shortage, and why water borrowed for shielding still exists but is temporarily unavailable to the garden.",
+      "explain": "At dawn, the player points to one decision and the actual resource trace that supports its result. The debrief distinguishes the historical 2017 source record from Aurora's fictional dates and simplified game scores.",
+      "transfer": "Plan a school activity with a limited power bank and shared water supply. Name a reserve, a priority and a time when a borrowed resource must be returned.",
+      "evidenceArtifact": "A saved before-and-after mission-table plan, a four-role information receipt and one annotated causal link between choice and outcome.",
+      "assessment": "The player can identify a binding constraint, preserve crew-first priorities and explain why an alternate preview changes a result. Correct reasoning counts in assisted mode too; a failed prediction can be revised locally.",
+      "accessibility": "Planning pauses the simulation; every dial has a keyboard/tap alternative; role facts have icons and text; the alarm timer can be removed without changing story access.",
+      "scienceBoundary": "The 36-hour darkness and Earth-set are authored training conditions until local terrain and ephemerides are validated. Water shielding illustrates mass and geometry; zaps are not measured doses and plants are not radiation-immune.",
+      "sourceRefs": [
+        "SRC-POLAR",
+        "SRC-LIFE-SUPPORT",
+        "SRC-SHIELDING",
+        "SRC-STORM2017",
+        "SRC-COTTON2019"
+      ]
+    },
+    {
+      "chapter": 2,
+      "question": "What does Alo need after its first bloom, and how can a crew become a reliable pollinator inside sealed habitats?",
+      "misconception": "A flower automatically makes seeds; pollen is a seed; every Brassica can fertilize itself; loose pollen can drift safely through lunar vacuum.",
+      "predict": "The player predicts which flower structures and transfer route can move pollen from one compatible individual to the other while preserving pressure and cleanliness. A stem-color prediction is recorded without promising a genetic ratio.",
+      "test": "Inspect a magnified flower, rehearse the transfer with inert practice markers, and complete the reciprocal Alo-to-Tara and Tara-to-Alo bee runs through sealed carriers. Three runs occur across seven labelled care days, rather than one instantaneous transformation.",
+      "observe": "The journal distinguishes transferred pollen, a later developing pod and a future seed. Clean brush labels and dated care images show what was done and what still needs time.",
+      "explain": "The player arranges a causal sequence: compatible pollen reaches a receptive stigma, fertilization may follow, then seeds develop. The care record explains why successful transfer is not proof of instant seed maturity.",
+      "transfer": "Observe a real classroom plant and make a dated prediction about a change. With an educator's guidance, compare flowers and identify the difference between pollination and the later appearance of seeds.",
+      "evidenceArtifact": "A seven-day pollination record with donor, recipient and tool labels; a dated purple/green stem prediction to revisit in Chapter 4.",
+      "assessment": "The player can select a compatible partner, explain why a sealed route matters and separate observation from prediction. An assisted transfer preserves the same evidence record and story.",
+      "accessibility": "No precision dragging, rapid brush movement or color-only identification is required. Named plant labels and enlarged structural diagrams supplement color.",
+      "scienceBoundary": "Alo and Tara use a selected compatible rapid-cycling cultivar. Ideal terrestrial Fast Plants timings do not guarantee identical lunar growth; exact dates and the later count of 42 are fiction.",
+      "sourceRefs": [
+        "SRC-PLANTS",
+        "SRC-POLLINATION",
+        "SRC-MOON"
+      ]
+    },
+    {
+      "chapter": 3,
+      "question": "When a frightening alarm and two measurements disagree, how do you find the fault without confusing certainty with confidence?",
+      "misconception": "The first alarm identifies the failed component; a fallible sensor means science cannot be trusted; falling petals prove that care failed.",
+      "predict": "Amara asks the player to choose an independent observation that would distinguish a tank failure from a leaking garden spur. The expected result is written before the isolation test.",
+      "test": "Compare the panel with a mechanical gauge, trace the safe-side circuit, isolate the correct spur and verify the pressure hold. Only after an explicit repair and safety gate may the crew inspect the annex. Later, maturity observations authorize a dated dry-down and harvest.",
+      "observe": "The independent readings converge after the repaired boundary holds pressure. Inside the annex, curled leaves and growth records distinguish an unflowered trial from a previous successful bloom. On May 21, the harvest tray reconciles 42 seeds into 12 planting and 30 reserve.",
+      "explain": "The player explains which competing explanation the test ruled out and how the evidence changed the plan. Mei and Amara connect Alo's natural ending with the next generation rather than treating endless individual survival as the only success.",
+      "transfer": "When two everyday measurements differ, check their method and an independent reference before deciding what to trust. Keep a count ledger when objects move between containers.",
+      "evidenceArtifact": "A fault tree with one disconfirmed hypothesis; the completed pressure-hold record; the dated 42 = 12 + 30 founder-seed ledger.",
+      "assessment": "The player justifies an isolation with a distinguishing observation and balances the seed ledger. A hint can point toward the next observation without writing the explanation for the player.",
+      "accessibility": "Pressure plots include textual trends; shakiness and screen movement can be disabled; logs remain readable after the alarm. The repair has no reaction-speed requirement.",
+      "scienceBoundary": "Lunar seismic hazards have observational support; this quake and damage are fictional. Dry-down follows observed maturity and a teaching schedule, not a universal instruction to dehydrate any stressed plant.",
+      "sourceRefs": [
+        "SRC-QUAKES",
+        "SRC-PLANTS",
+        "SRC-LIFE-SUPPORT"
+      ]
+    },
+    {
+      "chapter": 4,
+      "question": "How do you reach a promising resource without treating an interesting map pixel as a safe road or a guaranteed water supply?",
+      "misconception": "The shortest line is the safest route; every permanently shadowed patch contains accessible ice; detecting ice instantly fills a base reservoir; cold storage guarantees all old seeds will grow.",
+      "predict": "Rafi and Kai propose a route while Mei and Amara compare its slope and communication coverage. The player predicts where terrain could hide a hazard and which sample test would distinguish the target signal from a dry control.",
+      "test": "Reconcile field and base observations, test beacons before blind corners, budget a return reserve, calibrate the sampler on a known reference and recover an identified sample. The crew then secures the twelve-specimen vault in a closed carrier.",
+      "observe": "The route map updates from tested markers rather than an unexplained omniscient arrow. A sample result supports a local investigation, while the base supply ledger remains unchanged by a tiny survey sample. The recovered vault is inventoried before any specimen is opened.",
+      "explain": "The player states what the sample supports, what it does not prove and why the longer planned route kept a return option. The stem-color notebook is compared with actual descendants without forcing a promised ratio.",
+      "transfer": "Plan a field walk using terrain, communication and return time rather than distance alone. Distinguish a small observation from a claim about an entire place.",
+      "evidenceArtifact": "A route card with tested relay markers and a return reserve; a labelled sample/control comparison; a twelve-item vault custody record.",
+      "assessment": "The player can defend a route with two constraints and qualify a resource claim. Correctly saying 'not enough evidence yet' is a valid scientific result.",
+      "accessibility": "Map slopes have labels and profile views; navigation supports step-by-step commands; driving assistance retains the same route decisions and discoveries.",
+      "scienceBoundary": "The surveyed road, local sampling result, cold-trap vault and seed viability are fictional. Real missions support polar ice investigations but not every shadowed patch or this particular vault.",
+      "sourceRefs": [
+        "SRC-ICE",
+        "SRC-POLAR",
+        "SRC-RELAY"
+      ]
+    },
+    {
+      "chapter": 5,
+      "question": "How do you turn a flash, an old log and a difficult admission into evidence that a team can responsibly share?",
+      "misconception": "Every bright pixel is a meteoroid; a lunar meteor shower should make atmospheric streaks; admitting an error makes an engineer untrustworthy; an archive voice is a live caller.",
+      "predict": "Before opening the observation record, the player predicts which candidate flashes should appear in both synchronized channels. For the archive, the player distinguishes a timestamped record from an inference about the people in it.",
+      "test": "Synchronize instrument frames, reject a one-channel artifact, confirm the required impact observations and complete the corresponding inspection/maintenance. Cross-check the signed archive, evacuation record and seed manifest before Ferreira's personal explanation.",
+      "observe": "Two independent image records make false flashes visible. The manifest names Noor; Ferreira says what she did and what she regrets. Rao asks and receives permission before sharing Noor's living connection to the Academy. The cotton planting entry leaves eleven other vault specimens stored.",
+      "explain": "The player separates what the instrument saw, what the historical record states and what a person has chosen to tell the team. A response to Noor is an invitation, not a demand that she perform her grief.",
+      "transfer": "Check a striking image against another source and retain the timestamp. In group work, explain a mistake and the corrective action instead of concealing the evidence.",
+      "evidenceArtifact": "A paired-frame impact report; an archive provenance chain; a consented invitation; the cotton-plus-eleven vault record.",
+      "assessment": "The player can reject a false positive using a reason, link an inference to a record and describe the corrected team plan. The reveal is never hidden behind an optional collectible.",
+      "accessibility": "The observation is an indexed replay, not a reflex test. Flashes can be represented as still-frame markers; captions identify archive, local speech and remote text.",
+      "scienceBoundary": "NASA uses multiple observations to distinguish lunar impact flashes from false signals. This season's images, count requirements and damage are authored teaching material; there is no lunar atmospheric firework show.",
+      "sourceRefs": [
+        "SRC-IMPACTS",
+        "SRC-MOON",
+        "SRC-PLANTS",
+        "SRC-COTTON2019"
+      ]
+    },
+    {
+      "chapter": 6,
+      "question": "Can a crew plan for darkness before it arrives, and can someone be afraid while still acting capably?",
+      "misconception": "An eclipse switches sunlight off everywhere in the same way; a red ring is a second fire around Earth; a known eclipse date proves an exact view from Aurora; courage means no longer feeling afraid.",
+      "predict": "Kai and the player predict which critical loads need reserve energy during the five labelled eclipse segments. The camera diagram distinguishes a calendar event from a verified local line of sight.",
+      "test": "Build and rehearse the five-segment plan, compare a changed noncritical load, check the independent hand light and confirm recovery. During the event the crew follows the agreed schedule and handles the short feeder fault with the practiced tools.",
+      "observe": "The model exposes the reserve consequence before commitment. The external camera or conceptual inset shows Earth's atmospheric limb while a terrestrial diagram explains red light. Kai can ask for support and still complete his task.",
+      "explain": "The player explains why dim red light can reach an eclipsed Moon and which parts of the view are illustrative. The team names the preparation that made their response useful; it does not announce that Kai's fear has been cured.",
+      "transfer": "Prepare a calm contingency for a scheduled interruption: decide critical tasks, test a backup and ask another person to check the plan.",
+      "evidenceArtifact": "An acknowledged five-segment plan with entry and recovery checks; a labelled eclipse diagram; one explanation of the reserve decision.",
+      "assessment": "The player distinguishes cause from appearance and can explain a reserve choice. The family call and known-sender Noor message occur through an available link and are never needed to solve an undisclosed equation.",
+      "accessibility": "The planned event can be untimed; camera motion is optional; the red ring has a labelled diagram and spoken/text description. Family/assisted modes retain the emotional payoff.",
+      "scienceBoundary": "The NASA catalog lists a total lunar eclipse on January 12, 2047. Aurora's camera geometry and local visibility remain authored; Bangladesh appears on a conceptual diagram, not as a resolved stripe around Earth.",
+      "sourceRefs": [
+        "SRC-ECLIPSE",
+        "SRC-ECLIPSE-DATE",
+        "SRC-LIFE-SUPPORT"
+      ]
+    },
+    {
+      "chapter": 7,
+      "question": "How does a competent team revise its protection plan when the situation differs from its first successful night?",
+      "misconception": "A previous four-person plan can be copied for five people without revision; a solar storm is visible weather; a famous historical event supplies an exact lunar dose; an isolated radio means all local systems must have failed.",
+      "predict": "The player compares the first-night plan with the present five-person shelter ledger and predicts which assumptions no longer hold. The historical source card identifies the 2012 event as a counterfactual replay, not a new observation from 2047.",
+      "test": "Recalculate the occupied shelter, protect the thirty founder-reserve seeds and garden continuity, rehearse one changed shielding allocation and operate the six model steps across three authored waves. After exposure, use local diagnostics to separate an uplink-controller fault from intact station radios.",
+      "observe": "Changing occupancy changes demand. Shelter and plant results follow the committed model rather than an unexplained story override. Noor's last log is a stored recording. A damaged external path blocks Earth while the crew can still speak locally and maintain safe base operation.",
+      "explain": "The player identifies a changed assumption, a justified adaptation and the difference between a source event and the simplified station consequences. The maintenance ledger carries the unresolved communications fault into the final chapter.",
+      "transfer": "When reusing a plan, explicitly check what changed: participants, duration, environment and supplies. A successful earlier solution is evidence, not permission to ignore a new constraint.",
+      "evidenceArtifact": "A four-versus-five-occupant comparison; a protected founder-reserve entry; a six-step response record; an external-uplink fault report with a stable local-operation plan.",
+      "assessment": "The player can revise rather than blindly copy a plan and can localize the communications failure. The causal review never requires deliberately exposing people or plants to collect a log.",
+      "accessibility": "Wave advancement requires explicit confirmation; shelter roll calls use names and text; all critical advice is available locally while Earth is disconnected.",
+      "scienceBoundary": "STEREO-A measured the July 2012 event. Its effect on this fictional lunar base, the three waves, scores and controller failure are scenario rules, not a measured lunar exposure or an Earth-grid EMP transplanted to the Moon.",
+      "sourceRefs": [
+        "SRC-STORM2012",
+        "SRC-SHIELDING",
+        "SRC-LIFE-SUPPORT",
+        "SRC-RELAY"
+      ]
+    },
+    {
+      "chapter": 8,
+      "question": "Can the crew combine everything it has learned into a plan that brings the travellers home, keeps the garden alive and restores a real chain of communication?",
+      "misconception": "Seeing Earth from a high summit automatically connects a hidden base; the rover needs supplies only for the outward leg; a camera cut moves a person; every flower in the finale is the original Alo.",
+      "predict": "Before departure the player writes the complete outbound, repair and return plan, and separately forecasts base occupancy. The communications diagram must contain both Aurora-to-Malapert and Malapert-to-Earth links.",
+      "test": "Use the prepared road and repeaters, preserve the return reserve, compare bearings, diagnose and repair the controller and confirm both relay links. In alternating authored viewpoints, the base pair checks the garden while the rover team works. After the call, the return and final three-hour five-person base period are actually reconciled.",
+      "observe": "A summit-only link can reach Earth but cannot carry Aurora's report until the local chain works. The 24-hour outward leg, three-hour repair and 24-hour return total 51 fictional hours within 72 hours of provisions. Family-tree labels distinguish Alo's descendants, Tara's contribution and the December cotton.",
+      "explain": "The final report asks the player to support a success claim with one piece of biological evidence, one resource check and one communications test. Noor's live answer is the consequence of a completed engineering chain and a consensual human invitation.",
+      "transfer": "Draw the whole dependency path for a familiar system, then check every link and the return/recovery plan. A completed task includes handing over the evidence, not only making a device appear to work.",
+      "evidenceArtifact": "A two-link confirmation record; the 51-within-72-hour travel ledger; the two-then-five-person night check; an annotated living-garden lineage and shared expedition report.",
+      "assessment": "The player independently combines tools taught earlier, explains why both links were needed and reconciles all occupants and reserves. Same narrative success is available with driving, reading and timer assistance.",
+      "accessibility": "Safe viewpoint changes preserve each team's location; navigation and aiming have named step controls; long cruise is compressed; captions and a connection diagram make the call understandable without hearing.",
+      "scienceBoundary": "The 120-kilometre road, relay hardware, exact sky windows and travel schedule are fiction. Actual radio planning requires terrain, antenna and propagation analysis. The first self-renewing garden achievement belongs to this fictional history.",
+      "sourceRefs": [
+        "SRC-RELAY",
+        "SRC-POLAR",
+        "SRC-PLANTS",
+        "SRC-LIFE-SUPPORT",
+        "SRC-COTTON2019"
+      ]
+    }
+  ],
+  "continuityLocks": [
+    {
+      "id": "LOCK-01",
+      "topic": "Mandatory pacing",
+      "rule": "All 32 missions and 96 scenes belong to one main route totaling 720 target active minutes. No side content is counted toward 10–14 hours.",
+      "check": "Sum every scene, three-scene mission, chapter and pacing range."
+    },
+    {
+      "id": "LOCK-02",
+      "topic": "Young audience, qualified crew",
+      "rule": "Kai and Mei are 19; Amara and Rafi are 20. The junior learner controls qualified fictional young adults supported by command and emergency procedures.",
+      "check": "No unsupervised child astronaut claim or crew-first moral exception."
+    },
+    {
+      "id": "LOCK-03",
+      "topic": "Ferreira's presence",
+      "rule": "Ferreira is on Earth until her December 8–12 transit and physically at Aurora from December 12. Chapter 4 has only Rafi and Kai in the rover; Chapter 8 rover crew is Ferreira, Kai and Rafi.",
+      "check": "No touch, physical handover or local footsteps before arrival; five lunar occupants afterward."
+    },
+    {
+      "id": "LOCK-04",
+      "topic": "Rao and Noor",
+      "rule": "Rao and Noor remain Earth-based. Label archive recordings, queued messages, live remote links and local speech. Noor's first live voice is Chapter 8.",
+      "check": "No live Earth reply after a failed uplink; no archive pretending to know a new observation."
+    },
+    {
+      "id": "LOCK-05",
+      "topic": "A fair mystery",
+      "rule": "The Chapter 5 discovery connects N., the seed legacy, the 2034 trial and Noor's Academy role. Noor's name is not a magically secret public fact. Earlier incomplete acquired records and personal reluctance pace the connection; safety information is supplied promptly and nobody falsely says a crew member died.",
+      "check": "Earlier dialogue cannot reveal the personal connection or invent a false death to preserve suspense."
+    },
+    {
+      "id": "LOCK-06",
+      "topic": "The two founders",
+      "rule": "Alo and Tara are planted April 11, 2046. Alo blooms April 27; Tara flowers by April 30. Compatible reciprocal transfers and dated care occur April 30–May 6. Tara is an equal biological parent, not an incidental decoration.",
+      "check": "No pollen transfer before flowering, vacuum pollination or immediate seed harvest."
+    },
+    {
+      "id": "LOCK-07",
+      "topic": "Alo's natural ending",
+      "rule": "Pods mature before the dated dry-down; May 21 harvest gives exactly 42 founder seeds, allocated as 12 planted and 30 reserve. Original Alo dies naturally; later gardens contain descendants and a preserved petal, never a revived individual.",
+      "check": "42 = 12 + 30; no scene after harvest attributes new actions to living original Alo."
+    },
+    {
+      "id": "LOCK-08",
+      "topic": "Old garden",
+      "rule": "The 2034 annex contains frozen young, unflowered seedlings with curled leaves only: no flower buds, open flowers, pollination or seed production. No earlier bloom precedes Alo's fictional first bloom. The vault was deposited during an earlier survey, not an impossible last-minute evacuation journey.",
+      "check": "Archive dates and biological stages agree with the discovery."
+    },
+    {
+      "id": "LOCK-09",
+      "topic": "Vault and cotton",
+      "rule": "The recovered vault contains twelve distinct specimen types. Cotton is planted on December 15, leaving eleven other specimens stored. A sixteen-entry album is a separate record and never creates physical seeds.",
+      "check": "12 = 1 + 11; cotton is not planted at the finale and instantly mature."
+    },
+    {
+      "id": "LOCK-10",
+      "topic": "Chapter 4 field split",
+      "rule": "Rafi and Kai travel; Mei and Amara remain at Aurora with map and base duties. Communication is by a tested local path, not an Earth controller replacing the field observations.",
+      "check": "No third cadet joins the rover and no base cadet appears in the vault chamber."
+    },
+    {
+      "id": "LOCK-11",
+      "topic": "Historical sources",
+      "rule": "Chapter 1 explicitly replays the September 2017 record. Chapter 7 explicitly asks what if the July 2012 event had affected the fictional Moon base. Their region numbers, records and effects are not relabelled as measured 2046–47 weather.",
+      "check": "Observed source and simulated consequence appear as distinct evidence labels."
+    },
+    {
+      "id": "LOCK-12",
+      "topic": "Eclipse",
+      "rule": "The January 12, 2047 calendar eclipse is sourced. Aurora's exact visibility is not verified; an external-camera/conceptual illustration treatment preserves the scene. The five-segment plan remains consistent across dialogue and objectives.",
+      "check": "No universal local duration, naked-eye guarantee or resolved Bangladesh stripe."
+    },
+    {
+      "id": "LOCK-13",
+      "topic": "Earth outage",
+      "rule": "Chapter 7 damages the external uplink. Local station/suit radios and life-support remain functional. February–April explicitly show stable care, supplies and relay preparation; no live Earth response crosses the broken path.",
+      "check": "The finale repairs an unresolved link rather than a radio already repaired offscreen."
+    },
+    {
+      "id": "LOCK-14",
+      "topic": "Final travel",
+      "rule": "Depart April 8 00:00; reach Malapert April 9 00:00; repair until 03:00; arrive home April 10 03:00; dawn April 10 06:00. Outward 24 + repair 3 + return 24 = 51 fictional hours, covered by 72-hour provisions.",
+      "check": "No instant rover journey or forgotten return; dates never run backward."
+    },
+    {
+      "id": "LOCK-15",
+      "topic": "Final occupants",
+      "rule": "Mei and Amara occupy Aurora during the first 33 hours of the final 36-hour night. Ferreira, Kai and Rafi return for its last 3 hours. Base and rover ledgers count people separately.",
+      "check": "No four-person baseline after Ferreira arrives; two then five at finale."
+    },
+    {
+      "id": "LOCK-16",
+      "topic": "Both radio links",
+      "rule": "The final relay needs a tested Aurora-to-Malapert path and a working Malapert-to-Earth path. Earth visibility from a summit alone does not connect a hidden base.",
+      "check": "Controller repair, local path and Earth acquisition all have explicit confirmation."
+    },
+    {
+      "id": "LOCK-17",
+      "topic": "Physical presentation",
+      "rule": "Gardens are sealed and pressurized; raw regolith is not fertile potting soil; no airborne vacuum sounds, wind, clouds or atmospheric meteor streaks. A small experiment does not make all crew food or oxygen.",
+      "check": "Prose, dialogue, actions and requested art obey the same environment."
+    },
+    {
+      "id": "LOCK-18",
+      "topic": "Safe outcomes",
+      "rule": "Golden Bloom/Bloom advance this expedition. Alo lost and Mission stopped receive complete compassionate closures followed by a local checkpoint retry; assistance provides equal access. No irreversible moral choice asks the player to sacrifice crew for a flower.",
+      "check": "All downstream scenes have the success conditions they require; loss does not silently create a living founder."
+    },
+    {
+      "id": "LOCK-19",
+      "topic": "Three clocks",
+      "rule": "Active player time, fictional mission time and historical-source time are visibly distinct. Confirmed dated transitions advance biological growth, long travel and resupply; pause and reading spend no survival resources.",
+      "check": "No three-minute flower growth, unexplained five-month hunger or real-time waiting."
+    },
+    {
+      "id": "LOCK-20",
+      "topic": "A complete ending",
+      "rule": "Both teams return, the renewing garden survives, cotton is alive, Noor chooses to answer and the shared report closes the expedition. MARS is only a brief after-credits possibility.",
+      "check": "No required side objective, collection count or sequel hook withholds the ending."
+    }
+  ],
+  "sourceCards": [
+    {
+      "id": "SRC-MOON",
+      "title": "Moon facts",
+      "publisher": "NASA Science",
+      "url": "https://science.nasa.gov/moon/facts/",
+      "supports": "The Moon has an extremely tenuous, non-breathable exosphere and an exposed impact environment.",
+      "boundary": "This does not validate Aurora's engineering or authored weather schedule.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-POLAR",
+      "title": "Shackleton's illuminated rim and shadowed interior",
+      "publisher": "NASA Science / GSFC / ASU",
+      "url": "https://science.nasa.gov/resource/shackleton-craters-illuminated-rim-shadowed-interior/",
+      "supports": "Low polar Sun angles and local terrain produce strong illumination contrasts and permanent shadows.",
+      "boundary": "No single Aurora coordinate, 36-hour window, consecutive-sunlight claim or direct-Earth window is verified here.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-LIFE-SUPPORT",
+      "title": "Life support subsystems",
+      "publisher": "NASA Johnson Space Center",
+      "url": "https://www.nasa.gov/reference/jsc-life-support-subsystems/",
+      "supports": "Oxygen generation, carbon-dioxide removal, monitoring and water recovery are distinct life-support functions.",
+      "boundary": "Game air, energy and water units are teaching abstractions, not certified ECLSS performance values.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-PLANTS",
+      "title": "Fast Plants frequently asked questions",
+      "publisher": "Wisconsin Fast Plants / University of Wisconsin–Madison",
+      "url": "https://fastplants.org/frequently-asked-questions/",
+      "supports": "Selected rapid-cycling Brassica lines can flower and produce harvestable seeds quickly under ideal controlled growing conditions; storage, cultivar and growing conditions affect results.",
+      "boundary": "The game's exact dates, lunar cultivation and 42-seed harvest are fiction. Ideal terrestrial timing is not a guarantee for every mustard plant.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-POLLINATION",
+      "title": "Pollination and cross-pollination",
+      "publisher": "Wisconsin Fast Plants / University of Wisconsin–Madison",
+      "url": "https://www.fastplants.org/pdf/activities/WFP_growth-development-06web.pdf",
+      "supports": "Pollen moves from anther to stigma; self-incompatible Fast Plants need a compatible partner and can be pollinated by a handled tool.",
+      "boundary": "The selected compatible cultivar and sealed lunar carrier are narrative design choices. Do not generalize self-incompatibility to all flowering plants.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-QUAKES",
+      "title": "Moonquakes and faults near the lunar south pole",
+      "publisher": "NASA / LROC / Smithsonian",
+      "url": "https://www.nasa.gov/solar-system/moon/shrinking-moon-causing-moonquakes-and-faults-near-lunar-south-pole/",
+      "supports": "Apollo seismic records and terrain studies support lunar quake and fault hazards, including possible south-polar hazards with location uncertainty.",
+      "boundary": "The story's quake, leak, annex failure and dates are fictional; Apollo instruments were not a surface station at Aurora.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-ICE",
+      "title": "LCROSS mission and polar water evidence",
+      "publisher": "NASA Science",
+      "url": "https://science.nasa.gov/mission/lcross/",
+      "supports": "LCROSS investigated a permanently shadowed south-polar crater and found evidence of water and other materials in excavated debris.",
+      "boundary": "Evidence at a studied location does not establish accessible ice everywhere or instantly usable drinking water. The game's vault/sample site is fictional.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-IMPACTS",
+      "title": "Lunar impact monitoring",
+      "publisher": "NASA Meteoroid Environment Office",
+      "url": "https://www.nasa.gov/meteoroid-environment-office/lunar-impact-monitoring/",
+      "supports": "Synchronized observations from two telescopes help distinguish lunar impact flashes from noise and cosmic-ray artifacts.",
+      "boundary": "The chapter's observation set and success count are authored. Impact flashes are not atmospheric meteor streaks.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-ECLIPSE",
+      "title": "Eclipses and the Moon",
+      "publisher": "NASA Science",
+      "url": "https://science.nasa.gov/moon/eclipses/",
+      "supports": "A lunar eclipse places the Moon in Earth's shadow; sunlight filtered through Earth's atmosphere can illuminate it with red/orange light.",
+      "boundary": "A conceptual Earth-limb illustration is not a resolved view of Bangladesh and does not prove Aurora's line of sight.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-ECLIPSE-DATE",
+      "title": "Lunar eclipse catalog 2001–2100",
+      "publisher": "NASA GSFC / Fred Espenak",
+      "url": "https://eclipse.gsfc.nasa.gov/LEcat5/LE2001-2100.html",
+      "supports": "The catalog lists a total lunar eclipse on January 12, 2047.",
+      "boundary": "The catalog's global event listing and time standard do not determine local visibility, terrain obstruction or the fictional chapter's five teaching-segment durations.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-STORM2012",
+      "title": "The big CME that missed Earth",
+      "publisher": "NASA Scientific Visualization Studio",
+      "url": "https://svs.gsfc.nasa.gov/4167/",
+      "supports": "The July 2012 event was not directed at Earth and impacted STEREO-A, which supplied measurements.",
+      "boundary": "Chapter 7 is a counterfactual Moon-base replay. The three waves, crew scores, damage and fictional 2047 date are not an observed lunar outcome.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-STORM2017",
+      "title": "September 2017 solar storm at Mars",
+      "publisher": "NASA Jet Propulsion Laboratory",
+      "url": "https://www.jpl.nasa.gov/news/large-solar-storm-sparks-global-aurora-and-doubles-radiation-levels-on-the-martian-surface/",
+      "supports": "MAVEN and Curiosity detected effects of the September 2017 solar activity, including increased surface radiation measured by RAD.",
+      "boundary": "Mars measurements are not the Moon's dose. DONKI event metadata, lunar CRaTER measurements and Mars RAD records must retain distinct instrument contexts.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-SHIELDING",
+      "title": "Materials and protection from space radiation",
+      "publisher": "NASA",
+      "url": "https://www.nasa.gov/science-research/heliophysics/real-martians-how-to-protect-astronauts-from-space-radiation-on-mars/",
+      "supports": "Water and other already-required materials can contribute to shelter designs, connecting life-support storage with radiation protection.",
+      "boundary": "Protection depends on particles, spectrum, material, geometry and thickness. No fixed game-score conversion or universal water-wall guarantee is supported.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-RELAY",
+      "title": "Moonlight and south-polar communications",
+      "publisher": "European Space Agency",
+      "url": "https://www.esa.int/Applications/Connectivity_and_Secure_Communications/Moonlight2",
+      "supports": "Terrain and curvature can block direct surface-to-Earth line of sight; relays can connect otherwise obstructed lunar users.",
+      "boundary": "Aurora's road, ground repeaters and hardware are fictional. A real link requires location, antenna and propagation analysis; future satellite-service availability is not assumed.",
+      "checkedOn": "2026-10-25"
+    },
+    {
+      "id": "SRC-COTTON2019",
+      "title": "Chang'e-4 cotton germination: experiment-team report",
+      "publisher": "Qiu, Jian, Zhang and Xie / Chongqing University; International Journal of Molecular Sciences (2021)",
+      "url": "https://doi.org/10.3390/ijms222111723",
+      "supports": "Section 4.2 reports the authors' Chang'e-4 biological experiment: a cotton seed germinated and developed a green seedling on the Moon in 2019.",
+      "boundary": "This supports the historical sealed-experiment achievement, not a future first-flower forecast, a certified tissue-death temperature or the performance of Aurora's fictional garden. Germination, flowering and a renewing seed-producing garden are distinct milestones.",
+      "checkedOn": "2026-10-25"
+    }
+  ],
+  "verificationStatus": {
+    "sourceReview": "Primary-source pages reviewed on 2026-10-25; claims above are deliberately bounded to their cited support.",
+    "documentAudit": "Completed 25 October 2026: all 96 scene narratives, dialogue sets, choices and exit conditions read; 32 mission decision groups, 720-minute arithmetic, chronology, character knowledge/presence, biology, physical inventories and travel/link dependencies reviewed. Findings identified during drafting were corrected and rechecked in the hashed final narrative files. No unresolved contradiction was found within this document-review scope; this is not a guarantee of error-free implementation.",
+    "runtime": "No playable engine build, processed NASA dataset, validated local-sky or radio-route computation, localization review or measured playtime is supplied by this story package. HTML behavior and rendering are checked separately by the parent.",
+    "auditedNarrativeHashes": {
+      "chapters-1-4.json": "6e66b6fae4ed52c0310ce81b7a8fe1f0ae7c1091bd3637c9eeae47dd2d431ef0",
+      "chapters-5-8.json": "4dcf70e6a5b983bdfbbca0c1ba0e39fc8019d422ba1f8de8cc300548a06ec62c"
+    }
+  }
+}

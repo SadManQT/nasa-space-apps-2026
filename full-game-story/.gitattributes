@@ -1,0 +1,2 @@
+# Keep package manifests and audit fingerprints valid on every checkout.
+* -text
