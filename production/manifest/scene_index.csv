@@ -1,0 +1,97 @@
+chapter,mission,scene,legacy_scene,title,minutes,location,story_time,evidence
+1,EX-M0101,EX-CH01-S01,SC-0101,Sunlight We Cannot Keep,6,Aurora mission table,2046-04-11 06:00 UTC,Simulated
+1,EX-M0101,EX-CH01-S02,SC-0101,The Rule That Works Without Earth,6,Mission table and Safe Room doorway,2046-04-11 07:00 UTC,Simulated
+1,EX-M0101,EX-CH01-S03,SC-0102,A Label Older Than Our Names,6,Dry-storage drawer and calibration bench,2046-04-11 10:00 UTC,Simulated
+1,EX-M0102,EX-CH01-S04,SC-0102,Two Places for a Beginning,6,Garden glove ports and indoor reference bay,2046-04-11 late morning UTC,Simulated
+1,EX-M0102,EX-CH01-S05,SC-0103,An Important Scientific Lamp,6,Aurora corridor and care station,2046-04-11 evening through April 24 UTC,Fiction
+1,EX-M0102,EX-CH01-S06,SC-0103,The Night Has a Shape,6,Mission table and horizon display,2046-04-25 03:36 UTC,Computed-pending
+1,EX-M0103,EX-CH01-S07,SC-0104,Air Before the Jar Spills,6,Air console and mast status panel,2046-04-25 daylight shifts 1-2 UTC,Simulated
+1,EX-M0103,EX-CH01-S08,SC-0104,Borrowing Includes Returning,6,Safe Room practice interface,"2046-04-25 within daylight shift 2, before 18:00 UTC",Simulated
+1,EX-M0103,EX-CH01-S09,SC-0105,The Horizon Closes One Door,6,Mission table and Earth-facing viewport,2046-04-25 18:00 onward; dark shifts 3-4 UTC,Simulated
+1,EX-M0104,EX-CH01-S10,SC-0105,The Choice Inside the Rules,7,Safe Room and response controls,Dark shift 5; historical 2017 event replay UTC,Simulated
+1,EX-M0104,EX-CH01-S11,SC-0105,Send the Water Home,7,Garden service line and mission table,Dark shifts 6-7 through 2046-04-27 06:00 UTC,Simulated
+1,EX-M0104,EX-CH01-S12,SC-0106,Alo Needs a Friend,7,Chamber shutter and Tara reference bay,2046-04-27 06:00 UTC,Fiction
+2,EX-M0201,EX-CH02-S01,SC-0201,The Star in the Other Room,6,Tara reference bay and Earth console,2046-04-30 morning UTC,Simulated
+2,EX-M0201,EX-CH02-S02,SC-0201,A Bee Is More Than a Costume,6,Indoor botanical bench,2046-04-30 morning UTC,Simulated
+2,EX-M0201,EX-CH02-S03,SC-0202,The Route Must Keep Its Air,6,Garden service corridor and transfer interlock,2046-04-30 before the first bee run UTC,Simulated
+2,EX-M0202,EX-CH02-S04,SC-0202,The First Reciprocal Run,6,"Tara bench, transfer route and Alo glove ports",2046-04-30 first flowering-care day UTC,Simulated
+2,EX-M0202,EX-CH02-S05,SC-0202,"Seven Dates, Three Visits",6,Paired care stations and transfer route,2046-05-01 through May 06 UTC,Simulated
+2,EX-M0202,EX-CH02-S06,SC-0202,A Prediction Is Not a Promise,6,Paired plant observation bench,2046-05-06 midday UTC,Simulated
+2,EX-M0203,EX-CH02-S07,SC-0203,Not Tomorrow's Seeds,6,Aurora mission table,2046-05-06 afternoon UTC,Simulated
+2,EX-M0203,EX-CH02-S08,SC-0204,A Label Under a Label,6,Recorder service bench,2046-05-06 late afternoon UTC,Fiction
+2,EX-M0203,EX-CH02-S09,SC-0205,The File That Belongs Here,6,Local evidence reconstruction board,2046-05-06 early evening UTC,Simulated
+2,EX-M0204,EX-CH02-S10,SC-0205,A Voice With Younger Edges,7,Recorder playback station,2046-05-06 evening UTC,Fiction
+2,EX-M0204,EX-CH02-S11,SC-0205,"Send a Copy, Keep the Question",7,Aurora Earth-link console,2046-05-06 before 22:00 UTC,Fiction
+2,EX-M0204,EX-CH02-S12,SC-0206,The Floor Answers First,7,Interior brace zone beside mission table,2046-05-06 22:00 UTC,Fiction
+3,EX-M0301,EX-CH03-S01,SC-0301,The Red Shape on the Screen,6,Atmosphere service corridor,2046-05-06 22:05 UTC,Simulated
+3,EX-M0301,EX-CH03-S02,SC-0301,"Three Taps, One Falling Line",7,Atmosphere diagnostic taps,2046-05-06 22:10 UTC,Simulated
+3,EX-M0301,EX-CH03-S03,SC-0302,Choose the Smallest Safe Boundary,7,Isolation preview board,2046-05-06 late evening UTC,Simulated
+3,EX-M0302,EX-CH03-S04,SC-0302,The Clamp and the Read-Back,7,Garden service spur,2046-05-06 night through May 07 early hours UTC,Simulated
+3,EX-M0302,EX-CH03-S05,SC-0302,Five Checks Before a Quiet Room,7,Atmosphere console and restored garden spur,2046-05-07 before dawn UTC,Simulated
+3,EX-M0302,EX-CH03-S06,SC-0303,A Door We Knew Was There,7,Isolated annex viewing port,2046-05-07 morning UTC,Fiction
+3,EX-M0303,EX-CH03-S07,SC-0304,The Garden That Never Opened,7,Cold annex and warm-side support station,2046-05-08 after extended checks UTC,Fiction
+3,EX-M0303,EX-CH03-S08,SC-0304,A Map Is a Plan to Verify,7,Annex chart archive and habitat evidence table,2046-05-08 through May 16 care transition UTC,Simulated
+3,EX-M0303,EX-CH03-S09,SC-0305,The Pod Is Not Ready Because We Are,7,Garden maturity and drying bench,2046-05-16 UTC,Simulated
+3,EX-M0304,EX-CH03-S10,SC-0305,Forty-Two Sounds on a Tray,7,Dry-harvest bench,2046-05-21 UTC,Simulated
+3,EX-M0304,EX-CH03-S11,SC-0306,The Next Small Thing,8,Garden planting rack and reserve store,2046-05-21 after harvest UTC,Simulated
+3,EX-M0304,EX-CH03-S12,SC-0306,Five Months Are Made of Days,8,Aurora dated maintenance and lineage board,2046-05-21 through October 21 UTC,Fiction
+4,EX-M0401,EX-CH04-S01,SC-0401,What Actually Grew,7,Aurora descendant rack and prediction notebook,2046-10-21 06:00 UTC,Simulated
+4,EX-M0401,EX-CH04-S02,SC-0401,"Two Seats Out, Two Voices Home",7,Rover bay and base handover screen,2046-10-21 before departure UTC,Simulated
+4,EX-M0401,EX-CH04-S03,SC-0402,The Short Road Is Not the Safe Road,8,Shared route preview and rover navigation display,2046-10-21 departure UTC,Simulated
+4,EX-M0402,EX-CH04-S04,SC-0402,Put the Link Before the Corner,7,Surveyed ridge and three beacon positions,2046-10-21 morning UTC,Simulated
+4,EX-M0402,EX-CH04-S05,SC-0402,A Bright Patch Is Not a Report,7,Cold-trap reference and sample stations,2046-10-21 morning UTC,Simulated
+4,EX-M0402,EX-CH04-S06,SC-0403,Something With Corners,8,Cold-trap sample point and vault approach,2046-10-21 10:30 UTC,Fiction
+4,EX-M0403,EX-CH04-S07,SC-0404,The Lid Can Wait,7,Vault recovery work boundary,2046-10-21 late morning UTC,Simulated
+4,EX-M0403,EX-CH04-S08,SC-0404,The Whole Box Comes Home,7,"Vault cradle, rover cargo mount and local link",2046-10-21 late morning UTC,Simulated
+4,EX-M0403,EX-CH04-S09,SC-0404,Bring Back the Evidence and the People,8,Ridge return route and Aurora airlock,2046-10-21 through October 22 UTC,Simulated
+4,EX-M0404,EX-CH04-S10,SC-0405,"Twelve Wells, Twelve Questions",8,Dry quarantine glovebox,2046-10-22 after controlled sealed warming UTC,Simulated
+4,EX-M0404,EX-CH04-S11,SC-0405,Ask Commander Ferreira,8,Glovebox scan station and Earth console,2046-10-22 valid Earth contact window UTC,Fiction
+4,EX-M0404,EX-CH04-S12,SC-0406,A Fifth Mug Has a Journey,8,"Mission table, reliefmanifest and preparedlocker",2046-10-22 through December 12 UTC,Fiction
+5,EX-M0501,EX-CH05-S01,SC-0501,The Fifth Mug,6,Landing camera and airlock,"12 December 2046, scheduled arrival",Fiction
+5,EX-M0501,EX-CH05-S02,SC-0501,The Watch She Takes,7,Aurora corridor and atmosphere panel,"12 December, after arrival",Simulated
+5,EX-M0501,EX-CH05-S03,SC-0502,The Order We Left In,7,Aurora mission table,"14 December, afternoon",Fiction
+5,EX-M0502,EX-CH05-S04,SC-0502,A Garden That Had Not Flowered,6,Archive images at the mission table,"14 December, afternoon",Simulated
+5,EX-M0502,EX-CH05-S05,SC-0503,What I Didn't Say,7,"Aurora table, shared seating","14 December, late afternoon",Fiction
+5,EX-M0502,EX-CH05-S06,SC-0503,Two Kinds of Repair,7,Local records desk and spare locker,"14 December, before night observation",Simulated
+5,EX-M0503,EX-CH05-S07,SC-0504,Stars Without Streaks,8,Aurora impact-camera monitor,"14 December, night observation",Simulated
+5,EX-M0503,EX-CH05-S08,SC-0504,Dust Has a Cost,9,Maintenance console and isolated garden spur,"14 December, scheduled maintenance",Simulated
+5,EX-M0503,EX-CH05-S09,SC-0504,What the Flashes Cannot Prove,8,Aurora evidence table,"14 December, after maintenance",Simulated
+5,EX-M0504,EX-CH05-S10,SC-0505,The Name on the Page,6,"Mission table, live Earth data link","14 December, later",Fiction
+5,EX-M0504,EX-CH05-S11,SC-0505,"An Invitation, Not an Answer Owed",7,Message composer at the mission table,"14 December, after the reveal",Fiction
+5,EX-M0504,EX-CH05-S12,SC-0506,One More Seed,7,Aurora indoor reference bay,15 December; dated care into January,Simulated
+6,EX-M0601,EX-CH06-S01,SC-0601,The Lamp Is Still Here,6,"Power room, hand-light locker","12 January 2047, before eclipse preparation",Fiction
+6,EX-M0601,EX-CH06-S02,SC-0601,A Memory With a Switch,7,"Power room, dated personal log","12 January, calm planning interval",Fiction
+6,EX-M0601,EX-CH06-S03,SC-0602,The Seven-Unit Promise,7,"Power room, eclipse allocation board","12 January, forecast rehearsal",Simulated
+6,EX-M0602,EX-CH06-S04,SC-0602,The Brightest Plan Is Not the Best Plan,8,"Power room, side-by-side preview","12 January, uncommitted rehearsal",Simulated
+6,EX-M0602,EX-CH06-S05,SC-0603,A Fault Before It Matters,9,Protected-bus test panel,"12 January, pre-observation test",Simulated
+6,EX-M0602,EX-CH06-S06,SC-0603,Ready Is a Shared Word,8,Aurora mission table and filtered camera,"12 January, ingress readiness",Computed-pending
+6,EX-M0603,EX-CH06-S07,SC-0604,The Red Ring,6,Filtered remote-camera monitor,"12 January, authored eclipse observation window",Computed-pending
+6,EX-M0603,EX-CH06-S08,SC-0604,A Call Within the Window,7,"Mission table, Earth family audio link","12 January, scenario-valid Earth-contact window",Fiction
+6,EX-M0603,EX-CH06-S09,SC-0604,A Name Signed Twice,7,Aurora message log and eclipse desk,"12 January, before feeder interruption",Fiction
+6,EX-M0604,EX-CH06-S10,SC-0605,The Next Light,6,"Power room, camera feeder F2","12 January, protected transfer",Simulated
+6,EX-M0604,EX-CH06-S11,SC-0605,Egress Is a Result,7,Restored camera and debrief board,"12 January, egress and recovery",Simulated
+6,EX-M0604,EX-CH06-S12,SC-0606,Keep Watching,7,Aurora monitoring calendar and garden,"13 January–14 February, explicit dated transition",Fiction
+7,EX-M0701,EX-CH07-S01,SC-0701,A Warning We Share,8,Aurora mission table,"14 February 2047, before 06:00",Simulated
+7,EX-M0701,EX-CH07-S02,SC-0701,The Fifth Seat Changes the Sum,8,Life-support board and shelter roster,"14 February, forecast preparation",Simulated
+7,EX-M0701,EX-CH07-S03,SC-0702,"One Plan, Not Four Good Intentions",9,Integrated storm planning table,"14 February, uncommitted six-step forecast",Simulated
+7,EX-M0702,EX-CH07-S04,SC-0702,What Gets the Last Drop,8,Shelter water wall and seed case,"14 February, final preparation",Simulated
+7,EX-M0702,EX-CH07-S05,SC-0703,Everyone Inside,9,Aurora Safe Room,"14 February, first-wave readiness",Simulated
+7,EX-M0702,EX-CH07-S06,SC-0704,The First Wave Has a Ledger,8,Safe Room local telemetry,"14 February 06:00 onward, steps 1–2",Simulated
+7,EX-M0703,EX-CH07-S07,SC-0704,The Last Log,10,Safe Room archive player and forecast table,"First-wave lull, after step 2",Fiction
+7,EX-M0703,EX-CH07-S08,SC-0704,The Highest Line on the Chart,10,Safe Room integrated control panel,Steps 3–6;14 February–16 February 01:12,Simulated
+7,EX-M0703,EX-CH07-S09,SC-0705,A Different Silence,10,Aurora local network and uplink diagnostic,"16 February, after 01:12 through the separated clearance-reading interval",Simulated
+7,EX-M0704,EX-CH07-S10,SC-0706,A Base That Can Wait Safely,8,Aurora maintenance and care planning desk,"16 February–March, dated stable-operation gates",Simulated
+7,EX-M0704,EX-CH07-S11,SC-0706,Make the Road Hear Us,9,Local fabrication bench and surveyed-route simulator,"March–7 April, authored preparation",Simulated
+7,EX-M0704,EX-CH07-S12,SC-0706,Who Stays With the Garden,8,Aurora departure board and rover loadout,7 April to 8 April 00:00,Simulated
+8,EX-M0801,EX-CH08-S01,SC-0801,Before the Road,10,Aurora rover bay and departure board,"8 April 2047,00:00 departure",Fiction
+8,EX-M0801,EX-CH08-S02,SC-0801,The Return Is Already in the Battery,10,Rover route-planning console,"8 April, departure forecast before cruise",Simulated
+8,EX-M0801,EX-CH08-S03,SC-0802,Markers in the Dark,10,"Surveyed rover road, first repeater sector","8 April,00:00–10:00 represented by gated cruise",Simulated
+8,EX-M0802,EX-CH08-S04,SC-0802,The Small Light That Carries a Voice,10,Marker-two service pad and repeater chain,"8 April,10:00–17:00 including compressed onward cruise",Simulated
+8,EX-M0802,EX-CH08-S05,SC-0803,Two at Home,10,Aurora garden and life-support console,"8 April 18:00, start of final 36-hour night",Simulated
+8,EX-M0802,EX-CH08-S06,SC-0803,The Packet From the Summit,10,Aurora console and rover summit approach,8 April 18:00–9 April 00:00,Simulated
+8,EX-M0803,EX-CH08-S07,SC-0804,The Spare Has a History,10,Malapert relay service bay,"9 April 00:00–00:45, repair window",Simulated
+8,EX-M0803,EX-CH08-S08,SC-0804,A Lighthouse Needs Both Shores,10,Malapert local antenna and Earth dish controls,9 April 00:45–01:45,Computed-pending
+8,EX-M0803,EX-CH08-S09,SC-0804,Forty-Two Comes Back Correctly,10,Relay data check and Aurora acknowledgement panel,9 April 01:45–02:15,Simulated
+8,EX-M0804,EX-CH08-S10,SC-0805,"Hello, Aurora",10,"Relay rover cabin, Aurora and Noor's Earth rooftop",9 April 02:15–03:00,Fiction
+8,EX-M0804,EX-CH08-S11,SC-0805,The Same Road Home,10,Pressurised rover and Aurora arrival airlock,"9 April 03:00–10 April 03:00,24-hour return",Simulated
+8,EX-M0804,EX-CH08-S12,SC-0806,What We Grew,10,Aurora pressurised garden,"10 April 06:00, first light and complete epilogue",Fiction

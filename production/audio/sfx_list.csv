@@ -1,0 +1,36 @@
+id,description,loop,caption,first_scenes,game_file,status
+SFX_FAN_NORMAL,Station circulation fans (interior bed),yes,,EX-CH01-S01,game/assets/audio/sfx/SFX_FAN_NORMAL.ogg,todo
+SFX_FAN_LOWPOWER,Fans on reduced power (night / eclipse),yes,,EX-CH01-S09,game/assets/audio/sfx/SFX_FAN_LOWPOWER.ogg,todo
+SFX_GREENHOUSE_FAN,Garden chamber fan and grow-lamp hum,yes,,EX-CH01-S04,game/assets/audio/sfx/SFX_GREENHOUSE_FAN.ogg,todo
+SFX_PUMP_PRESSURE,Pressure pump running,yes,[pump running],EX-CH01-S08,game/assets/audio/sfx/SFX_PUMP_PRESSURE.ogg,todo
+SFX_WATER_TRANSFER,Water moving through the wall lines,yes,[water transferring],EX-CH01-S08,game/assets/audio/sfx/SFX_WATER_TRANSFER.ogg,todo
+SFX_VALVE_DETENT,Valve click into position,no,[valve set],EX-CH01-S08,game/assets/audio/sfx/SFX_VALVE_DETENT.ogg,todo
+SFX_GLOVE_PORT,Hands entering glove ports (rubber contact),no,,EX-CH01-S04,game/assets/audio/sfx/SFX_GLOVE_PORT.ogg,todo
+SFX_BRUSH_CONTACT,Soft pollination brush contact,no,,EX-CH02-S04,game/assets/audio/sfx/SFX_BRUSH_CONTACT.ogg,todo
+SFX_SEED_TICK,Dry seeds dropping into a tray,no,[seeds on the tray],EX-CH03-S10,game/assets/audio/sfx/SFX_SEED_TICK.ogg,todo
+SFX_SHUTTER_OPEN,Chamber viewing shutter sliding open,no,[shutter opens],EX-CH01-S12,game/assets/audio/sfx/SFX_SHUTTER_OPEN.ogg,todo
+SFX_DOOR_LATCH,Interior door latch,no,,EX-CH01-S02,game/assets/audio/sfx/SFX_DOOR_LATCH.ogg,todo
+SFX_HATCH_SEAL,Shelter hatch sealing,no,[hatch sealed],EX-CH01-S10,game/assets/audio/sfx/SFX_HATCH_SEAL.ogg,todo
+SFX_AIRLOCK_CYCLE,Airlock pressure cycle (equalising),no,[airlock equalising],EX-CH02-S03,game/assets/audio/sfx/SFX_AIRLOCK_CYCLE.ogg,todo
+SFX_SUIT_BREATH,Breathing inside a suit helmet,yes,,EX-CH03-S07,game/assets/audio/sfx/SFX_SUIT_BREATH.ogg,todo
+SFX_RADIO_LOCAL_IN,Local radio channel opening (clean),no,[local radio connected],EX-CH03-S07,game/assets/audio/sfx/SFX_RADIO_LOCAL_IN.ogg,todo
+SFX_RADIO_EARTH_IN,Earth link channel opening (with latency texture),no,[Earth link connected],EX-CH01-S01,game/assets/audio/sfx/SFX_RADIO_EARTH_IN.ogg,todo
+SFX_RADIO_EARTH_LOST,Earth link fading to silence,no,[Earth link lost],EX-CH01-S09,game/assets/audio/sfx/SFX_RADIO_EARTH_LOST.ogg,todo
+SFX_RECORDER_AGED,Old recorder playback texture (archive),yes,[archive recording],EX-CH01-S12,game/assets/audio/sfx/SFX_RECORDER_AGED.ogg,todo
+SFX_ALERT_PARTICLE,Particle-event instrument alarm (not a projectile sound),no,[particle warning],EX-CH01-S10,game/assets/audio/sfx/SFX_ALERT_PARTICLE.ogg,todo
+SFX_ALERT_PRESSURE,Pressure warning tone,no,[pressure warning],EX-CH02-S12,game/assets/audio/sfx/SFX_ALERT_PRESSURE.ogg,todo
+SFX_ALERT_STRUCTURAL,Structural shaking alarm,no,[structural alarm],EX-CH02-S12,game/assets/audio/sfx/SFX_ALERT_STRUCTURAL.ogg,todo
+SFX_QUAKE_CONTACT,Moonquake felt through the floor (structure-borne only),no,[station shaking],EX-CH02-S12,game/assets/audio/sfx/SFX_QUAKE_CONTACT.ogg,todo
+SFX_CUP_RATTLE,Mug rattling on the table,no,[cup rattling],EX-CH02-S11,game/assets/audio/sfx/SFX_CUP_RATTLE.ogg,todo
+SFX_CLAMP_SEAT,Repair clamp seating on a pipe,no,[clamp seated],EX-CH03-S04,game/assets/audio/sfx/SFX_CLAMP_SEAT.ogg,todo
+SFX_CONNECTOR,Electrical connector mating,no,,EX-CH05-S06,game/assets/audio/sfx/SFX_CONNECTOR.ogg,todo
+SFX_BREAKER_RESET,Feeder isolate / reset clunk,no,[feeder reset],EX-CH06-S10,game/assets/audio/sfx/SFX_BREAKER_RESET.ogg,todo
+SFX_BATTERY_SWAP,Battery pack removal and insertion,no,,EX-CH08-S04,game/assets/audio/sfx/SFX_BATTERY_SWAP.ogg,todo
+SFX_CONTROLLER_POWERUP,Relay controller powering up,no,[controller powered],EX-CH08-S07,game/assets/audio/sfx/SFX_CONTROLLER_POWERUP.ogg,todo
+SFX_ROVER_CABIN,Pressurised rover cabin hum,yes,,EX-CH04-S02,game/assets/audio/sfx/SFX_ROVER_CABIN.ogg,todo
+SFX_ROVER_CHASSIS,Rover wheels felt through the chassis (no airborne sound),yes,,EX-CH04-S03,game/assets/audio/sfx/SFX_ROVER_CHASSIS.ogg,todo
+SFX_SCANNER_BEEP,Ice scanner reading,no,[reading recorded],EX-CH04-S05,game/assets/audio/sfx/SFX_SCANNER_BEEP.ogg,todo
+SFX_CAMERA_SHUTTER,Photo capture,no,[photo saved],EX-CH01-S12,game/assets/audio/sfx/SFX_CAMERA_SHUTTER.ogg,todo
+SFX_UI_CONFIRM,Interface confirm,no,,all,game/assets/audio/sfx/SFX_UI_CONFIRM.ogg,todo
+SFX_UI_SOFT_ERROR,Gentle error (never a humiliating buzzer),no,,all,game/assets/audio/sfx/SFX_UI_SOFT_ERROR.ogg,todo
+SFX_UI_SHIFT_COMMIT,Committing a shift / plan,no,[plan committed],EX-CH01-S07,game/assets/audio/sfx/SFX_UI_SHIFT_COMMIT.ogg,todo

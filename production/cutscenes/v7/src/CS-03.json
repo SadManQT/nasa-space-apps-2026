@@ -1,0 +1,42 @@
+{
+ "id": "CS-03",
+ "card": [
+  "Chapter 1 - Night One",
+  "Alo Needs a Friend"
+ ],
+ "shots": [
+  "shots/CS-03-A.mp4",
+  "shots/CS-03-B.mp4",
+  "shots/CS-03-C.mp4",
+  "shots/CS-03-D.mp4"
+ ],
+ "music": "music/CS-03.mp3",
+ "lines": [
+  {
+   "at": 12.0,
+   "speaker": "Mei",
+   "text": "Chamber safe. Now we open it.",
+   "file": "vo/EX-CH01-S12-L01.mp3"
+  },
+  {
+   "at": 24.0,
+   "speaker": "N. (stored recording)",
+   "text": "If you are hearing this, Alo bloomed. Good. Now Alo needs a friend.",
+   "file": "vo/EX-CH01-S12-L02.mp3",
+   "radio": true
+  },
+  {
+   "at": 35.0,
+   "speaker": "Kai",
+   "text": "Another plant was in the next room all along.",
+   "file": "vo/EX-CH01-S12-L03.mp3"
+  },
+  {
+   "at": 38.8,
+   "speaker": "Amara",
+   "text": "And it has a name. Tara.",
+   "file": "vo/EX-CH01-S12-L04.mp3"
+  }
+ ],
+ "out": "../CS-03_Alo_Needs_a_Friend"
+}

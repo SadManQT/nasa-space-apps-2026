@@ -1,0 +1,165 @@
+{
+ "_about": "Rough feature boxes [x0, y0, x1, y1] in the 2048 px flat face render (production/tools/render_face_flat.py, default framing). eyeR/browR are the character's right (viewer's left). make_toon_face.py refines each box from the paint itself. \"no_brows\": true skips the brow layers (Kai: his brows sit behind his fringe). \"render_drop\" is the --drop used for that face render.",
+ "CH_Kai": {
+  "eyeR": [
+   659,
+   1275,
+   909,
+   1410
+  ],
+  "eyeL": [
+   1174,
+   1265,
+   1449,
+   1405
+  ],
+  "browR": [
+   714,
+   1160,
+   944,
+   1250
+  ],
+  "browL": [
+   1134,
+   1155,
+   1409,
+   1240
+  ],
+  "mouth": [
+   839,
+   1745,
+   1199,
+   1780
+  ],
+  "no_brows": true
+ },
+ "CH_Mei": {
+  "eyeR": [
+   519,
+   1235,
+   834,
+   1365
+  ],
+  "eyeL": [
+   1164,
+   1235,
+   1484,
+   1365
+  ],
+  "browR": [
+   504,
+   1080,
+   864,
+   1165
+  ],
+  "browL": [
+   1124,
+   1065,
+   1484,
+   1165
+  ],
+  "mouth": [
+   819,
+   1735,
+   1164,
+   1765
+  ]
+ },
+ "CH_Rafi": {
+  "eyeR": [
+   569,
+   1115,
+   849,
+   1240
+  ],
+  "eyeL": [
+   1164,
+   1110,
+   1439,
+   1230
+  ],
+  "browR": [
+   524,
+   955,
+   899,
+   1098
+  ],
+  "browL": [
+   1109,
+   955,
+   1524,
+   1098
+  ],
+  "mouth": [
+   784,
+   1665,
+   1224,
+   1700
+  ]
+ },
+ "CH_Ferreira": {
+  "eyeR": [
+   579,
+   1195,
+   814,
+   1315
+  ],
+  "eyeL": [
+   1074,
+   1200,
+   1374,
+   1310
+  ],
+  "browR": [
+   579,
+   1090,
+   844,
+   1170
+  ],
+  "browL": [
+   1009,
+   1090,
+   1404,
+   1170
+  ],
+  "mouth": [
+   764,
+   1675,
+   1104,
+   1720
+  ]
+ },
+ "CH_Amara": {
+  "eyeR": [
+   599,
+   1095,
+   899,
+   1265
+  ],
+  "eyeL": [
+   1199,
+   1090,
+   1504,
+   1260
+  ],
+  "browR": [
+   589,
+   905,
+   914,
+   1000
+  ],
+  "browL": [
+   1159,
+   895,
+   1509,
+   995
+  ],
+  "mouth": [
+   774,
+   1520,
+   1254,
+   1605
+  ],
+  "render_drop": 0.25
+ }
+}

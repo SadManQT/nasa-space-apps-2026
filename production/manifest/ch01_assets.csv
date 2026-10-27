@@ -1,0 +1,33 @@
+id,source_family,name,file,class,tool,priority,stages_or_variants,notes
+CH-KAI,A-01,Kai,CH_Kai.glb,hero_character,Tripo image-to-3D from approved turnaround + Blender rig,P0,suit;duty layer;helmet,orange tabs; shared cadet rig
+CH-AMA,A-02,Amara,CH_Amara.glb,hero_character,Tripo image-to-3D + Blender rig,P0,suit;duty layer;helmet,cyan tabs; stylus
+CH-MEI,A-03,Mei,CH_Mei.glb,hero_character,Tripo image-to-3D + Blender rig,P0,suit;duty layer;helmet,green tabs; seed pouch
+CH-RAF,A-04,Rafi,CH_Rafi.glb,hero_character,Tripo image-to-3D + Blender rig,P0,suit;duty layer;helmet,purple tabs; checklist strap
+CH-FER,A-07,Ferreira (Earth screen),CH_Ferreira.glb,hero_character,Tripo image-to-3D + Blender rig,P0,earth duty layer,screen-only in CH01
+PL-ALO,A-05,Alo,PL_Alo_<stage>.glb,plant,Meshy text/image-to-3D per stage + Blender blend shapes,P0,seed;sprout;bud;bloom;stress-frost;stress-thirst,purple stem; four-petal flowers; NO eyes or face - personality via posture blend shapes
+PL-TAR,A-06,Tara,PL_Tara_<stage>.glb,plant,Reuse Alo topology in Blender,P0,seed;sprout;bud;bloom,green stem
+PL-CROP,A-14,Edible crop rack,PL_CropRack.glb,plant,Meshy,P0,healthy;stressed;harvest-ready,indoor rack
+EN-COMMONS,A-10,Commons + Mission Table,EN_Commons_*.glb,environment,Blender modular kit + Meshy props,P0,4 mugs;table states,22x12 m
+EN-KIT,A-11,Habitat snap kit,EN_Kit_*.glb,environment,Blender modular (hand-built for snapping) + Meshy trim textures,P0,walls;floors;1.2m doors;lights;signs,
+EN-SAFE,A-13,Safe Room shell,EN_SafeRoom.glb,environment,Blender modular,P0,normal;storm,8x6 m; five seats
+EN-AIRLOCK,A-18,Airlock kit,EN_Airlock.glb,environment,Blender + Tripo props,P0,sealed;equalising;safe-to-open,double interlock
+EN-EXT,A-21/A-52,Exterior apron + masts + horizon,EN_Exterior.glb,environment,Blender terrain from NASA LOLA DEM + Tripo masts,P0,lit;terrain-blocked,black sky; low sun
+PR-POWER,A-12,Battery jar + heater console,PR_PowerConsole.glb,hero_prop,Tripo,P0,normal;fault,no baked text
+PR-AIR,A-12,Oxygen tank + production console,PR_AirConsole.glb,hero_prop,Tripo,P0,normal;fault,
+PR-WATER,A-16,Water wall panels + valve,PR_WaterWall.glb,hero_prop,Tripo + Blender segmented fill,P0,0/2/4/6 fill,
+PR-CRATE,A-22,Shield supply bundles + rails,PR_ShieldBundle.glb,small_prop,Meshy,P0,slotted;preview,4 slots
+PR-HATCH,A-23,Shelter hatch + roll-call board,PR_ShelterHatch.glb,hero_prop,Tripo,P0,open;closed;occupied,
+PR-CHAMBER,A-15,Growth cassettes + glove ports,PR_GrowthChamber.glb,hero_prop,Tripo,P0,empty;seed;plant,
+PR-PACKET,A-20,Two-seed packet,PR_SeedPacket.glb,small_prop,Meshy,P0,sealed;archived,"ALO" and "N." in Latin letters as UI decal; no Bangla script
+PR-RECORDER,A-19,Horticulture recorder,PR_Recorder.glb,small_prop,Meshy,P0,dormant;triggered,
+PR-DOSE,A-29,Radiation instrument,PR_DoseMonitor.glb,small_prop,Meshy,P0,normal;warning;shelter,
+PR-LIGHT,A-34,Hand light (Kai's lamp),PR_HandLight.glb,small_prop,Meshy,P0,docked;on,
+PR-PROBE,P-01,Moisture probe + reference cups,PR_MoistureProbe.glb,small_prop,Meshy,P0,,
+FX-STRESS,A-24,Chamber frost/condensation,FX_ChamberStress.tres,vfx,Godot shader,P0,low;high frost;thirst,
+AN-LOCO,A-48,Shared locomotion set,AN_Cadet_Locomotion.glb,animation,Mixamo retarget in Blender,P0,walk;run;idle;turn;brace;sit,
+AN-CARE,A-49,Care and science hands,AN_Cadet_Care.glb,animation,Mixamo + hand-keyed,P0,plant;water;scan;valve,
+AU-VO,A-57,English voice lines CH01,VO_CH01_*.wav,audio,ElevenLabs TTS v4 (designed voices),P1,C1-01..C1-F2,captions always complete without VO
+AU-SFX,A-56,CH01 effects and ambience,SFX_*.wav,audio,ElevenLabs SFX v2,P0,fans;valves;water;doors;alarm;suit,no vacuum sound
+AU-MUS,A-55,CH01 score cues,MUS_CH01_*.wav,audio,ElevenLabs Music v2.5,P0,exploration;night;storm;bloom,
+CS-CH01,—,CH01 cutscenes,CS_CH01_*.mp4,cutscene,Seedance 2.5 from 3D start frames,P0,opening;last light;earth-set;alarm;bloom;N. message,
+UI-KIT,A-53/A-54,HUD + icons + cards,UI_*.svg,ui,Recraft V4.1 vectors + hand edit,P0,English only; large text,no colour-only info

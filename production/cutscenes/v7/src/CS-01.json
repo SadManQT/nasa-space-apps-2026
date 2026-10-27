@@ -1,0 +1,41 @@
+{
+ "id": "CS-01",
+ "card": [
+  "Chapter 1 - Night One",
+  "Arrival at Aurora"
+ ],
+ "shots": [
+  "shots/CS-01-A.mp4",
+  "shots/CS-01-B.mp4",
+  "shots/CS-01-C.mp4"
+ ],
+ "music": "music/CS-01.mp3",
+ "lines": [
+  {
+   "at": 14.0,
+   "speaker": "Kai",
+   "text": "A full battery sounds like a good problem.",
+   "file": "vo/EX-CH01-S01-L01.mp3"
+  },
+  {
+   "at": 17.6,
+   "speaker": "Amara",
+   "text": "Only if we notice what spills.",
+   "file": "vo/EX-CH01-S01-L02.mp3"
+  },
+  {
+   "at": 22.0,
+   "speaker": "Mei",
+   "text": "Can we store it somewhere that is not a battery?",
+   "file": "vo/EX-CH01-S01-L03.mp3"
+  },
+  {
+   "at": 32.0,
+   "speaker": "Ferreira (Earth link)",
+   "text": "Show each other your reasoning, then commit it.",
+   "file": "vo/EX-CH01-S01-L04.mp3",
+   "radio": true
+  }
+ ],
+ "out": "../CS-01_Arrival"
+}

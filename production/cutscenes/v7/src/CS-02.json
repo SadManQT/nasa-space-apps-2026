@@ -1,0 +1,41 @@
+{
+ "id": "CS-02",
+ "card": [
+  "Chapter 1 - Night One",
+  "The Horizon Closes One Door"
+ ],
+ "shots": [
+  "shots/CS-02-A.mp4",
+  "shots/CS-02-B.mp4",
+  "shots/CS-02-C.mp4"
+ ],
+ "music": "music/CS-02.mp3",
+ "lines": [
+  {
+   "at": 12.6,
+   "speaker": "Ferreira (Earth link)",
+   "text": "Local rules remain active. Read back the next safe action.",
+   "file": "vo/EX-CH01-S09-L04.mp3",
+   "radio": true
+  },
+  {
+   "at": 18.0,
+   "speaker": "Kai",
+   "text": "I want to know where the next light comes from.",
+   "file": "vo/EX-CH01-S09-L01.mp3"
+  },
+  {
+   "at": 21.3,
+   "speaker": "Amara",
+   "text": "The plan. And that hand light. Both are here.",
+   "file": "vo/EX-CH01-S09-L02.mp3"
+  },
+  {
+   "at": 25.6,
+   "speaker": "Mei",
+   "text": "Read my cold-and-thirst card with Rafi's warning.",
+   "file": "vo/EX-CH01-S09-L03.mp3"
+  }
+ ],
+ "out": "../CS-02_The_Horizon_Closes_One_Door"
+}

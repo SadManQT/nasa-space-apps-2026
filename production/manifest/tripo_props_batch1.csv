@@ -1,0 +1,25 @@
+name,concept_or_source,size_flag,size_m,tris,tex,notes
+PL_Alo_Bloom,concept/plants/alo_bloom.png,--height,0.30,15000,2048,first bloom; purple stem; CH01-S12
+PL_Tara_Bloom,concept/plants/tara_bloom.png,--height,0.30,15000,2048,green stem; CH02-S01
+PR_GrowthChamber,concept/props/growth_chamber/growth_chamber_v1.png,--height,0.55,25000,2048,glove ports + shutter frame; plant goes inside in-engine
+PR_MissionTable,concept/props/mission_table/mission_table_v1.png,--height,0.76,20000,2048,central display = live UI material
+PL_Alo_Bud,concept/plants/alo_bud.png,--height,0.20,12000,2048,bud stage; CH01-S05
+PL_Alo_Pods,concept/plants/alo_pods.png,--height,0.35,15000,2048,mature dry pods; CH03-S09/S10
+PL_ZeroSeedlingTray,concept/plants/zero_seedling_tray.png,--longest,0.50,15000,2048,2034 unflowered seedlings only; CH03-S07
+PL_Cotton_Young,concept/plants/cotton_young.png,--height,0.32,15000,2048,no boll; CH05-S12 to CH08-S12
+PR_VaultCase,concept/props/vault_case/vault_case_v1.png,--longest,0.60,15000,2048,CH04 insulated case (closed)
+PR_SeedCase,concept/props/seed_case/seed_case_v1.png,--longest,0.35,12000,2048,CH07 founder reserve 15+15 (open)
+PR_Glovebox,concept/props/glovebox/glovebox_v1.png,--longest,1.20,25000,2048,CH04-S10 dry quarantine
+PR_MalapertRelay,concept/props/malapert_relay/malapert_relay_v1.png,--longest,4.00,40000,2048,CH08 summit relay
+PR_SurveyBeacon,concept/props/survey_beacon/survey_beacon_v1.png,--height,1.80,15000,2048,CH04 beacons + CH08 repeaters
+PR_CrewSeat,concept/props/crew_seat/crew_seat_v1.png,--height,1.10,15000,2048,Commons + Safe Room seats
+PR_HandLight,concept/props/hand_light/hand_light_v1.png,--longest,0.25,5000,1024,Kai's lamp
+PR_PollinationKit,concept/props/pollination_kit/pollination_kit_v1.png,--longest,0.20,5000,1024,CH02 carrier + brushes A/B
+PR_IceScanner,concept/props/ice_scanner/ice_scanner_v1.png,--longest,0.50,5000,1024,contact probe A-32; screen becomes a live UI material; CH04-S05
+PR_ManualGauge,concept/props/manual_gauge/manual_gauge_v1.png,--height,0.28,3000,1024,independent pressure gauge A-25 on wall bracket; needle animated in-engine; CH03-S01
+PR_RepairClamp,concept/props/repair_clamp/repair_clamp_v1.png,--longest,0.20,3000,1024,captive clamp A-26; CH03-S04
+PR_RelayController,concept/props/relay_controller/relay_controller_v1.png,--longest,0.50,5000,2048,spare controller in its crate with blank note; CH05-S02 and CH08-S07
+PR_UplinkFeedthrough,concept/props/uplink_feedthrough/uplink_feedthrough_v1.png,--height,0.60,5000,1024,damaged external uplink A-43; CH07-S09
+PR_SampleHolder,concept/props/sample_holder/sample_holder_v1.png,--height,0.12,2000,1024,sealed sample cup A-35; CH04-S05
+PR_SeedPacket,concept/props/seed_packet/seed_packet_v1.png,--longest,0.10,1500,1024,blank label; ALO and N. added as a UI decal; CH01-S03
+PR_Mug,concept/props/mug/mug_v1.png,--height,0.11,2000,1024,four then five on the mission table; CH01-S01

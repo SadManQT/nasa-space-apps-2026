@@ -1,0 +1,21 @@
+name,concept_or_source,size_flag,size_m,tris,tex,notes
+PR_ControlConsole,models/reuse/control_console.glb,--height,1.20,30000,2048,Mission/air console (screens -> live UI material)
+PR_PowerPanel,models/reuse/industrial_control_panel.glb,--height,2.00,25000,2048,Power room protected-bus panel incl. feeder F2 (A-42)
+PR_BatteryJar,models/reuse/energy_capsule.glb,--height,1.40,20000,2048,Battery jar with sun-drops (A-12)
+PR_OxygenUnit,models/reuse/industrial_machinery.glb,--height,2.00,30000,2048,Oxygen production unit (A-12)
+PR_WaterValve,models/reuse/industrial_valve.glb,--height,0.90,20000,1024,Water wall transfer valve (A-16)
+PR_WaterWallPanel,models/reuse/industrial_viewport.glb,--height,1.60,15000,2048,Transparent water-wall panel (A-16)
+PR_HatchDoor,models/reuse/industrial_vault_door.glb,--height,2.10,20000,2048,Safe Room hatch / airlock door (A-18/A-23)
+PR_SupplyBundles,models/reuse/cargo_crates.glb,--height,1.60,20000,2048,Shield supply bundles / relief cargo (A-22)
+PR_Dosimeter,models/reuse/dosimeter.glb,--longest,0.18,8000,1024,Exposure instrument (A-29); screen -> live UI
+PL_CropRack,models/reuse/vertical_farming_rack.glb,--height,2.00,30000,2048,Edible crop rack (A-14)
+PR_Recorder2034,models/reuse/vintage_computer.glb,--height,0.60,15000,1024,2034 horticulture recorder / annex terminal (A-19)
+EN_SolarMast,models/reuse/solar_panel_tower.glb,--height,12.0,10000,2048,Solar mast (A-21)
+EN_CorridorSegment,models/reuse/space_tunnel.glb,--height,2.60,20000,2048,Corridor / airlock tube segment (A-11)
+PR_Helmet,models/reuse/space_helmet.glb,--longest,0.38,15000,1024,Cadet helmet; recolour role stripe per cadet
+PR_CrewBunk,models/reuse/capsule_bunk_bed.glb,--height,2.00,20000,2048,Crew quarters dressing
+VH_Rover,models/reuse/space_rover.glb,--longest,6.00,40000,2048,Pressurised rover CH04/CH08 (A-31)
+VH_ReliefLander,models/reuse/lunar_lander.glb,--height,6.00,40000,2048,Relief lander on landing camera CH05 (A-39)
+VH_ZeroAscent,models/reuse/lunar_module.glb,--height,9.00,40000,2048,Expedition Zero ascent vehicle (archive images)
+EN_ExteriorModule,models/reuse/spacecraft_module.glb,--longest,4.00,30000,2048,Exterior habitat module dressing
+PR_AnnexDrum,models/reuse/weathered_metal_drum.glb,--height,0.90,12000,1024,Expedition Zero annex debris

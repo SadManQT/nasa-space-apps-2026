@@ -1,0 +1,386 @@
+line_id,scene,speaker,delivery,speaker_note,text,voice_file
+EX-CH01-S01-L01,EX-CH01-S01,Kai,live,,A full battery sounds like a good problem.,game/assets/audio/voice/Kai/VO_EX-CH01-S01-L01.ogg
+EX-CH01-S01-L02,EX-CH01-S01,Amara,live,,Only if we notice what spills.,game/assets/audio/voice/Amara/VO_EX-CH01-S01-L02.ogg
+EX-CH01-S01-L03,EX-CH01-S01,Mei,live,,Can we store it somewhere that is not a battery?,game/assets/audio/voice/Mei/VO_EX-CH01-S01-L03.ogg
+EX-CH01-S01-L04,EX-CH01-S01,Ferreira,earth_link,Earth link,"Show each other your reasoning, then commit it.",game/assets/audio/voice/Ferreira/VO_EX-CH01-S01-L04.ogg
+EX-CH01-S02-L01,EX-CH01-S02,Rafi,live,,These are names. We do not spend them.,game/assets/audio/voice/Rafi/VO_EX-CH01-S02-L01.ogg
+EX-CH01-S02-L02,EX-CH01-S02,Kai,live,,And if Earth cannot hear the roll call?,game/assets/audio/voice/Kai/VO_EX-CH01-S02-L02.ogg
+EX-CH01-S02-L03,EX-CH01-S02,Amara,live,,The station still can. So can we.,game/assets/audio/voice/Amara/VO_EX-CH01-S02-L03.ogg
+EX-CH01-S02-L04,EX-CH01-S02,Ferreira,earth_link,Earth link,You have local authority to stop an unsafe operation.,game/assets/audio/voice/Ferreira/VO_EX-CH01-S02-L04.ogg
+EX-CH01-S03-L01,EX-CH01-S03,Mei,live,,Alo means light. Someone named the packet before us.,game/assets/audio/voice/Mei/VO_EX-CH01-S03-L01.ogg
+EX-CH01-S03-L02,EX-CH01-S03,Kai,live,,Light One and Light Two?,game/assets/audio/voice/Kai/VO_EX-CH01-S03-L02.ogg
+EX-CH01-S03-L03,EX-CH01-S03,Amara,live,,Two labels first. Names second.,game/assets/audio/voice/Amara/VO_EX-CH01-S03-L03.ogg
+EX-CH01-S03-L04,EX-CH01-S03,Rafi,live,,And a reference before the interesting number.,game/assets/audio/voice/Rafi/VO_EX-CH01-S03-L04.ogg
+EX-CH01-S03-L05,EX-CH01-S03,Mei,live,,A sealed experiment grew a cotton seedling on the Moon in 2019. We are building on that beginning.,game/assets/audio/voice/Mei/VO_EX-CH01-S03-L05.ogg
+EX-CH01-S04-L01,EX-CH01-S04,Mei,live,,Alo outside. Tara inside. A star beside our light.,game/assets/audio/voice/Mei/VO_EX-CH01-S04-L01.ogg
+EX-CH01-S04-L02,EX-CH01-S04,Amara,live,,"A reference is a plant we care for, not one we ignore.",game/assets/audio/voice/Amara/VO_EX-CH01-S04-L02.ogg
+EX-CH01-S04-L03,EX-CH01-S04,Kai,live,,One lamp held still. I can manage that.,game/assets/audio/voice/Kai/VO_EX-CH01-S04-L03.ogg
+EX-CH01-S04-L04,EX-CH01-S04,Rafi,live,,"Transfer sealed. Two names, two records.",game/assets/audio/voice/Rafi/VO_EX-CH01-S04-L04.ogg
+EX-CH01-S05-L01,EX-CH01-S05,Mei,live,,You checked that switch already.,game/assets/audio/voice/Mei/VO_EX-CH01-S05-L01.ogg
+EX-CH01-S05-L02,EX-CH01-S05,Kai,live,,Important scientific lamp.,game/assets/audio/voice/Kai/VO_EX-CH01-S05-L02.ogg
+EX-CH01-S05-L03,EX-CH01-S05,Rafi,live,,Then it gets a backup. Here.,game/assets/audio/voice/Rafi/VO_EX-CH01-S05-L03.ogg
+EX-CH01-S05-L04,EX-CH01-S05,Amara,live,,Fourteen dated care entries. A bud is a useful result.,game/assets/audio/voice/Amara/VO_EX-CH01-S05-L04.ogg
+EX-CH01-S06-L01,EX-CH01-S06,Amara,live,,"Sunlight, Earth visibility and our switches are separate tracks.",game/assets/audio/voice/Amara/VO_EX-CH01-S06-L01.ogg
+EX-CH01-S06-L02,EX-CH01-S06,Kai,live,,So darkness can have a timetable.,game/assets/audio/voice/Kai/VO_EX-CH01-S06-L02.ogg
+EX-CH01-S06-L03,EX-CH01-S06,Mei,live,,Put the garden on it. The shelter borrows from us.,game/assets/audio/voice/Mei/VO_EX-CH01-S06-L03.ogg
+EX-CH01-S06-L04,EX-CH01-S06,Rafi,live,,Put returning the water on it too.,game/assets/audio/voice/Rafi/VO_EX-CH01-S06-L04.ogg
+EX-CH01-S07-L01,EX-CH01-S07,Amara,live,,We can keep air we make now. We cannot keep overflow.,game/assets/audio/voice/Amara/VO_EX-CH01-S07-L01.ogg
+EX-CH01-S07-L02,EX-CH01-S07,Kai,live,,Same full jar. Better destination.,game/assets/audio/voice/Kai/VO_EX-CH01-S07-L02.ogg
+EX-CH01-S07-L03,EX-CH01-S07,Mei,live,,Read the lamp setting before calling it spare.,game/assets/audio/voice/Mei/VO_EX-CH01-S07-L03.ogg
+EX-CH01-S07-L04,EX-CH01-S07,Rafi,live,,Four recommendations. One confirmed plan.,game/assets/audio/voice/Rafi/VO_EX-CH01-S07-L04.ogg
+EX-CH01-S08-L01,EX-CH01-S08,Rafi,live,,First rule: the crew goes inside.,game/assets/audio/voice/Rafi/VO_EX-CH01-S08-L01.ogg
+EX-CH01-S08-L02,EX-CH01-S08,Mei,live,,And the water comes home when the plan allows.,game/assets/audio/voice/Mei/VO_EX-CH01-S08-L02.ogg
+EX-CH01-S08-L03,EX-CH01-S08,Amara,live,,Practice complete. Baseline unchanged.,game/assets/audio/voice/Amara/VO_EX-CH01-S08-L03.ogg
+EX-CH01-S08-L04,EX-CH01-S08,Kai,live,,I drew the water a return ticket.,game/assets/audio/voice/Kai/VO_EX-CH01-S08-L04.ogg
+EX-CH01-S09-L01,EX-CH01-S09,Kai,live,,I want to know where the next light comes from.,game/assets/audio/voice/Kai/VO_EX-CH01-S09-L01.ogg
+EX-CH01-S09-L02,EX-CH01-S09,Amara,live,,The plan. And that hand light. Both are here.,game/assets/audio/voice/Amara/VO_EX-CH01-S09-L02.ogg
+EX-CH01-S09-L03,EX-CH01-S09,Mei,live,,Read my cold-and-thirst card with Rafi's warning.,game/assets/audio/voice/Mei/VO_EX-CH01-S09-L03.ogg
+EX-CH01-S09-L04,EX-CH01-S09,Ferreira,earth_link,Earth link before cutoff,Local rules remain active. Read back the next safe action.,game/assets/audio/voice/Ferreira/VO_EX-CH01-S09-L04.ogg
+EX-CH01-S10-L01,EX-CH01-S10,Rafi,live,,Four names. Four answers. Then we commit.,game/assets/audio/voice/Rafi/VO_EX-CH01-S10-L01.ogg
+EX-CH01-S10-L02,EX-CH01-S10,Kai,live,,I can do another action.,game/assets/audio/voice/Kai/VO_EX-CH01-S10-L02.ogg
+EX-CH01-S10-L03,EX-CH01-S10,Mei,live,,Read this one back first.,game/assets/audio/voice/Mei/VO_EX-CH01-S10-L03.ogg
+EX-CH01-S10-L04,EX-CH01-S10,Amara,live,,One exclusive response. Its cost is in the forecast.,game/assets/audio/voice/Amara/VO_EX-CH01-S10-L04.ogg
+EX-CH01-S11-L01,EX-CH01-S11,Mei,live,,Borrowing was the first half. This is the other half.,game/assets/audio/voice/Mei/VO_EX-CH01-S11-L01.ogg
+EX-CH01-S11-L02,EX-CH01-S11,Amara,live,,Exposure resolves before drain. Read the gate.,game/assets/audio/voice/Amara/VO_EX-CH01-S11-L02.ogg
+EX-CH01-S11-L03,EX-CH01-S11,Kai,live,,Low is not failed. What demand comes next?,game/assets/audio/voice/Kai/VO_EX-CH01-S11-L03.ogg
+EX-CH01-S11-L04,EX-CH01-S11,Rafi,live,,"Review the cause, not the person holding the control.",game/assets/audio/voice/Rafi/VO_EX-CH01-S11-L04.ogg
+EX-CH01-S12-L01,EX-CH01-S12,Mei,live,,Chamber safe. Now we open it.,game/assets/audio/voice/Mei/VO_EX-CH01-S12-L01.ogg
+EX-CH01-S12-L02,EX-CH01-S12,N.,recording,stored recording,"If you are hearing this, Alo bloomed. Good. Now Alo needs a friend.",game/assets/audio/voice/Noor/VO_EX-CH01-S12-L02.ogg
+EX-CH01-S12-L03,EX-CH01-S12,Kai,live,,Another plant was in the next room all along.,game/assets/audio/voice/Kai/VO_EX-CH01-S12-L03.ogg
+EX-CH01-S12-L04,EX-CH01-S12,Amara,live,,And it has a name. Tara.,game/assets/audio/voice/Amara/VO_EX-CH01-S12-L04.ogg
+EX-CH02-S01-L01,EX-CH02-S01,Ferreira,earth_link,Earth link,You did not just endure the night. You operated it.,game/assets/audio/voice/Ferreira/VO_EX-CH02-S01-L01.ogg
+EX-CH02-S01-L02,EX-CH02-S01,Mei,live,,Tara opened too. She belongs in the report.,game/assets/audio/voice/Mei/VO_EX-CH02-S01-L02.ogg
+EX-CH02-S01-L03,EX-CH02-S01,Kai,live,,Two flowers. Do we introduce them?,game/assets/audio/voice/Kai/VO_EX-CH02-S01-L03.ogg
+EX-CH02-S01-L04,EX-CH02-S01,Amara,live,,First we read how this cultivar makes seeds.,game/assets/audio/voice/Amara/VO_EX-CH02-S01-L04.ogg
+EX-CH02-S02-L01,EX-CH02-S02,Rafi,live,,I brought the bee.,game/assets/audio/voice/Rafi/VO_EX-CH02-S02-L01.ogg
+EX-CH02-S02-L02,EX-CH02-S02,Mei,live,,Good. What does it actually do?,game/assets/audio/voice/Mei/VO_EX-CH02-S02-L02.ogg
+EX-CH02-S02-L03,EX-CH02-S02,Amara,live,,One brush for each recorded direction.,game/assets/audio/voice/Amara/VO_EX-CH02-S02-L03.ogg
+EX-CH02-S02-L04,EX-CH02-S02,Kai,live,,I was hoping the answer was making that noise.,game/assets/audio/voice/Kai/VO_EX-CH02-S02-L04.ogg
+EX-CH02-S03-L01,EX-CH02-S03,Kai,live,,My line was shorter.,game/assets/audio/voice/Kai/VO_EX-CH02-S03-L01.ogg
+EX-CH02-S03-L02,EX-CH02-S03,Rafi,live,,It left out the air.,game/assets/audio/voice/Rafi/VO_EX-CH02-S03-L02.ogg
+EX-CH02-S03-L03,EX-CH02-S03,Amara,live,,"Count the whole reciprocal cycle once, not every camera cut.",game/assets/audio/voice/Amara/VO_EX-CH02-S03-L03.ogg
+EX-CH02-S03-L04,EX-CH02-S03,Mei,live,,And bring back records for both plants.,game/assets/audio/voice/Mei/VO_EX-CH02-S03-L04.ogg
+EX-CH02-S04-L01,EX-CH02-S04,Amara,live,,Donor Tara. Recipient Alo. Read the second label.,game/assets/audio/voice/Amara/VO_EX-CH02-S04-L01.ogg
+EX-CH02-S04-L02,EX-CH02-S04,Mei,live,,Confirmed. Contact recorded.,game/assets/audio/voice/Mei/VO_EX-CH02-S04-L02.ogg
+EX-CH02-S04-L03,EX-CH02-S04,Rafi,live,,So did it work?,game/assets/audio/voice/Rafi/VO_EX-CH02-S04-L03.ogg
+EX-CH02-S04-L04,EX-CH02-S04,Amara,live,,The transfer did. Seeds are a later observation.,game/assets/audio/voice/Amara/VO_EX-CH02-S04-L04.ogg
+EX-CH02-S05-L01,EX-CH02-S05,Kai,live,,The bee stamps are getting better.,game/assets/audio/voice/Kai/VO_EX-CH02-S05-L01.ogg
+EX-CH02-S05-L02,EX-CH02-S05,Amara,live,,The dates are the important part.,game/assets/audio/voice/Amara/VO_EX-CH02-S05-L02.ogg
+EX-CH02-S05-L03,EX-CH02-S05,Mei,live,,Both plants get care every day. Pollen runs have their own schedule.,game/assets/audio/voice/Mei/VO_EX-CH02-S05-L03.ogg
+EX-CH02-S05-L04,EX-CH02-S05,Rafi,live,,Weather check before each actual run. Familiar is not automatic.,game/assets/audio/voice/Rafi/VO_EX-CH02-S05-L04.ogg
+EX-CH02-S06-L01,EX-CH02-S06,Kai,live,,Purple and green. So the children will be...,game/assets/audio/voice/Kai/VO_EX-CH02-S06-L01.ogg
+EX-CH02-S06-L02,EX-CH02-S06,Amara,live,,A prediction. Finish it as a prediction.,game/assets/audio/voice/Amara/VO_EX-CH02-S06-L02.ogg
+EX-CH02-S06-L03,EX-CH02-S06,Mei,live,,What observation would make us change our mind?,game/assets/audio/voice/Mei/VO_EX-CH02-S06-L03.ogg
+EX-CH02-S06-L04,EX-CH02-S06,Rafi,live,,"Then a surprise is useful, not a penalty.",game/assets/audio/voice/Rafi/VO_EX-CH02-S06-L04.ogg
+EX-CH02-S07-L01,EX-CH02-S07,Kai,live,,Seeds tomorrow?,game/assets/audio/voice/Kai/VO_EX-CH02-S07-L01.ogg
+EX-CH02-S07-L02,EX-CH02-S07,Amara,live,,No. Not the day after either.,game/assets/audio/voice/Amara/VO_EX-CH02-S07-L02.ogg
+EX-CH02-S07-L03,EX-CH02-S07,Mei,live,,We keep caring. We do not pull a plant into the future.,game/assets/audio/voice/Mei/VO_EX-CH02-S07-L03.ogg
+EX-CH02-S07-L04,EX-CH02-S07,Rafi,live,,This equipment number matches the old trial card.,game/assets/audio/voice/Rafi/VO_EX-CH02-S07-L04.ogg
+EX-CH02-S08-L01,EX-CH02-S08,Kai,live,,Someone put the newer label over the older one.,game/assets/audio/voice/Kai/VO_EX-CH02-S08-L01.ogg
+EX-CH02-S08-L02,EX-CH02-S08,Mei,live,,Photograph it. Do not peel the only original.,game/assets/audio/voice/Mei/VO_EX-CH02-S08-L02.ogg
+EX-CH02-S08-L03,EX-CH02-S08,Amara,live,,A device match is not a person’s name.,game/assets/audio/voice/Amara/VO_EX-CH02-S08-L03.ogg
+EX-CH02-S08-L04,EX-CH02-S08,Rafi,live,,And a seedling record is not a previous flower.,game/assets/audio/voice/Rafi/VO_EX-CH02-S08-L04.ogg
+EX-CH02-S09-L01,EX-CH02-S09,Amara,live,,"Date, device, channel. Each gets one supported match.",game/assets/audio/voice/Amara/VO_EX-CH02-S09-L01.ogg
+EX-CH02-S09-L02,EX-CH02-S09,Kai,live,,Can I name the file after my guess?,game/assets/audio/voice/Kai/VO_EX-CH02-S09-L02.ogg
+EX-CH02-S09-L03,EX-CH02-S09,Mei,live,,Name it after the evidence first.,game/assets/audio/voice/Mei/VO_EX-CH02-S09-L03.ogg
+EX-CH02-S09-L04,EX-CH02-S09,Rafi,live,,I can repeat these steps. That is a good sign.,game/assets/audio/voice/Rafi/VO_EX-CH02-S09-L04.ogg
+EX-CH02-S10-L01,EX-CH02-S10,Engineer,recording,stored 2034 recording,Biological trial suspended. Crew retreat is mandatory.,game/assets/audio/voice/Engineer/VO_EX-CH02-S10-L01.ogg
+EX-CH02-S10-L02,EX-CH02-S10,Kai,live,,"That sounds like Ferreira. Younger, maybe.",game/assets/audio/voice/Kai/VO_EX-CH02-S10-L02.ogg
+EX-CH02-S10-L03,EX-CH02-S10,N.,recording,stored 2034 recording,My grandmother’s mustard fields turned yellow every winter. I wanted some of that light here.,game/assets/audio/voice/Noor/VO_EX-CH02-S10-L03.ogg
+EX-CH02-S10-L04,EX-CH02-S10,Mei,live,,Send the evidence. We are not solving a person by guessing.,game/assets/audio/voice/Mei/VO_EX-CH02-S10-L04.ogg
+EX-CH02-S11-L01,EX-CH02-S11,Rafi,live,,"Copy, source images, checksum, transcript. No invented answers.",game/assets/audio/voice/Rafi/VO_EX-CH02-S11-L01.ogg
+EX-CH02-S11-L02,EX-CH02-S11,Mei,live,,Leave the name as a question.,game/assets/audio/voice/Mei/VO_EX-CH02-S11-L02.ogg
+EX-CH02-S11-L03,EX-CH02-S11,Amara,live,,Delivered is not the same as answered.,game/assets/audio/voice/Amara/VO_EX-CH02-S11-L03.ogg
+EX-CH02-S11-L04,EX-CH02-S11,Kai,live,,We can wait after the evening checks. I know.,game/assets/audio/voice/Kai/VO_EX-CH02-S11-L04.ogg
+EX-CH02-S12-L01,EX-CH02-S12,Rafi,live,,"Brace zone. Four names, please.",game/assets/audio/voice/Rafi/VO_EX-CH02-S12-L01.ogg
+EX-CH02-S12-L02,EX-CH02-S12,Kai,live,,Here. The service cover moved.,game/assets/audio/voice/Kai/VO_EX-CH02-S12-L02.ogg
+EX-CH02-S12-L03,EX-CH02-S12,Mei,live,,Here. Garden controls can wait.,game/assets/audio/voice/Mei/VO_EX-CH02-S12-L03.ogg
+EX-CH02-S12-L04,EX-CH02-S12,Amara,live,,Here. Pressure warning changed. We verify the reading next.,game/assets/audio/voice/Amara/VO_EX-CH02-S12-L04.ogg
+EX-CH03-S01-L01,EX-CH03-S01,Amara,live,,The panel says tank. I do not trust the diagnosis yet.,game/assets/audio/voice/Amara/VO_EX-CH03-S01-L01.ogg
+EX-CH03-S01-L02,EX-CH03-S01,Kai,live,,Can we close the red thing?,game/assets/audio/voice/Kai/VO_EX-CH03-S01-L02.ogg
+EX-CH03-S01-L03,EX-CH03-S01,Rafi,live,,Gauge first. A colour is not a pipe.,game/assets/audio/voice/Rafi/VO_EX-CH03-S01-L03.ogg
+EX-CH03-S01-L04,EX-CH03-S01,Mei,live,,The plants keep their own sealed atmosphere while we check the room feed.,game/assets/audio/voice/Mei/VO_EX-CH03-S01-L04.ogg
+EX-CH03-S02-L01,EX-CH03-S02,Kai,live,,"If the fault is here, this tap should fall too.",game/assets/audio/voice/Kai/VO_EX-CH03-S02-L01.ogg
+EX-CH03-S02-L02,EX-CH03-S02,Amara,live,,It does not. Keep that observation.,game/assets/audio/voice/Amara/VO_EX-CH03-S02-L02.ogg
+EX-CH03-S02-L03,EX-CH03-S02,Mei,live,,And our chamber check still applies?,game/assets/audio/voice/Mei/VO_EX-CH03-S02-L03.ogg
+EX-CH03-S02-L04,EX-CH03-S02,Rafi,live,,Yes. Local plant atmosphere remains isolated from this room spur.,game/assets/audio/voice/Rafi/VO_EX-CH03-S02-L04.ogg
+EX-CH03-S03-L01,EX-CH03-S03,Rafi,live,,Smallest supported boundary. Keep the habitat supplied.,game/assets/audio/voice/Rafi/VO_EX-CH03-S03-L01.ogg
+EX-CH03-S03-L02,EX-CH03-S03,Amara,live,,Predict the gauges before running the preview.,game/assets/audio/voice/Amara/VO_EX-CH03-S03-L02.ogg
+EX-CH03-S03-L03,EX-CH03-S03,Ferreira,earth_link,Earth link,Repair diagram sent. Safety information does not wait.,game/assets/audio/voice/Ferreira/VO_EX-CH03-S03-L03.ogg
+EX-CH03-S03-L04,EX-CH03-S03,Kai,live,,The labels match the actual branch. Ready for the controlled step.,game/assets/audio/voice/Kai/VO_EX-CH03-S03-L04.ogg
+EX-CH03-S04-L01,EX-CH03-S04,Kai,live,,Clamp seated. That is not the same as verified.,game/assets/audio/voice/Kai/VO_EX-CH03-S04-L01.ogg
+EX-CH03-S04-L02,EX-CH03-S04,Amara,live,,Hold test first. Then controlled reopening.,game/assets/audio/voice/Amara/VO_EX-CH03-S04-L02.ogg
+EX-CH03-S04-L03,EX-CH03-S04,Rafi,live,,Work boundary clear.,game/assets/audio/voice/Rafi/VO_EX-CH03-S04-L03.ogg
+EX-CH03-S04-L04,EX-CH03-S04,Mei,live,,Local chamber stable. I will check it again after service returns.,game/assets/audio/voice/Mei/VO_EX-CH03-S04-L04.ogg
+EX-CH03-S05-L01,EX-CH03-S05,Amara,live,,Five checks. We keep the evidence even after the warning clears.,game/assets/audio/voice/Amara/VO_EX-CH03-S05-L01.ogg
+EX-CH03-S05-L02,EX-CH03-S05,Kai,live,,The note is wrong. The tested valve position is right.,game/assets/audio/voice/Kai/VO_EX-CH03-S05-L02.ogg
+EX-CH03-S05-L03,EX-CH03-S05,Rafi,live,,Then correct the note. Do not create a new fault to match it.,game/assets/audio/voice/Rafi/VO_EX-CH03-S05-L03.ogg
+EX-CH03-S05-L04,EX-CH03-S05,Mei,live,,Garden service restored. Monitoring continues.,game/assets/audio/voice/Mei/VO_EX-CH03-S05-L04.ogg
+EX-CH03-S06-L01,EX-CH03-S06,Mei,live,,N.R. The same mystery on a real door.,game/assets/audio/voice/Mei/VO_EX-CH03-S06-L01.ogg
+EX-CH03-S06-L02,EX-CH03-S06,Rafi,live,,A viewing port first. Our feet can wait.,game/assets/audio/voice/Rafi/VO_EX-CH03-S06-L02.ogg
+EX-CH03-S06-L03,EX-CH03-S06,Ferreira,earth_link,Earth link,An isolated annex. Use the supplied boundary checks.,game/assets/audio/voice/Ferreira/VO_EX-CH03-S06-L03.ogg
+EX-CH03-S06-L04,EX-CH03-S06,Amara,live,,Safe to inspect is not yet cleared to enter.,game/assets/audio/voice/Amara/VO_EX-CH03-S06-L04.ogg
+EX-CH03-S07-L01,EX-CH03-S07,Mei,live,,I mistook the curled leaves for flowers. They were young seedlings.,game/assets/audio/voice/Mei/VO_EX-CH03-S07-L01.ogg
+EX-CH03-S07-L02,EX-CH03-S07,Amara,radio,local link,The growth chart agrees: seedling stage.,game/assets/audio/voice/Amara/VO_EX-CH03-S07-L02.ogg
+EX-CH03-S07-L03,EX-CH03-S07,Rafi,live,,Record it. Leave the material undisturbed.,game/assets/audio/voice/Rafi/VO_EX-CH03-S07-L03.ogg
+EX-CH03-S07-L04,EX-CH03-S07,Kai,radio,local link,Return boundary ready when you are.,game/assets/audio/voice/Kai/VO_EX-CH03-S07-L04.ogg
+EX-CH03-S08-L01,EX-CH03-S08,Kai,live,,We have a map. Can we go now?,game/assets/audio/voice/Kai/VO_EX-CH03-S08-L01.ogg
+EX-CH03-S08-L02,EX-CH03-S08,Rafi,live,,We have evidence for a route. We still need a verified return plan.,game/assets/audio/voice/Rafi/VO_EX-CH03-S08-L02.ogg
+EX-CH03-S08-L03,EX-CH03-S08,Amara,live,,The deposit date is earlier than the retreat.,game/assets/audio/voice/Amara/VO_EX-CH03-S08-L03.ogg
+EX-CH03-S08-L04,EX-CH03-S08,Mei,live,,And first we finish caring for the garden we have.,game/assets/audio/voice/Mei/VO_EX-CH03-S08-L04.ogg
+EX-CH03-S09-L01,EX-CH03-S09,Mei,live,,The photograph was a flower. This is still Alo.,game/assets/audio/voice/Mei/VO_EX-CH03-S09-L01.ogg
+EX-CH03-S09-L02,EX-CH03-S09,Kai,live,,Can we make the lamp help?,game/assets/audio/voice/Kai/VO_EX-CH03-S09-L02.ogg
+EX-CH03-S09-L03,EX-CH03-S09,Amara,live,,"This is maturity, not the old cold alarm.",game/assets/audio/voice/Amara/VO_EX-CH03-S09-L03.ogg
+EX-CH03-S09-L04,EX-CH03-S09,Rafi,live,,We can stay while you do the checks.,game/assets/audio/voice/Rafi/VO_EX-CH03-S09-L04.ogg
+EX-CH03-S10-L01,EX-CH03-S10,Mei,live,,I thought keeping her alive meant longer.,game/assets/audio/voice/Mei/VO_EX-CH03-S10-L01.ogg
+EX-CH03-S10-L02,EX-CH03-S10,Amara,live,,It meant she could finish.,game/assets/audio/voice/Amara/VO_EX-CH03-S10-L02.ogg
+EX-CH03-S10-L03,EX-CH03-S10,Kai,live,,Do you want us to wait?,game/assets/audio/voice/Kai/VO_EX-CH03-S10-L03.ogg
+EX-CH03-S10-L04,EX-CH03-S10,Mei,live,,Stay. Then help me count.,game/assets/audio/voice/Mei/VO_EX-CH03-S10-L04.ogg
+EX-CH03-S11-L01,EX-CH03-S11,Amara,live,,Parent line first: Alo times Tara.,game/assets/audio/voice/Amara/VO_EX-CH03-S11-L01.ogg
+EX-CH03-S11-L02,EX-CH03-S11,Rafi,live,,Thirty founder seeds remain sealed.,game/assets/audio/voice/Rafi/VO_EX-CH03-S11-L02.ogg
+EX-CH03-S11-L03,EX-CH03-S11,Kai,live,,May one plant be Very Important Scientific Plant?,game/assets/audio/voice/Kai/VO_EX-CH03-S11-L03.ogg
+EX-CH03-S11-L04,EX-CH03-S11,Mei,live,,After its lineage label. Then yes.,game/assets/audio/voice/Mei/VO_EX-CH03-S11-L04.ogg
+EX-CH03-S12-L01,EX-CH03-S12,Kai,live,,October already?,game/assets/audio/voice/Kai/VO_EX-CH03-S12-L01.ogg
+EX-CH03-S12-L02,EX-CH03-S12,Amara,live,,Not already. Here are the days in between.,game/assets/audio/voice/Amara/VO_EX-CH03-S12-L02.ogg
+EX-CH03-S12-L03,EX-CH03-S12,Mei,live,,"These are descendants. Alo is in their lineage, not hiding in a pot.",game/assets/audio/voice/Mei/VO_EX-CH03-S12-L03.ogg
+EX-CH03-S12-L04,EX-CH03-S12,Rafi,live,,"And the map now has a preparation list, not a departure stamp.",game/assets/audio/voice/Rafi/VO_EX-CH03-S12-L04.ogg
+EX-CH04-S01-L01,EX-CH04-S01,Mei,live,,Our old prediction is here. Now count what actually grew.,game/assets/audio/voice/Mei/VO_EX-CH04-S01-L01.ogg
+EX-CH04-S01-L02,EX-CH04-S01,Amara,live,,"Seven purple, five green in this sample. Not a promised ratio.",game/assets/audio/voice/Amara/VO_EX-CH04-S01-L02.ogg
+EX-CH04-S01-L03,EX-CH04-S01,Kai,live,,So which one is Alo?,game/assets/audio/voice/Kai/VO_EX-CH04-S01-L03.ogg
+EX-CH04-S01-L04,EX-CH04-S01,Mei,live,,Their lineage is Alo and Tara. The original plant finished its life.,game/assets/audio/voice/Mei/VO_EX-CH04-S01-L04.ogg
+EX-CH04-S02-L01,EX-CH04-S02,Rafi,live,,I checked twice. Three times. I wanted to sound relaxed.,game/assets/audio/voice/Rafi/VO_EX-CH04-S02-L01.ogg
+EX-CH04-S02-L02,EX-CH04-S02,Ferreira,earth_link,Earth link,Rafi leads the field team. Returning is part of the objective.,game/assets/audio/voice/Ferreira/VO_EX-CH04-S02-L02.ogg
+EX-CH04-S02-L03,EX-CH04-S02,Amara,live,,"Two at base, two in the rover. Each ledger counts its own people.",game/assets/audio/voice/Amara/VO_EX-CH04-S02-L03.ogg
+EX-CH04-S02-L04,EX-CH04-S02,Kai,live,,Light checked. Once more is not a new person in the manifest.,game/assets/audio/voice/Kai/VO_EX-CH04-S02-L04.ogg
+EX-CH04-S03-L01,EX-CH04-S03,Kai,live,,The short route is right there.,game/assets/audio/voice/Kai/VO_EX-CH04-S03-L01.ogg
+EX-CH04-S03-L02,EX-CH04-S03,Amara,radio,local link,So is its slope limit.,game/assets/audio/voice/Amara/VO_EX-CH04-S03-L02.ogg
+EX-CH04-S03-L03,EX-CH04-S03,Rafi,live,,Both directions count. Both constraints count.,game/assets/audio/voice/Rafi/VO_EX-CH04-S03-L03.ogg
+EX-CH04-S03-L04,EX-CH04-S03,Mei,radio,local link,"Then we take the ridge together, even from different rooms.",game/assets/audio/voice/Mei/VO_EX-CH04-S03-L04.ogg
+EX-CH04-S04-L01,EX-CH04-S04,Rafi,live,,Beacon before the blind corner.,game/assets/audio/voice/Rafi/VO_EX-CH04-S04-L01.ogg
+EX-CH04-S04-L02,EX-CH04-S04,Kai,live,,A little returning light.,game/assets/audio/voice/Kai/VO_EX-CH04-S04-L02.ogg
+EX-CH04-S04-L03,EX-CH04-S04,Amara,radio,local link,Only if the link test says so.,game/assets/audio/voice/Amara/VO_EX-CH04-S04-L03.ogg
+EX-CH04-S04-L04,EX-CH04-S04,Mei,radio,local link,We see the chain. Keep the last position in the record.,game/assets/audio/voice/Mei/VO_EX-CH04-S04-L04.ogg
+EX-CH04-S05-L01,EX-CH04-S05,Kai,live,,"That bright patch is ice, right?",game/assets/audio/voice/Kai/VO_EX-CH04-S05-L01.ogg
+EX-CH04-S05-L02,EX-CH04-S05,Amara,radio,local link,Reference first. Bright is an image description.,game/assets/audio/voice/Amara/VO_EX-CH04-S05-L02.ogg
+EX-CH04-S05-L03,EX-CH04-S05,Rafi,live,,Dry reference recorded. Now the comparison.,game/assets/audio/voice/Rafi/VO_EX-CH04-S05-L03.ogg
+EX-CH04-S05-L04,EX-CH04-S05,Mei,radio,local link,Keep the negative result on the map too.,game/assets/audio/voice/Mei/VO_EX-CH04-S05-L04.ogg
+EX-CH04-S06-L01,EX-CH04-S06,Mei,radio,local link,That shape did not grow there.,game/assets/audio/voice/Mei/VO_EX-CH04-S06-L01.ogg
+EX-CH04-S06-L02,EX-CH04-S06,Kai,live,,Neither did we.,game/assets/audio/voice/Kai/VO_EX-CH04-S06-L02.ogg
+EX-CH04-S06-L03,EX-CH04-S06,Rafi,live,,Separate sample record. Separate case record. Seal stays closed.,game/assets/audio/voice/Rafi/VO_EX-CH04-S06-L03.ogg
+EX-CH04-S06-L04,EX-CH04-S06,Amara,radio,local link,Reserve supports recovery. Record the handling assessment first.,game/assets/audio/voice/Amara/VO_EX-CH04-S06-L04.ogg
+EX-CH04-S07-L01,EX-CH04-S07,Kai,live,,The message is under the lid.,game/assets/audio/voice/Kai/VO_EX-CH04-S07-L01.ogg
+EX-CH04-S07-L02,EX-CH04-S07,Mei,radio,local link,Then the lid can wait.,game/assets/audio/voice/Mei/VO_EX-CH04-S07-L02.ogg
+EX-CH04-S07-L03,EX-CH04-S07,Rafi,live,,"Probe, sleeve, cradle. Inner seal stays closed.",game/assets/audio/voice/Rafi/VO_EX-CH04-S07-L03.ogg
+EX-CH04-S07-L04,EX-CH04-S07,Amara,radio,local link,Shell temperature is not a complete seed-history record.,game/assets/audio/voice/Amara/VO_EX-CH04-S07-L04.ogg
+EX-CH04-S08-L01,EX-CH04-S08,Rafi,live,,Two supports. Sleeve seated before lift.,game/assets/audio/voice/Rafi/VO_EX-CH04-S08-L01.ogg
+EX-CH04-S08-L02,EX-CH04-S08,Kai,live,,Mount shows closed. Testing locked now.,game/assets/audio/voice/Kai/VO_EX-CH04-S08-L02.ogg
+EX-CH04-S08-L03,EX-CH04-S08,Mei,radio,local link,"One last context photo, please.",game/assets/audio/voice/Mei/VO_EX-CH04-S08-L03.ogg
+EX-CH04-S08-L04,EX-CH04-S08,Amara,radio,local link,Cargo and return forecast checked. Inner seal remains intact.,game/assets/audio/voice/Amara/VO_EX-CH04-S08-L04.ogg
+EX-CH04-S09-L01,EX-CH04-S09,Rafi,live,,Two returning crew. Two sealed cargo records. Reserve check.,game/assets/audio/voice/Rafi/VO_EX-CH04-S09-L01.ogg
+EX-CH04-S09-L02,EX-CH04-S09,Kai,live,,Same report shape. I can remember that.,game/assets/audio/voice/Kai/VO_EX-CH04-S09-L02.ogg
+EX-CH04-S09-L03,EX-CH04-S09,Amara,radio,local link,Prediction saved. Now compare the actual final reading.,game/assets/audio/voice/Amara/VO_EX-CH04-S09-L03.ogg
+EX-CH04-S09-L04,EX-CH04-S09,Mei,live,,Welcome home. The glovebox is ready.,game/assets/audio/voice/Mei/VO_EX-CH04-S09-L04.ogg
+EX-CH04-S10-L01,EX-CH04-S10,Amara,live,,Stable and dry. Now we open it inside the glovebox.,game/assets/audio/voice/Amara/VO_EX-CH04-S10-L01.ogg
+EX-CH04-S10-L02,EX-CH04-S10,Rafi,live,,Twelve distinct specimens. Twelve condition entries.,game/assets/audio/voice/Rafi/VO_EX-CH04-S10-L02.ogg
+EX-CH04-S10-L03,EX-CH04-S10,Kai,live,,Cotton. Like the first chapter of the real history.,game/assets/audio/voice/Kai/VO_EX-CH04-S10-L03.ogg
+EX-CH04-S10-L04,EX-CH04-S10,Mei,live,,We keep the whole collection safe before we choose what to grow.,game/assets/audio/voice/Mei/VO_EX-CH04-S10-L04.ogg
+EX-CH04-S11-L01,EX-CH04-S11,Mei,live,,The lid says: ask Commander Ferreira about Expedition Zero.,game/assets/audio/voice/Mei/VO_EX-CH04-S11-L01.ogg
+EX-CH04-S11-L02,EX-CH04-S11,Kai,live,,That is a question with an address.,game/assets/audio/voice/Kai/VO_EX-CH04-S11-L02.ogg
+EX-CH04-S11-L03,EX-CH04-S11,Rao,earth_link,Earth link,Manifest received. Your safety support is unchanged.,game/assets/audio/voice/Rao/VO_EX-CH04-S11-L03.ogg
+EX-CH04-S11-L04,EX-CH04-S11,Mei,live,,Then tell her we would like the whole story when she is ready.,game/assets/audio/voice/Mei/VO_EX-CH04-S11-L04.ogg
+EX-CH04-S12-L01,EX-CH04-S12,Kai,live,,We have a spare mug.,game/assets/audio/voice/Kai/VO_EX-CH04-S12-L01.ogg
+EX-CH04-S12-L02,EX-CH04-S12,Amara,live,,A carefully inventoried spare mug.,game/assets/audio/voice/Amara/VO_EX-CH04-S12-L02.ogg
+EX-CH04-S12-L03,EX-CH04-S12,Ferreira,earth_link,Earth link before travel,December 8 to 12. My relief assignment brings me there. I owe you the story.,game/assets/audio/voice/Ferreira/VO_EX-CH04-S12-L03.ogg
+EX-CH04-S12-L04,EX-CH04-S12,Mei,live,,Bring it when you come. The safety report is already here.,game/assets/audio/voice/Mei/VO_EX-CH04-S12-L04.ogg
+EX-CH05-S01-L01,EX-CH05-S01,Rafi,live,,"Name and seal indication, please.",game/assets/audio/voice/Rafi/VO_EX-CH05-S01-L01.ogg
+EX-CH05-S01-L02,EX-CH05-S01,Ferreira,live,,Ferreira. Seal indication checked twice.,game/assets/audio/voice/Ferreira/VO_EX-CH05-S01-L02.ogg
+EX-CH05-S01-L03,EX-CH05-S01,Kai,live,,Your mug passed inspection.,game/assets/audio/voice/Kai/VO_EX-CH05-S01-L03.ogg
+EX-CH05-S01-L04,EX-CH05-S01,Amara,live,,We are revising the occupancy ledger.,game/assets/audio/voice/Amara/VO_EX-CH05-S01-L04.ogg
+EX-CH05-S02-L01,EX-CH05-S02,Ferreira,live,,A good watch can be quiet.,game/assets/audio/voice/Ferreira/VO_EX-CH05-S02-L01.ogg
+EX-CH05-S02-L02,EX-CH05-S02,Amara,live,,Quiet still needs a record.,game/assets/audio/voice/Amara/VO_EX-CH05-S02-L02.ogg
+EX-CH05-S02-L03,EX-CH05-S02,Rafi,live,,Controller serial matches the manifest.,game/assets/audio/voice/Rafi/VO_EX-CH05-S02-L03.ogg
+EX-CH05-S02-L04,EX-CH05-S02,Kai,live,,The instructions stay here without Earth.,game/assets/audio/voice/Kai/VO_EX-CH05-S02-L04.ogg
+EX-CH05-S03-L01,EX-CH05-S03,Ferreira,live,,First the records. Then my memories.,game/assets/audio/voice/Ferreira/VO_EX-CH05-S03-L01.ogg
+EX-CH05-S03-L02,EX-CH05-S03,Amara,live,,A condition is not the failure time.,game/assets/audio/voice/Amara/VO_EX-CH05-S03-L02.ogg
+EX-CH05-S03-L03,EX-CH05-S03,Rafi,live,,Every name has a boarding mark.,game/assets/audio/voice/Rafi/VO_EX-CH05-S03-L03.ogg
+EX-CH05-S03-L04,EX-CH05-S03,Mei,live,,The garden was left. The gardener was not.,game/assets/audio/voice/Mei/VO_EX-CH05-S03-L04.ogg
+EX-CH05-S04-L01,EX-CH05-S04,Mei,live,,I thought those shapes were flowers.,game/assets/audio/voice/Mei/VO_EX-CH05-S04-L01.ogg
+EX-CH05-S04-L02,EX-CH05-S04,Amara,live,,Read the growth sheet beside the image.,game/assets/audio/voice/Amara/VO_EX-CH05-S04-L02.ogg
+EX-CH05-S04-L03,EX-CH05-S04,Ferreira,live,,We left before reproduction.,game/assets/audio/voice/Ferreira/VO_EX-CH05-S04-L03.ogg
+EX-CH05-S04-L04,EX-CH05-S04,Mei,live,,Then Alo finished a step they could not.,game/assets/audio/voice/Mei/VO_EX-CH05-S04-L04.ogg
+EX-CH05-S05-L01,EX-CH05-S05,Ferreira,live,,I was the engineer who could not fix the radio.,game/assets/audio/voice/Ferreira/VO_EX-CH05-S05-L01.ogg
+EX-CH05-S05-L02,EX-CH05-S05,Mei,live,,You could have told us.,game/assets/audio/voice/Mei/VO_EX-CH05-S05-L02.ogg
+EX-CH05-S05-L03,EX-CH05-S05,Ferreira,live,,Yes. I was afraid of how it would sound.,game/assets/audio/voice/Ferreira/VO_EX-CH05-S05-L03.ogg
+EX-CH05-S05-L04,EX-CH05-S05,Kai,live,,Then we can ask before we guess.,game/assets/audio/voice/Kai/VO_EX-CH05-S05-L04.ogg
+EX-CH05-S06-L01,EX-CH05-S06,Kai,live,,Matching shape is not matching specification.,game/assets/audio/voice/Kai/VO_EX-CH05-S06-L01.ogg
+EX-CH05-S06-L02,EX-CH05-S06,Rafi,live,,Read the connector and isolation points.,game/assets/audio/voice/Rafi/VO_EX-CH05-S06-L02.ogg
+EX-CH05-S06-L03,EX-CH05-S06,Mei,live,,Our other question needs permission.,game/assets/audio/voice/Mei/VO_EX-CH05-S06-L03.ogg
+EX-CH05-S06-L04,EX-CH05-S06,Ferreira,live,,Both kinds of repair deserve care.,game/assets/audio/voice/Ferreira/VO_EX-CH05-S06-L04.ogg
+EX-CH05-S07-L01,EX-CH05-S07,Kai,live,,No trails?,game/assets/audio/voice/Kai/VO_EX-CH05-S07-L01.ogg
+EX-CH05-S07-L02,EX-CH05-S07,Amara,live,,Not like meteors crossing Earth's air.,game/assets/audio/voice/Amara/VO_EX-CH05-S07-L02.ogg
+EX-CH05-S07-L03,EX-CH05-S07,Rafi,live,,Check the frame before and after.,game/assets/audio/voice/Rafi/VO_EX-CH05-S07-L03.ogg
+EX-CH05-S07-L04,EX-CH05-S07,Mei,live,,A tiny flash can leave a mark.,game/assets/audio/voice/Mei/VO_EX-CH05-S07-L04.ogg
+EX-CH05-S08-L01,EX-CH05-S08,Amara,live,,Two symptoms. Check their causes separately.,game/assets/audio/voice/Amara/VO_EX-CH05-S08-L01.ogg
+EX-CH05-S08-L02,EX-CH05-S08,Kai,live,,The dust kept a diary.,game/assets/audio/voice/Kai/VO_EX-CH05-S08-L02.ogg
+EX-CH05-S08-L03,EX-CH05-S08,Mei,live,,Read it after the pressure check.,game/assets/audio/voice/Mei/VO_EX-CH05-S08-L03.ogg
+EX-CH05-S08-L04,EX-CH05-S08,Ferreira,live,,"Protection changes the job, not the check.",game/assets/audio/voice/Ferreira/VO_EX-CH05-S08-L04.ogg
+EX-CH05-S09-L01,EX-CH05-S09,Rafi,live,,Tonight's flashes do not date the old fault.,game/assets/audio/voice/Rafi/VO_EX-CH05-S09-L01.ogg
+EX-CH05-S09-L02,EX-CH05-S09,Amara,live,,That blank is an honest result.,game/assets/audio/voice/Amara/VO_EX-CH05-S09-L02.ogg
+EX-CH05-S09-L03,EX-CH05-S09,Ferreira,live,,Leave it blank until we know.,game/assets/audio/voice/Ferreira/VO_EX-CH05-S09-L03.ogg
+EX-CH05-S09-L04,EX-CH05-S09,Mei,live,,An initial leads us. A record finishes it.,game/assets/audio/voice/Mei/VO_EX-CH05-S09-L04.ogg
+EX-CH05-S10-L01,EX-CH05-S10,Rao,earth_link,live Earth link,She gave permission to share the page.,game/assets/audio/voice/Rao/VO_EX-CH05-S10-L01.ogg
+EX-CH05-S10-L02,EX-CH05-S10,Ferreira,live,,"Dr. Noor Rahman. Our gardener, from Bangladesh.",game/assets/audio/voice/Ferreira/VO_EX-CH05-S10-L02.ogg
+EX-CH05-S10-L03,EX-CH05-S10,Mei,live,,She read the reports we sent?,game/assets/audio/voice/Mei/VO_EX-CH05-S10-L03.ogg
+EX-CH05-S10-L04,EX-CH05-S10,Rao,earth_link,live Earth link,Every one that reached Earth.,game/assets/audio/voice/Rao/VO_EX-CH05-S10-L04.ogg
+EX-CH05-S11-L01,EX-CH05-S11,Kai,live,,Should we send every graph?,game/assets/audio/voice/Kai/VO_EX-CH05-S11-L01.ogg
+EX-CH05-S11-L02,EX-CH05-S11,Amara,live,,Attachments can do that.,game/assets/audio/voice/Amara/VO_EX-CH05-S11-L02.ogg
+EX-CH05-S11-L03,EX-CH05-S11,Mei,live,,The invitation should sound like one.,game/assets/audio/voice/Mei/VO_EX-CH05-S11-L03.ogg
+EX-CH05-S11-L04,EX-CH05-S11,Ferreira,live,,Leave her room to answer.,game/assets/audio/voice/Ferreira/VO_EX-CH05-S11-L04.ogg
+EX-CH05-S12-L01,EX-CH05-S12,Noor,text,text,Thank you for asking. I would like to see what you grow next.,
+EX-CH05-S12-L02,EX-CH05-S12,Amara,live,,Cotton planted. Eleven other vault specimens protected.,game/assets/audio/voice/Amara/VO_EX-CH05-S12-L02.ogg
+EX-CH05-S12-L03,EX-CH05-S12,Rafi,live,,Founder reserve is a separate ledger.,game/assets/audio/voice/Rafi/VO_EX-CH05-S12-L03.ogg
+EX-CH05-S12-L04,EX-CH05-S12,Mei,live,,"A new seed, not the old flower returning.",game/assets/audio/voice/Mei/VO_EX-CH05-S12-L04.ogg
+EX-CH06-S01-L01,EX-CH06-S01,Kai,live,,The lamp still matters.,game/assets/audio/voice/Kai/VO_EX-CH06-S01-L01.ogg
+EX-CH06-S01-L02,EX-CH06-S01,Rafi,live,,So does asking for company.,game/assets/audio/voice/Rafi/VO_EX-CH06-S01-L02.ogg
+EX-CH06-S01-L03,EX-CH06-S01,Ferreira,live,,Plan with the facts you have.,game/assets/audio/voice/Ferreira/VO_EX-CH06-S01-L03.ogg
+EX-CH06-S01-L04,EX-CH06-S01,Amara,live,,Guide light goes on the protected list.,game/assets/audio/voice/Amara/VO_EX-CH06-S01-L04.ogg
+EX-CH06-S02-L01,EX-CH06-S02,Kai,live,,I did not know when it would return.,game/assets/audio/voice/Kai/VO_EX-CH06-S02-L01.ogg
+EX-CH06-S02-L02,EX-CH06-S02,Rafi,live,,This time we can read the plan.,game/assets/audio/voice/Rafi/VO_EX-CH06-S02-L02.ogg
+EX-CH06-S02-L03,EX-CH06-S02,Amara,live,,A forecast still has limits.,game/assets/audio/voice/Amara/VO_EX-CH06-S02-L03.ogg
+EX-CH06-S02-L04,EX-CH06-S02,Kai,live,,Then label the limits too.,game/assets/audio/voice/Kai/VO_EX-CH06-S02-L04.ogg
+EX-CH06-S03-L01,EX-CH06-S03,Kai,live,,Five segments. Essentials in every one.,game/assets/audio/voice/Kai/VO_EX-CH06-S03-L01.ogg
+EX-CH06-S03-L02,EX-CH06-S03,Amara,live,,Pump once. Camera once.,game/assets/audio/voice/Amara/VO_EX-CH06-S03-L02.ogg
+EX-CH06-S03-L03,EX-CH06-S03,Rafi,live,,"Seven game units, one accounting model.",game/assets/audio/voice/Rafi/VO_EX-CH06-S03-L03.ogg
+EX-CH06-S03-L04,EX-CH06-S03,Ferreira,live,,Show the forecast before committing.,game/assets/audio/voice/Ferreira/VO_EX-CH06-S03-L04.ogg
+EX-CH06-S04-L01,EX-CH06-S04,Kai,live,,I wanted the whole corridor bright.,game/assets/audio/voice/Kai/VO_EX-CH06-S04-L01.ogg
+EX-CH06-S04-L02,EX-CH06-S04,Rafi,live,,You need a known way through it.,game/assets/audio/voice/Rafi/VO_EX-CH06-S04-L02.ogg
+EX-CH06-S04-L03,EX-CH06-S04,Mei,live,,Keep that way in the plan.,game/assets/audio/voice/Mei/VO_EX-CH06-S04-L03.ogg
+EX-CH06-S04-L04,EX-CH06-S04,Kai,live,,Small light. Protected supply.,game/assets/audio/voice/Kai/VO_EX-CH06-S04-L04.ogg
+EX-CH06-S05-L01,EX-CH06-S05,Amara,live,,Predict the affected branch first.,game/assets/audio/voice/Amara/VO_EX-CH06-S05-L01.ogg
+EX-CH06-S05-L02,EX-CH06-S05,Kai,live,,Essentials should stay on.,game/assets/audio/voice/Kai/VO_EX-CH06-S05-L02.ogg
+EX-CH06-S05-L03,EX-CH06-S05,Rafi,live,,Local channel check. Here.,game/assets/audio/voice/Rafi/VO_EX-CH06-S05-L03.ogg
+EX-CH06-S05-L04,EX-CH06-S05,Ferreira,live,,A rehearsal pass does not sign the watch.,game/assets/audio/voice/Ferreira/VO_EX-CH06-S05-L04.ogg
+EX-CH06-S06-L01,EX-CH06-S06,Mei,live,,Plants checked.,game/assets/audio/voice/Mei/VO_EX-CH06-S06-L01.ogg
+EX-CH06-S06-L02,EX-CH06-S06,Amara,live,,Atmosphere checked.,game/assets/audio/voice/Amara/VO_EX-CH06-S06-L02.ogg
+EX-CH06-S06-L03,EX-CH06-S06,Rafi,live,,"Shelter, lamp and local channel checked.",game/assets/audio/voice/Rafi/VO_EX-CH06-S06-L03.ogg
+EX-CH06-S06-L04,EX-CH06-S06,Kai,live,,Ready means all of us.,game/assets/audio/voice/Kai/VO_EX-CH06-S06-L04.ogg
+EX-CH06-S07-L01,EX-CH06-S07,Mei,live,,Every sunrise and sunset at once.,game/assets/audio/voice/Mei/VO_EX-CH06-S07-L01.ogg
+EX-CH06-S07-L02,EX-CH06-S07,Amara,live,,A picture for light passing through Earth's air.,game/assets/audio/voice/Amara/VO_EX-CH06-S07-L02.ogg
+EX-CH06-S07-L03,EX-CH06-S07,Kai,live,,Home helps us understand the dark.,game/assets/audio/voice/Kai/VO_EX-CH06-S07-L03.ogg
+EX-CH06-S07-L04,EX-CH06-S07,Rafi,live,,Keep the diagram separate from the camera.,game/assets/audio/voice/Rafi/VO_EX-CH06-S07-L04.ogg
+EX-CH06-S08-L01,EX-CH06-S08,Family,earth_link,Earth audio,Is someone there with you?,game/assets/audio/voice/Family/VO_EX-CH06-S08-L01.ogg
+EX-CH06-S08-L02,EX-CH06-S08,Kai,live,,The whole crew. And a plan.,game/assets/audio/voice/Kai/VO_EX-CH06-S08-L02.ogg
+EX-CH06-S08-L03,EX-CH06-S08,Rafi,live,,Hello from the lamp department.,game/assets/audio/voice/Rafi/VO_EX-CH06-S08-L03.ogg
+EX-CH06-S08-L04,EX-CH06-S08,Kai,live,,We know which light comes next.,game/assets/audio/voice/Kai/VO_EX-CH06-S08-L04.ogg
+EX-CH06-S09-L01,EX-CH06-S09,Noor,text,text,I watched a red ring from there once. — N.,
+EX-CH06-S09-L02,EX-CH06-S09,Mei,live,,We know that name now.,game/assets/audio/voice/Mei/VO_EX-CH06-S09-L02.ogg
+EX-CH06-S09-L03,EX-CH06-S09,Amara,live,,The earlier date stays unspecified.,game/assets/audio/voice/Amara/VO_EX-CH06-S09-L03.ogg
+EX-CH06-S09-L04,EX-CH06-S09,Rafi,live,,Observation saved locally.,game/assets/audio/voice/Rafi/VO_EX-CH06-S09-L04.ogg
+EX-CH06-S10-L01,EX-CH06-S10,Kai,live,,"Rafi, stay on the channel.",game/assets/audio/voice/Kai/VO_EX-CH06-S10-L01.ogg
+EX-CH06-S10-L02,EX-CH06-S10,Rafi,live,,Here.,game/assets/audio/voice/Rafi/VO_EX-CH06-S10-L02.ogg
+EX-CH06-S10-L03,EX-CH06-S10,Amara,live,,Essentials hold. Isolate F2.,game/assets/audio/voice/Amara/VO_EX-CH06-S10-L03.ogg
+EX-CH06-S10-L04,EX-CH06-S10,Kai,live,,"Isolated. Check, then reset.",game/assets/audio/voice/Kai/VO_EX-CH06-S10-L04.ogg
+EX-CH06-S11-L01,EX-CH06-S11,Amara,live,,Keep the interruption in the record.,game/assets/audio/voice/Amara/VO_EX-CH06-S11-L01.ogg
+EX-CH06-S11-L02,EX-CH06-S11,Kai,live,,I was afraid. I still followed the steps.,game/assets/audio/voice/Kai/VO_EX-CH06-S11-L02.ogg
+EX-CH06-S11-L03,EX-CH06-S11,Rafi,live,,And we stayed on the channel.,game/assets/audio/voice/Rafi/VO_EX-CH06-S11-L03.ogg
+EX-CH06-S11-L04,EX-CH06-S11,Ferreira,live,,That is something you can repeat.,game/assets/audio/voice/Ferreira/VO_EX-CH06-S11-L04.ogg
+EX-CH06-S12-L01,EX-CH06-S12,Rafi,live,,That region needs watching.,game/assets/audio/voice/Rafi/VO_EX-CH06-S12-L01.ogg
+EX-CH06-S12-L02,EX-CH06-S12,Amara,live,,Watching is not an exact storm forecast.,game/assets/audio/voice/Amara/VO_EX-CH06-S12-L02.ogg
+EX-CH06-S12-L03,EX-CH06-S12,Mei,live,,Cotton care stays on the calendar.,game/assets/audio/voice/Mei/VO_EX-CH06-S12-L03.ogg
+EX-CH06-S12-L04,EX-CH06-S12,Kai,live,,So does the next handover.,game/assets/audio/voice/Kai/VO_EX-CH06-S12-L04.ogg
+EX-CH07-S01-L01,EX-CH07-S01,Rafi,live,,New observations. Everyone needs them.,game/assets/audio/voice/Rafi/VO_EX-CH07-S01-L01.ogg
+EX-CH07-S01-L02,EX-CH07-S01,Rao,earth_link,live Earth link,Historical source received and labelled.,game/assets/audio/voice/Rao/VO_EX-CH07-S01-L02.ogg
+EX-CH07-S01-L03,EX-CH07-S01,Ferreira,live,,"Your plan, cadets. I retain command responsibility.",game/assets/audio/voice/Ferreira/VO_EX-CH07-S01-L03.ogg
+EX-CH07-S01-L04,EX-CH07-S01,Kai,live,,Read every observation before we set anything.,game/assets/audio/voice/Kai/VO_EX-CH07-S01-L04.ogg
+EX-CH07-S02-L01,EX-CH07-S02,Amara,live,,April's card counted four.,game/assets/audio/voice/Amara/VO_EX-CH07-S02-L01.ogg
+EX-CH07-S02-L02,EX-CH07-S02,Ferreira,live,,Today it must count me.,game/assets/audio/voice/Ferreira/VO_EX-CH07-S02-L02.ogg
+EX-CH07-S02-L03,EX-CH07-S02,Mei,live,,Plants are not our whole life-support system.,game/assets/audio/voice/Mei/VO_EX-CH07-S02-L03.ogg
+EX-CH07-S02-L04,EX-CH07-S02,Rafi,live,,Five names. Five places inside.,game/assets/audio/voice/Rafi/VO_EX-CH07-S02-L04.ogg
+EX-CH07-S03-L01,EX-CH07-S03,Kai,live,,Four good ideas can still collide.,game/assets/audio/voice/Kai/VO_EX-CH07-S03-L01.ogg
+EX-CH07-S03-L02,EX-CH07-S03,Mei,live,,Say when the borrowed water returns.,game/assets/audio/voice/Mei/VO_EX-CH07-S03-L02.ogg
+EX-CH07-S03-L03,EX-CH07-S03,Amara,live,,And keep circulation running meanwhile.,game/assets/audio/voice/Amara/VO_EX-CH07-S03-L03.ogg
+EX-CH07-S03-L04,EX-CH07-S03,Rafi,live,,One schedule. Every dependency.,game/assets/audio/voice/Rafi/VO_EX-CH07-S03-L04.ogg
+EX-CH07-S04-L01,EX-CH07-S04,Mei,live,,Fifteen and fifteen. Thirty founders.,game/assets/audio/voice/Mei/VO_EX-CH07-S04-L01.ogg
+EX-CH07-S04-L02,EX-CH07-S04,Rafi,live,,Bundles stay through the last exposure.,game/assets/audio/voice/Rafi/VO_EX-CH07-S04-L02.ogg
+EX-CH07-S04-L03,EX-CH07-S04,Amara,live,,"Return after the sample, not before.",game/assets/audio/voice/Amara/VO_EX-CH07-S04-L03.ogg
+EX-CH07-S04-L04,EX-CH07-S04,Ferreira,live,,"Name the valve, then touch it.",game/assets/audio/voice/Ferreira/VO_EX-CH07-S04-L04.ogg
+EX-CH07-S05-L01,EX-CH07-S05,Rafi,live,,Kai?,game/assets/audio/voice/Rafi/VO_EX-CH07-S05-L01.ogg
+EX-CH07-S05-L02,EX-CH07-S05,Kai,live,,Here. Protected branch checked.,game/assets/audio/voice/Kai/VO_EX-CH07-S05-L02.ogg
+EX-CH07-S05-L03,EX-CH07-S05,Amara,live,,Atmosphere checked. Mei is here.,game/assets/audio/voice/Amara/VO_EX-CH07-S05-L03.ogg
+EX-CH07-S05-L04,EX-CH07-S05,Ferreira,live,,Ferreira here. Fifth position confirmed.,game/assets/audio/voice/Ferreira/VO_EX-CH07-S05-L04.ogg
+EX-CH07-S06-L01,EX-CH07-S06,Amara,live,,Compare the result with the forecast.,game/assets/audio/voice/Amara/VO_EX-CH07-S06-L01.ogg
+EX-CH07-S06-L02,EX-CH07-S06,Kai,live,,Protected branch matches.,game/assets/audio/voice/Kai/VO_EX-CH07-S06-L02.ogg
+EX-CH07-S06-L03,EX-CH07-S06,Mei,live,,Living garden still on local telemetry.,game/assets/audio/voice/Mei/VO_EX-CH07-S06-L03.ogg
+EX-CH07-S06-L04,EX-CH07-S06,Rafi,live,,"First wave checked, not merely endured.",game/assets/audio/voice/Rafi/VO_EX-CH07-S06-L04.ogg
+EX-CH07-S07-L01,EX-CH07-S07,Noor,recording,historical recording,"I'm calling the seeds Alo, light.",game/assets/audio/voice/Noor/VO_EX-CH07-S07-L01.ogg
+EX-CH07-S07-L02,EX-CH07-S07,Mei,live,,"The name was a hope, not a prediction.",game/assets/audio/voice/Mei/VO_EX-CH07-S07-L02.ogg
+EX-CH07-S07-L03,EX-CH07-S07,Kai,live,,Then our report needs more than a good line.,game/assets/audio/voice/Kai/VO_EX-CH07-S07-L03.ogg
+EX-CH07-S07-L04,EX-CH07-S07,Amara,live,,It needs the next checked step.,game/assets/audio/voice/Amara/VO_EX-CH07-S07-L04.ogg
+EX-CH07-S08-L01,EX-CH07-S08,Rafi,live,,Peak on the chart. Check the shield.,game/assets/audio/voice/Rafi/VO_EX-CH07-S08-L01.ogg
+EX-CH07-S08-L02,EX-CH07-S08,Kai,live,,No new solar income.,game/assets/audio/voice/Kai/VO_EX-CH07-S08-L02.ogg
+EX-CH07-S08-L03,EX-CH07-S08,Amara,live,,Five-person draw still applies.,game/assets/audio/voice/Amara/VO_EX-CH07-S08-L03.ogg
+EX-CH07-S08-L04,EX-CH07-S08,Mei,live,,Final exposure first. Then return the water.,game/assets/audio/voice/Mei/VO_EX-CH07-S08-L04.ogg
+EX-CH07-S09-L01,EX-CH07-S09,Kai,live,,I can hear Rafi. Earth cannot hear us.,game/assets/audio/voice/Kai/VO_EX-CH07-S09-L01.ogg
+EX-CH07-S09-L02,EX-CH07-S09,Amara,live,,Local pass. External path failed.,game/assets/audio/voice/Amara/VO_EX-CH07-S09-L02.ogg
+EX-CH07-S09-L03,EX-CH07-S09,Ferreira,live,,Correct isolation was still the right decision.,game/assets/audio/voice/Ferreira/VO_EX-CH07-S09-L03.ogg
+EX-CH07-S09-L04,EX-CH07-S09,Rafi,live,,Two clear readings before outside preparation.,game/assets/audio/voice/Rafi/VO_EX-CH07-S09-L04.ogg
+EX-CH07-S10-L01,EX-CH07-S10,Mei,live,,The garden needs ordinary days too.,game/assets/audio/voice/Mei/VO_EX-CH07-S10-L01.ogg
+EX-CH07-S10-L02,EX-CH07-S10,Amara,live,,"Account for the interval, not just the climax.",game/assets/audio/voice/Amara/VO_EX-CH07-S10-L02.ogg
+EX-CH07-S10-L03,EX-CH07-S10,Kai,live,,No reply from Earth is in this plan.,game/assets/audio/voice/Kai/VO_EX-CH07-S10-L03.ogg
+EX-CH07-S10-L04,EX-CH07-S10,Ferreira,live,,We have local procedures and stores.,game/assets/audio/voice/Ferreira/VO_EX-CH07-S10-L04.ogg
+EX-CH07-S11-L01,EX-CH07-S11,Rafi,live,,A high dish still needs to hear Aurora.,game/assets/audio/voice/Rafi/VO_EX-CH07-S11-L01.ogg
+EX-CH07-S11-L02,EX-CH07-S11,Kai,live,,"Every neighbouring link, not one magic line.",game/assets/audio/voice/Kai/VO_EX-CH07-S11-L02.ogg
+EX-CH07-S11-L03,EX-CH07-S11,Ferreira,live,,Check the housing before packing the spare.,game/assets/audio/voice/Ferreira/VO_EX-CH07-S11-L03.ogg
+EX-CH07-S11-L04,EX-CH07-S11,Amara,live,,A bench pass is not field verification.,game/assets/audio/voice/Amara/VO_EX-CH07-S11-L04.ogg
+EX-CH07-S12-L01,EX-CH07-S12,Ferreira,live,,Kai and Rafi with me. Mei and Amara hold Aurora.,game/assets/audio/voice/Ferreira/VO_EX-CH07-S12-L01.ogg
+EX-CH07-S12-L02,EX-CH07-S12,Amara,live,,"Two at home, then five for the last three hours.",game/assets/audio/voice/Amara/VO_EX-CH07-S12-L02.ogg
+EX-CH07-S12-L03,EX-CH07-S12,Kai,live,,Keep the small guide light.,game/assets/audio/voice/Kai/VO_EX-CH07-S12-L03.ogg
+EX-CH07-S12-L04,EX-CH07-S12,Mei,live,,It is already in the plan.,game/assets/audio/voice/Mei/VO_EX-CH07-S12-L04.ogg
+EX-CH08-S01-L01,EX-CH08-S01,Rafi,live,,Twenty-four out. Three repair. Twenty-four back.,game/assets/audio/voice/Rafi/VO_EX-CH08-S01-L01.ogg
+EX-CH08-S01-L02,EX-CH08-S01,Amara,live,,Seventy-two hours of independent supplies.,game/assets/audio/voice/Amara/VO_EX-CH08-S01-L02.ogg
+EX-CH08-S01-L03,EX-CH08-S01,Mei,live,,I have the garden.,game/assets/audio/voice/Mei/VO_EX-CH08-S01-L03.ogg
+EX-CH08-S01-L04,EX-CH08-S01,Ferreira,live,,"We have a road, not a heroic shortcut.",game/assets/audio/voice/Ferreira/VO_EX-CH08-S01-L04.ogg
+EX-CH08-S02-L01,EX-CH08-S02,Kai,live,,The shorter line looks cheaper.,game/assets/audio/voice/Kai/VO_EX-CH08-S02-L01.ogg
+EX-CH08-S02-L02,EX-CH08-S02,Rafi,live,,Check what its slope permits.,game/assets/audio/voice/Rafi/VO_EX-CH08-S02-L02.ogg
+EX-CH08-S02-L03,EX-CH08-S02,Ferreira,live,,A reserve cannot rescue an impossible road.,game/assets/audio/voice/Ferreira/VO_EX-CH08-S02-L03.ogg
+EX-CH08-S02-L04,EX-CH08-S02,Kai,live,,Then the return stays in the departure budget.,game/assets/audio/voice/Kai/VO_EX-CH08-S02-L04.ogg
+EX-CH08-S03-L01,EX-CH08-S03,Rafi,live,,"Match the marker, not the silhouette.",game/assets/audio/voice/Rafi/VO_EX-CH08-S03-L01.ogg
+EX-CH08-S03-L02,EX-CH08-S03,Mei,radio,Aurora local radio,Position packet received.,game/assets/audio/voice/Mei/VO_EX-CH08-S03-L02.ogg
+EX-CH08-S03-L03,EX-CH08-S03,Kai,live,,Marker two is dark.,game/assets/audio/voice/Kai/VO_EX-CH08-S03-L03.ogg
+EX-CH08-S03-L04,EX-CH08-S03,Ferreira,live,,Stop at the surveyed pad.,game/assets/audio/voice/Ferreira/VO_EX-CH08-S03-L04.ogg
+EX-CH08-S04-L01,EX-CH08-S04,Kai,live,,Power isolated before the battery.,game/assets/audio/voice/Kai/VO_EX-CH08-S04-L01.ogg
+EX-CH08-S04-L02,EX-CH08-S04,Rafi,live,,Tether and suit checked.,game/assets/audio/voice/Rafi/VO_EX-CH08-S04-L02.ogg
+EX-CH08-S04-L03,EX-CH08-S04,Ferreira,live,,A light is not yet a link.,game/assets/audio/voice/Ferreira/VO_EX-CH08-S04-L03.ogg
+EX-CH08-S04-L04,EX-CH08-S04,Kai,live,,Test both neighbours. Then continue.,game/assets/audio/voice/Kai/VO_EX-CH08-S04-L04.ogg
+EX-CH08-S05-L01,EX-CH08-S05,Amara,live,,Same darkness. Different garden.,game/assets/audio/voice/Amara/VO_EX-CH08-S05-L01.ogg
+EX-CH08-S05-L02,EX-CH08-S05,Mei,live,,Different us.,game/assets/audio/voice/Mei/VO_EX-CH08-S05-L02.ogg
+EX-CH08-S05-L03,EX-CH08-S05,Amara,live,,Two here until the return.,game/assets/audio/voice/Amara/VO_EX-CH08-S05-L03.ogg
+EX-CH08-S05-L04,EX-CH08-S05,Mei,live,,Then five for the last three hours.,game/assets/audio/voice/Mei/VO_EX-CH08-S05-L04.ogg
+EX-CH08-S06-L01,EX-CH08-S06,Amara,live,,Home checks first. Then acknowledge.,game/assets/audio/voice/Amara/VO_EX-CH08-S06-L01.ogg
+EX-CH08-S06-L02,EX-CH08-S06,Mei,live,,The packet says when and where.,game/assets/audio/voice/Mei/VO_EX-CH08-S06-L02.ogg
+EX-CH08-S06-L03,EX-CH08-S06,Rafi,radio,local radio,Summit reached. Three aboard.,game/assets/audio/voice/Rafi/VO_EX-CH08-S06-L03.ogg
+EX-CH08-S06-L04,EX-CH08-S06,Amara,radio,Aurora local radio,Current arrival packet acknowledged.,game/assets/audio/voice/Amara/VO_EX-CH08-S06-L04.ogg
+EX-CH08-S07-L01,EX-CH08-S07,Ferreira,live,,Power isolated?,game/assets/audio/voice/Ferreira/VO_EX-CH08-S07-L01.ogg
+EX-CH08-S07-L02,EX-CH08-S07,Kai,live,,Isolated. Zero verified.,game/assets/audio/voice/Kai/VO_EX-CH08-S07-L02.ogg
+EX-CH08-S07-L03,EX-CH08-S07,Rafi,live,,Tether set. Housing clear.,game/assets/audio/voice/Rafi/VO_EX-CH08-S07-L03.ogg
+EX-CH08-S07-L04,EX-CH08-S07,Kai,live,,Closed before reconnecting.,game/assets/audio/voice/Kai/VO_EX-CH08-S07-L04.ogg
+EX-CH08-S08-L01,EX-CH08-S08,Kai,live,,Aurora first.,game/assets/audio/voice/Kai/VO_EX-CH08-S08-L01.ogg
+EX-CH08-S08-L02,EX-CH08-S08,Rafi,live,,Road chain stable.,game/assets/audio/voice/Rafi/VO_EX-CH08-S08-L02.ogg
+EX-CH08-S08-L03,EX-CH08-S08,Ferreira,live,,Now the Earth leg. Check obstruction too.,game/assets/audio/voice/Ferreira/VO_EX-CH08-S08-L03.ogg
+EX-CH08-S08-L04,EX-CH08-S08,Kai,live,,"Both shores, not just the bright one.",game/assets/audio/voice/Kai/VO_EX-CH08-S08-L04.ogg
+EX-CH08-S09-L01,EX-CH08-S09,Rafi,live,,Strong is not the same as correct.,game/assets/audio/voice/Rafi/VO_EX-CH08-S09-L01.ogg
+EX-CH08-S09-L02,EX-CH08-S09,Kai,live,,ALO42 sent. Exact match returned.,game/assets/audio/voice/Kai/VO_EX-CH08-S09-L02.ogg
+EX-CH08-S09-L03,EX-CH08-S09,Amara,radio,Aurora local radio,Current telemetry follows.,game/assets/audio/voice/Amara/VO_EX-CH08-S09-L03.ogg
+EX-CH08-S09-L04,EX-CH08-S09,Ferreira,live,,Now verify the voices at both ends.,game/assets/audio/voice/Ferreira/VO_EX-CH08-S09-L04.ogg
+EX-CH08-S10-L01,EX-CH08-S10,Noor,earth_link,first live Earth voice,"Hello, Aurora. This is Noor.",game/assets/audio/voice/Noor/VO_EX-CH08-S10-L01.ogg
+EX-CH08-S10-L02,EX-CH08-S10,Mei,live,,We kept a place for you.,game/assets/audio/voice/Mei/VO_EX-CH08-S10-L02.ogg
+EX-CH08-S10-L03,EX-CH08-S10,Ferreira,live,,You brought us the seeds.,game/assets/audio/voice/Ferreira/VO_EX-CH08-S10-L03.ogg
+EX-CH08-S10-L04,EX-CH08-S10,Amara,live,,The garden has more than one gardener.,game/assets/audio/voice/Amara/VO_EX-CH08-S10-L04.ogg
+EX-CH08-S11-L01,EX-CH08-S11,Rafi,live,,Return is part of the mission.,game/assets/audio/voice/Rafi/VO_EX-CH08-S11-L01.ogg
+EX-CH08-S11-L02,EX-CH08-S11,Kai,live,,Same road. New timestamps.,game/assets/audio/voice/Kai/VO_EX-CH08-S11-L02.ogg
+EX-CH08-S11-L03,EX-CH08-S11,Amara,radio,Aurora local radio,Three arrivals expected and checked.,game/assets/audio/voice/Amara/VO_EX-CH08-S11-L03.ogg
+EX-CH08-S11-L04,EX-CH08-S11,Mei,live,,Five home. Three hours to first light.,game/assets/audio/voice/Mei/VO_EX-CH08-S11-L04.ogg
+EX-CH08-S12-L01,EX-CH08-S12,Mei,live,,Temperature and pressure steady.,game/assets/audio/voice/Mei/VO_EX-CH08-S12-L01.ogg
+EX-CH08-S12-L02,EX-CH08-S12,Amara,live,,Seeds protected. Everyone home.,game/assets/audio/voice/Amara/VO_EX-CH08-S12-L02.ogg
+EX-CH08-S12-L03,EX-CH08-S12,Ferreira,live,,You did not just survive the Moon. You grew it.,game/assets/audio/voice/Ferreira/VO_EX-CH08-S12-L03.ogg
+EX-CH08-S12-L04,EX-CH08-S12,Noor,earth_link,live Earth link,Show me the cotton by the window.,game/assets/audio/voice/Noor/VO_EX-CH08-S12-L04.ogg
