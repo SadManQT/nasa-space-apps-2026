@@ -1,0 +1,35 @@
+# OS junk
+.DS_Store
+**/.DS_Store
+Thumbs.db
+*.Spotlight-V100
+*.Trashes
+
+# Editor & environment
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.bak
+
+# Python cache & logs
+**/__pycache__/
+*.py[cod]
+*.log
+
+# Staging area for AI-generated models (raw downloads, reuse sources, pre-Godot finals).
+# Large and regenerable; the committed game copies live in game/assets/.
+production/models/
+
+# Cutscene mixes (rebuilt by compose_cutscene.py)
+production/cutscenes/v7/*.wav
+
+# Outdated cutscenes archive & masters/review if generated locally
+production/cutscenes/masters/
+production/cutscenes/review/
+archive/
+
+# Godot generated cache (.import files are committed)
+.godot/
+game/.godot/
