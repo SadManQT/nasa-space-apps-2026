@@ -21,6 +21,7 @@ Last updated: 27 October 2026.
 | The look and the science rules | [production/ART_BIBLE.md](production/ART_BIBLE.md) |
 | What every AI generation was | [production/AI_PROMPT_LOG.md](production/AI_PROMPT_LOG.md) |
 | How to make or check an asset | Section 6, scripts in [production/tools/](production/tools/) |
+| Detailed AI execution prompts for the complete game | [execution/00_START_HERE.md](execution/00_START_HERE.md), [master executor](execution/01_MASTER_EXECUTOR.md), and [coverage index](execution/99_COVERAGE_MATRIX.md) |
 
 ## 1. Project in one paragraph
 
@@ -290,6 +291,8 @@ Rules from the cinematic guide and the final story: cutscenes are short, embedde
 Optional opening (from the gameplay entry flow): mustard fields to the Moon chamber, 20–30 s, with no claim that Alo existed before the story.
 
 ## 10. Status (27 Oct 2026)
+
+**27 Oct — execution documentation:** `execution/` now contains 300 separate task prompts plus shared contracts, current-state notes, phased scheduling, ownership/dependency guidance and coverage/validation indexes. The prompts cover the 75 registry assets, 22 additional required families, all 32 missions/96 scenes/385 lines, 16 puzzles, 16 UI families, 18 cutscenes, speaker groups, music/SFX, source evidence, upgrades, endings, animation, QA and release. This is a documentation deliverable; it does not mark the implementation tasks complete or change approved story/art/numeric decisions. Start with [execution/00_START_HERE.md](execution/00_START_HERE.md). No asset generation, credit spend, commit or push is part of creating this pack.
 
 **27 Oct late (walks, showcase, cutscenes v7):**
 - Walks: the user approved Ferreira's walk, so every character's `Walk_loop` is now their own Meshy rig's plain walk (`walking.glb`, "walking_man"), passed first in `tools/build_character_v7.sh`. The SprintStop and RunToWalk one-shots are no longer played (they flailed the arms); gait cycles are sampled through cubic rotation curves.
