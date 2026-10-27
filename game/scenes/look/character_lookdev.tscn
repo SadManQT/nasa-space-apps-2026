@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/look/character_lookdev.gd" id="1_script"]
+[ext_resource type="Environment" path="res://environments/look/character_look.tres" id="2_environment"]
+
+[sub_resource type="PlaneMesh" id="Plane_floor"]
+size = Vector2(14, 8)
+
+[sub_resource type="StandardMaterial3D" id="Mat_floor"]
+albedo_color = Color(0.145, 0.175, 0.23, 1)
+metallic = 0.08
+roughness = 0.86
+
+[sub_resource type="StandardMaterial3D" id="Mat_backdrop"]
+albedo_color = Color(0.035, 0.055, 0.09, 1)
+roughness = 0.92
+
+[node name="CharacterLookdev" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_environment")
+
+[node name="Stage" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Stage"]
+mesh = SubResource("Plane_floor")
+material_override = SubResource("Mat_floor")
+
+[node name="Backdrop" type="CSGBox3D" parent="Stage"]
+size = Vector3(14, 5, 0.2)
+position = Vector3(0, 2.5, -3.6)
+use_collision = false
+material = SubResource("Mat_backdrop")
+
+[node name="KeyLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-48, -28, 0)
+light_color = Color(1, 0.91, 0.78, 1)
+light_energy = 2.05
+shadow_enabled = true
+shadow_bias = 0.045
+shadow_normal_bias = 1.35
+shadow_opacity = 0.82
+light_angular_distance = 2.2
+directional_shadow_max_distance = 28.0
+
+[node name="FillLight" type="OmniLight3D" parent="."]
+position = Vector3(-3.5, 3.4, 3.8)
+light_color = Color(0.63, 0.78, 1, 1)
+light_energy = 1.45
+omni_range = 11.0
+shadow_enabled = false
+
+[node name="RimLight" type="OmniLight3D" parent="."]
+position = Vector3(-1.8, 3.0, -3.0)
+light_color = Color(0.48, 0.72, 1, 1)
+light_energy = 10.0
+omni_range = 8.0
+shadow_enabled = false
+
+[node name="Camera" type="Camera3D" parent="."]
+position = Vector3(0, 2.55, 10.1)
+fov = 43.0
+current = true
+
+[node name="CameraTarget" type="Marker3D" parent="."]
+position = Vector3(0, 1.0, 0)

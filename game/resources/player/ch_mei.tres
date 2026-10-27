@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LocomotionTuning" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/locomotion_tuning.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+acceleration_time = 0.2
+braking_time = 0.17
+turn_rate = 10
+lean_degrees = 3.5

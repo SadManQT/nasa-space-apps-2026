@@ -1,0 +1,115 @@
+{
+ "duration": 2.88,
+ "cues": [
+  {
+   "t": 0.0,
+   "shape": "viseme_sil",
+   "weight": 0.0
+  },
+  {
+   "t": 0.06,
+   "shape": "viseme_E",
+   "weight": 1.0
+  },
+  {
+   "t": 0.13,
+   "shape": "viseme_SS",
+   "weight": 1.0
+  },
+  {
+   "t": 0.19,
+   "shape": "viseme_U",
+   "weight": 1.0
+  },
+  {
+   "t": 0.26,
+   "shape": "viseme_aa",
+   "weight": 1.0
+  },
+  {
+   "t": 0.33,
+   "shape": "viseme_U",
+   "weight": 1.0
+  },
+  {
+   "t": 0.54,
+   "shape": "viseme_E",
+   "weight": 1.0
+  },
+  {
+   "t": 0.61,
+   "shape": "viseme_O",
+   "weight": 0.8
+  },
+  {
+   "t": 0.68,
+   "shape": "viseme_U",
+   "weight": 1.0
+  },
+  {
+   "t": 0.96,
+   "shape": "viseme_E",
+   "weight": 1.0
+  },
+  {
+   "t": 1.1,
+   "shape": "viseme_SS",
+   "weight": 1.0
+  },
+  {
+   "t": 1.24,
+   "shape": "viseme_E",
+   "weight": 1.0
+  },
+  {
+   "t": 1.52,
+   "shape": "viseme_SS",
+   "weight": 1.0
+  },
+  {
+   "t": 1.66,
+   "shape": "viseme_nn",
+   "weight": 1.0
+  },
+  {
+   "t": 1.8,
+   "shape": "viseme_E",
+   "weight": 1.0
+  },
+  {
+   "t": 1.87,
+   "shape": "viseme_SS",
+   "weight": 1.0
+  },
+  {
+   "t": 1.94,
+   "shape": "viseme_E",
+   "weight": 1.0
+  },
+  {
+   "t": 2.15,
+   "shape": "viseme_PP",
+   "weight": 1.0
+  },
+  {
+   "t": 2.23,
+   "shape": "viseme_SS",
+   "weight": 1.0
+  },
+  {
+   "t": 2.46,
+   "shape": "viseme_E",
+   "weight": 1.0
+  },
+  {
+   "t": 2.53,
+   "shape": "viseme_PP",
+   "weight": 1.0
+  },
+  {
+   "t": 2.65,
+   "shape": "viseme_sil",
+   "weight": 0.0
+  }
+ ]
+}
