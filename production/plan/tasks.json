@@ -1015,7 +1015,8 @@
    "owner": "",
    "deps": [
     "M1-21",
-    "M1-22"
+    "M1-22",
+    "M1-40"
    ],
    "paths": [
     "game/"
@@ -1113,7 +1114,8 @@
    "status": "todo",
    "owner": "",
    "deps": [
-    "M1-27"
+    "M1-27",
+    "M1-39"
    ],
    "paths": [
     "game-design/19_TRAINING_DECISIONS.md",
@@ -1134,7 +1136,57 @@
    "priority": "P0",
    "tool": "claude",
    "title": "AAA puzzle and clue design: every mission a story-driven investigation",
-   "prompt": "Goal: the puzzles and clues feel like a professional Steam/AAA game, last long enough to matter, and are woven into the story, while staying\nclear for a 10–12-year-old and grounded in NASA data. Write game-design/22_PUZZLE_CLUE_DESIGN.md, one section per mission (EX-M0101..EX-M0804):\n1. The investigation: 3–6 clues the player discovers in the world (crew dialogue lines that already exist in STORY_FULL, Noor's logs and\n   records, instrument readouts from the NASA fixtures, objects placed in the room, the Data Card), where each clue is, and which role sees it\n   privately in Class mode (M1-37).\n2. The deduction: what the player must connect, the 'aha' moment, and the wrong-but-reasonable idea a smart player tries first (and how the\n   game answers it without punishing).\n3. The decision and its escalation: stakes rising across the mission's three scenes, a set-piece payoff (a cutscene beat, a lighting or\n   sound change, Alo's posture), and how success, partial success and failure feel different.\n4. Hints in three tiers (nudge, direction, worked example) instead of any pre-filled answer; Family/Cadet/Engineer differences.\n5. Target playtime (most missions 15–25 minutes of real play, not padding) and the moment-to-moment feel (what the hands do, what the ears hear).\nStudy and name the specific techniques you borrow from proven designs: Outer Wilds and Return of the Obra Dinn (knowledge-based deduction and\njournal), Frostpunk and Subnautica (survival trade-offs under pressure), Death Stranding (route and load planning), Portal and The Witness\n(teaching through play, escalating rules), Firewatch and Gone Home (environmental storytelling and found logs). No copying of their content,\nonly their design principles.\nRules: story text is canon word for word (new clue text is new world text, e.g. labels and log metadata, never rewritten dialogue); numbers in\n08_PUZZLE_DESIGNS.md are never edited (proposals go to the user); plants never have faces; English only; science rules hold.\nThen update each M3 puzzle and mission task prompt on the board to point at its section, and run board.py check."
+   "prompt": "Goal: the puzzles and clues feel like a professional Steam/AAA game, last long enough to matter, and are woven into the story, while staying\nclear for a 10–12-year-old and grounded in NASA data. Write game-design/22_PUZZLE_CLUE_DESIGN.md, one section per mission (EX-M0101..EX-M0804):\n1. The investigation: 3–6 clues the player discovers in the world (crew dialogue lines that already exist in STORY_FULL, Noor's logs and\n   records, instrument readouts from the NASA fixtures, objects placed in the room, the Data Card), where each clue is, and which role sees it\n   privately in Class mode (M1-37).\n2. The deduction: what the player must connect, the 'aha' moment, and the wrong-but-reasonable idea a smart player tries first (and how the\n   game answers it without punishing).\n3. The decision and its escalation: stakes rising across the mission's three scenes, a set-piece payoff (a cutscene beat, a lighting or\n   sound change, Alo's posture), and how success, partial success and failure feel different.\n4. Hints in three tiers (nudge, direction, worked example) instead of any pre-filled answer; Family/Cadet/Engineer differences.\n5. Target playtime (most missions 15–25 minutes of real play, not padding) and the moment-to-moment feel (what the hands do, what the ears hear).\nStudy and name the specific techniques you borrow from proven designs: Outer Wilds and Return of the Obra Dinn (knowledge-based deduction and\njournal), Frostpunk and Subnautica (survival trade-offs under pressure), Death Stranding (route and load planning), Portal and The Witness\n(teaching through play, escalating rules), Firewatch and Gone Home (environmental storytelling and found logs). No copying of their content,\nonly their design principles.\nRules: story text is canon word for word (new clue text is new world text, e.g. labels and log metadata, never rewritten dialogue); numbers in\n08_PUZZLE_DESIGNS.md are never edited (proposals go to the user); plants never have faces; English only; science rules hold.\nThen update each M3 puzzle and mission task prompt on the board to point at its section, and run board.py check.\nEvery investigation ends in a decision made the NASA way, using the practices in game-design/23_NASA_MISSION_PRACTICE.md (trade-study card, flight rules, Go/No-Go poll, checklists, risk matrix)."
+  },
+  {
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game-design/23_NASA_MISSION_PRACTICE.md",
+    "game/resources/data/nasa/"
+   ],
+   "refs": [
+    "docs/SCIENCE_AND_DATA.md",
+    "game-design/08_PUZZLE_DESIGNS.md",
+    "docs/competition-rules.md",
+    "production/ART_BIBLE.md"
+   ],
+   "note": "",
+   "evidence": "",
+   "updated": "2026-11-04",
+   "id": "M1-39",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "claude",
+   "title": "Real NASA mission practice behind every decision (trade studies, flight rules, Go/No-Go, dose limits)",
+   "prompt": "Goal: every decision in the game works the way a real NASA mission team makes it, with science that a NASA reviewer would accept, so the\ntrainer teaches real mission thinking (Validity 20, Relevance 20).\nWrite game-design/23_NASA_MISSION_PRACTICE.md, citing public NASA sources for each practice (title, document number, URL, page/section):\n1. Trade studies: options compared on power, mass/consumables, risk, crew time and schedule, with a stated decision rationale (NASA Systems\n   Engineering Handbook, NASA/SP-2016-6105 Rev2). Define the in-game trade-study card layout every decision uses.\n2. Flight rules: constraints agreed before the event (e.g. protected battery reserve, abort criteria, minimum air margin), how the game shows\n   them and what happens when the player breaks one.\n3. Go/No-Go polls: each role (power, atmosphere, horticulture, safety) answers Go or No-Go before commit, as in mission control; ties into\n   Class mode (M1-37).\n4. Procedures and checklists in ISS style (step, verify, caution/warning) for repairs and calibrations.\n5. Consumables and margins from NASA BVAD (NASA/TP-2015-218570 Rev2), with the formulas the simulation uses.\n6. Radiation: NASA-STD-3001 Vol 1 permissible exposure limits and ALARA; how shelter, dose and exposure Z map to them honestly (game units\n   are labelled as teaching units where they are not real doses).\n7. Risk: the NASA 5x5 likelihood x consequence matrix for anomalies; anomaly resolution (ISS mission evaluation room style) and a\n   lessons-learned debrief.\n8. Communication: Mission Control call-outs through Rao (CAPCOM style), Earth link windows from the JPL Horizons fixtures, light-time delay.\nFor each of the 16 puzzles, list which practices it uses and the exact numbers' sources (fixtures in game/resources/data/nasa/; add a small\nfixture for any new public source you cite, with provenance). Never change numbers in 08_PUZZLE_DESIGNS.md: list proposals for the user.\nKeep every explanation understandable to a 10–12-year-old (one plain sentence first, the detail after)."
+  },
+  {
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-39",
+    "M1-30"
+   ],
+   "paths": [
+    "production/review/science_review_ch01.md",
+    "production/plan/tasks.json"
+   ],
+   "refs": [
+    "docs/SCIENCE_AND_DATA.md",
+    "game-design/23_NASA_MISSION_PRACTICE.md",
+    "production/ART_BIBLE.md"
+   ],
+   "note": "",
+   "evidence": "",
+   "updated": "2026-11-04",
+   "id": "M1-40",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "claude",
+   "title": "Independent science review of Chapter 1 before the demo freeze",
+   "prompt": "Act as an independent NASA science reviewer for Chapter 1 as built: every number, unit, claim, Data Card, briefing, debrief line, visual\n(Moon science rules in ART_BIBLE §2) and procedure. For each item: source checked (dataset/document, URL), verdict (correct / correct as a\nlabelled teaching simplification / wrong), and the fix. Write production/review/science_review_ch01.md; add a board task for every 'wrong'\nitem (tool by type), and list the changes that need the user's approval (canon numbers). Never let an unsourced number reach the demo."
   },
   {
    "status": "todo",
@@ -3184,7 +3236,7 @@
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Per execution/QA_01_CANON_AND_LEARNING.md, QA_03_RUNTIME_AND_SAVES.md and QA_05_ACCESSIBILITY_AND_UX.md over the complete campaign; file\ndefects as board tasks."
+   "prompt": "Per execution/QA_01_CANON_AND_LEARNING.md, QA_03_RUNTIME_AND_SAVES.md and QA_05_ACCESSIBILITY_AND_UX.md over the complete campaign; file\ndefects as board tasks.\nInclude an independent science review of every chapter, as M1-40 did for Chapter 1."
   },
   {
    "id": "M3-93",
@@ -3500,6 +3552,19 @@
     "M3-6P",
     "M3-7P",
     "M3-8P"
+   ]
+  },
+  {
+   "id": "R27",
+   "title": "Real NASA mission practice and validated science in every decision",
+   "source": "Team goal (4 Nov); score sheet: Validity 1–20, Relevance 1–20",
+   "tasks": [
+    "M1-39",
+    "M1-40",
+    "M0-13",
+    "M0-14",
+    "M1-38",
+    "M3-92"
    ]
   }
  ]
