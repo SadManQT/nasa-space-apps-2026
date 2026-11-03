@@ -63,6 +63,11 @@ static func default_boundary_state(boundary_id: String) -> Dictionary:
 static func can_traverse(from_room: String, to_room: String, state: Dictionary = {}, context: Dictionary = {}) -> Dictionary:
 	if from_room == to_room:
 		return {"accepted": true, "mode": "same_room", "boundary_id": ""}
+	# Canonical scene cards may move the authored viewpoint between pressurised
+	# base rooms without teleporting a free-roaming actor. Exterior transitions
+	# remain governed by the physical airlock below.
+	if bool(context.get("authored_viewpoint_cut", false)) and from_room != "LOC-06" and to_room != "LOC-06":
+		return {"accepted": true, "mode": "authored_viewpoint_cut", "boundary_id": "", "warning": "Scene transition is an explicit labelled base-room viewpoint cut; no actor was silently teleported."}
 	var matched_id := ""
 	var definition: Dictionary = {}
 	for boundary_id in _BOUNDARIES.keys():

@@ -165,17 +165,16 @@ func acknowledge_dialogue(line_id: String) -> Dictionary:
 func gate_status(scene_id: String = "") -> Dictionary:
 	var id := current_scene_id() if scene_id.is_empty() else scene_id
 	var required: Array = GateCatalog.required_physical(id)
-	var flags: Dictionary = _scene_flags.get(id, {})
 	var missing: Array[String] = []
 	for flag in required:
-		if not bool(flags.get(String(flag), false)):
+		if not _flag_is_set(String(flag)):
 			missing.append(String(flag))
 	return {
 		"scene_id": id,
 		"predicate_id": String(GateCatalog.gate(id).get("predicate_id", "")),
 		"ready": missing.is_empty(),
 		"missing": missing,
-		"physical_flags": flags.duplicate(true),
+		"physical_flags": _context_flags(),
 		"dialogue_acknowledged": _dialogue_acks.get(id, []).duplicate(),
 		"dialogue_can_complete": false,
 	}
@@ -291,7 +290,14 @@ func _context(extra: Dictionary = {}) -> Dictionary:
 	return context
 
 func _context_flags() -> Dictionary:
-	var result: Dictionary = _scene_flags.get(current_scene_id(), {}).duplicate(true)
+	var result: Dictionary = {}
+	# Physical evidence remains valid after its owning scene is complete. S08
+	# intentionally reuses the S02 roll-call receipt.
+	for scene_flags in _scene_flags.values():
+		if scene_flags is Dictionary:
+			for flag in scene_flags.keys():
+				if bool(scene_flags[flag]):
+					result[String(flag)] = true
 	var p01_state: Dictionary = _p01.snapshot()
 	result["p01_zeroed"] = bool(p01_state.get("probe_zeroed", false))
 	result["p01_spanned"] = bool(p01_state.get("probe_spanned", false))
@@ -299,6 +305,9 @@ func _context_flags() -> Dictionary:
 	result["p01_scanned"] = bool(p01_state.get("packet_scanned", false))
 	result["p01_complete"] = bool(_p01.completion().get("complete", false))
 	return result
+
+func _flag_is_set(flag: String) -> bool:
+	return bool(_context_flags().get(flag, false))
 
 func _payload_for_target(target: Dictionary, payload: Dictionary) -> Dictionary:
 	var result := payload.duplicate(true)
@@ -309,7 +318,6 @@ func _payload_for_target(target: Dictionary, payload: Dictionary) -> Dictionary:
 	return result
 
 func _special_target_prerequisite(target_id: String) -> Dictionary:
-	var flags: Dictionary = _scene_flags.get(current_scene_id(), {})
 	var requirements := {
 		"p02_shift1": ["role_acknowledged"],
 		"p02_shift2": ["shelter_drill_complete", "pre_drill_baseline_verified"],
@@ -318,7 +326,7 @@ func _special_target_prerequisite(target_id: String) -> Dictionary:
 		"p02_shifts6_7": ["alarm_response_committed", "exposure_before_drain_verified", "water_returned"],
 	}
 	for required in requirements.get(target_id, []):
-		if not bool(flags.get(String(required), false)):
+		if not _flag_is_set(String(required)):
 			return {"accepted": false, "reason": "Complete physical prerequisite: " + String(required)}
 	return {"accepted": true}
 

@@ -205,6 +205,7 @@ The requested Worker A corrections are now applied only in the owned paths:
 5. `PlantService` enforces canonical ALO-01/TARA-01/COTTON-01 identities and planting dates, rejects backward lifecycle dates, requires dated maturity confirmation before dry-down and harvest, and returns the original plant on every rejected harvest. The initial campaign ledger now represents twelve unplanted vault specimens (`stored12=12`, `stored11=0`) while retaining the separate 42 = 12 + 30 founder reserve.
 6. Campaign pause/resume command payloads are type-checked before reading `reason`.
 7. `PuzzleHost.commit()` uses the revision captured by its accepted preview; a new state revision rejects the stale preview while replaying the same command still returns its receipt.
+8. Campaign and direct-simulation receipts no longer retain a full snapshot inside the receipt map. Duplicate replay reconstructs the caller's current snapshot, preventing recursive deep-copy growth during a long Chapter 1 route.
 
 ### SaveService
 

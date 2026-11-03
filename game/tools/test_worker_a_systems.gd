@@ -54,6 +54,7 @@ func _test_simulation_witnesses() -> void:
 		var simulation_duplicate: Dictionary = sim.commit(committed.get("snapshot", {}), "worker-a-" + name, 1, {"shifts": witnesses[name]})
 		_check(bool(simulation_duplicate.get("duplicate", false)), name + " direct simulation commit is idempotent from its returned snapshot")
 		_check(String(simulation_duplicate.get("receipt_id", "")) == String(committed.get("receipt_id", "")) and simulation_duplicate.get("reason", "") == committed.get("reason", "") and simulation_duplicate.get("deltas", []) == committed.get("deltas", []), name + " direct simulation duplicate returns the original receipt/result")
+		_check(simulation_duplicate.get("snapshot", {}).get("state_revision", -1) == 1, name + " direct duplicate reconstructs a current snapshot without nested receipts")
 	var bloom: Dictionary = sim.preview(sim.entry_profile(), {"shifts": _bloom_plan()})
 	var trace: Array = bloom.get("trace", [])
 	var expected_trace := [[15, 7, 7, 0, 0, 9], [17, 6, 8, 0, 0, 10], [14, 5, 7, 2, 0, 9], [11, 4, 5, 4, 0, 7], [8, 3, 3, 4, 0, 5], [5, 2, 2, 2, 0, 4], [2, 1, 1, 0, 0, 3]]

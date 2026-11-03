@@ -69,6 +69,7 @@ func commit(command: Dictionary) -> Dictionary:
 	if receipts.has(command_id):
 		var duplicate: Dictionary = receipts[command_id].duplicate(true)
 		duplicate["duplicate"] = true
+		duplicate["snapshot"] = _state.duplicate(true)
 		return duplicate
 	var verb := String(command.get("verb", ""))
 	if verb == "pause":
@@ -98,8 +99,12 @@ func commit(command: Dictionary) -> Dictionary:
 	result["snapshot"] = next.duplicate(true)
 	result["events"] = result.get("events", []).duplicate(true)
 	result["events"].append(ResultScript.event("command_committed", current_revision + 1, next))
-	next["receipts"][command_id] = result.duplicate(true)
-	next["mission_receipts"][command_id] = result.duplicate(true)
+	var receipt := result.duplicate(true)
+	# Do not nest a complete snapshot inside a receipt. The snapshot already owns
+	# the receipt map, so retaining it here causes exponential deep-copy growth.
+	receipt.erase("snapshot")
+	next["receipts"][command_id] = receipt.duplicate(true)
+	next["mission_receipts"][command_id] = receipt.duplicate(true)
 	_state = next
 	return result.duplicate(true)
 

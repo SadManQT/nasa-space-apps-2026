@@ -54,8 +54,7 @@ func commit(snapshot: Dictionary, command_id: String, expected_revision: int, pl
 	if receipts.has(command_id):
 		var duplicate: Dictionary = receipts[command_id].duplicate(true)
 		duplicate["duplicate"] = true
-		if not duplicate.has("snapshot"):
-			duplicate["snapshot"] = snapshot.duplicate(true)
+		duplicate["snapshot"] = snapshot.duplicate(true)
 		return duplicate
 	if expected_revision != current_revision:
 		var stale: Dictionary = ResultScript.empty(current_revision, "planning")
@@ -78,7 +77,9 @@ func commit(snapshot: Dictionary, command_id: String, expected_revision: int, pl
 		# snapshot. Otherwise a direct simulation replay loses receipt_id and
 		# the original result fields even though the first commit succeeded.
 		var stored_result := result.duplicate(true)
-		stored_result["snapshot"] = next.duplicate(true)
+		# Duplicate replay reconstructs the caller's current snapshot; storing a
+		# snapshot here would recursively contain the receipt map.
+		stored_result.erase("snapshot")
 		next["receipts"][command_id] = stored_result
 	return result
 

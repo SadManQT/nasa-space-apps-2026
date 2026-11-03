@@ -11,6 +11,7 @@ const RosterScript = preload("res://scripts/companions/companion_roster.gd")
 const DispatcherScript = preload("res://scripts/interactions/interaction_dispatcher.gd")
 const RouteScript = preload("res://scripts/missions/chapter1_route.gd")
 const RegistryScript = preload("res://scripts/missions/mission_registry.gd")
+const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 
 var checks := 0
 var failures := 0
@@ -80,6 +81,9 @@ func _test_navigation_and_pressure_boundaries() -> void:
 	_check(not bool(shutter_bad.get("accepted", false)), "garden shutter rejects an unverified chamber")
 	var shutter_good := world.open_garden_shutter(true)
 	_check(bool(shutter_good.get("accepted", false)) and bool(world.boundary_state("garden_viewing_shutter").get("open", false)), "verified garden shutter opens through the route service")
+	var authored_world := WorldRouteScript.new(DirectorScript.new())
+	var authored_base_cut := authored_world.set_scene("EX-CH01-S11", {"authored_viewpoint_cut": true, "label": "test base-room cut"})
+	_check(bool(authored_base_cut.get("accepted", false)) and authored_world.current_room_id() == "LOC-03", "authored base-room scene cut updates the world without bypassing the exterior airlock")
 
 func _test_rosters_and_switching() -> void:
 	var ch01 := RosterScript.scene_roster("EX-CH01-S01")

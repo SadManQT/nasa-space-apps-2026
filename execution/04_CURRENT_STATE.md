@@ -4,12 +4,11 @@
 
 The supervisor has now integrated a systems/content/world foundation on top of the
 commissioning slice. Worker A's authoritative state, P-02 simulation, save/retry,
-plant biology and puzzle host pass 97 focused checks. Worker C's full canonical
+plant biology and puzzle host pass 101 focused checks. Worker C's full canonical
 catalog/presentation layer validates 8 chapters, 32 missions, 96 scenes and 385
 dialogue lines and passes 577 focused checks. Worker B's room, navigation,
-interaction, roster and Chapter 1 mission route code is present, but its complete
-12-scene headless traversal exceeded the available verification window at S03 and
-must remain **unverified** until rerun. This is a release checkpoint, not a full-game
+interaction, roster and Chapter 1 mission route passes 187 checks across the complete
+12-scene traversal and CH02 readiness. This is a release checkpoint, not a full-game
 completion claim.
 
 The earlier 27 October snapshot below remains a historical baseline. A bounded bootstrap slice now exists: `game/project.godot` points to `res://scenes/main.tscn`; the title/briefing route and `EX-CH01-S01` through `EX-CH01-S03` commissioning flow live under `game/scenes/` and `game/scripts/`; primitive save/checkpoint and preview/commit services live under `game/scripts/campaign/`; and fresh verification is recorded in `production/review/execution/BOOTSTRAP_SLICE.md`. This does not promote the full Chapter 1 route, P-01/P-02, NASA data processing, audio, remaining chapters or export to complete. Godot 4.7.2 remains unavailable on the current Windows host, so the new implementation is structurally present but runtime/visual/export verification is unverified.
