@@ -5,7 +5,7 @@ Canon sources: [character bible](../game-design/04_CHARACTER_BIBLE.md), [world/l
 
 ## 1. Look in one sentence
 
-Toon or anime (changed again on 27 Oct 2026; realistic was dropped the same day). The exact style (A anime cel, B stylised toon, C painterly anime) is pending the user's pick from [concept/style_v7/](concept/style_v7/). Characters stay adults with real proportions for their style, distinct silhouettes and friendly, readable faces for players aged 10–15. Hardware and lunar light stay grounded.
+Anime cel-shaded style A is locked (27 Oct 2026; realistic was dropped the same day). Characters stay adults with real proportions for the style, distinct silhouettes and friendly, readable faces for players aged 10–15. Hardware and lunar light stay grounded.
 
 **Camera:** third-person follow camera, like Death Stranding ([gameplay spec](../docs/GAMEPLAY_DESIGN_FINAL.md) section 3). The player mostly sees a character from behind, so the back, shoulders, hands, walk and hair shape must identify each person; faces are seen in medium conversation shots, never extreme close-ups.
 
@@ -48,7 +48,7 @@ Role colours (tabs, helmet stripe, UI role icons): **Kai** orange `#F26B21` · *
 
 ## 5. Characters
 
-Shared rule (v6, 27 Oct 2026): built on a free realistic human base (MetaHuman recommended) on one skeleton, but every character has their own height, build, face and hair, so no two read alike, even from behind. Ages 19–20 for cadets (young adults, not children). Ferreira is in her 40s. Exact nationalities stay unspecified except Noor (Bangladeshi) and Mei's family link to China. Designs: [concept/cast_v6/](concept/cast_v6/) (portrait = face target, turnaround = build reference). v6 designs await the user's approval.
+Shared rule (v8, 27 Oct 2026): the installed anime cast uses the approved current character builds and one compatible runtime presentation, but every character has their own height, build, face and hair, so no two read alike, even from behind. Ages 19–20 for cadets (young adults, not children). Ferreira is in her 40s. Exact nationalities stay unspecified except Noor (Bangladeshi) and Mei's family link to China. Current references live under [concept/turnarounds_v7/](concept/turnarounds_v7/) and the installed GLBs are the runtime source of truth.
 
 | Character | Height and build | Face and hair | How they wear the duty coverall, and kit | Reads from behind as | Expression baseline |
 |---|---|---|---|---|---|

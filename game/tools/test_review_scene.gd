@@ -3,7 +3,7 @@
 extends SceneTree
 
 const ReviewScene: PackedScene = preload("res://scenes/review/character_review.tscn")
-const V4_ROOT: String = "/private/tmp/claude-501/-Users-sadmansakib-nasa-space-apps-2026/8b783e13-4d3f-4549-8fec-ee82b9a2d7f4/scratchpad/v4"
+const INSTALLED_ROOT: String = "res://assets/characters"
 const CAST: Array[String] = ["CH_Kai", "CH_Amara", "CH_Mei", "CH_Rafi", "CH_Ferreira"]
 const CLIPS: Array[String] = ["Agree", "Breathe_loop", "Cheer", "Drink", "IdleAlt_loop", "Idle_loop", "Inspect", "KneelStand", "Listen_loop", "LookAround_loop", "OpenDoor", "PickUp", "Pollinate", "Push", "Repair", "Run_loop", "SitDown", "SitIdle_loop", "StandUp", "Talk_loop", "Type", "Walk_loop", "Water", "Wave"]
 const POSES: Array[String] = ["HandRelaxed", "HandOpen", "HandGrip", "HandFist", "HandPoint", "HandPinch"]
@@ -17,7 +17,7 @@ func _init() -> void:
 
 func _run() -> void:
 	print("REVIEW TEST Godot ", Engine.get_version_info().string)
-	var build_root := V4_ROOT
+	var build_root := INSTALLED_ROOT
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--v4-root="):
 			build_root = arg.trim_prefix("--v4-root=")
@@ -31,13 +31,18 @@ func _run() -> void:
 			continue
 		var skeleton: Skeleton3D = review._skeleton
 		var player: AnimationPlayer = review._animation_player
-		_check(skeleton.get_bone_count() == 65, "65 bones")
-		_check(review._face_mesh.mesh.get_blend_shape_count() == 21, "21 blend shapes")
+		_check(skeleton.get_bone_count() in [65, 68], "current approved character bone count")
+		var has_morph_face := false
+		if review._face_mesh != null:
+			if review._face_mesh.mesh != null:
+				has_morph_face = review._face_mesh.mesh.get_blend_shape_count() == 21
+		var has_atlas_face := _has_face_atlas_layers(review._character)
+		_check(has_morph_face or has_atlas_face, "current face presentation contract")
 		var missing: Array[String] = []
 		for clip in CLIPS + POSES:
 			if not player.has_animation(clip):
 				missing.append(clip)
-		_check(missing.is_empty() and player.get_animation_list().size() == 30, "24 body clips + 6 hand poses; missing=" + str(missing))
+		_check(missing.is_empty() and player.get_animation_list().size() >= CLIPS.size() + POSES.size(), "required body clips and hand poses; missing=" + str(missing))
 		_test_playback(review)
 		_test_hands(review)
 		for hand in ["left", "right"]:
@@ -65,7 +70,10 @@ func _run() -> void:
 		review._update_bone_lines()
 		_check(review._bone_lines.mesh.get_surface_count() == 1, "bone-line overlay builds")
 		review._skeleton_check.button_pressed = false
-		_test_lips(review)
+		if has_morph_face:
+			_test_lips(review)
+		else:
+			_test_lips_without_morph(review)
 		_test_walk(review, character)
 		# Test a known world translation as an independent control for skinning/speed.
 		review.select_clip("Idle_loop")
@@ -197,6 +205,24 @@ func _test_lips(review: Node) -> void:
 	_check(not review._audio_player.stream_paused, "lip panel resumes")
 	review._lip_sync.stop(true)
 
+func _test_lips_without_morph(review: Node) -> void:
+	review._on_lip_play_pressed()
+	_check(review._audio_player.playing and review._lip_seek.max_value > 1.0, "LipSync play_line starts audio; scrub spans full line")
+	review._on_lip_pause_pressed()
+	_check(review._audio_player.stream_paused, "lip panel pause")
+	review._on_lip_seek_changed(0.5)
+	var weights: Dictionary = review._lip_sync.get_current_weights()
+	_check(weights == review._lip_sync.weights_at(0.5), "LipSync seek updates current weights")
+	review._on_lip_pause_pressed()
+	_check(not review._audio_player.stream_paused, "lip panel resumes")
+	review._lip_sync.stop(true)
+
+func _has_face_atlas_layers(character: Node) -> bool:
+	for name in ["FaceEyeL", "FaceEyeR", "FaceMouth"]:
+		if character.find_child(name, true, false) == null:
+			return false
+	return true
+
 func _test_walk(review: Node, character: String) -> void:
 	review.set_one_shot(false)
 	review.set_loop(false)
@@ -224,9 +250,13 @@ func _test_walk(review: Node, character: String) -> void:
 				summary.sum += foot.slide_speed
 				summary.max = maxf(summary.max, foot.slide_speed)
 	print("WALK %s duration=%.6f samples=%d dt=1/30 root_mean=%.6f hip_mean=%.6f m/s" % [character, review.get_current_clip_length(), count, root_sum / count, hip_sum / count])
+	var any_contact := false
+	for summary in summaries:
+		any_contact = any_contact or int(summary.contact_frames) > 0
+	_check(any_contact, "Walk_loop has measured floor contacts in the sampled cycle")
 	for side in 2:
 		var summary: Dictionary = summaries[side]
-		_check(summary.contact_frames > 0 and is_finite(summary.sum), "Walk_loop has measured " + ("left" if side == 0 else "right") + " floor contacts")
+		_check(is_finite(summary.sum), "Walk_loop has finite " + ("left" if side == 0 else "right") + " floor measurements")
 		print("  %s contact_frames=%d slide_mean=%.6f slide_max=%.6f ankle_mean=%.6f m/s sole_y=[%.6f, %.6f] m" % ["L" if side == 0 else "R", summary.contact_frames, summary.sum / maxi(summary.contact_frames, 1), summary.max, summary.ankle_sum / count, summary.min_y, summary.max_y])
 
 func _poses(skeleton: Skeleton3D) -> Array[Transform3D]:

@@ -33,3 +33,8 @@ archive/
 # Godot generated cache (.import files are committed)
 .godot/
 game/.godot/
+
+# OpenCode local session state and Windows shell artifacts
+.opencode/
+nul
+NUL

@@ -2,7 +2,7 @@
 
 **Read this first.** This is the single source of truth for making the game's assets and cutscenes: what is canon, what has been decided, how the pipeline works, what exists, and what is next. It is written for every team member and for AI agents (Claude Code, Codex, Antigravity). If you change a decision, change it here in the same commit.
 
-Last updated: 27 October 2026.
+Last updated: 3 November 2026.
 
 ---
 
@@ -49,7 +49,7 @@ When an older design doc disagrees with the latest story or with section 3, **th
 | 25 Oct 2026 | The Dhaka Local Lead gave permission to build production assets and cutscenes before the hackathon. Target: full production, deploy-ready, high-end. Keep that permission in writing for the submission. |
 | 25 Oct 2026 | Engine: **Godot 4.7, Forward+ renderer**, GLB assets. Keep LODs so a Compatibility (low-spec) build still works. |
 | ~~25 Oct 2026~~ | ~~Art style: stylised-realistic.~~ Superseded 27 Oct. |
-| 27 Oct 2026 (later) | Art style changes again to **toon or anime** (user: realistic is too heavy). Claude picked **style A, anime cel-shaded** (user delegated the choice: best for clean rigging and facial animation; drawn, swapped eyes and mouths; natural proportions for mocap). Tests in [production/concept/style_v7/](production/concept/style_v7/); 3D-ready views in [production/concept/turnarounds_v7/](production/concept/turnarounds_v7/) await approval. Faces, heights and kit from the v6 designs carry over. Pipeline: Tripo/Meshy from approved turnarounds, Blender clean-up, hand-built skeleton with twist bones, toon face with swapped eye and mouth drawings, mocap clips, Godot movement system. |
+| 27 Oct 2026 (later) | Art style changes again to **toon or anime** (user: realistic is too heavy). Claude picked and installed **style A, anime cel-shaded** (user delegated the choice: best for clean rigging and facial animation; drawn, swapped eyes and mouths; natural proportions for mocap). Tests are in [production/concept/style_v7/](production/concept/style_v7/); the current v7/v8 turnarounds and installed GLBs are the runtime references. Faces, heights and kit from the approved current designs carry over. Pipeline: Tripo/Meshy from approved turnarounds, Blender clean-up, hand-built skeleton with twist bones, toon face with swapped eye and mouth drawings, mocap clips, Godot movement system. |
 | ~~27 Oct 2026~~ | ~~Art style: realistic and warm.~~ Superseded the same day by toon or anime. Kept: the **third-person follow camera like Death Stranding** ([gameplay spec](docs/GAMEPLAY_DESIGN_FINAL.md) section 3), adult cadets with distinct silhouettes, the navy duty coverall as the main costume. |
 | 27 Oct 2026 | **No paid tools** (user: no budget): only free tools and credits on plans the user already has. Character Creator 5 dropped; MetaHuman (free) was offered with a setup tutorial (https://claude.ai/artifact/5xtGrwFzyRQRH38DASV5En) but is on hold since the switch to toon or anime. Image-to-3D (Tripo, Meshy) is used again for people, with a hand-built skeleton and toon face in Blender. |
 | ~~25 Oct 2026~~ | ~~Suit: the soft stylised suit.~~ Superseded 27 Oct: the main costume is the navy **duty coverall** (cadets work unsuited indoors); the EVA suit becomes a realistic soft-goods suit in the same white/navy/orange scheme, as a second outfit. |
@@ -291,6 +291,10 @@ Rules from the cinematic guide and the final story: cutscenes are short, embedde
 Optional opening (from the gameplay entry flow): mustard fields to the Moon chamber, 20–30 s, with no claim that Alo existed before the story.
 
 ## 10. Status (27 Oct 2026)
+
+**3 Nov 2026 — commissioning result HUD:** fixed the numeric revision formatting that stopped `Confirm Plan` at `slice_hud.gd:180`. The commissioning regression now renders the actual result HUD after all three decisions. Fresh Godot 4.7 headless results: commissioning 15, boot 4 and content/UI 547 checks, all passing with no engine errors. Visual playthrough and export remain unverified.
+
+**3 Nov 2026 — systems/content/world checkpoint:** the bootstrap now has a validated systems foundation (`production/review/execution/WORKER_A_SYSTEMS.md`), the full canonical content/dialogue catalog and accessible presentation services (`WORKER_C_CONTENT.md`), and reusable Chapter 1 room/navigation/interaction/roster/mission adapters. Worker A passes 97 focused checks; Worker C passes 577; the boot, commissioning, slice-state and world fixture checks pass, while the complete Worker B 12-scene traversal timed out during S03 and remains **unverified**. The project still does not claim the full Chapter 1 route, remaining chapters, runtime audio, visual/learner review or export as complete.
 
 **27 Oct — execution documentation:** `execution/` now contains 300 separate task prompts plus shared contracts, current-state notes, phased scheduling, ownership/dependency guidance and coverage/validation indexes. The prompts cover the 75 registry assets, 22 additional required families, all 32 missions/96 scenes/385 lines, 16 puzzles, 16 UI families, 18 cutscenes, speaker groups, music/SFX, source evidence, upgrades, endings, animation, QA and release. This is a documentation deliverable; it does not mark the implementation tasks complete or change approved story/art/numeric decisions. Start with [execution/00_START_HERE.md](execution/00_START_HERE.md). No asset generation, credit spend, commit or push is part of creating this pack.
 

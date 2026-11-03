@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "profile_id": "chapter1_base",
+  "profile_revision": "p02-base-v1",
+  "content_revision": "p02-numeric-contract",
+  "source": "game-design/08_PUZZLE_DESIGNS.md §P-02 numeric execution contract",
+  "scenario_datetime": "2046-04-25 00:00 UTC",
+  "shift_hours": 7.2,
+  "resources": {
+    "E": 14,
+    "A": 6,
+    "H": 6,
+    "W": 0,
+    "K": 0,
+    "C": 8,
+    "R": 12.0,
+    "Z": 0
+  },
+  "capacities": {
+    "energy_capacity": 20,
+    "air_capacity": 10,
+    "health_capacity": 10,
+    "water_capacity": 6,
+    "crate_capacity": 2,
+    "crop_capacity": 10
+  }
+}

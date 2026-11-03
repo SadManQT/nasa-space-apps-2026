@@ -3,7 +3,7 @@
 One folder per asset; the folder name equals the file name. Do not add files by hand: run `production/tools/sync_to_godot.sh`, which copies finished assets here, imports them and runs the quality gate. Full rules: [PRODUCTION_HANDBOOK.md](../../PRODUCTION_HANDBOOK.md). Every asset, made or planned: [production/ASSET_REGISTRY.csv](../../production/ASSET_REGISTRY.csv).
 
 ```text
-characters/CH_<Name>/CH_<Name>.glb       rigged, 78 bones, ~50k tris, 4K textures
+characters/CH_<Name>/CH_<Name>.glb       current v7/v8 cast, 65 bones (Mei 68 with hair), 44 clips
 plants/PL_<Name>/PL_<Name>.glb           growth stages; no faces, ever
 props/PR_<Name>/PR_<Name>.glb            hero props 2K textures, small props 1K
 vehicles/VH_<Name>/VH_<Name>.glb

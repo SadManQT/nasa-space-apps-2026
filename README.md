@@ -9,7 +9,7 @@
 
 ![Space Apps 2026](https://img.shields.io/badge/NASA%20Space%20Apps-2026-0B3D91?style=for-the-badge)
 ![Ages 10-15](https://img.shields.io/badge/ages-10--15-FFD84D?style=for-the-badge)
-![Bangla and English](https://img.shields.io/badge/Bangla%20%2B%20English-offline-3BA7FF?style=for-the-badge)
+![English captions](https://img.shields.io/badge/English-captions%20on-3BA7FF?style=for-the-badge)
 ![Godot](https://img.shields.io/badge/engine-Godot%204.7-478CBF?style=for-the-badge)
 
 ### [▶ Watch the pitch video](LastLightAcademy_pitch_video.mp4) · [English subtitles (.srt)](LastLightAcademy_pitch_video.srt)
@@ -46,7 +46,7 @@
 | **Audio** | English narration and character voices, original music |
 | **Subtitles** | English, burned into the picture, and also in [`LastLightAcademy_pitch_video.srt`](LastLightAcademy_pitch_video.srt) |
 
-The video is a concept visualization of the game we will build at the hackathon.
+The video is the project's original concept visualization. The repository now also contains a bounded bootable commissioning slice; the full campaign remains in active implementation.
 
 ## 💡 The idea in 30 seconds
 
@@ -55,8 +55,8 @@ The video is a concept visualization of the game we will build at the hackathon.
 > NASA plans to grow plants on the Moon again, including *Brassica rapa*: field mustard, the same yellow flower that
 > covers Bangladesh's fields every winter.
 >
-> Four young cadets. One mustard bud named Alo. One Moon night built from real polar science: the Sun disappears for
-> a day and a half, Earth sinks below the horizon, and a replay of a real 2017 solar storm hits.
+> Four young cadets. One mustard plant named Alo. One Moon-night training scenario shaped by documented lunar science:
+> the Sun disappears for a day and a half, Earth sinks below the horizon, and a labelled storm replay is considered.
 >
 > Keep the crew safe. Keep the base running. And at sunrise, Alo blooms.
 
@@ -70,9 +70,9 @@ station at the Moon's south pole, and each controls one system:
 | 🌱 **Mei** | the garden, food and Alo |
 | 🛡️ **Rafi** | the Safe Room (radiation shelter) |
 
-Sunlight becomes **sun-drops** the team counts and shares. Each cadet gets a **secret** the others need. The storm
-replays **real NASA records** from 2017, and the sunlight and Earth-set are built from NASA lunar science. Every number
-is labelled as observed, computed or simulated. At sunrise, Alo blooms… if the team talked.
+Sunlight becomes **sun-drops** the team counts and shares. Each cadet gets a **secret** the others need. The repository
+documents candidate NASA sources and labels game content as observed, computed or simulated only when that evidence is
+available. The current commissioning slice keeps its station and resource values explicitly fictional.
 
 **Why it matters:**
 
@@ -80,7 +80,7 @@ is labelled as observed, computed or simulated. At sunrise, Alo blooms… if the
 - **Real constraints.** Energy, air, heat, light and shielding all draw on the same limited supply, as on a real base.
 - **Consequences you can see.** A preview shows the effect of a plan before you commit. The debrief shows every
   decision, what it caused, and the science behind it.
-- **For every classroom.** Free, offline, in Bangla and English, playable in one class period with one projector.
+- **For every classroom.** Free, offline-ready, English-first, captioned and timer-free by default, with a readable judge route.
 
 ## 📜 The real history behind it
 
@@ -140,7 +140,7 @@ a friend*. If Alo is lost, the crew is safe, Tara is still growing, and a locked
 | **Amara** | Air: oxygen | Loves exact numbers; turns power into air |
 | **Mei** | Garden: food and Alo | Talks to her plants. "The garden is not a side system." |
 | **Rafi** | Safe Room: radiation shield | Checks twice and warns early; his warnings get the shelter ready in time |
-| **Alo** (আলো, "light") | A field-mustard bud with a face | Shivers, gets thirsty, gets scared, and blooms |
+| **Alo** (আলো, "light") | A faceless field-mustard plant | Leans, droops, recovers and blooms through biological stages |
 | **Commander Ferreira** | Instructor at Mission Control (Earth) | Calm and strict; only speaks while Earth is in the sky |
 | **Rao** | Flight controller (Earth) | Friendly; one hint per shift until Earth-set |
 | **Tara** (তারা, "star") | Alo's partner flower, grown indoors | Without Tara, Alo can't make seeds |
@@ -228,8 +228,7 @@ The lesson in one line: **missions fail from silence.**
 
 ### The fun layer
 
-- **Alo's moods:** 🥶 shivering in a tiny scarf · 🥵 thirsty, with drooping leaves · 😨 hiding its buds in the storm ·
-  🌼 bursting into a yellow cluster at sunrise.
+- **Alo's readable states:** cold posture · thirsty drooping leaves · storm stress · a natural yellow bloom at sunrise.
 - **Crew reactions:** blankets when it's cold, Rafi in his oversized helmet, Amara blowing bubbles when the air tank is
   full.
 - **Juicy feedback:** drops clink into the jar, frost creeps over the glass, the screen shakes in the storm, and the
@@ -380,15 +379,17 @@ days and are the same species as Alo, so students can watch a real "Alo" bloom.
 
 **Accessibility:**
 
-- Bangla and English, with captions for every line.
+- English captions for every line, with readable text and speaker/origin labels.
 - Icons and words together, never colour alone; large, readable text.
 - No action needs rapid button presses, and Family Mode has no timers.
 - A reduce-shaking option.
 - Works offline on low-end classroom laptops.
 
-## 🔭 NASA data
+## 🔭 NASA data and evidence status
 
-The game is built on real, computed NASA data, bundled so it works offline.
+The repository documents the NASA sources the complete campaign is designed to use. The current commissioning slice does
+**not** claim that the full offline processing bundle is integrated: its mission station, cadets, dates and resource values
+are labelled **SIMULATED** or **TRAINING SCENARIO** in-game.
 
 | In the game | NASA data | How we use it |
 |---|---|---|
@@ -403,12 +404,15 @@ The game is built on real, computed NASA data, bundled so it works offline.
 | Alo | **NASA LEAF** and **Veggie** | The species, the chamber and the story |
 | The video | **NASA SDO** (the X8.2 flare of 10 September 2017) | Real footage |
 
-We will add the challenge's official datasets when they are released, and prefer them wherever they overlap.
+Validated source products, retrieval metadata, processing revisions and limitations must be bundled before a runtime value is
+labelled **OBSERVED** or **COMPUTED**. Until then, the player-facing qualifier is "training scenario · source integration
+pending".
 
 ## 🔧 Hackathon build plan
 
-**Status: concept stage.** As the Space Apps rules require, no game code was written before the hackathon. The game
-will be built during the event.
+**Status: commissioning slice implemented; full campaign in progress.** The bootable demo is intentionally bounded to
+`EX-CH01-S01` through `EX-CH01-S03`, with captions, save/checkpoint state, preview/commit receipts and retry semantics.
+The execution prompt library covers the remaining systems, missions and release work; prompt presence is not completion.
 
 - **Engine:** Godot 4.7 + GDScript, Windows offline first, on the Compatibility renderer for older classroom hardware.
 - **Architecture:** the simulation is separate from the graphics: one authoritative state, a pure preview/step
@@ -416,13 +420,14 @@ will be built during the event.
 
 | Priority | What we build |
 |---|---|
-| **Must** | The complete Chapter 1 · the 3D station, consoles and the four cadets · sun-drops with the ghost preview · 7 shifts with secrets, Earth-set and the storm · Alo's moods · stars, endings and the debrief driven by real bundled data · Solo and Class play · Noor's message, Tara and the Season map with Chapters 2–8 locked |
+| **Must** | Extend the commissioning slice into the complete Chapter 1 · the 3D station, consoles and the four cadets · the shared P-01/P-02 simulation · seven shifts, endings, captions, save/retry and an evidence-backed debrief |
 | **Should** | STACK puzzle · Bangla · Engineer Mode · the CRaTER storm chart · the real-night date from LOLA + Horizons · the Curiosity card · sound · Family Mode · the mission patch |
 | **Could** | A short Chapter 2 sample (bee runs) · clap-to-pump · surprise cards · replays of other real storms |
 | **Later** | Season 1 Chapters 3–8 · Season 2: Mars · online co-op |
 
-**Judge route (5 minutes, Solo):** title and the "Why here?" map → two day shifts → Last Light and Earth-set → the
-storm → First Light and the debrief → Noor's message and the Season map: "this was Chapter 1 of 8".
+**Current judge route:** title → mission briefing → three canonical commissioning scenes → preview/commit → journal,
+receipt and retry demonstration. Do not present this route as the complete Chapter 1 night until P-01/P-02 and all 12
+Chapter 1 scene gates are implemented and freshly verified.
 
 **Before the build:** a paper playtest with students aged 10–15 (with guardian permission), measuring fun, learning (a
 short quiz before and after) and confusing words or icons.
@@ -477,6 +482,6 @@ The pitch video was made with these AI tools:
 
 <div align="center">
 
-*This is a concept visualization of a planned game. It is not endorsed by NASA.*
+*This repository contains a bootable commissioning slice and a documented full-campaign plan. It is not endorsed by NASA.*
 
 </div>

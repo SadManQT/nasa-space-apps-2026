@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "profile_revision": "p02-upgrades-v1",
+  "choices": {
+    "1": {"A": "taller_mast", "B": "fuel_cell"},
+    "2": {"A": "red_blue_leds", "B": "insulation_blankets"},
+    "3": {"A": "moon_dirt_shelter", "B": "flexible_seals"},
+    "4": {"A": "ice_harvester", "B": "rover_lights_heater"},
+    "5": {"A": "dust_shield", "B": "whipple_bumper"},
+    "6": {"A": "storm_early_warning", "B": "bigger_safe_room"},
+    "7": {"A": "relay_parts_kit", "B": "long_range_battery"}
+  },
+  "application": "Each acquired choice is applied once in chapter order; no choice resets a prior modifier."
+}

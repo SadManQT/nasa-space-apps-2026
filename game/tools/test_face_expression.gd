@@ -6,7 +6,8 @@ extends SceneTree
 const LipSyncScript: Script = preload("res://scripts/lip_sync.gd")
 const FaceScript: Script = preload("res://scripts/face_expression.gd")
 const HeadScript: Script = preload("res://scripts/head_accent.gd")
-const KAI_PATH: String = "/private/tmp/claude-501/-Users-sadmansakib-nasa-space-apps-2026/8b783e13-4d3f-4549-8fec-ee82b9a2d7f4/scratchpad/v4/CH_Kai/CH_Kai.glb"
+const FaceAtlasScript: Script = preload("res://scripts/face_atlas.gd")
+const KAI_PATH: String = "res://assets/characters/CH_Kai/CH_Kai.glb"
 
 # A controllable source for unit tests; the integration check uses real LipSync.
 class EnvelopeSource extends LipSync:
@@ -294,10 +295,19 @@ func _test_character() -> void:
 		return
 	var mesh := _find_face(character)
 	var skeleton := _find_skeleton(character)
-	_check(mesh != null and mesh.mesh.get_blend_shape_count() == 21, "Kai face has all 21 blend shapes")
+	var atlas_meshes := _find_face_atlas_meshes(character)
+	var legacy_face: bool = mesh != null and mesh.mesh.get_blend_shape_count() == 21
+	var current_face: bool = atlas_meshes.size() >= 3
+	_check(legacy_face or current_face, "Kai face uses the legacy morph or current face-atlas contract")
 	_check(skeleton != null and skeleton.get_bone_count() == 65, "Kai skeleton has 65 bones")
-	if mesh == null or skeleton == null:
+	if skeleton == null:
 		character.free()
+		return
+	get_root().add_child(character)
+	if not legacy_face:
+		_test_face_atlas_character(character, atlas_meshes, skeleton)
+		character.free()
+		await process_frame
 		return
 	print("  integration mesh: ", character.get_path_to(mesh))
 	print("  integration skeleton: ", character.get_path_to(skeleton))
@@ -318,7 +328,6 @@ func _test_character() -> void:
 	skeleton.add_child(head)
 	head.lip_sync_path = head.get_path_to(lip)
 	skeleton.modifier_callback_mode_process = Skeleton3D.MODIFIER_CALLBACK_MODE_PROCESS_MANUAL
-	get_root().add_child(character)
 	face.set_process(false)
 	face.blink_enabled = false
 	lip.play_line(_silent_stream(), _cue_file("kai", [[0.0, "viseme_aa", 0.8]], [0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0]))
@@ -423,6 +432,28 @@ func _find_face(node: Node) -> MeshInstance3D:
 		if found != null:
 			return found
 	return null
+
+func _find_face_atlas_meshes(node: Node) -> Dictionary:
+	var result := {}
+	for name in ["FaceEyeL", "FaceEyeR", "FaceMouth", "FaceBrowL", "FaceBrowR"]:
+		var mesh := node.find_child(name, true, false) as MeshInstance3D
+		if mesh != null:
+			result[name] = mesh
+	return result
+
+func _test_face_atlas_character(character: Node, meshes: Dictionary, skeleton: Skeleton3D) -> void:
+	for name in ["FaceEyeL", "FaceEyeR", "FaceMouth"]:
+		_check(meshes.has(name), "Kai face-atlas layer " + name + " exists")
+	var atlas: FaceAtlas = FaceAtlasScript.new()
+	atlas.name = "FaceAtlasTest"
+	character.add_child(atlas)
+	atlas.setup(character)
+	for name in meshes:
+		var material := (meshes[name] as MeshInstance3D).get_active_material(0)
+		_check(material is ShaderMaterial, "Kai face-atlas layer is shader-driven: " + name)
+	atlas.set_expression("happy")
+	_check(atlas.get_current_mouth_frame() == 3, "Kai face-atlas expression selects mouth frame")
+	_check(skeleton.find_bone("mixamorig_Head") >= 0, "Kai face-atlas head bone resolves")
 
 func _find_skeleton(node: Node) -> Skeleton3D:
 	if node is Skeleton3D:

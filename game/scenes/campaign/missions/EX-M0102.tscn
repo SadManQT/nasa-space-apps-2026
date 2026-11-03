@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/missions/mission_scene.gd" id="1_mission"]
+
+[node name="EX_M0102" type="Node3D"]
+script = ExtResource("1_mission")
+mission_id = "EX-M0102"
+scene_ids = ["EX-CH01-S04", "EX-CH01-S05", "EX-CH01-S06"]
+route_room_ids = ["LOC-03", "LOC-02", "LOC-01"]

@@ -1,0 +1,9 @@
+[gd_resource type="Theme" format=3]
+
+[resource]
+default_font_size = 18
+Button/colors/font_color = Color(0.92549, 0.933333, 0.941176, 1)
+Button/colors/font_hover_color = Color(0.05098, 0.023529, 0.039216, 1)
+Button/colors/font_pressed_color = Color(0.05098, 0.023529, 0.039216, 1)
+Button/colors/font_focus_color = Color(0.92549, 0.933333, 0.941176, 1)
+Label/colors/font_color = Color(0.92549, 0.933333, 0.941176, 1)

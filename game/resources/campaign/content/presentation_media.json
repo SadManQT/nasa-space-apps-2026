@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "media_revision": "runtime-media-2026-11-02",
+  "available_cutscenes": [
+    {
+      "id": "CS-01",
+      "scene_id": "EX-CH01-S01",
+      "title": "Arrival",
+      "runtime_path": "res://assets/cutscenes/CS-01_Arrival.ogv",
+      "runtime_format": "ogv",
+      "media_present": true,
+      "status": "present",
+      "caption_fallback": true,
+      "skip_completes_predicate": false,
+      "source": "game/assets/cutscenes/CS-01_Arrival.ogv"
+    },
+    {
+      "id": "CS-02",
+      "scene_id": "EX-CH01-S09",
+      "title": "The Horizon Closes One Door",
+      "runtime_path": "res://assets/cutscenes/CS-02_The_Horizon_Closes_One_Door.ogv",
+      "runtime_format": "ogv",
+      "media_present": true,
+      "status": "present",
+      "caption_fallback": true,
+      "skip_completes_predicate": false,
+      "source": "game/assets/cutscenes/CS-02_The_Horizon_Closes_One_Door.ogv"
+    },
+    {
+      "id": "CS-03",
+      "scene_id": "EX-CH01-S12",
+      "title": "Alo Needs a Friend",
+      "runtime_path": "res://assets/cutscenes/CS-03_Alo_Needs_a_Friend.ogv",
+      "runtime_format": "ogv",
+      "media_present": true,
+      "status": "present",
+      "caption_fallback": true,
+      "skip_completes_predicate": false,
+      "source": "game/assets/cutscenes/CS-03_Alo_Needs_a_Friend.ogv"
+    }
+  ],
+  "not_installed_cutscene_ids": [
+    "CS-04", "CS-05", "CS-06", "CS-07", "CS-08", "CS-09", "CS-10",
+    "CS-11", "CS-12", "CS-13", "CS-14", "CS-15", "CS-16", "CS-17", "CS-18"
+  ],
+  "audio": {
+    "voice_runtime_files_present": false,
+    "music_runtime_files_present": false,
+    "sfx_runtime_files_present": false,
+    "fallback_mode": "captions_only",
+    "source": "production/audio/vo_lines.csv",
+    "note": "The dialogue catalog supplies exact readable text. No missing voice, music or SFX file is presented as installed."
+  }
+}
