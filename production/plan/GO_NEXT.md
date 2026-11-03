@@ -30,12 +30,12 @@ git pull --rebase          # stash or commit your own unfinished work first
 
 ## 2. Pick the task
 
-Use your own lane name:
+Use your own lane name. **The `claude`, `antigravity` and `muse` lanes are Sadman's only** (Claude Code, Antigravity, Muse and ElevenLabs are on his machines); the board refuses to give them to anyone else (`reserved_lanes` in tasks.json). **Teammates take `--tool codex` (all code tasks, with whatever coding AI they have: Codex/ChatGPT, Gemini CLI, Cursor, Copilot…) or `--tool gemini`**, and always pass `--by "<your name>/<your AI>"` so the board knows who you are.
 
 | Lane | Who | Strengths it gets | Recommended model / effort |
 |---|---|---|---|
 | `claude` | Claude Code (incl. Opus thinking) | design docs, data and science mapping, generation pipelines (Tripo, Meshy, ElevenLabs), orchestration, video scripts | Opus, default effort |
-| `codex` | Codex / ChatGPT (Plus plan: low limits) | short, targeted jobs: bug hunts, code review, one hard fix | `gpt-6.1-sol` medium; high only for tricky bugs. Long coding sessions go to Antigravity instead |
+| `codex` | Any teammate's coding AI (Codex/ChatGPT, Gemini CLI, Cursor, Copilot); Sadman's Codex is on ChatGPT Plus (low limits) | game code, bug fixes, refactors, tests, builds | `gpt-6.1-sol` medium; high only for tricky bugs. Long coding sessions go to Antigravity instead |
 | `antigravity` | Antigravity (Pro plan) | long coding sessions, UI panels, visual verification with screenshots, game-feel | Gemini 4 Argon medium for long UI sessions; high for the Mission Table (P-02) and Mission Trainer; Claude Opus 5.5 high for science/data/docs; Claude Sonnet 5.5 medium for bulk content |
 | `muse` | Muse AI | Blender: terrain, environment kits, clean-up, lighting, renders | Muse default |
 | `gemini` | Gemini (Argon) | `any` tasks, Veo cutscenes, image concepts and paint-overs, research | Gemini 4 Argon medium |

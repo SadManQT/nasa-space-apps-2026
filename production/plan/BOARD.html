@@ -104,7 +104,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 </main>
 <script id="data" type="application/json">{
  "project": "Last Light Academy — NASA Space Apps 2026, Build a Junior Astronaut Mission Trainer",
- "go_next_prompt": "Continue on Last Light Academy. Run `git pull --rebase`, then read production/plan/GO_NEXT.md and follow its \"continue\" loop exactly: check `python3 production/plan/board.py mine --by \"<my name>/<your lane>\"`, then `board.py take --tool <claude|codex|antigravity|muse|gemini> --count 5 --by \"<my name>/<your lane>\"`, push the claim, and do each task in order inside its paths: verify with game/tools/run_tests.sh and screenshots where asked, log AI use, mark it done with evidence, commit under my GitHub account with no AI co-author lines, and push after every task. Then take the next chunk. Block what you cannot do and move on. Stop after about 8 tasks or when nothing is ready, release anything unstarted, and give me a short summary.",
+ "reserved_lanes": {
+  "claude": "Sadman",
+  "antigravity": "Sadman",
+  "muse": "Sadman"
+ },
+ "go_next_prompt": "Continue on Last Light Academy. (Lanes claude, antigravity and muse are Sadman's only; teammates use --tool codex for code tasks with whatever coding AI they have, or --tool gemini.) Run `git pull --rebase`, then read production/plan/GO_NEXT.md and follow its \"continue\" loop exactly: check `python3 production/plan/board.py mine --by \"<my name>/<your lane>\"`, then `board.py take --tool <codex for code with any coding AI, or gemini> --count 5 --by \"<my name>/<your lane>\"`, push the claim, and do each task in order inside its paths: verify with game/tools/run_tests.sh and screenshots where asked, log AI use, mark it done with evidence, commit under my GitHub account with no AI co-author lines, and push after every task. Then take the next chunk. Block what you cannot do and move on. Stop after about 8 tasks or when nothing is ready, release anything unstarted, and give me a short summary.",
  "deadlines": [
   {
    "when": "Every day",
@@ -1186,7 +1191,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "prompt": "Problem (BUGHUNT B16): operations set local completion flags only; knowledge, knowledge_flags and acquired_evidence_ids never change, the\nJournal shows the startup list, and the HUD reads raw dialogue, bypassing DialogueService knowledge requirements.\nDo: grant the canonical evidence/knowledge ids at the owning operation (ids from the content catalog), save and restore them, render all\ndialogue through DialogueService so knowledge-gated lines (e.g. Noor's identity only from CH05) are respected, and refresh the Journal.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests: an evidence operation adds its id, survives a JSON save/load, and a gated line stays hidden until then."
   },
   {
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/antigravity",
    "deps": [
     "M0-13"
@@ -1204,7 +1209,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "docs/GAMEPLAY_DESIGN_FINAL.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "Wrote docs/REQUIREMENTS_ALIGNMENT.md (R01–R27 matrix mapping challenge rules, local judging criteria, and registered promise to current story/gameplay, blunt code gaps B06–B16, and owning board tasks) and game-design/19_TRAINING_DECISIONS.md (all 32 missions EX-M0101..EX-M0804 with zero-prefill player decisions, 4-demand trade-offs, NASA fixture IDs, 10–12yo takeaways, success/partial/fail+retry, Predict-Observe-Explain debriefs, and §10 proposals for user approval covering all 15 SCIENCE_AND_DATA §B3 items and story-mission gameplay wrappers without touching canon text or 08_PUZZLE_DESIGNS numbers). board.py check passed; logged in production/AI_PROMPT_LOG.md.",
    "updated": "2026-11-04",
    "id": "M1-27",
    "milestone": "M1",

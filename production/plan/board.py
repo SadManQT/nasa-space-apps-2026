@@ -56,14 +56,22 @@ def ready(task, tasks):
     return task["status"] == "todo" and all(tasks[d]["status"] == "done" for d in task["deps"])
 
 
-def next_tasks(data, tool=None):
+def allowed(data, task, by):
+    """Lanes in data['reserved_lanes'] (tools only one person has) go only to that person."""
+    owner = data.get("reserved_lanes", {}).get(task["tool"])
+    return not owner or (by or "").lower().startswith(owner.lower())
+
+
+def next_tasks(data, tool=None, by=None):
     """Ready tasks in work order: milestone, then priority, then board order.
-    With a tool, only that tool's tasks and 'any' tasks; without one, every non-human task."""
+    With a tool, only that tool's tasks and 'any' tasks; without one, every non-human task.
+    With `by`, lanes reserved for someone else are left out."""
     tasks = by_id(data)
     order = {m["id"]: i for i, m in enumerate(data["milestones"])}
     fits = (lambda t: t["tool"] in (tool, "any")) if tool else (lambda t: t["tool"] != "human")
     pool = [(order[t["milestone"]], PRIORITY[t["priority"]], i, t)
-            for i, t in enumerate(data["tasks"]) if fits(t) and ready(t, tasks)]
+            for i, t in enumerate(data["tasks"])
+            if fits(t) and ready(t, tasks) and (by is None or allowed(data, t, by))]
     return [t for *_, t in sorted(pool, key=lambda x: x[:3])]
 
 
@@ -130,6 +138,9 @@ def set_status(data, tid, status, **fields):
     t = tasks[tid]
     if status == "in_progress" and not ready(t, tasks):
         sys.exit(f"{tid} is not ready (status {t['status']}; deps must all be done)")
+    if status == "in_progress" and not allowed(data, t, fields.get("owner")):
+        sys.exit(f"{tid} is in the '{t['tool']}' lane, which only {data['reserved_lanes'][t['tool']]} works "
+                 "(those tools are on their machines). Take another task.")
     t.update(status=status, updated=today(), **fields)
     save(data)
     print(f"{tid} -> {status}. Now commit and push production/plan/ (see GO_NEXT.md).")
@@ -147,6 +158,9 @@ def self_test():
     assert "w" not in [t["id"] for t in next_tasks(data)], "humans' tasks never go to an AI"
     data["tasks"][3]["status"] = "done"
     assert [t["id"] for t in next_tasks(data, "codex")] == ["z", "y", "x"], "z unlocks, P0 first"
+    data["reserved_lanes"] = {"codex": "Sadman"}
+    assert [t["id"] for t in next_tasks(data, None, "Atik/gemini")] == ["y"], "reserved lane hidden from others"
+    assert [t["id"] for t in next_tasks(data, None, "Sadman/claude")] == ["z", "y", "x"], "owner still sees it"
     data["tasks"][3]["deps"] = ["z"]
     assert any("cycle" in p for p in validate(data))
 
@@ -154,7 +168,7 @@ def self_test():
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    p = sub.add_parser("next"); p.add_argument("--tool", choices=TOOLS); p.add_argument("--all", action="store_true")
+    p = sub.add_parser("next"); p.add_argument("--tool", choices=TOOLS); p.add_argument("--all", action="store_true"); p.add_argument("--by")
     p = sub.add_parser("take"); p.add_argument("--tool", choices=TOOLS); p.add_argument("--count", type=int, default=5)
     p.add_argument("--by", required=True)
     p = sub.add_parser("mine"); p.add_argument("--by", required=True)
@@ -181,7 +195,7 @@ def main():
         if mine:
             print("Already in progress (finish or release these first if one is yours): "
                   + ", ".join(f"{t['id']} by {t.get('owner') or '?'}" for t in mine) + "\n")
-        found = next_tasks(data, a.tool)
+        found = next_tasks(data, a.tool, a.by)
         if not found:
             sys.exit("Nothing is ready for this tool. Try `next` without --tool, or check blocked tasks with `list --status blocked`.")
         if a.all:
@@ -190,7 +204,7 @@ def main():
             print(describe(found[0], tasks))
             print(f"\nClaim it: python3 production/plan/board.py claim {found[0]['id']} --by \"<your name>/<your AI>\"")
     elif a.cmd == "take":
-        chunk = next_tasks(data, a.tool)[:a.count]
+        chunk = next_tasks(data, a.tool, a.by)[:a.count]
         if not chunk:
             sys.exit("Nothing is ready for this tool. Try without --tool, or `list --status blocked`.")
         for t in chunk:
