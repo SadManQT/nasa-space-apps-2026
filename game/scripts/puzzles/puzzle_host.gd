@@ -5,6 +5,9 @@ class_name PuzzleHost
 ## CampaignDirector. It owns only reversible presentation state; arithmetic
 ## and receipts remain in the director/simulation.
 
+const ScienceScript = preload("res://scripts/science/science_data.gd")
+var science = ScienceScript.new()
+
 const IDLE := "idle"
 const ACTIVE := "active"
 const PREVIEWED := "previewed"
@@ -40,6 +43,7 @@ func begin(director: RefCounted, puzzle_id: String, mission_id: String, scene_id
 
 func snapshot() -> Dictionary:
 	return {
+		"source_cards": data_cards(),
 		"puzzle_id": _puzzle_id,
 		"mission_id": _mission_id,
 		"scene_id": _scene_id,
@@ -133,3 +137,6 @@ func _command(command_id: String, revision: int, plan: Dictionary) -> Dictionary
 
 func _host_reject(reason: String) -> Dictionary:
 	return {"accepted": false, "duplicate": false, "reason": reason, "lifecycle": _state}
+
+func data_cards() -> Array:
+	return science.cards_for_puzzle(_puzzle_id)

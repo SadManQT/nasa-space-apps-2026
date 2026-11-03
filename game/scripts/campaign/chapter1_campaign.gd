@@ -115,6 +115,12 @@ func query() -> Dictionary:
 	result["dialogue_lines"] = current_dialogue()
 	result["journal_entries"] = director.snapshot().get("knowledge", [])
 	result["accessibility"] = director.snapshot().get("accessibility", {})
+	var puzzle_ids: Array = []
+	for target in targets_for_current_scene():
+		var puzzle_id := String(target.get("puzzle_id", ""))
+		if not puzzle_id.is_empty() and not puzzle_ids.has(puzzle_id):
+			puzzle_ids.append(puzzle_id)
+	result["source_puzzle_ids"] = puzzle_ids
 	result["mission_table"] = {"title": current_scene_data().get("title", ""), "status": route.gate_status()}
 	return result
 

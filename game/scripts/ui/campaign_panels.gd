@@ -10,6 +10,10 @@ signal panel_opened(panel_id: String)
 signal panel_closed(panel_id: String)
 signal accessibility_changed(settings: Dictionary)
 
+const ScienceScript = preload("res://scripts/science/science_data.gd")
+const ChartScript = preload("res://scripts/ui/data_chart.gd")
+var science = ScienceScript.new()
+
 const INK := Color("#05060A")
 const NAVY := Color("#1F2A44")
 const IVORY := Color("#ECEEF0")
@@ -28,9 +32,13 @@ const PANEL_IDS := [
 	"pause",
 	"settings_accessibility",
 	"credits",
+	"sources",
+	"data_card",
 ]
 
 const PANEL_DEFINITIONS := {
+	"sources": {"title": "JOURNAL / SOURCES", "query_key": "sources", "description": "Offline NASA and partner evidence. Open a dataset to see what it means for Aurora."},
+	"data_card": {"title": "DATA CARD", "query_key": "data_card", "description": "Observed evidence, computations and training assumptions are labelled separately."},
 	"objective": {"title": "OBJECTIVE", "query_key": "objective", "description": "Current objective and evidence-backed next step."},
 	"dialogue_captions": {"title": "DIALOGUE / CAPTIONS", "query_key": "dialogue_lines", "description": "Exact lines with speaker and origin labels."},
 	"journal_discovery": {"title": "JOURNAL / DISCOVERY", "query_key": "journal_entries", "description": "Acquired evidence only; unrevealed knowledge stays hidden."},
@@ -200,6 +208,7 @@ func _build() -> void:
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.follow_focus = true
+	scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
 	page.add_child(scroll)
 	_body = VBoxContainer.new()
 	_body.add_theme_constant_override("separation", 9)
@@ -231,8 +240,16 @@ func _render_active_panel() -> void:
 		_render_dialogue(value)
 	elif _active_panel == "puzzle":
 		_render_puzzle(value)
+	elif _active_panel == "sources":
+		_render_sources()
+	elif _active_panel == "data_card":
+		_render_card(value)
 	else:
 		_render_data(value)
+		if _active_panel == "journal_discovery":
+			_source_button("SOURCES · ALL DATASETS", func(): open_panel("sources", {"ids": []}))
+		elif _active_panel in ["outcome", "mission_table"]:
+			_render_puzzle_sources(_query.get("source_puzzle_ids", []))
 	_apply_accessibility()
 
 func _render_data(value) -> void:
@@ -293,6 +310,7 @@ func _render_puzzle(value) -> void:
 			emit_command("preview_puzzle", option_id, {"option_id": option_id})
 		)
 		_body.add_child(button)
+	_render_puzzle_sources([data.get("puzzle_id", "")] if data.has("puzzle_id") else _query.get("source_puzzle_ids", []))
 	var forecast := Label.new()
 	forecast.text = "FORECAST\n" + String(data.get("forecast", "The state owner supplies the forecast."))
 	forecast.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -471,6 +489,58 @@ func _is_panel_descendant(candidate: Control) -> bool:
 	return is_instance_valid(candidate) and candidate != self and is_ancestor_of(candidate)
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE and not _active_panel.is_empty():
+	if event.is_action_pressed("ui_cancel") and not event.is_echo() and not _active_panel.is_empty():
 		close_panel()
 		get_viewport().set_input_as_handled()
+
+func _source_button(text: String, action: Callable) -> void:
+	var button := _button(text)
+	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	button.pressed.connect(action)
+	_body.add_child(button)
+
+func _render_sources() -> void:
+	var filter: Array = _query.get("sources", {}).get("ids", [])
+	for id in science.source_ids() if filter.is_empty() else filter:
+		var card: Dictionary = science.card(String(id))
+		_source_button(String(card.get("title", id)), func(): open_panel("data_card", {"source_id": id}))
+
+func _render_puzzle_sources(puzzle_ids: Array) -> void:
+	var ids: Array = []
+	for puzzle_id in puzzle_ids:
+		for card in science.cards_for_puzzle(String(puzzle_id)):
+			if not ids.has(card.source_id):
+				ids.append(card.source_id)
+	if not ids.is_empty():
+		_source_button("DATA CARDS · EVIDENCE BEHIND THESE NUMBERS", func(): open_panel("sources", {"ids": ids}))
+
+func _card_text(text: String, emphasis: bool = false) -> void:
+	var label := Label.new()
+	label.text = text
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.add_theme_font_size_override("font_size", 20)
+	label.add_theme_color_override("font_color", MUSTARD if emphasis else IVORY)
+	_body.add_child(label)
+
+func _render_card(value) -> void:
+	var id := String(value.get("source_id", "")) if value is Dictionary else ""
+	var card: Dictionary = science.card(id)
+	_card_text("WHAT THIS MEANS FOR AURORA\n" + String(card.get("takeaway", "")), true)
+	if not bool(card.get("pending", true)):
+		var visual: Dictionary = card.get("visual", {})
+		var visual_title := String(visual.get("label", "")).replace("_", " ").capitalize()
+		if visual.get("kind") != "line":
+			visual_title += " · %s %s" % [str(visual.get("values", [0])[0]), visual.get("unit", "")]
+		_card_text(visual_title, true)
+		var chart := ChartScript.new()
+		chart.series = visual
+		_body.add_child(chart)
+		var values: Array = visual.get("values", [])
+		_card_text(String(visual.get("label", "")).replace("_", " ") + " · " + String(visual.get("unit", "")) + "\n" + ("First %s · last %s · min %s · max %s\n%s → %s" % [values[0], values[-1], values.min(), values.max(), visual.get("start", ""), visual.get("end", "")] if values.size() > 1 else str(values[0])) + "\n" + String(visual.get("axis", "")))
+		_card_text(String(card.get("title", "")), true)
+		_card_text("EVIDENCE · " + String(card.get("evidence_label", "")) + "\n" + String(card.get("agency", "")) + "\nDataset: " + String(card.get("dataset_id", "")))
+		_card_text("WHAT WAS MEASURED / SUPPLIED\n" + ScienceScript.describe(card.get("fields_used", [])) + "\n" + ScienceScript.describe(card.get("values", {})))
+		_card_text("WHAT THE GAME COMPUTED\n" + ScienceScript.describe(card.get("derived", [])) + "\nGame resource units are training rules; the fixture does not validate every game number.")
+		_card_text("LIMITS\n" + String(card.get("boundary", "")), true)
+		_card_text("SOURCE\n" + String(card.get("url", "")) + "\n" + String(card.get("citation", "")) + "\nRetrieved: " + String(card.get("retrieved", "")) + "\nLicence: " + String(card.get("licence", "")))
+	_source_button("BACK TO ALL SOURCES", func(): open_panel("sources", {"ids": []}))

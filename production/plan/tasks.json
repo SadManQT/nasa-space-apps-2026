@@ -231,7 +231,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Data Card runtime: show the NASA source behind every number",
-   "status": "in_progress",
+   "status": "done",
    "owner": "atik/codex",
    "deps": [
     "M0-14",
@@ -246,7 +246,7 @@
     "execution/UI_09_SCIENTIFIC_PUZZLE.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "game/tools/run_tests.sh: 25/25 suites passed; focused science 33 checks and production UI 32 checks pass. Rendered and reviewed production/qa/evidence/M0-15_data_card.png, M0-15_journal_sources.png, M0-15_debrief.png, M0-15_campaign_hud.png at 1280x720 / 150% text; production/review/execution/M0-15.md.",
    "updated": "2026-11-04",
    "prompt": "Goal: whenever a puzzle preview, outcome or debrief shows a number that comes from NASA data, the player can open a Data Card:\nfirst a one-sentence plain-language takeaway and one simple visual (bar, gauge or line from the fixture values) with 'what this means for Aurora', then the dataset name, what was measured, what the game computed, the source URL and citation — read from game/resources/data/nasa/*.json.\nDo: implement the provenance lookup as one service used by the puzzle host and the debrief (execution/SYS_13_SCIENCE_DATA.md), an\naccessible Data Card panel (keyboard, controller, captions-sized text), and a 'Sources' entry in the Journal listing every fixture.\nNever invent a source; a missing fixture shows 'source pending' in development builds and fails the content test.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },

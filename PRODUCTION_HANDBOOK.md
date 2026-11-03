@@ -2,7 +2,7 @@
 
 **Read this first.** This is the single source of truth for making the game's assets and cutscenes: what is canon, what has been decided, how the pipeline works, what exists, and what is next. It is written for every team member and for AI agents (Claude Code, Codex, Antigravity). If you change a decision, change it here in the same commit.
 
-Last updated: 3 November 2026.
+Last updated: 4 November 2026.
 
 ---
 
@@ -299,7 +299,9 @@ Optional opening (from the gameplay entry flow): mustard fields to the Moon cham
 
 ## 10. Status (latest first)
 
-**4 Nov 2026 — NASA data map, offline fixtures, credits (board M0-13, M0-14, M0-16):** [docs/SCIENCE_AND_DATA.md](docs/SCIENCE_AND_DATA.md) §B now maps 28 verified NASA and partner sources to every puzzle P-01–P-16 (B3 lists 15 numbers no dataset supports, with proposals; 08 is unchanged). `production/tools/fetch_nasa_data.py` wrote 28 small offline fixtures and `puzzle_sources.json` to `game/resources/data/nasa/` (no keys; `--check` passes). [CREDITS.md](CREDITS.md) credits every file in `game/assets`; no font files exist (the game uses Godot's built-in Open Sans, OFL). Still open: the official Resources tab (M0-12), the Data Card runtime and its content test (M0-15), docs/TEAM.md, and confirming each AI service's terms.
+**4 Nov 2026 — Data Card runtime (board M0-15, Atik/Codex):** `ScienceData` reads all 28 offline fixtures and maps P-01–P-16 to source cards, with content validation that rejects missing provenance. PuzzleHost, outcome panels and the Journal share that lookup; the campaign HUD opens pause-safe Data Cards with a plain-language Aurora takeaway, a fixture-derived chart, measured inputs, computations, limitations and citations. Keyboard/controller Back restores focus and 150% text scrolls. Current evidence and test results: [M0-15.md](production/review/execution/M0-15.md).
+
+**4 Nov 2026 — NASA data map, offline fixtures, credits (board M0-13, M0-14, M0-16):** [docs/SCIENCE_AND_DATA.md](docs/SCIENCE_AND_DATA.md) §B now maps 28 verified NASA and partner sources to every puzzle P-01–P-16 (B3 lists 15 numbers no dataset supports, with proposals; 08 is unchanged). `production/tools/fetch_nasa_data.py` wrote 28 small offline fixtures and `puzzle_sources.json` to `game/resources/data/nasa/` (no keys; `--check` passes). [CREDITS.md](CREDITS.md) credits every file in `game/assets`; no font files exist (the game uses Godot's built-in Open Sans, OFL). Still open: the official Resources tab (M0-12), docs/TEAM.md, and confirming each AI service's terms.
 
 **3 Nov 2026 (night) — documentation drift and AI-use disclosure (board M0-18, M0-17):** README, GAMEPLAY_DESIGN_FINAL, STORY_FINAL, CAMPAIGN_SEASON1, 10_GAMEPLAY_SYSTEMS, HANDOFF, the execution notes and this handbook now agree with canon (English only, faceless plants, Forward+ with a Compatibility fallback, CH4 rover 100/reserve 30, CH8 home air A8, 32 missions, v8 cast 65/68 bones and 44 clips); 717 split words in `execution/*.md` repaired; legacy-id game-design files carry a "historical ids" note; [shots.csv](production/cutscenes/shots.csv) rows are `archived-realistic`. [docs/AI_USE.md](docs/AI_USE.md) is the text for the project page's "Use of AI" field and [AI_PROMPT_LOG.md](production/AI_PROMPT_LOG.md) now covers 27 Oct to 3 Nov. Documentation only; no game code, assets or numbers changed.
 

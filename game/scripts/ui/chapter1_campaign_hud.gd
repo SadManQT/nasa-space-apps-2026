@@ -21,6 +21,7 @@ var _targets: VBoxContainer
 var _next_line: Button
 var _advance: Button
 var _retry: Button
+var _last_outcome: Dictionary = {}
 var _modal_button_states := {}
 var _dialogue_index := 0
 var _scene_id := ""
@@ -60,6 +61,9 @@ func refresh_after_action(result: Dictionary) -> void:
 		_render_caption()
 		_build_targets()
 		_refresh_query()
+	if result.get("accepted", false):
+		_last_outcome = {"result": result.get("reason", "Operation completed."), "changes": result.get("deltas", []), "notes": result.get("warnings", [])}
+		panels.bind_query(runtime.query().merged({"outcome": _last_outcome}, true))
 	if result.has("reason"):
 		show_status(String(result.get("reason", "")))
 
@@ -183,6 +187,16 @@ func _build() -> void:
 	var exit := _button("TITLE")
 	exit.pressed.connect(_on_exit_pressed)
 	actions.add_child(exit)
+	var data_cards := _button("DATA CARDS")
+	data_cards.pressed.connect(func() -> void:
+		var ids: Array = []
+		for puzzle_id in runtime.query().get("source_puzzle_ids", []):
+			for card in panels.science.cards_for_puzzle(puzzle_id):
+				if not ids.has(card.source_id):
+					ids.append(card.source_id)
+		panels.open_panel("sources", {"ids": ids})
+	)
+	actions.add_child(data_cards)
 	var tools := HBoxContainer.new()
 	tools.add_theme_constant_override("separation", 6)
 	target_box.add_child(tools)
@@ -195,6 +209,9 @@ func _build() -> void:
 	_retry = _button("RETRY")
 	_retry.pressed.connect(func() -> void: runtime.retry_checkpoint())
 	tools.add_child(_retry)
+	var outcome := _button("OUTCOME")
+	outcome.pressed.connect(func() -> void: panels.open_panel("outcome", _last_outcome if not _last_outcome.is_empty() else {"result": "Complete an operation to review its result."}))
+	tools.add_child(outcome)
 	var controls := Label.new()
 	controls.text = "WASD move · Hold RMB to look · E use nearby\nEsc pause · Tab / arrows / Enter select controls"
 	controls.position = Vector2(24, 248)
