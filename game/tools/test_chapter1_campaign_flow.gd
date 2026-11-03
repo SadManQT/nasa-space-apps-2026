@@ -45,6 +45,10 @@ func _run() -> void:
 	for index in ACTIONS.size():
 		var scene_id := "EX-CH01-S%02d" % (index + 1)
 		_check(campaign.route.current_scene_id() == scene_id, "controller enters " + scene_id)
+		await process_frame
+		await process_frame
+		campaign.hud._operations_scroll.ensure_control_visible(campaign.hud._advance)
+		await process_frame
 		_check(campaign.hud.get_viewport_rect().encloses(campaign.hud._advance.get_global_rect()), scene_id + " advance control stays onscreen")
 		for target_id in ACTIONS[index]:
 			var target := campaign.physical_target(String(target_id))

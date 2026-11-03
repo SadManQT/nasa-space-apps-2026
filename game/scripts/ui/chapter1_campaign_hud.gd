@@ -1,6 +1,7 @@
 extends Control
 class_name Chapter1CampaignHUD
 
+const Outpost = preload("res://scripts/ui/outpost_status.gd")
 const PANELS_SCENE: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
 const IVORY := Color("#ECEEF0")
 const MUTED := Color("#A8B4C8")
@@ -22,6 +23,16 @@ var _next_line: Button
 var _advance: Button
 var _retry: Button
 var _last_outcome: Dictionary = {}
+var outpost: OutpostStatus
+var _forecast: Dictionary = {}
+var _forecast_key := ""
+var _forecast_source := ""
+var _pointer_preview := false
+var _focus_preview := false
+var _target_panel: PanelContainer
+var _controls: Label
+var _objective_scroll: ScrollContainer
+var _operations_scroll: ScrollContainer
 var _modal_button_states := {}
 var _dialogue_index := 0
 var _scene_id := ""
@@ -47,6 +58,8 @@ func refresh_scene(_result: Dictionary = {}) -> void:
 	var next_scene := String(scene.get("id", ""))
 	if next_scene != _scene_id:
 		_scene_id = next_scene
+		_forecast = {}
+		_forecast_key = ""
 	_dialogue_index = _first_unacknowledged_line()
 	_title.text = String(scene.get("title", "Chapter 1"))
 	_meta.text = "%s  ·  %s  ·  %s" % [next_scene, String(scene.get("location", "")), String(scene.get("storyTime", scene.get("story_time", "")))]
@@ -57,6 +70,8 @@ func refresh_scene(_result: Dictionary = {}) -> void:
 	apply_accessibility()
 
 func refresh_after_action(result: Dictionary) -> void:
+	_forecast = {}
+	_forecast_key = ""
 	if runtime != null:
 		_render_caption()
 		_build_targets()
@@ -98,6 +113,8 @@ func _build() -> void:
 	row.add_child(_stack(_title))
 	_meta = Label.new()
 	_meta.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_meta.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_meta.custom_minimum_size.x = 300
 	_meta.add_theme_color_override("font_color", MUTED)
 	_meta.add_theme_font_size_override("font_size", 11)
 	row.add_child(_stack(_meta))
@@ -110,7 +127,15 @@ func _build() -> void:
 	_objective.add_theme_font_size_override("font_size", 14)
 	_objective.add_theme_color_override("font_outline_color", Color("#05060A"))
 	_objective.add_theme_constant_override("outline_size", 5)
-	add_child(_objective)
+	_objective_scroll = ScrollContainer.new()
+	_objective_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_objective_scroll.follow_focus = true
+	_objective_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
+	_objective_scroll.accessibility_name = "Current objective"
+	_objective.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_objective.position = Vector2.ZERO
+	_objective_scroll.add_child(_objective)
+	add_child(_objective_scroll)
 
 	var caption := _panel(Color(0.03, 0.05, 0.10, 0.95), 14, Color(0.26, 0.40, 0.62, 0.65))
 	caption.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
@@ -141,6 +166,7 @@ func _build() -> void:
 	caption_box.add_child(_next_line)
 
 	var target_panel := _panel(Color(0.05, 0.08, 0.14, 0.92), 14, Color(0.13, 0.72, 0.78, 0.55))
+	_target_panel = target_panel
 	target_panel.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
 	target_panel.offset_left = -464
 	target_panel.offset_right = -24
@@ -155,21 +181,23 @@ func _build() -> void:
 	target_panel.add_child(target_margin)
 	var target_box := VBoxContainer.new()
 	target_box.add_theme_constant_override("separation", 8)
-	target_margin.add_child(target_box)
+	var operations_scroll := ScrollContainer.new()
+	_operations_scroll = operations_scroll
+	operations_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
+	operations_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	operations_scroll.follow_focus = true
+	target_margin.add_child(operations_scroll)
+	target_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	operations_scroll.add_child(target_box)
 	var target_title := Label.new()
 	target_title.text = "PHYSICAL OPERATIONS"
 	target_title.add_theme_color_override("font_color", CYAN)
 	target_title.add_theme_font_size_override("font_size", 14)
 	target_box.add_child(target_title)
-	var scroll := ScrollContainer.new()
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	scroll.follow_focus = true
-	target_box.add_child(scroll)
 	_targets = VBoxContainer.new()
 	_targets.add_theme_constant_override("separation", 7)
 	_targets.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.add_child(_targets)
+	target_box.add_child(_targets)
 	_status = Label.new()
 	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_status.add_theme_color_override("font_color", MUTED)
@@ -177,8 +205,8 @@ func _build() -> void:
 	_advance = _button("ADVANCE SCENE  ›")
 	_advance.pressed.connect(_on_advance_pressed)
 	target_box.add_child(_advance)
-	var actions := HBoxContainer.new()
-	actions.alignment = BoxContainer.ALIGNMENT_END
+	var actions := HFlowContainer.new()
+	actions.alignment = FlowContainer.ALIGNMENT_END
 	target_box.add_child(actions)
 	var journal := _button("JOURNAL")
 	journal.pressed.connect(_on_journal_pressed)
@@ -199,7 +227,7 @@ func _build() -> void:
 		panels.open_panel("sources", {"ids": ids})
 	)
 	actions.add_child(data_cards)
-	var tools := HBoxContainer.new()
+	var tools := HFlowContainer.new()
 	tools.add_theme_constant_override("separation", 6)
 	target_box.add_child(tools)
 	var pause := _button("PAUSE")
@@ -215,6 +243,7 @@ func _build() -> void:
 	outcome.pressed.connect(func() -> void: panels.open_panel("outcome", _last_outcome if not _last_outcome.is_empty() else {"result": "Complete an operation to review its result."}))
 	tools.add_child(outcome)
 	var controls := Label.new()
+	_controls = controls
 	controls.text = "WASD move · Hold RMB to look · E use nearby\nEsc pause · Tab / arrows / Enter select controls"
 	controls.add_theme_color_override("font_outline_color", Color("#05060A"))
 	controls.add_theme_constant_override("outline_size", 5)
@@ -222,6 +251,15 @@ func _build() -> void:
 	controls.add_theme_font_size_override("font_size", 13)
 	controls.add_theme_color_override("font_color", MUTED)
 	add_child(controls)
+	outpost = Outpost.new()
+	outpost.name = "OutpostStatus"
+	outpost.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	outpost.offset_left = 24
+	outpost.offset_right = -24
+	outpost.offset_top = 100
+	outpost.z_index = 70
+	add_child(outpost)
+	outpost.minimum_size_changed.connect(_layout_outpost.call_deferred)
 
 func _build_targets() -> void:
 	if _targets == null or runtime == null:
@@ -240,6 +278,22 @@ func _build_targets() -> void:
 		var button := _button("USE · " + String(target.get("focus_label", target.get("target_id", "operation"))) + "\nAT " + label)
 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		button.disabled = complete or runtime.target_completed(target)
+		button.mouse_entered.connect(func() -> void:
+			_pointer_preview = true
+			show_target_forecast(String(target.target_id))
+		)
+		button.mouse_exited.connect(func() -> void:
+			_pointer_preview = false
+			_clear_unselected_forecast()
+		)
+		button.focus_entered.connect(func() -> void:
+			_focus_preview = true
+			show_target_forecast(String(target.target_id))
+		)
+		button.focus_exited.connect(func() -> void:
+			_focus_preview = false
+			_clear_unselected_forecast()
+		)
 		button.pressed.connect(func() -> void: runtime.perform_target(String(target.get("target_id", ""))))
 		_targets.add_child(button)
 	_advance.disabled = complete or not bool(gate.get("ready", false))
@@ -249,10 +303,10 @@ func _build_targets() -> void:
 		_status.text = "CHAPTER %s COMPLETE · %s\nCheckpoint kept. Advance when the next chapter is ready." % [chapter_number, String(runtime.route.chapter_ready().get("ending", ""))]
 		_status.modulate = GREEN
 	elif bool(gate.get("ready", false)):
-		_status.text = "ALL PHYSICAL PREDICATES READY · advance explicitly."
+		_status.text = "ALL OPERATIONS READY · advance when ready."
 		_status.modulate = GREEN
 	else:
-		_status.text = "Missing: " + ", ".join(gate.get("missing", []))
+		_status.text = "%d operations remain. Complete the listed steps, then advance." % gate.get("missing", []).size()
 		_status.modulate = MUTED
 	if panels != null and not panels.active_panel().is_empty():
 		_set_modal_buttons(true)
@@ -319,7 +373,10 @@ func _on_exit_pressed() -> void:
 
 func _refresh_query() -> void:
 	if panels != null and runtime != null:
-		panels.bind_query(runtime.query())
+		var query := runtime.query()
+		panels.bind_query(query)
+		if outpost != null:
+			outpost.bind_query(query, _forecast)
 
 func apply_accessibility() -> void:
 	if runtime == null:
@@ -327,7 +384,22 @@ func apply_accessibility() -> void:
 	var settings: Dictionary = runtime.query().get("accessibility", {})
 	_caption_speaker.visible = bool(settings.get("captions", true))
 	_caption_line.visible = bool(settings.get("captions", true))
-	_scale_text(self, 1.5 if bool(settings.get("large_text", false)) else 1.0)
+	var large := bool(settings.get("large_text", false))
+	_scale_text(self, 1.5 if large else 1.0)
+	_layout_outpost()
+
+func _layout_outpost() -> void:
+	if outpost == null or runtime == null:
+		return
+	var large := bool(runtime.query().get("accessibility", {}).get("large_text", false))
+	outpost.offset_bottom = 254 if large else 210
+	var below := maxf(outpost.offset_bottom, outpost.get_global_rect().end.y) + 16
+	_objective_scroll.position = Vector2(24, below)
+	_objective_scroll.size = Vector2(740, 125)
+	_controls.position = Vector2(24, below + 128)
+	_target_panel.offset_top = below
+	if panels != null:
+		panels.set_content_top(below)
 
 func _scale_text(node: Node, scale_factor: float) -> void:
 	for child in node.get_children():
@@ -340,10 +412,14 @@ func _scale_text(node: Node, scale_factor: float) -> void:
 		_scale_text(child, scale_factor)
 
 func _on_panel_opened(_panel_id: String) -> void:
+	_operations_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_NONE
+	_objective_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_NONE
 	runtime.set_ui_paused(true)
 	_set_modal_buttons(true)
 
 func _on_panel_closed(_panel_id: String) -> void:
+	_operations_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
+	_objective_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
 	runtime.set_ui_paused(false)
 	_set_modal_buttons(false)
 
@@ -371,6 +447,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _stack(control: Control) -> Control:
 	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	box.add_child(control)
 	return box
 
@@ -419,3 +496,31 @@ func _panel(color: Color, radius: int, border: Color) -> PanelContainer:
 	style.border_color = border
 	panel.add_theme_stylebox_override("panel", style)
 	return panel
+
+func show_target_forecast(target_id: String, source: String = "ui") -> void:
+	if runtime == null or target_id.is_empty():
+		return
+	var key := "%s:%s:%s" % [runtime.route.current_scene_id(), target_id, runtime.director.query().state_revision]
+	if key == _forecast_key:
+		return
+	_forecast_key = key
+	_forecast_source = source
+	_forecast = runtime.forecast_target(target_id)
+	outpost.bind_query(runtime.query(), _forecast)
+	outpost.tooltip_text = "Forecast of the selected operation. Live resources stay unchanged until you confirm." if bool(_forecast.get("accepted", false)) else "Complete the preceding operations to see this forecast."
+
+func show_nearby_forecast(target_id: String) -> void:
+	if _pointer_preview or _focus_preview:
+		return
+	if not target_id.is_empty():
+		show_target_forecast(target_id, "nearby")
+	elif _forecast_source == "nearby":
+		_clear_unselected_forecast()
+
+func _clear_unselected_forecast() -> void:
+	if _pointer_preview or _focus_preview or runtime == null:
+		return
+	_forecast = {}
+	_forecast_key = ""
+	_forecast_source = ""
+	outpost.bind_query(runtime.query())

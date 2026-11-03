@@ -1,0 +1,111 @@
+{
+ "schema_version": 1,
+ "scope": "Training units. Wall water is allocated to shielding; shelter capacity applies at the Safe Room. Rations are crew-days. Exposure is not mSv.",
+ "groups": [
+  {
+   "id": "power",
+   "label": "Power",
+   "icon": "power",
+   "primary": "E",
+   "capacity": "energy_capacity",
+   "fields": {
+    "E": "Power"
+   },
+   "thresholds": {
+    "critical_below_or_equal": 0,
+    "warning_below_or_equal": 2
+   },
+   "display_fields": {
+    "E": "Energy E"
+   },
+   "display_units": {},
+   "description": "Stored power in training units.",
+   "additional_thresholds": {}
+  },
+  {
+   "id": "life",
+   "label": "Life support",
+   "icon": "life",
+   "primary": "A",
+   "capacity": "air_capacity",
+   "fields": {
+    "A": "Air",
+    "W": "Water in wall"
+   },
+   "thresholds": {
+    "critical_below_or_equal": 0,
+    "warning_below_or_equal": 2
+   },
+   "display_fields": {
+    "A": "Air A",
+    "W": "Wall water W"
+   },
+   "display_units": {},
+   "description": "Water shown is allocated to the shielding wall, not total drinking-water supply.",
+   "additional_thresholds": {
+    "W": {
+     "warning_at_or_above": 4
+    }
+   }
+  },
+  {
+   "id": "shielding",
+   "label": "Shielding",
+   "icon": "shielding",
+   "primary": "S",
+   "capacity": "shelter_max",
+   "fields": {
+    "S": "Shelter",
+    "Z": "Exposure"
+   },
+   "thresholds": {
+    "critical_below_or_equal": 1,
+    "warning_below_or_equal": 5
+   },
+   "exposure_limits": {
+    "CH01": 3,
+    "CH07": 6
+   },
+   "display_fields": {
+    "S": "Shelter S",
+    "Z": "Exposure Z"
+   },
+   "display_units": {},
+   "description": "Shelter is available Safe Room protection; exposure is accumulated game exposure, not mSv.",
+   "additional_thresholds": {
+    "Z": {
+     "warning_above": 0
+    }
+   }
+  },
+  {
+   "id": "food",
+   "label": "Food",
+   "icon": "food",
+   "primary": "C",
+   "capacity": "crop_capacity",
+   "fields": {
+    "C": "Crop condition",
+    "R": "Rations (crew-days)"
+   },
+   "thresholds": {
+    "critical_below_or_equal": 0,
+    "warning_below_or_equal": 2
+   },
+   "display_fields": {
+    "C": "Crops C",
+    "R": "Rations R"
+   },
+   "display_units": {
+    "R": "d"
+   },
+   "description": "Crops show plant condition. Rations are crew-days; plants do not instantly feed the crew.",
+   "additional_thresholds": {
+    "R": {
+     "critical_below_or_equal": 0,
+     "warning_below_or_equal": 2
+    }
+   }
+  }
+ ]
+}

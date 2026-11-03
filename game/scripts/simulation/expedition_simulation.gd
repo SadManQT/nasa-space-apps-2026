@@ -46,6 +46,17 @@ func entry_profile(profile_id: String = "chapter1_base") -> Dictionary:
 		"status": "ready",
 	}
 
+func outpost_readouts(snapshot: Dictionary) -> Dictionary:
+	if _profile.is_empty():
+		_profile = _load_profile("chapter1_base")
+	if _profile.is_empty() or not snapshot.get("resources", null) is Dictionary:
+		return {}
+	var resources := _normalise_resources(snapshot.get("resources", {}))
+	return {"shelter_capacity": _shelter_strength(resources, _modifiers(snapshot, {})), "shelter_max": int(_profile.rules.effective_shelter_cap)}
+
+func _shelter_strength(resources: Dictionary, modifiers: Dictionary) -> int:
+	return mini(int(_profile.rules.effective_shelter_cap), int(resources.get("W", 0)) + int(resources.get("K", 0)) + int(modifiers.get("shelter_bonus", 0)))
+
 func preview(snapshot: Dictionary, plan: Dictionary) -> Dictionary:
 	return _transition(snapshot, "", int(snapshot.get("state_revision", 0)), plan, false)
 
@@ -206,7 +217,7 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 		var sheltered := bool(validated.get("sheltered", true))
 		var shelter := 0
 		if sheltered:
-			shelter = mini(6, int(resources.get("W", 0)) + int(resources.get("K", 0)) + int(modifiers.get("shelter_bonus", 0)))
+			shelter = _shelter_strength(resources, modifiers)
 		var dose := 0
 		if shift_number == 5 or shift_number == 6:
 			dose = _dose_for_shelter(shelter)
@@ -389,7 +400,7 @@ static func base_profile_problem(profile: Dictionary) -> String:
 		return "shift_hours must be positive"
 	if not profile.get("rules", null) is Dictionary:
 		return "base rules must be a Dictionary"
-	for key in ["daylight_energy", "basic_energy", "breathing_air", "food_consumption"]:
+	for key in ["daylight_energy", "basic_energy", "breathing_air", "food_consumption", "effective_shelter_cap"]:
 		if not is_amount(profile.rules.get(key, null)):
 			return "base profile is missing rule " + key
 	return ""

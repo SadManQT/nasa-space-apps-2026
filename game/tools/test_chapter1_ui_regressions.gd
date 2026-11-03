@@ -54,8 +54,14 @@ func _run() -> void:
 	_check(not caption.visible, "captions off hides the production caption")
 	_check((hud.get("_title") as Label).get_theme_font_size("font_size") > 21, "large text scales the production HUD")
 	var advance := hud.get("_advance") as Button
+	_reveal_control(advance)
+	await process_frame
+	await process_frame
 	_check(hud.get_global_rect().encloses(advance.get_global_rect()), "advance control stays inside the 1280x720 viewport")
 	var title_button := _find_button(hud, "TITLE")
+	_reveal_control(title_button)
+	await process_frame
+	await process_frame
 	_check(title_button != null and hud.get_global_rect().encloses(title_button.get_global_rect()), "title control stays inside the viewport")
 	hud.refresh_after_action({"accepted": false, "reason": "TEST: preceding physical check is missing"})
 	_check((hud.get("_status") as Label).text == "TEST: preceding physical check is missing", "rejection cause survives gate refresh")

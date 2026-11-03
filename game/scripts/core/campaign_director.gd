@@ -78,6 +78,7 @@ func query() -> Dictionary:
 		"scenario_datetime": String(_state.get("scenario_datetime", "")),
 		"current_shift": int(_state.get("current_shift", 0)),
 		"resources": resources.duplicate(true),
+		"outpost": _simulation.outpost_readouts(_state),
 		"status": String(_state.get("status", "active")),
 		"paused": bool(_state.get("paused", false)),
 		"can_retry": not _checkpoint.is_empty(),

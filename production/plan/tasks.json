@@ -1201,7 +1201,7 @@
    "prompt": "Act as an independent NASA science reviewer for Chapter 1 as built: every number, unit, claim, Data Card, briefing, debrief line, visual\n(Moon science rules in ART_BIBLE §2) and procedure. For each item: source checked (dataset/document, URL), verdict (correct / correct as a\nlabelled teaching simplification / wrong), and the fix. Write production/review/science_review_ch01.md; add a board task for every 'wrong'\nitem (tool by type), and list the changes that need the user's approval (canon numbers). Never let an unsourced number reach the demo."
   },
   {
-   "status": "in_progress",
+   "status": "done",
    "owner": "atik/codex",
    "deps": [
     "M0-02"
@@ -1216,7 +1216,7 @@
     "execution/UI_03_HUD.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "run_tests.sh 24/24 suites; test_outpost_status 84 checks; production/qa/evidence/M1-28_*.png; production/review/execution/M1-28.md",
    "updated": "2026-11-04",
    "id": "M1-28",
    "milestone": "M1",

@@ -124,6 +124,23 @@ func query() -> Dictionary:
 	result["mission_table"] = {"title": current_scene_data().get("title", ""), "status": route.gate_status()}
 	return result
 
+## Project the real route operation on a restored copy. This exercises the
+## owning puzzle/ledger/director transition, including custom physical steps,
+## without changing live receipts, flags, resources, time or saves.
+func forecast_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
+	var state := _save_snapshot()
+	state["paused"] = false
+	var projected := restore_session(state)
+	if not bool(projected.get("accepted", false)):
+		return projected
+	var result: Dictionary = projected.route.perform(target_id, payload)
+	if not bool(result.get("accepted", false)):
+		return {"accepted": false, "reason": result.get("reason", "Forecast unavailable.")}
+	var predicted = result.get("snapshot", {})
+	if predicted is Dictionary and predicted.get("schema_version") == state.get("schema_version") and predicted.get("resources", {}).has("E"):
+		projected.director.restore_snapshot(predicted)
+	return {"accepted": true, "target_id": target_id, "input_revision": state.state_revision, "query": projected.director.query(), "reason": result.get("reason", "Read-only forecast")}
+
 func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 	if not _startup_error.is_empty() or route == null:
 		return {"accepted": false, "reason": "The expedition is unavailable."}
@@ -212,6 +229,8 @@ func _physics_process(_delta: float) -> void:
 	var selected := nearby_target()
 	_world_prompt.text = "E · " + String(physical_target(String(selected.target_id)).get_meta("focus_label", "Use")) if not selected.is_empty() else ""
 	_room.set_focus_target(String(selected.get("world_focus_id", "")))
+	if hud != null:
+		hud.show_nearby_forecast(String(selected.get("target_id", "")))
 
 func is_chapter_complete() -> bool:
 	if route == null:

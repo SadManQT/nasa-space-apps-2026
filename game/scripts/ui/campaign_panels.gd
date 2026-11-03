@@ -66,6 +66,7 @@ var _title: Label
 var _description: Label
 var _body: VBoxContainer
 var _close_button: Button
+var _safe_top := 0.0
 var _last_focus: Control
 
 func _ready() -> void:
@@ -180,6 +181,7 @@ func _build() -> void:
 	_overlay.hide()
 	add_child(_overlay)
 	_panel = _panel_style(Vector2(780, 540), Color(0.13, 0.72, 0.78, 0.84))
+	_panel.minimum_size_changed.connect(_layout_panel.call_deferred)
 	_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	_panel.hide()
 	add_child(_panel)
@@ -251,6 +253,20 @@ func _render_active_panel() -> void:
 		elif _active_panel in ["outcome", "mission_table"]:
 			_render_puzzle_sources(_query.get("source_puzzle_ids", []))
 	_apply_accessibility()
+	_layout_panel()
+
+func set_content_top(value: float) -> void:
+	_safe_top = value
+	_layout_panel()
+
+func _layout_panel() -> void:
+	if _panel == null or _safe_top <= 0 or not is_inside_tree():
+		return
+	var view := get_viewport_rect().size
+	var width := minf(780, view.x - 32)
+	_panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	_panel.position = Vector2((view.x - width) * 0.5, _safe_top)
+	_panel.size = Vector2(width, maxf(300, view.y - _safe_top - 20))
 
 func _render_data(value) -> void:
 	var body := Label.new()

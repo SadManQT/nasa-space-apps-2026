@@ -28,6 +28,7 @@
     "daylight_energy": 8,
     "basic_energy": 1,
     "breathing_air": 1,
-    "food_consumption": 1.2
+    "food_consumption": 1.2,
+    "effective_shelter_cap": 6
   }
 }
