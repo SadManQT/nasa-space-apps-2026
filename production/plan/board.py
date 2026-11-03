@@ -57,8 +57,8 @@ def ready(task, tasks):
 
 
 def allowed(data, task, by):
-    """Lanes in data['reserved_lanes'] (tools only one person has) go only to that person."""
-    owner = data.get("reserved_lanes", {}).get(task["tool"])
+    """A task's `reserved_for`, or its lane in data['reserved_lanes'], limits it to that person."""
+    owner = task.get("reserved_for") or data.get("reserved_lanes", {}).get(task["tool"])
     return not owner or (by or "").lower().startswith(owner.lower())
 
 
@@ -139,8 +139,8 @@ def set_status(data, tid, status, **fields):
     if status == "in_progress" and not ready(t, tasks):
         sys.exit(f"{tid} is not ready (status {t['status']}; deps must all be done)")
     if status == "in_progress" and not allowed(data, t, fields.get("owner")):
-        sys.exit(f"{tid} is in the '{t['tool']}' lane, which only {data['reserved_lanes'][t['tool']]} works "
-                 "(those tools are on their machines). Take another task.")
+        sys.exit(f"{tid} is reserved for {t.get('reserved_for') or data['reserved_lanes'][t['tool']]} "
+                 "(their tools and their area). Take another task.")
     t.update(status=status, updated=today(), **fields)
     save(data)
     print(f"{tid} -> {status}. Now commit and push production/plan/ (see GO_NEXT.md).")

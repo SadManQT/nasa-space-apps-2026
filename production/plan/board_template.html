@@ -141,6 +141,7 @@ function card(t) {
   const ready = isReady(t);
   const deps = t.deps.map(d => `<a href="#${esc(d)}">${esc(d)}</a> (${esc(byId[d]?.status)})`).join(", ");
   const extra = [
+    (t.reserved_for || (data.reserved_lanes || {})[t.tool]) && `Reserved for: ${esc(t.reserved_for || data.reserved_lanes[t.tool])}`,
     t.owner && `Owner: ${esc(t.owner)}`,
     deps && `Depends on: ${deps}`,
     t.paths?.length && `Paths: ${t.paths.map(esc).join(", ")}`,

@@ -30,7 +30,7 @@ git pull --rebase          # stash or commit your own unfinished work first
 
 ## 2. Pick the task
 
-Use your own lane name. **The `claude`, `antigravity` and `muse` lanes are Sadman's only** (Claude Code, Antigravity, Muse and ElevenLabs are on his machines); the board refuses to give them to anyone else (`reserved_lanes` in tasks.json). **Teammates take `--tool codex` (all code tasks, with whatever coding AI they have: Codex/ChatGPT, Gemini CLI, Cursor, Copilot…) or `--tool gemini`**, and always pass `--by "<your name>/<your AI>"` so the board knows who you are.
+Use your own lane name. **The `claude`, `antigravity`, `muse` and `gemini` lanes, and every cutscene and audio task (including the code that plays them), are Sadman's only** (Claude Code, Antigravity, Muse, ElevenLabs and Veo are on his machines); the board refuses to give them to anyone else (`reserved_lanes` in tasks.json). **Teammates take `--tool codex` (the code tasks, with whatever coding AI they have: Codex/ChatGPT, Gemini CLI, Cursor, Copilot…)**, and always pass `--by "<your name>/<your AI>"` so the board knows who you are.
 
 | Lane | Who | Strengths it gets | Recommended model / effort |
 |---|---|---|---|
