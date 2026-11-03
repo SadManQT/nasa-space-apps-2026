@@ -1,0 +1,310 @@
+{
+ "schema_version": 1,
+ "room_id": "LOC-03",
+ "description": "Authored training greybox; architecture is fictional, not a surveyed lunar site.",
+ "bounds_m": [
+  12.0,
+  8.0
+ ],
+ "ceiling_height_m": 3.6,
+ "floor_color": "#263343",
+ "wall_color": "#939ba6",
+ "accent_color": "#20b8c9",
+ "props": [
+  {
+   "id": "PR_GrowthChamber",
+   "path": "res://assets/props/PR_GrowthChamber/PR_GrowthChamber.glb",
+   "position": [
+    -3.2,
+    0.8,
+    -1.5
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PR_Glovebox",
+   "path": "res://assets/props/PR_Glovebox/PR_Glovebox.glb",
+   "position": [
+    3.2,
+    0.8,
+    -1.5
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PL_CropRack",
+   "path": "res://assets/plants/PL_CropRack/PL_CropRack.glb",
+   "position": [
+    -4.9,
+    0,
+    1.3
+   ],
+   "rotation_degrees": [
+    0,
+    90,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PL_Alo_Bud",
+   "path": "res://assets/plants/PL_Alo_Bud/PL_Alo_Bud.glb",
+   "position": [
+    -3.2,
+    0.8,
+    -1.5
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PL_Tara_Bloom",
+   "path": "res://assets/plants/PL_Tara_Bloom/PL_Tara_Bloom.glb",
+   "position": [
+    0,
+    0.8,
+    -1.5
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  }
+ ],
+ "focus_targets": [
+  {
+   "label": "Alo sealed glove port",
+   "position": [
+    -3.2,
+    1.05,
+    -0.9
+   ],
+   "target_id": "garden_alo_glove_port",
+   "verb": "Inspect",
+   "asset_id": "PR_GrowthChamber",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  },
+  {
+   "label": "Tara reference bay",
+   "position": [
+    0,
+    1.05,
+    -0.9
+   ],
+   "target_id": "garden_tara_bay",
+   "verb": "Inspect",
+   "asset_id": "tara_enclosure",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  },
+  {
+   "label": "Moisture probe and references",
+   "position": [
+    3.2,
+    1.05,
+    -0.9
+   ],
+   "target_id": "garden_probe",
+   "verb": "Inspect",
+   "asset_id": "PR_Glovebox",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  },
+  {
+   "label": "Viewing shutter",
+   "position": [
+    0.0,
+    1.4,
+    -3.4
+   ],
+   "target_id": "garden_shutter",
+   "verb": "OpenDoor",
+   "asset_id": "shutter",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  }
+ ],
+ "anchors": {
+  "garden_amara": [
+   2.8,
+   0.0,
+   2.0
+  ],
+  "garden_chamber": [
+   0.0,
+   0.0,
+   -2.0
+  ],
+  "garden_kai": [
+   -4.0,
+   0.0,
+   2.8
+  ],
+  "garden_mei": [
+   -2.8,
+   0.0,
+   2.0
+  ],
+  "garden_player": [
+   0,
+   0,
+   0.5
+  ],
+  "garden_rafi": [
+   4.0,
+   0.0,
+   2.8
+  ]
+ },
+ "fixtures": [
+  {
+   "id": "alo_bench",
+   "position": [
+    -3.2,
+    0.4,
+    -1.5
+   ],
+   "size": [
+    1.7,
+    0.8,
+    1.1
+   ],
+   "color": "#3c4b5d",
+   "transparent": false
+  },
+  {
+   "id": "tara_bench",
+   "position": [
+    0,
+    0.4,
+    -1.5
+   ],
+   "size": [
+    1.7,
+    0.8,
+    1.1
+   ],
+   "color": "#3c4b5d",
+   "transparent": false
+  },
+  {
+   "id": "probe_bench",
+   "position": [
+    3.2,
+    0.4,
+    -1.5
+   ],
+   "size": [
+    1.7,
+    0.8,
+    1.1
+   ],
+   "color": "#3c4b5d",
+   "transparent": false
+  },
+  {
+   "id": "tara_enclosure",
+   "position": [
+    0,
+    1.1,
+    -1.5
+   ],
+   "size": [
+    0.65,
+    0.65,
+    0.65
+   ],
+   "color": "#8bc4d6",
+   "transparent": true
+  },
+  {
+   "id": "shutter",
+   "position": [
+    0,
+    1.6,
+    -3.8
+   ],
+   "size": [
+    2.6,
+    1.6,
+    0.1
+   ],
+   "color": "#142538",
+   "transparent": false
+  }
+ ],
+ "lighting": {
+  "key_rotation_degrees": [
+   -65,
+   -25,
+   0
+  ],
+  "key_color": "#ffe4f0",
+  "key_energy": 1.6,
+  "fill_energy": 0.45,
+  "ambient_energy": 0.3,
+  "strip_color": "#ffe4f0"
+ },
+ "earth_visibility": "interior",
+ "plant_positions": {
+  "ALO-01": [
+   -3.2,
+   0.8,
+   -1.5
+  ],
+  "TARA-01": [
+   0,
+   0.8,
+   -1.5
+  ]
+ }
+}

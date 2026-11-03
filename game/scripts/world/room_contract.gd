@@ -322,7 +322,19 @@ static func room_ids() -> Array:
 static func room(room_id: String) -> Dictionary:
 	if not _ROOMS.has(room_id):
 		return {}
-	return (_ROOMS[room_id] as Dictionary).duplicate(true)
+	var result := (_ROOMS[room_id] as Dictionary).duplicate(true)
+	var authored := layout(room_id)
+	for key in ["bounds_m", "focus_targets", "anchors"]:
+		if authored.has(key):
+			result[key] = authored[key].duplicate(true)
+	return result
+
+static func layout(room_id: String) -> Dictionary:
+	var path := "res://resources/campaign/rooms/" + room_id + ".json"
+	if not FileAccess.file_exists(path):
+		return {}
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(path))
+	return parsed if parsed is Dictionary else {}
 
 static func room_for_scene(scene_id: String) -> String:
 	if _SCENE_ROOMS.has(scene_id):

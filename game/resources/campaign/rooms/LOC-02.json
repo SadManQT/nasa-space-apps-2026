@@ -1,0 +1,247 @@
+{
+ "schema_version": 1,
+ "room_id": "LOC-02",
+ "description": "Authored training greybox; architecture is fictional, not a surveyed lunar site.",
+ "bounds_m": [
+  12.0,
+  6.0
+ ],
+ "ceiling_height_m": 3.6,
+ "floor_color": "#263343",
+ "wall_color": "#939ba6",
+ "accent_color": "#20b8c9",
+ "props": [
+  {
+   "id": "PR_PowerPanel",
+   "path": "res://assets/props/PR_PowerPanel/PR_PowerPanel.glb",
+   "position": [
+    -3.5,
+    0,
+    -1.8
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PR_BatteryJar",
+   "path": "res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+   "position": [
+    -5,
+    0,
+    -1.6
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PR_OxygenUnit",
+   "path": "res://assets/props/PR_OxygenUnit/PR_OxygenUnit.glb",
+   "position": [
+    0,
+    0,
+    -1.8
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PR_ControlConsole",
+   "path": "res://assets/props/PR_ControlConsole/PR_ControlConsole.glb",
+   "position": [
+    1.5,
+    0,
+    1.0
+   ],
+   "rotation_degrees": [
+    0,
+    180,
+    0
+   ],
+   "scale": [
+    0.85,
+    0.85,
+    0.85
+   ]
+  },
+  {
+   "id": "PR_WaterValve",
+   "path": "res://assets/props/PR_WaterValve/PR_WaterValve.glb",
+   "position": [
+    3.5,
+    0,
+    -1.6
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PR_HandLight",
+   "path": "res://assets/props/PR_HandLight/PR_HandLight.glb",
+   "position": [
+    3.5,
+    0.9,
+    1.5
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  }
+ ],
+ "focus_targets": [
+  {
+   "label": "Power panel",
+   "position": [
+    -3.5,
+    1.0,
+    -1.5
+   ],
+   "target_id": "service_power_panel",
+   "verb": "Inspect",
+   "asset_id": "PR_PowerPanel",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  },
+  {
+   "label": "Air console",
+   "position": [
+    0.0,
+    1.0,
+    -1.5
+   ],
+   "target_id": "service_air_console",
+   "verb": "Inspect",
+   "asset_id": "PR_OxygenUnit",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  },
+  {
+   "label": "Garden spur valve",
+   "position": [
+    3.5,
+    0.8,
+    -1.5
+   ],
+   "target_id": "service_garden_valve",
+   "verb": "Inspect",
+   "asset_id": "PR_WaterValve",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  },
+  {
+   "label": "Hand-light locker",
+   "position": [
+    3.5,
+    1.0,
+    1.5
+   ],
+   "target_id": "service_hand_light",
+   "verb": "Inspect",
+   "asset_id": "PR_HandLight",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  }
+ ],
+ "anchors": {
+  "service_amara": [
+   0.0,
+   0.0,
+   1.6
+  ],
+  "service_kai": [
+   -3.2,
+   0.0,
+   1.6
+  ],
+  "service_player": [
+   0,
+   0,
+   -0.5
+  ],
+  "service_rafi": [
+   3.2,
+   0.0,
+   1.6
+  ]
+ },
+ "fixtures": [
+  {
+   "id": "light_bench",
+   "position": [
+    3.5,
+    0.45,
+    1.5
+   ],
+   "size": [
+    1.2,
+    0.9,
+    0.65
+   ],
+   "color": "#3c4b5d",
+   "transparent": false
+  }
+ ],
+ "lighting": {
+  "key_rotation_degrees": [
+   -65,
+   -25,
+   0
+  ],
+  "key_color": "#dfeeff",
+  "key_energy": 1.6,
+  "fill_energy": 0.45,
+  "ambient_energy": 0.3,
+  "strip_color": "#dfeeff"
+ },
+ "earth_visibility": "interior"
+}

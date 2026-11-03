@@ -1,6 +1,7 @@
 extends Node3D
 class_name CampaignRoom
 
+const Presentation = preload("res://scripts/world/room_presentation.gd")
 const RoomContract = preload("res://scripts/world/room_contract.gd")
 const DoorScript = preload("res://scripts/navigation/campaign_door.gd")
 const AssetGeometryScript = preload("res://scripts/asset_geometry.gd")
@@ -18,6 +19,9 @@ var door_root: Node3D
 var anchor_root: Node3D
 var navigation_root: Node3D
 var _built := false
+var _layout: Dictionary = {}
+var _selection_frames: Dictionary = {}
+var _focus_id := ""
 
 func _ready() -> void:
 	build_room()
@@ -29,6 +33,8 @@ func build_room() -> Dictionary:
 	if contract.is_empty():
 		push_error("CampaignRoom has no contract for " + room_id)
 		return {"accepted": false, "reason": "Unknown room contract."}
+	_layout = RoomContract.layout(room_id)
+	set_meta("room_name", contract.get("name", "AURORA"))
 	visual_root = _node_root("VisualRoot")
 	collision_root = _node_root("CollisionRoot")
 	focus_root = _node_root("FocusTargets")
@@ -37,6 +43,7 @@ func build_room() -> Dictionary:
 	anchor_root = _node_root("CompanionAnchors")
 	navigation_root = _node_root("Navigation")
 	_build_floor_and_walls(contract)
+	Presentation.build(self, _layout, contract.get("pressure") == "vacuum")
 	_build_doors(contract)
 	_build_focus_targets(contract)
 	_build_pressure_markers(contract)
@@ -45,6 +52,10 @@ func build_room() -> Dictionary:
 		_build_navigation(contract)
 	if load_approved_assets:
 		_load_approved_assets(contract)
+	_build_selection_frames(contract)
+	if contract.get("pressure") == "vacuum":
+		_style_vacuum(visual_root)
+		_style_vacuum(collision_root)
 	set_meta("room_id", room_id)
 	set_meta("visual_root", "VisualRoot")
 	set_meta("collision_root", "CollisionRoot")
@@ -128,7 +139,9 @@ func apply_plant_state(plants: Array) -> void:
 			model.scale = Vector3.ONE * 0.85
 			visual_root.add_child(model)
 			ToonMaterialsScript.apply_to_tree(model, false, true)
-		if focus != null:
+		if _layout.get("plant_positions", {}).has(individual):
+			model.position = Presentation.vector(_layout.plant_positions[individual])
+		elif focus != null:
 			model.position = Vector3(focus.position.x, 0.0, focus.position.z)
 		model.show()
 
@@ -143,16 +156,30 @@ func _node_root(node_name: String) -> Node3D:
 
 func _build_floor_and_walls(contract: Dictionary) -> void:
 	var bounds: Array = contract.get("bounds_m", [10.0, 10.0])
-	var width := minf(float(bounds[0]), 40.0)
-	var depth := minf(float(bounds[1]), 40.0)
-	_add_box(collision_root, "FloorCollision", Vector3(0.0, -0.15, 0.0), Vector3(width, 0.3, depth), Color("#192235"), false)
-	# Walls are intentionally owned by CollisionRoot, separate from any GLB
-	# visual. Doors are named child bodies so their legal state can disable only
-	# the relevant collision shape.
-	_add_box(collision_root, "NorthWallCollision", Vector3(0.0, 1.5, -depth * 0.5), Vector3(width, 3.0, 0.2), Color("#263650"), false)
-	_add_box(collision_root, "SouthWallCollision", Vector3(0.0, 1.5, depth * 0.5), Vector3(width, 3.0, 0.2), Color("#263650"), false)
-	_add_box(collision_root, "WestWallCollision", Vector3(-width * 0.5, 1.5, 0.0), Vector3(0.2, 3.0, depth), Color("#263650"), false)
-	_add_box(collision_root, "EastWallCollision", Vector3(width * 0.5, 1.5, 0.0), Vector3(0.2, 3.0, depth), Color("#263650"), false)
+	var width := float(bounds[0]) if not _layout.is_empty() else minf(float(bounds[0]), 40.0)
+	var depth := float(bounds[1]) if not _layout.is_empty() else minf(float(bounds[1]), 40.0)
+	var visible_shell := not _layout.is_empty()
+	var floor_color := Color(_layout.get("floor_color", "#192235"))
+	_add_box(collision_root, "FloorCollision", Vector3(0, -0.15, 0), Vector3(width, 0.3, depth), floor_color, visible_shell)
+	if contract.get("pressure") == "vacuum":
+		# A visible apron guard surrounds the bounded training area. Open sky
+		# replaces the old invisible room walls; the edge cannot drop the player.
+		var rail_height := float(_layout.get("apron_rail_height_m", 0.9))
+		for z in [-depth * 0.5, depth * 0.5]:
+			_add_box(collision_root, "ApronRail", Vector3(0, rail_height * 0.5, z), Vector3(width, rail_height, 0.1), Color("#7A7672"), true)
+		for x in [-width * 0.5, width * 0.5]:
+			_add_box(collision_root, "ApronRail", Vector3(x, rail_height * 0.5, 0), Vector3(0.1, rail_height, depth), Color("#7A7672"), true)
+		return
+	var height := float(_layout.get("ceiling_height_m", 3.0))
+	var wall_color := Color(_layout.get("wall_color", "#263650"))
+	_add_box(collision_root, "NorthWallCollision", Vector3(0, height * 0.5, -depth * 0.5), Vector3(width, height, 0.2), wall_color, visible_shell)
+	_add_box(collision_root, "SouthWallCollision", Vector3(0, height * 0.5, depth * 0.5), Vector3(width, height, 0.2), wall_color, visible_shell)
+	_add_box(collision_root, "WestWallCollision", Vector3(-width * 0.5, height * 0.5, 0), Vector3(0.2, height, depth), wall_color, visible_shell)
+	_add_box(collision_root, "EastWallCollision", Vector3(width * 0.5, height * 0.5, 0), Vector3(0.2, height, depth), wall_color, visible_shell)
+	if visible_shell:
+		var ceiling := _add_box(collision_root, "CeilingCollision", Vector3(0, height + 0.1, 0), Vector3(width, 0.2, depth), wall_color, true)
+		for mesh in ceiling.find_children("*", "MeshInstance3D", true, false):
+			mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
 func _build_doors(contract: Dictionary) -> void:
 	var boundaries: Array = contract.get("boundary_ids", [])
@@ -173,6 +200,7 @@ func _build_doors(contract: Dictionary) -> void:
 		door_root.add_child(door)
 		var label := Label3D.new()
 		label.name = "BoundaryLabel"
+		label.visible = _layout.is_empty()
 		label.text = boundary_id.replace("_", " ").to_upper()
 		label.font_size = 24
 		label.pixel_size = 0.002
@@ -192,14 +220,17 @@ func _build_focus_targets(contract: Dictionary) -> void:
 		node.add_to_group("interactable")
 		node.set_meta("target_id", String(target.get("target_id", node.name)))
 		node.set_meta("focus_label", String(target.get("label", node.name)))
+		node.set_meta("asset_id", target.get("asset_id", ""))
 		node.set_meta("verb", String(target.get("verb", "Inspect")))
 		node.set_meta("room_id", room_id)
 		focus_root.add_child(node)
 		var label := Label3D.new()
 		label.text = String(target.get("label", node.name))
-		label.position.y = 0.45
-		label.font_size = 28
-		label.pixel_size = 0.002
+		label.position = Presentation.vector(target.get("label_offset", [0, 0.7, 0]))
+		label.font_size = 32
+		label.pixel_size = 0.0012
+		label.fixed_size = true
+		label.hide()
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		node.add_child(label)
 
@@ -250,8 +281,19 @@ func _load_approved_assets(contract: Dictionary) -> void:
 		if model == null:
 			continue
 		model.name = path.get_file().get_basename()
-		model.position = _asset_position(index, paths.size())
-		model.scale = Vector3.ONE * (0.72 if room_id == "LOC-06" else 0.85)
+		var transform_data: Dictionary = {}
+		for prop in _layout.get("props", []):
+			if prop.id == String(model.name):
+				transform_data = prop
+				break
+		if not transform_data.is_empty():
+			model.position = Presentation.vector(transform_data.position)
+			model.rotation_degrees = Presentation.vector(transform_data.rotation_degrees)
+			model.scale = Presentation.vector(transform_data.scale)
+		else:
+			# Later-chapter staging is still owned by its room/art tasks.
+			model.position = _asset_position(index, paths.size())
+			model.scale = Vector3.ONE * 0.85
 		visual_root.add_child(model)
 		ToonMaterialsScript.apply_to_tree(model, false, true)
 
@@ -293,6 +335,39 @@ func _add_box(parent: Node3D, node_name: String, at: Vector3, size: Vector3, col
 		material.roughness = 0.88
 		box.material = material
 		mesh.mesh = box
+		mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		body.add_child(mesh)
+		ToonMaterialsScript.apply_to_mesh(mesh, false, false)
 	parent.add_child(body)
 	return body
+
+func _build_selection_frames(contract: Dictionary) -> void:
+	for spec in contract.get("focus_targets", []):
+		var asset := visual_root.get_node_or_null(String(spec.get("asset_id", ""))) as Node3D
+		if asset == null:
+			continue
+		var frame := Presentation.selection_frame(asset, AssetGeometryScript.bounds(asset))
+		frame.hide()
+		_selection_frames[String(spec.target_id)] = frame
+
+func set_focus_target(id: String) -> void:
+	if id == _focus_id:
+		return
+	_focus_id = id
+	for key in _selection_frames:
+		_selection_frames[key].visible = key == id
+	for node in focus_root.get_children():
+		if node.get_child_count() > 0:
+			(node.get_child(0) as Label3D).visible = node.get_meta("target_id", "") == id
+
+func _style_vacuum(node: Node) -> void:
+	if node is MeshInstance3D:
+		for surface in node.mesh.get_surface_count():
+			var material = node.get_active_material(surface)
+			if material is ShaderMaterial and material.shader == ToonMaterialsScript.WORLD_SHADER:
+				material.set_shader_parameter("shadow_color", Color("#040508"))
+				material.set_shader_parameter("band_1", 0.02)
+				material.set_shader_parameter("band_2", 0.06)
+				material.set_shader_parameter("band_softness", 0.003)
+	for child in node.get_children():
+		_style_vacuum(child)

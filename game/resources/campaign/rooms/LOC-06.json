@@ -1,0 +1,209 @@
+{
+ "schema_version": 1,
+ "room_id": "LOC-06",
+ "description": "Authored training greybox; architecture is fictional, not a surveyed lunar site.",
+ "bounds_m": [
+  120.0,
+  120.0
+ ],
+ "ceiling_height_m": 3.6,
+ "floor_color": "#7a7672",
+ "wall_color": "#939ba6",
+ "accent_color": "#f2c230",
+ "props": [
+  {
+   "id": "EN_ExteriorModule",
+   "path": "res://assets/environment/EN_ExteriorModule/EN_ExteriorModule.glb",
+   "position": [
+    0,
+    0,
+    -8
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "EN_SolarMast",
+   "path": "res://assets/environment/EN_SolarMast/EN_SolarMast.glb",
+   "position": [
+    -8,
+    0,
+    -6
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PR_Dosimeter",
+   "path": "res://assets/props/PR_Dosimeter/PR_Dosimeter.glb",
+   "position": [
+    -7,
+    0.9,
+    -3.8
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PR_Helmet",
+   "path": "res://assets/props/PR_Helmet/PR_Helmet.glb",
+   "position": [
+    0,
+    1,
+    -5.8
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  }
+ ],
+ "focus_targets": [
+  {
+   "label": "Mast status panel",
+   "position": [
+    -8.0,
+    1.0,
+    -4.0
+   ],
+   "target_id": "exterior_mast_status",
+   "verb": "Inspect",
+   "asset_id": "EN_SolarMast",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  },
+  {
+   "label": "Chamber service label",
+   "position": [
+    0.0,
+    1.0,
+    -5.0
+   ],
+   "target_id": "exterior_chamber_label",
+   "verb": "Inspect",
+   "asset_id": "EN_ExteriorModule",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  },
+  {
+   "label": "Return route marker",
+   "position": [
+    8.0,
+    0.5,
+    0.0
+   ],
+   "target_id": "exterior_return_marker",
+   "verb": "Inspect",
+   "asset_id": "route_marker",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  }
+ ],
+ "anchors": {
+  "exterior_airlock": [
+   0.0,
+   0.0,
+   8.0
+  ],
+  "exterior_kai": [
+   -2.0,
+   0.0,
+   2.0
+  ],
+  "exterior_player": [
+   0.0,
+   0.0,
+   5.0
+  ],
+  "exterior_rafi": [
+   2.0,
+   0.0,
+   2.0
+  ]
+ },
+ "fixtures": [
+  {
+   "id": "route_marker",
+   "position": [
+    8,
+    0.5,
+    0
+   ],
+   "size": [
+    0.15,
+    1,
+    0.15
+   ],
+   "color": "#f2c230",
+   "transparent": false
+  },
+  {
+   "id": "instrument_post",
+   "position": [
+    -7,
+    0.45,
+    -3.8
+   ],
+   "size": [
+    0.12,
+    0.9,
+    0.12
+   ],
+   "color": "#eceef0",
+   "transparent": false
+  }
+ ],
+ "lighting": {
+  "key_rotation_degrees": [
+   -4,
+   -35,
+   0
+  ],
+  "key_color": "#ffffff",
+  "key_energy": 1.6,
+  "fill_energy": 0.0,
+  "ambient_energy": 0.0,
+  "strip_color": "#ffffff"
+ },
+ "earth_visibility": "Not rendered: Aurora coordinate and terrain horizon remain unverified.",
+ "apron_rail_height_m": 0.9
+}

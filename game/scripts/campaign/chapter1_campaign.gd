@@ -25,6 +25,7 @@ var hud: Chapter1CampaignHUD
 var _room: CampaignRoom
 var _player: PlayerController
 var _startup_error := ""
+var _world_prompt: Label
 var _ui_paused := false
 var _exit_without_save_armed := false
 var save_path: String = SaveScript.DEFAULT_PATH
@@ -56,7 +57,6 @@ func _ready() -> void:
 		presentation["accessibility"][key] = initial_accessibility[key]
 	director.restore_snapshot(presentation)
 	_sync_route_projection()
-	_build_stage()
 	_refresh_world()
 	_build_hud()
 	_save_campaign()
@@ -168,10 +168,13 @@ func target_completed(spec: Dictionary) -> bool:
 		return true
 	return director.snapshot().get("receipts", {}).has(String(spec.get("command_id", "")))
 
-func interact_nearby() -> Dictionary:
-	if _ui_paused or _player == null:
-		return {"accepted": false, "reason": "Close the panel before using an operation."}
+func nearby_target() -> Dictionary:
+	if _ui_paused or _player == null or _room == null:
+		return {}
+	var camera := _player.follow_camera.camera
 	var flags: Dictionary = route.gate_status().get("physical_flags", {})
+	var closest: Dictionary = {}
+	var nearest := INF
 	for spec in targets_for_current_scene():
 		if target_completed(spec):
 			continue
@@ -181,13 +184,34 @@ func interact_nearby() -> Dictionary:
 				missing = true
 		if missing:
 			continue
-		var node := physical_target(String(spec.get("target_id", "")))
-		if node != null and _player.global_position.distance_to(node.global_position) <= float(spec.get("range_m", 3.0)):
-			return perform_target(String(spec.get("target_id", "")))
-	var result := {"accepted": false, "reason": "Move near an unfinished operation. Its location is listed beside USE."}
+		var target := physical_target(String(spec.get("target_id", "")))
+		if target == null:
+			continue
+		var distance := _player.global_position.distance_to(target.global_position)
+		if distance > float(spec.get("range_m", 3.0)) or distance >= nearest or not camera.is_position_in_frustum(target.global_position):
+			continue
+		var ray := PhysicsRayQueryParameters3D.create(_player.global_position + Vector3.UP * 1.4, target.global_position, _player.collision_mask, [_player.get_rid()])
+		if not _player.get_world_3d().direct_space_state.intersect_ray(ray).is_empty():
+			continue
+		closest = spec
+		nearest = distance
+	return closest
+
+func interact_nearby() -> Dictionary:
+	var selected := nearby_target()
+	if not selected.is_empty():
+		return perform_target(String(selected.target_id))
+	var result := {"accepted": false, "reason": "Move near an unfinished operation and face it. Its location is listed beside USE."}
 	if hud != null:
 		hud.show_status(result.reason)
 	return result
+
+func _physics_process(_delta: float) -> void:
+	if _world_prompt == null or _room == null:
+		return
+	var selected := nearby_target()
+	_world_prompt.text = "E · " + String(physical_target(String(selected.target_id)).get_meta("focus_label", "Use")) if not selected.is_empty() else ""
+	_room.set_focus_target(String(selected.get("world_focus_id", "")))
 
 func is_chapter_complete() -> bool:
 	if route == null:
@@ -393,24 +417,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		interact_nearby()
 		get_viewport().set_input_as_handled()
 
-func _build_stage() -> void:
-	var environment := WorldEnvironment.new()
-	environment.environment = load("res://environments/look/character_look.tres") as Environment
-	add_child(environment)
-	var key := DirectionalLight3D.new()
-	key.rotation_degrees = Vector3(-52, -32, 0)
-	key.light_color = Color("#FFE5B5")
-	key.light_energy = 1.65
-	key.shadow_enabled = true
-	add_child(key)
-	var fill := DirectionalLight3D.new()
-	fill.rotation_degrees = Vector3(-28, 145, 0)
-	fill.light_color = Color("#85B7FF")
-	fill.light_energy = 0.55
-	add_child(fill)
-
 func _refresh_world() -> void:
 	if _room != null and is_instance_valid(_room):
+		remove_child(_room)
 		_room.queue_free()
 		_room = null
 	if _player != null and is_instance_valid(_player):
@@ -467,3 +476,14 @@ func _build_hud() -> void:
 	hud = HUDScene.instantiate() as Chapter1CampaignHUD
 	layer.add_child(hud)
 	hud.setup(self)
+	_world_prompt = Label.new()
+	_world_prompt.name = "InteractionPrompt"
+	_world_prompt.position = Vector2(300, 465)
+	_world_prompt.size = Vector2(420, 44)
+	_world_prompt.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_world_prompt.add_theme_color_override("font_outline_color", Color("#05060A"))
+	_world_prompt.add_theme_constant_override("outline_size", 5)
+	_world_prompt.add_theme_font_size_override("font_size", 22)
+	_world_prompt.add_theme_color_override("font_color", Color("#F2C230"))
+	_world_prompt.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hud.add_child(_world_prompt)

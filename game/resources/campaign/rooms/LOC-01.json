@@ -1,0 +1,218 @@
+{
+ "schema_version": 1,
+ "room_id": "LOC-01",
+ "description": "Authored training greybox; architecture is fictional, not a surveyed lunar site.",
+ "bounds_m": [
+  22.0,
+  12.0
+ ],
+ "ceiling_height_m": 4.2,
+ "floor_color": "#263343",
+ "wall_color": "#939ba6",
+ "accent_color": "#f2c230",
+ "props": [
+  {
+   "id": "PR_MissionTable",
+   "path": "res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+   "position": [
+    0,
+    0,
+    0
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PR_BatteryJar",
+   "path": "res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+   "position": [
+    -5,
+    0,
+    -3
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PR_SeedPacket",
+   "path": "res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+   "position": [
+    -0.25,
+    0.76,
+    0.1
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "PR_Mug",
+   "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+   "position": [
+    0.45,
+    0.76,
+    0.2
+   ],
+   "rotation_degrees": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  }
+ ],
+ "focus_targets": [
+  {
+   "label": "Mission Table",
+   "position": [
+    0,
+    0.8,
+    0.7
+   ],
+   "target_id": "commons_mission_table",
+   "verb": "Inspect",
+   "asset_id": "PR_MissionTable",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  },
+  {
+   "label": "Earth screen",
+   "position": [
+    0,
+    1.6,
+    -5.5
+   ],
+   "target_id": "commons_earth_screen",
+   "verb": "Inspect",
+   "asset_id": "earth_screen",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  },
+  {
+   "label": "Charter and emergency card",
+   "position": [
+    -4,
+    1.4,
+    -4.6
+   ],
+   "target_id": "commons_charter",
+   "verb": "Inspect",
+   "asset_id": "charter",
+   "label_offset": [
+    0,
+    1.0,
+    0
+   ]
+  }
+ ],
+ "anchors": {
+  "commons_amara": [
+   -1.2,
+   0.0,
+   1.8
+  ],
+  "commons_kai": [
+   -3.6,
+   0.0,
+   1.8
+  ],
+  "commons_mei": [
+   1.2,
+   0.0,
+   1.8
+  ],
+  "commons_player": [
+   0.0,
+   0.0,
+   3.7
+  ],
+  "commons_rafi": [
+   3.6,
+   0.0,
+   1.8
+  ],
+  "commons_viewpoint": [
+   0.0,
+   1.5,
+   4.5
+  ]
+ },
+ "fixtures": [
+  {
+   "id": "earth_screen",
+   "position": [
+    0,
+    1.7,
+    -5.7
+   ],
+   "size": [
+    3,
+    1.5,
+    0.12
+   ],
+   "color": "#192b42",
+   "transparent": false
+  },
+  {
+   "id": "charter",
+   "position": [
+    -4,
+    1.4,
+    -4.8
+   ],
+   "size": [
+    1.6,
+    1.1,
+    0.1
+   ],
+   "color": "#1f2a44",
+   "transparent": false
+  }
+ ],
+ "lighting": {
+  "key_rotation_degrees": [
+   -65,
+   -25,
+   0
+  ],
+  "key_color": "#ffe5b5",
+  "key_energy": 1.6,
+  "fill_energy": 0.45,
+  "ambient_energy": 0.3,
+  "strip_color": "#ffe5b5"
+ },
+ "earth_visibility": "interior"
+}

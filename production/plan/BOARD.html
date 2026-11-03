@@ -444,7 +444,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Visible world now: lit greybox rooms, lunar exterior and readable targets",
-   "status": "in_progress",
+   "status": "done",
    "owner": "atik/codex",
    "deps": [
     "M0-02"
@@ -461,7 +461,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/VFX_01_LUNAR_ENVIRONMENT.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "game/tools/run_tests.sh: 23/23 suites passed; room presentation 126 checks, including actual prop bounds, plus existing production UI/world/campaign suites. Reviewed production/qa/evidence/M1-01_LOC-01.png through M1-01_LOC-06.png and M1-01_campaign_prompt.png, all from PlayerController follow cameras. production/review/execution/M1-01.md.",
    "updated": "2026-11-04",
    "prompt": "Problem (screenshot from 3 Nov): the campaign shows a black void. game/scripts/world/campaign_room.gd builds floors and walls with\nvisible=false, props are dropped into a 3-column grid (_asset_position), and targets are tiny Label3D text (the 'Mission Table' label floats\nover the battery jar).\nGoal: until the art kit lands (M1-06), every Chapter 1 location reads as a real lit room or a real lunar exterior.\nDo:\n1. Make floor, walls and ceiling visible with the shared toon look (game/shaders/toon_ramp.gdshaderinc, ToonMaterials): matte panels,\n   a darker floor, ceiling strip lights, one key light + fill per room. Exterior: regolith ground, black sky, a low hard Sun, Earth low on\n   the horizon if visible from the south pole, no fog (ART_BIBLE §2).\n2. Replace the grid with authored layouts: one data file per location, game/resources/campaign/rooms/<LOC>.json, giving each prop's\n   position, rotation and scale, the target anchor and the companion anchors. Gameplay positions are data, not code.\n3. Targets: an outline/highlight on the target prop and a screen-space prompt ('E · Mission Table') when in range and in view; keep\n   Label3D only as a billboard with a minimum on-screen size, never overlapping another prop.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. Screens of all five Chapter 1 rooms and the exterior, from the player camera."
   },

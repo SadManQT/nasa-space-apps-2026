@@ -108,6 +108,8 @@ func _build() -> void:
 	_objective.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_objective.add_theme_color_override("font_color", CYAN)
 	_objective.add_theme_font_size_override("font_size", 14)
+	_objective.add_theme_color_override("font_outline_color", Color("#05060A"))
+	_objective.add_theme_constant_override("outline_size", 5)
 	add_child(_objective)
 
 	var caption := _panel(Color(0.03, 0.05, 0.10, 0.95), 14, Color(0.26, 0.40, 0.62, 0.65))
@@ -214,6 +216,8 @@ func _build() -> void:
 	tools.add_child(outcome)
 	var controls := Label.new()
 	controls.text = "WASD move · Hold RMB to look · E use nearby\nEsc pause · Tab / arrows / Enter select controls"
+	controls.add_theme_color_override("font_outline_color", Color("#05060A"))
+	controls.add_theme_constant_override("outline_size", 5)
 	controls.position = Vector2(24, 248)
 	controls.add_theme_font_size_override("font_size", 13)
 	controls.add_theme_color_override("font_color", MUTED)
