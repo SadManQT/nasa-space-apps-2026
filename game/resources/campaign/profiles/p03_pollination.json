@@ -1,0 +1,32 @@
+{
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-03",
+  "scenario_datetime": "2046-04-30 06:00 UTC",
+  "resources": {
+    "E": 14,
+    "A": 10,
+    "H": 6,
+    "C": 8,
+    "R": 18
+  },
+  "sampled": {
+    "dates": [
+      "2046-04-30 12:00 UTC",
+      "2046-05-03 12:00 UTC",
+      "2046-05-06 12:00 UTC"
+    ],
+    "daylight_energy": 8,
+    "basic_energy": 1,
+    "full_light_energy": 2,
+    "cycle_energy": 1,
+    "breathing_air": 1,
+    "cycle_air": 1,
+    "health_gain": 1,
+    "crop_gain": 1,
+    "food_consumption": 1.2
+  },
+  "background": {
+    "supply": 14,
+    "total_consumption": 28,
+    "end_datetime": "2046-05-06 12:00 UTC"
+  }
+}

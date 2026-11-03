@@ -32,6 +32,14 @@ func new_campaign(content_revision: String = "") -> Dictionary:
 	_state["completed_scene_ids"] = []
 	_state["scenario_datetime"] = "2046-04-11 06:00 UTC"
 	_state["status"] = "active"
+	# Production starts from the validated chapter1_base profile, the same data
+	# the P-02 simulation reads, rather than CampaignState's schema defaults.
+	var profile: Dictionary = _simulation.entry_profile()
+	if profile.is_empty():
+		return {}
+	for key in profile.resources:
+		_state.resources[key] = profile.resources[key]
+	_state.upgrades["applied_profile_revision"] = String(profile.get("profile_revision", _state.upgrades.applied_profile_revision))
 	_seed_initial_biology()
 	# The production route starts on April 11. The bounded systems fixture keeps
 	# the April 25 entry profile in CampaignState.new_snapshot(); this method is
@@ -122,7 +130,6 @@ func commit(command: Dictionary) -> Dictionary:
 	result["receipt_id"] = receipt_id
 	result["input_revision"] = current_revision
 	result["output_revision"] = current_revision + 1
-	result["snapshot"] = next.duplicate(true)
 	result["events"] = result.get("events", []).duplicate(true)
 	result["events"].append(ResultScript.event("command_committed", current_revision + 1, next))
 	var receipt := result.duplicate(true)
@@ -132,6 +139,8 @@ func commit(command: Dictionary) -> Dictionary:
 	next["receipts"][command_id] = receipt.duplicate(true)
 	next["mission_receipts"][command_id] = receipt.duplicate(true)
 	_state = next
+	# Copied after the receipt is stored, so restoring it keeps deduplication.
+	result["snapshot"] = next.duplicate(true)
 	return result.duplicate(true)
 
 func restore_checkpoint() -> Dictionary:
@@ -250,27 +259,41 @@ func _transition(command: Dictionary, should_commit: bool) -> Dictionary:
 		var requested = payload.get("deltas", {})
 		if not requested is Dictionary:
 			return _reject("Resource deltas must be a primitive Dictionary.")
+		var ledger_date := String(payload.get("scenario_datetime", ""))
+		if payload.has("scenario_datetime") and (not StateScript.is_scenario_datetime(ledger_date) or ledger_date < String(_state.get("scenario_datetime", ""))):
+			return _reject("A dated resource ledger needs a valid UTC date and minute that does not move time backwards.")
 		var resources: Dictionary = _state.get("resources", {})
 		var next_resources := resources.duplicate(true)
 		var deltas: Array = []
 		for field in requested.keys():
 			var key := String(field)
-			if not next_resources.has(key) or not (requested[field] is float or requested[field] is int):
+			if not next_resources.has(key) or not (requested[field] is float or requested[field] is int) or not is_finite(float(requested[field])):
 				return _reject("Unknown or non-numeric resource delta: " + key)
 			var before := float(next_resources[key])
 			var after := before + float(requested[field])
+			if not is_finite(after):
+				return _reject("Resource delta overflowed " + key)
 			var capacity_key: String = {"E": "energy_capacity", "A": "air_capacity", "H": "health_capacity", "W": "water_capacity", "K": "crate_capacity", "C": "crop_capacity"}.get(key, "")
 			if not capacity_key.is_empty():
 				after = minf(after, float(next_resources.get(capacity_key, after)))
 			if after < 0.0:
 				return _reject("Resource delta would make %s negative." % key)
-			next_resources[key] = after if key == "R" else int(after)
+			var whole: bool = after == floor(after)
+			# Crates, water units and capacities are discrete; air, food,
+			# energy and exposure may carry fractions.
+			if not whole and (key in ["W", "K"] or key.ends_with("_capacity")):
+				return _reject("Resource %s only changes in whole units." % key)
+			next_resources[key] = after if key == "R" or not whole else int(after)
 			deltas.append({"field": "resources." + key, "from": before, "to": after})
 		var result := _generic_result(revision, should_commit, "resource_delta")
 		result["deltas"] = deltas
 		if should_commit:
 			var next := _state.duplicate(true)
 			next["resources"] = next_resources
+			if ledger_date > String(next.get("scenario_datetime", "")):
+				next["scenario_datetime"] = ledger_date
+				next["explicit_time_receipts"][String(command.command_id)] = ledger_date
+				_advance_plants(next)
 			result["snapshot"] = next
 		return result
 	if verb == "set_phase":

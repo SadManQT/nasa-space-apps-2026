@@ -1,4 +1,4 @@
-extends RefCounted
+extends "res://scripts/missions/campaign_route.gd"
 class_name Chapter1Route
 
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
@@ -16,9 +16,6 @@ const StateScript = preload("res://scripts/core/campaign_state.gd")
 ## mark a physical flag. Dialogue acknowledgements are recorded separately and
 ## never satisfy a scene gate.
 
-var _director: RefCounted
-var _world: RefCounted
-var _dispatcher: RefCounted
 var _p01: RefCounted
 var _scene_index := 0
 var _scene_flags := {}
@@ -27,12 +24,12 @@ var _completed_scene_ids: Array = []
 var _p02_hosts := {}
 var _last_result := {}
 var _ending := ""
-var _retry_checkpoint := {}
 
 func _init(director: RefCounted = null) -> void:
+	_gate_catalog = GateCatalog
 	_director = director if director != null else DirectorScript.new()
 	_world = WorldRouteScript.new(_director)
-	_dispatcher = DispatcherScript.new(_director, Callable(self, "_submit_command"))
+	_create_dispatcher(DispatcherScript)
 	_p01 = P01Script.new()
 	for scene_id in GateCatalog.scene_ids():
 		_scene_flags[scene_id] = {}
@@ -219,22 +216,6 @@ func advance_scene() -> Dictionary:
 	_scene_index += 1
 	var moved := _set_current_scene(_scene_index)
 	return {"accepted": true, "scene_completed": scene_id, "next_scene": current_scene_id(), "transition": moved, "completed_scene_ids": completed_scene_ids()}
-
-func retry() -> Dictionary:
-	if _retry_checkpoint.is_empty():
-		return {"accepted": false, "reason": "No physical retry checkpoint is available."}
-	var director_result: Dictionary = _director.restore_snapshot(_retry_checkpoint.director)
-	if not bool(director_result.get("accepted", false)):
-		return director_result
-	_restore_local(_retry_checkpoint.route)
-	_p02_hosts.clear()
-	return {"accepted": true, "director": director_result, "route": snapshot(), "reason": "Last physical checkpoint restored; no scene/dialogue receipt was duplicated."}
-
-func pause(reason: String = "route_pause") -> Dictionary:
-	return _dispatcher.pause(reason)
-
-func resume() -> Dictionary:
-	return _dispatcher.resume()
 
 func cancel_interaction(reason: String = "user") -> Dictionary:
 	return _dispatcher.cancel(reason)
@@ -506,13 +487,6 @@ func _local_snapshot() -> Dictionary:
 		"ending": _ending,
 		"world": _world.snapshot(),
 	}
-
-func _checkpoint_snapshot() -> Dictionary:
-	var state: Dictionary = _director.snapshot()
-	# The campaign controller persists the route separately; nesting it here
-	# would copy previous retry checkpoints into every later save.
-	state.erase("route_runtime")
-	return {"director": state, "route": _local_snapshot()}
 
 func _validate_local_snapshot(data: Dictionary) -> Dictionary:
 	if data.has("schema_version") and (not (data.schema_version is int or data.schema_version is float) or float(data.schema_version) != 1.0):

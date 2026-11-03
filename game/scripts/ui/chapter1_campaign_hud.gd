@@ -46,7 +46,7 @@ func refresh_scene(_result: Dictionary = {}) -> void:
 	var next_scene := String(scene.get("id", ""))
 	if next_scene != _scene_id:
 		_scene_id = next_scene
-		_dialogue_index = 0
+	_dialogue_index = _first_unacknowledged_line()
 	_title.text = String(scene.get("title", "Chapter 1"))
 	_meta.text = "%s  ·  %s  ·  %s" % [next_scene, String(scene.get("location", "")), String(scene.get("storyTime", scene.get("story_time", "")))]
 	_objective.text = "OBJECTIVE\n" + "\n".join(scene.get("playerActions", scene.get("player_actions", [])))
@@ -246,6 +246,12 @@ func _render_caption() -> void:
 		_caption_line.text = "Complete the physical operation; dialogue acknowledgement never completes a gate."
 		_next_line.disabled = true
 		return
+	if _dialogue_index >= lines.size():
+		_caption_speaker.text = "AURORA"
+		_caption_line.text = "All scene dialogue acknowledged."
+		_next_line.text = "DIALOGUE COMPLETE"
+		_next_line.disabled = true
+		return
 	_dialogue_index = clampi(_dialogue_index, 0, lines.size() - 1)
 	var line: Dictionary = lines[_dialogue_index]
 	_caption_speaker.text = "%s  ·  %s" % [String(line.get("speaker", "CREW")), String(line.get("origin_label", line.get("delivery", "LOCAL RADIO")))]
@@ -253,15 +259,25 @@ func _render_caption() -> void:
 	_next_line.disabled = false
 	_next_line.text = "ACKNOWLEDGE LINE  ·  %d/%d" % [_dialogue_index + 1, lines.size()]
 
+## Resumes the caption where the saved acknowledgements stopped, so a reload
+## does not replay lines the player already acknowledged.
+func _first_unacknowledged_line() -> int:
+	var acknowledged: Array = runtime.route.gate_status().get("dialogue_acknowledged", [])
+	var lines := runtime.current_dialogue()
+	for index in lines.size():
+		if not acknowledged.has(String(lines[index].get("id", ""))):
+			return index
+	return lines.size()
+
 func _on_next_line() -> void:
 	if runtime == null:
 		return
 	var lines := runtime.current_dialogue()
-	if lines.is_empty():
+	if lines.is_empty() or _dialogue_index >= lines.size():
 		return
-	runtime.acknowledge_dialogue(String(lines[_dialogue_index].get("id", "")))
-	if _dialogue_index < lines.size() - 1:
-		_dialogue_index += 1
+	var result := runtime.acknowledge_dialogue(String(lines[_dialogue_index].get("id", "")))
+	if bool(result.get("accepted", false)):
+		_dialogue_index = _first_unacknowledged_line()
 	_render_caption()
 
 func _on_advance_pressed() -> void:

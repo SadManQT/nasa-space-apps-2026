@@ -7,17 +7,16 @@ const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const Chapter2RouteScript = preload("res://scripts/missions/chapter2_route.gd")
 const SaveScript = preload("res://scripts/save/save_service.gd")
 
+var storage = preload("res://tools/support/isolated_storage.gd").new()
+
 var checks := 0
 var failures := 0
 var _campaign: Chapter1Campaign
 var _original_user_dir := ""
 
 func _init() -> void:
-	_original_user_dir = OS.get_user_data_dir()
-	ProjectSettings.set_setting("application/config/use_custom_user_dir", true)
-	ProjectSettings.set_setting("application/config/custom_user_dir_name", "LastLightAcademy-tests/later-runtime-%d" % Time.get_ticks_usec())
-	if OS.get_user_data_dir() == _original_user_dir or DirAccess.make_dir_recursive_absolute(OS.get_user_data_dir()) != OK:
-		push_error("Later runtime fixture could not isolate its save directory.")
+	if not storage.setup("test_campaign_later_runtime"):
+		push_error("Unable to isolate test storage.")
 		quit(1)
 		return
 	call_deferred("_run")
@@ -38,10 +37,12 @@ func _run() -> void:
 	state["scenario_datetime"] = "2046-05-06 18:00 UTC"
 	state["route_runtime"] = route_snapshot
 	_campaign = CampaignScene.instantiate() as Chapter1Campaign
+	storage.configure(_campaign)
 	_campaign.initial_snapshot = state
 	root.add_child(_campaign)
 	await process_frame
 	_check(_campaign.route != null and _campaign.route.current_scene_id() == "EX-CH02-S12", "production runtime restores a Chapter 2 checkpoint")
+	_test_panels()
 	var transition: Dictionary = _campaign.advance_scene()
 	_check(bool(transition.get("accepted", false)) and _campaign.route.current_scene_id() == "EX-CH03-S01", "production controller crosses into Chapter 3")
 	_check(String(_campaign.director.snapshot().get("chapter_id", "")) == "CH03" and _campaign.route.current_room_id() == "LOC-02", "Chapter 3 projection and service-room viewpoint are authoritative")
@@ -55,11 +56,15 @@ func _run() -> void:
 		_check(bool(operation.get("accepted", false)) and bool(_campaign.route.current_flags().get("p05_equip_gauge_done", false)), "P-05 operation commits through the production physical interaction")
 	else:
 		_check(false, "P-05 operation commits through the production physical interaction")
+	for chapter in range(3, 9):
+		if chapter > 3:
+			_check(bool(_campaign._start_extended("EX-CH%02d-S01" % chapter).get("accepted", false)), "later panel fixture enters chapter %d" % chapter)
+		_test_panels()
 	var saved: Dictionary = _campaign.save_campaign()
 	_check(bool(saved.get("accepted", false)), "later-chapter runtime saves a primitive route checkpoint")
 	_campaign.free()
-	_check(SaveScript.new().clear(), "later runtime fixture cleans its isolated save")
-	DirAccess.remove_absolute(OS.get_user_data_dir())
+	_check(SaveScript.new().clear(storage.path), "later runtime fixture cleans its isolated save")
+	storage.cleanup()
 	print("LATER CAMPAIGN RUNTIME RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
 
@@ -70,3 +75,13 @@ func _check(condition: bool, message: String) -> void:
 	else:
 		failures += 1
 		push_error("FAIL " + message)
+
+func _test_panels() -> void:
+	var chapter: String = _campaign.director.query().chapter_id
+	for panel_id in ["journal_discovery", "pause", "settings_accessibility"]:
+		_campaign.hud.panels.open_panel(panel_id, {})
+		_check(_campaign.director.query().paused and _campaign._player.process_mode == Node.PROCESS_MODE_DISABLED, "B04 " + chapter + " pauses for " + panel_id)
+		_campaign.hud.panels.close_panel()
+		_check(not _campaign.director.query().paused and _campaign._player.process_mode == Node.PROCESS_MODE_INHERIT, "B04 " + chapter + " resumes after " + panel_id)
+	if not _campaign.is_chapter_complete():
+		_check(not _campaign.hud._retry.disabled, "B05 later chapter HUD exposes its persisted retry checkpoint")

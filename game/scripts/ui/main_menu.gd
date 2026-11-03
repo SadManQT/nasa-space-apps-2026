@@ -275,9 +275,11 @@ func _build_command_panel() -> Control:
 	var science_button := _button("SCIENCE + SOURCES", Color(0.12, 0.18, 0.28), IVORY)
 	science_button.pressed.connect(func() -> void: science_requested.emit())
 	content.add_child(science_button)
-	var showcase_button := _button("DEVELOPER ASSET SHOWCASE", Color(0.10, 0.14, 0.22), MUTED)
-	showcase_button.pressed.connect(func() -> void: showcase_requested.emit())
-	content.add_child(showcase_button)
+	# Developer tool: offered only in debug/editor builds, never to players.
+	if OS.is_debug_build():
+		var showcase_button := _button("DEVELOPER ASSET SHOWCASE", Color(0.10, 0.14, 0.22), MUTED)
+		showcase_button.pressed.connect(func() -> void: showcase_requested.emit())
+		content.add_child(showcase_button)
 	var settings_button := _button("SETTINGS / ACCESSIBILITY", Color(0.10, 0.14, 0.22), IVORY)
 	settings_button.pressed.connect(func() -> void:
 		emit_command("open_panel", "settings_accessibility")

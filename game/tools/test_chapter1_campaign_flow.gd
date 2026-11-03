@@ -18,16 +18,15 @@ const ACTIONS := [
 	["verify_chamber", "open_shutter", "tag_bloom", "inspect_tara", "complete_debrief"],
 ]
 
+var storage = preload("res://tools/support/isolated_storage.gd").new()
+
 var checks := 0
 var failures := 0
 var campaign: Chapter1Campaign
 
 func _init() -> void:
-	var original := OS.get_user_data_dir()
-	ProjectSettings.set_setting("application/config/use_custom_user_dir", true)
-	ProjectSettings.set_setting("application/config/custom_user_dir_name", "LastLightAcademy-tests/full-flow-%d" % Time.get_ticks_usec())
-	if OS.get_user_data_dir() == original or DirAccess.make_dir_recursive_absolute(OS.get_user_data_dir()) != OK:
-		push_error("Full-flow test could not isolate its save directory.")
+	if not storage.setup("test_chapter1_campaign_flow"):
+		push_error("Unable to isolate test storage.")
 		quit(1)
 		return
 	call_deferred("_run")
@@ -35,6 +34,7 @@ func _init() -> void:
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
 	campaign = CampaignScene.instantiate() as Chapter1Campaign
+	storage.configure(campaign)
 	root.add_child(campaign)
 	await process_frame
 	if campaign.route == null or campaign.hud == null:
@@ -64,15 +64,18 @@ func _run() -> void:
 		if index == 3:
 			var saved := campaign.save_campaign()
 			_check(bool(saved.get("accepted", false)), "garden checkpoint saves")
-			var loaded: Dictionary = SaveScript.new().load()
+			var loaded: Dictionary = SaveScript.new().load(storage.path)
 			_check(bool(loaded.get("accepted", false)), "garden checkpoint loads")
 			var expected: Dictionary = campaign.route.current_flags()
 			campaign.free()
 			campaign = CampaignScene.instantiate() as Chapter1Campaign
+			storage.configure(campaign)
 			campaign.initial_snapshot = loaded.get("snapshot", {})
 			root.add_child(campaign)
 			await process_frame
 			_check(campaign.route.current_flags() == expected and bool(campaign.route.gate_status().get("ready", false)), "garden physical evidence survives runtime reload")
+		if index == ACTIONS.size() - 1:
+			_check(String(campaign.director.snapshot().get("scenario_datetime", "")).begins_with("2046-04-27"), "completed chapter reaches its canonical bloom date")
 		var advance := campaign.advance_scene()
 		_check(bool(advance.get("accepted", false)), scene_id + " advances through the production controller")
 		if not bool(advance.get("accepted", false)):
@@ -81,14 +84,15 @@ func _run() -> void:
 		await process_frame
 	_check(campaign.route.current_scene_id() == "EX-CH02-S01" and campaign.route.completed_scene_ids().is_empty() and String(campaign.director.snapshot().get("chapter_id", "")) == "CH02", "final Chapter 1 scene transitions into Chapter 2")
 	_check(campaign.hud._advance.disabled, "Chapter 2 advance stays disabled until its physical gate is ready")
-	_check(String(campaign.director.snapshot().get("scenario_datetime", "")).begins_with("2046-04-27"), "completed chapter reaches its canonical bloom date")
+	_check(String(campaign.director.snapshot().get("scenario_datetime", "")).begins_with("2046-04-30"), "B03 handoff advances from bloom to the dated P-03 entry")
+	await _test_chapter2_handoff()
 	_finish()
 
 func _finish() -> void:
 	if is_instance_valid(campaign):
 		campaign.free()
-	_check(SaveScript.new().clear(), "full-flow fixture cleans its isolated saves")
-	DirAccess.remove_absolute(OS.get_user_data_dir())
+	_check(SaveScript.new().clear(storage.path), "full-flow fixture cleans its isolated saves")
+	storage.cleanup()
 	print("CHAPTER 1 CAMPAIGN FLOW RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
 
@@ -99,3 +103,39 @@ func _check(condition: bool, message: String) -> void:
 	else:
 		failures += 1
 		push_error("FAIL " + message)
+
+func _test_chapter2_handoff() -> void:
+	var entry: Dictionary = campaign.director.snapshot().resources
+	_check(entry.E == 14 and entry.A == 10 and entry.H == 6 and entry.C == 8 and is_equal_approx(entry.R, 18.0), "B03 real Bloom handoff installs E14/A10/H6/C8/R18")
+	_check(not campaign.targets_for_current_scene().is_empty() and campaign.hud._targets.get_child_count() > 0, "B01 Chapter 2 exposes its operations through the production controller and HUD")
+	for number in range(1, 13):
+		var scene_id := "EX-CH02-S%02d" % number
+		_check(campaign.route.current_scene_id() == scene_id, "production Chapter 2 reaches " + scene_id)
+		for spec in campaign.targets_for_current_scene():
+			var target := campaign.physical_target(String(spec.target_id))
+			_check(target != null, "B01 physical target exists: " + String(spec.target_id))
+			if target == null: return
+			campaign._player.global_position = Vector3(target.global_position.x, 0, target.global_position.z + 1)
+			campaign._player.velocity = Vector3.ZERO
+			await physics_frame
+			var action := campaign.perform_target(String(spec.target_id))
+			_check(bool(action.get("accepted", false)), "production Chapter 2 commits " + String(spec.target_id))
+			if not bool(action.get("accepted", false)): return
+		if number == 5:
+			var values: Dictionary = campaign.director.snapshot().resources
+			_check([values.E, values.A, values.H, values.C] == [16, 4, 9, 10] and is_equal_approx(values.R, 14.4), "B03 sampled reciprocal operations end E16/A4/H9/C10/R14.4")
+			var loaded: Dictionary = campaign.save_service.load(storage.path)
+			_check(bool(loaded.get("accepted", false)), "B02 production Chapter 2 JSON save loads")
+			var expected: Dictionary = campaign.route.snapshot().p03
+			campaign.free()
+			campaign = CampaignScene.instantiate() as Chapter1Campaign
+			storage.configure(campaign)
+			campaign.initial_snapshot = loaded.get("snapshot", {})
+			root.add_child(campaign)
+			await process_frame
+			_check(campaign.route != null and campaign.route.snapshot().p03 == expected, "B02 production JSON restore preserves typed pollen actions and care dates")
+		if number == 6:
+			_check(is_equal_approx(campaign.director.snapshot().resources.R, 4.0), "B03 separate dated background ledger supplies 14 and consumes the unsampled share of 28")
+		_check(bool(campaign.advance_scene().get("accepted", false)), "production Chapter 2 advances " + scene_id)
+		await process_frame
+	_check(campaign.route.current_scene_id() == "EX-CH03-S01", "real Chapter 2 gameplay hands off to Chapter 3")

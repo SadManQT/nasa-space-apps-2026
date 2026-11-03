@@ -70,7 +70,7 @@ static func _p03_run_one(room_id: String, mission_id: String, scene_id: String) 
 		_p03_action("collect_alo", room_id, "Collect Alo pollen with brush B", mission_id, scene_id, "p03_collect_alo_pollen", ["p03_scan_alo_done"]),
 		_p03_action("seal_b", room_id, "Seal carrier B", mission_id, scene_id, "p03_seal_brush_b", ["p03_collect_alo_pollen_done"]),
 		_p03_action("transfer_tara", room_id, "Transfer to Tara stigma", mission_id, scene_id, "p03_transfer_to_tara", ["p03_seal_brush_b_done"]),
-		_p03_action("complete_run_1", room_id, "Commit reciprocal cycle one · E1/A1", mission_id, scene_id, "p03_complete_run_1", ["p03_transfer_to_tara_done"], "ledger_delta", {"E": -1, "A": -1}),
+		_p03_action("complete_run_1", room_id, "Commit reciprocal cycle one · E1/A1", mission_id, scene_id, "p03_complete_run_1", ["p03_transfer_to_tara_done"]),
 	]
 
 static func _p03_run_later(room_id: String, mission_id: String, scene_id: String) -> Array:
@@ -79,10 +79,10 @@ static func _p03_run_later(room_id: String, mission_id: String, scene_id: String
 		result.append(_p03_action("care_day_%d" % day, room_id, "Record dated care visit %d/7" % day, mission_id, scene_id, "p03_log_care_day_%d" % day))
 	result.append(_p03_action("run_2_forward", room_id, "Run two · Tara to Alo", mission_id, scene_id, "p03_run_2_forward", ["p03_run_1_complete"]))
 	result.append(_p03_action("run_2_reverse", room_id, "Run two · Alo to Tara", mission_id, scene_id, "p03_run_2_reverse", ["p03_run_2_forward_done"]))
-	result.append(_p03_action("complete_run_2", room_id, "Commit reciprocal cycle two · E1/A1", mission_id, scene_id, "p03_complete_run_2", ["p03_run_2_reverse_done"], "ledger_delta", {"E": -1, "A": -1}))
+	result.append(_p03_action("complete_run_2", room_id, "Commit reciprocal cycle two · E1/A1", mission_id, scene_id, "p03_complete_run_2", ["p03_run_2_reverse_done"]))
 	result.append(_p03_action("run_3_forward", room_id, "Run three · Tara to Alo", mission_id, scene_id, "p03_run_3_forward", ["p03_run_2_complete"]))
 	result.append(_p03_action("run_3_reverse", room_id, "Run three · Alo to Tara", mission_id, scene_id, "p03_run_3_reverse", ["p03_run_3_forward_done"]))
-	result.append(_p03_action("complete_run_3", room_id, "Commit reciprocal cycle three · E1/A1", mission_id, scene_id, "p03_complete_run_3", ["p03_run_3_reverse_done"], "ledger_delta", {"E": -1, "A": -1}))
+	result.append(_p03_action("complete_run_3", room_id, "Commit reciprocal cycle three · E1/A1", mission_id, scene_id, "p03_complete_run_3", ["p03_run_3_reverse_done"]))
 	return result
 
 static func _target(target_id: String, room_id: String, label: String, flag: String, mission_id: String, scene_id: String, required: Array = [], puzzle_id: String = "", action: String = "", command_verb: String = "set_phase", command_target: String = "WORLD_PHYSICAL", defaults: Dictionary = {}) -> Dictionary:

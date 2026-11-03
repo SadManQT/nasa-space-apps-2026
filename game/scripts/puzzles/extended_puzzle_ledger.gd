@@ -33,8 +33,11 @@ func snapshot() -> Dictionary:
 	return {"schema_version": 1, "receipts": _receipts.duplicate(true)}
 
 func restore(data: Dictionary) -> Dictionary:
-	if not data is Dictionary or int(data.get("schema_version", 1)) != 1:
+	var version = data.get("schema_version", 1)
+	if not (version is int or version is float) or float(version) != 1.0:
 		return {"accepted": false, "reason": "Extended puzzle ledger snapshot is incompatible."}
+	if not data.get("receipts", {}) is Dictionary:
+		return {"accepted": false, "reason": "Extended puzzle receipts must be a Dictionary."}
 	_receipts = data.get("receipts", {}).duplicate(true)
 	return {"accepted": true, "reason": "Extended puzzle ledger restored."}
 

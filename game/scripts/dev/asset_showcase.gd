@@ -7,6 +7,7 @@ const CAST: Array[String] = CharacterSwitcher.CAST
 const CUTSCENE_DIRECTORY: String = "res://assets/cutscenes"
 const PLINTH_HEIGHT: float = 0.18
 const MAX_ROW_WIDTH: float = 26.0   # long categories wrap, so a visitor sees a whole row from the aisle
+const TITLE_SCENE: String = "res://scenes/main.tscn"
 const HOLD_PROPS: Array[String] = ["", "PR_VaultCase", "PR_HandLight"]   # a closed case fits between the CarryBox palms at real size
 
 var exhibits: Array[Dictionary] = []
@@ -23,6 +24,7 @@ var _video_frame: AspectRatioContainer
 var _status: Label
 var _hold_scenes: Dictionary = {}
 var _cast: Array[Dictionary] = []
+var title_button: Button
 
 func _ready() -> void:
 	player = $Player as PlayerController
@@ -220,6 +222,8 @@ func _input(event: InputEvent) -> void:
 			return
 	elif key == KEY_C:
 		open_panel()
+	elif key == KEY_T:
+		return_to_title()
 	elif key >= KEY_1 and key < KEY_1 + CAST.size():
 		switch_character(key - KEY_1)
 	elif key == KEY_TAB:
@@ -244,7 +248,7 @@ func _build_ui() -> void:
 	title.add_theme_font_size_override("font_size", 26)
 	hud.add_child(title)
 	var help := Label.new()
-	help.text = "WASD move, Shift run, Ctrl sprint, 1-5/Tab character, H hold, C cutscenes, Esc release mouse"
+	help.text = "WASD move, Shift run, Ctrl sprint, 1-5/Tab character, H hold, C cutscenes, T title, Esc release mouse"
 	help.add_theme_font_size_override("font_size", 16)
 	hud.add_child(help)
 	_status = Label.new()
@@ -254,6 +258,11 @@ func _build_ui() -> void:
 	open.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	open.pressed.connect(open_panel)
 	hud.add_child(open)
+	title_button = Button.new()
+	title_button.text = "Return to title (T)"
+	title_button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	title_button.pressed.connect(return_to_title)
+	hud.add_child(title_button)
 	panel = PanelContainer.new()
 	canvas.add_child(panel)
 	panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -300,6 +309,10 @@ func _build_ui() -> void:
 	panel.hide()
 	video_overlay.hide()
 	refresh_cutscenes()
+
+## The title opened this hall by replacing the main scene; go back the same way.
+func return_to_title() -> void:
+	get_tree().change_scene_to_file(TITLE_SCENE)
 
 func refresh_cutscenes(directory: String = CUTSCENE_DIRECTORY) -> void:
 	for child in _cutscene_list.get_children():

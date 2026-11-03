@@ -15,6 +15,7 @@ func _init() -> void:
 	call_deferred("_run")
 
 func _run() -> void:
+	_test_bugfix_contracts()
 	_test_simulation_witnesses()
 	_test_simulation_boundaries()
 	_test_upgrade_combinations()
@@ -204,7 +205,7 @@ func _test_director_and_host() -> void:
 
 func _test_save_service() -> void:
 	var save = SaveScript.new()
-	var path := "user://worker_a_systems_%d.json" % Time.get_ticks_usec()
+	var path := OS.get_temp_dir().path_join("worker_a_systems_%d.json" % Time.get_ticks_usec())
 	var snapshot: Dictionary = StateScript.new_snapshot()
 	var first := save.save(snapshot, path)
 	_check(bool(first.accepted), "versioned save writes a validated primitive snapshot")
@@ -212,11 +213,17 @@ func _test_save_service() -> void:
 	var second := save.save(snapshot, path)
 	_check(bool(second.accepted) and second.schema_version == SaveScript.SCHEMA_VERSION, "second save keeps the schema revision and backup")
 	var corrupt := FileAccess.open(path, FileAccess.WRITE)
+	if corrupt == null:
+		_check(false, "save fixture opens its temporary file")
+		return
 	corrupt.store_string("{not valid json")
 	corrupt.close()
 	var recovered: Dictionary = save.load(path)
 	_check(bool(recovered.accepted) and bool(recovered.recovered) and recovered.snapshot.state_revision == 0, "corrupt primary recovers the last valid backup")
 	var corrupt_again := FileAccess.open(path, FileAccess.WRITE)
+	if corrupt_again == null:
+		_check(false, "save fixture reopens its temporary file")
+		return
 	corrupt_again.store_string("{corrupt again")
 	corrupt_again.close()
 	var recovered_again: Dictionary = save.load(path)
@@ -347,3 +354,32 @@ func _check(condition: bool, message: String) -> void:
 	else:
 		failures += 1
 		push_error("FAIL " + message)
+
+func _test_bugfix_contracts() -> void:
+	var director := DirectorScript.new()
+	var state := director.new_campaign()
+	var sim := SimulationScript.new()
+	_check(state.resources == sim.entry_profile().resources, "B18 production initialization uses the same external profile as simulation")
+	var custom: Dictionary = sim.entry_profile()
+	custom.resources.energy_capacity = 32
+	custom.resources.E = 30
+	custom.resources.health_capacity = 12
+	custom.resources.H = 11
+	var plan := {"shifts": [_step("DAY", 0, "FULL", "HOLD")]}
+	var forecast: Dictionary = sim.preview(custom, plan)
+	_check(bool(forecast.accepted) and forecast.final_state.E == 29 and forecast.final_state.energy_capacity == 32 and forecast.final_state.H == 12, "B18 supplied energy and health capacities survive normalization and modifiers")
+	plan["upgrades"] = {"choices": {"1": "B"}}
+	_check(sim.preview(custom, plan).final_state.energy_capacity == 32, "B18 fuel cell never lowers an existing capacity")
+	var bad_profile = JSON.parse_string(FileAccess.get_file_as_string("res://resources/campaign/profiles/chapter1_base.json"))
+	bad_profile.capacities.erase("air_capacity")
+	_check(not SimulationScript.base_profile_problem(bad_profile).is_empty(), "B18 incomplete profiles fail validation instead of using hardcoded fallback numbers")
+	var command := _command("fractional-air", 0, {})
+	command.verb = "apply_delta"
+	command.payload = {"deltas": {"A": -1.25}}
+	var committed: Dictionary = director.commit(command)
+	_check(bool(committed.accepted) and is_equal_approx(director.snapshot().resources.A, 4.75), "B11 resource deltas preserve fractional breathing")
+	_check(committed.snapshot == director.snapshot() and committed.snapshot.receipts.has("fractional-air") and not committed.snapshot.receipts["fractional-air"].has("snapshot"), "B12 returned snapshot contains the new receipt without nesting snapshots")
+	var restored := DirectorScript.new()
+	restored.restore_snapshot(JSON.parse_string(JSON.stringify(committed.snapshot)))
+	command.expected_state_revision = restored.query().state_revision
+	_check(bool(restored.commit(command).get("duplicate", false)) and is_equal_approx(restored.snapshot().resources.A, 4.75), "B12 JSON restore of the returned snapshot cannot charge a duplicate command")

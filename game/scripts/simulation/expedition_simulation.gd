@@ -6,12 +6,15 @@ class_name ExpeditionSimulation
 ## a receipt/revision to the returned copy; neither method mutates its input.
 
 const SCHEMA_VERSION := 1
-const PROFILE_PATH := "res://resources/campaign/profiles/chapter1_base.json"
+const PROFILE_DIRECTORY := "res://resources/campaign/profiles"
 const BASE_PROFILE_REVISION := "p02-base-v1"
 const SHIFT_COUNT := 7
 const SHIFT_HOURS := 7.2
 const ResultScript = preload("res://scripts/core/command_result.gd")
 const StateScript = preload("res://scripts/core/campaign_state.gd")
+
+var _base_resources := {}
+var _profile := {}
 
 const UPGRADE_IDS := {
 	1: {"A": "taller_mast", "B": "fuel_cell"},
@@ -25,6 +28,8 @@ const UPGRADE_IDS := {
 
 func entry_profile(profile_id: String = "chapter1_base") -> Dictionary:
 	var profile := _load_profile(profile_id)
+	if profile.is_empty():
+		return {}
 	var resources: Dictionary = profile.get("resources", {}).duplicate(true)
 	var capacities: Dictionary = profile.get("capacities", {}).duplicate(true)
 	for key in capacities.keys():
@@ -112,6 +117,12 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 		result["reason"] = "A plan cannot commit beyond shift seven."
 		return result
 
+	if _profile.is_empty():
+		_profile = _load_profile("chapter1_base")
+	if _profile.is_empty():
+		result["reason"] = "The simulation profile is unavailable or invalid."
+		return result
+	var rules: Dictionary = _profile.rules
 	var working: Dictionary = snapshot.duplicate(true)
 	var resources: Dictionary = _normalise_resources(working.get("resources", {}))
 	working["resources"] = resources
@@ -178,7 +189,7 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 			else:
 				action_progress = 0
 		var pre_energy := int(resources.get("E", 0))
-		var day_income := 8
+		var day_income := int(rules.daylight_energy)
 		if is_day and bool(modifiers.get("taller_mast", false)):
 			day_income += 2
 		if is_day:
@@ -210,7 +221,7 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 			elif transfer == "DRAIN":
 				resources["W"] = maxi(0, int(resources.get("W", 0)) - 2)
 
-		var energy_cost := 1
+		var energy_cost := int(rules.basic_energy)
 		if not is_day:
 			energy_cost += heat
 		energy_cost += oxygen
@@ -227,7 +238,7 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 			resources["E"] = energy_after_spend
 
 		# Breathing is after the cap and after the energy bus decision.
-		resources["A"] = maxi(0, int(resources.get("A", 0)) - 1)
+		resources["A"] = maxi(0, int(resources.get("A", 0)) - int(rules.breathing_air))
 
 		# Plant effects use post-transfer W. Light affects both health and crop;
 		# insulation blankets remove the declared COOL Alo cold damage. COLD
@@ -244,10 +255,10 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 		if int(resources.get("W", 0)) >= 4:
 			health_delta -= 1
 			crop_delta -= 1
-		resources["H"] = _apply_non_resurrecting(int(resources.get("H", 0)), health_delta, 10)
-		resources["C"] = _apply_non_resurrecting(int(resources.get("C", 0)), crop_delta, 10)
-		var food_shortfall := float(resources.get("R", 0.0)) < 1.2
-		resources["R"] = 0.0 if food_shortfall else _round_tenth(float(resources.get("R", 0.0)) - 1.2)
+		resources["H"] = _apply_non_resurrecting(int(resources.get("H", 0)), health_delta, int(resources.health_capacity))
+		resources["C"] = _apply_non_resurrecting(int(resources.get("C", 0)), crop_delta, int(resources.crop_capacity))
+		var food_shortfall := float(resources.get("R", 0.0)) < float(rules.food_consumption)
+		resources["R"] = 0.0 if food_shortfall else _round_tenth(float(resources.get("R", 0.0)) - float(rules.food_consumption))
 
 		var causes: Array = []
 		if blackout:
@@ -302,7 +313,7 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 		var date_text := String(working.get("scenario_datetime", "")).trim_suffix(" UTC").replace(" ", "T")
 		if date_text.length() == 16:
 			date_text += ":00"
-		var elapsed_seconds := int(Time.get_unix_time_from_datetime_string(date_text)) + int(SHIFT_HOURS * 3600)
+		var elapsed_seconds := int(Time.get_unix_time_from_datetime_string(date_text)) + int(float(_profile.shift_hours) * 3600)
 		working["scenario_datetime"] = Time.get_datetime_string_from_unix_time(elapsed_seconds, true).substr(0, 16) + " UTC"
 		if stopped:
 			break
@@ -335,43 +346,73 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 		result["warnings"].append("PREVIEW ONLY · no state, receipt, date, inventory or world side effects")
 	return result
 
+## Reads res://resources/campaign/profiles/<profile_id>.json and checks the
+## fields every gameplay profile shares. Returns {} (and reports why) when the
+## file is missing or malformed; callers decide whether that is fatal.
+static func load_profile(profile_id: String) -> Dictionary:
+	var path := PROFILE_DIRECTORY.path_join(profile_id + ".json")
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(path)) if FileAccess.file_exists(path) else null
+	var problem := profile_problem(parsed)
+	if problem.is_empty() and profile_id == "chapter1_base":
+		problem = base_profile_problem(parsed)
+	if not problem.is_empty():
+		push_error("Gameplay profile %s is invalid: %s" % [path, problem])
+		return {}
+	return parsed
+
+static func profile_problem(profile) -> String:
+	if not profile is Dictionary:
+		return "the profile must be a JSON object"
+	if not profile.get("scenario_datetime", null) is String or not StateScript.is_scenario_datetime(profile.scenario_datetime):
+		return "scenario_datetime must be a UTC date and minute"
+	if not profile.get("resources", null) is Dictionary or profile.resources.is_empty():
+		return "resources must be a non-empty object"
+	for key in profile.resources:
+		if not is_amount(profile.resources[key]):
+			return "resource %s must be a finite nonnegative number" % key
+	var capacities = profile.get("capacities", {})
+	if not capacities is Dictionary:
+		return "capacities must be an object"
+	for key in capacities:
+		if not is_amount(capacities[key]) or float(capacities[key]) != floor(float(capacities[key])):
+			return "capacity %s must be a nonnegative whole number" % key
+	return ""
+
+static func base_profile_problem(profile: Dictionary) -> String:
+	for key in ["E", "A", "H", "W", "K", "C", "R", "Z"]:
+		if not is_amount(profile.resources.get(key, null)):
+			return "base profile is missing resource " + key
+	for key in ["energy_capacity", "air_capacity", "health_capacity", "water_capacity", "crate_capacity", "crop_capacity"]:
+		if not is_amount(profile.get("capacities", {}).get(key, null)):
+			return "base profile is missing capacity " + key
+	if not is_amount(profile.get("shift_hours", null)) or float(profile.shift_hours) <= 0:
+		return "shift_hours must be positive"
+	if not profile.get("rules", null) is Dictionary:
+		return "base rules must be a Dictionary"
+	for key in ["daylight_energy", "basic_energy", "breathing_air", "food_consumption"]:
+		if not is_amount(profile.rules.get(key, null)):
+			return "base profile is missing rule " + key
+	return ""
+
+static func is_amount(value) -> bool:
+	return (value is int or value is float) and is_finite(float(value)) and float(value) >= 0.0
+
 func _load_profile(profile_id: String) -> Dictionary:
-	if profile_id == "chapter1_base" and FileAccess.file_exists(PROFILE_PATH):
-		var parsed = JSON.parse_string(FileAccess.get_file_as_string(PROFILE_PATH))
-		if parsed is Dictionary:
-			return parsed as Dictionary
-	return {
-		"profile_revision": BASE_PROFILE_REVISION,
-		"content_revision": "p02-numeric-contract",
-		"scenario_datetime": "2046-04-25 00:00 UTC",
-		"resources": {"E": 14, "A": 6, "H": 6, "W": 0, "K": 0, "C": 8, "R": 12.0, "Z": 0},
-		"capacities": {"energy_capacity": 20, "air_capacity": 10, "health_capacity": 10, "water_capacity": 6, "crate_capacity": 2, "crop_capacity": 10},
-	}
+	var profile := load_profile(profile_id)
+	if not profile.is_empty():
+		return profile
+	return {}
 
 func _normalise_resources(source: Dictionary) -> Dictionary:
-	var result := {
-		"E": source.get("E", source.get("energy", 14)),
-		"A": source.get("A", source.get("air", 6)),
-		"H": source.get("H", source.get("alo_health", 6)),
-		"W": source.get("W", source.get("water_shielding", 0)),
-		"K": source.get("K", source.get("crate_shielding", 0)),
-		"C": source.get("C", source.get("crop_condition", 8)),
-		"R": source.get("R", source.get("rations", 12.0)),
-		"Z": source.get("Z", source.get("exposure", 0)),
-		"energy_capacity": source.get("energy_capacity", 20),
-		"air_capacity": source.get("air_capacity", 10),
-		"health_capacity": source.get("health_capacity", 10),
-		"water_capacity": source.get("water_capacity", 6),
-		"crate_capacity": source.get("crate_capacity", 2),
-		"crop_capacity": source.get("crop_capacity", 10),
-	}
-	result["E"] = int(result["E"])
-	result["A"] = int(result["A"])
-	result["H"] = int(result["H"])
-	result["W"] = int(result["W"])
-	result["K"] = int(result["K"])
-	result["C"] = int(result["C"])
-	result["Z"] = int(result["Z"])
+	# Absent values come from the validated chapter1_base profile, not code constants.
+	if _base_resources.is_empty():
+		_base_resources = entry_profile().resources
+	var aliases := {"E": "energy", "A": "air", "H": "alo_health", "W": "water_shielding", "K": "crate_shielding", "C": "crop_condition", "R": "rations", "Z": "exposure"}
+	var result := {}
+	for key in _base_resources:
+		result[key] = source.get(key, source.get(aliases.get(key, key), _base_resources[key]))
+	for key in ["E", "A", "H", "W", "K", "C", "Z"]:
+		result[key] = int(result[key])
 	result["R"] = float(result["R"])
 	return result
 
@@ -504,8 +545,10 @@ func _modifiers(snapshot: Dictionary, plan: Dictionary) -> Dictionary:
 		"bigger_safe_room": false,
 		"relay_parts_kit": false,
 		"long_range_battery": false,
-		"energy_capacity": 20,
-		"crate_capacity": 2,
+		# Base capacities are the snapshot's own (seeded from the profile); an
+		# upgrade can only raise them.
+		"energy_capacity": int(snapshot.resources.energy_capacity),
+		"crate_capacity": int(snapshot.resources.crate_capacity),
 		"shelter_bonus": 0,
 	}
 	for chapter in range(1, 8):
@@ -515,11 +558,11 @@ func _modifiers(snapshot: Dictionary, plan: Dictionary) -> Dictionary:
 		if modifiers.has(choice):
 			modifiers[choice] = true
 	if bool(modifiers["fuel_cell"]):
-		modifiers["energy_capacity"] = 26
+		modifiers["energy_capacity"] = maxi(int(modifiers["energy_capacity"]), 26)
 	if bool(modifiers["moon_dirt_shelter"]):
 		modifiers["shelter_bonus"] = 1
 	if bool(modifiers["bigger_safe_room"]):
-		modifiers["crate_capacity"] = 3
+		modifiers["crate_capacity"] = maxi(int(modifiers["crate_capacity"]), 3)
 	return modifiers
 
 func _merge_upgrades(existing_raw, incoming_raw) -> Dictionary:

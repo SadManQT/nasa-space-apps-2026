@@ -5,79 +5,22 @@ class_name CompanionRoster
 ## The service returns primitive placement dictionaries; it never instantiates
 ## a character or changes campaign arithmetic.
 
+const RoomContract = preload("res://scripts/world/room_contract.gd")
 const ACTOR_IDS := ["kai", "amara", "mei", "rafi", "ferreira"]
 const CADET_IDS := ["kai", "amara", "mei", "rafi"]
 
-const _SCENE_LAYOUTS := {
-	"EX-CH01-S01": {"kai": ["LOC-01", "commons_kai", "base"], "amara": ["LOC-01", "commons_amara", "base"], "mei": ["LOC-01", "commons_mei", "base"], "rafi": ["LOC-01", "commons_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-	"EX-CH01-S02": {"kai": ["LOC-04", "safe_kai", "base"], "amara": ["LOC-04", "safe_amara", "base"], "mei": ["LOC-04", "safe_mei", "base"], "rafi": ["LOC-04", "safe_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-	"EX-CH01-S03": {"kai": ["LOC-01", "commons_kai", "base"], "amara": ["LOC-01", "commons_amara", "base"], "mei": ["LOC-01", "commons_mei", "base"], "rafi": ["LOC-01", "commons_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-	"EX-CH01-S04": {"kai": ["LOC-03", "garden_kai", "base"], "amara": ["LOC-03", "garden_amara", "base"], "mei": ["LOC-03", "garden_mei", "base"], "rafi": ["LOC-03", "garden_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-	"EX-CH01-S05": {"kai": ["LOC-02", "service_kai", "base"], "amara": ["LOC-02", "service_amara", "base"], "mei": ["LOC-03", "garden_mei", "base"], "rafi": ["LOC-02", "service_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-	"EX-CH01-S06": {"kai": ["LOC-01", "commons_kai", "base"], "amara": ["LOC-01", "commons_amara", "base"], "mei": ["LOC-01", "commons_mei", "base"], "rafi": ["LOC-01", "commons_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-	"EX-CH01-S07": {"kai": ["LOC-02", "service_kai", "base"], "amara": ["LOC-02", "service_amara", "base"], "mei": ["LOC-03", "garden_mei", "base"], "rafi": ["LOC-02", "service_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-	"EX-CH01-S08": {"kai": ["LOC-04", "safe_kai", "base"], "amara": ["LOC-04", "safe_amara", "base"], "mei": ["LOC-04", "safe_mei", "base"], "rafi": ["LOC-04", "safe_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-	"EX-CH01-S09": {"kai": ["LOC-01", "commons_kai", "base"], "amara": ["LOC-01", "commons_amara", "base"], "mei": ["LOC-01", "commons_mei", "base"], "rafi": ["LOC-01", "commons_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-	"EX-CH01-S10": {"kai": ["LOC-04", "safe_kai", "base"], "amara": ["LOC-04", "safe_amara", "base"], "mei": ["LOC-04", "safe_mei", "base"], "rafi": ["LOC-04", "safe_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-	"EX-CH01-S11": {"kai": ["LOC-01", "commons_kai", "base"], "amara": ["LOC-03", "garden_amara", "base"], "mei": ["LOC-03", "garden_mei", "base"], "rafi": ["LOC-01", "commons_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-	"EX-CH01-S12": {"kai": ["LOC-03", "garden_kai", "base"], "amara": ["LOC-03", "garden_amara", "base"], "mei": ["LOC-03", "garden_mei", "base"], "rafi": ["LOC-03", "garden_rafi", "base"], "ferreira": ["EARTH_SCREEN", "ferreira_earth_screen", "remote"]},
-}
+# Per-scene placements and the playable body are authored separately from
+# prose and radio viewpoints. The data follows the handbook's locked teams.
+const SCENE_ROSTERS = preload("res://resources/campaign/content/scene_rosters.json")
 
 static func scene_roster(scene_id: String) -> Dictionary:
-	if scene_id.begins_with("EX-CH02-"):
-		var order := int(scene_id.substr(9, 2))
-		var location: String = ["LOC-03", "LOC-03", "LOC-05", "LOC-05", "LOC-05", "LOC-03", "LOC-01", "LOC-02", "LOC-02", "LOC-02", "LOC-01", "LOC-01"][order - 1]
-		var prefix := "commons"
-		match location:
-			"LOC-03": prefix = "garden"
-			"LOC-05": prefix = "transfer"
-			"LOC-02": prefix = "service"
-		return {
-			"kai": {"actor_id": "kai", "physical_location_id": location, "anchor_id": prefix + "_kai", "team_id": "base", "present": true, "scene_id": scene_id},
-			"amara": {"actor_id": "amara", "physical_location_id": location, "anchor_id": prefix + "_amara", "team_id": "base", "present": true, "scene_id": scene_id},
-			"mei": {"actor_id": "mei", "physical_location_id": location, "anchor_id": prefix + "_mei", "team_id": "base", "present": true, "scene_id": scene_id},
-			"rafi": {"actor_id": "rafi", "physical_location_id": location, "anchor_id": prefix + "_rafi", "team_id": "base", "present": true, "scene_id": scene_id},
-			"ferreira": {"actor_id": "ferreira", "physical_location_id": "EARTH_SCREEN", "anchor_id": "ferreira_earth_screen", "team_id": "remote", "present": true, "scene_id": scene_id},
-		}
-	if scene_id.begins_with("EX-CH") and int(scene_id.substr(5, 2)) >= 3:
-		var parts := scene_id.split("-")
-		var chapter := int(String(parts[1]).trim_prefix("CH"))
-		var order := int(String(parts[2]).trim_prefix("S"))
-		var location: String = {
-			3: ["LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-07", "LOC-07", "LOC-07", "LOC-03", "LOC-03", "LOC-03", "LOC-01"],
-			4: ["LOC-08", "LOC-08", "LOC-08", "LOC-09", "LOC-09", "LOC-10", "LOC-10", "LOC-10", "LOC-08", "LOC-03", "LOC-01", "LOC-01"],
-			5: ["LOC-08", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-02", "LOC-01", "LOC-01", "LOC-01", "LOC-03"],
-			6: ["LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-01", "LOC-02", "LOC-01", "LOC-01", "LOC-02", "LOC-01", "LOC-03"],
-			7: ["LOC-01", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-01", "LOC-01", "LOC-02", "LOC-01"],
-			8: ["LOC-08", "LOC-08", "LOC-11", "LOC-11", "LOC-03", "LOC-08", "LOC-12", "LOC-12", "LOC-12", "LOC-11", "LOC-08", "LOC-03"],
-		}.get(chapter, ["LOC-01"])[order - 1]
-		var prefix := _room_prefix(location)
-		var team := "base"
-		var ferreira_location := "EARTH_SCREEN"
-		var ferreira_anchor := "ferreira_earth_screen"
-		if chapter == 8:
-			ferreira_location = "LOC-11"
-			ferreira_anchor = "relay_ferreira"
-			team = "rover"
-		return {
-			"kai": _scene_placement("kai", location, prefix + "_kai", team, scene_id),
-			"amara": _scene_placement("amara", location, prefix + "_amara", team, scene_id),
-			"mei": _scene_placement("mei", location, prefix + "_mei", team, scene_id),
-			"rafi": _scene_placement("rafi", location, prefix + "_rafi", team, scene_id),
-			"ferreira": _scene_placement("ferreira", ferreira_location, ferreira_anchor, "remote" if chapter < 8 else "rover", scene_id),
-		}
-	var source: Dictionary = _SCENE_LAYOUTS.get(scene_id, _SCENE_LAYOUTS["EX-CH01-S01"])
+	var scene: Dictionary = SCENE_ROSTERS.data.scenes.get(scene_id, {})
 	var result := {}
-	for actor_id in source.keys():
-		var row: Array = source[actor_id]
-		result[actor_id] = {
-			"actor_id": actor_id,
-			"physical_location_id": String(row[0]),
-			"anchor_id": String(row[1]),
-			"team_id": String(row[2]),
-			"present": true,
-			"scene_id": scene_id,
-		}
+	for actor_id in scene.get("actors", {}):
+		var row: Dictionary = scene.actors[actor_id]
+		var location := String(row.location_id)
+		var anchor: String = "ferreira_earth_screen" if location == "EARTH_SCREEN" else _room_prefix(location) + "_" + actor_id
+		result[actor_id] = _scene_placement(actor_id, location, anchor, String(row.team_id), scene_id)
 	return result
 
 static func chapter_roster(chapter_id: String, scene_id: String = "") -> Dictionary:
@@ -118,13 +61,25 @@ static func validate_roster(roster: Dictionary) -> Dictionary:
 		if not roster.has(actor_id):
 			errors.append("roster is missing " + actor_id)
 			continue
+		if not roster[actor_id] is Dictionary:
+			errors.append(actor_id + " placement must be a Dictionary")
+			continue
 		var row: Dictionary = roster[actor_id]
 		for key in ["actor_id", "physical_location_id", "anchor_id", "team_id", "present"]:
 			if not row.has(key):
 				errors.append(actor_id + " placement is missing " + key)
-		if actor_id == "ferreira" and String(row.get("physical_location_id", "")) not in ["EARTH_SCREEN", "LOC-01", "LOC-11"]:
-			errors.append("Ferreira has an invalid physical location")
+			elif (key == "present" and not row[key] is bool) or (key != "present" and not row[key] is String):
+				errors.append(actor_id + " placement has an invalid " + key)
+		if not row.get("physical_location_id", null) is String:
+			continue
+		var location := String(row.physical_location_id)
+		if RoomContract.room(location).is_empty() and not (actor_id == "ferreira" and location == "EARTH_SCREEN"):
+			errors.append(actor_id + " has an invalid physical location")
 	return {"valid": errors.is_empty(), "errors": errors}
+
+## Structured physical viewpoint; prose/radio speaker names never choose a body.
+static func playable_actor(scene_id: String) -> String:
+	return String(SCENE_ROSTERS.data.scenes.get(scene_id, {}).get("playable_actor_id", ""))
 
 static func actor_locations(roster: Dictionary) -> Dictionary:
 	var result := {}

@@ -3,6 +3,7 @@ extends Node3D
 const CAMPAIGN_SCENE: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const MENU_SCENE: PackedScene = preload("res://scenes/ui/main_menu.tscn")
 const SaveScript = preload("res://scripts/save/save_service.gd")
+const CampaignScript = preload("res://scripts/campaign/chapter1_campaign.gd")
 const LegacySliceState = preload("res://scripts/campaign/slice_state.gd")
 
 var _stage_camera: Camera3D
@@ -13,9 +14,11 @@ var _campaign: Node3D
 var _replace_dialog: ConfirmationDialog
 var _save_service: SaveService
 var _load_notice := ""
+var save_path: String = SaveScript.DEFAULT_PATH
+var legacy_save_path: String = LegacySliceState.SAVE_PATH
 
 func _ready() -> void:
-	_save_service = SaveScript.new()
+	_save_service = _new_save_service()
 	_build_stage()
 	_show_title()
 
@@ -93,8 +96,8 @@ func _start_new_expedition() -> void:
 		_replace_dialog.ok_button_text = "REPLACE SAVE"
 		_replace_dialog.cancel_button_text = "CANCEL"
 		_replace_dialog.confirmed.connect(func() -> void:
-			_save_service.clear()
-			LegacySliceState.clear_save()
+			_save_service.clear(save_path)
+			LegacySliceState.clear_save(legacy_save_path)
 			_launch_campaign({})
 		)
 		_menu.add_child(_replace_dialog)
@@ -120,6 +123,7 @@ func _launch_campaign(snapshot: Dictionary) -> void:
 	_campaign = CAMPAIGN_SCENE.instantiate()
 	_campaign.set("initial_snapshot", snapshot)
 	_campaign.set("initial_accessibility", settings)
+	_campaign.set("save_path", save_path)
 	_campaign.connect("exit_requested", _show_title)
 	add_child(_campaign)
 	_stage_camera.current = false
@@ -127,22 +131,29 @@ func _launch_campaign(snapshot: Dictionary) -> void:
 func _load_campaign_snapshot() -> Dictionary:
 	_load_notice = ""
 	if _save_service == null:
-		_save_service = SaveScript.new()
-	var saved: Dictionary = _save_service.load()
+		_save_service = _new_save_service()
+	var saved: Dictionary = _save_service.load(save_path)
 	if bool(saved.get("accepted", false)):
 		if bool(saved.get("recovered", false)):
 			_load_notice = "Recovered checkpoint from backup."
 			if not bool(saved.get("repair_accepted", true)):
 				_load_notice += " Primary repair failed: " + String(saved.get("repair_reason", "unknown error"))
 		return saved.get("snapshot", {}).duplicate(true)
-	if FileAccess.file_exists(SaveScript.DEFAULT_PATH) or FileAccess.file_exists(SaveScript.DEFAULT_PATH + ".bak"):
+	if FileAccess.file_exists(save_path) or FileAccess.file_exists(save_path + ".bak"):
 		_load_notice = "Checkpoint could not be opened. Saved files are preserved; New Expedition requires explicit replacement."
-	elif FileAccess.file_exists(LegacySliceState.SAVE_PATH):
+	elif FileAccess.file_exists(legacy_save_path):
 		_load_notice = "Legacy commissioning checkpoint preserved. Its physical route cannot safely resume; choose New Expedition to replace it deliberately."
 	return {}
 
+## Continue only offers a checkpoint the campaign can actually resume; an
+## unresumable primary falls back to the verified backup.
+func _new_save_service() -> SaveService:
+	var service: SaveService = SaveScript.new()
+	service.session_validator = func(snapshot: Dictionary) -> Dictionary: return CampaignScript.restore_session(snapshot)
+	return service
+
 func _save_slot_exists() -> bool:
-	return FileAccess.file_exists(SaveScript.DEFAULT_PATH) or FileAccess.file_exists(SaveScript.DEFAULT_PATH + ".bak") or FileAccess.file_exists(LegacySliceState.SAVE_PATH)
+	return FileAccess.file_exists(save_path) or FileAccess.file_exists(save_path + ".bak") or FileAccess.file_exists(legacy_save_path)
 
 func _show_load_notice() -> void:
 	if not _load_notice.is_empty() and is_instance_valid(_menu):

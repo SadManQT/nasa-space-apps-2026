@@ -23,5 +23,11 @@
     "water_capacity": 6,
     "crate_capacity": 2,
     "crop_capacity": 10
+  },
+  "rules": {
+    "daylight_energy": 8,
+    "basic_energy": 1,
+    "breathing_air": 1,
+    "food_consumption": 1.2
   }
 }

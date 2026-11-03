@@ -86,6 +86,28 @@ func _test_navigation_and_pressure_boundaries() -> void:
 	_check(bool(authored_base_cut.get("accepted", false)) and authored_world.current_room_id() == "LOC-03", "authored base-room scene cut updates the world without bypassing the exterior airlock")
 
 func _test_rosters_and_switching() -> void:
+	var world := WorldRouteScript.new()
+	for chapter in range(1, 9):
+		for number in range(1, 13):
+			var id := "EX-CH%02d-S%02d" % [chapter, number]
+			var entered := world.set_scene(id, {"authored_viewpoint_cut": true})
+			var actors := world.roster()
+			var player := RosterScript.playable_actor(id)
+			_check(bool(entered.get("accepted", false)) and actors.has(player) and actors[player].physical_location_id == world.current_room_id(), "B10 production roster and structured playable actor agree for " + id)
+			_check((actors.ferreira.physical_location_id == "EARTH_SCREEN") == (chapter < 5), "B10 Ferreira arrival is honored for " + id)
+			if chapter in [4, 8]:
+				_check(actors.mei.physical_location_id in ["LOC-01", "LOC-02", "LOC-03", "LOC-04", "LOC-05"] and actors.amara.physical_location_id in ["LOC-01", "LOC-02", "LOC-03", "LOC-04", "LOC-05"], "B10 Mei and Amara remain at Aurora for " + id)
+			if (chapter == 4 and number >= 2 and number <= 9) or (chapter == 8 and number <= 11):
+				_check(actors.kai.physical_location_id == actors.rafi.physical_location_id and actors.kai.physical_location_id != actors.mei.physical_location_id and (chapter != 8 or actors.ferreira.physical_location_id == actors.kai.physical_location_id), "B10 canonical rover team remains separate for " + id)
+	world.set_scene("EX-CH05-S01", {"authored_viewpoint_cut": true})
+	var stale_roster := world.snapshot()
+	stale_roster.roster.ferreira.physical_location_id = "EARTH_SCREEN"
+	_check(bool(world.restore(stale_roster).get("accepted", false)) and world.roster().ferreira.physical_location_id != "EARTH_SCREEN", "B10 old saved rosters inherit the corrected physical arrival")
+	var temporary = RouteScript.new()
+	var reference: WeakRef = weakref(temporary)
+	temporary = null
+	_check(reference.get_ref() == null, "staged route validation releases its dispatcher and director instead of leaking every autosave")
+
 	var ch01 := RosterScript.scene_roster("EX-CH01-S01")
 	_check(bool(RosterScript.validate_roster(ch01).get("valid", false)), "Chapter 1 scene roster validates")
 	_check(String(ch01.kai.physical_location_id) == "LOC-01" and String(ch01.ferreira.physical_location_id) == "EARTH_SCREEN", "Mei/Aurora cadets are physical while Ferreira remains Earth-side")
@@ -152,7 +174,7 @@ func _test_dispatcher_transaction_fixture() -> void:
 	_check(not bool(director.commit({"command_id": "fixture-paused", "issuer": "test", "owning_mission_id": "EX-M0103", "owning_scene_id": "EX-CH01-S07", "expected_state_revision": int(director.query().get("state_revision", 0)), "target_id": "WORLD_PHYSICAL", "verb": "set_phase", "payload": {"phase": "fixture:blocked"}}).get("accepted", false)), "pause blocks a physical commit")
 	director.resume()
 	var save := SaveScript.new()
-	var path := "user://worker_b_fixture_%d.json" % Time.get_ticks_usec()
+	var path := OS.get_temp_dir().path_join("worker_b_fixture_%d.json" % Time.get_ticks_usec())
 	var saved := save.save(director.snapshot(), path)
 	var loaded := save.load(path)
 	_check(bool(saved.get("accepted", false)) and bool(loaded.get("accepted", false)) and loaded.get("snapshot", {}).get("state_revision", -1) == director.snapshot().get("state_revision", -2), "physical fixture state survives primitive save/load")

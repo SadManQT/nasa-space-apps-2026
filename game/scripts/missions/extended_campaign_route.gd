@@ -1,4 +1,4 @@
-extends RefCounted
+extends "res://scripts/missions/campaign_route.gd"
 class_name ExtendedCampaignRoute
 
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
@@ -8,9 +8,6 @@ const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
 const LedgerScript = preload("res://scripts/puzzles/extended_puzzle_ledger.gd")
 const ResultScript = preload("res://scripts/core/command_result.gd")
 
-var _director: RefCounted
-var _world: RefCounted
-var _dispatcher: RefCounted
 var _ledger: RefCounted
 var _scene_index := 0
 var _scene_flags := {}
@@ -19,14 +16,16 @@ var _completed_scene_ids: Array = []
 var _last_result := {}
 
 func _init(director: RefCounted = null) -> void:
+	_gate_catalog = GateCatalog
 	_director = director if director != null else DirectorScript.new()
 	_world = WorldRouteScript.new(_director)
-	_dispatcher = DispatcherScript.new(_director, Callable(self, "_submit_command"))
+	_create_dispatcher(DispatcherScript)
 	_ledger = LedgerScript.new()
 	for scene_id in GateCatalog.scene_ids():
 		_scene_flags[scene_id] = {}
 		_dialogue_acks[scene_id] = []
 	_set_current_scene(0)
+	_retry_checkpoint = _checkpoint_snapshot()
 
 func director() -> RefCounted:
 	return _director
@@ -46,9 +45,6 @@ func current_mission_id() -> String:
 func current_room_id() -> String:
 	return String(GateCatalog.gate(current_scene_id()).get("room_id", "LOC-01"))
 
-func targets_for_current_scene() -> Array:
-	return GateCatalog.targets_for_scene(current_scene_id())
-
 func completed_scene_ids() -> Array:
 	return _completed_scene_ids.duplicate()
 
@@ -62,7 +58,9 @@ func start_at(scene_id: String) -> Dictionary:
 	var index := GateCatalog.scene_ids().find(scene_id)
 	if index < 0:
 		return {"accepted": false, "reason": "Unknown extended campaign scene: " + scene_id}
-	return _set_current_scene(index)
+	var result := _set_current_scene(index)
+	_retry_checkpoint = _checkpoint_snapshot()
+	return result
 
 func focus(target_id: String, context: Dictionary = {}) -> Dictionary:
 	_register_current_targets()
@@ -78,8 +76,11 @@ func preview(payload_override: Dictionary = {}) -> Dictionary:
 	return _dispatcher.preview(payload_override)
 
 func confirm(command_id_override: String = "", payload_override: Dictionary = {}) -> Dictionary:
+	var before := _checkpoint_snapshot()
 	var result: Dictionary = _dispatcher.confirm(command_id_override, payload_override)
 	if bool(result.get("accepted", false)):
+		if not bool(result.get("duplicate", false)):
+			_retry_checkpoint = before
 		_apply_target_result(String(_dispatcher.state().get("focused_target_id", "")))
 	_last_result = result.duplicate(true)
 	return result
@@ -175,6 +176,7 @@ func advance_scene() -> Dictionary:
 		return {"accepted": true, "scene_completed": scene_id, "chapter_complete": true, "campaign_complete": chapter == 8, "completed_scene_ids": completed_scene_ids()}
 	_scene_index += 1
 	var moved: Dictionary = _set_current_scene(_scene_index)
+	_retry_checkpoint = _checkpoint_snapshot()
 	return {"accepted": true, "scene_completed": scene_id, "next_scene": current_scene_id(), "transition": moved, "completed_scene_ids": completed_scene_ids()}
 
 func chapter_ready() -> Dictionary:
@@ -190,6 +192,7 @@ func chapter_ready() -> Dictionary:
 
 func snapshot() -> Dictionary:
 	return {
+		"retry_checkpoint": _retry_checkpoint.duplicate(true),
 		"schema_version": 1,
 		"current_scene_id": current_scene_id(),
 		"current_scene_index": _scene_index,
@@ -202,24 +205,37 @@ func snapshot() -> Dictionary:
 	}
 
 func restore(data: Dictionary) -> Dictionary:
-	if not data is Dictionary:
-		return {"accepted": false, "reason": "Extended route snapshot must be a primitive Dictionary."}
-	var scene_id := String(data.get("current_scene_id", ""))
-	var index := GateCatalog.scene_ids().find(scene_id)
-	if index < 0:
-		return {"accepted": false, "reason": "Extended route snapshot names an unknown scene."}
-	var world_result: Dictionary = _world.restore(data.get("world", {}))
-	if not bool(world_result.get("accepted", false)):
-		return world_result
-	var ledger_result: Dictionary = _ledger.restore(data.get("ledger", {}))
-	if not bool(ledger_result.get("accepted", false)):
-		return ledger_result
-	_scene_index = index
-	_completed_scene_ids = data.get("completed_scene_ids", []).duplicate()
-	_scene_flags = data.get("scene_flags", {}).duplicate(true)
-	_dialogue_acks = data.get("dialogue_acks", {}).duplicate(true)
+	var staged := _stage(data)
+	if not bool(staged.get("accepted", false)):
+		return staged
+	var checkpoint: Dictionary = data.get("retry_checkpoint", {})
+	if not checkpoint.is_empty():
+		var nested := _stage(checkpoint.route)
+		if not bool(nested.get("accepted", false)):
+			return nested
+	_world = staged.world
+	_ledger = staged.ledger
+	_scene_index = GateCatalog.scene_ids().find(data.current_scene_id)
+	_completed_scene_ids = data.completed_scene_ids.duplicate()
+	_scene_flags = data.scene_flags.duplicate(true)
+	_dialogue_acks = data.dialogue_acks.duplicate(true)
+	_retry_checkpoint = checkpoint.duplicate(true)
 	_register_current_targets()
 	return {"accepted": true, "reason": "Extended campaign route restored from primitive state."}
+
+## Restores a snapshot into temporary world and ledger objects; live state is untouched.
+func _stage(data: Dictionary) -> Dictionary:
+	var fields := _validate_route_fields(data, GateCatalog.scene_ids())
+	if not bool(fields.get("accepted", false)):
+		return fields
+	if not data.get("ledger", null) is Dictionary:
+		return {"accepted": false, "reason": "Extended route snapshot requires its puzzle ledger."}
+	var world: RefCounted = WorldRouteScript.new(_director)
+	var ledger: RefCounted = LedgerScript.new()
+	for restored in [world.restore(data.world), ledger.restore(data.ledger)]:
+		if not bool(restored.get("accepted", false)):
+			return restored
+	return {"accepted": true, "world": world, "ledger": ledger}
 
 func _set_current_scene(index: int) -> Dictionary:
 	var scene_ids: Array = GateCatalog.scene_ids()

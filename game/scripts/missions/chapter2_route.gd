@@ -1,4 +1,4 @@
-extends RefCounted
+extends "res://scripts/missions/campaign_route.gd"
 class_name Chapter2Route
 
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
@@ -9,9 +9,6 @@ const P03Script = preload("res://scripts/puzzles/p03_pollination.gd")
 const P04Script = preload("res://scripts/puzzles/p04_recorder_reconstruction.gd")
 const ResultScript = preload("res://scripts/core/command_result.gd")
 
-var _director: RefCounted
-var _world: RefCounted
-var _dispatcher: RefCounted
 var _p03: RefCounted
 var _p04: RefCounted
 var _scene_index := 0
@@ -21,15 +18,17 @@ var _completed_scene_ids: Array = []
 var _last_result := {}
 
 func _init(director: RefCounted = null) -> void:
+	_gate_catalog = GateCatalog
 	_director = director if director != null else DirectorScript.new()
 	_world = WorldRouteScript.new(_director)
-	_dispatcher = DispatcherScript.new(_director, Callable(self, "_submit_command"))
+	_create_dispatcher(DispatcherScript)
 	_p03 = P03Script.new()
 	_p04 = P04Script.new()
 	for scene_id in GateCatalog.scene_ids():
 		_scene_flags[scene_id] = {}
 		_dialogue_acks[scene_id] = []
 	_set_current_scene(0)
+	_retry_checkpoint = _checkpoint_snapshot()
 
 func director() -> RefCounted: return _director
 func world() -> RefCounted: return _world
@@ -45,7 +44,25 @@ func start_at(scene_id: String) -> Dictionary:
 	var index := GateCatalog.SCENE_ORDER.find(scene_id)
 	if index < 0: return {"accepted": false, "reason": "Unknown Chapter 2 scene: " + scene_id}
 	_scene_index = index
-	return _set_current_scene(index)
+	var result := _set_current_scene(index)
+	_retry_checkpoint = _checkpoint_snapshot()
+	return result
+
+## Dated Chapter 1 -> 2 handoff (08_PUZZLE_DESIGNS P-03 entry): one receipted
+## ledger entry moves the resources to the explicit entry profile and the date
+## to the profile's morning, whatever the Chapter 1 ending left behind.
+func apply_entry_profile() -> Dictionary:
+	var profile: Dictionary = P03Script.profile()
+	if profile.is_empty():
+		return {"accepted": false, "reason": "The P-03 entry profile could not be verified."}
+	var resources: Dictionary = _director.snapshot().get("resources", {})
+	var deltas := {}
+	for key in profile.resources:
+		deltas[key] = float(profile.resources[key]) - float(resources.get(key, 0))
+	var result: Dictionary = _director.commit({"command_id": "handoff:EX-CH02-entry", "issuer": "chapter2_route", "owning_mission_id": "EX-M0201", "owning_scene_id": "EX-CH02-S01", "expected_state_revision": int(_director.query().get("state_revision", 0)), "target_id": "P-03", "verb": "apply_delta", "payload": {"deltas": deltas, "scenario_datetime": String(profile.scenario_datetime), "ledger": "p03_entry_profile"}})
+	if bool(result.get("accepted", false)):
+		_retry_checkpoint = _checkpoint_snapshot()
+	return result
 
 func begin() -> Dictionary:
 	if _completed_scene_ids.is_empty() and not bool(_director.snapshot().get("chapter1_ready", false)):
@@ -61,8 +78,11 @@ func use(payload: Dictionary = {}, context: Dictionary = {}) -> Dictionary: retu
 func preview(payload_override: Dictionary = {}) -> Dictionary: return _dispatcher.preview(payload_override)
 
 func confirm(command_id_override: String = "", payload_override: Dictionary = {}) -> Dictionary:
+	var before := _checkpoint_snapshot()
 	var result: Dictionary = _dispatcher.confirm(command_id_override, payload_override)
 	if bool(result.get("accepted", false)):
+		if not bool(result.get("duplicate", false)):
+			_retry_checkpoint = before
 		_apply_target_result(String(_dispatcher.state().get("focused_target_id", "")), result)
 	_last_result = result.duplicate(true)
 	return result
@@ -117,6 +137,7 @@ func advance_scene() -> Dictionary:
 	if _scene_index >= GateCatalog.SCENE_ORDER.size() - 1: return {"accepted": true, "scene_completed": scene_id, "chapter_complete": true, "completed_scene_ids": completed_scene_ids()}
 	_scene_index += 1
 	var moved: Dictionary = _set_current_scene(_scene_index)
+	_retry_checkpoint = _checkpoint_snapshot()
 	return {"accepted": true, "scene_completed": scene_id, "next_scene": current_scene_id(), "transition": moved, "completed_scene_ids": completed_scene_ids()}
 
 func chapter_ready() -> Dictionary:
@@ -124,25 +145,37 @@ func chapter_ready() -> Dictionary:
 	return {"ready": complete, "completed_scene_count": _completed_scene_ids.size(), "reason": "Chapter 2 readiness requires all twelve physical scene gates, three reciprocal pollen runs, seven care dates and the reconstructed recorder copy."}
 
 func snapshot() -> Dictionary:
-	return {"schema_version": 1, "current_scene_id": current_scene_id(), "current_scene_index": _scene_index, "completed_scene_ids": _completed_scene_ids.duplicate(), "scene_flags": _scene_flags.duplicate(true), "dialogue_acks": _dialogue_acks.duplicate(true), "p03": _p03.snapshot(), "p04": _p04.snapshot(), "world": _world.snapshot(), "chapter_ready": chapter_ready()}
+	return {"retry_checkpoint": _retry_checkpoint.duplicate(true), "schema_version": 1, "current_scene_id": current_scene_id(), "current_scene_index": _scene_index, "completed_scene_ids": _completed_scene_ids.duplicate(), "scene_flags": _scene_flags.duplicate(true), "dialogue_acks": _dialogue_acks.duplicate(true), "p03": _p03.snapshot(), "p04": _p04.snapshot(), "world": _world.snapshot(), "chapter_ready": chapter_ready()}
 
 func restore(data: Dictionary) -> Dictionary:
-	if not data is Dictionary: return {"accepted": false, "reason": "Chapter 2 route snapshot must be primitive."}
-	var scene_id := String(data.get("current_scene_id", ""))
-	var index := GateCatalog.SCENE_ORDER.find(scene_id)
-	if index < 0: return {"accepted": false, "reason": "Chapter 2 route snapshot names an unknown scene."}
-	var world_result: Dictionary = _world.restore(data.get("world", {}))
-	if not bool(world_result.get("accepted", false)): return world_result
-	_scene_index = index
-	_completed_scene_ids = data.get("completed_scene_ids", []).duplicate()
-	_scene_flags = data.get("scene_flags", {}).duplicate(true)
-	_dialogue_acks = data.get("dialogue_acks", {}).duplicate(true)
-	var p03_result: Dictionary = _p03.restore(data.get("p03", {}))
-	if not bool(p03_result.get("accepted", false)): return p03_result
-	var p04_result: Dictionary = _p04.restore(data.get("p04", {}))
-	if not bool(p04_result.get("accepted", false)): return p04_result
+	var staged := _stage(data)
+	if not bool(staged.get("accepted", false)): return staged
+	var checkpoint: Dictionary = data.get("retry_checkpoint", {})
+	if not checkpoint.is_empty():
+		var nested := _stage(checkpoint.route)
+		if not bool(nested.get("accepted", false)): return nested
+	_world = staged.world
+	_p03 = staged.p03
+	_p04 = staged.p04
+	_scene_index = GateCatalog.SCENE_ORDER.find(data.current_scene_id)
+	_completed_scene_ids = data.completed_scene_ids.duplicate()
+	_scene_flags = data.scene_flags.duplicate(true)
+	_dialogue_acks = data.dialogue_acks.duplicate(true)
+	_retry_checkpoint = checkpoint.duplicate(true)
 	_register_current_targets()
 	return {"accepted": true, "reason": "Chapter 2 route restored from primitive mission state."}
+
+## Restores a snapshot into temporary world and puzzle objects; live state is untouched.
+func _stage(data: Dictionary) -> Dictionary:
+	var fields := _validate_route_fields(data, GateCatalog.SCENE_ORDER)
+	if not bool(fields.get("accepted", false)): return fields
+	if not data.get("p03", null) is Dictionary or not data.get("p04", null) is Dictionary: return {"accepted": false, "reason": "Chapter 2 snapshot requires P-03 and P-04 state."}
+	var world: RefCounted = WorldRouteScript.new(_director)
+	var p03: RefCounted = P03Script.new()
+	var p04: RefCounted = P04Script.new()
+	for restored in [world.restore(data.world), p03.restore(data.p03), p04.restore(data.p04)]:
+		if not bool(restored.get("accepted", false)): return restored
+	return {"accepted": true, "world": world, "p03": p03, "p04": p04}
 
 func _set_current_scene(index: int) -> Dictionary:
 	_scene_index = clampi(index, 0, GateCatalog.SCENE_ORDER.size() - 1)
@@ -182,8 +215,13 @@ func _submit_command(command: Dictionary, preview_only: bool) -> Dictionary:
 	var payload: Dictionary = command.get("payload", {}) if command.get("payload", {}) is Dictionary else {}
 	var action := String(payload.get("_puzzle_action", ""))
 	if puzzle_id == "P-03":
+		# Replays return the original receipt before advancing the local puzzle.
+		if _director.snapshot().receipts.has(command.command_id):
+			return _director.commit(command)
 		var check: Dictionary = _p03.preview_action(action, payload)
 		if not bool(check.get("accepted", false)): return _puzzle_reject(check.get("reason", "P-03 rejected."))
+		command = _p03.ledger_command(command, _director.snapshot())
+		if command.is_empty(): return _puzzle_reject("The P-03 resource profile could not be verified.")
 		if preview_only: return _director.preview(command)
 		var committed: Dictionary = _director.commit(command)
 		if bool(committed.get("accepted", false)):

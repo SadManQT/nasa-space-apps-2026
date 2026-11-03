@@ -67,7 +67,13 @@ func snapshot() -> Dictionary:
 	return {"schema_version": 1, "mapping": _mapping.duplicate(true), "checksum_verified": _checksum_verified, "transcript_opened": _transcript_opened, "engineer_played": _engineer_played, "n_clue_played": _n_clue_played, "classified": _classified, "copy_sent": _copy_sent, "handover_acknowledged": _handover_acknowledged}
 
 func restore(data: Dictionary) -> Dictionary:
-	if not data is Dictionary or int(data.get("schema_version", 1)) != 1: return {"accepted": false, "reason": "P-04 snapshot is incompatible."}
+	var version = data.get("schema_version", 1)
+	if not (version is int or version is float) or float(version) != 1.0: return {"accepted": false, "reason": "P-04 snapshot is incompatible."}
+	if not data.get("mapping", {}) is Dictionary: return {"accepted": false, "reason": "P-04 mapping must be a Dictionary."}
+	for value in data.get("mapping", {}).values():
+		if not value is String: return {"accepted": false, "reason": "P-04 mapping values must be strings."}
+	for key in ["checksum_verified", "transcript_opened", "engineer_played", "n_clue_played", "classified", "copy_sent", "handover_acknowledged"]:
+		if not data.get(key, null) is bool: return {"accepted": false, "reason": "P-04 evidence must be boolean."}
 	_mapping = data.get("mapping", {}).duplicate(true)
 	_checksum_verified = bool(data.get("checksum_verified", false))
 	_transcript_opened = bool(data.get("transcript_opened", false))

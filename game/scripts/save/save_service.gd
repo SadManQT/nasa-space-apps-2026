@@ -10,11 +10,20 @@ const FORMAT_ID := "last-light-academy-save"
 const DEFAULT_PATH := "user://last_light_expedition_v2.json"
 const StateScript = preload("res://scripts/core/campaign_state.gd")
 
+## Optional check that a structurally valid save can actually resume
+## (Chapter1Campaign.restore_session). It returns {"accepted": bool, "reason"}.
+## When set, a save that fails it is treated like a corrupt file: load falls
+## back to the backup, and save never preserves it as the backup.
+var session_validator := Callable()
+
 func save(snapshot: Dictionary, path: String = DEFAULT_PATH) -> Dictionary:
 	var migration := migrate(snapshot)
 	if not bool(migration.get("accepted", false)):
 		return {"accepted": false, "migrated": false, "recovered": false, "path": path, "reason": String(migration.get("reason", "Invalid save snapshot."))}
 	var candidate: Dictionary = migration["snapshot"]
+	var session := _validate_session(candidate)
+	if not bool(session.get("accepted", false)):
+		return session
 	var encoded := JSON.stringify(candidate)
 	var temp_path := path + ".tmp"
 	if not _write_validated_snapshot(temp_path, encoded):
@@ -27,7 +36,7 @@ func save(snapshot: Dictionary, path: String = DEFAULT_PATH) -> Dictionary:
 		# A recovery write may be replacing a corrupt primary. Never destroy an
 		# already-valid backup in that case: it is the only repeatable recovery
 		# source if the newly restored primary is corrupted again.
-		var old_primary_valid := bool(_read_snapshot(path).get("valid", false))
+		var old_primary_valid := bool(_load_candidate(path).get("accepted", false))
 		if old_primary_valid:
 			var old_text := FileAccess.get_file_as_string(path)
 			var backup_temp_path := backup_path + ".tmp"
@@ -53,37 +62,53 @@ func save(snapshot: Dictionary, path: String = DEFAULT_PATH) -> Dictionary:
 
 func load(path: String = DEFAULT_PATH, fallback_snapshot: Dictionary = {}) -> Dictionary:
 	var primary_exists := FileAccess.file_exists(path)
-	var primary := _read_snapshot(path)
-	if bool(primary.get("valid", false)):
-		var migration := migrate(primary["snapshot"])
-		if bool(migration.get("accepted", false)):
-			return {
-				"accepted": true,
-				"migrated": bool(migration.get("migrated", false)),
-				"recovered": false,
-				"path": path,
-				"schema_version": SCHEMA_VERSION,
-				"snapshot": migration["snapshot"].duplicate(true),
-			}
-	var backup_path := path + ".bak"
-	var backup := _read_snapshot(backup_path)
-	if bool(backup.get("valid", false)):
-		var migration_backup := migrate(backup["snapshot"])
-		if bool(migration_backup.get("accepted", false)):
-			# Restore through the same validated save path. This produces a fresh
-			# primary and retains the recovered data for the next failure.
-			var repaired := save(migration_backup["snapshot"], path)
-			return {
-				"accepted": true,
-				"migrated": bool(migration_backup.get("migrated", false)),
-				"recovered": true,
-				"repair_accepted": bool(repaired.get("accepted", false)),
-				"repair_reason": String(repaired.get("reason", "")),
-				"path": path,
-				"reason": "primary_corrupt_recovered_from_backup",
-				"snapshot": migration_backup["snapshot"].duplicate(true),
-			}
-	return {"accepted": false, "migrated": false, "recovered": false, "path": path, "reason": "save_corrupt_no_valid_backup" if primary_exists else "save_missing", "snapshot": fallback_snapshot.duplicate(true)}
+	var primary := _load_candidate(path)
+	if bool(primary.get("accepted", false)):
+		return {
+			"accepted": true,
+			"migrated": bool(primary.get("migrated", false)),
+			"recovered": false,
+			"path": path,
+			"schema_version": SCHEMA_VERSION,
+			"snapshot": primary["snapshot"].duplicate(true),
+		}
+	var backup := _load_candidate(path + ".bak")
+	if bool(backup.get("accepted", false)):
+		# Restore through the same validated save path. This produces a fresh
+		# primary and retains the recovered data for the next failure.
+		var repaired := save(backup["snapshot"], path)
+		return {
+			"accepted": true,
+			"migrated": bool(backup.get("migrated", false)),
+			"recovered": true,
+			"repair_accepted": bool(repaired.get("accepted", false)),
+			"repair_reason": String(repaired.get("reason", "")),
+			"path": path,
+			"reason": "primary_corrupt_recovered_from_backup",
+			"primary_reason": String(primary.get("reason", "")),
+			"snapshot": backup["snapshot"].duplicate(true),
+		}
+	return {"accepted": false, "migrated": false, "recovered": false, "path": path, "reason": "save_corrupt_no_valid_backup" if primary_exists else "save_missing", "primary_reason": String(primary.get("reason", "")), "snapshot": fallback_snapshot.duplicate(true)}
+
+## Reads, migrates and (when a validator is set) resume-checks one file.
+func _load_candidate(path: String) -> Dictionary:
+	var read := _read_snapshot(path)
+	if not bool(read.get("valid", false)):
+		return {"accepted": false, "reason": String(read.get("reason", "invalid"))}
+	var migration := migrate(read["snapshot"])
+	if not bool(migration.get("accepted", false)):
+		return migration
+	var session := _validate_session(migration["snapshot"])
+	if not bool(session.get("accepted", false)):
+		return session
+	return migration
+
+func _validate_session(snapshot: Dictionary) -> Dictionary:
+	if session_validator.is_valid():
+		var session = session_validator.call(snapshot)
+		if not session is Dictionary or not bool(session.get("accepted", false)):
+			return {"accepted": false, "reason": "checkpoint cannot resume: " + (String(session.get("reason", "unknown")) if session is Dictionary else "unknown")}
+	return {"accepted": true}
 
 func migrate(snapshot: Dictionary) -> Dictionary:
 	var validation := _validate_snapshot(snapshot)
@@ -106,7 +131,7 @@ func recover_corrupt(path: String = DEFAULT_PATH, fallback_snapshot: Dictionary 
 		loaded["recovered"] = false
 		return loaded
 	var fallback := migrate(fallback_snapshot)
-	var valid_fallback := bool(fallback.get("accepted", false))
+	var valid_fallback := bool(fallback.get("accepted", false)) and bool(_validate_session(fallback.get("snapshot", {})).get("accepted", false))
 	return {
 		"accepted": valid_fallback,
 		"migrated": bool(fallback.get("migrated", false)),

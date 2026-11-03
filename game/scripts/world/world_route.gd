@@ -51,18 +51,38 @@ func snapshot() -> Dictionary:
 	}
 
 func restore(snapshot_data: Dictionary) -> Dictionary:
-	if not snapshot_data is Dictionary:
-		return {"accepted": false, "reason": "World route snapshot must be a primitive Dictionary."}
+	# Validate every nested collection before replacing live world state.
+	for key in ["boundaries", "roster", "last_viewpoint_cut"]:
+		if not snapshot_data.get(key, null) is Dictionary:
+			return {"accepted": false, "reason": "World route requires a Dictionary for " + key}
+	if not snapshot_data.get("history", null) is Array or not snapshot_data.get("current_scene_id", null) is String or not snapshot_data.get("current_room_id", null) is String:
+		return {"accepted": false, "reason": "World route requires history and scene/room IDs."}
+	for entry in snapshot_data.history:
+		if not entry is Dictionary:
+			return {"accepted": false, "reason": "World history must contain Dictionaries."}
+	for boundary_id in NavigationContract.boundary_ids():
+		var value = snapshot_data.boundaries.get(boundary_id, null)
+		if not value is Dictionary:
+			return {"accepted": false, "reason": "World route is missing boundary " + boundary_id}
+		var defaults: Dictionary = NavigationContract.default_boundary_state(boundary_id)
+		for key in defaults:
+			if typeof(value.get(key, null)) != typeof(defaults[key]):
+				return {"accepted": false, "reason": "Invalid boundary field " + key}
 	var room_id := String(snapshot_data.get("current_room_id", ""))
 	if RoomContract.room(room_id).is_empty():
 		return {"accepted": false, "reason": "World route snapshot names an unknown room."}
 	var roster_value = snapshot_data.get("roster", {})
 	if not roster_value is Dictionary or not bool(RosterContract.validate_roster(roster_value).get("valid", false)):
 		return {"accepted": false, "reason": "World route snapshot has an invalid physical roster."}
+	var canonical_roster := RosterContract.scene_roster(snapshot_data.current_scene_id)
+	if canonical_roster.is_empty():
+		return {"accepted": false, "reason": "World route snapshot names an unknown scene."}
 	_current_room = room_id
 	_current_scene = String(snapshot_data.get("current_scene_id", "EX-CH01-S01"))
 	_boundaries = snapshot_data.get("boundaries", {}).duplicate(true)
-	_roster = roster_value.duplicate(true)
+	# Placements are authored scene facts, not player-editable save data. This
+	# also repairs older saves made before the arrival/split-team roster fix.
+	_roster = canonical_roster
 	_history = snapshot_data.get("history", []).duplicate(true)
 	_last_viewpoint_cut = snapshot_data.get("last_viewpoint_cut", {}).duplicate(true)
 	_emit_changed()

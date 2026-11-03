@@ -31,10 +31,22 @@ func _run() -> void:
 		_check(route.current_scene_id() == scene_id, "route is at " + scene_id)
 		for target in GateCatalog.targets_for_scene(scene_id):
 			var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+			var previous_state: Dictionary = JSON.parse_string(JSON.stringify(director.snapshot()))
+			var previous_route: Dictionary = JSON.parse_string(JSON.stringify(route.snapshot()))
 			var result: Dictionary = route.perform(String(target.get("target_id", "")), payload)
 			if not bool(result.get("accepted", false)):
 				print("EXTENDED DETAIL ", scene_id, " / ", target.get("target_id", ""), " -> ", result)
 			_check(bool(result.get("accepted", false)), scene_id + " commits " + String(target.get("target_id", "")))
+			if scene_id in ["EX-CH03-S01", "EX-CH04-S04", "EX-CH05-S01", "EX-CH06-S01", "EX-CH07-S05", "EX-CH08-S03"]:
+				var copy_director := DirectorScript.new()
+				copy_director.restore_snapshot(JSON.parse_string(JSON.stringify(director.snapshot())))
+				var copy := RouteScript.new(copy_director)
+				_check(bool(copy.restore(JSON.parse_string(JSON.stringify(route.snapshot()))).get("accepted", false)), "B05 later checkpoint persists at " + scene_id)
+				var retried := copy.retry()
+				var restored_local: Dictionary = JSON.parse_string(JSON.stringify(copy.snapshot()))
+				var restored_state: Dictionary = JSON.parse_string(JSON.stringify(copy_director.snapshot()))
+				_check(bool(retried.get("accepted", false)) and restored_local.ledger == previous_route.ledger and restored_local.world == previous_route.world and restored_local.scene_flags == previous_route.scene_flags and restored_state.resources == previous_state.resources and restored_state.receipts == previous_state.receipts, "B05 retry restores complete operation checkpoint at " + scene_id)
+
 		_check(bool(route.gate_status().get("ready", false)), scene_id + " physical gate is ready")
 		var moved: Dictionary = route.advance_scene()
 		var order := int(scene_id.substr(9, 2))

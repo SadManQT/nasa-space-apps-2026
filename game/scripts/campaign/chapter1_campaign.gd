@@ -10,6 +10,7 @@ const RouteScript = preload("res://scripts/missions/chapter1_route.gd")
 const Chapter2RouteScript = preload("res://scripts/missions/chapter2_route.gd")
 const ExtendedRouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const RoomContract = preload("res://scripts/world/room_contract.gd")
+const CompanionRosterScript = preload("res://scripts/companions/companion_roster.gd")
 const HUDScene: PackedScene = preload("res://scenes/ui/chapter1_campaign_hud.tscn")
 const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 
@@ -25,6 +26,8 @@ var _room: CampaignRoom
 var _player: PlayerController
 var _startup_error := ""
 var _ui_paused := false
+var _exit_without_save_armed := false
+var save_path: String = SaveScript.DEFAULT_PATH
 
 func _ready() -> void:
 	content = ContentScript.load_full()
@@ -33,49 +36,63 @@ func _ready() -> void:
 		_fail_startup("Campaign content could not be verified.")
 		return
 	save_service = SaveScript.new()
-	director = DirectorScript.new()
+	save_service.session_validator = restore_session
 	if initial_snapshot.is_empty():
-		director.new_campaign(ContentScript.EXPECTED_CONTENT_REVISION)
+		director = DirectorScript.new()
+		if director.new_campaign(ContentScript.EXPECTED_CONTENT_REVISION).is_empty():
+			_fail_startup("The gameplay profile could not be verified.")
+			return
+		route = RouteScript.new(director)
 	else:
-		if not initial_snapshot.get("route_runtime", {}) is Dictionary or initial_snapshot.get("route_runtime", {}).is_empty():
-			_fail_startup("This checkpoint is missing its physical mission route.")
+		var session := restore_session(initial_snapshot)
+		if not bool(session.get("accepted", false)):
+			_fail_startup(String(session.get("reason", "The checkpoint could not be restored.")))
 			return
-		var state_snapshot := initial_snapshot.duplicate(true)
-		state_snapshot.erase("route_runtime")
-		var restored := director.restore_snapshot(state_snapshot, ContentScript.EXPECTED_CONTENT_REVISION)
-		if not bool(restored.get("accepted", false)):
-			_fail_startup(String(restored.get("reason", "The checkpoint could not be restored.")))
-			return
+		director = session.director
+		route = session.route
 	var presentation := director.snapshot()
 	presentation["paused"] = false
 	for key in initial_accessibility:
 		presentation["accessibility"][key] = initial_accessibility[key]
 	director.restore_snapshot(presentation)
-	var saved_route: Dictionary = initial_snapshot.get("route_runtime", {}) if initial_snapshot.get("route_runtime", {}) is Dictionary else {}
-	var saved_chapter := String(initial_snapshot.get("chapter_id", "CH01"))
-	if saved_chapter == "CH02" or int(saved_route.get("chapter", 1)) == 2:
-		route = Chapter2RouteScript.new(director)
-	elif saved_chapter.begins_with("CH") and int(saved_chapter.trim_prefix("CH")) >= 3:
-		route = ExtendedRouteScript.new(director)
-	else:
-		route = RouteScript.new(director)
-	if initial_snapshot.get("route_runtime", {}) is Dictionary and not initial_snapshot.get("route_runtime", {}).is_empty():
-		var route_restore: Dictionary = route.restore(initial_snapshot.get("route_runtime", {}))
-		if not bool(route_restore.get("accepted", false)):
-			_fail_startup(String(route_restore.get("reason", "The saved mission route could not be restored.")))
-			return
-	else:
-		var saved_scene := String(director.snapshot().get("scene_id", "EX-CH01-S01"))
-		if not saved_scene.is_empty():
-			var started: Dictionary = route.start_at(saved_scene)
-			if not bool(started.get("accepted", false)):
-				_fail_startup(String(started.get("reason", "The saved scene is unavailable.")))
-				return
 	_sync_route_projection()
 	_build_stage()
 	_refresh_world()
 	_build_hud()
 	_save_campaign()
+
+## Rebuilds a director and its chapter route from a saved snapshot in fresh
+## objects, without touching any live session. SaveService uses it to judge
+## whether a checkpoint can actually resume before choosing it over a backup.
+static func restore_session(snapshot: Dictionary) -> Dictionary:
+	var saved_route = snapshot.get("route_runtime", {})
+	if not saved_route is Dictionary or saved_route.is_empty():
+		return {"accepted": false, "reason": "This checkpoint is missing its physical mission route."}
+	if str(saved_route.get("current_scene_id", "")) != str(snapshot.get("scene_id", "")):
+		return {"accepted": false, "reason": "The checkpoint scene and physical mission route disagree."}
+	var state := snapshot.duplicate(true)
+	state.erase("route_runtime")
+	var session_director := DirectorScript.new()
+	var restored: Dictionary = session_director.restore_snapshot(state, ContentScript.EXPECTED_CONTENT_REVISION)
+	if not bool(restored.get("accepted", false)):
+		return restored
+	var chapter := int(String(state.get("chapter_id", "CH01")).trim_prefix("CH"))
+	var route_chapter = saved_route.get("chapter", chapter)
+	if not (route_chapter is int or route_chapter is float) or float(route_chapter) != chapter:
+		return {"accepted": false, "reason": "The saved mission route belongs to a different chapter."}
+	var session_route: RefCounted
+	if chapter == 2:
+		session_route = Chapter2RouteScript.new(session_director)
+	elif chapter >= 3 and chapter <= 8:
+		session_route = ExtendedRouteScript.new(session_director)
+	elif chapter == 1:
+		session_route = RouteScript.new(session_director)
+	else:
+		return {"accepted": false, "reason": "The checkpoint names an unknown chapter."}
+	var route_restore: Dictionary = session_route.restore(saved_route)
+	if not bool(route_restore.get("accepted", false)):
+		return route_restore
+	return {"accepted": true, "director": session_director, "route": session_route}
 
 func current_scene_data() -> Dictionary:
 	return ContentScript.scene_by_id(content, route.current_scene_id())
@@ -87,10 +104,7 @@ func targets_for_current_scene() -> Array:
 	return _targets_for_scene()
 
 func _targets_for_scene() -> Array:
-	if route != null and route.has_method("targets_for_current_scene"):
-		return route.targets_for_current_scene()
-	var gate_script = load("res://scripts/missions/chapter1_gate_catalog.gd")
-	return gate_script.targets_for_scene(route.current_scene_id())
+	return route.targets_for_current_scene() if route != null else []
 
 func query() -> Dictionary:
 	var result := director.query()
@@ -122,9 +136,9 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 		else:
 			result = route.perform(target_id, payload, {"room_id": _room.room_id, "distance_m": distance, "line_of_sight": clear})
 	_sync_world_boundaries()
-	_save_campaign()
 	if hud != null:
 		hud.refresh_after_action(result)
+	_save_campaign()
 	return result
 
 func physical_target(target_id: String) -> Node3D:
@@ -190,22 +204,23 @@ func set_ui_paused(value: bool) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func retry_checkpoint() -> Dictionary:
-	if not route.has_method("retry"):
-		return {"accepted": false, "reason": "This later campaign route has no retry checkpoint yet."}
 	var result: Dictionary = route.retry()
 	if bool(result.get("accepted", false)):
 		_sync_route_projection()
 		_refresh_world()
-		_save_campaign()
 	if hud != null:
 		hud.refresh_scene(result)
 		hud.show_status(String(result.get("reason", "Checkpoint restored.")))
+	if bool(result.get("accepted", false)):
+		_save_campaign()
 	return result
 
 func acknowledge_dialogue(line_id: String) -> Dictionary:
 	var result: Dictionary = route.acknowledge_dialogue(line_id)
 	if hud != null:
 		hud.refresh_after_action(result)
+	if bool(result.get("accepted", false)) and not bool(result.get("duplicate", false)):
+		_save_campaign()
 	return result
 
 func advance_scene() -> Dictionary:
@@ -220,14 +235,18 @@ func advance_scene() -> Dictionary:
 	elif bool(result.get("accepted", false)):
 		_sync_route_projection()
 		_refresh_world()
-	_save_campaign()
 	if hud != null:
 		hud.refresh_scene(result)
+	_save_campaign()
 	return result
 
 func _start_chapter2() -> Dictionary:
 	_sync_route_projection()
-	route = Chapter2RouteScript.new(director)
+	var next_route = Chapter2RouteScript.new(director)
+	var entry: Dictionary = next_route.apply_entry_profile()
+	if not bool(entry.get("accepted", false)):
+		return entry
+	route = next_route
 	var started: Dictionary = route.start_at("EX-CH02-S01")
 	_sync_route_projection()
 	_refresh_world()
@@ -275,9 +294,16 @@ func handle_ui_command(command: Dictionary, _preview_only: bool = false) -> Dict
 		return restored
 	return {"accepted": false, "reason": "The campaign runtime does not own UI command " + verb}
 
+## Leaves only after the checkpoint is written. A failed save keeps the live
+## session open; pressing TITLE again is the explicit choice to leave without it.
 func exit_to_title() -> void:
-	if _startup_error.is_empty():
-		_save_campaign()
+	if _startup_error.is_empty() and not _exit_without_save_armed:
+		var saved := _save_campaign()
+		if not bool(saved.get("accepted", false)):
+			_exit_without_save_armed = true
+			if hud != null:
+				hud.show_status("SAVE FAILED · %s\nThe expedition is still open. Press SAVE to try again, or TITLE again to leave without saving." % String(saved.get("reason", "unknown error")))
+			return
 	exit_requested.emit()
 
 func _save_snapshot() -> Dictionary:
@@ -314,10 +340,18 @@ func _sync_route_projection() -> void:
 	if not bool(result.get("accepted", false)):
 		push_warning("Unable to synchronize the saved campaign scene projection: " + String(result.get("reason", "unknown")))
 
+## Every autosave goes through here, so a failure is always shown to the player.
 func _save_campaign() -> Dictionary:
 	if not _startup_error.is_empty():
 		return {"accepted": false, "reason": _startup_error}
-	return save_service.save(_save_snapshot())
+	var result: Dictionary = save_service.save(_save_snapshot(), save_path)
+	if bool(result.get("accepted", false)):
+		_exit_without_save_armed = false
+	else:
+		push_warning("Autosave failed: " + String(result.get("reason", "unknown error")))
+		if hud != null:
+			hud.show_status("AUTOSAVE FAILED · " + String(result.get("reason", "unknown error")) + " · progress since the last save is not on disk yet.")
+	return result
 
 func _fail_startup(reason: String) -> void:
 	_startup_error = reason
@@ -402,9 +436,7 @@ func _refresh_world() -> void:
 		player_anchor = [0.0, 0.0, 2.0]
 	_player = PLAYER_SCENE.instantiate() as PlayerController
 	_player.gravity = 1.62
-	var actor := String(current_scene_data().get("point_of_view", "Mei"))
-	if actor not in ["Kai", "Amara", "Mei", "Rafi"]:
-		actor = "Mei"
+	var actor: String = CompanionRosterScript.playable_actor(route.current_scene_id()).capitalize()
 	_player.character_glb = "res://assets/characters/CH_%s/CH_%s.glb" % [actor, actor]
 	_player.position = Vector3(float(player_anchor[0]), float(player_anchor[1]), float(player_anchor[2]))
 	(_player.get_node("FollowCamera") as FollowCamera).capture_mouse = false

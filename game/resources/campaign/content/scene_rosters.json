@@ -1,0 +1,2405 @@
+{
+  "source": "PRODUCTION_HANDBOOK.md section 4; full-game-story/story-data.json",
+  "scenes": {
+    "EX-CH01-S01": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH01-S02": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH01-S03": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH01-S04": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH01-S05": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH01-S06": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH01-S07": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH01-S08": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH01-S09": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH01-S10": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH01-S11": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH01-S12": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S01": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S02": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S03": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S04": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S05": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-05",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S06": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S07": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S08": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S09": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S10": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S11": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH02-S12": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S01": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S02": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S03": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S04": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S05": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S06": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S07": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S08": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-07",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S09": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S10": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S11": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH03-S12": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S01": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S02": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-08",
+          "team_id": "field"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-08",
+          "team_id": "field"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S03": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-08",
+          "team_id": "field"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-08",
+          "team_id": "field"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S04": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-09",
+          "team_id": "field"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-09",
+          "team_id": "field"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S05": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-09",
+          "team_id": "field"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-09",
+          "team_id": "field"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S06": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-10",
+          "team_id": "field"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-10",
+          "team_id": "field"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S07": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-10",
+          "team_id": "field"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-10",
+          "team_id": "field"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S08": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-10",
+          "team_id": "field"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-10",
+          "team_id": "field"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S09": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-08",
+          "team_id": "field"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-08",
+          "team_id": "field"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S10": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S11": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH04-S12": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "EARTH_SCREEN",
+          "team_id": "remote"
+        }
+      }
+    },
+    "EX-CH05-S01": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-08",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-08",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-08",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-08",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-08",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH05-S02": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH05-S03": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH05-S04": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH05-S05": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH05-S06": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH05-S07": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH05-S08": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH05-S09": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH05-S10": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH05-S11": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH05-S12": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S01": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S02": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S03": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S04": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S05": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S06": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S07": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S08": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S09": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S10": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S11": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH06-S12": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S01": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S02": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S03": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S04": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S05": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S06": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S07": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S08": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-04",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S09": {
+      "playable_actor_id": "amara",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S10": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S11": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-02",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH07-S12": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-01",
+          "team_id": "base"
+        }
+      }
+    },
+    "EX-CH08-S01": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "rafi": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        },
+        "ferreira": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        }
+      }
+    },
+    "EX-CH08-S02": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "rafi": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        },
+        "ferreira": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        }
+      }
+    },
+    "EX-CH08-S03": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "rafi": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        },
+        "ferreira": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        }
+      }
+    },
+    "EX-CH08-S04": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "rafi": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        },
+        "ferreira": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        }
+      }
+    },
+    "EX-CH08-S05": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "home"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "home"
+        },
+        "rafi": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        },
+        "ferreira": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        }
+      }
+    },
+    "EX-CH08-S06": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "rafi": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        },
+        "ferreira": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        }
+      }
+    },
+    "EX-CH08-S07": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-12",
+          "team_id": "rover"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "rafi": {
+          "location_id": "LOC-12",
+          "team_id": "rover"
+        },
+        "ferreira": {
+          "location_id": "LOC-12",
+          "team_id": "rover"
+        }
+      }
+    },
+    "EX-CH08-S08": {
+      "playable_actor_id": "kai",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-12",
+          "team_id": "rover"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "rafi": {
+          "location_id": "LOC-12",
+          "team_id": "rover"
+        },
+        "ferreira": {
+          "location_id": "LOC-12",
+          "team_id": "rover"
+        }
+      }
+    },
+    "EX-CH08-S09": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-12",
+          "team_id": "rover"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "rafi": {
+          "location_id": "LOC-12",
+          "team_id": "rover"
+        },
+        "ferreira": {
+          "location_id": "LOC-12",
+          "team_id": "rover"
+        }
+      }
+    },
+    "EX-CH08-S10": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "rafi": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        },
+        "ferreira": {
+          "location_id": "LOC-11",
+          "team_id": "rover"
+        }
+      }
+    },
+    "EX-CH08-S11": {
+      "playable_actor_id": "rafi",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        },
+        "amara": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "mei": {
+          "location_id": "LOC-01",
+          "team_id": "home"
+        },
+        "rafi": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        },
+        "ferreira": {
+          "location_id": "LOC-08",
+          "team_id": "rover"
+        }
+      }
+    },
+    "EX-CH08-S12": {
+      "playable_actor_id": "mei",
+      "actors": {
+        "kai": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "amara": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "mei": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "rafi": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        },
+        "ferreira": {
+          "location_id": "LOC-03",
+          "team_id": "base"
+        }
+      }
+    }
+  }
+}

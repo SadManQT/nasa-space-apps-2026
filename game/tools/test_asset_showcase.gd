@@ -5,11 +5,15 @@ const Showcase: PackedScene = preload("res://scenes/dev/asset_showcase.tscn")
 const CATEGORIES: Array[String] = ["characters", "plants", "props", "vehicles", "environment"]
 const HANDLE_RADIUS: float = 0.033   # PR_HandLight barrel, measured on the mesh
 
+var storage = preload("res://tools/support/isolated_storage.gd").new()
 var _level: Node3D
 var _checks: int = 0
 var _failures: int = 0
 
 func _init() -> void:
+	if not storage.setup("showcase"):
+		quit(1)
+		return
 	call_deferred("_run")
 
 func _run() -> void:
@@ -20,13 +24,22 @@ func _run() -> void:
 		_level.free()
 		quit(1)
 		return
+	var gate_output: Array = []
+	var gate_status := OS.execute("python3", ["-B", ProjectSettings.globalize_path("res://../production/tools/test_verify_gate.py")], gate_output, true)
+	_check(gate_status == 0 and "Ran 7 tests" in "\n".join(gate_output), "asset gate regressions reject failed Godot, empty output and missing expected records")
 	_test_inventory()
 	_test_bounds()
 	_test_cutscene_list()
 	await _test_modal_input()
 	await _test_switching_and_holds()
 	_test_bounds()
-	_level.free()
+	current_scene = _level
+	_check(_level.title_button.focus_mode == Control.FOCUS_ALL and _level.title_button.pressed.is_connected(_level.return_to_title), "B19 showcase return action is keyboard accessible")
+	_level.title_button.pressed.emit()
+	await scene_changed
+	_check(current_scene != null and current_scene.get_node_or_null("TitleLayer/MainMenu") != null, "B19 showcase return action restores the production title")
+	current_scene.free()
+	storage.cleanup()
 	await process_frame
 	print("SHOWCASE RESULT: %s (%d checks, %d failures)" % ["PASS" if _failures == 0 else "FAIL", _checks, _failures])
 	quit(0 if _failures == 0 else 1)

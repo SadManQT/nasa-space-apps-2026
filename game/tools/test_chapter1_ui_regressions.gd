@@ -7,16 +7,15 @@ const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const SaveScript = preload("res://scripts/save/save_service.gd")
 const LegacyScript = preload("res://scripts/campaign/slice_state.gd")
 
+var storage = preload("res://tools/support/isolated_storage.gd").new()
+
 var checks := 0
 var failures := 0
 var _original_user_dir := ""
 
 func _init() -> void:
-	_original_user_dir = OS.get_user_data_dir()
-	ProjectSettings.set_setting("application/config/use_custom_user_dir", true)
-	ProjectSettings.set_setting("application/config/custom_user_dir_name", "LastLightAcademy-QA-UI-" + str(Time.get_ticks_usec()))
-	if OS.get_user_data_dir() == _original_user_dir or DirAccess.make_dir_recursive_absolute(OS.get_user_data_dir()) != OK:
-		push_error("UI regression test could not isolate its save directory.")
+	if not storage.setup("test_chapter1_ui_regressions"):
+		push_error("Unable to isolate test storage.")
 		quit(1)
 		return
 	call_deferred("_run")
@@ -25,6 +24,7 @@ func _run() -> void:
 	root.content_scale_size = Vector2i(1280, 720)
 	root.size = Vector2i(1280, 720)
 	var main := MainScene.instantiate()
+	storage.configure(main)
 	root.add_child(main)
 	await process_frame
 	var menu := main.get_node("TitleLayer/MainMenu") as MainMenu
@@ -120,45 +120,49 @@ func _run() -> void:
 	_check(stage != null and stage.process_mode != Node.PROCESS_MODE_DISABLED and stage.visible, "return to title restores its stage")
 	main.queue_free()
 	await process_frame
-	var before := FileAccess.get_file_as_string("user://last_light_expedition_v2.json")
+	var before := FileAccess.get_file_as_string(storage.path)
 	var invalid := CampaignScene.instantiate() as Chapter1Campaign
+	storage.configure(invalid)
 	invalid.initial_snapshot = {"schema_version": -1}
 	root.add_child(invalid)
 	await process_frame
-	_check(FileAccess.get_file_as_string("user://last_light_expedition_v2.json") == before, "rejected restore never replaces an existing checkpoint")
+	_check(FileAccess.get_file_as_string(storage.path) == before, "rejected restore never replaces an existing checkpoint")
 	_check(invalid.hud == null, "rejected restore does not start a replacement campaign")
 	invalid.queue_free()
 	await process_frame
 	var missing_route: Dictionary = JSON.parse_string(before)
 	missing_route.erase("route_runtime")
 	invalid = CampaignScene.instantiate() as Chapter1Campaign
+	storage.configure(invalid)
 	invalid.initial_snapshot = missing_route
 	root.add_child(invalid)
 	await process_frame
-	_check(invalid.hud == null and FileAccess.get_file_as_string(SaveScript.DEFAULT_PATH) == before, "missing route state rejects restore without erasing physical evidence")
+	_check(invalid.hud == null and FileAccess.get_file_as_string(storage.path) == before, "missing route state rejects restore without erasing physical evidence")
 	invalid.queue_free()
 	await process_frame
-	SaveScript.new().clear()
-	var corrupt := FileAccess.open(SaveScript.DEFAULT_PATH, FileAccess.WRITE)
+	SaveScript.new().clear(storage.path)
+	var corrupt := FileAccess.open(storage.path, FileAccess.WRITE)
 	corrupt.store_string("{}")
 	corrupt.close()
 	main = MainScene.instantiate()
+	storage.configure(main)
 	root.add_child(main)
 	main.call("_start_new_expedition")
 	var replacement := main.get("_replace_dialog") as ConfirmationDialog
-	_check(replacement != null and replacement.visible and FileAccess.get_file_as_string(SaveScript.DEFAULT_PATH) == "{}", "invalid occupied slot still requires explicit replacement")
+	_check(replacement != null and replacement.visible and FileAccess.get_file_as_string(storage.path) == "{}", "invalid occupied slot still requires explicit replacement")
 	_check((main.get_node("TitleLayer/MainMenu").get("_save_note") as Label).text.contains("could not"), "unreadable checkpoint error is shown on title")
 	main.queue_free()
 	await process_frame
-	SaveScript.new().clear()
-	LegacyScript.save_snapshot(LegacyScript.new_snapshot())
+	SaveScript.new().clear(storage.path)
+	LegacyScript.save_snapshot(LegacyScript.new_snapshot(), storage.legacy_path)
 	main = MainScene.instantiate()
+	storage.configure(main)
 	root.add_child(main)
-	_check(main.call("_load_campaign_snapshot").is_empty() and FileAccess.file_exists(LegacyScript.SAVE_PATH), "legacy checkpoint is preserved without inventing full-route evidence")
+	_check(main.call("_load_campaign_snapshot").is_empty() and FileAccess.file_exists(storage.legacy_path), "legacy checkpoint is preserved without inventing full-route evidence")
 	main.queue_free()
 	await process_frame
-	_check(SaveScript.new().clear() and LegacyScript.clear_save(), "UI fixture cleans its isolated save files")
-	DirAccess.remove_absolute(OS.get_user_data_dir())
+	_check(SaveScript.new().clear(storage.path) and LegacyScript.clear_save(storage.legacy_path), "UI fixture cleans its isolated save files")
+	storage.cleanup()
 	print("CHAPTER 1 UI REGRESSIONS: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
 

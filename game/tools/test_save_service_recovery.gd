@@ -11,6 +11,7 @@ var path := ""
 
 func _init() -> void:
 	path = OS.get_temp_dir().path_join("lla-save-recovery-%d-%d.json" % [OS.get_process_id(), Time.get_ticks_usec()])
+	_test_resumable_backup()
 	_test_missing_primary()
 	_test_invalid_snapshots()
 	_test_failed_writes()
@@ -110,3 +111,58 @@ func _check(condition: bool, message: String) -> void:
 	else:
 		failures += 1
 		print("  FAIL ", message)
+
+func _test_resumable_backup() -> void:
+	var campaign = preload("res://scripts/campaign/chapter1_campaign.gd")
+	service.session_validator = campaign.restore_session
+	for chapter in [1, 2, 3]:
+		service.clear(path)
+		var director = preload("res://scripts/core/campaign_director.gd").new()
+		director.new_campaign(preload("res://scripts/content/content_loader.gd").EXPECTED_CONTENT_REVISION)
+		var route: RefCounted
+		if chapter == 1: route = preload("res://scripts/missions/chapter1_route.gd").new(director)
+		elif chapter == 2: route = preload("res://scripts/missions/chapter2_route.gd").new(director)
+		else: route = preload("res://scripts/missions/extended_campaign_route.gd").new(director)
+		var valid: Dictionary = director.snapshot()
+		valid.chapter_id = "CH%02d" % chapter
+		valid.scene_id = route.current_scene_id()
+		valid.mission_id = route.current_mission_id()
+		valid["route_runtime"] = route.snapshot()
+		var seed_first := service.save(valid, path)
+		var seed_second := service.save(valid, path)
+		_check(bool(seed_first.get("accepted", false)) and bool(seed_second.get("accepted", false)), "B09 seeds resumable primary and backup for chapter %d" % chapter)
+		var backup := FileAccess.get_file_as_string(path + ".bak")
+		var cases: Array = []
+		var missing := valid.duplicate(true)
+		missing.erase("route_runtime")
+		cases.append(missing)
+		var bad_scene := valid.duplicate(true)
+		bad_scene.route_runtime.current_scene_id = "EX-CH99-S99"
+		cases.append(bad_scene)
+		for field in ["world", "scene_flags", "dialogue_acks", "retry_checkpoint"]:
+			var malformed := valid.duplicate(true)
+			malformed.route_runtime[field] = []
+			cases.append(malformed)
+		var boundary := valid.duplicate(true)
+		boundary.route_runtime.world.boundaries = {"airlock_exterior": []}
+		cases.append(boundary)
+		var roster := valid.duplicate(true)
+		roster.route_runtime.world.roster.mei = []
+		cases.append(roster)
+		if chapter == 2:
+			var pollen := valid.duplicate(true)
+			pollen.route_runtime.p03.care_dates = [42]
+			cases.append(pollen)
+			var recorder := valid.duplicate(true)
+			recorder.route_runtime.p04.mapping = []
+			cases.append(recorder)
+		for invalid in cases:
+			_check(not bool(service.save(invalid, path).get("accepted", false)), "B09 unresumable new saves reject before touching disk")
+			_write_text(path, JSON.stringify(invalid))
+			var recovered := service.load(path)
+			_check(bool(recovered.get("accepted", false)) and bool(recovered.get("recovered", false)) and FileAccess.get_file_as_string(path + ".bak") == backup, "B09 malformed nested runtime falls back without destroying the resumable backup")
+		var old := {"schema_version": 1, "save_id": "legacy", "resources": valid.resources}
+		_write_text(path, JSON.stringify(old))
+		_check(bool(service.load(path).get("recovered", false)), "B09 migrated state without a route cannot suppress a usable backup")
+	service.session_validator = Callable()
+	service.clear(path)
