@@ -33,6 +33,7 @@ const STAGES := [
 	"young",
 	"alive",
 	"naturally_dead",
+	"lost",
 	"archived_petal",
 ]
 
@@ -54,7 +55,7 @@ func new_plant(individual_id: String, lineage_id: String, stage: String, planted
 		"care_receipts": {},
 		"care_history": [],
 		"stress": {"thirst": 0, "cold": 0, "water": 0},
-		"alive": normalized_stage not in ["naturally_dead", "archived_petal"],
+		"alive": normalized_stage not in ["naturally_dead", "lost", "archived_petal"],
 		"natural_death": false,
 		"harvested": false,
 		"harvested_at": "",
@@ -167,6 +168,30 @@ func apply_care(plant: Dictionary, care_id: String, scenario_datetime: String) -
 	result["events"].append({"type": "plant_care_recorded", "individual_id": String(base.get("individual_id", "")), "care_id": care_key})
 	result["reason"] = "Dated care recorded once."
 	return result
+
+func validate_plant(plant: Dictionary) -> Dictionary:
+	var defaults := new_plant("validation", "", "seed", "2046-04-11 06:00 UTC")
+	for key in defaults:
+		var value = plant.get(key, null)
+		if defaults[key] is int:
+			if not (value is int or value is float) or not is_finite(float(value)) or float(value) != floor(float(value)) or float(value) < 0:
+				return {"valid": false, "reason": "Plant numeric state is invalid: " + key}
+		elif typeof(value) != typeof(defaults[key]):
+			return {"valid": false, "reason": "Plant state has an invalid type for " + key}
+	if int(plant.schema_version) != SCHEMA_VERSION or plant.individual_id.is_empty() or not STAGES.has(plant.stage):
+		return {"valid": false, "reason": "Plant schema, identity or stage is invalid."}
+	for key in defaults.stress:
+		var value = plant.stress.get(key, null)
+		if not (value is int or value is float) or not is_finite(float(value)) or float(value) < 0:
+			return {"valid": false, "reason": "Plant stress must be a finite nonnegative number."}
+	for entry in plant.care_history:
+		if not entry is Dictionary or not entry.get("care_id", null) is String or not entry.get("scenario_datetime", null) is String:
+			return {"valid": false, "reason": "Plant care history must contain dated care records."}
+	for receipt in plant.care_receipts.values():
+		if not receipt is Dictionary:
+			return {"valid": false, "reason": "Plant care receipts must contain Dictionaries."}
+	var canonical_reason := _canonical_identity_reason(plant)
+	return {"valid": canonical_reason.is_empty(), "reason": canonical_reason}
 
 func advance_to(plant: Dictionary, scenario_datetime: String) -> Dictionary:
 	var base := plant.duplicate(true)
@@ -320,6 +345,10 @@ func _operation(operation: String, plant: Dictionary, scenario_datetime: String)
 		"plant": plant.duplicate(true),
 		"scenario_datetime": scenario_datetime,
 	}
+	var validation := validate_plant(plant)
+	if not bool(validation.get("valid", false)):
+		result["reason"] = validation.get("reason", "Malformed plant state.")
+		return result
 	if String(plant.get("individual_id", "")).is_empty() or String(plant.get("planted_at", "")).is_empty():
 		result["reason"] = "Plant identity and planted_at are required primitive fields."
 		return result

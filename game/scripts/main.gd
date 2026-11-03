@@ -3,15 +3,16 @@ extends Node3D
 const CAMPAIGN_SCENE: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const MENU_SCENE: PackedScene = preload("res://scenes/ui/main_menu.tscn")
 const SaveScript = preload("res://scripts/save/save_service.gd")
-const StateScript = preload("res://scripts/core/campaign_state.gd")
 const LegacySliceState = preload("res://scripts/campaign/slice_state.gd")
 
 var _stage_camera: Camera3D
+var _stage_root: Node3D
 var _menu_layer: CanvasLayer
 var _menu: MainMenu
 var _campaign: Node3D
 var _replace_dialog: ConfirmationDialog
 var _save_service: SaveService
+var _load_notice := ""
 
 func _ready() -> void:
 	_save_service = SaveScript.new()
@@ -19,26 +20,29 @@ func _ready() -> void:
 	_show_title()
 
 func _build_stage() -> void:
+	_stage_root = Node3D.new()
+	_stage_root.name = "TitleStage"
+	add_child(_stage_root)
 	var environment := WorldEnvironment.new()
 	environment.environment = load("res://environments/look/character_look.tres") as Environment
-	add_child(environment)
+	_stage_root.add_child(environment)
 	var key := DirectionalLight3D.new()
 	key.rotation_degrees = Vector3(-42, -28, 0)
 	key.light_color = Color("#FFE5B5")
 	key.light_energy = 1.8
 	key.shadow_enabled = true
 	key.directional_shadow_max_distance = 50.0
-	add_child(key)
+	_stage_root.add_child(key)
 	var fill := DirectionalLight3D.new()
 	fill.rotation_degrees = Vector3(-25, 142, 0)
 	fill.light_color = Color("#9CC7FF")
 	fill.light_energy = 0.7
-	add_child(fill)
+	_stage_root.add_child(fill)
 	_stage_camera = Camera3D.new()
 	_stage_camera.position = Vector3(0.0, 2.7, 8.4)
 	_stage_camera.fov = 42.0
 	_stage_camera.current = true
-	add_child(_stage_camera)
+	_stage_root.add_child(_stage_camera)
 	_stage_camera.look_at(Vector3(0.0, 1.0, 0.0))
 	_add_box(Vector3(0.0, -0.24, 0.0), Vector3(14.0, 0.45, 9.0), Color("#1B2435"), false)
 	_add_box(Vector3(0.0, 2.2, -2.7), Vector3(11.0, 4.3, 0.18), Color("#273651"), false)
@@ -56,12 +60,14 @@ func _build_stage() -> void:
 	title.pixel_size = 0.0035
 	title.modulate = Color("#ECEEF0")
 	title.outline_size = 12
-	add_child(title)
+	_stage_root.add_child(title)
 
 func _show_title() -> void:
 	if _campaign != null and is_instance_valid(_campaign):
 		_campaign.queue_free()
 		_campaign = null
+	_stage_root.process_mode = Node.PROCESS_MODE_INHERIT
+	_stage_root.show()
 	_stage_camera.current = true
 	_menu_layer = CanvasLayer.new()
 	_menu_layer.name = "TitleLayer"
@@ -73,12 +79,13 @@ func _show_title() -> void:
 	_menu.science_requested.connect(_menu.open_science)
 	_menu.showcase_requested.connect(_open_showcase)
 	_menu.setup(_load_campaign_snapshot())
+	_show_load_notice()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _start_new_expedition() -> void:
-	if not _load_campaign_snapshot().is_empty():
+	if _save_slot_exists():
 		_replace_dialog = ConfirmationDialog.new()
-		_replace_dialog.title = "Replace verified checkpoint?"
+		_replace_dialog.title = "Replace existing checkpoint files?"
 		_replace_dialog.dialog_text = (
 			"This slot already contains an expedition. Starting here "
 			+ "will replace that save."
@@ -99,32 +106,49 @@ func _continue_expedition() -> void:
 	var snapshot := _load_campaign_snapshot()
 	if snapshot.is_empty():
 		_menu.setup({})
+		_show_load_notice()
 		return
 	_launch_campaign(snapshot)
 
 func _launch_campaign(snapshot: Dictionary) -> void:
+	var settings := _menu.accessibility_settings() if is_instance_valid(_menu) else {}
+	_stage_root.hide()
+	_stage_root.process_mode = Node.PROCESS_MODE_DISABLED
 	if _menu_layer != null:
 		_menu_layer.queue_free()
 		_menu_layer = null
 	_campaign = CAMPAIGN_SCENE.instantiate()
 	_campaign.set("initial_snapshot", snapshot)
+	_campaign.set("initial_accessibility", settings)
 	_campaign.connect("exit_requested", _show_title)
 	add_child(_campaign)
 	_stage_camera.current = false
 
 func _load_campaign_snapshot() -> Dictionary:
+	_load_notice = ""
 	if _save_service == null:
 		_save_service = SaveScript.new()
 	var saved: Dictionary = _save_service.load()
 	if bool(saved.get("accepted", false)):
+		if bool(saved.get("recovered", false)):
+			_load_notice = "Recovered checkpoint from backup."
+			if not bool(saved.get("repair_accepted", true)):
+				_load_notice += " Primary repair failed: " + String(saved.get("repair_reason", "unknown error"))
 		return saved.get("snapshot", {}).duplicate(true)
-	# Keep the original three-scene commissioning save readable while the full
-	# campaign uses its own validated v2 slot. The adapter never writes to the
-	# legacy file and Chapter1Campaign restores the route at the saved scene.
-	var legacy := LegacySliceState.load_snapshot()
-	if legacy.is_empty():
-		return {}
-	return StateScript.from_slice_snapshot(legacy)
+	if FileAccess.file_exists(SaveScript.DEFAULT_PATH) or FileAccess.file_exists(SaveScript.DEFAULT_PATH + ".bak"):
+		_load_notice = "Checkpoint could not be opened. Saved files are preserved; New Expedition requires explicit replacement."
+	elif FileAccess.file_exists(LegacySliceState.SAVE_PATH):
+		_load_notice = "Legacy commissioning checkpoint preserved. Its physical route cannot safely resume; choose New Expedition to replace it deliberately."
+	return {}
+
+func _save_slot_exists() -> bool:
+	return FileAccess.file_exists(SaveScript.DEFAULT_PATH) or FileAccess.file_exists(SaveScript.DEFAULT_PATH + ".bak") or FileAccess.file_exists(LegacySliceState.SAVE_PATH)
+
+func _show_load_notice() -> void:
+	if not _load_notice.is_empty() and is_instance_valid(_menu):
+		var note := _menu.get("_save_note") as Label
+		if note != null:
+			note.text = _load_notice
 
 func _open_showcase() -> void:
 	get_tree().change_scene_to_file("res://scenes/dev/asset_showcase.tscn")
@@ -135,13 +159,13 @@ func _add_model(path: String, position: Vector3, scale_value: float) -> void:
 		return
 	model.position = position
 	model.scale = Vector3.ONE * scale_value
-	add_child(model)
+	_stage_root.add_child(model)
 	ToonMaterials.apply_to_tree(model, false, true)
 
 func _add_box(position: Vector3, size: Vector3, color: Color, emissive: bool) -> StaticBody3D:
 	var body := StaticBody3D.new()
 	body.position = position
-	add_child(body)
+	_stage_root.add_child(body)
 	var collision := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
 	shape.size = size

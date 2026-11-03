@@ -5,7 +5,7 @@ class_name CampaignRoomContract
 ## Geometry and interaction state are built by CampaignRoom; this file owns
 ## names, adjacency-facing IDs, canonical dimensions and approved asset reuse.
 
-const ROOM_IDS := ["LOC-01", "LOC-02", "LOC-03", "LOC-04", "LOC-06"]
+const ROOM_IDS := ["LOC-01", "LOC-02", "LOC-03", "LOC-04", "LOC-05", "LOC-06", "LOC-07", "LOC-08", "LOC-09", "LOC-10", "LOC-11", "LOC-12"]
 
 const _ROOMS := {
 	"LOC-01": {
@@ -125,6 +125,26 @@ const _ROOMS := {
 			"safe_player": [0.0, 0.0, 2.0],
 		},
 	},
+	"LOC-05": {
+		"room_id": "LOC-05",
+		"name": "Transfer Interlock",
+		"canonical_name": "Sealed pollination transfer corridor",
+		"bounds_m": [10.0, 8.0],
+		"pressure": "pressurised",
+		"asset_ids": ["PR_Glovebox", "PR_PollinationKit", "PR_SampleHolder"],
+		"asset_paths": [
+			"res://assets/props/PR_Glovebox/PR_Glovebox.glb",
+			"res://assets/props/PR_PollinationKit/PR_PollinationKit.glb",
+			"res://assets/props/PR_SampleHolder/PR_SampleHolder.glb",
+		],
+		"boundary_ids": ["door_service_garden", "garden_viewing_shutter"],
+		"focus_targets": [
+			{"target_id": "transfer_carrier", "label": "Sealed transfer carrier", "verb": "Inspect", "position": [-2.5, 1.0, -1.6]},
+			{"target_id": "transfer_glove_ports", "label": "Paired glove ports", "verb": "Inspect", "position": [0.0, 1.0, -1.6]},
+			{"target_id": "transfer_microscope", "label": "Pollen microscope", "verb": "Inspect", "position": [2.5, 1.0, -1.6]},
+		],
+		"anchors": {"transfer_mei": [-2.2, 0.0, 1.5], "transfer_amara": [0.0, 0.0, 1.5], "transfer_rafi": [2.2, 0.0, 1.5], "transfer_player": [0.0, 0.0, 2.4]},
+	},
 	"LOC-06": {
 		"room_id": "LOC-06",
 		"name": "Exterior",
@@ -151,6 +171,130 @@ const _ROOMS := {
 			"exterior_airlock": [0.0, 0.0, 8.0],
 		},
 	},
+	"LOC-07": {
+		"room_id": "LOC-07",
+		"name": "Isolated Annex",
+		"canonical_name": "Expedition Zero isolated service annex",
+		"bounds_m": [10.0, 8.0],
+		"pressure": "pressurised",
+		"asset_ids": ["PR_HatchDoor", "PR_VaultCase", "PR_AnnexDrum", "PR_Recorder2034"],
+		"asset_paths": [
+			"res://assets/props/PR_HatchDoor/PR_HatchDoor.glb",
+			"res://assets/props/PR_VaultCase/PR_VaultCase.glb",
+			"res://assets/props/PR_AnnexDrum/PR_AnnexDrum.glb",
+			"res://assets/props/PR_Recorder2034/PR_Recorder2034.glb",
+		],
+		"boundary_ids": ["door_service_safe", "annex_isolation"],
+		"focus_targets": [
+			{"target_id": "annex_utility_feed", "label": "Annex utility isolation", "verb": "Use", "position": [-3.0, 1.0, -1.5]},
+			{"target_id": "annex_zero_gauge", "label": "Zero differential gauge", "verb": "Inspect", "position": [0.0, 1.0, -1.5]},
+			{"target_id": "annex_hatch_view", "label": "Safe hatch viewing port", "verb": "Inspect", "position": [3.0, 1.0, -1.5]},
+		],
+		"anchors": {"annex_mei": [-2.4, 0.0, 1.5], "annex_amara": [0.0, 0.0, 1.5], "annex_rafi": [2.4, 0.0, 1.5], "annex_player": [0.0, 0.0, 2.4]},
+	},
+	"LOC-08": {
+		"room_id": "LOC-08",
+		"name": "Rover Bay",
+		"canonical_name": "Aurora rover bay and handover",
+		"bounds_m": [14.0, 10.0],
+		"pressure": "pressurised",
+		"asset_ids": ["VH_Rover", "PR_VaultCase", "PR_SupplyBundles", "PR_Dosimeter"],
+		"asset_paths": [
+			"res://assets/vehicles/VH_Rover/VH_Rover.glb",
+			"res://assets/props/PR_VaultCase/PR_VaultCase.glb",
+			"res://assets/props/PR_SupplyBundles/PR_SupplyBundles.glb",
+			"res://assets/props/PR_Dosimeter/PR_Dosimeter.glb",
+		],
+		"boundary_ids": ["airlock_exterior", "rover_bay_door"],
+		"focus_targets": [
+			{"target_id": "rover_seal", "label": "Pressurised rover seal", "verb": "Inspect", "position": [-3.0, 1.0, -1.5]},
+			{"target_id": "rover_loadout", "label": "Rover loadout and provisions", "verb": "Inspect", "position": [0.0, 1.0, -1.5]},
+			{"target_id": "base_handover", "label": "Base handover screen", "verb": "Inspect", "position": [3.0, 1.0, -1.5]},
+		],
+		"anchors": {"rover_rafi": [-3.0, 0.0, 1.5], "rover_kai": [0.0, 0.0, 1.5], "rover_player": [3.0, 0.0, 1.5]},
+	},
+	"LOC-09": {
+		"room_id": "LOC-09",
+		"name": "Surveyed Ridge",
+		"canonical_name": "Cold-trap surveyed ridge",
+		"bounds_m": [30.0, 30.0],
+		"pressure": "vacuum",
+		"asset_ids": ["EN_ExteriorModule", "EN_SolarMast", "PR_IceScanner", "PR_SurveyBeacon"],
+		"asset_paths": [
+			"res://assets/environment/EN_ExteriorModule/EN_ExteriorModule.glb",
+			"res://assets/environment/EN_SolarMast/EN_SolarMast.glb",
+			"res://assets/props/PR_IceScanner/PR_IceScanner.glb",
+			"res://assets/props/PR_SurveyBeacon/PR_SurveyBeacon.glb",
+		],
+		"boundary_ids": ["airlock_exterior", "ridge_route_boundary"],
+		"focus_targets": [
+			{"target_id": "ridge_route_card", "label": "Surveyed ridge route card", "verb": "Inspect", "position": [-5.0, 1.0, -4.0]},
+			{"target_id": "ridge_beacon_pad", "label": "Repeater beacon pad", "verb": "Use", "position": [0.0, 0.6, -4.0]},
+			{"target_id": "ice_scanner", "label": "Calibrated ice scanner", "verb": "Use", "position": [5.0, 0.8, -4.0]},
+		],
+		"anchors": {"ridge_rafi": [-2.0, 0.0, 2.0], "ridge_kai": [2.0, 0.0, 2.0], "ridge_player": [0.0, 0.0, 4.0]},
+	},
+	"LOC-10": {
+		"room_id": "LOC-10",
+		"name": "Cold-trap Vault",
+		"canonical_name": "Sealed cold-trap vault approach",
+		"bounds_m": [24.0, 24.0],
+		"pressure": "vacuum",
+		"asset_ids": ["PR_VaultCase", "PR_SampleHolder", "PR_RepairClamp"],
+		"asset_paths": [
+			"res://assets/props/PR_VaultCase/PR_VaultCase.glb",
+			"res://assets/props/PR_SampleHolder/PR_SampleHolder.glb",
+			"res://assets/props/PR_RepairClamp/PR_RepairClamp.glb",
+		],
+		"boundary_ids": ["ridge_route_boundary", "vault_recovery_boundary"],
+		"focus_targets": [
+			{"target_id": "vault_probe", "label": "Vault external probe", "verb": "Use", "position": [-4.0, 0.8, -3.0]},
+			{"target_id": "vault_sleeve", "label": "Insulated sleeve and cradle", "verb": "Use", "position": [0.0, 0.8, -3.0]},
+			{"target_id": "vault_case", "label": "Closed biological case", "verb": "Inspect", "position": [4.0, 0.8, -3.0]},
+		],
+		"anchors": {"vault_rafi": [-2.0, 0.0, 2.0], "vault_kai": [2.0, 0.0, 2.0], "vault_player": [0.0, 0.0, 4.0]},
+	},
+	"LOC-11": {
+		"room_id": "LOC-11",
+		"name": "Relay Route",
+		"canonical_name": "Surveyed relay route and repeater sectors",
+		"bounds_m": [60.0, 20.0],
+		"pressure": "vacuum",
+		"asset_ids": ["VH_Rover", "PR_SurveyBeacon", "PR_RelayController", "PR_UplinkFeedthrough"],
+		"asset_paths": [
+			"res://assets/vehicles/VH_Rover/VH_Rover.glb",
+			"res://assets/props/PR_SurveyBeacon/PR_SurveyBeacon.glb",
+			"res://assets/props/PR_RelayController/PR_RelayController.glb",
+			"res://assets/props/PR_UplinkFeedthrough/PR_UplinkFeedthrough.glb",
+		],
+		"boundary_ids": ["airlock_exterior", "relay_route_boundary"],
+		"focus_targets": [
+			{"target_id": "relay_route_console", "label": "Relay route console", "verb": "Inspect", "position": [-5.0, 1.0, -3.0]},
+			{"target_id": "repeater_chain", "label": "Three repeater buoys", "verb": "Use", "position": [0.0, 0.8, -3.0]},
+			{"target_id": "relay_controller", "label": "Relay controller housing", "verb": "Use", "position": [5.0, 1.0, -3.0]},
+		],
+		"anchors": {"relay_kai": [-2.0, 0.0, 2.0], "relay_rafi": [2.0, 0.0, 2.0], "relay_player": [0.0, 0.0, 4.0]},
+	},
+	"LOC-12": {
+		"room_id": "LOC-12",
+		"name": "Malapert Relay",
+		"canonical_name": "Malapert relay service bay",
+		"bounds_m": [18.0, 12.0],
+		"pressure": "pressurised",
+		"asset_ids": ["PR_RelayController", "PR_UplinkFeedthrough", "PR_HandLight"],
+		"asset_paths": [
+			"res://assets/props/PR_RelayController/PR_RelayController.glb",
+			"res://assets/props/PR_UplinkFeedthrough/PR_UplinkFeedthrough.glb",
+			"res://assets/props/PR_HandLight/PR_HandLight.glb",
+		],
+		"boundary_ids": ["relay_route_boundary", "relay_service_boundary"],
+		"focus_targets": [
+			{"target_id": "relay_isolator", "label": "Relay power isolator", "verb": "Use", "position": [-4.0, 1.0, -2.0]},
+			{"target_id": "relay_local_bearing", "label": "Local bearing control", "verb": "Use", "position": [0.0, 1.0, -2.0]},
+			{"target_id": "relay_earth_bearing", "label": "Earth bearing control", "verb": "Use", "position": [4.0, 1.0, -2.0]},
+		],
+		"anchors": {"relay_service_kai": [-3.0, 0.0, 2.0], "relay_service_rafi": [3.0, 0.0, 2.0], "relay_service_player": [0.0, 0.0, 4.0]},
+	},
 }
 
 const _SCENE_ROOMS := {
@@ -166,6 +310,10 @@ const _SCENE_ROOMS := {
 	"EX-CH01-S10": "LOC-04",
 	"EX-CH01-S11": "LOC-03",
 	"EX-CH01-S12": "LOC-03",
+	"EX-CH02-S01": "LOC-03", "EX-CH02-S02": "LOC-03", "EX-CH02-S03": "LOC-05",
+	"EX-CH02-S04": "LOC-05", "EX-CH02-S05": "LOC-05", "EX-CH02-S06": "LOC-03",
+	"EX-CH02-S07": "LOC-01", "EX-CH02-S08": "LOC-02", "EX-CH02-S09": "LOC-02",
+	"EX-CH02-S10": "LOC-02", "EX-CH02-S11": "LOC-01", "EX-CH02-S12": "LOC-01",
 }
 
 static func room_ids() -> Array:
@@ -177,7 +325,32 @@ static func room(room_id: String) -> Dictionary:
 	return (_ROOMS[room_id] as Dictionary).duplicate(true)
 
 static func room_for_scene(scene_id: String) -> String:
-	return String(_SCENE_ROOMS.get(scene_id, "LOC-01"))
+	if _SCENE_ROOMS.has(scene_id):
+		return String(_SCENE_ROOMS[scene_id])
+	return _extended_room_for_scene(scene_id)
+
+static func _extended_room_for_scene(scene_id: String) -> String:
+	var parts := scene_id.split("-")
+	if parts.size() != 3:
+		return "LOC-01"
+	var chapter := int(String(parts[1]).trim_prefix("CH"))
+	var order := int(String(parts[2]).trim_prefix("S"))
+	match chapter:
+		2:
+			return ["LOC-03", "LOC-03", "LOC-05", "LOC-05", "LOC-05", "LOC-03", "LOC-01", "LOC-02", "LOC-02", "LOC-02", "LOC-01", "LOC-01"][order - 1]
+		3:
+			return ["LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-07", "LOC-07", "LOC-07", "LOC-03", "LOC-03", "LOC-03", "LOC-01"][order - 1]
+		4:
+			return ["LOC-08", "LOC-08", "LOC-08", "LOC-09", "LOC-09", "LOC-10", "LOC-10", "LOC-10", "LOC-08", "LOC-03", "LOC-01", "LOC-01"][order - 1]
+		5:
+			return ["LOC-08", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-02", "LOC-01", "LOC-01", "LOC-01", "LOC-03"][order - 1]
+		6:
+			return ["LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-01", "LOC-02", "LOC-01", "LOC-01", "LOC-02", "LOC-01", "LOC-03"][order - 1]
+		7:
+			return ["LOC-01", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-01", "LOC-01", "LOC-02", "LOC-01"][order - 1]
+		8:
+			return ["LOC-08", "LOC-08", "LOC-11", "LOC-11", "LOC-03", "LOC-08", "LOC-12", "LOC-12", "LOC-12", "LOC-11", "LOC-08", "LOC-03"][order - 1]
+	return "LOC-01"
 
 static func scene_room_map() -> Dictionary:
 	return _SCENE_ROOMS.duplicate(true)

@@ -95,6 +95,43 @@ func set_door_open(boundary_id: String, is_open: bool) -> bool:
 			return true
 	return false
 
+func apply_plant_state(plants: Array) -> void:
+	if room_id != "LOC-03" or visual_root == null:
+		return
+	for individual in ["ALO-01", "TARA-01"]:
+		var stage := "seed"
+		for plant in plants:
+			if plant is Dictionary and String(plant.get("individual_id", "")) == individual:
+				stage = String(plant.get("stage", "seed"))
+		var prefix := "PL_Alo_" if individual == "ALO-01" else "PL_Tara_"
+		for model in visual_root.get_children():
+			if String(model.name).begins_with(prefix):
+				model.hide()
+		var asset := ""
+		if individual == "ALO-01":
+			asset = {"bud": "PL_Alo_Bud", "bloom": "PL_Alo_Bloom", "pollinated": "PL_Alo_Bloom", "pod_bearing": "PL_Alo_Pods", "mature_pods": "PL_Alo_Pods", "mature_dry": "PL_Alo_Pods"}.get(stage, "")
+		elif stage in ["bloom", "pollinated"]:
+			asset = "PL_Tara_Bloom"
+		var focus_id := "garden_alo_glove_port" if individual == "ALO-01" else "garden_tara_bay"
+		var focus := focus_root.get_node_or_null("Focus_" + focus_id) as Node3D
+		if focus != null:
+			(focus.get_child(0) as Label3D).text = String(focus.get_meta("focus_label")) + " · " + stage.to_upper()
+		# shortcut: label early stages until approved Alo/Tara seedlings and Tara buds exist.
+		if asset.is_empty() or not load_approved_assets:
+			continue
+		var model := visual_root.get_node_or_null(asset) as Node3D
+		if model == null:
+			model = AssetGeometryScript.load_glb("res://assets/plants/%s/%s.glb" % [asset, asset])
+			if model == null:
+				continue
+			model.name = asset
+			model.scale = Vector3.ONE * 0.85
+			visual_root.add_child(model)
+			ToonMaterialsScript.apply_to_tree(model, false, true)
+		if focus != null:
+			model.position = Vector3(focus.position.x, 0.0, focus.position.z)
+		model.show()
+
 func _node_root(node_name: String) -> Node3D:
 	var existing := get_node_or_null(node_name) as Node3D
 	if existing != null:
@@ -158,6 +195,13 @@ func _build_focus_targets(contract: Dictionary) -> void:
 		node.set_meta("verb", String(target.get("verb", "Inspect")))
 		node.set_meta("room_id", room_id)
 		focus_root.add_child(node)
+		var label := Label3D.new()
+		label.text = String(target.get("label", node.name))
+		label.position.y = 0.45
+		label.font_size = 28
+		label.pixel_size = 0.002
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		node.add_child(label)
 
 func _build_pressure_markers(contract: Dictionary) -> void:
 	for raw_boundary in contract.get("boundary_ids", []):

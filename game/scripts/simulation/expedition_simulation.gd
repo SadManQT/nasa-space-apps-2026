@@ -11,6 +11,7 @@ const BASE_PROFILE_REVISION := "p02-base-v1"
 const SHIFT_COUNT := 7
 const SHIFT_HOURS := 7.2
 const ResultScript = preload("res://scripts/core/command_result.gd")
+const StateScript = preload("res://scripts/core/campaign_state.gd")
 
 const UPGRADE_IDS := {
 	1: {"A": "taller_mast", "B": "fuel_cell"},
@@ -93,6 +94,12 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 	if not snapshot.has("resources"):
 		result["reason"] = "A P-02 snapshot must contain primitive resources."
 		return result
+	if String(snapshot.get("status", "")) == "mission_stopped":
+		result["reason"] = "This attempt is stopped; restore its checkpoint before another shift."
+		return result
+	if not StateScript.is_scenario_datetime(String(snapshot.get("scenario_datetime", ""))):
+		result["reason"] = "A P-02 transition requires a valid scenario UTC date and minute."
+		return result
 	var shifts := _extract_shifts(plan)
 	if shifts.is_empty():
 		result["reason"] = "A P-02 plan must provide one shift or a seven-shift array."
@@ -116,7 +123,7 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 	resources["crate_capacity"] = int(modifiers["crate_capacity"])
 
 	var stopped := false
-	var blackout_count := 0
+	var blackout_count := int(snapshot.get("blackout_count", 0))
 	for offset in range(shifts.size()):
 		var shift_number := starting_shift + offset + 1
 		var raw_step = shifts[offset]
@@ -239,7 +246,8 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 			crop_delta -= 1
 		resources["H"] = _apply_non_resurrecting(int(resources.get("H", 0)), health_delta, 10)
 		resources["C"] = _apply_non_resurrecting(int(resources.get("C", 0)), crop_delta, 10)
-		resources["R"] = _round_tenth(float(resources.get("R", 0.0)) - 1.2)
+		var food_shortfall := float(resources.get("R", 0.0)) < 1.2
+		resources["R"] = 0.0 if food_shortfall else _round_tenth(float(resources.get("R", 0.0)) - 1.2)
 
 		var causes: Array = []
 		if blackout:
@@ -282,9 +290,20 @@ func _transition(snapshot: Dictionary, command_id: String, expected_revision: in
 		if int(resources.get("A", 0)) <= 0:
 			stopped = true
 			result["unsafe_predicates"].append("air_depleted_shift_%d" % shift_number)
+		if int(resources.get("Z", 0)) > 3:
+			stopped = true
+			result["unsafe_predicates"].append("exposure_limit_exceeded_shift_%d" % shift_number)
+		if food_shortfall:
+			stopped = true
+			result["unsafe_predicates"].append("resupply_required_shift_%d" % shift_number)
 		if int(resources.get("H", 0)) <= 0:
 			result["warnings"].append("Alo is terminal within this attempt; later care cannot resurrect the plant.")
 		working["current_shift"] = shift_number
+		var date_text := String(working.get("scenario_datetime", "")).trim_suffix(" UTC").replace(" ", "T")
+		if date_text.length() == 16:
+			date_text += ":00"
+		var elapsed_seconds := int(Time.get_unix_time_from_datetime_string(date_text)) + int(SHIFT_HOURS * 3600)
+		working["scenario_datetime"] = Time.get_datetime_string_from_unix_time(elapsed_seconds, true).substr(0, 16) + " UTC"
 		if stopped:
 			break
 

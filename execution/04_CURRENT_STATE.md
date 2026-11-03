@@ -14,9 +14,12 @@ completion claim.
 The production boot is now wired to `game/scenes/campaign/chapter1_campaign.tscn`.
 `main.gd` injects the full content/director/route/save stack, and the six-check
 production session smoke passes with exit code 0. The old commissioning scene and
-legacy save adapter remain available for compatibility. The visual/learner/device
-review, Windows export, runtime audio, Chapters 2–8 and final endings/credits are
-still open.
+legacy save adapter remain available for compatibility. The later route batch now
+passes Chapter 2 **94/94**, Chapters 3–8 **452/452**, later runtime **7/7** and
+production session **8/8**. Chapter 1 flow/UI/logic pass **90/90**, **32/32** and
+**34/34**; save recovery passes **34/34**. The visual/learner/device review,
+Windows export, runtime audio and final credits presentation are still open. This
+verified batch remains uncommitted pending the next command.
 
 The earlier 27 October snapshot below remains a historical baseline. The current
 implementation has advanced beyond that bounded bootstrap; retain its older claims
@@ -38,9 +41,15 @@ Checked locally on 27 October 2026 against `ca01433`, which matched fetched `ori
 
 ## Major remaining integration
 
-`game/project.godot` has no configured application main scene. There are no completed campaign mission scripts or assembled Chapter 1 rooms. The imported props are geometry inventory, not finished world interactions. The first priority is a bootable Chapter 1 route connecting room assembly, state, simulation, planting/care, planning UI, exclusive storm response, debrief and checkpoint recovery.
+The current project has a configured production main scene and verified Chapter 1–8
+route contracts. Remaining release work is visual/learner/device review, runtime
+audio and cutscene integration, final credits presentation, performance checks,
+Windows export and release QA. The commissioning-only path remains as compatibility
+coverage.
 
-Complete campaign UI, plant lifecycle/stress coverage, remaining environments, fitted EVA/outfit variants, full audio, remaining anime cutscenes, save/load and the full 32 mission progression still require implementation and verification. Some items may have advanced since this snapshot: inspect before creating duplicates.
+The full 32-mission progression is functionally traversable in the current route
+fixtures, but it still requires the release reviews listed above; do not infer visual
+or platform acceptance from headless functional checks.
 
 ## Conflicts every executor must resolve correctly
 

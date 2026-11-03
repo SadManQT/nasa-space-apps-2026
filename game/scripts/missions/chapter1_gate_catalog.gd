@@ -172,6 +172,7 @@ static func _target(target_id: String, room_id: String, label: String, physical_
 		"target_id": target_id,
 		"room_id": room_id,
 		"focus_label": label,
+		"world_focus_id": _world_focus_id(target_id, room_id),
 		"verb": "Inspect" if physical_flag.ends_with("inspected") or physical_flag in ["commission_result_inspected", "packet_inspected"] else "Use",
 		"command_verb": "set_phase",
 		"command_target_id": "WORLD_PHYSICAL",
@@ -185,6 +186,26 @@ static func _target(target_id: String, room_id: String, label: String, physical_
 		"range_m": 3.0,
 		"line_of_sight_required": false,
 	}
+
+static func _world_focus_id(target_id: String, room_id: String) -> String:
+	match room_id:
+		"LOC-01":
+			if target_id == "charter_card": return "commons_charter"
+			if target_id == "ack_earth_set": return "commons_earth_screen"
+			return "commons_mission_table"
+		"LOC-02":
+			if target_id == "test_hand_light": return "service_hand_light"
+			if target_id == "care_montage": return "service_air_console"
+			return "service_power_panel"
+		"LOC-03":
+			if target_id.contains("tara"): return "garden_tara_bay"
+			if target_id == "open_shutter": return "garden_shutter"
+			if target_id in ["verify_exposure_order", "return_water", "p02_shifts6_7", "review_outcome", "record_paired_conditions", "confirm_services", "complete_debrief"]: return "garden_probe"
+			return "garden_alo_glove_port"
+		"LOC-04":
+			if target_id in ["roll_call", "shelter_drill", "confirm_four_sheltered"]: return "safe_roll_call_board"
+			return "safe_response_controls"
+	return ""
 
 static func _p01_target(target_id: String, room_id: String, label: String, action: String, mission_id: String, scene_id: String, required_flags: Array = []) -> Dictionary:
 	var result := _target(target_id, room_id, label, "", mission_id, scene_id, required_flags)

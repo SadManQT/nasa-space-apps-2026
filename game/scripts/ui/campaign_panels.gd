@@ -196,10 +196,16 @@ func _build() -> void:
 	var divider := HSeparator.new()
 	divider.modulate = Color(0.32, 0.52, 0.72, 0.7)
 	page.add_child(divider)
+	var scroll := ScrollContainer.new()
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
+	page.add_child(scroll)
 	_body = VBoxContainer.new()
 	_body.add_theme_constant_override("separation", 9)
 	_body.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	page.add_child(_body)
+	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(_body)
 	var footer := HBoxContainer.new()
 	footer.alignment = BoxContainer.ALIGNMENT_END
 	footer.add_theme_constant_override("separation", 8)
@@ -212,6 +218,7 @@ func _render_active_panel() -> void:
 	if _active_panel.is_empty() or not PANEL_DEFINITIONS.has(_active_panel):
 		return
 	for child in _body.get_children():
+		_body.remove_child(child)
 		child.queue_free()
 	var definition: Dictionary = PANEL_DEFINITIONS[_active_panel]
 	_title.text = String(definition.get("title", _active_panel.to_upper()))
@@ -300,6 +307,7 @@ func _render_settings() -> void:
 	_body.add_child(intro)
 	for key in ["captions", "large_text", "timer_free", "reduced_motion"]:
 		var check := CheckButton.new()
+		check.name = key
 		check.text = _setting_label(key)
 		check.button_pressed = bool(_settings.get(key, false))
 		check.focus_mode = Control.FOCUS_ALL
@@ -319,6 +327,11 @@ func _render_settings() -> void:
 	_body.add_child(labels)
 
 func _set_settings(settings: Dictionary, emit_change: bool) -> void:
+	var focus_key := ""
+	if emit_change and is_inside_tree():
+		var focused := get_viewport().gui_get_focus_owner()
+		if focused is CheckButton and _body.is_ancestor_of(focused):
+			focus_key = String(focused.name)
 	for key in _settings.keys():
 		if settings.has(key):
 			_settings[key] = bool(settings[key])
@@ -329,6 +342,9 @@ func _set_settings(settings: Dictionary, emit_change: bool) -> void:
 		emit_command("set_accessibility", "accessibility", copy, "accessibility")
 		if _active_panel == "settings_accessibility":
 			_render_active_panel()
+			var next_focus := _body.get_node_or_null(focus_key) as Control if not focus_key.is_empty() else null
+			if next_focus != null:
+				next_focus.grab_focus()
 
 func _setting_label(key: String) -> String:
 	return {

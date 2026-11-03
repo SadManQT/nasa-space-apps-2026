@@ -40,9 +40,23 @@ func snapshot() -> Dictionary:
 	return _state.duplicate(true)
 
 func restore(snapshot_data: Dictionary) -> Dictionary:
-	if not snapshot_data is Dictionary or not snapshot_data.has("receipts"):
-		return {"accepted": false, "reason": "P-01 snapshot is missing primitive receipts."}
+	for key in _state:
+		if not snapshot_data.has(key):
+			return {"accepted": false, "reason": "P-01 snapshot is missing " + key}
+		var value = snapshot_data[key]
+		if _state[key] is int:
+			if not (value is int or value is float) or not is_finite(float(value)) or float(value) != floor(float(value)) or float(value) < 0:
+				return {"accepted": false, "reason": "P-01 numeric state is invalid."}
+		elif typeof(value) != typeof(_state[key]):
+			return {"accepted": false, "reason": "P-01 snapshot has an invalid type for " + key}
+	if int(snapshot_data.cassette_alo_seed_count) > 1 or int(snapshot_data.cassette_tara_seed_count) > 1 or int(snapshot_data.moisture_alo) > 100 or int(snapshot_data.moisture_tara) > 100:
+		return {"accepted": false, "reason": "P-01 cassette values are outside their bounds."}
+	for receipt in snapshot_data.receipts.values():
+		if not receipt is Dictionary:
+			return {"accepted": false, "reason": "P-01 receipts must contain Dictionaries."}
 	_state = snapshot_data.duplicate(true)
+	for receipt in _state.receipts.values():
+		receipt.erase("state")
 	return {"accepted": true, "snapshot": snapshot()}
 
 func preview(action: String, payload: Dictionary = {}) -> Dictionary:
@@ -67,6 +81,7 @@ func commit(action: String, command_id: String, payload: Dictionary = {}) -> Dic
 	if receipts.has(command_id):
 		var duplicate: Dictionary = receipts[command_id].duplicate(true)
 		duplicate["duplicate"] = true
+		duplicate["state"] = snapshot()
 		return duplicate
 	var check := _validate(action, payload)
 	if not bool(check.get("accepted", false)):
@@ -82,7 +97,9 @@ func commit(action: String, command_id: String, payload: Dictionary = {}) -> Dic
 		"state": next.duplicate(true),
 		"reason": "P-01 physical step committed once.",
 	}
-	next["receipts"][command_id] = result.duplicate(true)
+	var receipt := result.duplicate(true)
+	receipt.erase("state")
+	next["receipts"][command_id] = receipt
 	_state = next
 	return result.duplicate(true)
 

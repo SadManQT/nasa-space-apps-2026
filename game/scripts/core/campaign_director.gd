@@ -42,10 +42,11 @@ func new_campaign(content_revision: String = "") -> Dictionary:
 	_checkpoint = _state.duplicate(true)
 	return _state.duplicate(true)
 
-func restore_snapshot(snapshot: Dictionary) -> Dictionary:
-	if not StateScript.is_compatible(snapshot):
+func restore_snapshot(snapshot: Dictionary, expected_content_revision: String = "") -> Dictionary:
+	if not StateScript.is_compatible(snapshot, expected_content_revision):
 		return _reject("Campaign snapshot is incompatible with the current state schema.")
 	_state = snapshot.duplicate(true)
+	_state.erase("route_runtime")
 	_checkpoint = _state.duplicate(true)
 	return {
 		"accepted": true,
@@ -109,10 +110,10 @@ func commit(command: Dictionary) -> Dictionary:
 	var current_revision := int(_state.get("state_revision", 0))
 	if int(command.get("expected_state_revision", -1)) != current_revision:
 		return _reject("This command is stale; no resource or world state changed.")
-	_checkpoint = _state.duplicate(true)
 	var result := _transition(command, true)
 	if not bool(result.get("accepted", false)):
 		return result
+	_checkpoint = _state.duplicate(true)
 	var next: Dictionary = result.get("snapshot", _state).duplicate(true)
 	next["state_revision"] = current_revision + 1
 	var receipt_id := String(result.get("receipt_id", ""))
@@ -215,6 +216,7 @@ func _transition(command: Dictionary, should_commit: bool) -> Dictionary:
 		else:
 			next["scene_phase"] = String(result.get("next_phase", "planning"))
 			next["status"] = "mission_stopped" if String(result.get("ending", "")) == "MISSION_STOPPED" else ("complete" if int(next.get("current_shift", 0)) >= 7 else "active")
+			_advance_plants(next)
 		result["snapshot"] = next
 		return result
 	if verb == "acknowledge_line":
@@ -233,7 +235,7 @@ func _transition(command: Dictionary, should_commit: bool) -> Dictionary:
 		return result
 	if verb == "advance_time":
 		var target_date := String(payload.get("scenario_datetime", ""))
-		if target_date.is_empty() or target_date <= String(_state.get("scenario_datetime", "")):
+		if not StateScript.is_scenario_datetime(target_date) or target_date <= String(_state.get("scenario_datetime", "")):
 			return _reject("Dated transitions must move scenario time forward explicitly.")
 		var result := _generic_result(revision, should_commit, "time_advanced")
 		result["deltas"] = [{"field": "scenario_datetime", "from": String(_state.get("scenario_datetime", "")), "to": target_date}]
@@ -241,17 +243,51 @@ func _transition(command: Dictionary, should_commit: bool) -> Dictionary:
 			var next := _state.duplicate(true)
 			next["scenario_datetime"] = target_date
 			next["explicit_time_receipts"][String(command.get("command_id", ""))] = target_date
+			_advance_plants(next)
+			result["snapshot"] = next
+		return result
+	if verb == "apply_delta":
+		var requested = payload.get("deltas", {})
+		if not requested is Dictionary:
+			return _reject("Resource deltas must be a primitive Dictionary.")
+		var resources: Dictionary = _state.get("resources", {})
+		var next_resources := resources.duplicate(true)
+		var deltas: Array = []
+		for field in requested.keys():
+			var key := String(field)
+			if not next_resources.has(key) or not (requested[field] is float or requested[field] is int):
+				return _reject("Unknown or non-numeric resource delta: " + key)
+			var before := float(next_resources[key])
+			var after := before + float(requested[field])
+			var capacity_key: String = {"E": "energy_capacity", "A": "air_capacity", "H": "health_capacity", "W": "water_capacity", "K": "crate_capacity", "C": "crop_capacity"}.get(key, "")
+			if not capacity_key.is_empty():
+				after = minf(after, float(next_resources.get(capacity_key, after)))
+			if after < 0.0:
+				return _reject("Resource delta would make %s negative." % key)
+			next_resources[key] = after if key == "R" else int(after)
+			deltas.append({"field": "resources." + key, "from": before, "to": after})
+		var result := _generic_result(revision, should_commit, "resource_delta")
+		result["deltas"] = deltas
+		if should_commit:
+			var next := _state.duplicate(true)
+			next["resources"] = next_resources
 			result["snapshot"] = next
 		return result
 	if verb == "set_phase":
 		var phase := String(payload.get("phase", ""))
 		if phase.is_empty():
 			return _reject("A scene phase cannot be empty.")
+		if payload.has("scenario_datetime") and not StateScript.is_scenario_datetime(String(payload.scenario_datetime)):
+			return _reject("A dated scene phase requires a valid UTC date and minute.")
 		var result := _generic_result(revision, should_commit, "scene_phase_changed")
 		result["next_phase"] = phase
 		if should_commit:
 			var next := _state.duplicate(true)
 			next["scene_phase"] = phase
+			var target_date := String(payload.get("scenario_datetime", ""))
+			if target_date > String(next.get("scenario_datetime", "")):
+				next["scenario_datetime"] = target_date
+				_advance_plants(next)
 			result["snapshot"] = next
 		return result
 	if verb == "plant_care" or verb == "harvest_plant":
@@ -327,3 +363,15 @@ func _seed_initial_biology() -> void:
 	var tara_at_entry: Dictionary = _plant_service.advance_to(tara, "2046-04-25 00:00 UTC")
 	_state["plants"] = [alo_at_entry.get("plant", alo), tara_at_entry.get("plant", tara)]
 	_state["inventories"]["biology_ledgers"] = _plant_service.canonical_ledgers()
+
+func _advance_plants(next: Dictionary) -> void:
+	for index in range(next.get("plants", []).size()):
+		var plant: Dictionary = next.plants[index]
+		if String(plant.get("individual_id", "")) == "ALO-01" and int(next.resources.get("H", 0)) <= 0:
+			plant["stage"] = "lost"
+			plant["alive"] = false
+			plant["death_reason"] = "survival_attempt_failed"
+		elif bool(plant.get("alive", true)):
+			var advanced: Dictionary = _plant_service.advance_to(plant, String(next.scenario_datetime))
+			if bool(advanced.get("accepted", false)):
+				next.plants[index] = advanced.plant

@@ -20,6 +20,8 @@ var _status: Label
 var _targets: VBoxContainer
 var _next_line: Button
 var _advance: Button
+var _retry: Button
+var _modal_button_states := {}
 var _dialogue_index := 0
 var _scene_id := ""
 
@@ -32,6 +34,8 @@ func setup(value: Chapter1Campaign) -> void:
 	panels = PANELS_SCENE.instantiate() as CampaignPanels
 	add_child(panels)
 	panels.set_command_sink(Callable(runtime, "handle_ui_command"))
+	panels.panel_opened.connect(_on_panel_opened)
+	panels.panel_closed.connect(_on_panel_closed)
 	_refresh_query()
 	refresh_scene({})
 
@@ -49,14 +53,15 @@ func refresh_scene(_result: Dictionary = {}) -> void:
 	_render_caption()
 	_build_targets()
 	_refresh_query()
+	apply_accessibility()
 
 func refresh_after_action(result: Dictionary) -> void:
-	if result.has("reason"):
-		show_status(String(result.get("reason", "")))
 	if runtime != null:
 		_render_caption()
 		_build_targets()
 		_refresh_query()
+	if result.has("reason"):
+		show_status(String(result.get("reason", "")))
 
 func show_status(text: String) -> void:
 	if _status != null:
@@ -131,10 +136,10 @@ func _build() -> void:
 
 	var target_panel := _panel(Color(0.05, 0.08, 0.14, 0.92), 14, Color(0.13, 0.72, 0.78, 0.55))
 	target_panel.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
-	target_panel.offset_left = -400
-	target_panel.offset_right = -30
+	target_panel.offset_left = -464
+	target_panel.offset_right = -24
 	target_panel.offset_top = 110
-	target_panel.offset_bottom = 540
+	target_panel.offset_bottom = -212
 	add_child(target_panel)
 	var target_margin := MarginContainer.new()
 	target_margin.add_theme_constant_override("margin_left", 18)
@@ -150,15 +155,20 @@ func _build() -> void:
 	target_title.add_theme_color_override("font_color", CYAN)
 	target_title.add_theme_font_size_override("font_size", 14)
 	target_box.add_child(target_title)
+	var scroll := ScrollContainer.new()
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
+	target_box.add_child(scroll)
 	_targets = VBoxContainer.new()
 	_targets.add_theme_constant_override("separation", 7)
-	_targets.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	target_box.add_child(_targets)
+	_targets.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(_targets)
 	_status = Label.new()
 	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_status.add_theme_color_override("font_color", MUTED)
 	target_box.add_child(_status)
-	_advance = _button("ADVANCE AFTER PHYSICAL GATE  ›")
+	_advance = _button("ADVANCE SCENE  ›")
 	_advance.pressed.connect(_on_advance_pressed)
 	target_box.add_child(_advance)
 	var actions := HBoxContainer.new()
@@ -173,27 +183,59 @@ func _build() -> void:
 	var exit := _button("TITLE")
 	exit.pressed.connect(_on_exit_pressed)
 	actions.add_child(exit)
+	var tools := HBoxContainer.new()
+	tools.add_theme_constant_override("separation", 6)
+	target_box.add_child(tools)
+	var pause := _button("PAUSE")
+	pause.pressed.connect(func() -> void: panels.open_panel("pause"))
+	tools.add_child(pause)
+	var settings := _button("SETTINGS")
+	settings.pressed.connect(func() -> void: panels.open_panel("settings_accessibility"))
+	tools.add_child(settings)
+	_retry = _button("RETRY")
+	_retry.pressed.connect(func() -> void: runtime.retry_checkpoint())
+	tools.add_child(_retry)
+	var controls := Label.new()
+	controls.text = "WASD move · Hold RMB to look · E use nearby\nEsc pause · Tab / arrows / Enter select controls"
+	controls.position = Vector2(24, 248)
+	controls.add_theme_font_size_override("font_size", 13)
+	controls.add_theme_color_override("font_color", MUTED)
+	add_child(controls)
 
 func _build_targets() -> void:
 	if _targets == null or runtime == null:
 		return
 	for child in _targets.get_children():
+		_targets.remove_child(child)
 		child.queue_free()
-	var gate := runtime.route.gate_status()
+	var gate: Dictionary = runtime.route.gate_status()
+	var complete := runtime.is_chapter_complete()
 	for raw_target in runtime.targets_for_current_scene():
 		if not raw_target is Dictionary:
 			continue
 		var target: Dictionary = raw_target
-		var button := _button("USE · " + String(target.get("focus_label", target.get("target_id", "operation"))))
+		var node := runtime.physical_target(String(target.get("target_id", "")))
+		var label := String(node.get_meta("focus_label", "")) if node != null else "unavailable"
+		var button := _button("USE · " + String(target.get("focus_label", target.get("target_id", "operation"))) + "\nAT " + label)
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		button.disabled = complete or runtime.target_completed(target)
 		button.pressed.connect(func() -> void: runtime.perform_target(String(target.get("target_id", ""))))
 		_targets.add_child(button)
-	_advance.disabled = not bool(gate.get("ready", false))
-	if bool(gate.get("ready", false)):
+	_advance.disabled = complete or not bool(gate.get("ready", false))
+	_retry.disabled = complete or runtime.route.snapshot().get("retry_checkpoint", {}).is_empty()
+	if complete:
+		var chapter_number := str(int(String(runtime.query().get("chapter_id", "CH01")).trim_prefix("CH")))
+		_status.text = "CHAPTER %s COMPLETE · %s\nCheckpoint kept. Advance when the next chapter is ready." % [chapter_number, String(runtime.route.chapter_ready().get("ending", ""))]
+		_status.modulate = GREEN
+	elif bool(gate.get("ready", false)):
 		_status.text = "ALL PHYSICAL PREDICATES READY · advance explicitly."
 		_status.modulate = GREEN
 	else:
 		_status.text = "Missing: " + ", ".join(gate.get("missing", []))
 		_status.modulate = MUTED
+	if panels != null and not panels.active_panel().is_empty():
+		_set_modal_buttons(true)
+	apply_accessibility()
 
 func _render_caption() -> void:
 	if runtime == null:
@@ -242,6 +284,54 @@ func _refresh_query() -> void:
 	if panels != null and runtime != null:
 		panels.bind_query(runtime.query())
 
+func apply_accessibility() -> void:
+	if runtime == null:
+		return
+	var settings: Dictionary = runtime.query().get("accessibility", {})
+	_caption_speaker.visible = bool(settings.get("captions", true))
+	_caption_line.visible = bool(settings.get("captions", true))
+	_scale_text(self, 1.5 if bool(settings.get("large_text", false)) else 1.0)
+
+func _scale_text(node: Node, scale_factor: float) -> void:
+	for child in node.get_children():
+		if child == panels:
+			continue
+		if child is Control:
+			if not child.has_meta("lla_base_font_size"):
+				child.set_meta("lla_base_font_size", child.get_theme_font_size("font_size"))
+			child.add_theme_font_size_override("font_size", int(round(float(child.get_meta("lla_base_font_size")) * scale_factor)))
+		_scale_text(child, scale_factor)
+
+func _on_panel_opened(_panel_id: String) -> void:
+	runtime.set_ui_paused(true)
+	_set_modal_buttons(true)
+
+func _on_panel_closed(_panel_id: String) -> void:
+	runtime.set_ui_paused(false)
+	_set_modal_buttons(false)
+
+func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
+	if not disabled:
+		for button in _modal_button_states:
+			if is_instance_valid(button):
+				button.disabled = bool(_modal_button_states[button])
+		_modal_button_states.clear()
+		return
+	for child in node.get_children():
+		if child == panels:
+			continue
+		if child is BaseButton:
+			if not _modal_button_states.has(child):
+				_modal_button_states[child] = child.disabled
+			child.disabled = true
+		_set_modal_buttons(true, child)
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
+		if panels != null and panels.active_panel().is_empty():
+			panels.open_panel("pause")
+			get_viewport().set_input_as_handled()
+
 func _stack(control: Control) -> Control:
 	var box := VBoxContainer.new()
 	box.add_child(control)
@@ -251,6 +341,7 @@ func _button(text: String) -> Button:
 	var button := Button.new()
 	button.text = text
 	button.custom_minimum_size = Vector2(0, 38)
+	button.add_theme_font_size_override("font_size", 14)
 	button.focus_mode = Control.FOCUS_ALL
 	button.add_theme_color_override("font_color", IVORY)
 	button.add_theme_color_override("font_hover_color", Color("#05060A"))

@@ -37,7 +37,7 @@ func _test_room_contracts_and_loading() -> void:
 		"LOC-04": "res://scenes/campaign/rooms/safe_room.tscn",
 		"LOC-06": "res://scenes/campaign/rooms/exterior.tscn",
 	}
-	for room_id in RoomContract.room_ids():
+	for room_id in scene_paths:
 		var validation := RoomContract.validate(room_id)
 		_check(bool(validation.get("valid", false)), room_id + " room contract validates")
 		var contract := RoomContract.room(room_id)
@@ -162,10 +162,10 @@ func _test_registry_honesty() -> void:
 	var registry := RegistryScript.new()
 	var validation := registry.validate_honesty()
 	_check(bool(validation.get("valid", false)), "mission registry loads 32 canonical missions and exposes honest blocked gates")
-	_check(int(validation.get("status", {}).get("implemented_count", 0)) == 4 and int(validation.get("status", {}).get("unimplemented_count", 0)) == 28, "registry distinguishes the four Chapter 1 adapters from 28 unimplemented missions")
+	_check(int(validation.get("status", {}).get("implemented_count", 0)) == 8 and int(validation.get("status", {}).get("unimplemented_count", 0)) == 24, "registry distinguishes the four Chapter 1 and four Chapter 2 adapters from 24 unimplemented missions")
 	var later = registry.create("EX-M0201")
 	var later_status: Dictionary = later.status()
-	_check(String(later_status.get("status", "")) == "unimplemented" and later_status.get("blocked_gates", []).size() == 3 and not bool(later_status.get("can_complete", true)), "later mission status is explicitly unimplemented and cannot falsely complete")
+	_check(String(later_status.get("status", "")) in ["ready", "active", "complete"] and later_status.get("missing_scene_ids", []).size() == 3, "Chapter 2 mission status exposes its three physical scene gates")
 	var chapter_scene: PackedScene = load("res://scenes/campaign/missions/EX-M0101.tscn")
 	var mission_scene: Node = chapter_scene.instantiate()
 	_check(String(mission_scene.get("mission_id")) == "EX-M0101" and mission_scene.get("scene_ids").size() == 3, "EX-M0101 scene composition exposes its three canonical scenes")

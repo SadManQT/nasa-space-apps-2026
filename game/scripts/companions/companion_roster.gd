@@ -24,6 +24,48 @@ const _SCENE_LAYOUTS := {
 }
 
 static func scene_roster(scene_id: String) -> Dictionary:
+	if scene_id.begins_with("EX-CH02-"):
+		var order := int(scene_id.substr(9, 2))
+		var location: String = ["LOC-03", "LOC-03", "LOC-05", "LOC-05", "LOC-05", "LOC-03", "LOC-01", "LOC-02", "LOC-02", "LOC-02", "LOC-01", "LOC-01"][order - 1]
+		var prefix := "commons"
+		match location:
+			"LOC-03": prefix = "garden"
+			"LOC-05": prefix = "transfer"
+			"LOC-02": prefix = "service"
+		return {
+			"kai": {"actor_id": "kai", "physical_location_id": location, "anchor_id": prefix + "_kai", "team_id": "base", "present": true, "scene_id": scene_id},
+			"amara": {"actor_id": "amara", "physical_location_id": location, "anchor_id": prefix + "_amara", "team_id": "base", "present": true, "scene_id": scene_id},
+			"mei": {"actor_id": "mei", "physical_location_id": location, "anchor_id": prefix + "_mei", "team_id": "base", "present": true, "scene_id": scene_id},
+			"rafi": {"actor_id": "rafi", "physical_location_id": location, "anchor_id": prefix + "_rafi", "team_id": "base", "present": true, "scene_id": scene_id},
+			"ferreira": {"actor_id": "ferreira", "physical_location_id": "EARTH_SCREEN", "anchor_id": "ferreira_earth_screen", "team_id": "remote", "present": true, "scene_id": scene_id},
+		}
+	if scene_id.begins_with("EX-CH") and int(scene_id.substr(5, 2)) >= 3:
+		var parts := scene_id.split("-")
+		var chapter := int(String(parts[1]).trim_prefix("CH"))
+		var order := int(String(parts[2]).trim_prefix("S"))
+		var location: String = {
+			3: ["LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-07", "LOC-07", "LOC-07", "LOC-03", "LOC-03", "LOC-03", "LOC-01"],
+			4: ["LOC-08", "LOC-08", "LOC-08", "LOC-09", "LOC-09", "LOC-10", "LOC-10", "LOC-10", "LOC-08", "LOC-03", "LOC-01", "LOC-01"],
+			5: ["LOC-08", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-02", "LOC-01", "LOC-01", "LOC-01", "LOC-03"],
+			6: ["LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-01", "LOC-02", "LOC-01", "LOC-01", "LOC-02", "LOC-01", "LOC-03"],
+			7: ["LOC-01", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-01", "LOC-01", "LOC-02", "LOC-01"],
+			8: ["LOC-08", "LOC-08", "LOC-11", "LOC-11", "LOC-03", "LOC-08", "LOC-12", "LOC-12", "LOC-12", "LOC-11", "LOC-08", "LOC-03"],
+		}.get(chapter, ["LOC-01"])[order - 1]
+		var prefix := _room_prefix(location)
+		var team := "base"
+		var ferreira_location := "EARTH_SCREEN"
+		var ferreira_anchor := "ferreira_earth_screen"
+		if chapter == 8:
+			ferreira_location = "LOC-11"
+			ferreira_anchor = "relay_ferreira"
+			team = "rover"
+		return {
+			"kai": _scene_placement("kai", location, prefix + "_kai", team, scene_id),
+			"amara": _scene_placement("amara", location, prefix + "_amara", team, scene_id),
+			"mei": _scene_placement("mei", location, prefix + "_mei", team, scene_id),
+			"rafi": _scene_placement("rafi", location, prefix + "_rafi", team, scene_id),
+			"ferreira": _scene_placement("ferreira", ferreira_location, ferreira_anchor, "remote" if chapter < 8 else "rover", scene_id),
+		}
 	var source: Dictionary = _SCENE_LAYOUTS.get(scene_id, _SCENE_LAYOUTS["EX-CH01-S01"])
 	var result := {}
 	for actor_id in source.keys():
@@ -93,3 +135,13 @@ static func actor_locations(roster: Dictionary) -> Dictionary:
 
 static func _placement(actor_id: String, location_id: String, anchor_id: String, team_id: String) -> Dictionary:
 	return {"actor_id": actor_id, "physical_location_id": location_id, "anchor_id": anchor_id, "team_id": team_id, "present": true}
+
+static func _scene_placement(actor_id: String, location_id: String, anchor_id: String, team_id: String, scene_id: String) -> Dictionary:
+	return {"actor_id": actor_id, "physical_location_id": location_id, "anchor_id": anchor_id, "team_id": team_id, "present": true, "scene_id": scene_id}
+
+static func _room_prefix(room_id: String) -> String:
+	return {
+		"LOC-01": "commons", "LOC-02": "service", "LOC-03": "garden", "LOC-04": "safe",
+		"LOC-05": "transfer", "LOC-06": "exterior", "LOC-07": "annex", "LOC-08": "rover",
+		"LOC-09": "ridge", "LOC-10": "vault", "LOC-11": "relay", "LOC-12": "relay_service",
+	}.get(room_id, "commons")

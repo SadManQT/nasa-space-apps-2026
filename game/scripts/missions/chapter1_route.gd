@@ -7,6 +7,7 @@ const WorldRouteScript = preload("res://scripts/world/world_route.gd")
 const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const P01Script = preload("res://scripts/missions/p01_commission_plant.gd")
 const PuzzleHostScript = preload("res://scripts/puzzles/puzzle_host.gd")
+const StateScript = preload("res://scripts/core/campaign_state.gd")
 
 ## Chapter 1 mission composition and physical-gate adapter.
 ##
@@ -26,7 +27,7 @@ var _completed_scene_ids: Array = []
 var _p02_hosts := {}
 var _last_result := {}
 var _ending := ""
-var _retry_local_checkpoint := {}
+var _retry_checkpoint := {}
 
 func _init(director: RefCounted = null) -> void:
 	_director = director if director != null else DirectorScript.new()
@@ -37,6 +38,7 @@ func _init(director: RefCounted = null) -> void:
 		_scene_flags[scene_id] = {}
 		_dialogue_acks[scene_id] = []
 	_set_current_scene(0)
+	_retry_checkpoint = _checkpoint_snapshot()
 
 func director() -> RefCounted:
 	return _director
@@ -81,15 +83,23 @@ func inspect(context: Dictionary = {}) -> Dictionary:
 	return _dispatcher.inspect(_context(context))
 
 func use(payload: Dictionary = {}, context: Dictionary = {}) -> Dictionary:
-	return _dispatcher.use(payload, _context(context))
+	var target: Dictionary = _dispatcher.target(String(_dispatcher.state().get("focused_target_id", "")))
+	return _dispatcher.use(_payload_for_target(target, payload), _context(context))
 
 func preview(payload_override: Dictionary = {}) -> Dictionary:
 	return _dispatcher.preview(payload_override)
 
 func confirm(command_id_override: String = "", payload_override: Dictionary = {}) -> Dictionary:
+	var before := _checkpoint_snapshot()
+	var target_id := String(_dispatcher.state().get("focused_target_id", ""))
 	var result: Dictionary = _dispatcher.confirm(command_id_override, payload_override)
 	if bool(result.get("accepted", false)):
-		_apply_target_result(String(_dispatcher.state().get("focused_target_id", "")), {}, result)
+		if not bool(result.get("duplicate", false)) and (target_id.begins_with("p02_") or int(before.director.get("current_shift", 0)) == 0):
+			_retry_checkpoint = before
+		var frozen: Dictionary = _dispatcher.state().get("last_command", {}).get("payload", {}).duplicate(true)
+		for key in payload_override:
+			frozen[key] = payload_override[key]
+		_apply_target_result(target_id, frozen, result)
 	_last_result = result.duplicate(true)
 	return result
 
@@ -125,8 +135,6 @@ func perform(target_id: String, payload: Dictionary = {}, context: Dictionary = 
 			_last_result = {"accepted": bool(trace.preview.get("accepted", false)), "preview": trace.preview, "trace": trace, "physical_commit": false}
 			return _last_result.duplicate(true)
 		return {"accepted": false, "trace": trace, "reason": trace.preview.get("reason", "Shift 2 forecast rejected.")}
-	if target_id in ["p02_shift5_alarm", "p02_shifts6_7"]:
-		_retry_local_checkpoint = _local_snapshot()
 	trace["preview"] = preview()
 	if not bool(trace.preview.get("accepted", false)):
 		return {"accepted": false, "trace": trace, "reason": trace.preview.get("reason", "Preview rejected.")}
@@ -134,7 +142,6 @@ func perform(target_id: String, payload: Dictionary = {}, context: Dictionary = 
 	var result: Dictionary = trace.confirm
 	if not bool(result.get("accepted", false)):
 		return {"accepted": false, "trace": trace, "result": result, "reason": result.get("reason", "Commit rejected.")}
-	_apply_target_result(target_id, prepared, result)
 	_last_result = {"accepted": true, "trace": trace, "result": result.duplicate(true), "gate": gate_status()}
 	return _last_result.duplicate(true)
 
@@ -169,6 +176,8 @@ func gate_status(scene_id: String = "") -> Dictionary:
 	for flag in required:
 		if not _flag_is_set(String(flag)):
 			missing.append(String(flag))
+	if id in ["EX-CH01-S11", "EX-CH01-S12"] and not bool(chapter_ready().get("safe_ending", false)):
+		missing.append("safe_night_completed")
 	return {
 		"scene_id": id,
 		"predicate_id": String(GateCatalog.gate(id).get("predicate_id", "")),
@@ -184,6 +193,7 @@ func advance_scene() -> Dictionary:
 	if not bool(status.get("ready", false)):
 		return {"accepted": false, "reason": "Physical scene gate is incomplete.", "missing": status.get("missing", [])}
 	var scene_id := current_scene_id()
+	var before := _checkpoint_snapshot()
 	var completion_command := {
 		"command_id": "scene-complete:%s" % scene_id,
 		"issuer": "chapter1_route",
@@ -194,9 +204,14 @@ func advance_scene() -> Dictionary:
 		"verb": "set_phase",
 		"payload": {"phase": "scene_complete:" + scene_id, "physical_gate": true},
 	}
+	var next_dates := {"EX-CH01-S01": "2046-04-11 07:00 UTC", "EX-CH01-S02": "2046-04-11 10:00 UTC"}
+	if next_dates.has(scene_id):
+		completion_command.payload["scenario_datetime"] = next_dates[scene_id]
 	var receipt: Dictionary = _director.commit(completion_command)
 	if not bool(receipt.get("accepted", false)):
 		return receipt
+	if int(before.director.get("current_shift", 0)) == 0 and not bool(receipt.get("duplicate", false)):
+		_retry_checkpoint = before
 	if not _completed_scene_ids.has(scene_id):
 		_completed_scene_ids.append(scene_id)
 	if _scene_index >= GateCatalog.SCENE_ORDER.size() - 1:
@@ -206,13 +221,13 @@ func advance_scene() -> Dictionary:
 	return {"accepted": true, "scene_completed": scene_id, "next_scene": current_scene_id(), "transition": moved, "completed_scene_ids": completed_scene_ids()}
 
 func retry() -> Dictionary:
-	var director_result: Dictionary = _director.restore_checkpoint()
+	if _retry_checkpoint.is_empty():
+		return {"accepted": false, "reason": "No physical retry checkpoint is available."}
+	var director_result: Dictionary = _director.restore_snapshot(_retry_checkpoint.director)
 	if not bool(director_result.get("accepted", false)):
 		return director_result
-	if not _retry_local_checkpoint.is_empty():
-		_restore_local(_retry_local_checkpoint)
+	_restore_local(_retry_checkpoint.route)
 	_p02_hosts.clear()
-	_ending = ""
 	return {"accepted": true, "director": director_result, "route": snapshot(), "reason": "Last physical checkpoint restored; no scene/dialogue receipt was duplicated."}
 
 func pause(reason: String = "route_pause") -> Dictionary:
@@ -226,43 +241,33 @@ func cancel_interaction(reason: String = "user") -> Dictionary:
 
 func chapter_ready() -> Dictionary:
 	var resources: Dictionary = _director.snapshot().get("resources", {})
-	var safe_ending := _ending in ["BLOOM", "GOLDEN"] and int(resources.get("H", 0)) > 0 and int(resources.get("A", 0)) > 0
+	var safe_ending := _ending in ["BLOOM", "GOLDEN"] and int(resources.get("H", 0)) > 0 and int(resources.get("A", 0)) > 0 and int(resources.get("Z", 0)) <= 3 and String(_director.query().get("status", "")) != "mission_stopped" and int(_director.query().get("current_shift", 0)) == 7
 	var complete := _completed_scene_ids.size() == GateCatalog.SCENE_ORDER.size() and safe_ending and bool(_scene_flags["EX-CH01-S12"].get("debrief_complete", false))
 	return {"ready": complete, "ending": _ending, "safe_ending": safe_ending, "completed_scene_count": _completed_scene_ids.size(), "reason": "CH02 readiness requires all twelve physical scene gates and a living Alo Bloom/Golden result."}
 
 func snapshot() -> Dictionary:
-	return {
-		"schema_version": 1,
-		"current_scene_id": current_scene_id(),
-		"current_scene_index": _scene_index,
-		"completed_scene_ids": _completed_scene_ids.duplicate(),
-		"scene_flags": _scene_flags.duplicate(true),
-		"dialogue_acks": _dialogue_acks.duplicate(true),
-		"p01": _p01.snapshot(),
-		"ending": _ending,
-		"world": _world.snapshot(),
-		"chapter_ready": chapter_ready(),
-	}
+	var result := _local_snapshot()
+	result["schema_version"] = 1
+	result["chapter_ready"] = chapter_ready()
+	result["retry_checkpoint"] = _retry_checkpoint.duplicate(true)
+	return result
 
 func restore(snapshot_data: Dictionary) -> Dictionary:
-	if not snapshot_data is Dictionary:
-		return {"accepted": false, "reason": "Chapter 1 route snapshot must be primitive."}
-	var scene_id := String(snapshot_data.get("current_scene_id", ""))
-	var index := GateCatalog.SCENE_ORDER.find(scene_id)
-	if index < 0:
-		return {"accepted": false, "reason": "Chapter 1 route snapshot names an unknown scene."}
-	var world_result: Dictionary = _world.restore(snapshot_data.get("world", {}))
-	if not bool(world_result.get("accepted", false)):
-		return world_result
-	_scene_index = index
-	_completed_scene_ids = snapshot_data.get("completed_scene_ids", []).duplicate()
-	_scene_flags = snapshot_data.get("scene_flags", {}).duplicate(true)
-	_dialogue_acks = snapshot_data.get("dialogue_acks", {}).duplicate(true)
-	_ending = String(snapshot_data.get("ending", ""))
-	var p01_result: Dictionary = _p01.restore(snapshot_data.get("p01", {}))
-	if not bool(p01_result.get("accepted", false)):
-		return p01_result
-	_register_current_targets()
+	var valid := _validate_local_snapshot(snapshot_data)
+	if not bool(valid.get("accepted", false)):
+		return valid
+	var retry_value = snapshot_data.get("retry_checkpoint", {})
+	if not retry_value is Dictionary:
+		return {"accepted": false, "reason": "Route retry checkpoint must be a Dictionary."}
+	if not retry_value.is_empty():
+		if not retry_value.get("director", null) is Dictionary or not retry_value.get("route", null) is Dictionary or not StateScript.is_compatible(retry_value.director):
+			return {"accepted": false, "reason": "Route retry checkpoint has an invalid campaign state."}
+		valid = _validate_local_snapshot(retry_value.route)
+		if not bool(valid.get("accepted", false)):
+			return valid
+	_restore_local(snapshot_data)
+	_retry_checkpoint = retry_value.duplicate(true) if not retry_value.is_empty() else _checkpoint_snapshot()
+	_p02_hosts.clear()
 	return {"accepted": true, "reason": "Chapter 1 route restored from primitive room/mission state."}
 
 func _set_current_scene(index: int) -> Dictionary:
@@ -286,7 +291,8 @@ func _context(extra: Dictionary = {}) -> Dictionary:
 		"suit_check": bool(_world.boundary_state("airlock_exterior").get("suit_check", false)),
 	}
 	for key in extra.keys():
-		context[key] = extra[key]
+		if key != "flags":
+			context[key] = extra[key]
 	return context
 
 func _context_flags() -> Dictionary:
@@ -320,6 +326,7 @@ func _payload_for_target(target: Dictionary, payload: Dictionary) -> Dictionary:
 func _special_target_prerequisite(target_id: String) -> Dictionary:
 	var requirements := {
 		"p02_shift1": ["role_acknowledged"],
+		"p02_stage_shift2": ["shift1_committed"],
 		"p02_shift2": ["shelter_drill_complete", "pre_drill_baseline_verified"],
 		"p02_shifts3_4": ["shift2_committed_at_18", "cards_combined", "earth_set_acknowledged"],
 		"p02_shift5_alarm": ["shifts3_4_resolved", "four_sheltered"],
@@ -331,19 +338,59 @@ func _special_target_prerequisite(target_id: String) -> Dictionary:
 	return {"accepted": true}
 
 func _submit_command(command: Dictionary, preview_only: bool) -> Dictionary:
+	var target_id := String(_dispatcher.state().get("focused_target_id", ""))
+	var target: Dictionary = _dispatcher.target(target_id)
+	var prerequisite := _special_target_prerequisite(target_id)
+	if not bool(prerequisite.get("accepted", false)):
+		return prerequisite
+	var command_id := String(command.get("command_id", ""))
+	var previous: Dictionary = _director.snapshot().get("receipts", {})
+	if previous.has(command_id):
+		if not preview_only:
+			return _director.commit(command)
+		var duplicate: Dictionary = previous[command_id].duplicate(true)
+		duplicate["duplicate"] = true
+		duplicate["snapshot"] = _director.snapshot()
+		return duplicate
+	var payload: Dictionary = command.get("payload", {}) if command.get("payload", {}) is Dictionary else {}
+	if target.has("puzzle_action"):
+		var plant_check: Dictionary = _p01.preview(String(target.puzzle_action), payload)
+		if not bool(plant_check.get("accepted", false)):
+			return plant_check
+	if target_id == "confirm_date_transition":
+		command = command.duplicate(true)
+		command["verb"] = "advance_time"
+		command["payload"] = {"scenario_datetime": "2046-04-25 03:36 UTC"}
 	if String(command.get("target_id", "")) == "P-02":
-		var command_id := String(command.get("command_id", ""))
+		if target_id == "p02_stage_shift2" and not preview_only:
+			return {"accepted": false, "reason": "The staged shift is preview-only; commit after the shelter drill."}
+		var plan: Dictionary = payload.get("plan", payload) if payload.get("plan", payload) is Dictionary else {}
+		var phase_check := _validate_shift_phase(target_id, plan)
+		if not bool(phase_check.get("accepted", false)):
+			return phase_check
 		var host = _p02_hosts.get(command_id, null)
 		if host == null:
 			host = PuzzleHostScript.new()
 			host.bind(_director, "P-02", String(command.get("owning_mission_id", current_mission_id())), String(command.get("owning_scene_id", current_scene_id())))
 			_p02_hosts[command_id] = host
-		var payload: Dictionary = command.get("payload", {}) if command.get("payload", {}) is Dictionary else {}
-		var plan: Dictionary = payload.get("plan", payload) if payload.get("plan", payload) is Dictionary else {}
 		if preview_only:
 			return host.preview(plan)
 		return host.commit(command_id, plan)
 	return _director.preview(command) if preview_only else _director.commit(command)
+
+func _validate_shift_phase(target_id: String, plan: Dictionary) -> Dictionary:
+	var phases := {"p02_shift1": [0, 1], "p02_stage_shift2": [1, 1], "p02_shift2": [1, 1], "p02_shifts3_4": [2, 2], "p02_shift5_alarm": [4, 1], "p02_shifts6_7": [5, 2]}
+	if not phases.has(target_id):
+		return {"accepted": false, "reason": "Unknown Chapter 1 shift target."}
+	var expected: Array = phases[target_id]
+	var count := 0
+	if plan.get("shifts", null) is Array:
+		count = plan.shifts.size()
+	elif plan.get("shift", plan.get("step", null)) is Dictionary:
+		count = 1
+	if int(_director.query().get("current_shift", 0)) != int(expected[0]) or count != int(expected[1]):
+		return {"accepted": false, "reason": "This physical gate must resolve its exact shifts in order."}
+	return {"accepted": true}
 
 func _apply_target_result(target_id: String, payload: Dictionary, result: Dictionary) -> void:
 	if not bool(result.get("accepted", false)):
@@ -368,6 +415,12 @@ func _apply_target_result(target_id: String, payload: Dictionary, result: Dictio
 			_last_result["p01"] = p01_result
 		return
 	if target.has("puzzle_id") and String(target.get("puzzle_id", "")) == "P-02":
+		if not String(result.get("ending", "")).is_empty():
+			_ending = String(result.ending)
+		if _ending == "MISSION_STOPPED":
+			if target_id == "p02_shifts6_7":
+				_mark_flag("final_shifts_resolved")
+			return
 		match target_id:
 			"p02_shift1": _mark_flag("shift1_committed")
 			"p02_shift2": _mark_flag("shift2_committed_at_18")
@@ -453,6 +506,75 @@ func _local_snapshot() -> Dictionary:
 		"ending": _ending,
 		"world": _world.snapshot(),
 	}
+
+func _checkpoint_snapshot() -> Dictionary:
+	var state: Dictionary = _director.snapshot()
+	# The campaign controller persists the route separately; nesting it here
+	# would copy previous retry checkpoints into every later save.
+	state.erase("route_runtime")
+	return {"director": state, "route": _local_snapshot()}
+
+func _validate_local_snapshot(data: Dictionary) -> Dictionary:
+	if data.has("schema_version") and (not (data.schema_version is int or data.schema_version is float) or float(data.schema_version) != 1.0):
+		return {"accepted": false, "reason": "Unsupported Chapter 1 route schema."}
+	if not data.get("current_scene_id", null) is String:
+		return {"accepted": false, "reason": "Chapter 1 scene ID must be a String."}
+	var raw_index = data.get("current_scene_index", null)
+	if not (raw_index is int or raw_index is float) or not is_finite(float(raw_index)) or float(raw_index) != floor(float(raw_index)):
+		return {"accepted": false, "reason": "Chapter 1 scene index must be an integer."}
+	var scene_id := String(data.get("current_scene_id", ""))
+	var index := GateCatalog.SCENE_ORDER.find(scene_id)
+	if index < 0 or int(data.get("current_scene_index", -1)) != index:
+		return {"accepted": false, "reason": "Chapter 1 snapshot names an invalid scene/index."}
+	for key in ["scene_flags", "dialogue_acks", "p01", "world"]:
+		if not data.get(key, null) is Dictionary:
+			return {"accepted": false, "reason": "Chapter 1 snapshot requires a Dictionary for " + key}
+	if not data.get("completed_scene_ids", null) is Array or not data.get("ending", null) is String:
+		return {"accepted": false, "reason": "Chapter 1 completion state has an invalid type."}
+	var seen := []
+	for completed in data.completed_scene_ids:
+		if not completed is String or not GateCatalog.SCENE_ORDER.has(completed) or seen.has(completed):
+			return {"accepted": false, "reason": "Chapter 1 completed scenes are invalid or duplicated."}
+		seen.append(completed)
+	var completed_count: int = data.completed_scene_ids.size()
+	var max_completed := index + (1 if index == GateCatalog.SCENE_ORDER.size() - 1 else 0)
+	if completed_count > max_completed or data.completed_scene_ids != GateCatalog.SCENE_ORDER.slice(0, completed_count):
+		return {"accepted": false, "reason": "Completed Chapter 1 scenes must be a canonical prefix before the current scene."}
+	for id in GateCatalog.scene_ids():
+		if not data.scene_flags.get(id, null) is Dictionary or not data.dialogue_acks.get(id, null) is Array:
+			return {"accepted": false, "reason": "Chapter 1 snapshot is missing scene evidence maps."}
+		for flag in data.scene_flags[id].values():
+			if not flag is bool:
+				return {"accepted": false, "reason": "Chapter 1 physical evidence must be boolean."}
+		for line_id in data.dialogue_acks[id]:
+			if not line_id is String or not GateCatalog.dialogue_ids(id).has(line_id):
+				return {"accepted": false, "reason": "Chapter 1 dialogue receipt is outside its scene."}
+	var plant_check: Dictionary = P01Script.new().restore(data.p01)
+	if not bool(plant_check.get("accepted", false)):
+		return plant_check
+	for key in ["boundaries", "roster", "last_viewpoint_cut"]:
+		if not data.world.get(key, null) is Dictionary:
+			return {"accepted": false, "reason": "World snapshot requires a Dictionary for " + key}
+	var world_defaults: Dictionary = WorldRouteScript.new(_director).snapshot()
+	for boundary_id in world_defaults.boundaries:
+		var boundary_value = data.world.boundaries.get(boundary_id, null)
+		if not boundary_value is Dictionary:
+			return {"accepted": false, "reason": "World boundary state must be a Dictionary."}
+		for key in world_defaults.boundaries[boundary_id]:
+			if typeof(boundary_value.get(key, null)) != typeof(world_defaults.boundaries[boundary_id][key]):
+				return {"accepted": false, "reason": "World boundary state has an invalid field: " + key}
+	for actor_id in world_defaults.roster:
+		var actor_value = data.world.roster.get(actor_id, null)
+		if not actor_value is Dictionary:
+			return {"accepted": false, "reason": "World roster placement must be a Dictionary."}
+		for key in world_defaults.roster[actor_id]:
+			if typeof(actor_value.get(key, null)) != typeof(world_defaults.roster[actor_id][key]):
+				return {"accepted": false, "reason": "World roster placement has an invalid field: " + key}
+	if not data.world.get("current_scene_id", null) is String or not data.world.get("current_room_id", null) is String:
+		return {"accepted": false, "reason": "World scene and room IDs must be Strings."}
+	if not data.world.get("history", null) is Array or data.world.current_scene_id != scene_id or data.world.current_room_id != String(GateCatalog.gate(scene_id).room_id):
+		return {"accepted": false, "reason": "World snapshot does not match the Chapter 1 scene."}
+	return WorldRouteScript.new(_director).restore(data.world)
 
 func _restore_local(snapshot_data: Dictionary) -> void:
 	_scene_index = int(snapshot_data.get("current_scene_index", _scene_index))

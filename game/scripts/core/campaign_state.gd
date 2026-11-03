@@ -7,6 +7,7 @@ class_name CampaignState
 
 const SCHEMA_VERSION := 2
 const CONTENT_REVISION := "story-data-extended-02-systems-contract"
+const PlantScript = preload("res://scripts/biology/plant_service.gd")
 
 static func new_snapshot(content_revision: String = "") -> Dictionary:
 	var revision := content_revision if not content_revision.is_empty() else CONTENT_REVISION
@@ -97,13 +98,64 @@ static func copy_snapshot(snapshot: Dictionary) -> Dictionary:
 	return snapshot.duplicate(true)
 
 static func is_compatible(snapshot: Dictionary, content_revision: String = "") -> bool:
-	if int(snapshot.get("schema_version", -1)) != SCHEMA_VERSION:
-		return false
-	if not snapshot.has("resources") or not snapshot.has("state_revision"):
+	if not bool(validate_snapshot(snapshot).get("valid", false)):
 		return false
 	if not content_revision.is_empty() and String(snapshot.get("content_revision", "")) != content_revision:
 		return false
 	return true
+
+static func validate_snapshot(snapshot: Dictionary) -> Dictionary:
+	var defaults := new_snapshot()
+	for key in defaults:
+		if not snapshot.has(key):
+			return {"valid": false, "reason": "Campaign snapshot is missing " + key}
+		var expected_type := typeof(defaults[key])
+		var value = snapshot[key]
+		if expected_type in [TYPE_INT, TYPE_FLOAT]:
+			if not _finite_number(value) or float(value) != floor(float(value)) or float(value) < 0:
+				return {"valid": false, "reason": "Campaign counter must be a nonnegative integer: " + key}
+		elif typeof(value) != expected_type:
+			return {"valid": false, "reason": "Campaign snapshot has an invalid type for " + key}
+	if int(snapshot.schema_version) != SCHEMA_VERSION or int(snapshot.current_shift) > 7:
+		return {"valid": false, "reason": "Campaign schema or shift is outside the supported contract."}
+	if not is_scenario_datetime(snapshot.scenario_datetime):
+		return {"valid": false, "reason": "Campaign scenario time must be a valid UTC date and minute."}
+	for key in defaults.resources:
+		if not snapshot.resources.has(key) or not _finite_number(snapshot.resources[key]) or float(snapshot.resources[key]) < 0:
+			return {"valid": false, "reason": "Campaign resource must be a finite nonnegative number: " + key}
+	for key in ["receipts", "mission_receipts", "interaction_receipts"]:
+		for receipt in snapshot[key].values():
+			if not receipt is Dictionary:
+				return {"valid": false, "reason": "Campaign receipts must contain Dictionaries."}
+	for plant in snapshot.plants:
+		if not plant is Dictionary:
+			return {"valid": false, "reason": "Campaign plants must contain identified primitive plants."}
+		var plant_check: Dictionary = PlantScript.new().validate_plant(plant)
+		if not bool(plant_check.get("valid", false)):
+			return plant_check
+	for key in defaults.accessibility:
+		if not snapshot.accessibility.get(key, null) is bool:
+			return {"valid": false, "reason": "Campaign accessibility setting must be a boolean: " + key}
+	if snapshot.has("blackout_count") and (not _finite_number(snapshot.blackout_count) or float(snapshot.blackout_count) != floor(float(snapshot.blackout_count)) or float(snapshot.blackout_count) < 0):
+		return {"valid": false, "reason": "Campaign blackout count must be a nonnegative integer."}
+	return {"valid": true, "reason": "Campaign state shape is valid."}
+
+static func _finite_number(value) -> bool:
+	return (value is int or value is float) and is_finite(float(value))
+
+static func is_scenario_datetime(value: String) -> bool:
+	if value.length() != 20 or value[4] != "-" or value[7] != "-" or value[10] != " " or value[13] != ":" or not value.ends_with(" UTC"):
+		return false
+	for part in [value.substr(0, 4), value.substr(5, 2), value.substr(8, 2), value.substr(11, 2), value.substr(14, 2)]:
+		if not part.is_valid_int() or part.begins_with("+") or part.begins_with("-"):
+			return false
+	var year := int(value.substr(0, 4))
+	var month := int(value.substr(5, 2))
+	var day := int(value.substr(8, 2))
+	if year < 1 or month < 1 or month > 12 or int(value.substr(11, 2)) > 23 or int(value.substr(14, 2)) > 59:
+		return false
+	var month_days := [31, 29 if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0) else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	return day >= 1 and day <= int(month_days[month - 1])
 
 static func from_slice_snapshot(slice: Dictionary) -> Dictionary:
 	## Bounded compatibility adapter. It only reads the commissioning shape and

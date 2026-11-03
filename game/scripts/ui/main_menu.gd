@@ -55,7 +55,7 @@ func setup(save_state: Dictionary) -> void:
 	var has_save := not save_state.is_empty()
 	_continue_button.disabled = not has_save
 	_continue_button.text = "CONTINUE EXPEDITION" if has_save else "CONTINUE · NO CHECKPOINT"
-	_save_note.text = "Verified checkpoint: %s" % String(save_state.get("checkpoint_id", "commissioning")) if has_save else "No saved expedition yet. New Expedition is always safe to start."
+	_save_note.text = "Verified checkpoint: %s" % String(save_state.get("checkpoint_id", "Chapter 1")) if has_save else "No saved expedition yet. New Expedition is always safe to start."
 	_save_note.modulate = IVORY if has_save else MUTED
 	if _panels != null:
 		_panels.bind_query(_query)
@@ -162,10 +162,17 @@ func _build() -> void:
 	page.add_theme_constant_override("separation", 20)
 	margins.add_child(page)
 	page.add_child(_build_header())
+	var scroll := ScrollContainer.new()
+	scroll.name = "TitleContentScroll"
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
+	page.add_child(scroll)
 	var body := HBoxContainer.new()
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	body.add_theme_constant_override("separation", 26)
-	page.add_child(body)
+	scroll.add_child(body)
 	body.add_child(_build_command_panel())
 	body.add_child(_build_diorama_panel())
 	page.add_child(_build_footer())
@@ -247,7 +254,7 @@ func _build_command_panel() -> Control:
 	var divider := HSeparator.new()
 	divider.modulate = Color(0.40, 0.52, 0.72, 0.45)
 	content.add_child(divider)
-	_begin_button = _button("BEGIN COMMISSIONING  ›", MUSTARD, INK)
+	_begin_button = _button("NEW EXPEDITION  ›", MUSTARD, INK)
 	_begin_button.pressed.connect(_show_briefing)
 	content.add_child(_begin_button)
 	_continue_button = _button("CONTINUE · NO CHECKPOINT", Color(0.15, 0.20, 0.31), IVORY)
@@ -317,7 +324,7 @@ func _build_diorama_panel() -> Control:
 		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		diagram.add_child(card)
 	var line := Label.new()
-	line.text = "A compact, caption-first commissioning slice\nfor judges, classrooms and families."
+	line.text = "Chapter 1: twelve caption-first scenes\nfor judges, classrooms and families."
 	line.add_theme_font_size_override("font_size", 16)
 	line.add_theme_color_override("font_color", MUTED)
 	line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -369,7 +376,7 @@ func _build_briefing() -> void:
 	content.add_theme_constant_override("separation", 12)
 	margin.add_child(content)
 	var title := Label.new()
-	title.text = "MISSION BRIEFING  /  NIGHT ONE"
+	title.text = "MISSION BRIEFING  /  CHAPTER 1"
 	title.add_theme_font_size_override("font_size", 26)
 	title.add_theme_color_override("font_color", MUSTARD)
 	content.add_child(title)
@@ -454,7 +461,7 @@ func _build_science() -> void:
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	content.add_child(spacer)
 	var disclosure := Label.new()
-	disclosure.text = "AI disclosure: current gameplay code uses no newly generated asset in this slice. Existing approved project assets remain credited in production records.\nAccessibility: captions, readable text, pause-safe decisions and timer-free progression are the default route."
+	disclosure.text = "AI disclosure: current gameplay code uses no newly generated asset in this chapter. Existing approved project assets remain credited in production records.\nAccessibility: captions, readable text, pause-safe decisions and timer-free progression are the default route."
 	disclosure.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	disclosure.add_theme_font_size_override("font_size", 13)
 	disclosure.add_theme_color_override("font_color", MUTED)
