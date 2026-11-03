@@ -842,8 +842,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "The crew is in the room: companions with idle, talk and look-at",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "atik/codex",
    "deps": [
     "M1-01"
    ],
@@ -858,7 +858,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Problem: only the player character exists in the campaign; companion anchors are bare Marker3D nodes.\nGoal: the three non-viewpoint cadets stand/sit/work at their anchors per scene, play idle/talk/care clips from their 44-clip sets, turn\ntheir gaze to whoever speaks (FaceAtlas, HairSprings, toon materials as on the player), and block movement physically; Ferreira and Rao\nappear on the Earth screen (portraits in game/assets/ui/) until Ferreira arrives in CH05.\nDo: per execution/SYS_21_COMPANION_BEHAVIOUR.md and SYS_08; reuse the player's character setup code instead of copying it.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
@@ -1074,8 +1074,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Discoveries enter the saved knowledge and evidence state (bug B16)",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "atik/codex",
    "deps": [
     "M0-02"
    ],
@@ -1091,7 +1091,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Problem (BUGHUNT B16): operations set local completion flags only; knowledge, knowledge_flags and acquired_evidence_ids never change, the\nJournal shows the startup list, and the HUD reads raw dialogue, bypassing DialogueService knowledge requirements.\nDo: grant the canonical evidence/knowledge ids at the owning operation (ids from the content catalog), save and restore them, render all\ndialogue through DialogueService so knowledge-gated lines (e.g. Noor's identity only from CH05) are respected, and refresh the Journal.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests: an evidence operation adds its id, survives a JSON save/load, and a gated line stays hidden until then."
   },
   {
@@ -3181,8 +3181,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Dated biology, inventories and resource ledgers through Chapters 2–8 (bugs B07, B08)",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "atik/codex",
    "deps": [
     "M0-02"
    ],
@@ -3200,7 +3200,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Problem (BUGHUNT B07/B08): later operations are set_phase flags; no leak, power, storm, travel or provision changes are applied, dates do not\nadvance, Alo can stay blooming after its harvest, cotton is never planted and the vault never falls to eleven.\nGoal: every later puzzle dispatches its real transition through the simulation/director and completion is judged from the resulting state;\ndated biology (pollination, maturity, dry-down, harvest 42 = 12 + 30, descendants, cotton on 15 Dec) and inventories follow the story\nledgers in PRODUCTION_HANDBOOK.md section 4; scene projection advances scenario_datetime.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the extended route test checks the P-05, P-14 and P-15 numeric endpoints from 08_PUZZLE_DESIGNS.md, dates, inventories\nand plant states, not just receipts."
   },
   {
