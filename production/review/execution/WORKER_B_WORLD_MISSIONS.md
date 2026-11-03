@@ -18,9 +18,10 @@
 - Room contracts, approved asset path presence, named roots, collision geometry, pressure boundaries, airlock/shutter behavior, rosters, interaction transaction fixture, save/pause/duplicate/stale behavior and honest 32-mission registry reached passing checks in the headless fixture.
 - `Godot_v4.7.2-stable_win64_console.exe --headless --path game --script res://tools/test_worker_b_world_missions.gd` — **functional-pass, 187 checks, 0 failures**. The fixture traverses all 12 canonical scenes, P-01, P-02, physical-only gates, retry/pause/duplicate/stale/save behavior, roster continuity and CH02 readiness.
 - Focused S03 regression `res://tools/test_ch01_s03_route.gd` — **functional-pass, 7 checks, 0 failures**.
+- Production integration `res://tools/test_campaign_session.gd` — **6/6 checks, exit code 0** for title boot, Chapter 1 entry, HUD/panels, first authoritative action, validated save and evidence-preserving restore.
 - No visual, learner, controller-device or export review was run.
 
 ## Known blockers
 
-- `main.gd` still requires supervisor wiring to inject the full director/content/world services; the existing commissioning route remains the production boot path.
+- Production boot is wired to the full Chapter 1 runtime; the commissioning scene remains a compatibility path.
 - Chapters 2–8 are registered with explicit blocked gates but are not playable implementations.

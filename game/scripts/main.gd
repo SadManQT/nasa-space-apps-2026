@@ -1,15 +1,20 @@
 extends Node3D
 
-const CAMPAIGN_SCENE: PackedScene = preload("res://scenes/campaign/ch01_commissioning.tscn")
+const CAMPAIGN_SCENE: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const MENU_SCENE: PackedScene = preload("res://scenes/ui/main_menu.tscn")
+const SaveScript = preload("res://scripts/save/save_service.gd")
+const StateScript = preload("res://scripts/core/campaign_state.gd")
+const LegacySliceState = preload("res://scripts/campaign/slice_state.gd")
 
 var _stage_camera: Camera3D
 var _menu_layer: CanvasLayer
 var _menu: MainMenu
 var _campaign: Node3D
 var _replace_dialog: ConfirmationDialog
+var _save_service: SaveService
 
 func _ready() -> void:
+	_save_service = SaveScript.new()
 	_build_stage()
 	_show_title()
 
@@ -67,11 +72,11 @@ func _show_title() -> void:
 	_menu.continue_requested.connect(_continue_expedition)
 	_menu.science_requested.connect(_menu.open_science)
 	_menu.showcase_requested.connect(_open_showcase)
-	_menu.setup(SliceState.load_snapshot())
+	_menu.setup(_load_campaign_snapshot())
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _start_new_expedition() -> void:
-	if SliceState.has_save():
+	if not _load_campaign_snapshot().is_empty():
 		_replace_dialog = ConfirmationDialog.new()
 		_replace_dialog.title = "Replace verified checkpoint?"
 		_replace_dialog.dialog_text = (
@@ -81,7 +86,8 @@ func _start_new_expedition() -> void:
 		_replace_dialog.ok_button_text = "REPLACE SAVE"
 		_replace_dialog.cancel_button_text = "CANCEL"
 		_replace_dialog.confirmed.connect(func() -> void:
-			SliceState.clear_save()
+			_save_service.clear()
+			LegacySliceState.clear_save()
 			_launch_campaign({})
 		)
 		_menu.add_child(_replace_dialog)
@@ -90,7 +96,7 @@ func _start_new_expedition() -> void:
 	_launch_campaign({})
 
 func _continue_expedition() -> void:
-	var snapshot := SliceState.load_snapshot()
+	var snapshot := _load_campaign_snapshot()
 	if snapshot.is_empty():
 		_menu.setup({})
 		return
@@ -105,6 +111,20 @@ func _launch_campaign(snapshot: Dictionary) -> void:
 	_campaign.connect("exit_requested", _show_title)
 	add_child(_campaign)
 	_stage_camera.current = false
+
+func _load_campaign_snapshot() -> Dictionary:
+	if _save_service == null:
+		_save_service = SaveScript.new()
+	var saved: Dictionary = _save_service.load()
+	if bool(saved.get("accepted", false)):
+		return saved.get("snapshot", {}).duplicate(true)
+	# Keep the original three-scene commissioning save readable while the full
+	# campaign uses its own validated v2 slot. The adapter never writes to the
+	# legacy file and Chapter1Campaign restores the route at the saved scene.
+	var legacy := LegacySliceState.load_snapshot()
+	if legacy.is_empty():
+		return {}
+	return StateScript.from_slice_snapshot(legacy)
 
 func _open_showcase() -> void:
 	get_tree().change_scene_to_file("res://scenes/dev/asset_showcase.tscn")

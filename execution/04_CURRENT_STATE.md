@@ -11,7 +11,16 @@ interaction, roster and Chapter 1 mission route passes 187 checks across the com
 12-scene traversal and CH02 readiness. This is a release checkpoint, not a full-game
 completion claim.
 
-The earlier 27 October snapshot below remains a historical baseline. A bounded bootstrap slice now exists: `game/project.godot` points to `res://scenes/main.tscn`; the title/briefing route and `EX-CH01-S01` through `EX-CH01-S03` commissioning flow live under `game/scenes/` and `game/scripts/`; primitive save/checkpoint and preview/commit services live under `game/scripts/campaign/`; and fresh verification is recorded in `production/review/execution/BOOTSTRAP_SLICE.md`. This does not promote the full Chapter 1 route, P-01/P-02, NASA data processing, audio, remaining chapters or export to complete. Godot 4.7.2 remains unavailable on the current Windows host, so the new implementation is structurally present but runtime/visual/export verification is unverified.
+The production boot is now wired to `game/scenes/campaign/chapter1_campaign.tscn`.
+`main.gd` injects the full content/director/route/save stack, and the six-check
+production session smoke passes with exit code 0. The old commissioning scene and
+legacy save adapter remain available for compatibility. The visual/learner/device
+review, Windows export, runtime audio, Chapters 2–8 and final endings/credits are
+still open.
+
+The earlier 27 October snapshot below remains a historical baseline. The current
+implementation has advanced beyond that bounded bootstrap; retain its older claims
+only as history and use the dated addendum above for current status.
 
 Checked locally on 27 October 2026 against `ca01433`, which matched fetched `origin/main`. Recheck before executing a task.
 

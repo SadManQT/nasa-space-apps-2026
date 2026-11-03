@@ -24,9 +24,34 @@ func _init() -> void:
 
 func new_campaign(content_revision: String = "") -> Dictionary:
 	_state = StateScript.new_snapshot(content_revision)
+	_state["checkpoint_id"] = "EX-CH01-S01-CHECKPOINT"
+	_state["chapter_id"] = "CH01"
+	_state["mission_id"] = "EX-M0101"
+	_state["scene_id"] = "EX-CH01-S01"
+	_state["scene_phase"] = "briefing"
+	_state["completed_scene_ids"] = []
+	_state["scenario_datetime"] = "2046-04-11 06:00 UTC"
+	_state["status"] = "active"
 	_seed_initial_biology()
+	# The production route starts on April 11. The bounded systems fixture keeps
+	# the April 25 entry profile in CampaignState.new_snapshot(); this method is
+	# the explicit full-campaign constructor.
+	for plant in _state.get("plants", []):
+		plant["last_advanced_at"] = "2046-04-11 06:00 UTC"
+		plant["stage"] = "seed"
 	_checkpoint = _state.duplicate(true)
 	return _state.duplicate(true)
+
+func restore_snapshot(snapshot: Dictionary) -> Dictionary:
+	if not StateScript.is_compatible(snapshot):
+		return _reject("Campaign snapshot is incompatible with the current state schema.")
+	_state = snapshot.duplicate(true)
+	_checkpoint = _state.duplicate(true)
+	return {
+		"accepted": true,
+		"reason": "Campaign snapshot restored.",
+		"snapshot": _state.duplicate(true),
+	}
 
 func snapshot() -> Dictionary:
 	return _state.duplicate(true)
