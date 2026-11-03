@@ -111,8 +111,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Delete the dead legacy code found by the bug hunt",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "atik/codex",
    "deps": [
     "M0-02"
    ],
@@ -124,7 +124,7 @@
    "refs": [],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Goal: the 'dead code safe to delete' list in production/review/BUGHUNT_2026-11-03.md section 2 is resolved.\nDo: delete only code that grep proves unreachable from scenes/main.tscn and from any test you keep; when a test only exists to cover\ndead code, delete that test too and say so. Keep the commissioning slice only if main.gd still needs its legacy-save check; otherwise\nretire it with its tests in one commit. Rename Chapter1Campaign / Chapter1CampaignHUD only if every reference, scene and test moves with it.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. The diff deletes more than it adds."
   },
   {
@@ -231,8 +231,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Data Card runtime: show the NASA source behind every number",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "atik/codex",
    "deps": [
     "M0-14",
     "M0-02"
@@ -247,7 +247,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Goal: whenever a puzzle preview, outcome or debrief shows a number that comes from NASA data, the player can open a Data Card:\nfirst a one-sentence plain-language takeaway and one simple visual (bar, gauge or line from the fixture values) with 'what this means for Aurora', then the dataset name, what was measured, what the game computed, the source URL and citation — read from game/resources/data/nasa/*.json.\nDo: implement the provenance lookup as one service used by the puzzle host and the debrief (execution/SYS_13_SCIENCE_DATA.md), an\naccessible Data Card panel (keyboard, controller, captions-sized text), and a 'Sources' entry in the Journal listing every fixture.\nNever invent a source; a missing fixture shows 'source pending' in development builds and fails the content test.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
@@ -340,8 +340,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Visible world now: lit greybox rooms, lunar exterior and readable targets",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "atik/codex",
    "deps": [
     "M0-02"
    ],
@@ -358,7 +358,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Problem (screenshot from 3 Nov): the campaign shows a black void. game/scripts/world/campaign_room.gd builds floors and walls with\nvisible=false, props are dropped into a 3-column grid (_asset_position), and targets are tiny Label3D text (the 'Mission Table' label floats\nover the battery jar).\nGoal: until the art kit lands (M1-06), every Chapter 1 location reads as a real lit room or a real lunar exterior.\nDo:\n1. Make floor, walls and ceiling visible with the shared toon look (game/shaders/toon_ramp.gdshaderinc, ToonMaterials): matte panels,\n   a darker floor, ceiling strip lights, one key light + fill per room. Exterior: regolith ground, black sky, a low hard Sun, Earth low on\n   the horizon if visible from the south pole, no fog (ART_BIBLE §2).\n2. Replace the grid with authored layouts: one data file per location, game/resources/campaign/rooms/<LOC>.json, giving each prop's\n   position, rotation and scale, the target anchor and the companion anchors. Gameplay positions are data, not code.\n3. Targets: an outline/highlight on the target prop and a screen-space prompt ('E · Mission Table') when in range and in view; keep\n   Label3D only as a billboard with a minimum on-screen size, never overlapping another prop.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. Screens of all five Chapter 1 rooms and the exterior, from the player camera."
   },
   {
@@ -919,8 +919,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Export presets and release builds (Windows, macOS; web feasibility)",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "atik/codex",
    "deps": [
     "M0-02"
    ],
@@ -933,7 +933,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Goal: judges and teammates can download and run the game; there is no export_presets.cfg today.\nDo: per execution/RELEASE_01_EXPORT_AND_PACKAGE.md: Windows x86_64 and macOS (universal, unsigned with run instructions) presets;\nexclude dev scenes and tools from the pack; version string; build to builds/ (gitignored) and attach to a GitHub Release (ask the user\nbefore publishing). Investigate a Chapter 1 web build with the Compatibility renderer and reduced textures for a 'play in the browser'\njudge link: report size, load time and look, and recommend yes/no.\nAcceptance: both builds start on a clean machine to the title screen and into Chapter 1; sizes and steps in production/qa/release_<date>.md."
   },
   {
@@ -1200,8 +1200,8 @@
    "prompt": "Act as an independent NASA science reviewer for Chapter 1 as built: every number, unit, claim, Data Card, briefing, debrief line, visual\n(Moon science rules in ART_BIBLE §2) and procedure. For each item: source checked (dataset/document, URL), verdict (correct / correct as a\nlabelled teaching simplification / wrong), and the fix. Write production/review/science_review_ch01.md; add a board task for every 'wrong'\nitem (tool by type), and list the changes that need the user's approval (canon numbers). Never let an unsourced number reach the demo."
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "atik/codex",
    "deps": [
     "M0-02"
    ],
@@ -1216,7 +1216,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "id": "M1-28",
    "milestone": "M1",
    "priority": "P0",
