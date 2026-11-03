@@ -18,9 +18,16 @@ var save_path: String = SaveScript.DEFAULT_PATH
 var legacy_save_path: String = LegacySave.SAVE_PATH
 
 func _ready() -> void:
+	if OS.get_cmdline_user_args().has("--export-smoke"):
+		# Release templates disable external script overrides. This bounded
+		# diagnostic injects an isolated temporary slot before any save service exists.
+		save_path = OS.get_temp_dir().path_join("lla-export-%d.json" % OS.get_process_id())
+		legacy_save_path = save_path + ".legacy"
 	_save_service = _new_save_service()
 	_build_stage()
 	_show_title()
+	if OS.get_cmdline_user_args().has("--export-smoke"):
+		_run_export_smoke.call_deferred()
 
 func _build_stage() -> void:
 	_stage_root = Node3D.new()
@@ -196,3 +203,41 @@ func _add_box(position: Vector3, size: Vector3, color: Color, emissive: bool) ->
 	mesh.mesh = box
 	body.add_child(mesh)
 	return body
+
+## Bounded release diagnostic: normal players never enter this path. It uses
+## the same title/new-expedition/physical-operation methods as the real UI.
+func _run_export_smoke() -> void:
+	var checks: Array[bool] = []
+	checks.append(_menu != null)
+	checks.append(not ResourceLoader.exists("res://scenes/dev/asset_showcase.tscn"))
+	var model_path := "res://assets/characters/CH_Kai/CH_Kai.glb"
+	var model_file := FileAccess.open(model_path, FileAccess.READ)
+	checks.append(model_file != null and model_file.get_buffer(4).get_string_from_ascii() == "glTF")
+	await _export_smoke_capture("M1-20_native_title")
+	_launch_campaign({})
+	for index in 6:
+		await get_tree().physics_frame
+	var campaign := _campaign as Chapter1Campaign
+	checks.append(campaign != null and campaign.hud != null and campaign._player.character != null)
+	checks.append(campaign.route.current_scene_id() == "EX-CH01-S01")
+	checks.append(campaign.hud.panels.science.validate().valid)
+	var target := campaign.physical_target("commission_route")
+	campaign._player.position = target.position + Vector3(0, -target.position.y, 1.0)
+	for index in 3:
+		await get_tree().physics_frame
+	checks.append(bool(campaign.perform_target("commission_route").get("accepted", false)))
+	await _export_smoke_capture("M1-20_native_chapter1")
+	checks.append(FileAccess.file_exists(save_path))
+	checks.append(_save_service.clear(save_path))
+	var failures := checks.count(false)
+	print("EXPORT SMOKE RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks.size(), failures])
+	get_tree().quit(0 if failures == 0 else 1)
+
+func _export_smoke_capture(id: String) -> void:
+	if DisplayServer.get_name() == "headless":
+		return
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--evidence-dir="):
+			await get_tree().process_frame
+			await RenderingServer.frame_post_draw
+			get_viewport().get_texture().get_image().save_png(argument.trim_prefix("--evidence-dir=").path_join(id + ".png"))

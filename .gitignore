@@ -49,3 +49,6 @@ project.local.yaml
 production/session-logs/
 production/session-state/
 docs/consistency-failures.md
+
+# Reproducible release candidates and web staging (M1-20)
+/builds/

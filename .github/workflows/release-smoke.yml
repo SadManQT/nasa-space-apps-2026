@@ -1,0 +1,28 @@
+name: Native export smoke
+on:
+  push:
+    branches: [main]
+    paths: ['game/**', 'production/qa/build_release.py', '.github/workflows/release-smoke.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  packaged-startup:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: windows
+          - os: macos-14
+            target: macos
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Fetch only runtime LFS assets
+        shell: bash
+        run: git lfs pull --include="game/assets/**" --exclude=""
+      - name: Build and boot outside the project on a fresh runner
+        shell: bash
+        run: python3 production/qa/build_release.py --platform ${{ matrix.target }} --install-tools --smoke
