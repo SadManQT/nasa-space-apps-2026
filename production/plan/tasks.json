@@ -1033,7 +1033,8 @@
     "M1-08",
     "M1-09",
     "M1-11",
-    "M1-17"
+    "M1-17",
+    "M1-38"
    ],
    "paths": [
     "game/scripts/",
@@ -1052,7 +1053,7 @@
    "priority": "P0",
    "tool": "antigravity",
    "title": "Make it fun: Chapter 1 game-feel and reward pass",
-   "prompt": "Goal: the game is fun, not homework. Play Chapter 1 and fix what feels flat:\nfeedback on every action (sound, a small animation, a meter tick, a crew reaction line or look), satisfying commit moments for the\nMission Table, tension during the night (lights dimming, fans slowing, the countdown to dawn), Alo's progress felt through posture and growth\n(never a face), stars/Golden Bloom celebrated, a clear next goal at all times, no dead time over ~20 seconds, and failure that teaches and\ninvites a retry instead of punishing. Keep Moon science rules (no sound in vacuum, no fog). Measure it: ask two first-time players to rate\nfun 1–5 and note where they smiled or got bored; write production/qa/fun_<date>.md.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second capture of the night shift."
+   "prompt": "Goal: the game is fun, not homework. Play Chapter 1 and fix what feels flat:\nfeedback on every action (sound, a small animation, a meter tick, a crew reaction line or look), satisfying commit moments for the\nMission Table, tension during the night (lights dimming, fans slowing, the countdown to dawn), Alo's progress felt through posture and growth\n(never a face), stars/Golden Bloom celebrated, a clear next goal at all times, no dead time over ~20 seconds, and failure that teaches and\ninvites a retry instead of punishing. Keep Moon science rules (no sound in vacuum, no fog). Measure it: ask two first-time players to rate\nfun 1–5 and note where they smiled or got bored; write production/qa/fun_<date>.md.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second capture of the night shift.\nAlso bring P-01 and P-02 up to the investigation design in game-design/22_PUZZLE_CLUE_DESIGN.md (clue chain, aha moment, escalation, set-piece, hint tiers)."
   },
   {
    "id": "M1-26",
@@ -1107,6 +1108,33 @@
    "tool": "claude",
    "title": "Requirements alignment and the training decision for every mission",
    "prompt": "Goal: story, gameplay and theme match the challenge 100%, and every one of the 32 missions is a training decision a junior learner makes\nthemselves, grounded in NASA data that anyone can understand, and fun.\nRequirements (board 'requirements' list, R01–R24): the challenge text in docs/competition-rules.md §F (\"students run a lunar or Martian\noutpost, balancing competing demands like life support, radiation shielding, power, and food production, so they experience firsthand the\ndecisions that determine whether a mission fails or succeeds\"; neither oversimplified nor too complex to hold a young learner's attention),\nthe theme \"The Next Frontier\", the score sheet and rules in §H, and docs/challenge-statement-2026.md once M0-12 lands.\nDo:\n1. docs/REQUIREMENTS_ALIGNMENT.md: a matrix R01–R24 -> where the current story/gameplay meets it -> gap -> board task. Be blunt about gaps.\n2. game-design/19_TRAINING_DECISIONS.md: one row per mission (EX-M0101..EX-M0804): the decision the player makes (real alternatives,\n   none pre-filled); which of the four demands it trades off (life support, shielding, power, food) and how the Outpost Status shows it;\n   the NASA dataset behind it (from docs/SCIENCE_AND_DATA.md) and its one-sentence plain-language takeaway for a 10–12-year-old; how it can\n   succeed, partly succeed and fail (with retry); the debrief question (predict -> observe -> explain); and what makes it fun (agency,\n   discovery, tension, reward, character moment). Missions that today only advance story get the smallest decision that fits the canon\n   scene (dialogue text and story events stay word for word; new decisions are gameplay choices around them).\n3. Any change to canon story or to numbers in game-design/08_PUZZLE_DESIGNS.md is a proposal in a final section for the user to approve;\n   never edit those files.\n4. Update the M3 mission tasks' prompts on the board only if a mission needs work they do not already describe; run board.py check.\nAcceptance: all 32 missions covered; every requirement row names its tasks; the user has the proposals list."
+  },
+  {
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-27"
+   ],
+   "paths": [
+    "game-design/19_TRAINING_DECISIONS.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md",
+    "production/plan/tasks.json"
+   ],
+   "refs": [
+    "game-design/19_TRAINING_DECISIONS.md",
+    "game-design/08_PUZZLE_DESIGNS.md",
+    "full-game-story/STORY_FULL.md",
+    "docs/SCIENCE_AND_DATA.md"
+   ],
+   "note": "",
+   "evidence": "",
+   "updated": "2026-11-04",
+   "id": "M1-38",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "claude",
+   "title": "AAA puzzle and clue design: every mission a story-driven investigation",
+   "prompt": "Goal: the puzzles and clues feel like a professional Steam/AAA game, last long enough to matter, and are woven into the story, while staying\nclear for a 10–12-year-old and grounded in NASA data. Write game-design/22_PUZZLE_CLUE_DESIGN.md, one section per mission (EX-M0101..EX-M0804):\n1. The investigation: 3–6 clues the player discovers in the world (crew dialogue lines that already exist in STORY_FULL, Noor's logs and\n   records, instrument readouts from the NASA fixtures, objects placed in the room, the Data Card), where each clue is, and which role sees it\n   privately in Class mode (M1-37).\n2. The deduction: what the player must connect, the 'aha' moment, and the wrong-but-reasonable idea a smart player tries first (and how the\n   game answers it without punishing).\n3. The decision and its escalation: stakes rising across the mission's three scenes, a set-piece payoff (a cutscene beat, a lighting or\n   sound change, Alo's posture), and how success, partial success and failure feel different.\n4. Hints in three tiers (nudge, direction, worked example) instead of any pre-filled answer; Family/Cadet/Engineer differences.\n5. Target playtime (most missions 15–25 minutes of real play, not padding) and the moment-to-moment feel (what the hands do, what the ears hear).\nStudy and name the specific techniques you borrow from proven designs: Outer Wilds and Return of the Obra Dinn (knowledge-based deduction and\njournal), Frostpunk and Subnautica (survival trade-offs under pressure), Death Stranding (route and load planning), Portal and The Witness\n(teaching through play, escalating rules), Firewatch and Gone Home (environmental storytelling and found logs). No copying of their content,\nonly their design principles.\nRules: story text is canon word for word (new clue text is new world text, e.g. labels and log metadata, never rewritten dialogue); numbers in\n08_PUZZLE_DESIGNS.md are never edited (proposals go to the user); plants never have faces; English only; science rules hold.\nThen update each M3 puzzle and mission task prompt on the board to point at its section, and run board.py check."
   },
   {
    "status": "todo",
@@ -1509,7 +1537,8 @@
    "status": "todo",
    "owner": "",
    "deps": [
-    "M1-09"
+    "M1-09",
+    "M1-38"
    ],
    "paths": [
     "game/scripts/puzzles/",
@@ -1521,12 +1550,13 @@
    "refs": [
     "execution/PUZZLE_P03.md",
     "execution/PUZZLE_P04.md",
-    "execution/UI_09_SCIENTIFIC_PUZZLE.md"
+    "execution/UI_09_SCIENTIFIC_PUZZLE.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Problem: P03 and P04 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P03.md and execution/PUZZLE_P04.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+   "prompt": "Problem: P03 and P04 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P03.md and execution/PUZZLE_P04.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-2M",
@@ -1540,6 +1570,7 @@
     "M1-17",
     "M1-27",
     "M1-28",
+    "M1-38",
     "M3-2P",
     "M3-2R",
     "M3-80"
@@ -1554,12 +1585,13 @@
     "execution/MISSION_EX_M0202.md",
     "execution/MISSION_EX_M0203.md",
     "execution/MISSION_EX_M0204.md",
-    "game-design/19_TRAINING_DECISIONS.md"
+    "game-design/19_TRAINING_DECISIONS.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Goal: Chapter 2's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0201.md .. M0204.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH02 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry)."
+   "prompt": "Goal: Chapter 2's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0201.md .. M0204.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH02 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-2C",
@@ -1743,7 +1775,8 @@
    "status": "todo",
    "owner": "",
    "deps": [
-    "M1-09"
+    "M1-09",
+    "M1-38"
    ],
    "paths": [
     "game/scripts/puzzles/",
@@ -1755,12 +1788,13 @@
    "refs": [
     "execution/PUZZLE_P05.md",
     "execution/PUZZLE_P06.md",
-    "execution/UI_09_SCIENTIFIC_PUZZLE.md"
+    "execution/UI_09_SCIENTIFIC_PUZZLE.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Problem: P05 and P06 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P05.md and execution/PUZZLE_P06.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+   "prompt": "Problem: P05 and P06 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P05.md and execution/PUZZLE_P06.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-3M",
@@ -1774,6 +1808,7 @@
     "M1-17",
     "M1-27",
     "M1-28",
+    "M1-38",
     "M3-3P",
     "M3-3R",
     "M3-80"
@@ -1788,12 +1823,13 @@
     "execution/MISSION_EX_M0302.md",
     "execution/MISSION_EX_M0303.md",
     "execution/MISSION_EX_M0304.md",
-    "game-design/19_TRAINING_DECISIONS.md"
+    "game-design/19_TRAINING_DECISIONS.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Goal: Chapter 3's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0301.md .. M0304.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH03 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry)."
+   "prompt": "Goal: Chapter 3's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0301.md .. M0304.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH03 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-3C",
@@ -1976,7 +2012,8 @@
    "status": "todo",
    "owner": "",
    "deps": [
-    "M1-09"
+    "M1-09",
+    "M1-38"
    ],
    "paths": [
     "game/scripts/puzzles/",
@@ -1988,12 +2025,13 @@
    "refs": [
     "execution/PUZZLE_P07.md",
     "execution/PUZZLE_P08.md",
-    "execution/UI_09_SCIENTIFIC_PUZZLE.md"
+    "execution/UI_09_SCIENTIFIC_PUZZLE.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Problem: P07 and P08 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P07.md and execution/PUZZLE_P08.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+   "prompt": "Problem: P07 and P08 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P07.md and execution/PUZZLE_P08.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-4M",
@@ -2007,6 +2045,7 @@
     "M1-17",
     "M1-27",
     "M1-28",
+    "M1-38",
     "M3-4P",
     "M3-4R",
     "M3-80"
@@ -2021,12 +2060,13 @@
     "execution/MISSION_EX_M0402.md",
     "execution/MISSION_EX_M0403.md",
     "execution/MISSION_EX_M0404.md",
-    "game-design/19_TRAINING_DECISIONS.md"
+    "game-design/19_TRAINING_DECISIONS.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Goal: Chapter 4's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0401.md .. M0404.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH04 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry)."
+   "prompt": "Goal: Chapter 4's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0401.md .. M0404.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH04 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-4C",
@@ -2209,7 +2249,8 @@
    "status": "todo",
    "owner": "",
    "deps": [
-    "M1-09"
+    "M1-09",
+    "M1-38"
    ],
    "paths": [
     "game/scripts/puzzles/",
@@ -2221,12 +2262,13 @@
    "refs": [
     "execution/PUZZLE_P09.md",
     "execution/PUZZLE_P10.md",
-    "execution/UI_09_SCIENTIFIC_PUZZLE.md"
+    "execution/UI_09_SCIENTIFIC_PUZZLE.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Problem: P09 and P10 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P09.md and execution/PUZZLE_P10.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+   "prompt": "Problem: P09 and P10 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P09.md and execution/PUZZLE_P10.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-5M",
@@ -2240,6 +2282,7 @@
     "M1-17",
     "M1-27",
     "M1-28",
+    "M1-38",
     "M3-5P",
     "M3-5R",
     "M3-80"
@@ -2254,12 +2297,13 @@
     "execution/MISSION_EX_M0502.md",
     "execution/MISSION_EX_M0503.md",
     "execution/MISSION_EX_M0504.md",
-    "game-design/19_TRAINING_DECISIONS.md"
+    "game-design/19_TRAINING_DECISIONS.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Goal: Chapter 5's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0501.md .. M0504.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH05 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry)."
+   "prompt": "Goal: Chapter 5's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0501.md .. M0504.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH05 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-5C",
@@ -2416,7 +2460,8 @@
    "status": "todo",
    "owner": "",
    "deps": [
-    "M1-09"
+    "M1-09",
+    "M1-38"
    ],
    "paths": [
     "game/scripts/puzzles/",
@@ -2428,12 +2473,13 @@
    "refs": [
     "execution/PUZZLE_P11.md",
     "execution/PUZZLE_P12.md",
-    "execution/UI_09_SCIENTIFIC_PUZZLE.md"
+    "execution/UI_09_SCIENTIFIC_PUZZLE.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Problem: P11 and P12 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P11.md and execution/PUZZLE_P12.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+   "prompt": "Problem: P11 and P12 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P11.md and execution/PUZZLE_P12.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-6M",
@@ -2447,6 +2493,7 @@
     "M1-17",
     "M1-27",
     "M1-28",
+    "M1-38",
     "M3-6P",
     "M3-6R",
     "M3-80"
@@ -2461,12 +2508,13 @@
     "execution/MISSION_EX_M0602.md",
     "execution/MISSION_EX_M0603.md",
     "execution/MISSION_EX_M0604.md",
-    "game-design/19_TRAINING_DECISIONS.md"
+    "game-design/19_TRAINING_DECISIONS.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Goal: Chapter 6's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0601.md .. M0604.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH06 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry)."
+   "prompt": "Goal: Chapter 6's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0601.md .. M0604.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH06 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-6C",
@@ -2621,7 +2669,8 @@
    "status": "todo",
    "owner": "",
    "deps": [
-    "M1-09"
+    "M1-09",
+    "M1-38"
    ],
    "paths": [
     "game/scripts/puzzles/",
@@ -2633,12 +2682,13 @@
    "refs": [
     "execution/PUZZLE_P13.md",
     "execution/PUZZLE_P14.md",
-    "execution/UI_09_SCIENTIFIC_PUZZLE.md"
+    "execution/UI_09_SCIENTIFIC_PUZZLE.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Problem: P13 and P14 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P13.md and execution/PUZZLE_P14.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+   "prompt": "Problem: P13 and P14 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P13.md and execution/PUZZLE_P14.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-7M",
@@ -2652,6 +2702,7 @@
     "M1-17",
     "M1-27",
     "M1-28",
+    "M1-38",
     "M3-7P",
     "M3-7R",
     "M3-80"
@@ -2666,12 +2717,13 @@
     "execution/MISSION_EX_M0702.md",
     "execution/MISSION_EX_M0703.md",
     "execution/MISSION_EX_M0704.md",
-    "game-design/19_TRAINING_DECISIONS.md"
+    "game-design/19_TRAINING_DECISIONS.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Goal: Chapter 7's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0701.md .. M0704.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH07 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry)."
+   "prompt": "Goal: Chapter 7's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0701.md .. M0704.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH07 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-7C",
@@ -2855,7 +2907,8 @@
    "status": "todo",
    "owner": "",
    "deps": [
-    "M1-09"
+    "M1-09",
+    "M1-38"
    ],
    "paths": [
     "game/scripts/puzzles/",
@@ -2867,12 +2920,13 @@
    "refs": [
     "execution/PUZZLE_P15.md",
     "execution/PUZZLE_P16.md",
-    "execution/UI_09_SCIENTIFIC_PUZZLE.md"
+    "execution/UI_09_SCIENTIFIC_PUZZLE.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Problem: P15 and P16 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P15.md and execution/PUZZLE_P16.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+   "prompt": "Problem: P15 and P16 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P15.md and execution/PUZZLE_P16.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-8M",
@@ -2886,6 +2940,7 @@
     "M1-17",
     "M1-27",
     "M1-28",
+    "M1-38",
     "M3-80",
     "M3-8P",
     "M3-8R"
@@ -2900,12 +2955,13 @@
     "execution/MISSION_EX_M0802.md",
     "execution/MISSION_EX_M0803.md",
     "execution/MISSION_EX_M0804.md",
-    "game-design/19_TRAINING_DECISIONS.md"
+    "game-design/19_TRAINING_DECISIONS.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Goal: Chapter 8's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0801.md .. M0804.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH08 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry)."
+   "prompt": "Goal: Chapter 8's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0801.md .. M0804.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH08 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/19_TRAINING_DECISIONS.md (real alternatives, Outpost Status forecasts, NASA data briefing and debrief, success/partial/fail with retry).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md for this chapter; it must feel like a professional game, not a form to fill in."
   },
   {
    "id": "M3-8C",
@@ -3428,6 +3484,22 @@
     "M1-19",
     "M1-34",
     "M0-14"
+   ]
+  },
+  {
+   "id": "R26",
+   "title": "AAA-quality puzzles and clues woven into the story",
+   "source": "Team goal (4 Nov): 'fun like professional Steam and AAA games, long, with the story'; score sheet: Creativity, Presentation",
+   "tasks": [
+    "M1-38",
+    "M1-31",
+    "M3-2P",
+    "M3-3P",
+    "M3-4P",
+    "M3-5P",
+    "M3-6P",
+    "M3-7P",
+    "M3-8P"
    ]
   }
  ]
