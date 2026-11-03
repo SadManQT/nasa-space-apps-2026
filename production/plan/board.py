@@ -2,6 +2,9 @@
 """Team task board for Last Light Academy: one JSON source of truth, the "go next" commands
 and the HTML view. Standard library only; run from anywhere in the repo.
 
+  python3 production/plan/board.py take --tool codex --count 5 --by "Atik/codex"   # "continue": claim a chunk
+  python3 production/plan/board.py mine --by "Atik/codex"     # your claimed tasks, in work order
+  python3 production/plan/board.py stale --days 2             # claims nobody has touched for 2+ days
   python3 production/plan/board.py next --tool codex          # the next task for your AI
   python3 production/plan/board.py show T-020                 # one task in full
   python3 production/plan/board.py claim T-020 --by "Atik/codex"
@@ -37,7 +40,7 @@ def load():
 
 
 def save(data):
-    data["updated"] = today()
+    data.pop("updated", None)  # a board-wide stamp would make every concurrent save conflict in git
     problems = validate(data)
     if problems:
         sys.exit("board not saved:\n  " + "\n  ".join(problems))
@@ -114,7 +117,9 @@ def describe(t, tasks):
 
 
 def render(data):
-    payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    view = dict(data, updated=max(t.get("updated", "") for t in data["tasks"]))
+    # One field per line, like tasks.json, so two teammates' saves merge in git like the JSON does.
+    payload = json.dumps(view, indent=1, ensure_ascii=False).replace("</", "<\\/")
     return TEMPLATE.read_text(encoding="utf-8").replace("/*BOARD_DATA*/null", payload)
 
 
@@ -150,6 +155,10 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("next"); p.add_argument("--tool", choices=TOOLS); p.add_argument("--all", action="store_true")
+    p = sub.add_parser("take"); p.add_argument("--tool", choices=TOOLS); p.add_argument("--count", type=int, default=5)
+    p.add_argument("--by", required=True)
+    p = sub.add_parser("mine"); p.add_argument("--by", required=True)
+    p = sub.add_parser("stale"); p.add_argument("--days", type=int, default=2)
     p = sub.add_parser("show"); p.add_argument("id")
     p = sub.add_parser("claim"); p.add_argument("id"); p.add_argument("--by", required=True)
     p = sub.add_parser("done"); p.add_argument("id"); p.add_argument("--evidence", required=True)
@@ -180,6 +189,25 @@ def main():
         else:
             print(describe(found[0], tasks))
             print(f"\nClaim it: python3 production/plan/board.py claim {found[0]['id']} --by \"<your name>/<your AI>\"")
+    elif a.cmd == "take":
+        chunk = next_tasks(data, a.tool)[:a.count]
+        if not chunk:
+            sys.exit("Nothing is ready for this tool. Try without --tool, or `list --status blocked`.")
+        for t in chunk:
+            t.update(status="in_progress", owner=a.by, updated=today())
+        save(data)
+        print(f"Claimed {len(chunk)} for {a.by}: " + ", ".join(t["id"] for t in chunk)
+              + "\nPush the claim now, then work through them in this order (board.py show <id> for each prompt):")
+        print("\n".join(f"  {t['id']}  [{t['milestone']} {t['priority']} {t['tool']}]  {t['title']}" for t in chunk))
+    elif a.cmd == "mine":
+        own = [t for t in data["tasks"] if t["status"] == "in_progress" and t.get("owner") == a.by]
+        print("\n".join(f"{t['id']}  [{t['milestone']} {t['priority']} {t['tool']}]  {t['title']}" for t in own)
+              or f"No tasks in progress for {a.by}.")
+    elif a.cmd == "stale":
+        cutoff = (datetime.date.today() - datetime.timedelta(days=a.days)).isoformat()
+        old = [t for t in data["tasks"] if t["status"] == "in_progress" and t.get("updated", "") < cutoff]
+        print("\n".join(f"{t['id']}  claimed by {t.get('owner') or '?'} on {t.get('updated', '?')}  {t['title']}" for t in old)
+              or f"No claims older than {a.days} days.")
     elif a.cmd == "show":
         print(describe(tasks[a.id], tasks) if a.id in tasks else f"no task {a.id}")
     elif a.cmd == "claim":

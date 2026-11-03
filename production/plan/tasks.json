@@ -1,7 +1,6 @@
 {
- "updated": "2026-11-04",
  "project": "Last Light Academy — NASA Space Apps 2026, Build a Junior Astronaut Mission Trainer",
- "go_next_prompt": "Go next on Last Light Academy. Run `git pull --rebase`, then read production/plan/GO_NEXT.md and follow it exactly: get the next ready task for your tool with `python3 production/plan/board.py next --tool <claude|codex|antigravity|muse|gemini>`, claim it and push the claim, do only that task inside its paths, verify it with game/tools/run_tests.sh and screenshots where asked, log any AI generation, mark it done with evidence, commit under my GitHub account with no AI co-author lines, push, and tell me what changed and which task is next.",
+ "go_next_prompt": "Continue on Last Light Academy. Run `git pull --rebase`, then read production/plan/GO_NEXT.md and follow its \"continue\" loop exactly: check `python3 production/plan/board.py mine --by \"<my name>/<your lane>\"`, then `board.py take --tool <claude|codex|antigravity|muse|gemini> --count 5 --by \"<my name>/<your lane>\"`, push the claim, and do each task in order inside its paths: verify with game/tools/run_tests.sh and screenshots where asked, log AI use, mark it done with evidence, commit under my GitHub account with no AI co-author lines, and push after every task. Then take the next chunk. Block what you cannot do and move on. Stop after about 8 tasks or when nothing is ready, release anything unstarted, and give me a short summary.",
  "deadlines": [
   {
    "when": "Every day",
@@ -1083,8 +1082,8 @@
    "prompt": "Problem (BUGHUNT B16): operations set local completion flags only; knowledge, knowledge_flags and acquired_evidence_ids never change, the\nJournal shows the startup list, and the HUD reads raw dialogue, bypassing DialogueService knowledge requirements.\nDo: grant the canonical evidence/knowledge ids at the owning operation (ids from the content catalog), save and restore them, render all\ndialogue through DialogueService so knowledge-gated lines (e.g. Noor's identity only from CH05) are respected, and refresh the Journal.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests: an evidence operation adds its id, survives a JSON save/load, and a gated line stays hidden until then."
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [
     "M0-13"
    ],
@@ -1102,7 +1101,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "id": "M1-27",
    "milestone": "M1",
    "priority": "P0",
@@ -1139,8 +1138,8 @@
    "prompt": "Goal: the puzzles and clues feel like a professional Steam/AAA game, last long enough to matter, and are woven into the story, while staying\nclear for a 10–12-year-old and grounded in NASA data. Write game-design/22_PUZZLE_CLUE_DESIGN.md, one section per mission (EX-M0101..EX-M0804):\n1. The investigation: 3–6 clues the player discovers in the world (crew dialogue lines that already exist in STORY_FULL, Noor's logs and\n   records, instrument readouts from the NASA fixtures, objects placed in the room, the Data Card), where each clue is, and which role sees it\n   privately in Class mode (M1-37).\n2. The deduction: what the player must connect, the 'aha' moment, and the wrong-but-reasonable idea a smart player tries first (and how the\n   game answers it without punishing).\n3. The decision and its escalation: stakes rising across the mission's three scenes, a set-piece payoff (a cutscene beat, a lighting or\n   sound change, Alo's posture), and how success, partial success and failure feel different.\n4. Hints in three tiers (nudge, direction, worked example) instead of any pre-filled answer; Family/Cadet/Engineer differences.\n5. Target playtime (most missions 15–25 minutes of real play, not padding) and the moment-to-moment feel (what the hands do, what the ears hear).\nStudy and name the specific techniques you borrow from proven designs: Outer Wilds and Return of the Obra Dinn (knowledge-based deduction and\njournal), Frostpunk and Subnautica (survival trade-offs under pressure), Death Stranding (route and load planning), Portal and The Witness\n(teaching through play, escalating rules), Firewatch and Gone Home (environmental storytelling and found logs). No copying of their content,\nonly their design principles.\nRules: story text is canon word for word (new clue text is new world text, e.g. labels and log metadata, never rewritten dialogue); numbers in\n08_PUZZLE_DESIGNS.md are never edited (proposals go to the user); plants never have faces; English only; science rules hold.\nThen update each M3 puzzle and mission task prompt on the board to point at its section, and run board.py check.\nEvery investigation ends in a decision made the NASA way, using the practices in game-design/23_NASA_MISSION_PRACTICE.md (trade-study card, flight rules, Go/No-Go poll, checklists, risk matrix)."
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [],
    "paths": [
     "game-design/23_NASA_MISSION_PRACTICE.md",

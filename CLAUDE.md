@@ -1,6 +1,6 @@
 # Last Light Academy — instructions for AI agents
 
-**"Go next":** when a teammate says "go next", follow [production/plan/GO_NEXT.md](production/plan/GO_NEXT.md) for exactly one task from the team board (`python3 production/plan/board.py next --tool claude`; readable view: `production/plan/BOARD.html`). That protocol overrides the template's per-file "May I write" prompts for the claimed task's own paths; approvals the task itself requires still apply.
+**"Continue" / "go next":** when a teammate says "continue" (take a chunk of up to 5 tasks and keep going) or "go next" (one task), follow [production/plan/GO_NEXT.md](production/plan/GO_NEXT.md) with the team board (`python3 production/plan/board.py next --tool claude`; readable view: `production/plan/BOARD.html`). That protocol overrides the template's per-file "May I write" prompts for the claimed task's own paths; approvals the task itself requires still apply.
 
 Before any work on assets, cutscenes, story or gameplay, read [PRODUCTION_HANDBOOK.md](PRODUCTION_HANDBOOK.md). It holds the canon order, locked decisions, pipeline, tools and credit rules, the full asset and cutscene lists, and current status. Update it in the same change whenever a decision or status changes.
 
@@ -17,5 +17,6 @@ Never break these (details in the handbook):
 ## Learned rules
 - Always verify each generated asset is correct, and remove unnecessary files so the folders and GitHub repo stay clean.
 - Never recommend or assume purchases that spend the user's money; present paid options only as choices the user explicitly approves.
+- Make all game missions and puzzles scientifically accurate, following NASA project requirements, real NASA mission types, and realistic engineering trade-offs.
 <!-- end claude-reflect -->
 

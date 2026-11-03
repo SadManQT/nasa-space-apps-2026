@@ -75,11 +75,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2>Deadlines</h2>
   <div class="grid" id="deadlines"></div>
 
-  <h2>Go next</h2>
+  <h2>Continue (or go next)</h2>
   <div class="panel go">
-    <p>Say this to your AI (Claude Code, Codex/ChatGPT Astra, Antigravity, Muse or Gemini) in the repo folder. It pulls, picks the first ready task for its tool, claims it, does it, verifies it and pushes. Full protocol: <code>production/plan/GO_NEXT.md</code>.</p>
+    <p>Say this to your AI (Claude Code, Codex/ChatGPT Astra, Antigravity, Muse or Gemini) in the repo folder. It pulls, claims a chunk of up to 5 ready tasks for its lane, and does them one by one: verify, log, push after each task, then the next chunk. Full protocol: <code>production/plan/GO_NEXT.md</code>.</p>
     <pre id="goPrompt"></pre>
-    <div class="row"><button class="primary" type="button" data-copy="goPrompt">Copy “go next” prompt</button></div>
+    <div class="row"><button class="primary" type="button" data-copy="goPrompt">Copy “continue” prompt</button></div>
   </div>
 
   <h2>Milestones</h2>
