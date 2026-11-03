@@ -6,7 +6,7 @@
 
 ## Assignment
 
-Implement the Outcome screen/component as a live, accessible GodotControl interface connected to the shared campaign.
+Implement the Outcome screen/component as a live, accessible Godot Control interface connected to the shared campaign.
 
 Execute this bounded task, integrate it with the current project and produce the acceptance evidence below. First reconcile the snapshot with current files; reuse already approved work and complete the real remaining gap.
 
@@ -37,7 +37,7 @@ SYS02/03/05/06/07, shared UI_Kit/theme, and the owning mission/puzzle/audio serv
 2. Build readable English layout with role icon plus name, navy/ivory/gold tokens, correct focus order and controller/keyboard navigation.
 3. Implement normal/empty/loading/disabled/blocked/error/confirmed states, with a visible reason for any gated action.
 4. Bind displayed values and previews to shared state; on confirmation send one versioned command, never mutate resource arithmetic in the Control.
-5. Support 150%text/reflow, caption-safe composition,44 px minimum targets, non colour cues, back/cancel/focus restore and pause-safe reading.
+5. Support 150%text/reflow, caption-safe composition,44 px minimum targets, non-colour cues, back/cancel/focus restore and pause-safe reading.
 6. Gate future identities/evidence and internal debug fields; show current radio origin/location/scenario qualifiers consistently.
 7. Test every edge case quoted below, duplicate click, reopened modal, save/load, language-independent English labels and assist settings.
 8. Integrate the screen in an actual mission/boot flow and provide screenshots/interaction evidence at agreed resolutions.
@@ -58,7 +58,7 @@ SYS02/03/05/06/07, shared UI_Kit/theme, and the owning mission/puzzle/audio serv
 - English only. Older Bangla shaping/localization requirements do not authorize Bangla script in runtime.
 - The complete campaign uses 32 missions/96 scenes, not the legacy structure.
 - No overlays expose a raw internal flag as a player objective.
-- No essential instruction is baked into a 3 D texture.
+- No essential instruction is baked into a 3D texture.
 - Source dimensions/contrast are targets to test, not pre-certified measurements.
 - For Mission Table/puzzle HUD, show all known costs and distinguish unknown future events; prediction and commit share the same simulation.
 - For journal/discovery/credits, preserve acquired knowledge, science provenance and current Noor reveal/MARS closure gates.

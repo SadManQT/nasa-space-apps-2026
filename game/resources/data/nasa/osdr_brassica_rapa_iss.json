@@ -1,0 +1,80 @@
+{
+ "source_id": "osdr_brassica_rapa_iss",
+ "retrieved": "2026-11-04",
+ "title": "Brassica rapa (mizuna) grown on the International Space Station",
+ "agency": "NASA Open Science Data Repository (GeneLab); OSD-59 with the Russian Federal Space Agency",
+ "dataset_id": "OSDR OSD-59 (GLDS-59, Lada, Expedition 22); OSD-412 (Veggie VEG-03D, SpaceX-12)",
+ "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-59",
+ "request_urls": [
+  "https://osdr.nasa.gov/osdr/data/search?term=Brassica+rapa&type=cgene&size=20"
+ ],
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Sugimoto et al. (OSD-59) and Hummerick et al. (OSD-412), NASA OSDR.",
+ "fields_used": [
+  "Accession",
+  "Study Title",
+  "Mission",
+  "Experiment Platform",
+  "protocol PAR, days, photoperiod"
+ ],
+ "values": {
+  "OSD-59": {
+   "title": "RNA-Seq transcriptome analysis of reactive oxygen species gene network in Mizuna plants grown in long-term space flight",
+   "mission": {
+    "Start Date": "30-Nov-09",
+    "End Date": "18-Mar-10",
+    "Name": "Expedition 22"
+   },
+   "platform": "Lada",
+   "space_program": "NASA, FSA",
+   "organism": "Brassica rapa",
+   "par_umol_m2_s": [
+    125,
+    250
+   ],
+   "cultivation_days": 27,
+   "photoperiod_16_8": false,
+   "temperature_23C": false
+  },
+  "OSD-412": {
+   "title": "Spatial characterization of microbial communities on multi-species leafy greens grown simultaneously in the Veggie vegetable production systems on the International Space Station VEG-03D",
+   "mission": {
+    "Start Date": "08/14/2017",
+    "End Date": "09/17/2017",
+    "Name": "SpaceX-12"
+   },
+   "platform": "Vegetable Production System (Veggie)  International Space Station Environment Simulator (ISSES)",
+   "space_program": "NASA",
+   "organism": "Microbiota",
+   "par_umol_m2_s": [
+    200,
+    300
+   ],
+   "cultivation_days": null,
+   "photoperiod_16_8": false,
+   "temperature_23C": false
+  }
+ },
+ "evidence_label": "Observed",
+ "derived": [
+  {
+   "name": "full_lamp_par_reference",
+   "value": [
+    200,
+    300
+   ],
+   "unit": "umol/m2/s",
+   "formula": "Veggie VEG-03D protocol PAR range",
+   "drives": "P-02 light FULL; garden lamp card"
+  },
+  {
+   "name": "lada_cultivation_days",
+   "value": 27,
+   "unit": "days",
+   "formula": "OSD-59 description",
+   "drives": "Alo care montage context"
+  }
+ ],
+ "boundary": "Leafy Brassica rapa on the ISS in microgravity, not Alo's flowering cultivar on the Moon. OSD-412 PAR, photoperiod and temperature describe its ground chambers simulating ISS conditions.",
+ "src_card": "SRC-PLANTS"
+}

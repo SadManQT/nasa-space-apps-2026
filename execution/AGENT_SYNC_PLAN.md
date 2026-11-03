@@ -4,6 +4,8 @@
 **Role:** synchronization lead
 **Scope:** coordination only. This file does not implement gameplay, shared runtime code, assets, audio, or UI. The existence of a prompt, proposed path, or planned handoff is never implementation evidence.
 
+**Status (3 Nov 2026):** this plan coordinated the 2 Nov worker batch and is now history. That batch was integrated and pushed (`ff09cfd`): Godot 4.7.2 runs, the main scene boots the production campaign, and the Chapter 1–8 route fixtures pass. Coordination now runs through the team board: `production/plan/tasks.json` (readable as `production/plan/BOARD.html`), one task per "go next" as described in `production/plan/GO_NEXT.md`, with ownership in each task's *owns paths*. Status lives in `PRODUCTION_HANDBOOK.md` §10. Sections 2, 9 and 10 below describe the 2 Nov baseline before that batch.
+
 ## 1. Authority and baseline rule
 
 - Canonical story: `full-game-story/STORY_FULL.md` and `full-game-story/story-data.json` — 8 chapters, 32 missions, 96 scenes, 385 dialogue lines, with IDs `EX-CHxx-Sxx` and `EX-Mxxxx`.
@@ -144,7 +146,7 @@ The hackathon target is 13–14 November 2026. Optimize for a truthful, polished
 | Current/stale character contract is mixed | Actual installed 65/68-bone, 44-clip GLBs and current dated handbook win over old 78-bone README/registry descriptions. Do not change accepted models just to satisfy a stale number. |
 | Cutscene status is inflated | Three OGVs are present. Remaining current-style cutscenes and the refused/slow-push motion shots are unverified until actual masters, runtime files, and playback evidence exist. |
 
-## 9. Current blockers and smallest remedies
+## 9. Blockers on 2 November (historical; see the board for current ones)
 
 1. **Godot 4.7.2 is not discoverable on this host.** Install or expose the approved executable, then rerun clean import, `verify_assets.gd`, all eight existing test scripts, and the new boot/Chapter 1 fixtures. Do not quote historical pass counts as fresh results.
 2. **No application main scene or campaign implementation exists.** Complete the interface freeze, then create the primary-agent bootstrap files and wire `run/main_scene` only after a real Chapter 1 fixture loads.
@@ -153,7 +155,7 @@ The hackathon target is 13–14 November 2026. Optimize for a truthful, polished
 5. **Room/interaction/collision contracts do not exist in `game/`.** Asset owners must publish named visual roots, collision roots, focus targets, sockets, movable parts, screen slots, legal visual states, and state-to-animation mappings before mission owners bind actions.
 6. **Prompt snapshot drift exists.** The pack names `ca01433`, while the checkout is `5f94bc0`; SYS01 must record current source hashes/revisions before content import or status updates.
 
-## 10. Verification matrix
+## 10. Verification matrix (2 November baseline, historical)
 
 | Gate | Current evidence | Required verification | Current label |
 |---|---|---|---|

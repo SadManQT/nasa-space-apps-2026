@@ -1,4 +1,4 @@
-# SRC-QUAKES — Moon quakes and faults near the lunar south pole
+# SRC-QUAKES — Moonquakes and faults near the lunar south pole
 
 **Execution prompt · snapshot 27 October 2026 / `ca01433` · Scientific evidence artifact.**
 
@@ -37,7 +37,7 @@ SYS13 science pipeline, SYS06 knowledge, acquired journal UI and the actual owni
 2. Classify the deliverable as a historical observation, article/experiment record, a computed product or a simulated teaching diagram. A primary-source page does not automatically provide a game-ready dataset.
 3. Download only the needed source-compatible material or author a qualified diagram; store raw provenance, transformation parameters, units, time stamps and limitations separately from the runtime card.
 4. Where terrain/ephemeris/radiation processing is genuinely required, implement and independently validate that pipeline before asserting a computed local result. Use an explicit source-qualified training fallback while it remains pending.
-5. Build readable English visuals/captions with non-colour context and an inspect able source/claim label; keep them available offline.
+5. Build readable English visuals/captions with non-colour context and an inspectable source/claim label; keep them available offline.
 6. Integrate with the acquired-only science journal and owning mission; verify the player can distinguish observation, inference and fictional consequence.
 
 
@@ -46,7 +46,7 @@ SYS13 science pipeline, SYS06 knowledge, acquired journal UI and the actual owni
 ### Authored source/claim record
 
 - **id:** SRC-QUAKES
-- **title:** Moon quakes and faults near the lunar south pole
+- **title:** Moonquakes and faults near the lunar south pole
 - **publisher:** NASA / LROC / Smithsonian
 - **url:** https://www.nasa.gov/solar-system/moon/shrinking-moon-causing-moonquakes-and-faults-near-lunar-south-pole/
 - **supports:** Apollo seismic records and terrain studies support lunar quake and fault hazards, including possible south-polar hazards with location uncertainty.
@@ -55,7 +55,7 @@ SYS13 science pipeline, SYS06 knowledge, acquired journal UI and the actual owni
 
 ### Implementation boundary
 
-Preserve this claim limit while producing an accessible runtime artifact. Keep historical source dates distinct from fictional 2046–2047 mission dates. The final story uses a 2017 historical storm replay and 2012 counter factual. Aurora's precise horizon/night/eclipse sight and the surveyed road are not certified by a generic source card.
+Preserve this claim limit while producing an accessible runtime artifact. Keep historical source dates distinct from fictional 2046–2047 mission dates. The final story uses a 2017 historical storm replay and 2012 counterfactual. Aurora's precise horizon/night/eclipse sight and the surveyed road are not certified by a generic source card.
 
 
 ## Required deliverables

@@ -1,0 +1,209 @@
+{
+ "source_id": "crater_dose_2012_07",
+ "retrieved": "2026-11-04",
+ "title": "Dose measured at the Moon by LRO CRaTER, July 2012",
+ "agency": "NASA LRO CRaTER team (University of New Hampshire); archived at NASA PDS PPI",
+ "dataset_id": "CRaTER L30 daily dose rate, detectors D1-D6 (as measured)",
+ "url": "https://crater-products.sr.unh.edu/data/inst/dose/table_l30drate.php",
+ "request_urls": [
+  "https://crater-products.sr.unh.edu/data/inst/dose/table_l30drate.php"
+ ],
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit (NASA mission data)",
+ "citation": "LRO CRaTER Legacy Data Products, daily average dose rates (Schwadron et al.), July 2012.",
+ "fields_used": [
+  "Date",
+  "D1..D6 dose rate, mGy(Si)/day, not shadow-corrected"
+ ],
+ "values": {
+  "columns": [
+   "date",
+   "D1",
+   "D2",
+   "D3",
+   "D4",
+   "D5",
+   "D6"
+  ],
+  "daily": [
+   [
+    "2012-07-15",
+    0.50483,
+    0.26169,
+    0.09236,
+    0.13995,
+    0.09421,
+    0.14519
+   ],
+   [
+    "2012-07-16",
+    0.12656,
+    0.15554,
+    0.0893,
+    0.1396,
+    0.09057,
+    0.14213
+   ],
+   [
+    "2012-07-17",
+    5.94744,
+    3.17938,
+    0.14136,
+    0.20604,
+    0.48323,
+    0.37778
+   ],
+   [
+    "2012-07-18",
+    13.30359,
+    6.85053,
+    0.17765,
+    0.2538,
+    1.62358,
+    2.72079
+   ],
+   [
+    "2012-07-19",
+    19.65351,
+    12.38721,
+    0.81459,
+    0.99654,
+    2.26555,
+    1.89697
+   ],
+   [
+    "2012-07-20",
+    14.29558,
+    7.86339,
+    0.2636,
+    0.35141,
+    1.08963,
+    0.82011
+   ],
+   [
+    "2012-07-21",
+    2.03779,
+    1.13194,
+    0.10832,
+    0.16083,
+    0.20434,
+    0.21809
+   ],
+   [
+    "2012-07-22",
+    0.57499,
+    0.37797,
+    0.09695,
+    0.14592,
+    0.11575,
+    0.16059
+   ],
+   [
+    "2012-07-23",
+    2.11979,
+    2.06585,
+    0.60706,
+    0.75951,
+    0.79002,
+    0.91389
+   ],
+   [
+    "2012-07-24",
+    3.91732,
+    4.0897,
+    0.90806,
+    1.09618,
+    1.34724,
+    1.47424
+   ],
+   [
+    "2012-07-25",
+    3.70683,
+    3.61772,
+    0.56865,
+    0.6956,
+    1.02353,
+    1.07495
+   ],
+   [
+    "2012-07-26",
+    2.40896,
+    2.25788,
+    0.3104,
+    0.39542,
+    0.58837,
+    0.6204
+   ],
+   [
+    "2012-07-27",
+    1.54089,
+    1.38085,
+    0.18517,
+    0.25083,
+    0.34504,
+    0.37962
+   ],
+   [
+    "2012-07-28",
+    1.20568,
+    1.01455,
+    0.13934,
+    0.19763,
+    0.24732,
+    0.28489
+   ],
+   [
+    "2012-07-29",
+    0.80033,
+    0.65915,
+    0.11547,
+    0.17205,
+    0.17848,
+    0.22326
+   ],
+   [
+    "2012-07-30",
+    0.52319,
+    0.44761,
+    0.1053,
+    0.15734,
+    0.13895,
+    0.18804
+   ],
+   [
+    "2012-07-31",
+    0.43177,
+    0.38546,
+    0.10628,
+    0.15824,
+    0.13048,
+    0.18275
+   ]
+  ]
+ },
+ "evidence_label": "Observed",
+ "derived": [
+  {
+   "name": "d1_before",
+   "value": 0.57499,
+   "unit": "mGy(Si)/day",
+   "formula": "D1 on 2012-07-22",
+   "drives": "P-13 card"
+  },
+  {
+   "name": "d1_peak",
+   "value": 3.91732,
+   "unit": "mGy(Si)/day",
+   "formula": "D1 on 2012-07-24",
+   "drives": "P-13 card"
+  },
+  {
+   "name": "d1_rise",
+   "value": 6.8,
+   "unit": "ratio",
+   "formula": "D1 24 Jul / D1 22 Jul",
+   "drives": "P-13 card: what reached the Moon"
+  }
+ ],
+ "boundary": "Dose in silicon detectors in lunar orbit, not tissue dose on the surface. The July 2012 CME itself missed; these particles are what really reached the Moon.",
+ "src_card": "SRC-STORM2012"
+}

@@ -23,7 +23,7 @@ Read [02_SHARED_CONTRACT.md](02_SHARED_CONTRACT.md), [03_SYSTEM_INTERFACES.md](0
 - [production/cutscenes/shots.csv](../production/cutscenes/shots.csv)
 - [production/tools/compose_cutscene.py](../production/tools/compose_cutscene.py)
 - [game-design/12_CINEMATIC_DIRECTION.md](../game-design/12_CINEMATIC_DIRECTION.md)
-- Current v 7 source/master/OGV files and the owning mission prompt; legacy cinematic text is subordinate to final canon.
+- Current v7 source/master/OGV files and the owning mission prompt; legacy cinematic text is subordinate to final canon.
 
 
 ## Ownership and dependencies
@@ -37,11 +37,11 @@ Approved current cast/world presentation; owning mission `post-credits`; SYS06 d
 
 1. Inspect current runtime/master/spec; retain the already passing material in CS01..03; inspect and complete their specifically documented fallback-motion or integration gaps instead of regenerating whole cuts. Identify exact missing integration or quality defect.
 2. Write a shot/beat plan from the owning final scene: correct participants, physical positions, camera, source of the voice, reveal state and the world operation that remains interactive.
-3. Reuse approved 3 D references/start frames; verify any genuinely new hero/character concept approval before credit spend. Check live tool/model/cost availability and log generations.
+3. Reuse approved 3D references/start frames; verify any genuinely new hero/character concept approval before credit spend. Check live tool/model/cost availability and log generations.
 4. Create/review source frames and motion for identity/limbs/hands/patches/plant biology/lighting/science; use in-engine performance where appropriate to the interactive beat.
 5. Record/render exact voices separately, edit music/sound/captions with clear origin and intelligibility; lip-sync visible mouths or stage a justified cutaway.
 6. Assemble master with source JSON/captions, convert to verified Theora OGV and test actual playback/audio on the export target.
-7. Bind the film at its declared event/predicate; pause/skip/resume safely and restore camera/focus/NPC anchors without completing an un performed puzzle.
+7. Bind the film at its declared event/predicate; pause/skip/resume safely and restore camera/focus/NPC anchors without completing an unperformed puzzle.
 8. Review start/middle/end plus moving critical moments, verify exact line/reveal/timing and hand off source/runtime/provenance/test evidence.
 
 
@@ -70,7 +70,7 @@ Maintain current anime faces, outfits, heights, role colours and patches; correc
 
 ### Source assembly
 
-Existing anime examples:`production/cutscenes/v7/src/CS-01.json`, CS-02.json, CS-03.json. Inspect the actual schema and`compose_cutscene.py`before extending it. Publish source frame/shot/voice/music/caption metadata and provenance. Runtime OGV may use existing Godot Movie Maker pipeline when FF mpeg lacks Theora; discover actual host tools first.
+Existing anime examples:`production/cutscenes/v7/src/CS-01.json`, CS-02.json, CS-03.json. Inspect the actual schema and`compose_cutscene.py`before extending it. Publish source frame/shot/voice/music/caption metadata and provenance. Runtime OGV may use existing Godot Movie Maker pipeline when FFmpeg lacks Theora; discover actual host tools first.
 
 
 ## Required deliverables

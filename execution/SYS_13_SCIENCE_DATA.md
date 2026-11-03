@@ -36,10 +36,10 @@ Follow the Phase 0 order in `06_EXECUTION_BOARD.md`. Treat new module names in `
 
 1. Use the 15 primary-source cards and scientific register to map each display to observed data, computed processing or simulated rules.
 2. Create offline bundled input/output provenance, licensing, units, time stamps and validation records for illumination/terrain/ephemerides/storm/plant evidence.
-3. Preserve 2017 historical replay versus 2012 counter factual labels and fictional expedition dates.
+3. Preserve 2017 historical replay versus 2012 counterfactual labels and fictional expedition dates.
 4. Do not mark local Aurora sky verified without site, horizon mask, ephemeris and independently checked geometry; provide an explicit camera/conceptual fallback.
 5. Separate game zaps/resources from measured units; keep prediction/observation/inference distinguishable.
-6. Test offline availability, source card links, unknown/missing data fallback s and learner interpretation for each relevant chapter.
+6. Test offline availability, source card links, unknown/missing data fallbacks and learner interpretation for each relevant chapter.
 
 
 ## Task-specific source and implementation detail

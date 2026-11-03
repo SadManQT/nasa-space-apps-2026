@@ -35,9 +35,9 @@ Core rendering/import conventions and the owning mission/world interaction contr
 ## Detailed work sequence
 
 1. Inspect the current binary/source, approved concept and owning scene requirements. Determine the exact missing function, style state or quality defect; preserve the known-good version until the replacement passes.
-2. For a 3 D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
+2. For a 3D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
 3. Read the plant timeline and owning final scenes; identify whether this is an original, descendant, cotton, edible crop or 2034 seedling. Model only the correct biological stage.
-4. Preserve four-petal led yellow cross mustard flowers, lobed leaves/slender pods, purple Alo/green Tara identities, natural cotton and the distinct un flowered old trial. Plants have no eyes, face or mouth.
+4. Preserve four-petalled yellow cross mustard flowers, lobed leaves/slender pods, purple Alo/green Tara identities, natural cotton and the distinct unflowered old trial. Plants have no eyes, face or mouth.
 5. Build named growth/stress states or stage swaps with safe blend/animation transitions; the biology service owns dates and meaning, not a model playback timer.
 6. Fit plants/cassettes/trays/chambers/glove ports and allow magnified inspection without exposing a flower to vacuum. Descendants carry lineage labels; original Alo is not revived.
 7. Review silhouette and botanical close-ups in neutral and actual grow lighting; verify the requested seed/sprout/bud/bloom/pod/dry state cannot be confused.
@@ -60,13 +60,13 @@ Alo's pre-bloom 2046 bud, not an unflowered sprout and never proof of a 2034 see
 
 ### Reference/generation brief (use only if a new or revised asset is actually required)
 
-Botanically grounded anime/cel plant asset PL_Alo_Bud, matching its exact identity and stage in this task. Natural plant structure with clear leaves/stem/flowers or pods appropriate to that stage; no eyes, no face, no mouth. Mustard has four yellow petals and correct Alo/Tara stem identity; cotton and curled young 2034 seedlings are distinct. Clean neutral reference view, metric scale, stable pot/tray anchor and separate editable growth/stress states; all gameplay placement remains in a press uri sed enclosure.
+Botanically grounded anime/cel plant asset PL_Alo_Bud, matching its exact identity and stage in this task. Natural plant structure with clear leaves/stem/flowers or pods appropriate to that stage; no eyes, no face, no mouth. Mustard has four yellow petals and correct Alo/Tara stem identity; cotton and curled young 2034 seedlings are distinct. Clean neutral reference view, metric scale, stable pot/tray anchor and separate editable growth/stress states; all gameplay placement remains in a pressurised enclosure.
 
 ### Source and runtime handoff
 
 - Preserve editable source, runtime GLB/scene, embedded or project-policy textures, approved dimensions, material slots, collision, named pivots/sockets and explicit state variants.
 - Use existing `production/tools/` helpers and `game/tools/verify_assets.gd` after inspecting their current arguments; historical tool paths/versions are not live facts.
-- New character/hero prop designs require the exact 2 D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
+- New character/hero prop designs require the exact 2D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
 
 
 ## Required deliverables

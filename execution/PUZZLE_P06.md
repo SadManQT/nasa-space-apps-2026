@@ -57,7 +57,7 @@ SYS02 content, SYS03 state, SYS04 simulation, SYS05 interactions, SYS07 checkpoi
 - **Difficulty, timing and retry:** Medium emotional pacing; no timer. Reset current counting step only.
 - **Completion trigger:** 42 total, 12 allocated, 30 sealed reserve, map scanned and petal stored.
 - **Narrative consequence / flags:** seed_legacy_pending; old_garden_seedling_only; vault_route_known; founder_reserve=30.
-- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penal is e the ending.
+- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penalise the ending.
 
 <a id="p-07"></a>
 

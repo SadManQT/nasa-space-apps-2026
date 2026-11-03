@@ -57,7 +57,7 @@ SYS02 content, SYS03 state, SYS04 simulation, SYS05 interactions, SYS07 checkpoi
 - **Difficulty, timing and retry:** Easy; tokens reversible; reset preserves collected evidence.
 - **Completion trigger:** All three matches correct, fragment transcript opened and N.’s mustard-fields clue heard/read.
 - **Narrative consequence / flags:** recorder_context_pending; engineer_voice_heard. Identity of N remains unknown.
-- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penal is e the ending.
+- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penalise the ending.
 
 <a id="p-05"></a>
 

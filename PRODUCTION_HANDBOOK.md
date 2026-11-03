@@ -22,6 +22,8 @@ Last updated: 3 November 2026.
 | What every AI generation was | [production/AI_PROMPT_LOG.md](production/AI_PROMPT_LOG.md) |
 | How to make or check an asset | Section 6, scripts in [production/tools/](production/tools/) |
 | Detailed AI execution prompts for the complete game | [execution/00_START_HERE.md](execution/00_START_HERE.md), [master executor](execution/01_MASTER_EXECUTOR.md), and [coverage index](execution/99_COVERAGE_MATRIX.md) |
+| **What to work on next ("go next")** | The team board: [production/plan/BOARD.html](production/plan/BOARD.html) (view), [tasks.json](production/plan/tasks.json) (source), protocol in [GO_NEXT.md](production/plan/GO_NEXT.md) |
+| Whether the project meets the competition rules | [docs/competition-rules.md](docs/competition-rules.md) section H |
 
 ## 1. Project in one paragraph
 
@@ -56,8 +58,9 @@ When an older design doc disagrees with the latest story or with section 3, **th
 | 25 Oct 2026 | Patches: **Bangladesh flag on the LEFT shoulder**, round **Aurora mission patch** (yellow mustard flower and crescent Moon) on the RIGHT shoulder and right chest. **Never the NASA meatball or worm**, and nothing that implies NASA endorsement. |
 | 25 Oct 2026 | **No Bangla script anywhere in the game.** English only. The seed packet reads "ALO" and "N." in Latin letters. |
 | 25 Oct 2026 | **Plants never have eyes, faces or mouths.** Alo's personality comes from posture and movement only. |
-| 25 Oct 2026 | Cutscenes: **Seedance 2.5** through the ElevenLabs connector, generated from start frames rendered from the final 3D models. |
-| ~~25 Oct 2026~~ | ~~The five stylised cast turnarounds are approved.~~ Superseded 27 Oct by the v6 realistic designs in [production/concept/cast_v6/](production/concept/cast_v6/), **awaiting the user's approval**. |
+| ~~25 Oct 2026~~ | ~~Cutscenes: Seedance 2.5 through the ElevenLabs connector.~~ Superseded 3 Nov for new shots. |
+| 3 Nov 2026 | Generated cutscene shots use **Google Veo** (Flow or the Gemini app on the user's Google AI Pro accounts; generate freely, the user has several accounts), from start frames rendered from the final 3D models, per the user's standing rule to prefer Veo when Veo and ElevenLabs can both do it. ElevenLabs is for voice, music and sound effects. The three finished v7 cuts (CS-01 to CS-03) stay as they are; their three push-in shots are re-made with Veo. |
+| ~~25 Oct 2026~~ | ~~The five stylised cast turnarounds are approved.~~ Superseded 27 Oct by the v6 realistic designs in [production/concept/cast_v6/](production/concept/cast_v6/), which the anime cel style replaced the same day (row above). The current cast is built from the v8 turnaround sheets in [production/concept/turnarounds_v8/](production/concept/turnarounds_v8/); the installed GLBs are the runtime reference. |
 | standing | Every AI-generated asset is logged in [production/AI_PROMPT_LOG.md](production/AI_PROMPT_LOG.md) (tool, model, prompt, inputs, result, human changes). The Bangladesh guide requires this. |
 | standing | The user approves 2D design sheets before Tripo credits are spent on new characters or hero props. |
 
@@ -98,6 +101,7 @@ When an older design doc disagrees with the latest story or with section 3, **th
 | **Blender 5.2.2** (`/opt/homebrew/bin/blender`) | Clean-up, previews, pose tests, final GLB export | Headless scripts in `production/tools/`. |
 | **Codex CLI** | Code review (the user's standing rule: Codex reviews code) | `codex exec -s read-only "<review prompt>"`. `codex review --uncommitted` cannot take a custom prompt. |
 | **Antigravity CLI** `agy` (`~/.local/bin/agy`) | UI/frontend, browser testing, visual checks | `agy -p "<task>" --mode plan` for read-only work. |
+| **Claude Code Game Studios** v1.2.0 (installed 30 Oct 2026) | Game-dev workflow for Claude Code: 49 studio agents, 74 slash skills (`/start`, `/adopt`, `/setup-engine`, `/design-system`, `/sprint-plan`, `/dev-story`…), hooks and path rules | Lives in `.claude/`, `project.yaml`, `design/` and the studio docs in `docs/`. Its master config is the second half of `CLAUDE.md`; the project rules at the top win on conflict. Next steps: `/setup-engine godot 4.7`, then `/adopt` (our design docs live in `game-design/` and the code in `game/`, not the template's `design/gdd/` and `src/`). |
 
 **Tripo CLI rules (learned the hard way)**
 1. `--profile` and `TRIPO_PROFILE` are **ignored** by CLI 0.8.1. Only `tripo config use <name>` switches accounts. `tripo --profile X auth login` would overwrite the default account's login.
@@ -133,6 +137,9 @@ When an older design doc disagrees with the latest story or with section 3, **th
 ## 6. Pipeline
 
 **Characters** (one command per character once the turnaround is approved):
+
+**Current cast (v8 sheets, 27 Oct):** Tripo multiview quad model + Tripo Mixamo rig (**65 bones**; Mei **68** with 3 ponytail bones) + 42 Meshy clips retargeted + 2 hold poses = **44 clips (13 looping)**, built by `production/tools/finish_character_v7.sh <name> <height_m> <work_dir>` (body and clips via `build_character_v7.sh`, then toon face, sleeve patches, Mei's ponytail bones, hold poses); details in [HANDOFF.md](HANDOFF.md) "READ THIS FIRST". The per-character targets are in [production/manifest/characters.csv](production/manifest/characters.csv). Steps 3 and 5 below are the 25–26 Oct pipeline (78-bone Tripo rig, then the 24-bone Meshy rig with 25 clips), kept as history.
+
 1. Concept: a style key frame plus a four-view turnaround sheet (Nano Banana Pro, flat #D9D9D9 background, A-pose), in the same layout as Kai's sheet.
 2. `python3 production/tools/split_turnaround.py <sheet.png> <out>/views front,right,back,left`: splits by background colour, not equal quarters.
 3. `production/tools/make_character.sh <Name> <height_m>`: Tripo multiview (H3.1, detailed, PBR, private), then pre-rig check, then rig (v1.0-20240301 biped, 78 bones with fingers, twist and eye bones), then re-export with the skeleton, then Blender clean-up, then previews and pose test.
@@ -148,7 +155,7 @@ When an older design doc disagrees with the latest story or with section 3, **th
 **Godot:** the project lives in [game/](game/) (Godot 4.7.2, Forward+). `production/tools/sync_to_godot.sh` copies every finished GLB into its own folder `game/assets/<category>/<Name>/`, imports headless, then runs the quality gate. Textures stay embedded in the GLB (project import default `gltf/embedded_image_handling = 2`, Basis Universal), so each folder holds only `<Name>.glb` and `<Name>.glb.import` and textures are never stored twice. Commit `*.import` files; `game/.godot/` is cache.
 
 **Quality gate (every new or changed asset, no exceptions):**
-1. Automated: `production/tools/verify_gate.py` (run by the sync) compares what Godot imports with the asset's manifest row: imports with a mesh, triangles within budget, largest texture within budget, standing on the floor (lowest point y = 0 ± 1 cm), real size within 2 % (height or longest side), characters have 78 bones. Results: [production/review/asset_verification.md](production/review/asset_verification.md).
+1. Automated: `production/tools/verify_gate.py` (run by the sync) compares what Godot imports with the asset's manifest row: imports with a mesh, triangles within budget, largest texture within budget, standing on the floor (lowest point y = 0 ± 1 cm), real size within 2 % (height or longest side), characters have the bone count and clips of their manifest row (current cast: 65 bones, Mei 68; 44 clips, 13 looping). Results: [production/review/asset_verification.md](production/review/asset_verification.md).
 2. Visual: review the asset's renders (contact sheet in `production/review/`) against the concept and the art bible: right silhouette, colours, no faces on plants, no baked text, no broken geometry, nothing missing from the concept. Codex (`gpt-6-astra`, high) gives the independent second opinion. Results: [production/review/visual_review.md](production/review/visual_review.md).
 3. Only assets that pass both are marked `verified` in the registry.
 
@@ -204,11 +211,11 @@ Status: ✅ final · 🟡 in progress · ♻️ reuse candidate already exported
 
 | ID | Asset | Chapters | Status |
 |---|---|---|---|
-| CH_Kai (A-01) | v7 anime: Tripo quad model, 1.74 m, ~58k tris, Mixamo 65-bone rig, 44 clips, toon face layers (no brows) | all | ✅ `game/assets/characters/CH_Kai/` (27 Oct) |
-| CH_Amara (A-02) | v7 anime, 1.72 m, 65 bones, 44 clips, toon face | all | ✅ (27 Oct) |
-| CH_Mei (A-03) | v7 anime, 1.60 m, 65 + 3 ponytail bones, 44 clips, toon face | all | ✅ (27 Oct) |
-| CH_Rafi (A-04) | v7 anime, 1.84 m, 65 bones, 44 clips, toon face | all | ✅ (27 Oct) |
-| CH_Ferreira (A-07) | v7 anime, 1.68 m, 65 bones, 44 clips, toon face; Earth duty-layer variant still to make | all | ✅ suit coverall (27 Oct); ⬜ duty layer |
+| CH_Kai (A-01) | v7 anime (v8 sheets): Tripo quad model, 1.74 m, ~58k tris, Mixamo 65-bone rig, 44 clips, toon face layers (no brows) | all | ✅ `game/assets/characters/CH_Kai/` (27 Oct) |
+| CH_Amara (A-02) | v7 anime (v8 sheets), 1.72 m, 65 bones, 44 clips, toon face | all | ✅ (27 Oct) |
+| CH_Mei (A-03) | v7 anime (v8 sheets), 1.60 m, 68 bones (65 + 3 ponytail), 44 clips, toon face | all | ✅ (27 Oct) |
+| CH_Rafi (A-04) | v7 anime (v8 sheets), 1.84 m, 65 bones, 44 clips, toon face | all | ✅ (27 Oct) |
+| CH_Ferreira (A-07) | v7 anime (v8 sheets), 1.68 m, 65 bones, 44 clips, toon face; Earth duty-layer variant still to make | all | ✅ suit coverall (27 Oct); ⬜ duty layer |
 | Cadet variants | Helmet per cadet (role stripe); indoor navy duty coverall | all | ✅ indoor v7 coveralls; one helmet installed; ⬜ fitted role variants / EVA outfits |
 | Rao (A-61) | Bust/portrait with headset at an Earth desk (screen only) | CH01–08 | 🟡 v7 portrait installed at `game/assets/ui/portraits/CH_Rao_screen.png`; screen/voice integration pending |
 | Noor (A-09) | Archive portrait (2034, younger), present-day portrait, live rooftop scene in Dhaka for CH08-S10 | CH05–08 | 🟡 both v7 portraits installed in `game/assets/ui/portraits/`; v7 rooftop/live-call integration pending |
@@ -290,9 +297,15 @@ Rules from the cinematic guide and the final story: cutscenes are short, embedde
 
 Optional opening (from the gameplay entry flow): mustard fields to the Moon chamber, 20–30 s, with no claim that Alo existed before the story.
 
-## 10. Status (27 Oct 2026)
+## 10. Status (latest first)
 
-**3 Nov 2026 — verified later-campaign route checkpoint:** the production controller now selects and restores Chapter 1, Chapter 2 and the shared Chapter 3–8 route. Chapter 2 has ordered P-03/P-04 physical gates and primitive puzzle snapshots; Chapters 3–8 cover all 72 remaining scenes with receipt-validated P-05–P-16 gates, room targets, chapter boundaries and EX-CH08-S12 campaign completion. Fresh Godot 4.7.2 headless results: Chapter 2 **94/94**, Chapters 3–8 **452/452**, later runtime transition **7/7**, production session **8/8**, Chapter 1 flow **90/90**, UI **32/32**, logic **34/34**, save recovery **34/34**, Worker A **101/101**, Worker B **187/187**, Worker C **577/577**, boot **4/4** and content **9/9**. This is a functional route checkpoint in the current worktree, not final visual, learner, audio, device, export or release QA; no commit/push was made for this batch.
+**4 Nov 2026 — NASA data map, offline fixtures, credits (board M0-13, M0-14, M0-16):** [docs/SCIENCE_AND_DATA.md](docs/SCIENCE_AND_DATA.md) §B now maps 28 verified NASA and partner sources to every puzzle P-01–P-16 (B3 lists 15 numbers no dataset supports, with proposals; 08 is unchanged). `production/tools/fetch_nasa_data.py` wrote 28 small offline fixtures and `puzzle_sources.json` to `game/resources/data/nasa/` (no keys; `--check` passes). [CREDITS.md](CREDITS.md) credits every file in `game/assets`; no font files exist (the game uses Godot's built-in Open Sans, OFL). Still open: the official Resources tab (M0-12), the Data Card runtime and its content test (M0-15), docs/TEAM.md, and confirming each AI service's terms.
+
+**3 Nov 2026 (night) — documentation drift and AI-use disclosure (board M0-18, M0-17):** README, GAMEPLAY_DESIGN_FINAL, STORY_FINAL, CAMPAIGN_SEASON1, 10_GAMEPLAY_SYSTEMS, HANDOFF, the execution notes and this handbook now agree with canon (English only, faceless plants, Forward+ with a Compatibility fallback, CH4 rover 100/reserve 30, CH8 home air A8, 32 missions, v8 cast 65/68 bones and 44 clips); 717 split words in `execution/*.md` repaired; legacy-id game-design files carry a "historical ids" note; [shots.csv](production/cutscenes/shots.csv) rows are `archived-realistic`. [docs/AI_USE.md](docs/AI_USE.md) is the text for the project page's "Use of AI" field and [AI_PROMPT_LOG.md](production/AI_PROMPT_LOG.md) now covers 27 Oct to 3 Nov. Documentation only; no game code, assets or numbers changed.
+
+**3 Nov 2026 (evening) — rules check, bug hunt and team board:** the official Bangladesh Participants Guide was read in full and checked against the project ([docs/competition-rules.md](docs/competition-rules.md) §H): main gaps are NASA-data-first traceability, the AI-use log (stops at 27 Oct), LICENSE/credits, written early-start permission, and a build that lets the player make the decisions. A Codex bug hunt ([production/review/BUGHUNT_2026-11-03.md](production/review/BUGHUNT_2026-11-03.md)) found no P0 but ten P1 defects; most important, **Chapter 2 is not playable in the production controller** (no operations, B01; the Chapter 1 handoff cannot fund pollination, B03; Chapter 2 saves cannot restore, B02) although its fixture test passes. Fixes are task M0-02. New `game/tools/run_tests.sh` runs every suite and only passes a suite that prints a passing line and exits 0 (Godot exits 0 when a test script fails to parse: on this Mac 10 of 25 suites had silently not loaded because the gitignored class cache was stale). All remaining work is now on the team board with full prompts (116 tasks, M0–M3); every teammate's AI follows [production/plan/GO_NEXT.md](production/plan/GO_NEXT.md) when told "go next".
+
+**3 Nov 2026 — verified later-campaign route checkpoint:** the production controller now selects and restores Chapter 1, Chapter 2 and the shared Chapter 3–8 route. Chapter 2 has ordered P-03/P-04 physical gates and primitive puzzle snapshots; Chapters 3–8 cover all 72 remaining scenes with receipt-validated P-05–P-16 gates, room targets, chapter boundaries and EX-CH08-S12 campaign completion. Fresh Godot 4.7.2 headless results: Chapter 2 **94/94**, Chapters 3–8 **452/452**, later runtime transition **7/7**, production session **8/8**, Chapter 1 flow **90/90**, UI **32/32**, logic **34/34**, save recovery **34/34**, Worker A **101/101**, Worker B **187/187**, Worker C **577/577**, boot **4/4** and content **9/9**. This is a functional route checkpoint (committed and pushed in `ff09cfd`), not final visual, learner, audio, device, export or release QA. The later bug hunt shows the Chapter 2 fixture bypasses the real handoff (B01–B03).
 
 **3 Nov 2026 — commissioning result HUD:** fixed the numeric revision formatting that stopped `Confirm Plan` at `slice_hud.gd:180`. The commissioning regression now renders the actual result HUD after all three decisions. Fresh Godot 4.7 headless results: commissioning 15, boot 4 and content/UI 547 checks, all passing with no engine errors. Visual playthrough and export remain unverified.
 
@@ -319,7 +332,7 @@ Optional opening (from the gameplay entry flow): mustard fields to the Moon cham
 
 **Character rebuild v4 runtime (26 Oct, Codex):** `game/scripts/face_expression.gd` now mixes expressions and scheduled blinks with the unchanged `LipSync` runtime; `game/scripts/head_accent.gd` adds optional, bounded speech-onset head/neck motion (off by default). `test_face_expression.gd` passes 65 checks, including runtime `GLTFDocument` loading of the scratchpad Kai build (21 blend shapes, 65 bones). `test_lip_sync.gd` passes all 15 existing checks; its generated cue fixtures now use and clean the system temporary directory so it can run in a sandbox. Exact output, sandbox diagnostics and scene wiring: [codex_face_report.md](production/review/codex_face_report.md). These checks do not install or visually approve the five v4 GLBs; their sign-off and installation remain pending in [HANDOFF.md](HANDOFF.md).
 
-**26 Oct:** 49 assets in Godot, all verified (gate + visual review); the five characters now have Meshy rigs (24 bones, no finger bones) with 25 clips each (locomotion, idles, conversation, sit, care and repair actions), gate-checked for bones, clips and loops. All 23 cutscene shots done and reviewed ([cutscene_review.md](production/review/cutscene_review.md)). Next: Codex re-review of the six audit re-renders, collision and lightmap import setup for props, the 29 planned assets (environment kit first), audio, `.ogv` conversion.
+**26 Oct:** (historical: the 27 Oct v8 cast replaced these rigs with the 65/68-bone Tripo Mixamo rig and 44 clips) 49 assets in Godot, all verified (gate + visual review); the five characters now have Meshy rigs (24 bones, no finger bones) with 25 clips each (locomotion, idles, conversation, sit, care and repair actions), gate-checked for bones, clips and loops. All 23 cutscene shots done and reviewed ([cutscene_review.md](production/review/cutscene_review.md)). Next: Codex re-review of the six audit re-renders, collision and lightmap import setup for props, the 29 planned assets (environment kit first), audio, `.ogv` conversion.
 
 **Earlier (25 Oct):**
 
@@ -327,7 +340,7 @@ Optional opening (from the gameplay entry flow): mustard fields to the Moon cham
 - Art bible, prompt log, Chapter 1 manifest, scene index.
 - Style lock: cadet key frame v4 and the no-eyes Alo key frame approved.
 - Five cast turnarounds approved and split into views.
-- **Kai final:** `production/models/final/CH_Kai/CH_Kai.glb` (49,999 tris, 1.74 m, 78-bone skeleton, 4K PBR, skinning verified).
+- **Kai final:** `production/models/final/CH_Kai/CH_Kai.glb` (49,999 tris, 1.74 m, 78-bone skeleton, 4K PBR, skinning verified; historical, replaced by the v8 cast).
 - 25 pitch-video props exported from Tripo for reuse (free) into `production/models/reuse/`; the dosimeter is checked and production quality, the rest still need review.
 - Pipeline scripts: split_turnaround, make_character, blender_cleanup (+ smoke test), render_preview, pose_test, tripo_api.
 
@@ -359,10 +372,7 @@ Optional opening (from the gameplay entry flow): mustard fields to the Moon cham
 
 - Older design docs still mention Bangla text and UI ([01_GAME_VISION.md](game-design/01_GAME_VISION.md), [13_UI_UX_DESIGN.md](game-design/13_UI_UX_DESIGN.md) and others) and plant faces ([04_CHARACTER_BIBLE.md:53](game-design/04_CHARACTER_BIBLE.md#L53), [14_ASSET_PRODUCTION_LIST.md:52](game-design/14_ASSET_PRODUCTION_LIST.md#L52), [01_GAME_VISION.md:25](game-design/01_GAME_VISION.md#L25), [docs/GAME_PLAN_FINAL.md:391](docs/GAME_PLAN_FINAL.md#L391)). Section 3 overrides them; updating those docs is pending the user's go-ahead.
 - [12_CINEMATIC_DIRECTION.md](game-design/12_CINEMATIC_DIRECTION.md) CIN-04 mentions "unopened buds"; the final canon allows no buds in the annex. CS-05 follows the final canon.
-- The old 4-hour scope in GAMEPLAY_DESIGN_FINAL and 01_GAME_VISION is superseded by the 10–14 hour story edition; the numeric puzzle contracts still apply.
+- The old 4-hour scope in 01_GAME_VISION is superseded by the 10–14 hour story edition (720 target minutes); README and GAMEPLAY_DESIGN_FINAL now say so. The numeric puzzle contracts still apply.
 - The Tripo API pool shows 2,000 "frozen" credits; only the 1,000 are treated as spendable until the user explains them.
-- The Meshy rig has no finger bones: hands keep their modelled pose in every clip. Fine for now; finger animation would need a different rig.
 - Ferreira's turnaround reads a little younger than mid-40s; age can be pushed in the face texture.
-- **Missing tool:** the installed ffmpeg 9.0.2 has no Theora encoder, so Seedance MP4s cannot yet be converted to `.ogv` for Godot. Install an ffmpeg build with libtheora before cutscene integration.
-- CS-01-B has Ferreira speaking on screen with no audio yet; once her voice line exists it needs lip-sync (`sync-lipsync-v3` on the same flow) or a cut that hides her mouth.
-- CS-02-A keeps a faint glow along the horizon after sunset; grade it down to black in the edit.
+- CS-01-B (Ferreira speaking with no lip-sync) and CS-02-A (horizon glow, graded in post) are archived realistic shots in [shots.csv](production/cutscenes/shots.csv); the current anime cuts are in [production/cutscenes/v7/](production/cutscenes/v7/).

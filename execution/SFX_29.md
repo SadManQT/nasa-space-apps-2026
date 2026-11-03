@@ -1,4 +1,4 @@
-# SFX_ROVER_CABIN — Press uri sed rover cabin hum
+# SFX_ROVER_CABIN — Pressurised rover cabin hum
 
 **Execution prompt · snapshot 27 October 2026 / `ca01433` · Sound effect.**
 
@@ -43,10 +43,10 @@ Owning interaction/world event and SYS17 audio interface; source art/physics con
 
 ## Task-specific source and implementation detail
 
-### Exact SFXCSV contract
+### Exact SFX CSV contract
 
 - **id:** SFX_ROVER_CABIN
-- **description:** Press uri sed rover cabin hum
+- **description:** Pressurised rover cabin hum
 - **loop:** yes
 - **caption:**
 - **first_scenes:** EX-CH04-S02

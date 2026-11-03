@@ -1,0 +1,612 @@
+{
+ "source_id": "donki_2017_09",
+ "retrieved": "2026-11-04",
+ "title": "Solar flares, CMEs and particle events of 4-12 September 2017",
+ "agency": "NASA GSFC Community Coordinated Modeling Center (DONKI)",
+ "dataset_id": "DONKI 2017-09-10T15:35:00-FLR-001; 2017-09-10T16:25:00-SEP-001; 2017-09-10T16:45:00-SEP-001; 2017-09-10T16:09:00-CME-001",
+ "url": "https://ccmc.gsfc.nasa.gov/tools/DONKI/",
+ "request_urls": [
+  "https://ccmc.gsfc.nasa.gov/DONKI-API/get/FLR?startDate=2017-09-04&endDate=2017-09-12",
+  "https://ccmc.gsfc.nasa.gov/DONKI-API/get/CME?startDate=2017-09-04&endDate=2017-09-12",
+  "https://ccmc.gsfc.nasa.gov/DONKI-API/get/SEP?startDate=2017-09-04&endDate=2017-09-12"
+ ],
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "NASA CCMC Space Weather Database Of Notifications, Knowledge, Information (DONKI), records for 2017-09-04 to 2017-09-12.",
+ "fields_used": [
+  "FLR classType/beginTime/peakTime/activeRegionNum",
+  "CME startTime/speed",
+  "SEP eventTime/instruments"
+ ],
+ "values": {
+  "FLR": [
+   {
+    "flrID": "2017-09-04T05:36:00-FLR-001",
+    "classType": "M1.2",
+    "beginTime": "2017-09-04T05:36Z",
+    "peakTime": "2017-09-04T05:49Z",
+    "endTime": "2017-09-04T06:05Z",
+    "sourceLocation": "S10W05",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-04T15:11:00-FLR-001",
+    "classType": "M1.5",
+    "beginTime": "2017-09-04T15:11Z",
+    "peakTime": "2017-09-04T15:30Z",
+    "endTime": "2017-09-04T15:33Z",
+    "sourceLocation": "S10W08",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-04T18:05:00-FLR-001",
+    "classType": "M1.0",
+    "beginTime": "2017-09-04T18:05Z",
+    "peakTime": "2017-09-04T18:22Z",
+    "endTime": "2019-09-04T18:31Z",
+    "sourceLocation": "S10W12",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-04T18:46:00-FLR-001",
+    "classType": "M1.7",
+    "beginTime": "2017-09-04T18:46Z",
+    "peakTime": "2017-09-04T19:37Z",
+    "endTime": "2017-09-04T19:52Z",
+    "sourceLocation": "S10W13",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-04T19:59:00-FLR-001",
+    "classType": "M1.5",
+    "beginTime": "2017-09-04T19:59Z",
+    "peakTime": "2017-09-04T20:02Z",
+    "endTime": "2017-09-04T20:06Z",
+    "sourceLocation": "S10W14",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-04T20:15:00-FLR-001",
+    "classType": "M5.5",
+    "beginTime": "2017-09-04T20:15Z",
+    "peakTime": "2017-09-04T20:33Z",
+    "endTime": "2017-09-04T20:37Z",
+    "sourceLocation": "S10W14",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-04T22:10:00-FLR-001",
+    "classType": "M2.1",
+    "beginTime": "2017-09-04T22:10Z",
+    "peakTime": "2017-09-04T22:14Z",
+    "endTime": "2017-09-04T22:19Z",
+    "sourceLocation": "S09W12",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-05T01:04:00-FLR-001",
+    "classType": "M4.2",
+    "beginTime": "2017-09-05T01:04Z",
+    "peakTime": "2017-09-05T01:08Z",
+    "endTime": "2017-09-05T01:11Z",
+    "sourceLocation": "S08W20",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-05T03:42:00-FLR-001",
+    "classType": "M1.0",
+    "beginTime": "2017-09-05T03:42Z",
+    "peakTime": "2017-09-05T03:51Z",
+    "endTime": "2017-09-05T04:04Z",
+    "sourceLocation": "S09W20",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-05T04:33:00-FLR-001",
+    "classType": "M3.2",
+    "beginTime": "2017-09-05T04:33Z",
+    "peakTime": "2017-09-05T04:53Z",
+    "endTime": "2017-09-05T05:07Z",
+    "sourceLocation": "S08W20",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-05T06:34:00-FLR-001",
+    "classType": "M3.8",
+    "beginTime": "2017-09-05T06:34Z",
+    "peakTime": "2017-09-05T06:40Z",
+    "endTime": "2017-09-05T06:43Z",
+    "sourceLocation": "S08W20",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-05T17:37:00-FLR-001",
+    "classType": "M2.3",
+    "beginTime": "2017-09-05T17:37Z",
+    "peakTime": "2017-09-05T17:43Z",
+    "endTime": "2017-09-05T17:51Z",
+    "sourceLocation": "S09W20",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-06T08:57:00-FLR-001",
+    "classType": "X2.2",
+    "beginTime": "2017-09-06T08:57Z",
+    "peakTime": "2017-09-06T09:10Z",
+    "endTime": "2017-09-06T09:17Z",
+    "sourceLocation": "S07W33",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-06T11:53:00-FLR-001",
+    "classType": "X9.3",
+    "beginTime": "2017-09-06T11:53Z",
+    "peakTime": "2017-09-06T12:02Z",
+    "endTime": "2017-09-06T12:10Z",
+    "sourceLocation": "S07W33",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-06T15:51:00-FLR-001",
+    "classType": "M2.5",
+    "beginTime": "2017-09-06T15:51Z",
+    "peakTime": "2017-09-06T15:56Z",
+    "endTime": "2017-09-06T16:03Z",
+    "sourceLocation": "S07W33",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-06T19:20:00-FLR-001",
+    "classType": "M1.4",
+    "beginTime": "2017-09-06T19:20Z",
+    "peakTime": "2017-09-06T19:30Z",
+    "endTime": "2017-09-06T19:35Z",
+    "sourceLocation": "S09W38",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-06T23:33:00-FLR-001",
+    "classType": "M1.2",
+    "beginTime": "2017-09-06T23:33Z",
+    "peakTime": "2017-09-06T23:39Z",
+    "endTime": "2017-09-06T23:44Z",
+    "sourceLocation": "S08W40",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-07T05:00:00-FLR-001",
+    "classType": "M2.4",
+    "beginTime": "2017-09-07T05:00Z",
+    "peakTime": "2017-09-07T05:02Z",
+    "endTime": "2017-09-07T05:08Z",
+    "sourceLocation": "S09W49",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-07T09:50:00-FLR-001",
+    "classType": "M1.4",
+    "beginTime": "2017-09-07T09:50Z",
+    "peakTime": "2017-09-07T09:54Z",
+    "endTime": "2017-09-07T09:58Z",
+    "sourceLocation": "S09W49",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-07T10:11:00-FLR-001",
+    "classType": "M7.3",
+    "beginTime": "2017-09-07T10:11Z",
+    "peakTime": "2017-09-07T10:15Z",
+    "endTime": "2017-09-07T10:18Z",
+    "sourceLocation": "S08W47",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-07T14:20:00-FLR-001",
+    "classType": "X1.3",
+    "beginTime": "2017-09-07T14:20Z",
+    "peakTime": "2017-09-07T14:36Z",
+    "endTime": "2017-09-07T14:55Z",
+    "sourceLocation": "S09W53",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-07T23:51:00-FLR-001",
+    "classType": "M3.9",
+    "beginTime": "2017-09-07T23:51Z",
+    "peakTime": "2017-09-07T23:59Z",
+    "endTime": "2017-09-08T00:14Z",
+    "sourceLocation": "S15W50",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-08T02:19:00-FLR-001",
+    "classType": "M1.3",
+    "beginTime": "2017-09-08T02:19Z",
+    "peakTime": "2017-09-08T02:24Z",
+    "endTime": "2017-09-08T02:29Z",
+    "sourceLocation": "S09W55",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-08T03:39:00-FLR-001",
+    "classType": "M1.2",
+    "beginTime": "2017-09-08T03:39Z",
+    "peakTime": "2017-09-08T03:43Z",
+    "endTime": "2017-09-08T03:46Z",
+    "sourceLocation": "S07W55",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-08T07:40:00-FLR-001",
+    "classType": "M8.1",
+    "beginTime": "2017-09-08T07:40Z",
+    "peakTime": "2017-09-08T07:49Z",
+    "endTime": "2017-09-08T07:58Z",
+    "sourceLocation": "S10W58",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-08T15:09:00-FLR-001",
+    "classType": "M3.0",
+    "beginTime": "2017-09-08T15:09Z",
+    "peakTime": "2017-09-08T15:47Z",
+    "endTime": "2017-09-08T16:04Z",
+    "sourceLocation": "S09W67",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-08T23:34:00-FLR-001",
+    "classType": "M2.1",
+    "beginTime": "2017-09-08T23:34Z",
+    "peakTime": "2017-09-08T23:45Z",
+    "endTime": "2017-09-09T23:56Z",
+    "sourceLocation": "S09W71",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-09T04:14:00-FLR-001",
+    "classType": "M1.1",
+    "beginTime": "2017-09-09T04:14Z",
+    "peakTime": "2017-09-09T04:28Z",
+    "endTime": "2017-09-09T04:43Z",
+    "sourceLocation": "S09W72",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-09T10:51:00-FLR-001",
+    "classType": "M3.7",
+    "beginTime": "2017-09-09T10:51Z",
+    "peakTime": "2017-09-09T11:04Z",
+    "endTime": "2017-09-09T11:42Z",
+    "sourceLocation": "S09W76",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-09T22:04:00-FLR-001",
+    "classType": "M1.1",
+    "beginTime": "2017-09-09T22:04Z",
+    "peakTime": "2017-09-09T23:54Z",
+    "endTime": "2017-09-10T00:41Z",
+    "sourceLocation": "S09W82",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-10T02:39:00-FLR-001",
+    "classType": "C9.0",
+    "beginTime": "2017-09-10T02:39Z",
+    "peakTime": "2017-09-10T03:09Z",
+    "endTime": "2017-09-10T03:47Z",
+    "sourceLocation": "S09W88",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-10T15:35:00-FLR-001",
+    "classType": "X8.2",
+    "beginTime": "2017-09-10T15:35Z",
+    "peakTime": "2017-09-10T16:06Z",
+    "endTime": "2017-09-10T16:31Z",
+    "sourceLocation": "S08W88",
+    "activeRegionNum": 12673
+   },
+   {
+    "flrID": "2017-09-11T10:08:00-FLR-001",
+    "classType": "B9.8",
+    "beginTime": "2017-09-11T10:08Z",
+    "peakTime": "2017-09-11T10:10Z",
+    "endTime": "2017-09-11T10:17Z",
+    "sourceLocation": "N11W88",
+    "activeRegionNum": 12674
+   },
+   {
+    "flrID": "2017-09-12T07:23:00-FLR-001",
+    "classType": "C3.0",
+    "beginTime": "2017-09-12T07:23Z",
+    "peakTime": "2017-09-12T07:29Z",
+    "endTime": "2017-09-12T07:48Z",
+    "sourceLocation": "N09E49",
+    "activeRegionNum": 12680
+   },
+   {
+    "flrID": "2017-09-12T19:03:00-FLR-001",
+    "classType": "C1.6",
+    "beginTime": "2017-09-12T19:03Z",
+    "peakTime": "2017-09-12T19:20Z",
+    "endTime": "2017-09-12T19:28Z",
+    "sourceLocation": "N07E41",
+    "activeRegionNum": 12680
+   }
+  ],
+  "CME": [
+   {
+    "activityID": "2017-09-04T19:39:00-CME-001",
+    "startTime": "2017-09-04T19:39Z",
+    "sourceLocation": "S10W14",
+    "activeRegionNum": 12673,
+    "speed_km_s": 710.0,
+    "analysis_type": "C"
+   },
+   {
+    "activityID": "2017-09-04T20:36:00-CME-001",
+    "startTime": "2017-09-04T20:36Z",
+    "sourceLocation": "S10W14",
+    "activeRegionNum": 12673,
+    "speed_km_s": 1114.0,
+    "analysis_type": "O"
+   },
+   {
+    "activityID": "2017-09-06T10:00:00-CME-001",
+    "startTime": "2017-09-06T10:00Z",
+    "sourceLocation": "S09W88",
+    "activeRegionNum": 12676,
+    "speed_km_s": 260.0,
+    "analysis_type": "S"
+   },
+   {
+    "activityID": "2017-09-06T12:24:00-CME-001",
+    "startTime": "2017-09-06T12:24Z",
+    "sourceLocation": "S7W33",
+    "activeRegionNum": 12673,
+    "speed_km_s": 1238.0,
+    "analysis_type": "O"
+   },
+   {
+    "activityID": "2017-09-06T13:09:00-CME-001",
+    "startTime": "2017-09-06T13:09Z",
+    "sourceLocation": "S07W91",
+    "activeRegionNum": 12675,
+    "speed_km_s": 1178.0,
+    "analysis_type": "O"
+   },
+   {
+    "activityID": "2017-09-07T10:48:00-CME-001",
+    "startTime": "2017-09-07T10:48Z",
+    "sourceLocation": "",
+    "activeRegionNum": 12673,
+    "speed_km_s": 597.0,
+    "analysis_type": "C"
+   },
+   {
+    "activityID": "2017-09-07T15:12:00-CME-001",
+    "startTime": "2017-09-07T15:12Z",
+    "sourceLocation": "",
+    "activeRegionNum": 12673,
+    "speed_km_s": 477.0,
+    "analysis_type": "S"
+   },
+   {
+    "activityID": "2017-09-07T22:54:00-CME-001",
+    "startTime": "2017-09-07T22:54Z",
+    "sourceLocation": "",
+    "activeRegionNum": null,
+    "speed_km_s": 282.0,
+    "analysis_type": "S"
+   },
+   {
+    "activityID": "2017-09-07T23:36:00-CME-001",
+    "startTime": "2017-09-07T23:36Z",
+    "sourceLocation": "S15W50",
+    "activeRegionNum": 12673,
+    "speed_km_s": 395.0,
+    "analysis_type": "S"
+   },
+   {
+    "activityID": "2017-09-08T04:17:00-CME-001",
+    "startTime": "2017-09-08T04:17Z",
+    "sourceLocation": "S07W55",
+    "activeRegionNum": 12673,
+    "speed_km_s": 442.0,
+    "analysis_type": "S"
+   },
+   {
+    "activityID": "2017-09-08T07:24:00-CME-001",
+    "startTime": "2017-09-08T07:24Z",
+    "sourceLocation": "S10W58",
+    "activeRegionNum": 12673,
+    "speed_km_s": 450.0,
+    "analysis_type": "S"
+   },
+   {
+    "activityID": "2017-09-09T16:48:00-CME-001",
+    "startTime": "2017-09-09T16:48Z",
+    "sourceLocation": "S09W79",
+    "activeRegionNum": 12673,
+    "speed_km_s": 465.0,
+    "analysis_type": "S"
+   },
+   {
+    "activityID": "2017-09-09T23:12:00-CME-001",
+    "startTime": "2017-09-09T23:12Z",
+    "sourceLocation": "N02W92",
+    "activeRegionNum": null,
+    "speed_km_s": 333.0,
+    "analysis_type": "S"
+   },
+   {
+    "activityID": "2017-09-10T16:09:00-CME-001",
+    "startTime": "2017-09-10T16:09Z",
+    "sourceLocation": "S09W91",
+    "activeRegionNum": 12673,
+    "speed_km_s": 2650.0,
+    "analysis_type": "R"
+   },
+   {
+    "activityID": "2017-09-11T13:34:00-CME-001",
+    "startTime": "2017-09-11T13:34Z",
+    "sourceLocation": "S8W110",
+    "activeRegionNum": 12673,
+    "speed_km_s": null,
+    "analysis_type": null
+   },
+   {
+    "activityID": "2017-09-12T08:09:00-CME-001",
+    "startTime": "2017-09-12T08:09Z",
+    "sourceLocation": "N09E49",
+    "activeRegionNum": 12680,
+    "speed_km_s": 450.0,
+    "analysis_type": "S"
+   },
+   {
+    "activityID": "2017-09-12T14:48:00-CME-001",
+    "startTime": "2017-09-12T14:48Z",
+    "sourceLocation": "",
+    "activeRegionNum": 12673,
+    "speed_km_s": 358.0,
+    "analysis_type": "S"
+   },
+   {
+    "activityID": "2017-09-12T20:42:00-CME-001",
+    "startTime": "2017-09-12T20:42Z",
+    "sourceLocation": "",
+    "activeRegionNum": 12673,
+    "speed_km_s": 741.0,
+    "analysis_type": "C"
+   }
+  ],
+  "SEP": [
+   {
+    "id": "2017-09-04T22:56:00-SEP-001",
+    "eventTime": "2017-09-04T22:56Z",
+    "location": null,
+    "instruments": [
+     "MODEL: REleASE:SOHO/EPHIN 15.8-39.8 MeV"
+    ]
+   },
+   {
+    "id": "2017-09-04T23:52:00-SEP-001",
+    "eventTime": "2017-09-04T23:52Z",
+    "location": null,
+    "instruments": [
+     "SOHO: COSTEP 15.8-39.8 MeV"
+    ]
+   },
+   {
+    "id": "2017-09-05T00:30:00-SEP-001",
+    "eventTime": "2017-09-05T00:30Z",
+    "location": null,
+    "instruments": [
+     "GOES13: SEM/EPS >10 MeV"
+    ]
+   },
+   {
+    "id": "2017-09-06T23:30:00-SEP-001",
+    "eventTime": "2017-09-06T23:30Z",
+    "location": null,
+    "instruments": [
+     "SOHO: COSTEP 15.8-39.8 MeV"
+    ]
+   },
+   {
+    "id": "2017-09-06T23:45:00-SEP-001",
+    "eventTime": "2017-09-06T23:45Z",
+    "location": null,
+    "instruments": [
+     "GOES13: SEM/EPS >10 MeV"
+    ]
+   },
+   {
+    "id": "2017-09-10T16:25:00-SEP-001",
+    "eventTime": "2017-09-10T16:25Z",
+    "location": null,
+    "instruments": [
+     "GOES13: SEM/EPS >100 MeV"
+    ]
+   },
+   {
+    "id": "2017-09-10T16:45:00-SEP-001",
+    "eventTime": "2017-09-10T16:45Z",
+    "location": null,
+    "instruments": [
+     "GOES13: SEM/EPS >10 MeV"
+    ]
+   },
+   {
+    "id": "2017-09-10T20:00:00-SEP-001",
+    "eventTime": "2017-09-10T20:00Z",
+    "location": null,
+    "instruments": [
+     "SOHO: COSTEP 15.8-39.8 MeV"
+    ]
+   }
+  ]
+ },
+ "evidence_label": "Observed",
+ "derived": [
+  {
+   "name": "x82_flare_start",
+   "value": "2017-09-10T15:35Z",
+   "unit": "UTC",
+   "formula": "DONKI FLR beginTime",
+   "drives": "P-02 storm replay label"
+  },
+  {
+   "name": "x82_flare_peak",
+   "value": "2017-09-10T16:06Z",
+   "unit": "UTC",
+   "formula": "DONKI FLR peakTime",
+   "drives": "P-02 storm replay label"
+  },
+  {
+   "name": "x93_flare_peak",
+   "value": "2017-09-06T12:02Z",
+   "unit": "UTC",
+   "formula": "DONKI FLR peakTime",
+   "drives": "P-02 Rafi's shift-2 forecast"
+  },
+  {
+   "name": "sep_gt100MeV_onset",
+   "value": "2017-09-10T16:25Z",
+   "unit": "UTC",
+   "formula": "DONKI SEP, GOES13 >100 MeV",
+   "drives": "P-02 shift-5 alarm"
+  },
+  {
+   "name": "sep_gt10MeV_onset",
+   "value": "2017-09-10T16:45Z",
+   "unit": "UTC",
+   "formula": "DONKI SEP, GOES13 >10 MeV",
+   "drives": "P-02 storm onset"
+  },
+  {
+   "name": "warning_lead_time",
+   "value": 70,
+   "unit": "min",
+   "formula": ">10 MeV onset - X8.2 flare start",
+   "drives": "P-02 alarm warning text"
+  },
+  {
+   "name": "first_particles_after_peak",
+   "value": 19,
+   "unit": "min",
+   "formula": ">100 MeV onset - X8.2 flare peak",
+   "drives": "P-02 alarm warning text"
+  },
+  {
+   "name": "cme_speed",
+   "value": 2650.0,
+   "unit": "km/s",
+   "formula": "DONKI CME most-accurate analysis",
+   "drives": "debrief card"
+  }
+ ],
+ "boundary": "Historical event metadata. The storm is replayed on the game's fictional 2046 night; it did not happen at Aurora. Earth-orbit and Moon doses differ.",
+ "src_card": "SRC-STORM2017"
+}

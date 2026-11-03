@@ -48,16 +48,16 @@ SYS02 content, SYS03 state, SYS04 simulation, SYS05 interactions, SYS07 checkpoi
 ## P-07 — Survey and Return
 
 - **Mission / reason:** [M-0401](../game-design/07_MISSION_DESIGNS/M-0401_Where_the_Sun_Cannot_Follow.md) — Plan the cold-trap route, survey ice and retain a return reserve.
-- **Location / equipment:** LOC-09; Press uri sed rover, route chart, slope scan, sample cup, calibrated ice scanner.
+- **Location / equipment:** LOC-09; Pressurised rover, route chart, slope scan, sample cup, calibrated ice scanner.
 - **Initial state:** Base E14/20, A8/10, H6, C8, R18; two daylight base shifts use DIM/O0, cost E2 each and breathe A0.5 for two home cadets, ending E18, A7, H6, C8, R16.8. The two rover occupants have an independent 48-hour consumables manifest covering the dated round trip; never charge them again at base. Rover resource 100, mandatory return reserve 30. Routes: A short 8 km cost 35 each way, slope 24°; B ridge 12 km cost 30 each way, max 12°; C shadow 10 km cost 40 each way, slope 18°. Rover design limit 15°.
 - **Player instructions and intermediate steps:** Inspect route cards; choose a route satisfying slope AND roundtrip reserve. Use the base-only slope card and rover-only headlight card to agree on the route. Place/test three beacons before blind corners. Drive three 100 m playable segments separated by labelled cruise. On route B stop at reference and sample points: dry reference signal 2; samples 2, 18, 19. Set threshold reference+10=12 and tag the two above threshold; collect one sealed sample.
 - **Accepted solution:** B is the only valid route: 100−30−30=40>=30 and 12°<=15°. Calibrate at 2, threshold 12; tag 18 and 19; retain 2 as negative control; collect one positive sample.
-- **Incorrect actions and feedback:** Route A fails slope regardless of energy; C fails slope and reserve. Uncalibrated positive reports are marked unverified. Off-road driving stops at a warning boundary, never tumbles into an unwin n able pit.
+- **Incorrect actions and feedback:** Route A fails slope regardless of energy; C fails slope and reserve. Uncalibrated positive reports are marked unverified. Off-road driving stops at a warning boundary, never tumbles into an unwinnable pit.
 - **Progressive hints H1 / H2 / H3:** A short road may be too steep. / Check both the return cost and slope. / Choose B, use dry 2, then tag 18 and 19.
 - **Difficulty, timing and retry:** Medium; rover checkpoints at each surveyed beacon; samples persist only after sealed save.
 - **Completion trigger:** Valid route chosen, three beacons linked, three stops reached, reference recorded, two positives tagged, one sample sealed, return reserve forecast>=30.
 - **Narrative consequence / flags:** ice_survey_pending; return_route_B; sample_verified. Resource units are game abstractions.
-- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penal is e the ending.
+- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penalise the ending.
 
 <a id="p-08"></a>
 

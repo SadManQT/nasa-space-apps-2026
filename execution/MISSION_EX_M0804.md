@@ -100,7 +100,7 @@ Which report accurately describes the achievement?
 
 
 ### EX-CH08-S11 — The Same Road Home
-**Target:**10 minutes. **Location:**Press uri sed rover and Aurora arrival airlock. **POV:**Rafi then Amara at labelled arrival. **Story time:**9 April 03: 00–10 April 03: 00,24-hour return. **Legacy provenance:**`SC-0805`.
+**Target:**10 minutes. **Location:**Pressurised rover and Aurora arrival airlock. **POV:**Rafi then Amara at labelled arrival. **Story time:**9 April 03: 00–10 April 03: 00,24-hour return. **Legacy provenance:**`SC-0805`.
 
 The crew enters the rover before the return transition starts. Rafi checks the same surveyed road in reverse and reads the remaining provision margin. The player compares actual use with the whole-mission forecast, including the three-hour repair window. Arrival at Malapert never counted as the finish.
 
@@ -142,7 +142,7 @@ When should home consumption increase?
 
 
 ### EX-CH08-S12 — What We Grew
-**Target:**10 minutes. **Location:**Aurora press uri sed garden. **POV:**Mei. **Story time:**10 April 06: 00, first light and complete epilogue. **Legacy provenance:**`SC-0806`.
+**Target:**10 minutes. **Location:**Aurora pressurised garden. **POV:**Mei. **Story time:**10 April 06: 00, first light and complete epilogue. **Legacy provenance:**`SC-0806`.
 
 The viewing shutter waits where the first bloom once appeared. Before touching it, the player verifies the final records: five people safely home, thirty founder seeds protected, eleven unplanted vault specimens retained, stable pressure and temperature, and cotton alive. The checks describe an established garden that survived another seasonal dark window. Dawn will reveal it, not create it instantly.
 
@@ -187,7 +187,7 @@ Which dedication fits the completed evidence?
 - 120 kilometres each way,24 hours out+3 hours repair+24 hours back=51 hours; provisions 72 hours.
 - Depart 8 April 00:00, summit 9 April 00:00, return 9 April 03:00, home 10 April 03:00, dawn 10 April 06:00.
 - Base has two occupants for 33 dark hours, then five for 3 hours.
-- Founder 30, retainedvault 11 and plantedcotton 1 remain distinct.
+- Founder 30, retained vault 11 and planted cotton 1 remain distinct.
 - First live Noor voice occurs only after verified dual-link checks.
 - MARS is only a post-credit future-story image, with no additional playable task.
 

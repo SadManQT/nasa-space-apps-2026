@@ -58,7 +58,7 @@ Emotional arc:Separation → known-road confidence → parallel responsibility �
 This mission target: 30 active minutes. Predecessor:`EX-M0802`. Successor:`EX-M0804`. Chapter puzzle families: P-15, P-16; reuse their single shared implementations and map the actual relevant stages.
 
 ### EX-CH08-S07 — The Spare Has a History
-**Target:**10 minutes. **Location:**Mala pert relay service bay. **POV:**Kai. **Story time:**9 April 00: 00–00: 45, repair window. **Legacy provenance:**`SC-0804`.
+**Target:**10 minutes. **Location:**Malapert relay service bay. **POV:**Kai. **Story time:**9 April 00: 00–00: 45, repair window. **Legacy provenance:**`SC-0804`.
 
 The controller crate opens beside the service housing its diagram promised. Kai recognises the note he wrote in December. The player checks the actual connectors and serial once more because preparation does not excuse verification at the point of use. Ferreira braces the service door while Rafi controls the tether.
 
@@ -100,7 +100,7 @@ Which action is safe before removal?
 
 
 ### EX-CH08-S08 — A Lighthouse Needs Both Shores
-**Target:**10 minutes. **Location:**Mala pert local antenna and Earth dish controls. **POV:**Kai. **Story time:**9 April 00: 45–01: 45. **Legacy provenance:**`SC-0804`.
+**Target:**10 minutes. **Location:**Malapert local antenna and Earth dish controls. **POV:**Kai. **Story time:**9 April 00: 45–01: 45. **Legacy provenance:**`SC-0804`.
 
 Two signal panels appear, and only one points toward Earth. The player first tunes the local channel toward the restored road chain. An image of Earth above a ridge cannot prove that Aurora is audible below the terrain. The local test must pass on its own evidence.
 
@@ -187,7 +187,7 @@ Which response passes the content check?
 - 120 kilometres each way,24 hours out+3 hours repair+24 hours back=51 hours; provisions 72 hours.
 - Depart 8 April 00:00, summit 9 April 00:00, return 9 April 03:00, home 10 April 03:00, dawn 10 April 06:00.
 - Base has two occupants for 33 dark hours, then five for 3 hours.
-- Founder 30, retainedvault 11 and plantedcotton 1 remain distinct.
+- Founder 30, retained vault 11 and planted cotton 1 remain distinct.
 - First live Noor voice occurs only after verified dual-link checks.
 - MARS is only a post-credit future-story image, with no additional playable task.
 

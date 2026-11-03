@@ -47,7 +47,7 @@ SYS02 content, SYS03 state, SYS04 simulation, SYS05 interactions, SYS07 checkpoi
 
 ## P-13 — One Integrated Storm Plan
 
-- **Mission / reason:** [M-0701](../game-design/07_MISSION_DESIGNS/M-0701_Your_Call_Cadets.md) — Plan three counter factual storm waves and protect crew, garden and seed reserve.
+- **Mission / reason:** [M-0701](../game-design/07_MISSION_DESIGNS/M-0701_Your_Call_Cadets.md) — Plan three counterfactual storm waves and protect crew, garden and seed reserve.
 - **Location / equipment:** LOC-04; E30/32, A10/10, H6, C8, R18, six shared water units, two crate-shield units, protected two-compartment seed case.
 - **Initial state:** Chapter 7 logistics snapshot after preparation costs, not Chapter 1 carry over. Six dark 7.2 h steps, multipliers [1,1,2,2,1,1]. Five lunar occupants (including Ferreira) consume A1.25 and R1.5 crew-days per step. Three waves span steps 1–2, 3–4 and 5–6.
 - **Player instructions and intermediate steps:** Two allowed preparation transfers put W4 in shelter; stage full K2 supply bundles and latch both founder-reserve compartments (15+15=30) before peak step 3. Schedule COZY heat, DIM light, O0 throughout. HOLD W in 1–5; DRAIN to W2 in step 6 after that step’s exposure. Isolate the exposed uplink before the peak. No free solar income during the storm.

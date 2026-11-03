@@ -1,5 +1,7 @@
 # Testing and acceptance matrix
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 ## What is verified now versus later
 
 This package receives document/link/ID/dependency/solution-arithmetic checks and a narrative consistency review. Gameplay performance, input behavior, save resilience, rendering and VO timing require an implemented game and are explicitly future acceptance tests, not tests passed here. No game tests or prototype were created.

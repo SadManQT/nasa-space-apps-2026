@@ -1,5 +1,7 @@
 # Core gameplay systems — specifications only
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 The complete adventure uses these 12 systems. No gameplay implementation, engine project or data importer is included. All numeric science play is a simplified game model.
 
 ## SYS-01 — Embodied exploration and role switching
@@ -31,9 +33,9 @@ The complete adventure uses these 12 systems. No gameplay implementation, engine
 - **Rules:** One mandatory mission ACTIVE at a time; ordered scene gates; objectives show action+place, never production IDs in normal play. Side observations do not unlock later missions.
 - **States:** LOCKED,AVAILABLE,ACTIVE,OBJECTIVE_1_DONE,OBJECTIVE_2_DONE,READY_TO_COMPLETE,COMPLETE,RETRY_REVIEW.
 - **Feedback:** Compact current objective, waypoint on request, completion recap and exact next destination.
-- **Dependencies:** 16 mission files, SYS-07 journal, SYS-08 transactional saves.
+- **Dependencies:** the 32 canonical missions (`EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); the 16 `M-xxxx` files in 07_MISSION_DESIGNS are historical), SYS-07 journal, SYS-08 transactional saves.
 - **Edge cases:** Re-entered zone cannot duplicate objective events; debug chapter select creates a documented prior-state snapshot only in development; final release Chapter Replay is isolated.
-- **Acceptance criteria:** All 16 missions reachable in order; no circular prerequisite; completion and unlock atomic; retries never bypass a mandatory scene.
+- **Acceptance criteria:** All 32 missions reachable in order; no circular prerequisite; completion and unlock atomic; retries never bypass a mandatory scene.
 
 ## SYS-04 — Shared habitat simulation and forecast
 

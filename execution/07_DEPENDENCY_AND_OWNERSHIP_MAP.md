@@ -50,9 +50,9 @@ For each chapter, `EX-Mxx01 → EX-Mxx02 → EX-Mxx03 → EX-Mxx04`, with three 
 
 | Chapter | Missions | Final scenes | Puzzle services | Key downstream contract |
 |---|---|---|---|---|
-|1 Night One|EX-M0101..0104|EX-CH01-S01..S12|P01/P02|Successful Bloom, stored message, Tarabud; loss requires supported retry|
+|1 Night One|EX-M0101..0104|EX-CH01-S01..S12|P01/P02|Successful Bloom, stored message, Tara bud; loss requires supported retry|
 |2 Be the Bee|EX-M0201..0204|EX-CH02-S01..S12|P03/P04|Compatible pollen/care, archive clue, immediate quake hand off|
-|3 Moon quake|EX-M0301..0304|EX-CH03-S01..S12|P05/P06|Safe leak/annex,42=12+30, generations/map|
+|3 Moonquake|EX-M0301..0304|EX-CH03-S01..S12|P05/P06|Safe leak/annex,42=12+30, generations/map|
 |4 Into the Cold Trap|EX-M0401..0404|EX-CH04-S01..S12|P07/P08|Two field/twohome, sealed vault 12, scheduled December arrival|
 |5 Shooting Stars|EX-M0501..0504|EX-CH05-S01..S12|P09/P10|Five occupants, consented Noor reveal, cotton 1/stored 11|
 |6 The Red Ring|EX-M0601..0604|EX-CH06-S01..S12|P11/P12|Five-segment plan, qualified eclipse, safe F2 recovery|
@@ -66,5 +66,5 @@ The [coverage matrix](99_COVERAGE_MATRIX.md) links every actual mission file and
 1. Record owned paths before starting. Shared system files have one editor at a time.
 2. Room geometry, dialogue/audio preparation, approved-asset finishing and bounded UI components can proceed independently once their contracts are frozen.
 3. Use existing approved sheets/voices where their authorization applies. New approval requirements attach to the exact new design/spend; they do not block unrelated ready tasks.
-4. Integrate changes in dependency order into a run n able Chapter 1 slice, then the remaining campaign. Preserve a known-good build checkpoint and user changes.
+4. Integrate changes in dependency order into a runnable Chapter 1 slice, then the remaining campaign. Preserve a known-good build checkpoint and user changes.
 5. Every handoff includes exact service/resource/part names, input/output examples, tested revision and current blockers. Do not label an upstream stub as production-ready.

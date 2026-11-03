@@ -6,7 +6,7 @@
 
 ## Assignment
 
-Create the actual launch able game entry and connect menus, saved progress and campaign scenes.
+Create the actual launchable game entry and connect menus, saved progress and campaign scenes.
 
 Execute this bounded task, integrate it with the current project and produce the acceptance evidence below. First reconcile the snapshot with current files; reuse already approved work and complete the real remaining gap.
 

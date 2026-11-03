@@ -35,13 +35,13 @@ Core rendering/import conventions and the owning mission/world interaction contr
 ## Detailed work sequence
 
 1. Inspect the current binary/source, approved concept and owning scene requirements. Determine the exact missing function, style state or quality defect; preserve the known-good version until the replacement passes.
-2. For a 3 D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
+2. For a 3D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
 3. Block out the canonical footprint, connected locations, player/companion anchors and interaction reach before decorative modelling. Keep camera/door/aisle clearance for all five adult scales.
 4. Reuse existing corridor/exterior/solar/prop meshes. Build a coherent snap kit, floor/ceiling/wall/door materials, motivated lights and collision/navigation; do not make 49 imported props stand in for assembled rooms.
 5. Place chapter-required machinery and live UI surfaces under the proper owners' asset/interaction contracts. Add stable entry/viewpoint/repair/safety anchors and preserve pressure boundaries.
 6. Create the necessary day/dark/fault/occupied states without changing the physical layout or teleporting crew. Earth screen locations are staged backgrounds, not a new playable Earth map.
 7. Traverse the route with player/camera/companion positions; test gates, door cancel, save/load and every required return path. Profile the full room lighting/material cost.
-8. Handoff a usable scene set, adj ace n cy/anchor map, collision/navigation evidence and the exact asset/socket list consumed by missions.
+8. Handoff a usable scene set, adjacency/anchor map, collision/navigation evidence and the exact asset/socket list consumed by missions.
 
 
 ## Task-specific source and implementation detail
@@ -55,18 +55,18 @@ Core rendering/import conventions and the owning mission/world interaction contr
 
 ### Canonical LOC-12 source
 
-## LOC-12 — Mala pert legacy relay summit
+## LOC-12 — Malapert legacy relay summit
 
 - **Narrative significance:** The lighthouse restores a relationship through actual work.
-- **Layout / appearance / landmarks:** 30×20 m secured work platform; Earth dish, local repeater antenna, controller bay, tether anchors, rover parking, Earth viewpoint. It is an authored site near real Mala pert, not a surveyed claim.
+- **Layout / appearance / landmarks:** 30×20 m secured work platform; Earth dish, local repeater antenna, controller bay, tether anchors, rover parking, Earth viewpoint. It is an authored site near real Malapert, not a surveyed claim.
 - **Connected locations:** LOC-11.
-- **Interactable objects:** Controller housing, power isola tor, test point, L/E tuner, checksum terminal.
+- **Interactable objects:** Controller housing, power isolator, test point, L/E tuner, checksum terminal.
 - **NPC positions:** Kai at housing, Ferreira bracing/checking, Rafi tether/vehicle; Noor/Rao/Mei/Amara remote after lock.
 - **Mission / scene usage:** SC-0804–05
 - **Puzzles / environmental clues:** P-16; object scans enter acquired evidence only; decorative labels cannot prematurely identify Noor.
 - **Exploration:** examine all listed props from the main path; no evidence hidden behind movable crates. Optional close inspection adds a journal image but never blocks progress.
 - **Lighting / audio:** Earth view used when fictional geometry permits; no claim of eternal visibility. Dish servo through contact/cabin, final voice carries emotion.
-- **Unlock / travers al conditions:** summit_reached and repeaters live.
+- **Unlock / traversal conditions:** summit_reached and repeaters live.
 - **Exit behavior:** return path stays open unless a visible pressure/radiation interlock is active; required companions rejoin at a safe anchor on exit. Use a labelled time card for cruise/airlock transitions, not invisible teleportation.
 
 ## Logical base layout
@@ -107,17 +107,17 @@ graph LR
 
 CH01 sparse station and labelled empty trays. CH02 paper bee and pollen records. CH03 sealed old annex, petal and founder ledger. CH04 twelve-descendant tray plus quarantined vault. CH05 fifth mug, new controller crate, cotton cassette, Noor portrait. CH06 eclipse print and charged lamp. CH07 shelter reserve case and exposed-branch fault label. CH08 garden photo and repaired relay status. Props accumulate rather than reset between chapters; only mission-specific hazard controls change state.
 
-No meter-scale model is required for all 120 km. Travers al intervals explicitly show distance and elapsed time to prevent a short drive implying Mala pert is next door. Navigation boundaries are geological slopes or surveyed safety limits; do not use invisible walls without a readable route warning.
+No meter-scale model is required for all 120 km. Traversal intervals explicitly show distance and elapsed time to prevent a short drive implying Malapert is next door. Navigation boundaries are geological slopes or surveyed safety limits; do not use invisible walls without a readable route warning.
 
 ### Reference/generation brief (use only if a new or revised asset is actually required)
 
-Last Light Academy EN_Malapert Summit environment concept and modular layout, coherent anime/cel treatment matching installed characters, grounded utilitarian lunar hardware, readable navy/ivory/orange/gold accents, metre-scale adult clearance. Use the canonical footprint and route adj ace n cy quoted in this task. Black lunar sky and hard low-sun shadows outside; motivated practical lighting and pressure-safe enclosures inside. Design functional doors, panels, aisles and interaction bays with editable layers and live-screen surfaces.
+Last Light Academy EN_Malapert Summit environment concept and modular layout, coherent anime/cel treatment matching installed characters, grounded utilitarian lunar hardware, readable navy/ivory/orange/gold accents, metre-scale adult clearance. Use the canonical footprint and route adjacency quoted in this task. Black lunar sky and hard low-sun shadows outside; motivated practical lighting and pressure-safe enclosures inside. Design functional doors, panels, aisles and interaction bays with editable layers and live-screen surfaces.
 
 ### Source and runtime handoff
 
 - Preserve editable source, runtime GLB/scene, embedded or project-policy textures, approved dimensions, material slots, collision, named pivots/sockets and explicit state variants.
 - Use existing `production/tools/` helpers and `game/tools/verify_assets.gd` after inspecting their current arguments; historical tool paths/versions are not live facts.
-- New character/hero prop designs require the exact 2 D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
+- New character/hero prop designs require the exact 2D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
 
 
 ## Required deliverables

@@ -35,8 +35,8 @@ Core rendering/import conventions and the owning mission/world interaction contr
 ## Detailed work sequence
 
 1. Inspect the current binary/source, approved concept and owning scene requirements. Determine the exact missing function, style state or quality defect; preserve the known-good version until the replacement passes.
-2. For a 3 D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
-3. Suit tether, isola tor, compatible socket/connector tools and seal/zero verification interfaces for field repair. Establish a usable silhouette, access direction, handle/control arrangement and separate live-screen area where applicable.
+2. For a 3D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
+3. Suit tether, isolator, compatible socket/connector tools and seal/zero verification interfaces for field repair. Establish a usable silhouette, access direction, handle/control arrangement and separate live-screen area where applicable.
 4. Expose every required state and moving child: Stowed/inspected/validated/active/completed variants as required by its exact owning scene. Publish the state→part/material/animation mapping to the interaction owner.
 5. Implement or coordinate the physical focus/collider/socket fixture and accessible steps. The shared state/simulation owns resource/knowledge/inventory mutations.
 6. Check the constraint: Bind to the shared transaction, biology and knowledge contracts; inspect source rather than inventing quantities or unsafe steps. Exercise valid, invalid, cancelled, partial and reloaded states in the consuming scene.
@@ -50,25 +50,25 @@ Core rendering/import conventions and the owning mission/world interaction contr
 
 - Registry identity: `PR_TetherRepairTools`; recorded status `required-not-registered`; category `prop`.
 - Source trace: `Additional execution family derived from current handbook and final scene actions`
-- Source notes: Suit tether, isola tor, compatible socket/connector tools and seal/zero verification interfaces for field repair.
-- Reconciliation: Additional required family derived from the current handbook/scene actions; not an existing registry row. Register and scope exact child parts before claiming delivery. Suit tether, isola tor, compatible socket/connector tools and seal/zero verification interfaces for field repair.
+- Source notes: Suit tether, isolator, compatible socket/connector tools and seal/zero verification interfaces for field repair.
+- Reconciliation: Additional required family derived from the current handbook/scene actions; not an existing registry row. Register and scope exact child parts before claiming delivery. Suit tether, isolator, compatible socket/connector tools and seal/zero verification interfaces for field repair.
 - First scene/dependency trace: EX-CH08-S04; intended build method: Reuse-first kit/state work under the approved pipeline.
 
 ### Prop identity and functional state contract
 
-- Purpose: Suit tether, isola tor, compatible socket/connector tools and seal/zero verification interfaces for field repair.
+- Purpose: Suit tether, isolator, compatible socket/connector tools and seal/zero verification interfaces for field repair.
 - Required states: Stowed/inspected/validated/active/completed variants as required by its exact owning scene.
 - Continuity/engineering boundary: Bind to the shared transaction, biology and knowledge contracts; inspect source rather than inventing quantities or unsafe steps.
 
 ### Reference/generation brief (use only if a new or revised asset is actually required)
 
-One production-reference PR_Tether Repair Tools for Last Light Academy, approved anime/cel hardware style on neutral background, adult metre scale and the documented size. Suit tether, isola tor, compatible socket/connector tools and seal/zero verification interfaces for field repair. Design usable handles, clear controls and separate functional parts. Surface palette white/navy/grey with role/hazard accents; English text and readouts are separate live UI, with no NASA marks. Show the complete object in a clean three quarter view and provide needed orthographic/detail views for model cleanup.
+One production-reference PR_Tether Repair Tools for Last Light Academy, approved anime/cel hardware style on neutral background, adult metre scale and the documented size. Suit tether, isolator, compatible socket/connector tools and seal/zero verification interfaces for field repair. Design usable handles, clear controls and separate functional parts. Surface palette white/navy/grey with role/hazard accents; English text and readouts are separate live UI, with no NASA marks. Show the complete object in a clean three quarter view and provide needed orthographic/detail views for model cleanup.
 
 ### Source and runtime handoff
 
 - Preserve editable source, runtime GLB/scene, embedded or project-policy textures, approved dimensions, material slots, collision, named pivots/sockets and explicit state variants.
 - Use existing `production/tools/` helpers and `game/tools/verify_assets.gd` after inspecting their current arguments; historical tool paths/versions are not live facts.
-- New character/hero prop designs require the exact 2 D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
+- New character/hero prop designs require the exact 2D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
 
 
 ## Required deliverables

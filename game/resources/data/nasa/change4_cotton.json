@@ -1,0 +1,40 @@
+{
+ "source_id": "change4_cotton",
+ "retrieved": "2026-11-04",
+ "title": "A cotton seedling on the Moon (Chang'e-4, 2019)",
+ "agency": "CNSA Chang'e-4 biological experiment, Chongqing University (partner agency)",
+ "dataset_id": "DOI 10.3390/ijms222111723",
+ "url": "https://doi.org/10.3390/ijms222111723",
+ "licence": "Facts and values quoted with citation; the article text remains (c) its publisher",
+ "citation": "Qiu, Jian, Zhang & Xie (2021) Plant gravitropism and signal conversion under a stress environment of altered gravity, Int. J. Mol. Sci. 22, 11723 (section 4.2).",
+ "fields_used": [
+  "flowered",
+  "germinated",
+  "year"
+ ],
+ "values": {
+  "year": 2019,
+  "germinated": true,
+  "flowered": false
+ },
+ "derived": [
+  {
+   "name": "milestone",
+   "value": "germination and a green seedling only",
+   "unit": "fact",
+   "formula": "experiment report",
+   "drives": "P-09 parallel"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "A sealed experiment; not a forecast for Aurora's garden. The finale's cotton is fiction.",
+ "verification": [
+  {
+   "checked_url": "https://api.crossref.org/works/10.3390/ijms222111723",
+   "quotes_found": [
+    "the first green leaf produced by mankind on the Moon"
+   ]
+  }
+ ],
+ "src_card": "SRC-COTTON2019"
+}

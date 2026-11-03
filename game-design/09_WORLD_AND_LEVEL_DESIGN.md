@@ -1,5 +1,7 @@
 # World and level design
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 Metric sizes are layout budgets for later greyboxing, not surveyed lunar architecture. Every route is authored. One compact station is revisited; neither an open-world lunar map nor a separate Earth playable level is required.
 
 ## LOC-01 — Aurora commons / Mission Table

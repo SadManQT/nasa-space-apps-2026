@@ -46,7 +46,7 @@ Actual owning chapter completion, SYS04/SYS14, save/checkpoint, outcome/debrief 
 
 Award after Chapter 2.
 
-**Option A:**Red-blue LED s: FULL costs 1 instead of 2.
+**Option A:**Red-blue LEDs: FULL costs 1 instead of 2.
 
 **Option B:**Insulation blankets: COOL causes no plant cold damage.
 

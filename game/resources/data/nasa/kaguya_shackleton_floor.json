@@ -1,0 +1,39 @@
+{
+ "source_id": "kaguya_shackleton_floor",
+ "retrieved": "2026-11-04",
+ "title": "Kaguya looks inside Shackleton crater",
+ "agency": "JAXA SELENE (Kaguya) Terrain Camera (partner agency)",
+ "dataset_id": "DOI 10.1126/science.1164020",
+ "url": "https://darts.isas.jaxa.jp/planet/pdap/selene/",
+ "licence": "Facts and values quoted with citation; the article text remains (c) its publisher",
+ "citation": "Haruyama, J. et al. (2008) Lack of exposed ice inside lunar south pole Shackleton Crater, Science 322.",
+ "fields_used": [
+  "exposed_pure_ice_seen",
+  "floor_temperature_K_below"
+ ],
+ "values": {
+  "floor_temperature_K_below": 90,
+  "exposed_pure_ice_seen": false
+ },
+ "derived": [
+  {
+   "name": "shackleton_floor_celsius_below",
+   "value": -183.1,
+   "unit": "deg C",
+   "formula": "K - 273.15",
+   "drives": "P-08 vault card"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "10 m resolution; ice may be mixed into soil below detection.",
+ "verification": [
+  {
+   "checked_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1126%2Fscience.1164020&resultType=core&format=json",
+   "quotes_found": [
+    "less than approximately 90 kelvin",
+    "exposed relatively pure water-ice deposits are not on the crater floor"
+   ]
+  }
+ ],
+ "src_card": "SRC-ICE"
+}

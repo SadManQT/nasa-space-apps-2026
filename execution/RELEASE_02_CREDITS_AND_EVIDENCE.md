@@ -6,7 +6,7 @@
 
 ## Assignment
 
-Prepare accurate credits/provenance and review able evidence for the actual delivered game.
+Prepare accurate credits/provenance and reviewable evidence for the actual delivered game.
 
 Execute this bounded task, integrate it with the current project and produce the acceptance evidence below. First reconcile the snapshot with current files; reuse already approved work and complete the real remaining gap.
 

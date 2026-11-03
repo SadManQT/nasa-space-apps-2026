@@ -8,7 +8,7 @@ Prepared against `ca01433` on 27 October 2026. Re-read current repository instru
 2. Story: `full-game-story/STORY_FULL.md` and `story-data.json`: 8 chapters, 32 required missions, 96 scenes, 385 authored dialogue lines. IDs: `EX-M0101` through `EX-M0804`, `EX-CH01-S01` through `EX-CH08-S12`. The older 16-mission/48-scene runtime outline is superseded.
 3. Mathematics: `game-design/08_PUZZLE_DESIGNS.md`, including the P-02 numeric appendix and P-13/P-14 upgrade/occupancy appendix. Story expansion changes pacing, not the numbers.
 4. Places: `game-design/09_WORLD_AND_LEVEL_DESIGN.md`, LOC-01..12; use current production names/aliases when assembling assets.
-5. Presentation: approved anime/cel direction and current v 8-built characters; current handbook overrides stale realistic, MetaHuman, old rig, Bangla UI, plant-face and Compatibility-only descriptions.
+5. Presentation: approved anime/cel direction and current v8-built characters; current handbook overrides stale realistic, MetaHuman, old rig, Bangla UI, plant-face and Compatibility-only descriptions.
 6. Target main route: 720 active minutes, range 600–840 over the same required content. Eight chapter target minutes: 75/75/85/90/85/85/105/120. No side-mission, collection, mandatory-loss or complete-replay padding.
 
 ## Locked production decisions
@@ -32,7 +32,7 @@ Prepared against `ca01433` on 27 October 2026. Re-read current repository instru
 - Old 2034 annex: young unflowered seedlings with curled leaves, no flower buds, blooms, pollination or seed production. Do not reuse the older cinematic's unopened-bud language.
 - Vault 12 distinct specimens; cotton planted 15 December leaves 11 stored. Album entries are not physical seeds. CH04 visible descendant sample is 12 plants: 7 purple/5 green.
 - December relief brings the compatible relay controller. February-to-April preparation tests/prepares it and the repeater infrastructure; it does not fabricate a second unexplained controller.
-- CH07 uses five occupants, six 7.2-hour steps and a labelled 2012 counter factual replay. The original 2017 replay belongs to CH01.
+- CH07 uses five occupants, six 7.2-hour steps and a labelled 2012 counterfactual replay. The original 2017 replay belongs to CH01.
 - External Earth uplink remains broken after CH07 until the final bypass. Local radios and stored guidance continue; no new live Earth reply appears through the outage.
 - Three repeaters form four surface hops: Aurora→R1→R2→R3→summit. A local path and an Earth path must pass separately. `ALO42` is a known-content echo/test phrase, not a computed checksum.
 - Finale: 120 km each way; 24h outward+3h repair+24h return=51h within 72h provisions. Depart 8 Apr 2047 00: 00; summit 9 Apr 00: 00; return 9 Apr 03: 00; home 10 Apr 03: 00; dawn 10 Apr 06: 00. Base occupancy 2 for 33 dark hours, then 5 for 3.
@@ -50,8 +50,8 @@ Prepared against `ca01433` on 27 October 2026. Re-read current repository instru
 
 ## Science and player access
 
-- Lunar sky is black; no fog, wind, atmosphere glow or billowing dust. Grounded lunar gravity, hard directional shadows, ballistic kicked r egoli th. No airborne exterior sound.
-- Plants remain in press uri sed enclosures. Pollination carriers, samples, doors, suit/EVA and repair boundaries preserve the pressure logic.
+- Lunar sky is black; no fog, wind, atmosphere glow or billowing dust. Grounded lunar gravity, hard directional shadows, ballistic kicked regolith. No airborne exterior sound.
+- Plants remain in pressurised enclosures. Pollination carriers, samples, doors, suit/EVA and repair boundaries preserve the pressure logic.
 - Radiation is instrument-led, not visible projectiles. Game exposure is not a measured dose. Historical replay dates remain distinct from fictional 2046–2047 dates.
 - Illumination, horizon visibility and the scenario 36-hour night are site-dependent. Jan 12 2047 eclipse date does not prove Aurora's actual view. Use observed/computed/simulated labels and a qualified camera/illustrative fallback until the real pipeline is validated.
 - Every essential clue has readable text/icon context; no colour-only, audio-only, pixel-perfect or compulsory rapid-input gate. Pause, captions, input remap, large text, reduced motion and timer alternatives remain equal routes.
@@ -60,7 +60,7 @@ Prepared against `ca01433` on 27 October 2026. Re-read current repository instru
 
 - Read current account/tool state only when the task needs a generation. Historical balances, model versions, endpoint names and Mac scratch paths are not live facts.
 - Existing paid plans/credits may be used only within the authorized work flow; no new paid subscription/tool. Never print tokens or keys, store them in prompts, commit them, or include them in reports.
-- `AGENTS.md` explicitly requires approval of 2 D sheets before spending Tripo credits on new characters/hero props. Check for an existing approval of the exact design; if absent, prepare the concrete sheet and ask only for that remaining approval. Continue independent ready work.
+- `AGENTS.md` explicitly requires approval of 2D sheets before spending Tripo credits on new characters/hero props. Check for an existing approval of the exact design; if absent, prepare the concrete sheet and ask only for that remaining approval. Continue independent ready work.
 - Tripo account switching: `tripo config use`, no `TRIPO_API_KEY`; API pool uses `TRIPO_OPENAPI_KEY`; private visibility; rig exports include animation. Preserve the actual existing models until replacements pass comparison and are approved.
 - Every AI generation has provenance in `production/AI_PROMPT_LOG.md`. Keep licenses, inputs, prompts, result IDs and human changes without secrets.
 - Raw/intermediate files belong in the established ignored staging area; final runtime assets follow the existing asset layout and Git LFS policy.

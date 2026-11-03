@@ -1,5 +1,7 @@
 # Asset production manifest
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 ## Existing repository assets and reuse limits
 
 Existing references: [main story](../docs/STORY_FINAL.md), [Season 1](../docs/CAMPAIGN_SEASON1.md), [gameplay specification](../docs/GAMEPLAY_DESIGN_FINAL.md), [pitch asset inventory](../pitch-video/v2/ASSETS.md), [final pitch plan](../pitch-video/VIDEOPITCH_FINAL.md), [production handoff](../pitch-video/final-production/PRODUCTION_HANDOFF_FINAL.md), and versioned scripts/captions/edit plans. The inventory describes externally hosted/downloadable assets; the editable files are not in this export. No MP4, .gitattributes, engine project, editable model, audio stem, font or processed NASA dataset is supplied locally. Past render reports describe their own production environment; they do not establish local asset availability or a visual inspection in this review.

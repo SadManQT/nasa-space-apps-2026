@@ -35,7 +35,7 @@ Follow the Phase 0 order in `06_EXECUTION_BOARD.md`. Treat new module names in `
 ## Detailed work sequence
 
 1. Resolve repo root and current HEAD; preserve unrelated edits and inspect Git LFS object presence without printing credentials.
-2. Discover the installed Godot and Blender binaries and their actual versions; translate historical mac OS commands to the current host without inventing an executable path.
+2. Discover the installed Godot and Blender binaries and their actual versions; translate historical macOS commands to the current host without inventing an executable path.
 3. Run a clean import and a bounded existing dev scene; capture missing fixtures, import/parser/shader errors and portable reproduction commands.
 4. Inspect current manifests against actual GLB headers, geometry/animation metadata and runtime file paths; label stale historical fields.
 5. Publish one agreed verification command sheet and baseline report; keep cache/intermediate outputs ignored and preserve binary sources.

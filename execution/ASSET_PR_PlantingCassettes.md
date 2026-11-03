@@ -35,7 +35,7 @@ Core rendering/import conventions and the owning mission/world interaction contr
 ## Detailed work sequence
 
 1. Inspect the current binary/source, approved concept and owning scene requirements. Determine the exact missing function, style state or quality defect; preserve the known-good version until the replacement passes.
-2. For a 3 D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
+2. For a 3D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
 3. Two separate sealed planting cassettes for Alo/Tara, ports, unique identity and water/soil states. Establish a usable silhouette, access direction, handle/control arrangement and separate live-screen area where applicable.
 4. Expose every required state and moving child: Stowed/inspected/validated/active/completed variants as required by its exact owning scene. Publish the state→part/material/animation mapping to the interaction owner.
 5. Implement or coordinate the physical focus/collider/socket fixture and accessible steps. The shared state/simulation owns resource/knowledge/inventory mutations.
@@ -68,7 +68,7 @@ One production-reference PR_Planting Cassettes for Last Light Academy, approved 
 
 - Preserve editable source, runtime GLB/scene, embedded or project-policy textures, approved dimensions, material slots, collision, named pivots/sockets and explicit state variants.
 - Use existing `production/tools/` helpers and `game/tools/verify_assets.gd` after inspecting their current arguments; historical tool paths/versions are not live facts.
-- New character/hero prop designs require the exact 2 D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
+- New character/hero prop designs require the exact 2D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
 
 
 ## Required deliverables

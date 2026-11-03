@@ -57,7 +57,7 @@ SYS02 content, SYS03 state, SYS04 simulation, SYS05 interactions, SYS07 checkpoi
 - **Difficulty, timing and retry:** Easy; unlimited clean tips. Retry affects the current transfer only.
 - **Completion trigger:** Three reciprocal runs valid, each charged E1/A1 once; seals passed, seven care visits and stem prediction logged.
 - **Narrative consequence / flags:** pollen_shared_pending; lineage_parent_pair = Alo × Tara.
-- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penal is e the ending.
+- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penalise the ending.
 
 <a id="p-04"></a>
 

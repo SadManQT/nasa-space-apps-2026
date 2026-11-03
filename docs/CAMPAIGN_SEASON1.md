@@ -144,7 +144,7 @@ Players uncover this one piece per chapter.
 - A huge solar storm broke the crew's only relay radio. Earth set. They had to leave in a hurry, **at sunset: the last light**.
 - Before leaving, Noor:
   1. hid her seed collection in the coldest place she knew, a small crater that never sees the Sun (colder than −230 °C: a natural freezer);
-  2. left two seeds in the garden drawer, labelled **আলো (Alo, "light")** and **তারা (Tara, "star")**, signed with one letter: **N.**;
+  2. left two seeds in the garden drawer, labelled in Latin letters **ALO** ("light") and **TARA** ("star"), signed with one letter: **N.**;
   3. recorded a message, set to play "when the first flower opens".
 - Her own garden froze, just like the real cotton sprout on the Moon in 2019.
 - Back on Earth, Noor founded **Last Light Academy**, named after the last sunset she saw on the Moon. Its purpose: train young crews to finish what she started.
@@ -171,12 +171,12 @@ Players uncover this one piece per chapter.
 ### Chapter 1 · Night One 🌙
 *~April 2046, midwinter · the whole crew · 25–30 min · the full rules are in `GAME_PLAN_FINAL.md`*
 
-- **New opening:** two weeks before the night, Mei finds an old seed packet at the back of the garden drawer. Inside: two seeds, the word **আলো**, and one letter, **N.** She plants one outside in the sealed chamber (Alo) and one inside under the lamp, "just in case".
+- **New opening:** two weeks before the night, Mei finds an old seed packet at the back of the garden drawer. Inside: two seeds, the word **ALO**, and one letter, **N.** She plants one outside in the sealed chamber (Alo) and one inside under the lamp, "just in case".
 - **The mission:** the v7 night, unchanged. The Sun sets for about 36 hours, Earth sets, a real storm hits (a replay of 10 September 2017), and at First Light Alo blooms.
 - **New ending (the hook):** as Alo opens, the base's old computer wakes up. A message recorded 12 years ago, set to play "when the first flower opens":
   > *"If you're hearing this, Alo bloomed. Good. Now Alo needs a friend. — N."*
 
-  Mei turns the packet over: **"Alo can't make seeds alone."** In the indoor pot, the second seed has a bud. Its label: **তারা, Tara, "star".**
+  Mei turns the packet over: **"Alo can't make seeds alone."** In the indoor pot, the second seed has a bud. Its label, in Latin letters: **TARA** ("star").
 - **Real science:** Fast Plants can't pollinate themselves. They need pollen from another plant.
 - **Upgrade choice:** ☀️ Taller mast or 🔋 Fuel-cell battery (§9).
 

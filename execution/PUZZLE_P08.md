@@ -57,7 +57,7 @@ SYS02 content, SYS03 state, SYS04 simulation, SYS05 interactions, SYS07 checkpoi
 - **Difficulty, timing and retry:** Medium; no timer; checkpoint field-secured and home-docked.
 - **Completion trigger:** Twelve distinct specimens recorded; lid scanned; quarantine status set pending viability evaluation, not assumed healthy.
 - **Narrative consequence / flags:** vault_recovered_pending; vault_specimens 12; vault_cotton 1; vault_note_seen.
-- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penal is e the ending.
+- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penalise the ending.
 
 <a id="p-09"></a>
 

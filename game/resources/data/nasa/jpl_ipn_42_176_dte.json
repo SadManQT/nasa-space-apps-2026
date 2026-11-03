@@ -1,0 +1,38 @@
+{
+ "source_id": "jpl_ipn_42_176_dte",
+ "retrieved": "2026-11-04",
+ "title": "Sunlight and Earth-link availability near the south pole",
+ "agency": "NASA Jet Propulsion Laboratory, Interplanetary Network Progress Report",
+ "dataset_id": "IPN PR 42-176",
+ "url": "https://ipnpr.jpl.nasa.gov/progress_report/42-176/176C.pdf",
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Bryant, S. (2009) Lunar Pole Illumination and Communications Maps Computed from Goldstone Solar System Radar Elevation Data, IPN Progress Report 42-176.",
+ "fields_used": [
+  "solar_availability_best_site_percent",
+  "dte_availability_best_site_percent"
+ ],
+ "values": {
+  "solar_availability_best_site_percent": 92,
+  "dte_availability_best_site_percent": 51
+ },
+ "derived": [
+  {
+   "name": "why_malapert",
+   "value": "peaks near the pole can keep continuous Earth view",
+   "unit": "fact",
+   "formula": "report abstract",
+   "drives": "P-16"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Goldstone radar DEM (40 m); not Aurora's site.",
+ "verification": [
+  {
+   "checked_url": "https://ipnpr.jpl.nasa.gov/progress_report/42-176/176C.pdf",
+   "quotes_found": [],
+   "note": "HTTP 200; PDF not parsed"
+  }
+ ],
+ "transcribed_from": "Abstract, p. 1 (pdftotext 2026-11-03).",
+ "src_card": "SRC-RELAY"
+}

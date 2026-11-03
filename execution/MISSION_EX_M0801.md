@@ -187,7 +187,7 @@ What does a dark marker justify?
 - 120 kilometres each way,24 hours out+3 hours repair+24 hours back=51 hours; provisions 72 hours.
 - Depart 8 April 00:00, summit 9 April 00:00, return 9 April 03:00, home 10 April 03:00, dawn 10 April 06:00.
 - Base has two occupants for 33 dark hours, then five for 3 hours.
-- Founder 30, retainedvault 11 and plantedcotton 1 remain distinct.
+- Founder 30, retained vault 11 and planted cotton 1 remain distinct.
 - First live Noor voice occurs only after verified dual-link checks.
 - MARS is only a post-credit future-story image, with no additional playable task.
 

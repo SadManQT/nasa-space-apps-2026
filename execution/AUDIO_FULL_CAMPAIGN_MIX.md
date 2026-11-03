@@ -33,7 +33,7 @@ SYS06/SYS10/SYS17; VOICE_*, MUSIC_*, SFX_* tasks; all owning missions/cutscenes.
 
 ## Detailed work sequence
 
-1. Reconcile all 385 voice rows to actual delivery/takes/text-only messages,12 cuesand 35 effects; reuse existing 3 cutscene mixes and 12 voice files where valid.
+1. Reconcile all 385 voice rows to actual delivery/takes/text-only messages,12 cues and 35 effects; reuse existing 3 cutscene mixes and 12 voice files where valid.
 2. Set voice/music/effects/UI buses and existing ducking/dynamic range priorities under SYS17.
 3. Publish line/cue/event timings, origin processing, caption and visible face cue alignment without duplicated outputs.
 4. Listen through representative quiet, planning, storm, rover, archive, reveal, eclipse and finale cases; check names, intelligibility and meaningful silence.

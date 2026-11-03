@@ -1,5 +1,7 @@
 # Scientific accuracy, fiction boundaries and source register
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 Design consistency reviewed 24 October 2026 against the supplied story/science documents. External pages were not re-source-documented during this review. This is a fictional future expedition. Historical inspiration, source-documented astronomy, authored environmental timing and simplified game rules are separate categories. No raw NASA dataset has been downloaded, processed, bundled or quantitatively validated by this documentation task.
 
 ## Claim register and locked production treatment

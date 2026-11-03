@@ -1,0 +1,58 @@
+{
+ "source_id": "meo_lunar_impact_flashes",
+ "retrieved": "2026-11-04",
+ "title": "NASA lunar impact flash monitoring",
+ "agency": "NASA Marshall Space Flight Center, Meteoroid Environment Office",
+ "dataset_id": "NTRS 20150016513 (Suggs et al. 2014 summary); NTRS 20170004471 (2015 Geminids)",
+ "url": "https://www.nasa.gov/meteoroid-environment-office/lunar-impact-monitoring/",
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "NASA MEO Lunar Impact Monitoring; Suggs, R.M. et al. (2014) flux summary (NTRS 20150016513); Moser, D.E., Suggs, R.M. & Ehlert, S.R. (2017) 2015 Geminid impact flashes (NTRS 20170004471).",
+ "fields_used": [
+  "calibrated_flashes_first_5_years",
+  "fraction_with_meteor_showers",
+  "geminid_detections_to_2017",
+  "nights_per_month",
+  "telescopes"
+ ],
+ "values": {
+  "nights_per_month": 10,
+  "telescopes": 2,
+  "calibrated_flashes_first_5_years": 126,
+  "fraction_with_meteor_showers": 0.62,
+  "geminid_detections_to_2017": "over 80"
+ },
+ "derived": [
+  {
+   "name": "verification_rule",
+   "value": "two telescopes must both see it",
+   "unit": "rule",
+   "formula": "MEO method",
+   "drives": "P-10 reject the two fixed artifacts"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Earth-based telescopes; the chapter's eight candidates and six-flash goal are authored.",
+ "verification": [
+  {
+   "checked_url": "https://www.nasa.gov/meteoroid-environment-office/lunar-impact-monitoring/",
+   "quotes_found": [
+    "observes the moon for meteoroid impact flashes about 10 nights per month",
+    "Two telescopes fitted with astronomical video cameras"
+   ]
+  },
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20150016513",
+   "quotes_found": [
+    "Telescopic video observations of 126 impact flashes",
+    "Approximately 62% of the impact flashes were correlated with major meteor showers"
+   ]
+  },
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20170004471",
+   "quotes_found": [
+    "over 80 detections"
+   ]
+  }
+ ],
+ "src_card": "SRC-IMPACTS"
+}

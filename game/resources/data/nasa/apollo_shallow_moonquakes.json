@@ -1,0 +1,257 @@
+{
+ "source_id": "apollo_shallow_moonquakes",
+ "retrieved": "2026-11-04",
+ "title": "The 28 shallow moonquakes recorded by Apollo seismometers",
+ "agency": "NASA Planetary Data System, Geosciences Node (Apollo Passive Seismic Experiment)",
+ "dataset_id": "urn:nasa:pds:apollo_seismic_event_catalog, nakamura_1979_sm_locations",
+ "url": "https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_seismic_event_catalog/data/nakamura_1979_sm_locations.csv",
+ "request_urls": [
+  "https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_seismic_event_catalog/data/nakamura_1979_sm_locations.csv"
+ ],
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Nakamura, Y. et al. (1979) shallow moonquake locations; NASA PDS Apollo seismic event catalog.",
+ "fields_used": [
+  "Year",
+  "Day",
+  "H",
+  "M",
+  "S",
+  "Lat",
+  "Long",
+  "Magnitude"
+ ],
+ "values": {
+  "quakes": [
+   {
+    "date": "1971-04-17",
+    "utc": "07:00:55",
+    "lat": 48.0,
+    "lon": 35.0,
+    "magnitude": 2.8
+   },
+   {
+    "date": "1971-05-20",
+    "utc": "17:25:10",
+    "lat": 42.0,
+    "lon": -24.0,
+    "magnitude": 2.0
+   },
+   {
+    "date": "1971-07-11",
+    "utc": "13:24:45",
+    "lat": 43.0,
+    "lon": -47.0,
+    "magnitude": 1.9
+   },
+   {
+    "date": "1972-01-02",
+    "utc": "22:29:40",
+    "lat": 54.0,
+    "lon": 101.0,
+    "magnitude": 1.9
+   },
+   {
+    "date": "1972-09-17",
+    "utc": "14:35:55",
+    "lat": 12.0,
+    "lon": 46.0,
+    "magnitude": 1.0
+   },
+   {
+    "date": "1972-12-06",
+    "utc": "23:08:20",
+    "lat": 51.0,
+    "lon": 45.0,
+    "magnitude": 1.4
+   },
+   {
+    "date": "1972-12-09",
+    "utc": "03:50:15",
+    "lat": -20.0,
+    "lon": -80.0,
+    "magnitude": 1.2
+   },
+   {
+    "date": "1973-02-08",
+    "utc": "22:52:10",
+    "lat": 33.0,
+    "lon": 35.0,
+    "magnitude": 0.8
+   },
+   {
+    "date": "1973-03-13",
+    "utc": "07:56:30",
+    "lat": -84.0,
+    "lon": -134.0,
+    "magnitude": 3.2
+   },
+   {
+    "date": "1973-06-20",
+    "utc": "20:22:00",
+    "lat": -1.0,
+    "lon": -71.0,
+    "magnitude": 2.2
+   },
+   {
+    "date": "1973-10-01",
+    "utc": "03:58:00",
+    "lat": -37.0,
+    "lon": -29.0,
+    "magnitude": 1.1
+   },
+   {
+    "date": "1974-02-23",
+    "utc": "21:16:50",
+    "lat": 36.0,
+    "lon": -16.0,
+    "magnitude": 0.7
+   },
+   {
+    "date": "1974-03-27",
+    "utc": "09:11:00",
+    "lat": -48.0,
+    "lon": -106.0,
+    "magnitude": 1.6
+   },
+   {
+    "date": "1974-04-19",
+    "utc": "13:35:15",
+    "lat": -37.0,
+    "lon": 42.0,
+    "magnitude": 0.9
+   },
+   {
+    "date": "1974-05-29",
+    "utc": "20:42:15",
+    "lat": null,
+    "lon": null,
+    "magnitude": 0.6
+   },
+   {
+    "date": "1974-07-11",
+    "utc": "00:46:30",
+    "lat": 21.0,
+    "lon": 88.0,
+    "magnitude": 2.7
+   },
+   {
+    "date": "1975-01-03",
+    "utc": "01:42:00",
+    "lat": 29.0,
+    "lon": -98.0,
+    "magnitude": 3.2
+   },
+   {
+    "date": "1975-01-12",
+    "utc": "03:14:10",
+    "lat": 75.0,
+    "lon": 40.0,
+    "magnitude": 1.7
+   },
+   {
+    "date": "1975-01-13",
+    "utc": "00:26:20",
+    "lat": -2.0,
+    "lon": -51.0,
+    "magnitude": 1.1
+   },
+   {
+    "date": "1975-02-13",
+    "utc": "22:03:50",
+    "lat": -19.0,
+    "lon": -26.0,
+    "magnitude": 1.4
+   },
+   {
+    "date": "1975-05-07",
+    "utc": "06:37:05",
+    "lat": -49.0,
+    "lon": -45.0,
+    "magnitude": 1.3
+   },
+   {
+    "date": "1975-05-27",
+    "utc": "23:29:00",
+    "lat": 3.0,
+    "lon": -58.0,
+    "magnitude": 1.4
+   },
+   {
+    "date": "1975-11-10",
+    "utc": "07:52:55",
+    "lat": -8.0,
+    "lon": 64.0,
+    "magnitude": 1.8
+   },
+   {
+    "date": "1976-01-04",
+    "utc": "11:18:55",
+    "lat": 50.0,
+    "lon": 30.0,
+    "magnitude": 1.8
+   },
+   {
+    "date": "1976-01-12",
+    "utc": "08:18:05",
+    "lat": 38.0,
+    "lon": 44.0,
+    "magnitude": 1.1
+   },
+   {
+    "date": "1976-03-06",
+    "utc": "10:12:40",
+    "lat": 50.0,
+    "lon": -20.0,
+    "magnitude": 2.3
+   },
+   {
+    "date": "1976-03-08",
+    "utc": "14:42:10",
+    "lat": -19.0,
+    "lon": -12.0,
+    "magnitude": 1.8
+   },
+   {
+    "date": "1976-05-16",
+    "utc": "12:32:40",
+    "lat": 77.0,
+    "lon": -10.0,
+    "magnitude": 1.5
+   }
+  ]
+ },
+ "evidence_label": "Observed",
+ "derived": [
+  {
+   "name": "count",
+   "value": 28,
+   "unit": "events",
+   "formula": "rows in the catalog",
+   "drives": "CH3 quake card"
+  },
+  {
+   "name": "max_magnitude",
+   "value": 3.2,
+   "unit": "catalog magnitude",
+   "formula": "max",
+   "drives": "CH3 quake card"
+  },
+  {
+   "name": "south_polar_event",
+   "value": [
+    {
+     "date": "1973-03-13",
+     "utc": "07:56:30",
+     "lat": -84.0,
+     "lon": -134.0,
+     "magnitude": 3.2
+    }
+   ],
+   "unit": "event",
+   "formula": "events at latitude <= -60",
+   "drives": "P-05 aftershock: the 13 Mar 1973 south-polar quake"
+  }
+ ],
+ "boundary": "Recorded by Apollo stations near the equator; the location of the polar event is uncertain. The story's quake, leak and dates are fiction.",
+ "src_card": "SRC-QUAKES"
+}

@@ -1,0 +1,314 @@
+{
+ "source_id": "goes13_protons_2017_09",
+ "retrieved": "2026-11-04",
+ "title": "GOES-13 proton flux during the 10 September 2017 storm",
+ "agency": "NOAA National Centers for Environmental Information (partner agency)",
+ "dataset_id": "GOES-13 EPEAD corrected integral proton flux, 5-min (g13_epead_cpflux_5m_20170901_20170930)",
+ "url": "https://www.ncei.noaa.gov/products/goes-1-15/space-weather-instruments",
+ "request_urls": [
+  "https://www.ncei.noaa.gov/data/goes-space-environment-monitor/access/avg/2017/09/goes13/csv/g13_epead_cpflux_5m_20170901_20170930.csv"
+ ],
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "NOAA NCEI, GOES-13 SEM EPEAD corrected proton flux, September 2017.",
+ "fields_used": [
+  "time_tag",
+  "ZPGT10W (>10 MeV, west-facing, p/(cm^2 s sr))",
+  "ZPGT100W (>100 MeV)"
+ ],
+ "values": {
+  "hourly_columns": [
+   "hour_start_utc",
+   "gt10MeV_pfu",
+   "gt100MeV_pfu"
+  ],
+  "hourly": [
+   [
+    "2017-09-10T12:00Z",
+    0.17,
+    0.0384
+   ],
+   [
+    "2017-09-10T13:00Z",
+    0.175,
+    0.0464
+   ],
+   [
+    "2017-09-10T14:00Z",
+    0.159,
+    0.0452
+   ],
+   [
+    "2017-09-10T15:00Z",
+    0.188,
+    0.0492
+   ],
+   [
+    "2017-09-10T16:00Z",
+    6.567,
+    1.9055
+   ],
+   [
+    "2017-09-10T17:00Z",
+    57.541,
+    14.0228
+   ],
+   [
+    "2017-09-10T18:00Z",
+    111.549,
+    29.7507
+   ],
+   [
+    "2017-09-10T19:00Z",
+    146.968,
+    37.5065
+   ],
+   [
+    "2017-09-10T20:00Z",
+    223.813,
+    44.2396
+   ],
+   [
+    "2017-09-10T21:00Z",
+    467.179,
+    51.6965
+   ],
+   [
+    "2017-09-10T22:00Z",
+    684.274,
+    58.5169
+   ],
+   [
+    "2017-09-10T23:00Z",
+    908.217,
+    58.7241
+   ],
+   [
+    "2017-09-11T00:00Z",
+    1188.479,
+    58.4886
+   ],
+   [
+    "2017-09-11T01:00Z",
+    1143.0,
+    51.5701
+   ],
+   [
+    "2017-09-11T02:00Z",
+    851.302,
+    48.4721
+   ],
+   [
+    "2017-09-11T03:00Z",
+    640.717,
+    46.3382
+   ],
+   [
+    "2017-09-11T04:00Z",
+    864.085,
+    45.38
+   ],
+   [
+    "2017-09-11T05:00Z",
+    881.156,
+    40.7612
+   ],
+   [
+    "2017-09-11T06:00Z",
+    880.521,
+    37.3538
+   ],
+   [
+    "2017-09-11T07:00Z",
+    998.368,
+    33.8475
+   ],
+   [
+    "2017-09-11T08:00Z",
+    857.301,
+    30.1288
+   ],
+   [
+    "2017-09-11T09:00Z",
+    951.845,
+    28.0157
+   ],
+   [
+    "2017-09-11T10:00Z",
+    1116.0,
+    26.1378
+   ],
+   [
+    "2017-09-11T11:00Z",
+    1048.064,
+    25.0577
+   ],
+   [
+    "2017-09-11T12:00Z",
+    909.242,
+    22.3862
+   ],
+   [
+    "2017-09-11T13:00Z",
+    754.968,
+    20.2895
+   ],
+   [
+    "2017-09-11T14:00Z",
+    720.323,
+    17.8683
+   ],
+   [
+    "2017-09-11T15:00Z",
+    581.689,
+    15.623
+   ],
+   [
+    "2017-09-11T16:00Z",
+    627.408,
+    14.5964
+   ],
+   [
+    "2017-09-11T17:00Z",
+    663.726,
+    13.3152
+   ],
+   [
+    "2017-09-11T18:00Z",
+    413.328,
+    11.882
+   ],
+   [
+    "2017-09-11T19:00Z",
+    354.796,
+    10.89
+   ],
+   [
+    "2017-09-11T20:00Z",
+    368.831,
+    10.6303
+   ],
+   [
+    "2017-09-11T21:00Z",
+    541.945,
+    10.0247
+   ],
+   [
+    "2017-09-11T22:00Z",
+    520.557,
+    9.0743
+   ],
+   [
+    "2017-09-11T23:00Z",
+    469.991,
+    8.581
+   ],
+   [
+    "2017-09-12T00:00Z",
+    443.479,
+    7.7602
+   ],
+   [
+    "2017-09-12T01:00Z",
+    459.562,
+    7.3969
+   ],
+   [
+    "2017-09-12T02:00Z",
+    419.919,
+    6.6963
+   ],
+   [
+    "2017-09-12T03:00Z",
+    387.852,
+    6.164
+   ],
+   [
+    "2017-09-12T04:00Z",
+    376.177,
+    5.7735
+   ],
+   [
+    "2017-09-12T05:00Z",
+    358.739,
+    5.2446
+   ],
+   [
+    "2017-09-12T06:00Z",
+    325.56,
+    4.7286
+   ],
+   [
+    "2017-09-12T07:00Z",
+    340.777,
+    4.5344
+   ],
+   [
+    "2017-09-12T08:00Z",
+    256.612,
+    3.7149
+   ],
+   [
+    "2017-09-12T09:00Z",
+    196.162,
+    3.3462
+   ],
+   [
+    "2017-09-12T10:00Z",
+    200.193,
+    3.4293
+   ],
+   [
+    "2017-09-12T11:00Z",
+    232.935,
+    2.7205
+   ]
+  ]
+ },
+ "evidence_label": "Observed",
+ "derived": [
+  {
+   "name": "gt10MeV_reaches_10pfu",
+   "value": "2017-09-10T16:45Z",
+   "unit": "UTC",
+   "formula": "first 5-min value >= 10 pfu after the X8.2 flare",
+   "drives": "P-02 storm onset"
+  },
+  {
+   "name": "gt10MeV_peak",
+   "value": 1347.2,
+   "unit": "pfu",
+   "formula": "max 5-min value, at 2017-09-11T00:55Z",
+   "drives": "debrief chart"
+  },
+  {
+   "name": "gt100MeV_peak",
+   "value": 60.718,
+   "unit": "pfu",
+   "formula": "max 5-min value, at 2017-09-10T22:20Z",
+   "drives": "debrief chart"
+  },
+  {
+   "name": "storm_shift1_mean_gt10MeV",
+   "value": 359.2,
+   "unit": "pfu",
+   "formula": "mean over [onset, onset+7.2 h)",
+   "drives": "P-02 shift 5"
+  },
+  {
+   "name": "storm_shift2_mean_gt10MeV",
+   "value": 922.8,
+   "unit": "pfu",
+   "formula": "mean over [onset+7.2 h, onset+14.4 h)",
+   "drives": "P-02 shift 6"
+  },
+  {
+   "name": "shift2_over_shift1",
+   "value": 2.57,
+   "unit": "ratio",
+   "formula": "storm_shift2_mean / storm_shift1_mean",
+   "drives": "P-02 proposal B3-4 (not applied)"
+  }
+ ],
+ "boundary": "Measured in geostationary Earth orbit, inside Earth's magnetosphere; not a dose at the Moon. pfu = protons/(cm^2 s sr).",
+ "src_card": "SRC-STORM2017"
+}

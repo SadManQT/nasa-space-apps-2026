@@ -1,5 +1,7 @@
 # Development roadmap — future work only
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 No milestones have been implemented by this task. These documents establish the design; source integration, balancing and paper playtests still remain before production lock; future implementation and production validation remain separate. Dependencies are sequential to control risk, not a claim of a fixed development schedule.
 
 ## MS-01 — Content lock and paper walkthrough

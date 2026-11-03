@@ -1,0 +1,39 @@
+{
+ "source_id": "esa_moonlight_relay",
+ "retrieved": "2026-11-04",
+ "title": "Why south-pole crews need relays (ESA Moonlight)",
+ "agency": "European Space Agency (partner)",
+ "dataset_id": "ESA Moonlight programme page",
+ "url": "https://www.esa.int/Applications/Connectivity_and_Secure_Communications/Moonlight2",
+ "licence": "(c) ESA; fact quoted with credit",
+ "citation": "ESA, Moonlight.",
+ "fields_used": [
+  "coverage_priority",
+  "direct_line_of_sight_can_be_blocked"
+ ],
+ "values": {
+  "direct_line_of_sight_can_be_blocked": true,
+  "coverage_priority": "lunar south pole"
+ },
+ "derived": [
+  {
+   "name": "relay_needed",
+   "value": true,
+   "unit": "bool",
+   "formula": "terrain and curvature block direct Earth links",
+   "drives": "P-15/P-16"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Aurora's road repeaters and Malapert relay are fiction; no service date is assumed.",
+ "verification": [
+  {
+   "checked_url": "https://www.esa.int/Applications/Connectivity_and_Secure_Communications/Moonlight2",
+   "quotes_found": [
+    "can prevent a direct line of sight between users on the surface and Earth",
+    "prioritise coverage of the lunar south pole"
+   ]
+  }
+ ],
+ "src_card": "SRC-RELAY"
+}

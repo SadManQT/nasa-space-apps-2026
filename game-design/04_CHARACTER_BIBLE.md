@@ -1,5 +1,7 @@
 # Character and relationship bible
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 All ages, personal backgrounds beyond source dialogue, selection procedures and speech details below are newly authored continuity decisions. They are not represented as pre-existing repository facts. Audience age 10–15 does not set astronaut age. Nationalities remain unspecified except Noor's Bangladesh identity and Mei's established family connection to China. All cadets wear the expedition's Bangladesh patch in recognition of the host academy partnership.
 
 ## CHAR-KAI — Kai / power and heat

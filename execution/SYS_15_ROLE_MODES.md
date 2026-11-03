@@ -38,7 +38,7 @@ Follow the Phase 0 order in `06_EXECUTION_BOARD.md`. Treat new module names in `
 2. Solo receives all role facts through switching and journal; Class uses genuinely private printable cards and four groups with one operator.
 3. Make sharing/acknowledgement/reading/decision receipts distinct; no source claims that ignoring one clue always removes a star.
 4. Engineer mode exposes qualified units/evidence; Family/assisted removes motor pressure without changing story/rewards.
-5. Adapt UI/focus/controller/timer guidance without duplicating numeric models or requiring un built network multiplayer.
+5. Adapt UI/focus/controller/timer guidance without duplicating numeric models or requiring unbuilt network multiplayer.
 6. Test one complete chapter in each mode and cross mode save/settings transitions.
 
 

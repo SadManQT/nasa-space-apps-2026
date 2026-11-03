@@ -48,7 +48,7 @@ SYS02 content, SYS03 state, SYS04 simulation, SYS05 interactions, SYS07 checkpoi
 ## P-15 — Two Teams, One Road
 
 - **Mission / reason:** [M-0801](../game-design/07_MISSION_DESIGNS/M-0801_The_Long_Road.md) — Prepare two teams and traverse the relay route with verified reserves.
-- **Location / equipment:** LOC-11; Three-seat press uri sed rover, controller spare, three repeater buoys, home-system board.
+- **Location / equipment:** LOC-11; Three-seat pressurised rover, controller spare, three repeater buoys, home-system board.
 - **Initial state:** Rover E14 (source units); independent supplies 72 h; 120 km each way; outbound travel/heat/repair allowance 5, return allowance 5; minimum reserve 2. Marker 2 battery dead. Home E20/cap 26, A8, H6, C8, R18, W0; 36 h COOL/DIM/basic demand is 5*(1+1+1)=E15. COOL costs H1 per 7.2 h without insulation; the five-shift night ends H1, so no unavailable upgrade is required. Air use is 0.5 per 7.2 h for the two home cadets for 33 h, then 1.25 per 7.2 h for all five for the final 3 h: total 2.8125.
 - **Player instructions and intermediate steps:** Load controller, battery spare and 72 h supplies; assign FER/KAI/RAF rover and MEI/AMA home. Choose surveyed road (max 12°, allowance 5), not shortcut (22°, allowance 3.5). At marker 2 stop, brake, isolate buoy, replace battery, reconnect and test chain 1→2→3. At home set heat MIN (COOL), lamp DIM, return OPEN, verify independent pressure; acknowledge summit packet.
 - **Accepted solution:** 14−5−5=4>=2; total journey 51 h<=72 h. Restore marker 2 before leaving. Home end E5, A5.1875, H1, C8, R14.625; all four checks valid. Travel sim advances 24 h outbound; local playable road length is intentionally compressed.
@@ -57,7 +57,7 @@ SYS02 content, SYS03 state, SYS04 simulation, SYS05 interactions, SYS07 checkpoi
 - **Difficulty, timing and retry:** Medium; guided cruise and station-view alternative; checkpoint each marker and home handover.
 - **Completion trigger:** Loadout valid, three buoys link, summit arrival at Apr 9 00: 00, home checks verified.
 - **Narrative consequence / flags:** summit_reached_pending; aurora_home_ready; repeater_chain_live; travellers_at_summit.
-- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penal is e the ending.
+- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penalise the ending.
 
 <a id="p-16"></a>
 

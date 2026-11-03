@@ -1,0 +1,53 @@
+{
+ "source_id": "vsat_relocatable_array",
+ "retrieved": "2026-11-04",
+ "title": "Relocatable 10 kW solar array for lunar south pole missions",
+ "agency": "NASA Langley Research Center (Vertical Solar Array Technology)",
+ "dataset_id": "NASA/TM-20210011743; NTRS 20210011743; VSAT overview NTRS 20220013210",
+ "url": "https://ntrs.nasa.gov/citations/20210011743",
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Pappa, R. et al. (2021) Relocatable 10 kW Solar Array for Lunar South Pole Missions, NASA/TM-20210011743.",
+ "fields_used": [
+  "array_power_kW",
+  "blanket_height_m",
+  "mast_length_m"
+ ],
+ "values": {
+  "array_power_kW": 10,
+  "blanket_height_m": 10,
+  "mast_length_m": 16
+ },
+ "derived": [
+  {
+   "name": "game_mean_power",
+   "value": 11.1,
+   "unit": "kW",
+   "formula": "8 sun-drops x 10 kWh / 7.2 h",
+   "drives": "P-02 day +8"
+  },
+  {
+   "name": "fraction_of_two_arrays",
+   "value": 0.56,
+   "unit": "of 20 kW",
+   "formula": "game_mean_power / (2 x 10 kW)",
+   "drives": "P-02 +8 is an [E] estimate"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "A design study, not flight hardware; the 56 % mean output is our estimate [E].",
+ "verification": [
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20210011743",
+   "quotes_found": [
+    "conceptual design for a 10 kW solar array"
+   ]
+  },
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20220013210",
+   "quotes_found": [
+    "vertical array deployment on extension masts of up to 10m in length"
+   ]
+  }
+ ],
+ "transcribed_from": "Blanket raised 10 m (PDF p. 5) and 16 m mast (PDF p. 8); pdftotext 2026-11-03 from https://ntrs.nasa.gov/api/citations/20210011743/downloads/NASA-TM-20210011743.pdf"
+}

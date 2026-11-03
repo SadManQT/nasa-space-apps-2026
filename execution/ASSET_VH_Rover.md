@@ -35,9 +35,9 @@ Core rendering/import conventions and the owning mission/world interaction contr
 ## Detailed work sequence
 
 1. Inspect the current binary/source, approved concept and owning scene requirements. Determine the exact missing function, style state or quality defect; preserve the known-good version until the replacement passes.
-2. For a 3 D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
+2. For a 3D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
 3. Preserve cabin pressure, entry/exit clearances, seat/hand/feet anchors and clear cargo/repair mounts if players interact with this vehicle.
-4. Expose wheel/hatch/light/camera/contact state sub parts and appropriate collision; keep drive/cruise/boarding logic owned by the runtime modules.
+4. Expose wheel/hatch/light/camera/contact state subparts and appropriate collision; keep drive/cruise/boarding logic owned by the runtime modules.
 5. Tie occupants and contents to canonical roster and manifest; do not add unseen operators or consume provisions without ledger receipts.
 6. For field travel, use authored survey segments/meaningful stops and explicit dated cruise; the full 51 hour final trip is fictional time, not forced waiting.
 7. Test boarded/stationary/moving/braked/EVA/load/save states, camera motion assistance and contact/cabin sound.
@@ -50,23 +50,23 @@ Core rendering/import conventions and the owning mission/world interaction contr
 
 - Registry identity: `VH_Rover`; recorded status `verified`; category `vehicles`.
 - Source trace: `models/reuse/space_rover.glb`
-- Source notes: Press uri sed rover CH04/CH08 (A-31)
+- Source notes: Pressurised rover CH04/CH08 (A-31)
 - Inspected binary metadata: `{"binary": true, "bytes": 4489732, "bones": 0, "clips": 0, "triangles": 40000, "sha256": "6bfdeed81ed62203dbcc90cebbde11dc2a6d8068714c1a7bb79c2571f69bd1e9"}`.
 - Existing dimensional/budget row: `longest 6.00 m, 40000 tris, 2048 px`. Confirm current manifest and permitted gate tolerance before changing it.
 
 ### Vehicle role
 
-Three-seat press uri sed rover, used bytwoin CH04 and three in CH08; separate cabin/exterior/airlock/cargo/service anchors and full return reserve.
+Three-seat pressurised rover, used by two in CH04 and three in CH08; separate cabin/exterior/airlock/cargo/service anchors and full return reserve.
 
 ### Reference/generation brief (use only if a new or revised asset is actually required)
 
-Last Light Academy VH_Rover, grounded utilitarian lunar vehicle in the approved anime/cel visual system. Follow the exact vehicle role quoted here, adult scale and existing silhouette. Functional cabin/seat/hatch/cargo/service geometry where required, readable controls using separate live UI surfaces, restrained white/navy/orange hardware and correct patches. Separate movable parts/anchors; physical lunar wheels/feet on r egoli th, black sky, clean contact shadows.
+Last Light Academy VH_Rover, grounded utilitarian lunar vehicle in the approved anime/cel visual system. Follow the exact vehicle role quoted here, adult scale and existing silhouette. Functional cabin/seat/hatch/cargo/service geometry where required, readable controls using separate live UI surfaces, restrained white/navy/orange hardware and correct patches. Separate movable parts/anchors; physical lunar wheels/feet on regolith, black sky, clean contact shadows.
 
 ### Source and runtime handoff
 
 - Preserve editable source, runtime GLB/scene, embedded or project-policy textures, approved dimensions, material slots, collision, named pivots/sockets and explicit state variants.
 - Use existing `production/tools/` helpers and `game/tools/verify_assets.gd` after inspecting their current arguments; historical tool paths/versions are not live facts.
-- New character/hero prop designs require the exact 2 D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
+- New character/hero prop designs require the exact 2D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
 
 
 ## Required deliverables
@@ -83,7 +83,7 @@ Last Light Academy VH_Rover, grounded utilitarian lunar vehicle in the approved 
 - Size/pivot/bounds/materials match current spec; collisions, moving parts and interaction sockets are demonstrated separately.
 - Review the correct anime style in front/side/back and the owning gameplay context; record what was actually inspected.
 - Occupants, supplies, route/time and return reserve match the owning chapter.
-- No wheel wind, airborne vacuum engine boom or unsafe un press uri sed cabin.
+- No wheel wind, airborne vacuum engine boom or unsafe unpressurised cabin.
 - No static vehicle model is labelled completed driving/boarding gameplay.
 - Pause, cancellation, duplicate input and save/reload preserve a coherent authoritative state where this task is interactive.
 - English captions/text, named icons and assisted input preserve all essential information and story access.

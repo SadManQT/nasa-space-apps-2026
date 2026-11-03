@@ -183,7 +183,7 @@ How is a forecast mismatch handled?
 **Evidence boundary:**Simulated. Sources:`game-design/06_SCENE_SCRIPTS/CHAPTER_04.md`, `game-design/03_STORY_TIMELINE.md`, `game-design/08_PUZZLE_DESIGNS.md`.
 
 ### Cross-mission continuity
-- The Octobertrait sample pays off the May prediction without a guaranteed genetic ratio.
+- The October trait sample pays off the May prediction without a guaranteed genetic ratio.
 - Rafi and Kai occupy the rover; Mei and Amara stay at base; Ferreira is remote until December 12.
 - Canonical route B returns 40 against a required 30; all three beacons are tested before blind corners.
 - Scanner reference 2, threshold 12 and sample signals 2/18/19 are explicitly tagged game-profile values.

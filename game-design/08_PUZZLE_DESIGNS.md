@@ -1,5 +1,7 @@
 # Scientific puzzles — complete rules and solutions
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 All units below are bounded game units unless explicitly identified as a real measurement. Values are design constants, not engineering procedures. Timers measure player pressure only; scientific time advances at explicit commits. Each heading is a stable cross-reference anchor.
 
 <a id="p-01"></a>

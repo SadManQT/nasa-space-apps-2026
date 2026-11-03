@@ -1,0 +1,36 @@
+{
+ "source_id": "diviner_cold_traps",
+ "retrieved": "2026-11-04",
+ "title": "Diviner temperatures in south-polar cold traps",
+ "agency": "NASA LRO Diviner (UCLA)",
+ "dataset_id": "DOI 10.1126/science.1187726",
+ "url": "https://www.diviner.ucla.edu/science",
+ "licence": "Facts and values quoted with citation; the article text remains (c) its publisher",
+ "citation": "Paige, D.A. et al. (2010) Diviner Lunar Radiometer observations of cold traps in the Moon's south polar region, Science 330, 479-482.",
+ "fields_used": [
+  "subsurface_temperature_K_lcross_site"
+ ],
+ "values": {
+  "subsurface_temperature_K_lcross_site": 38
+ },
+ "derived": [
+  {
+   "name": "cold_trap_celsius",
+   "value": -235.1,
+   "unit": "deg C",
+   "formula": "K - 273.15",
+   "drives": "P-07/P-08 cold card"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Estimated subsurface temperature at the LCROSS site; the vault site is fiction.",
+ "verification": [
+  {
+   "checked_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1126%2Fscience.1187726&resultType=core&format=json",
+   "quotes_found": [
+    "subsurface temperatures are estimated to be 38 kelvin"
+   ]
+  }
+ ],
+ "src_card": "SRC-ICE"
+}

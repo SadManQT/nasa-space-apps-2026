@@ -1,5 +1,7 @@
 # Chronology and physical presence
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 The source season runs April 2046–April 2047, between polar winters approximately 350 days apart. [Season 1](../docs/CAMPAIGN_SEASON1.md#a-real-moon-year) estimates midwinter near 25 April 2046 and 10 April 2047, and midsummer near 19 October 2046. These are source estimates [E], not locally verified Aurora ephemerides. The schedule below is authored UTC [F]; dates within each chapter support care and travel continuity. It does not claim a 365-day lunar year or computed horizon.
 
 | Date | Chapter / missions | Event | Ferreira / communications |

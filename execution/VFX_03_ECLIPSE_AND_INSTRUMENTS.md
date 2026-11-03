@@ -37,7 +37,7 @@ Run only when its actual inputs/dependent features are available. Independent re
 1. Use source backed date and explicit computed/simulated labels; Aurora specific geometry requires verification.
 2. Create Earth limb diagram/camera feed/horizon and link displays without claiming resolved Bangladesh stripe or actual site bearing.
 3. Demonstrate forecast versus observed readings, normal/fault/recovery and known-content message freshness.
-4. Test captions, non colour cues, photo sensitivity/reduced motion and actual screen distance.
+4. Test captions, non-colour cues, photo sensitivity/reduced motion and actual screen distance.
 
 
 ## Required deliverables

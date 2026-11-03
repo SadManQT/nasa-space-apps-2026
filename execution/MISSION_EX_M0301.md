@@ -49,7 +49,7 @@ Prerequisite `EX-M0204`; SYS02..08; chapter puzzles P-05, P-06; owning location/
 
 ### Chapter contract
 
-Chapter 3:**Moon quake**; dates: 6 May-21 October 2046, with explicit repair, harvest and generation gates; chapter target: 85 minutes.
+Chapter 3:**Moonquake**; dates: 6 May-21 October 2046, with explicit repair, harvest and generation gates; chapter target: 85 minutes.
 
 The crew localises and repairs a quake-damaged service spur, safely investigates an old seedling annex, verifies a future vault map and completes Alo harvest. Exactly 42 founder seeds become 12 planting plus 30 reserve, followed by a documented multi-generation care bridge.
 

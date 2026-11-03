@@ -1,0 +1,111 @@
+{
+ "source_id": "donki_2012_07",
+ "retrieved": "2026-11-04",
+ "title": "The July 2012 CME that missed Earth (STEREO-A)",
+ "agency": "NASA GSFC Community Coordinated Modeling Center (DONKI)",
+ "dataset_id": "DONKI 2012-07-23T02:36:00-CME-001; 2012-07-23T03:59:00-SEP-001; 2012-07-23T20:55:00-IPS-001",
+ "url": "https://ccmc.gsfc.nasa.gov/tools/DONKI/",
+ "request_urls": [
+  "https://ccmc.gsfc.nasa.gov/DONKI-API/get/CME?startDate=2012-07-22&endDate=2012-07-26",
+  "https://ccmc.gsfc.nasa.gov/DONKI-API/get/SEP?startDate=2012-07-22&endDate=2012-07-26",
+  "https://ccmc.gsfc.nasa.gov/DONKI-API/get/IPS?startDate=2012-07-22&endDate=2012-07-26"
+ ],
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "NASA CCMC DONKI, records for 2012-07-22 to 2012-07-26.",
+ "fields_used": [
+  "CME startTime/speed",
+  "SEP eventTime/instruments",
+  "IPS eventTime/location"
+ ],
+ "values": {
+  "CME": [
+   {
+    "activityID": "2012-07-23T02:36:00-CME-001",
+    "startTime": "2012-07-23T02:36Z",
+    "sourceLocation": "",
+    "activeRegionNum": null,
+    "speed_km_s": 3435.0,
+    "analysis_type": "ER"
+   }
+  ],
+  "SEP": [
+   {
+    "id": "2012-07-23T03:59:00-SEP-001",
+    "eventTime": "2012-07-23T03:59Z",
+    "location": null,
+    "instruments": [
+     "STEREO A: IMPACT 13-100 MeV"
+    ]
+   },
+   {
+    "id": "2012-07-23T14:00:00-SEP-001",
+    "eventTime": "2012-07-23T14:00Z",
+    "location": null,
+    "instruments": [
+     "GOES13: SEM/EPS >10 MeV"
+    ]
+   },
+   {
+    "id": "2012-07-24T18:27:00-SEP-001",
+    "eventTime": "2012-07-24T18:27Z",
+    "location": null,
+    "instruments": [
+     "STEREO B: IMPACT 13-100 MeV"
+    ]
+   }
+  ],
+  "IPS": [
+   {
+    "id": "2012-07-23T20:55:00-IPS-001",
+    "eventTime": "2012-07-23T20:55Z",
+    "location": "STEREO A",
+    "instruments": [
+     "STEREO A: IMPACT",
+     "STEREO A: PLASTIC"
+    ]
+   },
+   {
+    "id": "2012-07-23T21:21:00-IPS-001",
+    "eventTime": "2012-07-23T21:21Z",
+    "location": "STEREO B",
+    "instruments": [
+     "STEREO B: IMPACT",
+     "STEREO B: PLASTIC"
+    ]
+   }
+  ]
+ },
+ "evidence_label": "Observed",
+ "derived": [
+  {
+   "name": "cme_speed",
+   "value": 3435.0,
+   "unit": "km/s",
+   "formula": "DONKI CME most-accurate analysis",
+   "drives": "P-13 briefing"
+  },
+  {
+   "name": "stereo_a_particle_onset",
+   "value": "2012-07-23T03:59Z",
+   "unit": "UTC",
+   "formula": "DONKI SEP at STEREO A",
+   "drives": "P-13 step 1 start"
+  },
+  {
+   "name": "stereo_a_shock_arrival",
+   "value": "2012-07-23T20:55Z",
+   "unit": "UTC",
+   "formula": "DONKI IPS at STEREO A",
+   "drives": "P-13 peak step"
+  },
+  {
+   "name": "onset_to_shock",
+   "value": 16.93,
+   "unit": "h",
+   "formula": "IPS time - SEP onset",
+   "drives": "P-13 storm length"
+  }
+ ],
+ "boundary": "The CME hit STEREO-A, not Earth or the Moon. Chapter 7's Moon strike, three waves, damage and 2047 date are a labelled counterfactual.",
+ "src_card": "SRC-STORM2012"
+}

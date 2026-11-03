@@ -46,7 +46,7 @@
 | **Audio** | English narration and character voices, original music |
 | **Subtitles** | English, burned into the picture, and also in [`LastLightAcademy_pitch_video.srt`](LastLightAcademy_pitch_video.srt) |
 
-The video is the project's original concept visualization. The repository now also contains a bounded bootable commissioning slice; the full campaign remains in active implementation.
+The video is the project's original concept visualization. The repository now also contains the Godot game: a production campaign route through all eight chapters that passes its automated checks; visual, learner, audio and export review are still in progress (status: [PRODUCTION_HANDBOOK.md](PRODUCTION_HANDBOOK.md) §10).
 
 ## 💡 The idea in 30 seconds
 
@@ -80,7 +80,7 @@ available. The current commissioning slice keeps its station and resource values
 - **Real constraints.** Energy, air, heat, light and shielding all draw on the same limited supply, as on a real base.
 - **Consequences you can see.** A preview shows the effect of a plan before you commit. The debrief shows every
   decision, what it caused, and the science behind it.
-- **For every classroom.** Free, offline-ready, English-first, captioned and timer-free by default, with a readable judge route.
+- **For every classroom.** Free, offline-ready, English-only, captioned and timer-free by default, with a readable judge route.
 
 ## 📜 The real history behind it
 
@@ -146,8 +146,9 @@ a friend*. If Alo is lost, the crew is safe, Tara is still growing, and a locked
 | **Tara** (তারা, "star") | Alo's partner flower, grown indoors | Without Tara, Alo can't make seeds |
 | **Dr. Noor Rahman ("N.")** | Expedition Zero's gardener, from Bangladesh | Left the seeds. Her name means "light", just like Alo's |
 
-The cadets are stylised 3D astronauts: white suits with navy panels, orange trim and a Bangladesh flag patch. Each has
-a role colour: orange for Kai, cyan for Amara, green for Mei, purple for Rafi.
+The cadets are adult anime-style (cel-shaded) 3D characters. Indoors they wear a navy duty coverall; outside, a white EVA
+suit with navy and orange. Every outfit has the Bangladesh flag on the left shoulder and the Aurora mission patch on the
+right. Each has a role colour: orange for Kai, cyan for Amara, green for Mei, purple for Rafi.
 
 ## 🎮 How it plays
 
@@ -285,16 +286,16 @@ chapters, each with a new game toy and a new spotlight cadet.
 
 | # | Chapter | Spotlight | What happens | Length |
 |:---:|---|---|---|:---:|
-| 1 | **Night One** | Everyone | The long night, the storm and the first bloom | 25–30 min |
-| 2 | **Be the Bee** | Mei | No bees on the Moon, so the cadets carry pollen between Alo and Tara on a "bee stick", as astronaut Michael Foale did on Mir in 1997 | 20–25 min |
-| 3 | **Moonquake** | Amara | A moonquake starts an air leak. Alo makes 42 seeds, and a hatch opens: **N.R. · EXPEDITION ZERO** | 25 min |
-| 4 | **Into the Cold Trap** | Rafi | A rover trip into a crater colder than −230 °C finds ice, and Noor's seed vault | 30–35 min |
-| 5 | **Shooting Stars** | Ferreira | Under the Geminid meteor shower, Ferreira tells the truth about Expedition Zero. Noor is alive | 25 min |
-| 6 | **The Red Ring** | Kai | A real eclipse on 12 January 2047: Earth becomes a black disc in a red ring, and one part of it is the sunrise over Bangladesh | 25 min |
-| 7 | **The Great Storm** | Rafi and Ferreira | What if the great storm of July 2012 had hit the Moon? Three waves of particles, then total silence | 35–40 min |
-| 8 | **The Lighthouse** | Everyone | A relay on Malapert Mountain locks on to Earth: *"Hello, Aurora. This is Noor."* The first Moon garden blooms | 35–45 min |
+| 1 | **Night One** | Everyone | The long night, the storm and the first bloom | 75 min |
+| 2 | **Be the Bee** | Mei | No bees on the Moon, so the cadets carry pollen between Alo and Tara on a "bee stick", as astronaut Michael Foale did on Mir in 1997 | 75 min |
+| 3 | **Moonquake** | Amara | A moonquake starts an air leak. Alo makes 42 seeds, and a hatch opens: **N.R. · EXPEDITION ZERO** | 85 min |
+| 4 | **Into the Cold Trap** | Rafi | A rover trip into a crater colder than −230 °C finds ice, and Noor's seed vault | 90 min |
+| 5 | **Shooting Stars** | Ferreira | Under the Geminid meteor shower, Ferreira tells the truth about Expedition Zero. Noor is alive | 85 min |
+| 6 | **The Red Ring** | Kai | A real eclipse on 12 January 2047: Earth becomes a black disc in a red ring, and one part of it is the sunrise over Bangladesh | 85 min |
+| 7 | **The Great Storm** | Rafi and Ferreira | What if the great storm of July 2012 had hit the Moon? Three waves of particles, then total silence | 105 min |
+| 8 | **The Lighthouse** | Everyone | A relay on Malapert Mountain locks on to Earth: *"Hello, Aurora. This is Noor."* The first Moon garden blooms | 120 min |
 
-- **Main story:** about 4 hours. **Everything:** 10–14 hours, with optional Station Days, collections and upgrades.
+- **Main story:** 32 missions and 96 scenes, a 720-minute target (10–14 hours), from the canon story [full-game-story/STORY_FULL.md](full-game-story/STORY_FULL.md).
 - **The mystery:** who is "N."? **Alo means light. So does Noor.**
 - **The ending:** among the flowers grows **cotton**, the plant that froze on the Moon in 2019, alive at sunrise.
   Ferreira: *"You didn't survive the Moon. You grew it."*
@@ -410,29 +411,34 @@ pending".
 
 ## 🔧 Hackathon build plan
 
-**Status: commissioning slice implemented; full campaign in progress.** The bootable demo is intentionally bounded to
-`EX-CH01-S01` through `EX-CH01-S03`, with captions, save/checkpoint state, preview/commit receipts and retry semantics.
-The execution prompt library covers the remaining systems, missions and release work; prompt presence is not completion.
+**Status (3 Nov 2026): campaign route implemented; review and polish in progress.** The game boots into the production
+campaign, which runs Chapter 1, Chapter 2 and the shared Chapter 3–8 route to the final scene `EX-CH08-S12`, with
+captions, saves, preview/commit receipts and retries. Its automated suites pass (`game/tools/run_tests.sh`); a bug hunt
+found Chapter 2 not yet playable from the real Chapter 1 handoff, which is being fixed. Visual, learner, audio, device
+and export review are still open. All remaining work is on the team board ([production/plan/GO_NEXT.md](production/plan/GO_NEXT.md)).
 
-- **Engine:** Godot 4.7 + GDScript, Windows offline first, on the Compatibility renderer for older classroom hardware.
+- **Engine:** Godot 4.7 + GDScript, Windows offline first, on the Forward+ renderer with LODs and a Compatibility
+  fallback build for older classroom hardware.
 - **Architecture:** the simulation is separate from the graphics: one authoritative state, a pure preview/step
   function, and every number in a data file tagged with its source.
 
 | Priority | What we build |
 |---|---|
 | **Must** | Extend the commissioning slice into the complete Chapter 1 · the 3D station, consoles and the four cadets · the shared P-01/P-02 simulation · seven shifts, endings, captions, save/retry and an evidence-backed debrief |
-| **Should** | STACK puzzle · Bangla · Engineer Mode · the CRaTER storm chart · the real-night date from LOLA + Horizons · the Curiosity card · sound · Family Mode · the mission patch |
+| **Should** | STACK puzzle · Engineer Mode · the CRaTER storm chart · the real-night date from LOLA + Horizons · the Curiosity card · sound · Family Mode · the mission patch |
 | **Could** | A short Chapter 2 sample (bee runs) · clap-to-pump · surprise cards · replays of other real storms |
 | **Later** | Season 1 Chapters 3–8 · Season 2: Mars · online co-op |
 
-**Current judge route:** title → mission briefing → three canonical commissioning scenes → preview/commit → journal,
-receipt and retry demonstration. Do not present this route as the complete Chapter 1 night until P-01/P-02 and all 12
-Chapter 1 scene gates are implemented and freshly verified.
+**Judge route:** the production campaign from the title screen, starting with the 12 Chapter 1 scenes (P-01/P-02, the
+night and the first bloom). The game is English only. Present only what has fresh test and screenshot evidence.
 
 **Before the build:** a paper playtest with students aged 10–15 (with guardian permission), measuring fun, learning (a
 short quiz before and after) and confusing words or icons.
 
 ## 🤖 Use of AI (video production)
+
+The full disclosure for the game and the video (every tool, why, prompts, data and human work) is in
+[docs/AI_USE.md](docs/AI_USE.md); every generation is logged in [production/AI_PROMPT_LOG.md](production/AI_PROMPT_LOG.md).
 
 The pitch video was made with these AI tools:
 
@@ -482,6 +488,6 @@ The pitch video was made with these AI tools:
 
 <div align="center">
 
-*This repository contains a bootable commissioning slice and a documented full-campaign plan. It is not endorsed by NASA.*
+*This repository contains the Last Light Academy game, its production assets and design documents. It is not endorsed by NASA.*
 
 </div>

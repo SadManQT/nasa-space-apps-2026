@@ -39,7 +39,7 @@ Final version, 6 October 2026. This replaces every earlier story.
   - **Amara** makes the air;
   - **Mei** runs the garden;
   - **Rafi** guards the Safe Room.
-- **Alo.** Outside, in a small sealed growth chamber like NASA's LEAF, sits **Alo** (আলো, "light"), a bud of field mustard. If Alo makes it to sunrise, it will be the first flower ever to bloom on the Moon.
+- **Alo.** On 11 April 2046 the cadets plant **Alo** (আলো, "light"), a field-mustard seed, in a small sealed exterior test chamber like NASA's LEAF; after two weeks of dated care it is a bud. If Alo makes it to sunrise, it will be the first flower ever to bloom on the Moon.
 - **Sunset.** The Sun slides behind the far mountains and the tall solar masts go dark. For the next **36 hours**, the base lives on whatever is in the battery.
 
 ### 2. The Drill
@@ -85,7 +85,7 @@ Chapter 1 finishes cleanly with every ending, so a first session never needs Cha
 | **Amara** | Air: oxygen | Loves exact numbers; turns water and power into air |
 | **Mei** | Garden: food and Alo | Talks to her plants. "The garden is not a side system." |
 | **Rafi** | Safe Room: radiation shield | Checks twice and warns early; his warnings get the shelter ready in time |
-| **Alo** | A field-mustard bud with a face | Shivers, gets thirsty, gets scared, and blooms |
+| **Alo** | A purple-stem field mustard plant; no eyes, face or mouth, ever | Shows how it is doing only through posture and movement: it droops when cold or thirsty, and blooms |
 | **Commander Ferreira** | Instructor at Mission Control (Earth) | Calm and strict; only speaks while Earth is in the sky |
 | **Rao** | Flight controller (Earth) | Friendly; one hint per shift until Earth-set |
 | **Tara** (তারা, "star") | Alo's partner flower, grown indoors (from Chapter 1's ending) | A green-stemmed mustard: without Tara, Alo can't make seeds |
@@ -113,7 +113,7 @@ The mission's priorities, as on a real mission: **1. crew safe → 2. base runni
 The night above is only the beginning. Season 1 follows Alo's family for one Moon year, from one long winter night to the next (April 2046 to April 2047), in eight chapters. The game design for every chapter is in [`CAMPAIGN_SEASON1.md`](CAMPAIGN_SEASON1.md).
 
 ### Chapter 1 · Night One
-Two weeks before the long night, Mei finds an old seed packet at the back of a drawer: two seeds, the word **আলো**, and one letter, **N.** She plants them both. Then comes the night you already know: no Sun, no Earth, a real storm… and at First Light, Alo blooms. At that exact moment, the base's old computer wakes up and plays a message recorded twelve years ago:
+Two weeks before the long night, Mei finds an old seed packet at the back of a drawer: two seeds, the word **ALO**, and one letter, **N.** She plants them both. Then comes the night you already know: no Sun, no Earth, a real storm… and at First Light, Alo blooms. At that exact moment, the base's old computer wakes up and plays a message recorded twelve years ago:
 > *"If you're hearing this, Alo bloomed. Good. Now Alo needs a friend. — N."*
 
 ### Chapter 2 · Be the Bee

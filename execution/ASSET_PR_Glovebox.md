@@ -35,9 +35,9 @@ Core rendering/import conventions and the owning mission/world interaction contr
 ## Detailed work sequence
 
 1. Inspect the current binary/source, approved concept and owning scene requirements. Determine the exact missing function, style state or quality defect; preserve the known-good version until the replacement passes.
-2. For a 3 D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
+2. For a 3D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
 3. Dry contained quarantine workbench with usable glove ports and sample/vault space. Establish a usable silhouette, access direction, handle/control arrangement and separate live-screen area where applicable.
-4. Expose every required state and moving child: Sealed, s tabi lising, safe-to-open internal case, inspect, retained specimens. Publish the state→part/material/animation mapping to the interaction owner.
+4. Expose every required state and moving child: Sealed, stabilising, safe-to-open internal case, inspect, retained specimens. Publish the state→part/material/animation mapping to the interaction owner.
 5. Implement or coordinate the physical focus/collider/socket fixture and accessible steps. The shared state/simulation owns resource/knowledge/inventory mutations.
 6. Check the constraint: Opening the glove box/case must preserve pressure and inventory boundaries. Exercise valid, invalid, cancelled, partial and reloaded states in the consuming scene.
 7. Review current anime appearance, hand/tool contacts, text readability and world placement; fix local geometry/material parts before deciding regeneration is necessary.
@@ -57,7 +57,7 @@ Core rendering/import conventions and the owning mission/world interaction contr
 ### Prop identity and functional state contract
 
 - Purpose: Dry contained quarantine workbench with usable glove ports and sample/vault space.
-- Required states: Sealed, s tabi lising, safe-to-open internal case, inspect, retained specimens.
+- Required states: Sealed, stabilising, safe-to-open internal case, inspect, retained specimens.
 - Continuity/engineering boundary: Opening the glove box/case must preserve pressure and inventory boundaries.
 
 ### Reference/generation brief (use only if a new or revised asset is actually required)
@@ -68,7 +68,7 @@ One production-reference PR_Glovebox for Last Light Academy, approved anime/cel 
 
 - Preserve editable source, runtime GLB/scene, embedded or project-policy textures, approved dimensions, material slots, collision, named pivots/sockets and explicit state variants.
 - Use existing `production/tools/` helpers and `game/tools/verify_assets.gd` after inspecting their current arguments; historical tool paths/versions are not live facts.
-- New character/hero prop designs require the exact 2 D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
+- New character/hero prop designs require the exact 2D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
 
 
 ## Required deliverables

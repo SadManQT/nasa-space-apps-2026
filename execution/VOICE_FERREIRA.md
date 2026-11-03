@@ -22,7 +22,7 @@ Read [02_SHARED_CONTRACT.md](02_SHARED_CONTRACT.md), [03_SYSTEM_INTERFACES.md](0
 - [game-design/04_CHARACTER_BIBLE.md](../game-design/04_CHARACTER_BIBLE.md)
 - [game-design/15_AUDIO_AND_MUSIC_DIRECTION.md](../game-design/15_AUDIO_AND_MUSIC_DIRECTION.md)
 - [full-game-story/STORY_FULL.md](../full-game-story/STORY_FULL.md)
-- Existing v 7 individual MP3 files; current voice approval/tool/consent/license and pronunciation context.
+- Existing v7 individual MP3 files; current voice approval/tool/consent/license and pronunciation context.
 
 
 ## Ownership and dependencies
@@ -48,7 +48,7 @@ Script locked; actual authorized voice/tool; SYS06/SYS10/SYS17; owning missions 
 
 ### Speaker identity and delivery
 
-Canonical CSVspeaker:`Ferreira`; assigned rows: 40.
+Canonical CSV speaker:`Ferreira`; assigned rows: 40.
 Earth link before 12 December; locally present after arrival. Preserve current commander identity and warm restraint.
 
 ### Every assigned line (exact text and file contract)

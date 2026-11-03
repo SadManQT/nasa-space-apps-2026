@@ -1,5 +1,7 @@
 # Story and gameplay flowcharts
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 IDs agree with mission, scene, puzzle, location and flag documents. Rectangles are required progress unless marked optional. Failure loops restore a safe checkpoint; no failed campaign silently substitutes another plant.
 
 ## 1. Entire chronology

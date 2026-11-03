@@ -34,7 +34,7 @@ Run only when its actual inputs/dependent features are available. Independent re
 
 ## Detailed work sequence
 
-1. Re calculate source witnesses and boundary cases under actual implementation.
+1. Recalculate source witnesses and boundary cases under actual implementation.
 2. Enumerate 128 upgrade combinations with acquisition order and safe complete path checks.
 3. Test caps, partial alarm actions, exposure-before-drain, zero energy, rations, crop maturity and logistics.
 4. Assert founder/vault/rover/base occupancy conservation including 2.8125 baseline air normalisation.

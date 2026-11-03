@@ -1,5 +1,7 @@
 # Last Light Academy — Complete Game Production Bible
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 Version 1.1 ·24 October 2026 · status: **reviewed design documentation; game not implemented**.
 
 Start with [vision](01_GAME_VISION.md), [definitive story](02_COMPLETE_STORY.md), [timeline](03_STORY_TIMELINE.md), then [chapter breakdown](05_CHAPTER_BREAKDOWN.md). A developer should read [puzzle contracts](08_PUZZLE_DESIGNS.md), [technical blueprint](18_TECHNICAL_BLUEPRINT.md) and [acceptance tests](20_TESTING_AND_ACCEPTANCE.md) before building.

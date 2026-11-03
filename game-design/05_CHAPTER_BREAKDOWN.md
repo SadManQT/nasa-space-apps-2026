@@ -1,5 +1,7 @@
 # Playable chapter breakdown
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 All missions are mandatory and sequential. Exploration and conversation within a mission are flexible. There is no optional quest necessary to understand the ending.
 
 ## CH01 — Night One

@@ -35,11 +35,11 @@ Core rendering/import conventions and the owning mission/world interaction contr
 ## Detailed work sequence
 
 1. Inspect the current binary/source, approved concept and owning scene requirements. Determine the exact missing function, style state or quality defect; preserve the known-good version until the replacement passes.
-2. For a 3 D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
+2. For a 3D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
 3. For an installed full body, inspect approved face/height/silhouette, clip names, bone mappings, patch placement, fingers/shoulders/feet and face atlas layers. Use current renderer/runtime; do not overwrite the character merely because a historical row calls it planned.
 4. For Rao/Noor, inspect the existing 3 screen portraits first. Build the missing screen/talking/background state only; preserve Earth-only presence and Noor knowledge/live voice gates. For duty/EVA variants, fit the current body and maintain distinct role silhouette.
-5. Where a genuinely new design is needed, prepare matching A-pose multi view/concept sheets and obtain the exact required approval before credit-consuming model generation. Use existing authorized tools/credits; log prompts and results.
-6. Validate neutral/idle/walk/run/turn/hold/talk and actual prop contacts, including repeat setup, camera distance, pause and speech fallback. Restore Kai/Meibrow exceptions and Meihair rig as applicable.
+5. Where a genuinely new design is needed, prepare matching A-pose multiview/concept sheets and obtain the exact required approval before credit-consuming model generation. Use existing authorized tools/credits; log prompts and results.
+6. Validate neutral/idle/walk/run/turn/hold/talk and actual prop contacts, including repeat setup, camera distance, pause and speech fallback. Restore Kai/Mei brow exceptions and Mei hair rig as applicable.
 7. Install only an approved passing build through the existing source/runtime pipeline; rerun affected player/face/asset checks and update current manifest fields, not historical source snapshots.
 
 
@@ -61,7 +61,7 @@ Approved Last Light Academy anime/cel character or outfit reference for CH_Cadet
 
 - Preserve editable source, runtime GLB/scene, embedded or project-policy textures, approved dimensions, material slots, collision, named pivots/sockets and explicit state variants.
 - Use existing `production/tools/` helpers and `game/tools/verify_assets.gd` after inspecting their current arguments; historical tool paths/versions are not live facts.
-- New character/hero prop designs require the exact 2 D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
+- New character/hero prop designs require the exact 2D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
 
 
 ## Required deliverables

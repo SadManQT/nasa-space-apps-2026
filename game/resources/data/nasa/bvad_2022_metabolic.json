@@ -1,0 +1,77 @@
+{
+ "source_id": "bvad_2022_metabolic",
+ "retrieved": "2026-11-04",
+ "title": "Crew oxygen, food and water per day (NASA BVAD Rev 2)",
+ "agency": "NASA Johnson Space Center",
+ "dataset_id": "NASA/TP-2015-218570/REV2; NTRS 20210024855",
+ "url": "https://ntrs.nasa.gov/citations/20210024855",
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Ewert, M.K., Chen, T.T. & Powell, C.D. (2022) Life Support Baseline Values and Assumptions Document, NASA/TP-2015-218570/REV2.",
+ "fields_used": [
+  "cabin_pressure_exploration_kPa",
+  "cabin_pressure_iss_kPa",
+  "co2_kg_per_crew_day",
+  "food_energy_MJ_per_crew_day",
+  "food_solids_kg_per_crew_day",
+  "o2_kg_per_crew_day",
+  "potable_water_kg_per_crew_day"
+ ],
+ "values": {
+  "o2_kg_per_crew_day": 0.895,
+  "co2_kg_per_crew_day": 1.085,
+  "food_solids_kg_per_crew_day": 0.8,
+  "food_energy_MJ_per_crew_day": 12.778,
+  "potable_water_kg_per_crew_day": 3.217,
+  "cabin_pressure_iss_kPa": 101.3,
+  "cabin_pressure_exploration_kPa": 57
+ },
+ "derived": [
+  {
+   "name": "air_unit_kg_o2",
+   "value": 1.074,
+   "unit": "kg O2",
+   "formula": "4 crew x 0.895 kg/d x 7.2 h / 24 h",
+   "drives": "P-02 A-1 per shift"
+  },
+  {
+   "name": "air_per_shift_by_crew",
+   "value": {
+    "2": 0.5,
+    "4": 1.0,
+    "5": 1.25
+   },
+   "unit": "air units",
+   "formula": "crew / 4",
+   "drives": "P-02, P-07, P-10, P-13, P-15"
+  },
+  {
+   "name": "food_per_shift_by_crew",
+   "value": {
+    "4": 1.2,
+    "5": 1.5
+   },
+   "unit": "crew-days",
+   "formula": "crew x 7.2 / 24",
+   "drives": "P-02 R-1.2; P-13 R1.5"
+  },
+  {
+   "name": "gauge_100_percent",
+   "value": 101.3,
+   "unit": "kPa",
+   "formula": "nominal ISS cabin pressure",
+   "drives": "P-05 proposal B3-7"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Planning values for an 82 kg reference crew member; game air and food units are teaching abstractions.",
+ "verification": [
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20210024855",
+   "quotes_found": [
+    "Life Support Baseline Values and Assumptions Document"
+   ]
+  }
+ ],
+ "transcribed_from": "Table 3-31 (printed p. 58, PDF p. 72) for metabolic values; cabin pressure PDF pp. 62, 75, 155; read with pdftotext on 2026-11-03 from https://ntrs.nasa.gov/api/citations/20210024855/downloads/BVAD_2.15.22-final.pdf",
+ "src_card": "SRC-LIFE-SUPPORT"
+}

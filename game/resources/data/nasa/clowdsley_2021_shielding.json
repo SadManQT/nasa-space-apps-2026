@@ -1,0 +1,65 @@
+{
+ "source_id": "clowdsley_2021_shielding",
+ "retrieved": "2026-11-04",
+ "title": "How much shielding protects lunar crews from solar storms",
+ "agency": "NASA Langley Research Center",
+ "dataset_id": "NTRS 20210009760",
+ "url": "https://ntrs.nasa.gov/citations/20210009760",
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Clowdsley, M. (2021) Protecting Astronauts from Space Radiation on the Lunar Surface, Lunar Surface Innovation Consortium, 9 Feb 2021.",
+ "fields_used": [
+  "aug1972_spe_effective_dose_mSv_no_curtain",
+  "guideline_g_cm2",
+  "likely_spe_limit_mGy_eq_BFO",
+  "oct1989_spe_effective_dose_mSv_no_curtain"
+ ],
+ "values": {
+  "guideline_g_cm2": 20,
+  "aug1972_spe_effective_dose_mSv_no_curtain": {
+   "5": 185.4,
+   "7": 136.9,
+   "10": 105.4,
+   "15": 85.1
+  },
+  "oct1989_spe_effective_dose_mSv_no_curtain": {
+   "5": 160.1,
+   "7": 136.9,
+   "10": 108.0,
+   "15": 88.9
+  },
+  "likely_spe_limit_mGy_eq_BFO": 250
+ },
+ "derived": [
+  {
+   "name": "water_per_wall_unit",
+   "value": 3.33,
+   "unit": "g/cm2 = cm of water",
+   "formula": "20 g/cm2 / 6 units",
+   "drives": "P-02 W cap 6; P-13 S6"
+  },
+  {
+   "name": "relative_dose_aug1972",
+   "value": {
+    "5": 1.0,
+    "7": 0.74,
+    "10": 0.57,
+    "15": 0.46
+   },
+   "unit": "fraction of 5 g/cm2",
+   "formula": "dose / dose at 5 g/cm2",
+   "drives": "P-02 shelter table comparison (B3-3)"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Rover storm-shelter model for a female astronaut (slide 37); dose never reaches zero. Game zaps are not mSv.",
+ "verification": [
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20210009760",
+   "quotes_found": [
+    "Protecting Astronauts from Space Radiation on the Lunar Surface"
+   ]
+  }
+ ],
+ "transcribed_from": "PDF pages 16 and 31 (20 g/cm2 guidance), 15 (250 mGy-eq), 37 (dose table); pdftotext 2026-11-03 from https://ntrs.nasa.gov/api/citations/20210009760/downloads/Clowdsley_Lunar_Radiation_Talk_v2.pdf",
+ "src_card": "SRC-SHIELDING"
+}

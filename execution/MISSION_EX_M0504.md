@@ -169,7 +169,7 @@ Which physical inventory closes after planting cotton?
 - **One planted plus eleven other vault specimens:** The vault ledger reconciles 12 while the founder 30 stays separate.
 - **Sixteen minus one equals fifteen stored:** Sixteen counts album entries; the mismatched physical ledger is rejected for correction.
 
-**Convergence:**Cotton 1 + retainedvault 11 reconciles vault 12; founder 30 remains a distinct protected stock..
+**Convergence:**Cotton 1 + retained vault 11 reconciles vault 12; founder 30 remains a distinct protected stock..
 
 **Learning loop**
 

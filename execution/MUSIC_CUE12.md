@@ -26,7 +26,7 @@ Read [02_SHARED_CONTRACT.md](02_SHARED_CONTRACT.md), [03_SYSTEM_INTERFACES.md](0
 
 ## Ownership and dependencies
 
-Own this cue'smusic sources/stems/master/runtime files and metadata. SYS17 owns buses/playback; missions own cue-trigger eligibility.
+Own this cue's music sources/stems/master/runtime files and metadata. SYS17 owns buses/playback; missions own cue-trigger eligibility.
 
 Current story/cinematic beat locked; approved audio identity; SYS17 runtime.
 
@@ -51,13 +51,13 @@ Current story/cinematic beat locked; approved audio identity; SYS17 runtime.
 - **length:** 90 s + 180 s credits
 - **loop:** finale + credits loop
 - **final_scenes:** EX-CH08-S12
-- **entry_exit:** On safe shutter open; credits skip p able without a loud sting
+- **entry_exit:** On safe shutter open; credits skippable without a loud sting
 - **game_file:** game/assets/audio/music/MUS_CUE-12_What We Grew.ogg
 - **status:** todo
 
 ### Generator/performance brief
 
-Compose an original, restrained educational lunar-expedition cue for the exact emotional job above. Provide clean separate stems, loop able bed and natural transition tail; leave room for voice and quiet observation. Follow specified entry/exit rather than constant dramatic music. Do not invent lyrics or add spoken facts.
+Compose an original, restrained educational lunar-expedition cue for the exact emotional job above. Provide clean separate stems, loopable bed and natural transition tail; leave room for voice and quiet observation. Follow specified entry/exit rather than constant dramatic music. Do not invent lyrics or add spoken facts.
 
 
 ## Required deliverables

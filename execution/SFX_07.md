@@ -43,7 +43,7 @@ Owning interaction/world event and SYS17 audio interface; source art/physics con
 
 ## Task-specific source and implementation detail
 
-### Exact SFXCSV contract
+### Exact SFX CSV contract
 
 - **id:** SFX_GLOVE_PORT
 - **description:** Hands entering glove ports (rubber contact)

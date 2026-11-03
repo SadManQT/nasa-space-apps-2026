@@ -1,5 +1,7 @@
 # Character defect ledger
 
+> **Historical (v4 rig, 26 Oct 2026).** This ledger tracked the Kai v3 demo audit and the v4 rebuild. The current cast is the v7 anime style built from the v8 sheets (Tripo Mixamo rig, 65 bones, Mei 68; 44 clips): see [PRODUCTION_HANDBOOK.md](../../PRODUCTION_HANDBOOK.md) §6 and §8.1. Open rows here are not current work; current defects are tasks on the team board (`production/plan/tasks.json`).
+
 Source: the external audit of the Kai v3 demo (26 Oct 2026, IDs below are the audit's). Every fix goes into the pipeline scripts, so it applies to all five cast (Kai, Amara, Mei, Rafi, Ferreira), and each character is re-verified separately.
 
 Owners: **Claude** = geometry, rig, poses and renders (needs visual iteration). **Codex** = Godot runtime, tests, audit tooling (Codex ran out of credits on 26 Oct mid-task; Claude finished or repaired its partial work, see the bottom).

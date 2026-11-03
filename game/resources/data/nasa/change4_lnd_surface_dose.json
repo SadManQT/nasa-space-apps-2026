@@ -1,0 +1,40 @@
+{
+ "source_id": "change4_lnd_surface_dose",
+ "retrieved": "2026-11-04",
+ "title": "The first radiation dose measured on the Moon's surface",
+ "agency": "CNSA Chang'e-4 lander, Lunar Lander Neutrons and Dosimetry (Kiel University) (partner agency)",
+ "dataset_id": "DOI 10.1126/sciadv.aaz1334",
+ "url": "https://doi.org/10.1126/sciadv.aaz1334",
+ "licence": "Facts and values quoted with citation; the article text remains (c) its publisher",
+ "citation": "Zhang, S. et al. (2020) First measurements of the radiation dose on the lunar surface, Science Advances 6.",
+ "fields_used": [
+  "absorbed_dose_rate_uGy_per_h_silicon",
+  "neutral_dose_rate_uGy_per_h",
+  "uncertainty"
+ ],
+ "values": {
+  "absorbed_dose_rate_uGy_per_h_silicon": 13.2,
+  "uncertainty": 1.0,
+  "neutral_dose_rate_uGy_per_h": 3.1
+ },
+ "derived": [
+  {
+   "name": "quiet_dose_per_shift",
+   "value": 95.0,
+   "unit": "uGy(Si) per 7.2 h",
+   "formula": "13.2 x 7.2",
+   "drives": "P-14 route-dosimeter scale (proposal B3-13)"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Quiet-Sun dose in silicon on the far side, 2019; not a storm dose.",
+ "verification": [
+  {
+   "checked_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1126%2Fsciadv.aaz1334&resultType=core&format=json",
+   "quotes_found": [
+    "average total absorbed dose rate in silicon of 13.2 ± 1"
+   ]
+  }
+ ],
+ "src_card": "SRC-SHIELDING"
+}

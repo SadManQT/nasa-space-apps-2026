@@ -1,5 +1,7 @@
 # UI/UX specification
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 ## Design language and reading order
 
 Navy surfaces, warm ivory text, mustard accent, role-colour tabs plus role icon/name. Large rounded type for headings; a licensed humanist sans for body with tested Bangla shaping. Baloo Da2 is a source credit, not a font file present in this repository. Base body 24 px at 1080p, captions 28 px, minimum interactive target 44 px with at least 8 px separation; scale to 150% and reflow. Maintain4.5:1 normal-text contrast and 3:1 large text/nontext controls. These are production targets to test, not measured screenshots. No essential labels rendered into textures. Plain text supports English and Bangla.

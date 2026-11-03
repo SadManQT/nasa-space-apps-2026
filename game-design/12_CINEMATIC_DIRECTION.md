@@ -1,5 +1,7 @@
 # Cinematic direction guide
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 Default delivery is playable exploration with authored reactions. Cutscenes do not solve puzzles. For every row below, exact dialogue is the owning scene’s DL sequence in [dialogue master](11_DIALOGUE_MASTER.md); no additional spoken sentence is required or delegated to an implementer. Optional holds and reading can extend duration. All motion obeys reduced-shake/horizon-lock settings.
 
 ## CIN-01 — Arrival: a home to earn

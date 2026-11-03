@@ -1,4 +1,4 @@
-# SFX_AIRLOCK_CYCLE — Airlock pressure cycle (equal ising)
+# SFX_AIRLOCK_CYCLE — Airlock pressure cycle (equalising)
 
 **Execution prompt · snapshot 27 October 2026 / `ca01433` · Sound effect.**
 
@@ -43,12 +43,12 @@ Owning interaction/world event and SYS17 audio interface; source art/physics con
 
 ## Task-specific source and implementation detail
 
-### Exact SFXCSV contract
+### Exact SFX CSV contract
 
 - **id:** SFX_AIRLOCK_CYCLE
-- **description:** Airlock pressure cycle (equal ising)
+- **description:** Airlock pressure cycle (equalising)
 - **loop:** no
-- **caption:** [airlock equal ising]
+- **caption:** [airlock equalising]
 - **first_scenes:** EX-CH02-S03
 - **game_file:** game/assets/audio/sfx/SFX_AIRLOCK_CYCLE.ogg
 - **status:** todo

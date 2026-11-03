@@ -6,7 +6,7 @@
 
 ## Assignment
 
-Create grounded lunar visual feedback for footsteps, wheels, moon quake/impact and hardware events.
+Create grounded lunar visual feedback for footsteps, wheels, moonquake/impact and hardware events.
 
 Execute this bounded task, integrate it with the current project and produce the acceptance evidence below. First reconcile the snapshot with current files; reuse already approved work and complete the real remaining gap.
 
@@ -34,7 +34,7 @@ Run only when its actual inputs/dependent features are available. Independent re
 
 ## Detailed work sequence
 
-1. Use black sky, hardlow Sun and ballistic r egoli th with no cloud/fog/wind/billowing dust.
+1. Use black sky, hard low Sun and ballistic regolith with no cloud/fog/wind/billowing dust.
 2. Represent particles and contact responses at correct grounded lunar scale; keep actual radiation instruments only.
 3. Make quake/impact states readable with caption/optional shake; reduced motion preserves all information.
 4. Bind one event to the validated world state and test pause/reload/quality settings/performance.

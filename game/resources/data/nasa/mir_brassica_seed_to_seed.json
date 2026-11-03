@@ -1,0 +1,38 @@
+{
+ "source_id": "mir_brassica_seed_to_seed",
+ "retrieved": "2026-11-04",
+ "title": "Brassica rapa completed seed-to-seed cycles on Mir",
+ "agency": "NASA-funded experiment on Mir (Svet greenhouse)",
+ "dataset_id": "NTRS 20040141614",
+ "url": "https://ntrs.nasa.gov/citations/20040141614",
+ "licence": "Facts and values quoted with citation; the article text remains (c) its publisher",
+ "citation": "Musgrave, M.E. et al., Gravity independence of seed-to-seed cycling in Brassica rapa (NTRS 20040141614).",
+ "fields_used": [
+  "mission_days",
+  "species"
+ ],
+ "values": {
+  "mission_days": 122,
+  "species": "Brassica rapa"
+ },
+ "derived": [
+  {
+   "name": "hand_pollinated_in_space",
+   "value": true,
+   "unit": "bool",
+   "formula": "Mir Svet experiment",
+   "drives": "P-03 and P-06 context"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Microgravity on Mir, not lunar gravity; Alo's dates and seed count are fiction.",
+ "verification": [
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20040141614",
+   "quotes_found": [
+    "During a 122-d opportunity on the Mir space station, full life cycles were completed in microgravity with Brassica rapa"
+   ]
+  }
+ ],
+ "src_card": "SRC-POLLINATION"
+}

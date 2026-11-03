@@ -39,7 +39,7 @@ Execute Phase 0 interfaces first; Chapter 1 vertical slice comes next; extend th
 |`SYS16`|[Scene streaming, performance budgets and runtime resilience](SYS_16_PERFORMANCE_STREAMING.md)|Make the campaign stable on the agreed target hardware with measured budgets.|
 |`SYS17`|[Audio buses, cinematic playback, captions and pause/skip](SYS_17_AUDIO_CINEMATIC_RUNTIME.md)|Provide one runtime owner for voice/music/SFX/OGV playback and narrative acknowledgement.|
 |`SYS18`|[Registry, provenance and truthful production status](SYS_18_DOCUMENTATION_REGISTRY.md)|Reconcile drift and keep task evidence, manifests and handoffs consistent with actual outputs.|
-|`SYS19`|[Application bootstrap, main scene and complete launch flow](SYS_19_BOOTSTRAP_MAIN_SCENE.md)|Create the actual launch able game entry and connect menus, saved progress and campaign scenes.|
+|`SYS19`|[Application bootstrap, main scene and complete launch flow](SYS_19_BOOTSTRAP_MAIN_SCENE.md)|Create the actual launchable game entry and connect menus, saved progress and campaign scenes.|
 |`SYS20`|[Plant identity, dated lifecycle, care and viability service](SYS_20_PLANT_BIOLOGY.md)|Implement the shared biological state model that drives original plants, descendants, crops and cotton.|
 |`SYS21`|[Companion anchors, teamwork and contextual support](SYS_21_COMPANION_BEHAVIOUR.md)|Make non-controlled crew feel present and useful without bypassing player agency or knowledge gates.|
 |`SYS22`|[Shared puzzle host, input adapters and progressive hints](SYS_22_PUZZLE_HOST_HINTS.md)|Provide one reusable puzzle framework consumed by the sixteen puzzle implementations.|
@@ -209,22 +209,22 @@ Execute Phase 0 interfaces first; Chapter 1 vertical slice comes next; extend th
 
 |Task|Prompt|Outcome|
 |---|---|---|
-|`UI01`|[Main menu](UI_01_MAIN_MENU.md)|Implement the Main menu screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI02`|[New Expedition](UI_02_NEW_EXPEDITION.md)|Implement the New Expedition screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI03`|[HUD](UI_03_HUD.md)|Implement the HUD screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI04`|[Objective panel](UI_04_OBJECTIVE_PANEL.md)|Implement the Objective panel screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI05`|[Dialogue](UI_05_DIALOGUE.md)|Implement the Dialogue screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI06`|[Interaction](UI_06_INTERACTION.md)|Implement the Interaction screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI07`|[Expedition journal](UI_07_EXPEDITION_JOURNAL.md)|Implement the Expedition journal screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI08`|[Discovery log](UI_08_DISCOVERY_LOG.md)|Implement the Discovery log screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI09`|[Scientific puzzle](UI_09_SCIENTIFIC_PUZZLE.md)|Implement the Scientific puzzle screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI10`|[Mission Table](UI_10_MISSION_TABLE.md)|Implement the Mission Table screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI11`|[Rover](UI_11_ROVER.md)|Implement the Rover screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI12`|[Greenhouse](UI_12_GREENHOUSE.md)|Implement the Greenhouse screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI13`|[Outcome](UI_13_OUTCOME.md)|Implement the Outcome screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI14`|[Pause](UI_14_PAUSE.md)|Implement the Pause screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI15`|[Settings](UI_15_SETTINGS.md)|Implement the Settings screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
-|`UI16`|[Credits](UI_16_CREDITS.md)|Implement the Credits screen/component as a live, accessible GodotControl interface connected to the shared campaign.|
+|`UI01`|[Main menu](UI_01_MAIN_MENU.md)|Implement the Main menu screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI02`|[New Expedition](UI_02_NEW_EXPEDITION.md)|Implement the New Expedition screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI03`|[HUD](UI_03_HUD.md)|Implement the HUD screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI04`|[Objective panel](UI_04_OBJECTIVE_PANEL.md)|Implement the Objective panel screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI05`|[Dialogue](UI_05_DIALOGUE.md)|Implement the Dialogue screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI06`|[Interaction](UI_06_INTERACTION.md)|Implement the Interaction screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI07`|[Expedition journal](UI_07_EXPEDITION_JOURNAL.md)|Implement the Expedition journal screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI08`|[Discovery log](UI_08_DISCOVERY_LOG.md)|Implement the Discovery log screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI09`|[Scientific puzzle](UI_09_SCIENTIFIC_PUZZLE.md)|Implement the Scientific puzzle screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI10`|[Mission Table](UI_10_MISSION_TABLE.md)|Implement the Mission Table screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI11`|[Rover](UI_11_ROVER.md)|Implement the Rover screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI12`|[Greenhouse](UI_12_GREENHOUSE.md)|Implement the Greenhouse screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI13`|[Outcome](UI_13_OUTCOME.md)|Implement the Outcome screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI14`|[Pause](UI_14_PAUSE.md)|Implement the Pause screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI15`|[Settings](UI_15_SETTINGS.md)|Implement the Settings screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
+|`UI16`|[Credits](UI_16_CREDITS.md)|Implement the Credits screen/component as a live, accessible Godot Control interface connected to the shared campaign.|
 
 ## Final cutscene
 
@@ -297,7 +297,7 @@ Execute Phase 0 interfaces first; Chapter 1 vertical slice comes next; extend th
 |`SFX_SHUTTER_OPEN`|[Chamber viewing shutter sliding open](SFX_10.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_DOOR_LATCH`|[Interior door latch](SFX_11.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_HATCH_SEAL`|[Shelter hatch sealing](SFX_12.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
-|`SFX_AIRLOCK_CYCLE`|[Airlock pressure cycle (equal ising)](SFX_13.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
+|`SFX_AIRLOCK_CYCLE`|[Airlock pressure cycle (equalising)](SFX_13.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_SUIT_BREATH`|[Breathing inside a suit helmet](SFX_14.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_RADIO_LOCAL_IN`|[Local radio channel opening (clean)](SFX_15.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_RADIO_EARTH_IN`|[Earth link channel opening (with latency texture)](SFX_16.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
@@ -306,14 +306,14 @@ Execute Phase 0 interfaces first; Chapter 1 vertical slice comes next; extend th
 |`SFX_ALERT_PARTICLE`|[Particle-event instrument alarm (not a projectile sound)](SFX_19.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_ALERT_PRESSURE`|[Pressure warning tone](SFX_20.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_ALERT_STRUCTURAL`|[Structural shaking alarm](SFX_21.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
-|`SFX_QUAKE_CONTACT`|[Moon quake felt through the floor (structure-borne only)](SFX_22.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
+|`SFX_QUAKE_CONTACT`|[Moonquake felt through the floor (structure-borne only)](SFX_22.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_CUP_RATTLE`|[Mug rattling on the table](SFX_23.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_CLAMP_SEAT`|[Repair clamp seating on a pipe](SFX_24.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_CONNECTOR`|[Electrical connector mating](SFX_25.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_BREAKER_RESET`|[Feeder isolate / reset clunk](SFX_26.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_BATTERY_SWAP`|[Battery pack removal and insertion](SFX_27.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_CONTROLLER_POWERUP`|[Relay controller powering up](SFX_28.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
-|`SFX_ROVER_CABIN`|[Press uri sed rover cabin hum](SFX_29.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
+|`SFX_ROVER_CABIN`|[Pressurised rover cabin hum](SFX_29.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_ROVER_CHASSIS`|[Rover wheels felt through the chassis (no airborne sound)](SFX_30.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_SCANNER_BEEP`|[Ice scanner reading](SFX_31.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
 |`SFX_CAMERA_SHUTTER`|[Photo capture](SFX_32.md)|Produce and integrate this specific effect/ambience with correct physical listening context, variations and text-equivalent event.|
@@ -331,7 +331,7 @@ Execute Phase 0 interfaces first; Chapter 1 vertical slice comes next; extend th
 
 |Task|Prompt|Outcome|
 |---|---|---|
-|`VFX01`|[Lunar exterior effects and restrained hazards](VFX_01_LUNAR_ENVIRONMENT.md)|Create grounded lunar visual feedback for footsteps, wheels, moon quake/impact and hardware events.|
+|`VFX01`|[Lunar exterior effects and restrained hazards](VFX_01_LUNAR_ENVIRONMENT.md)|Create grounded lunar visual feedback for footsteps, wheels, moonquake/impact and hardware events.|
 |`VFX02`|[Plant stress, growth-light and habitat state feedback](VFX_02_PLANT_AND_HABITAT.md)|Build lifecycle/stress/environment feedback that accurately reflects biology and shared resources.|
 |`VFX03`|[Eclipse, camera and instrument visualisation](VFX_03_ECLIPSE_AND_INSTRUMENTS.md)|Implement qualified filtered camera and data visuals for light/sky/storm/radio evidence.|
 |`QA01`|[Independent canon and learning audit](QA_01_CANON_AND_LEARNING.md)|Audit the implemented whole campaign against the final story, knowledge/roster/seed/travelled gers and meaningful junior learning.|
@@ -341,7 +341,7 @@ Execute Phase 0 interfaces first; Chapter 1 vertical slice comes next; extend th
 |`QA05`|[Accessible controls, reading, modes and learner UX](QA_05_ACCESSIBILITY_AND_UX.md)|Verify whole-story access with keyboard/controller, mute, large-text, reduced motion and timer assistance.|
 |`QA06`|[Performance, import, export and cross-host reproducibility](QA_06_PERFORMANCE_AND_PORTABILITY.md)|Verify runtime performance and asset/media availability on agreed targets and fresh checkouts.|
 |`REL01`|[Portable game export, versioning and reproducible package](RELEASE_01_EXPORT_AND_PACKAGE.md)|Produce a tested release candidate of the implemented game with complete content and correct runtime assets.|
-|`REL02`|[Credits, science provenance, AI log and submission evidence](RELEASE_02_CREDITS_AND_EVIDENCE.md)|Prepare accurate credits/provenance and review able evidence for the actual delivered game.|
+|`REL02`|[Credits, science provenance, AI log and submission evidence](RELEASE_02_CREDITS_AND_EVIDENCE.md)|Prepare accurate credits/provenance and reviewable evidence for the actual delivered game.|
 
 ## Scientific evidence artifact
 
@@ -352,7 +352,7 @@ Execute Phase 0 interfaces first; Chapter 1 vertical slice comes next; extend th
 |`SRC-LIFE-SUPPORT`|[Life support subsystems](SCIENCE_SRC_LIFE_SUPPORT.md)|Produce the offline source card and any genuinely required evidence illustration/processed artifact for this primary source, with the exact supported-claim boundary below.|
 |`SRC-PLANTS`|[Fast Plants frequently asked questions](SCIENCE_SRC_PLANTS.md)|Produce the offline source card and any genuinely required evidence illustration/processed artifact for this primary source, with the exact supported-claim boundary below.|
 |`SRC-POLLINATION`|[Pollination and cross-pollination](SCIENCE_SRC_POLLINATION.md)|Produce the offline source card and any genuinely required evidence illustration/processed artifact for this primary source, with the exact supported-claim boundary below.|
-|`SRC-QUAKES`|[Moon quakes and faults near the lunar south pole](SCIENCE_SRC_QUAKES.md)|Produce the offline source card and any genuinely required evidence illustration/processed artifact for this primary source, with the exact supported-claim boundary below.|
+|`SRC-QUAKES`|[Moonquakes and faults near the lunar south pole](SCIENCE_SRC_QUAKES.md)|Produce the offline source card and any genuinely required evidence illustration/processed artifact for this primary source, with the exact supported-claim boundary below.|
 |`SRC-ICE`|[LCROSS mission and polar water evidence](SCIENCE_SRC_ICE.md)|Produce the offline source card and any genuinely required evidence illustration/processed artifact for this primary source, with the exact supported-claim boundary below.|
 |`SRC-IMPACTS`|[Lunar impact monitoring](SCIENCE_SRC_IMPACTS.md)|Produce the offline source card and any genuinely required evidence illustration/processed artifact for this primary source, with the exact supported-claim boundary below.|
 |`SRC-ECLIPSE`|[Eclipses and the Moon](SCIENCE_SRC_ECLIPSE.md)|Produce the offline source card and any genuinely required evidence illustration/processed artifact for this primary source, with the exact supported-claim boundary below.|
@@ -404,10 +404,10 @@ Execute Phase 0 interfaces first; Chapter 1 vertical slice comes next; extend th
 |2: Be the Bee|[EX-M0202](MISSION_EX_M0202.md)|EX-CH02-S04, EX-CH02-S05, EX-CH02-S06|18|
 |2: Be the Bee|[EX-M0203](MISSION_EX_M0203.md)|EX-CH02-S07, EX-CH02-S08, EX-CH02-S09|18|
 |2: Be the Bee|[EX-M0204](MISSION_EX_M0204.md)|EX-CH02-S10, EX-CH02-S11, EX-CH02-S12|21|
-|3: Moon quake|[EX-M0301](MISSION_EX_M0301.md)|EX-CH03-S01, EX-CH03-S02, EX-CH03-S03|20|
-|3: Moon quake|[EX-M0302](MISSION_EX_M0302.md)|EX-CH03-S04, EX-CH03-S05, EX-CH03-S06|21|
-|3: Moon quake|[EX-M0303](MISSION_EX_M0303.md)|EX-CH03-S07, EX-CH03-S08, EX-CH03-S09|21|
-|3: Moon quake|[EX-M0304](MISSION_EX_M0304.md)|EX-CH03-S10, EX-CH03-S11, EX-CH03-S12|23|
+|3: Moonquake|[EX-M0301](MISSION_EX_M0301.md)|EX-CH03-S01, EX-CH03-S02, EX-CH03-S03|20|
+|3: Moonquake|[EX-M0302](MISSION_EX_M0302.md)|EX-CH03-S04, EX-CH03-S05, EX-CH03-S06|21|
+|3: Moonquake|[EX-M0303](MISSION_EX_M0303.md)|EX-CH03-S07, EX-CH03-S08, EX-CH03-S09|21|
+|3: Moonquake|[EX-M0304](MISSION_EX_M0304.md)|EX-CH03-S10, EX-CH03-S11, EX-CH03-S12|23|
 |4: Into the Cold Trap|[EX-M0401](MISSION_EX_M0401.md)|EX-CH04-S01, EX-CH04-S02, EX-CH04-S03|22|
 |4: Into the Cold Trap|[EX-M0402](MISSION_EX_M0402.md)|EX-CH04-S04, EX-CH04-S05, EX-CH04-S06|22|
 |4: Into the Cold Trap|[EX-M0403](MISSION_EX_M0403.md)|EX-CH04-S07, EX-CH04-S08, EX-CH04-S09|22|

@@ -1,0 +1,67 @@
+{
+ "source_id": "usgs_gazetteer_south_pole",
+ "retrieved": "2026-11-04",
+ "title": "Named south-pole features: Mons Malapert, Shackleton, de Gerlache",
+ "agency": "USGS Astrogeology / IAU Working Group for Planetary System Nomenclature (partner agency)",
+ "dataset_id": "Gazetteer of Planetary Nomenclature features 16338, 5450, 1439",
+ "url": "https://planetarynames.wr.usgs.gov/Feature/16338",
+ "request_urls": [
+  "https://planetarynames.wr.usgs.gov/Feature/16338",
+  "https://planetarynames.wr.usgs.gov/Feature/5450",
+  "https://planetarynames.wr.usgs.gov/Feature/1439"
+ ],
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Gazetteer of Planetary Nomenclature, IAU WGPSN / USGS Astrogeology.",
+ "fields_used": [
+  "Feature Name",
+  "Center Latitude",
+  "Center Longitude",
+  "Diameter"
+ ],
+ "values": {
+  "Mons Malapert": {
+   "feature_id": 16338,
+   "center_lat_deg": -85.98,
+   "center_lon_deg_east": -1.67,
+   "diameter_km": 67.0
+  },
+  "Shackleton": {
+   "feature_id": 5450,
+   "center_lat_deg": -89.67,
+   "center_lon_deg_east": 129.78,
+   "diameter_km": 20.92
+  },
+  "de Gerlache": {
+   "feature_id": 1439,
+   "center_lat_deg": -88.48,
+   "center_lon_deg_east": -88.34,
+   "diameter_km": 32.71
+  }
+ },
+ "evidence_label": "Computed",
+ "derived": [
+  {
+   "name": "pole_to_mons_malapert",
+   "value": 121.9,
+   "unit": "km",
+   "formula": "great circle on a 1737.4 km sphere",
+   "drives": "P-15 120 km each way"
+  },
+  {
+   "name": "shackleton_to_mons_malapert",
+   "value": 128.7,
+   "unit": "km",
+   "formula": "great circle, crater centre to massif centre",
+   "drives": "P-15 range check"
+  },
+  {
+   "name": "bearing_malapert_to_shackleton",
+   "value": 176.7,
+   "unit": "deg from north",
+   "formula": "initial great-circle bearing",
+   "drives": "P-16 local bearing L2"
+  }
+ ],
+ "boundary": "Feature centres, not Aurora's site or the summit; the road is fictional and longer than a great circle.",
+ "src_card": "SRC-RELAY"
+}

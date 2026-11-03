@@ -1,0 +1,74 @@
+{
+ "source_id": "fast_plants_lifecycle",
+ "retrieved": "2026-11-04",
+ "title": "The Fast Plants (Brassica rapa) life cycle",
+ "agency": "Wisconsin Fast Plants Program, University of Wisconsin-Madison (partner)",
+ "dataset_id": "Fast Plants FAQ",
+ "url": "https://fastplants.org/frequently-asked-questions/",
+ "licence": "CC BY-NC-SA (Wisconsin Fast Plants open resources); facts quoted with credit",
+ "citation": "Wisconsin Fast Plants Program, Frequently Asked Questions, fastplants.org.",
+ "fields_used": [
+  "days_to_flower",
+  "pod_maturity_days_after_pollination",
+  "pollinate_days_after_planting",
+  "seed_harvest_days_after_planting",
+  "self_incompatible",
+  "stigma_receptive_days"
+ ],
+ "values": {
+  "days_to_flower": 14,
+  "stigma_receptive_days": [
+   2,
+   4
+  ],
+  "pollinate_days_after_planting": [
+   15,
+   21
+  ],
+  "pod_maturity_days_after_pollination": 20,
+  "seed_harvest_days_after_planting": 40,
+  "self_incompatible": true
+ },
+ "derived": [
+  {
+   "name": "alo_bloom_day",
+   "value": 16,
+   "unit": "plant day",
+   "formula": "planted 11 Apr, blooms 27 Apr (story)",
+   "drives": "CH2; ~14 days"
+  },
+  {
+   "name": "p03_run_days",
+   "value": [
+    19,
+    25
+   ],
+   "unit": "plant day",
+   "formula": "30 Apr - 6 May after 11 Apr planting",
+   "drives": "P-03 runs"
+  },
+  {
+   "name": "p06_dry_down_end_day",
+   "value": 40,
+   "unit": "plant day",
+   "formula": "21 May after 11 Apr planting",
+   "drives": "P-06 harvest"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Ideal Earth classroom conditions; lunar cultivation and the 42-seed count are fiction.",
+ "verification": [
+  {
+   "checked_url": "https://fastplants.org/frequently-asked-questions/",
+   "quotes_found": [
+    "uniform, short flowering time (14 days)",
+    "Fast Plants are typically self-incompatible",
+    "stigma is receptive to pollen for 2-4 days",
+    "pollination to occur sometime between 15 and 21 days after planting",
+    "Seed pods mature about 20 days after pollination",
+    "harvestable seeds approximately 40 days after planting"
+   ]
+  }
+ ],
+ "src_card": "SRC-PLANTS"
+}

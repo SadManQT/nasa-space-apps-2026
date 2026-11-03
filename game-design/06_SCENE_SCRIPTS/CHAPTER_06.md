@@ -1,5 +1,7 @@
 # Chapter 06 — The Red Ring
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../../full-game-story/STORY_FULL.md); [scene_index.csv](../../production/manifest/scene_index.csv) maps them.
+
 Purpose: Courage is supported action while afraid.
 
 ## Script execution contract

@@ -1,5 +1,7 @@
 # Project review and story consistency report
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 Reviewed 24 October 2026. Result: the game-design folder contained substantial drift from the main story and existing gameplay specification. The implementation companion has been corrected to follow those sources. This is a document review and repair; the game remains unimplemented.
 
 ## Scope and authority

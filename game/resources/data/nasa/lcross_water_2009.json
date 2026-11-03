@@ -1,0 +1,40 @@
+{
+ "source_id": "lcross_water_2009",
+ "retrieved": "2026-11-04",
+ "title": "Water found by LCROSS in Cabeus crater",
+ "agency": "NASA Ames Research Center (LCROSS)",
+ "dataset_id": "DOI 10.1126/science.1186986",
+ "url": "https://science.nasa.gov/mission/lcross/",
+ "licence": "Facts and values quoted with citation; the article text remains (c) its publisher",
+ "citation": "Colaprete, A. et al. (2010) Detection of water in the LCROSS ejecta plume, Science 330, 463-468.",
+ "fields_used": [
+  "impact_date",
+  "uncertainty_percent",
+  "water_ice_mass_percent"
+ ],
+ "values": {
+  "water_ice_mass_percent": 5.6,
+  "uncertainty_percent": 2.9,
+  "impact_date": "2009-10-09"
+ },
+ "derived": [
+  {
+   "name": "positive_sample_reference",
+   "value": 5.6,
+   "unit": "% water by mass",
+   "formula": "LCROSS value",
+   "drives": "P-07 ice scanner card"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "One impact site; ice is not everywhere and is not drinking water.",
+ "verification": [
+  {
+   "checked_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1126%2Fscience.1186986&resultType=core&format=json",
+   "quotes_found": [
+    "estimated to be 5.6 ± 2.9% by mass"
+   ]
+  }
+ ],
+ "src_card": "SRC-ICE"
+}

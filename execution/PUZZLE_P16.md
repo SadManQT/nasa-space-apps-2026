@@ -48,7 +48,7 @@ SYS02 content, SYS03 state, SYS04 simulation, SYS05 interactions, SYS07 checkpoi
 ## P-16 — The Link and the Living Garden
 
 - **Mission / reason:** [M-0802](../game-design/07_MISSION_DESIGNS/M-0802_From_Last_Light_to_First_Light.md) — Restore both links, bring the team home and validate the living garden.
-- **Location / equipment:** LOC-12; Replacement controller, isola tor, two antenna channels, signal meter, checksum, final garden panel.
+- **Location / equipment:** LOC-12; Replacement controller, isolator, two antenna channels, signal meter, checksum, final garden panel.
 - **Initial state:** Relay dark; housing damaged controller. Local bearing presets L1=poor, L2=good, L3=blocked; Earth presets E1=poor, E2=blocked, E3=good. First checksum incomplete until both links lock. The upcoming Aurora Earth-set handover window is displayed; both locks must be ready before its authored deadline, with an untimed equivalent.
 - **Player instructions and intermediate steps:** Isolate power, test zero, remove controller, install matching spare, close housing, reconnect. Use azimuth/elevation dials to match the displayed local bearing L2 and the Earth bearing E3; hold a stable lock for 3 s or tap-confirm in accessible mode. L/E presets provide an equally rewarded assisted alternative. Bearings come from bundled geometry when verified; until then label them scenario bearings. Send checksum ALO42 and receive exact match from Aurora; perform both voice checks. Return journey 24 h. At sunrise verify crew 5 safe, founder reserve 30 and eleven unplanted vault specimens protected, garden pressure stable, temperature stable, cotton alive; open shutter and save photo/dedication.
 - **Accepted solution:** Isolation→zero→replace→close→power; L2 then E3; checksum ALO42 match; voice Aurora+Earth; return; five final indicators; photo and any dedication.
@@ -57,7 +57,7 @@ SYS02 content, SYS03 state, SYS04 simulation, SYS05 interactions, SYS07 checkpoi
 - **Difficulty, timing and retry:** Medium; no dexterity timer; all steps check pointed after closed housing and link validation.
 - **Completion trigger:** Both links pass, voice checks logged, return confirmed, final five indicators pass, shared photo and dedication saved.
 - **Narrative consequence / flags:** campaign_complete_pending; relay_live; crew_returned; final_garden_validated; credits_available. MARS drawer optional.
-- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penal is e the ending.
+- **Accessible input:** Every drag or hold also has Select source → Select target → Confirm; every visual observation has a text-equivalent reading. No puzzle requires colour perception, audio frequency discrimination, fast repeated presses or pixel-perfect pointing. A hint does not penalise the ending.
 
 ### Final-edition mapping
 

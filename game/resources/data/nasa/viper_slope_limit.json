@@ -1,0 +1,35 @@
+{
+ "source_id": "viper_slope_limit",
+ "retrieved": "2026-11-04",
+ "title": "How steep a NASA lunar rover can climb",
+ "agency": "NASA (VIPER rover)",
+ "dataset_id": "NASA VIPER rover and instruments page",
+ "url": "https://science.nasa.gov/mission/viper/rover-and-instruments",
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "NASA Science, VIPER rover and instruments.",
+ "fields_used": [
+  "max_incline_deg"
+ ],
+ "values": {
+  "max_incline_deg": 15
+ },
+ "derived": [
+  {
+   "name": "rover_slope_limit",
+   "value": 15,
+   "unit": "deg",
+   "formula": "VIPER design incline",
+   "drives": "P-07 limit 15 deg; P-15 road <= 12 deg"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "VIPER's design figure; Aurora's rover and its road slopes are fictional [G].",
+ "verification": [
+  {
+   "checked_url": "https://science.nasa.gov/mission/viper/rover-and-instruments",
+   "quotes_found": [
+    "Capable of traversing an incline of as much as 15 degrees"
+   ]
+  }
+ ]
+}

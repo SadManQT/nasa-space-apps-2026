@@ -1,5 +1,7 @@
 # Chapter 01 — Night One
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../../full-game-story/STORY_FULL.md); [scene_index.csv](../../production/manifest/scene_index.csv) maps them.
+
 Purpose: Care becomes a shared responsibility.
 
 ## Script execution contract

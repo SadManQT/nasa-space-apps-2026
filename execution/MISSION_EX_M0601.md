@@ -187,7 +187,7 @@ Which allocation protects every required eclipse segment?
 - Five eclipse segments, seven-unit teaching allocation, never a duplicate duration charge.
 - Jan 12 eclipse date does not certify Aurora's local view or Bangladesh sunrise geometry.
 - Noor sends text; the earlier eclipse memory has no invented date.
-- Cotton grows through dated care; founder 30 and retainedvault 11 remain separate.
+- Cotton grows through dated care; founder 30 and retained vault 11 remain separate.
 
 ### Production constraints
 - Provide a filtered instrument feed or visibly conceptual fallback until local geometry is verified.

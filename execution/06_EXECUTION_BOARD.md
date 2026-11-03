@@ -23,7 +23,7 @@ Freeze interfaces before parallel mission/UI/asset integration. Art and audio ta
 - Complete all 16 UI families to the depth Chapter 1 uses, with extra advanced screens implemented when their dependent feature is ready.
 - Integrate missions EX-M0101..EX-M0104 and their 12 scenes.
 - Reuse CS01..03; wire their playback/skip/acknowledgement semantics without fabricating operations.
-- Run Chapter 1 specific numeric, mission, visual and accessibility checks. Preserve a launch able build before expanding scope.
+- Run Chapter 1 specific numeric, mission, visual and accessibility checks. Preserve a launchable build before expanding scope.
 
 **Phase 1 exit:** clean boot → New Expedition → commissioning → planting/care → seven-shift night → meaningful ending/retry → CH02 readiness, with working save/load and captions.
 
@@ -37,11 +37,11 @@ Complete rover survey/return, two-field/two-home coordination, calibrated ice ev
 
 ## Phase 4 — Chapters 6 and 7
 
-Complete the five-segment eclipse teaching profile, protected-service load planning, family communication only through a valid path, safe F2 isolation and supported Kai arc. Integrate the five-person 2012 counter factual storm, six steps/three waves, archive naming log, external-uplink diagnosis and mandatory February-to-April care/controller/repeater preparation. Run P11..14 and missions EX-M0601..EX-M0704.
+Complete the five-segment eclipse teaching profile, protected-service load planning, family communication only through a valid path, safe F2 isolation and supported Kai arc. Integrate the five-person 2012 counterfactual storm, six steps/three waves, archive naming log, external-uplink diagnosis and mandatory February-to-April care/controller/repeater preparation. Run P11..14 and missions EX-M0601..EX-M0704.
 
 ## Phase 5 — Chapter 8 and complete ending
 
-Complete 120 km outbound 24h, three-repeater/four-hop local chain, two-home/three-rover viewpoints, base 2 for 33 hthen 5 for 3h, compatible controller, independently verified local/Earth paths, exact fresh echo and first live Noor voice. Complete 24 hreturn, established descendants/cotton before dawn, photo/dedication/credits and safe Continue. Run P15..16 and missions EX-M0801..EX-M0804.
+Complete 120 km outbound 24h, three-repeater/four-hop local chain, two-home/three-rover viewpoints, base 2 for 33 h then 5 for 3h, compatible controller, independently verified local/Earth paths, exact fresh echo and first live Noor voice. Complete 24 h return, established descendants/cotton before dawn, photo/dedication/credits and safe Continue. Run P15..16 and missions EX-M0801..EX-M0804.
 
 ## Phase 6 — production finish and independent acceptance
 

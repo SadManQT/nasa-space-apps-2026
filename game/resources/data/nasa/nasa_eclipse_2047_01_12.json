@@ -1,0 +1,82 @@
+{
+ "source_id": "nasa_eclipse_2047_01_12",
+ "retrieved": "2026-11-04",
+ "title": "Total lunar eclipse of 12 January 2047",
+ "agency": "NASA Goddard Space Flight Center (F. Espenak, Five Millennium Catalog)",
+ "dataset_id": "Lunar eclipse catalog 2001-2100, catalog number 09755, Saros 125",
+ "url": "https://eclipse.gsfc.nasa.gov/LEcat5/LE2001-2100.html",
+ "request_urls": [
+  "https://eclipse.gsfc.nasa.gov/LEcat5/LE2001-2100.html"
+ ],
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Espenak, F. & Meeus, J., Five Millennium Catalog of Lunar Eclipses, NASA GSFC.",
+ "fields_used": [
+  "TD of greatest eclipse",
+  "Delta T",
+  "Saros",
+  "type",
+  "penumbral/partial/total durations"
+ ],
+ "values": {
+  "td_greatest": "01:26:14",
+  "delta_t_s": 90,
+  "saros": 125,
+  "type": "T",
+  "penumbral_min": 337.2,
+  "partial_min": 208.9,
+  "total_min": 70.0
+ },
+ "evidence_label": "Observed",
+ "derived": [
+  {
+   "name": "greatest_eclipse_ut",
+   "value": "2047-01-12T01:24:44Z",
+   "unit": "UTC",
+   "formula": "TD - Delta T",
+   "drives": "P-11/P-12"
+  },
+  {
+   "name": "contacts_ut",
+   "value": {
+    "P1": "2047-01-11T22:36:08Z",
+    "U1": "2047-01-11T23:40:17Z",
+    "U2": "2047-01-12T00:49:44Z",
+    "U3": "2047-01-12T01:59:44Z",
+    "U4": "2047-01-12T03:09:11Z",
+    "P4": "2047-01-12T04:13:20Z"
+   },
+   "unit": "UTC",
+   "formula": "greatest +/- half of each phase duration",
+   "drives": "P-11 five segments; P-12 ingress/ring/egress"
+  },
+  {
+   "name": "partial_ingress_min",
+   "value": 69.45,
+   "unit": "min",
+   "formula": "(partial - total) / 2",
+   "drives": "P-11 ingress"
+  },
+  {
+   "name": "point_full_shadow_bounds_min",
+   "value": [
+    70.0,
+    208.9
+   ],
+   "unit": "min",
+   "formula": "a point on the Moon is fully shadowed for between total and partial duration",
+   "drives": "E20 check"
+  },
+  {
+   "name": "segment_hours_over_shift",
+   "value": {
+    "ingress": 0.161,
+    "totality": 0.162
+   },
+   "unit": "shifts",
+   "formula": "minutes / 60 / 7.2 (08_PUZZLE_DESIGNS P-11 verified-data rule)",
+   "drives": "P-11 proposal B3-10"
+  }
+ ],
+ "boundary": "Whole-Moon contact times. Aurora's local ingress and egress depend on its coordinate and horizon.",
+ "src_card": "SRC-ECLIPSE-DATE"
+}

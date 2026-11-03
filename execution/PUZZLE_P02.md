@@ -68,7 +68,7 @@ Use expansion chapter 1 and its four `EX-M` missions. Legacy SC/M identifiers in
 
 ### Exact P-02 numeric appendix
 
-This contract is reproduced from [the existing 3 D gameplay design, section 6](../docs/GAMEPLAY_DESIGN_FINAL.md#6-chapter-1-numerical-contract). It replaces this folder’s incompatible B/O/G/frost/thirst model and free daytime crate staging. E=energy, A=air, H=Alo health, W=water shielding, K=crate shielding, C=edible-crop condition, R=crew-day rations, Z=game exposure. Changes must update both documents and the mission/test summaries together.
+This contract is reproduced from [the existing 3D gameplay design, section 6](../docs/GAMEPLAY_DESIGN_FINAL.md#6-chapter-1-numerical-contract). It replaces this folder’s incompatible B/O/G/frost/thirst model and free daytime crate staging. E=energy, A=air, H=Alo health, W=water shielding, K=crate shielding, C=edible-crop condition, R=crew-day rations, Z=game exposure. Changes must update both documents and the mission/test summaries together.
 
 
 The original energy, air, Alo, light, heat and shelter values are retained. Costs and thresholds are [G], with real-unit context from the science document. A new crop/ration layer reuses the garden's existing circuit and reservoir; it does not add another allocation console or energy currency.

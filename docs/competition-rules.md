@@ -188,3 +188,33 @@ The Resources tab is empty for now; the full statement with NASA data sets is pu
 - Slack: spaceappsbd.slack.com (@spaceappsbd)
 - Local logistics: Anowar Parvez Rabbi — design@basis.org.bd
 - Bangladesh: info@nasaspaceappsbd.com · Global: info@spaceappschallenge.org
+
+---
+
+## H. Compliance check against the official Bangladesh Participants Guide (read in full on 3 Nov 2026)
+
+Source: the 2026 Bangladesh Participants Guide (Google Doc shared by the team, 827 lines), the third-party Build Guide artifact (a summary, not official rules), and spaceappschallenge.org. The site's challenge pages render with JavaScript, so the full 28 Oct statement and its Resources tab could not be read by the AI tools; a teammate pastes it into `docs/challenge-statement-2026.md` (board task M0-12). Every action below is a task on the team board (`production/plan/BOARD.html`).
+
+**Theme and challenge fit.** Theme "The Next Frontier" (Moon, Mars and beyond): a lunar south-pole outpost fits. Challenge text: *"lets students run a lunar or Martian outpost, balancing competing demands like life support, radiation shielding, power, and food production, so they experience firsthand the decisions that determine whether a mission fails or succeeds."* P-02 already models all four (air A, shielding S = min(6, W + K) with exposure Z, energy E, crops C and rations R). **The biggest relevance risk is that the current build makes those decisions for the player** (pre-filled answers and a fixed P-02 plan, bug B06): fixed by M1-08, M1-09 and the M3 puzzle tasks. At least eight public GitHub projects already target this challenge (2D/web outpost managers using DONKI and fact sheets); our edge is a 3D story-driven trainer with real-data provenance, so the pitch must show both.
+
+| Rule (guide section) | Status on 3 Nov | Board task |
+|---|---|---|
+| Answer one published 2026 challenge, named on the project page (§11) | OK: "Build a Junior Astronaut Mission Trainer" is on the 2026 list | M2-10 |
+| Use NASA open data; "NASA-data-first, not NASA-data-added" (Relevance 1–20, NASA data 1–5) | **Gap:** official datasets (28 Oct) not mapped; game numbers not traced to datasets; no in-game source display | M0-12, M0-13, M0-14, M0-15 |
+| Public repository with code and documentation, no login (§10, §11) | OK: github.com/SadManQT/nasa-space-apps-2026 is public | M2-01 |
+| Event code stays open source (§11) | **Gap:** no LICENSE file | M0-16 |
+| Every member registered and identified with role, on the NASA page and the Bangladesh form (§04, §10) | Unknown | M0-11 |
+| "Do not begin work on your projects until the hackathon begins" (site banner; global FAQ) | **Resolved 3 Nov:** the team confirms the Dhaka Local Lead permitted the early start (see also handbook §3, 25 Oct). Keep that message or email in the team Drive and mention the permission in Project Details | M0-10 (done) |
+| Video 2: ≤240 s, team name, every member named, problem and challenge, a working demo, NASA data said aloud, generated content credited; YouTube + Google Form + Drive by **13 Nov 18:30** (§08) | Not started | M2-03 to M2-06 |
+| Video 3: ≤30 s, English subtitles, same content, documentation complete; YouTube/Vimeo + Form + NASA page by **14 Nov 12:00** (run of show: 09:00) | Not started | M2-07, M2-08 |
+| No recognisable names, voices or likenesses of anyone under 18 in any video or submission (§08, §10) | Cast are adults (19–20 and older); AI voices must be adult. If a team member is under 18, ask the Local Lead how to list them, since videos must name every member | M0-11, M1-12 |
+| AI content: valid reason, prompts explained, own work shown, every tool named (§15; "Use of AI" field) | **Gap:** AI log stops at 27 Oct | M0-17 |
+| No copyrighted material without consent; stock or paid content credited with a disclaimer (§15) | Needs an audit (fonts, mocap library, reused props) | M0-16 |
+| Project page: 8 fields, Submit clicked, links tested in a private window (§10) | Not started | M2-02, M2-10 |
+| Validity 20: "usability tested, accessible beyond experts, with clear performance metrics" | **Gap:** no learner playtest yet | M1-22 |
+| User experience 5: "anyone can use it" | **Gap:** no onboarding; developer button on the title screen | M1-18 |
+| Presentation 20: "polished visuals and audio, in clear English" | **Gap:** no rooms, no audio in the game | M1-01 to M1-16 |
+| Women participation bonus +5% | Unknown | M0-11 |
+| Ready before day one: datasets offline, environment tested, slide template and demo script (§09) | Partly | M0-14, M2-11, M2-09 |
+
+Global award categories that fit this project: Best Storytelling, Art & Technology, Most Inspirational, Best Use of Data (if M0-13 to M0-15 land). Local judges tick nomination categories; the 240 s pitch should make the case for them.

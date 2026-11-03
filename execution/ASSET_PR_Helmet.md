@@ -35,7 +35,7 @@ Core rendering/import conventions and the owning mission/world interaction contr
 ## Detailed work sequence
 
 1. Inspect the current binary/source, approved concept and owning scene requirements. Determine the exact missing function, style state or quality defect; preserve the known-good version until the replacement passes.
-2. For a 3 D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
+2. For a 3D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
 3. Existing correctly scaled helmet as reusable starting geometry. Establish a usable silhouette, access direction, handle/control arrangement and separate live-screen area where applicable.
 4. Expose every required state and moving child: Stored, equipped, visor/role identification as required. Publish the state→part/material/animation mapping to the interaction owner.
 5. Implement or coordinate the physical focus/collider/socket fixture and accessible steps. The shared state/simulation owns resource/knowledge/inventory mutations.
@@ -50,7 +50,7 @@ Core rendering/import conventions and the owning mission/world interaction contr
 
 - Registry identity: `PR_Helmet`; recorded status `verified`; category `props`.
 - Source trace: `models/reuse/space_helmet.glb`
-- Source notes: Cadet helmet; re colour role stripe per cadet
+- Source notes: Cadet helmet; recolour role stripe per cadet
 - Inspected binary metadata: `{"binary": true, "bytes": 1193580, "bones": 0, "clips": 0, "triangles": 15000, "sha256": "04dc18809012e75f7cb6835a6e46e0db2db956a63bf8b9aa341afcd5a487a531"}`.
 - Existing dimensional/budget row: `longest 0.38 m, 15000 tris, 1024 px`. Confirm current manifest and permitted gate tolerance before changing it.
 
@@ -68,7 +68,7 @@ One production-reference PR_Helmet for Last Light Academy, approved anime/cel ha
 
 - Preserve editable source, runtime GLB/scene, embedded or project-policy textures, approved dimensions, material slots, collision, named pivots/sockets and explicit state variants.
 - Use existing `production/tools/` helpers and `game/tools/verify_assets.gd` after inspecting their current arguments; historical tool paths/versions are not live facts.
-- New character/hero prop designs require the exact 2 D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
+- New character/hero prop designs require the exact 2D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
 
 
 ## Required deliverables

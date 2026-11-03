@@ -35,12 +35,12 @@ Core rendering/import conventions and the owning mission/world interaction contr
 ## Detailed work sequence
 
 1. Inspect the current binary/source, approved concept and owning scene requirements. Determine the exact missing function, style state or quality defect; preserve the known-good version until the replacement passes.
-2. For a 3 D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
+2. For a 3D deliverable, establish size/pivot, texture/geometry budget, UV0/normals/tangents, separate material slots, collision, moving child parts and required grip/interaction anchors with the consuming engineer. Add UV2/light map or LOD data when the agreed rendering/import pipeline requires it. Publish names and import settings before scene integration. For a portrait/UI-only deliverable, publish its texture, layout, licensing and runtime binding contract instead.
 3. Read the 16 UI_* tasks and agree theme/fonts/spacing/focus/control glyph/contrast tokens with their owners.
-4. Deliver scalable editable vector icons, word labels, panel states, source chips, role markers, resource widget s, diagrams and empty/error/loading/disabled variants.
+4. Deliver scalable editable vector icons, word labels, panel states, source chips, role markers, resource widgets, diagrams and empty/error/loading/disabled variants.
 5. Separate illustrations/styles from live state; numeric forecasts and acquired journal content are supplied by shared services.
 6. Support keyboard/controller focus, at least 44 px interaction targets, tested 150%text reflow and caption-safe layouts.
-7. Implement reusable GodotControl/theme resources rather than a disconnected marketing webpage.
+7. Implement reusable Godot Control/theme resources rather than a disconnected marketing webpage.
 8. Test the kit in an actual mission/hud/dialogue/planning screen and hand off exact components and appearance states.
 
 
@@ -61,7 +61,7 @@ Editable Last Light Academy anime mission UI kit: navy backgrounds, warm ivory t
 
 - Preserve editable source, runtime GLB/scene, embedded or project-policy textures, approved dimensions, material slots, collision, named pivots/sockets and explicit state variants.
 - Use existing `production/tools/` helpers and `game/tools/verify_assets.gd` after inspecting their current arguments; historical tool paths/versions are not live facts.
-- New character/hero prop designs require the exact 2 D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
+- New character/hero prop designs require the exact 2D approval before Tripo spending; asset reuse and read-only validation do not create an approval request.
 
 
 ## Required deliverables

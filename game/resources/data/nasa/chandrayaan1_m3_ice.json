@@ -1,0 +1,39 @@
+{
+ "source_id": "chandrayaan1_m3_ice",
+ "retrieved": "2026-11-04",
+ "title": "Exposed water ice seen by the Moon Mineralogy Mapper on Chandrayaan-1",
+ "agency": "ISRO Chandrayaan-1 mission with NASA's Moon Mineralogy Mapper (partner agency)",
+ "dataset_id": "DOI 10.1073/pnas.1802345115",
+ "url": "https://doi.org/10.1073/pnas.1802345115",
+ "licence": "Facts and values quoted with citation; the article text remains (c) its publisher",
+ "citation": "Li, S. et al. (2018) Direct evidence of surface exposed water ice in the lunar polar regions, PNAS 115.",
+ "fields_used": [
+  "cold_traps_with_exposed_ice_percent",
+  "max_ice_wt_percent_some_pixels"
+ ],
+ "values": {
+  "cold_traps_with_exposed_ice_percent": 3.5,
+  "max_ice_wt_percent_some_pixels": 30
+ },
+ "derived": [
+  {
+   "name": "ice_is_patchy",
+   "value": true,
+   "unit": "bool",
+   "formula": "only ~3.5 % of cold traps show exposed ice",
+   "drives": "P-07 survey lesson"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Surface (mm-deep) ice in some pixels; does not locate ice at the game's sample site.",
+ "verification": [
+  {
+   "checked_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI%3A10.1073%2Fpnas.1802345115&resultType=core&format=json",
+   "quotes_found": [
+    "3.5% of cold traps exhibit ice exposures",
+    "30 wt % ice that is intimately mixed with dry regolith"
+   ]
+  }
+ ],
+ "src_card": "SRC-ICE"
+}

@@ -1,5 +1,7 @@
 # Future implementation blueprint — no implementation supplied
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 ## Architecture intent
 
 Keep the expedition's story state, puzzle rules and presentation separate. This is a contract for a later developer, not source code or an engine project. Godot with GDScript is the existing project preference; choose and pin an available supported 4.x version at implementation start after testing the Compatibility renderer on target hardware. The older gameplay document’s4.7.2 label is not a verified installed dependency. No dependency was installed here.
@@ -67,9 +69,9 @@ Cross-location authored viewpoint cuts preserve each team's snapshot. Free role 
 
 ## Build and performance targets for later verification
 
-Windows offline first, Compatibility renderer, 1280×720 minimum UI layout, target 30 fps at 720p on an agreed modest classroom reference laptop. Establish the actual machine/spec at production kickoff; no claim of benchmark results here. Modular station, limited active NPCs, shared rigs, instanced plants/rocks, bounded roads and authored cruise reduce scope. Avoid mandatory heavy volumetrics, cinematic-resolution textures on all props, online APIs and dynamic global simulation of an entire lunar year.
+Windows offline first, Forward+ renderer with LODs and a Compatibility fallback build (handbook §3), 1280×720 minimum UI layout, target 30 fps at 720p on an agreed modest classroom reference laptop. Establish the actual machine/spec at production kickoff; no claim of benchmark results here. Modular station, limited active NPCs, shared rigs, instanced plants/rocks, bounded roads and authored cruise reduce scope. Avoid mandatory heavy volumetrics, cinematic-resolution textures on all props, online APIs and dynamic global simulation of an entire lunar year.
 
-Localization: externalize all player-visible text by stable ID; use Unicode/Bangla shaping; do not concatenate translated sentence fragments. Input abstraction supplies remappable glyphs and tap alternatives. Save migration must be explicit and versioned; prior incompatible versions preserve files and explain supported actions. Production logs must identify mission/scene/interaction without exposing private user data.
+Localization: externalize all player-visible text by stable ID; the game is English only (no Bangla script; handbook §3); do not concatenate translated sentence fragments. Input abstraction supplies remappable glyphs and tap alternatives. Save migration must be explicit and versioned; prior incompatible versions preserve files and explain supported actions. Production logs must identify mission/scene/interaction without exposing private user data.
 
 ## Vertical slice
 

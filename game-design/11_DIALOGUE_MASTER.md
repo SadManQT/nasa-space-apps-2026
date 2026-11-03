@@ -1,5 +1,7 @@
 # Dialogue master — English index
 
+> **Historical ids:** this file uses the legacy `SC-xxxx` scene and `M-xxxx` mission ids. Canon ids are `EX-CHxx-Sxx` and `EX-Mxxxx` in [STORY_FULL.md](../full-game-story/STORY_FULL.md); [scene_index.csv](../production/manifest/scene_index.csv) maps them.
+
 Exact lines are maintained in the owning scene and mirrored here. The main story remains the creative authority. Unknown recordings display N. until the Chapter 5 identity connection; technical speaker IDs are not shown in player UI. The CH02 archival FER voice displays Engineer (recording) until CH05. Before that chapter no journal/portrait/nameplate identifies the anonymous writer. All lines have caption/transcript parity; VO remains future production.
 
 ## CH01 — Night One

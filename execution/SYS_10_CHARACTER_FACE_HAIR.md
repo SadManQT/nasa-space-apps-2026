@@ -34,8 +34,8 @@ Follow the Phase 0 order in `06_EXECUTION_BOARD.md`. Treat new module names in `
 
 ## Detailed work sequence
 
-1. Inspect face_atlas, lip_sync, face_expression, hair_springs, head_accent and current v 8 builds.
-2. Preserve atlas row/column mapping, transparent cell 0, i dem potent setup, non mirrored eyes, approved skin fill and shadow treatment.
+1. Inspect face_atlas, lip_sync, face_expression, hair_springs, head_accent and current v8 builds.
+2. Preserve atlas row/column mapping, transparent cell 0, idempotent setup, non-mirrored eyes, approved skin fill and shadow treatment.
 3. Map speech cues to correct mouth cells using audio time; keep blinking, gaze and emotion from fighting lip sync.
 4. Respect Kai/Mei painted-brow exceptions and Mei 68 bone hair setup; avoid regenerating approved faces.
 5. Pause/seek/skip/fallback gracefully; prevent behind-shoulder targets and excessive head/hair stretch.
