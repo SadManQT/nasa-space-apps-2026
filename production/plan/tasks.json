@@ -146,14 +146,14 @@
    "priority": "P0",
    "tool": "human",
    "title": "Team roster, roles and both registrations",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/human",
    "deps": [],
    "paths": [
     "docs/TEAM.md"
    ],
    "refs": [],
-   "note": "",
+   "note": "docs/TEAM.md written on 4 Nov from the Bangladesh registration (6 members, 0 women, NASA team page linked). Still needed: each member's role and GitHub username, the under-18 yes/no answer, and confirmation that all six are on the NASA team page with photo and role.",
    "evidence": "",
    "updated": "2026-11-03",
    "prompt": "Do: create docs/TEAM.md with every member: name as registered, role (build / design / research / story / presenter), GitHub username,\nwhether they are on the Bangladesh pre-registration AND on the NASA team page (spaceappschallenge.org, Members tab, with photo and role).\nRecord (yes/no only, no birthdates) whether anyone is under 18: under-18 names, voices and faces must not appear in any video or submission.\nRecord whether the team has one or more women members (+5% score bonus). Choose the project licence (recommended Apache-2.0, matching the\nopen-source rule) and write it in TEAM.md. Upload the team photo to the NASA page.\nAcceptance: TEAM.md lists all members with both registrations confirmed; the licence choice is recorded."
@@ -215,7 +215,7 @@
     "game/tools/test_campaign_content.gd"
    ],
    "refs": [],
-   "note": "",
+   "note": "Follow-up: the registered sources include LRO LROC polar illumination maps; add an LROC illumination fixture if docs/SCIENCE_AND_DATA.md does not already cover it.",
    "evidence": "production/tools/fetch_nasa_data.py (stdlib, idempotent: keeps existing fixtures unless --refresh; --check validates offline) wrote 28 fixtures + puzzle_sources.json to game/resources/data/nasa/ (184 KB total, largest 32 KB; each has source_id, title, agency, dataset_id/DOI, url, request_urls or quote verification, retrieved, licence, citation, fields_used, values, derived numbers with formula and the puzzle they drive, evidence_label, boundary). Quotes are checked live against NTRS/Europe PMC/Crossref/page text; PDF-only values are marked transcribed with page refs. No API key needed (DONKI via CCMC); .env added to .gitignore; no keys in fixtures. '--check' -> 'OK: 28 fixtures, 16 puzzles, 15 source cards'. NOT RUN: game/tools/run_tests.sh and the test_campaign_content.gd check (user override: another agent owns game/tools and Godot runs) - M0-15 must add the check that every puzzle's data_source ids resolve to a fixture (use puzzle_sources.json). macOS note: run with SSL_CERT_FILE=<system roots> if CERTIFICATE_VERIFY_FAILED (see script docstring).",
    "updated": "2026-11-04",
    "prompt": "Goal: the game ships small, cached extracts of the real NASA data it uses, so the demo works with wifi off and every number has a source.\nDo: write production/tools/fetch_nasa_data.py (stdlib only, idempotent) that downloads the minimal extracts chosen in M0-13 and writes\ngame/resources/data/nasa/<source_id>.json, each with: source_id, title, dataset ID/DOI, url, retrieved (date), licence, citation,\nfields used, the extracted values, and the derived numbers the game uses (with the formula). Keys (api.nasa.gov, Earthdata) come from a\ngitignored .env; never commit keys; if a source needs a key the user lacks, block with the exact sign-up link.\nKeep each fixture small (<200 KB). Add a check in game/tools/test_campaign_content.gd that every puzzle's data_source ids resolve to a fixture.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Fixtures load offline."
@@ -589,13 +589,41 @@
    "prompt": "Integrate the LOLA terrain tiles (M1-34) and the rock kit (M1-35) into the exterior scenes: choose a terrain approach that works on Godot 4.7\n(check the current Terrain3D release's Godot compatibility; otherwise chunked MeshInstance3D LODs), collision for walking and the rover,\nrock scatter by slope, the low hard Sun with long shadows (directional shadow splits tuned for kilometre views), Earth and a star-free or\ncorrectly exposed black sky, no fog or atmosphere scattering; Forward+ with a Compatibility fallback. Target 60 fps on a mid laptop.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. including a wide vista and a boots-on-the-ground view."
   },
   {
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-09",
+    "M1-28"
+   ],
+   "paths": [
+    "game/scripts/",
+    "game/scenes/ui/",
+    "game/resources/campaign/"
+   ],
+   "refs": [
+    "docs/TEAM.md",
+    "execution/SYS_15_ROLE_MODES.md",
+    "docs/GAMEPLAY_DESIGN_FINAL.md",
+    "game-design/10_GAMEPLAY_SYSTEMS.md"
+   ],
+   "note": "",
+   "evidence": "",
+   "updated": "2026-11-04",
+   "id": "M1-37",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "antigravity",
+   "title": "Four-player co-op Class mode: shared decisions, private role clues (as registered)",
+   "prompt": "Why: the team registered Last Light Academy as \"a four-player cooperative junior astronaut mission trainer … Shared decisions and private\nclues teach teamwork\" (docs/TEAM.md). Judges compare the build and project page with that; the current build is single-player.\nGoal: up to four players play one machine together as Kai (power/heat), Amara (atmosphere), Mei (horticulture) and Rafi (safety): each role\ngets private clues the others do not see (role-facts per execution/SYS_15_ROLE_MODES.md: printed or on-screen role cards revealed one player\nat a time, 'pass the laptop' or a second screen), the team discusses, and the Mission Table decision (P-02 first, then every puzzle) is\ncommitted together with each role's sign-off. No network play. Solo mode keeps working with all clues available through the crew.\nDo: a mode choice on New Expedition (Solo / Class 2–4 players), role-card screens with a privacy hand-off, a 'team plan' confirm step,\nand printable role cards (PDF/PNG generated from the same data) for classrooms. Clues and role facts come from data, not code.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 2-minute capture of four people playing one P-02 shift."
+  },
+  {
    "id": "M1-08",
    "milestone": "M1",
    "priority": "P0",
    "tool": "antigravity",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [
     "M0-02"
    ],
@@ -611,7 +639,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Problem: puzzles are receipt gates: each step is a 'USE' button that submits the correct answer pre-filled.\nGoal: the player calibrates the moisture probe (zero at dry 10 -> 0, span at wet 110 -> 100) and plants with moisture in 40–60, choosing\nthe values themselves, with predict -> test -> observe -> explain feedback and a Data Card link (M0-15) when available.\nDo: implement the P-01 panel per execution/PUZZLE_P01.md and execution/UI_09_SCIENTIFIC_PUZZLE.md through the existing PuzzleHost; remove\nP-01's pre-filled payloads; wrong answers give a helpful, non-punishing hint (SYS_22); keyboard, mouse and controller; text scaling; no\ntimer pressure in Family mode. Numbers come from game-design/08_PUZZLE_DESIGNS.md only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
@@ -853,7 +881,7 @@
    "milestone": "M1",
    "priority": "P0",
    "tool": "codex",
-   "title": "Chapter 1 endings and the science debrief",
+   "title": "Chapter 1 endings, decision replay and the science debrief",
    "status": "todo",
    "owner": "",
    "deps": [
@@ -872,7 +900,7 @@
    "note": "",
    "evidence": "",
    "updated": "2026-11-03",
-   "prompt": "Goal: the four canonical endings from P-02 (Golden Bloom: Z≤3, no blackout, Alo alive, H≥5; Bloom: crew safe, H>0 — unlocks the story;\nAlo Lost: crew safe, H=0 — retry only; Mission Stopped: A≤0 or exposure breach) each end with an outcome screen and a debrief that shows\npredict -> what happened -> why, linking the NASA Data Cards (M0-15) behind the numbers.\nDo: per execution/ENDING_*.md and UI_13_OUTCOME.md; retry from the correct checkpoint; Continue only on Bloom/Golden Bloom.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. a test per ending predicate including the boundaries; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+   "prompt": "Goal: the four canonical endings from P-02 (Golden Bloom: Z≤3, no blackout, Alo alive, H≥5; Bloom: crew safe, H>0 — unlocks the story;\nAlo Lost: crew safe, H=0 — retry only; Mission Stopped: A≤0 or exposure breach) each end with an outcome screen and a debrief that shows\npredict -> what happened -> why, linking the NASA Data Cards (M0-15) behind the numbers.\nDo: per execution/ENDING_*.md and UI_13_OUTCOME.md; retry from the correct checkpoint; Continue only on Bloom/Golden Bloom.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. a test per ending predicate including the boundaries; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nRegistered promise (docs/TEAM.md): include a replay of the player's decisions shift by shift (what they chose, what the forecast said, what happened) before the debrief questions."
   },
   {
    "id": "M1-20",
@@ -3211,7 +3239,8 @@
     "M3-5P",
     "M3-6P",
     "M3-7P",
-    "M3-8P"
+    "M3-8P",
+    "M1-37"
    ]
   },
   {
@@ -3388,6 +3417,17 @@
    "tasks": [
     "M0-11",
     "M2-02"
+   ]
+  },
+  {
+   "id": "R25",
+   "title": "Deliver what was registered: 4-player co-op, private clues, replay and debrief",
+   "source": "Bangladesh registration (docs/TEAM.md)",
+   "tasks": [
+    "M1-37",
+    "M1-19",
+    "M1-34",
+    "M0-14"
    ]
   }
  ]
