@@ -919,7 +919,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Export presets and release builds (Windows, macOS; web feasibility)",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "atik/codex",
    "deps": [
     "M0-02"
@@ -934,7 +934,8 @@
    "note": "",
    "evidence": "",
    "updated": "2026-11-04",
-   "prompt": "Goal: judges and teammates can download and run the game; there is no export_presets.cfg today.\nDo: per execution/RELEASE_01_EXPORT_AND_PACKAGE.md: Windows x86_64 and macOS (universal, unsigned with run instructions) presets;\nexclude dev scenes and tools from the pack; version string; build to builds/ (gitignored) and attach to a GitHub Release (ask the user\nbefore publishing). Investigate a Chapter 1 web build with the Compatibility renderer and reduced textures for a 'play in the browser'\njudge link: report size, load time and look, and recommend yes/no.\nAcceptance: both builds start on a clean machine to the title screen and into Chapter 1; sizes and steps in production/qa/release_<date>.md."
+   "prompt": "Goal: judges and teammates can download and run the game; there is no export_presets.cfg today.\nDo: per execution/RELEASE_01_EXPORT_AND_PACKAGE.md: Windows x86_64 and macOS (universal, unsigned with run instructions) presets;\nexclude dev scenes and tools from the pack; version string; build to builds/ (gitignored) and attach to a GitHub Release (ask the user\nbefore publishing). Investigate a Chapter 1 web build with the Compatibility renderer and reduced textures for a 'play in the browser'\njudge link: report size, load time and look, and recommend yes/no.\nAcceptance: both builds start on a clean machine to the title screen and into Chapter 1; sizes and steps in production/qa/release_<date>.md.",
+   "blocker": "Windows/macOS candidates built; 23/23 source suites and both fresh-runner native smoke jobs pass (9 checks each), run 41712680810. ZIP sizes/hashes and browser no-go evidence: production/qa/release_2026-11-04.md. Only publication remains: M1-20 explicitly requires user approval before publishing; approval requested, pending."
   },
   {
    "id": "M1-21",
@@ -3291,6 +3292,29 @@
    "evidence": "",
    "updated": "2026-11-03",
    "prompt": "Per execution/RELEASE_01_EXPORT_AND_PACKAGE.md and RELEASE_02_CREDITS_AND_EVIDENCE.md: final builds, checksums, a GitHub Release (ask the\nuser before publishing), the evidence package, and README/project page links updated."
+  },
+  {
+   "id": "M2-13",
+   "milestone": "M2",
+   "priority": "P2",
+   "tool": "codex",
+   "title": "Browser candidate: reduce the download and bundle missing UI glyphs",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-20"
+   ],
+   "paths": [
+    "game/",
+    "production/qa/"
+   ],
+   "refs": [
+    "production/qa/release_2026-11-04.md"
+   ],
+   "note": "Found during M1-20 browser feasibility; desktop delivery remains the preferred judge route.",
+   "evidence": "",
+   "updated": "2026-11-04",
+   "prompt": "Repro: run production/qa/prepare_web.py with Pillow 11.3.0, export builds/web-stage with the Web feasibility preset, serve the resulting folder and open it in a clean browser. The current PCK is 285,998,112 bytes plus 39,514,754 bytes WASM despite 1024-pixel image staging. Title arrows/role symbols show missing-glyph boxes because native font fallbacks are unavailable. Goal: make a measured Chapter 1 browser candidate suitable for a judge link, or document an evidence-backed desktop-only decision. Do: audit the exported asset manifest and include only Chapter 1 dependencies; preserve GLTFDocument raw GLB loading and canonical progression; bundle appropriately licensed glyph coverage or replace decorative glyphs with code-native icons while keeping English labels; measure cold download and time to interactive under a stated network profile and on a representative low-spec device. Acceptance: full run_tests.sh passes; fresh-browser screenshots show title, briefing and Chapter 1 with no missing glyph boxes or script/shader errors; record actual transfer bytes, first usable frame timing, limitations, licences/credits and yes/no deployment recommendation. Do not publish hosting without the user’s approval."
   }
  ],
  "requirements": [

@@ -114,6 +114,22 @@ def main():
         'This is a development candidate; the repository board tracks remaining work.\n', encoding='utf-8')
     for name in ['LICENSE', 'CREDITS.md']:
         shutil.copy2(ROOT / name, output / name)
+    package = output.parent / ('last-light-academy-0.1.0-' + args.platform + '.zip')
+    with zipfile.ZipFile(package, 'w', compression=zipfile.ZIP_DEFLATED) as bundle:
+        if args.platform == 'macos':
+            with zipfile.ZipFile(filename) as app_archive:
+                for entry in app_archive.infolist():
+                    bundle.writestr(entry, app_archive.read(entry))
+        else:
+            for native in output.iterdir():
+                if native.suffix in ['.exe', '.pck', '.dll']:
+                    bundle.write(native, native.name)
+        for name in ['LICENSE', 'CREDITS.md', 'README.txt']:
+            bundle.write(output / name, name)
+    with zipfile.ZipFile(package) as bundle:
+        if bundle.testzip() is not None:
+            raise RuntimeError('Package CRC verification failed')
+    print('PACKAGE', package.name, package.stat().st_size, hashlib.sha256(package.read_bytes()).hexdigest(), flush=True)
     print('BUILD RESULT:', args.platform, 'PASS', 'sha256', hashlib.sha256(filename.read_bytes()).hexdigest(), flush=True)
 
 if __name__ == '__main__':
