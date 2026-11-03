@@ -5,7 +5,8 @@ Thumbs.db
 *.Spotlight-V100
 *.Trashes
 
-# Editor & environment
+# Editor & environment (.env holds API keys such as NASA_API_KEY; never commit it)
+.env
 .vscode/
 .idea/
 *.swp
@@ -38,3 +39,13 @@ game/.godot/
 .opencode/
 nul
 NUL
+
+# Claude Code Game Studios local state
+.claude/settings.local.json
+.claude/agent-memory/
+.claude/worktrees/
+CLAUDE.local.md
+project.local.yaml
+production/session-logs/
+production/session-state/
+docs/consistency-failures.md
