@@ -647,8 +647,8 @@
    "priority": "P0",
    "tool": "antigravity",
    "title": "P-02 Seven Shifts: the Mission Table plan the player actually makes",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [
     "M0-02"
    ],
@@ -663,9 +663,9 @@
     "execution/UI_10_MISSION_TABLE.md",
     "game-design/08_PUZZLE_DESIGNS.md"
    ],
-   "note": "",
+   "note": "Queued in the same Antigravity session as M1-08 on Sadman's Mac.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Problem: P-02 runs the real simulation but the HUD submits _default_plan (game/scripts/missions/chapter1_route.gd:485); the player never\nchooses heat (COZY/COOL/COLD), light (OFF/DIM/FULL), air or water transfers, nor PUMP/STACK/WAIT at the shift-5 alarm.\nGoal: the Chapter 1 heart: the player plans each of the seven 7.2 h shifts at the Mission Table, sees the preview from the same pure\nfunction that commits (ExpeditionSimulation), commits with Space+confirm, and lives with the consequences (E 14/20 +8 per day shift,\nA 6/10, H 6/10, W 0–6, K 0–2, S=min(6,W+K), blackout only below 0).\nDo: implement per execution/PUZZLE_P02.md and execution/UI_10_MISSION_TABLE.md; delete _default_plan from the play path (keep it only\nas a test fixture if needed); role facts from the four cadets inform choices; outcome feeds the four endings (M1-19).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests cover blackout at -1 vs exactly 0, each ending predicate and PUMP/STACK/WAIT; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
