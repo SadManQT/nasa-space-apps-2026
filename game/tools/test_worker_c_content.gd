@@ -27,10 +27,8 @@ func _run() -> void:
 	_test_dialogue_and_knowledge(content)
 	_test_audio_and_cutscenes(content)
 	await _test_panels()
-	await _test_accessibility_consumers(content)
 	await _test_main_menu_modal_focus()
 	_test_content_tamper_fixtures(content)
-	_test_slice_compatibility()
 	print("WORKER C CONTENT RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
 
@@ -150,9 +148,9 @@ func _test_panels() -> void:
 	focus_source.free()
 	panels.queue_free()
 	await process_frame
-	await _test_existing_menu_and_hud(query)
+	await _test_existing_menu(query)
 
-func _test_existing_menu_and_hud(query: Dictionary) -> void:
+func _test_existing_menu(query: Dictionary) -> void:
 	var menu = load("res://scenes/ui/main_menu.tscn").instantiate()
 	get_root().add_child(menu)
 	await process_frame
@@ -161,51 +159,6 @@ func _test_existing_menu_and_hud(query: Dictionary) -> void:
 	var menu_command: Dictionary = menu.emit_command("open_panel", "credits")
 	_check(menu.query_snapshot() == menu_before and String(menu_command.get("issuer", "")) == "main_menu", "existing menu binds a read-only query and emits commands")
 	menu.queue_free()
-	var hud = load("res://scenes/ui/slice_hud.tscn").instantiate()
-	get_root().add_child(hud)
-	await process_frame
-	hud.bind_query(query)
-	var hud_before: Dictionary = hud.query_snapshot()
-	var hud_command: Dictionary = hud.emit_command("acknowledge_line", "EX-CH01-S01-L01", {"line_id": "EX-CH01-S01-L01", "dialogue_only": true})
-	_check(hud.query_snapshot() == hud_before and String(hud_command.get("issuer", "")) == "campaign_hud", "existing HUD binds a read-only query and emits commands")
-	var hud_focus_source: Button = hud._next_button
-	hud_focus_source.grab_focus()
-	await process_frame
-	hud.show_pause()
-	hud.hide_pause()
-	await process_frame
-	_check(get_root().gui_get_focus_owner() == hud_focus_source, "pause close restores the prior HUD focus")
-	hud.show_journal()
-	hud.hide_journal()
-	await process_frame
-	_check(get_root().gui_get_focus_owner() == hud_focus_source, "journal close restores the prior HUD focus")
-	hud.queue_free()
-	await process_frame
-
-func _test_accessibility_consumers(content: Dictionary) -> void:
-	var hud: SliceHUD = load("res://scenes/ui/slice_hud.tscn").instantiate()
-	get_root().add_child(hud)
-	await process_frame
-	var slice := CampaignContent.load_slice()
-	hud.show_scene(CampaignContent.scene_at(slice, 0), SliceState.new_snapshot())
-	var base_font := hud._caption_line.get_theme_font_size("font_size")
-	hud.set_accessibility({"captions": false})
-	_check(not hud._caption_panel.visible and not hud._panels.captions_visible(), "captions toggle hides HUD captions end-to-end")
-	hud.set_accessibility({"captions": true})
-	_check(hud._caption_panel.visible and hud._panels.captions_visible(), "captions toggle restores HUD captions end-to-end")
-	hud.set_accessibility({"large_text": true})
-	_check(hud._caption_line.get_theme_font_size("font_size") > base_font, "large-text toggle scales the HUD presentation")
-	hud.set_accessibility({"timer_free": false})
-	_check(String(hud.get_meta("timer_behavior", "")) == "standard_timing" and hud._prompt.text.contains("STANDARD TIMING"), "timer-free toggle changes the HUD timing label and mode")
-	hud.set_accessibility({"timer_free": true})
-	_check(String(hud.get_meta("timer_behavior", "")) == "timer_free" and hud._prompt.text.contains("TIMER-FREE"), "timer-free toggle restores the timer-free behavior")
-	hud.set_accessibility({"reduced_motion": true})
-	_check(is_zero_approx(float(hud.get_meta("presentation_transition_seconds", -1.0))), "reduced-motion toggle disables presentation transition time")
-	hud.set_accessibility({"reduced_motion": false})
-	_check(is_equal_approx(float(hud.get_meta("presentation_transition_seconds", -1.0)), 0.15), "reduced-motion toggle restores the normal presentation contract")
-	hud.queue_free()
-	await process_frame
-
 func _test_main_menu_modal_focus() -> void:
 	var menu: MainMenu = load("res://scenes/ui/main_menu.tscn").instantiate()
 	get_root().add_child(menu)
@@ -243,12 +196,6 @@ func _test_content_tamper_fixtures(content: Dictionary) -> void:
 	_check(not bool(ContentScript.validate_full(content, dialogue_tampered).get("valid", true)), "full validation rejects a tampered dialogue catalog")
 	_check(String(dialogue_catalog.get("content_revision", "")) == ContentScript.EXPECTED_CONTENT_REVISION and String(dialogue_catalog.get("catalog_hash", "")) == ContentScript.EXPECTED_DIALOGUE_CATALOG_HASH, "dialogue catalog revision and hash are frozen")
 	_check(bool(ContentScript.validate_dialogue_catalog(dialogue_catalog).get("valid", false)), "checked-in dialogue catalog hash and revision validate")
-
-func _test_slice_compatibility() -> void:
-	var slice := ContentScript.load_slice()
-	_check(slice.size() > 0, "full loader retains a compatibility slice path")
-	_check(bool(ContentScript.validate(slice).get("valid", false)), "compatibility slice still validates")
-	_check(ContentScript.scene_at(slice, 2).get("id", "") == "EX-CH01-S03", "compatibility scene lookup remains ordered")
 
 func _check(condition: bool, message: String) -> void:
 	checks += 1

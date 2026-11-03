@@ -4,7 +4,7 @@ const CAMPAIGN_SCENE: PackedScene = preload("res://scenes/campaign/chapter1_camp
 const MENU_SCENE: PackedScene = preload("res://scenes/ui/main_menu.tscn")
 const SaveScript = preload("res://scripts/save/save_service.gd")
 const CampaignScript = preload("res://scripts/campaign/chapter1_campaign.gd")
-const LegacySliceState = preload("res://scripts/campaign/slice_state.gd")
+const LegacySave = preload("res://scripts/save/legacy_save.gd")
 
 var _stage_camera: Camera3D
 var _stage_root: Node3D
@@ -15,7 +15,7 @@ var _replace_dialog: ConfirmationDialog
 var _save_service: SaveService
 var _load_notice := ""
 var save_path: String = SaveScript.DEFAULT_PATH
-var legacy_save_path: String = LegacySliceState.SAVE_PATH
+var legacy_save_path: String = LegacySave.SAVE_PATH
 
 func _ready() -> void:
 	_save_service = _new_save_service()
@@ -97,7 +97,7 @@ func _start_new_expedition() -> void:
 		_replace_dialog.cancel_button_text = "CANCEL"
 		_replace_dialog.confirmed.connect(func() -> void:
 			_save_service.clear(save_path)
-			LegacySliceState.clear_save(legacy_save_path)
+			LegacySave.clear_save(legacy_save_path)
 			_launch_campaign({})
 		)
 		_menu.add_child(_replace_dialog)

@@ -25,5 +25,5 @@ func configure(node: Node) -> void:
 
 func cleanup() -> void:
 	preload("res://scripts/save/save_service.gd").new().clear(path)
-	preload("res://scripts/campaign/slice_state.gd").clear_save(legacy_path)
+	preload("res://scripts/save/legacy_save.gd").clear_save(legacy_path)
 	DirAccess.remove_absolute(directory)

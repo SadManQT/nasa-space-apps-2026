@@ -5,7 +5,7 @@ const MainScene = preload("res://scenes/main.tscn")
 const CampaignScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const SaveScript = preload("res://scripts/save/save_service.gd")
-const LegacyScript = preload("res://scripts/campaign/slice_state.gd")
+const LegacyScript = preload("res://scripts/save/legacy_save.gd")
 
 var storage = preload("res://tools/support/isolated_storage.gd").new()
 
@@ -154,7 +154,9 @@ func _run() -> void:
 	main.queue_free()
 	await process_frame
 	SaveScript.new().clear(storage.path)
-	LegacyScript.save_snapshot(LegacyScript.new_snapshot(), storage.legacy_path)
+	var legacy_file := FileAccess.open(storage.legacy_path, FileAccess.WRITE)
+	legacy_file.store_string(JSON.stringify({"content_revision": "story-data-extended-02-commissioning-slice"}))
+	legacy_file.close()
 	main = MainScene.instantiate()
 	storage.configure(main)
 	root.add_child(main)

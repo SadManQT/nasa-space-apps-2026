@@ -111,7 +111,7 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Delete the dead legacy code found by the bug hunt",
-   "status": "in_progress",
+   "status": "done",
    "owner": "atik/codex",
    "deps": [
     "M0-02"
@@ -123,7 +123,7 @@
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
+   "evidence": "game/tools/run_tests.sh: 22/22 suites passed; production UI 32 checks, full content 566 checks, science 33 checks, save recovery 92/92 pass. rg proves removed classes/paths/helper have no remaining game references; git diff --check clean; over 1600 lines removed. production/review/execution/M0-03.md.",
    "updated": "2026-11-04",
    "prompt": "Goal: the 'dead code safe to delete' list in production/review/BUGHUNT_2026-11-03.md section 2 is resolved.\nDo: delete only code that grep proves unreachable from scenes/main.tscn and from any test you keep; when a test only exists to cover\ndead code, delete that test too and say so. Keep the commissioning slice only if main.gd still needs its legacy-save check; otherwise\nretire it with its tests in one commit. Rename Chapter1Campaign / Chapter1CampaignHUD only if every reference, scene and test moves with it.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. The diff deletes more than it adds."
   },

@@ -249,10 +249,6 @@ func _apply_target_result(target_id: String, _result: Dictionary) -> void:
 		flags[flag] = true
 		_scene_flags[current_scene_id()] = flags
 
-func _preview_result(reason: String) -> Dictionary:
-	var revision := int(_director.query().get("state_revision", 0))
-	return {"accepted": true, "duplicate": false, "input_revision": revision, "output_revision": revision, "receipt_id": "", "deltas": [], "events": [{"type": "puzzle_preview", "state_revision": revision}], "warnings": [reason + " · no authoritative state mutation"], "unsafe_predicates": [], "reason": reason, "next_phase": "planning", "snapshot": _director.snapshot()}
-
 func _puzzle_reject(reason: String) -> Dictionary:
 	var result := ResultScript.empty(int(_director.query().get("state_revision", 0)), "planning")
 	result["reason"] = String(reason)

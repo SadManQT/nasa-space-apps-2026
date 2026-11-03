@@ -1,9 +1,7 @@
 extends RefCounted
 class_name CampaignState
 
-## Authoritative primitive state for the later mission/UI workers.
-## The existing SliceState remains untouched and continues to serve the
-## commissioning slice. This schema is the forward-compatible bridge.
+## Authoritative primitive state for the full campaign and its presentation.
 
 const SCHEMA_VERSION := 2
 const CONTENT_REVISION := "story-data-extended-02-systems-contract"
@@ -159,7 +157,7 @@ static func is_scenario_datetime(value: String) -> bool:
 
 static func from_slice_snapshot(slice: Dictionary) -> Dictionary:
 	## Bounded compatibility adapter. It only reads the commissioning shape and
-	## never writes to SliceState or changes the existing slice's save file.
+	## never writes to the retired commissioning save slot.
 	var result := new_snapshot()
 	result["save_id"] = String(slice.get("save_id", result["save_id"]))
 	result["checkpoint_id"] = String(slice.get("checkpoint_id", result["checkpoint_id"]))

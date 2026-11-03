@@ -1,22 +1,15 @@
 extends RefCounted
 class_name CampaignContentFull
 
-## Full-campaign content boundary.
-##
-## The original commissioning slice keeps its CampaignContent class under
-## scripts/campaign/.  This separate class deliberately avoids replacing that
-## global name while exposing the frozen full-catalog API at the new owned
-## path.  It also provides the small slice adapter used by older callers.
+## Validated full-campaign content boundary.
 
 const FULL_PATH := "res://resources/campaign/content/campaign_catalog.json"
 const DIALOGUE_PATH := "res://resources/campaign/dialogue_catalog.json"
-const SLICE_PATH := "res://resources/campaign/ch01_slice.json"
 const EXPECTED_STORY_SHA256 := "02fa2dee03d11d455f67406de28a4da3cee97b1f8f19fda2cee0e6c1e895a272"
 const EXPECTED_SCENE_INDEX_SHA256 := "8c0b8cda424d6bc6abb32ef64fd090c9afca53a0eedf16dee74e84dc4d51a934"
 const EXPECTED_VO_SHA256 := "d4d1aaae60f13504477462bca5141c4fa3343057760b3f199f82bb8509404a19"
 const EXPECTED_CONTENT_REVISION := "campaign-content-1-3e003a55fa46e38f"
 const EXPECTED_FULL_COUNTS := {"chapters": 8, "missions": 32, "scenes": 96, "dialogue_lines": 385}
-const EXPECTED_SLICE_SHA256 := "02fa2dee03d11d455f67406de28a4da3cee97b1f8f19fda2cee0e6c1e895a272"
 const EXPECTED_CATALOG_HASH := "31a768ef49efa7a9f5c1c97a581a66c0b5c731938bb3191a67fe56ecc7bf18c4"
 const EXPECTED_DIALOGUE_CATALOG_HASH := "a3410ee72ab2e1e9349d6fdc66d312c15937646d7a25de9f87362d9d558addd2"
 
@@ -250,31 +243,6 @@ static func dialogue_by_id(content: Dictionary, line_id: String) -> Dictionary:
 		if line is Dictionary and String(line.get("id", "")) == line_id:
 			return line.duplicate(true)
 	return {}
-
-## Compatibility path for the existing three-scene commissioning loader.  The
-## original `CampaignContent` class remains in scripts/campaign/content_loader.gd;
-## these helpers let a caller migrate by path without changing that slice.
-static func load_slice(path: String = SLICE_PATH) -> Dictionary:
-	return _read_json(path)
-
-static func validate(content: Dictionary) -> Dictionary:
-	var errors: Array[String] = []
-	if String(content.get("source_sha256", "")) != EXPECTED_SLICE_SHA256:
-		errors.append("source_sha256 does not match the commissioning slice")
-	var scenes: Array = content.get("scenes", [])
-	var expected := ["EX-CH01-S01", "EX-CH01-S02", "EX-CH01-S03"]
-	if scenes.size() != expected.size():
-		errors.append("commissioning slice must contain exactly three scenes")
-	for index in range(mini(scenes.size(), expected.size())):
-		if String(scenes[index].get("id", "")) != expected[index]:
-			errors.append("slice scene order contains " + String(scenes[index].get("id", "")))
-	return {"valid": errors.is_empty(), "errors": errors}
-
-static func scene_at(content: Dictionary, index: int) -> Dictionary:
-	var scenes: Array = content.get("scenes", [])
-	if index < 0 or index >= scenes.size() or not scenes[index] is Dictionary:
-		return {}
-	return scenes[index].duplicate(true)
 
 static func clear_cache() -> void:
 	_full_cache.clear()
