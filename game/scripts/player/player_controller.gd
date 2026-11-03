@@ -7,6 +7,7 @@ const OrientationScript: Script = preload("res://scripts/player/foot_orientation
 
 @export_file("*.glb") var character_glb: String = ""
 @export var tuning: LocomotionTuning
+@export var controlled := true
 @export var gravity: float = 9.8
 @export var look_at_enabled: bool = true
 @export var foot_ik_enabled: bool = true
@@ -29,6 +30,8 @@ var _previous_input := Vector2.ZERO
 var _pivoting: bool = false
 var _stick_running: bool = false
 var _movement_device: int = -1
+var placement_frames := 0
+var attention_target: Node3D
 var _gaze_target: Node3D
 var _gaze_modifiers: Array[SkeletonModifier3D] = []
 
@@ -148,6 +151,8 @@ func _setup_modifiers() -> void:
 			_gaze_modifiers.append(look)
 
 func _input(event: InputEvent) -> void:
+	if not controlled:
+		return
 	if event is InputEventJoypadMotion and event.axis in [JOY_AXIS_LEFT_X, JOY_AXIS_LEFT_Y]:
 		_movement_device = event.device
 
@@ -157,6 +162,17 @@ func set_hold(mode: PlayerAnimation.Hold) -> void:
 
 func _physics_process(delta: float) -> void:
 	if animation == null:
+		return
+	if placement_frames > 0:
+		placement_frames -= 1
+		return
+	if not controlled:
+		velocity = Vector3.ZERO
+		animation.advance(delta, 0.0)
+		pose_modifier.feet_enabled = foot_ik_enabled
+		pose_modifier.lean_enabled = false
+		_update_gaze(delta)
+		animation.skeleton.advance(delta)
 		return
 	var input := Input.get_vector("move_left", "move_right", "move_forward", "move_back", 0.15)
 	var stick := Vector2.ZERO
@@ -279,7 +295,9 @@ func interact() -> bool:
 func _update_gaze(delta: float) -> void:
 	var nearest := nearest_interactable()
 	var aim := global_position + Vector3.UP * 1.5 - Basis(Vector3.UP, follow_camera.yaw).z * 5.0
-	if nearest != null:
+	if is_instance_valid(attention_target):
+		aim = attention_target.global_position + Vector3.UP * 1.45
+	elif nearest != null:
 		aim = nearest.global_position + Vector3.UP * 0.8
 	_gaze_target.global_position = _gaze_target.global_position.lerp(aim, 1.0 - exp(-delta / 0.18))
 	# a target behind the shoulder would wrench the head round (or flip it between the limits): let go of it instead
@@ -291,3 +309,30 @@ func _update_gaze(delta: float) -> void:
 		var desired := 1.0 if look_at_enabled else 0.0
 		desired *= (1.0 - animation.action_weight) * ahead
 		modifier.influence = move_toward(modifier.influence, desired, delta / 0.2)
+
+## Both crew and player use the same loader, skeleton modifiers and animation tree.
+func set_controlled(value: bool) -> void:
+	controlled = value
+	velocity = Vector3.ZERO
+	_speed = 0.0
+	desired_speed = 0.0
+	horizontal_speed = 0.0
+	if follow_camera != null:
+		follow_camera.camera.current = value
+		follow_camera.set_process_unhandled_input(false)
+	collision_mask = 3 if value else 1
+
+func face_towards(point: Vector3) -> void:
+	var direction := point - global_position
+	if Vector2(direction.x, direction.z).length() > 0.01:
+		_yaw = atan2(direction.x, direction.z)
+		visual.global_rotation.y = _yaw
+
+func reset_placement() -> void:
+	# Allow broadphase transforms to settle before capsule recovery or floor snap.
+	placement_frames = 2
+	velocity = Vector3.ZERO
+	visual.position = Vector3.ZERO
+	pose_modifier.reset_placement()
+	follow_camera.reset_placement()
+	force_update_transform()

@@ -946,7 +946,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "The crew is in the room: companions with idle, talk and look-at",
-   "status": "in_progress",
+   "status": "done",
    "owner": "atik/codex",
    "deps": [
     "M1-01"
@@ -961,7 +961,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/SYS_08_WORLD_ROSTER_TIME.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "run_tests.sh: 25/25 suites passed; campaign_crew 927 checks; 11 room screenshots production/qa/evidence/M1-17_LOC-*.png; production/review/execution/M1-17.md",
    "updated": "2026-11-04",
    "prompt": "Problem: only the player character exists in the campaign; companion anchors are bare Marker3D nodes.\nGoal: the three non-viewpoint cadets stand/sit/work at their anchors per scene, play idle/talk/care clips from their 44-clip sets, turn\ntheir gaze to whoever speaks (FaceAtlas, HairSprings, toon materials as on the player), and block movement physically; Ferreira and Rao\nappear on the Earth screen (portraits in game/assets/ui/) until Ferreira arrives in CH05.\nDo: per execution/SYS_21_COMPANION_BEHAVIOUR.md and SYS_08; reuse the player's character setup code instead of copying it.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },

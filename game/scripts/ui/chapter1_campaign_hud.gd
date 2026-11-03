@@ -316,6 +316,7 @@ func _render_caption() -> void:
 	if runtime == null:
 		return
 	var lines := runtime.current_dialogue()
+	runtime.present_dialogue(lines[_dialogue_index] if _dialogue_index < lines.size() else {})
 	if lines.is_empty():
 		_caption_speaker.text = "AURORA / TRAINING SCENARIO"
 		_caption_line.text = "Complete the physical operation; dialogue acknowledgement never completes a gate."

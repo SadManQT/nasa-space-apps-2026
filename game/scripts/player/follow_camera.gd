@@ -1,6 +1,7 @@
 extends Node3D
 class_name FollowCamera
 
+@export var active := true
 @export var distance: float = 3.3
 @export var shoulder_offset: float = 0.42
 @export var target_height: float = 1.4
@@ -44,9 +45,9 @@ func _ready() -> void:
 	camera.name = "Camera3D"
 	camera.fov = 65.0
 	camera.near = 0.05
-	camera.current = true
+	camera.current = active
 	spring.add_child(camera)
-	if capture_mouse and DisplayServer.get_name() != "headless":
+	if active and capture_mouse and DisplayServer.get_name() != "headless":
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -101,3 +102,8 @@ func _safe_point(from: Vector3, to: Vector3) -> Vector3:
 	var length := from.distance_to(to)
 	var fraction := maxf(0.0, fractions[0] - spring.margin / maxf(length, 0.001)) if fractions[0] < 1.0 else 1.0
 	return from.lerp(to, fraction)
+
+func reset_placement() -> void:
+	_initialized = false
+	_quiet_time = 0.0
+	_arm_length = distance

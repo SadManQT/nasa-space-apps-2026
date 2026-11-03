@@ -25,6 +25,7 @@ var action_weight: float = 0.0
 var action_time: float = 0.0
 var action_duration: float = 0.0
 var movement_locked: bool = false
+var _rest_node: AnimationNodeAnimation
 var _graph: AnimationNodeBlendTree
 var _action_node: AnimationNodeAnimation
 var _idle_node: AnimationNodeAnimation
@@ -100,7 +101,8 @@ func _build_tree() -> void:
 	_graph.add_node("Cadence", AnimationNodeTimeScale.new())
 	_graph.connect_node("Cadence", 0, "Locomotion")
 	# Keep breathing at authored speed at rest, independent of the gait clock.
-	_graph.add_node("Rest", _node("Idle_loop"))
+	_rest_node = _node("Idle_loop")
+	_graph.add_node("Rest", _rest_node)
 	_graph.add_node("RestBlend", AnimationNodeBlend2.new())
 	_graph.connect_node("RestBlend", 0, "Cadence")
 	_graph.connect_node("RestBlend", 1, "Rest")
@@ -262,3 +264,20 @@ func _update_idle(delta: float, speed: float) -> void:
 	if has_clip(chosen):
 		_idle_node.animation = "motion/" + chosen
 		tree.set("parameters/IdleVariation/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+func set_rest_clip(clip: String) -> bool:
+	if not has_clip(clip):
+		return false
+	_rest_node.animation = "motion/" + clip
+	idle_variations = clip == "Idle_loop"
+	return true
+
+func reset_presentation() -> void:
+	set_talking(false)
+	set_rest_clip("Idle_loop")
+	tree.set("parameters/Action/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	tree.set("parameters/IdleVariation/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	action_name = ""
+	action_weight = 0.0
+	_pending_action = ""
+	movement_locked = false

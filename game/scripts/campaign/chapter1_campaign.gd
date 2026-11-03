@@ -23,6 +23,7 @@ var route: RefCounted
 var save_service: SaveService
 var hud: Chapter1CampaignHUD
 var _room: CampaignRoom
+var _crew: CampaignCrew
 var _player: PlayerController
 var _startup_error := ""
 var _world_prompt: Label
@@ -159,6 +160,8 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 		else:
 			result = route.perform(target_id, payload, {"room_id": _room.room_id, "distance_m": distance, "line_of_sight": clear})
 	_sync_world_boundaries()
+	if _crew != null:
+		_crew.react(result, bool(director.snapshot().get("accessibility", {}).get("reduced_motion", false)))
 	if hud != null:
 		hud.refresh_after_action(result)
 	_save_campaign()
@@ -248,8 +251,8 @@ func set_ui_paused(value: bool) -> void:
 	_ui_paused = value
 	if route != null:
 		route.pause("reading_panel") if value else route.resume()
-	if _player != null:
-		_player.process_mode = Node.PROCESS_MODE_DISABLED if value else Node.PROCESS_MODE_INHERIT
+	if _crew != null:
+		_crew.set_paused(value)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func retry_checkpoint() -> Dictionary:
@@ -441,9 +444,6 @@ func _refresh_world() -> void:
 		remove_child(_room)
 		_room.queue_free()
 		_room = null
-	if _player != null and is_instance_valid(_player):
-		_player.queue_free()
-		_player = null
 	var room_path: String = {
 		"LOC-01": "res://scenes/campaign/rooms/commons.tscn",
 		"LOC-02": "res://scenes/campaign/rooms/service_rooms.tscn",
@@ -468,15 +468,12 @@ func _refresh_world() -> void:
 				break
 	if player_anchor.is_empty():
 		player_anchor = [0.0, 0.0, 2.0]
-	_player = PLAYER_SCENE.instantiate() as PlayerController
-	_player.gravity = 1.62
-	var actor: String = CompanionRosterScript.playable_actor(route.current_scene_id()).capitalize()
-	_player.character_glb = "res://assets/characters/CH_%s/CH_%s.glb" % [actor, actor]
-	_player.position = Vector3(float(player_anchor[0]), float(player_anchor[1]), float(player_anchor[2]))
-	(_player.get_node("FollowCamera") as FollowCamera).capture_mouse = false
-	_room.add_child(_player)
-	_player.follow_camera.set_process_unhandled_input(false)
-	_player.process_mode = Node.PROCESS_MODE_DISABLED if _ui_paused else Node.PROCESS_MODE_INHERIT
+	if _crew == null:
+		_crew = CampaignCrew.new()
+		_crew.name = "Crew"
+		add_child(_crew)
+	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]))
+	_crew.set_paused(_ui_paused)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_sync_world_boundaries()
 
@@ -506,3 +503,7 @@ func _build_hud() -> void:
 	_world_prompt.add_theme_color_override("font_color", Color("#F2C230"))
 	_world_prompt.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(_world_prompt)
+
+func present_dialogue(line: Dictionary) -> void:
+	if _crew != null:
+		_crew.present_line(line, bool(director.snapshot().get("accessibility", {}).get("reduced_motion", false)))

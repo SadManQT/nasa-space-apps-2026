@@ -213,3 +213,14 @@ func _adjust_pelvis(delta: float) -> void:
 	var position := rig.get_bone_pose_position(_hips)
 	position.y -= _pelvis_offset
 	rig.set_bone_pose_position(_hips, position)
+
+func reset_placement() -> void:
+	_rotations.clear()
+	_positions.clear()
+	locked = [false, false]
+	weights = [0.0, 0.0]
+	_released = [false, false]
+	_ground = [INF, INF]
+	_pelvis_offset = 0.0
+	_lean = Vector2.ZERO
+	_last_velocity = Vector3.ZERO
