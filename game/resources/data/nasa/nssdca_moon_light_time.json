@@ -1,0 +1,62 @@
+{
+ "source_id": "nssdca_moon_light_time",
+ "retrieved": "2026-11-04",
+ "title": "Earth-Moon distance and radio light-time delay (NASA GSFC NSSDCA Moon Fact Sheet)",
+ "agency": "NASA Goddard Space Flight Center, Space Science Data Coordinated Archive (NSSDCA)",
+ "dataset_id": "NSSDCA Moon Fact Sheet (moonfact.html)",
+ "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Williams, D.R. (2024) Moon Fact Sheet, NASA Goddard Space Flight Center, Space Science Data Coordinated Archive (NSSDCA).",
+ "fields_used": [
+  "apogee_km",
+  "perigee_km",
+  "semimajor_axis_km",
+  "speed_of_light_km_s"
+ ],
+ "values": {
+  "semimajor_axis_km": 384400,
+  "perigee_km": 363300,
+  "apogee_km": 405500,
+  "speed_of_light_km_s": 299792.458
+ },
+ "derived": [
+  {
+   "name": "one_way_light_time_mean_s",
+   "value": 1.282,
+   "unit": "s",
+   "formula": "384400 km / 299792.458 km/s",
+   "drives": "Earth CAPCOM (Rao) and Noor live call one-way light-time delay"
+  },
+  {
+   "name": "one_way_light_time_range_s",
+   "value": [
+    1.212,
+    1.353
+   ],
+   "unit": "s",
+   "formula": "[363300, 405500] / 299792.458",
+   "drives": "Perigee-to-apogee one-way light-time bounds"
+  },
+  {
+   "name": "two_way_round_trip_mean_s",
+   "value": 2.564,
+   "unit": "s",
+   "formula": "2 x 384400 km / 299792.458 km/s",
+   "drives": "Two-way voice turnaround (~2.6 s) between Aurora/Malapert and Earth (P-02, P-11, P-16)"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Geometric vacuum light-time; P-16's 3-second dish lock and ALO42 checksum are gameplay abstractions [G]/[F] built on top of the ~2.56 s round-trip delay.",
+ "verification": [
+  {
+   "checked_url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+   "quotes_found": [
+    "Semimajor axis (10^6 km) 0.3844",
+    "Perigee (10^6 km)* 0.3633",
+    "Apogee (10^6 km)* 0.4055"
+   ]
+  }
+ ],
+ "transcribed_from": "Orbital parameters table on https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html; fetched 2026-11-04.",
+ "src_card": "SRC-RELAY"
+}

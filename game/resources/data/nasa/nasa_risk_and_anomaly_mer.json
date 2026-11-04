@@ -1,0 +1,96 @@
+{
+ "source_id": "nasa_risk_and_anomaly_mer",
+ "retrieved": "2026-11-04",
+ "title": "NASA 5x5 Risk Matrix, ISS Mission Evaluation Room (MER) Anomaly Resolution, and Lessons Learned",
+ "agency": "NASA Headquarters & NASA Lyndon B. Johnson Space Center",
+ "dataset_id": "NASA/SP-2011-3422 (NTRS 20120000033); NASA/SP-20240014019; JSC-CN-6337 (NTRS 20100036651); NASA-TN-D-7968 (NTRS 19750017909); NASA/SP-2011-6127-VOL-2 (NTRS 20110015803)",
+ "url": "https://ntrs.nasa.gov/citations/20120000033",
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Dezfuli, H. et al. (2011) NASA Risk Management Handbook, NASA/SP-2011-3422 (NTRS 20120000033); Evans, W.A. (2000) Anomaly Resolution in the International Space Station, JSC-CN-6337 (NTRS 20100036651); Lobb, J.D. (1975) Apollo Experience Report: Flight Anomaly Resolution, NASA-TN-D-7968 (NTRS 19750017909); Rhatigan, J. et al. (2011) Constellation Program Lessons Learned Vol 2, NASA/SP-2011-6127-VOL-2 (NTRS 20110015803).",
+ "fields_used": [
+  "anomaly_resolution_mer_steps",
+  "consequence_scale_1_to_5",
+  "lessons_learned_debrief_steps",
+  "likelihood_scale_1_to_5",
+  "risk_matrix_5x5_bands",
+  "risk_statement_template"
+ ],
+ "values": {
+  "risk_statement_template": "Given that [CONDITION], there is a possibility of [DEPARTURE], leading to [CONSEQUENCE].",
+  "likelihood_scale_1_to_5": {
+   "1": "Very Unlikely",
+   "2": "Unlikely",
+   "3": "Possible",
+   "4": "Likely",
+   "5": "Very Likely"
+  },
+  "consequence_scale_1_to_5": {
+   "1": "Negligible (minimal impact on margins)",
+   "2": "Minor (small consumable/comfort loss, easily recovered)",
+   "3": "Moderate (significant reserve loss or single-system degradation)",
+   "4": "Major (mission objective or crop survival threatened; near Flight Rule limit)",
+   "5": "Catastrophic (crew safety breach, cabin depressurization, or mission loss)"
+  },
+  "risk_matrix_5x5_bands": {
+   "LOW_GREEN": "Score LxC in {1x1, 1x2, 1x3, 2x1, 2x2, 3x1} -> monitor with standard procedures",
+   "MODERATE_YELLOW": "Score LxC in {1x4, 2x3, 2x4, 3x2, 3x3, 4x1, 4x2, 5x1, 5x2} -> active mitigation and role advisory required",
+   "HIGH_RED": "Score LxC in {1x5, 2x5, 3x4, 3x5, 4x3, 4x4, 4x5, 5x3, 5x4, 5x5} -> Flight Rule block or mandatory pre-commit mitigation"
+  },
+  "anomaly_resolution_mer_steps": [
+   "1. Safe the crew and affected system (immediate Flight Rule protection)",
+   "2. Cross-check with an independent instrument to rule out sensor artifact",
+   "3. Isolate branches systematically along a fault tree (never shut down the main bus/trunk)",
+   "4. Repair or replace on the de-energized / depressurized safe side",
+   "5. Reconnect and verify stable telemetry before returning to nominal operations"
+  ],
+  "lessons_learned_debrief_steps": [
+   "1. Factual outcome summary (no blame)",
+   "2. Most influential single-shift decision (counterfactual sensitivity check)",
+   "3. Root cause and trade-off explanation with NASA evidence chip",
+   "4. One-change replay from checkpoint",
+   "5. Team communication review and persistent engineering upgrade"
+  ]
+ },
+ "derived": [
+  {
+   "name": "game_anomaly_puzzles",
+   "value": [
+    "P-04 Recorder metadata reconstruction (3 independent fields)",
+    "P-05 Pressure drop after moonquake (independent mechanical gauge + 6-branch fault tree + aftershock annex isolation)",
+    "P-09 2034 evacuation sequence reconstruction (4 primary records)",
+    "P-10 Two-camera transient impact flash verification (rejecting 2 fixed hot-pixel artifacts) + spur patch",
+    "P-12 Eclipse feeder F2 trip fault isolation, zero-current check and branch restoration",
+    "P-14 Post-storm uplink fault tree (local PASS, dish FAIL, feedthrough FAIL -> F-EXT)"
+   ],
+   "unit": "MER anomaly workflows",
+   "formula": "Independent check -> Branch fault tree -> Safe-side repair -> Verification",
+   "drives": "P-04, P-05, P-09, P-10, P-12, P-14, P-15, P-16 and Chapter 1-8 Debriefs"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Adapts NASA 5x5 risk scoring, ISS Mission Evaluation Room (MER) fault-tree isolation, and LLIS blame-free lessons learned for young learners.",
+ "verification": [
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20120000033",
+   "quotes_found": [
+    "NASA Risk Management Handbook",
+    "NASA/SP-2011-3422-Version-1.0"
+   ]
+  },
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20100036651",
+   "quotes_found": [
+    "Anomaly Resolution in the International Space Station",
+    "manual fault isolation"
+   ]
+  },
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20110015803",
+   "quotes_found": [
+    "Constellation Program Lessons Learned"
+   ]
+  }
+ ],
+ "transcribed_from": "NASA/SP-2011-3422 PDF pp. 14, 104-107, 163-165; NASA/SP-2016-6105 Rev 2 Section 6.4 (PDF pp. 172-180); JSC-CN-6337 abstract; NASA/SP-2011-6127-VOL-2 abstract; checked 2026-11-04.",
+ "src_card": "SRC-MISSION-PRACTICE"
+}

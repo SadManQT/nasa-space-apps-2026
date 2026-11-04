@@ -1,0 +1,70 @@
+{
+ "source_id": "nasa_se_handbook_trade_studies",
+ "retrieved": "2026-11-04",
+ "title": "Decision analysis and engineering trade studies (NASA Systems Engineering Handbook Rev 2)",
+ "agency": "NASA Headquarters, Office of the Chief Engineer",
+ "dataset_id": "NASA/SP-2016-6105 Rev 2; HQ-E-DAA-TN38707; NTRS 20170001761",
+ "url": "https://ntrs.nasa.gov/citations/20170001761",
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Hirshorn, S.R., Voss, L.D. & Bromley, L.K. (2017) NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, Section 2.5 (p. 14), Section 4.3 (pp. 82-83), Section 6.8 Decision Analysis (pp. 193-201) and Appendix B Glossary (p. 235).",
+ "fields_used": [
+  "cost_effectiveness_dimensions",
+  "decision_analysis_report_sections",
+  "decision_analysis_steps",
+  "trade_study_definition"
+ ],
+ "values": {
+  "cost_effectiveness_dimensions": [
+   "technical_performance",
+   "cost_and_resources",
+   "schedule_and_time",
+   "risk"
+  ],
+  "decision_analysis_steps": [
+   "Understand the decision to be made and its mission context",
+   "Define decision criteria and mandatory constraints (Flight Rules)",
+   "Identify alternative solutions covering the decision space",
+   "Evaluate alternatives against criteria (power, consumables, risk, crew time, schedule)",
+   "Record risks, benefits, dissent and decision rationale",
+   "Select and commit the recommended alternative"
+  ],
+  "decision_analysis_report_sections": [
+   "Decision to be made",
+   "Decision criteria and weights",
+   "Alternatives evaluated",
+   "Evaluation results (decision matrix)",
+   "Risks and benefits of each option",
+   "Recommendation, final decision and rationale",
+   "Dissent and how dissent was addressed"
+  ],
+  "trade_study_definition": "Devising alternative means to meet functional requirements, evaluating these alternatives in terms of measures of effectiveness and system cost, and ranking the alternatives according to clear criteria."
+ },
+ "derived": [
+  {
+   "name": "trade_card_columns",
+   "value": [
+    "Power (E sun-drops)",
+    "Consumables (Air A, Water W, Rations R, Crop C, Plant H)",
+    "Risk (Exposure Z, Slope deg, Pressure kPa/%)",
+    "Crew Time & Schedule (shifts / hours)",
+    "Decision Rationale & Dissent"
+   ],
+   "unit": "card schema",
+   "formula": "Section 6.8 Decision Matrix mapped to Aurora habitat levers",
+   "drives": "P-02, P-03, P-05, P-06, P-07, P-10, P-11, P-13, P-14, P-15, P-16 trade-study cards"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "NASA engineering methodology simplified for 10-12-year-old learners into a side-by-side Preview A/B Trade Card with a one-sentence Decision Rationale.",
+ "verification": [
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20170001761",
+   "quotes_found": [
+    "NASA Systems Engineering Handbook",
+    "NASA/SP-2016-6105 Rev 2"
+   ]
+  }
+ ],
+ "transcribed_from": "Section 2.5 (PDF p. 26), Section 4.3 (PDF pp. 94-95), Section 6.8 Decision Analysis (printed pp. 193-201, PDF pp. 206-214) and Appendix B Glossary (printed p. 235, PDF p. 247); read with pdftotext on 2026-11-04 from https://ntrs.nasa.gov/api/citations/20170001761/downloads/20170001761.pdf",
+ "src_card": "SRC-MISSION-PRACTICE"
+}

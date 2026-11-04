@@ -1,0 +1,71 @@
+{
+ "source_id": "nasa_std_3001_radiation",
+ "retrieved": "2026-11-04",
+ "title": "Crew radiation permissible exposure limits and ALARA (NASA-STD-3001 Vol 1 Rev B)",
+ "agency": "NASA Office of the Chief Health and Medical Officer (OCHMO)",
+ "dataset_id": "NASA-STD-3001 Volume 1 Revision B (2022-01-05); OCHMO-TB-020 Rev E",
+ "url": "https://www.nasa.gov/wp-content/uploads/2020/10/2022-01-05_nasa-std-3001_vol.1_rev._b_final_draft_with_signature_010522.pdf",
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "NASA (2022) NASA Space Flight Human-System Standard, Volume 1: Crew Health, NASA-STD-3001 Vol 1 Rev B, Section 4.8 (pp. 29-33); NASA OCHMO Technical Brief OCHMO-TB-020 Rev E, Design for Ionizing Radiation Protection.",
+ "fields_used": [
+  "alara_standard_id",
+  "bfo_30day_limit_mGy_eq",
+  "bfo_1year_limit_mGy_eq",
+  "career_effective_dose_limit_mSv",
+  "nuclear_tech_annual_limit_mSv",
+  "spe_design_reference_effective_dose_limit_mSv"
+ ],
+ "values": {
+  "alara_standard_id": "[V1 4029] All crew radiation exposures shall be minimized using the ALARA (As Low As Reasonably Achievable) principle.",
+  "career_effective_dose_limit_mSv": 600,
+  "spe_design_reference_effective_dose_limit_mSv": 250,
+  "bfo_30day_limit_mGy_eq": 250,
+  "bfo_1year_limit_mGy_eq": 500,
+  "circulatory_30day_limit_mGy_eq": 250,
+  "cns_30day_limit_mGy_eq": 500,
+  "lens_30day_limit_mGy_eq": 1000,
+  "skin_30day_limit_mGy_eq": 1500,
+  "nuclear_tech_annual_limit_mSv": 20
+ },
+ "derived": [
+  {
+   "name": "game_exposure_limit_mapping",
+   "value": {
+    "P-02_max_Z": 3,
+    "P-14_max_Z": 6,
+    "real_short_term_spe_limit_mSv": 250,
+    "real_bfo_30day_limit_mGy_eq": 250
+   },
+   "unit": "teaching units Z vs mSv / mGy-Eq",
+   "formula": "Game Z <= 3 (CH1) and Z <= 6 (CH7) represent staying below NASA-STD-3001 [V1 4031] 250 mSv short-term SPE limit; Z is a teaching unit, never mSv.",
+   "drives": "P-02, P-13, P-14 exposure limit Flight Rule and ALARA mastery star"
+  },
+  {
+   "name": "alara_in_gameplay",
+   "value": "Preparing W4-W6 or K2 shelter before the storm peak reduces Z from 3 (limit) to 2 (P-02 Bloom/Golden) or 0 (P-13/P-14), practicing [V1 4029] ALARA within power and garden water constraints.",
+   "unit": "rule",
+   "formula": "S = min(6, W + K); dose per storm shift = 3 (S=0..1), 2 (S=2..3), 1 (S=4..5), 0 (S=6, below storm operational threshold)",
+   "drives": "P-02 shifts 5-6, P-13/P-14 steps 1-6"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "NASA-STD-3001 limits are in mSv and mGy-Eq; game exposure Z is a dimensionless teaching score (SIMULATED) and S=6 ('0 zaps') means 'below the storm operational threshold', not zero physical radiation.",
+ "verification": [
+  {
+   "checked_url": "https://www.nasa.gov/wp-content/uploads/2020/10/2022-01-05_nasa-std-3001_vol.1_rev._b_final_draft_with_signature_010522.pdf",
+   "quotes_found": [
+    "All crew radiation exposures shall be minimized using the ALARA principle",
+    "less than a NASA effective dose of 250 mSv"
+   ]
+  },
+  {
+   "checked_url": "https://www.nasa.gov/wp-content/uploads/2023/03/radiation-protection-technical-brief-ochmo.pdf",
+   "quotes_found": [
+    "not to exceed 600 millisieverts (mSv)",
+    "limited to an effective dose of 250 mSv per event"
+   ]
+  }
+ ],
+ "transcribed_from": "NASA-STD-3001 Vol 1 Rev B Section 4.8.1 [V1 4029] (p. 29), Section 4.8.2 [V1 4030] & Table 3 (pp. 29-30), Section 4.8.3 [V1 4031] (pp. 31-32), Section 4.8.4 [V1 4032] (p. 33), and OCHMO-TB-020 Rev E (pp. 1-2); read with pdftotext on 2026-11-04.",
+ "src_card": "SRC-SHIELDING"
+}

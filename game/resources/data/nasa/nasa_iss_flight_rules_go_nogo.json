@@ -1,0 +1,71 @@
+{
+ "source_id": "nasa_iss_flight_rules_go_nogo",
+ "retrieved": "2026-11-04",
+ "title": "Mission Control Flight Rules and Flight Controller Go/No-Go Operations",
+ "agency": "NASA Lyndon B. Johnson Space Center",
+ "dataset_id": "JSC-CN-19880 (NTRS 20100008453); JSC-CN-22496 (NTRS 20100042411); NASA/TP-20240016139 (NTRS 20240016139); NTRS 20070016005",
+ "url": "https://ntrs.nasa.gov/citations/20100008453",
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Kim, E., Knudsen, F. & Rice, S. (2010) Flight Rules Critical Readiness Review, JSC-CN-19880 (NTRS 20100008453); Daugherty, C.C. (2010) ISS Mechanisms and Maintenance Flight Control Documentation and Training Development, JSC-CN-22496 (NTRS 20100042411); Conkin, J. et al. (2024) Updates to NASA's Break-in-Prebreathe Flight Rules, NASA/TP-20240016139.",
+ "fields_used": [
+  "aurora_role_to_mcc_console_map",
+  "flight_rule_purpose",
+  "flight_rule_priority_hierarchy",
+  "go_nogo_poll_states"
+ ],
+ "values": {
+  "flight_rule_purpose": "Pre-agreed operational constraints and contingency actions vetted before flight to protect crew, station and hardware without real-time guesswork.",
+  "flight_rule_priority_hierarchy": [
+   "1. Crew safety and health",
+   "2. Vehicle/station integrity and life-support reserves",
+   "3. Mission and science payload objectives"
+  ],
+  "aurora_role_to_mcc_console_map": {
+   "Kai (Power & Heat)": "SPARTAN / EECOM (Station Power, Articulation, Thermal, and Analysis)",
+   "Amara (Atmosphere & Verification)": "ECLSS / ETHOS (Environmental and Thermal Operating Systems)",
+   "Mei (Horticulture & Science)": "PAYCOM / POD (Payload Operations Director)",
+   "Rafi (Safety, Radiation & EVA/Rover)": "SR&QA / Space Weather / EVA Officer",
+   "Commander Ferreira": "Flight Director / Mission Commander",
+   "Rao (Earth Desk)": "CAPCOM (Capsule Communicator)"
+  },
+  "go_nogo_poll_states": [
+   "GO: domain meets all Flight Rules and reserves",
+   "GO WITH ADVISORY: Flight Rules met, but a soft science/comfort margin is reduced",
+   "NO-GO: a Flight Rule or mandatory safety check is violated (blocks Commit or triggers pre-loaded abort)"
+  ]
+ },
+ "derived": [
+  {
+   "name": "game_flight_rules",
+   "value": {
+    "FR-01": "Crew First, Science Second (A > 0 and crew sheltered override plant health H)",
+    "FR-02": "Minimum Air & Protected Trunk (A > 0; MAIN trunk isolation interlocked; breathing N/4 per shift)",
+    "FR-03": "Storm Shelter & EVA Hatch Interlock (Safe Room mandatory on alarm; Z <= 3 in CH1, Z <= 6 in CH7; two post-storm readings < 1.0 before EVA)",
+    "FR-04": "Protected Power Bus & Eclipse Reserve (E >= 0 avoids blackout; 7 of 14 E reserved in P-11; main bus interlocked in P-12)",
+    "FR-05": "Rover Slope & Return Reserve (slope <= 15 deg; reserve >= 30/100 in P-07, >= 2/14 and 51 h <= 72 h in P-15; brake before repair)",
+    "FR-06": "Calibration & Containment Before Commit (two-point zero/span in P-01/P-07; sealed interlock in P-03; 3-stage dry warm-up in P-08)"
+   },
+   "unit": "flight rules",
+   "formula": "Pre-agreed constraints enforced by console interlocks and shift checkpoints",
+   "drives": "P-01 to P-16 Flight Rule banners, hard interlocks and Class Mode (M1-37) Go/No-Go polls"
+  }
+ ],
+ "evidence_label": "Published value",
+ "boundary": "Adapts NASA JSC Mission Control Flight Rules and console polling for a four-cadet cooperative trainer.",
+ "verification": [
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20100008453",
+   "quotes_found": [
+    "Flight Rules Critical Readiness Review"
+   ]
+  },
+  {
+   "checked_url": "https://ntrs.nasa.gov/api/citations/20100042411",
+   "quotes_found": [
+    "International Space Station Mechanisms and Maintenance Flight Control Documentation and Training Development"
+   ]
+  }
+ ],
+ "transcribed_from": "JSC-CN-19880 PDF pp. 1-4 ('Protects hardware, station and crew') and JSC-CN-22496 PDF pp. 2-6; read with pdftotext on 2026-11-04.",
+ "src_card": "SRC-MISSION-PRACTICE"
+}
