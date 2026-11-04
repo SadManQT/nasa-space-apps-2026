@@ -1,0 +1,1724 @@
+{
+ "schema_version": 1,
+ "board_task": "M1-30",
+ "about": "Plain-language NASA data content for every mission EX-M0101..EX-M0804: what the briefing, the Data Card and the debrief show. English only, written for 10-16-year-olds. Visual numbers are copied from the bundled fixtures in game/resources/data/nasa/ by the paths in visual.from; game numbers come from game-design/08_PUZZLE_DESIGNS.md (see game_numbers). Story canon is not quoted or changed here.",
+ "screens": {
+  "briefing": [
+   "plain",
+   "visual",
+   "for_aurora",
+   "source_lines"
+  ],
+  "data_card": [
+   "plain",
+   "visual",
+   "for_aurora",
+   "limits",
+   "source_lines",
+   "evidence"
+  ],
+  "debrief": [
+   "debrief",
+   "for_aurora",
+   "limits"
+  ]
+ },
+ "fields": {
+  "plain": "(1) What the real data says, in short sentences; hard words are explained in the same text.",
+  "visual": "(2) One simple chart. kind is line, bar or gauge; values are drawn; marks are reference lines; labels (3 or fewer) are the only text on the chart.",
+  "for_aurora": "(3) What it means for Aurora. meter is an Outpost Status group id (game/resources/campaign/outpost_status.json), 'rover' for the separate rover battery, or 'none'. fields lists the meter fields this mission changes; an empty list means the choice protects that area without changing a meter now.",
+  "source_lines": "(4) Agency · title · dataset ID · URL for each source, primary first. Full citations stay in the fixture files.",
+  "limits": "What the data does not show, said plainly.",
+  "evidence": "The primary fixture's evidence label (Observed, Published value or Computed)."
+ },
+ "missions": {
+  "EX-M0101": {
+   "title": "Give the Station a Crew",
+   "puzzle": "P-01",
+   "decision": "Send spare commissioning power to stored air or to the planting-bay lamp, and choose which record is made first.",
+   "source_ids": [
+    "jpl_horizons_pole_season"
+   ],
+   "evidence": "Computed",
+   "plain": "At the Moon's south pole, the Sun never climbs high. In 2046 and 2047 it stays within about 1.6 degrees of the horizon. That is less than the width of your thumb held at arm's length.",
+   "visual": {
+    "kind": "line",
+    "values": [
+     0.8394,
+     0.694,
+     0.5589,
+     0.347,
+     0.0895,
+     -0.0946,
+     -0.2416,
+     -0.439,
+     -0.6828,
+     -0.8545,
+     -0.9695,
+     -1.1007,
+     -1.2723,
+     -1.385,
+     -1.4369,
+     -1.4727,
+     -1.5358,
+     -1.5607,
+     -1.537,
+     -1.4739,
+     -1.4219,
+     -1.3533,
+     -1.2608,
+     -1.1174,
+     -0.9691,
+     -0.8237,
+     -0.6858,
+     -0.4959,
+     -0.2877,
+     -0.0985,
+     0.0497,
+     0.2425,
+     0.4648,
+     0.6565,
+     0.7749,
+     0.9244,
+     1.1124,
+     1.2649,
+     1.3166,
+     1.3822,
+     1.4935,
+     1.5731,
+     1.5339,
+     1.4913,
+     1.5001,
+     1.4902,
+     1.3572,
+     1.2077,
+     1.1144,
+     1.0235,
+     0.8204,
+     0.5944,
+     0.4275,
+     0.2891,
+     0.0636,
+     -0.1852,
+     -0.3774,
+     -0.516,
+     -0.7059,
+     -0.9156,
+     -1.0803,
+     -1.1756,
+     -1.2817,
+     -1.4003,
+     -1.4956,
+     -1.5217,
+     -1.5217,
+     -1.5218,
+     -1.5264,
+     -1.4792,
+     -1.3799,
+     -1.2646,
+     -1.1803,
+     -1.0745,
+     -0.9049,
+     -0.704,
+     -0.5532,
+     -0.4165,
+     -0.2178,
+     0.0235,
+     0.2034,
+     0.3356,
+     0.5186,
+     0.7499,
+     0.9155,
+     1.0058,
+     1.1313,
+     1.306,
+     1.4169,
+     1.4338,
+     1.4694,
+     1.5523,
+     1.5804,
+     1.5067,
+     1.4382,
+     1.4136,
+     1.3507,
+     1.1919,
+     1.0304,
+     0.9087,
+     0.7716,
+     0.558,
+     0.3418,
+     0.1603,
+     -0.0117
+    ],
+    "start": "2046-01-01",
+    "end": "2047-12-31",
+    "unit": "degrees",
+    "labels": [
+     "Sun's height at the pole (degrees), 2046 to 2047",
+     "0 is the horizon",
+     "Highest: 1.59 degrees"
+    ],
+    "note": "Every 7th daily value is drawn; the 1.59 label is the fixture's computed maximum.",
+    "from": [
+     "jpl_horizons_pole_season values.daily[*][1] every 7",
+     "jpl_horizons_pole_season values.daily[0][0]",
+     "jpl_horizons_pole_season values.daily[-1][0]"
+    ]
+   },
+   "for_aurora": {
+    "meter": "power",
+    "fields": [
+     "E"
+    ],
+    "text": "Aurora's solar power comes from low, sideways sunlight. The battery holds at most 20 units, so power that does not fit is lost. Making stored air now turns spare power into something the crew can use later."
+   },
+   "limits": "Computed by NASA JPL for a flat horizon at the exact pole. Hills, crater rims and Aurora's real site change the sunlight it gets.",
+   "source_lines": [
+    "NASA Jet Propulsion Laboratory (Horizons) · The Sun's height at the lunar south pole, 2046-2047 · Horizons target 10 (Sun), site coord@301 0E -90 h0 · https://ssd.jpl.nasa.gov/horizons/"
+   ],
+   "debrief": {
+    "question": "Why put spare power into stored air?",
+    "answer": "A full battery cannot take more. Air made now uses power that would otherwise be lost, and the crew needs that air later."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-02 contract: battery cap 20; air production O costs the same energy it adds."
+  },
+  "EX-M0102": {
+   "title": "Two Plants, One Night Plan",
+   "puzzle": "P-01",
+   "decision": "Plant Alo and Tara, keep a fair care record (photos plus conditions), and choose when borrowed shelter water goes back to the garden.",
+   "source_ids": [
+    "osdr_brassica_rapa_iss"
+   ],
+   "evidence": "Observed",
+   "plain": "Alo's species, Brassica rapa, has grown in space before. On the International Space Station, a leafy kind called mizuna grew for 27 days in the Lada greenhouse. Its lamps gave between 125 and 250 units of the light plants use.",
+   "visual": {
+    "kind": "gauge",
+    "values": [
+     125.0,
+     250.0
+    ],
+    "marks": [
+     200.0,
+     300.0
+    ],
+    "unit": "micromoles of light per square metre per second",
+    "unit_plain": "A count of the light that lands on each square metre of leaf every second.",
+    "labels": [
+     "Plant light",
+     "Space Station mizuna: 125 to 250",
+     "Veggie ground tests: 200 to 300"
+    ],
+    "from": [
+     "osdr_brassica_rapa_iss values.OSD-59.par_umol_m2_s",
+     "osdr_brassica_rapa_iss derived:full_lamp_par_reference"
+    ]
+   },
+   "for_aurora": {
+    "meter": "food",
+    "fields": [
+     "C"
+    ],
+    "text": "Light feeds the garden but costs power. A FULL lamp costs 2 units a shift, DIM costs 1 and OFF costs 0, but OFF makes plants weaker. Writing the lamp setting beside each photo shows why a plant changed."
+   },
+   "limits": "The Space Station plants grew while floating, not in Moon gravity. Aurora's OFF, DIM and FULL settings are game units, not measured light.",
+   "source_lines": [
+    "NASA Open Science Data Repository (GeneLab); OSD-59 with the Russian Federal Space Agency · Brassica rapa (mizuna) grown on the International Space Station · OSDR OSD-59 (GLDS-59, Lada, Expedition 22); OSD-412 (Veggie VEG-03D, SpaceX-12) · https://osdr.nasa.gov/bio/repo/data/studies/OSD-59"
+   ],
+   "debrief": {
+    "question": "Why keep a conditions table beside the photos?",
+    "answer": "Photos show what changed. The table shows why: light, water and warmth. You need both to compare two plants fairly."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-02 contract: light OFF/DIM/FULL costs 0/1/2 and changes plants by -1/0/+1."
+  },
+  "EX-M0103": {
+   "title": "Prepare While It Is Light",
+   "puzzle": "P-02",
+   "decision": "Split daylight energy between stored air and the garden lamp, and rehearse moving water into the shelter wall and back.",
+   "source_ids": [
+    "lro_mazarico_2011_illumination"
+   ],
+   "evidence": "Published value",
+   "plain": "Even the sunniest places near the south pole have nights. NASA's LRO spacecraft mapped the sunlight at one spot on the rim of Shackleton crater. Its longest stretch of total darkness is about 1.5 days.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     1.5
+    ],
+    "unit": "days",
+    "labels": [
+     "Longest total darkness at the LRO study spot",
+     "About 1.5 days, or 36 hours",
+     "Aurora's night: 5 shifts of 7.2 hours = 36 hours"
+    ],
+    "from": [
+     "lro_mazarico_2011_illumination values.longest_darkness_days"
+    ]
+   },
+   "for_aurora": {
+    "meter": "power",
+    "fields": [
+     "E",
+     "A"
+    ],
+    "text": "In daylight shifts 1 and 2 the panels add 8 units each. Then come 36 hours with no solar power at all. Air, warmth and lamp light for the whole night must come from what you store now."
+   },
+   "limits": "This is one measured spot, not Aurora's site. Aurora's 36-hour night is a training scenario sized to match it.",
+   "source_lines": [
+    "NASA Goddard Space Flight Center (LRO LOLA) · Illumination of the lunar poles from LRO LOLA topography · NTRS 20120010094; DOI 10.1016/j.icarus.2010.10.030 · https://ntrs.nasa.gov/citations/20120010094"
+   ],
+   "debrief": {
+    "question": "Why can a plan that feels comfortable at sunset run short before dawn?",
+    "answer": "Every unit used early is gone for the rest of the night. Nothing refills the battery until the Sun returns."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-02: day income +8 in shifts 1-2; shifts 3-7 dark, 7.2 h each."
+  },
+  "EX-M0104": {
+   "title": "Keep the Promise Until Dawn",
+   "puzzle": "P-02",
+   "decision": "When the storm alarm sounds, WAIT if the prepared shelter is enough, or choose one PUMP or STACK action; then send the borrowed water home.",
+   "source_ids": [
+    "goes13_protons_2017_09",
+    "donki_2017_09"
+   ],
+   "evidence": "Observed",
+   "plain": "On 10 September 2017, a huge flare on the Sun threw out a storm of protons. Protons are tiny, fast pieces of atoms. Seventy minutes after the flare began, a weather satellite near Earth measured the proton storm.",
+   "visual": {
+    "kind": "line",
+    "values": [
+     0.17,
+     0.175,
+     0.159,
+     0.188,
+     6.567,
+     57.541,
+     111.549,
+     146.968,
+     223.813,
+     467.179,
+     684.274,
+     908.217,
+     1188.479,
+     1143.0,
+     851.302,
+     640.717,
+     864.085,
+     881.156,
+     880.521,
+     998.368,
+     857.301,
+     951.845,
+     1116.0,
+     1048.064,
+     909.242,
+     754.968,
+     720.323,
+     581.689,
+     627.408,
+     663.726,
+     413.328,
+     354.796,
+     368.831,
+     541.945,
+     520.557,
+     469.991,
+     443.479,
+     459.562,
+     419.919,
+     387.852,
+     376.177,
+     358.739,
+     325.56,
+     340.777,
+     256.612,
+     196.162,
+     200.193,
+     232.935
+    ],
+    "start": "2017-09-10T12:00Z",
+    "end": "2017-09-12T11:00Z",
+    "unit": "pfu",
+    "unit_plain": "pfu: how many protons cross each square centimetre every second, from one patch of sky.",
+    "labels": [
+     "Fast protons near Earth, 10 to 12 September 2017",
+     "Storm level (10 pfu) reached at 16:45 UTC",
+     "Highest 5-minute reading: 1,347 pfu"
+    ],
+    "note": "Hourly means are drawn; the 1,347 label is the 5-minute maximum, so the line peaks lower.",
+    "from": [
+     "goes13_protons_2017_09 values.hourly[*][1]",
+     "goes13_protons_2017_09 values.hourly[0][0]",
+     "goes13_protons_2017_09 values.hourly[-1][0]"
+    ]
+   },
+   "for_aurora": {
+    "meter": "shielding",
+    "fields": [
+     "S",
+     "Z"
+    ],
+    "text": "Aurora replays this storm in dark shifts 5 and 6. Wall water (W) plus supply crates (K) make shelter S, up to 6, and more shelter means less exposure Z. If Z goes above 3 the mission stops, and after the storm the water must go back to the garden."
+   },
+   "limits": "GOES-13 measured this in orbit around Earth, inside Earth's magnetic shield, not at the Moon. The 2046 night and Aurora are fiction, and exposure Z is a game score, not a real radiation dose.",
+   "source_lines": [
+    "NOAA National Centers for Environmental Information (partner agency) · GOES-13 proton flux during the 10 September 2017 storm · GOES-13 EPEAD corrected integral proton flux, 5-min (g13_epead_cpflux_5m_20170901_20170930) · https://www.ncei.noaa.gov/products/goes-1-15/space-weather-instruments",
+    "NASA GSFC Community Coordinated Modeling Center (DONKI) · Solar flares, CMEs and particle events of 4-12 September 2017 · DONKI 2017-09-10T15:35:00-FLR-001; 2017-09-10T16:25:00-SEP-001; 2017-09-10T16:45:00-SEP-001; 2017-09-10T16:09:00-CME-001 · https://ccmc.gsfc.nasa.gov/tools/DONKI/"
+   ],
+   "debrief": {
+    "question": "When is WAIT the right choice?",
+    "answer": "When the wall was filled before the alarm. Shelter must be ready before the protons arrive, and the water goes back to the garden afterwards."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-02: S = min(6, W + K); dose per storm shift 3/2/1/0 for S 0-1/2-3/4-5/6; Z <= 3."
+  },
+  "EX-M0201": {
+   "title": "Understand the Missing Bee",
+   "puzzle": "P-03",
+   "decision": "Choose the compatible partner and a sealed, labelled route for carrying pollen between the two greenhouses.",
+   "source_ids": [
+    "fast_plants_lifecycle"
+   ],
+   "evidence": "Published value",
+   "plain": "Alo and Tara are Fast Plants, a quick-growing kind of Brassica rapa. A Fast Plant cannot make seeds with its own pollen, the yellow dust inside a flower. The pollen has to come from a different, matching plant.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     40.0
+    ],
+    "marks": [
+     14.0,
+     15.0,
+     21.0
+    ],
+    "unit": "days after planting",
+    "labels": [
+     "A Fast Plant's life: about 40 days",
+     "First flowers: about day 14",
+     "Best days to pollinate: 15 to 21"
+    ],
+    "from": [
+     "fast_plants_lifecycle values.seed_harvest_days_after_planting",
+     "fast_plants_lifecycle values.days_to_flower",
+     "fast_plants_lifecycle values.pollinate_days_after_planting"
+    ]
+   },
+   "for_aurora": {
+    "meter": "food",
+    "fields": [
+     "C"
+    ],
+    "text": "There are no bees on the Moon, so the cadets carry pollen by hand. Each two-way pollen run costs 1 power unit and 1 air unit. The carrier stays sealed so the route keeps its air."
+   },
+   "limits": "These timings are for ideal classroom growing on Earth. Growing on the Moon and Alo's exact dates are fiction.",
+   "source_lines": [
+    "Wisconsin Fast Plants Program, University of Wisconsin-Madison (partner) · The Fast Plants (Brassica rapa) life cycle · Fast Plants FAQ · https://fastplants.org/frequently-asked-questions/"
+   ],
+   "debrief": {
+    "question": "Why can't Alo use its own pollen?",
+    "answer": "Fast Plants are self-incompatible: their own pollen does not make seeds. They need a different, compatible plant, like Tara."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-03: E1/A1 per reciprocal run; runs on days 1, 4 and 7."
+  },
+  "EX-M0202": {
+   "title": "Carry the Future Carefully",
+   "puzzle": "P-03",
+   "decision": "Make three two-way pollen runs over seven dated care days, then record an honest stem-colour prediction.",
+   "source_ids": [
+    "mir_brassica_seed_to_seed",
+    "fast_plants_lifecycle"
+   ],
+   "evidence": "Published value",
+   "plain": "Has this worked in space before? Yes. On the Mir space station, a NASA-funded experiment grew Brassica rapa from seed to new seed. The plants were pollinated by hand during a 122-day run.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     122.0
+    ],
+    "marks": [
+     40.0
+    ],
+    "unit": "days",
+    "labels": [
+     "Days",
+     "Mir experiment: 122 days",
+     "One Fast Plant life cycle: about 40 days"
+    ],
+    "from": [
+     "mir_brassica_seed_to_seed values.mission_days",
+     "fast_plants_lifecycle values.seed_harvest_days_after_planting"
+    ]
+   },
+   "for_aurora": {
+    "meter": "food",
+    "fields": [
+     "C"
+    ],
+    "text": "Three careful runs, on 30 April, 3 May and 6 May, give Alo and Tara their best chance of seeds. Each run costs 1 power and 1 air. Moving pollen is only the first step; seeds still need weeks to form."
+   },
+   "limits": "Mir was weightless, while the Moon has gravity. Alo's dates and seed count are fiction.",
+   "source_lines": [
+    "NASA-funded experiment on Mir (Svet greenhouse) · Brassica rapa completed seed-to-seed cycles on Mir · NTRS 20040141614 · https://ntrs.nasa.gov/citations/20040141614",
+    "Wisconsin Fast Plants Program, University of Wisconsin-Madison (partner) · The Fast Plants (Brassica rapa) life cycle · Fast Plants FAQ · https://fastplants.org/frequently-asked-questions/"
+   ],
+   "debrief": {
+    "question": "You predicted the seedlings' stem colours. Is that a promise?",
+    "answer": "No. A prediction is a guess you can test. The next generation's stems will show what really happened."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-03: three reciprocal runs on days 1, 4 and 7 (30 April to 6 May), E1/A1 each."
+  },
+  "EX-M0203": {
+   "title": "Make an Old Record Useful",
+   "puzzle": "P-04",
+   "decision": "Wait for the pods instead of rushing them, collect the label evidence, and match date, device and channel to rebuild the old recording.",
+   "source_ids": [
+    "fast_plants_lifecycle"
+   ],
+   "evidence": "Published value",
+   "plain": "After a flower is pollinated, its seed pods take about 20 days to ripen. Fast Plant seeds are ready about 40 days after planting. No button can make them grow faster.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     20.0
+    ],
+    "unit": "days",
+    "labels": [
+     "Days from pollination to ripe pods",
+     "About 20 days",
+     "Seeds ready about 40 days after planting"
+    ],
+    "from": [
+     "fast_plants_lifecycle values.pod_maturity_days_after_pollination"
+    ]
+   },
+   "for_aurora": {
+    "meter": "food",
+    "fields": [
+     "C"
+    ],
+    "text": "Alo was planted on 11 April 2046, so its seeds will not be ready until about 21 May. Until then the job is steady care. Rushing could ruin the seeds Aurora is waiting for."
+   },
+   "limits": "These are ideal classroom timings on Earth; real plants vary with light, warmth and variety. Alo's dates are story dates.",
+   "source_lines": [
+    "Wisconsin Fast Plants Program, University of Wisconsin-Madison (partner) · The Fast Plants (Brassica rapa) life cycle · Fast Plants FAQ · https://fastplants.org/frequently-asked-questions/"
+   ],
+   "debrief": {
+    "question": "The 2034 chart shows plants that never flowered. Does that make Alo's bloom less of a first?",
+    "answer": "No. That earlier trial stopped before any flowers. It reached a different stage, so Alo's bloom is still the first."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-04 tokens (2034-04, HORT-01, ENGINEERING) are fiction; P-06 harvest on plant day 40."
+  },
+  "EX-M0204": {
+   "title": "Hear, Ask and Reprioritise",
+   "puzzle": "P-04",
+   "decision": "Treat the familiar voice as a guess to check, send the evidence to Ferreira, and drop everything for a roll call when the floor shakes.",
+   "source_ids": [
+    "apollo_shallow_moonquakes"
+   ],
+   "evidence": "Observed",
+   "plain": "The Moon has quakes too. Apollo astronauts left seismometers, instruments that feel the ground shake. From 1971 to 1976 they recorded 28 shallow moonquakes. The strongest measured 3.2 on the catalogue's own scale.",
+   "visual": {
+    "kind": "line",
+    "values": [
+     2.8,
+     2.0,
+     1.9,
+     1.9,
+     1.0,
+     1.4,
+     1.2,
+     0.8,
+     3.2,
+     2.2,
+     1.1,
+     0.7,
+     1.6,
+     0.9,
+     0.6,
+     2.7,
+     3.2,
+     1.7,
+     1.1,
+     1.4,
+     1.3,
+     1.4,
+     1.8,
+     1.8,
+     1.1,
+     2.3,
+     1.8,
+     1.5
+    ],
+    "start": "1971-04-17",
+    "end": "1976-05-16",
+    "unit": "catalogue magnitude",
+    "labels": [
+     "Strength of each shallow moonquake",
+     "28 quakes, 1971 to 1976",
+     "Strongest: 3.2"
+    ],
+    "from": [
+     "apollo_shallow_moonquakes values.quakes[*].magnitude",
+     "apollo_shallow_moonquakes values.quakes[0].date",
+     "apollo_shallow_moonquakes values.quakes[-1].date"
+    ]
+   },
+   "for_aurora": {
+    "meter": "life",
+    "fields": [
+     "A"
+    ],
+    "text": "When the floor shakes, people come first: roll call, then check the air pressure. A quake can loosen a seal, and a leak drains air."
+   },
+   "limits": "Recorded by Apollo stations near the Moon's equator, far from the pole. The catalogue uses its own magnitude scale, so do not compare it directly with earthquake numbers. Aurora's quake is fiction.",
+   "source_lines": [
+    "NASA Planetary Data System, Geosciences Node (Apollo Passive Seismic Experiment) · The 28 shallow moonquakes recorded by Apollo seismometers · urn:nasa:pds:apollo_seismic_event_catalog, nakamura_1979_sm_locations · https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_seismic_event_catalog/data/nakamura_1979_sm_locations.csv"
+   ],
+   "debrief": {
+    "question": "Why stop listening to the recording when the floor shook?",
+    "answer": "A new hazard changes priorities. A recording can wait; checking that everyone is safe and the air is holding cannot."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-05: an unsealed leak costs 1 air per phase."
+  },
+  "EX-M0301": {
+   "title": "Find the Falling Line",
+   "puzzle": "P-05",
+   "decision": "Compare three pressure taps and choose the smallest safe isolation: the garden spur, not the whole habitat trunk.",
+   "source_ids": [
+    "bvad_2022_metabolic"
+   ],
+   "evidence": "Published value",
+   "plain": "Air pushes on everything around it, and that push is called pressure. It is measured in kilopascals, or kPa. The Space Station keeps its air at 101.3 kPa, the same as air at sea level on Earth. A pressure reading that keeps falling means air is escaping.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     101.3
+    ],
+    "unit": "kPa",
+    "labels": [
+     "Cabin air pressure (kPa)",
+     "Space Station: 101.3 kPa, like sea level on Earth"
+    ],
+    "from": [
+     "bvad_2022_metabolic values.cabin_pressure_iss_kPa"
+    ]
+   },
+   "for_aurora": {
+    "meter": "life",
+    "fields": [
+     "A"
+    ],
+    "text": "Aurora's GARDEN tap fell from 82 to 74 test units while MAIN and RETURN stayed at 100. That points to the garden line, so close only that valve. Until the leak is sealed it costs 1 extra air unit each phase."
+   },
+   "limits": "Aurora's gauges show relative test units, not kPa. BVAD values are NASA planning numbers, not measurements from Aurora.",
+   "source_lines": [
+    "NASA Johnson Space Center · Crew oxygen, food and water per day (NASA BVAD Rev 2) · NASA/TP-2015-218570/REV2; NTRS 20210024855 · https://ntrs.nasa.gov/citations/20210024855"
+   ],
+   "debrief": {
+    "question": "Why close only the GARDEN valve?",
+    "answer": "Only the garden reading fell. Closing the whole habitat trunk would shut off more than needed and still not find the leak."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-05: MAIN 100, GARDEN 82 then 74, RETURN 100 (relative test units); leak A1 per phase."
+  },
+  "EX-M0302": {
+   "title": "Repair Before Discovery",
+   "puzzle": "P-05",
+   "decision": "Reopen only when the mechanical hold and five steady readings agree, correct the copied note to match, and inspect the annex by camera first.",
+   "source_ids": [
+    "apollo_shallow_moonquakes"
+   ],
+   "evidence": "Observed",
+   "plain": "Most of the moonquakes Apollo recorded were far from the south pole. One, on 13 March 1973, seems to have started near 84 degrees south. It ties for the strongest in the list, but its exact spot is uncertain.",
+   "visual": {
+    "kind": "line",
+    "values": [
+     48.0,
+     42.0,
+     43.0,
+     54.0,
+     12.0,
+     51.0,
+     -20.0,
+     33.0,
+     -84.0,
+     -1.0,
+     -37.0,
+     36.0,
+     -48.0,
+     -37.0,
+     21.0,
+     29.0,
+     75.0,
+     -2.0,
+     -19.0,
+     -49.0,
+     3.0,
+     -8.0,
+     50.0,
+     38.0,
+     50.0,
+     -19.0,
+     77.0
+    ],
+    "start": "1971-04-17",
+    "end": "1976-05-16",
+    "unit": "degrees latitude",
+    "labels": [
+     "Where each moonquake started (latitude; -90 is the south pole)",
+     "Most were far from the pole",
+     "13 March 1973: about 84 degrees south"
+    ],
+    "note": "27 of 28 quakes have a location; the one without is left out.",
+    "from": [
+     "apollo_shallow_moonquakes values.quakes[*].lat",
+     "apollo_shallow_moonquakes values.quakes[0].date",
+     "apollo_shallow_moonquakes values.quakes[-1].date"
+    ]
+   },
+   "for_aurora": {
+    "meter": "life",
+    "fields": [
+     "A"
+    ],
+    "text": "A repair only counts when it is measured. Aurora reopens the garden line slowly and needs five steady readings of 100 in a row. An aftershock can open another branch, so its automatic isolation must be checked too."
+   },
+   "limits": "The 1973 location is uncertain, and the Apollo stations were far away near the equator. Aurora's aftershock is fiction.",
+   "source_lines": [
+    "NASA Planetary Data System, Geosciences Node (Apollo Passive Seismic Experiment) · The 28 shallow moonquakes recorded by Apollo seismometers · urn:nasa:pds:apollo_seismic_event_catalog, nakamura_1979_sm_locations · https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_seismic_event_catalog/data/nakamura_1979_sm_locations.csv"
+   ],
+   "debrief": {
+    "question": "The clamp animation finished. Is the leak fixed?",
+    "answer": "Not yet. A finished action is not a verified repair. Five steady readings of 100 prove the clamp holds."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-05: five 2-second checks reading 100; phase-2 aftershock opens the annex branch."
+  },
+  "EX-M0303": {
+   "title": "Read What Was Unfinished",
+   "puzzle": "P-06",
+   "decision": "Decide what the 2034 annex really shows, treat the old map as a plan to verify, and open Alo's pods only after the dry-down.",
+   "source_ids": [
+    "fast_plants_lifecycle"
+   ],
+   "evidence": "Published value",
+   "plain": "Fast Plant seeds are ready to harvest about 40 days after planting. The pods ripen first, and then they dry. Only then are the seeds taken out and counted.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     40.0
+    ],
+    "unit": "days after planting",
+    "labels": [
+     "Days from planting to seed harvest",
+     "About 40 days",
+     "Alo: planted 11 April, harvested 21 May"
+    ],
+    "from": [
+     "fast_plants_lifecycle values.seed_harvest_days_after_planting"
+    ]
+   },
+   "for_aurora": {
+    "meter": "food",
+    "fields": [
+     "C"
+    ],
+    "text": "The 2034 annex holds only young seedlings with curled leaves: no buds, no flowers. Alo's pods ripen on 16 May and dry until 21 May before they are opened. Ripe is not the same as ready."
+   },
+   "limits": "Ideal classroom timing on Earth. The annex, its 2034 trial and Alo's dates are fiction; the drying moisture numbers are game values.",
+   "source_lines": [
+    "Wisconsin Fast Plants Program, University of Wisconsin-Madison (partner) · The Fast Plants (Brassica rapa) life cycle · Fast Plants FAQ · https://fastplants.org/frequently-asked-questions/"
+   ],
+   "debrief": {
+    "question": "Why open the pods only after the dry-down?",
+    "answer": "Ripening, drying and harvesting are separate steps. Each step has its own check before the next one starts."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-06: maturity 16 May (plant day 35); dry-down to moisture 20 by 21 May (plant day 40)."
+  },
+  "EX-M0304": {
+   "title": "Let the Garden Continue",
+   "puzzle": "P-06",
+   "decision": "Count 42 seeds, seal 12 for planting and 30 for the reserve, plant only the 12, and plan care and supplies through October.",
+   "source_ids": [
+    "bvad_2022_metabolic"
+   ],
+   "evidence": "Published value",
+   "plain": "NASA plans about 0.8 kg of food for each astronaut each day. That weight does not count the water in the food. It gives about 3,050 food Calories of energy.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     0.8
+    ],
+    "unit": "kg per person per day",
+    "labels": [
+     "Food per astronaut per day, without water",
+     "0.8 kg",
+     "Energy: about 3,050 Calories a day"
+    ],
+    "note": "Calories computed from the fixture: 12.778 MJ / 4.184 kJ per kcal = 3,054 kcal.",
+    "from": [
+     "bvad_2022_metabolic values.food_solids_kg_per_crew_day"
+    ]
+   },
+   "for_aurora": {
+    "meter": "food",
+    "fields": [
+     "R",
+     "C"
+    ],
+    "text": "A small garden is a fresh extra, not the crew's whole menu. Stored rations, counted in crew-days, still feed the cadets between supply deliveries. That is why 30 seeds stay sealed: they protect Alo's line, not today's dinner."
+   },
+   "limits": "BVAD values are NASA planning averages for a reference crew member. Aurora's crop and ration units are game units.",
+   "source_lines": [
+    "NASA Johnson Space Center · Crew oxygen, food and water per day (NASA BVAD Rev 2) · NASA/TP-2015-218570/REV2; NTRS 20210024855 · https://ntrs.nasa.gov/citations/20210024855"
+   ],
+   "debrief": {
+    "question": "Why plant only 12 seeds instead of all 42?",
+    "answer": "Twelve grow the garden now, and 30 stay sealed in case something goes wrong. A ledger counts each seed exactly once."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-06: 42 = 6 x 7, 12 planting + 30 reserve; P-02 food layer (a harvest is a small supplement)."
+  },
+  "EX-M0401": {
+   "title": "Make the Old Map Current",
+   "puzzle": "P-07",
+   "decision": "Read the descendant sample honestly, charge each person to one supply ledger, and pick the route that passes both the slope and the return-reserve rules.",
+   "source_ids": [
+    "viper_slope_limit"
+   ],
+   "evidence": "Published value",
+   "plain": "NASA designed its VIPER Moon rover to climb slopes of up to 15 degrees. Steeper ground is beyond what it was built for. A route must respect that limit, even when it is shorter.",
+   "visual": {
+    "kind": "gauge",
+    "values": [
+     15.0
+    ],
+    "marks": [
+     12,
+     24
+    ],
+    "unit": "degrees",
+    "labels": [
+     "Rover slope limit: 15 degrees",
+     "Route B, ridge: 12 degrees (passes)",
+     "Route A, short: 24 degrees (fails)"
+    ],
+    "from": [
+     "viper_slope_limit values.max_incline_deg",
+     "game-design/08_PUZZLE_DESIGNS.md P-07 route slopes (game values)"
+    ]
+   },
+   "for_aurora": {
+    "meter": "rover",
+    "fields": [
+     "rover battery"
+    ],
+    "text": "Route B is 12 km instead of 8, but it is safe. It costs 30 rover units each way, so 100 - 30 - 30 leaves 40, above the 30-unit return reserve. Route C fails both rules."
+   },
+   "limits": "VIPER's figure is a design value for one rover. Aurora's rover, its routes and their slopes are game numbers.",
+   "source_lines": [
+    "NASA (VIPER rover) · How steep a NASA lunar rover can climb · NASA VIPER rover and instruments page · https://science.nasa.gov/mission/viper/rover-and-instruments"
+   ],
+   "debrief": {
+    "question": "Route A is the shortest. Why not take it?",
+    "answer": "Its 24-degree slope is steeper than the rover's 15-degree limit. A valid route must pass every hard rule, not just be short."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-07: routes A 8 km/24 deg, B 12 km/12 deg, C 10 km/18 deg; rover 100, reserve 30; costs 35/30/40 each way."
+  },
+  "EX-M0402": {
+   "title": "Measure Before Claiming",
+   "puzzle": "P-07",
+   "decision": "Cross a blind corner only after the next beacon link is tested, tag only samples above the calibrated threshold, and keep the vault find in its own record.",
+   "source_ids": [
+    "lcross_water_2009"
+   ],
+   "evidence": "Published value",
+   "plain": "In 2009, NASA's LCROSS mission crashed a used rocket stage into Cabeus, a dark crater near the south pole. Instruments studied the cloud it threw up. The soil there held about 5.6% water ice by mass, give or take 2.9%.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     5.6
+    ],
+    "error": 2.9,
+    "unit": "% of mass",
+    "labels": [
+     "Water ice in Cabeus soil",
+     "5.6%, give or take 2.9%",
+     "Measured at one impact site only"
+    ],
+    "from": [
+     "lcross_water_2009 values.water_ice_mass_percent",
+     "lcross_water_2009 values.uncertainty_percent"
+    ]
+   },
+   "for_aurora": {
+    "meter": "life",
+    "fields": [],
+    "text": "No meter moves today; this decides what Aurora can honestly report about future water. The scanner reads 2 on a dry reference, so only readings above 12 count. Samples 18 and 19 pass, and the 2 stays as the control."
+   },
+   "limits": "One impact site in one crater. Ice is not everywhere, and ice is not drinking water until it is mined and cleaned. Aurora's sample site is fiction.",
+   "source_lines": [
+    "NASA Ames Research Center (LCROSS) · Water found by LCROSS in Cabeus crater · DOI 10.1126/science.1186986 · https://science.nasa.gov/mission/lcross/"
+   ],
+   "debrief": {
+    "question": "Why measure a dry reference before scanning samples?",
+    "answer": "Without a reference you cannot tell a real signal from the instrument's normal reading. The control makes the claim fair."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-07: dry reference 2; samples 2, 18, 19; threshold = reference + 10 = 12."
+  },
+  "EX-M0403": {
+   "title": "Recover Without Ruining",
+   "puzzle": "P-08",
+   "decision": "Keep the vault's biological seal closed in the field, prove the cargo latch with a lock test, and log forecast and actual reserves side by side.",
+   "source_ids": [
+    "diviner_cold_traps"
+   ],
+   "evidence": "Published value",
+   "plain": "NASA's LRO spacecraft carries Diviner, a tool that measures heat. In one dark crater near the south pole, the ground just under the surface is estimated at 38 kelvin. That is minus 235 degrees Celsius. Kelvin counts up from the coldest possible temperature.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     -235.1
+    ],
+    "unit": "degrees Celsius",
+    "labels": [
+     "Cold-trap soil temperature",
+     "38 kelvin = minus 235 degrees C",
+     "Water freezes at 0 degrees C"
+    ],
+    "from": [
+     "diviner_cold_traps derived:cold_trap_celsius"
+    ]
+   },
+   "for_aurora": {
+    "meter": "food",
+    "fields": [],
+    "text": "The vault's outer case is very cold. Opening it outside, or warming it fast, could let water condense on the seeds, like drops on a cold glass. It travels sealed and warms in three steps inside a dry glovebox."
+   },
+   "limits": "Diviner measured natural cold traps. The vault, its site and its seeds' temperature history are fiction, and the seeds were not necessarily at 38 kelvin.",
+   "source_lines": [
+    "NASA LRO Diviner (UCLA) · Diviner temperatures in south-polar cold traps · DOI 10.1126/science.1187726 · https://www.diviner.ucla.edu/science"
+   ],
+   "debrief": {
+    "question": "Why not open the lid as soon as you find the vault?",
+    "answer": "Cold seeds meeting warm, damp air can get wet from condensation. Keeping the case sealed until a controlled warm-up protects both the evidence and the seeds."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-08: probe, sleeve, cradle, mount; three-stage sealed warm-up; condensation check before opening."
+  },
+  "EX-M0404": {
+   "title": "Bring the Question Home",
+   "puzzle": "P-08",
+   "decision": "Inventory the 12 specimens without assuming they are alive, send the inscription to Ferreira as a question, and plan her real journey to Aurora.",
+   "source_ids": [
+    "kaguya_shackleton_floor"
+   ],
+   "evidence": "Published value",
+   "plain": "Japan's Kaguya spacecraft photographed the floor of Shackleton crater. The floor is colder than 90 kelvin, which is about minus 183 degrees Celsius. Yet its camera saw no patches of pure ice.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     -183.1
+    ],
+    "unit": "degrees Celsius",
+    "labels": [
+     "Shackleton crater floor temperature",
+     "Below about minus 183 degrees C",
+     "No pure ice seen at 10-metre detail"
+    ],
+    "from": [
+     "kaguya_shackleton_floor derived:shackleton_floor_celsius_below"
+    ]
+   },
+   "for_aurora": {
+    "meter": "food",
+    "fields": [],
+    "text": "Being cold did not prove there was ice. In the same way, a label does not prove a seed is alive. The 12 specimens stay in quarantine, kept apart, until tests show they can grow."
+   },
+   "limits": "Ice may still be mixed into the soil below what Kaguya could see. The vault and its specimens are fiction.",
+   "source_lines": [
+    "JAXA SELENE (Kaguya) Terrain Camera (partner agency) · Kaguya looks inside Shackleton crater · DOI 10.1126/science.1164020 · https://darts.isas.jaxa.jp/planet/pdap/selene/"
+   ],
+   "debrief": {
+    "question": "The vault list says 12 specimens. Are they healthy?",
+    "answer": "We do not know yet. A record tells us what is there, not whether it lives. Quarantine and a test come first."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-08: 12 distinct specimens; quarantine pending viability."
+  },
+  "EX-M0501": {
+   "title": "The Engineer Comes Home",
+   "puzzle": "P-09",
+   "decision": "Recompute the forecast for five people when Ferreira arrives, keep corrections visible, and rebuild the 2034 departure from timestamps.",
+   "source_ids": [
+    "bvad_2022_metabolic"
+   ],
+   "evidence": "Published value",
+   "plain": "NASA plans that each astronaut breathes about 0.9 kilograms of oxygen a day. When a fifth person moves in, the base needs a quarter more air than with four. The rooms stay the same size, but the need grows.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     1.25
+    ],
+    "marks": [
+     1.0
+    ],
+    "unit": "air units per 7.2-hour shift",
+    "labels": [
+     "Air used per 7.2-hour shift (game units)",
+     "4 people: 1 unit",
+     "5 people: 1.25 units"
+    ],
+    "from": [
+     "bvad_2022_metabolic derived:air_per_shift_by_crew.5",
+     "bvad_2022_metabolic derived:air_per_shift_by_crew.4"
+    ]
+   },
+   "for_aurora": {
+    "meter": "life",
+    "fields": [
+     "A",
+     "R"
+    ],
+    "text": "From 12 December, every shift costs 1.25 air units and 1.5 crew-days of food instead of 1 and 1.2. A forecast made for four people would run out early."
+   },
+   "limits": "BVAD gives planning averages for a reference crew member. One game air unit stands for about 1.07 kg of oxygen: four people over one shift.",
+   "source_lines": [
+    "NASA Johnson Space Center · Crew oxygen, food and water per day (NASA BVAD Rev 2) · NASA/TP-2015-218570/REV2; NTRS 20210024855 · https://ntrs.nasa.gov/citations/20210024855"
+   ],
+   "debrief": {
+    "question": "Ferreira's arrival changed no machine. Why did the forecast change?",
+    "answer": "More people breathe and eat more. Consumption follows the people actually aboard."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-10/P-13: five-person breathing 1.25 and food 1.5 per 7.2-hour step; P-02: four-person 1 and 1.2."
+  },
+  "EX-M0502": {
+   "title": "The Parts We Left Unsaid",
+   "puzzle": "P-09",
+   "decision": "Read the archived growth record correctly, and ask the questions that repair trust while keeping the station working.",
+   "source_ids": [
+    "change4_cotton"
+   ],
+   "evidence": "Published value",
+   "plain": "A plant trial can end early. In 2019, a cotton seed sprouted inside China's Chang'e-4 lander on the Moon. It grew a first green leaf, but never flowered.",
+   "visual": {
+    "kind": "gauge",
+    "values": [
+     1.0,
+     0.0
+    ],
+    "unit": "yes or no",
+    "labels": [
+     "Chang'e-4 cotton, 2019",
+     "Sprouted: yes",
+     "Flowered: no"
+    ],
+    "from": [
+     "change4_cotton values.germinated",
+     "change4_cotton values.flowered"
+    ]
+   },
+   "for_aurora": {
+    "meter": "food",
+    "fields": [],
+    "text": "The 2034 record shows the same kind of story: young seedlings with curled leaves and no buds. That trial stopped before flowering, so Alo's bloom stays the first. Getting the stage right keeps Aurora's history honest."
+   },
+   "limits": "Chang'e-4 was a small sealed experiment, not a garden. Aurora's 2034 trial is fiction.",
+   "source_lines": [
+    "CNSA Chang'e-4 biological experiment, Chongqing University (partner agency) · A cotton seedling on the Moon (Chang'e-4, 2019) · DOI 10.3390/ijms222111723 · https://doi.org/10.3390/ijms222111723"
+   ],
+   "debrief": {
+    "question": "Did the old garden ever flower?",
+    "answer": "No. The record shows seedlings only. A young seedling and a flowering plant are different stages of life."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md Story canon: the annex holds young, unflowered seedlings with curled leaves only."
+  },
+  "EX-M0503": {
+   "title": "A Moon That Keeps Records",
+   "puzzle": "P-10",
+   "decision": "Count only flashes that change between frames, reject the fixed detector spots, clean the dusty panel, patch the leaking spur, and keep the report's claims bounded.",
+   "source_ids": [
+    "meo_lunar_impact_flashes",
+    "vsat_relocatable_array"
+   ],
+   "evidence": "Published value",
+   "plain": "When a small space rock hits the Moon, it can make a quick flash of light. NASA watches the dark part of the Moon with two telescopes about 10 nights a month. A flash counts only if both telescopes see it.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     126.0
+    ],
+    "unit": "flashes",
+    "labels": [
+     "Confirmed impact flashes, first 5 years",
+     "126 flashes",
+     "62% came during meteor showers"
+    ],
+    "from": [
+     "meo_lunar_impact_flashes values.calibrated_flashes_first_5_years"
+    ]
+   },
+   "for_aurora": {
+    "meter": "power",
+    "fields": [
+     "E",
+     "A"
+    ],
+    "text": "Two of Aurora's candidates are detector glitches that stay in one spot; real flashes change. Cleaning the dusty panel brings daylight income back from 6 to 8. Patching the dome spur stops the extra loss of 1 air unit each phase."
+   },
+   "limits": "NASA's telescopes are on Earth. Aurora's eight candidates, its six-flash goal and the dust loss are game values.",
+   "source_lines": [
+    "NASA Marshall Space Flight Center, Meteoroid Environment Office · NASA lunar impact flash monitoring · NTRS 20150016513 (Suggs et al. 2014 summary); NTRS 20170004471 (2015 Geminids) · https://www.nasa.gov/meteoroid-environment-office/lunar-impact-monitoring/",
+    "NASA Langley Research Center (Vertical Solar Array Technology) · Relocatable 10 kW solar array for lunar south pole missions · NASA/TM-20210011743; NTRS 20210011743; VSAT overview NTRS 20220013210 · https://ntrs.nasa.gov/citations/20210011743"
+   ],
+   "debrief": {
+    "question": "How can you tell a real flash from a glitch?",
+    "answer": "A real flash changes from frame to frame. A detector fault stays in the same spot. Checking more than one frame tells them apart."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-10: 8 transients + 2 artifacts, 6 verified; dust 8 to 6; leak 1 air per unresolved phase."
+  },
+  "EX-M0504": {
+   "title": "Permission to Answer",
+   "puzzle": "P-10",
+   "decision": "Match the signed record to Dr Noor Rahman, invite contact without demanding it, and plant the vault's cotton seed.",
+   "source_ids": [
+    "change4_cotton"
+   ],
+   "evidence": "Published value",
+   "plain": "The first green leaf grown on the Moon was cotton. It sprouted inside China's Chang'e-4 lander in 2019, but it never flowered. Aurora's cotton will try to go further.",
+   "visual": {
+    "kind": "gauge",
+    "values": [
+     1.0,
+     0.0
+    ],
+    "unit": "yes or no",
+    "labels": [
+     "Cotton on the Moon, 2019",
+     "Sprouted: yes",
+     "Flowered: no"
+    ],
+    "from": [
+     "change4_cotton values.germinated",
+     "change4_cotton values.flowered"
+    ]
+   },
+   "for_aurora": {
+    "meter": "food",
+    "fields": [
+     "C"
+    ],
+    "text": "Noor's cotton seed is planted on 15 December, which leaves 11 vault specimens in storage. The album's 16 entries are records, not 16 seeds. Each living plant and each stored seed is counted once."
+   },
+   "limits": "Chang'e-4 was a sealed experiment and did not forecast Aurora's garden. Aurora's cotton is fiction.",
+   "source_lines": [
+    "CNSA Chang'e-4 biological experiment, Chongqing University (partner agency) · A cotton seedling on the Moon (Chang'e-4, 2019) · DOI 10.3390/ijms222111723 · https://doi.org/10.3390/ijms222111723"
+   ],
+   "debrief": {
+    "question": "After planting the cotton, how many vault specimens are stored?",
+    "answer": "Eleven. Twelve specimens minus one planted cotton seed. The 16 album entries describe knowledge, not extra seeds."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md Story canon: 12 vault specimens, cotton planted 15 Dec, 11 stored."
+  },
+  "EX-M0601": {
+   "title": "A Plan for Darkness",
+   "puzzle": "P-11",
+   "decision": "Turn the crew's needs into one checked eclipse budget: essentials in all five segments, the pump once, the camera once, no decorative floods.",
+   "source_ids": [
+    "nasa_eclipse_2047_01_12"
+   ],
+   "evidence": "Observed",
+   "plain": "On 12 January 2047, the Moon will pass through Earth's shadow. That is a total lunar eclipse. NASA's eclipse catalogue shows that any one spot on the Moon stays in the darkest shadow for between 70 and 209 minutes.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     208.9
+    ],
+    "marks": [
+     70.0
+    ],
+    "unit": "minutes",
+    "labels": [
+     "Time one spot spends in Earth's darkest shadow",
+     "At least 70.0 minutes",
+     "At most 208.9 minutes"
+    ],
+    "from": [
+     "nasa_eclipse_2047_01_12 derived:point_full_shadow_bounds_min[1]",
+     "nasa_eclipse_2047_01_12 derived:point_full_shadow_bounds_min[0]"
+    ]
+   },
+   "for_aurora": {
+    "meter": "power",
+    "fields": [
+     "E"
+    ],
+    "text": "While Earth blocks the Sun, Aurora's panels make no power. The plan keeps 7 of the 14 stored units: essentials in all five segments, plus the pump once and the camera once. Decorative floodlights cost 3 each and would break the budget."
+   },
+   "limits": "Catalogue times are for the whole Moon. Aurora's own times depend on its exact site, which is not fixed yet. The seven-unit split is a stated game fallback.",
+   "source_lines": [
+    "NASA Goddard Space Flight Center (F. Espenak, Five Millennium Catalog) · Total lunar eclipse of 12 January 2047 · Lunar eclipse catalog 2001-2100, catalog number 09755, Saros 125 · https://eclipse.gsfc.nasa.gov/LEcat5/LE2001-2100.html"
+   ],
+   "debrief": {
+    "question": "Why are floodlights not part of the plan?",
+    "answer": "Each flood costs 3 units. Five essentials, one pump and one camera already use the 7 protected units."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-11: essentials 1 per segment, pump 1, camera 1, floods 3 each; total 7 of 14."
+  },
+  "EX-M0602": {
+   "title": "The Plan We Share",
+   "puzzle": "P-11",
+   "decision": "Choose the small guide-light route over decorative floods, rehearse isolating a fault on the paused model, and close the readiness call with a shared checklist.",
+   "source_ids": [
+    "jpl_horizons_pole_season"
+   ],
+   "evidence": "Computed",
+   "plain": "On eclipse day, 12 January 2047, the Sun at the south pole is barely up. NASA JPL's calculation puts it just 0.14 degrees above a flat horizon. Light is scarce even before Earth's shadow arrives.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     0.1376
+    ],
+    "marks": [
+     1.586
+    ],
+    "unit": "degrees",
+    "labels": [
+     "Sun's height at the pole",
+     "12 January 2047: 0.14 degrees",
+     "Highest in 2046 to 2047: 1.59 degrees"
+    ],
+    "from": [
+     "jpl_horizons_pole_season derived:sun_elevation_2047_01_12",
+     "jpl_horizons_pole_season derived:sun_elevation_range[1]"
+    ]
+   },
+   "for_aurora": {
+    "meter": "power",
+    "fields": [
+     "E"
+    ],
+    "text": "Every stored unit matters tonight. The small guide-light route gives a safe path at a low cost, while floodlights would look brighter but use 3 units each. The best plan meets the need and keeps the reserve."
+   },
+   "limits": "Computed for a flat horizon at the exact pole. Aurora's ridge and nearby hills change the real sunlight.",
+   "source_lines": [
+    "NASA Jet Propulsion Laboratory (Horizons) · The Sun's height at the lunar south pole, 2046-2047 · Horizons target 10 (Sun), site coord@301 0E -90 h0 · https://ssd.jpl.nasa.gov/horizons/"
+   ],
+   "debrief": {
+    "question": "Why rehearse a fault before the eclipse starts?",
+    "answer": "Practising on a paused model means the crew already knows the safe order when a real fault happens."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-11: floods 3 per activation; essentials include the dim guide light."
+  },
+  "EX-M0603": {
+   "title": "All the Sunrises",
+   "puzzle": "P-12",
+   "decision": "Enter only checked science in the log (Earth's air bending sunlight, not a map of Bangladesh), and call home only inside a valid contact window.",
+   "source_ids": [
+    "nasa_eclipse_2047_01_12"
+   ],
+   "evidence": "Observed",
+   "plain": "During a total lunar eclipse, Earth hides the Sun from the Moon. Sunlight bending through Earth's air, at every sunrise and sunset at once, makes a red ring around Earth. On 12 January 2047 the total part lasts 70 minutes.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     70.0
+    ],
+    "range": [
+     "2047-01-12T00:49:44Z",
+     "2047-01-12T01:59:44Z"
+    ],
+    "unit": "minutes",
+    "labels": [
+     "Totality: the Moon fully inside Earth's shadow",
+     "70.0 minutes",
+     "00:49:44 to 01:59:44 UTC"
+    ],
+    "from": [
+     "nasa_eclipse_2047_01_12 values.total_min",
+     "nasa_eclipse_2047_01_12 derived:contacts_ut.U2",
+     "nasa_eclipse_2047_01_12 derived:contacts_ut.U3"
+    ]
+   },
+   "for_aurora": {
+    "meter": "none",
+    "fields": [],
+    "text": "Watching moves no meter: the camera runs on its own branch, F2. If F2 trips, only the camera goes dark while air, heat and the garden keep running. That separation is what makes observing safe."
+   },
+   "limits": "The red glow is real physics, but no camera can pick out one country on Earth's edge. The diagram is labelled as a concept.",
+   "source_lines": [
+    "NASA Goddard Space Flight Center (F. Espenak, Five Millennium Catalog) · Total lunar eclipse of 12 January 2047 · Lunar eclipse catalog 2001-2100, catalog number 09755, Saros 125 · https://eclipse.gsfc.nasa.gov/LEcat5/LE2001-2100.html",
+    "NASA Science · Eclipses and the Moon (explains the red light) · https://science.nasa.gov/moon/eclipses/"
+   ],
+   "debrief": {
+    "question": "Can the camera see Bangladesh's sunrise in the red ring?",
+    "answer": "No. The red light comes from Earth's whole edge at once. The diagram is a labelled concept, not a photo of one country."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-12: camera and view-screen branch F2 only; habitat services unaffected."
+  },
+  "EX-M0604": {
+   "title": "The Light That Returns",
+   "puzzle": "P-12",
+   "decision": "Isolate, check and restore only the camera feeder F2, count the recovery honestly, and hand over the watch.",
+   "source_ids": [
+    "vsat_relocatable_array"
+   ],
+   "evidence": "Published value",
+   "plain": "NASA engineers designed a 10-kilowatt solar array for the Moon's south pole. It stands on a 16-metre mast to catch the low Sun. When sunlight returns, so does power.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     10.0
+    ],
+    "marks": [
+     11.1
+    ],
+    "unit": "kilowatts",
+    "labels": [
+     "Power from one array (kilowatts)",
+     "Design: 10 kW",
+     "Aurora's daylight average: about 11.1 kW (our estimate)"
+    ],
+    "from": [
+     "vsat_relocatable_array values.array_power_kW",
+     "vsat_relocatable_array derived:game_mean_power"
+    ]
+   },
+   "for_aurora": {
+    "meter": "power",
+    "fields": [
+     "E"
+    ],
+    "text": "The eclipse plan ends with 7 units left in the battery. After the shadow passes, sunlight refills it, but recovery is counted shift by shift, not assumed. Only feeder F2 was reset; the protected main power line was never touched."
+   },
+   "limits": "A NASA design study, not flight hardware. Aurora's 11.1 kW daylight average is the team's estimate, about 56% of two such arrays.",
+   "source_lines": [
+    "NASA Langley Research Center (Vertical Solar Array Technology) · Relocatable 10 kW solar array for lunar south pole missions · NASA/TM-20210011743; NTRS 20210011743; VSAT overview NTRS 20220013210 · https://ntrs.nasa.gov/citations/20210011743"
+   ],
+   "debrief": {
+    "question": "Why reset only F2 and not all the power?",
+    "answer": "The fault was only on the camera branch. A small, bounded fault needs a bounded fix, and resetting everything would risk air and heat."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-11/P-12: E7 at recovery; isolate F2, confirm zero, reset, reconnect, test."
+  },
+  "EX-M0701": {
+   "title": "Your Call, Cadets",
+   "puzzle": "P-13",
+   "decision": "Label the 2012 storm as history used in a what-if, switch the forecast to five people, and keep protection until the last exposure check.",
+   "source_ids": [
+    "donki_2012_07",
+    "donki_2017_09"
+   ],
+   "evidence": "Observed",
+   "plain": "On 23 July 2012 the Sun blasted out a giant cloud of charged gas, called a CME (coronal mass ejection). It flew at about 3,435 km per second, but it missed Earth and the Moon. NASA's STEREO-A spacecraft was in its path and measured it.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     3435.0
+    ],
+    "marks": [
+     2650.0
+    ],
+    "unit": "km per second",
+    "labels": [
+     "Speed of the solar cloud",
+     "July 2012: 3,435 km/s",
+     "September 2017: 2,650 km/s"
+    ],
+    "from": [
+     "donki_2012_07 derived:cme_speed",
+     "donki_2017_09 derived:cme_speed"
+    ]
+   },
+   "for_aurora": {
+    "meter": "shielding",
+    "fields": [
+     "S",
+     "Z"
+    ],
+    "text": "Chapter 7 asks: what if a storm like this hit Aurora? The forecast must count five people: 1.25 air units and 1.5 crew-days of food every 7.2-hour step. Shelter stays up until the last exposure check, because draining early leaves the crew open to a later wave."
+   },
+   "limits": "The 2012 storm really happened, but it missed Earth and the Moon. Aurora's 2047 strike and its three waves are a labelled what-if.",
+   "source_lines": [
+    "NASA GSFC Community Coordinated Modeling Center (DONKI) · The July 2012 CME that missed Earth (STEREO-A) · DONKI 2012-07-23T02:36:00-CME-001; 2012-07-23T03:59:00-SEP-001; 2012-07-23T20:55:00-IPS-001 · https://ccmc.gsfc.nasa.gov/tools/DONKI/",
+    "NASA GSFC Community Coordinated Modeling Center (DONKI) · Solar flares, CMEs and particle events of 4-12 September 2017 · DONKI 2017-09-10T15:35:00-FLR-001; 2017-09-10T16:25:00-SEP-001; 2017-09-10T16:45:00-SEP-001; 2017-09-10T16:09:00-CME-001 · https://ccmc.gsfc.nasa.gov/tools/DONKI/"
+   ],
+   "debrief": {
+    "question": "Is Chapter 7's storm a real Moon event?",
+    "answer": "No. It uses real 2012 measurements to build a what-if. The game labels it so nobody mistakes a model for an observation."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-13: six 7.2 h steps; multipliers [1,1,2,2,1,1]; five occupants A1.25, R1.5."
+  },
+  "EX-M0702": {
+   "title": "What Gets the Last Drop",
+   "puzzle": "P-13",
+   "decision": "Sample exposure before draining on the last step, resolve every name before the hatch closes, and check the seed case by its sensors instead of opening it.",
+   "source_ids": [
+    "clowdsley_2021_shielding"
+   ],
+   "evidence": "Published value",
+   "plain": "NASA engineers modelled how much shielding protects a crew in a big solar storm. Their guide is about 20 grams of material over every square centimetre, like a wall of water 20 cm thick. Thicker shielding still helps, but less each time.",
+   "visual": {
+    "kind": "line",
+    "values": [
+     185.4,
+     136.9,
+     105.4,
+     85.1
+    ],
+    "unit": "mSv",
+    "unit_plain": "mSv (millisieverts): a measure of radiation's effect on the body.",
+    "axis": "Shielding: 5, 7, 10 and 15 grams per square centimetre",
+    "labels": [
+     "Modelled storm dose behind shielding",
+     "5 g/cm2: 185 mSv",
+     "15 g/cm2: 85 mSv"
+    ],
+    "from": [
+     "clowdsley_2021_shielding values.aug1972_spe_effective_dose_mSv_no_curtain"
+    ]
+   },
+   "for_aurora": {
+    "meter": "shielding",
+    "fields": [
+     "W",
+     "S"
+    ],
+    "text": "Aurora's full water wall is 6 units, standing for 20 g/cm2, so 1 unit is about 3.3 cm of water. Four units of water plus two crate units give the best shelter, S6. The water is not used up: it starts going back after the last exposure check."
+   },
+   "limits": "A NASA model of a rover shelter in the August 1972 storm. Real dose never drops to zero, and Aurora's exposure score is not mSv.",
+   "source_lines": [
+    "NASA Langley Research Center · How much shielding protects lunar crews from solar storms · NTRS 20210009760 · https://ntrs.nasa.gov/citations/20210009760"
+   ],
+   "debrief": {
+    "question": "Why sample exposure before draining on the last step?",
+    "answer": "Draining first would remove shielding while the storm is still there. Protection ends only after the final exposure check."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-13: W [4,4,4,4,4,2], K2; S6 = W4 + K2; founder reserve 15 + 15 latched."
+  },
+  "EX-M0703": {
+   "title": "What We Carry",
+   "puzzle": "P-14",
+   "decision": "Hold water and cargo through the peak, report progress truthfully, and find the one failed link by comparing passing and failing tests.",
+   "source_ids": [
+    "stereo_a_het_2012_07"
+   ],
+   "evidence": "Observed",
+   "plain": "STEREO-A measured the fastest protons from the July 2012 storm. Protons are tiny, fast pieces of atoms. Split into six steps of 7.2 hours, most of them arrived in steps 2 and 3, and then the count dropped quickly.",
+   "visual": {
+    "kind": "line",
+    "values": [
+     0.163,
+     0.689,
+     1.0,
+     0.021,
+     0.007,
+     0.004
+    ],
+    "unit": "share of the peak step",
+    "labels": [
+     "Share of the fastest protons in each 7.2-hour step (peak = 1)",
+     "Peak: step 3",
+     "Game's what-if waves: 1, 1, 2, 2, 1, 1"
+    ],
+    "from": [
+     "stereo_a_het_2012_07 derived:step_fluence_80MeV"
+    ]
+   },
+   "for_aurora": {
+    "meter": "shielding",
+    "fields": [
+     "Z"
+    ],
+    "text": "The game's three waves are a what-if; the real storm had one big peak. Either way the rule is the same: keep water and crates in place until the peak has passed. In Chapter 7, exposure Z must stay at 6 or below."
+   },
+   "limits": "STEREO-A was in orbit around the Sun, far from the Moon. 'Fastest' means the 80 MeV channel; slower protons peaked in step 3 too.",
+   "source_lines": [
+    "NASA GSFC Space Physics Data Facility (CDAWeb), STEREO IMPACT/HET · STEREO-A proton flux in the July 2012 storm · CDAWeb STA_L1_HET, parameter Proton_Flux · https://cdaweb.gsfc.nasa.gov/hapi"
+   ],
+   "debrief": {
+    "question": "The local radio works, but Earth is silent. What failed?",
+    "answer": "If the local network passes and only the Earth path fails, the fault is on the Earth uplink: the external feedthrough."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-14: Z <= 6; F-EXT; route readings 0.4 and 0.3 below threshold 1."
+  },
+  "EX-M0704": {
+   "title": "The Days That Make a Journey",
+   "puzzle": "P-15",
+   "decision": "Keep the base running on stored procedures and local supplies, design a relay path from Aurora to the summit dish, and set the home-night occupancy.",
+   "source_ids": [
+    "jpl_horizons_ch8_relay",
+    "esa_moonlight_relay"
+   ],
+   "evidence": "Computed",
+   "plain": "From the south pole in early April 2047, Earth sits below the horizon. NASA JPL's calculation puts it 4 to 7 degrees below a flat horizon. Aurora cannot point a dish straight at Earth.",
+   "visual": {
+    "kind": "line",
+    "values": [
+     -4.2806,
+     -4.5968,
+     -4.8982,
+     -5.1829,
+     -5.4493,
+     -5.6957,
+     -5.9206,
+     -6.1223,
+     -6.2995,
+     -6.4509,
+     -6.5754,
+     -6.6721,
+     -6.74,
+     -6.7787,
+     -6.7879,
+     -6.7674,
+     -6.7173
+    ],
+    "start": "2047-04-07T00:00Z",
+    "end": "2047-04-11T00:00Z",
+    "unit": "degrees",
+    "labels": [
+     "Earth's height seen from the south pole, 7 to 11 April 2047",
+     "Below 0 means hidden",
+     "Lowest: about minus 6.8 degrees"
+    ],
+    "from": [
+     "jpl_horizons_ch8_relay values.pole_6hourly[*][2]",
+     "jpl_horizons_ch8_relay values.pole_6hourly[0][0]",
+     "jpl_horizons_ch8_relay values.pole_6hourly[-1][0]"
+    ]
+   },
+   "for_aurora": {
+    "meter": "life",
+    "fields": [
+     "A"
+    ],
+    "text": "A relay is a station that passes a signal along. This one needs both legs: road repeaters from Aurora to the summit, then the summit dish to Earth. Until it works, the base runs on stored procedures and local supplies. The home-night plan charges two people for 33 hours, then five for 3."
+   },
+   "limits": "A geometric calculation with no hills. Aurora's exact site is not fixed yet, and the road and relay are fiction.",
+   "source_lines": [
+    "NASA Jet Propulsion Laboratory (Horizons) · Where Earth is from Mons Malapert and from the pole, 8-10 April 2047 · Horizons target 399 (Earth), sites coord@301 -1.67E -85.98 (Mons Malapert) and 0E -90 · https://ssd.jpl.nasa.gov/horizons/",
+    "European Space Agency (partner) · Why south-pole crews need relays (ESA Moonlight) · ESA Moonlight programme page · https://www.esa.int/Applications/Connectivity_and_Secure_Communications/Moonlight2"
+   ],
+   "debrief": {
+    "question": "Why can't the summit dish just point at Earth and be done?",
+    "answer": "Aurora also has to reach the summit. A relay helps only when both legs work: Aurora to summit, and summit to Earth."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-15: home air 0.5 per 7.2 h for 33 h, then 1.25 per 7.2 h for 3 h."
+  },
+  "EX-M0801": {
+   "title": "The Long Road",
+   "puzzle": "P-15",
+   "decision": "Provision the whole 51-hour trip with margin, take the surveyed road instead of the steep shortcut, and inspect the dark marker without leaving the road.",
+   "source_ids": [
+    "usgs_gazetteer_south_pole"
+   ],
+   "evidence": "Computed",
+   "plain": "Mons Malapert is a real mountain near the Moon's south pole. On the official map of Moon place names, its centre is about 122 km from the pole. That is almost three marathons laid end to end.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     121.9
+    ],
+    "unit": "km",
+    "labels": [
+     "Shortest distance over the Moon, pole to Mons Malapert",
+     "121.9 km",
+     "Aurora's road: 120 km each way (story value)"
+    ],
+    "note": "Three marathons = 126.6 km, so 121.9 km is 'almost three'.",
+    "from": [
+     "usgs_gazetteer_south_pole derived:pole_to_mons_malapert"
+    ]
+   },
+   "for_aurora": {
+    "meter": "rover",
+    "fields": [
+     "rover battery"
+    ],
+    "text": "The rover trip is 24 hours out, 3 hours of repair and 24 hours back: 51 hours, with 72 hours of supplies. Its battery plan is 14 - 5 - 5 = 4, above the 2-unit reserve. The surveyed road stays at 12 degrees or less; the 22-degree shortcut does not."
+   },
+   "limits": "Distance between feature centres on a smooth sphere. Aurora's site, the summit point and the road are fiction.",
+   "source_lines": [
+    "USGS Astrogeology / IAU Working Group for Planetary System Nomenclature (partner agency) · Named south-pole features: Mons Malapert, Shackleton, de Gerlache · Gazetteer of Planetary Nomenclature features 16338, 5450, 1439 · https://planetarynames.wr.usgs.gov/Feature/16338"
+   ],
+   "debrief": {
+    "question": "Why plan the return before leaving?",
+    "answer": "Supplies and battery for the trip home must already be on board. A plan that only reaches the summit is not a plan."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-15: 120 km each way; 24 + 3 + 24 = 51 h <= 72 h; rover E14, allowances 5/5, reserve 2; road <= 12 deg, shortcut 22 deg."
+  },
+  "EX-M0802": {
+   "title": "Two Teams, One Night",
+   "puzzle": "P-15",
+   "decision": "Test both links at each repaired marker, and set the home forecast to two people for 33 hours, then five for the last 3.",
+   "source_ids": [
+    "bvad_2022_metabolic"
+   ],
+   "evidence": "Published value",
+   "plain": "NASA plans each astronaut's oxygen at about 0.9 kilograms a day, so air needs follow the number of people. In Aurora's units, two people use half an air unit every 7.2-hour shift. Five people use one and a quarter.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     0.5
+    ],
+    "marks": [
+     1.25
+    ],
+    "unit": "air units per 7.2-hour shift",
+    "labels": [
+     "Air used per 7.2-hour shift (game units)",
+     "2 people at home: 0.5",
+     "All 5 at home: 1.25"
+    ],
+    "from": [
+     "bvad_2022_metabolic derived:air_per_shift_by_crew.2",
+     "bvad_2022_metabolic derived:air_per_shift_by_crew.5"
+    ]
+   },
+   "for_aurora": {
+    "meter": "life",
+    "fields": [
+     "A"
+    ],
+    "text": "Mei and Amara hold Aurora alone for 33 hours, using 0.5 air unit per shift. When the rover team returns for the last 3 hours, use rises to 1.25. The whole home night costs 2.8125 air units."
+   },
+   "limits": "BVAD gives planning averages. Game air units are a teaching scale: one unit is about 1.07 kg of oxygen.",
+   "source_lines": [
+    "NASA Johnson Space Center · Crew oxygen, food and water per day (NASA BVAD Rev 2) · NASA/TP-2015-218570/REV2; NTRS 20210024855 · https://ntrs.nasa.gov/citations/20210024855"
+   ],
+   "debrief": {
+    "question": "Why not charge two people for the whole night?",
+    "answer": "Three travellers come home before dawn. From then on five people breathe at the base, so the forecast must change at that moment."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-15: 0.5 per 7.2 h for 33 h, then 1.25 per 7.2 h for 3 h; total 2.8125."
+  },
+  "EX-M0803": {
+   "title": "Both Ends of the Light",
+   "puzzle": "P-16",
+   "decision": "Isolate and test for zero before swapping the controller, lock the local bearing L2 and the Earth bearing E3, and accept only the exact ALO42 reply.",
+   "source_ids": [
+    "jpl_horizons_ch8_relay"
+   ],
+   "evidence": "Computed",
+   "plain": "On 9 April 2047, Earth is almost due north of Mons Malapert. But NASA JPL's calculation puts it about 2.3 degrees below a flat horizon there. A spot at least 1.4 km above the Moon's average surface can see over the curve to Earth.",
+   "visual": {
+    "kind": "line",
+    "values": [
+     -2.1079,
+     -2.1157,
+     -2.1235,
+     -2.1312,
+     -2.1389,
+     -2.1466,
+     -2.1542,
+     -2.1617,
+     -2.1693,
+     -2.1767,
+     -2.1842,
+     -2.1916,
+     -2.1989,
+     -2.2062,
+     -2.2135,
+     -2.2207,
+     -2.2279,
+     -2.235,
+     -2.2421,
+     -2.2492,
+     -2.2562,
+     -2.2632,
+     -2.2701,
+     -2.2769,
+     -2.2838,
+     -2.2905,
+     -2.2973,
+     -2.304,
+     -2.3106,
+     -2.3172,
+     -2.3238,
+     -2.3303,
+     -2.3368,
+     -2.3432,
+     -2.3496,
+     -2.3559,
+     -2.3622,
+     -2.3684,
+     -2.3746,
+     -2.3808,
+     -2.3869,
+     -2.393,
+     -2.399,
+     -2.4049,
+     -2.4109,
+     -2.4167,
+     -2.4226,
+     -2.4284,
+     -2.4341
+    ],
+    "start": "2047-04-08T18:00Z",
+    "end": "2047-04-09T06:00Z",
+    "unit": "degrees",
+    "labels": [
+     "Earth's height seen from Mons Malapert",
+     "0 is a flat horizon",
+     "Link window 00:45 to 01:45 UTC: about minus 2.3 degrees"
+    ],
+    "from": [
+     "jpl_horizons_ch8_relay values.malapert_15min[*][2]",
+     "jpl_horizons_ch8_relay values.malapert_15min[0][0]",
+     "jpl_horizons_ch8_relay values.malapert_15min[-1][0]"
+    ]
+   },
+   "for_aurora": {
+    "meter": "none",
+    "fields": [],
+    "text": "This moves no meter; it decides whether Aurora can talk to Earth at all. The relay works only when the local link (L2) and the Earth link (E3) each pass their own test. The ALO42 message must also come back exactly."
+   },
+   "limits": "Geometry with no terrain: the summit's real height and the hills to the north still need NASA's LOLA elevation map. Until then the dial is labelled Computed.",
+   "source_lines": [
+    "NASA Jet Propulsion Laboratory (Horizons) · Where Earth is from Mons Malapert and from the pole, 8-10 April 2047 · Horizons target 399 (Earth), sites coord@301 -1.67E -85.98 (Mons Malapert) and 0E -90 · https://ssd.jpl.nasa.gov/horizons/"
+   ],
+   "debrief": {
+    "question": "Earth's signal is strong. Is the relay working?",
+    "answer": "Not until the local leg to Aurora is also tested. A network needs every link, and the data must arrive exactly."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-16: bearings L2 then E3; checksum ALO42."
+  },
+  "EX-M0804": {
+   "title": "From Last Light to First Light",
+   "puzzle": "P-16",
+   "decision": "Credit both teams in the report, raise home consumption only when the travellers actually return, and pass the five sunrise checks before opening the shutter.",
+   "source_ids": [
+    "jpl_ipn_42_176_dte"
+   ],
+   "evidence": "Published value",
+   "plain": "A NASA JPL study searched near the south pole for the best place to work. Even the best spot sees the Sun 92% of the time, but sees Earth only 51% of the time. Relays fill the gaps.",
+   "visual": {
+    "kind": "bar",
+    "values": [
+     51.0
+    ],
+    "marks": [
+     92.0
+    ],
+    "unit": "% of the time",
+    "labels": [
+     "Best south-pole site",
+     "Sunlight: 92%",
+     "Direct view of Earth: 51%"
+    ],
+    "from": [
+     "jpl_ipn_42_176_dte values.dte_availability_best_site_percent",
+     "jpl_ipn_42_176_dte values.solar_availability_best_site_percent"
+    ]
+   },
+   "for_aurora": {
+    "meter": "food",
+    "fields": [
+     "C"
+    ],
+    "text": "With the relay live, Aurora no longer waits for Earth to rise. At first light, five checks still decide success. They are: all five crew safe; 30 founder seeds and 11 vault specimens protected; steady garden pressure; steady temperature; and living cotton."
+   },
+   "limits": "The study used a 40-metre radar elevation map, not Aurora's site. Aurora's relay is fiction.",
+   "source_lines": [
+    "NASA Jet Propulsion Laboratory, Interplanetary Network Progress Report · Sunlight and Earth-link availability near the south pole · IPN PR 42-176 · https://ipnpr.jpl.nasa.gov/progress_report/42-176/176C.pdf"
+   ],
+   "debrief": {
+    "question": "Who kept the expedition connected?",
+    "answer": "Both teams, and the work before them. The road team fixed the relay while the home team kept the base and garden safe."
+   },
+   "game_numbers": "game-design/08_PUZZLE_DESIGNS.md P-16: five final indicators (crew 5, founder reserve 30, 11 vault specimens, garden pressure and temperature stable, cotton alive)."
+  }
+ }
+}

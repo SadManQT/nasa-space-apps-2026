@@ -18,6 +18,14 @@ func _run() -> void:
 		var cards := science.cards_for_puzzle("P-%02d" % number)
 		_check(not cards.is_empty() and not cards.any(func(card): return card.pending), "puzzle has verified cards: P-%02d" % number)
 	_check(science.card("not_a_source").pending, "unknown source never gets fabricated evidence")
+	for chapter in range(1, 9):
+		for mission in range(1, 5):
+			var id := "EX-M%02d%02d" % [chapter, mission]
+			var mcard := science.mission_card(id)
+			_check(not mcard.is_empty() and not String(mcard.get("plain", "")).is_empty(), "mission has a plain-language data card: " + id)
+			_check(mcard.get("source_ids", []).all(func(source): return not science.card(source).pending), "mission card sources resolve to verified evidence: " + id)
+			_check(mcard.get("visual", {}).get("labels", []).size() <= 3, "mission card chart keeps to three labels: " + id)
+	_check(science.mission_card("EX-M9999").is_empty(), "unknown mission gets no invented card")
 	var broken := Science.new("user://missing-science-fixture")
 	_check(not broken.validate().valid and broken.cards_for_puzzle("P-02")[0].pending, "missing fixtures fail content validation")
 	var card := science.card("lro_mazarico_2011_illumination")

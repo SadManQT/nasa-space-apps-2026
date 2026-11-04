@@ -4,6 +4,8 @@ class_name ScienceData
 ## Read-only, offline provenance boundary shared by puzzles, outcomes and Journal.
 ## Numeric displays come from bundled fixtures; training units remain qualified.
 const DATA_ROOT := "res://resources/data/nasa"
+## Plain-language briefing/debrief card per campaign mission (M1-30), built from the fixtures by production/tools/build_mission_cards.py.
+const MISSION_CARDS := "res://resources/campaign/content/mission_data_cards.json"
 const TAKEAWAYS := {
 	"apollo_shallow_moonquakes": "The Moon has shallow quakes, so Aurora must inspect and secure equipment.",
 	"bvad_2022_metabolic": "Crew consume oxygen, water and food, so Aurora must budget for everyone aboard.",
@@ -136,6 +138,10 @@ static func describe(value) -> String:
 
 func _pending(id: String) -> Dictionary:
 	return {"source_id": id, "title": "Source pending" if OS.is_debug_build() else "Source unavailable", "takeaway": "A verified source is not available for this display.", "pending": true}
+
+## The mission's data card (plain text, one simple visual, what it means for Aurora, limits, sources), or {} if none.
+func mission_card(mission_id: String) -> Dictionary:
+	return _read_json(MISSION_CARDS).get("missions", {}).get(mission_id, {}).duplicate(true)
 
 static func _read_json(path: String) -> Dictionary:
 	if not FileAccess.file_exists(path):
