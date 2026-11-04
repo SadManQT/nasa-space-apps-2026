@@ -1,54 +1,178 @@
-<div align="center">
+# Last Light Academy
 
-# 🌙 Last Light Academy
+**Run a Moon base. Keep the crew safe. Help the first flower bloom on the Moon.**
 
-### *Keep Alo, a tiny mustard flower, alive through one long Moon night,<br>so it can become the first flower ever to bloom on the Moon.*
+NASA Space Apps Challenge 2026 · Challenge: **[Build a Junior Astronaut Mission Trainer](https://www.spaceappschallenge.org/2026/challenges/build-a-junior-astronaut-mission-trainer/)** · Team **The Last BrainCell** · Local event: Dhaka, Bangladesh
 
-**NASA Space Apps Challenge 2026** · Challenge: **Build a Junior Astronaut Mission Trainer**<br>
-**Team The Last BrainCell** · Dhaka, Bangladesh 🇧🇩
+*An independent team project. It is not endorsed by NASA and uses no NASA logos.*
 
-![Space Apps 2026](https://img.shields.io/badge/NASA%20Space%20Apps-2026-0B3D91?style=for-the-badge)
-![Ages 10-15](https://img.shields.io/badge/ages-10--15-FFD84D?style=for-the-badge)
-![English captions](https://img.shields.io/badge/English-captions%20on-3BA7FF?style=for-the-badge)
-![Godot](https://img.shields.io/badge/engine-Godot%204.7-478CBF?style=for-the-badge)
-
-### [▶ Watch the pitch video](LastLightAcademy_pitch_video.mp4) · [English subtitles (.srt)](LastLightAcademy_pitch_video.srt)
-
-*One night. Four friends. The first flower on the Moon.*<br>
-*No Sun. No Earth. Just your team.*
-
-</div>
+**Jump to:** [Pitch](#the-pitch) · [Videos](#videos) · [Play it](#play-it) · [Screenshots](#screenshots) · [The challenge](#how-it-answers-the-challenge) · [NASA data](#nasa-data) · [Status](#status-4-november-2026) · [Use of AI](#use-of-ai) · [Licence and credits](#licence-and-credits) · [Team](#team) · [Full design](#the-full-design)
 
 ---
 
-**Contents:** [Team](#-team) · [Pitch video](#-pitch-video) · [The idea](#-the-idea-in-30-seconds) · [Real history](#-the-real-history-behind-it) · [Story](#-the-story-chapter-1-night-one) · [Characters](#-characters) · [How it plays](#-how-it-plays) · [Endings](#-stars-and-endings) · [Debrief](#-the-debrief-astronaut-skills) · [Season 1](#-season-1-the-first-moon-garden) · [Learning](#-learning-goals-and-curriculum) · [Modes](#-modes-controls-and-accessibility) · [NASA data](#-nasa-data) · [Build plan](#-hackathon-build-plan) · [Use of AI](#-use-of-ai-video-production) · [Credits](#-credits)
+## The pitch
+
+Last Light Academy is a 3D story game for ages 10–15, for classrooms and families. Four young cadets run Aurora Station at the Moon's south pole. In Chapter 1 the Sun sets for 36 hours, Earth sinks below the horizon, and a replay of the real solar storm of 10 September 2017 arrives. The cadets must keep the crew safe, keep the base running and keep Alo, a small mustard plant, alive until sunrise. Power, air, shielding water and food all come from the same small supply, so every choice is a trade-off: the water that shields the crew is the water Alo drinks. The game's key numbers come from NASA data, and in-game Data Cards show each source and say what is measured, what is computed and what is a training assumption. The full story runs over 8 chapters, 32 missions and 96 scenes across one Moon year.
+
+## Videos
+
+| Video | Length | Link |
+|---|---|---|
+| Local judging video (with the working game) | 240 s | *Link added after upload, due 13 Nov 2026* |
+| Global video | 30 s | *Link added after upload, due 14 Nov 2026* |
+| Concept pitch video (made before the hackathon) | 3:59 | [LastLightAcademy_pitch_video.mp4](LastLightAcademy_pitch_video.mp4) (Git LFS: use **Download** on the file page) · [English subtitles (.srt)](LastLightAcademy_pitch_video.srt) |
+
+## Play it
+
+**Download.** Windows (x86_64) and macOS (universal) builds of version `0.1.0-preview.20261104` are built and pass a start-up test on fresh GitHub machines ([run 41712680810](https://github.com/SadManQT/nasa-space-apps-2026/actions/runs/41712680810)). They are not published yet: the team approves the release first. When they are, they will be on the [Releases page](https://github.com/SadManQT/nasa-space-apps-2026/releases).
+
+- **Windows:** unzip, keep `LastLightAcademy.exe` and `LastLightAcademy.pck` together, run the EXE.
+- **macOS:** unzip, move the app to Applications and open it. The build is not signed. If macOS blocks it, use **Privacy & Security → Open Anyway**.
+
+There is no browser version. A test web build was about 310 MB and some symbols did not draw ([release notes](production/qa/release_2026-11-04.md)).
+
+**Run from source** (Godot 4.7; tested with 4.7.2):
+
+```bash
+git lfs install
+git clone https://github.com/SadManQT/nasa-space-apps-2026.git
+```
+
+Then open `game/project.godot` in the Godot editor and press **Play** (F5). The first time, Godot imports about 460 MB of assets, so it takes a while. From a terminal: `godot --headless --path game --import` once, then `godot --path game`.
+
+**Controls:** WASD to move, hold the right mouse button to look, **E** to use what is in front of you, **Esc** to pause, Tab / arrow keys / Enter for on-screen buttons. Captions are on and nothing is timed by default. Settings can make text 1.5 times larger and reduce motion.
+
+**Judge route (5 minutes):** title screen → **New Expedition** → Chapter 1. Walk to a console and press **E**, watch the four status cards change, and open a **Data Card** to see the NASA source behind a number.
+
+**Tests and builds:** `game/tools/run_tests.sh` runs every test suite (set `GODOT=/path/to/godot` if needed). `python3 production/qa/build_release.py --platform windows --install-tools --smoke` (or `--platform macos`) makes a release build and checks it starts.
+
+## Screenshots
+
+From the current build (Godot 4.7, 1280×720). The rooms are still grey test rooms; the final room art is in progress.
+
+| Title screen | The crew in the Commons | Power, air, shielding and food |
+|---|---|---|
+| ![Title screen: Run a real mission decision](production/qa/evidence/M1-20_native_title.png) | ![The crew around the Mission Table in the Commons](production/qa/evidence/M1-17_LOC-01.png) | ![Outpost Status cards for power, life support, shielding and food, with a forecast and Amara's caption](production/qa/evidence/M1-28_shift_forecast.png) |
+
+## How it answers the challenge
+
+The challenge asks for a game in which students *"run a lunar or Martian outpost, balancing competing demands like life support, radiation shielding, power, and food production"*. The first four demands are the four Outpost Status cards the player always sees; the fifth is the shift plan itself. Each rests on real data. Numbers below are from Chapter 1's main puzzle, P-02 ([game-design/08_PUZZLE_DESIGNS.md](game-design/08_PUZZLE_DESIGNS.md)). The simulation and the status cards already use them; the panels where the player sets each choice are in progress (see [Status](#status-4-november-2026)).
+
+| Demand | What the player manages | Real data behind it |
+|---|---|---|
+| **Power** | Energy in "sun-drops" (1 drop ≈ 10 kWh). The battery holds 20. Daylight adds 8 per shift; the 36-hour night adds none. The heater, the air maker and the grow lamp all spend drops. | NASA 10 kW south-pole solar array study; LOLA illumination study of Shackleton's rim; JPL Horizons Sun positions |
+| **Life support** | Air tank (holds 10 units; 1 unit = 1.07 kg of oxygen, what four people breathe in 7.2 hours). The crew uses 1 unit per shift. If the air runs out, flight rules stop the mission. | NASA Life Support Baseline Values and Assumptions Document (BVAD), 2022 |
+| **Radiation shielding** | A water wall (6 units = 20 g/cm² of water) plus supply crates make the shelter. Crew storm dose must stay at 3 or less. When the alarm sounds: **PUMP**, **STACK** or **WAIT**. | NASA DONKI and GOES-13 records of the 10 Sep 2017 storm; NASA lunar shielding guidance (20 g/cm²) |
+| **Food production** | Crops and rations (4 crew eat 1.2 crew-days of food per shift). The garden and Alo need light and warmth, which cost power, and water, which the shield also needs. | NASA BVAD food rates; NASA OSDR *Brassica rapa* growth on the ISS; *Brassica rapa* grown seed-to-seed on Mir |
+| **Running the outpost** | Seven shifts of 7.2 hours on the Mission Table. Each cadet holds information the others need. Preview a plan, commit it, see what happens. After Earth sets, there is no help from Mission Control. | JPL Horizons: from the pole, Earth set on 15 Apr 2046 and stays below the horizon all of Chapter 1's night |
+
+Chapters 2–8 add more of the same trade-offs: pollination and seed harvest, an air leak after a moonquake, a rover trip into a cold trap, an eclipse, a "what if" super-storm, and a relay to bring back the link to Earth ([docs/SCIENCE_AND_DATA.md](docs/SCIENCE_AND_DATA.md) §B2 traces every puzzle).
+
+## NASA data
+
+The game ships small offline extracts of 28 NASA and partner sources (`game/resources/data/nasa/`), so it needs no internet. Each extract keeps its source URL, ID or DOI, retrieval date, licence, the values used and the formulas. Data Cards in the game read these files. **The full table, with IDs, URLs and licences, is [docs/SCIENCE_AND_DATA.md](docs/SCIENCE_AND_DATA.md) §B.**
+
+| NASA source | What the game takes from it | Where the player meets it | In the game |
+|---|---|---|---|
+| **DONKI** space-weather records, 6–10 Sep 2017 | The real storm timeline: X8.2 flare at 15:35 UT on 10 Sep, particles 70 minutes later | Chapter 1 storm alarm and Rafi's forecast | Yes |
+| **LOLA** illumination study (Mazarico et al. 2011) | A Shackleton-rim site's longest darkness, about 1.5 days → the 36-hour night | Chapter 1 night length | Yes |
+| **JPL Horizons** | The low polar Sun; when Earth sets and rises; where Earth is from Mons Malapert | Earth-set in Chapter 1; relay aiming in Chapter 8 | Yes |
+| **BVAD** Rev 2 (2022) | Oxygen 0.895 kg and food 0.8 kg per person per day | Air and food in every chapter | Yes |
+| **Relocatable 10 kW Solar Array** / VSAT (NASA LaRC) | The power scale: 1 sun-drop ≈ 10 kWh | Power card, solar masts | Yes |
+| Lunar radiation shielding guidance (Clowdsley 2021, NASA LaRC) | 20 g/cm² of water makes a storm shelter | Water wall and shelter rating | Yes |
+| **LRO CRaTER** dose at the Moon; **DONKI** and **STEREO-A** records, July 2012 | The real dose rise at the Moon and the three-wave particle profile | Chapter 7 "what if" storm, clearly labelled | Yes |
+| **OSDR** *Brassica rapa* on the ISS (OSD-59, OSD-412); seed-to-seed on Mir | Grow-light levels; one plant per cassette; a full life cycle in space | The garden lamp and Alo | Yes |
+| **LCROSS**, **Diviner**, **VIPER** | Ice at 5.6 % by mass, 38 K cold traps, a 15° rover slope limit | Chapter 4 rover trip | Yes |
+| Lunar eclipse catalog (Espenak); Apollo moonquake catalog; Lunar Impact Monitoring | The 12 Jan 2047 eclipse; the real 1973 south-polar quake; how meteor flashes are checked | Chapters 3, 5 and 6 | Yes |
+| **LROC** south-pole illumination map; **LOLA** elevation models | The real horizon and ground around Aurora | Terrain and the "Why here?" map | In progress |
+
+Partner data, labelled with its agency: NOAA GOES-13, USGS/IAU place names, ESA Moonlight, ISRO Chandrayaan-1, JAXA Kaguya, CNSA Chang'e-4, and the Wisconsin Fast Plants Program.
+
+**Honesty labels.** Aurora Station, the cadets, Alo and the 2046 dates are fiction. The 2017 storm is a historical replay; the 2012 storm hitting the Moon is a "what if". Numbers that no dataset supports are listed in [docs/SCIENCE_AND_DATA.md](docs/SCIENCE_AND_DATA.md) §B3.
+
+## Status (4 November 2026)
+
+The hackathon is on 13–14 November 2026. Work started earlier, with the Dhaka Local Lead's permission. This is what the repository holds today; live status is in [PRODUCTION_HANDBOOK.md](PRODUCTION_HANDBOOK.md) §10, and all open work is on the [team board](production/plan/BOARD.html).
+
+**Built and tested**
+- A Godot 4.7 3D game that starts at the title screen and runs a campaign through all 8 chapters and 96 scenes, with captions, saves and retries. Every automated test suite passed in the latest full run (`game/tools/run_tests.sh`).
+- Six lit Chapter 1 rooms with the five 3D characters; the crew stand, talk and look at the speaker.
+- Outpost Status cards for power, life support, shielding and food, with forecasts before a choice is committed.
+- Data Cards for all 16 puzzles, from the 28 offline NASA and partner extracts.
+- Audio made and installed: all 383 spoken voice lines, 12 music cues and 35 sound effects.
+- Cutscenes CS-01 to CS-09 and CS-18 made and installed in the game folder.
+- Speed: on an Apple M4 Mac (Metal, 1280×720), 95 % of frames take 9.7–11.3 ms in the Greenhouse and the five-character Commons, inside the 16.7 ms needed for 60 fps ([perf report](production/qa/perf_2026-11-04.md)). Other hardware is not measured yet.
+- Windows and macOS release builds that start on clean machines (not yet published, see [Play it](#play-it)).
+
+**In progress**
+- Interactive P-01 and P-02 panels, so the player builds the night plan. Today the game applies the designed plan when the player commits.
+- Playing the voices, music, effects and cutscenes inside the campaign. Today the cutscenes play in the developer showcase, and the campaign shows every line as a caption.
+- Cutscenes CS-10 to CS-17.
+- Four-player Class mode with private role clues, as registered.
+- Chapter 1 endings, decision replay and the science debrief.
+- Final room art and real south-pole terrain from LOLA data.
+- Rooms and interactive puzzles for Chapters 2–8.
+- The 240 s and 30 s videos, and a playtest with learners.
+
+## Use of AI
+
+We used AI tools, and we disclose all of them. Every generation is logged with its exact prompt, inputs, result and the team's changes in **[production/AI_PROMPT_LOG.md](production/AI_PROMPT_LOG.md)**. The full disclosure (why each tool, sample prompts, the data it worked on) is **[docs/AI_USE.md](docs/AI_USE.md)**.
+
+| Tool | Maker | What it did |
+|---|---|---|
+| Claude Code (Claude Opus 5.5 where recorded) | Anthropic | Pipeline scripts, prompts for the other tools, documentation (including this README), NASA data extracts, code fixes, orchestration; the pitch video's scripts, music and edit |
+| Codex (GPT-6, gpt-6-astra) | OpenAI | Game code and tests, code review, bug hunts, release builds, the lunar rock kit |
+| Antigravity (Gemini 4 Argon) | Google | Requirements and NASA mission-practice documents; performance work; the interactive puzzle panels now in progress |
+| Nano Banana Pro (Gemini 3 Pro Image) | Google | Concept art, character turnaround sheets, screen portraits, cutscene start frames |
+| GPT Image 2.5 Sunburst | OpenAI | A few cutscene frame edits |
+| Topaz Image Upscale v2 | Topaz Labs | 4× upscales of turnaround views |
+| Tripo AI | VAST | 3D models of the characters, plants and props, and character skeletons |
+| Meshy | Meshy | Motion-capture animation clips and five text-to-motion story actions |
+| ElevenLabs (eleven_v4, eleven_music_v2_5, Sound Effects v2) | ElevenLabs | All 383 voice lines, 12 music cues and 35 sound effects; the Flows workspace that ran the image and video models |
+| Seedance 2.5 | ByteDance | Short cutscene video shots from our start frames |
+
+Google Veo was not used. The tool behind the 2–3 November campaign code is not recorded; the team is confirming it ([docs/AI_USE.md](docs/AI_USE.md)).
+
+**What the team did itself:** the story, characters and every line of dialogue; all puzzle rules and numbers; the science mapping; the art direction and every approval and rejection; and the review of AI-written code, which is also checked by a second AI and the test suites. AI tools turned our written designs and approved images into assets, and wrote code against our specifications. The NASA data extracts come from a plain Python script ([production/tools/fetch_nasa_data.py](production/tools/fetch_nasa_data.py)) that downloads the original records, or records values quoted from the cited papers; no AI model produces the data values.
+
+## Licence and credits
+
+- **Licence:** our own code and content are released under the **[Apache License 2.0](LICENSE)**. Everything else keeps its own licence.
+- **Credits:** [CREDITS.md](CREDITS.md) credits every source, including free ones and generated content: Godot Engine (MIT), Blender, FFmpeg, Python, the Open Sans font built into Godot (SIL OFL 1.1), every NASA and partner dataset, the research papers, and every AI tool, with a line for every file in `game/assets`.
+- **Pitch video:** solar-flare footage from NASA Goddard / SDO; character animations from Adobe Mixamo; font Baloo Da 2 (SIL OFL 1.1); rendered in Blender.
+
+## Team
+
+Team **The Last BrainCell** · Dhaka, Bangladesh · [Space Apps team page](https://www.spaceappschallenge.org/2026/find-a-team/the-last-braincell)
+
+| Name | Role | GitHub |
+|---|---|---|
+| Nafis Mohtasim Ramim | Team leader | |
+| Khandaker Shadman Sakib Siddiquee | Team member | [SadManQT](https://github.com/SadManQT) |
+| Md. Asif Iqbal | Team member | |
+| Abu Sayem Mohammed Tanvir | Team member | [SayemTanvir](https://github.com/SayemTanvir) |
+| Shahariar Rahman Shanto | Team member | |
+| MD ATIK KHAN | Team member | [ProgrammerAtik](https://github.com/ProgrammerAtik) |
+
+## What is in this repository
+
+| Path | What it is |
+|---|---|
+| [`game/`](game/) | The Godot 4.7 project: scripts, scenes, assets, offline NASA data, tests |
+| [`docs/`](docs/) | Science and data plan, AI use, team, competition rules, final story and gameplay design |
+| [`full-game-story/`](full-game-story/) | The canon story: 96 scenes ([STORY_FULL.md](full-game-story/STORY_FULL.md)) |
+| [`game-design/`](game-design/) | Puzzle rules and numbers, characters, world, UI, audio and science-accuracy designs |
+| [`production/`](production/) | Asset pipeline, AI prompt log, art bible, QA evidence and release scripts, team board |
+| [`PRODUCTION_HANDBOOK.md`](PRODUCTION_HANDBOOK.md) | Decisions, pipeline and current status |
+| [`CREDITS.md`](CREDITS.md), [`LICENSE`](LICENSE) | Credits and licence |
 
 ---
 
-## 👥 Team
+# The full design
 
-| Team member | Role |
-|---|---|
-| **Nafis Mohtasim Ramim** | Team Leader |
-| **MD ATIK KHAN** | Team member |
-| **Abu Sayem Mohammed Tanvir** | Team member |
-| **Md. Asif Iqbal** | Team member |
-| **Khandaker Shadman Sakib Siddiquee** | Team member |
-| **Shahariar Rahman Shanto** | Team member |
+> This part describes the finished game we are building. Some of it is not built yet; what works today is in [Status](#status-4-november-2026). More design detail: [docs/GAMEPLAY_DESIGN_FINAL.md](docs/GAMEPLAY_DESIGN_FINAL.md), [docs/STORY_FINAL.md](docs/STORY_FINAL.md) and [docs/CAMPAIGN_SEASON1.md](docs/CAMPAIGN_SEASON1.md).
 
-## 🎬 Pitch video
-
-| | |
-|---|---|
-| **File** | [`LastLightAcademy_pitch_video.mp4`](LastLightAcademy_pitch_video.mp4) (stored with Git LFS; use **Download** on the file page) |
-| **Length** | 3:59 |
-| **Format** | 1920×1080, 24 fps |
-| **Audio** | English narration and character voices, original music |
-| **Subtitles** | English, burned into the picture, and also in [`LastLightAcademy_pitch_video.srt`](LastLightAcademy_pitch_video.srt) |
-
-The video is the project's original concept visualization. The repository now also contains the Godot game: a production campaign route through all eight chapters that passes its automated checks; visual, learner, audio and export review are still in progress (status: [PRODUCTION_HANDBOOK.md](PRODUCTION_HANDBOOK.md) §10).
-
-## 💡 The idea in 30 seconds
+## The idea in 30 seconds
 
 > In 2019, the first plant ever to sprout on the Moon froze on its very first night.
 >
@@ -65,14 +189,13 @@ station at the Moon's south pole, and each controls one system:
 
 | Cadet | System |
 |---|---|
-| ⚡ **Kai** | power and heat |
-| 🫧 **Amara** | air (oxygen) |
-| 🌱 **Mei** | the garden, food and Alo |
-| 🛡️ **Rafi** | the Safe Room (radiation shelter) |
+| **Kai** | power and heat |
+| **Amara** | air (oxygen) |
+| **Mei** | the garden, food and Alo |
+| **Rafi** | the Safe Room (radiation shelter) |
 
-Sunlight becomes **sun-drops** the team counts and shares. Each cadet gets a **secret** the others need. The repository
-documents candidate NASA sources and labels game content as observed, computed or simulated only when that evidence is
-available. The current commissioning slice keeps its station and resource values explicitly fictional.
+Sunlight becomes **sun-drops** the team counts and shares. Each cadet gets a **secret** the others need. The game labels
+what is observed, computed, a training assumption or fiction (see [NASA data](#nasa-data)).
 
 **Why it matters:**
 
@@ -82,7 +205,7 @@ available. The current commissioning slice keeps its station and resource values
   decision, what it caused, and the science behind it.
 - **For every classroom.** Free, offline-ready, English-only, captioned and timer-free by default, with a readable judge route.
 
-## 📜 The real history behind it
+## The real history behind it
 
 Everything in the story starts from something true:
 
@@ -90,12 +213,12 @@ Everything in the story starts from something true:
 |---|---|
 | **2016** | On the International Space Station, zinnias were dying of mould. NASA let astronaut **Scott Kelly** care for them on his own judgement instead of waiting for instructions from Earth. They **bloomed**. |
 | **2019** | A cotton seedling in China's **Chang'e-4** lander became the first plant ever to sprout on the Moon. It **did not survive its first lunar night**. |
-| **Next** | NASA's **LEAF** experiment is a sealed plant-growth chamber for the lunar surface, planned for one of the first Artemis landings. One of its plants is ***Brassica rapa*** (field mustard): the classroom "Wisconsin Fast Plant", which goes from seed to flower in about 14 days, and the same species as Bangladesh's **Tori mustard (সরিষা)**. |
+| **Next** | NASA's **LEAF** experiment is a sealed plant-growth chamber for the lunar surface, planned for one of the first Artemis landings. One of its plants is ***Brassica rapa*** (field mustard): the classroom "Wisconsin Fast Plant", which goes from seed to flower in about 14 days, and the same species as Bangladesh's **Tori mustard**. |
 
-One flower links NASA, classrooms around the world and the fields of Bangladesh. That flower is **Alo** (আলো), which
+One flower links NASA, classrooms around the world and the fields of Bangladesh. That flower is **Alo**, which
 means *light* in Bangla.
 
-## 🌒 The story: Chapter 1, *Night One*
+## The story: Chapter 1, *Night One*
 
 **1. Last Light.** Aurora Station sits on the rim of **Shackleton crater**, near the Moon's south pole. Rim sites like
 this are among the best-lit places on the Moon, sunlit for most of the year. But tonight is its **longest night of the
@@ -132,7 +255,7 @@ and Ferreira's voice crackles back: *"You didn't survive the Moon. You ran it."*
 Every ending closes Chapter 1 on its own. After a bloom, N.'s old recording plays and Mei finds Tara's bud: *Alo needs
 a friend*. If Alo is lost, the crew is safe, Tara is still growing, and a locked recording waits *for the first bloom*.
 
-## 🎭 Characters
+## Characters
 
 | Who | Role | In one line |
 |---|---|---|
@@ -140,17 +263,17 @@ a friend*. If Alo is lost, the crew is safe, Tara is still growing, and a locked
 | **Amara** | Air: oxygen | Loves exact numbers; turns power into air |
 | **Mei** | Garden: food and Alo | Talks to her plants. "The garden is not a side system." |
 | **Rafi** | Safe Room: radiation shield | Checks twice and warns early; his warnings get the shelter ready in time |
-| **Alo** (আলো, "light") | A faceless field-mustard plant | Leans, droops, recovers and blooms through biological stages |
+| **Alo** ("light" in Bangla) | A faceless field-mustard plant | Leans, droops, recovers and blooms through biological stages |
 | **Commander Ferreira** | Instructor at Mission Control (Earth) | Calm and strict; only speaks while Earth is in the sky |
 | **Rao** | Flight controller (Earth) | Friendly; one hint per shift until Earth-set |
-| **Tara** (তারা, "star") | Alo's partner flower, grown indoors | Without Tara, Alo can't make seeds |
+| **Tara** ("star" in Bangla) | Alo's partner flower, grown indoors | Without Tara, Alo can't make seeds |
 | **Dr. Noor Rahman ("N.")** | Expedition Zero's gardener, from Bangladesh | Left the seeds. Her name means "light", just like Alo's |
 
 The cadets are adult anime-style (cel-shaded) 3D characters. Indoors they wear a navy duty coverall; outside, a white EVA
 suit with navy and orange. Every outfit has the Bangladesh flag on the left shoulder and the Aurora mission patch on the
 right. Each has a role colour: orange for Kai, cyan for Amara, green for Mei, purple for Rafi.
 
-## 🎮 How it plays
+## How it plays
 
 Players walk a compact 3D station in third person: four rooms (Power, Air, Garden, Safe Room), a corridor with the
 **Mission Table**, an airlock, and Alo's chamber outside. Instead of abstract buttons, they work real-looking consoles,
@@ -173,40 +296,40 @@ valves and equipment.
 
 ### One shift (2 to 3 minutes)
 
-1. **📻 Secret.** Sometimes one cadet gets a private message: "For Kai only."
-2. **🗣️ Talk and plan.** While Earth is up, Rao offers one hint. A **ghost preview** shows the result *before* you commit.
-3. **▶ Run.** A time-lapse plays: the Sun moves, frost or warm light spreads, bubbles rise, Alo reacts.
-4. **📋 Result.** Big icons show what changed, and why.
+1. **Secret.** Sometimes one cadet gets a private message: "For Kai only."
+2. **Talk and plan.** While Earth is up, Rao offers one hint. A **ghost preview** shows the result *before* you commit.
+3. **Run.** A time-lapse plays: the Sun moves, frost or warm light spreads, bubbles rise, Alo reacts.
+4. **Result.** Big icons show what changed, and why.
 
 ### The night: 7 shifts of about 7 hours
 
 | Shift | Sky | What happens |
 |:---:|---|---|
-| 1 | ☀️ Day | Meet the crew. Secrets for Kai and Amara. Sun-drops pour in |
-| 2 | ☀️ Day | The **storm drill** (practice). A secret for Rafi |
-| 3 | 🌅 **Last Light** | The Sun sets behind the mountains. A secret for Mei |
-| 4 | 🌍⬇️ **Earth-set** | The radio goes silent, and the hints stop |
-| 5 | ⚡ **The Storm** | THIS IS NOT A DRILL: **PUMP**, **STACK** or **WAIT** |
-| 6 | ⚡ Storm | Particles keep coming; the wall decides the dose |
-| 7 | 🌑 The last dark shift | Will the jar last? |
-| End | 🌄 **First Light** | The Sun returns, Alo blooms (or not), then the debrief |
+| 1 | Day | Meet the crew. Secrets for Kai and Amara. Sun-drops pour in |
+| 2 | Day | The **storm drill** (practice). A secret for Rafi |
+| 3 | **Last Light** | The Sun sets behind the mountains. A secret for Mei |
+| 4 | **Earth-set** | The radio goes silent, and the hints stop |
+| 5 | **The Storm** | THIS IS NOT A DRILL: **PUMP**, **STACK** or **WAIT** |
+| 6 | Storm | Particles keep coming; the wall decides the dose |
+| 7 | The last dark shift | Will the jar last? |
+| End | **First Light** | The Sun returns, Alo blooms (or not), then the debrief |
 
 ### The four jobs and their secrets
 
 | Cadet | Controls | Secret | The trade-off |
 |---|---|---|---|
-| ⚡ **Kai** | Night heater: COZY (2 drops) · COOL (1) · COLD (0) | "Tonight is the longest night of the year: about 36 hours without the Sun. Heat eats drops every night shift." | Warmth empties the jar; cold hurts Alo |
-| 🫧 **Amara** | Air maker: 0, 1 or 2 drops → +0, +1 or +2 air | "The jar can't hold all of today's sunlight. Make air now, and the tank keeps it for the night." | Air made at night eats night drops |
-| 🌱 **Mei** | Grow lamp: OFF · DIM (1) · FULL (2) | "In our scenario, radiation isn't Alo's danger. Frost and thirst are. Don't keep the wall full for long: that's Alo's water." | Light costs drops; frost and thirst cost Alo |
-| 🛡️ **Rafi** | Pumps: FILL (+2 water into the wall) · HOLD · DRAIN (−2) | "Sunspot 2673 just fired a giant flare. Another big one may come within about two days." | Fill too late and the crew is exposed; keep it full too long and Alo goes thirsty |
+| **Kai** | Night heater: COZY (2 drops) · COOL (1) · COLD (0) | "Tonight is the longest night of the year: about 36 hours without the Sun. Heat eats drops every night shift." | Warmth empties the jar; cold hurts Alo |
+| **Amara** | Air maker: 0, 1 or 2 drops → +0, +1 or +2 air | "The jar can't hold all of today's sunlight. Make air now, and the tank keeps it for the night." | Air made at night eats night drops |
+| **Mei** | Grow lamp: OFF · DIM (1) · FULL (2) | "In our scenario, radiation isn't Alo's danger. Frost and thirst are. Don't keep the wall full for long: that's Alo's water." | Light costs drops; frost and thirst cost Alo |
+| **Rafi** | Pumps: FILL (+2 water into the wall) · HOLD · DRAIN (−2) | "Sunspot 2673 just fired a giant flare. Another big one may come within about two days." | Fill too late and the crew is exposed; keep it full too long and Alo goes thirsty |
 
 ### The storm: three choices
 
 | Choice | What you do | Effect | The catch |
 |---|---|---|---|
-| 💧 **PUMP!** | A 15-second valve task (in Class Mode, the whole class claps) | +2 water into the shelter wall | 4+ water in the wall leaves Alo thirsty |
-| 📦 **STACK!** | A 30-second puzzle: fit supply bundles around the bunks, as NASA plans for Orion crews | +2 shielding from crates, no water used | Everyone is building: no air, no lamp, heat on COOL this shift |
-| ⏳ **WAIT** | A tense countdown | Everything keeps running | Only safe if the shelter was ready earlier |
+| **PUMP!** | A 15-second valve task (in Class Mode, the whole class claps) | +2 water into the shelter wall | 4+ water in the wall leaves Alo thirsty |
+| **STACK!** | A 30-second puzzle: fit supply bundles around the bunks, as NASA plans for Orion crews | +2 shielding from crates, no water used | Everyone is building: no air, no lamp, heat on COOL this shift |
+| **WAIT** | A tense countdown | Everything keeps running | Only safe if the shelter was ready earlier |
 
 The storm drill in shift 2 uses the same tasks, so nobody meets the controls for the first time when it's real.
 
@@ -236,7 +359,7 @@ The lesson in one line: **missions fail from silence.**
   sunrise bloom pops with petals and music.
 - **Reasons to replay:** the Golden Bloom, harder modes, and a mission patch to print with your team name.
 
-## ⭐ Stars and endings
+## Stars and endings
 
 Three stars, in the order of real mission priorities: **1. crew safe → 2. base running → 3. Alo blooms.**
 
@@ -246,24 +369,24 @@ Three stars, in the order of real mission priorities: **1. crew safe → 2. base
 
 | Ending | What happens |
 |---|---|
-| 🌟 **Golden Bloom** | Crew safe, lights on, and Alo bursts into a full golden cluster. Rare: the expert goal |
-| 🌸 **Bloom** | Crew safe and Alo alive. A tiny yellow flower opens at sunrise |
-| 🥀 **Alo lost** | The crew made it, but Alo didn't, just like the first Moon sprout in 2019. *Try again?* |
-| 📡 **Mission stopped** | The air ran out or the crew's storm dose passed the limit, so the flight rules stop the night before anyone is hurt. *Try again?* |
+| **Golden Bloom** | Crew safe, lights on, and Alo bursts into a full golden cluster. Rare: the expert goal |
+| **Bloom** | Crew safe and Alo alive. A tiny yellow flower opens at sunrise |
+| **Alo lost** | The crew made it, but Alo didn't, just like the first Moon sprout in 2019. *Try again?* |
+| **Mission stopped** | The air ran out or the crew's storm dose passed the limit, so the flight rules stop the night before anyone is hurt. *Try again?* |
 
 There are many ways to win. Every setting is useful in some winning plan; the point is informed trade-offs, not one
 right answer.
 
-## 🏅 The debrief: astronaut skills
+## The debrief: astronaut skills
 
 The debrief awards the team skills NASA trains astronauts and flight controllers in (Space Flight Resource Management):
 
 | Badge | Earned when… |
 |---|---|
-| 🗣️ **Communication** | The team acted on all four secrets |
-| 👀 **Situational awareness** | The shelter was ready before the alarm |
-| ⚖️ **Decision making** | No blackout |
-| 🤝 **Team care** | The crew stayed safe and Alo bloomed |
+| **Communication** | The team acted on all four secrets |
+| **Situational awareness** | The shelter was ready before the alarm |
+| **Decision making** | No blackout |
+| **Team care** | The crew stayed safe and Alo bloomed |
 
 Then it shows:
 
@@ -273,7 +396,7 @@ Then it shows:
 4. **"what was real"**: the measured sunlight map, the storm timeline and the radiation charts measured at the Moon
    and by Curiosity on Mars, each labelled observed, computed or simulated.
 
-## 🌼 Season 1: *The First Moon Garden*
+## Season 1: *The First Moon Garden*
 
 > **Turn one flower into the first garden on the Moon, in one real Moon year, and find out who left the seeds.**
 
@@ -305,8 +428,8 @@ chapters, each with a new game toy and a new spotlight cadet.
 <summary><b>The full Season 1 story (spoilers)</b></summary>
 
 **Chapter 1 · Night One.** Two weeks before the long night, Mei finds an old seed packet at the back of a drawer: two
-seeds, the word **আলো**, and one letter, **N.** She plants them both. Then comes the night: no Sun, no Earth, a real
-storm… and at First Light, Alo blooms, and Noor's twelve-year-old message plays.
+seeds, the word *Alo* written in Bangla, and one letter, **N.** She plants them both. Then comes the night: no Sun, no
+Earth, a real storm… and at First Light, Alo blooms, and Noor's twelve-year-old message plays.
 
 **Chapter 2 · Be the Bee.** A mustard flower can't make seeds alone: it needs pollen from another plant. Alo lives
 outside; its partner, Tara, lives inside. There are no bees on the Moon, so the cadets become the bees. Mei remembers
@@ -348,7 +471,7 @@ with the first Moon garden's sunrise.
 
 </details>
 
-## 📚 Learning goals and curriculum
+## Learning goals and curriculum
 
 | # | Big idea | Curriculum link |
 |:---:|---|---|
@@ -362,23 +485,20 @@ with the first Moon garden's sunrise.
 The same topics appear in Bangladesh's lower-secondary science (classes 6–8): energy, plants and photosynthesis, and
 the solar system.
 
-**🌱 Pair it with a real plant.** Grow Wisconsin Fast Plants (*Brassica rapa*) in class. They flower in about 14
+**Pair it with a real plant.** Grow Wisconsin Fast Plants (*Brassica rapa*) in class. They flower in about 14
 days and are the same species as Alo, so students can watch a real "Alo" bloom.
 
-## 🧩 Modes, controls and accessibility
+## Planned modes and accessibility
 
 | Mode | For | What changes |
 |---|---|---|
-| 🙋 **Solo** | Home, judges | One player switches between all four cadets; the secrets arrive in each cadet's inbox |
-| 👨‍👩‍👧 **Family** | Ages 6+ with an adult | No action timers, hints always on, a gentler storm |
-| 🧑‍🚀 **Cadet** (default) | Ages 10–15 | The full night |
-| 🧠 **Engineer** | Teens, adults, judges | Real units (1 sun-drop ≈ 10 kWh, 1 shift ≈ 7.2 h, g/cm² of shielding) and the real data charts |
-| 🏫 **Class** | One projector, four role groups | Printed role cards and sealed secret envelopes; everyone discusses, each role approves its setting |
+| **Solo** | Home, judges | One player switches between all four cadets; the secrets arrive in each cadet's inbox |
+| **Family** | Ages 6+ with an adult | No action timers, hints always on, a gentler storm |
+| **Cadet** (default) | Ages 10–15 | The full night |
+| **Engineer** | Teens, adults, judges | Real units (1 sun-drop ≈ 10 kWh, 1 shift ≈ 7.2 h, g/cm² of shielding) and the real data charts |
+| **Class** | One projector, four role groups | Printed role cards and sealed secret envelopes; everyone discusses, each role approves its setting |
 
-**Controls:** WASD to move, mouse to look, **E** to interact, **1–4** to pick a cadet, **Tab** for the Mission Table,
-**Space** to run the shift. Full controller support, and every control can be remapped.
-
-**Accessibility:**
+**Accessibility goals:**
 
 - English captions for every line, with readable text and speaker/origin labels.
 - Icons and words together, never colour alone; large, readable text.
@@ -386,108 +506,6 @@ days and are the same species as Alo, so students can watch a real "Alo" bloom.
 - A reduce-shaking option.
 - Works offline on low-end classroom laptops.
 
-## 🔭 NASA data and evidence status
-
-The repository documents the NASA sources the complete campaign is designed to use. The current commissioning slice does
-**not** claim that the full offline processing bundle is integrated: its mission station, cadets, dates and resource values
-are labelled **SIMULATED** or **TRAINING SCENARIO** in-game.
-
-| In the game | NASA data | How we use it |
-|---|---|---|
-| "Why here?" map and the base's sunlight | **LRO LROC** south-pole illumination map | Show the base's measured share of sunlight |
-| The horizon, Last Light, Earth-set and First Light | **LRO LOLA** south-pole terrain + **JPL Horizons** | Compute the real horizon and the Sun and Earth paths, and find a **real future 36-hour night** with Earth down |
-| The storm timeline and Rafi's forecast | **DONKI** (flares, CME and particle events, 6–10 September 2017) | The real event times |
-| How strong the storm is | **LRO CRaTER** radiation dose at the Moon, September 2017 | Scale the storm to the real curve; chart in the debrief |
-| The same storm on Mars | **MSL RAD** (Curiosity rover) | Debrief card |
-| Air and crew needs | **NASA BVAD** (Baseline Values and Assumptions Document) | Breathing rate, Engineer Mode |
-| Solar masts | **NASA VSAT** / relocatable solar array concepts | Power scale |
-| Water wall | **NASA radiation guidance** (~20 g/cm² storm shelter) | Shelter scale |
-| Alo | **NASA LEAF** and **Veggie** | The species, the chamber and the story |
-| The video | **NASA SDO** (the X8.2 flare of 10 September 2017) | Real footage |
-
-Validated source products, retrieval metadata, processing revisions and limitations must be bundled before a runtime value is
-labelled **OBSERVED** or **COMPUTED**. Until then, the player-facing qualifier is "training scenario · source integration
-pending".
-
-## 🔧 Hackathon build plan
-
-**Status (3 Nov 2026): campaign route implemented; review and polish in progress.** The game boots into the production
-campaign, which runs Chapter 1, Chapter 2 and the shared Chapter 3–8 route to the final scene `EX-CH08-S12`, with
-captions, saves, preview/commit receipts and retries. Its automated suites pass (`game/tools/run_tests.sh`); a bug hunt
-found Chapter 2 not yet playable from the real Chapter 1 handoff, which is being fixed. Visual, learner, audio, device
-and export review are still open. All remaining work is on the team board ([production/plan/GO_NEXT.md](production/plan/GO_NEXT.md)).
-
-- **Engine:** Godot 4.7 + GDScript, Windows offline first, on the Forward+ renderer with LODs and a Compatibility
-  fallback build for older classroom hardware.
-- **Architecture:** the simulation is separate from the graphics: one authoritative state, a pure preview/step
-  function, and every number in a data file tagged with its source.
-
-| Priority | What we build |
-|---|---|
-| **Must** | Extend the commissioning slice into the complete Chapter 1 · the 3D station, consoles and the four cadets · the shared P-01/P-02 simulation · seven shifts, endings, captions, save/retry and an evidence-backed debrief |
-| **Should** | STACK puzzle · Engineer Mode · the CRaTER storm chart · the real-night date from LOLA + Horizons · the Curiosity card · sound · Family Mode · the mission patch |
-| **Could** | A short Chapter 2 sample (bee runs) · clap-to-pump · surprise cards · replays of other real storms |
-| **Later** | Season 1 Chapters 3–8 · Season 2: Mars · online co-op |
-
-**Judge route:** the production campaign from the title screen, starting with the 12 Chapter 1 scenes (P-01/P-02, the
-night and the first bloom). The game is English only. Present only what has fresh test and screenshot evidence.
-
-**Before the build:** a paper playtest with students aged 10–15 (with guardian permission), measuring fun, learning (a
-short quiz before and after) and confusing words or icons.
-
-## 🤖 Use of AI (video production)
-
-The full disclosure for the game and the video (every tool, why, prompts, data and human work) is in
-[docs/AI_USE.md](docs/AI_USE.md); every generation is logged in [production/AI_PROMPT_LOG.md](production/AI_PROMPT_LOG.md).
-
-The pitch video was made with these AI tools:
-
-| Tool | What it did in the video |
-|---|---|
-| **Claude Code** (Anthropic) | Wrote the Blender scene and animation scripts, the motion-graphics animations, the synthesized music and sound effects, and the edit that assembles the film and its subtitles |
-| **ElevenLabs** | The narrator and character voices (text-to-speech from our script) |
-| **Tripo AI** | The 3D character models |
-
-## 🙏 Credits
-
-- **Character animations:** Adobe Mixamo.
-- **Solar-flare footage:** NASA/SDO.
-- **Font:** Baloo Da 2 (SIL Open Font License).
-- **3D rendering:** Blender.
-
-## 📁 What's in this repository
-
-| File | What it is |
-|---|---|
-| [`LastLightAcademy_pitch_video.mp4`](LastLightAcademy_pitch_video.mp4) | The pitch video (Git LFS) |
-| [`LastLightAcademy_pitch_video.srt`](LastLightAcademy_pitch_video.srt) | Its English subtitles |
-| `README.md` | This page |
-| `.gitattributes` | Stores the video with Git LFS |
-
----
-
-<details>
-<summary><b>বাংলায় সংক্ষেপে</b></summary>
-
-**এক লাইনে:** চাঁদের এক রাত পার করে ছোট্ট সরিষা ফুল "আলো"-কে বাঁচিয়ে রাখো, যাতে সে হয় চাঁদে ফোটা প্রথম ফুল।
-
-**যা সত্যি ঘটেছে:**
-- ২০১৯ সালে চাঁদে প্রথম যে চারাগাছটি গজিয়েছিল, প্রথম রাতেই তা ঠান্ডায় মরে যায়।
-- NASA আবার চাঁদে গাছ জন্মানোর পরিকল্পনা করছে। তার মধ্যে আছে Brassica rapa, সেই একই প্রজাতির সরিষা, যার হলুদ ফুলে প্রতি শীতে বাংলাদেশের মাঠ ভরে যায়।
-
-**খেলা:**
-- শ্যাকলটন খাদের কিনারায় "অরোরা স্টেশন"। চার ক্যাডেট কাই, আমারা, মেই আর রাফি প্রথমবার নিজেরাই ঘাঁটি চালায়।
-- সূর্যের আলো হয়ে যায় "সান-ড্রপ"। তাপ, বাতাস আর আলোর মধ্যে সেগুলো ভাগ করতে হয়।
-- সূর্য ডুবে থাকে প্রায় ৩৬ ঘণ্টা। পৃথিবী দিগন্তের নিচে নেমে যায়, তাই রেডিও চুপ।
-- তারপর আসে ১০ সেপ্টেম্বর ২০১৭-এর আসল সৌরঝড়। পানির দেয়াল ক্রুকে বাঁচায়, কিন্তু সেই পানিই আলোর খাবার।
-- প্রত্যেকের একটা করে গোপন তথ্য আছে। কথা না বললে মিশন ব্যর্থ হয়।
-
-**মৌসুম ১, "চাঁদের প্রথম বাগান":** এই রাতটা অধ্যায় ১। পুরো গল্পে ৮টা অধ্যায়, এক চাঁদ-বছর জুড়ে। রহস্য: বীজগুলো কে রেখে গেছে? "N."। "আলো" আর "নূর", দুটো নামেরই মানে আলো।
-
-</details>
-
-<div align="center">
-
-*This repository contains the Last Light Academy game, its production assets and design documents. It is not endorsed by NASA.*
-
-</div>
+**Architecture:** the simulation is separate from the graphics: one authoritative state, a pure preview/step
+function, and every number in a data file tagged with its source. Godot 4.7 with the Forward+ renderer, LODs and a
+Compatibility fallback for older classroom hardware.
