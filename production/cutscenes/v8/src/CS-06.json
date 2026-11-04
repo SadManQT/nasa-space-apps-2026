@@ -1,0 +1,44 @@
+{
+ "id": "CS-06",
+ "card": [
+  "Chapter 3 - Moonquake",
+  "Forty-Two Sounds on a Tray"
+ ],
+ "shots": [
+  "shots/CS-06-A.mp4",
+  "shots/CS-06-B.mp4",
+  "shots/CS-06-C.mp4"
+ ],
+ "transitions": [
+  "dissolve",
+  "dissolve"
+ ],
+ "music": "music/CS-06.mp3",
+ "lines": [
+  {
+   "at": 6.0,
+   "speaker": "Mei",
+   "text": "I thought keeping her alive meant longer.",
+   "file": "../../../audio/vo_masters/VO_EX-CH03-S10-L01.mp3"
+  },
+  {
+   "at": 9.2,
+   "speaker": "Amara",
+   "text": "It meant she could finish.",
+   "file": "../../../audio/vo_masters/VO_EX-CH03-S10-L02.mp3"
+  },
+  {
+   "at": 11.8,
+   "speaker": "Kai",
+   "text": "Do you want us to wait?",
+   "file": "../../../audio/vo_masters/VO_EX-CH03-S10-L03.mp3"
+  },
+  {
+   "at": 13.9,
+   "speaker": "Mei",
+   "text": "Stay. Then help me count.",
+   "file": "../../../audio/vo_masters/VO_EX-CH03-S10-L04.mp3"
+  }
+ ],
+ "out": "../CS-06_Forty-Two_Sounds_on_a_Tray"
+}

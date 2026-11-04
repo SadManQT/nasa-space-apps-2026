@@ -13,6 +13,7 @@ var gaits: Array[String] = []
 var _player: AnimationPlayer
 var _skeleton: Skeleton3D
 var _surface_meter: RefCounted
+static var _prepared_cache: Dictionary = {}
 
 static func bone(skeleton: Skeleton3D, suffix: String) -> int:
 	for i in skeleton.get_bone_count():
@@ -24,6 +25,15 @@ static func bone(skeleton: Skeleton3D, suffix: String) -> int:
 func prepare(player: AnimationPlayer, skeleton: Skeleton3D, source_path: String = "") -> bool:
 	_player = player
 	_skeleton = skeleton
+	var cache_key := "%s:%d" % [source_path, FileAccess.get_modified_time(source_path)] if not source_path.is_empty() and FileAccess.file_exists(source_path) else ""
+	if not cache_key.is_empty() and _prepared_cache.has(cache_key):
+		var cached: Dictionary = _prepared_cache[cache_key]
+		gaits = (cached.gaits as Array[String]).duplicate()
+		measurements = (cached.measurements as Dictionary).duplicate(true)
+		player.add_animation_library("motion", cached.library as AnimationLibrary)
+		player.stop()
+		skeleton.reset_bone_poses()
+		return true
 	for suffix in ["Hips", "LeftUpLeg", "RightUpLeg", "LeftLeg", "RightLeg", "LeftFoot", "RightFoot", "LeftToeBase", "RightToeBase"]:
 		if bone(skeleton, suffix) < 0:
 			push_error("Locomotion needs Mixamo bone " + suffix)
@@ -62,6 +72,8 @@ func prepare(player: AnimationPlayer, skeleton: Skeleton3D, source_path: String 
 			return false
 		measurements[name] = measured
 		library.add_animation(name + "_cycle", _cycle(library.get_animation(name), measured))
+	if not cache_key.is_empty():
+		_prepared_cache[cache_key] = {"library": library, "gaits": gaits.duplicate(), "measurements": measurements.duplicate(true)}
 	player.stop()
 	skeleton.reset_bone_poses()
 	return true

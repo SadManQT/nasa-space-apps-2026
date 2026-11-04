@@ -9,6 +9,8 @@ var lean_enabled: bool = true
 var targets: Array[Node3D] = []
 var poles: Array[Node3D] = []
 var solvers: Array[SkeletonModifier3D] = []
+var up_leg_bones: Array[int] = []
+var leg_bones: Array[int] = []
 var foot_bones: Array[int] = []
 var toe_bones: Array[int] = []
 var locked: Array[bool] = [false, false]
@@ -41,6 +43,8 @@ func setup(body: CharacterBody3D, motion: PlayerAnimation) -> void:
 	_surface_meter = LocomotionClips.FootSlideScript.new()
 	_surface_meter.setup(animation.player.get_node(animation.player.root_node), get_skeleton())
 	for side in ["Left", "Right"]:
+		up_leg_bones.append(LocomotionClips.bone(get_skeleton(), side + "UpLeg"))
+		leg_bones.append(LocomotionClips.bone(get_skeleton(), side + "Leg"))
 		foot_bones.append(LocomotionClips.bone(get_skeleton(), side + "Foot"))
 		toe_bones.append(LocomotionClips.bone(get_skeleton(), side + "ToeBase"))
 		var target := Node3D.new()
@@ -56,8 +60,8 @@ func setup(body: CharacterBody3D, motion: PlayerAnimation) -> void:
 			ik.name = side + "FootIK"
 			get_skeleton().add_child(ik)
 			ik.set("setting_count", 1)
-			ik.call("set_root_bone_name", 0, get_skeleton().get_bone_name(LocomotionClips.bone(get_skeleton(), side + "UpLeg")))
-			ik.call("set_middle_bone_name", 0, get_skeleton().get_bone_name(LocomotionClips.bone(get_skeleton(), side + "Leg")))
+			ik.call("set_root_bone_name", 0, get_skeleton().get_bone_name(up_leg_bones[-1]))
+			ik.call("set_middle_bone_name", 0, get_skeleton().get_bone_name(leg_bones[-1]))
 			ik.call("set_end_bone_name", 0, get_skeleton().get_bone_name(foot_bones[-1]))
 			ik.call("set_target_node", 0, ik.get_path_to(target))
 			ik.call("set_pole_node", 0, ik.get_path_to(pole))
@@ -79,10 +83,12 @@ func _process_modification_with_delta(delta: float) -> void:
 			_rotations.append(q)
 			_positions.append(p)
 		else:
-			_rotations[bone] = _rotations[bone].slerp(q, weight).normalized()
-			_positions[bone] = _positions[bone].lerp(p, weight)
-		rig.set_bone_pose_rotation(bone, _rotations[bone])
-		rig.set_bone_pose_position(bone, _positions[bone])
+			if not _rotations[bone].is_equal_approx(q):
+				_rotations[bone] = _rotations[bone].slerp(q, weight).normalized()
+				rig.set_bone_pose_rotation(bone, _rotations[bone])
+			if not _positions[bone].is_equal_approx(p):
+				_positions[bone] = _positions[bone].lerp(p, weight)
+				rig.set_bone_pose_position(bone, _positions[bone])
 	_update_lean(delta)
 	if solvers.size() == 2:
 		_update_feet(delta, fresh)
@@ -115,15 +121,16 @@ func _update_feet(delta: float, fresh: bool) -> void:
 	if speed > tuning.run_speed + 0.05:
 		gait = animation.clips.gaits[2]
 	var min_heights: Array = animation.clips.measurements[gait].min_toe_y
-	var surfaces: Dictionary = _surface_meter.sample_heights()
+	var sampled_heights: Array[float] = [NAN, NAN]
 	for side in 2:
 		var foot := rig.global_transform * rig.get_bone_global_pose(foot_bones[side])
 		var toe := rig.global_transform * rig.get_bone_global_pose(toe_bones[side]).origin
 		var local_toe := rig.to_local(toe)
 		var backwards := (local_toe.z - _previous_toes[side].z) / delta < -0.05
 		_previous_toes[side] = local_toe
-		var surface: Dictionary = surfaces["left" if side == 0 else "right"]
-		var low := float(surface.height) - actor.global_position.y < 0.04 or local_toe.y < float(min_heights[side]) + 0.025
+		var low := local_toe.y < float(min_heights[side]) + 0.025
+		if not low and backwards:
+			low = _sample_side_height(side, sampled_heights) - actor.global_position.y < 0.04
 		if not low or not backwards:
 			_released[side] = false
 		var contact := (low and backwards) or speed < 0.06
@@ -133,9 +140,8 @@ func _update_feet(delta: float, fresh: bool) -> void:
 		enabled = enabled and not hit.is_empty() and hit.normal.y > cos(actor.floor_max_angle)
 		_ground[side] = float(hit.position.y) if enabled else INF
 		contact = contact and enabled and not fresh
-		var prefix := "Left" if side == 0 else "Right"
-		var hip := rig.global_transform * rig.get_bone_global_pose(LocomotionClips.bone(rig, prefix + "UpLeg")).origin
-		var knee := rig.global_transform * rig.get_bone_global_pose(LocomotionClips.bone(rig, prefix + "Leg")).origin
+		var hip := rig.global_transform * rig.get_bone_global_pose(up_leg_bones[side]).origin
+		var knee := rig.global_transform * rig.get_bone_global_pose(leg_bones[side]).origin
 		var length := hip.distance_to(knee) + knee.distance_to(foot.origin) - 0.025
 		var predicted_hip := hip + actor.velocity * 0.04 - Vector3.UP * 0.10
 		if locked[side] and predicted_hip.distance_to(lock_positions[side]) > length:
@@ -143,7 +149,7 @@ func _update_feet(delta: float, fresh: bool) -> void:
 		contact = contact and not _released[side]
 		if contact and not locked[side]:
 			lock_positions[side] = foot.origin
-			lock_positions[side].y += float(hit.position.y) - float(surface.height)
+			lock_positions[side].y += float(hit.position.y) - _sample_side_height(side, sampled_heights)
 			_lock_bases[side] = Basis(Quaternion(Vector3.UP, hit.normal)) * foot.basis.orthonormalized()
 			_lock_toes[side] = rig.get_bone_pose_rotation(toe_bones[side])
 		if contact:
@@ -159,7 +165,7 @@ func _update_feet(delta: float, fresh: bool) -> void:
 			target.y += 0.08 * sin(PI * clampf(_release_time[side] / 0.16, 0.0, 1.0))
 		var clearance := 0.0
 		if enabled and not contact:
-			clearance = maxf(0.0, float(hit.position.y) + 0.035 - float(surface.height))
+			clearance = maxf(0.0, float(hit.position.y) + 0.035 - _sample_side_height(side, sampled_heights))
 			target.y = maxf(target.y, foot.origin.y + clearance)
 		targets[side].global_position = target
 		poles[side].global_position = knee + rig.global_basis.z * 1.5
@@ -170,7 +176,17 @@ func _update_feet(delta: float, fresh: bool) -> void:
 	_clear_swing_feet()
 	_adjust_pelvis(delta)
 
+func _sample_side_height(side: int, cache: Array[float]) -> float:
+	if is_nan(cache[side]):
+		var res: Dictionary = _surface_meter.sample_heights(side)
+		cache[side] = float(res["left" if side == 0 else "right"].height)
+	return cache[side]
+
 func _clear_swing_feet() -> void:
+	var clear0 := not locked[0] and is_finite(_ground[0])
+	var clear1 := not locked[1] and is_finite(_ground[1])
+	if not clear0 and not clear1:
+		return
 	var rig := get_skeleton()
 	var poses: Array[Transform3D] = []
 	var toes: Array[Quaternion] = []
@@ -181,7 +197,8 @@ func _clear_swing_feet() -> void:
 		pose.basis = rig.global_basis.inverse() * foot_bases[side]
 		rig.set_bone_global_pose(foot_bones[side], pose)
 		rig.set_bone_pose_rotation(toe_bones[side], toe_rotations[side])
-	var surface: Dictionary = _surface_meter.sample_heights()
+	var side_filter := -1 if (clear0 and clear1) else (0 if clear0 else 1)
+	var surface: Dictionary = _surface_meter.sample_heights(side_filter)
 	for side in 2:
 		if not locked[side] and is_finite(_ground[side]):
 			var original := rig.global_transform * poses[side].origin

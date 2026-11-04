@@ -1,0 +1,48 @@
+{
+ "id": "CS-05",
+ "card": [
+  "Chapter 3 - Moonquake",
+  "The Garden That Never Opened"
+ ],
+ "shots": [
+  "shots/CS-05-A.mp4",
+  "shots/CS-05-B.mp4",
+  "shots/CS-05-C.mp4",
+  "shots/CS-05-D.mp4"
+ ],
+ "transitions": [
+  "cut",
+  "cut",
+  "cut"
+ ],
+ "music": "music/CS-05.mp3",
+ "lines": [
+  {
+   "at": 5.6,
+   "speaker": "Mei",
+   "text": "I mistook the curled leaves for flowers. They were young seedlings.",
+   "file": "../../../audio/vo_masters/VO_EX-CH03-S07-L01.mp3"
+  },
+  {
+   "at": 13.4,
+   "speaker": "Amara (local link)",
+   "text": "The growth chart agrees: seedling stage.",
+   "file": "../../../audio/vo_masters/VO_EX-CH03-S07-L02.mp3",
+   "radio": true
+  },
+  {
+   "at": 18.3,
+   "speaker": "Rafi",
+   "text": "Record it. Leave the material undisturbed.",
+   "file": "../../../audio/vo_masters/VO_EX-CH03-S07-L03.mp3"
+  },
+  {
+   "at": 21.55,
+   "speaker": "Kai (local link)",
+   "text": "Return boundary ready when you are.",
+   "file": "../../../audio/vo_masters/VO_EX-CH03-S07-L04.mp3",
+   "radio": true
+  }
+ ],
+ "out": "../CS-05_The_Garden_That_Never_Opened"
+}

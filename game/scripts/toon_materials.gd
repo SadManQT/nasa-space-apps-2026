@@ -75,13 +75,16 @@ static func _apply_mesh(mesh_instance: MeshInstance3D, characters: bool, add_out
 # GLBs loaded at runtime (AssetGeometry.load_glb) bring full-size images only: without mipmaps distant detail
 # sparkles and the world shader's cel flatten has no blurred level to read. Built once, in place, per texture.
 static func _ensure_mipmaps(texture: Texture2D) -> void:
-	if not texture is ImageTexture:
+	if not texture is ImageTexture or texture.has_meta(&"mipmaps_ready"):
 		return
 	var image := texture.get_image()
-	if image == null or image.has_mipmaps() or image.is_compressed():
+	if image == null or image.is_compressed():
+		texture.set_meta(&"mipmaps_ready", true)
 		return
-	image.generate_mipmaps()
-	(texture as ImageTexture).set_image(image)
+	if not image.has_mipmaps():
+		image.generate_mipmaps()
+		(texture as ImageTexture).set_image(image)
+	texture.set_meta(&"mipmaps_ready", true)
 
 static func _looks_like_hair(mesh_instance: MeshInstance3D, source: StandardMaterial3D) -> bool:
 	var mesh_name := mesh_instance.name.to_lower()

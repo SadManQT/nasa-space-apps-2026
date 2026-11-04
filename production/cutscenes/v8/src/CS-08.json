@@ -1,0 +1,44 @@
+{
+ "id": "CS-08",
+ "card": [
+  "Chapter 5 - Shooting Stars",
+  "The Fifth Mug"
+ ],
+ "shots": [
+  "shots/CS-08-A.mp4",
+  "shots/CS-08-B.mp4",
+  "shots/CS-08-C.mp4"
+ ],
+ "transitions": [
+  "cut",
+  "cut"
+ ],
+ "lines": [
+  {
+   "at": 4.3,
+   "speaker": "Rafi",
+   "text": "Name and seal indication, please.",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S01-L01.mp3"
+  },
+  {
+   "at": 7.0,
+   "speaker": "Ferreira",
+   "text": "Ferreira. Seal indication checked twice.",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S01-L02.mp3"
+  },
+  {
+   "at": 11.3,
+   "speaker": "Kai",
+   "text": "Your mug passed inspection.",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S01-L03.mp3"
+  },
+  {
+   "at": 13.7,
+   "speaker": "Amara",
+   "text": "We are revising the occupancy ledger.",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S01-L04.mp3"
+  }
+ ],
+ "out": "../CS-08_The_Fifth_Mug"
+}
+

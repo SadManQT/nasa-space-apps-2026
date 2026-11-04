@@ -25,7 +25,5 @@ ok   tools/test_science_data.gd :: SCIENCE DATA RESULT: PASS (33 checks, 0 failu
 ok   tools/test_toon_materials.gd :: PASS ToonMaterials (12 checks, 2 swapped materials)
 ok   tools/test_worker_a_systems.gd :: WORKER A SYSTEMS RESULT: PASS (108 checks, 0 failures)
 ok   tools/test_worker_b_world_missions.gd :: WORKER B WORLD/MISSIONS RESULT: PASS (429 checks, 0 failures)
-FAIL tools/test_worker_c_content.gd :: exit 1 :: WORKER C CONTENT RESULT: FAIL (566 checks, 1 failures)
-       ERROR: FAIL missing runtime voice truthfully falls back to captions
-       WORKER C CONTENT RESULT: FAIL (566 checks, 1 failures)
-27/28 suites passed
+ok   tools/test_worker_c_content.gd :: WORKER C CONTENT RESULT: PASS (566 checks, 0 failures)
+28/28 suites passed

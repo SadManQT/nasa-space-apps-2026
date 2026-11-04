@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/SFX_ROVER_CABIN.ogg-a811d0fe1107ca0f3402413f9
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

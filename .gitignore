@@ -25,6 +25,7 @@ production/models/
 
 # Cutscene mixes (rebuilt by compose_cutscene.py)
 production/cutscenes/v7/*.wav
+production/cutscenes/v8/*.wav
 
 # Outdated cutscenes archive & masters/review if generated locally
 production/cutscenes/masters/

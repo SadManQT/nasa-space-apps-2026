@@ -1,0 +1,47 @@
+{
+ "id": "CS-07",
+ "card": [
+  "Chapter 4 - Into the Cold Trap",
+  "Something With Corners"
+ ],
+ "shots": [
+  "shots/CS-07-A.mp4",
+  "shots/CS-07-B.mp4",
+  "shots/CS-07-C.mp4"
+ ],
+ "transitions": [
+  "cut",
+  "cut"
+ ],
+ "music": "music/CS-07.mp3",
+ "lines": [
+  {
+   "at": 5.3,
+   "speaker": "Mei (local link)",
+   "text": "That shape did not grow there.",
+   "file": "../../../audio/vo_masters/VO_EX-CH04-S06-L01.mp3",
+   "radio": true
+  },
+  {
+   "at": 7.9,
+   "speaker": "Kai",
+   "text": "Neither did we.",
+   "file": "../../../audio/vo_masters/VO_EX-CH04-S06-L02.mp3"
+  },
+  {
+   "at": 9.9,
+   "speaker": "Rafi",
+   "text": "Separate sample record. Separate case record. Seal stays closed.",
+   "file": "../../../audio/vo_masters/VO_EX-CH04-S06-L03.mp3"
+  },
+  {
+   "at": 15.8,
+   "speaker": "Amara (local link)",
+   "text": "Reserve supports recovery. Record the handling assessment first.",
+   "file": "../../../audio/vo_masters/VO_EX-CH04-S06-L04.mp3",
+   "radio": true
+  }
+ ],
+ "out": "../CS-07_Something_With_Corners"
+}
+

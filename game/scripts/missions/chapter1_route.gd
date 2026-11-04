@@ -25,7 +25,7 @@ var _p02_hosts := {}
 var _last_result := {}
 var _ending := ""
 
-func _init(director: RefCounted = null) -> void:
+func _init(director: RefCounted = null, skip_initial_scene: bool = false) -> void:
 	_gate_catalog = GateCatalog
 	_director = director if director != null else DirectorScript.new()
 	_world = WorldRouteScript.new(_director)
@@ -34,8 +34,9 @@ func _init(director: RefCounted = null) -> void:
 	for scene_id in GateCatalog.scene_ids():
 		_scene_flags[scene_id] = {}
 		_dialogue_acks[scene_id] = []
-	_set_current_scene(0)
-	_retry_checkpoint = _checkpoint_snapshot()
+	if not skip_initial_scene:
+		_set_current_scene(0)
+		_retry_checkpoint = _checkpoint_snapshot()
 
 func director() -> RefCounted:
 	return _director

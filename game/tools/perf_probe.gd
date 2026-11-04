@@ -17,9 +17,15 @@ var _events: Array = []
 var _summaries: Array = []
 var _slot := ""
 var _metadata: Dictionary = {}
+var _physics_stamp := 0
 
 func _init() -> void:
 	_run.call_deferred()
+
+## First physics tick of the current frame (physics_frame precedes node physics).
+func _stamp_physics() -> void:
+	if _physics_stamp == 0:
+		_physics_stamp = Time.get_ticks_usec()
 
 func _run() -> void:
 	var args := OS.get_cmdline_user_args()
@@ -40,6 +46,9 @@ func _run() -> void:
 	_slot = OS.get_temp_dir().path_join("lla-perf-%d.json" % OS.get_process_id())
 	_metadata = {"engine": Engine.get_version_info(), "display": DisplayServer.get_name(), "renderer": RenderingServer.get_current_rendering_method(), "driver": RenderingServer.get_current_rendering_driver_name(), "cpu_only": _cpu_only, "window": root.size, "seconds": _seconds, "vsync": DisplayServer.window_get_vsync_mode(), "max_fps": Engine.max_fps, "physics_ticks": Engine.physics_ticks_per_second}
 	print("PERF metadata ", JSON.stringify(_metadata))
+	physics_frame.connect(_stamp_physics)
+	if not _cpu_only:
+		RenderingServer.viewport_set_measure_render_time(root.get_viewport_rid(), true)
 	_main = MAIN.instantiate()
 	_main.save_path = _slot
 	_main.legacy_save_path = _slot + ".legacy"
@@ -55,6 +64,7 @@ func _run() -> void:
 		return
 	if _cpu_only:
 		await _cpu_samples("hub")
+		await _cpu_walk("hub")
 	else:
 		await _sample("hub_walk", true, false)
 		await _sample("hub_panels", false, true)
@@ -67,6 +77,7 @@ func _run() -> void:
 	await physics_frame
 	if _cpu_only:
 		await _cpu_samples("garden")
+		await _cpu_walk("garden")
 	else:
 		await _sample("garden_walk", true, false)
 		await _sample("garden_panels", false, true)
@@ -79,6 +90,7 @@ func _run() -> void:
 	await physics_frame
 	if _cpu_only:
 		await _cpu_samples("full_cast")
+		await _cpu_walk("full_cast")
 	else:
 		await _sample("full_cast_walk", true, false)
 		await _sample("full_cast_panels", false, true)
@@ -102,6 +114,126 @@ func _event(label: String, action: Callable) -> void:
 	var elapsed := (Time.get_ticks_usec() - start) / 1000.0
 	_events.append({"event": label, "cpu_ms": elapsed})
 	print("PERF event ", label, " cpu_ms=", elapsed)
+
+## Walking CPU sweep: the same input/camera schedule as the rendered walk
+## sample, keyed to fixed-60 ticks. Per tick: wall interval, the physics part
+## (physics_frame -> process_frame: node physics callbacks, skeleton modifiers,
+## physics server step) and the remainder (node _process + dummy render).
+func _cpu_walk(label: String) -> void:
+	var ticks := int(_seconds * 60.0)
+	var intervals: Array = []
+	var physics: Array = []
+	var remainder: Array = []
+	await process_frame
+	var previous := Time.get_ticks_usec()
+	for index in ticks:
+		if index % 60 == 0:
+			_walk_step(index / 60)
+		await physics_frame
+		var physics_start := Time.get_ticks_usec()
+		await process_frame
+		var now := Time.get_ticks_usec()
+		var interval := (now - previous) / 1000.0
+		var physics_ms := (now - physics_start) / 1000.0
+		intervals.append(interval)
+		physics.append(physics_ms)
+		remainder.append(maxf(0.0, interval - physics_ms))
+		_frames.append([label + "_walk_cpu", index, interval, interval - physics_ms, physics_ms, 0, 0, Performance.get_monitor(Performance.OBJECT_COUNT), Performance.get_monitor(Performance.MEMORY_STATIC), 0, 0, 0, physics_ms, 0, 0])
+		previous = now
+	_summarize(label + "_walk_tick_cpu", intervals)
+	_summarize(label + "_walk_physics_cpu", physics)
+	_summarize(label + "_walk_process_cpu", remainder)
+	await _cpu_breakdown(label)
+	_release_input()
+
+func _walk_step(step: int) -> void:
+	_release_input()
+	Input.action_press(["move_left", "move_right", "move_forward", "move_back"][int(step / 2) % 4])
+	_campaign._player.follow_camera.yaw += 0.35
+
+## Per-system cost while walking, each called directly N times in the current
+## (moving) state. Sums are over every visible character in the room.
+func _cpu_breakdown(label: String) -> void:
+	var dt := 1.0 / 60.0
+	var bodies: Array = []
+	for id in _campaign._crew.local_ids:
+		bodies.append(_campaign._crew.bodies[id])
+	var player: PlayerController = _campaign._player
+	var systems := {
+		"animation_tree_advance": _each.bind(bodies, func(b): b.animation.advance(dt, b.horizontal_speed)),
+		"skeleton_advance_all_modifiers": _each.bind(bodies, func(b): b.animation.skeleton.advance(dt)),
+		"locomotion_pose_gd": _each.bind(bodies, func(b): b.pose_modifier._process_modification_with_delta(dt)),
+		"boot_sample_heights_x2": _each.bind(bodies, func(b): return [b.pose_modifier._surface_meter.sample_heights(), b.pose_modifier._surface_meter.sample_heights()]),
+		"foot_orientation_gd": _each.bind(bodies, func(b): _modifier(b, "FootOrientation")._process_modification_with_delta(dt)),
+		"nearest_interactable": _each.bind(bodies, func(b): b.nearest_interactable()),
+		"update_gaze": _each.bind(bodies, func(b): b._update_gaze(dt)),
+		"face_atlas_process": _each.bind(bodies, func(b): _face(b)._process(dt)),
+		"face_light_update": _each.bind(bodies, func(b): _face(b)._update_face_light()),
+		"player_camera_update": func(): player.follow_camera.update_camera(dt, player._yaw, player.horizontal_speed),
+		"player_step_up": func(): player._step_up(dt),
+		"campaign_nearby_target": func(): _campaign.nearby_target(),
+		"campaign_physics_process": func(): _campaign._physics_process(dt),
+		"director_query": func(): _campaign.director.query(),
+		"director_snapshot": func(): _campaign.director.snapshot(),
+		"route_gate_status": func(): _campaign.route.gate_status(),
+		"targets_for_scene": func(): _campaign.targets_for_current_scene(),
+	}
+	# Native modifiers: time skeleton.advance with only that modifier active.
+	for kind in ["TwoBoneIK3D", "LookAtModifier3D", "SpringBoneSimulator3D"]:
+		systems["native_" + kind] = _native_modifier_cost.bind(bodies, kind, dt)
+	var targets: Array = _campaign.targets_for_current_scene()
+	if not targets.is_empty():
+		var target_id := String(targets[0].get("target_id", ""))
+		systems["forecast_target_on_change"] = func(): _campaign.forecast_target(target_id)
+		systems["campaign_query_on_change"] = func(): _campaign.query()
+		systems["outpost_bind_query_on_change"] = func(): _campaign.hud.outpost.bind_query(_campaign.query())
+	var report := {}
+	for system in systems:
+		var values: Array = []
+		for repeat in 40:
+			var start := Time.get_ticks_usec()
+			var extra = systems[system].call()
+			var spent := (Time.get_ticks_usec() - start) / 1000.0
+			values.append(float(extra) if extra is float else spent)
+		values.sort()
+		report[system] = {"p50_ms": _percentile(values, 0.5), "p95_ms": _percentile(values, 0.95), "max_ms": values[-1]}
+	_events.append({"event": label + "_breakdown", "characters": bodies.size(), "systems": report})
+	print("PERF breakdown ", label, " characters=", bodies.size())
+	for system in report:
+		print("  %-34s p50 %7.3f  p95 %7.3f  max %7.3f ms" % [system, report[system].p50_ms, report[system].p95_ms, report[system].max_ms])
+	await physics_frame
+
+func _each(bodies: Array, action: Callable) -> void:
+	for body in bodies:
+		action.call(body)
+
+func _modifier(body: PlayerController, node_name: String) -> Node:
+	return body.animation.skeleton.get_node(node_name)
+
+func _face(body: PlayerController) -> FaceAtlas:
+	return body.character.get_node("FaceAtlas") as FaceAtlas
+
+## Returns the measured cost of the native modifiers of one class across bodies.
+func _native_modifier_cost(bodies: Array, kind: String, dt: float) -> float:
+	var total := 0.0
+	for b in bodies:
+		var rig: Skeleton3D = b.animation.skeleton
+		var saved := {}
+		for child in rig.get_children():
+			if child is SkeletonModifier3D:
+				saved[child] = child.active
+				child.active = false
+		var start := Time.get_ticks_usec()
+		rig.advance(dt)
+		var bare := Time.get_ticks_usec() - start
+		for child in saved:
+			child.active = child.is_class(kind) and saved[child]
+		start = Time.get_ticks_usec()
+		rig.advance(dt)
+		total += maxf(0.0, (Time.get_ticks_usec() - start) - bare) / 1000.0
+		for child in saved:
+			child.active = saved[child]
+	return total
 
 func _cpu_samples(label: String) -> void:
 	var values: Array = []
@@ -141,11 +273,14 @@ func _sample(label: String, walking: bool, panels: bool) -> void:
 	var previous_step := -1
 	# No warmup exclusion: first-use pipeline/texture/panel stalls count.
 	while (Time.get_ticks_usec() - start) / 1000000.0 < _seconds:
+		_physics_stamp = 0
 		await process_frame
 		var now := Time.get_ticks_usec()
 		var ms := (now - previous) / 1000.0
+		var physics_segment := (now - _physics_stamp) / 1000.0 if _physics_stamp > previous else 0.0
 		previous = now
 		values.append(ms)
+		var viewport := root.get_viewport_rid()
 		_frames.append([label, (now - start) / 1000.0, ms,
 			Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
 			Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0,
@@ -155,7 +290,10 @@ func _sample(label: String, walking: bool, panels: bool) -> void:
 			Performance.get_monitor(Performance.MEMORY_STATIC),
 			Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED),
 			Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED),
-			Performance.get_monitor(Performance.RENDER_BUFFER_MEM_USED)])
+			Performance.get_monitor(Performance.RENDER_BUFFER_MEM_USED),
+			physics_segment,
+			RenderingServer.viewport_get_measured_render_time_cpu(viewport) + RenderingServer.get_frame_setup_time_cpu(),
+			RenderingServer.viewport_get_measured_render_time_gpu(viewport)])
 		var step := int((now - start) / 1000000.0)
 		if step != previous_step:
 			previous_step = step
@@ -240,7 +378,7 @@ func _write_results() -> bool:
 	if csv == null:
 		push_error("Cannot write probe CSV: " + _output)
 		return false
-	csv.store_csv_line(PackedStringArray(["sample", "elapsed_ms", "frame_ms", "process_ms", "physics_ms", "draw_calls", "primitives", "objects", "static_bytes", "video_bytes", "texture_bytes", "buffer_bytes"]))
+	csv.store_csv_line(PackedStringArray(["sample", "elapsed_ms", "frame_ms", "process_ms", "physics_ms", "draw_calls", "primitives", "objects", "static_bytes", "video_bytes", "texture_bytes", "buffer_bytes", "physics_segment_ms", "render_cpu_ms", "render_gpu_ms"]))
 	for row in _frames:
 		var columns := PackedStringArray()
 		for value in row:

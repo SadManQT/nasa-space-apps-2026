@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/SFX_RECORDER_AGED.ogg-a5a939508bd14c9790163d3
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

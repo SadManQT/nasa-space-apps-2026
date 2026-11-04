@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/SFX_WATER_TRANSFER.ogg-28193bf91fee855e6775ce
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

@@ -24,5 +24,7 @@ func _process_modification_with_delta(delta: float) -> void:
 			_rotations.append(pose)
 		else:
 			var angle := _rotations[bone].angle_to(pose)
-			_rotations[bone] = _rotations[bone].slerp(pose, minf(1.0, limit / maxf(angle, 0.00001))).normalized()
-		rig.set_bone_pose_rotation(bone, _rotations[bone])
+			if angle > limit:
+				pose = _rotations[bone].slerp(pose, limit / angle).normalized()
+				rig.set_bone_pose_rotation(bone, pose)
+			_rotations[bone] = pose

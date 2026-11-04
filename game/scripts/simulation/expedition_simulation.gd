@@ -16,6 +16,7 @@ const StateScript = preload("res://scripts/core/campaign_state.gd")
 
 var _base_resources := {}
 var _profile := {}
+static var _profile_cache: Dictionary = {}
 
 const UPGRADE_IDS := {
 	1: {"A": "taller_mast", "B": "fuel_cell"},
@@ -411,8 +412,11 @@ static func is_amount(value) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and float(value) >= 0.0
 
 func _load_profile(profile_id: String) -> Dictionary:
+	if _profile_cache.has(profile_id):
+		return _profile_cache[profile_id]
 	var profile := load_profile(profile_id)
 	if not profile.is_empty():
+		_profile_cache[profile_id] = profile
 		return profile
 	return {}
 

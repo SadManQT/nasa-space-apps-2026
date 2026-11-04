@@ -1,0 +1,44 @@
+{
+ "id": "CS-04",
+ "card": [
+  "Chapter 2 - Be the Bee",
+  "The Floor Answers First"
+ ],
+ "shots": [
+  "shots/CS-04-A.mp4",
+  "shots/CS-04-B.mp4",
+  "shots/CS-04-C.mp4"
+ ],
+ "transitions": [
+  "cut",
+  "cut"
+ ],
+ "music": "music/CS-04.mp3",
+ "lines": [
+  {
+   "at": 7.0,
+   "speaker": "Rafi",
+   "text": "Brace zone. Four names, please.",
+   "file": "../../../audio/vo_masters/VO_EX-CH02-S12-L01.mp3"
+  },
+  {
+   "at": 14.4,
+   "speaker": "Kai",
+   "text": "Here. The service cover moved.",
+   "file": "../../../audio/vo_masters/VO_EX-CH02-S12-L02.mp3"
+  },
+  {
+   "at": 17.3,
+   "speaker": "Mei",
+   "text": "Here. Garden controls can wait.",
+   "file": "../../../audio/vo_masters/VO_EX-CH02-S12-L03.mp3"
+  },
+  {
+   "at": 20.6,
+   "speaker": "Amara",
+   "text": "Here. Pressure warning changed. We verify the reading next.",
+   "file": "../../../audio/vo_masters/VO_EX-CH02-S12-L04.mp3"
+  }
+ ],
+ "out": "../CS-04_The_Floor_Answers_First"
+}

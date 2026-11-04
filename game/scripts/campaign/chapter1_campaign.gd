@@ -85,11 +85,11 @@ static func restore_session(snapshot: Dictionary) -> Dictionary:
 		return {"accepted": false, "reason": "The saved mission route belongs to a different chapter."}
 	var session_route: RefCounted
 	if chapter == 2:
-		session_route = Chapter2RouteScript.new(session_director)
+		session_route = Chapter2RouteScript.new(session_director, true)
 	elif chapter >= 3 and chapter <= 8:
-		session_route = ExtendedRouteScript.new(session_director)
+		session_route = ExtendedRouteScript.new(session_director, true)
 	elif chapter == 1:
-		session_route = RouteScript.new(session_director)
+		session_route = RouteScript.new(session_director, true)
 	else:
 		return {"accepted": false, "reason": "The checkpoint names an unknown chapter."}
 	var route_restore: Dictionary = session_route.restore(saved_route)
@@ -133,6 +133,8 @@ func query() -> Dictionary:
 func forecast_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 	var state := _save_snapshot()
 	state["paused"] = false
+	if state.get("route_runtime", null) is Dictionary:
+		state["route_runtime"]["retry_checkpoint"] = {}
 	var projected := restore_session(state)
 	if not bool(projected.get("accepted", false)):
 		return projected
@@ -173,36 +175,51 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 	_save_campaign()
 	return result
 
+func _focus_node(world_focus_id: String) -> Node3D:
+	if _room == null or _room.focus_root == null or world_focus_id.is_empty():
+		return null
+	var direct := _room.focus_root.get_node_or_null("Focus_" + world_focus_id) as Node3D
+	if direct != null:
+		return direct
+	for node in _room.focus_root.get_children():
+		if String(node.get_meta("target_id", "")) == world_focus_id:
+			return node as Node3D
+	return null
+
 func physical_target(target_id: String) -> Node3D:
 	if _room == null or _room.focus_root == null:
 		return null
 	for spec in targets_for_current_scene():
 		if String(spec.get("target_id", "")) == target_id:
-			for node in _room.focus_root.get_children():
-				if String(node.get_meta("target_id", "")) == String(spec.get("world_focus_id", "")):
-					return node as Node3D
+			return _focus_node(String(spec.get("world_focus_id", "")))
 	return null
 
-func target_completed(spec: Dictionary) -> bool:
+func target_completed(spec: Dictionary, flags_override: Variant = null, director_receipts_override: Variant = null, p01_receipts_override: Variant = null) -> bool:
 	var id := String(spec.get("target_id", ""))
+	var physical_flags: Dictionary = flags_override if flags_override is Dictionary else route.gate_status().get("physical_flags", {})
 	if id == "p02_stage_shift2":
-		return bool(route.gate_status().get("physical_flags", {}).get("shift2_preview_staged", false))
+		return bool(physical_flags.get("shift2_preview_staged", false))
 	if String(spec.get("puzzle_id", "")) == "P-01":
-		return route.snapshot().get("p01", {}).get("receipts", {}).has("p01:" + id)
-	var physical_flags: Dictionary = route.gate_status().get("physical_flags", {})
+		var p01_receipts: Dictionary = p01_receipts_override if p01_receipts_override is Dictionary else (route._p01.snapshot().get("receipts", {}) if "_p01" in route and route._p01 != null else route.snapshot().get("p01", {}).get("receipts", {}))
+		return p01_receipts.has("p01:" + id)
 	if bool(physical_flags.get(String(spec.get("physical_flag", "")), false)):
 		return true
-	return director.snapshot().get("receipts", {}).has(String(spec.get("command_id", "")))
+	var receipts: Dictionary = director_receipts_override if director_receipts_override is Dictionary else director.snapshot().get("receipts", {})
+	return receipts.has(String(spec.get("command_id", "")))
 
 func nearby_target() -> Dictionary:
 	if _ui_paused or _player == null or _room == null:
 		return {}
 	var camera := _player.follow_camera.camera
-	var flags: Dictionary = route.gate_status().get("physical_flags", {})
+	var flags: Dictionary = route.current_flags() if route.has_method("current_flags") else route.gate_status().get("physical_flags", {})
+	var director_receipts: Dictionary = director._state.get("receipts", {}) if "_state" in director else director.snapshot().get("receipts", {})
+	var p01_receipts: Variant = null
 	var closest: Dictionary = {}
 	var nearest := INF
 	for spec in targets_for_current_scene():
-		if target_completed(spec):
+		if String(spec.get("puzzle_id", "")) == "P-01" and p01_receipts == null:
+			p01_receipts = route._p01.snapshot().get("receipts", {}) if "_p01" in route and route._p01 != null else route.snapshot().get("p01", {}).get("receipts", {})
+		if target_completed(spec, flags, director_receipts, p01_receipts):
 			continue
 		var missing := false
 		for flag in spec.get("required_flags", []):
@@ -210,7 +227,7 @@ func nearby_target() -> Dictionary:
 				missing = true
 		if missing:
 			continue
-		var target := physical_target(String(spec.get("target_id", "")))
+		var target := _focus_node(String(spec.get("world_focus_id", "")))
 		if target == null:
 			continue
 		var distance := _player.global_position.distance_to(target.global_position)
@@ -236,7 +253,8 @@ func _physics_process(_delta: float) -> void:
 	if _world_prompt == null or _room == null:
 		return
 	var selected := nearby_target()
-	_world_prompt.text = "E · " + String(physical_target(String(selected.target_id)).get_meta("focus_label", "Use")) if not selected.is_empty() else ""
+	var focus_node := _focus_node(String(selected.get("world_focus_id", ""))) if not selected.is_empty() else null
+	_world_prompt.text = "E · " + String(focus_node.get_meta("focus_label", "Use")) if focus_node != null else ""
 	_room.set_focus_target(String(selected.get("world_focus_id", "")))
 	if hud != null:
 		hud.show_nearby_forecast(String(selected.get("target_id", "")))

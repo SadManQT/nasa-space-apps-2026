@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/MUS_CUE-01_HomeNotYet.ogg-38131b8b4f39db2ff29
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

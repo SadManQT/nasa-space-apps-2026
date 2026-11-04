@@ -1,0 +1,42 @@
+{
+ "id": "CS-09",
+ "card": [
+  "Chapter 5 - Shooting Stars",
+  "What I Didn't Say"
+ ],
+ "shots": [
+  "shots/CS-09-A.mp4",
+  "shots/CS-09-B.mp4"
+ ],
+ "transitions": [
+  "cut"
+ ],
+ "lines": [
+  {
+   "at": 0.6,
+   "speaker": "Ferreira",
+   "text": "I was the engineer who could not fix the radio.",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S05-L01.mp3"
+  },
+  {
+   "at": 4.5,
+   "speaker": "Mei",
+   "text": "You could have told us.",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S05-L02.mp3"
+  },
+  {
+   "at": 6.3,
+   "speaker": "Ferreira",
+   "text": "Yes. I was afraid of how it would sound.",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S05-L03.mp3"
+  },
+  {
+   "at": 9.9,
+   "speaker": "Kai",
+   "text": "Then we can ask before we guess.",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S05-L04.mp3"
+  }
+ ],
+ "out": "../CS-09_What_I_Didnt_Say"
+}
+

@@ -4,7 +4,7 @@ class_name AssetGeometry
 # Raw glTF preserves the approved runtime look (including face layers). Reuse
 # its parsed resources instead of decoding images/meshes on every room cut.
 # Bound retained scenes; live instances keep their own resources alive on eviction.
-const CACHE_LIMIT := 8
+const CACHE_LIMIT := 16
 static var _scenes: Dictionary = {}
 static var _recent: Array[String] = []
 

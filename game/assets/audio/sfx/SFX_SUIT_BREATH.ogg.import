@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/SFX_SUIT_BREATH.ogg-c6f18d74a3219bd6efe4e96bc
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

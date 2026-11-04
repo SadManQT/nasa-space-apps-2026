@@ -286,12 +286,13 @@ func interact() -> bool:
 	return animation.request_action(String(nearest.get_meta("action", "Inspect")))
 
 func _update_gaze(delta: float) -> void:
-	var nearest := nearest_interactable()
 	var aim := global_position + Vector3.UP * 1.5 - Basis(Vector3.UP, follow_camera.yaw).z * 5.0
 	if is_instance_valid(attention_target):
 		aim = attention_target.global_position + Vector3.UP * 1.45
-	elif nearest != null:
-		aim = nearest.global_position + Vector3.UP * 0.8
+	else:
+		var nearest := nearest_interactable()
+		if nearest != null:
+			aim = nearest.global_position + Vector3.UP * 0.8
 	_gaze_target.global_position = _gaze_target.global_position.lerp(aim, 1.0 - exp(-delta / 0.18))
 	# a target behind the shoulder would wrench the head round (or flip it between the limits): let go of it instead
 	var to_aim := _gaze_target.global_position - global_position
