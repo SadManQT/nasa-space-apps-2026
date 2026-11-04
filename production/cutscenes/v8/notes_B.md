@@ -50,7 +50,13 @@ Probe nodes (estimate only, never run): video cv3AUxi6mvZRIbxWXRwx, image 6crqEJ
 | CS-09-A edit (hair) + CS-09-B edit (Mei patch) | 3,654 | 193,787 |
 | Music: CS-07/08/10/11/12, 2 variations each | 3,450 | 197,237 |
 | CS-07-C 7 s + CS-09-A 8 s + CS-09-B 5 s videos | 125,309 | 322,546 |
-| CS-08-C 7 s + CS-10-A 6 s + CS-10-C 6 s + CS-11-A 6 s videos + CS-10/11/12 start frames & edits | 146,449 | 468,995 |
+| CS-08-C video 7 s | 43,858 | 366,404 |
+| CS-10-A/B/C frames (3/3/2 refs) | 8,526 | 374,930 |
+| CS-11-A/B, CS-12-A/B frames (2/3/2/2 refs); CS-11-B v1 rejected (khaki coveralls, Mei brown hair, Rafi lost beard and vest) | 10,354 | 385,284 |
+| CS-10-B edit (Ferreira hair) | 1,827 | 387,111 |
+| CS-10-A 6 s + CS-10-C 6 s videos | 75,185 | 462,296 |
+| CS-12-A edit (remove "LIVE", hand light off) + CS-12-B edit (blank checklist card) + CS-11-B v2 frame | 6,699 | 468,995 |
+| CS-11-A video 6 s (missing from the earlier row) | 37,593 | **506,588** |
 
 ## Assembled cutscenes & remaining shots
 
@@ -58,3 +64,18 @@ Probe nodes (estimate only, never run): video cv3AUxi6mvZRIbxWXRwx, image 6crqEJ
 - **CS-08 (`CS-08_The_Fifth_Mug`)**: 18.1 s (shots A 4.04 s, B 7.04 s, C 7.04 s; hard cuts; 4 lines EX-CH05-S01-L01..L04). Composed to `production/cutscenes/v8/CS-08_The_Fifth_Mug.mp4` and encoded to `game/assets/cutscenes/CS-08_The_Fifth_Mug.ogv`.
 - **CS-09 (`CS-09_What_I_Didnt_Say`)**: 13.1 s (shots A 8.04 s, B 5.04 s; hard cut; no music per canon; 4 lines EX-CH05-S05-L01..L04). Composed to `production/cutscenes/v8/CS-09_What_I_Didnt_Say.mp4` and encoded to `game/assets/cutscenes/CS-09_What_I_Didnt_Say.ogv`.
 - **CS-10, CS-11, CS-12**: Start frames (including edits) and music cues generated on flow `VuwkAWRO7pmMn1jfcAhB` (frames saved in `production/cutscenes/masters/frames/B/`); CS-10-A, CS-10-C and CS-11-A video nodes were triggered right before the session limit; CS-10-B, CS-11-B/C and CS-12-A/B/C video nodes remain to be run and pulled from the flow.
+
+## Pending on the flow (connector dropped 4 Nov, resume here)
+
+Real running total **506,588 / 760,000**. Generated but not yet downloaded or reviewed:
+- CS-10-A video: node yomplA8DpMsd2EAeGRBX, session qRenPlLv15OBbIc9oWPB, gen HpeSZspNDhOEbmYY9P30 (6 s)
+- CS-10-C video: node AZoj6Fqp23X5UAVB2Rtt, session 68jvAVdxwOSM5pr1kYox, gen PEcGXzBdFpAYrTnBC2Gc (6 s)
+- CS-11-A video: node 7AhNKeDO389eGxTt4UNU, session LjucMVgfL0lCAVsR34Fu, gen 5xcyfG9s7XIJEZiXV9HC (6 s)
+- Frames to review: CS-10-B edit gen ajbUj9FUoRKcVHe4Dv60 (node K8asQwy3Bz7UN7k08lNZ); CS-12-A edit gen gUBoVcCt2JYO9g6MmXRd (node n5yGUCJq0oeJZ9Rr8Oqr); CS-12-B edit gen ZjhVsqeDYEexh1q2qr2O (node 4XrGM9t1OQeHqJdDS8GV); CS-11-B v2 gen 4DyeiutNYukkXyUGfw3V (node OR9KRP6mRpv44nJQxioI)
+- Music (2 variations each, never pulled): CS-08 node 6l78uVzWg0ODtnXTRMJ3, CS-10 on60dS1TtAxDG9QdNKiq, CS-11 LhOa1RBz4D5pEhdIGEhc, CS-12 l45JdOSwWIxm2GACffAH (CS-07 node QijDcY3PfeveQKj0eQ64 already used)
+
+Still to run (planned, ~200 k): CS-10-B 5 s from the CS-10-B edit; CS-11-B 6 s from CS-11-B v2; CS-11-C 6 s chained from the last frame of CS-11-A; CS-12-A 5 s from the CS-12-A edit; CS-12-B 4 s from the CS-12-B edit; CS-12-C 6 s chained from the last frame of CS-12-A. Optional if budget remains: CS-09-C 6 s chained from the last frame of CS-09-A (Ferreira answers, Kai leans in), which would give CS-09 room to breathe (it is 13.1 s now with lines nearly back to back).
+
+Planned line timing (hard cuts): CS-10 (A 6 / B 5 / C 6): Rao L01 3.8 (radio), Ferreira L02 6.6, Mei L03 11.3, Rao L04 14.2 (radio). CS-11 (A 6 / B 6 / C 6): Mei L01 4.0, Amara L02 7.7, Kai L03 11.4, Rafi L04 14.5. CS-12 (A 5 / B 4 / C 6): Kai L01 3.8, Rafi L02 6.0, Amara L03 7.6, Kai L04 11.1.
+
+Video prompts used so far are on each video node; motion-only prompts for the remaining shots are drafted in this agent's run log (CS-11-C: Kai turns his head to Rafi; Rafi switches on a separate small blank side panel beside the main monitor so the diagram stays apart from the camera image. CS-12-A: the wall screen cuts to black, the amber guide light stays on, Kai's hand closes round the hand light, then he looks at the three green lamps. CS-12-B: Rafi lifts his radio and answers. CS-12-C: Amara points at the isolation section; Kai pulls one breaker lever down, checks, nods).
