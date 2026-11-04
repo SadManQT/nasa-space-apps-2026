@@ -3584,7 +3584,7 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Re-edit CS-01 into a cold open: exterior silence, interior hum, title over the gold band (existing footage only)",
-   "status": "todo",
+   "status": "blocked",
    "deps": [],
    "paths": [
     "production/cutscenes/v8/",
@@ -3600,7 +3600,8 @@
    "note": "From doc 24 NR-05. No new generation; coordinate with M1-10 (playback) and M1-45 (exterior fixes).",
    "evidence": "",
    "updated": "2026-11-05",
-   "prompt": "Problem: CS-01 runs about 40 s and contains all four EX-CH01-S01 lines, so the player watches before doing anything, and the opening has no image that sets the game's look.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.1 (beats 2-4 and the line move), §2.11 (sound rules); production/cutscenes/v7/src/CS-01.json; production/tools/compose_cutscene.py; production/ART_BIBLE.md §2; production/review/science_review_ch01.md (Earth stays off the sky).\nDo: compose a v8 CS-01 cold open from the existing CS-01 shots: 2 s of the exterior in total silence (caption [no sound outside]), push into the commons as SFX_FAN_NORMAL fades in, on-screen text 'Aurora Station · lunar south pole · 11 April 2046 · 06:00 UTC', end on the gold battery band with the title LAST LIGHT ACADEMY for 2 s. No dialogue in the film (the S01 lines move into play in M1-49). The CS-01 music fades out with the cut; CUE-01 still enters after the charter. If M1-45's fixed exterior shot exists, use it.\nAcceptance: the cut runs 12-15 s; ffmpeg scdet shows only the intended cuts; the exterior section has no audio at all; no Earth in the sky, black sky, hard shadows; captions present; the runtime .ogv plays in the campaign (M1-10 runtime). Screenshot three frames to production/qa/evidence/M1-51_*.png. Log every AI generation in production/AI_PROMPT_LOG.md."
+   "prompt": "Problem: CS-01 runs about 40 s and contains all four EX-CH01-S01 lines, so the player watches before doing anything, and the opening has no image that sets the game's look.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.1 (beats 2-4 and the line move), §2.11 (sound rules); production/cutscenes/v7/src/CS-01.json; production/tools/compose_cutscene.py; production/ART_BIBLE.md §2; production/review/science_review_ch01.md (Earth stays off the sky).\nDo: compose a v8 CS-01 cold open from the existing CS-01 shots: 2 s of the exterior in total silence (caption [no sound outside]), push into the commons as SFX_FAN_NORMAL fades in, on-screen text 'Aurora Station · lunar south pole · 11 April 2046 · 06:00 UTC', end on the gold battery band with the title LAST LIGHT ACADEMY for 2 s. No dialogue in the film (the S01 lines move into play in M1-49). The CS-01 music fades out with the cut; CUE-01 still enters after the charter. If M1-45's fixed exterior shot exists, use it.\nAcceptance: the cut runs 12-15 s; ffmpeg scdet shows only the intended cuts; the exterior section has no audio at all; no Earth in the sky, black sky, hard shadows; captions present; the runtime .ogv plays in the campaign (M1-10 runtime). Screenshot three frames to production/qa/evidence/M1-51_*.png. Log every AI generation in production/AI_PROMPT_LOG.md.",
+   "blocker": "Night shift parked the work on branch night/M1-51: could not land: rebase conflict: ll conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with \"git config set advice.mergeConflict false\"\nCould not apply"
   },
   {
    "id": "M1-52",
