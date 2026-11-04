@@ -1268,7 +1268,7 @@
     "production/concept/"
    ],
    "refs": [
-    "game-design/19_TRAINING_DECISIONS.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md",
     "docs/SCIENCE_AND_DATA.md"
    ],
    "note": "",
@@ -3290,7 +3290,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Rewrite or retire 19_TRAINING_DECISIONS.md and fix the same canon drift in REQUIREMENTS_ALIGNMENT.md",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-38"
@@ -3308,7 +3308,7 @@
     "game/resources/data/nasa/puzzle_sources.json"
    ],
    "note": "Found during M1-38. Ask Sadman first: retire (pointer) or rewrite.",
-   "evidence": "",
+   "evidence": "19 retired to a pointer; REQUIREMENTS_ALIGNMENT.md fixed to canon; acceptance grep empty; all named fixtures exist; M1-29 refs point at 22 (M3-xM prompts already say not to use 19); board check OK",
    "updated": "2026-11-04",
    "prompt": "Problem (found in M1-38): game-design/19_TRAINING_DECISIONS.md (M1-27) does not match canon. It uses a non-canon cast (Ayla, Sofia, Liam, Noah instead of Kai, Amara, Mei, Rafi), a non-canon crop ('Lal Shak' instead of Alo and Tara, Brassica rapa), a 2059 date (canon is April 2046 to April 2047), mission titles not in story-data.json, puzzle contracts that are not those in game-design/08_PUZZLE_DESIGNS.md (e.g. a P-01 heat/light/oxygen/water slider puzzle), Data Card fixture IDs that do not exist in game/resources/data/nasa/, and a §10 proposals list citing numbers that are not in 08. docs/REQUIREMENTS_ALIGNMENT.md has the same drift (grep Ayla, Lal Shak, 2059). A banner now marks 19 as superseded by game-design/22_PUZZLE_CLUE_DESIGN.md.\nDo: ask Sadman whether to (a) retire 19 to a short pointer to 22 §3–§10, or (b) rewrite it to canon as a one-row-per-mission summary table derived from 22. Either way, fix docs/REQUIREMENTS_ALIGNMENT.md so every requirement row cites canon missions, real fixtures (puzzle_sources.json) and existing tasks; remove 19 from the read-first list of any open board task that still cites it (M1-30 if still open). Never edit STORY_FULL.md or 08.\nAcceptance: grep -E 'Ayla|Sofia|Liam|Noah|Lal Shak|2059' over game-design/19_TRAINING_DECISIONS.md and docs/REQUIREMENTS_ALIGNMENT.md returns nothing; every fixture ID named in both files exists in game/resources/data/nasa/ or game/resources/data/nasa_practice/; board.py check passes."
   }
