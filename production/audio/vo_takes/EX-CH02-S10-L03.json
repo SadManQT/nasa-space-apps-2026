@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH02-S10-L03",
+ "speaker": "N.",
+ "text": "My grandmother\u2019s mustard fields turned yellow every winter. I wanted some of that light here.",
+ "delivery": "recording",
+ "prompt": "[intimate, warm, economical, wistful] My grandmother\u2019s mustard fields turned yellow every winter. I wanted some of that light here.",
+ "chosen_take": 1,
+ "seconds": 6.6,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/V9eDA23skhokQdCjVRM3/BRfFm4xPMUNnEDalkI4r/content.mp3",
+   "heard": "My grandmother's mustard fields turned yellow every winter. I wanted some of that light here.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/qLt9cle1r9mmUUJXbxbH/TZ05nIzuVJM122H7i8cu/content.mp3",
+   "heard": "My grandmother's mustard fields turned yellow every winter. I wanted some of that light here.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH02-S10-L03.mp3",
+ "game_file": "game/assets/audio/voice/Noor/VO_EX-CH02-S10-L03.ogg"
+}

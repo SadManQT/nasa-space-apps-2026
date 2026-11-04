@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH02-S12-L03",
+ "speaker": "Mei",
+ "text": "Here. Garden controls can wait.",
+ "delivery": "live",
+ "prompt": "[calm, controlled] Here. Garden controls can wait.",
+ "chosen_take": 1,
+ "seconds": 2.92,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/SjTxM3UQhHqffVrx3gbJ/jdYYuEVPqEByMOlzOPbs/content.mp3",
+   "heard": "Here, garden controls can wait.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/6Y5KeQjvG6icZ8xnwKR0/68xYebOPfPAU7Fa0IDLU/content.mp3",
+   "heard": "Here, garden controls can wait.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH02-S12-L03.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH02-S12-L03.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S05-L03",
+ "speaker": "Rafi",
+ "text": "Then it gets a backup. Here.",
+ "delivery": "live",
+ "prompt": "[practical, decisive] Then it gets a backup. Here.",
+ "chosen_take": 1,
+ "seconds": 2.08,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/dsAAehJyc9foxCMMuA2U/IwD8lgWz7qp4ZcdAdUPb/content.mp3",
+   "heard": "Then it gets a backup. Here.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/BvKY3KxzZR80XSXNp2MR/UbFoAE807ngnin2kjkYg/content.mp3",
+   "heard": "Then it gets a backup. Here.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S05-L03.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH01-S05-L03.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH02-S07-L02",
+ "speaker": "Amara",
+ "text": "No. Not the day after either.",
+ "delivery": "live",
+ "prompt": "[warm, firm, gently amused] No. Not the day after either.",
+ "chosen_take": 1,
+ "seconds": 2.84,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/1OKlXhM1w5u99OeihSM3/kKYNLjdNLEn9Sg0QO7yU/content.mp3",
+   "heard": "No, not the day after either.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Fc8jJBacEwhRevNwBI6t/79OmcjVUhsUu4bSlN7lw/content.mp3",
+   "heard": "No, not the day after either.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH02-S07-L02.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH02-S07-L02.ogg"
+}

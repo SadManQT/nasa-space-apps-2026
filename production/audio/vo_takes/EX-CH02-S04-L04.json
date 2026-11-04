@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH02-S04-L04",
+ "speaker": "Amara",
+ "text": "The transfer did. Seeds are a later observation.",
+ "delivery": "live",
+ "prompt": "[measured, gently correcting] The transfer did. Seeds are a later observation.",
+ "chosen_take": 1,
+ "seconds": 3.94,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/jXYIbHtT64F4vb2Zotba/ZB1CgaS3ZarggkvGwQTD/content.mp3",
+   "heard": "The transfer did. Seeds are a later observation.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/pac5jVBoU8E2o4t389PC/ZmJwGHQMG0TWUD0rl2Mu/content.mp3",
+   "heard": "The transfer did. Seeds are a later observation.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH02-S04-L04.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH02-S04-L04.ogg"
+}

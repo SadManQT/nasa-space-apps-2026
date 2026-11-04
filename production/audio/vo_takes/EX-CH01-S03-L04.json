@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S03-L04",
+ "speaker": "Rafi",
+ "text": "And a reference before the interesting number.",
+ "delivery": "live",
+ "prompt": "[dry, practical] And a reference before the interesting number.",
+ "chosen_take": 1,
+ "seconds": 2.58,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/tVaFFgNzXBHOarhvWH5J/ke8ED1M0Eu96yDVeu15M/content.mp3",
+   "heard": "and a reference before the interesting number.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/K2ZIUh2nUTcpf4tpXbMY/v4ZLBHw1vpGnFaV8kIXy/content.mp3",
+   "heard": "and a reference before the interesting number.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S03-L04.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH01-S03-L04.ogg"
+}

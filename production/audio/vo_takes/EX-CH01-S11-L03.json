@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S11-L03",
+ "speaker": "Kai",
+ "text": "Low is not failed. What demand comes next?",
+ "delivery": "live",
+ "prompt": "[thoughtful, reassuring himself] Low is not failed. What demand comes next?",
+ "chosen_take": 1,
+ "seconds": 3.82,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/5qknueLWXDFHG7VcgeHA/uQDFmAxcWaWhg5E6Crhe/content.mp3",
+   "heard": "Low is not failed. What demand comes next?",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/rEdhLHTrf03f4WHS7oc8/mRkI26jz4IqXjPBq0KKX/content.mp3",
+   "heard": "Low has not failed. What demand comes next?",
+   "score": 0.875
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S11-L03.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH01-S11-L03.ogg"
+}

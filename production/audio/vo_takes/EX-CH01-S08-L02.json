@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S08-L02",
+ "speaker": "Mei",
+ "text": "And the water comes home when the plan allows.",
+ "delivery": "live",
+ "prompt": "[calm, resolute] And the water comes home when the plan allows.",
+ "chosen_take": 1,
+ "seconds": 3.26,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/9gSjMzO5iOhxzHe2WJQI/kVwXLM4ELsnDZZqlCJOj/content.mp3",
+   "heard": "And the water comes home when the plan allows.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/21NZVju9ySDUTeYHYgHI/vTAgwM4KxTfFeLJz81Uw/content.mp3",
+   "heard": "and the water comes home when the plan allows.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S08-L02.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH01-S08-L02.ogg"
+}

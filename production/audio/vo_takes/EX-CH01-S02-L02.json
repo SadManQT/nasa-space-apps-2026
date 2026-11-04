@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S02-L02",
+ "speaker": "Kai",
+ "text": "And if Earth cannot hear the roll call?",
+ "delivery": "live",
+ "prompt": "[uneasy, quiet] And if Earth cannot hear the roll call?",
+ "chosen_take": 1,
+ "seconds": 2.61,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/tU0BEXqoRpgxz5DnnmML/63wVTZObJ5TIEdl0yZUm/content.mp3",
+   "heard": "And if Earth cannot hear the roll call?",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/g1fVKt1KD3teHe9n7GuT/1EeI9tMdqZIA8QOb2zMw/content.mp3",
+   "heard": "And if Earth cannot hear the roll call?",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S02-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH01-S02-L02.ogg"
+}

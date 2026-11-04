@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S03-L02",
+ "speaker": "Kai",
+ "text": "Light One and Light Two?",
+ "delivery": "live",
+ "prompt": "[curious, lightly amused] Light One and Light Two?",
+ "chosen_take": 1,
+ "seconds": 2.3,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/TqE4dgAkL4DdL6N9Y9WQ/J9IydXnfiVdKu2PFBMM4/content.mp3",
+   "heard": "Light one and light two?",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/dDHJWjsYgYn7o7SttHvK/fOtKFAsEA6AW6Q7IUBje/content.mp3",
+   "heard": "Light one and light two?",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S03-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH01-S03-L02.ogg"
+}

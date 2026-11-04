@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S06-L03",
+ "speaker": "Mei",
+ "text": "Put the garden on it. The shelter borrows from us.",
+ "delivery": "live",
+ "prompt": "[calm, firm] Put the garden on it. The shelter borrows from us.",
+ "chosen_take": 1,
+ "seconds": 3.6,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/fx2xZYlAn3qC1aoIPwJ9/5G6To1tJG2lcaFxQNf0p/content.mp3",
+   "heard": "Put the garden on it. The shelter borrows from us.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/wQCCpR4FXj4TnGW8uVoS/XXIrT9MF3vNzwGRk8dzE/content.mp3",
+   "heard": "Put the garden on it. The shelter borrows from us.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S06-L03.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH01-S06-L03.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH02-S09-L02",
+ "speaker": "Kai",
+ "text": "Can I name the file after my guess?",
+ "delivery": "live",
+ "prompt": "[hopeful, a little cheeky] Can I name the file after my guess?",
+ "chosen_take": 1,
+ "seconds": 2.09,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/HzJsCMds6DOuKZe6BJKW/xY6VcXgQogbJPJDwBj5B/content.mp3",
+   "heard": "Can I name the file after my guess?",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/cNQZIfFkznRv4ISDlCRH/VMWqu4hsxupbeMX9zFTb/content.mp3",
+   "heard": "Can I name the file after my guess?",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH02-S09-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH02-S09-L02.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S11-L04",
+ "speaker": "Rafi",
+ "text": "Review the cause, not the person holding the control.",
+ "delivery": "live",
+ "prompt": "[serious, calm, steady] Review the cause, not the person holding the control.",
+ "chosen_take": 1,
+ "seconds": 3.55,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Vd5sUgkINQ5JdOEGsAkW/bFx66Xm5azXUdsXpSZ18/content.mp3",
+   "heard": "Review the cause, not the person holding the control.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/rvlwQtdctWmsydkj0cTQ/GfAKzx0vMGwOyPZ13IaG/content.mp3",
+   "heard": "Review the cause, not the person holding the control.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S11-L04.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH01-S11-L04.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH02-S08-L02",
+ "speaker": "Mei",
+ "text": "Photograph it. Do not peel the only original.",
+ "delivery": "live",
+ "prompt": "[calm, firm] Photograph it. Do not peel the only original.",
+ "chosen_take": 1,
+ "seconds": 3.75,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/o8YyYstYiiOt1OmcYP3S/Je0v6dAzN9mC7fvcSyIW/content.mp3",
+   "heard": "photograph it. Do not peel the only original.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/PGx1EAaXIWf9985X5KeF/Z81lMXFM1HydJ5V1uxHx/content.mp3",
+   "heard": "Photograph it. Do not peel the only original.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH02-S08-L02.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH02-S08-L02.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH02-S03-L04",
+ "speaker": "Mei",
+ "text": "And bring back records for both plants.",
+ "delivery": "live",
+ "prompt": "[calm, firm] And bring back records for both plants.",
+ "chosen_take": 1,
+ "seconds": 2.65,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/IuWi1XQTP057tXE5WQOa/Oo5iPB62joTBEUg6XUFU/content.mp3",
+   "heard": "and bring back records for both plants.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/FZlRfzdg9iEQSza5qKG2/Y2CRJ6x68DcCUw4xdjiF/content.mp3",
+   "heard": "and bring back records for both plants.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH02-S03-L04.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH02-S03-L04.ogg"
+}

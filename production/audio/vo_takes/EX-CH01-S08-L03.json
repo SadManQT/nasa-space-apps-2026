@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S08-L03",
+ "speaker": "Amara",
+ "text": "Practice complete. Baseline unchanged.",
+ "delivery": "live",
+ "prompt": "[calm, satisfied] Practice complete. Baseline unchanged.",
+ "chosen_take": 1,
+ "seconds": 3.26,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/rEG8J8J0c6PNY2yhtlxu/GTQBVtO2waB2g2WjC3De/content.mp3",
+   "heard": "Practice complete. Baseline unchanged.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/hveaERhjZdlOJOglXxNy/ekdkcp1fXad7zlDIIQfu/content.mp3",
+   "heard": "Practice complete. Baseline unchanged.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S08-L03.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH01-S08-L03.ogg"
+}

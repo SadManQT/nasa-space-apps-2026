@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S07-L02",
+ "speaker": "Kai",
+ "text": "Same full jar. Better destination.",
+ "delivery": "live",
+ "prompt": "[lightly amused, relieved] Same full jar. Better destination.",
+ "chosen_take": 1,
+ "seconds": 3.04,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/yqorpaXFQaKj2t1rnnUa/HBqOkZBEh8l2wMojAEuf/content.mp3",
+   "heard": "Same full jar, better destination.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/2Tf7OXH8onlWNz09UfpJ/j3CV5aypy5Xx8ww8jC8A/content.mp3",
+   "heard": "Same full jar, better destination.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S07-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH01-S07-L02.ogg"
+}

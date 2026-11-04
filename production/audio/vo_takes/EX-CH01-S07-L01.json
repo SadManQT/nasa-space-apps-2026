@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S07-L01",
+ "speaker": "Amara",
+ "text": "We can keep air we make now. We cannot keep overflow.",
+ "delivery": "live",
+ "prompt": "[measured, clear] We can keep air we make now. We cannot keep overflow.",
+ "chosen_take": 1,
+ "seconds": 4.49,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/xsov5wPGedFIxVg2DXlP/ns6eSi6JjY0tX3smP8Zm/content.mp3",
+   "heard": "We can keep air we make now. We cannot keep overflow.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Js0d0j9p2yHrRkdVcFQ6/8xkcRtceBk5vqpcYhXwF/content.mp3",
+   "heard": "We can keep air we make now. We cannot keep overflow.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S07-L01.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH01-S07-L01.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH02-S01-L02",
+ "speaker": "Mei",
+ "text": "Tara opened too. She belongs in the report.",
+ "delivery": "live",
+ "prompt": "[pleased, matter-of-fact] Tara opened too. She belongs in the report.",
+ "chosen_take": 2,
+ "seconds": 3.14,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/lxH6iJCCrsCC3w0SfjiD/140axFlaMa0Lq8vkmE12/content.mp3",
+   "heard": "Kara opened too. She belonged from the report.",
+   "score": 0.625
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/UJRZImLFpbrB778b9Pgz/o2y2ZqoFrX6CUJmJZ5RV/content.mp3",
+   "heard": "Tara opened too. She belongs in the report.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH02-S01-L02.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH02-S01-L02.ogg"
+}

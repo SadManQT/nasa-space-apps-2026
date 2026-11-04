@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH02-S09-L03",
+ "speaker": "Mei",
+ "text": "Name it after the evidence first.",
+ "delivery": "live",
+ "prompt": "[calm, firm, dry] Name it after the evidence first.",
+ "chosen_take": 1,
+ "seconds": 2.53,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/v8QqNvnGVpU1rd0LK5Ij/2RuhKLfIK8DD7UimTWXF/content.mp3",
+   "heard": "Name it after the evidence first.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/GeBOGwZLeNgd0vhXYG7C/JPRzcyRGziYvbK9G6jRb/content.mp3",
+   "heard": "Name it after the evidence first.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH02-S09-L03.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH02-S09-L03.ogg"
+}

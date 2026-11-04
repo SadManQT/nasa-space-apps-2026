@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S03-L05",
+ "speaker": "Mei",
+ "text": "A sealed experiment grew a cotton seedling on the Moon in 2019. We are building on that beginning.",
+ "delivery": "live",
+ "prompt": "[thoughtful, reverent, measured] A sealed experiment grew a cotton seedling on the Moon in 2019. We are building on that beginning.",
+ "chosen_take": 1,
+ "seconds": 7.99,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/5cFbcfuxXVIQOelGQA2W/KTb0NT9D06RotIeGcFJX/content.mp3",
+   "heard": "A sealed experiment grew a cotton seedling on the moon in 2019. We are building on that beginning.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/qeMfB0oCRDppqx8gcCpM/MdB0TAWnYTQHHlkfPHa3/content.mp3",
+   "heard": "A sealed experiment grew a cotton seedling on the moon in 2019. We are building on that beginning.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S03-L05.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH01-S03-L05.ogg"
+}

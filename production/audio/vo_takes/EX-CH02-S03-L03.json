@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH02-S03-L03",
+ "speaker": "Amara",
+ "text": "Count the whole reciprocal cycle once, not every camera cut.",
+ "delivery": "live",
+ "prompt": "[measured, precise] Count the whole reciprocal cycle once, not every camera cut.",
+ "chosen_take": 1,
+ "seconds": 4.72,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/BqFchvPA8hCJ8HVO0M9p/P8c7mCKk17xxdAHsVgjW/content.mp3",
+   "heard": "Count the whole reciprocal cycle once, not every camera cut.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/0tzZmLzLc0N4kd9DSSMq/KexmVvTAQCgMtfT3mHve/content.mp3",
+   "heard": "Count the whole reciprocal cycle once, not every camera cut.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH02-S03-L03.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH02-S03-L03.ogg"
+}

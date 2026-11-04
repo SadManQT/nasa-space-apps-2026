@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S07-L04",
+ "speaker": "Rafi",
+ "text": "Four recommendations. One confirmed plan.",
+ "delivery": "live",
+ "prompt": "[focused, reading off a checklist] Four recommendations. One confirmed plan.",
+ "chosen_take": 1,
+ "seconds": 3.21,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Kjvc5BRWVUYEyvwLvtrd/tTIduzY8VP0nDdmrRyqZ/content.mp3",
+   "heard": "Four recommendations. One confirmed plan.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/H3NlIwOgkXfoMRZun3sC/79WF0Y4ktVXrkDvDTAji/content.mp3",
+   "heard": "Four recommendations. One confirmed plan.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S07-L04.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH01-S07-L04.ogg"
+}
