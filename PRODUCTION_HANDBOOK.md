@@ -299,6 +299,8 @@ Optional opening (from the gameplay entry flow): mustard fields to the Moon cham
 
 ## 10. Status (latest first)
 
+**4 Nov 2026 — P-05 clock decision (Atik):** preserve final story dates; the four 7.2-hour P-05 phases are an **abstract resource budget**, not elapsed time added to scenario_datetime. Atik explicitly selected “Keep story dates; abstract phase budget”. M3-80 is reopened under atik/codex; source numbers and story timestamps remain intact.
+
 **4 Nov 2026 — Later-ledger source reconciliation (board M3-80, Atik/Codex):** blocked on the P-05 clock contract: three unresolved 7.2-hour phases from May 6 22:05 end May 7 19:41, while the final story verifies repair before dawn May 7. The E18/A3/H6/C8/R13.2 arithmetic reproduces correctly. An abstract-budget versus elapsed-time decision has been requested; no later-ledger runtime completion is claimed. Counterexample and remaining work: [M3-80.md](production/review/execution/M3-80.md).
 
 **4 Nov 2026 — Saved discoveries and caption gates (board M1-26, Atik/Codex):** successful physical operations now atomically acquire canonical scene records with observed operation labels. Journal queries, JSON checkpoints, identity/relay knowledge flags and the acknowledged-only backlog use that saved state. Campaign captions and director acknowledgements enforce DialogueService requirements; see [M1-26.md](production/review/execution/M1-26.md).
