@@ -8,7 +8,7 @@ Sources: production/manifest/{characters,tripo_props_batch1,reuse_props,planned_
 the files in game/assets/, production/review/asset_verification.md (automated gate) and
 production/review/visual_review.md. An asset is "verified" only when it passes both.
 """
-import csv, re
+import argparse, csv, re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -18,35 +18,50 @@ CAT = {"CH": "characters", "PL": "plants", "PR": "props", "VH": "vehicles", "EN"
 verdict = {}
 report = ROOT / "production/review/asset_verification.md"
 if report.exists():
-    for m in re.finditer(r"^\| (\w+) \| (✅ PASS|❌ FAIL|⬜[^|]*)", report.read_text(), re.M):
+    for m in re.finditer(r"^\| (\w+) \| (✅ PASS|❌ FAIL|⬜[^|]*)", report.read_text(encoding="utf-8"), re.M):
         verdict[m.group(1)] = "pass" if "PASS" in m.group(2) else "fail" if "FAIL" in m.group(2) else ""
 
 visual = {}
 review = ROOT / "production/review/visual_review.md"
 if review.exists():
-    for m in re.finditer(r"^\| (\w+) \| ([^|]+)\|", review.read_text(), re.M):
+    for m in re.finditer(r"^\| (\w+) \| ([^|]+)\|", review.read_text(encoding="utf-8"), re.M):
         # first table only: the second-opinion tables further down reuse asset names
         visual.setdefault(m.group(1), "fix" if "FIX" in m.group(2) else "pass" if "PASS" in m.group(2) else "")
 
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--manifest", choices=("characters", "tripo_props_batch1", "reuse_props", "lunar_kit"),
+                    help="Update only this manifest, preserving all other registry rows.")
+args = parser.parse_args()
 rows = []
-for manifest in ("characters", "tripo_props_batch1", "reuse_props"):
-    for r in csv.DictReader(open(M / f"{manifest}.csv")):
+if args.manifest:
+    with (ROOT / "production/ASSET_REGISTRY.csv").open(encoding="utf-8", newline="") as existing:
+        rows = [list(r.values()) for r in csv.DictReader(existing)
+                if r["defined_in"] != f"manifest/{args.manifest}.csv"]
+for manifest in ("characters", "tripo_props_batch1", "reuse_props", "lunar_kit"):
+    if args.manifest and manifest != args.manifest:
+        continue
+    for r in csv.DictReader(open(M / f"{manifest}.csv", encoding="utf-8")):
         n = r["name"]
         cat = CAT.get(n[:2], "misc")
-        glb = ROOT / f"game/assets/{cat}/{n}/{n}.glb"
+        game_path = r.get("game_path") or f"game/assets/{cat}/{n}/{n}.glb"
+        glb = ROOT / game_path
         status = ("failed check" if verdict.get(n) == "fail" else "needs fix (visual)" if visual.get(n) == "fix"
                   else "verified" if verdict.get(n) == "pass" and visual.get(n) == "pass"
                   else "awaiting visual review" if verdict.get(n) == "pass"
                   else "in game, unchecked" if glb.exists() else "in progress")
-        rows.append([n, cat, status, f"game/assets/{cat}/{n}/{n}.glb" if glb.exists() else "",
+        if r.get("art_status") == "provisional" and status == "verified":
+            status = "geometry verified; material approval pending"
+        rows.append([n, cat, status, game_path if glb.exists() else "",
                      r["concept_or_source"], f'{r["size_flag"][2:]} {r["size_m"]} m, {r["tris"]} tris, {r["tex"]} px',
                      f"manifest/{manifest}.csv", r.get("notes", "")])
-for r in csv.DictReader(open(M / "planned_assets.csv")):
+for r in csv.DictReader(open(M / "planned_assets.csv", encoding="utf-8")):
+    if args.manifest:
+        continue
     rows.append([r["name"], r["category"], "planned", "", r["method"], "", "manifest/planned_assets.csv",
                  f'first used {r["first_scenes"]}; {r["notes"]}'])
 
 out = ROOT / "production/ASSET_REGISTRY.csv"
-with open(out, "w", newline="") as f:
+with open(out, "w", newline="", encoding="utf-8") as f:
     w = csv.writer(f)
     w.writerow(["name", "category", "status", "game_path", "source", "spec", "defined_in", "notes"])
     w.writerows(sorted(rows, key=lambda r: (r[1], r[0])))

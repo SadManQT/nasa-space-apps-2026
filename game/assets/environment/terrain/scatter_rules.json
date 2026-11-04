@@ -1,0 +1,10 @@
+{
+  "density_per_m2": 0.35,
+  "slope_density": [[0, 1.0], [20, 0.65], [35, 0.2], [50, 0.0]],
+  "variant_weights": [16, 16, 14, 12, 10, 8, 6, 5, 4, 3, 2, 1.5, 1, 0.6, 0.3, 0.1],
+  "spacing_radius_factor": 0.65,
+  "collision_min_size_m": 0.35,
+  "lod0_min_distance_m": 8.0,
+  "lod0_size_multiplier": 12.0,
+  "lod1_multiplier": 2.5
+}

@@ -1,0 +1,248 @@
+{
+  "task": "M1-35",
+  "art_status": "provisional_pending_M1-33",
+  "seed": 351104,
+  "rocks": [
+    {
+      "id": "EN_LunarRock_01_Chip",
+      "size_m": 0.06,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_01_Chip_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_01_Chip_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_01_Chip_LOD2.glb"
+      ],
+      "triangles": [
+        194,
+        100,
+        46
+      ]
+    },
+    {
+      "id": "EN_LunarRock_02_Shard",
+      "size_m": 0.09,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_02_Shard_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_02_Shard_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_02_Shard_LOD2.glb"
+      ],
+      "triangles": [
+        144,
+        74,
+        34
+      ]
+    },
+    {
+      "id": "EN_LunarRock_03_Block",
+      "size_m": 0.14,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_03_Block_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_03_Block_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_03_Block_LOD2.glb"
+      ],
+      "triangles": [
+        188,
+        96,
+        44
+      ]
+    },
+    {
+      "id": "EN_LunarRock_04_Slab",
+      "size_m": 0.22,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_04_Slab_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_04_Slab_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_04_Slab_LOD2.glb"
+      ],
+      "triangles": [
+        148,
+        76,
+        34
+      ]
+    },
+    {
+      "id": "EN_LunarRock_05_Chip",
+      "size_m": 0.35,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_05_Chip_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_05_Chip_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_05_Chip_LOD2.glb"
+      ],
+      "triangles": [
+        170,
+        88,
+        40
+      ]
+    },
+    {
+      "id": "EN_LunarRock_06_Shard",
+      "size_m": 0.5,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_06_Shard_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_06_Shard_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_06_Shard_LOD2.glb"
+      ],
+      "triangles": [
+        168,
+        86,
+        40
+      ]
+    },
+    {
+      "id": "EN_LunarRock_07_Block",
+      "size_m": 0.75,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_07_Block_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_07_Block_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_07_Block_LOD2.glb"
+      ],
+      "triangles": [
+        154,
+        80,
+        36
+      ]
+    },
+    {
+      "id": "EN_LunarRock_08_Slab",
+      "size_m": 1.0,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_08_Slab_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_08_Slab_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_08_Slab_LOD2.glb"
+      ],
+      "triangles": [
+        158,
+        82,
+        36
+      ]
+    },
+    {
+      "id": "EN_LunarRock_09_Chip",
+      "size_m": 1.4,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_09_Chip_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_09_Chip_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_09_Chip_LOD2.glb"
+      ],
+      "triangles": [
+        176,
+        90,
+        42
+      ]
+    },
+    {
+      "id": "EN_LunarRock_10_Shard",
+      "size_m": 2.0,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_10_Shard_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_10_Shard_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_10_Shard_LOD2.glb"
+      ],
+      "triangles": [
+        170,
+        88,
+        40
+      ]
+    },
+    {
+      "id": "EN_LunarRock_11_Block",
+      "size_m": 2.8,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_11_Block_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_11_Block_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_11_Block_LOD2.glb"
+      ],
+      "triangles": [
+        164,
+        84,
+        38
+      ]
+    },
+    {
+      "id": "EN_LunarRock_12_Slab",
+      "size_m": 3.8,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_12_Slab_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_12_Slab_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_12_Slab_LOD2.glb"
+      ],
+      "triangles": [
+        148,
+        76,
+        34
+      ]
+    },
+    {
+      "id": "EN_LunarRock_13_Chip",
+      "size_m": 5.0,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_13_Chip_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_13_Chip_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_13_Chip_LOD2.glb"
+      ],
+      "triangles": [
+        178,
+        92,
+        42
+      ]
+    },
+    {
+      "id": "EN_LunarRock_14_Shard",
+      "size_m": 6.5,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_14_Shard_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_14_Shard_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_14_Shard_LOD2.glb"
+      ],
+      "triangles": [
+        138,
+        70,
+        32
+      ]
+    },
+    {
+      "id": "EN_LunarRock_15_Block",
+      "size_m": 8.0,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_15_Block_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_15_Block_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_15_Block_LOD2.glb"
+      ],
+      "triangles": [
+        180,
+        92,
+        42
+      ]
+    },
+    {
+      "id": "EN_LunarRock_16_Slab",
+      "size_m": 10.0,
+      "lods": [
+        "res://assets/environment/terrain/rocks/EN_LunarRock_16_Slab_LOD0.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_16_Slab_LOD1.glb",
+        "res://assets/environment/terrain/rocks/EN_LunarRock_16_Slab_LOD2.glb"
+      ],
+      "triangles": [
+        150,
+        78,
+        36
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "id": "EN_Regolith_Fresh",
+      "path": "res://assets/environment/terrain/materials/EN_Regolith_Fresh.tres",
+      "tile_size_m": 4
+    },
+    {
+      "id": "EN_Regolith_Compacted",
+      "path": "res://assets/environment/terrain/materials/EN_Regolith_Compacted.tres",
+      "tile_size_m": 4
+    },
+    {
+      "id": "EN_Regolith_Disturbed",
+      "path": "res://assets/environment/terrain/materials/EN_Regolith_Disturbed.tres",
+      "tile_size_m": 4
+    }
+  ]
+}

@@ -22,8 +22,8 @@ GODOT_ERRORS = ("SCRIPT ERROR", "Parse Error", "Failed to load script", "ERROR:"
 
 def specs():
     out = {}
-    for name in ("characters", "tripo_props_batch1", "reuse_props"):
-        for r in csv.DictReader(open(ROOT / f"production/manifest/{name}.csv")):
+    for name in ("characters", "tripo_props_batch1", "reuse_props", "lunar_kit"):
+        for r in csv.DictReader(open(ROOT / f"production/manifest/{name}.csv", encoding="utf-8")):
             out[r["name"]] = r
     return out
 
@@ -101,7 +101,7 @@ def main():
         lines.append(f"| {name} | {'✅ PASS' if ok else '❌ FAIL'} | {cell('tris')} | {cell('texture')} | {cell('on floor')} | {cell('size')} | {cell('rig')} |"
                      if "imports" in res and res["imports"][0] else f"| {name} | ❌ FAIL | {res['imports'][1]} | | | | |")
     lines += ["", f"**{len(assets)} assets in Godot, {failed} failing.**"]
-    (ROOT / "production/review/asset_verification.md").write_text("\n".join(lines) + "\n")
+    (ROOT / "production/review/asset_verification.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines[-1:]))
     sys.exit(1 if failed else 0)
 

@@ -34,12 +34,15 @@ func _ready() -> void:
 	print("SHOWCASE loaded %d assets" % exhibits.size())
 
 static func asset_paths(category: String) -> PackedStringArray:
+	return _asset_files("res://assets/" + category)
+
+static func _asset_files(directory: String) -> PackedStringArray:
 	var paths := PackedStringArray()
-	var directory := "res://assets/" + category
+	for file in DirAccess.get_files_at(directory):
+		if file.get_extension().to_lower() == "glb":
+			paths.append(directory.path_join(file))
 	for folder in DirAccess.get_directories_at(directory):
-		var path := directory.path_join(folder).path_join(folder + ".glb")
-		if FileAccess.file_exists(path):
-			paths.append(path)
+		paths.append_array(_asset_files(directory.path_join(folder)))
 	paths.sort()
 	return paths
 
