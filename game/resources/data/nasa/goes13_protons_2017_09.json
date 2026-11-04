@@ -12,8 +12,8 @@
  "citation": "NOAA NCEI, GOES-13 SEM EPEAD corrected proton flux, September 2017.",
  "fields_used": [
   "time_tag",
-  "ZPGT10W (>10 MeV, west-facing, p/(cm^2 s sr))",
-  "ZPGT100W (>100 MeV)"
+  "ZPGT10E (>10 MeV, east-facing, p/(cm^2 s sr))",
+  "ZPGT100E (>100 MeV, east-facing)"
  ],
  "values": {
   "hourly_columns": [
@@ -24,243 +24,243 @@
   "hourly": [
    [
     "2017-09-10T12:00Z",
-    0.17,
-    0.0384
+    0.538,
+    0.0367
    ],
    [
     "2017-09-10T13:00Z",
-    0.175,
-    0.0464
+    0.578,
+    0.0396
    ],
    [
     "2017-09-10T14:00Z",
-    0.159,
-    0.0452
+    0.556,
+    0.0319
    ],
    [
     "2017-09-10T15:00Z",
-    0.188,
-    0.0492
+    0.629,
+    0.0479
    ],
    [
     "2017-09-10T16:00Z",
-    6.567,
-    1.9055
+    6.707,
+    2.6666
    ],
    [
     "2017-09-10T17:00Z",
-    57.541,
-    14.0228
+    321.848,
+    15.1614
    ],
    [
     "2017-09-10T18:00Z",
-    111.549,
-    29.7507
+    848.314,
+    32.0412
    ],
    [
     "2017-09-10T19:00Z",
-    146.968,
-    37.5065
+    724.918,
+    41.8051
    ],
    [
     "2017-09-10T20:00Z",
-    223.813,
-    44.2396
+    583.758,
+    48.9204
    ],
    [
     "2017-09-10T21:00Z",
-    467.179,
-    51.6965
+    762.99,
+    54.4875
    ],
    [
     "2017-09-10T22:00Z",
-    684.274,
-    58.5169
+    952.819,
+    61.5348
    ],
    [
     "2017-09-10T23:00Z",
-    908.217,
-    58.7241
+    927.086,
+    57.6908
    ],
    [
     "2017-09-11T00:00Z",
-    1188.479,
-    58.4886
+    996.411,
+    59.5445
    ],
    [
     "2017-09-11T01:00Z",
-    1143.0,
-    51.5701
+    1134.933,
+    56.1953
    ],
    [
     "2017-09-11T02:00Z",
-    851.302,
-    48.4721
+    1102.017,
+    53.8545
    ],
    [
     "2017-09-11T03:00Z",
-    640.717,
-    46.3382
+    1138.95,
+    51.0351
    ],
    [
     "2017-09-11T04:00Z",
-    864.085,
-    45.38
+    1128.542,
+    48.9861
    ],
    [
     "2017-09-11T05:00Z",
-    881.156,
-    40.7612
+    1290.642,
+    44.828
    ],
    [
     "2017-09-11T06:00Z",
-    880.521,
-    37.3538
+    1263.408,
+    40.3896
    ],
    [
     "2017-09-11T07:00Z",
-    998.368,
-    33.8475
+    1250.8,
+    36.3214
    ],
    [
     "2017-09-11T08:00Z",
-    857.301,
-    30.1288
+    1148.717,
+    32.9208
    ],
    [
     "2017-09-11T09:00Z",
-    951.845,
-    28.0157
+    1370.208,
+    29.9123
    ],
    [
     "2017-09-11T10:00Z",
-    1116.0,
-    26.1378
+    1295.417,
+    27.5069
    ],
    [
     "2017-09-11T11:00Z",
-    1048.064,
-    25.0577
+    1368.717,
+    27.168
    ],
    [
     "2017-09-11T12:00Z",
-    909.242,
-    22.3862
+    1240.058,
+    24.6345
    ],
    [
     "2017-09-11T13:00Z",
-    754.968,
-    20.2895
+    1171.392,
+    21.3724
    ],
    [
     "2017-09-11T14:00Z",
-    720.323,
-    17.8683
+    1120.075,
+    18.5344
    ],
    [
     "2017-09-11T15:00Z",
-    581.689,
-    15.623
+    1047.192,
+    16.7686
    ],
    [
     "2017-09-11T16:00Z",
-    627.408,
-    14.5964
+    1011.811,
+    15.2575
    ],
    [
     "2017-09-11T17:00Z",
-    663.726,
-    13.3152
+    958.519,
+    13.8448
    ],
    [
     "2017-09-11T18:00Z",
-    413.328,
-    11.882
+    871.645,
+    12.4573
    ],
    [
     "2017-09-11T19:00Z",
-    354.796,
-    10.89
+    838.786,
+    11.6663
    ],
    [
     "2017-09-11T20:00Z",
-    368.831,
-    10.6303
+    855.41,
+    11.2011
    ],
    [
     "2017-09-11T21:00Z",
-    541.945,
-    10.0247
+    844.538,
+    10.523
    ],
    [
     "2017-09-11T22:00Z",
-    520.557,
-    9.0743
+    836.814,
+    9.5072
    ],
    [
     "2017-09-11T23:00Z",
-    469.991,
-    8.581
+    797.27,
+    9.2202
    ],
    [
     "2017-09-12T00:00Z",
-    443.479,
-    7.7602
+    734.377,
+    8.6635
    ],
    [
     "2017-09-12T01:00Z",
-    459.562,
-    7.3969
+    661.832,
+    8.0503
    ],
    [
     "2017-09-12T02:00Z",
-    419.919,
-    6.6963
+    620.762,
+    7.5582
    ],
    [
     "2017-09-12T03:00Z",
-    387.852,
-    6.164
+    578.972,
+    6.9517
    ],
    [
     "2017-09-12T04:00Z",
-    376.177,
-    5.7735
+    520.283,
+    6.3222
    ],
    [
     "2017-09-12T05:00Z",
-    358.739,
-    5.2446
+    496.08,
+    5.7662
    ],
    [
     "2017-09-12T06:00Z",
-    325.56,
-    4.7286
+    435.107,
+    5.3067
    ],
    [
     "2017-09-12T07:00Z",
-    340.777,
-    4.5344
+    422.342,
+    4.821
    ],
    [
     "2017-09-12T08:00Z",
-    256.612,
-    3.7149
+    380.883,
+    4.0483
    ],
    [
     "2017-09-12T09:00Z",
-    196.162,
-    3.3462
+    332.131,
+    3.6459
    ],
    [
     "2017-09-12T10:00Z",
-    200.193,
-    3.4293
+    305.081,
+    3.7889
    ],
    [
     "2017-09-12T11:00Z",
-    232.935,
-    2.7205
+    255.093,
+    2.746
    ]
   ]
  },
@@ -275,40 +275,61 @@
   },
   {
    "name": "gt10MeV_peak",
-   "value": 1347.2,
+   "value": 1493.5,
    "unit": "pfu",
-   "formula": "max 5-min value, at 2017-09-11T00:55Z",
+   "formula": "max 5-min value, at 2017-09-11T11:45Z",
    "drives": "debrief chart"
   },
   {
    "name": "gt100MeV_peak",
-   "value": 60.718,
+   "value": 68.128,
    "unit": "pfu",
-   "formula": "max 5-min value, at 2017-09-10T22:20Z",
+   "formula": "max 5-min value, at 2017-09-10T22:15Z",
    "drives": "debrief chart"
   },
   {
+   "name": "storm_level_end",
+   "value": "2017-09-14T17:25Z",
+   "unit": "UTC",
+   "formula": "first valid 5-min ZPGT10E value < 10 pfu after the event peak",
+   "drives": "P-02 replay duration boundary (real storm continues beyond the chart)"
+  },
+  {
    "name": "storm_shift1_mean_gt10MeV",
-   "value": 359.2,
+   "value": 707.1,
    "unit": "pfu",
-   "formula": "mean over [onset, onset+7.2 h)",
-   "drives": "P-02 shift 5"
+   "formula": "mean ZPGT10E over [onset+0 h, onset+7.2 h)",
+   "drives": "historical 7.2-hour block 1; P-02 replays only blocks 1-2"
   },
   {
    "name": "storm_shift2_mean_gt10MeV",
-   "value": 922.8,
+   "value": 1153.1,
    "unit": "pfu",
-   "formula": "mean over [onset+7.2 h, onset+14.4 h)",
-   "drives": "P-02 shift 6"
+   "formula": "mean ZPGT10E over [onset+7.2 h, onset+14.4 h)",
+   "drives": "historical 7.2-hour block 2; P-02 replays only blocks 1-2"
+  },
+  {
+   "name": "storm_shift3_mean_gt10MeV",
+   "value": 1256.9,
+   "unit": "pfu",
+   "formula": "mean ZPGT10E over [onset+14.4 h, onset+21.6 h)",
+   "drives": "historical 7.2-hour block 3; P-02 replays only blocks 1-2"
+  },
+  {
+   "name": "storm_shift4_mean_gt10MeV",
+   "value": 937.9,
+   "unit": "pfu",
+   "formula": "mean ZPGT10E over [onset+21.6 h, onset+28.8 h)",
+   "drives": "historical 7.2-hour block 4; P-02 replays only blocks 1-2"
   },
   {
    "name": "shift2_over_shift1",
-   "value": 2.57,
+   "value": 1.63,
    "unit": "ratio",
    "formula": "storm_shift2_mean / storm_shift1_mean",
    "drives": "P-02 proposal B3-4 (not applied)"
   }
  ],
- "boundary": "Measured in geostationary orbit, about 36,000 km above Earth, where Earth's magnetic field barely slows protons this fast; a flux, not a dose at the Moon. West-facing detector; NOAA's official peak (1,490 pfu, 11 Sep 11:45 UT) is from the east-facing one. pfu = protons/(cm^2 s sr).",
+ "boundary": "Measured in geostationary orbit, about 36,000 km above Earth, where Earth's magnetic field barely slows protons this fast; a flux, not a dose at the Moon. East-facing detector; its 1,493.5 pfu peak at 11 Sep 11:45 UT agrees within 1% with NOAA's official 1,490 pfu event peak. The chart ends on 12 Sep while the storm continues until 14 Sep 17:25 UT; Aurora shortens this to two storm shifts as a game rule. pfu = protons/(cm^2 s sr).",
  "src_card": "SRC-STORM2017"
 }

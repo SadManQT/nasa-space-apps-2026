@@ -214,7 +214,7 @@ Chapter question: how can one crew keep people, a station and a living experimen
 
 ### 3.4 `EX-M0104` — Keep the Promise Until Dawn
 
-`EX-CH01-S10`..`S12` · Safe Room and response controls, garden service line, chamber shutter and Tara reference bay · **P-02** shifts 5–7 and the ending · **21 min** · Data Cards: `donki_2017_09` and `goes13_protons_2017_09` (X8.2 flare 10 Sep 2017, >10 MeV onset 70 minutes after flare start `[M]`; second 7.2 h had 2.6× the flux, debrief only), `clowdsley_2021_shielding` · Outpost Status: Shielding `S = min(6, W + K)` and exposure `Z` take centre stage; the `Z ≤ 3` limit is badged.
+`EX-CH01-S10`..`S12` · Safe Room and response controls, garden service line, chamber shutter and Tara reference bay · **P-02** shifts 5–7 and the ending · **21 min** · Data Cards: `donki_2017_09` and `goes13_protons_2017_09` (X8.2 flare 10 Sep 2017, >10 MeV onset 70 minutes after flare start `[M]`; east-facing detector’s second 7.2 h had 1.6× the flux, debrief only), `clowdsley_2021_shielding` · Outpost Status: Shielding `S = min(6, W + K)` and exposure `Z` take centre stage; the `Z ≤ 3` limit is badged.
 
 **1 · Investigation**
 

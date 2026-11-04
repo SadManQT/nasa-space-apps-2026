@@ -51,8 +51,8 @@
     300
    ],
    "cultivation_days": null,
-   "photoperiod_16_8": false,
-   "temperature_23C": false
+   "photoperiod_16_8": true,
+   "temperature_23C": true
   }
  },
  "evidence_label": "Observed",

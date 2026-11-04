@@ -44,14 +44,14 @@
     25
    ],
    "unit": "plant day",
-   "formula": "30 Apr - 6 May after 11 Apr planting",
+   "formula": "30 Apr - 6 May after 11 Apr planting (story)",
    "drives": "P-03 runs"
   },
   {
    "name": "p06_dry_down_end_day",
    "value": 40,
    "unit": "plant day",
-   "formula": "21 May after 11 Apr planting",
+   "formula": "21 May after 11 Apr planting (story)",
    "drives": "P-06 harvest"
   }
  ],

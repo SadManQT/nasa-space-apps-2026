@@ -48,11 +48,13 @@ func _init(data_root: String = DATA_ROOT) -> void:
 		if file.ends_with(".json") and file != "puzzle_sources.json":
 			_fixtures[file.get_basename()] = _read_json(_root.path_join(file))
 
+## Sorted IDs of every bundled source, for the Journal source list.
 func source_ids() -> Array:
 	var ids := _fixtures.keys()
 	ids.sort()
 	return ids
 
+## Return presentation copies of the puzzle's sources, or an explicit pending card.
 func cards_for_puzzle(puzzle_id: String) -> Array:
 	var cards: Array = []
 	for id in _mapping.get("puzzles", {}).get(puzzle_id, []):
@@ -61,6 +63,7 @@ func cards_for_puzzle(puzzle_id: String) -> Array:
 		cards.append(_pending(puzzle_id))
 	return cards
 
+## Return an isolated source record with a fixture-derived visual and takeaway.
 func card(source_id: String) -> Dictionary:
 	var data: Dictionary = _fixtures.get(source_id, {})
 	if data.is_empty():
@@ -71,6 +74,7 @@ func card(source_id: String) -> Dictionary:
 	result["pending"] = false
 	return result
 
+## Check source coverage and required provenance without network access.
 func validate() -> Dictionary:
 	var errors: Array[String] = []
 	for number in range(1, 17):
@@ -109,6 +113,9 @@ func _visual(data: Dictionary) -> Dictionary:
 			if not points.is_empty():
 				return {"kind": "line", "label": String(columns[1]), "values": points, "start": str(rows[0][0]), "end": str(rows[-1][0]), "axis": "Bundled samples in order"}
 	for derived in data.get("derived", []):
+		# Authored dates remain in the record, but must not look like measurements.
+		if String(derived.get("formula", "")).to_lower().contains("story"):
+			continue
 		var value = derived.get("value")
 		if value is float or value is int:
 			return {"kind": "bar", "label": String(derived.get("name", "")).replace("_", " "), "values": [float(value)], "unit": derived.get("unit", ""), "axis": "Computed from fixture; zero baseline"}
@@ -121,6 +128,7 @@ func _visual(data: Dictionary) -> Dictionary:
 			return {"kind": "gauge", "label": String(key).replace("_", " "), "values": [1.0 if values[key] else 0.0], "unit": "Yes" if values[key] else "No", "axis": "Recorded fact; not a numerical measurement"}
 	return {}
 
+## Format measured inputs and processing metadata for the card's text equivalent.
 static func describe(value) -> String:
 	if value is Dictionary:
 		var rows: Array[String] = []

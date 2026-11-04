@@ -1,0 +1,10 @@
+test_goes_bundled_official_peak (test_nasa_fixtures.NasaFixtureTests.test_goes_bundled_official_peak) ... ok
+test_goes_detector_windows_and_end_beyond_chart (test_nasa_fixtures.NasaFixtureTests.test_goes_detector_windows_and_end_beyond_chart) ... ok
+test_horizons_refresh_preserves_elevation_columns (test_nasa_fixtures.NasaFixtureTests.test_horizons_refresh_preserves_elevation_columns) ... ok
+test_osdr_protocol_whitespace (test_nasa_fixtures.NasaFixtureTests.test_osdr_protocol_whitespace) ... ok
+test_story_dates_are_qualified (test_nasa_fixtures.NasaFixtureTests.test_story_dates_are_qualified) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.078s
+
+OK

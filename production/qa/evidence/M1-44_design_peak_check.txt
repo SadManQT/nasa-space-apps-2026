@@ -1,0 +1,6 @@
+M1-44 final fix-round consistency check, 2026-11-05
+PASS: design 23 P-02 row names the east-facing GOES-13 detector and 1,493.5 pfu measured peak.
+PASS: no stale 1,347 peak remains in design 23.
+PASS: design row agrees with bundled fixture, mission card and SCIENCE_AND_DATA.md.
+PASS: peak 1,493.5 pfu differs from NOAA official 1,490 pfu by 0.235% (below 1%).
+Documentation-only correction; existing M1-44 PNGs and capture transcript retained.

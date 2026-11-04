@@ -218,27 +218,34 @@ def fx_donki_2012_07():
 
 
 def fx_goes13_protons_2017_09():
+    """Extract the east EPEAD channels that reproduce NOAA's September event peak.
+
+    Keep the 48-hour chart separate from the event window used for the end time;
+    truncating the latter at the chart edge would falsely imply the storm ended.
+    """
     url = ("https://www.ncei.noaa.gov/data/goes-space-environment-monitor/access/avg/2017/09/goes13/csv/"
            "g13_epead_cpflux_5m_20170901_20170930.csv")
     lines = get(url).splitlines()
     start = next(i for i, ln in enumerate(lines) if ln.startswith("data:")) + 1
     rows = list(csv.DictReader(lines[start:]))
     t0, t1 = dt.datetime(2017, 9, 10, 12), dt.datetime(2017, 9, 12, 12)
+    event_stop = dt.datetime(2017, 9, 16)
     series = []
     for r in rows:
         t = dt.datetime.strptime(r["time_tag"][:19], "%Y-%m-%d %H:%M:%S")
-        if t0 <= t < t1:
-            p10, p100 = float(r["ZPGT10W"]), float(r["ZPGT100W"])
+        if t0 <= t < event_stop:
+            p10, p100 = float(r["ZPGT10E"]), float(r["ZPGT100E"])
             series.append((t, p10 if p10 >= 0 else None, p100 if p100 >= 0 else None))
     onset = next(t for t, p10, _ in series if t >= dt.datetime(2017, 9, 10, 15, 35) and p10 and p10 >= 10)
     pk10 = max((s for s in series if s[1]), key=lambda s: s[1])
     pk100 = max((s for s in series if s[2]), key=lambda s: s[2])
+    storm_end = next(t for t, p10, _ in series if t > pk10[0] and p10 is not None and p10 < 10)
 
     def mean10(a, b):
         v = [p for t, p, _ in series if a <= t < b and p is not None]
         return round(sum(v) / len(v), 1)
     shift = dt.timedelta(hours=7.2)
-    m1, m2 = mean10(onset, onset + shift), mean10(onset + shift, onset + 2 * shift)
+    means = [mean10(onset + n * shift, onset + (n + 1) * shift) for n in range(4)]
     hourly = []
     for h in range(int((t1 - t0).total_seconds() // 3600)):
         a = t0 + dt.timedelta(hours=h)
@@ -254,7 +261,7 @@ def fx_goes13_protons_2017_09():
         dataset_id="GOES-13 EPEAD corrected integral proton flux, 5-min (g13_epead_cpflux_5m_20170901_20170930)",
         url="https://www.ncei.noaa.gov/products/goes-1-15/space-weather-instruments", request_urls=[url],
         licence=US_GOV, citation="NOAA NCEI, GOES-13 SEM EPEAD corrected proton flux, September 2017.",
-        fields_used=["time_tag", "ZPGT10W (>10 MeV, west-facing, p/(cm^2 s sr))", "ZPGT100W (>100 MeV)"],
+        fields_used=["time_tag", "ZPGT10E (>10 MeV, east-facing, p/(cm^2 s sr))", "ZPGT100E (>100 MeV, east-facing)"],
         values={"hourly_columns": ["hour_start_utc", "gt10MeV_pfu", "gt100MeV_pfu"], "hourly": hourly},
         evidence_label="Observed",
         derived=[
@@ -262,14 +269,20 @@ def fx_goes13_protons_2017_09():
                     "P-02 storm onset"),
             derived("gt10MeV_peak", pk10[1], "pfu", f"max 5-min value, at {iso(pk10[0])}", "debrief chart"),
             derived("gt100MeV_peak", pk100[2], "pfu", f"max 5-min value, at {iso(pk100[0])}", "debrief chart"),
-            derived("storm_shift1_mean_gt10MeV", m1, "pfu", "mean over [onset, onset+7.2 h)", "P-02 shift 5"),
-            derived("storm_shift2_mean_gt10MeV", m2, "pfu", "mean over [onset+7.2 h, onset+14.4 h)", "P-02 shift 6"),
-            derived("shift2_over_shift1", round(m2 / m1, 2), "ratio", "storm_shift2_mean / storm_shift1_mean",
+            derived("storm_level_end", iso(storm_end), "UTC", "first valid 5-min ZPGT10E value < 10 pfu after the event peak",
+                    "P-02 replay duration boundary (real storm continues beyond the chart)"),
+            *[derived(f"storm_shift{n + 1}_mean_gt10MeV", mean, "pfu",
+                      f"mean ZPGT10E over [onset+{n * 7.2:g} h, onset+{(n + 1) * 7.2:g} h)",
+                      f"historical 7.2-hour block {n + 1}; P-02 replays only blocks 1-2")
+              for n, mean in enumerate(means)],
+            derived("shift2_over_shift1", round(means[1] / means[0], 2), "ratio", "storm_shift2_mean / storm_shift1_mean",
                     "P-02 proposal B3-4 (not applied)"),
         ],
         boundary="Measured in geostationary orbit, about 36,000 km above Earth, where Earth's magnetic field barely "
-                 "slows protons this fast; a flux, not a dose at the Moon. West-facing detector; NOAA's official peak "
-                 "(1,490 pfu, 11 Sep 11:45 UT) is from the east-facing one. pfu = protons/(cm^2 s sr).",
+                 "slows protons this fast; a flux, not a dose at the Moon. East-facing detector; its 1,493.5 pfu peak "
+                 "at 11 Sep 11:45 UT agrees within 1% with NOAA's official 1,490 pfu event peak. "
+                 "The chart ends on 12 Sep while the storm continues until 14 Sep 17:25 UT; "
+                 "Aurora shortens this to two storm shifts as a game rule. pfu = protons/(cm^2 s sr).",
         src_card="SRC-STORM2017")
 
 
@@ -417,8 +430,8 @@ def fx_jpl_horizons_ch1_sky():
         dataset_id="Horizons targets 399 (Earth) and 10 (Sun), site coord@301 0E -90 h0, 6-hourly",
         url="https://ssd.jpl.nasa.gov/horizons/", request_urls=[u1, u2], licence=JPL, citation=HZ_CITE,
         fields_used=["UT", "Earth azimuth/elevation, deg", "Sun elevation, deg"],
-        values={"columns": ["utc", "earth_azimuth_deg", "earth_elevation_deg", "sun_elevation_deg"],
-                "six_hourly": [[iso(a[0]), a[1], a[2], b[2]] for a, b in zip(earth, sun)]},
+        values={"columns": ["utc", "earth_elevation_deg", "earth_azimuth_deg", "sun_elevation_deg"],
+                "six_hourly": [[iso(a[0]), a[2], a[1], b[2]] for a, b in zip(earth, sun)]},
         evidence_label="Computed",
         derived=[derived("earth_horizon_crossings", crossings(earth), "utc", "linear interpolation of elevation sign change",
                          "P-02 Earth-link cutoff context (authored; see SCIENCE_AND_DATA B3-5)"),
@@ -448,9 +461,9 @@ def fx_jpl_horizons_ch8_relay():
         dataset_id="Horizons target 399 (Earth), sites coord@301 -1.67E -85.98 (Mons Malapert) and 0E -90",
         url="https://ssd.jpl.nasa.gov/horizons/", request_urls=[u1, u2], licence=JPL, citation=HZ_CITE,
         fields_used=["UT", "Earth azimuth/elevation, deg"],
-        values={"columns": ["utc", "earth_azimuth_deg", "earth_elevation_deg"],
-                "malapert_15min": [[iso(t), a, e] for t, a, e in mal],
-                "pole_6hourly": [[iso(t), a, e] for t, a, e in pole]},
+        values={"columns": ["utc", "earth_elevation_deg", "earth_azimuth_deg"],
+                "malapert_15min": [[iso(t), e, a] for t, a, e in mal],
+                "pole_6hourly": [[iso(t), e, a] for t, a, e in pole]},
         evidence_label="Computed",
         derived=[derived("e3_azimuth_range", [min(x[1] for x in win), max(x[1] for x in win)], "deg",
                          "Earth azimuth from Mons Malapert, 9 Apr 2047 00:45-01:45 UT", "P-16 Earth bearing E3"),
@@ -545,7 +558,8 @@ def fx_osdr_brassica_rapa_iss():
     out = {}
     for acc in ("OSD-59", "OSD-412"):
         s = hits[acc]
-        text = f"{s.get('Study Description', '')} {s.get('Study Protocol Description', '')}"
+        # OSDR uses thin spaces, narrow no-break spaces and NBSP in protocols.
+        text = " ".join(f"{s.get('Study Description', '')} {s.get('Study Protocol Description', '')}".split())
         par = re.search(r"(\d+)\s*[-–]\s*(\d+)\s*[µμ]mol", text)
         days = re.search(r"after (\d+) days cultivation", text)
         out[acc] = {"title": s.get("Study Title"), "mission": s.get("Mission"), "platform": s.get("Experiment Platform"),
@@ -807,8 +821,8 @@ def fx_fast_plants_lifecycle():
          "pod_maturity_days_after_pollination": 20, "seed_harvest_days_after_planting": 40,
          "self_incompatible": True},
         [derived("alo_bloom_day", 16, "plant day", "planted 11 Apr, blooms 27 Apr (story)", "CH2; ~14 days"),
-         derived("p03_run_days", [19, 25], "plant day", "30 Apr - 6 May after 11 Apr planting", "P-03 runs"),
-         derived("p06_dry_down_end_day", 40, "plant day", "21 May after 11 Apr planting", "P-06 harvest")],
+         derived("p03_run_days", [19, 25], "plant day", "30 Apr - 6 May after 11 Apr planting (story)", "P-03 runs"),
+         derived("p06_dry_down_end_day", 40, "plant day", "21 May after 11 Apr planting (story)", "P-06 harvest")],
         "Published value", "Ideal Earth classroom conditions; lunar cultivation and the 42-seed count are fiction.",
         [(url, "html", ["uniform, short flowering time (14 days)", "Fast Plants are typically self-incompatible",
                         "stigma is receptive to pollen for 2-4 days",
