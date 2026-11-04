@@ -26,6 +26,10 @@ GODOT = "/Applications/Godot.app/Contents/MacOS/Godot"
 GOCODE_RUN = str(Path.home() / ".local/bin/gocode-run")
 AGY_SETTINGS = str(Path.home() / ".local/share/night_shift/agy_settings.json")
 SLOTS = int(os.environ.get("SLOTS", "2"))
+LANES_ONLY = [l for l in os.environ.get("LANES_ONLY", "").split(",") if l]  # e.g. antigravity,gemini,any
+SLOT_PREFIX = os.environ.get("SLOT_PREFIX", "slot")
+SUMMARY = os.environ.get("SUMMARY", "night_summary.md")
+CLAIMS = NIGHT / "claims"  # one directory per task: an atomic lock shared by every running night shift
 DEADLINE = time.time() + float(os.environ.get("HOURS", "12")) * 3600
 WORKER_TIMEOUT = 4 * 3600
 GIT_ID = ["-c", "user.name=sadmanqt", "-c", "user.email=2405167@ugrad.cse.buet.ac.bd"]
@@ -46,7 +50,7 @@ LANES = {  # board lane -> accounts in order of preference
     "gemini": ["buet", "claude2"],
     "any": ["claude2", "codex", "buet"],
 }
-REVIEWER = {"codex": ["claude2", "claude-main"], "claude": ["codex", "codex-main", "claude-main"], "gemini": ["codex", "claude2"]}
+REVIEWER = {"codex": ["claude2", "buet", "claude-main"], "claude": ["codex", "codex-main", "buet", "claude-main"], "gemini": ["codex", "claude2"]}
 FABLE_HINTS = re.compile(r"habitat kit|environment|main scene|terrain|exterior|photoreal|M1-03|M1-05", re.I)
 
 asleep: dict[str, float] = {}       # account -> epoch when usable again
@@ -208,6 +212,8 @@ def park(slot, tid, reason):
 
 def pick(slot):
     for lane, accounts in LANES.items():
+        if LANES_ONLY and lane not in LANES_ONLY:
+            continue
         if not free(accounts):
             continue
         _, out = sh(["python3", "production/plan/board.py", "next", "--tool", lane], slot)
@@ -216,6 +222,10 @@ def pick(slot):
             if m and m[1] not in taken:
                 with lock:
                     if m[1] in taken:
+                        continue
+                    try:
+                        (CLAIMS / m[1]).mkdir(parents=True)
+                    except FileExistsError:  # another night shift has it
                         continue
                     taken.add(m[1])
                 return m[1], lane
@@ -260,7 +270,7 @@ def do_task(slot, tid, lane):
 
 
 def slot_loop(n):
-    slot = NIGHT / f"slot{n}"
+    slot = NIGHT / f"{SLOT_PREFIX}{n}"
     while time.time() < DEADLINE and not STOP.exists():
         try:
             prepare(slot)
@@ -285,6 +295,7 @@ def slot_loop(n):
             elif outcome == "deferred":
                 with lock:
                     taken.discard(tid)
+                    (CLAIMS / tid).rmdir()
                 time.sleep(300)
             log(f"[slot{n}] {tid} -> {outcome}: {note[:300]}")
             with lock:
@@ -297,7 +308,7 @@ def slot_loop(n):
 
 def write_summary():
     rows = "\n".join(f"| {r['at']} | {r['task']} | {r['outcome']} | {r['title']} | {r['note'].replace('|', '/').replace(chr(10), ' ')[:200]} |" for r in results)
-    (LOGDIR / "night_summary.md").write_text(
+    (LOGDIR / SUMMARY).write_text(
         "# Night shift summary\n\nLanded on main = done (tests green + independent review PASS). Parked work is on branches night/<task>.\n\n"
         "| Time | Task | Outcome | Title | Note |\n|---|---|---|---|---|\n" + rows + "\n")
 
@@ -306,7 +317,7 @@ if __name__ == "__main__":
     LOGDIR.mkdir(parents=True, exist_ok=True)
     NIGHT.mkdir(exist_ok=True)
     STOP.unlink(missing_ok=True)
-    log(f"night shift starts: {SLOTS} slot(s), until {dt.datetime.fromtimestamp(DEADLINE):%H:%M}")
+    log(f"night shift starts: {SLOTS} {SLOT_PREFIX} slot(s), lanes {LANES_ONLY or 'all'}, until {dt.datetime.fromtimestamp(DEADLINE):%H:%M}")
     threads = [threading.Thread(target=slot_loop, args=(i + 1,), daemon=True) for i in range(SLOTS)]
     for i, t in enumerate(threads):
         t.start()
