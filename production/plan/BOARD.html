@@ -973,8 +973,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "antigravity",
    "title": "First five minutes: title screen, onboarding and UX polish",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/night-buet",
    "deps": [
     "M0-02"
    ],
@@ -990,7 +990,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-05",
    "prompt": "Goal: 'User experience 5 = anyone can use it' — a judge or a 12-year-old plays the first five minutes without help.\nDo: (1) hide the DEVELOPER ASSET SHOWCASE button in exported builds (feature flag / OS.has_feature('editor')) and fix the footer that\noverlaps it; (2) New Expedition flow per execution/UI_01_MAIN_MENU.md and UI_02; (3) contextual first-time prompts for move, look, use,\nMission Table and the journal, shown once and replayable from Settings; (4) HUD and objective readability (UI_03, UI_04, UI_05, UI_06):\nfont sizes, contrast, text scaling to 150%, focus order for keyboard and controller; (5) remap controls (UI_15).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second screen recording of a cold start to the first objective."
   },
   {
