@@ -1134,7 +1134,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "deps": [
     "M1-21",
     "M1-22",
-    "M1-40"
+    "M1-40",
+    "M1-42",
+    "M1-43"
    ],
    "paths": [
     "game/"
@@ -3570,6 +3572,320 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "evidence": "",
    "updated": "2026-11-04",
    "prompt": "Problems (M1-40, production/review/science_review_ch01.md):\n(S1) SCIENCE_AND_DATA.md:36 (row 7) and B1 row 14, and 23_NASA_MISSION_PRACTICE.md:300 and :309, call 20 g/cm2 Clowdsley's storm-shelter guideline. Clowdsley slides 16 and 31 give it as the target 'for GCR protection'. Cite Townsend, Nealy & Wilson 1988 (NTRS 19880016043: 20 g/cm2 of water keeps the worst historical flares under the 25 rem 30-day limit) plus NASA-STD-3001 Vol 1 Rev B [V1 4031] for the SPE shelter.\n(B1 docs) SCIENCE_AND_DATA B3-5, 16_SCIENTIFIC_ACCURACY row 48 and 23 section 8.2 ('Earth below the horizon in P-02 shifts 4-7'): state that Earth is below the pole's horizon from 15 to 28 Apr 2046 and rising during the night, so the shift-4 cutoff is authored. Use whatever wording Sadman approved in M1-42.\n(N2) Add one line where the 2017 replay is explained: the X9.3 (6 Sep 11:53) and X8.2 (10 Sep 15:35) flares were 4 days 3.7 h apart; the replay compresses them.\n(N3) COLD 'about 0 C' is called frost (SCIENCE_AND_DATA:52, 23:274, 10_GAMEPLAY_SYSTEMS.md:154, 22 section 3.3 clue 6). Heavy frost for Brassica is below -2 C (Canola Council of Canada). Relabel COLD 'near or below freezing'; keep the damage numbers.\n(N4) SCIENCE_AND_DATA:37: a 20 cm water wall round a small 4-person shelter is about 2,000 L, not 'a few hundred litres' (pump energy still negligible, about 7 kJ to lift 2 t by 2 m); its '~40-minute warning' conflicts with the 70-min DONKI lead (first >100 MeV particles 50 min after flare start).\n(N5) 23:270: 'CO2 cannot build up in cabin air' -> 'CO2 builds up within hours and must never be allowed to'.\nDo: make these edits, citing the sources in the review. Ask Sadman about STORY_FULL S03 line 115 'Bengali lettering' (conflicts with the no-Bangla-script lock; proposed: 'the word ALO and a single initial, N., in Latin letters') and apply only if approved. Never change a number in 08.\nAcceptance: grep -n -e 'storm-shelter guideline' -e 'few hundred litres' -e 'cannot build up' docs/SCIENCE_AND_DATA.md game-design/23_NASA_MISSION_PRACTICE.md returns nothing; every changed line cites a source URL; python3 production/plan/board.py check passes."
+  },
+  {
+   "id": "M1-47",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Save schema 3: record the player's story choices and moments (story_log)",
+   "status": "todo",
+   "deps": [],
+   "paths": [
+    "game/scripts/core/campaign_state.gd",
+    "game/scripts/core/campaign_director.gd",
+    "game/scripts/save/save_service.gd",
+    "game/tools/"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game/resources/campaign/content/campaign_catalog.json"
+   ],
+   "note": "From the narrative revision (doc 24 NR-01). No canon or 08 number changes.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: the 96 decision reviews converge without a trace. CampaignState.new_snapshot() (schema 2) has no choice store; campaign_panels.gd emits preview_puzzle with an option_id and nothing records it, so no later scene or journal can show that a choice mattered.\nRead first: game-design/24_NARRATIVE_REVISION.md §5.1, §5.2 and §5.4; game/scripts/core/campaign_state.gd; game/scripts/save/save_service.gd (migrate, _migrate_v1); game/scripts/core/campaign_director.gd (commit, _transition); the catalog's scenes[].choice (ids EX-CHxx-Syy-CHOICE, options EX-CHxx-Syy-OPTnn).\nGoal: the smallest change that stores choices and moments in the save.\nDo: (1) SCHEMA_VERSION 2 -> 3 in campaign_state.gd and save_service.gd; new_snapshot() gains \"story_log\": {\"choices\": {}, \"moments\": []}. (2) SaveService.migrate() gains _migrate_v2() that copies a v2 snapshot and adds an empty story_log; v1 still migrates (v1 -> v2 -> v3). (3) validate_snapshot(): story_log.choices is a Dictionary of Dictionaries {option_id, scene_id, scenario_datetime, state_revision}; each option_id must exist in that choice's catalog options, or the choice id must be in a small allow-list of new ids (start with EX-CH03-S11-DEDICATION); moments is an Array of unique Strings. (4) Two director verbs committed like every other command (receipt, revision, idempotent by command_id): record_choice {choice_id, option_id} and record_moment {moment_id}. Previews never record. A choice locks once its scene's exit predicate has passed. (5) Wire Chapter 1: confirming a decision review (EX-CH01-S01..S12) sends record_choice.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). New tests: a v2 save loads and migrates to v3 with an empty story_log; confirming EX-CH01-S01-CHOICE adds exactly one entry; a preview adds none; a repeated command_id adds nothing; an unknown option_id is rejected with a reason; a choice cannot change after its scene exit. Paste the test names into the evidence."
+  },
+  {
+   "id": "M1-50",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "claude",
+   "title": "Chapter 1 narrative text pack: journal entries, questions, resume templates, drawer-lid note, feedback text",
+   "status": "todo",
+   "deps": [],
+   "paths": [
+    "game/resources/campaign/content/journal_text.json",
+    "game/resources/campaign/content/story_echoes.json",
+    "production/AI_PROMPT_LOG.md"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game/scripts/dialogue/knowledge_service.gd",
+    "game/scripts/missions/chapter1_gate_catalog.gd"
+   ],
+   "note": "From doc 24 NR-04. New written world text only; no spoken line.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: the journal can only print operation labels; there is no written content for the Now, Evidence, Garden, Decisions and Science tabs, no resume templates and no echo table.\nRead first: game-design/24_NARRATIVE_REVISION.md §4 (clues 1-3), §5.2 (D1, D2), §5.4 (story_echoes.json shape), §6.2-§6.7, §2.10 (feedback text and the Alo Lost debrief); full-game-story/story-data.json scenes EX-CH01-S01..S12 (prose, learning, choice options); chapter1_gate_catalog.gd target ids.\nDo: (1) Create game/resources/campaign/content/journal_text.json: one entry per Chapter 1 evidence target, question, concept card (from each scene's learning block), Growth Record caption template and resume line template, in the §6.3 shape (id, tab, type, status, title, body, scene_id, source, evidence_label, links, gate_flag). Include the drawer-lid note (§4 clue 2) and the §2.10 Chapter 1 feedback sentence and Alo Lost debrief text. (2) Create story_echoes.json with the D1 and D2 rows (§5.2). Rules: English only, no Bangla script, no NASA wording that implies endorsement, no name or fact before its scene, never copy a scene's future prose, every body two sentences or fewer, plain words a 10-year-old can read.\nAcceptance: both files parse as JSON (python3 -m json.tool); a short script lists every entry id and checks that scene_id exists in story-data.json and that no body contains 'Noor', 'Rahman' or 'Ferreira was'; paste its output into the evidence with the list of new text for Sadman to read. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M1-48",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "antigravity",
+   "title": "Journal v1 for the Chapter 1 demo: Now, Evidence, Garden and Decisions tabs plus the resume card",
+   "status": "todo",
+   "deps": [
+    "M1-47",
+    "M1-50"
+   ],
+   "paths": [
+    "game/scripts/ui/campaign_panels.gd",
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/scripts/dialogue/knowledge_service.gd",
+    "game/tools/",
+    "production/qa/evidence/"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md",
+    "execution/UI_07_EXPEDITION_JOURNAL.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
+   ],
+   "note": "From doc 24 NR-02. M3-90 and M3-98 extend this to the full campaign.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: _render_journal() prints one flat column of acquired records. Players cannot see objectives and completed work, clues versus inferences versus open questions, Alo and Tara's growth, or their own decisions, and there is no way to see 'where was I?' after a break.\nRead first: game-design/24_NARRATIVE_REVISION.md §6 (all), §5.2 D1-D3, §3.8; execution/UI_07_EXPEDITION_JOURNAL.md (layout contract); game-design/22_PUZZLE_CLUE_DESIGN.md §1 T1-T2 and §2.1; knowledge_service.gd; campaign_panels.gd.\nDo: (1) Extend CampaignKnowledge.journal(snapshot) to return {tabs: {now, evidence, garden, decisions}, resume: [...]} built only from the snapshot plus journal_text.json; keep it a pure function. (2) In the journal_discovery panel add four tabs: Now (objective, last three completed tasks, What now? hint ladder H1-H3), Evidence (three columns Observed / Inferred / Unknown), Garden (Growth Record for Alo and Tara in the layout chosen at EX-CH01-S04, life-cycle track), Decisions (what we chose / what it did). (3) The resume card (at most six lines, §6.6) shows on Continue and in pause. (4) Gate names by each entry's gate_flag, not by keyword. Keyboard and controller focus order, 44 px targets, text reflow at 150%, non-colour status cues.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). A test asserts journal() never returns an entry whose scene is not completed or acquired, and that the resume lines contain no text from a future scene. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. Required shots: each tab after EX-CH01-S03 and after EX-CH01-S12, the resume card, and the journal at 150% text."
+  },
+  {
+   "id": "M1-49",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges",
+   "status": "todo",
+   "deps": [
+    "M1-47"
+   ],
+   "paths": [
+    "game/scripts/campaign/",
+    "game/scripts/world/",
+    "game/scripts/missions/",
+    "game/resources/campaign/content/presentation_media.json",
+    "game/tools/",
+    "production/qa/evidence/"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game/scripts/biology/plant_service.gd",
+    "execution/SYS_21_COMPANION_BEHAVIOUR.md"
+   ],
+   "note": "From doc 24 NR-03. Uses existing assets, lines and numbers only.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: Alo's growth is told, not seen; Tara has no care of her own; the CH01-S02 -> S03 join has no cause; the four nameless mugs never get names.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.2 (Care Round loop), §7.1 beats 5-10, §2.9 (CH01 joins), §3.8 (dated stages); plant_service.gd apply_care() (receipts are keyed care@date); campaign_rules.json; execution/SYS_21_COMPANION_BEHAVIOUR.md.\nDo: (1) A Care Round interaction at the Alo glove ports and the Tara reference bay in EX-CH01-S04/S05: observe, measure (calibrated moisture and temperature side by side for both plants), photograph with a faint ghost of the previous photo (wide tolerance, Family Mode snaps), one small care task, record. A photo is apply_care(plant, \"photo\", date): one per plant per day. (2) In EX-CH01-S02 the inventory lamp on the dry-storage drawer blinks once in the background (reuse an existing UI tick until SFX_INVENTORY_LAMP_TICK exists); S03 opens on it. (3) At the end of EX-CH01-S12 the four mugs gain name decals (text labels on the existing mug prop are enough) and record_moment CH01-MUGS-NAMED. (4) Only if M1-51 is done: play EX-CH01-S01-L01..L04 in-engine at the mission table (L01-L02 on arrival, L03 at the route preview, L04 before commit), with captions, and point presentation_media.json at the re-edited CS-01; otherwise leave CS-01 unchanged and say so in the evidence.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). Tests: two photos on two dates appear for each plant; a second photo on the same date is refused; Tara and Alo both have entries before 25 Apr. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. Required shots: the Care Round with the ghost overlay for each plant, the S02 blink, the named mugs."
+  },
+  {
+   "id": "M1-51",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "claude",
+   "title": "Re-edit CS-01 into a cold open: exterior silence, interior hum, title over the gold band (existing footage only)",
+   "status": "todo",
+   "deps": [],
+   "paths": [
+    "production/cutscenes/v8/",
+    "game/assets/cutscenes/",
+    "production/AI_PROMPT_LOG.md"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md",
+    "production/cutscenes/v7/src/CS-01.json",
+    "production/tools/compose_cutscene.py",
+    "execution/CUTSCENE_CS01.md"
+   ],
+   "note": "From doc 24 NR-05. No new generation; coordinate with M1-10 (playback) and M1-45 (exterior fixes).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: CS-01 runs about 40 s and contains all four EX-CH01-S01 lines, so the player watches before doing anything, and the opening has no image that sets the game's look.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.1 (beats 2-4 and the line move), §2.11 (sound rules); production/cutscenes/v7/src/CS-01.json; production/tools/compose_cutscene.py; production/ART_BIBLE.md §2; production/review/science_review_ch01.md (Earth stays off the sky).\nDo: compose a v8 CS-01 cold open from the existing CS-01 shots: 2 s of the exterior in total silence (caption [no sound outside]), push into the commons as SFX_FAN_NORMAL fades in, on-screen text 'Aurora Station · lunar south pole · 11 April 2046 · 06:00 UTC', end on the gold battery band with the title LAST LIGHT ACADEMY for 2 s. No dialogue in the film (the S01 lines move into play in M1-49). The CS-01 music fades out with the cut; CUE-01 still enters after the charter. If M1-45's fixed exterior shot exists, use it.\nAcceptance: the cut runs 12-15 s; ffmpeg scdet shows only the intended cuts; the exterior section has no audio at all; no Earth in the sky, black sky, hard shadows; captions present; the runtime .ogv plays in the campaign (M1-10 runtime). Screenshot three frames to production/qa/evidence/M1-51_*.png. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M1-52",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Opening beat 1: a 6 s Earth mustard-field shot and its wind-and-birds effect",
+   "status": "todo",
+   "deps": [
+    "M1-51"
+   ],
+   "paths": [
+    "production/concept/opening_field/",
+    "production/cutscenes/v8/",
+    "production/audio/sfx_list.csv",
+    "game/assets/audio/sfx/",
+    "game/assets/cutscenes/",
+    "production/AI_PROMPT_LOG.md"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md",
+    "production/ART_BIBLE.md"
+   ],
+   "note": "From doc 24 NR-06. Get Sadman's approval of the 2D start frame before generating video.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: the yellow fields that N. remembers in EX-CH02-S10-L03 and that the CH08-S10 rooftop returns to are never seen, so the line has no image for the player to recognise.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.1 beat 1, §4 clue 8, §2.11 (new SFX table); production/ART_BIBLE.md §1, §3, §6 (mustard botany: four-petal cross-shaped yellow flowers).\nDo: (1) Generate a start frame: a mustard field in winter morning light, yellow to the horizon, no person, no text, no logo, four-petal flowers in close detail; show it to Sadman and wait for approval. (2) Animate 6 s (wind through the field). (3) Generate SFX_EARTH_FIELD_MORNING (wind, distant birds) and add it to sfx_list.csv with caption [wind and birds]. (4) Put the shot before the M1-51 exterior, hard cut, matching the field's yellow to the battery band.\nAcceptance: Sadman's approval quoted in the evidence; flowers have four petals; nothing implies it is Noor or Alo; the exterior after it is silent; Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-94",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Canon proposal pack from the narrative revision — needs Sadman's approval first",
+   "status": "todo",
+   "deps": [],
+   "paths": [
+    "full-game-story/STORY_FULL.md",
+    "full-game-story/story-data.json",
+    "production/audio/vo_lines.csv",
+    "game/assets/audio/voice/",
+    "game/resources/campaign/content/campaign_catalog.json",
+    "PRODUCTION_HANDBOOK.md",
+    "game-design/04_CHARACTER_BIBLE.md",
+    "game-design/24_NARRATIVE_REVISION.md",
+    "production/AI_PROMPT_LOG.md"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game/scripts/content/build_catalog.py"
+   ],
+   "note": "From doc 24 NR-07. Needs Sadman's approval first; nothing in canon changes before he decides each item.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: doc 24 proposes a few story facts and three optional spoken lines that only Sadman can approve, and canon is silent on Tara's end.\nRead first: game-design/24_NARRATIVE_REVISION.md §8 'What alters locked canon', §3.9 (Tara), §4 clues 2, 14, 18, 22, §5.2 D6, §7.3 beat 9, §7.5 beats 6 and 11; PRODUCTION_HANDBOOK.md §3.\nDo: (1) Ask Sadman, one item at a time, in plain words with the alternative beside each: Tara's dated resolution (watering stops 26 May, harvest 31 May 2046, working stock 'Tara x Alo' with no headline count, nameplate on the lineage board, her name on cotton's bay); Ferreira's margin note on the back of the evacuation order; Amara 'Forty-two.' (EX-CH03-S10); Rao 'Aurora, Earth. We hear you. Go ahead.' (EX-CH08-S10); Noor 'You finished what we could not.' (EX-CH08-S10); and, for review, the drawer-lid note, the cotton manifest note, Rao's listening log and the three tray dedications. A skipped or unclear answer is not approval: re-ask. (2) For each approved item: edit STORY_FULL.md and story-data.json, add or update vo_lines.csv rows, record approved lines with ElevenLabs in the speaker's existing voice, rebuild the catalog with game/scripts/content/build_catalog.py, record the decision in handbook §3 and the Tara row in §4, and update the character bible (Tara outcome; remove the 'stylised eyes' wording on Alo, which the §3 lock already overrides). (3) Mark each item in doc 24 §8 as approved or declined.\nAcceptance: each decision quoted from Sadman in the evidence; declined items untouched in canon; every new line has a voice file and a matching caption; python3 production/plan/board.py check passes; game/tools/run_tests.sh last line pasted if the catalog was rebuilt. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-95",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Story echoes and environmental clues for Chapters 2-8 (decisions D4-D13, the Noor and Ferreira clue objects)",
+   "status": "todo",
+   "deps": [
+    "M1-47",
+    "M1-49"
+   ],
+   "paths": [
+    "game/scripts/campaign/",
+    "game/scripts/world/",
+    "game/scripts/missions/",
+    "game/resources/campaign/content/story_echoes.json",
+    "game/tools/",
+    "production/qa/evidence/"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/22_PUZZLE_CLUE_DESIGN.md"
+   ],
+   "note": "From doc 24 NR-10. Items marked STORY CHANGE in doc 24 wait for their M3-94 approval; everything else can go ahead.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: later chapters never show the player's earlier choices, and the clue objects that make Noor and Ferreira's history readable are not in the rooms.\nRead first: game-design/24_NARRATIVE_REVISION.md §5.2 (D4-D13), §5.4, §4 (clues 10-22), §3.5 (F1-F11 staging), §2.9 (montage beat sheets and the CH06->CH07 hook); game-design/22_PUZZLE_CLUE_DESIGN.md for each mission's existing clues.\nDo: (1) One pure function returns the echoes for a scene from the snapshot and story_echoes.json; rooms and the journal read it. (2) Add the D4-D13 rows to story_echoes.json and their consumers: the record Ferreira leaves at her place (D9), the 'N.' label holder or monthly photo strip (D10), the companion who clips Kai's hand light in EX-CH08-S01 (D11), the printout at Kai's bunk and on the rover dash (D12), the dedication plaque (D13), the faint October beacon layer on the CH08 route map (D7). (3) Place the clue objects and staging: the gear-wheel tool tag and the stopped growth-chart line in the annex (CH03-S07), Ferreira's pause (CH03-S06), her empty chair on the Earth feed (CH04-S11), the document sleeve and the hatch pause (CH05-S02), the queued outbox (CH07-S10) and the two backlogs crossing (CH08-S09). Use placeholder props until M3-99 assets land.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). For every D-row a test sets the option and asserts the echo appears in its later scene and not before. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+  },
+  {
+   "id": "M3-96",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Tara's lifecycle in code: later maturity, harvest to a working stock, archived nameplate — needs Sadman's approval first (M3-94)",
+   "status": "todo",
+   "deps": [
+    "M3-94"
+   ],
+   "paths": [
+    "game/scripts/biology/plant_service.gd",
+    "game/resources/campaign/profiles/campaign_rules.json",
+    "game/scripts/simulation/",
+    "game/tools/"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md"
+   ],
+   "note": "From doc 24 NR-08. Start only if M3-94's evidence shows Sadman approved the Tara item; otherwise mark blocked.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: plant_service.gd ends Tara as naturally_dead on day 41 (22 May 2046) with seed_yield 0, so the reciprocal pollination that set her seeds has no outcome and she has no farewell.\nRead first: game-design/24_NARRATIVE_REVISION.md §3.9 and §7.6; plant_service.gd advance_to() and harvest(); campaign_rules.json biology block; M3-94 evidence (Sadman's decision).\nDo (approved version): Tara mature_days 45 (mature_pods on 26 May 2046), the same five-day dry-down, harvest on 31 May into a separate working-stock ledger (lineage 'Tara x Alo', no headline count shown), then a new stage archived_nameplate. Alo's photos remain allowed through 21 May. Never touch founder_seed42 (42 = 12 + 30, compartments 15 + 15) or the vault ledgers.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). Tests: Tara reaches mature_pods on 26 May and archived_nameplate after a 31 May harvest; founder 42 = 12 + 30 is unchanged before and after; a test fails if the working stock is added to the founder ledger; a save from before the change still loads."
+  },
+  {
+   "id": "M3-97",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Cutscene staging from the narrative revision: CS-15 call, CS-17 final garden, CS-18 lamp blink",
+   "status": "todo",
+   "deps": [],
+   "paths": [
+    "production/cutscenes/v8/",
+    "game/assets/cutscenes/",
+    "production/audio/sfx_list.csv",
+    "game/assets/audio/sfx/",
+    "production/AI_PROMPT_LOG.md"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md",
+    "production/cutscenes/v8/notes_C.md",
+    "production/tools/compose_cutscene.py"
+   ],
+   "note": "From doc 24 NR-09. Time-sensitive: CS-15 and CS-17 are still being made. The two new-line beats wait for M3-94; everything else can start now.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: the finale cutscenes are being made now, and the staging that gives them their weight (the pause, the three places, Tara's nameplate, the named mugs, the lamp blink) is not in their plans.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.5 (beats 5-13 and the CS-15 note), §7.6 (CS-17 table and note), §7.7 (CS-18), §2.11; production/cutscenes/v8/notes_C.md (current shot plan and resume steps).\nDo: (1) CS-15: hold the 2.6 s round-trip silence on the cut into shot B (the arc to Noor); no music under her first words (CUE-11 after); three ambiences each under its own picture (rover cabin hum, Aurora low-power fans, a Dhaka morning rooftop: generate SFX_DHAKA_ROOFTOP_MORNING); the Moon is not shown in Dhaka's sky. Use Rao's and Noor's new lines only if M3-94 approved them, else the text alternatives. (2) CS-17-C/D: frame edits adding Tara's nameplate beside Alo's petal, a named lineage label instead of a blank one, and five named mugs. (3) CS-18: four-frame inventory-lamp blink on the accepted CS-18-A still with SFX_INVENTORY_LAMP_TICK; 8 s.\nAcceptance: each master checked with ffmpeg scdet; ART_BIBLE §2 checks pass (black sky, no airborne exterior sound, four-petal flowers, no plant faces, no logos, no Bangla script); captions match vo_lines.csv exactly; screenshots of key frames in production/qa/evidence/M3-97_*.png. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-98",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "antigravity",
+   "title": "Full-campaign journal: People and Science tabs, flag-gated names, superseded entries, chapter pages, Class mode",
+   "status": "todo",
+   "deps": [
+    "M1-48"
+   ],
+   "paths": [
+    "game/scripts/ui/",
+    "game/scenes/ui/",
+    "game/scripts/dialogue/knowledge_service.gd",
+    "game/tools/",
+    "production/qa/evidence/"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md",
+    "execution/UI_07_EXPEDITION_JOURNAL.md",
+    "game-design/10_GAMEPLAY_SYSTEMS.md"
+   ],
+   "note": "From doc 24 NR-11. Coordinate with M3-90: M3-90 keeps the discovery log, rover, greenhouse and credits screens; the journal follows doc 24 §6.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: the Chapter 1 journal (M1-48) has four tabs; the campaign needs People and Science, name gating across the Noor reveal, superseded interpretations and chapter summaries.\nRead first: game-design/24_NARRATIVE_REVISION.md §6 (all), §4 (open-questions ledger), §5.2; execution/UI_07_EXPEDITION_JOURNAL.md; 10_GAMEPLAY_SYSTEMS.md SYS-07.\nDo: add People (facts with sources, moments, transcripts with origin labels) and Science (concept cards from each scene's learning block, earned Data Cards, the four evidence chips); gate names by gate_flag so Noor's page is 'N.' until noor_identity_revealed and re-titled with an Updated badge after; show superseded entries struck through but visible; a chapter page at each debrief; Class-mode role cards appear once delivered.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). A scripted run through EX-CH05-S10 shows 'N.' before and 'Noor' after, and no entry before its scene. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+  },
+  {
+   "id": "M3-99",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Narrative props, plant stages and effects: Alo and Tara growth variants, nameplates, named mugs, clue props, two new SFX",
+   "status": "todo",
+   "deps": [],
+   "paths": [
+    "production/concept/narrative_props/",
+    "production/models/",
+    "game/assets/plants/",
+    "game/assets/props/",
+    "game/assets/audio/sfx/",
+    "production/ASSET_REGISTRY.csv",
+    "production/audio/sfx_list.csv",
+    "production/AI_PROMPT_LOG.md"
+   ],
+   "refs": [
+    "game-design/24_NARRATIVE_REVISION.md",
+    "production/ART_BIBLE.md",
+    "execution/ASSET_PL_Alo_Sprout.md",
+    "execution/ASSET_PL_Tara_Bloom.md"
+   ],
+   "note": "From doc 24 NR-12. Get Sadman's approval on the 2D sheets before spending Tripo credits.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: Alo has no cotyledon, true-leaf, senescent or dry state; Tara has only a bloom model; the clue and memory props in doc 24 do not exist.\nRead first: game-design/24_NARRATIVE_REVISION.md §3.8 (stage table), §3.9, §4 (clues 2, 12, 14), §7.6, §2.11 (new SFX); production/ART_BIBLE.md §2, §6 (Brassica rapa botany, no faces); the existing ASSET_PL_* prompts.\nDo: (1) 2D sheets for approval: Alo cotyledon, true-leaf, senescent (yellowing, pods straw-coloured, leaning) and dry variants; Tara pods, senescent and dry (green stem); Alo and Tara nameplates; five mug name decals; the gear-wheel tool tag; the drawer-lid pencil note; the 'N.' label holder; the 'Working stock - Tara x Alo' envelope. (2) After approval, build them (blend-shape or texture variants of the existing plant models where possible; Tripo only where a new mesh is needed). (3) Generate SFX_INVENTORY_LAMP_TICK and SFX_DHAKA_ROOFTOP_MORNING with captions in sfx_list.csv.\nAcceptance: Sadman's approval quoted; every flower has four petals in a cross; no plant has eyes, a face or a mouth; English text only; registry and AI log rows added; a contact sheet in production/qa/evidence/M3-99_contact.png. Log every AI generation in production/AI_PROMPT_LOG.md."
   }
  ],
  "requirements": [
@@ -3880,7 +4196,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ]
   }
  ],
- "updated": "2026-11-04"
+ "updated": "2026-11-05"
 }</script>
 <script>
 const data = JSON.parse(document.getElementById("data").textContent);
