@@ -56,6 +56,41 @@ func voice_plan(line_id: String, acquired_flags: Array = []) -> Dictionary:
 		"reason": "No runtime voice file is installed; exact caption text remains available.",
 	}
 
+## The music cue for a scene (from music_cues.csv via presentation_media.json),
+## or {} for meaningful silence. runtime_path is the first installed variant.
+func music_for_scene(scene_id: String) -> Dictionary:
+	for cue in _audio_rows("music_cues"):
+		if scene_id in cue.get("scenes", []):
+			var path := ""
+			for candidate in cue.get("runtime_paths", []):
+				if _supported_audio_file(_runtime_path(String(candidate))):
+					path = _runtime_path(String(candidate))
+					break
+			return {"cue_id": String(cue.get("id", "")), "runtime_path": path, "media_present": not path.is_empty(), "loop": bool(cue.get("loop", true))}
+	return {}
+
+## Looping beds (sfx_list.csv rows with loop=yes) that start in this scene.
+func ambience_for_scene(scene_id: String) -> Array:
+	var result: Array = []
+	for row in _audio_rows("sfx"):
+		if bool(row.get("loop", false)) and scene_id in row.get("scenes", []):
+			result.append(sfx_plan(String(row.get("id", ""))))
+	return result
+
+## One sound effect by sfx_list.csv id. UI_ ids play on the UI bus.
+func sfx_plan(sfx_id: String) -> Dictionary:
+	for row in _audio_rows("sfx"):
+		if String(row.get("id", "")) == sfx_id:
+			var path := _runtime_path(String(row.get("runtime_path", "")))
+			var present := _supported_audio_file(path)
+			return {"id": sfx_id, "runtime_path": path if present else "", "media_present": present, "loop": bool(row.get("loop", false)), "caption": String(row.get("caption", "")), "bus": "UI" if sfx_id.begins_with("SFX_UI_") else "SFX"}
+	return {"id": sfx_id, "runtime_path": "", "media_present": false, "loop": false, "caption": "", "bus": "SFX"}
+
+func _audio_rows(key: String) -> Array:
+	var audio_value = _metadata.get("audio", {})
+	var rows = (audio_value as Dictionary).get(key, []) if audio_value is Dictionary else []
+	return rows.filter(func(row) -> bool: return row is Dictionary) if rows is Array else []
+
 func _read_metadata() -> Dictionary:
 	if not FileAccess.file_exists(MEDIA_PATH):
 		return {"audio": {"fallback_mode": "captions_only"}, "available_cutscenes": []}
@@ -86,7 +121,8 @@ func _runtime_metadata_files(key: String) -> Array:
 	return result
 
 func _supported_audio_file(path: String) -> bool:
-	return not path.is_empty() and path.get_extension().to_lower() in SUPPORTED_AUDIO_EXTENSIONS and FileAccess.file_exists(path)
+	# ResourceLoader, not FileAccess: an exported build keeps only the imported copy.
+	return not path.is_empty() and path.get_extension().to_lower() in SUPPORTED_AUDIO_EXTENSIONS and ResourceLoader.exists(path)
 
 func _runtime_path(source_path: String) -> String:
 	if source_path.begins_with("res://"):
