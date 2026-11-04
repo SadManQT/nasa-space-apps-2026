@@ -1,0 +1,24 @@
+Windowed capture attempt: 2026-11-05
+Command: /Applications/Godot.app/Contents/MacOS/Godot --path game --windowed --resolution 1280x720 --rendering-method forward_plus --rendering-driver metal --log-file /private/tmp/M1-47_capture_engine.log --script res://tools/capture_story_log.gd
+Exit: 134; EXC_CRASH / SIGABRT, before engine logging or script execution.
+Capture time: 2026-11-05 01:50:08.9257 +0600
+Faulting thread frames:
+__pthread_kill
+pthread_kill
+abort
+___RegisterApplication_block_invoke
+_dispatch_client_callout
+_dispatch_once_callout
+_RegisterApplication
+GetCurrentProcess
+-[NSMenuBarPresentationInstance _getAggregateUIMode:withOptions:]
+_NSGetAggregateUIMode
+-[NSMenuBarPresentationInstance _isVisible]
++[NSMenuBarPresentationInstance _isMenuBarVisible]
+_NSInitializeAppContext
+-[NSApplication init]
+image offset 7261596
++[NSApplication sharedApplication]
+image offset 7250272
+main
+No PNG evidence was produced.

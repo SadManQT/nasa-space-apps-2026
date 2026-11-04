@@ -315,6 +315,9 @@ func _render_dialogue(value) -> void:
 
 func _render_puzzle(value) -> void:
 	var data: Dictionary = value if value is Dictionary else {}
+	if data.has("choice_id"):
+		_render_decision_review(data)
+		return
 	var prompt := Label.new()
 	prompt.text = String(data.get("prompt", "Select a visible operation to request a preview."))
 	prompt.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -338,6 +341,50 @@ func _render_puzzle(value) -> void:
 	forecast.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	forecast.add_theme_color_override("font_color", MUTED)
 	_body.add_child(forecast)
+
+func _render_decision_review(data: Dictionary) -> void:
+	_title.text = "DECISION REVIEW"
+	_description.text = "Preview an option, then confirm it for your expedition record."
+	_card_text(String(data.get("prompt", "")))
+	var recorded := String(data.get("recorded_option_id", ""))
+	var locked := bool(data.get("locked", false))
+	var selected := {"option_id": recorded}
+	var group := ButtonGroup.new()
+	var forecast := Label.new()
+	forecast.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	forecast.add_theme_color_override("font_color", MUTED)
+	forecast.text = "Select an option to preview its consequence."
+	var confirm := _button("CONFIRM CHOICE")
+	confirm.name = "ConfirmChoice"
+	confirm.disabled = true
+	for option in data.get("options", []):
+		var option_id := String(option.get("id", ""))
+		var label := String(option.get("label", option_id))
+		var consequence := String(option.get("consequence", ""))
+		var button := _button(label)
+		button.name = option_id
+		button.toggle_mode = true
+		button.button_group = group
+		button.button_pressed = option_id == recorded
+		button.disabled = locked
+		if option_id == recorded:
+			forecast.text = "Recorded: %s\n%s" % [label, consequence]
+		button.pressed.connect(func() -> void:
+			selected.option_id = option_id
+			forecast.text = "Preview: %s\n%s" % [label, consequence]
+			confirm.disabled = option_id == recorded
+			emit_command("preview_puzzle", option_id, {"choice_id": data.choice_id, "option_id": option_id})
+		)
+		_body.add_child(button)
+	_body.add_child(forecast)
+	_card_text("The scene exit has passed. This choice is locked." if locked else "Your confirmed choice can be revised until you pass this scene's exit. Physical operations keep their own safety checks.")
+	confirm.pressed.connect(func() -> void:
+		# Closing the reading panel resumes the director before the command is
+		# committed. Pausing remains authoritative for every other operation.
+		close_panel()
+		emit_command("record_choice", String(data.choice_id), {"choice_id": data.choice_id, "option_id": selected.option_id})
+	)
+	_body.add_child(confirm)
 
 func _render_settings() -> void:
 	var intro := Label.new()

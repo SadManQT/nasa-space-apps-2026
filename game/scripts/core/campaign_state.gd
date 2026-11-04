@@ -3,10 +3,15 @@ class_name CampaignState
 
 ## Authoritative primitive state for the full campaign and its presentation.
 
-const SCHEMA_VERSION := 2
+const SCHEMA_VERSION := 3
 const CONTENT_REVISION := "story-data-extended-02-systems-contract"
 const PlantScript = preload("res://scripts/biology/plant_service.gd")
+const ContentScript = preload("res://scripts/content/content_loader.gd")
+# Reserved storage identity only; no proposed dedication text is introduced.
+const EXTRA_STORY_CHOICES := {"EX-CH03-S11-DEDICATION": "EX-CH03-S11"}
+static var _story_choices: Dictionary = {}
 
+## Creates an independent, primitive snapshot in the current save schema.
 static func new_snapshot(content_revision: String = "") -> Dictionary:
 	var revision := content_revision if not content_revision.is_empty() else CONTENT_REVISION
 	return {
@@ -28,6 +33,7 @@ static func new_snapshot(content_revision: String = "") -> Dictionary:
 		"knowledge": ["aurora_commissioning", "p02_contract_loaded"],
 		"dialogue_cursor": 0,
 		"acknowledged_line_ids": [],
+		"story_log": {"choices": {}, "moments": []},
 		"scenario_datetime": "2046-04-25 00:00 UTC",
 		"current_shift": 0,
 		"travel_segment": 0,
@@ -102,6 +108,7 @@ static func is_compatible(snapshot: Dictionary, content_revision: String = "") -
 		return false
 	return true
 
+## Checks the current schema, including catalog identities and story metadata.
 static func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 	var defaults := new_snapshot()
 	for key in defaults:
@@ -118,6 +125,9 @@ static func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 		return {"valid": false, "reason": "Campaign schema or shift is outside the supported contract."}
 	if not is_scenario_datetime(snapshot.scenario_datetime):
 		return {"valid": false, "reason": "Campaign scenario time must be a valid UTC date and minute."}
+	var story_check := _validate_story_log(snapshot)
+	if not story_check.valid:
+		return story_check
 	for key in defaults.resources:
 		if not snapshot.resources.has(key) or not _finite_number(snapshot.resources[key]) or float(snapshot.resources[key]) < 0:
 			return {"valid": false, "reason": "Campaign resource must be a finite nonnegative number: " + key}
@@ -149,6 +159,63 @@ static func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 			if not puzzle is Dictionary or not puzzle.get("operations") is Dictionary or not puzzle.get("samples") is Array or not _finite_number(puzzle.get("phase")) or float(puzzle.phase) < 0 or float(puzzle.phase) != floor(float(puzzle.phase)):
 				return {"valid": false, "reason": "Campaign puzzle ledger shape is invalid."}
 	return {"valid": true, "reason": "Campaign state shape is valid."}
+
+## Resolves a choice's owning scene from the existing campaign catalog.
+static func story_choice_scene_id(choice_id: String) -> String:
+	_load_story_choices()
+	return String(_story_choices.get(choice_id, {}).get("scene_id", EXTRA_STORY_CHOICES.get(choice_id, "")))
+
+## Returns a rejection reason, or an empty string for a supported option.
+static func story_choice_problem(choice_id: String, option_id: String) -> String:
+	_load_story_choices()
+	if option_id.strip_edges().is_empty():
+		return "A story choice requires a nonempty option_id."
+	if _story_choices.has(choice_id):
+		return "" if _story_choices[choice_id].options.has(option_id) else "Unknown option_id for story choice " + choice_id
+	return "" if EXTRA_STORY_CHOICES.has(choice_id) else "Unknown story choice_id: " + choice_id
+
+## Exit receipts lock immediately, including before the route changes scenes.
+static func story_choice_locked(snapshot: Dictionary, choice_id: String) -> bool:
+	var scene_id := story_choice_scene_id(choice_id)
+	return not scene_id.is_empty() and (snapshot.get("completed_scene_ids", []).has(scene_id) or snapshot.get("receipts", {}).has("scene-complete:" + scene_id) or snapshot.get("scene_phase", "") == "scene_complete:" + scene_id)
+
+static func _load_story_choices() -> void:
+	if not _story_choices.is_empty():
+		return
+	for scene in ContentScript.load_full().get("scenes", []):
+		var choice: Dictionary = scene.get("choice", {})
+		var options: Array = []
+		for option in choice.get("options", []):
+			options.append(option.id)
+		_story_choices[String(choice.get("id", ""))] = {"scene_id": scene.id, "options": options}
+
+static func _validate_story_log(snapshot: Dictionary) -> Dictionary:
+	var log: Dictionary = snapshot.story_log
+	if not log.get("choices") is Dictionary or not log.get("moments") is Array:
+		return {"valid": false, "reason": "story_log requires choices Dictionary and moments Array."}
+	for choice_id in log.choices:
+		if not choice_id is String or not log.choices[choice_id] is Dictionary:
+			return {"valid": false, "reason": "Story choices must map String IDs to Dictionaries."}
+		var entry: Dictionary = log.choices[choice_id]
+		for field in ["option_id", "scene_id", "scenario_datetime"]:
+			if not entry.get(field) is String:
+				return {"valid": false, "reason": "Story choice requires a String for " + field}
+		var problem := story_choice_problem(choice_id, entry.option_id)
+		if not problem.is_empty():
+			return {"valid": false, "reason": problem}
+		if entry.scene_id != story_choice_scene_id(choice_id):
+			return {"valid": false, "reason": "Story choice scene_id does not match its catalog owner."}
+		if not is_scenario_datetime(entry.scenario_datetime) or entry.scenario_datetime > snapshot.scenario_datetime:
+			return {"valid": false, "reason": "Story choice scenario_datetime must be valid and no later than the snapshot."}
+		var revision = entry.get("state_revision")
+		if not _finite_number(revision) or float(revision) < 0 or float(revision) != floor(float(revision)) or float(revision) > float(snapshot.state_revision):
+			return {"valid": false, "reason": "Story choice state_revision must be a nonnegative integer no later than the snapshot."}
+	var seen := {}
+	for moment in log.moments:
+		if not moment is String or moment.strip_edges().is_empty() or seen.has(moment):
+			return {"valid": false, "reason": "Story moments must be unique nonempty Strings."}
+		seen[moment] = true
+	return {"valid": true}
 
 static func _finite_number(value) -> bool:
 	return (value is int or value is float) and is_finite(float(value))

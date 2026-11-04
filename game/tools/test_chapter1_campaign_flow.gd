@@ -45,6 +45,25 @@ func _run() -> void:
 	for index in ACTIONS.size():
 		var scene_id := "EX-CH01-S%02d" % (index + 1)
 		_check(campaign.route.current_scene_id() == scene_id, "controller enters " + scene_id)
+		var choice_id := scene_id + "-CHOICE"
+		var option_id := scene_id + ("-OPT01" if index % 2 == 0 else "-OPT02")
+		var before_story: Dictionary = campaign.director.snapshot().story_log.duplicate(true)
+		var before_revision: int = campaign.director.snapshot().state_revision
+		campaign.hud._decision_review.pressed.emit()
+		var option := campaign.hud.panels.find_child(option_id, true, false) as Button
+		var confirm := campaign.hud.panels.find_child("ConfirmChoice", true, false) as Button
+		_check(option != null and confirm != null and confirm.disabled, scene_id + " decision review requires an explicit selection")
+		if option == null or confirm == null:
+			_finish()
+			return
+		option.pressed.emit()
+		_check(campaign.director.snapshot().story_log == before_story and campaign.director.snapshot().state_revision == before_revision, scene_id + " UI preview adds no choice or receipt")
+		_check(not confirm.disabled, scene_id + " preview enables confirmation")
+		confirm.pressed.emit()
+		var entry: Dictionary = campaign.director.snapshot().story_log.choices.get(choice_id, {})
+		_check(entry.get("option_id") == option_id and entry.get("scene_id") == scene_id and entry.get("state_revision") == before_revision + 1, scene_id + " UI confirmation records exactly one choice with commit metadata")
+		var choice_save: Dictionary = SaveScript.new().load(storage.path)
+		_check(choice_save.get("snapshot", {}).get("story_log", {}).get("choices", {}).get(choice_id) == JSON.parse_string(JSON.stringify(entry)), scene_id + " confirmation autosaves the choice")
 		await process_frame
 		await process_frame
 		campaign.hud._operations_scroll.ensure_control_visible(campaign.hud._advance)
@@ -82,11 +101,14 @@ func _run() -> void:
 			_check(String(campaign.director.snapshot().get("scenario_datetime", "")).begins_with("2046-04-27"), "completed chapter reaches its canonical bloom date")
 		var advance := campaign.advance_scene()
 		_check(bool(advance.get("accepted", false)), scene_id + " advances through the production controller")
+		var locked: Dictionary = campaign.director.commit({"command_id": "change-after-exit:" + scene_id, "issuer": "test", "owning_mission_id": campaign.director.query().mission_id, "owning_scene_id": scene_id, "expected_state_revision": campaign.director.query().state_revision, "target_id": choice_id, "verb": "record_choice", "payload": {"choice_id": choice_id, "option_id": scene_id + "-OPT02"}})
+		_check(not locked.get("accepted", true) and String(locked.get("reason", "")).contains("locked"), scene_id + " choice cannot change after its real scene exit")
 		if not bool(advance.get("accepted", false)):
 			_finish()
 			return
 		await process_frame
 	_check(campaign.route.current_scene_id() == "EX-CH02-S01" and campaign.route.completed_scene_ids().is_empty() and String(campaign.director.snapshot().get("chapter_id", "")) == "CH02", "final Chapter 1 scene transitions into Chapter 2")
+	_check(campaign.director.snapshot().story_log.choices.size() == 12, "all twelve Chapter 1 confirmed choices survive the garden reload and Chapter 2 handoff")
 	_check(campaign.hud._advance.disabled, "Chapter 2 advance stays disabled until its physical gate is ready")
 	_check(String(campaign.director.snapshot().get("scenario_datetime", "")).begins_with("2046-04-30"), "B03 handoff advances from bloom to the dated P-03 entry")
 	await _test_chapter2_handoff()

@@ -176,6 +176,13 @@ func query() -> Dictionary:
 			puzzle_ids.append(puzzle_id)
 	result["source_puzzle_ids"] = puzzle_ids
 	result["mission_table"] = {"title": current_scene_data().get("title", ""), "status": route.gate_status()}
+	if _chapter_number() == 1:
+		var decision: Dictionary = current_scene_data().get("choice", {}).duplicate(true)
+		var choice_id := String(decision.get("id", ""))
+		decision["choice_id"] = choice_id
+		decision["recorded_option_id"] = director.snapshot().story_log.choices.get(choice_id, {}).get("option_id", "")
+		decision["locked"] = CampaignState.story_choice_locked(director.snapshot(), choice_id)
+		result["puzzle"] = decision
 	return result
 
 ## Project the real route operation on a restored copy. This exercises the
@@ -410,9 +417,25 @@ func save_campaign() -> Dictionary:
 		hud.show_status(("CHECKPOINT SAVED · " if bool(result.get("accepted", false)) else "SAVE FAILED · ") + String(result.get("reason", "verified")))
 	return result
 
-func handle_ui_command(command: Dictionary, _preview_only: bool = false) -> Dictionary:
+## Routes decision previews without writes and confirmed choices to the director.
+func handle_ui_command(command: Dictionary, preview_only: bool = false) -> Dictionary:
 	var verb := String(command.get("verb", ""))
 	var payload: Dictionary = command.get("payload", {}) if command.get("payload", {}) is Dictionary else {}
+	if verb in ["preview_puzzle", "record_choice"]:
+		var choice: Dictionary = current_scene_data().get("choice", {})
+		if _chapter_number() != 1 or payload.get("choice_id") != choice.get("id") or not payload.get("option_id") is String:
+			return {"accepted": false, "reason": "This decision does not belong to the current Chapter 1 scene."}
+		var problem := CampaignState.story_choice_problem(String(payload.choice_id), String(payload.option_id))
+		if not problem.is_empty():
+			return {"accepted": false, "reason": problem}
+		if verb == "preview_puzzle":
+			return {"accepted": true, "reason": "Decision preview only; no story record changed."}
+		var result: Dictionary = director.preview(command) if preview_only else director.commit(command)
+		if hud != null and not preview_only:
+			hud.refresh_after_action(result)
+		if bool(result.get("accepted", false)) and not preview_only and not bool(result.get("duplicate", false)):
+			_save_campaign()
+		return result
 	if verb == "acknowledge_line":
 		return acknowledge_dialogue(String(payload.get("line_id", command.get("target_id", ""))))
 	if verb == "set_accessibility":

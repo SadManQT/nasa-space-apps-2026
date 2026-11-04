@@ -111,6 +111,7 @@ func preview(command: Dictionary) -> Dictionary:
 		result["snapshot"] = biology.snapshot
 	return result
 
+## Applies one revision and receipt per command_id; rejected commands are inert.
 func commit(command: Dictionary) -> Dictionary:
 	var shape := _validate_command(command, true)
 	if not bool(shape.get("accepted", false)):
@@ -229,6 +230,8 @@ func _transition(command: Dictionary, should_commit: bool) -> Dictionary:
 	var revision := int(_state.get("state_revision", 0))
 	var verb := String(command.get("verb", ""))
 	var payload: Dictionary = command.get("payload", {}) if command.get("payload", {}) is Dictionary else {}
+	if verb in ["record_choice", "record_moment"]:
+		return _story_transition(command, payload, should_commit)
 	if verb == "campaign_operation":
 		return _campaign_sim.transition(_state, command)
 	if verb == "commit_shift":
@@ -336,6 +339,11 @@ func _transition(command: Dictionary, should_commit: bool) -> Dictionary:
 		if should_commit:
 			var next := _state.duplicate(true)
 			next["scene_phase"] = phase
+			# Persist the passed exit before the route projects the next scene.
+			# Direct routes and resumed sessions therefore share the same lock.
+			var completed_scene := String(command.get("owning_scene_id", ""))
+			if bool(payload.get("physical_gate", false)) and phase == "scene_complete:" + completed_scene and not next.completed_scene_ids.has(completed_scene):
+				next.completed_scene_ids.append(completed_scene)
 			var target_date := String(payload.get("scenario_datetime", ""))
 			if target_date > String(next.get("scenario_datetime", "")):
 				next["scenario_datetime"] = target_date
@@ -345,6 +353,48 @@ func _transition(command: Dictionary, should_commit: bool) -> Dictionary:
 	if verb == "plant_care" or verb == "harvest_plant":
 		return _plant_transition(command, payload, should_commit)
 	return _reject("Unknown campaign command verb: " + verb)
+
+func _story_transition(command: Dictionary, payload: Dictionary, should_commit: bool) -> Dictionary:
+	if not command.get("payload") is Dictionary:
+		return _reject("Story command payload must be a Dictionary.")
+	var choice: bool = command.verb == "record_choice"
+	var id_field := "choice_id" if choice else "moment_id"
+	if not payload.get(id_field) is String or String(payload[id_field]).strip_edges().is_empty():
+		return _reject("Story command requires a nonempty String " + id_field + ".")
+	var id: String = payload[id_field]
+	if choice:
+		if not payload.get("option_id") is String:
+			return _reject("Story choice requires a String option_id.")
+		var problem := StateScript.story_choice_problem(id, payload.option_id)
+		if not problem.is_empty():
+			return _reject(problem)
+		if StateScript.story_choice_locked(_state, id):
+			return _reject("This story choice is locked because its scene exit has passed.")
+		if StateScript.story_choice_scene_id(id) != _state.scene_id:
+			return _reject("A story choice can only be confirmed in its owning scene.")
+	if command.get("owning_scene_id") != _state.scene_id or command.get("owning_mission_id") != _state.mission_id:
+		return _reject("Story command ownership does not match the current scene and mission.")
+	var revision := int(_state.state_revision)
+	var event_type := "story_choice_recorded" if choice else "story_moment_recorded"
+	if not should_commit:
+		event_type = "story_choice_preview" if choice else "story_moment_preview"
+	var result := _generic_result(revision, should_commit, event_type)
+	# Story previews return the original log even on the projected snapshot.
+	if should_commit:
+		var next := _state.duplicate(true)
+		if choice:
+			var entry := {"option_id": payload.option_id, "scene_id": _state.scene_id, "scenario_datetime": _state.scenario_datetime, "state_revision": revision + 1}
+			next.story_log.choices[id] = entry
+			result["deltas"] = [{"field": "story_log.choices." + id, "value": entry.duplicate(true)}]
+		else:
+			if not next.story_log.moments.has(id):
+				next.story_log.moments.append(id)
+				result["deltas"] = [{"field": "story_log.moments", "value": id}]
+		result["events"][0][id_field] = id
+		result["events"][0]["state_revision"] = revision + 1
+		result["reason"] = "Choice recorded." if choice else "Moment recorded."
+		result["snapshot"] = next
+	return result
 
 func _plant_transition(command: Dictionary, payload: Dictionary, should_commit: bool) -> Dictionary:
 	var individual_id := String(payload.get("individual_id", ""))

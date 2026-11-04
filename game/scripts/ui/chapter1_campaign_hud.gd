@@ -36,6 +36,7 @@ var _operations_scroll: ScrollContainer
 var _modal_button_states := {}
 var _dialogue_index := 0
 var _scene_id := ""
+var _decision_review: Button
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -63,6 +64,7 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 	_dialogue_index = _first_unacknowledged_line()
 	_title.text = String(scene.get("title", "Chapter 1"))
 	_meta.text = "%s  ·  %s  ·  %s" % [next_scene, String(scene.get("location", "")), String(scene.get("storyTime", scene.get("story_time", "")))]
+	_decision_review.visible = next_scene.begins_with("EX-CH01-")
 	_objective.text = "OBJECTIVE\n" + "\n".join(scene.get("playerActions", scene.get("player_actions", [])))
 	_render_caption()
 	_build_targets()
@@ -231,6 +233,11 @@ func _build() -> void:
 	var tools := HFlowContainer.new()
 	tools.add_theme_constant_override("separation", 6)
 	target_box.add_child(tools)
+	var decision := _button("DECISION REVIEW")
+	_decision_review = decision
+	decision.pressed.connect(func() -> void: panels.open_panel("puzzle"))
+	tools.add_child(decision)
+	decision.name = "DecisionReview"
 	var pause := _button("PAUSE")
 	pause.pressed.connect(func() -> void: panels.open_panel("pause"))
 	tools.add_child(pause)

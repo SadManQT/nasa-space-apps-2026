@@ -5,8 +5,9 @@ class_name SaveService
 ## one-generation backup. Scene-tree objects, callbacks and secrets are never
 ## accepted as part of the save contract.
 
-const SCHEMA_VERSION := 2
+const SCHEMA_VERSION := 3
 const FORMAT_ID := "last-light-academy-save"
+# Keep the installed slot's filename so existing expeditions are discovered.
 const DEFAULT_PATH := "user://last_light_expedition_v2.json"
 const StateScript = preload("res://scripts/core/campaign_state.gd")
 
@@ -110,6 +111,7 @@ func _validate_session(snapshot: Dictionary) -> Dictionary:
 			return {"accepted": false, "reason": "checkpoint cannot resume: " + (String(session.get("reason", "unknown")) if session is Dictionary else "unknown")}
 	return {"accepted": true}
 
+## Copies and validates v1/v2 saves into schema 3 without changing the source.
 func migrate(snapshot: Dictionary) -> Dictionary:
 	var validation := _validate_snapshot(snapshot)
 	if not bool(validation.get("valid", false)):
@@ -121,6 +123,8 @@ func migrate(snapshot: Dictionary) -> Dictionary:
 		return {"accepted": true, "migrated": false, "from_schema": from_version, "to_schema": SCHEMA_VERSION, "snapshot": current}
 	if from_version == 1:
 		return _migrate_v1(snapshot)
+	if from_version == 2:
+		return _migrate_v2(snapshot)
 	return {"accepted": false, "migrated": false, "from_schema": from_version, "to_schema": SCHEMA_VERSION, "reason": "Unsupported save schema version."}
 
 func recover_corrupt(path: String = DEFAULT_PATH, fallback_snapshot: Dictionary = {}) -> Dictionary:
@@ -153,7 +157,7 @@ func clear(path: String = DEFAULT_PATH) -> bool:
 
 func _migrate_v1(source: Dictionary) -> Dictionary:
 	var result := source.duplicate(true)
-	result["schema_version"] = SCHEMA_VERSION
+	result["schema_version"] = 2
 	result["save_format"] = FORMAT_ID
 	if not result.has("mission_receipts"):
 		result["mission_receipts"] = result.get("receipts", {}).duplicate(true)
@@ -163,6 +167,8 @@ func _migrate_v1(source: Dictionary) -> Dictionary:
 		result["accessibility"] = result.get("settings", {}).duplicate(true)
 	var defaults := StateScript.new_snapshot()
 	for key in defaults:
+		if key == "story_log":
+			continue
 		if not result.has(key):
 			result[key] = defaults[key].duplicate(true) if defaults[key] is Array or defaults[key] is Dictionary else defaults[key]
 	for key in defaults["accessibility"]:
@@ -180,7 +186,29 @@ func _migrate_v1(source: Dictionary) -> Dictionary:
 	var validation := _validate_snapshot(result)
 	if not bool(validation.get("valid", false)):
 		return {"accepted": false, "migrated": true, "from_schema": 1, "to_schema": SCHEMA_VERSION, "reason": String(validation.get("reason", "Migrated snapshot is invalid."))}
-	return {"accepted": true, "migrated": true, "from_schema": 1, "to_schema": SCHEMA_VERSION, "snapshot": result}
+	var migrated := _migrate_v2(result)
+	migrated["from_schema"] = 1
+	return migrated
+
+func _migrate_v2(source: Dictionary) -> Dictionary:
+	var result := source.duplicate(true)
+	result["schema_version"] = SCHEMA_VERSION
+	result["save_format"] = FORMAT_ID
+	result["story_log"] = {"choices": {}, "moments": []}
+	# A production save also owns the pre-operation director checkpoint. Upgrade
+	# that state through the same boundary or Continue/retry rejects old saves.
+	var runtime = result.get("route_runtime", {})
+	if runtime is Dictionary:
+		var checkpoint = runtime.get("retry_checkpoint", {})
+		if checkpoint is Dictionary and checkpoint.get("director") is Dictionary:
+			var nested := migrate(checkpoint.director)
+			if not bool(nested.get("accepted", false)):
+				return {"accepted": false, "migrated": true, "from_schema": 2, "to_schema": SCHEMA_VERSION, "reason": "Invalid migrated retry checkpoint: " + String(nested.get("reason", "unknown"))}
+			checkpoint["director"] = nested.snapshot
+	var validation := _validate_snapshot(result)
+	if not bool(validation.get("valid", false)):
+		return {"accepted": false, "migrated": true, "from_schema": 2, "to_schema": SCHEMA_VERSION, "reason": String(validation.get("reason", "Migrated snapshot is invalid."))}
+	return {"accepted": true, "migrated": true, "from_schema": 2, "to_schema": SCHEMA_VERSION, "snapshot": result}
 
 func _read_snapshot(path: String) -> Dictionary:
 	if not FileAccess.file_exists(path):
@@ -197,7 +225,7 @@ func _validate_snapshot(snapshot: Dictionary) -> Dictionary:
 	if not _is_primitive(snapshot):
 		return {"valid": false, "reason": "save data must contain only finite JSON primitives"}
 	var version = snapshot.get("schema_version", 0)
-	if not (version is int or version is float) or float(version) != floor(float(version)) or int(version) not in [1, SCHEMA_VERSION]:
+	if not (version is int or version is float) or float(version) != floor(float(version)) or int(version) not in [1, 2, SCHEMA_VERSION]:
 		return {"valid": false, "reason": "Unsupported save schema version."}
 	if not snapshot.get("save_id", null) is String or String(snapshot["save_id"]).is_empty():
 		return {"valid": false, "reason": "save requires a nonempty save_id"}
@@ -216,6 +244,11 @@ func _validate_snapshot(snapshot: Dictionary) -> Dictionary:
 			return {"valid": false, "reason": "save resource " + key + " must be a nonnegative number"}
 	if int(version) == SCHEMA_VERSION:
 		return StateScript.validate_snapshot(snapshot)
+	if int(version) == 2:
+		var current := snapshot.duplicate(true)
+		current["schema_version"] = SCHEMA_VERSION
+		current["story_log"] = {"choices": {}, "moments": []}
+		return StateScript.validate_snapshot(current)
 	for key in ["receipts", "settings", "accessibility"]:
 		if snapshot.has(key) and not snapshot[key] is Dictionary:
 			return {"valid": false, "reason": "legacy save " + key + " must be a Dictionary"}

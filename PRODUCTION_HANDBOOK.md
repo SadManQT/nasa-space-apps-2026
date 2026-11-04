@@ -2,7 +2,7 @@
 
 **Read this first.** This is the single source of truth for making the game's assets and cutscenes: what is canon, what has been decided, how the pipeline works, what exists, and what is next. It is written for every team member and for AI agents (Claude Code, Codex, Antigravity). If you change a decision, change it here in the same commit.
 
-Last updated: 4 November 2026.
+Last updated: 5 November 2026.
 
 ---
 
@@ -304,6 +304,8 @@ Rules from the cinematic guide and the final story: cutscenes are short, embedde
 Optional opening (from the gameplay entry flow): mustard fields to the Moon chamber, 20–30 s, with no claim that Alo existed before the story.
 
 ## 10. Status (latest first)
+
+**5 Nov 2026 — M1-47 schema 3 implemented; desktop verification blocked (Sadman/night-codex, OpenAI Codex / GPT-6):** story choices and unique moments now use validated save data, v1/v2 migration (including retry checkpoints), director receipts/revisions and Chapter 1 decision-review confirmation/autosave. New story suite 64/64 checks; production Chapter 1 flow 303/303 checks. Full runner ended **29/30 suites passed**, with one existing title-frame timing threshold failure (66.927 ms / 50 ms). Windowed Godot aborts in macOS application registration before capture; Sadman must run the windowed capture, review normal/150% UI and obtain a complete passing test rerun before M1-47 can be marked done. [Evidence and reproduction](production/qa/M1-47.md). No canon, puzzle-number or asset changes.
 
 **5 Nov 2026 — all 18 cutscenes in the game; 60 fps with no loading freezes (Sadman/Claude, ElevenLabs lanes in the Desktop session):** CS-01..CS-18 are encoded to game/assets/cutscenes/ and registered in presentation_media.json (the campaign still has to play them: M1-10). New this round: CS-10..CS-17, CS-09 gains a chained third shot (19.1 s), CS-08 gets its music, CS-03 re-made for M1-43 (four-petal cross, black sky, point Sun; graded with production/tools/grade_cs03a.py). Seedance 2.5 at 720p/1080p from v8-sheet start frames; prices rose ~20% on 5 Nov. One command rebuilds a cutscene: production/tools/build_cutscene.sh <spec>. Cutscene credits overall ~2.0M of the 2.57M balance. For Sadman's eye: all music picks (chosen by analysis), CS-12-B/C, CS-17-B shutter flash, CS-03-A Sun rise. Performance round 3: threaded loading behind an animated card; windowed 60 fps everywhere, new campaign 101 ms longest frame (was a 2.7 s freeze); one unreproduced stall filed as M1-53.
 
