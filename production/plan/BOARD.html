@@ -585,8 +585,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "prompt": "Goal: the remaining Chapter 1 registry rows exist: PL_Alo_Sprout (seed, sprout and seedling stages for planting and care), EN_EarthDesk\n(Ferreira's and Rao's Earth-screen backdrop), UI_Kit (icons, panel frames, meters in the approved palette).\nDo: concept sheets first and the user's approval (one combined approval message is fine), then generate/build per each execution prompt.\nPlants never have faces. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; registry updated; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
     "production/concept/lookdev_exterior_v1/",
@@ -596,15 +596,16 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/ART_BIBLE.md",
     "PRODUCTION_HANDBOOK.md"
    ],
-   "note": "",
+   "note": "Tanvir explicitly approved reassignment to Tanvir/Codex on 4 Nov 2026. Local Blender look-development; no paid generation credits. M1-33 remains the human art decision.",
    "evidence": "",
    "updated": "2026-11-04",
    "id": "M1-32",
    "milestone": "M1",
    "priority": "P0",
-   "tool": "claude",
+   "tool": "codex",
    "title": "Art direction: Death Stranding-scale lunar exteriors with the anime cast (look-dev for approval)",
-   "prompt": "The user wants the Moon scenes at 'Death Stranding type graphics, the max you can do'. The locked style (handbook §3, 27 Oct) is anime\ncel-shaded characters. Proposal to approve: keep the approved anime cast and toon interiors; build exteriors with Death Stranding scale and\nfidelity: vast real south-pole terrain from NASA LRO LOLA elevation data, a very low Sun (<2° at the pole) with kilometre-long hard black\nshadows, crisp regolith detail up close, boulder fields, crater rims, Earth low on the horizon, the black sky, lonely scale and silence.\nDo: 3–4 look-dev frames (Godot or Blender renders, or Gemini image paint-overs on renders) in production/concept/lookdev_exterior_v1/: the\nAurora exterior at the Shackleton–de Gerlache ridge, the rover on the relay road, the cold-trap crater lit only by headlights, Malapert\nsummit. One frame per option where the cast stands in it: (A) toon characters in high-fidelity terrain with matched rim light and\noutlines, (B) characters with a softer, more rendered shading. Science rules (ART_BIBLE §2) apply to every frame. Ask the user to choose;\nrecord the decision in handbook §3 and the ART_BIBLE."
+   "prompt": "The user wants the Moon scenes at 'Death Stranding type graphics, the max you can do'. The locked style (handbook §3, 27 Oct) is anime\ncel-shaded characters. Proposal to approve: keep the approved anime cast and toon interiors; build exteriors with Death Stranding scale and\nfidelity: vast real south-pole terrain from NASA LRO LOLA elevation data, a very low Sun (<2° at the pole) with kilometre-long hard black\nshadows, crisp regolith detail up close, boulder fields, crater rims, Earth low on the horizon, the black sky, lonely scale and silence.\nDo: 3–4 look-dev frames (Godot or Blender renders, or Gemini image paint-overs on renders) in production/concept/lookdev_exterior_v1/: the\nAurora exterior at the Shackleton–de Gerlache ridge, the rover on the relay road, the cold-trap crater lit only by headlights, Malapert\nsummit. One frame per option where the cast stands in it: (A) toon characters in high-fidelity terrain with matched rim light and\noutlines, (B) characters with a softer, more rendered shading. Science rules (ART_BIBLE §2) apply to every frame. Ask the user to choose;\nrecord the decision in handbook §3 and the ART_BIBLE.",
+   "reserved_for": "Tanvir"
   },
   {
    "status": "todo",
