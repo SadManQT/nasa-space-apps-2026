@@ -115,7 +115,7 @@ func _update_feet(delta: float, fresh: bool) -> void:
 	if speed > tuning.run_speed + 0.05:
 		gait = animation.clips.gaits[2]
 	var min_heights: Array = animation.clips.measurements[gait].min_toe_y
-	var surfaces: Dictionary = _surface_meter.sample(delta)
+	var surfaces: Dictionary = _surface_meter.sample_heights()
 	for side in 2:
 		var foot := rig.global_transform * rig.get_bone_global_pose(foot_bones[side])
 		var toe := rig.global_transform * rig.get_bone_global_pose(toe_bones[side]).origin
@@ -181,7 +181,7 @@ func _clear_swing_feet() -> void:
 		pose.basis = rig.global_basis.inverse() * foot_bases[side]
 		rig.set_bone_global_pose(foot_bones[side], pose)
 		rig.set_bone_pose_rotation(toe_bones[side], toe_rotations[side])
-	var surface: Dictionary = _surface_meter.sample(0.0)
+	var surface: Dictionary = _surface_meter.sample_heights()
 	for side in 2:
 		if not locked[side] and is_finite(_ground[side]):
 			var original := rig.global_transform * poses[side].origin

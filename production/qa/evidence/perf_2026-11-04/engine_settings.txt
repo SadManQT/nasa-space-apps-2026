@@ -1,0 +1,17 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+rendering/rendering_device/pipeline_cache/enable=true
+rendering/rendering_device/pipeline_cache/save_chunk_size_mb=3.0
+physics/common/physics_ticks_per_second=60
+display/window/vsync/vsync_mode=1
+rendering/shader_compiler/shader_cache/enabled=true
+rendering/shader_compiler/shader_cache/compress=true
+rendering/shader_compiler/shader_cache/use_zstd_compression=true
+rendering/shader_compiler/shader_cache/strip_debug=false
+rendering/shader_compiler/shader_cache/strip_debug.release=true
+rendering/anti_aliasing/quality/msaa_3d=0
+rendering/limits/global_shader_variables/buffer_size=65536
+rendering/anti_aliasing/quality/use_taa=false
+rendering/occlusion_culling/use_occlusion_culling=false
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)

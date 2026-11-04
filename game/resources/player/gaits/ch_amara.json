@@ -1,0 +1,48 @@
+{
+	"measurements": {
+		"Run_loop": {
+			"distance": 2.6057641578911332,
+			"min_toe_y": [
+				0.012981966137886047,
+				0.0466708242893219
+			],
+			"period": 0.6333333333333333,
+			"samples": 32,
+			"source_length": 0.75,
+			"speed": 4.1143644598281055,
+			"start": 0.03333333333333333,
+			"surface_samples": 30,
+			"surface_speed": 4.1143644598281055
+		},
+		"Sprint_loop": {
+			"distance": 2.4882298213490133,
+			"min_toe_y": [
+				0.031570158898830414,
+				0.05769399553537369
+			],
+			"period": 0.625,
+			"samples": 43,
+			"source_length": 0.625,
+			"speed": 3.981167714158421,
+			"start": 0.16666666666666666,
+			"surface_samples": 26,
+			"surface_speed": 3.981167714158421
+		},
+		"Walk_loop": {
+			"distance": 1.6251130847368156,
+			"min_toe_y": [
+				0.03392600268125534,
+				0.04553939402103424
+			],
+			"period": 1.0833333730697632,
+			"samples": 132,
+			"source_length": 1.0833333730697632,
+			"speed": 1.5001043308874078,
+			"start": 0.2315521713431555,
+			"surface_samples": 121,
+			"surface_speed": 1.5001043308874078
+		}
+	},
+	"source_sha256": "ce1bf4f8fc06dd5a1f5c6d69dd263b3a9ac9a06c4d34fef8dd603b41b3d193d9",
+	"version": 1
+}

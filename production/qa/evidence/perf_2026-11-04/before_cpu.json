@@ -1,0 +1,153 @@
+{
+	"cpu_only": true,
+	"events": [
+		{
+			"cpu_ms": 192.331,
+			"event": "title_build"
+		},
+		{
+			"cpu_ms": 5905.786,
+			"event": "new_campaign"
+		},
+		{
+			"cpu_ms": 0.719,
+			"event": "hub_panel_objective"
+		},
+		{
+			"cpu_ms": 0.739,
+			"event": "hub_panel_journal_discovery"
+		},
+		{
+			"cpu_ms": 4.241,
+			"event": "hub_panel_puzzle"
+		},
+		{
+			"cpu_ms": 1.431,
+			"event": "hub_panel_dialogue_captions"
+		},
+		{
+			"cpu_ms": 10.015,
+			"event": "hub_panel_sources"
+		},
+		{
+			"cpu_ms": 0.649,
+			"event": "hub_panel_pause"
+		},
+		{
+			"cpu_ms": 458.981,
+			"event": "garden_enter"
+		},
+		{
+			"cpu_ms": 0.499,
+			"event": "garden_panel_objective"
+		},
+		{
+			"cpu_ms": 0.605,
+			"event": "garden_panel_journal_discovery"
+		},
+		{
+			"cpu_ms": 0.549,
+			"event": "garden_panel_puzzle"
+		},
+		{
+			"cpu_ms": 1.449,
+			"event": "garden_panel_dialogue_captions"
+		},
+		{
+			"cpu_ms": 3.23,
+			"event": "garden_panel_sources"
+		},
+		{
+			"cpu_ms": 0.531,
+			"event": "garden_panel_pause"
+		},
+		{
+			"cpu_ms": 336.413,
+			"event": "garden_rebuild"
+		},
+		{
+			"cpu_ms": 1862.559,
+			"event": "full_cast_enter"
+		},
+		{
+			"cpu_ms": 0.515,
+			"event": "full_cast_panel_objective"
+		},
+		{
+			"cpu_ms": 0.605,
+			"event": "full_cast_panel_journal_discovery"
+		},
+		{
+			"cpu_ms": 0.548,
+			"event": "full_cast_panel_puzzle"
+		},
+		{
+			"cpu_ms": 0.965,
+			"event": "full_cast_panel_dialogue_captions"
+		},
+		{
+			"cpu_ms": 2.928,
+			"event": "full_cast_panel_sources"
+		},
+		{
+			"cpu_ms": 0.495,
+			"event": "full_cast_panel_pause"
+		}
+	],
+	"summaries": [
+		{
+			"frames_or_calls": 120,
+			"max_ms": 90.937,
+			"over_33ms": 9,
+			"p50_ms": 22.968,
+			"p95_ms": 34.067,
+			"p99_ms": 50.103,
+			"sample": "hub_headless_tick_cpu"
+		},
+		{
+			"frames_or_calls": 120,
+			"max_ms": 17.696,
+			"over_33ms": 0,
+			"p50_ms": 2.971,
+			"p95_ms": 6.416,
+			"p99_ms": 12.208,
+			"sample": "hub_boot_skinning_cpu"
+		},
+		{
+			"frames_or_calls": 120,
+			"max_ms": 29.407,
+			"over_33ms": 0,
+			"p50_ms": 22.782,
+			"p95_ms": 23.804,
+			"p99_ms": 28.648,
+			"sample": "garden_headless_tick_cpu"
+		},
+		{
+			"frames_or_calls": 120,
+			"max_ms": 8.993,
+			"over_33ms": 0,
+			"p50_ms": 2.269,
+			"p95_ms": 3.517,
+			"p99_ms": 6.494,
+			"sample": "garden_boot_skinning_cpu"
+		},
+		{
+			"frames_or_calls": 120,
+			"max_ms": 35.507,
+			"over_33ms": 2,
+			"p50_ms": 29.898,
+			"p95_ms": 31.806,
+			"p99_ms": 34.082,
+			"sample": "full_cast_headless_tick_cpu"
+		},
+		{
+			"frames_or_calls": 120,
+			"max_ms": 5.706,
+			"over_33ms": 0,
+			"p50_ms": 3.566,
+			"p95_ms": 3.839,
+			"p99_ms": 4.129,
+			"sample": "full_cast_boot_skinning_cpu"
+		}
+	]
+}

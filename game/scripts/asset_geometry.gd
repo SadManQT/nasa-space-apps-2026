@@ -1,10 +1,22 @@
 extends RefCounted
 class_name AssetGeometry
 
+# Raw glTF preserves the approved runtime look (including face layers). Reuse
+# its parsed resources instead of decoding images/meshes on every room cut.
+# Bound retained scenes; live instances keep their own resources alive on eviction.
+const CACHE_LIMIT := 8
+static var _scenes: Dictionary = {}
+static var _recent: Array[String] = []
+
 static func load_glb(path: String) -> Node3D:
 	if not FileAccess.file_exists(path):
 		push_error("Missing GLB: " + path)
 		return null
+	var modified := FileAccess.get_modified_time(path)
+	if _scenes.has(path) and _scenes[path].modified == modified:
+		_recent.erase(path)
+		_recent.append(path)
+		return (_scenes[path].scene as PackedScene).instantiate() as Node3D
 	var document := GLTFDocument.new()
 	var state := GLTFState.new()
 	state.handle_binary_image = GLTFState.HANDLE_BINARY_EMBED_AS_UNCOMPRESSED
@@ -12,7 +24,17 @@ static func load_glb(path: String) -> Node3D:
 	if error != OK:
 		push_error("GLB import failed (%s): %s" % [error, path])
 		return null
-	return document.generate_scene(state) as Node3D
+	var root := document.generate_scene(state) as Node3D
+	if root == null:
+		return null
+	var scene := PackedScene.new()
+	if scene.pack(root) == OK:
+		_scenes[path] = {"modified": modified, "scene": scene}
+		_recent.erase(path)
+		_recent.append(path)
+		while _recent.size() > CACHE_LIMIT:
+			_scenes.erase(_recent.pop_front())
+	return root
 
 static func bounds(root: Node3D, posed: bool = false) -> AABB:
 	var result := AABB()

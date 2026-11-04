@@ -4,6 +4,9 @@ class_name LocomotionClips
 const SAMPLE_RATE: float = 120.0
 const GAIT_SAMPLES: int = 120
 const FootSlideScript: Script = preload("res://scripts/review/foot_slide.gd")
+# Increment when gait measurement or cycle sampling changes; regenerate with
+# tools/bake_locomotion.gd. Source GLB hashes also reject stale measurements.
+const BAKE_VERSION := 1
 
 var measurements: Dictionary = {}
 var gaits: Array[String] = []
@@ -18,11 +21,9 @@ static func bone(skeleton: Skeleton3D, suffix: String) -> int:
 			return i
 	return -1
 
-func prepare(player: AnimationPlayer, skeleton: Skeleton3D) -> bool:
+func prepare(player: AnimationPlayer, skeleton: Skeleton3D, source_path: String = "") -> bool:
 	_player = player
 	_skeleton = skeleton
-	_surface_meter = FootSlideScript.new()
-	_surface_meter.setup(player.get_node(player.root_node), skeleton)
 	for suffix in ["Hips", "LeftUpLeg", "RightUpLeg", "LeftLeg", "RightLeg", "LeftFoot", "RightFoot", "LeftToeBase", "RightToeBase"]:
 		if bone(skeleton, suffix) < 0:
 			push_error("Locomotion needs Mixamo bone " + suffix)
@@ -44,10 +45,19 @@ func prepare(player: AnimationPlayer, skeleton: Skeleton3D) -> bool:
 		_strip_root(clean, name)
 		library.add_animation(name, clean)
 	player.add_animation_library("motion", library)
+	var baked := _baked_measurements(source_path)
+	if baked.is_empty():
+		_surface_meter = FootSlideScript.new()
+		_surface_meter.setup(player.get_node(player.root_node), skeleton)
 	for name in gaits:
 		if measurements.has(name) and measurements[name].has("speed"):
 			continue
-		var measured := _measure(name)
+		var measured: Dictionary = baked.get(name, {})
+		if measured.is_empty():
+			if _surface_meter == null:
+				_surface_meter = FootSlideScript.new()
+				_surface_meter.setup(player.get_node(player.root_node), skeleton)
+			measured = _measure(name)
 		if measured.is_empty():
 			return false
 		measurements[name] = measured
@@ -55,6 +65,26 @@ func prepare(player: AnimationPlayer, skeleton: Skeleton3D) -> bool:
 	player.stop()
 	skeleton.reset_bone_poses()
 	return true
+
+func _baked_measurements(source_path: String) -> Dictionary:
+	if source_path.is_empty():
+		return {}
+	var path := "res://resources/player/gaits/" + source_path.get_file().get_basename().to_lower() + ".json"
+	if not FileAccess.file_exists(path):
+		return {}
+	var data = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not data is Dictionary or data.get("version") != BAKE_VERSION or data.get("source_sha256") != FileAccess.get_sha256(source_path):
+		return {}
+	var measured = data.get("measurements", {})
+	if not measured is Dictionary:
+		return {}
+	for gait in gaits:
+		if not measured.get(gait) is Dictionary:
+			return {}
+		for key in ["speed", "period", "start", "min_toe_y", "source_length"]:
+			if not measured[gait].has(key):
+				return {}
+	return measured
 
 func _strip_root(animation: Animation, name: String) -> void:
 	for track in animation.get_track_count():

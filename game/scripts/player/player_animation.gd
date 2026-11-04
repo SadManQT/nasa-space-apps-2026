@@ -41,13 +41,13 @@ var action_is_transition: bool = false
 var hold_mode: Hold = Hold.NONE
 var hold_weights := Vector2.ZERO
 
-func setup(animation_player: AnimationPlayer, rig: Skeleton3D, settings: LocomotionTuning) -> bool:
+func setup(animation_player: AnimationPlayer, rig: Skeleton3D, settings: LocomotionTuning, source_path: String = "") -> bool:
 	player = animation_player
 	skeleton = rig
 	tuning = settings
 	player.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
 	clips = ClipScript.new()
-	if not clips.prepare(player, skeleton):
+	if not clips.prepare(player, skeleton, source_path):
 		return false
 	var measured: Array[float] = []
 	for name in clips.gaits:

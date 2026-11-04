@@ -87,7 +87,12 @@ func _test_dialogue_and_knowledge(content: Dictionary) -> void:
 		_check(not bool(predicate.get("requires_dialogue_acknowledgement", true)), "predicate does not depend on dialogue acknowledgement: " + String(predicate.get("id", "")))
 
 func _test_audio_and_cutscenes(content: Dictionary) -> void:
-	var audio = AudioScript.new(content)
+	# Exercise the missing-file contract even after production VO is installed.
+	var missing_voice_fixture := content.duplicate(true)
+	for line in missing_voice_fixture.get("dialogue", []):
+		if String(line.get("id", "")) == "EX-CH01-S01-L01":
+			line["voice_file"] = "res://__missing_test_fixture__/voice.ogg"
+	var audio = AudioScript.new(missing_voice_fixture)
 	var voice := audio.voice_plan("EX-CH01-S01-L01")
 	_check(String(voice.get("mode", "")) == "captions_only" and not bool(voice.get("media_present", true)), "missing runtime voice truthfully falls back to captions")
 	var audio_fixture := content.duplicate(true)

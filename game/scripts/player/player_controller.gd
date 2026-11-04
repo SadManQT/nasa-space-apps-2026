@@ -63,14 +63,7 @@ static func default_character_path() -> String:
 func load_character(path: String) -> bool:
 	if not FileAccess.file_exists(path):
 		return false
-	var document := GLTFDocument.new()
-	var state := GLTFState.new()
-	state.handle_binary_image = GLTFState.HANDLE_BINARY_EMBED_AS_UNCOMPRESSED
-	var error: Error = document.append_from_file(path, state)
-	if error != OK:
-		push_error("GLB import failed (%s): %s" % [error, path])
-		return false
-	var loaded := document.generate_scene(state) as Node3D
+	var loaded := AssetGeometry.load_glb(path)
 	if loaded == null:
 		return false
 	var players := loaded.find_children("*", "AnimationPlayer", true, false)
@@ -95,7 +88,7 @@ func load_character(path: String) -> bool:
 	var previous_transform := visual.transform
 	visual.top_level = true
 	visual.global_transform = Transform3D.IDENTITY
-	var prepared := animation.setup(players[0] as AnimationPlayer, skeletons[0] as Skeleton3D, tuning)
+	var prepared := animation.setup(players[0] as AnimationPlayer, skeletons[0] as Skeleton3D, tuning, path)
 	visual.top_level = false
 	visual.transform = previous_transform
 	if not prepared:

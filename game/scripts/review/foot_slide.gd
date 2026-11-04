@@ -14,6 +14,13 @@ var _previous_feet: Array[Vector3] = []
 var _foot_bones: Array[int] = []
 var _hip_bone: int = -1
 var _ready: bool = false
+# Runtime IK needs only the lowest boot points, not the review's per-vertex
+# velocity/contact history. Keep the identical vertices/weights in flat arrays.
+var _height_offsets := PackedInt32Array()
+var _height_sides := PackedInt32Array()
+var _height_bones := PackedInt32Array()
+var _height_binds := PackedVector3Array()
+var _height_weights := PackedFloat32Array()
 
 func setup(actor: Node3D, skeleton: Skeleton3D) -> void:
 	_actor = actor
@@ -68,7 +75,41 @@ func setup(actor: Node3D, skeleton: Skeleton3D) -> void:
 				if maxf(left, right) > 0.5:
 					selected.append({"side": 0 if left > right else 1, "bones": vertex_bones, "binds": vertex_binds, "weights": vertex_weights})
 			_boots.append({"vertices": selected})
+	_height_offsets.clear()
+	_height_sides.clear()
+	_height_bones.clear()
+	_height_binds.clear()
+	_height_weights.clear()
+	for surface in _boots:
+		for vertex in surface.vertices:
+			_height_offsets.append(_height_bones.size())
+			_height_sides.append(vertex.side)
+			for influence in vertex.bones.size():
+				_height_bones.append(vertex.bones[influence])
+				_height_binds.append(vertex.binds[influence])
+				_height_weights.append(vertex.weights[influence])
+	_height_offsets.append(_height_bones.size())
 	reset()
+
+## Exact skinned heights in world space, including all boot vertices and all
+## influences. Dot only the Y row; X/Z, velocities and contact arrays are unused
+## by locomotion. Does not change the review sampler's temporal state.
+func sample_heights() -> Dictionary:
+	var rows := PackedVector3Array()
+	var origins := PackedFloat32Array()
+	for bone in _skeleton.get_bone_count():
+		var pose := _skeleton.global_transform * _skeleton.get_bone_global_pose(bone)
+		rows.append(Vector3(pose.basis.x.y, pose.basis.y.y, pose.basis.z.y))
+		origins.append(pose.origin.y)
+	var heights: Array[float] = [INF, INF]
+	for vertex in _height_sides.size():
+		var height := 0.0
+		for influence in range(_height_offsets[vertex], _height_offsets[vertex + 1]):
+			var bone := _height_bones[influence]
+			height += (rows[bone].dot(_height_binds[influence]) + origins[bone]) * _height_weights[influence]
+		var side := _height_sides[vertex]
+		heights[side] = minf(heights[side], height)
+	return {"left": {"height": heights[0]}, "right": {"height": heights[1]}}
 
 func reset() -> void:
 	_ready = false
