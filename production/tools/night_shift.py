@@ -132,6 +132,7 @@ def prepare(slot: Path):
     else:
         sh(["git", "reset", "-q", "--hard"], slot)
         sh(["git", "clean", "-fdq", "-e", "game/.godot"], slot)
+        sh(["git", "rebase", "--abort"], slot)
         sh(["git", "checkout", "-q", "--detach", "origin/main"], slot, env=env, check=True)
     sh(["git", "lfs", "pull", "--include", "game/**"], slot, check=True)
 
@@ -204,6 +205,50 @@ def run_capture(slot, tid):
         (slot / f"production/qa/evidence/{tid}_capture_output.txt").write_text(out[-20000:])
 
 
+MERGE_TASKS = """
+import json, subprocess, sys
+tid = sys.argv[1]
+up = json.loads(subprocess.check_output(["git", "show", ":2:production/plan/tasks.json"]))
+mine = json.loads(subprocess.check_output(["git", "show", ":3:production/plan/tasks.json"]))
+ids = {t["id"]: i for i, t in enumerate(up["tasks"])}
+for t in mine["tasks"]:  # this task's update and tasks the worker added; everyone else's state stays upstream's
+    if t["id"] == tid and t["id"] in ids:
+        up["tasks"][ids[t["id"]]] = t
+    elif t["id"] not in ids:
+        up["tasks"].append(t)
+open("production/plan/tasks.json", "w").write(json.dumps(up, indent=1, ensure_ascii=False) + "\\n")
+"""
+
+
+def resolve_conflicts(slot, tid):
+    """GO_NEXT rule for board conflicts: keep everyone's board state plus this task's; union-merge append-only docs."""
+    _, out = sh(["git", "diff", "--name-only", "--diff-filter=U"], slot)
+    for f in out.split():
+        if f == "production/plan/BOARD.html":
+            continue
+        if f == "production/plan/tasks.json":
+            rc, err = sh(["python3", "-c", MERGE_TASKS, tid], slot)
+        elif f.endswith(".md"):
+            _, base = sh(["git", "show", f":1:{f}"], slot)
+            _, ours = sh(["git", "show", f":2:{f}"], slot)
+            _, theirs = sh(["git", "show", f":3:{f}"], slot)
+            tmp = slot / ".night_merge"
+            tmp.mkdir(exist_ok=True)
+            for name, text in (("base", base), ("ours", ours), ("theirs", theirs)):
+                (tmp / name).write_text(text)
+            sh(["git", "merge-file", "--union", str(tmp / "ours"), str(tmp / "base"), str(tmp / "theirs")], slot)
+            (slot / f).write_text((tmp / "ours").read_text())
+            rc = 0
+        else:
+            return False  # a real content conflict: leave it for a human
+        if rc:
+            return False
+    sh(["python3", "production/plan/board.py", "html"], slot)
+    sh(["git", "add", "-A", "--", "production/plan", *[f for f in out.split()]], slot)
+    rc, _ = sh(["git", "-c", "core.editor=true", "rebase", "--continue"], slot, env={**os.environ, "GIT_EDITOR": "true"})
+    return rc == 0
+
+
 def land(slot, tid, title, status):
     """Commit the slot's changes and push them to main (rebase first)."""
     sh(["git", "checkout", "-q", "-B", f"night/{slot.name}"], slot)
@@ -215,7 +260,7 @@ def land(slot, tid, title, status):
         return False, out
     for _ in range(3):
         rc, out = sh(["git", "pull", "-q", "--rebase", "origin", "main"], slot)
-        if rc:
+        if rc and not resolve_conflicts(slot, tid):
             sh(["git", "rebase", "--abort"], slot)
             return False, "rebase conflict: " + out[-500:]
         rc, out = sh(["git", "push", "-q", "origin", "HEAD:main"], slot)
@@ -349,6 +394,8 @@ if __name__ == "__main__":
     LOGDIR.mkdir(parents=True, exist_ok=True)
     NIGHT.mkdir(exist_ok=True)
     STOP.unlink(missing_ok=True)
+    pidfile = NIGHT / f"{SLOT_PREFIX}.pid"
+    pidfile.write_text(str(os.getpid()))
     log(f"night shift starts: {SLOTS} {SLOT_PREFIX} slot(s), lanes {LANES_ONLY or 'all'}, until {dt.datetime.fromtimestamp(DEADLINE):%H:%M}")
     threads = [threading.Thread(target=slot_loop, args=(i + 1,), daemon=True) for i in range(SLOTS)]
     for i, t in enumerate(threads):
@@ -356,4 +403,5 @@ if __name__ == "__main__":
         time.sleep(60 * i)  # stagger the first checkouts
     for t in threads:
         t.join()
+    pidfile.unlink(missing_ok=True)
     log("night shift ends")
