@@ -481,7 +481,7 @@
    "prompt": "Goal: the remaining Chapter 1 registry rows exist: PL_Alo_Sprout (seed, sprout and seedling stages for planting and care), EN_EarthDesk\n(Ferreira's and Rao's Earth-screen backdrop), UI_Kit (icons, panel frames, meters in the approved palette).\nDo: concept sheets first and the user's approval (one combined approval message is fine), then generate/build per each execution prompt.\nPlants never have faces. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; registry updated; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
-   "status": "in_progress",
+   "status": "done",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
@@ -493,7 +493,7 @@
     "PRODUCTION_HANDBOOK.md"
    ],
    "note": "Tanvir explicitly approved reassignment to Tanvir/Codex on 4 Nov 2026. Local Blender look-development; no paid generation credits. M1-33 remains the human art decision.",
-   "evidence": "",
+   "evidence": "Four exterior setting studies plus matched Aurora A/B pair; six reviewed PNGs and reproducible Blender source/provenance in production/concept/lookdev_exterior_v1/. 24 source GLBs unchanged; A/B camera and inputs match. run_tests.sh 30/30 suites passed. production/review/M1-32.md. Human M1-33 choice pending; procedural terrain labelled, real LOLA/ephemeris remains M1-34.",
    "updated": "2026-11-04",
    "id": "M1-32",
    "milestone": "M1",
