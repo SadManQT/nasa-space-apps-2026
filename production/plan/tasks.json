@@ -3801,7 +3801,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Rule out a threaded-loading deadlock at full-cast entry",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [],
    "paths": [
@@ -3817,7 +3817,7 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Found 5 Nov during the round-3 rendered verification: one windowed run of game/tools/perf_probe.gd (--perf-probe, window on top) stopped right after the garden_rebuild transition, at the start of the full-cast stage: Godot idle (~2% CPU) with no progress for 17 minutes. The next run passed cleanly, so it is intermittent. Find whether the threaded preparation (ResourceLoader.load_threaded_request / WorkerThreadPool jobs in game/scripts/loading/, staged construction in campaign_room.gd and chapter1_campaign.gd) can wait forever: a job that never reports, a main-thread await on a status that never changes, a resource requested twice, or a deadlock with a mutex. Add a watchdog: any preparation step that exceeds a time limit logs its step and falls back to synchronous loading behind the loading card instead of hanging.\nAcceptance: run the windowed probe 10 times in a row (command in production/qa/perf_2026-11-04.md) with zero stalls; a test forces a stuck job and proves the fallback completes; run_tests.sh passes.",
-   "blocker": ""
+   "blocker": "Night shift parked the work on branch night/M1-53: The task is not marked done on the board: finish it (or block it with a real reason)."
   },
   {
    "id": "M2-14",
