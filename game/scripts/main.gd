@@ -1,10 +1,15 @@
 extends Node3D
 
-const CAMPAIGN_SCENE: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
+const CAMPAIGN_PATH := "res://scenes/campaign/chapter1_campaign.tscn"
 const MENU_SCENE: PackedScene = preload("res://scenes/ui/main_menu.tscn")
 const SaveScript = preload("res://scripts/save/save_service.gd")
 const CampaignScript = preload("res://scripts/campaign/chapter1_campaign.gd")
 const LegacySave = preload("res://scripts/save/legacy_save.gd")
+
+var preparation: LoadPreparation
+var title_ready := false
+var _launching := false
+var _loading_card: LoadingCard
 
 var _stage_camera: Camera3D
 var _stage_root: Node3D
@@ -23,9 +28,27 @@ func _ready() -> void:
 		# diagnostic injects an isolated temporary slot before any save service exists.
 		save_path = OS.get_temp_dir().path_join("lla-export-%d.json" % OS.get_process_id())
 		legacy_save_path = save_path + ".legacy"
+	preparation = LoadPreparation.new()
+	add_child(preparation)
+	_loading_card = LoadingCard.new()
+	add_child(_loading_card)
+	await get_tree().process_frame
+	for path in ["res://assets/props/PR_MissionTable/PR_MissionTable.glb", "res://assets/props/PR_BatteryJar/PR_BatteryJar.glb", "res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"]:
+		if not await AssetGeometry.prepare(path, get_tree()):
+			push_error("Title equipment could not be prepared: " + path)
+	await preparation.resource("res://environments/look/character_look.tres")
+	await preparation.resource("res://scenes/ui/main_menu.tscn")
 	_save_service = _new_save_service()
+	var stamp := LoadTrace.begin()
 	_build_stage()
+	LoadTrace.end("title_stage", stamp)
+	stamp = LoadTrace.begin()
 	_show_title()
+	LoadTrace.end("title_ui_save_validation", stamp)
+	await get_tree().process_frame
+	_loading_card.queue_free()
+	_loading_card = null
+	title_ready = true
 	if OS.get_cmdline_user_args().has("--export-smoke"):
 		_run_export_smoke.call_deferred()
 
@@ -91,6 +114,7 @@ func _show_title() -> void:
 	_menu.setup(_load_campaign_snapshot())
 	_show_load_notice()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	preparation.prepare_campaign.call_deferred()
 
 func _start_new_expedition() -> void:
 	if _save_slot_exists():
@@ -121,19 +145,49 @@ func _continue_expedition() -> void:
 	_launch_campaign(snapshot)
 
 func _launch_campaign(snapshot: Dictionary) -> void:
+	if _launching:
+		return
+	_launching = true
 	var settings := _menu.accessibility_settings() if is_instance_valid(_menu) else {}
+	_loading_card = LoadingCard.new()
+	add_child(_loading_card)
+	await get_tree().process_frame
+	if not await preparation.wait_campaign():
+		_load_notice = preparation.failed
+		_show_load_notice()
+		_loading_card.queue_free()
+		_loading_card = null
+		_launching = false
+		return
 	_stage_root.hide()
 	_stage_root.process_mode = Node.PROCESS_MODE_DISABLED
 	if _menu_layer != null:
 		_menu_layer.queue_free()
 		_menu_layer = null
-	_campaign = CAMPAIGN_SCENE.instantiate()
+	var scene := await preparation.resource(CAMPAIGN_PATH) as PackedScene
+	var stamp := LoadTrace.begin()
+	_campaign = scene.instantiate()
+	LoadTrace.end("campaign_scene_instance", stamp)
+	_campaign.set("incremental_loading", true)
+	_campaign.set("preparation", preparation)
+	_campaign.set("prepared_content", preparation.content)
 	_campaign.set("initial_snapshot", snapshot)
 	_campaign.set("initial_accessibility", settings)
 	_campaign.set("save_path", save_path)
+	var crew := preparation.crew
+	crew.get_parent().remove_child(crew)
+	_campaign.add_child(crew)
+	_campaign.set("_crew", crew)
+	preparation.crew = null
+	preparation.campaign_ready = false
 	_campaign.connect("exit_requested", _show_title)
 	add_child(_campaign)
+	await _campaign.wait_loading()
 	_stage_camera.current = false
+	_loading_card.queue_free()
+	_loading_card = null
+	_launching = false
+
 
 func _load_campaign_snapshot() -> Dictionary:
 	_load_notice = ""
@@ -214,7 +268,7 @@ func _run_export_smoke() -> void:
 	var model_file := FileAccess.open(model_path, FileAccess.READ)
 	checks.append(model_file != null and model_file.get_buffer(4).get_string_from_ascii() == "glTF")
 	await _export_smoke_capture("M1-20_native_title")
-	_launch_campaign({})
+	await _launch_campaign({})
 	for index in 6:
 		await get_tree().physics_frame
 	var campaign := _campaign as Chapter1Campaign

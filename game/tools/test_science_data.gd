@@ -73,7 +73,7 @@ func _run() -> void:
 	var campaign = load("res://scenes/campaign/chapter1_campaign.tscn").instantiate()
 	storage.configure(campaign)
 	root.add_child(campaign)
-	await process_frame
+	await campaign.wait_loading()   # the campaign now builds in stages behind the loading card (perf round 3)
 	var before: Dictionary = campaign.director.snapshot()
 	_button(campaign.hud, "DATA CARDS").pressed.emit()
 	_check(campaign.hud.panels.active_panel() == "sources" and campaign.director.query().paused, "production Data Cards button opens a paused source list")

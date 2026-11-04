@@ -63,7 +63,9 @@ static func default_character_path() -> String:
 func load_character(path: String) -> bool:
 	if not FileAccess.file_exists(path):
 		return false
+	var stamp := LoadTrace.begin()
 	var loaded := AssetGeometry.load_glb(path)
+	LoadTrace.end("character_instance:" + path, stamp)
 	if loaded == null:
 		return false
 	var players := loaded.find_children("*", "AnimationPlayer", true, false)
@@ -88,7 +90,9 @@ func load_character(path: String) -> bool:
 	var previous_transform := visual.transform
 	visual.top_level = true
 	visual.global_transform = Transform3D.IDENTITY
+	stamp = LoadTrace.begin()
 	var prepared := animation.setup(players[0] as AnimationPlayer, skeletons[0] as Skeleton3D, tuning, path)
+	LoadTrace.end("gait_clips:" + path, stamp)
 	visual.top_level = false
 	visual.transform = previous_transform
 	if not prepared:
@@ -99,15 +103,19 @@ func load_character(path: String) -> bool:
 		return false
 	loaded_path = path
 	visual.global_rotation = Vector3(0.0, _yaw, 0.0)
+	stamp = LoadTrace.begin()
 	_setup_modifiers()
+	LoadTrace.end("rig_modifiers:" + path, stamp)
 	# the game look: toon shading and outlines, the drawn face layers, and hair springs (added last, after the gaze)
 	ToonMaterials.apply_to_tree(character, true, true)
+	stamp = LoadTrace.begin()
 	var face := FaceAtlas.new()
 	face.name = "FaceAtlas"
 	character.add_child(face)
 	var springs := HairSprings.new()
 	springs.name = "HairSprings"
 	character.add_child(springs)
+	LoadTrace.end("face_hair:" + path, stamp)
 	return true
 
 func _setup_modifiers() -> void:

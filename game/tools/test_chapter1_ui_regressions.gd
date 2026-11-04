@@ -32,7 +32,8 @@ func _run() -> void:
 	var main := MainScene.instantiate()
 	storage.configure(main)
 	root.add_child(main)
-	await process_frame
+	while not main.title_ready:
+		await process_frame
 	var menu := main.get_node("TitleLayer/MainMenu") as MainMenu
 	var title_settings := _find_button(menu, "SETTINGS / ACCESSIBILITY")
 	_reveal_control(title_settings)
@@ -50,7 +51,7 @@ func _run() -> void:
 	_reveal_control(title_settings)
 	await process_frame
 	_check(menu.get_global_rect().encloses(title_settings.get_global_rect()), "title settings can be reached with large text")
-	main.call("_launch_campaign", {})
+	await main.call("_launch_campaign", {})
 	await process_frame
 	await process_frame
 	var campaign := main.get_node("Chapter1Campaign") as Chapter1Campaign
@@ -115,6 +116,7 @@ func _run() -> void:
 	for scene_id in Gates.scene_ids():
 		if scene_id in ["EX-CH01-S02", "EX-CH01-S04"]:
 			campaign.call("_refresh_world")
+			await campaign.wait_loading()
 			if scene_id == "EX-CH01-S02":
 				_check(campaign._player.character_glb.contains("CH_Rafi"), "Safe Room scene uses its authored Rafi viewpoint")
 			else:
@@ -134,6 +136,7 @@ func _run() -> void:
 			traversed = false
 	_check(traversed and campaign.route.chapter_ready().get("ready", false), "real Chapter 1 operations reach the completed chapter")
 	campaign.call("_refresh_world")
+	await campaign.wait_loading()
 	_check(campaign._room.visual_root.get_node_or_null("PL_Alo_Bloom") != null and not campaign._room.visual_root.get_node("PL_Tara_Bloom").visible, "April 27 first bloom shows Alo bloom and keeps Tara's later bloom hidden")
 	hud.refresh_scene({"chapter_complete": true})
 	_check(advance.disabled and (hud.get("_status") as Label).text.contains("CHAPTER 1 COMPLETE"), "completed chapter shows a clear ending and disables repeated advance")
@@ -141,6 +144,7 @@ func _run() -> void:
 	await process_frame
 	stage = main.get_node_or_null("TitleStage")
 	_check(stage != null and stage.process_mode != Node.PROCESS_MODE_DISABLED and stage.visible, "return to title restores its stage")
+	await main.preparation.wait_campaign()
 	main.queue_free()
 	await process_frame
 	var before := FileAccess.get_file_as_string(storage.path)
@@ -170,10 +174,13 @@ func _run() -> void:
 	main = MainScene.instantiate()
 	storage.configure(main)
 	root.add_child(main)
+	while not main.title_ready:
+		await process_frame
 	main.call("_start_new_expedition")
 	var replacement := main.get("_replace_dialog") as ConfirmationDialog
 	_check(replacement != null and replacement.visible and FileAccess.get_file_as_string(storage.path) == "{}", "invalid occupied slot still requires explicit replacement")
 	_check((main.get_node("TitleLayer/MainMenu").get("_save_note") as Label).text.contains("could not"), "unreadable checkpoint error is shown on title")
+	await main.preparation.wait_campaign()
 	main.queue_free()
 	await process_frame
 	SaveScript.new().clear(storage.path)
@@ -183,7 +190,10 @@ func _run() -> void:
 	main = MainScene.instantiate()
 	storage.configure(main)
 	root.add_child(main)
+	while not main.title_ready:
+		await process_frame
 	_check(main.call("_load_campaign_snapshot").is_empty() and FileAccess.file_exists(storage.legacy_path), "legacy checkpoint is preserved without inventing full-route evidence")
+	await main.preparation.wait_campaign()
 	main.queue_free()
 	await process_frame
 	_check(SaveScript.new().clear(storage.path) and LegacyScript.clear_save(storage.legacy_path), "UI fixture cleans its isolated save files")

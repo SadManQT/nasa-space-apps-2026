@@ -110,7 +110,7 @@
       "evidenceArtifact": "A saved before-and-after mission-table plan, a four-role information receipt and one annotated causal link between choice and outcome.",
       "assessment": "The player can identify a binding constraint, preserve crew-first priorities and explain why an alternate preview changes a result. Correct reasoning counts in assisted mode too; a failed prediction can be revised locally.",
       "accessibility": "Planning pauses the simulation; every dial has a keyboard/tap alternative; role facts have icons and text; the alarm timer can be removed without changing story access.",
-      "scienceBoundary": "The 36-hour darkness and Earth-set are authored training conditions until local terrain and ephemerides are validated. Water shielding illustrates mass and geometry; zaps are not measured doses and plants are not radiation-immune.",
+      "scienceBoundary": "The 36-hour darkness and the shift-4 Earth-link cutoff are authored training conditions. The computed April 2046 sky (JPL Horizons) has Earth below the pole's horizon and rising during this night. Water shielding illustrates mass and geometry; zaps are not measured doses and plants are not radiation-immune.",
       "sourceRefs": [
         "SRC-POLAR",
         "SRC-LIFE-SUPPORT",

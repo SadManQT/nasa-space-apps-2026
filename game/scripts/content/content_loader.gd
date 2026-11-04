@@ -5,13 +5,13 @@ class_name CampaignContentFull
 
 const FULL_PATH := "res://resources/campaign/content/campaign_catalog.json"
 const DIALOGUE_PATH := "res://resources/campaign/dialogue_catalog.json"
-const EXPECTED_STORY_SHA256 := "02fa2dee03d11d455f67406de28a4da3cee97b1f8f19fda2cee0e6c1e895a272"
+const EXPECTED_STORY_SHA256 := "2951bc4ed085204626ccf04d5e983375f70c71b98c5f52a99079cd6e2b98abfa"
 const EXPECTED_SCENE_INDEX_SHA256 := "8c0b8cda424d6bc6abb32ef64fd090c9afca53a0eedf16dee74e84dc4d51a934"
-const EXPECTED_VO_SHA256 := "d4d1aaae60f13504477462bca5141c4fa3343057760b3f199f82bb8509404a19"
-const EXPECTED_CONTENT_REVISION := "campaign-content-1-3e003a55fa46e38f"
+const EXPECTED_VO_SHA256 := "a219a240df5d6966520306fbb5ad71e9f304eaecb4c0f83da11200ea1aee3d5e"
+const EXPECTED_CONTENT_REVISION := "campaign-content-1-f06dab44691238c6"
 const EXPECTED_FULL_COUNTS := {"chapters": 8, "missions": 32, "scenes": 96, "dialogue_lines": 385}
-const EXPECTED_CATALOG_HASH := "31a768ef49efa7a9f5c1c97a581a66c0b5c731938bb3191a67fe56ecc7bf18c4"
-const EXPECTED_DIALOGUE_CATALOG_HASH := "a3410ee72ab2e1e9349d6fdc66d312c15937646d7a25de9f87362d9d558addd2"
+const EXPECTED_CATALOG_HASH := "6f78d8397bec7d6705735159dc18f95cea224c8f7538a635746c448643d949bc"
+const EXPECTED_DIALOGUE_CATALOG_HASH := "de73cc9cecc4ef824b9622e2a00951ba734a9452d567b122b87c95f9fc2ff7ab"
 
 static var _full_cache: Dictionary = {}
 

@@ -276,26 +276,36 @@ func _build_navigation(contract: Dictionary) -> void:
 func _load_approved_assets(contract: Dictionary) -> void:
 	var paths: Array = contract.get("asset_paths", [])
 	for index in paths.size():
-		var path := String(paths[index])
-		var model := AssetGeometryScript.load_glb(path)
-		if model == null:
-			continue
-		model.name = path.get_file().get_basename()
-		var transform_data: Dictionary = {}
-		for prop in _layout.get("props", []):
-			if prop.id == String(model.name):
-				transform_data = prop
-				break
-		if not transform_data.is_empty():
-			model.position = Presentation.vector(transform_data.position)
-			model.rotation_degrees = Presentation.vector(transform_data.rotation_degrees)
-			model.scale = Presentation.vector(transform_data.scale)
-		else:
-			# Later-chapter staging is still owned by its room/art tasks.
-			model.position = _asset_position(index, paths.size())
-			model.scale = Vector3.ONE * 0.85
-		visual_root.add_child(model)
-		ToonMaterialsScript.apply_to_tree(model, false, true)
+		_add_approved_asset(String(paths[index]), index, paths.size())
+
+func load_assets_incremental() -> void:
+	var paths: Array = RoomContract.room(room_id).get("asset_paths", [])
+	for index in paths.size():
+		_add_approved_asset(String(paths[index]), index, paths.size())
+		await get_tree().process_frame
+	if RoomContract.room(room_id).get("pressure") == "vacuum":
+		_style_vacuum(visual_root)
+
+func _add_approved_asset(path: String, index: int, count: int) -> void:
+	var model := AssetGeometryScript.load_glb(path)
+	if model == null:
+		return
+	model.name = path.get_file().get_basename()
+	var transform_data: Dictionary = {}
+	for prop in _layout.get("props", []):
+		if prop.id == String(model.name):
+			transform_data = prop
+			break
+	if not transform_data.is_empty():
+		model.position = Presentation.vector(transform_data.position)
+		model.rotation_degrees = Presentation.vector(transform_data.rotation_degrees)
+		model.scale = Presentation.vector(transform_data.scale)
+	else:
+		# Later-chapter staging is still owned by its room/art tasks.
+		model.position = _asset_position(index, count)
+		model.scale = Vector3.ONE * 0.85
+	visual_root.add_child(model)
+	ToonMaterialsScript.apply_to_tree(model, false, true)
 
 func _asset_position(index: int, count: int) -> Vector3:
 	var column := index % 3

@@ -27,9 +27,10 @@ func _run() -> void:
 	_root = MainScene.instantiate()
 	storage.configure(_root)
 	root.add_child(_root)
-	await process_frame
+	while not _root.title_ready:
+		await process_frame
 	_check(_root.get_node_or_null("TitleLayer/MainMenu") != null, "production boot presents the title menu")
-	_root.call("_launch_campaign", {})
+	await _root.call("_launch_campaign", {})
 	await process_frame
 	var campaign := _root.get_node_or_null("Chapter1Campaign") as Chapter1Campaign
 	_check(campaign != null and campaign.route != null and campaign.route.current_scene_id() == "EX-CH01-S01", "new expedition enters the canonical Chapter 1 opening scene")

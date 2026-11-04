@@ -18,6 +18,9 @@ var _summaries: Array = []
 var _slot := ""
 var _metadata: Dictionary = {}
 var _physics_stamp := 0
+var _event_last := 0
+var _event_max := 0.0
+var _event_frames := 0
 
 func _init() -> void:
 	_run.call_deferred()
@@ -44,18 +47,24 @@ func _run() -> void:
 		quit(2)
 		return
 	_slot = OS.get_temp_dir().path_join("lla-perf-%d.json" % OS.get_process_id())
-	_metadata = {"engine": Engine.get_version_info(), "display": DisplayServer.get_name(), "renderer": RenderingServer.get_current_rendering_method(), "driver": RenderingServer.get_current_rendering_driver_name(), "cpu_only": _cpu_only, "window": root.size, "seconds": _seconds, "vsync": DisplayServer.window_get_vsync_mode(), "max_fps": Engine.max_fps, "physics_ticks": Engine.physics_ticks_per_second}
+	_metadata = {"engine": Engine.get_version_info(), "display": DisplayServer.get_name(), "renderer": RenderingServer.get_current_rendering_method(), "driver": RenderingServer.get_current_rendering_driver_name(), "cpu_only": _cpu_only, "window": root.size, "transition_schema": 3, "seconds": _seconds, "vsync": DisplayServer.window_get_vsync_mode(), "max_fps": Engine.max_fps, "physics_ticks": Engine.physics_ticks_per_second}
 	print("PERF metadata ", JSON.stringify(_metadata))
 	physics_frame.connect(_stamp_physics)
 	if not _cpu_only:
 		RenderingServer.viewport_set_measure_render_time(root.get_viewport_rid(), true)
+	LoadTrace.enabled = true
+	process_frame.connect(_event_heartbeat)
 	_main = MAIN.instantiate()
 	_main.save_path = _slot
 	_main.legacy_save_path = _slot + ".legacy"
-	_event("title_build", func(): root.add_child(_main))
+	await _transition_event("title_build", func():
+		root.add_child(_main)
+		while not _main.title_ready:
+			await process_frame
+	)
 	if not _cpu_only:
 		await _sample("title", false, false)
-	_event("new_campaign", func(): _main._launch_campaign({}))
+	await _transition_event("new_campaign", func(): await _main._launch_campaign({}))
 	_campaign = _main._campaign
 	await physics_frame
 	if _campaign == null or _campaign._player == null:
@@ -68,7 +77,7 @@ func _run() -> void:
 	else:
 		await _sample("hub_walk", true, false)
 		await _sample("hub_panels", false, true)
-	_event("garden_enter", func():
+	await _transition_event("garden_enter", func():
 		_campaign.route.start_at("EX-CH01-S04")
 		_campaign._sync_route_projection()
 		_campaign._refresh_world()
@@ -82,8 +91,8 @@ func _run() -> void:
 		await _sample("garden_walk", true, false)
 		await _sample("garden_panels", false, true)
 	# Visit the same room again: room/asset reloads must be visible in event timings.
-	_event("garden_rebuild", func(): _campaign._refresh_world())
-	_event("full_cast_enter", func():
+	await _transition_event("garden_rebuild", func(): _campaign._refresh_world())
+	await _transition_event("full_cast_enter", func():
 		_campaign._start_extended("EX-CH05-S02")
 		_campaign.hud.refresh_scene()
 	)
@@ -107,6 +116,33 @@ func _run() -> void:
 		return
 	print("PERF RESULT: PASS (", "CPU OPERATIONS ONLY; rendered frame times NOT ASSESSED" if _cpu_only else "rendered samples recorded", ")")
 	quit()
+
+func _event_heartbeat() -> void:
+	if _event_last == 0:
+		return
+	var now := Time.get_ticks_usec()
+	_event_max = maxf(_event_max, (now - _event_last) / 1000.0)
+	_event_last = now
+	_event_frames += 1
+
+## Includes the first draw after construction; total latency is not a frame time.
+func _transition_event(label: String, action: Callable) -> void:
+	await process_frame
+	LoadTrace.steps.clear()
+	_event_last = Time.get_ticks_usec()
+	_event_max = 0.0
+	_event_frames = 0
+	var start := _event_last
+	await action.call()
+	if is_instance_valid(_campaign):
+		await _campaign.wait_loading()
+	await process_frame
+	await process_frame
+	var elapsed := (Time.get_ticks_usec() - start) / 1000.0
+	_event_last = 0
+	var event := {"event": label, "duration_ms": elapsed, "max_frame_interval_ms": _event_max, "transition_frames": _event_frames, "steps": LoadTrace.steps.duplicate(true)}
+	_events.append(event)
+	print("PERF transition ", JSON.stringify(event))
 
 func _event(label: String, action: Callable) -> void:
 	var start := Time.get_ticks_usec()

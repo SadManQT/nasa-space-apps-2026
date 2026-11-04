@@ -10,11 +10,13 @@ static var _fallback_texture: Texture2D
 static func apply_to_tree(root: Node, characters: bool = false, add_outlines: bool = true) -> int:
 	if root == null:
 		return 0
+	var stamp := LoadTrace.begin()
 	var count := 0
 	if root is MeshInstance3D:
 		count += _apply_mesh(root as MeshInstance3D, characters, add_outlines)
 	for node in root.find_children("*", "MeshInstance3D", true, false):
 		count += _apply_mesh(node as MeshInstance3D, characters, add_outlines)
+	LoadTrace.end("toon:" + String(root.name), stamp)
 	return count
 
 static func apply_to_mesh(mesh_instance: MeshInstance3D, characters: bool = false, add_outlines: bool = true) -> int:
@@ -77,6 +79,7 @@ static func _apply_mesh(mesh_instance: MeshInstance3D, characters: bool, add_out
 static func _ensure_mipmaps(texture: Texture2D) -> void:
 	if not texture is ImageTexture or texture.has_meta(&"mipmaps_ready"):
 		return
+	var stamp := LoadTrace.begin()
 	var image := texture.get_image()
 	if image == null or image.is_compressed():
 		texture.set_meta(&"mipmaps_ready", true)
@@ -85,6 +88,7 @@ static func _ensure_mipmaps(texture: Texture2D) -> void:
 		image.generate_mipmaps()
 		(texture as ImageTexture).set_image(image)
 	texture.set_meta(&"mipmaps_ready", true)
+	LoadTrace.end("mipmap", stamp)
 
 static func _looks_like_hair(mesh_instance: MeshInstance3D, source: StandardMaterial3D) -> bool:
 	var mesh_name := mesh_instance.name.to_lower()

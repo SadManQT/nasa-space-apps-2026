@@ -7,6 +7,82 @@ class_name AssetGeometry
 const CACHE_LIMIT := 16
 static var _scenes: Dictionary = {}
 static var _recent: Array[String] = []
+static var pinned: Array[String] = []
+
+static var _image_extension: GLTFDocumentExtension
+static var _raw_loader: ResourceFormatLoader
+static var _requests: Dictionary = {}
+
+static func request(path: String) -> Error:
+	if is_prepared(path) or _requests.has(path):
+		return OK
+	if not FileAccess.file_exists(path):
+		return ERR_FILE_NOT_FOUND
+	if _raw_loader == null:
+		_image_extension = preload("res://scripts/loading/raw_gltf_images.gd").new()
+		GLTFDocument.register_gltf_document_extension(_image_extension, true)
+		_raw_loader = preload("res://scripts/loading/raw_gltf_loader.gd").new()
+		ResourceLoader.add_resource_format_loader(_raw_loader, true)
+	var key := path + ".lla_gltf"
+	var error := ResourceLoader.load_threaded_request(key, "GLTFState", false, ResourceLoader.CACHE_MODE_IGNORE)
+	if error == OK:
+		_requests[path] = key
+	return error
+
+static func is_prepared(path: String) -> bool:
+	return _scenes.has(path) and _scenes[path].modified == FileAccess.get_modified_time(path)
+
+static func prepare(path: String, tree: SceneTree) -> bool:
+	if is_prepared(path):
+		return true
+	if request(path) != OK:
+		return false
+	var key: String = _requests[path]
+	while ResourceLoader.load_threaded_get_status(key) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		await tree.process_frame
+	if ResourceLoader.load_threaded_get_status(key) != ResourceLoader.THREAD_LOAD_LOADED:
+		_requests.erase(path)
+		return false
+	var state := ResourceLoader.load_threaded_get(key) as GLTFState
+	_requests.erase(path)
+	if state == null:
+		return false
+	if LoadTrace.enabled:
+		LoadTrace.steps.append({"step": "worker_decode:" + path, "ms": state.get_meta("decode_ms")})
+		LoadTrace.steps.append({"step": "worker_mipmaps:" + path, "ms": state.get_meta("mipmaps_ms")})
+	# Node creation and packing always stay on the main thread.
+	await tree.process_frame
+	var stamp := LoadTrace.begin()
+	var document := state.get_meta("raw_document") as GLTFDocument
+	var root := document.generate_scene(state) as Node3D
+	LoadTrace.end("glb_generate_scene:" + path, stamp)
+	if root == null:
+		return false
+	stamp = LoadTrace.begin()
+	var scene := PackedScene.new()
+	var error := scene.pack(root)
+	LoadTrace.end("glb_pack:" + path, stamp)
+	root.free()
+	if error != OK:
+		return false
+	_remember(path, scene)
+	await tree.process_frame
+	return true
+
+static func _remember(path: String, scene: PackedScene) -> void:
+	_scenes[path] = {"modified": FileAccess.get_modified_time(path), "scene": scene}
+	_recent.erase(path)
+	_recent.append(path)
+	while _recent.size() > CACHE_LIMIT:
+		var victim := ""
+		for candidate in _recent:
+			if candidate not in pinned:
+				victim = candidate
+				break
+		if victim.is_empty():
+			victim = _recent[0]
+		_recent.erase(victim)
+		_scenes.erase(victim)
 
 static func load_glb(path: String) -> Node3D:
 	if not FileAccess.file_exists(path):
@@ -20,20 +96,22 @@ static func load_glb(path: String) -> Node3D:
 	var document := GLTFDocument.new()
 	var state := GLTFState.new()
 	state.handle_binary_image = GLTFState.HANDLE_BINARY_EMBED_AS_UNCOMPRESSED
+	var stamp := LoadTrace.begin()
 	var error := document.append_from_file(path, state)
+	LoadTrace.end("glb_decode:" + path, stamp)
 	if error != OK:
 		push_error("GLB import failed (%s): %s" % [error, path])
 		return null
+	stamp = LoadTrace.begin()
 	var root := document.generate_scene(state) as Node3D
+	LoadTrace.end("glb_generate_scene:" + path, stamp)
 	if root == null:
 		return null
+	stamp = LoadTrace.begin()
 	var scene := PackedScene.new()
 	if scene.pack(root) == OK:
-		_scenes[path] = {"modified": modified, "scene": scene}
-		_recent.erase(path)
-		_recent.append(path)
-		while _recent.size() > CACHE_LIMIT:
-			_scenes.erase(_recent.pop_front())
+		_remember(path, scene)
+	LoadTrace.end("glb_pack:" + path, stamp)
 	return root
 
 static func bounds(root: Node3D, posed: bool = false) -> AABB:

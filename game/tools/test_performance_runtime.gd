@@ -15,6 +15,7 @@ func _check(value: bool, label: String) -> void:
 		print("FAIL ", label)
 
 func _run() -> void:
+	await _test_threaded_geometry()
 	for id in ["Kai", "Amara", "Mei", "Rafi", "Ferreira"]:
 		var path := "res://assets/characters/CH_%s/CH_%s.glb" % [id, id]
 		var actor := AssetGeometry.load_glb(path)
@@ -86,5 +87,132 @@ func _run() -> void:
 	_check(stale._baked_measurements(invalid_glb).is_empty(), "stale source hash falls back to analysis")
 	DirAccess.remove_absolute(invalid_glb)
 	DirAccess.remove_absolute(invalid_path)
+	await _test_loading_transitions()
 	print("PERFORMANCE RUNTIME RESULT: %s (%d checks, %d failures)" % ["PASS" if _failures == 0 else "FAIL", _checks, _failures])
 	quit(0 if _failures == 0 else 1)
+
+var _last_tick := 0
+var _longest_tick := 0.0
+var _tick_count := 0
+
+func _heartbeat() -> void:
+	if _last_tick == 0:
+		return
+	var now := Time.get_ticks_usec()
+	_longest_tick = maxf(_longest_tick, (now - _last_tick) / 1000.0)
+	_last_tick = now
+	_tick_count += 1
+
+func _start_monitor() -> void:
+	_last_tick = Time.get_ticks_usec()
+	_longest_tick = 0.0
+	_tick_count = 0
+
+func _stop_monitor(label: String) -> void:
+	_last_tick = 0
+	_check(_tick_count > 1, label + " yields moving loading frames")
+	_check(_longest_tick < 50.0, label + " main-thread interval <50 ms (%.3f)" % _longest_tick)
+
+func _test_threaded_geometry() -> void:
+	process_frame.connect(_heartbeat)
+	for id in ["Kai", "Amara", "Mei", "Rafi", "Ferreira", "PR_MissionTable"]:
+		var path := "res://assets/characters/CH_%s/CH_%s.glb" % [id, id] if not id.begins_with("PR_") else "res://assets/props/%s/%s.glb" % [id, id]
+		_start_monitor()
+		_check(await AssetGeometry.prepare(path, self), id + " threaded raw preparation succeeds")
+		await process_frame
+		_stop_monitor(id + " raw load")
+		var threaded := AssetGeometry.load_glb(path)
+		# Independent original decoder catches omitted mesh-conversion extensions,
+		# transforms, skeletons, face layers or clip tracks, not just cached copies.
+		var document := GLTFDocument.new()
+		var state := GLTFState.new()
+		state.handle_binary_image = GLTFState.HANDLE_BINARY_EMBED_AS_UNCOMPRESSED
+		_check(document.append_from_file(path, state) == OK, id + " original raw decoder")
+		var original := document.generate_scene(state)
+		var meshes := threaded.find_children("*", "MeshInstance3D", true, false)
+		var reference := original.find_children("*", "MeshInstance3D", true, false)
+		_check(meshes.size() == reference.size() and not meshes.is_empty(), id + " every original mesh retained")
+		for index in mini(meshes.size(), reference.size()):
+			var a := meshes[index] as MeshInstance3D
+			var b := reference[index] as MeshInstance3D
+			_check(a.name == b.name and a.transform.is_equal_approx(b.transform), id + " mesh transform " + a.name)
+			_check(a.mesh.get_surface_count() == b.mesh.get_surface_count(), id + " mesh surfaces " + a.name)
+			for surface in a.mesh.get_surface_count():
+				_check(a.mesh.surface_get_arrays(surface).hash() == b.mesh.surface_get_arrays(surface).hash(), id + " exact vertices/indices/weights " + a.name)
+				var source := a.mesh.surface_get_material(surface) as StandardMaterial3D
+				var expected := b.mesh.surface_get_material(surface) as StandardMaterial3D
+				if source != null and expected != null and source.albedo_texture != null:
+					_check(source.albedo_texture.get_size() == expected.albedo_texture.get_size(), id + " full texture resolution " + a.name)
+					_check(source.albedo_texture.get_image().get_data().slice(0, expected.albedo_texture.get_image().get_data().size()) == expected.albedo_texture.get_image().get_data(), id + " unchanged base pixels " + a.name)
+		if not id.begins_with("PR_"):
+			_start_monitor()
+			_check(await LocomotionClips.prewarm(threaded, path, self), id + " gait worker succeeds")
+			await process_frame
+			_stop_monitor(id + " gait worker")
+		threaded.free()
+		original.free()
+
+func _test_loading_transitions() -> void:
+	_check(not await AssetGeometry.prepare("res://missing-perf-model.glb", self), "missing threaded GLB fails without blocking")
+	LoadTrace.enabled = true
+	LoadTrace.steps.clear()
+	var main := preload("res://scenes/main.tscn").instantiate()
+	var slot := OS.get_temp_dir().path_join("lla-perf-runtime-%d.json" % OS.get_process_id())
+	main.save_path = slot
+	main.legacy_save_path = slot + ".legacy"
+	_start_monitor()
+	root.add_child(main)
+	while not main.title_ready:
+		await process_frame
+	_stop_monitor("production title")
+	_start_monitor()
+	await main._launch_campaign({})
+	await process_frame
+	_stop_monitor("production new campaign")
+	var campaign := main._campaign as Chapter1Campaign
+	_check(campaign.incremental_loading and not campaign.loading, "production uses incremental loader and completes")
+	_check(campaign._crew.bodies.size() == 5, "title prepares all five cast actors")
+	for id in campaign._crew.bodies:
+		_check(campaign._crew.bodies[id].character.find_children("*", "MeshInstance3D", true, false).size() > 0, id + " prepared body has visible geometry")
+	while main.preparation._room_busy:
+		await process_frame
+	_evict_room("LOC-03")
+	_start_monitor()
+	campaign.route.start_at("EX-CH01-S04")
+	campaign._sync_route_projection()
+	campaign._refresh_world()
+	await campaign.wait_loading()
+	await process_frame
+	_stop_monitor("production garden entry")
+	_check(campaign._room.room_id == "LOC-03" and campaign._player.character != null, "garden transition keeps room/player ready")
+	_evict_room("LOC-01")
+	_start_monitor()
+	campaign._start_extended("EX-CH05-S02")
+	await campaign.wait_loading()
+	await process_frame
+	_stop_monitor("production full cast entry")
+	_check(campaign._crew.local_ids.size() == 5, "full cast is placed exactly once")
+	# A lamp must advance under the same frame pump used while workers load.
+	var card := LoadingCard.new()
+	root.add_child(card)
+	for frame in 4:
+		await process_frame
+	_check(card.ticks >= 3, "loading lamp keeps processing")
+	card.free()
+	# Finish optional look-ahead before tearing down this test's world.
+	while main.preparation._room_busy:
+		await process_frame
+	var sync_decode := false
+	for step in LoadTrace.steps:
+		sync_decode = sync_decode or String(step.step).begins_with("glb_decode:")
+	_check(not sync_decode, "production transitions never escape to synchronous GLB decode")
+	LoadTrace.enabled = false
+	main.free()
+	for suffix in ["", ".bak", ".tmp"]:
+		if FileAccess.file_exists(slot + suffix):
+			DirAccess.remove_absolute(slot + suffix)
+
+func _evict_room(room_id: String) -> void:
+	for path in LoadPreparation.room_paths(room_id):
+		AssetGeometry._scenes.erase(path)
+		AssetGeometry._recent.erase(path)

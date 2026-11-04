@@ -112,7 +112,7 @@ The team rehearses a quiet roll call. Nobody sprints. The player explains the st
 
 2046-04-11 10:00 UTC · Dry-storage drawer and calibration bench · 6 active minutes
 
-The inventory lamp blinks beside a drawer that seems too small to contain a story. Inside lies a sealed dry packet with two seeds, Bengali lettering and a single initial. Mei reads the word for light. Kai proposes Light One and Light Two. Amara writes two blank identity labels before anyone can make the joke permanent.
+The inventory lamp blinks beside a drawer that seems too small to contain a story. Inside lies a sealed dry packet with two seeds, the word ALO and a single initial, N., in Latin letters. Mei reads the word for light. Kai proposes Light One and Light Two. Amara writes two blank identity labels before anyone can make the joke permanent.
 
 A historical card shows cotton germinating in China's sealed Chang'e-4 experiment in 2019. Mei separates that real seedling from their future flowering goal.
 
@@ -417,7 +417,7 @@ Earth contact ends at its separate shift gate. The crew reads back Ferreira's la
 - **Explain:** Good plans combine specialist observations.
 - **Transfer:** Ask what another person knows before committing a shared plan.
 
-**Exit gate:** Cards combined, Earth-set acknowledged and shifts 3-4 resolved safely.
+**Exit gate:** Cards combined, Earth-link cutoff acknowledged and shifts 3-4 resolved safely.
 
 **Evidence:** Simulated · game-design/06_SCENE_SCRIPTS/CHAPTER_01.md, game-design/03_STORY_TIMELINE.md, game-design/08_PUZZLE_DESIGNS.md
 
@@ -474,7 +474,7 @@ Dark shifts 6-7 through 2046-04-27 06:00 UTC · Garden service line and mission 
 
 The alarm eases, but the wall does not empty itself. Mei studies the garden line while Amara checks which exposure step has actually finished. The player must respect the rule ordering. Water cannot be drained before the exposure it was meant to shield resolves. Afterwards, keeping it forever would be another mistake.
 
-The display shows the same reservoir and plant forecast discussed before Earth-set. The player checks the remaining plan, returns water at a valid gate and commits the final shifts. An animation follows flow back to the garden. Kai watches the battery approach a low value without narrating automatic failure. Exactly zero stored energy is distinct from an unpaid demand causing blackout. The system determines the result.
+The display shows the same reservoir and plant forecast discussed before the Earth-link cutoff. The player checks the remaining plan, returns water at a valid gate and commits the final shifts. An animation follows flow back to the garden. Kai watches the battery approach a low value without narrating automatic failure. Exactly zero stored energy is distinct from an unpaid demand causing blackout. The system determines the result.
 
 Alo lost and Mission stopped receive respectful closures and causal reviews. They never advance this expedition with an unexplained replacement flower. A local checkpoint restores the complete state for a supported retry. On the successful route, Mei records which choices kept the crew safe and which kept the bud alive. The last task before sunrise is not applause. It is confirming that opening the chamber's viewing shutter will be safe.
 

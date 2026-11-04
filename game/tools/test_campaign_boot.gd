@@ -21,11 +21,13 @@ func _run() -> void:
 	_root = scene.instantiate()
 	storage.configure(_root)
 	root.add_child(_root)
-	await process_frame
+	while not _root.title_ready:
+		await process_frame
 	_check(_root.get_node_or_null("TitleLayer") != null, "cold boot creates title layer")
 	_check(_root.get_node_or_null("TitleLayer/MainMenu") != null, "cold boot creates main menu")
 	_check(ProjectSettings.get_setting("application/run/main_scene", "") == "res://scenes/main.tscn", "project points at production boot scene")
 	_check(OS.get_user_data_dir() != storage.original_user_dir and _root.save_path == storage.path, "boot isolates user:// and injects a temporary save slot")
+	await _root.preparation.wait_campaign()
 	_root.free()
 	storage.cleanup()
 	await process_frame

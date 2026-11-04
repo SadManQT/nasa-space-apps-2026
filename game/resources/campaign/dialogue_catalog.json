@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "catalog_kind": "dialogue",
-  "content_revision": "campaign-content-1-3e003a55fa46e38f",
+  "content_revision": "campaign-content-1-f06dab44691238c6",
   "source_hashes": {
-    "story_data_sha256": "02fa2dee03d11d455f67406de28a4da3cee97b1f8f19fda2cee0e6c1e895a272",
+    "story_data_sha256": "2951bc4ed085204626ccf04d5e983375f70c71b98c5f52a99079cd6e2b98abfa",
     "scene_index_sha256": "8c0b8cda424d6bc6abb32ef64fd090c9afca53a0eedf16dee74e84dc4d51a934",
-    "vo_lines_sha256": "d4d1aaae60f13504477462bca5141c4fa3343057760b3f199f82bb8509404a19"
+    "vo_lines_sha256": "a219a240df5d6966520306fbb5ad71e9f304eaecb4c0f83da11200ea1aee3d5e"
   },
   "counts": {
     "dialogue_lines": 385,
@@ -11651,5 +11651,5 @@
     "grants_knowledge": [],
     "note": "Acknowledging a caption is not a physical operation or scene/mission completion."
   },
-  "catalog_hash": "a3410ee72ab2e1e9349d6fdc66d312c15937646d7a25de9f87362d9d558addd2"
+  "catalog_hash": "de73cc9cecc4ef824b9622e2a00951ba734a9452d567b122b87c95f9fc2ff7ab"
 }

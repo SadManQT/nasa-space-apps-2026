@@ -15,6 +15,86 @@ var _skeleton: Skeleton3D
 var _surface_meter: RefCounted
 static var _prepared_cache: Dictionary = {}
 
+## Builds resources on a worker from read-only source animations. No Nodes are
+## passed across the thread boundary; the resulting library is published on main.
+static func prewarm(actor: Node3D, source_path: String, tree: SceneTree) -> bool:
+	var key := "%s:%d" % [source_path, FileAccess.get_modified_time(source_path)]
+	if _prepared_cache.has(key):
+		return true
+	var players := actor.find_children("*", "AnimationPlayer", true, false)
+	if players.is_empty():
+		return false
+	var player := players[0] as AnimationPlayer
+	var sources := {}
+	for id in player.get_animation_list():
+		sources[id] = player.get_animation(id)
+	var job := PreparationJob.new()
+	job.start(_prepare_resources.bind(sources, source_path))
+	var result := await job.finish(tree)
+	if result.is_empty():
+		return false
+	_prepared_cache[key] = result
+	if LoadTrace.enabled:
+		LoadTrace.steps.append({"step": "worker_gait_clips:" + source_path, "ms": result.worker_ms})
+	return true
+
+static func _prepare_resources(sources: Dictionary, source_path: String) -> Dictionary:
+	var start := Time.get_ticks_usec()
+	var builder := LocomotionClips.new()
+	for pair in [["Walk_loop", "WalkBasic_loop"], ["Run_loop", "RunBasic_loop"], ["Sprint_loop", "Run_loop"]]:
+		var chosen: String = pair[0] if sources.has(pair[0]) else pair[1]
+		if pair[0] == "Sprint_loop" and not sources.has(chosen):
+			chosen = builder.gaits[1]
+		if not sources.has(chosen):
+			return {}
+		builder.gaits.append(chosen)
+	var baked := builder._baked_measurements(source_path)
+	if baked.is_empty():
+		# The incremental fallback below performs the original measurement on main.
+		return {}
+	var library := AnimationLibrary.new()
+	for id in sources:
+		var clean := (sources[id] as Animation).duplicate() as Animation
+		builder._strip_root(clean, id)
+		library.add_animation(id, clean)
+	for id in builder.gaits:
+		library.add_animation(id + "_cycle", builder._cycle(library.get_animation(id), baked[id]))
+	return {"library": library, "gaits": builder.gaits, "measurements": baked, "worker_ms": (Time.get_ticks_usec() - start) / 1000.0}
+
+static func prewarm_incremental(actor: Node3D, source_path: String, tree: SceneTree) -> bool:
+	var player := actor.find_children("*", "AnimationPlayer", true, false)[0] as AnimationPlayer
+	var rig := actor.find_children("*", "Skeleton3D", true, false)[0] as Skeleton3D
+	var builder := LocomotionClips.new()
+	builder._player = player
+	builder._skeleton = rig
+	player.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
+	for pair in [["Walk_loop", "WalkBasic_loop"], ["Run_loop", "RunBasic_loop"], ["Sprint_loop", "Run_loop"]]:
+		var chosen: String = pair[0] if player.has_animation(pair[0]) else pair[1]
+		if not player.has_animation(chosen):
+			return false
+		builder.gaits.append(chosen)
+	var library := AnimationLibrary.new()
+	for id in player.get_animation_list():
+		var clean := player.get_animation(id).duplicate() as Animation
+		builder._strip_root(clean, id)
+		library.add_animation(id, clean)
+		await tree.process_frame
+	player.add_animation_library("motion", library)
+	builder._surface_meter = FootSlideScript.new()
+	builder._surface_meter.setup(actor, rig)
+	for id in builder.gaits:
+		var data := await builder._measure_incremental(id, tree)
+		if data.is_empty():
+			return false
+		builder.measurements[id] = data
+		library.add_animation(id + "_cycle", builder._cycle(library.get_animation(id), data))
+		await tree.process_frame
+	var key := "%s:%d" % [source_path, FileAccess.get_modified_time(source_path)]
+	_prepared_cache[key] = {"library": library, "gaits": builder.gaits, "measurements": builder.measurements}
+	player.stop()
+	rig.reset_bone_poses()
+	return true
+
 static func bone(skeleton: Skeleton3D, suffix: String) -> int:
 	for i in skeleton.get_bone_count():
 		var name := skeleton.get_bone_name(i)
@@ -213,3 +293,57 @@ func _value(animation: Animation, track: int, type: Animation.TrackType, time: f
 		Animation.TYPE_ROTATION_3D: return animation.rotation_track_interpolate(track, time)
 		Animation.TYPE_SCALE_3D: return animation.scale_track_interpolate(track, time)
 		_: return animation.position_track_interpolate(track, time)
+
+func _measure_incremental(name: String, tree: SceneTree) -> Dictionary:
+	var animation := _player.get_animation("motion/" + name)
+	var count := maxi(32, int(ceil(animation.length * SAMPLE_RATE)))
+	var dt := animation.length / count
+	var positions: Array[PackedVector3Array] = [PackedVector3Array(), PackedVector3Array()]
+	var min_height: Array[float] = [INF, INF]
+	var surface_speeds: Array[float] = []
+	_surface_meter.reset()
+	_player.play("motion/" + name)
+	for frame in count + 1:
+		if frame % 4 == 0:
+			await tree.process_frame
+		_player.seek(minf(frame * dt, animation.length - 0.00001), true)
+		var surface: Dictionary = _surface_meter.sample(dt)
+		for side in ["left", "right"]:
+			if surface[side].contact_samples > 0:
+				surface_speeds.append(surface[side].slide_speed)
+		for side in 2:
+			var index := bone(_skeleton, "LeftToeBase" if side == 0 else "RightToeBase")
+			var p := _skeleton.global_transform * _skeleton.get_bone_global_pose(index).origin
+			positions[side].append(p)
+			min_height[side] = minf(min_height[side], p.y)
+	var speeds: Array[float] = []
+	for side in 2:
+		for frame in range(1, count):
+			var p := positions[side][frame]
+			var previous := positions[side][frame - 1]
+			var v := (p - previous) / dt
+			# Stance is low and moving backwards; swing and toe-off are excluded.
+			if p.y < min_height[side] + 0.035 and previous.y < min_height[side] + 0.035 and v.z < -0.2:
+				speeds.append(-v.z)
+	if speeds.size() < 4:
+		push_error("No measurable stance in " + name)
+		return {}
+	speeds.sort()
+	var speed: float = speeds[speeds.size() / 2]
+	var surface_mean := 0.0
+	for value in surface_speeds:
+		surface_mean += value / surface_speeds.size()
+	# Prefer the boot surface when it agrees with the joint; reject swing scuffs.
+	if surface_mean > 0.0 and absf(surface_mean - speed) / speed < 0.15:
+		speed = surface_mean
+	var peaks: Array[int] = []
+	for frame in range(2, count - 2):
+		if positions[0][frame].z >= positions[0][frame - 1].z and positions[0][frame].z > positions[0][frame + 1].z:
+			if peaks.is_empty() or (frame - peaks[-1]) * dt > 0.35:
+				peaks.append(frame)
+	var start := float(peaks[0]) * dt if not peaks.is_empty() else 0.0
+	var period := float(peaks[1] - peaks[0]) * dt if peaks.size() > 1 else animation.length
+	var result := {"speed": speed, "surface_speed": surface_mean, "surface_samples": surface_speeds.size(), "period": period, "start": start, "distance": speed * period, "samples": speeds.size(), "min_toe_y": min_height, "source_length": animation.length}
+	print("STRIDE %s speed=%.6f m/s period=%.6f m/cycle=%.6f stance_samples=%d source=%.6f s" % [name, speed, period, speed * period, speeds.size(), animation.length])
+	print("  authored boot surface mean=%.6f m/s contacts=%d" % [surface_mean, surface_speeds.size()])
+	return result

@@ -16,7 +16,7 @@
     {
       "path": "app.compiled.js",
       "bytes": 395953,
-      "sha256": "64cd4170586f8a87dc070e81ca0a5227f0c2fe6fa34a2867bc194b6ff4fe15c7"
+      "sha256": "2c0079f66127d3a7662edb756c9fef922a162de670a6c78e97e88d6c158c69fb"
     },
     {
       "path": "app.js",
@@ -71,7 +71,7 @@
     {
       "path": "content/learning-and-continuity.json",
       "bytes": 44237,
-      "sha256": "3855307a8b74e295061dacfcd864c486ca41c098afe34ea7bebab0dfb91f9b65"
+      "sha256": "9eaab66e01fc6557cda1c65599fe5453df3db1ec9a183d2141753eec4ffb8485"
     },
     {
       "path": "content/learning-audit.md",
@@ -96,7 +96,7 @@
     {
       "path": "index.html",
       "bytes": 430495,
-      "sha256": "f3895ca6bfb5c2039e6cd5b4e25635f43d6d9a41293db494e35550d48d5bb1c5"
+      "sha256": "52fca8b9d755025f12d7d538c80daf4d94425d3382f2e6d14c47c34009bd9ca7"
     },
     {
       "path": "package_story.py",
@@ -111,12 +111,12 @@
     {
       "path": "story-data.json",
       "bytes": 449364,
-      "sha256": "02fa2dee03d11d455f67406de28a4da3cee97b1f8f19fda2cee0e6c1e895a272"
+      "sha256": "2951bc4ed085204626ccf04d5e983375f70c71b98c5f52a99079cd6e2b98abfa"
     },
     {
       "path": "STORY_FULL.md",
       "bytes": 283316,
-      "sha256": "218e2d8c2ce8149f1255ac831525efdf78cfdf3a94cbc1ad0065493da89cb74d"
+      "sha256": "9bc890cde0ed0a0edda94c29ded9f70a83e5b8eea8018352d0763a232d884908"
     },
     {
       "path": "styles.css",

@@ -51,8 +51,8 @@ func setup(value: Chapter1Campaign) -> void:
 	_refresh_query()
 	refresh_scene({})
 
-func refresh_scene(_result: Dictionary = {}) -> void:
-	if runtime == null:
+func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> void:
+	if runtime == null or (runtime.loading and not during_loading):
 		return
 	var scene := runtime.current_scene_data()
 	var next_scene := String(scene.get("id", ""))

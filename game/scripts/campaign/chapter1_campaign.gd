@@ -17,6 +17,15 @@ const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 @export var initial_snapshot: Dictionary = {}
 @export var initial_accessibility: Dictionary = {}
 
+# Direct scene fixtures may still use the synchronous API. Production boot
+# always enables incremental loading and supplies the title's prepared resources.
+var incremental_loading := false
+var preparation: LoadPreparation
+var prepared_content: Dictionary = {}
+var loading := false
+var _transition_card: LoadingCard
+var _lookahead_room := ""
+
 var _dialogue: CampaignDialogueService
 var content: Dictionary = {}
 var director: CampaignDirector
@@ -33,12 +42,26 @@ var _exit_without_save_armed := false
 var save_path: String = SaveScript.DEFAULT_PATH
 
 func _ready() -> void:
-	content = ContentScript.load_full()
+	if incremental_loading:
+		loading = true
+		_ready_incremental()
+		return
+	_start_session()
+	if _startup_error.is_empty():
+		_refresh_world()
+		_build_hud()
+		_save_campaign()
+
+func _start_session() -> void:
+	var stamp := LoadTrace.begin()
+	content = prepared_content if not prepared_content.is_empty() else ContentScript.load_full()
 	_dialogue = CampaignDialogueService.new(content)
-	var validation := ContentScript.validate_full(content)
+	var validation := preparation.validation if preparation != null and not prepared_content.is_empty() else ContentScript.validate_full(content)
 	if not bool(validation.get("valid", false)):
 		_fail_startup("Campaign content could not be verified.")
 		return
+	LoadTrace.end("content_validation", stamp)
+	stamp = LoadTrace.begin()
 	save_service = SaveScript.new()
 	save_service.session_validator = restore_session
 	if initial_snapshot.is_empty():
@@ -60,9 +83,37 @@ func _ready() -> void:
 		presentation["accessibility"][key] = initial_accessibility[key]
 	director.restore_snapshot(presentation)
 	_sync_route_projection()
-	_refresh_world()
-	_build_hud()
-	_save_campaign()
+	LoadTrace.end("route_profile", stamp)
+
+func _ready_incremental() -> void:
+	await get_tree().process_frame
+	if preparation == null:
+		preparation = LoadPreparation.new()
+		add_child(preparation)
+		await preparation.prepare_campaign()
+		if not preparation.failed.is_empty():
+			_fail_startup(preparation.failed)
+			loading = false
+			return
+		prepared_content = preparation.content
+		_crew = preparation.crew
+		_crew.reparent(self)
+	_start_session()
+	if _startup_error.is_empty():
+		await _refresh_world_incremental()
+		var stamp := LoadTrace.begin()
+		_build_hud()
+		LoadTrace.end("campaign_ui", stamp)
+		await get_tree().process_frame
+		_save_campaign()
+	loading = false
+	if hud != null:
+		hud.refresh_scene()
+	_prefetch_next_room()
+
+func wait_loading() -> void:
+	while loading:
+		await get_tree().process_frame
 
 ## Rebuilds a director and its chapter route from a saved snapshot in fresh
 ## objects, without touching any live session. SaveService uses it to judge
@@ -147,7 +198,7 @@ func forecast_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 	return {"accepted": true, "target_id": target_id, "input_revision": state.state_revision, "query": projected.director.query(), "reason": result.get("reason", "Read-only forecast")}
 
 func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
-	if not _startup_error.is_empty() or route == null:
+	if loading or not _startup_error.is_empty() or route == null:
 		return {"accepted": false, "reason": "The expedition is unavailable."}
 	if is_chapter_complete():
 		return {"accepted": false, "reason": "Chapter 1 is complete. Return to title to keep this checkpoint."}
@@ -250,6 +301,8 @@ func interact_nearby() -> Dictionary:
 	return result
 
 func _physics_process(_delta: float) -> void:
+	if loading:
+		return
 	if _world_prompt == null or _room == null:
 		return
 	var selected := nearby_target()
@@ -300,6 +353,8 @@ func acknowledge_dialogue(line_id: String) -> Dictionary:
 	return result
 
 func advance_scene() -> Dictionary:
+	if loading:
+		return {"accepted": false, "reason": "Preparing Aurora."}
 	var result: Dictionary
 	if is_chapter_complete():
 		result = _transition_after_chapter()
@@ -453,7 +508,7 @@ func _input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _ui_paused or _player == null:
+	if loading or _ui_paused or _player == null:
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -464,24 +519,42 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _refresh_world() -> void:
+	if incremental_loading:
+		if not loading and preparation.room_ready(route.current_room_id()):
+			_refresh_world_now()
+			_prefetch_next_room()
+		elif not loading:
+			loading = true
+			_transition_card = LoadingCard.new()
+			add_child(_transition_card)
+			_rebuild_transition()
+		return
+	_refresh_world_now()
+
+func _refresh_world_now(incremental_assets: bool = false) -> void:
+	var stamp := LoadTrace.begin()
+	if incremental_loading:
+		preparation.activate_room(route.current_room_id())
 	if _room != null and is_instance_valid(_room):
 		remove_child(_room)
 		_room.queue_free()
 		_room = null
-	var room_path: String = {
-		"LOC-01": "res://scenes/campaign/rooms/commons.tscn",
-		"LOC-02": "res://scenes/campaign/rooms/service_rooms.tscn",
-		"LOC-03": "res://scenes/campaign/rooms/garden.tscn",
-		"LOC-04": "res://scenes/campaign/rooms/safe_room.tscn",
-		"LOC-06": "res://scenes/campaign/rooms/exterior.tscn",
-	}.get(route.current_room_id(), "")
+	var room_path: String = LoadPreparation.ROOM_SCENES.get(route.current_room_id(), "")
 	if room_path.is_empty():
 		_room = CampaignRoom.new()
 		_room.room_id = route.current_room_id()
 	else:
-		_room = load(room_path).instantiate() as CampaignRoom
-	_room.load_approved_assets = true
+		var scene := preparation.resources[room_path] as PackedScene if incremental_loading else load(room_path) as PackedScene
+		_room = scene.instantiate() as CampaignRoom
+	_room.load_approved_assets = not incremental_assets
 	add_child(_room)
+	if incremental_assets:
+		_room.load_approved_assets = true
+	if not incremental_assets:
+		_place_crew()
+	LoadTrace.end("room_rebuild", stamp)
+
+func _place_crew() -> void:
 	var anchors: Dictionary = RoomContract.anchors(route.current_room_id())
 	var anchor_id: String = {"LOC-01": "commons_player", "LOC-02": "service_player", "LOC-03": "garden_player", "LOC-04": "safe_player", "LOC-06": "exterior_player"}.get(route.current_room_id(), "")
 	var player_anchor: Array = anchors.get(anchor_id, [])
@@ -500,6 +573,55 @@ func _refresh_world() -> void:
 	_crew.set_paused(_ui_paused)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_sync_world_boundaries()
+
+func _refresh_world_incremental() -> void:
+	await get_tree().process_frame
+	await preparation.prepare_scene_media(route.current_scene_id())
+	if not await preparation.prepare_room(route.current_room_id()):
+		_fail_startup(preparation.failed)
+		return
+	_refresh_world_now(true)
+	await get_tree().process_frame
+	await _room.load_assets_incremental()
+	_place_crew()
+	await get_tree().process_frame
+	# First real room draw (including its lighting/layout variants) is covered.
+	if DisplayServer.get_name() != "headless":
+		await RenderingServer.frame_post_draw
+
+func _rebuild_transition() -> void:
+	var was_paused := _ui_paused
+	set_ui_paused(true)
+	await _refresh_world_incremental()
+	set_ui_paused(was_paused)
+	if hud != null:
+		hud.refresh_scene({}, true)
+	await get_tree().process_frame
+	_transition_card.queue_free()
+	_transition_card = null
+	loading = false
+	_prefetch_next_room()
+
+## Scene order is data-owned. Start the next room while the current scene is
+## playable, so walking to its exit overlaps decoding instead of waiting for it.
+func _prefetch_next_room() -> void:
+	if preparation == null or loading or preparation.preparing:
+		return
+	var scenes: Array = content.get("scenes", [])
+	for index in scenes.size() - 1:
+		if scenes[index].get("id", "") == route.current_scene_id():
+			var next_id := String(scenes[index + 1].get("id", ""))
+			var roster := CompanionRosterScript.scene_roster(next_id)
+			var actor := CompanionRosterScript.playable_actor(next_id)
+			var next_room := String(roster.get(actor, {}).get("physical_location_id", ""))
+			if not next_room.is_empty() and next_room != _lookahead_room:
+				_lookahead_room = next_room
+				_prefetch_room_and_media(next_room, next_id)
+			return
+
+func _prefetch_room_and_media(room_id: String, scene_id: String) -> void:
+	await preparation.prepare_room(room_id)
+	await preparation.prepare_scene_media(scene_id)
 
 func _sync_world_boundaries() -> void:
 	if _room == null:

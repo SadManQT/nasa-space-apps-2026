@@ -38,7 +38,10 @@ func _run() -> void:
 	_check(_level.title_button.focus_mode == Control.FOCUS_ALL and _level.title_button.pressed.is_connected(_level.return_to_title), "B19 showcase return action is keyboard accessible")
 	_level.title_button.pressed.emit()
 	await scene_changed
+	while current_scene != null and not current_scene.title_ready:
+		await process_frame
 	_check(current_scene != null and current_scene.get_node_or_null("TitleLayer/MainMenu") != null, "B19 showcase return action restores the production title")
+	await current_scene.preparation.wait_campaign()
 	current_scene.free()
 	storage.cleanup()
 	await process_frame

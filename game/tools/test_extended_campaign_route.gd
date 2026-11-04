@@ -15,7 +15,7 @@ func _init() -> void:
 
 func _run() -> void:
 	var director := DirectorScript.new()
-	director.new_campaign("campaign-content-1-3e003a55fa46e38f")
+	director.new_campaign("campaign-content-1-f06dab44691238c6")
 	var handoff: Dictionary = director.snapshot()
 	handoff["chapter1_ready"] = true
 	director.restore_snapshot(handoff)
