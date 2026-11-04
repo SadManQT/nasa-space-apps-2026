@@ -8,7 +8,7 @@ Start with [PRODUCTION_HANDBOOK.md](../PRODUCTION_HANDBOOK.md). Finished assets 
 | [ART_BIBLE.md](ART_BIBLE.md) | Look, palette, science rules, budgets, naming |
 | [AI_PROMPT_LOG.md](AI_PROMPT_LOG.md) | Every AI generation (required for the submission) |
 | [manifest/](manifest/) | Specs that drive the pipeline: `characters.csv`, `tripo_props_batch1.csv`, `reuse_props.csv`, `planned_assets.csv`, `scene_index.csv` (all 96 final scenes), `ch01_assets.csv` |
-| [concept/](concept/) | Approved concept art only: style frames, cast turnarounds (+ split views), plant and prop concepts |
+| [concept/](concept/) | Concept art: style frames, cast turnarounds (+ split views), plant and prop concepts. **Current cast sheets are `turnarounds_v8/` only**; `turnarounds/`, `turnarounds_v7/`, `cast_v6/` and `style_lock/` are superseded earlier passes, kept because the AI prompt log, the asset registry and older pipeline notes cite them |
 | [audio/](audio/) | `vo_lines.csv` (all 385 dialogue lines, speaker, delivery, target file), `music_cues.csv` (CUE-01–12 mapped to scenes), `sfx_list.csv` (effects with captions) |
 | [cutscenes/](cutscenes/) | `shots.csv`: 23 shots for 17 cutscenes with ready Seedance prompts, start-frame assets, voice lines and music |
 | [review/](review/) | `asset_verification.md` (automated gate), `visual_review.md` (human/AI visual check), contact sheets |

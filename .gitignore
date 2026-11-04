@@ -50,6 +50,19 @@ project.local.yaml
 production/session-logs/
 production/session-state/
 docs/consistency-failures.md
+# The Game Studios install itself stays local on Sadman's Mac (M0-19, 4 Nov): not part of the submission
+.claude/
+.agents/
+.codex/
+/design/
+/project.yaml
+docs/CLAUDE.md
+docs/COLLABORATIVE-DESIGN-PRINCIPLE.md
+docs/WORKFLOW-GUIDE.md
+docs/architecture/
+docs/engine-reference/
+docs/registry/
+docs/skill-flow-diagrams.md
 
 # Reproducible release candidates and web staging (M1-20)
 /builds/
