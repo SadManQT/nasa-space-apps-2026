@@ -683,7 +683,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Play CS-01, CS-02 and CS-03 inside the campaign",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M0-02"
@@ -698,7 +698,7 @@
     "execution/CUTSCENE_CS01.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "commit feat: campaign plays media; run_tests 31/31; screenshots production/qa/evidence/M1-10_*.png; perf render_m110_m111.json",
    "updated": "2026-11-05",
    "prompt": "Problem: the three finished cutscenes only play in the developer showcase; CampaignCutsceneRuntime is used only by a test.\nGoal: CS-01 Arrival at EX-CH01-S01, CS-02 at EX-CH01-S09, CS-03 at EX-CH01-S12 play in the campaign from presentation_media.json,\nwith captions, skip (hold to skip, skipping never completes a puzzle predicate), pause, and the caption-only fallback when a file is absent.\nDo: wire the runtime per execution/SYS_17_AUDIO_CINEMATIC_RUNTIME.md and execution/CUTSCENE_CS01..03.md; no new video files.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add a test that the three scenes trigger their cutscene once and resume play; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
    "reserved_for": "Sadman"
@@ -709,7 +709,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Audio runtime in the campaign: voice with captions, music, effects",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M0-02"
@@ -725,7 +725,7 @@
     "execution/AUDIO_FULL_CAMPAIGN_MIX.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "commit feat: campaign plays media; run_tests 31/31; screenshots production/qa/evidence/M1-11_*.png; perf render_m110_m111.json",
    "updated": "2026-11-05",
    "prompt": "Goal: when files exist under game/assets/audio/{voice,music,sfx}/ (paths in production/audio/*.csv), they play in the campaign; when they\ndon't, captions-only stays exactly as today.\nDo: per execution/SYS_17_AUDIO_CINEMATIC_RUNTIME.md and execution/AUDIO_FULL_CAMPAIGN_MIX.md: buses (Master, Voice, Music, SFX, UI),\nvoice lines tied to dialogue acknowledgement with captions in sync, music cues by scene from music_cues.csv with ducking under voice,\nlooping ambience/SFX by scene from sfx_list.csv, settings sliders, .ogg import settings (loop flags). Update presentation_media.json\nflags from the files actually present, never by hand.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. a test with two dummy .ogg files proves voice+caption sync and music ducking.",
    "reserved_for": "Sadman"
