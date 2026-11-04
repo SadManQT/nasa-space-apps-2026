@@ -48,6 +48,7 @@ When an older design doc disagrees with the latest story or with section 3, **th
 
 | Date | Decision |
 |---|---|
+| 4 Nov 2026 (Tanvir, M1-33) | **Exterior option A approved:** retain the approved anime cast with cel shading and fine outlines against detailed grey lunar exteriors; toon interiors remain unchanged. Approval is of the character treatment shown in `production/concept/lookdev_exterior_v1/00_Compare_A_B.png`. Surveyed terrain, dated lighting, Earth visibility and runtime performance still require M1-34/M1-36 verification. |
 | 4 Nov 2026 (Atik) | **P-05 keeps the final story dates.** Its four 7.2-hour-equivalent investigation phases are an abstract resource budget; they do not add elapsed hours to scenario time. Dated scene cards still own its story clock. |
 | 25 Oct 2026 | The Dhaka Local Lead gave permission to build production assets and cutscenes before the hackathon. Target: full production, deploy-ready, high-end. Keep that permission in writing for the submission. |
 | 25 Oct 2026 | Engine: **Godot 4.7, Forward+ renderer**, GLB assets. Keep LODs so a Compatibility (low-spec) build still works. |
@@ -301,6 +302,8 @@ Rules from the cinematic guide and the final story: cutscenes are short, embedde
 Optional opening (from the gameplay entry flow): mustard fields to the Moon chamber, 20–30 s, with no claim that Alo existed before the story.
 
 ## 10. Status (latest first)
+
+**4 Nov 2026 — exterior option A approved (M1-33, Tanvir):** Tanvir explicitly chose “A — cel shading and outlines”. The decision is locked in §3 and the Art Bible. M1-33 is complete; M1-35's art-choice blocker is cleared and its remaining surface finalization/review is ready for Tanvir/Codex. This decision installs no new runtime shaders or terrain.
 
 **4 Nov 2026 — exterior A/B studies ready (M1-32, Tanvir/Codex):** four intended settings (Aurora, relay road, cold-trap shelf and Malapert) are rendered from existing assets, with a matched A/B comparison of Kai and Amara safely inside a sealed observation bay. [Comparison and frames](production/concept/lookdev_exterior_v1/README.md) propose cel shading/outlines versus softer character shading; **M1-33's human decision is pending**, so no locked art choice changes. All terrain is visibly labelled as a composition proxy pending M1-34; Earth is omitted until viewing geometry is verified. Source hashes confirm 24 input GLBs unchanged; full Godot runner **30/30 suites passed**. No paid credits or game assets changed. Review: [M1-32.md](production/review/M1-32.md).
 

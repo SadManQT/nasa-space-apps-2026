@@ -504,16 +504,16 @@
    "reserved_for": "Tanvir"
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Tanvir/human",
    "deps": [
     "M1-32"
    ],
    "paths": [],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "Tanvir explicitly approved A — cel shading and outlines in the M1-33 question. Recorded in PRODUCTION_HANDBOOK.md section 3 and production/ART_BIBLE.md. Comparison caption and provenance updated. No runtime shader or terrain approval implied.",
+   "updated": "2026-11-04",
    "id": "M1-33",
    "milestone": "M1",
    "priority": "P0",
@@ -547,8 +547,8 @@
    "prompt": "Goal: every exterior is the real Moon. Download the NASA PDS LOLA south-pole DEM (e.g. LDEM 80S at 20 m/px, plus the 5 m/px Shackleton\ntiles where available; cite the product ID, DOI and URL in a provenance JSON next to the fixture), crop the areas the story uses (Aurora at the\nShackleton–de Gerlache connecting ridge, the cold trap for CH04, the 120 km relay road and Malapert summit for CH08), and convert them to\n16-bit heightmaps with the correct metres-per-pixel. Script it (production/tools/make_terrain.py, stdlib + numpy if installed) so it is\nreproducible. In Blender: add a detail layer (small craters and boulders by the size-frequency the ART_BIBLE allows; no invented mountains),\nbake normal/AO, and export Godot-ready terrain tiles with LODs; set the Sun azimuth and elevation for each story date from an ephemeris or\nthe LOLA illumination products, not by eye. Write the 'made from NASA data' credit line for the in-game Data Card and the video.\nAcceptance: heightmaps + provenance in the repo (LFS for binaries), tiles import in Godot, a side-by-side image of the LOLA hillshade and the\nin-game view in production/review/."
   },
   {
-   "status": "blocked",
-   "owner": "Tanvir/codex",
+   "status": "todo",
+   "owner": "",
    "deps": [],
    "paths": [
     "game/assets/environment/terrain/",
@@ -556,8 +556,8 @@
     "production/ASSET_REGISTRY.csv"
    ],
    "refs": [],
-   "note": "Model and decimate the rock shapes now; final materials follow the art direction chosen in M1-33. Tanvir explicitly approved reassignment from the reserved Muse lane to Tanvir/Codex on 4 Nov 2026; Blender sculpting uses no paid generation credits.",
-   "evidence": "Geometry delivered: 16 rocks x 3 LODs; 3 provisional regolith surfaces; slope-aware scatter; 51 registry rows; gate 100 assets/0 failures. run_tests.sh 29/30 initially, sole showcase discovery failure fixed and recheck 1/1 (627 checks); lunar 89 headless/91 native. production/review/M1-35.md and M1-35 contact/native PNGs. No paid credits. Final materials await M1-33.",
+   "note": "Model and decimate the rock shapes now; final materials follow the art direction chosen in M1-33. Tanvir explicitly approved reassignment from the reserved Muse lane to Tanvir/Codex on 4 Nov 2026; Blender sculpting uses no paid generation credits. M1-33 resolved on 4 Nov: Tanvir approved option A. Resume the remaining surface pass; keep already verified geometry.",
+   "evidence": "Geometry delivered: 16 rocks x 3 LODs; 3 provisional regolith surfaces; slope-aware scatter; 51 registry rows; gate 100 assets/0 failures. run_tests.sh 29/30 initially, sole showcase discovery failure fixed and recheck 1/1 (627 checks); lunar 89 headless/91 native. production/review/M1-35.md and M1-35 contact/native PNGs. No paid credits. M1-33 resolved: Tanvir approved A on 4 Nov 2026. Remaining surface finalization/review ready.",
    "updated": "2026-11-04",
    "id": "M1-35",
    "milestone": "M1",
@@ -565,8 +565,7 @@
    "tool": "codex",
    "title": "Lunar rock, boulder and regolith kit",
    "prompt": "Make 12–20 rocks and boulders (from pebbles to 10 m) and 3 regolith ground materials (fresh, compacted by the rover, disturbed by boots):\nTripo/Meshy from photos-of-reference style sheets or sculpted in Blender, decimated with LODs, materials matching the approved exterior\nlook; a scatter setup (density by slope) Godot can use. Angular, unweathered rocks (no wind erosion on the Moon), grey regolith, no\nvegetation, no fog. This step spends AI credits: check the balance first, never repeat a generation call to 'retry', log every generation in production/AI_PROMPT_LOG.md, and block the task if credits run out. Never buy anything. Acceptance: gate passes; contact sheet in production/review/; registry rows added.",
-   "reserved_for": "Tanvir",
-   "blocker": "Geometry and provisional materials verified. Final surfaces require M1-33 exterior art choice (M1-32 comparison still pending); resume after that human decision. Terrain integration remains M1-36."
+   "reserved_for": "Tanvir"
   },
   {
    "status": "todo",

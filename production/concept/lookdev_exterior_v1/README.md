@@ -1,15 +1,15 @@
 # Exterior art-direction comparison — M1-32
 
-Prepared for Tanvir, 4 November 2026. **M1-33's human decision is pending.**
+Prepared for Tanvir, 4 November 2026. **Tanvir approved option A for M1-33.**
 The current approved anime cast and toon interiors remain unchanged.
 
 Start with [the A/B decision sheet](00_Compare_A_B.png). It shows the same
 observation-bay frame and matching character details in two treatments:
 
-| Option | Treatment | Decision being considered |
+| Option | Treatment | Decision |
 |---|---|---|
-| A | Stepped cel shading and fine silhouette outlines | Keep the approved anime direction when detailed exteriors surround the cast. |
-| B | Softer diffuse/material shading, without the added silhouette outline | Permit a softer exterior character treatment while retaining the same models, faces, clothes and proportions. |
+| A | Stepped cel shading and fine silhouette outlines | Approved by Tanvir: keep the anime direction when detailed exteriors surround the cast. |
+| B | Softer diffuse/material shading, without the added silhouette outline | Retained as the reviewed alternative; not selected. |
 
 The cast poses, camera, terrain, imported assets and lights are identical between
 A and B. Kai and Amara wear their approved indoor duty coveralls **inside a
@@ -39,8 +39,8 @@ replaced. The cold-trap frame uses only two rover headlights: no Sun, ambient
 sky light, fog, atmospheric cone or dust cloud. No external characters appear
 without an approved EVA outfit.
 
-The recommendation is **A**, for continuity with the approved cast and interiors.
-This is an art recommendation, not a measured frame-rate claim.
+Tanvir selected **A — cel shading and outlines**. The decision is recorded in
+handbook §3 and the Art Bible. This is an art choice, not a measured frame-rate claim.
 
 ## What remains provisional
 
@@ -55,8 +55,8 @@ treatments; it does not certify a pixel-identical Godot implementation.
 Approval chooses an art direction. It does not approve invented mountains,
 station placement, route gradients, Earth visibility, mission-date illumination,
 new costumes or a hardware performance target. M1-34/M1-36 still supply and
-verify those production pieces. M1-35's rock surfaces can be finalized after
-M1-33, but its geometry remains the already verified local kit.
+verify those production pieces. M1-35's remaining surface finalization/review is
+now ready under approved A; its geometry remains the already verified local kit.
 
 ## Sources and reproduction
 

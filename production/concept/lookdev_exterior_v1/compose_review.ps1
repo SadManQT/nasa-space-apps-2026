@@ -49,7 +49,7 @@ for ($i=0; $i -lt 2; $i++) {
 }
 $g.DrawString('Full frame above / matching character detail below', $smallFont, $muted, 28, 648)
 $g.DrawString('Same approved models, pose, camera, lights and terrain. Only character shading / outlines change.', $font, $white, 28, 1655)
-$g.DrawString('M1-33 decision pending. Landscape is a composition proxy; this is not a performance or surveyed-terrain preview.', $smallFont, $muted, 28, 1694)
+$g.DrawString('M1-33: Tanvir approved A on 4 Nov 2026. Terrain remains a composition proxy; no performance claim.', $smallFont, $muted, 28, 1694)
 $sheet.Save((Join-Path $PSScriptRoot '00_Compare_A_B.png'), [System.Drawing.Imaging.ImageFormat]::Png)
 $g.Dispose()
 $sheet.Dispose()

@@ -1,6 +1,6 @@
 {
   "task": "M1-32",
-  "decision": "pending human M1-33",
+  "decision": "Option A approved by Tanvir on 2026-11-04: cel shading and outlines",
   "generator_sha256": "fc930f881e4667dc4433b32598f7fe634ab1d860bbb0d2b35c12909ee0b9daae",
   "frames": [
     {
@@ -252,8 +252,8 @@
   ],
   "outputs": {
     "00_Compare_A_B.png": {
-      "sha256": "a1c80bd7c1af891f12e22ee348159f8bdf9ac04e72233fb6c1e79ec21e9d1e07",
-      "bytes": 2588303,
+      "sha256": "f63452d9aac3b7751affc8eccc4177ce7314a08c5d0a60f719df22fc41854405",
+      "bytes": 2587910,
       "size": [
         1920,
         1730

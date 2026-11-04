@@ -11,7 +11,7 @@ Anime cel-shaded style A is locked (27 Oct 2026; realistic was dropped the same 
 
 **Reference blend:** the picked toon/anime style for people + Death Stranding's camera and grounded feel + Artemis/ISS hardware photography.
 
-**Exterior comparison prepared, 4 Nov 2026 (M1-32, Tanvir/Codex):** [lookdev_exterior_v1](concept/lookdev_exterior_v1/README.md) contains four setting studies and an A/B comparison of the approved cast: A retains cel shading and fine outlines; B proposes softer material shading. The cast stands inside a sealed pressurized observation bay in both comparison frames. M1-33's human choice is pending; neither option changes the locked style yet. The terrain is explicitly a procedural composition proxy pending M1-34's LOLA data, and the 1.5-degree study Sun is not dated ephemeris evidence. Earth remains omitted pending verified viewing geometry. These renders approve no new geography, costumes, runtime shader or performance target.
+**Exterior option A approved, 4 Nov 2026 (M1-33, Tanvir):** retain the approved anime cast with **cel shading and fine outlines** against detailed grey lunar exteriors. Toon interiors remain unchanged. [lookdev_exterior_v1](concept/lookdev_exterior_v1/README.md) records the approved comparison; its cast stands inside a sealed pressurized observation bay. The terrain is explicitly a procedural composition proxy pending M1-34's LOLA data, and the 1.5-degree study Sun is not dated ephemeris evidence. Earth remains omitted pending verified viewing geometry. Approval selects the character treatment; it approves no new geography, costumes, runtime shader implementation or performance target.
 
 ## 2. Non-negotiable science rules (reject any asset that breaks one)
 
