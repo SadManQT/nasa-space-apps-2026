@@ -2,6 +2,8 @@ extends Node3D
 class_name Chapter1Campaign
 
 signal exit_requested
+## A cutscene closed (watched to the end, skipped, or its text card dismissed).
+signal cutscene_closed(result: Dictionary)
 
 const ContentScript = preload("res://scripts/content/content_loader.gd")
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
@@ -11,6 +13,8 @@ const Chapter2RouteScript = preload("res://scripts/missions/chapter2_route.gd")
 const ExtendedRouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const RoomContract = preload("res://scripts/world/room_contract.gd")
 const CompanionRosterScript = preload("res://scripts/companions/companion_roster.gd")
+const CutsceneRuntimeScript = preload("res://scripts/cutscenes/cutscene_runtime.gd")
+const AudioRuntimeScript = preload("res://scripts/audio/audio_runtime.gd")
 const HUDScene: PackedScene = preload("res://scenes/ui/chapter1_campaign_hud.tscn")
 const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 
@@ -40,6 +44,11 @@ var _world_prompt: Label
 var _ui_paused := false
 var _exit_without_save_armed := false
 var save_path: String = SaveScript.DEFAULT_PATH
+var cutscenes: CampaignCutsceneRuntime
+var cutscene_player: CampaignCutscenePlayer
+var audio: CampaignAudioDirector
+var _cutscene_queue: Array = []
+var _played_cutscenes := {}
 
 func _ready() -> void:
 	if incremental_loading:
@@ -84,6 +93,22 @@ func _start_session() -> void:
 	director.restore_snapshot(presentation)
 	_sync_route_projection()
 	LoadTrace.end("route_profile", stamp)
+	_build_media()
+
+## Cutscene and audio presentation. Both share the session's dialogue service
+## and media manifest; neither can change gameplay state.
+func _build_media() -> void:
+	var metadata := AudioRuntimeScript.read_metadata()
+	cutscenes = CutsceneRuntimeScript.new(content, metadata, _dialogue)
+	cutscene_player = CampaignCutscenePlayer.new()
+	cutscene_player.name = "Cutscene"
+	cutscene_player.skip_hold_s = cutscenes.skip_hold_seconds()
+	cutscene_player.closed.connect(_on_cutscene_closed)
+	add_child(cutscene_player)
+	audio = CampaignAudioDirector.new()
+	audio.name = "Audio"
+	audio.setup(AudioRuntimeScript.new(content, metadata, _dialogue), preparation)
+	add_child(audio)
 
 func _ready_incremental() -> void:
 	await get_tree().process_frame
@@ -107,6 +132,7 @@ func _ready_incremental() -> void:
 		await get_tree().process_frame
 		_save_campaign()
 	loading = false
+	_on_scene_ready()
 	if hud != null:
 		hud.refresh_scene()
 	_prefetch_next_room()
@@ -226,6 +252,12 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 			if result.result.has(key):
 				result[key] = result.result[key]
 	_sync_world_boundaries()
+	if audio != null and not bool(result.get("duplicate", false)):
+		var label := ""
+		for spec in targets_for_current_scene():
+			if String(spec.get("target_id", "")) == target_id:
+				label = String(spec.get("focus_label", ""))
+		audio.play_operation(target_id, label, bool(result.get("accepted", false)))
 	if _crew != null:
 		_crew.react(result, bool(director.snapshot().get("accessibility", {}).get("reduced_motion", false)))
 	if hud != null:
@@ -336,7 +368,9 @@ func set_ui_paused(value: bool) -> void:
 	if route != null:
 		route.pause("reading_panel") if value else route.resume()
 	if _crew != null:
-		_crew.set_paused(value)
+		_crew.set_paused(value or is_cutscene_active())
+	if audio != null:
+		audio.set_paused(value)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func retry_checkpoint() -> Dictionary:
@@ -373,6 +407,10 @@ func advance_scene() -> Dictionary:
 	elif bool(result.get("accepted", false)):
 		_sync_route_projection()
 		_refresh_world()
+	if bool(result.get("accepted", false)) and bool(result.get("campaign_complete", false)):
+		_queue_cutscenes("campaign_complete")
+		if audio != null:
+			audio.play_credits()
 	if hud != null:
 		hud.refresh_scene(result)
 	_save_campaign()
@@ -443,6 +481,8 @@ func handle_ui_command(command: Dictionary, preview_only: bool = false) -> Dicti
 		next["accessibility"] = payload.duplicate(true)
 		var restored := director.restore_snapshot(next)
 		_save_campaign()
+		if audio != null:
+			audio.captions_enabled = bool(payload.get("captions", true))
 		if hud != null:
 			hud.apply_accessibility()
 		return restored
@@ -545,6 +585,7 @@ func _refresh_world() -> void:
 	if incremental_loading:
 		if not loading and preparation.room_ready(route.current_room_id()):
 			_refresh_world_now()
+			_on_scene_ready()
 			_prefetch_next_room()
 		elif not loading:
 			loading = true
@@ -553,6 +594,7 @@ func _refresh_world() -> void:
 			_rebuild_transition()
 		return
 	_refresh_world_now()
+	_on_scene_ready()
 
 func _refresh_world_now(incremental_assets: bool = false) -> void:
 	var stamp := LoadTrace.begin()
@@ -617,6 +659,7 @@ func _rebuild_transition() -> void:
 	set_ui_paused(true)
 	await _refresh_world_incremental()
 	set_ui_paused(was_paused)
+	_on_scene_ready()
 	if hud != null:
 		hud.refresh_scene({}, true)
 	await get_tree().process_frame
@@ -645,6 +688,8 @@ func _prefetch_next_room() -> void:
 func _prefetch_room_and_media(room_id: String, scene_id: String) -> void:
 	await preparation.prepare_room(room_id)
 	await preparation.prepare_scene_media(scene_id)
+	if audio != null:
+		await audio.prefetch(scene_id, RoomContract.room_for_scene(scene_id))
 
 func _sync_world_boundaries() -> void:
 	if _room == null:
@@ -676,3 +721,50 @@ func _build_hud() -> void:
 func present_dialogue(line: Dictionary) -> void:
 	if _crew != null:
 		_crew.present_line(line, bool(director.snapshot().get("accessibility", {}).get("reduced_motion", false)))
+	if audio != null:
+		audio.present_line(line, director.snapshot().get("knowledge_flags", []))
+
+## The current scene's world is ready (new game, Continue, advance, chapter
+## change, retry): retarget its sound and open any cutscene bound to its start.
+func _on_scene_ready() -> void:
+	if route == null or audio == null:
+		return
+	audio.captions_enabled = bool(director.snapshot().get("accessibility", {}).get("captions", true))
+	audio.enter_scene(route.current_scene_id(), route.current_room_id())
+	# A scene the player already worked in (Continue after acknowledging a line) does not replay its film.
+	if route.gate_status().get("dialogue_acknowledged", []).is_empty():
+		_queue_cutscenes("scene_enter")
+
+## Plays each cutscene bound to this beat of the current scene once per session.
+func _queue_cutscenes(trigger: String) -> void:
+	if cutscenes == null or not CampaignCutscenePlayer.autoplay:
+		return
+	for plan in cutscenes.plans_for_scene(route.current_scene_id(), trigger, director.snapshot().get("knowledge_flags", [])):
+		var id := String(plan.get("cutscene_id", ""))
+		if not _played_cutscenes.has(id):
+			_played_cutscenes[id] = true
+			_cutscene_queue.append(plan)
+	_play_next_cutscene()
+
+## True while a film or its text card covers the expedition.
+func is_cutscene_active() -> bool:
+	return cutscene_player != null and cutscene_player.is_active()
+
+func _play_next_cutscene() -> void:
+	if is_cutscene_active() or _cutscene_queue.is_empty():
+		return
+	_set_cinematic(true)
+	cutscene_player.play(_cutscene_queue.pop_front())
+
+func _on_cutscene_closed(result: Dictionary) -> void:
+	audio.mark_heard(cutscenes.heard_line_ids(String(result.get("cutscene_id", "")), float(result.get("position_s", 0.0))))
+	if _cutscene_queue.is_empty():
+		_set_cinematic(false)
+	cutscene_closed.emit(result)
+	_play_next_cutscene()
+
+func _set_cinematic(value: bool) -> void:
+	audio.set_cinematic(value)
+	if _crew != null:
+		_crew.set_paused(value or _ui_paused)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

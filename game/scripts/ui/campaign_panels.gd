@@ -404,9 +404,38 @@ func _render_settings() -> void:
 			_set_settings({key: check.button_pressed}, true)
 		)
 		_body.add_child(check)
+	# Volumes are per machine (user://audio_settings.cfg), not part of the expedition save.
+	for bus in AudioSettings.BUSES:
+		var row := HBoxContainer.new()
+		var name_label := Label.new()
+		name_label.text = String(AudioSettings.LABELS[bus])
+		name_label.custom_minimum_size.x = 220
+		name_label.add_theme_color_override("font_color", IVORY)
+		row.add_child(name_label)
+		var slider := HSlider.new()
+		slider.name = "volume_" + bus
+		slider.min_value = 0.0
+		slider.max_value = 1.0
+		slider.step = 0.05
+		slider.value = AudioSettings.volume(bus)
+		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		slider.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		slider.focus_mode = Control.FOCUS_ALL
+		slider.accessibility_name = name_label.text
+		var percent := Label.new()
+		percent.custom_minimum_size.x = 56
+		percent.text = "%d%%" % roundi(slider.value * 100.0)
+		percent.add_theme_color_override("font_color", MUTED)
+		slider.value_changed.connect(func(value: float) -> void:
+			AudioSettings.set_volume(bus, value)
+			percent.text = "%d%%" % roundi(value * 100.0)
+		)
+		row.add_child(slider)
+		row.add_child(percent)
+		_body.add_child(row)
 	var labels := Label.new()
 	labels.text = (
-		"CAPTIONS: exact text remains available when voice is missing.\n"
+		"CAPTIONS: exact text remains available when voice is missing; essential sounds are captioned too.\n"
 		+ ("TIMER-FREE: no reaction clock is required.\n" if is_timer_free() else "STANDARD TIMING: timing labels remain visible.\n")
 		+ ("REDUCED MOTION: panel changes are instant.\n" if is_reduced_motion() else "REDUCED MOTION: available in this panel.\n")
 		+ "These presentation settings never skip a safety predicate."

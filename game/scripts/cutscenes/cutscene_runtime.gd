@@ -10,9 +10,10 @@ var _content: Dictionary = {}
 var _dialogue: RefCounted
 var _metadata: Dictionary = {}
 
-func _init(content: Dictionary = {}, metadata_override: Dictionary = {}) -> void:
-	_content = content if not content.is_empty() else ContentScript.load_full()
-	_dialogue = DialogueScript.new(_content)
+## Pass the campaign's own dialogue service to avoid a second deep copy of the catalog.
+func _init(content: Dictionary = {}, metadata_override: Dictionary = {}, dialogue: RefCounted = null) -> void:
+	_content = content if not content.is_empty() or dialogue != null else ContentScript.load_full()
+	_dialogue = dialogue if dialogue != null else DialogueScript.new(_content)
 	_metadata = metadata_override.duplicate(true) if not metadata_override.is_empty() else _read_metadata()
 
 func available_cutscenes() -> Array:
@@ -72,6 +73,31 @@ func playback_plan(cutscene_id: String, scene_id: String = "", acquired_flags: A
 		"reason": "Cutscene media is not installed; exact dialogue/caption text is the runtime presentation.",
 		"skip_completes_predicate": false,
 	}
+
+## Playback plans for the cutscenes bound to a scene beat, in manifest order.
+## trigger is "scene_enter" (the scene opens) or "campaign_complete" (post-credits).
+func plans_for_scene(scene_id: String, trigger: String, acquired_flags: Array = []) -> Array:
+	var result: Array = []
+	for item in available_cutscenes():
+		if String(item.get("scene_id", "")) == scene_id and String(item.get("trigger", "scene_enter")) == trigger:
+			var plan := playback_plan(String(item.get("id", "")), scene_id, acquired_flags)
+			plan["title"] = String(item.get("title", ""))
+			result.append(plan)
+	return result
+
+## Scene lines the film has already spoken by position_s (from its caption cues),
+## so the HUD shows them afterwards without voicing them a second time.
+func heard_line_ids(cutscene_id: String, position_s: float) -> Array:
+	var result: Array = []
+	for cue in metadata_for_id(cutscene_id).get("caption_cues", []):
+		if cue is Dictionary and float(cue.get("at", INF)) <= position_s:
+			result.append(String(cue.get("line_id", "")))
+	return result
+
+## Seconds a skip input must be held (manifest cutscene_controls.skip_hold_s).
+func skip_hold_seconds() -> float:
+	var controls = _metadata.get("cutscene_controls", {})
+	return float(controls.get("skip_hold_s", 1.0)) if controls is Dictionary else 1.0
 
 func skip(cutscene_id: String, scene_id: String = "") -> Dictionary:
 	## Skipping changes presentation only. It deliberately emits no scene,

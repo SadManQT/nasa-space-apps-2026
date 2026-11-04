@@ -53,6 +53,8 @@ func _run() -> void:
 	if not _cpu_only:
 		RenderingServer.viewport_set_measure_render_time(root.get_viewport_rid(), true)
 	LoadTrace.enabled = true
+	# The probe drives its own walk and video samples; scene cutscenes would cover them.
+	CampaignCutscenePlayer.autoplay = false
 	process_frame.connect(_event_heartbeat)
 	_main = MAIN.instantiate()
 	_main.save_path = _slot

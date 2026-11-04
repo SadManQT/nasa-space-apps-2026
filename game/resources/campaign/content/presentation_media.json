@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "media_revision": "runtime-media-2026-11-05",
+  "media_revision": "runtime-media-2026-11-05b",
   "available_cutscenes": [
     {
       "id": "CS-01",
@@ -12,7 +12,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-01_Arrival.ogv"
+      "source": "game/assets/cutscenes/CS-01_Arrival.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 14.0,
+          "line_id": "EX-CH01-S01-L01"
+        },
+        {
+          "at": 17.6,
+          "line_id": "EX-CH01-S01-L02"
+        },
+        {
+          "at": 22.0,
+          "line_id": "EX-CH01-S01-L03"
+        },
+        {
+          "at": 32.0,
+          "line_id": "EX-CH01-S01-L04"
+        }
+      ]
     },
     {
       "id": "CS-02",
@@ -24,7 +43,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-02_The_Horizon_Closes_One_Door.ogv"
+      "source": "game/assets/cutscenes/CS-02_The_Horizon_Closes_One_Door.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 12.6,
+          "line_id": "EX-CH01-S09-L04"
+        },
+        {
+          "at": 18.0,
+          "line_id": "EX-CH01-S09-L01"
+        },
+        {
+          "at": 21.3,
+          "line_id": "EX-CH01-S09-L02"
+        },
+        {
+          "at": 25.6,
+          "line_id": "EX-CH01-S09-L03"
+        }
+      ]
     },
     {
       "id": "CS-03",
@@ -36,7 +74,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-03_Alo_Needs_a_Friend.ogv"
+      "source": "game/assets/cutscenes/CS-03_Alo_Needs_a_Friend.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 12.0,
+          "line_id": "EX-CH01-S12-L01"
+        },
+        {
+          "at": 24.0,
+          "line_id": "EX-CH01-S12-L02"
+        },
+        {
+          "at": 35.0,
+          "line_id": "EX-CH01-S12-L03"
+        },
+        {
+          "at": 38.8,
+          "line_id": "EX-CH01-S12-L04"
+        }
+      ]
     },
     {
       "id": "CS-04",
@@ -48,7 +105,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-04_The_Floor_Answers_First.ogv"
+      "source": "game/assets/cutscenes/CS-04_The_Floor_Answers_First.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 7.0,
+          "line_id": "EX-CH02-S12-L01"
+        },
+        {
+          "at": 14.4,
+          "line_id": "EX-CH02-S12-L02"
+        },
+        {
+          "at": 17.3,
+          "line_id": "EX-CH02-S12-L03"
+        },
+        {
+          "at": 20.6,
+          "line_id": "EX-CH02-S12-L04"
+        }
+      ]
     },
     {
       "id": "CS-05",
@@ -60,7 +136,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-05_The_Garden_That_Never_Opened.ogv"
+      "source": "game/assets/cutscenes/CS-05_The_Garden_That_Never_Opened.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 5.6,
+          "line_id": "EX-CH03-S07-L01"
+        },
+        {
+          "at": 13.4,
+          "line_id": "EX-CH03-S07-L02"
+        },
+        {
+          "at": 18.3,
+          "line_id": "EX-CH03-S07-L03"
+        },
+        {
+          "at": 21.55,
+          "line_id": "EX-CH03-S07-L04"
+        }
+      ]
     },
     {
       "id": "CS-06",
@@ -72,7 +167,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-06_Forty-Two_Sounds_on_a_Tray.ogv"
+      "source": "game/assets/cutscenes/CS-06_Forty-Two_Sounds_on_a_Tray.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 6.0,
+          "line_id": "EX-CH03-S10-L01"
+        },
+        {
+          "at": 9.2,
+          "line_id": "EX-CH03-S10-L02"
+        },
+        {
+          "at": 11.8,
+          "line_id": "EX-CH03-S10-L03"
+        },
+        {
+          "at": 13.9,
+          "line_id": "EX-CH03-S10-L04"
+        }
+      ]
     },
     {
       "id": "CS-07",
@@ -84,7 +198,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-07_Something_With_Corners.ogv"
+      "source": "game/assets/cutscenes/CS-07_Something_With_Corners.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 5.3,
+          "line_id": "EX-CH04-S06-L01"
+        },
+        {
+          "at": 7.9,
+          "line_id": "EX-CH04-S06-L02"
+        },
+        {
+          "at": 9.9,
+          "line_id": "EX-CH04-S06-L03"
+        },
+        {
+          "at": 15.8,
+          "line_id": "EX-CH04-S06-L04"
+        }
+      ]
     },
     {
       "id": "CS-08",
@@ -96,7 +229,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-08_The_Fifth_Mug.ogv"
+      "source": "game/assets/cutscenes/CS-08_The_Fifth_Mug.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 4.3,
+          "line_id": "EX-CH05-S01-L01"
+        },
+        {
+          "at": 7.0,
+          "line_id": "EX-CH05-S01-L02"
+        },
+        {
+          "at": 11.3,
+          "line_id": "EX-CH05-S01-L03"
+        },
+        {
+          "at": 13.7,
+          "line_id": "EX-CH05-S01-L04"
+        }
+      ]
     },
     {
       "id": "CS-09",
@@ -108,7 +260,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-09_What_I_Didnt_Say.ogv"
+      "source": "game/assets/cutscenes/CS-09_What_I_Didnt_Say.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 0.8,
+          "line_id": "EX-CH05-S05-L01"
+        },
+        {
+          "at": 9.0,
+          "line_id": "EX-CH05-S05-L02"
+        },
+        {
+          "at": 12.1,
+          "line_id": "EX-CH05-S05-L03"
+        },
+        {
+          "at": 15.9,
+          "line_id": "EX-CH05-S05-L04"
+        }
+      ]
     },
     {
       "id": "CS-10",
@@ -120,7 +291,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-10_The_Name_on_the_Page.ogv"
+      "source": "game/assets/cutscenes/CS-10_The_Name_on_the_Page.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 3.8,
+          "line_id": "EX-CH05-S10-L01"
+        },
+        {
+          "at": 6.6,
+          "line_id": "EX-CH05-S10-L02"
+        },
+        {
+          "at": 11.2,
+          "line_id": "EX-CH05-S10-L03"
+        },
+        {
+          "at": 14.0,
+          "line_id": "EX-CH05-S10-L04"
+        }
+      ]
     },
     {
       "id": "CS-11",
@@ -132,7 +322,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-11_The_Red_Ring.ogv"
+      "source": "game/assets/cutscenes/CS-11_The_Red_Ring.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 4.0,
+          "line_id": "EX-CH06-S07-L01"
+        },
+        {
+          "at": 7.6,
+          "line_id": "EX-CH06-S07-L02"
+        },
+        {
+          "at": 11.4,
+          "line_id": "EX-CH06-S07-L03"
+        },
+        {
+          "at": 14.5,
+          "line_id": "EX-CH06-S07-L04"
+        }
+      ]
     },
     {
       "id": "CS-12",
@@ -144,7 +353,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-12_The_Next_Light.ogv"
+      "source": "game/assets/cutscenes/CS-12_The_Next_Light.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 2.9,
+          "line_id": "EX-CH06-S10-L01"
+        },
+        {
+          "at": 5.9,
+          "line_id": "EX-CH06-S10-L02"
+        },
+        {
+          "at": 7.4,
+          "line_id": "EX-CH06-S10-L03"
+        },
+        {
+          "at": 11.6,
+          "line_id": "EX-CH06-S10-L04"
+        }
+      ]
     },
     {
       "id": "CS-13",
@@ -156,7 +384,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-13_The_Last_Log.ogv"
+      "source": "game/assets/cutscenes/CS-13_The_Last_Log.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 4.0,
+          "line_id": "EX-CH07-S07-L01"
+        },
+        {
+          "at": 8.0,
+          "line_id": "EX-CH07-S07-L02"
+        },
+        {
+          "at": 12.5,
+          "line_id": "EX-CH07-S07-L03"
+        },
+        {
+          "at": 15.95,
+          "line_id": "EX-CH07-S07-L04"
+        }
+      ]
     },
     {
       "id": "CS-14",
@@ -168,7 +415,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-14_Before_the_Road.ogv"
+      "source": "game/assets/cutscenes/CS-14_Before_the_Road.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 3.8,
+          "line_id": "EX-CH08-S01-L01"
+        },
+        {
+          "at": 8.4,
+          "line_id": "EX-CH08-S01-L02"
+        },
+        {
+          "at": 12.4,
+          "line_id": "EX-CH08-S01-L03"
+        },
+        {
+          "at": 15.0,
+          "line_id": "EX-CH08-S01-L04"
+        }
+      ]
     },
     {
       "id": "CS-15",
@@ -180,7 +446,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-15_Hello_Aurora.ogv"
+      "source": "game/assets/cutscenes/CS-15_Hello_Aurora.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 7.4,
+          "line_id": "EX-CH08-S10-L01"
+        },
+        {
+          "at": 13.55,
+          "line_id": "EX-CH08-S10-L02"
+        },
+        {
+          "at": 20.1,
+          "line_id": "EX-CH08-S10-L03"
+        },
+        {
+          "at": 22.95,
+          "line_id": "EX-CH08-S10-L04"
+        }
+      ]
     },
     {
       "id": "CS-16",
@@ -192,7 +477,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-16_The_Same_Road_Home.ogv"
+      "source": "game/assets/cutscenes/CS-16_The_Same_Road_Home.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 3.8,
+          "line_id": "EX-CH08-S11-L01"
+        },
+        {
+          "at": 6.45,
+          "line_id": "EX-CH08-S11-L02"
+        },
+        {
+          "at": 9.6,
+          "line_id": "EX-CH08-S11-L03"
+        },
+        {
+          "at": 13.6,
+          "line_id": "EX-CH08-S11-L04"
+        }
+      ]
     },
     {
       "id": "CS-17",
@@ -204,7 +508,26 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-17_What_We_Grew.ogv"
+      "source": "game/assets/cutscenes/CS-17_What_We_Grew.ogv",
+      "trigger": "scene_enter",
+      "caption_cues": [
+        {
+          "at": 4.0,
+          "line_id": "EX-CH08-S12-L01"
+        },
+        {
+          "at": 6.9,
+          "line_id": "EX-CH08-S12-L02"
+        },
+        {
+          "at": 16.2,
+          "line_id": "EX-CH08-S12-L03"
+        },
+        {
+          "at": 23.2,
+          "line_id": "EX-CH08-S12-L04"
+        }
+      ]
     },
     {
       "id": "CS-18",
@@ -216,16 +539,878 @@
       "status": "present",
       "caption_fallback": true,
       "skip_completes_predicate": false,
-      "source": "game/assets/cutscenes/CS-18_The_Closed_Drawer.ogv"
+      "source": "game/assets/cutscenes/CS-18_The_Closed_Drawer.ogv",
+      "trigger": "campaign_complete",
+      "caption_cues": []
     }
   ],
   "not_installed_cutscene_ids": [],
   "audio": {
-    "voice_runtime_files_present": false,
-    "music_runtime_files_present": false,
-    "sfx_runtime_files_present": false,
+    "voice_runtime_files_present": true,
+    "music_runtime_files_present": true,
+    "sfx_runtime_files_present": true,
     "fallback_mode": "captions_only",
-    "source": "production/audio/vo_lines.csv",
-    "note": "The dialogue catalog supplies exact readable text. No missing voice, music or SFX file is presented as installed."
+    "source": "production/audio/vo_lines.csv, music_cues.csv, sfx_list.csv",
+    "note": "Generated by production/tools/build_presentation_media.py from the files actually present. A missing voice, music or effect file falls back to its exact caption text.",
+    "mix": {
+      "voice_db": 0.0,
+      "music_db": -8.0,
+      "music_duck_db": 8.0,
+      "beds_db": -6.0,
+      "effects_duck_db": 4.0,
+      "sfx_db": 0.0,
+      "ui_db": -6.0,
+      "duck_attack_s": 0.15,
+      "duck_release_s": 0.6,
+      "music_fade_s": 1.5,
+      "sound_caption_s": 3.0,
+      "note": "Dialogue first: music ducks 6-9 dB under speech (music_duck_db), beds 3-6 dB (effects_duck_db). Voice masters are -16 LUFS, music about -18, beds about -24 (measured 5 Nov with ffmpeg ebur128); levels still need Sadman's ear."
+    },
+    "room_beds": {
+      "LOC-01": [
+        "SFX_FAN_NORMAL"
+      ],
+      "LOC-02": [
+        "SFX_FAN_NORMAL"
+      ],
+      "LOC-03": [
+        "SFX_GREENHOUSE_FAN"
+      ],
+      "LOC-04": [
+        "SFX_FAN_NORMAL"
+      ],
+      "LOC-05": [
+        "SFX_FAN_NORMAL"
+      ],
+      "LOC-06": [
+        "SFX_SUIT_BREATH"
+      ],
+      "LOC-07": [
+        "SFX_SUIT_BREATH"
+      ],
+      "LOC-08": [
+        "SFX_ROVER_CABIN"
+      ],
+      "LOC-09": [
+        "SFX_SUIT_BREATH"
+      ],
+      "LOC-10": [
+        "SFX_SUIT_BREATH"
+      ],
+      "LOC-11": [
+        "SFX_ROVER_CABIN",
+        "SFX_ROVER_CHASSIS"
+      ],
+      "LOC-12": [
+        "SFX_SUIT_BREATH"
+      ],
+      "note": "Looping beds by room. Outside (LOC-06, 09, 10, 12) only suit sound: vacuum carries no airborne sound."
+    },
+    "scene_beds": {
+      "EX-CH01-S08": [
+        "SFX_FAN_NORMAL",
+        "SFX_PUMP_PRESSURE",
+        "SFX_WATER_TRANSFER"
+      ],
+      "EX-CH01-S09": [
+        "SFX_FAN_LOWPOWER"
+      ],
+      "EX-CH04-S03": [
+        "SFX_ROVER_CABIN",
+        "SFX_ROVER_CHASSIS"
+      ],
+      "EX-CH06-S06": [
+        "SFX_FAN_LOWPOWER"
+      ],
+      "EX-CH06-S07": [
+        "SFX_FAN_LOWPOWER"
+      ],
+      "EX-CH06-S08": [
+        "SFX_FAN_LOWPOWER"
+      ],
+      "EX-CH06-S09": [
+        "SFX_FAN_LOWPOWER"
+      ],
+      "note": "Replaces the room bed for that scene (water-wall pumps, low power at night and in the eclipse, rover driving)."
+    },
+    "scene_sfx": {
+      "EX-CH01-S02": [
+        "SFX_DOOR_LATCH"
+      ],
+      "EX-CH01-S10": [
+        "SFX_ALERT_PARTICLE"
+      ],
+      "EX-CH02-S11": [
+        "SFX_CUP_RATTLE"
+      ],
+      "EX-CH02-S12": [
+        "SFX_QUAKE_CONTACT",
+        "SFX_ALERT_STRUCTURAL",
+        "SFX_ALERT_PRESSURE"
+      ],
+      "note": "One-shots when the scene opens (after its cutscene). Alerts are instrument tones; the quake is structure-borne only."
+    },
+    "operation_sfx": [
+      [
+        "earth_set",
+        "SFX_RADIO_EARTH_LOST"
+      ],
+      [
+        "brush",
+        "SFX_BRUSH_CONTACT"
+      ],
+      [
+        "pollen",
+        "SFX_BRUSH_CONTACT"
+      ],
+      [
+        "glove",
+        "SFX_GLOVE_PORT"
+      ],
+      [
+        "clamp",
+        "SFX_CLAMP_SEAT"
+      ],
+      [
+        "count_42",
+        "SFX_SEED_TICK"
+      ],
+      [
+        "harvest",
+        "SFX_SEED_TICK"
+      ],
+      [
+        "shutter",
+        "SFX_SHUTTER_OPEN"
+      ],
+      [
+        "photo",
+        "SFX_CAMERA_SHUTTER"
+      ],
+      [
+        "camera",
+        "SFX_CAMERA_SHUTTER"
+      ],
+      [
+        "hatch",
+        "SFX_HATCH_SEAL"
+      ],
+      [
+        "airlock",
+        "SFX_AIRLOCK_CYCLE"
+      ],
+      [
+        "valve",
+        "SFX_VALVE_DETENT"
+      ],
+      [
+        "battery",
+        "SFX_BATTERY_SWAP"
+      ],
+      [
+        "controller",
+        "SFX_CONTROLLER_POWERUP"
+      ],
+      [
+        "reset",
+        "SFX_BREAKER_RESET"
+      ],
+      [
+        "isolat",
+        "SFX_BREAKER_RESET"
+      ],
+      [
+        "feeder",
+        "SFX_BREAKER_RESET"
+      ],
+      [
+        "connect",
+        "SFX_CONNECTOR"
+      ],
+      [
+        "scan",
+        "SFX_SCANNER_BEEP"
+      ],
+      [
+        "p02_",
+        "SFX_UI_SHIFT_COMMIT"
+      ],
+      [
+        "commit",
+        "SFX_UI_SHIFT_COMMIT"
+      ]
+    ],
+    "line_sfx": {
+      "earth_link": "SFX_RADIO_EARTH_IN",
+      "radio": "SFX_RADIO_LOCAL_IN",
+      "recording": "SFX_RECORDER_AGED"
+    },
+    "ui_sfx": {
+      "accepted": "SFX_UI_CONFIRM",
+      "rejected": "SFX_UI_SOFT_ERROR"
+    },
+    "music_variant_by_scene": {
+      "EX-CH07-S05": "low",
+      "EX-CH07-S06": "mid",
+      "EX-CH07-S07": "low",
+      "EX-CH07-S08": "high",
+      "EX-CH07-S09": "mid"
+    },
+    "voice_lines_total": 385,
+    "voice_lines_with_file": 383,
+    "voice_files_present": 383,
+    "music_runtime_files": [
+      "res://assets/audio/music/MUS_CUE-01_HomeNotYet.ogg",
+      "res://assets/audio/music/MUS_CUE-02_SmallWork.ogg",
+      "res://assets/audio/music/MUS_CUE-03_LastLight.ogg",
+      "res://assets/audio/music/MUS_CUE-04_FirstFlower.ogg",
+      "res://assets/audio/music/MUS_CUE-05_Unfinished.ogg",
+      "res://assets/audio/music/MUS_CUE-06_BeyondHome.ogg",
+      "res://assets/audio/music/MUS_CUE-06_BeyondHome_Sting.ogg",
+      "res://assets/audio/music/MUS_CUE-07_AName.ogg",
+      "res://assets/audio/music/MUS_CUE-08_RedRing.ogg",
+      "res://assets/audio/music/MUS_CUE-09_AllWeLearned_mid.ogg",
+      "res://assets/audio/music/MUS_CUE-09_AllWeLearned_low.ogg",
+      "res://assets/audio/music/MUS_CUE-09_AllWeLearned_high.ogg",
+      "res://assets/audio/music/MUS_CUE-10_KnownRoad.ogg",
+      "res://assets/audio/music/MUS_CUE-11_HelloAurora.ogg",
+      "res://assets/audio/music/MUS_CUE-12_WhatWeGrew.ogg",
+      "res://assets/audio/music/MUS_CUE-12_WhatWeGrew_Credits.ogg"
+    ],
+    "sfx_runtime_files": [
+      "res://assets/audio/sfx/SFX_FAN_NORMAL.ogg",
+      "res://assets/audio/sfx/SFX_FAN_LOWPOWER.ogg",
+      "res://assets/audio/sfx/SFX_GREENHOUSE_FAN.ogg",
+      "res://assets/audio/sfx/SFX_PUMP_PRESSURE.ogg",
+      "res://assets/audio/sfx/SFX_WATER_TRANSFER.ogg",
+      "res://assets/audio/sfx/SFX_VALVE_DETENT.ogg",
+      "res://assets/audio/sfx/SFX_GLOVE_PORT.ogg",
+      "res://assets/audio/sfx/SFX_BRUSH_CONTACT.ogg",
+      "res://assets/audio/sfx/SFX_SEED_TICK.ogg",
+      "res://assets/audio/sfx/SFX_SHUTTER_OPEN.ogg",
+      "res://assets/audio/sfx/SFX_DOOR_LATCH.ogg",
+      "res://assets/audio/sfx/SFX_HATCH_SEAL.ogg",
+      "res://assets/audio/sfx/SFX_AIRLOCK_CYCLE.ogg",
+      "res://assets/audio/sfx/SFX_SUIT_BREATH.ogg",
+      "res://assets/audio/sfx/SFX_RADIO_LOCAL_IN.ogg",
+      "res://assets/audio/sfx/SFX_RADIO_EARTH_IN.ogg",
+      "res://assets/audio/sfx/SFX_RADIO_EARTH_LOST.ogg",
+      "res://assets/audio/sfx/SFX_RECORDER_AGED.ogg",
+      "res://assets/audio/sfx/SFX_ALERT_PARTICLE.ogg",
+      "res://assets/audio/sfx/SFX_ALERT_PRESSURE.ogg",
+      "res://assets/audio/sfx/SFX_ALERT_STRUCTURAL.ogg",
+      "res://assets/audio/sfx/SFX_QUAKE_CONTACT.ogg",
+      "res://assets/audio/sfx/SFX_CUP_RATTLE.ogg",
+      "res://assets/audio/sfx/SFX_CLAMP_SEAT.ogg",
+      "res://assets/audio/sfx/SFX_CONNECTOR.ogg",
+      "res://assets/audio/sfx/SFX_BREAKER_RESET.ogg",
+      "res://assets/audio/sfx/SFX_BATTERY_SWAP.ogg",
+      "res://assets/audio/sfx/SFX_CONTROLLER_POWERUP.ogg",
+      "res://assets/audio/sfx/SFX_ROVER_CABIN.ogg",
+      "res://assets/audio/sfx/SFX_ROVER_CHASSIS.ogg",
+      "res://assets/audio/sfx/SFX_SCANNER_BEEP.ogg",
+      "res://assets/audio/sfx/SFX_CAMERA_SHUTTER.ogg",
+      "res://assets/audio/sfx/SFX_UI_CONFIRM.ogg",
+      "res://assets/audio/sfx/SFX_UI_SOFT_ERROR.ogg",
+      "res://assets/audio/sfx/SFX_UI_SHIFT_COMMIT.ogg"
+    ],
+    "music_cues": [
+      {
+        "id": "CUE-01",
+        "title": "Home Not Yet",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-01_HomeNotYet.ogg",
+        "loop": true,
+        "media_present": true,
+        "scenes": [
+          "EX-CH01-S01",
+          "EX-CH01-S02"
+        ]
+      },
+      {
+        "id": "CUE-02",
+        "title": "Small Work",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-02_SmallWork.ogg",
+        "loop": true,
+        "media_present": true,
+        "scenes": [
+          "EX-CH01-S04",
+          "EX-CH01-S05",
+          "EX-CH02-S05",
+          "EX-CH03-S11",
+          "EX-CH03-S12",
+          "EX-CH05-S12",
+          "EX-CH06-S12",
+          "EX-CH07-S10"
+        ]
+      },
+      {
+        "id": "CUE-03",
+        "title": "Last Light",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-03_LastLight.ogg",
+        "loop": true,
+        "media_present": true,
+        "scenes": [
+          "EX-CH01-S06",
+          "EX-CH01-S07",
+          "EX-CH01-S08",
+          "EX-CH01-S09",
+          "EX-CH08-S05"
+        ]
+      },
+      {
+        "id": "CUE-04",
+        "title": "First Flower",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-04_FirstFlower.ogg",
+        "loop": false,
+        "media_present": true,
+        "scenes": [
+          "EX-CH01-S12"
+        ]
+      },
+      {
+        "id": "CUE-05",
+        "title": "Unfinished",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-05_Unfinished.ogg",
+        "loop": true,
+        "media_present": true,
+        "scenes": [
+          "EX-CH03-S07",
+          "EX-CH03-S09",
+          "EX-CH03-S10",
+          "EX-CH05-S04"
+        ]
+      },
+      {
+        "id": "CUE-06",
+        "title": "Beyond Home",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-06_BeyondHome.ogg",
+        "loop": true,
+        "media_present": true,
+        "scenes": [
+          "EX-CH04-S03",
+          "EX-CH04-S04",
+          "EX-CH04-S05",
+          "EX-CH04-S06",
+          "EX-CH04-S07",
+          "EX-CH04-S08",
+          "EX-CH04-S09"
+        ],
+        "sting_path": "res://assets/audio/music/MUS_CUE-06_BeyondHome_Sting.ogg",
+        "sting_scene": "EX-CH04-S06"
+      },
+      {
+        "id": "CUE-07",
+        "title": "A Name",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-07_AName.ogg",
+        "loop": true,
+        "media_present": true,
+        "scenes": [
+          "EX-CH05-S10",
+          "EX-CH05-S11"
+        ]
+      },
+      {
+        "id": "CUE-08",
+        "title": "Red Ring",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-08_RedRing.ogg",
+        "loop": true,
+        "media_present": true,
+        "scenes": [
+          "EX-CH06-S06",
+          "EX-CH06-S07",
+          "EX-CH06-S08",
+          "EX-CH06-S09"
+        ]
+      },
+      {
+        "id": "CUE-09",
+        "title": "All We Learned",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-09_AllWeLearned_mid.ogg",
+        "loop": true,
+        "media_present": true,
+        "scenes": [
+          "EX-CH07-S05",
+          "EX-CH07-S06",
+          "EX-CH07-S07",
+          "EX-CH07-S08",
+          "EX-CH07-S09"
+        ],
+        "variants": {
+          "low": "res://assets/audio/music/MUS_CUE-09_AllWeLearned_low.ogg",
+          "mid": "res://assets/audio/music/MUS_CUE-09_AllWeLearned_mid.ogg",
+          "high": "res://assets/audio/music/MUS_CUE-09_AllWeLearned_high.ogg"
+        }
+      },
+      {
+        "id": "CUE-10",
+        "title": "Known Road",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-10_KnownRoad.ogg",
+        "loop": true,
+        "media_present": true,
+        "scenes": [
+          "EX-CH08-S01",
+          "EX-CH08-S02",
+          "EX-CH08-S03",
+          "EX-CH08-S04",
+          "EX-CH08-S05",
+          "EX-CH08-S06"
+        ]
+      },
+      {
+        "id": "CUE-11",
+        "title": "Hello Aurora",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-11_HelloAurora.ogg",
+        "loop": false,
+        "media_present": true,
+        "scenes": [
+          "EX-CH08-S10"
+        ]
+      },
+      {
+        "id": "CUE-12",
+        "title": "What We Grew",
+        "runtime_path": "res://assets/audio/music/MUS_CUE-12_WhatWeGrew.ogg",
+        "loop": true,
+        "media_present": true,
+        "scenes": [
+          "EX-CH08-S12"
+        ],
+        "credits_path": "res://assets/audio/music/MUS_CUE-12_WhatWeGrew_Credits.ogg"
+      }
+    ],
+    "music_by_scene": {
+      "EX-CH01-S01": "CUE-01",
+      "EX-CH01-S02": "CUE-01",
+      "EX-CH01-S04": "CUE-02",
+      "EX-CH01-S05": "CUE-02",
+      "EX-CH01-S06": "CUE-03",
+      "EX-CH01-S07": "CUE-03",
+      "EX-CH01-S08": "CUE-03",
+      "EX-CH01-S09": "CUE-03",
+      "EX-CH01-S12": "CUE-04",
+      "EX-CH02-S05": "CUE-02",
+      "EX-CH03-S07": "CUE-05",
+      "EX-CH03-S09": "CUE-05",
+      "EX-CH03-S10": "CUE-05",
+      "EX-CH03-S11": "CUE-02",
+      "EX-CH03-S12": "CUE-02",
+      "EX-CH04-S03": "CUE-06",
+      "EX-CH04-S04": "CUE-06",
+      "EX-CH04-S05": "CUE-06",
+      "EX-CH04-S06": "CUE-06",
+      "EX-CH04-S07": "CUE-06",
+      "EX-CH04-S08": "CUE-06",
+      "EX-CH04-S09": "CUE-06",
+      "EX-CH05-S04": "CUE-05",
+      "EX-CH05-S10": "CUE-07",
+      "EX-CH05-S11": "CUE-07",
+      "EX-CH05-S12": "CUE-02",
+      "EX-CH06-S06": "CUE-08",
+      "EX-CH06-S07": "CUE-08",
+      "EX-CH06-S08": "CUE-08",
+      "EX-CH06-S09": "CUE-08",
+      "EX-CH06-S12": "CUE-02",
+      "EX-CH07-S05": "CUE-09",
+      "EX-CH07-S06": "CUE-09",
+      "EX-CH07-S07": "CUE-09",
+      "EX-CH07-S08": "CUE-09",
+      "EX-CH07-S09": "CUE-09",
+      "EX-CH07-S10": "CUE-02",
+      "EX-CH08-S01": "CUE-10",
+      "EX-CH08-S02": "CUE-10",
+      "EX-CH08-S03": "CUE-10",
+      "EX-CH08-S04": "CUE-10",
+      "EX-CH08-S05": "CUE-03",
+      "EX-CH08-S06": "CUE-10",
+      "EX-CH08-S10": "CUE-11",
+      "EX-CH08-S12": "CUE-12"
+    },
+    "sfx": [
+      {
+        "id": "SFX_FAN_NORMAL",
+        "runtime_path": "res://assets/audio/sfx/SFX_FAN_NORMAL.ogg",
+        "media_present": true,
+        "loop": true,
+        "caption": "[ventilation fans]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S01"
+        ]
+      },
+      {
+        "id": "SFX_FAN_LOWPOWER",
+        "runtime_path": "res://assets/audio/sfx/SFX_FAN_LOWPOWER.ogg",
+        "media_present": true,
+        "loop": true,
+        "caption": "[fans on low power]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S09"
+        ]
+      },
+      {
+        "id": "SFX_GREENHOUSE_FAN",
+        "runtime_path": "res://assets/audio/sfx/SFX_GREENHOUSE_FAN.ogg",
+        "media_present": true,
+        "loop": true,
+        "caption": "[garden fan humming]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S04"
+        ]
+      },
+      {
+        "id": "SFX_PUMP_PRESSURE",
+        "runtime_path": "res://assets/audio/sfx/SFX_PUMP_PRESSURE.ogg",
+        "media_present": true,
+        "loop": true,
+        "caption": "[pump running]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S08"
+        ]
+      },
+      {
+        "id": "SFX_WATER_TRANSFER",
+        "runtime_path": "res://assets/audio/sfx/SFX_WATER_TRANSFER.ogg",
+        "media_present": true,
+        "loop": true,
+        "caption": "[water transferring]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S08"
+        ]
+      },
+      {
+        "id": "SFX_VALVE_DETENT",
+        "runtime_path": "res://assets/audio/sfx/SFX_VALVE_DETENT.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[valve set]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S08"
+        ]
+      },
+      {
+        "id": "SFX_GLOVE_PORT",
+        "runtime_path": "res://assets/audio/sfx/SFX_GLOVE_PORT.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[hands in glove ports]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S04"
+        ]
+      },
+      {
+        "id": "SFX_BRUSH_CONTACT",
+        "runtime_path": "res://assets/audio/sfx/SFX_BRUSH_CONTACT.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[brush on petals]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH02-S04"
+        ]
+      },
+      {
+        "id": "SFX_SEED_TICK",
+        "runtime_path": "res://assets/audio/sfx/SFX_SEED_TICK.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[seeds on the tray]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH03-S10"
+        ]
+      },
+      {
+        "id": "SFX_SHUTTER_OPEN",
+        "runtime_path": "res://assets/audio/sfx/SFX_SHUTTER_OPEN.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[shutter opens]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S12"
+        ]
+      },
+      {
+        "id": "SFX_DOOR_LATCH",
+        "runtime_path": "res://assets/audio/sfx/SFX_DOOR_LATCH.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[door latches]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S02"
+        ]
+      },
+      {
+        "id": "SFX_HATCH_SEAL",
+        "runtime_path": "res://assets/audio/sfx/SFX_HATCH_SEAL.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[hatch sealed]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S10"
+        ]
+      },
+      {
+        "id": "SFX_AIRLOCK_CYCLE",
+        "runtime_path": "res://assets/audio/sfx/SFX_AIRLOCK_CYCLE.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[airlock equalising]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH02-S03"
+        ]
+      },
+      {
+        "id": "SFX_SUIT_BREATH",
+        "runtime_path": "res://assets/audio/sfx/SFX_SUIT_BREATH.ogg",
+        "media_present": true,
+        "loop": true,
+        "caption": "[suit breathing]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH03-S07"
+        ]
+      },
+      {
+        "id": "SFX_RADIO_LOCAL_IN",
+        "runtime_path": "res://assets/audio/sfx/SFX_RADIO_LOCAL_IN.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[local radio connected]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH03-S07"
+        ]
+      },
+      {
+        "id": "SFX_RADIO_EARTH_IN",
+        "runtime_path": "res://assets/audio/sfx/SFX_RADIO_EARTH_IN.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[Earth link connected]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S01"
+        ]
+      },
+      {
+        "id": "SFX_RADIO_EARTH_LOST",
+        "runtime_path": "res://assets/audio/sfx/SFX_RADIO_EARTH_LOST.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[Earth link lost]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S09"
+        ]
+      },
+      {
+        "id": "SFX_RECORDER_AGED",
+        "runtime_path": "res://assets/audio/sfx/SFX_RECORDER_AGED.ogg",
+        "media_present": true,
+        "loop": true,
+        "caption": "[archive recording]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S12"
+        ]
+      },
+      {
+        "id": "SFX_ALERT_PARTICLE",
+        "runtime_path": "res://assets/audio/sfx/SFX_ALERT_PARTICLE.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[particle warning]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S10"
+        ]
+      },
+      {
+        "id": "SFX_ALERT_PRESSURE",
+        "runtime_path": "res://assets/audio/sfx/SFX_ALERT_PRESSURE.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[pressure warning]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH02-S12"
+        ]
+      },
+      {
+        "id": "SFX_ALERT_STRUCTURAL",
+        "runtime_path": "res://assets/audio/sfx/SFX_ALERT_STRUCTURAL.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[structural alarm]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH02-S12"
+        ]
+      },
+      {
+        "id": "SFX_QUAKE_CONTACT",
+        "runtime_path": "res://assets/audio/sfx/SFX_QUAKE_CONTACT.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[station shaking]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH02-S12"
+        ]
+      },
+      {
+        "id": "SFX_CUP_RATTLE",
+        "runtime_path": "res://assets/audio/sfx/SFX_CUP_RATTLE.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[cup rattling]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH02-S11"
+        ]
+      },
+      {
+        "id": "SFX_CLAMP_SEAT",
+        "runtime_path": "res://assets/audio/sfx/SFX_CLAMP_SEAT.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[clamp seated]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH03-S04"
+        ]
+      },
+      {
+        "id": "SFX_CONNECTOR",
+        "runtime_path": "res://assets/audio/sfx/SFX_CONNECTOR.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[connector locks]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH05-S06"
+        ]
+      },
+      {
+        "id": "SFX_BREAKER_RESET",
+        "runtime_path": "res://assets/audio/sfx/SFX_BREAKER_RESET.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[feeder reset]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH06-S10"
+        ]
+      },
+      {
+        "id": "SFX_BATTERY_SWAP",
+        "runtime_path": "res://assets/audio/sfx/SFX_BATTERY_SWAP.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[battery swapped]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH08-S04"
+        ]
+      },
+      {
+        "id": "SFX_CONTROLLER_POWERUP",
+        "runtime_path": "res://assets/audio/sfx/SFX_CONTROLLER_POWERUP.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[controller powered]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH08-S07"
+        ]
+      },
+      {
+        "id": "SFX_ROVER_CABIN",
+        "runtime_path": "res://assets/audio/sfx/SFX_ROVER_CABIN.ogg",
+        "media_present": true,
+        "loop": true,
+        "caption": "[rover cabin hum]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH04-S02"
+        ]
+      },
+      {
+        "id": "SFX_ROVER_CHASSIS",
+        "runtime_path": "res://assets/audio/sfx/SFX_ROVER_CHASSIS.ogg",
+        "media_present": true,
+        "loop": true,
+        "caption": "[rover vibration]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH04-S03"
+        ]
+      },
+      {
+        "id": "SFX_SCANNER_BEEP",
+        "runtime_path": "res://assets/audio/sfx/SFX_SCANNER_BEEP.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[reading recorded]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH04-S05"
+        ]
+      },
+      {
+        "id": "SFX_CAMERA_SHUTTER",
+        "runtime_path": "res://assets/audio/sfx/SFX_CAMERA_SHUTTER.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[photo saved]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S12"
+        ]
+      },
+      {
+        "id": "SFX_UI_CONFIRM",
+        "runtime_path": "res://assets/audio/sfx/SFX_UI_CONFIRM.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[confirm]",
+        "bus": "UI",
+        "first_scenes": []
+      },
+      {
+        "id": "SFX_UI_SOFT_ERROR",
+        "runtime_path": "res://assets/audio/sfx/SFX_UI_SOFT_ERROR.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[try again]",
+        "bus": "UI",
+        "first_scenes": []
+      },
+      {
+        "id": "SFX_UI_SHIFT_COMMIT",
+        "runtime_path": "res://assets/audio/sfx/SFX_UI_SHIFT_COMMIT.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[plan committed]",
+        "bus": "UI",
+        "first_scenes": [
+          "EX-CH01-S07"
+        ]
+      }
+    ]
+  },
+  "cutscene_controls": {
+    "skip_hold_s": 1.0,
+    "note": "Hold Esc, Enter or the controller B button (or the on-screen button) to skip; Space, P or Start pauses. Captions are burned into every OGV by compose_cutscene.py. Watching or skipping never completes a predicate."
   }
 }
