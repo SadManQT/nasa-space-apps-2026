@@ -837,7 +837,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Cast the voices on ElevenLabs",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
@@ -849,7 +849,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game-design/04_CHARACTER_BIBLE.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "production/audio/voice_cast.csv (10 speakers, eleven_v4; 5 v7 voices kept + Rafi/Rao/Family library voices, Noor=N. voice, Engineer=Ferreira voice); samples in production/audio/vo_masters/; flow gY1LUxntVSKlN6E3WLA9",
    "updated": "2026-11-04",
    "prompt": "Needs the ElevenLabs connector logged in to the account with credits. Goal: one approved voice per speaker group.\nDo: for Kai, Amara, Mei, Rafi (adult cadets, 19–20), Commander Ferreira (mid-40s, Brazilian-Portuguese-accented English per the character\nbible), Rao (adult flight controller), Dr Noor Rahman (older Bangladeshi woman, warm, English), N. archive (Noor's stored recordings, slightly\ndegraded), Engineer and Family: read execution/VOICE_<NAME>.md and game-design/04_CHARACTER_BIBLE.md, pick from the voice library or design\nvoices (creative_design_voice) — adult voices only, never a child's voice. Generate one representative line per speaker from\nproduction/audio/vo_lines.csv (two takes each, default count). Save choices to production/audio/voice_cast.csv (speaker, voice_id, voice\nname, model, stability/similarity/style settings, sample file). Ask the user to approve. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
@@ -860,7 +860,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "human",
    "title": "Approve the voice cast",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M1-12"
@@ -868,8 +868,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "paths": [],
    "refs": [],
    "note": "On 4 Nov Sadman asked to make all audio and cutscenes now; the voice session plays him the samples and proceeds with the best take unless he objects.",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "Sadman 4 Nov: 'do all the works that needed eleven labs now and continue with your plan' + 'use the highest relevant quality voices'; per the task note, proceeding with the best takes unless he objects",
+   "updated": "2026-11-04",
    "prompt": "Listen to production/audio/samples/ and approve or ask for changes per speaker. The AI records the approval in voice_cast.csv and the\nhandbook §3."
   },
   {
@@ -878,8 +878,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Generate Chapter 1 voice lines (49)",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-13"
    ],
@@ -891,7 +891,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "refs": [],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Do: for every EX-CH01 row in production/audio/vo_lines.csv, generate the exact text (never reword source dialogue) with the approved\nvoice_cast.csv settings; pick the better of the takes; export to the row's voice_file path as .ogg (mono, 44.1 kHz, loudness -16 LUFS\ndialogue), trim silence to 120 ms; delivery notes from the 'delivery' and 'speaker_note' columns. Earth-screen and archive lines get a\nlight radio/recorder treatment in post (ffmpeg), not baked into the voice. Mark status in the CSV. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: 49 files present at their paths; a listening pass note in production/review/vo_review.md.",
    "reserved_for": "Sadman"
   },
@@ -1389,8 +1389,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P2",
    "tool": "gemini",
    "title": "Re-shoot the three credit-blocked cutscene shots with motion",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
     "production/cutscenes/v7/",
@@ -1402,7 +1402,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "CS-02-C, CS-03-B and CS-03-C are slow push-ins over their start frames because the Seedance jobs were refused when ElevenLabs credits ran\nout (flow e31hXPqSGnCFtVtzf44D). Re-make those three shots with Seedance 5 through ElevenLabs (handbook §3, 4 Nov) from the same start frames, recompose the three\nmasters with production/tools/compose_cutscene.py and ogv_writer.gd, and replace the .ogv files. This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -1766,8 +1766,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "gemini",
    "title": "Chapter 2 cutscenes: CS-04",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
     "production/cutscenes/",
@@ -1779,7 +1779,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "Generation can start now (start frames from the v8 character sheets, as for v7); wiring into the game uses the M1-10 runtime once it is merged.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Goal: the Chapter 2 cutscenes exist in the current anime style and play in the campaign (runtime from M1-10).\nDo: per execution/CUTSCENE_<id>.md and PRODUCTION_HANDBOOK.md §9 ('Make with' column): in-engine shots are staged in Godot and captured\nwith the Movie Maker OGV route; generated shots use start frames rendered from the final 3D models (production/tools/ pipeline in\nhandbook §6), then compose with compose_cutscene.py and ogv_writer.gd into game/assets/cutscenes/; update presentation_media.json.\nGenerator: Seedance 5 through the ElevenLabs connector (handbook §3, 4 Nov; Veo is an alternative). If you cannot run the compose scripts, put the approved Veo shots in production/cutscenes/v7/src/shots/<CS id>/ and block the task with reason 'shots ready, needs composing' so a claude or codex lane finishes it.\nDialogue is the scene's own lines, word for word. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2003,8 +2003,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "gemini",
    "title": "Chapter 3 cutscenes: CS-05, CS-06",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
     "production/cutscenes/",
@@ -2017,7 +2017,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "Generation can start now (start frames from the v8 character sheets, as for v7); wiring into the game uses the M1-10 runtime once it is merged.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Goal: the Chapter 3 cutscenes exist in the current anime style and play in the campaign (runtime from M1-10).\nDo: per execution/CUTSCENE_<id>.md and PRODUCTION_HANDBOOK.md §9 ('Make with' column): in-engine shots are staged in Godot and captured\nwith the Movie Maker OGV route; generated shots use start frames rendered from the final 3D models (production/tools/ pipeline in\nhandbook §6), then compose with compose_cutscene.py and ogv_writer.gd into game/assets/cutscenes/; update presentation_media.json.\nGenerator: Seedance 5 through the ElevenLabs connector (handbook §3, 4 Nov; Veo is an alternative). If you cannot run the compose scripts, put the approved Veo shots in production/cutscenes/v7/src/shots/<CS id>/ and block the task with reason 'shots ready, needs composing' so a claude or codex lane finishes it.\nDialogue is the scene's own lines, word for word. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2239,8 +2239,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "gemini",
    "title": "Chapter 4 cutscenes: CS-07",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
     "production/cutscenes/",
@@ -2252,7 +2252,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "Generation can start now (start frames from the v8 character sheets, as for v7); wiring into the game uses the M1-10 runtime once it is merged.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Goal: the Chapter 4 cutscenes exist in the current anime style and play in the campaign (runtime from M1-10).\nDo: per execution/CUTSCENE_<id>.md and PRODUCTION_HANDBOOK.md §9 ('Make with' column): in-engine shots are staged in Godot and captured\nwith the Movie Maker OGV route; generated shots use start frames rendered from the final 3D models (production/tools/ pipeline in\nhandbook §6), then compose with compose_cutscene.py and ogv_writer.gd into game/assets/cutscenes/; update presentation_media.json.\nGenerator: Seedance 5 through the ElevenLabs connector (handbook §3, 4 Nov; Veo is an alternative). If you cannot run the compose scripts, put the approved Veo shots in production/cutscenes/v7/src/shots/<CS id>/ and block the task with reason 'shots ready, needs composing' so a claude or codex lane finishes it.\nDialogue is the scene's own lines, word for word. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2475,8 +2475,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "gemini",
    "title": "Chapter 5 cutscenes: CS-08, CS-09, CS-10",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
     "production/cutscenes/",
@@ -2490,7 +2490,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "Generation can start now (start frames from the v8 character sheets, as for v7); wiring into the game uses the M1-10 runtime once it is merged.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Goal: the Chapter 5 cutscenes exist in the current anime style and play in the campaign (runtime from M1-10).\nDo: per execution/CUTSCENE_<id>.md and PRODUCTION_HANDBOOK.md §9 ('Make with' column): in-engine shots are staged in Godot and captured\nwith the Movie Maker OGV route; generated shots use start frames rendered from the final 3D models (production/tools/ pipeline in\nhandbook §6), then compose with compose_cutscene.py and ogv_writer.gd into game/assets/cutscenes/; update presentation_media.json.\nGenerator: Seedance 5 through the ElevenLabs connector (handbook §3, 4 Nov; Veo is an alternative). If you cannot run the compose scripts, put the approved Veo shots in production/cutscenes/v7/src/shots/<CS id>/ and block the task with reason 'shots ready, needs composing' so a claude or codex lane finishes it.\nDialogue is the scene's own lines, word for word. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2685,8 +2685,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "gemini",
    "title": "Chapter 6 cutscenes: CS-11, CS-12",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
     "production/cutscenes/",
@@ -2699,7 +2699,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "Generation can start now (start frames from the v8 character sheets, as for v7); wiring into the game uses the M1-10 runtime once it is merged.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Goal: the Chapter 6 cutscenes exist in the current anime style and play in the campaign (runtime from M1-10).\nDo: per execution/CUTSCENE_<id>.md and PRODUCTION_HANDBOOK.md §9 ('Make with' column): in-engine shots are staged in Godot and captured\nwith the Movie Maker OGV route; generated shots use start frames rendered from the final 3D models (production/tools/ pipeline in\nhandbook §6), then compose with compose_cutscene.py and ogv_writer.gd into game/assets/cutscenes/; update presentation_media.json.\nGenerator: Seedance 5 through the ElevenLabs connector (handbook §3, 4 Nov; Veo is an alternative). If you cannot run the compose scripts, put the approved Veo shots in production/cutscenes/v7/src/shots/<CS id>/ and block the task with reason 'shots ready, needs composing' so a claude or codex lane finishes it.\nDialogue is the scene's own lines, word for word. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2894,8 +2894,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "gemini",
    "title": "Chapter 7 cutscenes: CS-13",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
     "production/cutscenes/",
@@ -2907,7 +2907,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "Generation can start now (start frames from the v8 character sheets, as for v7); wiring into the game uses the M1-10 runtime once it is merged.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Goal: the Chapter 7 cutscenes exist in the current anime style and play in the campaign (runtime from M1-10).\nDo: per execution/CUTSCENE_<id>.md and PRODUCTION_HANDBOOK.md §9 ('Make with' column): in-engine shots are staged in Godot and captured\nwith the Movie Maker OGV route; generated shots use start frames rendered from the final 3D models (production/tools/ pipeline in\nhandbook §6), then compose with compose_cutscene.py and ogv_writer.gd into game/assets/cutscenes/; update presentation_media.json.\nGenerator: Seedance 5 through the ElevenLabs connector (handbook §3, 4 Nov; Veo is an alternative). If you cannot run the compose scripts, put the approved Veo shots in production/cutscenes/v7/src/shots/<CS id>/ and block the task with reason 'shots ready, needs composing' so a claude or codex lane finishes it.\nDialogue is the scene's own lines, word for word. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -3132,8 +3132,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "gemini",
    "title": "Chapter 8 cutscenes: CS-14, CS-15, CS-16, CS-17, CS-18",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
     "production/cutscenes/",
@@ -3149,7 +3149,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "Generation can start now (start frames from the v8 character sheets, as for v7); wiring into the game uses the M1-10 runtime once it is merged.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Goal: the Chapter 8 cutscenes exist in the current anime style and play in the campaign (runtime from M1-10).\nDo: per execution/CUTSCENE_<id>.md and PRODUCTION_HANDBOOK.md §9 ('Make with' column): in-engine shots are staged in Godot and captured\nwith the Movie Maker OGV route; generated shots use start frames rendered from the final 3D models (production/tools/ pipeline in\nhandbook §6), then compose with compose_cutscene.py and ogv_writer.gd into game/assets/cutscenes/; update presentation_media.json.\nGenerator: Seedance 5 through the ElevenLabs connector (handbook §3, 4 Nov; Veo is an alternative). If you cannot run the compose scripts, put the approved Veo shots in production/cutscenes/v7/src/shots/<CS id>/ and block the task with reason 'shots ready, needs composing' so a claude or codex lane finishes it.\nDialogue is the scene's own lines, word for word. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
