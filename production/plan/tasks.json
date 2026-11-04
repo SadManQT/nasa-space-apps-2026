@@ -733,8 +733,8 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Cast the voices on ElevenLabs",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
     "production/audio/voice_cast.csv",
@@ -746,7 +746,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Needs the ElevenLabs connector logged in to the account with credits. Goal: one approved voice per speaker group.\nDo: for Kai, Amara, Mei, Rafi (adult cadets, 19–20), Commander Ferreira (mid-40s, Brazilian-Portuguese-accented English per the character\nbible), Rao (adult flight controller), Dr Noor Rahman (older Bangladeshi woman, warm, English), N. archive (Noor's stored recordings, slightly\ndegraded), Engineer and Family: read execution/VOICE_<NAME>.md and game-design/04_CHARACTER_BIBLE.md, pick from the voice library or design\nvoices (creative_design_voice) — adult voices only, never a child's voice. Generate one representative line per speaker from\nproduction/audio/vo_lines.csv (two takes each, default count). Save choices to production/audio/voice_cast.csv (speaker, voice_id, voice\nname, model, stability/similarity/style settings, sample file). Ask the user to approve. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -797,8 +797,8 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Music CUE-01 to CUE-04 for Chapter 1",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
     "game/assets/audio/music/",
@@ -809,7 +809,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Do: per execution/MUSIC_CUE01..04.md and production/audio/music_cues.csv (emotional job, length, loop, entry/exit), generate with\nElevenLabs Music: CUE-01 Home Not Yet, CUE-02 Small Work, CUE-03, CUE-04. Instrumental only, seamless loops where marked (crossfade the\nloop point), export .ogg to each game_file path, -18 LUFS. Ask the user to approve CUE-01 before generating the rest. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -819,8 +819,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 1 sound effects (16) and UI sounds",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
     "game/assets/audio/sfx/",
@@ -832,7 +832,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Do: generate the 16 Chapter 1 effects in production/audio/sfx_list.csv (first_scenes in CH01: fans, pump, water transfer, valve, glove port,\nshutter, door latch, hatch seal, Earth radio in/lost, aged recorder, particle alert, camera shutter, shift commit) plus SFX_UI_CONFIRM and\nSFX_UI_SOFT_ERROR with ElevenLabs sound effects, per the matching execution/SFX_NN.md prompt (numbered in sfx_list.csv row order; index in execution/99_COVERAGE_MATRIX.md). Interior sound only — nothing airborne outside the habitat\n(suit/contact/cabin sound only). Loops seamless; export .ogg to game_file; fill each caption column. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
