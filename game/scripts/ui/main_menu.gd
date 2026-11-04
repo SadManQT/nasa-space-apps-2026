@@ -427,8 +427,8 @@ func _build_briefing() -> void:
 func _build_science() -> void:
 	_science = _panel(Color(0.03, 0.05, 0.10, 0.99), 18, Color(0.13, 0.72, 0.78, 0.68))
 	_science.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	_science.position = Vector2(-430, -285)
-	_science.size = Vector2(860, 570)
+	_science.position = Vector2(-480, -320)
+	_science.size = Vector2(960, 640)
 	_science.hide()
 	add_child(_science)
 	var margin := MarginContainer.new()
@@ -453,21 +453,25 @@ func _build_science() -> void:
 	intro.add_theme_font_size_override("font_size", 16)
 	intro.add_theme_color_override("font_color", IVORY)
 	content.add_child(intro)
+	# Rows and disclosure scroll, so BACK TO TITLE stays on screen at 1.5x text.
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	content.add_child(scroll)
 	var cards := VBoxContainer.new()
+	cards.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	cards.add_theme_constant_override("separation", 8)
-	content.add_child(cards)
+	scroll.add_child(cards)
 	cards.add_child(_source_row("SIMULATED", "Aurora Station / 2046 mission", "Fictional station, cadets, dates and game resources. Used for the training scenario."))
-	cards.add_child(_source_row("TRAINING SCENARIO", "Polar night and Earth-link exercise", "A teaching model until the offline lunar processing bundle is validated."))
-	cards.add_child(_source_row("DOCUMENTED", "NASA Space Apps Challenge 2026", "Challenge context and source notes are credited in the repository docs; no NASA endorsement is implied."))
-	var spacer := Control.new()
-	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	content.add_child(spacer)
+	cards.add_child(_source_row("TRAINING SCENARIO", "36-hour night and Earth-link cutoff", "The night is sized to a published Shackleton-rim site (Mazarico et al. 2011). In the computed April 2046 sky (JPL Horizons), Earth is below the exact pole's horizon and rising all night, so the shift-4 Earth-link cutoff is an authored training event."))
+	cards.add_child(_source_row("OBSERVED + COMPUTED", "Chapter 1 sources (each Data Card shows its dataset ID and link)", "NASA JPL Horizons (Sun and Earth positions) · NASA DONKI and NOAA GOES-13 (the 10 Sep 2017 storm) · LRO LOLA illumination study, Mazarico et al. 2011 · NASA BVAD 2022 (air and food) · NASA 10 kW solar array study · Townsend et al. 1988 and Clowdsley 2021, NASA Langley (water shielding) · NASA OSDR and Wisconsin Fast Plants (Brassica rapa)."))
+	cards.add_child(_source_row("DOCUMENTED", "NASA Space Apps Challenge 2026", "Made by an independent team for the challenge. No NASA endorsement is implied."))
 	var disclosure := Label.new()
-	disclosure.text = "AI disclosure: current gameplay code uses no newly generated asset in this chapter. Existing approved project assets remain credited in production records.\nAccessibility: captions, readable text, pause-safe decisions and timer-free progression are the default route."
+	disclosure.text = "AI disclosure: AI tools made this game's 3D models and animation, cutscene images and video, and all voices, music and sound effects, and wrote the game code to the team's specifications. The story, dialogue, puzzle rules, numbers and science mapping are the team's. Every generation is logged in production/AI_PROMPT_LOG.md (summary: docs/AI_USE.md).\nAccessibility: captions, readable text, pause-safe decisions and timer-free progression are the default route."
 	disclosure.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	disclosure.add_theme_font_size_override("font_size", 13)
 	disclosure.add_theme_color_override("font_color", MUTED)
-	content.add_child(disclosure)
+	cards.add_child(disclosure)
 	var close := _button("BACK TO TITLE", Color(0.12, 0.18, 0.28), IVORY)
 	close.name = "BackToTitle"
 	close.pressed.connect(close_science)

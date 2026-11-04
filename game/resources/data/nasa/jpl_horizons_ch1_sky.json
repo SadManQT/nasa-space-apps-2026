@@ -1,6 +1,6 @@
 {
  "source_id": "jpl_horizons_ch1_sky",
- "retrieved": "2026-11-04",
+ "retrieved": "2026-11-05",
  "title": "Earth and Sun from the lunar south pole, April 2046 (Chapter 1)",
  "agency": "NASA Jet Propulsion Laboratory (Horizons)",
  "dataset_id": "Horizons targets 399 (Earth) and 10 (Sun), site coord@301 0E -90 h0, 6-hourly",
@@ -868,7 +868,7 @@
    ],
    "unit": "utc",
    "formula": "linear interpolation of elevation sign change",
-   "drives": "P-02 Earth-set beat (see SCIENCE_AND_DATA B3-5)"
+   "drives": "P-02 Earth-link cutoff context (authored; see SCIENCE_AND_DATA B3-5)"
   },
   {
    "name": "earth_elevation_night_start",
@@ -892,6 +892,6 @@
    "drives": "P-02 'Earth is down'"
   }
  ],
- "boundary": "Ideal horizon at the exact pole. An elevated rim site sees farther; Aurora's coordinate and the LOLA horizon mask are still pending.",
+ "boundary": "Ideal horizon at the exact pole. Earth was below it from 15 to 28 April 2046 and rising through Chapter 1's night; a higher site would only see Earth rise sooner. Aurora's shift-4 Earth-link cutoff is an authored training event, not Earth setting.",
  "src_card": "SRC-POLAR"
 }

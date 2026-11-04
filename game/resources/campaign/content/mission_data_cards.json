@@ -172,7 +172,7 @@
     ],
     "text": "Aurora's solar power comes from low, sideways sunlight. The battery holds at most 20 units, so power that does not fit is lost. Making stored air now turns spare power into something the crew can use later."
    },
-   "limits": "Computed by NASA JPL for a flat horizon at the exact pole. Hills, crater rims and Aurora's real site change the sunlight it gets.",
+   "limits": "Computed with NASA JPL's Horizons service for a flat horizon at the exact pole. Hills, crater rims and Aurora's real site change the sunlight it gets.",
    "source_lines": [
     "NASA Jet Propulsion Laboratory (Horizons) · The Sun's height at the lunar south pole, 2046-2047 · Horizons target 10 (Sun), site coord@301 0E -90 h0 · https://ssd.jpl.nasa.gov/horizons/"
    ],
@@ -238,7 +238,7 @@
     "lro_mazarico_2011_illumination"
    ],
    "evidence": "Published value",
-   "plain": "Even the sunniest places near the south pole have nights. NASA's LRO spacecraft mapped the sunlight at one spot on the rim of Shackleton crater. Its longest stretch of total darkness is about 1.5 days.",
+   "plain": "Even the sunniest places near the south pole have nights. Scientists used maps from NASA's LRO laser altimeter to calculate the sunlight at one spot on the rim of Shackleton crater. Its longest stretch of total darkness is about 1.5 days.",
    "visual": {
     "kind": "bar",
     "values": [
@@ -262,7 +262,7 @@
     ],
     "text": "In daylight shifts 1 and 2 the panels add 8 units each. Then come 36 hours with no solar power at all. Air, warmth and lamp light for the whole night must come from what you store now."
    },
-   "limits": "This is one measured spot, not Aurora's site. Aurora's 36-hour night is a training scenario sized to match it.",
+   "limits": "This is one modelled spot, not Aurora's site. Aurora's 36-hour night is a training scenario sized to match it.",
    "source_lines": [
     "NASA Goddard Space Flight Center (LRO LOLA) · Illumination of the lunar poles from LRO LOLA topography · NTRS 20120010094; DOI 10.1016/j.icarus.2010.10.030 · https://ntrs.nasa.gov/citations/20120010094"
    ],
@@ -281,7 +281,7 @@
     "donki_2017_09"
    ],
    "evidence": "Observed",
-   "plain": "On 10 September 2017, a huge flare on the Sun threw out a storm of protons. Protons are tiny, fast pieces of atoms. Seventy minutes after the flare began, a weather satellite near Earth measured the proton storm.",
+   "plain": "On 10 September 2017, a huge flare and a very fast cloud of solar gas sped up a storm of protons. Protons are tiny, fast pieces of atoms. Seventy minutes after the flare began, a weather satellite near Earth measured the proton storm.",
    "visual": {
     "kind": "line",
     "values": [
@@ -341,9 +341,9 @@
     "labels": [
      "Fast protons near Earth, 10 to 12 September 2017",
      "Storm level (10 pfu) reached at 16:45 UTC",
-     "Highest 5-minute reading: 1,347 pfu"
+     "West-facing sensor's highest 5-minute reading: 1,347 pfu"
     ],
-    "note": "Hourly means are drawn; the 1,347 label is the 5-minute maximum, so the line peaks lower.",
+    "note": "Hourly means from the west-facing sensor are drawn; the 1,347 label is its 5-minute maximum, so the line peaks lower. NOAA's official peak, 1,490 pfu at 11:45 UTC on 11 Sep, is from the east-facing sensor.",
     "from": [
      "goes13_protons_2017_09 values.hourly[*][1]",
      "goes13_protons_2017_09 values.hourly[0][0]",
@@ -358,7 +358,7 @@
     ],
     "text": "Aurora replays this storm in dark shifts 5 and 6. Wall water (W) plus supply crates (K) make shelter S, up to 6, and more shelter means less exposure Z. If Z goes above 3 the mission stops, and after the storm the water must go back to the garden."
    },
-   "limits": "GOES-13 measured this in orbit around Earth, inside Earth's magnetic shield, not at the Moon. The 2046 night and Aurora are fiction, and exposure Z is a game score, not a real radiation dose.",
+   "limits": "GOES-13 measured this 36,000 km above Earth, where Earth's magnetic field barely slows protons this fast. The Moon has no magnetic field or air, so a storm like this reaches its surface. This is a flux, not a dose at the Moon. The real storm stayed above storm level for about three and a half days. Aurora's replay shortens it to two shifts; that is a game rule. The 2046 night and Aurora are fiction, and exposure Z is a game score, not a real radiation dose.",
    "source_lines": [
     "NOAA National Centers for Environmental Information (partner agency) · GOES-13 proton flux during the 10 September 2017 storm · GOES-13 EPEAD corrected integral proton flux, 5-min (g13_epead_cpflux_5m_20170901_20170930) · https://www.ncei.noaa.gov/products/goes-1-15/space-weather-instruments",
     "NASA GSFC Community Coordinated Modeling Center (DONKI) · Solar flares, CMEs and particle events of 4-12 September 2017 · DONKI 2017-09-10T15:35:00-FLR-001; 2017-09-10T16:25:00-SEP-001; 2017-09-10T16:45:00-SEP-001; 2017-09-10T16:09:00-CME-001 · https://ccmc.gsfc.nasa.gov/tools/DONKI/"

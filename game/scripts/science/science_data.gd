@@ -20,7 +20,7 @@ const TAKEAWAYS := {
 	"esa_moonlight_relay": "Terrain can block a direct Earth link, so Aurora needs a verified relay path.",
 	"fast_plants_lifecycle": "Fast Plants need compatible pollination, so Aurora cares for both Alo and Tara.",
 	"goes13_protons_2017_09": "Measured proton flux rose during the 2017 event, so Aurora practises sheltering before the peak.",
-	"jpl_horizons_ch1_sky": "Earth can cross the polar horizon, so Aurora plans communication gaps using a qualified sky calculation.",
+	"jpl_horizons_ch1_sky": "In the computed April 2046 sky, Earth is below the exact pole's horizon and rising all night, so Aurora's shift-4 Earth-link cutoff is an authored training event.",
 	"jpl_horizons_ch8_relay": "Earth bearing changes with time, so Aurora must verify pointing and terrain clearance separately.",
 	"jpl_horizons_pole_season": "The polar Sun stays low and changes with season, so Aurora cannot assume continuous power.",
 	"jpl_ipn_42_176_dte": "Polar sites differ in Earth visibility, so Aurora checks communication access as well as sunlight.",

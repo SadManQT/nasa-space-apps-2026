@@ -12,7 +12,7 @@ NASA Space Apps Challenge 2026 · Challenge: **[Build a Junior Astronaut Mission
 
 ## The pitch
 
-Last Light Academy is a 3D story game for ages 10–15, for classrooms and families. Four young cadets run Aurora Station at the Moon's south pole. In Chapter 1 the Sun sets for 36 hours, Earth sinks below the horizon, and a replay of the real solar storm of 10 September 2017 arrives. The cadets must keep the crew safe, keep the base running and keep Alo, a small mustard plant, alive until sunrise. Power, air, shielding water and food all come from the same small supply, so every choice is a trade-off: the water that shields the crew is the water Alo drinks. The game's key numbers come from NASA data, and in-game Data Cards show each source and say what is measured, what is computed and what is a training assumption. The full story runs over 8 chapters, 32 missions and 96 scenes across one Moon year.
+Last Light Academy is a 3D story game for ages 10–15, for classrooms and families. Four young cadets run Aurora Station at the Moon's south pole. In Chapter 1 the Sun sets for 36 hours, the link to Earth is cut in a training exercise, and a replay of the real solar storm of 10 September 2017 arrives. The cadets must keep the crew safe, keep the base running and keep Alo, a small mustard plant, alive until sunrise. Power, air, shielding water and food all come from the same small supply, so every choice is a trade-off: the water that shields the crew is the water Alo drinks. The game's key numbers come from NASA data, and in-game Data Cards show each source and say what is measured, what is computed and what is a training assumption. The full story runs over 8 chapters, 32 missions and 96 scenes across one Moon year.
 
 ## Videos
 
@@ -62,9 +62,9 @@ The challenge asks for a game in which students *"run a lunar or Martian outpost
 |---|---|---|
 | **Power** | Energy in "sun-drops" (1 drop ≈ 10 kWh). The battery holds 20. Daylight adds 8 per shift; the 36-hour night adds none. The heater, the air maker and the grow lamp all spend drops. | NASA 10 kW south-pole solar array study; LOLA illumination study of Shackleton's rim; JPL Horizons Sun positions |
 | **Life support** | Air tank (holds 10 units; 1 unit = 1.07 kg of oxygen, what four people breathe in 7.2 hours). The crew uses 1 unit per shift. If the air runs out, flight rules stop the mission. | NASA Life Support Baseline Values and Assumptions Document (BVAD), 2022 |
-| **Radiation shielding** | A water wall (6 units = 20 g/cm² of water) plus supply crates make the shelter. Crew storm dose must stay at 3 or less. When the alarm sounds: **PUMP**, **STACK** or **WAIT**. | NASA DONKI and GOES-13 records of the 10 Sep 2017 storm; NASA lunar shielding guidance (20 g/cm²) |
+| **Radiation shielding** | A water wall (6 units = 20 g/cm² of water) plus supply crates make the shelter. Crew storm dose must stay at 3 or less. When the alarm sounds: **PUMP**, **STACK** or **WAIT**. | NASA DONKI and GOES-13 records of the 10 Sep 2017 storm; 20 g/cm² of water keeps the worst recorded solar storms under the 30-day limit (Townsend et al. 1988, NASA) |
 | **Food production** | Crops and rations (4 crew eat 1.2 crew-days of food per shift). The garden and Alo need light and warmth, which cost power, and water, which the shield also needs. | NASA BVAD food rates; NASA OSDR *Brassica rapa* growth on the ISS; *Brassica rapa* grown seed-to-seed on Mir |
-| **Running the outpost** | Seven shifts of 7.2 hours on the Mission Table. Each cadet holds information the others need. Preview a plan, commit it, see what happens. After Earth sets, there is no help from Mission Control. | JPL Horizons: from the pole, Earth set on 15 Apr 2046 and stays below the horizon all of Chapter 1's night |
+| **Running the outpost** | Seven shifts of 7.2 hours on the Mission Table. Each cadet holds information the others need. Preview a plan, commit it, see what happens. After the shift-4 Earth-link cutoff, there is no help from Mission Control. | JPL Horizons: from the exact pole, Earth set on 15 Apr 2046 and stays below the horizon, rising, all through Chapter 1's night, so the cutoff is an authored training event, not Earth setting |
 
 Chapters 2–8 add more of the same trade-offs: pollination and seed harvest, an air leak after a moonquake, a rover trip into a cold trap, an eclipse, a "what if" super-storm, and a relay to bring back the link to Earth ([docs/SCIENCE_AND_DATA.md](docs/SCIENCE_AND_DATA.md) §B2 traces every puzzle).
 
@@ -76,10 +76,10 @@ The game ships small offline extracts of 28 NASA and partner sources (`game/reso
 |---|---|---|---|
 | **DONKI** space-weather records, 6–10 Sep 2017 | The real storm timeline: X8.2 flare at 15:35 UT on 10 Sep, particles 70 minutes later | Chapter 1 storm alarm and Rafi's forecast | Yes |
 | **LOLA** illumination study (Mazarico et al. 2011) | A Shackleton-rim site's longest darkness, about 1.5 days → the 36-hour night | Chapter 1 night length | Yes |
-| **JPL Horizons** | The low polar Sun; when Earth sets and rises; where Earth is from Mons Malapert | Earth-set in Chapter 1; relay aiming in Chapter 8 | Yes |
+| **JPL Horizons** | The low polar Sun; Earth's height above the pole's horizon; where Earth is from Mons Malapert | Chapter 1 sky Data Card (the Earth-link cutoff is an authored training event); relay aiming in Chapter 8 | Yes |
 | **BVAD** Rev 2 (2022) | Oxygen 0.895 kg and food 0.8 kg per person per day | Air and food in every chapter | Yes |
 | **Relocatable 10 kW Solar Array** / VSAT (NASA LaRC) | The power scale: 1 sun-drop ≈ 10 kWh | Power card, solar masts | Yes |
-| Lunar radiation shielding guidance (Clowdsley 2021, NASA LaRC) | 20 g/cm² of water makes a storm shelter | Water wall and shelter rating | Yes |
+| Solar-storm shielding study (Townsend, Nealy & Wilson 1988, NASA LaRC); lunar radiation guidance (Clowdsley 2021, NASA LaRC) | 20 g/cm² of water: enough to keep the worst recorded solar storms under the 30-day limit (Townsend et al. 1988); NASA's 2021 lunar guidance uses the same thickness as its target against cosmic rays (Clowdsley) | Water wall and shelter rating | Yes |
 | **LRO CRaTER** dose at the Moon; **DONKI** and **STEREO-A** records, July 2012 | The real dose rise at the Moon and the three-wave particle profile | Chapter 7 "what if" storm, clearly labelled | Yes |
 | **OSDR** *Brassica rapa* on the ISS (OSD-59, OSD-412); seed-to-seed on Mir | Grow-light levels; one plant per cassette; a full life cycle in space | The garden lamp and Alo | Yes |
 | **LCROSS**, **Diviner**, **VIPER** | Ice at 5.6 % by mass, 38 K cold traps, a 15° rover slope limit | Chapter 4 rover trip | Yes |
@@ -180,7 +180,7 @@ Team **The Last BrainCell** · Dhaka, Bangladesh · [Space Apps team page](https
 > covers Bangladesh's fields every winter.
 >
 > Four young cadets. One mustard plant named Alo. One Moon-night training scenario shaped by documented lunar science:
-> the Sun disappears for a day and a half, Earth sinks below the horizon, and a labelled storm replay is considered.
+> the Sun disappears for a day and a half, the link to Earth is cut, and a labelled storm replay is considered.
 >
 > Keep the crew safe. Keep the base running. And at sunrise, Alo blooms.
 
@@ -229,8 +229,9 @@ for the next **36 hours** the base lives on whatever is in the battery.
 **2. The Drill.** Commander Ferreira, at Mission Control on Earth, calls a storm drill: *"Practice building the
 shelter."* Then Rafi gets a private message: *"Sunspot 2673 just fired a giant flare. Another big one may come."*
 
-**3. Earth-Set.** From the south pole, Earth slowly sinks below the horizon. *"Earth-set in ten seconds,"* says
-Ferreira. *"From here, you're on your own."* The radio hisses, then goes silent. **No Sun. No Earth.**
+**3. The Earth Link Closes.** At shift 4 the training scenario cuts the link to Mission Control. Ferreira's last live
+words: *"Local rules remain active. Read back the next safe action."* The channel greys out and stored guidance takes
+over. **No Sun. No Earth link.**
 
 **4. The Storm.** Rafi's radiation counter starts ticking: the first particles of a giant solar storm, a replay of the
 real storm of **10 September 2017**. The screen flips: **THIS IS NOT A DRILL.** There are 90 seconds to pump water
@@ -247,8 +248,9 @@ and Ferreira's voice crackles back: *"You didn't survive the Moon. You ran it."*
 - **Observed:** the storm's timing comes from NASA's DONKI record of 10 September 2017, and LRO's CRaTER instrument
   measured that storm at the Moon. On Mars, the Curiosity rover measured the same storm. LROC's polar map measured
   how often each spot near the pole is sunlit.
-- **Computed** (once the team's processing is checked): Aurora's horizon and the Sun and Earth paths, from LOLA
-  terrain and JPL Horizons. Until then, the 36-hour night and the Earth-set are labelled *training scenario*.
+- **Computed:** the Sun and Earth paths, from JPL Horizons. In that sky Earth stays below the pole's horizon and rises
+  through the night, so the shift-4 Earth-link cutoff is labelled *training scenario*, like the 36-hour night. Aurora's
+  own horizon from LOLA terrain is still being processed.
 - **Simulated / fiction:** Aurora Station, the cadets, Alo, sun-drops, the 2046 dates, and what the storm does to
   this base.
 
@@ -264,8 +266,8 @@ a friend*. If Alo is lost, the crew is safe, Tara is still growing, and a locked
 | **Mei** | Garden: food and Alo | Talks to her plants. "The garden is not a side system." |
 | **Rafi** | Safe Room: radiation shield | Checks twice and warns early; his warnings get the shelter ready in time |
 | **Alo** ("light" in Bangla) | A faceless field-mustard plant | Leans, droops, recovers and blooms through biological stages |
-| **Commander Ferreira** | Instructor at Mission Control (Earth) | Calm and strict; only speaks while Earth is in the sky |
-| **Rao** | Flight controller (Earth) | Friendly; one hint per shift until Earth-set |
+| **Commander Ferreira** | Instructor at Mission Control (Earth) | Calm and strict; only speaks while the Earth link is open |
+| **Rao** | Flight controller (Earth) | Friendly; one hint per shift until the Earth-link cutoff |
 | **Tara** ("star" in Bangla) | Alo's partner flower, grown indoors | Without Tara, Alo can't make seeds |
 | **Dr. Noor Rahman ("N.")** | Expedition Zero's gardener, from Bangladesh | Left the seeds. Her name means "light", just like Alo's |
 
@@ -297,7 +299,7 @@ valves and equipment.
 ### One shift (2 to 3 minutes)
 
 1. **Secret.** Sometimes one cadet gets a private message: "For Kai only."
-2. **Talk and plan.** While Earth is up, Rao offers one hint. A **ghost preview** shows the result *before* you commit.
+2. **Talk and plan.** While the Earth link is open, Rao offers one hint. A **ghost preview** shows the result *before* you commit.
 3. **Run.** A time-lapse plays: the Sun moves, frost or warm light spreads, bubbles rise, Alo reacts.
 4. **Result.** Big icons show what changed, and why.
 
@@ -308,7 +310,7 @@ valves and equipment.
 | 1 | Day | Meet the crew. Secrets for Kai and Amara. Sun-drops pour in |
 | 2 | Day | The **storm drill** (practice). A secret for Rafi |
 | 3 | **Last Light** | The Sun sets behind the mountains. A secret for Mei |
-| 4 | **Earth-set** | The radio goes silent, and the hints stop |
+| 4 | **Earth-link cutoff** | The Earth link greys out, and the hints stop |
 | 5 | **The Storm** | THIS IS NOT A DRILL: **PUMP**, **STACK** or **WAIT** |
 | 6 | Storm | Particles keep coming; the wall decides the dose |
 | 7 | The last dark shift | Will the jar last? |
@@ -340,13 +342,13 @@ The storm drill in shift 2 uses the same tasks, so nobody meets the controls for
 | Energy budgets | Sun-drops you count and move | Solar power only while the Sun is up |
 | Battery limits | The jar holds 20; extra drops spill | Turn spare sunlight into air and growth |
 | The polar Sun | The Sun circles the horizon behind mountains | Rim sites are sunlit most of the year; published longest nights for Shackleton rim sites are ~1.5 days (Mazarico et al. 2011). Aurora's exact night is a training scenario |
-| Talking to Earth | Earth sinks and the radio turns to static | Earth's height above a polar horizon changes over the month, so when it is visible depends on the exact site and terrain |
-| Shielding | Sparks fizzle in the blue water wall | ~20 g/cm² of water makes a storm shelter |
+| Talking to Earth | The Earth link greys out and stored guidance takes over | In the computed April 2046 sky, Earth was below the exact pole's horizon from 15 to 28 April and rising during this night. Aurora's shift-4 Earth-link cutoff is an authored training event, not Earth setting |
+| Shielding | The wall gauge fills and the exposure meter stays low | ~20 g/cm² of water keeps the worst recorded solar storms under the 30-day limit (Townsend et al. 1988, NASA) |
 | Photosynthesis | Lamp OFF −1, DIM ±0, FULL +1 | Respiration and the light compensation point |
 | Plants vs radiation | The storm scares Alo, but cold and thirst are the real danger | Plants generally tolerate much higher doses than people (not immunity) |
 | Shared resources | The shield water *is* Alo's water | Multi-use water, as in NASA's water-wall concepts |
 | Crew first | Running out of air ends the mission | Real flight rules |
-| Teamwork | Secrets and the Earth-set silence | Scott Kelly's zinnias; NASA team training |
+| Teamwork | Secrets and the Earth-link silence | Scott Kelly's zinnias; NASA team training |
 
 The lesson in one line: **missions fail from silence.**
 

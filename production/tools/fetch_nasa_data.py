@@ -267,8 +267,9 @@ def fx_goes13_protons_2017_09():
             derived("shift2_over_shift1", round(m2 / m1, 2), "ratio", "storm_shift2_mean / storm_shift1_mean",
                     "P-02 proposal B3-4 (not applied)"),
         ],
-        boundary="Measured in geostationary Earth orbit, inside Earth's magnetosphere; not a dose at the Moon. "
-                 "pfu = protons/(cm^2 s sr).",
+        boundary="Measured in geostationary orbit, about 36,000 km above Earth, where Earth's magnetic field barely "
+                 "slows protons this fast; a flux, not a dose at the Moon. West-facing detector; NOAA's official peak "
+                 "(1,490 pfu, 11 Sep 11:45 UT) is from the east-facing one. pfu = protons/(cm^2 s sr).",
         src_card="SRC-STORM2017")
 
 
@@ -420,13 +421,14 @@ def fx_jpl_horizons_ch1_sky():
                 "six_hourly": [[iso(a[0]), a[1], a[2], b[2]] for a, b in zip(earth, sun)]},
         evidence_label="Computed",
         derived=[derived("earth_horizon_crossings", crossings(earth), "utc", "linear interpolation of elevation sign change",
-                         "P-02 Earth-set beat (see SCIENCE_AND_DATA B3-5)"),
+                         "P-02 Earth-link cutoff context (authored; see SCIENCE_AND_DATA B3-5)"),
                  derived("earth_elevation_night_start", e["2046-04-25T18:00Z"], "deg", "25 Apr 2046 18:00 UT", "P-02"),
                  derived("earth_elevation_night_end", e["2046-04-27T06:00Z"], "deg", "27 Apr 2046 06:00 UT", "P-02"),
                  derived("earth_below_horizon_all_night", all(x[2] < 0 for x in night), "bool",
                          "every 6-hourly sample 25 Apr 18:00 - 27 Apr 06:00 < 0", "P-02 'Earth is down'")],
-        boundary="Ideal horizon at the exact pole. An elevated rim site sees farther; Aurora's coordinate and the "
-                 "LOLA horizon mask are still pending.",
+        boundary="Ideal horizon at the exact pole. Earth was below it from 15 to 28 April 2046 and rising through "
+                 "Chapter 1's night; a higher site would only see Earth rise sooner. Aurora's shift-4 Earth-link cutoff "
+                 "is an authored training event, not Earth setting.",
         src_card="SRC-POLAR")
 
 
@@ -660,7 +662,7 @@ def fx_clowdsley_2021_shielding():
         "NASA Langley Research Center", "NTRS 20210009760", "https://ntrs.nasa.gov/citations/20210009760", US_GOV,
         "Clowdsley, M. (2021) Protecting Astronauts from Space Radiation on the Lunar Surface, Lunar Surface "
         "Innovation Consortium, 9 Feb 2021.",
-        {"guideline_g_cm2": 20,
+        {"gcr_target_g_cm2": 20,
          "aug1972_spe_effective_dose_mSv_no_curtain": {"5": 185.4, "7": 136.9, "10": 105.4, "15": 85.1},
          "oct1989_spe_effective_dose_mSv_no_curtain": {"5": 160.1, "7": 136.9, "10": 108.0, "15": 88.9},
          "likely_spe_limit_mGy_eq_BFO": 250},
@@ -669,9 +671,12 @@ def fx_clowdsley_2021_shielding():
          derived("relative_dose_aug1972", {"5": 1.0, "7": 0.74, "10": 0.57, "15": 0.46}, "fraction of 5 g/cm2",
                  "dose / dose at 5 g/cm2", "P-02 shelter table comparison (B3-3)")],
         "Published value",
-        "Rover storm-shelter model for a female astronaut (slide 37); dose never reaches zero. Game zaps are not mSv.",
+        "20 g/cm2 is Clowdsley's target against galactic cosmic rays (GCR; slides 16, 31). For solar storms, Townsend, Nealy & "
+        "Wilson 1988 (NASA-TM-100620, NTRS 19880016043, p. 4) found 20 g/cm2 of water keeps the largest recorded "
+        "flares under the 30-day limit. Slide 37 is a rover storm-shelter model for a female astronaut; dose never "
+        "reaches zero. Game zaps are not mSv.",
         [(ntrs(20210009760), "ntrs", ["Protecting Astronauts from Space Radiation on the Lunar Surface"])],
-        transcribed="PDF pages 16 and 31 (20 g/cm2 guidance), 15 (250 mGy-eq), 37 (dose table); pdftotext 2026-11-03 "
+        transcribed="PDF pages 16 and 31 (20 g/cm2 GCR target), 15 (250 mGy-eq), 37 (dose table); pdftotext 2026-11-03 "
                     "from https://ntrs.nasa.gov/api/citations/20210009760/downloads/Clowdsley_Lunar_Radiation_Talk_v2.pdf",
         src_card="SRC-SHIELDING")
 

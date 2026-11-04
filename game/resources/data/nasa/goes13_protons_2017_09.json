@@ -1,6 +1,6 @@
 {
  "source_id": "goes13_protons_2017_09",
- "retrieved": "2026-11-04",
+ "retrieved": "2026-11-05",
  "title": "GOES-13 proton flux during the 10 September 2017 storm",
  "agency": "NOAA National Centers for Environmental Information (partner agency)",
  "dataset_id": "GOES-13 EPEAD corrected integral proton flux, 5-min (g13_epead_cpflux_5m_20170901_20170930)",
@@ -309,6 +309,6 @@
    "drives": "P-02 proposal B3-4 (not applied)"
   }
  ],
- "boundary": "Measured in geostationary Earth orbit, inside Earth's magnetosphere; not a dose at the Moon. pfu = protons/(cm^2 s sr).",
+ "boundary": "Measured in geostationary orbit, about 36,000 km above Earth, where Earth's magnetic field barely slows protons this fast; a flux, not a dose at the Moon. West-facing detector; NOAA's official peak (1,490 pfu, 11 Sep 11:45 UT) is from the east-facing one. pfu = protons/(cm^2 s sr).",
  "src_card": "SRC-STORM2017"
 }

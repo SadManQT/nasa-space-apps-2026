@@ -149,7 +149,7 @@ static func targets_for_scene(scene_id: String) -> Array:
 			targets.append(_p02_target("p02_shift2", room_id, "Commit daylight shift 2 at the dated gate", mission_id, scene_id, "p02-shift-2"))
 		"EX-CH01-S09":
 			targets.append(_target("combine_cards", room_id, "Combine Mei and Rafi observations", "cards_combined", mission_id, scene_id))
-			targets.append(_target("ack_earth_set", room_id, "Acknowledge the Earth-set cutoff", "earth_set_acknowledged", mission_id, scene_id, ["cards_combined"]))
+			targets.append(_target("ack_earth_set", room_id, "Acknowledge the Earth-link cutoff (training scenario)", "earth_set_acknowledged", mission_id, scene_id, ["cards_combined"]))
 			targets.append(_p02_target("p02_shifts3_4", room_id, "Resolve dark shifts 3 and 4", mission_id, scene_id, "p02-shifts-3-4"))
 		"EX-CH01-S10":
 			targets.append(_target("confirm_four_sheltered", room_id, "Confirm all four cadets sheltered", "four_sheltered", mission_id, scene_id))
