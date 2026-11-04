@@ -3478,7 +3478,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Save schema 3: record the player's story choices and moments (story_log)",
-   "status": "todo",
+   "status": "done",
    "deps": [],
    "paths": [
     "game/scripts/core/campaign_state.gd",
@@ -3491,10 +3491,10 @@
     "game/resources/campaign/content/campaign_catalog.json"
    ],
    "note": "From the narrative revision (doc 24 NR-01). No canon or 08 number changes. | 5 Nov 02:30: the code already landed on main in 8d6978b WITHOUT review (night-shift flaw, since fixed). Finish: take the screenshots (sandboxed engines write production/qa/evidence/M1-47_capture.sh, run by the night shift), and review commit 8d6978b against the acceptance criteria; fix any defect.",
-   "evidence": "",
+   "evidence": "Reviewed 8d6978b against all acceptance criteria; fixed long-label wrapping and added 144 layout checks. Fix-round GODOT=/Applications/Godot.app/Contents/MacOS/Godot game/tools/run_tests.sh: 30/30 suites passed (447 Chapter 1 flow, 64 story-log, 537 performance checks); output: production/qa/evidence/M1-47_tests.txt. Outside-sandbox windowed capture completed: production/qa/evidence/M1-47_capture.txt ends STORY LOG CAPTURE RESULT: PASS (0 failures). All 13 probes in production/qa/evidence/M1-47_probes.json passed. Four 1280x720 screenshots reviewed: production/qa/evidence/M1-47_preview.png, production/qa/evidence/M1-47_recorded.png, production/qa/evidence/M1-47_large_text.png, production/qa/evidence/M1-47_large_text_confirm.png. QA and screenshot links: production/qa/M1-47.md. The capture run printed repository-relative evidence paths directly; both capture logs remain unedited. Retained production/qa/evidence/M1-47_capture_output.txt, including the wrapper check: M1-47 evidence verified: 4 screenshots, 13 passing probes. Capture script parse and wrapper shell syntax passed. No pending visual-review action. No commit or push.",
    "updated": "2026-11-05",
    "prompt": "Problem: the 96 decision reviews converge without a trace. CampaignState.new_snapshot() (schema 2) has no choice store; campaign_panels.gd emits preview_puzzle with an option_id and nothing records it, so no later scene or journal can show that a choice mattered.\nRead first: game-design/24_NARRATIVE_REVISION.md §5.1, §5.2 and §5.4; game/scripts/core/campaign_state.gd; game/scripts/save/save_service.gd (migrate, _migrate_v1); game/scripts/core/campaign_director.gd (commit, _transition); the catalog's scenes[].choice (ids EX-CHxx-Syy-CHOICE, options EX-CHxx-Syy-OPTnn).\nGoal: the smallest change that stores choices and moments in the save.\nDo: (1) SCHEMA_VERSION 2 -> 3 in campaign_state.gd and save_service.gd; new_snapshot() gains \"story_log\": {\"choices\": {}, \"moments\": []}. (2) SaveService.migrate() gains _migrate_v2() that copies a v2 snapshot and adds an empty story_log; v1 still migrates (v1 -> v2 -> v3). (3) validate_snapshot(): story_log.choices is a Dictionary of Dictionaries {option_id, scene_id, scenario_datetime, state_revision}; each option_id must exist in that choice's catalog options, or the choice id must be in a small allow-list of new ids (start with EX-CH03-S11-DEDICATION); moments is an Array of unique Strings. (4) Two director verbs committed like every other command (receipt, revision, idempotent by command_id): record_choice {choice_id, option_id} and record_moment {moment_id}. Previews never record. A choice locks once its scene's exit predicate has passed. (5) Wire Chapter 1: confirming a decision review (EX-CH01-S01..S12) sends record_choice.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). New tests: a v2 save loads and migrates to v3 with an empty story_log; confirming EX-CH01-S01-CHOICE adds exactly one entry; a preview adds none; a repeated command_id adds nothing; an unknown option_id is rejected with a reason; a choice cannot change after its scene exit. Paste the test names into the evidence.",
-   "owner": "",
+   "owner": "Sadman/night-codex",
    "blocker": ""
   },
   {
