@@ -238,6 +238,8 @@ func _render_active_panel() -> void:
 	var value = _query.get(query_key, {})
 	if _active_panel == "settings_accessibility":
 		_render_settings()
+	elif _active_panel == "pause":
+		_render_data("The expedition is paused. Close this panel to resume.")
 	elif _active_panel == "dialogue_captions":
 		_render_dialogue(value)
 	elif _active_panel == "puzzle":
@@ -347,6 +349,8 @@ func _render_settings() -> void:
 		var check := CheckButton.new()
 		check.name = key
 		check.text = _setting_label(key)
+		check.add_theme_color_override("font_pressed_color", IVORY)
+		check.add_theme_color_override("font_hover_pressed_color", IVORY)
 		check.button_pressed = bool(_settings.get(key, false))
 		check.focus_mode = Control.FOCUS_ALL
 		check.pressed.connect(func() -> void:

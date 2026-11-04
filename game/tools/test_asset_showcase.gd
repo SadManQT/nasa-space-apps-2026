@@ -25,7 +25,8 @@ func _run() -> void:
 		quit(1)
 		return
 	var gate_output: Array = []
-	var gate_status := OS.execute("python3", ["-B", ProjectSettings.globalize_path("res://../production/tools/test_verify_gate.py")], gate_output, true)
+	var python := "python" if OS.get_name() == "Windows" else "python3"
+	var gate_status := OS.execute(python, ["-B", ProjectSettings.globalize_path("res://../production/tools/test_verify_gate.py")], gate_output, true)
 	_check(gate_status == 0 and "Ran 7 tests" in "\n".join(gate_output), "asset gate regressions reject failed Godot, empty output and missing expected records")
 	_test_inventory()
 	_test_bounds()

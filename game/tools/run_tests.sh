@@ -20,7 +20,9 @@ failed=0; count=0
 for t in tools/test_*${1:-}*.gd; do
   count=$((count + 1))
   tmp=$(mktemp)
-  "$GODOT" --headless --path . --script "res://$t" >"$tmp" 2>&1 & pid=$!
+  flags=(--headless --path .)
+  [[ "$t" == tools/test_player_controller.gd ]] && flags+=(--fixed-fps 60)
+  "$GODOT" "${flags[@]}" --script "res://$t" >"$tmp" 2>&1 & pid=$!
   for _ in $(seq "${SUITE_TIMEOUT:-300}"); do kill -0 "$pid" 2>/dev/null || break; sleep 1; done
   if kill -0 "$pid" 2>/dev/null; then kill "$pid"; wait "$pid" 2>/dev/null; rc=124; echo "TIMEOUT after ${SUITE_TIMEOUT:-300}s" >>"$tmp"
   else wait "$pid"; rc=$?; fi

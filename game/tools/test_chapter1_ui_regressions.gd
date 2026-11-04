@@ -21,6 +21,12 @@ func _init() -> void:
 	call_deferred("_run")
 
 func _run() -> void:
+	var keyboard_actions := {"move_forward": KEY_W, "move_back": KEY_S, "move_left": KEY_A, "move_right": KEY_D, "run": KEY_SHIFT, "sprint": KEY_CTRL, "interact": KEY_E}
+	for action in keyboard_actions:
+		var event := InputEventKey.new()
+		event.physical_keycode = keyboard_actions[action]
+		event.pressed = true
+		_check(event.is_action_pressed(action), "normal keyboard input reaches " + action)
 	root.content_scale_size = Vector2i(1280, 720)
 	root.size = Vector2i(1280, 720)
 	var main := MainScene.instantiate()
@@ -33,6 +39,11 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	_check(menu.get_global_rect().encloses(title_settings.get_global_rect()), "title settings can be reached at 1280x720")
+	menu.open_panel("settings_accessibility")
+	await process_frame
+	var enabled_setting := menu.find_child("captions", true, false) as CheckButton
+	_check(enabled_setting != null and enabled_setting.get_theme_color("font_pressed_color").srgb_to_linear().get_luminance() > 0.5, "enabled title settings keep readable text on the dark panel")
+	menu._panels.close_panel()
 	menu.set_accessibility({"large_text": true, "captions": false})
 	await process_frame
 	await process_frame
@@ -69,9 +80,12 @@ func _run() -> void:
 	var settings := _find_button(hud, "SETTINGS")
 	_check(pause != null and settings != null, "pause and settings are reachable in the production HUD")
 	hud.panels.open_panel("pause")
+	_check((hud.panels.get("_body") as VBoxContainer).get_child(0).text == "The expedition is paused. Close this panel to resume.", "pause panel explains how to resume")
 	_check(bool(campaign.director.query().get("paused", false)) and player.process_mode == Node.PROCESS_MODE_DISABLED, "opening a modal pauses authoritative actions and movement")
 	_check(advance.disabled and title_button != null and title_button.disabled, "modal panels exclude underlying controls from keyboard focus")
-	hud.panels.close_panel()
+	_send_key(KEY_ESCAPE)
+	await process_frame
+	_check(hud.panels.active_panel().is_empty(), "Escape closes the open pause panel")
 	_check(not bool(campaign.director.query().get("paused", true)) and player.process_mode != Node.PROCESS_MODE_DISABLED, "closing a modal resumes actions and movement")
 	hud.panels.open_panel("settings_accessibility")
 	await process_frame
@@ -91,7 +105,10 @@ func _run() -> void:
 	if campaign.has_method("physical_target") and campaign.has_method("interact_nearby"):
 		var target: Node3D = campaign.call("physical_target", "commission_route")
 		player.position = target.position + Vector3(0.0, -target.position.y, 1.0)
-		_check(campaign.call("interact_nearby").get("accepted", false) and campaign.route.current_flags().get("commission_route_confirmed", false), "nearby E action commits the real physical operation")
+		await physics_frame
+		_send_key(KEY_E)
+		await process_frame
+		_check(campaign.route.current_flags().get("commission_route_confirmed", false), "actual E input commits the nearby physical operation: " + String(hud.get("_status").text))
 	else:
 		_check(false, "nearby E action commits the real physical operation")
 	var traversed := true
@@ -189,6 +206,18 @@ func _reveal_control(control: Control) -> void:
 		if ancestor is ScrollContainer:
 			ancestor.ensure_control_visible(control)
 		ancestor = ancestor.get_parent()
+
+func _send_key(code: Key) -> void:
+	var event := InputEventKey.new()
+	event.physical_keycode = code
+	event.keycode = code
+	event.pressed = true
+	Input.parse_input_event(event)
+	Input.flush_buffered_events()
+	var release := event.duplicate() as InputEventKey
+	release.pressed = false
+	Input.parse_input_event(release)
+	Input.flush_buffered_events()
 
 func _check(condition: bool, message: String) -> void:
 	checks += 1

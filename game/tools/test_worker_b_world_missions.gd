@@ -54,6 +54,7 @@ func _test_room_contracts_and_loading() -> void:
 		for root_name in ["visual_root", "collision_root", "focus_root", "pressure_root", "door_root", "anchor_root", "navigation_root"]:
 			_check(roots.get(root_name) != null, room_id + " exposes named " + root_name)
 		_check(room.get_node("CollisionRoot").get_child_count() >= 5, room_id + " has independent collision geometry")
+		_check(room.collision_root.get_node("FloorCollision").find_children("*", "MeshInstance3D", true, false).size() > 0, room_id + " has a visible floor for navigation")
 		_check(room.get_node("FocusTargets").get_child_count() == contract.get("focus_targets", []).size(), room_id + " registers every focus target")
 		_check(room.get_node("PressureBoundaries").get_child_count() == contract.get("boundary_ids", []).size(), room_id + " registers pressure boundaries")
 		room.queue_free()
