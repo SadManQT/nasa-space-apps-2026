@@ -28,6 +28,7 @@ SLOTS = int(os.environ.get("SLOTS", "2"))
 LANES_ONLY = [l for l in os.environ.get("LANES_ONLY", "").split(",") if l]  # e.g. antigravity,gemini,any
 SLOT_PREFIX = os.environ.get("SLOT_PREFIX", "slot")
 SUMMARY = os.environ.get("SUMMARY", "night_summary.md")
+PREFER = os.environ.get("PREFER", "")  # account tried first in every lane, e.g. buet for a Gemini-first shift
 STOP = LOGDIR / ("STOP_NIGHT" if SLOT_PREFIX == "slot" else f"STOP_NIGHT_{SLOT_PREFIX}")
 CLAIMS = NIGHT / "claims"  # one directory per task: an atomic lock shared by every running night shift
 DEADLINE = time.time() + float(os.environ.get("HOURS", "12")) * 3600
@@ -241,7 +242,7 @@ def pick(slot):
             continue
         if not free(accounts):
             continue
-        _, out = sh(["python3", "production/plan/board.py", "next", "--tool", lane], slot)
+        _, out = sh(["python3", "production/plan/board.py", "next", "--tool", lane, "--all"], slot)
         for line in out.splitlines():
             m = re.match(r"^(M\d-[\w-]+)\s+\[", line)
             if m and m[1] not in taken:
@@ -261,6 +262,8 @@ def do_task(slot, tid, lane):
     info = task_info(slot, tid)
     effort = "xhigh" if info.get("priority") == "P0" else "high"
     accounts = LANES[lane][:]
+    if PREFER in ACCOUNTS:
+        accounts = [PREFER] + [a for a in accounts if a != PREFER]
     if FABLE_HINTS.search(f"{tid} {info.get('title', '')}"):
         accounts.insert(0, "fable")
     fix, worker = "", None
@@ -300,15 +303,15 @@ def slot_loop(n):
     slot = NIGHT / f"{SLOT_PREFIX}{n}"
     while time.time() < DEADLINE and not STOP.exists():
         try:
-            prepare(slot)
+            prepare(slot)  # noqa: one fresh checkout per task
             tid, lane = pick(slot)
             if not tid:
                 wake = min(asleep.values(), default=0)
                 if wake > time.time():
-                    log(f"[slot{n}] every lane with ready work is limited; sleeping {(wake - time.time()) / 60:.0f} min")
+                    log(f"[{SLOT_PREFIX}{n}] every lane with ready work is limited; sleeping {(wake - time.time()) / 60:.0f} min")
                     time.sleep(min(wake - time.time() + 5, 3600))
                     continue
-                log(f"[slot{n}] nothing ready on the board; slot stops")
+                log(f"[{SLOT_PREFIX}{n}] nothing ready on the board; slot stops")
                 return
             title = task_info(slot, tid).get("title", tid)
             outcome, note = do_task(slot, tid, lane)
@@ -326,12 +329,12 @@ def slot_loop(n):
                     taken.discard(tid)
                     (CLAIMS / tid).rmdir()
                 time.sleep(300)
-            log(f"[slot{n}] {tid} -> {outcome}: {note[:300]}")
+            log(f"[{SLOT_PREFIX}{n}] {tid} -> {outcome}: {note[:300]}")
             with lock:
                 results.append({"task": tid, "title": title, "outcome": outcome, "note": note[:600], "at": f"{dt.datetime.now():%H:%M}"})
                 write_summary()
         except Exception as e:  # keep the night going; the next loop starts from a fresh checkout
-            log(f"[slot{n}] error: {e}")
+            log(f"[{SLOT_PREFIX}{n}] error: {e}")
             time.sleep(120)
 
 
