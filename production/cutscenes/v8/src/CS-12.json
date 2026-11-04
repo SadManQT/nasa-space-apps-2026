@@ -1,0 +1,44 @@
+{
+ "id": "CS-12",
+ "card": [
+  "Chapter 6 - The Red Ring",
+  "The Next Light"
+ ],
+ "shots": [
+  "shots/CS-12-A.mp4",
+  "shots/CS-12-B.mp4",
+  "shots/CS-12-C.mp4"
+ ],
+ "transitions": [
+  "cut",
+  "cut"
+ ],
+ "music": "music/CS-12.mp3",
+ "lines": [
+  {
+   "at": 2.9,
+   "speaker": "Kai",
+   "text": "Rafi, stay on the channel.",
+   "file": "../../../audio/vo_masters/VO_EX-CH06-S10-L01.mp3"
+  },
+  {
+   "at": 5.9,
+   "speaker": "Rafi",
+   "text": "Here.",
+   "file": "../../../audio/vo_masters/VO_EX-CH06-S10-L02.mp3"
+  },
+  {
+   "at": 7.4,
+   "speaker": "Amara",
+   "text": "Essentials hold. Isolate F2.",
+   "file": "../../../audio/vo_masters/VO_EX-CH06-S10-L03.mp3"
+  },
+  {
+   "at": 11.6,
+   "speaker": "Kai",
+   "text": "Isolated. Check, then reset.",
+   "file": "../../../audio/vo_masters/VO_EX-CH06-S10-L04.mp3"
+  }
+ ],
+ "out": "../CS-12_The_Next_Light"
+}

@@ -39,6 +39,6 @@
    "file": "../../../audio/vo_masters/VO_EX-CH05-S01-L04.mp3"
   }
  ],
- "out": "../CS-08_The_Fifth_Mug"
+ "out": "../CS-08_The_Fifth_Mug",
+ "music": "music/CS-08.mp3"
 }
-

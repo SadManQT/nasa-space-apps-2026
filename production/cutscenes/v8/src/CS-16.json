@@ -1,0 +1,43 @@
+{
+ "id": "CS-16",
+ "card": [
+  "Chapter 8 - The Lighthouse",
+  "The Same Road Home"
+ ],
+ "shots": [
+  "shots/CS-16-A.mp4",
+  "shots/CS-16-B.mp4"
+ ],
+ "transitions": [
+  "fadeblack"
+ ],
+ "music": "music/CS-16.mp3",
+ "lines": [
+  {
+   "at": 3.8,
+   "speaker": "Rafi",
+   "text": "Return is part of the mission.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S11-L01.mp3"
+  },
+  {
+   "at": 6.45,
+   "speaker": "Kai",
+   "text": "Same road. New timestamps.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S11-L02.mp3"
+  },
+  {
+   "at": 9.6,
+   "speaker": "Amara (local radio)",
+   "text": "Three arrivals expected and checked.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S11-L03.mp3",
+   "radio": true
+  },
+  {
+   "at": 13.6,
+   "speaker": "Mei",
+   "text": "Five home. Three hours to first light.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S11-L04.mp3"
+  }
+ ],
+ "out": "../CS-16_The_Same_Road_Home"
+}

@@ -1,0 +1,44 @@
+{
+ "id": "CS-11",
+ "card": [
+  "Chapter 6 - The Red Ring",
+  "The Red Ring"
+ ],
+ "shots": [
+  "shots/CS-11-A.mp4",
+  "shots/CS-11-B.mp4",
+  "shots/CS-11-C.mp4"
+ ],
+ "transitions": [
+  "cut",
+  "cut"
+ ],
+ "music": "music/CS-11.mp3",
+ "lines": [
+  {
+   "at": 4.0,
+   "speaker": "Mei",
+   "text": "Every sunrise and sunset at once.",
+   "file": "../../../audio/vo_masters/VO_EX-CH06-S07-L01.mp3"
+  },
+  {
+   "at": 7.6,
+   "speaker": "Amara",
+   "text": "A picture for light passing through Earth's air.",
+   "file": "../../../audio/vo_masters/VO_EX-CH06-S07-L02.mp3"
+  },
+  {
+   "at": 11.4,
+   "speaker": "Kai",
+   "text": "Home helps us understand the dark.",
+   "file": "../../../audio/vo_masters/VO_EX-CH06-S07-L03.mp3"
+  },
+  {
+   "at": 14.5,
+   "speaker": "Rafi",
+   "text": "Keep the diagram separate from the camera.",
+   "file": "../../../audio/vo_masters/VO_EX-CH06-S07-L04.mp3"
+  }
+ ],
+ "out": "../CS-11_The_Red_Ring"
+}

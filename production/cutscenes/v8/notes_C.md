@@ -52,38 +52,60 @@ The v7 cutscene frames are used as the style reference instead of the style_v7 l
 | Videos (Seedance 2.5 1080p): CS-14-C 7 s, CS-15-B 9 s, CS-15-C 5 s, CS-15-A 5 s | 162,901.3 | 213,108.5 |
 | Frame edit (GPT Image 2.5 Sunburst): CS-14-A patches | 517.6 | 213,626.1 |
 | Start frames (Sunburst, 2 takes): CS-14-B, CS-13-B, CS-16-B | 4,075.1 | 217,701.2 |
+| 5 Nov resume. Frames (Sunburst, 2 takes): CS-16-B end 1,520.0; CS-17-B start 1,520.0; CS-17-C start 2,004.9; CS-17-D start 2,489.8 | 7,534.7 | 225,235.9 |
+| Frame edits (Sunburst, 1 take): CS-13-B patch 517.6; CS-17-C sky fix 517.6; CS-17-B end frame (2 takes) 1,035.1 | 2,070.3 | 227,306.2 |
+| Videos 1080p (7,518.6/s): CS-13-A 6 s 45,111.9; CS-13-B 6 s 45,111.9; CS-14-A 7 s 52,630.5; CS-17-A 6 s 45,111.9; CS-17-B 9 s 67,667.8; CS-17-C 8 s 60,149.1; CS-17-D 8 s 60,149.1 | 375,932.2 | 603,238.4 |
+| Videos 720p (3,360.9/s): CS-14-B 7 s 23,526.1; CS-16-A 8 s 26,887.0; CS-16-B 11 s 36,969.6 | 87,382.7 | 690,621.1 |
+| Seedance 2.5 Extend 720p: CS-15-D 8 s 26,298.9; CS-13-C 8 s 28,315.4 | 54,614.3 | 745,235.4 |
 
-Remaining under the 820,000 cap: 602,298.8.
+Spent on 5 Nov: 527,534.0 (cap for the resume was 602,000). Remaining under the 820,000 cap: 74,764.6. No retakes were needed.
+
+Prices rose about 20 % between 4 and 5 Nov: Seedance 2.5 is now 7,518.6 credits/s at 1080p and 3,360.9/s at 720p. Seedance 2.5 Extend (continue from the end of a clip, no upload needed) costs about 3,290-3,540/s at 720p and is how the chained shots were made: the flow has no way to upload a locally extracted last frame.
 
 Notes: Nano Banana Pro charges about 609 credits per wired reference per take, so the five sheets were merged into one to-scale cast line-up (node XydOog8bQBSsGZqk7pnh). GPT Image 2.5 Sunburst edits cost about 518 credits and fixed sleeve patches that Gemini could not; use it for edits and follow-up frames. Seedance 2.5 sometimes inserts its own hard cut (CS-15-B cut at 0.333 s): add "one continuous shot, no cuts" to every video prompt and check every master with `ffmpeg -i X -vf scdet=threshold=12 -f null -`.
 
 ## Shots and frames
 
-| Shot | Start frame (generation id, node) | Video node / generation | Status |
+| Shot | Start frame (generation id) | Video node / generation | Status |
 |---|---|---|---|
-| CS-13-A | Lg4oGiU0AdaUfnJwHtUm (edit node ypRkUfy84c05q0cWZn9Q) | ZXlAC5Xpoct61Yyo4FEL, 6 s, prompt ready, NOT RUN (estimate 37,592) | to generate |
-| CS-13-B | Sunburst node vyMyRYcW1QfMyzdlFBCf (gens CTGvziYvgcCoqwaEigU1, RCuKtzZLHHh0VlfFw8hX) | not created | frame to review |
-| CS-13-C | plan: last frame of CS-13-A | not created | — |
-| CS-14-A | QzSqeI5rufhc0QT7TD0V (Sunburst node eFYROpMnmidWhMaroKq2), accepted | not created | to generate |
-| CS-14-B | Sunburst node 6zHzUv6GPllvaUnRGEpC (gens jhv3nuOAgR8UVL2I7Sxm, pFp7fleI93kBUTL2op7B) | not created | frame to review |
-| CS-14-C | wXDwoM6Z6qFWBtNIcs94 (node eMipTvm7rYtUpGMyrGd3), accepted | HkCLvWr1CYKOZgDrl1KS / Z72VitHViWfybuqBAHXp (session 2776yRcvwKmnk0ua2dVl), paid | download + review |
-| CS-15-A | EZ60BuvRJYgdBJvDJdxl (node bi9jH3Yq3UtFGfFTjc2Q), accepted | ta5lPaWJYAGoirahDh6H / 3R61uMAebJc5WBuGy3lo (session ZuGIYucXZV8Ly4cHF1lR), paid | download + review |
-| CS-15-B | pc2igIhjLVUsXAlDRRhG (node n9F8wH3joepZAL4t8o5W), accepted | DvWusIR00FhwIfAGtwc8 / w5Qwe1AbMk4dvjoPGE1v, 9.04 s | ACCEPTED after trim: Seedance put a hard cut at 0.333 s (wide start frame, then a continuous arc from behind Noor to her face); first 0.375 s cut, master 8.67 s, 10-bit HEVC; copied to v8/src/shots/ |
-| CS-15-C | 0OwA5pu0sivnnTjQmAei (node 6CCSuv73xW8shNMDwG6Q), accepted | RapXhKOVVsal8qvaGzOP / hOfxVQVC6TQv8gXJdXCo (session zEzFjvdqXhu50cSYnq4D), paid | download + review |
-| CS-15-D | plan: last frame of CS-15-A | not created | — |
-| CS-16-A | QZ4Hq0QLxZ85ROUjcRU2 (edit node 1ykn9Ezcz8w8UecDK8UH), accepted | 9Bin8yg396h6MYL3Fge0, 8 s, prompt ready, NOT RUN | to generate |
-| CS-16-B | Sunburst node 5CKDnhUVwwkwjC3vXjzk (gens E90H1qbTlWRiTycjsOuk, 5WlzjQfgdOwLhIhDPPlI); plan an end frame (hatch open, three step in) | not created | frame to review |
-| CS-17-A | LqmeFcTCVkxqVwqtaRyJ (edit node 45eoEUXUW7EcwlZtQ65b), accepted | jahEMc9Il4IBdeLiqmSS, 6 s, prompt ready, NOT RUN | to generate |
-| CS-17-B | plan: start = last frame of CS-17-A, end = Sunburst edit "shutter open, white low sunlight, black sky, grey regolith" | — | — |
-| CS-17-C/D | plan: petal sleeve beside blank lineage label + Ferreira line; shared photo by the cotton with Noor on a tablet | — | — |
-| CS-18-A | NlTVkOw0UBCCmG7PJDwp (edit node f36Zk6w0SroWtbdGPrNO), accepted | still, composed by another session | done |
+| CS-13-A | Lg4oGiU0AdaUfnJwHtUm | ZXlAC5Xpoct61Yyo4FEL / X4TlcHyDkBz6YxQkVRTs, 1080p | ACCEPTED 6.04 s (almost static camera) |
+| CS-13-B | D5iPrj0fSssLhkp9yQjI (Sunburst patch fix of take CTGvziYvgcCoqwaEigU1) | bBdtmBMLgnrTVDHCmB6y / Zgw0o5bDFjahYV4a2uXN, 1080p | ACCEPTED 6.04 s |
+| CS-13-C | extend of CS-13-A | aHpYkqb7hbR6yJEVq7Pm / 8bJpvOOacYNtzGxlTMi8, extend 720p | ACCEPTED 8.00 s |
+| CS-14-A | QzSqeI5rufhc0QT7TD0V | COXnMukt3iHrL8De30UZ / FamPUwalCOIZ1d1Ygm4Z, 1080p | ACCEPTED 7.04 s |
+| CS-14-B | pFp7fleI93kBUTL2op7B | 8Cm7PJAWc6jJfKSLCrEc / ZnZ9Z70cSfLsZw3J8kMR, 720p | ACCEPTED 7.04 s (plan 5 s; 7 s so Amara and Mei both speak in it) |
+| CS-14-C | wXDwoM6Z6qFWBtNIcs94 | HkCLvWr1CYKOZgDrl1KS / Z72VitHViWfybuqBAHXp, 1080p | ACCEPTED 7.04 s |
+| CS-15-A | EZ60BuvRJYgdBJvDJdxl | ta5lPaWJYAGoirahDh6H / 3R61uMAebJc5WBuGy3lo, 1080p | ACCEPTED 5.04 s |
+| CS-15-B | pc2igIhjLVUsXAlDRRhG | DvWusIR00FhwIfAGtwc8 / w5Qwe1AbMk4dvjoPGE1v | ACCEPTED 8.67 s (trimmed 4 Nov) |
+| CS-15-C | 0OwA5pu0sivnnTjQmAei | RapXhKOVVsal8qvaGzOP / hOfxVQVC6TQv8gXJdXCo, 1080p | ACCEPTED 5.04 s |
+| CS-15-D | extend of CS-15-A | Wpg1KEDusvOTcKszWHpG / hTxZJdPhNBbZVa12v33T, extend 720p | ACCEPTED 8.00 s |
+| CS-16-A | QZ4Hq0QLxZ85ROUjcRU2 | 9Bin8yg396h6MYL3Fge0 / jVKrg5Scn3xe5ixzIVWD, 720p | ACCEPTED 8.04 s |
+| CS-16-B | 5WlzjQfgdOwLhIhDPPlI, end frame jlPGraDeWbPtRAwWoMxH | m2rTAP9aR23qNjnaSSWM / SsKj7tXCJekXljCRtZSQ, 720p | ACCEPTED 11.04 s |
+| CS-17-A | LqmeFcTCVkxqVwqtaRyJ | jahEMc9Il4IBdeLiqmSS / dmJ3wnd2W8Q3PqXFcUgD, 1080p | ACCEPTED 6.04 s |
+| CS-17-B | 7CWXTMtYIQnMwshVziS4 (new angle, cut on Mei's hand on the knob), end frame bJA4JQzULQQMsWfFOhpS | u1fwXyql361LlEnOb3Gn / lD0rOtohbpg9z6g0WnpS, 1080p | ACCEPTED 9.04 s; borderline white bloom in the opening from about 2 to 4.5 s |
+| CS-17-C | KDsIUVHYGzAKrPPJ7MCH (sky and patch fix of sJQdwxCoUyLM6MXP4eb0) | nPS6EUygUyBTqwvcAEYR / jD8YxA5sUHXCrHhZqQav, 1080p | ACCEPTED 8.04 s |
+| CS-17-D | ZC4K7atQwVydAn00DqMn | 0vx2vMDi38tjoWy3fY8p / IjJStj8RW4uGDnOcIcoF, 1080p | ACCEPTED 8.04 s |
+| CS-18-A | NlTVkOw0UBCCmG7PJDwp | still, composed by another session | done |
 
-Rejected frames: CS-13-A take 2 HP9QMzl1Ml86zuU2tiel (duplicate Rafi, no Ferreira); CS-13-A take 1 tXbhDQFsIlwiLHsKigc7 used only as edit base (five-petal flower); CS-14-A take 2 pLJ6HFkQOetvFksDBUMR (duplicate Amara, no Ferreira); CS-14-A take 1 doAivqhnHwnuK1eKRoCO and Gemini edit wt9XIFkLYPX2RPKUtrMa (edit bases: Mei's hair, patches on the wrong sleeves); CS-15-A take 1 UlCvNkGj43n93vr5wwyK (full Earth); CS-16-A 9Gg7C86NhsjyK3a6oXtE (edit base: daylight-bright ground, headlight glow); CS-17-A take 2 C6NSICqZ1ySGnJ2qT93S (two Kais, no Ferreira); CS-17-A take 1 BPlPncIBoU3smURvAv5a (edit base: wrong Ferreira); CS-18-A Z2WbtgGsSKyWd9mBFAmG (edit base: drawer open).
+All accepted shots are in v8/src/shots/; masters in production/cutscenes/masters/, strips and 6-frame grids in production/cutscenes/review/. Accepted frames and edit bases are in masters/frames/C/. Every master passed the cut check (scdet threshold 12, max score 6.5).
 
-Music nodes (2 variations each, paid, not yet downloaded): CS-13 ClVZmhJYQt2LxhdaYwuX (25 s), CS-14 q3rxkWb9t8jwaZDW5t5w (24 s), CS-15 U1wywBHGCcFUCE9lxp5W (32 s), CS-16 4yMeAiedpv4TrBidzvo8 (23 s), CS-17 PtrSFaNIHrwqzi8lhfWo (36 s), CS-18 89GvzcYfMOtIeySlSGvY (11 s). Sessions: vhdqedy4f2jxSdbtz3en, z0Uy6SSvPA3ESVJrNHFE, PtsP4OyQY70nkUVbKmub, PehATigNrD2eQadHlZTq, Kl6lRICUkiAh8Uljhhs0, zeSRxtGjwnj3iUi5ksWb, 4JIojzcDkdBD83AcItcQ, NIepYFFNYVzleZ4cSEGS, GoSSOdquhHv92TTSwRqQ, BDrwoMyiLUUslgqPvpUp, 1MpKLwWlsMDtgYOMYOH3, qVLgdLwKqHAQXzJHowEt.
+Rejected frames (5 Nov): CS-13-B take 2 RCuKtzZLHHh0VlfFw8hX (five-petal patch); CS-14-B take 1 jhv3nuOAgR8UVL2I7Sxm (Mei blue eyes); CS-16-B take 1 E90H1qbTlWRiTycjsOuk; CS-16-B end take 1 rypw6ZmJEBy8MmijjIQW; CS-17-B start take 2 N6PvyBiWud6xe3diA5OC (gauge panel mirrored); CS-17-B end take 2 9T08ACwN2JRCiRpqsOUP; CS-17-C take 1 ZGjtbegxkAXbNstlJWbT (blue sky through the window); CS-17-D take 1 AODdZZDB0PP6yRcaQFPs. Earlier: CS-13-A take 2 HP9QMzl1Ml86zuU2tiel (duplicate Rafi, no Ferreira); CS-13-A take 1 tXbhDQFsIlwiLHsKigc7 used only as edit base (five-petal flower); CS-14-A take 2 pLJ6HFkQOetvFksDBUMR (duplicate Amara, no Ferreira); CS-14-A take 1 doAivqhnHwnuK1eKRoCO and Gemini edit wt9XIFkLYPX2RPKUtrMa (edit bases: Mei's hair, patches on the wrong sleeves); CS-15-A take 1 UlCvNkGj43n93vr5wwyK (full Earth); CS-16-A 9Gg7C86NhsjyK3a6oXtE (edit base: daylight-bright ground, headlight glow); CS-17-A take 2 C6NSICqZ1ySGnJ2qT93S (two Kais, no Ferreira); CS-17-A take 1 BPlPncIBoU3smURvAv5a (edit base: wrong Ferreira); CS-18-A Z2WbtgGsSKyWd9mBFAmG (edit base: drawer open).
+
+Music nodes (2 variations each, paid 4 Nov, downloaded 5 Nov; picks in v8/src/music/: CS-13 bQv5VzMyZKhtEMIJmxp7, CS-14 5DaIczC090kXysMg9kUW, CS-15 hAC9fzr5MBo4ENjOFbjg with 3 s lead-in and silence until 11.2 s, CS-16 FBCzkUTloQ2oHL9SBkAQ, CS-17 0tbQpFGsMdCV4ap2ypxR; CS-18 has no music in its spec, so none saved; picked by loudness stats, not by ear): CS-13 ClVZmhJYQt2LxhdaYwuX (25 s), CS-14 q3rxkWb9t8jwaZDW5t5w (24 s), CS-15 U1wywBHGCcFUCE9lxp5W (32 s), CS-16 4yMeAiedpv4TrBidzvo8 (23 s), CS-17 PtrSFaNIHrwqzi8lhfWo (36 s), CS-18 89GvzcYfMOtIeySlSGvY (11 s). Sessions: vhdqedy4f2jxSdbtz3en, z0Uy6SSvPA3ESVJrNHFE, PtsP4OyQY70nkUVbKmub, PehATigNrD2eQadHlZTq, Kl6lRICUkiAh8Uljhhs0, zeSRxtGjwnj3iUi5ksWb, 4JIojzcDkdBD83AcItcQ, NIepYFFNYVzleZ4cSEGS, GoSSOdquhHv92TTSwRqQ, BDrwoMyiLUUslgqPvpUp, 1MpKLwWlsMDtgYOMYOH3, qVLgdLwKqHAQXzJHowEt.
 
 Start-frame prompts and video prompts are stored verbatim on each node of the flow.
 
-## Blocker (4 Nov, 21:45)
+## Status (5 Nov)
 
-The ElevenLabs connector ("claude.ai ElevenLabs (2)") disconnected while this lane was resuming, so the paid CS-14-C, CS-15-A and CS-15-C videos, the Sunburst frames and the 12 music takes could not be re-linked or downloaded, and nothing further was generated. All signed links from before expired at 19:00. Resume: reconnect, call creative_get_flow_run_status with the session ids above (no new charge), intake the three videos, review the Sunburst frames, then run the prepared nodes ZXlAC5Xpoct61Yyo4FEL, 9Bin8yg396h6MYL3Fge0, jahEMc9Il4IBdeLiqmSS (estimate 125,309) after adding "one continuous shot, no cuts" to their prompts.
+Resumed after the connector came back. All 16 shots of CS-13..CS-17 are accepted and in v8/src/shots/; specs CS-13.json .. CS-17.json written (line fit checked against compose_cutscene.py's join overlaps: cut 0, dissolve 0.5 s, fadeblack 1.0 s). Generation log: production/ai_log_parts/cutscenes_C2.md.
+
+| Cutscene | Shots | Joins | Length | Lines (at) |
+|---|---|---|---|---|
+| CS-13 The Last Log | A 6.04, B 6.04, C 8.00 | cut, cut | 20.08 | Noor rec 4.0, Mei 8.0, Kai 12.5, Amara 15.95 |
+| CS-14 Before the Road | A 7.04, B 7.04, C 7.04 | cut, dissolve | 20.63 | Rafi 3.8, Amara 8.4, Mei 12.4, Ferreira 15.0 |
+| CS-15 Hello, Aurora | A 5.04, B 8.67, C 5.04, D 8.00 | dissolve, cut, cut | 26.25 | Noor 7.4 (2.6 s held pause after the cut into B), Mei 13.55, round-trip silence, Ferreira 20.1, Amara 22.95 (ends 0.34 s before the end) |
+| CS-16 The Same Road Home | A 8.04, B 11.04 | fadeblack | 18.08 | Rafi 3.8, Kai 6.45, Amara radio 9.6, Mei 13.6 |
+| CS-17 What We Grew | A 6.04, B 9.04, C 8.04, D 8.04 | cut, dissolve, cut | 30.67 | Mei 4.0, Amara 6.9, Ferreira 16.2, Noor 23.2 |
+
+24_NARRATIVE_REVISION follow-through: CS-15 keeps the held pause before Noor and no music under her first words (music file edited); the unapproved Rao/Noor/Amara lines are not used. CS-17 frames carry Tara's nameplate beside Alo's petal, the first planting tray, five role-colour mugs and a blank plate on cotton's bay; names stay blank (no-text rule). CS-17 keeps the canon line order (Ferreira before Noor), not the revision's order.
+
+Still to do (not this lane): compose_cutscene.py and the .ogv step for CS-13..CS-17; shots.csv, AI_PROMPT_LOG.md and the handbook from the C2 log; a listen-through of the music picks and of CS-15's tail. CS-18 under §7.7 needs no new still (reuse plus a lamp-blink overlay in compose_cutscene.py); an open empty ALO drawer or the shared photo on the cabinet would need a still edit, and a readable MARS label conflicts with the no-text rule.

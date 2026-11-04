@@ -1,0 +1,47 @@
+{
+ "id": "CS-17",
+ "card": [
+  "Chapter 8 - The Lighthouse",
+  "What We Grew"
+ ],
+ "shots": [
+  "shots/CS-17-A.mp4",
+  "shots/CS-17-B.mp4",
+  "shots/CS-17-C.mp4",
+  "shots/CS-17-D.mp4"
+ ],
+ "transitions": [
+  "cut",
+  "dissolve",
+  "cut"
+ ],
+ "music": "music/CS-17.mp3",
+ "lines": [
+  {
+   "at": 4.0,
+   "speaker": "Mei",
+   "text": "Temperature and pressure steady.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S12-L01.mp3"
+  },
+  {
+   "at": 6.9,
+   "speaker": "Amara",
+   "text": "Seeds protected. Everyone home.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S12-L02.mp3"
+  },
+  {
+   "at": 16.2,
+   "speaker": "Ferreira",
+   "text": "You did not just survive the Moon. You grew it.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S12-L03.mp3"
+  },
+  {
+   "at": 23.2,
+   "speaker": "Noor (Earth link)",
+   "text": "Show me the cotton by the window.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S12-L04.mp3",
+   "radio": true
+  }
+ ],
+ "out": "../CS-17_What_We_Grew"
+}

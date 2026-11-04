@@ -1,0 +1,44 @@
+{
+ "id": "CS-14",
+ "card": [
+  "Chapter 8 - The Lighthouse",
+  "Before the Road"
+ ],
+ "shots": [
+  "shots/CS-14-A.mp4",
+  "shots/CS-14-B.mp4",
+  "shots/CS-14-C.mp4"
+ ],
+ "transitions": [
+  "cut",
+  "dissolve"
+ ],
+ "music": "music/CS-14.mp3",
+ "lines": [
+  {
+   "at": 3.8,
+   "speaker": "Rafi",
+   "text": "Twenty-four out. Three repair. Twenty-four back.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S01-L01.mp3"
+  },
+  {
+   "at": 8.4,
+   "speaker": "Amara",
+   "text": "Seventy-two hours of independent supplies.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S01-L02.mp3"
+  },
+  {
+   "at": 12.4,
+   "speaker": "Mei",
+   "text": "I have the garden.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S01-L03.mp3"
+  },
+  {
+   "at": 15.0,
+   "speaker": "Ferreira",
+   "text": "We have a road, not a heroic shortcut.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S01-L04.mp3"
+  }
+ ],
+ "out": "../CS-14_Before_the_Road"
+}

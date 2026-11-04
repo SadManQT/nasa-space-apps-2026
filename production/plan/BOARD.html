@@ -2475,7 +2475,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "gemini",
    "title": "Chapter 5 cutscenes: CS-08, CS-09, CS-10",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
@@ -2489,8 +2489,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/CUTSCENE_CS10.md"
    ],
    "note": "Generation can start now (start frames from the v8 character sheets, as for v7); wiring into the game uses the M1-10 runtime once it is merged.",
-   "evidence": "",
-   "updated": "2026-11-04",
+   "evidence": "CS-08 (music added), CS-09 (19.1 s with the chained shot C), CS-10 composed and encoded to game/assets/cutscenes/",
+   "updated": "2026-11-05",
    "prompt": "Goal: the Chapter 5 cutscenes exist in the current anime style and play in the campaign (runtime from M1-10).\nDo: per execution/CUTSCENE_<id>.md and PRODUCTION_HANDBOOK.md §9 ('Make with' column): in-engine shots are staged in Godot and captured\nwith the Movie Maker OGV route; generated shots use start frames rendered from the final 3D models (production/tools/ pipeline in\nhandbook §6), then compose with compose_cutscene.py and ogv_writer.gd into game/assets/cutscenes/; update presentation_media.json.\nGenerator: Seedance 5 through the ElevenLabs connector (handbook §3, 4 Nov; Veo is an alternative). If you cannot run the compose scripts, put the approved Veo shots in production/cutscenes/v7/src/shots/<CS id>/ and block the task with reason 'shots ready, needs composing' so a claude or codex lane finishes it.\nDialogue is the scene's own lines, word for word. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2684,7 +2684,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "gemini",
    "title": "Chapter 6 cutscenes: CS-11, CS-12",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
@@ -2697,8 +2697,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/CUTSCENE_CS12.md"
    ],
    "note": "Generation can start now (start frames from the v8 character sheets, as for v7); wiring into the game uses the M1-10 runtime once it is merged.",
-   "evidence": "",
-   "updated": "2026-11-04",
+   "evidence": "CS-11, CS-12 composed and encoded to game/assets/cutscenes/",
+   "updated": "2026-11-05",
    "prompt": "Goal: the Chapter 6 cutscenes exist in the current anime style and play in the campaign (runtime from M1-10).\nDo: per execution/CUTSCENE_<id>.md and PRODUCTION_HANDBOOK.md §9 ('Make with' column): in-engine shots are staged in Godot and captured\nwith the Movie Maker OGV route; generated shots use start frames rendered from the final 3D models (production/tools/ pipeline in\nhandbook §6), then compose with compose_cutscene.py and ogv_writer.gd into game/assets/cutscenes/; update presentation_media.json.\nGenerator: Seedance 5 through the ElevenLabs connector (handbook §3, 4 Nov; Veo is an alternative). If you cannot run the compose scripts, put the approved Veo shots in production/cutscenes/v7/src/shots/<CS id>/ and block the task with reason 'shots ready, needs composing' so a claude or codex lane finishes it.\nDialogue is the scene's own lines, word for word. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2892,7 +2892,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "gemini",
    "title": "Chapter 7 cutscenes: CS-13",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
@@ -2904,8 +2904,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/CUTSCENE_CS13.md"
    ],
    "note": "Generation can start now (start frames from the v8 character sheets, as for v7); wiring into the game uses the M1-10 runtime once it is merged.",
-   "evidence": "",
-   "updated": "2026-11-04",
+   "evidence": "CS-13 composed and encoded to game/assets/cutscenes/",
+   "updated": "2026-11-05",
    "prompt": "Goal: the Chapter 7 cutscenes exist in the current anime style and play in the campaign (runtime from M1-10).\nDo: per execution/CUTSCENE_<id>.md and PRODUCTION_HANDBOOK.md §9 ('Make with' column): in-engine shots are staged in Godot and captured\nwith the Movie Maker OGV route; generated shots use start frames rendered from the final 3D models (production/tools/ pipeline in\nhandbook §6), then compose with compose_cutscene.py and ogv_writer.gd into game/assets/cutscenes/; update presentation_media.json.\nGenerator: Seedance 5 through the ElevenLabs connector (handbook §3, 4 Nov; Veo is an alternative). If you cannot run the compose scripts, put the approved Veo shots in production/cutscenes/v7/src/shots/<CS id>/ and block the task with reason 'shots ready, needs composing' so a claude or codex lane finishes it.\nDialogue is the scene's own lines, word for word. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -3129,7 +3129,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "gemini",
    "title": "Chapter 8 cutscenes: CS-14, CS-15, CS-16, CS-17, CS-18",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
@@ -3145,8 +3145,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/CUTSCENE_CS18.md"
    ],
    "note": "Generation can start now (start frames from the v8 character sheets, as for v7); wiring into the game uses the M1-10 runtime once it is merged.",
-   "evidence": "",
-   "updated": "2026-11-04",
+   "evidence": "CS-14..CS-17 composed and encoded (CS-15 holds the 2.6 s pause before Noor; CS-17 callbacks per 24_NARRATIVE_REVISION §7.6); CS-18 unchanged",
+   "updated": "2026-11-05",
    "prompt": "Goal: the Chapter 8 cutscenes exist in the current anime style and play in the campaign (runtime from M1-10).\nDo: per execution/CUTSCENE_<id>.md and PRODUCTION_HANDBOOK.md §9 ('Make with' column): in-engine shots are staged in Godot and captured\nwith the Movie Maker OGV route; generated shots use start frames rendered from the final 3D models (production/tools/ pipeline in\nhandbook §6), then compose with compose_cutscene.py and ogv_writer.gd into game/assets/cutscenes/; update presentation_media.json.\nGenerator: Seedance 5 through the ElevenLabs connector (handbook §3, 4 Nov; Veo is an alternative). If you cannot run the compose scripts, put the approved Veo shots in production/cutscenes/v7/src/shots/<CS id>/ and block the task with reason 'shots ready, needs composing' so a claude or codex lane finishes it.\nDialogue is the scene's own lines, word for word. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends ElevenLabs credits (about 2.4M available on 4 Nov; keep 100k in reserve): check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -3459,7 +3459,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Fix CS-03 science errors: five-petal Alo flower and sunrise sky glow (M1-40 B2, B3)",
-   "status": "todo",
+   "status": "done",
    "deps": [
     "M1-40"
    ],
@@ -3482,9 +3482,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/cutscenes/v7/src/CS-03.json"
    ],
    "note": "Found in M1-40. Prompt text alone did not stop the five-petal output (M1-25 prompt asked for four petals): gate on a petal count.",
-   "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Problem (M1-40 B2, B3): in production/cutscenes/v7/CS-03_Alo_Needs_a_Friend.mp4 (same as the game .ogv) the hero bloom in shot C (about 18-34 s; frames at 22, 26, 28, 30 s) shows the central open Alo flower with FIVE petals. Every Brassicaceae flower has four petals in a cross (ART_BIBLE section 2 rule 8). Shot A (about 0.5-4.5 s, under the title card) draws a broad soft-edged glowing band across the sky at sunrise. The airless Moon has no twilight or sky glow (rule 1).\nRepro: ffmpeg -ss 28 -i production/cutscenes/v7/CS-03_Alo_Needs_a_Friend.mp4 -frames:v 1 -vf 'scale=1920:-1,crop=760:520:600:40' petals.jpg, then count the petals of the centre flower. ffmpeg -ss 1.5 -i ... -frames:v 1 sunrise.jpg shows the band.\nDo the smallest fix that keeps the shot lengths, so VO timings 12.0/24.0/35.0/38.8 s stay. Shot C: regenerate (Seedance via ElevenLabs, start frame with four-petal cross flowers, e.g. the approved Alo bloom model render) or repaint; every open flower must have exactly four petals in a cross, purple stem, no face. Shot A: mask or re-grade the band, or regenerate with 'airless Moon: no glow or light band in the sky; sunrise is a hard-edged lit ridge and the Sun's disc'. If regenerating shot A, also make the arrays vertical blankets on tall masts facing the low Sun (S5). Recompose with production/tools/compose_cutscene.py and replace the game .ogv. Keep at most two renders running at once.\nAcceptance: a contact sheet of shot A every 0.5 s (0-9 s) shows black sky above the horizon; zoomed crops of every open Alo flower in shot C show four petals; both are retained in production/review/ and listed in production/review/cutscene_review.md; durations within 0.1 s of today's (44.71 s); scdet check shows no unintended hard cuts; one row per generation in production/ai_log_parts/M1-43.md."
+   "evidence": "CS-03-A re-made (black sky, point Sun, vertical arrays; graded with production/tools/grade_cs03a.py) and CS-03-C re-made (four-petal cross counted on 7 frames + 24-frame sheet); same lengths; CS-03 recomposed and re-encoded; evidence production/cutscenes/review/M1-43_*",
+   "updated": "2026-11-05",
+   "prompt": "Problem (M1-40 B2, B3): in production/cutscenes/v7/CS-03_Alo_Needs_a_Friend.mp4 (same as the game .ogv) the hero bloom in shot C (about 18-34 s; frames at 22, 26, 28, 30 s) shows the central open Alo flower with FIVE petals. Every Brassicaceae flower has four petals in a cross (ART_BIBLE section 2 rule 8). Shot A (about 0.5-4.5 s, under the title card) draws a broad soft-edged glowing band across the sky at sunrise. The airless Moon has no twilight or sky glow (rule 1).\nRepro: ffmpeg -ss 28 -i production/cutscenes/v7/CS-03_Alo_Needs_a_Friend.mp4 -frames:v 1 -vf 'scale=1920:-1,crop=760:520:600:40' petals.jpg, then count the petals of the centre flower. ffmpeg -ss 1.5 -i ... -frames:v 1 sunrise.jpg shows the band.\nDo the smallest fix that keeps the shot lengths, so VO timings 12.0/24.0/35.0/38.8 s stay. Shot C: regenerate (Seedance via ElevenLabs, start frame with four-petal cross flowers, e.g. the approved Alo bloom model render) or repaint; every open flower must have exactly four petals in a cross, purple stem, no face. Shot A: mask or re-grade the band, or regenerate with 'airless Moon: no glow or light band in the sky; sunrise is a hard-edged lit ridge and the Sun's disc'. If regenerating shot A, also make the arrays vertical blankets on tall masts facing the low Sun (S5). Recompose with production/tools/compose_cutscene.py and replace the game .ogv. Keep at most two renders running at once.\nAcceptance: a contact sheet of shot A every 0.5 s (0-9 s) shows black sky above the horizon; zoomed crops of every open Alo flower in shot C show four petals; both are retained in production/review/ and listed in production/review/cutscene_review.md; durations within 0.1 s of today's (44.71 s); scdet check shows no unintended hard cuts; one row per generation in production/ai_log_parts/M1-43.md.",
+   "owner": "Sadman/claude-voice"
   },
   {
    "id": "M1-44",
@@ -3886,6 +3887,29 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Problem: Alo has no cotyledon, true-leaf, senescent or dry state; Tara has only a bloom model; the clue and memory props in doc 24 do not exist.\nRead first: game-design/24_NARRATIVE_REVISION.md §3.8 (stage table), §3.9, §4 (clues 2, 12, 14), §7.6, §2.11 (new SFX); production/ART_BIBLE.md §2, §6 (Brassica rapa botany, no faces); the existing ASSET_PL_* prompts.\nDo: (1) 2D sheets for approval: Alo cotyledon, true-leaf, senescent (yellowing, pods straw-coloured, leaning) and dry variants; Tara pods, senescent and dry (green stem); Alo and Tara nameplates; five mug name decals; the gear-wheel tool tag; the drawer-lid pencil note; the 'N.' label holder; the 'Working stock - Tara x Alo' envelope. (2) After approval, build them (blend-shape or texture variants of the existing plant models where possible; Tripo only where a new mesh is needed). (3) Generate SFX_INVENTORY_LAMP_TICK and SFX_DHAKA_ROOFTOP_MORNING with captions in sfx_list.csv.\nAcceptance: Sadman's approval quoted; every flower has four petals in a cross; no plant has eyes, a face or a mouth; English text only; registry and AI log rows added; a contact sheet in production/qa/evidence/M3-99_contact.png. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M1-53",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Rule out a threaded-loading deadlock at full-cast entry",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/loading/",
+    "game/scripts/campaign/",
+    "game/tools/"
+   ],
+   "refs": [
+    "production/qa/perf_2026-11-04.md",
+    "game/scripts/loading/load_preparation.gd"
+   ],
+   "note": "",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Found 5 Nov during the round-3 rendered verification: one windowed run of game/tools/perf_probe.gd (--perf-probe, window on top) stopped right after the garden_rebuild transition, at the start of the full-cast stage: Godot idle (~2% CPU) with no progress for 17 minutes. The next run passed cleanly, so it is intermittent. Find whether the threaded preparation (ResourceLoader.load_threaded_request / WorkerThreadPool jobs in game/scripts/loading/, staged construction in campaign_room.gd and chapter1_campaign.gd) can wait forever: a job that never reports, a main-thread await on a status that never changes, a resource requested twice, or a deadlock with a mutex. Add a watchdog: any preparation step that exceeds a time limit logs its step and falls back to synchronous loading behind the loading card instead of hanging.\nAcceptance: run the windowed probe 10 times in a row (command in production/qa/perf_2026-11-04.md) with zero stalls; a test forces a stuck job and proves the fallback completes; run_tests.sh passes."
   }
  ],
  "requirements": [

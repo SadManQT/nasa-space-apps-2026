@@ -141,3 +141,38 @@ Line times are set from the measured VO master lengths (production/audio/vo_mast
 - The specs point at `../../masters/CS-0N-X.mp4`, but `production/cutscenes/masters/` and `review/` are git-ignored (.gitignore lines 30-31). The cuts will compose on this machine. Before committing, copy the shots to a tracked folder (as v7 does with `src/shots/`) or keep them through LFS.
 - Check of all three specs: every path exists, the caption text matches vo_lines.csv exactly, and no lines overlap. Lengths: CS-04 26.1 s, CS-05 25.2 s, CS-06 20.1 s.
 - The M1-25 shots in v7/src/shots are mixed now: CS-02-C and CS-03-C are 1920x1080, CS-03-B and the untouched shots are about 1284x716. compose scales every shot to 1280x720. The v7 cuts CS-02 and CS-03 need recomposing to pick them up; their old specs time lines against 12 s shots, and the new shots are 12.04 s.
+
+## M1-43 — CS-03 science fixes B2 (four-petal Alo) and B3 (no sky glow), plus S5 for CS-03-A (5 Nov 2026)
+
+Task cap 150,000 credits; spent **109,279.3** (estimate_only before every run). Seedance prices have risen since 4 Nov: 720p is now 3,360.9 credits/s (10 s = 33,608.8, 12 s = 40,330.5). New Seedance nodes cannot be added with `bytedance-seedance-v2.5` ("not available in your region"), so the video nodes are copies of the M1-25 node; they run as `bytedance-seedance-v2.5-us`. Both shots keep their lengths (10.04 s and 12.04 s), so the CS-03 line times 12.0 / 24.0 / 35.0 / 38.8 s are unchanged. CS-03 itself is not recomposed.
+
+| Step | Node | Generation | Credits | Result |
+|---|---|---|---|---|
+| CS-03-A start frame edit, GPT Image 2.5 Sunburst, 2 takes, from the v7 CS-01-A exterior (library asset BsQpuzZcrHzSqU3RRTib, node BdT62RKpmZob1ScJ6psJ) | H7PU0RGKKT25np9EbBhJ | hN5wslCLAgTchVJKX2c7 (rejected: "J" mark on the dome), **E2dcLKGnDOrDtDgGoFsK** (accepted, active take on the node) | 865.6 | Black sky, small Sun on the left horizon, hard-edged lit peaks, tall vertical blankets on taller masts, greenhouse module with a lamp-lit side window, no text |
+| CS-03-C end frame edit, GPT Image 2.5 Sunburst, 2 takes, from K0d3gYYxDjViQvxvvcmp | eh2SP8EfcL4VXi0Xjex2 | **R9SyhB1F3RofZa6fMPMz** (pinned as UeqtGUPTV0f2YRA1IDty), cItvz39VO8HduBuL769y (not used) | 865.6 | Closer push-in framing; the open flower is a clean four-petal cross with six stamens |
+| CS-03-A video v3, 720p 10 s | OEKMeyyh5ByEZVq4CsSf | 61UHMkCRSnsgHqlrz3zC | 33,608.8 | **Rejected:** the Sun climbs about five disc widths in 10 s, a soft halo grows along the ridge crests, the blankets turn into ladder-like frames |
+| CS-03-C video v3, 720p 12 s, start + end frame | wQzwnlIgxENwUfofoTtK | PuBGi6FUa49ONnnA99l5 | 40,330.5 | **Accepted** |
+| CS-03-A video v4, 720p 10 s | nKYXd3sqokRcQ4km7cuj | tzctFLznCNyH8HtKDC36 | 33,608.8 | **Accepted after a post pass** |
+
+Video prompts are on the nodes and in production/ai_log_parts/cutscenes_A2.md.
+
+### B3, CS-03-A: re-generated, then graded
+- Free post fix tried first and failed: `clear_stars.py --grade-sky` (debug at frame 60 of the v7 shot) stops at the band's top edge, so the band stays, and the mask takes in the dark solar panels; the band also sweeps down over the ridges and the regolith plain at 3–4.5 s, outside any sky mask.
+- Re-generated from a corrected start frame (above), which also makes the arrays tall vertical blankets on tall masts (S5). v4's prompt pins the Sun low on the horizon ("at the pole the Sun only skims the horizon").
+- v4 needed a free post pass (one-off OpenCV script, not added to production/tools): the lit regolith drifted to beige from about 4 s (pulled back to grey; the gold window and orange trim are untouched), and a soft glare halo grew round the Sun (graded down inside 9 disc radii, like `--grade-sky 0.45`, with the Sun tracked per frame; the blanket and mast are excluded). Masters: `production/cutscenes/masters/CS-03-A-v4.mp4` (raw), `CS-03-A-v4-post.mp4` (accepted, 1280x720 10-bit HEVC, 10.04 s, no cuts at scdet 12). Copied over `v7/src/shots/CS-03-A.mp4`.
+- Result: black sky to the horizon in every frame, no band, a small Sun disc with a tight rim low on the left horizon, hard-edged lit peak tops, grey regolith, hard shadows, a lamp-lit greenhouse window.
+- Notes for review: the Sun still rises about two disc widths over the 10 s and ends just above the left module roof; the blankets face the camera more than the Sun on the left (vertical, but S5's "face-on to the low Sun" is only partly met); the composition changed from v7 (camera lower and centred, the greenhouse shutter stays closed and only its side window glows).
+- Evidence: `review/M1-43_CS-03-A_before_2.5s.png` (v7, band), `review/M1-43_CS-03-A_after_2.5s.png`, `review/M1-43_CS-03-A_before_after_2.5s.png`, `review/M1-43_CS-03-A_after_grid.png` (0.5, 1.5, 2.5, 3.5, 4.5, 6, 8, 9.9 s), `review/CS-03-A-v3_strip.png`, `review/CS-03-A-v4_strip.png`.
+
+### B2, CS-03-C: re-generated with the flower held by both end frames
+- The v7 start frame K0d3gYYxDjViQvxvvcmp already shows a clean four-petal cross; the M1-25 take went wrong in the motion (it asked the open flower to "unfurl", and orbited the camera, and Seedance redrew it with five petals and opened four more flowers). The fix pins a four-petal end frame (a push-in edit of the same frame) and asks for no opening: the flower is already open, the buds stay as they are, a slow straight push-in.
+- Master `production/cutscenes/masters/CS-03-C-v3.mp4` (1280x720 H.264, 12.04 s, no cuts at scdet 12), copied over `v7/src/shots/CS-03-C.mp4`.
+- Petal gate (counted by eye on 3x crops of the open flower): 0.5 s 4, 2 s 4, 4 s 4, 6 s 4, 8 s 4, 10 s 4, 11.9 s 4, each a cross (up, down, left, right) with about six stamens; a 2 fps sheet of the cluster (24 frames) also shows 4 on every frame. Exactly one flower is open for the whole shot; the half-open yellow bud stays closed; purple stem, lobed leaves, green buds above, blank tag (leaves the frame as the camera pushes in), no face.
+- Evidence: `review/M1-43_CS-03-C_before_8s.png` (M1-25 take, five petals), `review/M1-43_CS-03-C_v3_petal_gate.png` (the seven crops), `review/M1-43_CS-03-C_v3_petals_2fps.png`, `review/M1-43_CS-03-C_after_6s.png`, `review/M1-43_CS-03-C_after_11.9s.png`, `review/CS-03-C-v3_strip.png`.
+- Fallback not needed: cutting to a render of the approved Alo bloom model stays available if a reviewer rejects this take.
+
+### Left for Sadman
+- Recompose CS-03 (compose_cutscene.py) and re-encode its .ogv to pick up both shots; both shots are 1280x720 now.
+- Watch CS-03-A once for the Sun's slow climb and the blanket orientation.
+- The rejected v3 master `production/cutscenes/masters/CS-03-A-v3.mp4` and its strip are still on disk (git-ignored); delete them if not wanted.
+- shots.csv, AI_PROMPT_LOG.md and the handbook are not updated by this lane; the log rows are in production/ai_log_parts/cutscenes_A2.md.

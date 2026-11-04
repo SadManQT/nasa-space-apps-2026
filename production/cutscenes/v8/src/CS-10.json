@@ -1,0 +1,46 @@
+{
+ "id": "CS-10",
+ "card": [
+  "Chapter 5 - Shooting Stars",
+  "The Name on the Page"
+ ],
+ "shots": [
+  "shots/CS-10-A.mp4",
+  "shots/CS-10-B.mp4",
+  "shots/CS-10-C.mp4"
+ ],
+ "transitions": [
+  "cut",
+  "cut"
+ ],
+ "music": "music/CS-10.mp3",
+ "lines": [
+  {
+   "at": 3.8,
+   "speaker": "Rao (Earth link)",
+   "text": "She gave permission to share the page.",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S10-L01.mp3",
+   "radio": true
+  },
+  {
+   "at": 6.6,
+   "speaker": "Ferreira",
+   "text": "Dr. Noor Rahman. Our gardener, from Bangladesh.",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S10-L02.mp3"
+  },
+  {
+   "at": 11.2,
+   "speaker": "Mei",
+   "text": "She read the reports we sent?",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S10-L03.mp3"
+  },
+  {
+   "at": 14.0,
+   "speaker": "Rao (Earth link)",
+   "text": "Every one that reached Earth.",
+   "file": "../../../audio/vo_masters/VO_EX-CH05-S10-L04.mp3",
+   "radio": true
+  }
+ ],
+ "out": "../CS-10_The_Name_on_the_Page"
+}

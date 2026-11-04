@@ -1,0 +1,45 @@
+{
+ "id": "CS-13",
+ "card": [
+  "Chapter 7 - The Great Storm",
+  "The Last Log"
+ ],
+ "shots": [
+  "shots/CS-13-A.mp4",
+  "shots/CS-13-B.mp4",
+  "shots/CS-13-C.mp4"
+ ],
+ "transitions": [
+  "cut",
+  "cut"
+ ],
+ "music": "music/CS-13.mp3",
+ "lines": [
+  {
+   "at": 4.0,
+   "speaker": "Noor (recording)",
+   "text": "I'm calling the seeds Alo, light.",
+   "file": "../../../audio/vo_masters/VO_EX-CH07-S07-L01.mp3",
+   "radio": true
+  },
+  {
+   "at": 8.0,
+   "speaker": "Mei",
+   "text": "The name was a hope, not a prediction.",
+   "file": "../../../audio/vo_masters/VO_EX-CH07-S07-L02.mp3"
+  },
+  {
+   "at": 12.5,
+   "speaker": "Kai",
+   "text": "Then our report needs more than a good line.",
+   "file": "../../../audio/vo_masters/VO_EX-CH07-S07-L03.mp3"
+  },
+  {
+   "at": 15.95,
+   "speaker": "Amara",
+   "text": "It needs the next checked step.",
+   "file": "../../../audio/vo_masters/VO_EX-CH07-S07-L04.mp3"
+  }
+ ],
+ "out": "../CS-13_The_Last_Log"
+}

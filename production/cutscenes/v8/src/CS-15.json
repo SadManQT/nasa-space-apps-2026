@@ -1,0 +1,47 @@
+{
+ "id": "CS-15",
+ "card": [
+  "Chapter 8 - The Lighthouse",
+  "Hello, Aurora"
+ ],
+ "shots": [
+  "shots/CS-15-A.mp4",
+  "shots/CS-15-B.mp4",
+  "shots/CS-15-C.mp4",
+  "shots/CS-15-D.mp4"
+ ],
+ "transitions": [
+  "dissolve",
+  "cut",
+  "cut"
+ ],
+ "music": "music/CS-15.mp3",
+ "lines": [
+  {
+   "at": 7.4,
+   "speaker": "Noor (Earth link)",
+   "text": "Hello, Aurora. This is Noor.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S10-L01.mp3",
+   "radio": true
+  },
+  {
+   "at": 13.55,
+   "speaker": "Mei",
+   "text": "We kept a place for you.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S10-L02.mp3"
+  },
+  {
+   "at": 20.1,
+   "speaker": "Ferreira",
+   "text": "You brought us the seeds.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S10-L03.mp3"
+  },
+  {
+   "at": 22.95,
+   "speaker": "Amara",
+   "text": "The garden has more than one gardener.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S10-L04.mp3"
+  }
+ ],
+ "out": "../CS-15_Hello_Aurora"
+}
