@@ -151,7 +151,7 @@ Class mode is one running local game, four discussion groups and genuinely priva
 | Kai / shift 1 | Five dark shifts, about 36 h; heat spends the finite night reserve. | Team compares heat and remaining energy. |
 | Amara / shift 1 | Make air during daylight before excess jar income spills. | Air production is planned before sunset. |
 | Rafi / shift 2 | Labelled 2017 replay feed: sunspot 2673 fired a large flare; more activity is possible. | Team prepares shelter before the alarm. |
-| Mei / shift 3 | This scenario’s direct plant threats are frost and thirst; shielding borrows the garden reservoir. | Team protects temperature and returns borrowed water. |
+| Mei / shift 3 | This scenario’s direct plant threats are cold near or below freezing and thirst; shielding borrows the garden reservoir. (Heavy *Brassica* frost is below −2 °C: Canola Council of Canada <https://www.canolacouncil.org/canola-watch/2017/09/07/fall-frost-swathing-and-straight-combining-considerations>.) | Team protects temperature and returns borrowed water. |
 
 **Combined-evidence decision (GAME-05):** the shift 3–4 plan for *when to fill the wall and when to return the water* only becomes clear by combining two roles. Rafi's card says a storm is likely; Mei's says the shelter water is Alo's and thirst starts at W≥4. Kai's five-dark-shift budget and Amara's stored air decide what the team can afford meanwhile. DL-0105-08 to 12 stages this as a short disagreement, and the Mission Table's side-by-side Preview A/B settles it. The debrief names this decision when the shelter was ready before the alarm and the water was returned afterwards.
 

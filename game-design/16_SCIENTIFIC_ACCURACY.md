@@ -33,7 +33,7 @@ Every scientifically significant display, debrief card, pitch line and subtitle 
 |---|---|---|---|
 | **OBSERVED** | A traceable historical record or publication | DONKI 2017 flare/SEP timeline; CRaTER dose at the Moon; MSL RAD on Mars; LROC illumination map; published longest-night estimates | Product name, exact URL, retrieval date, time range, units, quality flags |
 | **COMPUTED** | Our processing of real data under stated assumptions | Horizon mask (LOLA), Sun/Earth paths (Horizons), dose curve scaled from CRaTER | All OBSERVED fields plus site coordinate, method, script version and limitations |
-| **SIMULATED** | Game rules, fiction or a training scenario | Sun-drops, air units, zaps, Alo health, Aurora Station, 2046 dates, the 36 h night and Earth-set until computed, storm effects on the base | The rule in plain words, its real-world basis if any, and "not a measurement" |
+| **SIMULATED** | Game rules, fiction or a training scenario | Sun-drops, air units, zaps, Alo health, Aurora Station, 2046 dates, the 36 h night and the Earth-link cutoff (authored; Earth is below the pole's horizon and rising, JPL Horizons <https://ssd.jpl.nasa.gov/api/horizons.api>), storm effects on the base | The rule in plain words, its real-world basis if any, and "not a measurement" |
 
 A COMPUTED label is allowed only after the check in the register below is recorded; until then the same display shows SIMULATED · *training scenario*. The 2017 storm is shown as *Historical replay, re-dated to a fictional 2046 night*; Chapter 7 as *What if? Counterfactual replay of the July 2012 storm*.
 
@@ -45,10 +45,10 @@ Nothing in this register has been verified yet: no site coordinate is chosen and
 |---|---|---|---|---|---|---|---|---|
 | Night lasts ≈ 36 h (5 dark shifts) | P-02, Kai card, SC-0105, pitch | TBD (Aurora rim point) | TBD (April 2046 window) | LOLA horizon mask + Horizons Sun elevation, pipeline step 4 | Mazarico 2011 (order of magnitude only) | Published rim nights ~1.5 d; site-dependent | TBD | Training scenario |
 | Rim sunlit "about 240 days in a row" | Removed from story/README 24 Oct | — | — | — | Not verified for Aurora | — | — | Withdrawn |
-| Earth sets at shift 4 and stays down all night | SC-0105, DL-0105-01 | TBD | TBD | Horizons Earth elevation vs horizon mask | JPL IPN 42-176 (general) | Libration ±6.7°, terrain | TBD | Training scenario |
-| Storm warning → alarm at shift 5; two storm shifts | P-02, SC-0105 | n/a | 2017-09-10 replay, re-dated | DONKI event times compressed into shifts [G] | NASA DONKI | Compression is a game choice | TBD | Historical replay, timing simplified |
+| Earth link cuts off at shift 4; Earth stays down all night | SC-0105, DL-0105-01 | Exact pole, 0°E −90°, h 0 (Aurora coordinate TBD) | 15 Apr 2046 03:17 UT set → 28 Apr 06:03 UT rise; 25 Apr 18:00 → 27 Apr 06:00 UT: −3.44° → −1.40° | Horizons Earth elevation (fixture `jpl_horizons_ch1_sky`), rechecked live | JPL Horizons <https://ssd.jpl.nasa.gov/api/horizons.api>; JPL IPN 42-176 (general) | Disc ~1.9° and site height shift times by hours, not direction | M1-40 review, 4 Nov 2026 | Earth below the pole's horizon from 15 to 28 Apr 2046 and rising during this night: the shift-4 Earth-link cutoff is an authored training event, not an Earth-set |
+| Storm warning → alarm at shift 5; two storm shifts | P-02, SC-0105 | n/a | 2017-09-10 replay, re-dated | DONKI event times compressed into shifts [G]: the X9.3 (6 Sep 11:53 UT) and X8.2 (10 Sep 15:35 UT) flares were 4 days 3.7 h apart | NASA DONKI <https://ccmc.gsfc.nasa.gov/DONKI-API/get/FLR?startDate=2017-09-04&endDate=2017-09-12> | Compression is a game choice | TBD | Historical replay, timing simplified |
 | 90 s action window; pump moves +2 W per alarm | P-02 alarm, README | n/a | n/a | Game abstraction | SCIENCE_AND_DATA row 8 | Not a real warning time | TBD | Simulated |
-| Dose 3/2/1/0 by shelter level | P-02, Safe Room UI | n/a | n/a | Game table; later scaled to CRaTER shape | Clowdsley (NTRS 20210009760) context | No score→mSv conversion | TBD | Simulated until calibrated |
+| Dose 3/2/1/0 by shelter level | P-02, Safe Room UI | n/a | n/a | Game table; later scaled to CRaTER shape | 20 g/cm² water = worst recorded storms under the 30-day limit (Townsend et al. 1988 <https://ntrs.nasa.gov/citations/19880016043>); NASA-STD-3001 [V1 4031]; Clowdsley (NTRS 20210009760) dose curve | No score→mSv conversion | TBD | Simulated until calibrated |
 
 ## Primary and direct-attribution sources
 
