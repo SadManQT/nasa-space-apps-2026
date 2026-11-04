@@ -367,8 +367,8 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Habitat kit and Chapter 1 room concept sheets for approval",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-fable",
    "deps": [],
    "paths": [
     "production/concept/environment_v1/"
@@ -379,8 +379,8 @@
     "production/ART_BIBLE.md"
    ],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "production/concept/environment_v1/ (2 kit sheets + labelled copies, 5 room mood frames, 2 illustrated alternates, README.md, provenance.json); review sheet production/qa/evidence/M1-03_review_sheet.png; 11 Tripo image generations logged in AI_PROMPT_LOG.md; run_tests.sh 29/29 suites passed; approval pending in M1-04",
+   "updated": "2026-11-05",
    "prompt": "Goal: 2D sheets the user can approve before any Tripo/Meshy credits are spent (standing rule).\nDo: per execution/ASSET_EN_HabitatKit.md and the five Chapter 1 environment prompts, produce in production/concept/environment_v1/:\na modular kit sheet (wall straight/corner/window/door frame, floor and ceiling tiles, pipe and cable runs, light strips, hatch) in the\napproved anime cel style (production/concept/style_v7/, ART_BIBLE palette), plus one paint-over mood frame per room (Commons with the\nMission Table, Service Rooms, Garden with Alo's external chamber, Safe Room, Exterior). Use the free/included image tools first\n(Gemini image in the user's Google AI Pro plan; Tripo image costs ~20 credits each). Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible).\nThen ask the user to approve or mark changes, and record the decision in PRODUCTION_HANDBOOK.md §3. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision."
   },
   {
