@@ -1,0 +1,47 @@
+M1-53 — blocked, 5 November 2026 — Sadman/night-codex
+
+Claim succeeded. No implementation, tests, commits or pushes performed.
+
+Required windowed preflight command (repository root):
+/Applications/Godot.app/Contents/MacOS/Godot --path game --rendering-method forward_plus --rendering-driver metal --resolution 1280x720 --log-file /tmp/lla-M1-53-window-check.log --script res://tools/perf_probe.gd -- --perf-probe --perf-output=/tmp/lla-M1-53-window-check
+
+Observed: exit 134, no stdout, no engine log created, no window/capture/results.
+Crash report: /Users/sadmansakib/Library/Logs/DiagnosticReports/Godot-2026-11-05-015219.ips
+Capture time: 2026-11-05 01:52:17.8607 +0600
+Exception: {"codes": "0x0000000000000000, 0x0000000000000000", "rawCodes": [0, 0], "type": "EXC_CRASH", "signal": "SIGABRT"}
+Triggered-thread stack (first 20 frames):
+__pthread_kill
+pthread_kill
+abort
+___RegisterApplication_block_invoke
+_dispatch_client_callout
+_dispatch_once_callout
+_RegisterApplication
+GetCurrentProcess
+-[NSMenuBarPresentationInstance _getAggregateUIMode:withOptions:]
+_NSGetAggregateUIMode
+-[NSMenuBarPresentationInstance _isVisible]
++[NSMenuBarPresentationInstance _isMenuBarVisible]
+_NSInitializeAppContext
+-[NSApplication init]
+<unnamed>
++[NSApplication sharedApplication]
+<unnamed>
+main
+start
+
+Read-only inspection found unbounded polling in:
+- LoadPreparation.resource(): ResourceLoader in-progress status.
+- PreparationJob.finish(): worker completion (also used by LocomotionClips.prewarm).
+- AssetGeometry.prepare(): raw GLTF resource request.
+- LoadPreparation.prepare_room(): shared room-busy flag.
+These are audit candidates, NOT a proven cause of the original full-cast stall.
+No watchdog/fallback was implemented; no forced-stuck-job test was added.
+
+Unblock: Sadman must resume M1-53 in a desktop-capable session where windowed
+Godot can start. Implement and test bounded preparation/fallback, then complete
+10 consecutive window-on-top rendered probes, retain M1-53_*.png screenshots,
+and run GODOT=/Applications/Godot.app/Contents/MacOS/Godot game/tools/run_tests.sh.
+run_tests.sh last line: NOT RUN (stopped at mandatory human-action blocker).
+Rendered probe acceptance: 0/10 completed; no screenshots available.
+Task remains blocked, not done. No root-cause or deadlock-free claim is made.
