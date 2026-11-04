@@ -92,58 +92,58 @@ Run on readable strips of at most six assets, with the from-above column include
 
 ## M1-35 geometry review — 4 November 2026, Tanvir/Codex
 
-All 48 rock LOD renders and the three provisional ground surfaces inspected against ART_BIBLE.md. First build rejected for open fracture caps; rebuilt closed convex hulls and added manifold/volume/area assertions. Four diagnostic contact sheets: M1-35_rock_contact.png, M1-35_rock_LOD1.png, M1-35_rock_LOD2.png and M1-35_regolith_contact.png. Original procedural shapes, not lunar scans. Grey angular forms, no lettering/vegetation/faces/atmosphere. These verdicts accept geometry and provisional surface readability only; M1-33 must approve final exterior materials. See M1-35.md.
+All 48 rock LOD renders and the three provisional ground surfaces inspected against ART_BIBLE.md. First build rejected for open fracture caps; rebuilt closed convex hulls and added manifold/volume/area assertions. Four diagnostic contact sheets: M1-35_rock_contact.png, M1-35_rock_LOD1.png, M1-35_rock_LOD2.png and M1-35_regolith_contact.png. Original procedural shapes, not lunar scans. Grey angular forms, no lettering/vegetation/faces/atmosphere. Final review after Tanvir selected M1-33 option A retains the neutral grey rough surfaces for the detailed exterior around the cel-shaded cast. All 60 asset hashes remain unchanged; refreshed native evidence and review are in M1-35.md.
 
 | Asset | Verdict | Notes |
 |---|---|---|
-| EN_LunarRock_01_Chip_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_01_Chip_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_01_Chip_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_02_Shard_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_02_Shard_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_02_Shard_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_03_Block_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_03_Block_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_03_Block_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_04_Slab_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_04_Slab_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_04_Slab_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_05_Chip_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_05_Chip_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_05_Chip_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_06_Shard_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_06_Shard_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_06_Shard_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_07_Block_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_07_Block_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_07_Block_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_08_Slab_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_08_Slab_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_08_Slab_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_09_Chip_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_09_Chip_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_09_Chip_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_10_Shard_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_10_Shard_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_10_Shard_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_11_Block_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_11_Block_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_11_Block_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_12_Slab_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_12_Slab_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_12_Slab_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_13_Chip_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_13_Chip_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_13_Chip_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_14_Shard_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_14_Shard_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_14_Shard_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_15_Block_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_15_Block_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_15_Block_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_16_Slab_LOD0 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_16_Slab_LOD1 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_LunarRock_16_Slab_LOD2 | PASS geometry; final art pending | M1-35 geometry; final surface approval waits for M1-33 |
-| EN_Regolith_Fresh | PASS geometry; final art pending | 4 m tile; provisional material; M1-33 approval pending |
-| EN_Regolith_Compacted | PASS geometry; final art pending | 4 m tile; provisional material; M1-33 approval pending |
-| EN_Regolith_Disturbed | PASS geometry; final art pending | 4 m tile; provisional material; M1-33 approval pending |
+| EN_LunarRock_01_Chip_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_01_Chip_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_01_Chip_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_02_Shard_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_02_Shard_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_02_Shard_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_03_Block_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_03_Block_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_03_Block_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_04_Slab_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_04_Slab_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_04_Slab_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_05_Chip_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_05_Chip_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_05_Chip_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_06_Shard_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_06_Shard_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_06_Shard_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_07_Block_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_07_Block_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_07_Block_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_08_Slab_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_08_Slab_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_08_Slab_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_09_Chip_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_09_Chip_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_09_Chip_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_10_Shard_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_10_Shard_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_10_Shard_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_11_Block_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_11_Block_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_11_Block_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_12_Slab_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_12_Slab_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_12_Slab_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_13_Chip_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_13_Chip_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_13_Chip_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_14_Shard_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_14_Shard_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_14_Shard_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_15_Block_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_15_Block_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_15_Block_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_16_Slab_LOD0 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_16_Slab_LOD1 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_LunarRock_16_Slab_LOD2 | PASS geometry and surfaces (option A) | M1-35 geometry and surfaces verified against M1-33 option A |
+| EN_Regolith_Fresh | PASS geometry and surfaces (option A) | 4 m tile; surface verified against M1-33 option A |
+| EN_Regolith_Compacted | PASS geometry and surfaces (option A) | 4 m tile; surface verified against M1-33 option A |
+| EN_Regolith_Disturbed | PASS geometry and surfaces (option A) | 4 m tile; surface verified against M1-33 option A |

@@ -1,7 +1,7 @@
 """Rebuild M1-35 with Blender, no external services or generation credits.
 
 blender --background --factory-startup --python production/tools/build_lunar_kit.py
-Deterministic source geometry/textures; final exterior art approval is M1-33.
+Deterministic source geometry/textures; reviewed against M1-33 option A.
 """
 import csv
 import json
@@ -144,8 +144,8 @@ def export(obj, name, size, rows, ratio=1):
                               export_lights=False, export_extras=True)
     rows.append(dict(name=name, concept_or_source="tools/build_lunar_kit.py (seed 351104)",
                      size_flag="--longest", size_m=size, tris=tris, tex=256,
-                     game_path=path.relative_to(ROOT).as_posix(), art_status="provisional",
-                     notes="M1-35 geometry; final surface approval waits for M1-33"))
+                     game_path=path.relative_to(ROOT).as_posix(), art_status="verified_option_a",
+                     notes="M1-35 geometry and surfaces verified against M1-33 option A"))
     return tris
 
 
@@ -235,6 +235,8 @@ def main():
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
     maps, rock_image = textures()
+    # Keep the original embedded material IDs so existing imports remain stable.
+    # The legacy suffix is not an approval state; kit.json owns that status.
     mat = material("LunarRock_Provisional",rock_image)
     rows, assets = [], []
     originals = []
@@ -262,7 +264,7 @@ def main():
         name = "EN_Regolith_"+kind
         export(obj,name,4,rows)
         rows[-1]["tex"] = 512
-        rows[-1]["notes"] = "4 m tile; provisional material; M1-33 approval pending"
+        rows[-1]["notes"] = "4 m tile; surface verified against M1-33 option A"
         # Preserve the original square UV for a repeatable 4 m patch.
         for poly in obj.data.polygons:
             for loop in poly.loop_indices:
@@ -282,7 +284,7 @@ def main():
         writer = csv.DictWriter(f,fieldnames=rows[0].keys())
         writer.writeheader()
         writer.writerows(rows)
-    (OUT/"kit.json").write_text(json.dumps(dict(task="M1-35", art_status="provisional_pending_M1-33",
+    (OUT/"kit.json").write_text(json.dumps(dict(task="M1-35", art_status="verified_option_a",
                                                seed=351104, rocks=assets, materials=materials),indent=2)+"\n",encoding="utf-8")
     setup_render()
     for mesh,name,size in originals:
@@ -290,7 +292,7 @@ def main():
         bpy.context.collection.objects.link(obj)
         bpy.context.view_layer.update()
         render(obj,STAGE/(name+".png"))
-    print("LUNAR_KIT_BUILD_PASS: 16 rocks, 48 LOD files, 3 provisional ground patches/materials")
+    print("LUNAR_KIT_BUILD_PASS: 16 rocks, 48 LOD files, 3 option-A ground patches/materials")
 
 
 if __name__ == "__main__":

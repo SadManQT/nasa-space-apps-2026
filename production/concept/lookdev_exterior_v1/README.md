@@ -55,8 +55,8 @@ treatments; it does not certify a pixel-identical Godot implementation.
 Approval chooses an art direction. It does not approve invented mountains,
 station placement, route gradients, Earth visibility, mission-date illumination,
 new costumes or a hardware performance target. M1-34/M1-36 still supply and
-verify those production pieces. M1-35's remaining surface finalization/review is
-now ready under approved A; its geometry remains the already verified local kit.
+verify those production pieces. M1-35's surface review retained the existing grey
+rough materials under approved A; see [its review](../../review/M1-35.md).
 
 ## Sources and reproduction
 

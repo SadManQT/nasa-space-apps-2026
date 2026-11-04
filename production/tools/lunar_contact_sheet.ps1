@@ -11,7 +11,7 @@ $sheet = [System.Drawing.Bitmap]::new(1536, 1500)
 $graphics = [System.Drawing.Graphics]::FromImage($sheet)
 $graphics.Clear([System.Drawing.Color]::FromArgb(20, 23, 29))
 $graphics.DrawString("M1-35 | Lunar fracture kit | LOD$lod | 16 variants", $heading, $brush, 20, 14)
-$graphics.DrawString('Normalized display size; dimensions below are actual metres. Diagnostic lighting. Surfaces await M1-33.', $font, $brush, 20, 52)
+$graphics.DrawString('Normalized display size; dimensions below are actual metres. Diagnostic lighting. Reviewed against option A.', $font, $brush, 20, 52)
 for ($index = 0; $index -lt 16; $index++) {
     $rock = $catalog.rocks[$index]
     $x = ($index % 4) * 384
@@ -31,8 +31,8 @@ $sheet.Dispose()
 $sheet = [System.Drawing.Bitmap]::new(1536, 630)
 $graphics = [System.Drawing.Graphics]::FromImage($sheet)
 $graphics.Clear([System.Drawing.Color]::FromArgb(20, 23, 29))
-$graphics.DrawString('M1-35 | Provisional regolith | 4 m square repeatable tiles', $heading, $brush, 20, 14)
-$graphics.DrawString('Final exterior shading awaits M1-33. No airborne dust, vegetation or atmospheric effects.', $font, $brush, 20, 52)
+$graphics.DrawString('M1-35 | Regolith for option A | 4 m square repeatable tiles', $heading, $brush, 20, 14)
+$graphics.DrawString('Surfaces reviewed against M1-33 option A. No airborne dust, vegetation or atmospheric effects.', $font, $brush, 20, 52)
 $index = 0
 foreach ($kind in @('Fresh', 'Compacted', 'Disturbed')) {
     $file = Join-Path $repoRoot ('game/assets/environment/terrain/textures/T_Regolith_' + $kind + '_BaseColor.png')

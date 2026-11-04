@@ -1,7 +1,7 @@
 # Lunar rock and regolith kit — M1-35
 
-Tanvir/Codex, 4 November 2026. **Geometry is ready for integration; all materials
-are provisional until the human exterior choice in M1-33.** This kit is not yet
+Tanvir/Codex, 4 November 2026. **Geometry and surfaces are verified against the
+option A direction chosen by Tanvir in M1-33.** This kit is not yet
 placed in the campaign. M1-36 owns the terrain provider and streaming.
 
 `kit.json` lists 16 fracture forms, their actual longest dimension (0.06–10 m),
@@ -10,6 +10,14 @@ Forms alternate chips, shards, blocks and slabs. Each closed convex rock has its
 base at Y=0, centred X/Z, identity object transforms, and metre units. No NASA
 marks, vegetation, atmospheric effects, paid generation or external source art.
 These are original procedural shapes, not scanned lunar specimens.
+
+The final surface review retains the existing neutral grey textures, roughness
+0.94 and shallow ground normals. Detailed terrain supports the cel-shaded cast;
+the kit does not apply character outlines to rocks. No mesh or texture rebuild
+was needed. Embedded GLB material IDs retain their legacy `_Provisional` suffix
+for import stability; `kit.json` and the registry carry current status. The
+[surface verification record](../../../../production/review/M1-35_surface_verification.json)
+records hashes of all 60 unchanged GLBs, textures and reusable materials.
 
 The ground GLBs are 4 m square patches with 0–1 UVs. Their equivalent `.tres`
 materials can be assigned to the actual terrain: one UV repeat per 4 m. Surface

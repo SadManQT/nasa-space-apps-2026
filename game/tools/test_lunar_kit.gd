@@ -107,7 +107,7 @@ func _evidence(catalog: Dictionary) -> void:
 		obj.position = Vector3((i % 4 - 1.5) * 3.8, 0, (i / 4 - 1.5) * 3.8)
 		scene.add_child(obj)
 	var title := Label.new()
-	title.text = "M1-35 | 16 fracture forms | normalized display sizes | provisional surfaces"
+	title.text = "M1-35 | 16 fracture forms | normalized display sizes | surfaces reviewed for option A"
 	title.position = Vector2(24, 20)
 	title.add_theme_font_size_override("font_size", 22)
 	root.add_child(title)
@@ -129,7 +129,7 @@ func _evidence(catalog: Dictionary) -> void:
 	camera.position = Vector3(0, 10, 7)
 	camera.size = 14
 	camera.look_at(Vector3.ZERO)
-	title.text = "M1-35 | Fresh / rover-compacted / boot-disturbed | provisional | hard Sun at 5 degrees"
+	title.text = "M1-35 | Fresh / rover-compacted / boot-disturbed | option A | hard Sun at 5 degrees"
 	for i in 3:
 		var path := "res://assets/environment/terrain/rocks/" + String(catalog.materials[i].id) + ".glb"
 		var patch := (load(path) as PackedScene).instantiate() as Node3D
