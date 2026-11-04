@@ -878,7 +878,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Generate Chapter 1 voice lines (49)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude-voice",
    "deps": [
     "M1-13"
@@ -890,7 +890,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
+   "evidence": "383/383 spoken lines at their voice_file paths (CH01 49 incl. 12 reused v7 takes); production/review/vo_review.md; vo_lines.csv status column",
    "updated": "2026-11-04",
    "prompt": "Do: for every EX-CH01 row in production/audio/vo_lines.csv, generate the exact text (never reword source dialogue) with the approved\nvoice_cast.csv settings; pick the better of the takes; export to the row's voice_file path as .ogg (mono, 44.1 kHz, loudness -16 LUFS\ndialogue), trim silence to 120 ms; delivery notes from the 'delivery' and 'speaker_note' columns. Earth-screen and archive lines get a\nlight radio/recorder treatment in post (ffmpeg), not baked into the voice. Mark status in the CSV. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: 49 files present at their paths; a listening pass note in production/review/vo_review.md.",
    "reserved_for": "Sadman"
@@ -901,7 +901,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Music CUE-01 to CUE-04 for Chapter 1",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
@@ -912,7 +912,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/MUSIC_CUE01.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "CUE-01..04 (+05..12) in game/assets/audio/music/, -18 LUFS Vorbis, loops crossfaded; production/review/music_review.md",
    "updated": "2026-11-04",
    "prompt": "Do: per execution/MUSIC_CUE01..04.md and production/audio/music_cues.csv (emotional job, length, loop, entry/exit), generate with\nElevenLabs Music: CUE-01 Home Not Yet, CUE-02 Small Work, CUE-03, CUE-04. Instrumental only, seamless loops where marked (crossfade the\nloop point), export .ogg to each game_file path, -18 LUFS. Ask the user to approve CUE-01 before generating the rest. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
@@ -923,7 +923,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 1 sound effects (16) and UI sounds",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude-voice",
    "deps": [],
    "paths": [
@@ -935,7 +935,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/99_COVERAGE_MATRIX.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "35/35 effects incl. UI confirm/soft error in game/assets/audio/sfx/, captions filled; production/review/sfx_review.md",
    "updated": "2026-11-04",
    "prompt": "Do: generate the 16 Chapter 1 effects in production/audio/sfx_list.csv (first_scenes in CH01: fans, pump, water transfer, valve, glove port,\nshutter, door latch, hatch seal, Earth radio in/lost, aged recorder, particle alert, camera shutter, shift commit) plus SFX_UI_CONFIRM and\nSFX_UI_SOFT_ERROR with ElevenLabs sound effects, per the matching execution/SFX_NN.md prompt (numbered in sfx_list.csv row order; index in execution/99_COVERAGE_MATRIX.md). Interior sound only — nothing airborne outside the habitat\n(suit/contact/cabin sound only). Loops seamless; export .ogg to game_file; fill each caption column. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
@@ -1789,8 +1789,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 2 voice lines (48)",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-14"
    ],
@@ -1800,8 +1800,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-14 for every CH02 row in production/audio/vo_lines.csv, with the approved voice_cast.csv. Noor's first live voice is\nonly in EX-CH08-S10; before that she is stored recordings (N. archive treatment). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -1811,8 +1811,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 2 music and effects: SFX_BRUSH_CONTACT, SFX_AIRLOCK_CYCLE, SFX_ALERT_PRESSURE, SFX_ALERT_STRUCTURAL, SFX_QUAKE_CONTACT, SFX_CUP_RATTLE",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-15",
     "M1-16"
@@ -1823,8 +1823,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-15/M1-16 for SFX_BRUSH_CONTACT, SFX_AIRLOCK_CYCLE, SFX_ALERT_PRESSURE, SFX_ALERT_STRUCTURAL, SFX_QUAKE_CONTACT, SFX_CUP_RATTLE (execution/MUSIC_CUENN.md, execution/SFX_NN.md; index in execution/99_COVERAGE_MATRIX.md). Vacuum carries no sound: exterior and rover\nscenes use suit, contact and cabin sound only. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2027,8 +2027,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 3 voice lines (48)",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-14"
    ],
@@ -2038,8 +2038,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-14 for every CH03 row in production/audio/vo_lines.csv, with the approved voice_cast.csv. Noor's first live voice is\nonly in EX-CH08-S10; before that she is stored recordings (N. archive treatment). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2049,8 +2049,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 3 music and effects: CUE05, SFX_SEED_TICK, SFX_SUIT_BREATH, SFX_RADIO_LOCAL_IN, SFX_CLAMP_SEAT",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-15",
     "M1-16"
@@ -2061,8 +2061,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-15/M1-16 for CUE05, SFX_SEED_TICK, SFX_SUIT_BREATH, SFX_RADIO_LOCAL_IN, SFX_CLAMP_SEAT (execution/MUSIC_CUENN.md, execution/SFX_NN.md; index in execution/99_COVERAGE_MATRIX.md). Vacuum carries no sound: exterior and rover\nscenes use suit, contact and cabin sound only. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2262,8 +2262,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 4 voice lines (48)",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-14"
    ],
@@ -2273,8 +2273,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-14 for every CH04 row in production/audio/vo_lines.csv, with the approved voice_cast.csv. Noor's first live voice is\nonly in EX-CH08-S10; before that she is stored recordings (N. archive treatment). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2284,8 +2284,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 4 music and effects: CUE06, SFX_ROVER_CABIN, SFX_ROVER_CHASSIS, SFX_SCANNER_BEEP",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-15",
     "M1-16"
@@ -2296,8 +2296,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-15/M1-16 for CUE06, SFX_ROVER_CABIN, SFX_ROVER_CHASSIS, SFX_SCANNER_BEEP (execution/MUSIC_CUENN.md, execution/SFX_NN.md; index in execution/99_COVERAGE_MATRIX.md). Vacuum carries no sound: exterior and rover\nscenes use suit, contact and cabin sound only. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2500,8 +2500,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 5 voice lines (48)",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-14"
    ],
@@ -2511,8 +2511,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-14 for every CH05 row in production/audio/vo_lines.csv, with the approved voice_cast.csv. Noor's first live voice is\nonly in EX-CH08-S10; before that she is stored recordings (N. archive treatment). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2522,8 +2522,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 5 music and effects: CUE07, SFX_CONNECTOR",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-15",
     "M1-16"
@@ -2534,8 +2534,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-15/M1-16 for CUE07, SFX_CONNECTOR (execution/MUSIC_CUENN.md, execution/SFX_NN.md; index in execution/99_COVERAGE_MATRIX.md). Vacuum carries no sound: exterior and rover\nscenes use suit, contact and cabin sound only. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2709,8 +2709,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 6 voice lines (48)",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-14"
    ],
@@ -2720,8 +2720,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-14 for every CH06 row in production/audio/vo_lines.csv, with the approved voice_cast.csv. Noor's first live voice is\nonly in EX-CH08-S10; before that she is stored recordings (N. archive treatment). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2731,8 +2731,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 6 music and effects: CUE08, SFX_BREAKER_RESET",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-15",
     "M1-16"
@@ -2743,8 +2743,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-15/M1-16 for CUE08, SFX_BREAKER_RESET (execution/MUSIC_CUENN.md, execution/SFX_NN.md; index in execution/99_COVERAGE_MATRIX.md). Vacuum carries no sound: exterior and rover\nscenes use suit, contact and cabin sound only. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2917,8 +2917,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 7 voice lines (48)",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-14"
    ],
@@ -2928,8 +2928,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-14 for every CH07 row in production/audio/vo_lines.csv, with the approved voice_cast.csv. Noor's first live voice is\nonly in EX-CH08-S10; before that she is stored recordings (N. archive treatment). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -2939,8 +2939,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 7 music and effects: CUE09",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-15",
     "M1-16"
@@ -2951,8 +2951,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-15/M1-16 for CUE09 (execution/MUSIC_CUENN.md, execution/SFX_NN.md; index in execution/99_COVERAGE_MATRIX.md). Vacuum carries no sound: exterior and rover\nscenes use suit, contact and cabin sound only. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -3159,8 +3159,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 8 voice lines (48)",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-14"
    ],
@@ -3170,8 +3170,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-14 for every CH08 row in production/audio/vo_lines.csv, with the approved voice_cast.csv. Noor's first live voice is\nonly in EX-CH08-S10; before that she is stored recordings (N. archive treatment). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
@@ -3181,8 +3181,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 8 music and effects: CUE10, CUE11, CUE12, SFX_BATTERY_SWAP, SFX_CONTROLLER_POWERUP",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude-voice",
    "deps": [
     "M1-15",
     "M1-16"
@@ -3193,8 +3193,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md",
+   "updated": "2026-11-04",
    "prompt": "Same method as M1-15/M1-16 for CUE10, CUE11, CUE12, SFX_BATTERY_SWAP, SFX_CONTROLLER_POWERUP (execution/MUSIC_CUENN.md, execution/SFX_NN.md; index in execution/99_COVERAGE_MATRIX.md). Vacuum carries no sound: exterior and rover\nscenes use suit, contact and cabin sound only. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.",
    "reserved_for": "Sadman"
   },
