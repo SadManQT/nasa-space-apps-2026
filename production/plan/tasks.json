@@ -3181,7 +3181,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Dated biology, inventories and resource ledgers through Chapters 2–8 (bugs B07, B08)",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "atik/codex",
    "deps": [
     "M0-02"
