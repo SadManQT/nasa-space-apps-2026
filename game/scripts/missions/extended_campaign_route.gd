@@ -24,7 +24,7 @@ func _init(director: RefCounted = null) -> void:
 	for scene_id in GateCatalog.scene_ids():
 		_scene_flags[scene_id] = {}
 		_dialogue_acks[scene_id] = []
-	_set_current_scene(0)
+	_set_current_scene(0, false)
 	_retry_checkpoint = _checkpoint_snapshot()
 
 func director() -> RefCounted:
@@ -140,6 +140,7 @@ func gate_status(scene_id: String = "") -> Dictionary:
 	for required in GateCatalog.required_physical(id):
 		if not bool(flags.get(String(required), false)):
 			missing.append(String(required))
+	missing.append_array(_director.campaign_state_predicates(id))
 	return {
 		"scene_id": id,
 		"predicate_id": String(GateCatalog.gate(id).get("predicate_id", "")),
@@ -237,12 +238,14 @@ func _stage(data: Dictionary) -> Dictionary:
 			return restored
 	return {"accepted": true, "world": world, "ledger": ledger}
 
-func _set_current_scene(index: int) -> Dictionary:
+func _set_current_scene(index: int, project_clock: bool = true) -> Dictionary:
 	var scene_ids: Array = GateCatalog.scene_ids()
 	_scene_index = clampi(index, 0, scene_ids.size() - 1)
 	var result: Dictionary = _world.set_scene(current_scene_id(), {"authored_viewpoint_cut": true, "label": "CAMPAIGN SCENE CARD"})
 	if not bool(result.get("accepted", false)):
 		return result
+	if project_clock and bool(result.get("accepted", false)):
+		result = _director.project_scene(current_scene_id())
 	_register_current_targets()
 	return result
 

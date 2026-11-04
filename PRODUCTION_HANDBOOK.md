@@ -48,6 +48,7 @@ When an older design doc disagrees with the latest story or with section 3, **th
 
 | Date | Decision |
 |---|---|
+| 4 Nov 2026 (Atik) | **P-05 keeps the final story dates.** Its four 7.2-hour-equivalent investigation phases are an abstract resource budget; they do not add elapsed hours to scenario time. Dated scene cards still own its story clock. |
 | 25 Oct 2026 | The Dhaka Local Lead gave permission to build production assets and cutscenes before the hackathon. Target: full production, deploy-ready, high-end. Keep that permission in writing for the submission. |
 | 25 Oct 2026 | Engine: **Godot 4.7, Forward+ renderer**, GLB assets. Keep LODs so a Compatibility (low-spec) build still works. |
 | ~~25 Oct 2026~~ | ~~Art style: stylised-realistic.~~ Superseded 27 Oct. |
@@ -298,6 +299,8 @@ Rules from the cinematic guide and the final story: cutscenes are short, embedde
 Optional opening (from the gameplay entry flow): mustard fields to the Moon chamber, 20–30 s, with no claim that Alo existed before the story.
 
 ## 10. Status (latest first)
+
+**4 Nov 2026 — Later ledgers complete (board M3-80, Atik/Codex):** later puzzles now commit real resource/biology/inventory/route transitions. Dated pollination, May 21 harvest42=12+30, replacement descendants, December 15 cotton/vault11, six-step storm and the 51-hour rover/33+3-hour home night reproduce the source endpoints in focused tests. Pure previews, numeric scene predicates, JSON retry and 128 storm upgrade/water cases are covered. Entry profiles reconcile explicit station logistics; Outcome notes show actual readings. `run_tests.sh`: **27/27 suites passed**, plus the final 635-check route/clock check; verification and evidence: [M3-80.md](production/review/execution/M3-80.md).
 
 **4 Nov 2026 — P-05 clock decision (Atik):** preserve final story dates; the four 7.2-hour P-05 phases are an **abstract resource budget**, not elapsed time added to scenario_datetime. Atik explicitly selected “Keep story dates; abstract phase budget”. M3-80 is reopened under atik/codex; source numbers and story timestamps remain intact.
 

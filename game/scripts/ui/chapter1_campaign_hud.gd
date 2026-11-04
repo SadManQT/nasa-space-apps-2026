@@ -78,7 +78,7 @@ func refresh_after_action(result: Dictionary) -> void:
 		_build_targets()
 		_refresh_query()
 	if result.get("accepted", false):
-		_last_outcome = {"result": result.get("reason", "Operation completed."), "changes": result.get("deltas", []), "notes": result.get("warnings", [])}
+		_last_outcome = {"result": result.get("reason", "Operation completed."), "changes": result.get("deltas", []), "notes": result.get("warnings", []) + result.get("ledger_summary", [])}
 		panels.bind_query(runtime.query().merged({"outcome": _last_outcome}, true))
 	if result.has("reason"):
 		show_status(String(result.get("reason", "")))

@@ -116,6 +116,8 @@ func meter_view(id: String) -> Dictionary:
 	for field in group.get("additional_thresholds", {}):
 		var limits: Dictionary = group.additional_thresholds[field]
 		var amount := float(resources.get(field, 0))
+		if field == "W":
+			amount = maxf(0, amount - float(_query.get("outpost", {}).get("separate_shelter_water", 0)))
 		if limits.has("critical_below_or_equal") and amount <= float(limits.critical_below_or_equal):
 			status = "! LOW"
 		elif status == "OK" and ((limits.has("warning_below_or_equal") and amount <= float(limits.warning_below_or_equal)) or (limits.has("warning_at_or_above") and amount >= float(limits.warning_at_or_above)) or (limits.has("warning_above") and amount > float(limits.warning_above))):

@@ -1,6 +1,7 @@
 extends RefCounted
 class_name CampaignDirector
 
+const CampaignSimulation = preload("res://scripts/simulation/campaign_ledger_simulation.gd")
 const Knowledge = preload("res://scripts/dialogue/knowledge_service.gd")
 const StateScript = preload("res://scripts/core/campaign_state.gd")
 const ResultScript = preload("res://scripts/core/command_result.gd")
@@ -15,6 +16,7 @@ var _state: Dictionary
 var _checkpoint: Dictionary
 var _simulation: RefCounted
 var _plant_service: RefCounted
+var _campaign_sim := CampaignSimulation.new()
 
 func _init() -> void:
 	_simulation = SimulationScript.new()
@@ -48,6 +50,13 @@ func new_campaign(content_revision: String = "") -> Dictionary:
 	for plant in _state.get("plants", []):
 		plant["last_advanced_at"] = "2046-04-11 06:00 UTC"
 		plant["stage"] = "seed"
+	_state.inventories.founder_seed42 = {"total": 0, "allocated": 0, "reserve": 0, "unallocated": 0, "reserve_compartments": []}
+	_state.inventories.allocated12 = 0
+	_state.inventories.reserve30 = 0
+	_state.inventories.vault12 = {"total": 0, "stored": 0, "cotton_planted": 0, "stored_after_cotton": 0}
+	_state.inventories.stored12 = 0
+	_state.inventories.stored11 = 0
+	_state.inventories.biology_ledgers = {}
 	_checkpoint = _state.duplicate(true)
 	return _state.duplicate(true)
 
@@ -94,7 +103,13 @@ func preview(command: Dictionary) -> Dictionary:
 		return _reject("The expedition is paused; resume before previewing an operation.")
 	if int(command.get("expected_state_revision", -1)) != int(_state.get("state_revision", 0)):
 		return _reject("This command preview is stale; read the current snapshot first.")
-	return _transition(command, false)
+	var result := _transition(command, false)
+	if result.get("accepted", false) and String(command.get("payload", {}).get("_puzzle_action", "")).begins_with("p03_"):
+		var biology := _campaign_sim.chapter2_biology(result.get("snapshot", _state), command)
+		if not biology.accepted:
+			return biology
+		result["snapshot"] = biology.snapshot
+	return result
 
 func commit(command: Dictionary) -> Dictionary:
 	var shape := _validate_command(command, true)
@@ -123,8 +138,13 @@ func commit(command: Dictionary) -> Dictionary:
 	var result := _transition(command, true)
 	if not bool(result.get("accepted", false)):
 		return result
-	_checkpoint = _state.duplicate(true)
 	var next: Dictionary = result.get("snapshot", _state).duplicate(true)
+	if String(command.get("payload", {}).get("_puzzle_action", "")).begins_with("p03_"):
+		var biology := _campaign_sim.chapter2_biology(next, command)
+		if not biology.accepted:
+			return biology
+		next = biology.snapshot
+	_checkpoint = _state.duplicate(true)
 	for event in Knowledge.grant_operation(next, command):
 		event["state_revision"] = current_revision + 1
 		event["scene_id"] = command.owning_scene_id
@@ -209,6 +229,8 @@ func _transition(command: Dictionary, should_commit: bool) -> Dictionary:
 	var revision := int(_state.get("state_revision", 0))
 	var verb := String(command.get("verb", ""))
 	var payload: Dictionary = command.get("payload", {}) if command.get("payload", {}) is Dictionary else {}
+	if verb == "campaign_operation":
+		return _campaign_sim.transition(_state, command)
 	if verb == "commit_shift":
 		var plan: Dictionary = payload.get("plan", payload) if payload.get("plan", payload) is Dictionary else {}
 		var simulation_result: Dictionary
@@ -293,14 +315,15 @@ func _transition(command: Dictionary, should_commit: bool) -> Dictionary:
 			deltas.append({"field": "resources." + key, "from": before, "to": after})
 		var result := _generic_result(revision, should_commit, "resource_delta")
 		result["deltas"] = deltas
-		if should_commit:
-			var next := _state.duplicate(true)
-			next["resources"] = next_resources
-			if ledger_date > String(next.get("scenario_datetime", "")):
-				next["scenario_datetime"] = ledger_date
-				next["explicit_time_receipts"][String(command.command_id)] = ledger_date
-				_advance_plants(next)
-			result["snapshot"] = next
+		# A preview returns the same projected resources/date on a copy. Only
+		# commit replaces _state and stores a receipt in the coordinator.
+		var next := _state.duplicate(true)
+		next["resources"] = next_resources
+		if ledger_date > String(next.get("scenario_datetime", "")):
+			next["scenario_datetime"] = ledger_date
+			next["explicit_time_receipts"][String(command.command_id)] = ledger_date
+			_advance_plants(next)
+		result["snapshot"] = next
 		return result
 	if verb == "set_phase":
 		var phase := String(payload.get("phase", ""))
@@ -396,7 +419,7 @@ func _seed_initial_biology() -> void:
 func _advance_plants(next: Dictionary) -> void:
 	for index in range(next.get("plants", []).size()):
 		var plant: Dictionary = next.plants[index]
-		if String(plant.get("individual_id", "")) == "ALO-01" and int(next.resources.get("H", 0)) <= 0:
+		if String(plant.get("individual_id", "")) == "ALO-01" and bool(plant.get("alive", true)) and int(next.resources.get("H", 0)) <= 0:
 			plant["stage"] = "lost"
 			plant["alive"] = false
 			plant["death_reason"] = "survival_attempt_failed"
@@ -404,3 +427,16 @@ func _advance_plants(next: Dictionary) -> void:
 			var advanced: Dictionary = _plant_service.advance_to(plant, String(next.scenario_datetime))
 			if bool(advanced.get("accepted", false)):
 				next.plants[index] = advanced.plant
+
+## Authored cuts advance the explicit story clock, never reading or wall time.
+func project_scene(scene_id: String) -> Dictionary:
+	var result := _campaign_sim.project_scene(_state, scene_id)
+	if result.accepted:
+		var changed: bool = result.snapshot != _state
+		_state = result.snapshot
+		if changed:
+			_state.state_revision = int(_state.state_revision) + 1
+	return result
+
+func campaign_state_predicates(scene_id: String) -> Array:
+	return _campaign_sim.state_predicates(scene_id, _state)

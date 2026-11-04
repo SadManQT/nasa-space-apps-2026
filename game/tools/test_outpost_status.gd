@@ -26,6 +26,9 @@ func _run() -> void:
 	query.resources.W = 4
 	hud.outpost.bind_query(query)
 	_check(hud.outpost.meter_view("life").status == "! CHECK", "borrowed garden water triggers its data-backed thirst warning")
+	query.outpost["separate_shelter_water"] = 2
+	hud.outpost.bind_query(query)
+	_check(hud.outpost.meter_view("life").status == "OK", "separate ice-water shielding does not falsely report four borrowed garden units")
 	hud.outpost.bind_query(runtime.query())
 	var original: Dictionary = runtime.director.snapshot()
 	_check(hud.outpost._cards.size() == 4, "all four competing demands have visible meters")

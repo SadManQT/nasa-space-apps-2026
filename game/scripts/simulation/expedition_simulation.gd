@@ -6,6 +6,7 @@ class_name ExpeditionSimulation
 ## a receipt/revision to the returned copy; neither method mutates its input.
 
 const SCHEMA_VERSION := 1
+const CampaignRules = preload("res://resources/campaign/profiles/campaign_rules.json")
 const PROFILE_DIRECTORY := "res://resources/campaign/profiles"
 const BASE_PROFILE_REVISION := "p02-base-v1"
 const SHIFT_COUNT := 7
@@ -52,7 +53,8 @@ func outpost_readouts(snapshot: Dictionary) -> Dictionary:
 	if _profile.is_empty() or not snapshot.get("resources", null) is Dictionary:
 		return {}
 	var resources := _normalise_resources(snapshot.get("resources", {}))
-	return {"shelter_capacity": _shelter_strength(resources, _modifiers(snapshot, {})), "shelter_max": int(_profile.rules.effective_shelter_cap)}
+	var modifiers := _modifiers(snapshot, {})
+	return {"shelter_capacity": _shelter_strength(resources, modifiers), "shelter_max": int(_profile.rules.effective_shelter_cap), "separate_shelter_water": int(CampaignRules.data.upgrade.ice_water) if modifiers.ice_harvester else 0}
 
 func _shelter_strength(resources: Dictionary, modifiers: Dictionary) -> int:
 	return mini(int(_profile.rules.effective_shelter_cap), int(resources.get("W", 0)) + int(resources.get("K", 0)) + int(modifiers.get("shelter_bonus", 0)))
@@ -667,3 +669,47 @@ func _upgrade_choices(raw) -> Dictionary:
 					result[str(chapter)] = raw_choice
 				break
 	return result
+
+## Shared later-campaign economic sample. Fractional air/food and partial home
+## intervals stay fractional. This is pure and does not touch clocks/receipts.
+func sampled_phase(snapshot: Dictionary, settings: Dictionary) -> Dictionary:
+	if _profile.is_empty():
+		_profile = _load_profile("chapter1_base")
+	if _profile.is_empty():
+		return {"accepted": false, "reason": "The shared phase rules are unavailable.", "snapshot": snapshot.duplicate(true)}
+	var next := snapshot.duplicate(true)
+	var resources: Dictionary = next.resources
+	var before := resources.duplicate(true)
+	var modifiers := _modifiers(next, {})
+	var fraction := float(settings.get("fraction", 1.0))
+	var daylight := float(settings.get("daylight_energy", 0.0))
+	if daylight > 0 and modifiers.taller_mast:
+		daylight += float(CampaignRules.data.upgrade.taller_mast_income)
+	var light := int(settings.get("light", 1))
+	var heat := float(settings.get("heat", 0))
+	var demand := float(settings.get("basic_energy", 1)) + heat + float(_light_cost(light, modifiers))
+	resources.E = minf(float(resources.energy_capacity), float(resources.E) + daylight * fraction) - demand * fraction
+	resources.A = float(resources.A) - float(settings.get("breathing_air", 0.0)) * fraction - float(settings.get("extra_air", 0.0)) * fraction
+	resources.R = float(resources.R) - float(settings.get("food_consumption", 0.0)) * fraction
+	var shelter := _shelter_strength(resources, modifiers)
+	var dose := _dose_for_shelter(shelter) * int(settings.get("exposure_multiplier", 0))
+	resources.Z = float(resources.Z) + dose
+	# Exposure precedes the ordinary water transfer, including the final drain.
+	resources.W = int(settings.get("water_after_exposure", resources.W))
+	var cold := 0.0
+	if not bool(settings.get("day_warm", false)):
+		cold = 2.0 if heat == 0 else 1.0 if heat == 1 and not modifiers.insulation_blankets else 0.0
+	var crop_cold := 1.0 if cold == 2.0 else 0.0
+	var separate_water := int(CampaignRules.data.upgrade.ice_water) if modifiers.ice_harvester else 0
+	var thirsty := maxf(0, float(resources.W) - separate_water) >= 4
+	var light_delta: float = [-1.0, 0.0, 1.0][light]
+	if float(resources.H) > 0:
+		resources.H = clampf(float(resources.H) + (light_delta - cold - float(thirsty)) * fraction, 0, float(resources.health_capacity))
+	if float(resources.C) > 0:
+		resources.C = clampf(float(resources.C) + (light_delta - crop_cold - float(thirsty)) * fraction, 0, float(resources.crop_capacity))
+	if resources.E < 0 or resources.A <= 0 or resources.R < 0 or resources.H <= 0 or resources.C <= 0 or resources.Z > float(settings.get("exposure_limit", 1.0e9)):
+		return {"accepted": false, "reason": "The sample would breach the energy, air, food, living-garden or exposure reserve. Restore the pre-operation checkpoint.", "snapshot": snapshot.duplicate(true), "projected_resources": resources}
+	return {"accepted": true, "snapshot": next, "trace": {"before": before, "after": resources.duplicate(true), "shelter": shelter, "dose": dose, "fraction": fraction, "water_after_exposure": resources.W, "water_conservation": {"total": float(resources.water_capacity) + separate_water, "garden_usable": float(resources.water_capacity) - maxf(0, float(resources.W) - separate_water), "shield_water": resources.W, "separate_reserve_unallocated": maxf(0, separate_water - float(resources.W))}}}
+
+func campaign_modifiers(snapshot: Dictionary) -> Dictionary:
+	return _modifiers(snapshot, {})

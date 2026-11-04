@@ -1,0 +1,49 @@
+{
+  "source": "08_PUZZLE_DESIGNS.md and PRODUCTION_HANDBOOK.md section 4",
+  "upgrade": {
+    "taller_mast_income": 2,
+    "fuel_cell_entry": 4,
+    "fuel_cell_capacity": 26,
+    "ice_water": 2,
+    "long_range_battery": 4,
+    "flexible_seal_factor": 0.5
+  },
+  "biology": {
+    "founder_total": 42,
+    "founder_planting": 12,
+    "founder_reserve": 30,
+    "reserve_compartments": [
+      15,
+      15
+    ],
+    "harvest_date": "2046-05-21 00:00 UTC",
+    "maturity_date": "2046-05-16 00:00 UTC",
+    "moisture_wet": 70,
+    "moisture_dry": 20,
+    "descendant_sample": 12,
+    "purple": 7,
+    "green": 5,
+    "vault_total": 12,
+    "cotton_planted": 1,
+    "vault_stored": 11,
+    "cotton_date": "2046-12-15 00:00 UTC",
+    "pod_observation_date": "2046-05-08",
+    "annual_completion_days": 40
+  },
+  "logistics": {
+    "crop_yield_scale": 4,
+    "new_crop_condition": 8,
+    "crew_before_relief": 4,
+    "crew_after_relief": 5,
+    "relief_date": "2046-12-12 00:00 UTC"
+  },
+  "relay": {
+    "local_bearing": "L2",
+    "earth_bearing": "E3",
+    "known_echo": "ALO42",
+    "controller_count": 1,
+    "reading_limit": 1,
+    "reading_interval_seconds": 600,
+    "repeater_spares": 1
+  }
+}

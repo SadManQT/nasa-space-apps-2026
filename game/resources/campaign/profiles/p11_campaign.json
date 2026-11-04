@@ -1,0 +1,16 @@
+{
+  "resources": {
+    "E": 14
+  },
+  "capacities": {
+    "energy_capacity": 20
+  },
+  "allocation": 7,
+  "essential_segments": 5,
+  "pump_cost": 1,
+  "camera_cost": 1,
+  "scheduled_mature_crop": true,
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-11; game-design/10_GAMEPLAY_SYSTEMS.md upgrades",
+  "profile_id": "p11_campaign",
+  "scenario_datetime": "2047-01-12 00:00 UTC"
+}

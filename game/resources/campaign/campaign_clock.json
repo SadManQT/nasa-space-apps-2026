@@ -1,0 +1,366 @@
+{
+  "source": "full-game-story/STORY_FULL.md; exact storm/route endpoints from 08; non-exact dates use authored window lower bounds",
+  "scenes": {
+    "EX-CH02-S01": {
+      "not_before": "2046-04-30 06:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH02-S02": {
+      "not_before": "2046-04-30 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH02-S03": {
+      "not_before": "2046-04-30 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH02-S04": {
+      "not_before": "2046-04-30 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH02-S05": {
+      "not_before": "2046-04-30 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH02-S06": {
+      "not_before": "2046-05-06 12:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH02-S07": {
+      "not_before": "2046-05-06 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH02-S08": {
+      "not_before": "2046-05-06 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH02-S09": {
+      "not_before": "2046-05-06 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH02-S10": {
+      "not_before": "2046-05-06 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH02-S11": {
+      "not_before": "2046-05-06 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH02-S12": {
+      "not_before": "2046-05-06 22:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH03-S01": {
+      "not_before": "2046-05-06 22:05 UTC",
+      "precision": "minute"
+    },
+    "EX-CH03-S02": {
+      "not_before": "2046-05-06 22:10 UTC",
+      "precision": "minute"
+    },
+    "EX-CH03-S03": {
+      "not_before": "2046-05-06 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH03-S04": {
+      "not_before": "2046-05-07 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH03-S05": {
+      "not_before": "2046-05-07 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH03-S06": {
+      "not_before": "2046-05-07 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH03-S07": {
+      "not_before": "2046-05-08 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH03-S08": {
+      "not_before": "2046-05-08 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH03-S09": {
+      "not_before": "2046-05-16 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH03-S10": {
+      "not_before": "2046-05-21 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH03-S11": {
+      "not_before": "2046-05-21 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH03-S12": {
+      "not_before": "2046-05-21 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH04-S01": {
+      "not_before": "2046-10-21 06:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH04-S02": {
+      "not_before": "2046-10-21 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH04-S03": {
+      "not_before": "2046-10-21 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH04-S04": {
+      "not_before": "2046-10-21 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH04-S05": {
+      "not_before": "2046-10-21 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH04-S06": {
+      "not_before": "2046-10-21 10:30 UTC",
+      "precision": "minute"
+    },
+    "EX-CH04-S07": {
+      "not_before": "2046-10-21 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH04-S08": {
+      "not_before": "2046-10-21 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH04-S09": {
+      "not_before": "2046-10-22 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH04-S10": {
+      "not_before": "2046-10-22 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH04-S11": {
+      "not_before": "2046-10-22 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH04-S12": {
+      "not_before": "2046-10-22 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S01": {
+      "not_before": "2046-12-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S02": {
+      "not_before": "2046-12-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S03": {
+      "not_before": "2046-12-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S04": {
+      "not_before": "2046-12-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S05": {
+      "not_before": "2046-12-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S06": {
+      "not_before": "2046-12-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S07": {
+      "not_before": "2046-12-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S08": {
+      "not_before": "2046-12-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S09": {
+      "not_before": "2046-12-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S10": {
+      "not_before": "2046-12-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S11": {
+      "not_before": "2046-12-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH05-S12": {
+      "not_before": "2046-12-15 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S01": {
+      "not_before": "2047-01-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S02": {
+      "not_before": "2047-01-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S03": {
+      "not_before": "2047-01-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S04": {
+      "not_before": "2047-01-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S05": {
+      "not_before": "2047-01-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S06": {
+      "not_before": "2047-01-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S07": {
+      "not_before": "2047-01-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S08": {
+      "not_before": "2047-01-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S09": {
+      "not_before": "2047-01-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S10": {
+      "not_before": "2047-01-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S11": {
+      "not_before": "2047-01-12 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH06-S12": {
+      "not_before": "2047-01-13 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH07-S01": {
+      "not_before": "2047-02-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH07-S02": {
+      "not_before": "2047-02-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH07-S03": {
+      "not_before": "2047-02-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH07-S04": {
+      "not_before": "2047-02-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH07-S05": {
+      "not_before": "2047-02-14 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH07-S06": {
+      "not_before": "2047-02-14 06:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH07-S07": {
+      "not_before": "2047-02-14 20:24 UTC",
+      "precision": "minute"
+    },
+    "EX-CH07-S08": {
+      "not_before": "2047-02-14 20:24 UTC",
+      "precision": "minute"
+    },
+    "EX-CH07-S09": {
+      "not_before": "2047-02-16 01:12 UTC",
+      "precision": "minute"
+    },
+    "EX-CH07-S10": {
+      "not_before": "2047-02-16 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH07-S11": {
+      "not_before": "2047-03-01 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH07-S12": {
+      "not_before": "2047-04-07 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH08-S01": {
+      "not_before": "2047-04-08 00:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH08-S02": {
+      "not_before": "2047-04-08 00:00 UTC",
+      "precision": "date_window"
+    },
+    "EX-CH08-S03": {
+      "not_before": "2047-04-08 00:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH08-S04": {
+      "not_before": "2047-04-08 10:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH08-S05": {
+      "not_before": "2047-04-08 18:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH08-S06": {
+      "not_before": "2047-04-09 00:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH08-S07": {
+      "not_before": "2047-04-09 00:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH08-S08": {
+      "not_before": "2047-04-09 00:45 UTC",
+      "precision": "minute"
+    },
+    "EX-CH08-S09": {
+      "not_before": "2047-04-09 01:45 UTC",
+      "precision": "minute"
+    },
+    "EX-CH08-S10": {
+      "not_before": "2047-04-09 02:15 UTC",
+      "precision": "minute"
+    },
+    "EX-CH08-S11": {
+      "not_before": "2047-04-10 03:00 UTC",
+      "precision": "minute"
+    },
+    "EX-CH08-S12": {
+      "not_before": "2047-04-10 06:00 UTC",
+      "precision": "minute"
+    }
+  },
+  "operations": {
+    "p06_confirm_care_transition": "2046-05-16 00:00 UTC",
+    "p06_confirm_maturity": "2046-05-16 00:00 UTC",
+    "p06_configure_drydown": "2046-05-16 00:00 UTC",
+    "p06_drydown_five_days": "2046-05-21 00:00 UTC",
+    "p06_confirm_descendant_survey": "2046-10-21 06:00 UTC",
+    "p08_return_to_base": "2046-10-22 00:00 UTC",
+    "p08_confirm_december_transition": "2046-12-12 00:00 UTC",
+    "p10_plant_cotton": "2046-12-15 00:00 UTC",
+    "p12_date_february_warning": "2047-02-14 00:00 UTC",
+    "p14_date_march_gate": "2047-03-01 00:00 UTC",
+    "p14_sign_departure_prep": "2047-04-08 00:00 UTC",
+    "p15_reach_marker_two": "2047-04-08 10:00 UTC",
+    "p15_reach_approach": "2047-04-08 17:00 UTC",
+    "p15_confirm_summit": "2047-04-09 00:00 UTC",
+    "p16_start_return": "2047-04-09 03:00 UTC",
+    "p16_confirm_return_24h": "2047-04-10 03:00 UTC",
+    "p03_complete_run_1": "2046-04-30 12:00 UTC",
+    "p03_log_care_day_2": "2046-05-01 12:00 UTC",
+    "p03_log_care_day_3": "2046-05-02 12:00 UTC",
+    "p03_log_care_day_4": "2046-05-03 12:00 UTC",
+    "p03_log_care_day_5": "2046-05-04 12:00 UTC",
+    "p03_log_care_day_6": "2046-05-05 12:00 UTC",
+    "p03_log_care_day_7": "2046-05-06 12:00 UTC"
+  }
+}

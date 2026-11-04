@@ -44,7 +44,7 @@ const PANEL_DEFINITIONS := {
 	"journal_discovery": {"title": "JOURNAL / DISCOVERY", "query_key": "journal_entries", "description": "Acquired evidence only; unrevealed knowledge stays hidden."},
 	"mission_table": {"title": "MISSION TABLE", "query_key": "mission_table", "description": "Read-only mission plan and supplied forecast."},
 	"puzzle": {"title": "PUZZLE", "query_key": "puzzle", "description": "A named interaction can preview or submit an explicit command."},
-	"outcome": {"title": "OUTCOME", "query_key": "outcome", "description": "The recorded result and its responsible receipt."},
+	"outcome": {"title": "OUTCOME", "query_key": "outcome", "description": "Review the changed readings, reserves and recorded evidence."},
 	"pause": {"title": "PAUSE", "query_key": "pause", "description": "Reading and planning do not advance scenario time."},
 	"settings_accessibility": {"title": "SETTINGS / ACCESSIBILITY", "query_key": "accessibility", "description": "Captions, large text, reduced motion and timer-free labels."},
 	"credits": {"title": "CREDITS", "query_key": "credits", "description": "Project, source and media disclosure."},
@@ -242,6 +242,9 @@ func _render_active_panel() -> void:
 		_render_dialogue(value)
 	elif _active_panel == "puzzle":
 		_render_puzzle(value)
+	elif _active_panel == "outcome":
+		_render_outcome(value)
+		_render_puzzle_sources(_query.get("source_puzzle_ids", []))
 	elif _active_panel == "journal_discovery":
 		_render_journal(value)
 		_source_button("SOURCES · ALL DATASETS", func(): open_panel("sources", {"ids": []}))
@@ -404,7 +407,7 @@ func _display_value(value) -> String:
 		for key in value.keys():
 			rows.append("%s: %s" % [String(key), _display_value(value[key])])
 		return "\n".join(rows)
-	return String(value)
+	return str(value)
 
 func _button(text: String) -> Button:
 	var button := Button.new()
@@ -573,3 +576,16 @@ func _render_journal(value) -> void:
 		_card_text(String(entry.get("evidence_label", "Recorded observation")))
 		for observation in entry.get("observations", []):
 			_card_text(String(observation.get("text", "")))
+
+func _render_outcome(value) -> void:
+	var data: Dictionary = value if value is Dictionary else {}
+	_card_text(String(data.get("result", "Complete an operation to review its readings.")), true)
+	var labels := {"E": "Energy E", "A": "Air A", "H": "Garden health H", "C": "Crop condition C", "R": "Rations R (crew-days)", "Z": "Game exposure Z", "W": "Shelter water W", "K": "Crate shielding K"}
+	for change in data.get("changes", []):
+		if not change is Dictionary:
+			continue
+		var key := String(change.get("field", "")).trim_prefix("resources.")
+		if labels.has(key):
+			_card_text("%s: %s to %s" % [labels[key], _display_value(change.get("from")), _display_value(change.get("to"))])
+	for note in data.get("notes", []):
+		_card_text(str(note))

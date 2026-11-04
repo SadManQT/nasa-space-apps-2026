@@ -61,6 +61,8 @@ func _run() -> void:
 			_check(bool(_campaign._start_extended("EX-CH%02d-S01" % chapter).get("accepted", false)), "later panel fixture enters chapter %d" % chapter)
 		_test_panels()
 	var saved: Dictionary = _campaign.save_campaign()
+	if not saved.get("accepted", false):
+		print("LATER SAVE DETAIL ", saved.get("reason", ""), " ", _invalid_path(_campaign._save_snapshot()))
 	_check(bool(saved.get("accepted", false)), "later-chapter runtime saves a primitive route checkpoint")
 	_campaign.free()
 	_check(SaveScript.new().clear(storage.path), "later runtime fixture cleans its isolated save")
@@ -85,3 +87,22 @@ func _test_panels() -> void:
 		_check(not _campaign.director.query().paused and _campaign._player.process_mode == Node.PROCESS_MODE_INHERIT, "B04 " + chapter + " resumes after " + panel_id)
 	if not _campaign.is_chapter_complete():
 		_check(not _campaign.hud._retry.disabled, "B05 later chapter HUD exposes its persisted retry checkpoint")
+
+func _invalid_path(value, path: String = "$", depth: int = 0) -> String:
+	if depth > 64:
+		return path + " too deep"
+	if value is Dictionary:
+		for key in value:
+			if not key is String:
+				return path + "." + str(key) + " key type=" + str(typeof(key))
+			var invalid := _invalid_path(value[key], path + "." + key, depth + 1)
+			if not invalid.is_empty():
+				return invalid
+	elif value is Array:
+		for index in value.size():
+			var invalid := _invalid_path(value[index], path + "[" + str(index) + "]", depth + 1)
+			if not invalid.is_empty():
+				return invalid
+	elif typeof(value) not in [TYPE_NIL, TYPE_BOOL, TYPE_INT, TYPE_FLOAT, TYPE_STRING]:
+		return path + " type=" + str(typeof(value))
+	return ""

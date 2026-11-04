@@ -88,7 +88,7 @@ func _validate(puzzle_id: String, action: String, payload: Dictionary) -> String
 		"p13_commit_plan":
 			if int(payload.get("water", -1)) != 4 or int(payload.get("crate", -1)) != 2 or String(payload.get("heat", "")) != "COZY" or String(payload.get("light", "")) != "DIM" or int(payload.get("reserve", -1)) != 30: return "P-13 witness requires W4, K2, COZY/DIM and protected reserve 30."
 		"p14_route_reading_1", "p14_route_reading_2":
-			if float(payload.get("reading", 99.0)) >= 1.0: return "P-14 route clearance requires a reading below 1."
+			if not (payload.get("reading") is int or payload.get("reading") is float) or not is_finite(float(payload.reading)) or float(payload.reading) < 0 or float(payload.reading) >= 1.0: return "P-14 route clearance requires a reading below 1."
 		"p15_choose_surveyed_route":
 			if String(payload.get("route", "")) != "SURVEYED" or int(payload.get("reserve", -1)) < 2: return "P-15 requires the surveyed route and at least two units of return reserve."
 		"p15_restore_marker_2":

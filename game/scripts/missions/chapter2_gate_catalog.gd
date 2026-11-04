@@ -75,12 +75,14 @@ static func _p03_run_one(room_id: String, mission_id: String, scene_id: String) 
 
 static func _p03_run_later(room_id: String, mission_id: String, scene_id: String) -> Array:
 	var result: Array = []
-	for day in range(2, 8):
-		result.append(_p03_action("care_day_%d" % day, room_id, "Record dated care visit %d/7" % day, mission_id, scene_id, "p03_log_care_day_%d" % day))
-	result.append(_p03_action("run_2_forward", room_id, "Run two · Tara to Alo", mission_id, scene_id, "p03_run_2_forward", ["p03_run_1_complete"]))
+	for day in range(2, 4):
+		result.append(_p03_action("care_day_%d" % day, room_id, "Record dated care visit %d/7" % day, mission_id, scene_id, "p03_log_care_day_%d" % day, ["p03_run_1_complete"] if day == 2 else ["p03_log_care_day_%d_done" % (day - 1)]))
+	result.append(_p03_action("run_2_forward", room_id, "Run two · Tara to Alo", mission_id, scene_id, "p03_run_2_forward", ["p03_run_1_complete", "p03_log_care_day_3_done"]))
 	result.append(_p03_action("run_2_reverse", room_id, "Run two · Alo to Tara", mission_id, scene_id, "p03_run_2_reverse", ["p03_run_2_forward_done"]))
 	result.append(_p03_action("complete_run_2", room_id, "Commit reciprocal cycle two · E1/A1", mission_id, scene_id, "p03_complete_run_2", ["p03_run_2_reverse_done"]))
-	result.append(_p03_action("run_3_forward", room_id, "Run three · Tara to Alo", mission_id, scene_id, "p03_run_3_forward", ["p03_run_2_complete"]))
+	for day in range(4, 8):
+		result.append(_p03_action("care_day_%d" % day, room_id, "Record dated care visit %d/7" % day, mission_id, scene_id, "p03_log_care_day_%d" % day, ["p03_run_2_complete"] if day == 4 else ["p03_log_care_day_%d_done" % (day - 1)]))
+	result.append(_p03_action("run_3_forward", room_id, "Run three · Tara to Alo", mission_id, scene_id, "p03_run_3_forward", ["p03_run_2_complete", "p03_log_care_day_7_done"]))
 	result.append(_p03_action("run_3_reverse", room_id, "Run three · Alo to Tara", mission_id, scene_id, "p03_run_3_reverse", ["p03_run_3_forward_done"]))
 	result.append(_p03_action("complete_run_3", room_id, "Commit reciprocal cycle three · E1/A1", mission_id, scene_id, "p03_complete_run_3", ["p03_run_3_reverse_done"]))
 	return result

@@ -66,7 +66,14 @@ func _run() -> void:
 	var state := director.snapshot()
 	var forbidden := director.commit({"command_id": "test:locked-live", "issuer": "test", "owning_mission_id": "EX-M0804", "owning_scene_id": "EX-CH08-S10", "expected_state_revision": state.state_revision, "target_id": "EX-CH08-S10-L01", "verb": "acknowledge_line", "payload": {"line_id": "EX-CH08-S10-L01"}})
 	_check(not forbidden.accepted and director.snapshot() == state, "direct acknowledgement cannot bypass a knowledge gate")
-	for scene_id in ["EX-CH08-S08", "EX-CH08-S09"]:
+	# Bounded relay-entry fixture: earlier source tasks delivered the compatible
+	# spare and verified the four-hop surface chain. P-16 must still perform
+	# the real isolation/replacement/power/bearing/echo sequence.
+	var relay_entry := director.snapshot()
+	relay_entry.inventories["relay_controllers"] = 1
+	relay_entry.route.local_hops = ["Aurora-R1", "R1-R2", "R2-R3", "R3-summit"]
+	director.restore_snapshot(relay_entry)
+	for scene_id in ["EX-CH08-S07", "EX-CH08-S08", "EX-CH08-S09"]:
 		extended.start_at(scene_id)
 		for target in Gate.targets_for_scene(scene_id):
 			_check(extended.perform(target.target_id, target.get("payload_defaults", {})).accepted, "relay evidence " + target.target_id)

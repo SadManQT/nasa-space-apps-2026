@@ -161,6 +161,10 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 			result = {"accepted": false, "reason": "Move into clear view of " + String(target.get_meta("focus_label", "the target")) + "."}
 		else:
 			result = route.perform(target_id, payload, {"room_id": _room.room_id, "distance_m": distance, "line_of_sight": clear})
+	if result.has("result") and result.result is Dictionary and result.get("accepted", false):
+		for key in ["reason", "deltas", "warnings", "ledger_summary"]:
+			if result.result.has(key):
+				result[key] = result.result[key]
 	_sync_world_boundaries()
 	if _crew != null:
 		_crew.react(result, bool(director.snapshot().get("accessibility", {}).get("reduced_motion", false)))

@@ -136,6 +136,18 @@ static func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 			return {"valid": false, "reason": "Campaign accessibility setting must be a boolean: " + key}
 	if snapshot.has("blackout_count") and (not _finite_number(snapshot.blackout_count) or float(snapshot.blackout_count) != floor(float(snapshot.blackout_count)) or float(snapshot.blackout_count) < 0):
 		return {"valid": false, "reason": "Campaign blackout count must be a nonnegative integer."}
+	if snapshot.has("campaign_ledgers"):
+		var book = snapshot.campaign_ledgers
+		if not book is Dictionary:
+			return {"valid": false, "reason": "Campaign ledgers must be a primitive Dictionary."}
+		for field in ["profiles", "puzzles", "operations"]:
+			if not book.get(field) is Dictionary:
+				return {"valid": false, "reason": "Campaign ledger collection is invalid: " + field}
+		if not book.get("entries") is Array or not _finite_number(book.get("food_sampled")) or float(book.food_sampled) < 0 or not book.get("food_period_start") is String or not is_scenario_datetime(book.food_period_start):
+			return {"valid": false, "reason": "Campaign ledger entries or food interval is invalid."}
+		for puzzle in book.puzzles.values():
+			if not puzzle is Dictionary or not puzzle.get("operations") is Dictionary or not puzzle.get("samples") is Array or not _finite_number(puzzle.get("phase")) or float(puzzle.phase) < 0 or float(puzzle.phase) != floor(float(puzzle.phase)):
+				return {"valid": false, "reason": "Campaign puzzle ledger shape is invalid."}
 	return {"valid": true, "reason": "Campaign state shape is valid."}
 
 static func _finite_number(value) -> bool:

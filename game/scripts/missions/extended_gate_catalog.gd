@@ -69,7 +69,8 @@ static func targets_for_scene(scene_id: String) -> Array:
 	return result
 
 static func _target(action: String, room_id: String, label: String, mission_id: String, scene_id: String, puzzle_id: String, required: Array, defaults: Dictionary) -> Dictionary:
-	return {"target_id": action, "room_id": room_id, "world_focus_id": _world_focus_id(action, room_id), "focus_label": label, "verb": "Use", "command_verb": "set_phase", "command_target_id": puzzle_id, "command_id": "extended:%s" % action, "owning_mission_id": mission_id, "owning_scene_id": scene_id, "physical_flag": action + "_done", "required_flags": required.filter(func(value): return not String(value).is_empty()), "unmet_reason": "Complete the preceding evidence step before using this target.", "readout": label, "range_m": 3.0, "line_of_sight_required": false, "puzzle_id": puzzle_id, "puzzle_action": action, "payload_defaults": defaults}
+	label = {"p05_inspect_tank": "Inspect main tank candidate", "p05_inspect_habitat": "Inspect habitat trunk candidate", "p05_inspect_garden": "Inspect garden feedthrough candidate", "p05_inspect_return": "Inspect return line candidate", "p05_inspect_airlock": "Inspect airlock seal candidate", "p05_inspect_annex": "Inspect annex branch candidate"}.get(action, label)
+	return {"target_id": action, "room_id": room_id, "world_focus_id": _world_focus_id(action, room_id), "focus_label": label, "verb": "Use", "command_verb": "campaign_operation", "command_target_id": puzzle_id, "command_id": "extended:%s" % action, "owning_mission_id": mission_id, "owning_scene_id": scene_id, "physical_flag": action + "_done", "required_flags": required.filter(func(value): return not String(value).is_empty()), "unmet_reason": "Complete the preceding evidence step before using this target.", "readout": label, "range_m": 3.0, "line_of_sight_required": false, "puzzle_id": puzzle_id, "puzzle_action": action, "payload_defaults": defaults}
 
 static func _world_focus_id(action: String, room_id: String) -> String:
 	match room_id:
@@ -78,6 +79,8 @@ static func _world_focus_id(action: String, room_id: String) -> String:
 				return "commons_earth_screen"
 			return "commons_mission_table"
 		"LOC-02":
+			if action.begins_with("p05_inspect_") or action.begins_with("p05_read_"):
+				return "service_garden_valve" if action.contains("garden") or action.contains("annex") else "service_air_console"
 			if action.contains("air") or action.contains("pressure") or action.contains("oxygen"):
 				return "service_air_console"
 			return "service_power_panel"
@@ -128,7 +131,7 @@ static func _actions(chapter: int, order: int) -> Array:
 		3:
 			return [
 				["p05_equip_gauge", "p05_read_panel_warning", "p05_identify_three_taps"],
-				["p05_read_main_t0", "p05_read_garden_t0", "p05_read_return_t0", "p05_read_main_t10", "p05_read_garden_t10", "p05_read_return_t10", "p05_identify_garden_fall"],
+				["p05_read_main_t0", "p05_read_garden_t0", "p05_read_return_t0", "p05_inspect_tank", "p05_inspect_habitat", "p05_inspect_garden", "p05_inspect_return", "p05_inspect_airlock", "p05_inspect_annex", "p05_read_main_t10", "p05_read_garden_t10", "p05_read_return_t10", "p05_identify_garden_fall"],
 				["p05_verify_annex_isolation", "p05_preview_garden_isolation", "p05_rollback_check"],
 				["p05_isolate_garden", "p05_verify_main_hold", "p05_apply_garden_clamp", "p05_reopen_garden_slow", "p05_stable_read_1", "p05_stable_read_2", "p05_stable_read_3", "p05_stable_read_4", "p05_stable_read_5"],
 				["p05_reconcile_records", "p05_save_monitoring_handover"],

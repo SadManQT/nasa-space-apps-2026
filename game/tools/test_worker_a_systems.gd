@@ -159,7 +159,7 @@ func _test_upgrade_combinations() -> void:
 func _test_director_and_host() -> void:
 	var director = DirectorScript.new()
 	var initial_campaign: Dictionary = director.new_campaign()
-	_check(initial_campaign.get("inventories", {}).get("vault12", {}).get("stored", 0) == 12 and initial_campaign.get("inventories", {}).get("vault12", {}).get("cotton_planted", 1) == 0 and initial_campaign.get("inventories", {}).get("stored12", 0) == 12 and initial_campaign.get("inventories", {}).get("stored11", -1) == 0 and initial_campaign.get("inventories", {}).get("reserve30", 0) == 30, "CampaignState starts with twelve unplanted vault specimens and the separate thirty-seed founder reserve")
+	_check(initial_campaign.get("inventories", {}).get("vault12", {}).get("stored", -1) == 0 and initial_campaign.get("inventories", {}).get("vault12", {}).get("cotton_planted", 1) == 0 and initial_campaign.get("inventories", {}).get("stored12", -1) == 0 and initial_campaign.get("inventories", {}).get("stored11", -1) == 0 and initial_campaign.get("inventories", {}).get("reserve30", -1) == 0, "A new campaign acquires physical founder/vault inventories only at harvest and recovery")
 	var command := _command("director-shift-1", int(director.query().state_revision), {"shifts": [_bloom_plan()[0]]})
 	var before: Dictionary = director.snapshot()
 	var preview: Dictionary = director.preview(command)

@@ -1,0 +1,32 @@
+{
+  "resources": {
+    "E": 14,
+    "A": 8,
+    "H": 6,
+    "C": 8,
+    "R": 18,
+    "W": 0,
+    "K": 0,
+    "Z": 0
+  },
+  "capacities": {
+    "energy_capacity": 20
+  },
+  "phases": 2,
+  "daylight_energy": 8,
+  "basic_energy": 1,
+  "heat": 0,
+  "light": 1,
+  "breathing_air": 0.5,
+  "food_consumption": 0.6,
+  "rover_energy": 100,
+  "rover_allowance": 30,
+  "rover_reserve": 30,
+  "rover_provisions": 48,
+  "max_slope": 15,
+  "route_slope": 12,
+  "scheduled_mature_crop": true,
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-07; game-design/10_GAMEPLAY_SYSTEMS.md upgrades",
+  "profile_id": "p07_campaign",
+  "scenario_datetime": "2046-10-21 06:00 UTC"
+}

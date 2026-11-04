@@ -3181,7 +3181,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Dated biology, inventories and resource ledgers through Chapters 2–8 (bugs B07, B08)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "atik/codex",
    "deps": [
     "M0-02"
@@ -3199,7 +3199,7 @@
     "execution/SYS_04_SIMULATION_PREVIEW.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "run_tests.sh: 27/27 suites passed; final extended route 635 checks; later_numeric 388 checks incl 128 safe storm/water combinations; five reviewed screenshots production/qa/evidence/M3-80_EX-*.png; production/review/execution/M3-80.md; Atik approved P-05 abstract budget with unchanged story dates.",
    "updated": "2026-11-04",
    "prompt": "Problem (BUGHUNT B07/B08): later operations are set_phase flags; no leak, power, storm, travel or provision changes are applied, dates do not\nadvance, Alo can stay blooming after its harvest, cotton is never planted and the vault never falls to eleven.\nGoal: every later puzzle dispatches its real transition through the simulation/director and completion is judged from the resulting state;\ndated biology (pollination, maturity, dry-down, harvest 42 = 12 + 30, descendants, cotton on 15 Dec) and inventories follow the story\nledgers in PRODUCTION_HANDBOOK.md section 4; scene projection advances scenario_datetime.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the extended route test checks the P-05, P-14 and P-15 numeric endpoints from 08_PUZZLE_DESIGNS.md, dates, inventories\nand plant states, not just receipts.",
    "blocker": "Canon decision needed from Atik/story owner: P-05 requires three unresolved 7.2h phases (to May 7 19:41 from May 6 22:05), but STORY_FULL CH03-S04/S05 verifies repair before dawn May 7. Exact numeric witness reproduces; choose abstract resource-budget phases or revise affected story dates/catalog. Input request pending; production/review/execution/M3-80.md. No later-ledger implementation claimed."

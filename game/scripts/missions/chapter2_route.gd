@@ -27,7 +27,7 @@ func _init(director: RefCounted = null) -> void:
 	for scene_id in GateCatalog.scene_ids():
 		_scene_flags[scene_id] = {}
 		_dialogue_acks[scene_id] = []
-	_set_current_scene(0)
+	_set_current_scene(0, false)
 	_retry_checkpoint = _checkpoint_snapshot()
 
 func director() -> RefCounted: return _director
@@ -177,9 +177,11 @@ func _stage(data: Dictionary) -> Dictionary:
 		if not bool(restored.get("accepted", false)): return restored
 	return {"accepted": true, "world": world, "p03": p03, "p04": p04}
 
-func _set_current_scene(index: int) -> Dictionary:
+func _set_current_scene(index: int, project_clock: bool = true) -> Dictionary:
 	_scene_index = clampi(index, 0, GateCatalog.SCENE_ORDER.size() - 1)
 	var result: Dictionary = _world.set_scene(current_scene_id(), {"authored_viewpoint_cut": true, "label": "CHAPTER 2 SCENE CARD"})
+	if project_clock and bool(result.get("accepted", false)):
+		result = _director.project_scene(current_scene_id())
 	_register_current_targets()
 	return result
 

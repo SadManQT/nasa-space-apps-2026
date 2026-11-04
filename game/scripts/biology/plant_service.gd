@@ -5,6 +5,7 @@ class_name PlantService
 ## Operations return a new primitive plant dictionary; the input plant is
 ## never mutated. Renderers should consume only the returned stage/status.
 
+const CampaignRules = preload("res://resources/campaign/profiles/campaign_rules.json")
 const SCHEMA_VERSION := 1
 const FOUNDER_TOTAL := 42
 const FOUNDER_ALLOCATED := 12
@@ -221,12 +222,14 @@ func advance_to(plant: Dictionary, scenario_datetime: String) -> Dictionary:
 			current = "bud"
 		if elapsed >= int(base.get("bloom_days", 16)) and current in ["seed", "sprout", "bud"]:
 			current = "bloom"
+		if current == "pollinated" and String(base.individual_id) in [ALO_ID, TARA_ID] and scenario_datetime.substr(0, 10) >= String(CampaignRules.data.biology.pod_observation_date):
+			current = "pod_bearing"
 		if current in ["pollinated", "pod_bearing"] and elapsed >= int(base.get("mature_days", 35)):
 			current = "mature_pods"
 		if current == "mature_pods" and not String(base.get("dry_down_started_at", "")).is_empty():
 			if _day_number(String(base.get("dry_down_started_at", ""))) + 5 <= target_day:
 				current = "mature_dry"
-		if current == "mature_dry" and elapsed > int(base.get("mature_days", 35)) + 5:
+		if elapsed > int(base.get("mature_days", 35)) + 5 and String(base.individual_id) in [ALO_ID, TARA_ID]:
 			current = "naturally_dead"
 			base["alive"] = false
 			base["natural_death"] = true

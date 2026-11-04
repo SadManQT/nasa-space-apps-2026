@@ -1,0 +1,40 @@
+{
+  "resources": {
+    "E": 30,
+    "A": 10,
+    "H": 6,
+    "C": 8,
+    "R": 18,
+    "W": 0,
+    "K": 0,
+    "Z": 0
+  },
+  "capacities": {
+    "energy_capacity": 32
+  },
+  "phases": 6,
+  "daylight_energy": 0,
+  "basic_energy": 1,
+  "heat": 2,
+  "light": 1,
+  "breathing_air": 1.25,
+  "food_consumption": 1.5,
+  "multipliers": [
+    1,
+    1,
+    2,
+    2,
+    1,
+    1
+  ],
+  "water": 4,
+  "crates": 2,
+  "drain_to": 2,
+  "exposure_limit": 6,
+  "shift_hours": 7.2,
+  "storm_start": "2047-02-14 06:00 UTC",
+  "scheduled_mature_crop": true,
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-13; game-design/10_GAMEPLAY_SYSTEMS.md upgrades",
+  "profile_id": "p13_campaign",
+  "scenario_datetime": "2047-02-14 06:00 UTC"
+}
