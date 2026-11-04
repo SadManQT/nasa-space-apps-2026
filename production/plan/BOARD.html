@@ -3928,8 +3928,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Bring docs/AI_USE.md up to date (the in-game disclosure points judges to it)",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-claude2",
    "deps": [],
    "paths": [
     "docs/AI_USE.md"
@@ -3940,7 +3940,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/ui/main_menu.gd"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "docs/AI_USE.md rewritten from AI_PROMPT_LOG.md (all 10 generative tools + non-AI tools + Whisper; 383 VO, 12 cues/16 files, 35 SFX, 18 cutscenes, night shift); 26/26 relative links resolve; matches README 'Use of AI' and main_menu.gd disclosure; run_tests.sh 31/31 suites passed; log row 2026-11-05 M2-14",
    "updated": "2026-11-05",
    "prompt": "docs/AI_USE.md (3 Nov) is out of date and the Science + Sources screen now points judges to it. It says ElevenLabs voiced only CS-01..03 and made three cues, Seedance made only CS-01..03, and Antigravity generated nothing. Rewrite it from production/AI_PROMPT_LOG.md (the source of truth) and README.md 'Use of AI': every tool and model with what it made (all 383 voice lines, 12 score cues/16 files, 35 effects, 18 cutscenes with Seedance 2.5 shots and Nano Banana Pro/GPT Image start frames, Tripo/Meshy 3D, Claude/Codex/Antigravity/Gemini code and documents incl. the night shift), what the team did itself (story, dialogue, puzzle rules, numbers, science mapping, review and approval), and where prompts are logged. English, plain, honest; no AI co-author lines. Acceptance: every tool in AI_PROMPT_LOG.md appears; no claim the log contradicts; README and the in-game text agree."
   }
