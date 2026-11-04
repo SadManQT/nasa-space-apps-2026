@@ -683,7 +683,7 @@
    "tool": "codex",
    "title": "Play CS-01, CS-02 and CS-03 inside the campaign",
    "status": "in_progress",
-   "owner": "Sadman/antigravity",
+   "owner": "Sadman/claude",
    "deps": [
     "M0-02"
    ],
@@ -698,7 +698,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
+   "updated": "2026-11-05",
    "prompt": "Problem: the three finished cutscenes only play in the developer showcase; CampaignCutsceneRuntime is used only by a test.\nGoal: CS-01 Arrival at EX-CH01-S01, CS-02 at EX-CH01-S09, CS-03 at EX-CH01-S12 play in the campaign from presentation_media.json,\nwith captions, skip (hold to skip, skipping never completes a puzzle predicate), pause, and the caption-only fallback when a file is absent.\nDo: wire the runtime per execution/SYS_17_AUDIO_CINEMATIC_RUNTIME.md and execution/CUTSCENE_CS01..03.md; no new video files.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add a test that the three scenes trigger their cutscene once and resume play; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
    "reserved_for": "Sadman"
   },
@@ -709,7 +709,7 @@
    "tool": "codex",
    "title": "Audio runtime in the campaign: voice with captions, music, effects",
    "status": "in_progress",
-   "owner": "Sadman/antigravity",
+   "owner": "Sadman/claude",
    "deps": [
     "M0-02"
    ],
@@ -725,7 +725,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
+   "updated": "2026-11-05",
    "prompt": "Goal: when files exist under game/assets/audio/{voice,music,sfx}/ (paths in production/audio/*.csv), they play in the campaign; when they\ndon't, captions-only stays exactly as today.\nDo: per execution/SYS_17_AUDIO_CINEMATIC_RUNTIME.md and execution/AUDIO_FULL_CAMPAIGN_MIX.md: buses (Master, Voice, Music, SFX, UI),\nvoice lines tied to dialogue acknowledgement with captions in sync, music cues by scene from music_cues.csv with ducking under voice,\nlooping ambience/SFX by scene from sfx_list.csv, settings sliders, .ogg import settings (loop flags). Update presentation_media.json\nflags from the files actually present, never by hand.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. a test with two dummy .ogg files proves voice+caption sync and music ducking.",
    "reserved_for": "Sadman"
   },
@@ -3320,7 +3320,7 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Chapter 1 judge-facing text: Earth-link cutoff, AI disclosure, shielding source and storm card wording (M1-40 B1, B4, S1-S4, S8, S9, N1, N9)",
-   "status": "todo",
+   "status": "in_progress",
    "deps": [
     "M1-40"
    ],
@@ -3346,8 +3346,9 @@
    ],
    "note": "Found in M1-40. Canon edits (08 line 27, STORY S09 exit gate, learning-and-continuity.json scienceBoundary) only after Sadman approves the wording in the review's 'Changes that need Sadman's approval'.",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Problem (M1-40, production/review/science_review_ch01.md): judge-facing Chapter 1 text states things the sources contradict.\nRepro: (1) grep -n 'Earth-set' game/scripts/missions/chapter1_gate_catalog.gd README.md game/scripts/ui/main_menu.gd: the S09 gate says 'Acknowledge the Earth-set cutoff' and README:67/79/343 say Earth sets/sinks in the night, but game/resources/data/nasa/jpl_horizons_ch1_sky.json (and a live JPL Horizons query) has Earth below the pole's horizon from 15 Apr 03:17 to 28 Apr 06:03 2046 and RISING all night (-3.44 to -1.40 deg), so no site height can give an Earth-set at shift 4. (2) main_menu.gd:466 says 'current gameplay code uses no newly generated asset in this chapter' although CS-01..03, all VO and the characters are AI-generated (docs/AI_USE.md). (3) README:65/82/344 and the clowdsley fixture present 20 g/cm2 as Clowdsley's storm-shelter guideline; Clowdsley slides 16 and 31 say it is the target 'for GCR protection'. (4) mission_data_cards.json:361 says GOES-13 was 'inside Earth's magnetic shield'; :344 labels 1,347 pfu as the peak (NOAA official: 1,490 pfu at 11 Sep 11:45); the EX-M0104 card never says the real storm stayed above storm level about 3.5 days. (5) mission_data_cards.json:175 'Computed by NASA JPL'; :241/:265 'mapped' / 'measured spot'; :284 'flare ... threw out'. (6) README:344 'Sparks fizzle in the blue water wall' (radiation is never visible, ART_BIBLE section 2 rule 6).\nDo, without touching canon: rename the gate label to 'Acknowledge the Earth-link cutoff (training scenario)'; rewrite the jpl_horizons_ch1_sky takeaway (science_data.gd:23), the fixture boundary and derived 'drives' text (fetch_nasa_data.py ~419-432 and the JSON) and main_menu.gd:460 to say the computed April 2046 sky has Earth below the pole's horizon and rising, so the shift-4 cutoff is an authored training event; replace main_menu.gd:466 with a true AI disclosure (models, cutscene video, voices; see production/AI_PROMPT_LOG.md and docs/AI_USE.md); apply the exact replacement wording for S1, S2, S3 (label: NOAA 1,490 pfu, or name the detector), S4, S8, S9, N1 and N9 given in the review, in build_mission_cards.py then rebuild mission_data_cards.json; fix README rows 65, 67, 79, 82, 343 and 344. Then ask Sadman to approve the three canon wordings in the review (08 line 27; STORY_FULL S09 exit gate plus story-data.json and the catalog rebuild; learning-and-continuity.json:113) and apply only what he approves. Never change a game number.\nAcceptance: grep -rn -e 'no newly generated asset' -e 'magnetic shield' -e 'Sparks fizzle' -e 'Computed by NASA JPL' -e 'storm-shelter guideline' README.md game/scripts game/resources/campaign/content production/tools returns nothing; grep -n 'Earth-set' over game/scripts, README.md and mission_data_cards.json returns only lines Sadman approved; ScienceData.validate() passes; game/tools/run_tests.sh passes; retained screenshots of the Science + Sources screen, the S09 gate prompt and the EX-M0104 Data Card in production/qa/evidence/M1-42_*.png; one row in production/ai_log_parts/M1-42.md."
+   "updated": "2026-11-05",
+   "prompt": "Problem (M1-40, production/review/science_review_ch01.md): judge-facing Chapter 1 text states things the sources contradict.\nRepro: (1) grep -n 'Earth-set' game/scripts/missions/chapter1_gate_catalog.gd README.md game/scripts/ui/main_menu.gd: the S09 gate says 'Acknowledge the Earth-set cutoff' and README:67/79/343 say Earth sets/sinks in the night, but game/resources/data/nasa/jpl_horizons_ch1_sky.json (and a live JPL Horizons query) has Earth below the pole's horizon from 15 Apr 03:17 to 28 Apr 06:03 2046 and RISING all night (-3.44 to -1.40 deg), so no site height can give an Earth-set at shift 4. (2) main_menu.gd:466 says 'current gameplay code uses no newly generated asset in this chapter' although CS-01..03, all VO and the characters are AI-generated (docs/AI_USE.md). (3) README:65/82/344 and the clowdsley fixture present 20 g/cm2 as Clowdsley's storm-shelter guideline; Clowdsley slides 16 and 31 say it is the target 'for GCR protection'. (4) mission_data_cards.json:361 says GOES-13 was 'inside Earth's magnetic shield'; :344 labels 1,347 pfu as the peak (NOAA official: 1,490 pfu at 11 Sep 11:45); the EX-M0104 card never says the real storm stayed above storm level about 3.5 days. (5) mission_data_cards.json:175 'Computed by NASA JPL'; :241/:265 'mapped' / 'measured spot'; :284 'flare ... threw out'. (6) README:344 'Sparks fizzle in the blue water wall' (radiation is never visible, ART_BIBLE section 2 rule 6).\nDo, without touching canon: rename the gate label to 'Acknowledge the Earth-link cutoff (training scenario)'; rewrite the jpl_horizons_ch1_sky takeaway (science_data.gd:23), the fixture boundary and derived 'drives' text (fetch_nasa_data.py ~419-432 and the JSON) and main_menu.gd:460 to say the computed April 2046 sky has Earth below the pole's horizon and rising, so the shift-4 cutoff is an authored training event; replace main_menu.gd:466 with a true AI disclosure (models, cutscene video, voices; see production/AI_PROMPT_LOG.md and docs/AI_USE.md); apply the exact replacement wording for S1, S2, S3 (label: NOAA 1,490 pfu, or name the detector), S4, S8, S9, N1 and N9 given in the review, in build_mission_cards.py then rebuild mission_data_cards.json; fix README rows 65, 67, 79, 82, 343 and 344. Then ask Sadman to approve the three canon wordings in the review (08 line 27; STORY_FULL S09 exit gate plus story-data.json and the catalog rebuild; learning-and-continuity.json:113) and apply only what he approves. Never change a game number.\nAcceptance: grep -rn -e 'no newly generated asset' -e 'magnetic shield' -e 'Sparks fizzle' -e 'Computed by NASA JPL' -e 'storm-shelter guideline' README.md game/scripts game/resources/campaign/content production/tools returns nothing; grep -n 'Earth-set' over game/scripts, README.md and mission_data_cards.json returns only lines Sadman approved; ScienceData.validate() passes; game/tools/run_tests.sh passes; retained screenshots of the Science + Sources screen, the S09 gate prompt and the EX-M0104 Data Card in production/qa/evidence/M1-42_*.png; one row in production/ai_log_parts/M1-42.md.",
+   "owner": "Sadman/claude"
   },
   {
    "id": "M1-43",
