@@ -546,8 +546,8 @@
    "prompt": "Goal: every exterior is the real Moon. Download the NASA PDS LOLA south-pole DEM (e.g. LDEM 80S at 20 m/px, plus the 5 m/px Shackleton\ntiles where available; cite the product ID, DOI and URL in a provenance JSON next to the fixture), crop the areas the story uses (Aurora at the\nShackleton–de Gerlache connecting ridge, the cold trap for CH04, the 120 km relay road and Malapert summit for CH08), and convert them to\n16-bit heightmaps with the correct metres-per-pixel. Script it (production/tools/make_terrain.py, stdlib + numpy if installed) so it is\nreproducible. In Blender: add a detail layer (small craters and boulders by the size-frequency the ART_BIBLE allows; no invented mountains),\nbake normal/AO, and export Godot-ready terrain tiles with LODs; set the Sun azimuth and elevation for each story date from an ephemeris or\nthe LOLA illumination products, not by eye. Write the 'made from NASA data' credit line for the in-game Data Card and the video.\nAcceptance: heightmaps + provenance in the repo (LFS for binaries), tiles import in Godot, a side-by-side image of the LOLA hillshade and the\nin-game view in production/review/."
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
     "game/assets/environment/terrain/",
@@ -555,15 +555,16 @@
     "production/ASSET_REGISTRY.csv"
    ],
    "refs": [],
-   "note": "Model and decimate the rock shapes now; final materials follow the art direction chosen in M1-33.",
+   "note": "Model and decimate the rock shapes now; final materials follow the art direction chosen in M1-33. Tanvir explicitly approved reassignment from the reserved Muse lane to Tanvir/Codex on 4 Nov 2026; Blender sculpting uses no paid generation credits.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "id": "M1-35",
    "milestone": "M1",
    "priority": "P1",
-   "tool": "muse",
+   "tool": "codex",
    "title": "Lunar rock, boulder and regolith kit",
-   "prompt": "Make 12–20 rocks and boulders (from pebbles to 10 m) and 3 regolith ground materials (fresh, compacted by the rover, disturbed by boots):\nTripo/Meshy from photos-of-reference style sheets or sculpted in Blender, decimated with LODs, materials matching the approved exterior\nlook; a scatter setup (density by slope) Godot can use. Angular, unweathered rocks (no wind erosion on the Moon), grey regolith, no\nvegetation, no fog. This step spends AI credits: check the balance first, never repeat a generation call to 'retry', log every generation in production/AI_PROMPT_LOG.md, and block the task if credits run out. Never buy anything. Acceptance: gate passes; contact sheet in production/review/; registry rows added."
+   "prompt": "Make 12–20 rocks and boulders (from pebbles to 10 m) and 3 regolith ground materials (fresh, compacted by the rover, disturbed by boots):\nTripo/Meshy from photos-of-reference style sheets or sculpted in Blender, decimated with LODs, materials matching the approved exterior\nlook; a scatter setup (density by slope) Godot can use. Angular, unweathered rocks (no wind erosion on the Moon), grey regolith, no\nvegetation, no fog. This step spends AI credits: check the balance first, never repeat a generation call to 'retry', log every generation in production/AI_PROMPT_LOG.md, and block the task if credits run out. Never buy anything. Acceptance: gate passes; contact sheet in production/review/; registry rows added.",
+   "reserved_for": "Tanvir"
   },
   {
    "status": "todo",
