@@ -45,7 +45,7 @@ Every public NASA and partner source cited in this document was verified live on
     6. **Recommendation / Final Decision and Rationale** (why the chosen option wins), and
     7. **Dissent** (any discipline's objection and how it was resolved).
   - **Appendix B *Glossary*** (printed p. 235, PDF p. 247): defines a **Trade Study** as *"a means of evaluating system designs by devising alternative means to meet functional requirements, evaluating these alternatives in terms of the measures of effectiveness and system cost, ranking the alternatives according to appropriate criteria."*
-- **Fixture:** [`game/resources/data/nasa/nasa_se_handbook_trade_studies.json`](../game/resources/data/nasa/nasa_se_handbook_trade_studies.json)
+- **Fixture:** [`game/resources/data/nasa_practice/nasa_se_handbook_trade_studies.json`](../game/resources/data/nasa_practice/nasa_se_handbook_trade_studies.json)
 
 ### 1.2 How Trade Studies Work in *Last Light Academy*
 
@@ -114,7 +114,7 @@ Every Mission Table shift, route selection, alarm response, eclipse schedule, an
   - **Document Number:** NASA VIPER Mission Page (`viper_slope_limit`)
   - **URL:** <https://science.nasa.gov/mission/viper/rover-and-instruments>
   - **Section:** Rover specifications (`15°` maximum operational slope limit).
-- **Fixture:** [`game/resources/data/nasa/nasa_iss_flight_rules_go_nogo.json`](../game/resources/data/nasa/nasa_iss_flight_rules_go_nogo.json) and [`game/resources/data/nasa/viper_slope_limit.json`](../game/resources/data/nasa/viper_slope_limit.json)
+- **Fixture:** [`game/resources/data/nasa_practice/nasa_iss_flight_rules_go_nogo.json`](../game/resources/data/nasa_practice/nasa_iss_flight_rules_go_nogo.json) and [`game/resources/data/nasa/viper_slope_limit.json`](../game/resources/data/nasa/viper_slope_limit.json)
 
 ### 2.2 Aurora Station's Six Core Flight Rules (`FR-01` to `FR-06`)
 
@@ -143,7 +143,7 @@ Every Mission Table shift, route selection, alarm response, eclipse schedule, an
   - **Document Number:** NTRS `20070016005`
   - **URL:** <https://ntrs.nasa.gov/citations/20070016005>
   - **Page / Section:** PDF pp. 1–5 (how specialized flight control disciplines evaluate telemetry against Flight Rules and report readiness to the Flight Director).
-- **Fixture:** [`game/resources/data/nasa/nasa_iss_flight_rules_go_nogo.json`](../game/resources/data/nasa/nasa_iss_flight_rules_go_nogo.json)
+- **Fixture:** [`game/resources/data/nasa_practice/nasa_iss_flight_rules_go_nogo.json`](../game/resources/data/nasa_practice/nasa_iss_flight_rules_go_nogo.json)
 
 ### 3.2 Mapping Aurora's Crew to NASA Mission Control (MCC) Disciplines
 
@@ -188,7 +188,7 @@ Before the **Commit** button executes a shift or multi-role operation (`P-02`, `
   - **Document Number:** `JSC-CN-22496` (NTRS `20100042411`)
   - **URL:** <https://ntrs.nasa.gov/citations/20100042411>
   - **Page / Section:** PDF pp. 4–6 (ISS Maintenance Work Area [MWA] containment and Orbital Replacement Unit [ORU] procedure support).
-- **Fixture:** [`game/resources/data/nasa/nasa_iss_crew_procedures_odf.json`](../game/resources/data/nasa/nasa_iss_crew_procedures_odf.json)
+- **Fixture:** [`game/resources/data/nasa_practice/nasa_iss_crew_procedures_odf.json`](../game/resources/data/nasa_practice/nasa_iss_crew_procedures_odf.json)
 
 ### 4.2 The ISS Operations Data File (ODF) Callout Hierarchy
 
@@ -298,7 +298,7 @@ Every shift in `P-02`, `P-03`, `P-05`, `P-07`, `P-10`, `P-13`, `P-14`, and `P-15
   - **Document Number:** NTRS `20210009760` (Clowdsley, M., 9 February 2021, NASA Langley Research Center)
   - **URL:** <https://ntrs.nasa.gov/citations/20210009760> (PDF: <https://ntrs.nasa.gov/api/citations/20210009760/downloads/Clowdsley_Lunar_Radiation_Talk_v2.pdf>)
   - **Pages / Slides:** Slides 15 (`250 mGy-Eq` BFO limit), 16 & 31 (`20 g/cm²` hydrogen-rich storm-shelter guideline), and 37 (August 1972 SPE effective dose inside a lunar rover shelter: **$185.4\text{ mSv}$ at $5\text{ g/cm}^2$**, **$136.9\text{ mSv}$ at $7\text{ g/cm}^2$**, **$105.4\text{ mSv}$ at $10\text{ g/cm}^2$**, **$85.1\text{ mSv}$ at $15\text{ g/cm}^2$**).
-- **Fixtures:** [`nasa_std_3001_radiation.json`](../game/resources/data/nasa/nasa_std_3001_radiation.json), [`clowdsley_2021_shielding.json`](../game/resources/data/nasa/clowdsley_2021_shielding.json), [`donki_2017_09.json`](../game/resources/data/nasa/donki_2017_09.json), [`goes13_protons_2017_09.json`](../game/resources/data/nasa/goes13_protons_2017_09.json), [`donki_2012_07.json`](../game/resources/data/nasa/donki_2012_07.json), [`stereo_a_het_2012_07.json`](../game/resources/data/nasa/stereo_a_het_2012_07.json), [`crater_dose_2012_07.json`](../game/resources/data/nasa/crater_dose_2012_07.json), [`change4_lnd_surface_dose.json`](../game/resources/data/nasa/change4_lnd_surface_dose.json)
+- **Fixtures:** [`nasa_std_3001_radiation.json`](../game/resources/data/nasa_practice/nasa_std_3001_radiation.json), [`clowdsley_2021_shielding.json`](../game/resources/data/nasa/clowdsley_2021_shielding.json), [`donki_2017_09.json`](../game/resources/data/nasa/donki_2017_09.json), [`goes13_protons_2017_09.json`](../game/resources/data/nasa/goes13_protons_2017_09.json), [`donki_2012_07.json`](../game/resources/data/nasa/donki_2012_07.json), [`stereo_a_het_2012_07.json`](../game/resources/data/nasa/stereo_a_het_2012_07.json), [`crater_dose_2012_07.json`](../game/resources/data/nasa/crater_dose_2012_07.json), [`change4_lnd_surface_dose.json`](../game/resources/data/nasa/change4_lnd_surface_dose.json)
 
 ### 6.2 Honest Mapping Between Real Shielding / Dose Limits and Game Teaching Units (`S` and `Z`)
 
@@ -332,7 +332,7 @@ Per [`production/ART_BIBLE.md`](../production/ART_BIBLE.md) §2 rule 6 and [`gam
   - **Document Number:** `NASA/SP-2011-6127-VOL-2` (`JSC-CN-24727`, NTRS `20110015803`)
   - **URL:** <https://ntrs.nasa.gov/citations/20110015803> · <https://llis.nasa.gov/>
   - **Page / Section:** `SP-2011-6127-VOL-2` Preface (factual, non-blaming presentation of context, root cause, and actionable lessons learned).
-- **Fixture:** [`game/resources/data/nasa/nasa_risk_and_anomaly_mer.json`](../game/resources/data/nasa/nasa_risk_and_anomaly_mer.json)
+- **Fixture:** [`game/resources/data/nasa_practice/nasa_risk_and_anomaly_mer.json`](../game/resources/data/nasa_practice/nasa_risk_and_anomaly_mer.json)
 
 ### 7.2 The NASA 5×5 Likelihood × Consequence Risk Matrix in Gameplay
 
@@ -412,7 +412,7 @@ Following NASA's Lessons Learned standard (`NASA/SP-2011-6127-VOL-2` and `llis.n
 - **Title 4:** *ESA Moonlight Programme* (Partner Agency)
   - **URL:** <https://www.esa.int/Applications/Connectivity_and_Secure_Communications/Moonlight2>
   - **Section:** Programme overview (terrain and curvature at the lunar south pole block direct line-of-sight to Earth, requiring surface/orbital relays).
-- **Fixtures:** [`nssdca_moon_light_time.json`](../game/resources/data/nasa/nssdca_moon_light_time.json), [`jpl_horizons_ch1_sky.json`](../game/resources/data/nasa/jpl_horizons_ch1_sky.json), [`jpl_horizons_ch8_relay.json`](../game/resources/data/nasa/jpl_horizons_ch8_relay.json), [`jpl_horizons_pole_season.json`](../game/resources/data/nasa/jpl_horizons_pole_season.json), [`jpl_ipn_42_176_dte.json`](../game/resources/data/nasa/jpl_ipn_42_176_dte.json), [`esa_moonlight_relay.json`](../game/resources/data/nasa/esa_moonlight_relay.json)
+- **Fixtures:** [`nssdca_moon_light_time.json`](../game/resources/data/nasa_practice/nssdca_moon_light_time.json), [`jpl_horizons_ch1_sky.json`](../game/resources/data/nasa/jpl_horizons_ch1_sky.json), [`jpl_horizons_ch8_relay.json`](../game/resources/data/nasa/jpl_horizons_ch8_relay.json), [`jpl_horizons_pole_season.json`](../game/resources/data/nasa/jpl_horizons_pole_season.json), [`jpl_ipn_42_176_dte.json`](../game/resources/data/nasa/jpl_ipn_42_176_dte.json), [`esa_moonlight_relay.json`](../game/resources/data/nasa/esa_moonlight_relay.json)
 
 ### 8.2 How Communication Works in Gameplay
 
