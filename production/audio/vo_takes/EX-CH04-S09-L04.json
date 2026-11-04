@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S09-L04",
+ "speaker": "Mei",
+ "text": "Welcome home. The glovebox is ready.",
+ "delivery": "live",
+ "prompt": "[warm, relieved] Welcome home. The glovebox is ready.",
+ "chosen_take": 1,
+ "seconds": 2.97,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Jf6LUJha5lY55z316Vho/9MUulq72dMBldyiuOqId/content.mp3",
+   "heard": "Welcome home! The glove box is ready!",
+   "score": 0.769
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/UmGvMbjt0GIIH8Ry9QcP/TOSxqLx1rbnbkQTu86s0/content.mp3",
+   "heard": "Welcome home! The glove box is ready!",
+   "score": 0.769
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S09-L04.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH04-S09-L04.ogg"
+}

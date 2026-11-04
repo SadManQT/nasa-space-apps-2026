@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S04-L04",
+ "speaker": "Mei",
+ "text": "We see the chain. Keep the last position in the record.",
+ "delivery": "radio",
+ "prompt": "[attentive, calm] We see the chain. Keep the last position in the record.",
+ "chosen_take": 1,
+ "seconds": 3.65,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/fsq0Mj1iXZqZzRvVgkSo/oFrDfdoKoAqbJKcwRIyK/content.mp3",
+   "heard": "We see the chain. Keep the last position in the record.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/zQ4uhqcSYgHgnibseLaD/yGSstbIxVFgVluSAAhQY/content.mp3",
+   "heard": "We see the chain. Keep the last position in the record.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S04-L04.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH04-S04-L04.ogg"
+}

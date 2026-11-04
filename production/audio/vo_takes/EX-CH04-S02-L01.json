@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S02-L01",
+ "speaker": "Rafi",
+ "text": "I checked twice. Three times. I wanted to sound relaxed.",
+ "delivery": "live",
+ "prompt": "[sheepish, self-aware] I checked twice. Three times. I wanted to sound relaxed.",
+ "chosen_take": 1,
+ "seconds": 4.52,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/yB6pz1XhsvHTPjXt47FA/xszVE5HhLjJbEhRIpXy2/content.mp3",
+   "heard": "I checked twice. Three times. I wanted to sound relaxed.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/rwJcDxVUeipQGzPNoX0P/78Ts5rwvVMY7tTKEws21/content.mp3",
+   "heard": "I checked twice. Three times. I wanted to sound relaxed.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S02-L01.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH04-S02-L01.ogg"
+}

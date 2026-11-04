@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S03-L03",
+ "speaker": "Ferreira",
+ "text": "Repair diagram sent. Safety information does not wait.",
+ "delivery": "earth_link",
+ "prompt": "[calm, formal, urgent undertone] Repair diagram sent. Safety information does not wait.",
+ "chosen_take": 1,
+ "seconds": 4.16,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/wTi6jiJC5Qqz3zllZvn5/K4JmjR3vZU7Vj2DiOJh3/content.mp3",
+   "heard": "Repair diagram sent. Safety information does not wait.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/n1EqJm9NDWlhvwHris3e/M3quTOIH9cqwTw9kj7OC/content.mp3",
+   "heard": "Repair diagram sent. Safety information does not wait.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S03-L03.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH03-S03-L03.ogg"
+}

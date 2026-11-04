@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S11-L01",
+ "speaker": "Mei",
+ "text": "The lid says: ask Commander Ferreira about Expedition Zero.",
+ "delivery": "live",
+ "prompt": "[reading aloud, intrigued] The lid says: ask Commander Ferreira about Expedition Zero.",
+ "chosen_take": 1,
+ "seconds": 4.68,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Yivu16Q20DfFYlr8YmA5/ZeH9iE9wv3WGm6lxFl4g/content.mp3",
+   "heard": "The lid says, ask Commander Ferreira about Expedition Zero.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/5QySgRDkPB465cIMo44c/OUIyMFFRUArs7K2n0hnr/content.mp3",
+   "heard": "The lid says, ask Commander Ferreira about Expedition Zero.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S11-L01.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH04-S11-L01.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S11-L04",
+ "speaker": "Mei",
+ "text": "After its lineage label. Then yes.",
+ "delivery": "live",
+ "prompt": "[warm, a small smile] After its lineage label. Then yes.",
+ "chosen_take": 2,
+ "seconds": 3.56,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/4Ue8Nrjrb6tUq2kcd4OC/8QSEuXogNHOHzZDwI0m8/content.mp3",
+   "heard": "After its lineage, then yes. After its lineage label, then yes.",
+   "score": 0.706
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/9HnXZbKa3XSgeiEVxnvp/7oogH8CGOW31q7ScAfjK/content.mp3",
+   "heard": "after its lineage label, then yes.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S11-L04.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH03-S11-L04.ogg"
+}

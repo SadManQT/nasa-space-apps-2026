@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S05-L04",
+ "speaker": "Mei",
+ "text": "Keep the negative result on the map too.",
+ "delivery": "radio",
+ "prompt": "[warm, steady] Keep the negative result on the map too.",
+ "chosen_take": 1,
+ "seconds": 2.62,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/euXR5pnyhTzhLC9h8RcB/Jj355Y2UWHYQidujYd4k/content.mp3",
+   "heard": "Keep the negative result on the map too.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/min33CkUj9Nmf5FsJNgi/12pfAawcBqkhG1nmH9Z8/content.mp3",
+   "heard": "Keep the negative result on the map too.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S05-L04.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH04-S05-L04.ogg"
+}

@@ -4,9 +4,11 @@
 
 spec: {"id": "CS-01", "card": ["Chapter 1 - Night One", "Arrival at Aurora"], "shots": [mp4, ...],
        "music": mp3, "lines": [{"at": s, "speaker": "Kai", "text": "...", "file": mp3, "radio": false}, ...],
-       "out": "<dir>/<name>"}   (paths relative to the spec's folder)
+       "out": "<dir>/<name>", "transitions": ["cut", "dissolve", ...]}   (paths relative to the spec's folder)
 Writes <out>.mp4 (1280x720, 24 fps, H.264 + AAC, captions burned in) and <out>.wav (the final mix) for the .ogv
-step (ogv_writer.gd). Shots join with half-second dissolves; the music dips under every line; Earth-link lines get
+step (ogv_writer.gd). "transitions" (optional, one per join) picks how each shot meets the next: "dissolve"
+(half-second, the default), "cut" (hard cut, for match-on-action and continuous action) or "fadeblack" (one-second
+dip through black, for time jumps). "music" is optional. The music dips under every line; Earth-link lines get
 a radio band-pass. Captions name the speaker, as the game's caption rule asks.
 """
 import json, os, shutil, subprocess, sys, tempfile
@@ -54,16 +56,24 @@ spec_path = sys.argv[1]; base = os.path.dirname(os.path.abspath(spec_path)); spe
 rel = lambda p: p if os.path.isabs(p) else os.path.join(base, p)
 out = rel(spec["out"]); work = tempfile.mkdtemp(prefix="cutscene_")   # card and caption PNGs
 shots = [rel(s) for s in spec["shots"]]; lens = [dur(s) for s in shots]
-total = sum(lens) - XF * (len(shots) - 1)
+JOIN = {"dissolve": ("fade", XF), "fadeblack": ("fadeblack", 1.0), "cut": (None, 0.0)}   # xfade kind, overlap
+joins = spec.get("transitions") or ["dissolve"] * (len(shots) - 1)
+assert len(joins) == len(shots) - 1, "transitions needs one entry per join between shots"
+total = sum(lens) - sum(JOIN[j][1] for j in joins)
 
-# video: scale, dissolve shot to shot, fade from and to black, chapter card, captions
+# video: scale, join shot to shot, fade from and to black, chapter card, captions
 inputs, vf = [], []
 for i, s in enumerate(shots):
     inputs += ["-i", s]
-    vf.append(f"[{i}:v]scale={W}:{H},fps={FPS},format=yuv420p,setpts=PTS-STARTPTS[v{i}]")
+    vf.append(f"[{i}:v]scale={W}:{H},fps={FPS},format=yuv420p,setpts=PTS-STARTPTS,settb=AVTB[v{i}]")   # one timebase so cut (concat) and xfade can mix
 cur, t = "v0", lens[0]
 for i in range(1, len(shots)):
-    vf.append(f"[{cur}][v{i}]xfade=transition=fade:duration={XF}:offset={t - XF:.3f}[x{i}]"); cur = f"x{i}"; t += lens[i] - XF
+    kind, d = JOIN[joins[i - 1]]
+    if kind:
+        vf.append(f"[{cur}][v{i}]xfade=transition={kind}:duration={d}:offset={t - d:.3f}[x{i}]")
+    else:
+        vf.append(f"[{cur}][v{i}]concat=n=2:v=1:a=0[x{i}]")
+    cur = f"x{i}"; t += lens[i] - d
 vf.append(f"[{cur}]fade=t=in:st=0:d=0.8,fade=t=out:st={total - 1.0:.3f}:d=1.0[base]"); cur = "base"
 n = len(shots)
 if spec.get("card"):
@@ -89,7 +99,10 @@ for k, ln in enumerate(lines):
     chain = "highpass=f=320,lowpass=f=3200,acompressor=threshold=0.2:ratio=4," if ln.get("radio") else ""
     ms = int(ln["at"] * 1000)
     af.append(f"[{n}:a]{chain}aformat=sample_rates=48000:channel_layouts=stereo,adelay={ms}|{ms},volume=1.6[l{k}]"); mix.append(f"[l{k}]"); n += 1
-af.append(f"{''.join(mix)}amix=inputs={len(mix)}:normalize=0,atrim=0:{total:.3f},alimiter=limit=0.95[aout]")
+if mix:
+    af.append(f"{''.join(mix)}amix=inputs={len(mix)}:normalize=0,atrim=0:{total:.3f},alimiter=limit=0.95[aout]")
+else:   # no music and no lines: a silent track keeps the .wav step working
+    af.append(f"anullsrc=r=48000:cl=stereo,atrim=0:{total:.3f}[aout]")
 
 graph = ";".join(vf + af)
 subprocess.run(["ffmpeg", "-loglevel", "error", "-y", *inputs, "-filter_complex", graph, "-map", f"[{cur}]", "-map", "[aout]",

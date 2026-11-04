@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S01-L02",
+ "speaker": "Amara",
+ "text": "Seven purple, five green in this sample. Not a promised ratio.",
+ "delivery": "live",
+ "prompt": "[measured, precise] Seven purple, five green in this sample. Not a promised ratio.",
+ "chosen_take": 1,
+ "seconds": 5.23,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Jma60OxDTzY8VFC3i1DU/LocYUE8LraCAqtVICrsv/content.mp3",
+   "heard": "7 purple, 5 green in this sample, not a promised ratio.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/dKpQa4rtNtEAqZITuHB2/cV2LmkKAsa5MSpkBnIAg/content.mp3",
+   "heard": "7 purple, 5 green in this sample, not a promised ratio.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S01-L02.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH04-S01-L02.ogg"
+}

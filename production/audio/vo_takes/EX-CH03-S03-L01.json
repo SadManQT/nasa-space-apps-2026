@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S03-L01",
+ "speaker": "Rafi",
+ "text": "Smallest supported boundary. Keep the habitat supplied.",
+ "delivery": "live",
+ "prompt": "[focused, decisive] Smallest supported boundary. Keep the habitat supplied.",
+ "chosen_take": 2,
+ "seconds": 3.63,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/DzCLy86rpYEjlzTp6NjV/vpKqdMCStiQdTbtTsCGS/content.mp3",
+   "heard": "Smallest supported boundary. Keep the habitats applied.",
+   "score": 0.714
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/CYbp0YoGjoB7Ny6hkPfO/xM0Tm6VL4kGS8SDXKQHl/content.mp3",
+   "heard": "Smallest supported boundary. Keep the habitat supplied.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S03-L01.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH03-S03-L01.ogg"
+}

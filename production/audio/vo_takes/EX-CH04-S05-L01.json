@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S05-L01",
+ "speaker": "Kai",
+ "text": "That bright patch is ice, right?",
+ "delivery": "live",
+ "prompt": "[curious, a little excited] That bright patch is ice, right?",
+ "chosen_take": 1,
+ "seconds": 2.33,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/I2BJCa5f8YEDEPmCurLa/17aWmoZaJd8bqeRyWU8V/content.mp3",
+   "heard": "That bright patch is ice, right?",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/2bXT3WmkRns7Di5MmMbz/3KwHvOKKqlU5dVlv2wfL/content.mp3",
+   "heard": "That bright patch is ice, right?",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S05-L01.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH04-S05-L01.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S11-L01",
+ "speaker": "Amara",
+ "text": "Parent line first: Alo times Tara.",
+ "delivery": "live",
+ "prompt": "[calm, methodical] Parent line first: Alo times Tara.",
+ "chosen_take": 1,
+ "seconds": 3.51,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/KwIUGbkFMm3QeG32pdIC/VavzZXPl0Z15GjE3eCAz/content.mp3",
+   "heard": "Parent line first. Alo times Tara.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/L3XpO2ETy1YOT47igAad/IPsYV2o5Xiyu7mRYJJk1/content.mp3",
+   "heard": "parent line first, alo times tara",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S11-L01.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH03-S11-L01.ogg"
+}

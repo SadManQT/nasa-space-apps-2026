@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S11-L04",
+ "speaker": "Mei",
+ "text": "Then tell her we would like the whole story when she is ready.",
+ "delivery": "live",
+ "prompt": "[warm, gentle, patient] Then tell her we would like the whole story when she is ready.",
+ "chosen_take": 1,
+ "seconds": 3.7,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/4EQjGfTMbspFcUmUwhPP/p2c1DFoL4ka3FUL8Y5Bc/content.mp3",
+   "heard": "Then tell her we would like the whole story when she is ready.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/I9NpDpbH4CBxTBJTf2wX/fQihAWppF7KOiG6VvpU6/content.mp3",
+   "heard": "Then tell her we would like the whole story when she is ready.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S11-L04.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH04-S11-L04.ogg"
+}

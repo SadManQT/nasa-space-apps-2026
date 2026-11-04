@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S05-L03",
+ "speaker": "Rafi",
+ "text": "Then correct the note. Do not create a new fault to match it.",
+ "delivery": "live",
+ "prompt": "[firm, practical] Then correct the note. Do not create a new fault to match it.",
+ "chosen_take": 1,
+ "seconds": 4.09,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/aPfYVQIT46D7bSEi8Bt8/Saph5J8auy0E5xoLSxM0/content.mp3",
+   "heard": "Then correct the note. Do not create a new fault to match it.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/lZmVZc4E9dUn0UsidzyZ/vfSdkN2kcWDm4SS7ZMbR/content.mp3",
+   "heard": "Then correct the note. Do not create a new fault to match it.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S05-L03.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH03-S05-L03.ogg"
+}

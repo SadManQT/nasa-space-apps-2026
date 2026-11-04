@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S11-L02",
+ "speaker": "Kai",
+ "text": "That is a question with an address.",
+ "delivery": "live",
+ "prompt": "[lightly amused, thoughtful] That is a question with an address.",
+ "chosen_take": 1,
+ "seconds": 2.36,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/fHF3QMB26dkq9aSpyiKs/tiUXBB5JDfL1EUw5fP7Q/content.mp3",
+   "heard": "That is a question with an address.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/lxvz0Z3aUWI5rAeV6HiC/eliRtcqYZBcx8qFpitmT/content.mp3",
+   "heard": "That is a question with an address.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S11-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH04-S11-L02.ogg"
+}

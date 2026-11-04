@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S04-L02",
+ "speaker": "Kai",
+ "text": "A little returning light.",
+ "delivery": "live",
+ "prompt": "[hopeful, playful] A little returning light.",
+ "chosen_take": 1,
+ "seconds": 1.94,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/eczgoDJ5skTpzjKZCFIx/ekKMm8i884Qct3mFWxbN/content.mp3",
+   "heard": "A little returning light.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/S6g809EjF03sjiqQYhO8/kfrI8f2U7oHRHY0iVbUR/content.mp3",
+   "heard": "A little returning light.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S04-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH04-S04-L02.ogg"
+}

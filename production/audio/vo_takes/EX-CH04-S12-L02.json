@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S12-L02",
+ "speaker": "Amara",
+ "text": "A carefully inventoried spare mug.",
+ "delivery": "live",
+ "prompt": "[dry, warmly amused] A carefully inventoried spare mug.",
+ "chosen_take": 1,
+ "seconds": 3.2,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/R6OsKoqOQ2BzgCgY4a4T/cpIIx6Uo0UuUYAvBpDoE/content.mp3",
+   "heard": "A carefully inventoried spare mug.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/MYr7OVI7jgiM4sB3xIvE/gs1q4xj9XodSeTmEhh2O/content.mp3",
+   "heard": "A carefully inventoried spare mug.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S12-L02.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH04-S12-L02.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S10-L01",
+ "speaker": "Amara",
+ "text": "Stable and dry. Now we open it inside the glovebox.",
+ "delivery": "live",
+ "prompt": "[calm, methodical] Stable and dry. Now we open it inside the glovebox.",
+ "chosen_take": 1,
+ "seconds": 4.72,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/QGe1J66wI5Pxa2HAL8f9/HwAGDIQi37xmPr8CGxyt/content.mp3",
+   "heard": "Stable and dry. Now we open it inside the glove box.",
+   "score": 0.857
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/5MgUut6egoktmROvmVp8/CqVCRIVRBZKM1LyQKsG8/content.mp3",
+   "heard": "Stable and dry. Now we open it inside the glove box.",
+   "score": 0.857
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S10-L01.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH04-S10-L01.ogg"
+}

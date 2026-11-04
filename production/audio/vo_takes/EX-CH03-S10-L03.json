@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S10-L03",
+ "speaker": "Kai",
+ "text": "Do you want us to wait?",
+ "delivery": "live",
+ "prompt": "[quietly, caring] Do you want us to wait?",
+ "chosen_take": 1,
+ "seconds": 1.65,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/H9DKvVKqXwC1eFieuZHh/DgE9yXveiISSASIUlCTH/content.mp3",
+   "heard": "Do you want us to wait?",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/4fcl0CwH2ULvEojUdbdi/uILliFxraS2b5oo87oUv/content.mp3",
+   "heard": "Do you want us to wait?",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S10-L03.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH03-S10-L03.ogg"
+}

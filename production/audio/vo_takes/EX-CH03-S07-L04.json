@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S07-L04",
+ "speaker": "Kai",
+ "text": "Return boundary ready when you are.",
+ "delivery": "radio",
+ "prompt": "[focused, steady] Return boundary ready when you are.",
+ "chosen_take": 1,
+ "seconds": 2.18,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/2grLDNohyAxCaidL5LjU/yXs3vbA7V1xbdCWx3wSD/content.mp3",
+   "heard": "Return boundary ready when you are.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/FQeMOnQ9PtR19YKMKxrW/w5cpgB9slnXCXN9S48pz/content.mp3",
+   "heard": "Return boundary ready when you are.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S07-L04.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH03-S07-L04.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S05-L02",
+ "speaker": "Kai",
+ "text": "The note is wrong. The tested valve position is right.",
+ "delivery": "live",
+ "prompt": "[puzzled, then certain] The note is wrong. The tested valve position is right.",
+ "chosen_take": 1,
+ "seconds": 3.8,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/LHJPkZFAARcOONTI5XmP/uNKcHLejXRGx3giPQbe9/content.mp3",
+   "heard": "The note is wrong. The tested valve position is right.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/bfqdLnESYTANElYOobDb/UytIIavruvvaohSLUEyu/content.mp3",
+   "heard": "The note is wrong. The tested valve position is right.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S05-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH03-S05-L02.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S09-L03",
+ "speaker": "Amara",
+ "text": "This is maturity, not the old cold alarm.",
+ "delivery": "live",
+ "prompt": "[gentle, measured] This is maturity, not the old cold alarm.",
+ "chosen_take": 1,
+ "seconds": 3.74,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/7jWtHkCbMIx2IGqVskRT/3Bu2DwbeLBVviZZfNiGD/content.mp3",
+   "heard": "This is maturity, not the old cold alarm.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/GpJgBG30uRUdCcz5U16n/G5nV7KOnO5da0vrKvVOn/content.mp3",
+   "heard": "This is maturity, not the old cold alarm.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S09-L03.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH03-S09-L03.ogg"
+}

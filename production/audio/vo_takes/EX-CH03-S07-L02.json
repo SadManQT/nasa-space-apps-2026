@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S07-L02",
+ "speaker": "Amara",
+ "text": "The growth chart agrees: seedling stage.",
+ "delivery": "radio",
+ "prompt": "[measured, confirming] The growth chart agrees: seedling stage.",
+ "chosen_take": 1,
+ "seconds": 3.1,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/R3dsP6sVu6dSF2Ktr5eP/svDzE42xig8t8sQOjsSf/content.mp3",
+   "heard": "The growth chart agrees. Seedling stage.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/yVB7Op2217f6d7A6e99j/jHRQ4eP2maGVOk2hMgk6/content.mp3",
+   "heard": "The growth chart agrees. Seedling stage.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S07-L02.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH03-S07-L02.ogg"
+}

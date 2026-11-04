@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S12-L03",
+ "speaker": "Ferreira",
+ "text": "December 8 to 12. My relief assignment brings me there. I owe you the story.",
+ "delivery": "earth_link",
+ "prompt": "[measured, sincere, a quiet pause before the admission] December 8 to 12. My relief assignment brings me there. I owe you the story.",
+ "chosen_take": 1,
+ "seconds": 6.47,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/lBXQ6It731CqsaRExF0c/JpKPOGxJgmCSMT8UP9Sz/content.mp3",
+   "heard": "December 8th to 12th. My relief assignment brings me there. I owe you the story.",
+   "score": 0.938
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/jOmjt3AxY5bNwHhEp6xx/XkygXXB3CuzoVMAeBkTQ/content.mp3",
+   "heard": "December 8th to 12th. My relief assignment brings me there. I owe you the story.",
+   "score": 0.938
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S12-L03.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH04-S12-L03.ogg"
+}

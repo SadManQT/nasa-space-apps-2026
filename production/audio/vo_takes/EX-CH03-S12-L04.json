@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S12-L04",
+ "speaker": "Rafi",
+ "text": "And the map now has a preparation list, not a departure stamp.",
+ "delivery": "live",
+ "prompt": "[practical, upbeat] And the map now has a preparation list, not a departure stamp.",
+ "chosen_take": 1,
+ "seconds": 3.56,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/XcqfmvQ3t15HT0JcQM3y/diYhsh0GQhEWtKsHj3kH/content.mp3",
+   "heard": "And the map now has a preparation list, not a departure stamp.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/O4QGJ2ACDrbL3k77FpJ3/hEKtFL8OMV1lVvEe1maV/content.mp3",
+   "heard": "And the map now has a preparation list, not a departure stamp.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S12-L04.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH03-S12-L04.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S01-L01",
+ "speaker": "Amara",
+ "text": "The panel says tank. I do not trust the diagnosis yet.",
+ "delivery": "live",
+ "prompt": "[measured, wary] The panel says tank. I do not trust the diagnosis yet.",
+ "chosen_take": 1,
+ "seconds": 4.8,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/ouL7tqKjUBnnpDxxPsfX/69kVUFf4iYQfURtMwyXi/content.mp3",
+   "heard": "The panel says, Tank, I do not trust the diagnosis yet.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/KbijTgtiCRisPA7qpPci/OVfb5pfqaBNaYI6puZf0/content.mp3",
+   "heard": "The panel says tank. I do not trust the diagnosis yet.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S01-L01.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH03-S01-L01.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S06-L02",
+ "speaker": "Rafi",
+ "text": "A viewing port first. Our feet can wait.",
+ "delivery": "live",
+ "prompt": "[firm, calm] A viewing port first. Our feet can wait.",
+ "chosen_take": 1,
+ "seconds": 3.04,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/tbC6qlefSU0f6tZ0uQOI/9vxd9e19NcPKl3eF6FJz/content.mp3",
+   "heard": "A viewing port first. Our feet can wait.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/AOBXJVGAaRfhZuLBHpW5/6vZ2lPAq9vVZwcHjUscb/content.mp3",
+   "heard": "A viewing port first. Our feet can wait.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S06-L02.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH03-S06-L02.ogg"
+}

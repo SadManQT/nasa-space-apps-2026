@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH04-S03-L04",
+ "speaker": "Mei",
+ "text": "Then we take the ridge together, even from different rooms.",
+ "delivery": "radio",
+ "prompt": "[warm, resolved] Then we take the ridge together, even from different rooms.",
+ "chosen_take": 1,
+ "seconds": 3.63,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/IyIh28h4m6Qggd1zZLAH/YJ1qN2ZJJuKD9kANuEji/content.mp3",
+   "heard": "then we take the ridge together, even from different rooms.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/IzO6wge7dI3xQb4cIhbd/D6zHNNWS0G0wafqLsAOR/content.mp3",
+   "heard": "then we take the ridge together, even from different rooms.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH04-S03-L04.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH04-S03-L04.ogg"
+}
