@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH02-S10-L01",
+ "speaker": "Engineer",
+ "text": "Biological trial suspended. Crew retreat is mandatory.",
+ "delivery": "recording",
+ "prompt": "[younger, tense, formal log entry] (M1-12 cast sample, flow gY1LUxntVSKlN6E3WLA9)",
+ "chosen_take": 2,
+ "seconds": 4.07,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/sXUuiY86hjmpDqwvAsiC/TDl1oVeRFocc25qzU8h4/content.mp3",
+   "heard": "Biological trials suspended. Crew retreat is mandatory.",
+   "score": 0.857
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/v7axTjfKolB2joOGYsTN/9EcMsUGFgtM45cAWPr9P/content.mp3",
+   "heard": "Biological trial suspended. Crew retreat is mandatory.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH02-S10-L01.mp3",
+ "game_file": "game/assets/audio/voice/Engineer/VO_EX-CH02-S10-L01.ogg"
+}

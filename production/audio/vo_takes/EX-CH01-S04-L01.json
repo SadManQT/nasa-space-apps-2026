@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH01-S04-L01",
+ "speaker": "Mei",
+ "text": "Alo outside. Tara inside. A star beside our light.",
+ "delivery": "live",
+ "prompt": "[warm, gentle] (M1-12 cast sample, flow gY1LUxntVSKlN6E3WLA9)",
+ "chosen_take": 1,
+ "seconds": 5.39,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/s5KI7DhPrwZ0FODUreiK/B9uwwfr6EPGQIBsgjXiz/content.mp3",
+   "heard": "Aloe outside, Tara inside, a star beside our light.",
+   "score": 0.889
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/vYIQVO9uSDm0scu1U1hD/Dg8TluRWcsMA9he95N3G/content.mp3",
+   "heard": "Aloe outside, Tara inside, a star beside our light.",
+   "score": 0.889
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S04-L01.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH01-S04-L01.ogg"
+}

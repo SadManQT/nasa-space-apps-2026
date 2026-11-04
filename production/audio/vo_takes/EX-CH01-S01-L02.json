@@ -1,0 +1,19 @@
+{
+ "line_id": "EX-CH01-S01-L02",
+ "speaker": "Amara",
+ "text": "Only if we notice what spills.",
+ "delivery": "live",
+ "prompt": "reused v7 cutscene take (27 Oct, eleven_v4)",
+ "chosen_take": 1,
+ "seconds": 2.52,
+ "takes": [
+  {
+   "take": 1,
+   "source": "production/cutscenes/v7/src/vo/EX-CH01-S01-L02.mp3",
+   "heard": "only if we notice what spills.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH01-S01-L02.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH01-S01-L02.ogg"
+}
