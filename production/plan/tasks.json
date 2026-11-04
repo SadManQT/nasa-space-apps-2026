@@ -321,8 +321,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Repo hygiene: template install, superseded art, LFS budget",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     ".gitignore",
@@ -331,7 +331,7 @@
    "refs": [],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Ask the user before every delete, move outside the repo, branch deletion or history change; list what you propose first.\nTopics: (1) the Claude Code Game Studios install (.claude/, .agents/, .codex/, design/, project.yaml and template docs in docs/) is\nuncommitted and unconfigured: propose commit-as-is, configure (/setup-engine godot 4.7) or ignore; .agents/ and .codex/ duplicate .claude/.\n(2) ~64 superseded concept PNGs (production/concept/turnarounds, turnarounds_v7, cast_v6, style_lock; ~39 MB in LFS) contradict\nproduction/README.md 'approved concepts only': propose moving them to ~/nasa-space-apps-2026-archive. (3) Git LFS: 229 files, ~781 MB\nlocally; check the GitHub LFS storage/bandwidth quota for the account so judges' clones keep working. (4) The unmerged 24 Oct branch\norigin/claude/amazing-brahmagupta-srm6nk has commits authored 'Claude'; the user's rule is no Claude contributors: propose deleting it\nafter checking nothing in it is still needed (docs/ASSETS.md, CUTSCENES.md, TECH_ART.md, P02_BALANCE_CHECK.md, REVIEW_2026-10-24.md).\n(5) Commit game/tools/test_campaign_later_runtime.gd.uid if still untracked.\nAcceptance: the user approved each change; git status is clean of stray files."
   },
   {
@@ -1125,8 +1125,8 @@
    "prompt": "Goal: story, gameplay and theme match the challenge 100%, and every one of the 32 missions is a training decision a junior learner makes\nthemselves, grounded in NASA data that anyone can understand, and fun.\nRequirements (board 'requirements' list, R01–R24): the challenge text in docs/competition-rules.md §F (\"students run a lunar or Martian\noutpost, balancing competing demands like life support, radiation shielding, power, and food production, so they experience firsthand the\ndecisions that determine whether a mission fails or succeeds\"; neither oversimplified nor too complex to hold a young learner's attention),\nthe theme \"The Next Frontier\", the score sheet and rules in §H, and docs/challenge-statement-2026.md once M0-12 lands.\nDo:\n1. docs/REQUIREMENTS_ALIGNMENT.md: a matrix R01–R24 -> where the current story/gameplay meets it -> gap -> board task. Be blunt about gaps.\n2. game-design/19_TRAINING_DECISIONS.md: one row per mission (EX-M0101..EX-M0804): the decision the player makes (real alternatives,\n   none pre-filled); which of the four demands it trades off (life support, shielding, power, food) and how the Outpost Status shows it;\n   the NASA dataset behind it (from docs/SCIENCE_AND_DATA.md) and its one-sentence plain-language takeaway for a 10–12-year-old; how it can\n   succeed, partly succeed and fail (with retry); the debrief question (predict -> observe -> explain); and what makes it fun (agency,\n   discovery, tension, reward, character moment). Missions that today only advance story get the smallest decision that fits the canon\n   scene (dialogue text and story events stay word for word; new decisions are gameplay choices around them).\n3. Any change to canon story or to numbers in game-design/08_PUZZLE_DESIGNS.md is a proposal in a final section for the user to approve;\n   never edit those files.\n4. Update the M3 mission tasks' prompts on the board only if a mission needs work they do not already describe; run board.py check.\nAcceptance: all 32 missions covered; every requirement row names its tasks; the user has the proposals list."
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M1-27",
     "M1-39"
@@ -1256,8 +1256,8 @@
    "prompt": "Goal: the challenge is called 'Junior Astronaut Mission Trainer'; a teacher or a judge can open any training scenario in one click without\nplaying 12 hours.\nDo: a 'Mission Trainer' entry on the title screen listing the 16 scenarios (P-01..P-16) grouped by demand (Power, Life support, Shielding,\nFood), each with a 20-second NASA data briefing (plain-language takeaway + visual), the real decision, the outcome, a debrief with the\npredict/observe/explain question and a star rating; scenarios unlock as their puzzle is implemented, others show 'coming soon'; reuses the\ncampaign puzzle panels and simulation with a scenario entry profile from data (no copied logic); results saved separately from the campaign.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M1-27",
     "M0-14"
@@ -1273,7 +1273,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "id": "M1-30",
    "milestone": "M1",
    "priority": "P0",
@@ -1310,8 +1310,8 @@
    "priority": "P0",
    "tool": "claude",
    "title": "README for judges",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M0-13",
     "M0-16",
@@ -1323,7 +1323,7 @@
    "refs": [],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-04",
    "prompt": "Rewrite the top of README.md for a judge with five minutes: one-paragraph pitch; the challenge named exactly ('Build a Junior Astronaut\nMission Trainer', 2026); 240 s and 30 s video links; download/play links; 3 screenshots; how the game answers the challenge's five demands\n(life support, radiation shielding, power, food, outpost operation); the NASA data table (link docs/SCIENCE_AND_DATA.md); AI use\n(docs/AI_USE.md); licence; credits; team. Move the long design material below or into docs/. English only."
   },
   {
