@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH06-S10-L01",
+ "speaker": "Kai",
+ "text": "Rafi, stay on the channel.",
+ "delivery": "live",
+ "prompt": "[tense, calm, commanding] Rafi, stay on the channel.",
+ "chosen_take": 1,
+ "seconds": 2.04,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Mu9ol0OhxKesP5BaBP7t/uRiQULxBWhBsSJrgnVA6/content.mp3",
+   "heard": "Rafi, stay on the channel.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/AcN2YYpGEOt01N3WT607/n9HaxrOQ35v5PQRjAvBg/content.mp3",
+   "heard": "Rafi, stay on the channel.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH06-S10-L01.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH06-S10-L01.ogg"
+}

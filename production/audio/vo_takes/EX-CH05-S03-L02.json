@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S03-L02",
+ "speaker": "Amara",
+ "text": "A condition is not the failure time.",
+ "delivery": "live",
+ "prompt": "[measured, precise] A condition is not the failure time.",
+ "chosen_take": 1,
+ "seconds": 3.03,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/z8IlU1w1v0WRII7NYND8/9PNwrEUzul3b7EidgVuO/content.mp3",
+   "heard": "A condition is not the failure time.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/je8vIsx7VKFXjThZPhxf/aZNFjuz839hzUkbZVnob/content.mp3",
+   "heard": "A condition is not the failure time.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S03-L02.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH05-S03-L02.ogg"
+}

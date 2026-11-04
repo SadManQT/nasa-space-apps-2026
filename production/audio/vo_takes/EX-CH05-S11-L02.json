@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S11-L02",
+ "speaker": "Amara",
+ "text": "Attachments can do that.",
+ "delivery": "live",
+ "prompt": "[dry, gently amused] Attachments can do that.",
+ "chosen_take": 1,
+ "seconds": 1.99,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/85UmVfqKFt4E4jGSlbu1/53HqXUf4I4A163IBZXvT/content.mp3",
+   "heard": "Attachments can do that.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Vd7b1c5leoXbgkAX38ph/aqyw5VsZyV2g6m0CpG5f/content.mp3",
+   "heard": "Attachments can do that.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S11-L02.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH05-S11-L02.ogg"
+}

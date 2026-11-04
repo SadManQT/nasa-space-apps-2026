@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S11-L04",
+ "speaker": "Mei",
+ "text": "Five home. Three hours to first light.",
+ "delivery": "live",
+ "prompt": "[warm, relieved] Five home. Three hours to first light.",
+ "chosen_take": 1,
+ "seconds": 3.33,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/LasrfHXsSwswAe2dTCs3/XmHztxNE2a2jIYhIgZMm/content.mp3",
+   "heard": "Five home. Three hours to first light.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/KGsVwPWuyZ1Tc11msGEj/NfnIaHnMsX7tEvdfxwMf/content.mp3",
+   "heard": "Five home. Three hours to first light.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S11-L04.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH08-S11-L04.ogg"
+}

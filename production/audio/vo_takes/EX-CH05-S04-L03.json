@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S04-L03",
+ "speaker": "Ferreira",
+ "text": "We left before reproduction.",
+ "delivery": "live",
+ "prompt": "[quiet, regretful] We left before reproduction.",
+ "chosen_take": 1,
+ "seconds": 2.05,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/ghvuLt4apIwxlkXDN81A/4xZnbM2Z9OCMG2plgQYe/content.mp3",
+   "heard": "We left before reproduction.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/dSKuaNch81pPzvdybkGd/8Ap56CQEG94cdBdrwbdw/content.mp3",
+   "heard": "We left before reproduction.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S04-L03.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH05-S04-L03.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S11-L02",
+ "speaker": "Kai",
+ "text": "Same road. New timestamps.",
+ "delivery": "live",
+ "prompt": "[focused, lightly confident] Same road. New timestamps.",
+ "chosen_take": 1,
+ "seconds": 2.46,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/V6Bjpsad8vRe3RC1nAFb/tty5el39CcHjLbYBMji7/content.mp3",
+   "heard": "Same road. New timestamps.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Egs5MIUmQ2sH2fGUKpT1/Lo4cN8vYP8Xo18MVkcdH/content.mp3",
+   "heard": "Same road. New timestamps.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S11-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH08-S11-L02.ogg"
+}

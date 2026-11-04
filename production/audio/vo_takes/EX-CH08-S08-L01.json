@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S08-L01",
+ "speaker": "Kai",
+ "text": "Aurora first.",
+ "delivery": "live",
+ "prompt": "[focused, decisive] Aurora first.",
+ "chosen_take": 1,
+ "seconds": 1.34,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Q2E0W9dHaSYqVi5R0z3m/LOzFQhAYceCIDRFIVpzv/content.mp3",
+   "heard": "Aurora first.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/BVO7GX5pIRFrNoqbkwrl/Nq8Cav0A67QHKaltHO9u/content.mp3",
+   "heard": "Aurora first!",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S08-L01.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH08-S08-L01.ogg"
+}

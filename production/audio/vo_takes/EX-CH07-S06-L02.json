@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S06-L02",
+ "speaker": "Kai",
+ "text": "Protected branch matches.",
+ "delivery": "live",
+ "prompt": "[focused, relieved] Protected branch matches.",
+ "chosen_take": 1,
+ "seconds": 1.72,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/0B4yKWBuknX8rJMkLRUA/ETJAaYbdcouGsqRcIzrq/content.mp3",
+   "heard": "Protected branch matches.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/E9bGXP1qlQKRQ9kTpUR9/sohmCKMDkjXG7MFdsZcV/content.mp3",
+   "heard": "Protected branch matches.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S06-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH07-S06-L02.ogg"
+}

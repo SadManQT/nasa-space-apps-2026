@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S12-L02",
+ "speaker": "Amara",
+ "text": "Seeds protected. Everyone home.",
+ "delivery": "live",
+ "prompt": "[warm, relieved] Seeds protected. Everyone home.",
+ "chosen_take": 2,
+ "seconds": 3.03,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/bTQNhDcZPVUJvvEtLXas/JlJcoi66IRWEK2fqzoxH/content.mp3",
+   "heard": "Seats protected. Everyone home.",
+   "score": 0.75
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/wvuCOpA8ACMsS5tavQ3N/81Oj0cR83dv54vRTg0rr/content.mp3",
+   "heard": "Seeds protected. Everyone home.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S12-L02.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH08-S12-L02.ogg"
+}

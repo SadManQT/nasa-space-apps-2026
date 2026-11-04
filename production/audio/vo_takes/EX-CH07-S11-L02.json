@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S11-L02",
+ "speaker": "Kai",
+ "text": "Every neighbouring link, not one magic line.",
+ "delivery": "live",
+ "prompt": "[focused, thoughtful] Every neighbouring link, not one magic line.",
+ "chosen_take": 1,
+ "seconds": 3.42,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/ONsITAHjceAIcD219sOX/fdMiXk2hKwik4JJ3WUle/content.mp3",
+   "heard": "Every neighboring link, not one magic line.",
+   "score": 0.857
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/5rpjr58XZJcQmMjK2qi5/c4KeHFnYMzvNwnlZfTIK/content.mp3",
+   "heard": "Every neighboring link, not one magic line.",
+   "score": 0.857
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S11-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH07-S11-L02.ogg"
+}

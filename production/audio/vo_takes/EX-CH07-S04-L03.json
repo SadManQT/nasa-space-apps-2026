@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S04-L03",
+ "speaker": "Amara",
+ "text": "Return after the sample, not before.",
+ "delivery": "live",
+ "prompt": "[measured, practical] Return after the sample, not before.",
+ "chosen_take": 1,
+ "seconds": 3.03,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/gYIjR79qlZlcOplrKdsQ/hDYf5QrgY827cXDbnQpR/content.mp3",
+   "heard": "Return after the sample, not before.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/bIJX21DZY1vPPzDapv4H/kvut4CflWVa0OFf3u1xv/content.mp3",
+   "heard": "Return after the sample, not before.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S04-L03.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH07-S04-L03.ogg"
+}

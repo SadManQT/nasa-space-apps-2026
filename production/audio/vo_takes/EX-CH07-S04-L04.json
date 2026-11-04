@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S04-L04",
+ "speaker": "Ferreira",
+ "text": "Name the valve, then touch it.",
+ "delivery": "live",
+ "prompt": "[calm, clipped, commanding] Name the valve, then touch it.",
+ "chosen_take": 1,
+ "seconds": 2.4,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Yvt9tQtQLO8YH1TE14J0/Qf6OD7Dm2r3GuUVrSTZY/content.mp3",
+   "heard": "Name the valve, then touch it.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/IYtJmZ1jWiEIa97h86df/RmCQlV36XdH3D3ojSYmj/content.mp3",
+   "heard": "Name the valve, then touch it.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S04-L04.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH07-S04-L04.ogg"
+}

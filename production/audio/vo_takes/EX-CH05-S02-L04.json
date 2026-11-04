@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S02-L04",
+ "speaker": "Kai",
+ "text": "The instructions stay here without Earth.",
+ "delivery": "live",
+ "prompt": "[thoughtful, steady] The instructions stay here without Earth.",
+ "chosen_take": 1,
+ "seconds": 2.81,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/l490xch9jKnpubsqyvaz/p5rbrQ8rfIzRuH6hUQgS/content.mp3",
+   "heard": "The instructions stay here without Earth.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Tbdkc4hJB5x7iFMUcdue/FPKe1vuNCeKefwcrTDfX/content.mp3",
+   "heard": "The instructions stay here without Earth.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S02-L04.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH05-S02-L04.ogg"
+}

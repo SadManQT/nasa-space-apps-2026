@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH06-S05-L04",
+ "speaker": "Ferreira",
+ "text": "A rehearsal pass does not sign the watch.",
+ "delivery": "live",
+ "prompt": "[measured, wise] A rehearsal pass does not sign the watch.",
+ "chosen_take": 1,
+ "seconds": 3.37,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/gOsuimxKpKB0kVBnERMZ/cGpyhAPqxiDFSiA818dh/content.mp3",
+   "heard": "A rehearsal pass does not sign the watch.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/NF9rVuyv0PlOmLshd9kI/JSuJSlNiynZrGlbKGjP9/content.mp3",
+   "heard": "A rehearsal pass does not sign the watch.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH06-S05-L04.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH06-S05-L04.ogg"
+}

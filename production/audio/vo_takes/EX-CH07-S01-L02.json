@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S01-L02",
+ "speaker": "Rao",
+ "text": "Historical source received and labelled.",
+ "delivery": "earth_link",
+ "prompt": "[calm, formal] Historical source received and labelled.",
+ "chosen_take": 1,
+ "seconds": 2.79,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/5NWwGe8aFy8qlNBKFGyT/mzzKelhDlPwvIHPINlLn/content.mp3",
+   "heard": "Historical source received and labeled.",
+   "score": 0.8
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/qtRIjcReDYpK1GhOt4H7/qZPUbqplUOY93C1ecPEU/content.mp3",
+   "heard": "historical source received and labeled.",
+   "score": 0.8
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S01-L02.mp3",
+ "game_file": "game/assets/audio/voice/Rao/VO_EX-CH07-S01-L02.ogg"
+}

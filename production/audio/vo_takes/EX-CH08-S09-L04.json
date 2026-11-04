@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S09-L04",
+ "speaker": "Ferreira",
+ "text": "Now verify the voices at both ends.",
+ "delivery": "live",
+ "prompt": "[measured, anticipating] Now verify the voices at both ends.",
+ "chosen_take": 1,
+ "seconds": 3.28,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/WXsmVwi2YIFRYvSrKlOx/L9frdRfspMRtRkuD1tWa/content.mp3",
+   "heard": "Now verify the voices at both ends.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/ehaK533zDrHl0DgVkcbm/m9gruTifv4a4hQrSoLiw/content.mp3",
+   "heard": "Now verify the voices at both ends.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S09-L04.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH08-S09-L04.ogg"
+}

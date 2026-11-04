@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S02-L01",
+ "speaker": "Kai",
+ "text": "The shorter line looks cheaper.",
+ "delivery": "live",
+ "prompt": "[thoughtful, wary] The shorter line looks cheaper.",
+ "chosen_take": 1,
+ "seconds": 2.48,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/c5JxgWk2FbJTa2QcSWTw/1subsQgWmIPiclbqEtKh/content.mp3",
+   "heard": "The shorter line looks cheaper.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Fdu1WlkIo3oHuADqt21c/hMwGLuFqZWkxxIiBx3Un/content.mp3",
+   "heard": "The shorter line looks cheaper.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S02-L01.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH08-S02-L01.ogg"
+}

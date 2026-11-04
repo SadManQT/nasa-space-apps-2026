@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S10-L03",
+ "speaker": "Kai",
+ "text": "No reply from Earth is in this plan.",
+ "delivery": "live",
+ "prompt": "[focused, matter-of-fact] No reply from Earth is in this plan.",
+ "chosen_take": 1,
+ "seconds": 2.58,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/v1MtGvjJwwljdNjVDLfZ/K2RAxbVM8ncjwLIX1uMW/content.mp3",
+   "heard": "No reply from Earth is in this plan.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/1fSCHzHnVCZPNhm8c0aO/B5cbzT9mczSVxbYoBOBf/content.mp3",
+   "heard": "No reply from Earth is in this plan.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S10-L03.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH07-S10-L03.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S01-L04",
+ "speaker": "Amara",
+ "text": "We are revising the occupancy ledger.",
+ "delivery": "live",
+ "prompt": "[measured, thoughtful] We are revising the occupancy ledger.",
+ "chosen_take": 1,
+ "seconds": 2.91,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/I0nUft6hkiwSzZx6jHoz/h7YwhuhZ3TuPh8u3Cpng/content.mp3",
+   "heard": "We are revising the occupancy ledger.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/gVTHv7fblp2jnzOIY3xd/LkhTaXG9LrFOcAhQoICS/content.mp3",
+   "heard": "We are revising the occupancy ledger.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S01-L04.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH05-S01-L04.ogg"
+}

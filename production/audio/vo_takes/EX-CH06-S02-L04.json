@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH06-S02-L04",
+ "speaker": "Kai",
+ "text": "Then label the limits too.",
+ "delivery": "live",
+ "prompt": "[thoughtful, agreeing] Then label the limits too.",
+ "chosen_take": 1,
+ "seconds": 2.01,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/MfTLRxHoNl4LyoDh6B6X/dhel9AhPFZstH0aUe4qf/content.mp3",
+   "heard": "Then label the limits too.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/cOpeAwrKef7Ls4SI8rvC/bCJPKJ4MeDE7MwO73Myc/content.mp3",
+   "heard": "Then label the limits too.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH06-S02-L04.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH06-S02-L04.ogg"
+}

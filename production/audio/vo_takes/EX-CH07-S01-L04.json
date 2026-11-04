@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S01-L04",
+ "speaker": "Kai",
+ "text": "Read every observation before we set anything.",
+ "delivery": "live",
+ "prompt": "[focused, careful] Read every observation before we set anything.",
+ "chosen_take": 1,
+ "seconds": 3.24,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Ms168rlqffnjkDSj3EDa/y5KPGJSsnsIiLtT9XFgR/content.mp3",
+   "heard": "Read every observation before we set anything.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/3Px6u7Jk6PmoLzMhTkTm/wYSDQIbZ4UzoDhzh1a8K/content.mp3",
+   "heard": "Read every observation before we set anything.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S01-L04.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH07-S01-L04.ogg"
+}

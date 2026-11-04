@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S05-L01",
+ "speaker": "Amara",
+ "text": "Same darkness. Different garden.",
+ "delivery": "live",
+ "prompt": "[quiet, reflective] Same darkness. Different garden.",
+ "chosen_take": 1,
+ "seconds": 2.91,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/BRy33eril2FDtCVgnNkL/BoxFduup9C7cvtzL6bog/content.mp3",
+   "heard": "Same darkness, different garden.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/iiwP8SaTca1LeSrM24NB/XhHPIqa1BAF0HZUWkoMw/content.mp3",
+   "heard": "Same darkness, different garden.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S05-L01.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH08-S05-L01.ogg"
+}

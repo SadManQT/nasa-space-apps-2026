@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S04-L01",
+ "speaker": "Kai",
+ "text": "Power isolated before the battery.",
+ "delivery": "live",
+ "prompt": "[focused, reading off a checklist] Power isolated before the battery.",
+ "chosen_take": 1,
+ "seconds": 2.38,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/v63Zi7PXAOFG17zmgLpN/OvhPipdqH81RLnVJmIXU/content.mp3",
+   "heard": "Power isolated before the battery.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/FXautFNrMZC0tIu74Dgf/Ar2iDQr1G3fbuXrZCtz3/content.mp3",
+   "heard": "Power isolated before the battery.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S04-L01.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH08-S04-L01.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S09-L04",
+ "speaker": "Mei",
+ "text": "An initial leads us. A record finishes it.",
+ "delivery": "live",
+ "prompt": "[thoughtful, quietly determined] An initial leads us. A record finishes it.",
+ "chosen_take": 1,
+ "seconds": 3.81,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/N8RtQNrkzacqTeCU7Byg/JuxiFcFxexyHQD33cw4j/content.mp3",
+   "heard": "An initial leads us. A record finishes it.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/4FPo7MQvT9AYg92USutj/k7oBmLZ6osBi5LORtwZH/content.mp3",
+   "heard": "An initial leads us. A record finishes it.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S09-L04.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH05-S09-L04.ogg"
+}

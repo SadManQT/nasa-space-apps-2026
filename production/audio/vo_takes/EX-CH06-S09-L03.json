@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH06-S09-L03",
+ "speaker": "Amara",
+ "text": "The earlier date stays unspecified.",
+ "delivery": "live",
+ "prompt": "[measured, precise] The earlier date stays unspecified.",
+ "chosen_take": 1,
+ "seconds": 2.88,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/WFoMxn98fYXoK20J7J8W/nOp6hsc9M2xxjrCZFbMh/content.mp3",
+   "heard": "The earlier date stays unspecified.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/jNukHOBGTL0mMUBgCyPm/f1024Sd9tRrTFdZvtWY1/content.mp3",
+   "heard": "The earlier date stays unspecified.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH06-S09-L03.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH06-S09-L03.ogg"
+}

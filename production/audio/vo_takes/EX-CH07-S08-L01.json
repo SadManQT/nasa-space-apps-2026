@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S08-L01",
+ "speaker": "Rafi",
+ "text": "Peak on the chart. Check the shield.",
+ "delivery": "live",
+ "prompt": "[steady, clear] Peak on the chart. Check the shield.",
+ "chosen_take": 1,
+ "seconds": 2.15,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Q89jLcHaMrrHtlczEXZb/NVwGiVuxRM5tuFfFvLPa/content.mp3",
+   "heard": "Peek on the chart. Check the shield.",
+   "score": 0.857
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/I0ahR4MqZzg0lJ2yJbcp/Kq8N2p71IHV7sJ4DPHaQ/content.mp3",
+   "heard": "Peek on the chart. Check the shield.",
+   "score": 0.857
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S08-L01.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH07-S08-L01.ogg"
+}

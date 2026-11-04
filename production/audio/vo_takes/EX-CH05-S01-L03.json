@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S01-L03",
+ "speaker": "Kai",
+ "text": "Your mug passed inspection.",
+ "delivery": "live",
+ "prompt": "[lightly amused, confident] Your mug passed inspection.",
+ "chosen_take": 1,
+ "seconds": 1.9,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/I73BIodNlFWzqLsUiRZ3/oHAQLQlZ6Lp8mIU90pPH/content.mp3",
+   "heard": "Your mug passed inspection!",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/dLpZEwtQlHOLrTVTNciI/3hqMAfw3Teru6EJBv1cR/content.mp3",
+   "heard": "Your mug passed inspection!",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S01-L03.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH05-S01-L03.ogg"
+}

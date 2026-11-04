@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S11-L01",
+ "speaker": "Rafi",
+ "text": "Return is part of the mission.",
+ "delivery": "live",
+ "prompt": "[steady, clear] Return is part of the mission.",
+ "chosen_take": 1,
+ "seconds": 2.08,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/DKjEYsRF44RMDm12i1Ln/fcymCi0veMgEVaYbbUIK/content.mp3",
+   "heard": "Return is part of the mission.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/yRRYGiRM8Tw8MFuXMi15/M7frvn7hMVXO3LCWjvjk/content.mp3",
+   "heard": "Return is part of the mission.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S11-L01.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH08-S11-L01.ogg"
+}

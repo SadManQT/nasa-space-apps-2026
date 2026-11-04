@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S05-L02",
+ "speaker": "Kai",
+ "text": "Here. Protected branch checked.",
+ "delivery": "live",
+ "prompt": "[focused, reading off a checklist] Here. Protected branch checked.",
+ "chosen_take": 1,
+ "seconds": 2.69,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/L69IxJDc5WsSROR3Bl5f/tLIRjHP0wFcf8yyjUgpM/content.mp3",
+   "heard": "Here, protected branch checked.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/2dL4NjLfMQkA8a3ZtNrB/zvcX8kS3SfYnTQKHkFJQ/content.mp3",
+   "heard": "Here, protected branch checked.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S05-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH07-S05-L02.ogg"
+}

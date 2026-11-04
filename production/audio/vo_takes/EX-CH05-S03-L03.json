@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S03-L03",
+ "speaker": "Rafi",
+ "text": "Every name has a boarding mark.",
+ "delivery": "live",
+ "prompt": "[firm, matter-of-fact] Every name has a boarding mark.",
+ "chosen_take": 1,
+ "seconds": 2.03,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/ILSyIEIvikfKREIDKcLQ/ZNGmLm0THvijMVbhk1S5/content.mp3",
+   "heard": "Every name has a boarding mark.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/d79mag1ekKdqdbWGhKTT/pemtDq3mVQDPBup71Gvv/content.mp3",
+   "heard": "Every name has a boarding mark.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S03-L03.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH05-S03-L03.ogg"
+}

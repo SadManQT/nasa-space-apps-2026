@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S06-L01",
+ "speaker": "Amara",
+ "text": "Compare the result with the forecast.",
+ "delivery": "live",
+ "prompt": "[measured, precise] Compare the result with the forecast.",
+ "chosen_take": 1,
+ "seconds": 2.57,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/nBZRsvCee06PaRFfaXmG/4BkoQt7kW75YAipnHQB5/content.mp3",
+   "heard": "Compare the result with the forecast.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/rh3EM7XeCxqRypaxw345/94jCr0ZLeG4RaHMWrMBt/content.mp3",
+   "heard": "Compare the result with the forecast.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S06-L01.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH07-S06-L01.ogg"
+}

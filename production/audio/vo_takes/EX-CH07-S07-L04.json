@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S07-L04",
+ "speaker": "Amara",
+ "text": "It needs the next checked step.",
+ "delivery": "live",
+ "prompt": "[warm, resolute] It needs the next checked step.",
+ "chosen_take": 2,
+ "seconds": 2.91,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/BiB6R4vNFWaQoDKZjddG/aq3SnqXPJkI5gtBPxirl/content.mp3",
+   "heard": "It needs the next check step.",
+   "score": 0.833
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/njaAce72XbFro04j3fhP/xCemGDr0jVDBZhaWWeXg/content.mp3",
+   "heard": "It needs the next checked step.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S07-L04.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH07-S07-L04.ogg"
+}

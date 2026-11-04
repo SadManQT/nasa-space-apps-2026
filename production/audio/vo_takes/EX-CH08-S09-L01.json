@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S09-L01",
+ "speaker": "Rafi",
+ "text": "Strong is not the same as correct.",
+ "delivery": "live",
+ "prompt": "[steady, firm] Strong is not the same as correct.",
+ "chosen_take": 1,
+ "seconds": 2.96,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/oI1LsGhC4Fa4HOHef9RH/E9bLBUm3LlDnifqfB3ZW/content.mp3",
+   "heard": "Strong is not the same as correct.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/4cyDLpUlPopypuPojKXZ/VS0Nd8fFWNiriCSR0xwv/content.mp3",
+   "heard": "Strong is not the same as correct.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S09-L01.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH08-S09-L01.ogg"
+}

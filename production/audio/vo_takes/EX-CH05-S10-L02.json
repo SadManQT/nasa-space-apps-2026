@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S10-L02",
+ "speaker": "Ferreira",
+ "text": "Dr. Noor Rahman. Our gardener, from Bangladesh.",
+ "delivery": "live",
+ "prompt": "[warm, with quiet pride] Dr. Noor Rahman. Our gardener, from Bangladesh.",
+ "chosen_take": 1,
+ "seconds": 4.22,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/rTNmvRC9vj8zv3hQUOB5/8MZYVKaKyRMjaFFtLDi2/content.mp3",
+   "heard": "Dr. Noor Rahman, our gardener from Bangladesh.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/73F3sEAviyHhhEUKoVNx/0xKY5UyiF6kFHVrJetyf/content.mp3",
+   "heard": "Dr. Noor Rahman, our gardener from Bangladesh.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S10-L02.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH05-S10-L02.ogg"
+}

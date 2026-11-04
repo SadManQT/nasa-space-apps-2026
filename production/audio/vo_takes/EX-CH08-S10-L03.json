@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S10-L03",
+ "speaker": "Ferreira",
+ "text": "You brought us the seeds.",
+ "delivery": "live",
+ "prompt": "[warm, pauses, moved] You brought us the seeds.",
+ "chosen_take": 1,
+ "seconds": 2.1,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Y6E1Kw5yktayXIm2VkBd/NUFq7qFDVXEqz5uPBdtE/content.mp3",
+   "heard": "You brought us the seeds.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/RX2hlo6mONvURZQmJB57/oPentJVf8tHKSJh2BdeR/content.mp3",
+   "heard": "You brought us the seeds.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S10-L03.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH08-S10-L03.ogg"
+}

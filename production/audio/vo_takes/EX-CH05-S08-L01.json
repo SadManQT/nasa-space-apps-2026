@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S08-L01",
+ "speaker": "Amara",
+ "text": "Two symptoms. Check their causes separately.",
+ "delivery": "live",
+ "prompt": "[measured, analytical] Two symptoms. Check their causes separately.",
+ "chosen_take": 1,
+ "seconds": 3.41,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/HLeldL3zssWjtSibcGeO/Ai6q3POQ4b43LYbHyMek/content.mp3",
+   "heard": "Two symptoms. Check their causes separately.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/rkkN74nItEZ8XJNHilRD/4kbaMi1vO4KWtz1sntDP/content.mp3",
+   "heard": "Two symptoms. Check their causes separately.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S08-L01.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH05-S08-L01.ogg"
+}

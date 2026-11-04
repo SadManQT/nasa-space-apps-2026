@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S07-L01",
+ "speaker": "Noor",
+ "text": "I'm calling the seeds Alo, light.",
+ "delivery": "recording",
+ "prompt": "[warm, wistful] I'm calling the seeds Alo, light.",
+ "chosen_take": 1,
+ "seconds": 3.15,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/N2xa4zj17n6uJEQWVl4v/DFzb8amALeJyhQusucsu/content.mp3",
+   "heard": "I'm calling the seeds aloe, light.",
+   "score": 0.857
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/fLvKEnzoO8DMU9f2jaVg/F3hAs2qxtcMrNEAAgEgL/content.mp3",
+   "heard": "I'm calling the seeds aloe, light.",
+   "score": 0.857
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S07-L01.mp3",
+ "game_file": "game/assets/audio/voice/Noor/VO_EX-CH07-S07-L01.ogg"
+}

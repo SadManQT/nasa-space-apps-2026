@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S07-L01",
+ "speaker": "Ferreira",
+ "text": "Power isolated?",
+ "delivery": "live",
+ "prompt": "[calm, crisp, commanding] Power isolated?",
+ "chosen_take": 2,
+ "seconds": 1.52,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/4EM3ZzEX9sWrF9OGZfpf/dOI2DLX9jujZOCSnlIBo/content.mp3",
+   "heard": "Power Isomated?",
+   "score": 0.5
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/gTsNUAmwU7piFAQgFTXG/dF5qRU5pSXeqkyoEpOGr/content.mp3",
+   "heard": "Power isolated.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S07-L01.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH08-S07-L01.ogg"
+}

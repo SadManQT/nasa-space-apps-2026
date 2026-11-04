@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S03-L04",
+ "speaker": "Ferreira",
+ "text": "Stop at the surveyed pad.",
+ "delivery": "live",
+ "prompt": "[calm, clipped, commanding] Stop at the surveyed pad.",
+ "chosen_take": 1,
+ "seconds": 1.87,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/jRHZwkJwnj3vAg7JUMvk/zm6dmOep2pTFJgqJUv9x/content.mp3",
+   "heard": "Stop at the survey pad.",
+   "score": 0.8
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/tzaAjsXPlOAj9xwqSvFP/0a679UJrGy9xrbx5ECyZ/content.mp3",
+   "heard": "Stop at the survey pad.",
+   "score": 0.8
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S03-L04.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH08-S03-L04.ogg"
+}

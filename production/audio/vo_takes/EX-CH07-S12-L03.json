@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S12-L03",
+ "speaker": "Kai",
+ "text": "Keep the small guide light.",
+ "delivery": "live",
+ "prompt": "[warm, lightly amused] Keep the small guide light.",
+ "chosen_take": 1,
+ "seconds": 1.67,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/BuD7AbqKzw8eewSv7hIS/RkQGBkoLOICeFzDdpREB/content.mp3",
+   "heard": "Keep the small guide light.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/zaa48JUzKp9pG2MesbAO/JmBIdNcEvcMNeLR1kOfZ/content.mp3",
+   "heard": "Keep the small guide light.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S12-L03.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH07-S12-L03.ogg"
+}

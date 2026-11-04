@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S06-L03",
+ "speaker": "Mei",
+ "text": "Our other question needs permission.",
+ "delivery": "live",
+ "prompt": "[thoughtful, careful] Our other question needs permission.",
+ "chosen_take": 1,
+ "seconds": 2.84,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/s11XjnZPlbFmmc1mPuHI/nOHQYv8AmJeSH7uVCbRg/content.mp3",
+   "heard": "Our other question needs permission.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/42Oa9Yo1AuKAEwVc8T42/WLsjJrZtNWZcOIe86btG/content.mp3",
+   "heard": "Our other question needs permission.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S06-L03.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH05-S06-L03.ogg"
+}

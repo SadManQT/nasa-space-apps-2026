@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S06-L02",
+ "speaker": "Mei",
+ "text": "The packet says when and where.",
+ "delivery": "live",
+ "prompt": "[calm, attentive] The packet says when and where.",
+ "chosen_take": 1,
+ "seconds": 2.44,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/4e9pFBdI91jeqs0CJ5hp/PqvDhwR2L7JE2ZrlPgND/content.mp3",
+   "heard": "The packet says when and where.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/NwwfbdaZwMUYfyAJk7ET/n8jIscqVxLHVEX0XvDty/content.mp3",
+   "heard": "The packet says when and where.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S06-L02.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH08-S06-L02.ogg"
+}

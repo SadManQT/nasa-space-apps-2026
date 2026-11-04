@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S10-L03",
+ "speaker": "Mei",
+ "text": "She read the reports we sent?",
+ "delivery": "live",
+ "prompt": "[hopeful, hesitant] She read the reports we sent?",
+ "chosen_take": 2,
+ "seconds": 2.41,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/mwHtHmy1oU0L7Gvx2UdS/rly9ZCGdMUElSDUsMhMw/content.mp3",
+   "heard": "He read the reports we sent?",
+   "score": 0.833
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/zQ2vqK55xSgUveYKg1Ba/bkDBkpYFpLz3cVtzr0dz/content.mp3",
+   "heard": "She read the reports we sent?",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S10-L03.mp3",
+ "game_file": "game/assets/audio/voice/Mei/VO_EX-CH05-S10-L03.ogg"
+}

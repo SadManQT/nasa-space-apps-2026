@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S05-L03",
+ "speaker": "Amara",
+ "text": "Atmosphere checked. Mei is here.",
+ "delivery": "live",
+ "prompt": "[focused, reading off a checklist] Atmosphere checked. Mei is here.",
+ "chosen_take": 1,
+ "seconds": 2.75,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/NSCg9pU1H6IMzcaJHXDR/WyJ7P1uUtLP8YzXejRbv/content.mp3",
+   "heard": "Atmosphere checked. May is here.",
+   "score": 0.8
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Eg0L3qRIdG50x7zr3Z9F/L5GJSaTuX4hDEYjMeBMG/content.mp3",
+   "heard": "Atmosphere checked. May is here.",
+   "score": 0.8
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S05-L03.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH07-S05-L03.ogg"
+}

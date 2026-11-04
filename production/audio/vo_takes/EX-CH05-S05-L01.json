@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S05-L01",
+ "speaker": "Ferreira",
+ "text": "I was the engineer who could not fix the radio.",
+ "delivery": "live",
+ "prompt": "[restrained, heavy, deliberate pause before the admission] I was the engineer who could not fix the radio.",
+ "chosen_take": 1,
+ "seconds": 3.67,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/6nVdYAJUkCMEtnjGoRL8/iuW0yS7qs5cY9lg34KIl/content.mp3",
+   "heard": "I was the engineer who could not fix the radio.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/ur7c55v3NJyN5eAknWaz/e0WZPXmbPOJPIY4cxLWE/content.mp3",
+   "heard": "I was the engineer who could not fix the radio.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S05-L01.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH05-S05-L01.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S03-L01",
+ "speaker": "Kai",
+ "text": "Four good ideas can still collide.",
+ "delivery": "live",
+ "prompt": "[lightly amused, thoughtful] Four good ideas can still collide.",
+ "chosen_take": 1,
+ "seconds": 2.64,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/ku8JQUQr2bM0c5mXrMT6/gT06fyDV9kr0IBZiiUFf/content.mp3",
+   "heard": "Four good ideas can still collide.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/FXYFeBDpDsueKEPloOFR/ai7kWzn4TTigG1yftYgE/content.mp3",
+   "heard": "Four good ideas can still collide.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S03-L01.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH07-S03-L01.ogg"
+}

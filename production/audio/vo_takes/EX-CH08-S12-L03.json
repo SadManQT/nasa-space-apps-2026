@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S12-L03",
+ "speaker": "Ferreira",
+ "text": "You did not just survive the Moon. You grew it.",
+ "delivery": "live",
+ "prompt": "[warm, pauses, proud] You did not just survive the Moon. You grew it.",
+ "chosen_take": 1,
+ "seconds": 3.92,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/tqw6LMTAhAW2v7Um3qpF/rfaNH9uaxv9gnK6CPOLI/content.mp3",
+   "heard": "You did not just survive the moon. You grew it.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/vzVcUP7816SpPvFbsC70/YPAJWckvll225G538Sc2/content.mp3",
+   "heard": "You did not just survive the moon. You grew it.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S12-L03.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH08-S12-L03.ogg"
+}

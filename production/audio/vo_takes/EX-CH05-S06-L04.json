@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S06-L04",
+ "speaker": "Ferreira",
+ "text": "Both kinds of repair deserve care.",
+ "delivery": "live",
+ "prompt": "[warm, composed] Both kinds of repair deserve care.",
+ "chosen_take": 1,
+ "seconds": 2.87,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/mfXBlQMV0bP4UlIvxCIz/LetMaBdh1JnG8C4isowV/content.mp3",
+   "heard": "Both kinds of repair deserve care.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/c9VSyBXXxOyACF7HnDfZ/PyiAjNasknUNFxYKIzVQ/content.mp3",
+   "heard": "Both kinds of repair deserve care.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S06-L04.mp3",
+ "game_file": "game/assets/audio/voice/Ferreira/VO_EX-CH05-S06-L04.ogg"
+}

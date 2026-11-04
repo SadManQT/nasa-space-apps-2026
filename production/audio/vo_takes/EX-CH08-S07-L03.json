@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S07-L03",
+ "speaker": "Rafi",
+ "text": "Tether set. Housing clear.",
+ "delivery": "live",
+ "prompt": "[steady, clear] Tether set. Housing clear.",
+ "chosen_take": 1,
+ "seconds": 2.21,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/62l9uiH6hM8FZKCkpawj/UwLckwv9cBxwcAVRJYBA/content.mp3",
+   "heard": "Tether set. Housing clear.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/IbBkjIy8qzoYH1DLqAg7/KppGPjasX8TqKPl0aYh5/content.mp3",
+   "heard": "Tether set. Housing clear.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S07-L03.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH08-S07-L03.ogg"
+}

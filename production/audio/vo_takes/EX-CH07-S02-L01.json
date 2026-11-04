@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S02-L01",
+ "speaker": "Amara",
+ "text": "April's card counted four.",
+ "delivery": "live",
+ "prompt": "[thoughtful, matter-of-fact] April's card counted four.",
+ "chosen_take": 1,
+ "seconds": 2.26,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/HyiMvyXtLc0rhBj78s3Q/yja25v8fZYq9vKMgNgGl/content.mp3",
+   "heard": "April's card counted four.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/CHS2seJmDU241U2zneiq/rbUbS5RcZ0mJskBidzTs/content.mp3",
+   "heard": "April's card counted four.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S02-L01.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH07-S02-L01.ogg"
+}

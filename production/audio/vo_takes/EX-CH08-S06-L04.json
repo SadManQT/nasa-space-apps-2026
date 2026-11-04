@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S06-L04",
+ "speaker": "Amara",
+ "text": "Current arrival packet acknowledged.",
+ "delivery": "radio",
+ "prompt": "[calm, precise] Current arrival packet acknowledged.",
+ "chosen_take": 1,
+ "seconds": 2.25,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/2zMAJmuBci9SIUNEeBDA/Va9zPjIFpRGtpXgiQT1i/content.mp3",
+   "heard": "Current Arrival Packet acknowledged.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/oqQVcYYyyg5Uq0FlUEI8/fkLNQUC3dR40d2G7wTca/content.mp3",
+   "heard": "Current arrival packet acknowledged.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S06-L04.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH08-S06-L04.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH07-S02-L04",
+ "speaker": "Rafi",
+ "text": "Five names. Five places inside.",
+ "delivery": "live",
+ "prompt": "[steady, clear] Five names. Five places inside.",
+ "chosen_take": 1,
+ "seconds": 3.23,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/vod5w4fDS0DugXaBWQNh/KDHOGUuAQ8PwN9J7t5K4/content.mp3",
+   "heard": "Five names. Five places inside.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/Zc8c4tYVXb6RRISzbBUZ/IY1v5P0NVQpmseA4qgzK/content.mp3",
+   "heard": "Five names. Five places inside.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH07-S02-L04.mp3",
+ "game_file": "game/assets/audio/voice/Rafi/VO_EX-CH07-S02-L04.ogg"
+}

@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH05-S08-L02",
+ "speaker": "Kai",
+ "text": "The dust kept a diary.",
+ "delivery": "live",
+ "prompt": "[lightly amused, confident] The dust kept a diary.",
+ "chosen_take": 1,
+ "seconds": 1.92,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/yM56R6DpoD4o70lDdN8I/PEEjVDIBcP6q75IwtN3g/content.mp3",
+   "heard": "The dust kept a diary.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/b981cf22f8fd4439b151b5a9d718bd06/content_generation/pZX8akIecTrEKCdedNFJ/ZGg79SROBDbIchea1O6B/content.mp3",
+   "heard": "The dust kept a diary.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH05-S08-L02.mp3",
+ "game_file": "game/assets/audio/voice/Kai/VO_EX-CH05-S08-L02.ogg"
+}
