@@ -1074,7 +1074,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Discoveries enter the saved knowledge and evidence state (bug B16)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "atik/codex",
    "deps": [
     "M0-02"
@@ -1090,7 +1090,7 @@
     "execution/SYS_06_DIALOGUE_KNOWLEDGE.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "run_tests.sh: 26/26 suites passed; final campaign_knowledge 41 checks; normal/150% rendered Journal screenshots production/qa/evidence/M1-26_journal_*.png; production/review/execution/M1-26.md",
    "updated": "2026-11-04",
    "prompt": "Problem (BUGHUNT B16): operations set local completion flags only; knowledge, knowledge_flags and acquired_evidence_ids never change, the\nJournal shows the startup list, and the HUD reads raw dialogue, bypassing DialogueService knowledge requirements.\nDo: grant the canonical evidence/knowledge ids at the owning operation (ids from the content catalog), save and restore them, render all\ndialogue through DialogueService so knowledge-gated lines (e.g. Noor's identity only from CH05) are respected, and refresh the Journal.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests: an evidence operation adds its id, survives a JSON save/load, and a gated line stays hidden until then."
   },

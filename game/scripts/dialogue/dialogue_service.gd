@@ -48,6 +48,12 @@ func lines_for_scene(scene_id: String, acquired_flags: Array = [], include_locke
 			line["available"] = false
 			line["text"] = ""
 			line["line"] = ""
+			line["speaker"] = "Unknown source"
+			line["speaker_label"] = "Unknown source"
+			line["speaker_identity"] = {}
+			line["speaker_id"] = "unknown"
+			line["source_speaker"] = ""
+			line["voice_file"] = ""
 			line["locked_reason"] = "Source not acquired yet."
 			result.append(line)
 	return result
@@ -61,7 +67,7 @@ func caption_for_line(line_id: String, acquired_flags: Array = []) -> Dictionary
 			"available": false,
 			"line_id": line_id,
 			"text": "",
-			"speaker": String(line.get("speaker_label", "")),
+			"speaker": "Unknown source",
 			"origin": String(line.get("origin", "")),
 			"origin_label": String(line.get("origin_label", "")),
 			"reason": "Source not acquired yet.",
@@ -85,7 +91,7 @@ func transcript(acquired_flags: Array = [], acknowledged_line_ids: Array = []) -
 		if not raw_line is Dictionary:
 			continue
 		var line: Dictionary = raw_line
-		if not line_available(line, acquired_flags):
+		if not acknowledged.has(String(line.get("id", ""))) or not line_available(line, acquired_flags):
 			continue
 		var entry := caption_for_line(String(line.get("id", "")), acquired_flags)
 		entry["acknowledged"] = acknowledged.has(String(line.get("id", "")))

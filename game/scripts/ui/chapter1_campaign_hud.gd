@@ -73,6 +73,7 @@ func refresh_after_action(result: Dictionary) -> void:
 	_forecast = {}
 	_forecast_key = ""
 	if runtime != null:
+		_dialogue_index = _first_unacknowledged_line()
 		_render_caption()
 		_build_targets()
 		_refresh_query()

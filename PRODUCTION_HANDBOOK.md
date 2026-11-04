@@ -299,6 +299,8 @@ Optional opening (from the gameplay entry flow): mustard fields to the Moon cham
 
 ## 10. Status (latest first)
 
+**4 Nov 2026 — Saved discoveries and caption gates (board M1-26, Atik/Codex):** successful physical operations now atomically acquire canonical scene records with observed operation labels. Journal queries, JSON checkpoints, identity/relay knowledge flags and the acknowledged-only backlog use that saved state. Campaign captions and director acknowledgements enforce DialogueService requirements; see [M1-26.md](production/review/execution/M1-26.md).
+
 **4 Nov 2026 — Crew presence (board M1-17, Atik/Codex):** roster-bound cached bodies now accompany the authored viewpoint, reuse the player character setup, block movement, listen/talk/look at the displayed speaker and pause together. Safe Room seating and Earth-screen portraits are integrated; Ferreira’s portrait derives from her approved GLB. See [M1-17.md](production/review/execution/M1-17.md) for checks, screenshots and the separate EVA/environment/contact limits.
 
 **4 Nov 2026 — Outpost Status and shared forecasts (board M1-28, Atik/Codex):** four persistent HUD cards show E, A/W, shelter S/exposure Z and crops C/rations R from the director query. Shelter uses the simulation’s existing capped upgrade-aware calculation; display thresholds live in JSON. Real-route forecasts run on a restored checkpoint copy and never commit live progress. Four meters remain visible above reflowing reading panels at 150% text; details, screenshots and verification: [M1-28.md](production/review/execution/M1-28.md). Interactive puzzle choices, learner/device/controller review and physical screen-reader checks remain separate work.

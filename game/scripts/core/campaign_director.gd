@@ -1,6 +1,7 @@
 extends RefCounted
 class_name CampaignDirector
 
+const Knowledge = preload("res://scripts/dialogue/knowledge_service.gd")
 const StateScript = preload("res://scripts/core/campaign_state.gd")
 const ResultScript = preload("res://scripts/core/command_result.gd")
 const SimulationScript = preload("res://scripts/simulation/expedition_simulation.gd")
@@ -124,6 +125,10 @@ func commit(command: Dictionary) -> Dictionary:
 		return result
 	_checkpoint = _state.duplicate(true)
 	var next: Dictionary = result.get("snapshot", _state).duplicate(true)
+	for event in Knowledge.grant_operation(next, command):
+		event["state_revision"] = current_revision + 1
+		event["scene_id"] = command.owning_scene_id
+		result["events"].append(event)
 	next["state_revision"] = current_revision + 1
 	var receipt_id := String(result.get("receipt_id", ""))
 	if receipt_id.is_empty():
@@ -231,8 +236,8 @@ func _transition(command: Dictionary, should_commit: bool) -> Dictionary:
 		return result
 	if verb == "acknowledge_line":
 		var line_id := String(payload.get("line_id", ""))
-		if line_id.is_empty():
-			return _reject("Acknowledging a line requires a stable line_id.")
+		if not Knowledge.line_allowed(line_id, _state.knowledge_flags, String(command.get("owning_scene_id", ""))):
+			return _reject("This caption is unavailable until its owning evidence has been acquired.")
 		var result := _generic_result(revision, should_commit, "dialogue_acknowledged")
 		result["deltas"] = [{"field": "acknowledged_line_ids", "value": line_id}]
 		result["next_phase"] = String(_state.get("scene_phase", "planning"))

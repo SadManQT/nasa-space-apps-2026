@@ -17,6 +17,7 @@ const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 @export var initial_snapshot: Dictionary = {}
 @export var initial_accessibility: Dictionary = {}
 
+var _dialogue: CampaignDialogueService
 var content: Dictionary = {}
 var director: CampaignDirector
 var route: RefCounted
@@ -33,6 +34,7 @@ var save_path: String = SaveScript.DEFAULT_PATH
 
 func _ready() -> void:
 	content = ContentScript.load_full()
+	_dialogue = CampaignDialogueService.new(content)
 	var validation := ContentScript.validate_full(content)
 	if not bool(validation.get("valid", false)):
 		_fail_startup("Campaign content could not be verified.")
@@ -99,7 +101,7 @@ func current_scene_data() -> Dictionary:
 	return ContentScript.scene_by_id(content, route.current_scene_id())
 
 func current_dialogue() -> Array:
-	return current_scene_data().get("dialogue", [])
+	return _dialogue.lines_for_scene(route.current_scene_id(), director.snapshot().get("knowledge_flags", []))
 
 func targets_for_current_scene() -> Array:
 	return _targets_for_scene()
@@ -114,7 +116,7 @@ func query() -> Dictionary:
 	result["room_id"] = route.current_room_id()
 	result["objective"] = current_scene_data().get("playerActions", [])
 	result["dialogue_lines"] = current_dialogue()
-	result["journal_entries"] = director.snapshot().get("knowledge", [])
+	result["journal_entries"] = CampaignKnowledge.journal(director.snapshot())
 	result["accessibility"] = director.snapshot().get("accessibility", {})
 	var puzzle_ids: Array = []
 	for target in targets_for_current_scene():

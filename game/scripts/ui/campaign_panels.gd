@@ -242,15 +242,16 @@ func _render_active_panel() -> void:
 		_render_dialogue(value)
 	elif _active_panel == "puzzle":
 		_render_puzzle(value)
+	elif _active_panel == "journal_discovery":
+		_render_journal(value)
+		_source_button("SOURCES · ALL DATASETS", func(): open_panel("sources", {"ids": []}))
 	elif _active_panel == "sources":
 		_render_sources()
 	elif _active_panel == "data_card":
 		_render_card(value)
 	else:
 		_render_data(value)
-		if _active_panel == "journal_discovery":
-			_source_button("SOURCES · ALL DATASETS", func(): open_panel("sources", {"ids": []}))
-		elif _active_panel in ["outcome", "mission_table"]:
+		if _active_panel in ["outcome", "mission_table"]:
 			_render_puzzle_sources(_query.get("source_puzzle_ids", []))
 	_apply_accessibility()
 	_layout_panel()
@@ -560,3 +561,15 @@ func _render_card(value) -> void:
 		_card_text("LIMITS\n" + String(card.get("boundary", "")), true)
 		_card_text("SOURCE\n" + String(card.get("url", "")) + "\n" + String(card.get("citation", "")) + "\nRetrieved: " + String(card.get("retrieved", "")) + "\nLicence: " + String(card.get("licence", "")))
 	_source_button("BACK TO ALL SOURCES", func(): open_panel("sources", {"ids": []}))
+
+func _render_journal(value) -> void:
+	if not value is Array or value.is_empty():
+		_card_text("New discoveries appear here after you complete their evidence operations.")
+		return
+	for entry in value:
+		if not entry is Dictionary:
+			continue
+		_card_text(String(entry.get("title", "Acquired record")).to_upper(), true)
+		_card_text(String(entry.get("evidence_label", "Recorded observation")))
+		for observation in entry.get("observations", []):
+			_card_text(String(observation.get("text", "")))
