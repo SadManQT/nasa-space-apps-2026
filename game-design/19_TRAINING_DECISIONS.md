@@ -1,5 +1,8 @@
 # 19 — Mission Training Decisions (`EX-M0101`–`EX-M0804`)
 
+> **Superseded for implementation (4 Nov 2026, board `M1-38`). Do not build from §0–§9 of this file.** A canon check found that this document does not match the canon it cites: it uses a non-canon cast (Ayla, Sofia, Liam, Noah instead of Kai, Amara, Mei, Rafi), a non-canon crop ("Lal Shak" instead of Alo and Tara, *Brassica rapa*), a 2059 date (canon is April 2046 to April 2047), puzzle contracts that are not those in [`08_PUZZLE_DESIGNS.md`](08_PUZZLE_DESIGNS.md) (for example P-01 here is a heat/light/oxygen/water slider puzzle; in 08 it is *Commission and Plant*), mission titles that are not the ones in `story-data.json`, and Data Card fixture IDs that do not exist in `game/resources/data/nasa/`.
+> Use [`22_PUZZLE_CLUE_DESIGN.md`](22_PUZZLE_CLUE_DESIGN.md) instead: §3–§10 give every mission's decision, four-demand Outpost Status, real Data Card fixtures, success / partial / failure with retry, and debrief, all checked against `STORY_FULL.md` and 08. §10 below has the same problem: the "locked numbers" it lists (for example `41 L/day`, `320 L` water wall, `500 kW` beacon) are not in 08, so its proposals do not apply; the valid proposals are in [`docs/SCIENCE_AND_DATA.md`](../docs/SCIENCE_AND_DATA.md) §B3 and in 22 §11. Whether to rewrite or retire this file is board task `M1-41`.
+
 - **Date:** 2026-11-04
 - **Board Task:** `M1-27` (Requirements alignment and the training decision for every mission)
 - **Companion Matrix:** [`docs/REQUIREMENTS_ALIGNMENT.md`](../docs/REQUIREMENTS_ALIGNMENT.md)
