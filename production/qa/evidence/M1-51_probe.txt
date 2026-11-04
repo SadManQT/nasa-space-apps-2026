@@ -1,0 +1,34 @@
+M1-51 probe, 2026-11-05 02:45
+ogv: /Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/game/assets/cutscenes/CS-01_Arrival.ogv ( 13M)
+duration: 14.208333 s (master 14.166667 s)
+hard cuts (scdet t=10): 0
+exterior 0-5.4 s:
+  [Parsed_astats_1 @ 0xabd028c00] Max level: 0.000011
+  [Parsed_astats_1 @ 0xabd028c00] Peak level dB: -85.421077
+  [Parsed_astats_1 @ 0xabd028c00] RMS level dB: -114.712554
+interior 5.4 s-end:
+  [Parsed_astats_1 @ 0xb7f011140] Peak level dB: -18.351183
+  [Parsed_astats_1 @ 0xb7f011140] RMS level dB: -31.055430
+       [8] _run (/Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/production/qa/evidence/M1-51_capture.gd:29)
+       [8] _run (/Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/production/qa/evidence/M1-51_capture.gd:29)
+       [8] _run (/Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/production/qa/evidence/M1-51_capture.gd:29)
+       [8] _run (/Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/production/qa/evidence/M1-51_capture.gd:29)
+       [8] _run (/Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/production/qa/evidence/M1-51_capture.gd:29)
+       [9] _run (/Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/production/qa/evidence/M1-51_capture.gd:29)
+       [9] _run (/Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/production/qa/evidence/M1-51_capture.gd:29)
+       [9] _run (/Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/production/qa/evidence/M1-51_capture.gd:29)
+       [9] _run (/Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/production/qa/evidence/M1-51_capture.gd:29)
+PASS a new expedition opens with CS-01
+PASS CS-01 plays as video from the .ogv
+M1-51 CS-01 stream length: 14.21 s
+PASS the cold open runs 12-15 s (got 14.21 s)
+M1-51 evidence: /Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/game/../production/qa/evidence/M1-51_film_exterior_silent.png (0)
+M1-51 evidence: /Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/game/../production/qa/evidence/M1-51_film_slate_fans.png (0)
+M1-51 evidence: /Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/game/../production/qa/evidence/M1-51_film_title_gold_band.png (0)
+PASS every beat was captured (missing: [])
+PASS the film ran to its end on its own
+PASS the film speaks none of the EX-CH01-S01 lines (no caption cues)
+PASS after the film the first scene line is voiced in play
+PASS the commons fan bed carries on from the film's fans
+M1-51 evidence: /Users/sadmansakib/nasa-space-apps-2026/.night/gslot1/game/../production/qa/evidence/M1-51_after_film_first_line.png (0)
+CS-01 COLD OPEN CAPTURE RESULT: PASS (0 failures)

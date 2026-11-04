@@ -14,24 +14,7 @@
       "skip_completes_predicate": false,
       "source": "game/assets/cutscenes/CS-01_Arrival.ogv",
       "trigger": "scene_enter",
-      "caption_cues": [
-        {
-          "at": 14.0,
-          "line_id": "EX-CH01-S01-L01"
-        },
-        {
-          "at": 17.6,
-          "line_id": "EX-CH01-S01-L02"
-        },
-        {
-          "at": 22.0,
-          "line_id": "EX-CH01-S01-L03"
-        },
-        {
-          "at": 32.0,
-          "line_id": "EX-CH01-S01-L04"
-        }
-      ]
+      "caption_cues": []
     },
     {
       "id": "CS-02",

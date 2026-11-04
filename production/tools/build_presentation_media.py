@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[2]
 GAME = ROOT / "game"
 OUT = GAME / "resources/campaign/content/presentation_media.json"
 CATALOG = json.loads((GAME / "resources/campaign/content/campaign_catalog.json").read_text())
-SPEC_DIRS = [ROOT / "production/cutscenes/v7/src", ROOT / "production/cutscenes/v8/src"]
+SPEC_DIRS = [ROOT / "production/cutscenes/v8/src", ROOT / "production/cutscenes/v7/src"]   # the newest edition of a cutscene wins
 
 
 def res(path):
