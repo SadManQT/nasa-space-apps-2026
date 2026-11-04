@@ -8,9 +8,9 @@ On 26 Oct Codex audited all 23 shots against a stricter checklist (flag on every
 
 | Shot | Claude | Codex | Fixes made |
 |---|---|---|---|
-| CS-01-A | PASS | PASS (audit: MINOR) | |
+| CS-01-A | PASS | PASS (audit: MINOR) | M1-45 (5 Nov): the v7 exterior repainted in post with the NASA vertical arrays and a 0.53° Sun disc (`tools/repaint_vsat_arrays.py`); frames every 1 s in `M1-45_CS-01-A_every_1s.png`, Sun crops in `M1-45_CS-01-A_sun_before_after.png` |
 | CS-01-B | PASS | FIX rejected twice | Ferreira's sheet used as reference so her hair stays dark |
-| CS-02-A | PASS | FIX accepted (audit) | Horizon glow graded to black in post: `tools/clear_stars.py --grade-sky 0.45` |
+| CS-02-A | PASS | FIX accepted (audit) | Horizon glow graded to black in post: `tools/clear_stars.py --grade-sky 0.45`. M1-45 (5 Nov): the v7 exterior repainted with the NASA vertical arrays, whose sunlit edges fade out by 5.5 s as the plate's last light does; frames every 1 s in `M1-45_CS-02-A_every_1s.png`, before/after in `M1-45_arrays_before_after.png` |
 | CS-02-B | PASS | PASS | Other take picked (first had stars over sunlit ground) |
 | CS-03-A | PASS | PASS | Regenerated (desert window, flower already open) |
 | CS-03-B | PASS | PASS | Regenerated with Rafi, recorder edited to match PR_Recorder2034 |

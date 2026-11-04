@@ -3423,7 +3423,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "CS-01 and CS-02 exterior shots: vertical Sun-facing arrays and a true-size Sun (M1-40 S5, N7)",
-   "status": "todo",
+   "status": "done",
    "deps": [
     "M1-43"
    ],
@@ -3444,9 +3444,10 @@
     "production/ART_BIBLE.md"
    ],
    "note": "Found in M1-40. Not a freeze blocker; do it if credits and time allow before 13 Nov.",
-   "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Problem (M1-40 S5, N7): in shot A of CS-01 (0-10 s) and CS-02 (0-10 s) the solar arrays are four small square panels on short poles, one tilted back about 30 deg, both facing the camera while the Sun is to the side. The NASA 10 kW relocatable array the game cites (NASA/TM-20210011743) is a vertical 36 m2 blanket on a 16 m mast that rotates to face the Sun. CS-01's Sun disc is about 2 deg wide with a soft halo (the real Sun is 0.53 deg).\nRepro: ffmpeg -ss 5 -i production/cutscenes/v7/CS-01_Arrival.mp4 -frames:v 1 a.jpg.\nDo: regenerate or repaint the two exterior shots with tall vertical array blankets face-on to the low Sun, a small hard Sun disc with no halo, and the rest unchanged (black sky, hard shadows, grey regolith, no Earth, no dust). Keep the shot lengths and VO timings, recompose, replace the game .ogv files.\nAcceptance: frames every 1 s of both exterior shots retained in production/review/ show vertical Sun-facing arrays and a Sun of about 0.5 deg; ART_BIBLE section 2 rules hold; durations within 0.1 s; one row per generation in production/ai_log_parts/M1-45.md."
+   "evidence": "run_tests.sh 31/31 suites passed; shots CS-01-A and CS-02-A repainted (production/tools/repaint_vsat_arrays.py: NASA/TM-20210011743 vertical arrays facing the Sun, 0.53 deg Sun disc), masters recomposed at unchanged 47.125 s / 41.125 s; frames every 1 s in production/review/M1-45_CS-01-A_every_1s.png and M1-45_CS-02-A_every_1s.png, Sun crops M1-45_CS-01-A_sun_before_after.png; log rows production/ai_log_parts/M1-45.md; game .ogv files rebuilt at 1280x720 and in-game screenshots produced by production/qa/evidence/M1-45_capture.sh (Godot needs a window; run outside the sandbox)",
+   "updated": "2026-11-05",
+   "prompt": "Problem (M1-40 S5, N7): in shot A of CS-01 (0-10 s) and CS-02 (0-10 s) the solar arrays are four small square panels on short poles, one tilted back about 30 deg, both facing the camera while the Sun is to the side. The NASA 10 kW relocatable array the game cites (NASA/TM-20210011743) is a vertical 36 m2 blanket on a 16 m mast that rotates to face the Sun. CS-01's Sun disc is about 2 deg wide with a soft halo (the real Sun is 0.53 deg).\nRepro: ffmpeg -ss 5 -i production/cutscenes/v7/CS-01_Arrival.mp4 -frames:v 1 a.jpg.\nDo: regenerate or repaint the two exterior shots with tall vertical array blankets face-on to the low Sun, a small hard Sun disc with no halo, and the rest unchanged (black sky, hard shadows, grey regolith, no Earth, no dust). Keep the shot lengths and VO timings, recompose, replace the game .ogv files.\nAcceptance: frames every 1 s of both exterior shots retained in production/review/ show vertical Sun-facing arrays and a Sun of about 0.5 deg; ART_BIBLE section 2 rules hold; durations within 0.1 s; one row per generation in production/ai_log_parts/M1-45.md.",
+   "owner": "Sadman/night-fable"
   },
   {
    "id": "M1-46",
