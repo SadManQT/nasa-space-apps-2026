@@ -15,13 +15,12 @@ Usage limits: the account sleeps until the reset time it printed; the lane's nex
 Accounts come from GoCode's saved profiles through ~/.local/bin/gocode-run (approved by Sadman, 5 Nov 2026).
 Log: production/session-logs/night_shift.log (local). Morning summary: production/session-logs/night_summary.md.
 """
-import datetime as dt, json, os, re, subprocess, sys, threading, time
+import datetime as dt, fcntl, json, os, re, subprocess, sys, threading, time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 NIGHT = ROOT / ".night"
 LOGDIR = ROOT / "production/session-logs"
-STOP = LOGDIR / "STOP_NIGHT"
 GODOT = "/Applications/Godot.app/Contents/MacOS/Godot"
 GOCODE_RUN = str(Path.home() / ".local/bin/gocode-run")
 AGY_SETTINGS = str(Path.home() / ".local/share/night_shift/agy_settings.json")
@@ -29,6 +28,7 @@ SLOTS = int(os.environ.get("SLOTS", "2"))
 LANES_ONLY = [l for l in os.environ.get("LANES_ONLY", "").split(",") if l]  # e.g. antigravity,gemini,any
 SLOT_PREFIX = os.environ.get("SLOT_PREFIX", "slot")
 SUMMARY = os.environ.get("SUMMARY", "night_summary.md")
+STOP = LOGDIR / ("STOP_NIGHT" if SLOT_PREFIX == "slot" else f"STOP_NIGHT_{SLOT_PREFIX}")
 CLAIMS = NIGHT / "claims"  # one directory per task: an atomic lock shared by every running night shift
 DEADLINE = time.time() + float(os.environ.get("HOURS", "12")) * 3600
 WORKER_TIMEOUT = 4 * 3600
@@ -153,6 +153,12 @@ project's repository; work only here). Do board task {tid} — exactly this one 
 6. Record: one row in production/AI_PROMPT_LOG.md (tool = your engine and model, "night shift"), a dated line in
    PRODUCTION_HANDBOOK.md §10 if project status changed, then python3 production/plan/board.py done {tid} --evidence "<proof>".
 7. Never run git commit, push, reset, checkout, rebase, stash or clean.
+8. If your sandbox cannot open a window (windowed Godot exits 134/SIGABRT in _RegisterApplication), do NOT block the task
+   for screenshots or windowed measurements: write production/qa/evidence/{tid}_capture.sh — a bash script that produces
+   every needed screenshot/probe output into production/qa/evidence/ ({GODOT} --path game ...) — and say so; the night-shift
+   script runs it outside the sandbox before testing and review. Only block for things a script cannot do.
+9. game/tools/test_performance_runtime.gd has wall-clock checks that can fail when the machine is busy; rerun before
+   concluding a timing failure is real.
 Finish with: what changed, the last line of run_tests.sh, evidence files, anything Sadman must check."""
     if fix:
         p += f"\n\nTHIS IS A FIX ROUND for work already in this checkout (see `git status` and `git diff`). Fix exactly these problems, re-verify, keep the task's board entry correct:\n{fix}"
@@ -169,13 +175,32 @@ Reply with exactly one line "VERDICT: PASS" or "VERDICT: FIX", then for FIX a nu
 
 
 def tests_pass(slot):
-    try:
-        _, out = sh(["game/tools/run_tests.sh"], slot, timeout=3600, env={**os.environ, "GODOT": GODOT})
-    except subprocess.TimeoutExpired:
-        return False, "run_tests.sh timed out"
-    last = [l for l in out.splitlines() if "suites passed" in l]
-    ok = bool(last) and re.search(r"(\d+)/\1 suites passed", last[-1]) is not None
-    return ok, "\n".join(out.splitlines()[-25:])
+    """Full suite, one run at a time across every night shift (timing checks hate load); one retry for flakes."""
+    CLAIMS.mkdir(parents=True, exist_ok=True)
+    out = ""
+    for attempt in range(2):
+        with open(NIGHT / "tests.lock", "w") as lk:
+            fcntl.flock(lk, fcntl.LOCK_EX)
+            try:
+                _, out = sh(["game/tools/run_tests.sh"], slot, timeout=3600, env={**os.environ, "GODOT": GODOT})
+            except subprocess.TimeoutExpired:
+                out = "run_tests.sh timed out"
+        last = [l for l in out.splitlines() if "suites passed" in l]
+        if last and re.search(r"(\d+)/\1 suites passed", last[-1]):
+            return True, "\n".join(out.splitlines()[-25:])
+    return False, "\n".join(out.splitlines()[-25:])
+
+
+def run_capture(slot, tid):
+    """Run the worker's capture script outside the sandbox (screenshots, windowed probes)."""
+    cap = slot / f"production/qa/evidence/{tid}_capture.sh"
+    if cap.exists():
+        log(f"[{slot.name}] running {cap.name} outside the sandbox")
+        try:
+            _, out = sh(["bash", str(cap)], slot, timeout=2400, env={**os.environ, "GODOT": GODOT})
+        except subprocess.TimeoutExpired:
+            out = "capture script timed out"
+        (slot / f"production/qa/evidence/{tid}_capture_output.txt").write_text(out[-20000:])
 
 
 def land(slot, tid, title, status):
@@ -250,7 +275,9 @@ def do_task(slot, tid, lane):
             continue  # same round again on the lane's next account
         status = task_info(slot, tid).get("status")
         if status == "blocked":
-            return "blocked", task_info(slot, tid).get("note", "") or "blocked by the worker"
+            t = task_info(slot, tid)
+            return "blocked", t.get("blocker") or t.get("note") or "blocked by the worker"
+        run_capture(slot, tid)
         green, tail = tests_pass(slot)
         if not green:
             fix = f"run_tests.sh is not green:\n{tail}"
@@ -285,7 +312,9 @@ def slot_loop(n):
                 return
             title = task_info(slot, tid).get("title", tid)
             outcome, note = do_task(slot, tid, lane)
-            if outcome in ("done", "blocked"):
+            if outcome == "blocked":  # keep any partial work off main; land only the block and its reason
+                park(slot, tid, note)
+            elif outcome == "done":
                 ok, err = land(slot, tid, title, outcome)
                 if not ok:
                     outcome, note = "failed", f"could not land: {err}"
