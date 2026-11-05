@@ -14,6 +14,7 @@ var _speaker := ""
 var _seats: Node3D
 var _screen: Sprite3D
 var _screen_label: Label3D
+var _screen_backdrop: Sprite3D
 
 func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3) -> PlayerController:
 	room = next_room
@@ -106,10 +107,14 @@ func present_line(line: Dictionary, reduced_motion: bool) -> void:
 		var earth := _speaker in ["rao", "ferreira"] and not local_ids.has(_speaker)
 		_screen.visible = earth
 		_screen_label.visible = earth
+		_screen_backdrop.visible = false  # the Earth room shows only during a call (_show_earth_desk)
 		if earth:
 			var path := "res://assets/ui/portraits/CH_%s_screen.png" % _speaker.capitalize()
 			_screen.texture = load(path) if ResourceLoader.exists(path) else null
-			_screen_label.text = "%s / %s" % [_speaker.capitalize(), line.get("origin_label", "EARTH SCREEN")]
+			_show_earth_desk(String(line.get("origin_label", "")))
+			var origin := String(line.get("origin_label", ""))
+			var origin_word := String(UiDesign.text().get("dialogue", {}).get("origins", {}).get(origin, origin.capitalize()))
+			_screen_label.text = _speaker.capitalize() + (" · " + origin_word if not origin_word.is_empty() else "")
 
 func react(result: Dictionary, reduced_motion: bool) -> void:
 	if reduced_motion or not result.get("accepted", false) or result.get("duplicate", false) or result.get("result", {}).get("duplicate", false) or room.room_id == "LOC-04":
@@ -133,14 +138,24 @@ func _add_seat(at: Vector3) -> void:
 	_seats.add_child(mesh)
 	ToonMaterials.apply_to_tree(mesh, false, false)
 
+## The Earth screen: EN_EarthDesk (the room behind the caller) as a 16:9 backdrop,
+## the caller's portrait over it, and the caller's name with the source word.
 func _build_screen() -> void:
 	_screen = null
 	_screen_label = null
+	_screen_backdrop = null
 	if room.room_id != "LOC-01":
 		return
+	var center_y := float(UiKit.kit().get("earth_screen", {}).get("center_y_m", 1.78))
+	_screen_backdrop = Sprite3D.new()
+	_screen_backdrop.name = "EarthDesk"
+	_screen_backdrop.position = Vector3(0, center_y, -5.21)
+	_screen_backdrop.shaded = false
+	_screen_backdrop.transparent = false  # opaque pass: nothing behind the screen (the wall sign) shows through
+	room.add_child(_screen_backdrop)
 	_screen = Sprite3D.new()
 	_screen.name = "EarthPortrait"
-	_screen.position = Vector3(0, 2, -5.2)
+	_screen.position = Vector3(0, center_y, -5.2)
 	_screen.pixel_size = 0.004
 	_screen.shaded = false
 	room.add_child(_screen)
@@ -148,6 +163,28 @@ func _build_screen() -> void:
 	_screen_label.position = Vector3(0, 0.9, -5.15)
 	_screen_label.font_size = 32
 	_screen_label.pixel_size = 0.005
+	# Caller and caption are both see-through; sorting by centre distance alone put the portrait over
+	# the caption whenever the camera stood close to the screen, so the caption always draws last.
+	_screen_label.render_priority = 1
 	room.add_child(_screen_label)
+	for layer in [_screen_backdrop, _screen, _screen_label]:
+		layer.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF  # a lit screen throws no shadow on its wall
 	_screen.hide()
 	_screen_label.hide()
+	_screen_backdrop.hide()
+
+## Puts EN_EarthDesk behind the portrait (the archive variant for a stored
+## recording) and fits the portrait to the backdrop's height, so Rao and
+## Ferreira appear on the same screen at the same size.
+func _show_earth_desk(origin_label: String) -> void:
+	var desk: Dictionary = UiKit.kit().get("earth_screen", {})
+	var path := String(desk.get("variants", {}).get(origin_label.to_upper(), desk.get("base", "")))
+	var width_m := float(desk.get("width_m", 4.8))
+	var texture: Texture2D = load(path) if ResourceLoader.exists(path) else null
+	_screen_backdrop.texture = texture
+	_screen_backdrop.visible = texture != null
+	if texture != null:
+		_screen_backdrop.pixel_size = width_m / float(texture.get_width())
+	var height_m := width_m * (float(texture.get_height()) / float(texture.get_width()) if texture != null else 9.0 / 16.0)
+	if _screen.texture != null:
+		_screen.pixel_size = height_m / float(_screen.texture.get_height())

@@ -244,9 +244,9 @@ Status: ✅ final · 🟡 in progress · ♻️ reuse candidate already exported
 
 | ID | Asset | Scenes | Status |
 |---|---|---|---|
-| PL_Alo (A-05) | Seed, sprout, bud, first bloom, flowering, pollinated, pods, mature-dry; frost and thirst stress states; sway shader | CH01-S03 → CH03-S10 | 🟡 bud, bloom and pods installed; early/stress states, sway and toon treatment pending |
+| PL_Alo (A-05) | Seed, sprout, bud, first bloom, flowering, pollinated, pods, mature-dry; frost and thirst stress states; sway shader | CH01-S03 → CH03-S10 | 🟡 seed, cotyledon and true-leaf seedling (PL_Alo_Sprout, with thirst and cold posture morphs; M1-07), bud, bloom and pods installed; later stress states, sway and toon treatment pending |
 | PR_PressedPetal (A-30) | Alo's archived petal in a dated sleeve | CH03-S10 → CH08-S12 | ⬜ |
-| PL_Tara (A-06) | Same stages, green stem, own label; pods, senescent and dry states for the 31 May farewell; nameplate and working-stock envelope (M3-99) | CH01-S04 → CH03-S12 (31 May) | 🟡 bloom installed; other stages, own label and toon treatment pending |
+| PL_Tara (A-06) | Same stages, green stem, own label; pods, senescent and dry states for the 31 May farewell; nameplate and working-stock envelope (M3-99) | CH01-S04 → CH03-S12 (31 May) | 🟡 seedling stages (PL_Tara_Sprout; M1-07) and bloom installed; other stages, own label and toon treatment pending |
 | PL_Descendants | 12-position tray; CH04 sample of 7 purple + 5 green stems; renewing mixed final garden | CH03-S11 → CH08-S12 | ⬜ |
 | PL_ZeroSeedlings | Frozen 2034 trays: young unflowered seedlings with curled leaves only | CH03-S06/S07, CH05-S04 | 🟡 `PL_ZeroSeedlingTray` installed; toon/staging pending |
 | PL_Cotton (A-41) | Seed, sprout, young plant, alive at first light (no boll) | CH05-S12 → CH08-S12 | 🟡 young plant installed; seed/sprout/cassette and toon pending |
@@ -270,7 +270,7 @@ Status: ✅ final · 🟡 in progress · ♻️ reuse candidate already exported
 | EN_RelayRoad (A-45) | 120 km road as five short playable segments; repeaters R1–R3; marker-two service pad | CH08-S02 → S06, S11 | ⬜ |
 | EN_Malapert (A-44) | Summit relay: controller housing, isolator, local antenna, Earth dish, tether platform | CH08-S06 → S10 | ⬜ |
 | EN_NoorRooftop (A-09) | Modest Dhaka rooftop with plants at night (screen scene) | CH08-S10, S12 | ⬜ |
-| EN_EarthDesk (A-61) | Rao's compact Earth control desk (screen) | CH01–08 | ⬜ |
+| EN_EarthDesk (A-61) | Rao's compact Earth control desk (screen) | CH01–08 | 🟡 built (M1-07): Rao's room as a Blender render with a painted grade, live and archive variants, behind Ferreira on the commons Earth screen; sheet awaiting Sadman's approval |
 
 ### 8.4 Props by chapter
 
@@ -286,7 +286,7 @@ Status: ✅ final · 🟡 in progress · ♻️ reuse candidate already exported
 ### 8.5 Animation, UI and audio
 
 - **Animation (A-48–A-51):** locomotion (walk, run, idle, turn, brace, sit), care hands (plant, brush, scan, count seeds, sleeve petal), repair and vehicle (valve, clamp, isolate, connector, battery swap, enter rover, tether), gestures (offer lamp, place mug, roll-call answer, grief pause, group photo). Tripo presets (v1.0 rig, up to 5 per call) or retargeting in Godot.
-- **UI (A-53/A-54):** HUD, Mission Table planning and forecast/preview, decision review, journal (Mission/People/Garden/Evidence/Science), evidence board, debrief, printable Class-mode role cards, settings and accessibility (captions, 150% text, timer-free). English only; icons always paired with words.
+- **UI (A-53/A-54):** HUD, Mission Table planning and forecast/preview, decision review, journal (Mission/People/Garden/Evidence/Science), evidence board, debrief, printable Class-mode role cards, settings and accessibility (captions, 150% text, timer-free). English only; icons always paired with words. The shared kit (39 SVG line icons with their words, meters, source chips, role markers, state cards, `lla_theme.tres`) is built (M1-07); its sheet awaits Sadman's approval.
 - **Audio (A-55–A-57):** designed ElevenLabs voices for every speaking character (Noor has a younger archive voice and an older live voice); sound effects (fans, valves, water, doors, suit, rover, alarms; none airborne outside); score cues CUE-01 to CUE-12. Captions must carry the full story without VO.
 
 ## 9. Cutscene master list (final scene IDs)
@@ -317,6 +317,8 @@ Rules from the cinematic guide and the final story: cutscenes are short, embedde
 Optional opening (from the gameplay entry flow): mustard fields to the Moon chamber, 20–30 s, with no claim that Alo existed before the story.
 
 ## 10. Status (latest first)
+
+**6 Nov 2026 (night) — Chapter 1's last missing assets are built; M1-07 waits only for Sadman's approval of two sheets (Sadman/night-claude2, Opus 5.5):** Alo's and Tara's seedlings (PL_Alo_Sprout, PL_Tara_Sprout: seed, cotyledon and true-leaf stage nodes from the M3-99 sheet approved 5 Nov, on each plant's own pot) pass the asset gate (126 assets, 0 failing) and show in the garden by date through `PlantService.seedling_form` (true leaves from day 4, `biology.true_leaf_day`); the garden now preloads them with its other dated plant models, and the parsed-asset cache holds 20 scenes (was 16) so garden + power room + cast fit without the commons' props falling back to a main-thread decode (`test_performance_runtime` caught it). EN_EarthDesk is now Rao's own room rebuilt in Blender (display wall with the real near-side Moon, workstation rows, the warm lamp, soft focus, a painted grade), so Ferreira's cut-out portrait sits in the room Rao's portrait shows; the commons screen draws room, caller and caption in a fixed order, goes dark for local speech, stays clear of the wall sign and casts no shadow (`test_earth_screen.gd`). The UI kit sheet is captured at the 1080p reference in its own viewport (the parked capture had wrapped one letter per line), and kit icons now grow with 150 % text. Approve or change: [UI_Kit_sheet_v1.png](production/concept/ui_kit/UI_Kit_sheet_v1.png) and [EN_EarthDesk_sheet_v1.png](production/concept/earth_desk/EN_EarthDesk_sheet_v1.png) (decisions in each README; one combined answer is enough). No credits spent.
 
 **6 Nov 2026 (night) — science explainers complete for Chapters 1–8 (M1-60, M3-68, M3-77, Sadman/claude, Opus 5.5):** 19 clips (34–45 s, 1280×720) in `game/assets/explainers/science/`, registered in `explainers.json` with the missions whose data cards cite their NASA fixtures (`used_by`); every fixture a data card cites has a clip. All-ages captions, honest labels, fixture-only numbers (build.py check); the laser-mapping clip shows the real LOLA hillshade. Playing them from data cards and Journal → Science is Ramim's M1-72; the hint player (M1-64) plays them as hint level 2. M1-34 (LOLA terrain) landed the same night.
 

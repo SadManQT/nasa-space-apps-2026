@@ -19,3 +19,5 @@ VH_ReliefLander,models/reuse/lunar_lander.glb,--height,6.00,40000,2048,Relief la
 VH_ZeroAscent,models/reuse/lunar_module.glb,--height,9.00,40000,2048,Expedition Zero ascent vehicle (archive images)
 EN_ExteriorModule,models/reuse/spacecraft_module.glb,--longest,4.00,30000,2048,Exterior habitat module dressing
 PR_AnnexDrum,models/reuse/weathered_metal_drum.glb,--height,0.90,12000,1024,Expedition Zero annex debris
+PL_Alo_Sprout,concept/plants/build_sprout_glb.py (procedural seedling on the PL_Alo_Bud pot; M3-99 sheet approved 5 Nov 2026),--height,0.106,14000,2048,"seed, cotyledon and true-leaf stage nodes with Droop/Cup morphs; purple hypocotyl; CH01-S05 (11-17 Apr 2046)"
+PL_Tara_Sprout,concept/plants/build_sprout_glb.py (procedural seedling on the PL_Tara_Bloom pot; M3-99 sheet approved 5 Nov 2026),--height,0.127,14000,2048,"seed, cotyledon and true-leaf stage nodes with Droop/Cup morphs; green hypocotyl; CH01-S05 (11-17 Apr 2046)"

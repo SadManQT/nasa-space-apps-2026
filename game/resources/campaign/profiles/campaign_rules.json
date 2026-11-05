@@ -33,6 +33,7 @@
     "cotton_date": "2046-12-15 00:00 UTC",
     "pod_observation_date": "2046-05-08",
     "annual_completion_days": 40,
+    "true_leaf_day": 4,
     "working_stock": {
       "lineage_id": "LINEAGE-TARA-ALO",
       "cross": "Tara x Alo",

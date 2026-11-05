@@ -479,8 +479,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 1 missing assets: Alo's early stages, Earth desk, UI kit",
-   "status": "todo",
-   "owner": "",
+   "status": "blocked",
+   "owner": "Sadman/night-claude2",
    "deps": [],
    "paths": [
     "production/concept/",
@@ -495,9 +495,9 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-06",
    "prompt": "Goal: the remaining Chapter 1 registry rows exist: PL_Alo_Sprout (seed, sprout and seedling stages for planting and care), EN_EarthDesk\n(Ferreira's and Rao's Earth-screen backdrop), UI_Kit (icons, panel frames, meters in the approved palette).\nDo: concept sheets first and the user's approval (one combined approval message is fine), then generate/build per each execution prompt.\nPlants never have faces. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; registry updated; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
-   "blocker": "Night shift parked the work on branch night/M1-07: ",
+   "blocker": "Built and verified; waits only for Sadman's approval of two 2D sheets (one combined answer is fine): production/concept/ui_kit/UI_Kit_sheet_v1.png (UI kit look; 6 decisions in its README, incl. Rafi's role word) and production/concept/earth_desk/EN_EarthDesk_sheet_v1.png (Rao's room behind Earth-screen callers; 5 decisions in its README). The seedlings PL_Alo_Sprout/PL_Tara_Sprout follow the M3-99 sheet approved 5 Nov and pass the gate (126 assets, 0 failing). run_tests.sh 41/41; evidence production/qa/evidence/M1-07_*.png; no credits spent. On approval: board.py done M1-07 (no rebuild unless a change is asked). Touches outside the task's paths, all minimal: game/scripts/ui (UiKit, icon scaling), game/resources/ui, campaign_rules.json true_leaf_day, plant_service.seedling_form, load_preparation.gd garden preload, AssetGeometry.CACHE_LIMIT 20. Unblock: Sadman.",
    "reserved_for": "sadman",
    "effort": 3
   },
