@@ -1,0 +1,484 @@
+{
+ "task": "M1-05",
+ "seed": 20261105,
+ "approved_sheets": [
+  "production/concept/environment_v1/01_HabitatKit_sheet_A.png",
+  "production/concept/environment_v1/01_HabitatKit_sheet_B.png"
+ ],
+ "conventions": {
+  "units": "metres",
+  "up": "+Y",
+  "front": "-Z (Godot forward); wall faces lie on z=0 and face -Z, bodies extend to +z",
+  "pivot": "base centre; the corner at its inside vertex; door and hatch leaves on their own child pivots",
+  "grid_m": 1.0,
+  "wall_height_m": 2.6,
+  "wall_depth_m": 0.15,
+  "door_opening_m": [
+   1.2,
+   2.1
+  ],
+  "hatch_clear_m": 1.176,
+  "lod_distance_m": 12.0,
+  "textures": "tileable PBR sets stored once in textures/ (1024 px, LOD0) and textures/lod1/ (512 px, LOD1); every GLB references them by uri, so Godot imports each texture one time and all pieces share it"
+ },
+ "pieces": [
+  {
+   "id": "EN_Kit_Wall_Straight",
+   "display": "Straight wall panel",
+   "notes": "1 x 2.6 m quilted panel, handrail at 1.0 m, navy skirting; face on z=0 facing -Z",
+   "footprint_m": [
+    1.0,
+    0.15
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_Wall_Straight_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb"
+   ],
+   "triangles": [
+    2026,
+    442
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    2.6,
+    0.206
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.056
+   ]
+  },
+  {
+   "id": "EN_Kit_Wall_Corner",
+   "display": "Inside corner",
+   "notes": "two 0.5 m legs at 90 deg; pivot at the inside corner; the room lies towards -X and -Z",
+   "footprint_m": [
+    0.65,
+    0.65
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_Wall_Corner_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb"
+   ],
+   "triangles": [
+    1964,
+    452
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    0.65,
+    2.6,
+    0.65
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.5
+   ]
+  },
+  {
+   "id": "EN_Kit_Wall_Window",
+   "display": "Window wall panel",
+   "notes": "0.56 x 0.42 m pressure window at 1.55 m, navy frame, glass material M_Kit_Glass",
+   "footprint_m": [
+    1.0,
+    0.15
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_Wall_Window_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_Wall_Window_LOD1.glb"
+   ],
+   "triangles": [
+    2192,
+    424
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    2.6,
+    0.206
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.056
+   ]
+  },
+  {
+   "id": "EN_Kit_DoorFrame",
+   "display": "Sliding pressure door",
+   "notes": "3 m two-sided module, 1.2 x 2.1 m opening centred at x=-0.5; child DoorLeaf slides +X by 1.25 m",
+   "footprint_m": [
+    3.0,
+    0.3
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_DoorFrame_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_DoorFrame_LOD1.glb"
+   ],
+   "triangles": [
+    1400,
+    696
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    3.0,
+    2.6,
+    0.472
+   ],
+   "bounds_min_m": [
+    -1.5,
+    0.0,
+    -0.161
+   ],
+   "sockets": {
+    "opening_centre": [
+     -0.5,
+     0,
+     0
+    ],
+    "opening_size": [
+     1.2,
+     2.1
+    ],
+    "leaf_node": "DoorLeaf",
+    "leaf_travel_m": 1.25,
+    "leaf_axis": "+X"
+   }
+  },
+  {
+   "id": "EN_Kit_Hatch",
+   "display": "Round pressure hatch",
+   "notes": "2 m bulkhead, 1.2 m hatch centred 1.2 m up (sill 0.6 m); child HatchLeaf hinged at the left collar",
+   "footprint_m": [
+    2.0,
+    0.15
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_Hatch_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_Hatch_LOD1.glb"
+   ],
+   "triangles": [
+    4520,
+    1896
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    2.0,
+    2.6,
+    0.53
+   ],
+   "bounds_min_m": [
+    -1.0,
+    0.0,
+    -0.3
+   ],
+   "sockets": {
+    "opening_centre": [
+     0,
+     1.2,
+     0
+    ],
+    "opening_diameter": 1.176,
+    "leaf_node": "HatchLeaf",
+    "hinge": [
+     -0.72,
+     1.2,
+     -0.12
+    ],
+    "open_rotation_deg_y": 100
+   }
+  },
+  {
+   "id": "EN_Kit_Wall_EquipBay",
+   "display": "Equipment bay panel",
+   "notes": "recessed navy console 0.7 x 0.9 m from 1.0 m up; 'Screen' material slot 0.5 x 0.3 m for a live UI",
+   "footprint_m": [
+    1.0,
+    0.15
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD1.glb"
+   ],
+   "triangles": [
+    1046,
+    310
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    2.6,
+    0.226
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.076
+   ],
+   "sockets": {
+    "screen_material": "Screen",
+    "screen_centre": [
+     0,
+     1.65,
+     0.043
+    ],
+    "screen_size": [
+     0.5,
+     0.3
+    ]
+   }
+  },
+  {
+   "id": "EN_Kit_FloorTile",
+   "display": "Floor tile",
+   "notes": "1 x 1 m anti-slip deck 0.06 m thick with four tie-down rings; mount at y=-0.06 so the deck is y=0",
+   "footprint_m": [
+    1.0,
+    1.0
+   ],
+   "mount_y": -0.06,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_FloorTile_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_FloorTile_LOD1.glb"
+   ],
+   "triangles": [
+    1030,
+    390
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    0.072,
+    1.0
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.5
+   ]
+  },
+  {
+   "id": "EN_Kit_CeilingTile",
+   "display": "Ceiling tile",
+   "notes": "1 x 1 m quilted tile with vent grille and sensor; the visible face is the base, mount at y=2.6",
+   "footprint_m": [
+    1.0,
+    1.0
+   ],
+   "mount_y": 2.6,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_CeilingTile_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb"
+   ],
+   "triangles": [
+    1430,
+    390
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    0.061,
+    1.0
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.5
+   ]
+  },
+  {
+   "id": "EN_Kit_PipeRun",
+   "display": "Pipe run",
+   "notes": "two coolant pipes and an air duct on brackets, 1 m along X; rotate to mount on a wall or ceiling",
+   "footprint_m": [
+    1.0,
+    0.4
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_PipeRun_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_PipeRun_LOD1.glb"
+   ],
+   "triangles": [
+    792,
+    296
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    0.267,
+    0.435
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.255
+   ]
+  },
+  {
+   "id": "EN_Kit_CableRun",
+   "display": "Cable tray",
+   "notes": "1 m navy tray with an inspection window and orange latch, along X",
+   "footprint_m": [
+    1.0,
+    0.27
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_CableRun_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_CableRun_LOD1.glb"
+   ],
+   "triangles": [
+    198,
+    178
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    0.12,
+    0.276
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.135
+   ]
+  },
+  {
+   "id": "EN_Kit_LightStrip",
+   "display": "Light strip",
+   "notes": "1 m luminaire along X; the emissive diffuser is the base face; mount at y=2.52 under a ceiling",
+   "footprint_m": [
+    1.0,
+    0.14
+   ],
+   "mount_y": 2.52,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_LightStrip_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_LightStrip_LOD1.glb"
+   ],
+   "triangles": [
+    94,
+    94
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    0.092,
+    0.14
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.07
+   ]
+  },
+  {
+   "id": "EN_Kit_BulkheadRing",
+   "display": "Corridor bulkhead ring",
+   "notes": "octagonal corridor segment 2.6 m across the flats, 1.0 m along Z (chain on the 1 m grid); tread 0.14 m above the base (mount at y=-0.14)",
+   "footprint_m": [
+    2.6,
+    1.0
+   ],
+   "mount_y": -0.14,
+   "lods": [
+    "res://assets/environment/kit/EN_Kit_BulkheadRing_LOD0.glb",
+    "res://assets/environment/kit/EN_Kit_BulkheadRing_LOD1.glb"
+   ],
+   "triangles": [
+    4692,
+    1700
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    2.6,
+    2.6,
+    1.0
+   ],
+   "bounds_min_m": [
+    -1.3,
+    0.0,
+    -0.5
+   ],
+   "sockets": {
+    "chain_pitch_m": 1.0,
+    "axis": "Z",
+    "walk_y": 0.0,
+    "clear_height_m": 2.32,
+    "floor_flat_width_m": 0.961,
+    "handrail_y": 1.0,
+    "light_strip_y": 2.22,
+    "end_cap": "EN_Kit_DoorFrame (3 m two-sided module) across each open end"
+   }
+  }
+ ],
+ "materials": [
+  {
+   "id": "M_Kit_Quilt",
+   "path": "res://assets/environment/kit/materials/M_Kit_Quilt.tres",
+   "tile_m": 0.5
+  },
+  {
+   "id": "M_Kit_PaintGrey",
+   "path": "res://assets/environment/kit/materials/M_Kit_PaintGrey.tres",
+   "tile_m": 0.5
+  },
+  {
+   "id": "M_Kit_PaintWhite",
+   "path": "res://assets/environment/kit/materials/M_Kit_PaintWhite.tres",
+   "tile_m": 0.5
+  },
+  {
+   "id": "M_Kit_PaintNavy",
+   "path": "res://assets/environment/kit/materials/M_Kit_PaintNavy.tres",
+   "tile_m": 0.5
+  },
+  {
+   "id": "M_Kit_PaintOrange",
+   "path": "res://assets/environment/kit/materials/M_Kit_PaintOrange.tres",
+   "tile_m": 0.5
+  },
+  {
+   "id": "M_Kit_PaintBlue",
+   "path": "res://assets/environment/kit/materials/M_Kit_PaintBlue.tres",
+   "tile_m": 0.5
+  },
+  {
+   "id": "M_Kit_PaintDark",
+   "path": "res://assets/environment/kit/materials/M_Kit_PaintDark.tres",
+   "tile_m": 0.5
+  },
+  {
+   "id": "M_Kit_Steel",
+   "path": "res://assets/environment/kit/materials/M_Kit_Steel.tres",
+   "tile_m": 0.25
+  },
+  {
+   "id": "M_Kit_Floor",
+   "path": "res://assets/environment/kit/materials/M_Kit_Floor.tres",
+   "tile_m": 1.0
+  }
+ ]
+}

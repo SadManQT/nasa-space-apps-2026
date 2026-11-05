@@ -512,8 +512,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Generate and install the habitat kit (3D)",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-fable + Sadman/night-claude3",
    "deps": [
     "M1-04"
    ],
@@ -527,8 +527,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "PRODUCTION_HANDBOOK.md"
    ],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "run_tests.sh 33/33 suites passed (habitat kit 224 checks incl. corridor/hatch physics rays; performance 537); verify_gate 124 assets 0 failing (24 EN_Kit_* rows); windowed capture HABITAT KIT RESULT: PASS (229 checks) via production/qa/evidence/M1-05_capture.sh; screenshots production/qa/evidence/M1-05_godot_kit_lod0.png, M1-05_godot_kit_lod1.png, M1-05_godot_room.png, M1-05_godot_room_open.png, M1-05_godot_corridor.png; contact sheets production/review/M1-05_habitat_kit_contact.png, M1-05_habitat_kit_lods.png. Fix round 1 (Fable): textures stored once and shared (kit 45 -> 11 MB). Fix round 2 (claude3): bulkhead ring rebuilt as the 1 m corridor segment of sheet B (chains on the grid), hatch leaf two-sided, captures re-lit (were blown out; 4000/5000 K downlights, SSIL, AgX), captions fit, corridor built between two door modules; other 22 GLBs byte-identical",
+   "updated": "2026-11-05",
    "prompt": "Goal: game-ready modular kit pieces in game/assets/environment/kit/, passing the asset gate.\nDo: follow PRODUCTION_HANDBOOK.md §6 and execution/ASSET_EN_HabitatKit.md: Tripo multiview or Meshy image-to-3D from the approved sheets\n(Tripo: `tripo config use` only, --visibility private; Meshy: confirm cost first), Blender clean-up (production/tools/blender_cleanup.py),\nconsistent 1 m grid snapping and pivots, collision-friendly simple shapes, toon-ready materials, LOD for the Compatibility build, then\nproduction/tools/sync_to_godot.sh and verify_gate.py. Register every piece in production/ASSET_REGISTRY.csv. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes for every piece; a contact sheet in production/review/; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
