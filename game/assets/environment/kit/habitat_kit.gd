@@ -5,10 +5,15 @@
 extends RefCounted
 
 const CATALOG_PATH := "res://assets/environment/kit/kit.json"
+## Extension catalogues in the same schema (M3-3A: the Expedition Zero annex pieces). Their pieces are placed,
+## bounded and driven exactly like kit pieces; catalog() and ids() stay the kit's own.
+const EXTENSION_CATALOGS: Array[String] = ["res://assets/environment/EN_ZeroAnnex/annex.json"]
 const DOOR_LEAF := "DoorLeaf"
 const HATCH_LEAF := "HatchLeaf"
 const SCREEN_MATERIAL := "Screen"
+const PIECE_META := "piece_id"
 static var _catalog: Dictionary = {}
+static var _extensions: Array = []
 static var _scenes: Dictionary = {}
 
 ## The whole catalogue: conventions, pieces (id, lods, triangles, footprint_m, mount_y, sockets) and materials.
@@ -24,12 +29,40 @@ static func ids() -> PackedStringArray:
 		out.append(entry.id)
 	return out
 
-## The catalogue entry for one piece, or an empty dictionary for an unknown id.
+## Every extension catalogue that exists on disk (missing files are skipped, so the kit works without them).
+static func extensions() -> Array:
+	if _extensions.is_empty():
+		for path in EXTENSION_CATALOGS:
+			if FileAccess.file_exists(path):
+				var parsed = JSON.parse_string(FileAccess.get_file_as_string(path))
+				if parsed is Dictionary and parsed.has("pieces"):
+					_extensions.append(parsed)
+	return _extensions
+
+## The catalogue entry for one piece (kit or extension), or an empty dictionary for an unknown id.
 static func piece(id: String) -> Dictionary:
 	for entry in catalog().pieces:
 		if entry.id == id:
 			return entry
+	for ext in extensions():
+		for entry in ext.pieces:
+			if entry.id == id:
+				return entry
 	return {}
+
+## Every piece id of one extension catalogue (by its res:// path), in catalogue order.
+static func extension_ids(path: String) -> PackedStringArray:
+	var out := PackedStringArray()
+	if FileAccess.file_exists(path):
+		var parsed = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if parsed is Dictionary and parsed.has("pieces"):
+			for entry in parsed.pieces:
+				out.append(entry.id)
+	return out
+
+## The catalogue id of a node built by instance() (its "piece_id" meta), or the node's name for anything else.
+static func piece_id(node: Node) -> String:
+	return String(node.get_meta(PIECE_META)) if node.has_meta(PIECE_META) else String(node.name)
 
 ## The vertical offset that puts a piece's finished surface on the room's floor or ceiling plane.
 static func mount_y(id: String) -> float:
@@ -50,6 +83,7 @@ static func instance(id: String, with_collision: bool = true, max_lod: int = 1) 
 		return null
 	var node := Node3D.new()
 	node.name = id
+	node.set_meta(PIECE_META, id)  # survives a rename in a level (set_part_open looks the piece up by this)
 	var switch := float(entry.get("lod_distance_m", 12.0))
 	var lods: Array = entry.lods
 	var last := mini(max_lod, lods.size() - 1)
@@ -97,6 +131,45 @@ static func set_hatch_open(node: Node3D, fraction: float) -> void:
 	var angle := float(sockets.get("open_rotation_deg_y", 100.0))
 	for leaf in node.find_children(HATCH_LEAF, "Node3D", true, false):
 		(leaf as Node3D).rotation_degrees.y = angle * clampf(fraction, 0.0, 1.0)
+
+## Drives a named moving part of a piece from its catalogue "sockets.parts" entry (M3-3A annex pieces): fraction 0 is
+## the GLB rest pose, 1 the open or displaced pose. Kinds: "rotate" (degrees about the part's local axis x, y or z),
+## "slide" (metres along that axis) and "pose" (lerp from rest_position to position, with a yaw). Every child named
+## after the part is driven (one per LOD). The node must be a piece built by instance(): the piece id travels in its
+## "piece_id" meta, so a level may rename the node (falls back to the node name for pieces built another way).
+static func set_part_open(node: Node3D, part: String, fraction: float) -> void:
+	var id := piece_id(node)
+	var parts: Dictionary = piece(id).get("sockets", {}).get("parts", {})
+	if not parts.has(part):
+		push_error("HabitatKit: piece %s has no moving part %s" % [id, part])
+		return
+	var spec: Dictionary = parts[part]
+	var t := clampf(fraction, 0.0, 1.0)
+	for leaf in node.find_children(part, "Node3D", true, false):
+		var child := leaf as Node3D
+		match String(spec.get("kind", "")):
+			"rotate":
+				var deg := float(spec.get("degrees", 0.0)) * t
+				var rot := Vector3.ZERO
+				match String(spec.get("axis", "y")):
+					"x": rot.x = deg
+					"z": rot.z = deg
+					_: rot.y = deg
+				child.rotation_degrees = rot
+			"slide":
+				if not child.has_meta("rest_position"):
+					child.set_meta("rest_position", child.position)
+				var rest: Vector3 = child.get_meta("rest_position")
+				var axis := Vector3.RIGHT
+				match String(spec.get("axis", "x")):
+					"y": axis = Vector3.UP
+					"z": axis = Vector3.BACK
+				child.position = rest + axis * float(spec.get("metres", 0.0)) * t
+			"pose":
+				var rest_pose: Array = spec.get("rest_position", [child.position.x, child.position.y, child.position.z])
+				var open_pose: Array = spec.get("position", rest_pose)
+				child.position = Vector3(rest_pose[0], rest_pose[1], rest_pose[2]).lerp(Vector3(open_pose[0], open_pose[1], open_pose[2]), t)
+				child.rotation_degrees = Vector3(0.0, float(spec.get("yaw_degrees", 0.0)) * t, 0.0)
 
 ## The live-UI surfaces of a piece: [{mesh: MeshInstance3D, surface: int}] for every surface whose material is
 ## named "Screen". Assign a ViewportTexture material with mesh.set_surface_override_material(surface, material).

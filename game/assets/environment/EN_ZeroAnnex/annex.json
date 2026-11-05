@@ -1,0 +1,429 @@
+{
+ "task": "M3-3A",
+ "seed": 20261103,
+ "extends": "res://assets/environment/kit/kit.json (same conventions; habitat_kit.gd reads this file as an extension catalogue)",
+ "canon": "LOC-07 Expedition Zero service annex: a 10 x 6 m lower annex reached through the N.R. floor hatch from the service corridor (09_WORLD_AND_LEVEL_DESIGN.md); EX-CH03-S06..S08 and doc 24 clues 10-13",
+ "conventions": {
+  "units": "metres",
+  "up": "+Y",
+  "front": "-Z (Godot forward); wall faces lie on z=0 and face -Z, bodies extend to +z",
+  "pivot": "base centre; moving parts on their own child pivots",
+  "grid_m": 1.0,
+  "wall_height_m": 2.6,
+  "wall_depth_m": 0.15,
+  "annex_floor_below_corridor_m": 3.0,
+  "lod_distance_m": 12.0,
+  "live_ui": "material slots named Screen*, Document* and Label* carry no texture text; the game draws N.R., the chart's last line, the route sheet, the 2034 tag and the feed status"
+ },
+ "pieces": [
+  {
+   "id": "EN_ZeroAnnex_FloorHatch",
+   "display": "Corridor floor module with the N.R. hatch",
+   "notes": "2 x 2 m deck module (mount at y=-0.056 so the deck is y=0): round 0.9 m hatch coaming, child HatchLeaf hinged at the -X edge (opens 100 deg about Z), child Cover (the 1.3 m service cover hood that stands on the deck over the hatch; the quake slid it aside), child PortShutter on the leaf over the camera port, utility feed coupling with its status plate",
+   "footprint_m": [
+    2.0,
+    2.0
+   ],
+   "mount_y": -0.056,
+   "lods": [
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_FloorHatch_LOD0.glb",
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_FloorHatch_LOD1.glb"
+   ],
+   "triangles": [
+    3418,
+    1658
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    2.0,
+    0.382,
+    2.0
+   ],
+   "bounds_min_m": [
+    -1.0,
+    0.0,
+    -1.0
+   ],
+   "sockets": {
+    "opening_centre": [
+     0,
+     0.056,
+     0
+    ],
+    "opening_diameter": 0.9,
+    "deck_y": 0.056,
+    "coaming_top_y": 0.188,
+    "parts": {
+     "HatchLeaf": {
+      "kind": "rotate",
+      "axis": "z",
+      "degrees": 100.0
+     },
+     "Cover": {
+      "kind": "pose",
+      "rest_position": [
+       0,
+       0.064,
+       0
+      ],
+      "position": [
+       1.145,
+       0.064,
+       -0.285
+      ],
+      "yaw_degrees": 14.0
+     },
+     "PortShutter": {
+      "kind": "slide",
+      "axis": "x",
+      "metres": 0.17
+     },
+     "FeedValve": {
+      "kind": "rotate",
+      "axis": "y",
+      "degrees": 90.0
+     }
+    },
+    "camera_socket": "Socket_Camera (on the leaf, above the port)",
+    "hatch_axis": "+Z rotation lifts the +X side of the leaf"
+   }
+  },
+  {
+   "id": "EN_ZeroAnnex_Ladder",
+   "display": "Fixed access ladder",
+   "notes": "3.0 m ladder from the annex floor to the corridor deck, rails 0.5 m apart, rungs every 0.3 m; stands against a wall at z=0",
+   "footprint_m": [
+    0.6,
+    0.2
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_Ladder_LOD0.glb",
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_Ladder_LOD1.glb"
+   ],
+   "triangles": [
+    672,
+    384
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    0.6,
+    3.0,
+    0.162
+   ],
+   "bounds_min_m": [
+    -0.3,
+    0.0,
+    -0.122
+   ],
+   "sockets": {
+    "top_y": 3.0,
+    "rung_pitch_m": 0.3,
+    "climb_axis": "-Z face"
+   }
+  },
+  {
+   "id": "EN_ZeroAnnex_Wall",
+   "display": "2034 annex wall panel",
+   "notes": "1 x 2.6 m riveted olive-grey aluminium panel under frost, stiffener rib at 1.3 m, conduit along the top; face on z=0 facing -Z",
+   "footprint_m": [
+    1.0,
+    0.15
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_Wall_LOD0.glb",
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_Wall_LOD1.glb"
+   ],
+   "triangles": [
+    642,
+    66
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    2.6,
+    0.211
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.061
+   ]
+  },
+  {
+   "id": "EN_ZeroAnnex_Wall_Corner",
+   "display": "2034 annex inside corner",
+   "notes": "two 0.5 m legs at 90 deg, pivot at the inside corner; the room lies towards -X and -Z",
+   "footprint_m": [
+    0.65,
+    0.65
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_Wall_Corner_LOD0.glb",
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_Wall_Corner_LOD1.glb"
+   ],
+   "triangles": [
+    104,
+    104
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    0.65,
+    2.6,
+    0.65
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.5
+   ]
+  },
+  {
+   "id": "EN_ZeroAnnex_Floor",
+   "display": "Annex grating deck",
+   "notes": "1 x 1 m steel grating deck 0.06 m thick; mount at y=-0.06",
+   "footprint_m": [
+    1.0,
+    1.0
+   ],
+   "mount_y": -0.06,
+   "lods": [
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_Floor_LOD0.glb",
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_Floor_LOD1.glb"
+   ],
+   "triangles": [
+    22,
+    22
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    0.06,
+    1.0
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.5
+   ]
+  },
+  {
+   "id": "EN_ZeroAnnex_Ceiling",
+   "display": "Annex ceiling panel",
+   "notes": "1 x 1 m frosted panel with five stiffener ribs, hanging: the rib faces are the base (y=0), the frosted face 16 mm above; mount at y=2.584 so the frosted face meets the 2.6 m wall tops",
+   "footprint_m": [
+    1.0,
+    1.0
+   ],
+   "mount_y": 2.584,
+   "lods": [
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_Ceiling_LOD0.glb",
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_Ceiling_LOD1.glb"
+   ],
+   "triangles": [
+    82,
+    82
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    0.062,
+    1.0
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.5
+   ],
+   "sockets": {
+    "frosted_face_y": 0.016
+   }
+  },
+  {
+   "id": "EN_ZeroAnnex_CeilingLamp",
+   "display": "Annex ceiling panel with dead fixture",
+   "notes": "the ceiling panel with a dead 0.9 m linear 2034 luminaire under its ribs (DeadLamp diffuser slot, the lowest point); mount at y=2.554 so its panel lines up with the plain panels; place one every two or three metres",
+   "footprint_m": [
+    1.0,
+    1.0
+   ],
+   "mount_y": 2.554,
+   "lods": [
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_CeilingLamp_LOD0.glb",
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_CeilingLamp_LOD1.glb"
+   ],
+   "triangles": [
+    176,
+    176
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    0.092,
+    1.0
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.5
+   ],
+   "sockets": {
+    "lamp_material": "DeadLamp",
+    "diffuser_y": 0.0,
+    "frosted_face_y": 0.046,
+    "spacing_m": "every 2-3 m (LOC-07 sample: x = -1.5, 1.5, 4.5, 7.5 on rows z = -1.5 and 1.5)"
+   }
+  },
+  {
+   "id": "EN_ZeroAnnex_TrayBench",
+   "display": "Frozen-tray bench",
+   "notes": "1.2 x 0.6 m bench, top at 0.9 m with Socket_Tray_A/B for PL_ZeroSeedlingTray, dead grow-lamp bar at 1.5 m (DeadLamp slot), bench label slot",
+   "footprint_m": [
+    1.2,
+    0.6
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_TrayBench_LOD0.glb",
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_TrayBench_LOD1.glb"
+   ],
+   "triangles": [
+    200,
+    200
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.2,
+    1.55,
+    0.611
+   ],
+   "bounds_min_m": [
+    -0.6,
+    0.0,
+    -0.311
+   ],
+   "sockets": {
+    "tray_sockets": [
+     "Socket_Tray_A",
+     "Socket_Tray_B"
+    ],
+    "tray_asset": "res://assets/plants/PL_ZeroSeedlingTray/PL_ZeroSeedlingTray.glb",
+    "bench_top_y": 0.9,
+    "lamp_material": "DeadLamp"
+   }
+  },
+  {
+   "id": "EN_ZeroAnnex_ChartArchive",
+   "display": "Chart archive stand",
+   "notes": "growth chart board (Document_Chart), route sheet (Document_Route) under child SealedCover (hinged, opens 110 deg about -X), child MapPouch (removable), loop-valve photograph (Document_Photo), 2034 service tag (Label_ServiceTag)",
+   "footprint_m": [
+    1.0,
+    0.45
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_ChartArchive_LOD0.glb",
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_ChartArchive_LOD1.glb"
+   ],
+   "triangles": [
+    414,
+    390
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.009,
+    1.204,
+    0.48
+   ],
+   "bounds_min_m": [
+    -0.509,
+    0.0,
+    -0.255
+   ],
+   "sockets": {
+    "documents": [
+     "Document_Chart",
+     "Document_Route",
+     "Document_Photo"
+    ],
+    "labels": [
+     "Label_ServiceTag"
+    ],
+    "parts": {
+     "SealedCover": {
+      "kind": "rotate",
+      "axis": "x",
+      "degrees": -110.0
+     },
+     "MapPouch": {
+      "kind": "pose",
+      "rest_position": [
+       0.0,
+       0.52,
+       -0.231
+      ],
+      "position": [
+       0.0,
+       0.52,
+       -0.231
+      ],
+      "yaw_degrees": 0.0
+     }
+    }
+   }
+  },
+  {
+   "id": "EN_ZeroAnnex_SupportStation",
+   "display": "Warm-side support station",
+   "notes": "1.0 x 0.6 m cart: sloped console with Screen and Screen_Gauge slots, two local-radio handsets, Socket_ToolTag hook, Socket_HandLight bracket, boundary status plate (Label)",
+   "footprint_m": [
+    1.0,
+    0.6
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_SupportStation_LOD0.glb",
+    "res://assets/environment/EN_ZeroAnnex/EN_ZeroAnnex_SupportStation_LOD1.glb"
+   ],
+   "triangles": [
+    672,
+    432
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    1.097,
+    0.611
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.311
+   ],
+   "sockets": {
+    "screens": [
+     "Screen",
+     "Screen_Gauge"
+    ],
+    "sockets": [
+     "Socket_ToolTag",
+     "Socket_HandLight"
+    ],
+    "tool_tag_asset": "PR_ToolTag_Gear (M3-99)",
+    "hand_light_asset": "res://assets/props/PR_HandLight/PR_HandLight.glb"
+   }
+  }
+ ]
+}

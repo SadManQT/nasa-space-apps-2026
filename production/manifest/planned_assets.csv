@@ -5,7 +5,6 @@ EN_Garden,environment,Blender modular + new props,EX-CH01-S04,"growth chambers, 
 EN_SafeRoom,environment,Blender modular + reused props,EX-CH01-S08,"5 seats, water wall, bundle slots, hatch (LOC-04)"
 EN_Airlock,environment,Blender + PR_HatchDoor,EX-CH02-S03,double interlock and pass-through (LOC-05)
 EN_Garage,environment,Blender + VH_Rover,EX-CH04-S02,rover bay and departure boards (LOC-08)
-EN_ZeroAnnex,environment,Blender + PL_ZeroSeedlingTray + PR_AnnexDrum,EX-CH03-S06,2034 annex with N.R. hatch and viewing port (LOC-07)
 EN_Exterior,environment,Blender terrain from NASA LOLA DEM + EN_SolarMast,EX-CH01-S09,"mast courtyard, horizon, landing pad (LOC-06)"
 EN_ColdTrap,environment,Blender terrain,EX-CH04-S03,ridge road with 3 beacons and vault shelf (LOC-09/10)
 EN_RelayRoad,environment,Blender terrain + PR_SurveyBeacon,EX-CH08-S02,five short road segments; repeaters R1-R3 (LOC-11)
@@ -16,11 +15,9 @@ CH_Rao,character,Portrait/bust (screen only),EX-CH01-S01,headset; Earth desk
 CH_Noor,character,Portraits: 2034 archive + present + rooftop,EX-CH05-S10,older Bangladeshi botanist
 CH_Ferreira_Duty,character,Turnaround + Tripo multiview,EX-CH01-S01,Earth duty-layer outfit for screen scenes before 12 Dec
 CH_Cadet_DutyLayer,character,Turnaround + Tripo multiview x4,EX-CH01-S05,indoor navy coverall variants
-PR_Helmet_Roles,prop,Blender recolour of PR_Helmet,EX-CH03-S07,role-colour stripe per cadet
-PL_Descendants,plant,Blender instancing of PL_Alo_* and PL_Tara_*,EX-CH03-S11,12-position tray; CH04 7 purple + 5 green
+CH_Cadet_EVA,character,Turnaround + Tripo multiview x5 (v8 pipeline),EX-CH03-S07,"fitted EVA suits for the four cadets and Ferreira; five 2D sheets on one approval page production/concept/turnarounds_eva_v1/00_Approval_Sheet.png await Sadman's approval (M3-3A), no 3D credit spent"
 PL_Alo_Sprout,plant,Blender procedural seedling (cotyledon + true-leaf states),EX-CH01-S05,cotyledon 12-13 Apr and true-leaf 15-17 Apr states; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval
 PL_Cotton_Seedling,plant,Blender (scaled from PL_Cotton_Young),EX-CH05-S12,early cotton
-PR_PressedPetal,prop,Blender (small),EX-CH03-S10,petal in dated sleeve
 PR_PaperBee,prop,Blender (small),EX-CH02-S02,origami bee
 PR_ImpactMonitor,prop,UI + screen frames,EX-CH05-S07,impact-camera frames (A-40)
 UI_Kit,ui,Godot UI + vector icons,EX-CH01-S01,"HUD, forecast, journal, debrief, settings (A-53/A-54)"
