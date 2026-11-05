@@ -76,7 +76,7 @@ func _run() -> void:
 	for scene_id in ["EX-CH08-S07", "EX-CH08-S08", "EX-CH08-S09"]:
 		extended.start_at(scene_id)
 		for target in Gate.targets_for_scene(scene_id):
-			_check(extended.perform(target.target_id, target.get("payload_defaults", {})).accepted, "relay evidence " + target.target_id)
+			_check(extended.perform(target.target_id, preload("res://tools/support/chapter8_witness.gd").payload(target.target_id, director.snapshot(), target.get("payload_defaults", {}))).accepted, "relay evidence " + target.target_id)
 	_check(director.snapshot().knowledge_flags.has("relay_local_verified") and director.snapshot().knowledge_flags.has("relay_earth_verified"), "both verified path records persist as canonical flags")
 	_check(_has(dialogue.lines_for_scene("EX-CH08-S10", director.snapshot().knowledge_flags), "EX-CH08-S10-L01"), "first live Noor line unlocks after both records")
 	var roundtrip: Dictionary = JSON.parse_string(JSON.stringify(director.snapshot()))

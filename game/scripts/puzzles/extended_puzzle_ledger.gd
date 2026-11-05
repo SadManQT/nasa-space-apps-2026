@@ -1,6 +1,8 @@
 extends RefCounted
 class_name ExtendedPuzzleLedger
 
+const Chapter8 = preload("res://scripts/puzzles/chapter8_puzzles.gd")
+
 var _receipts := {}
 
 func preview(puzzle_id: String, action: String, payload: Dictionary = {}) -> Dictionary:
@@ -44,6 +46,10 @@ func restore(data: Dictionary) -> Dictionary:
 func _validate(puzzle_id: String, action: String, payload: Dictionary) -> String:
 	if puzzle_id.is_empty() or action.is_empty():
 		return "Every extended puzzle action needs a stable puzzle and action ID."
+	# P-15 and P-16: the player's own decisions, checked against the answer keys
+	# in res://resources/campaign/profiles/campaign_rules.json (never pre-filled).
+	if Chapter8.is_step(action):
+		return Chapter8.validate(action, payload)
 	match action:
 		"p05_read_main_t0", "p05_read_main_t10":
 			if int(payload.get("reading", -1)) != 100: return "The main trunk witness must read 100."
@@ -89,14 +95,4 @@ func _validate(puzzle_id: String, action: String, payload: Dictionary) -> String
 			if int(payload.get("water", -1)) != 4 or int(payload.get("crate", -1)) != 2 or String(payload.get("heat", "")) != "COZY" or String(payload.get("light", "")) != "DIM" or int(payload.get("reserve", -1)) != 30: return "P-13 witness requires W4, K2, COZY/DIM and protected reserve 30."
 		"p14_route_reading_1", "p14_route_reading_2":
 			if not (payload.get("reading") is int or payload.get("reading") is float) or not is_finite(float(payload.reading)) or float(payload.reading) < 0 or float(payload.reading) >= 1.0: return "P-14 route clearance requires a reading below 1."
-		"p15_choose_surveyed_route":
-			if String(payload.get("route", "")) != "SURVEYED" or int(payload.get("reserve", -1)) < 2: return "P-15 requires the surveyed route and at least two units of return reserve."
-		"p15_restore_marker_2":
-			if String(payload.get("battery", "")) != "SPARE" or String(payload.get("test", "")) != "PASS": return "Repeater marker 2 needs the spare battery and a passing chain test."
-		"p16_local_bearing":
-			if String(payload.get("bearing", "")) != "L2": return "The local relay bearing witness is L2."
-		"p16_earth_bearing":
-			if String(payload.get("bearing", "")) != "E3": return "The Earth relay bearing witness is E3."
-		"p16_checksum":
-			if String(payload.get("value", "")) != "ALO42": return "The final checksum witness is ALO42."
 	return ""

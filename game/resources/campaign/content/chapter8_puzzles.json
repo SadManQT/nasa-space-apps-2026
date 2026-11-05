@@ -1,0 +1,2535 @@
+{
+ "schema_version": 1,
+ "content_revision": "chapter8-puzzles-v1",
+ "source": "game-design/08_PUZZLE_DESIGNS.md P-15 and P-16; game-design/22_PUZZLE_CLUE_DESIGN.md sections 2 and 10; game-design/24_NARRATIVE_REVISION.md sections 2.8 to 2.10; game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md sections 1, 2 and 6; full-game-story/STORY_FULL.md EX-CH08-S01..S12. Spoken lines are referenced by id and read from the dialogue catalog, never retyped here. Answer keys live in profiles/campaign_rules.json (chapter8 and relay).",
+ "roles": {
+  "ferreira": {
+   "name": "Ferreira",
+   "role": "commander, Expedition Zero engineer",
+   "letter": "F"
+  },
+  "kai": {
+   "name": "Kai",
+   "role": "power and heat",
+   "letter": "K"
+  },
+  "amara": {
+   "name": "Amara",
+   "role": "atmosphere and measurement",
+   "letter": "A"
+  },
+  "mei": {
+   "name": "Mei",
+   "role": "horticulture",
+   "letter": "M"
+  },
+  "rafi": {
+   "name": "Rafi",
+   "role": "safety and field operations",
+   "letter": "R"
+  }
+ },
+ "puzzles": {
+  "P-15": {
+   "title": "Two Teams, One Road",
+   "hints": [
+    "A return reserve belongs in the departure plan.",
+    "Marker2 is part of the radio path.",
+    "Use surveyed route, restore buoy 2, home heatMIN/lampDIM/returnOPEN."
+   ],
+   "mastery": "Both ledgers safe, rover reserve at least 2, no blackout, marker two restored and the chain tested.",
+   "first_time_card": {
+    "title": "Two teams, one road",
+    "purpose": "Plan the whole trip, not just the way out.",
+    "steps": [
+     "Read the journey card and the manifest.",
+     "Choose a road the rover can actually drive.",
+     "Keep the return in the battery."
+    ],
+    "clip": "The rover and the return reserve (explainer clip pending)"
+   }
+  },
+  "P-16": {
+   "title": "The Link and the Living Garden",
+   "hints": [
+    "A relay needs both ends.",
+    "Connect Aurora’s repeater chain before Earth.",
+    "L2 thenE3, checksumALO42, verify both voices; return and open the safe shutter."
+   ],
+   "mastery": "Both links pass on their own evidence, the echo comes back exactly, everyone is home and the five sunrise checks pass.",
+   "first_time_card": {
+    "title": "Both ends of the light",
+    "purpose": "A relay works only when every link passes its own test.",
+    "steps": [
+     "Isolate, test zero, replace, close, reconnect.",
+     "Lock the road chain first, then Earth.",
+     "Accept only the exact reply."
+    ],
+    "clip": "Replacing the controller and checking both links (explainer clip pending)"
+   }
+  }
+ },
+ "scenes": {
+  "EX-CH08-S01": {
+   "id": "EX-CH08-S01",
+   "mission": "EX-M0801",
+   "title": "Before the Road",
+   "story_date": "8 April 2047 · 00:00 · rover bay",
+   "stage": "learn",
+   "goal": "Assign two teams and pack the rover",
+   "why": "Nobody appears at the summit because the story needs them.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Log + voice",
+     "text": "The journey card on the departure board: 24 h out, 3 h repair, 24 h back.",
+     "where": "Departure board",
+     "holders": [
+      "rafi",
+      "amara"
+     ],
+     "line_id": "EX-CH08-S01-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Voice",
+     "text": "Independent supplies for the trip.",
+     "where": "Departure board",
+     "holders": [
+      "amara"
+     ],
+     "line_id": "EX-CH08-S01-L02"
+    },
+    {
+     "id": "c3",
+     "kind": "Object",
+     "text": "Packed hardware against the signed preparation manifest: compatible controller, battery spare, service diagram, three repeater checkpoints.",
+     "where": "Rover bay crates",
+     "holders": [
+      "kai"
+     ]
+    },
+    {
+     "id": "c4",
+     "kind": "Object + voice",
+     "text": "The duplicate home-night checklist Mei passes to Kai.",
+     "where": "Rover door",
+     "holders": [
+      "mei",
+      "kai"
+     ],
+     "line_id": "EX-CH08-S01-L03"
+    },
+    {
+     "id": "c5",
+     "kind": "Voice",
+     "text": "Ferreira on the road ahead.",
+     "where": "Rover bay",
+     "holders": [
+      "ferreira"
+     ],
+     "line_id": "EX-CH08-S01-L04"
+    }
+   ],
+   "aha": "The return is already in the battery.",
+   "wrong_idea": "Carry only enough for the outward leg: departure waits until the return and the repair hours are packed too.",
+   "flight_rules": [
+    "FR-05 · Rover slope never above 15°; return reserve at least 2 of 14; the whole trip 51 h within 72 h of supplies; park and brake before any exterior repair.",
+    "FR-01 · Crew first, station second, science third."
+   ],
+   "risk": {
+    "title": "Shortcut 22°",
+    "likelihood": 4,
+    "consequence": 5,
+    "level": "HIGH"
+   },
+   "set_piece": "Five names face two destination boards. The separation is visible before the door closes."
+  },
+  "EX-CH08-S02": {
+   "id": "EX-CH08-S02",
+   "mission": "EX-M0801",
+   "title": "The Return Is Already in the Battery",
+   "story_date": "8 April 2047 · departure forecast · route console",
+   "stage": "apply",
+   "goal": "Choose the road and keep the return reserve",
+   "why": "The cheapest line is only cheap if the rover can drive it.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Route screen: surveyed road up to 12°, 5 units each way; shortcut 22°, 3.5 units each way.",
+     "where": "Route console",
+     "holders": [
+      "kai"
+     ],
+     "line_id": "EX-CH08-S02-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument + voice",
+     "text": "The slope map laid over the same line.",
+     "where": "Route console",
+     "holders": [
+      "rafi"
+     ],
+     "line_id": "EX-CH08-S02-L02"
+    },
+    {
+     "id": "c3",
+     "kind": "Voice",
+     "text": "Ferreira on reserves and roads.",
+     "where": "Route console",
+     "holders": [
+      "ferreira",
+      "rafi"
+     ],
+     "line_id": "EX-CH08-S02-L03"
+    },
+    {
+     "id": "c4",
+     "kind": "Data card",
+     "text": "VIPER's slope limit: 15° (measured mission limit).",
+     "where": "Data card",
+     "holders": [
+      "rafi"
+     ]
+    },
+    {
+     "id": "c5",
+     "kind": "Voice",
+     "text": "Kai on the departure budget.",
+     "where": "Route console",
+     "holders": [
+      "kai"
+     ],
+     "line_id": "EX-CH08-S02-L04"
+    }
+   ],
+   "aha": "The return is already in the battery.",
+   "wrong_idea": "The shortcut looks cheaper: 14 − 3.5 − 3.5 leaves 7, but a 22° slope is above the rover's limit whatever the energy says.",
+   "flight_rules": [
+    "FR-05 · Rover slope never above 15°; return reserve at least 2 of 14; the whole trip 51 h within 72 h of supplies; park and brake before any exterior repair."
+   ],
+   "risk": {
+    "title": "Shortcut 22°",
+    "likelihood": 4,
+    "consequence": 5,
+    "level": "HIGH"
+   },
+   "set_piece": "Cruise begins only after the rejected shortcut is explained. Long shadows, black sky, the rover heard only through cabin and chassis."
+  },
+  "EX-CH08-S03": {
+   "id": "EX-CH08-S03",
+   "mission": "EX-M0801",
+   "title": "Markers in the Dark",
+   "story_date": "8 April 2047 · 00:00 to 10:00 by gated cruise · first repeater sector",
+   "stage": "twist",
+   "goal": "Find marker two and stop on known ground",
+   "why": "Appearance alone cannot prove a safe route.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Voice",
+     "text": "Rafi on matching the marker.",
+     "where": "Rover cabin",
+     "holders": [
+      "rafi"
+     ],
+     "line_id": "EX-CH08-S03-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument + radio",
+     "text": "Marker one passed its adjacent-link test; a timestamped position packet went to Aurora.",
+     "where": "Rover radio",
+     "holders": [
+      "rafi",
+      "mei"
+     ],
+     "line_id": "EX-CH08-S03-L02"
+    },
+    {
+     "id": "c3",
+     "kind": "Instrument + voice",
+     "text": "Marker two is dark; the console still shows a healthy surveyed pad.",
+     "where": "Rover console",
+     "holders": [
+      "rafi",
+      "kai"
+     ],
+     "line_id": "EX-CH08-S03-L03"
+    },
+    {
+     "id": "c4",
+     "kind": "Instrument",
+     "text": "An apparent bypass crosses an unsupported cliff route on the terrain overlay.",
+     "where": "Terrain overlay",
+     "holders": [
+      "rafi"
+     ]
+    },
+    {
+     "id": "c5",
+     "kind": "Voice",
+     "text": "Ferreira's call.",
+     "where": "Rover cabin",
+     "holders": [
+      "ferreira"
+     ],
+     "line_id": "EX-CH08-S03-L04"
+    }
+   ],
+   "aha": "Match the marker, not the silhouette.",
+   "wrong_idea": "Leave the road for the visible bypass: the terrain overlay shows an unsupported cliff route, and Kai's hand stops on the steering control.",
+   "flight_rules": [
+    "FR-05 · Rover slope never above 15°; return reserve at least 2 of 14; the whole trip 51 h within 72 h of supplies; park and brake before any exterior repair."
+   ],
+   "risk": {
+    "title": "Off-road bypass over a cliff",
+    "likelihood": 3,
+    "consequence": 5,
+    "level": "HIGH"
+   },
+   "set_piece": "Marker two sits dark on its surveyed pad. The brake is set before anyone opens a hatch."
+  },
+  "EX-CH08-S04": {
+   "id": "EX-CH08-S04",
+   "mission": "EX-M0802",
+   "title": "The Small Light That Carries a Voice",
+   "story_date": "8 April 2047 · 10:00 to 17:00 · marker-two service pad",
+   "stage": "learn",
+   "goal": "Restore marker two and test both neighbours",
+   "why": "Lit means powered. A light is not yet a link.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Object + voice",
+     "text": "The repeater's service drawing and battery specification.",
+     "where": "Marker-two housing",
+     "holders": [
+      "kai"
+     ],
+     "line_id": "EX-CH08-S04-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument + voice",
+     "text": "Suit readiness and the tether point.",
+     "where": "Rover airlock",
+     "holders": [
+      "rafi"
+     ],
+     "line_id": "EX-CH08-S04-L02"
+    },
+    {
+     "id": "c3",
+     "kind": "Instrument + voice",
+     "text": "The marker lights, but the two adjacent-link tests (1→2, 2→3) are still pending.",
+     "where": "Marker-two panel",
+     "holders": [
+      "kai",
+      "rafi"
+     ],
+     "line_id": "EX-CH08-S04-L03"
+    },
+    {
+     "id": "c4",
+     "kind": "Voice",
+     "text": "Kai on finishing the job.",
+     "where": "Marker-two pad",
+     "holders": [
+      "kai"
+     ],
+     "line_id": "EX-CH08-S04-L04"
+    },
+    {
+     "id": "c5",
+     "kind": "Data card",
+     "text": "Terrain and the Moon's curve block direct line of sight near the south pole; relays fix it.",
+     "where": "Data card",
+     "holders": [
+      "rafi"
+     ]
+    }
+   ],
+   "aha": "A light is not yet a link.",
+   "wrong_idea": "Assume the whole chain works when the marker lights: local power proves neither neighbouring link.",
+   "flight_rules": [
+    "FR-05 · Rover slope never above 15°; return reserve at least 2 of 14; the whole trip 51 h within 72 h of supplies; park and brake before any exterior repair.",
+    "FR-04 · Protected power: isolate and verify zero before touching a live controller; never reconnect with the housing open."
+   ],
+   "risk": {
+    "title": "Repeater chain gap over a ridge",
+    "likelihood": 3,
+    "consequence": 4,
+    "level": "HIGH"
+   },
+   "set_piece": "A repair in vacuum with careful hands: no sound outside the suit, only breathing and the contact of tools.",
+   "new_hints": [
+    "Who must be able to hear the summit?",
+    "Draw both legs: Aurora to summit, summit to Earth.",
+    "Three repeater sites along the surveyed road, each in sight of its neighbours, plus the Earth dish."
+   ]
+  },
+  "EX-CH08-S05": {
+   "id": "EX-CH08-S05",
+   "mission": "EX-M0802",
+   "title": "Two at Home",
+   "story_date": "8 April 2047 · 18:00 · start of the 36-hour night · Aurora garden",
+   "stage": "apply",
+   "goal": "Set the home loop and forecast the night",
+   "why": "Home demand changes when people actually arrive.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Object",
+     "text": "The same independent gauge that exposed the misleading leak reading in the quake, read calmly.",
+     "where": "Life-support console",
+     "holders": [
+      "amara"
+     ]
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument",
+     "text": "The home loop: heat MIN (the COOL profile), lamp DIM, water return OPEN.",
+     "where": "Garden panel",
+     "holders": [
+      "mei"
+     ]
+    },
+    {
+     "id": "c3",
+     "kind": "Instrument + voice",
+     "text": "The occupancy forecast: two for 33 hours, then five for 3 hours.",
+     "where": "Life-support console",
+     "holders": [
+      "amara",
+      "mei"
+     ],
+     "line_id": "EX-CH08-S05-L04"
+    },
+    {
+     "id": "c4",
+     "kind": "Voice",
+     "text": "Amara and Mei on this night.",
+     "where": "Garden",
+     "holders": [
+      "amara",
+      "mei"
+     ],
+     "line_id": "EX-CH08-S05-L01"
+    },
+    {
+     "id": "c5",
+     "kind": "Voice",
+     "text": "Two at home.",
+     "where": "Garden",
+     "holders": [
+      "amara"
+     ],
+     "line_id": "EX-CH08-S05-L03"
+    },
+    {
+     "id": "c6",
+     "kind": "Data card",
+     "text": "NASA plans about 0.9 kg of oxygen per person per day: in Aurora's units 0.5 air per 7.2 h for two people, 1.25 for five.",
+     "where": "Data card",
+     "holders": [
+      "amara"
+     ]
+    }
+   ],
+   "aha": "Then five for the last three hours.",
+   "wrong_idea": "Two occupants for the whole night forgets the returning three. Return CLOSED does not fail silently: it shows a thirst forecast.",
+   "flight_rules": [
+    "FR-02 · Air margin: breathing is 0.5 air per 7.2 h for two people and 1.25 for five.",
+    "FR-01 · Crew first, station second, science third."
+   ],
+   "risk": {
+    "title": "Home forecast counts the wrong people",
+    "likelihood": 3,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "The Sun leaves at the scenario gate. Mei straightens one crooked nameplate and leaves the guide light where it was planned."
+  },
+  "EX-CH08-S06": {
+   "id": "EX-CH08-S06",
+   "mission": "EX-M0802",
+   "title": "The Packet From the Summit",
+   "story_date": "8 April 18:00 to 9 April 00:00 · Aurora console and summit approach",
+   "stage": "twist",
+   "goal": "Check home first, then accept the fresh packet",
+   "why": "A message must be current enough for the decision it supports.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Voice",
+     "text": "Amara's order of work.",
+     "where": "Aurora console",
+     "holders": [
+      "amara"
+     ],
+     "line_id": "EX-CH08-S06-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Voice",
+     "text": "Mei on what a packet carries.",
+     "where": "Aurora console",
+     "holders": [
+      "mei"
+     ],
+     "line_id": "EX-CH08-S06-L02"
+    },
+    {
+     "id": "c3",
+     "kind": "Instrument",
+     "text": "Two packets on the console: an older approach packet and a new summit packet, each with sender, position and time.",
+     "where": "Aurora console",
+     "holders": [
+      "amara"
+     ]
+    },
+    {
+     "id": "c4",
+     "kind": "Radio",
+     "text": "Rafi's arrival call.",
+     "where": "Local radio",
+     "holders": [
+      "rafi"
+     ],
+     "line_id": "EX-CH08-S06-L03"
+    },
+    {
+     "id": "c5",
+     "kind": "Radio",
+     "text": "Amara's acknowledgement.",
+     "where": "Local radio",
+     "holders": [
+      "amara"
+     ],
+     "line_id": "EX-CH08-S06-L04"
+    }
+   ],
+   "aha": "The packet says when and where.",
+   "wrong_idea": "The earlier approach packet certifies arrival: its position and time cannot. Home checks come before any acknowledgement.",
+   "flight_rules": [
+    "FR-01 · Crew first, station second, science third.",
+    "FR-02 · Air margin: breathing is 0.5 air per 7.2 h for two people and 1.25 for five."
+   ],
+   "risk": {
+    "title": "Stale packet accepted as arrival",
+    "likelihood": 2,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "A viewpoint card cuts to Rafi at the summit exactly 24 hours after departure. The dark relay housing lies beyond the window.",
+   "new_hints": [
+    "When and where was this message sent?",
+    "Compare it with the newest position you know.",
+    "Accept the packet whose sender, position and time match the planned 24-hour arrival."
+   ]
+  },
+  "EX-CH08-S07": {
+   "id": "EX-CH08-S07",
+   "mission": "EX-M0803",
+   "title": "The Spare Has a History",
+   "story_date": "9 April 2047 · 00:00 to 00:45 · Malapert relay service bay",
+   "stage": "learn",
+   "goal": "Replace the controller safely",
+   "why": "Correct parts and correct procedure are separate requirements.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Object",
+     "text": "The crate with Kai's December note; the actual connectors and serial checked again at the point of use.",
+     "where": "Controller crate",
+     "holders": [
+      "kai"
+     ]
+    },
+    {
+     "id": "c2",
+     "kind": "Voice",
+     "text": "Ferreira's question before anything moves.",
+     "where": "Service bay",
+     "holders": [
+      "ferreira"
+     ],
+     "line_id": "EX-CH08-S07-L01"
+    },
+    {
+     "id": "c3",
+     "kind": "Voice",
+     "text": "Kai's read-back.",
+     "where": "Service bay",
+     "holders": [
+      "kai"
+     ],
+     "line_id": "EX-CH08-S07-L02"
+    },
+    {
+     "id": "c4",
+     "kind": "Voice",
+     "text": "Rafi on the tether and the door.",
+     "where": "Service bay",
+     "holders": [
+      "rafi"
+     ],
+     "line_id": "EX-CH08-S07-L03"
+    },
+    {
+     "id": "c5",
+     "kind": "Voice",
+     "text": "Kai on the housing.",
+     "where": "Service bay",
+     "holders": [
+      "kai"
+     ],
+     "line_id": "EX-CH08-S07-L04"
+    },
+    {
+     "id": "c6",
+     "kind": "Object",
+     "text": "A tempting reset control stays visible beside the housing. It cannot certify a safe replacement.",
+     "where": "Relay housing",
+     "holders": [
+      "kai"
+     ]
+    }
+   ],
+   "aha": "Isolated. Zero verified.",
+   "wrong_idea": "Reset the damaged controller while live: removal stays blocked until isolation and zero are verified.",
+   "flight_rules": [
+    "FR-04 · Protected power: isolate and verify zero before touching a live controller; never reconnect with the housing open."
+   ],
+   "risk": {
+    "title": "Live controller removed",
+    "likelihood": 2,
+    "consequence": 5,
+    "level": "HIGH · interlocked"
+   },
+   "set_piece": "Nothing sparks in vacuum. When the controller powers, the antenna panel wakes with two unverified channels."
+  },
+  "EX-CH08-S08": {
+   "id": "EX-CH08-S08",
+   "mission": "EX-M0803",
+   "title": "A Lighthouse Needs Both Shores",
+   "story_date": "9 April 2047 · 00:45 to 01:45 · local antenna and Earth dish",
+   "stage": "apply",
+   "goal": "Lock the road chain, then Earth",
+   "why": "A relay is useful only when both legs pass on their own evidence.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Voice",
+     "text": "Kai's order of work.",
+     "where": "Antenna controls",
+     "holders": [
+      "kai"
+     ],
+     "line_id": "EX-CH08-S08-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument",
+     "text": "Two signal panels, each pairing strength with an obstruction reading. Local presets: 1 poor, 2 good, 3 blocked. Earth presets: 1 poor, 2 blocked, 3 good.",
+     "where": "Antenna controls",
+     "holders": [
+      "kai",
+      "rafi"
+     ]
+    },
+    {
+     "id": "c3",
+     "kind": "Data card",
+     "text": "Scenario bearings, labelled Computed with no terrain: from Mons Malapert on 9 April 00:45 to 01:45 Earth sits at azimuth 357.9° to 358.0°, elevation −2.3°; the summit sees over the curve from 1.4 km up.",
+     "where": "Data card",
+     "holders": [
+      "rafi"
+     ]
+    },
+    {
+     "id": "c4",
+     "kind": "Instrument",
+     "text": "The Aurora Earth-set handover window: a planned deadline with an untimed equivalent.",
+     "where": "Aurora console",
+     "holders": [
+      "amara"
+     ]
+    },
+    {
+     "id": "c5",
+     "kind": "Voice",
+     "text": "Rafi on the road chain.",
+     "where": "Antenna controls",
+     "holders": [
+      "rafi"
+     ],
+     "line_id": "EX-CH08-S08-L02"
+    },
+    {
+     "id": "c6",
+     "kind": "Voice",
+     "text": "Ferreira on the Earth leg.",
+     "where": "Antenna controls",
+     "holders": [
+      "ferreira"
+     ],
+     "line_id": "EX-CH08-S08-L03"
+    },
+    {
+     "id": "c7",
+     "kind": "Voice",
+     "text": "Kai on both shores.",
+     "where": "Antenna controls",
+     "holders": [
+      "kai"
+     ],
+     "line_id": "EX-CH08-S08-L04"
+    }
+   ],
+   "aha": "Both shores, not just the bright one.",
+   "wrong_idea": "Point at Earth first because Earth is the goal: the local leg must pass on its own first, or Aurora still has no checked path to the summit.",
+   "flight_rules": [
+    "FR-04 · Protected power: isolate and verify zero before touching a live controller; never reconnect with the housing open."
+   ],
+   "risk": {
+    "title": "Earth leg strong, local leg unverified",
+    "likelihood": 3,
+    "consequence": 4,
+    "level": "HIGH"
+   },
+   "set_piece": "Pressure without motor timing: the handover window counts down, and the dials answer with strength and obstruction, never a buzzer."
+  },
+  "EX-CH08-S09": {
+   "id": "EX-CH08-S09",
+   "mission": "EX-M0803",
+   "title": "Forty-Two Comes Back Correctly",
+   "story_date": "9 April 2047 · 01:45 to 02:15 · relay data check",
+   "stage": "twist",
+   "goal": "Send the test phrase and accept only the exact reply",
+   "why": "A strong signal can still carry wrong content.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Voice",
+     "text": "Rafi on strength.",
+     "where": "Data check",
+     "holders": [
+      "rafi"
+     ],
+     "line_id": "EX-CH08-S09-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument",
+     "text": "The diagnostic preview holds three replies: an exact current match, a near match and an older saved packet.",
+     "where": "Data check",
+     "holders": [
+      "rafi"
+     ]
+    },
+    {
+     "id": "c3",
+     "kind": "Voice",
+     "text": "Kai's report.",
+     "where": "Data check",
+     "holders": [
+      "kai"
+     ],
+     "line_id": "EX-CH08-S09-L02"
+    },
+    {
+     "id": "c4",
+     "kind": "Radio",
+     "text": "Amara's telemetry packet, with the station clock and the five-person return plan attached.",
+     "where": "Local radio",
+     "holders": [
+      "amara"
+     ],
+     "line_id": "EX-CH08-S09-L03"
+    },
+    {
+     "id": "c5",
+     "kind": "Voice",
+     "text": "Ferreira on what comes next.",
+     "where": "Data check",
+     "holders": [
+      "ferreira"
+     ],
+     "line_id": "EX-CH08-S09-L04"
+    },
+    {
+     "id": "c6",
+     "kind": "Log",
+     "text": "Two backlogs cross on the data panel: Aurora's outbox, queued for Earth since the blackout, finally sends; Rao's listening log arrives, one line every few hours for fifty-two days.",
+     "where": "Data panel",
+     "holders": [
+      "amara",
+      "kai"
+     ]
+    }
+   ],
+   "aha": "Strong is not the same as correct.",
+   "wrong_idea": "Accept a similar-looking or older reply: it fails the exact-current-match rule.",
+   "flight_rules": [
+    "FR-04 · Protected power: isolate and verify zero before touching a live controller; never reconnect with the housing open."
+   ],
+   "risk": {
+    "title": "Near-match reply accepted as proof",
+    "likelihood": 3,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "The returned characters A-L-O-4-2 settle beside the sent string one by one."
+  },
+  "EX-CH08-S10": {
+   "id": "EX-CH08-S10",
+   "mission": "EX-M0804",
+   "title": "Hello, Aurora",
+   "story_date": "9 April 2047 · 02:15 to 03:00 · summit cabin, Aurora, a rooftop on Earth",
+   "stage": "learn",
+   "goal": "Check both voices, then transmit",
+   "why": "The transmit button waits for two visible path checks.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument",
+     "text": "Both path checks are visible before the transmit control unlocks.",
+     "where": "Transmit panel",
+     "holders": [
+      "kai",
+      "rafi"
+     ]
+    },
+    {
+     "id": "c2",
+     "kind": "Data card",
+     "text": "The light-time chip on the Earth channel: about 1.3 s one way, 2.6 s round trip. The crew leaves pauses for the delay.",
+     "where": "Earth channel",
+     "holders": [
+      "amara"
+     ]
+    },
+    {
+     "id": "c3",
+     "kind": "Instrument",
+     "text": "Current garden telemetry and the preserved lineage photograph, ready to send.",
+     "where": "Aurora table",
+     "holders": [
+      "mei"
+     ]
+    },
+    {
+     "id": "c4",
+     "kind": "Voice",
+     "text": "Mei to the Earth link.",
+     "where": "Aurora table",
+     "holders": [
+      "mei"
+     ],
+     "line_id": "EX-CH08-S10-L02"
+    },
+    {
+     "id": "c5",
+     "kind": "Voice",
+     "text": "Ferreira to the Earth link.",
+     "where": "Summit cabin",
+     "holders": [
+      "ferreira"
+     ],
+     "line_id": "EX-CH08-S10-L03"
+    },
+    {
+     "id": "c6",
+     "kind": "Voice",
+     "text": "Amara on gardeners.",
+     "where": "Aurora table",
+     "holders": [
+      "amara"
+     ],
+     "line_id": "EX-CH08-S10-L04"
+    }
+   ],
+   "aha": "The garden has more than one gardener.",
+   "wrong_idea": "The relay crew alone saved the garden: the debrief shows the home care and the earlier work that made it possible.",
+   "flight_rules": [
+    "FR-01 · Crew first, station second, science third."
+   ],
+   "risk": {
+    "title": "Transmit before both path checks",
+    "likelihood": 2,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "A labelled three-way cut: summit cabin, Aurora table, a rooftop in Bangladesh. Real round-trip pauses on the channel."
+  },
+  "EX-CH08-S11": {
+   "id": "EX-CH08-S11",
+   "mission": "EX-M0804",
+   "title": "The Same Road Home",
+   "story_date": "9 April 03:00 to 10 April 03:00 · 24-hour return · rover and arrival airlock",
+   "stage": "apply",
+   "goal": "Bring three home on the same road",
+   "why": "Return is part of the mission.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Voice",
+     "text": "Rafi on the mission.",
+     "where": "Rover cabin",
+     "holders": [
+      "rafi"
+     ],
+     "line_id": "EX-CH08-S11-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument + voice",
+     "text": "Three return route gates with new timestamps.",
+     "where": "Rover console",
+     "holders": [
+      "kai"
+     ],
+     "line_id": "EX-CH08-S11-L02"
+    },
+    {
+     "id": "c3",
+     "kind": "Instrument",
+     "text": "Actual round-trip use against the whole-mission forecast, including the 3-hour repair window.",
+     "where": "Rover console",
+     "holders": [
+      "rafi"
+     ]
+    },
+    {
+     "id": "c4",
+     "kind": "Radio",
+     "text": "Amara at the airlock.",
+     "where": "Local radio",
+     "holders": [
+      "amara"
+     ],
+     "line_id": "EX-CH08-S11-L03"
+    },
+    {
+     "id": "c5",
+     "kind": "Voice",
+     "text": "Mei at the airlock.",
+     "where": "Arrival airlock",
+     "holders": [
+      "mei"
+     ],
+     "line_id": "EX-CH08-S11-L04"
+    }
+   ],
+   "aha": "Same road. New timestamps.",
+   "wrong_idea": "Raise home consumption when the rover leaves the summit: those three people are still supplied by the rover until they are physically home.",
+   "flight_rules": [
+    "FR-05 · Rover slope never above 15°; return reserve at least 2 of 14; the whole trip 51 h within 72 h of supplies; park and brake before any exterior repair.",
+    "FR-02 · Air margin: breathing is 0.5 air per 7.2 h for two people and 1.25 for five."
+   ],
+   "risk": {
+    "title": "People counted twice between rover and base",
+    "likelihood": 3,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "Ferreira's mug beside the others. Three hours to first light."
+  },
+  "EX-CH08-S12": {
+   "id": "EX-CH08-S12",
+   "mission": "EX-M0804",
+   "title": "What We Grew",
+   "story_date": "10 April 2047 · 06:00 · first light · Aurora pressurised garden",
+   "stage": "twist",
+   "goal": "Pass five checks, then open the shutter",
+   "why": "The last safety check comes before the most beautiful moment.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument",
+     "text": "Five final checks on the shutter panel: crew 5 safe; founder reserve 30 and eleven unplanted vault specimens; pressure stable; temperature stable; cotton alive.",
+     "where": "Shutter panel",
+     "holders": [
+      "rafi",
+      "amara",
+      "kai",
+      "mei"
+     ]
+    },
+    {
+     "id": "c2",
+     "kind": "Voice",
+     "text": "Mei's reading.",
+     "where": "Garden",
+     "holders": [
+      "mei"
+     ],
+     "line_id": "EX-CH08-S12-L01"
+    },
+    {
+     "id": "c3",
+     "kind": "Voice",
+     "text": "Amara's reading.",
+     "where": "Garden",
+     "holders": [
+      "amara"
+     ],
+     "line_id": "EX-CH08-S12-L02"
+    },
+    {
+     "id": "c4",
+     "kind": "Voice",
+     "text": "Ferreira at the window.",
+     "where": "Garden",
+     "holders": [
+      "ferreira"
+     ],
+     "line_id": "EX-CH08-S12-L03"
+    },
+    {
+     "id": "c5",
+     "kind": "Object",
+     "text": "Alo's petal beside the lineage label; Tara's nameplate level with it; cotton by the window in Tara's bay.",
+     "where": "Lineage board",
+     "holders": [
+      "mei"
+     ]
+    }
+   ],
+   "aha": "A renewing system preserves conditions and future capacity.",
+   "wrong_idea": "Open the shutter as soon as everyone is home: the shutter waits for its safety checks.",
+   "flight_rules": [
+    "FR-01 · Crew first, station second, science third."
+   ],
+   "risk": {
+    "title": "Shutter opened before the final checks",
+    "likelihood": 1,
+    "consequence": 4,
+    "level": "MODERATE · interlocked"
+   },
+   "set_piece": "The shutter opens on mustard descendants in flower, every stem upright toward the window.",
+   "new_hints": [
+    "What must be true before you open a window to the Sun?",
+    "People, seeds, pressure, temperature and the cotton.",
+    "Crew 5 ✓ · founder 30 and vault 11 ✓ · pressure ✓ · temperature ✓ · cotton alive ✓ → open the shutter."
+   ]
+  }
+ },
+ "steps": {
+  "p15_confirm_teams": {
+   "id": "p15_confirm_teams",
+   "scene": "EX-CH08-S01",
+   "title": "Two boards, five names",
+   "goal": "Put three names on the rover board and two on home",
+   "why": "Nobody appears at the summit because the story needs another speaker.",
+   "kind": "assign",
+   "boards": [
+    {
+     "id": "rover",
+     "label": "Rover · to Malapert",
+     "seats": 3
+    },
+    {
+     "id": "home",
+     "label": "Aurora · keeps home",
+     "seats": 2
+    }
+   ],
+   "people": [
+    "ferreira",
+    "kai",
+    "rafi",
+    "mei",
+    "amara"
+   ],
+   "feedback": {
+    "mei_on_rover": "Mei has the garden. Only the home team can run the care round and the home loop.",
+    "amara_on_rover": "Amara reads the independent gauge at home. Without her, the home checks have no measurement.",
+    "seats": "Three travel and two keep Aurora. The rover has three seats and the garden needs two pairs of hands."
+   },
+   "no_go_role": "mei",
+   "poll": [
+    "ferreira",
+    "kai",
+    "amara",
+    "mei",
+    "rafi"
+   ]
+  },
+  "p15_confirm_loadout": {
+   "id": "p15_confirm_loadout",
+   "scene": "EX-CH08-S01",
+   "title": "Open crates against the manifest",
+   "goal": "Pack only what the signed manifest lists",
+   "why": "A missing spare blocks departure. An incompatible spare rides for nothing.",
+   "kind": "select_many",
+   "payload_key": "packed",
+   "items": [
+    {
+     "id": "controller",
+     "label": "Compatible relay controller",
+     "detail": "Kai's December note: connector and serial match the Malapert housing."
+    },
+    {
+     "id": "battery_spare",
+     "label": "Repeater battery spare",
+     "detail": "Matches the marker-two battery specification."
+    },
+    {
+     "id": "service_diagram",
+     "label": "Relay service diagram",
+     "detail": "The housing, the isolator and the two antenna channels."
+    },
+    {
+     "id": "repeater_checkpoints",
+     "label": "Three repeater checkpoints",
+     "detail": "Surveyed pads for markers one, two and three."
+    },
+    {
+     "id": "old_2034_controller",
+     "label": "2034 controller from the old housing",
+     "detail": "Damaged. Its connector does not match the December spare's."
+    },
+    {
+     "id": "decorative_floods",
+     "label": "Decorative flood lamps",
+     "detail": "Removed from the eclipse plan. They would ride on the return reserve."
+    }
+   ],
+   "feedback": {
+    "missing": "Something on the signed manifest is still in the bay. Departure waits.",
+    "forbidden": "That crate is not on the manifest. A damaged unit or a decorative load spends reserve for nothing."
+   },
+   "no_go_role": "kai",
+   "poll": [
+    "ferreira",
+    "kai",
+    "rafi"
+   ]
+  },
+  "p15_confirm_roundtrip_provisions": {
+   "id": "p15_confirm_roundtrip_provisions",
+   "scene": "EX-CH08-S01",
+   "title": "Supplies for the whole trip",
+   "goal": "Choose how many hours of independent supplies to carry",
+   "why": "Arrival is not the end of the journey.",
+   "kind": "choice",
+   "payload_key": "hours",
+   "options": [
+    {
+     "id": "outward",
+     "label": "24 hours",
+     "detail": "Enough for the outward leg only.",
+     "payload": {
+      "hours": 24
+     },
+     "feedback": "The return and the repair hours are missing. Twenty-four out, three repair, twenty-four back: departure waits."
+    },
+    {
+     "id": "outward_repair",
+     "label": "27 hours",
+     "detail": "Outward leg plus the repair window.",
+     "payload": {
+      "hours": 27
+     },
+     "feedback": "That covers the summit but not the road home. Return is part of the mission."
+    },
+    {
+     "id": "exact",
+     "label": "51 hours",
+     "detail": "Exactly the round trip: 24 + 3 + 24.",
+     "payload": {
+      "hours": 51
+     },
+     "advisory": "Exactly 51 hours leaves no margin. The rover carries 72; use the margin."
+    },
+    {
+     "id": "margin",
+     "label": "72 hours",
+     "detail": "The whole 51-hour plan with margin.",
+     "payload": {
+      "hours": 72
+     }
+    }
+   ],
+   "no_go_role": "amara",
+   "poll": [
+    "ferreira",
+    "kai",
+    "rafi",
+    "mei",
+    "amara"
+   ]
+  },
+  "p15_choose_surveyed_route": {
+   "id": "p15_choose_surveyed_route",
+   "scene": "EX-CH08-S02",
+   "title": "Which road can be committed?",
+   "goal": "Pick the road, then mark the battery that must stay unavailable",
+   "why": "Optimise only inside the safety limits.",
+   "kind": "route",
+   "payload_key": "route",
+   "routes": [
+    {
+     "id": "SHORTCUT",
+     "label": "Shorter steep shortcut",
+     "slope": 22,
+     "allowance": 3.5,
+     "detail": "Looks cheaper: 3.5 units each way.",
+     "feedback": "Route rejected by the flight rule: a 22° slope is above the rover's 15° limit. A reserve cannot rescue an impossible road."
+    },
+    {
+     "id": "SURVEYED",
+     "label": "Surveyed road",
+     "slope": 12,
+     "allowance": 5,
+     "detail": "5 units out, 5 back, 12° at the steepest."
+    }
+   ],
+   "reserve": {
+    "label": "Battery kept for the return and the minimum",
+    "min": 0,
+    "max": 26,
+    "step": 1
+   },
+   "feedback": {
+    "reserve_low": "That leaves less than the 2-unit minimum. The return stays in the departure budget.",
+    "reserve_high": "The battery cannot keep more than what the round trip leaves. Subtract both legs first."
+   },
+   "no_go_role": "rafi",
+   "poll": [
+    "ferreira",
+    "kai",
+    "rafi"
+   ]
+  },
+  "p15_confirm_return_reserve": {
+   "id": "p15_confirm_return_reserve",
+   "scene": "EX-CH08-S02",
+   "title": "Reconcile the reserve",
+   "goal": "Work out what the battery holds after the return",
+   "why": "The arithmetic is the plan: battery, minus out, minus back.",
+   "kind": "number",
+   "payload_key": "reserve",
+   "number": {
+    "label": "Battery after the round trip",
+    "min": 0,
+    "max": 26,
+    "step": 1,
+    "unit": "units"
+   },
+   "formula": "energy minus the outward allowance minus the return allowance",
+   "feedback": {
+    "wrong": "That is not what the battery holds after both legs. Subtract the outward allowance and the return allowance from the battery.",
+    "low": "Below the 2-unit minimum: the plan is not safe to commit."
+   },
+   "no_go_role": "kai",
+   "poll": [
+    "ferreira",
+    "kai",
+    "rafi"
+   ]
+  },
+  "p15_reach_marker_two": {
+   "id": "p15_reach_marker_two",
+   "scene": "EX-CH08-S03",
+   "title": "Match the marker to the map",
+   "goal": "Turn the bearing dial until the marker and the map agree",
+   "why": "The black sky and long shadows give scale, not a compass.",
+   "kind": "dial",
+   "dial": {
+    "label": "Bearing to marker two",
+    "min": 0,
+    "max": 360,
+    "coarse": 10,
+    "fine": 1,
+    "unit": "°",
+    "reading_label": "Scenario bearing (surveyed map)"
+   },
+   "presets": [
+    {
+     "id": "silhouette",
+     "label": "Steer toward the tall silhouette",
+     "bearing": 214,
+     "strength": "looks right",
+     "obstruction": "Not on the surveyed line. A silhouette is not a reference."
+    },
+    {
+     "id": "map",
+     "label": "Match the surveyed map bearing",
+     "bearing": 177,
+     "strength": "map and marker agree",
+     "obstruction": ""
+    }
+   ],
+   "feedback": {
+    "off": "The marker and the map disagree at that bearing. Match the marker, not the silhouette."
+   },
+   "no_go_role": "rafi",
+   "poll": [
+    "ferreira",
+    "kai",
+    "rafi"
+   ]
+  },
+  "p15_set_brake": {
+   "id": "p15_set_brake",
+   "scene": "EX-CH08-S03",
+   "title": "What does a dark marker justify?",
+   "goal": "Decide what to do at the dark marker",
+   "why": "A stable service point permits a bounded diagnosis.",
+   "kind": "choice",
+   "payload_key": "action",
+   "options": [
+    {
+     "id": "bypass",
+     "label": "Leave the road for the visible bypass",
+     "detail": "It looks shorter than the dark pad.",
+     "payload": {
+      "action": "bypass"
+     },
+     "feedback": "The terrain overlay shows an unsupported cliff route. Off-road driving meets a slope barrier; return to the last marker."
+    },
+    {
+     "id": "brake_on_pad",
+     "label": "Brake in the known service zone",
+     "detail": "Stop on the surveyed pad and set the brake.",
+     "payload": {
+      "action": "brake_on_pad"
+     }
+    }
+   ],
+   "no_go_role": "ferreira",
+   "poll": [
+    "ferreira",
+    "kai",
+    "rafi"
+   ]
+  },
+  "p15_save_position_packet": {
+   "id": "p15_save_position_packet",
+   "scene": "EX-CH08-S03",
+   "title": "Send the position packet",
+   "goal": "Choose the packet that tells Aurora where you are now",
+   "why": "A packet needs a sender, a position and a time.",
+   "kind": "choice",
+   "payload_key": "packet",
+   "options": [
+    {
+     "id": "stored",
+     "label": "Resend the stored packet",
+     "detail": "Sent from marker one earlier on the road.",
+     "payload": {
+      "packet": "stored"
+     },
+     "feedback": "That packet says where you were, not where you are. Aurora could not tell it from a stored update.",
+     "fields": {
+      "Sender": "Rafi",
+      "Position": "Marker one pad",
+      "Time": "8 April 04:30"
+     }
+    },
+    {
+     "id": "current",
+     "label": "Send a new packet",
+     "detail": "Marker two pad, brake set, now.",
+     "payload": {
+      "packet": "current"
+     },
+     "fields": {
+      "Sender": "Rafi",
+      "Position": "Marker two pad",
+      "Time": "8 April 10:00"
+     }
+    }
+   ],
+   "no_go_role": "rafi",
+   "poll": [
+    "rafi",
+    "mei"
+   ]
+  },
+  "p15_restore_marker_2": {
+   "id": "p15_restore_marker_2",
+   "scene": "EX-CH08-S04",
+   "title": "Repeater procedure card",
+   "goal": "Do the six steps in order",
+   "why": "Power isolated before the battery. No bare-handed repair in vacuum.",
+   "kind": "procedure",
+   "payload_key": "sequence",
+   "steps": [
+    {
+     "id": "isolate",
+     "label": "Open the isolation switch",
+     "verify": "Current reads 0 at the housing."
+    },
+    {
+     "id": "remove_battery",
+     "label": "Remove the dead battery",
+     "verify": "Housing clear; tether held."
+    },
+    {
+     "id": "compare_spec",
+     "label": "Compare the spare with the specification",
+     "verify": "Voltage and connector match the drawing."
+    },
+    {
+     "id": "install_spare",
+     "label": "Install the spare battery",
+     "verify": "Seated and latched."
+    },
+    {
+     "id": "close_housing",
+     "label": "Close and latch the housing",
+     "verify": "Latch indicator closed."
+    },
+    {
+     "id": "reconnect",
+     "label": "Close the isolation switch",
+     "verify": "Marker lights."
+    }
+   ],
+   "distractors": [
+    {
+     "id": "reseat_dead",
+     "label": "Re-seat the dead battery",
+     "feedback": "That battery is the fault. The packed spare matches the specification; the dead one does not light anything."
+    },
+    {
+     "id": "reconnect_open",
+     "label": "Reconnect with the housing open",
+     "feedback": "Held: the housing must be closed before power returns."
+    }
+   ],
+   "feedback": {
+    "order": "Held: the procedure names the missing condition. Do the previous step first.",
+    "unbraked": "An unbraked exterior repair cannot start. Set the brake on the pad first."
+   },
+   "no_go_role": "kai",
+   "poll": [
+    "kai",
+    "rafi",
+    "ferreira"
+   ]
+  },
+  "p15_test_repeater_chain": {
+   "id": "p15_test_repeater_chain",
+   "scene": "EX-CH08-S04",
+   "title": "The marker lights. What completes verification?",
+   "goal": "Test what the marker must do, not what it looks like",
+   "why": "A bright indicator can mean local power without proving a link.",
+   "kind": "select_many",
+   "payload_key": "tested",
+   "items": [
+    {
+     "id": "1-2",
+     "label": "Test marker one → marker two",
+     "detail": "Packet out, packet back."
+    },
+    {
+     "id": "2-3",
+     "label": "Test marker two → marker three",
+     "detail": "Packet out, packet back."
+    },
+    {
+     "id": "lit",
+     "label": "The marker is lit: call the chain working",
+     "detail": "No test."
+    }
+   ],
+   "feedback": {
+    "missing": "Lit means powered. Test both neighbours.",
+    "forbidden": "A light is not yet a link. Run the two adjacent-link tests before calling the chain working."
+   },
+   "no_go_role": "ferreira",
+   "poll": [
+    "kai",
+    "rafi",
+    "ferreira"
+   ]
+  },
+  "p15_reach_approach": {
+   "id": "p15_reach_approach",
+   "scene": "EX-CH08-S04",
+   "title": "Continue to marker three",
+   "goal": "Confirm the chain and drive on to the 100-kilometre approach",
+   "why": "The final twenty kilometres stay on the route schedule.",
+   "kind": "confirm",
+   "readback": "Three repeater sites verified. Field team reaches the 100-kilometre approach at 17:00; a time card holds the field position while control returns to Aurora.",
+   "poll": [
+    "ferreira",
+    "kai",
+    "rafi"
+   ]
+  },
+  "p15_confirm_home_occupancy": {
+   "id": "p15_confirm_home_occupancy",
+   "scene": "EX-CH08-S05",
+   "title": "Which home forecast matches the signed journey?",
+   "goal": "Choose how to count the people at home tonight",
+   "why": "Consumption follows the actual people and the moment they arrive.",
+   "kind": "choice",
+   "payload_key": "segments",
+   "options": [
+    {
+     "id": "two_all_night",
+     "label": "Two occupants for the whole night",
+     "detail": "Mei and Amara for 36 hours.",
+     "payload": {
+      "segments": [
+       [
+        2,
+        36
+       ]
+      ]
+     },
+     "feedback": "It omits the returning three during the final hours. Then five for the last three hours."
+    },
+    {
+     "id": "five_all_night",
+     "label": "Five occupants for the whole night",
+     "detail": "Count everyone from the start.",
+     "payload": {
+      "segments": [
+       [
+        5,
+        36
+       ]
+      ]
+     },
+     "feedback": "Three of them breathe rover air until 03:00 on 10 April. Counting them at home all night over-spends the forecast."
+    },
+    {
+     "id": "segmented",
+     "label": "Two for 33 hours, then five for 3 hours",
+     "detail": "The transition matches the dated roster.",
+     "payload": {
+      "segments": [
+       [
+        2,
+        33
+       ],
+       [
+        5,
+        3
+       ]
+      ]
+     }
+    }
+   ],
+   "no_go_role": "amara",
+   "poll": [
+    "mei",
+    "amara"
+   ]
+  },
+  "p15_confirm_segment_forecast": {
+   "id": "p15_confirm_segment_forecast",
+   "scene": "EX-CH08-S05",
+   "title": "Set the home loop and predict the air",
+   "goal": "Set heat, lamp and water return, then predict the night's air use",
+   "why": "Predict before you test the schedule.",
+   "kind": "settings",
+   "fields": [
+    {
+     "id": "heat",
+     "label": "Heat",
+     "options": [
+      {
+       "value": "COLD",
+       "label": "OFF",
+       "cost": "0 battery per shift · plants −2"
+      },
+      {
+       "value": "COOL",
+       "label": "MIN",
+       "cost": "1 battery per shift · plants −1"
+      },
+      {
+       "value": "COZY",
+       "label": "COZY",
+       "cost": "2 battery per shift · no cold damage"
+      }
+     ]
+    },
+    {
+     "id": "light",
+     "label": "Lamp",
+     "options": [
+      {
+       "value": "OFF",
+       "label": "OFF",
+       "cost": "0 battery · plants −1"
+      },
+      {
+       "value": "DIM",
+       "label": "DIM",
+       "cost": "1 battery · plants ±0"
+      },
+      {
+       "value": "FULL",
+       "label": "FULL",
+       "cost": "2 battery · plants +1"
+      }
+     ]
+    },
+    {
+     "id": "water_return",
+     "label": "Water return",
+     "options": [
+      {
+       "value": "OPEN",
+       "label": "OPEN",
+       "cost": "water flows back to the garden"
+      },
+      {
+       "value": "CLOSED",
+       "label": "CLOSED",
+       "cost": "water stays in the wall"
+      }
+     ]
+    },
+    {
+     "id": "air_total",
+     "label": "Air used over the whole night (predict)",
+     "options": [
+      {
+       "value": 2.5,
+       "label": "2.5",
+       "cost": "0.5 per shift × 5 shifts: two people all night"
+      },
+      {
+       "value": 2.8125,
+       "label": "2.8125",
+       "cost": "0.5 × 33 h ÷ 7.2 + 1.25 × 3 h ÷ 7.2"
+      },
+      {
+       "value": 6.25,
+       "label": "6.25",
+       "cost": "1.25 per shift × 5 shifts: five people all night"
+      }
+     ]
+    }
+   ],
+   "feedback": {
+    "heat": "The 36-hour night runs 5 shifts: COZY would spend 15 battery on heat alone, and OFF freezes the garden. MIN holds the garden at 1 per shift.",
+    "light": "DIM keeps the plants steady at 1 battery per shift; FULL spends the night's margin and OFF costs the garden.",
+    "water_return": "Thirst forecast: with the return CLOSED the garden dries while the wall holds water nobody needs tonight. Open the return.",
+    "air_total": "Air follows the people: 0.5 per shift for 33 hours, then 1.25 for 3 hours. Add the two parts."
+   },
+   "no_go_role": "mei",
+   "poll": [
+    "mei",
+    "amara"
+   ]
+  },
+  "p15_confirm_home_pressure": {
+   "id": "p15_confirm_home_pressure",
+   "scene": "EX-CH08-S05",
+   "title": "Verify pressure independently",
+   "goal": "Choose the reading that verifies the garden's pressure",
+   "why": "The panel once showed a misleading leak. The gauge did not.",
+   "kind": "choice",
+   "payload_key": "gauge",
+   "options": [
+    {
+     "id": "panel",
+     "label": "Trust the panel indication",
+     "detail": "The console summary says stable.",
+     "payload": {
+      "gauge": "panel"
+     },
+     "feedback": "The panel is a diagnosis, not a measurement. In the quake it was wrong; the independent gauge was right."
+    },
+    {
+     "id": "independent",
+     "label": "Read the independent gauge",
+     "detail": "100 relative units, steady over five readings.",
+     "payload": {
+      "gauge": "independent"
+     }
+    }
+   ],
+   "no_go_role": "amara",
+   "poll": [
+    "mei",
+    "amara"
+   ]
+  },
+  "p15_confirm_home_checks": {
+   "id": "p15_confirm_home_checks",
+   "scene": "EX-CH08-S06",
+   "title": "Home checks first",
+   "goal": "Run the home checks in order before any acknowledgement",
+   "why": "A working relay later cannot repair a neglected home now.",
+   "kind": "procedure",
+   "payload_key": "sequence",
+   "steps": [
+    {
+     "id": "air",
+     "label": "Check air against the forecast",
+     "verify": "Air within the segmented forecast."
+    },
+    {
+     "id": "temperature",
+     "label": "Check temperature",
+     "verify": "MIN heat holding."
+    },
+    {
+     "id": "return_path",
+     "label": "Check the open return path",
+     "verify": "Water return OPEN."
+    },
+    {
+     "id": "acknowledge",
+     "label": "Acknowledge the field message",
+     "verify": "Sent over local radio."
+    }
+   ],
+   "distractors": [],
+   "feedback": {
+    "order": "Home checks first. Then acknowledge."
+   },
+   "no_go_role": "amara",
+   "poll": [
+    "mei",
+    "amara"
+   ]
+  },
+  "p15_confirm_summit": {
+   "id": "p15_confirm_summit",
+   "scene": "EX-CH08-S06",
+   "title": "Which packet can certify arrival?",
+   "goal": "Pick the packet that proves the summit was reached",
+   "why": "Evidence must be current enough for the decision it supports.",
+   "kind": "choice",
+   "payload_key": "packet",
+   "options": [
+    {
+     "id": "approach",
+     "label": "The earlier approach packet",
+     "detail": "Stored on the console since 17:00.",
+     "payload": {
+      "packet": "approach"
+     },
+     "feedback": "Its location and time cannot prove summit arrival. Compare it with the newest position you know.",
+     "fields": {
+      "Sender": "Rafi",
+      "Position": "100 km approach",
+      "Time": "8 April 17:00"
+     }
+    },
+    {
+     "id": "summit",
+     "label": "The new summit packet",
+     "detail": "Sender, position and time match the planned 24-hour leg.",
+     "payload": {
+      "packet": "summit"
+     },
+     "fields": {
+      "Sender": "Rafi",
+      "Position": "Malapert summit, relay housing",
+      "Time": "9 April 00:00"
+     }
+    }
+   ],
+   "no_go_role": "mei",
+   "poll": [
+    "mei",
+    "amara"
+   ]
+  },
+  "p15_receive_summit_packet": {
+   "id": "p15_receive_summit_packet",
+   "scene": "EX-CH08-S06",
+   "title": "Acknowledge the current packet",
+   "goal": "Send the acknowledgement that belongs to the current packet",
+   "why": "A stale acknowledgement would mislead the other team.",
+   "kind": "choice",
+   "payload_key": "packet",
+   "options": [
+    {
+     "id": "stored",
+     "label": "Acknowledge the stored approach packet",
+     "detail": "It is already on the console.",
+     "payload": {
+      "packet": "stored"
+     },
+     "feedback": "That acknowledgement answers an old question. Accept the packet whose sender, position and time match the planned arrival."
+    },
+    {
+     "id": "current",
+     "label": "Acknowledge the current arrival packet",
+     "detail": "Three aboard, summit, 00:00.",
+     "payload": {
+      "packet": "current"
+     }
+    }
+   ],
+   "no_go_role": "amara",
+   "poll": [
+    "mei",
+    "amara"
+   ]
+  },
+  "p16_isolate_power": {
+   "id": "p16_isolate_power",
+   "scene": "EX-CH08-S07",
+   "title": "Which action is safe before removal?",
+   "goal": "Choose the first command on the housing",
+   "why": "The sequence blocks removal until isolation and zero are verified.",
+   "kind": "choice",
+   "payload_key": "step",
+   "options": [
+    {
+     "id": "reset_live",
+     "label": "Reset the damaged controller while live",
+     "detail": "The reset control is right there.",
+     "payload": {
+      "step": "reset_live"
+     },
+     "feedback": "A reset cannot certify a safe replacement. Removal stays blocked until isolation and zero are verified."
+    },
+    {
+     "id": "isolate",
+     "label": "Isolate relay power",
+     "detail": "Open the isolator first.",
+     "payload": {
+      "step": "isolate"
+     }
+    }
+   ],
+   "no_go_role": "ferreira",
+   "poll": [
+    "ferreira",
+    "kai"
+   ]
+  },
+  "p16_zero_test": {
+   "id": "p16_zero_test",
+   "scene": "EX-CH08-S07",
+   "title": "Verify zero",
+   "goal": "Read the meter before touching the controller",
+   "why": "Having the correct spare does not remove electrical hazards.",
+   "kind": "choice",
+   "payload_key": "reading",
+   "options": [
+    {
+     "id": "skip",
+     "label": "Skip the meter: the isolator is open",
+     "detail": "The switch position is proof enough.",
+     "payload": {
+      "reading": -1
+     },
+     "feedback": "A switch position is not a measurement. Verify zero at the point of work."
+    },
+    {
+     "id": "zero",
+     "label": "Meter reads 0.0 A",
+     "detail": "Isolated. Zero verified.",
+     "payload": {
+      "reading": 0
+     }
+    }
+   ],
+   "no_go_role": "kai",
+   "poll": [
+    "kai"
+   ]
+  },
+  "p16_install_controller": {
+   "id": "p16_install_controller",
+   "scene": "EX-CH08-S07",
+   "title": "Which spare goes in?",
+   "goal": "Check serial and connector at the point of use",
+   "why": "Preparation does not excuse verification.",
+   "kind": "choice",
+   "payload_key": "controller",
+   "options": [
+    {
+     "id": "old_2034",
+     "label": "The 2034 unit from the housing",
+     "detail": "Already seated once.",
+     "payload": {
+      "controller": "old_2034"
+     },
+     "feedback": "That is the damaged controller. Its serial is the fault record, not the spare."
+    },
+    {
+     "id": "bench_mismatch",
+     "label": "Bench unit with the other connector",
+     "detail": "It tested fine on the bench in March.",
+     "payload": {
+      "controller": "bench_mismatch"
+     },
+     "feedback": "A bench pass is not field verification. The connector does not match this housing."
+    },
+    {
+     "id": "december_spare",
+     "label": "The December spare",
+     "detail": "Kai's note: connector and serial match the Malapert housing.",
+     "payload": {
+      "controller": "december_spare"
+     }
+    }
+   ],
+   "no_go_role": "kai",
+   "poll": [
+    "kai",
+    "ferreira"
+   ]
+  },
+  "p16_close_housing": {
+   "id": "p16_close_housing",
+   "scene": "EX-CH08-S07",
+   "title": "Close before reconnecting",
+   "goal": "Decide what happens before power returns",
+   "why": "Reconnecting with the housing open is blocked.",
+   "kind": "choice",
+   "payload_key": "housing",
+   "options": [
+    {
+     "id": "open",
+     "label": "Reconnect now, close later",
+     "detail": "Save a minute on the handover window.",
+     "payload": {
+      "housing": "open"
+     },
+     "feedback": "Blocked: closed before reconnecting. The housing protects the connector in vacuum."
+    },
+    {
+     "id": "closed",
+     "label": "Close and latch the housing",
+     "detail": "Latch indicator closed.",
+     "payload": {
+      "housing": "closed"
+     }
+    }
+   ],
+   "no_go_role": "rafi",
+   "poll": [
+    "kai",
+    "rafi"
+   ]
+  },
+  "p16_restore_power": {
+   "id": "p16_restore_power",
+   "scene": "EX-CH08-S07",
+   "title": "Restore power",
+   "goal": "Close the isolator and watch the antenna panel wake",
+   "why": "Two channels, both unverified.",
+   "kind": "confirm",
+   "readback": "Isolate → zero → replace → close → power. The antenna panel wakes with two unverified channels.",
+   "payload": {
+    "step": "reconnect"
+   },
+   "poll": [
+    "ferreira",
+    "kai",
+    "rafi"
+   ]
+  },
+  "p16_local_bearing": {
+   "id": "p16_local_bearing",
+   "scene": "EX-CH08-S08",
+   "title": "Lock the road chain",
+   "goal": "Turn the local dials until the signal panel reads good with no obstruction",
+   "why": "Aurora first. An image of Earth above a ridge cannot prove that Aurora is audible.",
+   "kind": "dial",
+   "dial": {
+    "label": "Local antenna · azimuth",
+    "min": 0,
+    "max": 360,
+    "coarse": 10,
+    "fine": 1,
+    "unit": "°",
+    "reading_label": "Scenario bearing · Computed, no terrain"
+   },
+   "presets": [
+    {
+     "id": "L1",
+     "label": "Preset 1",
+     "bearing": 168,
+     "strength": "poor",
+     "obstruction": "Signal poor: the first repeater sits behind the near ridge from here."
+    },
+    {
+     "id": "L2",
+     "label": "Preset 2",
+     "bearing": 177,
+     "strength": "good",
+     "obstruction": ""
+    },
+    {
+     "id": "L3",
+     "label": "Preset 3",
+     "bearing": 186,
+     "strength": "blocked",
+     "obstruction": "Obstructed: terrain between the dish and the road chain."
+    }
+   ],
+   "feedback": {
+    "off": "No signal at that bearing. Try a preset or turn toward the road chain."
+   },
+   "no_go_role": "rafi",
+   "poll": [
+    "kai",
+    "rafi"
+   ]
+  },
+  "p16_earth_bearing": {
+   "id": "p16_earth_bearing",
+   "scene": "EX-CH08-S08",
+   "title": "Now the Earth leg",
+   "goal": "Turn the Earth dish until strength is good and the obstruction reading is clear",
+   "why": "Strength alone is not enough when the path stays obstructed.",
+   "kind": "dial",
+   "dial": {
+    "label": "Earth dish · azimuth",
+    "min": 0,
+    "max": 360,
+    "coarse": 10,
+    "fine": 1,
+    "unit": "°",
+    "reading_label": "Scenario bearing · Computed, no terrain"
+   },
+   "presets": [
+    {
+     "id": "E1",
+     "label": "Preset 1",
+     "bearing": 349,
+     "strength": "poor",
+     "obstruction": "Signal poor: Earth sits low; this bearing misses it."
+    },
+    {
+     "id": "E2",
+     "label": "Preset 2",
+     "bearing": 4,
+     "strength": "strong",
+     "obstruction": "Obstructed: strong, but the northern hills block the path. Check obstruction too."
+    },
+    {
+     "id": "E3",
+     "label": "Preset 3",
+     "bearing": 358,
+     "strength": "good",
+     "obstruction": ""
+    }
+   ],
+   "feedback": {
+    "off": "No signal at that bearing. Earth is almost due north and about 2.3° below a flat horizon."
+   },
+   "prerequisite_text": "Aurora first. Lock the local leg before the Earth dish.",
+   "no_go_role": "ferreira",
+   "poll": [
+    "kai",
+    "ferreira"
+   ]
+  },
+  "p16_stable_lock": {
+   "id": "p16_stable_lock",
+   "scene": "EX-CH08-S08",
+   "title": "Hold a stable lock",
+   "goal": "Hold both locks for 3 seconds, or tap to confirm",
+   "why": "Both legs locked and stable before the handover window closes.",
+   "kind": "lock",
+   "lock": {
+    "hold_seconds": 3,
+    "window_label": "Aurora Earth-set handover window: 01:45. Untimed equivalent: tap to confirm with assistance on."
+   },
+   "no_go_role": "kai",
+   "poll": [
+    "kai",
+    "rafi",
+    "ferreira"
+   ]
+  },
+  "p16_checksum": {
+   "id": "p16_checksum",
+   "scene": "EX-CH08-S09",
+   "title": "Which reply passes the content check?",
+   "goal": "Send the test phrase and pick the reply that is exact and current",
+   "why": "A signal meter can be strong while content arrives wrong.",
+   "kind": "choice",
+   "payload_key": "value",
+   "sent": "ALO42",
+   "options": [
+    {
+     "id": "near",
+     "label": "A L 0 4 2 · strong · current",
+     "detail": "Strength 5 of 5. One character differs.",
+     "payload": {
+      "value": "AL042",
+      "packet": "current"
+     },
+     "feedback": "Rejected: the third character is a zero, not the letter O. Strong is not the same as correct.",
+     "fields": {
+      "Reply": "AL042",
+      "Strength": "5 of 5",
+      "Test id": "this session"
+     }
+    },
+    {
+     "id": "old",
+     "label": "A L O 4 2 · strong · older saved packet",
+     "detail": "Exact text from yesterday's bench test.",
+     "payload": {
+      "value": "ALO42",
+      "packet": "stored"
+     },
+     "feedback": "Rejected: the acknowledgement belongs to an old test, not this one. Exact and current, or not at all.",
+     "fields": {
+      "Reply": "ALO42",
+      "Strength": "4 of 5",
+      "Test id": "bench, 8 April"
+     }
+    },
+    {
+     "id": "exact",
+     "label": "A L O 4 2 · good · current",
+     "detail": "Exact match, this test.",
+     "payload": {
+      "value": "ALO42",
+      "packet": "current"
+     },
+     "fields": {
+      "Reply": "ALO42",
+      "Strength": "4 of 5",
+      "Test id": "this session"
+     }
+    }
+   ],
+   "no_go_role": "rafi",
+   "poll": [
+    "rafi",
+    "kai"
+   ]
+  },
+  "p16_confirm_path_records": {
+   "id": "p16_confirm_path_records",
+   "scene": "EX-CH08-S09",
+   "title": "Save both path records",
+   "goal": "Record the two verified paths",
+   "why": "The network is useful when you can show where the information went.",
+   "kind": "select_many",
+   "payload_key": "records",
+   "items": [
+    {
+     "id": "local",
+     "label": "Local path: Aurora → three repeaters → summit",
+     "detail": "Four surface hops, each tested."
+    },
+    {
+     "id": "earth",
+     "label": "Earth path: summit dish → Earth",
+     "detail": "Locked, stable, exact echo."
+    }
+   ],
+   "feedback": {
+    "missing": "Both records, or the relay is only half a lighthouse.",
+    "forbidden": ""
+   },
+   "no_go_role": "rafi",
+   "poll": [
+    "rafi",
+    "amara"
+   ]
+  },
+  "p16_voice_verification_ready": {
+   "id": "p16_voice_verification_ready",
+   "scene": "EX-CH08-S09",
+   "title": "What stands in for a conversation?",
+   "goal": "Decide whether the data echo closes the test",
+   "why": "Connectivity and correct delivery need separate verification.",
+   "kind": "choice",
+   "payload_key": "plan",
+   "options": [
+    {
+     "id": "echo_enough",
+     "label": "The echo is enough: skip the voice checks",
+     "detail": "Data went and came back.",
+     "payload": {
+      "plan": "echo_enough"
+     },
+     "feedback": "A data echo does not stand in for a conversation. Now verify the voices at both ends."
+    },
+    {
+     "id": "explicit",
+     "label": "Keep both voice checks as explicit next steps",
+     "detail": "Aurora, then Earth.",
+     "payload": {
+      "plan": "explicit"
+     }
+    }
+   ],
+   "no_go_role": "ferreira",
+   "poll": [
+    "ferreira",
+    "rafi"
+   ]
+  },
+  "p16_noor_live_voice": {
+   "id": "p16_noor_live_voice",
+   "scene": "EX-CH08-S10",
+   "title": "Two voice checks, then transmit",
+   "goal": "Confirm Aurora's voice, then Earth's, then open the channel",
+   "why": "Leave pauses for the 2.6-second round trip.",
+   "kind": "procedure",
+   "payload_key": "voice_checks",
+   "steps": [
+    {
+     "id": "Aurora",
+     "label": "Voice check: Aurora",
+     "verify": "Mei and Amara heard clearly over the road chain."
+    },
+    {
+     "id": "Earth",
+     "label": "Voice check: Earth",
+     "verify": "Rao answers after the light-time pause."
+    }
+   ],
+   "distractors": [
+    {
+     "id": "transmit_first",
+     "label": "Transmit before the checks",
+     "feedback": "The transmit control waits until both path checks are visible."
+    }
+   ],
+   "feedback": {
+    "order": "Aurora first, then Earth. The checks are separate on purpose."
+   },
+   "no_go_role": "amara",
+   "poll": [
+    "ferreira",
+    "kai",
+    "amara",
+    "mei",
+    "rafi"
+   ]
+  },
+  "p16_confirm_telemetry": {
+   "id": "p16_confirm_telemetry",
+   "scene": "EX-CH08-S10",
+   "title": "Which report describes the achievement?",
+   "goal": "Choose the report sentence and send the garden telemetry",
+   "why": "Let each contributor stay named.",
+   "kind": "choice",
+   "payload_key": "report",
+   "options": [
+    {
+     "id": "relay_alone",
+     "label": "The relay crew alone saved the garden",
+     "detail": "Three people on a mountain fixed everything.",
+     "payload": {
+      "report": "relay_alone"
+     },
+     "feedback": "The checked record shows the home care and the earlier work that made this possible. The garden has more than one gardener."
+    },
+    {
+     "id": "both_teams",
+     "label": "Both teams and earlier work kept the expedition connected",
+     "detail": "Preparation, repair and ongoing care, all named.",
+     "payload": {
+      "report": "both_teams"
+     }
+    }
+   ],
+   "no_go_role": "mei",
+   "poll": [
+    "ferreira",
+    "kai",
+    "amara",
+    "mei",
+    "rafi"
+   ]
+  },
+  "p16_start_return": {
+   "id": "p16_start_return",
+   "scene": "EX-CH08-S10",
+   "title": "Read back the return departure",
+   "goal": "Confirm the departure time Rafi reads",
+   "why": "A read-back closes the loop.",
+   "kind": "choice",
+   "payload_key": "departure",
+   "options": [
+    {
+     "id": "now",
+     "label": "Leave now, 02:15",
+     "detail": "Every minute on the summit spends supplies.",
+     "payload": {
+      "departure": "2047-04-09 02:15 UTC"
+     },
+     "feedback": "The plan says 03:00: the call finishes and the cabin is sealed first. Read back the time on the card."
+    },
+    {
+     "id": "planned",
+     "label": "Return starts 03:00, 9 April",
+     "detail": "As planned: 24 hours to Aurora.",
+     "payload": {
+      "departure": "2047-04-09 03:00 UTC"
+     }
+    }
+   ],
+   "no_go_role": "rafi",
+   "poll": [
+    "ferreira",
+    "kai",
+    "rafi"
+   ]
+  },
+  "p16_confirm_return_24h": {
+   "id": "p16_confirm_return_24h",
+   "scene": "EX-CH08-S11",
+   "title": "Three route gates, new timestamps",
+   "goal": "At each gate, accept the current return packet",
+   "why": "A stale outward timestamp is not a homebound position.",
+   "kind": "select_many",
+   "payload_key": "gates",
+   "items": [
+    {
+     "id": "gate3_return",
+     "label": "Marker three: 9 April 09:00, homebound",
+     "detail": "Current return packet."
+    },
+    {
+     "id": "gate2_return",
+     "label": "Marker two: 9 April 17:00, homebound",
+     "detail": "Current return packet."
+    },
+    {
+     "id": "gate1_return",
+     "label": "Marker one: 10 April 01:00, homebound",
+     "detail": "Current return packet."
+    },
+    {
+     "id": "gate2_outward",
+     "label": "Marker two: 8 April 10:00, outward",
+     "detail": "Yesterday's packet from the repair."
+    }
+   ],
+   "feedback": {
+    "missing": "Same road, new timestamps. Confirm all three return gates.",
+    "forbidden": "That timestamp is from the outward leg. It cannot confirm a homebound position."
+   },
+   "no_go_role": "kai",
+   "poll": [
+    "rafi",
+    "kai"
+   ]
+  },
+  "p16_confirm_five_at_aurora": {
+   "id": "p16_confirm_five_at_aurora",
+   "scene": "EX-CH08-S11",
+   "title": "Arrival check",
+   "goal": "Verify the three returning names and the pressure procedure",
+   "why": "The airlock does not open because a cinematic needs a reunion.",
+   "kind": "select_many",
+   "payload_key": "arrivals",
+   "items": [
+    {
+     "id": "ferreira",
+     "label": "Ferreira",
+     "detail": "Returning."
+    },
+    {
+     "id": "kai",
+     "label": "Kai",
+     "detail": "Returning."
+    },
+    {
+     "id": "rafi",
+     "label": "Rafi",
+     "detail": "Returning."
+    },
+    {
+     "id": "pressure_procedure",
+     "label": "Equalise before opening",
+     "detail": "Pressure procedure complete."
+    },
+    {
+     "id": "noor",
+     "label": "Noor",
+     "detail": "On Earth, on the screen."
+    }
+   ],
+   "feedback": {
+    "missing": "Three arrivals expected and checked, and the pressure procedure before the door.",
+    "forbidden": "Noor is on the restored screen, not in the airlock."
+   },
+   "no_go_role": "amara",
+   "poll": [
+    "mei",
+    "amara"
+   ]
+  },
+  "p16_update_occupancy": {
+   "id": "p16_update_occupancy",
+   "scene": "EX-CH08-S11",
+   "title": "When should home consumption increase?",
+   "goal": "Choose the moment the base ledger changes",
+   "why": "Consumption belongs to the place actually supporting each person.",
+   "kind": "choice",
+   "payload_key": "occupancy_change",
+   "options": [
+    {
+     "id": "summit_departure",
+     "label": "When the rover leaves the summit",
+     "detail": "They are coming home, so count them now.",
+     "payload": {
+      "occupancy_change": "summit_departure"
+     },
+     "feedback": "Those people are still supplied by the rover. The base ledger changes at the actual location transition."
+    },
+    {
+     "id": "arrival",
+     "label": "When the three physically return at 03:00",
+     "detail": "Five home. Three hours to first light.",
+     "payload": {
+      "occupancy_change": "arrival"
+     }
+    }
+   ],
+   "no_go_role": "amara",
+   "poll": [
+    "mei",
+    "amara"
+   ]
+  },
+  "p16_save_final_records": {
+   "id": "p16_save_final_records",
+   "scene": "EX-CH08-S12",
+   "title": "Five checks before the shutter",
+   "goal": "Tick each check against its actual reading",
+   "why": "Dawn reveals the garden; it does not create it.",
+   "kind": "checks",
+   "payload_key": "checks",
+   "checks": [
+    {
+     "id": "crew",
+     "label": "Crew 5 safe at home",
+     "reads": "crew_home"
+    },
+    {
+     "id": "seeds",
+     "label": "Founder reserve 30 and eleven vault specimens protected",
+     "reads": "seeds"
+    },
+    {
+     "id": "pressure",
+     "label": "Garden pressure stable",
+     "reads": "pressure"
+    },
+    {
+     "id": "temperature",
+     "label": "Temperature stable",
+     "reads": "temperature"
+    },
+    {
+     "id": "cotton",
+     "label": "Cotton alive",
+     "reads": "cotton"
+    }
+   ],
+   "feedback": {
+    "missing": "The shutter waits for its safety checks. Tick every one against its reading."
+   },
+   "no_go_role": "rafi",
+   "poll": [
+    "ferreira",
+    "kai",
+    "amara",
+    "mei",
+    "rafi"
+   ]
+  },
+  "p16_save_photo": {
+   "id": "p16_save_photo",
+   "scene": "EX-CH08-S12",
+   "title": "Frame the shared photograph",
+   "goal": "Choose the frame for the photograph",
+   "why": "Everyone who kept the light is in it.",
+   "kind": "choice",
+   "payload_key": "frame",
+   "options": [
+    {
+     "id": "window",
+     "label": "By the window",
+     "detail": "Cotton in Tara's bay, the descendants in flower.",
+     "payload": {
+      "frame": "window"
+     }
+    },
+    {
+     "id": "board",
+     "label": "At the lineage board",
+     "detail": "Alo's petal, Tara's nameplate, both names.",
+     "payload": {
+      "frame": "board"
+     }
+    }
+   ],
+   "poll": [
+    "ferreira",
+    "kai",
+    "amara",
+    "mei",
+    "rafi"
+   ]
+  },
+  "p16_save_dedication": {
+   "id": "p16_save_dedication",
+   "scene": "EX-CH08-S12",
+   "title": "Choose a dedication",
+   "goal": "Pick the dedication the completed evidence supports",
+   "why": "It is engraved on the lineage board and shown in the credits.",
+   "kind": "choice",
+   "payload_key": "dedication",
+   "options": [
+    {
+     "id": "hands",
+     "label": "For every hand that kept the light",
+     "detail": "The photo credits the whole linked expedition.",
+     "payload": {
+      "dedication": "For every hand that kept the light"
+     }
+    },
+    {
+     "id": "gardens",
+     "label": "For the gardens we leave for others",
+     "detail": "The lineage record connects care across generations.",
+     "payload": {
+      "dedication": "For the gardens we leave for others"
+     }
+    }
+   ],
+   "poll": [
+    "ferreira",
+    "kai",
+    "amara",
+    "mei",
+    "rafi"
+   ]
+  },
+  "p16_make_credits_available": {
+   "id": "p16_make_credits_available",
+   "scene": "EX-CH08-S12",
+   "title": "Complete the credits",
+   "goal": "Finish the campaign",
+   "why": "Continue returns to the safe completed garden.",
+   "kind": "confirm",
+   "readback": "Final records, photo and dedication saved. Credits name both teams and the people who made their first chance possible.",
+   "poll": [
+    "ferreira",
+    "kai",
+    "amara",
+    "mei",
+    "rafi"
+   ]
+  }
+ }
+}

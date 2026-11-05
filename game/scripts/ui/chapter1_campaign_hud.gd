@@ -5,6 +5,8 @@ const Outpost = preload("res://scripts/ui/outpost_status.gd")
 const PANELS_SCENE: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
 const MISSION_TABLE_SCENE: PackedScene = preload("res://scenes/ui/mission_table_panel.tscn")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
+const CHAPTER8_PANEL_SCENE: PackedScene = preload("res://scenes/ui/chapter8_puzzle_panel.tscn")
+const Chapter8Script = preload("res://scripts/puzzles/chapter8_puzzles.gd")
 const IVORY := Color("#ECEEF0")
 const MUTED := Color("#A8B4C8")
 const CYAN := Color("#20B8C9")
@@ -15,6 +17,7 @@ const RED := Color("#E56B6F")
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
 var mission_table: MissionTablePanel
+var chapter8_panel: Chapter8PuzzlePanel
 var _title: Label
 var _meta: Label
 var _objective: Label
@@ -57,6 +60,11 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
 	mission_table.closed.connect(func(_target: String) -> void: _on_panel_closed("mission_table"))
 	mission_table.commit_requested.connect(_on_mission_table_commit)
+	chapter8_panel = CHAPTER8_PANEL_SCENE.instantiate() as Chapter8PuzzlePanel
+	add_child(chapter8_panel)
+	chapter8_panel.opened.connect(func(_target: String) -> void: _on_panel_opened("chapter8_panel"))
+	chapter8_panel.closed.connect(func(_target: String) -> void: _on_panel_closed("chapter8_panel"))
+	chapter8_panel.commit_requested.connect(_on_chapter8_commit)
 	_refresh_query()
 	refresh_scene({})
 
@@ -314,6 +322,9 @@ func _build_targets() -> void:
 		if MissionTableScript.is_gate(target_id):
 			button.text = "PLAN AT MISSION TABLE · " + String(target.get("focus_label", target_id)) + "\nAT " + label
 			button.pressed.connect(func() -> void: open_mission_table(target_id))
+		elif Chapter8Script.is_step(target_id):
+			button.text = "DECIDE · " + String(target.get("focus_label", target_id)) + "\nAT " + label
+			button.pressed.connect(func() -> void: open_chapter8_panel(target_id))
 		else:
 			button.pressed.connect(func() -> void: runtime.perform_target(target_id))
 		_targets.add_child(button)
@@ -344,6 +355,34 @@ func open_mission_table(target_id: String) -> bool:
 		return false
 	mission_table.open(runtime.route, target_id, runtime.query().get("accessibility", {}))
 	return true
+
+## Opens the Chapter 8 puzzle panel (P-15 / P-16) for one operation. Reading
+## and deciding pause the expedition; the physical commit happens only after
+## the panel closes with LOCK IN.
+func open_chapter8_panel(target_id: String) -> bool:
+	if runtime == null or chapter8_panel == null or runtime.is_chapter_complete() or not Chapter8Script.is_step(target_id):
+		return false
+	if runtime.is_cutscene_active() or chapter8_panel.is_open() or (mission_table != null and mission_table.is_open()):
+		return false
+	if panels != null and not panels.active_panel().is_empty():
+		return false
+	if not runtime.route.has_method("chapter8_view"):
+		return false
+	var settings: Dictionary = runtime.query().get("accessibility", {}).duplicate(true)
+	chapter8_panel.open(runtime.route, target_id, settings)
+	return true
+
+func _on_chapter8_commit(target_id: String, payload: Dictionary) -> void:
+	if runtime == null:
+		return
+	var result := runtime.perform_target(target_id, payload)
+	if not bool(result.get("accepted", false)):
+		show_status("HELD · " + String(result.get("reason", "The operation was not recorded.")))
+		return
+	var title := Chapter8Script.focus_label(target_id)
+	_last_outcome = {"result": "%s · locked in" % title, "changes": result.get("deltas", []), "notes": result.get("warnings", []) + result.get("ledger_summary", [])}
+	show_status("%s · locked in. %s" % [title, String(result.get("reason", ""))])
+	panels.open_panel("outcome", _last_outcome)
 
 func _on_mission_table_commit(target_id: String, plan: Dictionary) -> void:
 	if runtime == null:
@@ -453,7 +492,7 @@ func _layout_outpost() -> void:
 
 func _scale_text(node: Node, scale_factor: float) -> void:
 	for child in node.get_children():
-		if child == panels or child == mission_table:
+		if child == panels or child == mission_table or child == chapter8_panel:
 			continue
 		if child is Control:
 			if not child.has_meta("lla_base_font_size"):
@@ -481,7 +520,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_modal_button_states.clear()
 		return
 	for child in node.get_children():
-		if child == panels or child == mission_table:
+		if child == panels or child == mission_table or child == chapter8_panel:
 			continue
 		if child is BaseButton:
 			if not _modal_button_states.has(child):
@@ -491,7 +530,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
-		if panels != null and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()):
+		if panels != null and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (chapter8_panel == null or not chapter8_panel.is_open()):
 			panels.open_panel("pause")
 			get_viewport().set_input_as_handled()
 
