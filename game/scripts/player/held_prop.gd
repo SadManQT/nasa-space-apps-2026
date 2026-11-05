@@ -10,7 +10,9 @@ var prop_bounds := AABB()
 var grip := Vector3.ZERO
 var _bones: Dictionary = {}
 
-func setup(rig: Skeleton3D, hold: PlayerAnimation.Hold, scene: PackedScene) -> bool:
+## Aligns a packed prop to the existing BOX or RIGHT hand pose. Photoreal
+## cargo may preserve its authored materials with `stylize = false`.
+func setup(rig: Skeleton3D, hold: PlayerAnimation.Hold, scene: PackedScene, stylize: bool = true) -> bool:
 	if skeleton != null and skeleton.skeleton_updated.is_connected(update_alignment):
 		skeleton.skeleton_updated.disconnect(update_alignment)
 	if prop != null:
@@ -39,18 +41,26 @@ func setup(rig: Skeleton3D, hold: PlayerAnimation.Hold, scene: PackedScene) -> b
 	# The hand light is authored along +X; its central barrel is the grip.
 	var marker := prop.find_child("Grip", true, false) as Node3D
 	grip = prop.to_local(marker.global_position) if marker != null else prop_bounds.get_center()
-	ToonMaterials.apply_to_tree(prop, false, true)
+	if stylize:
+		ToonMaterials.apply_to_tree(prop, false, true)
 	# Read the final pose after IK, gaze and spring modifiers have run.
 	skeleton.skeleton_updated.connect(update_alignment)
 	update_alignment()
 	return true
 
+## Clears the attachment and its pose-update subscription safely.
+func clear() -> void:
+	setup(null, PlayerAnimation.Hold.NONE, null)
+
+## Returns a named hand joint in world coordinates after the final pose.
 func bone_position(suffix: String) -> Vector3:
 	return skeleton.global_transform * skeleton.get_bone_global_pose(_bones[suffix]).origin
 
+## Returns the midpoint used to align a prop between the palms.
 func palm_center(side: String) -> Vector3:
 	return (bone_position(side + "Hand") + bone_position(side + "HandMiddle1")) * 0.5
 
+## Refreshes alignment after IK, gaze and skeleton modifiers have run.
 func update_alignment() -> void:
 	if prop == null or not is_instance_valid(skeleton) or not skeleton.is_inside_tree() or not prop.is_inside_tree():
 		return
@@ -76,7 +86,7 @@ func update_alignment() -> void:
 		axes = Basis(across, up, across.cross(up))
 		prop.global_transform = Transform3D(axes, centre - axes * grip)
 
-# Centre of the circle through the right middle finger's three joints: the axis of whatever the hand grips.
+## Centre of the circle through the right middle finger's three joints.
 func curl_centre() -> Vector3:
 	var a := bone_position("RightHandMiddle1")
 	var ab := bone_position("RightHandMiddle2") - a

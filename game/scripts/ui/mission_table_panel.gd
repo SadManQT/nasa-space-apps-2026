@@ -15,6 +15,8 @@ class_name MissionTablePanel
 signal commit_requested(target_id: String, plan: Dictionary)
 signal opened(target_id: String)
 signal closed(target_id: String)
+## Requests the Safe Room carry activity before the STACK timer starts.
+signal payload_requested(settings: Dictionary)
 
 const TableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
 const INK := Color("#05060A")
@@ -207,6 +209,11 @@ func pin_plan_a() -> void:
 
 ## Starts the PUMP or STACK task; timed unless timer-free assistance is on.
 func start_task() -> Dictionary:
+	if String(_table().alarm_state().action) == "STACK":
+		if not payload_requested.has_connections():
+			return {"accepted": false, "reason": "Open the supply task from the Safe Room."}
+		payload_requested.emit(_settings.duplicate(true))
+		return {"accepted": true, "reason": "Choose your carrying controls before starting."}
 	var result: Dictionary = _table().start_alarm_task(bool(_settings.get("timer_free", true)))
 	if bool(result.get("accepted", false)):
 		_task_time_left = float(result.get("timer_seconds", 0))
@@ -215,9 +222,19 @@ func start_task() -> Dictionary:
 
 ## Confirms one valve or bundle step of the running task.
 func task_step(step_index: int) -> Dictionary:
+	if String(_table().alarm_state().action) == "STACK":
+		return {"accepted": false, "reason": "Carry a supply bundle to a bunk slot."}
 	var result: Dictionary = _table().task_step(step_index)
 	_after_action(result, "TaskStep_%d" % (step_index + 1))
 	return result
+
+## Refreshes the shared forecast after the physical supply task returns.
+func refresh_payload_result() -> void:
+	_task_time_left = 0.0
+	_previewed_key = ""
+	_notice = "Supplies checked. Try the forecast before locking in the shift."
+	_render()
+	_grab_first_focus()
 
 ## Ends the running task with its current progress.
 func end_task() -> Dictionary:
@@ -413,6 +430,22 @@ func _render_task(column: VBoxContainer, current: Dictionary) -> void:
 	var steps := int(alarm.get("steps", 0))
 	var progress := int(alarm.get("progress", 0))
 	var state := String(alarm.get("state", "idle"))
+	if action == "STACK":
+		column.add_child(_wrap("Carry supplies into the outlined bunk slots. All four placed: crates 2. One to three: crates 1. Crates shield beside the water wall; they never move garden water.", 14, IVORY))
+		if state == "resolved":
+			column.add_child(_wrap("%d of %d bundles placed · condition checked" % [progress, steps], 14, GREEN))
+		elif state == "idle":
+			var carry := _button("CARRY SUPPLIES · CHOOSE CONTROLS", "StartPayload")
+			carry.pressed.connect(func() -> void: start_task())
+			column.add_child(carry)
+		else:
+			# Old saves may contain a button-based task in progress. Resolve
+			# their recorded partial amount, without inventing more deliveries.
+			column.add_child(_wrap("Saved supply task: %d of %d placed." % [progress, steps], 14, MUTED))
+			var finish := _button("FINISH WITH SAVED SUPPLIES", "FinishSavedPayload")
+			finish.pressed.connect(func() -> void: end_task())
+			column.add_child(finish)
+		return
 	var assisted := bool(_settings.get("timer_free", true))
 	var box := _card_box(state == "resolved", true)
 	var inner := VBoxContainer.new()

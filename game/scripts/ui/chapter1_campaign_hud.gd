@@ -15,6 +15,7 @@ const RED := Color("#E56B6F")
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
 var mission_table: MissionTablePanel
+var payload_activity: PayloadStackActivity
 var _title: Label
 var _meta: Label
 var _objective: Label
@@ -60,6 +61,7 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
 	mission_table.closed.connect(func(_target: String) -> void: _on_panel_closed("mission_table"))
 	mission_table.commit_requested.connect(_on_mission_table_commit)
+	mission_table.payload_requested.connect(_on_payload_requested)
 	_resume_pending = bool(runtime.incremental_loading) and not runtime.initial_snapshot.is_empty()
 	_refresh_query()
 	refresh_scene({})
@@ -365,6 +367,20 @@ func _on_mission_table_commit(target_id: String, plan: Dictionary) -> void:
 	_last_outcome = {"result": "%s · %s" % [String(report.get("title", "")), String(report.get("summary", ""))], "changes": outcome.get("deltas", []), "notes": [star_line] + outcome.get("warnings", []) + report.get("unsafe_predicates", [])}
 	show_status("%s · %s\n%s" % [String(report.get("title", "")), String(report.get("summary", "")), star_line])
 	panels.open_panel("outcome", _last_outcome)
+
+## Hosts the physical shift-5 STACK activity (doc 25 §4.3) over the paused
+## Mission Table. The job is staged in the Safe Room; anywhere else the table
+## keeps its button flow and the cadet is told where to go.
+func _on_payload_requested(settings: Dictionary) -> void:
+	if runtime == null or is_instance_valid(payload_activity):
+		return
+	if runtime.route.current_room_id() != "LOC-04":
+		show_status("Carry the supplies from the Safe Room response controls.")
+		return
+	payload_activity = PayloadStackActivity.new()
+	runtime.add_child(payload_activity)
+	payload_activity.closed.connect(func() -> void: payload_activity = null)
+	payload_activity.setup(runtime, settings)
 
 func _render_caption() -> void:
 	if runtime == null:
