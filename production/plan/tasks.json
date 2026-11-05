@@ -3857,7 +3857,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Cutscene staging from the narrative revision: CS-15 call, CS-17 final garden, CS-18 lamp blink",
-   "status": "todo",
+   "status": "blocked",
    "deps": [],
    "paths": [
     "production/cutscenes/v8/",
@@ -3875,7 +3875,8 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Problem: the finale cutscenes are being made now, and the staging that gives them their weight (the pause, the three places, Tara's nameplate, the named mugs, the lamp blink) is not in their plans.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.5 (beats 5-13 and the CS-15 note), §7.6 (CS-17 table and note), §7.7 (CS-18), §2.11; production/cutscenes/v8/notes_C.md (current shot plan and resume steps).\nDo: (1) CS-15: hold the 2.6 s round-trip silence on the cut into shot B (the arc to Noor); no music under her first words (CUE-11 after); three ambiences each under its own picture (rover cabin hum, Aurora low-power fans, a Dhaka morning rooftop: generate SFX_DHAKA_ROOFTOP_MORNING); the Moon is not shown in Dhaka's sky. Use Rao's and Noor's new lines only if M3-94 approved them, else the text alternatives. (2) CS-17-C/D: frame edits adding Tara's nameplate beside Alo's petal, a named lineage label instead of a blank one, and five named mugs. (3) CS-18: four-frame inventory-lamp blink on the accepted CS-18-A still with SFX_INVENTORY_LAMP_TICK; 8 s.\nAcceptance: each master checked with ffmpeg scdet; ART_BIBLE §2 checks pass (black sky, no airborne exterior sound, four-petal flowers, no plant faces, no logos, no Bangla script); captions match vo_lines.csv exactly; screenshots of key frames in production/qa/evidence/M3-97_*.png. Log every AI generation in production/AI_PROMPT_LOG.md.",
-   "owner": ""
+   "owner": "",
+   "blocker": "Night shift parked the work on branch night/M3-97: You've hit your weekly limit · resets Nov 10 at 5pm (Asia/Dhaka)\n"
   },
   {
    "id": "M3-98",
