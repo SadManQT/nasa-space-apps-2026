@@ -1,0 +1,83 @@
+{
+ "about": "Region, site and story-date definitions for production/tools/make_terrain.py (board M1-34). Coordinates are south polar stereographic metres in the MOON_ME (DE421) frame: x grows toward 90 deg E, y grows toward 0 deg E, the pole is (0, 0). Heights are metres above the 1,737.4 km reference sphere. Pinned site coordinates are written back by `make_terrain.py sites`; the rule that chose each one is kept beside it.",
+ "moon_radius_m": 1737400.0,
+ "products": {
+  "pgda78_site01": {"title": "High-Resolution LOLA Topography for Lunar South Pole Sites: Site01 Connecting ridge, 5 m/px", "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/Site01/Site01_final_adj_5mpp_surf.tif", "page": "https://pgda.gsfc.nasa.gov/products/78", "doi": "10.1016/j.pss.2020.105119", "mpp": 5, "kind": "strip_tiff"},
+  "pgda78_site04": {"title": "High-Resolution LOLA Topography for Lunar South Pole Sites: Site04 Shackleton rim, 5 m/px", "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/Site04/Site04_final_adj_5mpp_surf.tif", "page": "https://pgda.gsfc.nasa.gov/products/78", "doi": "10.1016/j.pss.2020.105119", "mpp": 5, "kind": "strip_tiff"},
+  "pgda78_site23": {"title": "High-Resolution LOLA Topography for Lunar South Pole Sites: Site23 Malapert massif, 5 m/px", "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/Site23/Site23_final_adj_5mpp_surf.tif", "page": "https://pgda.gsfc.nasa.gov/products/78", "doi": "10.1016/j.pss.2020.105119", "mpp": 5, "kind": "strip_tiff"},
+  "pgda90_10mpp": {"title": "A New View of the Lunar South Pole from LOLA: LDEM_83S_10MPP_ADJ (83S-90S, 10 m/px)", "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_83S_10MPP_ADJ.TIF", "page": "https://pgda.gsfc.nasa.gov/products/90", "doi": "10.3847/PSJ/acf3e1", "data_doi": "10.60903/gsfcpgda-lola-spole", "mpp": 10, "kind": "cog"},
+  "pgda90_20mpp": {"title": "A New View of the Lunar South Pole from LOLA: LDEM_80S_20MPP_ADJ (80S-90S, 20 m/px)", "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_20MPP_ADJ.TIF", "page": "https://pgda.gsfc.nasa.gov/products/90", "doi": "10.3847/PSJ/acf3e1", "data_doi": "10.60903/gsfcpgda-lola-spole", "mpp": 20, "kind": "cog"},
+  "pgda90_20mpp_hill": {"title": "A New View of the Lunar South Pole from LOLA: LDEM_80S_20MPP_ADJ_HILL (hillshade, 45 deg altitude, 45 deg azimuth)", "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_20MPP_ADJ_HILL.TIF", "page": "https://pgda.gsfc.nasa.gov/products/90", "doi": "10.3847/PSJ/acf3e1", "data_doi": "10.60903/gsfcpgda-lola-spole", "mpp": 20, "kind": "cog"},
+  "pgda90_20mpp_psr": {"title": "A New View of the Lunar South Pole from LOLA: LPSR_80S_20MPP_ADJ (permanently shadowed regions map)", "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LPSR_80S_20MPP_ADJ.TIF", "page": "https://pgda.gsfc.nasa.gov/products/90", "doi": "10.3847/PSJ/acf3e1", "data_doi": "10.60903/gsfcpgda-lola-spole", "mpp": 20, "kind": "cog"},
+  "pgda90_40mpp": {"title": "A New View of the Lunar South Pole from LOLA: LDEM_80S_40MPP_ADJ (80S-90S, 40 m/px)", "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_40MPP_ADJ.TIF", "page": "https://pgda.gsfc.nasa.gov/products/90", "doi": "10.3847/PSJ/acf3e1", "data_doi": "10.60903/gsfcpgda-lola-spole", "mpp": 40, "kind": "cog"},
+  "pgda90_80mpp": {"title": "A New View of the Lunar South Pole from LOLA: LDEM_80S_80MPP_ADJ (80S-90S, 80 m/px)", "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_80MPP_ADJ.TIF", "page": "https://pgda.gsfc.nasa.gov/products/90", "doi": "10.3847/PSJ/acf3e1", "data_doi": "10.60903/gsfcpgda-lola-spole", "mpp": 80, "kind": "cog"},
+  "pds_ldem_80s_20m": {"title": "PDS LRO LOLA GDR LDEM_80S_20M V2.0 (cross-check only)", "url": "https://imbrium.mit.edu/DATA/LOLA_GDR/POLAR/IMG/LDEM_80S_20M.IMG", "label": "https://imbrium.mit.edu/DATA/LOLA_GDR/POLAR/IMG/LDEM_80S_20M.LBL", "page": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm", "dataset_id": "LRO-L-LOLA-4-GDR-V1.0", "mpp": 20, "kind": "pds_img", "lines": 30400, "samples": 30400, "scaling_factor": 0.5, "projection_offset": 15199.5}
+ },
+ "sites": {
+  "aurora": {
+   "name": "Aurora Station (authored outpost) on the Shackleton-de Gerlache connecting ridge",
+   "rule": "highest LOLA pixel within 1,500 m of the centre of PGDA Site01 (Connecting ridge, Mazarico et al. 2011 site 1), x = -11,000 m, y = -12,000 m",
+   "search_center_xy_m": [-11000.0, -12000.0],
+   "search_radius_m": 1500.0,
+   "mast_height_m": 10.0
+  },
+  "cold_trap": {
+   "name": "Chapter 4 cold trap: a small permanently shadowed basin reached by a ridge road from Aurora",
+   "rule": "PSR from LPSR_80S_20MPP_ADJ with 0.3 to 6 km2 of area, outside Shackleton, whose slope-limited (<= 12 deg) route from Aurora on the 20 m DEM is closest to 12 km; the site is the lowest PSR pixel",
+   "min_area_km2": 0.3,
+   "max_area_km2": 6.0,
+   "target_route_km": 12.0,
+   "max_route_km": 20.0,
+   "slope_limit_deg": 12.0,
+   "shackleton_center_xy_m": [7686.0, -6400.0],
+   "shackleton_exclude_radius_m": 12000.0
+  },
+  "malapert_summit": {
+   "name": "Malapert relay summit (authored platform at the highest point of Mons Malapert)",
+   "rule": "highest LOLA pixel of PGDA Site23 (Malapert massif) within 6,000 m of the USGS/IAU Mons Malapert centre, -85.98 deg, -1.67 deg E",
+   "search_center_latlon": [-85.98, -1.67],
+   "search_radius_m": 6000.0
+  }
+ },
+ "regions": [
+  {"id": "aurora_ridge", "kind": "hero", "site": "aurora", "size_m": 8000, "mpp": 5, "sources": ["pgda78_site01", "pgda90_10mpp"], "story": "LOC-06 mast courtyard, Chapter 1 to 8 exteriors at Aurora"},
+  {"id": "aurora_vista", "kind": "vista", "site": "aurora", "size_m": 64000, "mpp": 40, "sources": ["pgda90_40mpp"], "story": "horizon from Aurora: Shackleton, de Gerlache, the pole"},
+  {"id": "cold_trap", "kind": "hero", "site": "cold_trap", "size_m": 8000, "mpp": 5, "sources": ["pgda78_site01", "pgda78_site04", "pgda90_10mpp"], "story": "LOC-09 surveyed approach and LOC-10 vault shelf (Chapter 4)"},
+  {"id": "relay_road", "kind": "corridor", "from": "aurora", "to": "malapert_summit", "half_width_m": 16000, "mpp": 80, "sources": ["pgda90_80mpp"], "story": "LOC-11 relay road, 120 km in five playable segments (Chapter 8); 80 m vista grid, cut 10 m patches for the playable segments with make_terrain.window_m"},
+  {"id": "malapert_summit", "kind": "hero", "site": "malapert_summit", "size_m": 8000, "mpp": 5, "sources": ["pgda78_site23", "pgda90_10mpp"], "story": "LOC-12 relay summit (Chapter 8)"},
+  {"id": "malapert_vista", "kind": "vista", "site": "malapert_summit", "size_m": 64000, "mpp": 40, "sources": ["pgda90_40mpp"], "story": "horizon from the summit toward Earth"}
+ ],
+ "routes": [
+  {"id": "cold_trap_road", "from": "aurora", "to": "cold_trap", "grid": "pgda90_20mpp", "route_mpp": 20.0, "corridor_half_width_m": 6000.0, "slope_limit_deg": 12.0, "hard_limit_deg": 15.0, "story": "P-07 route B: 12 km ridge road, max 12 deg (game numbers from game-design/08_PUZZLE_DESIGNS.md; the computed road is evidence, not a replacement); routed on the full 20 m grid"},
+  {"id": "relay_road", "from": "aurora", "to": "malapert_summit", "grid": "pgda90_80mpp", "route_mpp": 80.0, "corridor_half_width_m": 40000.0, "slope_limit_deg": 12.0, "hard_limit_deg": 15.0, "story": "P-15 surveyed road: 120 km each way, max 12 deg (game numbers unchanged). The real summit plateau is ringed by slopes over 12 deg on the 80 m grid, so the last approach may use up to the VIPER design incline of 15 deg; the length above 12 deg is reported"}
+ ],
+ "sun_windows": [
+  {"id": "ch01_april_2046", "site": "aurora", "start": "2046-04-10 00:00", "stop": "2046-05-01 00:00", "step": "1 h", "scenes": "EX-CH01-S01..S12 (11 to 27 April 2046; the authored night runs 25 Apr 18:00 to 27 Apr 06:00 UTC)"},
+  {"id": "ch04_october_2046", "site": "aurora", "start": "2046-10-20 00:00", "stop": "2046-10-23 00:00", "step": "1 h", "scenes": "EX-CH04-S01..S09 departure and return at Aurora, 21-22 October 2046"},
+  {"id": "ch04_cold_trap", "site": "cold_trap", "start": "2046-10-20 00:00", "stop": "2046-10-23 00:00", "step": "1 h", "scenes": "EX-CH04-S04..S08 at the cold trap, 21 October 2046 morning"},
+  {"id": "ch05_december_2046", "site": "aurora", "start": "2046-12-11 00:00", "stop": "2046-12-14 00:00", "step": "1 h", "scenes": "EX-CH05-S01 landing camera, 12 December 2046"},
+  {"id": "ch06_january_2047", "site": "aurora", "start": "2047-01-11 00:00", "stop": "2047-01-14 00:00", "step": "1 h", "scenes": "EX-CH06-S07 eclipse window, 12 January 2047"},
+  {"id": "ch07_february_2047", "site": "aurora", "start": "2047-02-13 00:00", "stop": "2047-02-16 00:00", "step": "1 h", "scenes": "EX-CH07 storm shelter, 14 February 2047"},
+  {"id": "ch08_april_2047", "site": "aurora", "start": "2047-04-07 00:00", "stop": "2047-04-11 00:00", "step": "1 h", "scenes": "EX-CH08-S01 departure 8 Apr 00:00, EX-CH08-S11 return 10 Apr 03:00"},
+  {"id": "ch08_summit", "site": "malapert_summit", "start": "2047-04-08 00:00", "stop": "2047-04-11 00:00", "step": "1 h", "scenes": "EX-CH08-S06..S10 summit 9 April 2047 00:00-02:15 UTC"}
+ ],
+ "preview_scenes": {"about": "the dated story scene whose Horizons Sun lights each site in the previews, the review sheets and the Godot captures", "aurora": "EX-CH01-S07", "cold_trap": "EX-CH04-S05", "malapert_summit": "EX-CH08-S08"},
+ "scene_lighting": [
+  {"scene": "EX-CH01-S01", "site": "aurora", "utc": "2046-04-11 06:00", "note": "mission table; exterior seen through the viewport"},
+  {"scene": "EX-CH01-S07", "site": "aurora", "utc": "2046-04-25 06:00", "note": "daylight shifts 1-2, mast status"},
+  {"scene": "EX-CH01-S09", "site": "aurora", "utc": "2046-04-25 18:00", "note": "authored night begins"},
+  {"scene": "EX-CH01-S12", "site": "aurora", "utc": "2046-04-27 06:00", "note": "authored night ends"},
+  {"scene": "EX-CH04-S02", "site": "aurora", "utc": "2046-10-21 06:00", "note": "rover departure"},
+  {"scene": "EX-CH04-S05", "site": "cold_trap", "utc": "2046-10-21 09:00", "note": "cold-trap reference station"},
+  {"scene": "EX-CH04-S06", "site": "cold_trap", "utc": "2046-10-21 10:30", "note": "vault approach"},
+  {"scene": "EX-CH04-S09", "site": "aurora", "utc": "2046-10-22 06:00", "note": "ridge return"},
+  {"scene": "EX-CH05-S01", "site": "aurora", "utc": "2046-12-12 12:00", "note": "landing camera (arrival hour is authored)"},
+  {"scene": "EX-CH06-S07", "site": "aurora", "utc": "2047-01-12 01:00", "note": "eclipse totality window (00:00-02:42 UT per docs)"},
+  {"scene": "EX-CH07-S05", "site": "aurora", "utc": "2047-02-14 06:00", "note": "everyone inside"},
+  {"scene": "EX-CH08-S01", "site": "aurora", "utc": "2047-04-08 00:00", "note": "rover departure"},
+  {"scene": "EX-CH08-S03", "site": "relay_road_mid", "utc": "2047-04-08 06:00", "note": "first repeater sector (road midpoint)"},
+  {"scene": "EX-CH08-S06", "site": "malapert_summit", "utc": "2047-04-09 00:00", "note": "summit reached"},
+  {"scene": "EX-CH08-S08", "site": "malapert_summit", "utc": "2047-04-09 01:15", "note": "Earth dish lock window 00:45-01:45"},
+  {"scene": "EX-CH08-S11", "site": "aurora", "utc": "2047-04-10 03:00", "note": "return"}
+ ]
+}

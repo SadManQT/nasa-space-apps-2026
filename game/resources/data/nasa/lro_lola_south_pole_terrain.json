@@ -1,0 +1,389 @@
+{
+ "source_id": "lro_lola_south_pole_terrain",
+ "retrieved": "2026-11-05",
+ "title": "The real south-pole terrain: LRO LOLA elevation models of the connecting ridge, a cold trap and Mons Malapert",
+ "agency": "NASA Goddard Space Flight Center, Planetary Geodynamics Data Archive (PGDA); LRO LOLA team; NASA PDS Geosciences Node",
+ "dataset_id": "PGDA product 90 (LDEM_80S_20MPP_ADJ, LDEM_80S_40MPP_ADJ, LDEM_80S_80MPP_ADJ, LPSR_80S_20MPP_ADJ; data DOI 10.60903/gsfcpgda-lola-spole), PGDA product 78 (Site01, Site04, Site23 5 m/px), PDS LRO-L-LOLA-4-GDR-V1.0 LDEM_80S_20M (cross-check)",
+ "url": "https://pgda.gsfc.nasa.gov/products/90",
+ "request_urls": [
+  "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/Site01/Site01_final_adj_5mpp_surf.tif",
+  "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/Site23/Site23_final_adj_5mpp_surf.tif",
+  "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_20MPP_ADJ.TIF",
+  "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_40MPP_ADJ.TIF",
+  "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LPSR_80S_20MPP_ADJ.TIF",
+  "https://imbrium.mit.edu/DATA/LOLA_GDR/POLAR/IMG/LDEM_80S_20M.IMG"
+ ],
+ "licence": "U.S. Government work (no U.S. copyright); free to use with credit",
+ "citation": "Barker, M. K., Mazarico, E., Neumann, G. A., Smith, D. E., Zuber, M. T., Head, J. W. (2021). Improved LOLA elevation maps for south pole landing sites: error estimates and their impact on illumination conditions. Planetary and Space Science 203, 105119. https://doi.org/10.1016/j.pss.2020.105119; Barker, M. K., Mazarico, E., Neumann, G. A., Smith, D. E., Zuber, M. T., Head, J. W. (2023). A New View of the Lunar South Pole from LOLA. The Planetary Science Journal 4, 183. https://doi.org/10.3847/PSJ/acf3e1 ; data https://doi.org/10.60903/gsfcpgda-lola-spole; Smith, D. E. et al. (2010). The Lunar Orbiter Laser Altimeter investigation on the Lunar Reconnaissance Orbiter mission. Space Science Reviews 150, 209-241; LRO-L-LOLA-4-GDR-V1.0, NASA PDS Geosciences Node; Mazarico, E., Neumann, G. A., Smith, D. E., Zuber, M. T., Torrence, M. H. (2011). Illumination conditions of the lunar polar regions using LOLA topography. Icarus 211, 1066-1081. https://doi.org/10.1016/j.icarus.2010.10.030; JPL Horizons On-Line Ephemeris System (DE441), https://ssd.jpl.nasa.gov/horizons/",
+ "credit_line": "Terrain made from NASA data: Lunar Reconnaissance Orbiter, Lunar Orbiter Laser Altimeter (LOLA) elevation models from NASA Goddard's Planetary Geodynamics Data Archive (Barker et al. 2021, 2023) and the NASA PDS; Sun and Earth positions from NASA JPL Horizons. NASA does not endorse this game.",
+ "credit_line_short": "Terrain made from NASA LRO LOLA data (GSFC PGDA / PDS); sky geometry from JPL Horizons.",
+ "fields_used": [
+  "surface height (m) above the 1,737.4 km sphere, south polar stereographic 5/20/40/80 m per pixel",
+  "permanently shadowed region mask",
+  "JPL Horizons Sun and Earth azimuth/elevation"
+ ],
+ "values": {
+  "sites": {
+   "aurora": {
+    "x_m": -11572.5,
+    "y_m": -12472.5,
+    "height_m": 1959.4962,
+    "lat_deg": -89.4389,
+    "lon_deg_east": 222.8564,
+    "name": "Aurora Station (authored outpost) on the Shackleton-de Gerlache connecting ridge",
+    "rule": "highest LOLA pixel within 1,500 m of the centre of PGDA Site01 (Connecting ridge, Mazarico et al. 2011 site 1), x = -11,000 m, y = -12,000 m"
+   },
+   "malapert_summit": {
+    "x_m": -4987.5,
+    "y_m": 122327.5,
+    "height_m": 4993.6182,
+    "lat_deg": -85.9642,
+    "lon_deg_east": 357.6652,
+    "name": "Malapert relay summit (authored platform at the highest point of Mons Malapert)",
+    "rule": "highest LOLA pixel of PGDA Site23 (Malapert massif) within 6,000 m of the USGS/IAU Mons Malapert centre, -85.98 deg, -1.67 deg E"
+   },
+   "cold_trap": {
+    "name": "Chapter 4 cold trap: a small permanently shadowed basin reached by a ridge road from Aurora",
+    "rule": "PSR from LPSR_80S_20MPP_ADJ with 0.3 to 6 km2 of area, outside Shackleton, whose slope-limited (<= 12 deg) route from Aurora on the 20 m DEM is closest to 12 km; the site is the lowest PSR pixel",
+    "x_m": -4230.0,
+    "y_m": -11970.0,
+    "height_m": 1126.7808,
+    "lat_deg": -89.5813,
+    "lon_deg_east": 199.4626,
+    "psr_area_km2": 1.858
+   }
+  },
+  "heightmaps": {
+   "aurora_ridge": {
+    "metres_per_pixel": 5.0,
+    "columns": 1600,
+    "rows": 1600,
+    "z_min_m": 737.959,
+    "z_max_m": 1959.496,
+    "source": "pgda78_site01"
+   },
+   "aurora_vista": {
+    "metres_per_pixel": 40.0,
+    "columns": 1600,
+    "rows": 1600,
+    "z_min_m": -2981.267,
+    "z_max_m": 1958.613,
+    "source": "pgda90_40mpp"
+   },
+   "cold_trap": {
+    "metres_per_pixel": 10.0,
+    "columns": 800,
+    "rows": 800,
+    "z_min_m": 319.509,
+    "z_max_m": 1730.713,
+    "source": "pgda90_10mpp"
+   },
+   "relay_road": {
+    "metres_per_pixel": 80.0,
+    "columns": 724,
+    "rows": 2114,
+    "z_min_m": -4021.135,
+    "z_max_m": 5172.486,
+    "source": "pgda90_80mpp"
+   },
+   "malapert_summit": {
+    "metres_per_pixel": 5.0,
+    "columns": 1600,
+    "rows": 1600,
+    "z_min_m": 3478.059,
+    "z_max_m": 4993.618,
+    "source": "pgda78_site23"
+   },
+   "malapert_vista": {
+    "metres_per_pixel": 40.0,
+    "columns": 1600,
+    "rows": 1600,
+    "z_min_m": -2510.642,
+    "z_max_m": 5173.187,
+    "source": "pgda90_40mpp"
+   }
+  },
+  "columns": [
+   "chapter",
+   "sun_el_deg",
+   "sun_az_deg",
+   "terrain_horizon_deg",
+   "sun_state",
+   "site",
+   "utc",
+   "earth_el_deg"
+  ],
+  "scene_lighting": [
+   [
+    "Chapter 1",
+    -1.58,
+    256.042,
+    -1.63,
+    "partial",
+    "aurora",
+    "2046-04-11 06:00",
+    4.759
+   ],
+   [
+    "Chapter 1",
+    -1.504,
+    85.492,
+    -2.06,
+    "lit",
+    "aurora",
+    "2046-04-25 06:00",
+    -4.519
+   ],
+   [
+    "Chapter 1",
+    -1.447,
+    79.4,
+    -1.53,
+    "partial",
+    "aurora",
+    "2046-04-25 18:00",
+    -3.889
+   ],
+   [
+    "Chapter 1",
+    -1.284,
+    61.114,
+    -2.74,
+    "lit",
+    "aurora",
+    "2046-04-27 06:00",
+    -1.848
+   ],
+   [
+    "Chapter 4",
+    1.823,
+    59.794,
+    -2.62,
+    "lit",
+    "aurora",
+    "2046-10-21 06:00",
+    1.78
+   ],
+   [
+    "Chapter 4",
+    1.601,
+    81.663,
+    9.89,
+    "dark",
+    "cold_trap",
+    "2046-10-21 09:00",
+    1.594
+   ],
+   [
+    "Chapter 4",
+    1.606,
+    80.902,
+    9.94,
+    "dark",
+    "cold_trap",
+    "2046-10-21 10:30",
+    1.506
+   ],
+   [
+    "Chapter 4",
+    1.91,
+    47.616,
+    -2.74,
+    "lit",
+    "aurora",
+    "2046-10-22 06:00",
+    0.331
+   ],
+   [
+    "Chapter 5",
+    0.512,
+    143.752,
+    -2.67,
+    "lit",
+    "aurora",
+    "2046-12-12 12:00",
+    4.238
+   ],
+   [
+    "Chapter 6",
+    -0.242,
+    132.432,
+    -3.03,
+    "lit",
+    "aurora",
+    "2047-01-12 01:00",
+    -0.159
+   ],
+   [
+    "Chapter 7",
+    -0.795,
+    88.676,
+    -1.31,
+    "lit",
+    "aurora",
+    "2047-02-14 06:00",
+    -7.312
+   ],
+   [
+    "Chapter 8",
+    -2.066,
+    166.077,
+    -1.22,
+    "dark",
+    "aurora",
+    "2047-04-08 00:00",
+    -5.822
+   ],
+   [
+    "Chapter 8",
+    -0.126,
+    54.923,
+    4.87,
+    "dark",
+    "relay_road_mid",
+    "2047-04-08 06:00",
+    -3.473
+   ],
+   [
+    "Chapter 8",
+    2.291,
+    19.12,
+    -4.34,
+    "lit",
+    "malapert_summit",
+    "2047-04-09 00:00",
+    -2.267
+   ],
+   [
+    "Chapter 8",
+    2.305,
+    18.487,
+    -4.37,
+    "lit",
+    "malapert_summit",
+    "2047-04-09 01:15",
+    -2.301
+   ],
+   [
+    "Chapter 8",
+    -1.955,
+    140.23,
+    -2.91,
+    "lit",
+    "aurora",
+    "2047-04-10 03:00",
+    -7.165
+   ]
+  ],
+  "pds_cross_check_rms_m": 1.37
+ },
+ "evidence_label": "Computed",
+ "derived": [
+  {
+   "name": "aurora_site_height",
+   "value": 1959.5,
+   "unit": "m",
+   "formula": "highest LOLA 5 m pixel within 1.5 km of PGDA Site01 (Connecting ridge) centre",
+   "drives": "where Aurora stands; the mast courtyard outside"
+  },
+  {
+   "name": "malapert_summit_height",
+   "value": 4993.6,
+   "unit": "m",
+   "formula": "highest LOLA 5 m pixel within 6 km of the IAU Mons Malapert centre",
+   "drives": "P-16 why the summit sees Earth; the summit relay"
+  },
+  {
+   "name": "cold_trap_psr_area",
+   "value": 1.858,
+   "unit": "km2",
+   "formula": "area of the chosen permanently shadowed region in LPSR_80S_20MPP_ADJ",
+   "drives": "P-07 cold trap site; the cold-trap approach and the vault shelf"
+  },
+  {
+   "name": "cold_trap_road_length",
+   "value": 8.6,
+   "unit": "km",
+   "formula": "least-cost road from Aurora on the 20 m DEM with every cell <= 12 deg",
+   "drives": "P-07 route B (game keeps 12 km / 12 deg)"
+  },
+  {
+   "name": "cold_trap_road_max_slope",
+   "value": 11.88,
+   "unit": "deg",
+   "formula": "steepest cell on that road",
+   "drives": "P-07 slope card (rover limit 15 deg from VIPER)"
+  },
+  {
+   "name": "relay_road_length",
+   "value": 198.3,
+   "unit": "km",
+   "formula": "least-cost road Aurora -> Malapert summit on the 80 m DEM, every cell <= 12 deg",
+   "drives": "P-15 '120 km each way' (game number unchanged; the real road is longer)"
+  },
+  {
+   "name": "relay_road_max_slope",
+   "value": 14.98,
+   "unit": "deg",
+   "formula": "steepest cell on that road; cells over 12 deg are allowed up to the 15 deg VIPER design incline only where no gentler way exists",
+   "drives": "P-15 road slope card"
+  },
+  {
+   "name": "relay_road_length_over_12_deg",
+   "value": 3.68,
+   "unit": "km",
+   "formula": "length of that road on cells steeper than 12 deg (the summit plateau is ringed by 12-15 deg slopes on the 80 m grid)",
+   "drives": "P-15 'slope warnings' on the last summit approach"
+  },
+  {
+   "name": "aurora_sun_above_terrain_april_2046",
+   "value": [
+    279,
+    505
+   ],
+   "unit": "h",
+   "formula": "hours 10 Apr - 1 May 2046 when the Sun's centre is above the LOLA horizon seen from 2 m at Aurora (Horizons + horizon mask)",
+   "drives": "P-02 night length context (the 36 h night stays an authored training scenario)"
+  },
+  {
+   "name": "aurora_longest_sun_below_terrain_april_2046",
+   "value": 194,
+   "unit": "h",
+   "formula": "longest unbroken run of hours 10 Apr - 1 May 2046 with the Sun's centre behind the terrain seen from 2 m at Aurora; from 2046-04-11T14:00Z to 2046-04-19T15:00Z",
+   "drives": "science note for P-02: the real ridge point had a longer darkness earlier that month than the authored 36 h night"
+  },
+  {
+   "name": "aurora_mast_sun_above_terrain_april_2046",
+   "value": [
+    364,
+    505
+   ],
+   "unit": "h",
+   "formula": "same hours seen from the solar array's lower edge, 10.0 m up (the NASA VSAT relocatable array's blankets span 10-16 m); longest darkness there 85 h",
+   "drives": "P-02 power context: why Aurora stores energy (Mazarico 2011)"
+  },
+  {
+   "name": "earth_elevation_malapert_summit_9_apr_2047",
+   "value": -2.301,
+   "unit": "deg",
+   "formula": "Horizons Earth elevation from the pinned summit at 01:15 UT",
+   "drives": "P-16 Earth bearing E3"
+  },
+  {
+   "name": "malapert_terrain_horizon_toward_earth",
+   "value": -4.6,
+   "unit": "deg",
+   "formula": "LOLA terrain horizon at Earth's azimuth from the summit (2 m eye, curvature removed); Earth's centre clears it by 2.30 deg, and in every hour of 8-10 Apr 2047 (73 of 73)",
+   "drives": "P-16: the real summit sees Earth over the real terrain, which the pole cannot"
+  },
+  {
+   "name": "eclipse_12_jan_2047_sun_and_earth_above_aurora_terrain",
+   "value": true,
+   "unit": "",
+   "formula": "at 01:00 UT the Sun (el -0.242) and Earth (el -0.159) both clear Aurora's terrain horizon (-3.03 deg toward the Sun)",
+   "drives": "P-11/P-12 the eclipse is in view from Aurora's ridge (SCIENCE_AND_DATA E20 asked for this check)"
+  }
+ ],
+ "boundary": "Aurora, the vault shelf and the relay platform are authored places set on real LOLA terrain; the heights, slopes, shadows and Sun/Earth angles are computed from NASA data, the buildings, roads and the 36-hour night are not measurements. Game numbers (12 km, 12 deg, 120 km) stay as in game-design/08_PUZZLE_DESIGNS.md; the computed road lengths are shown beside them, never instead of them.",
+ "src_card": "SRC-MOON"
+}

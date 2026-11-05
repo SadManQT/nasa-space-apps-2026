@@ -27,6 +27,7 @@ const TAKEAWAYS := {
 	"kaguya_shackleton_floor": "Shackleton's floor is very cold, so Aurora treats an expedition there as a protected operation.",
 	"lcross_water_2009": "LCROSS found water in impact material, so Aurora uses evidence rather than assuming every cold trap is rich in ice.",
 	"lro_mazarico_2011_illumination": "Even a well-lit polar site has dark periods, so Aurora must store energy for the night.",
+	"lro_lola_south_pole_terrain": "The exteriors stand on LOLA's real south-pole terrain, so Aurora's slopes, shadows and horizon come from measurements, not invention.",
 	"meo_lunar_impact_flashes": "Two telescopes help verify an impact flash, so Aurora rejects single-camera artifacts.",
 	"mir_brassica_seed_to_seed": "Brassica completed a seed cycle in space, so Aurora can study a garden across generations.",
 	"nasa_eclipse_2047_01_12": "An eclipse has predictable phases, so Aurora compares a filtered camera view with a labelled conceptual diagram.",

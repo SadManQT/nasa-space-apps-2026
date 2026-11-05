@@ -8,6 +8,7 @@
 *.png filter=lfs diff=lfs merge=lfs -text
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.jpeg filter=lfs diff=lfs merge=lfs -text
+*.r16 filter=lfs diff=lfs merge=lfs -text
 
 # Append-only team logs: keep both sides' new rows on merge (MASTER_PLAN.md §7)
 production/AI_PROMPT_LOG.md merge=union

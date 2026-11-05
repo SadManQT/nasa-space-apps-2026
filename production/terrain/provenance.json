@@ -1,0 +1,407 @@
+{
+ "about": "Provenance of every NASA elevation product behind the game's south-pole terrain (board M1-34). Written by production/tools/make_terrain.py.",
+ "retrieved": "2026-11-05",
+ "licence": "NASA data: U.S. Government work, no copyright; free to use with credit. Credit line below.",
+ "credit_line": "Terrain made from NASA data: Lunar Reconnaissance Orbiter, Lunar Orbiter Laser Altimeter (LOLA) elevation models from NASA Goddard's Planetary Geodynamics Data Archive (Barker et al. 2021, 2023) and the NASA PDS; Sun and Earth positions from NASA JPL Horizons. NASA does not endorse this game.",
+ "credit_line_short": "Terrain made from NASA LRO LOLA data (GSFC PGDA / PDS); sky geometry from JPL Horizons.",
+ "citations": [
+  "Barker, M. K., Mazarico, E., Neumann, G. A., Smith, D. E., Zuber, M. T., Head, J. W. (2021). Improved LOLA elevation maps for south pole landing sites: error estimates and their impact on illumination conditions. Planetary and Space Science 203, 105119. https://doi.org/10.1016/j.pss.2020.105119",
+  "Barker, M. K., Mazarico, E., Neumann, G. A., Smith, D. E., Zuber, M. T., Head, J. W. (2023). A New View of the Lunar South Pole from LOLA. The Planetary Science Journal 4, 183. https://doi.org/10.3847/PSJ/acf3e1 ; data https://doi.org/10.60903/gsfcpgda-lola-spole",
+  "Smith, D. E. et al. (2010). The Lunar Orbiter Laser Altimeter investigation on the Lunar Reconnaissance Orbiter mission. Space Science Reviews 150, 209-241; LRO-L-LOLA-4-GDR-V1.0, NASA PDS Geosciences Node",
+  "Mazarico, E., Neumann, G. A., Smith, D. E., Zuber, M. T., Torrence, M. H. (2011). Illumination conditions of the lunar polar regions using LOLA topography. Icarus 211, 1066-1081. https://doi.org/10.1016/j.icarus.2010.10.030",
+  "JPL Horizons On-Line Ephemeris System (DE441), https://ssd.jpl.nasa.gov/horizons/"
+ ],
+ "products": {
+  "pgda78_site01": {
+   "title": "High-Resolution LOLA Topography for Lunar South Pole Sites: Site01 Connecting ridge, 5 m/px",
+   "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/Site01/Site01_final_adj_5mpp_surf.tif",
+   "page": "https://pgda.gsfc.nasa.gov/products/78",
+   "doi": "10.1016/j.pss.2020.105119",
+   "mpp": 5,
+   "used_for": [
+    "heightmap aurora_ridge",
+    "Aurora site pick (highest pixel near the Site01 centre)"
+   ],
+   "cache_bytes": 40980810,
+   "retrieved": "2026-11-05"
+  },
+  "pgda78_site04": {
+   "title": "High-Resolution LOLA Topography for Lunar South Pole Sites: Site04 Shackleton rim, 5 m/px",
+   "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/Site04/Site04_final_adj_5mpp_surf.tif",
+   "page": "https://pgda.gsfc.nasa.gov/products/78",
+   "doi": "10.1016/j.pss.2020.105119",
+   "mpp": 5,
+   "used_for": [
+    "opened only to test 5 m coverage; the site lies outside it, so the 10 m grid is used"
+   ],
+   "cache_bytes": 40980806,
+   "retrieved": "2026-11-05"
+  },
+  "pgda78_site23": {
+   "title": "High-Resolution LOLA Topography for Lunar South Pole Sites: Site23 Malapert massif, 5 m/px",
+   "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/Site23/Site23_final_adj_5mpp_surf.tif",
+   "page": "https://pgda.gsfc.nasa.gov/products/78",
+   "doi": "10.1016/j.pss.2020.105119",
+   "mpp": 5,
+   "used_for": [
+    "heightmap malapert_summit",
+    "Malapert summit pick"
+   ],
+   "cache_bytes": 70586804,
+   "retrieved": "2026-11-05"
+  },
+  "pgda90_10mpp": {
+   "title": "A New View of the Lunar South Pole from LOLA: LDEM_83S_10MPP_ADJ (83S-90S, 10 m/px)",
+   "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_83S_10MPP_ADJ.TIF",
+   "page": "https://pgda.gsfc.nasa.gov/products/90",
+   "doi": "10.3847/PSJ/acf3e1",
+   "data_doi": "10.60903/gsfcpgda-lola-spole",
+   "mpp": 10,
+   "used_for": [
+    "heightmap cold_trap"
+   ],
+   "cache_bytes": 9612123,
+   "width": 43280,
+   "height": 43280,
+   "compression": 8,
+   "tile_w": 512,
+   "retrieved": "2026-11-05"
+  },
+  "pgda90_20mpp": {
+   "title": "A New View of the Lunar South Pole from LOLA: LDEM_80S_20MPP_ADJ (80S-90S, 20 m/px)",
+   "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_20MPP_ADJ.TIF",
+   "page": "https://pgda.gsfc.nasa.gov/products/90",
+   "doi": "10.3847/PSJ/acf3e1",
+   "data_doi": "10.60903/gsfcpgda-lola-spole",
+   "mpp": 20,
+   "used_for": [
+    "road cold_trap_road",
+    "cold trap pick (road search)",
+    "PDS cross-check"
+   ],
+   "cache_bytes": 31547410,
+   "width": 30400,
+   "height": 30400,
+   "compression": 8,
+   "tile_w": 512,
+   "retrieved": "2026-11-05"
+  },
+  "pgda90_20mpp_hill": {
+   "title": "A New View of the Lunar South Pole from LOLA: LDEM_80S_20MPP_ADJ_HILL (hillshade, 45 deg altitude, 45 deg azimuth)",
+   "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_20MPP_ADJ_HILL.TIF",
+   "page": "https://pgda.gsfc.nasa.gov/products/90",
+   "doi": "10.3847/PSJ/acf3e1",
+   "data_doi": "10.60903/gsfcpgda-lola-spole",
+   "mpp": 20,
+   "used_for": [
+    "review sheets: NASA's own hillshade beside ours"
+   ],
+   "cache_bytes": 8475293,
+   "width": 30400,
+   "height": 30400,
+   "compression": 8,
+   "tile_w": 512,
+   "retrieved": "2026-11-05"
+  },
+  "pgda90_20mpp_psr": {
+   "title": "A New View of the Lunar South Pole from LOLA: LPSR_80S_20MPP_ADJ (permanently shadowed regions map)",
+   "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LPSR_80S_20MPP_ADJ.TIF",
+   "page": "https://pgda.gsfc.nasa.gov/products/90",
+   "doi": "10.3847/PSJ/acf3e1",
+   "data_doi": "10.60903/gsfcpgda-lola-spole",
+   "mpp": 20,
+   "used_for": [
+    "cold trap pick (permanently shadowed regions)",
+    "preview PSR crops"
+   ],
+   "cache_bytes": 35732267,
+   "width": 30400,
+   "height": 30400,
+   "compression": 8,
+   "tile_w": 512,
+   "retrieved": "2026-11-05"
+  },
+  "pgda90_40mpp": {
+   "title": "A New View of the Lunar South Pole from LOLA: LDEM_80S_40MPP_ADJ (80S-90S, 40 m/px)",
+   "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_40MPP_ADJ.TIF",
+   "page": "https://pgda.gsfc.nasa.gov/products/90",
+   "doi": "10.3847/PSJ/acf3e1",
+   "data_doi": "10.60903/gsfcpgda-lola-spole",
+   "mpp": 40,
+   "used_for": [
+    "heightmap aurora_vista",
+    "heightmap malapert_vista",
+    "terrain horizon 4-32 km from each site"
+   ],
+   "cache_bytes": 53504991,
+   "width": 15200,
+   "height": 15200,
+   "compression": 8,
+   "tile_w": 512,
+   "retrieved": "2026-11-05"
+  },
+  "pgda90_80mpp": {
+   "title": "A New View of the Lunar South Pole from LOLA: LDEM_80S_80MPP_ADJ (80S-90S, 80 m/px)",
+   "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_80MPP_ADJ.TIF",
+   "page": "https://pgda.gsfc.nasa.gov/products/90",
+   "doi": "10.3847/PSJ/acf3e1",
+   "data_doi": "10.60903/gsfcpgda-lola-spole",
+   "mpp": 80,
+   "used_for": [
+    "heightmap relay_road",
+    "road relay_road",
+    "terrain horizon 32-100 km from each site"
+   ],
+   "cache_bytes": 62927722,
+   "width": 7600,
+   "height": 7600,
+   "compression": 8,
+   "tile_w": 512,
+   "retrieved": "2026-11-05"
+  },
+  "pds_ldem_80s_20m": {
+   "title": "PDS LRO LOLA GDR LDEM_80S_20M V2.0 (cross-check only)",
+   "url": "https://imbrium.mit.edu/DATA/LOLA_GDR/POLAR/IMG/LDEM_80S_20M.IMG",
+   "label": "https://imbrium.mit.edu/DATA/LOLA_GDR/POLAR/IMG/LDEM_80S_20M.LBL",
+   "page": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm",
+   "dataset_id": "LRO-L-LOLA-4-GDR-V1.0",
+   "mpp": 20,
+   "lines": 30400,
+   "samples": 30400,
+   "scaling_factor": 0.5,
+   "projection_offset": 15199.5,
+   "used_for": [
+    "independent cross-check of the PGDA grid, datum and projection at Aurora"
+   ],
+   "cache_bytes": 30405121,
+   "retrieved": "2026-11-05"
+  }
+ },
+ "sites": {
+  "aurora": {
+   "x_m": -11572.5,
+   "y_m": -12472.5,
+   "height_m": 1959.4962158203125,
+   "lat_deg": -89.43890921454619,
+   "lon_deg_east": 222.85643000554958,
+   "product": "pgda78_site01",
+   "name": "Aurora Station (authored outpost) on the Shackleton-de Gerlache connecting ridge",
+   "rule": "highest LOLA pixel within 1,500 m of the centre of PGDA Site01 (Connecting ridge, Mazarico et al. 2011 site 1), x = -11,000 m, y = -12,000 m",
+   "mast_height_m": 10.0
+  },
+  "malapert_summit": {
+   "x_m": -4987.5,
+   "y_m": 122327.5,
+   "height_m": 4993.6181640625,
+   "lat_deg": -85.96421545666995,
+   "lon_deg_east": 357.6652468663214,
+   "product": "pgda78_site23",
+   "name": "Malapert relay summit (authored platform at the highest point of Mons Malapert)",
+   "rule": "highest LOLA pixel of PGDA Site23 (Malapert massif) within 6,000 m of the USGS/IAU Mons Malapert centre, -85.98 deg, -1.67 deg E",
+   "iau_center_xy_m": [
+    -3553.9702955394496,
+    121898.10265722124
+   ]
+  },
+  "cold_trap": {
+   "name": "Chapter 4 cold trap: a small permanently shadowed basin reached by a ridge road from Aurora",
+   "rule": "PSR from LPSR_80S_20MPP_ADJ with 0.3 to 6 km2 of area, outside Shackleton, whose slope-limited (<= 12 deg) route from Aurora on the 20 m DEM is closest to 12 km; the site is the lowest PSR pixel",
+   "x_m": -4230.0,
+   "y_m": -11970.0,
+   "height_m": 1126.78076171875,
+   "lat_deg": -89.58133360242644,
+   "lon_deg_east": 199.46256560936368,
+   "product": "pgda90_20mpp + pgda90_20mpp_psr",
+   "psr_component": 1449,
+   "psr_area_km2": 1.858,
+   "straight_line_from_aurora_m": 6603.0,
+   "selection_road_length_m": 8523.0,
+   "selection_grid_mpp": 40.0,
+   "psr_centroid_xy_m": [
+    -4239.054897739505,
+    -12283.29171151776
+   ],
+   "psr_bbox_xy_m": [
+    -4970.0,
+    -3430.0,
+    -13170.0,
+    -11530.0
+   ]
+  }
+ },
+ "regions": {
+  "aurora_ridge": {
+   "source_product": "pgda78_site01",
+   "columns": 1600,
+   "rows": 1600,
+   "metres_per_pixel": 5.0,
+   "z_min_m": 737.959,
+   "z_max_m": 1959.496,
+   "origin_x_m": -15572.5,
+   "origin_y_m": -8472.5,
+   "sha256_r16": "be6153413d56d1602129464bff513ddda211e07286b1ece75b5e9320d8e314f6",
+   "interpolated_nan_fraction": 0.0
+  },
+  "aurora_vista": {
+   "source_product": "pgda90_40mpp",
+   "columns": 1600,
+   "rows": 1600,
+   "metres_per_pixel": 40.0,
+   "z_min_m": -2981.267,
+   "z_max_m": 1958.613,
+   "origin_x_m": -43580.0,
+   "origin_y_m": 19540.0,
+   "sha256_r16": "c3cd6aba60edb675c08f240486aa1a2ff072893859f6b86b3dcc6e8b76795c41",
+   "interpolated_nan_fraction": 0.0
+  },
+  "cold_trap": {
+   "source_product": "pgda90_10mpp",
+   "columns": 800,
+   "rows": 800,
+   "metres_per_pixel": 10.0,
+   "z_min_m": 319.509,
+   "z_max_m": 1730.713,
+   "origin_x_m": -8225.0,
+   "origin_y_m": -7975.0,
+   "sha256_r16": "de8c2adfa01949f64762e7905af253ba5cfdab16ffc586a1367ff47b470ddc21",
+   "interpolated_nan_fraction": 0.0
+  },
+  "relay_road": {
+   "source_product": "pgda90_80mpp",
+   "columns": 724,
+   "rows": 2114,
+   "metres_per_pixel": 80.0,
+   "z_min_m": -4021.135,
+   "z_max_m": 5172.486,
+   "origin_x_m": -46120.0,
+   "origin_y_m": 139880.0,
+   "sha256_r16": "75902720aa758185a6b1e9b3ff984180096661713daffad78d692a96e9b7b6a9",
+   "interpolated_nan_fraction": 0.0
+  },
+  "malapert_summit": {
+   "source_product": "pgda78_site23",
+   "columns": 1600,
+   "rows": 1600,
+   "metres_per_pixel": 5.0,
+   "z_min_m": 3478.059,
+   "z_max_m": 4993.618,
+   "origin_x_m": -8987.5,
+   "origin_y_m": 126327.5,
+   "sha256_r16": "658ed25c476729e8e2e490c701b653a421406924ce4082ac73c4be6afc604391",
+   "interpolated_nan_fraction": 0.0
+  },
+  "malapert_vista": {
+   "source_product": "pgda90_40mpp",
+   "columns": 1600,
+   "rows": 1600,
+   "metres_per_pixel": 40.0,
+   "z_min_m": -2510.642,
+   "z_max_m": 5173.187,
+   "origin_x_m": -36980.0,
+   "origin_y_m": 154340.0,
+   "sha256_r16": "cf713e5d9be78e834e22c5fb5c99c3911a913e6eac7ee12f3395c94caf048b43",
+   "interpolated_nan_fraction": 0.0
+  }
+ },
+ "routes": {
+  "cold_trap_road": {
+   "columns": [
+    "x_m",
+    "y_m",
+    "height_m",
+    "distance_m",
+    "slope_deg"
+   ],
+   "length_m": 8557.8,
+   "max_slope_deg": 11.88,
+   "climb_m": 20.8,
+   "descent_m": 802.3,
+   "length_over_limit_m": 0.0,
+   "from": "aurora",
+   "to": "cold_trap",
+   "grid_product": "pgda90_20mpp",
+   "grid_mpp_used": 20.0,
+   "slope_limit_deg": 12.0,
+   "hard_limit_deg": null,
+   "corridor_half_width_m": 6000.0,
+   "straight_line_m": 7359.7,
+   "story": "P-07 route B: 12 km ridge road, max 12 deg (game numbers from game-design/08_PUZZLE_DESIGNS.md; the computed road is evidence, not a replacement); routed on the full 20 m grid",
+   "seconds": 0.9
+  },
+  "relay_road": {
+   "columns": [
+    "x_m",
+    "y_m",
+    "height_m",
+    "distance_m",
+    "slope_deg"
+   ],
+   "length_m": 198255.4,
+   "max_slope_deg": 14.98,
+   "climb_m": 10310.7,
+   "descent_m": 7276.6,
+   "length_over_limit_m": 3683.3,
+   "from": "aurora",
+   "to": "malapert_summit",
+   "grid_product": "pgda90_80mpp",
+   "grid_mpp_used": 80.0,
+   "slope_limit_deg": 12.0,
+   "hard_limit_deg": 15.0,
+   "corridor_half_width_m": 40000.0,
+   "straight_line_m": 134960.7,
+   "story": "P-15 surveyed road: 120 km each way, max 12 deg (game numbers unchanged). The real summit plateau is ringed by slopes over 12 deg on the 80 m grid, so the last approach may use up to the VIPER design incline of 15 deg; the length above 12 deg is reported",
+   "seconds": 19.8
+  }
+ },
+ "pds_cross_check": {
+  "product": "pds_ldem_80s_20m",
+  "dataset_id": "LRO-L-LOLA-4-GDR-V1.0",
+  "product_version": "V2.0",
+  "window_px": 500,
+  "rms_difference_m": 1.37,
+  "mean_difference_m": -0.36,
+  "max_abs_difference_m": 52.93,
+  "note": "PDS GDR V2.0 (2017, unadjusted tracks) against PGDA 2023 adjusted DEM over a 10 km window at Aurora; small residuals confirm the grids, datum and projection convention"
+ },
+ "ephemeris": {
+  "service": "JPL Horizons (DE441)",
+  "windows": {
+   "ch01_april_2046": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272046-04-10+00%3A00%27&STOP_TIME=%272046-05-01+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272046-04-10+00%3A00%27&STOP_TIME=%272046-05-01+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "ch04_october_2046": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272046-10-20+00%3A00%27&STOP_TIME=%272046-10-23+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272046-10-20+00%3A00%27&STOP_TIME=%272046-10-23+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "ch04_cold_trap": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-20+00%3A00%27&STOP_TIME=%272046-10-23+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-20+00%3A00%27&STOP_TIME=%272046-10-23+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "ch05_december_2046": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272046-12-11+00%3A00%27&STOP_TIME=%272046-12-14+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272046-12-11+00%3A00%27&STOP_TIME=%272046-12-14+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "ch06_january_2047": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272047-01-11+00%3A00%27&STOP_TIME=%272047-01-14+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272047-01-11+00%3A00%27&STOP_TIME=%272047-01-14+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "ch07_february_2047": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272047-02-13+00%3A00%27&STOP_TIME=%272047-02-16+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272047-02-13+00%3A00%27&STOP_TIME=%272047-02-16+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "ch08_april_2047": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272047-04-07+00%3A00%27&STOP_TIME=%272047-04-11+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272047-04-07+00%3A00%27&STOP_TIME=%272047-04-11+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "ch08_summit": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27357.66525%2C-85.96422%2C4.9936%27&START_TIME=%272047-04-08+00%3A00%27&STOP_TIME=%272047-04-11+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27357.66525%2C-85.96422%2C4.9936%27&START_TIME=%272047-04-08+00%3A00%27&STOP_TIME=%272047-04-11+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "ch08_road_mid": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27330.94540%2C-87.56934%2C-0.6437%27&START_TIME=%272047-04-07+00%3A00%27&STOP_TIME=%272047-04-11+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27330.94540%2C-87.56934%2C-0.6437%27&START_TIME=%272047-04-07+00%3A00%27&STOP_TIME=%272047-04-11+00%3A00%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ]
+  }
+ }
+}
