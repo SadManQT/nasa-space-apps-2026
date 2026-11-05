@@ -363,6 +363,7 @@ func _render_decision_review(data: Dictionary) -> void:
 		var consequence := String(option.get("consequence", ""))
 		var button := _button(label)
 		button.name = option_id
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		button.toggle_mode = true
 		button.button_group = group
 		button.button_pressed = option_id == recorded

@@ -1,0 +1,15 @@
+{
+	"confirmation_autosaves": true,
+	"confirmation_records_exactly_one_choice": true,
+	"large_text_close_control_visible": true,
+	"large_text_confirmation_reachable_by_focus": true,
+	"large_text_options_fit_window_width": true,
+	"large_text_panel_fits_window": true,
+	"large_text_uses_150_percent_font": true,
+	"normal_close_control_visible": true,
+	"normal_options_fit_window_width": true,
+	"normal_panel_fits_window": true,
+	"preview_preserves_story_log_receipts_and_revision": true,
+	"reopen_selects_recorded_option": true,
+	"unchanged_choice_does_not_enable_confirmation": true
+}

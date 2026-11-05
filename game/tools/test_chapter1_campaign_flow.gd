@@ -33,6 +33,7 @@ func _init() -> void:
 
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
+	await _test_decision_review_layout()
 	campaign = CampaignScene.instantiate() as Chapter1Campaign
 	storage.configure(campaign)
 	root.add_child(campaign)
@@ -113,6 +114,43 @@ func _run() -> void:
 	_check(String(campaign.director.snapshot().get("scenario_datetime", "")).begins_with("2046-04-30"), "B03 handoff advances from bloom to the dated P-03 entry")
 	await _test_chapter2_handoff()
 	_finish()
+
+func _test_decision_review_layout() -> void:
+	var original_size := root.size
+	var original_scale := root.content_scale_size
+	var panels := preload("res://scripts/ui/campaign_panels.gd").new()
+	root.add_child(panels)
+	panels.set_content_top(24)
+	var catalog: Dictionary = preload("res://scripts/content/content_loader.gd").load_full()
+	for resolution in [Vector2i(1280, 720), Vector2i(640, 480)]:
+		root.content_scale_size = resolution
+		root.size = resolution
+		for large in [false, true]:
+			# Match the production HUD clearance at its native logical size.
+			panels.set_content_top((270.0 if large else 226.0) if resolution.x == 1280 else 24.0)
+			for scene in catalog.scenes.slice(0, 12):
+				var choice: Dictionary = scene.choice.duplicate(true)
+				choice["choice_id"] = choice.id
+				panels.bind_query({"scene_id": scene.id, "puzzle": choice, "accessibility": {"large_text": large}})
+				panels.open_panel("puzzle")
+				for frame in 5:
+					await process_frame
+				var label := "%s %s %s text" % [scene.id, resolution, "150%" if large else "normal"]
+				_check(panels.get_viewport_rect().encloses(panels._panel.get_global_rect()), label + " decision panel fits viewport")
+				_check(panels.get_viewport_rect().encloses(panels._close_button.get_global_rect()), label + " close control stays visible")
+				var option := panels.find_child(String(choice.options[1].id), true, false) as Button
+				option.pressed.emit()
+				for frame in 3:
+					await process_frame
+				var confirm := panels.find_child("ConfirmChoice", true, false) as Button
+				confirm.grab_focus()
+				for frame in 3:
+					await process_frame
+				_check(confirm.has_focus() and panels.get_viewport_rect().encloses(confirm.get_global_rect()), label + " confirmation scrolls into view on focus")
+				panels.close_panel()
+	panels.free()
+	root.content_scale_size = original_scale
+	root.size = original_size
 
 func _finish() -> void:
 	if is_instance_valid(campaign):
