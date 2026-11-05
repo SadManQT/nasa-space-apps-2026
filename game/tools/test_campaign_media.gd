@@ -48,7 +48,7 @@ func _test_manifest(metadata: Dictionary) -> void:
 		if not ResourceLoader.exists("res://" + file.trim_prefix("game/")):
 			missing.append(line.id)
 	_check(voiced == int(audio.get("voice_files_present", -1)) and missing.is_empty(), "every catalog voice file the manifest counts (%d) opens; missing %s" % [voiced, missing])
-	_check(audio.get("music_runtime_files", []).size() == 16 and audio.get("sfx_runtime_files", []).size() == 35, "16 music files and 35 effects are listed")
+	_check(audio.get("music_runtime_files", []).size() == 16 and audio.get("sfx_runtime_files", []).size() == 37, "16 music files and 37 effects are listed (M3-99 added the lamp tick and the Dhaka rooftop)")
 	var runtime := CampaignAudioRuntime.new(content, metadata)
 	_check(runtime.music_for_scene("EX-CH01-S01").get("cue_id", "") == "CUE-01", "CUE-01 opens the campaign")
 	_check(runtime.music_for_scene("EX-CH08-S05").get("cue_id", "") == "CUE-03", "a scene named on its own (CUE-03 at EX-CH08-S05) beats a range")
@@ -69,7 +69,7 @@ func _test_loops(metadata: Dictionary) -> void:
 		var stream := load(String(row.runtime_path)) as AudioStream
 		_check(stream != null and bool(stream.get("loop")) == bool(row.loop), "%s imports with loop=%s" % [row.id, row.loop])
 		looping += 1 if bool(row.loop) else 0
-	_check(looping == 9, "nine looping effects (fans, pumps, water, suit, recorder, rover)")
+	_check(looping == 10, "ten looping effects (fans, pumps, water, suit, recorder, rover, Dhaka rooftop)")
 	for cue in metadata.audio.music_cues:
 		var stream := load(String(cue.runtime_path)) as AudioStream
 		_check(stream != null and bool(stream.get("loop")) == bool(cue.loop), "%s imports with loop=%s" % [cue.id, cue.loop])

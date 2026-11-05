@@ -24,15 +24,3 @@ PR_PressedPetal,prop,Blender (small),EX-CH03-S10,petal in dated sleeve
 PR_PaperBee,prop,Blender (small),EX-CH02-S02,origami bee
 PR_ImpactMonitor,prop,UI + screen frames,EX-CH05-S07,impact-camera frames (A-40)
 UI_Kit,ui,Godot UI + vector icons,EX-CH01-S01,"HUD, forecast, journal, debrief, settings (A-53/A-54)"
-PL_Alo_PodsGreen,plant,Shader recolour of PL_Alo_Pods,EX-CH03-S08,8 May pod_bearing state (PL_Alo_Pods is the mature look); 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval
-PL_Alo_Senescent,plant,PL_Alo_Pods + stem lean,EX-CH03-S09,"16 May mature_pods: straw pods, yellowing leaves, leaning purple stem; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval"
-PL_Alo_Dry,plant,Shader recolour + lean of PL_Alo_Pods,EX-CH03-S09,16-21 May mature_dry vigil state; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval
-PL_Tara_Pods,plant,Mirrored PL_Alo_Pods with green stem and pods,EX-CH03-S08,"Tara pod stage, green stem; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval"
-PL_Tara_Senescent,plant,Mirrored PL_Alo_Pods recolour + lean,EX-CH03-S12,"Tara senescent, green stem; dates depend on M3-94; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval"
-PL_Tara_Dry,plant,Mirrored PL_Alo_Pods recolour + lean,EX-CH03-S12,"Tara dry, faded olive stem; depends on M3-94; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval"
-PR_Nameplate_AloTara,prop,Blender procedural,EX-CH01-S04,round label holders ALO / TARA (the two empty circles); 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval
-PR_LabelHolder_N,prop,Blender procedural,EX-CH05-S11,seed-label holder marked N. (D10 option 2); 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval
-PR_Mug_NameDecals,prop,PR_Mug + tape decals,EX-CH01-S12,KAI AMARA MEI RAFI FERREIRA in role colours; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval
-PR_ToolTag_Gear,prop,Blender procedural,EX-CH03-S07,"gear-wheel tool tag, clue 12; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval"
-PR_DrawerLidNote,prop,Blender procedural (texture on the dry-storage drawer lid),EX-CH01-S03,"pencil note, clue 2; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval"
-PR_WorkingStockEnvelope,prop,Blender procedural,EX-CH03-S12,"Working stock - Tara x Alo, no count; depends on M3-94; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval"

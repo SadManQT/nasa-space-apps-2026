@@ -1,0 +1,2 @@
+NARRATIVE PROPS RESULT: PASS (419 checks, 0 failures)
+composed M3-99_contact.png and M3-99_garden_stages.png

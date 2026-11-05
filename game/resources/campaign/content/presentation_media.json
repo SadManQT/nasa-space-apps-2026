@@ -803,7 +803,9 @@
       "res://assets/audio/sfx/SFX_CAMERA_SHUTTER.ogg",
       "res://assets/audio/sfx/SFX_UI_CONFIRM.ogg",
       "res://assets/audio/sfx/SFX_UI_SOFT_ERROR.ogg",
-      "res://assets/audio/sfx/SFX_UI_SHIFT_COMMIT.ogg"
+      "res://assets/audio/sfx/SFX_UI_SHIFT_COMMIT.ogg",
+      "res://assets/audio/sfx/SFX_INVENTORY_LAMP_TICK.ogg",
+      "res://assets/audio/sfx/SFX_DHAKA_ROOFTOP_MORNING.ogg"
     ],
     "music_cues": [
       {
@@ -1396,6 +1398,29 @@
         "bus": "UI",
         "first_scenes": [
           "EX-CH01-S07"
+        ]
+      },
+      {
+        "id": "SFX_INVENTORY_LAMP_TICK",
+        "runtime_path": "res://assets/audio/sfx/SFX_INVENTORY_LAMP_TICK.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[inventory lamp]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S02",
+          "EX-CH01-S03"
+        ]
+      },
+      {
+        "id": "SFX_DHAKA_ROOFTOP_MORNING",
+        "runtime_path": "res://assets/audio/sfx/SFX_DHAKA_ROOFTOP_MORNING.ogg",
+        "media_present": true,
+        "loop": true,
+        "caption": "[city morning]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH08-S10"
         ]
       }
     ]

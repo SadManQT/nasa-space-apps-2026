@@ -1,0 +1,100 @@
+{
+ "about": "M3-99 authored text for the narrative props. Every word is canon (STORY_FULL.md) or approved doc 24 world text (M3-94, 5 Nov 2026); English in Latin letters only. Edit words here; no rebuild needed. Sizes are em heights in metres, offsets are metres in the anchor's plane (x right, y up), colours are sRGB.",
+ "fonts": {
+  "hand": "res://assets/props/narrative/fonts/GochiHand-Regular.ttf",
+  "print": "res://assets/props/narrative/fonts/BarlowSemiCondensed-SemiBold.ttf"
+ },
+ "font_px": 128,
+ "lift_m": 0.0002,
+ "props": {
+  "PR_LabelHolder": {
+   "anchor": "Text_Label",
+   "band_node": "Band",
+   "default": "alo",
+   "variants": [
+    {
+     "id": "alo",
+     "registry_name": "PR_Nameplate_AloTara",
+     "source": "STORY_FULL EX-CH01-S04 (Mei presses both names onto their holders: two empty circles); seed id ALO-01 (plant_service.gd); stem colour in words so colour is never the only cue",
+     "band": "#6E3E6C",
+     "lines": [
+      {"text": "ALO", "font": "print", "size_m": 0.0105, "offset": [0.0, 0.0025], "color": "#1F2A44"},
+      {"text": "ALO-01  |  purple stem", "font": "print", "size_m": 0.0027, "offset": [0.0, -0.0058], "color": "#1F2A44"}
+     ]
+    },
+    {
+     "id": "tara",
+     "registry_name": "PR_Nameplate_AloTara",
+     "source": "STORY_FULL EX-CH01-S04; Tara's nameplate moves to the lineage board on 31 May (EX-CH03-S12) and stands level with Alo's petal (EX-CH08-S12)",
+     "band": "#4F8A3A",
+     "lines": [
+      {"text": "TARA", "font": "print", "size_m": 0.0105, "offset": [0.0, 0.0025], "color": "#1F2A44"},
+      {"text": "TARA-01  |  green stem", "font": "print", "size_m": 0.0027, "offset": [0.0, -0.0058], "color": "#1F2A44"}
+     ]
+    },
+    {
+     "id": "n",
+     "registry_name": "PR_LabelHolder_N",
+     "source": "doc 24 §5.2 D10 option 2: the seed-label holder marked N., handwritten by Mei, mustard-gold band",
+     "band": "#F2C230",
+     "lines": [
+      {"text": "N.", "font": "hand", "size_m": 0.014, "offset": [0.0, 0.0], "color": "#1F2A44"}
+     ]
+    }
+   ]
+  },
+  "PR_Mug_Named": {
+   "anchor": "NameArc",
+   "arc": true,
+   "default": "unnamed",
+   "variants": [
+    {"id": "unnamed", "source": "the four nameless mugs of EX-CH01-S01 (identical to PR_Mug)", "lines": []},
+    {"id": "KAI", "tape": "Tape_KAI", "source": "names gained at the end of EX-CH01-S12; role colour ART_BIBLE §3 darkened for legibility on tape", "lines": [{"text": "KAI", "font": "hand", "size_m": 0.015, "color": "#CE5B1C"}]},
+    {"id": "AMARA", "tape": "Tape_AMARA", "source": "EX-CH01-S12", "lines": [{"text": "AMARA", "font": "hand", "size_m": 0.015, "color": "#1B9CAB"}]},
+    {"id": "MEI", "tape": "Tape_MEI", "source": "EX-CH01-S12", "lines": [{"text": "MEI", "font": "hand", "size_m": 0.015, "color": "#419544"}]},
+    {"id": "RAFI", "tape": "Tape_RAFI", "source": "EX-CH01-S12", "lines": [{"text": "RAFI", "font": "hand", "size_m": 0.015, "color": "#794EA5"}]},
+    {"id": "FERREIRA", "tape": "Tape_FERREIRA", "source": "the fifth mug, EX-CH04-S12 and EX-CH05-S01", "lines": [{"text": "FERREIRA", "font": "hand", "size_m": 0.015, "color": "#806F4A"}]}
+   ]
+  },
+  "PR_ToolTag_Gear": {
+   "anchor": "Text_Stamp",
+   "default": "default",
+   "variants": [
+    {
+     "id": "default",
+     "source": "doc 24 §4 clue 12 (CH03-S07 annex warm-side bench); stamp ENG-07 approved on the M3-99 sheet",
+     "lines": [{"text": "ENG-07", "font": "print", "size_m": 0.0042, "offset": [0.0, 0.0], "color": "#4B5056"}]
+    }
+   ]
+  },
+  "PR_DrawerLidNote": {
+   "anchor": "Text_Note",
+   "default": "default",
+   "variants": [
+    {
+     "id": "default",
+     "source": "STORY_FULL EX-CH01-S03 and doc 24 §4 clue 2, word for word; the third line stops at 'Water at'",
+     "lines": [
+      {"text": "Seed 1: outer chamber.", "font": "hand", "size_m": 0.0102, "offset": [0.0, 0.0], "rotation_deg": -1.2, "align": "left", "color": "#4A4C50"},
+      {"text": "Seed 2: inside, for comparison.", "font": "hand", "size_m": 0.0102, "offset": [0.0, -0.021], "rotation_deg": -0.4, "align": "left", "color": "#4A4C50"},
+      {"text": "Water at", "font": "hand", "size_m": 0.0102, "offset": [0.0, -0.042], "rotation_deg": 0.4, "align": "left", "color": "#4A4C50"}
+     ]
+    }
+   ]
+  },
+  "PR_WorkingStockEnvelope": {
+   "anchor": "Text_Label",
+   "default": "default",
+   "variants": [
+    {
+     "id": "default",
+     "source": "STORY_FULL EX-CH03-S12 and doc 24 §7.6: Working stock, Tara × Alo, no seed count anywhere",
+     "lines": [
+      {"text": "Working stock", "font": "hand", "size_m": 0.0105, "offset": [0.0, 0.002], "color": "#1F2A44"},
+      {"text": "Tara × Alo", "font": "hand", "size_m": 0.0125, "offset": [0.0, -0.017], "color": "#1F2A44"}
+     ]
+    }
+   ]
+  }
+ }
+}

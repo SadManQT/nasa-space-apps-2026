@@ -1,12 +1,13 @@
 # Narrative props and plant stages: 2D sheets for approval (M3-99)
 
-Board task M3-99 (doc 24 NR-12). **Status: waiting for Sadman's approval. Nothing here is built into the game yet, and no Tripo, Meshy or ElevenLabs credit has been spent.**
+Board task M3-99 (doc 24 NR-12). **Status: approved by Sadman on 5 Nov 2026 ("all are approved", PRODUCTION_HANDBOOK.md §3) and built on 6 Nov 2026.** The runtime assets are in [game/assets/props/narrative/](../../../game/assets/props/narrative/README.md) and `game/assets/plants/`; no Tripo or Meshy credit was spent.
 
 | Sheet | What it shows |
 |---|---|
 | [M3-99_plant_stages_v1.png](M3-99_plant_stages_v1.png) | Alo cotyledon, true leaves, green pods, senescent, dry; Tara pods, senescent, dry |
 | [M3-99_props_v1.png](M3-99_props_v1.png) | Alo and Tara nameplates, the "N." label holder, the gear-wheel tool tag, the drawer-lid pencil note, the working-stock envelope, five named mugs |
-| [../../qa/evidence/M3-99_contact.png](../../qa/evidence/M3-99_contact.png) | Both sheets on one page |
+| [../../qa/evidence/M3-99_contact.png](../../qa/evidence/M3-99_contact.png) | The built assets in Godot, words drawn at runtime (6 Nov) |
+| [../../qa/evidence/M3-99_bake_vs_approved.png](../../qa/evidence/M3-99_bake_vs_approved.png) | Each approved plant panel above its built GLB |
 
 ## How the sheets were made (no AI image generation)
 
@@ -18,6 +19,8 @@ The sheets are Blender 5.2 Cycles renders of the planned build, not paintings, s
 
 To rebuild them: `blender -b --factory-startup --python build_plant_panels.py -- <dir>`, then the same with `build_prop_panels.py`, then `python3 compose_sheets.py <dir>`. Set `M399_SAMPLES` for faster previews.
 
+**Runtime build (6 Nov 2026):** [`build_runtime_assets.py`](build_runtime_assets.py) imports these sheet scripts and builds the approved look into the game: the six plant stage GLBs (bake of the same remap and lean) and the five props (same geometry, baked PBR maps, no baked text). Usage and verification: [game/assets/props/narrative/README.md](../../../game/assets/props/narrative/README.md).
+
 ## Canon checks done
 
 - Brassica rapa botany (ART_BIBLE §2 rule 8, §6): Alo's stem is purple and Tara's is green at every stage. No stage on this sheet has flowers, so the four-petal cross rule does not come into play here.
@@ -25,27 +28,20 @@ To rebuild them: `blender -b --factory-startup --python build_plant_panels.py --
 - Every word on a prop comes from canon or doc 24: "two empty circles" (STORY_FULL CH01-S04); seed ids ALO-01 and TARA-01 (`plant_service.gd`); the drawer-lid lines (doc 24 §4 clue 2); "N." (D10 option 2); "Working stock — Tara × Alo" (§7.6). The text is English in Latin letters, with no Bangla script, no logos and no seed count on the envelope.
 - Role colours on the mugs come from ART_BIBLE §3. The marker ink is darkened for legibility, and Ferreira's most, because her gold is pale on tape.
 
-## Decisions for Sadman (approve, change or decline each)
+## Decisions (approved as shown on 5 Nov 2026) and how they were built
 
-1. **Alo seedlings:** the cotyledon (12–13 Apr) and true-leaf (15–17 Apr) states.
-2. **Alo green pods (8 May):** this state is new. The registry calls `PL_Alo_Pods` "mature dry pods", and its straw colour is the 16 May look, so 8 May had no art. This recolour fills the gap.
-3. **Alo senescent and dry:** the lean and the colours.
-4. **Tara pods, senescent and dry:** the pods and senescent states are fine by themselves. The dates on the sheet and the **dry** state depend on the Tara decision in **M3-94**, which is not approved yet: either the 31 May harvest, or the coded natural end on 22 May. Real dry Brassica stems turn straw-coloured. The sheet keeps a faded olive-green so Tara still reads as green-stemmed. Choose the olive or the true straw colour.
-5. **Nameplates:** round holders, with the name, the seed id and the stem colour in words, so colour is never the only cue.
-6. **"N." label holder:** the same holder family, "N." handwritten, with a mustard-gold band.
-7. **Gear-wheel tool tag:** the stamped text "ENG-07" is new world text. Keep it or remove it.
-8. **Drawer-lid note:** the wording follows doc 24 clue 2 exactly. It is new world text listed in the M3-94 pack.
-9. **Working-stock envelope:** it exists only if M3-94 approves Tara's working stock.
-10. **Five mugs:** masking tape in role-colour marker. Who writes the names, and is handwriting right?
+1. **Alo seedlings:** approved; the cotyledon and true-leaf states were built by M1-07 (`PL_Alo_Sprout`, `PL_Tara_Sprout`, parked on `night/M1-07` until Sadman approves that task's two other sheets), so M3-99 does not build a second version.
+2. **Alo green pods (8 May):** `PL_Alo_PodsGreen`.
+3. **Alo senescent and dry:** `PL_Alo_Senescent` (lean 18°), `PL_Alo_Dry` (lean 28°).
+4. **Tara pods, senescent and dry:** `PL_Tara_Pods`, `PL_Tara_Senescent`, `PL_Tara_Dry`; dates from M3-94 (watering stops 26 May, harvest 31 May 2046). The dry stem keeps the approved faded olive. One correction: Tara's stem is now green down to the soil; the approval remap had left a purple stem foot inside the tray, which a green-stem Brassica rapa cannot have.
+5. **Nameplates** and 6. **"N." label holder:** one holder model, `PR_LabelHolder`, with variants `alo`, `tara`, `n`. The id line is 2.7 mm instead of 2.8 mm and sits 0.4 mm higher, so it stays inside the printed band in the bundled font.
+7. **Gear-wheel tool tag:** `PR_ToolTag_Gear`, stamp "ENG-07" kept.
+8. **Drawer-lid note:** `PR_DrawerLidNote`, word for word.
+9. **Working-stock envelope:** `PR_WorkingStockEnvelope` (M3-94 approved the working stock).
+10. **Five mugs:** `PR_Mug_Named`, handwritten names in role-colour marker on masking tape.
 
-## Still to do after approval
+The words are drawn at runtime (ART_BIBLE §7: no text baked into models) in two SIL OFL fonts that ship with the game: Gochi Hand for handwriting and Barlow Semi Condensed for print. The sheets' Bradley Hand and DIN Alternate are macOS system fonts that cannot be redistributed.
 
-- Build the approved variants as runtime GLBs or material variants under `game/assets/plants/` and `game/assets/props/`, and run `production/tools/verify_gate.py`.
-- **Sound effects (not generated):** the ElevenLabs connector was not authorised in the overnight session, so neither effect exists yet. Specs from doc 24 §2.11:
+## Sound effects (M3-99, 6 Nov 2026)
 
-| Id | Description | Loop | Caption | First scene |
-|---|---|---|---|---|
-| `SFX_INVENTORY_LAMP_TICK` | A soft relay tick as the inventory lamp blinks | no | [inventory lamp] | EX-CH01-S02, EX-CH01-S03 (and CS-18) |
-| `SFX_DHAKA_ROOFTOP_MORNING` | A city morning from a rooftop: distant traffic, birds, a kettle | yes (bed under the call) | [city morning] | EX-CH08-S10 |
-
-  Add the `sfx_list.csv` rows in the same change as the `.ogg` files. `build_presentation_media.py` stops if a row says `loop=yes` and the file is missing.
+`SFX_INVENTORY_LAMP_TICK` ([inventory lamp], EX-CH01-S02, S03 and CS-18) and `SFX_DHAKA_ROOFTOP_MORNING` ([city morning], looping bed, EX-CH08-S10 and CS-15) were generated with ElevenLabs Sound Effects v2 and are listed in `production/audio/sfx_list.csv` (AI log rows of 6 Nov). The cutscene slots in CS-15 and CS-18 that still say `pending` are filled when the films are next rebuilt (board task filed by M3-99).

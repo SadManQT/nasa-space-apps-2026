@@ -1,0 +1,13 @@
+{
+ "about": "M3-99: dated stage variants of Alo's and Tara's models, by individual and PlantService code stage. CampaignRoom.apply_plant_state shows the listed model instead of the shared Tripo stage model (PL_Alo_Pods for every pod stage). Dates: game-design/24_NARRATIVE_REVISION.md §3.8 (Alo: pods 8 May, mature 16 May, dry 16-21 May 2046) and §3.9 (Tara: pods from 8 May, watering stops 26 May, harvest 31 May 2046). Built from the sheets Sadman approved on 5 Nov 2026 by production/concept/narrative_props/build_runtime_assets.py.",
+ "ALO-01": {
+  "pod_bearing": "PL_Alo_PodsGreen",
+  "mature_pods": "PL_Alo_Senescent",
+  "mature_dry": "PL_Alo_Dry"
+ },
+ "TARA-01": {
+  "pod_bearing": "PL_Tara_Pods",
+  "mature_pods": "PL_Tara_Senescent",
+  "mature_dry": "PL_Tara_Dry"
+ }
+}

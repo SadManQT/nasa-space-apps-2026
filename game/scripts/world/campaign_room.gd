@@ -28,6 +28,8 @@ var _layout: Dictionary = {}
 var _selection_frames: Dictionary = {}
 var _focus_id := ""
 var _scene_context := ""
+const PLANT_STAGE_MODELS_PATH := "res://assets/plants/plant_stage_models.json"
+static var _plant_stage_models: Dictionary = {}
 
 func _ready() -> void:
 	build_room()
@@ -153,6 +155,7 @@ func apply_plant_state(plants: Array) -> void:
 			asset = {"bud": "PL_Alo_Bud", "bloom": "PL_Alo_Bloom", "pollinated": "PL_Alo_Bloom", "pod_bearing": "PL_Alo_Pods", "mature_pods": "PL_Alo_Pods", "mature_dry": "PL_Alo_Pods"}.get(stage, "")
 		elif stage in ["bloom", "pollinated"]:
 			asset = "PL_Tara_Bloom"
+		asset = plant_stage_model(individual, stage, asset)
 		var focus_id := "garden_alo_glove_port" if individual == "ALO-01" else "garden_tara_bay"
 		var focus := focus_root.get_node_or_null("Focus_" + focus_id) as Node3D
 		if focus != null:
@@ -175,6 +178,14 @@ func apply_plant_state(plants: Array) -> void:
 		elif focus != null:
 			model.position = Vector3(focus.position.x, 0.0, focus.position.z)
 		model.show()
+
+## The dated stage variant of a garden plant's model (M3-99: green pods, senescent, dry), or `fallback` when the
+## stage has none. Data: res://assets/plants/plant_stage_models.json.
+static func plant_stage_model(individual: String, stage: String, fallback: String) -> String:
+	if _plant_stage_models.is_empty():
+		_plant_stage_models = JSON.parse_string(FileAccess.get_file_as_string(PLANT_STAGE_MODELS_PATH))
+	var models = _plant_stage_models.get(individual, {})
+	return String(models.get(stage, fallback)) if models is Dictionary else fallback
 
 func _node_root(node_name: String) -> Node3D:
 	var existing := get_node_or_null(node_name) as Node3D
