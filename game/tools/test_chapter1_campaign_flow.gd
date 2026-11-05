@@ -3,6 +3,7 @@ extends SceneTree
 
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const SaveScript = preload("res://scripts/save/save_service.gd")
+const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
 const ACTIONS := [
 	["commission_route", "commission_result", "charter_card"],
 	["classify_information", "roll_call", "practice_fault"],
@@ -38,6 +39,7 @@ func _run() -> void:
 	storage.configure(campaign)
 	root.add_child(campaign)
 	await process_frame
+	PlanFixture.prepare(campaign.route)
 	if campaign.route == null or campaign.hud == null:
 		_check(false, "production campaign initializes its route and HUD")
 		_finish()

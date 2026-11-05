@@ -657,8 +657,8 @@
    "priority": "P0",
    "tool": "antigravity",
    "title": "P-02 Seven Shifts: the Mission Table plan the player actually makes",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-claude2",
    "deps": [
     "M0-02"
    ],
@@ -674,7 +674,7 @@
     "game-design/08_PUZZLE_DESIGNS.md"
    ],
    "note": "Queued in the same Antigravity session as M1-08 on Sadman's Mac.",
-   "evidence": "",
+   "evidence": "run_tests.sh 32/32 suites passed (production/qa/evidence/M1-09_tests.txt); new suite game/tools/test_p02_mission_table.gd 78 checks: Bloom/Golden/PUMP/STACK witnesses exact through the route with preview==commit, blackout at E-1 vs exactly E0, GOLDEN/BLOOM/ALO_LOST/MISSION_STOPPED predicates, PUMP/STACK/WAIT incl. partial tasks, save/retry, panel Space+confirm and campaign integration; _default_plan deleted (play path uses the player's Mission Table plan). Screenshots: production/qa/evidence/M1-09_hud_plan_button.png, M1-09_shift1_cards.png, M1-09_shift1_preview.png, M1-09_shift1_confirm.png, M1-09_shift5_stack_task.png, M1-09_shift5_stack_preview.png, M1-09_large_text.png, M1-09_shifts6_7_golden_projection.png, M1-09_shifts6_7_confirm.png, M1-09_ending_outcome.png; capture probe M1-09_capture_probe.txt (PASS)",
    "updated": "2026-11-05",
    "prompt": "Problem: P-02 runs the real simulation but the HUD submits _default_plan (game/scripts/missions/chapter1_route.gd:485); the player never\nchooses heat (COZY/COOL/COLD), light (OFF/DIM/FULL), air or water transfers, nor PUMP/STACK/WAIT at the shift-5 alarm.\nGoal: the Chapter 1 heart: the player plans each of the seven 7.2 h shifts at the Mission Table, sees the preview from the same pure\nfunction that commits (ExpeditionSimulation), commits with Space+confirm, and lives with the consequences (E 14/20 +8 per day shift,\nA 6/10, H 6/10, W 0–6, K 0–2, S=min(6,W+K), blackout only below 0).\nDo: implement per execution/PUZZLE_P02.md and execution/UI_10_MISSION_TABLE.md; delete _default_plan from the play path (keep it only\nas a test fixture if needed); role facts from the four cadets inform choices; outcome feeds the four endings (M1-19).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests cover blackout at -1 vs exactly 0, each ending predicate and PUMP/STACK/WAIT; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },

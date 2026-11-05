@@ -6,6 +6,7 @@ const CampaignScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const SaveScript = preload("res://scripts/save/save_service.gd")
 const LegacyScript = preload("res://scripts/save/legacy_save.gd")
+const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
 
 var storage = preload("res://tools/support/isolated_storage.gd").new()
 
@@ -113,6 +114,7 @@ func _run() -> void:
 	else:
 		_check(false, "nearby E action commits the real physical operation")
 	var traversed := true
+	PlanFixture.prepare(campaign.route)
 	for scene_id in Gates.scene_ids():
 		if scene_id in ["EX-CH01-S02", "EX-CH01-S04"]:
 			campaign.call("_refresh_world")

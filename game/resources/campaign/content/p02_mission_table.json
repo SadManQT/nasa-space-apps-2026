@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "content_revision": "p02-mission-table-v1",
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-02 and its numeric execution contract; execution/UI_10_MISSION_TABLE.md",
+  "gates": {
+    "p02_shift1": {"shifts": [1], "label": "Shift 1 · daylight", "commit_label": "COMMIT SHIFT 1"},
+    "p02_stage_shift2": {"shifts": [2], "label": "Shift 2 · daylight · staged before the drill", "commit_label": "STAGE SHIFT 2 PREVIEW", "preview_only": true},
+    "p02_shift2": {"shifts": [2], "label": "Shift 2 · daylight", "commit_label": "COMMIT SHIFT 2"},
+    "p02_shifts3_4": {"shifts": [3, 4], "label": "Shifts 3–4 · dark", "commit_label": "COMMIT SHIFTS 3–4"},
+    "p02_shift5_alarm": {"shifts": [5], "label": "Shift 5 · particle alarm", "commit_label": "COMMIT ALARM RESPONSE"},
+    "p02_shifts6_7": {"shifts": [6, 7], "label": "Shifts 6–7 · dark", "commit_label": "COMMIT SHIFTS 6–7"}
+  },
+  "fields": {
+    "heat": {"label": "HEAT", "options": [
+      {"value": "COLD", "label": "COLD", "cost": "E0 · Alo −2 · crop −1"},
+      {"value": "COOL", "label": "COOL", "cost": "E1 · Alo −1"},
+      {"value": "COZY", "label": "COZY", "cost": "E2 · no cold damage"}
+    ]},
+    "air_production": {"label": "AIR MAKER", "options": [
+      {"value": 0, "label": "OFF", "cost": "E0 · air +0"},
+      {"value": 1, "label": "+1", "cost": "E1 · air +1"},
+      {"value": 2, "label": "+2", "cost": "E2 · air +2"}
+    ]},
+    "light": {"label": "GARDEN LIGHT", "options": [
+      {"value": "OFF", "label": "OFF", "cost": "E0 · plants −1"},
+      {"value": "DIM", "label": "DIM", "cost": "E1 · plants ±0"},
+      {"value": "FULL", "label": "FULL", "cost": "E2 · plants +1"}
+    ]},
+    "transfer": {"label": "WATER WALL", "options": [
+      {"value": "DRAIN", "label": "DRAIN", "cost": "wall −2 · back to garden"},
+      {"value": "HOLD", "label": "HOLD", "cost": "no change"},
+      {"value": "FILL", "label": "FILL", "cost": "wall +2 · from garden"}
+    ]},
+    "action": {"label": "ALARM RESPONSE", "options": [
+      {"value": "PUMP", "label": "PUMP", "cost": "valve task · wall +2 (partial +1)"},
+      {"value": "STACK", "label": "STACK", "cost": "bundle task · crates 2 (partial 1) · forces COOL, air OFF, light OFF"},
+      {"value": "WAIT", "label": "WAIT", "cost": "no task · keep the prepared shelter"}
+    ]}
+  },
+  "day_shifts": [1, 2],
+  "alarm_shift": 5,
+  "stack_forces": {"heat": "COOL", "air_production": 0, "light": "OFF"},
+  "alarm_tasks": {
+    "PUMP": {"steps": 3, "timer_seconds": 15, "step_labels": ["OPEN GARDEN ISOLATION VALVE", "OPEN SHELTER WALL VALVE", "CONFIRM FLOW AND CLOSE GARDEN VALVE"]},
+    "STACK": {"steps": 4, "timer_seconds": 30, "step_labels": ["BUNK SLOT 1", "BUNK SLOT 2", "BUNK SLOT 3", "BUNK SLOT 4"]}
+  },
+  "role_cards": [
+    {
+      "role_id": "kai", "name": "Kai", "role": "POWER", "icon": "BATTERY", "arrives_shift": 1,
+      "quote": "Same full jar. Better destination.", "quote_id": "EX-CH01-S07-L02",
+      "facts": [
+        "The battery holds 20. Daylight adds 8 in shifts 1 and 2 only; anything above 20 is lost.",
+        "Shifts 3 to 7 are dark: five shifts, 36 hours, running only on what is stored.",
+        "Every shift costs 1 for basics, plus heat (night only), the air maker and the garden light.",
+        "A demand below zero is a blackout: the battery resets to 0 and air, Alo and the crop each lose 2. Ending a shift at exactly 0 is an empty-battery warning, not a blackout."
+      ]
+    },
+    {
+      "role_id": "amara", "name": "Amara", "role": "AIR", "icon": "TANK", "arrives_shift": 1,
+      "quote": "We can keep air we make now. We cannot keep overflow.", "quote_id": "EX-CH01-S07-L01",
+      "facts": [
+        "The air tank holds 10. The crew of four breathes 1 per shift.",
+        "The air maker turns 1 energy into 1 air, up to 2 per shift, before breathing.",
+        "Make air while sunlight would overflow the battery.",
+        "If air reaches 0, the flight rules stop the mission."
+      ]
+    },
+    {
+      "role_id": "rafi", "name": "Rafi", "role": "SPACE WEATHER", "icon": "SUN", "arrives_shift": 2,
+      "quote": "First rule: the crew goes inside.", "quote_id": "EX-CH01-S08-L01",
+      "facts": [
+        "A large solar flare was observed. In this training scenario a particle event may follow during shifts 5 and 6.",
+        "Shelter S = water wall + supply crates, at most 6. Dose per storm shift: S 0–1 gives 3, 2–3 gives 2, 4–5 gives 1, 6 gives 0.",
+        "The crew exposure limit is 3 game units for the night. These are training units, not sieverts.",
+        "One water transfer per shift: FILL +2, DRAIN −2 or HOLD. At shift 5 the alarm response replaces it. Crates come down before shift 7."
+      ]
+    },
+    {
+      "role_id": "mei", "name": "Mei", "role": "GARDEN", "icon": "LEAF", "arrives_shift": 3,
+      "quote": "Read my cold-and-thirst card with Rafi's warning.", "quote_id": "EX-CH01-S09-L03",
+      "facts": [
+        "Garden light changes Alo and the crop each shift: OFF −1, DIM 0, FULL +1.",
+        "At night COOL costs Alo 1. COLD costs Alo 2 and the crop 1. COZY costs neither.",
+        "The water wall borrows garden water. At 4 or more after the transfer, Alo and the crop are thirsty: −1 each.",
+        "Alo at 0 cannot recover in this attempt."
+      ]
+    }
+  ],
+  "hints": [
+    "Store air while sunlight would overflow.",
+    "Prepare shielding before the alarm, then return the water.",
+    "Open the worked Bloom plan or Guided plan."
+  ],
+  "golden_hints": [
+    "Golden needs Alo at 5 or more with no blackout, so every drop must reach the garden at exactly the right time.",
+    "Open the worked Golden plan."
+  ],
+  "endings": {
+    "GOLDEN": {"title": "GOLDEN BLOOM", "summary": "All three stars and Alo at 5 or more. The rare expert result."},
+    "BLOOM": {"title": "BLOOM", "summary": "The crew is safe and Alo is alive at sunrise."},
+    "ALO_LOST": {"title": "ALO LOST", "summary": "The crew completed the night safely, but Alo did not survive. Retry the last shift checkpoint to try again."},
+    "MISSION_STOPPED": {"title": "MISSION STOPPED", "summary": "Flight rules stopped operations. Read the cause, then retry from the last shift checkpoint."}
+  },
+  "worked_plans": {
+    "bloom": {
+      "title": "Worked Bloom plan (all-COZY nights, WAIT at the alarm)",
+      "expected_final": {"E": 2, "A": 1, "H": 1, "W": 0, "K": 0, "C": 3, "R": 3.6, "Z": 2},
+      "expected_ending": "BLOOM",
+      "shifts": [
+        {"air_production": 2, "light": "FULL", "transfer": "HOLD"},
+        {"air_production": 0, "light": "FULL", "transfer": "HOLD"},
+        {"heat": "COZY", "air_production": 0, "light": "OFF", "transfer": "FILL"},
+        {"heat": "COZY", "air_production": 0, "light": "OFF", "transfer": "FILL"},
+        {"heat": "COZY", "air_production": 0, "light": "OFF", "action": "WAIT"},
+        {"heat": "COZY", "air_production": 0, "light": "OFF", "transfer": "DRAIN"},
+        {"heat": "COZY", "air_production": 0, "light": "OFF", "transfer": "DRAIN"}
+      ]
+    },
+    "golden": {
+      "title": "Worked Golden plan (STACK at the alarm)",
+      "expected_final": {"E": 0, "A": 1, "H": 5, "W": 0, "K": 0, "C": 9, "R": 3.6, "Z": 2},
+      "expected_ending": "GOLDEN",
+      "shifts": [
+        {"air_production": 2, "light": "FULL", "transfer": "HOLD"},
+        {"air_production": 0, "light": "FULL", "transfer": "DRAIN"},
+        {"heat": "COOL", "air_production": 0, "light": "FULL", "transfer": "DRAIN"},
+        {"heat": "COOL", "air_production": 0, "light": "FULL", "transfer": "FILL"},
+        {"heat": "COOL", "air_production": 0, "light": "OFF", "action": "STACK"},
+        {"heat": "COZY", "air_production": 0, "light": "OFF", "transfer": "HOLD"},
+        {"heat": "COOL", "air_production": 0, "light": "FULL", "transfer": "DRAIN"}
+      ]
+    },
+    "pump": {
+      "title": "PUMP witness",
+      "expected_final": {"E": 0, "A": 1, "H": 1, "W": 6, "K": 0, "C": 7, "R": 3.6, "Z": 2},
+      "expected_ending": "BLOOM",
+      "shifts": [
+        {"air_production": 1, "light": "FULL", "transfer": "DRAIN"},
+        {"air_production": 1, "light": "FULL", "transfer": "DRAIN"},
+        {"heat": "COOL", "air_production": 0, "light": "OFF", "transfer": "HOLD"},
+        {"heat": "COOL", "air_production": 0, "light": "OFF", "transfer": "FILL"},
+        {"heat": "COZY", "air_production": 0, "light": "DIM", "action": "PUMP"},
+        {"heat": "COOL", "air_production": 0, "light": "FULL", "transfer": "HOLD"},
+        {"heat": "COOL", "air_production": 0, "light": "FULL", "transfer": "FILL"}
+      ]
+    },
+    "stack": {
+      "title": "STACK witness",
+      "expected_final": {"E": 0, "A": 3, "H": 1, "W": 0, "K": 0, "C": 6, "R": 3.6, "Z": 2},
+      "expected_ending": "BLOOM",
+      "shifts": [
+        {"air_production": 2, "light": "OFF", "transfer": "FILL"},
+        {"air_production": 2, "light": "DIM", "transfer": "DRAIN"},
+        {"heat": "COOL", "air_production": 0, "light": "DIM", "transfer": "DRAIN"},
+        {"heat": "COOL", "air_production": 0, "light": "FULL", "transfer": "FILL"},
+        {"heat": "COOL", "air_production": 0, "light": "OFF", "action": "STACK"},
+        {"heat": "COZY", "air_production": 0, "light": "OFF", "transfer": "HOLD"},
+        {"heat": "COZY", "air_production": 0, "light": "DIM", "transfer": "DRAIN"}
+      ]
+    }
+  }
+}

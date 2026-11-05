@@ -6,6 +6,7 @@ const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const Simulation = preload("res://scripts/simulation/expedition_simulation.gd")
 const State = preload("res://scripts/core/campaign_state.gd")
 const PlantPuzzle = preload("res://scripts/missions/p01_commission_plant.gd")
+const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
 
 var checks := 0
 var failures := 0
@@ -26,7 +27,9 @@ func _run() -> void:
 func _new_route() -> RefCounted:
 	var director := Director.new()
 	director.new_campaign()
-	return Route.new(director)
+	var route := Route.new(director)
+	PlanFixture.prepare(route)
+	return route
 
 func _targets(scene: String) -> Array:
 	if scene == "EX-CH01-S03":

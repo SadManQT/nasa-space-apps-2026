@@ -3,6 +3,8 @@ class_name Chapter1CampaignHUD
 
 const Outpost = preload("res://scripts/ui/outpost_status.gd")
 const PANELS_SCENE: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
+const MISSION_TABLE_SCENE: PackedScene = preload("res://scenes/ui/mission_table_panel.tscn")
+const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
 const IVORY := Color("#ECEEF0")
 const MUTED := Color("#A8B4C8")
 const CYAN := Color("#20B8C9")
@@ -12,6 +14,7 @@ const RED := Color("#E56B6F")
 
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
+var mission_table: MissionTablePanel
 var _title: Label
 var _meta: Label
 var _objective: Label
@@ -49,6 +52,11 @@ func setup(value: Chapter1Campaign) -> void:
 	panels.set_command_sink(Callable(runtime, "handle_ui_command"))
 	panels.panel_opened.connect(_on_panel_opened)
 	panels.panel_closed.connect(_on_panel_closed)
+	mission_table = MISSION_TABLE_SCENE.instantiate() as MissionTablePanel
+	add_child(mission_table)
+	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
+	mission_table.closed.connect(func(_target: String) -> void: _on_panel_closed("mission_table"))
+	mission_table.commit_requested.connect(_on_mission_table_commit)
 	_refresh_query()
 	refresh_scene({})
 
@@ -302,7 +310,12 @@ func _build_targets() -> void:
 			_focus_preview = false
 			_clear_unselected_forecast()
 		)
-		button.pressed.connect(func() -> void: runtime.perform_target(String(target.get("target_id", ""))))
+		var target_id := String(target.get("target_id", ""))
+		if MissionTableScript.is_gate(target_id):
+			button.text = "PLAN AT MISSION TABLE · " + String(target.get("focus_label", target_id)) + "\nAT " + label
+			button.pressed.connect(func() -> void: open_mission_table(target_id))
+		else:
+			button.pressed.connect(func() -> void: runtime.perform_target(target_id))
 		_targets.add_child(button)
 	_advance.disabled = complete or not bool(gate.get("ready", false))
 	_retry.disabled = complete or runtime.route.snapshot().get("retry_checkpoint", {}).is_empty()
@@ -319,6 +332,34 @@ func _build_targets() -> void:
 	if panels != null and not panels.active_panel().is_empty():
 		_set_modal_buttons(true)
 	apply_accessibility()
+
+## Opens the P-02 Mission Table for one shift gate. Reading and planning pause
+## the expedition; the physical commit happens only after the table closes.
+func open_mission_table(target_id: String) -> bool:
+	if runtime == null or mission_table == null or runtime.is_chapter_complete() or not MissionTableScript.is_gate(target_id):
+		return false
+	if runtime.is_cutscene_active() or mission_table.is_open():
+		return false
+	if panels != null and not panels.active_panel().is_empty():
+		return false
+	mission_table.open(runtime.route, target_id, runtime.query().get("accessibility", {}))
+	return true
+
+func _on_mission_table_commit(target_id: String, plan: Dictionary) -> void:
+	if runtime == null:
+		return
+	var result := runtime.perform_target(target_id, {"plan": plan})
+	if not bool(result.get("accepted", false)):
+		return
+	var outcome: Dictionary = result.get("result", {}) if result.get("result", {}) is Dictionary else {}
+	var report := MissionTableScript.ending_report(outcome)
+	if report.is_empty():
+		return
+	var stars: Dictionary = report.get("stars", {})
+	var star_line := "%s Crew exposure ≤ 3 · %s No blackout · %s Alo alive" % ["★" if stars.get("safe_exposure", false) else "☆", "★" if stars.get("no_blackout", false) else "☆", "★" if stars.get("alo_alive", false) else "☆"]
+	_last_outcome = {"result": "%s · %s" % [String(report.get("title", "")), String(report.get("summary", ""))], "changes": outcome.get("deltas", []), "notes": [star_line] + outcome.get("warnings", []) + report.get("unsafe_predicates", [])}
+	show_status("%s · %s\n%s" % [String(report.get("title", "")), String(report.get("summary", "")), star_line])
+	panels.open_panel("outcome", _last_outcome)
 
 func _render_caption() -> void:
 	if runtime == null:
@@ -412,7 +453,7 @@ func _layout_outpost() -> void:
 
 func _scale_text(node: Node, scale_factor: float) -> void:
 	for child in node.get_children():
-		if child == panels:
+		if child == panels or child == mission_table:
 			continue
 		if child is Control:
 			if not child.has_meta("lla_base_font_size"):
@@ -440,7 +481,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_modal_button_states.clear()
 		return
 	for child in node.get_children():
-		if child == panels:
+		if child == panels or child == mission_table:
 			continue
 		if child is BaseButton:
 			if not _modal_button_states.has(child):
@@ -450,7 +491,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
-		if panels != null and panels.active_panel().is_empty():
+		if panels != null and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()):
 			panels.open_panel("pause")
 			get_viewport().set_input_as_handled()
 
@@ -516,7 +557,7 @@ func show_target_forecast(target_id: String, source: String = "ui") -> void:
 	_forecast_source = source
 	_forecast = runtime.forecast_target(target_id)
 	outpost.bind_query(runtime.query(), _forecast)
-	outpost.tooltip_text = "Forecast of the selected operation. Live resources stay unchanged until you confirm." if bool(_forecast.get("accepted", false)) else "Complete the preceding operations to see this forecast."
+	outpost.tooltip_text = "Forecast of the selected operation. Live resources stay unchanged until you confirm." if bool(_forecast.get("accepted", false)) else String(_forecast.get("reason", "Complete the preceding operations to see this forecast."))
 
 func show_nearby_forecast(target_id: String) -> void:
 	if _pointer_preview or _focus_preview:

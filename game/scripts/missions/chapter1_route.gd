@@ -8,6 +8,8 @@ const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const P01Script = preload("res://scripts/missions/p01_commission_plant.gd")
 const PuzzleHostScript = preload("res://scripts/puzzles/puzzle_host.gd")
 const StateScript = preload("res://scripts/core/campaign_state.gd")
+const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
+const SimulationScript = preload("res://scripts/simulation/expedition_simulation.gd")
 
 ## Chapter 1 mission composition and physical-gate adapter.
 ##
@@ -24,6 +26,8 @@ var _completed_scene_ids: Array = []
 var _p02_hosts := {}
 var _last_result := {}
 var _ending := ""
+var _p02_table: RefCounted = MissionTableScript.new()
+var _table_simulation: RefCounted = SimulationScript.new()
 
 func _init(director: RefCounted = null, skip_initial_scene: bool = false) -> void:
 	_gate_catalog = GateCatalog
@@ -64,6 +68,55 @@ func current_flags() -> Dictionary:
 
 func last_result() -> Dictionary:
 	return _last_result.duplicate(true)
+
+## The player's P-02 plan (P02MissionTable). The Mission Table UI edits it;
+## P-02 gates commit exactly its plan.
+func mission_table() -> RefCounted:
+	return _p02_table
+
+## Everything the Mission Table shows for one P-02 gate, read-only. Both
+## forecasts call ExpeditionSimulation.preview on the authoritative snapshot,
+## the same pure function every P-02 commit runs, so preview and commit agree.
+## Reading works while the expedition is paused.
+func mission_table_view(target_id: String) -> Dictionary:
+	var state: Dictionary = _director.snapshot()
+	var committed := int(state.get("current_shift", 0))
+	var shifts := MissionTableScript.gate_shifts(target_id)
+	var selections := {}
+	for shift in range(1, MissionTableScript.SHIFT_COUNT + 1):
+		selections[shift] = _p02_table.selection(shift)
+	var view := {
+		"target_id": target_id,
+		"gate": MissionTableScript.gate_info(target_id),
+		"shifts": shifts,
+		"committed_shift": committed,
+		"scenario_datetime": String(state.get("scenario_datetime", "")),
+		"resources": state.get("resources", {}).duplicate(true),
+		"blackout_count": int(state.get("blackout_count", 0)),
+		"status": String(state.get("status", "")),
+		"cards": _p02_table.role_cards(committed),
+		"selections": selections,
+		"hints": _p02_table.revealed_hints(),
+		"worked_plans": _p02_table.unlocked_worked_plans(),
+		"alarm": _p02_table.alarm_state(),
+		"block_reason": _p02_table.commit_block_reason(target_id, committed),
+		"prerequisite_reason": _prerequisite_reason(target_id),
+		"gate_preview": {},
+		"night_projection": {},
+		"planned_through": committed,
+	}
+	if target_id == "p02_stage_shift2" and bool(_context_flags().get("shift2_preview_staged", false)):
+		view["prerequisite_reason"] = "Shift 2 is already staged. Commit it after the shelter drill."
+	var gate_plan: Dictionary = _p02_table.plan_for_gate(target_id)
+	if not gate_plan.is_empty() and not shifts.is_empty() and int(shifts[0]) == committed + 1:
+		view["gate_preview"] = _table_simulation.preview(state, gate_plan)
+	var night_plan: Dictionary = _p02_table.plan_from(committed + 1)
+	if not night_plan.shifts.is_empty():
+		var projection: Dictionary = _table_simulation.preview(state, night_plan)
+		view["night_projection"] = projection
+		view["planned_through"] = committed + night_plan.shifts.size()
+		view["ending_report"] = MissionTableScript.ending_report(projection)
+	return view
 
 func start_at(scene_id: String) -> Dictionary:
 	var index := GateCatalog.SCENE_ORDER.find(scene_id)
@@ -110,6 +163,10 @@ func perform(target_id: String, payload: Dictionary = {}, context: Dictionary = 
 	var special_check := _special_target_prerequisite(target_id)
 	if not bool(special_check.get("accepted", false)):
 		return special_check
+	if MissionTableScript.is_gate(target_id) and not payload.has("plan"):
+		var plan_problem: String = _p02_table.plan_block_reason(target_id, int(_director.query().get("current_shift", 0)))
+		if not plan_problem.is_empty():
+			return {"accepted": false, "reason": plan_problem, "mission_table": true}
 	var prepared := _payload_for_target(target, payload)
 	var trace := {}
 	trace["focus"] = focus(target_id, context)
@@ -252,6 +309,40 @@ func restore(snapshot_data: Dictionary) -> Dictionary:
 	_p02_hosts.clear()
 	return {"accepted": true, "reason": "Chapter 1 route restored from primitive room/mission state."}
 
+## Restores the last shift checkpoint but keeps the player's written plan, read
+## cards and hints: retry rewinds resources and actions, not what the crew
+## learned. Alarm task progress is an action, so it resets before shift 5.
+func retry() -> Dictionary:
+	var table: Dictionary = _p02_table.snapshot()
+	var result: Dictionary = super.retry()
+	if bool(result.get("accepted", false)):
+		_p02_table.restore(table)
+		if int(_director.query().get("current_shift", 0)) < int(MissionTableScript.data().get("alarm_shift", 5)):
+			_p02_table.reset_alarm_task()
+		result["route"] = snapshot()
+	return result
+
+## Player-facing text for the physical step a P-02 gate still waits on, or "".
+func _prerequisite_reason(target_id: String) -> String:
+	var check := _special_target_prerequisite(target_id)
+	if bool(check.get("accepted", false)):
+		return ""
+	var labels := {
+		"shift1_committed": "Commit shift 1 first.",
+		"shift2_committed_at_18": "Commit shift 2 first.",
+		"shifts3_4_resolved": "Commit shifts 3–4 first.",
+		"alarm_response_committed": "Commit the alarm response first.",
+	}
+	for flag in ["role_acknowledged", "shift1_committed", "shelter_drill_complete", "pre_drill_baseline_verified", "shift2_committed_at_18", "cards_combined", "earth_set_acknowledged", "shifts3_4_resolved", "four_sheltered", "alarm_response_committed", "exposure_before_drain_verified", "water_returned"]:
+		if String(check.get("reason", "")).ends_with(": " + flag):
+			if labels.has(flag):
+				return labels[flag]
+			for scene_id in GateCatalog.scene_ids():
+				for spec in GateCatalog.targets_for_scene(scene_id):
+					if String(spec.get("physical_flag", "")) == flag:
+						return "First: " + String(spec.get("focus_label", "complete the preceding operation")) + "."
+	return "Complete the preceding operation first."
+
 func _set_current_scene(index: int) -> Dictionary:
 	_scene_index = clampi(index, 0, GateCatalog.SCENE_ORDER.size() - 1)
 	var scene_id := current_scene_id()
@@ -302,7 +393,7 @@ func _payload_for_target(target: Dictionary, payload: Dictionary) -> Dictionary:
 	if target.has("puzzle_action"):
 		result["_puzzle_action"] = String(target.get("puzzle_action", ""))
 	if target.has("puzzle_id") and String(target.get("puzzle_id", "")) == "P-02" and not result.has("plan"):
-		result["plan"] = _default_plan(String(target.get("command_id", "")))
+		result["plan"] = _p02_table.plan_for_gate(String(target.get("target_id", "")))
 	return result
 
 func _special_target_prerequisite(target_id: String) -> Dictionary:
@@ -399,6 +490,7 @@ func _apply_target_result(target_id: String, payload: Dictionary, result: Dictio
 	if target.has("puzzle_id") and String(target.get("puzzle_id", "")) == "P-02":
 		if not String(result.get("ending", "")).is_empty():
 			_ending = String(result.ending)
+			_p02_table.record_ending(_ending)
 		if _ending == "MISSION_STOPPED":
 			if target_id == "p02_shifts6_7":
 				_mark_flag("final_shifts_resolved")
@@ -464,19 +556,6 @@ func _mark_flag(flag: String) -> void:
 	flags[flag] = true
 	_scene_flags[current_scene_id()] = flags
 
-func _default_plan(command_id: String) -> Dictionary:
-	match command_id:
-		"p02-shift-1": return {"shift": _step("DAY", 2, "FULL", "HOLD")}
-		"p02-stage-shift-2": return {"shift": _step("DAY", 0, "FULL", "HOLD")}
-		"p02-shift-2": return {"shift": _step("DAY", 0, "FULL", "HOLD")}
-		"p02-shifts-3-4": return {"shifts": [_step("COZY", 0, "OFF", "FILL"), _step("COZY", 0, "OFF", "FILL")]}
-		"p02-shift-5": return {"shift": _step("COZY", 0, "OFF", "WAIT")}
-		"p02-shifts-6-7": return {"shifts": [_step("COZY", 0, "OFF", "DRAIN"), _step("COZY", 0, "OFF", "DRAIN")]}
-	return {"shift": _step("DAY", 0, "OFF", "HOLD")}
-
-func _step(heat, oxygen: int, light, transfer: String) -> Dictionary:
-	return {"heat": heat, "air_production": oxygen, "light": light, "transfer": transfer}
-
 func _local_snapshot() -> Dictionary:
 	return {
 		"current_scene_id": current_scene_id(),
@@ -487,6 +566,7 @@ func _local_snapshot() -> Dictionary:
 		"p01": _p01.snapshot(),
 		"ending": _ending,
 		"world": _world.snapshot(),
+		"p02_table": _p02_table.snapshot(),
 	}
 
 func _validate_local_snapshot(data: Dictionary) -> Dictionary:
@@ -527,6 +607,12 @@ func _validate_local_snapshot(data: Dictionary) -> Dictionary:
 	var plant_check: Dictionary = P01Script.new().restore(data.p01)
 	if not bool(plant_check.get("accepted", false)):
 		return plant_check
+	# Saves written before the Mission Table existed have no plan; they resume
+	# with an empty table rather than an invented plan.
+	if data.has("p02_table"):
+		var table_check: Dictionary = MissionTableScript.new().restore(data.p02_table)
+		if not bool(table_check.get("accepted", false)):
+			return table_check
 	for key in ["boundaries", "roster", "last_viewpoint_cut"]:
 		if not data.world.get(key, null) is Dictionary:
 			return {"accepted": false, "reason": "World snapshot requires a Dictionary for " + key}
@@ -558,5 +644,8 @@ func _restore_local(snapshot_data: Dictionary) -> void:
 	_dialogue_acks = snapshot_data.get("dialogue_acks", {}).duplicate(true)
 	_ending = String(snapshot_data.get("ending", ""))
 	_p01.restore(snapshot_data.get("p01", {}))
+	_p02_table = MissionTableScript.new()
+	if snapshot_data.has("p02_table"):
+		_p02_table.restore(snapshot_data.p02_table)
 	_world.restore(snapshot_data.get("world", {}))
 	_register_current_targets()

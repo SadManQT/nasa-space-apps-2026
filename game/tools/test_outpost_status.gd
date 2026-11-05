@@ -1,6 +1,7 @@
 extends SceneTree
 
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
+const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
 var storage = preload("res://tools/support/isolated_storage.gd").new()
 var checks := 0
 var failures := 0
@@ -79,6 +80,7 @@ func _run() -> void:
 		_check(runtime.route.advance_scene().get("accepted", false), "setup advances real scene: " + scene_id)
 	var first = Gates.targets_for_scene("EX-CH01-S07")[0]
 	_check(runtime.route.perform(first.target_id).get("accepted", false), "read the shift role facts before forecasting")
+	PlanFixture.prepare(runtime.route)
 	runtime.call("_sync_route_projection")
 	runtime.call("_refresh_world")
 	hud.refresh_scene()

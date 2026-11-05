@@ -12,6 +12,7 @@ const DispatcherScript = preload("res://scripts/interactions/interaction_dispatc
 const RouteScript = preload("res://scripts/missions/chapter1_route.gd")
 const RegistryScript = preload("res://scripts/missions/mission_registry.gd")
 const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
+const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
 
 var checks := 0
 var failures := 0
@@ -196,6 +197,7 @@ func _test_registry_honesty() -> void:
 
 func _test_chapter1_route_order_and_physical_gates() -> void:
 	var route := RouteScript.new(DirectorScript.new())
+	PlanFixture.prepare(route)
 	var dialogue_only := route.acknowledge_dialogue("EX-CH01-S01-L01")
 	_check(bool(dialogue_only.get("accepted", false)) and not bool(route.gate_status().get("ready", false)), "dialogue acknowledgement never completes the S01 physical gate")
 	_check(bool(route.perform("commission_route").get("accepted", false)), "S01 commissioning route is a real interaction")

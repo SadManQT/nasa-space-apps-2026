@@ -1,0 +1,21 @@
+screenshot M1-09_hud_plan_button.png (saved)
+ok   the HUD opens the Mission Table for shift 1
+ok   commit starts disabled until cards are shared and the plan is set
+screenshot M1-09_shift1_cards.png (saved)
+ok   shift 1 preview E15 A7 with 2 overflow
+screenshot M1-09_shift1_preview.png (saved)
+screenshot M1-09_shift1_confirm.png (saved)
+ok   the confirmed shift 1 commits exactly its preview
+ok   the HUD opens the alarm response
+screenshot M1-09_shift5_stack_task.png (saved)
+screenshot M1-09_shift5_stack_preview.png (saved)
+ok   the table reopens at 150% text
+screenshot M1-09_large_text.png (saved)
+large text: viewport [P: (0.0, 0.0), S: (1280.0, 720.0)], frame [P: (12.0, 12.0), S: (1256.0, 696.0)], commit [P: (750.0, 642.0), S: (355.0, 44.0)]
+ok   the table and Commit stay on screen at 150% text
+ok   a complete STACK commits K2
+screenshot M1-09_shifts6_7_golden_projection.png (saved)
+screenshot M1-09_shifts6_7_confirm.png (saved)
+ok   the Golden plan earns GOLDEN BLOOM in the real campaign
+screenshot M1-09_ending_outcome.png (saved)
+RESULT PASS (0 failures)
