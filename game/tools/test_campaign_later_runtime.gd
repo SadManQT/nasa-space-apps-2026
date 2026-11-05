@@ -23,7 +23,7 @@ func _init() -> void:
 
 func _run() -> void:
 	var director := DirectorScript.new()
-	director.new_campaign("campaign-content-1-f06dab44691238c6")
+	director.new_campaign(CampaignContentFull.EXPECTED_CONTENT_REVISION)
 	var route := Chapter2RouteScript.new(director)
 	route.start_at("EX-CH02-S12")
 	var route_snapshot: Dictionary = route.snapshot()

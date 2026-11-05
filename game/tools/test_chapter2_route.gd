@@ -13,13 +13,13 @@ func _init() -> void:
 
 func _run() -> void:
 	var golden := DirectorScript.new()
-	var golden_state := golden.new_campaign("campaign-content-1-f06dab44691238c6")
+	var golden_state := golden.new_campaign(CampaignContentFull.EXPECTED_CONTENT_REVISION)
 	golden_state.resources.E = 0
 	golden.restore_snapshot(golden_state)
 	var golden_route := RouteScript.new(golden)
 	_check(bool(golden_route.apply_entry_profile().get("accepted", false)) and golden.snapshot().resources.E == 14, "B03 zero-energy Golden carryover can fund the entry profile")
 	var director := DirectorScript.new()
-	director.new_campaign("campaign-content-1-f06dab44691238c6")
+	director.new_campaign(CampaignContentFull.EXPECTED_CONTENT_REVISION)
 	var handoff := director.snapshot()
 	handoff["chapter1_ready"] = true
 	handoff["chapter_id"] = "CH02"

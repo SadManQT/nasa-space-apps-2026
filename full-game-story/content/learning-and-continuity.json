@@ -85,6 +85,11 @@
       "id": "ED-05",
       "change": "The complete garden ending and credits resolve this campaign. The MARS drawer can be a short after-credits teaser.",
       "preserved": "No Mars mission, sequel purchase, collection threshold or unresolved cliffhanger is needed to finish this story."
+    },
+    {
+      "id": "ED-06",
+      "change": "Narrative-revision canon pack approved by Sadman on 5 November 2026 (game-design/24_NARRATIVE_REVISION.md §8, board M3-94): Tara's dated end (watering stops 26 May, harvest 31 May 2046 into the sealed working stock Tara × Alo with no headline count; her nameplate on the lineage board; her name on the bay where cotton is planted), Ferreira's margin note on the back of the evacuation order (EX-CH05-S05), and three new spoken lines: Amara \"Forty-two.\" (EX-CH03-S10-L05), Rao \"Aurora, Earth. We hear you. Go ahead.\" (EX-CH08-S10-L05) and Noor \"You finished what we could not.\" (EX-CH08-S10-L06). The drawer-lid note, the cotton manifest note, Rao's listening log and the three tray dedications ship as written world text.",
+      "preserved": "Every previously recorded line and its id; the founder ledger 42 = 12 + 30 and the 15 + 15 seed case; the reveal order; Noor's first live voice only after both relay checks; no revived Alo."
     }
   ],
   "teachingPrinciples": [
@@ -291,8 +296,8 @@
     {
       "id": "LOCK-06",
       "topic": "The two founders",
-      "rule": "Alo and Tara are planted April 11, 2046. Alo blooms April 27; Tara flowers by April 30. Compatible reciprocal transfers and dated care occur April 30–May 6. Tara is an equal biological parent, not an incidental decoration.",
-      "check": "No pollen transfer before flowering, vacuum pollination or immediate seed harvest."
+      "rule": "Alo and Tara are planted April 11, 2046. Alo blooms April 27; Tara flowers by April 30. Compatible reciprocal transfers and dated care occur April 30–May 6. Tara is an equal biological parent, not an incidental decoration. Tara's own harvest follows on May 31 (watering stops May 26, twenty days after the last pollination run) into the garden's sealed working stock, Tara × Alo, recorded without a headline count and kept separate from the founder 42 = 12 + 30.",
+      "check": "No pollen transfer before flowering, vacuum pollination or immediate seed harvest; the working stock never enters the founder ledger."
     },
     {
       "id": "LOCK-07",

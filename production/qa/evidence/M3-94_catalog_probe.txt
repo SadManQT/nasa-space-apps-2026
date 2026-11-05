@@ -1,0 +1,36 @@
+campaign catalog campaign-content-1-dc4e79f2208c7126, dialogue_lines=388, valid=true []
+ok   frozen catalog validates
+
+EX-CH03-S10 with no flags:
+  1. EX-CH03-S10-L01  Mei [LOCAL LIVE]: I thought keeping her alive meant longer.
+  2. EX-CH03-S10-L02  Amara [LOCAL LIVE]: It meant she could finish.
+  3. EX-CH03-S10-L03  Kai [LOCAL LIVE]: Do you want us to wait?
+  4. EX-CH03-S10-L04  Mei [LOCAL LIVE]: Stay. Then help me count.
+  5. EX-CH03-S10-L05  Amara [LOCAL LIVE]: Forty-two.
+
+EX-CH08-S10 with identity only (channel still closed):
+  1. EX-CH08-S10-L05  (locked: Source not acquired yet.)
+  2. EX-CH08-S10-L01  (locked: Source not acquired yet.)
+  3. EX-CH08-S10-L02  Mei [LOCAL LIVE]: We kept a place for you.
+  4. EX-CH08-S10-L06  (locked: Source not acquired yet.)
+  5. EX-CH08-S10-L03  Ferreira [LOCAL LIVE]: You brought us the seeds.
+  6. EX-CH08-S10-L04  Amara [LOCAL LIVE]: The garden has more than one gardener.
+
+EX-CH08-S10 with identity + both relay legs verified:
+  1. EX-CH08-S10-L05  Rao [EARTH LINK]: Aurora, Earth. We hear you. Go ahead.
+  2. EX-CH08-S10-L01  Noor [EARTH LINK]: Hello, Aurora. This is Noor.
+  3. EX-CH08-S10-L02  Mei [LOCAL LIVE]: We kept a place for you.
+  4. EX-CH08-S10-L06  Noor [EARTH LINK]: You finished what we could not.
+  5. EX-CH08-S10-L03  Ferreira [LOCAL LIVE]: You brought us the seeds.
+  6. EX-CH08-S10-L04  Amara [LOCAL LIVE]: The garden has more than one gardener.
+ok   EX-CH03-S10-L05 is Amara's tally line, played fifth
+ok   EX-CH08-S10-L05 opens the scene on the Earth link and waits for both relay legs
+ok   EX-CH08-S10-L06 answers Mei fourth and is identity- and relay-gated
+ok   EX-CH03-S10-L05 ships text-only until M3-94R records it (captions fallback)
+ok   EX-CH08-S10-L05 ships text-only until M3-94R records it (captions fallback)
+ok   EX-CH08-S10-L06 ships text-only until M3-94R records it (captions fallback)
+ok   EX-CH08-S10-L01 keeps its recorded voice file
+ok   EX-CH08-S10-L02 keeps its recorded voice file
+ok   EX-CH08-S10-L03 keeps its recorded voice file
+ok   EX-CH08-S10-L04 keeps its recorded voice file
+M3-94 PROBE RESULT: PASS (0 failures)

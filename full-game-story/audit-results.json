@@ -1,6 +1,8 @@
 {
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "EX-CH03-S12: prose is 331 words; review spoken/cinematic pacing"
+  ],
   "checks": [
     {
       "check": "Exactly eight ordered chapters",
@@ -3788,6 +3790,10 @@
     },
     {
       "check": "EX-CH03-S10-L04: unique dialogue ID",
+      "passed": true
+    },
+    {
+      "check": "EX-CH03-S10-L05: unique dialogue ID",
       "passed": true
     },
     {
@@ -10311,11 +10317,19 @@
       "passed": true
     },
     {
+      "check": "EX-CH08-S10-L05: unique dialogue ID",
+      "passed": true
+    },
+    {
       "check": "EX-CH08-S10-L01: unique dialogue ID",
       "passed": true
     },
     {
       "check": "EX-CH08-S10-L02: unique dialogue ID",
+      "passed": true
+    },
+    {
+      "check": "EX-CH08-S10-L06: unique dialogue ID",
       "passed": true
     },
     {
@@ -10799,10 +10813,10 @@
       "passed": true
     }
   ],
-  "checkCount": 2699,
-  "passedCount": 2699,
-  "narrativeWords": 17887,
-  "dialogueLines": 385,
+  "checkCount": 2702,
+  "passedCount": 2702,
+  "narrativeWords": 18233,
+  "dialogueLines": 388,
   "sceneCount": 96,
   "missionCount": 32
 }

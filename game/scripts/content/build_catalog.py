@@ -2,8 +2,15 @@
 """Build the checked-in runtime campaign catalog from the canonical sources.
 
 This file is intentionally kept beside the runtime loader so a future content
-revision can be regenerated without hand-editing 96 scenes or 385 lines.  It
+revision can be regenerated without hand-editing 96 scenes or 388 lines.  It
 does not run in Godot; the generated JSON files are the engine inputs.
+
+Line ids are stable keys, not a play order: a line added later keeps the next
+free suffix (EX-CH08-S10-L05 is spoken first in its scene).  The play order is
+the dialogue array order in story-data.json, which the catalog exposes as
+``order`` and ``dialogue_ids``.  Three lines approved on 5 Nov 2026 (M3-94)
+ship text-only until M3-94R records them: their ``voice_file`` is empty and the
+runtime falls back to captions, as for the two on-screen text lines.
 """
 
 from __future__ import annotations
@@ -74,11 +81,18 @@ def base_speaker(value: str) -> str:
 
 
 def line_knowledge_requirements(speaker: str, scene_id: str, delivery: str) -> list[str]:
+    """Knowledge flags a line needs before the runtime may show or speak it.
+
+    Noor's lines wait for her consented identity; every live Earth-link line in
+    the Chapter 8 call scenes (Noor's and Rao's) also waits for both verified
+    relay legs, so nothing on the restored channel plays before the player has
+    verified it.
+    """
     requirements: list[str] = []
     if speaker == "Noor":
         requirements.append("noor_identity_revealed")
-        if scene_id in {"EX-CH08-S10", "EX-CH08-S12"} and delivery == "earth_link":
-            requirements.extend(["relay_local_verified", "relay_earth_verified"])
+    if scene_id in {"EX-CH08-S10", "EX-CH08-S12"} and delivery == "earth_link":
+        requirements.extend(["relay_local_verified", "relay_earth_verified"])
     return requirements
 
 
@@ -93,12 +107,13 @@ def load_sources() -> tuple[dict[str, Any], dict[str, dict[str, str]], dict[str,
         "scene_index_sha256": sha256(SCENE_INDEX_PATH),
         "vo_lines_sha256": sha256(VO_PATH),
     }
-    if len(scene_rows) != 96 or len(vo_rows) != 385:
+    if len(scene_rows) != 96 or len(vo_rows) != 388:
         raise ValueError("canonical source row counts changed; inspect before regenerating")
     return story, scene_index, vo_index, source_hashes
 
 
-def build_dialogue_line(scene: dict[str, Any], source_line: dict[str, Any], vo: dict[str, str]) -> dict[str, Any]:
+def build_dialogue_line(scene: dict[str, Any], source_line: dict[str, Any], vo: dict[str, str], order: int) -> dict[str, Any]:
+    """Build one catalog line; ``order`` is its 1-based play position in the scene."""
     line_id = source_line["id"]
     story_speaker = source_line["speaker"]
     vo_speaker = vo["speaker"]
@@ -111,7 +126,7 @@ def build_dialogue_line(scene: dict[str, Any], source_line: dict[str, Any], vo: 
     return {
         "id": line_id,
         "scene_id": scene["id"],
-        "order": int(line_id.rsplit("-L", 1)[1]),
+        "order": order,
         "speaker": vo_speaker,
         "speaker_id": speaker_id,
         "speaker_label": base_speaker(story_speaker),
@@ -243,11 +258,11 @@ def build_catalog() -> tuple[dict[str, Any], dict[str, Any]]:
             if index_row is None:
                 raise ValueError(f"scene index is missing {scene_id}")
             line_entries = []
-            for source_line in scene_source["dialogue"]:
+            for line_order, source_line in enumerate(scene_source["dialogue"], start=1):
                 vo = vo_index.get(source_line["id"])
                 if vo is None:
                     raise ValueError(f"VO index is missing {source_line['id']}")
-                line_entries.append(build_dialogue_line(scene_source, source_line, vo))
+                line_entries.append(build_dialogue_line(scene_source, source_line, vo, line_order))
             dialogue.extend(copy.deepcopy(line_entries))
             scene_mission_id = scene_source.get("missionId", scene_source.get("mission", ""))
             predicate = build_predicate(scene_id, scene_mission_id, chapter_id, scene_source["exitCondition"], scene_source["sourceRefs"])
