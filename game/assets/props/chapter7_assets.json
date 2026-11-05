@@ -1,0 +1,3492 @@
+{
+ "task": "M3-7A",
+ "seed": 20261106,
+ "about": "Chapter 7 (The Great Storm) shelter and uplink props and EN_Fabrication; built by production/tools/build_chapter7_assets.py; read by chapter7_assets.gd",
+ "conventions": {
+  "units": "metres",
+  "up": "+Y",
+  "front": "each asset's 'front': -Z for the procedural pieces (the habitat kit convention: a wall plate shares its kit wall's transform), +Z for the Tripo feedthrough",
+  "pivot": "base centre (lowest point y = 0); wall pieces: back face on z = 0, mounted at mount_y; moving parts on their own child pivots",
+  "lods": "<id>.glb (props) or <id>_LOD0.glb (EN_Fabrication) is the game LOD with collision; *_LOD1.glb is the Compatibility LOD (fewer segments, 512 px kit textures, no collision)",
+  "textures": "kit PBR sets referenced by uri from game/assets/environment/kit/textures (stored once); the relief's own maps in EN_Fabrication/textures",
+  "text": "no text on any surface: every word is a Screen_* slot or a Label3D the room adds; no logos",
+  "lamp_states": {
+   "off": [
+    0.2,
+    0.21,
+    0.22,
+    0.0
+   ],
+   "idle": [
+    0.55,
+    0.58,
+    0.62,
+    0.4
+   ],
+   "pass": [
+    0.2,
+    1.0,
+    0.35,
+    1.2
+   ],
+   "fail": [
+    1.0,
+    0.16,
+    0.1,
+    1.4
+   ],
+   "warn": [
+    1.0,
+    0.62,
+    0.1,
+    1.0
+   ],
+   "on": [
+    0.85,
+    0.95,
+    1.0,
+    1.0
+   ]
+  }
+ },
+ "assets": [
+  {
+   "id": "PR_ShelterDiagram",
+   "display": "Shelter diagram and five seat markers",
+   "notes": "0.80 x 0.66 m magnetic wall board: the 8 x 6 m Safe Room plan (hatch, water-wall panels, four bundle slots, the central seed latch) with five seat positions (Seat_1..5); five role-colour seat markers SeatMarker_Kai/_Amara/_Mei/_Rafi/_Ferreira park on the steel strip (Park_1..5) until placed; Screen_Roster is the live readiness strip",
+   "scenes": [
+    "EX-CH07-S02",
+    "EX-CH07-S05"
+   ],
+   "front": "-Z",
+   "mount": "wall",
+   "mount_y": 1.05,
+   "lods": [
+    "res://assets/props/PR_ShelterDiagram/PR_ShelterDiagram.glb",
+    "res://assets/props/PR_ShelterDiagram/PR_ShelterDiagram_LOD1.glb"
+   ],
+   "triangles": [
+    3866,
+    1498
+   ],
+   "lod_distance_m": 8.0,
+   "collision": true,
+   "size_m": [
+    0.8,
+    0.66,
+    0.049
+   ],
+   "bounds_min_m": [
+    -0.4,
+    -0.0,
+    -0.049
+   ],
+   "sockets": {
+    "Seat_1": [
+     0.0518,
+     0.4509,
+     -0.026
+    ],
+    "Seat_2": [
+     0.1086,
+     0.4049,
+     -0.026
+    ],
+    "Seat_3": [
+     0.13,
+     0.335,
+     -0.026
+    ],
+    "Seat_4": [
+     0.1086,
+     0.2651,
+     -0.026
+    ],
+    "Seat_5": [
+     0.0518,
+     0.2191,
+     -0.026
+    ],
+    "Park_1": [
+     -0.26,
+     0.062,
+     -0.025
+    ],
+    "Park_2": [
+     -0.13,
+     0.062,
+     -0.025
+    ],
+    "Park_3": [
+     0.0,
+     0.062,
+     -0.025
+    ],
+    "Park_4": [
+     0.13,
+     0.062,
+     -0.025
+    ],
+    "Park_5": [
+     0.26,
+     0.062,
+     -0.025
+    ]
+   },
+   "moving_parts": {
+    "SeatMarker_Kai": [
+     -0.26,
+     0.062,
+     -0.025
+    ],
+    "SeatMarker_Amara": [
+     -0.13,
+     0.062,
+     -0.025
+    ],
+    "SeatMarker_Mei": [
+     0.0,
+     0.062,
+     -0.025
+    ],
+    "SeatMarker_Rafi": [
+     0.13,
+     0.062,
+     -0.025
+    ],
+    "SeatMarker_Ferreira": [
+     0.26,
+     0.062,
+     -0.025
+    ]
+   },
+   "screens": [
+    "Screen_Roster"
+   ],
+   "lamps": [],
+   "states": {
+    "markers": [
+     "SeatMarker_Kai",
+     "SeatMarker_Amara",
+     "SeatMarker_Mei",
+     "SeatMarker_Rafi",
+     "SeatMarker_Ferreira"
+    ],
+    "roles": [
+     "Kai",
+     "Amara",
+     "Mei",
+     "Rafi",
+     "Ferreira"
+    ],
+    "role_colours": {
+     "Kai": "#F26B21",
+     "Amara": "#20B8C9",
+     "Mei": "#4CAF50",
+     "Rafi": "#8E5CC2",
+     "Ferreira": "#B8A06A"
+    },
+    "seats": [
+     "Seat_1",
+     "Seat_2",
+     "Seat_3",
+     "Seat_4",
+     "Seat_5"
+    ],
+    "parking": [
+     "Park_1",
+     "Park_2",
+     "Park_3",
+     "Park_4",
+     "Park_5"
+    ],
+    "marker_offset_m": [
+     0,
+     0,
+     0
+    ],
+    "label_offset_m": [
+     0,
+     0.032,
+     -0.012
+    ],
+    "screen": "Screen_Roster",
+    "rule": "a marker on a seat is a position, not proof: the roster gate still needs the name and the answer (EX-CH07-S05)"
+   }
+  },
+  {
+   "id": "PR_SeedCase",
+   "display": "Founder-reserve seed case (15 + 15)",
+   "notes": "0.35 x 0.25 x 0.15 m sealed case: two compartments of 15 vials, one seed in each (Well_A_01..15, Well_B_01..15), hinged Lid, draw Latch, CompartmentLid_A/_B with Lamp_SealA/_SealB, Screen_Case sealed-telemetry window, side grips Grip_L/_R; replaces the 27 Oct Tripo case whose vials held many seeds each",
+   "scenes": [
+    "EX-CH07-S04",
+    "EX-CH07-S05",
+    "EX-CH07-S06",
+    "EX-CH07-S07",
+    "EX-CH07-S10",
+    "EX-CH08-S12"
+   ],
+   "front": "-Z",
+   "mount": "table",
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/props/PR_SeedCase/PR_SeedCase.glb",
+    "res://assets/props/PR_SeedCase/PR_SeedCase_LOD1.glb"
+   ],
+   "triangles": [
+    10026,
+    3282
+   ],
+   "lod_distance_m": 6.0,
+   "collision": true,
+   "size_m": [
+    0.351,
+    0.154,
+    0.273
+   ],
+   "bounds_min_m": [
+    -0.176,
+    -0.0,
+    -0.139
+   ],
+   "sockets": {
+    "Well_A_01": [
+     -0.109,
+     0.107,
+     -0.08
+    ],
+    "Well_A_02": [
+     -0.073,
+     0.107,
+     -0.08
+    ],
+    "Well_A_03": [
+     -0.037,
+     0.107,
+     -0.08
+    ],
+    "Well_A_04": [
+     -0.109,
+     0.107,
+     -0.04
+    ],
+    "Well_A_05": [
+     -0.073,
+     0.107,
+     -0.04
+    ],
+    "Well_A_06": [
+     -0.037,
+     0.107,
+     -0.04
+    ],
+    "Well_A_07": [
+     -0.109,
+     0.107,
+     0.0
+    ],
+    "Well_A_08": [
+     -0.073,
+     0.107,
+     0.0
+    ],
+    "Well_A_09": [
+     -0.037,
+     0.107,
+     0.0
+    ],
+    "Well_A_10": [
+     -0.109,
+     0.107,
+     0.04
+    ],
+    "Well_A_11": [
+     -0.073,
+     0.107,
+     0.04
+    ],
+    "Well_A_12": [
+     -0.037,
+     0.107,
+     0.04
+    ],
+    "Well_A_13": [
+     -0.109,
+     0.107,
+     0.08
+    ],
+    "Well_A_14": [
+     -0.073,
+     0.107,
+     0.08
+    ],
+    "Well_A_15": [
+     -0.037,
+     0.107,
+     0.08
+    ],
+    "Well_B_01": [
+     0.037,
+     0.107,
+     -0.08
+    ],
+    "Well_B_02": [
+     0.073,
+     0.107,
+     -0.08
+    ],
+    "Well_B_03": [
+     0.109,
+     0.107,
+     -0.08
+    ],
+    "Well_B_04": [
+     0.037,
+     0.107,
+     -0.04
+    ],
+    "Well_B_05": [
+     0.073,
+     0.107,
+     -0.04
+    ],
+    "Well_B_06": [
+     0.109,
+     0.107,
+     -0.04
+    ],
+    "Well_B_07": [
+     0.037,
+     0.107,
+     0.0
+    ],
+    "Well_B_08": [
+     0.073,
+     0.107,
+     0.0
+    ],
+    "Well_B_09": [
+     0.109,
+     0.107,
+     0.0
+    ],
+    "Well_B_10": [
+     0.037,
+     0.107,
+     0.04
+    ],
+    "Well_B_11": [
+     0.073,
+     0.107,
+     0.04
+    ],
+    "Well_B_12": [
+     0.109,
+     0.107,
+     0.04
+    ],
+    "Well_B_13": [
+     0.037,
+     0.107,
+     0.08
+    ],
+    "Well_B_14": [
+     0.073,
+     0.107,
+     0.08
+    ],
+    "Well_B_15": [
+     0.109,
+     0.107,
+     0.08
+    ],
+    "Grip_R": [
+     -0.1695,
+     0.082,
+     0
+    ],
+    "Grip_L": [
+     0.1695,
+     0.082,
+     0
+    ],
+    "Rest": [
+     0,
+     0,
+     0
+    ]
+   },
+   "moving_parts": {
+    "CompartmentLid_A": [
+     -0.073,
+     0.1085,
+     0.111
+    ],
+    "CompartmentLid_B": [
+     0.073,
+     0.1085,
+     0.111
+    ],
+    "Lid": [
+     0,
+     0.118,
+     0.129
+    ],
+    "Latch": [
+     0,
+     0.088,
+     -0.131
+    ]
+   },
+   "screens": [
+    "Screen_Case"
+   ],
+   "lamps": [
+    "Lamp_SealA",
+    "Lamp_SealB"
+   ],
+   "states": {
+    "lid": {
+     "node": "Lid",
+     "axis": "x",
+     "open_deg": 105.0
+    },
+    "latch": {
+     "node": "Latch",
+     "axis": "x",
+     "released_deg": -120.0
+    },
+    "compartments": {
+     "A": {
+      "node": "CompartmentLid_A",
+      "axis": "x",
+      "open_deg": 100.0,
+      "lamp": "Lamp_SealA",
+      "wells": [
+       "Well_A_01",
+       "Well_A_02",
+       "Well_A_03",
+       "Well_A_04",
+       "Well_A_05",
+       "Well_A_06",
+       "Well_A_07",
+       "Well_A_08",
+       "Well_A_09",
+       "Well_A_10",
+       "Well_A_11",
+       "Well_A_12",
+       "Well_A_13",
+       "Well_A_14",
+       "Well_A_15"
+      ]
+     },
+     "B": {
+      "node": "CompartmentLid_B",
+      "axis": "x",
+      "open_deg": 100.0,
+      "lamp": "Lamp_SealB",
+      "wells": [
+       "Well_B_01",
+       "Well_B_02",
+       "Well_B_03",
+       "Well_B_04",
+       "Well_B_05",
+       "Well_B_06",
+       "Well_B_07",
+       "Well_B_08",
+       "Well_B_09",
+       "Well_B_10",
+       "Well_B_11",
+       "Well_B_12",
+       "Well_B_13",
+       "Well_B_14",
+       "Well_B_15"
+      ]
+     }
+    },
+    "seeds_per_compartment": 15,
+    "founder_total": 30,
+    "seed_material": "M_Seed",
+    "seed_triangles_lod0": 64,
+    "grips": [
+     "Grip_L",
+     "Grip_R"
+    ],
+    "screen": "Screen_Case",
+    "rule": "the case stays latched during exposure; its seal lamps and Screen_Case are the safe check (EX-CH07-S06)"
+   }
+  },
+  {
+   "id": "PR_ValveDiagram",
+   "display": "Water-wall valve diagram",
+   "notes": "0.72 x 0.54 m enamel plate beside the water wall: garden reservoir, the six water units (WaterCell_1..6 show W), pump, supply and return valves with Lamp_Supply/_Return, the two-position ReturnSelector (early / after the exposure sample) and Screen_Return for the two return times",
+   "scenes": [
+    "EX-CH07-S04",
+    "EX-CH07-S08"
+   ],
+   "front": "-Z",
+   "mount": "wall",
+   "mount_y": 1.1,
+   "lods": [
+    "res://assets/props/PR_ValveDiagram/PR_ValveDiagram.glb",
+    "res://assets/props/PR_ValveDiagram/PR_ValveDiagram_LOD1.glb"
+   ],
+   "triangles": [
+    2030,
+    1270
+   ],
+   "lod_distance_m": 8.0,
+   "collision": true,
+   "size_m": [
+    0.72,
+    0.54,
+    0.042
+   ],
+   "bounds_min_m": [
+    -0.36,
+    -0.0,
+    -0.042
+   ],
+   "sockets": {
+    "Point_Cell_1": [
+     0.06,
+     0.3175,
+     -0.024
+    ],
+    "Point_Cell_2": [
+     0.108,
+     0.3175,
+     -0.024
+    ],
+    "Point_Cell_3": [
+     0.156,
+     0.3175,
+     -0.024
+    ],
+    "Point_Cell_4": [
+     0.204,
+     0.3175,
+     -0.024
+    ],
+    "Point_Cell_5": [
+     0.252,
+     0.3175,
+     -0.024
+    ],
+    "Point_Cell_6": [
+     0.3,
+     0.3175,
+     -0.024
+    ],
+    "Point_Supply": [
+     -0.08,
+     0.468,
+     -0.024
+    ],
+    "Point_Return": [
+     -0.08,
+     0.158,
+     -0.024
+    ],
+    "Point_Garden": [
+     -0.24,
+     0.32,
+     -0.024
+    ],
+    "Point_Selector": [
+     -0.245,
+     0.06,
+     -0.04
+    ]
+   },
+   "moving_parts": {
+    "WaterCell_1": [
+     0.06,
+     0.3175,
+     -0.024
+    ],
+    "WaterCell_2": [
+     0.108,
+     0.3175,
+     -0.024
+    ],
+    "WaterCell_3": [
+     0.156,
+     0.3175,
+     -0.024
+    ],
+    "WaterCell_4": [
+     0.204,
+     0.3175,
+     -0.024
+    ],
+    "WaterCell_5": [
+     0.252,
+     0.3175,
+     -0.024
+    ],
+    "WaterCell_6": [
+     0.3,
+     0.3175,
+     -0.024
+    ],
+    "ReturnSelector": [
+     -0.245,
+     0.06,
+     -0.023
+    ]
+   },
+   "screens": [
+    "Screen_Return"
+   ],
+   "lamps": [
+    "Lamp_Return",
+    "Lamp_Supply"
+   ],
+   "states": {
+    "water_cells": [
+     "WaterCell_1",
+     "WaterCell_2",
+     "WaterCell_3",
+     "WaterCell_4",
+     "WaterCell_5",
+     "WaterCell_6"
+    ],
+    "water_units_cap": 6,
+    "selector": {
+     "node": "ReturnSelector",
+     "axis": "z",
+     "early_deg": -35.0,
+     "after_deg": 35.0
+    },
+    "valves": {
+     "supply": {
+      "lamp": "Lamp_Supply",
+      "point": "Point_Supply"
+     },
+     "ret": {
+      "lamp": "Lamp_Return",
+      "point": "Point_Return"
+     }
+    },
+    "screen": "Screen_Return",
+    "witness_w": [
+     4,
+     4,
+     4,
+     4,
+     4,
+     2
+    ],
+    "rule": "W = units in the wall (P-13 witness W4 through step 5, W2 after the step-6 sample); garden water = 6 - W"
+   }
+  },
+  {
+   "id": "PR_TelemetryDisplay",
+   "display": "Safe Room local telemetry displays",
+   "notes": "0.96 x 0.52 m wall unit: Screen_Systems (energy, air, food) and Screen_Garden (garden local telemetry) with the six ledger lamps Lamp_E/_A/_H/_C/_R/_Z between them, keys, speaker and grab handles",
+   "scenes": [
+    "EX-CH07-S06",
+    "EX-CH07-S08"
+   ],
+   "front": "-Z",
+   "mount": "wall",
+   "mount_y": 1.2,
+   "lods": [
+    "res://assets/props/PR_TelemetryDisplay/PR_TelemetryDisplay.glb",
+    "res://assets/props/PR_TelemetryDisplay/PR_TelemetryDisplay_LOD1.glb"
+   ],
+   "triangles": [
+    1424,
+    744
+   ],
+   "lod_distance_m": 10.0,
+   "collision": true,
+   "size_m": [
+    0.974,
+    0.52,
+    0.136
+   ],
+   "bounds_min_m": [
+    -0.487,
+    -0.0,
+    -0.136
+   ],
+   "sockets": {
+    "Point_E": [
+     0,
+     0.43,
+     -0.095
+    ],
+    "Point_A": [
+     0,
+     0.38,
+     -0.095
+    ],
+    "Point_H": [
+     0,
+     0.33,
+     -0.095
+    ],
+    "Point_C": [
+     0,
+     0.28,
+     -0.095
+    ],
+    "Point_R": [
+     0,
+     0.23,
+     -0.095
+    ],
+    "Point_Z": [
+     0,
+     0.18,
+     -0.095
+    ],
+    "Screen_Systems_Centre": [
+     0.228,
+     0.305,
+     -0.092
+    ],
+    "Screen_Garden_Centre": [
+     -0.228,
+     0.305,
+     -0.092
+    ]
+   },
+   "moving_parts": {},
+   "screens": [
+    "Screen_Garden",
+    "Screen_Systems"
+   ],
+   "lamps": [
+    "Lamp_A",
+    "Lamp_C",
+    "Lamp_E",
+    "Lamp_H",
+    "Lamp_R",
+    "Lamp_Z"
+   ],
+   "states": {
+    "screens": [
+     "Screen_Systems",
+     "Screen_Garden"
+    ],
+    "ledger_lamps": {
+     "E": "Lamp_E",
+     "A": "Lamp_A",
+     "H": "Lamp_H",
+     "C": "Lamp_C",
+     "R": "Lamp_R",
+     "Z": "Lamp_Z"
+    },
+    "ledger_letters": "08 P-02: E energy, A air, H plant health, C edible-crop condition, R crew-day rations, Z game exposure"
+   }
+  },
+  {
+   "id": "PR_ArchivePlayer",
+   "display": "Safe Room archive player",
+   "notes": "0.30 x 0.20 x 0.13 m local archive player (no antenna: the last log is stored, not received): speaker grille, Screen_Archive, play/pause/stop keys with raised icons, volume knob, Lamp_Stored, the ArchiveCard and a folding handle",
+   "scenes": [
+    "EX-CH07-S07"
+   ],
+   "front": "-Z",
+   "mount": "table",
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/props/PR_ArchivePlayer/PR_ArchivePlayer.glb",
+    "res://assets/props/PR_ArchivePlayer/PR_ArchivePlayer_LOD1.glb"
+   ],
+   "triangles": [
+    1350,
+    1018
+   ],
+   "lod_distance_m": 6.0,
+   "collision": true,
+   "size_m": [
+    0.306,
+    0.155,
+    0.219
+   ],
+   "bounds_min_m": [
+    -0.153,
+    -0.0,
+    -0.116
+   ],
+   "sockets": {
+    "Speaker": [
+     0.068,
+     0.06,
+     -0.11
+    ],
+    "Key_Play": [
+     -0.022,
+     0.034,
+     -0.11
+    ],
+    "Key_Pause": [
+     -0.054,
+     0.034,
+     -0.11
+    ],
+    "Key_Stop": [
+     -0.086,
+     0.034,
+     -0.11
+    ]
+   },
+   "moving_parts": {
+    "ArchiveCard": [
+     0.085,
+     0.115,
+     0.04
+    ]
+   },
+   "screens": [
+    "Screen_Archive"
+   ],
+   "lamps": [
+    "Lamp_Stored"
+   ],
+   "states": {
+    "screen": "Screen_Archive",
+    "lamp": "Lamp_Stored",
+    "card": {
+     "node": "ArchiveCard",
+     "axis": "y",
+     "eject_m": 0.03
+    },
+    "keys": [
+     "Key_Play",
+     "Key_Pause",
+     "Key_Stop"
+    ],
+    "speaker": "Speaker",
+    "rule": "a stored local recording: it never proves the Earth link is open (EX-CH07-S07)"
+   }
+  },
+  {
+   "id": "PR_UplinkFeedthrough",
+   "display": "Damaged external uplink feedthrough (A-43)",
+   "notes": "the 27 Oct Tripo feedthrough (scorched boot, two cables, navy junction box) re-exported with a collision box and the DiagnosedTag lockout tag (hidden until F-EXT is diagnosed); faces +Z like the other Tripo exports",
+   "scenes": [
+    "EX-CH07-S09",
+    "EX-CH08-S07"
+   ],
+   "front": "+Z",
+   "mount": "exterior wall",
+   "mount_y": 1.2,
+   "lods": [
+    "res://assets/props/PR_UplinkFeedthrough/PR_UplinkFeedthrough.glb",
+    "res://assets/props/PR_UplinkFeedthrough/PR_UplinkFeedthrough_LOD1.glb"
+   ],
+   "triangles": [
+    5123,
+    1683
+   ],
+   "lod_distance_m": 10.0,
+   "collision": true,
+   "size_m": [
+    0.437,
+    0.6,
+    0.424
+   ],
+   "bounds_min_m": [
+    -0.219,
+    0.0,
+    -0.212
+   ],
+   "sockets": {
+    "Point_Feedthrough": [
+     0.0,
+     0.33,
+     0.2121
+    ],
+    "Point_Tag": [
+     0.12,
+     0.22,
+     -0.0745
+    ]
+   },
+   "moving_parts": {
+    "DiagnosedTag": [
+     0.12,
+     0.22,
+     -0.0745
+    ]
+   },
+   "screens": [],
+   "lamps": [],
+   "states": {
+    "tag": {
+     "node": "DiagnosedTag",
+     "visible_when": "diagnosed"
+    },
+    "states": [
+     "failed",
+     "diagnosed"
+    ],
+    "rule": "the authored storm damage (P-14 F-EXT), never a penalty; no direct repair in the finale (A-43)"
+   }
+  },
+  {
+   "id": "PR_NetworkDiagnostic",
+   "display": "Local network diagnostic panel",
+   "notes": "0.84 x 0.66 m wall cabinet: mimic of the local network, the external feedthrough and the Earth dish with Lamp_Local/_Feed/_Dish, TestButton_Local/_Dish/_Feed, IsolationKey with Lamp_Isolated, Screen_Diag and the DataCard that carries the saved relay-bypass diagram to S10",
+   "scenes": [
+    "EX-CH07-S05",
+    "EX-CH07-S09",
+    "EX-CH07-S10"
+   ],
+   "front": "-Z",
+   "mount": "wall",
+   "mount_y": 1.0,
+   "lods": [
+    "res://assets/props/PR_NetworkDiagnostic/PR_NetworkDiagnostic.glb",
+    "res://assets/props/PR_NetworkDiagnostic/PR_NetworkDiagnostic_LOD1.glb"
+   ],
+   "triangles": [
+    3018,
+    1466
+   ],
+   "lod_distance_m": 8.0,
+   "collision": true,
+   "size_m": [
+    0.84,
+    0.66,
+    0.136
+   ],
+   "bounds_min_m": [
+    -0.42,
+    -0.0,
+    -0.136
+   ],
+   "sockets": {
+    "Point_Local": [
+     0.07,
+     0.345,
+     -0.114
+    ],
+    "Point_Feed": [
+     -0.08,
+     0.56,
+     -0.114
+    ],
+    "Point_Dish": [
+     -0.2,
+     0.565,
+     -0.114
+    ],
+    "Point_TestLocal": [
+     -0.04,
+     0.235,
+     -0.12
+    ],
+    "Point_TestDish": [
+     -0.135,
+     0.235,
+     -0.12
+    ],
+    "Point_TestFeed": [
+     -0.23,
+     0.235,
+     -0.12
+    ],
+    "Point_Isolation": [
+     -0.33,
+     0.235,
+     -0.13
+    ],
+    "Point_DataCard": [
+     -0.19,
+     0.085,
+     -0.13
+    ]
+   },
+   "moving_parts": {
+    "TestButton_Local": [
+     -0.04,
+     0.235,
+     -0.106
+    ],
+    "TestButton_Dish": [
+     -0.135,
+     0.235,
+     -0.106
+    ],
+    "TestButton_Feed": [
+     -0.23,
+     0.235,
+     -0.106
+    ],
+    "IsolationKey": [
+     -0.33,
+     0.235,
+     -0.11
+    ],
+    "DataCard": [
+     -0.19,
+     0.085,
+     -0.106
+    ]
+   },
+   "screens": [
+    "Screen_Diag"
+   ],
+   "lamps": [
+    "Lamp_Dish",
+    "Lamp_Feed",
+    "Lamp_Isolated",
+    "Lamp_Local"
+   ],
+   "states": {
+    "branches": {
+     "Local": {
+      "button": "TestButton_Local",
+      "lamp": "Lamp_Local",
+      "press_m": 0.004
+     },
+     "Dish": {
+      "button": "TestButton_Dish",
+      "lamp": "Lamp_Dish",
+      "press_m": 0.004
+     },
+     "Feed": {
+      "button": "TestButton_Feed",
+      "lamp": "Lamp_Feed",
+      "press_m": 0.004
+     }
+    },
+    "expected_after_storm": {
+     "Local": "pass",
+     "Dish": "fail",
+     "Feed": "fail"
+    },
+    "isolation": {
+     "node": "IsolationKey",
+     "axis": "z",
+     "isolated_deg": 90.0,
+     "lamp": "Lamp_Isolated"
+    },
+    "data_card": {
+     "node": "DataCard",
+     "axis": "z",
+     "pull_m": -0.05,
+     "carries": "saved relay-bypass diagram (doc 24 join CH07 S09 -> S10)"
+    },
+    "screen": "Screen_Diag"
+   }
+  },
+  {
+   "id": "EN_Fabrication_Bench",
+   "display": "Local fabrication bench",
+   "notes": "1.80 x 0.75 m bench, worktop 0.90 m, tool board to 1.85 m with shelf, bins and task light: controller cradle (Socket_Controller for PR_RelayController), SpareBattery in its cradle, connector tray with Connector_A/_B/_C (round bayonet) and Connector_Wrong (rectangular), echo test unit with Screen_Echo, Checklist clipboard (Screen_Checklist), vise, drawers",
+   "scenes": [
+    "EX-CH07-S10",
+    "EX-CH07-S11"
+   ],
+   "front": "-Z",
+   "mount": "floor",
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_Fabrication/EN_Fabrication_Bench_LOD0.glb",
+    "res://assets/environment/EN_Fabrication/EN_Fabrication_Bench_LOD1.glb"
+   ],
+   "triangles": [
+    3990,
+    1958
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.8,
+    1.95,
+    0.797
+   ],
+   "bounds_min_m": [
+    -0.9,
+    -0.0,
+    -0.412
+   ],
+   "sockets": {
+    "Socket_Controller": [
+     0.36,
+     0.923,
+     0.04
+    ],
+    "Socket_Battery": [
+     -0.16,
+     0.927,
+     0.13
+    ],
+    "Socket_EchoUnit": [
+     -0.56,
+     1.023,
+     0.16
+    ],
+    "Socket_Connector_A": [
+     -0.51,
+     0.915,
+     -0.254
+    ],
+    "Socket_Connector_B": [
+     -0.51,
+     0.915,
+     -0.218
+    ],
+    "Socket_Connector_C": [
+     -0.51,
+     0.915,
+     -0.182
+    ],
+    "Socket_Connector_Wrong": [
+     -0.51,
+     0.915,
+     -0.146
+    ],
+    "Socket_Checklist": [
+     0.02,
+     0.903,
+     -0.21
+    ],
+    "Stand_Operator": [
+     0,
+     0,
+     -0.825
+    ]
+   },
+   "moving_parts": {
+    "SpareBattery": [
+     -0.16,
+     0.927,
+     0.13
+    ],
+    "Connector_A": [
+     -0.51,
+     0.915,
+     -0.254
+    ],
+    "Connector_B": [
+     -0.51,
+     0.915,
+     -0.218
+    ],
+    "Connector_C": [
+     -0.51,
+     0.915,
+     -0.182
+    ],
+    "Connector_Wrong": [
+     -0.51,
+     0.915,
+     -0.146
+    ],
+    "Checklist": [
+     0.02,
+     0.903,
+     -0.21
+    ]
+   },
+   "screens": [
+    "Screen_Checklist",
+    "Screen_Echo"
+   ],
+   "lamps": [
+    "Lamp_Battery",
+    "Lamp_Echo"
+   ],
+   "states": {
+    "battery": {
+     "node": "SpareBattery",
+     "socket": "Socket_Battery",
+     "lamp": "Lamp_Battery"
+    },
+    "connectors": {
+     "Connector_A": true,
+     "Connector_B": true,
+     "Connector_C": true,
+     "Connector_Wrong": false
+    },
+    "controller_socket": "Socket_Controller",
+    "controller_asset": "PR_RelayController",
+    "checklist": {
+     "node": "Checklist",
+     "screen": "Screen_Checklist"
+    },
+    "echo": {
+     "screen": "Screen_Echo",
+     "lamp": "Lamp_Echo"
+    },
+    "rule": "a bench pass is not field verification (EX-CH07-S11-L04): the echo test records a bench result only"
+   }
+  },
+  {
+   "id": "EN_Fabrication_RouteSimulator",
+   "display": "Surveyed-route simulator",
+   "notes": "2.00 x 0.82 m table with a relief of the real LOLA corridor from Aurora to the Malapert summit (1:90,000, vertical exaggeration 2), the computed surveyed road inlaid, Aurora's mast and the summit dish markers, three RepeaterPin_1..3 parked at PinPark_1..3, computed Pad_R1..3 and their road-level alternatives, Screen_Route on a tilted monitor",
+   "scenes": [
+    "EX-CH07-S11"
+   ],
+   "front": "-Z",
+   "mount": "floor",
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_Fabrication/EN_Fabrication_RouteSimulator_LOD0.glb",
+    "res://assets/environment/EN_Fabrication/EN_Fabrication_RouteSimulator_LOD1.glb"
+   ],
+   "triangles": [
+    21262,
+    6094
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    2.0,
+    1.609,
+    0.832
+   ],
+   "bounds_min_m": [
+    -1.0,
+    -0.0,
+    -0.422
+   ],
+   "sockets": {
+    "Site_Aurora": [
+     0.783,
+     0.968,
+     -0.0848
+    ],
+    "Site_Summit": [
+     -0.7147,
+     1.0348,
+     -0.1579
+    ],
+    "Pad_R1": [
+     0.3098,
+     0.915,
+     0.0191
+    ],
+    "Pad_R1_Road": [
+     0.324,
+     0.9143,
+     0.0093
+    ],
+    "Pad_R2": [
+     0.0271,
+     0.9166,
+     0.0458
+    ],
+    "Pad_R2_Road": [
+     0.0538,
+     0.9113,
+     0.052
+    ],
+    "Pad_R3": [
+     -0.2164,
+     0.9535,
+     0.1827
+    ],
+    "Pad_R3_Road": [
+     -0.1924,
+     0.9438,
+     0.1693
+    ],
+    "PinPark_1": [
+     -0.83,
+     0.832,
+     -0.36
+    ],
+    "PinPark_2": [
+     -0.78,
+     0.832,
+     -0.36
+    ],
+    "PinPark_3": [
+     -0.73,
+     0.832,
+     -0.36
+    ],
+    "Screen_Route_Centre": [
+     -0.62,
+     1.42,
+     0.3035
+    ],
+    "Stand_Operator": [
+     0,
+     0,
+     -0.86
+    ]
+   },
+   "moving_parts": {
+    "RepeaterPin_1": [
+     -0.83,
+     0.832,
+     -0.36
+    ],
+    "RepeaterPin_2": [
+     -0.78,
+     0.832,
+     -0.36
+    ],
+    "RepeaterPin_3": [
+     -0.73,
+     0.832,
+     -0.36
+    ]
+   },
+   "screens": [
+    "Screen_Route"
+   ],
+   "lamps": [],
+   "states": {
+    "pins": [
+     "RepeaterPin_1",
+     "RepeaterPin_2",
+     "RepeaterPin_3"
+    ],
+    "parking": [
+     "PinPark_1",
+     "PinPark_2",
+     "PinPark_3"
+    ],
+    "pads": [
+     "Pad_R1",
+     "Pad_R2",
+     "Pad_R3"
+    ],
+    "road_level_pads": [
+     "Pad_R1_Road",
+     "Pad_R2_Road",
+     "Pad_R3_Road"
+    ],
+    "screen": "Screen_Route"
+   }
+  }
+ ],
+ "route_simulator": {
+  "source": "NASA LRO LOLA, PGDA product 90 (LDEM_80S_80MPP_ADJ, 80 m/px) via game/assets/environment/terrain/lola/relay_road (M1-34); road = routes.relay_road (make_terrain.py)",
+  "credit_line": "Terrain made from NASA data: Lunar Reconnaissance Orbiter, Lunar Orbiter Laser Altimeter (LOLA) elevation models from NASA Goddard's Planetary Geodynamics Data Archive (Barker et al. 2021, 2023) and the NASA PDS; Sun and Earth positions from NASA JPL Horizons. NASA does not endorse this game.",
+  "credit_line_short": "Terrain made from NASA LRO LOLA data (GSFC PGDA / PDS); sky geometry from JPL Horizons.",
+  "scale": "1:90,000",
+  "table_m_per_map_m": 1.1111111111111112e-05,
+  "vertical_exaggeration": 2.0,
+  "region_map_x_m": [
+   -44000.0,
+   2000.0
+  ],
+  "region_map_y_m": [
+   -18000.0,
+   134000.0
+  ],
+  "height_floor_m": -4200.0,
+  "relief_size_m": [
+   1.6889,
+   0.5111
+  ],
+  "relief_base_y": 0.832,
+  "relief_centre_z": 0.02,
+  "transform": "table X = -(map y - yc) * scale; table Z = zc - (map x - xc) * scale; table Y = relief_base_y + (h - height_floor_m) * scale * VE (xc, yc = region centres, zc = relief_centre_z)",
+  "masts_m": {
+   "aurora": 10.0,
+   "repeater": 3.0,
+   "summit": 5.0
+  },
+  "moon_radius_m": 1737400.0,
+  "los_method": "true-scale chord over bilinear LOLA heights every 40 m with the sagitta s(d - s)/2R subtracted; 500 m at each end ignored",
+  "sites": {
+   "Aurora": {
+    "socket": "Site_Aurora",
+    "map_xy_m": [
+     -11572.5,
+     -12472.5
+    ],
+    "table": [
+     0.783,
+     0.968,
+     -0.0848
+    ]
+   },
+   "Summit": {
+    "socket": "Site_Summit",
+    "map_xy_m": [
+     -4987.5,
+     122327.5
+    ],
+    "table": [
+     -0.7147,
+     1.0348,
+     -0.1579
+    ]
+   }
+  },
+  "road_length_km": 198.3,
+  "road_table": [
+   [
+    0.7827,
+    0.9681,
+    -0.0849,
+    0.0
+   ],
+   [
+    0.7862,
+    0.9667,
+    -0.0778,
+    772.0
+   ],
+   [
+    0.7871,
+    0.9645,
+    -0.0707,
+    1446.0
+   ],
+   [
+    0.7898,
+    0.963,
+    -0.0636,
+    2185.0
+   ],
+   [
+    0.7942,
+    0.9619,
+    -0.0564,
+    2991.0
+   ],
+   [
+    0.7907,
+    0.9594,
+    -0.0493,
+    3763.0
+   ],
+   [
+    0.7862,
+    0.9564,
+    -0.0449,
+    4470.0
+   ],
+   [
+    0.78,
+    0.9547,
+    -0.0396,
+    5275.0
+   ],
+   [
+    0.7729,
+    0.9539,
+    -0.0324,
+    6180.0
+   ],
+   [
+    0.7658,
+    0.9544,
+    -0.0316,
+    6854.0
+   ],
+   [
+    0.7587,
+    0.9559,
+    -0.0244,
+    7759.0
+   ],
+   [
+    0.7524,
+    0.9571,
+    -0.0173,
+    8631.0
+   ],
+   [
+    0.7489,
+    0.959,
+    -0.0102,
+    9403.0
+   ],
+   [
+    0.7427,
+    0.9615,
+    -0.0031,
+    10275.0
+   ],
+   [
+    0.7409,
+    0.9619,
+    0.004,
+    10981.0
+   ],
+   [
+    0.7418,
+    0.9612,
+    0.0111,
+    11654.0
+   ],
+   [
+    0.7418,
+    0.96,
+    0.0182,
+    12294.0
+   ],
+   [
+    0.74,
+    0.9584,
+    0.0253,
+    13001.0
+   ],
+   [
+    0.7391,
+    0.9575,
+    0.0324,
+    13674.0
+   ],
+   [
+    0.7356,
+    0.9558,
+    0.0396,
+    14446.0
+   ],
+   [
+    0.732,
+    0.9542,
+    0.0467,
+    15219.0
+   ],
+   [
+    0.7267,
+    0.9518,
+    0.0538,
+    16058.0
+   ],
+   [
+    0.7196,
+    0.9498,
+    0.0591,
+    16897.0
+   ],
+   [
+    0.7124,
+    0.9488,
+    0.0618,
+    17636.0
+   ],
+   [
+    0.7053,
+    0.9476,
+    0.0618,
+    18276.0
+   ],
+   [
+    0.6982,
+    0.9462,
+    0.0609,
+    18949.0
+   ],
+   [
+    0.6911,
+    0.9439,
+    0.0582,
+    19689.0
+   ],
+   [
+    0.684,
+    0.9415,
+    0.0564,
+    20395.0
+   ],
+   [
+    0.6769,
+    0.9391,
+    0.0564,
+    21035.0
+   ],
+   [
+    0.6698,
+    0.9371,
+    0.0564,
+    21675.0
+   ],
+   [
+    0.6627,
+    0.9358,
+    0.0556,
+    22348.0
+   ],
+   [
+    0.6556,
+    0.9343,
+    0.0484,
+    23253.0
+   ],
+   [
+    0.6484,
+    0.9327,
+    0.0422,
+    24125.0
+   ],
+   [
+    0.6413,
+    0.9312,
+    0.0396,
+    24864.0
+   ],
+   [
+    0.6342,
+    0.9298,
+    0.0378,
+    25571.0
+   ],
+   [
+    0.6271,
+    0.928,
+    0.036,
+    26277.0
+   ],
+   [
+    0.62,
+    0.9253,
+    0.0324,
+    27050.0
+   ],
+   [
+    0.6147,
+    0.9226,
+    0.0253,
+    27888.0
+   ],
+   [
+    0.6076,
+    0.9206,
+    0.0244,
+    28562.0
+   ],
+   [
+    0.6004,
+    0.9185,
+    0.0218,
+    29301.0
+   ],
+   [
+    0.5933,
+    0.9181,
+    0.0209,
+    29974.0
+   ],
+   [
+    0.5871,
+    0.9175,
+    0.0147,
+    30813.0
+   ],
+   [
+    0.58,
+    0.9162,
+    0.0076,
+    31718.0
+   ],
+   [
+    0.5729,
+    0.9156,
+    0.0084,
+    32391.0
+   ],
+   [
+    0.5658,
+    0.9154,
+    0.0084,
+    33031.0
+   ],
+   [
+    0.5587,
+    0.9152,
+    0.0084,
+    33671.0
+   ],
+   [
+    0.5516,
+    0.9149,
+    0.0084,
+    34311.0
+   ],
+   [
+    0.5444,
+    0.9136,
+    0.0084,
+    34951.0
+   ],
+   [
+    0.5373,
+    0.9119,
+    0.0084,
+    35591.0
+   ],
+   [
+    0.5302,
+    0.9098,
+    0.0084,
+    36231.0
+   ],
+   [
+    0.5231,
+    0.9083,
+    0.0084,
+    36871.0
+   ],
+   [
+    0.516,
+    0.9069,
+    0.0076,
+    37544.0
+   ],
+   [
+    0.5089,
+    0.906,
+    0.0076,
+    38184.0
+   ],
+   [
+    0.5018,
+    0.9045,
+    0.0067,
+    38857.0
+   ],
+   [
+    0.4947,
+    0.9026,
+    0.0058,
+    39531.0
+   ],
+   [
+    0.4876,
+    0.9005,
+    0.0049,
+    40204.0
+   ],
+   [
+    0.4804,
+    0.8983,
+    0.0049,
+    40844.0
+   ],
+   [
+    0.4733,
+    0.8968,
+    0.0049,
+    41484.0
+   ],
+   [
+    0.4662,
+    0.8957,
+    0.0049,
+    42124.0
+   ],
+   [
+    0.4591,
+    0.8951,
+    0.0049,
+    42764.0
+   ],
+   [
+    0.452,
+    0.8944,
+    0.0049,
+    43404.0
+   ],
+   [
+    0.4449,
+    0.8937,
+    0.0049,
+    44044.0
+   ],
+   [
+    0.4378,
+    0.8932,
+    0.0049,
+    44684.0
+   ],
+   [
+    0.4307,
+    0.8928,
+    0.0076,
+    45423.0
+   ],
+   [
+    0.4236,
+    0.8925,
+    0.0084,
+    46096.0
+   ],
+   [
+    0.4164,
+    0.8925,
+    0.0084,
+    46736.0
+   ],
+   [
+    0.4093,
+    0.8926,
+    0.0084,
+    47376.0
+   ],
+   [
+    0.4022,
+    0.893,
+    0.0084,
+    48016.0
+   ],
+   [
+    0.3951,
+    0.8943,
+    0.0076,
+    48689.0
+   ],
+   [
+    0.388,
+    0.8958,
+    0.0049,
+    49429.0
+   ],
+   [
+    0.3809,
+    0.8972,
+    0.0049,
+    50069.0
+   ],
+   [
+    0.3738,
+    0.8992,
+    0.004,
+    50742.0
+   ],
+   [
+    0.3667,
+    0.9012,
+    0.004,
+    51382.0
+   ],
+   [
+    0.3596,
+    0.9034,
+    0.004,
+    52022.0
+   ],
+   [
+    0.3524,
+    0.9058,
+    0.004,
+    52662.0
+   ],
+   [
+    0.3453,
+    0.9082,
+    0.0049,
+    53335.0
+   ],
+   [
+    0.3382,
+    0.9107,
+    0.0093,
+    54141.0
+   ],
+   [
+    0.3311,
+    0.9128,
+    0.0093,
+    54781.0
+   ],
+   [
+    0.324,
+    0.9143,
+    0.0093,
+    55421.0
+   ],
+   [
+    0.3169,
+    0.9153,
+    0.0111,
+    56127.0
+   ],
+   [
+    0.3098,
+    0.916,
+    0.0129,
+    56833.0
+   ],
+   [
+    0.3027,
+    0.9154,
+    0.0129,
+    57473.0
+   ],
+   [
+    0.2956,
+    0.9146,
+    0.0138,
+    58146.0
+   ],
+   [
+    0.2884,
+    0.9132,
+    0.0191,
+    58985.0
+   ],
+   [
+    0.2813,
+    0.9121,
+    0.0262,
+    59890.0
+   ],
+   [
+    0.2742,
+    0.9113,
+    0.0333,
+    60796.0
+   ],
+   [
+    0.2671,
+    0.9106,
+    0.0378,
+    61601.0
+   ],
+   [
+    0.26,
+    0.9099,
+    0.0413,
+    62374.0
+   ],
+   [
+    0.2529,
+    0.9098,
+    0.0476,
+    63246.0
+   ],
+   [
+    0.2458,
+    0.9098,
+    0.0502,
+    63985.0
+   ],
+   [
+    0.2387,
+    0.9103,
+    0.0573,
+    64890.0
+   ],
+   [
+    0.2316,
+    0.9101,
+    0.0573,
+    65530.0
+   ],
+   [
+    0.2244,
+    0.9099,
+    0.0573,
+    66170.0
+   ],
+   [
+    0.2173,
+    0.9099,
+    0.0573,
+    66810.0
+   ],
+   [
+    0.2102,
+    0.9108,
+    0.0573,
+    67450.0
+   ],
+   [
+    0.2031,
+    0.912,
+    0.0582,
+    68123.0
+   ],
+   [
+    0.196,
+    0.913,
+    0.0582,
+    68763.0
+   ],
+   [
+    0.1889,
+    0.9129,
+    0.0582,
+    69403.0
+   ],
+   [
+    0.1818,
+    0.9122,
+    0.0582,
+    70043.0
+   ],
+   [
+    0.1747,
+    0.9116,
+    0.0564,
+    70750.0
+   ],
+   [
+    0.1676,
+    0.9107,
+    0.0529,
+    71522.0
+   ],
+   [
+    0.1604,
+    0.9099,
+    0.052,
+    72195.0
+   ],
+   [
+    0.1533,
+    0.9087,
+    0.0502,
+    72902.0
+   ],
+   [
+    0.1462,
+    0.9069,
+    0.0502,
+    73542.0
+   ],
+   [
+    0.1391,
+    0.9054,
+    0.0493,
+    74215.0
+   ],
+   [
+    0.132,
+    0.9051,
+    0.0493,
+    74855.0
+   ],
+   [
+    0.1249,
+    0.9051,
+    0.0493,
+    75495.0
+   ],
+   [
+    0.1178,
+    0.9051,
+    0.0493,
+    76135.0
+   ],
+   [
+    0.1107,
+    0.9048,
+    0.0493,
+    76775.0
+   ],
+   [
+    0.1036,
+    0.9048,
+    0.0493,
+    77415.0
+   ],
+   [
+    0.0964,
+    0.9049,
+    0.0493,
+    78055.0
+   ],
+   [
+    0.0893,
+    0.9051,
+    0.0493,
+    78695.0
+   ],
+   [
+    0.0822,
+    0.9051,
+    0.0493,
+    79335.0
+   ],
+   [
+    0.0751,
+    0.9058,
+    0.0493,
+    79975.0
+   ],
+   [
+    0.068,
+    0.9072,
+    0.0493,
+    80615.0
+   ],
+   [
+    0.0609,
+    0.9093,
+    0.0493,
+    81255.0
+   ],
+   [
+    0.0538,
+    0.9113,
+    0.052,
+    81994.0
+   ],
+   [
+    0.0467,
+    0.9132,
+    0.0556,
+    82767.0
+   ],
+   [
+    0.0396,
+    0.9147,
+    0.0582,
+    83506.0
+   ],
+   [
+    0.0324,
+    0.9147,
+    0.0653,
+    84411.0
+   ],
+   [
+    0.0253,
+    0.914,
+    0.0724,
+    85316.0
+   ],
+   [
+    0.0182,
+    0.9135,
+    0.0796,
+    86221.0
+   ],
+   [
+    0.0111,
+    0.9148,
+    0.0867,
+    87126.0
+   ],
+   [
+    0.004,
+    0.9167,
+    0.0929,
+    87998.0
+   ],
+   [
+    -0.0031,
+    0.9181,
+    0.1,
+    88904.0
+   ],
+   [
+    -0.0102,
+    0.9194,
+    0.1071,
+    89809.0
+   ],
+   [
+    -0.0173,
+    0.9205,
+    0.1142,
+    90714.0
+   ],
+   [
+    -0.0227,
+    0.9211,
+    0.1213,
+    91552.0
+   ],
+   [
+    -0.0298,
+    0.9208,
+    0.1284,
+    92458.0
+   ],
+   [
+    -0.0324,
+    0.9204,
+    0.1356,
+    93197.0
+   ],
+   [
+    -0.0396,
+    0.9199,
+    0.1427,
+    94102.0
+   ],
+   [
+    -0.0413,
+    0.9194,
+    0.1498,
+    94808.0
+   ],
+   [
+    -0.0449,
+    0.9187,
+    0.1569,
+    95581.0
+   ],
+   [
+    -0.0484,
+    0.9175,
+    0.164,
+    96354.0
+   ],
+   [
+    -0.0538,
+    0.9158,
+    0.1711,
+    97192.0
+   ],
+   [
+    -0.0609,
+    0.9129,
+    0.1782,
+    98097.0
+   ],
+   [
+    -0.068,
+    0.9116,
+    0.1836,
+    98936.0
+   ],
+   [
+    -0.0751,
+    0.9096,
+    0.1853,
+    99642.0
+   ],
+   [
+    -0.0822,
+    0.9087,
+    0.1862,
+    100316.0
+   ],
+   [
+    -0.0893,
+    0.9086,
+    0.1862,
+    100956.0
+   ],
+   [
+    -0.0964,
+    0.91,
+    0.1853,
+    101629.0
+   ],
+   [
+    -0.1036,
+    0.9123,
+    0.1827,
+    102368.0
+   ],
+   [
+    -0.1107,
+    0.9153,
+    0.1756,
+    103273.0
+   ],
+   [
+    -0.1178,
+    0.9169,
+    0.1693,
+    104145.0
+   ],
+   [
+    -0.1249,
+    0.9185,
+    0.1622,
+    105050.0
+   ],
+   [
+    -0.132,
+    0.9196,
+    0.1569,
+    105889.0
+   ],
+   [
+    -0.1391,
+    0.9217,
+    0.1533,
+    106662.0
+   ],
+   [
+    -0.1462,
+    0.9239,
+    0.1516,
+    107368.0
+   ],
+   [
+    -0.1533,
+    0.9263,
+    0.1498,
+    108074.0
+   ],
+   [
+    -0.1604,
+    0.9285,
+    0.1453,
+    108880.0
+   ],
+   [
+    -0.1676,
+    0.9306,
+    0.1462,
+    109553.0
+   ],
+   [
+    -0.1747,
+    0.9344,
+    0.1533,
+    110458.0
+   ],
+   [
+    -0.1818,
+    0.9371,
+    0.156,
+    111198.0
+   ],
+   [
+    -0.188,
+    0.9404,
+    0.1622,
+    112036.0
+   ],
+   [
+    -0.1924,
+    0.9438,
+    0.1693,
+    112842.0
+   ],
+   [
+    -0.1996,
+    0.9472,
+    0.1764,
+    113747.0
+   ],
+   [
+    -0.2067,
+    0.9497,
+    0.1782,
+    114454.0
+   ],
+   [
+    -0.2138,
+    0.9528,
+    0.1827,
+    115259.0
+   ],
+   [
+    -0.2209,
+    0.9545,
+    0.1853,
+    115999.0
+   ],
+   [
+    -0.228,
+    0.9564,
+    0.188,
+    116738.0
+   ],
+   [
+    -0.2351,
+    0.9582,
+    0.1916,
+    117510.0
+   ],
+   [
+    -0.2422,
+    0.9591,
+    0.1933,
+    118217.0
+   ],
+   [
+    -0.2493,
+    0.9602,
+    0.1933,
+    118857.0
+   ],
+   [
+    -0.2564,
+    0.9616,
+    0.1933,
+    119497.0
+   ],
+   [
+    -0.2636,
+    0.9622,
+    0.1942,
+    120170.0
+   ],
+   [
+    -0.2707,
+    0.9629,
+    0.1942,
+    120810.0
+   ],
+   [
+    -0.2778,
+    0.9635,
+    0.1942,
+    121450.0
+   ],
+   [
+    -0.2849,
+    0.9633,
+    0.1942,
+    122090.0
+   ],
+   [
+    -0.292,
+    0.9638,
+    0.1942,
+    122730.0
+   ],
+   [
+    -0.2991,
+    0.9647,
+    0.1924,
+    123436.0
+   ],
+   [
+    -0.3062,
+    0.9656,
+    0.1916,
+    124109.0
+   ],
+   [
+    -0.3133,
+    0.9661,
+    0.1916,
+    124749.0
+   ],
+   [
+    -0.3204,
+    0.966,
+    0.1898,
+    125456.0
+   ],
+   [
+    -0.3276,
+    0.9655,
+    0.1844,
+    126294.0
+   ],
+   [
+    -0.3347,
+    0.9653,
+    0.1809,
+    127067.0
+   ],
+   [
+    -0.3418,
+    0.9648,
+    0.1738,
+    127972.0
+   ],
+   [
+    -0.3489,
+    0.9645,
+    0.1667,
+    128877.0
+   ],
+   [
+    -0.356,
+    0.965,
+    0.1596,
+    129782.0
+   ],
+   [
+    -0.3631,
+    0.9651,
+    0.1551,
+    130588.0
+   ],
+   [
+    -0.3702,
+    0.9649,
+    0.1524,
+    131327.0
+   ],
+   [
+    -0.3773,
+    0.9625,
+    0.1453,
+    132232.0
+   ],
+   [
+    -0.3844,
+    0.9615,
+    0.1436,
+    132939.0
+   ],
+   [
+    -0.3916,
+    0.9605,
+    0.1427,
+    133612.0
+   ],
+   [
+    -0.3987,
+    0.9595,
+    0.1409,
+    134318.0
+   ],
+   [
+    -0.4058,
+    0.9589,
+    0.14,
+    134991.0
+   ],
+   [
+    -0.4129,
+    0.9578,
+    0.1347,
+    135830.0
+   ],
+   [
+    -0.42,
+    0.9558,
+    0.1284,
+    136702.0
+   ],
+   [
+    -0.4271,
+    0.953,
+    0.1213,
+    137607.0
+   ],
+   [
+    -0.4342,
+    0.9509,
+    0.1213,
+    138247.0
+   ],
+   [
+    -0.4413,
+    0.9496,
+    0.1258,
+    139053.0
+   ],
+   [
+    -0.4484,
+    0.9491,
+    0.1293,
+    139825.0
+   ],
+   [
+    -0.4556,
+    0.9491,
+    0.1293,
+    140465.0
+   ],
+   [
+    -0.4627,
+    0.9475,
+    0.1293,
+    141105.0
+   ],
+   [
+    -0.4698,
+    0.9472,
+    0.1311,
+    141812.0
+   ],
+   [
+    -0.4769,
+    0.9491,
+    0.1311,
+    142452.0
+   ],
+   [
+    -0.484,
+    0.9501,
+    0.1329,
+    143158.0
+   ],
+   [
+    -0.4911,
+    0.9499,
+    0.1347,
+    143864.0
+   ],
+   [
+    -0.4982,
+    0.948,
+    0.1347,
+    144504.0
+   ],
+   [
+    -0.5053,
+    0.947,
+    0.1347,
+    145144.0
+   ],
+   [
+    -0.5124,
+    0.9463,
+    0.1356,
+    145817.0
+   ],
+   [
+    -0.5196,
+    0.9456,
+    0.1356,
+    146457.0
+   ],
+   [
+    -0.5267,
+    0.9452,
+    0.1356,
+    147097.0
+   ],
+   [
+    -0.5338,
+    0.9446,
+    0.1356,
+    147737.0
+   ],
+   [
+    -0.5409,
+    0.9437,
+    0.1347,
+    148410.0
+   ],
+   [
+    -0.548,
+    0.9427,
+    0.1338,
+    149084.0
+   ],
+   [
+    -0.5551,
+    0.9417,
+    0.1329,
+    149757.0
+   ],
+   [
+    -0.5622,
+    0.9408,
+    0.1329,
+    150397.0
+   ],
+   [
+    -0.5693,
+    0.9397,
+    0.1329,
+    151037.0
+   ],
+   [
+    -0.5764,
+    0.9391,
+    0.1329,
+    151677.0
+   ],
+   [
+    -0.5836,
+    0.9386,
+    0.132,
+    152350.0
+   ],
+   [
+    -0.5907,
+    0.938,
+    0.132,
+    152990.0
+   ],
+   [
+    -0.5978,
+    0.9378,
+    0.132,
+    153630.0
+   ],
+   [
+    -0.6049,
+    0.9379,
+    0.132,
+    154270.0
+   ],
+   [
+    -0.612,
+    0.9384,
+    0.132,
+    154910.0
+   ],
+   [
+    -0.6191,
+    0.9384,
+    0.1284,
+    155682.0
+   ],
+   [
+    -0.6262,
+    0.9388,
+    0.1258,
+    156422.0
+   ],
+   [
+    -0.6333,
+    0.9395,
+    0.124,
+    157128.0
+   ],
+   [
+    -0.6404,
+    0.941,
+    0.124,
+    157768.0
+   ],
+   [
+    -0.6476,
+    0.9428,
+    0.124,
+    158408.0
+   ],
+   [
+    -0.6547,
+    0.945,
+    0.1258,
+    159114.0
+   ],
+   [
+    -0.6618,
+    0.9479,
+    0.1267,
+    159788.0
+   ],
+   [
+    -0.6689,
+    0.9505,
+    0.1293,
+    160527.0
+   ],
+   [
+    -0.676,
+    0.9529,
+    0.1293,
+    161167.0
+   ],
+   [
+    -0.6831,
+    0.9544,
+    0.1249,
+    161973.0
+   ],
+   [
+    -0.6902,
+    0.9552,
+    0.1222,
+    162712.0
+   ],
+   [
+    -0.6973,
+    0.9556,
+    0.1204,
+    163418.0
+   ],
+   [
+    -0.7044,
+    0.9558,
+    0.1204,
+    164058.0
+   ],
+   [
+    -0.7116,
+    0.956,
+    0.1204,
+    164698.0
+   ],
+   [
+    -0.7187,
+    0.9563,
+    0.1204,
+    165338.0
+   ],
+   [
+    -0.7258,
+    0.9573,
+    0.1204,
+    165978.0
+   ],
+   [
+    -0.7329,
+    0.9587,
+    0.1187,
+    166685.0
+   ],
+   [
+    -0.74,
+    0.96,
+    0.1178,
+    167358.0
+   ],
+   [
+    -0.7471,
+    0.962,
+    0.1116,
+    168230.0
+   ],
+   [
+    -0.7542,
+    0.9646,
+    0.1089,
+    168969.0
+   ],
+   [
+    -0.7613,
+    0.9675,
+    0.1062,
+    169708.0
+   ],
+   [
+    -0.7684,
+    0.9707,
+    0.1,
+    170580.0
+   ],
+   [
+    -0.7756,
+    0.9733,
+    0.0982,
+    171287.0
+   ],
+   [
+    -0.7827,
+    0.9762,
+    0.0964,
+    172059.0
+   ],
+   [
+    -0.7871,
+    0.979,
+    0.0893,
+    172865.0
+   ],
+   [
+    -0.788,
+    0.9809,
+    0.0822,
+    173538.0
+   ],
+   [
+    -0.788,
+    0.9826,
+    0.0751,
+    174178.0
+   ],
+   [
+    -0.788,
+    0.984,
+    0.068,
+    174818.0
+   ],
+   [
+    -0.7862,
+    0.9849,
+    0.0609,
+    175524.0
+   ],
+   [
+    -0.7827,
+    0.9862,
+    0.0538,
+    176297.0
+   ],
+   [
+    -0.7818,
+    0.9866,
+    0.0467,
+    176970.0
+   ],
+   [
+    -0.7818,
+    0.9882,
+    0.0396,
+    177610.0
+   ],
+   [
+    -0.7818,
+    0.9898,
+    0.0324,
+    178250.0
+   ],
+   [
+    -0.7818,
+    0.991,
+    0.0253,
+    178890.0
+   ],
+   [
+    -0.7818,
+    0.9921,
+    0.0182,
+    179530.0
+   ],
+   [
+    -0.7809,
+    0.9927,
+    0.0111,
+    180203.0
+   ],
+   [
+    -0.7782,
+    0.9928,
+    0.004,
+    180943.0
+   ],
+   [
+    -0.7738,
+    0.9945,
+    -0.0031,
+    181748.0
+   ],
+   [
+    -0.7711,
+    0.9965,
+    -0.0102,
+    182488.0
+   ],
+   [
+    -0.7711,
+    0.9987,
+    -0.0173,
+    183128.0
+   ],
+   [
+    -0.7711,
+    1.0002,
+    -0.0244,
+    183768.0
+   ],
+   [
+    -0.7684,
+    1.0026,
+    -0.0316,
+    184507.0
+   ],
+   [
+    -0.7684,
+    1.0056,
+    -0.0387,
+    185147.0
+   ],
+   [
+    -0.764,
+    1.0085,
+    -0.044,
+    185887.0
+   ],
+   [
+    -0.7613,
+    1.0116,
+    -0.0493,
+    186626.0
+   ],
+   [
+    -0.756,
+    1.0141,
+    -0.0547,
+    187398.0
+   ],
+   [
+    -0.7524,
+    1.0169,
+    -0.0618,
+    188171.0
+   ],
+   [
+    -0.7498,
+    1.0191,
+    -0.0689,
+    188910.0
+   ],
+   [
+    -0.748,
+    1.0182,
+    -0.076,
+    189617.0
+   ],
+   [
+    -0.748,
+    1.0188,
+    -0.0831,
+    190257.0
+   ],
+   [
+    -0.7453,
+    1.0207,
+    -0.0902,
+    190996.0
+   ],
+   [
+    -0.7391,
+    1.0247,
+    -0.0973,
+    191868.0
+   ],
+   [
+    -0.7338,
+    1.0277,
+    -0.1044,
+    192707.0
+   ],
+   [
+    -0.7293,
+    1.0309,
+    -0.1116,
+    193513.0
+   ],
+   [
+    -0.724,
+    1.0322,
+    -0.1187,
+    194352.0
+   ],
+   [
+    -0.7196,
+    1.0343,
+    -0.1258,
+    195157.0
+   ],
+   [
+    -0.7178,
+    1.0351,
+    -0.1329,
+    195863.0
+   ],
+   [
+    -0.7133,
+    1.0339,
+    -0.14,
+    196669.0
+   ],
+   [
+    -0.7133,
+    1.0344,
+    -0.1471,
+    197309.0
+   ],
+   [
+    -0.7151,
+    1.035,
+    -0.1542,
+    198015.0
+   ]
+  ],
+  "road_note": "the computed road is 198 km on the 80 m grid; the game's travel numbers stay 120 km each way (08 P-15, M1-34 decision)",
+  "pads": [
+   {
+    "id": "R1",
+    "socket": "Pad_R1",
+    "map_xy_m": [
+     -20920.0,
+     30120.0
+    ],
+    "height_m": -359.1,
+    "road_km": 55.4,
+    "offset_from_road_m": 1553.0,
+    "table": [
+     0.3098,
+     0.915,
+     0.0191
+    ],
+    "road_level": {
+     "socket": "Pad_R1_Road",
+     "map_xy_m": [
+      -20040.0,
+      28840.0
+     ],
+     "height_m": -475.1,
+     "table": [
+      0.324,
+      0.9143,
+      0.0093
+     ]
+    }
+   },
+   {
+    "id": "R2",
+    "socket": "Pad_R2",
+    "map_xy_m": [
+     -23320.0,
+     55560.0
+    ],
+    "height_m": -386.9,
+    "road_km": 82.0,
+    "offset_from_road_m": 2464.0,
+    "table": [
+     0.0271,
+     0.9166,
+     0.0458
+    ],
+    "road_level": {
+     "socket": "Pad_R2_Road",
+     "map_xy_m": [
+      -23880.0,
+      53160.0
+     ],
+     "height_m": -616.5,
+     "table": [
+      0.0538,
+      0.9113,
+      0.052
+     ]
+    }
+   },
+   {
+    "id": "R3",
+    "socket": "Pad_R3",
+    "map_xy_m": [
+     -35640.0,
+     77480.0
+    ],
+    "height_m": 1275.2,
+    "road_km": 112.8,
+    "offset_from_road_m": 2471.0,
+    "table": [
+     -0.2164,
+     0.9535,
+     0.1827
+    ],
+    "road_level": {
+     "socket": "Pad_R3_Road",
+     "map_xy_m": [
+      -34440.0,
+      75320.0
+     ],
+     "height_m": 850.4,
+     "table": [
+      -0.1924,
+      0.9438,
+      0.1693
+     ]
+    }
+   }
+  ],
+  "hops": [
+   {
+    "frm": "Aurora",
+    "to": "R1",
+    "chain_link": true,
+    "clear": true,
+    "min_clearance_m": 14.6,
+    "at_m": 520.0,
+    "distance_m": 43606.0,
+    "point": [
+     -11684.0,
+     -11964.5,
+     1918.5
+    ]
+   },
+   {
+    "frm": "Aurora",
+    "to": "R2",
+    "chain_link": false,
+    "clear": true,
+    "min_clearance_m": 18.6,
+    "at_m": 520.0,
+    "distance_m": 69039.0,
+    "point": [
+     -11661.0,
+     -11959.8,
+     1920.7
+    ]
+   },
+   {
+    "frm": "Aurora",
+    "to": "R3",
+    "chain_link": false,
+    "clear": true,
+    "min_clearance_m": 33.2,
+    "at_m": 520.0,
+    "distance_m": 93117.0,
+    "point": [
+     -11707.0,
+     -11970.0,
+     1916.4
+    ]
+   },
+   {
+    "frm": "Aurora",
+    "to": "Summit",
+    "chain_link": false,
+    "clear": true,
+    "min_clearance_m": 27.9,
+    "at_m": 520.0,
+    "distance_m": 134961.0,
+    "point": [
+     -11547.1,
+     -11953.1,
+     1931.0
+    ]
+   },
+   {
+    "frm": "R1",
+    "to": "R2",
+    "chain_link": true,
+    "clear": true,
+    "min_clearance_m": 12.1,
+    "at_m": 25032.0,
+    "distance_m": 25553.0,
+    "point": [
+     -23271.1,
+     55041.6,
+     -399.2
+    ]
+   },
+   {
+    "frm": "R1",
+    "to": "R3",
+    "chain_link": false,
+    "clear": true,
+    "min_clearance_m": 48.4,
+    "at_m": 49074.0,
+    "distance_m": 49595.0,
+    "point": [
+     -35485.6,
+     76983.1,
+     1205.3
+    ]
+   },
+   {
+    "frm": "R1",
+    "to": "Summit",
+    "chain_link": false,
+    "clear": true,
+    "min_clearance_m": 23.8,
+    "at_m": 93054.0,
+    "distance_m": 93574.0,
+    "point": [
+     -5076.1,
+     121815.0,
+     4927.6
+    ]
+   },
+   {
+    "frm": "R2",
+    "to": "R3",
+    "chain_link": true,
+    "clear": true,
+    "min_clearance_m": 37.0,
+    "at_m": 24624.0,
+    "distance_m": 25145.0,
+    "point": [
+     -35385.0,
+     77026.2,
+     1203.2
+    ]
+   },
+   {
+    "frm": "R2",
+    "to": "Summit",
+    "chain_link": false,
+    "clear": true,
+    "min_clearance_m": 15.2,
+    "at_m": 68718.0,
+    "distance_m": 69239.0,
+    "point": [
+     -5125.3,
+     121825.8,
+     4929.1
+    ]
+   },
+   {
+    "frm": "R3",
+    "to": "Summit",
+    "chain_link": true,
+    "clear": true,
+    "min_clearance_m": 12.1,
+    "at_m": 53802.0,
+    "distance_m": 54322.0,
+    "point": [
+     -5280.9,
+     121898.2,
+     4939.2
+    ]
+   }
+  ],
+  "road_level_alternatives": [
+   {
+    "pad": "R1",
+    "road_point": [
+     -20040.0,
+     28840.0,
+     -475.1
+    ],
+    "road_m": 55420.8,
+    "legs": [
+     {
+      "frm": "Aurora",
+      "to": "R1 (road)",
+      "clear": true,
+      "min_clearance_m": 11.8,
+      "at_m": 520.0,
+      "distance_m": 42171.0,
+      "point": [
+       -11676.9,
+       -11963.0,
+       1919.2
+      ]
+     },
+     {
+      "frm": "R1 (road)",
+      "to": "R2",
+      "clear": false,
+      "min_clearance_m": -48.1,
+      "at_m": 1440.0,
+      "distance_m": 26921.0,
+      "point": [
+       -20215.5,
+       30269.3,
+       -429.8
+      ]
+     }
+    ]
+   },
+   {
+    "pad": "R2",
+    "road_point": [
+     -23880.0,
+     53160.0,
+     -616.5
+    ],
+    "road_m": 81994.1,
+    "legs": [
+     {
+      "frm": "R1",
+      "to": "R2 (road)",
+      "clear": true,
+      "min_clearance_m": 23.9,
+      "at_m": 521.0,
+      "distance_m": 23229.0,
+      "point": [
+       -20986.3,
+       30636.4,
+       -389.2
+      ]
+     },
+     {
+      "frm": "R2 (road)",
+      "to": "R3",
+      "clear": false,
+      "min_clearance_m": -69.1,
+      "at_m": 1281.0,
+      "distance_m": 27014.0,
+      "point": [
+       -24437.5,
+       54312.9,
+       -464.3
+      ]
+     }
+    ]
+   },
+   {
+    "pad": "R3",
+    "road_point": [
+     -34440.0,
+     75320.0,
+     850.4
+    ],
+    "road_m": 112842.1,
+    "legs": [
+     {
+      "frm": "R2",
+      "to": "R3 (road)",
+      "clear": true,
+      "min_clearance_m": 43.0,
+      "at_m": 521.0,
+      "distance_m": 22674.0,
+      "point": [
+       -23575.4,
+       56013.9,
+       -401.8
+      ]
+     },
+     {
+      "frm": "R3 (road)",
+      "to": "Summit",
+      "clear": true,
+      "min_clearance_m": 9.3,
+      "at_m": 54952.0,
+      "distance_m": 55472.0,
+      "point": [
+       -5263.8,
+       121886.6,
+       4938.6
+      ]
+     }
+    ]
+   }
+  ],
+  "blocked_examples": [
+   {
+    "frm_road_m": 105050.3,
+    "to_road_m": 149083.6,
+    "frm": [
+     -33800.0,
+     69240.0
+    ],
+    "to": [
+     -31240.0,
+     107320.0
+    ],
+    "clear": false,
+    "min_clearance_m": -1588.4,
+    "at_m": 20363.0,
+    "distance_m": 38166.0,
+    "point": [
+     -32434.1,
+     89557.3,
+     1768.5
+    ]
+   },
+   {
+    "frm_road_m": 47376.2,
+    "to_road_m": 78694.7,
+    "frm": [
+     -19960.0,
+     21160.0
+    ],
+    "to": [
+     -23640.0,
+     49960.0
+    ],
+    "clear": false,
+    "min_clearance_m": -966.5,
+    "at_m": 8650.0,
+    "distance_m": 29034.0,
+    "point": [
+     -21056.4,
+     29740.4,
+     -380.6
+    ]
+   },
+   {
+    "frm_road_m": 4469.6,
+    "to_road_m": 29301.0,
+    "frm": [
+     -15160.0,
+     -12760.0
+    ],
+    "to": [
+     -21160.0,
+     3960.0
+    ],
+    "clear": false,
+    "min_clearance_m": -627.4,
+    "at_m": 6201.0,
+    "distance_m": 17764.0,
+    "point": [
+     -17254.6,
+     -6923.1,
+     1463.9
+    ]
+   }
+  ],
+  "direct_aurora_summit": {
+   "clear": true,
+   "min_clearance_m": 27.9,
+   "at_m": 520.0,
+   "distance_m": 134961.0,
+   "point": [
+    -11547.1,
+    -11953.1,
+    1931.0
+   ],
+   "note": "FINDING for the science reviewer: on the 80 m LOLA grid Aurora's ridge-top mast and the summit relay see each other directly; STORY_FULL EX-CH07-S11 says the base is 'hidden by terrain'. Not changed here (canon is Sadman's); the repeaters still matter for the rover on the road: two of the three pads are blocked when moved down to the road."
+  }
+ }
+}
