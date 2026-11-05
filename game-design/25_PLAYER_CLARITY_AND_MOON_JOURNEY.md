@@ -53,7 +53,7 @@ From [M1-09_hud_plan_button.png](../production/qa/evidence/M1-09_hud_plan_button
 | S, Shelter | Storm shelter |
 | Z, Exposure | Radiation dose |
 | C, Crops | Garden health |
-| R, Rations | Food (days) |
+| R, Rations | Food (crew-days: one feeds one person for one day; 08 counts R in crew-days) |
 | P-02 | Seven Shifts (the night plan) — never the code |
 | EX-CH01-S07 | hidden; the chapter name and the story date only |
 | Preview | Try it (nothing changes yet) |

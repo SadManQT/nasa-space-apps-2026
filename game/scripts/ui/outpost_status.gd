@@ -1,101 +1,201 @@
-extends HBoxContainer
+extends PanelContainer
 class_name OutpostStatus
 
-## A read-only view of CampaignDirector.query(), including its shared simulation
-## shelter readout. Forecasts are primitive results, never a second live state.
+## The compact station strip (doc 25 §2.2): a read-only view of
+## CampaignDirector.query() in player words ("Battery 14 of 20", never "E 14/20").
+## It appears only when a value changes, when a value that matters now runs low,
+## or while a job's forecast is shown, and hides again after a few seconds.
+## Thresholds stay in outpost_status.json; display words live in ui_text.json.
+## Forecasts are primitive results, never a second live state.
 const RULES_PATH := "res://resources/campaign/outpost_status.json"
-const IVORY := Color("#ECEEF0")
-const GOLD := Color("#F2C230")
-const GREEN := Color("#68C78B")
-const RED := Color("#F38C91")
+const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
+
 var _rules: Dictionary
 var _cards: Dictionary = {}
 var _query: Dictionary = {}
+var _baseline: Dictionary = {}  # the values the player has already seen; a change is measured against these
+var _content := ""  # what the strip shows now, so a refresh that changes nothing keeps its timer
 var _forecast: Dictionary = {}
-
-class StatusIcon extends Control:
-	var kind := ""
-	func _draw() -> void:
-		var color := Color("#F2C230")
-		if kind == "power":
-			draw_rect(Rect2(2, 5, 17, 13), color, false, 2)
-			draw_line(Vector2(21, 9), Vector2(21, 14), color, 2)
-			draw_line(Vector2(6, 11), Vector2(15, 11), color, 2)
-		elif kind == "shielding":
-			draw_polyline(PackedVector2Array([Vector2(3, 3), Vector2(21, 3), Vector2(20, 15), Vector2(12, 22), Vector2(4, 15), Vector2(3, 3)]), color, 2)
-		elif kind == "food":
-			draw_arc(Vector2(12, 11), 9, PI, TAU, 20, color, 2)
-			draw_line(Vector2(3, 11), Vector2(21, 11), color, 2)
-			draw_line(Vector2(12, 11), Vector2(12, 23), color, 2)
-		else:
-			for y in [6, 12, 18]:
-				draw_line(Vector2(3, y), Vector2(21, y), color, 2)
+var _settings: Dictionary = {}
+var _rows: VBoxContainer
+var _title: Label
+var _timer := 0.0
+var _sticky := false
+var _tween: Tween
+var _ever_bound := false
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_theme_constant_override("separation", 10)
+	add_theme_stylebox_override("panel", UiDesign.glass_style(Color.TRANSPARENT, Color.TRANSPARENT, 12))
 	_rules = JSON.parse_string(FileAccess.get_file_as_string(RULES_PATH))
+	_rows = VBoxContainer.new()
+	_rows.add_theme_constant_override("separation", 6)
+	add_child(_rows)
+	_title = UiDesign.label("Station", "caption", "muted")
+	_rows.add_child(_title)
 	for group in _rules.get("groups", []):
-		var panel := PanelContainer.new()
+		var panel := VBoxContainer.new()
 		panel.name = String(group.id)
-		panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		var style := StyleBoxFlat.new()
-		style.bg_color = Color("#0C1424")
-		style.border_color = Color("#43536D")
-		style.set_border_width_all(1)
-		style.set_corner_radius_all(8)
-		style.content_margin_left = 12
-		style.content_margin_right = 12
-		style.content_margin_top = 8
-		style.content_margin_bottom = 8
-		panel.add_theme_stylebox_override("panel", style)
-		add_child(panel)
-		var box := VBoxContainer.new()
-		box.add_theme_constant_override("separation", 3)
-		panel.add_child(box)
+		panel.add_theme_constant_override("separation", 2)
+		_rows.add_child(panel)
 		var header := HBoxContainer.new()
-		box.add_child(header)
-		var icon := StatusIcon.new()
-		icon.kind = String(group.icon)
-		icon.custom_minimum_size = Vector2(24, 24)
+		header.add_theme_constant_override("separation", 8)
+		panel.add_child(header)
+		var icon := UiDesign.LineIcon.new(String(group.icon), UiDesign.colour("accent"))
 		header.add_child(icon)
-		var title := _label(String(group.label), 16, 1)
-		title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		header.add_child(title)
-		var status := _label("", 12, 1)
-		status.custom_minimum_size.x = 72
-		header.add_child(status)
-		var values := _label("", 14)
-		box.add_child(values)
+		var values := UiDesign.label("", "body")
+		values.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		header.add_child(values)
+		var status := UiDesign.label("", "caption", "muted")
+		status.visible = false
+		panel.add_child(status)
 		var bar := ProgressBar.new()
 		bar.show_percentage = false
-		bar.custom_minimum_size.y = 7
-		box.add_child(bar)
-		var forecast := _label("Select an operation", 12, 1)
-		box.add_child(forecast)
-		_cards[group.id] = {"panel": panel, "values": values, "bar": bar, "forecast": forecast, "status": status}
+		bar.custom_minimum_size.y = 4
+		bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var track := StyleBoxFlat.new()
+		track.bg_color = Color(1, 1, 1, 0.12)
+		track.set_corner_radius_all(2)
+		bar.add_theme_stylebox_override("background", track)
+		panel.add_child(bar)
+		var forecast := UiDesign.label("", "caption", "accent")
+		forecast.visible = false
+		panel.add_child(forecast)
+		panel.visible = false
+		_cards[group.id] = {"panel": panel, "values": values, "bar": bar, "forecast": forecast, "status": status, "icon": icon}
+	visible = false
+	modulate.a = 0.0
+	set_process(true)
 
+## Accessibility settings (reduced motion) for the show and hide tweens.
+func set_settings(settings: Dictionary) -> void:
+	_settings = settings.duplicate(true)
+
+## Binds the live query and an optional forecast of the job in reach. The strip
+## shows the groups whose values changed, run low or would change.
 func bind_query(query: Dictionary, forecast: Dictionary = {}) -> void:
 	_query = query.duplicate(true)
 	_forecast = forecast.duplicate(true)
 	if bool(_forecast.get("accepted", false)) and int(_forecast.get("input_revision", -1)) != int(query.get("state_revision", 0)):
 		_forecast = {}
+	var current := _resources(_query)
+	if not _ever_bound:
+		_baseline = current
+	var before := _baseline
+	var predicted := _resources(_forecast.get("query", {})) if bool(_forecast.get("accepted", false)) else {}
+	var show_groups := 0
+	var sticky := false
+	var changed_any := false
 	for group in _rules.get("groups", []):
 		var view := meter_view(String(group.id))
 		var card: Dictionary = _cards[group.id]
+		var changed := false
+		var forecast_changes := false
+		for key in group.fields:
+			if float(current.get(key, 0)) != float(before.get(key, 0)):
+				changed = true
+			if not predicted.is_empty() and float(predicted.get(key, current.get(key, 0))) != float(current.get(key, 0)):
+				forecast_changes = true
+		var low: bool = view.status != "OK" and view.matters_now
+		var show: bool = changed or forecast_changes or low
 		card.values.text = view.current_text
-		card.status.text = view.status
-		card.status.modulate = RED if view.status == "! LOW" or view.status == "! LIMIT" else GOLD if view.status == "! CHECK" else GREEN
+		card.status.text = view.status_word
+		card.status.visible = not view.status_word.is_empty()
+		var tone := _tone(view.status)
+		card.status.add_theme_color_override("font_color", tone)
+		card.values.add_theme_color_override("font_color", UiDesign.colour("ivory"))  # the status line and icon carry the warning
+		card.icon.colour = tone if view.status != "OK" else UiDesign.colour("accent")
+		card.icon.queue_redraw()
 		card.bar.max_value = view.capacity
-		card.bar.value = view.value
+		card.bar.visible = view.has_capacity
 		var fill := StyleBoxFlat.new()
-		fill.bg_color = card.status.modulate
+		fill.bg_color = tone
+		fill.set_corner_radius_all(2)
 		card.bar.add_theme_stylebox_override("fill", fill)
+		_animate_bar(card.bar, float(view.value), changed)
 		card.forecast.text = view.forecast_text
+		card.forecast.visible = forecast_changes and not view.forecast_text.is_empty()
 		card.panel.accessibility_name = view.accessibility_text
 		card.bar.accessibility_name = view.accessibility_text
-		card.panel.tooltip_text = String(_rules.get("scope", ""))
+		card.panel.visible = show
+		if show:
+			show_groups += 1
+		changed_any = changed_any or changed or forecast_changes
+		sticky = sticky or (low and not changed and not forecast_changes)
+	_ever_bound = true
+	tooltip_text = String(_rules.get("scope", ""))
+	if show_groups > 0:
+		_sticky = sticky and not changed_any
+		var content := str([current, predicted, _cards.keys().filter(func(id) -> bool: return _cards[id].panel.visible)])
+		if content != _content or not visible:
+			_timer = float(UiDesign.tokens().get("motion", {}).get("strip_seconds", 6.0))
+		_content = content
+		if not predicted.is_empty():
+			_timer = INF
+		_show()
+	elif visible:
+		_timer = minf(_timer, 0.4)
 
+## Hides the strip at once, with no fade (a panel takes the screen).
+func hide_now() -> void:
+	_timer = 0.0
+	_sticky = false
+	_content = ""
+	if _tween != null and _tween.is_valid():
+		_tween.kill()
+	modulate.a = 0.0
+	visible = false
+
+## True while the strip is showing or fading in.
+func is_showing() -> bool:
+	return visible and modulate.a > 0.01
+
+func _process(delta: float) -> void:
+	if not visible or _timer == INF:
+		return
+	_timer -= delta
+	if _timer <= 0.0 and not _sticky:
+		_baseline = _resources(_query)  # the change has been on screen long enough: it is now seen
+		_content = ""
+		_fade(false)
+
+func _show() -> void:
+	if not visible or modulate.a < 0.99:
+		_fade(true)
+
+func _fade(shown: bool) -> void:
+	if _tween != null and _tween.is_valid():
+		_tween.kill()
+	var seconds := UiDesign.motion_seconds("show_seconds" if shown else "hide_seconds", _settings)
+	if shown:
+		visible = true
+	if seconds <= 0.0 or not is_inside_tree():
+		modulate.a = 1.0 if shown else 0.0
+		visible = shown
+		return
+	_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	_tween.tween_property(self, "modulate:a", 1.0 if shown else 0.0, seconds)
+	if not shown:
+		_tween.tween_callback(func() -> void: visible = false)
+
+func _animate_bar(bar: ProgressBar, value: float, changed: bool) -> void:
+	var seconds := UiDesign.motion_seconds("count_seconds", _settings)
+	if not changed or seconds <= 0.0 or not is_inside_tree():
+		bar.value = value
+		return
+	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(bar, "value", value, seconds)
+
+func _tone(status: String) -> Color:
+	match status:
+		"! LOW", "! LIMIT":
+			return UiDesign.colour("danger")
+		"! CHECK":
+			return UiDesign.colour("caution")
+	return UiDesign.colour("good")
+
+## One group's view in player words: value, capacity, status code, the text
+## shown, the forecast line and the screen-reader sentence.
 func meter_view(id: String) -> Dictionary:
 	var group: Dictionary = {}
 	for candidate in _rules.get("groups", []):
@@ -103,10 +203,12 @@ func meter_view(id: String) -> Dictionary:
 			group = candidate
 	if group.is_empty():
 		return {}
+	var fields: Dictionary = UiDesign.text().get("station", {}).get("fields", {})
 	var resources := _resources(_query)
 	var primary := String(group.primary)
 	var value := float(resources.get(primary, 0))
-	var cap := float(_query.get("resources", {}).get(group.capacity, _query.get("outpost", {}).get(group.capacity, 1)))
+	var primary_field: Dictionary = fields.get(primary, {})
+	var cap := _capacity(String(primary_field.get("capacity", group.get("capacity", ""))))
 	var status := "OK"
 	var thresholds: Dictionary = group.thresholds
 	if value <= float(thresholds.critical_below_or_equal):
@@ -126,34 +228,69 @@ func meter_view(id: String) -> Dictionary:
 		var limit = group.exposure_limits.get(_query.get("chapter_id", ""))
 		if limit != null and float(resources.get("Z", 0)) > float(limit):
 			status = "! LIMIT"
-	var text: Array[String] = []
+	var status_words: Dictionary = UiDesign.text().get("station", {}).get("status_words", {})
+	var status_word := String(status_words.get(status, ""))
+	var lines: Array[String] = []
 	var spoken: Array[String] = []
 	var changes: Array[String] = []
 	var predicted := _resources(_forecast.get("query", {}))
+	var matters := false
 	for key in group.fields:
-		text.append("%s %s%s%s" % [group.display_fields[key], _number(float(resources.get(key, 0))), "/" + _number(cap) if key == primary else "", group.display_units.get(key, "")])
-		spoken.append("%s %s" % [group.fields[key], _number(float(resources.get(key, 0)))])
+		var field: Dictionary = fields.get(key, {})
+		var word := String(field.get("word", group.fields[key]))
+		var amount := float(resources.get(key, 0))
+		var field_cap := _capacity(String(field.get("capacity", "")))
+		var line := "%s %s" % [word, UiDesign.number(amount)]
+		if field_cap > 0:
+			line += " %s %s" % [String(field.get("scale", "of")), UiDesign.number(field_cap)]
+		if field.has("unit"):
+			line += " " + String(field.unit)
+		lines.append(line)
+		spoken.append(line)
+		matters = matters or _matters_now(String(field.get("matters_from", "")))
 		if bool(_forecast.get("accepted", false)):
-			var delta := float(predicted.get(key, resources.get(key, 0))) - float(resources.get(key, 0))
-			changes.append("%s -> %s%s" % [key, "+" if delta >= 0 else "", _number(delta)])
-	var forecast_text := " · ".join(changes) if not changes.is_empty() else "Select an operation"
-	if not _forecast.is_empty() and not bool(_forecast.get("accepted", false)):
-		forecast_text = "Forecast unavailable"
-	return {"value": value, "capacity": maxf(cap, 1), "status": status, "current_text": " · ".join(text), "forecast_text": forecast_text, "accessibility_text": String(group.label) + ": " + ", ".join(spoken) + ". " + status + ". " + forecast_text + ". " + String(group.description)}
+			var next := float(predicted.get(key, amount))
+			if next != amount:
+				var delta := next - amount
+				changes.append("%s %s → %s (%s%s)" % [word, UiDesign.number(amount), UiDesign.number(next), "+" if delta >= 0 else "−", UiDesign.number(absf(delta))])
+	var low_meaning := ""
+	if status != "OK":
+		low_meaning = String(primary_field.get("low", ""))
+		for key in group.fields:
+			if key != primary and status != "OK" and low_meaning.is_empty():
+				low_meaning = String(fields.get(key, {}).get("low", ""))
+	var forecast_text := " · ".join(changes)
+	if not forecast_text.is_empty():
+		forecast_text += " " + String(UiDesign.text().get("station", {}).get("forecast_word", ""))
+	var shown_status := status_word
+	if not low_meaning.is_empty() and not status_word.is_empty():
+		shown_status = "%s · %s" % [status_word.capitalize(), low_meaning]
+	return {
+		"value": value,
+		"capacity": maxf(cap, 1),
+		"has_capacity": cap > 0,
+		"status": status,
+		"status_word": shown_status,
+		"matters_now": matters,
+		"current_text": "\n".join(lines),
+		"forecast_text": forecast_text.strip_edges(),
+		"accessibility_text": String(group.label) + ": " + ", ".join(spoken) + ". " + (status_word if not status_word.is_empty() else "fine") + ". " + (forecast_text if not forecast_text.is_empty() else "") + " " + String(group.description),
+	}
+
+func _capacity(key: String) -> float:
+	if key.is_empty():
+		return 0.0
+	return float(_query.get("resources", {}).get(key, _query.get("outpost", {}).get(key, 0)))
+
+func _matters_now(scene_from: String) -> bool:
+	if scene_from.is_empty():
+		return true
+	var current := String(_query.get("scene_id", ""))
+	if not GateCatalog.SCENE_ORDER.has(current) or not GateCatalog.SCENE_ORDER.has(scene_from):
+		return true
+	return GateCatalog.SCENE_ORDER.find(current) >= GateCatalog.SCENE_ORDER.find(scene_from)
 
 static func _resources(query: Dictionary) -> Dictionary:
 	var result: Dictionary = query.get("resources", {}).duplicate(true)
 	result["S"] = query.get("outpost", {}).get("shelter_capacity", 0)
 	return result
-
-static func _number(value: float) -> String:
-	return str(int(value)) if value == floor(value) else String.num(value, 2).rstrip("0").rstrip(".")
-
-static func _label(text: String, size: int, lines: int = 2) -> Label:
-	var label := Label.new()
-	label.text = text
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.max_lines_visible = lines
-	label.add_theme_font_size_override("font_size", size)
-	label.add_theme_color_override("font_color", Color("#ECEEF0"))
-	return label

@@ -40,7 +40,6 @@ var _room: CampaignRoom
 var _crew: CampaignCrew
 var _player: PlayerController
 var _startup_error := ""
-var _world_prompt: Label
 var _ui_paused := false
 var _exit_without_save_armed := false
 var save_path: String = SaveScript.DEFAULT_PATH
@@ -336,7 +335,7 @@ func interact_nearby() -> Dictionary:
 		return {"accepted": true, "reason": "Mission Table open.", "mission_table": true}
 	if not selected.is_empty():
 		return perform_target(String(selected.target_id))
-	var result := {"accepted": false, "reason": "Move near an unfinished operation and face it. Its location is listed beside USE."}
+	var result := {"accepted": false, "reason": "Walk up to the next job and face it. Press H to see where it is."}
 	if hud != null:
 		hud.show_status(result.reason)
 	return result
@@ -344,11 +343,9 @@ func interact_nearby() -> Dictionary:
 func _physics_process(_delta: float) -> void:
 	if loading:
 		return
-	if _world_prompt == null or _room == null:
+	if _room == null:
 		return
 	var selected := nearby_target()
-	var focus_node := _focus_node(String(selected.get("world_focus_id", ""))) if not selected.is_empty() else null
-	_world_prompt.text = "E · " + String(focus_node.get_meta("focus_label", "Use")) if focus_node != null else ""
 	_room.set_focus_target(String(selected.get("world_focus_id", "")))
 	if hud != null:
 		hud.show_nearby_forecast(String(selected.get("target_id", "")))
@@ -498,7 +495,7 @@ func exit_to_title() -> void:
 		if not bool(saved.get("accepted", false)):
 			_exit_without_save_armed = true
 			if hud != null:
-				hud.show_status("SAVE FAILED · %s\nThe expedition is still open. Press SAVE to try again, or TITLE again to leave without saving." % String(saved.get("reason", "unknown error")))
+				hud.show_status("SAVE FAILED · %s\nYour game is still open. Choose Save to try again, or Save and quit again to leave without saving." % String(saved.get("reason", "unknown error")))
 			return
 	exit_requested.emit()
 
@@ -708,17 +705,6 @@ func _build_hud() -> void:
 	hud = HUDScene.instantiate() as Chapter1CampaignHUD
 	layer.add_child(hud)
 	hud.setup(self)
-	_world_prompt = Label.new()
-	_world_prompt.name = "InteractionPrompt"
-	_world_prompt.position = Vector2(300, 465)
-	_world_prompt.size = Vector2(420, 44)
-	_world_prompt.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_world_prompt.add_theme_color_override("font_outline_color", Color("#05060A"))
-	_world_prompt.add_theme_constant_override("outline_size", 5)
-	_world_prompt.add_theme_font_size_override("font_size", 22)
-	_world_prompt.add_theme_color_override("font_color", Color("#F2C230"))
-	_world_prompt.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	hud.add_child(_world_prompt)
 
 func present_dialogue(line: Dictionary) -> void:
 	if _crew != null:

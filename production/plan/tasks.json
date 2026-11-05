@@ -4022,7 +4022,7 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Clean, professional HUD: one plain-language goal, the UI design system, no developer text",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -4040,7 +4040,7 @@
     "production/ART_BIBLE.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "run_tests.sh: 36/36 suites passed (incl. new test_player_text.gd: PASS, 353 checks over every Chapter 1 scene, panel, journal tab, hint, data card and 3D room sign, plus a clear centre at 100% and 150% text). Screens: production/qa/evidence/M1-54_after_s07_dialogue.png (before: M1-09_hud_plan_button.png, same moment), M1-54_walking.png, M1-54_what_now.png, M1-54_pause.png, M1-54_settings.png, M1-54_toast_and_strip.png, M1-54_large_text.png (capture: game/tools/capture_hud_m154.gd). Independent reviews: Codex gpt-6.1-sol FIX (5 findings) and a fresh Claude subagent FIX (5 must-fix) - all fixed. Outside the owned paths, kept minimal: chapter1_campaign.gd (old fixed prompt removed, two messages reworded), room_presentation.gd (room sign), journal_text.json (player words), knowledge_service.gd (one fallback string), doc 25 §1.1 food row (crew-days). Follow-ups: M1-61, M1-62; M1-55 note.",
    "updated": "2026-11-05",
    "prompt": "Problem: Sadman played the 5 Nov build and found the screen \"super confusing\": developer IDs (EX-CH01-S07, P-02), single-letter\nvariables (E 14/20, W 0, Z 0), an unreadable objective, and six panels covering ~70% of the screen (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §0).\nGoal: a clean, professional (AAA) interface where a new player always knows what to do and why.\nDo: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 (ten clarity rules, the §1.1 player-word table as display strings only) and §2 (design system, screen\nstates, removal of the always-on status cards/operations list/controls block). Goal card (goal ≤ 8 words + why ≤ 12 words),\nworld marker with distance, context prompts on objects, compact station strip that appears only on change or when low, What Now\non H, developer IDs only in debug builds behind F10. Keep every simulation value and rule; this is presentation. Write\ngame/tools/test_player_text.gd: walk every HUD/panel state and fail on visible text matching the §8.1 patterns, and check the\ncentre third stays clear in free movement (§8.2). Screenshot every state in §2.2 and a before/after pair of the same moment.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "blocker": "Night shift parked the work on branch night/M1-54: "
@@ -4065,7 +4065,7 @@
     "game-design/08_PUZZLE_DESIGNS.md",
     "production/qa/evidence/M1-09_shift1_cards.png"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "note": "From doc 25 (Sadman, 5 Nov 2026). M1-54 review: the failure path of a locked-in plan shows developer text (unsafe predicates such as air_depleted_shift_5 in Last result, 'MISSION STOPPED' in the toast; chapter1_campaign_hud.gd _on_mission_table_commit); put it in player words here and add the Mission Table (including a failing plan) to game/tools/test_player_text.gd.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Problem: the Seven Shifts Mission Table (M1-09) works but reads like a spreadsheet (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §0.5).\nDo: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §3 exactly: three-step guided first shift, rows that appear when their information arrives (08's schedule),\nlabelled toggles with icons, before→after forecast bars with one consequence sentence, short crew-note cards with More, the\n7-shift night strip, buttons Try it · Lock in shift (Space) · Close (Esc), Save as Plan A under More. Same simulation and preview\nfunction as M1-09; existing P-02 tests must still pass unchanged. Screenshot every step of the guided first shift and shift 5.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
@@ -4586,6 +4586,55 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Do: build the Chapter 1 explainers in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §7.1 (rows marked CH01): why the Sun stays low at the pole; where Earth is and why\nshift 4's cutoff is a training event; air, water and food for a crew; solar power and batteries; reading the 2017 proton-flux\nchart; what shielding does; how plants grow in space. Every explainer: 20–45 s, captions, animated diagrams made in Godot with the M1-59 pipeline, honest labels (measured, model, diagram or counterfactual; game-design/24_NARRATIVE_REVISION.md §2.12), numbers taken from the bundled fixture in game/resources/data/nasa/ (never invented), ending on what it means for the player's next decision; attach it to the mission data card (M1-30), the clue that uses the data and Journal → Science. Check every number against its fixture and source.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M1-61",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Sound captions in the house style: on a panel, out of the walking view, no captions for interface clicks",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-54"
+   ],
+   "paths": [
+    "game/scripts/audio/audio_director.gd",
+    "game/resources/campaign/content/presentation_media.json"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "production/qa/evidence/M1-54_toast_and_strip.png"
+   ],
+   "note": "Found by M1-54 (5 Nov 2026). The HUD plays SFX_UI_CONFIRM whenever a panel opens (chapter1_campaign_hud.gd _on_panel_opened), which is where the lingering '[confirm]' caption comes from.",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem (M1-54 screenshots, production/qa/evidence/M1-54_toast_and_strip.png): the sound captions from game/scripts/audio/audio_director.gd ('[ventilation fans]   [confirm]') float as outlined text over the 3D view just under the centre third, with no backing panel (doc 25 §1 rule 10), and interface sounds such as [confirm] are captioned although they carry no information.\nDo: draw sound captions on a small dark-glass panel in the house style (UiDesign) at the bottom edge, above the dialogue bar when it shows and never inside the centre third; caption only effects that tell the player something (alarms, doors, machines, voices off screen), not interface clicks (set 'caption' to empty for UI sounds in presentation_media.json); keep the captions setting and the 3 s timing.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass, including test_player_text.gd. Save screenshots of the walking state with a sound caption and with dialogue to production/qa/evidence/M1-61_*.png and list them in the evidence."
+  },
+  {
+   "id": "M1-62",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Goal card text for Chapters 2-8: an authored goal, why, prompt, result and hint for every job",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-54"
+   ],
+   "paths": [
+    "game/resources/campaign/content/ui_text.json",
+    "game/tools/test_player_text.gd"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/08_PUZZLE_DESIGNS.md",
+    "full-game-story/STORY_FULL.md"
+   ],
+   "note": "Found by the M1-54 review (5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: M1-54 gave every Chapter 1 job authored player text in game/resources/campaign/content/ui_text.json (targets.<target_id>: goal <= 8 words, why <= 12 words, prompt, result, hint). Jobs in Chapters 2-8 have none, so the goal card falls back to the job's focus label ('Do the next job: lock in reciprocal cycle one'), with no why line and no hint.\nDo: write targets entries for every Chapter 2-8 job (game/scripts/missions/extended_gate_catalog.gd and the chapter gate data list them) following doc 25 §1 (verb + thing + place; a why that names the stake; the §1.1 player words; numbers from 08_PUZZLE_DESIGNS.md; no future names before EX-CH05-S10). Extend game/tools/test_player_text.gd to walk Chapters 2-8 the same way it walks Chapter 1 and to fail when a job has no authored goal.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass, including test_player_text.gd over all eight chapters.\nKnown fallback problems (M1-54 review): Chapters 3-8 build job labels with action.capitalize() ('p 05 equip gauge'); Chapter 2 labels pass through the word table ('trial-prepare chart', 'Try it one'); both 'Run two' jobs read the same; _goal_for_flag shows raw flag names; ledger summaries put 'E 14; A 6' into Last result; the Z note and data-card formulas name '08_PUZZLE_DESIGNS'. Authored text removes the need for the fallback."
   },
   {
    "id": "M3-68",

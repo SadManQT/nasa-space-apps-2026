@@ -71,20 +71,16 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	_check(hud.get_global_rect().encloses(advance.get_global_rect()), "advance control stays inside the 1280x720 viewport")
-	var title_button := _find_button(hud, "TITLE")
-	_reveal_control(title_button)
-	await process_frame
-	await process_frame
-	_check(title_button != null and hud.get_global_rect().encloses(title_button.get_global_rect()), "title control stays inside the viewport")
 	hud.refresh_after_action({"accepted": false, "reason": "TEST: preceding physical check is missing"})
 	_check((hud.get("_status") as Label).text == "TEST: preceding physical check is missing", "rejection cause survives gate refresh")
-	var pause := _find_button(hud, "PAUSE")
-	var settings := _find_button(hud, "SETTINGS")
-	_check(pause != null and settings != null, "pause and settings are reachable in the production HUD")
-	hud.panels.open_panel("pause")
-	_check((hud.panels.get("_body") as VBoxContainer).get_child(0).text == "The expedition is paused. Close this panel to resume.", "pause panel explains how to resume")
+	# Doc 25 §2.2: no always-on controls block; Esc opens the pause menu, which holds Settings and Save and quit.
+	_send_key(KEY_ESCAPE)
+	await process_frame
+	var pause_body := hud.panels.get("_body") as VBoxContainer
+	_check(hud.panels.active_panel() == "pause" and pause_body.get_node_or_null("Settings") is Button and pause_body.get_node_or_null("SaveAndQuit") is Button, "Esc opens the pause menu with Settings and Save and quit")
+	_check(pause_body.get_child(0).name == "Resume" and (pause_body.get_child(0) as Button).text == "Resume", "pause menu leads with Resume")
 	_check(bool(campaign.director.query().get("paused", false)) and player.process_mode == Node.PROCESS_MODE_DISABLED, "opening a modal pauses authoritative actions and movement")
-	_check(advance.disabled and title_button != null and title_button.disabled, "modal panels exclude underlying controls from keyboard focus")
+	_check(advance.disabled, "modal panels exclude underlying controls from keyboard focus")
 	_send_key(KEY_ESCAPE)
 	await process_frame
 	_check(hud.panels.active_panel().is_empty(), "Escape closes the open pause panel")
@@ -141,7 +137,7 @@ func _run() -> void:
 	await campaign.wait_loading()
 	_check(campaign._room.visual_root.get_node_or_null("PL_Alo_Bloom") != null and not campaign._room.visual_root.get_node("PL_Tara_Bloom").visible, "April 27 first bloom shows Alo bloom and keeps Tara's later bloom hidden")
 	hud.refresh_scene({"chapter_complete": true})
-	_check(advance.disabled and (hud.get("_status") as Label).text.contains("CHAPTER 1 COMPLETE"), "completed chapter shows a clear ending and disables repeated advance")
+	_check(advance.disabled and (hud.get("_title") as Label).text == "Chapter 1 complete", "completed chapter shows a clear ending and disables repeated advance")
 	main.call("_show_title")
 	await process_frame
 	stage = main.get_node_or_null("TitleStage")

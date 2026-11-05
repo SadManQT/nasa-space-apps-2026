@@ -73,7 +73,7 @@ func _run() -> void:
 	for index in 4:
 		await physics_frame
 	_check(runtime.nearby_target().get("target_id") == "commission_route", "in-range/in-view E prompt selects the actual Mission Table")
-	_check(runtime._world_prompt.text.contains("Mission Table"), "production screen-space prompt names its highlighted prop")
+	_check(runtime.hud.get("_nearby_id") == "commission_route" and runtime.hud.call("_prompt_text", "commission_route") == "Trace the power route", "the prompt on the highlighted prop names its job (doc 25 §1 rule 7)")
 	if OS.get_cmdline_user_args().has("--evidence"):
 		await RenderingServer.frame_post_draw
 		root.get_texture().get_image().save_png(ProjectSettings.globalize_path("res://../production/qa/evidence/M1-01_campaign_prompt.png"))

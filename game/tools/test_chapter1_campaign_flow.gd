@@ -69,8 +69,7 @@ func _run() -> void:
 		_check(choice_save.get("snapshot", {}).get("story_log", {}).get("choices", {}).get(choice_id) == JSON.parse_string(JSON.stringify(entry)), scene_id + " confirmation autosaves the choice")
 		await process_frame
 		await process_frame
-		campaign.hud._operations_scroll.ensure_control_visible(campaign.hud._advance)
-		await process_frame
+		await process_frame  # the Continue control sits in the goal card (doc 25 §2.2); no scroll list any more
 		_check(campaign.hud.get_viewport_rect().encloses(campaign.hud._advance.get_global_rect()), scene_id + " advance control stays onscreen")
 		for target_id in ACTIONS[index]:
 			var target := campaign.physical_target(String(target_id))

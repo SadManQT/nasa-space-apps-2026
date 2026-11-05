@@ -1,52 +1,123 @@
 extends Control
 class_name Chapter1CampaignHUD
 
+## The flat campaign HUD (doc 25 §1–§2). While the player moves it shows one
+## goal card (goal, why, chapter and story date), a marker on the goal in the
+## world with its distance, a prompt on the object in reach, a message toast and
+## the compact station strip when a value changes or runs low. Dialogue sits at
+## the bottom centre with Next and Auto. H opens What now; Esc opens the pause
+## menu; developer IDs appear only in debug builds behind F10.
+## Every string the player reads is a player word (ui_text.json); simulation
+## values and rules are untouched: this node only presents the runtime.
+
 const Outpost = preload("res://scripts/ui/outpost_status.gd")
 const PANELS_SCENE: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
 const MISSION_TABLE_SCENE: PackedScene = preload("res://scenes/ui/mission_table_panel.tscn")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
-const IVORY := Color("#ECEEF0")
-const MUTED := Color("#A8B4C8")
-const CYAN := Color("#20B8C9")
-const MUSTARD := Color("#F2C230")
-const GREEN := Color("#4CAF50")
-const RED := Color("#E56B6F")
 
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
 var mission_table: MissionTablePanel
-var _title: Label
-var _meta: Label
-var _objective: Label
-var _caption_speaker: Label
-var _caption_line: Label
-var _status: Label
-var _targets: VBoxContainer
-var _next_line: Button
-var _advance: Button
-var _retry: Button
-var _last_outcome: Dictionary = {}
 var outpost: OutpostStatus
+
+# Goal card
+var _goal_card: PanelContainer
+var _chapter_line: Label
+var _title: Label
+var _why: Label
+var _advance: Button
+var _goal_icon: UiDesign.LineIcon
+# World marker and prompt
+var _marker: Marker
+var _prompt: PanelContainer
+var _prompt_key: Label
+var _prompt_label: Label
+# Toast and station strip
+var _column: VBoxContainer
+var _toast: PanelContainer
+var _status: Label
+var _toast_timer := 0.0
+# Dialogue
+var _dialogue_bar: PanelContainer
+var _caption_speaker: Label
+var _caption_count: Label
+var _caption_line: Label
+var _next_line: Button
+var _auto_button: Button
+var _auto_on := false
+var _auto_timer := 0.0
+# What now (content lives in the HUD; the panel layer shows it)
+var _what_now_home: Control
+var _what_now: VBoxContainer
+var _wn_goal: Label
+var _wn_why: Label
+var _wn_where: Label
+var _wn_hint: Label
+var _targets: VBoxContainer
+var _retry: Button
+var _decision_review: Button
+var _last_result_button: Button
+var _data_cards_button: Button
+# Debug overlay (F10, debug builds only)
+var _debug: Label
+var _debug_on := false
+# State
+var _last_outcome: Dictionary = {}
 var _forecast: Dictionary = {}
 var _forecast_key := ""
 var _forecast_source := ""
 var _pointer_preview := false
 var _focus_preview := false
-var _target_panel: PanelContainer
-var _controls: Label
-var _objective_scroll: ScrollContainer
-var _operations_scroll: ScrollContainer
 var _modal_button_states := {}
 var _dialogue_index := 0
 var _scene_id := ""
-var _decision_review: Button
 ## Continue (title → saved checkpoint) opens "Previously at Aurora" once the
 ## world and any scene-entry film are done; direct fixtures never trigger it.
 var _resume_pending := false
+var _goal_info: Dictionary = {}
+var _done_ids: Dictionary = {}
+var _nearby_id := ""
+var _marker_node: Node3D
+var _chrome_hidden := false
+var _pulse: Tween
+var _words: Dictionary = {}
+
+## The goal marker drawn over the world: a diamond with the distance under it.
+class Marker extends Control:
+	var distance_text := ""
+	var dimmed := false
+	var _label: Label
+	func _init() -> void:
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		custom_minimum_size = Vector2(96, 44)
+		size = custom_minimum_size
+		_label = UiDesign.label("", "caption", "ivory")
+		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_label.position = Vector2(0, 22)
+		_label.size = Vector2(96, 20)
+		_label.add_theme_color_override("font_outline_color", UiDesign.colour("ink"))
+		_label.add_theme_constant_override("outline_size", 4)
+		add_child(_label)
+	func set_distance(text: String) -> void:
+		distance_text = text
+		_label.text = text
+	func _draw() -> void:
+		var centre := Vector2(48, 10)
+		var r := float(UiDesign.tokens().get("world_marker", {}).get("size_px", 14)) * 0.5
+		var tone := UiDesign.colour("accent")
+		if dimmed:
+			tone.a = 0.6
+		draw_colored_polygon(PackedVector2Array([centre + Vector2(0, -r), centre + Vector2(r, 0), centre + Vector2(0, r), centre + Vector2(-r, 0)]), Color(UiDesign.colour("ink"), 0.55))
+		draw_polyline(PackedVector2Array([centre + Vector2(0, -r), centre + Vector2(r, 0), centre + Vector2(0, r), centre + Vector2(-r, 0), centre + Vector2(0, -r)]), tone, 2.0, true)
+		draw_circle(centre, 2.5, tone)
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_words = UiDesign.text().get("hud", {})
 	_build()
+	resized.connect(_layout)
+	set_process(true)
 
 func setup(value: Chapter1Campaign) -> void:
 	runtime = value
@@ -55,6 +126,19 @@ func setup(value: Chapter1Campaign) -> void:
 	panels.set_command_sink(Callable(runtime, "handle_ui_command"))
 	panels.panel_opened.connect(_on_panel_opened)
 	panels.panel_closed.connect(_on_panel_closed)
+	panels.set_panel_builder("what_now", _build_what_now)
+	panels.set_pause_actions([
+		{"label": String(_words.get("what_now", "What now")), "name": "WhatNow", "action": func() -> void: panels.open_panel("what_now")},
+		{"label": String(_words.get("journal", "Journal")), "name": "Journal", "action": _on_journal_pressed},
+		{"label": String(_words.get("settings", "Settings")), "name": "Settings", "action": func() -> void: panels.open_panel("settings_accessibility")},
+		{"label": String(_words.get("save", "Save")), "name": "Save", "action": func() -> void:
+			panels.close_panel()
+			_on_save_pressed()},
+		{"label": String(_words.get("save_and_quit", "Save and quit")), "name": "SaveAndQuit", "action": func() -> void:
+			panels.close_panel()
+			_on_exit_pressed()},
+	])
+	panels.set_content_top(float(UiDesign.px(64, get_viewport_rect().size.y)))
 	mission_table = MISSION_TABLE_SCENE.instantiate() as MissionTablePanel
 	add_child(mission_table)
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
@@ -64,6 +148,7 @@ func setup(value: Chapter1Campaign) -> void:
 	_refresh_query()
 	refresh_scene({})
 
+## Re-reads the current scene: goal card, jobs, dialogue and the strip.
 func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> void:
 	if runtime == null or (runtime.loading and not during_loading):
 		return
@@ -73,168 +158,226 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 		_scene_id = next_scene
 		_forecast = {}
 		_forecast_key = ""
+		_done_ids = {}
+		_auto_timer = 0.0
 	_dialogue_index = _first_unacknowledged_line()
-	_title.text = String(scene.get("title", "Chapter 1"))
-	_meta.text = "%s  ·  %s  ·  %s" % [next_scene, String(scene.get("location", "")), String(scene.get("storyTime", scene.get("story_time", "")))]
 	_decision_review.visible = next_scene.begins_with("EX-CH01-")
-	_objective.text = "OBJECTIVE\n" + "\n".join(scene.get("playerActions", scene.get("player_actions", [])))
 	_render_caption()
 	_build_targets()
 	_refresh_query()
 	apply_accessibility()
 	_offer_resume_card()
 
+## After any runtime action: refresh what changed and answer back with one line.
 func refresh_after_action(result: Dictionary) -> void:
 	_forecast = {}
 	_forecast_key = ""
+	var before := _done_ids.duplicate()
 	if runtime != null:
 		_dialogue_index = _first_unacknowledged_line()
 		_render_caption()
 		_build_targets()
 		_refresh_query()
+	var newly_done: Array = []
+	for id in _done_ids:
+		if not before.has(id):
+			newly_done.append(id)
 	if result.get("accepted", false):
-		_last_outcome = {"result": result.get("reason", "Operation completed."), "changes": result.get("deltas", []), "notes": result.get("warnings", []) + result.get("ledger_summary", [])}
-		panels.bind_query(runtime.query().merged({"outcome": _last_outcome}, true))
+		_last_outcome = {"result": result.get("reason", "Done."), "changes": result.get("deltas", []), "notes": result.get("warnings", []) + result.get("ledger_summary", [])}
+		if panels != null and runtime != null:
+			panels.bind_query(runtime.query().merged({"outcome": _last_outcome}, true))
+		if not newly_done.is_empty():
+			var line := _result_line(String(newly_done[0]))
+			_last_outcome["result"] = line
+			show_status(line)
+		return
 	if result.has("reason"):
 		show_status(String(result.get("reason", "")))
 
+## Shows one line in the toast (top right, five seconds). Runtime reasons are
+## rewritten into player words; "do this first" reasons name the job.
 func show_status(text: String) -> void:
-	if _status != null:
-		_status.text = text
-		_status.modulate = GREEN if text.contains("SAVED") or text.contains("committed") else MUTED
+	if _status == null:
+		return
+	var rewrite := UiDesign.toast_rewrite(text)
+	var line := String(rewrite.text)
+	if not String(rewrite.flag).is_empty():
+		line = line % _goal_for_flag(String(rewrite.flag))
+	if line.is_empty():
+		_hide_toast()
+		return
+	_status.text = line
+	var edge := UiDesign.colour("glass_edge", Color(1, 1, 1, 0.18))
+	match String(rewrite.kind):
+		"good":
+			edge = UiDesign.colour("good")
+		"caution":
+			edge = UiDesign.colour("caution")
+	if text.begins_with("SAVE FAILED") or text.begins_with("AUTOSAVE FAILED"):
+		edge = UiDesign.colour("danger")
+	_toast.add_theme_stylebox_override("panel", UiDesign.glass_style(edge, Color.TRANSPARENT, 12))
+	_toast_timer = float(UiDesign.tokens().get("motion", {}).get("toast_seconds", 5.0))
+	if not _chrome_hidden:
+		_fade(_toast, true)
+
+func _hide_toast() -> void:
+	_toast_timer = 0.0
+	if _toast != null and _toast.visible:
+		_fade(_toast, false)
 
 func _build() -> void:
-	var top := _panel(Color(0.03, 0.06, 0.12, 0.96), 0, Color(0.26, 0.40, 0.62, 0.7))
-	top.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	top.offset_bottom = 86
-	add_child(top)
-	var top_margin := MarginContainer.new()
-	top_margin.add_theme_constant_override("margin_left", 24)
-	top_margin.add_theme_constant_override("margin_right", 24)
-	top_margin.add_theme_constant_override("margin_top", 12)
-	top_margin.add_theme_constant_override("margin_bottom", 10)
-	top.add_child(top_margin)
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 16)
-	top_margin.add_child(row)
-	var brand := Label.new()
-	brand.text = "LAST LIGHT / AURORA"
-	brand.add_theme_color_override("font_color", MUSTARD)
-	brand.add_theme_font_size_override("font_size", 14)
-	row.add_child(brand)
-	_title = Label.new()
+	var view := get_viewport_rect().size
+	var margin := _margin()
+	# Goal card, top left.
+	_goal_card = UiDesign.glass_panel(Color.TRANSPARENT, 14)
+	_goal_card.name = "GoalCard"
+	_goal_card.position = Vector2(margin, margin)
+	# A container grows with its content but never shrinks on its own: refit when the text gets shorter.
+	_goal_card.minimum_size_changed.connect(func() -> void: _goal_card.reset_size.call_deferred())
+	var card_box := VBoxContainer.new()
+	card_box.add_theme_constant_override("separation", 4)
+	_goal_card.add_child(card_box)
+	_chapter_line = UiDesign.label("", "caption", "muted")
+	card_box.add_child(_chapter_line)
+	var goal_row := HBoxContainer.new()
+	goal_row.add_theme_constant_override("separation", 8)
+	card_box.add_child(goal_row)
+	_goal_icon = UiDesign.LineIcon.new("goal", UiDesign.colour("accent"))
+	_goal_icon.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	goal_row.add_child(_goal_icon)
+	_title = UiDesign.label("", "heading", "ivory")
 	_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_title.add_theme_color_override("font_color", IVORY)
-	_title.add_theme_font_size_override("font_size", 21)
-	row.add_child(_stack(_title))
-	_meta = Label.new()
-	_meta.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	_meta.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_meta.custom_minimum_size.x = 300
-	_meta.add_theme_color_override("font_color", MUTED)
-	_meta.add_theme_font_size_override("font_size", 11)
-	row.add_child(_stack(_meta))
-
-	_objective = Label.new()
-	_objective.position = Vector2(24, 108)
-	_objective.size = Vector2(370, 125)
-	_objective.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_objective.add_theme_color_override("font_color", CYAN)
-	_objective.add_theme_font_size_override("font_size", 14)
-	_objective.add_theme_color_override("font_outline_color", Color("#05060A"))
-	_objective.add_theme_constant_override("outline_size", 5)
-	_objective_scroll = ScrollContainer.new()
-	_objective_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	_objective_scroll.follow_focus = true
-	_objective_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
-	_objective_scroll.accessibility_name = "Current objective"
-	_objective.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_objective.position = Vector2.ZERO
-	_objective_scroll.add_child(_objective)
-	add_child(_objective_scroll)
-
-	var caption := _panel(Color(0.03, 0.05, 0.10, 0.95), 14, Color(0.26, 0.40, 0.62, 0.65))
-	caption.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
-	caption.offset_top = -190
-	caption.offset_bottom = -28
-	add_child(caption)
-	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 22)
-	margin.add_theme_constant_override("margin_right", 22)
-	margin.add_theme_constant_override("margin_top", 14)
-	margin.add_theme_constant_override("margin_bottom", 12)
-	caption.add_child(margin)
-	var caption_box := VBoxContainer.new()
-	caption_box.add_theme_constant_override("separation", 5)
-	margin.add_child(caption_box)
-	_caption_speaker = Label.new()
-	_caption_speaker.add_theme_color_override("font_color", MUSTARD)
-	_caption_speaker.add_theme_font_size_override("font_size", 13)
-	caption_box.add_child(_caption_speaker)
-	_caption_line = Label.new()
-	_caption_line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_caption_line.add_theme_color_override("font_color", IVORY)
-	_caption_line.add_theme_font_size_override("font_size", 20)
-	_caption_line.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	caption_box.add_child(_caption_line)
-	_next_line = _button("ACKNOWLEDGE LINE  ›")
-	_next_line.pressed.connect(_on_next_line)
-	caption_box.add_child(_next_line)
-
-	var target_panel := _panel(Color(0.05, 0.08, 0.14, 0.92), 14, Color(0.13, 0.72, 0.78, 0.55))
-	_target_panel = target_panel
-	target_panel.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
-	target_panel.offset_left = -464
-	target_panel.offset_right = -24
-	target_panel.offset_top = 110
-	target_panel.offset_bottom = -212
-	add_child(target_panel)
-	var target_margin := MarginContainer.new()
-	target_margin.add_theme_constant_override("margin_left", 18)
-	target_margin.add_theme_constant_override("margin_right", 18)
-	target_margin.add_theme_constant_override("margin_top", 18)
-	target_margin.add_theme_constant_override("margin_bottom", 18)
-	target_panel.add_child(target_margin)
-	var target_box := VBoxContainer.new()
-	target_box.add_theme_constant_override("separation", 8)
-	var operations_scroll := ScrollContainer.new()
-	_operations_scroll = operations_scroll
-	operations_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
-	operations_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	operations_scroll.follow_focus = true
-	target_margin.add_child(operations_scroll)
-	target_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	operations_scroll.add_child(target_box)
-	var target_title := Label.new()
-	target_title.text = "PHYSICAL OPERATIONS"
-	target_title.add_theme_color_override("font_color", CYAN)
-	target_title.add_theme_font_size_override("font_size", 14)
-	target_box.add_child(target_title)
-	_targets = VBoxContainer.new()
-	_targets.add_theme_constant_override("separation", 7)
-	_targets.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	target_box.add_child(_targets)
-	_status = Label.new()
-	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_status.add_theme_color_override("font_color", MUTED)
-	target_box.add_child(_status)
-	_advance = _button("ADVANCE SCENE  ›")
+	_title.accessibility_name = "Current goal"
+	goal_row.add_child(_title)
+	_why = UiDesign.label("", "body", "muted")
+	card_box.add_child(_why)
+	var what_now_key := UiDesign.label("%s · %s" % [String(_words.get("what_now_key", "H")), String(_words.get("what_now", "What now"))], "caption", "muted")
+	what_now_key.name = "WhatNowKey"
+	card_box.add_child(what_now_key)
+	_advance = UiDesign.button("%s · %s" % [String(_words.get("continue", "Continue")), String(_words.get("continue_key", "Enter"))], 40)
+	_advance.name = "Continue"
+	_advance.visible = false
+	_advance.disabled = true
 	_advance.pressed.connect(_on_advance_pressed)
-	target_box.add_child(_advance)
-	var actions := HFlowContainer.new()
-	actions.alignment = FlowContainer.ALIGNMENT_END
-	target_box.add_child(actions)
-	var journal := _button("JOURNAL")
-	journal.pressed.connect(_on_journal_pressed)
-	actions.add_child(journal)
-	var save := _button("SAVE")
-	save.pressed.connect(_on_save_pressed)
-	actions.add_child(save)
-	var exit := _button("TITLE")
-	exit.pressed.connect(_on_exit_pressed)
-	actions.add_child(exit)
-	var data_cards := _button("DATA CARDS")
-	data_cards.pressed.connect(func() -> void:
+	card_box.add_child(_advance)
+	add_child(_goal_card)
+	# World marker and the prompt on the object in reach.
+	_marker = Marker.new()
+	_marker.name = "GoalMarker"
+	_marker.visible = false
+	add_child(_marker)
+	_prompt = UiDesign.glass_panel(UiDesign.colour("accent"), 8)
+	_prompt.name = "Prompt"
+	_prompt.visible = false
+	var prompt_row := HBoxContainer.new()
+	prompt_row.add_theme_constant_override("separation", 8)
+	_prompt.add_child(prompt_row)
+	_prompt_key = UiDesign.label(String(UiDesign.tokens().get("keys", {}).get("interact", "E")), "body", "ink")
+	_prompt_key.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_prompt_key.custom_minimum_size = Vector2(28, 0)
+	var key_panel := PanelContainer.new()
+	var key_style := StyleBoxFlat.new()
+	key_style.bg_color = UiDesign.colour("accent")
+	key_style.set_corner_radius_all(6)
+	key_style.content_margin_left = 6
+	key_style.content_margin_right = 6
+	key_panel.add_theme_stylebox_override("panel", key_style)
+	key_panel.add_child(_prompt_key)
+	prompt_row.add_child(key_panel)
+	_prompt_label = UiDesign.label("", "body", "ivory")
+	_prompt_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	prompt_row.add_child(_prompt_label)
+	add_child(_prompt)
+	# Toast and station strip, top right.
+	_column = VBoxContainer.new()
+	_column.name = "TopRight"
+	_column.add_theme_constant_override("separation", 8)
+	_column.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_column)
+	_toast = UiDesign.glass_panel(Color.TRANSPARENT, 12)
+	_toast.name = "Toast"
+	_toast.visible = false
+	_status = UiDesign.label("", "body", "ivory")
+	_status.accessibility_name = "Message"
+	_toast.add_child(_status)
+	_column.add_child(_toast)
+	outpost = Outpost.new()
+	outpost.name = "OutpostStatus"
+	_column.add_child(outpost)
+	# Dialogue, bottom centre.
+	_dialogue_bar = UiDesign.glass_panel(Color.TRANSPARENT, 14)
+	_dialogue_bar.name = "Dialogue"
+	_dialogue_bar.visible = false
+	_dialogue_bar.mouse_filter = Control.MOUSE_FILTER_STOP
+	var dialogue_box := VBoxContainer.new()
+	dialogue_box.add_theme_constant_override("separation", 6)
+	_dialogue_bar.add_child(dialogue_box)
+	var speaker_row := HBoxContainer.new()
+	dialogue_box.add_child(speaker_row)
+	_caption_speaker = UiDesign.label("", "caption", "accent")
+	_caption_speaker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	speaker_row.add_child(_caption_speaker)
+	_caption_count = UiDesign.label("", "caption", "muted")
+	_caption_count.autowrap_mode = TextServer.AUTOWRAP_OFF
+	speaker_row.add_child(_caption_count)
+	_caption_line = UiDesign.label("", "body", "ivory")
+	_caption_line.set_meta("verbatim", true)  # canon lines stay word for word (STORY_FULL.md)
+	dialogue_box.add_child(_caption_line)
+	var dialogue_buttons := HBoxContainer.new()
+	dialogue_buttons.add_theme_constant_override("separation", 8)
+	dialogue_buttons.alignment = BoxContainer.ALIGNMENT_END
+	dialogue_box.add_child(dialogue_buttons)
+	_auto_button = UiDesign.button(String(_words.get("auto", "Auto")), 36)
+	_auto_button.name = "Auto"
+	_auto_button.toggle_mode = true
+	_auto_button.focus_mode = Control.FOCUS_NONE  # Space is Next's key; a clicked Auto must not take it
+	_auto_button.toggled.connect(_on_auto_toggled)
+	dialogue_buttons.add_child(_auto_button)
+	_next_line = UiDesign.button("%s · %s" % [String(_words.get("next_line", "Next")), String(_words.get("next_line_key", "Space"))], 36)
+	_next_line.name = "Next"
+	_next_line.focus_mode = Control.FOCUS_NONE  # Space presses it from anywhere
+	_next_line.pressed.connect(_on_next_line)
+	dialogue_buttons.add_child(_next_line)
+	add_child(_dialogue_bar)
+	# What now content (shown inside the panel layer on H).
+	_what_now_home = Control.new()
+	_what_now_home.name = "WhatNowHome"
+	_what_now_home.visible = false
+	_what_now_home.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_what_now_home)
+	_what_now = VBoxContainer.new()
+	_what_now.name = "WhatNow"
+	_what_now.add_theme_constant_override("separation", 10)
+	_what_now.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_what_now.set_meta("lla_keep", true)
+	_what_now.set_meta("lla_home", _what_now_home)
+	_what_now_home.add_child(_what_now)
+	_wn_goal = UiDesign.label("", "heading", "ivory")
+	_what_now.add_child(_wn_goal)
+	_wn_why = UiDesign.label("", "body", "muted")
+	_what_now.add_child(_wn_why)
+	_wn_where = _icon_line("place", "")
+	_what_now.add_child(_wn_where.get_parent())
+	_wn_hint = _icon_line("message", "")
+	_what_now.add_child(_wn_hint.get_parent())
+	var jobs_title := UiDesign.label(String(_words.get("jobs_here", "Jobs here")), "caption", "muted")
+	_what_now.add_child(jobs_title)
+	_targets = VBoxContainer.new()
+	_targets.name = "Jobs"
+	_targets.add_theme_constant_override("separation", 4)
+	_targets.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_what_now.add_child(_targets)
+	var tools := HFlowContainer.new()
+	tools.add_theme_constant_override("h_separation", 8)
+	tools.add_theme_constant_override("v_separation", 8)
+	_what_now.add_child(tools)
+	_last_result_button = UiDesign.button(String(_words.get("last_result", "Last result")))
+	_last_result_button.name = "LastResult"
+	_last_result_button.pressed.connect(func() -> void: panels.open_panel("outcome", _last_outcome if not _last_outcome.is_empty() else {"result": String(_words.get("no_result", "Nothing to show yet."))}))
+	tools.add_child(_last_result_button)
+	_data_cards_button = UiDesign.button(String(_words.get("data_cards", "Data cards")))
+	_data_cards_button.name = "DataCards"
+	_data_cards_button.pressed.connect(func() -> void:
 		var ids: Array = []
 		for puzzle_id in runtime.query().get("source_puzzle_ids", []):
 			for card in panels.science.cards_for_puzzle(puzzle_id):
@@ -242,46 +385,77 @@ func _build() -> void:
 					ids.append(card.source_id)
 		panels.open_panel("sources", {"ids": ids})
 	)
-	actions.add_child(data_cards)
-	var tools := HFlowContainer.new()
-	tools.add_theme_constant_override("separation", 6)
-	target_box.add_child(tools)
-	var decision := _button("DECISION REVIEW")
-	_decision_review = decision
-	decision.pressed.connect(func() -> void: panels.open_panel("puzzle"))
-	tools.add_child(decision)
-	decision.name = "DecisionReview"
-	var pause := _button("PAUSE")
-	pause.pressed.connect(func() -> void: panels.open_panel("pause"))
-	tools.add_child(pause)
-	var settings := _button("SETTINGS")
-	settings.pressed.connect(func() -> void: panels.open_panel("settings_accessibility"))
-	tools.add_child(settings)
-	_retry = _button("RETRY")
-	_retry.pressed.connect(func() -> void: runtime.retry_checkpoint())
+	tools.add_child(_data_cards_button)
+	_decision_review = UiDesign.button(String(_words.get("your_choice", "Your choice")))
+	_decision_review.name = "DecisionReview"
+	_decision_review.pressed.connect(func() -> void: panels.open_panel("puzzle"))
+	tools.add_child(_decision_review)
+	_retry = UiDesign.button(String(_words.get("retry", "Retry from the last checkpoint")))
+	_retry.name = "Retry"
+	_retry.pressed.connect(func() -> void:
+		panels.close_panel()
+		runtime.retry_checkpoint())
 	tools.add_child(_retry)
-	var outcome := _button("OUTCOME")
-	outcome.pressed.connect(func() -> void: panels.open_panel("outcome", _last_outcome if not _last_outcome.is_empty() else {"result": "Complete an operation to review its result."}))
-	tools.add_child(outcome)
-	var controls := Label.new()
-	_controls = controls
-	controls.text = "WASD move · Hold RMB to look · E use nearby\nEsc pause · Tab / arrows / Enter select controls"
-	controls.add_theme_color_override("font_outline_color", Color("#05060A"))
-	controls.add_theme_constant_override("outline_size", 5)
-	controls.position = Vector2(24, 248)
-	controls.add_theme_font_size_override("font_size", 13)
-	controls.add_theme_color_override("font_color", MUTED)
-	add_child(controls)
-	outpost = Outpost.new()
-	outpost.name = "OutpostStatus"
-	outpost.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	outpost.offset_left = 24
-	outpost.offset_right = -24
-	outpost.offset_top = 100
-	outpost.z_index = 70
-	add_child(outpost)
-	outpost.minimum_size_changed.connect(_layout_outpost.call_deferred)
+	# Debug overlay (F10): developer IDs never appear elsewhere.
+	_debug = UiDesign.label("", "caption", "muted")
+	_debug.name = "DebugOverlay"
+	_debug.visible = false
+	_debug.add_theme_color_override("font_outline_color", UiDesign.colour("ink"))
+	_debug.add_theme_constant_override("outline_size", 4)
+	add_child(_debug)
+	_layout()
 
+func _icon_line(kind: String, text: String) -> Label:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	var icon := UiDesign.LineIcon.new(kind, UiDesign.colour("accent"))
+	icon.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	row.add_child(icon)
+	var label := UiDesign.label(text, "body", "ivory")
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(label)
+	return label
+
+func _margin() -> int:
+	var view := get_viewport_rect().size
+	var grid := int(UiDesign.tokens().get("panel", {}).get("grid", 8))
+	var margin := UiDesign.px(float(UiDesign.tokens().get("panel", {}).get("safe_margin", 64)), view.y)
+	return maxi(grid, int(round(float(margin) / grid)) * grid)
+
+## Places every HUD element on the 8 px grid inside the safe margin.
+func _layout() -> void:
+	if _goal_card == null:
+		return
+	var view := get_viewport_rect().size
+	var margin := _margin()
+	var goal_width := minf(float(UiDesign.px(600, view.y)), view.x / 3.0 - margin - 8.0)
+	_goal_card.position = Vector2(margin, margin)
+	_goal_card.custom_minimum_size = Vector2(goal_width, 0)
+	_goal_card.size = Vector2(goal_width, 0)
+	var column_width := float(UiDesign.px(540, view.y))
+	_column.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	_column.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	_column.grow_vertical = Control.GROW_DIRECTION_END
+	_column.offset_left = -margin - column_width
+	_column.offset_right = -margin
+	_column.offset_top = margin
+	_column.offset_bottom = margin
+	var dialogue_width := float(UiDesign.px(1080, view.y))
+	_dialogue_bar.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
+	_dialogue_bar.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_dialogue_bar.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_dialogue_bar.offset_left = -dialogue_width * 0.5
+	_dialogue_bar.offset_right = dialogue_width * 0.5
+	_dialogue_bar.offset_bottom = -margin
+	_dialogue_bar.offset_top = -margin
+	_debug.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
+	_debug.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_debug.offset_left = margin
+	_debug.offset_bottom = -8
+	_debug.offset_top = -8
+	_debug.offset_right = margin + float(UiDesign.px(900, view.y))
+
+## Works out the one goal for the current scene state and rebuilds the jobs list.
 func _build_targets() -> void:
 	if _targets == null or runtime == null:
 		return
@@ -290,53 +464,200 @@ func _build_targets() -> void:
 		child.queue_free()
 	var gate: Dictionary = runtime.route.gate_status()
 	var complete := runtime.is_chapter_complete()
-	for raw_target in runtime.targets_for_current_scene():
+	var flags: Dictionary = gate.get("physical_flags", {})
+	var targets := runtime.targets_for_current_scene()
+	var current: Dictionary = {}
+	var fallback: Dictionary = {}
+	_done_ids = {}
+	for raw_target in targets:
 		if not raw_target is Dictionary:
 			continue
 		var target: Dictionary = raw_target
-		var node := runtime.physical_target(String(target.get("target_id", "")))
-		var label := String(node.get_meta("focus_label", "")) if node != null else "unavailable"
-		var button := _button("USE · " + String(target.get("focus_label", target.get("target_id", "operation"))) + "\nAT " + label)
-		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		button.disabled = complete or runtime.target_completed(target)
-		button.mouse_entered.connect(func() -> void:
-			_pointer_preview = true
-			show_target_forecast(String(target.target_id))
-		)
-		button.mouse_exited.connect(func() -> void:
-			_pointer_preview = false
-			_clear_unselected_forecast()
-		)
-		button.focus_entered.connect(func() -> void:
-			_focus_preview = true
-			show_target_forecast(String(target.target_id))
-		)
-		button.focus_exited.connect(func() -> void:
-			_focus_preview = false
-			_clear_unselected_forecast()
-		)
-		var target_id := String(target.get("target_id", ""))
-		if MissionTableScript.is_gate(target_id):
-			button.text = "PLAN AT MISSION TABLE · " + String(target.get("focus_label", target_id)) + "\nAT " + label
-			button.pressed.connect(func() -> void: open_mission_table(target_id))
-		else:
-			button.pressed.connect(func() -> void: runtime.perform_target(target_id))
-		_targets.add_child(button)
-	_advance.disabled = complete or not bool(gate.get("ready", false))
+		var id := String(target.get("target_id", ""))
+		var done := runtime.target_completed(target)
+		if done:
+			_done_ids[id] = true
+			continue
+		if fallback.is_empty():
+			fallback = target
+		var missing := false
+		for flag in target.get("required_flags", []):
+			if not bool(flags.get(flag, false)):
+				missing = true
+		if not missing and current.is_empty():
+			current = target
+	if current.is_empty():
+		current = fallback
+	for raw_target in targets:
+		if not raw_target is Dictionary:
+			continue
+		var target: Dictionary = raw_target
+		var id := String(target.get("target_id", ""))
+		var state := "later"
+		if _done_ids.has(id):
+			state = "done"
+		elif id == String(current.get("target_id", "")):
+			state = "now"
+		_targets.add_child(_job_row(target, state))
+	_goal_info = _goal_for_state(current, gate, complete)
+	_apply_goal()
 	_retry.disabled = complete or runtime.route.snapshot().get("retry_checkpoint", {}).is_empty()
-	if complete:
-		var chapter_number := str(int(String(runtime.query().get("chapter_id", "CH01")).trim_prefix("CH")))
-		_status.text = "CHAPTER %s COMPLETE · %s\nCheckpoint kept. Advance when the next chapter is ready." % [chapter_number, String(runtime.route.chapter_ready().get("ending", ""))]
-		_status.modulate = GREEN
-	elif bool(gate.get("ready", false)):
-		_status.text = "ALL OPERATIONS READY · advance when ready."
-		_status.modulate = GREEN
-	else:
-		_status.text = "%d operations remain. Complete the listed steps, then advance." % gate.get("missing", []).size()
-		_status.modulate = MUTED
+	_update_debug(gate)
 	if panels != null and not panels.active_panel().is_empty():
 		_set_modal_buttons(true)
 	apply_accessibility()
+
+func _job_row(target: Dictionary, state: String) -> Control:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 10)
+	var word := String(_words.get("job_" + state, state.capitalize()))
+	var mark := String({"done": "✓", "now": "▸", "later": "·"}.get(state, "·"))
+	var state_label := UiDesign.label("%s %s" % [mark, word], "caption", "muted" if state != "now" else "accent")
+	state_label.custom_minimum_size.x = 72
+	row.add_child(state_label)
+	var text := UiDesign.label(_goal_text(target), "body", "ivory" if state != "done" else "muted")
+	text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(text)
+	return row
+
+## The authored text for one job, or a plain-word fallback for later chapters.
+func _target_text(target: Dictionary) -> Dictionary:
+	var authored = UiDesign.text().get("targets", {}).get(String(target.get("target_id", "")), null)
+	if authored is Dictionary:
+		return authored
+	var label := UiDesign.player_words(String(target.get("focus_label", "")).get_slice(" · ", 0))  # drop trailing codes such as "E1/A1"
+	return {"goal": String(_words.get("fallback_goal", "Do the next job: %s")) % label.to_lower(), "why": String(_words.get("fallback_why", "")), "prompt": label, "result": "", "hint": ""}
+
+func _goal_text(target: Dictionary) -> String:
+	return String(_target_text(target).get("goal", ""))
+
+func _goal_for_state(current: Dictionary, gate: Dictionary, complete: bool) -> Dictionary:
+	var info := {"goal": "", "why": "", "hint": "", "target_id": "", "place": "", "ready": false, "complete": complete}
+	if complete:
+		var done: Dictionary = _words.get("chapter_complete", {})
+		info.goal = String(done.get("goal", "Chapter complete"))
+		info.why = String(done.get("why", ""))
+		return info
+	if not current.is_empty():
+		var text := _target_text(current)
+		info.goal = String(text.get("goal", ""))
+		info.why = String(text.get("why", ""))
+		info.hint = String(text.get("hint", ""))
+		info.target_id = String(current.get("target_id", ""))
+		var node := runtime.physical_target(info.target_id)
+		info.place = String(node.get_meta("focus_label", "")) if node != null else ""
+		return info
+	var scene_text: Dictionary = UiDesign.text().get("scenes", {}).get(_scene_id, {})
+	if bool(gate.get("ready", false)):
+		info.ready = true
+		var next: Dictionary = scene_text.get("next", {})
+		info.goal = String(next.get("goal", String(_words.get("continue", "Continue"))))
+		info.why = String(next.get("why", ""))
+		return info
+	info.goal = "Finish the jobs here"
+	return info
+
+func _apply_goal() -> void:
+	var changed := _title.text != String(_goal_info.get("goal", ""))
+	_title.text = String(_goal_info.get("goal", ""))
+	_why.text = String(_goal_info.get("why", ""))
+	_why.visible = not _why.text.is_empty()
+	_chapter_line.text = _chapter_text()
+	var complete := bool(_goal_info.get("complete", false))
+	var ready := bool(_goal_info.get("ready", false))
+	_advance.visible = ready and not complete
+	_advance.disabled = complete or not ready
+	_marker_node = runtime.physical_target(String(_goal_info.get("target_id", ""))) if not String(_goal_info.get("target_id", "")).is_empty() else null
+	_wn_goal.text = _title.text
+	_wn_why.text = _why.text
+	_wn_why.visible = _why.visible
+	_wn_hint.text = String(_goal_info.get("hint", ""))
+	_wn_hint.get_parent().visible = not _wn_hint.text.is_empty()
+	_update_where()
+	if changed and not _title.text.is_empty():
+		_pulse_goal()
+
+func _chapter_text() -> String:
+	var chapter_id := String(runtime.query().get("chapter_id", "CH01"))
+	var number := int(chapter_id.trim_prefix("CH"))
+	var parts: Array[String] = [String(_words.get("chapter_label", "Chapter %d")) % number]
+	var name := String(_words.get("chapter_names", {}).get(chapter_id, ""))
+	if not name.is_empty():
+		parts.append(name)
+	var scene_text: Dictionary = UiDesign.text().get("scenes", {}).get(_scene_id, {})
+	var date := String(scene_text.get("date", ""))
+	if date.is_empty():
+		var scene := runtime.current_scene_data()
+		date = UiDesign.player_words(String(scene.get("storyTime", scene.get("story_time", ""))))
+	if not date.is_empty():
+		parts.append(date)
+	return " · ".join(parts)
+
+func _update_where() -> void:
+	var place := String(_goal_info.get("place", ""))
+	if place.is_empty():
+		_wn_where.get_parent().visible = false
+		return
+	_wn_where.get_parent().visible = true
+	var distance := _distance_to(_marker_node)
+	_wn_where.text = "%s · %s" % [place, UiDesign.distance_text(distance)] if distance >= 0.0 else place
+
+func _distance_to(node: Node3D) -> float:
+	if node == null or runtime == null:
+		return -1.0
+	var player: Node3D = runtime.get("_player") as Node3D
+	if player == null:
+		return -1.0
+	var a := player.global_position
+	var b := node.global_position
+	return Vector2(a.x, a.z).distance_to(Vector2(b.x, b.z))
+
+## The goal of the job whose flag a "do this first" reason names.
+func _goal_for_flag(flag: String) -> String:
+	for raw_target in runtime.targets_for_current_scene():
+		if raw_target is Dictionary and String(raw_target.get("physical_flag", "")) == flag:
+			var goal := _goal_text(raw_target)
+			return goal[0].to_lower() + goal.substr(1) if goal.length() > 1 else goal
+	return UiDesign.player_words(flag.replace("_", " "))
+
+func _result_line(target_id: String) -> String:
+	var authored = UiDesign.text().get("targets", {}).get(target_id, {})
+	var line := String(authored.get("result", "")) if authored is Dictionary else ""
+	if line.is_empty():
+		for raw_target in runtime.targets_for_current_scene():
+			if raw_target is Dictionary and String(raw_target.get("target_id", "")) == target_id:
+				line = "Done: " + _goal_text(raw_target)
+	return line
+
+func _pulse_goal() -> void:
+	if runtime == null or UiDesign.reduced_motion(runtime.query().get("accessibility", {})) or not is_inside_tree():
+		return
+	if _pulse != null and _pulse.is_valid():
+		_pulse.kill()
+	_goal_card.self_modulate = Color.WHITE
+	_pulse = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE).set_loops(int(UiDesign.tokens().get("motion", {}).get("pulse_count", 2)))
+	_pulse.tween_property(_goal_card, "self_modulate", Color(1.18, 1.18, 1.18), 0.22)  # the dialogue dim lives on modulate.a
+	_pulse.tween_property(_goal_card, "self_modulate", Color.WHITE, 0.26)
+
+func _update_debug(gate: Dictionary) -> void:
+	if not OS.is_debug_build():
+		_debug.visible = false
+		return
+	var scene := runtime.current_scene_data()
+	var query := runtime.query()
+	_debug.text = "%s · %s · %s · %s · rev %d · missing: %s · goal: %s" % [
+		String(_words.get("debug_hint", "Developer view")), _scene_id, String(scene.get("location", "")), String(scene.get("storyTime", scene.get("story_time", ""))),
+		int(query.get("state_revision", 0)), ", ".join(gate.get("missing", []).map(func(f): return String(f))), String(_goal_info.get("target_id", "-"))]
+	_debug.visible = _debug_on
+
+## Fills the What now panel body with the HUD's own content (kept, not freed).
+func _build_what_now(body: VBoxContainer) -> void:
+	_update_where()
+	_last_result_button.visible = true
+	_data_cards_button.visible = not runtime.query().get("source_puzzle_ids", []).is_empty()
+	if _what_now.get_parent() != null:
+		_what_now.get_parent().remove_child(_what_now)
+	body.add_child(_what_now)
 
 ## Opens the P-02 Mission Table for one shift gate. Reading and planning pause
 ## the expedition; the physical commit happens only after the table closes.
@@ -361,7 +682,7 @@ func _on_mission_table_commit(target_id: String, plan: Dictionary) -> void:
 	if report.is_empty():
 		return
 	var stars: Dictionary = report.get("stars", {})
-	var star_line := "%s Crew exposure ≤ 3 · %s No blackout · %s Alo alive" % ["★" if stars.get("safe_exposure", false) else "☆", "★" if stars.get("no_blackout", false) else "☆", "★" if stars.get("alo_alive", false) else "☆"]
+	var star_line := "%s Crew dose 3 or under · %s No blackout · %s Alo alive" % ["★" if stars.get("safe_exposure", false) else "☆", "★" if stars.get("no_blackout", false) else "☆", "★" if stars.get("alo_alive", false) else "☆"]
 	_last_outcome = {"result": "%s · %s" % [String(report.get("title", "")), String(report.get("summary", ""))], "changes": outcome.get("deltas", []), "notes": [star_line] + outcome.get("warnings", []) + report.get("unsafe_predicates", [])}
 	show_status("%s · %s\n%s" % [String(report.get("title", "")), String(report.get("summary", "")), star_line])
 	panels.open_panel("outcome", _last_outcome)
@@ -371,26 +692,37 @@ func _render_caption() -> void:
 		return
 	var lines := runtime.current_dialogue()
 	runtime.present_dialogue(lines[_dialogue_index] if _dialogue_index < lines.size() else {})
-	if lines.is_empty():
-		_caption_speaker.text = "AURORA / TRAINING SCENARIO"
-		_caption_line.text = "Complete the physical operation; dialogue acknowledgement never completes a gate."
+	if lines.is_empty() or _dialogue_index >= lines.size():
 		_next_line.disabled = true
-		return
-	if _dialogue_index >= lines.size():
-		_caption_speaker.text = "AURORA"
-		_caption_line.text = "All scene dialogue acknowledged."
-		_next_line.text = "DIALOGUE COMPLETE"
-		_next_line.disabled = true
+		_next_line.text = String(_words.get("next_line", "Next"))
+		_caption_count.text = ""
+		_set_dialogue_visible(false)
 		return
 	_dialogue_index = clampi(_dialogue_index, 0, lines.size() - 1)
 	var line: Dictionary = lines[_dialogue_index]
-	_caption_speaker.text = "%s  ·  %s" % [String(line.get("speaker", "CREW")), String(line.get("origin_label", line.get("delivery", "LOCAL RADIO")))]
+	var speaker := String(line.get("speaker", "Crew"))
+	var origins: Dictionary = UiDesign.text().get("dialogue", {}).get("origins", {})
+	var origin := String(origins.get(String(line.get("origin_label", line.get("delivery", ""))), ""))
+	_caption_speaker.text = speaker + (" · " + origin if not origin.is_empty() else "")
+	var tone := String(UiDesign.text().get("dialogue", {}).get("speaker_colours", {}).get(speaker, "accent"))
+	_caption_speaker.add_theme_color_override("font_color", UiDesign.colour(tone, UiDesign.colour("accent")))
 	_caption_line.text = String(line.get("text", line.get("line", "")))
+	_caption_count.text = "%d of %d" % [_dialogue_index + 1, lines.size()]
 	_next_line.disabled = false
-	_next_line.text = "ACKNOWLEDGE LINE  ·  %d/%d" % [_dialogue_index + 1, lines.size()]
+	_next_line.text = "%s · %s" % [String(_words.get("next_line", "Next")), String(_words.get("next_line_key", "Space"))]
+	var motion: Dictionary = UiDesign.tokens().get("motion", {})
+	_auto_timer = float(motion.get("auto_dialogue_base_seconds", 2.2)) + float(motion.get("auto_dialogue_seconds_per_character", 0.05)) * _caption_line.text.length()
+	_set_dialogue_visible(true)
+
+func _set_dialogue_visible(shown: bool) -> void:
+	if _chrome_hidden and shown:
+		return
+	if shown != bool(_dialogue_bar.get_meta("lla_shown", _dialogue_bar.visible)):  # mid-fade, `visible` is still the old state
+		_fade(_dialogue_bar, shown)
+	_goal_card.modulate.a = 0.6 if shown else 1.0
 
 ## Resumes the caption where the saved acknowledgements stopped, so a reload
-## does not replay lines the player already acknowledged.
+## does not replay lines the player already read.
 func _first_unacknowledged_line() -> int:
 	var acknowledged: Array = runtime.route.gate_status().get("dialogue_acknowledged", [])
 	var lines := runtime.current_dialogue()
@@ -409,6 +741,10 @@ func _on_next_line() -> void:
 	if bool(result.get("accepted", false)):
 		_dialogue_index = _first_unacknowledged_line()
 	_render_caption()
+
+func _on_auto_toggled(pressed: bool) -> void:
+	_auto_on = pressed
+	_auto_button.text = String(_words.get("auto_on", "Auto on")) if pressed else String(_words.get("auto", "Auto"))
 
 func _on_advance_pressed() -> void:
 	if runtime != null:
@@ -455,52 +791,47 @@ func _refresh_query() -> void:
 		var query := runtime.query()
 		panels.bind_query(query)
 		if outpost != null:
+			outpost.set_settings(query.get("accessibility", {}))
 			outpost.bind_query(query, _forecast)
 
+## Applies captions and large text to every HUD element (panels do their own).
 func apply_accessibility() -> void:
 	if runtime == null:
 		return
 	var settings: Dictionary = runtime.query().get("accessibility", {})
-	_caption_speaker.visible = bool(settings.get("captions", true))
-	_caption_line.visible = bool(settings.get("captions", true))
-	var large := bool(settings.get("large_text", false))
-	_scale_text(self, 1.5 if large else 1.0)
-	_layout_outpost()
-
-func _layout_outpost() -> void:
-	if outpost == null or runtime == null:
-		return
-	var large := bool(runtime.query().get("accessibility", {}).get("large_text", false))
-	outpost.offset_bottom = 254 if large else 210
-	var below := maxf(outpost.offset_bottom, outpost.get_global_rect().end.y) + 16
-	_objective_scroll.position = Vector2(24, below)
-	_objective_scroll.size = Vector2(740, 125)
-	_controls.position = Vector2(24, below + 128)
-	_target_panel.offset_top = below
-	if panels != null:
-		panels.set_content_top(below)
-
-func _scale_text(node: Node, scale_factor: float) -> void:
-	for child in node.get_children():
-		if child == panels or child == mission_table:
-			continue
-		if child is Control:
-			if not child.has_meta("lla_base_font_size"):
-				child.set_meta("lla_base_font_size", child.get_theme_font_size("font_size"))
-			child.add_theme_font_size_override("font_size", int(round(float(child.get_meta("lla_base_font_size")) * scale_factor)))
-		_scale_text(child, scale_factor)
+	var captions := bool(settings.get("captions", true))
+	_caption_speaker.visible = captions
+	_caption_line.visible = captions
+	_caption_count.visible = captions
+	var scale := 1.5 if bool(settings.get("large_text", false)) else 1.0
+	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table])
+	if outpost != null:
+		outpost.set_settings(settings)
 
 func _on_panel_opened(_panel_id: String) -> void:
-	_operations_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_NONE
-	_objective_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_NONE
 	runtime.set_ui_paused(true)
 	_set_modal_buttons(true)
+	_set_chrome_hidden(true)
+	_ui_sound("SFX_UI_CONFIRM")
 
 func _on_panel_closed(_panel_id: String) -> void:
-	_operations_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
-	_objective_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
 	runtime.set_ui_paused(false)
 	_set_modal_buttons(false)
+	_set_chrome_hidden(false)
+	_render_caption()
+
+## Hides the flat HUD while a panel or instrument has the screen (doc 25 §2.2).
+func _set_chrome_hidden(hidden: bool) -> void:
+	_chrome_hidden = hidden
+	_goal_card.visible = not hidden
+	_marker.visible = _marker.visible and not hidden
+	_prompt.visible = _prompt.visible and not hidden
+	if hidden:
+		_dialogue_bar.visible = false
+		_toast.visible = false
+		outpost.hide_now()
+	elif _toast_timer > 0.0:
+		_fade(_toast, true)
 
 func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 	if not disabled:
@@ -510,7 +841,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_modal_button_states.clear()
 		return
 	for child in node.get_children():
-		if child == panels or child == mission_table:
+		if child == panels or child == mission_table or child == _what_now_home:
 			continue
 		if child is BaseButton:
 			if not _modal_button_states.has(child):
@@ -519,63 +850,139 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_set_modal_buttons(true, child)
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
-		if panels != null and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()):
-			panels.open_panel("pause")
+	if not (event is InputEventKey and event.pressed and not event.echo):
+		return
+	var key := (event as InputEventKey).physical_keycode
+	var free := panels != null and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open())
+	if key == KEY_ESCAPE and free:
+		panels.open_panel("pause")
+		get_viewport().set_input_as_handled()
+	elif key == KEY_H:
+		if free:
+			panels.open_panel("what_now")
 			get_viewport().set_input_as_handled()
+		elif panels != null and panels.active_panel() == "what_now":
+			panels.close_panel()
+			get_viewport().set_input_as_handled()
+	elif (key == KEY_ENTER or key == KEY_KP_ENTER) and free and _advance.visible and not _advance.disabled:
+		_on_advance_pressed()
+		get_viewport().set_input_as_handled()
+	elif key == KEY_SPACE and free and _dialogue_bar.visible and not _next_line.disabled:
+		_on_next_line()
+		get_viewport().set_input_as_handled()
+	elif key == KEY_F10 and OS.is_debug_build():
+		_debug_on = not _debug_on
+		_debug.visible = _debug_on
+		get_viewport().set_input_as_handled()
 
-func _stack(control: Control) -> Control:
-	var box := VBoxContainer.new()
-	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	box.add_child(control)
-	return box
+func _process(delta: float) -> void:
+	if runtime == null or runtime.loading:
+		return
+	if _toast_timer > 0.0 and _toast.visible:
+		_toast_timer -= delta
+		if _toast_timer <= 0.0:
+			_fade(_toast, false)
+	if _auto_on and _dialogue_bar.visible and not _next_line.disabled and not _chrome_hidden and not runtime.is_cutscene_active():
+		_auto_timer -= delta
+		if _auto_timer <= 0.0:
+			_on_next_line()
+	_update_world_overlay()
 
-func _button(text: String) -> Button:
-	var button := Button.new()
-	button.text = text
-	button.custom_minimum_size = Vector2(0, 38)
-	button.add_theme_font_size_override("font_size", 14)
-	button.focus_mode = Control.FOCUS_ALL
-	button.add_theme_color_override("font_color", IVORY)
-	button.add_theme_color_override("font_hover_color", Color("#05060A"))
-	button.add_theme_stylebox_override("normal", _button_style(Color("#1F2A44"), IVORY, false))
-	button.add_theme_stylebox_override("hover", _button_style(MUSTARD, Color("#05060A"), true))
-	button.add_theme_stylebox_override("focus", _button_style(Color("#243B5A"), IVORY, true))
-	return button
+## Projects the goal marker (with distance) and the prompt on the object in reach.
+func _update_world_overlay() -> void:
+	if _chrome_hidden or runtime.is_cutscene_active():
+		_marker.visible = false
+		_prompt.visible = false
+		return
+	var camera := get_viewport().get_camera_3d()
+	if camera == null:
+		_marker.visible = false
+		_prompt.visible = false
+		return
+	var view := get_viewport_rect().size
+	var margin := float(_margin())
+	var marker_tokens: Dictionary = UiDesign.tokens().get("world_marker", {})
+	var lift := Vector3.UP * float(marker_tokens.get("height_m", 1.35))
+	var nearby_node: Node3D = runtime.physical_target(_nearby_id) if not _nearby_id.is_empty() else null
+	if nearby_node != null:
+		_prompt_label.text = _prompt_text(_nearby_id)
+		var point := _project(camera, nearby_node.global_position + lift * 0.6, view, margin)
+		_prompt.size = Vector2.ZERO
+		_prompt.position = (point - Vector2(_prompt.size.x * 0.5, -8)).clamp(Vector2(margin, margin), view - _prompt.size - Vector2(margin, margin))
+		_clear_of_cards(_prompt)
+		_prompt.visible = true
+	else:
+		_prompt.visible = false
+	if _marker_node == null or not is_instance_valid(_marker_node) or (nearby_node != null and nearby_node == _marker_node):
+		_marker.visible = false
+		return
+	var distance := _distance_to(_marker_node)
+	var fade := float(marker_tokens.get("fade_within_m", 3.0))
+	var alpha := clampf((distance - fade) / 1.5, 0.35, 1.0)
+	var behind := camera.is_position_behind(_marker_node.global_position + lift)
+	var point := _project(camera, _marker_node.global_position + lift, view, margin)
+	var inside := not behind and point.x > margin and point.x < view.x - margin and point.y > margin and point.y < view.y - margin
+	_marker.dimmed = not inside
+	_marker.set_distance(UiDesign.distance_text(distance))
+	_marker.position = point - _marker.size * Vector2(0.5, 0.25)
+	_clear_of_cards(_marker)
+	_marker.modulate.a = alpha if inside else 0.6
+	_marker.visible = true
+	_marker.queue_redraw()
+	if panels != null and panels.active_panel() == "what_now":
+		_update_where()
 
-func _button_style(fill: Color, text_color: Color, highlighted: bool) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = fill
-	style.corner_radius_top_left = 7
-	style.corner_radius_top_right = 7
-	style.corner_radius_bottom_left = 7
-	style.corner_radius_bottom_right = 7
-	style.content_margin_left = 10
-	style.content_margin_right = 10
-	if highlighted:
-		style.border_width_left = 2
-		style.border_width_top = 2
-		style.border_width_right = 2
-		style.border_width_bottom = 2
-		style.border_color = MUSTARD
-	return style
+## Keeps a projected marker or prompt from drawing over the goal card or the
+## top-right column (large text makes both taller): it drops just below them.
+func _clear_of_cards(control: Control) -> void:
+	for card: Control in [_goal_card, _column]:
+		if card.visible and card.get_rect().intersects(Rect2(control.position, control.size)):
+			control.position.y = card.get_rect().end.y + 8.0
 
-func _panel(color: Color, radius: int, border: Color) -> PanelContainer:
-	var panel := PanelContainer.new()
-	var style := StyleBoxFlat.new()
-	style.bg_color = color
-	style.corner_radius_top_left = radius
-	style.corner_radius_top_right = radius
-	style.corner_radius_bottom_left = radius
-	style.corner_radius_bottom_right = radius
-	style.border_width_left = 1
-	style.border_width_top = 1
-	style.border_width_right = 1
-	style.border_width_bottom = 1
-	style.border_color = border
-	panel.add_theme_stylebox_override("panel", style)
-	return panel
+func _project(camera: Camera3D, world_point: Vector3, view: Vector2, margin: float) -> Vector2:
+	var point := camera.unproject_position(world_point)
+	if camera.is_position_behind(world_point):
+		point = Vector2(view.x - point.x, view.y - margin)
+	return point.clamp(Vector2(margin, margin), view - Vector2(margin, margin))
 
+func _prompt_text(target_id: String) -> String:
+	for raw_target in runtime.targets_for_current_scene():
+		if raw_target is Dictionary and String(raw_target.get("target_id", "")) == target_id:
+			return String(_target_text(raw_target).get("prompt", ""))
+	return ""
+
+func _fade(control: Control, shown: bool) -> void:
+	var settings: Dictionary = runtime.query().get("accessibility", {}) if runtime != null else {}
+	var seconds := UiDesign.motion_seconds("show_seconds" if shown else "hide_seconds", settings)
+	if seconds <= 0.0 or not is_inside_tree():
+		control.visible = shown
+		control.modulate.a = 1.0
+		control.set_meta("lla_shown", shown)
+		return
+	var previous = control.get_meta("lla_fade", null)
+	if previous is Tween and (previous as Tween).is_valid():
+		(previous as Tween).kill()  # a late hide callback must not hide what was just shown
+	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	control.set_meta("lla_fade", tween)
+	control.set_meta("lla_shown", shown)
+	if shown:
+		control.modulate.a = 0.0
+		control.visible = true
+		tween.tween_property(control, "modulate:a", 1.0, seconds)
+	else:
+		tween.tween_property(control, "modulate:a", 0.0, seconds)
+		tween.tween_callback(func() -> void:
+			control.visible = false
+			control.modulate.a = 1.0)
+
+func _ui_sound(sfx_id: String) -> void:
+	if runtime == null or runtime.audio == null:
+		return
+	var audio = runtime.audio
+	if audio.runtime != null and audio.has_method("_play_oneshot"):
+		audio._play_oneshot(audio.runtime.sfx_plan(sfx_id))
+
+## Forecast of one job for the station strip ("Battery 14 → 15 if you do this").
 func show_target_forecast(target_id: String, source: String = "ui") -> void:
 	if runtime == null or target_id.is_empty():
 		return
@@ -586,9 +993,11 @@ func show_target_forecast(target_id: String, source: String = "ui") -> void:
 	_forecast_source = source
 	_forecast = runtime.forecast_target(target_id)
 	outpost.bind_query(runtime.query(), _forecast)
-	outpost.tooltip_text = "Forecast of the selected operation. Live resources stay unchanged until you confirm." if bool(_forecast.get("accepted", false)) else String(_forecast.get("reason", "Complete the preceding operations to see this forecast."))
+	outpost.tooltip_text = "What this job would change. Nothing changes until you do it." if bool(_forecast.get("accepted", false)) else UiDesign.player_words(String(_forecast.get("reason", "Do the earlier jobs first to see this forecast.")))
 
+## Called every physics frame by the campaign with the job in reach (or "").
 func show_nearby_forecast(target_id: String) -> void:
+	_nearby_id = target_id
 	if _pointer_preview or _focus_preview:
 		return
 	if not target_id.is_empty():

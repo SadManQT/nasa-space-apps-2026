@@ -47,14 +47,14 @@ func _run() -> void:
 	panels.bind_query({"source_puzzle_ids": ["P-02"], "outcome": {"reason": "Recorded result"}})
 	panels.set_accessibility({"large_text": true})
 	panels.open_panel("journal_discovery")
-	_check(_button(panels, "SOURCES · ALL DATASETS") != null, "Journal has a Sources entry")
+	_check(_button(panels, "Sources · all data cards") != null, "Journal has a Sources entry")
 	panels.open_panel("outcome")
-	_check(_button(panels, "DATA CARDS · EVIDENCE BEHIND THESE NUMBERS") != null, "debrief exposes the same source cards")
+	_check(_button(panels, "Data cards · the evidence behind these numbers") != null, "debrief exposes the same source cards")
 	panels.open_panel("data_card", {"source_id": "lro_mazarico_2011_illumination"})
 	await process_frame
 	await process_frame
 	_check(root.get_visible_rect().encloses(panels._panel.get_global_rect()), "large-text Data Card shell fits 1280x720")
-	_check(_text(panels).contains("WHAT THIS MEANS FOR AURORA") and _text(panels).contains("WHAT THE GAME COMPUTED") and _text(panels).contains("ntrs.nasa.gov"), "card includes explanation, computations and citation")
+	_check(_text(panels).contains("What this means for Aurora") and _text(panels).contains("What the game computed") and _text(panels).contains("ntrs.nasa.gov"), "card includes explanation, computations and citation")
 	var cancel := InputEventAction.new()
 	cancel.action = "ui_cancel"
 	cancel.pressed = true
@@ -76,12 +76,12 @@ func _run() -> void:
 	root.add_child(campaign)
 	await campaign.wait_loading()   # the campaign now builds in stages behind the loading card (perf round 3)
 	var before: Dictionary = campaign.director.snapshot()
-	_button(campaign.hud, "DATA CARDS").pressed.emit()
+	_button(campaign.hud, "Data cards").pressed.emit()
 	_check(campaign.hud.panels.active_panel() == "sources" and campaign.director.query().paused, "production Data Cards button opens a paused source list")
 	campaign.hud.panels.open_panel("data_card", {"source_id": "fast_plants_lifecycle"})
 	campaign.hud.panels.close_panel()
 	_check(campaign.director.snapshot() == before, "reading and closing cards preserves the full authoritative state")
-	_button(campaign.hud, "OUTCOME").pressed.emit()
+	_button(campaign.hud, "Last result").pressed.emit()
 	_check(campaign.hud.panels.active_panel() == "outcome", "production HUD exposes the debrief source entry")
 	campaign.hud.panels.close_panel()
 	if OS.get_cmdline_user_args().has("--evidence"):

@@ -91,7 +91,7 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 		mesh_box(visuals, "WallSeam", Vector3(x, height * 0.5, -depth * 0.5 + 0.11), Vector3(0.035, height, 0.025), Color("#263343"))
 	mesh_box(visuals, "FloorGuide", Vector3(0, 0.015, -depth * 0.5 + 0.25), Vector3(width - 0.4, 0.02, 0.06), accent, true)
 	var title := Label3D.new()
-	title.text = String(layout.room_id) + " / " + String(room.get_meta("room_name", "AURORA")).to_upper()
+	title.text = String(room.get_meta("room_name", "Aurora"))  # a wall sign in player words; no location IDs (doc 25 §1)
 	title.position = Vector3(0, height - 0.65, -depth * 0.5 + 0.18)
 	title.font_size = 52
 	title.pixel_size = 0.005

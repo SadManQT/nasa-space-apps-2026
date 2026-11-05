@@ -1,0 +1,64 @@
+{
+ "schema_version": 1,
+ "source": "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md section 2.1 (design system) and production/ART_BIBLE.md section 3 (palette). Sizes are for 1080p; the HUD scales them by viewport height.",
+ "reference_height": 1080,
+ "type": {
+  "title": 40,
+  "heading": 28,
+  "body": 20,
+  "caption": 16,
+  "minimum": 18,
+  "large_text_scale": 1.5,
+  "max_line_characters": 60
+ },
+ "colour": {
+  "ink": "#05060A",
+  "navy": "#1F2A44",
+  "ivory": "#ECEEF0",
+  "muted": "#A8B4C8",
+  "accent": "#F2C230",
+  "caution": "#F2A33A",
+  "danger": "#E56B6F",
+  "good": "#68C78B",
+  "glass": "#0C1424CC",
+  "glass_edge": "#ECEEF02E",
+  "scrim": "#05060ABD",
+  "kai": "#F26B21",
+  "amara": "#20B8C9",
+  "mei": "#4CAF50",
+  "rafi": "#8E5CC2",
+  "ferreira": "#B8A06A"
+ },
+ "panel": {
+  "radius": 12,
+  "edge_width": 1,
+  "padding": 16,
+  "grid": 8,
+  "safe_margin": 64,
+  "max_layers": 2
+ },
+ "motion": {
+  "show_seconds": 0.2,
+  "hide_seconds": 0.15,
+  "count_seconds": 0.35,
+  "pulse_count": 2,
+  "toast_seconds": 5.0,
+  "strip_seconds": 6.0,
+  "auto_dialogue_base_seconds": 2.2,
+  "auto_dialogue_seconds_per_character": 0.05
+ },
+ "world_marker": {
+  "fade_within_m": 3.0,
+  "height_m": 1.35,
+  "size_px": 14
+ },
+ "keys": {
+  "interact": "E",
+  "what_now": "H",
+  "pause": "Esc",
+  "continue": "Enter",
+  "next_line": "Space",
+  "auto_dialogue": "A",
+  "debug_overlay": "F10"
+ }
+}

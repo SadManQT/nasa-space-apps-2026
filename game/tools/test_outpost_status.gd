@@ -32,10 +32,22 @@ func _run() -> void:
 	_check(hud.outpost.meter_view("life").status == "OK", "separate ice-water shielding does not falsely report four borrowed garden units")
 	hud.outpost.bind_query(runtime.query())
 	var original: Dictionary = runtime.director.snapshot()
-	_check(hud.outpost._cards.size() == 4, "all four competing demands have visible meters")
-	_check(hud.outpost.meter_view("power").current_text.contains("14/20"), "power reads the authoritative E and capacity")
-	_check(hud.outpost.meter_view("life").current_text.contains("water"), "life support labels the actual wall-water allocation")
+	_check(hud.outpost._cards.size() == 4, "all four competing demands have a strip group")
+	_check(hud.outpost.meter_view("power").current_text.contains("Battery 14 of 20"), "power reads the authoritative E and capacity in player words (doc 25 §1.1)")
+	_check(hud.outpost.meter_view("life").current_text.contains("Water in the shelter wall"), "life support labels the actual wall-water allocation")
 	_check(hud.outpost.meter_view("food").accessibility_text.contains("crew-days"), "rations expose their unit to assistive technology")
+	var seen: Dictionary = runtime.query()
+	hud.outpost.hide_now()
+	hud.outpost.bind_query(seen)
+	hud.outpost._baseline = OutpostStatus._resources(seen)
+	var spent: Dictionary = seen.duplicate(true)
+	spent.resources.E = float(seen.resources.E) - 2.0
+	hud.outpost.bind_query(spent)
+	hud.outpost.bind_query(spent)  # the next frame's refresh changes nothing
+	_check(hud.outpost._cards["power"].panel.visible and hud.outpost._timer > 1.0, "a change stays on the strip when the next refresh changes nothing")
+	hud.outpost.hide_now()
+	hud.outpost._baseline = OutpostStatus._resources(seen)
+	hud.outpost.bind_query(seen)
 	var preview: Dictionary = runtime.forecast_target("commission_route")
 	_check(preview.accepted and runtime.director.snapshot() == original, "forecast runs the real route without changing live state")
 	for large in [false, true]:
@@ -46,19 +58,22 @@ func _run() -> void:
 		hud.show_target_forecast("commission_route")
 		await process_frame
 		await process_frame
+		await create_timer(0.4).timeout  # the strip fades in
 		for id in ["power", "life", "shielding", "food"]:
 			var card: Dictionary = hud.outpost._cards[id]
-			_check(root.get_visible_rect().encloses(card.panel.get_global_rect()), "meter fits viewport, large=%s: %s" % [large, id])
-			_check(card.panel.get_global_rect().encloses(card.forecast.get_global_rect()), "forecast fits its card, large=%s: %s" % [large, id])
-			_check(card.values.get_line_count() <= 2 and card.forecast.get_line_count() <= 2, "readout wraps without hiding numeric text: " + id)
 			_check(not card.panel.accessibility_name.is_empty(), "screen reader gets plain-language values: " + id)
+			if not card.panel.is_visible_in_tree():
+				continue  # doc 25 §2.2: a group shows only when it changes, runs low or would change
+			_check(root.get_visible_rect().encloses(card.panel.get_global_rect()), "strip group fits viewport, large=%s: %s" % [large, id])
+			_check(card.panel.get_global_rect().encloses(card.forecast.get_global_rect()), "forecast fits its group, large=%s: %s" % [large, id])
+			_check(card.values.get_visible_line_count() == card.values.get_line_count(), "readout wraps without hiding numeric text, large=%s: %s" % [large, id])
 		if OS.get_cmdline_user_args().has("--evidence"):
 			await _capture("M1-28_status_" + ("150" if large else "100"))
 		hud.panels.open_panel("settings_accessibility")
 		await process_frame
 		await process_frame
 		_check(root.get_visible_rect().encloses(hud.panels._close_button.get_global_rect()), "modal Close fits below status row")
-		_check(hud.panels._panel.get_global_rect().position.y >= hud.outpost.get_global_rect().end.y, "modal keeps all four meters uncovered")
+		_check(not hud.outpost.is_showing(), "a panel takes the screen: the strip hides behind the blur (doc 25 §2.2)")
 		if large and OS.get_cmdline_user_args().has("--evidence"):
 			await _capture("M1-28_settings_150")
 		hud.panels.close_panel()
@@ -88,8 +103,8 @@ func _run() -> void:
 	preview = runtime.forecast_target("p02_shift1")
 	_check(preview.accepted and runtime.director.snapshot() == before, "P-02 forecast preserves resources, receipts, time and biology")
 	hud.show_target_forecast("p02_shift1")
-	_check(hud.outpost.meter_view("power").forecast_text.contains("E -> +"), "power preview includes an arrow and signed delta")
-	_check(hud.outpost.meter_view("food").forecast_text.contains("R -> -"), "food preview shows the real ration cost")
+	_check(hud.outpost.meter_view("power").forecast_text.contains("Battery") and hud.outpost.meter_view("power").forecast_text.contains("→") and hud.outpost.meter_view("power").forecast_text.contains("(+"), "power preview includes an arrow and signed delta")
+	_check(hud.outpost.meter_view("food").forecast_text.contains("Food") and hud.outpost.meter_view("food").forecast_text.contains("(−"), "food preview shows the real ration cost")
 	if OS.get_cmdline_user_args().has("--evidence"):
 		await _capture("M1-28_shift_forecast")
 	var committed: Dictionary = runtime.route.perform("p02_shift1")
@@ -105,7 +120,7 @@ func _run() -> void:
 	after.resources.K = 2
 	_check(simulation.outpost_readouts(after).shelter_capacity == 6, "shelter readout uses the canonical cap")
 	hud.outpost.bind_query(runtime.query(), preview)
-	_check(hud.outpost.meter_view("power").forecast_text.contains("Select"), "a changed state revision invalidates the old forecast")
+	_check(hud.outpost.meter_view("power").forecast_text.is_empty(), "a changed state revision invalidates the old forecast")
 	runtime.free()
 	storage.cleanup()
 	print("OUTPOST STATUS RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])

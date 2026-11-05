@@ -222,13 +222,13 @@ func _test_panel() -> void:
 	await process_frame
 	_check(root.gui_get_focus_owner() != null and root.gui_get_focus_owner().name == "Tab_evidence", "ui_down moves focus to the next tab")
 	var reveal := panels._body.get_node_or_null("RevealHint") as Button
-	_check(reveal != null and reveal.text == "SHOW HINT 1 OF 3 · NUDGE" and not _text(panels._body).contains("Check the instrument"), "What now? hides every hint until asked")
+	_check(reveal != null and reveal.text == "Show hint 1 of 3 · Nudge" and not _text(panels._body).contains("Check the instrument"), "What now? hides every hint until asked")
 	reveal.pressed.emit()
 	await process_frame
 	var body_text := _text(panels._body)
-	_check(body_text.contains("H1 · NUDGE") and body_text.contains("Check the instrument before trusting it.") and not body_text.contains("Use the two reference cups."), "one hint level opens per request")
+	_check(body_text.contains("Hint 1 · Nudge") and body_text.contains("Check the instrument before trusting it.") and not body_text.contains("Use the two reference cups."), "one hint level opens per request")
 	reveal = panels._body.get_node_or_null("RevealHint") as Button
-	_check(reveal != null and reveal.text == "SHOW HINT 2 OF 3 · DIRECTION" and root.gui_get_focus_owner() == reveal, "the next hint button keeps focus after a reveal")
+	_check(reveal != null and reveal.text == "Show hint 2 of 3 · Direction" and root.gui_get_focus_owner() == reveal, "the next hint button keeps focus after a reveal")
 	panels.select_journal_tab("evidence")
 	await process_frame
 	var holder := panels._body.get_node_or_null("EvidenceColumns")
@@ -265,13 +265,13 @@ func _test_panel() -> void:
 	panels.bind_query({"journal_entries": s03, "scene_id": "EX-CH01-S03", "state_revision": 3})
 	panels.open_panel("pause")
 	await process_frame
-	_check((panels._body.get_child(0) as Label).text == "The expedition is paused. Close this panel to resume.", "pause keeps its resume instruction first")
+	_check(panels._body.get_child(0) is Button and (panels._body.get_child(0) as Button).text == "Resume", "pause leads with Resume (doc 25 §2.2)")
 	var card := panels._body.get_node_or_null("ResumeCard")
 	_check(card != null and _text(card).contains("PREVIOUSLY AT AURORA") and _text(card).contains("Open question: Who is N.?") and card.find_children("ResumeLine*", "Label", true, false).size() == s03.resume.size(), "pause shows the resume card with every line")
 	panels.close_panel()
 	panels.open_panel("resume")
 	await process_frame
-	_check(panels._close_button.text == "CONTINUE EXPEDITION" and _text(panels._body).contains("Now: Calibrate the moisture probe"), "the Continue card ends on a continue control")
+	_check(panels._close_button.text == "Continue" and _text(panels._body).contains("Now: Calibrate the moisture probe"), "the Continue card ends on a continue control")
 	var open_journal := _find_button(panels._body, "OPEN THE JOURNAL · NOW")
 	_check(open_journal != null, "the Continue card links to the journal")
 	open_journal.pressed.emit()

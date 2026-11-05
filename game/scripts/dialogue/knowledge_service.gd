@@ -481,7 +481,7 @@ static func _garden_tab(text: Dictionary, ctx: Dictionary, shown: Array) -> Dict
 		var stage := String(plant.get("stage", ""))
 		var stage_label := String(stage_labels.get(stage, stage.replace("_", " ")))
 		var track := int(STAGE_TRACK.get(stage, -1))
-		var caption := String(lifecycle_template.get("body", "{plant_name} is now at the {stage_label} stage.")).replace("{plant_name}", String(labels.name)).replace("{stage_label}", stage_label)
+		var caption := String(lifecycle_template.get("body", "{plant_name} is now in the {stage_label} phase.")).replace("{plant_name}", String(labels.name)).replace("{stage_label}", stage_label)
 		plants.append({
 			"id": plant_id, "name": String(labels.name), "chamber": String(labels.chamber), "side": String(labels.side),
 			"stage": stage, "stage_label": stage_label, "alive": bool(plant.get("alive", true)), "track_index": track, "caption": caption,
