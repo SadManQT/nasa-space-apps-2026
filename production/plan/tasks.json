@@ -617,7 +617,7 @@
    "effort": 3
   },
   {
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Sadman/night-shift",
    "deps": [
     "M1-09",
@@ -644,7 +644,8 @@
    "title": "Four-player co-op Class mode: shared decisions, private role clues (as registered)",
    "prompt": "Why: the team registered Last Light Academy as \"a four-player cooperative junior astronaut mission trainer … Shared decisions and private\nclues teach teamwork\" (docs/TEAM.md). Judges compare the build and project page with that; the current build is single-player.\nGoal: up to four players play one machine together as Kai (power/heat), Amara (atmosphere), Mei (horticulture) and Rafi (safety): each role\ngets private clues the others do not see (role-facts per execution/SYS_15_ROLE_MODES.md: printed or on-screen role cards revealed one player\nat a time, 'pass the laptop' or a second screen), the team discusses, and the Mission Table decision (P-02 first, then every puzzle) is\ncommitted together with each role's sign-off. No network play. Solo mode keeps working with all clues available through the crew.\nDo: a mode choice on New Expedition (Solo / Class 2–4 players), role-card screens with a privacy hand-off, a 'team plan' confirm step,\nand printable role cards (PDF/PNG generated from the same data) for classrooms. Clues and role facts come from data, not code.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 2-minute capture of four people playing one P-02 shift.",
    "reserved_for": "ramim",
-   "effort": 5
+   "effort": 5,
+   "blocker": "Night shift parked the work on branch night/M1-37: run_tests.sh is not green:\nrun_tests.sh timed out"
   },
   {
    "id": "M1-08",
