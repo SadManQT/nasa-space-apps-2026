@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Fetch only runtime LFS assets
         shell: bash
-        run: git lfs pull --include="game/assets/**" --exclude=""
+        run: git lfs pull --include="game/assets/**,game/tools/test_data/**" --exclude=""
       - name: Build and boot outside the project on a fresh runner
         shell: bash
         run: python3 production/qa/build_release.py --platform ${{ matrix.target }} --install-tools --smoke
