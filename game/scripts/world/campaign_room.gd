@@ -9,6 +9,7 @@ const Kit = preload("res://assets/environment/kit/habitat_kit.gd")
 const DoorScript = preload("res://scripts/navigation/campaign_door.gd")
 const AssetGeometryScript = preload("res://scripts/asset_geometry.gd")
 const ToonMaterialsScript = preload("res://scripts/toon_materials.gd")
+const Staging = preload("res://scripts/world/room_staging.gd")
 ## PR_CrewSeat: cushion runs from 0.2 m behind to 0.5 m in front of the pivot at 0.44 m high.
 const SEAT_SIT_OFFSET_M := 0.3
 
@@ -30,6 +31,9 @@ var _focus_id := ""
 var _scene_context := ""
 const PLANT_STAGE_MODELS_PATH := "res://assets/plants/plant_stage_models.json"
 static var _plant_stage_models: Dictionary = {}
+var _choices: Dictionary = {}
+var _stage: Dictionary = {}
+var _stage_signature := ""
 
 func _ready() -> void:
 	build_room()
@@ -255,29 +259,58 @@ func _build_doors(contract: Dictionary) -> void:
 func _build_focus_targets(contract: Dictionary) -> void:
 	var targets: Array = contract.get("focus_targets", [])
 	for raw_target in targets:
-		if not raw_target is Dictionary:
-			continue
-		var target: Dictionary = raw_target
-		var node := Node3D.new()
-		node.name = "Focus_" + String(target.get("target_id", "target"))
-		var position: Array = target.get("position", [0.0, 1.0, 0.0])
-		node.position = Vector3(float(position[0]), float(position[1]), float(position[2]))
-		node.add_to_group("interactable")
-		node.set_meta("target_id", String(target.get("target_id", node.name)))
-		node.set_meta("focus_label", String(target.get("label", node.name)))
-		node.set_meta("asset_id", target.get("asset_id", ""))
-		node.set_meta("verb", String(target.get("verb", "Inspect")))
-		node.set_meta("room_id", room_id)
-		focus_root.add_child(node)
-		var label := Label3D.new()
-		label.text = String(target.get("label", node.name))
-		label.position = Presentation.vector(target.get("label_offset", [0, 0.7, 0]))
-		label.font_size = 32
-		label.pixel_size = 0.0012
-		label.fixed_size = true
-		label.hide()
-		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		node.add_child(label)
+		if raw_target is Dictionary:
+			_add_focus_target(raw_target)
+
+func _add_focus_target(target: Dictionary) -> Node3D:
+	var node := Node3D.new()
+	node.name = "Focus_" + String(target.get("target_id", "target"))
+	var position: Array = target.get("position", [0.0, 1.0, 0.0])
+	node.position = Vector3(float(position[0]), float(position[1]), float(position[2]))
+	node.add_to_group("interactable")
+	node.set_meta("target_id", String(target.get("target_id", node.name)))
+	node.set_meta("focus_label", String(target.get("label", node.name)))
+	node.set_meta("asset_id", target.get("asset_id", ""))
+	node.set_meta("verb", String(target.get("verb", "Inspect")))
+	node.set_meta("room_id", room_id)
+	focus_root.add_child(node)
+	var label := Label3D.new()
+	label.text = String(target.get("label", node.name))
+	label.position = Presentation.vector(target.get("label_offset", [0, 0.7, 0]))
+	label.font_size = 32
+	label.pixel_size = 0.0012
+	label.fixed_size = true
+	label.hide()
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	node.add_child(label)
+	return node
+
+## Adds one chapter-staging station (RoomContract.staging focus_targets) with its selection frame around the
+## staged object named by asset_id. Removed again by remove_staged_focus_targets().
+func add_staged_focus_target(target: Dictionary) -> Node3D:
+	var node := _add_focus_target(target)
+	node.set_meta("chapter_staging", true)
+	var staged := visual_root.get_node_or_null(Staging.ROOT_NAME)
+	var asset: Node3D = null
+	if staged != null:
+		asset = staged.get_node_or_null(String(target.get("asset_id", ""))) as Node3D
+	if asset != null and not _selection_frames.has(String(target.target_id)):
+		var frame := Presentation.selection_frame(asset, AssetGeometryScript.bounds(asset))
+		frame.hide()
+		frame.set_meta("chapter_staging", true)
+		_selection_frames[String(target.target_id)] = frame
+	return node
+
+## Removes every staged station and its selection frame.
+func remove_staged_focus_targets() -> void:
+	for node in focus_root.get_children():
+		if node.has_meta("chapter_staging"):
+			var id := String(node.get_meta("target_id", ""))
+			var frame = _selection_frames.get(id)
+			if frame != null and is_instance_valid(frame) and frame.has_meta("chapter_staging"):
+				_selection_frames.erase(id)
+			focus_root.remove_child(node)
+			node.queue_free()
 
 func _build_pressure_markers(contract: Dictionary) -> void:
 	for raw_boundary in contract.get("boundary_ids", []):
@@ -444,14 +477,16 @@ func has_installed_seat_at(at: Vector3) -> bool:
 			return true
 	return false
 
-## Plays the room's authored fixture cues for the staged scene, e.g. the shared inventory
-## lamp's single blink at the CH01 S02→S03 join (doc 24 §2.9; fixture "cue" in the room JSON).
-## Presentation only: repeating the same scene cannot restart a cue or change progression.
-## Returns the number of cues started.
+## Stages the room for one scene: applies the chapter staging that RoomContract.staging reports for it (dated
+## furniture, the scene's prop states and light level, stations, collision and a rebuilt navigation map; see
+## room_staging.gd), then plays the room's authored fixture cues, e.g. the shared inventory lamp's single blink at
+## the CH01 S02→S03 join (doc 24 §2.9; fixture "cue" in the room JSON). Presentation only: repeating the same
+## scene cannot restart a cue or change progression. Returns the number of cues started.
 func set_scene_context(scene_id: String) -> int:
 	if _scene_context == scene_id or visual_root == null:
 		return 0
 	_scene_context = scene_id
+	_apply_staging()
 	var started := 0
 	for fixture in _layout.get("fixtures", []):
 		var cue: Dictionary = fixture.get("cue", {})
@@ -469,6 +504,47 @@ func set_scene_context(scene_id: String) -> int:
 		blink.tween_property(material, "albedo_color", Color(fixture.color), float(pulse[2]))
 		started += 1
 	return started
+
+## Records the story choices (story_log.choices: choice_id -> {"option_id", ...}) that gate echo staging, e.g. the
+## 2034 record Ferreira leaves at her place (doc 24 §5.2 D9), and re-stages the current scene if they change it.
+func set_story_choices(choices: Dictionary) -> void:
+	_choices = choices.duplicate(true)
+	if not _scene_context.is_empty():
+		_apply_staging()
+
+## The chapter staging applied for the current scene (RoomContract.staging), or {} before any scene context.
+func stage() -> Dictionary:
+	return _stage
+
+## The scene this room is staged for ("" before set_scene_context).
+func scene_context() -> String:
+	return _scene_context
+
+func _apply_staging() -> void:
+	var next := RoomContract.staging_for(_layout, _scene_context, _choices)
+	var signature := JSON.stringify(next)
+	if signature == _stage_signature:
+		return
+	var changes_floor: bool = not _stage.get("obstacles", []).is_empty() or not _stage.get("hide", []).is_empty() or not next.obstacles.is_empty() or not next.hide.is_empty()
+	if not _stage.is_empty():
+		Staging.clear(self)
+	_stage = next
+	_stage_signature = signature
+	if not next.layers.is_empty():
+		Staging.build(self, next, _layout)
+	if changes_floor and build_navigation and _layout.get("assembly") == "habitat_kit":
+		_rebuild_navigation(RoomContract.staged_layout_for(_layout, _scene_context, _choices))
+
+## Swaps the room's private navigation map for one built from the staged obstacles (same rasteriser and agent
+## clearance as the base room, so staged furniture is walked around like Chapter 1 furniture).
+func _rebuild_navigation(layout: Dictionary) -> void:
+	for region in navigation_root.get_children():
+		var map: RID = region.get_meta("private_navigation_map", RID())
+		navigation_root.remove_child(region)
+		region.free()
+		if map.is_valid():
+			NavigationServer3D.free_rid(map)
+	Habitat.navigation(navigation_root, layout)
 
 func _style_vacuum(node: Node) -> void:
 	if node is MeshInstance3D:

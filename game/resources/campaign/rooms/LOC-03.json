@@ -698,5 +698,204 @@
    "energy": 0.5,
    "range_m": 1.0
   }
+ ],
+ "staging": [
+  {
+   "id": "ch06_cotton_in_taras_bay",
+   "from": "EX-CH06-S01",
+   "about": "Cotton, planted 15 Dec 2046 in Tara's old bay (M3-94), has its first leaves by 13 Jan (EX-CH06-S12). Alo and Tara are archived records by now (petal and nameplate), never living plants again.",
+   "hide": [
+    "PL_Alo_Bud",
+    "PL_Tara_Bloom"
+   ],
+   "hide_signs": [
+    "TARA / INDOOR REFERENCE"
+   ],
+   "props": [
+    {
+     "id": "PL_Cotton_Young",
+     "path": "res://assets/plants/PL_Cotton_Young/PL_Cotton_Young.glb",
+     "position": [
+      -3.2,
+      0.8,
+      -1.5
+     ],
+     "rotation_degrees": [
+      0,
+      30,
+      0
+     ],
+     "scale": [
+      0.85,
+      0.85,
+      0.85
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "id": "taras_bay_sign",
+     "text": "TARA'S BAY  /  COTTON\nPLANTED 15 DEC 2046",
+     "position": [
+      -3.2,
+      0.62,
+      -0.91
+     ],
+     "size": 0.0021
+    }
+   ],
+   "focus_labels": {
+    "garden_tara_bay": "Cotton in Tara's bay"
+   },
+   "review_views": {
+    "ch06_cotton": {
+     "from": [
+      -2.3,
+      1.45,
+      0.25
+     ],
+     "to": [
+      -3.2,
+      0.95,
+      -1.5
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch06_monitoring_calendar",
+   "from": "EX-CH06-S12",
+   "until": "EX-CH07-S12",
+   "about": "EX-CH06-S12 'Aurora monitoring calendar and garden': the shared watch-and-care calendar beside the lineage board, with the 13 Jan routine solar image Rafi pins (an active region is a reason to watch, not a storm date). The CH06 -> CH07 join: the montage ends on this image (doc 24 §2.9).",
+   "fixtures": [
+    {
+     "id": "monitoring_calendar",
+     "position": [
+      1.95,
+      1.5,
+      -3.97
+     ],
+     "size": [
+      1.5,
+      0.95,
+      0.06
+     ],
+     "color": "#e6e8ea",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "prints": [
+    {
+     "id": "active_region_print",
+     "kind": "solar_image",
+     "position": [
+      1.47,
+      1.64,
+      -3.937
+     ],
+     "size": [
+      0.4,
+      0.4
+     ],
+     "caption": "13 JAN 2047 - ROUTINE SOLAR IMAGE\nACTIVE REGION: WATCH DAILY\nNOT A FORECAST DATE",
+     "caption_size": 0.00052
+    }
+   ],
+   "signs": [
+    {
+     "id": "calendar_title",
+     "text": "AURORA MONITORING CALENDAR  -  JANUARY TO FEBRUARY 2047",
+     "position": [
+      1.95,
+      1.93,
+      -3.936
+     ],
+     "size": 0.00085,
+     "color": "#1b2433",
+     "outline": 0
+    },
+    {
+     "id": "calendar_rows",
+     "text": "DAILY  -  SOLAR IMAGE CHECK, NAMED WATCHER\nWEEKLY  -  COTTON CARE, TARA'S BAY\nRESERVES  -  FOUNDER 30 SEALED, VAULT SPECIMENS 11 STORED\nHANDOVER  -  NEXT REPORT OWNER SIGNS HERE",
+     "position": [
+      2.2,
+      1.52,
+      -3.936
+     ],
+     "size": 0.0007,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.9
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "garden_monitoring_calendar",
+     "label": "Monitoring calendar",
+     "position": [
+      1.95,
+      1.4,
+      -3.8
+     ],
+     "approach_m": [
+      1.95,
+      0,
+      -2.9
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p12_reconcile_monitoring": "garden_monitoring_calendar",
+    "p12_date_february_warning": "garden_monitoring_calendar",
+    "p12_confirm_care_ledger": "garden_tara_bay"
+   },
+   "by_scene": {
+    "EX-CH06-S12": {
+     "anchors": {
+      "garden_mei": [
+       -3.2,
+       0,
+       -0.3
+      ],
+      "garden_amara": [
+       -3.3,
+       0,
+       -2.9
+      ],
+      "garden_kai": [
+       -0.7,
+       0,
+       -2.6
+      ],
+      "garden_ferreira": [
+       -1.1,
+       0,
+       1.6
+      ]
+     }
+    }
+   },
+   "review_views": {
+    "ch06_calendar": {
+     "from": [
+      0.6,
+      1.6,
+      -1.4
+     ],
+     "to": [
+      1.9,
+      1.5,
+      -4.0
+     ]
+    }
+   }
+  }
  ]
 }

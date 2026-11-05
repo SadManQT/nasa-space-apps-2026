@@ -16,11 +16,20 @@ var _screen: Sprite3D
 var _screen_label: Label3D
 var _screen_area := Vector2(2.8, 1.4)
 
-func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3) -> PlayerController:
+## Stages next_room for scene_id (chapter staging, scene anchors, carried objects) and places the scene's roster in
+## it: the playable actor at player_at, everyone else at the scene's anchors. choices is story_log.choices; it only
+## moves relationship staging, e.g. who stands at Kai's shoulder in EX-CH06-S10 (doc 24 §5.2 D11).
+func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choices: Dictionary = {}) -> PlayerController:
 	room = next_room
 	local_ids.clear()
+	# The room is staged first, so its scene furniture, stations and anchors exist before anyone stands in it.
+	room.set_story_choices(choices)
+	room.set_scene_context(scene_id)
 	var active := Roster.playable_actor(scene_id)
 	var roster := Roster.scene_roster(scene_id)
+	# The scene's anchors once per placement: the room's base anchors under its applied staging.
+	var anchors := Contract.anchors(room.room_id)
+	anchors.merge(room.stage().get("anchors", {}), true)
 	for body in bodies.values():
 		body.hide()
 		body.process_mode = Node.PROCESS_MODE_DISABLED
@@ -43,7 +52,7 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3) -> Pla
 			player = body
 			body.position = player_at
 		else:
-			body.position = anchor_position(room.room_id, id)
+			body.position = _anchor_in(anchors, room.room_id, id)
 		body.face_towards(Vector3(0, 0, -2))
 		body.reset_placement()
 	# Seated listeners use the room's installed crew seats; a simple stand-in bench backs
@@ -62,12 +71,15 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3) -> Pla
 			if not room.has_installed_seat_at(body.position):
 				_add_seat(body.position)
 	_build_screen()
-	# Staging the scene also starts the room's authored scene-join cues (doc 24 §2.9).
-	room.set_scene_context(scene_id)
+	_attach_carried(room.stage().get("carried", {}))
 	return player
 
-static func anchor_position(room_id: String, id: String) -> Vector3:
-	var anchors := Contract.anchors(room_id)
+## The floor point where cast member id stands in a room: the scene's staged anchor when scene_id is given
+## (RoomContract.staged_anchors), else the room's base anchor, else a safe rear lane.
+static func anchor_position(room_id: String, id: String, scene_id: String = "", choices: Dictionary = {}) -> Vector3:
+	return _anchor_in(Contract.anchors(room_id) if scene_id.is_empty() else Contract.staged_anchors(room_id, scene_id, choices), room_id, id)
+
+static func _anchor_in(anchors: Dictionary, room_id: String, id: String) -> Vector3:
 	for key in anchors:
 		if String(key).ends_with("_" + id):
 			var at: Array = anchors[key]
@@ -78,6 +90,43 @@ static func anchor_position(room_id: String, id: String) -> Vector3:
 	var width: float = Contract.room(room_id).bounds_m[0]
 	var depth: float = Contract.room(room_id).bounds_m[1]
 	return Vector3((slot - 2) * minf(1.5, (width - 2.0) / 5.0), 0, minf(3.3, depth / 2.0 - 0.7))
+
+## Objects a cast member carries in this scene (room staging "carried": id -> {path, bone, position,
+## rotation_degrees}), e.g. the charged hand light clipped to Kai from EX-CH06-S01 to S11 (doc 24 §2.9). Every body
+## loses last scene's carried object first, so a viewpoint cut never duplicates one.
+func _attach_carried(carried: Dictionary) -> void:
+	for id in bodies:
+		var body: PlayerController = bodies[id]
+		for old in body.find_children("Carried_*", "BoneAttachment3D", true, false):
+			old.get_parent().remove_child(old)
+			old.queue_free()
+		if not carried.has(id) or not local_ids.has(id) or body.character == null:
+			continue
+		var spec: Dictionary = carried[id]
+		var rigs := body.character.find_children("*", "Skeleton3D", true, false)
+		var model := AssetGeometry.load_glb(String(spec.path))
+		if rigs.is_empty() or model == null:
+			continue
+		var rig := rigs[0] as Skeleton3D
+		var bone := rig.find_bone(String(spec.bone))
+		if bone < 0:
+			model.free()
+			continue
+		var socket := BoneAttachment3D.new()
+		socket.name = "Carried_" + String(spec.path).get_file().get_basename()
+		socket.bone_name = String(spec.bone)
+		rig.add_child(socket)
+		# The authored point is in the rig's rest space (character facing +Z, its right side at -X); the attachment
+		# follows the bone from there, so the object rides with the hips in every clip.
+		var rest := Transform3D(Basis.from_euler(_radians(spec.get("rotation_degrees", [0, 0, 0]))), _vector(spec.get("position", [0, 0, 0])))
+		model.transform = rig.get_bone_global_rest(bone).affine_inverse() * rest
+		socket.add_child(model)
+
+static func _vector(value: Array) -> Vector3:
+	return Vector3(float(value[0]), float(value[1]), float(value[2]))
+
+static func _radians(value: Array) -> Vector3:
+	return Vector3(deg_to_rad(float(value[0])), deg_to_rad(float(value[1])), deg_to_rad(float(value[2])))
 
 func _body(id: String) -> PlayerController:
 	if bodies.has(id):

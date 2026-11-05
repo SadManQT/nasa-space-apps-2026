@@ -1,0 +1,5 @@
+LOC-02 EX-CH06-S01 windowed frame ms with cast: p50=16.66 p95=17.07; draw calls=1106
+LOC-01 EX-CH06-S07 windowed frame ms with cast: p50=16.67 p95=17.08; draw calls=372
+LOC-02 EX-CH06-S10 windowed frame ms with cast: p50=16.75 p95=17.83; draw calls=980
+LOC-03 EX-CH06-S12 windowed frame ms with cast: p50=16.64 p95=18.13; draw calls=267
+CHAPTER 6 ROOMS RESULT: PASS (3139 checks, 0 failures)

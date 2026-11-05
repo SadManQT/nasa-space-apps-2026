@@ -741,5 +741,679 @@
     -1
    ]
   }
- }
+ },
+ "staging": [
+  {
+   "id": "ch05_five_at_the_table",
+   "from": "EX-CH05-S01",
+   "about": "From 12 Dec 2046 Ferreira lives at Aurora: four seats become five (doc 09 LOC-01) and the fifth mug joins the four (doc 24 §1.1). Her chair is at the head of the table until she gives it up in EX-CH07-S01 (doc 24 §2.7); the Chapter 7 rooms move it.",
+   "props": [
+    {
+     "id": "commons_seat_5",
+     "path": "res://assets/props/PR_CrewSeat/PR_CrewSeat.glb",
+     "position": [
+      0,
+      0,
+      -1.75
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "id": "commons_mug_5",
+     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "position": [
+      -0.22,
+      0.762,
+      -0.6
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "seat_5",
+     "position": [
+      0,
+      0.55,
+      -1.75
+     ],
+     "size": [
+      0.83,
+      1.1,
+      1.02
+     ]
+    }
+   ],
+   "anchors": {
+    "commons_ferreira": [
+     0,
+     0,
+     -2.75
+    ]
+   }
+  },
+  {
+   "id": "ch05_d9_ascent_manifest",
+   "from": "EX-CH05-S06",
+   "until": "EX-CH07-S12",
+   "choice": {
+    "choice_id": "EX-CH05-S05-CHOICE",
+    "option_id": "EX-CH05-S05-OPT01"
+   },
+   "about": "Doc 24 §5.2 D9: after EX-CH05-S05 Ferreira leaves one 2034 record at her place, under her mug, through Chapters 6-7.",
+   "fixtures": [
+    {
+     "id": "ferreira_record",
+     "position": [
+      -0.22,
+      0.761,
+      -0.6
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "ferreira_record_title",
+     "text": "ASCENT MANIFEST\n2034",
+     "position": [
+      -0.22,
+      0.7625,
+      -0.69
+     ],
+     "pitch": -90,
+     "size": 0.00045,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.18
+    }
+   ]
+  },
+  {
+   "id": "ch05_d9_greenhouse_note",
+   "from": "EX-CH05-S06",
+   "until": "EX-CH07-S12",
+   "choice": {
+    "choice_id": "EX-CH05-S05-CHOICE",
+    "option_id": "EX-CH05-S05-OPT02"
+   },
+   "about": "Doc 24 §5.2 D9: after EX-CH05-S05 Ferreira leaves one 2034 record at her place, under her mug, through Chapters 6-7.",
+   "fixtures": [
+    {
+     "id": "ferreira_record",
+     "position": [
+      -0.22,
+      0.761,
+      -0.6
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "ferreira_record_title",
+     "text": "GREENHOUSE SERVICE NOTE\n2034",
+     "position": [
+      -0.22,
+      0.7625,
+      -0.69
+     ],
+     "pitch": -90,
+     "size": 0.00045,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.18
+    }
+   ]
+  },
+  {
+   "id": "ch05_place_for_noor",
+   "from": "EX-CH05-S12",
+   "choice": {
+    "choice_id": "EX-CH05-S11-CHOICE",
+    "option_id": "EX-CH05-S11-OPT02"
+   },
+   "about": "Doc 24 §5.2 D10: 'We kept a place for your work.' A seed-label holder marked N. waits at the table until Noor speaks (EX-CH08-S10).",
+   "fixtures": [
+    {
+     "id": "n_holder_base",
+     "position": [
+      0.0,
+      0.7675,
+      0.78
+     ],
+     "size": [
+      0.09,
+      0.015,
+      0.035
+     ],
+     "color": "#1F2A44",
+     "transparent": false
+    },
+    {
+     "id": "n_holder_card",
+     "position": [
+      0.0,
+      0.8075,
+      0.775
+     ],
+     "size": [
+      0.08,
+      0.065,
+      0.004
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "n_holder_text",
+     "text": "N.",
+     "position": [
+      0.0,
+      0.8075,
+      0.7775
+     ],
+     "size": 0.0009,
+     "color": "#1b2433",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch06_eclipse_desk",
+   "from": "EX-CH06-S01",
+   "until": "EX-CH06-S12",
+   "about": "EX-CH06-S06..S09: the eclipse desk by the Mission Table. The filtered remote-camera monitor (M3-6A) shows the scenario view only after the protective configuration is checked (S06), the eclipse advances to the red ring in S07, and the message log receives Noor's text in S09 (doc 24 §4 clue 20; the words come from the dialogue catalog, never retyped). The protected plan dims the Commons practicals while the eclipse lasts (S07-S09).",
+   "fixtures": [
+    {
+     "id": "eclipse_desk",
+     "position": [
+      3.0,
+      0.37,
+      -5.62
+     ],
+     "size": [
+      1.6,
+      0.74,
+      0.7
+     ],
+     "color": "#3c4b5d",
+     "transparent": false
+    },
+    {
+     "id": "message_log_stand",
+     "position": [
+      3.5,
+      0.79,
+      -5.72
+     ],
+     "size": [
+      0.07,
+      0.1,
+      0.07
+     ],
+     "color": "#1F2A44",
+     "transparent": false
+    },
+    {
+     "id": "message_log_screen",
+     "position": [
+      3.5,
+      1.01,
+      -5.71
+     ],
+     "size": [
+      0.5,
+      0.34,
+      0.03
+     ],
+     "color": "#0b1220",
+     "transparent": false,
+     "finish": "screen"
+    }
+   ],
+   "eclipse_props": [
+    {
+     "id": "eclipse_monitor",
+     "prop": "PR_EclipseMonitor",
+     "position": [
+      2.75,
+      0.74,
+      -5.55
+     ],
+     "yaw": 180,
+     "by_scene": {
+      "EX-CH06-S06": {
+       "monitor": {
+        "phase": 0.0,
+        "mode": "live"
+       }
+      },
+      "EX-CH06-S07": {
+       "monitor": {
+        "track": [
+         0.1,
+         0.5,
+         70.0
+        ],
+        "mode": "live"
+       }
+      },
+      "EX-CH06-S08": {
+       "monitor": {
+        "phase": 0.55,
+        "mode": "live",
+        "logged": [
+         "ingress",
+         "ring"
+        ]
+       }
+      },
+      "EX-CH06-S09": {
+       "monitor": {
+        "phase": 0.66,
+        "mode": "live",
+        "logged": [
+         "ingress",
+         "ring"
+        ]
+       }
+      }
+     }
+    }
+   ],
+   "signs": [
+    {
+     "id": "message_log_text",
+     "text": "AURORA MESSAGE LOG\n\nNo new packets",
+     "position": [
+      3.5,
+      1.01,
+      -5.692
+     ],
+     "size": 0.00046,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 0.46,
+     "by_scene": {
+      "EX-CH06-S08": {
+       "text": "AURORA MESSAGE LOG\n\nEarth path checked: window open\nFamily audio for Kai waiting"
+      },
+      "EX-CH06-S09": {
+       "text": "AURORA MESSAGE LOG\n12 JAN 2047 - TEXT PACKET - FROM N.\n\n“{line}”",
+       "line": "EX-CH06-S09-L01"
+      }
+     }
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "eclipse_desk",
+     "position": [
+      3.0,
+      0.37,
+      -5.62
+     ],
+     "size": [
+      1.6,
+      0.74,
+      0.7
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_eclipse_monitor",
+     "label": "Filtered camera monitor",
+     "position": [
+      2.75,
+      1.1,
+      -5.3
+     ],
+     "approach_m": [
+      2.75,
+      0,
+      -4.3
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "eclipse_monitor"
+    },
+    {
+     "target_id": "commons_message_log",
+     "label": "Message log",
+     "position": [
+      3.5,
+      1.0,
+      -5.45
+     ],
+     "approach_m": [
+      3.5,
+      0,
+      -4.3
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p12_check_four_roles": "commons_mission_table",
+    "p12_check_five_segments": "commons_mission_table",
+    "p12_ready_camera": "commons_eclipse_monitor",
+    "p12_log_ingress": "commons_eclipse_monitor",
+    "p12_log_ring": "commons_eclipse_monitor",
+    "p12_deliver_family_contact": "commons_earth_screen",
+    "p12_preserve_observation_qualifications": "commons_message_log",
+    "p12_store_known_noor_text": "commons_message_log",
+    "p12_reserve_live_voice": "commons_message_log"
+   },
+   "by_scene": {
+    "EX-CH06-S02..EX-CH06-S11": {
+     "carried": {
+      "kai": {
+       "path": "res://assets/props/PR_HandLight/PR_HandLight.glb",
+       "bone": "mixamorig_Hips",
+       "position": [
+        -0.17,
+        0.93,
+        -0.04
+       ],
+       "rotation_degrees": [
+        0,
+        0,
+        90
+       ]
+      }
+     }
+    },
+    "EX-CH06-S07": {
+     "carried": {
+      "kai": {
+       "path": "res://assets/props/PR_HandLight/PR_HandLight.glb",
+       "bone": "mixamorig_Hips",
+       "position": [
+        -0.17,
+        0.93,
+        -0.04
+       ],
+       "rotation_degrees": [
+        0,
+        0,
+        90
+       ]
+      }
+     },
+     "anchors": {
+      "commons_kai": [
+       1.6,
+       0,
+       -3.95
+      ],
+      "commons_amara": [
+       3.9,
+       0,
+       -4.05
+      ],
+      "commons_rafi": [
+       2.6,
+       0,
+       -3.35
+      ],
+      "commons_ferreira": [
+       0.7,
+       0,
+       -3.4
+      ]
+     },
+     "lighting": {
+      "practical_scale": 0.35,
+      "ambient_energy": 0.1
+     }
+    },
+    "EX-CH06-S08": {
+     "carried": {
+      "kai": {
+       "path": "res://assets/props/PR_HandLight/PR_HandLight.glb",
+       "bone": "mixamorig_Hips",
+       "position": [
+        -0.17,
+        0.93,
+        -0.04
+       ],
+       "rotation_degrees": [
+        0,
+        0,
+        90
+       ]
+      }
+     },
+     "anchors": {
+      "commons_rafi": [
+       1.3,
+       0,
+       -3.6
+      ],
+      "commons_ferreira": [
+       0,
+       0,
+       -2.75
+      ]
+     },
+     "lighting": {
+      "practical_scale": 0.35,
+      "ambient_energy": 0.1
+     }
+    },
+    "EX-CH06-S09": {
+     "carried": {
+      "kai": {
+       "path": "res://assets/props/PR_HandLight/PR_HandLight.glb",
+       "bone": "mixamorig_Hips",
+       "position": [
+        -0.17,
+        0.93,
+        -0.04
+       ],
+       "rotation_degrees": [
+        0,
+        0,
+        90
+       ]
+      }
+     },
+     "anchors": {
+      "commons_amara": [
+       3.95,
+       0,
+       -4.1
+      ],
+      "commons_rafi": [
+       2.4,
+       0,
+       -3.5
+      ],
+      "commons_ferreira": [
+       1.2,
+       0,
+       -3.1
+      ],
+      "commons_kai": [
+       -0.4,
+       0,
+       -3.3
+      ]
+     },
+     "lighting": {
+      "practical_scale": 0.35,
+      "ambient_energy": 0.1
+     }
+    }
+   },
+   "review_views": {
+    "ch06_eclipse_desk": {
+     "from": [
+      1.0,
+      1.65,
+      -2.6
+     ],
+     "to": [
+      3.0,
+      1.15,
+      -5.9
+     ]
+    },
+    "ch06_table": {
+     "from": [
+      -3.4,
+      2.0,
+      3.6
+     ],
+     "to": [
+      0.2,
+      0.8,
+      -1.4
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch06_eclipse_keepsakes",
+   "from": "EX-CH06-S08",
+   "about": "Doc 09 revisit rule 'CH06 eclipse print': the held ring frame pinned above the eclipse desk from S08, and from S10 Noor's note beside it, indexed as personal recollection with its date left unspecified (EX-CH06-S09). Kept after the chapter: props accumulate.",
+   "fixtures": [
+    {
+     "id": "eclipse_pin_board",
+     "position": [
+      2.4,
+      1.8,
+      -5.985
+     ],
+     "size": [
+      0.9,
+      0.6,
+      0.03
+     ],
+     "color": "#a8977a",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "noor_note_card",
+     "from": "EX-CH06-S10",
+     "position": [
+      2.66,
+      1.84,
+      -5.968
+     ],
+     "size": [
+      0.26,
+      0.15,
+      0.004
+     ],
+     "color": "#f1ede2",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "prints": [
+    {
+     "id": "ring_frame_print",
+     "kind": "eclipse_frame",
+     "position": [
+      2.18,
+      1.86,
+      -5.968
+     ],
+     "size": [
+      0.34,
+      0.19
+     ],
+     "monitor": {
+      "phase": 0.5,
+      "mode": "held",
+      "logged": [
+       "ingress",
+       "ring"
+      ]
+     },
+     "caption": "12 JAN 2047 - RING, FILTERED CAMERA\nSCENARIO VIEW - CONCEPTUAL INSET",
+     "caption_size": 0.00042
+    }
+   ],
+   "signs": [
+    {
+     "id": "noor_note_text",
+     "from": "EX-CH06-S10",
+     "line": "EX-CH06-S09-L01",
+     "text": "“{line}”\n\nPERSONAL RECOLLECTION\nEARLIER DATE: UNSPECIFIED",
+     "position": [
+      2.66,
+      1.84,
+      -5.965
+     ],
+     "size": 0.00045,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.24
+    }
+   ],
+   "review_views": {
+    "ch06_pin_board": {
+     "from": [
+      2.4,
+      1.75,
+      -4.4
+     ],
+     "to": [
+      2.4,
+      1.8,
+      -6.0
+     ]
+    }
+   }
+  }
+ ]
 }

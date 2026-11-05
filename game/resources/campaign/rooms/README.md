@@ -60,3 +60,40 @@ Run `production/qa/evidence/M1-06_capture.sh` (windowed; the night-shift Claude
 session can open a window) for fresh room/player/chamber PNGs and windowed frame
 timings in `M1-06_runtime.txt`. A blank (shader-compile) frame is retried and a
 still-blank capture fails the run.
+
+# Chapter staging (M3-6R, first used for Chapter 6)
+
+The base layout above stays the Chapter 1 room. A room JSON's `staging` array holds dated layers that
+`RoomContract.staging()` resolves for a scene and `CampaignRoom.set_scene_context()` builds
+(`game/scripts/world/room_staging.gd`); `CampaignCrew.place()` stages the room before anyone stands in it.
+Doc 09's revisit rule applies: props accumulate between chapters; only mission-specific controls change.
+
+- A layer, and any item in it, is active from `from` to `until` (inclusive scene ids, either optional).
+  `by_scene` overrides fields for one scene or an inclusive `"FROM..UNTIL"` range (later keys win).
+- `choice` / `unless` (`{"choice_id", "option_id"}`) gate a story-echo layer on `story_log.choices`
+  (doc 24 §5.2), passed as `CampaignCrew.place(..., choices)` or `CampaignRoom.set_story_choices()`.
+- Additions: `props` (GLBs through AssetGeometry), `fixtures`, `signs` (`line` fills `{line}` with a canon
+  catalog line word for word; `pitch`, `wrap_m`, `color`, `outline`), `eclipse_props` (M3-6A props through
+  `eclipse_props.gd`: `state`, `board`, `screens`, `parts_visible`, `monitor` with `phase`/`track`/`mode`/
+  `logged`), `prints` (`solar_image`, `eclipse_frame`), `local_lights`, `obstacles` (collision and the
+  rebuilt navigation map), `focus_targets` (stations).
+- Changes: `hide` (base node ids, including their obstacles), `hide_signs` (base sign texts),
+  `focus_labels`, `anchors` (merged by key; later layers win), `lighting` (`practical_scale`,
+  `strip_scale`, `ambient_energy`), `carried` (an object on a cast member's bone, e.g. Kai's lamp).
+- `stations` maps each scene action to the focus target it happens at; `RoomContract.station_focus()`
+  answers it for the mission catalogue.
+
+| Scenes | Room | What the staging shows |
+|---|---|---|
+| EX-CH06-S01..S05, S10, S11 | LOC-02 | Guide light leaving the protected supply at Kai's taped junction box (CH05 → CH06) and running low along the aisle to the Commons door; protected-bus test panel with F2 (A-42) beside that door; two decorative floods (shed in S10–S11); allocation board above the guide line (five cards from S01, the P-11 accepted plan and 7-unit forecast from S04); camera repeater desk with Kai's dated log; the lamp in its clip in the wall locker (S01, and from S12), on Kai's hip S02–S11; per-scene crew anchors (Ferreira in the Commons doorway; D11 companion at Kai's shoulder in S10); practicals at 18 % in S10 (the amber guide line is the only warm light), 55 % in S11 |
+| EX-CH05-S01 on | LOC-01 | Five seats and five mugs; Ferreira's chair at the head until EX-CH07-S01 moves it |
+| EX-CH05-S06..CH07-S12 | LOC-01 | D9: the ascent manifest or greenhouse service note at her place, under her mug |
+| EX-CH05-S12 on | LOC-01 | D10 (OPT02): the seed-label holder marked "N." |
+| EX-CH06-S06..S09 | LOC-01 | Eclipse desk with the filtered monitor (S06 protected, S07 ingress → ring, S08–S09 ring logged) and the message log (Noor's text in S09); Commons practicals at 35 % while the eclipse lasts |
+| EX-CH06-S08 on | LOC-01 | Pin board: the held ring frame; from S10 Noor's note indexed as personal recollection, date unspecified |
+| EX-CH06-S01 on | LOC-03 | Cotton in Tara's bay (Alo and Tara archived), the bay sign and focus renamed |
+| EX-CH06-S12..CH07-S12 | LOC-03 | Monitoring calendar with the 13 Jan routine solar image (CH06 → CH07 join) |
+
+Run `game/tools/run_tests.sh chapter6_rooms` (mapping, rosters, stations, navigation, collision, resting
+props, readable signs, every §2.9 join, echoes, re-staging back to Chapter 1, cast placement), and
+`production/qa/evidence/M3-6R_capture.sh` for the windowed screenshots and frame timings.

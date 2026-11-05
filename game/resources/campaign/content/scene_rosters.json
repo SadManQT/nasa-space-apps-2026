@@ -1513,7 +1513,7 @@
           "team_id": "base"
         },
         "mei": {
-          "location_id": "LOC-02",
+          "location_id": "LOC-03",
           "team_id": "base"
         },
         "rafi": {
@@ -1538,7 +1538,7 @@
           "team_id": "base"
         },
         "mei": {
-          "location_id": "LOC-02",
+          "location_id": "LOC-03",
           "team_id": "base"
         },
         "rafi": {
@@ -1563,7 +1563,7 @@
           "team_id": "base"
         },
         "mei": {
-          "location_id": "LOC-02",
+          "location_id": "LOC-03",
           "team_id": "base"
         },
         "rafi": {
@@ -1613,7 +1613,7 @@
           "team_id": "base"
         },
         "mei": {
-          "location_id": "LOC-02",
+          "location_id": "LOC-03",
           "team_id": "base"
         },
         "rafi": {
@@ -1655,23 +1655,23 @@
       "playable_actor_id": "mei",
       "actors": {
         "kai": {
-          "location_id": "LOC-02",
+          "location_id": "LOC-01",
           "team_id": "base"
         },
         "amara": {
-          "location_id": "LOC-02",
+          "location_id": "LOC-01",
           "team_id": "base"
         },
         "mei": {
-          "location_id": "LOC-02",
+          "location_id": "LOC-01",
           "team_id": "base"
         },
         "rafi": {
-          "location_id": "LOC-02",
+          "location_id": "LOC-01",
           "team_id": "base"
         },
         "ferreira": {
-          "location_id": "LOC-02",
+          "location_id": "LOC-01",
           "team_id": "base"
         }
       }
@@ -1738,7 +1738,7 @@
           "team_id": "base"
         },
         "mei": {
-          "location_id": "LOC-02",
+          "location_id": "LOC-01",
           "team_id": "base"
         },
         "rafi": {
@@ -1755,23 +1755,23 @@
       "playable_actor_id": "kai",
       "actors": {
         "kai": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-02",
           "team_id": "base"
         },
         "amara": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-02",
           "team_id": "base"
         },
         "mei": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-02",
           "team_id": "base"
         },
         "rafi": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-02",
           "team_id": "base"
         },
         "ferreira": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-02",
           "team_id": "base"
         }
       }
