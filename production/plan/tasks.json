@@ -3589,6 +3589,7 @@
    "status": "todo",
    "owner": "",
    "deps": [
+    "M1-71",
     "M3-92"
    ],
    "paths": [
@@ -5320,6 +5321,46 @@
    "prompt": "M1-56 message persistence needs a safe authoritative metadata update API. Existing Director.snapshot -> Chapter1Campaign._save_snapshot -> SaveService already retains presentation_resume, and fresh New starts it empty. However Director.restore_snapshot also replaces _checkpoint. PuzzleHost.retry calls Director.restore_checkpoint, so using load/restore merely to mark a message read would overwrite the pre-shift rollback. No public bounded presentation-message setter exists.\nExpose a small public Director method for updating only presentation_resume.messages, with validated message metadata (delivered/read IDs and any explicitly agreed primitive state). Publish its exact method/payload contract for Ramim's comms/KnowledgeService integration. Preserve the gameplay checkpoint, current gameplay revision semantics, receipts, phase, resources, dialogue and flags; duplicate updates must be harmless. Never accept arbitrary state/root changes through this API. Do not add a second save store; existing runtime.save_campaign can persist the normal snapshot. Keep message pack/inbox implementation in Ramim folders, and Chapter1 prose in Sadman M1-57.\nAcceptance: focused tests with a real PuzzleHost/Director prove preview/read/update/retry returns to the same pre-message gameplay checkpoint; only message metadata changes; duplicate, malformed and missing state are safe; save/restore round-trips existing presentation_resume.messages, fresh New resets it, and old saves lacking it load. Run the full repository runner and disclose the existing M1-67/M1-68 failures if still present; do not weaken those checks. This prerequisite unblocks M1-56; tell Ramim to release/resume it when ready.",
    "reserved_for": "atik",
    "effort": 1
+  },
+  {
+   "id": "M1-70",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "any",
+   "title": "Data cards: show a source's credit line (the LOLA terrain card first)",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Why: M1-34 added a 'credit_line' field to game/resources/data/nasa/lro_lola_south_pole_terrain.json (the 'made from NASA data' credit for the terrain). The night-shift change to show it touched game/scripts/ui/campaign_panels.gd, which is your folder, so it was left out when M1-34 landed. Do: in _render_card(), after the Source block, show a 'Credit' block with card.credit_line when it is not empty, in the same player-words style as the other blocks ('Credit', not 'CREDIT'). Acceptance: the LOLA terrain data card shows its credit line; cards without one are unchanged; run_tests.sh passes; screenshot production/qa/evidence/<task id>_credit.png.",
+   "reserved_for": "ramim",
+   "effort": 2
+  },
+  {
+   "id": "M1-71",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "any",
+   "title": "Export presets: include the LOLA terrain heightmaps (*.r16) in every build",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/export_presets.cfg"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Why: M1-34 put the real LOLA terrain in game/assets/environment/terrain/lola/ with 16-bit heightmaps (*.r16) that terrain_heightfield.gd reads at run time. export_presets.cfg (your file) exports only all_resources plus *.json, so release builds would lose the heightfields. Do: change include_filter to \"*.json,*.r16\" in all three presets. Acceptance: an exported build loads res://assets/environment/terrain/lola/aurora_ridge/heightmap_5m.r16 (FileAccess.file_exists true in the export); run_tests.sh passes. Needed for the 12 Nov release (M3-93).",
+   "reserved_for": "atik",
+   "effort": 2
   }
  ],
  "requirements": [
