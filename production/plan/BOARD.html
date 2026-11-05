@@ -537,7 +537,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Assemble the Chapter 1 rooms from the kit",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [
     "M1-05",
@@ -557,8 +557,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Goal: Commons/Mission Table (LOC-01), Service Rooms (LOC-02), Garden + Alo chamber (LOC-03), Safe Room (LOC-04) and the Exterior are\nreal scenes built from the kit and installed props, replacing the M1-01 greybox.\nDo: build game/scenes/campaign/rooms/*.tscn from game/assets/environment/kit/ and the approved props, using the layout data files from\nM1-01 (move the data, don't duplicate it). Collision on walls/floors/large props, navigation regions, doors and pressure boundaries per\ngame-design/09_WORLD_AND_LEVEL_DESIGN.md, baked or static lighting that keeps 60 fps, the toon look. Keep RoomContract targets valid.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. Walk every room with the player; no clipping through walls, no floating props.\nThe Exterior uses the real LOLA terrain from M1-34/M1-36 once it exists; until then keep the greybox exterior."
+   "updated": "2026-11-05",
+   "prompt": "Goal: Commons/Mission Table (LOC-01), Service Rooms (LOC-02), Garden + Alo chamber (LOC-03), Safe Room (LOC-04) and the Exterior are\nreal scenes built from the kit and installed props, replacing the M1-01 greybox.\nDo: build game/scenes/campaign/rooms/*.tscn from game/assets/environment/kit/ and the approved props, using the layout data files from\nM1-01 (move the data, don't duplicate it). Collision on walls/floors/large props, navigation regions, doors and pressure boundaries per\ngame-design/09_WORLD_AND_LEVEL_DESIGN.md, baked or static lighting that keeps 60 fps, the toon look. Keep RoomContract targets valid.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. Walk every room with the player; no clipping through walls, no floating props.\nThe Exterior uses the real LOLA terrain from M1-34/M1-36 once it exists; until then keep the greybox exterior.",
+   "blocker": "Night shift parked the work on branch night/M1-06: "
   },
   {
    "id": "M1-07",
