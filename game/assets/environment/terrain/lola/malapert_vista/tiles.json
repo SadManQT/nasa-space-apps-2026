@@ -1,0 +1,80 @@
+{
+ "region": "malapert_vista",
+ "kind": "vista",
+ "built": "2026-11-05",
+ "metres_per_pixel": 40.0,
+ "tiles": [],
+ "vista": {
+  "center_x_m": -12.479999999999563,
+  "center_z_m": -32.47999999999956,
+  "size_x_m": 63960.0,
+  "size_z_m": 63960.0,
+  "hole_m": [
+   -4000.0,
+   4000.0,
+   -4000.0,
+   4000.0
+  ],
+  "lods": [
+   {
+    "lod": 0,
+    "path": "res://assets/environment/terrain/lola/malapert_vista/tiles/EN_Terrain_MalapertVista_LOD0.glb",
+    "vertex_spacing_m": 200.0,
+    "field": "lola",
+    "triangles": 204160,
+    "visible_from_m": 0.0,
+    "visible_to_m": 12000.0,
+    "bytes": 6563344
+   },
+   {
+    "lod": 1,
+    "path": "res://assets/environment/terrain/lola/malapert_vista/tiles/EN_Terrain_MalapertVista_LOD1.glb",
+    "vertex_spacing_m": 400.0,
+    "field": "lola",
+    "triangles": 51680,
+    "visible_from_m": 12000.0,
+    "visible_to_m": 30000.0,
+    "bytes": 1359496
+   },
+   {
+    "lod": 2,
+    "path": "res://assets/environment/terrain/lola/malapert_vista/tiles/EN_Terrain_MalapertVista_LOD2.glb",
+    "vertex_spacing_m": 800.0,
+    "field": "lola",
+    "triangles": 13240,
+    "visible_from_m": 30000.0,
+    "visible_to_m": 1000000000.0,
+    "bytes": 352840
+   }
+  ]
+ },
+ "frame": "Godot metres; X = east column direction, Z = south row direction, Y up; the site is at the origin at Y = 0",
+ "curvature": true,
+ "curvature_note": "Y = height - site height - (X^2 + Z^2) / (2 x 1,737,400 m): the meshes follow the Moon's sphere, so the Horizons Sun/Earth elevations (relative to the site's horizontal) light the far terrain correctly",
+ "site_height_m": 4993.6181640625,
+ "skirt_m": 25.0,
+ "uv1": "region 0..1, v = 0 at the north (z_min) edge: normal and AO maps",
+ "uv2": "metres / 4 (one repeat per 4 m like the M1-35 regolith kit)",
+ "collision": "terrain_heightfield.gd to_height_map_shape() on heightmap_<mpp>m_detail.r16 (hero) or heightmap_<mpp>m.r16; never the visual mesh",
+ "material": "res://assets/environment/terrain/lola/terrain_lola.gdshader via lola_region.gd (object-space normal map, lunar-Lambert regolith)",
+ "normal_map": "T_Terrain_MalapertVista_Normal.png",
+ "normal_map_space": "object space in this region's Godot frame (R = X, G = Y up, B = Z), curvature included; not a tangent-space map",
+ "ao_map": "T_Terrain_MalapertVista_AO.png",
+ "ao_bake": {
+  "mesh_spacing_m": 100.0,
+  "distance_m": 1500.0,
+  "samples": 24,
+  "size_px": 1024,
+  "orientation_check": {
+   "corr_with_crests": 0.236,
+   "corr_if_flipped": 0.004
+  },
+  "use": "darkens only the faint Earthshine/bounce fill; the Sun's light is never multiplied by AO"
+ },
+ "extent_godot_m": {
+  "x_min": -31992.48,
+  "x_max": 31967.52,
+  "z_min": -32012.48,
+  "z_max": 31947.52
+ }
+}

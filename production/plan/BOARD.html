@@ -629,8 +629,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "prompt": "Look at production/concept/lookdev_exterior_v1/ and pick A or B (or ask for changes). The AI records it in handbook §3."
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-fable",
    "deps": [],
    "paths": [
     "production/terrain/",
@@ -644,7 +644,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/ART_BIBLE.md"
    ],
    "note": "Heightmaps, provenance and Blender base meshes can start now; apply surface materials and lighting only after the art direction is chosen (M1-33). 5 Nov: the 4 Nov claim produced no files; released to Claude Fable 5.1 (environment lead). Blender is on this Mac (/opt/homebrew/bin/blender).",
-   "evidence": "",
+   "evidence": "run_tests.sh 36/36 suites passed (GODOT=godot_gated; test_terrain_lola.gd 1,090 checks, test_science_data.gd 146 with the new lro_lola_south_pole_terrain fixture); python3 production/tools/test_make_terrain.py OK; production/qa/evidence/M1-34_capture.sh -> M1-34_capture_output.txt 'TERRAIN CAPTURE RESULT: PASS (12 files, 0 failures)', 12 frames production/qa/evidence/M1-34_*.png; six LOLA-hillshade-vs-Godot sheets production/review/M1-34_*_lola_vs_game.png; heightmaps + provenance (PGDA 78/90 DOIs, URLs, PDS cross-check RMS 1.37 m, per-heightmap SHA-256) in production/terrain/ and game/assets/environment/terrain/lola/ (.r16/.glb/.png via LFS); credit line in handbook §5, lola_terrain.json and the Data Card fixture; §10 status line and AI_PROMPT_LOG row 2026-11-05 M1-34. Canon unchanged: measured relay road 198 km / 3.7 km above 12 deg is shown beside P-15's 120 km, never instead. Playable road segments, streaming and ground-level regolith detail are M1-36.",
    "updated": "2026-11-05",
    "id": "M1-34",
    "milestone": "M1",

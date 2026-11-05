@@ -1,0 +1,41 @@
+{
+ "region": "malapert_summit",
+ "kind": "hero",
+ "story": "LOC-12 relay summit (Chapter 8)",
+ "source_product": "pgda78_site23",
+ "source_title": "High-Resolution LOLA Topography for Lunar South Pole Sites: Site23 Malapert massif, 5 m/px",
+ "source_url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/Site23/Site23_final_adj_5mpp_surf.tif",
+ "retrieved": "2026-11-05",
+ "format": "r16: little-endian uint16, row-major, top row first (north = toward 0 deg E is up); height_m = z_min_m + value * (z_max_m - z_min_m) / 65535",
+ "columns": 1600,
+ "rows": 1600,
+ "metres_per_pixel": 5.0,
+ "z_min_m": 3478.059,
+ "z_max_m": 4993.618,
+ "height_datum": "metres above the 1,737.4 km reference sphere (LOLA)",
+ "projection": "south polar stereographic, MOON_ME (DE421); x toward 90E, y toward 0E, pole at (0,0)",
+ "origin_x_m": -8987.5,
+ "origin_y_m": 126327.5,
+ "origin_note": "map coordinates of the centre of pixel (column 0, row 0)",
+ "source_window": {
+  "col0": 402,
+  "row0": 1134
+ },
+ "interpolated_nan_fraction": 0.0,
+ "site": {
+  "id": "malapert_summit",
+  "x_m": -4987.5,
+  "y_m": 122327.5,
+  "height_m": 4993.6181640625,
+  "lat_deg": -85.96421545666995,
+  "lon_deg_east": 357.6652468663214,
+  "pixel_col": 800.0,
+  "pixel_row": 800.0
+ },
+ "godot": {
+  "frame": "X = map x - site x; Z = -(map y - site y); Y = height - site height (site at the origin, metres)",
+  "x_of_col": "origin_x_m + col * metres_per_pixel - site.x_m",
+  "z_of_row": "-(origin_y_m - row * metres_per_pixel - site.y_m)"
+ },
+ "sha256_r16": "658ed25c476729e8e2e490c701b653a421406924ce4082ac73c4be6afc604391"
+}

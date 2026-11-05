@@ -1,0 +1,75 @@
+{
+ "region": "relay_road",
+ "kind": "corridor",
+ "built": "2026-11-05",
+ "metres_per_pixel": 80.0,
+ "tiles": [],
+ "vista": {
+  "center_x_m": -5627.519999999999,
+  "center_z_m": -67832.47999999998,
+  "size_x_m": 57840.0,
+  "size_z_m": 169040.0,
+  "hole_m": null,
+  "lods": [
+   {
+    "lod": 0,
+    "path": "res://assets/environment/terrain/lola/relay_road/tiles/EN_Terrain_RelayRoad_LOD0.glb",
+    "vertex_spacing_m": 200.0,
+    "field": "lola",
+    "triangles": 492946,
+    "visible_from_m": 0.0,
+    "visible_to_m": 12000.0,
+    "bytes": 15821092
+   },
+   {
+    "lod": 1,
+    "path": "res://assets/environment/terrain/lola/relay_road/tiles/EN_Terrain_RelayRoad_LOD1.glb",
+    "vertex_spacing_m": 400.0,
+    "field": "lola",
+    "triangles": 124942,
+    "visible_from_m": 12000.0,
+    "visible_to_m": 30000.0,
+    "bytes": 3272660
+   },
+   {
+    "lod": 2,
+    "path": "res://assets/environment/terrain/lola/relay_road/tiles/EN_Terrain_RelayRoad_LOD2.glb",
+    "vertex_spacing_m": 800.0,
+    "field": "lola",
+    "triangles": 31516,
+    "visible_from_m": 30000.0,
+    "visible_to_m": 1000000000.0,
+    "bytes": 832180
+   }
+  ]
+ },
+ "frame": "Godot metres; X = east column direction, Z = south row direction, Y up; the site is at the origin at Y = 0",
+ "curvature": true,
+ "curvature_note": "Y = height - site height - (X^2 + Z^2) / (2 x 1,737,400 m): the meshes follow the Moon's sphere, so the Horizons Sun/Earth elevations (relative to the site's horizontal) light the far terrain correctly",
+ "site_height_m": 1959.4962158203125,
+ "skirt_m": 25.0,
+ "uv1": "region 0..1, v = 0 at the north (z_min) edge: normal and AO maps",
+ "uv2": "metres / 4 (one repeat per 4 m like the M1-35 regolith kit)",
+ "collision": "terrain_heightfield.gd to_height_map_shape() on heightmap_<mpp>m_detail.r16 (hero) or heightmap_<mpp>m.r16; never the visual mesh",
+ "material": "res://assets/environment/terrain/lola/terrain_lola.gdshader via lola_region.gd (object-space normal map, lunar-Lambert regolith)",
+ "normal_map": "T_Terrain_RelayRoad_Normal.png",
+ "normal_map_space": "object space in this region's Godot frame (R = X, G = Y up, B = Z), curvature included; not a tangent-space map",
+ "ao_map": "T_Terrain_RelayRoad_AO.png",
+ "ao_bake": {
+  "mesh_spacing_m": 200.0,
+  "distance_m": 3000.0,
+  "samples": 24,
+  "size_px": 1024,
+  "orientation_check": {
+   "corr_with_crests": 0.264,
+   "corr_if_flipped": -0.007
+  },
+  "use": "darkens only the faint Earthshine/bounce fill; the Sun's light is never multiplied by AO"
+ },
+ "extent_godot_m": {
+  "x_min": -34547.52,
+  "x_max": 23292.48,
+  "z_min": -152352.47999999998,
+  "z_max": 16687.520000000004
+ }
+}

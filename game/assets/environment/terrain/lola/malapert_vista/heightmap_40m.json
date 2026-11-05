@@ -1,0 +1,41 @@
+{
+ "region": "malapert_vista",
+ "kind": "vista",
+ "story": "horizon from the summit toward Earth",
+ "source_product": "pgda90_40mpp",
+ "source_title": "A New View of the Lunar South Pole from LOLA: LDEM_80S_40MPP_ADJ (80S-90S, 40 m/px)",
+ "source_url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_40MPP_ADJ.TIF",
+ "retrieved": "2026-11-05",
+ "format": "r16: little-endian uint16, row-major, top row first (north = toward 0 deg E is up); height_m = z_min_m + value * (z_max_m - z_min_m) / 65535",
+ "columns": 1600,
+ "rows": 1600,
+ "metres_per_pixel": 40.0,
+ "z_min_m": -2510.642,
+ "z_max_m": 5173.187,
+ "height_datum": "metres above the 1,737.4 km reference sphere (LOLA)",
+ "projection": "south polar stereographic, MOON_ME (DE421); x toward 90E, y toward 0E, pole at (0,0)",
+ "origin_x_m": -36980.0,
+ "origin_y_m": 154340.0,
+ "origin_note": "map coordinates of the centre of pixel (column 0, row 0)",
+ "source_window": {
+  "col0": 6675,
+  "row0": 3741
+ },
+ "interpolated_nan_fraction": 0.0,
+ "site": {
+  "id": "malapert_summit",
+  "x_m": -4987.5,
+  "y_m": 122327.5,
+  "height_m": 4993.6181640625,
+  "lat_deg": -85.96421545666995,
+  "lon_deg_east": 357.6652468663214,
+  "pixel_col": 799.812,
+  "pixel_row": 800.312
+ },
+ "godot": {
+  "frame": "X = map x - site x; Z = -(map y - site y); Y = height - site height (site at the origin, metres)",
+  "x_of_col": "origin_x_m + col * metres_per_pixel - site.x_m",
+  "z_of_row": "-(origin_y_m - row * metres_per_pixel - site.y_m)"
+ },
+ "sha256_r16": "cf713e5d9be78e834e22c5fb5c99c3911a913e6eac7ee12f3395c94caf048b43"
+}

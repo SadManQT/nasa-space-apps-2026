@@ -1,0 +1,56 @@
+{
+ "about": "Story sites pinned on the real LOLA terrain by make_terrain.py sites; rules in regions.json. Coordinates: south polar stereographic metres (MOON_ME/DE421), heights above the 1,737.4 km sphere.",
+ "computed": "2026-11-05",
+ "sites": {
+  "aurora": {
+   "x_m": -11572.5,
+   "y_m": -12472.5,
+   "height_m": 1959.4962158203125,
+   "lat_deg": -89.43890921454619,
+   "lon_deg_east": 222.85643000554958,
+   "product": "pgda78_site01",
+   "name": "Aurora Station (authored outpost) on the Shackleton-de Gerlache connecting ridge",
+   "rule": "highest LOLA pixel within 1,500 m of the centre of PGDA Site01 (Connecting ridge, Mazarico et al. 2011 site 1), x = -11,000 m, y = -12,000 m",
+   "mast_height_m": 10.0
+  },
+  "malapert_summit": {
+   "x_m": -4987.5,
+   "y_m": 122327.5,
+   "height_m": 4993.6181640625,
+   "lat_deg": -85.96421545666995,
+   "lon_deg_east": 357.6652468663214,
+   "product": "pgda78_site23",
+   "name": "Malapert relay summit (authored platform at the highest point of Mons Malapert)",
+   "rule": "highest LOLA pixel of PGDA Site23 (Malapert massif) within 6,000 m of the USGS/IAU Mons Malapert centre, -85.98 deg, -1.67 deg E",
+   "iau_center_xy_m": [
+    -3553.9702955394496,
+    121898.10265722124
+   ]
+  },
+  "cold_trap": {
+   "name": "Chapter 4 cold trap: a small permanently shadowed basin reached by a ridge road from Aurora",
+   "rule": "PSR from LPSR_80S_20MPP_ADJ with 0.3 to 6 km2 of area, outside Shackleton, whose slope-limited (<= 12 deg) route from Aurora on the 20 m DEM is closest to 12 km; the site is the lowest PSR pixel",
+   "x_m": -4230.0,
+   "y_m": -11970.0,
+   "height_m": 1126.78076171875,
+   "lat_deg": -89.58133360242644,
+   "lon_deg_east": 199.46256560936368,
+   "product": "pgda90_20mpp + pgda90_20mpp_psr",
+   "psr_component": 1449,
+   "psr_area_km2": 1.858,
+   "straight_line_from_aurora_m": 6603.0,
+   "selection_road_length_m": 8523.0,
+   "selection_grid_mpp": 40.0,
+   "psr_centroid_xy_m": [
+    -4239.054897739505,
+    -12283.29171151776
+   ],
+   "psr_bbox_xy_m": [
+    -4970.0,
+    -3430.0,
+    -13170.0,
+    -11530.0
+   ]
+  }
+ }
+}

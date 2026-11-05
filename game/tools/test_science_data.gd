@@ -13,7 +13,7 @@ func _run() -> void:
 	var science := Science.new()
 	var validation := science.validate()
 	_check(validation.valid, "all puzzles and fixture provenance validate: " + str(validation.errors))
-	_check(validation.fixture_count == 28, "Journal lists all 28 bundled fixtures")
+	_check(validation.fixture_count == 29, "Journal lists all 29 bundled fixtures")
 	for number in range(1, 17):
 		var cards := science.cards_for_puzzle("P-%02d" % number)
 		_check(not cards.is_empty() and not cards.any(func(card): return card.pending), "puzzle has verified cards: P-%02d" % number)

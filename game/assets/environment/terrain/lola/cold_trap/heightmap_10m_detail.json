@@ -1,0 +1,49 @@
+{
+ "region": "cold_trap",
+ "kind": "hero",
+ "story": "LOC-09 surveyed approach and LOC-10 vault shelf (Chapter 4)",
+ "source_product": "pgda90_10mpp",
+ "source_title": "A New View of the Lunar South Pole from LOLA: LDEM_83S_10MPP_ADJ (83S-90S, 10 m/px)",
+ "source_url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_83S_10MPP_ADJ.TIF",
+ "retrieved": "2026-11-05",
+ "format": "r16: little-endian uint16, row-major, top row first (north = toward 0 deg E is up); height_m = z_min_m + value * (z_max_m - z_min_m) / 65535",
+ "columns": 800,
+ "rows": 800,
+ "metres_per_pixel": 10.0,
+ "z_min_m": 319.509,
+ "z_max_m": 1730.869,
+ "height_datum": "metres above the 1,737.4 km reference sphere (LOLA)",
+ "projection": "south polar stereographic, MOON_ME (DE421); x toward 90E, y toward 0E, pole at (0,0)",
+ "origin_x_m": -8225.0,
+ "origin_y_m": -7975.0,
+ "origin_note": "map coordinates of the centre of pixel (column 0, row 0)",
+ "source_window": {
+  "col0": 20817,
+  "row0": 22437
+ },
+ "interpolated_nan_fraction": 0.0,
+ "site": {
+  "id": "cold_trap",
+  "x_m": -4230.0,
+  "y_m": -11970.0,
+  "height_m": 1126.78076171875,
+  "lat_deg": -89.58133360242644,
+  "lon_deg_east": 199.46256560936368,
+  "pixel_col": 399.5,
+  "pixel_row": 399.5
+ },
+ "godot": {
+  "frame": "X = map x - site x; Z = -(map y - site y); Y = height - site height (site at the origin, metres)",
+  "x_of_col": "origin_x_m + col * metres_per_pixel - site.x_m",
+  "z_of_row": "-(origin_y_m - row * metres_per_pixel - site.y_m)"
+ },
+ "sha256_r16": "ab6101d3271d2aa5379fd007590d882c18549ddb71cddc71791567a50a52e089",
+ "detail_layer": {
+  "count": 2237,
+  "diameter_min_m": 30.0,
+  "diameter_max_m": 60.0,
+  "seed": 831276071,
+  "law": "Trask (1966) / Gault (1970) equilibrium, N(>D) = 10^-1.1 D_km^-1.83 per km2; depth/diameter 0.04-0.16, rim 0.015-0.04 D"
+ },
+ "about": "LOLA heightmap plus the authored sub-resolution crater layer (not NASA data at these scales); use for collision so it matches the tiles"
+}

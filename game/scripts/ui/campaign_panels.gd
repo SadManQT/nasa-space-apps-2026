@@ -716,6 +716,8 @@ func _render_card(value) -> void:
 		_card_text("WHAT THE GAME COMPUTED\n" + ScienceScript.describe(card.get("derived", [])) + "\nGame resource units are training rules; the fixture does not validate every game number.")
 		_card_text("LIMITS\n" + String(card.get("boundary", "")), true)
 		_card_text("SOURCE\n" + String(card.get("url", "")) + "\n" + String(card.get("citation", "")) + "\nRetrieved: " + String(card.get("retrieved", "")) + "\nLicence: " + String(card.get("licence", "")))
+		if not String(card.get("credit_line", "")).is_empty():
+			_card_text("CREDIT\n" + String(card.get("credit_line", "")))
 	_source_button("BACK TO ALL SOURCES", func(): open_panel("sources", {"ids": []}))
 
 ## ---------------------------------------------------------------------------

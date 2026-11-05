@@ -3,7 +3,12 @@
 # and any load failure.
 #   Godot --headless --path game --script res://tools/verify_assets.gd
 # production/tools/verify_gate.py compares these numbers with each asset's spec.
+# The LOLA terrain tiles (M1-34) are kilometre-scale heightfield meshes, not props: they have no
+# manifest spec, no floor and no single size, so they are skipped here and verified by
+# tools/test_terrain_lola.gd instead (import, triangle counts, footprint, vertices on the heightfield).
 extends SceneTree
+
+const SKIP_DIRS := ["res://assets/environment/terrain/lola"]
 
 func _init() -> void:
 	for path in _glbs("res://assets"):
@@ -55,6 +60,8 @@ func _global_xform(n: Node3D) -> Transform3D:
 
 func _glbs(dir: String) -> Array[String]:
 	var out: Array[String] = []
+	if dir in SKIP_DIRS:
+		return out
 	for f in DirAccess.get_files_at(dir):
 		if f.ends_with(".glb"):
 			out.append(dir.path_join(f))

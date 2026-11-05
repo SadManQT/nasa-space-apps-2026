@@ -1,0 +1,9 @@
+TERRAIN CAPTURE RESULT: PASS (12 files, 0 failures)
+== review
+wrote production/review/M1-34_aurora_ridge_lola_vs_game.png (3 panels)
+wrote production/review/M1-34_aurora_vista_lola_vs_game.png (3 panels)
+wrote production/review/M1-34_cold_trap_lola_vs_game.png (3 panels)
+wrote production/review/M1-34_relay_road_lola_vs_game.png (3 panels)
+wrote production/review/M1-34_malapert_summit_lola_vs_game.png (3 panels)
+wrote production/review/M1-34_malapert_vista_lola_vs_game.png (3 panels)
+== review done in 1 s

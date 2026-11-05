@@ -893,6 +893,15 @@ def fx_jpl_ipn_42_176_dte():
     return rec
 
 
+def fx_lro_lola_south_pole_terrain():
+    """Written by production/tools/make_terrain.py fixture (LOLA heightmaps, sites, routes, Horizons); kept here so
+    the index and --check know it. It is never downloaded by this script."""
+    p = OUT / "lro_lola_south_pole_terrain.json"
+    if not p.exists():
+        raise RuntimeError("run `python3 production/tools/make_terrain.py all` first (board M1-34)")
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
 FIXTURES = {f.__name__[3:]: f for f in (
     fx_donki_2017_09, fx_goes13_protons_2017_09, fx_donki_2012_07, fx_stereo_a_het_2012_07, fx_crater_dose_2012_07,
     fx_lro_mazarico_2011_illumination, fx_jpl_horizons_pole_season, fx_jpl_horizons_ch1_sky,
@@ -900,7 +909,8 @@ FIXTURES = {f.__name__[3:]: f for f in (
     fx_vsat_relocatable_array, fx_clowdsley_2021_shielding, fx_apollo_shallow_moonquakes, fx_meo_lunar_impact_flashes,
     fx_lcross_water_2009, fx_diviner_cold_traps, fx_chandrayaan1_m3_ice, fx_kaguya_shackleton_floor,
     fx_viper_slope_limit, fx_osdr_brassica_rapa_iss, fx_mir_brassica_seed_to_seed, fx_fast_plants_lifecycle,
-    fx_change4_lnd_surface_dose, fx_change4_cotton, fx_esa_moonlight_relay, fx_jpl_ipn_42_176_dte)}
+    fx_change4_lnd_surface_dose, fx_change4_cotton, fx_esa_moonlight_relay, fx_jpl_ipn_42_176_dte,
+    fx_lro_lola_south_pole_terrain)}
 
 # Same mapping as docs/SCIENCE_AND_DATA.md §B2.
 PUZZLES = {
@@ -913,7 +923,7 @@ PUZZLES = {
     "P-05": ["apollo_shallow_moonquakes", "bvad_2022_metabolic"],
     "P-06": ["fast_plants_lifecycle", "mir_brassica_seed_to_seed"],
     "P-07": ["viper_slope_limit", "lcross_water_2009", "diviner_cold_traps", "chandrayaan1_m3_ice",
-             "kaguya_shackleton_floor", "bvad_2022_metabolic"],
+             "kaguya_shackleton_floor", "bvad_2022_metabolic", "lro_lola_south_pole_terrain"],
     "P-08": ["diviner_cold_traps", "kaguya_shackleton_floor"],
     "P-09": ["change4_cotton"],
     "P-10": ["meo_lunar_impact_flashes", "bvad_2022_metabolic", "vsat_relocatable_array"],
@@ -922,11 +932,13 @@ PUZZLES = {
     "P-13": ["donki_2012_07", "stereo_a_het_2012_07", "crater_dose_2012_07", "clowdsley_2021_shielding",
              "bvad_2022_metabolic"],
     "P-14": ["stereo_a_het_2012_07", "donki_2012_07", "change4_lnd_surface_dose"],
-    "P-15": ["usgs_gazetteer_south_pole", "viper_slope_limit", "bvad_2022_metabolic", "esa_moonlight_relay"],
-    "P-16": ["jpl_horizons_ch8_relay", "usgs_gazetteer_south_pole", "esa_moonlight_relay", "jpl_ipn_42_176_dte"],
+    "P-15": ["usgs_gazetteer_south_pole", "viper_slope_limit", "bvad_2022_metabolic", "esa_moonlight_relay",
+             "lro_lola_south_pole_terrain"],
+    "P-16": ["jpl_horizons_ch8_relay", "usgs_gazetteer_south_pole", "esa_moonlight_relay", "jpl_ipn_42_176_dte",
+             "lro_lola_south_pole_terrain"],
 }
 SRC_CARDS = {
-    "SRC-MOON": [], "SRC-POLAR": ["lro_mazarico_2011_illumination", "jpl_horizons_pole_season", "jpl_horizons_ch1_sky"],
+    "SRC-MOON": ["lro_lola_south_pole_terrain"], "SRC-POLAR": ["lro_mazarico_2011_illumination", "jpl_horizons_pole_season", "jpl_horizons_ch1_sky"],
     "SRC-LIFE-SUPPORT": ["bvad_2022_metabolic"], "SRC-PLANTS": ["fast_plants_lifecycle", "osdr_brassica_rapa_iss"],
     "SRC-POLLINATION": ["fast_plants_lifecycle", "mir_brassica_seed_to_seed"], "SRC-QUAKES": ["apollo_shallow_moonquakes"],
     "SRC-ICE": ["lcross_water_2009", "diviner_cold_traps", "chandrayaan1_m3_ice", "kaguya_shackleton_floor"],
@@ -935,7 +947,8 @@ SRC_CARDS = {
     "SRC-STORM2012": ["donki_2012_07", "stereo_a_het_2012_07", "crater_dose_2012_07"],
     "SRC-STORM2017": ["donki_2017_09", "goes13_protons_2017_09"],
     "SRC-SHIELDING": ["clowdsley_2021_shielding", "change4_lnd_surface_dose"],
-    "SRC-RELAY": ["esa_moonlight_relay", "jpl_ipn_42_176_dte", "jpl_horizons_ch8_relay", "usgs_gazetteer_south_pole"],
+    "SRC-RELAY": ["esa_moonlight_relay", "jpl_ipn_42_176_dte", "jpl_horizons_ch8_relay", "usgs_gazetteer_south_pole",
+                  "lro_lola_south_pole_terrain"],
     "SRC-COTTON2019": ["change4_cotton"],
 }
 

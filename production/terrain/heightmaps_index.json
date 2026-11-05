@@ -1,0 +1,46 @@
+{
+ "regions": {
+  "aurora_ridge": {
+   "heightmap": "aurora_ridge/heightmap_5m.r16",
+   "meta": "aurora_ridge/heightmap_5m.json",
+   "mpp": 5.0,
+   "columns": 1600,
+   "rows": 1600
+  },
+  "aurora_vista": {
+   "heightmap": "aurora_vista/heightmap_40m.r16",
+   "meta": "aurora_vista/heightmap_40m.json",
+   "mpp": 40.0,
+   "columns": 1600,
+   "rows": 1600
+  },
+  "cold_trap": {
+   "heightmap": "cold_trap/heightmap_10m.r16",
+   "meta": "cold_trap/heightmap_10m.json",
+   "mpp": 10.0,
+   "columns": 800,
+   "rows": 800
+  },
+  "relay_road": {
+   "heightmap": "relay_road/heightmap_80m.r16",
+   "meta": "relay_road/heightmap_80m.json",
+   "mpp": 80.0,
+   "columns": 724,
+   "rows": 2114
+  },
+  "malapert_summit": {
+   "heightmap": "malapert_summit/heightmap_5m.r16",
+   "meta": "malapert_summit/heightmap_5m.json",
+   "mpp": 5.0,
+   "columns": 1600,
+   "rows": 1600
+  },
+  "malapert_vista": {
+   "heightmap": "malapert_vista/heightmap_40m.r16",
+   "meta": "malapert_vista/heightmap_40m.json",
+   "mpp": 40.0,
+   "columns": 1600,
+   "rows": 1600
+  }
+ }
+}

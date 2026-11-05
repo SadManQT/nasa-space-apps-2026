@@ -38,7 +38,8 @@
    "diviner_cold_traps",
    "chandrayaan1_m3_ice",
    "kaguya_shackleton_floor",
-   "bvad_2022_metabolic"
+   "bvad_2022_metabolic",
+   "lro_lola_south_pole_terrain"
   ],
   "P-08": [
    "diviner_cold_traps",
@@ -75,17 +76,21 @@
    "usgs_gazetteer_south_pole",
    "viper_slope_limit",
    "bvad_2022_metabolic",
-   "esa_moonlight_relay"
+   "esa_moonlight_relay",
+   "lro_lola_south_pole_terrain"
   ],
   "P-16": [
    "jpl_horizons_ch8_relay",
    "usgs_gazetteer_south_pole",
    "esa_moonlight_relay",
-   "jpl_ipn_42_176_dte"
+   "jpl_ipn_42_176_dte",
+   "lro_lola_south_pole_terrain"
   ]
  },
  "src_cards": {
-  "SRC-MOON": [],
+  "SRC-MOON": [
+   "lro_lola_south_pole_terrain"
+  ],
   "SRC-POLAR": [
    "lro_mazarico_2011_illumination",
    "jpl_horizons_pole_season",
@@ -137,7 +142,8 @@
    "esa_moonlight_relay",
    "jpl_ipn_42_176_dte",
    "jpl_horizons_ch8_relay",
-   "usgs_gazetteer_south_pole"
+   "usgs_gazetteer_south_pole",
+   "lro_lola_south_pole_terrain"
   ],
   "SRC-COTTON2019": [
    "change4_cotton"
