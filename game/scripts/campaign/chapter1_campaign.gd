@@ -334,6 +334,8 @@ func interact_nearby() -> Dictionary:
 	var selected := nearby_target()
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) == "P-02" and hud != null and hud.open_mission_table(String(selected.target_id)):
 		return {"accepted": true, "reason": "Mission Table open.", "mission_table": true}
+	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-05", "P-06"] and hud != null and hud.open_scientific_puzzle(String(selected.target_id)):
+		return {"accepted": true, "reason": "Scientific Puzzle Panel open.", "scientific_puzzle": true}
 	if not selected.is_empty():
 		return perform_target(String(selected.target_id))
 	var result := {"accepted": false, "reason": "Move near an unfinished operation and face it. Its location is listed beside USE."}

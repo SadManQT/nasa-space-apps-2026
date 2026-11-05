@@ -7,8 +7,12 @@ const WorldRouteScript = preload("res://scripts/world/world_route.gd")
 const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
 const LedgerScript = preload("res://scripts/puzzles/extended_puzzle_ledger.gd")
 const ResultScript = preload("res://scripts/core/command_result.gd")
+const P05Script = preload("res://scripts/puzzles/p05_falling_pressure.gd")
+const P06Script = preload("res://scripts/puzzles/p06_harvest_future.gd")
 
 var _ledger: RefCounted
+var _p05: RefCounted = P05Script.new()
+var _p06: RefCounted = P06Script.new()
 var _scene_index := 0
 var _scene_flags := {}
 var _dialogue_acks := {}
@@ -21,6 +25,8 @@ func _init(director: RefCounted = null, skip_initial_scene: bool = false) -> voi
 	_world = WorldRouteScript.new(_director)
 	_create_dispatcher(DispatcherScript)
 	_ledger = LedgerScript.new()
+	_p05 = P05Script.new()
+	_p06 = P06Script.new()
 	for scene_id in GateCatalog.scene_ids():
 		_scene_flags[scene_id] = {}
 		_dialogue_acks[scene_id] = []
@@ -55,6 +61,34 @@ func current_flags() -> Dictionary:
 func last_result() -> Dictionary:
 	return _last_result.duplicate(true)
 
+## The player's interactive P-05 Find the Falling Pressure state model.
+func p05() -> RefCounted:
+	return _p05
+
+## The player's interactive P-06 A Harvest With a Future state model.
+func p06() -> RefCounted:
+	return _p06
+
+## Read-only view dictionary for the Scientific Puzzle Panel (UI_09) for a P-05 or P-06 gate.
+func puzzle_view(target_id: String = "") -> Dictionary:
+	var scene_id := current_scene_id()
+	var resolved_target := target_id
+	if resolved_target.is_empty():
+		var targets: Array = targets_for_current_scene()
+		if not targets.is_empty():
+			resolved_target = String(targets[0].get("target_id", ""))
+	var is_p06 := P06Script.is_gate(resolved_target) or int(scene_id.substr(9, 2)) >= 7
+	var model: RefCounted = _p06 if is_p06 else _p05
+	var view: Dictionary = model.view_state(scene_id, resolved_target)
+	var state: Dictionary = _director.snapshot()
+	view["scenario_datetime"] = String(state.get("scenario_datetime", ""))
+	view["resources"] = state.get("resources", {}).duplicate(true)
+	view["plants"] = state.get("plants", []).duplicate(true)
+	view["inventories"] = state.get("inventories", {}).duplicate(true)
+	view["completed_flags"] = _context_flags()
+	view["gate_status"] = gate_status()
+	return view
+
 func start_at(scene_id: String) -> Dictionary:
 	var index := GateCatalog.scene_ids().find(scene_id)
 	if index < 0:
@@ -71,7 +105,8 @@ func inspect(context: Dictionary = {}) -> Dictionary:
 	return _dispatcher.inspect(_context(context))
 
 func use(payload: Dictionary = {}, context: Dictionary = {}) -> Dictionary:
-	return _dispatcher.use(payload, _context(context))
+	var target: Dictionary = _dispatcher.target(String(_dispatcher.state().get("focused_target_id", "")))
+	return _dispatcher.use(_payload_for_target(target, payload), _context(context))
 
 func preview(payload_override: Dictionary = {}) -> Dictionary:
 	return _dispatcher.preview(payload_override)
@@ -93,6 +128,14 @@ func perform(target_id: String, payload: Dictionary = {}, context: Dictionary = 
 		return {"accepted": false, "reason": "Target %s is not part of %s." % [target_id, current_scene_id()]}
 	var target: Dictionary = candidates[0]
 	var prepared: Dictionary = _payload_for_target(target, payload)
+	if P05Script.is_gate(target_id) and payload.is_empty():
+		var p05_block: String = _p05.commit_block_reason(target_id)
+		if not p05_block.is_empty():
+			return {"accepted": false, "reason": p05_block, "scientific_puzzle": true, "puzzle_id": "P-05"}
+	if P06Script.is_gate(target_id) and payload.is_empty():
+		var p06_block: String = _p06.commit_block_reason(target_id)
+		if not p06_block.is_empty():
+			return {"accepted": false, "reason": p06_block, "scientific_puzzle": true, "puzzle_id": "P-06"}
 	var trace := {}
 	trace["focus"] = focus(target_id, context)
 	if not bool(trace.focus.get("accepted", false)):
@@ -202,6 +245,8 @@ func snapshot() -> Dictionary:
 		"scene_flags": _scene_flags.duplicate(true),
 		"dialogue_acks": _dialogue_acks.duplicate(true),
 		"ledger": _ledger.snapshot(),
+		"p05": _p05.snapshot(),
+		"p06": _p06.snapshot(),
 		"world": _world.snapshot(),
 		"chapter_ready": chapter_ready(),
 	}
@@ -217,6 +262,8 @@ func restore(data: Dictionary) -> Dictionary:
 			return nested
 	_world = staged.world
 	_ledger = staged.ledger
+	_p05 = staged.p05
+	_p06 = staged.p06
 	_scene_index = GateCatalog.scene_ids().find(data.current_scene_id)
 	_completed_scene_ids = data.completed_scene_ids.duplicate()
 	_scene_flags = data.scene_flags.duplicate(true)
@@ -224,6 +271,17 @@ func restore(data: Dictionary) -> Dictionary:
 	_retry_checkpoint = checkpoint.duplicate(true)
 	_register_current_targets()
 	return {"accepted": true, "reason": "Extended campaign route restored from primitive state."}
+
+## Restores the last operation checkpoint while keeping the player's P-05 and P-06 panel work.
+func retry() -> Dictionary:
+	var p05_state: Dictionary = _p05.snapshot()
+	var p06_state: Dictionary = _p06.snapshot()
+	var result: Dictionary = super.retry()
+	if bool(result.get("accepted", false)):
+		_p05.restore(p05_state)
+		_p06.restore(p06_state)
+		result["route"] = snapshot()
+	return result
 
 ## Restores a snapshot into temporary world and ledger objects; live state is untouched.
 func _stage(data: Dictionary) -> Dictionary:
@@ -234,10 +292,24 @@ func _stage(data: Dictionary) -> Dictionary:
 		return {"accepted": false, "reason": "Extended route snapshot requires its puzzle ledger."}
 	var world: RefCounted = WorldRouteScript.new(_director)
 	var ledger: RefCounted = LedgerScript.new()
+	var p05_model: RefCounted = P05Script.new()
+	var p06_model: RefCounted = P06Script.new()
 	for restored in [world.restore(data.world), ledger.restore(data.ledger)]:
 		if not bool(restored.get("accepted", false)):
 			return restored
-	return {"accepted": true, "world": world, "ledger": ledger}
+	if data.has("p05"):
+		if not data.p05 is Dictionary:
+			return {"accepted": false, "reason": "Extended route p05 state must be a Dictionary."}
+		var r05: Dictionary = p05_model.restore(data.p05)
+		if not bool(r05.get("accepted", false)):
+			return r05
+	if data.has("p06"):
+		if not data.p06 is Dictionary:
+			return {"accepted": false, "reason": "Extended route p06 state must be a Dictionary."}
+		var r06: Dictionary = p06_model.restore(data.p06)
+		if not bool(r06.get("accepted", false)):
+			return r06
+	return {"accepted": true, "world": world, "ledger": ledger, "p05": p05_model, "p06": p06_model}
 
 func _set_current_scene(index: int, project_clock: bool = true) -> Dictionary:
 	var scene_ids: Array = GateCatalog.scene_ids()
@@ -273,6 +345,15 @@ func _context_flags() -> Dictionary:
 
 func _payload_for_target(target: Dictionary, override: Dictionary) -> Dictionary:
 	var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+	var action := String(target.get("puzzle_action", target.get("target_id", "")))
+	if P05Script.is_gate(action):
+		var p05_payload: Dictionary = _p05.payload_for_action(action)
+		for k in p05_payload:
+			payload[k] = p05_payload[k]
+	elif P06Script.is_gate(action):
+		var p06_payload: Dictionary = _p06.payload_for_action(action)
+		for k in p06_payload:
+			payload[k] = p06_payload[k]
 	for key in override.keys():
 		payload[key] = override[key]
 	if target.has("puzzle_action"):

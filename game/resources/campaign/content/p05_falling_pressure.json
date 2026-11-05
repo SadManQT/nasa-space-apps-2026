@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "content_revision": "p05-falling-pressure-v1",
+  "puzzle_id": "P-05",
+  "title": "Find the Falling Pressure",
+  "subtitle": "Isolate the leaking branch with the independent mechanical gauge",
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-05; execution/PUZZLE_P05.md; game-design/22_PUZZLE_CLUE_DESIGN.md §5.1-5.2; game-design/24_NARRATIVE_REVISION.md §2.3, §2.9, §2.10; game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6",
+  "nasa_sources": [
+    "apollo_shallow_moonquakes",
+    "bvad_2022_metabolic"
+  ],
+  "entry_resources": {
+    "E": 14,
+    "A": 10,
+    "H": 6,
+    "C": 8,
+    "R": 18.0
+  },
+  "witness_resources": {
+    "E": 18,
+    "A": 3,
+    "H": 6,
+    "C": 8,
+    "R": 13.2
+  },
+  "investigation_phases": 4,
+  "max_inspections_per_phase": 2,
+  "phase_rates": {
+    "daylight_energy": 8,
+    "basic_energy": 1,
+    "light": 1,
+    "breathing_air": 1,
+    "unresolved_leak_air": 1,
+    "food_consumption": 1.2
+  },
+  "stable_readings_required": 5,
+  "stable_interval_seconds": 2,
+  "taps": {
+    "MAIN": {
+      "id": "MAIN",
+      "label": "Main Reserve Tap",
+      "t0": 100,
+      "t10": 100,
+      "isolated": 100,
+      "stable": 100,
+      "unit": "relative test units"
+    },
+    "GARDEN": {
+      "id": "GARDEN",
+      "label": "Garden Branch Tap",
+      "t0": 82,
+      "t10": 74,
+      "isolated": 74,
+      "stable": 100,
+      "unit": "relative test units"
+    },
+    "RETURN": {
+      "id": "RETURN",
+      "label": "Return Line Tap",
+      "t0": 100,
+      "t10": 100,
+      "isolated": 100,
+      "stable": 100,
+      "unit": "relative test units"
+    }
+  },
+  "expected_actions": {
+    "p05_read_main_t0": {
+      "reading": 100
+    },
+    "p05_read_garden_t0": {
+      "reading": 82
+    },
+    "p05_read_return_t0": {
+      "reading": 100
+    },
+    "p05_read_main_t10": {
+      "reading": 100
+    },
+    "p05_read_garden_t10": {
+      "reading": 74
+    },
+    "p05_read_return_t10": {
+      "reading": 100
+    },
+    "p05_stable_read_1": {
+      "main": 100,
+      "garden": 100,
+      "return": 100
+    },
+    "p05_stable_read_2": {
+      "main": 100,
+      "garden": 100,
+      "return": 100
+    },
+    "p05_stable_read_3": {
+      "main": 100,
+      "garden": 100,
+      "return": 100
+    },
+    "p05_stable_read_4": {
+      "main": 100,
+      "garden": 100,
+      "return": 100
+    },
+    "p05_stable_read_5": {
+      "main": 100,
+      "garden": 100,
+      "return": 100
+    }
+  },
+  "candidates": [
+    {
+      "id": "main_tank",
+      "action": "p05_inspect_tank",
+      "label": "Main Air Tank",
+      "branch": "MAIN",
+      "summary": "Primary reserve shell and regulator hold steady at 100 relative test units.",
+      "fault": false
+    },
+    {
+      "id": "habitat_trunk",
+      "action": "p05_inspect_habitat",
+      "label": "Habitat Trunk Line",
+      "branch": "MAIN",
+      "summary": "Main crew breathing supply. Isolating this trunk stops the leak and the habitat's air supply too.",
+      "fault": false
+    },
+    {
+      "id": "garden_feedthrough",
+      "action": "p05_inspect_garden",
+      "label": "Garden Feedthrough Collar",
+      "branch": "GARDEN",
+      "summary": "Bulkhead collar shaken by the shallow moonquake; manual tap falls from 82 at t0 to 74 at t10.",
+      "fault": true
+    },
+    {
+      "id": "return_line",
+      "action": "p05_inspect_return",
+      "label": "Return Manifold",
+      "branch": "RETURN",
+      "summary": "Return circulation loop holds steady at 100 relative test units across the 10-second check.",
+      "fault": false
+    },
+    {
+      "id": "airlock_seal",
+      "action": "p05_inspect_airlock",
+      "label": "Airlock Inner Seal",
+      "branch": "RETURN",
+      "summary": "Inner hatch lip is clean and seated; no differential drop across the airlock boundary.",
+      "fault": false
+    },
+    {
+      "id": "annex_branch",
+      "action": "p05_inspect_annex",
+      "label": "Annex Branch Feed",
+      "branch": "ANNEX",
+      "summary": "Phase-2 aftershock trips the branch indicator; automatic isolation holds when verified.",
+      "fault": false
+    }
+  ],
+  "stages": [
+    {
+      "id": "learn",
+      "order": 1,
+      "title": "Stage 1 · Learn: Trust the Mechanical Gauge",
+      "scenes": [
+        "EX-CH03-S01",
+        "EX-CH03-S02"
+      ],
+      "goal": "Equip the independent mechanical gauge, read the panel warning, identify the three test taps, and predict which branch is falling.",
+      "target_minutes": "2–3 min"
+    },
+    {
+      "id": "apply",
+      "order": 2,
+      "title": "Stage 2 · Apply: Six Candidates, Two Checks Per Phase",
+      "scenes": [
+        "EX-CH03-S02",
+        "EX-CH03-S03"
+      ],
+      "goal": "Record t0 and t10 readings across MAIN (100→100), GARDEN (82→74), and RETURN (100→100), inspect candidates within the 2-per-phase limit, and preview isolating the garden branch.",
+      "target_minutes": "4–6 min"
+    },
+    {
+      "id": "twist",
+      "order": 3,
+      "title": "Stage 3 · Twist: Aftershock, Clamp, and Reconciled Ledger",
+      "scenes": [
+        "EX-CH03-S04",
+        "EX-CH03-S05",
+        "EX-CH03-S06"
+      ],
+      "goal": "Verify annex auto-isolation after the phase-2 aftershock, isolate GARDEN, seat the repair clamp, slow-reopen for 5 steady 100/100/100 readings, fix the copied paper note, and inspect the N.R. annex hatch by camera at zero differential.",
+      "target_minutes": "3–5 min"
+    }
+  ],
+  "guided_intro": {
+    "headline": "Find the leaking branch without cutting crew air",
+    "why_now": "After the shallow moonquake, air is dropping by 1 unit each phase on top of crew breathing. The electronic board is noisy, so you must test three taps with the mechanical gauge.",
+    "first_step": "Predict which branch is falling, then attach the mechanical gauge to MAIN, GARDEN, and RETURN at t0 and t10.",
+    "explainer_clip": {
+      "id": "clip_p05_differential_isolation",
+      "title": "How Differential Pressure Isolation Works",
+      "duration_seconds": 12,
+      "steps": [
+        "Attach the mechanical gauge to each test tap (MAIN, GARDEN, RETURN) at t0 and again 10 seconds later (t10).",
+        "A steady 100 → 100 reading means the branch is tight. A falling 82 → 74 reading reveals the active leak.",
+        "Close only the leaking branch valve, verify pressure holds, seat the repair clamp, and reopen slowly for 5 steady checks."
+      ]
+    }
+  },
+  "prediction": {
+    "prompt": "Before running the 10-second comparison, which branch do you predict is losing pressure after the moonquake?",
+    "correct_option": "GARDEN",
+    "options": [
+      {
+        "id": "MAIN",
+        "label": "Main Reserve Tap",
+        "response": "Prediction logged: Main Reserve. Compare t0 and t10 gauge readings to test your hypothesis."
+      },
+      {
+        "id": "GARDEN",
+        "label": "Garden Branch Tap",
+        "response": "Prediction logged: Garden Branch. Compare t0 and t10 gauge readings to see if the bulkhead feedthrough is falling."
+      },
+      {
+        "id": "RETURN",
+        "label": "Return Line Tap",
+        "response": "Prediction logged: Return Line. Compare t0 and t10 gauge readings to test your hypothesis."
+      }
+    ]
+  },
+  "role_cards": [
+    {
+      "role_id": "amara",
+      "holder": "A",
+      "name": "Amara",
+      "role": "LIFE SUPPORT",
+      "icon": "TANK",
+      "arrives_scene": "EX-CH03-S01",
+      "quote": "Do not guess with a wrench. Read the taps first.",
+      "clue_ids": [
+        "P05-C1",
+        "P05-C3"
+      ],
+      "facts": [
+        "The independent mechanical gauge reads MAIN 100 → 100, GARDEN 82 → 74, and RETURN 100 → 100 over 10 seconds.",
+        "Each investigation phase uses 1 air for crew breathing plus 1 air for the unresolved leak until sealed before phase 4 (Air 10 → 3)."
+      ]
+    },
+    {
+      "role_id": "kai",
+      "holder": "K",
+      "name": "Kai",
+      "role": "POWER & PIPING",
+      "icon": "BATTERY",
+      "arrives_scene": "EX-CH03-S01",
+      "quote": "The aftershock flipped the annex indicator, not the seal.",
+      "clue_ids": [
+        "P05-C4",
+        "P05-C5"
+      ],
+      "facts": [
+        "During phase 2 an aftershock trips the annex branch indicator; verify its automatic isolation before reopening the garden.",
+        "Four daylight phases at DIM light and air maker OFF add +8 solar and spend 2 per phase (Battery 14 → 18, capped at 20)."
+      ]
+    },
+    {
+      "role_id": "mei",
+      "holder": "M",
+      "name": "Mei",
+      "role": "GARDEN",
+      "icon": "LEAF",
+      "arrives_scene": "EX-CH03-S02",
+      "quote": "Alo and Tara can ride out a brief branch isolation while we seat the clamp.",
+      "clue_ids": [
+        "P05-C6"
+      ],
+      "facts": [
+        "Briefly isolating the garden branch while seating the bulkhead clamp keeps Alo at 6 and Garden health at 8.",
+        "Four phases consume 1.2 food days per phase (Food 18.0 → 13.2 days)."
+      ]
+    },
+    {
+      "role_id": "rafi",
+      "holder": "R",
+      "name": "Rafi",
+      "role": "SAFETY & SEISMIC",
+      "icon": "SHIELD",
+      "arrives_scene": "EX-CH03-S02",
+      "quote": "Fix the note when the note is wrong, not the valve that passed five checks.",
+      "clue_ids": [
+        "P05-C2",
+        "P05-C7"
+      ],
+      "facts": [
+        "Six candidate locations can be inspected, with at most 2 inspections per phase.",
+        "When a copied paper note conflicts with a tested valve, fix the note; inspect the N.R. annex hatch by camera only after confirming zero differential."
+      ]
+    }
+  ],
+  "trade_study": {
+    "prompt": "Select the isolation plan that stops the 82 → 74 drop without cutting crew breathing air:",
+    "correct_option": "isolate_garden",
+    "options": [
+      {
+        "id": "isolate_garden",
+        "label": "Isolate Garden Branch Only",
+        "cost": "Garden isolated briefly · Crew air stays online · Leak stopped before phase 4",
+        "recommended": true
+      },
+      {
+        "id": "isolate_habitat_trunk",
+        "label": "Isolate Habitat Trunk",
+        "cost": "Stops the leak and the habitat's air supply too",
+        "recommended": false
+      },
+      {
+        "id": "close_main_valve",
+        "label": "Close Main Reserve Valve",
+        "cost": "Triggers Flight Rule FR-02 Protected Reserve Warning",
+        "recommended": false
+      }
+    ]
+  },
+  "go_no_go_poll": {
+    "prompt": "Confirm Go/No-Go across all four stations before isolating the garden branch:",
+    "stations": [
+      {
+        "id": "life_support",
+        "label": "Life Support (Amara)",
+        "call": "GO — Main reserve at 100; garden tap isolated on standby."
+      },
+      {
+        "id": "power",
+        "label": "Power & Piping (Kai)",
+        "call": "GO — Annex automatic isolation verified after phase-2 tremor."
+      },
+      {
+        "id": "garden",
+        "label": "Garden Bay (Mei)",
+        "call": "GO — Alo and Tara buffered for brief collar clamp repair."
+      },
+      {
+        "id": "safety",
+        "label": "Flight Rules (Rafi)",
+        "call": "GO — Rollback path verified if main pressure drops."
+      }
+    ]
+  },
+  "odf_steps": [
+    {
+      "id": "step_isolate",
+      "action": "p05_isolate_garden",
+      "label": "1. Close GARDEN isolation valve only"
+    },
+    {
+      "id": "step_verify_hold",
+      "action": "p05_verify_main_hold",
+      "label": "2. Verify MAIN holds 100 and isolated GARDEN holds 74"
+    },
+    {
+      "id": "step_clamp",
+      "action": "p05_apply_garden_clamp",
+      "label": "3. Seat repair clamp on garden feedthrough collar from safe side"
+    },
+    {
+      "id": "step_reopen",
+      "action": "p05_reopen_garden_slow",
+      "label": "4. Reopen GARDEN valve slowly and verify 5 steady 100/100/100 checks"
+    }
+  ],
+  "wrong_actions": {
+    "close_main_valve": {
+      "id": "close_main_valve",
+      "label": "Close MAIN Reserve Valve",
+      "badge": "PROTECTED RESERVE WARNING (FR-02)",
+      "feedback": "Closing MAIN cuts the station's primary reserve. Flight Rule FR-02 raises a Protected Reserve Warning and reopens MAIN immediately."
+    },
+    "isolate_habitat_trunk": {
+      "id": "isolate_habitat_trunk",
+      "label": "Isolate Habitat Trunk",
+      "badge": "HABITAT AIR WARNING",
+      "feedback": "This stops the leak and the habitat's air supply too. Leave the habitat trunk open and isolate only the leaking garden branch."
+    },
+    "clamp_before_isolation": {
+      "id": "clamp_before_isolation",
+      "label": "Seat Clamp Before Isolating Garden",
+      "badge": "PRESSURISED LINE",
+      "feedback": "The repair clamp cannot latch cleanly against a pressurised leaking collar. Isolate the GARDEN valve first, then seat the clamp from the safe side."
+    },
+    "clamp_wrong_branch": {
+      "id": "clamp_wrong_branch",
+      "label": "Seat Clamp on Return Line",
+      "badge": "NO LEAK ON RETURN",
+      "feedback": "RETURN held 100 → 100. Clamping an intact line leaves the garden feedthrough leaking."
+    },
+    "fast_reopen_garden": {
+      "id": "fast_reopen_garden",
+      "label": "Snap Garden Valve Open Fast",
+      "badge": "PRESSURE SURGE RISK",
+      "feedback": "A fast reopen hammers the newly clamped collar. Reopen GARDEN slowly and verify five steady readings 2 seconds apart."
+    },
+    "change_valve_to_match_bad_note": {
+      "id": "change_valve_to_match_bad_note",
+      "label": "Change Tested Valve to Match Copied Paper Note",
+      "badge": "EVIDENCE OVER PAPER",
+      "feedback": "The valve just passed five consecutive 100/100/100 mechanical gauge checks. Correct the copied paper note to match the physical evidence, not the valve."
+    },
+    "open_annex_hatch_unverified": {
+      "id": "open_annex_hatch_unverified",
+      "label": "Open N.R. Annex Hatch Directly",
+      "badge": "FLIGHT RULE BLOCK",
+      "feedback": "Never open an unverified bulkhead hatch. Isolate the annex feed, confirm zero pressure differential, and inspect inside by camera only."
+    }
+  },
+  "scene_gates": {
+    "EX-CH03-S01": {
+      "stage": "learn",
+      "headline": "Equip the mechanical gauge and identify the three pressure taps",
+      "instruction": "Read the noisy manifold warning, equip the independent mechanical gauge, and locate the MAIN, GARDEN, and RETURN taps."
+    },
+    "EX-CH03-S02": {
+      "stage": "apply",
+      "headline": "Compare t0 and t10 tap readings and inspect the six candidates",
+      "instruction": "Record t0 readings (100, 82, 100), inspect up to 2 candidates per phase, then record t10 readings (100, 74, 100) to confirm the garden branch is falling."
+    },
+    "EX-CH03-S03": {
+      "stage": "apply",
+      "headline": "Verify annex isolation, preview garden isolation, and confirm rollback",
+      "instruction": "Check the phase-2 aftershock annex isolation, compare isolating GARDEN against isolating the habitat trunk, and confirm the rollback plan."
+    },
+    "EX-CH03-S04": {
+      "stage": "twist",
+      "headline": "Isolate GARDEN, seat the collar clamp, and log five steady readings",
+      "instruction": "Close GARDEN only, verify MAIN holds 100 and GARDEN holds 74, seat the repair clamp, reopen slowly, and record five 100/100/100 checks."
+    },
+    "EX-CH03-S05": {
+      "stage": "twist",
+      "headline": "Reconcile the mismatched paper note with the tested valve",
+      "instruction": "Keep the tested valve setting, correct the copied paper note to match physical evidence, and save the monitoring handover."
+    },
+    "EX-CH03-S06": {
+      "stage": "twist",
+      "headline": "Isolate the annex feed, confirm zero differential, and inspect the N.R. hatch",
+      "instruction": "Close the annex feed, verify zero pressure differential across the hatch, and inspect the N.R. annex by camera before suited entry."
+    }
+  },
+  "hints": [
+    "Which reading changes over time?",
+    "Compare the manual garden reading.",
+    "Close GARDEN, clamp its feedthrough, reopen and verify five steady readings."
+  ]
+}

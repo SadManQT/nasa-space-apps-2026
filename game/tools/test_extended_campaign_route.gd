@@ -40,6 +40,8 @@ func _run() -> void:
 			_check(action.accepted, "dated Chapter 2 handoff operation " + target.target_id)
 		pollination.advance_scene()
 	var route := RouteScript.new(director)
+	route.p05().apply_witness_solution()
+	route.p06().apply_witness_solution()
 	_check(bool(route.start_at("EX-CH03-S01").get("accepted", false)), "extended route starts at canonical Chapter 3")
 	var expected_scene_count := GateCatalog.scene_ids().size()
 	_check(expected_scene_count == 72, "extended route contains all 72 Chapter 3–8 scenes")

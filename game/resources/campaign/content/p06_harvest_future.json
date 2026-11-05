@@ -1,0 +1,407 @@
+{
+  "schema_version": 1,
+  "content_revision": "p06-harvest-future-v1",
+  "puzzle_id": "P-06",
+  "title": "A Harvest With a Future",
+  "subtitle": "Confirm pod maturity, run the five-day dry-down vigil, and divide 42 founder seeds into 12 planted and 30 sealed reserve",
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-06; execution/PUZZLE_P06.md; game-design/22_PUZZLE_CLUE_DESIGN.md §5.2-5.4; game-design/24_NARRATIVE_REVISION.md §2.3, §2.9, §2.10, §7.3, §7.6; game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6",
+  "nasa_sources": [
+    "fast_plants_lifecycle",
+    "mir_brassica_seed_to_seed"
+  ],
+  "initial_moisture": 70,
+  "drydown_target_moisture": 20,
+  "drydown_days": 5,
+  "pod_count": 6,
+  "wells_count": 6,
+  "seeds_per_well": 7,
+  "total_seeds": 42,
+  "planted_allocation": 12,
+  "reserve_allocation": 30,
+  "reserve_compartments": [
+    15,
+    15
+  ],
+  "descendant_counts_october": {
+    "total": 12,
+    "purple_stems": 7,
+    "green_stems": 5
+  },
+  "expected_actions": {
+    "p06_count_42": {
+      "total": 42,
+      "wells": 6
+    },
+    "p06_allocate_12_30": {
+      "planted": 12,
+      "reserve": 30
+    }
+  },
+  "stages": [
+    {
+      "id": "learn",
+      "order": 1,
+      "title": "Stage 1 · Learn: Seedling Alarm vs Mature Completion",
+      "scenes": [
+        "EX-CH03-S07",
+        "EX-CH03-S08",
+        "EX-CH03-S09"
+      ],
+      "goal": "Compare the cold annex's Day-12 curled seedlings against Alo's Day-35 plump brown pods, log the N.R. vault map with 3 present-day safety checks, and close irrigation to Alo only.",
+      "target_minutes": "2–3 min"
+    },
+    {
+      "id": "apply",
+      "order": 2,
+      "title": "Stage 2 · Apply: Five-Day Dry-Down, Six Wells of Seven, 12 + 30 Split",
+      "scenes": [
+        "EX-CH03-S09",
+        "EX-CH03-S10",
+        "EX-CH03-S11"
+      ],
+      "goal": "Complete the 5-day dry-down vigil from moisture 70 to 20, open 6 pods into 6 counting wells (7 seeds each = 42), allocate 12 planted and 30 sealed reserve (15 + 15), sleeve Alo's petal, and dedicate the descendant tray.",
+      "target_minutes": "4–6 min"
+    },
+    {
+      "id": "twist",
+      "order": 3,
+      "title": "Stage 3 · Twist: Two Lineages, Separate Ledgers Across Five Months",
+      "scenes": [
+        "EX-CH03-S12"
+      ],
+      "goal": "Honour Tara's 31 May farewell into a separate 'Working stock — Tara × Alo' vial, place her nameplate level with Alo's petal, and reconcile five months of logs through 21 October (12 descendants: 7 purple, 5 green).",
+      "target_minutes": "2–4 min"
+    }
+  ],
+  "guided_intro": {
+    "headline": "Harvest Alo's seeds without losing the founder reserve",
+    "why_now": "Alo is at Day 35. Her yellowing leaves and plump brown pods mean her lifecycle is complete—not failing. To harvest viable seeds, her pods must dry down for five days before opening.",
+    "first_step": "Verify mature brown pods on the camera and growth chart, then close irrigation to Alo only while keeping Tara's indoor line open.",
+    "explainer_clip": {
+      "id": "clip_p06_seed_to_seed_harvest",
+      "title": "Seed-to-Seed Harvest & Founder Reserve Split",
+      "duration_seconds": 12,
+      "steps": [
+        "Confirm Day-35 pod maturity first, then shut off Alo's irrigation valve only and dry the substrate from 70 down to 20 over 5 days.",
+        "Open all 6 dry pods into the 6 counting wells (7 seeds per well = 42 founder seeds).",
+        "Plant 12 seeds in the two 6-position descendant cassettes and seal 30 seeds (15 + 15) in the protected founder reserve."
+      ]
+    }
+  },
+  "prediction": {
+    "prompt": "Alo has 6 mature pods and each pod holds 7 seeds. After planting two 6-cell cassettes (12 seeds), how many founder seeds will be sealed in the reserve?",
+    "correct_option": "30",
+    "options": [
+      {
+        "id": "30",
+        "label": "30 seeds in reserve (42 total − 12 planted = 30 sealed in 15 + 15)",
+        "response": "Prediction logged: 30 reserve seeds. Open the 6 pods into the counting wells to verify 6 × 7 = 42."
+      },
+      {
+        "id": "24",
+        "label": "24 seeds in reserve",
+        "response": "Prediction logged: 24 reserve seeds. Count all 6 wells of 7 first to check the total harvest."
+      },
+      {
+        "id": "42",
+        "label": "42 seeds in reserve (none planted now)",
+        "response": "Prediction logged: 42 reserve seeds. Remember 12 seeds must be planted now for the next generation."
+      }
+    ]
+  },
+  "role_cards": [
+    {
+      "role_id": "mei",
+      "holder": "M",
+      "name": "Mei",
+      "role": "BOTANY & HARVEST",
+      "icon": "LEAF",
+      "arrives_scene": "EX-CH03-S07",
+      "quote": "Alo isn't failing. She's finishing.",
+      "clue_ids": [
+        "P06-C1",
+        "P06-C4"
+      ],
+      "facts": [
+        "In the cold annex, seedlings stopped at Day 12 ('Leaves curling. Heat'). Alo is at Day 35 with plump brown pods—maturity, not cold failure.",
+        "Close irrigation to Alo only and dry her substrate from 70 down to 20 over 5 days before opening the 6 pods."
+      ]
+    },
+    {
+      "role_id": "amara",
+      "holder": "A",
+      "name": "Amara",
+      "role": "INVENTORY & RESERVE",
+      "icon": "TANK",
+      "arrives_scene": "EX-CH03-S08",
+      "quote": "Twelve for the living trays, thirty sealed in two compartments.",
+      "clue_ids": [
+        "P06-C5",
+        "P06-C6"
+      ],
+      "facts": [
+        "Six dry pods opened into 6 counting wells hold 7 seeds each: 42 founder seeds in total.",
+        "Allocate 12 seeds to the two 6-position planting cassettes and seal 30 seeds in the two-compartment (15 + 15) founder reserve."
+      ]
+    },
+    {
+      "role_id": "kai",
+      "holder": "K",
+      "name": "Kai",
+      "role": "ARCHIVE & PROVENANCE",
+      "icon": "BATTERY",
+      "arrives_scene": "EX-CH03-S07",
+      "quote": "An old map is a clue, not a clearance.",
+      "clue_ids": [
+        "P06-C2",
+        "P06-C7"
+      ],
+      "facts": [
+        "The N.R. tool tag and hand-drawn vault map require 3 present-day checks (slope limit, return reserve, link chain) before any rover trip.",
+        "Tara's 31 May harvest is sealed as 'Working stock — Tara × Alo' so Alo's 42 = 12 + 30 founder ledger stays distinct."
+      ]
+    },
+    {
+      "role_id": "rafi",
+      "holder": "R",
+      "name": "Rafi",
+      "role": "SAFETY & CONTINUITY",
+      "icon": "SHIELD",
+      "arrives_scene": "EX-CH03-S08",
+      "quote": "Check your suit seal before you step back, and check your dates before you sign.",
+      "clue_ids": [
+        "P06-C3",
+        "P06-C8"
+      ],
+      "facts": [
+        "Exiting the cold annex requires an inner-hatch suit check before removing gloves.",
+        "By 21 October the 12 living descendants (7 purple stems, 5 green stems) are reconciled with the saved May prediction."
+      ]
+    }
+  ],
+  "vigil_days": [
+    {
+      "day": 1,
+      "id": "CH03-ALO-VIGIL-1",
+      "date": "2046-05-17",
+      "moisture": 58,
+      "caption": "Day 1 (17 May): Alo's irrigation valve closed; Tara's indoor line stays open. Mei checks the top pod seam."
+    },
+    {
+      "day": 2,
+      "id": "CH03-ALO-VIGIL-2",
+      "date": "2046-05-18",
+      "moisture": 46,
+      "caption": "Day 2 (18 May): Stems turn parchment-gold under the growth lamp. Kai logs the drying curve."
+    },
+    {
+      "day": 3,
+      "id": "CH03-ALO-VIGIL-3",
+      "date": "2046-05-19",
+      "moisture": 35,
+      "caption": "Day 3 (19 May): Dry seed coats rattle softly when the bay air circulator cycles."
+    },
+    {
+      "day": 4,
+      "id": "CH03-ALO-VIGIL-4",
+      "date": "2046-05-20",
+      "moisture": 26,
+      "caption": "Day 4 (20 May): Amara lays out the six-well counting tray and two 15-seed reserve vials."
+    },
+    {
+      "day": 5,
+      "id": "CH03-ALO-VIGIL-5",
+      "date": "2046-05-21",
+      "moisture": 20,
+      "caption": "Day 5 (21 May): Substrate moisture reaches 20. All six pods are crisp, intact, and ready to open."
+    }
+  ],
+  "dedication_choice": {
+    "choice_id": "EX-CH03-S11-DEDICATION",
+    "scene_id": "EX-CH03-S11",
+    "prompt": "Choose the dedication plaque for the twelve-seed descendant tray (Alo × Tara):",
+    "kai_cassette_note": "Kai's hand-lettered tag on Cassette 1 stays beside it: 'Very Important Scientific Plant'.",
+    "options": [
+      {
+        "id": "light_and_star",
+        "label": "Light and Star",
+        "description": "Names the descendant tray for both founders—Alo (Light) and Tara (Star)."
+      },
+      {
+        "id": "for_alo_and_tara",
+        "label": "For Alo and Tara",
+        "description": "Dedicates the new cassettes to the two plants that carried Aurora through the first month."
+      },
+      {
+        "id": "the_next_small_thing",
+        "label": "The Next Small Thing",
+        "description": "Echoes Mei's quiet reminder that a lunar garden survives one small step at a time."
+      }
+    ]
+  },
+  "tara_farewell": {
+    "id": "CH03-TARA-FAREWELL",
+    "watering_stopped_date": "2046-05-26",
+    "harvest_date": "2046-05-31",
+    "vial_label": "Working stock — Tara × Alo",
+    "headline": "31 May 2046 · Tara's Harvest & Lineage Nameplate",
+    "summary": "Five days after closing Tara's irrigation on 26 May, the crew harvests her pods into a sealed 'Working stock — Tara × Alo' vial with no headline count, places Tara's nameplate level with Alo's sleeved petal on the lineage board, and leaves Tara's name on the bay frame."
+  },
+  "trade_study": {
+    "prompt": "Select how to divide Alo's 42 founder seeds between active planting and sealed storage:",
+    "correct_option": "split_12_30",
+    "options": [
+      {
+        "id": "split_12_30",
+        "label": "Plant 12 (two 6-cell cassettes) · Seal 30 in Founder Reserve (15 + 15)",
+        "cost": "12 active descendants · 30 protected across two compartments",
+        "recommended": true
+      },
+      {
+        "id": "plant_all_42",
+        "label": "Plant All 42 Seeds Immediately",
+        "cost": "Zero reserve left if a storm or leak strikes the bay",
+        "recommended": false
+      },
+      {
+        "id": "seal_all_42",
+        "label": "Seal All 42 Seeds Without Planting",
+        "cost": "Breaks the living generation chain before Chapter 4",
+        "recommended": false
+      }
+    ]
+  },
+  "go_no_go_poll": {
+    "prompt": "Confirm Go/No-Go across all four stations before sealing the 30-seed founder reserve:",
+    "stations": [
+      {
+        "id": "botany",
+        "label": "Botany (Mei)",
+        "call": "GO — Substrate at 20 after 5-day dry-down; 6 pods counted at 7 seeds each (42 total)."
+      },
+      {
+        "id": "inventory",
+        "label": "Inventory (Amara)",
+        "call": "GO — 12 seeds staged for Cassettes 1 & 2; 30 sealed in two 15-seed reserve compartments."
+      },
+      {
+        "id": "archive",
+        "label": "Archive (Kai)",
+        "call": "GO — Alo's pressed petal sleeved; lineage board ready for Alo and Tara."
+      },
+      {
+        "id": "safety",
+        "label": "Continuity (Rafi)",
+        "call": "GO — Founder 42 ledger kept separate from Tara's upcoming working-stock vial."
+      }
+    ]
+  },
+  "odf_steps": [
+    {
+      "id": "step_drydown",
+      "action": "p06_drydown_five_days",
+      "label": "1. Complete 5-day dry-down vigil to substrate moisture 20"
+    },
+    {
+      "id": "step_open_pods",
+      "action": "p06_open_six_pods",
+      "label": "2. Open all 6 dry pods into the 6 counting wells"
+    },
+    {
+      "id": "step_count_42",
+      "action": "p06_count_42",
+      "label": "3. Verify 7 seeds in each of the 6 wells (42 total)"
+    },
+    {
+      "id": "step_allocate_12_30",
+      "action": "p06_allocate_12_30",
+      "label": "4. Allocate 12 for planting and 30 for the sealed founder reserve"
+    },
+    {
+      "id": "step_sleeve_petal",
+      "action": "p06_sleeve_petal",
+      "label": "5. Sleeve Alo's last petal and mount her nameplate on the lineage board"
+    }
+  ],
+  "wrong_actions": {
+    "treat_annex_map_as_cleared_route": {
+      "id": "treat_annex_map_as_cleared_route",
+      "label": "Mark Annex Vault Map as Cleared Route",
+      "badge": "PROVENANCE WARNING",
+      "feedback": "The hand-drawn N.R. map is an unverified historical clue. Log it as a survey objective requiring three present-day checks: slope limit, return reserve, and relay link chain."
+    },
+    "treat_alo_yellowing_as_cold_alarm": {
+      "id": "treat_alo_yellowing_as_cold_alarm",
+      "label": "Raise Cold Alarm & Add Heat to Alo",
+      "badge": "LIFECYCLE CHECK",
+      "feedback": "In the annex, curling leaves at Day 12 meant cold failure. Alo is at Day 35 with plump brown seed pods: her yellowing leaves mean completion, not cold damage."
+    },
+    "stop_irrigation_before_maturity": {
+      "id": "stop_irrigation_before_maturity",
+      "label": "Close Alo Irrigation Before Maturity Check",
+      "badge": "MATURITY CHECK REQUIRED",
+      "feedback": "Confirm pod maturity on the camera and growth chart before stopping irrigation so you do not dry down immature pods."
+    },
+    "close_tara_irrigation_in_s09": {
+      "id": "close_tara_irrigation_in_s09",
+      "label": "Close Tara's Indoor Irrigation Line",
+      "badge": "WRONG PLANT",
+      "feedback": "Tara is still maturing on the indoor shelf (she finishes on 31 May). Keep Tara's irrigation open and close only Alo's drying valve."
+    },
+    "open_pods_wet": {
+      "id": "open_pods_wet",
+      "label": "Crack Pods Before Moisture Reaches 20",
+      "badge": "PODS STILL DAMP",
+      "feedback": "Opening pods at moisture above 20 risks bruising damp seeds. Complete the 5-day dry-down to moisture 20 first."
+    },
+    "plant_all_42_seeds": {
+      "id": "plant_all_42_seeds",
+      "label": "Plant All 42 Seeds Immediately",
+      "badge": "NO FOUNDER RESERVE",
+      "feedback": "Planting all 42 seeds leaves zero backup if a storm or leak strikes. Plant 12 in the two cassettes and seal 30 in the two-compartment reserve."
+    },
+    "merge_tara_into_founder_42": {
+      "id": "merge_tara_into_founder_42",
+      "label": "Add Tara's 31 May Harvest Into the 42-Seed Ledger",
+      "badge": "LEDGER SEPARATION",
+      "feedback": "Alo's 42 = 12 + 30 ledger is the audited founder reserve. Store Tara's 31 May pods separately as 'Working stock — Tara × Alo' so the numbers never blur."
+    }
+  },
+  "scene_gates": {
+    "EX-CH03-S07": {
+      "stage": "learn",
+      "headline": "Inspect the cold annex seedlings and hand-drawn vault map",
+      "instruction": "Scan the Day-12 growth chart ('Leaves curling. Heat') and vault map, verify your suit seal at the inner hatch, and review the maturity comparison."
+    },
+    "EX-CH03-S08": {
+      "stage": "learn",
+      "headline": "Log vault map provenance and three required present-day checks",
+      "instruction": "Record the N.R. map as an unverified clue requiring slope, return-reserve, and link-chain checks, then prepare the garden care transition."
+    },
+    "EX-CH03-S09": {
+      "stage": "learn",
+      "headline": "Confirm Day-35 pod maturity and close irrigation to Alo only",
+      "instruction": "Inspect Alo's plump brown pods on the maturity camera, distinguish completion from cold failure, and close Alo's drying valve while leaving Tara's line open."
+    },
+    "EX-CH03-S10": {
+      "stage": "apply",
+      "headline": "Run the 5-day dry-down vigil, count 42 seeds across 6 wells, and split 12 + 30",
+      "instruction": "Dry the substrate from 70 to 20 over 5 days, open all 6 pods into 6 counting wells (7 each = 42), allocate 12 planted + 30 reserve, and sleeve Alo's petal."
+    },
+    "EX-CH03-S11": {
+      "stage": "apply",
+      "headline": "Plant 12 descendant positions, seal 30 reserve seeds, and dedicate the tray",
+      "instruction": "Plant two 6-position cassettes (12 seeds), seal 30 founder seeds in two 15-seed compartments, and choose the Alo × Tara tray dedication."
+    },
+    "EX-CH03-S12": {
+      "stage": "twist",
+      "headline": "Record Tara's 31 May working stock and reconcile five months to October",
+      "instruction": "Log Tara's 31 May harvest into 'Working stock — Tara × Alo', mount her nameplate beside Alo's petal, and confirm the 12 October descendants (7 purple, 5 green)."
+    }
+  },
+  "hints": [
+    "Harvest after the pods mature.",
+    "Keep twelve for planting and thirty protected.",
+    "Six wells of seven total 42; allocate 12 and 30."
+  ]
+}

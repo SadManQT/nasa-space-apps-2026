@@ -222,12 +222,6 @@ static func _actions(chapter: int, order: int) -> Array:
 
 static func _defaults(action: String) -> Dictionary:
 	match action:
-		"p05_read_main_t0", "p05_read_main_t10", "p05_read_return_t0", "p05_read_return_t10": return {"reading": 100}
-		"p05_read_garden_t0": return {"reading": 82}
-		"p05_read_garden_t10": return {"reading": 74}
-		"p05_stable_read_1", "p05_stable_read_2", "p05_stable_read_3", "p05_stable_read_4", "p05_stable_read_5": return {"main": 100, "garden": 100, "return": 100}
-		"p06_count_42": return {"total": 42, "wells": 6}
-		"p06_allocate_12_30": return {"planted": 12, "reserve": 30}
 		"p07_choose_route_b": return {"route": "B"}
 		"p07_verify_slope": return {"slope": 12}
 		"p07_verify_return_reserve": return {"reserve": 40}
