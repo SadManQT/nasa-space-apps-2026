@@ -14,15 +14,12 @@ EN_NoorRooftop,environment,Generated cutscene plate,EX-CH08-S10,Dhaka rooftop at
 EN_EarthDesk,environment,2D/screen render,EX-CH01-S01,Rao's Earth control desk (screen)
 CH_Rao,character,Portrait/bust (screen only),EX-CH01-S01,headset; Earth desk
 CH_Noor,character,Portraits: 2034 archive + present + rooftop,EX-CH05-S10,older Bangladeshi botanist
-CH_Ferreira_Duty,character,Turnaround + Tripo multiview,EX-CH01-S01,Earth duty-layer outfit for screen scenes before 12 Dec
-CH_Cadet_DutyLayer,character,Turnaround + Tripo multiview x4,EX-CH01-S05,indoor navy coverall variants
+CH_Ferreira_Duty,character,Screen portrait (Tripo image-to-image from the v8 front view),EX-CH01-S01,Earth duty-layer screen portrait before 12 Dec; takes A/B in production/concept/ch05_assets/ferreira_duty await Sadman's pick (M3-5A)
 PR_Helmet_Roles,prop,Blender recolour of PR_Helmet,EX-CH03-S07,role-colour stripe per cadet
 PL_Descendants,plant,Blender instancing of PL_Alo_* and PL_Tara_*,EX-CH03-S11,12-position tray; CH04 7 purple + 5 green
 PL_Alo_Sprout,plant,Blender procedural seedling (cotyledon + true-leaf states),EX-CH01-S05,cotyledon 12-13 Apr and true-leaf 15-17 Apr states; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval
-PL_Cotton_Seedling,plant,Blender (scaled from PL_Cotton_Young),EX-CH05-S12,early cotton
 PR_PressedPetal,prop,Blender (small),EX-CH03-S10,petal in dated sleeve
 PR_PaperBee,prop,Blender (small),EX-CH02-S02,origami bee
-PR_ImpactMonitor,prop,UI + screen frames,EX-CH05-S07,impact-camera frames (A-40)
 UI_Kit,ui,Godot UI + vector icons,EX-CH01-S01,"HUD, forecast, journal, debrief, settings (A-53/A-54)"
 PL_Alo_PodsGreen,plant,Shader recolour of PL_Alo_Pods,EX-CH03-S08,8 May pod_bearing state (PL_Alo_Pods is the mature look); 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval
 PL_Alo_Senescent,plant,PL_Alo_Pods + stem lean,EX-CH03-S09,"16 May mature_pods: straw pods, yellowing leaves, leaning purple stem; 2D sheet production/concept/narrative_props (M3-99) awaiting Sadman's approval"
