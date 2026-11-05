@@ -900,7 +900,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "First five minutes: title screen, onboarding and UX polish",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [
     "M0-02",
@@ -921,7 +921,7 @@
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Goal: 'User experience 5 = anyone can use it' — a judge or a 12-year-old plays the first five minutes without help.\nDo: (1) hide the DEVELOPER ASSET SHOWCASE button in exported builds (feature flag / OS.has_feature('editor')) and fix the footer that\noverlaps it; (2) New Expedition flow per execution/UI_01_MAIN_MENU.md and UI_02; (3) contextual first-time prompts for move, look, use,\nMission Table and the journal, shown once and replayable from Settings; (4) HUD and objective readability (UI_03, UI_04, UI_05, UI_06):\nfont sizes, contrast, text scaling to 150%, focus order for keyboard and controller; (5) remap controls (UI_15).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second screen recording of a cold start to the first objective.\n\nClarity and menus (Sadman, 5 Nov): follow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 for every first-five-minutes screen and build the title and menus in §2.3 (live Moon backdrop, Moon trainer entry, Story/Cadet/Expedition assist modes, settings categories) on the M1-54 design system.",
-   "blocker": "Night shift parked the work on branch night/M1-18: k   tools/test_lip_sync.gd :: PASS LipSync coarticulation, closures, loudness, release and errors\nok   tools/test_lunar_kit.gd :: LUNAR KIT RESULT: PASS (89 checks, 0 failures)\nok   tools/test_outpost_status.gd :: OUTPOST STATUS RESULT: PASS (85 checks, 0 failures)\nFAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (537 checks, 2 failures)\n       FAIL Kai raw load",
+   "blocker": "Fresh baseline is 35/37: missing Sadman explainer clip (M1-67) and reproduced Atik loading/performance failures (M1-68; retry 0/1). Required full-suite gate prevents UI acceptance. Analysis handoff/evidence recorded; no product edits.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -931,8 +931,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Chapter 1 endings, decision replay and the science debrief",
-   "status": "in_progress",
-   "owner": "Ramim/codex",
+   "status": "todo",
+   "owner": "",
    "deps": [
     "M1-09",
     "M0-15"
@@ -1289,8 +1289,8 @@
    "prompt": "Goal: the challenge is about balancing life support, radiation shielding, power and food; the player should see those four at all times.\nDo: a compact HUD panel with four meters, Power (E), Life support (air A and water), Shielding (S and accumulated exposure Z), Food (crops C\nand rations R), labelled in plain words with icons; every puzzle preview shows the forecast change on each meter (arrows plus the number)\nbefore the player commits; red/amber thresholds come from data, not code; accessible (colour plus shape, screen-reader text, scales to 150%).\nValues come from the authoritative director state; no second source of truth.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
-   "status": "in_progress",
-   "owner": "Ramim/codex",
+   "status": "todo",
+   "owner": "",
    "deps": [
     "M1-09",
     "M0-15",
@@ -4263,8 +4263,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Mission Table made simple: guided first shift, plain toggles, before-and-after forecast",
-   "status": "in_progress",
-   "owner": "Ramim/codex",
+   "status": "todo",
+   "owner": "",
    "deps": [
     "M1-54"
    ],
@@ -5253,6 +5253,50 @@
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "M1-08 is blocked by missing authoritative P-01 input and route hooks. Repro: campaign/chapter1_campaign.gd interact_nearby handles P-02 as a panel but sends P-01 to perform_target with no user payload; missions/p01_commission_plant.gd _validate accepts set_zero/set_span/recheck based on action order only, water defaults to 50, and chapter1_route.gd _apply_target_result also supplies missing moisture=50. This lets a USE action solve the puzzle automatically.\nExpose the P-01 query and explicit selected-input command interface for Ramim's UI/PuzzleHost without changing P-02 or other puzzle behavior. Authoritatively validate calibration against the documented dry 10 -> 0 and wet 110 -> 100 references, require the recheck, require explicit planting/watering inputs, accept moisture 40..60 inclusive, and remove missing-value success defaults. Wrong, missing, non-finite and out-of-range inputs must give explanatory retry feedback without changing state, costs, flags or receipts. Preserve save/load, cancel/reopen and duplicate-action idempotence. The nearby use flow must request the UI rather than automatically supply successful values. Keep UI implementation in Ramim folders; publish the exact route/query/payload contract in evidence and notify Ramim to release/resume blocked M1-08 once available.\nRead execution/PUZZLE_P01.md, execution/SYS_22_PUZZLE_HOST_HINTS.md, game-design/08_PUZZLE_DESIGNS.md P-01 and the current PuzzleHost/Mission Table contracts. Acceptance: current runner green, focused real-route tests for correct/wrong/missing/non-finite calibration and moisture 39/40/60/61, unchanged snapshots after rejected/preview/cancelled actions, one receipt per valid action, no auto-solved physical USE path.",
+   "reserved_for": "atik",
+   "effort": 2
+  },
+  {
+   "id": "M1-67",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "claude",
+   "title": "Restore the second M1-63 explainer sample required by the test gate",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/assets/explainers/",
+    "game/resources/campaign/content/explainers.json",
+    "production/explainers/motion/",
+    "production/tools/motion/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "The fresh Windows baseline at main 990126b (Godot 4.7.2, through game/tools/run_tests.sh) fails test_explainers.gd: EXPLAINERS RESULT: FAIL (21 checks, 1 failures), assertion 'at least the two M1-63 sample clips are registered'. game/resources/campaign/content/explainers.json contains only sci_polar_sun; M1-63 promised both samples, and production/explainers/motion/specs/sci_proton_flux_chart.json plus its source scene already exist, but the second clip/registry entry is missing.\nBuild and ship the missing sci_proton_flux_chart explainer through the approved production/tools/motion/build.py pipeline, keeping the source fixtures, honest science labels, captions, durations and free generation rules. Do not hand-edit measured values, duplicate the first sample or weaken the two-sample test. Correct the M1-63 status/log if necessary. This blocks Ramim's mandatory all-suite acceptance gate, so prioritize and publish the fix, then notify Ramim to resume M1-18 and the queued UI tasks.\nAcceptance: registered IDs include both real clips, each actual .ogv loads/plays with registered length and captions; focused run_tests.sh explainers passes and full run_tests.sh passes (any separately recorded performance prerequisite also applies). Evidence: production/qa/evidence/M1-18_baseline.txt records the full original 35/37 run; the runtime feature source was untouched when it failed.",
+   "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M1-68",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Investigate and fix reproduced Windows loading performance gate failures",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/loading/",
+    "production/qa/perf/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Ramim fresh baseline on Windows at main 990126b, Godot 4.7.2, fails the production loading performance gate before any feature source changes. Full game/tools/run_tests.sh: 35/37 suites passed; test_performance_runtime.gd reports 537 checks / 2 failures: production title main-thread interval 59.455ms and production new campaign interval 128.056ms (limit <50ms). The other failure is the separate missing-explainer request M1-67.\nA single focused retry through run_tests.sh performance_runtime after cache warmup fails 537 checks / 7 failures (0/1 suites passed). Runner prints the first five details: Kai raw load 51.280ms, Amara 50.826ms, Mei 57.054ms, Rafi 57.689ms, Ferreira 52.718ms; remaining two details were suppressed by the runner, so do not invent them. Logs: production/qa/evidence/M1-18_baseline.txt and M1-18_performance_retry.txt.\nInvestigate the shared loading/performance path and the Windows test/runtime behavior, then fix the cause within Atik-owned runtime/loading/performance paths. Profile whether scheduling/raw glTF import or timing measurement is responsible; do not silently relax/skip the 50ms gate or claim reference-Mac performance based on this PC. Any necessary Ramim UI or Sadman asset/test changes need owner requests. Preserve campaign/save behavior and incremental-loading contract. Publish the fix/evidence and notify Ramim to resume blocked M1-18.\nAcceptance: focused real production performance runner passes on the documented supported machine without weakening its intent; full run_tests.sh green after M1-67 also lands, with truthful hardware/timing evidence and no unrelated changes.",
    "reserved_for": "atik",
    "effort": 2
   }
