@@ -1789,7 +1789,6 @@
     "M3-2C",
     "M3-2V",
     "M3-2U",
-    "M1-21",
     "M3-2S",
     "M3-2T",
     "M3-66"
@@ -1804,7 +1803,7 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "5 Nov: depends on Chapter 1 QA (M1-21) instead of the demo freeze M1-24, which waits on a human learner playtest; the full campaign should not wait on that.",
+   "note": "5 Nov: depends on Chapter 1 QA (M1-21) instead of the demo freeze M1-24, which waits on a human learner playtest; the full campaign should not wait on that. 5 Nov: no longer waits for M1-21; chapters are checked in parallel as each is built (start from a chapter-start save), and M3-92 checks the whole campaign in one run.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play Chapter 2 from a Chapter 1 save to the Chapter 3 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch02/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
@@ -2041,7 +2040,6 @@
     "M3-3C",
     "M3-3V",
     "M3-3U",
-    "M3-2Q",
     "M3-3S",
     "M3-3T",
     "M3-66"
@@ -2056,7 +2054,7 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "",
+   "note": "5 Nov: no longer waits for M3-2Q; chapters are checked in parallel as each is built (start from a chapter-start save), and M3-92 checks the whole campaign in one run.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play Chapter 3 from a Chapter 2 save to the Chapter 4 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch03/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
@@ -2293,7 +2291,6 @@
     "M3-4C",
     "M3-4V",
     "M3-4U",
-    "M3-3Q",
     "M3-4S",
     "M3-4T",
     "M3-66"
@@ -2308,7 +2305,7 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "",
+   "note": "5 Nov: no longer waits for M3-3Q; chapters are checked in parallel as each is built (start from a chapter-start save), and M3-92 checks the whole campaign in one run.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play Chapter 4 from a Chapter 3 save to the Chapter 5 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch04/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
@@ -2546,7 +2543,6 @@
     "M3-5C",
     "M3-5V",
     "M3-5U",
-    "M3-4Q",
     "M3-5S",
     "M3-5T",
     "M3-66"
@@ -2561,7 +2557,7 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "",
+   "note": "5 Nov: no longer waits for M3-4Q; chapters are checked in parallel as each is built (start from a chapter-start save), and M3-92 checks the whole campaign in one run.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play Chapter 5 from a Chapter 4 save to the Chapter 6 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch05/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
@@ -2769,7 +2765,6 @@
     "M3-6C",
     "M3-6V",
     "M3-6U",
-    "M3-5Q",
     "M3-6S",
     "M3-6T",
     "M3-66"
@@ -2784,7 +2779,7 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "",
+   "note": "5 Nov: no longer waits for M3-5Q; chapters are checked in parallel as each is built (start from a chapter-start save), and M3-92 checks the whole campaign in one run.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play Chapter 6 from a Chapter 5 save to the Chapter 7 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch06/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
@@ -2992,7 +2987,6 @@
     "M3-7C",
     "M3-7V",
     "M3-7U",
-    "M3-6Q",
     "M3-7S",
     "M3-7T",
     "M3-66"
@@ -3007,7 +3001,7 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "",
+   "note": "5 Nov: no longer waits for M3-6Q; chapters are checked in parallel as each is built (start from a chapter-start save), and M3-92 checks the whole campaign in one run.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play Chapter 7 from a Chapter 6 save to the Chapter 8 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch07/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.7 (Chapter 7) and the §2.9 bridge-list rows for CH07 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
@@ -3250,7 +3244,6 @@
     "M3-8C",
     "M3-8V",
     "M3-8U",
-    "M3-7Q",
     "M3-8S",
     "M3-8T",
     "M3-66"
@@ -3265,7 +3258,7 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "",
+   "note": "5 Nov: no longer waits for M3-7Q; chapters are checked in parallel as each is built (start from a chapter-start save), and M3-92 checks the whole campaign in one run.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play Chapter 8 from a Chapter 7 save to the Chapter campaign end boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch08/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
