@@ -8,40 +8,118 @@
   "shots/CS-15-A.mp4",
   "shots/CS-15-B.mp4",
   "shots/CS-15-C.mp4",
-  "shots/CS-15-D.mp4"
+  {
+   "file": "shots/CS-15-D.mp4",
+   "hold_end": 3.0
+  }
  ],
  "transitions": [
-  "dissolve",
+  "cut",
   "cut",
   "cut"
  ],
  "music": "music/CS-15.mp3",
  "lines": [
   {
-   "at": 7.4,
-   "speaker": "Noor (Earth link)",
-   "text": "Hello, Aurora. This is Noor.",
-   "file": "../../../audio/vo_masters/VO_EX-CH08-S10-L01.mp3",
-   "radio": true
+   "at": 1.25,
+   "speaker": "Rao",
+   "tag": "EARTH LINK \u00b7 LIVE",
+   "text": "Aurora, Earth. We hear you. Go ahead.",
+   "duration": 3.0,
+   "recording_task": "M3-94R"
   },
   {
-   "at": 13.55,
+   "at": 7.641667,
+   "speaker": "Noor",
+   "text": "Hello, Aurora. This is Noor.",
+   "file": "../../../audio/vo_masters/VO_EX-CH08-S10-L01.mp3",
+   "radio": true,
+   "tag": "EARTH LINK \u00b7 LIVE"
+  },
+  {
+   "at": 14.05,
    "speaker": "Mei",
    "text": "We kept a place for you.",
    "file": "../../../audio/vo_masters/VO_EX-CH08-S10-L02.mp3"
   },
   {
-   "at": 20.1,
+   "at": 18.73,
+   "speaker": "Noor",
+   "tag": "EARTH LINK \u00b7 LIVE",
+   "text": "You finished what we could not.",
+   "duration": 2.8,
+   "recording_task": "M3-94R"
+  },
+  {
+   "at": 22.3,
    "speaker": "Ferreira",
    "text": "You brought us the seeds.",
    "file": "../../../audio/vo_masters/VO_EX-CH08-S10-L03.mp3"
   },
   {
-   "at": 22.95,
+   "at": 25.1,
    "speaker": "Amara",
    "text": "The garden has more than one gardener.",
    "file": "../../../audio/vo_masters/VO_EX-CH08-S10-L04.mp3"
   }
  ],
- "out": "../CS-15_Hello_Aurora"
+ "out": "../CS-15_Hello_Aurora",
+ "music_in": 11.2,
+ "music_at": 13.083333,
+ "music_mutes": [
+  {
+   "at": 16.13,
+   "until": 18.73
+  }
+ ],
+ "beds": [
+  {
+   "file": "../../../../game/assets/audio/sfx/SFX_ROVER_CABIN.ogg",
+   "at": 0.0,
+   "until": 5.041667,
+   "gain": 0.125893,
+   "fade_in": 0.04,
+   "fade_out": 0.04
+  },
+  {
+   "file": "../../../../game/assets/audio/sfx/SFX_DHAKA_ROOFTOP_MORNING.ogg",
+   "at": 5.041667,
+   "until": 13.708333,
+   "gain": 0.199526,
+   "fade_in": 0.04,
+   "fade_out": 0.04,
+   "pending": "M3-94R owns generation; this cue slot remains silent."
+  },
+  {
+   "file": "../../../../game/assets/audio/sfx/SFX_FAN_LOWPOWER.ogg",
+   "at": 13.708333,
+   "until": 18.75,
+   "gain": 0.223872,
+   "fade_in": 0.04,
+   "fade_out": 0.04
+  },
+  {
+   "file": "../../../../game/assets/audio/sfx/SFX_ROVER_CABIN.ogg",
+   "at": 18.75,
+   "until": 29.75,
+   "gain": 0.125893,
+   "fade_in": 0.04,
+   "fade_out": 1.0
+  }
+ ],
+ "sfx": [
+  {
+   "file": "../../../../game/assets/audio/sfx/SFX_RADIO_EARTH_IN.ogg",
+   "at": 0.7,
+   "gain_db": -6
+  }
+ ],
+ "texts": [
+  {
+   "at": 28.5,
+   "until": 29.7,
+   "text": "Return departs 03:00",
+   "chip": "UTC \u00b7 9 April 2047"
+  }
+ ]
 }

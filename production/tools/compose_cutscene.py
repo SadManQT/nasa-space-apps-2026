@@ -13,6 +13,7 @@ A shot is a file path, or an object for an edited shot (every key optional but "
    "ramp": {"hold": 2.0, "rate": 0.4},                   after "hold" seconds at normal speed the rest accelerates
                                                           smoothly: shown time = hold + ln(1 + rate * (t - hold)) / rate,
                                                           so the shot ends at (1 + rate * remaining) times speed
+   "hold_end": 3.0,                                      hold the last frame after the shot for this many seconds
    "zoom": {"center": [0.5, 0.5], "from": 1.0, "to": 2.4, "start": 1.0, "end": 5.0}}
                                                           an eased push-in (smoothstep) between two shot-local
                                                           times, about a point given as fractions of the frame
@@ -25,7 +26,14 @@ Optional layers, all timed in seconds of the finished cut:
   "captions": [{"at": 0.4, "until": 2.6, "text": "[no sound outside]", "speaker": ""}]   sound captions
   "texts":    [{"at": 6.6, "until": 10.6, "text": "Aurora Station ...", "chip": "Story (2046)"}]   a slate, top left
   "title":    {"at": 11.3, "until": 13.6, "text": "LAST LIGHT ACADEMY"}   the game title over the picture
-  "beds":     [{"file": ogg_or_mp3, "at": 5.6, "fade_in": 2.0, "gain": 0.5}]   sound beds, looped to the end
+  "beds":     [{"file": ogg_or_mp3, "at": 5.6, "until": 10.0, "fade_in": 2.0, "fade_out": 0.6, "gain": 0.5}]
+  "sfx":      [{"file": ogg_or_mp3, "at": 1.2, "gain_db": -6}]   one-shot effects
+  "music_at": 13.1, "music_in": 11.2                    place the music after trimming its silent lead-in
+  "music_mutes": [{"at": 16.13, "until": 18.73}]       leave a round-trip pause clear of music
+  "tail_black": 1.0                                     append black after the picture's closing fade
+A line's optional "tag" labels its channel, e.g. EARTH LINK · LIVE. A caption-only approved line has
+"duration" instead of a voice "file"; it still appears in the runtime caption cues. Beds and effects with
+"pending": "<owning task / reason>" are explicitly silent until that key is removed. Never substitute a sound.
 Where no layer, line or music plays the mix is digital silence, so a vacuum exterior stays truly silent.
 """
 import json, math, os, shutil, subprocess, sys, tempfile
@@ -39,11 +47,14 @@ ZOOM_SUPER = 4   # zoompan samples a 4x upscale so a push-in moves in quarter pi
 def dur(path):
     return float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path]))
 
-def caption_png(path, speaker, text):
+def caption_png(path, speaker, text, tag=""):
+    """Render an exact dialogue or sound caption, optionally labelling its live/archive channel."""
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
     f_name, f_text = ImageFont.truetype(FONT, 26, index=2), ImageFont.truetype(FONT, 34, index=5)
     line = f"{speaker}:  " if speaker else ""
-    lead = d.textlength(line, font=f_name)
+    f_tag = ImageFont.truetype(FONT, 15, index=2)
+    tag_w = d.textlength(tag, font=f_tag) + 18 if tag else 0
+    lead = d.textlength(line, font=f_name) + (tag_w + 12 if tag else 0)
     rows = [""]   # wrap long lines; the first row carries the speaker
     for word in text.split():
         trial = f"{rows[-1]} {word}".strip()
@@ -56,9 +67,23 @@ def caption_png(path, speaker, text):
     x = (W - tw) / 2
     d.rounded_rectangle((x - 22, y - 12, x + tw + 22, y + 50 + 46 * (len(rows) - 1)), 12, fill=(8, 12, 22, 170))
     d.text((x, y + 6), line, font=f_name, fill=(255, 214, 120, 255))
+    if tag:
+        tx = x + d.textlength(line, font=f_name)
+        d.rounded_rectangle((tx, y + 9, tx + tag_w, y + 35), 6, outline=(120, 220, 255, 255), width=2)
+        d.text((tx + 9, y + 13), tag, font=f_tag, fill=(120, 220, 255, 255))
     for i, r in enumerate(rows):
         d.text((x + (lead if i == 0 else 0), y + 46 * i), r, font=f_text, fill=(255, 255, 255, 255))
     img.save(path)
+
+def active_audio(entries, kind):
+    """Keep explicitly available audio; report deferred cue slots and fail on accidental missing files."""
+    for entry in entries:
+        if entry.get("pending"):
+            print(f"SILENT {kind} {os.path.basename(entry['file'])}: {entry['pending']}", flush=True)
+        elif not os.path.isfile(rel(entry["file"])):
+            sys.exit(f"missing {kind} file {entry['file']}")
+        else:
+            yield entry
 
 def title_png(path, lines):
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
@@ -129,6 +154,8 @@ def shot_filter(i, shot, length):
         s, e = float(zoom["start"]), float(zoom["end"])
         ease = f"st(0,clip(((in-1)/{FPS}-{s:.3f})/{e - s:.3f},0,1))\\;{z0:.4f}+{z1 - z0:.4f}*ld(0)*ld(0)*(3-2*ld(0))"
         steps.append(f"zoompan=z='{ease}':x='iw*{cx:.4f}-iw/zoom/2':y='ih*{cy:.4f}-ih/zoom/2':d=1:s={W}x{H}:fps={FPS},")
+    if shot.get("hold_end"):
+        steps.append(f"tpad=stop_mode=clone:stop_duration={float(shot['hold_end']):.6f},")
     steps.append(f"format=yuv420p,setpts=PTS-STARTPTS,settb=AVTB[v{i}]")   # one timebase so cut (concat) and xfade can mix
     return "".join(steps)
 
@@ -139,7 +166,7 @@ def shown_length(shot, length):
     if ramp:
         hold, rate = float(ramp.get("hold", 0.0)), float(ramp["rate"])
         seen = hold + math.log(1 + rate * (seen - hold)) / rate
-    return seen
+    return seen + float(shot.get("hold_end", 0.0))
 
 spec_path = sys.argv[1]; base = os.path.dirname(os.path.abspath(spec_path)); spec = json.load(open(spec_path))
 rel = lambda p: p if os.path.isabs(p) else os.path.join(base, p)
@@ -153,7 +180,9 @@ def join(spec_join):
     return JOIN[kind][0], float(overlap) if overlap else JOIN[kind][1]
 joins = [join(j) for j in (spec.get("transitions") or ["dissolve"] * (len(shots) - 1))]
 assert len(joins) == len(shots) - 1, "transitions needs one entry per join between shots"
-total = sum(lens) - sum(d for _, d in joins)
+tail = float(spec.get("tail_black", 0.0))
+picture_end = sum(lens) - sum(d for _, d in joins)
+total = picture_end + tail
 
 # video: scale, join shot to shot, fade from and to black, chapter card, captions
 inputs, vf = [], []
@@ -168,7 +197,9 @@ for i in range(1, len(shots)):
     else:
         vf.append(f"[{cur}][v{i}]concat=n=2:v=1:a=0[x{i}]")
     cur = f"x{i}"; t += lens[i] - d
-vf.append(f"[{cur}]fade=t=in:st=0:d=0.8,fade=t=out:st={total - 1.0:.3f}:d=1.0[base]"); cur = "base"
+if tail:
+    vf.append(f"[{cur}]tpad=stop_mode=clone:stop_duration={tail:.6f}[held]"); cur = "held"
+vf.append(f"[{cur}]fade=t=in:st=0:d=0.8,fade=t=out:st={picture_end - 1.0:.3f}:d=1.0[base]"); cur = "base"
 n = len(shots)
 def overlay(png, enable_from, enable_to, fade=None, tag=""):
     """Adds a full-frame PNG input shown between two times, with an optional alpha fade at both ends."""
@@ -184,8 +215,8 @@ if spec.get("card"):
     vf.append(f"[{cur}][card]overlay=enable='between(t,0.5,5.1)'[c]"); cur = "c"; n += 1
 lines = spec.get("lines", [])
 for k, ln in enumerate(lines):
-    ln["dur"] = dur(rel(ln["file"]))
-    caption_png(f"{work}/cap{k}.png", ln["speaker"], ln["text"])
+    ln["dur"] = dur(rel(ln["file"])) if ln.get("file") else float(ln["duration"])
+    caption_png(f"{work}/cap{k}.png", ln["speaker"], ln["text"], ln.get("tag", ""))
     overlay(f"{work}/cap{k}.png", ln["at"] - 0.15, ln["at"] + ln["dur"] + 0.5, tag="k")
 for k, cap in enumerate(spec.get("captions", [])):   # sound captions: no speaker, no voice file
     caption_png(f"{work}/scap{k}.png", cap.get("speaker", ""), cap["text"])
@@ -202,15 +233,29 @@ af, mix = [], []
 if spec.get("music"):
     inputs += ["-i", rel(spec["music"])]
     duck = "+".join(f"between(t,{ln['at'] - 0.3:.2f},{ln['at'] + ln['dur'] + 0.3:.2f})" for ln in lines) or "0"
-    af.append(f"[{n}:a]atrim=0:{total:.3f},afade=t=in:d=1.5,afade=t=out:st={total - 2.5:.3f}:d=2.5,"
-              f"volume='if({duck},0.28,0.55)':eval=frame[mus]"); mix.append("[mus]"); n += 1
-for k, bed in enumerate(spec.get("beds", [])):
+    mute = "+".join(f"between(t,{m['at']:.6f},{m['until']:.6f})" for m in spec.get("music_mutes", [])) or "0"
+    lead = round(float(spec.get("music_at", 0)) * 48000)
+    af.append(f"[{n}:a]aformat=sample_rates=48000:channel_layouts=stereo,atrim=start={float(spec.get('music_in', 0)):.6f},"
+              # adelay's inserted silence can have NOPTS. Re-clock before atrim, which otherwise drops it.
+              f"asetpts=PTS-STARTPTS,afade=t=in:d=1.5,adelay={lead}S|{lead}S,asetpts=N/SR/TB,atrim=0:{total:.3f},"
+              f"afade=t=out:st={picture_end - 2.5:.3f}:d=2.5,"
+              f"volume='if({mute},0,if({duck},0.28,0.55))':eval=frame[mus]"); mix.append("[mus]"); n += 1
+for k, bed in enumerate(active_audio(spec.get("beds", []), "bed")):
     inputs += ["-stream_loop", "-1", "-i", rel(bed["file"])]
-    at, until = float(bed["at"]), float(bed.get("until", total)); ms = int(at * 1000)
+    at, until = float(bed["at"]), float(bed.get("until", total)); samples = round(at * 48000)
+    fade_out = float(bed.get("fade_out", 0.6))
     af.append(f"[{n}:a]aformat=sample_rates=48000:channel_layouts=stereo,atrim=0:{until - at:.3f},"
-              f"afade=t=in:d={float(bed.get('fade_in', 1.0)):.2f},afade=t=out:st={until - at - 0.6:.3f}:d=0.6,"
-              f"adelay={ms}|{ms},volume={float(bed.get('gain', 0.5)):.3f}[b{k}]"); mix.append(f"[b{k}]"); n += 1
+              f"asetpts=PTS-STARTPTS,afade=t=in:d={float(bed.get('fade_in', 1.0)):.3f},"
+              f"afade=t=out:st={until - at - fade_out:.3f}:d={fade_out:.3f},"
+              f"adelay={samples}S|{samples}S,asetpts=N/SR/TB,volume={float(bed.get('gain', 0.5)):.6f}[b{k}]"); mix.append(f"[b{k}]"); n += 1
+for k, fx in enumerate(active_audio(spec.get("sfx", []), "effect")):
+    inputs += ["-i", rel(fx["file"])]
+    samples = round(float(fx["at"]) * 48000)
+    af.append(f"[{n}:a]aformat=sample_rates=48000:channel_layouts=stereo,volume={float(fx.get('gain_db', 0))}dB,"
+              f"adelay={samples}S|{samples}S,asetpts=N/SR/TB[fx{k}]"); mix.append(f"[fx{k}]"); n += 1
 for k, ln in enumerate(lines):
+    if not ln.get("file"):
+        continue   # approved caption-only line; recording belongs to M3-94R
     inputs += ["-i", rel(ln["file"])]
     chain = "highpass=f=320,lowpass=f=3200,acompressor=threshold=0.2:ratio=4," if ln.get("radio") else ""
     ms = int(ln["at"] * 1000)

@@ -7,8 +7,8 @@
  "shots": [
   "shots/CS-17-A.mp4",
   "shots/CS-17-B.mp4",
-  "shots/CS-17-C.mp4",
-  "shots/CS-17-D.mp4"
+  "shots/CS-17-C_named.mp4",
+  "shots/CS-17-D_named.mp4"
  ],
  "transitions": [
   "cut",
@@ -37,7 +37,8 @@
   },
   {
    "at": 23.2,
-   "speaker": "Noor (Earth link)",
+   "speaker": "Noor",
+   "tag": "EARTH LINK · LIVE",
    "text": "Show me the cotton by the window.",
    "file": "../../../audio/vo_masters/VO_EX-CH08-S12-L04.mp3",
    "radio": true

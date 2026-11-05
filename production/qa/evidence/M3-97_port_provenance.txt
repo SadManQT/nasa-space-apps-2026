@@ -1,0 +1,11 @@
+M3-97 port onto origin/main fc72c90, 6 Nov 2026 (Sadman/night-claude2)
+Source: origin/night/M3-97 commit 5051d64. Content files did not conflict with main (only PRODUCTION_HANDBOOK.md, BOARD.html and tasks.json did); all 54 content files were taken from the branch with the LFS smudge, and the handbook, AI log and board were rewritten on main's current versions.
+Rebuilt from the ported sources into a scratch folder and compared with the ported binaries (SHA-256, first 16 hex):
+PASS shots/CS-18-A_blink.mp4   lamp_blink.py blink/CS-18-A.json     9ab6f85f1af5ebad = 9ab6f85f1af5ebad
+PASS shots/CS-17-C_named.mp4   name_labels.py labels/CS-17-C.json   6046575c990e8535 = 6046575c990e8535
+PASS shots/CS-17-D_named.mp4   name_labels.py labels/CS-17-D.json   9b6000e4355c868a = 9b6000e4355c868a
+PASS CS-15_Hello_Aurora.mp4    compose_cutscene.py src/CS-15.json   2feb3e93101022f5 = 2feb3e93101022f5
+PASS CS-17_What_We_Grew.mp4    compose_cutscene.py src/CS-17.json   ff55e317e84f4947 = ff55e317e84f4947
+PASS CS-18_The_Closed_Drawer.mp4 compose_cutscene.py src/CS-18.json d2ebafe39470206f = d2ebafe39470206f
+Fixed this round: name_labels.py raised "incomplete label tracking ... lost ['TARA']" on CS-17-C although the shot is right. The TARA quad is last on screen at frame 184 (all four corners at x < 0 from frame 185, 1920 px frame) and optical flow only fails at frame 189, so nothing visible is missing. The builder now records whether a lost label had already left the frame; only a label lost while still on screen fails the build. Rebuild prints "TARA (track ended at frame 189)" as off screen and the output is byte-identical.
+Runtime OGVs: byte-identical to the branch, which encoded them with M3-97_capture.sh (its log: M3-97_capture_output.txt); verify_staging.py --runtime re-run on this checkout passes all runtime parity checks (M3-97_staging_checks.txt).

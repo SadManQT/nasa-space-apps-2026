@@ -1,0 +1,16 @@
+{
+ "in": "../shots/CS-17-D.mp4",
+ "out": "../shots/CS-17-D_named.mp4",
+ "labels": [
+  {"text": "KAI", "quad": [[603, 893], [681, 893], [681, 925], [603, 925]], "track": [601, 842, 683, 958],
+   "ink": "#b5461a", "fill": 0.6, "height": 0.52, "cylinder": 55, "tracking": 0.1},
+  {"text": "AMARA", "quad": [[728, 883], [805, 883], [805, 915], [728, 915]], "track": [726, 832, 807, 951],
+   "ink": "#137d8a", "fill": 0.78, "height": 0.52, "cylinder": 55, "tracking": 0.08},
+  {"text": "MEI", "quad": [[848, 872], [924, 872], [924, 904], [848, 904]], "track": [846, 832, 926, 952],
+   "ink": "#2e7d32", "fill": 0.6, "height": 0.52, "cylinder": 55, "tracking": 0.1},
+  {"text": "RAFI", "quad": [[967, 886], [1043, 886], [1043, 918], [967, 918]], "track": [965, 836, 1045, 956],
+   "ink": "#6a3fa0", "fill": 0.66, "height": 0.52, "cylinder": 55, "tracking": 0.1},
+  {"text": "FERREIRA", "quad": [[1094, 895], [1171, 895], [1171, 927], [1094, 927]], "track": [1092, 842, 1173, 962],
+   "ink": "#7a6430", "fill": 0.86, "height": 0.52, "cylinder": 55, "tracking": 0.04}
+ ]
+}

@@ -1,10 +1,28 @@
 {
  "id": "CS-18",
  "shots": [
-  "shots/CS-18-A.mp4"
+  "shots/CS-18-A_blink.mp4"
  ],
  "transitions": [],
  "lines": [],
- "out": "../CS-18_The_Closed_Drawer"
+ "sfx": [
+  {
+   "at": 3.8,
+   "file": "../../../../game/assets/audio/sfx/SFX_INVENTORY_LAMP_TICK.ogg",
+   "gain_db": 0,
+   "pending": "M3-94R owns generation; this cue slot remains silent."
+  }
+ ],
+ "tail_black": 1.0,
+ "out": "../CS-18_The_Closed_Drawer",
+ "beds": [
+  {
+   "file": "../../../../game/assets/audio/sfx/SFX_FAN_NORMAL.ogg",
+   "at": 0.0,
+   "until": 7.0,
+   "gain": 0.398107,
+   "fade_in": 0.8,
+   "fade_out": 1.0
+  }
+ ]
 }
-
