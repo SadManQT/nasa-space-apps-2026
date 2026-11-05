@@ -736,7 +736,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "antigravity",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [
     "M0-02"
@@ -754,7 +754,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "note": "",
    "evidence": "",
    "updated": "2026-11-05",
-   "prompt": "Problem: puzzles are receipt gates: each step is a 'USE' button that submits the correct answer pre-filled.\nGoal: the player calibrates the moisture probe (zero at dry 10 -> 0, span at wet 110 -> 100) and plants with moisture in 40–60, choosing\nthe values themselves, with predict -> test -> observe -> explain feedback and a Data Card link (M0-15) when available.\nDo: implement the P-01 panel per execution/PUZZLE_P01.md and execution/UI_09_SCIENTIFIC_PUZZLE.md through the existing PuzzleHost; remove\nP-01's pre-filled payloads; wrong answers give a helpful, non-punishing hint (SYS_22); keyboard, mouse and controller; text scaling; no\ntimer pressure in Family mode. Numbers come from game-design/08_PUZZLE_DESIGNS.md only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+   "prompt": "Problem: puzzles are receipt gates: each step is a 'USE' button that submits the correct answer pre-filled.\nGoal: the player calibrates the moisture probe (zero at dry 10 -> 0, span at wet 110 -> 100) and plants with moisture in 40–60, choosing\nthe values themselves, with predict -> test -> observe -> explain feedback and a Data Card link (M0-15) when available.\nDo: implement the P-01 panel per execution/PUZZLE_P01.md and execution/UI_09_SCIENTIFIC_PUZZLE.md through the existing PuzzleHost; remove\nP-01's pre-filled payloads; wrong answers give a helpful, non-punishing hint (SYS_22); keyboard, mouse and controller; text scaling; no\ntimer pressure in Family mode. Numbers come from game-design/08_PUZZLE_DESIGNS.md only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
+   "blocker": "Night shift parked the work on branch night/M1-08: "
   },
   {
    "id": "M1-09",
