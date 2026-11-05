@@ -4104,7 +4104,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Clean, professional HUD: one plain-language goal, the UI design system, no developer text",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [],
    "paths": [
@@ -4124,7 +4124,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
    "evidence": "",
    "updated": "2026-11-05",
-   "prompt": "Problem: Sadman played the 5 Nov build and found the screen \"super confusing\": developer IDs (EX-CH01-S07, P-02), single-letter\nvariables (E 14/20, W 0, Z 0), an unreadable objective, and six panels covering ~70% of the screen (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §0).\nGoal: a clean, professional (AAA) interface where a new player always knows what to do and why.\nDo: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 (ten clarity rules, the §1.1 player-word table as display strings only) and §2 (design system, screen\nstates, removal of the always-on status cards/operations list/controls block). Goal card (goal ≤ 8 words + why ≤ 12 words),\nworld marker with distance, context prompts on objects, compact station strip that appears only on change or when low, What Now\non H, developer IDs only in debug builds behind F10. Keep every simulation value and rule; this is presentation. Write\ngame/tools/test_player_text.gd: walk every HUD/panel state and fail on visible text matching the §8.1 patterns, and check the\ncentre third stays clear in free movement (§8.2). Screenshot every state in §2.2 and a before/after pair of the same moment.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+   "prompt": "Problem: Sadman played the 5 Nov build and found the screen \"super confusing\": developer IDs (EX-CH01-S07, P-02), single-letter\nvariables (E 14/20, W 0, Z 0), an unreadable objective, and six panels covering ~70% of the screen (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §0).\nGoal: a clean, professional (AAA) interface where a new player always knows what to do and why.\nDo: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 (ten clarity rules, the §1.1 player-word table as display strings only) and §2 (design system, screen\nstates, removal of the always-on status cards/operations list/controls block). Goal card (goal ≤ 8 words + why ≤ 12 words),\nworld marker with distance, context prompts on objects, compact station strip that appears only on change or when low, What Now\non H, developer IDs only in debug builds behind F10. Keep every simulation value and rule; this is presentation. Write\ngame/tools/test_player_text.gd: walk every HUD/panel state and fail on visible text matching the §8.1 patterns, and check the\ncentre third stays clear in free movement (§8.2). Screenshot every state in §2.2 and a before/after pair of the same moment.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
+   "blocker": "Night shift parked the work on branch night/M1-54: "
   },
   {
    "id": "M1-55",
