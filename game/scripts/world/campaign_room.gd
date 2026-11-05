@@ -3,9 +3,14 @@ class_name CampaignRoom
 
 const Presentation = preload("res://scripts/world/room_presentation.gd")
 const RoomContract = preload("res://scripts/world/room_contract.gd")
+const Habitat = preload("res://scripts/world/habitat_room_builder.gd")
+const KitDoor = preload("res://scripts/world/habitat_pressure_door.gd")
+const Kit = preload("res://assets/environment/kit/habitat_kit.gd")
 const DoorScript = preload("res://scripts/navigation/campaign_door.gd")
 const AssetGeometryScript = preload("res://scripts/asset_geometry.gd")
 const ToonMaterialsScript = preload("res://scripts/toon_materials.gd")
+## PR_CrewSeat: cushion runs from 0.2 m behind to 0.5 m in front of the pivot at 0.44 m high.
+const SEAT_SIT_OFFSET_M := 0.3
 
 @export var room_id := "LOC-01"
 @export var load_approved_assets := true
@@ -22,10 +27,12 @@ var _built := false
 var _layout: Dictionary = {}
 var _selection_frames: Dictionary = {}
 var _focus_id := ""
+var _scene_context := ""
 
 func _ready() -> void:
 	build_room()
 
+## Builds this room once, preserving stable roots and interaction IDs.
 func build_room() -> Dictionary:
 	if _built:
 		return {"accepted": true, "room_id": room_id, "duplicate": true}
@@ -42,14 +49,29 @@ func build_room() -> Dictionary:
 	door_root = _node_root("Doors")
 	anchor_root = _node_root("CompanionAnchors")
 	navigation_root = _node_root("Navigation")
-	_build_floor_and_walls(contract)
+	var stamp := LoadTrace.begin()
+	if _layout.get("assembly") == "habitat_kit":
+		Habitat.build(self, _layout)
+	else:
+		_build_floor_and_walls(contract)
+	LoadTrace.end("room_shell:" + room_id, stamp)
+	stamp = LoadTrace.begin()
 	Presentation.build(self, _layout, contract.get("pressure") == "vacuum")
 	_build_doors(contract)
 	_build_focus_targets(contract)
 	_build_pressure_markers(contract)
 	_build_anchors(contract)
+	if _layout.get("assembly") == "habitat_kit":
+		for obstacle in _layout.obstacles:
+			Habitat.collider(collision_root, String(obstacle.id), Presentation.vector(obstacle.position), Presentation.vector(obstacle.size))
+	LoadTrace.end("room_fixtures_doors:" + room_id, stamp)
+	stamp = LoadTrace.begin()
 	if build_navigation:
-		_build_navigation(contract)
+		if _layout.get("assembly") == "habitat_kit":
+			Habitat.navigation(navigation_root, _layout)
+		else:
+			_build_navigation(contract)
+	LoadTrace.end("room_navigation:" + room_id, stamp)
 	if load_approved_assets:
 		_load_approved_assets(contract)
 	_build_selection_frames(contract)
@@ -73,6 +95,7 @@ func build_room() -> Dictionary:
 		"anchor_count": anchor_root.get_child_count(),
 	}
 
+## Returns the authored focus anchors for the existing interaction dispatcher.
 func focus_targets() -> Array:
 	var result: Array = []
 	if focus_root == null:
@@ -86,6 +109,7 @@ func focus_targets() -> Array:
 		})
 	return result
 
+## Returns the stable scene roots consumed by campaign staging.
 func named_roots() -> Dictionary:
 	return {
 		"visual_root": visual_root,
@@ -97,15 +121,21 @@ func named_roots() -> Dictionary:
 		"navigation_root": navigation_root,
 	}
 
+## Mirrors the authoritative WorldRoute pressure-boundary state.
 func set_door_open(boundary_id: String, is_open: bool) -> bool:
 	if door_root == null:
 		return false
 	for node in door_root.get_children():
 		if String(node.get_meta("boundary_id", "")) == boundary_id and node is CampaignDoor:
 			(node as CampaignDoor).set_open(is_open)
+			if boundary_id == "garden_viewing_shutter" and _layout.get("assembly") == "habitat_kit":
+				var shutter := visual_root.get_node_or_null("shutter") as Node3D
+				if shutter != null:
+					shutter.visible = not is_open
 			return true
 	return false
 
+## Displays the canonical plant stage at its sealed chamber anchor.
 func apply_plant_state(plants: Array) -> void:
 	if room_id != "LOC-03" or visual_root == null:
 		return
@@ -136,9 +166,10 @@ func apply_plant_state(plants: Array) -> void:
 			if model == null:
 				continue
 			model.name = asset
-			model.scale = Vector3.ONE * 0.85
+			model.scale = Vector3.ONE * (1.0 if _layout.get("assembly") == "habitat_kit" else 0.85)
 			visual_root.add_child(model)
-			ToonMaterialsScript.apply_to_tree(model, false, true)
+			if _layout.get("assembly") != "habitat_kit":
+				ToonMaterialsScript.apply_to_tree(model, false, true)
 		if _layout.get("plant_positions", {}).has(individual):
 			model.position = Presentation.vector(_layout.plant_positions[individual])
 		elif focus != null:
@@ -182,6 +213,9 @@ func _build_floor_and_walls(contract: Dictionary) -> void:
 			mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
 func _build_doors(contract: Dictionary) -> void:
+	if _layout.get("assembly") == "habitat_kit":
+		_build_kit_doors()
+		return
 	var boundaries: Array = contract.get("boundary_ids", [])
 	for index in boundaries.size():
 		var boundary_id := String(boundaries[index])
@@ -274,24 +308,29 @@ func _build_navigation(contract: Dictionary) -> void:
 	navigation_root.add_child(region)
 
 func _load_approved_assets(contract: Dictionary) -> void:
-	var paths: Array = contract.get("asset_paths", [])
+	var paths: Array = _layout.get("props", []) if _layout.get("assembly") == "habitat_kit" else contract.get("asset_paths", [])
 	for index in paths.size():
-		_add_approved_asset(String(paths[index]), index, paths.size())
+		_add_approved_asset(String(paths[index].path) if paths[index] is Dictionary else String(paths[index]), index, paths.size(), paths[index] if paths[index] is Dictionary else {})
 
+## Loads approved prop instances over frames using the existing geometry cache.
 func load_assets_incremental() -> void:
-	var paths: Array = RoomContract.room(room_id).get("asset_paths", [])
+	var paths: Array = _layout.get("props", []) if _layout.get("assembly") == "habitat_kit" else RoomContract.room(room_id).get("asset_paths", [])
 	for index in paths.size():
-		_add_approved_asset(String(paths[index]), index, paths.size())
+		_add_approved_asset(String(paths[index].path) if paths[index] is Dictionary else String(paths[index]), index, paths.size(), paths[index] if paths[index] is Dictionary else {})
 		await get_tree().process_frame
 	if RoomContract.room(room_id).get("pressure") == "vacuum":
 		_style_vacuum(visual_root)
+	_build_selection_frames(RoomContract.room(room_id))
 
-func _add_approved_asset(path: String, index: int, count: int) -> void:
+func _add_approved_asset(path: String, index: int, count: int, authored: Dictionary = {}) -> void:
+	var asset_name := String(authored.get("id", path.get_file().get_basename()))
+	if visual_root.has_node(asset_name):
+		return
 	var model := AssetGeometryScript.load_glb(path)
 	if model == null:
 		return
-	model.name = path.get_file().get_basename()
-	var transform_data: Dictionary = {}
+	model.name = asset_name
+	var transform_data: Dictionary = authored
 	for prop in _layout.get("props", []):
 		if prop.id == String(model.name):
 			transform_data = prop
@@ -305,7 +344,8 @@ func _add_approved_asset(path: String, index: int, count: int) -> void:
 		model.position = _asset_position(index, count)
 		model.scale = Vector3.ONE * 0.85
 	visual_root.add_child(model)
-	ToonMaterialsScript.apply_to_tree(model, false, true)
+	if _layout.get("assembly") != "habitat_kit":
+		ToonMaterialsScript.apply_to_tree(model, false, true)
 
 func _asset_position(index: int, count: int) -> Vector3:
 	var column := index % 3
@@ -353,6 +393,8 @@ func _add_box(parent: Node3D, node_name: String, at: Vector3, size: Vector3, col
 
 func _build_selection_frames(contract: Dictionary) -> void:
 	for spec in contract.get("focus_targets", []):
+		if _selection_frames.has(String(spec.target_id)):
+			continue
 		var asset := visual_root.get_node_or_null(String(spec.get("asset_id", ""))) as Node3D
 		if asset == null:
 			continue
@@ -360,6 +402,7 @@ func _build_selection_frames(contract: Dictionary) -> void:
 		frame.hide()
 		_selection_frames[String(spec.target_id)] = frame
 
+## Highlights only the current in-range interaction target.
 func set_focus_target(id: String) -> void:
 	if id == _focus_id:
 		return
@@ -369,6 +412,52 @@ func set_focus_target(id: String) -> void:
 	for node in focus_root.get_children():
 		if node.get_child_count() > 0:
 			(node.get_child(0) as Label3D).visible = node.get_meta("target_id", "") == id
+
+## The authored fixture spec (position, size, colour, cue) with this id, or {} if absent.
+func fixture(id: String) -> Dictionary:
+	for spec in _layout.get("fixtures", []):
+		if String(spec.get("id", "")) == id:
+			return spec.duplicate(true)
+	return {}
+
+## True when an installed PR_CrewSeat's sitting position is at this floor point, so a seated
+## companion needs no stand-in bench. The sitter's origin is SEAT_SIT_OFFSET_M in front of
+## the seat pivot (measured from the approved PR_CrewSeat cushion and backrest).
+func has_installed_seat_at(at: Vector3) -> bool:
+	for prop in _layout.get("props", []):
+		if not prop is Dictionary or String(prop.get("path", "")).get_file() != "PR_CrewSeat.glb":
+			continue
+		var yaw := deg_to_rad(float(prop.get("rotation_degrees", [0, 0, 0])[1]))
+		var sit := Presentation.vector(prop.position) + Basis(Vector3.UP, yaw) * Vector3(0, 0, SEAT_SIT_OFFSET_M)
+		if Vector2(sit.x - at.x, sit.z - at.z).length() < 0.15:
+			return true
+	return false
+
+## Plays the room's authored fixture cues for the staged scene, e.g. the shared inventory
+## lamp's single blink at the CH01 S02→S03 join (doc 24 §2.9; fixture "cue" in the room JSON).
+## Presentation only: repeating the same scene cannot restart a cue or change progression.
+## Returns the number of cues started.
+func set_scene_context(scene_id: String) -> int:
+	if _scene_context == scene_id or visual_root == null:
+		return 0
+	_scene_context = scene_id
+	var started := 0
+	for fixture in _layout.get("fixtures", []):
+		var cue: Dictionary = fixture.get("cue", {})
+		if not cue.get("delay_s", {}).has(scene_id):
+			continue
+		var lamp := visual_root.get_node_or_null(String(fixture.id)) as MeshInstance3D
+		var material := lamp.material_override as StandardMaterial3D if lamp != null else null
+		if material == null:
+			continue
+		var pulse: Array = cue.get("pulse_s", [0.2, 0.5, 0.3])
+		var blink := create_tween()
+		blink.tween_interval(float(cue.delay_s[scene_id]))
+		blink.tween_property(material, "albedo_color", Color(cue.lit_color), float(pulse[0]))
+		blink.tween_interval(float(pulse[1]))
+		blink.tween_property(material, "albedo_color", Color(fixture.color), float(pulse[2]))
+		started += 1
+	return started
 
 func _style_vacuum(node: Node) -> void:
 	if node is MeshInstance3D:
@@ -381,3 +470,43 @@ func _style_vacuum(node: Node) -> void:
 				material.set_shader_parameter("band_softness", 0.003)
 	for child in node.get_children():
 		_style_vacuum(child)
+
+func _build_kit_doors() -> void:
+	for portal in _layout.portals:
+		var door := KitDoor.new()
+		door.name = "Door_" + String(portal.boundary_id)
+		var yaw := Habitat.wall_yaw(String(portal.wall))
+		var module_at := Habitat.wall_point(_layout, String(portal.wall), float(portal.offset_m))
+		var basis := Basis(Vector3.UP, deg_to_rad(yaw))
+		door.position = module_at + basis * Vector3(-0.5, 1.05, 0)
+		door.rotation.y = deg_to_rad(yaw)
+		var shape := CollisionShape3D.new()
+		shape.name = "CollisionShape3D"
+		var box := BoxShape3D.new()
+		box.size = Vector3(1.2, 2.1, 0.18)
+		shape.shape = box
+		door.add_child(shape)
+		door.set_meta("boundary_id", portal.boundary_id)
+		door.setup(String(portal.boundary_id), String(portal.boundary_id).begins_with("door_"))
+		door_root.add_child(door)
+		var module := Kit.place(door, "EN_Kit_DoorFrame", Vector3(0.5, -1.05, 0))
+		door.bind_module(module)
+		var sign := Label3D.new()
+		sign.text = String(portal.destination).to_upper()
+		sign.position = Vector3(0, 1.25, -0.2)
+		sign.font_size = 38
+		sign.pixel_size = 0.002
+		door.add_child(sign)
+	# The shutter controls a view, never the room's pressure glazing or a walking exit.
+	if room_id == "LOC-03":
+		var shutter := DoorScript.new()
+		shutter.name = "Door_garden_viewing_shutter"
+		shutter.set_meta("boundary_id", "garden_viewing_shutter")
+		shutter.setup("garden_viewing_shutter", false)
+		door_root.add_child(shutter)
+
+func _exit_tree() -> void:
+	if navigation_root != null:
+		for region in navigation_root.get_children():
+			if region.has_meta("private_navigation_map"):
+				NavigationServer3D.free_rid(region.get_meta("private_navigation_map"))

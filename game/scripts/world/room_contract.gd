@@ -316,9 +316,11 @@ const _SCENE_ROOMS := {
 	"EX-CH02-S10": "LOC-02", "EX-CH02-S11": "LOC-01", "EX-CH02-S12": "LOC-01",
 }
 
+## Returns every stable location ID in the campaign.
 static func room_ids() -> Array:
 	return ROOM_IDS.duplicate()
 
+## Resolves the location contract using the existing authored layout as authority.
 static func room(room_id: String) -> Dictionary:
 	if not _ROOMS.has(room_id):
 		return {}
@@ -327,8 +329,16 @@ static func room(room_id: String) -> Dictionary:
 	for key in ["bounds_m", "focus_targets", "anchors"]:
 		if authored.has(key):
 			result[key] = authored[key].duplicate(true)
+	if authored.get("assembly") == "habitat_kit":
+		result["asset_paths"] = []
+		result["asset_ids"] = []
+		for prop in authored.props:
+			if prop.path not in result.asset_paths:
+				result.asset_paths.append(prop.path)
+			result.asset_ids.append(prop.id)
 	return result
 
+## Loads the single authored layout for this location, or an empty fallback.
 static func layout(room_id: String) -> Dictionary:
 	var path := "res://resources/campaign/rooms/" + room_id + ".json"
 	if not FileAccess.file_exists(path):
@@ -336,6 +346,7 @@ static func layout(room_id: String) -> Dictionary:
 	var parsed = JSON.parse_string(FileAccess.get_file_as_string(path))
 	return parsed if parsed is Dictionary else {}
 
+## Resolves the physical scene location without changing story progression.
 static func room_for_scene(scene_id: String) -> String:
 	if _SCENE_ROOMS.has(scene_id):
 		return String(_SCENE_ROOMS[scene_id])
@@ -364,21 +375,26 @@ static func _extended_room_for_scene(scene_id: String) -> String:
 			return ["LOC-08", "LOC-08", "LOC-11", "LOC-11", "LOC-03", "LOC-08", "LOC-12", "LOC-12", "LOC-12", "LOC-11", "LOC-08", "LOC-03"][order - 1]
 	return "LOC-01"
 
+## Returns the authored scene-to-room map as an independent copy.
 static func scene_room_map() -> Dictionary:
 	return _SCENE_ROOMS.duplicate(true)
 
+## Returns the interaction targets consumed by the world dispatcher.
 static func all_focus_targets(room_id: String) -> Array:
 	var definition := room(room_id)
 	return definition.get("focus_targets", []).duplicate(true)
 
+## Returns the crew/player staging anchors for this room.
 static func anchors(room_id: String) -> Dictionary:
 	var definition := room(room_id)
 	return definition.get("anchors", {}).duplicate(true)
 
+## Returns unique approved GLBs needed by the room loading service.
 static func all_asset_paths(room_id: String) -> Array:
 	var definition := room(room_id)
 	return definition.get("asset_paths", []).duplicate(true)
 
+## Checks the mandatory room contract fields before building geometry.
 static func validate(room_id: String) -> Dictionary:
 	var definition := room(room_id)
 	var errors: Array[String] = []

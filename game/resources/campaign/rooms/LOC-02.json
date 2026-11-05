@@ -1,12 +1,12 @@
 {
- "schema_version": 1,
+ "schema_version": 2,
  "room_id": "LOC-02",
- "description": "Authored training greybox; architecture is fictional, not a surveyed lunar site.",
+ "description": "Two adjacent 6 x 5 m equipment bays plus the shared service corridor, assembled from the approved PBR kit.",
  "bounds_m": [
-  12.0,
-  6.0
+  12,
+  8
  ],
- "ceiling_height_m": 3.6,
+ "ceiling_height_m": 2.6,
  "floor_color": "#263343",
  "wall_color": "#939ba6",
  "accent_color": "#20b8c9",
@@ -53,9 +53,9 @@
    "id": "PR_OxygenUnit",
    "path": "res://assets/props/PR_OxygenUnit/PR_OxygenUnit.glb",
    "position": [
+    1.4,
     0,
-    0,
-    -1.8
+    -1.9
    ],
    "rotation_degrees": [
     0,
@@ -72,13 +72,13 @@
    "id": "PR_ControlConsole",
    "path": "res://assets/props/PR_ControlConsole/PR_ControlConsole.glb",
    "position": [
-    1.5,
+    4.7,
     0,
-    1.0
+    -1.6
    ],
    "rotation_degrees": [
     0,
-    180,
+    0,
     0
    ],
    "scale": [
@@ -92,7 +92,7 @@
    "path": "res://assets/props/PR_WaterValve/PR_WaterValve.glb",
    "position": [
     3.5,
-    0,
+    0.85,
     -1.6
    ],
    "rotation_degrees": [
@@ -110,9 +110,9 @@
    "id": "PR_HandLight",
    "path": "res://assets/props/PR_HandLight/PR_HandLight.glb",
    "position": [
-    3.5,
+    4.8,
     0.9,
-    1.5
+    -0.1
    ],
    "rotation_degrees": [
     0,
@@ -131,8 +131,8 @@
    "label": "Power panel",
    "position": [
     -3.5,
-    1.0,
-    -1.5
+    1.3,
+    -1.2
    ],
    "target_id": "service_power_panel",
    "verb": "Inspect",
@@ -141,14 +141,19 @@
     0,
     1.0,
     0
+   ],
+   "approach_m": [
+    -3.5,
+    0,
+    0
    ]
   },
   {
    "label": "Air console",
    "position": [
-    0.0,
-    1.0,
-    -1.5
+    1.4,
+    1.3,
+    -1.35
    ],
    "target_id": "service_air_console",
    "verb": "Inspect",
@@ -157,14 +162,19 @@
     0,
     1.0,
     0
+   ],
+   "approach_m": [
+    1.4,
+    0,
+    0
    ]
   },
   {
    "label": "Garden spur valve",
    "position": [
     3.5,
-    0.8,
-    -1.5
+    1.25,
+    -1.25
    ],
    "target_id": "service_garden_valve",
    "verb": "Inspect",
@@ -173,14 +183,19 @@
     0,
     1.0,
     0
+   ],
+   "approach_m": [
+    3.5,
+    0,
+    0
    ]
   },
   {
    "label": "Hand-light locker",
    "position": [
-    3.5,
-    1.0,
-    1.5
+    4.8,
+    1,
+    -0.1
    ],
    "target_id": "service_hand_light",
    "verb": "Inspect",
@@ -189,38 +204,43 @@
     0,
     1.0,
     0
+   ],
+   "approach_m": [
+    4.8,
+    0,
+    1
    ]
   }
  ],
  "anchors": {
   "service_amara": [
-   0.0,
-   0.0,
-   1.6
+   1.4,
+   0,
+   0.8
   ],
   "service_kai": [
    -3.2,
-   0.0,
-   1.6
+   0,
+   0.8
   ],
   "service_player": [
    0,
    0,
-   -0.5
+   2.2
   ],
   "service_rafi": [
-   3.2,
-   0.0,
-   1.6
+   4.7,
+   0,
+   2.6
   ]
  },
  "fixtures": [
   {
    "id": "light_bench",
    "position": [
-    3.5,
+    4.8,
     0.45,
-    1.5
+    -0.1
    ],
    "size": [
     1.2,
@@ -228,6 +248,51 @@
     0.65
    ],
    "color": "#3c4b5d",
+   "transparent": false
+  },
+  {
+   "id": "spur_plinth",
+   "position": [
+    3.5,
+    0.42,
+    -1.6
+   ],
+   "size": [
+    0.6,
+    0.84,
+    0.6
+   ],
+   "color": "#1F2A44",
+   "transparent": false
+  },
+  {
+   "id": "power_partition",
+   "position": [
+    0,
+    1.65,
+    -1.5
+   ],
+   "size": [
+    0.035,
+    1.3,
+    5
+   ],
+   "color": "#8BC4D6",
+   "transparent": true
+  },
+  {
+   "id": "protected_trunk",
+   "position": [
+    0,
+    0.45,
+    -1.5
+   ],
+   "size": [
+    0.28,
+    0.9,
+    5
+   ],
+   "color": "#1F2A44",
    "transparent": false
   }
  ],
@@ -238,10 +303,247 @@
    0
   ],
   "key_color": "#dfeeff",
-  "key_energy": 1.6,
-  "fill_energy": 0.45,
-  "ambient_energy": 0.3,
-  "strip_color": "#dfeeff"
+  "key_energy": 0,
+  "fill_energy": 0,
+  "ambient_energy": 0.22,
+  "strip_color": "#dfeeff",
+  "practical_energy": 0.7,
+  "practical_range_m": 10,
+  "shadow_lights": 2
  },
- "earth_visibility": "interior"
+ "earth_visibility": "interior",
+ "assembly": "habitat_kit",
+ "portals": [
+  {
+   "boundary_id": "door_commons_service",
+   "wall": "south",
+   "offset_m": -3,
+   "destination": "Commons",
+   "corridor_segments": 3
+  },
+  {
+   "boundary_id": "door_service_garden",
+   "wall": "east",
+   "offset_m": 2,
+   "destination": "Transfer interlock"
+  },
+  {
+   "boundary_id": "door_service_safe",
+   "wall": "west",
+   "offset_m": 2,
+   "destination": "Safe Room"
+  }
+ ],
+ "navigation": {
+  "cell_m": 0.25,
+  "agent_radius_m": 0.3
+ },
+ "walk_probe": [
+  [
+   0,
+   2.2
+  ],
+  [
+   -4,
+   2.2
+  ],
+  [
+   0,
+   2.2
+  ],
+  [
+   4,
+   2.2
+  ],
+  [
+   0,
+   2.2
+  ]
+ ],
+ "obstacles": [
+  {
+   "id": "power_panel",
+   "position": [
+    -3.5,
+    1,
+    -1.8
+   ],
+   "size": [
+    1.09,
+    2,
+    1.01
+   ]
+  },
+  {
+   "id": "battery",
+   "position": [
+    -5,
+    0.7,
+    -1.6
+   ],
+   "size": [
+    0.6,
+    1.4,
+    0.6
+   ]
+  },
+  {
+   "id": "oxygen",
+   "position": [
+    1.4,
+    1,
+    -1.9
+   ],
+   "size": [
+    1.55,
+    2,
+    0.92
+   ]
+  },
+  {
+   "id": "console",
+   "position": [
+    4.7,
+    0.51,
+    -1.6
+   ],
+   "size": [
+    1.39,
+    1.02,
+    0.89
+   ]
+  },
+  {
+   "id": "spur",
+   "position": [
+    3.5,
+    0.8,
+    -1.6
+   ],
+   "size": [
+    0.6,
+    1.6,
+    0.6
+   ]
+  },
+  {
+   "id": "bench",
+   "position": [
+    4.8,
+    0.45,
+    -0.1
+   ],
+   "size": [
+    1.2,
+    0.9,
+    0.65
+   ]
+  },
+  {
+   "id": "protected_trunk",
+   "position": [
+    0,
+    1.3,
+    -1.5
+   ],
+   "size": [
+    0.28,
+    2.6,
+    5
+   ]
+  }
+ ],
+ "kit_runs": [
+  {
+   "piece": "EN_Kit_PipeRun",
+   "position": [
+    -4.5,
+    2.12,
+    -2.8
+   ],
+   "step": [
+    1,
+    0,
+    0
+   ],
+   "count": 10
+  },
+  {
+   "piece": "EN_Kit_CableRun",
+   "position": [
+    -4.5,
+    2.42,
+    -2.8
+   ],
+   "step": [
+    1,
+    0,
+    0
+   ],
+   "count": 10
+  }
+ ],
+ "ceiling_strips": [
+  [
+   -3.0,
+   2.52,
+   -2
+  ],
+  [
+   3.0,
+   2.52,
+   -2
+  ],
+  [
+   -3.0,
+   2.52,
+   2
+  ],
+  [
+   3.0,
+   2.52,
+   2
+  ]
+ ],
+ "signs": [
+  {
+   "text": "POWER",
+   "position": [
+    -3.5,
+    2.25,
+    -3.8
+   ]
+  },
+  {
+   "text": "ATMOSPHERE",
+   "position": [
+    2.5,
+    2.25,
+    -3.8
+   ]
+  },
+  {
+   "text": "PROTECTED SERVICE TRUNK",
+   "position": [
+    0,
+    1.02,
+    1.05
+   ],
+   "size": 0.0016
+  }
+ ],
+ "review_views": {
+  "overview": {
+   "from": [
+    3.8,
+    2.05,
+    3.3
+   ],
+   "to": [
+    -0.8,
+    1,
+    -1.8
+   ]
+  }
+ }
 }

@@ -20,8 +20,8 @@ func _run() -> void:
 		room.room_id = id
 		room.load_approved_assets = true
 		root.add_child(room)
-		_check(room.collision_root.get_node("FloorCollision").get_child_count() == 2, id + " floor has visible geometry aligned with collision")
-		_check(room.get_node("RoomLighting/KeyLight").shadow_enabled, id + " has a shadow-casting key")
+		_check(room.collision_root.has_node("FloorCollision") and (room.visual_root.has_node("HabitatKit") or room.collision_root.get_node("FloorCollision").get_child_count() == 2), id + " floor has visible geometry aligned with collision")
+		_check(room.get_node("RoomLighting/KeyLight").shadow_enabled or room.get_node("RoomLighting").get_children().any(func(n): return n is OmniLight3D and n.shadow_enabled), id + " has motivated shadow-casting lighting")
 		var environment: Environment = room.get_node("RoomLighting/RoomEnvironment").environment
 		_check(not environment.fog_enabled and not environment.volumetric_fog_enabled, id + " has no fog")
 		for target in definition.focus_targets:

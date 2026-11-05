@@ -1,7 +1,14 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/campaign_room.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://scenes/campaign/rooms/habitat_kit_preload.tscn" id="2_kit"]
 
+; Architecture, portals and furniture are authored in resources/campaign/rooms/LOC-*.json.
+; CampaignRoom assembles the approved M1-05 kit while retaining the public room contract.
+; HabitatKitPreload makes the kit GLBs dependencies of this scene, so LoadPreparation's
+; threaded room load decodes them off the main thread before the room is built.
 [node name="ServiceRooms" type="Node3D"]
 script = ExtResource("1_room")
 room_id = "LOC-02"
+
+[node name="HabitatKitPreload" parent="." instance=ExtResource("2_kit")]

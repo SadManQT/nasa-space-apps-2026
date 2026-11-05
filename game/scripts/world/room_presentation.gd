@@ -4,10 +4,12 @@ class_name RoomPresentation
 const Toon = preload("res://scripts/toon_materials.gd")
 const Geometry = preload("res://scripts/asset_geometry.gd")
 
+## Converts an authored metre-space vector from the room data.
 static func vector(value: Array) -> Vector3:
 	return Vector3(float(value[0]), float(value[1]), float(value[2]))
 
-static func mesh_box(parent: Node3D, id: String, position: Vector3, size: Vector3, color: Color, luminous: bool = false) -> MeshInstance3D:
+## Builds a fixture; habitat assemblies retain standard physically based materials.
+static func mesh_box(parent: Node3D, id: String, position: Vector3, size: Vector3, color: Color, luminous: bool = false, pbr: bool = false) -> MeshInstance3D:
 	var mesh := MeshInstance3D.new()
 	mesh.name = id
 	mesh.position = position
@@ -15,21 +17,25 @@ static func mesh_box(parent: Node3D, id: String, position: Vector3, size: Vector
 	box.size = size
 	mesh.mesh = box
 	var material := StandardMaterial3D.new()
+	if pbr and not luminous:
+		material = (load("res://assets/environment/kit/materials/M_Kit_PaintWhite.tres") as StandardMaterial3D).duplicate()
 	material.albedo_color = color
-	material.roughness = 0.95
+	material.roughness = 0.65 if pbr else 0.95
 	if luminous:
 		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	mesh.material_override = material
 	parent.add_child(mesh, true)
-	if not luminous:
+	if not luminous and not pbr:
 		# ToonMaterials reads surface materials, so put this source on the mesh.
 		mesh.material_override = null
 		box.material = material
 		Toon.apply_to_mesh(mesh, false, false)
 	return mesh
 
+## Stages the room's authored fixtures and static, bounded practical-light rig.
 static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
+	var habitat: bool = layout.get("assembly") == "habitat_kit"
 	var lighting := Node3D.new()
 	lighting.name = "RoomLighting"
 	room.add_child(lighting)
@@ -44,6 +50,8 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 	environment.ambient_light_energy = float(settings.get("ambient_energy", 0.0 if vacuum else 0.3))
 	environment.fog_enabled = false
 	environment.volumetric_fog_enabled = false
+	if habitat:
+		environment.tonemap_mode = Environment.TONE_MAPPER_AGX
 	world.environment = environment
 	lighting.add_child(world)
 	var key := DirectionalLight3D.new()
@@ -51,7 +59,7 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 	key.rotation_degrees = vector(settings.get("key_rotation_degrees", [-4, -35, 0] if vacuum else [-65, -25, 0]))
 	key.light_color = Color(settings.get("key_color", "#FFFFFF"))
 	key.light_energy = float(settings.get("key_energy", 1.6))
-	key.shadow_enabled = true
+	key.shadow_enabled = not habitat
 	key.directional_shadow_max_distance = 160.0 if vacuum else 40.0
 	key.light_size = 0.0
 	lighting.add_child(key)
@@ -65,7 +73,7 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 		return
 	var visuals := room.get_node("VisualRoot") as Node3D
 	for fixture in layout.get("fixtures", []):
-		var mesh := mesh_box(visuals, fixture.id, vector(fixture.position), vector(fixture.size), Color(fixture.color))
+		var mesh := mesh_box(visuals, fixture.id, vector(fixture.position), vector(fixture.size), Color(fixture.color), bool(fixture.get("emissive", false)), habitat)
 		if bool(fixture.get("transparent", false)):
 			var glass := StandardMaterial3D.new()
 			glass.albedo_color = Color(0.55, 0.82, 0.9, 0.13)
@@ -77,6 +85,9 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 			var frame := selection_frame(mesh, Geometry.bounds(mesh), Color("#A8D8E5"))
 			frame.name = "PressureEnclosureFrame"
 	if vacuum:
+		return
+	if habitat:
+		_build_practicals(room, layout)
 		return
 	var bounds: Array = layout.bounds_m
 	var width := float(bounds[0])
@@ -98,6 +109,7 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 	title.modulate = accent
 	visuals.add_child(title)
 
+## Draws an accessible selection outline without modifying the source material.
 static func selection_frame(parent: Node3D, bounds: AABB, color: Color = Color("#F2C230")) -> Node3D:
 	var frame := Node3D.new()
 	frame.name = "SelectionFrame"
@@ -116,3 +128,28 @@ static func selection_frame(parent: Node3D, bounds: AABB, color: Color = Color("
 		for z in [start.z, end.z]:
 			mesh_box(frame, "Edge", Vector3(center.x, y, z), Vector3(box.size.x, 0.012, 0.012), color, true)
 	return frame
+
+static func _build_practicals(room: Node3D, layout: Dictionary) -> void:
+	var settings: Dictionary = layout.lighting
+	for index in layout.ceiling_strips.size():
+		var at := vector(layout.ceiling_strips[index])
+		# Preserve the four named fixture clusters used by presentation/QA callers.
+		mesh_box(room.visual_root, "CeilingStrip", at, Vector3(1.8, 0.04, 0.14), Color(settings.strip_color), true, true)
+		var light := OmniLight3D.new()
+		light.name = "Practical_%d" % index
+		light.position = at - Vector3(0, 0.35, 0)
+		light.light_color = Color(settings.key_color)
+		light.light_energy = float(settings.practical_energy)
+		light.omni_range = float(settings.practical_range_m)
+		light.shadow_enabled = index < int(settings.shadow_lights)
+		light.light_size = 0.16
+		room.get_node("RoomLighting").add_child(light)
+	for spec in layout.get("signs", []):
+		var label := Label3D.new()
+		label.text = spec.text
+		label.position = vector(spec.position)
+		label.rotation_degrees.y = float(spec.get("yaw", 0))
+		label.font_size = 40
+		label.pixel_size = float(spec.get("size", 0.0025))
+		label.modulate = Color(layout.accent_color)
+		room.visual_root.add_child(label)
