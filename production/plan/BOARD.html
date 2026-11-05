@@ -86,10 +86,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">30 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">44 todo</span></div><div class="bar"><i style="width:39%"></i></div>
-<details open><summary>Working now (2)</summary><ul>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">30 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">43 todo</span></div><div class="bar"><i style="width:39%"></i></div>
+<details open><summary>Working now (3)</summary><ul>
 <li><a class="id" href="#M0-11">M0-11</a> Team roster, roles and both registrations <span class="chip ">human</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/human on 2026-11-03</div></li>
 <li><a class="id" href="#M1-34">M1-34</a> Real south-pole terrain from NASA LRO LOLA elevation data <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/claude on 2026-11-06</div></li>
+<li><a class="id" href="#M1-60">M1-60</a> Chapter 1 science explainers: the polar Sun, Earth&#x27;s position, crew needs, power, storm data, shielding, plant growth <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/claude on 2026-11-06</div></li>
 </ul></details>
 <details open><summary>Next up today (6)</summary><ul>
 <li><a class="id" href="#M1-06">M1-06</a> Assemble the Chapter 1 rooms from the kit <span class="chip ">claude</span> <span class="chip ">P0</span></li>
@@ -102,7 +103,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <details open><summary>Blocked (1)</summary><ul>
 <li><a class="id" href="#M1-52">M1-52</a> Opening beat 1: a 6 s Earth mustard-field shot and its wind-and-birds effect <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Night shift parked the work on branch night/M1-52: Sadman must review and approve the exact 2D Earth mustard-field start frame before video generation, and the approval must be qu…</div></li>
 </ul></details>
-<details><summary>To do (38)</summary><ul>
+<details><summary>To do (37)</summary><ul>
 <li><a class="id" href="#M1-24">M1-24</a> Fix the playtest and QA findings, then freeze the demo build <span class="chip ">claude</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M2-02">M2-02</a> NASA project page text, ready to paste <span class="chip ">claude</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M2-03">M2-03</a> Video 2 (240 s local judging) script, shot list and subtitles <span class="chip ">claude</span> <span class="chip ">P0</span></li>
@@ -137,7 +138,6 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-6T">M3-6T</a> Chapter 6 messages: every scene joined to the next <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-7T">M3-7T</a> Chapter 7 messages: every scene joined to the next <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-8T">M3-8T</a> Chapter 8 messages: every scene joined to the next <span class="chip ">claude</span> <span class="chip ">P1</span></li>
-<li><a class="id" href="#M1-60">M1-60</a> Chapter 1 science explainers: the polar Sun, Earth&#x27;s position, crew needs, power, storm data, shielding, plant growth <span class="chip ">claude</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M3-68">M3-68</a> Science explainers for Chapters 2-4 and the Moon trainer (5-8 in M3-77) <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-76">M3-76</a> Explainer clips for every Chapter 5-8 mechanic <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-77">M3-77</a> Science explainers for Chapters 5-8 <span class="chip ">claude</span> <span class="chip ">P1</span></li>
@@ -5184,24 +5184,25 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Chapter 1 science explainers: the polar Sun, Earth's position, crew needs, power, storm data, shielding, plant growth",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
-    "M1-59",
     "M1-63"
    ],
    "paths": [
-    "production/explainers/science/",
-    "game/assets/explainers/science/"
+    "game/assets/explainers/science/",
+    "game/resources/campaign/content/explainers.json",
+    "production/explainers/motion/",
+    "production/explainers/science/"
    ],
    "refs": [
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
     "game/scripts/science/science_data.gd"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): science explainers use the Claude Motion pipeline per MASTER_PLAN §5, so M1-59 (Godot how-to clips) is no longer a prerequisite. The polar Sun and proton-flux clips were made in M1-63.",
    "evidence": "",
-   "updated": "2026-11-05",
-   "prompt": "Do: build the Chapter 1 explainers in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §7.1 (rows marked CH01): why the Sun stays low at the pole; where Earth is and why\nshift 4's cutoff is a training event; air, water and food for a crew; solar power and batteries; reading the 2017 proton-flux\nchart; what shielding does; how plants grow in space. Every explainer: 20–45 s, captions, animated diagrams made in Godot with the M1-59 pipeline, honest labels (measured, model, diagram or counterfactual; game-design/24_NARRATIVE_REVISION.md §2.12), numbers taken from the bundled fixture in game/resources/data/nasa/ (never invented), ending on what it means for the player's next decision; attach it to the mission data card (M1-30), the clue that uses the data and Journal → Science. Check every number against its fixture and source.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
+   "updated": "2026-11-06",
+   "prompt": "Do: build the Chapter 1 explainers in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §7.1 (rows marked CH01): why the Sun stays low at the pole; where Earth is and why\nshift 4's cutoff is a training event; air, water and food for a crew; solar power and batteries; reading the 2017 proton-flux\nchart; what shielding does; how plants grow in space. Every explainer: 20–45 s, captions, animated diagrams made with the Claude Motion pipeline (M1-63: production/explainers/motion/STYLE.md, production/tools/motion/build.py), honest labels (measured, model, diagram or counterfactual; game-design/24_NARRATIVE_REVISION.md §2.12), numbers taken from the bundled fixture in game/resources/data/nasa/ (never invented), ending on what it means for the player's next decision; attach it to the mission data card (M1-30), the clue that uses the data and Journal → Science. Check every number against its fixture and source.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "sadman",
    "effort": 3
   },

@@ -4824,24 +4824,25 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Chapter 1 science explainers: the polar Sun, Earth's position, crew needs, power, storm data, shielding, plant growth",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
-    "M1-59",
     "M1-63"
    ],
    "paths": [
-    "production/explainers/science/",
-    "game/assets/explainers/science/"
+    "game/assets/explainers/science/",
+    "game/resources/campaign/content/explainers.json",
+    "production/explainers/motion/",
+    "production/explainers/science/"
    ],
    "refs": [
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
     "game/scripts/science/science_data.gd"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): science explainers use the Claude Motion pipeline per MASTER_PLAN §5, so M1-59 (Godot how-to clips) is no longer a prerequisite. The polar Sun and proton-flux clips were made in M1-63.",
    "evidence": "",
-   "updated": "2026-11-05",
-   "prompt": "Do: build the Chapter 1 explainers in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §7.1 (rows marked CH01): why the Sun stays low at the pole; where Earth is and why\nshift 4's cutoff is a training event; air, water and food for a crew; solar power and batteries; reading the 2017 proton-flux\nchart; what shielding does; how plants grow in space. Every explainer: 20–45 s, captions, animated diagrams made in Godot with the M1-59 pipeline, honest labels (measured, model, diagram or counterfactual; game-design/24_NARRATIVE_REVISION.md §2.12), numbers taken from the bundled fixture in game/resources/data/nasa/ (never invented), ending on what it means for the player's next decision; attach it to the mission data card (M1-30), the clue that uses the data and Journal → Science. Check every number against its fixture and source.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
+   "updated": "2026-11-06",
+   "prompt": "Do: build the Chapter 1 explainers in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §7.1 (rows marked CH01): why the Sun stays low at the pole; where Earth is and why\nshift 4's cutoff is a training event; air, water and food for a crew; solar power and batteries; reading the 2017 proton-flux\nchart; what shielding does; how plants grow in space. Every explainer: 20–45 s, captions, animated diagrams made with the Claude Motion pipeline (M1-63: production/explainers/motion/STYLE.md, production/tools/motion/build.py), honest labels (measured, model, diagram or counterfactual; game-design/24_NARRATIVE_REVISION.md §2.12), numbers taken from the bundled fixture in game/resources/data/nasa/ (never invented), ending on what it means for the player's next decision; attach it to the mission data card (M1-30), the clue that uses the data and Journal → Science. Check every number against its fixture and source.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "sadman",
    "effort": 3
   },
