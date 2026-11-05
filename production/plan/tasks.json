@@ -931,8 +931,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Chapter 1 endings, decision replay and the science debrief",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-09",
     "M0-15"
@@ -1289,8 +1289,8 @@
    "prompt": "Goal: the challenge is about balancing life support, radiation shielding, power and food; the player should see those four at all times.\nDo: a compact HUD panel with four meters, Power (E), Life support (air A and water), Shielding (S and accumulated exposure Z), Food (crops C\nand rations R), labelled in plain words with icons; every puzzle preview shows the forecast change on each meter (arrows plus the number)\nbefore the player commits; red/amber thresholds come from data, not code; accessible (colour plus shape, screen-reader text, scales to 150%).\nValues come from the authoritative director state; no second source of truth.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-09",
     "M0-15",
@@ -4263,8 +4263,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Mission Table made simple: guided first shift, plain toggles, before-and-after forecast",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-54"
    ],
@@ -4290,8 +4290,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Messages: inbox, arrival toasts, unlock triggers and the message validator",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-54"
    ],
@@ -4309,7 +4309,7 @@
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-06",
    "prompt": "Goal: every scene connects to the next with text messages (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5; joins in game-design/24_NARRATIVE_REVISION.md §2.9).\nDo: a Messages system: threads (crew, commander, earth, academy, archive), unread counts, a toast on arrival (never during\ndialogue), key M and the pause menu entry, messages flagged goal feed the goal card. Load every\ngame/resources/campaign/content/messages/ch*.json (schema in §5) and unlock on scene_enter / scene_exit / mission_done /\njob_done / found; record read state in the save. Write production/tools/check_messages.py (stdlib): parses game-design/24_NARRATIVE_REVISION.md §2.9 and fails\nunless every join present in the loaded chapter files has ≥ 2 messages, IDs are unique, unlock scene IDs exist in\nfull-game-story/story-data.json, bodies are ≤ 60 words, text is English (no U+0980–U+09FF), and \"Noor\"/\"Rahman\" never unlock\nbefore EX-CH05-S10. Add a two-message sample ch00 fixture for tests only. game/tools/test_comms.gd covers load, unlock, toast,\ngoal handoff and save.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
    "effort": 3
@@ -5006,8 +5006,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Hint player: three progressive levels (nudge, animated explainer, worked method) in a polished overlay",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-54"
    ],
@@ -5024,7 +5024,7 @@
    ],
    "note": "From MASTER_PLAN.md (Sadman, 5 Nov 2026).",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-06",
    "prompt": "Goal: a hint is a small, beautiful moment, never a wall of text (MASTER_PLAN.md §5).\nDo: one overlay opened from What now (H) and from every puzzle panel's Hint button, one level per request: level 1 a one-line nudge (doc 22 H1) with the relevant object highlighted; level 2 the animated explainer clip for the concept (game/resources/campaign/content/explainers.json, played in a 16:9 card with captions, pause and replay; text fallback when a clip is missing); level 3 the worked method on a different example, never the player's exact answer. Hints never change an ending, a star or a reward; the overlay pauses the clock; Esc closes; reduced motion shows stills. Reuse UiDesign (game/scripts/ui/ui_design.gd) for every style. Also the first-time How to cards (doc 25 §1 rule 5) from how_to.json.\nWrite game/tools/test_hint_player.gd: three levels open in order, a missing clip falls back to text, no level reveals the answer string for its own puzzle.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence.",
    "reserved_for": "ramim",
    "effort": 3
