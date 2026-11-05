@@ -114,14 +114,14 @@
   }
   function captions(t) {
     for (const [a, b, str] of SPEC.captions) {
-      if (t < a - .3 || t > b + .3) continue;
-      const k = Math.min(es(t, a - .3, a), 1 - es(t, b, b + .3));
+      if (t < a || t > b) continue;
+      const k = Math.min(es(t, a, a + .25), 1 - es(t, b - .25, b));   // fades stay inside the caption's own time, so two never overlap
       const lines = wrap(str, 1480, 46);
       const h = lines.length * 62 + 44, y = H - 72 - h;
       g.save(); g.globalAlpha = k;
       const wMax = Math.max(...lines.map(l => { g.font = `600 46px ${FONT}`; return g.measureText(l).width; }));
       rrect(W / 2 - wMax / 2 - 44, y, wMax + 88, h, 22, C.scrim, null);
-      lines.forEach((l, i) => text(l, W / 2, y + 66 + i * 62 + (1 - ex(seg(t, a - .3, a + .2))) * 10, { size: 46, weight: 600, align: 'center' }));
+      lines.forEach((l, i) => text(l, W / 2, y + 66 + i * 62 + (1 - ex(seg(t, a, a + .4))) * 10, { size: 46, weight: 600, align: 'center' }));
       g.restore();
     }
   }
