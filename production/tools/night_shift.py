@@ -57,6 +57,7 @@ REVIEWER = {"codex": ["claude3", "claude2", "buet"], "claude": ["codex", "codex-
 # Fable 5.1 leads the photoreal environment, 3D assets and room builds (5 Nov decision)
 FABLE_HINTS = re.compile(r"habitat kit|environment|main scene|terrain|exterior|interior|photoreal|LOLA|\b3D\b|Blender|\bassets\b|rooms and locations|M1-03|M1-05|M1-06", re.I)
 
+OPUS = {"claude2", "claude3"}  # the accounts that run Claude Opus 5.5
 asleep: dict[str, float] = {}       # account -> epoch when usable again
 taken: set[str] = set()             # task ids picked this run
 results: list[dict] = []
@@ -341,7 +342,8 @@ def pick(slot):
             continue
         if not free(accounts):
             continue
-        _, out = sh(["python3", "production/plan/board.py", "next", "--tool", lane, "--all"], slot)
+        # Sadman's accounts work only Sadman's tasks (MASTER_PLAN.md §7); teammates' tasks stay theirs
+        _, out = sh(["python3", "production/plan/board.py", "next", "--tool", lane, "--all", "--by", "Sadman/night"], slot)
         cands += [(m[1], lane) for m in (re.match(r"^(M\d-[\w-]+)\s+\[", ln) for ln in out.splitlines()) if m]
     waits = waiting_on(json.loads((slot / "production/plan/tasks.json").read_text())["tasks"])
     for tid, lane in sorted(cands, key=lambda c: -waits[c[0]]):
@@ -385,7 +387,8 @@ def do_task(slot, tid, lane):
     if PREFER in ACCOUNTS:
         accounts = [PREFER] + [a for a in accounts if a != PREFER]
     if FABLE_HINTS.search(f"{tid} {info.get('title', '')}"):
-        accounts.insert(0, "fable")
+        # Fable leads; when Fable hits its limit, Opus 5.5 continues the work at extra-high effort (Sadman, 5 Nov)
+        accounts = ["fable", "claude2", "claude3"] + [a for a in accounts if a not in ("fable", "claude2", "claude3")]
     fix, worker = resume_parked(slot, tid), None
     if fix:
         fix += "\n" + str(info.get("blocker", ""))[:1500]
@@ -398,7 +401,8 @@ def do_task(slot, tid, lane):
         worker = cands[0]
         log(f"[{slot.name}] {tid} round {rounds + 1} on {worker} (effort {effort})")
         before = changes(slot)
-        eff = "xhigh" if ACCOUNTS[worker]["engine"] == "codex" else effort  # Codex always extra-high (Sadman, 5 Nov)
+        # Codex and Opus always extra-high (Sadman, 5 Nov); Fable keeps the task's effort
+        eff = "xhigh" if ACCOUNTS[worker]["engine"] == "codex" or worker in OPUS else effort
         ok, out = run_agent(worker, worker_prompt(tid, slot, f"Sadman/night-{worker}", fix), slot, eff)
         if not ok and limit_wait(out[-3000:]):
             continue  # same round again on the lane's next account (this one is asleep now)

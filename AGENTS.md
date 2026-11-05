@@ -1,5 +1,7 @@
 # Last Light Academy — instructions for AI agents (Codex, Antigravity, others)
 
+**`continue(<name>)`:** when a teammate types `continue(sadman)`, `continue(ramim)`, `continue(atik)` or `continue(<their name>)`, follow [production/plan/GO_NEXT.md](production/plan/GO_NEXT.md) §0: work only that member's board tasks (`board.py take --by "<Name>/<AI>"`) and edit only the folders they own ([production/plan/MASTER_PLAN.md](production/plan/MASTER_PLAN.md) §7, their card in [production/plan/team/](production/plan/team/)). A change in someone else's folder becomes a board task for them (`board.py add`), never an edit.
+
 **"Continue" / "go next":** when a teammate says "continue" (take a chunk of up to 5 tasks and keep going) or "go next" (one task), follow [production/plan/GO_NEXT.md](production/plan/GO_NEXT.md) with the team board (`python3 production/plan/board.py next --tool <your tool>`; readable view: `production/plan/BOARD.html`). The board is the ordered list of all remaining work; [HANDOFF.md](HANDOFF.md) is history.
 
 Before any work on assets, cutscenes, story or gameplay, read [PRODUCTION_HANDBOOK.md](PRODUCTION_HANDBOOK.md). It holds the canon order, locked decisions, pipeline, tools and credit rules, the full asset and cutscene lists, and current status. Update it in the same change whenever a decision or status changes.

@@ -1,5 +1,21 @@
 # Go next / continue: how any teammate's AI picks up, does and hands off work
 
+## 0. continue(<name>) — how the five of us work (from 5 Nov 2026)
+
+The plan is [MASTER_PLAN.md](MASTER_PLAN.md); every task on the board is assigned to one member (`reserved_for`), and every folder has one owner (§7 there), so two people never edit the same file. When a teammate types **`continue(<name>)`** (for example `continue(ramim)`), the AI:
+
+1. `git pull --rebase` (stash or commit your own unfinished work first).
+2. Finds the member: `python3 production/plan/board.py team`. Ids: `sadman`, `ramim`, `atik`, and two slots `member4` (QA and playtest lead) and `member5` (science, story and accessibility reviewer). A name that is not an id yet takes a free slot — ask which role they prefer if both are free, then `python3 production/plan/board.py rename-member member4 <name> --name "<full name>"`, commit `chore(team): <name> takes the member4 slot` and push. If no slot is free, stop and ask Sadman.
+3. Reads the member's card (`production/plan/team/<card>.md`, shown by `board.py team`) and MASTER_PLAN.md §6–§7, §10–§11.
+4. `python3 production/plan/board.py mine --by "<Name>/<AI>"` — finish those first. Then `python3 production/plan/board.py take --by "<Name>/<AI>" --count 5` (no `--tool`: it hands out only this member's ready tasks), commit `chore(board): claim <ids>` and push at once.
+5. For each claimed task, steps 4–8 below, with one extra rule: **edit only the member's own folders.** A needed change in another member's folder becomes a task for them: `python3 production/plan/board.py add --milestone <M> --for <owner> --title "..." --prompt "<what, why, acceptance>" --paths <their folder> --by "<Name>/<AI>"`. Then continue with what you can do.
+6. Tells the teammate what only a human can do: `python3 production/plan/board.py list --member <name> --tool human --status todo`.
+7. One line after each task (id, done or blocked, commit); stop after about 8 tasks or when nothing is ready, with a short summary. Never leave claims behind.
+
+A task of yours that is `blocked` with "Night shift parked the work on branch night/<id>" was started by Sadman's night shift: `release` it, then claim it and continue from that branch. Sadman's night shift (`production/tools/night_shift.py`) only takes Sadman's tasks.
+
+The sections below are the original loop; `continue(<name>)` uses them with `--by "<Name>/<AI>"` and without `--tool`.
+
 Two ways to start, both covered by this file:
 
 - **"continue"** (the normal way to work): the AI pulls, claims a **chunk of up to 5 ready tasks** for its lane at once, pushes the claim, then does them one by one, verifying and pushing after each task. When the chunk is done it pulls and takes the next chunk, and keeps going until nothing is ready for its lane, it is blocked, or the session has done about 8 tasks (then it reports so the teammate can start a fresh session and say "continue" again). Saying "continue" again in the same session resumes the same loop.
@@ -30,7 +46,7 @@ git pull --rebase          # stash or commit your own unfinished work first
 
 ## 2. Pick the task
 
-Use your own lane name. **The `claude`, `antigravity`, `muse` and `gemini` lanes, and every cutscene and audio task (including the code that plays them), are Sadman's only** (Claude Code, Antigravity, Muse, ElevenLabs and Veo are on his machines); the board refuses to give them to anyone else (`reserved_lanes` in tasks.json). **Teammates take `--tool codex` (the code tasks, with whatever coding AI they have: Codex/ChatGPT, Gemini CLI, Cursor, Copilot…)**, and always pass `--by "<your name>/<your AI>"` so the board knows who you are.
+**Since 5 Nov 2026 every task is assigned to one member (`reserved_for`) and that decides who takes it; the lane below only says which kind of AI suits the task, and `continue(<name>)` (§0) needs no `--tool`.** Use your own lane name. **The `claude`, `antigravity`, `muse` and `gemini` lanes, and every cutscene and audio task (including the code that plays them), are Sadman's only** (Claude Code, Antigravity, Muse, ElevenLabs and Veo are on his machines); the board refuses to give them to anyone else (`reserved_lanes` in tasks.json). **Teammates take `--tool codex` (the code tasks, with whatever coding AI they have: Codex/ChatGPT, Gemini CLI, Cursor, Copilot…)**, and always pass `--by "<your name>/<your AI>"` so the board knows who you are.
 
 | Lane | Who | Strengths it gets | Recommended model / effort |
 |---|---|---|---|
