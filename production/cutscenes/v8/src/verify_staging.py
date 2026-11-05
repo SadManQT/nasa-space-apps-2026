@@ -1,7 +1,9 @@
-"""Verify M3-97's rendered masters; --runtime also checks the window-encoded OGVs.
+"""Verify M3-97's rendered masters; --runtime also checks the window-encoded OGVs (frames and audio).
 
 Run sequentially through production/tools/heavy.py. Writes master-frame evidence and a blink strip;
 the separate M3-97_capture.sh captures the actual campaign player with its window on top.
+--stale prints only the names of runtime films whose picture or sound no longer matches the master
+(M3-97_capture.sh re-encodes just those, so an audio-only fix such as M4-02's lamp tick is not missed).
 """
 import argparse
 import csv
@@ -17,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[4]
 SRC = Path(__file__).resolve().parent
 EVIDENCE = ROOT / "production/qa/evidence"
 FPS = 24
+RATE = 48000   # decode rate for every audio check
 FILMS = {
     "CS-15": ("CS-15_Hello_Aurora", 29.75, [5.041667, 13.708333, 18.75]),
     "CS-17": ("CS-17_What_We_Grew", 30.708333, [6.041667, 22.625]),
@@ -75,6 +78,68 @@ def samples(path, start, end):
     return np.frombuffer(raw, np.float32)
 
 
+def mono(path):
+    """Decode a film's whole audio track as 48 kHz mono for timing and parity checks."""
+    raw = subprocess.check_output(["ffmpeg", "-v", "error", "-i", str(path), "-vn", "-ac", "1", "-ar", str(RATE), "-f", "f32le", "-"])
+    return np.frombuffer(raw, np.float32)
+
+
+def envelope_db(signal, window=0.05):
+    """RMS level of each consecutive `window`-second block (50 ms by default), in dBFS."""
+    size = int(RATE * window)
+    count = len(signal) // size
+    return 20 * np.log10(np.sqrt((signal[:count * size].reshape(count, size) ** 2).mean(axis=1)) + 1e-9)
+
+
+def clicks(signal, start, end):
+    """Onsets (s) of clicks: 1 ms high-passed energy 20 dB above the window's median after 50 ms of quiet.
+
+    A click's own decaying ring stays one event; a second relay tick or a double trigger would be two.
+    """
+    segment = signal[int(start * RATE):int(end * RATE)]
+    energy = np.sqrt(np.convolve(np.diff(segment, prepend=segment[:1]) ** 2, np.ones(48) / 48, "same"))
+    quiet, onsets, last = int(0.05 * RATE), [], None
+    for index in np.flatnonzero(energy > 10 * np.median(energy)):
+        if last is None or index - last > quiet:
+            onsets.append(start + index / RATE)
+        last = index
+    return onsets
+
+
+def runtime_parity(key, name, expected_length, master):
+    """Yield (ok, proof) pairs comparing the game's Theora film with its master: clock, key frames and sound."""
+    ogv = ROOT / f"game/assets/cutscenes/{name}.ogv"
+    # Held/duplicate Theora frames are not all returned by -count_frames; validate the stream's clock.
+    probe = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "v:0",
+        "-show_entries", "stream=duration,r_frame_rate,codec_name", "-of", "json", str(ogv)]))["streams"][0]
+    yield (probe["codec_name"] == "theora" and probe["r_frame_rate"] == "24/1"
+           and abs(float(probe["duration"]) - expected_length) < 0.001,
+           f"{key} runtime Theora covers the complete 24 fps timeline")
+    for at, label in KEYS[key]:
+        actual = frame(ogv, at)
+        reference = cv2.resize(frame(master, at), (actual.shape[1], actual.shape[0]))
+        error = float(np.abs(actual.astype(float) - reference).mean())
+        yield error < 16, f"{key} runtime/master frame {label}: mean error {error:.3f}"
+    # Vorbis against AAC differs by at most ~1.2 dB per 50 ms window on matching films; a missing or
+    # moved cue (the old silent lamp slot against the M4-02 master: 12.7 dB) is far outside that.
+    runtime_level, master_level = envelope_db(mono(ogv)), envelope_db(mono(master))
+    count = min(len(runtime_level), len(master_level))
+    audible = np.maximum(runtime_level[:count], master_level[:count]) > -60
+    drift = float(np.abs(runtime_level[:count] - master_level[:count])[audible].max()) if audible.any() else 0.0
+    yield drift < 3.0, f"{key} runtime/master sound: largest 50 ms level difference {drift:.2f} dB"
+
+
+def stale_films():
+    """Print the runtime films whose picture or sound no longer matches the master (nothing else on stdout)."""
+    for key, (name, expected_length, _) in FILMS.items():
+        try:
+            stale = not all(ok for ok, _ in runtime_parity(key, name, expected_length, SRC.parent / f"{name}.mp4"))
+        except (AssertionError, subprocess.CalledProcessError, KeyError, IndexError, ValueError, cv2.error):
+            stale = True   # a missing, truncated or undecodable runtime film is stale too
+        if stale:
+            print(name, flush=True)
+
+
 def main(runtime=False):
     """Check exact canon captions, timing, scdet cuts, source blink, silence, and optional OGV parity."""
     EVIDENCE.mkdir(parents=True, exist_ok=True)
@@ -94,8 +159,12 @@ def main(runtime=False):
           "approved Rao/Noor lines are caption-only pending M3-94R")
     spans = [(b["at"], b["until"]) for b in specs["CS-15"]["beds"]]
     check(all(abs(a[1] - b[0]) < 1e-6 for a, b in zip(spans, spans[1:])), "ambience beds never overlap across pictures")
-    check(specs["CS-15"]["beds"][1].get("pending") and specs["CS-18"]["sfx"][0].get("pending"),
-          "two M3-94R effects retain explicit silent cue slots")
+    dhaka, tick = specs["CS-15"]["beds"][1], specs["CS-18"]["sfx"][0]
+    check(dhaka["file"].endswith("SFX_DHAKA_ROOFTOP_MORNING.ogg")
+          and bool(dhaka.get("pending")) == any(not line.get("file") for line in lines),
+          "CS-15 Dhaka bed goes in with M3-94R's Rao/Noor recordings, so the film is encoded once (M4-02)")
+    check(tick["file"].endswith("SFX_INVENTORY_LAMP_TICK.ogg") and not tick.get("pending")
+          and (SRC / tick["file"]).resolve().is_file(), "CS-18 inventory lamp tick is installed (M4-02)")
     labels = [json.loads((SRC / "labels" / f"CS-17-{letter}.json").read_text()) for letter in "CD"]
     check([label["text"] for label in labels[0]["labels"]] == ["TARA", "Alo × Tara"], "Tara and parent lineage are named")
     check([label["text"] for label in labels[1]["labels"]] == ["KAI", "AMARA", "MEI", "RAFI", "FERREIRA"], "five named mugs")
@@ -108,25 +177,17 @@ def main(runtime=False):
         scan = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(master), "-vf", "scdet=threshold=12", "-an", "-f", "null", "-"],
                               capture_output=True, text=True, check=True)
         cuts = [float(value) for value in re.findall(r"lavfi\.scd\.time: ([0-9.]+)", scan.stderr)]
-        (EVIDENCE / f"M3-97_{key}_scdet.txt").write_text("\n".join(row for row in scan.stderr.splitlines() if "scdet" in row) + "\n")
+        # Drop ffmpeg's filter address ("@ 0x...") so the evidence only changes when the cuts do.
+        (EVIDENCE / f"M3-97_{key}_scdet.txt").write_text("\n".join(
+            re.sub(r" @ 0x[0-9a-f]+", "", row) for row in scan.stderr.splitlines() if "scdet" in row) + "\n")
         check(len(cuts) == len(expected_cuts) and all(abs(a - b) < 1 / FPS for a, b in zip(cuts, expected_cuts)),
               f"{key} scdet only planned cuts: {cuts}")
         for at, label in KEYS[key]:
             picture = frame(master, at)
             check(cv2.imwrite(str(EVIDENCE / f"M3-97_{key.replace('-', '')}_{label}.png"), picture), f"{key} master evidence {label}")
         if runtime:
-            ogv = ROOT / f"game/assets/cutscenes/{name}.ogv"
-            # Held/duplicate Theora frames are not all returned by -count_frames; validate the stream's clock.
-            probe = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "v:0",
-                "-show_entries", "stream=duration,r_frame_rate,codec_name", "-of", "json", str(ogv)]))["streams"][0]
-            check(probe["codec_name"] == "theora" and probe["r_frame_rate"] == "24/1"
-                  and abs(float(probe["duration"]) - expected_length) < 0.001,
-                  f"{key} runtime Theora covers the complete 24 fps timeline")
-            for at, label in KEYS[key]:
-                actual = frame(ogv, at)
-                reference = cv2.resize(frame(master, at), (actual.shape[1], actual.shape[0]))
-                error = float(np.abs(actual.astype(float) - reference).mean())
-                check(error < 16, f"{key} runtime/master frame {label}: mean error {error:.3f}")
+            for ok, proof in runtime_parity(key, name, expected_length, master):
+                check(ok, proof)
     silent = samples(SRC.parent / "CS-15_Hello_Aurora.mp4", 5.2, 7.5)
     check(silent.size > 0 and float(np.abs(silent).max()) < 1e-5, "CS-15 open-channel pause is digital silence (no music/cabin bleed)")
     source = SRC / "shots/CS-18-A_blink.mp4"
@@ -135,6 +196,21 @@ def main(runtime=False):
     check(raised == [91, 92, 93, 94], f"inventory lamp rises on exactly four frames: {raised}")
     strip = np.hstack([cv2.resize(frame(source, k / FPS)[310:410, 850:960], (220, 200)) for k in range(89, 97)])
     cv2.imwrite(str(EVIDENCE / "M3-97_CS18_blink_frames89-96.png"), strip)
+    # The relay tick sounds once and lands on the first lit frame of the blink (doc 24 section 7.7 beat 2).
+    first_lit = (raised[0] / FPS, (raised[0] + 1) / FPS)
+    films = [("master", SRC.parent / "CS-18_The_Closed_Drawer.mp4")]
+    films += [("runtime", ROOT / "game/assets/cutscenes/CS-18_The_Closed_Drawer.ogv")] if runtime else []
+    for label, film in films:
+        sound = mono(film)
+        onsets = [round(float(at), 4) for at in clicks(sound, 0.9, 6.9)]   # inside the fade-in and the bed's fade-out
+        check(len(onsets) == 1 and first_lit[0] <= onsets[0] < first_lit[1],
+              f"CS-18 {label}: one lamp tick at {onsets} s, on blink frame {raised[0]} "
+              f"({first_lit[0]:.4f}-{first_lit[1]:.4f} s)")
+        bed = envelope_db(sound[int(2.0 * RATE):int(3.5 * RATE)], 0.1)
+        tick = envelope_db(sound[int(onsets[0] * RATE):int((onsets[0] + 0.1) * RATE)], 0.1)[0]
+        peak = 20 * np.log10(float(np.abs(sound).max()))
+        check(tick - np.median(bed) >= 6 and peak < -1,
+              f"CS-18 {label}: tick {tick - np.median(bed):.1f} dB over the fan bed (100 ms), film peak {peak:.1f} dBFS")
     black = frame(SRC.parent / "CS-18_The_Closed_Drawer.mp4", 7.5)
     check(float(black.max()) <= 2, "CS-18 ends on black")
     tail = samples(SRC.parent / "CS-18_The_Closed_Drawer.mp4", 7.1, 7.9)
@@ -145,4 +221,9 @@ def main(runtime=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runtime", action="store_true")
-    main(parser.parse_args().runtime)
+    parser.add_argument("--stale", action="store_true", help="list runtime films that need re-encoding, then exit")
+    arguments = parser.parse_args()
+    if arguments.stale:
+        stale_films()
+    else:
+        main(arguments.runtime)

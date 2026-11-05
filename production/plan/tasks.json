@@ -4221,7 +4221,7 @@
     "production/tools/master_vo.py",
     "production/audio/voice_cast.csv"
    ],
-   "note": "Needs a Claude session with the ElevenLabs connector (Sadman: say 'do M3-94R' in such a session). Not for the night shift.",
+   "note": "Needs a Claude session with the ElevenLabs connector (Sadman: say 'do M3-94R' in such a session). Not for the night shift. 6 Nov (M4-02): both sound effects already exist (M3-99) and CS-18's tick is installed; record only the three voice lines. Installing Rao and Noor in CS-15 with the Dhaka bed is M4-04.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Record Amara \"Forty-two.\" (EX-CH03-S10), Rao \"Aurora, Earth. We hear you. Go ahead.\" (EX-CH08-S10) and Noor \"You finished what we could not.\" (EX-CH08-S10) with eleven_v4 in each speaker's voice from production/audio/voice_cast.csv; pick and master takes with production/tools/master_vo.py (delivery treatment per line); generate SFX_DHAKA_ROOFTOP_MORNING and SFX_INVENTORY_LAMP_TICK for M3-97. Log every generation in production/AI_PROMPT_LOG.md. Acceptance: vo_lines.csv rows say done; captions match; game/tools/run_tests.sh last line in the evidence.",
@@ -5476,9 +5476,52 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Fill the CS-18 lamp tick and CS-15 Dhaka bed with the M3-99 effects",
+   "status": "done",
+   "owner": "Sadman/night-claude2",
+   "deps": [],
+   "paths": [
+    "production/cutscenes/v8/",
+    "game/assets/cutscenes/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/night-claude2 on 2026-11-06.",
+   "evidence": "CS-18: lamp tick installed (pending key removed), master recomposed and OGV re-encoded via heavy.py/godot_gated; tick onset 3.8045 s master / 3.8059 s runtime = blink frame 91 (first of 91-94), one click, 7.8 dB over fan bed, picture hashes unchanged (M4-02_provenance.txt). verify_staging.py --runtime: M3-97 STAGING RESULT: PASS (masters + runtime), now with sound parity and tick-frame checks; M3-97_capture.sh re-encodes only --stale films (CS-18 only), M3-97 CAPTURE: PASS. CS-15 deferred: M3-94R still open, Dhaka bed stays pending with a note -> M4-04 (pause decision + 15.1 LU masking pre-check). Filed M4-03 (D13 dedication overlay, was a dangling M4-01 pointer). run_tests.sh: 42/42 suites passed (M4-02_tests.txt). Evidence: production/qa/evidence/M4-02_CS18_tick_sync.png, M4-02_review.md, M4-02_capture.sh, M4-02_capture_output.txt.",
+   "updated": "2026-11-06",
+   "prompt": "M3-99 generated SFX_INVENTORY_LAMP_TICK (0.245 s one-shot) and SFX_DHAKA_ROOFTOP_MORNING (12 s seamless loop, -24 LUFS) into game/assets/audio/sfx/ (sfx_list.csv, presentation_media.json updated). CS-18.json's lamp tick at 3.8 s and CS-15.json's Dhaka bed (5.04-13.71 s) still carry 'pending' keys, so the composer leaves them silent. Do: remove those two pending keys and rebuild per production/cutscenes/v8/notes_C.md (M3-97 section, rebuild order through heavy.py). CS-18 can be rebuilt now. Rebuild CS-15 together with M3-94R's two recordings (Rao, Noor) so the 29.75 s film is encoded once; if M3-94R is still open, do CS-18 only and leave CS-15's bed pending with a note. Then run M3-97_capture.sh (runtime OGV parity) and listen: the tick must land on the four-frame blink, the Dhaka bed must sit under Noor's lines without masking them (bed gain 0.1995 in CS-15.json). Acceptance: verify_staging.py --runtime passes; run_tests.sh last line in the evidence.",
+   "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M4-03",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Draw the chosen D13 dedication over CS-18's closing black (6.0-8.0 s)",
    "status": "todo",
    "owner": "",
    "deps": [],
+   "paths": [
+    "game/scripts/cutscenes/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/night-claude2 on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Problem: doc 24 section 7.7 beat 3 (and the section 2.9 join CH08 -> credits -> CS-18, marked Fix) says that if the player chose 'For the gardens we leave for others' (D13, EX-CH08-S12-CHOICE OPT02, kept in story_log.choices) those words sit small at the bottom of CS-18's black for two seconds. A pre-rendered film cannot carry a save-dependent line, so M3-97 left it to a runtime overlay and its notes pointed at board task M4-01, but M4-01 is a different task and no task covered it (found in M4-02). Do: in the cutscene player (game/scripts/cutscenes/cutscene_player.gd or a small helper beside it), when CS-18 plays on campaign_complete and the D13 choice is OPT02, fade in the exact catalog label 'For the gardens we leave for others' (read it from campaign_catalog.json, never retyped) small and centred near the bottom of the frame over 6.0-8.0 s (CS-18's picture fades 6-7 s, black and silence 7-8 s), in the UiDesign text style; nothing for OPT01 or no choice. English only; no new audio (the closing 7-8 s stays silent; M4-02 put the lamp tick at 3.8 s). Acceptance: a test that plays CS-18 with OPT02, OPT01 and no choice and checks the overlay text and timing; window captures production/qa/evidence/<id>_dedication_{opt02,opt01}.png at 7.5 s; game/tools/run_tests.sh last line in the evidence.",
+   "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M4-04",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "CS-15: install the Dhaka rooftop bed with M3-94R's Rao and Noor recordings, encode once",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-94R"
+   ],
    "paths": [
     "production/cutscenes/v8/",
     "game/assets/cutscenes/"
@@ -5487,7 +5530,7 @@
    "note": "Filed by Sadman/night-claude2 on 2026-11-06.",
    "evidence": "",
    "updated": "2026-11-06",
-   "prompt": "M3-99 generated SFX_INVENTORY_LAMP_TICK (0.245 s one-shot) and SFX_DHAKA_ROOFTOP_MORNING (12 s seamless loop, -24 LUFS) into game/assets/audio/sfx/ (sfx_list.csv, presentation_media.json updated). CS-18.json's lamp tick at 3.8 s and CS-15.json's Dhaka bed (5.04-13.71 s) still carry 'pending' keys, so the composer leaves them silent. Do: remove those two pending keys and rebuild per production/cutscenes/v8/notes_C.md (M3-97 section, rebuild order through heavy.py). CS-18 can be rebuilt now. Rebuild CS-15 together with M3-94R's two recordings (Rao, Noor) so the 29.75 s film is encoded once; if M3-94R is still open, do CS-18 only and leave CS-15's bed pending with a note. Then run M3-97_capture.sh (runtime OGV parity) and listen: the tick must land on the four-frame blink, the Dhaka bed must sit under Noor's lines without masking them (bed gain 0.1995 in CS-15.json). Acceptance: verify_staging.py --runtime passes; run_tests.sh last line in the evidence.",
+   "prompt": "M4-02 installed CS-18's lamp tick and deferred CS-15 so its 29.75 s film is encoded once, when M3-94R's two recordings exist. Do: (1) In production/cutscenes/v8/src/CS-15.json add the mastered Rao (1.25 s) and Noor reply (18.73 s) files to the two caption-only lines (exact text, radio=true; drop duration/recording_task; re-time only if a take is longer than its slot) and remove the Dhaka bed's pending key. (2) First settle how the bed meets the 2.6 s pause: the bed spans all of picture B (5.041667-13.708333 s) but verify_staging.py asserts digital silence over 5.2-7.5 s, and doc 24 section 7.5 beat 7 reads 'SFX_DHAKA_ROOFTOP_MORNING; then 2.6 s of nothing but the open channel'. Recommended: start the bed at 7.641667 s with Noor's first word (short fade-in), so the accepted silent pause stays and Earth's air arrives with her voice; then update the bed-contiguity check to allow that one gap. The alternative (rooftop under the pause) needs the silence check narrowed to music and cabin bleed; Sadman picks by ear. (3) Rebuild through heavy.py per notes_C.md (compose CS-15, then bash production/qa/evidence/M3-97_capture.sh, which re-encodes only stale films). Pre-check from M4-02: Noor's first line through the radio chain is -23.6 LUFS against the bed at gain 0.199526 at -38.7 LUFS (15.1 LU), so the bed should not mask her; confirm by listening. Acceptance: verify_staging.py --runtime passes with the updated checks; captions still match vo_lines.csv; build_presentation_media.py --check passes; game/tools/run_tests.sh last line in the evidence.",
    "reserved_for": "sadman",
    "effort": 1
   }

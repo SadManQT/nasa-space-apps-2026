@@ -1,0 +1,31 @@
+M4-02 provenance (6 Nov 2026, Sadman/night-claude2, Claude Opus 5.5 night shift)
+
+CS-18 master production/cutscenes/v8/CS-18_The_Closed_Drawer.mp4 (rebuilt: heavy.py compose_cutscene.py src/CS-18.json)
+  file sha256 before d2ebafe39470206f176f01d100c6ddc00f319c0fb6a5136e705fb24714b28938
+  file sha256 after  2212ed7cd7f888086dd30754b1a1239e5c61c365c1f4235d969cab4d769e42de
+  video packets md5 before 63f67dc15b5c595776bd40648e6bf017
+  video packets md5 after  63f67dc15b5c595776bd40648e6bf017   (identical: picture unchanged)
+  audio md5 before 5d486796b704ed80c1f641797e13180f
+  audio md5 after  7070db02048e201b4aa9d99ddd7521bf   (the tick is in)
+
+CS-18 runtime game/assets/cutscenes/CS-18_The_Closed_Drawer.ogv (re-encoded by M3-97_capture.sh via godot_gated Movie Maker)
+  file sha256 before 38552cfe3774938161ca790023d415a1c4ebb3b8950a49982a63a985a537f9e9
+  file sha256 after  64d46ab8b5b4fb2b165f321675d153f975860572785646e8214ab58f25faf23f
+  decoded video framemd5 digest before 9f236670992c8512301af20332ee5f46
+  decoded video framemd5 digest after  9f236670992c8512301af20332ee5f46   (identical: picture unchanged)
+
+CS-15 and CS-17 masters and runtime films: untouched (verify_staging.py --stale listed only CS-18).
+
+First M3-97_capture.sh run on this checkout (the run that re-encoded; M3-97_capture_output.txt holds the later no-op run):
+  M3-97 runtime films to re-encode: CS-18_The_Closed_Drawer
+  M3-97 encoded CS-18_The_Closed_Drawer: 192 frames (8.0 seconds)
+  PASS CS-15 Dhaka bed goes in with M3-94R's Rao/Noor recordings, so the film is encoded once (M4-02)
+  PASS CS-18 inventory lamp tick is installed (M4-02)
+  PASS CS-15 runtime/master sound: largest 50 ms level difference 1.08 dB
+  PASS CS-17 runtime/master sound: largest 50 ms level difference 1.17 dB
+  PASS CS-18 runtime/master sound: largest 50 ms level difference 0.76 dB
+  PASS CS-18 master: one lamp tick at [3.8045] s, on blink frame 91 (3.7917-3.8333 s)
+  PASS CS-18 runtime: one lamp tick at [3.8059] s, on blink frame 91 (3.7917-3.8333 s)
+  M3-97 STAGING RESULT: PASS (masters + runtime)
+  M3-97 CAPTURE RESULT: PASS (0 failures)
+  M3-97 CAPTURE: PASS

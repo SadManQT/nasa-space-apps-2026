@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Outside-sandbox handoff: encode the three verified masters (only when the runtime films no longer
-# match them, or M3_97_REENCODE=1), check runtime parity, then capture the actual campaign player
-# with its window always on top. No credits or network.
+# Outside-sandbox handoff: encode the verified masters whose runtime films no longer match them in
+# picture or sound (all three with M3_97_REENCODE=1), check runtime parity, then capture the actual
+# campaign player with its window always on top. No credits or network.
 # Godot's Movie Maker needs a window; godot_gated already invokes heavy.py (do not double-lock it).
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/../../.." && pwd)
@@ -13,11 +13,18 @@ trap 'rm -rf "$WORK"' EXIT
 exec > >(tee "$OUT/M3-97_capture_output.txt") 2>&1
 
 # The OGVs are LFS binaries: re-encoding films that already match their masters only churns the repository.
-if [ "${M3_97_REENCODE:-0}" != 1 ] && python3 production/tools/heavy.py python3 production/cutscenes/v8/src/verify_staging.py --runtime > "$WORK/parity.log" 2>&1; then
-  cat "$WORK/parity.log"
+# --stale compares frames and sound per film, so an audio-only rebuild (M4-02's lamp tick) is re-encoded too.
+if [ "${M3_97_REENCODE:-0}" = 1 ]; then
+  stale="CS-15_Hello_Aurora CS-17_What_We_Grew CS-18_The_Closed_Drawer"
+else
+  stale=$(python3 production/tools/heavy.py python3 production/cutscenes/v8/src/verify_staging.py --stale)
+fi
+if [ -z "$stale" ]; then
+  python3 production/tools/heavy.py python3 production/cutscenes/v8/src/verify_staging.py --runtime
   echo "M3-97 runtime films already match their masters; not re-encoded (M3_97_REENCODE=1 forces it)"
 else
-  for name in CS-15_Hello_Aurora CS-17_What_We_Grew CS-18_The_Closed_Drawer; do
+  echo "M3-97 runtime films to re-encode: "$stale
+  for name in $stale; do
     master="$ROOT/production/cutscenes/v8/$name.mp4"
     mkdir "$WORK/frames"
     python3 production/tools/heavy.py ffmpeg -v error -y -i "$master" -vf fps=24,scale=1152:648 -q:v 2 "$WORK/frames/%05d.jpg"
