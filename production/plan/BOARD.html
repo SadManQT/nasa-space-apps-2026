@@ -4212,7 +4212,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Carrying payloads, and the shift-5 STACK as a real carry-and-place task",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [],
    "paths": [
@@ -4228,7 +4228,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
    "evidence": "",
    "updated": "2026-11-05",
-   "prompt": "Do: a payload system per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.3: payloads with mass, size, handling (fragile, sealed, keep-cold) and destination; carry\nplaces (hands 1, back frame up to 3 small; sled and trailer hooks for later chapters); pickup refused with the reason when over\ncapacity; load and weight shown; delivery to a marked place checks condition. Reuse HeldProp for hand poses. Chapter 1: the\nshift-5 STACK becomes the physical task 08 defines (four supply bundles into outlined bunk slots in 30 s; partial = K1,\ncomplete = K2; assisted input before start; untimed in Family Mode; no falling-crate physics). Tests cover capacity, delivery\ncondition, STACK K0/K1/K2 and the assisted path; P-02 numbers unchanged.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+   "prompt": "Do: a payload system per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.3: payloads with mass, size, handling (fragile, sealed, keep-cold) and destination; carry\nplaces (hands 1, back frame up to 3 small; sled and trailer hooks for later chapters); pickup refused with the reason when over\ncapacity; load and weight shown; delivery to a marked place checks condition. Reuse HeldProp for hand poses. Chapter 1: the\nshift-5 STACK becomes the physical task 08 defines (four supply bundles into outlined bunk slots in 30 s; partial = K1,\ncomplete = K2; assisted input before start; untimed in Family Mode; no falling-crate physics). Tests cover capacity, delivery\ncondition, STACK K0/K1/K2 and the assisted path; P-02 numbers unchanged.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
+   "blocker": "Night shift parked the work on branch night/M1-58: 434` and `game/scripts/payload/stack_activity.gd:393` say \"2 supplies in the shelter wall\". That mixes K up with the water wall and works against what the puzzle teaches (crates do not move garden water).\n4. **The bridge line can be false.** `game/scripts/payload/payload_rules.json:21` (\"The wall still holds borrowed water. Next, return it to the garden.\") is shown every time at `stack_activity.gd"
   },
   {
    "id": "M1-59",
