@@ -4851,8 +4851,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Sound captions in the house style: on a panel, out of the walking view, no captions for interface clicks",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-codex",
    "deps": [
     "M1-54"
    ],
@@ -4865,8 +4865,8 @@
     "production/qa/evidence/M1-54_toast_and_strip.png"
    ],
    "note": "Found by M1-54 (5 Nov 2026). The HUD plays SFX_UI_CONFIRM whenever a panel opens (chapter1_campaign_hud.gd _on_panel_opened), which is where the lingering '[confirm]' caption comes from.",
-   "evidence": "",
-   "updated": "2026-11-05",
+   "evidence": "run_tests.sh (gated) last line: 39/39 suites passed — test_sound_captions.gd 82, test_player_text.gd 354, test_performance_runtime.gd 537 checks (production/qa/evidence/M1-61_tests.txt, fix-round rerun 6 Nov). Screenshots (outside-sandbox capture via M1-61_capture.sh, 1280x720, SOUND CAPTIONS RESULT: PASS 86 checks; 86/86 probes true in M1-61_probes.json): production/qa/evidence/M1-61_walking.png (walking, [ventilation fans] on dark-glass panel at bottom-left safe edge), M1-61_dialogue.png (panel 8 px above the dialogue bar, outside the centre third), M1-61_walking_large_text.png, M1-61_dialogue_large_text.png; log M1-61_capture_output.txt; review M1-61_review.md. UI confirm/soft-error/shift-commit captions emptied in presentation_media.json and kept empty by build_presentation_media.py; Captions setting and 3 s lifetime kept. Built by Sadman/night-codex; fix round (Sadman/night-claude2, Claude Opus 5.5) reviewed screenshots and code, re-ran tests, no code change. Integration outside listed paths: two-line binding in Ramim's chapter1_campaign_hud.gd apply_accessibility.",
+   "updated": "2026-11-06",
    "prompt": "Problem (M1-54 screenshots, production/qa/evidence/M1-54_toast_and_strip.png): the sound captions from game/scripts/audio/audio_director.gd ('[ventilation fans]   [confirm]') float as outlined text over the 3D view just under the centre third, with no backing panel (doc 25 §1 rule 10), and interface sounds such as [confirm] are captioned although they carry no information.\nDo: draw sound captions on a small dark-glass panel in the house style (UiDesign) at the bottom edge, above the dialogue bar when it shows and never inside the centre third; caption only effects that tell the player something (alarms, doors, machines, voices off screen), not interface clicks (set 'caption' to empty for UI sounds in presentation_media.json); keep the captions setting and the 3 s timing.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass, including test_player_text.gd. Save screenshots of the walking state with a sound caption and with dialogue to production/qa/evidence/M1-61_*.png and list them in the evidence.",
    "reserved_for": "sadman",
    "effort": 1

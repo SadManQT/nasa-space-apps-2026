@@ -123,7 +123,8 @@ def build(current):
             if loop != (row["loop"] == "yes"):
                 raise SystemExit(f"{row['id']}: .import loop={loop} but sfx_list.csv says loop={row['loop']}")
             effects.append({"id": row["id"], "runtime_path": path, "media_present": present(path), "loop": loop,
-                            "caption": row["caption"], "bus": "UI" if row["id"].startswith("SFX_UI_") else "SFX",
+                            "caption": "" if row["id"].startswith("SFX_UI_") else row["caption"],
+                            "bus": "UI" if row["id"].startswith("SFX_UI_") else "SFX",
                             "first_scenes": [] if row["first_scenes"] == "all" else scene_list(row["first_scenes"])})
     audio = media.setdefault("audio", {})
     audio.update({

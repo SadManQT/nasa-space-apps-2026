@@ -805,6 +805,8 @@ func apply_accessibility() -> void:
 	_caption_count.visible = captions
 	var scale := 1.5 if bool(settings.get("large_text", false)) else 1.0
 	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table])
+	if runtime.audio != null:
+		runtime.audio.set_caption_layout(_dialogue_bar, settings)
 	if outpost != null:
 		outpost.set_settings(settings)
 

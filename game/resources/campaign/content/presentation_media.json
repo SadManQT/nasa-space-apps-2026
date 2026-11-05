@@ -1366,7 +1366,7 @@
         "runtime_path": "res://assets/audio/sfx/SFX_UI_CONFIRM.ogg",
         "media_present": true,
         "loop": false,
-        "caption": "[confirm]",
+        "caption": "",
         "bus": "UI",
         "first_scenes": []
       },
@@ -1375,7 +1375,7 @@
         "runtime_path": "res://assets/audio/sfx/SFX_UI_SOFT_ERROR.ogg",
         "media_present": true,
         "loop": false,
-        "caption": "[try again]",
+        "caption": "",
         "bus": "UI",
         "first_scenes": []
       },
@@ -1384,7 +1384,7 @@
         "runtime_path": "res://assets/audio/sfx/SFX_UI_SHIFT_COMMIT.ogg",
         "media_present": true,
         "loop": false,
-        "caption": "[plan committed]",
+        "caption": "",
         "bus": "UI",
         "first_scenes": [
           "EX-CH01-S07"

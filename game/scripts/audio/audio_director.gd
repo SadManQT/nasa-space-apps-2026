@@ -15,6 +15,9 @@ var captions_enabled := true
 var voice_line_id := ""
 var voice: AudioStreamPlayer
 var sound_caption: Label
+var _sound_caption_panel: PanelContainer
+var _dialogue_bar: Control
+var _caption_scale := 1.0
 var _music: Array[AudioStreamPlayer] = []
 var _music_path := ""
 var _sting: AudioStreamPlayer
@@ -55,18 +58,23 @@ func _ready() -> void:
 	var layer := CanvasLayer.new()
 	layer.layer = 150
 	add_child(layer)
-	sound_caption = Label.new()
+	_sound_caption_panel = UiDesign.glass_panel()
+	_sound_caption_panel.name = "SoundCaptionPanel"
+	_sound_caption_panel.visible = false
+	_sound_caption_panel.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
+	_sound_caption_panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	layer.add_child(_sound_caption_panel)
+	sound_caption = UiDesign.label("", "caption", "ivory")
 	sound_caption.name = "SoundCaption"
-	sound_caption.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
-	sound_caption.offset_top = -238
-	sound_caption.offset_bottom = -204
 	sound_caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	sound_caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	sound_caption.add_theme_font_size_override("font_size", 16)
-	sound_caption.add_theme_color_override("font_color", Color("#A8B4C8"))
-	sound_caption.add_theme_color_override("font_outline_color", Color("#05060A"))
-	sound_caption.add_theme_constant_override("outline_size", 5)
-	layer.add_child(sound_caption)
+	_sound_caption_panel.add_child(sound_caption)
+
+## Shares the HUD's actual dialogue bounds and accessibility settings. The sound
+## panel follows reflow, resizing and dialogue fades without reserving walking space.
+func set_caption_layout(dialogue_bar: Control, settings: Dictionary) -> void:
+	_dialogue_bar = dialogue_bar
+	captions_enabled = bool(settings.get("captions", true))
+	_caption_scale = float(UiDesign.tokens().get("type", {}).get("large_text_scale", 1.5)) if bool(settings.get("large_text", false)) else 1.0
 
 ## The scene changed (or its world was rebuilt): retarget music and beds and
 ## queue its opening effects. A repeat call for the same scene changes nothing.
@@ -287,13 +295,36 @@ func _caption(text: String) -> void:
 	_captions.append({"text": text, "until": Time.get_ticks_msec() + int(_mix("sound_caption_s", 3.0) * 1000.0)})
 
 func _update_captions() -> void:
-	if _captions.is_empty():
-		sound_caption.visible = false
-		return
 	var now := Time.get_ticks_msec()
 	_captions = _captions.filter(func(item) -> bool: return item.until > now)
 	sound_caption.visible = captions_enabled and not _cinematic and not _paused and not _captions.is_empty()
+	_sound_caption_panel.visible = sound_caption.visible
 	sound_caption.text = "   ".join(_captions.map(func(item) -> String: return item.text))
+	if _sound_caption_panel.visible:
+		_layout_sound_caption()
+
+func _layout_sound_caption() -> void:
+	var view := get_viewport().get_visible_rect().size
+	var panel_tokens: Dictionary = UiDesign.tokens().get("panel", {})
+	var grid := int(panel_tokens.get("grid", 8))
+	var scaled_margin := UiDesign.px(float(panel_tokens.get("safe_margin", 64)), view.y)
+	var margin := float(maxi(grid, roundi(float(scaled_margin) / grid) * grid))
+	var gap := float(grid)
+	UiDesign.apply_type(_sound_caption_panel, view.y, _caption_scale)
+	var style := _sound_caption_panel.get_theme_stylebox("panel")
+	var padding := style.get_content_margin(SIDE_LEFT) + style.get_content_margin(SIDE_RIGHT)
+	var text_width := sound_caption.get_theme_font("font").get_string_size(sound_caption.text, HORIZONTAL_ALIGNMENT_LEFT, -1, sound_caption.get_theme_font_size("font_size")).x
+	# Wrap within the left third, so even a tall dialogue bar cannot push sound
+	# captions into the walking view. Short cues keep their natural compact width.
+	var width := minf(ceilf(text_width + padding), view.x / 3.0 - margin - gap)
+	var bottom := view.y - margin
+	# Keep the panel directly above the bar for its entire fade, including 150% reflow.
+	if is_instance_valid(_dialogue_bar) and _dialogue_bar.is_visible_in_tree():
+		bottom = minf(bottom, _dialogue_bar.get_global_rect().position.y - gap)
+	_sound_caption_panel.offset_left = margin
+	_sound_caption_panel.offset_right = margin + width
+	_sound_caption_panel.offset_top = bottom - view.y
+	_sound_caption_panel.offset_bottom = bottom - view.y
 
 func _mix(key: String, fallback: float) -> float:
 	return runtime.mix(key, fallback) if runtime != null else fallback
