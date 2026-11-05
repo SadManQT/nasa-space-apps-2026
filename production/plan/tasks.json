@@ -1624,8 +1624,8 @@
    "priority": "P1",
    "tool": "antigravity",
    "title": "Chapter 2 puzzles P-03 and P-04 as real interactive panels",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/night-buet",
    "deps": [
     "M1-09",
     "M1-38"

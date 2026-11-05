@@ -41,6 +41,84 @@ func completed_scene_ids() -> Array: return _completed_scene_ids.duplicate()
 func last_result() -> Dictionary: return _last_result.duplicate(true)
 func current_flags() -> Dictionary: return _context_flags()
 
+## Returns the route's interactive P-03 pollination puzzle state.
+func p03() -> RefCounted:
+	return _p03
+
+## Returns the route's interactive P-04 recorder reconstruction puzzle state.
+func p04() -> RefCounted:
+	return _p04
+
+## Returns the read-only view for the ScientificPuzzlePanel, including live
+## simulation forecasts computed by the same pure transition used on commit.
+func puzzle_view(target_id: String = "") -> Dictionary:
+	var scene_id := current_scene_id()
+	var targets := targets_for_current_scene()
+	var resolved_target_id := target_id
+	if resolved_target_id.is_empty():
+		for item in targets:
+			if item is Dictionary and String(item.get("puzzle_id", "")) in ["P-03", "P-04"] and not bool(item.get("completed", false)):
+				resolved_target_id = String(item.get("target_id", ""))
+				break
+	if resolved_target_id.is_empty() and not targets.is_empty():
+		resolved_target_id = String(targets[0].get("target_id", ""))
+	var is_p04 := scene_id in ["EX-CH02-S07", "EX-CH02-S08", "EX-CH02-S09", "EX-CH02-S10", "EX-CH02-S11", "EX-CH02-S12"]
+	for item in targets:
+		if item is Dictionary and String(item.get("target_id", "")) == resolved_target_id:
+			if String(item.get("puzzle_id", "")) == "P-04":
+				is_p04 = true
+			elif String(item.get("puzzle_id", "")) == "P-03":
+				is_p04 = false
+	var view: Dictionary = _p04.view_for_scene(scene_id, resolved_target_id) if is_p04 else _p03.view_for_scene(scene_id, resolved_target_id)
+	var state: Dictionary = _director.snapshot()
+	view["before_resources"] = state.get("resources", {}).duplicate(true)
+	view["before_plants"] = state.get("plants", []).duplicate(true)
+	view["before_datetime"] = String(state.get("scenario_datetime", ""))
+	view["scene_targets"] = targets
+	view["target_preview"] = _preview_target_while_paused(resolved_target_id)
+	return view
+
+func _preview_target_while_paused(target_id: String) -> Dictionary:
+	var candidates: Array = GateCatalog.targets_for_scene(current_scene_id()).filter(func(item): return String(item.get("target_id", "")) == target_id)
+	if candidates.is_empty():
+		return {"accepted": false, "reason": "Select a Chapter 2 step to preview."}
+	var target: Dictionary = candidates[0]
+	var flags := _context_flags()
+	for req in target.get("required_flags", []):
+		if not bool(flags.get(String(req), false)):
+			return {"accepted": false, "reason": "Complete the preceding step first (%s)." % String(req)}
+	var prepared := _payload_for_target(target, {})
+	var temp_director := DirectorScript.new()
+	var unpaused: Dictionary = _director.snapshot()
+	unpaused["paused"] = false
+	temp_director.restore_snapshot(unpaused)
+	var command := {
+		"command_id": String(target.get("command_id", "physical:" + target_id)),
+		"issuer": "chapter2_route_preview",
+		"owning_mission_id": String(target.get("owning_mission_id", current_mission_id())),
+		"owning_scene_id": String(target.get("owning_scene_id", current_scene_id())),
+		"expected_state_revision": int(unpaused.get("state_revision", 0)),
+		"target_id": String(target.get("command_target_id", "WORLD_PHYSICAL")),
+		"verb": String(target.get("command_verb", "set_phase")),
+		"payload": prepared,
+	}
+	var puzzle_id := String(target.get("puzzle_id", ""))
+	var action := String(prepared.get("_puzzle_action", ""))
+	if puzzle_id == "P-03":
+		var check: Dictionary = _p03.preview_action(action, prepared)
+		if not bool(check.get("accepted", false)):
+			return check
+		command = _p03.ledger_command(command, unpaused)
+		if command.is_empty():
+			return {"accepted": false, "reason": "The P-03 resource profile could not be verified."}
+		return temp_director.preview(command)
+	if puzzle_id == "P-04":
+		var p04_check: Dictionary = _p04.preview_action(action, prepared)
+		if not bool(p04_check.get("accepted", false)):
+			return p04_check
+		return temp_director.preview(command)
+	return temp_director.preview(command)
+
 func start_at(scene_id: String) -> Dictionary:
 	var index := GateCatalog.SCENE_ORDER.find(scene_id)
 	if index < 0: return {"accepted": false, "reason": "Unknown Chapter 2 scene: " + scene_id}
@@ -75,7 +153,9 @@ func focus(target_id: String, context: Dictionary = {}) -> Dictionary:
 	return _dispatcher.focus(target_id, _context(context))
 
 func inspect(context: Dictionary = {}) -> Dictionary: return _dispatcher.inspect(_context(context))
-func use(payload: Dictionary = {}, context: Dictionary = {}) -> Dictionary: return _dispatcher.use(payload, _context(context))
+func use(payload: Dictionary = {}, context: Dictionary = {}) -> Dictionary:
+	var target: Dictionary = _dispatcher.target(String(_dispatcher.state().get("focused_target_id", "")))
+	return _dispatcher.use(_payload_for_target(target, payload), _context(context))
 func preview(payload_override: Dictionary = {}) -> Dictionary: return _dispatcher.preview(payload_override)
 
 func confirm(command_id_override: String = "", payload_override: Dictionary = {}) -> Dictionary:
@@ -207,8 +287,18 @@ func _context_flags() -> Dictionary:
 
 func _payload_for_target(target: Dictionary, override: Dictionary) -> Dictionary:
 	var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+	var puzzle_id := String(target.get("puzzle_id", ""))
+	var action := String(target.get("puzzle_action", ""))
+	if puzzle_id == "P-03" and not action.is_empty():
+		var p03_payload: Dictionary = _p03.payload_for_action(action)
+		for key in p03_payload.keys():
+			payload[key] = p03_payload[key]
+	elif puzzle_id == "P-04" and not action.is_empty():
+		var p04_payload: Dictionary = _p04.payload_for_action(action)
+		for key in p04_payload.keys():
+			payload[key] = p04_payload[key]
 	for key in override.keys(): payload[key] = override[key]
-	if target.has("puzzle_action"): payload["_puzzle_action"] = String(target.get("puzzle_action", ""))
+	if target.has("puzzle_action"): payload["_puzzle_action"] = action
 	if String(target.get("command_verb", "")) == "apply_delta" and (payload.has("E") or payload.has("A")):
 		payload["deltas"] = {"E": int(payload.get("E", 0)), "A": int(payload.get("A", 0))}
 	return payload
@@ -255,5 +345,6 @@ func _apply_target_result(target_id: String, _result: Dictionary) -> void:
 func _puzzle_reject(reason: String) -> Dictionary:
 	var result := ResultScript.empty(int(_director.query().get("state_revision", 0)), "planning")
 	result["reason"] = String(reason)
+	result["scientific_puzzle"] = true
 	result["snapshot"] = _director.snapshot()
 	return result

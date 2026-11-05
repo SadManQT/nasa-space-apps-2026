@@ -4,6 +4,7 @@ class_name Chapter1CampaignHUD
 const Outpost = preload("res://scripts/ui/outpost_status.gd")
 const PANELS_SCENE: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
 const MISSION_TABLE_SCENE: PackedScene = preload("res://scenes/ui/mission_table_panel.tscn")
+const SCIENTIFIC_PUZZLE_SCENE: PackedScene = preload("res://scenes/ui/scientific_puzzle_panel.tscn")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
 const IVORY := Color("#ECEEF0")
 const MUTED := Color("#A8B4C8")
@@ -15,6 +16,7 @@ const RED := Color("#E56B6F")
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
 var mission_table: MissionTablePanel
+var scientific_puzzle: ScientificPuzzlePanel
 var _title: Label
 var _meta: Label
 var _objective: Label
@@ -57,6 +59,11 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
 	mission_table.closed.connect(func(_target: String) -> void: _on_panel_closed("mission_table"))
 	mission_table.commit_requested.connect(_on_mission_table_commit)
+	scientific_puzzle = SCIENTIFIC_PUZZLE_SCENE.instantiate() as ScientificPuzzlePanel
+	add_child(scientific_puzzle)
+	scientific_puzzle.opened.connect(func(_target: String) -> void: _on_panel_opened("scientific_puzzle"))
+	scientific_puzzle.closed.connect(func(_target: String) -> void: _on_panel_closed("scientific_puzzle"))
+	scientific_puzzle.commit_requested.connect(_on_scientific_puzzle_commit)
 	_refresh_query()
 	refresh_scene({})
 
@@ -311,9 +318,13 @@ func _build_targets() -> void:
 			_clear_unselected_forecast()
 		)
 		var target_id := String(target.get("target_id", ""))
+		var puzzle_id := String(target.get("puzzle_id", ""))
 		if MissionTableScript.is_gate(target_id):
 			button.text = "PLAN AT MISSION TABLE · " + String(target.get("focus_label", target_id)) + "\nAT " + label
 			button.pressed.connect(func() -> void: open_mission_table(target_id))
+		elif puzzle_id in ["P-03", "P-04"] and runtime.route != null and runtime.route.has_method("puzzle_view"):
+			button.text = "OPEN %s WORKBENCH · %s\nAT %s" % [puzzle_id, String(target.get("focus_label", target_id)), label]
+			button.pressed.connect(func() -> void: open_scientific_puzzle(target_id))
 		else:
 			button.pressed.connect(func() -> void: runtime.perform_target(target_id))
 		_targets.add_child(button)
@@ -344,6 +355,24 @@ func open_mission_table(target_id: String) -> bool:
 		return false
 	mission_table.open(runtime.route, target_id, runtime.query().get("accessibility", {}))
 	return true
+
+## Opens the Chapter 2 Scientific Puzzle Panel (P-03 Pollination or P-04 Recorder
+## Reconstruction) and pauses scenario time while the player configures choices.
+func open_scientific_puzzle(target_id: String = "") -> bool:
+	if runtime == null or scientific_puzzle == null or runtime.is_chapter_complete():
+		return false
+	if runtime.route == null or not runtime.route.has_method("puzzle_view"):
+		return false
+	if runtime.is_cutscene_active() or scientific_puzzle.is_open() or (mission_table != null and mission_table.is_open()):
+		return false
+	if panels != null and not panels.active_panel().is_empty():
+		return false
+	return scientific_puzzle.open(runtime.route, target_id, runtime.query().get("accessibility", {}))
+
+func _on_scientific_puzzle_commit(target_id: String, payload: Dictionary) -> void:
+	if runtime == null:
+		return
+	runtime.perform_target(target_id, payload)
 
 func _on_mission_table_commit(target_id: String, plan: Dictionary) -> void:
 	if runtime == null:
@@ -436,6 +465,8 @@ func apply_accessibility() -> void:
 	_caption_line.visible = bool(settings.get("captions", true))
 	var large := bool(settings.get("large_text", false))
 	_scale_text(self, 1.5 if large else 1.0)
+	if scientific_puzzle != null:
+		scientific_puzzle.set_accessibility(settings)
 	_layout_outpost()
 
 func _layout_outpost() -> void:
@@ -453,7 +484,7 @@ func _layout_outpost() -> void:
 
 func _scale_text(node: Node, scale_factor: float) -> void:
 	for child in node.get_children():
-		if child == panels or child == mission_table:
+		if child == panels or child == mission_table or child == scientific_puzzle:
 			continue
 		if child is Control:
 			if not child.has_meta("lla_base_font_size"):
@@ -481,7 +512,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_modal_button_states.clear()
 		return
 	for child in node.get_children():
-		if child == panels or child == mission_table:
+		if child == panels or child == mission_table or child == scientific_puzzle:
 			continue
 		if child is BaseButton:
 			if not _modal_button_states.has(child):
@@ -491,7 +522,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
-		if panels != null and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()):
+		if panels != null and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (scientific_puzzle == null or not scientific_puzzle.is_open()):
 			panels.open_panel("pause")
 			get_viewport().set_input_as_handled()
 

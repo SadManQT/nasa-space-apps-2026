@@ -1,11 +1,18 @@
 extends RefCounted
 class_name ExtendedPuzzleLedger
 
+const P03Script = preload("res://scripts/puzzles/p03_pollination.gd")
+const P04Script = preload("res://scripts/puzzles/p04_recorder_reconstruction.gd")
+
 var _receipts := {}
 
 func preview(puzzle_id: String, action: String, payload: Dictionary = {}) -> Dictionary:
 	if _receipts.has(action):
 		return {"accepted": true, "duplicate": true, "reason": "Puzzle action already has a receipt."}
+	if puzzle_id == "P-03":
+		return P03Script.new().preview_action(action, payload)
+	if puzzle_id == "P-04":
+		return P04Script.new().preview_action(action, payload)
 	var error := _validate(puzzle_id, action, payload)
 	if not error.is_empty():
 		return {"accepted": false, "duplicate": false, "reason": error}

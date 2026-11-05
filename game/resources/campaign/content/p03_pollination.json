@@ -1,0 +1,467 @@
+{
+  "puzzle_id": "P-03",
+  "title": "Alo Meets Tara",
+  "subtitle": "Reciprocal Pollination & First-Generation Prediction",
+  "chapter": "CH02",
+  "scenes": [
+    "EX-CH02-S01",
+    "EX-CH02-S02",
+    "EX-CH02-S03",
+    "EX-CH02-S04",
+    "EX-CH02-S05",
+    "EX-CH02-S06"
+  ],
+  "mission_ids": [
+    "EX-M0201",
+    "EX-M0202"
+  ],
+  "room_ids": [
+    "LOC-01",
+    "LOC-03",
+    "LOC-04",
+    "LOC-05"
+  ],
+  "question": "How do we help two self-incompatible plants make viable seed across two pressurised chambers without cross-contaminating brushes or breaching pressure boundaries?",
+  "goal_one_line": "Transfer pollen Tara->Alo with Brush A and Alo->Tara with Brush B across three dated runs, log seven daily care checks, and pre-register a stem-colour hypothesis.",
+  "first_time_explainer": {
+    "title": "Reciprocal Pollination Protocol",
+    "summary": "Brassica rapa is self-incompatible: each flower needs pollen from a partner plant's anther placed on its own receptive stigma. Keep Brush A (Tara->Alo) and Brush B (Alo->Tara) in closed carriers, open one pressure door at a time (E1/A1 per complete cycle), and pre-register a stem-colour hypothesis before seeds mature."
+  },
+  "stages": {
+    "learn": {
+      "id": "learn",
+      "label": "Learn · Protocol & Trade Study",
+      "scenes": [
+        "EX-CH02-S01",
+        "EX-CH02-S02",
+        "EX-CH02-S03"
+      ],
+      "summary": "Confirm flower anatomy (anther vs stigma), trade-study why chambers stay separate and brushes are labelled A and B, verify space weather GO, and rehearse single-boundary pressure order."
+    },
+    "apply": {
+      "id": "apply",
+      "label": "Apply · Reciprocal Runs & 7-Day Care",
+      "scenes": [
+        "EX-CH02-S04",
+        "EX-CH02-S05"
+      ],
+      "summary": "Execute three dated reciprocal runs (30 Apr, 3 May, 6 May) at E1/A1 per cycle and log seven daily care observations without contaminating either stigma."
+    },
+    "twist": {
+      "id": "twist",
+      "label": "Twist · Pre-Registered Stem Prediction",
+      "scenes": [
+        "EX-CH02-S06"
+      ],
+      "summary": "Record what stem colours may appear when purple-stemmed Alo and green-stemmed Tara cross, why genotypes are still unknown, and what future test will check the descendants."
+    }
+  },
+  "plants": {
+    "TARA-01": {
+      "id": "TARA-01",
+      "label": "Tara (TARA-01)",
+      "short_label": "Tara",
+      "chamber": "LOC-03 · Bay 2",
+      "stem_colour": "Green stem",
+      "required_brush_as_donor": "A",
+      "recipient_id": "ALO-01"
+    },
+    "ALO-01": {
+      "id": "ALO-01",
+      "label": "Alo (ALO-01)",
+      "short_label": "Alo",
+      "chamber": "LOC-05 · Greenhouse",
+      "stem_colour": "Purple stem",
+      "required_brush_as_donor": "B",
+      "recipient_id": "TARA-01"
+    }
+  },
+  "structures": [
+    {
+      "id": "anther",
+      "label": "Anther (pollen sac)",
+      "role": "donor_source",
+      "valid_collect": true,
+      "valid_transfer": false,
+      "feedback": "Pollen collected from the donor anther onto the clean brush tip."
+    },
+    {
+      "id": "stigma",
+      "label": "Stigma (receptive tip)",
+      "role": "recipient_target",
+      "valid_collect": false,
+      "valid_transfer": true,
+      "feedback": "Partner pollen transferred cleanly onto the recipient flower's receptive stigma."
+    },
+    {
+      "id": "petal",
+      "label": "Yellow petal",
+      "role": "attractor",
+      "valid_collect": false,
+      "valid_transfer": false,
+      "feedback": "Touching a petal transfers no pollen. Collect from the donor anther and touch the partner plant's receptive stigma."
+    }
+  ],
+  "brushes": [
+    {
+      "id": "A",
+      "label": "Brush A · Tara -> Alo",
+      "donor_id": "TARA-01",
+      "recipient_id": "ALO-01",
+      "carrier_id": "CARRIER-A",
+      "valid": true,
+      "feedback": "Brush A is dedicated to Tara -> Alo transfers inside Carrier A."
+    },
+    {
+      "id": "B",
+      "label": "Brush B · Alo -> Tara",
+      "donor_id": "ALO-01",
+      "recipient_id": "TARA-01",
+      "carrier_id": "CARRIER-B",
+      "valid": true,
+      "feedback": "Brush B is dedicated to Alo -> Tara transfers inside Carrier B."
+    },
+    {
+      "id": "UNLABELLED",
+      "label": "One unlabelled brush for both directions",
+      "donor_id": "",
+      "recipient_id": "",
+      "carrier_id": "",
+      "valid": false,
+      "feedback": "With one brush you can't tell which pollen went where. Use Brush A for Tara->Alo and clean Brush B for Alo->Tara."
+    }
+  ],
+  "carrier_modes": [
+    {
+      "id": "sealed_interlock",
+      "label": "Closed carrier · one pressure door at a time",
+      "valid": true,
+      "feedback": "Closed carrier sealed; inner and outer boundaries open one at a time so pollen stays dry and rooms stay isolated."
+    },
+    {
+      "id": "open_carrier",
+      "label": "Carry open brush through corridor",
+      "valid": false,
+      "feedback": "An unsealed brush loses pollen and risks contamination across rooms. Seal the carrier before moving."
+    },
+    {
+      "id": "join_chambers",
+      "label": "Put the two chambers together / open both doors",
+      "valid": false,
+      "feedback": "Opening both boundaries or putting both plants in one chamber breaks isolation: a single leak or pathogen could wipe out both Alo and Tara."
+    }
+  ],
+  "weather_modes": [
+    {
+      "id": "go_checked",
+      "label": "Space weather GO verified (quiet solar window)",
+      "valid": true,
+      "feedback": "Space weather GO confirmed; corridor transfer between Bay 2 and the Greenhouse is safe."
+    },
+    {
+      "id": "skip_check",
+      "label": "Skip space-weather check",
+      "valid": false,
+      "feedback": "Verify space weather GO before opening the transfer route between Bay 2 and the Greenhouse."
+    }
+  ],
+  "step_requirements": {
+    "p03_scan_tara": {
+      "label": "Scan Tara (TARA-01) as donor",
+      "stage": "apply",
+      "run": 1,
+      "requires_weather": "go_checked",
+      "donor_id": "TARA-01"
+    },
+    "p03_collect_tara_pollen": {
+      "label": "Collect Tara pollen from anther with Brush A",
+      "stage": "apply",
+      "run": 1,
+      "donor_id": "TARA-01",
+      "source_structure": "anther",
+      "brush_id": "A"
+    },
+    "p03_seal_brush_a": {
+      "label": "Seal Brush A in closed carrier & pass one boundary at a time",
+      "stage": "apply",
+      "run": 1,
+      "brush_id": "A",
+      "carrier_mode": "sealed_interlock"
+    },
+    "p03_transfer_to_alo": {
+      "label": "Touch Alo's receptive stigma with Brush A",
+      "stage": "apply",
+      "run": 1,
+      "donor_id": "TARA-01",
+      "recipient_id": "ALO-01",
+      "target_structure": "stigma",
+      "brush_id": "A",
+      "carrier_mode": "sealed_interlock"
+    },
+    "p03_scan_alo": {
+      "label": "Scan Alo (ALO-01) as reverse donor",
+      "stage": "apply",
+      "run": 1,
+      "requires_weather": "go_checked",
+      "donor_id": "ALO-01"
+    },
+    "p03_collect_alo_pollen": {
+      "label": "Collect Alo pollen from anther with clean Brush B",
+      "stage": "apply",
+      "run": 1,
+      "donor_id": "ALO-01",
+      "source_structure": "anther",
+      "brush_id": "B"
+    },
+    "p03_seal_brush_b": {
+      "label": "Seal Brush B in closed carrier & pass one boundary at a time",
+      "stage": "apply",
+      "run": 1,
+      "brush_id": "B",
+      "carrier_mode": "sealed_interlock"
+    },
+    "p03_transfer_to_tara": {
+      "label": "Touch Tara's receptive stigma with Brush B",
+      "stage": "apply",
+      "run": 1,
+      "donor_id": "ALO-01",
+      "recipient_id": "TARA-01",
+      "target_structure": "stigma",
+      "brush_id": "B",
+      "carrier_mode": "sealed_interlock"
+    },
+    "p03_complete_run_1": {
+      "label": "Commit Reciprocal Cycle 1 (2046-04-30 · E1/A1)",
+      "stage": "apply",
+      "run": 1,
+      "requires_weather": "go_checked",
+      "carrier_mode": "sealed_interlock"
+    },
+    "p03_run_2_forward": {
+      "label": "Run 2 Forward · Tara anther -> Brush A -> Alo stigma (2046-05-03)",
+      "stage": "apply",
+      "run": 2,
+      "requires_weather": "go_checked",
+      "donor_id": "TARA-01",
+      "recipient_id": "ALO-01",
+      "source_structure": "anther",
+      "target_structure": "stigma",
+      "brush_id": "A",
+      "carrier_mode": "sealed_interlock"
+    },
+    "p03_run_2_reverse": {
+      "label": "Run 2 Reverse · Alo anther -> Brush B -> Tara stigma (2046-05-03)",
+      "stage": "apply",
+      "run": 2,
+      "requires_weather": "go_checked",
+      "donor_id": "ALO-01",
+      "recipient_id": "TARA-01",
+      "source_structure": "anther",
+      "target_structure": "stigma",
+      "brush_id": "B",
+      "carrier_mode": "sealed_interlock"
+    },
+    "p03_complete_run_2": {
+      "label": "Commit Reciprocal Cycle 2 (2046-05-03 · E1/A1)",
+      "stage": "apply",
+      "run": 2,
+      "requires_weather": "go_checked",
+      "carrier_mode": "sealed_interlock"
+    },
+    "p03_run_3_forward": {
+      "label": "Run 3 Forward · Tara anther -> Brush A -> Alo stigma (2046-05-06)",
+      "stage": "apply",
+      "run": 3,
+      "requires_weather": "go_checked",
+      "donor_id": "TARA-01",
+      "recipient_id": "ALO-01",
+      "source_structure": "anther",
+      "target_structure": "stigma",
+      "brush_id": "A",
+      "carrier_mode": "sealed_interlock"
+    },
+    "p03_run_3_reverse": {
+      "label": "Run 3 Reverse · Alo anther -> Brush B -> Tara stigma (2046-05-06)",
+      "stage": "apply",
+      "run": 3,
+      "requires_weather": "go_checked",
+      "donor_id": "ALO-01",
+      "recipient_id": "TARA-01",
+      "source_structure": "anther",
+      "target_structure": "stigma",
+      "brush_id": "B",
+      "carrier_mode": "sealed_interlock"
+    },
+    "p03_complete_run_3": {
+      "label": "Commit Reciprocal Cycle 3 (2046-05-06 · E1/A1)",
+      "stage": "apply",
+      "run": 3,
+      "requires_weather": "go_checked",
+      "carrier_mode": "sealed_interlock"
+    }
+  },
+  "care_dates": [
+    {
+      "day": 1,
+      "date": "2046-04-30",
+      "label": "Day 1 · 30 Apr (Reciprocal Run 1)",
+      "is_run_day": true,
+      "run_number": 1
+    },
+    {
+      "day": 2,
+      "date": "2046-05-01",
+      "label": "Day 2 · 01 May moisture & flower check",
+      "is_run_day": false,
+      "run_number": 0
+    },
+    {
+      "day": 3,
+      "date": "2046-05-02",
+      "label": "Day 3 · 02 May receptive stigma check",
+      "is_run_day": false,
+      "run_number": 0
+    },
+    {
+      "day": 4,
+      "date": "2046-05-03",
+      "label": "Day 4 · 03 May (Reciprocal Run 2)",
+      "is_run_day": true,
+      "run_number": 2
+    },
+    {
+      "day": 5,
+      "date": "2046-05-04",
+      "label": "Day 5 · 04 May petal drop & swelling check",
+      "is_run_day": false,
+      "run_number": 0
+    },
+    {
+      "day": 6,
+      "date": "2046-05-05",
+      "label": "Day 6 · 05 May pod elongation check",
+      "is_run_day": false,
+      "run_number": 0
+    },
+    {
+      "day": 7,
+      "date": "2046-05-06",
+      "label": "Day 7 · 06 May (Reciprocal Run 3)",
+      "is_run_day": true,
+      "run_number": 3
+    }
+  ],
+  "prediction_options": {
+    "expectations": [
+      {
+        "id": "both_may_appear",
+        "value": "Both visible colours may appear",
+        "label": "Both visible colours (purple and green stems) may appear",
+        "valid": true,
+        "feedback": "Valid expectation: with one purple-stemmed parent and one green-stemmed parent of unestablished genotype, both colours remain possible."
+      },
+      {
+        "id": "guaranteed_fixed_ratio",
+        "value": "Every seedling will follow a guaranteed fixed ratio",
+        "label": "Promise a guaranteed 100% purple or fixed 3:1 ratio now",
+        "valid": false,
+        "feedback": "We only know the two parents' visible stem colours, not whether either parent is homozygous or heterozygous. Do not promise a fixed ratio before observing the descendants."
+      },
+      {
+        "id": "yellow_stems",
+        "value": "Stems will turn yellow like the petals",
+        "label": "Stems will turn bright yellow like flower petals",
+        "valid": false,
+        "feedback": "Petal yellow and stem purple/green are different traits. Record what you expect for purple vs green stems."
+      }
+    ],
+    "reasons": [
+      {
+        "id": "genotype_not_established",
+        "value": "Alo has purple and Tara has green stems; the complete genotype is not established.",
+        "label": "Alo has purple and Tara has green stems; the complete genotype is not established.",
+        "valid": true,
+        "feedback": "Accurate reasoning: visible phenotype alone does not establish the full underlying genotype of both founder plants."
+      },
+      {
+        "id": "maternal_clone_only",
+        "value": "Seeds only copy the mother plant's stem colour.",
+        "label": "Each seed is a clone of whichever plant held the pod.",
+        "valid": false,
+        "feedback": "Reciprocal cross-pollination combines alleles from both donor pollen and recipient ovule—seedlings are not maternal clones."
+      }
+    ],
+    "future_tests": [
+      {
+        "id": "compare_descendant_stems",
+        "value": "Compare descendant stem observations after seed harvest.",
+        "label": "Compare descendant stem observations after seed harvest (surprise: every plant one colour).",
+        "valid": true,
+        "feedback": "Testable criterion registered: descendant stem counts after harvest will test the prediction."
+      },
+      {
+        "id": "skip_descendant_count",
+        "value": "Decide now without counting future seedlings.",
+        "label": "Close the study today without counting future seedlings.",
+        "valid": false,
+        "feedback": "A scientific prediction needs a future test: we must compare descendant stem observations after seed harvest."
+      }
+    ]
+  },
+  "feedback_messages": {
+    "self_pollination": "Cultivar self-incompatibility: Brassica rapa flowers reject their own pollen. Transfer pollen from the partner plant instead.",
+    "wrong_brush_direction": "Wrong brush for this direction: use Brush A only for Tara -> Alo and Brush B only for Alo -> Tara so pollen lineages stay distinct.",
+    "dirty_brush": "Brush tip is carrying unverified pollen; replace the tip with a clean sterile tip before collecting.",
+    "unsealed_carrier": "Seal the brush inside its closed carrier before crossing the pressure boundary.",
+    "missing_weather_check": "Confirm space weather is GO before starting a cross-chamber pollination transfer.",
+    "petal_selected": "Touching a petal transfers no pollen. Select the donor anther to collect pollen and the recipient stigma to deliver it.",
+    "prediction_incomplete": "Select your expectation, scientific reason, and future test in the Stem Prediction panel before locking in."
+  },
+  "clues": [
+    {
+      "id": "P03-C1",
+      "holder": "K",
+      "holder_name": "Kaya",
+      "label": "Flower anatomy & self-incompatibility",
+      "text": "Anther holds pollen; stigma receives it. Brassica rapa is self-incompatible—each plant needs pollen from its partner."
+    },
+    {
+      "id": "P03-C2",
+      "holder": "M",
+      "holder_name": "Meera",
+      "label": "Single-boundary airlock & closed carrier",
+      "text": "Keep Alo and Tara in separate chambers so one fault cannot harm both. Seal the brush carrier and open one pressure door at a time (E1/A1 per cycle)."
+    },
+    {
+      "id": "P03-C3",
+      "holder": "A",
+      "holder_name": "Arif",
+      "label": "Space-weather GO & 7-day care window",
+      "text": "Check space weather GO before each transfer on 30 Apr, 03 May, and 06 May, and log all 7 dated care visits."
+    },
+    {
+      "id": "P03-C4",
+      "holder": "R",
+      "holder_name": "Rafi",
+      "label": "Brushes A/B & purple/green stems",
+      "text": "Use Brush A for Tara->Alo and Brush B for Alo->Tara. Alo has a purple stem and Tara has a green stem—write what we expect and what would surprise us."
+    }
+  ],
+  "hints": {
+    "pollination": [
+      "A flower needs pollen from its partner.",
+      "Take pollen from the anther to the other plant’s stigma.",
+      "Use A for Tara→Alo and clean B for Alo→Tara."
+    ],
+    "prediction": [
+      "What can two stem colours tell you, and what can't they?",
+      "Write what you expect and what would surprise you.",
+      "Example of the format: 'Both colours may appear. A surprise would be every plant one colour.'"
+    ]
+  },
+  "bridges": {
+    "ch01_to_ch02": "Tara's bud opens in Bay 2 on 2046-04-30 06:00 UTC as Earth's morning radio check-in arrives.",
+    "s02_to_s03": "Rafi's folded paper bee rests beside the sealed carrier latch as Meera sets the single-boundary airlock rule.",
+    "s06_to_s07": "Recording the purple/green stem prediction turns the logbook page to Alo and Tara's family tree and the missing gardener's notes."
+  }
+}

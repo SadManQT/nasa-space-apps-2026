@@ -1,0 +1,315 @@
+{
+  "puzzle_id": "P-04",
+  "title": "Recorder Reconstruction",
+  "subtitle": "Evidence Separation, Metadata Matching & Inference Classification",
+  "chapter": "CH02",
+  "scenes": [
+    "EX-CH02-S07",
+    "EX-CH02-S08",
+    "EX-CH02-S09",
+    "EX-CH02-S10",
+    "EX-CH02-S11",
+    "EX-CH02-S12"
+  ],
+  "mission_ids": [
+    "EX-M0203",
+    "EX-M0204"
+  ],
+  "room_ids": [
+    "LOC-01",
+    "LOC-02",
+    "LOC-05",
+    "LOC-06"
+  ],
+  "question": "How do we reconstruct three damaged archive fragments from physical bench evidence without damaging labels or confusing an inference with an observed fact?",
+  "goal_one_line": "Photograph the three physical bench labels in place, match Date (2034-04), Device (HORT-01), and Channel (ENGINEERING) to unlock the checksummed audio, and sort Observed, Inferred, and Unknown claims.",
+  "first_time_explainer": {
+    "title": "Archive Reconstruction & Evidence Discipline",
+    "summary": "Three recorder fragments each lack one metadata token: File A needs a Date, File B needs a Device ID, and File C needs a Channel tag. Photograph the bench plates in place (never peel them), match all three tokens to verify the local checksum, and classify what the clips prove into Observed, Inferred, and Unknown."
+  },
+  "stages": {
+    "learn": {
+      "id": "learn",
+      "label": "Learn · Life-Cycle & Bench Labels",
+      "scenes": [
+        "EX-CH02-S07",
+        "EX-CH02-S08"
+      ],
+      "summary": "Order the Fast Plant life-cycle (flower -> pods -> drying -> harvest), separate current garden evidence from older reference records, and photograph the HORT-01 serial plate, 2034-04 maintenance strip, and trial-stage chart in place."
+    },
+    "apply": {
+      "id": "apply",
+      "label": "Apply · Metadata Token Matching & Checksum",
+      "scenes": [
+        "EX-CH02-S09"
+      ],
+      "summary": "Assign verified Date (2034-04), Device (HORT-01), and Channel (ENGINEERING) tokens to Files A, B, and C, verify the local checksum, and open the intact transcript while leaving the Person slot blank."
+    },
+    "twist": {
+      "id": "twist",
+      "label": "Twist · Observed / Inferred / Unknown Board",
+      "scenes": [
+        "EX-CH02-S10",
+        "EX-CH02-S11",
+        "EX-CH02-S12"
+      ],
+      "summary": "Play the dated 2034 Engineer fragment and N.'s mustard-fields memory, sort each claim into Observed, Inferred, or Unknown, and send the verified technical copy to Ferreira."
+    }
+  },
+  "expected_tokens": {
+    "date": "2034-04",
+    "device": "HORT-01",
+    "channel": "ENGINEERING"
+  },
+  "files": [
+    {
+      "field": "date",
+      "file_id": "FILE-A",
+      "label": "File A · Missing Date Token",
+      "shape_badge": "[DATE · YYYY-MM]",
+      "expected": "2034-04",
+      "source_card": "Maintenance strip photo (2034-04)",
+      "description": "Header has Device=HORT-01 and Channel=ENGINEERING, but the YYYY-MM maintenance date slot is blank."
+    },
+    {
+      "field": "device",
+      "file_id": "FILE-B",
+      "label": "File B · Missing Device Token",
+      "shape_badge": "[DEVICE · ID-00]",
+      "expected": "HORT-01",
+      "source_card": "Bench serial plate photo (HORT-01)",
+      "description": "Header has Date=2034-04 and Channel=ENGINEERING, but the bench equipment identifier slot is blank."
+    },
+    {
+      "field": "channel",
+      "file_id": "FILE-C",
+      "label": "File C · Missing Channel Token",
+      "shape_badge": "[CHANNEL · DEPT]",
+      "expected": "ENGINEERING",
+      "source_card": "Recorder header & trial chart (ENGINEERING)",
+      "description": "Header has Date=2034-04 and Device=HORT-01, but the department recording channel slot is blank."
+    }
+  ],
+  "token_options": {
+    "date": [
+      {
+        "value": "2034-04",
+        "label": "2034-04 · Bench maintenance strip date",
+        "badge": "[DATE]",
+        "valid": true,
+        "source_disagrees": "",
+        "feedback": "Verified against the photographed 2034-04 maintenance strip on the old horticulture bench."
+      },
+      {
+        "value": "2046-05",
+        "label": "2046-05 · Current Aurora mission month",
+        "badge": "[DATE]",
+        "valid": false,
+        "source_disagrees": "Maintenance strip photo (2034-04)",
+        "feedback": "Maintenance strip photo (2034-04) disagrees: the archive fragment comes from the April 2034 trial, not May 2046. Audio stays locked until all three match."
+      },
+      {
+        "value": "HORT-01",
+        "label": "HORT-01 · Bench serial plate ID",
+        "badge": "[DEVICE]",
+        "valid": false,
+        "source_disagrees": "Maintenance strip photo (2034-04)",
+        "feedback": "Maintenance strip photo (2034-04) disagrees: HORT-01 is a Device ID token, not a YYYY-MM Date token for File A."
+      }
+    ],
+    "device": [
+      {
+        "value": "HORT-01",
+        "label": "HORT-01 · Stamped horticulture bench serial plate",
+        "badge": "[DEVICE]",
+        "valid": true,
+        "source_disagrees": "",
+        "feedback": "Verified against the photographed HORT-01 serial plate exposed under the paper bee's wing."
+      },
+      {
+        "value": "BAY2-04",
+        "label": "BAY2-04 · Current Bay 2 seedling rack",
+        "badge": "[DEVICE]",
+        "valid": false,
+        "source_disagrees": "Bench serial plate photo (HORT-01)",
+        "feedback": "Bench serial plate photo (HORT-01) disagrees: the old bench frame is stamped HORT-01, not BAY2-04. Audio stays locked until all three match."
+      },
+      {
+        "value": "ENGINEERING",
+        "label": "ENGINEERING · Recorder channel tag",
+        "badge": "[CHANNEL]",
+        "valid": false,
+        "source_disagrees": "Bench serial plate photo (HORT-01)",
+        "feedback": "Bench serial plate photo (HORT-01) disagrees: ENGINEERING is a Channel tag for File C, not a Device ID for File B."
+      }
+    ],
+    "channel": [
+      {
+        "value": "ENGINEERING",
+        "label": "ENGINEERING · Recorder header & trial chart channel",
+        "badge": "[CHANNEL]",
+        "valid": true,
+        "source_disagrees": "",
+        "feedback": "Verified against the recorder header and 2034 trial-stage chart (ENGINEERING)."
+      },
+      {
+        "value": "PUBLIC_PA",
+        "label": "PUBLIC_PA · Station broadcast channel",
+        "badge": "[CHANNEL]",
+        "valid": false,
+        "source_disagrees": "Recorder header & trial chart (ENGINEERING)",
+        "feedback": "Recorder header & trial chart (ENGINEERING) disagrees: the suspension order was logged on ENGINEERING, not PUBLIC_PA. Audio stays locked until all three match."
+      },
+      {
+        "value": "2034-04",
+        "label": "2034-04 · Maintenance strip date",
+        "badge": "[DATE]",
+        "valid": false,
+        "source_disagrees": "Recorder header & trial chart (ENGINEERING)",
+        "feedback": "Recorder header & trial chart (ENGINEERING) disagrees: 2034-04 is a Date token for File A, not a Channel token for File C."
+      }
+    ]
+  },
+  "label_handling_options": [
+    {
+      "id": "photograph_in_place",
+      "label": "Photograph all three bench labels in place (do not peel)",
+      "valid": true,
+      "feedback": "All three physical labels photographed in place; provenance stays intact."
+    },
+    {
+      "id": "peel_labels",
+      "label": "Peel the 2034 maintenance strip off the bench frame",
+      "valid": false,
+      "feedback": "Do not peel archive stickers—peeling damages brittle evidence and breaks chain of custody. Photograph labels in place."
+    }
+  ],
+  "person_slot_options": [
+    {
+      "id": "blank_unknown",
+      "label": "Leave Person slot blank (Unknown — N. not yet named by record)",
+      "valid": true,
+      "feedback": "Correct: a device match is not a person's name. Keep the Person slot blank until signed documentary evidence is found."
+    },
+    {
+      "id": "guess_ferreira",
+      "label": "Write 'Ferreira' in the Person slot from voice similarity",
+      "valid": false,
+      "feedback": "Voice similarity is an inference, not a verified identity record. Leave the Person slot blank and classify the voice match under Inferred."
+    },
+    {
+      "id": "guess_noor_name",
+      "label": "Guess a full name for 'N.' in the Person slot",
+      "valid": false,
+      "feedback": "Only the initial 'N.' is recorded here. Guessing a full name before finding a signed record violates archive rules."
+    }
+  ],
+  "transcripts": {
+    "engineer_2034": {
+      "id": "engineer_2034",
+      "speaker": "Engineer (2034)",
+      "header": "2034-04 · HORT-01 · ENGINEERING",
+      "text": "Biological trial suspended. Crew retreat is mandatory."
+    },
+    "n_memory": {
+      "id": "n_memory",
+      "speaker": "N. (personal note & voice fragment)",
+      "header": "Undated bench note · Signed 'N.'",
+      "text": "My grandmother’s mustard fields turned yellow every winter. I wanted some of that light here."
+    }
+  },
+  "classification_columns": [
+    {
+      "id": "observed",
+      "label": "Observed (directly recorded)",
+      "description": "Facts stamped on physical plates, charts, or verified transcript words."
+    },
+    {
+      "id": "inferred",
+      "label": "Inferred (reasoned from clues)",
+      "description": "Reasonable connections such as a voice that sounds like someone, not yet proven by a record."
+    },
+    {
+      "id": "unknown",
+      "label": "Unknown (still unrecorded)",
+      "description": "Details that no physical plate or transcript has named yet."
+    }
+  ],
+  "classification_claims": [
+    {
+      "id": "retreat_2034",
+      "statement": "2034 HORT-01 trial suspended before flowering; crew retreat ordered",
+      "expected": "observed",
+      "feedback_ok": "Observed: directly stated in the checksummed 2034-04 ENGINEERING recording and trial-stage chart.",
+      "feedback_wrong": "The 2034 suspension and mandatory retreat are directly recorded in the verified ENGINEERING clip and trial chart—place this under Observed."
+    },
+    {
+      "id": "voice_resembles_ferreira",
+      "statement": "The 2034 Engineer's voice resembles a younger Commander Ferreira",
+      "expected": "inferred",
+      "feedback_ok": "Inferred: a voice that 'sounds like' someone is a reasoned inference, not an observed identity stamp.",
+      "feedback_wrong": "A voice that 'sounds like' someone goes under Inferred, never Observed or Unknown."
+    },
+    {
+      "id": "writer_n_identity",
+      "statement": "Full name of the gardener who signed the mustard-fields note 'N.'",
+      "expected": "unknown",
+      "feedback_ok": "Unknown: the note is signed only with the initial 'N.'; no document here states the writer's full name.",
+      "feedback_wrong": "Neither the HORT-01 plate nor the audio gives N.'s full name. Place the writer's full identity under Unknown."
+    }
+  ],
+  "feedback_messages": {
+    "premature_checksum": "All three metadata tokens (Date=2034-04, Device=HORT-01, Channel=ENGINEERING) must match the photographed bench evidence before the local checksum can verify.",
+    "premature_transcript": "Verify the reconstructed local checksum before opening the audio transcript.",
+    "premature_audio": "Audio stays locked until all three metadata tokens match and the transcript is opened.",
+    "classification_incomplete": "Sort all three statements into Observed, Inferred, and Unknown accurately before locking in the classification."
+  },
+  "clues": [
+    {
+      "id": "P04-C1",
+      "holder": "K",
+      "holder_name": "Kaya",
+      "label": "Trial-stage chart ('reproductive stage not reached')",
+      "text": "The 2034 trial chart stops before flowering and pod set: 'reproductive stage not reached'. Current Aurora plants are already in flower."
+    },
+    {
+      "id": "P04-C2",
+      "holder": "M",
+      "holder_name": "Meera",
+      "label": "Equipment serial plate HORT-01",
+      "text": "Under the wing of Rafi's paper bee on the old bench frame sits the stamped equipment serial plate: HORT-01."
+    },
+    {
+      "id": "P04-C3",
+      "holder": "A",
+      "holder_name": "Arif",
+      "label": "Maintenance strip 2034-04 & ENGINEERING channel",
+      "text": "The maintenance strip reads 2034-04 and the recorder header channel is ENGINEERING. Photograph labels in place—never peel them."
+    },
+    {
+      "id": "P04-C4",
+      "holder": "R",
+      "holder_name": "Rafi",
+      "label": "N.'s mustard-fields note & Observed vs Inferred",
+      "text": "N. wrote about winter mustard fields, and the 2034 Engineer sounds like a younger Ferreira—file voice similarity under Inferred and N.'s name under Unknown."
+    }
+  ],
+  "hints": {
+    "metadata": [
+      "Find the original equipment plate.",
+      "Dates, devices and channels are different fields.",
+      "2034-04, HORT-01, ENGINEERING."
+    ],
+    "classification": [
+      "Which statements did someone actually record, and which are our guesses?",
+      "A voice that 'sounds like' someone goes under Inferred.",
+      "Example: 'Retreat ordered, 2034' → Observed. 'Voice resembles Ferreira' → Inferred. 'Writer's name' → Unknown."
+    ]
+  },
+  "bridges": {
+    "s06_to_s07": "The stem-colour prediction page leads directly to the family-tree diagram and the gap where an earlier bench trial was cut short.",
+    "s07_to_s08": "Lifting the wing of Rafi's paper bee on the old horticulture bench reveals the stamped HORT-01 serial plate.",
+    "s10_hold": "After N.'s line ('My grandmother’s mustard fields turned yellow every winter. I wanted some of that light here.'), the room holds 1.5 seconds of quiet before classification.",
+    "s11_to_s12": "As the intact technical copy goes to Ferreira at evening handover, the water in the cup on the bench trembles—the shallow moonquake that opens Chapter 3."
+  }
+}

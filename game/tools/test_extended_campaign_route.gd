@@ -21,6 +21,8 @@ func _run() -> void:
 	director.restore_snapshot(handoff)
 	var pollination := preload("res://scripts/missions/chapter2_route.gd").new(director)
 	_check(pollination.apply_entry_profile().accepted, "P-03 entry profile is explicit")
+	pollination.p03().apply_worked_plan()
+	pollination.p04().apply_worked_plan()
 	pollination.start_at("EX-CH02-S01")
 	for scene_id in preload("res://scripts/missions/chapter2_gate_catalog.gd").SCENE_ORDER:
 		for target in pollination.targets_for_current_scene():
