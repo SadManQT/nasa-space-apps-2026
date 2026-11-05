@@ -3931,7 +3931,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Tara's lifecycle in code: later maturity, harvest to a working stock, archived nameplate — needs Sadman's approval first (M3-94)",
-   "status": "todo",
+   "status": "done",
    "deps": [
     "M3-94"
    ],
@@ -3945,9 +3945,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "From doc 24 NR-08. Start only if M3-94's evidence shows Sadman approved the Tara item; otherwise mark blocked.",
-   "evidence": "",
+   "evidence": "run_tests.sh: 34/34 suites passed (GODOT=godot_gated, twice); new suite game/tools/test_tara_lifecycle.gd 75 checks; Tara checks at EX-CH03-S12 in test_extended_campaign_route.gd; production/qa/evidence/M3-96_tara_lifecycle.txt (probe: mature_pods 26 May, archived_nameplate after 31 May harvest, working stock Tara x Alo with no count, founder_42 byte-identical before/after, pre-change save loads) + M3-96_run_tests.txt + M3-96_capture.sh",
    "updated": "2026-11-05",
-   "prompt": "Problem: plant_service.gd ends Tara as naturally_dead on day 41 (22 May 2046) with seed_yield 0, so the reciprocal pollination that set her seeds has no outcome and she has no farewell.\nRead first: game-design/24_NARRATIVE_REVISION.md §3.9 and §7.6; plant_service.gd advance_to() and harvest(); campaign_rules.json biology block; M3-94 evidence (Sadman's decision).\nDo (approved version): Tara mature_days 45 (mature_pods on 26 May 2046), the same five-day dry-down, harvest on 31 May into a separate working-stock ledger (lineage 'Tara x Alo', no headline count shown), then a new stage archived_nameplate. Alo's photos remain allowed through 21 May. Never touch founder_seed42 (42 = 12 + 30, compartments 15 + 15) or the vault ledgers.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). Tests: Tara reaches mature_pods on 26 May and archived_nameplate after a 31 May harvest; founder 42 = 12 + 30 is unchanged before and after; a test fails if the working stock is added to the founder ledger; a save from before the change still loads."
+   "prompt": "Problem: plant_service.gd ends Tara as naturally_dead on day 41 (22 May 2046) with seed_yield 0, so the reciprocal pollination that set her seeds has no outcome and she has no farewell.\nRead first: game-design/24_NARRATIVE_REVISION.md §3.9 and §7.6; plant_service.gd advance_to() and harvest(); campaign_rules.json biology block; M3-94 evidence (Sadman's decision).\nDo (approved version): Tara mature_days 45 (mature_pods on 26 May 2046), the same five-day dry-down, harvest on 31 May into a separate working-stock ledger (lineage 'Tara x Alo', no headline count shown), then a new stage archived_nameplate. Alo's photos remain allowed through 21 May. Never touch founder_seed42 (42 = 12 + 30, compartments 15 + 15) or the vault ledgers.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). Tests: Tara reaches mature_pods on 26 May and archived_nameplate after a 31 May harvest; founder 42 = 12 + 30 is unchanged before and after; a test fails if the working stock is added to the founder ledger; a save from before the change still loads.",
+   "owner": "Sadman/night-fable"
   },
   {
    "id": "M3-97",

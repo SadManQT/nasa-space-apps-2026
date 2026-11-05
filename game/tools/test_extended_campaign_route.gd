@@ -143,6 +143,12 @@ func _verify_scene(id: String, state: Dictionary) -> void:
 			var descendants: Array = state.plants.filter(func(plant): return String(plant.individual_id).begins_with("DESC-CURRENT") and plant.alive)
 			_check(descendants.size() == 12 and descendants.filter(func(plant): return plant.attributes.stem_colour == "purple").size() == 7 and descendants.filter(func(plant): return plant.attributes.stem_colour == "green").size() == 5, "October sample has twelve replacement descendants, seven purple and five green")
 			_check(state.scenario_datetime.begins_with("2046-10-21") and state.inventories.reserve30 == 30, "dated descendant bridge never spends protected founder seeds")
+			var tara: Dictionary = state.plants.filter(func(plant): return plant.individual_id == "TARA-01")[0]
+			_check(tara.maturity_confirmed_at.begins_with("2046-05-26") and tara.dry_down_started_at.begins_with("2046-05-26"), "Tara's pods are mature and her watering stops on 26 May")
+			_check(tara.harvested and not tara.alive and tara.stage == "archived_nameplate" and tara.harvested_at.begins_with("2046-05-31") and tara.seed_yield == 0, "Tara's 31 May harvest archives her nameplate with no headline count")
+			var stock: Dictionary = state.inventories.get("working_stock", {})
+			_check(String(stock.get("cross", "")) == "Tara x Alo" and bool(stock.get("sealed", false)) and not stock.has("total") and not stock.has("count"), "the working stock is Tara x Alo, sealed, with no count")
+			_check(state.inventories.founder_seed42.total == 42 and state.inventories.founder_seed42.allocated == 12 and state.inventories.founder_seed42.reserve == 30 and state.inventories.founder_seed42.reserve_compartments.size() == 2 and int(state.inventories.founder_seed42.reserve_compartments[0]) == 15 and int(state.inventories.founder_seed42.reserve_compartments[1]) == 15 and state.inventories.allocated12 == 12, "founder 42 = 12 + 30 (15 + 15) is unchanged after Tara's harvest")
 		"EX-CH04-S08":
 			expected = {"E": 18, "A": 7, "H": 6, "C": 8, "R": 16.8}
 			_check(state.route.energy == 40 and state.route.provisions == 48 and state.inventories.vault12.stored == 12, "survey return conserves rover and twelve distinct specimens")

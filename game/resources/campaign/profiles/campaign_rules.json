@@ -17,6 +17,10 @@
       15
     ],
     "harvest_date": "2046-05-21 00:00 UTC",
+    "dry_down_days": 5,
+    "tara_mature_days": 45,
+    "tara_maturity_date": "2046-05-26 00:00 UTC",
+    "tara_harvest_date": "2046-05-31 00:00 UTC",
     "maturity_date": "2046-05-16 00:00 UTC",
     "moisture_wet": 70,
     "moisture_dry": 20,
@@ -28,7 +32,20 @@
     "vault_stored": 11,
     "cotton_date": "2046-12-15 00:00 UTC",
     "pod_observation_date": "2046-05-08",
-    "annual_completion_days": 40
+    "annual_completion_days": 40,
+    "working_stock": {
+      "lineage_id": "LINEAGE-TARA-ALO",
+      "cross": "Tara x Alo",
+      "label": "Working stock: Tara × Alo",
+      "source_individual": "TARA-01",
+      "parents": [
+        "TARA-01",
+        "ALO-01"
+      ],
+      "headline_count": "not recorded",
+      "separate_from_founder": true,
+      "basis": "Doc 24 §3.9 and §7.6, approved 5 Nov 2026 (M3-94): an active collection kept apart from the sealed founder base collection; no screen shows a number for it."
+    }
   },
   "logistics": {
     "crop_yield_scale": 4,

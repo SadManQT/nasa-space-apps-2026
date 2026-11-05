@@ -74,6 +74,9 @@ func transition(snapshot: Dictionary, command: Dictionary) -> Dictionary:
 	_book.operations[action] = {"scene_id": owning_scene, "when": _work.scenario_datetime}
 	if puzzle_id == "P-06":
 		_summary.append("Alo: %s. Founder lot %s; planting allocation %s; protected reserve %s." % [String(_plant("ALO-01").get("stage", "not recorded")).replace("_", " "), _work.inventories.founder_seed42.get("total", 0), _work.inventories.allocated12, _work.inventories.reserve30])
+		var tara_line := _tara_summary()
+		if not tara_line.is_empty():
+			_summary.append(tara_line)
 	if action.begins_with("p10_") and _work.inventories.get("cotton_planted", 0) > 0:
 		_summary.append("Cotton planted 15 December; eleven vault specimens remain stored. Founder reserve stays separate.")
 	if action == "p16_save_final_records":
@@ -173,6 +176,7 @@ func _date(when: String) -> void:
 	if when > String(_work.scenario_datetime):
 		_work.scenario_datetime = when
 		_work.explicit_time_receipts["ledger:" + when] = when
+		_tara_lifecycle(when)
 		for index in _work.plants.size():
 			var plant: Dictionary = _work.plants[index]
 			if plant.alive:
@@ -470,7 +474,9 @@ func _continuity_descendants() -> void:
 		if plant.plant_type == "mustard":
 			plant.alive = false
 			plant.natural_death = true
-			if plant.individual_id != "ALO-01":
+			# Harvested individuals keep their archive (Alo's petal, Tara's nameplate);
+			# only unharvested annuals are closed as naturally dead here.
+			if not bool(plant.get("harvested", false)) and not _plants.is_terminal_stage(String(plant.get("stage", ""))):
 				plant.stage = "naturally_dead"
 				plant.death_reason = "completed_annual_life"
 	for index in int(bio.descendant_sample):
@@ -478,6 +484,53 @@ func _continuity_descendants() -> void:
 		if _plant(id).is_empty():
 			_work.plants.append(_plants.new_plant(id, Plants.ALO_TARA_LINEAGE, "young", _work.scenario_datetime, {"record_start_is_observation": true, "planting_date_unknown": true, "generation": "later replacement cohort; exact count not asserted", "founder_ancestors": [Plants.ALO_ID, Plants.TARA_ID], "stem_colour": ("purple" if index < int(bio.purple) else "green") if october_sample else "not_resampled"}))
 	_book.entries.append({"kind": "dated_replacement_generations", "from": interval_start, "observed_at": _work.scenario_datetime, "founder_reserve": bio.founder_reserve, "later_harvest_totals": "not fixed by the story", "current_descendants": bio.descendant_sample, "purple": bio.purple if october_sample else "not_resampled", "green": bio.green if october_sample else "not_resampled", "basis": "STORY_FULL EX-CH03-S12 / EX-CH04-S01; observation baseline is not an invented planting date"})
+
+## Tara's dated end (doc 24 §3.9 and §7.6, approved 5 Nov 2026). These are authored
+## story events, not player puzzle operations: when the ledger clock passes 26 May
+## 2046 her mature pods are confirmed and her watering stops that day; when it passes
+## 31 May her dry pods are harvested into the separate working stock (Tara x Alo, no
+## headline count) and she is archived as `archived_nameplate`. Each step is dated
+## on its canonical day even when the clock jumps past both at once, so a save from
+## any earlier date reaches the same record. Tara that was never pollinated sets no
+## seed, is never harvested and completes her annual life as before. The founder
+## ledger (42 = 12 + 30) and the vault ledgers are never read or written here.
+func _tara_lifecycle(when: String) -> void:
+	var index := _plant_index(Plants.TARA_ID)
+	if index < 0:
+		return
+	var tara: Dictionary = _work.plants[index]
+	if not bool(tara.get("alive", false)) or bool(tara.get("harvested", false)):
+		return
+	var schedule: Dictionary = _plants.tara_schedule()
+	var maturity_date := String(schedule.maturity_date)
+	var harvest_date := String(schedule.harvest_date)
+	if when >= maturity_date and String(tara.get("maturity_confirmed_at", "")).is_empty():
+		var matured := _plants.advance_to(tara, maturity_date)
+		if matured.accepted and String(matured.plant.get("stage", "")) == "mature_pods":
+			var confirmed := _plants.apply_care(matured.plant, "maturity_check", maturity_date)
+			var dried := _plants.apply_care(confirmed.plant, "dry_down", maturity_date) if confirmed.accepted else confirmed
+			if dried.accepted:
+				_work.plants[index] = dried.plant
+				tara = dried.plant
+				_book.entries.append({"kind": "tara_watering_stopped", "individual_id": Plants.TARA_ID, "when": maturity_date, "stage": "mature_pods", "basis": "STORY_FULL EX-CH03-S12 (approved 5 Nov 2026): mature pods in the cooler indoor reference bay 20 days after the last pollination run; five-day dry-down like Alo's"})
+	if when >= harvest_date and not String(tara.get("dry_down_started_at", "")).is_empty() and not bool(tara.get("harvested", false)):
+		var harvest := _plants.harvest(tara, harvest_date)
+		if harvest.accepted and String(harvest.get("ledger_target", "")) == Plants.LEDGER_WORKING_STOCK:
+			_work.plants[index] = harvest.plant
+			_work.inventories[Plants.LEDGER_WORKING_STOCK] = (harvest.working_stock as Dictionary).duplicate(true)
+			_book.entries.append({"kind": "tara_working_stock", "individual_id": Plants.TARA_ID, "when": harvest_date, "stage": String(harvest.plant.get("stage", "")), "ledger": Plants.LEDGER_WORKING_STOCK, "lineage": String(harvest.working_stock.get("cross", "")), "headline_count": String(harvest.working_stock.get("headline_count", "")), "founder_ledger_touched": false, "basis": "STORY_FULL EX-CH03-S12 (approved 5 Nov 2026): Tara's seeds are the working stock the garden uses, so Alo's thirty stay sealed; her nameplate goes to the lineage board"})
+
+## One summary line for the P-06 ledger once Tara's record exists; empty before 26 May.
+func _tara_summary() -> String:
+	var tara := _plant(Plants.TARA_ID)
+	if tara.is_empty():
+		return ""
+	var stock: Dictionary = _work.inventories.get(Plants.LEDGER_WORKING_STOCK, {})
+	if bool(tara.get("harvested", false)) and not stock.is_empty():
+		return "Tara: archived nameplate on the lineage board. Working stock %s sealed %s; no headline count. Founder reserve untouched." % [String(stock.get("cross", "Tara x Alo")), String(stock.get("harvested_at", "")).substr(0, 10)]
+	if not String(tara.get("dry_down_started_at", "")).is_empty():
+		return "Tara: %s; watering stopped %s for her five-day dry-down." % [String(tara.get("stage", "")).replace("_", " "), String(tara.get("dry_down_started_at", "")).substr(0, 10)]
+	return ""
 
 func _refresh_replacement_cohort() -> void:
 	var current := _living_descendants()

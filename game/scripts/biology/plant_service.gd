@@ -17,7 +17,17 @@ const ALO_ID := "ALO-01"
 const TARA_ID := "TARA-01"
 const COTTON_ID := "COTTON-01"
 const ALO_TARA_LINEAGE := "LINEAGE-ALO-TARA"
+## Lineage of the working stock: Tara as seed parent of her own line (Tara x Alo),
+## recorded beside the founders' Alo x Tara. Approved 5 Nov 2026 (doc 24 §3.9).
+const TARA_ALO_LINEAGE := "LINEAGE-TARA-ALO"
 const COTTON_LINEAGE := "LINEAGE-VAULT-COTTON"
+## Where a harvest's seeds are booked. Only Alo's 42 ever enter the founder ledger.
+const LEDGER_FOUNDER := "founder_42"
+const LEDGER_WORKING_STOCK := "working_stock"
+## Default lifecycle lengths (days after planting) when the rules block omits them.
+const DEFAULT_MATURE_DAYS := 35
+const DEFAULT_TARA_MATURE_DAYS := 45
+const DEFAULT_DRY_DOWN_DAYS := 5
 const ALO_PLANTED_DATE := "2046-04-11"
 const TARA_PLANTED_DATE := "2046-04-11"
 const COTTON_PLANTED_DATE := "2046-12-15"
@@ -36,7 +46,15 @@ const STAGES := [
 	"naturally_dead",
 	"lost",
 	"archived_petal",
+	"archived_nameplate",
 ]
+
+## Stages a plant never leaves. Alo is archived as a pressed petal, Tara as the
+## nameplate carried to the lineage board (doc 24 §7.6 beat 4).
+const TERMINAL_STAGES := ["naturally_dead", "lost", "archived_petal", "archived_nameplate"]
+const ARCHIVED_STAGES := ["archived_petal", "archived_nameplate"]
+## Observations that change no biological state but are still dated once per day.
+const OBSERVATION_CARE_IDS := ["inspect", "observe", "log", "label", "check", "photo"]
 
 func new_plant(individual_id: String, lineage_id: String, stage: String, planted_at: String, attributes: Dictionary = {}) -> Dictionary:
 	var normalized_stage := stage.to_lower()
@@ -56,7 +74,7 @@ func new_plant(individual_id: String, lineage_id: String, stage: String, planted
 		"care_receipts": {},
 		"care_history": [],
 		"stress": {"thirst": 0, "cold": 0, "water": 0},
-		"alive": normalized_stage not in ["naturally_dead", "lost", "archived_petal"],
+		"alive": normalized_stage not in TERMINAL_STAGES,
 		"natural_death": false,
 		"harvested": false,
 		"harvested_at": "",
@@ -66,7 +84,7 @@ func new_plant(individual_id: String, lineage_id: String, stage: String, planted
 		"seed_yield": int(attributes.get("seed_yield", 0)),
 		"enclosure": String(attributes.get("enclosure", "pressurised_garden")),
 		"bloom_days": int(attributes.get("bloom_days", 16)),
-		"mature_days": int(attributes.get("mature_days", 35)),
+		"mature_days": int(attributes.get("mature_days", DEFAULT_MATURE_DAYS)),
 		"attributes": attributes.duplicate(true),
 	}
 	if individual_id == ALO_ID:
@@ -77,6 +95,9 @@ func new_plant(individual_id: String, lineage_id: String, stage: String, planted
 	if individual_id == TARA_ID:
 		plant["lineage_id"] = lineage_id if not lineage_id.is_empty() else ALO_TARA_LINEAGE
 		plant["bloom_days"] = 19
+		# Tara's pods develop in the cooler indoor reference bay: mature pods on day 45
+		# (26 May 2046), watering stops that day, dry pods and harvest on day 50 (31 May).
+		plant["mature_days"] = int(_biology().get("tara_mature_days", DEFAULT_TARA_MATURE_DAYS))
 	if individual_id == COTTON_ID or String(attributes.get("plant_type", "")) == "cotton":
 		plant["plant_type"] = "cotton"
 		if individual_id == COTTON_ID and lineage_id.is_empty():
@@ -156,7 +177,7 @@ func apply_care(plant: Dictionary, care_id: String, scenario_datetime: String) -
 	else:
 		# Inspect, log and label are valid no-resource observations. Unknown care
 		# IDs remain rejected so UI typos cannot become silent biology changes.
-		if care_key not in ["inspect", "observe", "log", "label", "check"]:
+		if care_key not in OBSERVATION_CARE_IDS:
 			result["accepted"] = false
 			result["reason"] = "Unknown care action; no biological state was changed."
 			return result
@@ -224,12 +245,14 @@ func advance_to(plant: Dictionary, scenario_datetime: String) -> Dictionary:
 			current = "bloom"
 		if current == "pollinated" and String(base.individual_id) in [ALO_ID, TARA_ID] and scenario_datetime.substr(0, 10) >= String(CampaignRules.data.biology.pod_observation_date):
 			current = "pod_bearing"
-		if current in ["pollinated", "pod_bearing"] and elapsed >= int(base.get("mature_days", 35)):
+		var mature_days := int(base.get("mature_days", DEFAULT_MATURE_DAYS))
+		var dry_down_days := int(_biology().get("dry_down_days", DEFAULT_DRY_DOWN_DAYS))
+		if current in ["pollinated", "pod_bearing"] and elapsed >= mature_days:
 			current = "mature_pods"
 		if current == "mature_pods" and not String(base.get("dry_down_started_at", "")).is_empty():
-			if _day_number(String(base.get("dry_down_started_at", ""))) + 5 <= target_day:
+			if _day_number(String(base.get("dry_down_started_at", ""))) + dry_down_days <= target_day:
 				current = "mature_dry"
-		if elapsed > int(base.get("mature_days", 35)) + 5 and String(base.individual_id) in [ALO_ID, TARA_ID]:
+		if elapsed > mature_days + dry_down_days and String(base.individual_id) in [ALO_ID, TARA_ID]:
 			current = "naturally_dead"
 			base["alive"] = false
 			base["natural_death"] = true
@@ -242,6 +265,12 @@ func advance_to(plant: Dictionary, scenario_datetime: String) -> Dictionary:
 	result["reason"] = "Dated lifecycle evaluated without skipping biological stages."
 	return result
 
+## Records the one dated harvest of a mature, dried individual and archives it.
+## Alo's harvest is the founder lot (42 = 12 + 30, `ledger_target` "founder_42").
+## Tara's harvest (31 May 2046) goes to the separate working stock, lineage
+## Tara x Alo, with no headline count (`ledger_target` "working_stock",
+## `working_stock` holds the record) and archives her as `archived_nameplate`.
+## Any other individual also books to the working stock, never to the founder ledger.
 func harvest(plant: Dictionary, scenario_datetime: String) -> Dictionary:
 	var original := plant.duplicate(true)
 	var base := original.duplicate(true)
@@ -249,7 +278,7 @@ func harvest(plant: Dictionary, scenario_datetime: String) -> Dictionary:
 	if not bool(result.get("accepted", false)):
 		result["plant"] = original.duplicate(true)
 		return result
-	if bool(base.get("harvested", false)) or String(base.get("stage", "")) == "archived_petal":
+	if bool(base.get("harvested", false)) or String(base.get("stage", "")) in ARCHIVED_STAGES:
 		result["accepted"] = false
 		result["duplicate"] = true
 		result["reason"] = "This individual has already completed its harvest record."
@@ -276,19 +305,32 @@ func harvest(plant: Dictionary, scenario_datetime: String) -> Dictionary:
 		result["reason"] = "Pods are not dry-harvest ready; premature harvest is rejected."
 		result["plant"] = original.duplicate(true)
 		return result
+	var individual_id := String(base.get("individual_id", ""))
 	var yield_count := int(base.get("seed_yield", 0))
-	if String(base.get("individual_id", "")) == "ALO-01":
+	var ledger_target := LEDGER_WORKING_STOCK
+	var archived_stage := "archived_petal"
+	if individual_id == ALO_ID:
 		yield_count = FOUNDER_TOTAL
+		ledger_target = LEDGER_FOUNDER
+	elif individual_id == TARA_ID:
+		# The working stock is recorded without a headline count (doc 24 §3.9):
+		# the plant keeps no seed number and the ledger record carries none.
+		yield_count = 0
+		archived_stage = "archived_nameplate"
 	base["seed_yield"] = yield_count
 	base["harvested"] = true
 	base["harvested_at"] = scenario_datetime
 	base["alive"] = false
 	base["natural_death"] = true
 	base["death_reason"] = "completed_annual_life"
-	base["stage"] = "archived_petal"
+	base["stage"] = archived_stage
 	result["accepted"] = true
 	result["plant"] = base
 	result["seed_count"] = yield_count
+	result["ledger_target"] = ledger_target
+	result["headline_count"] = ledger_target == LEDGER_FOUNDER
+	if individual_id == TARA_ID:
+		result["working_stock"] = working_stock_record(scenario_datetime)
 	result["lineage_record"] = {
 		"individual_id": String(base.get("individual_id", "")),
 		"lineage_id": String(base.get("lineage_id", "")),
@@ -296,9 +338,49 @@ func harvest(plant: Dictionary, scenario_datetime: String) -> Dictionary:
 		"natural_death": true,
 	}
 	result["ledgers"] = canonical_ledgers()
-	result["events"].append({"type": "plant_naturally_completed", "individual_id": String(base.get("individual_id", "")), "seed_count": yield_count})
-	result["reason"] = "Harvest recorded after dated dry-down; the original individual is archived and never revived."
+	result["events"].append({"type": "plant_naturally_completed", "individual_id": String(base.get("individual_id", "")), "seed_count": yield_count, "ledger_target": ledger_target})
+	if individual_id == TARA_ID:
+		result["reason"] = "Harvest recorded after dated dry-down into the sealed working stock (Tara x Alo, no headline count); the founder ledger is untouched and Tara's nameplate is archived on the lineage board."
+	else:
+		result["reason"] = "Harvest recorded after dated dry-down; the original individual is archived and never revived."
 	return result
+
+## The working-stock ledger record written by Tara's harvest: lineage Tara x Alo,
+## sealed, deliberately without any seed count, and never part of founder_42.
+## `harvested_at` is the dated harvest (canon 31 May 2046).
+func working_stock_record(harvested_at: String) -> Dictionary:
+	var rules: Dictionary = _biology().get("working_stock", {})
+	return {
+		"lineage_id": String(rules.get("lineage_id", TARA_ALO_LINEAGE)),
+		"cross": String(rules.get("cross", "Tara x Alo")),
+		"label": String(rules.get("label", "Working stock: Tara x Alo")),
+		"source_individual": String(rules.get("source_individual", TARA_ID)),
+		"parents": (rules.get("parents", [TARA_ID, ALO_ID]) as Array).duplicate(true),
+		"harvested_at": harvested_at,
+		"sealed": true,
+		"headline_count": String(rules.get("headline_count", "not recorded")),
+		"separate_from_founder": true,
+		"founder_ledger": LEDGER_FOUNDER,
+	}
+
+## Tara's dated schedule from the rules block: the day her pods are mature and her
+## watering stops (26 May 2046) and her dry-pod harvest day (31 May 2046).
+func tara_schedule() -> Dictionary:
+	var biology := _biology()
+	return {
+		"mature_days": int(biology.get("tara_mature_days", DEFAULT_TARA_MATURE_DAYS)),
+		"dry_down_days": int(biology.get("dry_down_days", DEFAULT_DRY_DOWN_DAYS)),
+		"maturity_date": String(biology.get("tara_maturity_date", "2046-05-26 00:00 UTC")),
+		"harvest_date": String(biology.get("tara_harvest_date", "2046-05-31 00:00 UTC")),
+	}
+
+## True when the stage is one a plant never leaves (dead, lost or archived).
+func is_terminal_stage(stage: String) -> bool:
+	return stage in TERMINAL_STAGES
+
+func _biology() -> Dictionary:
+	var data = CampaignRules.data
+	return data.get("biology", {}) if data is Dictionary else {}
 
 func record_cotton_plant(vault_ledger: Dictionary, scenario_datetime: String) -> Dictionary:
 	var ledger := vault_ledger.duplicate(true)
