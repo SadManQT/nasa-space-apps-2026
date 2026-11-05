@@ -543,8 +543,8 @@
    "prompt": "Look at production/concept/lookdev_exterior_v1/ and pick A or B (or ask for changes). The AI records it in handbook §3."
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "production/terrain/",
@@ -559,7 +559,7 @@
    ],
    "note": "Heightmaps, provenance and Blender base meshes can start now; apply surface materials and lighting only after the art direction is chosen (M1-33). 5 Nov: the 4 Nov claim produced no files; released to Claude Fable 5.1 (environment lead). Blender is on this Mac (/opt/homebrew/bin/blender). 5 Nov 22:40: returned to todo (it passed review but hit a rebase conflict on landing; the night shift resumes night/M1-34).",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-06",
    "id": "M1-34",
    "milestone": "M1",
    "priority": "P0",
