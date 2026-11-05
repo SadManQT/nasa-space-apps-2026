@@ -346,7 +346,11 @@ def pick(slot):
         # Sadman's accounts work only Sadman's tasks (MASTER_PLAN.md §7); teammates' tasks stay theirs
         _, out = sh(["python3", "production/plan/board.py", "next", "--tool", lane, "--all", "--by", "Sadman/night"], slot)
         cands += [(m[1], lane) for m in (re.match(r"^(M\d-[\w-]+)\s+\[", ln) for ln in out.splitlines()) if m]
-    waits = waiting_on(json.loads((slot / "production/plan/tasks.json").read_text())["tasks"])
+    tasks = json.loads((slot / "production/plan/tasks.json").read_text())["tasks"]
+    waits, by_id = waiting_on(tasks), {t["id"]: t for t in tasks}
+    # a task Sadman claimed by hand in a day session (owner "Sadman/claude", ...) is his, not the night shift's
+    cands = [(tid, lane) for tid, lane in cands
+             if not (by_id.get(tid, {}).get("status") == "in_progress" and not str(by_id[tid].get("owner", "")).startswith("Sadman/night"))]
     for tid, lane in sorted(cands, key=lambda c: -waits[c[0]]):
         with lock:
             if tid in taken or overlaps(slot, tid):

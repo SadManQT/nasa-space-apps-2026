@@ -11,6 +11,7 @@ with a reason. Needs: node + `npm install` in this folder (playwright-core, uses
 ffmpeg, python3 + numpy, and Godot 4.7 (its Movie Maker is the only Theora encoder here; see ogv_writer.gd).
 """
 import datetime as dt
+import fcntl
 import hashlib
 import json
 import re
@@ -226,6 +227,12 @@ def sound_bed(spec, path, rate=44100):
 
 # ---- registry -------------------------------------------------------------------------------------------------
 def register(spec, ogv, length):
+    with open(EXPL / "build" / ".registry.lock", "w") as lock:   # two render chains may finish at once
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        _register(spec, ogv, length)
+
+
+def _register(spec, ogv, length):
     reg = json.loads(REGISTRY.read_text()) if REGISTRY.exists() else {
         "schema_version": 1,
         "about": "Explainer clips the hint player, data cards and Journal play (MASTER_PLAN.md section 5). Science "

@@ -40,4 +40,16 @@ with mock.patch.multiple(ns, run_agent=first_call, log=lambda m: None, resume_pa
     assert calls[0] == ("claude2", "xhigh"), calls  # 3D work goes to Claude: Opus 5.5 at extra-high effort
 assert not any("fable" in accounts for accounts in ns.LANES.values()), ns.LANES  # Opus 5.5 for all tasks (5 Nov 23:40)
 
+# a task claimed by hand in a day session is never picked by the night shift (6 Nov: nslot1 resumed M1-34 while Sadman/claude landed it)
+import json as _json, tempfile
+with tempfile.TemporaryDirectory() as tmp:
+    slot = Path(tmp); (slot / "production/plan").mkdir(parents=True)
+    (slot / "production/plan/tasks.json").write_text(_json.dumps({"tasks": [
+        {"id": "M9-01", "status": "in_progress", "owner": "Sadman/claude", "deps": [], "paths": []},
+        {"id": "M9-02", "status": "todo", "owner": "", "deps": [], "paths": []}]}))
+    listing = "M9-01  [M9 P0 claude]  x\nM9-02  [M9 P0 claude]  y\n"
+    with mock.patch.multiple(ns, sh=lambda *a, **k: (0, listing), free=lambda a: a, overlaps=lambda s, t: False, CLAIMS=slot / "claims"):
+        ns.taken.clear(); (slot / "claims").mkdir()
+        assert ns.pick(slot)[0] == "M9-02", "a hand-claimed task must be skipped"
+
 print("night_shift self-check: PASS")

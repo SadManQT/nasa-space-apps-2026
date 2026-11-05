@@ -34,6 +34,7 @@ A 9-year-old and a judge should both follow every clip, the first time, with the
 | Type | Avenir Next (Sadman's Mac renders every clip); SF Mono for axis ticks. Titles 88 px bold, labels 26–34 px semibold, captions 46 px semibold |
 | Layout | Label chip top left (64 px margin); content between y≈140 and y≈820; captions centred at the bottom on a scrim; a thin progress bar on the bottom edge |
 | Framing | Every clip opens on the shared `title` beat (eyebrow "SCIENCE EXPLAINER" and the title) and closes on the shared `takeaway` beat ("WHAT IT MEANS FOR YOU" and `ends_on`) |
+| Shared beats | `title`, `takeaway`, and `card` (a statement card with the fields `card` and `sub`, used for the "where the data stops" beat); everything else lives in the clip's scene file |
 
 ## 4. Sound
 
