@@ -2947,8 +2947,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 7 assets: the storm shelter and uplink props",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-claude2",
    "deps": [
     "M1-05"
    ],
@@ -2963,8 +2963,8 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "Added 5 Nov 2026 (Sadman: every chapter 1-8 fully assigned).",
-   "evidence": "",
-   "updated": "2026-11-05",
+   "evidence": "run_tests.sh 39/39 suites passed (test_chapter7_assets 254 checks headless; 265 with --evidence windowed); verify_gate.py 140 assets in Godot, 0 failing (18 new/changed GLBs from production/manifest/chapter7_assets.csv). Nine assets, each <id>.glb (props) or <id>_LOD0.glb (EN_Fabrication) with convex collision + <id>_LOD1.glb Compatibility LOD: PR_ShelterDiagram (five role-colour seat markers), PR_SeedCase (rebuilt from the approved design: exactly 15 + 15 seeds, one per vial, counted from the geometry by the suite; lid, latch, sealed compartments), PR_ValveDiagram (six water units), PR_TelemetryDisplay, PR_ArchivePlayer, PR_UplinkFeedthrough (A-43, 27 Oct Tripo mesh + collision + lockout tag), PR_NetworkDiagnostic (+ DataCard for the S09->S10 join), EN_Fabrication_Bench, EN_Fabrication_RouteSimulator (relief from the M1-34 NASA LOLA heightmap, true-scale line-of-sight pads). Built by production/tools/build_chapter7_assets.py (deterministic, byte-identical rebuild; no credits); catalogue/helpers game/assets/props/chapter7_assets.json/.gd; listed in PRODUCTION_HANDBOOK.md section 8.3/8.4. Visual review PASS (Claude + Codex gpt-6-astra second opinion), registry rows verified. Screenshots production/qa/evidence/M3-7A_godot_safe_room, _shelter_markers, _telemetry, _seed_case, _diagnostic, _uplink, _uplink_exterior, _fabrication, _route_relief, _lod0, _lod1.png (production/qa/evidence/M3-7A_capture.sh); sheets M3-7A_contact/_states/_lods.png. Gate tools also read chapter*_assets.csv (minimal change outside game/assets). Finding filed as M4-01 (member5): on the LOLA grid Aurora sees the Malapert summit directly vs STORY_FULL S11 'hidden by terrain'.",
+   "updated": "2026-11-06",
    "prompt": "Do: make and install the CH07 props and EN_Fabrication from PRODUCTION_HANDBOOK.md §8 (five shelter seat markers, the seed case with two 15-seed compartments, water-wall valve diagram, local telemetry displays, archive player, damaged external uplink feedthrough (A-43), local network diagnostic panel; EN_Fabrication bench and route simulator for CH07-S11), following the pipeline in PRODUCTION_HANDBOOK.md §6 and the asset gate (production/tools/verify_gate.py). Reuse the habitat kit (game/assets/environment/kit/) and existing props first; new hero props need Sadman's approval of a 2D sheet before 3D credits are spent. Log every generation in production/AI_PROMPT_LOG.md.\nAcceptance: every prop is in game/assets/ with collision and a Compatibility LOD, passes the gate, and is listed in PRODUCTION_HANDBOOK.md §8; screenshots in production/qa/evidence/<task id>_*.png.",
    "blocker": "Night shift parked the work on branch night/M3-5A: ",
    "reserved_for": "sadman",
@@ -5386,6 +5386,26 @@
    "prompt": "Why: Sadman's science explainers (M1-60, M3-68, M3-77: 17 clips, 34-45 s each) are registered in game/resources/campaign/content/explainers.json with 'sources' (NASA fixture ids) and 'used_by' (mission ids such as EX-M0101, puzzle ids). The hint player (M1-64) plays them as hint level 2, but a player reading a mission data card or Journal -> Science cannot watch them yet. Do: on a data card, show 'Watch: <explainer title>' for each explainer whose used_by contains the card's mission id or whose sources overlap the card's source_ids; play it in the same 16:9 card player as the hint player (captions are burned in; pause, replay, Esc closes; reduced motion shows a still). In Journal -> Science (M3-98), list every explainer the player has unlocked (its mission reached), grouped by chapter. Reuse UiDesign. Acceptance: EX-M0101's card offers the polar Sun, crew needs and solar power clips; run_tests.sh passes; screenshots production/qa/evidence/<task id>_*.png.",
    "reserved_for": "ramim",
    "effort": 2
+  },
+  {
+   "id": "M4-01",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Science review: Aurora sees the Malapert summit directly on the LOLA grid (EX-CH07-S11 says 'hidden by terrain')",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "production/review/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/night-claude2 on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Claim: STORY_FULL EX-CH07-S11 says 'A controller alone cannot connect a summit to a base hidden by terrain', and game-design/23_NASA_MISSION_PRACTICE.md says line of sight is blocked over the road. Finding (M3-7A, production/tools/route_simulator_data.py on the M1-34 NASA LRO LOLA 80 m relay-corridor heightmap, true scale with the lunar-curvature sagitta s(d-s)/2R): the chord from Aurora's 10 m mast (ridge top, 1,959 m) to a 5 m antenna on the Malapert summit (4,994 m), 135 km, clears the terrain everywhere (smallest clearance about 28 m, 0.5 km from Aurora); this matches published work that proposes Malapert as a relay because it sees the Shackleton rim area. What still holds in the data: road-level points in the valleys are blocked by ridges 600-1,600 m above the line, and two of the three repeater pads fail when moved down to the road, so the repeater chain matters for the rover on the road. Data: game/assets/props/chapter7_assets.json route_simulator (hops, road_level_alternatives, blocked_examples, direct_aurora_summit). Do: verify the computation (rerun python3 production/tools/route_simulator_data.py), label the claim correct / wrong / unclear in production/review/, and if wrong propose the smallest fix for Sadman to approve (for example: the habitat's Earth-relay antenna sits low on the ridge's shadowed side, or the chain serves the rover rather than the base); story canon changes only with Sadman's approval. Acceptance: verdict with numbers and sources in production/review/; a board task for the story owner if a text change is proposed.",
+   "reserved_for": "member5",
+   "effort": 1
   }
  ],
  "requirements": [

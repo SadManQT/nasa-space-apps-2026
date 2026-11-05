@@ -3,7 +3,8 @@
 
   python3 production/tools/verify_gate.py            (run after sync_to_godot.sh)
 
-Specs come from production/manifest/{characters,tripo_props_batch1,reuse_props,lunar_kit,habitat_kit}.csv.
+Specs come from production/manifest/{characters,tripo_props_batch1,reuse_props,lunar_kit,habitat_kit}.csv and every
+chapter set production/manifest/chapter*_assets.csv (M3-7A).
 Checks per asset: imports with a mesh; triangles within budget; largest texture within budget;
 standing on the floor (lowest point y = 0 ± 1 cm); real-world size within 2 % of spec
 (height for --height, longest side for --longest); characters have their rig (bones) and at least
@@ -23,9 +24,18 @@ GODOT = os.environ.get("GODOT", "/Applications/Godot.app/Contents/MacOS/Godot")
 GODOT_ERRORS = ("SCRIPT ERROR", "Parse Error", "Failed to load script", "ERROR:")
 
 
+MANIFESTS = ("characters", "tripo_props_batch1", "reuse_props", "lunar_kit", "habitat_kit")
+
+
+def manifest_names():
+    """The fixed manifests plus every chapter asset set (production/manifest/chapter*_assets.csv)."""
+    extra = sorted(p.stem for p in (ROOT / "production/manifest").glob("chapter*_assets.csv"))
+    return list(MANIFESTS) + [n for n in extra if n not in MANIFESTS]
+
+
 def specs():
     out = {}
-    for name in ("characters", "tripo_props_batch1", "reuse_props", "lunar_kit", "habitat_kit"):
+    for name in manifest_names():
         for r in csv.DictReader(open(ROOT / f"production/manifest/{name}.csv", encoding="utf-8")):
             out[r["name"]] = r
     return out

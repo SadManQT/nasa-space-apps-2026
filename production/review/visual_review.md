@@ -23,7 +23,7 @@ Reviewed 25 Oct 2026 by Claude Code; second opinion by Antigravity (section at t
 | PR_GrowthChamber | ✅ PASS | Glove ports, shutter frame, soil tray |
 | PR_MissionTable | ✅ PASS | Central display to become a live UI material |
 | PR_VaultCase | ✅ PASS | Dusty insulated case, ID window |
-| PR_SeedCase | ✅ PASS | Top view confirms two compartments of vials (15 + 15) |
+| PR_SeedCase | ✅ PASS | Top view confirms two compartments of vials (15 + 15). 6 Nov: rebuilt by M3-7A with exactly one seed per vial (the Tripo vials held many seeds each), see the M3-7A section |
 | PR_Glovebox | ✅ PASS | Two pairs of glove ports, side hatch, gauge |
 | PR_MalapertRelay | ✅ PASS | Dish, local antenna, controller cabinet, railed platform |
 | PR_SurveyBeacon | ✅ PASS | Tripod, housing, dish, orange ring |
@@ -182,3 +182,28 @@ All 26 Cycles previews ([M1-05_habitat_kit_contact.png](M1-05_habitat_kit_contac
 Fix round, 5 Nov (same reviewer): the kit was rebuilt deterministically with its four texture sets stored once and shared by every GLB (geometry byte-identical to the first build, previews and both sheets re-rendered, verdicts unchanged). The Godot kit-overview captures `M1-05_godot_kit_lod0.png` and `_kit_lod1.png` were blank in the first build (camera aimed before entering the tree) and are re-taken with the camera on the face side and the game LOD forced; LOD0 shows the quilt relief, rivets and controls that LOD1 drops. Room, open-state and corridor captures re-taken with the shared textures: no visible change.
 
 Fix round 2, 5 Nov (Sadman/night-claude3, Claude Opus 5.5): two pieces rebuilt from the same script, the other 22 GLBs, every texture and every material byte-identical (md5 checked). EN_Kit_BulkheadRing is now the 1 m corridor segment of sheet B (above); EN_Kit_Hatch's leaf is two-sided (above). The Godot sample-assembly captures were re-taken because the first ones were blown out (six 2.2-energy omni lights 5 cm under the ceiling, Filmic tone mapping) and their captions ran off the frame: the room is now lit only by a soft-shadowed downlight under each light strip, with screen-space bounce light and AgX tone mapping, so the ceiling takes bounce light as under real recessed strips; the corridor is four chained segments between two door modules instead of two loose rings in a void; the open hatch shows a lit segment and the next door. Inspected: `M1-05_godot_room.png` (far wall, quilt relief, steel handrails, navy skirting, deck rings, no clipping), `_room_open.png` (door leaf parked in the jamb, corridor through the doorway, hatch leaf's room face and the passage beyond), `_corridor.png` (liner, rails, tread, seal lines, 5000 K strip, room through the open door), `_kit_lod0/1.png` (captions now fit). No text or logos on any surface, no faces, metre scale.
+
+## M3-7A Chapter 7 shelter and uplink props, EN_Fabrication — 6 November 2026, Sadman/night-claude2 (Claude Opus 5.5)
+
+Reviewed on the Cycles previews and the review sheets `production/qa/evidence/M3-7A_contact.png`, `_states.png`, `_lods.png`, and in Godot (`M3-7A_godot_*.png`). Independent second opinion: OpenAI Codex CLI (gpt-6-astra, high, read-only), two passes: the first asked for clearer evidence (telemetry and diagnostic close-ups, the low-Sun shadow, a smaller summit label), the second gave all nine PASS. No text, logos or flags on any surface; role colours from ART_BIBLE section 3; no plants in this set. The designs are new procedural props (no credits): Sadman checks them in play.
+
+| Asset | Verdict | Notes |
+|---|---|---|
+| PR_ShelterDiagram | ✅ PASS | 0.80 x 0.66 m navy board, white enamel 8 x 6 m Safe Room plan (orange hatch, blue water panels, four bundle slots, gold seed latch), five seat rings on the interior side; five markers in the ART_BIBLE role colours parked on the steel strip and snapping to the seats (Godot close-up); status strip is a live slot |
+| PR_ShelterDiagram_LOD1 | ✅ PASS | Compatibility LOD: same plan, markers and colours, fewer segments, 512 px kit textures |
+| PR_SeedCase | ✅ PASS | rebuild of the approved seed_case_v1 design (white case, navy rim and corner guards, orange draw latch): two foam compartments of 3 x 5 clear vials, exactly one ~2 mm Brassica rapa seed in each (macro render; the suite counts 30 from the geometry), inner seal lids with lamps, hinged lid, side grips, sealed-telemetry window |
+| PR_SeedCase_LOD1 | ✅ PASS | Compatibility LOD: 30 simplified vials, same silhouette and colours |
+| PR_ValveDiagram | ✅ PASS | enamel mimic: garden reservoir (green band), six water units whose fills show W, pump, supply and return valve symbols with lamps, two-position return selector, live return-time screen |
+| PR_ValveDiagram_LOD1 | ✅ PASS | Compatibility LOD: same mimic, fewer segments |
+| PR_TelemetryDisplay | ✅ PASS | navy wall unit, two live screens (systems, garden) and the six E A H C R Z lamps between them, keys, speaker, orange grab handles; close-up text readable in Godot |
+| PR_TelemetryDisplay_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours |
+| PR_ArchivePlayer | ✅ PASS | grey rugged player with navy corner guards, speaker grille, live screen, play/pause/stop keys with raised icons, volume knob, archive card, folding handle; no antenna (stored recordings only) |
+| PR_ArchivePlayer_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours |
+| PR_UplinkFeedthrough | ✅ PASS | the approved 27 Oct Tripo mesh unchanged, plus a collision box and an orange lockout tag under the junction box shown once F-EXT is diagnosed; exterior capture under a 4 degree Sun with black sky and grey regolith; the plate's faceting is pre-existing |
+| PR_UplinkFeedthrough_LOD1 | ✅ PASS | Compatibility LOD: decimated to a third, bounds kept, 512 px maps |
+| PR_NetworkDiagnostic | ✅ PASS | navy cabinet with a mimic of the local network, the feedthrough on the dashed hull line and the Earth dish; three guarded test buttons, three branch lamps, isolation key with lamp, live screen (PASS/FAIL/FAIL readable in Godot), data card |
+| PR_NetworkDiagnostic_LOD1 | ✅ PASS | Compatibility LOD: same mimic and controls, fewer segments |
+| EN_Fabrication_Bench_LOD0 | ✅ PASS | steel-frame bench with ESD mat, drawers, vise, controller cradle (takes PR_RelayController), spare battery on its cradle, connector tray with three round plugs and one rectangular wrong one, echo test unit, clipboard with a paper sheet, tool board with shadowed tools, shelf, bins and task light |
+| EN_Fabrication_Bench_LOD1 | ✅ PASS | Compatibility LOD: same layout, fewer segments |
+| EN_Fabrication_RouteSimulator_LOD0 | ✅ PASS | navy table with a relief of the real LOLA corridor (crater detail from the 80 m data, no grid banding after the tangent-frame normal fix), orange computed road, Aurora mast and summit dish markers, three repeater pins, tilted monitor with a live screen |
+| EN_Fabrication_RouteSimulator_LOD1 | ✅ PASS | Compatibility LOD: relief at half density with 1024 px maps, road and pins kept |
