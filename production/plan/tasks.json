@@ -4905,7 +4905,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Science explainers for Chapters 2-4 and the Moon trainer (5-8 in M3-77)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-60"
@@ -4920,7 +4920,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): on the Claude Motion pipeline per MASTER_PLAN §5; the Godot how-to clip pipeline (M1-59) is not a prerequisite.",
-   "evidence": "",
+   "evidence": "Chapters 2-4 and Moon trainer explainers on the Claude Motion pipeline: sci_moonquakes (38 s), sci_cold_traps (38 s), sci_water_evidence (40 s), sci_rover_slopes (36 s), sci_laser_mapping (42 s, the real LOLA hillshade from M1-34), sci_low_gravity (34 s); plant growth for CH02 is M1-60's. Every cited NASA fixture now has an explainer (the gazetteer one is M3-77's sci_long_road). Fixture tokens only (build.py check), honest labels, each ends on the next decision; linked to missions by used_by. test_explainers.gd 321/321; captures production/qa/evidence/explainer_*.png; log production/ai_log_parts/M1-60.md.",
    "updated": "2026-11-06",
    "prompt": "Do: build every remaining explainer in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §7.1 (moonquakes, LOLA mapping, cold traps, how we know there is water, rovers and\nslopes, impact flashes, cotton on the Moon, the red ring, the 2012 and 2017 storms, relays and line of sight, low gravity) and add\none for any later clue that uses a NASA fixture without an explainer. Every explainer: 20–45 s, captions, animated diagrams made with the Claude Motion pipeline (M1-63: production/explainers/motion/STYLE.md, production/tools/motion/build.py), honest labels (measured, model, diagram or counterfactual; game-design/24_NARRATIVE_REVISION.md §2.12), numbers taken from the bundled fixture in game/resources/data/nasa/ (never invented), ending on what it means for the player's next decision; attach it to the mission data card (M1-30), the clue that uses the data and Journal → Science. Check every number against its fixture and source.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "sadman",
@@ -5198,8 +5198,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Science explainers for Chapters 5-8",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude",
    "deps": [
     "M3-68"
    ],
@@ -5213,8 +5213,8 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "From MASTER_PLAN.md (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): on the Claude Motion pipeline per MASTER_PLAN §5; the Godot how-to clip pipeline (M1-59) is not a prerequisite.",
-   "evidence": "",
-   "updated": "2026-11-05",
+   "evidence": "Chapters 5-8 explainers: sci_impact_flashes (38 s), sci_cotton_moon (34 s), sci_red_ring (40 s, Earth drawn 3.7x the Sun as seen from the Moon), sci_storms_2012_2017 (42 s, real 2012 STEREO-A and 2017 GOES curves; Chapter 7's strike labelled a what-if), sci_relays (40 s), sci_long_road (38 s, gazetteer + LOLA road, for EX-M0801); solar power for CH06 is M1-60's. test_explainers.gd 321/321; captures production/qa/evidence/explainer_*.png; log production/ai_log_parts/M1-60.md.",
+   "updated": "2026-11-06",
    "prompt": "Split from M3-68 so Act One does not wait for Act Two. Same brief as M3-68 (doc 25 §7.1 table) for the Chapter 5-8 rows: impact flashes, cotton on the Moon, the red ring, solar storms in 2012 and 2017, relays and line of sight.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence.",
    "reserved_for": "sadman",
    "effort": 3

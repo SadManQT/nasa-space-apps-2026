@@ -1,0 +1,108 @@
+{
+ "id": "sci_long_road",
+ "title": "The long road to Malapert",
+ "level": "explainer",
+ "length_s": 38,
+ "fps": 24,
+ "purpose": "Teach map distance on the Moon: the official place names, the straight-line distance from the pole to Mons Malapert, and why the drivable road is far longer.",
+ "scenes": "long_road.js",
+ "used_by": [
+  "EX-M0801",
+  "P-15"
+ ],
+ "sources": [
+  "usgs_gazetteer_south_pole",
+  "lro_lola_south_pole_terrain"
+ ],
+ "values": {
+  "straight": {
+   "from": "usgs_gazetteer_south_pole:derived.pole_to_mons_malapert",
+   "fmt": "{:.0f}"
+  },
+  "road": {
+   "from": "lro_lola_south_pole_terrain:derived.relay_road_length",
+   "fmt": "{:.0f}"
+  },
+  "slope": {
+   "from": "lro_lola_south_pole_terrain:derived.relay_road_max_slope",
+   "fmt": "{:.0f}"
+  }
+ },
+ "series": {
+  "features": "usgs_gazetteer_south_pole:values"
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 18,
+   "scene": "names",
+   "label": "model",
+   "credit": "USGS / IAU Gazetteer of Planetary Nomenclature · great-circle distance",
+   "pole": "South pole",
+   "line": "About {straight} km in a straight line",
+   "marathons": "Almost three marathons"
+  },
+  {
+   "from": 18,
+   "to": 28,
+   "scene": "road",
+   "label": "model",
+   "credit": "Road computed from LOLA heights (gentle cells only)",
+   "road_l": "The drivable road: about {road} km",
+   "slope_l": "Steepest stretch: {slope}°"
+  },
+  {
+   "from": 28,
+   "to": 32,
+   "scene": "card",
+   "label": "model",
+   "credit": "Gazetteer feature centres",
+   "card": "Feature centres, not Aurora's site",
+   "sub": "The game's road and its stops are fiction"
+  },
+  {
+   "from": 32,
+   "to": 38,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.4,
+   "Places on the Moon have official names, kept on a public map."
+  ],
+  [
+   8.8,
+   13.2,
+   "Mons Malapert is a real mountain about {straight} km from the south pole."
+  ],
+  [
+   13.6,
+   17.6,
+   "That is almost three marathons laid end to end."
+  ],
+  [
+   18.4,
+   22.8,
+   "But a rover cannot drive straight over craters and steep slopes."
+  ],
+  [
+   23.2,
+   27.6,
+   "A road on gentle ground is about {road} km long."
+  ],
+  [
+   28.4,
+   31.6,
+   "Those are the features' centres."
+  ]
+ ],
+ "ends_on": "The straight line is never the road. Pack for the road you will actually drive.",
+ "literals": []
+}

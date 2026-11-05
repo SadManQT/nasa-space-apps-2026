@@ -267,7 +267,7 @@ def cmd_check(paths):
     paths = paths or sorted((EXPL / "specs").glob("*.json"))
     for p in paths:
         load(p)
-        print(f"ok   {Path(p).relative_to(ROOT)}")
+        print(f"ok   {Path(p).resolve().relative_to(ROOT)}")
 
 
 def cmd_stills(path, times):

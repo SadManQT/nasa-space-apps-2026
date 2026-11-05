@@ -283,6 +283,120 @@
    "spec": "production/explainers/motion/specs/sci_impact_flashes.json"
   },
   {
+   "id": "sci_laser_mapping",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Mapping the Moon with a laser",
+   "path": "res://assets/explainers/science/sci_laser_mapping.ogv",
+   "length_s": 42.04,
+   "labels": [
+    "diagram",
+    "measured",
+    "model"
+   ],
+   "sources": [
+    "lro_lola_south_pole_terrain"
+   ],
+   "used_by": [
+    "EX-M0401",
+    "EX-M0801",
+    "P-08",
+    "P-15"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.6,
+     "text": "NASA's LRO spacecraft fires laser pulses at the Moon from orbit."
+    },
+    {
+     "start": 9.0,
+     "end": 14.6,
+     "text": "Timing each echo gives the distance, and so the height of the ground."
+    },
+    {
+     "start": 15.4,
+     "end": 19.8,
+     "text": "Millions of those heights make a map, down to one point every 5 m."
+    },
+    {
+     "start": 20.2,
+     "end": 23.8,
+     "text": "This is the real ridge where Aurora stands."
+    },
+    {
+     "start": 24.2,
+     "end": 27.8,
+     "text": "Two NASA maps of it agree to about 1.4 m."
+    },
+    {
+     "start": 28.4,
+     "end": 32.0,
+     "text": "From heights you get slopes: how steep each step is."
+    },
+    {
+     "start": 32.4,
+     "end": 36.6,
+     "text": "So the road to the cold trap is 8.6 km, never steeper than 12°."
+    }
+   ],
+   "ends_on": "Real maps make real plans. Check the slope on the map before you drive.",
+   "spec": "production/explainers/motion/specs/sci_laser_mapping.json"
+  },
+  {
+   "id": "sci_long_road",
+   "kind": "science",
+   "level": "explainer",
+   "title": "The long road to Malapert",
+   "path": "res://assets/explainers/science/sci_long_road.ogv",
+   "length_s": 38.04,
+   "labels": [
+    "model"
+   ],
+   "sources": [
+    "usgs_gazetteer_south_pole",
+    "lro_lola_south_pole_terrain"
+   ],
+   "used_by": [
+    "EX-M0801",
+    "P-15"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.4,
+     "text": "Places on the Moon have official names, kept on a public map."
+    },
+    {
+     "start": 8.8,
+     "end": 13.2,
+     "text": "Mons Malapert is a real mountain about 122 km from the south pole."
+    },
+    {
+     "start": 13.6,
+     "end": 17.6,
+     "text": "That is almost three marathons laid end to end."
+    },
+    {
+     "start": 18.4,
+     "end": 22.8,
+     "text": "But a rover cannot drive straight over craters and steep slopes."
+    },
+    {
+     "start": 23.2,
+     "end": 27.6,
+     "text": "A road on gentle ground is about 198 km long."
+    },
+    {
+     "start": 28.4,
+     "end": 31.6,
+     "text": "Those are the features' centres."
+    }
+   ],
+   "ends_on": "The straight line is never the road. Pack for the road you will actually drive.",
+   "spec": "production/explainers/motion/specs/sci_long_road.json"
+  },
+  {
    "id": "sci_low_gravity",
    "kind": "science",
    "level": "explainer",
