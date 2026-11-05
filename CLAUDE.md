@@ -20,5 +20,6 @@ Never break these (details in the handbook):
 - Always verify each generated asset is correct, and remove unnecessary files so the folders and GitHub repo stay clean.
 - Never recommend or assume purchases that spend the user's money; present paid options only as choices the user explicitly approves.
 - Make all game missions and puzzles scientifically accurate, following NASA project requirements, real NASA mission types, and realistic engineering trade-offs.
+- Use Claude Opus 5.5 with extra-high reasoning effort for all tasks.
 <!-- end claude-reflect -->
 
