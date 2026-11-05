@@ -1,10 +1,10 @@
 # Showcase cutscenes
 
-Game-ready Ogg Theora videos (`.ogv`, 1152x648, 24 fps, Vorbis audio). The asset
+Game-ready Ogg Theora videos (`.ogv`, 1280x720, 24 fps, Vorbis audio). The asset
 showcase discovers them at runtime, sorts by filename, and displays
 `CS-01_Arrival.ogv` as `CS-01 Arrival`.
 
-Made from the masters in `production/cutscenes/v7/` (sources and specs in its `src/`):
+Made from the masters in `production/cutscenes/v7/` and `v8/` (sources and specs in their `src/`; CS-01 is the v8 cold open):
 `production/tools/compose_cutscene.py`, then `production/tools/ogv_writer.gd`.
 
 Open `res://scenes/dev/asset_showcase.tscn`, then press C. Select a video to play;
