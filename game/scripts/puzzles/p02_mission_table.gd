@@ -3,8 +3,9 @@ class_name P02MissionTable
 
 ## P-02 Seven Shifts planning state behind the Mission Table.
 ##
-## Holds only what the player has decided and read: per-shift settings, shared
-## role cards, hint progress and the shift-5 alarm task progress. It never does
+## Holds only what the player has decided and read: per-shift settings, the
+## role-card receipts (read privately, shared with the crew, signed the team
+## plan), hint progress and the shift-5 alarm task progress. It never does
 ## resource arithmetic. `plan_for_gate` turns the selections into the exact plan
 ## ExpeditionSimulation previews and commits, so the forecast and the committed
 ## result come from the same pure function. Option lists, role cards, hints and
@@ -24,6 +25,8 @@ static var _data_cache: Dictionary = {}
 
 var _selections := {}
 var _shared := {}
+var _read := {}
+var _sign_offs := {}
 var _hint_level := 0
 var _golden_hint_level := 0
 var _bloom_achieved := false
@@ -209,6 +212,7 @@ func role_cards(committed_shift: int) -> Array:
 		var arrived := committed_shift + 1 >= int(card.get("arrives_shift", 1))
 		card["arrived"] = arrived
 		card["shared"] = bool(_shared.get(String(card.role_id), false))
+		card["read"] = bool(_read.get(String(card.role_id), false))
 		if not arrived:
 			card["facts"] = []
 			card["quote"] = ""
@@ -216,17 +220,94 @@ func role_cards(committed_shift: int) -> Array:
 	return result
 
 ## Marks a delivered card as shared with the crew. Sharing a card twice is a
-## harmless no-op; a card that has not arrived cannot be shared.
-func share(role_id: String, committed_shift: int) -> Dictionary:
+## harmless no-op; a card that has not arrived cannot be shared. With
+## `require_read` (Class mode) the role's player must have read the card
+## privately first, so sharing is a separate act from receiving it.
+func share(role_id: String, committed_shift: int, require_read: bool = false) -> Dictionary:
 	for card in role_cards(committed_shift):
 		if String(card.role_id) != role_id:
 			continue
 		if not bool(card.arrived):
 			return _reject("%s's card arrives at shift %d." % [String(card.name), int(card.arrives_shift)])
+		if require_read and not bool(_read.get(role_id, false)):
+			return _reject("%s's note has not been read privately yet." % String(card.name))
 		var duplicate := bool(_shared.get(role_id, false))
 		_shared[role_id] = true
 		return {"accepted": true, "duplicate": duplicate, "reason": "%s shared the %s card. Read by the crew." % [String(card.name), String(card.role).to_lower()]}
 	return _reject("Unknown role card: " + role_id)
+
+## Records that the role's player read a delivered card privately (the
+## hand-off screen or a printed card). Reading twice is a harmless no-op; a
+## card that has not arrived cannot be read.
+func mark_read(role_id: String, committed_shift: int) -> Dictionary:
+	for card in role_cards(committed_shift):
+		if String(card.role_id) != role_id:
+			continue
+		if not bool(card.arrived):
+			return _reject("%s's card arrives at shift %d." % [String(card.name), int(card.arrives_shift)])
+		var duplicate := bool(_read.get(role_id, false))
+		_read[role_id] = true
+		return {"accepted": true, "duplicate": duplicate, "reason": "%s read the %s note privately." % [String(card.name), String(card.role).to_lower()]}
+	return _reject("Unknown role card: " + role_id)
+
+## Identifies one exact plan for one gate at one committed shift. Sign-offs
+## are bound to this key, so any change to the plan (a choice, a worked plan,
+## alarm task progress, a retry) makes earlier signatures stale.
+func plan_key(target_id: String, committed_shift: int) -> String:
+	return JSON.stringify(plan_for_gate(target_id)) + "@" + str(committed_shift)
+
+## One role signs the current, complete plan for `target_id`. Signing the same
+## plan twice is a harmless no-op; signing a changed plan replaces the old
+## signature.
+func sign_off(role_id: String, target_id: String, committed_shift: int) -> Dictionary:
+	if not data().get("role_cards", []).any(func(card): return String(card.get("role_id", "")) == role_id):
+		return _reject("Unknown role: " + role_id)
+	var block := plan_block_reason(target_id, committed_shift)
+	if not block.is_empty():
+		return _reject(block)
+	var key := plan_key(target_id, committed_shift)
+	var duplicate := String(_sign_offs.get(role_id, "")) == key
+	_sign_offs[role_id] = key
+	return {"accepted": true, "duplicate": duplicate, "reason": "%s signed the team plan." % _role_name(role_id)}
+
+## Roles whose signature matches the current plan for this gate, in card order.
+func signed_roles(target_id: String, committed_shift: int) -> Array:
+	var key := plan_key(target_id, committed_shift)
+	var result: Array = []
+	for card in data().get("role_cards", []):
+		var role_id := String(card.get("role_id", ""))
+		if String(_sign_offs.get(role_id, "")) == key:
+			result.append(role_id)
+	return result
+
+## Roles that signed an earlier version of the plan and must sign again.
+func stale_sign_offs(target_id: String, committed_shift: int) -> Array:
+	var key := plan_key(target_id, committed_shift)
+	var result: Array = []
+	for card in data().get("role_cards", []):
+		var role_id := String(card.get("role_id", ""))
+		var signed := String(_sign_offs.get(role_id, ""))
+		if not signed.is_empty() and signed != key:
+			result.append(role_id)
+	return result
+
+## Forgets every signature, e.g. when the crew mode changes.
+func clear_sign_offs() -> void:
+	_sign_offs.clear()
+
+## The communication receipts the debrief reports separately: which notes
+## were read privately, which were shared with the crew and which roles signed
+## the plan currently on the table.
+func communication_record() -> Dictionary:
+	var read: Array = []
+	var shared: Array = []
+	for card in data().get("role_cards", []):
+		var role_id := String(card.get("role_id", ""))
+		if bool(_read.get(role_id, false)):
+			read.append(role_id)
+		if bool(_shared.get(role_id, false)):
+			shared.append(role_id)
+	return {"read": read, "shared": shared, "sign_offs": _sign_offs.duplicate()}
 
 ## Reveals the next progressive hint. Golden hints unlock only after a first
 ## Bloom and follow H1-H3. Hints never change ending eligibility.
@@ -407,6 +488,8 @@ func snapshot() -> Dictionary:
 		"schema_version": SCHEMA_VERSION,
 		"selections": selections,
 		"shared": _shared.duplicate(),
+		"read": _read.duplicate(),
+		"sign_offs": _sign_offs.duplicate(),
 		"hint_level": _hint_level,
 		"golden_hint_level": _golden_hint_level,
 		"bloom_achieved": _bloom_achieved,
@@ -440,6 +523,23 @@ func restore(raw) -> Dictionary:
 		if not raw.shared[role_id] is bool:
 			return _reject("Mission Table shared state must be boolean.")
 		shared[String(role_id)] = raw.shared[role_id]
+	# Receipts added with Class mode; saves written before them restore empty.
+	var read := {}
+	if raw.has("read"):
+		if not raw.read is Dictionary:
+			return _reject("Mission Table read receipts must be a Dictionary.")
+		for role_id in raw.read:
+			if not raw.read[role_id] is bool:
+				return _reject("Mission Table read receipts must be boolean.")
+			read[String(role_id)] = raw.read[role_id]
+	var sign_offs := {}
+	if raw.has("sign_offs"):
+		if not raw.sign_offs is Dictionary:
+			return _reject("Mission Table sign-offs must be a Dictionary.")
+		for role_id in raw.sign_offs:
+			if not raw.sign_offs[role_id] is String:
+				return _reject("Mission Table sign-offs must name a plan key.")
+			sign_offs[String(role_id)] = raw.sign_offs[role_id]
 	for key in ["hint_level", "golden_hint_level"]:
 		var value = raw.get(key, 0)
 		if not (value is int or value is float) or float(value) < 0 or float(value) != floor(float(value)):
@@ -449,6 +549,8 @@ func restore(raw) -> Dictionary:
 		return _reject("Mission Table alarm task state is invalid.")
 	_selections = selections
 	_shared = shared
+	_read = read
+	_sign_offs = sign_offs
 	_hint_level = int(raw.get("hint_level", 0))
 	_golden_hint_level = int(raw.get("golden_hint_level", 0))
 	_bloom_achieved = bool(raw.get("bloom_achieved", false))
@@ -488,6 +590,12 @@ static func _value_label(field: String, value) -> String:
 		if _normalise(field, option.get("value")) == value:
 			return String(option.get("label", str(value)))
 	return str(value)
+
+func _role_name(role_id: String) -> String:
+	for card in data().get("role_cards", []):
+		if String(card.get("role_id", "")) == role_id:
+			return String(card.get("name", role_id))
+	return role_id
 
 func _reject(reason: String) -> Dictionary:
 	return {"accepted": false, "duplicate": false, "reason": reason}

@@ -11,12 +11,21 @@ class_name MissionTablePanel
 ## the physical P-02 operation. Space opens the commit confirmation and Space
 ## again confirms; Esc steps back. Every control is a focusable button of at
 ## least 44 px, and every state has a text cue as well as a colour.
+##
+## Crew modes (CrewModes): in Solo the four cards are public to the one
+## player. In Class the cards column shows only who holds each note and
+## whether it was read privately or shared; the facts appear only on the
+## privacy hand-off (RoleCardHandoff) or a printed card, sharing requires a
+## private read first, and the commit confirmation becomes the team plan:
+## every role signs the exact plan before the operator locks it in.
 
 signal commit_requested(target_id: String, plan: Dictionary)
 signal opened(target_id: String)
 signal closed(target_id: String)
 
 const TableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
+const CrewScript = preload("res://scripts/crew/crew_modes.gd")
+const HANDOFF_SCENE: PackedScene = preload("res://scenes/ui/role_card_handoff.tscn")
 const INK := Color("#05060A")
 const NAVY := Color("#1F2A44")
 const NAVY_DEEP := Color("#0B1426")
@@ -41,6 +50,8 @@ const RESOURCE_ROWS := [
 var _route: RefCounted
 var _target_id := ""
 var _settings := {"large_text": false, "timer_free": true}
+var _crew: Dictionary = {}
+var _handoff: RoleCardHandoff
 var _view: Dictionary = {}
 var _previewed_key := ""
 var _pinned: Dictionary = {}
@@ -73,16 +84,24 @@ func _ready() -> void:
 	_content = VBoxContainer.new()
 	_content.add_theme_constant_override("separation", 10)
 	margin.add_child(_content)
+	_handoff = HANDOFF_SCENE.instantiate() as RoleCardHandoff
+	_handoff.name = "RoleCardHandoff"
+	add_child(_handoff)
+	_handoff.card_read.connect(_on_card_read)
+	_handoff.finished.connect(_on_handoff_closed)
+	_handoff.cancelled.connect(func() -> void: _on_handoff_closed([]))
 	hide()
 	get_viewport().size_changed.connect(_layout)
 
 ## Opens the table for one P-02 gate. `settings` carries large_text and
-## timer_free from the accessibility settings.
+## timer_free from the accessibility settings and `crew` (CrewModes setting;
+## Solo when absent).
 func open(route: RefCounted, target_id: String, settings: Dictionary = {}) -> void:
 	_route = route
 	_target_id = target_id
 	for key in settings:
 		_settings[key] = settings[key]
+	_crew = CrewScript.normalise(_settings.get("crew", {}))
 	_confirming = false
 	_notice = ""
 	_previewed_key = ""
@@ -97,6 +116,8 @@ func open(route: RefCounted, target_id: String, settings: Dictionary = {}) -> vo
 func close() -> void:
 	if not visible:
 		return
+	if _handoff != null and _handoff.is_open():
+		_handoff.cancel()
 	hide()
 	_confirming = false
 	closed.emit(_target_id)
@@ -119,11 +140,53 @@ func choose(shift: int, field: String, value) -> Dictionary:
 	_after_action(result, "Choice_%d_%s_%s" % [shift, field, str(value)])
 	return result
 
-## Shares one delivered role card with the crew.
+## Shares one delivered role card with the crew. In Class mode the role's
+## player must have read the note privately first.
 func share_card(role_id: String) -> Dictionary:
-	var result: Dictionary = _table().share(role_id, _committed())
-	_after_action(result, "Share_" + role_id)
+	var result: Dictionary = _table().share(role_id, _committed(), _class_mode())
+	if not bool(result.get("accepted", false)) and _class_mode() and not _card(role_id).get("read", false) and bool(_card(role_id).get("arrived", false)):
+		result["reason"] = CrewScript.text("table", "share_requires_read", CrewScript.role_tokens(_crew, role_id))
+	_after_action(result, "Share_" + role_id if not bool(result.get("accepted", false)) else "Read_" + role_id)
 	return result
+
+## Class mode: opens the privacy hand-off for one delivered note. The read
+## receipt is recorded when the holder reveals it.
+func read_card(role_id: String) -> bool:
+	var card := _card(role_id)
+	if card.is_empty() or not bool(card.get("arrived", false)):
+		_notice = "%s's note arrives at shift %d." % [String(card.get("name", role_id)), int(card.get("arrives_shift", 1))] if not card.is_empty() else "Unknown role card: " + role_id
+		_render()
+		return false
+	return _handoff.open([card], _crew, _settings)
+
+## Class mode: passes every delivered note round, one holder at a time.
+func read_all_cards() -> bool:
+	var cards: Array = []
+	for card in _view.get("cards", []):
+		if bool(card.get("arrived", false)):
+			cards.append(card)
+	return _handoff.open(cards, _crew, _settings)
+
+## The hand-off screen this table owns (for the HUD, tests and captures).
+func handoff() -> RoleCardHandoff:
+	return _handoff
+
+## Class mode: one role signs the exact plan on the table.
+func sign_off(role_id: String) -> Dictionary:
+	var result: Dictionary = _table().sign_off(role_id, _target_id, _committed())
+	if bool(result.get("accepted", false)):
+		var next := _unsigned_roles_after(role_id)
+		_after_action(result, "SignOff_" + String(next[0]) if not next.is_empty() else "ConfirmCommit")
+	else:
+		_after_action(result, "SignOff_" + role_id)
+	return result
+
+## Roles whose signature matches the plan on the table right now.
+func signed_roles() -> Array:
+	return _table().signed_roles(_target_id, _committed())
+
+func crew() -> Dictionary:
+	return _crew.duplicate(true)
 
 ## Runs the current plan through the shared simulation and records that this
 ## exact plan was previewed, which Commit requires.
@@ -153,9 +216,10 @@ func request_commit() -> Dictionary:
 		_render()
 		return {"accepted": false, "reason": reason}
 	_confirming = true
-	_focus_name = "ConfirmCommit"
+	var unsigned := _unsigned_roles()
+	_focus_name = "SignOff_" + String(unsigned[0]) if _class_mode() and not unsigned.is_empty() else "ConfirmCommit"
 	_render()
-	return {"accepted": true, "reason": "Confirm to commit."}
+	return {"accepted": true, "reason": "Confirm to commit." if not _class_mode() else CrewScript.text("team_plan", "instruction")}
 
 ## Confirms the open confirmation: closes the table (resuming the expedition)
 ## and emits the plan once.
@@ -168,6 +232,13 @@ func confirm_commit() -> Dictionary:
 		_notice = reason
 		_render()
 		return {"accepted": false, "reason": reason}
+	if _class_mode():
+		var unsigned := _unsigned_roles()
+		if not unsigned.is_empty():
+			_notice = CrewScript.text("team_plan", "operator_blocked", {"signed": str(CrewScript.ROLE_ORDER.size() - unsigned.size()), "total": str(CrewScript.ROLE_ORDER.size())})
+			_focus_name = "SignOff_" + String(unsigned[0])
+			_render()
+			return {"accepted": false, "reason": _notice}
 	var plan: Dictionary = _table().plan_for_gate(_target_id)
 	var id := _target_id
 	close()
@@ -229,7 +300,7 @@ func end_task() -> Dictionary:
 # --- Input -----------------------------------------------------------------
 
 func _input(event: InputEvent) -> void:
-	if not visible:
+	if not visible or (_handoff != null and _handoff.is_open()):
 		return
 	var commit_key: bool = event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_SPACE
 	var commit_pad: bool = event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_Y
@@ -279,7 +350,9 @@ func _render() -> void:
 		_content.remove_child(child)
 		child.queue_free()
 	_render_header()
-	if _confirming:
+	if _confirming and _class_mode():
+		_render_team_plan()
+	elif _confirming:
 		_render_confirmation()
 	else:
 		# Each column scrolls on its own, so focusing a card never scrolls the
@@ -307,6 +380,12 @@ func _render_header() -> void:
 	gate_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	row.add_child(gate_label)
 	var committed := _committed()
+	if _class_mode():
+		var mode_chip := _label(" %s " % CrewScript.mode_label(_crew), 11, INK)
+		mode_chip.name = "CrewModeChip"
+		mode_chip.add_theme_stylebox_override("normal", _box(CYAN, Color(0, 0, 0, 0), 4, 0))
+		mode_chip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		row.add_child(mode_chip)
 	var meta := _wrap("%s · %d OF 7 SHIFTS COMMITTED · 7.2 h EACH · TIME PAUSED WHILE THE TABLE IS OPEN" % [String(_view.get("scenario_datetime", "")), committed], 12, MUTED)
 	meta.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	meta.size_flags_horizontal = Control.SIZE_FILL
@@ -314,6 +393,8 @@ func _render_header() -> void:
 	row.add_child(meta)
 
 func _render_cards() -> Control:
+	if _class_mode():
+		return _render_private_cards()
 	var column := _column("CREW CARDS · SHARE WHAT EACH ROLE KNOWS", 300)
 	for card in _view.get("cards", []):
 		var box := _card_box(bool(card.get("shared", false)), bool(card.get("arrived", false)))
@@ -339,6 +420,46 @@ func _render_cards() -> Control:
 			else:
 				var share := _button("SHARE %s'S CARD" % String(card.get("name", "")).to_upper(), "Share_" + String(card.get("role_id", "")))
 				var role_id := String(card.get("role_id", ""))
+				share.pressed.connect(func() -> void: share_card(role_id))
+				inner.add_child(share)
+		column.add_child(box)
+	return column
+
+## Class mode: who holds each note and its receipts, never its facts.
+func _render_private_cards() -> Control:
+	var column := _column(CrewScript.text("table", "cards_title_class"), 300)
+	for card in _view.get("cards", []):
+		var role_id := String(card.get("role_id", ""))
+		var arrived := bool(card.get("arrived", false))
+		var read := bool(card.get("read", false))
+		var shared := bool(card.get("shared", false))
+		var tokens := CrewScript.role_tokens(_crew, role_id, {"shift": str(int(card.get("arrives_shift", 1)))})
+		var box := _card_box(shared, arrived)
+		var inner := VBoxContainer.new()
+		inner.add_theme_constant_override("separation", 4)
+		box.add_child(inner)
+		var head := HBoxContainer.new()
+		head.add_theme_constant_override("separation", 8)
+		inner.add_child(head)
+		var chip := _label(" %s " % String(card.get("role", "")), 11, INK)
+		chip.add_theme_stylebox_override("normal", _box(CrewScript.role_color(role_id) if arrived else MUTED, Color(0, 0, 0, 0), 4, 0))
+		head.add_child(chip)
+		head.add_child(_label(String(card.get("name", "")), 16, IVORY))
+		inner.add_child(_wrap(CrewScript.text("table", "holder_line", tokens).to_upper(), 12, MUTED))
+		if not arrived:
+			inner.add_child(_wrap("Arrives at shift %d. Not yet available." % int(card.get("arrives_shift", 1)), 13, MUTED))
+		else:
+			var status_key := "status_shared" if shared else ("status_read" if read else "status_unread")
+			var status := _wrap(CrewScript.text("table", status_key, tokens), 12, GREEN if shared else (CYAN if read else MUSTARD))
+			status.name = "Status_" + role_id
+			inner.add_child(status)
+			var read_button := _button(CrewScript.text("table", "reread_button" if read else "read_button", tokens), "Read_" + role_id)
+			read_button.pressed.connect(func() -> void: read_card(role_id))
+			inner.add_child(read_button)
+			if shared:
+				inner.add_child(_wrap(CrewScript.text("table", "shared_hint", tokens), 12, MUTED))
+			elif read:
+				var share := _button(CrewScript.text("table", "share_button", tokens), "Share_" + role_id)
 				share.pressed.connect(func() -> void: share_card(role_id))
 				inner.add_child(share)
 		column.add_child(box)
@@ -584,6 +705,9 @@ func _render_confirmation() -> void:
 	var report := TableScript.ending_report(forecast)
 	if not report.is_empty():
 		inner.add_child(_wrap("SUNRISE RESULT · %s · %s" % [String(report.get("title", "")), String(report.get("summary", ""))], 15, GREEN if bool(report.get("unlocks_chapter2", false)) else RED))
+	var solo_note := _wrap(CrewScript.text("team_plan", "solo_note"), 12, MUTED)
+	solo_note.name = "SoloNote"
+	inner.add_child(solo_note)
 	var row := HBoxContainer.new()
 	row.alignment = BoxContainer.ALIGNMENT_END
 	row.add_theme_constant_override("separation", 8)
@@ -594,6 +718,107 @@ func _render_confirmation() -> void:
 	var confirm := _button("CONFIRM · SPACE", "ConfirmCommit")
 	confirm.pressed.connect(func() -> void: confirm_commit())
 	row.add_child(confirm)
+
+## Class mode confirmation: the exact plan, its forecast and one signature
+## row per role. The operator's lock-in is enabled only when all four signed
+## this plan.
+func _render_team_plan() -> void:
+	var gate: Dictionary = _view.get("gate", {})
+	var forecast: Dictionary = _view.get("gate_preview", {})
+	var box := _card_box(false, true)
+	box.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_content.add_child(box)
+	var scroll := ScrollContainer.new()
+	scroll.name = "TeamPlanScroll"
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
+	box.add_child(scroll)
+	var inner := VBoxContainer.new()
+	inner.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	inner.add_theme_constant_override("separation", 8)
+	scroll.add_child(inner)
+	inner.add_child(_wrap("%s · %s" % [CrewScript.text("team_plan", "title"), String(gate.get("commit_label", "COMMIT"))], 20, MUSTARD))
+	inner.add_child(_wrap("%s: “%s”" % [CrewScript.text("team_plan", "intro_speaker"), CrewScript.text("team_plan", "intro")], 14, CYAN))
+	inner.add_child(_wrap(CrewScript.text("team_plan", "instruction"), 14, IVORY))
+	if bool(gate.get("preview_only", false)):
+		inner.add_child(_wrap("This stages the shift 2 forecast for the drill. Nothing is committed and no time passes.", 13, MUTED))
+	else:
+		inner.add_child(_wrap("These consequences are final for this attempt. RETRY restores the checkpoint before this commit.", 13, MUTED))
+	for raw_shift in _view.get("shifts", []):
+		var shift := int(raw_shift)
+		var line := _wrap("SHIFT %d · %s" % [shift, _plan_summary(shift)], 14, IVORY)
+		line.name = "PlanLine_%d" % shift
+		inner.add_child(line)
+	for record in forecast.get("trace", []):
+		inner.add_child(_wrap(_trace_text(record), 13, RED if bool(record.get("blackout", false)) else IVORY))
+	inner.add_child(_wrap("Station after: " + _summary(forecast.get("final_state", {})) + "   (now " + _summary(_view.get("resources", {})) + ")", 14, CYAN))
+	for predicate in forecast.get("unsafe_predicates", []):
+		inner.add_child(_wrap("FLIGHT RULES STOP THE MISSION · " + _predicate_text(String(predicate)), 15, RED))
+	var report := TableScript.ending_report(forecast)
+	if not report.is_empty():
+		inner.add_child(_wrap("SUNRISE RESULT · %s · %s" % [String(report.get("title", "")), String(report.get("summary", ""))], 14, GREEN if bool(report.get("unlocks_chapter2", false)) else RED))
+	inner.add_child(HSeparator.new())
+	var signed: Array = _view.get("signed_roles", [])
+	var stale: Array = _view.get("stale_sign_offs", [])
+	var grid := GridContainer.new()
+	grid.name = "SignOffs"
+	grid.columns = 1 if _scale() > 1.0 else 2
+	grid.add_theme_constant_override("h_separation", 10)
+	grid.add_theme_constant_override("v_separation", 8)
+	inner.add_child(grid)
+	for role_id in CrewScript.ROLE_ORDER:
+		var tokens := CrewScript.role_tokens(_crew, String(role_id))
+		var is_signed: bool = signed.has(role_id)
+		var cell := _card_box(is_signed, true)
+		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var cell_inner := VBoxContainer.new()
+		cell_inner.add_theme_constant_override("separation", 4)
+		cell.add_child(cell_inner)
+		var head := HBoxContainer.new()
+		head.add_theme_constant_override("separation", 8)
+		cell_inner.add_child(head)
+		var chip := _label(" %s " % String(tokens.get("name", role_id)).to_upper(), 11, INK)
+		chip.add_theme_stylebox_override("normal", _box(CrewScript.role_color(String(role_id)), Color(0, 0, 0, 0), 4, 0))
+		head.add_child(chip)
+		head.add_child(_label(CrewScript.text("table", "holder_line", tokens).to_upper(), 12, MUTED))
+		var status_key := "signed" if is_signed else ("stale" if stale.has(role_id) else "waiting")
+		var status := _wrap(CrewScript.text("team_plan", status_key, tokens), 12, GREEN if is_signed else (RED if status_key == "stale" else MUSTARD))
+		status.name = "SignStatus_" + String(role_id)
+		cell_inner.add_child(status)
+		var sign := _button(CrewScript.text("team_plan", "sign_button", tokens), "SignOff_" + String(role_id))
+		sign.disabled = is_signed
+		var id := String(role_id)
+		sign.pressed.connect(func() -> void: sign_off(id))
+		cell_inner.add_child(sign)
+		grid.add_child(cell)
+	var unsigned := _unsigned_roles()
+	var gate_line := _wrap(CrewScript.text("team_plan", "operator_blocked", {"signed": str(CrewScript.ROLE_ORDER.size() - unsigned.size()), "total": str(CrewScript.ROLE_ORDER.size())}) if not unsigned.is_empty() else "All four roles signed this plan. The operator may lock it in.", 13, MUSTARD if not unsigned.is_empty() else GREEN)
+	gate_line.name = "TeamPlanGate"
+	_content.add_child(gate_line)
+	var row := HFlowContainer.new()
+	row.alignment = FlowContainer.ALIGNMENT_END
+	row.add_theme_constant_override("h_separation", 8)
+	row.add_theme_constant_override("v_separation", 6)
+	_content.add_child(row)
+	var back := _button(CrewScript.text("team_plan", "back_button"), "CancelCommit")
+	back.pressed.connect(cancel_confirm)
+	row.add_child(back)
+	var confirm := _button(CrewScript.text("team_plan", "operator_button"), "ConfirmCommit")
+	confirm.disabled = not unsigned.is_empty()
+	confirm.tooltip_text = String(gate_line.text)
+	confirm.pressed.connect(func() -> void: confirm_commit())
+	row.add_child(confirm)
+
+## "HEAT COZY · AIR MAKER +2 · GARDEN LIGHT FULL · WATER WALL HOLD" for one shift.
+func _plan_summary(shift: int) -> String:
+	var current: Dictionary = _view.get("selections", {}).get(shift, {})
+	var parts: Array = []
+	for field in TableScript.fields_for_shift(shift):
+		if current.has(field):
+			parts.append("%s %s" % [TableScript.field_label(String(field)), TableScript._value_label(String(field), current[field])])
+	if TableScript.is_day_shift(shift):
+		parts.push_front("HEAT DAY")
+	return " · ".join(parts)
 
 # --- Text helpers ------------------------------------------------------------
 
@@ -666,14 +891,51 @@ func _star(value) -> String:
 func _table() -> RefCounted:
 	return _route.mission_table()
 
+func _class_mode() -> bool:
+	return CrewScript.is_class(_crew)
+
+func _card(role_id: String) -> Dictionary:
+	for card in _view.get("cards", []):
+		if String(card.get("role_id", "")) == role_id:
+			return card
+	return {}
+
+## Roles that have not signed the plan currently on the table, in card order.
+func _unsigned_roles() -> Array:
+	var signed: Array = signed_roles() if _route != null else []
+	var result: Array = []
+	for role_id in CrewScript.ROLE_ORDER:
+		if not signed.has(role_id):
+			result.append(role_id)
+	return result
+
+func _unsigned_roles_after(role_id: String) -> Array:
+	var remaining := _unsigned_roles()
+	remaining.erase(role_id)
+	return remaining
+
+func _on_card_read(role_id: String) -> void:
+	if _route != null:
+		_table().mark_read(role_id, _committed())
+
+func _on_handoff_closed(read: Array) -> void:
+	if not visible:
+		return
+	_notice = ""
+	_focus_name = "Share_" + String(read.back()) if not read.is_empty() else ""
+	_render()
+
 func _committed() -> int:
 	return int(_view.get("committed_shift", 0)) if not _view.is_empty() else int(_route.director().query().get("current_shift", 0))
 
 func _refresh_view() -> void:
 	_view = _route.mission_table_view(_target_id)
+	_view["crew"] = _crew.duplicate(true)
+	_view["signed_roles"] = _table().signed_roles(_target_id, int(_view.get("committed_shift", 0)))
+	_view["stale_sign_offs"] = _table().stale_sign_offs(_target_id, int(_view.get("committed_shift", 0)))
 
 func _plan_key() -> String:
-	return JSON.stringify(_table().plan_for_gate(_target_id)) + "@" + str(_committed())
+	return _table().plan_key(_target_id, _committed())
 
 func _commit_reason() -> String:
 	if _view.is_empty():
@@ -720,7 +982,10 @@ func _apply_focus(target: Control) -> void:
 func _grab_first_focus() -> void:
 	for card in _view.get("cards", []):
 		if bool(card.get("arrived", false)) and not bool(card.get("shared", false)):
-			var share := find_child("Share_" + String(card.role_id), true, false) as Control
+			var control_name := "Share_" + String(card.role_id)
+			if _class_mode() and not bool(card.get("read", false)):
+				control_name = "Read_" + String(card.role_id)
+			var share := find_child(control_name, true, false) as Control
 			if share != null:
 				_focus_later(share)
 				return

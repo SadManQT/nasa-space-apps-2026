@@ -18,6 +18,7 @@ const CYAN := Color("#20B8C9")
 const GREEN := Color("#4CAF50")
 const PURPLE := Color("#8E5CC2")
 const PANELS_SCENE: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
+const CrewScript = preload("res://scripts/crew/crew_modes.gd")
 
 var _continue_button: Button
 var _begin_button: Button
@@ -38,6 +39,11 @@ var _accessibility := {
 	"reduced_motion": false,
 }
 var _footer_status: Label
+## Crew chosen in the briefing: Solo (one player, all roles) or Class 2–4.
+var _crew: Dictionary = {}
+var _crew_buttons: Dictionary = {}
+var _crew_summary: Label
+var _crew_seats: Label
 
 func _ready() -> void:
 	var loaded_theme := load("res://resources/ui/lla_theme.tres") as Theme
@@ -80,6 +86,15 @@ func query_snapshot() -> Dictionary:
 
 func accessibility_settings() -> Dictionary:
 	return _accessibility.duplicate(true)
+
+## The crew setting New Expedition starts with ({"mode", "players"}).
+func crew_settings() -> Dictionary:
+	return CrewScript.normalise(_crew)
+
+## Chooses the crew for the next expedition; invalid input falls back to Solo.
+func set_crew(crew: Dictionary) -> void:
+	_crew = CrewScript.normalise(crew)
+	_refresh_crew_choice()
 
 func captions_visible() -> bool:
 	return bool(_accessibility.get("captions", true))
@@ -364,8 +379,8 @@ func _build_footer() -> Control:
 func _build_briefing() -> void:
 	_briefing = _panel(Color(0.03, 0.05, 0.10, 0.98), 18, Color(0.95, 0.76, 0.22, 0.75))
 	_briefing.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	_briefing.position = Vector2(-390, -270)
-	_briefing.size = Vector2(780, 540)
+	_briefing.position = Vector2(-390, -320)
+	_briefing.size = Vector2(780, 640)
 	_briefing.hide()
 	add_child(_briefing)
 	var margin := MarginContainer.new()
@@ -401,6 +416,7 @@ func _build_briefing() -> void:
 	content.add_child(roles)
 	for item in [["KAI", "POWER & HEAT", ORANGE], ["AMARA", "AIR & MEASUREMENT", CYAN], ["MEI", "GARDEN & PLANT CARE", GREEN], ["RAFI", "SAFETY & FIELD OPERATIONS", PURPLE]]:
 		roles.add_child(_role_card(item[0], item[1], item[2]))
+	content.add_child(_build_crew_choice())
 	var qualifier := Label.new()
 	qualifier.text = "SIMULATED · Training scenario\nThe station, cadets, 2046 dates and game resources are fictional."
 	qualifier.add_theme_font_size_override("font_size", 13)
@@ -419,10 +435,78 @@ func _build_briefing() -> void:
 	_briefing_start_button = _button("ENTER AURORA  ›", MUSTARD, INK)
 	_briefing_start_button.pressed.connect(func() -> void:
 		_hide_briefing()
-		emit_command("new_campaign", "campaign")
+		emit_command("new_campaign", "campaign", {"crew": crew_settings()})
 		new_expedition_requested.emit()
 	)
 	actions.add_child(_briefing_start_button)
+
+## Solo or Class (2–4 players on this machine). Every word and the seat plans
+## come from crew_modes.json; the choice travels with the new expedition.
+func _build_crew_choice() -> Control:
+	var box := VBoxContainer.new()
+	box.name = "CrewChoice"
+	box.add_theme_constant_override("separation", 6)
+	var heading := Label.new()
+	heading.text = CrewScript.text("menu", "heading")
+	heading.add_theme_font_size_override("font_size", 13)
+	heading.add_theme_color_override("font_color", CYAN)
+	box.add_child(heading)
+	var row := HFlowContainer.new()
+	row.add_theme_constant_override("h_separation", 8)
+	row.add_theme_constant_override("v_separation", 6)
+	box.add_child(row)
+	var options: Array = [{"mode": CrewScript.SOLO, "players": 1, "label": CrewScript.text("menu", "solo_button")}]
+	var class_info := CrewScript.mode_info(CrewScript.CLASS)
+	for count in range(int(class_info.get("players_min", 2)), int(class_info.get("players_max", 4)) + 1):
+		options.append({"mode": CrewScript.CLASS, "players": count, "label": CrewScript.text("menu", "class_button", {"players": str(count)})})
+	for option in options:
+		var button := _button(String(option.label), Color(0.12, 0.18, 0.28), IVORY)
+		button.name = "Crew_%s_%d" % [String(option.mode), int(option.players)]
+		button.toggle_mode = true
+		button.custom_minimum_size = Vector2(0, 44)
+		button.add_theme_font_size_override("font_size", 13)
+		var choice := {"mode": String(option.mode), "players": int(option.players)}
+		button.pressed.connect(func() -> void:
+			set_crew(choice)
+			button.grab_focus()
+		)
+		row.add_child(button)
+		_crew_buttons[button.name] = button
+	_crew_summary = Label.new()
+	_crew_summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_crew_summary.add_theme_font_size_override("font_size", 13)
+	_crew_summary.add_theme_color_override("font_color", IVORY)
+	box.add_child(_crew_summary)
+	_crew_seats = Label.new()
+	_crew_seats.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_crew_seats.add_theme_font_size_override("font_size", 12)
+	_crew_seats.add_theme_color_override("font_color", MUTED)
+	box.add_child(_crew_seats)
+	_crew = CrewScript.default_crew()
+	_refresh_crew_choice()
+	return box
+
+func _refresh_crew_choice() -> void:
+	if _crew_summary == null:
+		return
+	var crew := crew_settings()
+	for name in _crew_buttons:
+		var button := _crew_buttons[name] as Button
+		var selected: bool = name == "Crew_%s_%d" % [String(crew.mode), int(crew.players)]
+		button.button_pressed = selected
+		button.text = ("● " if selected else "") + String(button.get_meta("lla_label", button.text.trim_prefix("● ")))
+		button.set_meta("lla_label", button.text.trim_prefix("● "))
+		if selected:
+			button.add_theme_stylebox_override("normal", _button_style(Color("#2C3D63"), 1.0, MUSTARD))
+			button.add_theme_stylebox_override("pressed", _button_style(Color("#2C3D63"), 1.0, MUSTARD))
+		else:
+			button.add_theme_stylebox_override("normal", _button_style(Color(0.12, 0.18, 0.28), 0.88))
+			button.add_theme_stylebox_override("pressed", _button_style(Color("#D8A915"), 1.0))
+	_crew_summary.text = String(CrewScript.mode_info(String(crew.mode)).get("summary", ""))
+	if CrewScript.is_class(crew):
+		_crew_seats.text = CrewScript.text("menu", "seat_plan_prefix") + CrewScript.seat_plan_text(crew) + "\n" + CrewScript.text("menu", "print_hint")
+	else:
+		_crew_seats.text = CrewScript.text("menu", "print_hint")
 
 func _build_science() -> void:
 	_science = _panel(Color(0.03, 0.05, 0.10, 0.99), 18, Color(0.13, 0.72, 0.78, 0.68))

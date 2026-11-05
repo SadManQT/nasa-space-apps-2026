@@ -149,6 +149,7 @@ func _launch_campaign(snapshot: Dictionary) -> void:
 		return
 	_launching = true
 	var settings := _menu.accessibility_settings() if is_instance_valid(_menu) else {}
+	var crew := _menu.crew_settings() if is_instance_valid(_menu) else {}
 	_loading_card = LoadingCard.new()
 	add_child(_loading_card)
 	await get_tree().process_frame
@@ -173,6 +174,7 @@ func _launch_campaign(snapshot: Dictionary) -> void:
 	_campaign.set("prepared_content", preparation.content)
 	_campaign.set("initial_snapshot", snapshot)
 	_campaign.set("initial_accessibility", settings)
+	_campaign.set("initial_crew", crew)
 	_campaign.set("save_path", save_path)
 	var crew := preparation.crew
 	crew.get_parent().remove_child(crew)

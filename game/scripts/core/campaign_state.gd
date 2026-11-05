@@ -7,6 +7,7 @@ const SCHEMA_VERSION := 3
 const CONTENT_REVISION := "story-data-extended-02-systems-contract"
 const PlantScript = preload("res://scripts/biology/plant_service.gd")
 const ContentScript = preload("res://scripts/content/content_loader.gd")
+const CrewScript = preload("res://scripts/crew/crew_modes.gd")
 # Reserved storage identity only; no proposed dedication text is introduced.
 const EXTRA_STORY_CHOICES := {"EX-CH03-S11-DEDICATION": "EX-CH03-S11"}
 static var _story_choices: Dictionary = {}
@@ -146,6 +147,12 @@ static func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 			return {"valid": false, "reason": "Campaign accessibility setting must be a boolean: " + key}
 	if snapshot.has("blackout_count") and (not _finite_number(snapshot.blackout_count) or float(snapshot.blackout_count) != floor(float(snapshot.blackout_count)) or float(snapshot.blackout_count) < 0):
 		return {"valid": false, "reason": "Campaign blackout count must be a nonnegative integer."}
+	# Crew mode (Solo or Class) is optional so saves from before it still load;
+	# when present it must be a complete, valid setting.
+	if snapshot.has("crew"):
+		var crew_problem := CrewScript.problem(snapshot.crew)
+		if not crew_problem.is_empty():
+			return {"valid": false, "reason": "Campaign crew setting is invalid: " + crew_problem}
 	if snapshot.has("campaign_ledgers"):
 		var book = snapshot.campaign_ledgers
 		if not book is Dictionary:
@@ -159,6 +166,10 @@ static func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 			if not puzzle is Dictionary or not puzzle.get("operations") is Dictionary or not puzzle.get("samples") is Array or not _finite_number(puzzle.get("phase")) or float(puzzle.phase) < 0 or float(puzzle.phase) != floor(float(puzzle.phase)):
 				return {"valid": false, "reason": "Campaign puzzle ledger shape is invalid."}
 	return {"valid": true, "reason": "Campaign state shape is valid."}
+
+## The expedition's crew setting, normalised (Solo unless the save says Class).
+static func crew_of(snapshot: Dictionary) -> Dictionary:
+	return CrewScript.normalise(snapshot.get("crew", {}))
 
 ## Resolves a choice's owning scene from the existing campaign catalog.
 static func story_choice_scene_id(choice_id: String) -> String:

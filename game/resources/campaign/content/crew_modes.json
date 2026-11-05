@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "content_revision": "crew-modes-v1",
+  "source": "docs/TEAM.md registered project (four-player cooperative, shared decisions, private clues); execution/SYS_15_ROLE_MODES.md; docs/GAMEPLAY_DESIGN_FINAL.md section 5 (Solo, Family/Class); game-design/10_GAMEPLAY_SYSTEMS.md 'Role facts and communication debrief'; full-game-story/STORY_FULL.md EX-CH01-S07 (role acknowledgement before the commit). Role facts themselves stay in p02_mission_table.json.",
+  "default_mode": "solo",
+  "modes": {
+    "solo": {
+      "label": "SOLO",
+      "players_min": 1,
+      "players_max": 1,
+      "summary": "One player holds all four roles. Every crew note is on the Mission Table and in the journal.",
+      "sign_off": "automatic"
+    },
+    "class": {
+      "label": "CLASS",
+      "players_min": 2,
+      "players_max": 4,
+      "summary": "Two to four players share this machine. Crew notes stay private: read yours one player at a time, discuss, then every role signs the team plan before the operator locks it in.",
+      "sign_off": "each_role"
+    }
+  },
+  "roles": {
+    "kai": {"name": "Kai", "duty": "Power and heat", "color": "#F26B21"},
+    "amara": {"name": "Amara", "duty": "Atmosphere", "color": "#20B8C9"},
+    "mei": {"name": "Mei", "duty": "Horticulture", "color": "#4CAF50"},
+    "rafi": {"name": "Rafi", "duty": "Safety", "color": "#8E5CC2"}
+  },
+  "role_order": ["kai", "amara", "mei", "rafi"],
+  "seat_plans": {
+    "2": [
+      {"seat": 1, "role_ids": ["kai", "mei"]},
+      {"seat": 2, "role_ids": ["amara", "rafi"]}
+    ],
+    "3": [
+      {"seat": 1, "role_ids": ["kai", "amara"]},
+      {"seat": 2, "role_ids": ["mei"]},
+      {"seat": 3, "role_ids": ["rafi"]}
+    ],
+    "4": [
+      {"seat": 1, "role_ids": ["kai"]},
+      {"seat": 2, "role_ids": ["amara"]},
+      {"seat": 3, "role_ids": ["mei"]},
+      {"seat": 4, "role_ids": ["rafi"]}
+    ]
+  },
+  "seat_plan_note": "Mei and Rafi never share a seat: the shift 3-4 decision (when to fill the wall and when to return the water) only becomes clear when their two notes meet in discussion (10_GAMEPLAY_SYSTEMS.md, combined-evidence decision).",
+  "seat_label": "Player {seat}",
+  "solo_holder": "You",
+  "handoff": {
+    "eyebrow": "PRIVATE CREW NOTE · {index} OF {total}",
+    "cover_title": "Pass this screen to {holder}.",
+    "cover_line": "Everyone else, look away. Nothing on the next screen is shown to the crew.",
+    "cover_hint": "Using printed cards? Hand {name}'s card to {holder} instead and press HIDE.",
+    "reveal_button": "I HOLD {NAME}'S ROLE · SHOW MY NOTE",
+    "hide_button": "HIDE · PASS ON",
+    "hide_last_button": "HIDE · BACK TO THE CREW",
+    "cancel_button": "NOT NOW",
+    "read_footer": "Tell the crew what matters in your own words. Keep the numbers you need. This screen is private.",
+    "none_arrived": "No crew note has arrived yet. Notes arrive as the night plan unfolds."
+  },
+  "table": {
+    "mode_chip": "{mode} · {players} PLAYERS",
+    "cards_title_class": "CREW NOTES · PRIVATE UNTIL EACH ROLE SHARES",
+    "holder_line": "{holder} · {duty}",
+    "status_unread": "○ NOT READ YET",
+    "status_read": "✓ READ PRIVATELY",
+    "status_shared": "✓ SHARED · TOLD THE CREW",
+    "read_button": "READ PRIVATELY",
+    "reread_button": "READ AGAIN",
+    "share_button": "MARK {NAME}'S NOTE SHARED",
+    "share_requires_read": "{name}'s note has not been read privately yet. Pass the screen or the printed card to {holder} first.",
+    "shared_hint": "The crew heard it from {holder}; the numbers stay on the printed card or the private screen."
+  },
+  "team_plan": {
+    "title": "TEAM PLAN · EVERY ROLE SIGNS",
+    "intro_speaker": "Rafi",
+    "intro": "Four recommendations. One confirmed plan.",
+    "intro_id": "EX-CH01-S07-L04",
+    "instruction": "Each role reads the plan and signs it. The operator locks it in only after all four signatures.",
+    "sign_button": "SIGN OFF AS {NAME}",
+    "signed": "✓ SIGNED",
+    "waiting": "○ WAITING",
+    "stale": "! PLAN CHANGED · SIGN AGAIN",
+    "incomplete": "Set every choice and read the forecast before the crew signs.",
+    "operator_button": "OPERATOR · LOCK IN · SPACE",
+    "operator_blocked": "Every role signs before the operator locks in ({signed} of {total}).",
+    "back_button": "BACK · ESC",
+    "solo_note": "SOLO · you hold all four roles, so no sign-off round is needed.",
+    "changed_notice": "The plan changed; earlier signatures no longer apply."
+  },
+  "menu": {
+    "heading": "WHO IS PLAYING?",
+    "solo_button": "SOLO · 1 PLAYER",
+    "class_button": "CLASS · {players} PLAYERS",
+    "seat_plan_prefix": "SEATS · ",
+    "seat_plan_joiner": " and ",
+    "print_hint": "Printable crew notes for classrooms: docs/classroom/role_cards (PDF and PNG)."
+  },
+  "settings": {
+    "heading": "CREW MODE",
+    "note": "Changeable any time. Class mode hides crew-note facts from the shared screen and asks every role to sign the team plan."
+  },
+  "print": {
+    "title": "LAST LIGHT ACADEMY · CREW NOTES",
+    "subtitle": "Seven Shifts, the night plan · Class mode · one card per role · private until you choose to share",
+    "how_to": [
+      "Deal one card per role. With 2 or 3 players, use the seat plan below.",
+      "Read your card privately. Tell the crew what matters in your own words.",
+      "Discuss. Then each role signs the team plan on screen before the operator locks it in.",
+      "Cards arrive at different shifts: keep later cards face down until the screen says they have arrived."
+    ],
+    "arrives": "Arrives at shift {shift}",
+    "private_stamp": "PRIVATE · {holder}",
+    "footer": "Training units, not real measurements. Aurora Station, the cadets and the 2046 dates are fictional. Independent team project · not NASA-endorsed."
+  }
+}

@@ -5,6 +5,8 @@ const Outpost = preload("res://scripts/ui/outpost_status.gd")
 const PANELS_SCENE: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
 const MISSION_TABLE_SCENE: PackedScene = preload("res://scenes/ui/mission_table_panel.tscn")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
+const HANDOFF_SCENE: PackedScene = preload("res://scenes/ui/role_card_handoff.tscn")
+const CrewScript = preload("res://scripts/crew/crew_modes.gd")
 const IVORY := Color("#ECEEF0")
 const MUTED := Color("#A8B4C8")
 const CYAN := Color("#20B8C9")
@@ -15,6 +17,9 @@ const RED := Color("#E56B6F")
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
 var mission_table: MissionTablePanel
+## Class mode: the privacy hand-off for crew notes outside the Mission Table.
+var crew_cards: RoleCardHandoff
+var _crew_button: Button
 var _title: Label
 var _meta: Label
 var _objective: Label
@@ -60,6 +65,12 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
 	mission_table.closed.connect(func(_target: String) -> void: _on_panel_closed("mission_table"))
 	mission_table.commit_requested.connect(_on_mission_table_commit)
+	crew_cards = HANDOFF_SCENE.instantiate() as RoleCardHandoff
+	crew_cards.name = "CrewCards"
+	add_child(crew_cards)
+	crew_cards.card_read.connect(_on_crew_card_read)
+	crew_cards.finished.connect(func(_read: Array) -> void: _on_panel_closed("crew_notes"))
+	crew_cards.cancelled.connect(func() -> void: _on_panel_closed("crew_notes"))
 	_resume_pending = bool(runtime.incremental_loading) and not runtime.initial_snapshot.is_empty()
 	_refresh_query()
 	refresh_scene({})
@@ -82,6 +93,7 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 	_build_targets()
 	_refresh_query()
 	apply_accessibility()
+	apply_crew()
 	_offer_resume_card()
 
 func refresh_after_action(result: Dictionary) -> void:
@@ -251,6 +263,11 @@ func _build() -> void:
 	decision.pressed.connect(func() -> void: panels.open_panel("puzzle"))
 	tools.add_child(decision)
 	decision.name = "DecisionReview"
+	_crew_button = _button("CREW NOTES")
+	_crew_button.name = "CrewNotes"
+	_crew_button.visible = false
+	_crew_button.pressed.connect(func() -> void: open_crew_notes())
+	tools.add_child(_crew_button)
 	var pause := _button("PAUSE")
 	pause.pressed.connect(func() -> void: panels.open_panel("pause"))
 	tools.add_child(pause)
@@ -347,8 +364,47 @@ func open_mission_table(target_id: String) -> bool:
 		return false
 	if panels != null and not panels.active_panel().is_empty():
 		return false
-	mission_table.open(runtime.route, target_id, runtime.query().get("accessibility", {}))
+	var settings: Dictionary = runtime.query().get("accessibility", {}).duplicate(true)
+	settings["crew"] = runtime.query().get("crew", {})
+	mission_table.open(runtime.route, target_id, settings)
 	return true
+
+## Class mode: passes every delivered crew note round, one holder at a time,
+## without opening the Mission Table. Reading pauses the expedition like a
+## panel; the read receipts land in the route's Mission Table.
+func open_crew_notes() -> bool:
+	if runtime == null or crew_cards == null or runtime.is_cutscene_active() or crew_cards.is_open():
+		return false
+	if (mission_table != null and mission_table.is_open()) or (panels != null and not panels.active_panel().is_empty()):
+		return false
+	if not runtime.route.has_method("mission_table"):
+		return false
+	var query := runtime.query()
+	var crew: Dictionary = query.get("crew", {})
+	var cards: Array = []
+	for card in runtime.route.mission_table().role_cards(int(query.get("current_shift", 0))):
+		if bool(card.get("arrived", false)):
+			cards.append(card)
+	if cards.is_empty():
+		show_status(CrewScript.text("handoff", "none_arrived"))
+		return false
+	if not crew_cards.open(cards, crew, query.get("accessibility", {})):
+		return false
+	_on_panel_opened("crew_notes")
+	return true
+
+## Shows the CREW NOTES tool only in Class mode.
+func apply_crew() -> void:
+	if runtime == null or _crew_button == null:
+		return
+	var crew: Dictionary = runtime.query().get("crew", {})
+	_crew_button.visible = CrewScript.is_class(crew)
+	_crew_button.text = "CREW NOTES · " + CrewScript.mode_label(crew) if CrewScript.is_class(crew) else "CREW NOTES"
+
+func _on_crew_card_read(role_id: String) -> void:
+	if runtime == null or not runtime.route.has_method("mission_table"):
+		return
+	runtime.route.mission_table().mark_read(role_id, int(runtime.query().get("current_shift", 0)))
 
 func _on_mission_table_commit(target_id: String, plan: Dictionary) -> void:
 	if runtime == null:
@@ -482,7 +538,7 @@ func _layout_outpost() -> void:
 
 func _scale_text(node: Node, scale_factor: float) -> void:
 	for child in node.get_children():
-		if child == panels or child == mission_table:
+		if child == panels or child == mission_table or child == crew_cards:
 			continue
 		if child is Control:
 			if not child.has_meta("lla_base_font_size"):
@@ -510,7 +566,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_modal_button_states.clear()
 		return
 	for child in node.get_children():
-		if child == panels or child == mission_table:
+		if child == panels or child == mission_table or child == crew_cards:
 			continue
 		if child is BaseButton:
 			if not _modal_button_states.has(child):

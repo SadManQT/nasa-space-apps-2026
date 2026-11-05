@@ -22,6 +22,7 @@ const MUSTARD := Color("#F2C230")
 const CYAN := Color("#20B8C9")
 const GREEN := Color("#4CAF50")
 
+const CrewScript = preload("res://scripts/crew/crew_modes.gd")
 const PANEL_IDS := [
 	"objective",
 	"dialogue_captions",
@@ -499,6 +500,10 @@ func _render_settings() -> void:
 		row.add_child(slider)
 		row.add_child(percent)
 		_body.add_child(row)
+	# Only inside an expedition (a command sink owns the change); the title
+	# chooses the crew in the New Expedition briefing instead.
+	if _query.has("crew") and _command_sink.is_valid():
+		_render_crew_setting()
 	var labels := Label.new()
 	labels.text = (
 		"CAPTIONS: exact text remains available when voice is missing; essential sounds are captioned too.\n"
@@ -509,6 +514,46 @@ func _render_settings() -> void:
 	labels.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	labels.add_theme_color_override("font_color", MUTED)
 	_body.add_child(labels)
+
+## Crew mode (Solo / Class 2–4) inside an expedition. The choice is a
+## `set_crew` command to the runtime; the panel mirrors it at once.
+func _render_crew_setting() -> void:
+	var crew: Dictionary = CrewScript.normalise(_query.get("crew", {}))
+	var heading := Label.new()
+	heading.text = CrewScript.text("settings", "heading")
+	heading.add_theme_color_override("font_color", CYAN)
+	_body.add_child(heading)
+	var row := HFlowContainer.new()
+	row.name = "CrewRow"
+	row.add_theme_constant_override("h_separation", 8)
+	row.add_theme_constant_override("v_separation", 6)
+	_body.add_child(row)
+	var options: Array = [{"mode": CrewScript.SOLO, "players": 1, "label": CrewScript.text("menu", "solo_button")}]
+	var class_info := CrewScript.mode_info(CrewScript.CLASS)
+	for count in range(int(class_info.get("players_min", 2)), int(class_info.get("players_max", 4)) + 1):
+		options.append({"mode": CrewScript.CLASS, "players": count, "label": CrewScript.text("menu", "class_button", {"players": str(count)})})
+	for option in options:
+		var selected: bool = String(option.mode) == String(crew.mode) and int(option.players) == int(crew.players)
+		var button := _button(("● " if selected else "") + String(option.label))
+		button.name = "Crew_%s_%d" % [String(option.mode), int(option.players)]
+		button.toggle_mode = true
+		button.button_pressed = selected
+		var choice := {"mode": String(option.mode), "players": int(option.players)}
+		button.pressed.connect(func() -> void:
+			_query["crew"] = choice.duplicate(true)
+			emit_command("set_crew", "crew", choice, "crew")
+			_render_active_panel()
+			var next_focus := _body.find_child(button.name, true, false) as Control
+			if next_focus != null:
+				next_focus.grab_focus()
+		)
+		row.add_child(button)
+	var note := Label.new()
+	note.name = "CrewNote"
+	note.text = String(CrewScript.mode_info(String(crew.mode)).get("summary", "")) + (" " + CrewScript.text("menu", "seat_plan_prefix") + CrewScript.seat_plan_text(crew) if CrewScript.is_class(crew) else "") + "\n" + CrewScript.text("settings", "note")
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	note.add_theme_color_override("font_color", MUTED)
+	_body.add_child(note)
 
 func _set_settings(settings: Dictionary, emit_change: bool) -> void:
 	var focus_key := ""

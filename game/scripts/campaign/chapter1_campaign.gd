@@ -20,6 +20,9 @@ const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 
 @export var initial_snapshot: Dictionary = {}
 @export var initial_accessibility: Dictionary = {}
+## Crew setting chosen on New Expedition ({"mode": "solo"|"class", "players"});
+## a resumed checkpoint keeps the crew it was saved with.
+@export var initial_crew: Dictionary = {}
 
 # Direct scene fixtures may still use the synchronous API. Production boot
 # always enables incremental loading and supplies the title's prepared resources.
@@ -90,6 +93,8 @@ func _start_session() -> void:
 	presentation["paused"] = false
 	for key in initial_accessibility:
 		presentation["accessibility"][key] = initial_accessibility[key]
+	if initial_snapshot.is_empty() and not initial_crew.is_empty():
+		presentation["crew"] = CrewModes.normalise(initial_crew)
 	director.restore_snapshot(presentation)
 	_sync_route_projection()
 	LoadTrace.end("route_profile", stamp)
@@ -195,6 +200,7 @@ func query() -> Dictionary:
 	result["dialogue_lines"] = current_dialogue()
 	result["journal_entries"] = CampaignKnowledge.journal(director.snapshot())
 	result["accessibility"] = director.snapshot().get("accessibility", {})
+	result["crew"] = CampaignState.crew_of(director.snapshot())
 	var puzzle_ids: Array = []
 	for target in targets_for_current_scene():
 		var puzzle_id := String(target.get("puzzle_id", ""))
@@ -487,6 +493,20 @@ func handle_ui_command(command: Dictionary, preview_only: bool = false) -> Dicti
 			audio.captions_enabled = bool(payload.get("captions", true))
 		if hud != null:
 			hud.apply_accessibility()
+		return restored
+	if verb == "set_crew":
+		var crew_problem := CrewModes.problem(payload)
+		if not crew_problem.is_empty():
+			return {"accepted": false, "reason": crew_problem}
+		var next := director.snapshot()
+		next["crew"] = CrewModes.normalise(payload)
+		var restored := director.restore_snapshot(next)
+		if bool(restored.get("accepted", false)) and route.has_method("mission_table"):
+			# Signatures belong to the crew that gave them.
+			route.mission_table().clear_sign_offs()
+		_save_campaign()
+		if hud != null:
+			hud.apply_crew()
 		return restored
 	return {"accepted": false, "reason": "The campaign runtime does not own UI command " + verb}
 
