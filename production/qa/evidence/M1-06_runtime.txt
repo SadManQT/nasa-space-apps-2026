@@ -1,0 +1,10 @@
+LOC-01: scripted PlayerController walk, floor contact and wall/prop/door collision probes executed.
+LOC-01 windowed frame ms: p50=16.72 p95=17.57; draw calls=79 objects=91
+LOC-02: scripted PlayerController walk, floor contact and wall/prop/door collision probes executed.
+LOC-02 windowed frame ms: p50=16.65 p95=17.48; draw calls=73 objects=73
+LOC-03: scripted PlayerController walk, floor contact and wall/prop/door collision probes executed.
+LOC-03 windowed frame ms: p50=16.67 p95=17.37; draw calls=79 objects=84
+LOC-04: scripted PlayerController walk, floor contact and wall/prop/door collision probes executed.
+LOC-04 windowed frame ms: p50=16.69 p95=17.39; draw calls=76 objects=80
+Campaign with HUD/cast frame ms (after 2 s settle): p50=16.63 p95=17.71; draw calls=524
+HABITAT ROOMS RESULT: PASS (360 checks, 0 failures)

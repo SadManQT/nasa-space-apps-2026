@@ -1,12 +1,12 @@
 {
- "schema_version": 1,
+ "schema_version": 2,
  "room_id": "LOC-04",
- "description": "Authored training greybox; architecture is fictional, not a surveyed lunar site.",
+ "description": "Approved M1-04 habitat assembly; fictional Aurora architecture, metre-grid kit with PBR materials.",
  "bounds_m": [
   8.0,
   6.0
  ],
- "ceiling_height_m": 3.6,
+ "ceiling_height_m": 2.6,
  "floor_color": "#263343",
  "wall_color": "#939ba6",
  "accent_color": "#f2c230",
@@ -15,13 +15,89 @@
    "id": "PR_CrewSeat",
    "path": "res://assets/props/PR_CrewSeat/PR_CrewSeat.glb",
    "position": [
-    -2.3,
+    -2.08,
     0,
-    -1
+    0.9
    ],
    "rotation_degrees": [
     0,
+    180,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "shelter_seat_2",
+   "path": "res://assets/props/PR_CrewSeat/PR_CrewSeat.glb",
+   "position": [
+    -1.04,
     0,
+    0.9
+   ],
+   "rotation_degrees": [
+    0,
+    180,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "shelter_seat_3",
+   "path": "res://assets/props/PR_CrewSeat/PR_CrewSeat.glb",
+   "position": [
+    0,
+    0,
+    0.9
+   ],
+   "rotation_degrees": [
+    0,
+    180,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "shelter_seat_4",
+   "path": "res://assets/props/PR_CrewSeat/PR_CrewSeat.glb",
+   "position": [
+    1.04,
+    0,
+    0.9
+   ],
+   "rotation_degrees": [
+    0,
+    180,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "shelter_seat_5",
+   "path": "res://assets/props/PR_CrewSeat/PR_CrewSeat.glb",
+   "position": [
+    2.08,
+    0,
+    0.9
+   ],
+   "rotation_degrees": [
+    0,
+    180,
     0
    ],
    "scale": [
@@ -36,7 +112,7 @@
    "position": [
     0,
     0,
-    -2.5
+    -2.6
    ],
    "rotation_degrees": [
     0,
@@ -47,34 +123,15 @@
     1,
     1,
     1
-   ]
-  },
-  {
-   "id": "PR_CrewBunk",
-   "path": "res://assets/props/PR_CrewBunk/PR_CrewBunk.glb",
-   "position": [
-    -3,
-    0,
-    1
-   ],
-   "rotation_degrees": [
-    0,
-    90,
-    0
-   ],
-   "scale": [
-    0.85,
-    0.85,
-    0.85
    ]
   },
   {
    "id": "PR_SupplyBundles",
    "path": "res://assets/props/PR_SupplyBundles/PR_SupplyBundles.glb",
    "position": [
-    2.5,
+    2.7,
     0,
-    -2
+    -1.8
    ],
    "rotation_degrees": [
     0,
@@ -82,18 +139,18 @@
     0
    ],
    "scale": [
-    0.85,
-    0.85,
-    0.85
+    0.65,
+    0.65,
+    0.65
    ]
   },
   {
    "id": "PR_HatchDoor",
    "path": "res://assets/props/PR_HatchDoor/PR_HatchDoor.glb",
    "position": [
-    3,
+    -3.505,
     0,
-    1
+    -1.4
    ],
    "rotation_degrees": [
     0,
@@ -122,14 +179,19 @@
     0,
     1.0,
     0
+   ],
+   "approach_m": [
+    -2.5,
+    0,
+    -0.6
    ]
   },
   {
    "label": "Water wall and return valve",
    "position": [
-    0.0,
-    1.0,
-    -2.0
+    0,
+    1.35,
+    -2.35
    ],
    "target_id": "safe_water_wall",
    "verb": "Inspect",
@@ -138,6 +200,11 @@
     0,
     1.0,
     0
+   ],
+   "approach_m": [
+    0,
+    0,
+    -0.6
    ]
   },
   {
@@ -154,14 +221,19 @@
     0,
     1.0,
     0
+   ],
+   "approach_m": [
+    1.8,
+    0,
+    -0.6
    ]
   },
   {
    "label": "Safe Room hatch",
    "position": [
-    2.6,
+    -2.95,
     1.2,
-    1
+    -1.4
    ],
    "target_id": "safe_hatch",
    "verb": "OpenDoor",
@@ -170,29 +242,34 @@
     0,
     1.0,
     0
+   ],
+   "approach_m": [
+    -2.15,
+    0,
+    -1.4
    ]
   }
  ],
  "anchors": {
   "safe_amara": [
-   -0.8,
-   0.0,
-   0.8
+   -1.04,
+   0,
+   0.6
   ],
   "safe_ferreira": [
-   0.0,
-   0.0,
-   1.8
+   0,
+   0,
+   0.6
   ],
   "safe_kai": [
-   -1.8,
-   0.0,
-   1.8
+   -2.08,
+   0,
+   0.6
   ],
   "safe_mei": [
-   0.8,
-   0.0,
-   0.8
+   1.04,
+   0,
+   0.6
   ],
   "safe_player": [
    0,
@@ -200,9 +277,9 @@
    -0.4
   ],
   "safe_rafi": [
-   1.8,
-   0.0,
-   1.8
+   2.08,
+   0,
+   0.6
   ]
  },
  "fixtures": [
@@ -219,13 +296,14 @@
     0.1
    ],
    "color": "#142538",
-   "transparent": false
+   "transparent": false,
+   "finish": "screen"
   },
   {
    "id": "response",
    "position": [
     2.5,
-    1.4,
+    1.65,
     -2.65
    ],
    "size": [
@@ -234,7 +312,141 @@
     0.1
    ],
    "color": "#142538",
+   "transparent": false,
+   "finish": "screen"
+  },
+  {
+   "id": "water_west",
+   "position": [
+    -2,
+    1.2,
+    -2.85
+   ],
+   "size": [
+    1.6,
+    2.2,
+    0.18
+   ],
+   "color": "#2E8BC0",
    "transparent": false
+  },
+  {
+   "id": "water_east",
+   "position": [
+    2,
+    1.2,
+    -2.85
+   ],
+   "size": [
+    1.6,
+    2.2,
+    0.18
+   ],
+   "color": "#2E8BC0",
+   "transparent": false
+  },
+  {
+   "id": "seed_latch",
+   "position": [
+    0,
+    0.55,
+    -2
+   ],
+   "size": [
+    0.8,
+    1.1,
+    0.55
+   ],
+   "color": "#1F2A44",
+   "transparent": false
+  },
+  {
+   "id": "bundle_slot_1",
+   "position": [
+    0.9,
+    0.12,
+    -1.9
+   ],
+   "size": [
+    0.46,
+    0.24,
+    0.62
+   ],
+   "color": "#F26B21",
+   "transparent": false
+  },
+  {
+   "id": "bundle_slot_2",
+   "position": [
+    1.42,
+    0.12,
+    -1.9
+   ],
+   "size": [
+    0.46,
+    0.24,
+    0.62
+   ],
+   "color": "#F26B21",
+   "transparent": false
+  },
+  {
+   "id": "bundle_slot_3",
+   "position": [
+    1.94,
+    0.12,
+    -1.9
+   ],
+   "size": [
+    0.46,
+    0.24,
+    0.62
+   ],
+   "color": "#F26B21",
+   "transparent": false
+  },
+  {
+   "id": "bundle_slot_4",
+   "position": [
+    2.46,
+    0.12,
+    -1.9
+   ],
+   "size": [
+    0.46,
+    0.24,
+    0.62
+   ],
+   "color": "#F26B21",
+   "transparent": false
+  },
+  {
+   "id": "inventory_lamp",
+   "position": [
+    -1.88,
+    1.24,
+    -2.68
+   ],
+   "size": [
+    0.08,
+    0.05,
+    0.025
+   ],
+   "color": "#342C16",
+   "transparent": false,
+   "emissive": true,
+   "cue": {
+    "note": "Doc 24 §2.9 CH01 S02→S03: the shared inventory status lamp blinks once, delay_s after the scene is staged.",
+    "lit_color": "#F2C230",
+    "pulse_s": [
+     0.2,
+     0.5,
+     0.3
+    ],
+    "delay_s": {
+     "EX-CH01-S02": 6.0
+    }
+   }
   }
  ],
  "lighting": {
@@ -244,10 +456,265 @@
    0
   ],
   "key_color": "#ffd28f",
-  "key_energy": 1.6,
-  "fill_energy": 0.45,
-  "ambient_energy": 0.3,
-  "strip_color": "#ffd28f"
+  "key_energy": 0,
+  "fill_energy": 0,
+  "ambient_energy": 0.22,
+  "strip_color": "#ffd28f",
+  "practical_energy": 0.7,
+  "practical_range_m": 10,
+  "shadow_lights": 2
  },
- "earth_visibility": "interior"
+ "earth_visibility": "interior",
+ "assembly": "habitat_kit",
+ "portals": [
+  {
+   "boundary_id": "door_commons_safe",
+   "wall": "south",
+   "offset_m": -1,
+   "destination": "Commons"
+  },
+  {
+   "boundary_id": "door_service_safe",
+   "wall": "east",
+   "offset_m": 0,
+   "destination": "Service rooms"
+  }
+ ],
+ "navigation": {
+  "cell_m": 0.25,
+  "agent_radius_m": 0.3
+ },
+ "walk_probe": [
+  [
+   0,
+   -0.6
+  ],
+  [
+   -2,
+   -0.6
+  ],
+  [
+   2,
+   -0.6
+  ],
+  [
+   0,
+   -0.6
+  ]
+ ],
+ "obstacles": [
+  {
+   "id": "seat_0",
+   "position": [
+    -2.08,
+    0.55,
+    0.9
+   ],
+   "size": [
+    0.83,
+    1.1,
+    1.02
+   ]
+  },
+  {
+   "id": "seat_1",
+   "position": [
+    -1.04,
+    0.55,
+    0.9
+   ],
+   "size": [
+    0.83,
+    1.1,
+    1.02
+   ]
+  },
+  {
+   "id": "seat_2",
+   "position": [
+    0,
+    0.55,
+    0.9
+   ],
+   "size": [
+    0.83,
+    1.1,
+    1.02
+   ]
+  },
+  {
+   "id": "seat_3",
+   "position": [
+    1.04,
+    0.55,
+    0.9
+   ],
+   "size": [
+    0.83,
+    1.1,
+    1.02
+   ]
+  },
+  {
+   "id": "seat_4",
+   "position": [
+    2.08,
+    0.55,
+    0.9
+   ],
+   "size": [
+    0.83,
+    1.1,
+    1.02
+   ]
+  },
+  {
+   "id": "water_wall",
+   "position": [
+    0,
+    1,
+    -2.65
+   ],
+   "size": [
+    1.3,
+    2,
+    0.5
+   ]
+  },
+  {
+   "id": "seed_latch",
+   "position": [
+    0,
+    0.55,
+    -2
+   ],
+   "size": [
+    0.8,
+    1.1,
+    0.55
+   ]
+  },
+  {
+   "id": "bundles",
+   "position": [
+    2.2,
+    0.35,
+    -1.9
+   ],
+   "size": [
+    2,
+    0.7,
+    0.65
+   ]
+  },
+  {
+   "id": "hatch",
+   "position": [
+    -3.505,
+    1.05,
+    -1.4
+   ],
+   "size": [
+    0.99,
+    2.1,
+    2.1
+   ]
+  }
+ ],
+ "kit_runs": [],
+ "ceiling_strips": [
+  [
+   -2.0,
+   2.52,
+   -1.5
+  ],
+  [
+   2.0,
+   2.52,
+   -1.5
+  ],
+  [
+   -2.0,
+   2.52,
+   1.5
+  ],
+  [
+   2.0,
+   2.52,
+   1.5
+  ]
+ ],
+ "signs": [
+  {
+   "text": "SAFE ROOM / ROLL CALL",
+   "position": [
+    -2.5,
+    1.52,
+    -2.68
+   ],
+   "size": 0.0018
+  },
+  {
+   "text": "PROTECTED SEED LATCH",
+   "position": [
+    0,
+    0.88,
+    -1.71
+   ],
+   "size": 0.0014
+  },
+  {
+   "text": "BUNDLE RAIL / 1   2   3   4",
+   "position": [
+    2,
+    1.18,
+    -2.7
+   ],
+   "size": 0.0016
+  },
+  {
+   "text": "KAI   AMARA   MEI   RAFI",
+   "position": [
+    -2.5,
+    1.32,
+    -2.68
+   ],
+   "size": 0.0011
+  },
+  {
+   "text": "STORAGE / INVENTORY",
+   "position": [
+    -2.5,
+    1.15,
+    -2.68
+   ],
+   "size": 0.0009
+  }
+ ],
+ "review_views": {
+  "overview": {
+   "from": [
+    3.4,
+    2.05,
+    2.5
+   ],
+   "to": [
+    -1.0,
+    1.1,
+    -2.3
+   ]
+  },
+  "hatch": {
+   "from": [
+    2.4,
+    1.8,
+    -0.6
+   ],
+   "to": [
+    -3.2,
+    1.0,
+    -1.5
+   ]
+  }
+ }
 }

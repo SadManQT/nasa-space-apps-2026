@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+; Every approved M1-05 kit LOD (game/assets/environment/kit/kit.json), held so a room scene's
+; threaded load brings the kit in with it. test_habitat_rooms.gd fails if this drifts from kit.json.
+
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_BulkheadRing_LOD0.glb" id="1_55sqv"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_BulkheadRing_LOD1.glb" id="2_451jl"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_CableRun_LOD0.glb" id="3_3jhp6"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_CableRun_LOD1.glb" id="4_bqll5"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_CeilingTile_LOD0.glb" id="5_tbq1u"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb" id="6_1u8hi"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_DoorFrame_LOD0.glb" id="7_8mvwi"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_DoorFrame_LOD1.glb" id="8_ejd5e"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_FloorTile_LOD0.glb" id="9_c0e01"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_FloorTile_LOD1.glb" id="10_5dvv2"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_Hatch_LOD0.glb" id="11_wl8y4"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_Hatch_LOD1.glb" id="12_0nc5b"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_LightStrip_LOD0.glb" id="13_cg66x"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_LightStrip_LOD1.glb" id="14_ugair"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_PipeRun_LOD0.glb" id="15_nvaup"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_PipeRun_LOD1.glb" id="16_ond4j"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_Wall_Corner_LOD0.glb" id="17_to7um"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb" id="18_srm3g"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD0.glb" id="19_7k0kq"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD1.glb" id="20_7v2kw"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_Wall_Straight_LOD0.glb" id="21_s3stj"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb" id="22_p1tfu"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_Wall_Window_LOD0.glb" id="23_xqj08"]
+[ext_resource type="PackedScene" path="res://assets/environment/kit/EN_Kit_Wall_Window_LOD1.glb" id="24_s3c4a"]
+
+[node name="HabitatKitPreload" type="ResourcePreloader" unique_id=920811189]
+resources = [PackedStringArray("EN_Kit_BulkheadRing_LOD0", "EN_Kit_BulkheadRing_LOD1", "EN_Kit_CableRun_LOD0", "EN_Kit_CableRun_LOD1", "EN_Kit_CeilingTile_LOD0", "EN_Kit_CeilingTile_LOD1", "EN_Kit_DoorFrame_LOD0", "EN_Kit_DoorFrame_LOD1", "EN_Kit_FloorTile_LOD0", "EN_Kit_FloorTile_LOD1", "EN_Kit_Hatch_LOD0", "EN_Kit_Hatch_LOD1", "EN_Kit_LightStrip_LOD0", "EN_Kit_LightStrip_LOD1", "EN_Kit_PipeRun_LOD0", "EN_Kit_PipeRun_LOD1", "EN_Kit_Wall_Corner_LOD0", "EN_Kit_Wall_Corner_LOD1", "EN_Kit_Wall_EquipBay_LOD0", "EN_Kit_Wall_EquipBay_LOD1", "EN_Kit_Wall_Straight_LOD0", "EN_Kit_Wall_Straight_LOD1", "EN_Kit_Wall_Window_LOD0", "EN_Kit_Wall_Window_LOD1"), [ExtResource("1_55sqv"), ExtResource("2_451jl"), ExtResource("3_3jhp6"), ExtResource("4_bqll5"), ExtResource("5_tbq1u"), ExtResource("6_1u8hi"), ExtResource("7_8mvwi"), ExtResource("8_ejd5e"), ExtResource("9_c0e01"), ExtResource("10_5dvv2"), ExtResource("11_wl8y4"), ExtResource("12_0nc5b"), ExtResource("13_cg66x"), ExtResource("14_ugair"), ExtResource("15_nvaup"), ExtResource("16_ond4j"), ExtResource("17_to7um"), ExtResource("18_srm3g"), ExtResource("19_7k0kq"), ExtResource("20_7v2kw"), ExtResource("21_s3stj"), ExtResource("22_p1tfu"), ExtResource("23_xqj08"), ExtResource("24_s3c4a")]]

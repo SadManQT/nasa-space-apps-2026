@@ -14,6 +14,7 @@ var _speaker := ""
 var _seats: Node3D
 var _screen: Sprite3D
 var _screen_label: Label3D
+var _screen_area := Vector2(2.8, 1.4)
 
 func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3) -> PlayerController:
 	room = next_room
@@ -45,7 +46,8 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3) -> Pla
 			body.position = anchor_position(room.room_id, id)
 		body.face_towards(Vector3(0, 0, -2))
 		body.reset_placement()
-	# A safe, simple bench backs seated listeners; no fictitious hand/tool contact.
+	# Seated listeners use the room's installed crew seats; a simple stand-in bench backs
+	# them only where a room has none. No fictitious hand/tool contact.
 	_seats = Node3D.new()
 	_seats.name = "CrewSeats"
 	room.add_child(_seats)
@@ -57,8 +59,11 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3) -> Pla
 			body.face_towards(body.position + Vector3.FORWARD)
 			body.animation.set_rest_clip("SitIdle_loop")
 			body.foot_ik_enabled = false
-			_add_seat(body.position)
+			if not room.has_installed_seat_at(body.position):
+				_add_seat(body.position)
 	_build_screen()
+	# Staging the scene also starts the room's authored scene-join cues (doc 24 §2.9).
+	room.set_scene_context(scene_id)
 	return player
 
 static func anchor_position(room_id: String, id: String) -> Vector3:
@@ -109,6 +114,10 @@ func present_line(line: Dictionary, reduced_motion: bool) -> void:
 		if earth:
 			var path := "res://assets/ui/portraits/CH_%s_screen.png" % _speaker.capitalize()
 			_screen.texture = load(path) if ResourceLoader.exists(path) else null
+			if _screen.texture != null:
+				# Fit any portrait resolution inside the physical screen, never past its bezel.
+				var pixels := Vector2(_screen.texture.get_size())
+				_screen.pixel_size = minf(_screen_area.x / pixels.x, _screen_area.y / pixels.y)
 			_screen_label.text = "%s / %s" % [_speaker.capitalize(), line.get("origin_label", "EARTH SCREEN")]
 
 func react(result: Dictionary, reduced_motion: bool) -> void:
@@ -138,14 +147,23 @@ func _build_screen() -> void:
 	_screen_label = null
 	if room.room_id != "LOC-01":
 		return
+	var at := Vector3(0, 2, -5.2)
+	_screen_area = Vector2(2.8, 1.4)
+	var spec := room.fixture("earth_screen")
+	if not spec.is_empty():
+		# The portrait lies on the north screen's room-facing surface, inset from its bezel.
+		var centre: Array = spec.position
+		var size: Array = spec.size
+		at = Vector3(float(centre[0]), float(centre[1]), float(centre[2]) + float(size[2]) * 0.5 + 0.01)
+		_screen_area = Vector2(float(size[0]), float(size[1])) * 0.94
 	_screen = Sprite3D.new()
 	_screen.name = "EarthPortrait"
-	_screen.position = Vector3(0, 2, -5.2)
+	_screen.position = at
 	_screen.pixel_size = 0.004
 	_screen.shaded = false
 	room.add_child(_screen)
 	_screen_label = Label3D.new()
-	_screen_label.position = Vector3(0, 0.9, -5.15)
+	_screen_label.position = at + Vector3(0, -_screen_area.y * 0.5 - 0.12, 0.005)
 	_screen_label.font_size = 32
 	_screen_label.pixel_size = 0.005
 	room.add_child(_screen_label)

@@ -38,7 +38,13 @@ func _run() -> void:
 		var room := Room.new()
 		room.room_id = Contract.room_for_scene(scene_id)
 		root.add_child(room)
-		var player_at := Vector3(0, 0, -0.4) if room.room_id == "LOC-04" else Vector3(0, 0, 0)
+		# Stage the player where Chapter1Campaign does: the room's authored *_player anchor. The kit
+		# rooms (M1-06) put furniture at the origin, e.g. the Commons Mission Table.
+		var player_at := Vector3.ZERO
+		var anchors := Contract.anchors(room.room_id)
+		for key in anchors:
+			if String(key).ends_with("_player"):
+				player_at = Vector3(anchors[key][0], anchors[key][1], anchors[key][2])
 		var player := crew.place(scene_id, room, player_at)
 		for i in 5:
 			await physics_frame

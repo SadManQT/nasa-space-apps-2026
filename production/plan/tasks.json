@@ -447,8 +447,8 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Assemble the Chapter 1 rooms from the kit",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-claude2",
    "deps": [
     "M1-05",
     "M1-01"
@@ -466,8 +466,8 @@
     "execution/ASSET_EN_Exterior.md"
    ],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-05",
+   "evidence": "run_tests.sh last line: 38/38 suites passed (production/qa/evidence/M1-06_tests.txt): habitat rooms 333/0, campaign crew 927/0, room presentation 136/0, performance 537/0, explainers 321/0. Fix round 3: test_explainers failed only because this worktree's base 1d7c4ef predates M1-67 on main; main's 43 explainer/fixture files were copied in byte-identical (no M1-06 code change; they drop out at the land rebase); round 2's HUD bug task renumbered M1-70 -> M1-74 (main reused M1-70). Windowed capture HABITAT ROOMS RESULT: PASS (360 checks): player walk in every room, no wall/prop clipping, props resting on surfaces, 1 m door approaches, readable signs. 60 fps: every room and the campaign with cast p50 16.6-16.7 ms, p95 <=17.7 ms (M1-06_runtime.txt). Screenshots: production/qa/evidence/M1-06_LOC-01_overview.png, M1-06_LOC-01_player.png, M1-06_LOC-02_overview.png, M1-06_LOC-02_player.png, M1-06_LOC-03_overview.png, M1-06_LOC-03_player.png, M1-06_LOC-03_chamber.png, M1-06_LOC-03_chamber_closed.png, M1-06_LOC-03_alo.png, M1-06_LOC-04_overview.png, M1-06_LOC-04_hatch.png, M1-06_LOC-04_player.png, M1-06_campaign.png. Notes: production/review/execution/M1-06.md; exterior stays greybox until M1-36 (terrain in Godot).",
+   "updated": "2026-11-06",
    "prompt": "Goal: Commons/Mission Table (LOC-01), Service Rooms (LOC-02), Garden + Alo chamber (LOC-03), Safe Room (LOC-04) and the Exterior are\nreal scenes built from the kit and installed props, replacing the M1-01 greybox.\nDo: build game/scenes/campaign/rooms/*.tscn from game/assets/environment/kit/ and the approved props, using the layout data files from\nM1-01 (move the data, don't duplicate it). Collision on walls/floors/large props, navigation regions, doors and pressure boundaries per\ngame-design/09_WORLD_AND_LEVEL_DESIGN.md, baked or static lighting that keeps 60 fps, the toon look. Keep RoomContract targets valid.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. Walk every room with the player; no clipping through walls, no floating props.\nThe Exterior uses the real LOLA terrain from M1-34/M1-36 once it exists; until then keep the greybox exterior.",
    "blocker": "Night shift parked the work on branch night/M1-06: ",
    "reserved_for": "sadman",
@@ -5406,6 +5406,26 @@
    "updated": "2026-11-06",
    "prompt": "Handbook section 6 quality gate step 2 for the nine M3-6A props (18 GLBs in game/assets/props/eclipse_power/; they pass the automated gate in production/review/asset_verification.md). Inspect production/qa/evidence/M3-6A_contact.png, M3-6A_lods.png and the Godot captures M3-6A_*.png against production/ART_BIBLE.md sections 2, 3 and 7 and the story (STORY_FULL EX-CH06-S01..S12, 08 P-11/P-12): palette, no baked text or logos (every word is a Label3D or live screen), English only, metre scale, LOD1 keeps silhouette and colours, the monitor's eclipse picture (black sky, Earth 3.5x the Sun seen from the Moon, red rim only at totality, inset labelled conceptual / not to scale / not a map, NASA-catalog date checked, Aurora geometry labelled scenario). Add a dated 'M3-6A eclipse power props review' section with one row per GLB (PASS or FIX with the reason) to production/review/visual_review.md, then run python3 production/tools/build_registry.py --manifest eclipse_props so the registry shows verified (or needs fix). A FIX goes back to Sadman as a board task naming the prop and the change.",
    "reserved_for": "member5",
+   "effort": 1
+  },
+  {
+   "id": "M1-74",
+   "milestone": "M1",
+   "priority": "P2",
+   "tool": "codex",
+   "title": "Stop the 'no meta lla_fade' error in the HUD fade",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/night-claude2 on 2026-11-06 (first numbered M1-70; renumbered because main gave M1-70 to the data-card credit line).",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Found during M1-06 windowed capture (production/qa/evidence/M1-06_capture.txt): starting chapter1_campaign.tscn logs 'ERROR: The object does not have any meta values with the key lla_fade' from _fade (game/scripts/ui/chapter1_campaign_hud.gd:962). In Godot 4.7 get_meta(key, null) still errors when the key is missing, because a null default counts as no default. Use control.get_meta(\"lla_fade\") only when control.has_meta(\"lla_fade\") (same for any other get_meta(..., null) in the HUD). Acceptance: the campaign starts with no get_meta error in the log; run_tests.sh passes.",
+   "reserved_for": "ramim",
    "effort": 1
   }
  ],
