@@ -1,0 +1,3 @@
+#!/bin/sh
+# Godot through the machine-wide two-at-a-time gate (production/tools/heavy.py). Night-shift workers get this as $GODOT.
+exec python3 "$(dirname "$0")/heavy.py" "${GODOT_BIN:-/Applications/Godot.app/Contents/MacOS/Godot}" "$@"

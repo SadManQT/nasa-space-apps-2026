@@ -14,7 +14,7 @@ while [ "$(date +%s)" -lt "$END" ] && [ ! -f production/session-logs/STOP_ALL ];
     [ "$left" -lt 1 ] && continue
     echo "$(date '+%F %T') starting $pfx ($left h left)"
     env SLOTS=1 SLOT_PREFIX="$pfx" SUMMARY="night_summary_$pfx.md" HOURS="$left" $extra \
-      python3 production/tools/night_shift.py >> "production/session-logs/night_shift_$pfx.out" 2>&1 &
+      nice -n 15 python3 production/tools/night_shift.py >> "production/session-logs/night_shift_$pfx.out" 2>&1 &
     sleep 60
   done
   sleep 600

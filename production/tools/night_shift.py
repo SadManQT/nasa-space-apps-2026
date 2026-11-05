@@ -21,7 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 NIGHT = ROOT / ".night"
 LOGDIR = ROOT / "production/session-logs"
-GODOT = "/Applications/Godot.app/Contents/MacOS/Godot"
+GODOT = str(ROOT / "production/tools/godot_gated")  # Godot through the two-at-a-time gate (heavy.py)
 GOCODE_RUN = str(Path.home() / ".local/bin/gocode-run")
 AGY_SETTINGS = str(Path.home() / ".local/share/night_shift/agy_settings.json")
 SLOTS = int(os.environ.get("SLOTS", "2"))
@@ -105,7 +105,7 @@ def run_agent(account, prompt, cwd, effort="high"):
     pf = Path(cwd) / ".night_prompt.md"
     pf.write_text(prompt)
     cmd = [c.replace("{p}", str(pf)) for c in ACCOUNTS[account]["cmd"]]
-    env = {**os.environ, "EFFORT": effort, "AGY_SETTINGS": AGY_SETTINGS, "GODOT": GODOT}
+    env = {**os.environ, "EFFORT": effort, "AGY_SETTINGS": AGY_SETTINGS, "GODOT": GODOT, "SUITE_TIMEOUT": "1200"}
     env.pop("CLAUDECODE", None)
     try:
         _, out = sh(cmd, cwd, timeout=WORKER_TIMEOUT, env=env)
@@ -194,7 +194,7 @@ def tests_pass(slot):
         with open(NIGHT / "tests.lock", "w") as lk:
             fcntl.flock(lk, fcntl.LOCK_EX)
             try:
-                _, out = sh(["game/tools/run_tests.sh"], slot, timeout=3600, env={**os.environ, "GODOT": GODOT})
+                _, out = sh(["game/tools/run_tests.sh"], slot, timeout=3600, env={**os.environ, "GODOT": GODOT, "SUITE_TIMEOUT": "1200"})
             except subprocess.TimeoutExpired:
                 out = "run_tests.sh timed out"
         last = [l for l in out.splitlines() if "suites passed" in l]
@@ -209,7 +209,7 @@ def run_capture(slot, tid):
     if cap.exists():
         log(f"[{slot.name}] running {cap.name} outside the sandbox")
         try:
-            _, out = sh(["bash", str(cap)], slot, timeout=2400, env={**os.environ, "GODOT": GODOT})
+            _, out = sh(["bash", str(cap)], slot, timeout=2400, env={**os.environ, "GODOT": GODOT, "SUITE_TIMEOUT": "1200"})
         except subprocess.TimeoutExpired:
             out = "capture script timed out"
         (slot / f"production/qa/evidence/{tid}_capture_output.txt").write_text(out[-20000:])
