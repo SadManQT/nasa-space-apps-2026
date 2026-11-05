@@ -512,8 +512,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Generate and install the habitat kit (3D)",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/night-fable",
    "deps": [
     "M1-04"
    ],
@@ -528,7 +528,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-05",
    "prompt": "Goal: game-ready modular kit pieces in game/assets/environment/kit/, passing the asset gate.\nDo: follow PRODUCTION_HANDBOOK.md §6 and execution/ASSET_EN_HabitatKit.md: Tripo multiview or Meshy image-to-3D from the approved sheets\n(Tripo: `tripo config use` only, --visibility private; Meshy: confirm cost first), Blender clean-up (production/tools/blender_cleanup.py),\nconsistent 1 m grid snapping and pivots, collision-friendly simple shapes, toon-ready materials, LOD for the Compatibility build, then\nproduction/tools/sync_to_godot.sh and verify_gate.py. Register every piece in production/ASSET_REGISTRY.csv. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes for every piece; a contact sheet in production/review/; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {

@@ -246,7 +246,7 @@ Status: ✅ final · 🟡 in progress · ♻️ reuse candidate already exported
 | ID | Location | Scenes | Status |
 |---|---|---|---|
 | EN_Commons (A-10) | Mission Table, Earth console/screen, lockers, galley; 4 then 5 mugs | throughout | ⬜ |
-| EN_Kit (A-11) | Modular habitat walls, floors, 1.2 m doors, lights, corridors | throughout | ⬜ (♻️ space tunnel, viewport, light capsule) |
+| EN_Kit (A-11) | Modular habitat walls, floors, 1.2 m doors, lights, corridors | throughout | ✅ M1-05 (5 Nov): 12 pieces x 2 LODs in [game/assets/environment/kit/](game/assets/environment/kit/README.md), built in Blender from the approved sheets, gate-verified; rooms assembled in M1-06 |
 | EN_ServiceRooms (LOC-02) | Power room (battery jar, heater console, F2 feeder, hand-light locker, eclipse allocation board, protected-bus test panel); atmosphere room and service corridor (oxygen tank, independent gauge, three diagnostic taps, isolation valves, garden spur) | CH01, CH03, CH05, CH06 | ⬜ (♻️ control console, industrial control panel, machinery) |
 | EN_Garden (LOC-03) | Exterior pressurised test chamber with glove ports and **viewing shutter**; Tara indoor reference bay; botanical bench; paired care stations; drying bench; planting rack; reserve store; lineage board; dry quarantine glovebox | CH01–08 | ⬜ |
 | EN_SafeRoom (A-13) | Five seats, water wall, four supply-bundle slots, hatch, roll-call board, response controls, archive player, seed-case latch | CH01, CH07 | ⬜ (♻️ capsule bunk bed, cargo crates) |

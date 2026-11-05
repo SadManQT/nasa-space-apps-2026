@@ -1,6 +1,5 @@
 name,category,method,first_scenes,notes
 EN_Commons,environment,Blender modular kit + reused props,EX-CH01-S01,22x12 m commons with Mission Table and Earth screen (LOC-01)
-EN_HabitatKit,environment,Blender modular,EX-CH01-S01,"walls, floors, 1.2 m doors, lights, trim sheets (A-11)"
 EN_ServiceRooms,environment,Blender modular + reused props,EX-CH01-S07,power room + atmosphere room and service corridor (LOC-02)
 EN_Garden,environment,Blender modular + new props,EX-CH01-S04,"growth chambers, Tara bay, benches, glovebox, lineage board (LOC-03)"
 EN_SafeRoom,environment,Blender modular + reused props,EX-CH01-S08,"5 seats, water wall, bundle slots, hatch (LOC-04)"

@@ -3,7 +3,7 @@
 
   python3 production/tools/verify_gate.py            (run after sync_to_godot.sh)
 
-Specs come from production/manifest/{characters,tripo_props_batch1,reuse_props}.csv.
+Specs come from production/manifest/{characters,tripo_props_batch1,reuse_props,lunar_kit,habitat_kit}.csv.
 Checks per asset: imports with a mesh; triangles within budget; largest texture within budget;
 standing on the floor (lowest point y = 0 ± 1 cm); real-world size within 2 % of spec
 (height for --height, longest side for --longest); characters have their rig (bones) and at least
@@ -22,7 +22,7 @@ GODOT_ERRORS = ("SCRIPT ERROR", "Parse Error", "Failed to load script", "ERROR:"
 
 def specs():
     out = {}
-    for name in ("characters", "tripo_props_batch1", "reuse_props", "lunar_kit"):
+    for name in ("characters", "tripo_props_batch1", "reuse_props", "lunar_kit", "habitat_kit"):
         for r in csv.DictReader(open(ROOT / f"production/manifest/{name}.csv", encoding="utf-8")):
             out[r["name"]] = r
     return out

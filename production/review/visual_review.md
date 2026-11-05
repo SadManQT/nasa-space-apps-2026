@@ -147,3 +147,34 @@ All 48 rock LOD renders and the three provisional ground surfaces inspected agai
 | EN_Regolith_Fresh | PASS geometry and surfaces (option A) | 4 m tile; surface verified against M1-33 option A |
 | EN_Regolith_Compacted | PASS geometry and surfaces (option A) | 4 m tile; surface verified against M1-33 option A |
 | EN_Regolith_Disturbed | PASS geometry and surfaces (option A) | 4 m tile; surface verified against M1-33 option A |
+
+## M1-05 habitat kit review — 5 November 2026, Sadman/night-fable (Claude Fable 5.1)
+
+All 26 Cycles previews ([M1-05_habitat_kit_contact.png](M1-05_habitat_kit_contact.png), [M1-05_habitat_kit_lods.png](M1-05_habitat_kit_lods.png)) and the Godot captures (`production/qa/evidence/M1-05_godot_*.png`) inspected against the approved sheets `production/concept/environment_v1/01_HabitatKit_sheet_A_labelled.png` / `_B_labelled.png` and ART_BIBLE.md §3 and §7: palette tokens (suit white, navy, signal orange, water blue), no text or logos on any surface, no faces, metre scale, pivots at the base, LOD1 keeps the silhouette and colours with the relief, rivets and small controls dropped. Surfaces are PBR (quilt, powder-coat paint, brushed steel, anti-slip deck) per the 5 Nov photoreal-environment decision; the toon pass can still restyle them. Second opinion (Codex) not run on the night shift.
+
+| Asset | Verdict | Notes |
+|---|---|---|
+| EN_Kit_Wall_Straight_LOD0 | ✅ PASS | quilted off-white panel in a light-grey frame, steel handrail at 1.0 m on two brackets, navy skirting with grey cap: matches sheet A piece 1 |
+| EN_Kit_Wall_Straight_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
+| EN_Kit_Wall_Corner_LOD0 | ✅ PASS | two 0.5 m quilted legs at 90 deg with a corner column; inner faces checked from the room side: matches sheet A piece 2 |
+| EN_Kit_Wall_Corner_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
+| EN_Kit_Wall_Window_LOD0 | ✅ PASS | rounded navy pressure-window frame with rivets and a recessed glass pane, quilt above and below, painted surrounds: matches sheet A piece 3 (window scaled to keep whole quilt rows) |
+| EN_Kit_Wall_Window_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
+| EN_Kit_DoorFrame_LOD0 | ✅ PASS | 3 m two-sided pressure frame, arched lip, stiffener ribs, orange grab handle each side, threshold; open state parks the leaf (orange handle, recessed field) inside the wide jamb: matches sheet A piece 4 |
+| EN_Kit_DoorFrame_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
+| EN_Kit_Hatch_LOD0 | ✅ PASS | round leaf with navy seal ring, chrome three-spoke locking wheel, two orange handles, viewport, collar with 24 rivets, hinge knuckles; open state swings into the room: matches sheet A piece 5 |
+| EN_Kit_Hatch_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
+| EN_Kit_Wall_EquipBay_LOD0 | ✅ PASS | recessed navy console with a blank dark screen (material 'Screen', no text), four toggles, two lamps, round gauge, orange handles each side: matches sheet A piece 6 |
+| EN_Kit_Wall_EquipBay_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
+| EN_Kit_FloorTile_LOD0 | ✅ PASS | dark anti-slip deck 4 mm proud of a navy rim, four steel tie-down rings in navy washers: matches sheet B piece 1 |
+| EN_Kit_FloorTile_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
+| EN_Kit_CeilingTile_LOD0 | ✅ PASS | 4 x 4 quilted cells in a grey rim, round vent grille with slats, sensor dome: matches sheet B piece 2 |
+| EN_Kit_CeilingTile_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
+| EN_Kit_PipeRun_LOD0 | ✅ PASS | two water-blue pipes with bolted steel flanges, white duct with a coupling band, two grey bracket feet: matches sheet B piece 3 |
+| EN_Kit_PipeRun_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
+| EN_Kit_CableRun_LOD0 | ✅ PASS | navy tray with end flanges, inspection window over five coloured cables, orange latch clip: matches sheet B piece 4 |
+| EN_Kit_CableRun_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
+| EN_Kit_LightStrip_LOD0 | ✅ PASS | brushed-steel housing with two clips and a warm emissive diffuser: matches sheet B piece 5 |
+| EN_Kit_LightStrip_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
+| EN_Kit_BulkheadRing_LOD0 | ✅ PASS | octagonal grey frame, orange seal bands on both faces, quilted inner liner, two vertical handrails, sill tread, 32 rivets: matches sheet B piece 6 (octagon as drawn) |
+| EN_Kit_BulkheadRing_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and colours, flat quilt, fewer segments, 512 px textures |
