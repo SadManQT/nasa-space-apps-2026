@@ -1,0 +1,7 @@
+PASS bash -n production/qa/evidence/M3-97_capture.sh
+PASS Godot --check-only capture_m3_97.gd: no script errors.
+PASS Theora remux timeline 8.000000 s (24 fps); terminal duplicate removed.
+PASS Theora remux timeline 30.708333 s (24 fps); terminal duplicate removed.
+PASS Theora PTS-based image sampling at 2.00 s: mean error 4.408.
+PASS Theora PTS-based image sampling at 3.84 s: mean error 3.438.
+PASS Theora PTS-based image sampling at 7.50 s: mean error 0.000.

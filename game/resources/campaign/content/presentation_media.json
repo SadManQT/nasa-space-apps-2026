@@ -433,19 +433,27 @@
       "trigger": "scene_enter",
       "caption_cues": [
         {
-          "at": 7.4,
+          "at": 1.25,
+          "line_id": "EX-CH08-S10-L05"
+        },
+        {
+          "at": 7.642,
           "line_id": "EX-CH08-S10-L01"
         },
         {
-          "at": 13.55,
+          "at": 14.05,
           "line_id": "EX-CH08-S10-L02"
         },
         {
-          "at": 20.1,
+          "at": 18.73,
+          "line_id": "EX-CH08-S10-L06"
+        },
+        {
+          "at": 22.3,
           "line_id": "EX-CH08-S10-L03"
         },
         {
-          "at": 22.95,
+          "at": 25.1,
           "line_id": "EX-CH08-S10-L04"
         }
       ]

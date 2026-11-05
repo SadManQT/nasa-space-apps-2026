@@ -1,0 +1,3 @@
+PASS CS-01 old/current compiled video filter graphs are identical (trim, speed ramp, zoom, custom dissolve, sound captions, slate, title).
+PASS CS-01 duration, edited shots, and layer input count are unchanged.
+This is a dry-run regression check; no cold-open media was re-encoded.

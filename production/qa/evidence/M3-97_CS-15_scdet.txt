@@ -1,0 +1,3 @@
+[Parsed_scdet_0 @ 0x872c59bc0] lavfi.scd.score: 37.563, lavfi.scd.time: 5.041667
+[Parsed_scdet_0 @ 0x872c59bc0] lavfi.scd.score: 29.006, lavfi.scd.time: 13.708333
+[Parsed_scdet_0 @ 0x872c59bc0] lavfi.scd.score: 16.739, lavfi.scd.time: 18.75

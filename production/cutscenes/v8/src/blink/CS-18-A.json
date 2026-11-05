@@ -1,0 +1,21 @@
+{
+ "in": "../shots/CS-18-A.mp4",
+ "out": "../shots/CS-18-A_blink.mp4",
+ "duration": 7.0,
+ "lamp": [
+  905.5,
+  360.0
+ ],
+ "at": 3.8,
+ "curve": [
+  0.55,
+  1.0,
+  0.7,
+  0.3
+ ],
+ "core": 4.0,
+ "halo": 16.0,
+ "bounce": 55.0,
+ "halo_gain": 0.95,
+ "bounce_gain": 0.3
+}
