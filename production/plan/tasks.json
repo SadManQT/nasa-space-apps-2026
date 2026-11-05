@@ -2946,7 +2946,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 7 assets: the storm shelter and uplink props",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [
     "M1-05"
@@ -2963,9 +2963,9 @@
    ],
    "note": "Added 5 Nov 2026 (Sadman: every chapter 1-8 fully assigned).",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-06",
    "prompt": "Do: make and install the CH07 props and EN_Fabrication from PRODUCTION_HANDBOOK.md §8 (five shelter seat markers, the seed case with two 15-seed compartments, water-wall valve diagram, local telemetry displays, archive player, damaged external uplink feedthrough (A-43), local network diagnostic panel; EN_Fabrication bench and route simulator for CH07-S11), following the pipeline in PRODUCTION_HANDBOOK.md §6 and the asset gate (production/tools/verify_gate.py). Reuse the habitat kit (game/assets/environment/kit/) and existing props first; new hero props need Sadman's approval of a 2D sheet before 3D credits are spent. Log every generation in production/AI_PROMPT_LOG.md.\nAcceptance: every prop is in game/assets/ with collision and a Compatibility LOD, passes the gate, and is listed in PRODUCTION_HANDBOOK.md §8; screenshots in production/qa/evidence/<task id>_*.png.",
-   "blocker": "Night shift parked the work on branch night/M3-5A: ",
+   "blocker": "Night shift parked the work on branch night/M3-7A: could not land: rebase conflict: 7 assets: the storm shelter and uplink props\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with",
    "reserved_for": "sadman",
    "effort": 3
   },
