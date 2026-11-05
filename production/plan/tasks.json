@@ -869,12 +869,13 @@
    "id": "M1-18",
    "milestone": "M1",
    "priority": "P0",
-   "tool": "antigravity",
+   "tool": "claude",
    "title": "First five minutes: title screen, onboarding and UX polish",
    "status": "todo",
    "owner": "",
    "deps": [
-    "M0-02"
+    "M0-02",
+    "M1-54"
    ],
    "paths": [
     "game/scripts/ui/",
@@ -884,12 +885,13 @@
    "refs": [
     "execution/UI_01_MAIN_MENU.md",
     "execution/UI_03_HUD.md",
-    "execution/QA_05_ACCESSIBILITY_AND_UX.md"
+    "execution/QA_05_ACCESSIBILITY_AND_UX.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
    "updated": "2026-11-05",
-   "prompt": "Goal: 'User experience 5 = anyone can use it' — a judge or a 12-year-old plays the first five minutes without help.\nDo: (1) hide the DEVELOPER ASSET SHOWCASE button in exported builds (feature flag / OS.has_feature('editor')) and fix the footer that\noverlaps it; (2) New Expedition flow per execution/UI_01_MAIN_MENU.md and UI_02; (3) contextual first-time prompts for move, look, use,\nMission Table and the journal, shown once and replayable from Settings; (4) HUD and objective readability (UI_03, UI_04, UI_05, UI_06):\nfont sizes, contrast, text scaling to 150%, focus order for keyboard and controller; (5) remap controls (UI_15).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second screen recording of a cold start to the first objective.",
+   "prompt": "Goal: 'User experience 5 = anyone can use it' — a judge or a 12-year-old plays the first five minutes without help.\nDo: (1) hide the DEVELOPER ASSET SHOWCASE button in exported builds (feature flag / OS.has_feature('editor')) and fix the footer that\noverlaps it; (2) New Expedition flow per execution/UI_01_MAIN_MENU.md and UI_02; (3) contextual first-time prompts for move, look, use,\nMission Table and the journal, shown once and replayable from Settings; (4) HUD and objective readability (UI_03, UI_04, UI_05, UI_06):\nfont sizes, contrast, text scaling to 150%, focus order for keyboard and controller; (5) remap controls (UI_15).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second screen recording of a cold start to the first objective.\n\nClarity and menus (Sadman, 5 Nov): follow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 for every first-five-minutes screen and build the title and menus in §2.3 (live Moon backdrop, Moon trainer entry, Story/Cadet/Expedition assist modes, settings categories) on the M1-54 design system.",
    "blocker": "Night shift parked the work on branch night/M1-18: k   tools/test_lip_sync.gd :: PASS LipSync coarticulation, closures, loudness, release and errors\nok   tools/test_lunar_kit.gd :: LUNAR KIT RESULT: PASS (89 checks, 0 failures)\nok   tools/test_outpost_status.gd :: OUTPOST STATUS RESULT: PASS (85 checks, 0 failures)\nFAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (537 checks, 2 failures)\n       FAIL Kai raw load"
   },
   {
@@ -964,7 +966,13 @@
     "M1-20",
     "M1-28",
     "M1-30",
-    "M1-31"
+    "M1-31",
+    "M1-54",
+    "M1-55",
+    "M1-56",
+    "M1-57",
+    "M1-58",
+    "M1-59"
    ],
    "paths": [
     "production/qa/",
@@ -972,12 +980,13 @@
    ],
    "refs": [
     "execution/QA_04_VISUAL_CONTACTS.md",
-    "execution/QA_05_ACCESSIBILITY_AND_UX.md"
+    "execution/QA_05_ACCESSIBILITY_AND_UX.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Play the release build from title to the CH02 readiness point twice (one Golden Bloom attempt, one deliberate Alo Lost then retry), with\nkeyboard and with a controller. Capture a screenshot per scene into production/qa/evidence/ch01/. For every defect, add a new board task\n(next free M1-3x id, tool by type, prompt with exact repro and expected result, dep none) via editing production/plan/tasks.json, then run\n`python3 production/plan/board.py check`. Check canon on screen: no Bangla text, no plant faces, no NASA logos, science rules."
+   "updated": "2026-11-05",
+   "prompt": "Play the release build from title to the CH02 readiness point twice (one Golden Bloom attempt, one deliberate Alo Lost then retry), with\nkeyboard and with a controller. Capture a screenshot per scene into production/qa/evidence/ch01/. For every defect, add a new board task\n(next free M1-3x id, tool by type, prompt with exact repro and expected result, dep none) via editing production/plan/tasks.json, then run\n`python3 production/plan/board.py check`. Check canon on screen: no Bangla text, no plant faces, no NASA logos, science rules.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 items 1–3 and 5 (no developer text, clear centre, teaching coverage, five-second test at 10 checkpoints) and log first-time play times per mission."
   },
   {
    "id": "M1-22",
@@ -1063,17 +1072,18 @@
    ],
    "refs": [
     "production/ART_BIBLE.md",
-    "game-design/22_PUZZLE_CLUE_DESIGN.md"
+    "game-design/22_PUZZLE_CLUE_DESIGN.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
+   "updated": "2026-11-05",
    "id": "M1-31",
    "milestone": "M1",
    "priority": "P0",
    "tool": "antigravity",
    "title": "Make it fun: Chapter 1 game-feel and reward pass",
-   "prompt": "Goal: the game is fun, not homework. Play Chapter 1 and fix what feels flat:\nfeedback on every action (sound, a small animation, a meter tick, a crew reaction line or look), satisfying commit moments for the\nMission Table, tension during the night (lights dimming, fans slowing, the countdown to dawn), Alo's progress felt through posture and growth\n(never a face), stars/Golden Bloom celebrated, a clear next goal at all times, no dead time over ~20 seconds, and failure that teaches and\ninvites a retry instead of punishing. Keep Moon science rules (no sound in vacuum, no fog). Measure it: ask two first-time players to rate\nfun 1–5 and note where they smiled or got bored; write production/qa/fun_<date>.md.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second capture of the night shift.\nAlso bring P-01 and P-02 up to the investigation design in game-design/22_PUZZLE_CLUE_DESIGN.md §3 (§3.1–§3.4: clue chain, aha moment, escalation, set-piece, hint tiers)."
+   "prompt": "Goal: the game is fun, not homework. Play Chapter 1 and fix what feels flat:\nfeedback on every action (sound, a small animation, a meter tick, a crew reaction line or look), satisfying commit moments for the\nMission Table, tension during the night (lights dimming, fans slowing, the countdown to dawn), Alo's progress felt through posture and growth\n(never a face), stars/Golden Bloom celebrated, a clear next goal at all times, no dead time over ~20 seconds, and failure that teaches and\ninvites a retry instead of punishing. Keep Moon science rules (no sound in vacuum, no fog). Measure it: ask two first-time players to rate\nfun 1–5 and note where they smiled or got bored; write production/qa/fun_<date>.md.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second capture of the night shift.\nAlso bring P-01 and P-02 up to the investigation design in game-design/22_PUZZLE_CLUE_DESIGN.md §3 (§3.1–§3.4: clue chain, aha moment, escalation, set-piece, hint tiers).\n\nUse game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (mission shape, length targets, never padded) and §1 rule 8 (every action answers back) as the bar for Chapter 1."
   },
   {
    "id": "M1-26",
@@ -1248,17 +1258,18 @@
    ],
    "refs": [
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "execution/UI_01_MAIN_MENU.md"
+    "execution/UI_01_MAIN_MENU.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-05",
    "id": "M1-29",
    "milestone": "M1",
    "priority": "P0",
    "tool": "antigravity",
    "title": "Mission Trainer mode: every puzzle as a 5–10 minute training scenario",
-   "prompt": "Goal: the challenge is called 'Junior Astronaut Mission Trainer'; a teacher or a judge can open any training scenario in one click without\nplaying 12 hours.\nDo: a 'Mission Trainer' entry on the title screen listing the 16 scenarios (P-01..P-16) grouped by demand (Power, Life support, Shielding,\nFood), each with a 20-second NASA data briefing (plain-language takeaway + visual), the real decision, the outcome, a debrief with the\npredict/observe/explain question and a star rating; scenarios unlock as their puzzle is implemented, others show 'coming soon'; reuses the\ncampaign puzzle panels and simulation with a scenario entry profile from data (no copied logic); results saved separately from the campaign.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+   "prompt": "Goal: the challenge is called 'Junior Astronaut Mission Trainer'; a teacher or a judge can open any training scenario in one click without\nplaying 12 hours.\nDo: a 'Mission Trainer' entry on the title screen listing the 16 scenarios (P-01..P-16) grouped by demand (Power, Life support, Shielding,\nFood), each with a 20-second NASA data briefing (plain-language takeaway + visual), the real decision, the outcome, a debrief with the\npredict/observe/explain question and a star rating; scenarios unlock as their puzzle is implemented, others show 'coming soon'; reuses the\ncampaign puzzle panels and simulation with a scenario entry profile from data (no copied logic); results saved separately from the campaign.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nFollow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 (clarity rules) in every trainer screen; M3-67 later adds Moon sorties on top of this mode."
   },
   {
    "status": "done",
@@ -1625,12 +1636,13 @@
     "execution/PUZZLE_P04.md",
     "execution/UI_09_SCIENTIFIC_PUZZLE.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Problem: P03 and P04 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P03.md and execution/PUZZLE_P04.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §4 (P-03 §4.1–4.2, P-04 §4.3–4.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text."
+   "updated": "2026-11-05",
+   "prompt": "Problem: P03 and P04 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P03.md and execution/PUZZLE_P04.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §4 (P-03 §4.1–4.2, P-04 §4.3–4.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip)."
   },
   {
    "id": "M3-2M",
@@ -1647,7 +1659,9 @@
     "M1-38",
     "M3-2P",
     "M3-2R",
-    "M3-80"
+    "M3-80",
+    "M1-58",
+    "M3-64"
    ],
    "paths": [
     "game/scripts/missions/",
@@ -1660,12 +1674,13 @@
     "execution/MISSION_EX_M0203.md",
     "execution/MISSION_EX_M0204.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Goal: Chapter 2's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0201.md .. M0204.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH02 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §4 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §4 (§4.1–§4.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47."
+   "updated": "2026-11-05",
+   "prompt": "Goal: Chapter 2's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0201.md .. M0204.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH02 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §4 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §4 (§4.1–§4.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: payload care on the sealed pollination route (§4.3); report cards and messages via M3-64 and M1-56; follow §1 clarity rules."
   },
   {
    "id": "M3-2C",
@@ -1774,7 +1789,9 @@
     "M3-2V",
     "M3-2U",
     "M1-21",
-    "M3-2S"
+    "M3-2S",
+    "M3-2T",
+    "M3-66"
    ],
    "paths": [
     "production/qa/",
@@ -1783,12 +1800,13 @@
    "refs": [
     "execution/QA_01_CANON_AND_LEARNING.md",
     "execution/QA_04_VISUAL_CONTACTS.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "5 Nov: depends on Chapter 1 QA (M1-21) instead of the demo freeze M1-24, which waits on a human learner playtest; the full campaign should not wait on that.",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Play Chapter 2 from a Chapter 1 save to the Chapter 3 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch02/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect."
+   "updated": "2026-11-05",
+   "prompt": "Play Chapter 2 from a Chapter 1 save to the Chapter 3 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch02/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
   },
   {
    "id": "M3-3A",
@@ -1868,12 +1886,13 @@
     "execution/PUZZLE_P06.md",
     "execution/UI_09_SCIENTIFIC_PUZZLE.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Problem: P05 and P06 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P05.md and execution/PUZZLE_P06.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §5 (P-05 §5.1–5.2, P-06 §5.2–5.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text."
+   "updated": "2026-11-05",
+   "prompt": "Problem: P05 and P06 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P05.md and execution/PUZZLE_P06.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §5 (P-05 §5.1–5.2, P-06 §5.2–5.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip)."
   },
   {
    "id": "M3-3M",
@@ -1890,7 +1909,10 @@
     "M1-38",
     "M3-3P",
     "M3-3R",
-    "M3-80"
+    "M3-80",
+    "M1-58",
+    "M3-64",
+    "M3-65"
    ],
    "paths": [
     "game/scripts/missions/",
@@ -1903,12 +1925,13 @@
     "execution/MISSION_EX_M0303.md",
     "execution/MISSION_EX_M0304.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Goal: Chapter 3's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0301.md .. M0304.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH03 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §5 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §5 (§5.1–§5.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47."
+   "updated": "2026-11-05",
+   "prompt": "Goal: Chapter 3's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0301.md .. M0304.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH03 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §5 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §5 (§5.1–§5.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: the quake as a readable hazard and sled payloads for the harvest (§4.3, M3-65); report cards and messages via M3-64 and M1-56; follow §1 clarity rules."
   },
   {
    "id": "M3-3C",
@@ -2018,7 +2041,9 @@
     "M3-3V",
     "M3-3U",
     "M3-2Q",
-    "M3-3S"
+    "M3-3S",
+    "M3-3T",
+    "M3-66"
    ],
    "paths": [
     "production/qa/",
@@ -2027,12 +2052,13 @@
    "refs": [
     "execution/QA_01_CANON_AND_LEARNING.md",
     "execution/QA_04_VISUAL_CONTACTS.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Play Chapter 3 from a Chapter 2 save to the Chapter 4 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch03/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect."
+   "updated": "2026-11-05",
+   "prompt": "Play Chapter 3 from a Chapter 2 save to the Chapter 4 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch03/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
   },
   {
    "id": "M3-4A",
@@ -2110,12 +2136,13 @@
     "execution/PUZZLE_P08.md",
     "execution/UI_09_SCIENTIFIC_PUZZLE.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Problem: P07 and P08 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P07.md and execution/PUZZLE_P08.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §6 (P-07 §6.1–6.2, P-08 §6.2–6.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text."
+   "updated": "2026-11-05",
+   "prompt": "Problem: P07 and P08 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P07.md and execution/PUZZLE_P08.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §6 (P-07 §6.1–6.2, P-08 §6.2–6.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip)."
   },
   {
    "id": "M3-4M",
@@ -2132,7 +2159,13 @@
     "M1-38",
     "M3-4P",
     "M3-4R",
-    "M3-80"
+    "M3-80",
+    "M3-60",
+    "M3-61",
+    "M3-62",
+    "M3-63",
+    "M3-64",
+    "M3-65"
    ],
    "paths": [
     "game/scripts/missions/",
@@ -2145,12 +2178,13 @@
     "execution/MISSION_EX_M0403.md",
     "execution/MISSION_EX_M0404.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Goal: Chapter 4's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0401.md .. M0404.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH04 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §6 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §6 (§6.1–§6.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47."
+   "updated": "2026-11-05",
+   "prompt": "Goal: Chapter 4's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0401.md .. M0404.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH04 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §6 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §6 (§6.1–§6.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: the EVA and rover journey to the cold trap: route planning, beacons as markers that stay, cold shadow, the vault as a keep-cold payload (§4.2–§4.5); report cards and messages via M3-64 and M1-56; follow §1 clarity rules."
   },
   {
    "id": "M3-4C",
@@ -2259,7 +2293,9 @@
     "M3-4V",
     "M3-4U",
     "M3-3Q",
-    "M3-4S"
+    "M3-4S",
+    "M3-4T",
+    "M3-66"
    ],
    "paths": [
     "production/qa/",
@@ -2268,12 +2304,13 @@
    "refs": [
     "execution/QA_01_CANON_AND_LEARNING.md",
     "execution/QA_04_VISUAL_CONTACTS.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Play Chapter 4 from a Chapter 3 save to the Chapter 5 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch04/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect."
+   "updated": "2026-11-05",
+   "prompt": "Play Chapter 4 from a Chapter 3 save to the Chapter 5 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch04/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
   },
   {
    "id": "M3-5A",
@@ -2352,12 +2389,13 @@
     "execution/PUZZLE_P10.md",
     "execution/UI_09_SCIENTIFIC_PUZZLE.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Problem: P09 and P10 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P09.md and execution/PUZZLE_P10.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §7 (P-09 §7.1, P-10 §7.3–7.4 (the P-16 spare check is §7.2)) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text."
+   "updated": "2026-11-05",
+   "prompt": "Problem: P09 and P10 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P09.md and execution/PUZZLE_P10.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §7 (P-09 §7.1, P-10 §7.3–7.4 (the P-16 spare check is §7.2)) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip)."
   },
   {
    "id": "M3-5M",
@@ -2374,7 +2412,11 @@
     "M1-38",
     "M3-5P",
     "M3-5R",
-    "M3-80"
+    "M3-80",
+    "M3-60",
+    "M3-61",
+    "M3-64",
+    "M3-65"
    ],
    "paths": [
     "game/scripts/missions/",
@@ -2387,12 +2429,13 @@
     "execution/MISSION_EX_M0503.md",
     "execution/MISSION_EX_M0504.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Goal: Chapter 5's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0501.md .. M0504.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH05 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §7 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §7 (§7.1–§7.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47."
+   "updated": "2026-11-05",
+   "prompt": "Goal: Chapter 5's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0501.md .. M0504.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH05 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §7 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §7 (§7.1–§7.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: unloading Ferreira's relief cargo as deliveries, impact-flash observation and a shield-maintenance sortie (§4.3, M3-65); report cards and messages via M3-64 and M1-56; follow §1 clarity rules."
   },
   {
    "id": "M3-5C",
@@ -2503,7 +2546,9 @@
     "M3-5V",
     "M3-5U",
     "M3-4Q",
-    "M3-5S"
+    "M3-5S",
+    "M3-5T",
+    "M3-66"
    ],
    "paths": [
     "production/qa/",
@@ -2512,12 +2557,13 @@
    "refs": [
     "execution/QA_01_CANON_AND_LEARNING.md",
     "execution/QA_04_VISUAL_CONTACTS.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Play Chapter 5 from a Chapter 4 save to the Chapter 6 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch05/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect."
+   "updated": "2026-11-05",
+   "prompt": "Play Chapter 5 from a Chapter 4 save to the Chapter 6 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch05/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
   },
   {
    "id": "M3-6R",
@@ -2567,12 +2613,13 @@
     "execution/PUZZLE_P12.md",
     "execution/UI_09_SCIENTIFIC_PUZZLE.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Problem: P11 and P12 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P11.md and execution/PUZZLE_P12.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §8 (P-11 §8.1–8.2, P-12 §8.2–8.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text."
+   "updated": "2026-11-05",
+   "prompt": "Problem: P11 and P12 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P11.md and execution/PUZZLE_P12.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §8 (P-11 §8.1–8.2, P-12 §8.2–8.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip)."
   },
   {
    "id": "M3-6M",
@@ -2589,7 +2636,11 @@
     "M1-38",
     "M3-6P",
     "M3-6R",
-    "M3-80"
+    "M3-80",
+    "M3-60",
+    "M3-61",
+    "M3-64",
+    "M3-65"
    ],
    "paths": [
     "game/scripts/missions/",
@@ -2602,12 +2653,13 @@
     "execution/MISSION_EX_M0603.md",
     "execution/MISSION_EX_M0604.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Goal: Chapter 6's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0601.md .. M0604.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH06 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §8 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §8 (§8.1–§8.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47."
+   "updated": "2026-11-05",
+   "prompt": "Goal: Chapter 6's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0601.md .. M0604.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH06 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §8 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §8 (§8.1–§8.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: a sortie to the arrays and the fault in darkness on an energy budget (§4.2, M3-65); report cards and messages via M3-64 and M1-56; follow §1 clarity rules."
   },
   {
    "id": "M3-6C",
@@ -2717,7 +2769,9 @@
     "M3-6V",
     "M3-6U",
     "M3-5Q",
-    "M3-6S"
+    "M3-6S",
+    "M3-6T",
+    "M3-66"
    ],
    "paths": [
     "production/qa/",
@@ -2726,12 +2780,13 @@
    "refs": [
     "execution/QA_01_CANON_AND_LEARNING.md",
     "execution/QA_04_VISUAL_CONTACTS.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Play Chapter 6 from a Chapter 5 save to the Chapter 7 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch06/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect."
+   "updated": "2026-11-05",
+   "prompt": "Play Chapter 6 from a Chapter 5 save to the Chapter 7 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch06/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
   },
   {
    "id": "M3-7R",
@@ -2781,12 +2836,13 @@
     "execution/PUZZLE_P14.md",
     "execution/UI_09_SCIENTIFIC_PUZZLE.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Problem: P13 and P14 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P13.md and execution/PUZZLE_P14.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §9 (P-13 §9.1–9.2, P-14 §9.2–9.3) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.7 (Chapter 7) and the §2.9 bridge-list rows for CH07 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text."
+   "updated": "2026-11-05",
+   "prompt": "Problem: P13 and P14 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P13.md and execution/PUZZLE_P14.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §9 (P-13 §9.1–9.2, P-14 §9.2–9.3) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.7 (Chapter 7) and the §2.9 bridge-list rows for CH07 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip)."
   },
   {
    "id": "M3-7M",
@@ -2803,7 +2859,12 @@
     "M1-38",
     "M3-7P",
     "M3-7R",
-    "M3-80"
+    "M3-80",
+    "M3-60",
+    "M3-61",
+    "M3-62",
+    "M3-64",
+    "M3-65"
    ],
    "paths": [
     "game/scripts/missions/",
@@ -2816,12 +2877,13 @@
     "execution/MISSION_EX_M0703.md",
     "execution/MISSION_EX_M0704.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Goal: Chapter 7's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0701.md .. M0704.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH07 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §9 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §9 (§9.1–§9.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.7 (Chapter 7) and the §2.9 bridge-list rows for CH07 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47."
+   "updated": "2026-11-05",
+   "prompt": "Goal: Chapter 7's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0701.md .. M0704.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH07 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §9 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §9 (§9.1–§9.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.7 (Chapter 7) and the §2.9 bridge-list rows for CH07 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: the storm shelter run with the dosimeter, repeaters placed for the uplink (§4.4, M3-65); report cards and messages via M3-64 and M1-56; follow §1 clarity rules."
   },
   {
    "id": "M3-7C",
@@ -2930,7 +2992,9 @@
     "M3-7V",
     "M3-7U",
     "M3-6Q",
-    "M3-7S"
+    "M3-7S",
+    "M3-7T",
+    "M3-66"
    ],
    "paths": [
     "production/qa/",
@@ -2939,12 +3003,13 @@
    "refs": [
     "execution/QA_01_CANON_AND_LEARNING.md",
     "execution/QA_04_VISUAL_CONTACTS.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Play Chapter 7 from a Chapter 6 save to the Chapter 8 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch07/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.7 (Chapter 7) and the §2.9 bridge-list rows for CH07 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect."
+   "updated": "2026-11-05",
+   "prompt": "Play Chapter 7 from a Chapter 6 save to the Chapter 8 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch07/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.7 (Chapter 7) and the §2.9 bridge-list rows for CH07 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
   },
   {
    "id": "M3-8A",
@@ -3025,12 +3090,13 @@
     "execution/PUZZLE_P16.md",
     "execution/UI_09_SCIENTIFIC_PUZZLE.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Problem: P15 and P16 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P15.md and execution/PUZZLE_P16.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §10 (P-15 §10.1–10.2 (teams set in §9.4), P-16 §10.3–10.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text."
+   "updated": "2026-11-05",
+   "prompt": "Problem: P15 and P16 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P15.md and execution/PUZZLE_P16.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §10 (P-15 §10.1–10.2 (teams set in §9.4), P-16 §10.3–10.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip)."
   },
   {
    "id": "M3-8M",
@@ -3047,7 +3113,12 @@
     "M1-38",
     "M3-80",
     "M3-8P",
-    "M3-8R"
+    "M3-8R",
+    "M3-60",
+    "M3-61",
+    "M3-62",
+    "M3-63",
+    "M3-64"
    ],
    "paths": [
     "game/scripts/missions/",
@@ -3060,12 +3131,13 @@
     "execution/MISSION_EX_M0803.md",
     "execution/MISSION_EX_M0804.md",
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
-   "prompt": "Goal: Chapter 8's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0801.md .. M0804.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH08 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §10 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §10 (§10.1–§10.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47."
+   "updated": "2026-11-05",
+   "prompt": "Goal: Chapter 8's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0801.md .. M0804.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH08 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §10 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §10 (§10.1–§10.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: two teams on the 120 km relay road by rover on the CH04 markers, carrying the controller up the summit, and the voice arriving over the player's network (§4.4–§4.5); report cards and messages via M3-64 and M1-56; follow §1 clarity rules."
   },
   {
    "id": "M3-8C",
@@ -3178,7 +3250,9 @@
     "M3-8V",
     "M3-8U",
     "M3-7Q",
-    "M3-8S"
+    "M3-8S",
+    "M3-8T",
+    "M3-66"
    ],
    "paths": [
     "production/qa/",
@@ -3187,12 +3261,13 @@
    "refs": [
     "execution/QA_01_CANON_AND_LEARNING.md",
     "execution/QA_04_VISUAL_CONTACTS.md",
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Play Chapter 8 from a Chapter 7 save to the Chapter campaign end boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch08/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect."
+   "updated": "2026-11-05",
+   "prompt": "Play Chapter 8 from a Chapter 7 save to the Chapter campaign end boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch08/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6."
   },
   {
    "id": "M3-80",
@@ -3240,12 +3315,13 @@
    ],
    "refs": [
     "execution/UI_07_EXPEDITION_JOURNAL.md",
-    "execution/UI_16_CREDITS.md"
+    "execution/UI_16_CREDITS.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Implement execution/UI_07_EXPEDITION_JOURNAL.md, UI_08_DISCOVERY_LOG.md, UI_11_ROVER.md, UI_12_GREENHOUSE.md and UI_16_CREDITS.md\n(credits list from CREDITS.md and the AI-use summary; post-credits CS-18 still). Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
+   "updated": "2026-11-05",
+   "prompt": "Implement execution/UI_07_EXPEDITION_JOURNAL.md, UI_08_DISCOVERY_LOG.md, UI_11_ROVER.md, UI_12_GREENHOUSE.md and UI_16_CREDITS.md\n(credits list from CREDITS.md and the AI-use summary; post-credits CS-18 still). Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nEvery UI family follows the game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §2 design system and §1 clarity rules."
   },
   {
    "id": "M3-91",
@@ -3287,12 +3363,13 @@
     "production/plan/tasks.json"
    ],
    "refs": [
-    "game-design/24_NARRATIVE_REVISION.md"
+    "game-design/24_NARRATIVE_REVISION.md",
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Per execution/QA_01_CANON_AND_LEARNING.md, QA_03_RUNTIME_AND_SAVES.md and QA_05_ACCESSIBILITY_AND_UX.md over the complete campaign; file\ndefects as board tasks.\nInclude an independent science review of every chapter, as M1-40 did for Chapter 1.\n\nStory continuity: every one of the 100 joins in game-design/24_NARRATIVE_REVISION.md §2.9 must play in one full run; list each join with pass/fail."
+   "updated": "2026-11-05",
+   "prompt": "Per execution/QA_01_CANON_AND_LEARNING.md, QA_03_RUNTIME_AND_SAVES.md and QA_05_ACCESSIBILITY_AND_UX.md over the complete campaign; file\ndefects as board tasks.\nInclude an independent science review of every chapter, as M1-40 did for Chapter 1.\n\nStory continuity: every one of the 100 joins in game-design/24_NARRATIVE_REVISION.md §2.9 must play in one full run; list each join with pass/fail.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 across the whole campaign: no developer text, every join's messages, teaching coverage for every mechanic, and first-time chapter lengths."
   },
   {
    "id": "M3-93",
@@ -3919,6 +3996,551 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Record Amara \"Forty-two.\" (EX-CH03-S10), Rao \"Aurora, Earth. We hear you. Go ahead.\" (EX-CH08-S10) and Noor \"You finished what we could not.\" (EX-CH08-S10) with eleven_v4 in each speaker's voice from production/audio/voice_cast.csv; pick and master takes with production/tools/master_vo.py (delivery treatment per line); generate SFX_DHAKA_ROOFTOP_MORNING and SFX_INVENTORY_LAMP_TICK for M3-97. Log every generation in production/AI_PROMPT_LOG.md. Acceptance: vo_lines.csv rows say done; captions match; game/tools/run_tests.sh last line in the evidence."
+  },
+  {
+   "id": "M1-54",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "claude",
+   "title": "Clean, professional HUD: one plain-language goal, the UI design system, no developer text",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/scripts/ui/outpost_status.gd",
+    "game/scripts/ui/campaign_panels.gd",
+    "game/scenes/ui/",
+    "game/resources/ui/",
+    "game/resources/campaign/content/ui_text.json",
+    "game/tools/test_player_text.gd"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "production/qa/evidence/M1-09_hud_plan_button.png",
+    "production/ART_BIBLE.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: Sadman played the 5 Nov build and found the screen \"super confusing\": developer IDs (EX-CH01-S07, P-02), single-letter\nvariables (E 14/20, W 0, Z 0), an unreadable objective, and six panels covering ~70% of the screen (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §0).\nGoal: a clean, professional (AAA) interface where a new player always knows what to do and why.\nDo: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 (ten clarity rules, the §1.1 player-word table as display strings only) and §2 (design system, screen\nstates, removal of the always-on status cards/operations list/controls block). Goal card (goal ≤ 8 words + why ≤ 12 words),\nworld marker with distance, context prompts on objects, compact station strip that appears only on change or when low, What Now\non H, developer IDs only in debug builds behind F10. Keep every simulation value and rule; this is presentation. Write\ngame/tools/test_player_text.gd: walk every HUD/panel state and fail on visible text matching the §8.1 patterns, and check the\ncentre third stays clear in free movement (§8.2). Screenshot every state in §2.2 and a before/after pair of the same moment.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M1-55",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "claude",
+   "title": "Mission Table made simple: guided first shift, plain toggles, before-and-after forecast",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-54"
+   ],
+   "paths": [
+    "game/scripts/ui/mission_table_panel.gd",
+    "game/scenes/ui/mission_table"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/08_PUZZLE_DESIGNS.md",
+    "production/qa/evidence/M1-09_shift1_cards.png"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Problem: the Seven Shifts Mission Table (M1-09) works but reads like a spreadsheet (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §0.5).\nDo: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §3 exactly: three-step guided first shift, rows that appear when their information arrives (08's schedule),\nlabelled toggles with icons, before→after forecast bars with one consequence sentence, short crew-note cards with More, the\n7-shift night strip, buttons Try it · Lock in shift (Space) · Close (Esc), Save as Plan A under More. Same simulation and preview\nfunction as M1-09; existing P-02 tests must still pass unchanged. Screenshot every step of the guided first shift and shift 5.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M1-56",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Messages: inbox, arrival toasts, unlock triggers and the message validator",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-54"
+   ],
+   "paths": [
+    "game/scripts/comms/",
+    "game/scripts/ui/comms_panel.gd",
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/resources/campaign/content/messages/README.md",
+    "production/tools/check_messages.py",
+    "game/tools/test_comms.gd"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/24_NARRATIVE_REVISION.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Goal: every scene connects to the next with text messages (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5; joins in game-design/24_NARRATIVE_REVISION.md §2.9).\nDo: a Messages system: threads (crew, commander, earth, academy, archive), unread counts, a toast on arrival (never during\ndialogue), key M and the pause menu entry, messages flagged goal feed the goal card. Load every\ngame/resources/campaign/content/messages/ch*.json (schema in §5) and unlock on scene_enter / scene_exit / mission_done /\njob_done / found; record read state in the save. Write production/tools/check_messages.py (stdlib): parses game-design/24_NARRATIVE_REVISION.md §2.9 and fails\nunless every join present in the loaded chapter files has ≥ 2 messages, IDs are unique, unlock scene IDs exist in\nfull-game-story/story-data.json, bodies are ≤ 60 words, text is English (no U+0980–U+09FF), and \"Noor\"/\"Rahman\" never unlock\nbefore EX-CH05-S10. Add a two-message sample ch00 fixture for tests only. game/tools/test_comms.gd covers load, unlock, toast,\ngoal handoff and save.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M1-57",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "claude",
+   "title": "Chapter 1 messages: every scene joined to the next (at least 30 messages)",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-56"
+   ],
+   "paths": [
+    "game/resources/campaign/content/messages/ch01.json"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/24_NARRATIVE_REVISION.md",
+    "full-game-story/STORY_FULL.md",
+    "game-design/04_CHARACTER_BIBLE.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: write game/resources/campaign/content/messages/ch01.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 1 join in game-design/24_NARRATIVE_REVISION.md §2.9 (12 joins\nincluding CH01→CH02) at least 2 messages (what just happened and why it matters; what comes next and where), plus briefing,\nreport and character messages: at least 30 in all. Each in the sender's voice from the character bible, dated in story time,\n≤ 60 words, English only, consistent with STORY_FULL.md word for word where it quotes canon, no future names (N. only).\nMessages must make the plan legible to a new player: why air, battery, the shelter water and the plants matter tonight.\nRun production/tools/check_messages.py (must pass) and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M1-58",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Carrying payloads, and the shift-5 STACK as a real carry-and-place task",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/payload/",
+    "game/scripts/player/held_prop.gd",
+    "game/tools/test_payload.gd"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/08_PUZZLE_DESIGNS.md",
+    "game/scripts/player/held_prop.gd"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: a payload system per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.3: payloads with mass, size, handling (fragile, sealed, keep-cold) and destination; carry\nplaces (hands 1, back frame up to 3 small; sled and trailer hooks for later chapters); pickup refused with the reason when over\ncapacity; load and weight shown; delivery to a marked place checks condition. Reuse HeldProp for hand poses. Chapter 1: the\nshift-5 STACK becomes the physical task 08 defines (four supply bundles into outlined bunk slots in 30 s; partial = K1,\ncomplete = K2; assisted input before start; untimed in Family Mode; no falling-crate physics). Tests cover capacity, delivery\ncondition, STACK K0/K1/K2 and the assisted path; P-02 numbers unchanged.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M1-59",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "antigravity",
+   "title": "Explainer clips: the Godot clip pipeline, Chapter 1's clips, first-time cards and Journal How to",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-54",
+    "M1-55",
+    "M1-56",
+    "M1-58"
+   ],
+   "paths": [
+    "production/explainers/",
+    "game/assets/explainers/",
+    "game/scripts/ui/how_to_card.gd",
+    "game/resources/campaign/content/how_to.json"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "production/tools/ogv_writer.gd",
+    "production/tools/build_cutscene.sh"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §7: one spec file per clip in production/explainers/ drives the real game screens with scripted input plus\narrow, ring and caption overlays, rendered with Godot Movie Maker to game/assets/explainers/<id>.ogv (1152×648, 24 fps, 8–20 s,\ncaptions, English). Build the ten Chapter 1 clips listed in §7. A first-time card (title, one-line purpose, ≤ 3 steps, the clip,\nthen a guided first use) appears the first time each mechanic is needed; Journal → How to replays them; always skippable.\nRegistry game/resources/campaign/content/how_to.json; a test fails if a registered mechanic lacks a card or clip. Check every\nclip frame against the current UI (no stale screens).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-60",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "The Moon you can walk: the region around the ridge on real terrain (Fable)",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-36",
+    "M1-05"
+   ],
+   "paths": [
+    "game/scenes/world/moon_region",
+    "game/scripts/world/moon_region.gd",
+    "game/assets/environment/moon_region/"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/09_WORLD_AND_LEVEL_DESIGN.md",
+    "production/ART_BIBLE.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Goal: the RPG Moon Sadman asked for: a photoreal, walkable region around Aurora on the real LOLA terrain (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.1).\nDo: assemble LOC-06 (mast courtyard), LOC-07 (Expedition Zero annex exterior), LOC-08 (garage and landing apron), LOC-09\n(cold-trap approach) and LOC-10 (vault shelf) on the M1-36 terrain with streaming, collision and the 5 Nov look (one hard low Sun\nfrom the ephemeris, black sky, true-size Earth near the horizon, long shadows, no haze). Add the places worth visiting in §4.1,\neach with a reason hook (job, clue, view or measurement). Moon science rules (ART_BIBLE §2). 60 fps target on this Mac\n(perf probe). Screenshots from each location at story-correct Sun angles; a walk-through video capture.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-61",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "EVA: suit budget, scanner pulse, footing with load, and assist modes",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-58"
+   ],
+   "paths": [
+    "game/scripts/eva/",
+    "game/scripts/player/player_controller.gd",
+    "game/tools/test_eva.gd"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "docs/GAMEPLAY_DESIGN_FINAL.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.2: suit budget (oxygen, power, cooling) with cost and return reserve shown before leaving; scanner pulse\n(hold F) with slope bands carrying numbers and patterns plus boulders, soft regolith and cold shadow; footing (careful band slows;\npayload sway with Q/E lean; assisted balance in Story/Cadet); slips cost time and payload condition, never the mission; lunar\ngait and ballistic dust. Assist modes Story/Cadet/Expedition per §2.3. Build and test on a slope test level until M3-60 lands,\nthen on the region. Tests: budget arithmetic, reserve warnings, slope classification from heights, assisted vs manual balance.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-62",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Things you build stay: markers, fixed lines, lights, repeaters and the coverage map",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-61"
+   ],
+   "paths": [
+    "game/scripts/network/",
+    "game/scripts/save/",
+    "game/tools/test_network.gd"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/24_NARRATIVE_REVISION.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.4: placeable survey markers, fixed lines, path lights and relay repeaters made from carried payloads;\nsaved and shown on later trips, the map and the route planner (CH04 beacons return as a layer on the CH08 route map, game-design/24_NARRATIVE_REVISION.md N1);\na coverage map whose new links can unlock messages; the finale's voice travels over player-built links (P-16). Save migration\ntested; no change to canon outcomes.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-63",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "The rover and the route planner",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-61"
+   ],
+   "paths": [
+    "game/scripts/rover/",
+    "game/scripts/ui/route_planner.gd",
+    "game/tools/test_rover.gd"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game/resources/data/nasa/viper_slope_limit.json"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.5: rover with the VIPER-class slope limit from the fixture, battery with return reserve, trailer payloads,\ncab dashboard readouts, assisted driving that stays inside the limit (Expedition only warns); a route planner on the map with\nwaypoints, slope profile, distance, time, battery and reserve shown before confirming. Tests for the slope limit, reserve\narithmetic and planner estimates.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-64",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "The RPG layer: cadet record, skills, gear loadout, jobs board and rest",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-56",
+    "M1-58",
+    "M3-61"
+   ],
+   "paths": [
+    "game/scripts/progression/",
+    "game/scripts/ui/cadet_record.gd",
+    "game/scripts/ui/jobs_board.gd",
+    "game/resources/campaign/content/jobs.json",
+    "game/tools/test_progression.gd"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/24_NARRATIVE_REVISION.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.6: report cards after every sortie and job (training grades, never story gates); five cadet skills with\nthree ranks and visible small benefits plus a crew line per rank; gear loadout slots from the existing upgrade choices with a\nweight limit; a jobs board with optional deliveries, surveys, maintenance and science runs, each with a sender and reason in\nMessages; rest at the Safe Room bunks (save, messages, photos, record). Write at least 4 jobs per chapter region in jobs.json.\nTests: grading, rank thresholds, loadout weight, job unlocks.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-65",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Readable hazards: moonquake, cold, impact flashes, darkness, solar-storm shelter run",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-61"
+   ],
+   "paths": [
+    "game/scripts/hazards/",
+    "game/tools/test_hazards.gd"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/08_PUZZLE_DESIGNS.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: hazards per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.2 and §6, never combat: quake shaking with things to secure and aftershock warnings (CH03); cold shadow\nheater cost and equipment limits (CH04); impact flashes as observations and shield maintenance (CH05); darkness energy budget\n(CH06); solar storm dose that accumulates outside shelter with a dosimeter and a shelter run (CH07; untimed in Family Mode,\ndose still shown). Numbers from 08 where they exist; every hazard warns before it matters. Tests per hazard.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-66",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "antigravity",
+   "title": "Explainer clips for every chapter 2-8 mechanic",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-59",
+    "M3-61",
+    "M3-62",
+    "M3-63",
+    "M3-64",
+    "M3-65"
+   ],
+   "paths": [
+    "production/explainers/",
+    "game/assets/explainers/"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: with the M1-59 pipeline, build the chapter 2–8 clips listed in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §7 and register each with its first-time card;\nevery clip matches the current screens.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-67",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "antigravity",
+   "title": "Moon trainer: free training sorties on the real terrain from the title menu",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-29",
+    "M3-60",
+    "M3-61",
+    "M3-62",
+    "M3-63"
+   ],
+   "paths": [
+    "game/scripts/trainer/",
+    "game/scenes/trainer/"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.7 on top of M1-29 Mission Trainer: sorties that teach walking, the scanner, carrying, markers and the\nrover on the real region, with report cards and no story spoilers; reachable from the title menu.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-2T",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Chapter 2 messages: every scene joined to the next",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-56"
+   ],
+   "paths": [
+    "game/resources/campaign/content/messages/ch02.json"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/24_NARRATIVE_REVISION.md",
+    "full-game-story/STORY_FULL.md",
+    "game-design/04_CHARACTER_BIBLE.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: write game/resources/campaign/content/messages/ch02.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 2 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-3T",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Chapter 3 messages: every scene joined to the next",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-56"
+   ],
+   "paths": [
+    "game/resources/campaign/content/messages/ch03.json"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/24_NARRATIVE_REVISION.md",
+    "full-game-story/STORY_FULL.md",
+    "game-design/04_CHARACTER_BIBLE.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: write game/resources/campaign/content/messages/ch03.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 3 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-4T",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Chapter 4 messages: every scene joined to the next",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-56"
+   ],
+   "paths": [
+    "game/resources/campaign/content/messages/ch04.json"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/24_NARRATIVE_REVISION.md",
+    "full-game-story/STORY_FULL.md",
+    "game-design/04_CHARACTER_BIBLE.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: write game/resources/campaign/content/messages/ch04.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 4 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-5T",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Chapter 5 messages: every scene joined to the next",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-56"
+   ],
+   "paths": [
+    "game/resources/campaign/content/messages/ch05.json"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/24_NARRATIVE_REVISION.md",
+    "full-game-story/STORY_FULL.md",
+    "game-design/04_CHARACTER_BIBLE.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: write game/resources/campaign/content/messages/ch05.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 5 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-6T",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Chapter 6 messages: every scene joined to the next",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-56"
+   ],
+   "paths": [
+    "game/resources/campaign/content/messages/ch06.json"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/24_NARRATIVE_REVISION.md",
+    "full-game-story/STORY_FULL.md",
+    "game-design/04_CHARACTER_BIBLE.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: write game/resources/campaign/content/messages/ch06.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 6 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-7T",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Chapter 7 messages: every scene joined to the next",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-56"
+   ],
+   "paths": [
+    "game/resources/campaign/content/messages/ch07.json"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/24_NARRATIVE_REVISION.md",
+    "full-game-story/STORY_FULL.md",
+    "game-design/04_CHARACTER_BIBLE.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: write game/resources/campaign/content/messages/ch07.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 7 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-8T",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Chapter 8 messages: every scene joined to the next",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-56"
+   ],
+   "paths": [
+    "game/resources/campaign/content/messages/ch08.json"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/24_NARRATIVE_REVISION.md",
+    "full-game-story/STORY_FULL.md",
+    "game-design/04_CHARACTER_BIBLE.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: write game/resources/campaign/content/messages/ch08.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 8 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
   }
  ],
  "requirements": [
