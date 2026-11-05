@@ -3847,7 +3847,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Opening beat 1: a 6 s Earth mustard-field shot and its wind-and-birds effect",
-   "status": "todo",
+   "status": "blocked",
    "deps": [
     "M1-51"
    ],
@@ -3866,7 +3866,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "note": "From doc 24 NR-06. Get Sadman's approval of the 2D start frame before generating video.",
    "evidence": "",
    "updated": "2026-11-05",
-   "prompt": "Problem: the yellow fields that N. remembers in EX-CH02-S10-L03 and that the CH08-S10 rooftop returns to are never seen, so the line has no image for the player to recognise.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.1 beat 1, §4 clue 8, §2.11 (new SFX table); production/ART_BIBLE.md §1, §3, §6 (mustard botany: four-petal cross-shaped yellow flowers).\nDo: (1) Generate a start frame: a mustard field in winter morning light, yellow to the horizon, no person, no text, no logo, four-petal flowers in close detail; show it to Sadman and wait for approval. (2) Animate 6 s (wind through the field). (3) Generate SFX_EARTH_FIELD_MORNING (wind, distant birds) and add it to sfx_list.csv with caption [wind and birds]. (4) Put the shot before the M1-51 exterior, hard cut, matching the field's yellow to the battery band.\nAcceptance: Sadman's approval quoted in the evidence; flowers have four petals; nothing implies it is Noor or Alo; the exterior after it is silent; Log every AI generation in production/AI_PROMPT_LOG.md."
+   "prompt": "Problem: the yellow fields that N. remembers in EX-CH02-S10-L03 and that the CH08-S10 rooftop returns to are never seen, so the line has no image for the player to recognise.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.1 beat 1, §4 clue 8, §2.11 (new SFX table); production/ART_BIBLE.md §1, §3, §6 (mustard botany: four-petal cross-shaped yellow flowers).\nDo: (1) Generate a start frame: a mustard field in winter morning light, yellow to the horizon, no person, no text, no logo, four-petal flowers in close detail; show it to Sadman and wait for approval. (2) Animate 6 s (wind through the field). (3) Generate SFX_EARTH_FIELD_MORNING (wind, distant birds) and add it to sfx_list.csv with caption [wind and birds]. (4) Put the shot before the M1-51 exterior, hard cut, matching the field's yellow to the battery band.\nAcceptance: Sadman's approval quoted in the evidence; flowers have four petals; nothing implies it is Noor or Alo; the exterior after it is silent; Log every AI generation in production/AI_PROMPT_LOG.md.",
+   "owner": "Sadman/night-codex-main",
+   "blocker": "Sadman must review and approve the exact 2D Earth mustard-field start frame before video generation, and the approval must be quoted in acceptance evidence (M1-52 Do 1 / Acceptance; doc 24 section 8 NR-06). No field frame or matching approval is recorded in this checkout. Per the unattended brief step 3, stop until Sadman completes this approval in an attended session."
   },
   {
    "id": "M3-94",
