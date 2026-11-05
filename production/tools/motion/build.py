@@ -175,6 +175,11 @@ def stage(spec):
         "mono": '"SF Mono", Menlo, Consolas, monospace',
     }
     series = {k: lookup(v) for k, v in spec.get("series", {}).items()}
+    for k, rel in spec.get("images", {}).items():   # repo-relative image paths become file:// URLs for the stage page
+        img = ROOT / rel
+        if not img.exists():
+            fail(f"image {k}: {rel} does not exist")
+        spec["images"][k] = img.resolve().as_uri()
     work = EXPL / "build" / spec["id"]
     work.mkdir(parents=True, exist_ok=True)
     html = (

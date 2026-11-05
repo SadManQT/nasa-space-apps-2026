@@ -585,6 +585,116 @@
    "spec": "production/explainers/motion/specs/sci_proton_flux_chart.json"
   },
   {
+   "id": "sci_red_ring",
+   "kind": "science",
+   "level": "explainer",
+   "title": "The red ring",
+   "path": "res://assets/explainers/science/sci_red_ring.ogv",
+   "length_s": 40.04,
+   "labels": [
+    "diagram",
+    "measured"
+   ],
+   "sources": [
+    "nasa_eclipse_2047_01_12"
+   ],
+   "used_by": [
+    "EX-M0601",
+    "EX-M0603",
+    "P-11"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.8,
+     "text": "On 12 January 2047, the Sun, Earth and Moon line up."
+    },
+    {
+     "start": 9.2,
+     "end": 14.4,
+     "text": "The Moon slides into Earth's shadow: a total lunar eclipse."
+    },
+    {
+     "start": 15.4,
+     "end": 19.8,
+     "text": "From the Moon, Earth covers the whole Sun."
+    },
+    {
+     "start": 20.2,
+     "end": 24.6,
+     "text": "Sunlight bending through Earth's air paints a thin red ring around it."
+    },
+    {
+     "start": 25.0,
+     "end": 28.6,
+     "text": "The full shadow lasts about 70 minutes."
+    },
+    {
+     "start": 29.4,
+     "end": 33.6,
+     "text": "Those minutes are for the whole Moon."
+    }
+   ],
+   "ends_on": "While Earth hides the Sun, the panels make almost nothing. Plan the battery for the dark.",
+   "spec": "production/explainers/motion/specs/sci_red_ring.json"
+  },
+  {
+   "id": "sci_relays",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Relays and line of sight",
+   "path": "res://assets/explainers/science/sci_relays.ogv",
+   "length_s": 40.04,
+   "labels": [
+    "diagram",
+    "model"
+   ],
+   "sources": [
+    "esa_moonlight_relay",
+    "jpl_horizons_ch8_relay"
+   ],
+   "used_by": [
+    "EX-M0704",
+    "EX-M0803",
+    "P-15",
+    "P-16"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.6,
+     "text": "Radio travels in straight lines, and the Moon's surface curves away."
+    },
+    {
+     "start": 9.0,
+     "end": 15.4,
+     "text": "Around 8 April 2047, Earth is below the pole's horizon: no direct link."
+    },
+    {
+     "start": 16.4,
+     "end": 21.0,
+     "text": "A relay on a high peak can see both the base and Earth."
+    },
+    {
+     "start": 21.4,
+     "end": 25.8,
+     "text": "To see Earth then, it must stand at least 1.4 km high."
+    },
+    {
+     "start": 26.2,
+     "end": 29.6,
+     "text": "Repeaters along a road pass the signal hop by hop."
+    },
+    {
+     "start": 30.4,
+     "end": 34.6,
+     "text": "This is geometry, before the real terrain check."
+    }
+   ],
+   "ends_on": "If you cannot see it, you cannot talk to it. Put a relay where both ends are in view.",
+   "spec": "production/explainers/motion/specs/sci_relays.json"
+  },
+  {
    "id": "sci_rover_slopes",
    "kind": "science",
    "level": "explainer",
@@ -764,6 +874,63 @@
    ],
    "ends_on": "Use spare power before it spills, and keep enough in the tank for the dark.",
    "spec": "production/explainers/motion/specs/sci_solar_power.json"
+  },
+  {
+   "id": "sci_storms_2012_2017",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Solar storms in 2012 and 2017",
+   "path": "res://assets/explainers/science/sci_storms_2012_2017.ogv",
+   "length_s": 42.04,
+   "labels": [
+    "measured"
+   ],
+   "sources": [
+    "donki_2012_07",
+    "stereo_a_het_2012_07",
+    "goes13_protons_2017_09"
+   ],
+   "used_by": [
+    "EX-M0104",
+    "EX-M0701",
+    "EX-M0703",
+    "P-13",
+    "P-14"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.8,
+     "text": "In July 2012, the Sun threw out a huge cloud at about 3,435 km/s."
+    },
+    {
+     "start": 9.2,
+     "end": 14.8,
+     "text": "It missed Earth and hit the STEREO-A spacecraft instead."
+    },
+    {
+     "start": 16.4,
+     "end": 20.8,
+     "text": "STEREO-A's protons rose within hours; the shock arrived about 17 hours later."
+    },
+    {
+     "start": 21.2,
+     "end": 25.8,
+     "text": "The 2017 storm did reach Earth, peaking near 1,494 pfu."
+    },
+    {
+     "start": 26.2,
+     "end": 29.6,
+     "text": "Both are real. Only one hit home."
+    },
+    {
+     "start": 30.4,
+     "end": 35.6,
+     "text": "So the game's storm asks: what if the 2012 storm had hit the Moon?"
+    }
+   ],
+   "ends_on": "Real storms set the rules. Prepare as if the big one is aimed at you.",
+   "spec": "production/explainers/motion/specs/sci_storms_2012_2017.json"
   },
   {
    "id": "sci_water_evidence",

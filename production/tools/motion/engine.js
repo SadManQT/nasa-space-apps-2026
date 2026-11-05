@@ -178,5 +178,11 @@
       lines.forEach((l, i) => text(l, W / 2, y + 170 + i * 80, { size: 60, weight: 600, align: 'center', alpha: ex(seg(u, .4 + i * .25, 1.4 + i * .25)) }));
     },
   };
-  window.addEventListener('load', () => { window.ready = { W, H, FPS: SPEC.fps, duration: SPEC.length_s }; });
+  // Optional images (spec "images": real NASA renders such as a LOLA hillshade), preloaded before the first frame.
+  // A missing file rejects, which Playwright reports as a page error, so the render fails instead of drawing blanks.
+  window.IMG = {};
+  const loads = Object.entries(SPEC.images || {}).map(([k, src]) => new Promise((ok, bad) => {
+    const im = new Image(); im.onload = () => { IMG[k] = im; ok(); }; im.onerror = () => bad(new Error('image ' + k + ' did not load: ' + src)); im.src = src;
+  }));
+  window.addEventListener('load', () => { Promise.all(loads).then(() => { window.ready = { W, H, FPS: SPEC.fps, duration: SPEC.length_s }; }); });
 })();
