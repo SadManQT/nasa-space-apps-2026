@@ -629,7 +629,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "prompt": "Look at production/concept/lookdev_exterior_v1/ and pick A or B (or ask for changes). The AI records it in handbook §3."
   },
   {
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [],
    "paths": [
@@ -652,7 +652,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "tool": "claude",
    "title": "Real south-pole terrain from NASA LRO LOLA elevation data",
    "prompt": "Goal: every exterior is the real Moon. Download the NASA PDS LOLA south-pole DEM (e.g. LDEM 80S at 20 m/px, plus the 5 m/px Shackleton\ntiles where available; cite the product ID, DOI and URL in a provenance JSON next to the fixture), crop the areas the story uses (Aurora at the\nShackleton–de Gerlache connecting ridge, the cold trap for CH04, the 120 km relay road and Malapert summit for CH08), and convert them to\n16-bit heightmaps with the correct metres-per-pixel. Script it (production/tools/make_terrain.py, stdlib + numpy if installed) so it is\nreproducible. In Blender: add a detail layer (small craters and boulders by the size-frequency the ART_BIBLE allows; no invented mountains),\nbake normal/AO, and export Godot-ready terrain tiles with LODs; set the Sun azimuth and elevation for each story date from an ephemeris or\nthe LOLA illumination products, not by eye. Write the 'made from NASA data' credit line for the in-game Data Card and the video.\nAcceptance: heightmaps + provenance in the repo (LFS for binaries), tiles import in Godot, a side-by-side image of the LOLA hillshade and the\nin-game view in production/review/.",
-   "blocker": "Night shift parked the work on branch night/M1-34: This checkout already holds the earlier attempt parked on origin/night/M1-34 (uncommitted). Check it, finish the task and fix what stopped it:\n"
+   "blocker": "Night shift parked the work on branch night/M1-34: could not land: rebase conflict: rrain from NASA LRO LOLA elevation data\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with \"git"
   },
   {
    "status": "done",
