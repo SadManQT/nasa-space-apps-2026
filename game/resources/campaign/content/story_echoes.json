@@ -1,0 +1,1016 @@
+{
+  "schema_version": 1,
+  "board_task": "M1-50",
+  "about": "Persistent decision and moment echoes for Last Light Academy (doc 24 section 5.2 and section 5.4). Maps choice_id/option_id or moment_id to later scene echoes ({scene_id, kind, target_id, text}). Chapter 1 pack covers D1 (EX-CH01-S01-CHOICE) and D2 (EX-CH01-S04-CHOICE).",
+  "consumer_rules": [
+    "An echo fires only when its choice option (or moment) is in story_log and the player is in its scene_id; it is never shown before then.",
+    "When an echo fires, its text becomes a 'Where it showed up again' line under the linked Decision entry.",
+    "choices and moments are lookup maps of the same rows listed in entries; the M1-50 check keeps them identical."
+  ],
+  "decisions": [
+    {
+      "id": "D1",
+      "choice_id": "EX-CH01-S01-CHOICE",
+      "scene_id": "EX-CH01-S01",
+      "choice_kind": "preparation",
+      "title": "Where should spare commissioning energy go?",
+      "body": "Routing spare sunlight to stored air or the planting bay saves a dated Day-one photo that returns in Chapter 8.",
+      "persistent_state": "story_log.choices",
+      "reconnection": "Both options reach the fixed 25 April P-02 survival baseline.",
+      "options": {
+        "EX-CH01-S01-OPT01": {
+          "option_id": "EX-CH01-S01-OPT01",
+          "label": "Store air",
+          "immediate_consequence": "The air gauge rises in the commissioning exercise and a Day-one photo of the rising gauge is saved.",
+          "echo_ids": [
+            "ECHO-D1-OPT01-CH08-S05",
+            "ECHO-D1-OPT01-CH08-S12"
+          ]
+        },
+        "EX-CH01-S01-OPT02": {
+          "option_id": "EX-CH01-S01-OPT02",
+          "label": "Light the planting bay",
+          "immediate_consequence": "The empty planting bench glows warm and a Day-one photo of the lit bay is saved.",
+          "echo_ids": [
+            "ECHO-D1-OPT02-CH08-S05",
+            "ECHO-D1-OPT02-CH08-S12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "scene_id": "EX-CH01-S04",
+      "choice_kind": "preparation",
+      "title": "How is the notebook organised?",
+      "body": "Setting up the Growth Record as paired photographs or a paired conditions table keeps that layout across every garden comparison.",
+      "persistent_state": "story_log.choices",
+      "reconnection": "Both layouts hold the same dated care records and plant identities.",
+      "options": {
+        "EX-CH01-S04-OPT01": {
+          "option_id": "EX-CH01-S04-OPT01",
+          "label": "Paired photographs",
+          "layout_id": "paired_photographs",
+          "immediate_consequence": "The Growth Record opens in the paired-photographs layout.",
+          "echo_ids": [
+            "ECHO-D2-OPT01-CH01-S05",
+            "ECHO-D2-OPT01-CH01-S12",
+            "ECHO-D2-OPT01-CH03-S09",
+            "ECHO-D2-OPT01-CH03-S10",
+            "ECHO-D2-OPT01-CH03-S12",
+            "ECHO-D2-OPT01-CH04-S01",
+            "ECHO-D2-OPT01-CH08-S12"
+          ]
+        },
+        "EX-CH01-S04-OPT02": {
+          "option_id": "EX-CH01-S04-OPT02",
+          "label": "Paired conditions table",
+          "layout_id": "paired_conditions",
+          "immediate_consequence": "The Growth Record opens in the paired-conditions table layout.",
+          "echo_ids": [
+            "ECHO-D2-OPT02-CH01-S05",
+            "ECHO-D2-OPT02-CH01-S12",
+            "ECHO-D2-OPT02-CH03-S09",
+            "ECHO-D2-OPT02-CH03-S10",
+            "ECHO-D2-OPT02-CH03-S12",
+            "ECHO-D2-OPT02-CH04-S01",
+            "ECHO-D2-OPT02-CH08-S12"
+          ]
+        }
+      }
+    }
+  ],
+  "choices": {
+    "EX-CH01-S01-CHOICE": {
+      "EX-CH01-S01-OPT01": [
+        {
+          "id": "ECHO-D1-OPT01-CH08-S05",
+          "decision_id": "D1",
+          "choice_id": "EX-CH01-S01-CHOICE",
+          "option_id": "EX-CH01-S01-OPT01",
+          "source_scene_id": "EX-CH01-S01",
+          "scene_id": "EX-CH08-S05",
+          "kind": "photo",
+          "target_id": "commons_day_one_photo",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Framed Day-one air gauge photo",
+          "text": "Your framed 11 April photo of the rising air gauge hangs beside the home console during the second long night.",
+          "body": "Your framed 11 April photo of the rising air gauge hangs beside the home console during the second long night.",
+          "source": "EX-CH01-S01 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S01-DECISION-OPT01"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D1-OPT01-CH08-S12",
+          "decision_id": "D1",
+          "choice_id": "EX-CH01-S01-CHOICE",
+          "option_id": "EX-CH01-S01-OPT01",
+          "source_scene_id": "EX-CH01-S01",
+          "scene_id": "EX-CH08-S12",
+          "kind": "photo",
+          "target_id": "garden_final_photo_board",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Day-one air photo on the final board",
+          "text": "The 11 April air-gauge photo is pinned beside the final garden strip.",
+          "body": "The 11 April air-gauge photo is pinned beside the final garden strip.",
+          "source": "EX-CH01-S01 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S01-DECISION-OPT01"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        }
+      ],
+      "EX-CH01-S01-OPT02": [
+        {
+          "id": "ECHO-D1-OPT02-CH08-S05",
+          "decision_id": "D1",
+          "choice_id": "EX-CH01-S01-CHOICE",
+          "option_id": "EX-CH01-S01-OPT02",
+          "source_scene_id": "EX-CH01-S01",
+          "scene_id": "EX-CH08-S05",
+          "kind": "photo",
+          "target_id": "commons_day_one_photo",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Framed Day-one glowing bay photo",
+          "text": "Your framed 11 April photo of the glowing planting bay hangs beside the home console during the second long night.",
+          "body": "Your framed 11 April photo of the glowing planting bay hangs beside the home console during the second long night.",
+          "source": "EX-CH01-S01 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S01-DECISION-OPT02"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D1-OPT02-CH08-S12",
+          "decision_id": "D1",
+          "choice_id": "EX-CH01-S01-CHOICE",
+          "option_id": "EX-CH01-S01-OPT02",
+          "source_scene_id": "EX-CH01-S01",
+          "scene_id": "EX-CH08-S12",
+          "kind": "photo",
+          "target_id": "garden_final_photo_board",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Day-one glowing bay photo on the final board",
+          "text": "The 11 April photo of the glowing planting bench is pinned beside the final garden strip.",
+          "body": "The 11 April photo of the glowing planting bench is pinned beside the final garden strip.",
+          "source": "EX-CH01-S01 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S01-DECISION-OPT02"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        }
+      ]
+    },
+    "EX-CH01-S04-CHOICE": {
+      "EX-CH01-S04-OPT01": [
+        {
+          "id": "ECHO-D2-OPT01-CH01-S05",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT01",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH01-S05",
+          "kind": "journal",
+          "target_id": "garden_probe",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Growth Record in paired-photo layout",
+          "text": "Your Growth Record shows Alo and Tara side by side as paired dated photographs across the fourteen care days.",
+          "body": "Your Growth Record shows Alo and Tara side by side as paired dated photographs across the fourteen care days.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT01"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT01-CH01-S12",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT01",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH01-S12",
+          "kind": "journal",
+          "target_id": "garden_probe",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "First bloom in paired-photo layout",
+          "text": "Alo's first flower photo and Tara's indoor bud photo sit side by side in the paired-photo layout you chose on planting day.",
+          "body": "Alo's first flower photo and Tara's indoor bud photo sit side by side in the paired-photo layout you chose on planting day.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT01"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT01-CH03-S09",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT01",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH03-S09",
+          "kind": "journal",
+          "target_id": "garden_probe",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Maturity check in paired-photo layout",
+          "text": "Alo's 12 April sprout photo opens beside today's photo of her ripening pods, in the paired photographs you chose.",
+          "body": "Alo's 12 April sprout photo opens beside today's photo of her ripening pods, in the paired photographs you chose.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT01"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT01-CH03-S10",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT01",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH03-S10",
+          "kind": "journal",
+          "target_id": "garden_probe",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Harvest strip in paired-photo layout",
+          "text": "The Growth Record displays Alo's completed life cycle as the paired photo strip you started on 11 April.",
+          "body": "The Growth Record displays Alo's completed life cycle as the paired photo strip you started on 11 April.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT01"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT01-CH03-S12",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT01",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH03-S12",
+          "kind": "journal",
+          "target_id": "garden_tara_bay",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Multi-generation bridge in paired-photo layout",
+          "text": "Each new generation is added to the paired-photograph strip you set up on planting day.",
+          "body": "Each new generation is added to the paired-photograph strip you set up on planting day.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT01"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT01-CH04-S01",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT01",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH04-S01",
+          "kind": "journal",
+          "target_id": "garden_probe",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Descendant comparison in paired-photo layout",
+          "text": "The October stem-colour comparison opens in your paired-photograph layout from Chapter 1.",
+          "body": "The October stem-colour comparison opens in your paired-photograph layout from Chapter 1.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT01"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT01-CH08-S12",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT01",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH08-S12",
+          "kind": "object",
+          "target_id": "garden_lineage_board",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Paired-photo strip on the lineage board",
+          "text": "The Growth Record strip on the lineage board shows the paired photographs you started on 11 April 2046.",
+          "body": "The Growth Record strip on the lineage board shows the paired photographs you started on 11 April 2046.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT01"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        }
+      ],
+      "EX-CH01-S04-OPT02": [
+        {
+          "id": "ECHO-D2-OPT02-CH01-S05",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT02",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH01-S05",
+          "kind": "journal",
+          "target_id": "garden_probe",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Growth Record in paired-conditions layout",
+          "text": "Your Growth Record compares Alo and Tara in a paired conditions table of moisture, heat and light across fourteen care days.",
+          "body": "Your Growth Record compares Alo and Tara in a paired conditions table of moisture, heat and light across fourteen care days.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT02"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT02-CH01-S12",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT02",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH01-S12",
+          "kind": "journal",
+          "target_id": "garden_probe",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "First bloom in paired-conditions layout",
+          "text": "Alo's dawn bloom and Tara's indoor bud are logged in the paired conditions table you chose on planting day.",
+          "body": "Alo's dawn bloom and Tara's indoor bud are logged in the paired conditions table you chose on planting day.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT02"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT02-CH03-S09",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT02",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH03-S09",
+          "kind": "journal",
+          "target_id": "garden_probe",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Maturity check in paired-conditions layout",
+          "text": "Alo's 12 April readings sit beside today's maturity readings in the paired conditions table you chose.",
+          "body": "Alo's 12 April readings sit beside today's maturity readings in the paired conditions table you chose.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT02"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT02-CH03-S10",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT02",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH03-S10",
+          "kind": "journal",
+          "target_id": "garden_probe",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Harvest table in paired-conditions layout",
+          "text": "The Growth Record shows Alo's full life cycle in the paired conditions table you started on 11 April.",
+          "body": "The Growth Record shows Alo's full life cycle in the paired conditions table you started on 11 April.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT02"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT02-CH03-S12",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT02",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH03-S12",
+          "kind": "journal",
+          "target_id": "garden_tara_bay",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Multi-generation bridge in paired-conditions layout",
+          "text": "Each new generation is logged in the paired conditions table you set up on planting day.",
+          "body": "Each new generation is logged in the paired conditions table you set up on planting day.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT02"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT02-CH04-S01",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT02",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH04-S01",
+          "kind": "journal",
+          "target_id": "garden_probe",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Descendant comparison in paired-conditions layout",
+          "text": "The October stem-colour comparison opens in your paired conditions table from Chapter 1.",
+          "body": "The October stem-colour comparison opens in your paired conditions table from Chapter 1.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT02"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        },
+        {
+          "id": "ECHO-D2-OPT02-CH08-S12",
+          "decision_id": "D2",
+          "choice_id": "EX-CH01-S04-CHOICE",
+          "option_id": "EX-CH01-S04-OPT02",
+          "source_scene_id": "EX-CH01-S04",
+          "scene_id": "EX-CH08-S12",
+          "kind": "object",
+          "target_id": "garden_lineage_board",
+          "tab": "decisions",
+          "type": "decision_echo",
+          "status": "LINKED",
+          "title": "Paired-conditions strip on the lineage board",
+          "text": "The Growth Record strip on the lineage board shows the paired conditions table you started on 11 April 2046.",
+          "body": "The Growth Record strip on the lineage board shows the paired conditions table you started on 11 April 2046.",
+          "source": "EX-CH01-S04 choice",
+          "evidence_label": "Simulated",
+          "links": [
+            "J-CH01-S04-DECISION-OPT02"
+          ],
+          "gate_flag": "",
+          "superseded_by": "",
+          "moment_id": ""
+        }
+      ]
+    }
+  },
+  "moments": {
+    "CH01-MUGS-NAMED": [
+      {
+        "id": "ECHO-MOMENT-MUGS-CH04-S12",
+        "decision_id": "M1",
+        "choice_id": "",
+        "option_id": "",
+        "source_scene_id": "EX-CH01-S12",
+        "scene_id": "EX-CH04-S12",
+        "kind": "object",
+        "target_id": "commons_mission_table",
+        "tab": "people",
+        "type": "moment_echo",
+        "status": "LINKED",
+        "title": "Fifth mug above the table",
+        "text": "A fifth mug is clipped above the table, beside the four mugs the cadets named after Night One.",
+        "body": "A fifth mug is clipped above the table, beside the four mugs the cadets named after Night One.",
+        "source": "CH01-MUGS-NAMED moment",
+        "evidence_label": "Fiction",
+        "links": [
+          "J-CH01-S12-MOMENT-MUGS"
+        ],
+        "gate_flag": "",
+        "superseded_by": "",
+        "moment_id": "CH01-MUGS-NAMED"
+      }
+    ]
+  },
+  "entries": [
+    {
+      "id": "ECHO-D1-OPT01-CH08-S05",
+      "decision_id": "D1",
+      "choice_id": "EX-CH01-S01-CHOICE",
+      "option_id": "EX-CH01-S01-OPT01",
+      "source_scene_id": "EX-CH01-S01",
+      "scene_id": "EX-CH08-S05",
+      "kind": "photo",
+      "target_id": "commons_day_one_photo",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Framed Day-one air gauge photo",
+      "text": "Your framed 11 April photo of the rising air gauge hangs beside the home console during the second long night.",
+      "body": "Your framed 11 April photo of the rising air gauge hangs beside the home console during the second long night.",
+      "source": "EX-CH01-S01 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S01-DECISION-OPT01"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D1-OPT01-CH08-S12",
+      "decision_id": "D1",
+      "choice_id": "EX-CH01-S01-CHOICE",
+      "option_id": "EX-CH01-S01-OPT01",
+      "source_scene_id": "EX-CH01-S01",
+      "scene_id": "EX-CH08-S12",
+      "kind": "photo",
+      "target_id": "garden_final_photo_board",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Day-one air photo on the final board",
+      "text": "The 11 April air-gauge photo is pinned beside the final garden strip.",
+      "body": "The 11 April air-gauge photo is pinned beside the final garden strip.",
+      "source": "EX-CH01-S01 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S01-DECISION-OPT01"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D1-OPT02-CH08-S05",
+      "decision_id": "D1",
+      "choice_id": "EX-CH01-S01-CHOICE",
+      "option_id": "EX-CH01-S01-OPT02",
+      "source_scene_id": "EX-CH01-S01",
+      "scene_id": "EX-CH08-S05",
+      "kind": "photo",
+      "target_id": "commons_day_one_photo",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Framed Day-one glowing bay photo",
+      "text": "Your framed 11 April photo of the glowing planting bay hangs beside the home console during the second long night.",
+      "body": "Your framed 11 April photo of the glowing planting bay hangs beside the home console during the second long night.",
+      "source": "EX-CH01-S01 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S01-DECISION-OPT02"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D1-OPT02-CH08-S12",
+      "decision_id": "D1",
+      "choice_id": "EX-CH01-S01-CHOICE",
+      "option_id": "EX-CH01-S01-OPT02",
+      "source_scene_id": "EX-CH01-S01",
+      "scene_id": "EX-CH08-S12",
+      "kind": "photo",
+      "target_id": "garden_final_photo_board",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Day-one glowing bay photo on the final board",
+      "text": "The 11 April photo of the glowing planting bench is pinned beside the final garden strip.",
+      "body": "The 11 April photo of the glowing planting bench is pinned beside the final garden strip.",
+      "source": "EX-CH01-S01 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S01-DECISION-OPT02"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT01-CH01-S05",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT01",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH01-S05",
+      "kind": "journal",
+      "target_id": "garden_probe",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Growth Record in paired-photo layout",
+      "text": "Your Growth Record shows Alo and Tara side by side as paired dated photographs across the fourteen care days.",
+      "body": "Your Growth Record shows Alo and Tara side by side as paired dated photographs across the fourteen care days.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT01"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT01-CH01-S12",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT01",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH01-S12",
+      "kind": "journal",
+      "target_id": "garden_probe",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "First bloom in paired-photo layout",
+      "text": "Alo's first flower photo and Tara's indoor bud photo sit side by side in the paired-photo layout you chose on planting day.",
+      "body": "Alo's first flower photo and Tara's indoor bud photo sit side by side in the paired-photo layout you chose on planting day.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT01"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT01-CH03-S09",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT01",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH03-S09",
+      "kind": "journal",
+      "target_id": "garden_probe",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Maturity check in paired-photo layout",
+      "text": "Alo's 12 April sprout photo opens beside today's photo of her ripening pods, in the paired photographs you chose.",
+      "body": "Alo's 12 April sprout photo opens beside today's photo of her ripening pods, in the paired photographs you chose.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT01"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT01-CH03-S10",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT01",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH03-S10",
+      "kind": "journal",
+      "target_id": "garden_probe",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Harvest strip in paired-photo layout",
+      "text": "The Growth Record displays Alo's completed life cycle as the paired photo strip you started on 11 April.",
+      "body": "The Growth Record displays Alo's completed life cycle as the paired photo strip you started on 11 April.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT01"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT01-CH03-S12",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT01",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH03-S12",
+      "kind": "journal",
+      "target_id": "garden_tara_bay",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Multi-generation bridge in paired-photo layout",
+      "text": "Each new generation is added to the paired-photograph strip you set up on planting day.",
+      "body": "Each new generation is added to the paired-photograph strip you set up on planting day.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT01"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT01-CH04-S01",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT01",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH04-S01",
+      "kind": "journal",
+      "target_id": "garden_probe",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Descendant comparison in paired-photo layout",
+      "text": "The October stem-colour comparison opens in your paired-photograph layout from Chapter 1.",
+      "body": "The October stem-colour comparison opens in your paired-photograph layout from Chapter 1.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT01"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT01-CH08-S12",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT01",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH08-S12",
+      "kind": "object",
+      "target_id": "garden_lineage_board",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Paired-photo strip on the lineage board",
+      "text": "The Growth Record strip on the lineage board shows the paired photographs you started on 11 April 2046.",
+      "body": "The Growth Record strip on the lineage board shows the paired photographs you started on 11 April 2046.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT01"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT02-CH01-S05",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT02",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH01-S05",
+      "kind": "journal",
+      "target_id": "garden_probe",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Growth Record in paired-conditions layout",
+      "text": "Your Growth Record compares Alo and Tara in a paired conditions table of moisture, heat and light across fourteen care days.",
+      "body": "Your Growth Record compares Alo and Tara in a paired conditions table of moisture, heat and light across fourteen care days.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT02"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT02-CH01-S12",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT02",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH01-S12",
+      "kind": "journal",
+      "target_id": "garden_probe",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "First bloom in paired-conditions layout",
+      "text": "Alo's dawn bloom and Tara's indoor bud are logged in the paired conditions table you chose on planting day.",
+      "body": "Alo's dawn bloom and Tara's indoor bud are logged in the paired conditions table you chose on planting day.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT02"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT02-CH03-S09",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT02",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH03-S09",
+      "kind": "journal",
+      "target_id": "garden_probe",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Maturity check in paired-conditions layout",
+      "text": "Alo's 12 April readings sit beside today's maturity readings in the paired conditions table you chose.",
+      "body": "Alo's 12 April readings sit beside today's maturity readings in the paired conditions table you chose.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT02"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT02-CH03-S10",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT02",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH03-S10",
+      "kind": "journal",
+      "target_id": "garden_probe",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Harvest table in paired-conditions layout",
+      "text": "The Growth Record shows Alo's full life cycle in the paired conditions table you started on 11 April.",
+      "body": "The Growth Record shows Alo's full life cycle in the paired conditions table you started on 11 April.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT02"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT02-CH03-S12",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT02",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH03-S12",
+      "kind": "journal",
+      "target_id": "garden_tara_bay",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Multi-generation bridge in paired-conditions layout",
+      "text": "Each new generation is logged in the paired conditions table you set up on planting day.",
+      "body": "Each new generation is logged in the paired conditions table you set up on planting day.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT02"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT02-CH04-S01",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT02",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH04-S01",
+      "kind": "journal",
+      "target_id": "garden_probe",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Descendant comparison in paired-conditions layout",
+      "text": "The October stem-colour comparison opens in your paired conditions table from Chapter 1.",
+      "body": "The October stem-colour comparison opens in your paired conditions table from Chapter 1.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT02"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-D2-OPT02-CH08-S12",
+      "decision_id": "D2",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT02",
+      "source_scene_id": "EX-CH01-S04",
+      "scene_id": "EX-CH08-S12",
+      "kind": "object",
+      "target_id": "garden_lineage_board",
+      "tab": "decisions",
+      "type": "decision_echo",
+      "status": "LINKED",
+      "title": "Paired-conditions strip on the lineage board",
+      "text": "The Growth Record strip on the lineage board shows the paired conditions table you started on 11 April 2046.",
+      "body": "The Growth Record strip on the lineage board shows the paired conditions table you started on 11 April 2046.",
+      "source": "EX-CH01-S04 choice",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-DECISION-OPT02"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": ""
+    },
+    {
+      "id": "ECHO-MOMENT-MUGS-CH04-S12",
+      "decision_id": "M1",
+      "choice_id": "",
+      "option_id": "",
+      "source_scene_id": "EX-CH01-S12",
+      "scene_id": "EX-CH04-S12",
+      "kind": "object",
+      "target_id": "commons_mission_table",
+      "tab": "people",
+      "type": "moment_echo",
+      "status": "LINKED",
+      "title": "Fifth mug above the table",
+      "text": "A fifth mug is clipped above the table, beside the four mugs the cadets named after Night One.",
+      "body": "A fifth mug is clipped above the table, beside the four mugs the cadets named after Night One.",
+      "source": "CH01-MUGS-NAMED moment",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S12-MOMENT-MUGS"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "moment_id": "CH01-MUGS-NAMED"
+    }
+  ]
+}

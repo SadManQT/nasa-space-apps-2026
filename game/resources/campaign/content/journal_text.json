@@ -1,0 +1,3228 @@
+{
+  "schema_version": 1,
+  "board_task": "M1-50",
+  "chapter_id": "CH01",
+  "about": "Chapter 1 narrative text pack for the Expedition Journal (Now, Evidence, Garden, Decisions, People and Science tabs), Growth Record caption templates, resume card templates, the EX-CH01-S03 drawer-lid note, the Chapter 1 mistake feedback sentence and the Alo Lost blame-free debrief text.",
+  "consumer_rules": [
+    "Show an entry only after its trigger fires in the saved snapshot; nothing appears early.",
+    "Show a link only when the linked entry is already shown; links never preview later entries.",
+    "Gate titles and bodies by gate_flag, never by keyword (doc 24 section 6.5). Chapter 1 needs no gate flags: N. stays N.",
+    "surface 'journal' entries belong to the tabs; the other surfaces are the P-02 preview, the chapter debrief, the resume card and the Growth Record templates.",
+    "Fill {placeholders} only from the snapshot; a placeholders map lists the allowed words for a slot.",
+    "evidence_label uses the catalog domain: Simulated, Fiction or Computed-pending."
+  ],
+  "drawer_lid_note": {
+    "entry_id": "J-CH01-S03-LID",
+    "inscription": "Seed 1: outer chamber. Seed 2: inside, for comparison. Water at"
+  },
+  "chapter1_feedback": "J-CH01-S11-FEEDBACK-DRAIN",
+  "alo_lost_debrief": "J-CH01-S11-DEBRIEF-ALO-LOST",
+  "growth_record_templates": [
+    "J-TPL-GROWTH-PHOTO",
+    "J-TPL-GROWTH-TABLE",
+    "J-TPL-GROWTH-LIFECYCLE"
+  ],
+  "resume_templates": [
+    "J-RESUME-LINE-1",
+    "J-RESUME-LINE-2",
+    "J-RESUME-LINE-3",
+    "J-RESUME-LINE-4",
+    "J-RESUME-LINE-5",
+    "J-RESUME-LINE-6"
+  ],
+  "entries": [
+    {
+      "id": "J-CH01-S01-TARGET-COMMISSION-ROUTE",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Sunlight routing traced",
+      "body": "The battery is full at 20 units while the solar mast keeps making power. Extra energy can fill the air tank or warm the planting bay instead of spilling.",
+      "date": "2046-04-11 06:00 UTC",
+      "scene_id": "EX-CH01-S01",
+      "source": "Aurora mission table",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S01-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S01",
+        "target_id": "commission_route"
+      },
+      "surface": "journal",
+      "target_id": "commission_route"
+    },
+    {
+      "id": "J-CH01-S01-TARGET-COMMISSION-RESULT",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Commissioning route checked",
+      "body": "We compared storing extra air against lighting the planting bench. Both choices are safe and leave the April 25 night baseline unchanged.",
+      "date": "2046-04-11 06:00 UTC",
+      "scene_id": "EX-CH01-S01",
+      "source": "Aurora mission table",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S01-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S01",
+        "target_id": "commission_result"
+      },
+      "surface": "journal",
+      "target_id": "commission_result"
+    },
+    {
+      "id": "J-CH01-S01-TARGET-CHARTER-CARD",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Station charter and stop rule",
+      "body": "Rafi turned the emergency card toward every seat at the table. Any cadet may stop an operation when something seems unsafe.",
+      "date": "2046-04-11 06:00 UTC",
+      "scene_id": "EX-CH01-S01",
+      "source": "Commons charter card",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S01",
+        "target_id": "charter_card"
+      },
+      "surface": "journal",
+      "target_id": "charter_card"
+    },
+    {
+      "id": "J-CH01-S02-TARGET-CLASSIFY-INFORMATION",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Local, stored and live-link paths",
+      "body": "Station sensors, suit radios and printed safety cards stay here at Aurora. Losing the live Earth screen only pauses long-distance conversation.",
+      "date": "2046-04-11 07:00 UTC",
+      "scene_id": "EX-CH01-S02",
+      "source": "Safe Room response controls",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S02-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S02",
+        "target_id": "classify_information"
+      },
+      "surface": "journal",
+      "target_id": "classify_information"
+    },
+    {
+      "id": "J-CH01-S02-TARGET-ROLL-CALL",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Four crew name tokens",
+      "body": "Rafi placed four crew name tokens on the Safe Room board. Names stand for people, and we never trade a person for a resource.",
+      "date": "2046-04-11 07:00 UTC",
+      "scene_id": "EX-CH01-S02",
+      "source": "Safe Room roll-call board",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S02",
+        "target_id": "roll_call"
+      },
+      "surface": "journal",
+      "target_id": "roll_call"
+    },
+    {
+      "id": "J-CH01-S02-TARGET-PRACTICE-FAULT",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Practice fault cleared locally",
+      "body": "We solved the disconnected practice fault using the stored station card alone. The garden bench can be made safe before the crew steps into the shelter.",
+      "date": "2046-04-11 07:00 UTC",
+      "scene_id": "EX-CH01-S02",
+      "source": "Safe Room practice panel",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S02-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S02",
+        "target_id": "practice_fault"
+      },
+      "surface": "journal",
+      "target_id": "practice_fault"
+    },
+    {
+      "id": "J-CH01-S03-TARGET-INSPECT-PACKET",
+      "tab": "evidence",
+      "type": "clue",
+      "status": "OBSERVED",
+      "title": "Seed packet",
+      "body": "Two dry seeds, the word ALO and the initial N. The original stays sealed; we copied the label.",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Dry-storage drawer",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-Q-WHO-IS-N",
+        "J-Q-WHY-TWO-SEEDS",
+        "J-Q-WHY-ALO-NAME"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S03",
+        "target_id": "inspect_packet"
+      },
+      "surface": "journal",
+      "target_id": "inspect_packet"
+    },
+    {
+      "id": "J-CH01-S03-LID",
+      "tab": "evidence",
+      "type": "clue",
+      "status": "OBSERVED",
+      "title": "Drawer lid",
+      "body": "A pencilled plan for two seeds: one outside, one inside for comparison. The last line stops at \"Water at\".",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Drawer lid (inspection camera)",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-Q-WHO-IS-N",
+        "J-Q-WHY-TWO-SEEDS"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S03",
+        "target_id": "inspect_packet"
+      },
+      "surface": "journal",
+      "target_id": ""
+    },
+    {
+      "id": "J-CH01-S03-TARGET-CALIBRATE-PROBE",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Probe dry zero set",
+      "body": "The dry reference read 10 when it should read 0, so the probe was off by 10. Setting zero first keeps our soil readings honest.",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Calibration bench",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S03-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S03",
+        "target_id": "calibrate_probe"
+      },
+      "surface": "journal",
+      "target_id": "calibrate_probe"
+    },
+    {
+      "id": "J-CH01-S03-TARGET-SPAN-PROBE",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Probe wet span set",
+      "body": "We matched the moisture probe to the wet reference sample at 100. Now the scale between bone-dry and fully wet is fixed.",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Calibration bench",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S03-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S03",
+        "target_id": "span_probe"
+      },
+      "surface": "journal",
+      "target_id": "span_probe"
+    },
+    {
+      "id": "J-CH01-S03-TARGET-RECHECK-PROBE",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Probe calibration verified",
+      "body": "Rechecking both reference blocks confirmed 0 dry and 100 wet with no drift. The probe is ready to measure the 40 to 60 planting moisture band.",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Calibration bench",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S03-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S03",
+        "target_id": "recheck_probe"
+      },
+      "surface": "journal",
+      "target_id": "recheck_probe"
+    },
+    {
+      "id": "J-CH01-S03-TARGET-COMPARE-ATMOSPHERE",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Two sealed plant chambers",
+      "body": "Both the outer test chamber and the indoor bay hold warm, pressurised air. Neither seed ever touches lunar vacuum.",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Chamber atmosphere diagram",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S03-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S03",
+        "target_id": "compare_atmosphere"
+      },
+      "surface": "journal",
+      "target_id": "compare_atmosphere"
+    },
+    {
+      "id": "J-CH01-S03-INF-PLAN",
+      "tab": "evidence",
+      "type": "interpretation",
+      "status": "INFERRED",
+      "title": "Planned two-chamber test",
+      "body": "Whoever left the seeds planned the same two-chamber test we are running. Something interrupted the note before the watering line was finished.",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Seed packet and drawer lid",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-Q-WHO-IS-N",
+        "J-Q-WHY-TWO-SEEDS"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S03",
+        "target_id": "inspect_packet"
+      },
+      "surface": "journal",
+      "target_id": ""
+    },
+    {
+      "id": "J-CH01-S04-TARGET-PLANT-ALO",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Alo planted in outer chamber",
+      "body": "Mei guided the first seed into the sealed outer test cassette through the glove ports. Kai held the work light steady while the transfer lid stayed latched.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Outer chamber glove ports",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "plant_alo"
+      },
+      "surface": "journal",
+      "target_id": "plant_alo"
+    },
+    {
+      "id": "J-CH01-S04-TARGET-PLANT-TARA",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Tara planted in reference bay",
+      "body": "The second seed from the same packet was planted in the indoor reference bay and named Tara. A reference plant gets the same careful care as the outer test plant.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Indoor reference bay",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "plant_tara"
+      },
+      "surface": "journal",
+      "target_id": "plant_tara"
+    },
+    {
+      "id": "J-CH01-S04-TARGET-WATER-ALO",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Alo watered to calibrated band",
+      "body": "We watered Alo's cassette to inside the 40 to 60 band. The calibrated probe checked the reading before we sealed it.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Outer chamber glove ports",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "water_alo"
+      },
+      "surface": "journal",
+      "target_id": "water_alo"
+    },
+    {
+      "id": "J-CH01-S04-TARGET-WATER-TARA",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Tara watered to calibrated band",
+      "body": "Tara's indoor cassette was watered to the same calibrated 40 to 60 moisture band. Matching starting water lets us compare the two chambers fairly.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Indoor reference bay",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "water_tara"
+      },
+      "surface": "journal",
+      "target_id": "water_tara"
+    },
+    {
+      "id": "J-CH01-S04-TARGET-LABEL-ALO",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Alo labelled EXTERNAL TEST",
+      "body": "Alo's holder carries the label EXTERNAL TEST with today's planting date and seed lot. Clear labels keep our observations tied to the right chamber.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Outer chamber holder",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "label_alo"
+      },
+      "surface": "journal",
+      "target_id": "label_alo"
+    },
+    {
+      "id": "J-CH01-S04-TARGET-LABEL-TARA",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Tara labelled INDOOR REFERENCE",
+      "body": "Tara's holder carries the label INDOOR REFERENCE beside her own close-up camera view. Both plants now have named places in the notebook.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Indoor reference bay",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "label_tara"
+      },
+      "surface": "journal",
+      "target_id": "label_tara"
+    },
+    {
+      "id": "J-CH01-S04-TARGET-SEAL-ALO",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Alo cassette sealed",
+      "body": "The outer test cassette seal locked cleanly and held pressure. Alo is safe inside her pressurised enclosure.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Outer chamber glove ports",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "seal_alo"
+      },
+      "surface": "journal",
+      "target_id": "seal_alo"
+    },
+    {
+      "id": "J-CH01-S04-TARGET-SEAL-TARA",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Tara cassette sealed",
+      "body": "Tara's indoor reference cassette seal closed and passed its check. Both seeds are now enclosed with warm air, water and light.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Indoor reference bay",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "seal_tara"
+      },
+      "surface": "journal",
+      "target_id": "seal_tara"
+    },
+    {
+      "id": "J-CH01-S04-TARGET-RECORD-PAIRED-CONDITIONS",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Paired Growth Record started",
+      "body": "We wrote down the warmth, water and light beside the first photo of each plant. With the conditions next to each photo, later changes are easier to explain.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Botanical bench notebook",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "record_paired_conditions"
+      },
+      "surface": "journal",
+      "target_id": "record_paired_conditions"
+    },
+    {
+      "id": "J-CH01-S04-TARGET-CONFIRM-SERVICES",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Both chamber services confirmed",
+      "body": "Power, air, heat and water lines were verified for both plant chambers. The original seed packet is back in dry storage.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Garden service panel",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "confirm_services"
+      },
+      "surface": "journal",
+      "target_id": "confirm_services"
+    },
+    {
+      "id": "J-CH01-S05-TARGET-TEST-HAND-LIGHT",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Backup hand light hung ready",
+      "body": "Rafi hung a tested backup hand light handle-out beside the corridor locker. Its home is marked on the equipment board so anyone can reach it in the dark.",
+      "date": "2046-04-11 evening UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "Service corridor locker",
+      "evidence_label": "Fiction",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S05",
+        "target_id": "test_hand_light"
+      },
+      "surface": "journal",
+      "target_id": "test_hand_light"
+    },
+    {
+      "id": "J-CH01-S05-TARGET-CARE-MONTAGE",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Fourteen dated care entries",
+      "body": "We made fourteen dated care entries for both plants: moisture, connections, root photos and new leaves. Both Alo and Tara formed green buds on 18 April.",
+      "date": "2046-04-24 UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "Garden care station",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S05-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S05",
+        "target_id": "care_montage"
+      },
+      "surface": "journal",
+      "target_id": "care_montage"
+    },
+    {
+      "id": "J-CH01-S05-TARGET-CONFIRM-DATE-TRANSITION",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Dated care complete",
+      "body": "The date card moved to 24 April only after every care visit was recorded. Both plants are in bud before the night plan begins on 25 April.",
+      "date": "2046-04-24 UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "Growth Record notebook",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S05-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S05",
+        "target_id": "confirm_date_transition"
+      },
+      "surface": "journal",
+      "target_id": "confirm_date_transition"
+    },
+    {
+      "id": "J-CH01-S06-TARGET-ARRANGE-TIMELINE",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Three separate night tracks",
+      "body": "Sunlight, the Earth radio link and station switches sit on separate timeline tracks. Two daylight shifts come before five dark shifts in this 36-hour training scenario.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S06",
+      "source": "Horizon and timeline display",
+      "evidence_label": "Computed-pending",
+      "links": [
+        "J-CH01-S06-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S06",
+        "target_id": "arrange_timeline"
+      },
+      "surface": "journal",
+      "target_id": "arrange_timeline"
+    },
+    {
+      "id": "J-CH01-S06-TARGET-ACK-SCHEDULE",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Shared night schedule checked",
+      "body": "With the shelter's water and the garden's watering on one board, we spotted a clash early. We added a time to send the water back before using anything.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S06",
+      "source": "Aurora mission table",
+      "evidence_label": "Computed-pending",
+      "links": [
+        "J-CH01-S06-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S06",
+        "target_id": "ack_schedule"
+      },
+      "surface": "journal",
+      "target_id": "ack_schedule"
+    },
+    {
+      "id": "J-CH01-S07-TARGET-ROLE-CARDS",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Four specialist role constraints",
+      "body": "Power, air, garden and safety cards each show part of the night budget. No single card can solve the seven shifts without the others.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S07",
+      "source": "Service power and air panels",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S07-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S07",
+        "target_id": "role_cards"
+      },
+      "surface": "journal",
+      "target_id": "role_cards"
+    },
+    {
+      "id": "J-CH01-S07-TARGET-P02-SHIFT1",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Daylight shift 1 committed",
+      "body": "We committed daylight shift 1 with the battery cap and the whole night in view. Kai wrote the reason beside the setting for the next watch.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S07",
+      "source": "Mission Table shift planner",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S07-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S07",
+        "target_id": "p02_shift1"
+      },
+      "surface": "journal",
+      "target_id": "p02_shift1"
+    },
+    {
+      "id": "J-CH01-S07-TARGET-P02-STAGE-SHIFT2",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Daylight shift 2 staged for drill",
+      "body": "Shift 2 is staged in the forecast and paused until the Safe Room drill finishes. Staging lets us check the whole night before we lock the second shift.",
+      "date": "2046-04-25 10:48 UTC",
+      "scene_id": "EX-CH01-S07",
+      "source": "Mission Table shift planner",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S07",
+        "target_id": "p02_stage_shift2"
+      },
+      "surface": "journal",
+      "target_id": "p02_stage_shift2"
+    },
+    {
+      "id": "J-CH01-S08-TARGET-SHELTER-DRILL",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Safe Room drill and roll call",
+      "body": "All four cadets counted themselves into the Safe Room and practised moving garden water into the shelter wall. The storm trace is a labelled replay of a real 2017 event.",
+      "date": "2046-04-25 10:48 UTC",
+      "scene_id": "EX-CH01-S08",
+      "source": "Safe Room roll-call board",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S08-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S08",
+        "target_id": "shelter_drill"
+      },
+      "surface": "journal",
+      "target_id": "shelter_drill"
+    },
+    {
+      "id": "J-CH01-S08-TARGET-VERIFY-DRILL-BASELINE",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Pre-drill baseline unchanged",
+      "body": "Amara read the post-drill meters aloud to prove practice spent no real energy, air or water. Kai drew a return ticket arrow so we remember to send borrowed water back.",
+      "date": "2046-04-25 10:48 UTC",
+      "scene_id": "EX-CH01-S08",
+      "source": "Safe Room response controls",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S08-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S08",
+        "target_id": "verify_drill_baseline"
+      },
+      "surface": "journal",
+      "target_id": "verify_drill_baseline"
+    },
+    {
+      "id": "J-CH01-S08-TARGET-P02-SHIFT2",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Daylight shift 2 committed at 18:00",
+      "body": "With the shelter drill complete, we committed the second daylight shift at the 18:00 gate. The solar masts now approach sunset with reserves stored.",
+      "date": "2046-04-25 18:00 UTC",
+      "scene_id": "EX-CH01-S08",
+      "source": "Safe Room response controls",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S08",
+        "target_id": "p02_shift2"
+      },
+      "surface": "journal",
+      "target_id": "p02_shift2"
+    },
+    {
+      "id": "J-CH01-S09-TARGET-COMBINE-CARDS",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "OBSERVED",
+      "title": "Cold, thirst and storm cards combined",
+      "body": "Mei's card says cold and thirst are Alo's biggest dangers tonight, and Rafi's storm warning needs the same water for the shelter wall. Reading the two cards together lets us plan for the crew and the garden at once.",
+      "date": "2046-04-25 18:00 UTC",
+      "scene_id": "EX-CH01-S09",
+      "source": "Aurora mission table",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S09-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S09",
+        "target_id": "combine_cards"
+      },
+      "surface": "journal",
+      "target_id": "combine_cards"
+    },
+    {
+      "id": "J-CH01-S09-TARGET-ACK-EARTH-SET",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Earth-link cutoff acknowledged",
+      "body": "We read back Ferreira's last instruction before the Earth-link cutoff greyed out the live channel. Local rules and stored guidance stay active at Aurora.",
+      "date": "2046-04-26 01:12 UTC",
+      "scene_id": "EX-CH01-S09",
+      "source": "Commons Earth screen",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S09-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S09",
+        "target_id": "ack_earth_set"
+      },
+      "surface": "journal",
+      "target_id": "ack_earth_set"
+    },
+    {
+      "id": "J-CH01-S09-TARGET-P02-SHIFTS3-4",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Dark shifts 3 and 4 resolved",
+      "body": "We committed the first two dark shifts using stored power and local rules. The hand light stayed in its marked place.",
+      "date": "2046-04-26 08:24 UTC",
+      "scene_id": "EX-CH01-S09",
+      "source": "Aurora mission table",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S09",
+        "target_id": "p02_shifts3_4"
+      },
+      "surface": "journal",
+      "target_id": "p02_shifts3_4"
+    },
+    {
+      "id": "J-CH01-S10-TARGET-CONFIRM-FOUR-SHELTERED",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "All four cadets sheltered",
+      "body": "When the instrument alarm rose in dark shift 5, Rafi called four names and waited for four answers. Every cadet was inside the Safe Room before we committed a response.",
+      "date": "2046-04-26 08:24 UTC",
+      "scene_id": "EX-CH01-S10",
+      "source": "Safe Room roll-call board",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S10-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S10",
+        "target_id": "confirm_four_sheltered"
+      },
+      "surface": "journal",
+      "target_id": "confirm_four_sheltered"
+    },
+    {
+      "id": "J-CH01-S10-TARGET-P02-SHIFT5-ALARM",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Shift 5 storm response committed",
+      "body": "Mei asked Kai to read our chosen action back, so we acted as one team instead of rushing. One allowed response ran under the rules we practised.",
+      "date": "2046-04-26 08:24 UTC",
+      "scene_id": "EX-CH01-S10",
+      "source": "Safe Room response controls",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S10-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S10",
+        "target_id": "p02_shift5_alarm"
+      },
+      "surface": "journal",
+      "target_id": "p02_shift5_alarm"
+    },
+    {
+      "id": "J-CH01-S11-TARGET-VERIFY-EXPOSURE-ORDER",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Exposure step verified complete",
+      "body": "Amara checked the instrument log to confirm the storm exposure step finished before touching the water valve. Shielding water stays in the wall until its job is done.",
+      "date": "2046-04-26 15:36 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Garden probe and line display",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S11-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S11",
+        "target_id": "verify_exposure_order"
+      },
+      "surface": "journal",
+      "target_id": "verify_exposure_order"
+    },
+    {
+      "id": "J-CH01-S11-TARGET-RETURN-WATER",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Borrowed water returned to garden",
+      "body": "At a legal gate we drained the shelter wall back into the garden reservoir. The garden's water supply is open again.",
+      "date": "2046-04-26 15:36 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Garden service valve",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S11-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S11",
+        "target_id": "return_water"
+      },
+      "surface": "journal",
+      "target_id": "return_water"
+    },
+    {
+      "id": "J-CH01-S11-TARGET-P02-SHIFTS6-7",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Final dark shifts 6 and 7 resolved",
+      "body": "We committed the last two dark shifts, which end at 06:00 UTC on 27 April. The forecast checked every shift's demand against the stored energy.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Garden probe and shift console",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S11",
+        "target_id": "p02_shifts6_7"
+      },
+      "surface": "journal",
+      "target_id": "p02_shifts6_7"
+    },
+    {
+      "id": "J-CH01-S11-TARGET-REVIEW-OUTCOME",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Night One causal outcome reviewed",
+      "body": "We reviewed the night shift by shift: what kept the crew safe and what happened to Alo's bud. The review names a cause, not a person.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Garden outcome review panel",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S11-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S11",
+        "target_id": "review_outcome"
+      },
+      "surface": "journal",
+      "target_id": "review_outcome"
+    },
+    {
+      "id": "J-CH01-S12-TARGET-VERIFY-CHAMBER",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Outer chamber safe before shutter",
+      "body": "At dawn we checked the air pressure, warmth and water in Alo's outer chamber, and all were steady. We check safety before we celebrate.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Outer chamber glove port gauge",
+      "evidence_label": "Fiction",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S12",
+        "target_id": "verify_chamber"
+      },
+      "surface": "journal",
+      "target_id": "verify_chamber"
+    },
+    {
+      "id": "J-CH01-S12-TARGET-OPEN-SHUTTER",
+      "tab": "evidence",
+      "type": "clue",
+      "status": "OBSERVED",
+      "title": "First bloom at dawn",
+      "body": "When we opened the viewing shutter, Alo had a yellow mustard flower with four petals. She came through the 36-hour night inside her sealed chamber.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Garden viewing shutter",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-Q-ALO-FRIEND"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S12",
+        "target_id": "open_shutter"
+      },
+      "surface": "journal",
+      "target_id": "open_shutter"
+    },
+    {
+      "id": "J-CH01-S12-TARGET-TAG-BLOOM",
+      "tab": "evidence",
+      "type": "clue",
+      "status": "OBSERVED",
+      "title": "A recording, not a call",
+      "body": "It played when we tagged the bloom photo. Nobody could call us: the Earth link was down.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Horticulture recorder",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-Q-WHO-IS-N",
+        "J-Q-ALO-FRIEND",
+        "J-CH01-S12-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S12",
+        "target_id": "tag_bloom"
+      },
+      "surface": "journal",
+      "target_id": "tag_bloom"
+    },
+    {
+      "id": "J-CH01-S12-TARGET-INSPECT-TARA",
+      "tab": "evidence",
+      "type": "clue",
+      "status": "OBSERVED",
+      "title": "Tara's bud in the reference bay",
+      "body": "Tara is still in bud in the indoor reference bay, on a healthy green stem. When the message said Alo needs a friend, Mei looked toward her.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Indoor reference bay",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-Q-ALO-FRIEND"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S12",
+        "target_id": "inspect_tara"
+      },
+      "surface": "journal",
+      "target_id": "inspect_tara"
+    },
+    {
+      "id": "J-CH01-S12-TARGET-COMPLETE-DEBRIEF",
+      "tab": "evidence",
+      "type": "fact",
+      "status": "VERIFIED",
+      "title": "Night One debrief complete",
+      "body": "Our debrief separated the real 2017 storm record, the training schedule and the parts of Aurora's story that are fiction. The bloom photo now sits beside the sealed packet marked N.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Garden debrief console",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-Q-WHO-IS-N",
+        "J-Q-ALO-FRIEND"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S12",
+        "target_id": "complete_debrief"
+      },
+      "surface": "journal",
+      "target_id": "complete_debrief"
+    },
+    {
+      "id": "J-CH01-S12-INF-MESSAGE",
+      "tab": "evidence",
+      "type": "interpretation",
+      "status": "INFERRED",
+      "title": "Left for a future bloom",
+      "body": "The voice signed N. was recorded before we arrived and set to play for a bloom. Whoever N. is expected someone to be here to hear it.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Horticulture recorder and Tara bay",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-Q-WHO-IS-N",
+        "J-Q-ALO-FRIEND"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S12",
+        "target_id": "tag_bloom"
+      },
+      "surface": "journal",
+      "target_id": ""
+    },
+    {
+      "id": "J-Q-WHO-IS-N",
+      "tab": "evidence",
+      "type": "question",
+      "status": "UNKNOWN",
+      "title": "Who is N.?",
+      "body": "Someone left two seeds in a packet marked ALO and N. Who is N., and when were they here?",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Seed packet and drawer lid",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S03-TARGET-INSPECT-PACKET",
+        "J-CH01-S03-LID",
+        "J-CH01-S12-TARGET-TAG-BLOOM",
+        "J-CH01-S12-INF-MESSAGE"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S03",
+        "target_id": "inspect_packet"
+      },
+      "surface": "journal",
+      "target_id": ""
+    },
+    {
+      "id": "J-Q-WHY-TWO-SEEDS",
+      "tab": "evidence",
+      "type": "question",
+      "status": "UNKNOWN",
+      "title": "Why only two seeds?",
+      "body": "The drawer held only two seeds and a pencilled plan that stops in the middle of a line. Why two seeds, and why did the note stop?",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Dry-storage drawer lid",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S03-LID",
+        "J-CH01-S03-INF-PLAN"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S03",
+        "target_id": "inspect_packet"
+      },
+      "surface": "journal",
+      "target_id": ""
+    },
+    {
+      "id": "J-Q-WHY-ALO-NAME",
+      "tab": "evidence",
+      "type": "question",
+      "status": "UNKNOWN",
+      "title": "Why the name Alo?",
+      "body": "The packet is marked ALO, which means light. Why did the person who left the seeds choose that name?",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Seed packet",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S03-TARGET-INSPECT-PACKET"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S03",
+        "target_id": "inspect_packet"
+      },
+      "surface": "journal",
+      "target_id": ""
+    },
+    {
+      "id": "J-Q-ALO-FRIEND",
+      "tab": "evidence",
+      "type": "question",
+      "status": "UNKNOWN",
+      "title": "Why does Alo need a friend?",
+      "body": "The stored message says Alo needs a friend now that she has bloomed. What kind of friend does a flowering plant need, and could it be Tara?",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Stored bloom recording",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S12-TARGET-TAG-BLOOM",
+        "J-CH01-S12-TARGET-INSPECT-TARA"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S12",
+        "target_id": "tag_bloom"
+      },
+      "surface": "journal",
+      "target_id": ""
+    },
+    {
+      "id": "J-CH01-S01-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "A full store can't take more",
+      "body": "Extra sunlight spills if the battery is already full. Check where energy can be used or stored before calling it spare.",
+      "date": "2046-04-11 06:00 UTC",
+      "scene_id": "EX-CH01-S01",
+      "source": "EX-CH01-S01 learning block",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S01-TARGET-COMMISSION-ROUTE"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "Storage limits and useful loads.",
+        "predict": "What reaches a full store?",
+        "observe": "The preview distinguishes useful routing from overflow.",
+        "explain": "Available production is not unlimited storage.",
+        "transfer": "Check where energy can be used or stored before treating it as spare."
+      }
+    },
+    {
+      "id": "J-CH01-S02-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "Local rules work without Earth",
+      "body": "Losing the Earth radio link stops live calls, not the station's air, sensors or safety cards. A good emergency plan never depends on one phone line.",
+      "date": "2046-04-11 07:00 UTC",
+      "scene_id": "EX-CH01-S02",
+      "source": "EX-CH01-S02 learning block",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S02-TARGET-CLASSIFY-INFORMATION"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "Independent operations and shared procedures.",
+        "predict": "Which instructions disappear with a radio path?",
+        "observe": "Local cards, sensors and suit links remain.",
+        "explain": "Communications and life support are separate systems.",
+        "transfer": "A school emergency plan should not depend on one phone."
+      }
+    },
+    {
+      "id": "J-CH01-S03-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "Measurements need a reference",
+      "body": "A sensor number only makes sense after we check it against known dry and wet samples. Always check how an instrument was zeroed before trusting it.",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "EX-CH01-S03 learning block",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S03-TARGET-CALIBRATE-PROBE",
+        "J-CH01-S03-TARGET-RECHECK-PROBE"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S03"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "Measurements need references.",
+        "predict": "Does outside mean exposed?",
+        "observe": "Both chambers maintain atmosphere.",
+        "explain": "A reading needs an instrument and a reference.",
+        "transfer": "Check how an instrument was zeroed before relying on it."
+      }
+    },
+    {
+      "id": "J-CH01-S04-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "Comparisons keep their conditions",
+      "body": "A plant photo means more when we write down the date, temperature, water and light beside it. Keeping both records together shows what really caused a change.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "EX-CH01-S04 learning block",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-TARGET-RECORD-PAIRED-CONDITIONS"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S04"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "Comparisons retain their conditions.",
+        "predict": "Is a single photograph enough?",
+        "observe": "Dates and environment records accompany each image.",
+        "explain": "Outcomes need context to be interpreted.",
+        "transfer": "Record light and watering in a classroom growing comparison."
+      }
+    },
+    {
+      "id": "J-CH01-S05-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "Growth takes time and daily care",
+      "body": "Plants do not jump from seed to bud in one second; they grow through days of steady water, warmth and light. Keeping notes on ordinary days shows how the bud was earned.",
+      "date": "2046-04-24 UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "EX-CH01-S05 learning block",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S05-TARGET-CARE-MONTAGE"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S05"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "Growth takes time and sustained care.",
+        "predict": "What happens between seed and bud?",
+        "observe": "Dated maintenance is retained in the montage.",
+        "explain": "Time compression need not imply instant biology.",
+        "transfer": "Keep records of ordinary days in a growing experiment."
+      }
+    },
+    {
+      "id": "J-CH01-S06-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "Separate tracks, linked schedules",
+      "body": "Sunlight, the Earth radio link and station switches change at different gates. Putting them on one timeline shows where shelter water and garden care overlap.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S06",
+      "source": "EX-CH01-S06 learning block",
+      "evidence_label": "Computed-pending",
+      "links": [
+        "J-CH01-S06-TARGET-ARRANGE-TIMELINE"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S06"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "Independent systems have linked schedules.",
+        "predict": "Does sunset end everything simultaneously?",
+        "observe": "The tracks change at separate gates.",
+        "explain": "Timelines expose dependencies without conflating events.",
+        "transfer": "Separate deadlines, communications and resources in a project plan."
+      }
+    },
+    {
+      "id": "J-CH01-S07-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "One shared budget connects all roles",
+      "body": "Air makers, heaters and plant lamps all spend from the same stored power. Compare complete shift plans instead of looking at one system alone.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S07",
+      "source": "EX-CH01-S07 learning block",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S07-TARGET-ROLE-CARDS"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S07"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "A shared resource budget connects systems.",
+        "predict": "Can one load change without affecting the forecast?",
+        "observe": "Every setting uses the same shared budget.",
+        "explain": "Compare whole plans rather than separate best cases.",
+        "transfer": "Agree on a single shared budget before promising separate outcomes."
+      }
+    },
+    {
+      "id": "J-CH01-S08-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "Borrowing water includes returning it",
+      "body": "The same water cannot fill the shelter wall and water the garden at the same time. Plan when shared equipment comes back before you borrow it.",
+      "date": "2046-04-25 10:48 UTC",
+      "scene_id": "EX-CH01-S08",
+      "source": "EX-CH01-S08 learning block",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S08-TARGET-SHELTER-DRILL"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S08"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "Conservation and sequence in protective systems.",
+        "predict": "Can the same water be in both places?",
+        "observe": "The diagram moves a conserved reservoir.",
+        "explain": "Protection has secondary costs that need restoration.",
+        "transfer": "Plan the return of shared equipment before borrowing it."
+      }
+    },
+    {
+      "id": "J-CH01-S09-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "Different roles see the whole problem",
+      "body": "Storm protection and plant thirst use the same water tank. Combining Mei's and Rafi's observations lets us build a plan that works for both.",
+      "date": "2046-04-25 18:00 UTC",
+      "scene_id": "EX-CH01-S09",
+      "source": "EX-CH01-S09 learning block",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S09-TARGET-COMBINE-CARDS"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S09"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "Information from different roles changes decisions.",
+        "predict": "Which two facts affect the water plan?",
+        "observe": "Storm risk and plant thirst share a reservoir.",
+        "explain": "Good plans combine specialist observations.",
+        "transfer": "Ask what another person knows before committing a shared plan."
+      }
+    },
+    {
+      "id": "J-CH01-S10-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "Prepared drills beat frantic clicks",
+      "body": "Clicking faster cannot collect two exclusive emergency actions at once. Following the agreed roll call and reading back one choice keeps the team safe.",
+      "date": "2046-04-26 08:24 UTC",
+      "scene_id": "EX-CH01-S10",
+      "source": "EX-CH01-S10 learning block",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S10-TARGET-P02-SHIFT5-ALARM"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S10"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "Preparation reduces emergency confusion.",
+        "predict": "Does more frantic input always help?",
+        "observe": "Only one exclusive response resolves.",
+        "explain": "Resources and procedure determine a safe response.",
+        "transfer": "Follow an agreed drill sequence rather than inventing simultaneous tasks."
+      }
+    },
+    {
+      "id": "J-CH01-S11-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "Recovery completes a safety plan",
+      "body": "Wait until the storm exposure finishes before draining the shelter wall, then send the water home to the garden. Emergency actions need a clear end step.",
+      "date": "2046-04-26 15:36 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "EX-CH01-S11 learning block",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S11-TARGET-VERIFY-EXPOSURE-ORDER",
+        "J-CH01-S11-TARGET-RETURN-WATER"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S11"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "Recovery completes a safety plan.",
+        "predict": "When can a protective resource return?",
+        "observe": "Exposure, drainage and later plant effects occur in order.",
+        "explain": "Interventions need explicit end conditions.",
+        "transfer": "Check safe restoration after using emergency supplies."
+      }
+    },
+    {
+      "id": "J-CH01-S12-CONCEPT",
+      "tab": "science",
+      "type": "concept",
+      "status": "VERIFIED",
+      "title": "Stored media versus live contact",
+      "body": "The bloom message played because tagging the flower photo started a file stored at Aurora. Checking where a message comes from tells a recording apart from a live call.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "EX-CH01-S12 learning block",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S12-TARGET-TAG-BLOOM"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_complete",
+        "scene_id": "EX-CH01-S12"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "learning": {
+        "concept": "Evidence distinguishes stored media from live contact.",
+        "predict": "Why does a message play while Earth is unavailable?",
+        "observe": "The recorder shows its local origin and event trigger.",
+        "explain": "A stored message can respond to a local event.",
+        "transfer": "Distinguish recorded messages from live conversations."
+      }
+    },
+    {
+      "id": "J-CH01-S01-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "Sunlight We Cannot Keep",
+      "body": "Trace where the spare sunlight goes, choose stored air or the planting bay, and read the station charter. This is the crew's first decision at Aurora.",
+      "date": "2046-04-11 06:00 UTC",
+      "scene_id": "EX-CH01-S01",
+      "source": "Mission EX-M0101",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Trace where the spare sunlight goes, choose stored air or the planting bay, and read the station charter.",
+      "completed_text": "You routed spare commissioning sunlight and accepted Aurora's safety charter."
+    },
+    {
+      "id": "J-CH01-S02-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "The Rule That Works Without Earth",
+      "body": "Sort local, stored and Earth-link information, run the four-person roll call, and clear the practice fault. A safe station has to work even when Earth cannot answer.",
+      "date": "2046-04-11 07:00 UTC",
+      "scene_id": "EX-CH01-S02",
+      "source": "Mission EX-M0101",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Sort local, stored and Earth-link information, run the four-person roll call, and clear the practice fault.",
+      "completed_text": "You completed the four-person roll call and solved the practice fault using local rules."
+    },
+    {
+      "id": "J-CH01-S03-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "A Label Older Than Our Names",
+      "body": "Calibrate the moisture probe, inspect the sealed seed packet, and compare both plant chambers. Two old seeds need a fair beginning.",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Mission EX-M0101",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-Q-WHO-IS-N"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S03"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Calibrate the moisture probe, inspect the sealed seed packet, and compare both plant chambers.",
+      "completed_text": "You calibrated the moisture probe and inspected the sealed ALO seed packet."
+    },
+    {
+      "id": "J-CH01-S04-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "Two Places for a Beginning",
+      "body": "Plant, water, label and seal one seed in each cassette, then record their conditions. Each plant gets its own place and its own record.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Mission EX-M0102",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S04"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Plant, water, label and seal one seed in each cassette, then record their conditions.",
+      "completed_text": "You planted Alo outside and Tara inside and opened their paired Growth Record."
+    },
+    {
+      "id": "J-CH01-S05-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "An Important Scientific Lamp",
+      "body": "Hang the backup hand light, then complete the dated care visits for both plants. Time moves on only after each day's care is recorded.",
+      "date": "2046-04-11 evening UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "Mission EX-M0102",
+      "evidence_label": "Fiction",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S05"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Hang the backup hand light, then complete the dated care visits for both plants.",
+      "completed_text": "You hung the backup hand light and logged fourteen care entries through first buds."
+    },
+    {
+      "id": "J-CH01-S06-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "The Night Has a Shape",
+      "body": "Put the Sun, Earth-link and station tracks in order, then check the shared night schedule. A long night is easier to face when it has a timetable.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S06",
+      "source": "Mission EX-M0102",
+      "evidence_label": "Computed-pending",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S06"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Put the Sun, Earth-link and station tracks in order, then check the shared night schedule.",
+      "completed_text": "You aligned the three night timeline tracks and scheduled the water return."
+    },
+    {
+      "id": "J-CH01-S07-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "Air Before the Jar Spills",
+      "body": "Read the four role cards, commit daylight shift 1, and stage shift 2 without committing it. What the station stores in daylight has to last the dark shifts.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S07",
+      "source": "Mission EX-M0103",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S07"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Read the four role cards, commit daylight shift 1, and stage shift 2 without committing it.",
+      "completed_text": "You combined the four role cards, committed daylight shift 1, and staged shift 2."
+    },
+    {
+      "id": "J-CH01-S08-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "Borrowing Includes Returning",
+      "body": "Practise the shelter drill, check that practice cost nothing, and commit daylight shift 2 at 18:00. Water the shelter borrows has to go back to the garden.",
+      "date": "2046-04-25 10:48 UTC",
+      "scene_id": "EX-CH01-S08",
+      "source": "Mission EX-M0103",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S08"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Practise the shelter drill, check that practice cost nothing, and commit daylight shift 2 at 18:00.",
+      "completed_text": "You practised the shelter drill and committed daylight shift 2."
+    },
+    {
+      "id": "J-CH01-S09-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "The Horizon Closes One Door",
+      "body": "Read Mei's cold-and-thirst card with Rafi's warning, acknowledge the Earth-link cutoff, then resolve dark shifts 3 and 4. From here the crew works with local rules and stored guidance.",
+      "date": "2046-04-25 18:00 UTC",
+      "scene_id": "EX-CH01-S09",
+      "source": "Mission EX-M0103",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S09"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Read Mei's cold-and-thirst card with Rafi's warning, acknowledge the Earth-link cutoff, then resolve dark shifts 3 and 4.",
+      "completed_text": "You acknowledged the Earth-link cutoff and resolved dark shifts 3 and 4."
+    },
+    {
+      "id": "J-CH01-S10-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "The Choice Inside the Rules",
+      "body": "Confirm all four cadets are in the Safe Room, then choose one WAIT, PUMP or STACK response. The crew goes inside first, every time.",
+      "date": "2046-04-26 08:24 UTC",
+      "scene_id": "EX-CH01-S10",
+      "source": "Mission EX-M0104",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S10"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Confirm all four cadets are in the Safe Room, then choose one WAIT, PUMP or STACK response.",
+      "completed_text": "You sheltered all four cadets and resolved the shift 5 storm alarm."
+    },
+    {
+      "id": "J-CH01-S11-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "Send the Water Home",
+      "body": "Check that the exposure has resolved, return the borrowed water, and resolve dark shifts 6 and 7. The water goes home only after it has finished protecting the crew.",
+      "date": "2046-04-26 15:36 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Mission EX-M0104",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S11"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Check that the exposure has resolved, return the borrowed water, and resolve dark shifts 6 and 7.",
+      "completed_text": "You returned the borrowed water after the exposure resolved and completed shifts 6 and 7."
+    },
+    {
+      "id": "J-CH01-S12-NOW",
+      "tab": "now",
+      "type": "objective",
+      "status": "OBSERVED",
+      "title": "Alo Needs a Friend",
+      "body": "Check the chamber, open the viewing shutter and record what you see, then look in on Tara. Safety checks come before celebrating.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Mission EX-M0104",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-Q-ALO-FRIEND"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "scene_active",
+        "scene_id": "EX-CH01-S12"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "objective_text": "Check the chamber, open the viewing shutter and record what you see, then look in on Tara.",
+      "completed_text": "You opened the shutter on Alo's first flower, heard N.'s stored message, and checked Tara's bud."
+    },
+    {
+      "id": "J-TPL-GROWTH-PHOTO",
+      "tab": "garden",
+      "type": "growth_template",
+      "status": "OBSERVED",
+      "title": "Paired photographs caption",
+      "body": "{plant_name}, {date}: {stage_summary}. Moisture {moisture}, {band_status}.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Growth Record notebook",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "template"
+      },
+      "surface": "growth_record",
+      "target_id": "",
+      "layout_id": "paired_photographs",
+      "option_id": "EX-CH01-S04-OPT01",
+      "placeholders": {
+        "band_status": {
+          "in_band": "inside the calibrated band",
+          "low": "below the calibrated band",
+          "high": "above the calibrated band"
+        }
+      }
+    },
+    {
+      "id": "J-TPL-GROWTH-TABLE",
+      "tab": "garden",
+      "type": "growth_template",
+      "status": "OBSERVED",
+      "title": "Paired conditions table row",
+      "body": "{plant_name} ({chamber_label}) on {date}: stage {stage_label}, moisture {moisture}, heat {heat_label}, light {light_label}.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Growth Record notebook",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S04-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "template"
+      },
+      "surface": "growth_record",
+      "target_id": "",
+      "layout_id": "paired_conditions",
+      "option_id": "EX-CH01-S04-OPT02"
+    },
+    {
+      "id": "J-TPL-GROWTH-LIFECYCLE",
+      "tab": "garden",
+      "type": "growth_template",
+      "status": "OBSERVED",
+      "title": "Life-cycle track caption",
+      "body": "Life cycle from seed to sprout, bud, flower, pods and ripe seeds. {plant_name} is now at the {stage_label} stage.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Growth Record life-cycle bar",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S05-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "template"
+      },
+      "surface": "growth_record",
+      "target_id": "",
+      "layout_id": "lifecycle_track",
+      "option_id": "",
+      "placeholders": {
+        "stage_label": {
+          "seed": "seed",
+          "sprout": "sprout",
+          "bud": "bud",
+          "bloom": "flower"
+        }
+      }
+    },
+    {
+      "id": "J-CH01-S04-GROWTH-ALO-SEED",
+      "tab": "garden",
+      "type": "growth_photo",
+      "status": "OBSERVED",
+      "title": "Alo, 11 April",
+      "body": "Planted in the sealed outer test chamber, labelled EXTERNAL TEST. Moisture set inside the calibrated 40 to 60 band.",
+      "date": "2046-04-11 UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Outer chamber camera",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "record_paired_conditions"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "plant_id": "ALO-01",
+      "stage_id": "seed"
+    },
+    {
+      "id": "J-CH01-S04-GROWTH-TARA-SEED",
+      "tab": "garden",
+      "type": "growth_photo",
+      "status": "OBSERVED",
+      "title": "Tara, 11 April",
+      "body": "Planted in the indoor reference bay, labelled INDOOR REFERENCE. Same seed packet, same 40 to 60 moisture band.",
+      "date": "2046-04-11 UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Indoor reference bay camera",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S04",
+        "target_id": "record_paired_conditions"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "plant_id": "TARA-01",
+      "stage_id": "seed"
+    },
+    {
+      "id": "J-CH01-S05-GROWTH-ALO-SPROUT",
+      "tab": "garden",
+      "type": "growth_photo",
+      "status": "OBSERVED",
+      "title": "Alo, 12 April",
+      "body": "Two seed leaves open. Moisture inside the calibrated band.",
+      "date": "2046-04-12 UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "Outer chamber camera",
+      "evidence_label": "Fiction",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "photo",
+        "plant_id": "ALO-01",
+        "stage": "sprout",
+        "date": "2046-04-12"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "plant_id": "ALO-01",
+      "stage_id": "sprout"
+    },
+    {
+      "id": "J-CH01-S05-GROWTH-TARA-SPROUT",
+      "tab": "garden",
+      "type": "growth_photo",
+      "status": "OBSERVED",
+      "title": "Tara, 12 April",
+      "body": "Two green seed leaves open in the indoor reference bay. Moisture and warmth stay steady beside Alo's record.",
+      "date": "2046-04-12 UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "Indoor reference bay camera",
+      "evidence_label": "Fiction",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "photo",
+        "plant_id": "TARA-01",
+        "stage": "sprout",
+        "date": "2046-04-12"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "plant_id": "TARA-01",
+      "stage_id": "sprout"
+    },
+    {
+      "id": "J-CH01-S05-GROWTH-ALO-BUD",
+      "tab": "garden",
+      "type": "growth_photo",
+      "status": "OBSERVED",
+      "title": "Alo, 18 April",
+      "body": "Rough-edged true leaves and a tight green bud cluster at the stem tip.",
+      "date": "2046-04-18 UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "Outer chamber camera",
+      "evidence_label": "Fiction",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "photo",
+        "plant_id": "ALO-01",
+        "stage": "bud",
+        "date": "2046-04-18"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "plant_id": "ALO-01",
+      "stage_id": "bud"
+    },
+    {
+      "id": "J-CH01-S05-GROWTH-TARA-BUD",
+      "tab": "garden",
+      "type": "growth_photo",
+      "status": "OBSERVED",
+      "title": "Tara, 18 April",
+      "body": "True leaves open and a tight green bud cluster forms in the indoor reference bay.",
+      "date": "2046-04-18 UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "Indoor reference bay camera",
+      "evidence_label": "Fiction",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "photo",
+        "plant_id": "TARA-01",
+        "stage": "bud",
+        "date": "2046-04-18"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "plant_id": "TARA-01",
+      "stage_id": "bud"
+    },
+    {
+      "id": "J-CH01-S12-GROWTH-ALO-BLOOM",
+      "tab": "garden",
+      "type": "growth_photo",
+      "status": "VERIFIED",
+      "title": "Alo, 27 April",
+      "body": "Four yellow petals open in a cross when the viewing shutter opens at dawn. First flower in the outer chamber.",
+      "date": "2046-04-27 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Outer chamber camera",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S12-TARGET-OPEN-SHUTTER",
+        "J-CH01-S12-TARGET-TAG-BLOOM"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S12",
+        "target_id": "tag_bloom"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "plant_id": "ALO-01",
+      "stage_id": "bloom"
+    },
+    {
+      "id": "J-CH01-S12-GROWTH-TARA-BUD-DAWN",
+      "tab": "garden",
+      "type": "growth_photo",
+      "status": "VERIFIED",
+      "title": "Tara, 27 April",
+      "body": "Still in bud, on a healthy green stem in the indoor reference bay. Her care went on through the whole night.",
+      "date": "2046-04-27 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Indoor reference bay camera",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S12-TARGET-INSPECT-TARA",
+        "J-Q-ALO-FRIEND"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S12",
+        "target_id": "inspect_tara"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "plant_id": "TARA-01",
+      "stage_id": "bud"
+    },
+    {
+      "id": "J-RESUME-LINE-1",
+      "tab": "now",
+      "type": "resume_template",
+      "status": "OBSERVED",
+      "title": "Where and when",
+      "body": "{location} · {scenario_date} · {shift_label}.",
+      "date": "2046-04-11 06:00 UTC",
+      "scene_id": "EX-CH01-S01",
+      "source": "Saved expedition snapshot",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "template"
+      },
+      "surface": "resume_card",
+      "target_id": "",
+      "line_slot": 1,
+      "slot_name": "where_and_when"
+    },
+    {
+      "id": "J-RESUME-LINE-2",
+      "tab": "now",
+      "type": "resume_template",
+      "status": "OBSERVED",
+      "title": "Who is where",
+      "body": "{away_team} are at {away_location}; {home_team} are at Aurora.",
+      "date": "2046-04-11 06:00 UTC",
+      "scene_id": "EX-CH01-S01",
+      "source": "Saved expedition snapshot",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "template"
+      },
+      "surface": "resume_card",
+      "target_id": "",
+      "line_slot": 2,
+      "slot_name": "who_is_where",
+      "usage": "Only when the crew is split (doc 24 section 6.6, line 2). Chapter 1 never shows it."
+    },
+    {
+      "id": "J-RESUME-LINE-3",
+      "tab": "now",
+      "type": "resume_template",
+      "status": "OBSERVED",
+      "title": "Last thing you did",
+      "body": "{last_completed_text}",
+      "date": "2046-04-11 06:00 UTC",
+      "scene_id": "EX-CH01-S01",
+      "source": "Saved expedition snapshot",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "template"
+      },
+      "surface": "resume_card",
+      "target_id": "",
+      "line_slot": 3,
+      "slot_name": "last_completed",
+      "usage": "The completed_text of the last completed scene's Now entry."
+    },
+    {
+      "id": "J-RESUME-LINE-4",
+      "tab": "now",
+      "type": "resume_template",
+      "status": "OBSERVED",
+      "title": "Now",
+      "body": "Now: {current_objective}",
+      "date": "2046-04-11 06:00 UTC",
+      "scene_id": "EX-CH01-S01",
+      "source": "Saved expedition snapshot",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "template"
+      },
+      "surface": "resume_card",
+      "target_id": "",
+      "line_slot": 4,
+      "slot_name": "current_objective"
+    },
+    {
+      "id": "J-RESUME-LINE-5",
+      "tab": "now",
+      "type": "resume_template",
+      "status": "OBSERVED",
+      "title": "The garden",
+      "body": "Garden: Alo {alo_stage_phrase}, outside; Tara {tara_stage_phrase}, inside.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Saved expedition snapshot",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "template"
+      },
+      "surface": "resume_card",
+      "target_id": "",
+      "line_slot": 5,
+      "slot_name": "garden_state",
+      "placeholders": {
+        "stage_phrase": {
+          "seed": "planted, not yet up",
+          "sprout": "with seed leaves open",
+          "bud": "in bud",
+          "bloom": "in flower"
+        }
+      }
+    },
+    {
+      "id": "J-RESUME-LINE-6",
+      "tab": "now",
+      "type": "resume_template",
+      "status": "UNKNOWN",
+      "title": "An open question",
+      "body": "Open question: {open_question}",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Saved expedition snapshot",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-Q-WHO-IS-N"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "template"
+      },
+      "surface": "resume_card",
+      "target_id": "",
+      "line_slot": 6,
+      "slot_name": "open_question"
+    },
+    {
+      "id": "J-CH01-S01-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Spare sunlight → stored air",
+      "body": "We routed spare commissioning sunlight into the air tank. The air gauge rose in the exercise and a Day-one photo was saved.",
+      "date": "2046-04-11 06:00 UTC",
+      "scene_id": "EX-CH01-S01",
+      "source": "Aurora mission table",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S01-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S01-CHOICE",
+        "option_id": "EX-CH01-S01-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S01-CHOICE",
+      "option_id": "EX-CH01-S01-OPT01"
+    },
+    {
+      "id": "J-CH01-S01-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Spare sunlight → planting bay",
+      "body": "We routed spare commissioning sunlight to the planting bay lamp. The empty garden glowed until 25 April and a Day-one photo was saved.",
+      "date": "2046-04-11 06:00 UTC",
+      "scene_id": "EX-CH01-S01",
+      "source": "Aurora mission table",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S01-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S01-CHOICE",
+        "option_id": "EX-CH01-S01-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S01-CHOICE",
+      "option_id": "EX-CH01-S01-OPT02"
+    },
+    {
+      "id": "J-CH01-S04-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Notebook layout → paired photographs",
+      "body": "We set up the Growth Record as paired dated photographs for Alo and Tara. Side-by-side photos make changes in shape and size easy to spot.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Botanical bench notebook",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-TPL-GROWTH-PHOTO"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S04-CHOICE",
+        "option_id": "EX-CH01-S04-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT01"
+    },
+    {
+      "id": "J-CH01-S04-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Notebook layout → paired conditions table",
+      "body": "We set up the Growth Record as a paired conditions table for Alo and Tara. Comparing temperature, moisture and light side by side explains why each plant changes.",
+      "date": "2046-04-11 late morning UTC",
+      "scene_id": "EX-CH01-S04",
+      "source": "Botanical bench notebook",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-TPL-GROWTH-TABLE"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S04-CHOICE",
+        "option_id": "EX-CH01-S04-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S04-CHOICE",
+      "option_id": "EX-CH01-S04-OPT02"
+    },
+    {
+      "id": "J-CH01-S02-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Rehearsal lead → Rafi",
+      "body": "Rafi led the local emergency rehearsal from his printed checklist. All four cadets confirmed the same shutdown and roll-call order.",
+      "date": "2046-04-11 07:00 UTC",
+      "scene_id": "EX-CH01-S02",
+      "source": "Safe Room doorway",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S02-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S02-CHOICE",
+        "option_id": "EX-CH01-S02-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S02-CHOICE",
+      "option_id": "EX-CH01-S02-OPT01"
+    },
+    {
+      "id": "J-CH01-S02-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Rehearsal lead → Amara",
+      "body": "Amara read the local procedure back to test a second user on the card. All four cadets confirmed the same shutdown and roll-call order.",
+      "date": "2046-04-11 07:00 UTC",
+      "scene_id": "EX-CH01-S02",
+      "source": "Safe Room doorway",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S02-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S02-CHOICE",
+        "option_id": "EX-CH01-S02-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S02-CHOICE",
+      "option_id": "EX-CH01-S02-OPT02"
+    },
+    {
+      "id": "J-CH01-S03-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "First record → packet provenance",
+      "body": "We copied the ALO seed packet record first so seed handling was traceable from the start. Then we calibrated the moisture probe before planting.",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Dry-storage drawer",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S03-TARGET-INSPECT-PACKET"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S03-CHOICE",
+        "option_id": "EX-CH01-S03-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S03-CHOICE",
+      "option_id": "EX-CH01-S03-OPT01"
+    },
+    {
+      "id": "J-CH01-S03-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "First record → calibration result",
+      "body": "We logged the moisture probe reference check first so every measurement had a clear zero and span. Then we copied the ALO seed packet label.",
+      "date": "2046-04-11 10:00 UTC",
+      "scene_id": "EX-CH01-S03",
+      "source": "Calibration bench",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S03-TARGET-RECHECK-PROBE"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S03-CHOICE",
+        "option_id": "EX-CH01-S03-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S03-CHOICE",
+      "option_id": "EX-CH01-S03-OPT02"
+    },
+    {
+      "id": "J-CH01-S05-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Beside latest image → first photograph",
+      "body": "We placed the 12 April sprout photograph beside the 24 April bud image. With the first and latest photos together, two weeks of growth are easy to see.",
+      "date": "2046-04-24 UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "Growth Record notebook",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S05-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S05-CHOICE",
+        "option_id": "EX-CH01-S05-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S05-CHOICE",
+      "option_id": "EX-CH01-S05-OPT01"
+    },
+    {
+      "id": "J-CH01-S05-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Beside latest image → conditions record",
+      "body": "We placed the fourteen-day care and conditions log beside the 24 April bud image. Showing the daily water and heat readings highlights the work behind the bud.",
+      "date": "2046-04-24 UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "Growth Record notebook",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S05-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S05-CHOICE",
+        "option_id": "EX-CH01-S05-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S05-CHOICE",
+      "option_id": "EX-CH01-S05-OPT02"
+    },
+    {
+      "id": "J-CH01-S06-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Tested keeping water in wall all night",
+      "body": "We tested keeping borrowed water in the shelter wall for the whole night in the paused forecast. That preview showed how an unreturned loan leaves the garden thirsty.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S06",
+      "source": "Aurora mission table",
+      "evidence_label": "Computed-pending",
+      "links": [
+        "J-CH01-S06-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S06-CHOICE",
+        "option_id": "EX-CH01-S06-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S06-CHOICE",
+      "option_id": "EX-CH01-S06-OPT01"
+    },
+    {
+      "id": "J-CH01-S06-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Tested returning water after exposure",
+      "body": "We tested sending the water back as soon as the storm exposure it shields had passed. The forecast showed less shielding later but water back for the garden, so we checked both.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S06",
+      "source": "Aurora mission table",
+      "evidence_label": "Computed-pending",
+      "links": [
+        "J-CH01-S06-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S06-CHOICE",
+        "option_id": "EX-CH01-S06-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S06-CHOICE",
+      "option_id": "EX-CH01-S06-OPT02"
+    },
+    {
+      "id": "J-CH01-S07-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Daylight forecast → stored-air priority",
+      "body": "We tested making extra stored air first, inside the same daylight energy limit. The forecast showed that air making and the lamp share one battery.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S07",
+      "source": "Mission Table shift planner",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S07-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S07-CHOICE",
+        "option_id": "EX-CH01-S07-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S07-CHOICE",
+      "option_id": "EX-CH01-S07-OPT01"
+    },
+    {
+      "id": "J-CH01-S07-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Daylight forecast → garden-lamp priority",
+      "body": "We tested putting the garden lamp first within the same daylight budget. The forecast showed the plant benefit and the air and energy the rest of the night still needed.",
+      "date": "2046-04-25 03:36 UTC",
+      "scene_id": "EX-CH01-S07",
+      "source": "Mission Table shift planner",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S07-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S07-CHOICE",
+        "option_id": "EX-CH01-S07-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S07-CHOICE",
+      "option_id": "EX-CH01-S07-OPT02"
+    },
+    {
+      "id": "J-CH01-S08-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Water return reminder → timeline marker",
+      "body": "We marked the water return on the shift timeline so the return gate stands out clearly. Everyone can see when the borrowed water goes back to the garden.",
+      "date": "2046-04-25 10:48 UTC",
+      "scene_id": "EX-CH01-S08",
+      "source": "Safe Room practice interface",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S08-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S08-CHOICE",
+        "option_id": "EX-CH01-S08-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S08-CHOICE",
+      "option_id": "EX-CH01-S08-OPT01"
+    },
+    {
+      "id": "J-CH01-S08-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Water return reminder → reservoir diagram",
+      "body": "We marked the water return on the shared reservoir flow diagram. Following the arrow shows that shelter shielding and garden water come from one tank.",
+      "date": "2046-04-25 10:48 UTC",
+      "scene_id": "EX-CH01-S08",
+      "source": "Safe Room practice interface",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S08-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S08-CHOICE",
+        "option_id": "EX-CH01-S08-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S08-CHOICE",
+      "option_id": "EX-CH01-S08-OPT02"
+    },
+    {
+      "id": "J-CH01-S09-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Dark plan comparison → shelter timeline first",
+      "body": "We started the dark-shift comparison from the shelter and water-return timeline. Checking protection first showed how much energy was left for heat and lamps.",
+      "date": "2046-04-25 18:00 UTC",
+      "scene_id": "EX-CH01-S09",
+      "source": "Aurora mission table",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S09-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S09-CHOICE",
+        "option_id": "EX-CH01-S09-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S09-CHOICE",
+      "option_id": "EX-CH01-S09-OPT01"
+    },
+    {
+      "id": "J-CH01-S09-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Dark plan comparison → heat-and-lamp timeline first",
+      "body": "We started the dark-shift comparison from the chamber heat and lamp timeline. Tracing plant needs first showed when the shelter water had to return.",
+      "date": "2046-04-25 18:00 UTC",
+      "scene_id": "EX-CH01-S09",
+      "source": "Aurora mission table",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S09-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S09-CHOICE",
+        "option_id": "EX-CH01-S09-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S09-CHOICE",
+      "option_id": "EX-CH01-S09-OPT02"
+    },
+    {
+      "id": "J-CH01-S10-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Shift 5 response → prepared WAIT",
+      "body": "With all four cadets inside, we confirmed WAIT because the forecast showed the prepared shelter was enough. No extra water or crates were created.",
+      "date": "2046-04-26 08:24 UTC",
+      "scene_id": "EX-CH01-S10",
+      "source": "Safe Room response controls",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S10-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S10-CHOICE",
+        "option_id": "EX-CH01-S10-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S10-CHOICE",
+      "option_id": "EX-CH01-S10-OPT01"
+    },
+    {
+      "id": "J-CH01-S10-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Shift 5 response → PUMP or STACK intervention",
+      "body": "With all four cadets inside, we read back one PUMP or STACK action for shift 5 and committed it. The forecast then showed what the rest of the night had left.",
+      "date": "2046-04-26 08:24 UTC",
+      "scene_id": "EX-CH01-S10",
+      "source": "Safe Room response controls",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S10-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S10-CHOICE",
+        "option_id": "EX-CH01-S10-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S10-CHOICE",
+      "option_id": "EX-CH01-S10-OPT02"
+    },
+    {
+      "id": "J-CH01-S11-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Outcome review lead → water-return timeline",
+      "body": "We started the Night One review with the water-return timeline. It showed how sending the shelter water back on time gave Alo's garden its water again.",
+      "date": "2046-04-26 15:36 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Garden outcome review panel",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S11-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S11-CHOICE",
+        "option_id": "EX-CH01-S11-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S11-CHOICE",
+      "option_id": "EX-CH01-S11-OPT01"
+    },
+    {
+      "id": "J-CH01-S11-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Outcome review lead → demand-and-energy record",
+      "body": "We led the Night One review with the demand-and-energy log. It showed that a low battery at dawn is still safe when every shift demand is paid.",
+      "date": "2046-04-26 15:36 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Garden outcome review panel",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S11-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S11-CHOICE",
+        "option_id": "EX-CH01-S11-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S11-CHOICE",
+      "option_id": "EX-CH01-S11-OPT02"
+    },
+    {
+      "id": "J-CH01-S12-DECISION-OPT01",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Bloom caption → four role decisions",
+      "body": "We paired Alo's first-bloom photo with the four specialists' decisions across the night. The archive highlights how teamwork kept the flower alive.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Garden debrief console",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S12-TARGET-TAG-BLOOM"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S12-CHOICE",
+        "option_id": "EX-CH01-S12-OPT01"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S12-CHOICE",
+      "option_id": "EX-CH01-S12-OPT01"
+    },
+    {
+      "id": "J-CH01-S12-DECISION-OPT02",
+      "tab": "decisions",
+      "type": "decision",
+      "status": "OBSERVED",
+      "title": "Bloom caption → care-and-recovery timeline",
+      "body": "We paired Alo's first-bloom photo with the full care and water-recovery timeline from 11 to 27 April. The archive highlights the steady daily work behind the bloom.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Garden debrief console",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S12-TARGET-TAG-BLOOM"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "choice_confirmed",
+        "choice_id": "EX-CH01-S12-CHOICE",
+        "option_id": "EX-CH01-S12-OPT02"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "choice_id": "EX-CH01-S12-CHOICE",
+      "option_id": "EX-CH01-S12-OPT02"
+    },
+    {
+      "id": "J-CH01-S05-MOMENT-LAMP",
+      "tab": "people",
+      "type": "moment",
+      "status": "OBSERVED",
+      "title": "Kai and the backup hand light",
+      "body": "Kai checked the corridor switch twice. Rafi hung a hand light beside the locker, handle out.",
+      "date": "2046-04-11 evening UTC",
+      "scene_id": "EX-CH01-S05",
+      "source": "Service corridor locker",
+      "evidence_label": "Fiction",
+      "links": [
+        "J-CH01-S05-TARGET-TEST-HAND-LIGHT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "target",
+        "scene_id": "EX-CH01-S05",
+        "target_id": "test_hand_light"
+      },
+      "surface": "journal",
+      "target_id": ""
+    },
+    {
+      "id": "J-CH01-S12-MOMENT-MUGS",
+      "tab": "people",
+      "type": "moment",
+      "status": "OBSERVED",
+      "title": "Four named mugs",
+      "body": "After Alo's first flower opened, the four nameless mugs in the commons got the cadets' names. Aurora feels like their station now.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S12",
+      "source": "Aurora commons table",
+      "evidence_label": "Fiction",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "moment",
+        "moment_id": "CH01-MUGS-NAMED"
+      },
+      "surface": "journal",
+      "target_id": "",
+      "moment_id": "CH01-MUGS-NAMED"
+    },
+    {
+      "id": "J-CH01-S11-FEEDBACK-DRAIN",
+      "tab": "decisions",
+      "type": "feedback",
+      "status": "OBSERVED",
+      "title": "Water drain blocked",
+      "body": "The wall is still shielding the next exposure. Drain after it resolves.",
+      "date": "2046-04-26 15:36 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Garden service line forecast",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S11-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "preview_rejected",
+        "puzzle_id": "P-02",
+        "rule": "drain_before_exposure_resolves"
+      },
+      "surface": "p02_preview",
+      "target_id": ""
+    },
+    {
+      "id": "J-CH01-S11-DEBRIEF-ALO-LOST",
+      "tab": "decisions",
+      "type": "debrief",
+      "status": "OBSERVED",
+      "title": "Alo Lost debrief",
+      "body": "Alo did not survive the night in this attempt. Your checkpoint keeps her alive at the start of shift 5.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Chapter 1 outcome review",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S11-FEEDBACK-DRAIN",
+        "J-CH01-S11-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "outcome",
+        "puzzle_id": "P-02",
+        "outcome": "alo_lost"
+      },
+      "surface": "chapter_debrief",
+      "target_id": "",
+      "body_template": "Alo did not survive the night in this attempt. Your checkpoint keeps her alive at the start of shift {checkpoint_shift}.",
+      "usage": "body is the doc 24 section 2.10 sentence, true when Alo is alive at the start of shift 5. If her health reached 0 earlier, render body_template with the last shift that began with Alo alive.",
+      "panels": [
+        "J-CH01-S11-DEBRIEF-PANEL-1",
+        "J-CH01-S11-DEBRIEF-PANEL-2",
+        "J-CH01-S11-DEBRIEF-PANEL-3",
+        "J-CH01-S11-DEBRIEF-PANEL-4",
+        "J-CH01-S11-DEBRIEF-PANEL-5"
+      ]
+    },
+    {
+      "id": "J-CH01-S11-DEBRIEF-PANEL-1",
+      "tab": "decisions",
+      "type": "debrief_step",
+      "status": "OBSERVED",
+      "title": "What we planned",
+      "body": "Here is the seven-shift plan we committed: heat, air, light and water for every shift.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Mission Table shift record",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "outcome",
+        "puzzle_id": "P-02",
+        "outcome": "alo_lost"
+      },
+      "surface": "chapter_debrief",
+      "target_id": ""
+    },
+    {
+      "id": "J-CH01-S11-DEBRIEF-PANEL-2",
+      "tab": "decisions",
+      "type": "debrief_step",
+      "status": "OBSERVED",
+      "title": "What happened",
+      "body": "Alo's health fell from {start_health} to 0 by shift {loss_shift}. Each drop is marked on the shift where it happened.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Chamber telemetry log",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "outcome",
+        "puzzle_id": "P-02",
+        "outcome": "alo_lost"
+      },
+      "surface": "chapter_debrief",
+      "target_id": ""
+    },
+    {
+      "id": "J-CH01-S11-DEBRIEF-PANEL-3",
+      "tab": "decisions",
+      "type": "debrief_step",
+      "status": "OBSERVED",
+      "title": "Why",
+      "body": "{cause_text}",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Mission Table shift record and its Data Card",
+      "evidence_label": "Simulated",
+      "links": [
+        "J-CH01-S07-CONCEPT",
+        "J-CH01-S08-CONCEPT",
+        "J-CH01-S11-CONCEPT"
+      ],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "outcome",
+        "puzzle_id": "P-02",
+        "outcome": "alo_lost"
+      },
+      "surface": "chapter_debrief",
+      "target_id": "",
+      "placeholders": {
+        "cause_text": {
+          "cold": "The chamber heater ran on COOL or COLD in the dark, and each of those shifts cost Alo health. Saving power on heat was paid for by the plant.",
+          "thirst": "The shelter wall held 4 or more units of water, so the garden was short of water. Alo lost health in every shift the water stayed in the wall.",
+          "dark": "The garden light was OFF, and Alo lost a little health in each of those shifts. Plants need light to keep growing.",
+          "blackout": "One shift asked for more energy than the battery held, so the station blacked out. A blackout costs Alo 2 health at once."
+        }
+      }
+    },
+    {
+      "id": "J-CH01-S11-DEBRIEF-PANEL-4",
+      "tab": "decisions",
+      "type": "debrief_step",
+      "status": "OBSERVED",
+      "title": "What we would change",
+      "body": "{change_question}",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Forecast comparison",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "outcome",
+        "puzzle_id": "P-02",
+        "outcome": "alo_lost"
+      },
+      "surface": "chapter_debrief",
+      "target_id": "",
+      "placeholders": {
+        "change_question": {
+          "cold": "Which dark shift could spend 1 more energy on heat?",
+          "thirst": "When could the shelter water go back to the garden, once the exposure it shields has resolved?",
+          "dark": "Which shift could afford DIM light instead of OFF?",
+          "blackout": "Which setting could wait so that every shift's demand is paid?"
+        }
+      }
+    },
+    {
+      "id": "J-CH01-S11-DEBRIEF-PANEL-5",
+      "tab": "decisions",
+      "type": "debrief_step",
+      "status": "OBSERVED",
+      "title": "Try again from here",
+      "body": "Restore the checkpoint at the start of shift {checkpoint_shift}, {checkpoint_time}. All four cadets, Alo and every reading return to that moment.",
+      "date": "2046-04-27 06:00 UTC",
+      "scene_id": "EX-CH01-S11",
+      "source": "Local retry checkpoint",
+      "evidence_label": "Simulated",
+      "links": [],
+      "gate_flag": "",
+      "superseded_by": "",
+      "trigger": {
+        "on": "outcome",
+        "puzzle_id": "P-02",
+        "outcome": "alo_lost"
+      },
+      "surface": "chapter_debrief",
+      "target_id": "",
+      "placeholders": {
+        "checkpoint_time": {
+          "3": "25 April 2046, 18:00 UTC",
+          "4": "26 April 2046, 01:12 UTC",
+          "5": "26 April 2046, 08:24 UTC",
+          "6": "26 April 2046, 15:36 UTC",
+          "7": "26 April 2046, 22:48 UTC"
+        }
+      }
+    }
+  ]
+}
