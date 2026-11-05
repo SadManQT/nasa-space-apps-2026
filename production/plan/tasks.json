@@ -657,8 +657,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M0-02"
    ],
@@ -674,7 +674,7 @@
    ],
    "note": "Ownership (MASTER_PLAN.md §7): the panel and puzzles/ are Ramim's; game/scripts/missions/p01_commission_plant.gd is Atik's - ask for rule changes there with a board task.",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-06",
    "prompt": "Problem: puzzles are receipt gates: each step is a 'USE' button that submits the correct answer pre-filled.\nGoal: the player calibrates the moisture probe (zero at dry 10 -> 0, span at wet 110 -> 100) and plants with moisture in 40–60, choosing\nthe values themselves, with predict -> test -> observe -> explain feedback and a Data Card link (M0-15) when available.\nDo: implement the P-01 panel per execution/PUZZLE_P01.md and execution/UI_09_SCIENTIFIC_PUZZLE.md through the existing PuzzleHost; remove\nP-01's pre-filled payloads; wrong answers give a helpful, non-punishing hint (SYS_22); keyboard, mouse and controller; text scaling; no\ntimer pressure in Family mode. Numbers come from game-design/08_PUZZLE_DESIGNS.md only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
    "blocker": "Night shift parked the work on branch night/M1-08: ",
    "reserved_for": "ramim",
@@ -900,8 +900,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "First five minutes: title screen, onboarding and UX polish",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M0-02",
     "M1-54"
@@ -919,7 +919,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-06",
    "prompt": "Goal: 'User experience 5 = anyone can use it' — a judge or a 12-year-old plays the first five minutes without help.\nDo: (1) hide the DEVELOPER ASSET SHOWCASE button in exported builds (feature flag / OS.has_feature('editor')) and fix the footer that\noverlaps it; (2) New Expedition flow per execution/UI_01_MAIN_MENU.md and UI_02; (3) contextual first-time prompts for move, look, use,\nMission Table and the journal, shown once and replayable from Settings; (4) HUD and objective readability (UI_03, UI_04, UI_05, UI_06):\nfont sizes, contrast, text scaling to 150%, focus order for keyboard and controller; (5) remap controls (UI_15).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second screen recording of a cold start to the first objective.\n\nClarity and menus (Sadman, 5 Nov): follow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 for every first-five-minutes screen and build the title and menus in §2.3 (live Moon backdrop, Moon trainer entry, Story/Cadet/Expedition assist modes, settings categories) on the M1-54 design system.",
    "blocker": "Night shift parked the work on branch night/M1-18: k   tools/test_lip_sync.gd :: PASS LipSync coarticulation, closures, loudness, release and errors\nok   tools/test_lunar_kit.gd :: LUNAR KIT RESULT: PASS (89 checks, 0 failures)\nok   tools/test_outpost_status.gd :: OUTPOST STATUS RESULT: PASS (85 checks, 0 failures)\nFAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (537 checks, 2 failures)\n       FAIL Kai raw load",
    "reserved_for": "ramim",
@@ -931,8 +931,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Chapter 1 endings, decision replay and the science debrief",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-09",
     "M0-15"
@@ -948,7 +948,7 @@
    ],
    "note": "5 Nov: the earlier attempt is saved on branch night/M1-19-saved (3f67b01); it no longer merges cleanly, so port what is still right (git diff origin/main...origin/night/M1-19-saved). Ownership: mission-side ending data comes from Atik's route API; add a board task for Atik if a hook is missing.",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-06",
    "prompt": "Goal: the four canonical endings from P-02 (Golden Bloom: Z≤3, no blackout, Alo alive, H≥5; Bloom: crew safe, H>0 — unlocks the story;\nAlo Lost: crew safe, H=0 — retry only; Mission Stopped: A≤0 or exposure breach) each end with an outcome screen and a debrief that shows\npredict -> what happened -> why, linking the NASA Data Cards (M0-15) behind the numbers.\nDo: per execution/ENDING_*.md and UI_13_OUTCOME.md; retry from the correct checkpoint; Continue only on Bloom/Golden Bloom.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. a test per ending predicate including the boundaries; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nRegistered promise (docs/TEAM.md): include a replay of the player's decisions shift by shift (what they chose, what the forecast said, what happened) before the debrief questions.",
    "blocker": "Night shift parked the work on branch night/M1-19: An earlier attempt is parked on origin/night/M1-19 but no longer merges cleanly: read `git diff origin/main...origin/night/M1-19` and port what is still right.\n",
    "reserved_for": "ramim",
@@ -1289,8 +1289,8 @@
    "prompt": "Goal: the challenge is about balancing life support, radiation shielding, power and food; the player should see those four at all times.\nDo: a compact HUD panel with four meters, Power (E), Life support (air A and water), Shielding (S and accumulated exposure Z), Food (crops C\nand rations R), labelled in plain words with icons; every puzzle preview shows the forecast change on each meter (arrows plus the number)\nbefore the player commits; red/amber thresholds come from data, not code; accessible (colour plus shape, screen-reader text, scales to 150%).\nValues come from the authoritative director state; no second source of truth.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-09",
     "M0-15",
@@ -1309,7 +1309,7 @@
    ],
    "note": "Ownership: campaign hooks (game/scripts/campaign/) are Atik's - ask with a board task.",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-06",
    "id": "M1-29",
    "milestone": "M1",
    "priority": "P0",
@@ -4263,8 +4263,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Mission Table made simple: guided first shift, plain toggles, before-and-after forecast",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-54"
    ],
@@ -4279,7 +4279,7 @@
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026). M1-54 review: the failure path of a locked-in plan shows developer text (unsafe predicates such as air_depleted_shift_5 in Last result, 'MISSION STOPPED' in the toast; chapter1_campaign_hud.gd _on_mission_table_commit); put it in player words here and add the Mission Table (including a failing plan) to game/tools/test_player_text.gd.",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-06",
    "prompt": "Problem: the Seven Shifts Mission Table (M1-09) works but reads like a spreadsheet (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §0.5).\nDo: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §3 exactly: three-step guided first shift, rows that appear when their information arrives (08's schedule),\nlabelled toggles with icons, before→after forecast bars with one consequence sentence, short crew-note cards with More, the\n7-shift night strip, buttons Try it · Lock in shift (Space) · Close (Esc), Save as Plan A under More. Same simulation and preview\nfunction as M1-09; existing P-02 tests must still pass unchanged. Screenshot every step of the guided first shift and shift 5.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
    "effort": 3
