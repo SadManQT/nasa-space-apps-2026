@@ -110,6 +110,9 @@ def run_agent(account, prompt, cwd, effort="high"):
         return False, "worker timed out"
     finally:
         pf.unlink(missing_ok=True)
+    tr = LOGDIR / "transcripts"
+    tr.mkdir(exist_ok=True)
+    (tr / f"{time.strftime('%m%d_%H%M%S')}_{Path(cwd).name}_{account}.txt").write_text(out[-30000:])
     wait = limit_wait(out[-3000:])
     if wait:
         asleep[account] = time.time() + wait
@@ -281,6 +284,18 @@ def park(slot, tid, reason):
     land(slot, tid, "", "blocked")
 
 
+def overlaps(slot, tid):
+    """True if tid owns a path that a task running in any night shift also owns (they would conflict on landing)."""
+    # ponytail: check-then-mkdir across processes can race; the loser parks on a landing conflict
+    data = {t["id"]: t for t in json.loads((slot / "production/plan/tasks.json").read_text())["tasks"]}
+    mine = data[tid].get("paths", [])
+    for other in os.listdir(CLAIMS):
+        theirs = data.get(other, {}).get("paths", [])
+        if any(a.startswith(b) or b.startswith(a) for a in mine for b in theirs):
+            return True
+    return False
+
+
 def pick(slot):
     for lane, accounts in LANES.items():
         if LANES_ONLY and lane not in LANES_ONLY:
@@ -292,7 +307,7 @@ def pick(slot):
             m = re.match(r"^(M\d-[\w-]+)\s+\[", line)
             if m and m[1] not in taken:
                 with lock:
-                    if m[1] in taken:
+                    if m[1] in taken or overlaps(slot, m[1]):
                         continue
                     try:
                         (CLAIMS / m[1]).mkdir(parents=True)
@@ -303,6 +318,27 @@ def pick(slot):
     return None, None
 
 
+def resume_parked(slot, tid):
+    """Bring back work parked on night/<tid> (main's board files kept). Returns a note for the worker, or ''."""
+    br = f"origin/night/{tid}"
+    if sh(["git", "rev-parse", "-q", "--verify", br], slot)[0]:
+        return ""
+    sh(["git", "merge", "--squash", br], slot)
+    sh(["git", "checkout", "HEAD", "--", "production/plan/tasks.json", "production/plan/BOARD.html"], slot)
+    if sh(["git", "diff", "--name-only", "--diff-filter=U"], slot)[1].strip():
+        prepare(slot)
+        return f"An earlier attempt is parked on {br} but no longer merges cleanly: read `git diff origin/main...{br}` and port what is still right."
+    sh(["git", "reset", "-q"], slot)
+    if not sh(["git", "status", "--porcelain"], slot)[1].strip():
+        return ""  # the parked branch held only a board claim
+    return f"This checkout already holds the earlier attempt parked on {br} (uncommitted). Check it, finish the task and fix what stopped it:"
+
+
+def changes(slot):
+    """Fingerprint of the work in the checkout, board files excluded."""
+    return sh(["git", "status", "--porcelain", "-uall", "--", ".", ":!production/plan"], slot)[1] + sh(["git", "diff", "--", ".", ":!production/plan"], slot)[1]
+
+
 def do_task(slot, tid, lane):
     info = task_info(slot, tid)
     effort = "xhigh" if info.get("priority") == "P0" else "high"
@@ -311,17 +347,26 @@ def do_task(slot, tid, lane):
         accounts = [PREFER] + [a for a in accounts if a != PREFER]
     if FABLE_HINTS.search(f"{tid} {info.get('title', '')}"):
         accounts.insert(0, "fable")
-    fix, worker = "", None
+    fix, worker = resume_parked(slot, tid), None
+    if fix:
+        fix += "\n" + str(info.get("blocker", ""))[:1500]
+        log(f"[{slot.name}] {tid} resumes the parked work on night/{tid}")
     for round_ in range(3):  # first pass + two fix rounds
         cands = free(accounts)
         if not cands:
             return "deferred", "all accounts for this lane are at their usage limit"
         worker = cands[0]
         log(f"[{slot.name}] {tid} round {round_ + 1} on {worker} (effort {effort})")
+        before = changes(slot)
         ok, out = run_agent(worker, worker_prompt(tid, slot, f"Sadman/night-{worker}", fix), slot, effort)
         if not ok and limit_wait(out[-3000:]):
             continue  # same round again on the lane's next account
         status = task_info(slot, tid).get("status")
+        if status not in ("done", "blocked") and changes(slot) == before:
+            # ponytail: a silent quota/permission failure looks like this; 2 h rest, no smarter diagnosis
+            asleep[worker] = time.time() + 7200
+            log(f"[{slot.name}] {worker} changed nothing on {tid}; resting it 2 h")
+            continue
         if status == "blocked":
             t = task_info(slot, tid)
             return "blocked", t.get("blocker") or t.get("note") or "blocked by the worker"
@@ -369,10 +414,10 @@ def slot_loop(n):
                     park(slot, tid, note)
             elif outcome == "failed":
                 park(slot, tid, note)
-            elif outcome == "deferred":
-                with lock:
-                    taken.discard(tid)
-                    (CLAIMS / tid).rmdir()
+            with lock:  # the claim is only a run-time lock; the board status stops a retry
+                taken.discard(tid)
+                (CLAIMS / tid).rmdir()
+            if outcome == "deferred":
                 time.sleep(300)
             log(f"[{SLOT_PREFIX}{n}] {tid} -> {outcome}: {note[:300]}")
             with lock:

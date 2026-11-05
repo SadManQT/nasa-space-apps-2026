@@ -566,7 +566,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 1 missing assets: Alo's early stages, Earth desk, UI kit",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [],
    "paths": [
@@ -735,8 +735,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "antigravity",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "in_progress",
-   "owner": "Sadman/antigravity",
+   "status": "todo",
+   "owner": "",
    "deps": [
     "M0-02"
    ],
@@ -752,7 +752,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-04",
+   "updated": "2026-11-05",
    "prompt": "Problem: puzzles are receipt gates: each step is a 'USE' button that submits the correct answer pre-filled.\nGoal: the player calibrates the moisture probe (zero at dry 10 -> 0, span at wet 110 -> 100) and plants with moisture in 40–60, choosing\nthe values themselves, with predict -> test -> observe -> explain feedback and a Data Card link (M0-15) when available.\nDo: implement the P-01 panel per execution/PUZZLE_P01.md and execution/UI_09_SCIENTIFIC_PUZZLE.md through the existing PuzzleHost; remove\nP-01's pre-filled payloads; wrong answers give a helpful, non-punishing hint (SYS_22); keyboard, mouse and controller; text scaling; no\ntimer pressure in Family mode. Numbers come from game-design/08_PUZZLE_DESIGNS.md only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
@@ -761,8 +761,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "antigravity",
    "title": "P-02 Seven Shifts: the Mission Table plan the player actually makes",
-   "status": "in_progress",
-   "owner": "Sadman/antigravity",
+   "status": "todo",
+   "owner": "",
    "deps": [
     "M0-02"
    ],
@@ -779,7 +779,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "Queued in the same Antigravity session as M1-08 on Sadman's Mac.",
    "evidence": "",
-   "updated": "2026-11-04",
+   "updated": "2026-11-05",
    "prompt": "Problem: P-02 runs the real simulation but the HUD submits _default_plan (game/scripts/missions/chapter1_route.gd:485); the player never\nchooses heat (COZY/COOL/COLD), light (OFF/DIM/FULL), air or water transfers, nor PUMP/STACK/WAIT at the shift-5 alarm.\nGoal: the Chapter 1 heart: the player plans each of the seven 7.2 h shifts at the Mission Table, sees the preview from the same pure\nfunction that commits (ExpeditionSimulation), commits with Space+confirm, and lives with the consequences (E 14/20 +8 per day shift,\nA 6/10, H 6/10, W 0–6, K 0–2, S=min(6,W+K), blackout only below 0).\nDo: implement per execution/PUZZLE_P02.md and execution/UI_10_MISSION_TABLE.md; delete _default_plan from the play path (keep it only\nas a test fixture if needed); role facts from the four cadets inform choices; outcome feeds the four endings (M1-19).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests cover blackout at -1 vs exactly 0, each ending predicate and PUMP/STACK/WAIT; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
@@ -975,7 +975,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "antigravity",
    "title": "First five minutes: title screen, onboarding and UX polish",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M0-02"
@@ -3587,7 +3587,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Save schema 3: record the player's story choices and moments (story_log)",
-   "status": "blocked",
+   "status": "todo",
    "deps": [],
    "paths": [
     "game/scripts/core/campaign_state.gd",
@@ -3612,7 +3612,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Chapter 1 narrative text pack: journal entries, questions, resume templates, drawer-lid note, feedback text",
-   "status": "blocked",
+   "status": "todo",
    "deps": [],
    "paths": [
     "game/resources/campaign/content/journal_text.json",
@@ -3628,7 +3628,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Problem: the journal can only print operation labels; there is no written content for the Now, Evidence, Garden, Decisions and Science tabs, no resume templates and no echo table.\nRead first: game-design/24_NARRATIVE_REVISION.md §4 (clues 1-3), §5.2 (D1, D2), §5.4 (story_echoes.json shape), §6.2-§6.7, §2.10 (feedback text and the Alo Lost debrief); full-game-story/story-data.json scenes EX-CH01-S01..S12 (prose, learning, choice options); chapter1_gate_catalog.gd target ids.\nDo: (1) Create game/resources/campaign/content/journal_text.json: one entry per Chapter 1 evidence target, question, concept card (from each scene's learning block), Growth Record caption template and resume line template, in the §6.3 shape (id, tab, type, status, title, body, scene_id, source, evidence_label, links, gate_flag). Include the drawer-lid note (§4 clue 2) and the §2.10 Chapter 1 feedback sentence and Alo Lost debrief text. (2) Create story_echoes.json with the D1 and D2 rows (§5.2). Rules: English only, no Bangla script, no NASA wording that implies endorsement, no name or fact before its scene, never copy a scene's future prose, every body two sentences or fewer, plain words a 10-year-old can read.\nAcceptance: both files parse as JSON (python3 -m json.tool); a short script lists every entry id and checks that scene_id exists in story-data.json and that no body contains 'Noor', 'Rahman' or 'Ferreira was'; paste its output into the evidence with the list of new text for Sadman to read. Log every AI generation in production/AI_PROMPT_LOG.md.",
-   "blocker": "Night shift parked the work on branch night/M1-50: The task is not marked done on the board: finish it (or block it with a real reason)."
+   "blocker": "Night shift parked the work on branch night/M1-50: The task is not marked done on the board: finish it (or block it with a real reason).",
+   "owner": ""
   },
   {
    "id": "M1-48",
@@ -3692,7 +3693,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "claude",
    "title": "Re-edit CS-01 into a cold open: exterior silence, interior hum, title over the gold band (existing footage only)",
-   "status": "blocked",
+   "status": "todo",
    "deps": [],
    "paths": [
     "production/cutscenes/v8/",
@@ -3709,7 +3710,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Problem: CS-01 runs about 40 s and contains all four EX-CH01-S01 lines, so the player watches before doing anything, and the opening has no image that sets the game's look.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.1 (beats 2-4 and the line move), §2.11 (sound rules); production/cutscenes/v7/src/CS-01.json; production/tools/compose_cutscene.py; production/ART_BIBLE.md §2; production/review/science_review_ch01.md (Earth stays off the sky).\nDo: compose a v8 CS-01 cold open from the existing CS-01 shots: 2 s of the exterior in total silence (caption [no sound outside]), push into the commons as SFX_FAN_NORMAL fades in, on-screen text 'Aurora Station · lunar south pole · 11 April 2046 · 06:00 UTC', end on the gold battery band with the title LAST LIGHT ACADEMY for 2 s. No dialogue in the film (the S01 lines move into play in M1-49). The CS-01 music fades out with the cut; CUE-01 still enters after the charter. If M1-45's fixed exterior shot exists, use it.\nAcceptance: the cut runs 12-15 s; ffmpeg scdet shows only the intended cuts; the exterior section has no audio at all; no Earth in the sky, black sky, hard shadows; captions present; the runtime .ogv plays in the campaign (M1-10 runtime). Screenshot three frames to production/qa/evidence/M1-51_*.png. Log every AI generation in production/AI_PROMPT_LOG.md.",
-   "blocker": "Night shift parked the work on branch night/M1-51: could not land: rebase conflict: ll conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with \"git config set advice.mergeConflict false\"\nCould not apply"
+   "blocker": "Night shift parked the work on branch night/M1-51: could not land: rebase conflict: ll conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with \"git config set advice.mergeConflict false\"\nCould not apply",
+   "owner": ""
   },
   {
    "id": "M1-52",
@@ -3900,7 +3902,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Problem: Alo has no cotyledon, true-leaf, senescent or dry state; Tara has only a bloom model; the clue and memory props in doc 24 do not exist.\nRead first: game-design/24_NARRATIVE_REVISION.md §3.8 (stage table), §3.9, §4 (clues 2, 12, 14), §7.6, §2.11 (new SFX); production/ART_BIBLE.md §2, §6 (Brassica rapa botany, no faces); the existing ASSET_PL_* prompts.\nDo: (1) 2D sheets for approval: Alo cotyledon, true-leaf, senescent (yellowing, pods straw-coloured, leaning) and dry variants; Tara pods, senescent and dry (green stem); Alo and Tara nameplates; five mug name decals; the gear-wheel tool tag; the drawer-lid pencil note; the 'N.' label holder; the 'Working stock - Tara x Alo' envelope. (2) After approval, build them (blend-shape or texture variants of the existing plant models where possible; Tripo only where a new mesh is needed). (3) Generate SFX_INVENTORY_LAMP_TICK and SFX_DHAKA_ROOFTOP_MORNING with captions in sfx_list.csv.\nAcceptance: Sadman's approval quoted; every flower has four petals in a cross; no plant has eyes, a face or a mouth; English text only; registry and AI log rows added; a contact sheet in production/qa/evidence/M3-99_contact.png. Log every AI generation in production/AI_PROMPT_LOG.md.",
-   "blocker": "Night shift parked the work on branch night/M3-99: 2D approval sheets ready, no credits spent: production/concept/narrative_props/M3-99_plant_stages_v1.png + M3-99_props_v1.png (contact: production/qa/evidence/M3-99_contact.png). Needs Sadman to approve/change the 10 items in production/concept/narrative_props/README.md before any build; Tara dry state and working-stock envelope also wait on M3-94. SFX_INVENTORY_LAMP_TICK and SFX_DHAKA_ROOFTOP_MOR"
+   "blocker": "Sadman: approve or mark up the 2D sheets on main: production/concept/narrative_props/M3-99_plant_stages_v1.png and M3-99_props_v1.png (contact sheet production/qa/evidence/M3-99_contact.png). Tara senescent/dry dates also wait on M3-94."
   },
   {
    "id": "M1-53",
@@ -3908,7 +3910,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Rule out a threaded-loading deadlock at full-cast entry",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [],
    "paths": [
