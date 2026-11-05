@@ -41,18 +41,20 @@ ACCOUNTS = {
     "codex-main":  {"engine": "codex",  "cmd": ["sh", "-c", 'codex exec -s workspace-write -m gpt-6.1-sol -c model_reasoning_effort="$EFFORT" < "$0"', "{p}"]},
     "claude2":     {"engine": "claude", "cmd": [GOCODE_RUN, "claude2", "{p}", "claude-opus-5-5"]},
     "fable":       {"engine": "claude", "cmd": [GOCODE_RUN, "claude2", "{p}", "claude-fable-5-1"]},
-    "claude-main": {"engine": "claude", "cmd": ["sh", "-c", 'claude -p "$(cat "$0")" --permission-mode auto --model claude-opus-5-5', "{p}"]},
+    "claude-main": {"engine": "claude", "cmd": ["sh", "-c", 'claude -p "$(cat "$0")" --permission-mode auto --model claude-opus-5-5 --effort "$EFFORT"', "{p}"]},
     "buet":        {"engine": "gemini", "cmd": [GOCODE_RUN, "buet", "{p}", "gemini-4-argon-high"]},
 }
-LANES = {  # board lane -> accounts in order of preference
+LANES = {  # board lane -> accounts in order of preference (Sadman, 5 Nov: Claude takes most work)
     "codex": ["codex", "codex-main", "claude2"],
-    "claude": ["claude2", "claude-main"],
+    "claude": ["claude2", "fable", "claude-main"],
     "antigravity": ["buet", "claude2"],
     "gemini": ["buet", "claude2"],
-    "any": ["claude2", "codex", "buet"],
+    "muse": ["fable", "claude2"],
+    "any": ["claude2", "fable", "codex", "buet"],
 }
 REVIEWER = {"codex": ["claude2", "buet", "claude-main"], "claude": ["codex", "codex-main", "buet", "claude-main"], "gemini": ["codex", "claude2"]}
-FABLE_HINTS = re.compile(r"habitat kit|environment|main scene|terrain|exterior|photoreal|M1-03|M1-05", re.I)
+# Fable 5.1 leads the photoreal environment and 3D scene work (5 Nov decision)
+FABLE_HINTS = re.compile(r"habitat kit|environment|main scene|terrain|exterior|interior|photoreal|LOLA|\b3D\b|Blender|M1-03|M1-05", re.I)
 
 asleep: dict[str, float] = {}       # account -> epoch when usable again
 taken: set[str] = set()             # task ids picked this run
@@ -152,7 +154,9 @@ project's repository; work only here). Do board task {tid} — exactly this one 
    spending credits the task says need approval, a human action), do not fake it: python3 production/plan/board.py block {tid}
    --reason "<what is needed and who can unblock it>" and stop.
 4. Do the work. Reuse existing services; gameplay values in data files; doc comments on public functions; at most one
-   Godot/ffmpeg/Blender process at a time; never a bare Godot exit code as a test result.
+   Godot/ffmpeg/Blender process at a time, and run every Blender render, ffmpeg encode or windowed Godot capture as
+   `python3 production/tools/heavy.py <command...>` (it waits so that no more than two run on this Mac); never a bare
+   Godot exit code as a test result.
 5. Verify: GODOT={GODOT} game/tools/run_tests.sh must print "N/N suites passed". Anything a player sees needs screenshots in
    production/qa/evidence/{tid}_*.png (run the game windowed or a scripted capture with the window on top).
 6. Record: one row in production/AI_PROMPT_LOG.md (tool = your engine and model, "night shift"), a dated line in
@@ -377,7 +381,8 @@ def do_task(slot, tid, lane):
         worker = cands[0]
         log(f"[{slot.name}] {tid} round {round_ + 1} on {worker} (effort {effort})")
         before = changes(slot)
-        ok, out = run_agent(worker, worker_prompt(tid, slot, f"Sadman/night-{worker}", fix), slot, effort)
+        eff = "xhigh" if ACCOUNTS[worker]["engine"] == "codex" else effort  # Codex always extra-high (Sadman, 5 Nov)
+        ok, out = run_agent(worker, worker_prompt(tid, slot, f"Sadman/night-{worker}", fix), slot, eff)
         if not ok and limit_wait(out[-3000:]):
             continue  # same round again on the lane's next account
         status = task_info(slot, tid).get("status")
@@ -457,6 +462,8 @@ def write_summary():
 if __name__ == "__main__":
     LOGDIR.mkdir(parents=True, exist_ok=True)
     NIGHT.mkdir(exist_ok=True)
+    for i in range(2):  # heavy.py's slots; created here because sandboxed workers cannot create files outside their checkout
+        (NIGHT / f"heavy{i}.lock").touch()
     STOP.unlink(missing_ok=True)
     pidfile = NIGHT / f"{SLOT_PREFIX}.pid"
     pidfile.write_text(str(os.getpid()))

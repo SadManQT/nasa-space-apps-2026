@@ -390,7 +390,7 @@
    "priority": "P0",
    "tool": "human",
    "title": "Approve the habitat kit and room concept sheets",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M1-03"
@@ -398,8 +398,8 @@
    "paths": [],
    "refs": [],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "Sadman approved all sheets in production/concept/environment_v1/ on 5 Nov 2026 ('all are approved'); recorded in PRODUCTION_HANDBOOK.md §3.",
+   "updated": "2026-11-05",
    "prompt": "Review production/concept/environment_v1/. Approve, or write the changes you want next to each sheet. The AI that made them records the\ndecision in PRODUCTION_HANDBOOK.md §3. Nothing is generated in 3D before this approval."
   },
   {
@@ -524,8 +524,8 @@
    "prompt": "Look at production/concept/lookdev_exterior_v1/ and pick A or B (or ask for changes). The AI records it in handbook §3."
   },
   {
-   "status": "in_progress",
-   "owner": "Sadman/claude",
+   "status": "todo",
+   "owner": "",
    "deps": [],
    "paths": [
     "production/terrain/",
@@ -538,13 +538,13 @@
     "game-design/09_WORLD_AND_LEVEL_DESIGN.md",
     "production/ART_BIBLE.md"
    ],
-   "note": "Heightmaps, provenance and Blender base meshes can start now; apply surface materials and lighting only after the art direction is chosen (M1-33).",
+   "note": "Heightmaps, provenance and Blender base meshes can start now; apply surface materials and lighting only after the art direction is chosen (M1-33). 5 Nov: the 4 Nov claim produced no files; released to Claude Fable 5.1 (environment lead). Blender is on this Mac (/opt/homebrew/bin/blender).",
    "evidence": "",
-   "updated": "2026-11-04",
+   "updated": "2026-11-05",
    "id": "M1-34",
    "milestone": "M1",
    "priority": "P0",
-   "tool": "muse",
+   "tool": "claude",
    "title": "Real south-pole terrain from NASA LRO LOLA elevation data",
    "prompt": "Goal: every exterior is the real Moon. Download the NASA PDS LOLA south-pole DEM (e.g. LDEM 80S at 20 m/px, plus the 5 m/px Shackleton\ntiles where available; cite the product ID, DOI and URL in a provenance JSON next to the fixture), crop the areas the story uses (Aurora at the\nShackleton–de Gerlache connecting ridge, the cold trap for CH04, the 120 km relay road and Malapert summit for CH08), and convert them to\n16-bit heightmaps with the correct metres-per-pixel. Script it (production/tools/make_terrain.py, stdlib + numpy if installed) so it is\nreproducible. In Blender: add a detail layer (small craters and boulders by the size-frequency the ART_BIBLE allows; no invented mountains),\nbake normal/AO, and export Godot-ready terrain tiles with LODs; set the Sun azimuth and elevation for each story date from an ephemeris or\nthe LOLA illumination products, not by eye. Write the 'made from NASA data' credit line for the in-game Data Card and the video.\nAcceptance: heightmaps + provenance in the repo (LFS for binaries), tiles import in Godot, a side-by-side image of the LOLA hillshade and the\nin-game view in production/review/."
   },
@@ -3776,7 +3776,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Narrative props, plant stages and effects: Alo and Tara growth variants, nameplates, named mugs, clue props, two new SFX",
-   "status": "blocked",
+   "status": "todo",
    "deps": [],
    "paths": [
     "production/concept/narrative_props/",
@@ -3794,11 +3794,11 @@
     "execution/ASSET_PL_Alo_Sprout.md",
     "execution/ASSET_PL_Tara_Bloom.md"
    ],
-   "note": "From doc 24 NR-12. Get Sadman's approval on the 2D sheets before spending Tripo credits.",
+   "note": "From doc 24 NR-12. Get Sadman's approval on the 2D sheets before spending Tripo credits. APPROVED by Sadman 5 Nov 2026: the 2D sheets on main (production/concept/narrative_props/) — build the 3D props and plant stages from them. Tara's senescent/dry dates wait on M3-94.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Problem: Alo has no cotyledon, true-leaf, senescent or dry state; Tara has only a bloom model; the clue and memory props in doc 24 do not exist.\nRead first: game-design/24_NARRATIVE_REVISION.md §3.8 (stage table), §3.9, §4 (clues 2, 12, 14), §7.6, §2.11 (new SFX); production/ART_BIBLE.md §2, §6 (Brassica rapa botany, no faces); the existing ASSET_PL_* prompts.\nDo: (1) 2D sheets for approval: Alo cotyledon, true-leaf, senescent (yellowing, pods straw-coloured, leaning) and dry variants; Tara pods, senescent and dry (green stem); Alo and Tara nameplates; five mug name decals; the gear-wheel tool tag; the drawer-lid pencil note; the 'N.' label holder; the 'Working stock - Tara x Alo' envelope. (2) After approval, build them (blend-shape or texture variants of the existing plant models where possible; Tripo only where a new mesh is needed). (3) Generate SFX_INVENTORY_LAMP_TICK and SFX_DHAKA_ROOFTOP_MORNING with captions in sfx_list.csv.\nAcceptance: Sadman's approval quoted; every flower has four petals in a cross; no plant has eyes, a face or a mouth; English text only; registry and AI log rows added; a contact sheet in production/qa/evidence/M3-99_contact.png. Log every AI generation in production/AI_PROMPT_LOG.md.",
-   "blocker": "Sadman: approve or mark up the 2D sheets on main: production/concept/narrative_props/M3-99_plant_stages_v1.png and M3-99_props_v1.png (contact sheet production/qa/evidence/M3-99_contact.png). Tara senescent/dry dates also wait on M3-94."
+   "owner": ""
   },
   {
    "id": "M1-53",
