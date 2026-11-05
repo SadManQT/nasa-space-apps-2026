@@ -12,10 +12,14 @@ static var pinned: Array[String] = []
 static var _image_extension: GLTFDocumentExtension
 static var _raw_loader: ResourceFormatLoader
 static var _requests: Dictionary = {}
+static var _preparing: Dictionary = {}
 
+## Schedules one raw decode per path; recovered sessions use the original decoder.
 static func request(path: String) -> Error:
 	if is_prepared(path) or _requests.has(path):
 		return OK
+	if PreparationWatchdog.synchronous:
+		return ERR_UNAVAILABLE
 	if not FileAccess.file_exists(path):
 		return ERR_FILE_NOT_FOUND
 	if _raw_loader == null:
@@ -32,26 +36,49 @@ static func request(path: String) -> Error:
 static func is_prepared(path: String) -> bool:
 	return _scenes.has(path) and _scenes[path].modified == FileAccess.get_modified_time(path)
 
+## Coalesces callers through scene publication, with an independent raw fallback.
 static func prepare(path: String, tree: SceneTree) -> bool:
 	if is_prepared(path):
 		return true
+	if _preparing.has(path):
+		var pending: Dictionary = _preparing[path]
+		if not await PreparationWatchdog.wait_until(tree, "geometry_queue:" + path, func(): return pending.done):
+			return await _recover_geometry(path, tree, pending)
+		return pending.success
+	var pending := {"done": false, "success": false, "recovering": false}
+	_preparing[path] = pending
+	if PreparationWatchdog.synchronous:
+		return await _recover_geometry(path, tree, pending)
+	var prepared := await _prepare_threaded(path, tree, pending)
+	if not pending.done:
+		_finish_geometry(path, pending, prepared)
+	return pending.success
+
+static func _prepare_threaded(path: String, tree: SceneTree, pending: Dictionary) -> bool:
 	if request(path) != OK:
-		return false
+		return await _recover_geometry(path, tree, pending)
 	var key: String = _requests[path]
-	while ResourceLoader.load_threaded_get_status(key) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-		await tree.process_frame
-	if ResourceLoader.load_threaded_get_status(key) != ResourceLoader.THREAD_LOAD_LOADED:
-		_requests.erase(path)
-		return false
-	var state := ResourceLoader.load_threaded_get(key) as GLTFState
+	var completed := await PreparationWatchdog.wait_until(tree, "raw_decode:" + path, func():
+		return pending.recovering or ResourceLoader.load_threaded_get_status(key) != ResourceLoader.THREAD_LOAD_IN_PROGRESS)
+	if pending.recovering:
+		return await _recover_geometry(path, tree, pending)
+	if not completed:
+		return await _recover_geometry(path, tree, pending)
+	var status := ResourceLoader.load_threaded_get_status(key)
+	var state: GLTFState
+	if status == ResourceLoader.THREAD_LOAD_LOADED or status == ResourceLoader.THREAD_LOAD_FAILED:
+		state = ResourceLoader.load_threaded_get(key) as GLTFState
 	_requests.erase(path)
 	if state == null:
-		return false
+		return await _recover_geometry(path, tree, pending)
 	if LoadTrace.enabled:
 		LoadTrace.steps.append({"step": "worker_decode:" + path, "ms": state.get_meta("decode_ms")})
 		LoadTrace.steps.append({"step": "worker_mipmaps:" + path, "ms": state.get_meta("mipmaps_ms")})
-	# Node creation and packing always stay on the main thread.
+	# Node creation and packing always stay on the main thread. A timed-out
+	# follower can take over recovery while this owner yields.
 	await tree.process_frame
+	if pending.recovering:
+		return await _recover_geometry(path, tree, pending)
 	var stamp := LoadTrace.begin()
 	var document := state.get_meta("raw_document") as GLTFDocument
 	var root := document.generate_scene(state) as Node3D
@@ -68,6 +95,33 @@ static func prepare(path: String, tree: SceneTree) -> bool:
 	_remember(path, scene)
 	await tree.process_frame
 	return true
+
+static func _recover_geometry(path: String, tree: SceneTree, pending: Dictionary) -> bool:
+	if pending.recovering:
+		# The owner yields only to draw the recovery card, then does bounded
+		# synchronous work. All followers share its published outcome.
+		await PreparationWatchdog.wait_until(tree, "raw_recovery:" + path, func(): return pending.done)
+		return pending.success
+	pending.recovering = true
+	if _requests.has(path):
+		PreparationWatchdog.retire_resource(tree, _requests[path])
+		_requests.erase(path)
+	var prepared: bool = await PreparationWatchdog.fallback(tree, _prepare_sync.bind(path))
+	_finish_geometry(path, pending, prepared)
+	return prepared
+
+static func _finish_geometry(path: String, pending: Dictionary, success: bool) -> void:
+	pending.success = success
+	pending.done = true
+	_preparing.erase(path)
+
+static func _prepare_sync(path: String) -> bool:
+	# Direct GLTFDocument decoding never joins the virtual .lla_gltf request.
+	var instance := load_glb(path)
+	if instance == null:
+		return false
+	instance.free()
+	return is_prepared(path)
 
 static func _remember(path: String, scene: PackedScene) -> void:
 	_scenes[path] = {"modified": FileAccess.get_modified_time(path), "scene": scene}

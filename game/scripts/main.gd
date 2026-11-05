@@ -57,7 +57,7 @@ func _build_stage() -> void:
 	_stage_root.name = "TitleStage"
 	add_child(_stage_root)
 	var environment := WorldEnvironment.new()
-	environment.environment = load("res://environments/look/character_look.tres") as Environment
+	environment.environment = preparation.resources.get("res://environments/look/character_look.tres") as Environment
 	_stage_root.add_child(environment)
 	var key := DirectionalLight3D.new()
 	key.rotation_degrees = Vector3(-42, -28, 0)

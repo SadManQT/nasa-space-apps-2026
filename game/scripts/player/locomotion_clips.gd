@@ -29,7 +29,7 @@ static func prewarm(actor: Node3D, source_path: String, tree: SceneTree) -> bool
 	for id in player.get_animation_list():
 		sources[id] = player.get_animation(id)
 	var job := PreparationJob.new()
-	job.start(_prepare_resources.bind(sources, source_path))
+	job.start(_prepare_resources.bind(sources, source_path), "gait_clips:" + source_path)
 	var result := await job.finish(tree)
 	if result.is_empty():
 		return false

@@ -1,0 +1,8 @@
+# M1-53 resume validation needs the PASS logs alongside JSON/CSV/PNGs.
+!M1-53_*.log
+# Kept on the capture machine only (hashes are in M1-53_capture_progress.json):
+# 4 MB raw frame CSVs, engine-log duplicates of the stdout logs, and the middle
+# runs' screenshots (runs 01 and 10 are committed as the visual record).
+M1-53_run_*.csv
+M1-53_*_engine.log
+M1-53_run_0[2-9]_*.png

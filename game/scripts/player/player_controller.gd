@@ -81,7 +81,9 @@ func load_character(path: String) -> bool:
 	character = loaded
 	if tuning == null:
 		var preset := "res://resources/player/" + path.get_file().get_basename().to_lower() + ".tres"
-		tuning = load(preset) as LocomotionTuning if ResourceLoader.exists(preset) else LocomotionTuning.new()
+		# A recovered preparation may still have a quarantined request at this path.
+		var cache_mode := ResourceLoader.CACHE_MODE_IGNORE_DEEP if PreparationWatchdog.synchronous else ResourceLoader.CACHE_MODE_REUSE
+		tuning = ResourceLoader.load(preset, "", cache_mode) as LocomotionTuning if ResourceLoader.exists(preset) else LocomotionTuning.new()
 	tuning = tuning.duplicate() as LocomotionTuning
 	animation = AnimationScript.new()
 	animation.name = "PlayerAnimation"

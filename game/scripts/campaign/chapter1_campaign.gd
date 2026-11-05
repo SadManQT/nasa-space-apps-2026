@@ -585,7 +585,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _refresh_world() -> void:
 	if incremental_loading:
-		if not loading and preparation.room_ready(route.current_room_id()):
+		if not loading and not PreparationWatchdog.synchronous and preparation.room_ready(route.current_room_id()):
 			_refresh_world_now()
 			_on_scene_ready()
 			_prefetch_next_room()
@@ -654,7 +654,7 @@ func _refresh_world_incremental() -> void:
 	await get_tree().process_frame
 	# First real room draw (including its lighting/layout variants) is covered.
 	if DisplayServer.get_name() != "headless":
-		await RenderingServer.frame_post_draw
+		await preparation.wait_for_draw("room_first_draw:" + route.current_room_id())
 
 func _rebuild_transition() -> void:
 	var was_paused := _ui_paused

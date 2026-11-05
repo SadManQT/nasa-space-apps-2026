@@ -1,0 +1,676 @@
+{
+	"cpu_only": false,
+	"events": [
+		{
+			"duration_ms": 493.35,
+			"event": "title_build",
+			"max_frame_interval_ms": 40.434,
+			"steps": [
+				{
+					"ms": 77.281,
+					"step": "worker_decode:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 5.699,
+					"step": "worker_mipmaps:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 3.309,
+					"step": "glb_generate_scene:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 0.173,
+					"step": "glb_pack:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 112.489,
+					"step": "worker_decode:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 4.983,
+					"step": "worker_mipmaps:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 1.111,
+					"step": "glb_generate_scene:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 0.132,
+					"step": "glb_pack:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 47.474,
+					"step": "worker_decode:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 1.879,
+					"step": "worker_mipmaps:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 0.185,
+					"step": "glb_generate_scene:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 0.117,
+					"step": "glb_pack:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 3.157,
+					"step": "toon:PR_MissionTable"
+				},
+				{
+					"ms": 0.015,
+					"step": "toon:PR_BatteryJar"
+				},
+				{
+					"ms": 0.011,
+					"step": "toon:PR_SeedPacket"
+				},
+				{
+					"ms": 7.414,
+					"step": "title_stage"
+				},
+				{
+					"ms": 17.07,
+					"step": "title_ui_save_validation"
+				}
+			],
+			"transition_frames": 29
+		},
+		{
+			"duration_ms": 345.545,
+			"event": "new_campaign",
+			"max_frame_interval_ms": 62.203,
+			"steps": [
+				{
+					"ms": 0.181,
+					"step": "campaign_scene_instance"
+				},
+				{
+					"ms": 9.418,
+					"step": "content_validation"
+				},
+				{
+					"ms": 3.298,
+					"step": "route_profile"
+				},
+				{
+					"ms": 8.062,
+					"step": "room_rebuild"
+				},
+				{
+					"ms": 0.094,
+					"step": "toon:PR_MissionTable"
+				},
+				{
+					"ms": 0.036,
+					"step": "toon:PR_BatteryJar"
+				},
+				{
+					"ms": 0.066,
+					"step": "toon:PR_SeedPacket"
+				},
+				{
+					"ms": 0.149,
+					"step": "toon:PR_Mug"
+				},
+				{
+					"ms": 47.313,
+					"step": "campaign_ui"
+				}
+			],
+			"transition_frames": 13
+		},
+		{
+			"duration_ms": 101.084,
+			"event": "garden_enter",
+			"max_frame_interval_ms": 51.126,
+			"steps": [
+				{
+					"ms": 0.055,
+					"step": "toon:PR_GrowthChamber"
+				},
+				{
+					"ms": 0.028,
+					"step": "toon:PR_Glovebox"
+				},
+				{
+					"ms": 0.021,
+					"step": "toon:PL_CropRack"
+				},
+				{
+					"ms": 0.019,
+					"step": "toon:PL_Alo_Bud"
+				},
+				{
+					"ms": 0.022,
+					"step": "toon:PL_Tara_Bloom"
+				},
+				{
+					"ms": 13.424,
+					"step": "room_rebuild"
+				}
+			],
+			"transition_frames": 2
+		},
+		{
+			"duration_ms": 26.322,
+			"event": "garden_rebuild",
+			"max_frame_interval_ms": 20.112,
+			"steps": [
+				{
+					"ms": 0.058,
+					"step": "toon:PR_GrowthChamber"
+				},
+				{
+					"ms": 0.032,
+					"step": "toon:PR_Glovebox"
+				},
+				{
+					"ms": 0.026,
+					"step": "toon:PL_CropRack"
+				},
+				{
+					"ms": 0.021,
+					"step": "toon:PL_Alo_Bud"
+				},
+				{
+					"ms": 0.029,
+					"step": "toon:PL_Tara_Bloom"
+				},
+				{
+					"ms": 9.88,
+					"step": "room_rebuild"
+				}
+			],
+			"transition_frames": 2
+		},
+		{
+			"duration_ms": 841.779,
+			"event": "full_cast_enter",
+			"max_frame_interval_ms": 82.159,
+			"steps": [
+				{
+					"ms": 145.879,
+					"step": "worker_decode:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 7.48,
+					"step": "worker_mipmaps:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 1.247,
+					"step": "glb_generate_scene:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 0.236,
+					"step": "glb_pack:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 112.513,
+					"step": "worker_decode:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 5.016,
+					"step": "worker_mipmaps:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 1.065,
+					"step": "glb_generate_scene:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 0.137,
+					"step": "glb_pack:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 46.88,
+					"step": "worker_decode:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 2.415,
+					"step": "worker_mipmaps:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 0.202,
+					"step": "glb_generate_scene:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 0.128,
+					"step": "glb_pack:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 46.717,
+					"step": "worker_decode:res://assets/props/PR_Mug/PR_Mug.glb"
+				},
+				{
+					"ms": 2.082,
+					"step": "worker_mipmaps:res://assets/props/PR_Mug/PR_Mug.glb"
+				},
+				{
+					"ms": 0.203,
+					"step": "glb_generate_scene:res://assets/props/PR_Mug/PR_Mug.glb"
+				},
+				{
+					"ms": 0.112,
+					"step": "glb_pack:res://assets/props/PR_Mug/PR_Mug.glb"
+				},
+				{
+					"ms": 2.119,
+					"step": "room_rebuild"
+				},
+				{
+					"ms": 0.036,
+					"step": "toon:PR_MissionTable"
+				},
+				{
+					"ms": 0.026,
+					"step": "toon:PR_BatteryJar"
+				},
+				{
+					"ms": 0.034,
+					"step": "toon:PR_SeedPacket"
+				},
+				{
+					"ms": 0.021,
+					"step": "toon:PR_Mug"
+				}
+			],
+			"transition_frames": 46
+		},
+		{
+			"cpu_ms": 8.185,
+			"event": "video_open_CS-01"
+		},
+		{
+			"event": "video_position_CS-01",
+			"seconds": 20.024412
+		},
+		{
+			"cpu_ms": 10.212,
+			"event": "video_open_CS-02"
+		},
+		{
+			"event": "video_position_CS-02",
+			"seconds": 20.011221
+		},
+		{
+			"cpu_ms": 8.504,
+			"event": "video_open_CS-03"
+		},
+		{
+			"event": "video_position_CS-03",
+			"seconds": 19.964414
+		},
+		{
+			"cpu_ms": 6.81,
+			"event": "video_open_CS-04"
+		},
+		{
+			"event": "video_position_CS-04",
+			"seconds": 20.000274
+		},
+		{
+			"cpu_ms": 8.321,
+			"event": "video_open_CS-05"
+		},
+		{
+			"event": "video_position_CS-05",
+			"seconds": 20.009222
+		},
+		{
+			"cpu_ms": 10.419,
+			"event": "video_open_CS-06"
+		},
+		{
+			"event": "video_position_CS-06",
+			"seconds": 19.9986963333333
+		},
+		{
+			"cpu_ms": 15.652,
+			"event": "video_open_CS-07"
+		},
+		{
+			"event": "video_position_CS-07",
+			"seconds": 20.021439
+		},
+		{
+			"cpu_ms": 9.883,
+			"event": "video_open_CS-08"
+		},
+		{
+			"event": "video_position_CS-08",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 12.245,
+			"event": "video_open_CS-09"
+		},
+		{
+			"event": "video_position_CS-09",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 8.152,
+			"event": "video_open_CS-10"
+		},
+		{
+			"event": "video_position_CS-10",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 8.637,
+			"event": "video_open_CS-11"
+		},
+		{
+			"event": "video_position_CS-11",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 10.224,
+			"event": "video_open_CS-12"
+		},
+		{
+			"event": "video_position_CS-12",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 13.098,
+			"event": "video_open_CS-13"
+		},
+		{
+			"event": "video_position_CS-13",
+			"seconds": 19.8005243333333
+		},
+		{
+			"cpu_ms": 11.216,
+			"event": "video_open_CS-14"
+		},
+		{
+			"event": "video_position_CS-14",
+			"seconds": 19.7098313333333
+		},
+		{
+			"cpu_ms": 5.942,
+			"event": "video_open_CS-15"
+		},
+		{
+			"event": "video_position_CS-15",
+			"seconds": 19.5464853333334
+		},
+		{
+			"cpu_ms": 6.489,
+			"event": "video_open_CS-16"
+		},
+		{
+			"event": "video_position_CS-16",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 6.12,
+			"event": "video_open_CS-17"
+		},
+		{
+			"event": "video_position_CS-17",
+			"seconds": 19.5769316666667
+		},
+		{
+			"cpu_ms": 11.37,
+			"event": "video_open_CS-18"
+		},
+		{
+			"event": "video_position_CS-18",
+			"seconds": 0.0
+		}
+	],
+	"metadata": {
+		"cpu_only": false,
+		"display": "macOS",
+		"driver": "metal",
+		"engine": {
+			"build": "official",
+			"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+			"hex": 263938,
+			"major": 4,
+			"minor": 7,
+			"patch": 2,
+			"status": "stable",
+			"string": "4.7.2-stable (official)",
+			"timestamp": 0
+		},
+		"max_fps": 0,
+		"physics_ticks": 60,
+		"renderer": "forward_plus",
+		"seconds": 20.0,
+		"transition_schema": 3,
+		"vsync": 1,
+		"window": "(1280, 720)"
+	},
+	"preparation_recoveries": [],
+	"summaries": [
+		{
+			"frames_or_calls": 1195,
+			"max_ms": 41.696,
+			"over_33ms": 7,
+			"p50_ms": 16.688,
+			"p95_ms": 17.532,
+			"p99_ms": 25.446,
+			"sample": "title"
+		},
+		{
+			"frames_or_calls": 1184,
+			"max_ms": 79.98,
+			"over_33ms": 9,
+			"p50_ms": 16.672,
+			"p95_ms": 18.199,
+			"p99_ms": 32.827,
+			"sample": "hub_walk"
+		},
+		{
+			"frames_or_calls": 1192,
+			"max_ms": 57.376,
+			"over_33ms": 2,
+			"p50_ms": 16.669,
+			"p95_ms": 17.864,
+			"p99_ms": 21.382,
+			"sample": "hub_panels"
+		},
+		{
+			"frames_or_calls": 1195,
+			"max_ms": 73.802,
+			"over_33ms": 2,
+			"p50_ms": 16.68,
+			"p95_ms": 18.156,
+			"p99_ms": 19.796,
+			"sample": "garden_walk"
+		},
+		{
+			"frames_or_calls": 1192,
+			"max_ms": 53.297,
+			"over_33ms": 5,
+			"p50_ms": 16.666,
+			"p95_ms": 17.736,
+			"p99_ms": 21.452,
+			"sample": "garden_panels"
+		},
+		{
+			"frames_or_calls": 1190,
+			"max_ms": 109.421,
+			"over_33ms": 5,
+			"p50_ms": 16.719,
+			"p95_ms": 18.168,
+			"p99_ms": 23.187,
+			"sample": "full_cast_walk"
+		},
+		{
+			"frames_or_calls": 1800,
+			"max_ms": 773.225,
+			"over_33ms": 7,
+			"p50_ms": 7.784,
+			"p95_ms": 17.338,
+			"p99_ms": 21.037,
+			"sample": "full_cast_panels"
+		},
+		{
+			"frames_or_calls": 2796,
+			"max_ms": 74.809,
+			"over_33ms": 14,
+			"p50_ms": 6.895,
+			"p95_ms": 7.564,
+			"p99_ms": 7.86,
+			"sample": "video_CS-01"
+		},
+		{
+			"frames_or_calls": 2778,
+			"max_ms": 118.801,
+			"over_33ms": 14,
+			"p50_ms": 6.913,
+			"p95_ms": 7.593,
+			"p99_ms": 8.163,
+			"sample": "video_CS-02"
+		},
+		{
+			"frames_or_calls": 2796,
+			"max_ms": 88.41,
+			"over_33ms": 15,
+			"p50_ms": 6.902,
+			"p95_ms": 7.501,
+			"p99_ms": 8.405,
+			"sample": "video_CS-03"
+		},
+		{
+			"frames_or_calls": 2799,
+			"max_ms": 85.074,
+			"over_33ms": 15,
+			"p50_ms": 6.905,
+			"p95_ms": 7.621,
+			"p99_ms": 9.573,
+			"sample": "video_CS-04"
+		},
+		{
+			"frames_or_calls": 2771,
+			"max_ms": 102.03,
+			"over_33ms": 14,
+			"p50_ms": 6.895,
+			"p95_ms": 7.668,
+			"p99_ms": 8.868,
+			"sample": "video_CS-05"
+		},
+		{
+			"frames_or_calls": 2763,
+			"max_ms": 147.199,
+			"over_33ms": 14,
+			"p50_ms": 6.876,
+			"p95_ms": 7.678,
+			"p99_ms": 8.984,
+			"sample": "video_CS-06"
+		},
+		{
+			"frames_or_calls": 2762,
+			"max_ms": 138.082,
+			"over_33ms": 15,
+			"p50_ms": 6.908,
+			"p95_ms": 7.519,
+			"p99_ms": 7.836,
+			"sample": "video_CS-07"
+		},
+		{
+			"frames_or_calls": 2788,
+			"max_ms": 83.058,
+			"over_33ms": 13,
+			"p50_ms": 6.901,
+			"p95_ms": 7.573,
+			"p99_ms": 7.807,
+			"sample": "video_CS-08"
+		},
+		{
+			"frames_or_calls": 2777,
+			"max_ms": 126.766,
+			"over_33ms": 14,
+			"p50_ms": 6.904,
+			"p95_ms": 7.521,
+			"p99_ms": 7.788,
+			"sample": "video_CS-09"
+		},
+		{
+			"frames_or_calls": 2774,
+			"max_ms": 137.832,
+			"over_33ms": 12,
+			"p50_ms": 6.88,
+			"p95_ms": 7.586,
+			"p99_ms": 7.825,
+			"sample": "video_CS-10"
+		},
+		{
+			"frames_or_calls": 2772,
+			"max_ms": 128.398,
+			"over_33ms": 13,
+			"p50_ms": 6.916,
+			"p95_ms": 7.522,
+			"p99_ms": 7.79,
+			"sample": "video_CS-11"
+		},
+		{
+			"frames_or_calls": 2796,
+			"max_ms": 128.641,
+			"over_33ms": 11,
+			"p50_ms": 6.901,
+			"p95_ms": 7.534,
+			"p99_ms": 7.756,
+			"sample": "video_CS-12"
+		},
+		{
+			"frames_or_calls": 2742,
+			"max_ms": 350.432,
+			"over_33ms": 15,
+			"p50_ms": 6.89,
+			"p95_ms": 7.342,
+			"p99_ms": 7.754,
+			"sample": "video_CS-13"
+		},
+		{
+			"frames_or_calls": 2723,
+			"max_ms": 328.979,
+			"over_33ms": 14,
+			"p50_ms": 6.879,
+			"p95_ms": 7.399,
+			"p99_ms": 7.761,
+			"sample": "video_CS-14"
+		},
+		{
+			"frames_or_calls": 2710,
+			"max_ms": 459.893,
+			"over_33ms": 14,
+			"p50_ms": 6.873,
+			"p95_ms": 7.421,
+			"p99_ms": 7.762,
+			"sample": "video_CS-15"
+		},
+		{
+			"frames_or_calls": 2754,
+			"max_ms": 268.637,
+			"over_33ms": 12,
+			"p50_ms": 6.896,
+			"p95_ms": 7.385,
+			"p99_ms": 7.71,
+			"sample": "video_CS-16"
+		},
+		{
+			"frames_or_calls": 2702,
+			"max_ms": 341.992,
+			"over_33ms": 14,
+			"p50_ms": 6.887,
+			"p95_ms": 7.603,
+			"p99_ms": 8.68,
+			"sample": "video_CS-17"
+		},
+		{
+			"frames_or_calls": 2837,
+			"max_ms": 288.135,
+			"over_33ms": 4,
+			"p50_ms": 6.894,
+			"p95_ms": 7.512,
+			"p99_ms": 7.721,
+			"sample": "video_CS-18"
+		}
+	]
+}

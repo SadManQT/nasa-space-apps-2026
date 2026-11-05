@@ -1,0 +1,116 @@
+{
+  "source_sha256": "42ed51c9919b6819eb3689c8a80c845ff3dae114f48394b45e8563f0759a0c00",
+  "runs": [
+    {
+      "run": 1,
+      "full_cast_enter": {
+        "duration_ms": 841.779,
+        "event": "full_cast_enter",
+        "max_frame_interval_ms": 82.159,
+        "steps": [
+          {
+            "ms": 145.879,
+            "step": "worker_decode:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+          },
+          {
+            "ms": 7.48,
+            "step": "worker_mipmaps:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+          },
+          {
+            "ms": 1.247,
+            "step": "glb_generate_scene:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+          },
+          {
+            "ms": 0.236,
+            "step": "glb_pack:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+          },
+          {
+            "ms": 112.513,
+            "step": "worker_decode:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+          },
+          {
+            "ms": 5.016,
+            "step": "worker_mipmaps:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+          },
+          {
+            "ms": 1.065,
+            "step": "glb_generate_scene:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+          },
+          {
+            "ms": 0.137,
+            "step": "glb_pack:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+          },
+          {
+            "ms": 46.88,
+            "step": "worker_decode:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+          },
+          {
+            "ms": 2.415,
+            "step": "worker_mipmaps:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+          },
+          {
+            "ms": 0.202,
+            "step": "glb_generate_scene:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+          },
+          {
+            "ms": 0.128,
+            "step": "glb_pack:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+          },
+          {
+            "ms": 46.717,
+            "step": "worker_decode:res://assets/props/PR_Mug/PR_Mug.glb"
+          },
+          {
+            "ms": 2.082,
+            "step": "worker_mipmaps:res://assets/props/PR_Mug/PR_Mug.glb"
+          },
+          {
+            "ms": 0.203,
+            "step": "glb_generate_scene:res://assets/props/PR_Mug/PR_Mug.glb"
+          },
+          {
+            "ms": 0.112,
+            "step": "glb_pack:res://assets/props/PR_Mug/PR_Mug.glb"
+          },
+          {
+            "ms": 2.119,
+            "step": "room_rebuild"
+          },
+          {
+            "ms": 0.036,
+            "step": "toon:PR_MissionTable"
+          },
+          {
+            "ms": 0.026,
+            "step": "toon:PR_BatteryJar"
+          },
+          {
+            "ms": 0.034,
+            "step": "toon:PR_SeedPacket"
+          },
+          {
+            "ms": 0.021,
+            "step": "toon:PR_Mug"
+          }
+        ],
+        "transition_frames": 46
+      },
+      "recoveries": [],
+      "artifacts_sha256": {
+        "M1-53_run_01.json": "fb5e2cd89bcf4d6e7f87199e92870ae4a0dead3d5e1675a118586a7947e2aa7e",
+        "M1-53_run_01.csv": "486071f586498f39e32b66b3ddc82746797db57be963e8c98c0ad16b6c114195",
+        "M1-53_run_01.log": "179c09d6bbdf90efe2eadd3a01582bfc44d9b1b829b8f7e9bde5fc70534ba1d8",
+        "M1-53_run_01_engine.log": "179c09d6bbdf90efe2eadd3a01582bfc44d9b1b829b8f7e9bde5fc70534ba1d8",
+        "M1-53_run_01_title_build.png": "cbcbddb25f1a9d3ef47d4a59792b3594d33ccd2724188edb72a328c8bf944321",
+        "M1-53_run_01_new_campaign.png": "7357a81d19f45a81561f6d891e208268545d46c30991274fb3dc973d0561e75b",
+        "M1-53_run_01_garden_enter.png": "18f235a0af7c0d3d9e4105077a0c7040da105e4bfac2092bccb981be7b3bae0e",
+        "M1-53_run_01_garden_rebuild.png": "a9415e17e17e658653da8ad641d2dc17ef310555065f270a578afbfec266aafc",
+        "M1-53_run_01_full_cast_enter.png": "991c2f997ed3a9d295d01cd0fc48be2de689ac6e8759b27df36fec3fbcbdc5da"
+      }
+    }
+  ],
+  "forced_stall": true,
+  "complete": false,
+  "running": "M1-53_run_02",
+  "failure": "Capture interrupted by signal 15; completed probes retained"
+}

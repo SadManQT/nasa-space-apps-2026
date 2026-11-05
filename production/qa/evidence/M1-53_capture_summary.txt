@@ -1,0 +1,3 @@
+AUDIT: forced-stall absent; 0/10 complete rendered probes validated (logs, JSON, CSV, PNGs).
+M1-53_run_01: PASS (505.9s); checkpoint saved immediately.
+FAIL: Capture interrupted by signal 15; completed probes retained; retained passes are diagnostic evidence, not ten-run acceptance.
