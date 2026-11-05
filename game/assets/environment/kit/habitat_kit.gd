@@ -48,8 +48,13 @@ static func instance(id: String, with_collision: bool = true, max_lod: int = 1) 
 	if entry.is_empty():
 		push_error("HabitatKit: unknown piece " + id)
 		return null
+	return instance_entry(entry, with_collision, max_lod)
+
+## Builds a piece from a catalogue entry of this shape (id, lods, lod_distance_m), so kit extensions that keep
+## their own catalogue (game/assets/environment/EN_Airlock/airlock.json, M3-2A) get the same two-LOD group.
+static func instance_entry(entry: Dictionary, with_collision: bool = true, max_lod: int = 1) -> Node3D:
 	var node := Node3D.new()
-	node.name = id
+	node.name = String(entry.id)
 	var switch := float(entry.get("lod_distance_m", 12.0))
 	var lods: Array = entry.lods
 	var last := mini(max_lod, lods.size() - 1)

@@ -71,9 +71,12 @@ def _remap_buffer_views(doc, keep):
     fix({k: v for k, v in doc.items() if k != "bufferViews"})
 
 
-def externalise(glb_path, texture_dir="textures"):
+def externalise(glb_path, texture_dir="textures", write_files=True):
     """Rewrites one GLB in place; returns (images moved, bytes before, bytes after). A GLB with no embedded
-    images is left untouched. Image files land in <glb folder>/<texture_dir>/<image name><ext>."""
+    images is left untouched. Image files land in <glb folder>/<texture_dir>/<image name><ext>.
+    With write_files False nothing is written to the texture folder: the GLB only *references* the files that
+    are already there (a kit extension in another folder pointing at "../kit/textures", board M3-2A), so the
+    shared set is never rewritten by a second build."""
     glb_path = Path(glb_path)
     before = glb_path.stat().st_size
     doc, binary = _read_glb(glb_path)
@@ -82,7 +85,8 @@ def externalise(glb_path, texture_dir="textures"):
     if not embedded:
         return 0, before, before
     out_dir = glb_path.parent / texture_dir
-    out_dir.mkdir(parents=True, exist_ok=True)
+    if write_files:
+        out_dir.mkdir(parents=True, exist_ok=True)
     removed = set()
     for i in embedded:
         image = images[i]
@@ -92,8 +96,10 @@ def externalise(glb_path, texture_dir="textures"):
         mime = image.get("mimeType", "image/png")
         name = image.get("name") or f"{glb_path.stem}_image{i}"
         target = out_dir / (name + EXTENSIONS.get(mime, ".png"))
-        if not target.exists() or target.read_bytes() != payload:
+        if write_files and (not target.exists() or target.read_bytes() != payload):
             target.write_bytes(payload)
+        elif not write_files and not target.exists():
+            raise FileNotFoundError(f"{glb_path.name} references {target}, which does not exist")
         removed.add(image["bufferView"])
         images[i] = {"name": name, "mimeType": mime, "uri": f"{texture_dir}/{target.name}"}
     keep = [i for i in range(len(doc["bufferViews"])) if i not in removed]

@@ -182,3 +182,33 @@ All 26 Cycles previews ([M1-05_habitat_kit_contact.png](M1-05_habitat_kit_contac
 Fix round, 5 Nov (same reviewer): the kit was rebuilt deterministically with its four texture sets stored once and shared by every GLB (geometry byte-identical to the first build, previews and both sheets re-rendered, verdicts unchanged). The Godot kit-overview captures `M1-05_godot_kit_lod0.png` and `_kit_lod1.png` were blank in the first build (camera aimed before entering the tree) and are re-taken with the camera on the face side and the game LOD forced; LOD0 shows the quilt relief, rivets and controls that LOD1 drops. Room, open-state and corridor captures re-taken with the shared textures: no visible change.
 
 Fix round 2, 5 Nov (Sadman/night-claude3, Claude Opus 5.5): two pieces rebuilt from the same script, the other 22 GLBs, every texture and every material byte-identical (md5 checked). EN_Kit_BulkheadRing is now the 1 m corridor segment of sheet B (above); EN_Kit_Hatch's leaf is two-sided (above). The Godot sample-assembly captures were re-taken because the first ones were blown out (six 2.2-energy omni lights 5 cm under the ceiling, Filmic tone mapping) and their captions ran off the frame: the room is now lit only by a soft-shadowed downlight under each light strip, with screen-space bounce light and AgX tone mapping, so the ceiling takes bounce light as under real recessed strips; the corridor is four chained segments between two door modules instead of two loose rings in a void; the open hatch shows a lit segment and the next door. Inspected: `M1-05_godot_room.png` (far wall, quilt relief, steel handrails, navy skirting, deck rings, no clipping), `_room_open.png` (door leaf parked in the jamb, corridor through the doorway, hatch leaf's room face and the passage beyond), `_corridor.png` (liner, rails, tread, seal lines, 5000 K strip, room through the open door), `_kit_lod0/1.png` (captions now fit). No text or logos on any surface, no faces, metre scale.
+
+## M3-2A Chapter 2 assets (5 Nov 2026, first-pass notes by Sadman/night-fable, Claude Fable 5.1; verdicts wait for Sadman's sheet approval)
+
+The sheets are in `production/concept/chapter2_v1/` and the contact sheet is `M3-2A_chapter2_contact.png`. The build is
+procedural Blender (no generation), so the renders are the shipped geometry; the automated gate passes for all twelve
+files (`asset_verification.md`). Verdict cells stay open until Sadman approves the sheets, so the registry reads
+"awaiting visual review" for these rows.
+
+| Asset | Verdict | Notes |
+|---|---|---|
+| EN_Airlock_SuitLocker_LOD0 | ⬜ awaiting sheet approval | open-front locker with rail, helmet shelf, boot tray, retaining bar and orange latch; RoleTab slot tints per cadet in Godot (checked in test_en_airlock.gd); blank plate, no text |
+| EN_Airlock_SuitLocker_LOD1 | ⬜ awaiting sheet approval | same silhouette, fewer segments, no vent slots or helmet rings |
+| EN_Airlock_Bench_LOD0 | ⬜ awaiting sheet approval | brushed steel seat (grain repeated four times as often as on the kit's rails, so it reads as fine brushing up close) on navy pedestals; orange boot rail reads at a glance |
+| EN_Airlock_Bench_LOD1 | ⬜ awaiting sheet approval | same silhouette and colours |
+| EN_Airlock_GlovePort_LOD0 | ⬜ awaiting sheet approval | kit window frame reused at 1.75 m, two flanged ports with dark sleeves on the far side; quilt above and below matches the kit walls |
+| EN_Airlock_GlovePort_LOD1 | ⬜ awaiting sheet approval | flat quilt, 10-segment rings |
+| EN_Airlock_PassThrough_LOD0 | ⬜ awaiting sheet approval | chamber box with navy seal frames on both faces, round viewports in both lids, gauge and orange lever; the far face is finished (two-sided module); lids swing 100 deg as the catalogue says (physics-checked) |
+| EN_Airlock_PassThrough_LOD1 | ⬜ awaiting sheet approval | same, fewer segments; the flat quilt sits 2 mm proud of the body face (the parked build z-fought there and showed vertical stripes) |
+| EN_Airlock_InterlockPanel_LOD0 | ⬜ awaiting sheet approval | console in the kit's equipment-bay language: Screen slot, two gauges, three lamps, wheel, grille, lever child; words are live (Label3D) in Godot |
+| EN_Airlock_InterlockPanel_LOD1 | ⬜ awaiting sheet approval | same, fewer segments |
+| PR_PaperBee | ⬜ awaiting sheet approval | reads as an origami bee from every view: pleated gold/navy abdomen, pointed head, kite wings folded from a root panel on the thorax, strip legs, antennae rooted inside the head; no face and nothing on the head that reads as an eye (the parked build had a stub there and floating wings); sockets present |
+| PR_SeedTray | ⬜ awaiting sheet approval | clean 12-cell tray, 0.50 m like PL_ZeroSeedlingTray, navy rim, orange tabs |
+
+Port and rebuild, 6 Nov (Sadman/night-claude2, Claude Opus 5.5): the parked GLBs, previews, sheets, UI icon and
+`airlock.json` predated the build scripts' last fixes, so everything was rebuilt from the scripts (a second run is
+byte-identical). Changed: PR_PaperBee (wings and antennae as above, 152 triangles), EN_Airlock_PassThrough LOD0/LOD1
+(quilt offset), EN_Airlock_Bench (seat grain), `airlock.json` (the six ceiling light strips now sit under the ceiling at
+z = 1 and 3 instead of on the near-wall line; interlock `time_compression` note), the plan on the airlock sheet (numbered
+anchors that step clear of every label) and the UI icon. The other eight GLBs are byte-identical to the parked build.
+Inspected: every Cycles preview, the three sheets, the contact sheet and the Godot captures listed in the board evidence.

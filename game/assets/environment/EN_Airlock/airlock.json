@@ -1,0 +1,1540 @@
+{
+ "task": "M3-2A",
+ "seed": 20261105,
+ "design_reference": [
+  "game-design/09_WORLD_AND_LEVEL_DESIGN.md LOC-05",
+  "production/concept/environment_v1 (M1-04 approved kit sheets)",
+  "production/concept/chapter2_v1 (M3-2A sheets, awaiting approval)"
+ ],
+ "conventions": {
+  "units": "metres",
+  "up": "+Y",
+  "front": "-Z (Godot forward); wall faces lie on z=0 and face -Z, bodies extend to +z; standing pieces face -Z with their pivot at the base centre",
+  "grid_m": 1.0,
+  "wall_height_m": 2.6,
+  "lod_distance_m": 12.0,
+  "textures": "the kit's PBR sets, referenced by uri in ../kit/textures (stored once, shared with every kit piece)"
+ },
+ "pieces": [
+  {
+   "id": "EN_Airlock_SuitLocker",
+   "display": "EVA suit locker",
+   "notes": "0.6 x 0.55 x 2.2 m open-front locker: hanger rail 1.78 m, helmet shelf 1.86 m, boot tray, backpack brackets, retaining bar with orange latch; blank name plate; material slot RoleTab (0.04 x 0.40 m strip) takes the cadet's role colour; stands against a wall, open front faces -Z",
+   "kind": "standing",
+   "footprint_m": [
+    0.6,
+    0.55
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_Airlock/EN_Airlock_SuitLocker_LOD0.glb",
+    "res://assets/environment/EN_Airlock/EN_Airlock_SuitLocker_LOD1.glb"
+   ],
+   "triangles": [
+    664,
+    256
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    0.6,
+    2.2,
+    0.56
+   ],
+   "bounds_min_m": [
+    -0.3,
+    0.0,
+    -0.285
+   ],
+   "sockets": {
+    "role_tab_material": "RoleTab",
+    "hanger_rail": [
+     0,
+     1.78,
+     0
+    ],
+    "helmet_shelf": [
+     0,
+     1.86,
+     0.06
+    ],
+    "boot_tray": [
+     0,
+     0.12,
+     0.05
+    ],
+    "name_plate": [
+     0,
+     2.1100000000000003,
+     -0.281
+    ]
+   }
+  },
+  {
+   "id": "EN_Airlock_Bench",
+   "display": "Suit-up bench",
+   "notes": "1.6 x 0.45 x 0.45 m brushed steel seat on navy pedestals, cross rail, orange boot rail, tie-down rings; seat at 0.45 m",
+   "kind": "standing",
+   "footprint_m": [
+    1.6,
+    0.45
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_Airlock/EN_Airlock_Bench_LOD0.glb",
+    "res://assets/environment/EN_Airlock/EN_Airlock_Bench_LOD1.glb"
+   ],
+   "triangles": [
+    460,
+    76
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.6,
+    0.45,
+    0.41
+   ],
+   "bounds_min_m": [
+    -0.8,
+    0.0,
+    -0.21
+   ],
+   "sockets": {
+    "seat_y": 0.45,
+    "seats": [
+     [
+      -0.45,
+      0.45,
+      0
+     ],
+     [
+      0.45,
+      0.45,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "EN_Airlock_GlovePort",
+   "display": "Glove-port wall module",
+   "notes": "1 m wall: pressure window 0.56 x 0.42 m at 1.75 m, two glove ports (0.27 m flanges at x +-0.22, 1.19 m) with sleeves on the far side; the sealed plant chamber lies behind it",
+   "kind": "wall",
+   "footprint_m": [
+    1.0,
+    0.15
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD0.glb",
+    "res://assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD1.glb"
+   ],
+   "triangles": [
+    3428,
+    908
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    2.6,
+    0.786
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.056
+   ],
+   "sockets": {
+    "window_centre": [
+     0,
+     1.75,
+     0
+    ],
+    "window_size": [
+     0.56,
+     0.42
+    ],
+    "ports": [
+     [
+      -0.22,
+      1.19,
+      0
+     ],
+     [
+      0.22,
+      1.19,
+      0
+     ]
+    ],
+    "port_clear_diameter": 0.18
+   }
+  },
+  {
+   "id": "EN_Airlock_PassThrough",
+   "display": "Sealed carrier pass-through",
+   "notes": "1 m two-sided bulkhead: 0.50 x 0.44 m chamber at 1.00-1.44 m through the wall, standing 0.42 m into the room; LidA (room side, hinge on the left) and LidB (far side, hinge on the right) open +Y 100 deg; gauge, orange equalisation lever, LampSafe lamp",
+   "kind": "wall",
+   "footprint_m": [
+    1.0,
+    0.57
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_Airlock/EN_Airlock_PassThrough_LOD0.glb",
+    "res://assets/environment/EN_Airlock/EN_Airlock_PassThrough_LOD1.glb"
+   ],
+   "triangles": [
+    3336,
+    1128
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    2.6,
+    0.775
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.522
+   ],
+   "sockets": {
+    "opening_centre": [
+     0,
+     1.22,
+     0
+    ],
+    "opening_size": [
+     0.5,
+     0.44
+    ],
+    "carrier_socket": [
+     0,
+     1.03,
+     -0.12000000000000001
+    ],
+    "lids": {
+     "LidA": {
+      "side": "room",
+      "hinge": [
+       -0.28,
+       1.22,
+       -0.44
+      ],
+      "open_rotation_deg_y": 100
+     },
+     "LidB": {
+      "side": "far",
+      "hinge": [
+       0.28,
+       1.22,
+       0.16999999999999998
+      ],
+      "open_rotation_deg_y": 100
+     }
+    },
+    "lamp_material": "LampSafe",
+    "far_face_z": 0.15
+   }
+  },
+  {
+   "id": "EN_Airlock_InterlockPanel",
+   "display": "Pressure interlock panel",
+   "notes": "1 m wall: recessed navy console 0.74 x 1.34 m; Screen slot 0.5 x 0.3 m at 1.70 m for the live words SEALED / EQUALISING / SAFE TO OPEN; gauges at 1.33 m; lamps at 1.10 m (LampSealed red, LampEqualising amber, LampSafe green); orange equalisation wheel; pump grille; child CycleLever on the boss at (0.27, 0.88)",
+   "kind": "wall",
+   "footprint_m": [
+    1.0,
+    0.15
+   ],
+   "mount_y": 0.0,
+   "lods": [
+    "res://assets/environment/EN_Airlock/EN_Airlock_InterlockPanel_LOD0.glb",
+    "res://assets/environment/EN_Airlock/EN_Airlock_InterlockPanel_LOD1.glb"
+   ],
+   "triangles": [
+    2714,
+    1074
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "size_m": [
+    1.0,
+    2.6,
+    0.233
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.083
+   ],
+   "sockets": {
+    "screen_material": "Screen",
+    "screen_centre": [
+     0,
+     1.7,
+     0.043
+    ],
+    "screen_size": [
+     0.5,
+     0.3
+    ],
+    "lamps": {
+     "SEALED": "LampSealed",
+     "EQUALISING": "LampEqualising",
+     "SAFE TO OPEN": "LampSafe"
+    },
+    "lever_node": "CycleLever",
+    "lever_pivot": [
+     0.27,
+     0.88,
+     -0.01
+    ],
+    "lever_pull_rotation_deg_x": -70,
+    "gauges": [
+     [
+      -0.17,
+      1.33,
+      0.03
+     ],
+     [
+      0.17,
+      1.33,
+      0.03
+     ]
+    ]
+   }
+  }
+ ],
+ "props": [
+  {
+   "id": "PR_PaperBee",
+   "display": "Paper bee (origami)",
+   "notes": "Rafi's origami bee, EX-CH02-S02 bench and S07 record: duo paper, gold face and navy reverse, white wings; no face drawn; sockets Socket_Grip (thorax) and Socket_Rest (base); states folded / held / placed are the same mesh",
+   "path": "res://assets/props/PR_PaperBee/PR_PaperBee.glb",
+   "triangles": 152,
+   "size_m": [
+    0.082,
+    0.037,
+    0.089
+   ],
+   "sockets": {
+    "Socket_Grip": [
+     0,
+     0.031,
+     -0.006
+    ],
+    "Socket_Rest": [
+     0,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "PR_SeedTray",
+   "display": "Clean seed tray (12 cells)",
+   "notes": "Kai's clean seed tray, EX-CH02-S06 -> S07 bridge object: 4 x 3 empty cells, off-white, navy rim, orange tabs; 0.50 m like PL_ZeroSeedlingTray so PL_Descendants (CH03) can sit in it",
+   "path": "res://assets/props/PR_SeedTray/PR_SeedTray.glb",
+   "triangles": 224,
+   "size_m": [
+    0.5,
+    0.055,
+    0.324
+   ],
+   "sockets": {}
+  }
+ ],
+ "interlock": {
+  "states": [
+   "SEALED",
+   "EQUALISING",
+   "SAFE TO OPEN"
+  ],
+  "equalise_seconds": 12.0,
+  "sides": [
+   "habitat",
+   "surface"
+  ],
+  "start_side": "habitat",
+  "hatches": {
+   "inner": "inner_hatch",
+   "outer": "outer_hatch"
+  },
+  "panels": [
+   "vestibule_panel",
+   "chamber_panel"
+  ],
+  "pump_sfx": "res://assets/audio/sfx/SFX_AIRLOCK_CYCLE.ogg",
+  "rule": "one hatch open at a time; a hatch opens only when the chamber matches its side; the pump runs only while EQUALISING",
+  "time_compression": "a real chamber takes minutes to pump down or repressurise; equalise_seconds is the compressed on-screen cycle, and the room owner shows a labelled time card for the rest (LOC-05 exit behaviour), never an invisible jump"
+ },
+ "pass_through": {
+  "piece": "EN_Airlock_PassThrough",
+  "lids": [
+   "LidA",
+   "LidB"
+  ],
+  "rule": "one lid open at a time; the carrier socket is inside the chamber"
+ },
+ "cadets": [
+  {
+   "name": "Kai",
+   "role_colour": "#F26B21"
+  },
+  {
+   "name": "Amara",
+   "role_colour": "#20B8C9"
+  },
+  {
+   "name": "Mei",
+   "role_colour": "#4CAF50"
+  },
+  {
+   "name": "Rafi",
+   "role_colour": "#8E5CC2"
+  },
+  {
+   "name": "Ferreira",
+   "role_colour": "#B8A06A"
+  }
+ ],
+ "vestibule": {
+  "bounds_m": [
+   8.0,
+   4.0
+  ],
+  "ceiling_m": 2.6,
+  "zones": {
+   "vestibule": {
+    "x": [
+     0.0,
+     5.0
+    ],
+    "z": [
+     0.0,
+     4.0
+    ],
+    "pressure": "habitat"
+   },
+   "chamber": {
+    "x": [
+     5.3,
+     8.0
+    ],
+    "z": [
+     0.0,
+     4.0
+    ],
+    "pressure": "cycled"
+   }
+  },
+  "connections": {
+   "inner_door": "LOC-01",
+   "pass_through": "LOC-03 (sealed carrier transfer)",
+   "glove_ports": "LOC-03 (Alo chamber)",
+   "outer_hatch": "LOC-06"
+  },
+  "placements": [
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     0.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     0.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     0.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     0.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     0.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     0.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     0.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     0.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     1.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     1.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     1.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     1.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     1.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     1.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     1.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     1.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     2.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     2.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     2.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     2.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     2.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     2.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     2.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     2.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     3.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     3.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     3.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     3.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     3.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     3.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     3.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     3.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     4.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     4.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     4.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     4.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     4.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     4.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     4.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     4.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     5.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     5.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     5.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     5.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     5.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     5.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     5.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     5.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     6.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     6.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     6.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     6.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     6.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     6.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     6.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     6.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     7.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     7.5,
+     0.0,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     7.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     7.5,
+     0.0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     7.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     7.5,
+     0.0,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     7.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     7.5,
+     0.0,
+     3.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Corner",
+    "position": [
+     0,
+     0.0,
+     4
+    ],
+    "yaw": -90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     1,
+     0.0,
+     4
+    ],
+    "yaw": 0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Airlock_GlovePort",
+    "position": [
+     2,
+     0.0,
+     4
+    ],
+    "yaw": 0,
+    "role": "glove_ports"
+   },
+   {
+    "piece": "EN_Airlock_PassThrough",
+    "position": [
+     3,
+     0.0,
+     4
+    ],
+    "yaw": 0,
+    "role": "pass_through"
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     4,
+     0.0,
+     4
+    ],
+    "yaw": 0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     5,
+     0.0,
+     4
+    ],
+    "yaw": 0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     6,
+     0.0,
+     4
+    ],
+    "yaw": 0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     7,
+     0.0,
+     4
+    ],
+    "yaw": 0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Corner",
+    "position": [
+     8,
+     0.0,
+     4
+    ],
+    "yaw": 0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Hatch",
+    "position": [
+     8,
+     0.0,
+     1.5
+    ],
+    "yaw": 90,
+    "role": "outer_hatch"
+   },
+   {
+    "piece": "EN_Airlock_InterlockPanel",
+    "position": [
+     8,
+     0.0,
+     3
+    ],
+    "yaw": 90,
+    "role": "chamber_panel"
+   },
+   {
+    "piece": "EN_Kit_Wall_Corner",
+    "position": [
+     8,
+     0.0,
+     0
+    ],
+    "yaw": 90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     1,
+     0.0,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     2,
+     0.0,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     3,
+     0.0,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     4,
+     0.0,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     5,
+     0.0,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     6,
+     0.0,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     7,
+     0.0,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Corner",
+    "position": [
+     0,
+     0.0,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_DoorFrame",
+    "position": [
+     0,
+     0.0,
+     2
+    ],
+    "yaw": -90,
+    "role": "inner_door"
+   },
+   {
+    "piece": "EN_Airlock_InterlockPanel",
+    "position": [
+     5,
+     0.0,
+     0.5
+    ],
+    "yaw": 90,
+    "role": "vestibule_panel"
+   },
+   {
+    "piece": "EN_Kit_Hatch",
+    "position": [
+     5,
+     0.0,
+     2
+    ],
+    "yaw": 90,
+    "role": "inner_hatch"
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     5,
+     0.0,
+     3.5
+    ],
+    "yaw": 90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     5.3,
+     0.0,
+     0.5
+    ],
+    "yaw": -90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     5.3,
+     0.0,
+     3.5
+    ],
+    "yaw": -90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_LightStrip",
+    "position": [
+     1.5,
+     0.0,
+     1
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_LightStrip",
+    "position": [
+     1.5,
+     0.0,
+     3
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_LightStrip",
+    "position": [
+     3.5,
+     0.0,
+     1
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_LightStrip",
+    "position": [
+     3.5,
+     0.0,
+     3
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_LightStrip",
+    "position": [
+     6.5,
+     0.0,
+     1
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_LightStrip",
+    "position": [
+     6.5,
+     0.0,
+     3
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Airlock_SuitLocker",
+    "position": [
+     0.5,
+     0.0,
+     0.29500000000000004
+    ],
+    "yaw": 180,
+    "role": "locker_kai",
+    "role_tab": "#F26B21"
+   },
+   {
+    "piece": "EN_Airlock_SuitLocker",
+    "position": [
+     1.1,
+     0.0,
+     0.29500000000000004
+    ],
+    "yaw": 180,
+    "role": "locker_amara",
+    "role_tab": "#20B8C9"
+   },
+   {
+    "piece": "EN_Airlock_SuitLocker",
+    "position": [
+     1.7,
+     0.0,
+     0.29500000000000004
+    ],
+    "yaw": 180,
+    "role": "locker_mei",
+    "role_tab": "#4CAF50"
+   },
+   {
+    "piece": "EN_Airlock_SuitLocker",
+    "position": [
+     2.3,
+     0.0,
+     0.29500000000000004
+    ],
+    "yaw": 180,
+    "role": "locker_rafi",
+    "role_tab": "#8E5CC2"
+   },
+   {
+    "piece": "EN_Airlock_SuitLocker",
+    "position": [
+     2.9,
+     0.0,
+     0.29500000000000004
+    ],
+    "yaw": 180,
+    "role": "locker_ferreira",
+    "role_tab": "#B8A06A"
+   },
+   {
+    "piece": "EN_Airlock_Bench",
+    "position": [
+     4.1,
+     0.0,
+     0.245
+    ],
+    "yaw": 180,
+    "role": "bench"
+   }
+  ],
+  "anchors": {
+   "player": [
+    2.5,
+    0.0,
+    2.6
+   ],
+   "companion_checklist": [
+    1.5,
+    0.0,
+    2.2
+   ],
+   "companion_tools": [
+    3.2,
+    0.0,
+    3.0
+   ],
+   "suit_check": [
+    1.7,
+    0.0,
+    1.2
+   ],
+   "bench": [
+    4.1,
+    0.0,
+    0.9
+   ],
+   "pass_through": [
+    3.0,
+    0.0,
+    3.1
+   ],
+   "glove_ports": [
+    2.0,
+    0.0,
+    3.2
+   ],
+   "vestibule_panel": [
+    4.3,
+    0.0,
+    0.5
+   ],
+   "inner_hatch": [
+    4.3,
+    0.0,
+    2.0
+   ],
+   "chamber": [
+    6.6,
+    0.0,
+    2.0
+   ],
+   "chamber_panel": [
+    7.3,
+    0.0,
+    3.0
+   ],
+   "outer_hatch": [
+    7.3,
+    0.0,
+    1.5
+   ],
+   "exterior_step": [
+    8.8,
+    0.0,
+    1.5
+   ],
+   "viewpoint": [
+    1.2,
+    1.6,
+    0.8
+   ]
+  }
+ }
+}
