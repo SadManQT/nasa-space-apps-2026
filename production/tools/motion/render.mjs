@@ -32,7 +32,10 @@ if (mode === 'stills') {
     const p = `${outDir}/${String(f).padStart(5, '0')}.jpg`;
     if (fs.existsSync(p)) continue;
     await page.evaluate(t => renderAt(t), f / info.FPS);
-    await canvas.screenshot({ path: p + '.tmp.jpg', type: 'jpeg', quality: 95 });
+    for (let tries = 1; ; tries++) {                  // a busy machine can stall one capture; retry, then give up
+      try { await canvas.screenshot({ path: p + '.tmp.jpg', type: 'jpeg', quality: 95, timeout: 120000 }); break; }
+      catch (err) { if (tries >= 3) throw err; console.error('retry frame', f, err.name); }
+    }
     fs.renameSync(p + '.tmp.jpg', p);
     if (f % 120 === 0) console.log('frame', f, '/', n);
   }

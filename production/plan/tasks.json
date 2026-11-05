@@ -4984,7 +4984,7 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Claude Motion explainer pipeline: install Tweenkit, house style, spec to video to game, two sample clips",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -4996,8 +4996,8 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "From MASTER_PLAN.md (Sadman, 5 Nov 2026).",
-   "evidence": "",
-   "updated": "2026-11-05",
+   "evidence": "Tweenkit installed (tweenkit@claude-motion-skills, MIT); production/explainers/motion/STYLE.md (house style, all-ages rules, spec format, chosen prompts); production/tools/motion/build.py check|stills|render; sci_polar_sun + sci_proton_flux_chart (45 s each, 1280x720 OGV) registered in explainers.json; run_tests.sh explainers 1/1 (41 checks); in-game captures production/qa/evidence/M1-63_*.png; log production/ai_log_parts/M1-63.md",
+   "updated": "2026-11-06",
    "prompt": "Goal: science explainers and hint videos look premium and stay consistent (MASTER_PLAN.md §5).\nDo: install the Claude Motion plugin (Tweenkit, from the claude-motion-skills directory entry; free) in Sadman's Claude Code; write production/explainers/motion/STYLE.md (palette and type from ART_BIBLE §3 and game/resources/ui/ui_design.json, 1920x1080 masters, 1152x648 game encodes, 24 fps, captions burned in, no narration, no NASA logos, honest labels: measured / model / diagram); a spec format (one JSON per clip: id, purpose, beats, captions, source fixture, length 8-45 s); a render script that turns a spec into an .ogv the game can play and registers it in game/resources/campaign/content/explainers.json (id, path, length, captions, level: concept|explainer|method); render two sample clips (Why the Sun stays low at the pole; Reading a proton-flux chart) and show them to Sadman.\nAcceptance: the two clips play in Godot; STYLE.md and the spec format exist; every generation logged in production/ai_log_parts/M1-63.md.",
    "reserved_for": "sadman",
    "effort": 2
@@ -5264,7 +5264,7 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Restore the second M1-63 explainer sample required by the test gate",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -5275,7 +5275,7 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-06.",
-   "evidence": "",
+   "evidence": "sci_proton_flux_chart rendered through build.py and registered; test_explainers.gd PASS (41 checks, 0 failures). Ramim: the explainer suite is green again, M1-18 and the queued UI tasks can resume.",
    "updated": "2026-11-06",
    "prompt": "The fresh Windows baseline at main 990126b (Godot 4.7.2, through game/tools/run_tests.sh) fails test_explainers.gd: EXPLAINERS RESULT: FAIL (21 checks, 1 failures), assertion 'at least the two M1-63 sample clips are registered'. game/resources/campaign/content/explainers.json contains only sci_polar_sun; M1-63 promised both samples, and production/explainers/motion/specs/sci_proton_flux_chart.json plus its source scene already exist, but the second clip/registry entry is missing.\nBuild and ship the missing sci_proton_flux_chart explainer through the approved production/tools/motion/build.py pipeline, keeping the source fixtures, honest science labels, captions, durations and free generation rules. Do not hand-edit measured values, duplicate the first sample or weaken the two-sample test. Correct the M1-63 status/log if necessary. This blocks Ramim's mandatory all-suite acceptance gate, so prioritize and publish the fix, then notify Ramim to resume M1-18 and the queued UI tasks.\nAcceptance: registered IDs include both real clips, each actual .ogv loads/plays with registered length and captions; focused run_tests.sh explainers passes and full run_tests.sh passes (any separately recorded performance prerequisite also applies). Evidence: production/qa/evidence/M1-18_baseline.txt records the full original 35/37 run; the runtime feature source was untouched when it failed.",
    "reserved_for": "sadman",

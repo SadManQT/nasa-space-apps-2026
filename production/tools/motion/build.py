@@ -11,6 +11,7 @@ with a reason. Needs: node + `npm install` in this folder (playwright-core, uses
 ffmpeg, python3 + numpy, and Godot 4.7 (its Movie Maker is the only Theora encoder here; see ogv_writer.gd).
 """
 import datetime as dt
+import hashlib
 import json
 import re
 import shutil
@@ -275,8 +276,14 @@ def cmd_render(path):
     spec["_spec"] = str(Path(path).resolve())
     work = stage(spec)
     frames, small = work / "frames", work / "small"
-    for d in (frames, small):
-        shutil.rmtree(d, ignore_errors=True)
+    page = hashlib.sha1((work / "stage.html").read_bytes()).hexdigest()
+    if (frames / ".stage").exists() and (frames / ".stage").read_text() == page:
+        print("resuming: keeping the frames already rendered for this exact page")
+    else:
+        shutil.rmtree(frames, ignore_errors=True)
+        frames.mkdir(parents=True)
+        (frames / ".stage").write_text(page)
+    shutil.rmtree(small, ignore_errors=True)
     node(work / "stage.html", "frames", frames)
     sound_bed(spec, work / "bed.wav")
     master = EXPL / "masters" / f"{spec['id']}.mp4"                                 # 1920x1080, gitignored, rebuildable
@@ -284,15 +291,15 @@ def cmd_render(path):
     run(["ffmpeg", "-v", "error", "-y", "-framerate", 24, "-i", frames / "%05d.jpg", "-i", work / "bed.wav",
          "-c:v", "libx264", "-crf", 16, "-preset", "slow", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest", master])
     small.mkdir()
-    run(["ffmpeg", "-v", "error", "-y", "-i", frames / "%05d.jpg", "-vf", "scale=1152:648:flags=lanczos", "-q:v", 2, small / "%05d.jpg"])
+    run(["ffmpeg", "-v", "error", "-y", "-i", frames / "%05d.jpg", "-vf", "scale=1280:720:flags=lanczos", "-q:v", 2, small / "%05d.jpg"])
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     ogv = OUT_DIR / f"{spec['id']}.ogv"
-    run([GODOT, "--path", ROOT / "game", "--resolution", "1152x648", "--write-movie", ogv, "--fixed-fps", 24,
+    run([GODOT, "--path", ROOT / "game", "--resolution", "1280x720", "--write-movie", ogv, "--fixed-fps", 24,
          "-s", ROOT / "production/tools/ogv_writer.gd", "--", small, work / "bed.wav"])
     info = probe(ogv)
     length = float(info["format"]["duration"])
     video = [s for s in info["streams"] if s.get("width")]
-    if not video or (video[0]["width"], video[0]["height"]) not in ((1152, 648), (1280, 720)) or abs(length - spec["length_s"]) > .25:
+    if not video or (video[0]["width"], video[0]["height"]) != (1280, 720)   # the project's film size, like the cutscenes or abs(length - spec["length_s"]) > .25:
         fail(f"{ogv.name}: unexpected encode {info}")
     register(spec, ogv, length)
     shutil.rmtree(frames); shutil.rmtree(small)

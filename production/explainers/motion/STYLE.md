@@ -27,7 +27,7 @@ A 9-year-old and a judge should both follow every clip, the first time, with the
 
 | Item | Value |
 |---|---|
-| Canvas | 1920×1080 masters, 24 fps; game encode 1152×648, 24 fps, Ogg Theora (`.ogv`) |
+| Canvas | 1920×1080 masters, 24 fps; game encode 1280×720 (the project's film size, like the cutscenes), 24 fps, Ogg Theora (`.ogv`) |
 | Length | 8–45 s (science explainers 20–45 s) |
 | Background | space black `#05060A` to `#0B1222`, with a fixed, slowly twinkling star field |
 | Palette | `game/resources/ui/ui_design.json` colours plus ART_BIBLE §3: ivory text, accent mustard `#F2C230` (the Sun, hope, key lines), water blue `#2E8BC0`, regolith grey `#7A7672`, caution `#F2A33A` (protons), danger `#E56B6F` (storm line), good `#68C78B` (measured), cyan `#20B8C9` (model) |

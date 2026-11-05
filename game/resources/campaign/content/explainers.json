@@ -66,6 +66,76 @@
    ],
    "ends_on": "Sunlight here comes and goes. In the dark shifts, the base runs on its battery alone.",
    "spec": "production/explainers/motion/specs/sci_polar_sun.json"
+  },
+  {
+   "id": "sci_proton_flux_chart",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Reading a proton-flux chart",
+   "path": "res://assets/explainers/science/sci_proton_flux_chart.ogv",
+   "length_s": 45.04,
+   "labels": [
+    "diagram",
+    "measured"
+   ],
+   "sources": [
+    "goes13_protons_2017_09",
+    "donki_2017_09"
+   ],
+   "used_by": [
+    "EX-M0103",
+    "P-02",
+    "P-14"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.2,
+     "text": "A weather satellite near Earth counts tiny, fast bits of the Sun: protons."
+    },
+    {
+     "start": 8.5,
+     "end": 11.8,
+     "text": "Its count is in pfu: protons per square centimetre, each second."
+    },
+    {
+     "start": 12.4,
+     "end": 16.2,
+     "text": "On a normal scale, a quiet day is so small you cannot even see it."
+    },
+    {
+     "start": 16.6,
+     "end": 20.6,
+     "text": "On a log scale, each step up is ten times bigger. Now both fit!"
+    },
+    {
+     "start": 21.4,
+     "end": 24.8,
+     "text": "10 September 2017: an X8.2 flare bursts on the Sun at 15:35 UTC."
+    },
+    {
+     "start": 25.2,
+     "end": 28.8,
+     "text": "At 16:45 UTC, the protons cross the storm line: 10 pfu."
+    },
+    {
+     "start": 29.2,
+     "end": 32.0,
+     "text": "That is just seventy minutes after the flare began."
+    },
+    {
+     "start": 32.4,
+     "end": 35.8,
+     "text": "Then they stay high for days, peaking at 1,493.5 pfu!"
+    },
+    {
+     "start": 36.3,
+     "end": 40.3,
+     "text": "The Moon has no air or magnetic shield, so storms like this reach the ground."
+    }
+   ],
+   "ends_on": "When the alarm sounds, the protons are already on their way. Get the shelter ready before it!",
+   "spec": "production/explainers/motion/specs/sci_proton_flux_chart.json"
   }
  ]
 }
