@@ -15,7 +15,7 @@ Usage limits: the account sleeps until the reset time it printed; the lane's nex
 Accounts come from GoCode's saved profiles through ~/.local/bin/gocode-run (approved by Sadman, 5 Nov 2026).
 Log: production/session-logs/night_shift.log (local). Morning summary: production/session-logs/night_summary.md.
 """
-import datetime as dt, fcntl, json, os, re, subprocess, sys, threading, time
+import collections, datetime as dt, fcntl, json, os, re, subprocess, sys, threading, time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -296,25 +296,44 @@ def overlaps(slot, tid):
     return False
 
 
+def waiting_on(tasks):
+    """For each task, how many unfinished tasks wait on it, directly or through other tasks."""
+    deps = {t["id"]: t.get("deps", []) for t in tasks}
+    count = collections.Counter()
+    for t in tasks:
+        if t["status"] == "done":
+            continue
+        seen, todo = set(), list(deps[t["id"]])
+        while todo:
+            d = todo.pop()
+            if d not in seen:
+                seen.add(d)
+                todo += deps.get(d, [])
+        count.update(seen)
+    return count
+
+
 def pick(slot):
+    """The ready task that unblocks the most other work (lane order breaks ties), locked for this slot."""
+    cands = []
     for lane, accounts in LANES.items():
         if LANES_ONLY and lane not in LANES_ONLY:
             continue
         if not free(accounts):
             continue
         _, out = sh(["python3", "production/plan/board.py", "next", "--tool", lane, "--all"], slot)
-        for line in out.splitlines():
-            m = re.match(r"^(M\d-[\w-]+)\s+\[", line)
-            if m and m[1] not in taken:
-                with lock:
-                    if m[1] in taken or overlaps(slot, m[1]):
-                        continue
-                    try:
-                        (CLAIMS / m[1]).mkdir(parents=True)
-                    except FileExistsError:  # another night shift has it
-                        continue
-                    taken.add(m[1])
-                return m[1], lane
+        cands += [(m[1], lane) for m in (re.match(r"^(M\d-[\w-]+)\s+\[", ln) for ln in out.splitlines()) if m]
+    waits = waiting_on(json.loads((slot / "production/plan/tasks.json").read_text())["tasks"])
+    for tid, lane in sorted(cands, key=lambda c: -waits[c[0]]):
+        with lock:
+            if tid in taken or overlaps(slot, tid):
+                continue
+            try:
+                (CLAIMS / tid).mkdir(parents=True)
+            except FileExistsError:  # another night shift has it
+                continue
+            taken.add(tid)
+        return tid, lane
     return None, None
 
 
