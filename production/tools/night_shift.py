@@ -292,13 +292,23 @@ def park(slot, tid, reason):
     land(slot, tid, "", "blocked")
 
 
+# Shared logs and registries (append-only; .md files union-merge when landing) and folders so broad that every task
+# names them; they must not stop two tasks from running side by side. A real clash still parks and resumes later.
+SHARED_PATHS = {"production/AI_PROMPT_LOG.md", "production/ASSET_REGISTRY.csv", "production/manifest/planned_assets.csv",
+                "game/resources/campaign/", "game/resources/campaign/content/", "game/scenes/", "game/assets/"}
+
+
+def _specific(paths):
+    return [p for p in paths if p not in SHARED_PATHS and not p.endswith(".md") and p.rstrip("/").count("/") >= 2]
+
+
 def overlaps(slot, tid):
-    """True if tid owns a path that a task running in any night shift also owns (they would conflict on landing)."""
+    """True if tid owns a specific path that a task running in any night shift also owns (they would conflict on landing)."""
     # ponytail: check-then-mkdir across processes can race; the loser parks on a landing conflict
     data = {t["id"]: t for t in json.loads((slot / "production/plan/tasks.json").read_text())["tasks"]}
-    mine = data[tid].get("paths", [])
+    mine = _specific(data[tid].get("paths", []))
     for other in os.listdir(CLAIMS):
-        theirs = data.get(other, {}).get("paths", [])
+        theirs = _specific(data.get(other, {}).get("paths", []))
         if any(a.startswith(b) or b.startswith(a) for a in mine for b in theirs):
             return True
     return False
