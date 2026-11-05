@@ -103,7 +103,7 @@ def main():
         with tempfile.TemporaryDirectory(prefix='lla-export-smoke-') as outside_project:
             run_checked(command, output / 'smoke.log', outside_project, timeout=180, result_pattern=r'EXPORT SMOKE RESULT: PASS \(\d+ checks, 0 failures\)')
     (output / 'README.txt').write_text(
-        'Last Light Academy — 0.1.0-preview.20261104\n'
+        'Last Light Academy — ' + re.search(r'config/version="([^"]+)"', (ROOT / 'game/project.godot').read_text()).group(1) + '\n'
         'The Last BrainCell / NASA Space Apps 2026 independent team project.\n'
         'Windows: keep the EXE and PCK together; run LastLightAcademy.exe.\n'
         'macOS: unzip the app and open it. This team build is unsigned and unnotarized.\n'
