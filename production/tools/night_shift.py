@@ -29,6 +29,7 @@ LANES_ONLY = [l for l in os.environ.get("LANES_ONLY", "").split(",") if l]  # e.
 SLOT_PREFIX = os.environ.get("SLOT_PREFIX", "slot")
 SUMMARY = os.environ.get("SUMMARY", "night_summary.md")
 PREFER = os.environ.get("PREFER", "")  # account tried first in every lane, e.g. buet for a Gemini-first shift
+PREFER = "claude2" if PREFER == "fable" else PREFER  # Opus 5.5 for all Claude work (Sadman, 5 Nov 23:40)
 STOP = LOGDIR / ("STOP_NIGHT" if SLOT_PREFIX == "slot" else f"STOP_NIGHT_{SLOT_PREFIX}")
 CLAIMS = NIGHT / "claims"  # one directory per task: an atomic lock shared by every running night shift
 DEADLINE = time.time() + float(os.environ.get("HOURS", "12")) * 3600
@@ -45,16 +46,16 @@ ACCOUNTS = {
     "claude3":     {"engine": "claude", "cmd": [GOCODE_RUN, "claude3", "{p}", "claude-opus-5-5"]},
     "buet":        {"engine": "gemini", "cmd": [GOCODE_RUN, "buet", "{p}", "gemini-4-argon-high"]},
 }
-LANES = {  # board lane -> accounts in order of preference (Sadman, 5 Nov: Claude takes most work, Fable first)
-    "codex": ["codex", "codex-main", "fable", "claude3"],
-    "claude": ["fable", "claude2", "claude3"],
-    "antigravity": ["buet", "fable", "claude3"],
-    "gemini": ["buet", "fable", "claude3"],
-    "muse": ["fable", "claude2", "claude3"],
-    "any": ["fable", "claude3", "claude2", "codex", "buet"],
+LANES = {  # board lane -> accounts in order of preference (Sadman, 5 Nov 23:40: Claude work runs on Opus 5.5, never Fable)
+    "codex": ["codex", "codex-main", "claude2", "claude3"],
+    "claude": ["claude2", "claude3"],
+    "antigravity": ["buet", "claude2", "claude3"],
+    "gemini": ["buet", "claude2", "claude3"],
+    "muse": ["claude2", "claude3"],
+    "any": ["claude3", "claude2", "codex", "buet"],
 }
 REVIEWER = {"codex": ["claude3", "claude2", "buet"], "claude": ["codex", "codex-main", "buet", "claude3"], "gemini": ["codex", "claude3", "claude2"]}
-# Fable 5.1 leads the photoreal environment, 3D assets and room builds (5 Nov decision)
+# Claude (Opus 5.5) leads the photoreal environment, 3D assets and room builds (5 Nov decision; Opus replaced Fable 5 Nov 23:40)
 FABLE_HINTS = re.compile(r"habitat kit|environment|main scene|terrain|exterior|interior|photoreal|LOLA|\b3D\b|Blender|\bassets\b|rooms and locations|M1-03|M1-05|M1-06", re.I)
 
 OPUS = {"claude2", "claude3"}  # the accounts that run Claude Opus 5.5
@@ -101,7 +102,7 @@ def free(accounts):
     return [a for a in accounts if asleep.get(a, 0) <= now]
 
 
-def run_agent(account, prompt, cwd, effort="high"):
+def run_agent(account, prompt, cwd, effort="xhigh"):
     """Run a prompt on an account. Returns (ok, output); puts the account to sleep on a usage limit."""
     pf = Path(cwd) / ".night_prompt.md"
     pf.write_text(prompt)
@@ -382,13 +383,12 @@ def changes(slot):
 
 def do_task(slot, tid, lane):
     info = task_info(slot, tid)
-    effort = "xhigh" if info.get("priority") == "P0" else "high"
+    effort = "xhigh"  # every task at extra-high effort (Sadman, 5 Nov 23:40)
     accounts = LANES[lane][:]
     if PREFER in ACCOUNTS:
         accounts = [PREFER] + [a for a in accounts if a != PREFER]
     if FABLE_HINTS.search(f"{tid} {info.get('title', '')}"):
-        # Fable leads; when Fable hits its limit, Opus 5.5 continues the work at extra-high effort (Sadman, 5 Nov)
-        accounts = ["fable", "claude2", "claude3"] + [a for a in accounts if a not in ("fable", "claude2", "claude3")]
+        accounts = ["claude2", "claude3"] + [a for a in accounts if a not in ("claude2", "claude3")]
     fix, worker = resume_parked(slot, tid), None
     if fix:
         fix += "\n" + str(info.get("blocker", ""))[:1500]
@@ -401,9 +401,7 @@ def do_task(slot, tid, lane):
         worker = cands[0]
         log(f"[{slot.name}] {tid} round {rounds + 1} on {worker} (effort {effort})")
         before = changes(slot)
-        # Codex and Opus always extra-high (Sadman, 5 Nov); Fable keeps the task's effort
-        eff = "xhigh" if ACCOUNTS[worker]["engine"] == "codex" or worker in OPUS else effort
-        ok, out = run_agent(worker, worker_prompt(tid, slot, f"Sadman/night-{worker}", fix), slot, eff)
+        ok, out = run_agent(worker, worker_prompt(tid, slot, f"Sadman/night-{worker}", fix), slot, effort)
         if not ok and limit_wait(out[-3000:]):
             continue  # same round again on the lane's next account (this one is asleep now)
         status = task_info(slot, tid).get("status")
@@ -428,7 +426,7 @@ def do_task(slot, tid, lane):
         reviewers = free(REVIEWER[engine])
         if not reviewers:
             return "deferred", "no reviewer account available"
-        _, verdict = run_agent(reviewers[0], review_prompt(tid, slot), slot, "high")
+        _, verdict = run_agent(reviewers[0], review_prompt(tid, slot), slot, "xhigh")
         if re.search(r"VERDICT:\s*PASS", verdict):
             return "done", f"worker {worker}, reviewer {reviewers[0]}"
         fix = verdict[-4000:]

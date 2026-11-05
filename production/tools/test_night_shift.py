@@ -34,10 +34,10 @@ def first_call(account, prompt, cwd, effort):
     calls.append((account, effort))
     return limited(account)
 ns.asleep.clear()
-ns.asleep["fable"] = time.time() + 3600  # Fable is at its limit
 with mock.patch.multiple(ns, run_agent=first_call, log=lambda m: None, resume_parked=lambda s, t: "", changes=lambda s: "",
                          worker_prompt=lambda *a: "", task_info=lambda s, t: {"priority": "P1", "title": "Assemble the Chapter 1 rooms from the kit", "status": "todo"}):
     ns.do_task(Path("/nowhere"), "M1-06", "codex")
-    assert calls[0] == ("claude2", "xhigh"), calls  # Fable's work continues on Opus 5.5 at extra-high effort
+    assert calls[0] == ("claude2", "xhigh"), calls  # 3D work goes to Claude: Opus 5.5 at extra-high effort
+assert not any("fable" in accounts for accounts in ns.LANES.values()), ns.LANES  # Opus 5.5 for all tasks (5 Nov 23:40)
 
 print("night_shift self-check: PASS")
