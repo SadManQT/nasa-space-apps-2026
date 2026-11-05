@@ -73,6 +73,10 @@ func _run() -> void:
 		await process_frame
 		_check(campaign.hud.get_viewport_rect().encloses(campaign.hud._advance.get_global_rect()), scene_id + " advance control stays onscreen")
 		for target_id in ACTIONS[index]:
+			# The terminal P-02 receipt now opens its pause-safe outcome review.
+			# Closing it returns to the same physical story gates.
+			if campaign.hud.panels.active_panel() == "outcome":
+				campaign.hud.panels.close_panel()
 			var target := campaign.physical_target(String(target_id))
 			if target == null:
 				_check(false, scene_id + " has physical target " + String(target_id))

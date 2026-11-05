@@ -10,6 +10,7 @@ const PuzzleHostScript = preload("res://scripts/puzzles/puzzle_host.gd")
 const StateScript = preload("res://scripts/core/campaign_state.gd")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
 const SimulationScript = preload("res://scripts/simulation/expedition_simulation.gd")
+const OutcomeScript = preload("res://scripts/missions/chapter1_outcome.gd")
 
 ## Chapter 1 mission composition and physical-gate adapter.
 ##
@@ -26,6 +27,7 @@ var _completed_scene_ids: Array = []
 var _p02_hosts := {}
 var _last_result := {}
 var _ending := ""
+var _outcome_history := {}
 var _p02_table: RefCounted = MissionTableScript.new()
 var _table_simulation: RefCounted = SimulationScript.new()
 
@@ -68,6 +70,11 @@ func current_flags() -> Dictionary:
 
 func last_result() -> Dictionary:
 	return _last_result.duplicate(true)
+
+## Read-only closure, captured shift forecasts and science debrief. Opening
+## this view never completes a scene or grants future evidence/inventory.
+func outcome_view() -> Dictionary:
+	return OutcomeScript.view(_director.snapshot(), _ending, _outcome_history, _retry_checkpoint, bool(chapter_ready().safe_ending), _p02_table)
 
 ## The player's P-02 plan (P02MissionTable). The Mission Table UI edits it;
 ## P-02 gates commit exactly its plan.
@@ -143,6 +150,7 @@ func preview(payload_override: Dictionary = {}) -> Dictionary:
 func confirm(command_id_override: String = "", payload_override: Dictionary = {}) -> Dictionary:
 	var before := _checkpoint_snapshot()
 	var target_id := String(_dispatcher.state().get("focused_target_id", ""))
+	var forecast: Dictionary = _dispatcher.state().get("last_preview", {})
 	var result: Dictionary = _dispatcher.confirm(command_id_override, payload_override)
 	if bool(result.get("accepted", false)):
 		if not bool(result.get("duplicate", false)) and (target_id.begins_with("p02_") or int(before.director.get("current_shift", 0)) == 0):
@@ -150,6 +158,8 @@ func confirm(command_id_override: String = "", payload_override: Dictionary = {}
 		var frozen: Dictionary = _dispatcher.state().get("last_command", {}).get("payload", {}).duplicate(true)
 		for key in payload_override:
 			frozen[key] = payload_override[key]
+		if MissionTableScript.is_gate(target_id):
+			OutcomeScript.record(_outcome_history, before.director, forecast, result, frozen.get("plan", {}), _p02_table.role_cards(int(before.director.get("current_shift", 0))))
 		_apply_target_result(target_id, frozen, result)
 	_last_result = result.duplicate(true)
 	return result
@@ -565,11 +575,14 @@ func _local_snapshot() -> Dictionary:
 		"dialogue_acks": _dialogue_acks.duplicate(true),
 		"p01": _p01.snapshot(),
 		"ending": _ending,
+		"outcome_history": _outcome_history.duplicate(true),
 		"world": _world.snapshot(),
 		"p02_table": _p02_table.snapshot(),
 	}
 
 func _validate_local_snapshot(data: Dictionary) -> Dictionary:
+	if not OutcomeScript.validate(data.get("outcome_history", {})):
+		return {"accepted": false, "reason": "Chapter 1 decision replay is invalid."}
 	if data.has("schema_version") and (not (data.schema_version is int or data.schema_version is float) or float(data.schema_version) != 1.0):
 		return {"accepted": false, "reason": "Unsupported Chapter 1 route schema."}
 	if not data.get("current_scene_id", null) is String:
@@ -643,6 +656,7 @@ func _restore_local(snapshot_data: Dictionary) -> void:
 	_scene_flags = snapshot_data.get("scene_flags", {}).duplicate(true)
 	_dialogue_acks = snapshot_data.get("dialogue_acks", {}).duplicate(true)
 	_ending = String(snapshot_data.get("ending", ""))
+	_outcome_history = snapshot_data.get("outcome_history", {}).duplicate(true)
 	_p01.restore(snapshot_data.get("p01", {}))
 	_p02_table = MissionTableScript.new()
 	if snapshot_data.has("p02_table"):

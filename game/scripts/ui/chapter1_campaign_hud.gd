@@ -52,6 +52,15 @@ func setup(value: Chapter1Campaign) -> void:
 	panels.set_command_sink(Callable(runtime, "handle_ui_command"))
 	panels.panel_opened.connect(_on_panel_opened)
 	panels.panel_closed.connect(_on_panel_closed)
+	panels.outcome_retry_requested.connect(func() -> void:
+		panels.close_panel()
+		runtime.retry_checkpoint()
+	)
+	panels.outcome_continue_requested.connect(func() -> void:
+		# Continue returns to the shutter/message/Tara gates. Only the route
+		# can advance the chapter after all required physical evidence exists.
+		panels.close_panel()
+	)
 	mission_table = MISSION_TABLE_SCENE.instantiate() as MissionTablePanel
 	add_child(mission_table)
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
@@ -77,6 +86,7 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 	_render_caption()
 	_build_targets()
 	_refresh_query()
+	_last_outcome = {}
 	apply_accessibility()
 
 func refresh_after_action(result: Dictionary) -> void:
@@ -88,7 +98,12 @@ func refresh_after_action(result: Dictionary) -> void:
 		_build_targets()
 		_refresh_query()
 	if result.get("accepted", false):
-		_last_outcome = {"result": result.get("reason", "Operation completed."), "changes": result.get("deltas", []), "notes": result.get("warnings", []) + result.get("ledger_summary", [])}
+		var committed: Dictionary = result.get("result", result)
+		if runtime.route.has_method("outcome_view") and not String(committed.get("ending", "")).is_empty():
+			open_outcome()
+			return
+		if not _last_outcome.get("chapter1", false):
+			_last_outcome = {"result": result.get("reason", "Operation completed."), "changes": result.get("deltas", []), "notes": result.get("warnings", []) + result.get("ledger_summary", [])}
 		panels.bind_query(runtime.query().merged({"outcome": _last_outcome}, true))
 	if result.has("reason"):
 		show_status(String(result.get("reason", "")))
@@ -256,7 +271,8 @@ func _build() -> void:
 	_retry.pressed.connect(func() -> void: runtime.retry_checkpoint())
 	tools.add_child(_retry)
 	var outcome := _button("OUTCOME")
-	outcome.pressed.connect(func() -> void: panels.open_panel("outcome", _last_outcome if not _last_outcome.is_empty() else {"result": "Complete an operation to review its result."}))
+	outcome.name = "OutcomeReview"
+	outcome.pressed.connect(open_outcome)
 	tools.add_child(outcome)
 	var controls := Label.new()
 	_controls = controls
@@ -348,18 +364,18 @@ func open_mission_table(target_id: String) -> bool:
 func _on_mission_table_commit(target_id: String, plan: Dictionary) -> void:
 	if runtime == null:
 		return
-	var result := runtime.perform_target(target_id, {"plan": plan})
-	if not bool(result.get("accepted", false)):
+	runtime.perform_target(target_id, {"plan": plan})
+
+## Rebuild an ending from saved route evidence, including after load/retry.
+## A generic operation result remains available before an ending is earned.
+func open_outcome() -> void:
+	if runtime == null or panels == null:
 		return
-	var outcome: Dictionary = result.get("result", {}) if result.get("result", {}) is Dictionary else {}
-	var report := MissionTableScript.ending_report(outcome)
-	if report.is_empty():
-		return
-	var stars: Dictionary = report.get("stars", {})
-	var star_line := "%s Crew exposure ≤ 3 · %s No blackout · %s Alo alive" % ["★" if stars.get("safe_exposure", false) else "☆", "★" if stars.get("no_blackout", false) else "☆", "★" if stars.get("alo_alive", false) else "☆"]
-	_last_outcome = {"result": "%s · %s" % [String(report.get("title", "")), String(report.get("summary", ""))], "changes": outcome.get("deltas", []), "notes": [star_line] + outcome.get("warnings", []) + report.get("unsafe_predicates", [])}
-	show_status("%s · %s\n%s" % [String(report.get("title", "")), String(report.get("summary", "")), star_line])
-	panels.open_panel("outcome", _last_outcome)
+	if runtime.route.has_method("outcome_view"):
+		var closure: Dictionary = runtime.route.outcome_view()
+		if not closure.is_empty():
+			_last_outcome = closure
+	panels.open_panel("outcome", _last_outcome if not _last_outcome.is_empty() else {"result": "Complete an operation to review its result."})
 
 func _render_caption() -> void:
 	if runtime == null:

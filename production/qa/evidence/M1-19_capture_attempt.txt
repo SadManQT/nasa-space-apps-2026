@@ -1,0 +1,11 @@
+5 November 2026 — restricted worktree sandbox
+Command: bash production/qa/evidence/M1-19_capture.sh
+Godot: /Applications/Godot.app/Contents/MacOS/Godot, 4.7.2.stable.official.ed1daf0bf
+Windowed Godot launched through python3 production/tools/heavy.py.
+Wrapper exit: 250; Godot emitted no text and produced no PNG.
+heavy.py forwards its child's return code; 250 is consistent with SIGABRT (-6).
+No stack trace was produced; _RegisterApplication is not independently asserted
+for this particular launch.
+The user explicitly permits an outside-sandbox capture script in this case.
+Ready: production/qa/evidence/M1-19_capture.sh and
+game/tools/capture_chapter1_outcomes.gd. Visual verification remains pending.

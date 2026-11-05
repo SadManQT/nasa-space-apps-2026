@@ -9,9 +9,12 @@ signal command_emitted(command: Dictionary)
 signal panel_opened(panel_id: String)
 signal panel_closed(panel_id: String)
 signal accessibility_changed(settings: Dictionary)
+signal outcome_retry_requested
+signal outcome_continue_requested
 
 const ScienceScript = preload("res://scripts/science/science_data.gd")
 const ChartScript = preload("res://scripts/ui/data_chart.gd")
+const OutcomeScene = preload("res://scenes/ui/chapter1_outcome.tscn")
 var science = ScienceScript.new()
 
 const INK := Color("#05060A")
@@ -68,6 +71,9 @@ var _body: VBoxContainer
 var _close_button: Button
 var _safe_top := 0.0
 var _last_focus: Control
+var _outcome_navigation := {}
+var _source_from_outcome := false
+var _outcome_scroll_position := 0
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -117,6 +123,10 @@ func presentation_transition_seconds() -> float:
 func open_panel(panel_id: String, data: Dictionary = {}) -> bool:
 	if not PANEL_DEFINITIONS.has(panel_id):
 		return false
+	if panel_id == "outcome" and _active_panel not in ["data_card", "sources"]:
+		_outcome_navigation = {}
+		_source_from_outcome = false
+		_outcome_scroll_position = 0
 	if _active_panel.is_empty():
 		_last_focus = _focused_control()
 	if _query_provider.is_valid():
@@ -129,6 +139,8 @@ func open_panel(panel_id: String, data: Dictionary = {}) -> bool:
 		_query = next_query
 	_active_panel = panel_id
 	_render_active_panel()
+	if _body != null:
+		(_body.get_parent() as ScrollContainer).set_deferred("scroll_vertical", _outcome_scroll_position if panel_id == "outcome" and _source_from_outcome else 0)
 	_overlay.show()
 	_panel.show()
 	panel_opened.emit(panel_id)
@@ -246,7 +258,8 @@ func _render_active_panel() -> void:
 		_render_puzzle(value)
 	elif _active_panel == "outcome":
 		_render_outcome(value)
-		_render_puzzle_sources(_query.get("source_puzzle_ids", []))
+		if not value is Dictionary or not value.get("chapter1", false):
+			_render_puzzle_sources(_query.get("source_puzzle_ids", []))
 	elif _active_panel == "journal_discovery":
 		_render_journal(value)
 		_source_button("SOURCES · ALL DATASETS", func(): open_panel("sources", {"ids": []}))
@@ -266,13 +279,18 @@ func set_content_top(value: float) -> void:
 	_layout_panel()
 
 func _layout_panel() -> void:
-	if _panel == null or _safe_top <= 0 or not is_inside_tree():
+	if _panel == null or not is_inside_tree():
 		return
 	var view := get_viewport_rect().size
-	var width := minf(780, view.x - 32)
+	var closure: bool = (_active_panel == "outcome" and bool(_query.get("outcome", {}).get("chapter1", false))) or (_source_from_outcome and _active_panel in ["data_card", "sources"])
+	if _safe_top <= 0 and not closure:
+		return
+	var top := 20.0 if closure else _safe_top
+	var width := minf(960 if closure else 780, view.x - 32)
+	_panel.custom_minimum_size = Vector2.ZERO
 	_panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	_panel.position = Vector2((view.x - width) * 0.5, _safe_top)
-	_panel.size = Vector2(width, maxf(300, view.y - _safe_top - 20))
+	_panel.position = Vector2((view.x - width) * 0.5, top)
+	_panel.size = Vector2(width, maxf(300, view.y - top - 20))
 
 func _render_data(value) -> void:
 	var body := Label.new()
@@ -594,6 +612,12 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		close_panel()
 		get_viewport().set_input_as_handled()
 
+func _unhandled_input(event: InputEvent) -> void:
+	# Godot sends controller cancel through this callback, not key_input.
+	# Keyboard events retain their existing path and cannot close twice.
+	if not event is InputEventKey:
+		_unhandled_key_input(event)
+
 func _source_button(text: String, action: Callable) -> void:
 	var button := _button(text)
 	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -624,6 +648,8 @@ func _card_text(text: String, emphasis: bool = false) -> void:
 	_body.add_child(label)
 
 func _render_card(value) -> void:
+	if _source_from_outcome:
+		_source_button("RETURN TO SCIENCE DEBRIEF", func(): open_panel("outcome"))
 	var id := String(value.get("source_id", "")) if value is Dictionary else ""
 	var card: Dictionary = science.card(id)
 	_card_text("WHAT THIS MEANS FOR AURORA\n" + String(card.get("takeaway", "")), true)
@@ -660,6 +686,21 @@ func _render_journal(value) -> void:
 
 func _render_outcome(value) -> void:
 	var data: Dictionary = value if value is Dictionary else {}
+	if data.get("chapter1", false):
+		_description.text = "Your decisions → your forecast → the result → the evidence. Reading is paused."
+		var closure := OutcomeScene.instantiate() as Chapter1OutcomePanel
+		_body.add_child(closure)
+		closure.science = science
+		closure.navigation_changed.connect(func(navigation: Dictionary): _outcome_navigation = navigation)
+		closure.retry_requested.connect(func(): outcome_retry_requested.emit())
+		closure.continue_requested.connect(func(): outcome_continue_requested.emit())
+		closure.source_requested.connect(func(id: String):
+			_outcome_scroll_position = (_body.get_parent() as ScrollContainer).scroll_vertical
+			_source_from_outcome = true
+			open_panel("data_card", {"source_id": id})
+		)
+		closure.setup(data, text_scale(), _outcome_navigation)
+		return
 	_card_text(String(data.get("result", "Complete an operation to review its readings.")), true)
 	var labels := {"E": "Energy E", "A": "Air A", "H": "Garden health H", "C": "Crop condition C", "R": "Rations R (crew-days)", "Z": "Game exposure Z", "W": "Shelter water W", "K": "Crate shielding K"}
 	for change in data.get("changes", []):

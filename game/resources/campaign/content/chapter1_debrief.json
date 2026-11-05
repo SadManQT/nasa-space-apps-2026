@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "source": "game-design/13_UI_UX_DESIGN.md Chapter 1 debrief; game-design/08_PUZZLE_DESIGNS.md P-02",
+  "boundary": "A fictional expedition, informed by real observations. Game resource units and the seven-shift schedule are training rules. Game exposure is not a medical dose. The storm is a labelled September 2017 historical replay; Aurora's expedition is in April 2046. The shift-4 Earth-link cutoff is an authored training event, not a computed Earth-set.",
+  "tradeoffs": [
+    {
+      "title": "Power and air",
+      "predict": "Could daylight power pay for air before darkness?",
+      "why": "Charging is capped before systems spend energy. Producing air in daylight can use energy that would otherwise overflow. Exactly zero energy is an empty battery; only an unpaid demand causes a blackout.",
+      "sources": [
+        "lro_mazarico_2011_illumination",
+        "vsat_relocatable_array",
+        "bvad_2022_metabolic"
+      ],
+      "fields": [
+        "E",
+        "A"
+      ]
+    },
+    {
+      "title": "Shelter and garden water",
+      "predict": "When could borrowed water return to Alo?",
+      "why": "The wall and the garden share a reservoir. Water in the wall helps shield the crew, but a wall holding at least 4 leaves the garden thirsty. Storm exposure resolves before an ordinary drain; crate shielding is separate from water.",
+      "sources": [
+        "clowdsley_2021_shielding",
+        "goes13_protons_2017_09",
+        "osdr_brassica_rapa_iss"
+      ],
+      "fields": [
+        "W",
+        "K",
+        "H",
+        "C",
+        "Z"
+      ]
+    },
+    {
+      "title": "Historical evidence and the scenario",
+      "predict": "Which readings were measured, and which came from the training model?",
+      "why": "The proton observations and historical event record inform the exercise. The station, its resource costs and its night schedule are authored. Computed viewing geometry does not turn the shift-4 link cutoff into an observed event.",
+      "sources": [
+        "donki_2017_09",
+        "goes13_protons_2017_09",
+        "jpl_horizons_ch1_sky"
+      ],
+      "fields": [
+        "Z"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "day_air",
+      "prompt": "Why make air in daylight?",
+      "options": [
+        "Use charging energy before it overflows",
+        "Plants instantly make all the crew's air",
+        "Darkness removes the need for air"
+      ],
+      "correct": 0,
+      "explanation": "Daylight charging can overflow the battery. The air maker can use some of that available energy to build a reserve."
+    },
+    {
+      "id": "water",
+      "prompt": "Why can shelter water hurt Alo?",
+      "options": [
+        "The plant sees the radiation",
+        "The wall borrows water from the garden reservoir",
+        "Crates consume the garden's water"
+      ],
+      "correct": 1,
+      "explanation": "The wall and garden share water. Return it after the exposure step it was protecting; crates provide separate shielding."
+    },
+    {
+      "id": "measurement",
+      "prompt": "Which label means a real measurement?",
+      "options": [
+        "Simulated",
+        "Fiction",
+        "Observed"
+      ],
+      "correct": 2,
+      "explanation": "Observed identifies a measured record. Computed geometry and simulated game resource units have different labels."
+    }
+  ]
+}

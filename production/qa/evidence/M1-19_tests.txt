@@ -1,0 +1,1 @@
+M1-19 verification waiting for both heavy slots; no partial lock is retained.
