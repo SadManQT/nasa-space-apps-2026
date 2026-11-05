@@ -1,0 +1,150 @@
+{
+ "id": "sci_polar_sun",
+ "title": "Why the Sun stays low at the pole",
+ "purpose": "Teach why sunlight at the lunar south pole is low, sideways and not continuous, so the player plans power for the dark shifts.",
+ "level": "explainer",
+ "length_s": 45,
+ "fps": 24,
+ "scenes": "polar_sun.js",
+ "used_by": [
+  "EX-M0101",
+  "EX-M0102",
+  "P-02"
+ ],
+ "sources": [
+  "jpl_horizons_pole_season",
+  "lro_mazarico_2011_illumination"
+ ],
+ "values": {
+  "lo": {
+   "from": "jpl_horizons_pole_season:derived.sun_elevation_range[0]",
+   "fmt": "{:+.2f}"
+  },
+  "hi": {
+   "from": "jpl_horizons_pole_season:derived.sun_elevation_range[1]",
+   "fmt": "{:+.2f}"
+  },
+  "start_year": {
+   "from": "jpl_horizons_pole_season:values.daily[0][0]",
+   "fmt": "year"
+  },
+  "end_year": {
+   "from": "jpl_horizons_pole_season:values.daily[-1][0]",
+   "fmt": "year"
+  },
+  "midwinter": {
+   "from": "jpl_horizons_pole_season:derived.midwinter_2046",
+   "fmt": "day"
+  },
+  "midsummer": {
+   "from": "jpl_horizons_pole_season:derived.midsummer_2047",
+   "fmt": "day"
+  },
+  "sunlit_days": {
+   "from": "lro_mazarico_2011_illumination:values.continuous_sunlight_days"
+  },
+  "dark_days": {
+   "from": "lro_mazarico_2011_illumination:values.longest_darkness_days"
+  }
+ },
+ "series": {
+  "elevation": "jpl_horizons_pole_season:values.daily"
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 16,
+   "scene": "spin",
+   "label": "diagram",
+   "credit": "Not to scale",
+   "axis": "Spin axis: almost straight up",
+   "light": "Sunlight",
+   "pole": "South pole",
+   "top": "Like a spinning top",
+   "circle": "From the pole, the Sun rolls around the edge of the sky"
+  },
+  {
+   "from": 16,
+   "to": 28,
+   "scene": "season",
+   "label": "model",
+   "credit": "NASA JPL Horizons · flat horizon at the exact pole",
+   "y_title": "How high the Sun gets (degrees)",
+   "horizon": "Horizon",
+   "high": "Highest: {hi}° on {midsummer} {end_year}",
+   "low": "Lowest: {lo}° on {midwinter} {start_year}",
+   "thumb": "Your thumb at arm's length"
+  },
+  {
+   "from": 28,
+   "to": 38,
+   "scene": "rim",
+   "label": "model",
+   "credit": "NASA LRO laser heights · Mazarico et al. 2011 · one Shackleton-rim site",
+   "rim": "Tall rim: sunny {sunlit_days} days in a row",
+   "floor": "Crater floor: in shadow",
+   "ray": "Low sunlight",
+   "bar_lit": "{sunlit_days} days of sunlight",
+   "bar_dark": "{dark_days} days dark"
+  },
+  {
+   "from": 38,
+   "to": 45,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.2,
+   "The Moon spins standing almost straight up, like a top."
+  ],
+  [
+   8.5,
+   12.2,
+   "So at the south pole, sunlight comes in from the side."
+  ],
+  [
+   12.5,
+   15.8,
+   "The Sun never climbs. It rolls around the edge of the sky."
+  ],
+  [
+   16.4,
+   20.6,
+   "Here is how high the Sun gets in {start_year} and {end_year}. Zero is the horizon."
+  ],
+  [
+   21.0,
+   24.4,
+   "It stays between {lo}° and {hi}°: just a peek above or below."
+  ],
+  [
+   24.8,
+   27.8,
+   "That is smaller than your thumb held out at arm's length!"
+  ],
+  [
+   28.4,
+   32.6,
+   "So up high is best. A tall crater rim can stay sunny {sunlit_days} days straight."
+  ],
+  [
+   33.0,
+   37.6,
+   "Down in the crater it stays dark. Even on the rim, darkness can last {dark_days} days."
+  ]
+ ],
+ "ends_on": "Sunlight here comes and goes. In the dark shifts, the base runs on its battery alone.",
+ "literals": [
+  {
+   "text": "Mazarico et al. 2011",
+   "why": "source citation, lro_mazarico_2011_illumination citation field"
+  }
+ ]
+}

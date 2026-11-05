@@ -1,0 +1,189 @@
+{
+ "id": "sci_proton_flux_chart",
+ "title": "Reading a proton-flux chart",
+ "purpose": "Teach what the 2017 GOES curve measures, how to read a log scale and why shelter must be ready before the alarm.",
+ "level": "explainer",
+ "length_s": 45,
+ "fps": 24,
+ "scenes": "proton_flux_chart.js",
+ "used_by": [
+  "EX-M0103",
+  "P-02",
+  "P-14"
+ ],
+ "sources": [
+  "goes13_protons_2017_09",
+  "donki_2017_09"
+ ],
+ "values": {
+  "flare_day": {
+   "from": "donki_2017_09:derived.x82_flare_start",
+   "fmt": "date"
+  },
+  "flare_start": {
+   "from": "donki_2017_09:derived.x82_flare_start",
+   "fmt": "time"
+  },
+  "flare_class": {
+   "from": "donki_2017_09:values.FLR[31].classType"
+  },
+  "storm_cross": {
+   "from": "goes13_protons_2017_09:derived.gt10MeV_reaches_10pfu",
+   "fmt": "time"
+  },
+  "lead_words": {
+   "from": "donki_2017_09:derived.warning_lead_time",
+   "fmt": "words"
+  },
+  "peak": {
+   "from": "goes13_protons_2017_09:derived.gt10MeV_peak",
+   "fmt": "{:,.1f}"
+  },
+  "gt100_onset": {
+   "from": "donki_2017_09:derived.sep_gt100MeV_onset",
+   "fmt": "time"
+  }
+ },
+ "series": {
+  "flux": "goes13_protons_2017_09:values.hourly",
+  "flare_at": "donki_2017_09:derived.x82_flare_start",
+  "cross_at": "goes13_protons_2017_09:derived.gt10MeV_reaches_10pfu",
+  "peak_pfu": "goes13_protons_2017_09:derived.gt10MeV_peak"
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 12,
+   "scene": "detector",
+   "label": "diagram",
+   "credit": "Not to scale",
+   "sun": "Sun",
+   "earth": "Earth",
+   "sat": "Weather satellite, 36,000 km up",
+   "count": "Protons counted"
+  },
+  {
+   "from": 12,
+   "to": 21,
+   "scene": "logscale",
+   "label": "diagram",
+   "credit": "How to read the chart",
+   "quiet": "Quiet day",
+   "storm": "Storm",
+   "linear": "Normal scale",
+   "log": "Log scale: each step is ×10",
+   "lost": "Where did it go?"
+  },
+  {
+   "from": 21,
+   "to": 36,
+   "scene": "chart",
+   "label": "measured",
+   "credit": "NOAA GOES-13 hourly means · flare time NASA DONKI",
+   "y_title": "Protons (pfu)",
+   "flare": "{flare_class} flare, {flare_start}",
+   "level": "Storm line: 10 pfu",
+   "l10": "Protons >10 MeV",
+   "lead": "{lead_words} minutes",
+   "peak": "Highest 5-minute reading: {peak} pfu"
+  },
+  {
+   "from": 36,
+   "to": 40.5,
+   "scene": "boundary",
+   "label": "measured",
+   "credit": "NOAA GOES-13",
+   "earth": "Counted here, near Earth",
+   "moon": "The Moon: no air, no magnetic shield",
+   "note": "A count of protons, not a dose"
+  },
+  {
+   "from": 40.5,
+   "to": 45,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.2,
+   "A weather satellite near Earth counts tiny, fast bits of the Sun: protons."
+  ],
+  [
+   8.5,
+   11.8,
+   "Its count is in pfu: protons per square centimetre, each second."
+  ],
+  [
+   12.4,
+   16.2,
+   "On a normal scale, a quiet day is so small you cannot even see it."
+  ],
+  [
+   16.6,
+   20.6,
+   "On a log scale, each step up is ten times bigger. Now both fit!"
+  ],
+  [
+   21.4,
+   24.8,
+   "{flare_day}: an {flare_class} flare bursts on the Sun at {flare_start}."
+  ],
+  [
+   25.2,
+   28.8,
+   "At {storm_cross}, the protons cross the storm line: 10 pfu."
+  ],
+  [
+   29.2,
+   32.0,
+   "That is just {lead_words} minutes after the flare began."
+  ],
+  [
+   32.4,
+   35.8,
+   "Then they stay high for days, peaking at {peak} pfu!"
+  ],
+  [
+   36.3,
+   40.3,
+   "The Moon has no air or magnetic shield, so storms like this reach the ground."
+  ]
+ ],
+ "ends_on": "When the alarm sounds, the protons are already on their way. Get the shelter ready before it!",
+ "literals": [
+  {
+   "text": "36,000 km",
+   "why": "goes13_protons_2017_09 boundary: 'Measured in geostationary orbit, about 36,000 km above Earth'"
+  },
+  {
+   "text": "10 pfu",
+   "why": "the storm level on the EX-M0103 data card ('Storm level (10 pfu)') and the fixture's gt10MeV_reaches_10pfu rule"
+  },
+  {
+   "text": ">100 MeV",
+   "why": "GOES channel name, goes13_protons_2017_09 fields_used ZPGT100E"
+  },
+  {
+   "text": ">10 MeV",
+   "why": "GOES channel name, goes13_protons_2017_09 fields_used ZPGT10E"
+  },
+  {
+   "text": "×10",
+   "why": "definition of a log scale's grid step, not a measurement"
+  },
+  {
+   "text": "GOES-13",
+   "why": "satellite name (goes13_protons_2017_09 agency/dataset), not a measurement"
+  },
+  {
+   "text": "5-minute",
+   "why": "sampling interval of the peak value: gt10MeV_peak formula 'max 5-min value'"
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "lla-motion",
+  "private": true,
+  "description": "Frame capture for the Claude Motion explainer pipeline (production/tools/motion/build.py). Uses the installed Google Chrome; no browser download.",
+  "dependencies": {
+    "playwright-core": "1.56.1"
+  }
+}

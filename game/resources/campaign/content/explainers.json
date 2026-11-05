@@ -1,0 +1,71 @@
+{
+ "schema_version": 1,
+ "about": "Explainer clips the hint player, data cards and Journal play (MASTER_PLAN.md section 5). Science explainers are built by production/tools/motion/build.py from production/explainers/motion/specs/; do not edit their entries by hand.",
+ "explainers": [
+  {
+   "id": "sci_polar_sun",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Why the Sun stays low at the pole",
+   "path": "res://assets/explainers/science/sci_polar_sun.ogv",
+   "length_s": 45.04,
+   "labels": [
+    "diagram",
+    "model"
+   ],
+   "sources": [
+    "jpl_horizons_pole_season",
+    "lro_mazarico_2011_illumination"
+   ],
+   "used_by": [
+    "EX-M0101",
+    "EX-M0102",
+    "P-02"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.2,
+     "text": "The Moon spins standing almost straight up, like a top."
+    },
+    {
+     "start": 8.5,
+     "end": 12.2,
+     "text": "So at the south pole, sunlight comes in from the side."
+    },
+    {
+     "start": 12.5,
+     "end": 15.8,
+     "text": "The Sun never climbs. It rolls around the edge of the sky."
+    },
+    {
+     "start": 16.4,
+     "end": 20.6,
+     "text": "Here is how high the Sun gets in 2046 and 2047. Zero is the horizon."
+    },
+    {
+     "start": 21.0,
+     "end": 24.4,
+     "text": "It stays between −1.56° and +1.59°: just a peek above or below."
+    },
+    {
+     "start": 24.8,
+     "end": 27.8,
+     "text": "That is smaller than your thumb held out at arm's length!"
+    },
+    {
+     "start": 28.4,
+     "end": 32.6,
+     "text": "So up high is best. A tall crater rim can stay sunny 240 days straight."
+    },
+    {
+     "start": 33.0,
+     "end": 37.6,
+     "text": "Down in the crater it stays dark. Even on the rim, darkness can last 1.5 days."
+    }
+   ],
+   "ends_on": "Sunlight here comes and goes. In the dark shifts, the base runs on its battery alone.",
+   "spec": "production/explainers/motion/specs/sci_polar_sun.json"
+  }
+ ]
+}
