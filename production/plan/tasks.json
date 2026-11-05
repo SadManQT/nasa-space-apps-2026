@@ -4290,7 +4290,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Messages: inbox, arrival toasts, unlock triggers and the message validator",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [
     "M1-54"
@@ -4312,7 +4312,8 @@
    "updated": "2026-11-06",
    "prompt": "Goal: every scene connects to the next with text messages (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5; joins in game-design/24_NARRATIVE_REVISION.md §2.9).\nDo: a Messages system: threads (crew, commander, earth, academy, archive), unread counts, a toast on arrival (never during\ndialogue), key M and the pause menu entry, messages flagged goal feed the goal card. Load every\ngame/resources/campaign/content/messages/ch*.json (schema in §5) and unlock on scene_enter / scene_exit / mission_done /\njob_done / found; record read state in the save. Write production/tools/check_messages.py (stdlib): parses game-design/24_NARRATIVE_REVISION.md §2.9 and fails\nunless every join present in the loaded chapter files has ≥ 2 messages, IDs are unique, unlock scene IDs exist in\nfull-game-story/story-data.json, bodies are ≤ 60 words, text is English (no U+0980–U+09FF), and \"Noor\"/\"Rahman\" never unlock\nbefore EX-CH05-S10. Add a two-message sample ch00 fixture for tests only. game/tools/test_comms.gd covers load, unlock, toast,\ngoal handoff and save.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
-   "effort": 3
+   "effort": 3,
+   "blocker": "Needs Atik M1-69: message reads must update presentation_resume.messages without Director.restore_snapshot replacing PuzzleHost rollback checkpoint. Existing save store is reusable; no safe public metadata setter yet. Read-only integration audit complete."
   },
   {
    "id": "M1-57",
@@ -5299,6 +5300,26 @@
    "prompt": "Ramim fresh baseline on Windows at main 990126b, Godot 4.7.2, fails the production loading performance gate before any feature source changes. Full game/tools/run_tests.sh: 35/37 suites passed; test_performance_runtime.gd reports 537 checks / 2 failures: production title main-thread interval 59.455ms and production new campaign interval 128.056ms (limit <50ms). The other failure is the separate missing-explainer request M1-67.\nA single focused retry through run_tests.sh performance_runtime after cache warmup fails 537 checks / 7 failures (0/1 suites passed). Runner prints the first five details: Kai raw load 51.280ms, Amara 50.826ms, Mei 57.054ms, Rafi 57.689ms, Ferreira 52.718ms; remaining two details were suppressed by the runner, so do not invent them. Logs: production/qa/evidence/M1-18_baseline.txt and M1-18_performance_retry.txt.\nInvestigate the shared loading/performance path and the Windows test/runtime behavior, then fix the cause within Atik-owned runtime/loading/performance paths. Profile whether scheduling/raw glTF import or timing measurement is responsible; do not silently relax/skip the 50ms gate or claim reference-Mac performance based on this PC. Any necessary Ramim UI or Sadman asset/test changes need owner requests. Preserve campaign/save behavior and incremental-loading contract. Publish the fix/evidence and notify Ramim to resume blocked M1-18.\nAcceptance: focused real production performance runner passes on the documented supported machine without weakening its intent; full run_tests.sh green after M1-67 also lands, with truthful hardware/timing evidence and no unrelated changes.",
    "reserved_for": "atik",
    "effort": 2
+  },
+  {
+   "id": "M1-69",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Expose safe message metadata updates without resetting puzzle checkpoints",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/campaign/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "M1-56 message persistence needs a safe authoritative metadata update API. Existing Director.snapshot -> Chapter1Campaign._save_snapshot -> SaveService already retains presentation_resume, and fresh New starts it empty. However Director.restore_snapshot also replaces _checkpoint. PuzzleHost.retry calls Director.restore_checkpoint, so using load/restore merely to mark a message read would overwrite the pre-shift rollback. No public bounded presentation-message setter exists.\nExpose a small public Director method for updating only presentation_resume.messages, with validated message metadata (delivered/read IDs and any explicitly agreed primitive state). Publish its exact method/payload contract for Ramim's comms/KnowledgeService integration. Preserve the gameplay checkpoint, current gameplay revision semantics, receipts, phase, resources, dialogue and flags; duplicate updates must be harmless. Never accept arbitrary state/root changes through this API. Do not add a second save store; existing runtime.save_campaign can persist the normal snapshot. Keep message pack/inbox implementation in Ramim folders, and Chapter1 prose in Sadman M1-57.\nAcceptance: focused tests with a real PuzzleHost/Director prove preview/read/update/retry returns to the same pre-message gameplay checkpoint; only message metadata changes; duplicate, malformed and missing state are safe; save/restore round-trips existing presentation_resume.messages, fresh New resets it, and old saves lacking it load. Run the full repository runner and disclose the existing M1-67/M1-68 failures if still present; do not weaken those checks. This prerequisite unblocks M1-56; tell Ramim to release/resume it when ready.",
+   "reserved_for": "atik",
+   "effort": 1
   }
  ],
  "requirements": [
