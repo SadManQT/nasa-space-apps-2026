@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "catalog_kind": "dialogue",
-  "content_revision": "campaign-content-1-f06dab44691238c6",
+  "content_revision": "campaign-content-1-dc4e79f2208c7126",
   "source_hashes": {
-    "story_data_sha256": "2951bc4ed085204626ccf04d5e983375f70c71b98c5f52a99079cd6e2b98abfa",
+    "story_data_sha256": "2db1f13eda8264db5b16d1dc51138a5397555bda33aa10953260173d2306729f",
     "scene_index_sha256": "8c0b8cda424d6bc6abb32ef64fd090c9afca53a0eedf16dee74e84dc4d51a934",
-    "vo_lines_sha256": "a219a240df5d6966520306fbb5ad71e9f304eaecb4c0f83da11200ea1aee3d5e"
+    "vo_lines_sha256": "aa2bbc83148781d48802796101cc194bea528a78dd15199a1214d4045598b5f7"
   },
   "counts": {
-    "dialogue_lines": 385,
+    "dialogue_lines": 388,
     "speakers": 10
   },
   "speakers": {
@@ -4176,6 +4176,36 @@
       "text": "Stay. Then help me count.",
       "line": "Stay. Then help me count.",
       "voice_file": "game/assets/audio/voice/Mei/VO_EX-CH03-S10-L04.ogg",
+      "knowledge_required": [],
+      "knowledge_reveals": [],
+      "acknowledgement_completes_predicate": false,
+      "evidence_tag": "Simulated",
+      "source_refs": [
+        "game-design/06_SCENE_SCRIPTS/CHAPTER_03.md",
+        "game-design/03_STORY_TIMELINE.md",
+        "game-design/08_PUZZLE_DESIGNS.md"
+      ]
+    },
+    {
+      "id": "EX-CH03-S10-L05",
+      "scene_id": "EX-CH03-S10",
+      "order": 5,
+      "speaker": "Amara",
+      "speaker_id": "amara",
+      "speaker_label": "Amara",
+      "source_speaker": "Amara",
+      "speaker_note": "quietly, after three seconds of only the fans",
+      "speaker_identity": {
+        "display_name": "Amara",
+        "role": "atmosphere and measurement",
+        "knowledge_status": "known"
+      },
+      "delivery": "live",
+      "origin": "live",
+      "origin_label": "LOCAL LIVE",
+      "text": "Forty-two.",
+      "line": "Forty-two.",
+      "voice_file": "",
       "knowledge_required": [],
       "knowledge_reveals": [],
       "acknowledgement_completes_predicate": false,
@@ -11273,9 +11303,42 @@
       ]
     },
     {
-      "id": "EX-CH08-S10-L01",
+      "id": "EX-CH08-S10-L05",
       "scene_id": "EX-CH08-S10",
       "order": 1,
+      "speaker": "Rao",
+      "speaker_id": "rao",
+      "speaker_label": "Rao",
+      "source_speaker": "Rao (Earth link)",
+      "speaker_note": "live Earth link; the channel opens before Noor speaks",
+      "speaker_identity": {
+        "display_name": "Rao",
+        "role": "Earth flight controller",
+        "knowledge_status": "known"
+      },
+      "delivery": "earth_link",
+      "origin": "earth_link",
+      "origin_label": "EARTH LINK",
+      "text": "Aurora, Earth. We hear you. Go ahead.",
+      "line": "Aurora, Earth. We hear you. Go ahead.",
+      "voice_file": "",
+      "knowledge_required": [
+        "relay_local_verified",
+        "relay_earth_verified"
+      ],
+      "knowledge_reveals": [],
+      "acknowledgement_completes_predicate": false,
+      "evidence_tag": "Fiction",
+      "source_refs": [
+        "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+        "game-design/03_STORY_TIMELINE.md",
+        "game-design/08_PUZZLE_DESIGNS.md"
+      ]
+    },
+    {
+      "id": "EX-CH08-S10-L01",
+      "scene_id": "EX-CH08-S10",
+      "order": 2,
       "speaker": "Noor",
       "speaker_id": "noor",
       "speaker_label": "Noor",
@@ -11309,7 +11372,7 @@
     {
       "id": "EX-CH08-S10-L02",
       "scene_id": "EX-CH08-S10",
-      "order": 2,
+      "order": 3,
       "speaker": "Mei",
       "speaker_id": "mei",
       "speaker_label": "Mei",
@@ -11337,9 +11400,43 @@
       ]
     },
     {
+      "id": "EX-CH08-S10-L06",
+      "scene_id": "EX-CH08-S10",
+      "order": 4,
+      "speaker": "Noor",
+      "speaker_id": "noor",
+      "speaker_label": "Noor",
+      "source_speaker": "Noor (live Earth link)",
+      "speaker_note": "live Earth link; after the 2.6-second round trip",
+      "speaker_identity": {
+        "display_name": "Dr Noor Rahman",
+        "role": "botanist and Academy founder",
+        "knowledge_status": "revealed_in_chapter_5"
+      },
+      "delivery": "earth_link",
+      "origin": "earth_link",
+      "origin_label": "EARTH LINK",
+      "text": "You finished what we could not.",
+      "line": "You finished what we could not.",
+      "voice_file": "",
+      "knowledge_required": [
+        "noor_identity_revealed",
+        "relay_local_verified",
+        "relay_earth_verified"
+      ],
+      "knowledge_reveals": [],
+      "acknowledgement_completes_predicate": false,
+      "evidence_tag": "Fiction",
+      "source_refs": [
+        "game-design/06_SCENE_SCRIPTS/CHAPTER_08.md",
+        "game-design/03_STORY_TIMELINE.md",
+        "game-design/08_PUZZLE_DESIGNS.md"
+      ]
+    },
+    {
       "id": "EX-CH08-S10-L03",
       "scene_id": "EX-CH08-S10",
-      "order": 3,
+      "order": 5,
       "speaker": "Ferreira",
       "speaker_id": "ferreira",
       "speaker_label": "Ferreira",
@@ -11369,7 +11466,7 @@
     {
       "id": "EX-CH08-S10-L04",
       "scene_id": "EX-CH08-S10",
-      "order": 4,
+      "order": 6,
       "speaker": "Amara",
       "speaker_id": "amara",
       "speaker_label": "Amara",
@@ -11651,5 +11748,5 @@
     "grants_knowledge": [],
     "note": "Acknowledging a caption is not a physical operation or scene/mission completion."
   },
-  "catalog_hash": "de73cc9cecc4ef824b9622e2a00951ba734a9452d567b122b87c95f9fc2ff7ab"
+  "catalog_hash": "1d5bb4f1a73f4870db5983fdaa9ddab764f5c22b92c9c13c94bfab40fe44e8b6"
 }

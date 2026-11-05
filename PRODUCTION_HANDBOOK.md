@@ -86,10 +86,11 @@ When an older design doc disagrees with the latest story or with section 3, **th
 | Rao | Earth flight controller | adult | Earth screen only, always |
 | Dr Noor Rahman ("N.") | Botanist, Academy founder, Bangladeshi | older adult | Earth only. Stored recordings and text until CH08; **first live voice only in CH08-S10**, after both relay links are verified. Identity revealed only in CH05. |
 | Alo | Purple-stem field mustard (Brassica rapa) | plant | Planted 11 Apr 2046, blooms 27 Apr, harvested 21 May, dies naturally. Never revived; later plants are descendants. |
-| Tara | Green-stem compatible partner | plant | Indoor reference bay; blooms 30 Apr; equal care and screen time |
+| Tara | Green-stem compatible partner | plant | Indoor reference bay; blooms 30 Apr; equal care and screen time. Watering stops 26 May (20 days after the last pollination run), harvest 31 May 2046 into the sealed **working stock "Tara × Alo"** with no headline count, never mixed with the founder ledger; her farewell opens EX-CH03-S12; her nameplate sits on the lineage board level with Alo's petal; her name stays on the bay, where cotton is planted 15 Dec and grows at first light (approved 5 Nov 2026, M3-94; code M3-96) |
 
 **Key ledgers (assets must show these exact counts)**
 - Alo harvest: **42 seeds = 12 planted + 30 founder reserve**. The reserve travels as **15 + 15** in the Chapter 7 seed case.
+- Working stock: Tara's 31 May harvest, **"Tara × Alo"**, sealed with **no headline count**; later generations' seeds join it. The founder 30 stay sealed; no asset or screen shows a number for the working stock.
 - The 2034 annex holds **young, unflowered seedlings with curled leaves only**: no buds, no flowers, no pods.
 - Vault: **12 distinct specimens**. Cotton is planted 15 Dec, leaving **11** stored. The album's 16 cultivar entries are records, not physical seeds.
 - CH04 descendant sample: 12 plants, 7 purple stems and 5 green.
@@ -237,7 +238,7 @@ Status: ✅ final · 🟡 in progress · ♻️ reuse candidate already exported
 |---|---|---|---|
 | PL_Alo (A-05) | Seed, sprout, bud, first bloom, flowering, pollinated, pods, mature-dry; frost and thirst stress states; sway shader | CH01-S03 → CH03-S10 | 🟡 bud, bloom and pods installed; early/stress states, sway and toon treatment pending |
 | PR_PressedPetal (A-30) | Alo's archived petal in a dated sleeve | CH03-S10 → CH08-S12 | ⬜ |
-| PL_Tara (A-06) | Same stages, green stem, own label | CH01-S04 → CH03 | 🟡 bloom installed; other stages, own label and toon treatment pending |
+| PL_Tara (A-06) | Same stages, green stem, own label; pods, senescent and dry states for the 31 May farewell; nameplate and working-stock envelope (M3-99) | CH01-S04 → CH03-S12 (31 May) | 🟡 bloom installed; other stages, own label and toon treatment pending |
 | PL_Descendants | 12-position tray; CH04 sample of 7 purple + 5 green stems; renewing mixed final garden | CH03-S11 → CH08-S12 | ⬜ |
 | PL_ZeroSeedlings | Frozen 2034 trays: young unflowered seedlings with curled leaves only | CH03-S06/S07, CH05-S04 | 🟡 `PL_ZeroSeedlingTray` installed; toon/staging pending |
 | PL_Cotton (A-41) | Seed, sprout, young plant, alive at first light (no boll) | CH05-S12 → CH08-S12 | 🟡 young plant installed; seed/sprout/cassette and toon pending |
@@ -445,7 +446,7 @@ Optional opening (from the gameplay entry flow): mustard fields to the Moon cham
 
 ## 12. Known conflicts and open questions
 
-- Older design docs still mention Bangla text and UI ([01_GAME_VISION.md](game-design/01_GAME_VISION.md), [13_UI_UX_DESIGN.md](game-design/13_UI_UX_DESIGN.md) and others) and plant faces ([04_CHARACTER_BIBLE.md:53](game-design/04_CHARACTER_BIBLE.md#L53), [14_ASSET_PRODUCTION_LIST.md:52](game-design/14_ASSET_PRODUCTION_LIST.md#L52), [01_GAME_VISION.md:25](game-design/01_GAME_VISION.md#L25), [docs/GAME_PLAN_FINAL.md:391](docs/GAME_PLAN_FINAL.md#L391)). Section 3 overrides them; updating those docs is pending the user's go-ahead.
+- Older design docs still mention Bangla text and UI ([01_GAME_VISION.md](game-design/01_GAME_VISION.md), [13_UI_UX_DESIGN.md](game-design/13_UI_UX_DESIGN.md) and others) and plant faces ([04_CHARACTER_BIBLE.md](game-design/04_CHARACTER_BIBLE.md) was corrected on 5 Nov 2026, M3-94; still in [14_ASSET_PRODUCTION_LIST.md:52](game-design/14_ASSET_PRODUCTION_LIST.md#L52), [01_GAME_VISION.md:25](game-design/01_GAME_VISION.md#L25), [docs/GAME_PLAN_FINAL.md:391](docs/GAME_PLAN_FINAL.md#L391)). Section 3 overrides them; updating those docs is pending the user's go-ahead.
 - [12_CINEMATIC_DIRECTION.md](game-design/12_CINEMATIC_DIRECTION.md) CIN-04 mentions "unopened buds"; the final canon allows no buds in the annex. CS-05 follows the final canon.
 - The old 4-hour scope in 01_GAME_VISION is superseded by the 10–14 hour story edition (720 target minutes); README and GAMEPLAY_DESIGN_FINAL now say so. The numeric puzzle contracts still apply.
 - The Tripo API pool shows 2,000 "frozen" credits; only the 1,000 are treated as spendable until the user explains them.

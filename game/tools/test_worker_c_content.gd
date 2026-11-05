@@ -22,7 +22,7 @@ func _run() -> void:
 	_check(content.get("counts", {}).get("chapters", 0) == 8, "catalog contains eight chapters")
 	_check(content.get("counts", {}).get("missions", 0) == 32, "catalog contains thirty-two missions")
 	_check(content.get("counts", {}).get("scenes", 0) == 96, "catalog contains ninety-six scenes")
-	_check(content.get("counts", {}).get("dialogue_lines", 0) == 385, "catalog contains exactly 385 dialogue lines")
+	_check(content.get("counts", {}).get("dialogue_lines", 0) == 388, "catalog contains exactly 388 dialogue lines")
 	_test_ids_and_order(content)
 	_test_dialogue_and_knowledge(content)
 	_test_audio_and_cutscenes(content)
@@ -55,8 +55,8 @@ func _test_ids_and_order(content: Dictionary) -> void:
 	var nested_count := 0
 	for scene in scenes:
 		nested_count += scene.get("dialogue", []).size()
-	_check(nested_count == 385, "nested scene dialogue totals 385")
-	_check(dialogue.size() == 385, "global dialogue order totals 385")
+	_check(nested_count == 388, "nested scene dialogue totals 388")
+	_check(dialogue.size() == 388, "global dialogue order totals 388")
 	_check(ContentScript.scene_by_id(content, "EX-CH08-S12").get("title", "") == "What We Grew", "scene lookup resolves the final canonical scene")
 	_check(ContentScript.mission_by_id(content, "EX-M0504").get("scene_ids", []).size() == 3, "mission lookup resolves a three-scene mission")
 
@@ -77,7 +77,10 @@ func _test_dialogue_and_knowledge(content: Dictionary) -> void:
 	_check(not leaked, "future knowledge text is not exposed before acquisition")
 	var live_before_relay: Array = service.lines_for_scene("EX-CH08-S10", ["noor_identity_revealed"])
 	var live_after_relay: Array = service.lines_for_scene("EX-CH08-S10", ["noor_identity_revealed", "relay_local_verified", "relay_earth_verified"])
-	_check(live_before_relay.size() == 3 and live_after_relay.size() == 4, "first live Noor voice waits for both relay flags")
+	_check(live_before_relay.size() == 3 and live_after_relay.size() == 6, "first live Noor voice, her reply and Rao's channel wait for both relay flags")
+	var relay_order: Array = live_after_relay.map(func(line) -> String: return String(line.get("id", "")))
+	_check(relay_order == ["EX-CH08-S10-L05", "EX-CH08-S10-L01", "EX-CH08-S10-L02", "EX-CH08-S10-L06", "EX-CH08-S10-L03", "EX-CH08-S10-L04"], "Rao opens the channel before Noor speaks and Noor answers Mei before Ferreira (stable ids, narrative order)")
+	_check(String(service.dialogue_by_id("EX-CH03-S10-L05").get("text", "")) == "Forty-two." and String(service.dialogue_by_id("EX-CH03-S10-L05").get("voice_file", "")).is_empty(), "the approved tally line is in the catalog and ships text-only until M3-94R records it")
 	var caption := service.caption_for_line("EX-CH08-S10-L01", ["noor_identity_revealed", "relay_local_verified", "relay_earth_verified"])
 	_check(String(caption.get("text", "")) == "Hello, Aurora. This is Noor.", "caption service preserves the exact first live line")
 	var ack := service.acknowledgement_command("EX-CH01-S01-L01", 0, "EX-M0101", "EX-CH01-S01")

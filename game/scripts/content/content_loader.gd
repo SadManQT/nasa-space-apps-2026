@@ -5,13 +5,13 @@ class_name CampaignContentFull
 
 const FULL_PATH := "res://resources/campaign/content/campaign_catalog.json"
 const DIALOGUE_PATH := "res://resources/campaign/dialogue_catalog.json"
-const EXPECTED_STORY_SHA256 := "2951bc4ed085204626ccf04d5e983375f70c71b98c5f52a99079cd6e2b98abfa"
+const EXPECTED_STORY_SHA256 := "2db1f13eda8264db5b16d1dc51138a5397555bda33aa10953260173d2306729f"
 const EXPECTED_SCENE_INDEX_SHA256 := "8c0b8cda424d6bc6abb32ef64fd090c9afca53a0eedf16dee74e84dc4d51a934"
-const EXPECTED_VO_SHA256 := "a219a240df5d6966520306fbb5ad71e9f304eaecb4c0f83da11200ea1aee3d5e"
-const EXPECTED_CONTENT_REVISION := "campaign-content-1-f06dab44691238c6"
-const EXPECTED_FULL_COUNTS := {"chapters": 8, "missions": 32, "scenes": 96, "dialogue_lines": 385}
-const EXPECTED_CATALOG_HASH := "6f78d8397bec7d6705735159dc18f95cea224c8f7538a635746c448643d949bc"
-const EXPECTED_DIALOGUE_CATALOG_HASH := "de73cc9cecc4ef824b9622e2a00951ba734a9452d567b122b87c95f9fc2ff7ab"
+const EXPECTED_VO_SHA256 := "aa2bbc83148781d48802796101cc194bea528a78dd15199a1214d4045598b5f7"
+const EXPECTED_CONTENT_REVISION := "campaign-content-1-dc4e79f2208c7126"
+const EXPECTED_FULL_COUNTS := {"chapters": 8, "missions": 32, "scenes": 96, "dialogue_lines": 388}
+const EXPECTED_CATALOG_HASH := "50d470e1a2a4c872509b6a7976e97bf705c52559f3290664509cfe34cacf0b9a"
+const EXPECTED_DIALOGUE_CATALOG_HASH := "1d5bb4f1a73f4870db5983fdaa9ddab764f5c22b92c9c13c94bfab40fe44e8b6"
 
 static var _full_cache: Dictionary = {}
 
@@ -161,9 +161,9 @@ static func validate_full(content, dialogue_catalog = null) -> Dictionary:
 	for predicate_entry in predicates:
 		if predicate_entry is Dictionary and bool(predicate_entry.get("requires_dialogue_acknowledgement", true)):
 			errors.append(String(predicate_entry.get("id", "predicate")) + " is dialogue-gated")
-	if dialogue_ids.size() != 385:
-		errors.append("nested scene dialogue does not total 385 lines")
-	if scene_ids.size() == 96 and mission_ids.size() == 32 and dialogue.size() == 385:
+	if dialogue_ids.size() != 388:
+		errors.append("nested scene dialogue does not total 388 lines")
+	if scene_ids.size() == 96 and mission_ids.size() == 32 and dialogue.size() == 388:
 		if dialogue_ids != _dialogue_ids_from_global(dialogue):
 			errors.append("scene dialogue order differs from global dialogue order")
 
@@ -206,8 +206,8 @@ static func validate_dialogue_catalog(dialogue_catalog) -> Dictionary:
 		if String(source_hashes.get("vo_lines_sha256", "")) != EXPECTED_VO_SHA256:
 			errors.append("VO source hash does not match")
 	var lines: Array = _array_field(dialogue_catalog, "lines", errors, "dialogue lines")
-	if lines.size() != 385:
-		errors.append("expected dialogue_lines=385, got %s" % lines.size())
+	if lines.size() != 388:
+		errors.append("expected dialogue_lines=388, got %s" % lines.size())
 	var line_ids: Array[String] = []
 	for raw_line in lines:
 		if not raw_line is Dictionary:

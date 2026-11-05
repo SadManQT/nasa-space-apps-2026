@@ -1,0 +1,4 @@
+ok   tools/test_asset_showcase.gd :: SHOWCASE RESULT: PASS (627 checks, 0 failures)
+ok   tools/test_campaign_boot.gd :: CAMPAIGN BOOT RESULT: PASS (5 checks, 0 failures)
+ok   tools/test_campaign_crew.gd :: CAMPAIGN CREW RESULT: PASS (927 checks, 0 failures)
+ok   tools/test_campaign_knowledge.gd :: CAMPAIGN KNOWLEDGE RESULT: PASS (46 checks, 0 failures)
