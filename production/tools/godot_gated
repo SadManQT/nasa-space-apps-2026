@@ -1,3 +1,12 @@
 #!/bin/sh
 # Godot through the machine-wide two-at-a-time gate (production/tools/heavy.py). Night-shift workers get this as $GODOT.
+# Inside the Codex sandbox a windowed Godot cannot register with macOS and aborts, which pops up a crash dialog on
+# Sadman's screen; refuse it here and point to the capture script the night shift runs outside the sandbox.
+if [ -n "${CODEX_SANDBOX:-}" ]; then
+  case " $* " in
+    *" --headless "*|*" --version "*|*" --help "*) ;;
+    *) echo "godot_gated: windowed Godot cannot open inside this sandbox. Write production/qa/evidence/<task>_capture.sh instead; the night shift runs it outside the sandbox." >&2
+       exit 3 ;;
+  esac
+fi
 exec python3 "$(dirname "$0")/heavy.py" "${GODOT_BIN:-/Applications/Godot.app/Contents/MacOS/Godot}" "$@"

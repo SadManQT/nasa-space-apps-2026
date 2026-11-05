@@ -157,8 +157,9 @@ project's repository; work only here). Do board task {tid} — exactly this one 
    --reason "<what is needed and who can unblock it>" and stop.
 4. Do the work. Reuse existing services; gameplay values in data files; doc comments on public functions; at most one
    Godot/ffmpeg/Blender process at a time, and run every Blender render, ffmpeg encode or windowed Godot capture as
-   `python3 production/tools/heavy.py <command...>` (it waits so that no more than two run on this Mac); never a bare
-   Godot exit code as a test result.
+   `python3 production/tools/heavy.py <command...>` (it waits so that no more than two run on this Mac); keep Blender renders light (Eevee, or Cycles with at most
+   128 samples and --threads 4) because a heavy Cycles render crashed Blender on 5 Nov; never a bare Godot exit code as a
+   test result.
 5. Verify: GODOT={GODOT} game/tools/run_tests.sh must print "N/N suites passed". Anything a player sees needs screenshots in
    production/qa/evidence/{tid}_*.png (run the game windowed or a scripted capture with the window on top).
 6. Record: one row in production/AI_PROMPT_LOG.md (tool = your engine and model, "night shift"), a dated line in
