@@ -299,7 +299,7 @@ def cmd_render(path):
     info = probe(ogv)
     length = float(info["format"]["duration"])
     video = [s for s in info["streams"] if s.get("width")]
-    if not video or (video[0]["width"], video[0]["height"]) != (1280, 720)   # the project's film size, like the cutscenes or abs(length - spec["length_s"]) > .25:
+    if not video or (video[0]["width"], video[0]["height"]) != (1280, 720) or abs(length - spec["length_s"]) > .25:   # 1280x720: the project's film size
         fail(f"{ogv.name}: unexpected encode {info}")
     register(spec, ogv, length)
     shutil.rmtree(frames); shutil.rmtree(small)
