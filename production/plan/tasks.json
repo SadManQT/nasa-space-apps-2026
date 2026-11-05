@@ -543,7 +543,7 @@
    "prompt": "Look at production/concept/lookdev_exterior_v1/ and pick A or B (or ask for changes). The AI records it in handbook §3."
   },
   {
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -558,7 +558,7 @@
     "production/ART_BIBLE.md"
    ],
    "note": "Heightmaps, provenance and Blender base meshes can start now; apply surface materials and lighting only after the art direction is chosen (M1-33). 5 Nov: the 4 Nov claim produced no files; released to Claude Fable 5.1 (environment lead). Blender is on this Mac (/opt/homebrew/bin/blender). 5 Nov 22:40: returned to todo (it passed review but hit a rebase conflict on landing; the night shift resumes night/M1-34).",
-   "evidence": "",
+   "evidence": "Landed from night/M1-34 (Claude Fable 5.1, reviewed PASS) by Sadman/claude: LOLA heightmaps + provenance (production/terrain/, game/assets/environment/terrain/lola/), tiles with LODs import in Godot, LOLA hillshade vs in-game side-by-sides production/review/M1-34_*_lola_vs_game.png, captures production/qa/evidence/M1-34_*.png. test_terrain_lola 1090/1090, test_science_data 146/146, test_player_text 354/354 (card now in player words), test_explainers 237/237, make_terrain checks OK, gate 124 assets 0 failing. Follow-ups: M1-70 (Ramim, data-card credit line), M1-71 (Atik, export *.r16).",
    "updated": "2026-11-06",
    "id": "M1-34",
    "milestone": "M1",
