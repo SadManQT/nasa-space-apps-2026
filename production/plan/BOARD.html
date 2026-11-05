@@ -60,6 +60,14 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 .row { display: flex; gap: 8px; flex-wrap: wrap; }
 .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 @media (max-width: 600px) { main { padding: 16px 16px 48px; } h1 { font-size: 20px; } }
+.grid.team { grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); align-items: start; }
+.team .panel, .task .meta { overflow-wrap: anywhere; }
+.team details { margin-top: 10px; }
+.team summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+.team ul { margin: 6px 0 0; padding-left: 18px; }
+.team li { margin: 6px 0; }
+.team .counts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.filters select { max-width: 100%; }
 </style>
 </head>
 <body>
@@ -74,6 +82,246 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 
   <h2>Deadlines</h2>
   <div class="grid" id="deadlines"></div>
+
+  <h2 id="team">Team</h2>
+<p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
+<div class="grid team">
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">28 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">42 todo</span></div><div class="bar"><i style="width:38%"></i></div>
+<details open><summary>Working now (2)</summary><ul>
+<li><a class="id" href="#M0-11">M0-11</a> Team roster, roles and both registrations <span class="chip ">human</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/human on 2026-11-03</div></li>
+<li><a class="id" href="#M1-63">M1-63</a> Claude Motion explainer pipeline: install Tweenkit, house style, spec to video to game, two sample clips <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/claude on 2026-11-05</div></li>
+</ul></details>
+<details open><summary>Next up today (6)</summary><ul>
+<li><a class="id" href="#M1-06">M1-06</a> Assemble the Chapter 1 rooms from the kit <span class="chip ">codex</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-34">M1-34</a> Real south-pole terrain from NASA LRO LOLA elevation data <span class="chip ">claude</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-07">M1-07</a> Chapter 1 missing assets: Alo&#x27;s early stages, Earth desk, UI kit <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M1-61">M1-61</a> Sound captions in the house style: on a panel, out of the walking view, no captions for interface clicks <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-2A">M3-2A</a> Chapter 2 assets: EN_Airlock, PR_PaperBee <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-94R">M3-94R</a> Record the three approved M3-94 lines and the two M3-97 sound effects with ElevenLabs <span class="chip ">human</span> <span class="chip ">P1</span></li>
+</ul></details>
+<details open><summary>Blocked (1)</summary><ul>
+<li><a class="id" href="#M1-52">M1-52</a> Opening beat 1: a 6 s Earth mustard-field shot and its wind-and-birds effect <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Night shift parked the work on branch night/M1-52: Sadman must review and approve the exact 2D Earth mustard-field start frame before video generation, and the approval must be qu…</div></li>
+</ul></details>
+<details><summary>To do (36)</summary><ul>
+<li><a class="id" href="#M1-24">M1-24</a> Fix the playtest and QA findings, then freeze the demo build <span class="chip ">codex</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M2-02">M2-02</a> NASA project page text, ready to paste <span class="chip ">claude</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M2-03">M2-03</a> Video 2 (240 s local judging) script, shot list and subtitles <span class="chip ">claude</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M2-04">M2-04</a> Record gameplay captures and narration for the videos <span class="chip ">human</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M2-05">M2-05</a> Edit Video 2 (≤240 s) with burned-in English subtitles <span class="chip ">claude</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M2-06">M2-06</a> Upload Video 2 by 13 Nov 18:30 <span class="chip ">human</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M2-07">M2-07</a> Video 3 (30 s global) with English subtitles <span class="chip ">claude</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M2-08">M2-08</a> Upload Video 3 by 14 Nov 09:00 <span class="chip ">human</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M2-09">M2-09</a> Seven-slide English deck (backup for the demo field) <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M2-10">M2-10</a> Fill in and submit the NASA project page <span class="chip ">human</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M2-12">M2-12</a> Rehearse the live 240 s pitch for local judging (14 Nov 11:00) <span class="chip ">human</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-2R">M3-2R</a> Chapter 2 rooms and locations <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-3A">M3-3A</a> Chapter 3 assets: EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-3R">M3-3R</a> Chapter 3 rooms and locations <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-4A">M3-4A</a> Chapter 4 assets: EN_Garage, EN_ColdTrap <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-4R">M3-4R</a> Chapter 4 rooms and locations <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-5A">M3-5A</a> Chapter 5 assets: PL_Cotton_Seedling, PR_ImpactMonitor, CH_Ferreira_Duty, CH_Cadet_DutyLayer <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-5R">M3-5R</a> Chapter 5 rooms and locations <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-6R">M3-6R</a> Chapter 6 rooms and locations <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-7R">M3-7R</a> Chapter 7 rooms and locations <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-8A">M3-8A</a> Chapter 8 assets: EN_MalapertSummit, EN_RelayRoad, EN_NoorRooftop, CH_Noor, CH_Rao <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-8R">M3-8R</a> Chapter 8 rooms and locations <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-97">M3-97</a> Cutscene staging from the narrative revision: CS-15 call, CS-17 final garden, CS-18 lamp blink <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-99">M3-99</a> Narrative props, plant stages and effects: Alo and Tara growth variants, nameplates, named mugs, clue props, two new SFX <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M1-57">M1-57</a> Chapter 1 messages: every scene joined to the next (at least 30 messages) <span class="chip ">claude</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-59">M1-59</a> Explainer clips: the Godot clip pipeline, Chapter 1&#x27;s clips, first-time cards and Journal How to <span class="chip ">antigravity</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M3-60">M3-60</a> The Moon you can walk: the region around the ridge on real terrain (Fable) <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-66">M3-66</a> Explainer clips for every Chapter 2-4 mechanic (5-8 in M3-76) <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-5T">M3-5T</a> Chapter 5 messages: every scene joined to the next <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-6T">M3-6T</a> Chapter 6 messages: every scene joined to the next <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-7T">M3-7T</a> Chapter 7 messages: every scene joined to the next <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-8T">M3-8T</a> Chapter 8 messages: every scene joined to the next <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M1-60">M1-60</a> Chapter 1 science explainers: the polar Sun, Earth&#x27;s position, crew needs, power, storm data, shielding, plant growth <span class="chip ">claude</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M3-68">M3-68</a> Science explainers for Chapters 2-4 and the Moon trainer (5-8 in M3-77) <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-76">M3-76</a> Explainer clips for every Chapter 5-8 mechanic <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-77">M3-77</a> Science explainers for Chapters 5-8 <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+</ul></details>
+<details><summary>Done (28)</summary><ul>
+<li><a class="id" href="#M1-10">M1-10</a> Play CS-01, CS-02 and CS-03 inside the campaign <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">commit feat: campaign plays media; run_tests 31/31; screenshots production/qa/evidence/M1-10_*.png; perf render_m110_m111.json</div></li>
+<li><a class="id" href="#M1-11">M1-11</a> Audio runtime in the campaign: voice with captions, music, effects <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">commit feat: campaign plays media; run_tests 31/31; screenshots production/qa/evidence/M1-11_*.png; perf render_m110_m111.json</div></li>
+<li><a class="id" href="#M1-12">M1-12</a> Cast the voices on ElevenLabs <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">production/audio/voice_cast.csv (10 speakers, eleven_v4; 5 v7 voices kept + Rafi/Rao/Family library voices, Noor=N. voice, Engineer=Ferreir…</div></li>
+<li><a class="id" href="#M1-14">M1-14</a> Generate Chapter 1 voice lines (49) <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">383/383 spoken lines at their voice_file paths (CH01 49 incl. 12 reused v7 takes); production/review/vo_review.md; vo_lines.csv status colu…</div></li>
+<li><a class="id" href="#M1-15">M1-15</a> Music CUE-01 to CUE-04 for Chapter 1 <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">CUE-01..04 (+05..12) in game/assets/audio/music/, -18 LUFS Vorbis, loops crossfaded; production/review/music_review.md</div></li>
+<li><a class="id" href="#M1-16">M1-16</a> Chapter 1 sound effects (16) and UI sounds <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">35/35 effects incl. UI confirm/soft error in game/assets/audio/sfx/, captions filled; production/review/sfx_review.md</div></li>
+<li><a class="id" href="#M1-25">M1-25</a> Re-shoot the three credit-blocked cutscene shots with motion <span class="chip ">gemini</span> <span class="chip ">P2</span><div class="meta">CS-02-C, CS-03-B, CS-03-C Seedance 2.5 shots generated, recomposed in v7, and encoded to OGV in game/assets/cutscenes/ (production/cutscene…</div></li>
+<li><a class="id" href="#M3-2C">M3-2C</a> Chapter 2 cutscenes: CS-04 <span class="chip ">gemini</span> <span class="chip ">P1</span><div class="meta">CS-04 (3 shots + music + VO) composed in v8 and encoded to game/assets/cutscenes/CS-04_The_Floor_Answers_First.ogv (production/cutscenes/v8…</div></li>
+<li><a class="id" href="#M3-2V">M3-2V</a> Chapter 2 voice lines (48) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md</div></li>
+<li><a class="id" href="#M3-2S">M3-2S</a> Chapter 2 music and effects: SFX_BRUSH_CONTACT, SFX_AIRLOCK_CYCLE, SFX_ALERT_PRESSURE, SFX_ALERT_STRUCTURAL, SFX_QUAKE_CONTACT, SFX_CUP_RATTLE <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md</div></li>
+<li><a class="id" href="#M3-3C">M3-3C</a> Chapter 3 cutscenes: CS-05, CS-06 <span class="chip ">gemini</span> <span class="chip ">P1</span><div class="meta">CS-05 (4 shots) and CS-06 (3 shots) composed in v8 and encoded to OGV in game/assets/cutscenes/ (production/cutscenes/v8/notes_A.md).</div></li>
+<li><a class="id" href="#M3-3V">M3-3V</a> Chapter 3 voice lines (48) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md</div></li>
+<li><a class="id" href="#M3-3S">M3-3S</a> Chapter 3 music and effects: CUE05, SFX_SEED_TICK, SFX_SUIT_BREATH, SFX_RADIO_LOCAL_IN, SFX_CLAMP_SEAT <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md</div></li>
+<li><a class="id" href="#M3-4C">M3-4C</a> Chapter 4 cutscenes: CS-07 <span class="chip ">gemini</span> <span class="chip ">P1</span><div class="meta">CS-07 (3 shots + CUE-06 + VO) composed in v8 and encoded to game/assets/cutscenes/CS-07_Something_With_Corners.ogv (production/cutscenes/v8…</div></li>
+<li><a class="id" href="#M3-4V">M3-4V</a> Chapter 4 voice lines (48) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md</div></li>
+<li><a class="id" href="#M3-4S">M3-4S</a> Chapter 4 music and effects: CUE06, SFX_ROVER_CABIN, SFX_ROVER_CHASSIS, SFX_SCANNER_BEEP <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md</div></li>
+<li><a class="id" href="#M3-5C">M3-5C</a> Chapter 5 cutscenes: CS-08, CS-09, CS-10 <span class="chip ">gemini</span> <span class="chip ">P1</span><div class="meta">CS-08 (music added), CS-09 (19.1 s with the chained shot C), CS-10 composed and encoded to game/assets/cutscenes/</div></li>
+<li><a class="id" href="#M3-5V">M3-5V</a> Chapter 5 voice lines (48) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md</div></li>
+<li><a class="id" href="#M3-5S">M3-5S</a> Chapter 5 music and effects: CUE07, SFX_CONNECTOR <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md</div></li>
+<li><a class="id" href="#M3-6C">M3-6C</a> Chapter 6 cutscenes: CS-11, CS-12 <span class="chip ">gemini</span> <span class="chip ">P1</span><div class="meta">CS-11, CS-12 composed and encoded to game/assets/cutscenes/</div></li>
+<li><a class="id" href="#M3-6V">M3-6V</a> Chapter 6 voice lines (48) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md</div></li>
+<li><a class="id" href="#M3-6S">M3-6S</a> Chapter 6 music and effects: CUE08, SFX_BREAKER_RESET <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md</div></li>
+<li><a class="id" href="#M3-7C">M3-7C</a> Chapter 7 cutscenes: CS-13 <span class="chip ">gemini</span> <span class="chip ">P1</span><div class="meta">CS-13 composed and encoded to game/assets/cutscenes/</div></li>
+<li><a class="id" href="#M3-7V">M3-7V</a> Chapter 7 voice lines (48) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md</div></li>
+<li><a class="id" href="#M3-7S">M3-7S</a> Chapter 7 music and effects: CUE09 <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md</div></li>
+<li><a class="id" href="#M3-8C">M3-8C</a> Chapter 8 cutscenes: CS-14, CS-15, CS-16, CS-17, CS-18 <span class="chip ">gemini</span> <span class="chip ">P1</span><div class="meta">CS-14..CS-17 composed and encoded (CS-15 holds the 2.6 s pause before Noor; CS-17 callbacks per 24_NARRATIVE_REVISION §7.6); CS-18 unchanged</div></li>
+<li><a class="id" href="#M3-8V">M3-8V</a> Chapter 8 voice lines (48) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">all spoken lines of the chapter at their voice_file paths; production/review/vo_review.md</div></li>
+<li><a class="id" href="#M3-8S">M3-8S</a> Chapter 8 music and effects: CUE10, CUE11, CUE12, SFX_BATTERY_SWAP, SFX_CONTROLLER_POWERUP <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">chapter cues and effects generated: game/assets/audio/music/, game/assets/audio/sfx/; production/review/music_review.md, sfx_review.md</div></li>
+</ul></details>
+</div>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">34 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<details open><summary>Next up today (5)</summary><ul>
+<li><a class="id" href="#M1-08">M1-08</a> P-01 Commission &amp; Plant: a real, interactive puzzle panel <span class="chip ">antigravity</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-18">M1-18</a> First five minutes: title screen, onboarding and UX polish <span class="chip ">claude</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-19">M1-19</a> Chapter 1 endings, decision replay and the science debrief <span class="chip ">codex</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-29">M1-29</a> Mission Trainer mode: every puzzle as a 5–10 minute training scenario <span class="chip ">antigravity</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-55">M1-55</a> Mission Table made simple: guided first shift, plain toggles, before-and-after forecast <span class="chip ">claude</span> <span class="chip ">P0</span></li>
+</ul></details>
+<details open><summary>Blocked (1)</summary><ul>
+<li><a class="id" href="#M1-37">M1-37</a> Four-player co-op Class mode: shared decisions, private role clues (as registered) <span class="chip ">antigravity</span> <span class="chip ">P0</span><div class="meta">Night shift parked the work on branch night/M1-37: run_tests.sh is not green: run_tests.sh timed out</div></li>
+</ul></details>
+<details><summary>To do (29)</summary><ul>
+<li><a class="id" href="#M1-31">M1-31</a> Make it fun: Chapter 1 game-feel and reward pass <span class="chip ">antigravity</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M3-2P">M3-2P</a> Chapter 2 puzzles P-03 and P-04 as real interactive panels <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-2U">M3-2U</a> Upgrade choice after Chapter 1 <span class="chip ">codex</span> <span class="chip ">P2</span></li>
+<li><a class="id" href="#M3-3P">M3-3P</a> Chapter 3 puzzles P-05 and P-06 as real interactive panels <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-3U">M3-3U</a> Upgrade choice after Chapter 2 <span class="chip ">codex</span> <span class="chip ">P2</span></li>
+<li><a class="id" href="#M3-4P">M3-4P</a> Chapter 4 puzzles P-07 and P-08 as real interactive panels <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-4U">M3-4U</a> Upgrade choice after Chapter 3 <span class="chip ">codex</span> <span class="chip ">P2</span></li>
+<li><a class="id" href="#M3-5P">M3-5P</a> Chapter 5 puzzles P-09 and P-10 as real interactive panels <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-5U">M3-5U</a> Upgrade choice after Chapter 4 <span class="chip ">codex</span> <span class="chip ">P2</span></li>
+<li><a class="id" href="#M3-6P">M3-6P</a> Chapter 6 puzzles P-11 and P-12 as real interactive panels <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-6U">M3-6U</a> Upgrade choice after Chapter 5 <span class="chip ">codex</span> <span class="chip ">P2</span></li>
+<li><a class="id" href="#M3-7P">M3-7P</a> Chapter 7 puzzles P-13 and P-14 as real interactive panels <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-7U">M3-7U</a> Upgrade choice after Chapter 6 <span class="chip ">codex</span> <span class="chip ">P2</span></li>
+<li><a class="id" href="#M3-8P">M3-8P</a> Chapter 8 puzzles P-15 and P-16 as real interactive panels <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-8U">M3-8U</a> Upgrade choice after Chapter 7 <span class="chip ">codex</span> <span class="chip ">P2</span></li>
+<li><a class="id" href="#M3-90">M3-90</a> Remaining UI families: journal, discovery log, rover, greenhouse, credits <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-91">M3-91</a> All 128 upgrade profiles complete the campaign <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-98">M3-98</a> Full-campaign journal: People and Science tabs, flag-gated names, superseded entries, chapter pages, Class mode <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M1-56">M1-56</a> Messages: inbox, arrival toasts, unlock triggers and the message validator <span class="chip ">codex</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M3-64">M3-64</a> The RPG layer: cadet record, skills, gear loadout, jobs board and rest <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-67">M3-67</a> Moon trainer: free training sorties on the real terrain from the title menu <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-2T">M3-2T</a> Chapter 2 messages: every scene joined to the next <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-3T">M3-3T</a> Chapter 3 messages: every scene joined to the next <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-4T">M3-4T</a> Chapter 4 messages: every scene joined to the next <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M1-62">M1-62</a> Goal card text for Chapters 2-8: an authored goal, why, prompt, result and hint for every job <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-69">M3-69</a> The junior-astronaut curriculum: competencies, the Academy manual and &#x27;what you learned&#x27; debriefs <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-70">M3-70</a> Steam-quality settings, controls and saves <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M1-64">M1-64</a> Hint player: three progressive levels (nudge, animated explainer, worked method) in a polished overlay <span class="chip ">codex</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M3-72">M3-72</a> Chapter select, mission list, progress and achievements screens <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+</ul></details>
+</div>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">20 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
+<li><a class="id" href="#M1-58">M1-58</a> Carrying payloads, and the shift-5 STACK as a real carry-and-place task <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/night-shift on 2026-11-05</div></li>
+</ul></details>
+<details open><summary>Next up today (3)</summary><ul>
+<li><a class="id" href="#M1-49">M1-49</a> Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges <span class="chip ">codex</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-71">M3-71</a> Save slots, autosave and versioned save migrations at Steam quality <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+</ul></details>
+<details open><summary>Blocked (1)</summary><ul>
+<li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Draft pre-release v0.1.0-preview.20261105 is on GitHub with both ZIPs (built from 57b837b; CI run 41970276437 green on Windows and macOS; production/qa/release_2026-11-05.md). Sad…</div></li>
+</ul></details>
+<details><summary>To do (17)</summary><ul>
+<li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-2M">M3-2M</a> Chapter 2 missions EX-M0201 to EX-M0204: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-3M">M3-3M</a> Chapter 3 missions EX-M0301 to EX-M0304: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-4M">M3-4M</a> Chapter 4 missions EX-M0401 to EX-M0404: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-5M">M3-5M</a> Chapter 5 missions EX-M0501 to EX-M0504: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-6M">M3-6M</a> Chapter 6 missions EX-M0601 to EX-M0604: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-7M">M3-7M</a> Chapter 7 missions EX-M0701 to EX-M0704: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-8M">M3-8M</a> Chapter 8 missions EX-M0801 to EX-M0804: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-93">M3-93</a> Full-game release builds and evidence package <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M2-13">M2-13</a> Browser candidate: reduce the download and bundle missing UI glyphs <span class="chip ">codex</span> <span class="chip ">P2</span></li>
+<li><a class="id" href="#M3-95">M3-95</a> Story echoes and environmental clues for Chapters 2-8 (decisions D4-D13, the Noor and Ferreira clue objects) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-61">M3-61</a> EVA: suit budget, scanner pulse, footing with load, and assist modes <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-62">M3-62</a> Things you build stay: markers, fixed lines, lights, repeaters and the coverage map <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-63">M3-63</a> The rover and the route planner <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-65">M3-65</a> Readable hazards: moonquake, cold, impact flashes, darkness, solar-storm shelter run <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-73">M3-73</a> Act One release candidate (Chapters 1-4): Windows and macOS builds, soak test, Steam-ready packaging <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+</ul></details>
+</div>
+<div class="panel" data-member="member4"><b>Fourth member (rename when they say who they are)</b> <span class="id">member4</span><div class="meta">QA and playtest lead · 5% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">8 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<details open><summary>Next up today (1)</summary><ul>
+<li><a class="id" href="#M1-65">M1-65</a> First-impressions playtest of today&#x27;s Chapter 1: what confuses a new player <span class="chip ">any</span> <span class="chip ">P1</span></li>
+</ul></details>
+<details><summary>To do (7)</summary><ul>
+<li><a class="id" href="#M1-21">M1-21</a> Chapter 1 full playthrough QA with screenshots <span class="chip ">antigravity</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-22">M1-22</a> Learner playtest (5+ players) with anonymous metrics <span class="chip ">human</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M2-11">M2-11</a> 12 Nov offline dry run and fallback video <span class="chip ">any</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M3-2Q">M3-2Q</a> Chapter 2 playthrough QA <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-4Q">M3-4Q</a> Chapter 4 playthrough QA <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-6Q">M3-6Q</a> Chapter 6 playthrough QA <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-8Q">M3-8Q</a> Chapter 8 playthrough QA <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+</ul></details>
+</div>
+<div class="panel" data-member="member5"><b>Fifth member (rename when they say who they are)</b> <span class="id">member5</span><div class="meta">Science, story and accessibility reviewer · 5% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">7 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<details open><summary>Next up today (1)</summary><ul>
+<li><a class="id" href="#M0-12">M0-12</a> Paste the official 28 Oct challenge statement into the repo <span class="chip ">human</span> <span class="chip ">P0</span></li>
+</ul></details>
+<details><summary>To do (6)</summary><ul>
+<li><a class="id" href="#M3-3Q">M3-3Q</a> Chapter 3 playthrough QA <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-5Q">M3-5Q</a> Chapter 5 playthrough QA <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-7Q">M3-7Q</a> Chapter 7 playthrough QA <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-92">M3-92</a> Full-campaign canon, learning and accessibility QA <span class="chip ">antigravity</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-74">M3-74</a> Act One full playthrough QA: canon, learning and accessibility (Chapters 1-4) <span class="chip ">any</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M3-75">M3-75</a> Science fact-check: Chapters 1-4 player text, messages, hints and data cards against their sources <span class="chip ">any</span> <span class="chip ">P1</span></li>
+</ul></details>
+</div>
+<div class="panel" data-member=""><b>Unassigned / earlier work</b><div class="meta">Done before the team split, or by someone not on the member list</div><div class="counts"><span class="chip s-done">44 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:100%"></i></div>
+<details><summary>Done (44)</summary><ul>
+<li><a class="id" href="#M0-01">M0-01</a> Reliable test runner that cannot pass a suite that failed to load <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">24/24 suites passed on 3 Nov; a deliberately unparseable suite is reported FAIL with the parse error.</div></li>
+<li><a class="id" href="#M0-02">M0-02</a> Fix the route, save, roster and harness defects from the 3 Nov bug hunt <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">game/tools/run_tests.sh: 24/24 suites passed; fixed B01 B02 B03 B04 B05 B09 B10 B11 B12 B17 B18 B19 B20 + harness a-d; not fixed none</div></li>
+<li><a class="id" href="#M0-03">M0-03</a> Delete the dead legacy code found by the bug hunt <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">game/tools/run_tests.sh: 22/22 suites passed; production UI 32 checks, full content 566 checks, science 33 checks, save recovery 92/92 pass…</div></li>
+<li><a class="id" href="#M0-10">M0-10</a> Get the early-start permission in writing from the Dhaka Local Lead <span class="chip ">human</span> <span class="chip ">P0</span><div class="meta">User confirmed on 3 Nov 2026 that the Dhaka Local Lead permitted the early start. Keep any written record (email/message) in the team Drive…</div></li>
+<li><a class="id" href="#M0-13">M0-13</a> Make the game NASA-data-first: map the official datasets to every puzzle <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">docs/SCIENCE_AND_DATA.md §B rewritten: B1 = 28 verified sources (NASA DONKI 2017+2012, GOES-13 NCEI, STEREO-A HET via CDAWeb HAPI, LRO CRaT…</div></li>
+<li><a class="id" href="#M0-14">M0-14</a> Offline NASA data fixtures with provenance <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">production/tools/fetch_nasa_data.py (stdlib, idempotent: keeps existing fixtures unless --refresh; --check validates offline) wrote 28 fixt…</div></li>
+<li><a class="id" href="#M0-15">M0-15</a> Data Card runtime: show the NASA source behind every number <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">game/tools/run_tests.sh: 25/25 suites passed; focused science 33 checks and production UI 32 checks pass. Rendered and reviewed production/…</div></li>
+<li><a class="id" href="#M0-16">M0-16</a> Licence and credits for an open-source, fully credited submission <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">LICENSE (Apache-2.0) already present. CREDITS.md written: team, engine/tools with licences, font audit, AI tools and the generated-content …</div></li>
+<li><a class="id" href="#M0-17">M0-17</a> AI-use disclosure ready for the project page <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">AI_PROMPT_LOG.md: 10 rows added (26 Oct 8-prop Tripo 3D backfill with task ids; 27 Oct Codex v7 runtime/review, refused Seedance CS-02-C/CS…</div></li>
+<li><a class="id" href="#M0-18">M0-18</a> Fix documentation drift so every AI reads one consistent truth <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Docs only. Handbook §3/§6/§8.1/§10/§12 (v8 cast 65/68 bones 44 clips; stale Theora/finger-bone items removed); GAMEPLAY_DESIGN_FINAL to can…</div></li>
+<li><a class="id" href="#M0-19">M0-19</a> Repo hygiene: template install, superseded art, LFS budget <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Sadman approved each item 4 Nov: template install kept local via .gitignore; superseded concepts kept and marked in production/README.md; 5…</div></li>
+<li><a class="id" href="#M1-01">M1-01</a> Visible world now: lit greybox rooms, lunar exterior and readable targets <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">game/tools/run_tests.sh: 23/23 suites passed; room presentation 126 checks, including actual prop bounds, plus existing production UI/world…</div></li>
+<li><a class="id" href="#M1-03">M1-03</a> Habitat kit and Chapter 1 room concept sheets for approval <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">Sheets in production/concept/environment_v1/ (kit A/B, LOC-01..04, LOC-06, two illustrated alternates; provenance.json); review sheet produ…</div></li>
+<li><a class="id" href="#M1-04">M1-04</a> Approve the habitat kit and room concept sheets <span class="chip ">human</span> <span class="chip ">P0</span><div class="meta">Sadman approved all sheets in production/concept/environment_v1/ on 5 Nov 2026 (&#x27;all are approved&#x27;); recorded in PRODUCTION_HANDBOOK.md §3.</div></li>
+<li><a class="id" href="#M1-05">M1-05</a> Generate and install the habitat kit (3D) <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">run_tests.sh 33/33 suites passed (habitat kit 224 checks incl. corridor/hatch physics rays; performance 537); verify_gate 124 assets 0 fail…</div></li>
+<li><a class="id" href="#M1-32">M1-32</a> Art direction: Death Stranding-scale lunar exteriors with the anime cast (look-dev for approval) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Four exterior setting studies plus matched Aurora A/B pair; six reviewed PNGs and reproducible Blender source/provenance in production/conc…</div></li>
+<li><a class="id" href="#M1-33">M1-33</a> Choose the exterior art direction <span class="chip ">human</span> <span class="chip ">P0</span><div class="meta">Tanvir explicitly approved A — cel shading and outlines in the M1-33 question. Recorded in PRODUCTION_HANDBOOK.md section 3 and production/…</div></li>
+<li><a class="id" href="#M1-35">M1-35</a> Lunar rock, boulder and regolith kit <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Option A surface review complete; 60 asset hashes unchanged; 51 verified registry rows. Asset gate: 100 assets, 0 failures. run_tests.sh: 3…</div></li>
+<li><a class="id" href="#M1-09">M1-09</a> P-02 Seven Shifts: the Mission Table plan the player actually makes <span class="chip ">antigravity</span> <span class="chip ">P0</span><div class="meta">run_tests.sh 32/32 suites passed (production/qa/evidence/M1-09_tests.txt); new suite game/tools/test_p02_mission_table.gd 78 checks: Bloom/…</div></li>
+<li><a class="id" href="#M1-13">M1-13</a> Approve the voice cast <span class="chip ">human</span> <span class="chip ">P0</span><div class="meta">Sadman 4 Nov: &#x27;do all the works that needed eleven labs now and continue with your plan&#x27; + &#x27;use the highest relevant quality voices&#x27;; per t…</div></li>
+<li><a class="id" href="#M1-17">M1-17</a> The crew is in the room: companions with idle, talk and look-at <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">run_tests.sh: 25/25 suites passed; campaign_crew 927 checks; 11 room screenshots production/qa/evidence/M1-17_LOC-*.png; production/review/…</div></li>
+<li><a class="id" href="#M1-26">M1-26</a> Discoveries enter the saved knowledge and evidence state (bug B16) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">run_tests.sh: 26/26 suites passed; final campaign_knowledge 41 checks; normal/150% rendered Journal screenshots production/qa/evidence/M1-2…</div></li>
+<li><a class="id" href="#M1-27">M1-27</a> Requirements alignment and the training decision for every mission <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">Wrote docs/REQUIREMENTS_ALIGNMENT.md (R01–R27 matrix mapping challenge rules, local judging criteria, and registered promise to current sto…</div></li>
+<li><a class="id" href="#M1-38">M1-38</a> AAA puzzle and clue design: every mission a story-driven investigation <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">game-design/22_PUZZLE_CLUE_DESIGN.md (32 missions); 142 canon quotes verified (production/tools/check_clue_quotes.py); M3-xP/M3-xM tasks no…</div></li>
+<li><a class="id" href="#M1-39">M1-39</a> Real NASA mission practice behind every decision (trade studies, flight rules, Go/No-Go, dose limits) <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">game-design/23_NASA_MISSION_PRACTICE.md written (MP-01..MP-08 with 10-12yo plain openers, exact NASA doc citations, P-01..P-16 traceability…</div></li>
+<li><a class="id" href="#M1-40">M1-40</a> Independent science review of Chapter 1 before the demo freeze <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">production/review/science_review_ch01.md: 4 blockers, 9 should-fix, 9 nits, 28 confirmed (sources checked live 4 Nov); follow-ups M1-42..M1…</div></li>
+<li><a class="id" href="#M1-28">M1-28</a> Outpost Status: the four competing demands always visible, with forecasts <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">run_tests.sh 24/24 suites; test_outpost_status 84 checks; production/qa/evidence/M1-28_*.png; production/review/execution/M1-28.md</div></li>
+<li><a class="id" href="#M1-30">M1-30</a> NASA data briefings and debriefs anyone can understand <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">mission_data_cards.json (32 cards, FK grade ~5.7, numbers read from fixtures by production/tools/build_mission_cards.py); ScienceData.missi…</div></li>
+<li><a class="id" href="#M2-01">M2-01</a> README for judges <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">README.md rewritten for judges (video and release links marked pending; team roles &#x27;to confirm&#x27;)</div></li>
+<li><a class="id" href="#M3-80">M3-80</a> Dated biology, inventories and resource ledgers through Chapters 2–8 (bugs B07, B08) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">run_tests.sh: 27/27 suites passed; final extended route 635 checks; later_numeric 388 checks incl 128 safe storm/water combinations; five r…</div></li>
+<li><a class="id" href="#M1-41">M1-41</a> Rewrite or retire 19_TRAINING_DECISIONS.md and fix the same canon drift in REQUIREMENTS_ALIGNMENT.md <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">19 retired to a pointer; REQUIREMENTS_ALIGNMENT.md fixed to canon; acceptance grep empty; all named fixtures exist; M1-29 refs point at 22 …</div></li>
+<li><a class="id" href="#M1-42">M1-42</a> Chapter 1 judge-facing text: Earth-link cutoff, AI disclosure, shielding source and storm card wording (M1-40 B1, B4, S1-S4, S8, S9, N1, N9) <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">Science + Sources discloses AI assets and lists sources; Earth-link cutoff wording; Townsend 1988 storm source; GOES west-sensor label + NO…</div></li>
+<li><a class="id" href="#M1-43">M1-43</a> Fix CS-03 science errors: five-petal Alo flower and sunrise sky glow (M1-40 B2, B3) <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">CS-03-A re-made (black sky, point Sun, vertical arrays; graded with production/tools/grade_cs03a.py) and CS-03-C re-made (four-petal cross …</div></li>
+<li><a class="id" href="#M1-44">M1-44</a> NASA fixture fixes: Earth elevation chart, OSDR false values, GOES official detector, story-value labels (M1-40 S3, S6, S7, N6) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Fix-round verification: GODOT=/Applications/Godot.app/Contents/MacOS/Godot game/tools/run_tests.sh: 31/31 suites passed (science 146 checks…</div></li>
+<li><a class="id" href="#M1-45">M1-45</a> CS-01 and CS-02 exterior shots: vertical Sun-facing arrays and a true-size Sun (M1-40 S5, N7) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">run_tests.sh 31/31 suites passed; shots CS-01-A and CS-02-A repainted (production/tools/repaint_vsat_arrays.py: NASA/TM-20210011743 vertica…</div></li>
+<li><a class="id" href="#M1-46">M1-46</a> Science docs: correct the shielding source, Earth-link wording, frost, water volume and CO2 lines (M1-40 S1 docs, N2-N5) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Docs-only edits in docs/SCIENCE_AND_DATA.md and game-design/10, 16, 22, 23 (S1 Townsend 1988 + NASA-STD-3001 V1 4031, B1 Earth-link wording…</div></li>
+<li><a class="id" href="#M1-47">M1-47</a> Save schema 3: record the player&#x27;s story choices and moments (story_log) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Ported valid fixes from origin/night/M1-47 (467a16f7458da2401d85fd9a79ad7f0846ad108e) while preserving current main: decision-label wrappin…</div></li>
+<li><a class="id" href="#M1-50">M1-50</a> Chapter 1 narrative text pack: journal entries, questions, resume templates, drawer-lid note, feedback text <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">python3 -m json.tool parses journal_text.json and story_echoes.json. production/qa/evidence/M1-50_text_check.py PASS (output: M1-50_text_ch…</div></li>
+<li><a class="id" href="#M1-48">M1-48</a> Journal v1 for the Chapter 1 demo: Now, Evidence, Garden and Decisions tabs plus the resume card <span class="chip ">antigravity</span> <span class="chip ">P0</span><div class="meta">run_tests.sh: 34/34 suites passed (test_journal_tabs.gd 281/281, test_campaign_knowledge.gd 46/46); JOURNAL CAPTURE RESULT: PASS (0 failure…</div></li>
+<li><a class="id" href="#M1-51">M1-51</a> Re-edit CS-01 into a cold open: exterior silence, interior hum, title over the gold band (existing footage only) <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">Fix round: ported origin/night/M1-51 and rebuilt the cut from the M1-45 fixed exterior (the parked .ogv was the conflict). v8 spec producti…</div></li>
+<li><a class="id" href="#M3-94">M3-94</a> Canon proposal pack from the narrative revision — needs Sadman&#x27;s approval first <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">All approved doc 24 items applied to the story sources, story-data.json/STORY_FULL.md, vo_lines.csv (3 text-only rows; recording is M3-94R)…</div></li>
+<li><a class="id" href="#M3-96">M3-96</a> Tara&#x27;s lifecycle in code: later maturity, harvest to a working stock, archived nameplate — needs Sadman&#x27;s approval first (M3-94) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">run_tests.sh: 34/34 suites passed (GODOT=godot_gated, twice); new suite game/tools/test_tara_lifecycle.gd 75 checks; Tara checks at EX-CH03…</div></li>
+<li><a class="id" href="#M2-14">M2-14</a> Bring docs/AI_USE.md up to date (the in-game disclosure points judges to it) <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">docs/AI_USE.md rewritten from AI_PROMPT_LOG.md (all 10 generative tools + non-AI tools + Whisper; 383 VO, 12 cues/16 files, 35 SFX, 18 cuts…</div></li>
+<li><a class="id" href="#M1-54">M1-54</a> Clean, professional HUD: one plain-language goal, the UI design system, no developer text <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">run_tests.sh: 36/36 suites passed (incl. new test_player_text.gd: PASS, 353 checks over every Chapter 1 scene, panel, journal tab, hint, da…</div></li>
+</ul></details>
+</div>
+</div>
 
   <h2>Continue (or go next)</h2>
   <div class="panel go">

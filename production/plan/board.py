@@ -22,6 +22,7 @@ Every change rewrites tasks.json and BOARD.html; commit and push both at once (s
 """
 import argparse
 import datetime
+import html
 import json
 import pathlib
 import sys
@@ -176,11 +177,76 @@ def describe(t, tasks):
     return "\n".join(lines) + "\n\nPROMPT\n" + t["prompt"]
 
 
+TEAM_CSS = """.grid.team { grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); align-items: start; }
+.team .panel, .task .meta { overflow-wrap: anywhere; }
+.team details { margin-top: 10px; }
+.team summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+.team ul { margin: 6px 0 0; padding-left: 18px; }
+.team li { margin: 6px 0; }
+.team .counts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.filters select { max-width: 100%; }
+"""
+DEADLINES_ANCHOR = '<div class="grid" id="deadlines"></div>'
+
+
+def _short(text, n=180):
+    text = " ".join(str(text or "").split())
+    return text if len(text) <= n else text[:n - 1] + "…"
+
+
+def team_html(data):
+    """BOARD.html's Team section: per member what is being worked on, what is next (take's order), blocked, to do, done."""
+    e, ids = html.escape, member_ids(data)
+    who = lambda t: (t.get("reserved_for") or "").lower() if (t.get("reserved_for") or "").lower() in ids else None
+    groups = [(m["id"].lower(), m) for m in data.get("members", [])]
+    groups.append((None, {"name": "Unassigned / earlier work", "role": "Done before the team split, or by someone not on the member list"}))
+    chip = lambda text, cls="": f'<span class="chip {cls}">{e(text)}</span>'
+
+    def li(t, extra=""):
+        return f'<li><a class="id" href="#{e(t["id"])}">{e(t["id"])}</a> {e(t.get("title", ""))} {chip(t["tool"])} {chip(t["priority"])}{extra}</li>'
+
+    def part(label, items, open_=True):
+        if not items:
+            return ""
+        return f'<details{" open" if open_ else ""}><summary>{label} ({len(items)})</summary><ul>\n' + "\n".join(items) + "\n</ul></details>"
+
+    cards = []
+    for mid, m in groups:
+        mine = [t for t in data["tasks"] if who(t) == mid]
+        if mid is None and not mine:
+            continue
+        own = {t["id"] for t in mine}
+        st = {s: [t for t in mine if t["status"] == s] for s in STATUSES}
+        nxt = [t for t in next_tasks(data, None, mid) if t["id"] in own][:5]  # the chunk `take` would claim
+        nxt += [t for t in next_tasks(data, "human", mid) if t["id"] in own and t["tool"] == "human"]  # done by hand, never taken by an AI
+        pct = round(100 * len(st["done"]) / max(len(mine), 1))
+        head = (f'<b>{e(m.get("name") or mid)}</b>' + (f' <span class="id">{e(mid)}</span>' if mid else "")
+                + f'<div class="meta">{e(m.get("role", ""))}' + (f' · {m["share"]}% share' if "share" in m else "") + "</div>"
+                + '<div class="counts">' + "".join(chip(f'{len(st[s])} {s.replace("_", " ")}', "s-" + s)
+                                                  for s in ("done", "in_progress", "blocked", "todo")) + "</div>"
+                + f'<div class="bar"><i style="width:{pct}%"></i></div>')
+        body = [
+            part("Working now", [li(t, f'<div class="meta">claimed by {e(t.get("owner") or "?")} on {e(t.get("updated", "?"))}</div>')
+                                 for t in st["in_progress"]]),
+            part("Next up today", [li(t) for t in nxt]),
+            part("Blocked", [li(t, f'<div class="meta">{e(_short(t.get("blocker") or t.get("note") or t.get("evidence")))}</div>')
+                             for t in st["blocked"]]),
+            part("To do", [li(t) for t in st["todo"] if t not in nxt], open_=False),
+            part("Done", [li(t, f'<div class="meta">{e(_short(t.get("evidence"), 140))}</div>') for t in st["done"]], open_=False),
+        ]
+        cards.append(f'<div class="panel" data-member="{e(mid or "")}">' + head + "\n" + "\n".join(b for b in body if b) + "\n</div>")
+    return ('<h2 id="team">Team</h2>\n<p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand '
+            "that member (up to 5, in work order), then any ready steps they do by hand.</p>\n"
+            '<div class="grid team">\n' + "\n".join(cards) + "\n</div>")
+
+
 def render(data):
     view = dict(data, updated=max(t.get("updated", "") for t in data["tasks"]))
     # One field per line, like tasks.json, so two teammates' saves merge in git like the JSON does.
     payload = json.dumps(view, indent=1, ensure_ascii=False).replace("</", "<\\/")
-    return TEMPLATE.read_text(encoding="utf-8").replace("/*BOARD_DATA*/null", payload)
+    page = TEMPLATE.read_text(encoding="utf-8").replace("/*BOARD_DATA*/null", payload)
+    page = page.replace("</style>", TEAM_CSS + "</style>", 1)  # payload has no "</", so these hit the template only
+    return page.replace(DEADLINES_ANCHOR, DEADLINES_ANCHOR + "\n\n  " + team_html(data), 1)
 
 
 def set_status(data, tid, status, **fields):
@@ -227,6 +293,9 @@ def self_test():
     data["tasks"][2]["reserved_for"] = "nobody"
     assert any("not in members" in p for p in validate(data))
     assert next_id(data, "A") == "A-01" and next_id({"tasks": [{"id": "M1-65"}, {"id": "M1-2A"}]}, "M1") == "M1-66"
+    data["tasks"][0].update(status="in_progress", owner="Ramim/codex", reserved_for="Ramim")
+    ramim = render(data).split('data-member="ramim"')[1].split("data-member=")[0]
+    assert "Working now" in ramim and 'href="#x"' in ramim, "Team section lists an in-progress task under its member"
 
 
 def main():
