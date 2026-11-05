@@ -657,7 +657,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [
     "M0-02"
@@ -676,7 +676,7 @@
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Problem: puzzles are receipt gates: each step is a 'USE' button that submits the correct answer pre-filled.\nGoal: the player calibrates the moisture probe (zero at dry 10 -> 0, span at wet 110 -> 100) and plants with moisture in 40–60, choosing\nthe values themselves, with predict -> test -> observe -> explain feedback and a Data Card link (M0-15) when available.\nDo: implement the P-01 panel per execution/PUZZLE_P01.md and execution/UI_09_SCIENTIFIC_PUZZLE.md through the existing PuzzleHost; remove\nP-01's pre-filled payloads; wrong answers give a helpful, non-punishing hint (SYS_22); keyboard, mouse and controller; text scaling; no\ntimer pressure in Family mode. Numbers come from game-design/08_PUZZLE_DESIGNS.md only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
-   "blocker": "Night shift parked the work on branch night/M1-08: ",
+   "blocker": "Needs M1-66 (Atik): P-01 mission and route still auto-supply answers and lack authoritative chosen-value calibration/moisture validation and panel hooks. No UI-only bypass; analysis complete, no runtime edits.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -5233,6 +5233,27 @@
    "updated": "2026-11-05",
    "prompt": "Goal: fresh eyes catch what the team no longer sees (doc 25 started exactly like this).\nDo: pull main, open the game (README 'Run the game'), start a New campaign and play 20-30 minutes of Chapter 1 without help; note every moment you did not know what to do or why, every bit of text you skipped, anything that looked broken or ugly, and what felt good; take a screenshot of each. Then ask 1-2 friends who have never seen the game to do the same while you watch silently. Write production/qa/playtests/first_impressions/report.md (moment, screenshot, what the player expected, severity) and file each real problem as a board task for the owner of that area (MASTER_PLAN.md §7).\nAcceptance: report.md with at least 10 observations and screenshots; every problem is a task with an owner.",
    "reserved_for": "member4",
+   "effort": 2
+  },
+  {
+   "id": "M1-66",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "P-01 runtime: validate player inputs and expose puzzle-panel route hooks",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/missions/",
+    "game/scripts/campaign/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "M1-08 is blocked by missing authoritative P-01 input and route hooks. Repro: campaign/chapter1_campaign.gd interact_nearby handles P-02 as a panel but sends P-01 to perform_target with no user payload; missions/p01_commission_plant.gd _validate accepts set_zero/set_span/recheck based on action order only, water defaults to 50, and chapter1_route.gd _apply_target_result also supplies missing moisture=50. This lets a USE action solve the puzzle automatically.\nExpose the P-01 query and explicit selected-input command interface for Ramim's UI/PuzzleHost without changing P-02 or other puzzle behavior. Authoritatively validate calibration against the documented dry 10 -> 0 and wet 110 -> 100 references, require the recheck, require explicit planting/watering inputs, accept moisture 40..60 inclusive, and remove missing-value success defaults. Wrong, missing, non-finite and out-of-range inputs must give explanatory retry feedback without changing state, costs, flags or receipts. Preserve save/load, cancel/reopen and duplicate-action idempotence. The nearby use flow must request the UI rather than automatically supply successful values. Keep UI implementation in Ramim folders; publish the exact route/query/payload contract in evidence and notify Ramim to release/resume blocked M1-08 once available.\nRead execution/PUZZLE_P01.md, execution/SYS_22_PUZZLE_HOST_HINTS.md, game-design/08_PUZZLE_DESIGNS.md P-01 and the current PuzzleHost/Mission Table contracts. Acceptance: current runner green, focused real-route tests for correct/wrong/missing/non-finite calibration and moisture 39/40/60/61, unchanged snapshots after rejected/preview/cancelled actions, one receipt per valid action, no auto-solved physical USE path.",
+   "reserved_for": "atik",
    "effort": 2
   }
  ],
