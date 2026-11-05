@@ -1,0 +1,87 @@
+{
+ "id": "sci_cotton_moon",
+ "title": "Cotton on the Moon",
+ "level": "explainer",
+ "length_s": 34,
+ "fps": 24,
+ "purpose": "Teach what the Chang'e-4 cotton experiment showed (a seedling) and what it did not (no flowers).",
+ "scenes": "cotton_moon.js",
+ "used_by": [
+  "EX-M0502",
+  "EX-M0504"
+ ],
+ "sources": [
+  "change4_cotton"
+ ],
+ "values": {
+  "year": {
+   "from": "change4_cotton:values.year"
+  }
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 22,
+   "scene": "can",
+   "label": "measured",
+   "credit": "CNSA Chang'e-4 biological experiment (Chongqing University)",
+   "lander": "Chang'e-4 lander, far side",
+   "can": "Sealed can",
+   "yes": "Sprouted: yes",
+   "no": "Flowered: no"
+  },
+  {
+   "from": 22,
+   "to": 27,
+   "scene": "card",
+   "label": "measured",
+   "credit": "Chang'e-4",
+   "card": "A sealed experiment, not a garden",
+   "sub": "The finale's cotton is fiction"
+  },
+  {
+   "from": 27,
+   "to": 34,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.6,
+   "In {year}, China's Chang'e-4 lander carried seeds to the Moon's far side."
+  ],
+  [
+   9.0,
+   13.4,
+   "Inside a small sealed can, a cotton seed sprouted into a green seedling."
+  ],
+  [
+   13.8,
+   17.8,
+   "So a seed can sprout on the Moon, inside a sealed can."
+  ],
+  [
+   18.2,
+   21.6,
+   "But it never flowered or made seeds."
+  ],
+  [
+   22.4,
+   26.6,
+   "That was one small, sealed experiment."
+  ]
+ ],
+ "ends_on": "A sprout is a start, not a harvest. Growing food on the Moon still has to be proven.",
+ "literals": [
+  {
+   "text": "Chang'e-4",
+   "why": "mission name"
+  }
+ ]
+}

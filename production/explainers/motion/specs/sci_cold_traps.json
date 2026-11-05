@@ -1,0 +1,119 @@
+{
+ "id": "sci_cold_traps",
+ "title": "Why cold traps hold ice",
+ "level": "explainer",
+ "length_s": 38,
+ "fps": 24,
+ "purpose": "Teach permanent shadow at the pole, how cold it gets there, and why that keeps ice.",
+ "scenes": "cold_traps.js",
+ "used_by": [
+  "EX-M0403",
+  "EX-M0404",
+  "P-07"
+ ],
+ "sources": [
+  "diviner_cold_traps",
+  "kaguya_shackleton_floor"
+ ],
+ "values": {
+  "k": {
+   "from": "diviner_cold_traps:values.subsurface_temperature_K_lcross_site"
+  },
+  "c": {
+   "from": "diviner_cold_traps:derived.cold_trap_celsius",
+   "fmt": "{:+.0f}"
+  },
+  "floor_c": {
+   "from": "kaguya_shackleton_floor:derived.shackleton_floor_celsius_below",
+   "fmt": "{:+.0f}"
+  }
+ },
+ "series": {
+  "c": "diviner_cold_traps:derived.cold_trap_celsius",
+  "floor_c": "kaguya_shackleton_floor:derived.shackleton_floor_celsius_below"
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 15,
+   "scene": "shadow",
+   "label": "diagram",
+   "credit": "Not to scale",
+   "sun": "Low Sun",
+   "floor": "Never sunlit",
+   "rim": "Sunlit rim"
+  },
+  {
+   "from": 15,
+   "to": 28,
+   "scene": "thermo",
+   "label": "measured",
+   "credit": "NASA LRO Diviner (Paige et al. 2010) · JAXA Kaguya (Haruyama et al. 2008)",
+   "a": "Shackleton floor: below {floor_c} °C",
+   "b": "Cold trap near Cabeus: {c} °C",
+   "ice": "Ice stays frozen"
+  },
+  {
+   "from": 28,
+   "to": 33,
+   "scene": "card",
+   "label": "measured",
+   "credit": "Diviner estimate at one site",
+   "card": "One spot's temperature estimate",
+   "sub": "The vault site in the game is fiction"
+  },
+  {
+   "from": 33,
+   "to": 38,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.4,
+   "Near the pole, the Sun stays so low that some crater floors never see it."
+  ],
+  [
+   8.8,
+   12.8,
+   "Those floors sit in shadow all year, every year."
+  ],
+  [
+   15.4,
+   19.4,
+   "In that dark, Shackleton's floor is colder than {floor_c} °C."
+  ],
+  [
+   19.8,
+   24.2,
+   "One cold trap measured by NASA's Diviner is about {c} °C."
+  ],
+  [
+   24.6,
+   27.8,
+   "Ice that drifts in there stays frozen for a very long time."
+  ],
+  [
+   28.4,
+   32.6,
+   "That number is an estimate for one spot."
+  ]
+ ],
+ "ends_on": "The coldest places keep ice, but they are also the hardest places to work.",
+ "literals": [
+  {
+   "text": "Paige et al. 2010",
+   "why": "source citation, diviner_cold_traps citation"
+  },
+  {
+   "text": "Haruyama et al. 2008",
+   "why": "source citation, kaguya_shackleton_floor citation"
+  }
+ ]
+}

@@ -1,5 +1,5 @@
 ## Windowed M1-63 evidence: plays each registered science explainer in Godot and saves what the player sees.
-##   Godot --path game --windowed --script res://tools/capture_explainers_m163.gd
+##   Godot --path game --windowed --script res://tools/capture_explainers_m163.gd [-- <clip id> ...]
 extends SceneTree
 
 const REGISTRY := "res://resources/campaign/content/explainers.json"
@@ -18,6 +18,9 @@ func _run() -> void:
 	back.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root.add_child(back)
 	var entries: Array = JSON.parse_string(FileAccess.get_file_as_string(REGISTRY)).get("explainers", [])
+	var only := OS.get_cmdline_user_args()   # optional clip ids after "--"; none means every clip
+	if not only.is_empty():
+		entries = entries.filter(func(e): return only.has(String(e["id"])))
 	for entry: Dictionary in entries:
 		var player := VideoStreamPlayer.new()
 		player.stream = load(String(entry["path"]))
@@ -33,7 +36,7 @@ func _run() -> void:
 				await process_frame
 				waited += 1
 			await RenderingServer.frame_post_draw
-			var path := ProjectSettings.globalize_path("res://../production/qa/evidence/M1-63_%s_%02ds.png" % [entry["id"], int(t)])
+			var path := ProjectSettings.globalize_path("res://../production/qa/evidence/explainer_%s_%02ds.png" % [entry["id"], int(t)])
 			if root.get_texture().get_image().save_png(path) != OK:
 				failures += 1
 			print("M1-63 evidence: ", path)

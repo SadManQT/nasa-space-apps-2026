@@ -162,6 +162,14 @@
       lines.forEach((l, i) => text(l, W / 2, 540 + i * 104 + (1 - k) * 24, { size: 88, weight: 700, align: 'center', alpha: k }));
       line(W / 2 - 220, 596 + (lines.length - 1) * 104, W / 2 + 220, 596 + (lines.length - 1) * 104, { color: C.accent, width: 4, p: es(u, .5, 1.6) });
     },
+    card(g, u, b) {   // a short statement card (where the data stops); fields: card, sub
+      const k = pop(u, .1, 1.0);
+      g.save(); g.translate(W / 2, 440); g.scale(k, k); g.translate(-W / 2, -440);
+      panel(W / 2 - 540, 320, 1080, 250);
+      wrap(b.card, 960, 44, 700).forEach((l, i) => text(l, W / 2, 420 + i * 54, { size: 44, weight: 700, align: 'center', color: C.accent }));
+      wrap(b.sub || '', 960, 30, 600).forEach((l, i) => text(l, W / 2, 500 + i * 38, { size: 30, weight: 600, align: 'center', alpha: ex(seg(u, .6, 1.4)) * Math.min(1, k) }));
+      g.restore();
+    },
     takeaway(g, u, b) {
       const k = ex(seg(u, .1, 1));
       const lines = wrap(b.text || SPEC.ends_on, 1240, 60, 600), h = lines.length * 80 + 170, y = 430 - h / 2;

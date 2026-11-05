@@ -1,0 +1,122 @@
+{
+ "id": "sci_shielding",
+ "title": "What shielding does",
+ "level": "explainer",
+ "length_s": 42,
+ "fps": 24,
+ "purpose": "Teach how matter, especially water, slows fast protons, what a model storm dose looks like behind thicker walls, and that dose never reaches zero.",
+ "scenes": "shielding.js",
+ "used_by": [
+  "EX-M0103",
+  "EX-M0702",
+  "P-02",
+  "P-14"
+ ],
+ "sources": [
+  "clowdsley_2021_shielding"
+ ],
+ "values": {
+  "d5": {
+   "from": "clowdsley_2021_shielding:values.aug1972_spe_effective_dose_mSv_no_curtain.5",
+   "fmt": "{:.0f}"
+  },
+  "d15": {
+   "from": "clowdsley_2021_shielding:values.aug1972_spe_effective_dose_mSv_no_curtain.15",
+   "fmt": "{:.0f}"
+  }
+ },
+ "series": {
+  "dose": "clowdsley_2021_shielding:values.aug1972_spe_effective_dose_mSv_no_curtain"
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 16,
+   "scene": "stop",
+   "label": "diagram",
+   "credit": "Not to scale",
+   "wall": "Water wall",
+   "protons": "Fast protons",
+   "through": "Fewer get through"
+  },
+  {
+   "from": 16,
+   "to": 30,
+   "scene": "chart",
+   "label": "model",
+   "credit": "NASA (Clowdsley 2021) · model of the August 1972 solar storm",
+   "x_title": "Shielding thickness",
+   "unit": "g/cm²",
+   "y_title": "Dose (mSv)",
+   "zero": "Never zero"
+  },
+  {
+   "from": 30,
+   "to": 36,
+   "scene": "alara",
+   "label": "diagram",
+   "credit": "How crews stay safe",
+   "a": "Shield up",
+   "b": "Get in fast",
+   "c": "Stay inside"
+  },
+  {
+   "from": 36,
+   "to": 42,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.4,
+   "Fast protons lose energy as they push through anything in their way."
+  ],
+  [
+   8.8,
+   12.8,
+   "Water is great at this, because it is packed with light hydrogen atoms."
+  ],
+  [
+   13.0,
+   15.8,
+   "The thicker the wall, the fewer get through."
+  ],
+  [
+   16.4,
+   20.6,
+   "A model of a huge 1972 solar storm shows what thicker shielding does."
+  ],
+  [
+   21.0,
+   25.4,
+   "Behind the thinnest wall, about {d5} mSv. Behind the thickest, about {d15}."
+  ],
+  [
+   25.8,
+   29.6,
+   "Thicker walls cut the dose, but it never drops to zero."
+  ],
+  [
+   30.4,
+   35.6,
+   "So crews do three things: put shielding up, get behind it fast, and stay there."
+  ]
+ ],
+ "ends_on": "Every layer of water helps, but only if it is in place before the protons arrive.",
+ "literals": [
+  {
+   "text": "1972",
+   "why": "the August 1972 solar particle event that Clowdsley 2021 models (fixture key aug1972_spe)"
+  },
+  {
+   "text": "Clowdsley 2021",
+   "why": "source citation, clowdsley_2021_shielding citation field"
+  }
+ ]
+}

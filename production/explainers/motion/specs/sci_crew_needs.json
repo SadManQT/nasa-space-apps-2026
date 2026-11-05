@@ -1,0 +1,134 @@
+{
+ "id": "sci_crew_needs",
+ "title": "Air, water and food for a crew",
+ "level": "explainer",
+ "length_s": 39,
+ "fps": 24,
+ "purpose": "Teach the daily oxygen, water and food one person needs (NASA BVAD), that a crew multiplies it, and why margins matter.",
+ "scenes": "crew_needs.js",
+ "used_by": [
+  "EX-M0101",
+  "EX-M0301",
+  "EX-M0304",
+  "EX-M0501",
+  "EX-M0802",
+  "P-02"
+ ],
+ "sources": [
+  "bvad_2022_metabolic"
+ ],
+ "values": {
+  "o2": {
+   "from": "bvad_2022_metabolic:values.o2_kg_per_crew_day",
+   "fmt": "{:.1f}"
+  },
+  "water": {
+   "from": "bvad_2022_metabolic:values.potable_water_kg_per_crew_day",
+   "fmt": "{:.1f}"
+  },
+  "food": {
+   "from": "bvad_2022_metabolic:values.food_solids_kg_per_crew_day",
+   "fmt": "{:.1f}"
+  },
+  "co2": {
+   "from": "bvad_2022_metabolic:values.co2_kg_per_crew_day",
+   "fmt": "{:.1f}"
+  }
+ },
+ "series": {
+  "o2": "bvad_2022_metabolic:values.o2_kg_per_crew_day",
+  "water": "bvad_2022_metabolic:values.potable_water_kg_per_crew_day",
+  "food": "bvad_2022_metabolic:values.food_solids_kg_per_crew_day",
+  "co2": "bvad_2022_metabolic:values.co2_kg_per_crew_day"
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 20,
+   "scene": "day",
+   "label": "model",
+   "credit": "NASA Baseline Values and Assumptions (BVAD) · planning values",
+   "who": "One person, one day",
+   "o2_l": "Oxygen",
+   "water_l": "Water",
+   "food_l": "Food",
+   "co2_l": "Carbon dioxide out",
+   "o2_v": "{o2} kg",
+   "water_v": "{water} kg",
+   "food_v": "{food} kg",
+   "co2_v": "{co2} kg"
+  },
+  {
+   "from": 20,
+   "to": 31,
+   "scene": "crew",
+   "label": "model",
+   "credit": "NASA BVAD · four crew members",
+   "times": "×4 every day",
+   "missing": "Missing any one: the crew cannot stay"
+  },
+  {
+   "from": 31,
+   "to": 34,
+   "scene": "limits",
+   "label": "model",
+   "credit": "NASA BVAD planning values",
+   "card": "Planning values for an average adult",
+   "sub": "The game counts air and food in simpler units"
+  },
+  {
+   "from": 34,
+   "to": 39,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.4,
+   "Every day, one astronaut needs three things: air, water and food."
+  ],
+  [
+   8.8,
+   12.2,
+   "About {o2} kg of oxygen to breathe."
+  ],
+  [
+   12.6,
+   16.0,
+   "About {water} kg of water to drink, and {food} kg of food."
+  ],
+  [
+   16.4,
+   19.6,
+   "And they breathe out about {co2} kg of carbon dioxide."
+  ],
+  [
+   20.4,
+   24.4,
+   "A crew of four needs four times as much, every single day."
+  ],
+  [
+   24.8,
+   28.4,
+   "Without any one of the three, the crew cannot stay."
+  ],
+  [
+   31.3,
+   33.9,
+   "These are planning values for an average adult."
+  ]
+ ],
+ "ends_on": "Each shift uses a little of everything. Keep a margin, so one bad night cannot run you out.",
+ "literals": [
+  {
+   "text": "×4",
+   "why": "the crew size (four) shown as a multiplier, not a measurement"
+  }
+ ]
+}

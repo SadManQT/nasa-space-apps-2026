@@ -1,0 +1,118 @@
+{
+ "id": "sci_solar_power",
+ "title": "Solar power and batteries",
+ "level": "explainer",
+ "length_s": 41,
+ "fps": 24,
+ "purpose": "Teach why polar solar panels stand tall, how a battery stores and spills power, and what darkness does to a base.",
+ "scenes": "solar_power.js",
+ "used_by": [
+  "EX-M0101",
+  "EX-M0503",
+  "EX-M0604",
+  "P-01",
+  "P-02",
+  "P-11"
+ ],
+ "sources": [
+  "vsat_relocatable_array"
+ ],
+ "values": {
+  "kw": {
+   "from": "vsat_relocatable_array:values.array_power_kW"
+  },
+  "mast": {
+   "from": "vsat_relocatable_array:values.mast_length_m"
+  },
+  "blanket": {
+   "from": "vsat_relocatable_array:values.blanket_height_m"
+  }
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 15,
+   "scene": "array",
+   "label": "model",
+   "credit": "NASA design study · relocatable {kw} kW solar array",
+   "sun": "Low Sun",
+   "mast_l": "Mast: {mast} m",
+   "blanket_l": "Panel raised {blanket} m above the ground"
+  },
+  {
+   "from": 15,
+   "to": 27,
+   "scene": "tank",
+   "label": "diagram",
+   "credit": "How a battery works",
+   "tank": "Battery",
+   "in_l": "From the panels",
+   "out_l": "To the base",
+   "spill": "Full: extra power is lost"
+  },
+  {
+   "from": 27,
+   "to": 35,
+   "scene": "dark",
+   "label": "diagram",
+   "credit": "How a battery works",
+   "dark": "No sunlight",
+   "empty": "Empty: lights and heaters go dark",
+   "tank": "Battery"
+  },
+  {
+   "from": 35,
+   "to": 41,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.4,
+   "Near the pole the Sun stays low, so solar panels stand tall and upright."
+  ],
+  [
+   8.8,
+   12.4,
+   "This NASA design hangs a {kw} kW panel from a {mast} m mast."
+  ],
+  [
+   12.6,
+   14.8,
+   "It turns to keep facing the Sun."
+  ],
+  [
+   15.4,
+   19.4,
+   "A battery works like a water tank: sunlight fills it, the base drains it."
+  ],
+  [
+   19.8,
+   23.4,
+   "When the tank is full, any extra power spills away and is lost."
+  ],
+  [
+   23.8,
+   26.6,
+   "So spare power is best used while you have it."
+  ],
+  [
+   27.4,
+   31.0,
+   "When the Sun hides, nothing flows in. The base lives on the tank."
+  ],
+  [
+   31.4,
+   34.6,
+   "If the tank runs dry, the lights and heaters go dark."
+  ]
+ ],
+ "ends_on": "Use spare power before it spills, and keep enough in the tank for the dark.",
+ "literals": []
+}

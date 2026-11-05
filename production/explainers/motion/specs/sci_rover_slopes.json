@@ -1,0 +1,98 @@
+{
+ "id": "sci_rover_slopes",
+ "title": "Rovers and slopes",
+ "level": "explainer",
+ "length_s": 36,
+ "fps": 24,
+ "purpose": "Teach why rovers have a slope limit, what VIPER's design limit is, and why the safe route can be the longer one.",
+ "scenes": "rover_slopes.js",
+ "used_by": [
+  "EX-M0401",
+  "P-08",
+  "P-15"
+ ],
+ "sources": [
+  "viper_slope_limit"
+ ],
+ "values": {
+  "slope": {
+   "from": "viper_slope_limit:values.max_incline_deg"
+  }
+ },
+ "series": {
+  "slope": "viper_slope_limit:values.max_incline_deg"
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 18,
+   "scene": "climb",
+   "label": "measured",
+   "credit": "NASA VIPER rover design figure",
+   "ok": "Up to {slope}°: it climbs",
+   "slip": "Steeper: the wheels slip"
+  },
+  {
+   "from": 18,
+   "to": 27,
+   "scene": "route",
+   "label": "diagram",
+   "credit": "Planning a route",
+   "steep": "Short but too steep",
+   "gentle": "Longer, gentle, safe"
+  },
+  {
+   "from": 27,
+   "to": 31,
+   "scene": "card",
+   "label": "measured",
+   "credit": "NASA VIPER",
+   "card": "VIPER's design figure",
+   "sub": "The game's rover and its roads are fiction"
+  },
+  {
+   "from": 31,
+   "to": 36,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.4,
+   "Lunar dust is loose, so steep slopes make rover wheels slip."
+  ],
+  [
+   8.8,
+   12.8,
+   "NASA's VIPER rover was designed to climb slopes up to {slope}°."
+  ],
+  [
+   13.2,
+   17.4,
+   "Any steeper, and it has to find another way around."
+  ],
+  [
+   18.4,
+   22.6,
+   "On a map, the shortest line can be the steepest."
+  ],
+  [
+   23.0,
+   26.6,
+   "A longer, gentler route is often the safe one."
+  ],
+  [
+   27.4,
+   30.6,
+   "That limit is VIPER's design figure."
+  ]
+ ],
+ "ends_on": "Check the slope before you drive. The short way is not always the safe way.",
+ "literals": []
+}

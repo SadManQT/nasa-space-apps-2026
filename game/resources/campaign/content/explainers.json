@@ -3,6 +3,449 @@
  "about": "Explainer clips the hint player, data cards and Journal play (MASTER_PLAN.md section 5). Science explainers are built by production/tools/motion/build.py from production/explainers/motion/specs/; do not edit their entries by hand.",
  "explainers": [
   {
+   "id": "sci_cold_traps",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Why cold traps hold ice",
+   "path": "res://assets/explainers/science/sci_cold_traps.ogv",
+   "length_s": 38.04,
+   "labels": [
+    "diagram",
+    "measured"
+   ],
+   "sources": [
+    "diviner_cold_traps",
+    "kaguya_shackleton_floor"
+   ],
+   "used_by": [
+    "EX-M0403",
+    "EX-M0404",
+    "P-07"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.4,
+     "text": "Near the pole, the Sun stays so low that some crater floors never see it."
+    },
+    {
+     "start": 8.8,
+     "end": 12.8,
+     "text": "Those floors sit in shadow all year, every year."
+    },
+    {
+     "start": 15.4,
+     "end": 19.4,
+     "text": "In that dark, Shackleton's floor is colder than −183 °C."
+    },
+    {
+     "start": 19.8,
+     "end": 24.2,
+     "text": "One cold trap measured by NASA's Diviner is about −235 °C."
+    },
+    {
+     "start": 24.6,
+     "end": 27.8,
+     "text": "Ice that drifts in there stays frozen for a very long time."
+    },
+    {
+     "start": 28.4,
+     "end": 32.6,
+     "text": "That number is an estimate for one spot."
+    }
+   ],
+   "ends_on": "The coldest places keep ice, but they are also the hardest places to work.",
+   "spec": "production/explainers/motion/specs/sci_cold_traps.json"
+  },
+  {
+   "id": "sci_cotton_moon",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Cotton on the Moon",
+   "path": "res://assets/explainers/science/sci_cotton_moon.ogv",
+   "length_s": 34.04,
+   "labels": [
+    "measured"
+   ],
+   "sources": [
+    "change4_cotton"
+   ],
+   "used_by": [
+    "EX-M0502",
+    "EX-M0504"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.6,
+     "text": "In 2019, China's Chang'e-4 lander carried seeds to the Moon's far side."
+    },
+    {
+     "start": 9.0,
+     "end": 13.4,
+     "text": "Inside a small sealed can, a cotton seed sprouted into a green seedling."
+    },
+    {
+     "start": 13.8,
+     "end": 17.8,
+     "text": "So a seed can sprout on the Moon, inside a sealed can."
+    },
+    {
+     "start": 18.2,
+     "end": 21.6,
+     "text": "But it never flowered or made seeds."
+    },
+    {
+     "start": 22.4,
+     "end": 26.6,
+     "text": "That was one small, sealed experiment."
+    }
+   ],
+   "ends_on": "A sprout is a start, not a harvest. Growing food on the Moon still has to be proven.",
+   "spec": "production/explainers/motion/specs/sci_cotton_moon.json"
+  },
+  {
+   "id": "sci_crew_needs",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Air, water and food for a crew",
+   "path": "res://assets/explainers/science/sci_crew_needs.ogv",
+   "length_s": 39.04,
+   "labels": [
+    "model"
+   ],
+   "sources": [
+    "bvad_2022_metabolic"
+   ],
+   "used_by": [
+    "EX-M0101",
+    "EX-M0301",
+    "EX-M0304",
+    "EX-M0501",
+    "EX-M0802",
+    "P-02"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.4,
+     "text": "Every day, one astronaut needs three things: air, water and food."
+    },
+    {
+     "start": 8.8,
+     "end": 12.2,
+     "text": "About 0.9 kg of oxygen to breathe."
+    },
+    {
+     "start": 12.6,
+     "end": 16.0,
+     "text": "About 3.2 kg of water to drink, and 0.8 kg of food."
+    },
+    {
+     "start": 16.4,
+     "end": 19.6,
+     "text": "And they breathe out about 1.1 kg of carbon dioxide."
+    },
+    {
+     "start": 20.4,
+     "end": 24.4,
+     "text": "A crew of four needs four times as much, every single day."
+    },
+    {
+     "start": 24.8,
+     "end": 28.4,
+     "text": "Without any one of the three, the crew cannot stay."
+    },
+    {
+     "start": 31.3,
+     "end": 33.9,
+     "text": "These are planning values for an average adult."
+    }
+   ],
+   "ends_on": "Each shift uses a little of everything. Keep a margin, so one bad night cannot run you out.",
+   "spec": "production/explainers/motion/specs/sci_crew_needs.json"
+  },
+  {
+   "id": "sci_earth_position",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Where is Earth from the pole?",
+   "path": "res://assets/explainers/science/sci_earth_position.ogv",
+   "length_s": 42.04,
+   "labels": [
+    "model"
+   ],
+   "sources": [
+    "jpl_horizons_ch1_sky",
+    "jpl_ipn_42_176_dte"
+   ],
+   "used_by": [
+    "EX-M0104",
+    "EX-M0804",
+    "P-02"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.4,
+     "text": "From the south pole, Earth never climbs high. It hugs the horizon."
+    },
+    {
+     "start": 8.8,
+     "end": 13.0,
+     "text": "Through April 2046 it rocks slowly up above the edge, then down below it."
+    },
+    {
+     "start": 13.4,
+     "end": 17.6,
+     "text": "From 15 April to 28 April, Earth is below the horizon: no direct radio link."
+    },
+    {
+     "start": 18.0,
+     "end": 20.6,
+     "text": "Chapter 1's night falls inside that gap."
+    },
+    {
+     "start": 21.4,
+     "end": 25.6,
+     "text": "On the best peak near the pole, Earth is in view 51% of the time."
+    },
+    {
+     "start": 26.0,
+     "end": 29.4,
+     "text": "The same peak gets sunlight 92% of the time."
+    },
+    {
+     "start": 29.8,
+     "end": 32.6,
+     "text": "That is why relay stations go on high peaks."
+    },
+    {
+     "start": 33.3,
+     "end": 36.8,
+     "text": "So in the game, shift 4's link cutoff is a training drill."
+    }
+   ],
+   "ends_on": "When Earth is out of view, no one can answer quickly. Your crew plans and decides on its own.",
+   "spec": "production/explainers/motion/specs/sci_earth_position.json"
+  },
+  {
+   "id": "sci_impact_flashes",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Impact flashes",
+   "path": "res://assets/explainers/science/sci_impact_flashes.ogv",
+   "length_s": 38.04,
+   "labels": [
+    "diagram",
+    "measured"
+   ],
+   "sources": [
+    "meo_lunar_impact_flashes"
+   ],
+   "used_by": [
+    "EX-M0503",
+    "P-09"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.4,
+     "text": "Tiny bits of space rock hit the Moon and make brief flashes of light."
+    },
+    {
+     "start": 8.8,
+     "end": 12.8,
+     "text": "NASA watches the Moon's dark side for them about 10 nights a month."
+    },
+    {
+     "start": 13.2,
+     "end": 17.6,
+     "text": "In the first five years they confirmed 126 flashes, 62% during meteor showers."
+    },
+    {
+     "start": 18.4,
+     "end": 22.6,
+     "text": "A camera can glitch, so one sighting is not enough."
+    },
+    {
+     "start": 23.0,
+     "end": 28.4,
+     "text": "A flash counts only when two telescopes both see it at the same moment."
+    },
+    {
+     "start": 29.4,
+     "end": 32.6,
+     "text": "These flashes were watched from Earth."
+    }
+   ],
+   "ends_on": "Trust a reading when two independent checks agree, not when one says so.",
+   "spec": "production/explainers/motion/specs/sci_impact_flashes.json"
+  },
+  {
+   "id": "sci_low_gravity",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Low gravity",
+   "path": "res://assets/explainers/science/sci_low_gravity.ogv",
+   "length_s": 34.04,
+   "labels": [
+    "diagram"
+   ],
+   "sources": [],
+   "used_by": [
+    "Moon trainer",
+    "EVA"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.4,
+     "text": "On the Moon you weigh about one-sixth of what you weigh on Earth."
+    },
+    {
+     "start": 8.8,
+     "end": 14.4,
+     "text": "So every step becomes a bound, and you float down slowly."
+    },
+    {
+     "start": 15.4,
+     "end": 21.4,
+     "text": "With no air, kicked-up dust flies in clean arcs and drops straight back."
+    },
+    {
+     "start": 22.4,
+     "end": 28.4,
+     "text": "Less weight on the wheels means less grip, so stopping takes longer."
+    }
+   ],
+   "ends_on": "Move slower than feels natural, and leave yourself room to stop.",
+   "spec": "production/explainers/motion/specs/sci_low_gravity.json"
+  },
+  {
+   "id": "sci_moonquakes",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Moonquakes",
+   "path": "res://assets/explainers/science/sci_moonquakes.ogv",
+   "length_s": 38.04,
+   "labels": [
+    "diagram",
+    "measured"
+   ],
+   "sources": [
+    "apollo_shallow_moonquakes"
+   ],
+   "used_by": [
+    "EX-M0204",
+    "EX-M0302",
+    "P-05"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.4,
+     "text": "Apollo astronauts left seismometers on the Moon, and the ground moved."
+    },
+    {
+     "start": 8.8,
+     "end": 12.8,
+     "text": "From 1971 to 1976 they recorded 28 shallow moonquakes."
+    },
+    {
+     "start": 13.2,
+     "end": 17.6,
+     "text": "The strongest reached magnitude 3.2: enough to rattle a base."
+    },
+    {
+     "start": 19.4,
+     "end": 23.4,
+     "text": "A quake shakes anything that is not held down."
+    },
+    {
+     "start": 23.8,
+     "end": 28.4,
+     "text": "That is why equipment on the Moon is strapped and latched."
+    },
+    {
+     "start": 29.3,
+     "end": 32.7,
+     "text": "These were recorded far from the south pole."
+    }
+   ],
+   "ends_on": "Before the ground shakes, latch what matters. Loose things fall.",
+   "spec": "production/explainers/motion/specs/sci_moonquakes.json"
+  },
+  {
+   "id": "sci_plant_growth",
+   "kind": "science",
+   "level": "explainer",
+   "title": "How plants grow in space",
+   "path": "res://assets/explainers/science/sci_plant_growth.ogv",
+   "length_s": 42.04,
+   "labels": [
+    "measured"
+   ],
+   "sources": [
+    "fast_plants_lifecycle",
+    "mir_brassica_seed_to_seed",
+    "osdr_brassica_rapa_iss"
+   ],
+   "used_by": [
+    "EX-M0102",
+    "EX-M0201",
+    "EX-M0202",
+    "EX-M0203",
+    "EX-M0303",
+    "P-01",
+    "P-03"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.6,
+     "text": "Fast Plants can go from seed to new seeds in about 40 days."
+    },
+    {
+     "start": 9.0,
+     "end": 12.6,
+     "text": "They flower after about 14 days."
+    },
+    {
+     "start": 13.0,
+     "end": 17.4,
+     "text": "Then pollen must travel from one plant to another; they cannot pollinate themselves."
+    },
+    {
+     "start": 17.8,
+     "end": 20.6,
+     "text": "About 20 days later, the seeds are ripe."
+    },
+    {
+     "start": 21.4,
+     "end": 25.8,
+     "text": "On the Mir space station, Brassica plants grew from seed to seed."
+    },
+    {
+     "start": 26.2,
+     "end": 29.6,
+     "text": "Astronauts moved the pollen by hand, flower to flower."
+    },
+    {
+     "start": 29.9,
+     "end": 32.9,
+     "text": "On the ISS, Brassica greens grew under lamps for 27 days."
+    },
+    {
+     "start": 33.3,
+     "end": 35.9,
+     "text": "Those plants grew in orbit, not on the Moon."
+    }
+   ],
+   "ends_on": "A seed needs light, time and a partner plant. Plan for all three.",
+   "spec": "production/explainers/motion/specs/sci_plant_growth.json"
+  },
+  {
    "id": "sci_polar_sun",
    "kind": "science",
    "level": "explainer",
@@ -20,6 +463,8 @@
    "used_by": [
     "EX-M0101",
     "EX-M0102",
+    "EX-M0103",
+    "EX-M0602",
     "P-02"
    ],
    "captions": [
@@ -84,6 +529,8 @@
    ],
    "used_by": [
     "EX-M0103",
+    "EX-M0104",
+    "EX-M0701",
     "P-02",
     "P-14"
    ],
@@ -136,6 +583,246 @@
    ],
    "ends_on": "When the alarm sounds, the protons are already on their way. Get the shelter ready before it!",
    "spec": "production/explainers/motion/specs/sci_proton_flux_chart.json"
+  },
+  {
+   "id": "sci_rover_slopes",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Rovers and slopes",
+   "path": "res://assets/explainers/science/sci_rover_slopes.ogv",
+   "length_s": 36.04,
+   "labels": [
+    "diagram",
+    "measured"
+   ],
+   "sources": [
+    "viper_slope_limit"
+   ],
+   "used_by": [
+    "EX-M0401",
+    "P-08",
+    "P-15"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.4,
+     "text": "Lunar dust is loose, so steep slopes make rover wheels slip."
+    },
+    {
+     "start": 8.8,
+     "end": 12.8,
+     "text": "NASA's VIPER rover was designed to climb slopes up to 15°."
+    },
+    {
+     "start": 13.2,
+     "end": 17.4,
+     "text": "Any steeper, and it has to find another way around."
+    },
+    {
+     "start": 18.4,
+     "end": 22.6,
+     "text": "On a map, the shortest line can be the steepest."
+    },
+    {
+     "start": 23.0,
+     "end": 26.6,
+     "text": "A longer, gentler route is often the safe one."
+    },
+    {
+     "start": 27.4,
+     "end": 30.6,
+     "text": "That limit is VIPER's design figure."
+    }
+   ],
+   "ends_on": "Check the slope before you drive. The short way is not always the safe way.",
+   "spec": "production/explainers/motion/specs/sci_rover_slopes.json"
+  },
+  {
+   "id": "sci_shielding",
+   "kind": "science",
+   "level": "explainer",
+   "title": "What shielding does",
+   "path": "res://assets/explainers/science/sci_shielding.ogv",
+   "length_s": 42.04,
+   "labels": [
+    "diagram",
+    "model"
+   ],
+   "sources": [
+    "clowdsley_2021_shielding"
+   ],
+   "used_by": [
+    "EX-M0103",
+    "EX-M0702",
+    "P-02",
+    "P-14"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.4,
+     "text": "Fast protons lose energy as they push through anything in their way."
+    },
+    {
+     "start": 8.8,
+     "end": 12.8,
+     "text": "Water is great at this, because it is packed with light hydrogen atoms."
+    },
+    {
+     "start": 13.0,
+     "end": 15.8,
+     "text": "The thicker the wall, the fewer get through."
+    },
+    {
+     "start": 16.4,
+     "end": 20.6,
+     "text": "A model of a huge 1972 solar storm shows what thicker shielding does."
+    },
+    {
+     "start": 21.0,
+     "end": 25.4,
+     "text": "Behind the thinnest wall, about 185 mSv. Behind the thickest, about 85."
+    },
+    {
+     "start": 25.8,
+     "end": 29.6,
+     "text": "Thicker walls cut the dose, but it never drops to zero."
+    },
+    {
+     "start": 30.4,
+     "end": 35.6,
+     "text": "So crews do three things: put shielding up, get behind it fast, and stay there."
+    }
+   ],
+   "ends_on": "Every layer of water helps, but only if it is in place before the protons arrive.",
+   "spec": "production/explainers/motion/specs/sci_shielding.json"
+  },
+  {
+   "id": "sci_solar_power",
+   "kind": "science",
+   "level": "explainer",
+   "title": "Solar power and batteries",
+   "path": "res://assets/explainers/science/sci_solar_power.ogv",
+   "length_s": 41.04,
+   "labels": [
+    "diagram",
+    "model"
+   ],
+   "sources": [
+    "vsat_relocatable_array"
+   ],
+   "used_by": [
+    "EX-M0101",
+    "EX-M0503",
+    "EX-M0604",
+    "P-01",
+    "P-02",
+    "P-11"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.4,
+     "text": "Near the pole the Sun stays low, so solar panels stand tall and upright."
+    },
+    {
+     "start": 8.8,
+     "end": 12.4,
+     "text": "This NASA design hangs a 10 kW panel from a 16 m mast."
+    },
+    {
+     "start": 12.6,
+     "end": 14.8,
+     "text": "It turns to keep facing the Sun."
+    },
+    {
+     "start": 15.4,
+     "end": 19.4,
+     "text": "A battery works like a water tank: sunlight fills it, the base drains it."
+    },
+    {
+     "start": 19.8,
+     "end": 23.4,
+     "text": "When the tank is full, any extra power spills away and is lost."
+    },
+    {
+     "start": 23.8,
+     "end": 26.6,
+     "text": "So spare power is best used while you have it."
+    },
+    {
+     "start": 27.4,
+     "end": 31.0,
+     "text": "When the Sun hides, nothing flows in. The base lives on the tank."
+    },
+    {
+     "start": 31.4,
+     "end": 34.6,
+     "text": "If the tank runs dry, the lights and heaters go dark."
+    }
+   ],
+   "ends_on": "Use spare power before it spills, and keep enough in the tank for the dark.",
+   "spec": "production/explainers/motion/specs/sci_solar_power.json"
+  },
+  {
+   "id": "sci_water_evidence",
+   "kind": "science",
+   "level": "explainer",
+   "title": "How we know there is water",
+   "path": "res://assets/explainers/science/sci_water_evidence.ogv",
+   "length_s": 40.04,
+   "labels": [
+    "measured"
+   ],
+   "sources": [
+    "lcross_water_2009",
+    "chandrayaan1_m3_ice"
+   ],
+   "used_by": [
+    "EX-M0402",
+    "P-07",
+    "P-08"
+   ],
+   "captions": [
+    {
+     "start": 4.4,
+     "end": 8.6,
+     "text": "On 9 October 2009, NASA crashed a spent rocket stage into a dark crater."
+    },
+    {
+     "start": 9.0,
+     "end": 13.0,
+     "text": "A second spacecraft flew through the plume and measured it."
+    },
+    {
+     "start": 13.4,
+     "end": 17.6,
+     "text": "About 5.6% of it was water ice, give or take 2.9%."
+    },
+    {
+     "start": 18.4,
+     "end": 22.6,
+     "text": "Another instrument looked for ice right at the surface."
+    },
+    {
+     "start": 23.0,
+     "end": 27.4,
+     "text": "It found exposed ice in only 3.5% of the cold traps."
+    },
+    {
+     "start": 27.8,
+     "end": 29.8,
+     "text": "So ice is patchy."
+    },
+    {
+     "start": 30.4,
+     "end": 34.6,
+     "text": "Some places hold plenty, most hold little, and none of it is ready to drink."
+    }
+   ],
+   "ends_on": "Test before you trust: one sample does not tell you the whole crater.",
+   "spec": "production/explainers/motion/specs/sci_water_evidence.json"
   }
  ]
 }

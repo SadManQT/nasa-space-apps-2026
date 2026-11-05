@@ -1,0 +1,110 @@
+{
+ "id": "sci_moonquakes",
+ "title": "Moonquakes",
+ "level": "explainer",
+ "length_s": 38,
+ "fps": 24,
+ "purpose": "Teach that Apollo seismometers recorded shallow moonquakes, how strong they were, and why equipment on the Moon is latched down.",
+ "scenes": "moonquakes.js",
+ "used_by": [
+  "EX-M0204",
+  "EX-M0302",
+  "P-05"
+ ],
+ "sources": [
+  "apollo_shallow_moonquakes"
+ ],
+ "values": {
+  "count": {
+   "from": "apollo_shallow_moonquakes:derived.count"
+  },
+  "max": {
+   "from": "apollo_shallow_moonquakes:derived.max_magnitude"
+  },
+  "first": {
+   "from": "apollo_shallow_moonquakes:values.quakes[0].date",
+   "fmt": "year"
+  },
+  "last": {
+   "from": "apollo_shallow_moonquakes:values.quakes[-1].date",
+   "fmt": "year"
+  }
+ },
+ "series": {
+  "quakes": "apollo_shallow_moonquakes:values.quakes"
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 19,
+   "scene": "seismo",
+   "label": "measured",
+   "credit": "NASA PDS · Apollo Passive Seismic Experiment (Nakamura et al.)",
+   "trace": "Apollo seismometer, {first} to {last}",
+   "count_l": "{count} shallow moonquakes",
+   "max_l": "Strongest: magnitude {max}"
+  },
+  {
+   "from": 19,
+   "to": 29,
+   "scene": "shelf",
+   "label": "diagram",
+   "credit": "What a quake does to a room",
+   "loose": "Loose",
+   "latched": "Latched"
+  },
+  {
+   "from": 29,
+   "to": 33,
+   "scene": "card",
+   "label": "measured",
+   "credit": "NASA PDS · Apollo seismic catalogue",
+   "card": "Recorded by stations near the equator",
+   "sub": "The polar quake's position is uncertain; the story's quake is fiction"
+  },
+  {
+   "from": 33,
+   "to": 38,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.4,
+   "Apollo astronauts left seismometers on the Moon, and the ground moved."
+  ],
+  [
+   8.8,
+   12.8,
+   "From {first} to {last} they recorded {count} shallow moonquakes."
+  ],
+  [
+   13.2,
+   17.6,
+   "The strongest reached magnitude {max}: enough to rattle a base."
+  ],
+  [
+   19.4,
+   23.4,
+   "A quake shakes anything that is not held down."
+  ],
+  [
+   23.8,
+   28.4,
+   "That is why equipment on the Moon is strapped and latched."
+  ],
+  [
+   29.3,
+   32.7,
+   "These were recorded far from the south pole."
+  ]
+ ],
+ "ends_on": "Before the ground shakes, latch what matters. Loose things fall.",
+ "literals": []
+}

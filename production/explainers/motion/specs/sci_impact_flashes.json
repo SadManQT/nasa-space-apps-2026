@@ -1,0 +1,105 @@
+{
+ "id": "sci_impact_flashes",
+ "title": "Impact flashes",
+ "level": "explainer",
+ "length_s": 38,
+ "fps": 24,
+ "purpose": "Teach that meteoroids hitting the Moon make brief flashes, how NASA watches for them, and why two telescopes must agree.",
+ "scenes": "impact_flashes.js",
+ "used_by": [
+  "EX-M0503",
+  "P-09"
+ ],
+ "sources": [
+  "meo_lunar_impact_flashes"
+ ],
+ "values": {
+  "nights": {
+   "from": "meo_lunar_impact_flashes:values.nights_per_month"
+  },
+  "count": {
+   "from": "meo_lunar_impact_flashes:values.calibrated_flashes_first_5_years"
+  },
+  "pct": {
+   "from": "meo_lunar_impact_flashes:values.fraction_with_meteor_showers",
+   "fmt": "{:.0%}"
+  }
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 18,
+   "scene": "watch",
+   "label": "measured",
+   "credit": "NASA Marshall Meteoroid Environment Office",
+   "scope": "Telescopes on Earth",
+   "dark": "The Moon's dark side",
+   "flash": "Flash!",
+   "count_l": "{count} flashes in five years"
+  },
+  {
+   "from": 18,
+   "to": 29,
+   "scene": "check",
+   "label": "diagram",
+   "credit": "NASA's rule: two telescopes must agree",
+   "a": "Telescope A",
+   "b": "Telescope B",
+   "real": "Both saw it: real",
+   "fake": "Only one saw it: rejected"
+  },
+  {
+   "from": 29,
+   "to": 33,
+   "scene": "card",
+   "label": "measured",
+   "credit": "NASA MEO",
+   "card": "Seen from Earth",
+   "sub": "The chapter's flash candidates are written for the game"
+  },
+  {
+   "from": 33,
+   "to": 38,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.4,
+   "Tiny bits of space rock hit the Moon and make brief flashes of light."
+  ],
+  [
+   8.8,
+   12.8,
+   "NASA watches the Moon's dark side for them about {nights} nights a month."
+  ],
+  [
+   13.2,
+   17.6,
+   "In the first five years they confirmed {count} flashes, {pct} during meteor showers."
+  ],
+  [
+   18.4,
+   22.6,
+   "A camera can glitch, so one sighting is not enough."
+  ],
+  [
+   23.0,
+   28.4,
+   "A flash counts only when two telescopes both see it at the same moment."
+  ],
+  [
+   29.4,
+   32.6,
+   "These flashes were watched from Earth."
+  ]
+ ],
+ "ends_on": "Trust a reading when two independent checks agree, not when one says so.",
+ "literals": []
+}

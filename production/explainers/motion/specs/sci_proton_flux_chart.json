@@ -8,6 +8,8 @@
  "scenes": "proton_flux_chart.js",
  "used_by": [
   "EX-M0103",
+  "EX-M0104",
+  "EX-M0701",
   "P-02",
   "P-14"
  ],

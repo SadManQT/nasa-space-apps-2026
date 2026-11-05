@@ -4824,7 +4824,7 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Chapter 1 science explainers: the polar Sun, Earth's position, crew needs, power, storm data, shielding, plant growth",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-63"
@@ -4840,7 +4840,7 @@
     "game/scripts/science/science_data.gd"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): science explainers use the Claude Motion pipeline per MASTER_PLAN §5, so M1-59 (Godot how-to clips) is no longer a prerequisite. The polar Sun and proton-flux clips were made in M1-63.",
-   "evidence": "",
+   "evidence": "Five new Chapter 1 explainers through the Claude Motion pipeline: sci_earth_position (42 s), sci_crew_needs (39 s), sci_solar_power (41 s), sci_shielding (42 s), sci_plant_growth (42 s); with M1-63's sci_polar_sun and sci_proton_flux_chart that covers all seven M1-60 topics. Every number is a fixture token (build.py check); honest labels per beat; each ends on the player's next decision. Attached by used_by (missions whose data cards cite the clip's fixtures, plus the hand links) in explainers.json; the Watch button on data cards and Journal Science is Ramim's M1-72. run_tests.sh explainers 1/1 (195 checks). In-game captures production/qa/evidence/explainer_*.png; log production/ai_log_parts/M1-60.md.",
    "updated": "2026-11-06",
    "prompt": "Do: build the Chapter 1 explainers in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §7.1 (rows marked CH01): why the Sun stays low at the pole; where Earth is and why\nshift 4's cutoff is a training event; air, water and food for a crew; solar power and batteries; reading the 2017 proton-flux\nchart; what shielding does; how plants grow in space. Every explainer: 20–45 s, captions, animated diagrams made with the Claude Motion pipeline (M1-63: production/explainers/motion/STYLE.md, production/tools/motion/build.py), honest labels (measured, model, diagram or counterfactual; game-design/24_NARRATIVE_REVISION.md §2.12), numbers taken from the bundled fixture in game/resources/data/nasa/ (never invented), ending on what it means for the player's next decision; attach it to the mission data card (M1-30), the clue that uses the data and Journal → Science. Check every number against its fixture and source.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "sadman",
@@ -5365,6 +5365,26 @@
    "updated": "2026-11-06",
    "prompt": "Why: M1-34 put the real LOLA terrain in game/assets/environment/terrain/lola/ with 16-bit heightmaps (*.r16) that terrain_heightfield.gd reads at run time. export_presets.cfg (your file) exports only all_resources plus *.json, so release builds would lose the heightfields. Do: change include_filter to \"*.json,*.r16\" in all three presets. Acceptance: an exported build loads res://assets/environment/terrain/lola/aurora_ridge/heightmap_5m.r16 (FileAccess.file_exists true in the export); run_tests.sh passes. Needed for the 12 Nov release (M3-93).",
    "reserved_for": "atik",
+   "effort": 2
+  },
+  {
+   "id": "M1-72",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "any",
+   "title": "Data cards and Journal Science: a Watch button that plays the card's science explainer",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Why: Sadman's science explainers (M1-60, M3-68, M3-77: 17 clips, 34-45 s each) are registered in game/resources/campaign/content/explainers.json with 'sources' (NASA fixture ids) and 'used_by' (mission ids such as EX-M0101, puzzle ids). The hint player (M1-64) plays them as hint level 2, but a player reading a mission data card or Journal -> Science cannot watch them yet. Do: on a data card, show 'Watch: <explainer title>' for each explainer whose used_by contains the card's mission id or whose sources overlap the card's source_ids; play it in the same 16:9 card player as the hint player (captions are burned in; pause, replay, Esc closes; reduced motion shows a still). In Journal -> Science (M3-98), list every explainer the player has unlocked (its mission reached), grouped by chapter. Reuse UiDesign. Acceptance: EX-M0101's card offers the polar Sun, crew needs and solar power clips; run_tests.sh passes; screenshots production/qa/evidence/<task id>_*.png.",
+   "reserved_for": "ramim",
    "effort": 2
   }
  ],

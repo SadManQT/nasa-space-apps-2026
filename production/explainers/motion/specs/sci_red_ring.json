@@ -1,0 +1,107 @@
+{
+ "id": "sci_red_ring",
+ "title": "The red ring",
+ "level": "explainer",
+ "length_s": 40,
+ "fps": 24,
+ "purpose": "Teach what a total lunar eclipse looks like from the Moon, why Earth wears a red ring, and what it does to solar power.",
+ "scenes": "red_ring.js",
+ "used_by": [
+  "EX-M0601",
+  "EX-M0603",
+  "P-11"
+ ],
+ "sources": [
+  "nasa_eclipse_2047_01_12"
+ ],
+ "values": {
+  "day": {
+   "from": "nasa_eclipse_2047_01_12:derived.greatest_eclipse_ut",
+   "fmt": "date"
+  },
+  "total": {
+   "from": "nasa_eclipse_2047_01_12:values.total_min",
+   "fmt": "{:.0f}"
+  },
+  "partial": {
+   "from": "nasa_eclipse_2047_01_12:values.partial_min",
+   "fmt": "{:.0f}"
+  }
+ },
+ "beats": [
+  {
+   "from": 0,
+   "to": 4,
+   "scene": "title"
+  },
+  {
+   "from": 4,
+   "to": 15,
+   "scene": "line_up",
+   "label": "diagram",
+   "credit": "Not to scale",
+   "sun": "Sun",
+   "earth": "Earth",
+   "moon": "Moon",
+   "shadow": "Earth's shadow"
+  },
+  {
+   "from": 15,
+   "to": 29,
+   "scene": "view",
+   "label": "measured",
+   "credit": "NASA Goddard eclipse catalogue (Espenak)",
+   "view": "Seen from the Moon",
+   "total_l": "Total: about {total} minutes",
+   "power": "Solar power"
+  },
+  {
+   "from": 29,
+   "to": 34,
+   "scene": "card",
+   "label": "measured",
+   "credit": "Whole-Moon contact times",
+   "card": "Times for the whole Moon",
+   "sub": "Aurora's exact start and end depend on its site and horizon"
+  },
+  {
+   "from": 34,
+   "to": 40,
+   "scene": "takeaway"
+  }
+ ],
+ "captions": [
+  [
+   4.4,
+   8.8,
+   "On {day}, the Sun, Earth and Moon line up."
+  ],
+  [
+   9.2,
+   14.4,
+   "The Moon slides into Earth's shadow: a total lunar eclipse."
+  ],
+  [
+   15.4,
+   19.8,
+   "From the Moon, Earth covers the whole Sun."
+  ],
+  [
+   20.2,
+   24.6,
+   "Sunlight bending through Earth's air paints a thin red ring around it."
+  ],
+  [
+   25.0,
+   28.6,
+   "The full shadow lasts about {total} minutes."
+  ],
+  [
+   29.4,
+   33.6,
+   "Those minutes are for the whole Moon."
+  ]
+ ],
+ "ends_on": "While Earth hides the Sun, the panels make almost nothing. Plan the battery for the dark.",
+ "literals": []
+}
