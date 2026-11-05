@@ -285,6 +285,15 @@ func _run_export_smoke() -> void:
 	checks.append(_save_service.clear(save_path))
 	var failures := checks.count(false)
 	print("EXPORT SMOKE RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks.size(), failures])
+	# Slow runners are still loading the next rooms here; quitting mid-load
+	# reports "resources still in use at exit". Settle (at most ~15 s), then free.
+	for index in 900:
+		if not preparation.busy():
+			break
+		await get_tree().process_frame
+	_campaign.queue_free()
+	for index in 30:
+		await get_tree().process_frame
 	get_tree().quit(0 if failures == 0 else 1)
 
 func _export_smoke_capture(id: String) -> void:

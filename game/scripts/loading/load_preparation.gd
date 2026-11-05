@@ -119,6 +119,10 @@ static func room_paths(room_id: String) -> Array:
 			paths.append("res://assets/plants/%s/%s.glb" % [id, id])
 	return paths
 
+## True while campaign preparation or a room look-ahead is still loading.
+func busy() -> bool:
+	return preparing or _room_busy
+
 func activate_room(room_id: String) -> void:
 	AssetGeometry.pinned.assign(room_paths(room_id))
 
