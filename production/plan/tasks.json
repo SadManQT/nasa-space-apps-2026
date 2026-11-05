@@ -1248,7 +1248,7 @@
    "prompt": "Goal: the challenge is about balancing life support, radiation shielding, power and food; the player should see those four at all times.\nDo: a compact HUD panel with four meters, Power (E), Life support (air A and water), Shielding (S and accumulated exposure Z), Food (crops C\nand rations R), labelled in plain words with icons; every puzzle preview shows the forecast change on each meter (arrows plus the number)\nbefore the player commits; red/amber thresholds come from data, not code; accessible (colour plus shape, screen-reader text, scales to 150%).\nValues come from the authoritative director state; no second source of truth.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [
     "M1-09",
@@ -1274,7 +1274,8 @@
    "priority": "P0",
    "tool": "antigravity",
    "title": "Mission Trainer mode: every puzzle as a 5–10 minute training scenario",
-   "prompt": "Goal: the challenge is called 'Junior Astronaut Mission Trainer'; a teacher or a judge can open any training scenario in one click without\nplaying 12 hours.\nDo: a 'Mission Trainer' entry on the title screen listing the 16 scenarios (P-01..P-16) grouped by demand (Power, Life support, Shielding,\nFood), each with a 20-second NASA data briefing (plain-language takeaway + visual), the real decision, the outcome, a debrief with the\npredict/observe/explain question and a star rating; scenarios unlock as their puzzle is implemented, others show 'coming soon'; reuses the\ncampaign puzzle panels and simulation with a scenario entry profile from data (no copied logic); results saved separately from the campaign.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nFollow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 (clarity rules) in every trainer screen; M3-67 later adds Moon sorties on top of this mode."
+   "prompt": "Goal: the challenge is called 'Junior Astronaut Mission Trainer'; a teacher or a judge can open any training scenario in one click without\nplaying 12 hours.\nDo: a 'Mission Trainer' entry on the title screen listing the 16 scenarios (P-01..P-16) grouped by demand (Power, Life support, Shielding,\nFood), each with a 20-second NASA data briefing (plain-language takeaway + visual), the real decision, the outcome, a debrief with the\npredict/observe/explain question and a star rating; scenarios unlock as their puzzle is implemented, others show 'coming soon'; reuses the\ncampaign puzzle panels and simulation with a scenario entry profile from data (no copied logic); results saved separately from the campaign.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nFollow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 (clarity rules) in every trainer screen; M3-67 later adds Moon sorties on top of this mode.",
+   "blocker": "Night shift parked the work on branch night/M1-29: "
   },
   {
    "status": "done",
