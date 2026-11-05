@@ -4,7 +4,9 @@ class_name Chapter1CampaignHUD
 const Outpost = preload("res://scripts/ui/outpost_status.gd")
 const PANELS_SCENE: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
 const MISSION_TABLE_SCENE: PackedScene = preload("res://scenes/ui/mission_table_panel.tscn")
+const P01_PANEL_SCENE: PackedScene = preload("res://scenes/ui/p01_puzzle_panel.tscn")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
+const P01PuzzleScript = preload("res://scripts/puzzles/p01_commission_plant_puzzle.gd")
 const IVORY := Color("#ECEEF0")
 const MUTED := Color("#A8B4C8")
 const CYAN := Color("#20B8C9")
@@ -15,6 +17,7 @@ const RED := Color("#E56B6F")
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
 var mission_table: MissionTablePanel
+var p01_panel: P01PuzzlePanel
 var _title: Label
 var _meta: Label
 var _objective: Label
@@ -57,6 +60,12 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
 	mission_table.closed.connect(func(_target: String) -> void: _on_panel_closed("mission_table"))
 	mission_table.commit_requested.connect(_on_mission_table_commit)
+	p01_panel = P01_PANEL_SCENE.instantiate() as P01PuzzlePanel
+	add_child(p01_panel)
+	p01_panel.opened.connect(func(_target: String) -> void: _on_panel_opened("p01_panel"))
+	p01_panel.closed.connect(func(_target: String) -> void: _on_panel_closed("p01_panel"))
+	p01_panel.commit_requested.connect(_on_p01_commit)
+	p01_panel.data_cards_requested.connect(_on_p01_data_cards)
 	_refresh_query()
 	refresh_scene({})
 
@@ -314,6 +323,9 @@ func _build_targets() -> void:
 		if MissionTableScript.is_gate(target_id):
 			button.text = "PLAN AT MISSION TABLE · " + String(target.get("focus_label", target_id)) + "\nAT " + label
 			button.pressed.connect(func() -> void: open_mission_table(target_id))
+		elif P01PuzzleScript.is_gate(target_id) and runtime.route != null and runtime.route.has_method("p01_bench_view"):
+			button.text = "OPEN COMMISSIONING BENCH · " + String(target.get("focus_label", target_id)) + "\nAT " + label
+			button.pressed.connect(func() -> void: open_p01_panel(target_id))
 		else:
 			button.pressed.connect(func() -> void: runtime.perform_target(target_id))
 		_targets.add_child(button)
@@ -329,16 +341,41 @@ func _build_targets() -> void:
 	else:
 		_status.text = "%d operations remain. Complete the listed steps, then advance." % gate.get("missing", []).size()
 		_status.modulate = MUTED
-	if panels != null and not panels.active_panel().is_empty():
+	if (panels != null and not panels.active_panel().is_empty()) or (mission_table != null and mission_table.is_open()) or (p01_panel != null and p01_panel.is_open()):
 		_set_modal_buttons(true)
 	apply_accessibility()
+
+## Opens the P-01 Commissioning & Planting Bench for one P-01 gate. Reading and
+## adjusting bench controls pause the expedition; the physical commit happens
+## only after the bench closes.
+func open_p01_panel(target_id: String) -> bool:
+	if runtime == null or p01_panel == null or runtime.is_chapter_complete() or runtime.route == null or not runtime.route.has_method("p01_bench_view") or not P01PuzzleScript.is_gate(target_id):
+		return false
+	if runtime.is_cutscene_active() or p01_panel.is_open() or (mission_table != null and mission_table.is_open()):
+		return false
+	if panels != null and not panels.active_panel().is_empty():
+		return false
+	p01_panel.open(runtime.route, target_id, runtime.query().get("accessibility", {}))
+	return true
+
+func _on_p01_commit(target_id: String, payload: Dictionary) -> void:
+	if runtime == null:
+		return
+	runtime.perform_target(target_id, payload)
+
+func _on_p01_data_cards(card_ids: Array) -> void:
+	if panels == null:
+		return
+	if p01_panel != null and p01_panel.is_open():
+		p01_panel.close()
+	panels.open_panel("sources", {"ids": card_ids})
 
 ## Opens the P-02 Mission Table for one shift gate. Reading and planning pause
 ## the expedition; the physical commit happens only after the table closes.
 func open_mission_table(target_id: String) -> bool:
 	if runtime == null or mission_table == null or runtime.is_chapter_complete() or not MissionTableScript.is_gate(target_id):
 		return false
-	if runtime.is_cutscene_active() or mission_table.is_open():
+	if runtime.is_cutscene_active() or mission_table.is_open() or (p01_panel != null and p01_panel.is_open()):
 		return false
 	if panels != null and not panels.active_panel().is_empty():
 		return false
@@ -453,7 +490,7 @@ func _layout_outpost() -> void:
 
 func _scale_text(node: Node, scale_factor: float) -> void:
 	for child in node.get_children():
-		if child == panels or child == mission_table:
+		if child == panels or child == mission_table or child == p01_panel:
 			continue
 		if child is Control:
 			if not child.has_meta("lla_base_font_size"):
@@ -481,7 +518,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_modal_button_states.clear()
 		return
 	for child in node.get_children():
-		if child == panels or child == mission_table:
+		if child == panels or child == mission_table or child == p01_panel:
 			continue
 		if child is BaseButton:
 			if not _modal_button_states.has(child):
@@ -491,7 +528,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
-		if panels != null and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()):
+		if panels != null and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (p01_panel == null or not p01_panel.is_open()):
 			panels.open_panel("pause")
 			get_viewport().set_input_as_handled()
 

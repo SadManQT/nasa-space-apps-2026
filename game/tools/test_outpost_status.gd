@@ -69,6 +69,7 @@ func _run() -> void:
 			await _capture("M1-28_data_card_status")
 			hud.panels.close_panel()
 	# Arrange the production route's first six scenes without fabricating resources.
+	PlanFixture.prepare_p01(runtime.route)
 	for scene_id in Gates.SCENE_ORDER.slice(0, 6):
 		var targets: Array = Gates.targets_for_scene(scene_id)
 		if scene_id == "EX-CH01-S03":

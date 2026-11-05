@@ -7,6 +7,7 @@ extends RefCounted
 ## P-02 gates without opening the table.
 
 static func prepare(route: RefCounted, plan_id: String = "bloom") -> void:
+	prepare_p01(route)
 	if route == null or not route.has_method("mission_table"):
 		return
 	var table: RefCounted = route.mission_table()
@@ -17,3 +18,7 @@ static func prepare(route: RefCounted, plan_id: String = "bloom") -> void:
 		table.start_alarm_task(true)
 		for index in table.alarm_task_steps():
 			table.task_step(index)
+
+static func prepare_p01(route: RefCounted) -> void:
+	if route != null and route.has_method("p01_puzzle") and route.p01_puzzle() != null:
+		route.p01_puzzle().apply_canonical_setup()

@@ -1,0 +1,336 @@
+{
+  "puzzle_id": "P-01",
+  "title": "Commission & Plant",
+  "bench_title": "COMMISSIONING & PLANTING BENCH",
+  "subtitle": "Two-point moisture probe calibration, sealed packet provenance scan, and paired cassette planting",
+  "probe": {
+    "initial_offset": 10,
+    "uncalibrated_dry": 10,
+    "uncalibrated_wet": 110,
+    "target_dry": 0,
+    "target_wet": 100,
+    "calibrated_zero_offset": -10,
+    "zero_offset_options": [
+      {"offset": 0, "dry_reading": 10, "label": "Offset 0 (Dry cup reads 10 · Uncalibrated)"},
+      {"offset": -5, "dry_reading": 5, "label": "Offset -5 (Dry cup reads 5 · Under-zeroed)"},
+      {"offset": -10, "dry_reading": 0, "label": "Offset -10 (Dry cup reads 0 · Calibrated Zero)"},
+      {"offset": -15, "dry_reading": -5, "label": "Offset -15 (Dry cup reads -5 · Over-zeroed)"}
+    ],
+    "wet_span_options": [
+      {"span": 110, "wet_reading": 110, "label": "Span 110 (Wet cup reads 110 · Uncalibrated)"},
+      {"span": 90, "wet_reading": 90, "label": "Span 90 (Wet cup reads 90 · Under-spanned)"},
+      {"span": 100, "wet_reading": 100, "label": "Span 100 (Wet cup reads 100 · Calibrated Span)"},
+      {"span": 120, "wet_reading": 120, "label": "Span 120 (Wet cup reads 120 · Over-spanned)"}
+    ]
+  },
+  "packet": {
+    "inscription": "ALO",
+    "initial": "N.",
+    "seed_count": 2,
+    "species": "Brassica rapa (Rapid-Cycling Reference Lineage)",
+    "scan_modes": [
+      {
+        "id": "sealed_optical",
+        "label": "Optical Scan Through Intact Seal (Record ALO & N. · 2 Seeds)",
+        "valid": true
+      },
+      {
+        "id": "unrecorded_glance",
+        "label": "Quick Visual Glance (Skip Provenance Record)",
+        "valid": false
+      },
+      {
+        "id": "unseal_on_bench",
+        "label": "Break Seal on Open Bench (Contamination Risk)",
+        "valid": false
+      }
+    ]
+  },
+  "moisture_band": {
+    "min": 40,
+    "max": 60,
+    "nominal": 50,
+    "scale_min": 0,
+    "scale_max": 100,
+    "preset_options": [
+      {"moisture": 30, "label": "30 units (Too Dry < 40)"},
+      {"moisture": 39, "label": "39 units (Boundary Below 40)"},
+      {"moisture": 40, "label": "40 units (Minimum Band)"},
+      {"moisture": 50, "label": "50 units (Nominal Target)"},
+      {"moisture": 60, "label": "60 units (Maximum Band)"},
+      {"moisture": 61, "label": "61 units (Boundary Flooded > 60)"},
+      {"moisture": 75, "label": "75 units (Flooded > 60 · Needs Drain)"}
+    ],
+    "drain_step": 10
+  },
+  "cassettes": {
+    "alo": {
+      "id": "alo",
+      "individual_id": "ALO-01",
+      "title": "Cassette A — Alo",
+      "short_name": "Alo",
+      "role": "External Test Specimen (Pressurised Lunar Test Chamber)",
+      "required_seeds": 1,
+      "required_label": "EXTERNAL_TEST",
+      "required_label_display": "EXTERNAL TEST"
+    },
+    "tara": {
+      "id": "tara",
+      "individual_id": "TARA-01",
+      "title": "Cassette B — Tara",
+      "short_name": "Tara",
+      "role": "Indoor Reference Specimen (Habitat Reference Bay)",
+      "required_seeds": 1,
+      "required_label": "INDOOR_REFERENCE",
+      "required_label_display": "INDOOR REFERENCE"
+    }
+  },
+  "labels": [
+    {"id": "EXTERNAL_TEST", "display": "EXTERNAL TEST", "assigned_to": "alo"},
+    {"id": "INDOOR_REFERENCE", "display": "INDOOR REFERENCE", "assigned_to": "tara"}
+  ],
+  "predictions": {
+    "EX-CH01-S03": {
+      "id": "s03_calibration",
+      "question": "PREDICT · Before adjusting a moisture probe with a +10 unit offset, what will it display in a bone-dry (0 moisture) reference cup?",
+      "correct_option": "reads_10",
+      "options": [
+        {
+          "id": "reads_0",
+          "label": "0 units (already accurate without calibration)",
+          "feedback": "Not yet: because the probe starts with a +10 offset, it adds 10 units to the true 0 dry cup until we zero it on the dry reference."
+        },
+        {
+          "id": "reads_10",
+          "label": "10 units (+10 offset on a 0 dry reference cup)",
+          "feedback": "Confirmed: the +10 offset shifts dry (0) to 10 and wet (100) to 110. Two-point calibration sets dry to 0 and wet to 100."
+        },
+        {
+          "id": "reads_100",
+          "label": "100 units (saturated wet reference)",
+          "feedback": "100 units is the calibrated wet reference target. A bone-dry reference cup has 0 moisture, which reads 10 before zeroing."
+        }
+      ]
+    },
+    "EX-CH01-S04": {
+      "id": "s04_planting",
+      "question": "PREDICT · Why do we plant both Alo (EXTERNAL TEST) and Tara (INDOOR REFERENCE) with 1 seed and 40–60 calibrated moisture (50 nominal)?",
+      "correct_option": "paired_control",
+      "options": [
+        {
+          "id": "paired_control",
+          "label": "Matched baseline so chamber placement is the only experimental variable",
+          "feedback": "Confirmed: matching seed count (1 each) and calibrated moisture (40–60, 50 nominal) lets Tara serve as a true indoor control for Alo."
+        },
+        {
+          "id": "flood_faster",
+          "label": "Flooding above 60 units makes seeds germinate twice as fast",
+          "feedback": "Flooding (> 60 units) deprives roots of oxygen inside a sealed cassette. If flooded, drain excess water to waste rather than sealing."
+        },
+        {
+          "id": "same_label",
+          "label": "Give both cassettes the same EXTERNAL TEST label",
+          "feedback": "Each cassette needs a distinct label: EXTERNAL TEST for Alo and INDOOR REFERENCE for Tara so crew logs never confuse the two specimens."
+        }
+      ]
+    }
+  },
+  "hints": [
+    {
+      "id": "H1",
+      "tier": 1,
+      "title": "Hint 1 — Instrument First",
+      "text": "Check the instrument before trusting it."
+    },
+    {
+      "id": "H2",
+      "tier": 2,
+      "title": "Hint 2 — Reference Cups",
+      "text": "Use the two reference cups."
+    },
+    {
+      "id": "H3",
+      "tier": 3,
+      "title": "Hint 3 — Calibration & Moisture Band",
+      "text": "Dry must read 0, wet 100, then fill both to 50."
+    }
+  ],
+  "gates": {
+    "calibrate_probe": {
+      "target_id": "calibrate_probe",
+      "action": "set_zero",
+      "scene_id": "EX-CH01-S03",
+      "step_number": 1,
+      "total_steps": 12,
+      "title": "Step 1 of 4 (Calibration Bench) · Zero the Dry Reference",
+      "label": "Calibrate dry and wet references",
+      "instruction": "Select the Dry Reference Cup (currently reading 10 due to the +10 offset) and set the Zero Offset to -10 so dry reads 0.",
+      "predict": "An uncalibrated probe with a +10 offset reads 10 in a bone-dry cup and 110 in a saturated cup.",
+      "test": "Place the probe in the Dry Reference Cup and adjust Zero Offset from 0 to -10.",
+      "observe": "Dry Reference Cup reading drops from 10 to 0 displayed units.",
+      "explain": "Zeroing removes the constant +10 additive offset at the lower bound of the moisture scale."
+    },
+    "span_probe": {
+      "target_id": "span_probe",
+      "action": "set_span",
+      "scene_id": "EX-CH01-S03",
+      "step_number": 2,
+      "total_steps": 12,
+      "title": "Step 2 of 4 (Calibration Bench) · Set Wet Reference Span",
+      "label": "Set wet reference span",
+      "instruction": "Select the Wet Reference Cup (raw reading 110) and set the Wet Span target to 100 so full saturation reads 100.",
+      "predict": "Without span calibration, the upper reference reads 110 instead of 100.",
+      "test": "Place the zeroed probe in the Wet Reference Cup and set Wet Span to 100.",
+      "observe": "Wet Reference Cup reading settles at 100 displayed units.",
+      "explain": "Span calibration anchors the 100-unit upper bound so every intermediate moisture reading (40–60) is linear and accurate."
+    },
+    "recheck_probe": {
+      "target_id": "recheck_probe",
+      "action": "recheck",
+      "scene_id": "EX-CH01-S03",
+      "step_number": 3,
+      "total_steps": 12,
+      "title": "Step 3 of 4 (Calibration Bench) · Two-Point Recheck",
+      "label": "Recheck dry zero and wet span",
+      "instruction": "Verify both reference cups in sequence: confirm Dry Reference = 0 and Wet Reference = 100.",
+      "predict": "After adjusting zero and span, re-dipping both cups verifies that neither adjustment drifted.",
+      "test": "Check the Dry Reference Cup (0) and Check the Wet Reference Cup (100).",
+      "observe": "Dry cup holds steady at 0; Wet cup holds steady at 100. Calibration lock is green.",
+      "explain": "A two-point recheck confirms instrument repeatability before measuring live growth media."
+    },
+    "inspect_packet": {
+      "target_id": "inspect_packet",
+      "action": "scan_packet",
+      "scene_id": "EX-CH01-S03",
+      "step_number": 4,
+      "total_steps": 12,
+      "title": "Step 4 of 4 (Calibration Bench) · Scan Sealed Seed Packet",
+      "label": "Inspect sealed packet and record",
+      "instruction": "Run the Optical Scan through the intact packet seal to log the Latin inscription ALO, initial N., and 2 seeds without opening the packet.",
+      "predict": "Opening the packet on the commons bench risks moisture and dust exposure before we reach the garden glove port.",
+      "test": "Select Optical Scan Through Intact Seal.",
+      "observe": "Scanner logs provenance: Inscription 'ALO', Initial 'N.' (Latin letters), Quantity: 2 viable seeds, Seal: INTACT.",
+      "explain": "Non-destructive optical logging preserves sterile containment until each seed is transferred into its cassette."
+    },
+    "plant_alo": {
+      "target_id": "plant_alo",
+      "action": "plant_alo",
+      "scene_id": "EX-CH01-S04",
+      "step_number": 5,
+      "total_steps": 12,
+      "cassette": "alo",
+      "title": "Step 1 of 8 (Garden Bench) · Plant Seed in Alo Cassette",
+      "label": "Plant one seed in the sealed Alo cassette",
+      "instruction": "Select Cassette A (Alo) and place exactly 1 seed from the scanned packet into its wicking pillow.",
+      "predict": "Placing 1 seed in Alo leaves 1 matched seed from the same packet for the indoor reference cassette Tara.",
+      "test": "Set Alo Cassette Seed Count to 1 Seed.",
+      "observe": "1 seed is seated in Cassette A (Alo)'s wicking slot; 1 seed remains in the packet for Tara.",
+      "explain": "Single-seed placement prevents root competition inside the compact lunar cassette."
+    },
+    "plant_tara": {
+      "target_id": "plant_tara",
+      "action": "plant_tara",
+      "scene_id": "EX-CH01-S04",
+      "step_number": 6,
+      "total_steps": 12,
+      "cassette": "tara",
+      "title": "Step 2 of 8 (Garden Bench) · Plant Seed in Tara Cassette",
+      "label": "Plant one seed in the sealed Tara cassette",
+      "instruction": "Select Cassette B (Tara) and place the remaining 1 seed into the indoor reference cassette.",
+      "predict": "With 1 seed in Alo and 1 seed in Tara, both chambers start with identical genetic stock.",
+      "test": "Set Tara Cassette Seed Count to 1 Seed.",
+      "observe": "Cassette B (Tara) holds 1 seed; both cassettes are now seeded (1 + 1).",
+      "explain": "Paired experiments require a matched control specimen from the same seed lot."
+    },
+    "water_alo": {
+      "target_id": "water_alo",
+      "action": "water_alo",
+      "scene_id": "EX-CH01-S04",
+      "step_number": 7,
+      "total_steps": 12,
+      "cassette": "alo",
+      "title": "Step 3 of 8 (Garden Bench) · Set Alo Moisture (40–60 Band)",
+      "label": "Set Alo moisture to the calibrated band",
+      "instruction": "Adjust Cassette A (Alo) water level into the calibrated 40–60 band (50 nominal). If flooded above 60, drain excess water to waste.",
+      "predict": "Below 40 is too dry to trigger imbibition; above 60 floods the wicking pillow and must be drained to waste.",
+      "test": "Adjust Alo moisture to 40–60 units (50 nominal) using the calibrated probe.",
+      "observe": "Calibrated probe reads within 40–60 units in Cassette A (Alo) with aerobic pore space intact.",
+      "explain": "In reduced gravity (0.166 g), capillary water bridges pores easily; 40–60 units balances water film and root oxygen."
+    },
+    "water_tara": {
+      "target_id": "water_tara",
+      "action": "water_tara",
+      "scene_id": "EX-CH01-S04",
+      "step_number": 8,
+      "total_steps": 12,
+      "cassette": "tara",
+      "title": "Step 4 of 8 (Garden Bench) · Set Tara Moisture (40–60 Band)",
+      "label": "Set Tara moisture to the calibrated band",
+      "instruction": "Adjust Cassette B (Tara) water level into the calibrated 40–60 band (50 nominal). If flooded above 60, drain excess water to waste.",
+      "predict": "Matching Tara's moisture band (40–60, 50 nominal) to Alo's ensures hydration is not a confounding variable.",
+      "test": "Adjust Tara moisture to 40–60 units (50 nominal) using the calibrated probe.",
+      "observe": "Calibrated probe reads within 40–60 units in Cassette B (Tara).",
+      "explain": "Controlled starting moisture across both cassettes isolates environmental stress during the 14-day lunar night."
+    },
+    "label_alo": {
+      "target_id": "label_alo",
+      "action": "label_alo_external",
+      "scene_id": "EX-CH01-S04",
+      "step_number": 9,
+      "total_steps": 12,
+      "cassette": "alo",
+      "title": "Step 5 of 8 (Garden Bench) · Label Alo EXTERNAL TEST",
+      "label": "Label Alo EXTERNAL TEST",
+      "instruction": "Assign the distinct label EXTERNAL TEST to Cassette A (Alo).",
+      "predict": "Clear, non-duplicated labels prevent telemetry or crew observations from swapping test and control.",
+      "test": "Select label EXTERNAL TEST for Cassette A (Alo).",
+      "observe": "Cassette A (Alo) tag is locked as EXTERNAL TEST.",
+      "explain": "Alo is housed in the external-facing lunar test chamber and must be tracked separately from the indoor reference."
+    },
+    "label_tara": {
+      "target_id": "label_tara",
+      "action": "label_tara_indoor",
+      "scene_id": "EX-CH01-S04",
+      "step_number": 10,
+      "total_steps": 12,
+      "cassette": "tara",
+      "title": "Step 6 of 8 (Garden Bench) · Label Tara INDOOR REFERENCE",
+      "label": "Label Tara INDOOR REFERENCE",
+      "instruction": "Assign the distinct label INDOOR REFERENCE to Cassette B (Tara).",
+      "predict": "Because Alo already holds EXTERNAL TEST, Tara must take the complementary INDOOR REFERENCE label.",
+      "test": "Select label INDOOR REFERENCE for Cassette B (Tara).",
+      "observe": "Cassette B (Tara) tag is locked as INDOOR REFERENCE.",
+      "explain": "Distinct test and reference labels guarantee unambiguous paired records across shifts."
+    },
+    "seal_alo": {
+      "target_id": "seal_alo",
+      "action": "seal_alo",
+      "scene_id": "EX-CH01-S04",
+      "step_number": 11,
+      "total_steps": 12,
+      "cassette": "alo",
+      "title": "Step 7 of 8 (Garden Bench) · Seal Alo Cassette",
+      "label": "Close Alo cassette seal",
+      "instruction": "Verify Alo is calibrated, seeded (1), watered (40–60), and labelled (EXTERNAL TEST), then close the cassette seal.",
+      "predict": "Closing the seal locks Cassette A's internal atmosphere and moisture loop for the chamber run.",
+      "test": "Switch Cassette A (Alo) Seal to CLOSED & LOCKED.",
+      "observe": "Alo cassette seal clicks shut and passes pressure check.",
+      "explain": "The cassette must be sealed only after calibration, 1 seed, 40–60 moisture, and distinct labelling are verified."
+    },
+    "seal_tara": {
+      "target_id": "seal_tara",
+      "action": "seal_tara",
+      "scene_id": "EX-CH01-S04",
+      "step_number": 12,
+      "total_steps": 12,
+      "cassette": "tara",
+      "title": "Step 8 of 8 (Garden Bench) · Seal Tara Cassette",
+      "label": "Close Tara cassette seal",
+      "instruction": "Verify Tara is calibrated, seeded (1), watered (40–60), and labelled (INDOOR REFERENCE), then close the cassette seal.",
+      "predict": "With both Alo and Tara sealed under matched conditions, P-01 Commissioning & Planting is complete.",
+      "test": "Switch Cassette B (Tara) Seal to CLOSED & LOCKED.",
+      "observe": "Tara cassette seal clicks shut. Both cassettes are commissioned and ready for paired telemetry.",
+      "explain": "Sealing both cassettes completes the paired biological setup before the 14-day lunar night."
+    }
+  }
+}

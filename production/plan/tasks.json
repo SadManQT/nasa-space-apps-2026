@@ -631,8 +631,8 @@
    "priority": "P0",
    "tool": "antigravity",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/night-claude3",
    "deps": [
     "M0-02"
    ],

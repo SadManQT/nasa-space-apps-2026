@@ -13,6 +13,8 @@ func _init() -> void:
 func _run() -> void:
 	var route := RouteScript.new(DirectorScript.new())
 	_check(bool(route.start_at("EX-CH01-S03").get("accepted", false)), "S03 starts")
+	_check(not bool(route.perform("calibrate_probe").get("accepted", false)), "unconfigured S03 calibration does not pre-fill zero")
+	route.p01_puzzle().apply_canonical_setup()
 	for target_id in ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"]:
 		var result: Dictionary = route.perform(target_id)
 		_check(bool(result.get("accepted", false)), "S03 action commits: " + target_id)

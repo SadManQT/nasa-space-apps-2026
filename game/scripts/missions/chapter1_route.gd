@@ -6,6 +6,7 @@ const DispatcherScript = preload("res://scripts/interactions/interaction_dispatc
 const WorldRouteScript = preload("res://scripts/world/world_route.gd")
 const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const P01Script = preload("res://scripts/missions/p01_commission_plant.gd")
+const P01PuzzleScript = preload("res://scripts/puzzles/p01_commission_plant_puzzle.gd")
 const PuzzleHostScript = preload("res://scripts/puzzles/puzzle_host.gd")
 const StateScript = preload("res://scripts/core/campaign_state.gd")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
@@ -19,6 +20,8 @@ const SimulationScript = preload("res://scripts/simulation/expedition_simulation
 ## never satisfy a scene gate.
 
 var _p01: RefCounted
+var _p01_puzzle: RefCounted = P01PuzzleScript.new()
+var _p01_hosts := {}
 var _scene_index := 0
 var _scene_flags := {}
 var _dialogue_acks := {}
@@ -68,6 +71,110 @@ func current_flags() -> Dictionary:
 
 func last_result() -> Dictionary:
 	return _last_result.duplicate(true)
+
+## The player's P-01 workbench choices (`P01CommissionPlantPuzzle`).
+func p01_puzzle() -> RefCounted:
+	return _p01_puzzle
+
+## Read-only view of the P-01 Commissioning & Planting Bench for `target_id`.
+## Previews the player's current workbench selection against the authoritative
+## `P01CommissionPlant` state without mutating receipts or resources.
+func p01_bench_view(target_id: String) -> Dictionary:
+	var state: Dictionary = _director.snapshot()
+	var gate_info: Dictionary = P01PuzzleScript.gate_info(target_id)
+	var action := String(gate_info.get("action", ""))
+	var p01_snap: Dictionary = _p01.snapshot()
+	var prepared_payload: Dictionary = _p01_puzzle.payload_for_gate(target_id)
+	var prereq := _p01_prerequisite_reason(target_id)
+	var gate_preview: Dictionary = _p01.preview(action, prepared_payload) if not action.is_empty() else {"accepted": false, "reason": "Select a P-01 operation."}
+	var block := prereq if not prereq.is_empty() else ("" if bool(gate_preview.get("accepted", false)) else String(gate_preview.get("reason", "Complete the current step settings.")))
+	var host := PuzzleHostScript.new()
+	host.bind(_director, "P-01", current_mission_id(), current_scene_id())
+	var scene_gates: Array = P01PuzzleScript.gates_for_scene(current_scene_id())
+	var completed_gates: Array = []
+	for gid in P01PuzzleScript.ALL_GATES:
+		if p01_snap.get("receipts", {}).has("p01:" + String(gid)):
+			completed_gates.append(String(gid))
+	return {
+		"target_id": target_id,
+		"scene_id": current_scene_id(),
+		"scenario_datetime": String(state.get("scenario_datetime", "")),
+		"gate": gate_info,
+		"scene_gates": scene_gates,
+		"completed_gates": completed_gates,
+		"p01": p01_snap,
+		"completion": _p01.completion(),
+		"workbench": _p01_puzzle.snapshot(),
+		"displayed_dry": _p01_puzzle.displayed_dry_reading(),
+		"displayed_wet": _p01_puzzle.displayed_wet_reading(),
+		"hints": _p01_puzzle.revealed_hints(),
+		"data_cards": host.data_cards(),
+		"prerequisite_reason": prereq,
+		"gate_preview": gate_preview,
+		"block_reason": block,
+	}
+
+## Drains excess water from a flooded cassette (`> 60`) on both the workbench
+## and the P-01 state without harming the seed.
+func drain_p01_cassette(cassette_id: String, target_moisture: int = 50) -> Dictionary:
+	var wb_res: Dictionary = _p01_puzzle.drain_excess_water(cassette_id, target_moisture)
+	if not bool(wb_res.get("accepted", false)):
+		return wb_res
+	_p01.drain_water(cassette_id, int(wb_res.get("moisture", target_moisture)))
+	return wb_res
+
+## Resets an unsettled (unsealed) cassette on both the workbench and the P-01
+## model without destroying any seed, clearing unsettled scene flags for that
+## cassette so it can be re-planted, re-watered, and re-labelled.
+func reset_p01_cassette(cassette_id: String) -> Dictionary:
+	var model_res: Dictionary = _p01.reset_cassette(cassette_id)
+	if not bool(model_res.get("accepted", false)):
+		return model_res
+	_p01_puzzle.reset_cassette(cassette_id, _p01.snapshot())
+	var s04_flags: Dictionary = _scene_flags.get("EX-CH01-S04", {})
+	for suffix in ["_planted", "_watered", "_labelled"]:
+		s04_flags.erase(cassette_id + suffix)
+	s04_flags.erase("p01_complete")
+	_scene_flags["EX-CH01-S04"] = s04_flags
+	for target_prefix in ["plant_", "water_", "label_"]:
+		var tid := target_prefix + cassette_id
+		_p01_hosts.erase("physical:" + tid)
+		if "_state" in _director and _director._state is Dictionary:
+			_director._state.get("receipts", {}).erase("physical:" + tid)
+			_director._state.get("mission_receipts", {}).erase("physical:" + tid)
+	return model_res
+
+func _p01_prerequisite_reason(target_id: String) -> String:
+	for spec in GateCatalog.targets_for_scene(current_scene_id()):
+		if String(spec.get("target_id", "")) == target_id:
+			var flags := _context_flags()
+			for req in spec.get("required_flags", []):
+				var flag := String(req)
+				if not bool(flags.get(flag, false)):
+					match flag:
+						"p01_zeroed":
+							return "First calibrate the dry reference cup to 0 (Step 1: Calibrate dry and wet references)."
+						"p01_spanned":
+							return "First set the wet reference span to 100 (Step 2: Set wet reference span)."
+						"p01_rechecked":
+							return "First complete the two-point probe recheck (dry = 0, wet = 100)."
+						"p01_scanned":
+							return "First scan the sealed seed packet (ALO / N., 2 seeds)."
+						"alo_planted":
+							return "First place 1 seed in the Alo cassette."
+						"tara_planted":
+							return "First place 1 seed in the Tara cassette."
+						"alo_watered":
+							return "First water the Alo cassette into the 40–60 calibrated band."
+						"tara_watered":
+							return "First water the Tara cassette into the 40–60 calibrated band."
+						"alo_labelled":
+							return "First label the Alo cassette EXTERNAL TEST."
+						"tara_labelled":
+							return "First label the Tara cassette INDOOR REFERENCE."
+						_:
+							return "Complete the preceding physical step first (" + flag + ")."
+	return ""
 
 ## The player's P-02 plan (P02MissionTable). The Mission Table UI edits it;
 ## P-02 gates commit exactly its plan.
@@ -306,6 +413,7 @@ func restore(snapshot_data: Dictionary) -> Dictionary:
 			return valid
 	_restore_local(snapshot_data)
 	_retry_checkpoint = retry_value.duplicate(true) if not retry_value.is_empty() else _checkpoint_snapshot()
+	_p01_hosts.clear()
 	_p02_hosts.clear()
 	return {"accepted": true, "reason": "Chapter 1 route restored from primitive room/mission state."}
 
@@ -313,9 +421,11 @@ func restore(snapshot_data: Dictionary) -> Dictionary:
 ## cards and hints: retry rewinds resources and actions, not what the crew
 ## learned. Alarm task progress is an action, so it resets before shift 5.
 func retry() -> Dictionary:
+	var p01_wb: Dictionary = _p01_puzzle.snapshot()
 	var table: Dictionary = _p02_table.snapshot()
 	var result: Dictionary = super.retry()
 	if bool(result.get("accepted", false)):
+		_p01_puzzle.restore(p01_wb)
 		_p02_table.restore(table)
 		if int(_director.query().get("current_shift", 0)) < int(MissionTableScript.data().get("alarm_shift", 5)):
 			_p02_table.reset_alarm_task()
@@ -391,6 +501,9 @@ func _flag_is_set(flag: String) -> bool:
 func _payload_for_target(target: Dictionary, payload: Dictionary) -> Dictionary:
 	var result := payload.duplicate(true)
 	if target.has("puzzle_action"):
+		var tid := String(target.get("target_id", ""))
+		if P01PuzzleScript.is_gate(tid):
+			result = _p01_puzzle.payload_for_gate(tid, result)
 		result["_puzzle_action"] = String(target.get("puzzle_action", ""))
 	if target.has("puzzle_id") and String(target.get("puzzle_id", "")) == "P-02" and not result.has("plan"):
 		result["plan"] = _p02_table.plan_for_gate(String(target.get("target_id", "")))
@@ -427,9 +540,18 @@ func _submit_command(command: Dictionary, preview_only: bool) -> Dictionary:
 		return duplicate
 	var payload: Dictionary = command.get("payload", {}) if command.get("payload", {}) is Dictionary else {}
 	if target.has("puzzle_action"):
+		var p01_host = _p01_hosts.get(command_id, null)
+		if p01_host == null:
+			p01_host = PuzzleHostScript.new()
+			p01_host.bind(_director, "P-01", String(command.get("owning_mission_id", current_mission_id())), String(command.get("owning_scene_id", current_scene_id())))
+			_p01_hosts[command_id] = p01_host
 		var plant_check: Dictionary = _p01.preview(String(target.puzzle_action), payload)
+		_p01_puzzle.record_attempt(plant_check)
 		if not bool(plant_check.get("accepted", false)):
-			return plant_check
+			return p01_host.record_failure(plant_check)
+		if preview_only:
+			return p01_host.preview_command(command, plant_check)
+		return p01_host.commit_command(command_id, command, false)
 	if target_id == "confirm_date_transition":
 		command = command.duplicate(true)
 		command["verb"] = "advance_time"
@@ -474,10 +596,9 @@ func _apply_target_result(target_id: String, payload: Dictionary, result: Dictio
 		var action := String(target.get("puzzle_action", ""))
 		var p01_payload := payload.duplicate(true)
 		p01_payload.erase("_puzzle_action")
-		if action in ["water_alo", "water_tara"] and not p01_payload.has("moisture"):
-			p01_payload["moisture"] = 50
 		var p01_result: Dictionary = _p01.commit(action, "p01:" + target_id, p01_payload)
 		if bool(p01_result.get("accepted", false)) or bool(p01_result.get("duplicate", false)):
+			_p01_puzzle.sync_from_committed(action, p01_payload, _p01.snapshot())
 			_apply_p01_flag(action)
 			if action == "plant_alo" and bool(p01_result.get("accepted", false)):
 				_commit_plant_care("ALO-01", target.get("owning_scene_id", current_scene_id()))
@@ -485,6 +606,9 @@ func _apply_target_result(target_id: String, payload: Dictionary, result: Dictio
 				_commit_plant_care("TARA-01", target.get("owning_scene_id", current_scene_id()))
 			if bool(_p01.completion().get("complete", false)):
 				_mark_flag("p01_complete")
+				var host = _p01_hosts.get("physical:" + target_id, null)
+				if host != null:
+					host.complete(p01_result)
 			_last_result["p01"] = p01_result
 		return
 	if target.has("puzzle_id") and String(target.get("puzzle_id", "")) == "P-02":
@@ -564,6 +688,7 @@ func _local_snapshot() -> Dictionary:
 		"scene_flags": _scene_flags.duplicate(true),
 		"dialogue_acks": _dialogue_acks.duplicate(true),
 		"p01": _p01.snapshot(),
+		"p01_puzzle": _p01_puzzle.snapshot(),
 		"ending": _ending,
 		"world": _world.snapshot(),
 		"p02_table": _p02_table.snapshot(),
@@ -607,6 +732,10 @@ func _validate_local_snapshot(data: Dictionary) -> Dictionary:
 	var plant_check: Dictionary = P01Script.new().restore(data.p01)
 	if not bool(plant_check.get("accepted", false)):
 		return plant_check
+	if data.has("p01_puzzle"):
+		var wb_check: Dictionary = P01PuzzleScript.new().restore(data.p01_puzzle)
+		if not bool(wb_check.get("accepted", false)):
+			return wb_check
 	# Saves written before the Mission Table existed have no plan; they resume
 	# with an empty table rather than an invented plan.
 	if data.has("p02_table"):
@@ -644,6 +773,9 @@ func _restore_local(snapshot_data: Dictionary) -> void:
 	_dialogue_acks = snapshot_data.get("dialogue_acks", {}).duplicate(true)
 	_ending = String(snapshot_data.get("ending", ""))
 	_p01.restore(snapshot_data.get("p01", {}))
+	_p01_puzzle = P01PuzzleScript.new()
+	if snapshot_data.has("p01_puzzle"):
+		_p01_puzzle.restore(snapshot_data.p01_puzzle)
 	_p02_table = MissionTableScript.new()
 	if snapshot_data.has("p02_table"):
 		_p02_table.restore(snapshot_data.p02_table)

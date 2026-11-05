@@ -111,6 +111,7 @@ func _run() -> void:
 	quit(0 if failures == 0 else 1)
 
 func _goto(scene_id: String) -> void:
+	campaign.route.p01_puzzle().apply_canonical_setup()
 	while campaign.route.current_scene_id() != scene_id:
 		var current: String = campaign.route.current_scene_id()
 		var ids: Array = ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"] if current == "EX-CH01-S03" else GateCatalog.targets_for_scene(current).map(func(spec): return String(spec.target_id))

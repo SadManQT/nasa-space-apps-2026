@@ -346,6 +346,7 @@ func _test_campaign_integration() -> void:
 # --- Helpers -------------------------------------------------------------------
 
 func _reach(route: RefCounted, scene_id: String) -> void:
+	PlanFixture.prepare_p01(route)
 	while route.current_scene_id() != scene_id:
 		for target_id in _targets(route.current_scene_id()):
 			route.perform(target_id)
