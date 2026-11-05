@@ -4003,8 +4003,8 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Clean, professional HUD: one plain-language goal, the UI design system, no developer text",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/night-fable",
    "deps": [],
    "paths": [
     "game/scripts/ui/chapter1_campaign_hud.gd",

@@ -1,0 +1,666 @@
+{
+ "schema_version": 1,
+ "source": "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md sections 1, 1.1, 2.2 and 8.1. Display strings only: code, data and save names stay as they are. Goals are at most 8 words, why lines at most 12 (game/tools/test_player_text.gd checks).",
+ "limits": {
+  "goal_words": 8,
+  "why_words": 12,
+  "line_characters": 60
+ },
+ "banned_patterns": [
+  "EX-CH\\d",
+  "\\bP-\\d\\d\\b",
+  "\\b[EAWKSZCRH] ?\\d",
+  "\\b(commit|commits|committed|committing|stage|staged|staging|acknowledge|acknowledged|acknowledgement|acknowledgment|role constraints?|operations?)\\b"
+ ],
+ "words": {
+  "commit shift": "lock in shift",
+  "commit": "lock in",
+  "committed": "locked in",
+  "committing": "locking in",
+  "stage": "prepare",
+  "staged": "prepared",
+  "staging": "preparing",
+  "role constraints": "crew notes",
+  "role constraint": "crew note",
+  "role cards": "crew notes",
+  "role card": "crew note",
+  "acknowledge line": "next",
+  "acknowledgement": "reading",
+  "acknowledgment": "reading",
+  "acknowledged": "read",
+  "acknowledge": "read",
+  "physical operations": "jobs here",
+  "physical operation": "job",
+  "operations": "jobs",
+  "operation": "job",
+  "local live": "",
+  "preview": "try it",
+  "pin as plan a": "save as plan a",
+  "p-02": "Seven Shifts",
+  "p-01": "the planting"
+ },
+ "rewrites": [
+  {
+   "starts_with": "CHECKPOINT SAVED",
+   "text": "Saved. You can quit safely.",
+   "kind": "good"
+  },
+  {
+   "starts_with": "Last physical checkpoint restored",
+   "text": "Back at the last checkpoint.",
+   "kind": "good"
+  },
+  {
+   "equals": "Mission Table open.",
+   "text": "",
+   "kind": "quiet"
+  },
+  {
+   "starts_with": "Complete physical prerequisite: ",
+   "flag_goal": "First: %s",
+   "kind": "caution"
+  },
+  {
+   "equals": "Complete the preceding physical check before using this target.",
+   "text": "Do the earlier jobs here first.",
+   "kind": "caution"
+  },
+  {
+   "equals": "This operation has no physical target in the current room.",
+   "text": "That job is in another room.",
+   "kind": "caution"
+  },
+  {
+   "contains": " is not part of ",
+   "text": "That job is not part of this scene.",
+   "kind": "caution"
+  },
+  {
+   "equals": "The staged shift is preview-only; commit after the shelter drill.",
+   "text": "Shift 2 is only prepared. Lock it in after the shelter drill.",
+   "kind": "caution"
+  },
+  {
+   "equals": "This physical gate must resolve its exact shifts in order.",
+   "text": "Plan the shifts in order.",
+   "kind": "caution"
+  },
+  {
+   "equals": "Physical scene gate is incomplete.",
+   "text": "Finish the jobs here first.",
+   "kind": "caution"
+  },
+  {
+   "equals": "The expedition is paused; resume before previewing an operation.",
+   "text": "Paused. Resume first.",
+   "kind": "caution"
+  },
+  {
+   "starts_with": "SAVE FAILED",
+   "kind": "caution"
+  },
+  {
+   "starts_with": "AUTOSAVE FAILED",
+   "kind": "caution"
+  }
+ ],
+ "hud": {
+  "chapter_names": {
+   "CH01": "Night One",
+   "CH02": "Be the Bee"
+  },
+  "chapter_label": "Chapter %d",
+  "continue": "Continue",
+  "continue_key": "Enter",
+  "what_now": "What now",
+  "what_now_key": "H",
+  "where": "Where",
+  "hint": "Hint",
+  "jobs_here": "Jobs here",
+  "job_done": "Done",
+  "job_now": "Now",
+  "job_later": "Later",
+  "distance": "%d m",
+  "here": "here",
+  "last_result": "Last result",
+  "data_cards": "Data cards",
+  "retry": "Retry from the last checkpoint",
+  "your_choice": "Your choice",
+  "messages": "Messages",
+  "no_messages": "No messages yet.",
+  "no_result": "Nothing to show yet. Finish a job to see what it changed.",
+  "resume": "Resume",
+  "journal": "Journal",
+  "settings": "Settings",
+  "save": "Save",
+  "save_and_quit": "Save and quit",
+  "next_line": "Next",
+  "next_line_key": "Space",
+  "auto": "Auto",
+  "auto_on": "Auto on",
+  "close": "Close",
+  "close_key": "Esc",
+  "chapter_complete": {
+   "goal": "Chapter 1 complete",
+   "why": "Your checkpoint is kept for Chapter 2"
+  },
+  "debug_hint": "Developer view (F10)",
+  "fallback_goal": "Do the next job: %s",
+  "fallback_why": ""
+ },
+ "dialogue": {
+  "origins": {
+   "LOCAL LIVE": "",
+   "EARTH LINK": "Earth link",
+   "LOCAL RADIO": "Radio",
+   "STORED RECORDING": "Recording",
+   "QUEUED TEXT": "Message"
+  },
+  "speaker_colours": {
+   "Kai": "kai",
+   "Amara": "amara",
+   "Mei": "mei",
+   "Rafi": "rafi",
+   "Ferreira": "ferreira",
+   "Commander Ferreira": "ferreira"
+  }
+ },
+ "station": {
+  "status_words": {
+   "OK": "",
+   "! CHECK": "check",
+   "! LOW": "low",
+   "! LIMIT": "over the limit"
+  },
+  "forecast_word": "if you do this",
+  "fields": {
+   "E": {
+    "word": "Battery",
+    "scale": "of",
+    "capacity": "energy_capacity",
+    "icon": "power",
+    "low": "at zero the station goes dark",
+    "matters_from": "EX-CH01-S01"
+   },
+   "A": {
+    "word": "Air",
+    "scale": "of",
+    "capacity": "air_capacity",
+    "icon": "life",
+    "low": "the crew breathes it; the air maker adds more",
+    "matters_from": "EX-CH01-S01"
+   },
+   "W": {
+    "word": "Water in the shelter wall",
+    "icon": "water",
+    "low": "it shields the Safe Room in a storm",
+    "matters_from": "EX-CH01-S07"
+   },
+   "K": {
+    "word": "Supplies in the shelter wall",
+    "icon": "shielding",
+    "low": "stacked supplies add shielding",
+    "matters_from": "EX-CH01-S10"
+   },
+   "S": {
+    "word": "Storm shelter",
+    "scale": "of",
+    "capacity": "shelter_max",
+    "icon": "shielding",
+    "low": "how many the shelter protects in a storm",
+    "matters_from": "EX-CH01-S07"
+   },
+   "Z": {
+    "word": "Radiation dose",
+    "icon": "radiation",
+    "low": "keep it at 3 or under this chapter",
+    "matters_from": "EX-CH01-S07"
+   },
+   "H": {
+    "word": "Alo's health",
+    "scale": "of",
+    "capacity": "health_capacity",
+    "icon": "plant",
+    "low": "Alo needs light, water and warmth",
+    "matters_from": "EX-CH01-S04"
+   },
+   "C": {
+    "word": "Garden health",
+    "scale": "of",
+    "capacity": "crop_capacity",
+    "icon": "plant",
+    "low": "the plants need light and water",
+    "matters_from": "EX-CH01-S04"
+   },
+   "R": {
+    "word": "Food",
+    "unit": "days",
+    "icon": "food",
+    "low": "days of meals for four",
+    "matters_from": "EX-CH01-S01"
+   }
+  }
+ },
+ "scenes": {
+  "EX-CH01-S01": {
+   "date": "11 April 2046, 06:00",
+   "place": "Mission Table",
+   "next": {
+    "goal": "Continue to the Safe Room",
+    "why": "Rafi runs the rule that works without Earth"
+   }
+  },
+  "EX-CH01-S02": {
+   "date": "11 April 2046, 07:00",
+   "place": "Safe Room",
+   "next": {
+    "goal": "Continue to the dry-storage drawer",
+    "why": "A sealed packet waits with a label older than you"
+   }
+  },
+  "EX-CH01-S03": {
+   "date": "11 April 2046, 10:00",
+   "place": "Calibration bench",
+   "next": {
+    "goal": "Continue to the garden",
+    "why": "Two seeds, two places: Alo outside, Tara inside"
+   }
+  },
+  "EX-CH01-S04": {
+   "date": "11 April 2046, late morning",
+   "place": "Garden",
+   "next": {
+    "goal": "Continue to the service rooms",
+    "why": "Days of care begin with a hand light"
+   }
+  },
+  "EX-CH01-S05": {
+   "date": "11 to 24 April 2046",
+   "place": "Service rooms",
+   "next": {
+    "goal": "Continue to the Mission Table",
+    "why": "The night has a shape; see it before it comes"
+   }
+  },
+  "EX-CH01-S06": {
+   "date": "25 April 2046, 03:36",
+   "place": "Mission Table",
+   "next": {
+    "goal": "Continue to the service rooms",
+    "why": "Daylight shift 1 begins: air before the jar spills"
+   }
+  },
+  "EX-CH01-S07": {
+   "date": "25 April 2046, daylight shifts 1 and 2",
+   "place": "Service rooms",
+   "next": {
+    "goal": "Continue to the Safe Room",
+    "why": "Rehearse the drill, then lock in shift 2"
+   }
+  },
+  "EX-CH01-S08": {
+   "date": "25 April 2046, daylight shift 2",
+   "place": "Safe Room",
+   "next": {
+    "goal": "Continue to the Mission Table",
+    "why": "At 18:00 the Sun sets and the dark shifts begin"
+   }
+  },
+  "EX-CH01-S09": {
+   "date": "25 April 2046, 18:00, dark shifts 3 and 4",
+   "place": "Mission Table",
+   "next": {
+    "goal": "Continue to the Safe Room",
+    "why": "A storm alarm sounds in dark shift 5"
+   }
+  },
+  "EX-CH01-S10": {
+   "date": "26 April 2046, dark shift 5",
+   "place": "Safe Room",
+   "next": {
+    "goal": "Continue to the garden",
+    "why": "Send the water home and plan the last shifts"
+   }
+  },
+  "EX-CH01-S11": {
+   "date": "26 to 27 April 2046, dark shifts 6 and 7",
+   "place": "Garden",
+   "next": {
+    "goal": "Continue to Alo's chamber",
+    "why": "Dawn on 27 April: see what the night made"
+   }
+  },
+  "EX-CH01-S12": {
+   "date": "27 April 2046, 06:00",
+   "place": "Garden",
+   "next": {
+    "goal": "Finish Chapter 1",
+    "why": "Alo bloomed; the crew kept its promise until dawn"
+   }
+  }
+ },
+ "targets": {
+  "commission_route": {
+   "goal": "Trace the power route at the Mission Table",
+   "why": "Sunlight makes more power than the battery can store",
+   "prompt": "Trace the power route",
+   "result": "Route traced: spare daylight power now has somewhere to go.",
+   "hint": "Follow the power from the arrays to the battery, then to the loads."
+  },
+  "commission_result": {
+   "goal": "Check the result at the Mission Table",
+   "why": "See whether the spare power was used or overflowed",
+   "prompt": "Check the result",
+   "result": "Result checked: used power counts, overflow is lost.",
+   "hint": "Compare what was produced with what the battery kept."
+  },
+  "charter_card": {
+   "goal": "Read the charter and emergency card",
+   "why": "It sets the limits that keep four cadets safe",
+   "prompt": "Read the charter card",
+   "result": "Charter read: the emergency limits are now yours to keep.",
+   "hint": "The card is on the wall near the Mission Table."
+  },
+  "classify_information": {
+   "goal": "Sort the information at the response controls",
+   "why": "When Earth goes quiet, only local facts still work",
+   "prompt": "Sort the information",
+   "result": "Sorted: local, stored and live-link information are now separate.",
+   "hint": "Ask of each item: does it survive without the Earth link?"
+  },
+  "roll_call": {
+   "goal": "Run the roll call at the board",
+   "why": "Four names on the board means nobody is missing",
+   "prompt": "Run the roll call",
+   "result": "Roll call complete: all four cadets accounted for.",
+   "hint": "Every token on the board is one person."
+  },
+  "practice_fault": {
+   "goal": "Fix the practice fault at the controls",
+   "why": "Practise solving it with local information only",
+   "prompt": "Fix the practice fault",
+   "result": "Practice fault fixed without the Earth link.",
+   "hint": "Use only what you sorted as local."
+  },
+  "calibrate_probe": {
+   "goal": "Set the probe's dry zero at the bench",
+   "why": "A probe only tells the truth after it is calibrated",
+   "prompt": "Set the dry zero",
+   "result": "Dry zero set.",
+   "hint": "Dry reference first, then wet."
+  },
+  "span_probe": {
+   "goal": "Set the probe's wet span at the bench",
+   "why": "Two known references bracket every reading between them",
+   "prompt": "Set the wet span",
+   "result": "Wet span set.",
+   "hint": "The wet reference is the second point of the scale."
+  },
+  "recheck_probe": {
+   "goal": "Recheck the dry zero and wet span",
+   "why": "A second check proves the probe holds its calibration",
+   "prompt": "Recheck both references",
+   "result": "Probe rechecked: it holds both references.",
+   "hint": "Repeat both references in the same order."
+  },
+  "inspect_packet": {
+   "goal": "Inspect the sealed seed packet",
+   "why": "Its label is older than the crew's names",
+   "prompt": "Inspect the seed packet",
+   "result": "Packet inspected: seal, record and inscription noted without damage.",
+   "hint": "Look and record. Do not open it."
+  },
+  "compare_atmosphere": {
+   "goal": "Compare the two chamber diagrams",
+   "why": "An old cotton germination record is not this year's goal",
+   "prompt": "Compare the chamber diagrams",
+   "result": "Diagrams compared: both chambers hold air; the goals differ.",
+   "hint": "Both chambers keep an atmosphere; only the purpose differs."
+  },
+  "plant_alo": {
+   "goal": "Plant Alo's seed through the glove port",
+   "why": "Alo grows in the sealed chamber outside the garden",
+   "prompt": "Plant Alo's seed",
+   "result": "Alo planted in the sealed external cassette.",
+   "hint": "Work through the glove port; the chamber stays sealed."
+  },
+  "plant_tara": {
+   "goal": "Plant Tara's seed in the reference bay",
+   "why": "Tara is Alo's indoor partner, grown the same way",
+   "prompt": "Plant Tara's seed",
+   "result": "Tara planted in the indoor reference cassette.",
+   "hint": "Same seed depth, same care, different place."
+  },
+  "water_alo": {
+   "goal": "Set Alo's moisture to the calibrated band",
+   "why": "The probe you calibrated says when the soil is right",
+   "prompt": "Set Alo's moisture",
+   "result": "Alo's moisture is in the band.",
+   "hint": "Watch the probe reading, not the water level."
+  },
+  "water_tara": {
+   "goal": "Set Tara's moisture to the calibrated band",
+   "why": "Equal care for both plants keeps the comparison fair",
+   "prompt": "Set Tara's moisture",
+   "result": "Tara's moisture is in the band.",
+   "hint": "Match the band exactly; equal care is the point."
+  },
+  "label_alo": {
+   "goal": "Label Alo's cassette External test",
+   "why": "A label tells everyone which plant is which",
+   "prompt": "Label Alo's cassette",
+   "result": "Alo labelled External test.",
+   "hint": "The label names the plant's part in the test."
+  },
+  "label_tara": {
+   "goal": "Label Tara's cassette Indoor reference",
+   "why": "Tara is the reference Alo's test is measured against",
+   "prompt": "Label Tara's cassette",
+   "result": "Tara labelled Indoor reference.",
+   "hint": "Reference means the plant you compare against."
+  },
+  "seal_alo": {
+   "goal": "Close Alo's cassette seal",
+   "why": "A sealed cassette keeps air and water with the plant",
+   "prompt": "Close Alo's seal",
+   "result": "Alo's cassette sealed.",
+   "hint": "Check the seal line all the way round."
+  },
+  "seal_tara": {
+   "goal": "Close Tara's cassette seal",
+   "why": "Tara gets the same seal as Alo",
+   "prompt": "Close Tara's seal",
+   "result": "Tara's cassette sealed.",
+   "hint": "Same seal, same check."
+  },
+  "record_paired_conditions": {
+   "goal": "Record both plants' conditions and photographs",
+   "why": "Day-one records make every later change measurable",
+   "prompt": "Record conditions and photos",
+   "result": "Day-one conditions and photographs recorded for both plants.",
+   "hint": "Date, light, moisture, photo: for each plant."
+  },
+  "confirm_services": {
+   "goal": "Confirm both chamber service connections",
+   "why": "Light, air and water must reach both chambers",
+   "prompt": "Confirm the service connections",
+   "result": "Service connections confirmed for both chambers.",
+   "hint": "Follow each line from the service room to the chamber."
+  },
+  "test_hand_light": {
+   "goal": "Test and hang the hand light",
+   "why": "Alo needs light the crew can carry and trust",
+   "prompt": "Test the hand light",
+   "result": "Hand light tested and hung.",
+   "hint": "Test it before you trust it."
+  },
+  "care_montage": {
+   "goal": "Log the care visits at the air console",
+   "why": "Each dated visit is one more fact about Alo",
+   "prompt": "Log the care visits",
+   "result": "Care visits logged, each with its date.",
+   "hint": "One observation per visit; the dates matter."
+  },
+  "confirm_date_transition": {
+   "goal": "Confirm the date at the power panel",
+   "why": "Time moves to 25 April, the last day of light",
+   "prompt": "Confirm the date",
+   "result": "It is now 25 April 2046: two daylight shifts remain.",
+   "hint": "The calendar only moves when you confirm it."
+  },
+  "arrange_timeline": {
+   "goal": "Arrange the Sun, link and station tracks",
+   "why": "Sun, Earth link and station follow three separate clocks",
+   "prompt": "Arrange the three tracks",
+   "result": "Tracks arranged: sunset, link cutoff and station events are separate.",
+   "hint": "Sunset does not end everything at once."
+  },
+  "ack_schedule": {
+   "goal": "Confirm the shared preparation schedule",
+   "why": "Every role prepares before dark; the schedule shows when",
+   "prompt": "Confirm the schedule",
+   "result": "Schedule confirmed.",
+   "hint": "Check which role depends on another's work."
+  },
+  "role_cards": {
+   "goal": "Read the crew notes at the power panel",
+   "why": "Kai and Amara set limits the night plan must respect",
+   "prompt": "Read the crew notes",
+   "result": "Crew notes read: the power and air limits are known.",
+   "hint": "Two notes: Kai's power limit, Amara's air limit."
+  },
+  "p02_shift1": {
+   "goal": "Plan the first shift at the power panel",
+   "why": "The Sun sets in two shifts; the battery must last",
+   "prompt": "Plan shift 1",
+   "result": "Shift 1 locked in.",
+   "hint": "Store air while sunlight would overflow."
+  },
+  "p02_stage_shift2": {
+   "goal": "Prepare shift 2 without locking it in",
+   "why": "The shelter drill comes first; the forecast waits",
+   "prompt": "Prepare shift 2",
+   "result": "Shift 2 prepared, not locked in. The drill comes next.",
+   "hint": "Try it only; nothing changes yet."
+  },
+  "shelter_drill": {
+   "goal": "Rehearse the shelter drill at the board",
+   "why": "A storm gives minutes; the drill makes shelter automatic",
+   "prompt": "Rehearse the drill",
+   "result": "Drill complete: entry and roll call rehearsed at no cost.",
+   "hint": "Entry, hatch, roll call, in that order."
+  },
+  "verify_drill_baseline": {
+   "goal": "Check the baseline at the response controls",
+   "why": "A drill must change nothing in the station",
+   "prompt": "Check the baseline",
+   "result": "Baseline verified: the drill changed nothing.",
+   "hint": "Compare the readings with the ones before the drill."
+  },
+  "p02_shift2": {
+   "goal": "Lock in shift 2 at the response controls",
+   "why": "Sunset is at 18:00; this is the last daylight shift",
+   "prompt": "Lock in shift 2",
+   "result": "Shift 2 locked in at 18:00. The night begins.",
+   "hint": "Prepare shielding before the alarm, then return the water."
+  },
+  "combine_cards": {
+   "goal": "Combine Mei's and Rafi's notes at the table",
+   "why": "The garden and the storm outlook shape the night plan",
+   "prompt": "Combine the crew notes",
+   "result": "Notes combined: plant thirst and storm risk share one reservoir.",
+   "hint": "Which two facts change the water plan?"
+  },
+  "ack_earth_set": {
+   "goal": "Read the Earth-link cutoff at the Earth screen",
+   "why": "After the cutoff the crew decides alone until dawn",
+   "prompt": "Read the Earth-link cutoff",
+   "result": "Cutoff noted: until dawn the crew decides without Earth.",
+   "hint": "The link ends in shift 4; the plan must not need it."
+  },
+  "p02_shifts3_4": {
+   "goal": "Plan dark shifts 3 and 4",
+   "why": "No sunlight now: every shift spends battery and air",
+   "prompt": "Plan shifts 3 and 4",
+   "result": "Shifts 3 and 4 locked in.",
+   "hint": "Open the worked Bloom plan or Guided plan."
+  },
+  "confirm_four_sheltered": {
+   "goal": "Confirm four sheltered at the roll-call board",
+   "why": "A solar storm is replaying; nobody stays outside the shelter",
+   "prompt": "Confirm four sheltered",
+   "result": "Four sheltered: everyone is behind the water wall.",
+   "hint": "Count the tokens on the board."
+  },
+  "p02_shift5_alarm": {
+   "goal": "Answer the storm alarm at the response controls",
+   "why": "Wait, pump or stack: one choice protects the crew",
+   "prompt": "Answer the alarm",
+   "result": "Alarm answered.",
+   "hint": "The forecast says whether waiting is safe."
+  },
+  "verify_exposure_order": {
+   "goal": "Check the radiation dose before draining water",
+   "why": "The water shields you; check the dose before removing it",
+   "prompt": "Check the radiation dose",
+   "result": "Dose checked before the drain: order kept.",
+   "hint": "Dose first, drain second."
+  },
+  "return_water": {
+   "goal": "Return the borrowed water to the garden",
+   "why": "The garden lent its water; Alo needs it back",
+   "prompt": "Return the water",
+   "result": "Water returned to the garden.",
+   "hint": "Return it only once the dose is checked."
+  },
+  "p02_shifts6_7": {
+   "goal": "Plan the last dark shifts, 6 and 7",
+   "why": "Dawn is two shifts away; the battery must reach it",
+   "prompt": "Plan shifts 6 and 7",
+   "result": "Shifts 6 and 7 locked in. Dawn is next.",
+   "hint": "Spend only what the battery can give until sunrise."
+  },
+  "review_outcome": {
+   "goal": "Review how the night ended",
+   "why": "See what your plan did, or retry the checkpoint",
+   "prompt": "Review the outcome",
+   "result": "Outcome reviewed.",
+   "hint": "A retry restores the checkpoint before the night plan."
+  },
+  "verify_chamber": {
+   "goal": "Check Alo's chamber at the glove port",
+   "why": "Pressure and conditions must be safe before you look",
+   "prompt": "Check the chamber",
+   "result": "Chamber safe: pressure and conditions verified.",
+   "hint": "Pressure first; the shutter stays closed until then."
+  },
+  "open_shutter": {
+   "goal": "Open the viewing shutter",
+   "why": "Alo bloomed in the night; see it safely",
+   "prompt": "Open the shutter",
+   "result": "Shutter open.",
+   "hint": "The shutter only opens on a verified chamber."
+  },
+  "tag_bloom": {
+   "goal": "Tag the first-bloom image",
+   "why": "The tag unlocks a recording left for this moment",
+   "prompt": "Tag the bloom image",
+   "result": "Image tagged: a stored recording plays.",
+   "hint": "Tag the image, then listen."
+  },
+  "inspect_tara": {
+   "goal": "Inspect Tara in the reference bay",
+   "why": "Alo needs a partner plant; Tara is the candidate",
+   "prompt": "Inspect Tara",
+   "result": "Tara inspected.",
+   "hint": "Compare how far Tara has grown against Alo."
+  },
+  "complete_debrief": {
+   "goal": "Complete the chapter debrief",
+   "why": "Your decisions and evidence become Chapter 1's record",
+   "prompt": "Complete the debrief",
+   "result": "Debrief complete. Chapter 1 is in the record.",
+   "hint": "Decisions first, then the evidence that supports them."
+  }
+ }
+}

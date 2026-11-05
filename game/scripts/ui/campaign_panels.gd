@@ -1,9 +1,10 @@
 extends Control
 class_name CampaignPanels
 
-## Shared, data-driven presentation panels.  This node reads a primitive query
-## and emits primitive commands; it never owns campaign arithmetic or mutates a
-## director/state object.
+## Shared, data-driven presentation panels in the one house style (doc 25 §2):
+## one dark-glass panel over a blurred world, a title, one line of purpose, the
+## body, and one exit key. This node reads a primitive query and emits primitive
+## commands; it never owns campaign arithmetic or mutates a director/state object.
 
 signal command_emitted(command: Dictionary)
 signal panel_opened(panel_id: String)
@@ -34,21 +35,35 @@ const PANEL_IDS := [
 	"credits",
 	"sources",
 	"data_card",
+	"what_now",
 ]
 
+## Titles and purpose lines are player words (doc 25 §1.1); ids stay as they are.
 const PANEL_DEFINITIONS := {
-	"sources": {"title": "JOURNAL / SOURCES", "query_key": "sources", "description": "Offline NASA and partner evidence. Open a dataset to see what it means for Aurora."},
-	"data_card": {"title": "DATA CARD", "query_key": "data_card", "description": "Observed evidence, computations and training assumptions are labelled separately."},
-	"objective": {"title": "OBJECTIVE", "query_key": "objective", "description": "Current objective and evidence-backed next step."},
-	"dialogue_captions": {"title": "DIALOGUE / CAPTIONS", "query_key": "dialogue_lines", "description": "Exact lines with speaker and origin labels."},
-	"journal_discovery": {"title": "JOURNAL / DISCOVERY", "query_key": "journal_entries", "description": "Acquired evidence only; unrevealed knowledge stays hidden."},
-	"mission_table": {"title": "MISSION TABLE", "query_key": "mission_table", "description": "Read-only mission plan and supplied forecast."},
-	"puzzle": {"title": "PUZZLE", "query_key": "puzzle", "description": "A named interaction can preview or submit an explicit command."},
-	"outcome": {"title": "OUTCOME", "query_key": "outcome", "description": "Review the changed readings, reserves and recorded evidence."},
-	"pause": {"title": "PAUSE", "query_key": "pause", "description": "Reading and planning do not advance scenario time."},
-	"settings_accessibility": {"title": "SETTINGS / ACCESSIBILITY", "query_key": "accessibility", "description": "Captions, large text, reduced motion and timer-free labels."},
-	"credits": {"title": "CREDITS", "query_key": "credits", "description": "Project, source and media disclosure."},
+	"sources": {"title": "Sources", "query_key": "sources", "description": "The NASA and partner data behind the game. Open one to see what it means for Aurora."},
+	"data_card": {"title": "Data card", "query_key": "data_card", "description": "What was measured, what the game worked out, and where the limits are."},
+	"objective": {"title": "Goal", "query_key": "objective", "description": "What to do next and why."},
+	"dialogue_captions": {"title": "Dialogue", "query_key": "dialogue_lines", "description": "Every line of this scene, with who said it."},
+	"journal_discovery": {"title": "Journal", "query_key": "journal_entries", "description": "What the crew has found so far."},
+	"mission_table": {"title": "Mission Table", "query_key": "mission_table", "description": "The night plan and its forecast."},
+	"puzzle": {"title": "Your choice", "query_key": "puzzle", "description": "Try an option to see what it would mean."},
+	"outcome": {"title": "Last result", "query_key": "outcome", "description": "What the last job changed."},
+	"pause": {"title": "Paused", "query_key": "pause", "description": "The clock stops while you read and plan."},
+	"settings_accessibility": {"title": "Settings", "query_key": "accessibility", "description": "Captions, text size, reduced motion and timer-free play."},
+	"credits": {"title": "Credits", "query_key": "credits", "description": "Who made this, and with what."},
+	"what_now": {"title": "What now", "query_key": "what_now", "description": "Your goal, why it matters, where to go and a hint."},
 }
+
+const BLUR_SHADER := """
+shader_type canvas_item;
+uniform sampler2D screen_texture : hint_screen_texture, filter_linear_mipmap;
+uniform float blur_lod = 2.5;
+uniform vec4 tint : source_color = vec4(0.02, 0.024, 0.04, 0.72);
+void fragment() {
+	vec4 scene = textureLod(screen_texture, SCREEN_UV, blur_lod);
+	COLOR = vec4(mix(scene.rgb, tint.rgb, tint.a), 1.0);
+}
+"""
 
 var _query: Dictionary = {}
 var _settings := {
@@ -68,6 +83,9 @@ var _body: VBoxContainer
 var _close_button: Button
 var _safe_top := 0.0
 var _last_focus: Control
+var _builders: Dictionary = {}
+var _pause_actions: Array = []
+var _tween: Tween
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -87,6 +105,16 @@ func bind_query_provider(provider: Callable) -> void:
 
 func set_command_sink(sink: Callable) -> void:
 	_command_sink = sink
+
+## Lets an owner (the HUD) fill a panel's body itself. The callable receives the
+## body container; children it marks with meta "lla_keep" are handed back, not freed.
+func set_panel_builder(panel_id: String, builder: Callable) -> void:
+	_builders[panel_id] = builder
+
+## The pause menu entries, in order: [{"label": String, "action": Callable}].
+## "Resume" is always first and closes the panel.
+func set_pause_actions(actions: Array) -> void:
+	_pause_actions = actions.duplicate()
 
 func query_snapshot() -> Dictionary:
 	return _query.duplicate(true)
@@ -110,9 +138,8 @@ func text_scale() -> float:
 	return 1.5 if bool(_settings.get("large_text", false)) else 1.0
 
 func presentation_transition_seconds() -> float:
-	## Panels are currently presented synchronously. This contract lets a
-	## future animated shell honor reduced motion without changing state flow.
-	return 0.0 if is_reduced_motion() else 0.15
+	## Show and hide ease out in 150–250 ms; reduced motion makes them instant.
+	return 0.0 if is_reduced_motion() else float(UiDesign.tokens().get("motion", {}).get("show_seconds", 0.2))
 
 func open_panel(panel_id: String, data: Dictionary = {}) -> bool:
 	if not PANEL_DEFINITIONS.has(panel_id):
@@ -127,10 +154,13 @@ func open_panel(panel_id: String, data: Dictionary = {}) -> bool:
 		var next_query := _query.duplicate(true)
 		next_query[String(PANEL_DEFINITIONS[panel_id].get("query_key", ""))] = data.duplicate(true)
 		_query = next_query
+	var was_open := not _active_panel.is_empty()
 	_active_panel = panel_id
 	_render_active_panel()
 	_overlay.show()
 	_panel.show()
+	if not was_open:
+		_animate_open()
 	panel_opened.emit(panel_id)
 	_close_button.grab_focus()
 	return true
@@ -142,6 +172,7 @@ func close_panel() -> void:
 	var return_focus := _last_focus
 	_last_focus = null
 	_active_panel = ""
+	_release_kept_children()
 	_overlay.hide()
 	_panel.hide()
 	panel_closed.emit(closed)
@@ -178,33 +209,33 @@ func _build() -> void:
 	_overlay.color = Color(0.0, 0.01, 0.03, 0.74)
 	_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	var shader := Shader.new()
+	shader.code = BLUR_SHADER
+	var material := ShaderMaterial.new()
+	material.shader = shader
+	_overlay.material = material
 	_overlay.hide()
 	add_child(_overlay)
-	_panel = _panel_style(Vector2(780, 540), Color(0.13, 0.72, 0.78, 0.84))
+	_panel = _panel_style(Vector2(780, 540), UiDesign.colour("glass_edge", Color(1, 1, 1, 0.18)))
 	_panel.minimum_size_changed.connect(_layout_panel.call_deferred)
 	_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	_panel.hide()
 	add_child(_panel)
 	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 30)
-	margin.add_theme_constant_override("margin_right", 30)
-	margin.add_theme_constant_override("margin_top", 26)
-	margin.add_theme_constant_override("margin_bottom", 24)
+	margin.add_theme_constant_override("margin_left", 28)
+	margin.add_theme_constant_override("margin_right", 28)
+	margin.add_theme_constant_override("margin_top", 22)
+	margin.add_theme_constant_override("margin_bottom", 20)
 	_panel.add_child(margin)
 	var page := VBoxContainer.new()
-	page.add_theme_constant_override("separation", 12)
+	page.add_theme_constant_override("separation", 10)
 	margin.add_child(page)
-	_title = Label.new()
-	_title.add_theme_font_size_override("font_size", 26)
-	_title.add_theme_color_override("font_color", MUSTARD)
+	_title = UiDesign.label("", "heading", "accent")
 	page.add_child(_title)
-	_description = Label.new()
-	_description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_description.add_theme_font_size_override("font_size", 14)
-	_description.add_theme_color_override("font_color", CYAN)
+	_description = UiDesign.label("", "caption", "muted")
 	page.add_child(_description)
 	var divider := HSeparator.new()
-	divider.modulate = Color(0.32, 0.52, 0.72, 0.7)
+	divider.modulate = Color(1, 1, 1, 0.18)
 	page.add_child(divider)
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -221,25 +252,50 @@ func _build() -> void:
 	footer.alignment = BoxContainer.ALIGNMENT_END
 	footer.add_theme_constant_override("separation", 8)
 	page.add_child(footer)
-	_close_button = _button("CLOSE PANEL")
+	var hud_words: Dictionary = UiDesign.text().get("hud", {})
+	_close_button = _button("%s · %s" % [String(hud_words.get("close", "Close")), String(hud_words.get("close_key", "Esc"))])
 	_close_button.pressed.connect(close_panel)
 	footer.add_child(_close_button)
+
+func _animate_open() -> void:
+	var seconds := presentation_transition_seconds()
+	if seconds <= 0.0 or not is_inside_tree():
+		_panel.modulate.a = 1.0
+		return
+	if _tween != null and _tween.is_valid():
+		_tween.kill()
+	_panel.modulate.a = 0.0
+	_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	_tween.tween_property(_panel, "modulate:a", 1.0, seconds)
+
+## Hands body children an owner wants back (meta "lla_keep") to that owner
+## instead of freeing them with the rest of the body.
+func _release_kept_children() -> void:
+	for child in _body.get_children():
+		if child.has_meta("lla_keep"):
+			_body.remove_child(child)
+			var home = child.get_meta("lla_home", null)
+			if home is Node and is_instance_valid(home):
+				home.add_child(child)
 
 func _render_active_panel() -> void:
 	if _active_panel.is_empty() or not PANEL_DEFINITIONS.has(_active_panel):
 		return
+	_release_kept_children()
 	for child in _body.get_children():
 		_body.remove_child(child)
 		child.queue_free()
 	var definition: Dictionary = PANEL_DEFINITIONS[_active_panel]
-	_title.text = String(definition.get("title", _active_panel.to_upper()))
+	_title.text = String(definition.get("title", _active_panel.capitalize()))
 	_description.text = String(definition.get("description", ""))
 	var query_key := String(definition.get("query_key", ""))
 	var value = _query.get(query_key, {})
-	if _active_panel == "settings_accessibility":
+	if _builders.has(_active_panel) and (_builders[_active_panel] as Callable).is_valid():
+		(_builders[_active_panel] as Callable).call(_body)
+	elif _active_panel == "settings_accessibility":
 		_render_settings()
 	elif _active_panel == "pause":
-		_render_data("The expedition is paused. Close this panel to resume.")
+		_render_pause()
 	elif _active_panel == "dialogue_captions":
 		_render_dialogue(value)
 	elif _active_panel == "puzzle":
@@ -249,7 +305,7 @@ func _render_active_panel() -> void:
 		_render_puzzle_sources(_query.get("source_puzzle_ids", []))
 	elif _active_panel == "journal_discovery":
 		_render_journal(value)
-		_source_button("SOURCES · ALL DATASETS", func(): open_panel("sources", {"ids": []}))
+		_source_button("Sources · all data cards", func(): open_panel("sources", {"ids": []}))
 	elif _active_panel == "sources":
 		_render_sources()
 	elif _active_panel == "data_card":
@@ -261,6 +317,7 @@ func _render_active_panel() -> void:
 	_apply_accessibility()
 	_layout_panel()
 
+## Kept for callers; the panel now centres itself inside the safe margin.
 func set_content_top(value: float) -> void:
 	_safe_top = value
 	_layout_panel()
@@ -269,45 +326,54 @@ func _layout_panel() -> void:
 	if _panel == null or _safe_top <= 0 or not is_inside_tree():
 		return
 	var view := get_viewport_rect().size
-	var width := minf(780, view.x - 32)
+	var margin := float(UiDesign.px(float(UiDesign.tokens().get("panel", {}).get("safe_margin", 64)), view.y))
+	var width := minf(780, view.x - margin * 2)
 	_panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	_panel.position = Vector2((view.x - width) * 0.5, _safe_top)
-	_panel.size = Vector2(width, maxf(300, view.y - _safe_top - 20))
+	_panel.position = Vector2((view.x - width) * 0.5, margin)
+	_panel.size = Vector2(width, maxf(300, view.y - margin * 2))
 
 func _render_data(value) -> void:
-	var body := Label.new()
-	body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	var body := UiDesign.label(_display_value(value), "body")
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body.add_theme_font_size_override("font_size", 18 if bool(_settings.get("large_text", false)) else 16)
-	body.add_theme_color_override("font_color", IVORY)
-	body.text = _display_value(value)
 	_body.add_child(body)
-	if _active_panel == "pause":
-		var note := Label.new()
-		note.text = "CAPTIONS ON BY DEFAULT  ·  TIMER-FREE LABELS  ·  REDUCED MOTION AVAILABLE"
-		note.add_theme_color_override("font_color", MUTED)
-		note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		_body.add_child(note)
+
+func _render_pause() -> void:
+	var words: Dictionary = UiDesign.text().get("hud", {})
+	var resume := _button(String(words.get("resume", "Resume")))
+	resume.name = "Resume"
+	resume.pressed.connect(close_panel)
+	_body.add_child(resume)
+	for raw in _pause_actions:
+		if not raw is Dictionary:
+			continue
+		var entry: Dictionary = raw
+		var button := _button(String(entry.get("label", "")))
+		button.name = String(entry.get("name", String(entry.get("label", "")).to_pascal_case()))
+		var action: Callable = entry.get("action", Callable())
+		if action.is_valid():
+			button.pressed.connect(action)
+		_body.add_child(button)
 
 func _render_dialogue(value) -> void:
 	if not captions_visible():
-		_render_data("Captions are hidden. Enable Captions on to read dialogue.")
+		_render_data("Captions are off. Turn them on in Settings to read the lines.")
 		return
 	var lines: Array = value if value is Array else []
 	if lines.is_empty():
-		_render_data("No acquired dialogue is ready.")
+		_render_data("No lines yet.")
 		return
+	var origins: Dictionary = UiDesign.text().get("dialogue", {}).get("origins", {})
 	for raw_line in lines:
 		if not raw_line is Dictionary:
 			continue
 		var line: Dictionary = raw_line
-		var label := Label.new()
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		label.add_theme_font_size_override("font_size", 18 if bool(_settings.get("large_text", false)) else 15)
-		label.add_theme_color_override("font_color", IVORY)
-		label.text = "%s  ·  %s\n%s" % [String(line.get("speaker", "")), String(line.get("origin_label", "")), String(line.get("text", ""))]
+		var origin := String(origins.get(String(line.get("origin_label", "")), ""))
+		var speaker := String(line.get("speaker", ""))
+		if not origin.is_empty():
+			speaker += " · " + origin
+		var label := UiDesign.label("%s\n%s" % [speaker, String(line.get("text", ""))], "body")
 		_body.add_child(label)
-		var acknowledge := _button("ACKNOWLEDGE LINE  ·  " + String(line.get("id", "")))
+		var acknowledge := _button(String(UiDesign.text().get("hud", {}).get("next_line", "Next")))
 		acknowledge.pressed.connect(func() -> void:
 			emit_command("acknowledge_line", String(line.get("id", "")), {"line_id": String(line.get("id", "")), "dialogue_only": true})
 		)
@@ -318,11 +384,7 @@ func _render_puzzle(value) -> void:
 	if data.has("choice_id"):
 		_render_decision_review(data)
 		return
-	var prompt := Label.new()
-	prompt.text = String(data.get("prompt", "Select a visible operation to request a preview."))
-	prompt.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	prompt.add_theme_font_size_override("font_size", 18 if bool(_settings.get("large_text", false)) else 16)
-	prompt.add_theme_color_override("font_color", IVORY)
+	var prompt := UiDesign.label(UiDesign.player_words(String(data.get("prompt", "Pick a job to see what it would change."))), "body")
 	_body.add_child(prompt)
 	var options: Array = data.get("options", [])
 	for raw_option in options:
@@ -336,25 +398,19 @@ func _render_puzzle(value) -> void:
 		)
 		_body.add_child(button)
 	_render_puzzle_sources([data.get("puzzle_id", "")] if data.has("puzzle_id") else _query.get("source_puzzle_ids", []))
-	var forecast := Label.new()
-	forecast.text = "FORECAST\n" + String(data.get("forecast", "The state owner supplies the forecast."))
-	forecast.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	forecast.add_theme_color_override("font_color", MUTED)
+	var forecast := UiDesign.label("Forecast\n" + UiDesign.player_words(String(data.get("forecast", "Try an option to see its forecast."))), "caption", "muted")
 	_body.add_child(forecast)
 
 func _render_decision_review(data: Dictionary) -> void:
-	_title.text = "DECISION REVIEW"
-	_description.text = "Preview an option, then confirm it for your expedition record."
+	_title.text = String(UiDesign.text().get("hud", {}).get("your_choice", "Your choice"))
+	_description.text = "Try an option, then confirm it. You can change it until you leave this scene."
 	_card_text(String(data.get("prompt", "")))
 	var recorded := String(data.get("recorded_option_id", ""))
 	var locked := bool(data.get("locked", false))
 	var selected := {"option_id": recorded}
 	var group := ButtonGroup.new()
-	var forecast := Label.new()
-	forecast.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	forecast.add_theme_color_override("font_color", MUTED)
-	forecast.text = "Select an option to preview its consequence."
-	var confirm := _button("CONFIRM CHOICE")
+	var forecast := UiDesign.label("Pick an option to see what it means.", "caption", "muted")
+	var confirm := _button("Confirm choice")
 	confirm.name = "ConfirmChoice"
 	confirm.disabled = true
 	for option in data.get("options", []):
@@ -372,13 +428,13 @@ func _render_decision_review(data: Dictionary) -> void:
 			forecast.text = "Recorded: %s\n%s" % [label, consequence]
 		button.pressed.connect(func() -> void:
 			selected.option_id = option_id
-			forecast.text = "Preview: %s\n%s" % [label, consequence]
+			forecast.text = "Try it: %s\n%s" % [label, consequence]
 			confirm.disabled = option_id == recorded
 			emit_command("preview_puzzle", option_id, {"choice_id": data.choice_id, "option_id": option_id})
 		)
 		_body.add_child(button)
 	_body.add_child(forecast)
-	_card_text("The scene exit has passed. This choice is locked." if locked else "Your confirmed choice can be revised until you pass this scene's exit. Physical operations keep their own safety checks.")
+	_card_text("This scene is over, so the choice is locked." if locked else "You can change your mind until you leave this scene. Jobs keep their own safety checks.")
 	confirm.pressed.connect(func() -> void:
 		# Closing the reading panel resumes the director before the command is
 		# committed. Pausing remains authoritative for every other operation.
@@ -388,17 +444,16 @@ func _render_decision_review(data: Dictionary) -> void:
 	_body.add_child(confirm)
 
 func _render_settings() -> void:
-	var intro := Label.new()
-	intro.text = "Presentation settings are explicit and pause-safe. They do not alter resources, predicates or story access."
-	intro.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	intro.add_theme_color_override("font_color", IVORY)
+	var intro := UiDesign.label("These change how the game looks and sounds. They never change the station or the story.", "caption", "muted")
 	_body.add_child(intro)
 	for key in ["captions", "large_text", "timer_free", "reduced_motion"]:
 		var check := CheckButton.new()
 		check.name = key
 		check.text = _setting_label(key)
+		check.add_theme_color_override("font_color", IVORY)
 		check.add_theme_color_override("font_pressed_color", IVORY)
 		check.add_theme_color_override("font_hover_pressed_color", IVORY)
+		check.add_theme_color_override("font_hover_color", IVORY)
 		check.button_pressed = bool(_settings.get(key, false))
 		check.focus_mode = Control.FOCUS_ALL
 		check.pressed.connect(func() -> void:
@@ -408,10 +463,8 @@ func _render_settings() -> void:
 	# Volumes are per machine (user://audio_settings.cfg), not part of the expedition save.
 	for bus in AudioSettings.BUSES:
 		var row := HBoxContainer.new()
-		var name_label := Label.new()
-		name_label.text = String(AudioSettings.LABELS[bus])
+		var name_label := UiDesign.label(String(AudioSettings.LABELS[bus]), "body")
 		name_label.custom_minimum_size.x = 220
-		name_label.add_theme_color_override("font_color", IVORY)
 		row.add_child(name_label)
 		var slider := HSlider.new()
 		slider.name = "volume_" + bus
@@ -423,10 +476,8 @@ func _render_settings() -> void:
 		slider.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		slider.focus_mode = Control.FOCUS_ALL
 		slider.accessibility_name = name_label.text
-		var percent := Label.new()
+		var percent := UiDesign.label("%d%%" % roundi(slider.value * 100.0), "caption", "muted")
 		percent.custom_minimum_size.x = 56
-		percent.text = "%d%%" % roundi(slider.value * 100.0)
-		percent.add_theme_color_override("font_color", MUTED)
 		slider.value_changed.connect(func(value: float) -> void:
 			AudioSettings.set_volume(bus, value)
 			percent.text = "%d%%" % roundi(value * 100.0)
@@ -434,16 +485,13 @@ func _render_settings() -> void:
 		row.add_child(slider)
 		row.add_child(percent)
 		_body.add_child(row)
-	var labels := Label.new()
-	labels.text = (
-		"CAPTIONS: exact text remains available when voice is missing; essential sounds are captioned too.\n"
-		+ ("TIMER-FREE: no reaction clock is required.\n" if is_timer_free() else "STANDARD TIMING: timing labels remain visible.\n")
-		+ ("REDUCED MOTION: panel changes are instant.\n" if is_reduced_motion() else "REDUCED MOTION: available in this panel.\n")
-		+ "These presentation settings never skip a safety predicate."
-	)
-	labels.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	labels.add_theme_color_override("font_color", MUTED)
-	_body.add_child(labels)
+	var notes := UiDesign.label(
+		"Captions keep every line readable when a voice is missing, and caption the sounds that matter.\n"
+		+ ("Timer-free: nothing needs a quick reaction.\n" if is_timer_free() else "Standard timing: timed tasks show their clock.\n")
+		+ ("Reduced motion: panels change instantly.\n" if is_reduced_motion() else "Reduced motion is available here.\n")
+		+ "None of these skip a safety check.",
+		"caption", "muted")
+	_body.add_child(notes)
 
 func _set_settings(settings: Dictionary, emit_change: bool) -> void:
 	var focus_key := ""
@@ -483,27 +531,16 @@ func _display_value(value) -> String:
 		return "\n".join(rows)
 	if value is Dictionary:
 		if value.is_empty():
-			return "No data supplied by the campaign query."
+			return "Nothing here yet."
 		var rows: Array[String] = []
 		for key in value.keys():
-			rows.append("%s: %s" % [String(key), _display_value(value[key])])
+			rows.append("%s: %s" % [String(key).capitalize(), _display_value(value[key])])
 		return "\n".join(rows)
 	return str(value)
 
 func _button(text: String) -> Button:
-	var button := Button.new()
-	button.text = text
-	button.custom_minimum_size = Vector2(0, 44)
+	var button := UiDesign.button(text, 44)
 	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	button.focus_mode = Control.FOCUS_ALL
-	button.add_theme_font_size_override("font_size", 14)
-	button.add_theme_color_override("font_color", IVORY)
-	button.add_theme_color_override("font_hover_color", INK)
-	button.add_theme_color_override("font_focus_color", IVORY)
-	button.add_theme_stylebox_override("normal", _button_style(NAVY, IVORY, false))
-	button.add_theme_stylebox_override("hover", _button_style(MUSTARD, INK, true))
-	button.add_theme_stylebox_override("pressed", _button_style(Color("#D8A915"), INK, true))
-	button.add_theme_stylebox_override("focus", _button_style(Color("#243B5A"), IVORY, true))
 	return button
 
 func _panel_style(size: Vector2, border: Color) -> PanelContainer:
@@ -512,36 +549,11 @@ func _panel_style(size: Vector2, border: Color) -> PanelContainer:
 	panel.position = -size * 0.5
 	panel.size = size
 	panel.z_index = 40
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.03, 0.05, 0.10, 0.99)
-	style.corner_radius_top_left = 18
-	style.corner_radius_top_right = 18
-	style.corner_radius_bottom_left = 18
-	style.corner_radius_bottom_right = 18
-	style.border_width_left = 1
-	style.border_width_top = 1
-	style.border_width_right = 1
-	style.border_width_bottom = 1
-	style.border_color = border
-	panel.add_theme_stylebox_override("panel", style)
+	panel.add_theme_stylebox_override("panel", UiDesign.glass_style(border, Color(0.03, 0.05, 0.10, 0.94), 0))
 	return panel
 
 func _button_style(color: Color, text_color: Color, highlighted: bool) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = color
-	style.corner_radius_top_left = 8
-	style.corner_radius_top_right = 8
-	style.corner_radius_bottom_left = 8
-	style.corner_radius_bottom_right = 8
-	style.content_margin_left = 12
-	style.content_margin_right = 12
-	if highlighted:
-		style.border_width_left = 2
-		style.border_width_top = 2
-		style.border_width_right = 2
-		style.border_width_bottom = 2
-		style.border_color = MUSTARD
-	return style
+	return UiDesign.button_style(color, highlighted)
 
 func _apply_accessibility() -> void:
 	if not is_inside_tree():
@@ -551,16 +563,7 @@ func _apply_accessibility() -> void:
 	_apply_text_scale(self)
 
 func _apply_text_scale(node: Node) -> void:
-	for child in node.get_children():
-		if child is Control:
-			var control := child as Control
-			if not control.has_meta("lla_base_font_size"):
-				var base_size := control.get_theme_font_size("font_size")
-				if base_size > 0:
-					control.set_meta("lla_base_font_size", base_size)
-			if control.has_meta("lla_base_font_size"):
-				control.add_theme_font_size_override("font_size", int(round(float(control.get_meta("lla_base_font_size")) * text_scale())))
-		_apply_text_scale(child)
+	UiDesign.apply_type(node, get_viewport_rect().size.y, text_scale())
 
 func _focused_control() -> Control:
 	if get_viewport() == null:
@@ -613,20 +616,16 @@ func _render_puzzle_sources(puzzle_ids: Array) -> void:
 			if not ids.has(card.source_id):
 				ids.append(card.source_id)
 	if not ids.is_empty():
-		_source_button("DATA CARDS · EVIDENCE BEHIND THESE NUMBERS", func(): open_panel("sources", {"ids": ids}))
+		_source_button("Data cards · the evidence behind these numbers", func(): open_panel("sources", {"ids": ids}))
 
 func _card_text(text: String, emphasis: bool = false) -> void:
-	var label := Label.new()
-	label.text = text
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.add_theme_font_size_override("font_size", 20)
-	label.add_theme_color_override("font_color", MUSTARD if emphasis else IVORY)
+	var label := UiDesign.label(text, "body", "accent" if emphasis else "ivory")
 	_body.add_child(label)
 
 func _render_card(value) -> void:
 	var id := String(value.get("source_id", "")) if value is Dictionary else ""
 	var card: Dictionary = science.card(id)
-	_card_text("WHAT THIS MEANS FOR AURORA\n" + String(card.get("takeaway", "")), true)
+	_card_text("What this means for Aurora\n" + String(card.get("takeaway", "")), true)
 	if not bool(card.get("pending", true)):
 		var visual: Dictionary = card.get("visual", {})
 		var visual_title := String(visual.get("label", "")).replace("_", " ").capitalize()
@@ -639,34 +638,35 @@ func _render_card(value) -> void:
 		var values: Array = visual.get("values", [])
 		_card_text(String(visual.get("label", "")).replace("_", " ") + " · " + String(visual.get("unit", "")) + "\n" + ("First %s · last %s · min %s · max %s\n%s → %s" % [values[0], values[-1], values.min(), values.max(), visual.get("start", ""), visual.get("end", "")] if values.size() > 1 else str(values[0])) + "\n" + String(visual.get("axis", "")))
 		_card_text(String(card.get("title", "")), true)
-		_card_text("EVIDENCE · " + String(card.get("evidence_label", "")) + "\n" + String(card.get("agency", "")) + "\nDataset: " + String(card.get("dataset_id", "")))
-		_card_text("WHAT WAS MEASURED / SUPPLIED\n" + ScienceScript.describe(card.get("fields_used", [])) + "\n" + ScienceScript.describe(card.get("values", {})))
-		_card_text("WHAT THE GAME COMPUTED\n" + ScienceScript.describe(card.get("derived", [])) + "\nGame resource units are training rules; the fixture does not validate every game number.")
-		_card_text("LIMITS\n" + String(card.get("boundary", "")), true)
-		_card_text("SOURCE\n" + String(card.get("url", "")) + "\n" + String(card.get("citation", "")) + "\nRetrieved: " + String(card.get("retrieved", "")) + "\nLicence: " + String(card.get("licence", "")))
-	_source_button("BACK TO ALL SOURCES", func(): open_panel("sources", {"ids": []}))
+		_card_text("Evidence · " + String(card.get("evidence_label", "")) + "\n" + String(card.get("agency", "")) + "\nDataset: " + String(card.get("dataset_id", "")))
+		_card_text("What was measured or supplied\n" + ScienceScript.describe(card.get("fields_used", [])) + "\n" + ScienceScript.describe(card.get("values", {})))
+		_card_text("What the game computed\n" + ScienceScript.describe(card.get("derived", [])) + "\nGame resource units are training rules; the fixture does not validate every game number.")
+		_card_text("Limits\n" + String(card.get("boundary", "")), true)
+		_card_text("Source\n" + String(card.get("url", "")) + "\n" + String(card.get("citation", "")) + "\nRetrieved: " + String(card.get("retrieved", "")) + "\nLicence: " + String(card.get("licence", "")))
+	_source_button("Back to all sources", func(): open_panel("sources", {"ids": []}))
 
 func _render_journal(value) -> void:
 	if not value is Array or value.is_empty():
-		_card_text("New discoveries appear here after you complete their evidence operations.")
+		_card_text("New discoveries appear here after you finish the jobs that find them.")
 		return
 	for entry in value:
 		if not entry is Dictionary:
 			continue
-		_card_text(String(entry.get("title", "Acquired record")).to_upper(), true)
+		_card_text(String(entry.get("title", "Record")), true)
 		_card_text(String(entry.get("evidence_label", "Recorded observation")))
 		for observation in entry.get("observations", []):
 			_card_text(String(observation.get("text", "")))
 
 func _render_outcome(value) -> void:
 	var data: Dictionary = value if value is Dictionary else {}
-	_card_text(String(data.get("result", "Complete an operation to review its readings.")), true)
-	var labels := {"E": "Energy E", "A": "Air A", "H": "Garden health H", "C": "Crop condition C", "R": "Rations R (crew-days)", "Z": "Game exposure Z", "W": "Shelter water W", "K": "Crate shielding K"}
+	_card_text(UiDesign.player_words(String(data.get("result", UiDesign.text().get("hud", {}).get("no_result", "Nothing to show yet.")))), true)
+	var fields: Dictionary = UiDesign.text().get("station", {}).get("fields", {})
 	for change in data.get("changes", []):
 		if not change is Dictionary:
 			continue
 		var key := String(change.get("field", "")).trim_prefix("resources.")
-		if labels.has(key):
-			_card_text("%s: %s to %s" % [labels[key], _display_value(change.get("from")), _display_value(change.get("to"))])
+		if fields.has(key):
+			var unit := String(fields[key].get("unit", ""))
+			_card_text("%s: %s → %s%s" % [String(fields[key].get("word", key)), _display_value(change.get("from")), _display_value(change.get("to")), (" " + unit) if not unit.is_empty() else ""])
 	for note in data.get("notes", []):
-		_card_text(str(note))
+		_card_text(UiDesign.player_words(str(note)))
