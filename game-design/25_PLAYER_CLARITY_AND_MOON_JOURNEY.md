@@ -138,9 +138,11 @@ The four always-on status cards, the operations list and the controls block leav
 - They are made from payloads you carry, they stay in the save, and they appear on later trips, on the map and in the route planner (24 N1: chapter 4 beacon positions return as a layer on the chapter 8 route map).
 - **Coverage map:** relay links drawn as lines. A new link can bring messages (the Earth desk, the archive). The finale's live voice arrives over the network the player built (canon: P-16 dual-link verification).
 
-### 4.5 The rover
+### 4.5 The rover (you drive it)
 
+- **The player drives it.** Walk up and press E to climb in; a third-person chase camera and a cab view (V); crew ride along as passengers and talk on the intercom; headlights; climb out anywhere it is safe. It is drivable in the Moon trainer from day one, and in the story from chapter 4 (canon).
 - VIPER-class slope limit from the fixture (`viper_slope_limit`), battery with a return reserve, trailer payloads, and readouts on the cab dashboard. Assisted driving stays inside the slope limit; Expedition mode only warns.
+- Low-gravity handling that feels right: a long, floaty suspension travel, wheels that spray dust in ballistic arcs, gentle drifts on loose regolith, and braking distances longer than on Earth.
 - **Route planner:** pick waypoints on the map; see the slope profile, distance, time, battery and reserve before confirming.
 
 ### 4.6 The RPG layer
@@ -195,6 +197,31 @@ A title-menu mode (built with M1-29 Mission Trainer) with free training sorties 
 - **Chapter 1:** moving and looking; using things (E); the goal card and What now (H); the station strip; Messages; the Mission Table in three steps; locking in a shift; carrying and stacking supplies; the care-round photo; the evidence board.
 - **Chapters 2–8, one per new mechanic:** the pollination route; reading a recorder's history; isolating a fault with a reference gauge; the harvest ledger; the scanner pulse and slopes; markers and fixed lines; the rover and the return reserve; classifying an impact flash; the energy budget for darkness; the storm shelter run and the dosimeter; repeaters and the coverage map; replacing the controller and checking both links.
 
+### 7.1 Science explainers (the physics and the NASA data behind the clues)
+
+Short motion explainers (20–45 seconds, captions, a calm narrator-free style with animated diagrams) teach **the physics a junior astronaut needs and how each NASA dataset works**, exactly where a clue or decision uses it. Each one ends on what it means for the player's next decision. They play from the mission data card (M1-30), the clue that uses the data, and Journal → Science, and they are labelled honestly (measured data, model, diagram or counterfactual; 24 §2.12).
+
+| Explainer | Teaches | Fixture(s) | First used |
+|---|---|---|---|
+| Why the Sun stays low at the pole | Axial tilt, polar illumination, why light is not continuous | `jpl_horizons_pole_season`, `lro_mazarico_2011_illumination` | CH01 |
+| Where is Earth? | Earth's position from the pole, line of sight, the shift-4 cutoff as a training event | `jpl_horizons_ch1_sky`, `jpl_ipn_42_176_dte` | CH01 |
+| Air, water and food for a crew | Daily human needs and margins | `bvad_2022_metabolic` | CH01 |
+| Solar power and batteries | Generation, storage, overflow, blackout | `vsat_relocatable_array` | CH01, CH06 |
+| Reading a proton-flux chart | What the 2017 GOES curve measures; log scales; when to shelter | `goes13_protons_2017_09`, `donki_2017_09` | CH01, CH07 |
+| What shielding does | Why water and regolith reduce dose; ALARA | `clowdsley_2021_shielding`, `change4_lnd_surface_dose`, `crater_dose_2012_07` | CH01, CH07 |
+| How plants grow in space | Seed-to-seed cycles, pollination, controlled conditions | `fast_plants_lifecycle`, `mir_brassica_seed_to_seed`, `osdr_brassica_rapa_iss` | CH01, CH02 |
+| Moonquakes | Shallow quakes recorded by Apollo seismometers; why equipment must be secured | `apollo_shallow_moonquakes` | CH03 |
+| Mapping the Moon with a laser | How LOLA measures height; slopes from heights | LOLA terrain (M1-34) | CH04 |
+| Why cold traps hold ice | Permanent shadow, Diviner temperatures | `diviner_cold_traps`, `kaguya_shackleton_floor` | CH04 |
+| How we know there is water | LCROSS impact, M3 spectra; evidence versus assumption | `lcross_water_2009`, `chandrayaan1_m3_ice` | CH04 |
+| Rovers and slopes | Slope limits, traction in regolith, energy per metre | `viper_slope_limit` | CH04, CH08 |
+| Impact flashes | Meteoroids hitting the Moon; why two telescopes must agree | `meo_lunar_impact_flashes` | CH05 |
+| Cotton on the Moon | What Chang'e-4 showed, and what it did not | `change4_cotton` | CH05 |
+| The red ring | A total eclipse of the Sun by Earth, seen from the Moon | `nasa_eclipse_2047_01_12` | CH06 |
+| Solar storms in 2012 and 2017 | Real events versus labelled counterfactuals | `donki_2012_07`, `stereo_a_het_2012_07` | CH07 |
+| Relays and line of sight | Why terrain blocks radio; how relays and pointing work | `esa_moonlight_relay`, `jpl_horizons_ch8_relay` | CH07, CH08 |
+| Low gravity | Why you bound, why dust falls straight back, why braking takes longer | — (physics) | Moon trainer |
+
 ---
 
 ## 8. How we know it works (acceptance)
@@ -228,5 +255,49 @@ A title-menu mode (built with M1-29 Mission Trainer) with free training sorties 
 | M3-66 | antigravity | Explainer clips for every chapter 2–8 mechanic (§7) |
 | M3-67 | antigravity | Moon trainer mode (§4.7) |
 | M3-2T … M3-8T | claude (Fable) | Messages for chapters 2–8 (§5) |
+| M1-60 | claude (Fable) | Chapter 1 science explainers (§7.1) |
+| M3-68 | claude (Fable) | Science explainers for chapters 2–8 and the Moon trainer (§7.1) |
+| M3-69 | claude (Fable) | The junior-astronaut curriculum: competencies, Academy manual, "what you learned" debriefs (§10) |
+| M3-70 | codex | Steam-quality settings, controls and saves (§11) |
 
 Existing tasks gain this document: M1-18 (first five minutes, now Fable), M1-21 (Chapter 1 QA waits for M1-54…M1-59), M1-29, M1-31, M3-90, every chapter's puzzles, missions and QA (missions wait for the journey systems their chapter uses), and M3-92.
+
+---
+
+## 10. What a junior astronaut learns (the curriculum)
+
+The game answers the official challenge, *Build a Junior Astronaut Mission Trainer* (operate an outpost while balancing life support, radiation shielding, power and food; [GAMEPLAY_DESIGN_FINAL](../docs/GAMEPLAY_DESIGN_FINAL.md) §10), and teaches through the eight real NASA practices in [23](23_NASA_MISSION_PRACTICE.md). It is a trainer you learn from by playing: no exams, no quizzes, no certification claim.
+
+| Competency | What the cadet learns | Where it is taught and practised | Proved in play by |
+|---|---|---|---|
+| Life support | Air, water and food needs; margins; leaks and thermal limits | CH01 night plan, CH07 storm, rest and jobs | Keeping air and food above the line through a dark night |
+| Power | Solar generation, storage, overflow, darkness budgets | CH01, CH06 red ring | A blackout-free plan through known darkness |
+| Thermal control | Heat in the habitat, cold shadow outside | CH01 heat, CH04 cold trap | Equipment kept inside its temperature limits |
+| Radiation and space weather | Dose, shielding, ALARA, reading real storm data | CH01 shift 5, CH07 | Sheltering in time from the measured profile |
+| Food and plant science | Growth stages, pollination, seed-to-seed, a real cotton result | CH01–CH03, CH05 | Alo and Tara's lineage carried to harvest |
+| EVA and suit operations | Suit budget, return reserve, checklists, buddy checks | Moon trainer, CH04, CH08 | A sortie home with the reserve intact |
+| Navigation | Slopes from real elevation data; Sun and Earth bearings; no GPS | CH04, CH08 | A planned route that matches the ground |
+| Rover operations | Slope limits, energy per metre, payload care | Moon trainer, CH04, CH08 | A drive within the limit and the reserve |
+| Communication | Line of sight, relays, link windows, light-time delay, CAPCOM call-outs | CH01 cutoff, CH07–CH08 | Both links verified before the call |
+| Lunar science | Regolith, ice in cold traps, moonquakes, impact flashes, eclipses | CH03–CH06 | Each measurement checked against a reference |
+| Teamwork and systems engineering | Trade studies, flight rules, Go/No-Go polls, procedures, risk, anomaly resolution, blame-free debriefs | Every chapter (23 MP-01…MP-08) | Plans that follow the agreed rules |
+| The scientific method | Observed, inferred and unknown; a wrong theory is information | The N. mystery, every puzzle (22 T2, T10) | Claims filed in the right column |
+
+- **The cadet record tracks each competency** (from M3-64): the moments the cadet learned it, practised it and proved it.
+- **The Academy manual** (Journal → Manual) collects what the cadet learned in plain words: one page per competency, with its explainer clips (§7, §7.1), the real data card and the cadet's own decisions.
+- **"What you learned"** ends every chapter: three things learned, the real data behind them and one decision replayed. It extends the existing debrief order.
+- **Fun first:** every lesson arrives through something the player wants to do (save Alo, get the crew through the night, reach the summit). No lecture before play, no text longer than §1 allows.
+
+## 11. Steam-worthy quality bar
+
+A game people would buy on Steam, with or without the competition:
+
+- **Look and sound:** no placeholder art, text or audio in anything the player reaches; one consistent visual language (§2); music and effects mixed to the existing loudness targets.
+- **Performance and stability:** 60 fps on this Mac in every area (the existing perf probe); loading behind the loading card in under 10 s; no crash or soft-lock in a two-hour soak per chapter.
+- **Settings:** resolution, window mode, V-sync, frame cap, quality preset, field of view; master, music, voice and effects volume; full keyboard and controller remapping with matching button glyphs; captions and subtitle size; the accessibility options already defined plus the §2.3 assist modes.
+- **Saves:** autosave at every scene change, three manual slots, Continue on the title screen, chapter select after completion, safe save migration (M1-47 schema).
+- **Respect for the player:** pause anywhere, skip any cutscene after the first viewing, no lost progress on quit, clear credits and the AI-use disclosure.
+
+## 12. Releases come after the full game (Sadman, 5 November)
+
+Build and perfect the full game first; release packaging (store page, browser build, final release builds) waits until the game is complete. The NASA Space Apps dates are fixed outside the team (video uploads by 13 November 18:30 and 14 November 09:00; judging on 14 November), so the M2 submission tasks stay on the board and run against whatever build exists by then.

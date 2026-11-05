@@ -972,7 +972,8 @@
     "M1-56",
     "M1-57",
     "M1-58",
-    "M1-59"
+    "M1-59",
+    "M1-60"
    ],
    "paths": [
     "production/qa/",
@@ -986,7 +987,7 @@
    "note": "",
    "evidence": "",
    "updated": "2026-11-05",
-   "prompt": "Play the release build from title to the CH02 readiness point twice (one Golden Bloom attempt, one deliberate Alo Lost then retry), with\nkeyboard and with a controller. Capture a screenshot per scene into production/qa/evidence/ch01/. For every defect, add a new board task\n(next free M1-3x id, tool by type, prompt with exact repro and expected result, dep none) via editing production/plan/tasks.json, then run\n`python3 production/plan/board.py check`. Check canon on screen: no Bangla text, no plant faces, no NASA logos, science rules.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 items 1–3 and 5 (no developer text, clear centre, teaching coverage, five-second test at 10 checkpoints) and log first-time play times per mission."
+   "prompt": "Play the release build from title to the CH02 readiness point twice (one Golden Bloom attempt, one deliberate Alo Lost then retry), with\nkeyboard and with a controller. Capture a screenshot per scene into production/qa/evidence/ch01/. For every defect, add a new board task\n(next free M1-3x id, tool by type, prompt with exact repro and expected result, dep none) via editing production/plan/tasks.json, then run\n`python3 production/plan/board.py check`. Check canon on screen: no Bangla text, no plant faces, no NASA logos, science rules.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 items 1–3 and 5 (no developer text, clear centre, teaching coverage, five-second test at 10 checkpoints) and log first-time play times per mission.\n\nAlso check the Chapter 1 science explainers (M1-60) play from their data cards and clues."
   },
   {
    "id": "M1-22",
@@ -3356,7 +3357,10 @@
    "deps": [
     "M3-8Q",
     "M3-90",
-    "M3-91"
+    "M3-91",
+    "M3-68",
+    "M3-69",
+    "M3-70"
    ],
    "paths": [
     "production/qa/",
@@ -3369,7 +3373,7 @@
    "note": "",
    "evidence": "",
    "updated": "2026-11-05",
-   "prompt": "Per execution/QA_01_CANON_AND_LEARNING.md, QA_03_RUNTIME_AND_SAVES.md and QA_05_ACCESSIBILITY_AND_UX.md over the complete campaign; file\ndefects as board tasks.\nInclude an independent science review of every chapter, as M1-40 did for Chapter 1.\n\nStory continuity: every one of the 100 joins in game-design/24_NARRATIVE_REVISION.md §2.9 must play in one full run; list each join with pass/fail.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 across the whole campaign: no developer text, every join's messages, teaching coverage for every mechanic, and first-time chapter lengths."
+   "prompt": "Per execution/QA_01_CANON_AND_LEARNING.md, QA_03_RUNTIME_AND_SAVES.md and QA_05_ACCESSIBILITY_AND_UX.md over the complete campaign; file\ndefects as board tasks.\nInclude an independent science review of every chapter, as M1-40 did for Chapter 1.\n\nStory continuity: every one of the 100 joins in game-design/24_NARRATIVE_REVISION.md §2.9 must play in one full run; list each join with pass/fail.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 across the whole campaign: no developer text, every join's messages, teaching coverage for every mechanic, and first-time chapter lengths.\n\nAlso verify the curriculum (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §10: every competency taught, practised and proved), every science explainer (§7.1) and the Steam quality bar (§11)."
   },
   {
    "id": "M3-93",
@@ -4257,7 +4261,7 @@
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
    "evidence": "",
    "updated": "2026-11-05",
-   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.5: rover with the VIPER-class slope limit from the fixture, battery with return reserve, trailer payloads,\ncab dashboard readouts, assisted driving that stays inside the limit (Expedition only warns); a route planner on the map with\nwaypoints, slope profile, distance, time, battery and reserve shown before confirming. Tests for the slope limit, reserve\narithmetic and planner estimates.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.5: rover with the VIPER-class slope limit from the fixture, battery with return reserve, trailer payloads,\ncab dashboard readouts, assisted driving that stays inside the limit (Expedition only warns); a route planner on the map with\nwaypoints, slope profile, distance, time, battery and reserve shown before confirming. Tests for the slope limit, reserve\narithmetic and planner estimates.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.\n\nThe player drives the rover (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.5): climb in with E, chase camera and cab view (V), crew ride along on the intercom, headlights, climb out anywhere safe, low-gravity handling (long suspension travel, ballistic dust, longer braking). Drivable in the Moon trainer as soon as it exists."
   },
   {
    "id": "M3-64",
@@ -4365,7 +4369,7 @@
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
    "evidence": "",
    "updated": "2026-11-05",
-   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.7 on top of M1-29 Mission Trainer: sorties that teach walking, the scanner, carrying, markers and the\nrover on the real region, with report cards and no story spoilers; reachable from the title menu.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.7 on top of M1-29 Mission Trainer: sorties that teach walking, the scanner, carrying, markers and the\nrover on the real region, with report cards and no story spoilers; reachable from the title menu.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.\n\nInclude driving the rover (M3-63) and the low-gravity explainer (§7.1) in the trainer."
   },
   {
    "id": "M3-2T",
@@ -4541,6 +4545,105 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Do: write game/resources/campaign/content/messages/ch08.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 8 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M1-60",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "claude",
+   "title": "Chapter 1 science explainers: the polar Sun, Earth's position, crew needs, power, storm data, shielding, plant growth",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-59"
+   ],
+   "paths": [
+    "production/explainers/science/",
+    "game/assets/explainers/science/"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game/scripts/science/science_data.gd"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: build the Chapter 1 explainers in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §7.1 (rows marked CH01): why the Sun stays low at the pole; where Earth is and why\nshift 4's cutoff is a training event; air, water and food for a crew; solar power and batteries; reading the 2017 proton-flux\nchart; what shielding does; how plants grow in space. Every explainer: 20–45 s, captions, animated diagrams made in Godot with the M1-59 pipeline, honest labels (measured, model, diagram or counterfactual; game-design/24_NARRATIVE_REVISION.md §2.12), numbers taken from the bundled fixture in game/resources/data/nasa/ (never invented), ending on what it means for the player's next decision; attach it to the mission data card (M1-30), the clue that uses the data and Journal → Science. Check every number against its fixture and source.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-68",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Science explainers for chapters 2-8 and the Moon trainer (physics and the NASA data behind every clue)",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-59"
+   ],
+   "paths": [
+    "production/explainers/science/",
+    "game/assets/explainers/science/"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: build every remaining explainer in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §7.1 (moonquakes, LOLA mapping, cold traps, how we know there is water, rovers and\nslopes, impact flashes, cotton on the Moon, the red ring, the 2012 and 2017 storms, relays and line of sight, low gravity) and add\none for any later clue that uses a NASA fixture without an explainer. Every explainer: 20–45 s, captions, animated diagrams made in Godot with the M1-59 pipeline, honest labels (measured, model, diagram or counterfactual; game-design/24_NARRATIVE_REVISION.md §2.12), numbers taken from the bundled fixture in game/resources/data/nasa/ (never invented), ending on what it means for the player's next decision; attach it to the mission data card (M1-30), the clue that uses the data and Journal → Science. Check every number against its fixture and source.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-69",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "The junior-astronaut curriculum: competencies, the Academy manual and 'what you learned' debriefs",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-64"
+   ],
+   "paths": [
+    "game/scripts/progression/curriculum.gd",
+    "game/resources/campaign/content/curriculum.json",
+    "game/scripts/ui/academy_manual.gd",
+    "game/tools/test_curriculum.gd"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
+    "game-design/23_NASA_MISSION_PRACTICE.md",
+    "docs/GAMEPLAY_DESIGN_FINAL.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §10: the twelve competencies in curriculum.json, each mapped to the missions that teach, practise and prove it\n(learned / practised / proved moments recorded in the cadet record); Journal → Manual with one plain-language page per competency\n(its explainer clips, the real data card and the cadet's own decisions); a \"what you learned\" page at every chapter end (three\nthings, the data behind them, one decision replayed). Fun first: no quizzes or exams. Test: every competency has at least one\nteach, practise and prove moment in the campaign data.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
+  },
+  {
+   "id": "M3-70",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Steam-quality settings, controls and saves",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-54"
+   ],
+   "paths": [
+    "game/scripts/settings/",
+    "game/scripts/ui/settings_menu.gd",
+    "game/scripts/save/",
+    "game/tools/test_settings.gd"
+   ],
+   "refs": [
+    "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
+   ],
+   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "evidence": "",
+   "updated": "2026-11-05",
+   "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §11: resolution, window mode, V-sync, frame cap, quality preset, field of view; master/music/voice/effects\nvolume; full keyboard and controller remapping with matching button glyphs; captions and subtitle size; assist modes (§2.3);\nautosave at every scene change, three manual slots, Continue, chapter select after completion, safe migration from the M1-47\nschema; pause anywhere; skip any cutscene after the first viewing. Tests for settings persistence, remapping conflicts and save\nslots.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md."
   }
  ],
  "requirements": [
