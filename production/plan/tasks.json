@@ -5263,8 +5263,8 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Restore the second M1-63 explainer sample required by the test gate",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/assets/explainers/",
