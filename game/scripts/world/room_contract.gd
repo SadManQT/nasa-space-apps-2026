@@ -314,6 +314,13 @@ const _SCENE_ROOMS := {
 	"EX-CH02-S04": "LOC-05", "EX-CH02-S05": "LOC-05", "EX-CH02-S06": "LOC-03",
 	"EX-CH02-S07": "LOC-01", "EX-CH02-S08": "LOC-02", "EX-CH02-S09": "LOC-02",
 	"EX-CH02-S10": "LOC-02", "EX-CH02-S11": "LOC-01", "EX-CH02-S12": "LOC-01",
+	# Chapter 6 (M3-6R), from each scene's location in STORY_FULL.md and the CHAPTER_06 scene scripts: the power
+	# room holds the locker, plan, board, test panel and F2 (S01-S05, S10) and the debrief at the board (S11, SC-0605);
+	# the eclipse desk and its filtered monitor stand by the Mission Table (S06-S09, SC-0603/0604); S12 is the garden.
+	"EX-CH06-S01": "LOC-02", "EX-CH06-S02": "LOC-02", "EX-CH06-S03": "LOC-02",
+	"EX-CH06-S04": "LOC-02", "EX-CH06-S05": "LOC-02", "EX-CH06-S06": "LOC-01",
+	"EX-CH06-S07": "LOC-01", "EX-CH06-S08": "LOC-01", "EX-CH06-S09": "LOC-01",
+	"EX-CH06-S10": "LOC-02", "EX-CH06-S11": "LOC-02", "EX-CH06-S12": "LOC-03",
 }
 
 ## Returns every stable location ID in the campaign.
@@ -367,8 +374,6 @@ static func _extended_room_for_scene(scene_id: String) -> String:
 			return ["LOC-03", "LOC-08", "LOC-08", "LOC-09", "LOC-09", "LOC-10", "LOC-10", "LOC-10", "LOC-08", "LOC-03", "LOC-01", "LOC-01"][order - 1]
 		5:
 			return ["LOC-08", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-02", "LOC-01", "LOC-01", "LOC-01", "LOC-03"][order - 1]
-		6:
-			return ["LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-01", "LOC-02", "LOC-01", "LOC-01", "LOC-02", "LOC-01", "LOC-03"][order - 1]
 		7:
 			return ["LOC-01", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-01", "LOC-01", "LOC-02", "LOC-01"][order - 1]
 		8:
@@ -407,3 +412,144 @@ static func validate(room_id: String) -> Dictionary:
 		if definition.get("bounds_m", []).size() != 2:
 			errors.append(room_id + " must declare width and depth")
 	return {"valid": errors.is_empty(), "errors": errors}
+
+# ------------------------------------------------------------------------------------------- chapter staging
+# A room JSON's optional "staging" array holds dated layers (doc 09 revisit rules: props accumulate between
+# chapters; only mission-specific controls change state). A layer, and any item inside it, is active from its
+# "from" scene to its "until" scene (inclusive, either optional); "by_scene" (a scene id or an inclusive
+# "FROM..UNTIL" range) overrides fields for those scenes; "choice" / "unless" gate an echo layer on a recorded
+# story_log option (doc 24 §5.2). The base layout stays the Chapter 1 room; staging only adds and hides.
+
+const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "prints", "hide", "hide_signs"]
+const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views"]
+
+## Story order of a canon scene id (chapter * 100 + scene number), or -1 for anything that is not one.
+static func scene_order(scene_id: String) -> int:
+	var parts := scene_id.split("-")
+	if parts.size() != 3 or parts[0] != "EX" or not parts[1].begins_with("CH") or not parts[2].begins_with("S"):
+		return -1
+	return int(parts[1].substr(2)) * 100 + int(parts[2].substr(1))
+
+## True when scene_id lies inside an item's dated window ("from"/"until", inclusive, either optional).
+static func in_window(item: Dictionary, scene_id: String) -> bool:
+	var at := scene_order(scene_id)
+	if at < 0:
+		return false
+	if item.has("from") and at < scene_order(String(item.from)):
+		return false
+	if item.has("until") and at > scene_order(String(item.until)):
+		return false
+	return true
+
+## The chapter staging a room shows in one scene: every active layer's additions (props, fixtures, obstacles,
+## focus targets, signs, lights, M3-6A eclipse props, prints), what it hides from the base layout, merged anchors,
+## focus relabels, per-scene lighting, the stations each scene action uses, and objects a cast member carries.
+## choices is story_log.choices (choice_id -> {"option_id", ...}); it only gates echo layers.
+static func staging(room_id: String, scene_id: String, choices: Dictionary = {}) -> Dictionary:
+	return staging_for(layout(room_id), scene_id, choices)
+
+## staging() for a layout the caller already holds (a built room keeps its own), so the JSON is not read again.
+static func staging_for(room_layout: Dictionary, scene_id: String, choices: Dictionary = {}) -> Dictionary:
+	var result := {"layers": [], "walk_probe": []}
+	for key in _STAGING_LISTS:
+		result[key] = []
+	for key in _STAGING_MAPS:
+		result[key] = {}
+	for raw_layer in room_layout.get("staging", []):
+		if not raw_layer is Dictionary or not _choice_met(raw_layer, choices):
+			continue
+		var layer := _resolve(raw_layer, scene_id)
+		if layer.is_empty():
+			continue
+		result.layers.append(String(layer.get("id", "")))
+		for key in _STAGING_LISTS:
+			for item in layer.get(key, []):
+				if item is Dictionary:
+					var one := _resolve(item, scene_id)
+					if not one.is_empty():
+						result[key].append(one)
+				else:
+					result[key].append(item)
+		for key in _STAGING_MAPS:
+			var values: Dictionary = layer.get(key, {})
+			for name in values:
+				result[key][name] = values[name].duplicate(true) if values[name] is Dictionary or values[name] is Array else values[name]
+		if layer.has("walk_probe"):
+			result.walk_probe = layer.walk_probe.duplicate(true)
+	return result
+
+## The location as it stands in one scene: the base layout with hidden items removed and the active staging
+## added (the shape the M1-06 checks read: props, fixtures, obstacles, focus_targets, anchors, signs, walk_probe).
+## The applied staging itself is under "stage".
+static func staged_layout(room_id: String, scene_id: String, choices: Dictionary = {}) -> Dictionary:
+	return staged_layout_for(layout(room_id), scene_id, choices)
+
+## staged_layout() for a layout the caller already holds.
+static func staged_layout_for(base: Dictionary, scene_id: String, choices: Dictionary = {}) -> Dictionary:
+	if base.is_empty():
+		return {}
+	var stage := staging_for(base, scene_id, choices)
+	var result := base.duplicate(true)
+	result.erase("staging")
+	for key in ["props", "fixtures", "obstacles", "local_lights"]:
+		var kept: Array = []
+		for item in base.get(key, []):
+			if String(item.get("id", "")) not in stage.hide:
+				kept.append(item.duplicate(true))
+		result[key] = kept + stage[key]
+	var targets: Array = []
+	for target in base.get("focus_targets", []):
+		var copy: Dictionary = target.duplicate(true)
+		if stage.focus_labels.has(String(copy.target_id)):
+			copy.label = String(stage.focus_labels[copy.target_id])
+		targets.append(copy)
+	result.focus_targets = targets + stage.focus_targets
+	var signs: Array = []
+	for sign in base.get("signs", []):
+		if String(sign.text) not in stage.hide_signs:
+			signs.append(sign.duplicate(true))
+	result.signs = signs + stage.signs
+	result.anchors = base.get("anchors", {}).duplicate(true)
+	result.anchors.merge(stage.anchors, true)
+	result.review_views = base.get("review_views", {}).duplicate(true)
+	result.review_views.merge(stage.review_views, true)
+	if not stage.walk_probe.is_empty():
+		result.walk_probe = stage.walk_probe.duplicate(true)
+	result["stage"] = stage
+	return result
+
+## Crew and player anchors for one scene (base anchors with the active staging's overrides).
+static func staged_anchors(room_id: String, scene_id: String, choices: Dictionary = {}) -> Dictionary:
+	var result := anchors(room_id)
+	result.merge(staging(room_id, scene_id, choices).anchors, true)
+	return result
+
+## The room station (a focus target id) that a scene's action happens at, from the active staging's "stations",
+## or "" when the room data names none (callers keep their own fallback).
+static func station_focus(scene_id: String, action: String) -> String:
+	return String(staging(room_for_scene(scene_id), scene_id).stations.get(action, ""))
+
+static func _resolve(item: Dictionary, scene_id: String) -> Dictionary:
+	if not in_window(item, scene_id):
+		return {}
+	var result := item.duplicate(true)
+	result.erase("by_scene")
+	var overrides: Dictionary = item.get("by_scene", {})
+	for key in overrides:
+		var span := String(key).split("..")
+		if in_window({"from": span[0], "until": span[span.size() - 1]}, scene_id):
+			for field in overrides[key]:
+				var value = overrides[key][field]
+				result[field] = value.duplicate(true) if value is Dictionary or value is Array else value
+	return result
+
+static func _choice_met(layer: Dictionary, choices: Dictionary) -> bool:
+	for gate in ["choice", "unless"]:
+		if not layer.has(gate):
+			continue
+		var spec: Dictionary = layer[gate]
+		var recorded = choices.get(String(spec.get("choice_id", "")), {})
+		var picked := String(recorded.get("option_id", "")) if recorded is Dictionary else String(recorded)
+		if (picked == String(spec.get("option_id", ""))) != (gate == "choice"):
+			return false
+	return true

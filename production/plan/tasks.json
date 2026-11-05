@@ -2714,8 +2714,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 6 rooms and locations",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-claude2",
    "deps": [
     "M1-06",
     "M3-6A"
@@ -2729,8 +2729,8 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-05",
+   "evidence": "run_tests.sh 42/42 suites passed (production/qa/evidence/M3-6R_tests.txt; test_chapter6_rooms 3095 checks, rerun 1/1 after the last anchor tweak); windowed capture PASS 3139 checks, 60 fps with cast in LOC-01/02/03 (M3-6R_runtime.txt, M3-6R_capture.sh). CH06 scene-room map per STORY_FULL (S07 -> LOC-01 eclipse desk, S11 -> LOC-02), roster rows (Mei in the garden S01-S03/S05, Commons S10); chapter staging layers in LOC-01/02/03.json built by game/scripts/world/room_staging.gd with collision, rebuilt navigation, per-scene light levels, anchors and stations for every CH06 action; M3-6A props placed in each scene's state; every doc 24 §2.9 CH05->CH06..CH06->CH07 join, clue 20 and D9/D10/D11 echoes staged and tested; new wall hand-light locker in LOC-02. Screenshots production/qa/evidence/M3-6R_*.png (22): S01_power_room, S01_player, S01_marker_tape, S01_hand_light_locker, S02_personal_log, S03_allocation_board, S04_floods_and_guide, S05_test_panel, S06_mission_table, S06_eclipse_desk, S07_red_ring, S09_message_log, S10_f2_dark, S10_f2_fault_close, S10_guide_light, S10_player_lamp, S10_lamp_on_kai, S11_debrief_board, S11_camera_restored, S12_monitoring_calendar, S12_cotton, CH07_pinned_note. Runtime wiring filed: M4-02 (Atik, stations + story choices), M4-03 (Ramim, P-11/P-12 drive the props).",
+   "updated": "2026-11-06",
    "prompt": "Goal: every location the Chapter 6 scenes use (production/manifest/scene_index.csv, CH06 rows; LOC ids in\ngame-design/09_WORLD_AND_LEVEL_DESIGN.md) is a real scene built the same way as the Chapter 1 rooms (M1-06), with layout data in\ngame/resources/campaign/rooms/, collision, navigation, lighting and valid RoomContract targets. Chapters 3–8 currently reuse the five\nChapter 1 rooms; give each scene its proper location. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); place this chapter's bridge objects, §4 clue objects and §5.2 story-echo objects in the rooms so each join can play in the world.",
    "reserved_for": "sadman",
    "effort": 3
@@ -5425,6 +5425,51 @@
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Found during M1-06 windowed capture (production/qa/evidence/M1-06_capture.txt): starting chapter1_campaign.tscn logs 'ERROR: The object does not have any meta values with the key lla_fade' from _fade (game/scripts/ui/chapter1_campaign_hud.gd:962). In Godot 4.7 get_meta(key, null) still errors when the key is missing, because a null default counts as no default. Use control.get_meta(\"lla_fade\") only when control.has_meta(\"lla_fade\") (same for any other get_meta(..., null) in the HUD). Acceptance: the campaign starts with no get_meta error in the log; run_tests.sh passes.",
+   "reserved_for": "ramim",
+   "effort": 1
+  },
+  {
+   "id": "M4-02",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Chapter 6: use the room stations and pass story choices to the staged rooms",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-6R"
+   ],
+   "paths": [
+    "game/scripts/missions/",
+    "game/scripts/campaign/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/night-claude2 on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "M3-6R staged every Chapter 6 room (game/resources/campaign/rooms/README.md, Chapter staging). Two small runtime hooks in Atik's folders make it play: (1) game/scripts/missions/extended_gate_catalog.gd _world_focus_id(): when RoomContract.station_focus(scene_id, action) returns a focus id, use it (pass the scene id from _target); keep today's heuristic as the fallback. Chapter 6 actions then happen at the hand-light locker, guide-light branch, allocation board, protected-bus test panel, camera monitor, eclipse desk, message log and monitoring calendar instead of the Chapter 1 power panel and Mission Table. (2) game/scripts/campaign/chapter1_campaign.gd _place_crew(): pass director.snapshot().story_log.choices as the 4th argument of _crew.place(...) so the doc 24 §5.2 echoes show (D9 record at Ferreira's place, D10 N. holder, D11 companion at Kai's shoulder in EX-CH06-S10). Acceptance: a test asserts every EX-CH06 target's world_focus_id equals RoomContract.station_focus and that the room shows the D9 object after recording EX-CH05-S05-CHOICE; game/tools/run_tests.sh N/N suites passed; screenshots production/qa/evidence/<id>_*.png of one CH06 interaction at its station. Fits inside M3-6M (Chapter 6 missions).",
+   "reserved_for": "atik",
+   "effort": 1
+  },
+  {
+   "id": "M4-03",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Chapter 6: P-11/P-12 panels drive the staged eclipse props",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-6R"
+   ],
+   "paths": [
+    "game/scripts/puzzles/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/night-claude2 on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "M3-6R places the M3-6A eclipse props in the rooms at each scene's opening state (game/resources/campaign/rooms/README.md, Chapter staging). The P-11 and P-12 panels (M3-6P) should move them as the player acts, through game/assets/props/eclipse_power/eclipse_props.gd only: in the power room (LOC-02) the nodes are VisualRoot/ChapterStaging/eclipse_board (populate_board, Forecast screen), a42_panel (apply_state test_disconnected / f2_isolated / f2_fault_cleared / f2_reset / f2_restored, set_part), guide_branch, flood_west and flood_east (S04 matched previews: apply_state on/off), repeater_monitor; in the Commons (LOC-01) eclipse_monitor. A monitor's screen is node.get_meta('monitor_screen') (set_phase, set_mode, set_logged, show_inset); in EX-CH06-S07 the room eases the phase toward the ring as presentation only, so kill node.get_meta('monitor_track') before driving set_phase. Never switch the protected essentials. Acceptance: tests for the prop states each P-11/P-12 step produces; game/tools/run_tests.sh N/N suites passed; screenshots production/qa/evidence/<id>_*.png. Fits inside M3-6P.",
    "reserved_for": "ramim",
    "effort": 1
   }

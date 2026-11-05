@@ -77,20 +77,8 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 	if layout.is_empty():
 		return
 	var visuals := room.get_node("VisualRoot") as Node3D
-	for fixture in layout.get("fixtures", []):
-		var mesh := mesh_box(visuals, fixture.id, vector(fixture.position), vector(fixture.size), Color(fixture.color), bool(fixture.get("emissive", false)), habitat)
-		if habitat and fixture.has("finish"):
-			mesh.material_override = finish_material(String(fixture.finish), Color(fixture.color))
-		if bool(fixture.get("transparent", false)):
-			var glass := StandardMaterial3D.new()
-			glass.albedo_color = Color(0.55, 0.82, 0.9, 0.13)
-			glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			glass.cull_mode = BaseMaterial3D.CULL_DISABLED
-			glass.roughness = 0.25
-			mesh.material_override = glass
-			mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-			var frame := selection_frame(mesh, Geometry.bounds(mesh), Color("#A8D8E5"))
-			frame.name = "PressureEnclosureFrame"
+	for spec in layout.get("fixtures", []):
+		fixture(visuals, spec, habitat)
 	if vacuum:
 		return
 	if habitat:
@@ -115,6 +103,43 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 	title.pixel_size = 0.005
 	title.modulate = accent
 	visuals.add_child(title)
+
+## Builds one authored fixture box (habitat rooms keep PBR kit paint; "finish" swaps in a display or satin
+## surface; "transparent" makes it pressure glazing with a visible frame). Shared by the base layout and the
+## chapter staging.
+static func fixture(parent: Node3D, spec: Dictionary, habitat: bool) -> MeshInstance3D:
+	var mesh := mesh_box(parent, spec.id, vector(spec.position), vector(spec.size), Color(spec.color), bool(spec.get("emissive", false)), habitat)
+	if habitat and spec.has("finish"):
+		mesh.material_override = finish_material(String(spec.finish), Color(spec.color))
+	if bool(spec.get("transparent", false)):
+		var glass := StandardMaterial3D.new()
+		glass.albedo_color = Color(0.55, 0.82, 0.9, 0.13)
+		glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		glass.cull_mode = BaseMaterial3D.CULL_DISABLED
+		glass.roughness = 0.25
+		mesh.material_override = glass
+		mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		var frame := selection_frame(mesh, Geometry.bounds(mesh), Color("#A8D8E5"))
+		frame.name = "PressureEnclosureFrame"
+	return mesh
+
+## Builds one authored wall sign: single-sided, so a sign authored facing the wrong way disappears instead of
+## reading mirrored. Optional "yaw", "pitch" (-90 lays it on a table, top edge away from the reader), "size"
+## (pixel size), "font_size", "color" (default: the room accent) and "wrap_m" (word-wrap width in metres).
+static func wall_sign(parent: Node3D, spec: Dictionary, layout: Dictionary) -> Label3D:
+	var label := Label3D.new()
+	label.text = spec.text
+	label.position = vector(spec.position)
+	label.rotation_degrees = Vector3(float(spec.get("pitch", 0)), float(spec.get("yaw", 0)), 0)
+	label.double_sided = false
+	label.font_size = int(spec.get("font_size", 40))
+	label.pixel_size = float(spec.get("size", 0.0025))
+	label.modulate = Color(spec.get("color", layout.get("accent_color", "#ffffff")))
+	if spec.has("wrap_m"):
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.width = float(spec.wrap_m) / label.pixel_size
+	parent.add_child(label)
+	return label
 
 ## A smooth, untextured surface for authored fixtures whose kit paint texture would read wrong:
 ## "screen" is an unlit display behind dark glass, "satin" a painted board with no paint grain.
@@ -185,13 +210,4 @@ static func _build_practicals(room: Node3D, layout: Dictionary) -> void:
 		lamp.shadow_enabled = false
 		room.get_node("RoomLighting").add_child(lamp)
 	for spec in layout.get("signs", []):
-		var label := Label3D.new()
-		label.text = spec.text
-		label.position = vector(spec.position)
-		label.rotation_degrees.y = float(spec.get("yaw", 0))
-		# Single-sided: a sign authored facing the wrong way disappears instead of reading mirrored.
-		label.double_sided = false
-		label.font_size = 40
-		label.pixel_size = float(spec.get("size", 0.0025))
-		label.modulate = Color(layout.accent_color)
-		room.visual_root.add_child(label)
+		wall_sign(room.visual_root, spec, layout)
