@@ -1923,7 +1923,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 3 assets: EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [
     "M1-05"
@@ -1943,8 +1943,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
-   "prompt": "Goal: the Chapter 3 (Moonquake) registry rows that are still planned become installed, gated assets.\nDo: for each of EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA: read execution/ASSET_<name>.md; make a 2D sheet; batch the sheets into one approval request to the\nuser (do not spend 3D credits before approval); then generate (Tripo/Meshy), clean up in Blender, gate, sync to Godot and update\nproduction/ASSET_REGISTRY.csv. Characters reuse the v8 pipeline (production/tools/build_character_v7.sh) and must pass the side-view\nmirrored-arm check. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; contact sheet in production/review/; registry rows set to verified.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); build every object that this chapter's bridges and §4 clues need (the 'What carries over' column names them) as part of this asset set."
+   "updated": "2026-11-05",
+   "prompt": "Goal: the Chapter 3 (Moonquake) registry rows that are still planned become installed, gated assets.\nDo: for each of EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA: read execution/ASSET_<name>.md; make a 2D sheet; batch the sheets into one approval request to the\nuser (do not spend 3D credits before approval); then generate (Tripo/Meshy), clean up in Blender, gate, sync to Godot and update\nproduction/ASSET_REGISTRY.csv. Characters reuse the v8 pipeline (production/tools/build_character_v7.sh) and must pass the side-view\nmirrored-arm check. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; contact sheet in production/review/; registry rows set to verified.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); build every object that this chapter's bridges and §4 clues need (the 'What carries over' column names them) as part of this asset set.",
+   "blocker": "Night shift parked the work on branch night/M3-3A: "
   },
   {
    "id": "M3-3R",
