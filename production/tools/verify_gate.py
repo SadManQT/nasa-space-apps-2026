@@ -3,7 +3,8 @@
 
   python3 production/tools/verify_gate.py            (run after sync_to_godot.sh)
 
-Specs come from production/manifest/{characters,tripo_props_batch1,reuse_props,lunar_kit,habitat_kit}.csv.
+Specs come from every production/manifest/*.csv with the gate columns (name, size_flag, size_m, tris, tex):
+characters, tripo_props_batch1, reuse_props, lunar_kit, habitat_kit, eclipse_props and any later kit manifest.
 Checks per asset: imports with a mesh; triangles within budget; largest texture within budget;
 standing on the floor (lowest point y = 0 ± 1 cm); real-world size within 2 % of spec
 (height for --height, longest side for --longest); characters have their rig (bones) and at least
@@ -23,9 +24,22 @@ GODOT = os.environ.get("GODOT", "/Applications/Godot.app/Contents/MacOS/Godot")
 GODOT_ERRORS = ("SCRIPT ERROR", "Parse Error", "Failed to load script", "ERROR:")
 
 
+GATE_COLUMNS = {"name", "size_flag", "size_m", "tris", "tex"}
+
+
+def gate_manifests():
+    """Names of the manifests that carry gate specs, in a stable order (a new kit's manifest needs no edit here)."""
+    names = []
+    for path in sorted((ROOT / "production/manifest").glob("*.csv")):
+        with path.open(encoding="utf-8") as f:
+            if GATE_COLUMNS <= set(next(csv.reader(f), [])):
+                names.append(path.stem)
+    return names
+
+
 def specs():
     out = {}
-    for name in ("characters", "tripo_props_batch1", "reuse_props", "lunar_kit", "habitat_kit"):
+    for name in gate_manifests():
         for r in csv.DictReader(open(ROOT / f"production/manifest/{name}.csv", encoding="utf-8")):
             out[r["name"]] = r
     return out

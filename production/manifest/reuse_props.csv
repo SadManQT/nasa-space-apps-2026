@@ -1,6 +1,6 @@
 name,concept_or_source,size_flag,size_m,tris,tex,notes
 PR_ControlConsole,models/reuse/control_console.glb,--height,1.20,30000,2048,Mission/air console (screens -> live UI material)
-PR_PowerPanel,models/reuse/industrial_control_panel.glb,--height,2.00,25000,2048,Power room protected-bus panel incl. feeder F2 (A-42)
+PR_PowerPanel,models/reuse/industrial_control_panel.glb,--height,2.00,25000,2048,Power room main switchboard (dressing); the interactive A-42 protected-bus test panel with feeder F2 is PR_ProtectedBusPanel (M3-6A)
 PR_BatteryJar,models/reuse/energy_capsule.glb,--height,1.40,20000,2048,Battery jar with sun-drops (A-12)
 PR_OxygenUnit,models/reuse/industrial_machinery.glb,--height,2.00,30000,2048,Oxygen production unit (A-12)
 PR_WaterValve,models/reuse/industrial_valve.glb,--height,0.90,20000,1024,Water wall transfer valve (A-16)

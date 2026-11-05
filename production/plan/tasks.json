@@ -2686,8 +2686,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 6 assets: the eclipse power props",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-claude2",
    "deps": [
     "M1-05"
    ],
@@ -2702,10 +2702,9 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "Added 5 Nov 2026 (Sadman: every chapter 1-8 fully assigned).",
-   "evidence": "",
-   "updated": "2026-11-05",
+   "evidence": "9 CH06 props x 2 LODs (game LOD with -convcolonly collision + Compatibility LOD) in game/assets/props/eclipse_power/ (PR_EclipseBoard, PR_SegmentCard x5 variants, PR_ServiceTag x4, PR_GuideLightBranch, PR_GuideLightRun, PR_DecorativeFlood, PR_ProtectedBusPanel A-42, PR_FilteredCamera, PR_EclipseMonitor + labelled Earth-limb inset screen), procedural Blender on the M1-05 kit textures, no credits; listed in PRODUCTION_HANDBOOK 8.4/10; gate: 142 assets in Godot, 0 failing (production/review/asset_verification.md); test_eclipse_props.gd PASS 567 checks (580 with --evidence); run_tests.sh (GODOT=godot_gated, SUITE_TIMEOUT=1200): 38/38 suites passed. This slot's base 4d01020 predates M1-67/M1-60, so the explainer registry, its 19 clips + .uid files, the LOLA fixture it cites, puzzle_sources.json, science_data.gd and test_science_data.gd were copied byte-identical from origin/main (blob hashes checked) and drop out of the diff on rebase; read-only merge-tree check vs origin/main: only the handbook 10 insert, tasks.json and BOARD.html conflict (night-shift resolver cases). Evidence production/qa/evidence/M3-6A_{props_lod0,props_lod1,power_room,panel_f2_tripped,panel_f2_isolated,board_plan,s04_floods_on,s04_guide_only,monitor_ring,monitor_screen_ring,monitor_screen_ingress,monitor_screen_no_signal,camera_exterior,contact,lods}.png, re-run with M3-6A_capture.sh; visual review filed as M4-01 (member5).",
+   "updated": "2026-11-06",
    "prompt": "Do: make and install the CH06 props from PRODUCTION_HANDBOOK.md §8 (five segment cards and the protected-service board, guide-light branch, decorative floods, protected-bus test panel and feeder F2 (A-42), the filtered remote camera and monitor with a labelled Earth-limb inset), following the pipeline in PRODUCTION_HANDBOOK.md §6 and the asset gate (production/tools/verify_gate.py). Reuse the habitat kit (game/assets/environment/kit/) and existing props first; new hero props need Sadman's approval of a 2D sheet before 3D credits are spent. Log every generation in production/AI_PROMPT_LOG.md.\nAcceptance: every prop is in game/assets/ with collision and a Compatibility LOD, passes the gate, and is listed in PRODUCTION_HANDBOOK.md §8; screenshots in production/qa/evidence/<task id>_*.png.",
-   "blocker": "Night shift parked the work on branch night/M3-5A: ",
    "reserved_for": "sadman",
    "effort": 3
   },
@@ -5386,6 +5385,28 @@
    "prompt": "Why: Sadman's science explainers (M1-60, M3-68, M3-77: 17 clips, 34-45 s each) are registered in game/resources/campaign/content/explainers.json with 'sources' (NASA fixture ids) and 'used_by' (mission ids such as EX-M0101, puzzle ids). The hint player (M1-64) plays them as hint level 2, but a player reading a mission data card or Journal -> Science cannot watch them yet. Do: on a data card, show 'Watch: <explainer title>' for each explainer whose used_by contains the card's mission id or whose sources overlap the card's source_ids; play it in the same 16:9 card player as the hint player (captions are burned in; pause, replay, Esc closes; reduced motion shows a still). In Journal -> Science (M3-98), list every explainer the player has unlocked (its mission reached), grouped by chapter. Reuse UiDesign. Acceptance: EX-M0101's card offers the polar Sun, crew needs and solar power clips; run_tests.sh passes; screenshots production/qa/evidence/<task id>_*.png.",
    "reserved_for": "ramim",
    "effort": 2
+  },
+  {
+   "id": "M4-01",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Visual review of the Chapter 6 eclipse power props (M3-6A)",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-6A"
+   ],
+   "paths": [
+    "production/review/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/night-claude2 on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Handbook section 6 quality gate step 2 for the nine M3-6A props (18 GLBs in game/assets/props/eclipse_power/; they pass the automated gate in production/review/asset_verification.md). Inspect production/qa/evidence/M3-6A_contact.png, M3-6A_lods.png and the Godot captures M3-6A_*.png against production/ART_BIBLE.md sections 2, 3 and 7 and the story (STORY_FULL EX-CH06-S01..S12, 08 P-11/P-12): palette, no baked text or logos (every word is a Label3D or live screen), English only, metre scale, LOD1 keeps silhouette and colours, the monitor's eclipse picture (black sky, Earth 3.5x the Sun seen from the Moon, red rim only at totality, inset labelled conceptual / not to scale / not a map, NASA-catalog date checked, Aurora geometry labelled scenario). Add a dated 'M3-6A eclipse power props review' section with one row per GLB (PASS or FIX with the reason) to production/review/visual_review.md, then run python3 production/tools/build_registry.py --manifest eclipse_props so the registry shows verified (or needs fix). A FIX goes back to Sadman as a board task naming the prop and the change.",
+   "reserved_for": "member5",
+   "effort": 1
   }
  ],
  "requirements": [

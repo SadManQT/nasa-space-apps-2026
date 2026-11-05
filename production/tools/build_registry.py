@@ -4,12 +4,14 @@ tools can find any asset, its source, its game path and its verification status 
 
   python3 production/tools/build_registry.py
 
-Sources: production/manifest/{characters,tripo_props_batch1,reuse_props,lunar_kit,habitat_kit,planned_assets}.csv,
+Sources: every production/manifest/*.csv with gate columns (verify_gate.gate_manifests()), planned_assets.csv,
 the files in game/assets/, production/review/asset_verification.md (automated gate) and
 production/review/visual_review.md. An asset is "verified" only when it passes both.
 """
 import argparse, csv, re
 from pathlib import Path
+
+from verify_gate import gate_manifests
 
 ROOT = Path(__file__).resolve().parents[2]
 M = ROOT / "production/manifest"
@@ -29,7 +31,8 @@ if review.exists():
         visual.setdefault(m.group(1), "fix" if "FIX" in m.group(2) else "pass" if "PASS" in m.group(2) else "")
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--manifest", choices=("characters", "tripo_props_batch1", "reuse_props", "lunar_kit", "habitat_kit"),
+MANIFESTS = gate_manifests()
+parser.add_argument("--manifest", choices=MANIFESTS,
                     help="Update only this manifest, preserving all other registry rows.")
 args = parser.parse_args()
 rows = []
@@ -37,7 +40,7 @@ if args.manifest:
     with (ROOT / "production/ASSET_REGISTRY.csv").open(encoding="utf-8", newline="") as existing:
         rows = [list(r.values()) for r in csv.DictReader(existing)
                 if r["defined_in"] != f"manifest/{args.manifest}.csv"]
-for manifest in ("characters", "tripo_props_batch1", "reuse_props", "lunar_kit", "habitat_kit"):
+for manifest in MANIFESTS:
     if args.manifest and manifest != args.manifest:
         continue
     for r in csv.DictReader(open(M / f"{manifest}.csv", encoding="utf-8")):

@@ -1,0 +1,1654 @@
+{
+ "task": "M3-6A",
+ "generated_by": "production/tools/build_eclipse_props.py",
+ "content": "res://assets/props/eclipse_power/eclipse_props_content.json",
+ "conventions": {
+  "units": "metres",
+  "up": "+Y",
+  "front": "-Z (Godot forward); the viewer stands on the -Z side, so the viewer's right is -X",
+  "anchors": {
+   "wall": "back plane z=0, body towards -Z, lowest point y=0; place at a kit wall's grid position and lift by mount_y",
+   "floor": "stands on y=0; a floor cabinet also has its back on z=0 to sit flush with a kit wall",
+   "loose": "hand-held card or tag: base centre at the origin, back on z=0; sits in a board socket"
+  },
+  "textures": "the habitat kit's PBR sets, referenced by uri from game/assets/environment/kit/textures (LOD0 1024 px, LOD1 512 px)",
+  "nodes": "parts are child nodes on their own pivots; Lamp_<id> lens meshes; Screen_<id> live-UI meshes (material Screen*); Label_<id> empties in front of blank plates (LOD0 only); Socket_<id> empties (LOD0 only)"
+ },
+ "props": [
+  {
+   "id": "PR_EclipseBoard",
+   "display": "Eclipse allocation board",
+   "scenes": [
+    "EX-CH06-S03",
+    "EX-CH06-S04",
+    "EX-CH06-S11"
+   ],
+   "notes": "protected-service board: five segment card slots, four service rows, 20 tag sockets, five warning lamps, live forecast strip",
+   "anchor": "wall",
+   "mount_y": 1.1,
+   "lod_distance_m": 12.0,
+   "lods": [
+    "res://assets/props/eclipse_power/PR_EclipseBoard_LOD0.glb",
+    "res://assets/props/eclipse_power/PR_EclipseBoard_LOD1.glb"
+   ],
+   "triangles": [
+    1366,
+    902
+   ],
+   "collision": "LOD0",
+   "parts": {},
+   "lamps": {
+    "Seg1": {
+     "node": "Lamp_Seg1",
+     "centre_m": [
+      0.232,
+      0.636,
+      -0.0525
+     ],
+     "radius_m": 0.007,
+     "parent": null
+    },
+    "Seg2": {
+     "node": "Lamp_Seg2",
+     "centre_m": [
+      -0.004,
+      0.636,
+      -0.0525
+     ],
+     "radius_m": 0.007,
+     "parent": null
+    },
+    "Seg3": {
+     "node": "Lamp_Seg3",
+     "centre_m": [
+      -0.24,
+      0.636,
+      -0.0525
+     ],
+     "radius_m": 0.007,
+     "parent": null
+    },
+    "Seg4": {
+     "node": "Lamp_Seg4",
+     "centre_m": [
+      -0.476,
+      0.636,
+      -0.0525
+     ],
+     "radius_m": 0.007,
+     "parent": null
+    },
+    "Seg5": {
+     "node": "Lamp_Seg5",
+     "centre_m": [
+      -0.712,
+      0.636,
+      -0.0525
+     ],
+     "radius_m": 0.007,
+     "parent": null
+    }
+   },
+   "screens": {
+    "Forecast": {
+     "node": "Screen_Forecast",
+     "centre_m": [
+      -0.09,
+      0.05,
+      -0.0535
+     ],
+     "size_m": [
+      1.02,
+      0.056
+     ],
+     "parent": null
+    }
+   },
+   "labels": {
+    "Header": {
+     "node": "Label_Header",
+     "centre_m": [
+      0.0,
+      0.925,
+      -0.0525
+     ],
+     "plate_m": [
+      0.86,
+      0.05
+     ],
+     "parent": null
+    },
+    "Row1": {
+     "node": "Label_Row1",
+     "centre_m": [
+      0.6,
+      0.58,
+      -0.056
+     ],
+     "plate_m": [
+      0.27,
+      0.05
+     ],
+     "parent": null
+    },
+    "Row2": {
+     "node": "Label_Row2",
+     "centre_m": [
+      0.6,
+      0.44,
+      -0.056
+     ],
+     "plate_m": [
+      0.27,
+      0.05
+     ],
+     "parent": null
+    },
+    "Row3": {
+     "node": "Label_Row3",
+     "centre_m": [
+      0.6,
+      0.3,
+      -0.056
+     ],
+     "plate_m": [
+      0.27,
+      0.05
+     ],
+     "parent": null
+    },
+    "Row4": {
+     "node": "Label_Row4",
+     "centre_m": [
+      0.6,
+      0.16,
+      -0.056
+     ],
+     "plate_m": [
+      0.27,
+      0.05
+     ],
+     "parent": null
+    },
+    "SegState1": {
+     "node": "Label_SegState1",
+     "centre_m": [
+      0.342,
+      0.636,
+      -0.054
+     ],
+     "plate_m": [
+      0.15,
+      0.022
+     ],
+     "parent": null
+    },
+    "SegState2": {
+     "node": "Label_SegState2",
+     "centre_m": [
+      0.106,
+      0.636,
+      -0.054
+     ],
+     "plate_m": [
+      0.15,
+      0.022
+     ],
+     "parent": null
+    },
+    "SegState3": {
+     "node": "Label_SegState3",
+     "centre_m": [
+      -0.13,
+      0.636,
+      -0.054
+     ],
+     "plate_m": [
+      0.15,
+      0.022
+     ],
+     "parent": null
+    },
+    "SegState4": {
+     "node": "Label_SegState4",
+     "centre_m": [
+      -0.366,
+      0.636,
+      -0.054
+     ],
+     "plate_m": [
+      0.15,
+      0.022
+     ],
+     "parent": null
+    },
+    "SegState5": {
+     "node": "Label_SegState5",
+     "centre_m": [
+      -0.602,
+      0.636,
+      -0.054
+     ],
+     "plate_m": [
+      0.15,
+      0.022
+     ],
+     "parent": null
+    },
+    "Forecast": {
+     "node": "Label_Forecast",
+     "centre_m": [
+      0.62,
+      0.05,
+      -0.053
+     ],
+     "plate_m": [
+      0.22,
+      0.04
+     ],
+     "parent": null
+    }
+   },
+   "sockets": {
+    "Tag_1_1": {
+     "node": "Socket_Tag_1_1",
+     "position_m": [
+      0.322,
+      0.5425,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_2_1": {
+     "node": "Socket_Tag_2_1",
+     "position_m": [
+      0.086,
+      0.5425,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_3_1": {
+     "node": "Socket_Tag_3_1",
+     "position_m": [
+      -0.15,
+      0.5425,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_4_1": {
+     "node": "Socket_Tag_4_1",
+     "position_m": [
+      -0.386,
+      0.5425,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_5_1": {
+     "node": "Socket_Tag_5_1",
+     "position_m": [
+      -0.622,
+      0.5425,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_1_2": {
+     "node": "Socket_Tag_1_2",
+     "position_m": [
+      0.322,
+      0.4025,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_2_2": {
+     "node": "Socket_Tag_2_2",
+     "position_m": [
+      0.086,
+      0.4025,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_3_2": {
+     "node": "Socket_Tag_3_2",
+     "position_m": [
+      -0.15,
+      0.4025,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_4_2": {
+     "node": "Socket_Tag_4_2",
+     "position_m": [
+      -0.386,
+      0.4025,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_5_2": {
+     "node": "Socket_Tag_5_2",
+     "position_m": [
+      -0.622,
+      0.4025,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_1_3": {
+     "node": "Socket_Tag_1_3",
+     "position_m": [
+      0.322,
+      0.2625,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_2_3": {
+     "node": "Socket_Tag_2_3",
+     "position_m": [
+      0.086,
+      0.2625,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_3_3": {
+     "node": "Socket_Tag_3_3",
+     "position_m": [
+      -0.15,
+      0.2625,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_4_3": {
+     "node": "Socket_Tag_4_3",
+     "position_m": [
+      -0.386,
+      0.2625,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_5_3": {
+     "node": "Socket_Tag_5_3",
+     "position_m": [
+      -0.622,
+      0.2625,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_1_4": {
+     "node": "Socket_Tag_1_4",
+     "position_m": [
+      0.322,
+      0.1225,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_2_4": {
+     "node": "Socket_Tag_2_4",
+     "position_m": [
+      0.086,
+      0.1225,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_3_4": {
+     "node": "Socket_Tag_3_4",
+     "position_m": [
+      -0.15,
+      0.1225,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_4_4": {
+     "node": "Socket_Tag_4_4",
+     "position_m": [
+      -0.386,
+      0.1225,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Tag_5_4": {
+     "node": "Socket_Tag_5_4",
+     "position_m": [
+      -0.622,
+      0.1225,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Card_1": {
+     "node": "Socket_Card_1",
+     "position_m": [
+      0.322,
+      0.672,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Card_2": {
+     "node": "Socket_Card_2",
+     "position_m": [
+      0.086,
+      0.672,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Card_3": {
+     "node": "Socket_Card_3",
+     "position_m": [
+      -0.15,
+      0.672,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Card_4": {
+     "node": "Socket_Card_4",
+     "position_m": [
+      -0.386,
+      0.672,
+      -0.0515
+     ],
+     "parent": null
+    },
+    "Card_5": {
+     "node": "Socket_Card_5",
+     "position_m": [
+      -0.622,
+      0.672,
+      -0.0515
+     ],
+     "parent": null
+    }
+   },
+   "size_m": [
+    1.602,
+    1.0,
+    0.064
+   ],
+   "bounds_min_m": [
+    -0.801,
+    0.0,
+    -0.064
+   ],
+   "bounds_max_m": [
+    0.801,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "PR_SegmentCard",
+   "display": "Eclipse segment card",
+   "scenes": [
+    "EX-CH06-S03"
+   ],
+   "notes": "one card, five variants (precharge, ingress, totality, egress, recovery)",
+   "anchor": "loose",
+   "mount_y": 0.0,
+   "lod_distance_m": 6.0,
+   "lods": [
+    "res://assets/props/eclipse_power/PR_SegmentCard_LOD0.glb",
+    "res://assets/props/eclipse_power/PR_SegmentCard_LOD1.glb"
+   ],
+   "triangles": [
+    172,
+    52
+   ],
+   "collision": "LOD0",
+   "parts": {
+    "Band": {
+     "axis": "none",
+     "positions": {},
+     "rest": null,
+     "note": "tinted per segment by the runtime",
+     "pivot_m": [
+      0.0,
+      0.114,
+      -0.004
+     ],
+     "parent": null
+    }
+   },
+   "lamps": {},
+   "screens": {},
+   "labels": {
+    "Name": {
+     "node": "Label_Name",
+     "centre_m": [
+      0.0,
+      0.052,
+      -0.0051
+     ],
+     "plate_m": [
+      0.17600000000000002,
+      0.07
+     ],
+     "parent": null
+    }
+   },
+   "sockets": {},
+   "size_m": [
+    0.2,
+    0.13,
+    0.006
+   ],
+   "bounds_min_m": [
+    -0.1,
+    0.0,
+    -0.005
+   ],
+   "bounds_max_m": [
+    0.1,
+    0.13,
+    0.002
+   ]
+  },
+  {
+   "id": "PR_ServiceTag",
+   "display": "Service tag",
+   "scenes": [
+    "EX-CH06-S03",
+    "EX-CH06-S04"
+   ],
+   "notes": "magnetic tag, four variants (essentials, return pump, camera, decorative floods)",
+   "anchor": "loose",
+   "mount_y": 0.0,
+   "lod_distance_m": 6.0,
+   "lods": [
+    "res://assets/props/eclipse_power/PR_ServiceTag_LOD0.glb",
+    "res://assets/props/eclipse_power/PR_ServiceTag_LOD1.glb"
+   ],
+   "triangles": [
+    136,
+    52
+   ],
+   "collision": "LOD0",
+   "parts": {
+    "Band": {
+     "axis": "none",
+     "positions": {},
+     "rest": null,
+     "note": "tinted per service by the runtime",
+     "pivot_m": [
+      0.062,
+      0.0375,
+      -0.012
+     ],
+     "parent": null
+    }
+   },
+   "lamps": {},
+   "screens": {},
+   "labels": {
+    "Name": {
+     "node": "Label_Name",
+     "centre_m": [
+      -0.012,
+      0.0375,
+      -0.0131
+     ],
+     "plate_m": [
+      0.10799999999999998,
+      0.048
+     ],
+     "parent": null
+    }
+   },
+   "sockets": {},
+   "size_m": [
+    0.15,
+    0.075,
+    0.014
+   ],
+   "bounds_min_m": [
+    -0.075,
+    0.0,
+    -0.013
+   ],
+   "bounds_max_m": [
+    0.075,
+    0.075,
+    0.001
+   ]
+  },
+  {
+   "id": "PR_GuideLightBranch",
+   "display": "Guide-light branch",
+   "scenes": [
+    "EX-CH05-S12",
+    "EX-CH06-S02",
+    "EX-CH06-S04",
+    "EX-CH06-S10"
+   ],
+   "notes": "junction box, status lamp, branch label, conduit with Kai's marker tape, first 0.82 m of amber channel",
+   "anchor": "wall",
+   "mount_y": 0.36,
+   "lod_distance_m": 12.0,
+   "lods": [
+    "res://assets/props/eclipse_power/PR_GuideLightBranch_LOD0.glb",
+    "res://assets/props/eclipse_power/PR_GuideLightBranch_LOD1.glb"
+   ],
+   "triangles": [
+    598,
+    326
+   ],
+   "collision": "LOD0",
+   "parts": {
+    "MarkerTape": {
+     "axis": "none",
+     "positions": {},
+     "rest": null,
+     "note": "Kai's orange marker tape (CH05 -> CH06 bridge)",
+     "pivot_m": [
+      0.41,
+      0.35,
+      -0.035
+     ],
+     "parent": null
+    },
+    "Diffuser": {
+     "axis": "none",
+     "positions": {},
+     "rest": null,
+     "note": "emissive when the guide light is on",
+     "pivot_m": [
+      -0.085,
+      0.07,
+      -0.032
+     ],
+     "parent": null
+    }
+   },
+   "lamps": {
+    "Branch": {
+     "node": "Lamp_Branch",
+     "centre_m": [
+      0.365,
+      0.168,
+      -0.073
+     ],
+     "radius_m": 0.008,
+     "parent": null
+    }
+   },
+   "screens": {},
+   "labels": {
+    "Branch": {
+     "node": "Label_Branch",
+     "centre_m": [
+      0.422,
+      0.115,
+      -0.0755
+     ],
+     "plate_m": [
+      0.12,
+      0.05
+     ],
+     "parent": null
+    },
+    "BranchState": {
+     "node": "Label_BranchState",
+     "centre_m": [
+      0.41,
+      0.05,
+      -0.0755
+     ],
+     "plate_m": [
+      0.12,
+      0.024
+     ],
+     "parent": null
+    }
+   },
+   "sockets": {
+    "RunJoin": {
+     "node": "Socket_RunJoin",
+     "position_m": [
+      -0.5,
+      0.0,
+      0.0
+     ],
+     "parent": null
+    }
+   },
+   "size_m": [
+    0.99,
+    0.595,
+    0.077
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.077
+   ],
+   "bounds_max_m": [
+    0.49,
+    0.595,
+    0.0
+   ]
+  },
+  {
+   "id": "PR_GuideLightRun",
+   "display": "Guide-light run",
+   "scenes": [
+    "EX-CH06-S04",
+    "EX-CH06-S10"
+   ],
+   "notes": "1 m amber LED channel that chains on the kit grid",
+   "anchor": "wall",
+   "mount_y": 0.406,
+   "lod_distance_m": 12.0,
+   "lods": [
+    "res://assets/props/eclipse_power/PR_GuideLightRun_LOD0.glb",
+    "res://assets/props/eclipse_power/PR_GuideLightRun_LOD1.glb"
+   ],
+   "triangles": [
+    106,
+    82
+   ],
+   "collision": "LOD0",
+   "parts": {
+    "Diffuser": {
+     "axis": "none",
+     "positions": {},
+     "rest": null,
+     "note": "emissive when the guide light is on",
+     "pivot_m": [
+      -0.0,
+      0.024,
+      -0.032
+     ],
+     "parent": null
+    },
+    "EndCap": {
+     "axis": "none",
+     "positions": {},
+     "rest": null,
+     "note": "hidden when another run continues the line",
+     "pivot_m": [
+      -0.494,
+      0.024,
+      -0.018
+     ],
+     "parent": null
+    }
+   },
+   "lamps": {},
+   "screens": {},
+   "labels": {},
+   "sockets": {
+    "RunJoin": {
+     "node": "Socket_RunJoin",
+     "position_m": [
+      -0.5,
+      0.0,
+      0.0
+     ],
+     "parent": null
+    }
+   },
+   "size_m": [
+    1.0,
+    0.048,
+    0.034
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.034
+   ],
+   "bounds_max_m": [
+    0.5,
+    0.048,
+    0.0
+   ]
+  },
+  {
+   "id": "PR_DecorativeFlood",
+   "display": "Decorative flood",
+   "scenes": [
+    "EX-CH06-S03",
+    "EX-CH06-S04"
+   ],
+   "notes": "finned LED wall flood on a tilt yoke, aimed 25 deg down",
+   "anchor": "wall",
+   "mount_y": 2.0,
+   "lod_distance_m": 12.0,
+   "lods": [
+    "res://assets/props/eclipse_power/PR_DecorativeFlood_LOD0.glb",
+    "res://assets/props/eclipse_power/PR_DecorativeFlood_LOD1.glb"
+   ],
+   "triangles": [
+    404,
+    192
+   ],
+   "collision": "LOD0",
+   "parts": {
+    "Head": {
+     "axis": "rot_x",
+     "positions": {
+      "aim": -25.0,
+      "level": 0.0
+     },
+     "rest": "aim",
+     "note": "",
+     "pivot_m": [
+      0.0,
+      0.09,
+      -0.115
+     ],
+     "parent": null
+    },
+    "Lens": {
+     "axis": "none",
+     "positions": {},
+     "rest": null,
+     "note": "emissive when the flood is on",
+     "pivot_m": [
+      0.0,
+      0.09,
+      -0.164
+     ],
+     "parent": "Head"
+    }
+   },
+   "lamps": {},
+   "screens": {},
+   "labels": {},
+   "sockets": {
+    "Light": {
+     "node": "Socket_Light",
+     "position_m": [
+      0.0,
+      0.09,
+      -0.17
+     ],
+     "parent": "Head"
+    }
+   },
+   "size_m": [
+    0.286,
+    0.181,
+    0.19
+   ],
+   "bounds_min_m": [
+    -0.143,
+    0.0,
+    -0.19
+   ],
+   "bounds_max_m": [
+    0.143,
+    0.181,
+    0.0
+   ]
+  },
+  {
+   "id": "PR_ProtectedBusPanel",
+   "display": "Protected-bus test panel and feeder F2",
+   "scenes": [
+    "EX-CH06-S02",
+    "EX-CH06-S05",
+    "EX-CH06-S10",
+    "EX-CH06-S11"
+   ],
+   "notes": "A-42: mimic diagram, isolation boundary, sealed protected breakers, test selector, F2 isolator/breaker/fault lamp/readout/test button, flood breaker",
+   "anchor": "floor",
+   "mount_y": 0.0,
+   "lod_distance_m": 12.0,
+   "lods": [
+    "res://assets/props/eclipse_power/PR_ProtectedBusPanel_LOD0.glb",
+    "res://assets/props/eclipse_power/PR_ProtectedBusPanel_LOD1.glb"
+   ],
+   "triangles": [
+    3238,
+    1994
+   ],
+   "collision": "LOD0",
+   "parts": {
+    "ProtectedGuard": {
+     "axis": "rot_x",
+     "positions": {
+      "closed": 0.0,
+      "open": -100.0
+     },
+     "rest": "closed",
+     "note": "sealed: the runtime refuses to open it and shows the survival-services warning",
+     "pivot_m": [
+      0.18,
+      1.345,
+      -0.4985
+     ],
+     "parent": null
+    },
+    "SealTag": {
+     "axis": "none",
+     "positions": {},
+     "rest": null,
+     "note": "orange do-not-switch tag on the guard hasp",
+     "pivot_m": [
+      0.18,
+      1.115,
+      -0.477
+     ],
+     "parent": null
+    },
+    "TestSwitch": {
+     "axis": "rot_z",
+     "positions": {
+      "connected": 0.0,
+      "disconnected": 90.0
+     },
+     "rest": "connected",
+     "note": "",
+     "pivot_m": [
+      -0.15,
+      1.32,
+      -0.465
+     ],
+     "parent": null
+    },
+    "F2Isolator": {
+     "axis": "rot_z",
+     "positions": {
+      "connected": 0.0,
+      "isolated": 90.0
+     },
+     "rest": "connected",
+     "note": "isolate before reset (P-12)",
+     "pivot_m": [
+      -0.255,
+      1.33,
+      -0.467
+     ],
+     "parent": null
+    },
+    "F2Breaker": {
+     "axis": "rot_x",
+     "positions": {
+      "on": 40.0,
+      "tripped": 0.0,
+      "off": -40.0
+     },
+     "rest": "on",
+     "note": "trips to the middle; reset is off then on, interlocked behind the isolator",
+     "pivot_m": [
+      -0.255,
+      1.205,
+      -0.493
+     ],
+     "parent": null
+    },
+    "F2TestButton": {
+     "axis": "move_z",
+     "positions": {
+      "released": 0.0,
+      "pressed": 0.004
+     },
+     "rest": "released",
+     "note": "",
+     "pivot_m": [
+      -0.283,
+      1.115,
+      -0.469
+     ],
+     "parent": null
+    },
+    "FloodBreaker": {
+     "axis": "rot_x",
+     "positions": {
+      "on": 40.0,
+      "off": -40.0
+     },
+     "rest": "off",
+     "note": "",
+     "pivot_m": [
+      -0.36,
+      1.3,
+      -0.493
+     ],
+     "parent": null
+    }
+   },
+   "lamps": {
+    "Air": {
+     "node": "Lamp_Air",
+     "centre_m": [
+      0.33,
+      1.725,
+      -0.461
+     ],
+     "radius_m": 0.011,
+     "parent": null
+    },
+    "Heat": {
+     "node": "Lamp_Heat",
+     "centre_m": [
+      0.23,
+      1.725,
+      -0.461
+     ],
+     "radius_m": 0.011,
+     "parent": null
+    },
+    "Grow": {
+     "node": "Lamp_Grow",
+     "centre_m": [
+      0.13,
+      1.725,
+      -0.461
+     ],
+     "radius_m": 0.011,
+     "parent": null
+    },
+    "Guide": {
+     "node": "Lamp_Guide",
+     "centre_m": [
+      0.03,
+      1.725,
+      -0.461
+     ],
+     "radius_m": 0.011,
+     "parent": null
+    },
+    "Test": {
+     "node": "Lamp_Test",
+     "centre_m": [
+      -0.15,
+      1.725,
+      -0.461
+     ],
+     "radius_m": 0.011,
+     "parent": null
+    },
+    "F2": {
+     "node": "Lamp_F2",
+     "centre_m": [
+      -0.255,
+      1.725,
+      -0.461
+     ],
+     "radius_m": 0.011,
+     "parent": null
+    },
+    "Floods": {
+     "node": "Lamp_Floods",
+     "centre_m": [
+      -0.36,
+      1.725,
+      -0.461
+     ],
+     "radius_m": 0.011,
+     "parent": null
+    },
+    "F2Fault": {
+     "node": "Lamp_F2Fault",
+     "centre_m": [
+      -0.23,
+      1.115,
+      -0.461
+     ],
+     "radius_m": 0.012,
+     "parent": null
+    }
+   },
+   "screens": {
+    "Main": {
+     "node": "Screen_Main",
+     "centre_m": [
+      0.18,
+      1.56,
+      -0.463
+     ],
+     "size_m": [
+      0.44,
+      0.115
+     ],
+     "parent": null
+    },
+    "F2Current": {
+     "node": "Screen_F2Current",
+     "centre_m": [
+      -0.255,
+      1.06,
+      -0.463
+     ],
+     "size_m": [
+      0.08,
+      0.03
+     ],
+     "parent": null
+    }
+   },
+   "labels": {
+    "Header": {
+     "node": "Label_Header",
+     "centre_m": [
+      0.0,
+      1.915,
+      -0.4635
+     ],
+     "plate_m": [
+      0.52,
+      0.036
+     ],
+     "parent": null
+    },
+    "Air": {
+     "node": "Label_Air",
+     "centre_m": [
+      0.33,
+      1.668,
+      -0.4635
+     ],
+     "plate_m": [
+      0.096,
+      0.036
+     ],
+     "parent": null
+    },
+    "Heat": {
+     "node": "Label_Heat",
+     "centre_m": [
+      0.23,
+      1.668,
+      -0.4635
+     ],
+     "plate_m": [
+      0.096,
+      0.036
+     ],
+     "parent": null
+    },
+    "Grow": {
+     "node": "Label_Grow",
+     "centre_m": [
+      0.13,
+      1.668,
+      -0.4635
+     ],
+     "plate_m": [
+      0.096,
+      0.036
+     ],
+     "parent": null
+    },
+    "Guide": {
+     "node": "Label_Guide",
+     "centre_m": [
+      0.03,
+      1.668,
+      -0.4635
+     ],
+     "plate_m": [
+      0.096,
+      0.036
+     ],
+     "parent": null
+    },
+    "Test": {
+     "node": "Label_Test",
+     "centre_m": [
+      -0.15,
+      1.668,
+      -0.4635
+     ],
+     "plate_m": [
+      0.096,
+      0.036
+     ],
+     "parent": null
+    },
+    "F2": {
+     "node": "Label_F2",
+     "centre_m": [
+      -0.255,
+      1.668,
+      -0.4635
+     ],
+     "plate_m": [
+      0.096,
+      0.036
+     ],
+     "parent": null
+    },
+    "Floods": {
+     "node": "Label_Floods",
+     "centre_m": [
+      -0.36,
+      1.668,
+      -0.4635
+     ],
+     "plate_m": [
+      0.096,
+      0.036
+     ],
+     "parent": null
+    },
+    "Shed": {
+     "node": "Label_Shed",
+     "centre_m": [
+      -0.255,
+      1.56,
+      -0.4635
+     ],
+     "plate_m": [
+      0.3,
+      0.05
+     ],
+     "parent": null
+    },
+    "Protected": {
+     "node": "Label_Protected",
+     "centre_m": [
+      0.18,
+      1.425,
+      -0.4635
+     ],
+     "plate_m": [
+      0.36,
+      0.03
+     ],
+     "parent": null
+    },
+    "BreakerAir": {
+     "node": "Label_BreakerAir",
+     "centre_m": [
+      0.33,
+      1.185,
+      -0.4635
+     ],
+     "plate_m": [
+      0.088,
+      0.03
+     ],
+     "parent": null
+    },
+    "BreakerHeat": {
+     "node": "Label_BreakerHeat",
+     "centre_m": [
+      0.23,
+      1.185,
+      -0.4635
+     ],
+     "plate_m": [
+      0.088,
+      0.03
+     ],
+     "parent": null
+    },
+    "BreakerGrow": {
+     "node": "Label_BreakerGrow",
+     "centre_m": [
+      0.13,
+      1.185,
+      -0.4635
+     ],
+     "plate_m": [
+      0.088,
+      0.03
+     ],
+     "parent": null
+    },
+    "BreakerGuide": {
+     "node": "Label_BreakerGuide",
+     "centre_m": [
+      0.03,
+      1.185,
+      -0.4635
+     ],
+     "plate_m": [
+      0.088,
+      0.03
+     ],
+     "parent": null
+    },
+    "SealTag": {
+     "node": "Label_SealTag",
+     "centre_m": [
+      0.18,
+      1.077,
+      -0.4815
+     ],
+     "plate_m": [
+      0.12,
+      0.05
+     ],
+     "parent": "SealTag"
+    },
+    "ColTest": {
+     "node": "Label_ColTest",
+     "centre_m": [
+      -0.15,
+      1.425,
+      -0.4635
+     ],
+     "plate_m": [
+      0.1,
+      0.03
+     ],
+     "parent": null
+    },
+    "ColF2": {
+     "node": "Label_ColF2",
+     "centre_m": [
+      -0.255,
+      1.425,
+      -0.4635
+     ],
+     "plate_m": [
+      0.1,
+      0.03
+     ],
+     "parent": null
+    },
+    "ColFloods": {
+     "node": "Label_ColFloods",
+     "centre_m": [
+      -0.36,
+      1.425,
+      -0.4635
+     ],
+     "plate_m": [
+      0.1,
+      0.03
+     ],
+     "parent": null
+    },
+    "TestSwitch": {
+     "node": "Label_TestSwitch",
+     "centre_m": [
+      -0.15,
+      1.255,
+      -0.4635
+     ],
+     "plate_m": [
+      0.096,
+      0.04
+     ],
+     "parent": null
+    },
+    "F2Controls": {
+     "node": "Label_F2Controls",
+     "centre_m": [
+      -0.255,
+      1.005,
+      -0.4635
+     ],
+     "plate_m": [
+      0.1,
+      0.03
+     ],
+     "parent": null
+    },
+    "FloodBreaker": {
+     "node": "Label_FloodBreaker",
+     "centre_m": [
+      -0.36,
+      1.215,
+      -0.4635
+     ],
+     "plate_m": [
+      0.096,
+      0.04
+     ],
+     "parent": null
+    }
+   },
+   "sockets": {},
+   "size_m": [
+    0.9,
+    2.0,
+    0.547
+   ],
+   "bounds_min_m": [
+    -0.45,
+    0.0,
+    -0.547
+   ],
+   "bounds_max_m": [
+    0.45,
+    2.0,
+    0.0
+   ]
+  },
+  {
+   "id": "PR_FilteredCamera",
+   "display": "Filtered remote camera",
+   "scenes": [
+    "EX-CH06-S06",
+    "EX-CH06-S07",
+    "EX-CH06-S10",
+    "EX-CH06-S11"
+   ],
+   "notes": "exterior mast camera: pan, tilt, MLI body, sun hood with hinged solar filter, F2 junction box and cable",
+   "anchor": "floor",
+   "mount_y": 0.0,
+   "lod_distance_m": 20.0,
+   "lods": [
+    "res://assets/props/eclipse_power/PR_FilteredCamera_LOD0.glb",
+    "res://assets/props/eclipse_power/PR_FilteredCamera_LOD1.glb"
+   ],
+   "triangles": [
+    1370,
+    762
+   ],
+   "collision": "LOD0",
+   "parts": {
+    "Pan": {
+     "axis": "rot_y",
+     "positions": {
+      "home": 0.0
+     },
+     "rest": "home",
+     "note": "yaw; the runtime aims it at the eclipse",
+     "pivot_m": [
+      0.0,
+      1.5,
+      0.0
+     ],
+     "parent": null
+    },
+    "Tilt": {
+     "axis": "rot_x",
+     "positions": {
+      "level": 0.0,
+      "up": 12.0
+     },
+     "rest": "level",
+     "note": "pitch; elevation of the Earth from Aurora is low",
+     "pivot_m": [
+      0.0,
+      1.75,
+      0.0
+     ],
+     "parent": "Pan"
+    },
+    "Filter": {
+     "axis": "rot_x",
+     "positions": {
+      "in": 0.0,
+      "out": 115.0
+     },
+     "rest": "in",
+     "note": "solar filter: 'in' is the protective configuration (EX-CH06-S06)",
+     "pivot_m": [
+      0.0,
+      1.816,
+      -0.27
+     ],
+     "parent": "Tilt"
+    }
+   },
+   "lamps": {
+    "Power": {
+     "node": "Lamp_Power",
+     "centre_m": [
+      -0.045,
+      0.765,
+      -0.1225
+     ],
+     "radius_m": 0.007,
+     "parent": null
+    },
+    "Status": {
+     "node": "Lamp_Status",
+     "centre_m": [
+      0.04,
+      1.78,
+      0.182
+     ],
+     "radius_m": 0.006,
+     "parent": "Tilt"
+    }
+   },
+   "screens": {},
+   "labels": {},
+   "sockets": {},
+   "size_m": [
+    0.46,
+    1.829,
+    0.694
+   ],
+   "bounds_min_m": [
+    -0.23,
+    0.0,
+    -0.45
+   ],
+   "bounds_max_m": [
+    0.23,
+    1.829,
+    0.244
+   ]
+  },
+  {
+   "id": "PR_EclipseMonitor",
+   "display": "Filtered-camera monitor",
+   "scenes": [
+    "EX-CH06-S06",
+    "EX-CH06-S07",
+    "EX-CH06-S09",
+    "EX-CH06-S10",
+    "EX-CH06-S11"
+   ],
+   "notes": "desk display; Screen_Main takes monitor/eclipse_monitor_screen.gd (camera view + labelled Earth-limb inset)",
+   "anchor": "floor",
+   "mount_y": 0.0,
+   "lod_distance_m": 10.0,
+   "lods": [
+    "res://assets/props/eclipse_power/PR_EclipseMonitor_LOD0.glb",
+    "res://assets/props/eclipse_power/PR_EclipseMonitor_LOD1.glb"
+   ],
+   "triangles": [
+    366,
+    214
+   ],
+   "collision": "LOD0",
+   "parts": {
+    "Display": {
+     "axis": "rot_x",
+     "positions": {
+      "upright": 0.0,
+      "tilted": 8.0
+     },
+     "rest": "upright",
+     "note": "tilt hinge; tilted faces up",
+     "pivot_m": [
+      0.0,
+      0.25,
+      0.04
+     ],
+     "parent": null
+    },
+    "HoldButton": {
+     "axis": "move_z",
+     "positions": {
+      "released": 0.0,
+      "pressed": 0.002
+     },
+     "rest": "released",
+     "note": "",
+     "pivot_m": [
+      -0.225,
+      0.242,
+      0.0
+     ],
+     "parent": "Display"
+    }
+   },
+   "lamps": {
+    "Rec": {
+     "node": "Lamp_Rec",
+     "centre_m": [
+      -0.27,
+      0.242,
+      0.0
+     ],
+     "radius_m": 0.0045,
+     "parent": "Display"
+    }
+   },
+   "screens": {
+    "Main": {
+     "node": "Screen_Main",
+     "centre_m": [
+      0.0,
+      0.422,
+      -0.0005
+     ],
+     "size_m": [
+      0.576,
+      0.324
+     ],
+     "parent": "Display"
+    }
+   },
+   "labels": {
+    "Bezel": {
+     "node": "Label_Bezel",
+     "centre_m": [
+      0.17,
+      0.242,
+      -0.0013
+     ],
+     "plate_m": [
+      0.22,
+      0.02
+     ],
+     "parent": "Display"
+    }
+   },
+   "sockets": {},
+   "size_m": [
+    0.62,
+    0.6,
+    0.21
+   ],
+   "bounds_min_m": [
+    -0.31,
+    0.0,
+    -0.085
+   ],
+   "bounds_max_m": [
+    0.31,
+    0.6,
+    0.125
+   ]
+  }
+ ]
+}

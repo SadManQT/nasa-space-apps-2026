@@ -1,0 +1,42 @@
+{
+ "task": "M3-6A",
+ "about": "Text and science values for the filtered-camera monitor screen (eclipse_monitor_screen.gd). English only. The date comes from the NASA fixture, never typed here; Aurora's own timing and view stay labelled as scenario (EX-CH06-S07). The inset is a conceptual diagram of light passing Earth's atmospheric limb; it is not a map and shows no region of Earth (EX-CH06-S07 decision review).",
+ "fixture": "res://resources/data/nasa/nasa_eclipse_2047_01_12.json",
+ "science": {
+  "earth_to_sun_width_ratio": 3.5,
+  "ratio_note": "Earth (12,742 km across) seen from the Moon at its mean distance of 384,400 km spans about 1.9 degrees; the Sun spans about 0.54 degrees in January (Earth near perihelion), so from the Moon Earth's disc looks about 3.5 times wider than the Sun.",
+  "earth_radius_frame": 0.30,
+  "path_offset_of_radius_gap": 0.35,
+  "ring_width_of_earth_radius": 0.012,
+  "ring_note": "The rim is sunlight refracted through the lower atmosphere at Earth's edge; Rayleigh scattering removes most blue on the long path, so the light reaching the Moon is red to orange, brightest on the side nearest the hidden Sun."
+ },
+ "text": {
+  "title": "FILTERED REMOTE CAMERA",
+  "feed": "FEED: CAMERA FEEDER F2",
+  "filter_in": "SOLAR FILTER IN",
+  "filter_out": "SOLAR FILTER OUT",
+  "exposure": "EXPOSURE AUTO",
+  "instrument": "INSTRUMENT VIEW - NOT A WINDOW",
+  "events": [
+   {"id": "ingress", "text": "INGRESS"},
+   {"id": "ring", "text": "RING"},
+   {"id": "egress", "text": "EGRESS"}
+  ],
+  "logged": "LOGGED",
+  "not_logged": "NOT LOGGED",
+  "held": "FRAME HELD",
+  "no_signal": "NO SIGNAL",
+  "no_signal_detail": "Camera feeder F2 has no supply. Habitat services are not on this branch.",
+  "date_line": "Eclipse date: {date} - NASA eclipse catalog (checked)",
+  "geometry_line": "Aurora's local timing and view: scenario, awaiting verified geometry",
+  "inset": {
+   "title": "WHY THE RIM IS RED",
+   "sun": "Sun",
+   "earth": "Earth (night side)",
+   "atmosphere": "Atmosphere at Earth's edge (limb)",
+   "rays": "Sunlight bends through the air; blue scatters out, red reaches the Moon",
+   "moon": "Moon - Aurora camera",
+   "footer": "Conceptual diagram - not to scale - not a map of Earth"
+  }
+ }
+}

@@ -1,0 +1,751 @@
+{
+ "task": "M3-6A",
+ "about": "Authored content for the Chapter 6 eclipse power props: label text, lamp words, variants and visual state presets. Geometry facts are generated into eclipse_props.json by production/tools/build_eclipse_props.py; eclipse_props.gd merges both. Presets only pose the props; the puzzles (P-11, P-12) own every rule, cost and transaction. English only, no logos.",
+ "sources": {
+  "story": "full-game-story/STORY_FULL.md EX-CH06-S01..S12",
+  "numbers": "game-design/08_PUZZLE_DESIGNS.md P-11 (five segments, accepted plan) and P-12 (isolate, zero and fault check, reset, reconnect, camera test)",
+  "joins": "game-design/24_NARRATIVE_REVISION.md section 2.9: CH05->CH06 marker tape on the guide-light circuit; S04->S05 the labelled guide-light branch; S11->S12 the lamp back in its clip"
+ },
+ "lamp_states": {
+  "off": {
+   "color": "#1b1d21",
+   "energy": 0.0,
+   "word": "OFF"
+  },
+  "ok": {
+   "color": "#3fd16b",
+   "energy": 2.2,
+   "word": "ON"
+  },
+  "warn": {
+   "color": "#ffb020",
+   "energy": 2.4,
+   "word": "CHECK"
+  },
+  "fault": {
+   "color": "#ff3b30",
+   "energy": 2.8,
+   "word": "FAULT"
+  },
+  "info": {
+   "color": "#41c8ff",
+   "energy": 2.0,
+   "word": "READY"
+  },
+  "rec": {
+   "color": "#ff2d2d",
+   "energy": 2.6,
+   "word": "REC"
+  }
+ },
+ "ink": {
+  "dark": "#1f2a44",
+  "light": "#eceef0"
+ },
+ "lights": {
+  "guide": {
+   "lens_color": "#ffb35c",
+   "lens_energy": 1.8,
+   "omni_color": "#ffb066",
+   "omni_energy": 0.35,
+   "omni_range_m": 1.5,
+   "spacing_m": 0.5
+  },
+  "flood": {
+   "lens_color": "#fff1dc",
+   "lens_energy": 6.0,
+   "spot_color": "#ffe2bf",
+   "spot_energy": 9.0,
+   "spot_range_m": 7.0,
+   "spot_angle_deg": 55.0
+  }
+ },
+ "props": {
+  "PR_EclipseBoard": {
+   "labels": {
+    "Header": "ECLIPSE ALLOCATION - TEACHING MODEL",
+    "Row1": "ESSENTIALS",
+    "Row2": "RETURN PUMP",
+    "Row3": "CAMERA",
+    "Row4": "DECORATIVE FLOODS",
+    "Forecast": "FORECAST",
+    "SegState1": {
+     "text": "",
+     "bind": {
+      "lamp": "Seg1"
+     },
+     "words": {
+      "off": "",
+      "ok": "PROTECTED",
+      "warn": "SERVICE MISSING"
+     }
+    },
+    "SegState2": {
+     "text": "",
+     "bind": {
+      "lamp": "Seg2"
+     },
+     "words": {
+      "off": "",
+      "ok": "PROTECTED",
+      "warn": "SERVICE MISSING"
+     }
+    },
+    "SegState3": {
+     "text": "",
+     "bind": {
+      "lamp": "Seg3"
+     },
+     "words": {
+      "off": "",
+      "ok": "PROTECTED",
+      "warn": "SERVICE MISSING"
+     }
+    },
+    "SegState4": {
+     "text": "",
+     "bind": {
+      "lamp": "Seg4"
+     },
+     "words": {
+      "off": "",
+      "ok": "PROTECTED",
+      "warn": "SERVICE MISSING"
+     }
+    },
+    "SegState5": {
+     "text": "",
+     "bind": {
+      "lamp": "Seg5"
+     },
+     "words": {
+      "off": "",
+      "ok": "PROTECTED",
+      "warn": "SERVICE MISSING"
+     }
+    }
+   },
+   "rows": [
+    "essentials",
+    "return_pump",
+    "camera",
+    "decorative_floods"
+   ],
+   "default_state": "blank",
+   "states": {
+    "blank": {
+     "lamps": {
+      "Seg1": "off",
+      "Seg2": "off",
+      "Seg3": "off",
+      "Seg4": "off",
+      "Seg5": "off"
+     }
+    },
+    "accepted_plan": {
+     "lamps": {
+      "Seg1": "ok",
+      "Seg2": "ok",
+      "Seg3": "ok",
+      "Seg4": "ok",
+      "Seg5": "ok"
+     }
+    },
+    "segment3_unprotected": {
+     "lamps": {
+      "Seg1": "ok",
+      "Seg2": "ok",
+      "Seg3": "warn",
+      "Seg4": "ok",
+      "Seg5": "ok"
+     }
+    }
+   },
+   "layouts": {
+    "accepted_plan": {
+     "source": "08_PUZZLE_DESIGNS.md P-11 accepted solution: essentials [1,1,1,1,1], pump [1,0,0,0,0], camera [0,1,0,0,0], floods all off",
+     "tags": {
+      "Tag_1_1": "essentials",
+      "Tag_2_1": "essentials",
+      "Tag_3_1": "essentials",
+      "Tag_4_1": "essentials",
+      "Tag_5_1": "essentials",
+      "Tag_1_2": "return_pump",
+      "Tag_2_3": "camera"
+     }
+    }
+   },
+   "screens": {
+    "Forecast": {
+     "about": "forecast line written by the P-11 puzzle from its own numbers"
+    }
+   }
+  },
+  "PR_SegmentCard": {
+   "labels": {
+    "Name": ""
+   },
+   "variants": [
+    {
+     "id": "precharge",
+     "order": 1,
+     "band": "#2e8bc0",
+     "labels": {
+      "Name": "1  PRECHARGE"
+     }
+    },
+    {
+     "id": "ingress",
+     "order": 2,
+     "band": "#f2c230",
+     "labels": {
+      "Name": "2  INGRESS"
+     }
+    },
+    {
+     "id": "totality",
+     "order": 3,
+     "band": "#9a1f1a",
+     "labels": {
+      "Name": "3  TOTALITY"
+     }
+    },
+    {
+     "id": "egress",
+     "order": 4,
+     "band": "#f26b21",
+     "labels": {
+      "Name": "4  EGRESS"
+     }
+    },
+    {
+     "id": "recovery",
+     "order": 5,
+     "band": "#4caf50",
+     "labels": {
+      "Name": "5  RECOVERY"
+     }
+    }
+   ]
+  },
+  "PR_ServiceTag": {
+   "labels": {
+    "Name": ""
+   },
+   "variants": [
+    {
+     "id": "essentials",
+     "band": "#20b8c9",
+     "labels": {
+      "Name": "ESSENTIALS"
+     },
+     "components": [
+      "air circulation",
+      "minimum heat",
+      "dim grow light",
+      "guide light"
+     ]
+    },
+    {
+     "id": "return_pump",
+     "band": "#2e8bc0",
+     "labels": {
+      "Name": "PUMP"
+     }
+    },
+    {
+     "id": "camera",
+     "band": "#8e5cc2",
+     "labels": {
+      "Name": "CAMERA"
+     }
+    },
+    {
+     "id": "decorative_floods",
+     "band": "#f2c230",
+     "labels": {
+      "Name": "FLOODS"
+     }
+    }
+   ]
+  },
+  "PR_GuideLightBranch": {
+   "labels": {
+    "Branch": {
+     "text": "GUIDE LIGHT\nPROTECTED BRANCH",
+     "hidden_in": [
+      "taped"
+     ]
+    },
+    "BranchState": {
+     "text": "",
+     "bind": {
+      "lamp": "Branch"
+     },
+     "words": {
+      "off": "SUPPLY OFF",
+      "ok": "SUPPLY ON"
+     }
+    }
+   },
+   "light": "guide",
+   "default_state": "labelled_on",
+   "states": {
+    "taped": {
+     "lamps": {
+      "Branch": "ok"
+     },
+     "visible": {
+      "MarkerTape": true
+     },
+     "label_visible": {
+      "Branch": false
+     },
+     "light": true
+    },
+    "labelled_on": {
+     "lamps": {
+      "Branch": "ok"
+     },
+     "visible": {
+      "MarkerTape": true
+     },
+     "label_visible": {
+      "Branch": true
+     },
+     "light": true
+    },
+    "labelled_off": {
+     "lamps": {
+      "Branch": "off"
+     },
+     "visible": {
+      "MarkerTape": true
+     },
+     "label_visible": {
+      "Branch": true
+     },
+     "light": false
+    }
+   }
+  },
+  "PR_GuideLightRun": {
+   "labels": {},
+   "light": "guide",
+   "default_state": "on",
+   "states": {
+    "on": {
+     "light": true
+    },
+    "off": {
+     "light": false
+    }
+   }
+  },
+  "PR_DecorativeFlood": {
+   "labels": {},
+   "light": "flood",
+   "default_state": "off",
+   "states": {
+    "on": {
+     "light": true,
+     "parts": {
+      "Head": "aim"
+     }
+    },
+    "off": {
+     "light": false,
+     "parts": {
+      "Head": "aim"
+     }
+    }
+   }
+  },
+  "PR_ProtectedBusPanel": {
+   "labels": {
+    "Header": "PROTECTED BUS",
+    "Air": {
+     "text": "AIR",
+     "bind": {
+      "lamp": "Air"
+     }
+    },
+    "Heat": {
+     "text": "HEAT",
+     "bind": {
+      "lamp": "Heat"
+     }
+    },
+    "Grow": {
+     "text": "GROW LIGHT",
+     "bind": {
+      "lamp": "Grow"
+     }
+    },
+    "Guide": {
+     "text": "GUIDE LIGHT",
+     "bind": {
+      "lamp": "Guide"
+     }
+    },
+    "Test": {
+     "text": "TEST BRANCH",
+     "bind": {
+      "lamp": "Test"
+     },
+     "words": {
+      "off": "DISCONNECTED"
+     }
+    },
+    "F2": {
+     "text": "F2 CAMERA",
+     "bind": {
+      "lamp": "F2"
+     },
+     "words": {
+      "off": "NO SUPPLY"
+     }
+    },
+    "Floods": {
+     "text": "FLOODS",
+     "bind": {
+      "lamp": "Floods"
+     },
+     "words": {
+      "off": "SHED"
+     }
+    },
+    "Shed": "SHEDDABLE BRANCHES\nTEST - CAMERA - FLOODS",
+    "Protected": "PROTECTED ESSENTIALS",
+    "BreakerAir": "AIR",
+    "BreakerHeat": "HEAT",
+    "BreakerGrow": "GROW",
+    "BreakerGuide": "GUIDE",
+    "SealTag": {
+     "text": "PROTECTED\nDO NOT SWITCH",
+     "ink": "dark"
+    },
+    "ColTest": "TEST",
+    "ColF2": {
+     "text": "F2 ISOLATOR",
+     "bind": {
+      "part": "F2Isolator"
+     },
+     "words": {
+      "connected": "CONNECTED",
+      "isolated": "ISOLATED"
+     }
+    },
+    "ColFloods": "FLOOD BRANCH",
+    "TestSwitch": {
+     "text": "TEST SELECT",
+     "bind": {
+      "part": "TestSwitch"
+     },
+     "words": {
+      "connected": "CONNECTED",
+      "disconnected": "DISCONNECTED"
+     }
+    },
+    "F2Controls": {
+     "text": "F2 BREAKER",
+     "bind": {
+      "part": "F2Breaker"
+     },
+     "words": {
+      "on": "ON",
+      "tripped": "TRIPPED",
+      "off": "OFF - RESET"
+     }
+    },
+    "FloodBreaker": {
+     "text": "FLOOD BREAKER",
+     "bind": {
+      "part": "FloodBreaker"
+     },
+     "words": {
+      "on": "ON",
+      "off": "OFF"
+     }
+    }
+   },
+   "screens": {
+    "Main": {
+     "about": "status rows in words; the puzzle may replace the text"
+    },
+    "F2Current": {
+     "about": "F2 current readout; only the 0 A after a trip is a puzzle number (08 P-12)"
+    }
+   },
+   "default_state": "normal",
+   "states": {
+    "normal": {
+     "lamps": {
+      "Air": "ok",
+      "Heat": "ok",
+      "Grow": "ok",
+      "Guide": "ok",
+      "Test": "ok",
+      "F2": "ok",
+      "Floods": "ok",
+      "F2Fault": "off"
+     },
+     "parts": {
+      "ProtectedGuard": "closed",
+      "TestSwitch": "connected",
+      "F2Isolator": "connected",
+      "F2Breaker": "on",
+      "F2TestButton": "released",
+      "FloodBreaker": "on"
+     },
+     "screens": {
+      "Main": "AIR ON   HEAT ON   GROW ON   GUIDE ON\nTEST ON   F2 CAMERA ON   FLOODS ON",
+      "F2Current": "F2  LOAD NORMAL"
+     }
+    },
+    "eclipse_schedule": {
+     "lamps": {
+      "Air": "ok",
+      "Heat": "ok",
+      "Grow": "ok",
+      "Guide": "ok",
+      "Test": "ok",
+      "F2": "ok",
+      "Floods": "off",
+      "F2Fault": "off"
+     },
+     "parts": {
+      "ProtectedGuard": "closed",
+      "TestSwitch": "connected",
+      "F2Isolator": "connected",
+      "F2Breaker": "on",
+      "F2TestButton": "released",
+      "FloodBreaker": "off"
+     },
+     "screens": {
+      "Main": "AIR ON   HEAT ON   GROW ON   GUIDE ON\nTEST ON   F2 CAMERA ON   FLOODS SHED",
+      "F2Current": "F2  LOAD NORMAL"
+     }
+    },
+    "test_disconnected": {
+     "lamps": {
+      "Air": "ok",
+      "Heat": "ok",
+      "Grow": "ok",
+      "Guide": "ok",
+      "Test": "off",
+      "F2": "ok",
+      "Floods": "off",
+      "F2Fault": "off"
+     },
+     "parts": {
+      "TestSwitch": "disconnected",
+      "F2Isolator": "connected",
+      "F2Breaker": "on",
+      "FloodBreaker": "off"
+     },
+     "screens": {
+      "Main": "AIR ON   HEAT ON   GROW ON   GUIDE ON\nTEST DISCONNECTED   F2 CAMERA ON   FLOODS SHED",
+      "F2Current": "F2  LOAD NORMAL"
+     }
+    },
+    "f2_tripped": {
+     "lamps": {
+      "Air": "ok",
+      "Heat": "ok",
+      "Grow": "ok",
+      "Guide": "ok",
+      "Test": "ok",
+      "F2": "fault",
+      "Floods": "off",
+      "F2Fault": "fault"
+     },
+     "parts": {
+      "TestSwitch": "connected",
+      "F2Isolator": "connected",
+      "F2Breaker": "tripped",
+      "FloodBreaker": "off"
+     },
+     "screens": {
+      "Main": "AIR ON   HEAT ON   GROW ON   GUIDE ON\nTEST ON   F2 CAMERA FAULT   FLOODS SHED",
+      "F2Current": "F2  0 A  TRIPPED"
+     }
+    },
+    "f2_isolated": {
+     "lamps": {
+      "Air": "ok",
+      "Heat": "ok",
+      "Grow": "ok",
+      "Guide": "ok",
+      "Test": "ok",
+      "F2": "off",
+      "Floods": "off",
+      "F2Fault": "fault"
+     },
+     "parts": {
+      "F2Isolator": "isolated",
+      "F2Breaker": "tripped",
+      "FloodBreaker": "off"
+     },
+     "screens": {
+      "Main": "AIR ON   HEAT ON   GROW ON   GUIDE ON\nTEST ON   F2 ISOLATED   FLOODS SHED",
+      "F2Current": "F2  0 A  ISOLATED"
+     }
+    },
+    "f2_fault_cleared": {
+     "lamps": {
+      "Air": "ok",
+      "Heat": "ok",
+      "Grow": "ok",
+      "Guide": "ok",
+      "Test": "ok",
+      "F2": "off",
+      "Floods": "off",
+      "F2Fault": "off"
+     },
+     "parts": {
+      "F2Isolator": "isolated",
+      "F2Breaker": "off",
+      "FloodBreaker": "off"
+     },
+     "screens": {
+      "Main": "AIR ON   HEAT ON   GROW ON   GUIDE ON\nTEST ON   F2 FAULT CLEARED   FLOODS SHED",
+      "F2Current": "F2  0 A  CLEARED"
+     }
+    },
+    "f2_reset": {
+     "lamps": {
+      "Air": "ok",
+      "Heat": "ok",
+      "Grow": "ok",
+      "Guide": "ok",
+      "Test": "ok",
+      "F2": "off",
+      "Floods": "off",
+      "F2Fault": "off"
+     },
+     "parts": {
+      "F2Isolator": "isolated",
+      "F2Breaker": "on",
+      "FloodBreaker": "off"
+     },
+     "screens": {
+      "Main": "AIR ON   HEAT ON   GROW ON   GUIDE ON\nTEST ON   F2 RESET, STILL ISOLATED   FLOODS SHED",
+      "F2Current": "F2  0 A  RESET"
+     }
+    },
+    "f2_restored": {
+     "lamps": {
+      "Air": "ok",
+      "Heat": "ok",
+      "Grow": "ok",
+      "Guide": "ok",
+      "Test": "ok",
+      "F2": "ok",
+      "Floods": "off",
+      "F2Fault": "off"
+     },
+     "parts": {
+      "F2Isolator": "connected",
+      "F2Breaker": "on",
+      "FloodBreaker": "off"
+     },
+     "screens": {
+      "Main": "AIR ON   HEAT ON   GROW ON   GUIDE ON\nTEST ON   F2 CAMERA ON   FLOODS SHED",
+      "F2Current": "F2  LOAD NORMAL"
+     }
+    }
+   },
+   "sequences": {
+    "p12_restore": [
+     "f2_tripped",
+     "f2_isolated",
+     "f2_fault_cleared",
+     "f2_reset",
+     "f2_restored"
+    ],
+    "s05_rehearsal": [
+     "eclipse_schedule",
+     "test_disconnected",
+     "eclipse_schedule"
+    ]
+   }
+  },
+  "PR_FilteredCamera": {
+   "labels": {},
+   "default_state": "filter_in",
+   "states": {
+    "filter_in": {
+     "lamps": {
+      "Power": "ok",
+      "Status": "ok"
+     },
+     "parts": {
+      "Filter": "in"
+     }
+    },
+    "filter_out": {
+     "lamps": {
+      "Power": "ok",
+      "Status": "warn"
+     },
+     "parts": {
+      "Filter": "out"
+     }
+    },
+    "f2_lost": {
+     "lamps": {
+      "Power": "off",
+      "Status": "off"
+     },
+     "parts": {
+      "Filter": "in"
+     }
+    }
+   }
+  },
+  "PR_EclipseMonitor": {
+   "labels": {
+    "Bezel": {
+     "text": "REMOTE CAMERA - FILTERED",
+     "ink": "light"
+    }
+   },
+   "default_state": "live",
+   "states": {
+    "live": {
+     "lamps": {
+      "Rec": "rec"
+     },
+     "parts": {
+      "HoldButton": "released",
+      "Display": "tilted"
+     }
+    },
+    "held": {
+     "lamps": {
+      "Rec": "warn"
+     },
+     "parts": {
+      "HoldButton": "pressed",
+      "Display": "tilted"
+     }
+    },
+    "no_signal": {
+     "lamps": {
+      "Rec": "off"
+     },
+     "parts": {
+      "HoldButton": "released",
+      "Display": "tilted"
+     }
+    }
+   },
+   "screens": {
+    "Main": {
+     "about": "monitor/eclipse_monitor_screen.gd via attach_monitor_screen"
+    }
+   }
+  }
+ }
+}
