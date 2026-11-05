@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "board_task": "M1-48",
+  "about": "The 'What now?' hint ladder (H1 nudge, H2 direction, H3 worked example) the Journal's Now tab offers for each Chapter 1 scene. Puzzle steps quote game-design/08_PUZZLE_DESIGNS.md word for word; non-puzzle decisions use the NEW hint text in game-design/22_PUZZLE_CLUE_DESIGN.md section 3. Scenes without authored hints fall back to the scene's own mission-card steps from the campaign catalog (player_actions), so no hint text is invented.",
+  "consumer_rules": [
+    "Show at most one more level each time the player asks; never pre-fill a control (doc 22 section 2.3).",
+    "Using a hint never changes an ending, a star or a reward.",
+    "A scene with 'from': 'p02_mission_table' reads the three P-02 hints from p02_mission_table.json so the Journal and the Mission Table never drift.",
+    "A scene absent from 'scenes' uses the fallback: its catalog player_actions in order, with the exit condition as the last level when fewer than three actions exist."
+  ],
+  "levels": [
+    {
+      "id": "H1",
+      "label": "NUDGE"
+    },
+    {
+      "id": "H2",
+      "label": "DIRECTION"
+    },
+    {
+      "id": "H3",
+      "label": "WORKED EXAMPLE"
+    }
+  ],
+  "fallback": {
+    "source": "Mission card steps",
+    "from": "player_actions"
+  },
+  "scenes": {
+    "EX-CH01-S01": {
+      "source": "22 section 3.1 energy route (NEW)",
+      "hints": [
+        "Follow the arrow after the battery is full.",
+        "A full store cannot take more; a tank or a lamp can still use it.",
+        "Route the spare to the air tank or to the bay lamp, then compare both with spilling it."
+      ]
+    },
+    "EX-CH01-S03": {
+      "source": "08 P-01",
+      "hints": [
+        "Check the instrument before trusting it.",
+        "Use the two reference cups.",
+        "Dry must read 0, wet 100, then fill both to 50."
+      ]
+    },
+    "EX-CH01-S04": {
+      "source": "08 P-01",
+      "hints": [
+        "Check the instrument before trusting it.",
+        "Use the two reference cups.",
+        "Dry must read 0, wet 100, then fill both to 50."
+      ]
+    },
+    "EX-CH01-S06": {
+      "source": "22 section 3.2 schedule (NEW)",
+      "hints": [
+        "Which room does the shelter water come from?",
+        "Put the water's return on the same timeline as the storm.",
+        "Compare two whole nights: wall full until dawn, or water returned after the exposure resolves. Read the garden line in both."
+      ]
+    },
+    "EX-CH01-S07": {
+      "source": "08 P-02",
+      "from": "p02_mission_table"
+    },
+    "EX-CH01-S08": {
+      "source": "08 P-02",
+      "from": "p02_mission_table"
+    },
+    "EX-CH01-S09": {
+      "source": "08 P-02",
+      "from": "p02_mission_table"
+    },
+    "EX-CH01-S10": {
+      "source": "08 P-02",
+      "from": "p02_mission_table"
+    },
+    "EX-CH01-S11": {
+      "source": "08 P-02",
+      "from": "p02_mission_table"
+    }
+  }
+}

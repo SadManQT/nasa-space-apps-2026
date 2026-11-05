@@ -34,6 +34,7 @@ const PANEL_IDS := [
 	"credits",
 	"sources",
 	"data_card",
+	"resume",
 ]
 
 const PANEL_DEFINITIONS := {
@@ -41,7 +42,8 @@ const PANEL_DEFINITIONS := {
 	"data_card": {"title": "DATA CARD", "query_key": "data_card", "description": "Observed evidence, computations and training assumptions are labelled separately."},
 	"objective": {"title": "OBJECTIVE", "query_key": "objective", "description": "Current objective and evidence-backed next step."},
 	"dialogue_captions": {"title": "DIALOGUE / CAPTIONS", "query_key": "dialogue_lines", "description": "Exact lines with speaker and origin labels."},
-	"journal_discovery": {"title": "JOURNAL / DISCOVERY", "query_key": "journal_entries", "description": "Acquired evidence only; unrevealed knowledge stays hidden."},
+	"journal_discovery": {"title": "EXPEDITION JOURNAL", "query_key": "journal_entries", "description": "Up and down change tabs; right moves into the page. Nothing appears before you have seen it."},
+	"resume": {"title": "PREVIOUSLY AT AURORA", "query_key": "journal_entries", "description": "Where you were when the expedition was saved. Reading does not advance scenario time."},
 	"mission_table": {"title": "MISSION TABLE", "query_key": "mission_table", "description": "Read-only mission plan and supplied forecast."},
 	"puzzle": {"title": "PUZZLE", "query_key": "puzzle", "description": "A named interaction can preview or submit an explicit command."},
 	"outcome": {"title": "OUTCOME", "query_key": "outcome", "description": "Review the changed readings, reserves and recorded evidence."},
@@ -68,6 +70,25 @@ var _body: VBoxContainer
 var _close_button: Button
 var _safe_top := 0.0
 var _last_focus: Control
+var _columns: HBoxContainer
+var _side: VBoxContainer
+var _scroll: ScrollContainer
+## Journal presentation state (never saved): the open tab, which "What now?"
+## hints the player asked for per scene, and a one-tap Growth Record view swap.
+var _journal_tab := "now"
+var _hint_levels := {}
+var _garden_layout_override := ""
+
+const JOURNAL_TABS := [
+	{"id": "now", "label": "NOW"},
+	{"id": "evidence", "label": "EVIDENCE"},
+	{"id": "garden", "label": "GARDEN"},
+	{"id": "decisions", "label": "DECISIONS"},
+]
+const JOURNAL_PANEL_WIDTH := 1180.0
+const PANEL_WIDTH := 780.0
+const SIDE_WIDTH := 200.0
+const STATUS_BADGES := {"OBSERVED": "• OBSERVED", "VERIFIED": "• VERIFIED", "INFERRED": "• INFERRED", "UNKNOWN": "• UNKNOWN", "LINKED": "• LINKED", "ARCHIVED": "• ARCHIVED"}
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -133,7 +154,28 @@ func open_panel(panel_id: String, data: Dictionary = {}) -> bool:
 	_panel.show()
 	panel_opened.emit(panel_id)
 	_close_button.grab_focus()
+	if panel_id == "journal_discovery":
+		_focus_journal_tab(_journal_tab)
 	return true
+
+## Opens the Expedition Journal on one tab ("now", "evidence", "garden" or
+## "decisions"). An empty journal argument keeps the bound query's journal.
+func open_journal(tab: String = "now", journal: Dictionary = {}) -> bool:
+	if JOURNAL_TABS.any(func(item): return item.id == tab):
+		_journal_tab = tab
+	return open_panel("journal_discovery", journal)
+
+func journal_tab() -> String:
+	return _journal_tab
+
+## Switches the open journal to another tab and keeps keyboard focus on it.
+func select_journal_tab(tab: String) -> void:
+	if not JOURNAL_TABS.any(func(item): return item.id == tab):
+		return
+	_journal_tab = tab
+	if _active_panel == "journal_discovery":
+		_render_active_panel()
+		_focus_journal_tab(tab)
 
 func close_panel() -> void:
 	if _active_panel.is_empty():
@@ -142,6 +184,8 @@ func close_panel() -> void:
 	var return_focus := _last_focus
 	_last_focus = null
 	_active_panel = ""
+	_garden_layout_override = ""
+	_side.hide()
 	_overlay.hide()
 	_panel.hide()
 	panel_closed.emit(closed)
@@ -206,12 +250,25 @@ func _build() -> void:
 	var divider := HSeparator.new()
 	divider.modulate = Color(0.32, 0.52, 0.72, 0.7)
 	page.add_child(divider)
+	_columns = HBoxContainer.new()
+	_columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_columns.add_theme_constant_override("separation", 18)
+	page.add_child(_columns)
+	# Left tab column (UI_07 contract); shown only by the journal.
+	_side = VBoxContainer.new()
+	_side.name = "JournalTabs"
+	_side.custom_minimum_size.x = SIDE_WIDTH
+	_side.add_theme_constant_override("separation", 8)
+	_side.hide()
+	_columns.add_child(_side)
 	var scroll := ScrollContainer.new()
+	_scroll = scroll
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.follow_focus = true
 	scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
-	page.add_child(scroll)
+	_columns.add_child(scroll)
 	_body = VBoxContainer.new()
 	_body.add_theme_constant_override("separation", 9)
 	_body.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -239,7 +296,9 @@ func _render_active_panel() -> void:
 	if _active_panel == "settings_accessibility":
 		_render_settings()
 	elif _active_panel == "pause":
-		_render_data("The expedition is paused. Close this panel to resume.")
+		_render_pause()
+	elif _active_panel == "resume":
+		_render_resume_panel(value)
 	elif _active_panel == "dialogue_captions":
 		_render_dialogue(value)
 	elif _active_panel == "puzzle":
@@ -258,6 +317,9 @@ func _render_active_panel() -> void:
 		_render_data(value)
 		if _active_panel in ["outcome", "mission_table"]:
 			_render_puzzle_sources(_query.get("source_puzzle_ids", []))
+	if _active_panel != "journal_discovery":
+		_side.hide()
+	_close_button.text = "CONTINUE EXPEDITION" if _active_panel == "resume" else "CLOSE PANEL"
 	_apply_accessibility()
 	_layout_panel()
 
@@ -269,10 +331,19 @@ func _layout_panel() -> void:
 	if _panel == null or _safe_top <= 0 or not is_inside_tree():
 		return
 	var view := get_viewport_rect().size
-	var width := minf(780, view.x - 32)
+	var width := minf(JOURNAL_PANEL_WIDTH if _active_panel == "journal_discovery" else PANEL_WIDTH, view.x - 32)
+	var top := _safe_top
+	var height := maxf(300, view.y - top - 20)
+	var needed := _panel.get_combined_minimum_size().y
+	if needed > height:
+		# The chrome outgrew the space under the status bar (large text on a
+		# small window): slide up over the bar rather than off the bottom edge.
+		height = minf(needed, view.y - 32)
+		top = maxf(16, view.y - 16 - height)
+	_panel.z_index = 80 if top < _safe_top else 40
 	_panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	_panel.position = Vector2((view.x - width) * 0.5, _safe_top)
-	_panel.size = Vector2(width, maxf(300, view.y - _safe_top - 20))
+	_panel.position = Vector2((view.x - width) * 0.5, top)
+	_panel.size = Vector2(width, height)
 
 func _render_data(value) -> void:
 	var body := Label.new()
@@ -282,12 +353,6 @@ func _render_data(value) -> void:
 	body.add_theme_color_override("font_color", IVORY)
 	body.text = _display_value(value)
 	_body.add_child(body)
-	if _active_panel == "pause":
-		var note := Label.new()
-		note.text = "CAPTIONS ON BY DEFAULT  ·  TIMER-FREE LABELS  ·  REDUCED MOTION AVAILABLE"
-		note.add_theme_color_override("font_color", MUTED)
-		note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		_body.add_child(note)
 
 func _render_dialogue(value) -> void:
 	if not captions_visible():
@@ -455,6 +520,13 @@ func _set_settings(settings: Dictionary, emit_change: bool) -> void:
 		if settings.has(key):
 			_settings[key] = bool(settings[key])
 	_apply_accessibility()
+	if _active_panel == "journal_discovery":
+		# Column stacking and photo strips depend on the text scale.
+		var focused_tab := get_viewport().gui_get_focus_owner() if is_inside_tree() else null
+		var keep_tab: bool = focused_tab != null and String(focused_tab.name).begins_with("Tab_")
+		_render_active_panel()
+		if keep_tab:
+			_focus_journal_tab(_journal_tab)
 	if emit_change:
 		var copy := _settings.duplicate(true)
 		accessibility_changed.emit(copy)
@@ -646,17 +718,459 @@ func _render_card(value) -> void:
 		_card_text("SOURCE\n" + String(card.get("url", "")) + "\n" + String(card.get("citation", "")) + "\nRetrieved: " + String(card.get("retrieved", "")) + "\nLicence: " + String(card.get("licence", "")))
 	_source_button("BACK TO ALL SOURCES", func(): open_panel("sources", {"ids": []}))
 
+## ---------------------------------------------------------------------------
+## Expedition Journal (M1-48): four tabs over CampaignKnowledge.journal(), the
+## "Previously at Aurora" resume card, and the What now? hint ladder. The
+## panel only presents the pure view model; it never computes campaign state.
+## ---------------------------------------------------------------------------
+
+func _journal_data(value = null) -> Dictionary:
+	var data = value if value != null else _query.get("journal_entries", {})
+	return data if data is Dictionary else {}
+
 func _render_journal(value) -> void:
-	if not value is Array or value.is_empty():
-		_card_text("New discoveries appear here after you complete their evidence operations.")
+	var journal := _journal_data(value)
+	var tabs: Dictionary = journal.get("tabs", {}) if journal.get("tabs", {}) is Dictionary else {}
+	if not JOURNAL_TABS.any(func(item): return item.id == _journal_tab):
+		_journal_tab = "now"
+	_render_journal_tabs(journal)
+	var data: Dictionary = tabs.get(_journal_tab, {}) if tabs.get(_journal_tab, {}) is Dictionary else {}
+	match _journal_tab:
+		"now":
+			_render_now_tab(data)
+		"evidence":
+			_render_evidence_tab(data)
+		"garden":
+			_render_garden_tab(data)
+		"decisions":
+			_render_decisions_tab(data)
+
+## Left tab column. The open tab is pressed and prefixed with "›", a cue that
+## does not depend on colour; counts tell the player where new entries are.
+func _render_journal_tabs(journal: Dictionary) -> void:
+	for child in _side.get_children():
+		_side.remove_child(child)
+		child.queue_free()
+	_side.show()
+	var counts: Dictionary = journal.get("counts", {}) if journal.get("counts", {}) is Dictionary else {}
+	var group := ButtonGroup.new()
+	var buttons: Array[Button] = []
+	for item in JOURNAL_TABS:
+		var tab_id := String(item.id)
+		var active := tab_id == _journal_tab
+		var count := int(counts.get(tab_id, 0))
+		var button := _button(("› " if active else "   ") + String(item.label) + (" · %d" % count if count > 0 else ""))
+		button.name = "Tab_" + tab_id
+		button.toggle_mode = true
+		button.button_group = group
+		button.button_pressed = active
+		button.custom_minimum_size = Vector2(SIDE_WIDTH, 44)
+		button.add_theme_stylebox_override("pressed", _button_style(Color("#243B5A"), IVORY, true))
+		button.add_theme_color_override("font_pressed_color", IVORY)
+		button.add_theme_color_override("font_hover_pressed_color", IVORY)
+		button.accessibility_name = "%s tab%s" % [String(item.label).capitalize(), ", open" if active else ""]
+		button.pressed.connect(func() -> void: select_journal_tab(tab_id))
+		_side.add_child(button)
+		buttons.append(button)
+	for index in buttons.size():
+		var button := buttons[index]
+		button.focus_neighbor_top = buttons[(index - 1 + buttons.size()) % buttons.size()].get_path()
+		button.focus_neighbor_bottom = buttons[(index + 1) % buttons.size()].get_path()
+		button.focus_neighbor_right = _scroll.get_v_scroll_bar().get_path()
+
+func _focus_journal_tab(tab: String) -> void:
+	var button := _side.get_node_or_null("Tab_" + tab) as Button
+	if button != null and button.is_inside_tree():
+		button.grab_focus()
+
+func _render_now_tab(data: Dictionary) -> void:
+	var objective: Dictionary = data.get("objective", {}) if data.get("objective", {}) is Dictionary else {}
+	_section("OBJECTIVE")
+	if objective.is_empty():
+		_body.add_child(_card([_label("Your current objective appears here once the expedition begins.", 15, MUTED)]))
+	else:
+		var complete := String(objective.get("state", "")) == "complete"
+		var rows: Array = [
+			_label(String(objective.get("scene_title", "")), 20, MUSTARD),
+			_label(String(objective.get("objective_text", "")), 17, IVORY),
+		]
+		var why := String(objective.get("why", ""))
+		if not why.is_empty() and why != String(objective.get("objective_text", "")):
+			rows.append(_label(why, 14, MUTED))
+		rows.append(_label("%s%s · %s" % ["• COMPLETE · " if complete else "", String(objective.get("mission", "")), String(objective.get("date_label", ""))], 12, CYAN if complete else MUTED))
+		if complete:
+			rows.append(_label("This scene is finished. Advance when the next chapter is ready.", 14, IVORY))
+		_body.add_child(_card(rows))
+	_section("DONE SO FAR")
+	var completed: Array = data.get("completed", []) if data.get("completed", []) is Array else []
+	if completed.is_empty():
+		_body.add_child(_label("Nothing is finished yet. Start with the objective above.", 14, MUTED))
+	for row in completed:
+		if row is Dictionary:
+			_body.add_child(_card([
+				_label("• " + String(row.get("date_label", "")) + " · " + String(row.get("scene_title", "")), 12, CYAN),
+				_label(String(row.get("completed_text", "")), 15, IVORY),
+			]))
+	_render_hint_ladder(data.get("hints", {}) if data.get("hints", {}) is Dictionary else {})
+
+## What now? (doc 22 §2.3): H1 nudge, H2 direction, H3 worked example, one
+## level per request. Hints never change an ending, a star or a reward.
+func _render_hint_ladder(hints: Dictionary) -> void:
+	_section("WHAT NOW?")
+	var levels: Array = hints.get("levels", []) if hints.get("levels", []) is Array else []
+	var labels: Array = hints.get("level_labels", []) if hints.get("level_labels", []) is Array else []
+	var scene_id := String(hints.get("scene_id", ""))
+	if levels.is_empty():
+		_body.add_child(_label("No hint is written for this step.", 14, MUTED))
 		return
-	for entry in value:
+	var revealed := clampi(int(_hint_levels.get(scene_id, 0)), 0, levels.size())
+	for index in revealed:
+		var level: Dictionary = labels[index] if index < labels.size() and labels[index] is Dictionary else {"id": "H%d" % (index + 1), "label": ""}
+		_body.add_child(_card([
+			_label("%s · %s" % [String(level.get("id", "")), String(level.get("label", ""))], 12, CYAN),
+			_label(String(levels[index]), 15, IVORY),
+		]))
+	if revealed < levels.size():
+		var next_level: Dictionary = labels[revealed] if revealed < labels.size() and labels[revealed] is Dictionary else {"id": "H%d" % (revealed + 1), "label": ""}
+		var reveal := _button("SHOW HINT %d OF %d · %s" % [revealed + 1, levels.size(), String(next_level.get("label", ""))])
+		reveal.name = "RevealHint"
+		reveal.pressed.connect(func() -> void:
+			_hint_levels[scene_id] = revealed + 1
+			_render_active_panel()
+			var again := _body.get_node_or_null("RevealHint") as Button
+			if again != null:
+				again.grab_focus()
+			else:
+				_focus_journal_tab(_journal_tab)
+		)
+		_body.add_child(reveal)
+	else:
+		_body.add_child(_label("All three hints are open.", 13, MUTED))
+	_body.add_child(_label("Source: %s. Hints never change an ending, a star or a reward." % String(hints.get("source", "mission card")), 11, MUTED))
+
+## Observed / Inferred / Unknown (doc 22 T2). Three columns side by side; at
+## 150% text the columns stack so every card reflows at full width.
+func _render_evidence_tab(data: Dictionary) -> void:
+	var columns: Dictionary = data.get("columns", {}) if data.get("columns", {}) is Dictionary else {}
+	_body.add_child(_label("Observed is what we saw. Inferred is what we think it means. Unknown is what we still have to ask. A clue moves columns only with a new source.", 13, MUTED))
+	var stacked := text_scale() > 1.0
+	var holder: BoxContainer = VBoxContainer.new() if stacked else HBoxContainer.new()
+	holder.name = "EvidenceColumns"
+	holder.add_theme_constant_override("separation", 14)
+	holder.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	for key in ["observed", "inferred", "unknown"]:
+		var column := VBoxContainer.new()
+		column.name = "Column_" + key
+		column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		column.size_flags_stretch_ratio = 1.0
+		column.add_theme_constant_override("separation", 8)
+		var entries: Array = columns.get(key, []) if columns.get(key, []) is Array else []
+		column.add_child(_label("• %s · %d" % [key.to_upper(), entries.size()], 13, CYAN))
+		if entries.is_empty():
+			column.add_child(_label("Nothing here yet.", 13, MUTED))
+		for entry in entries:
+			if entry is Dictionary:
+				column.add_child(_entry_card(entry))
+		holder.add_child(column)
+	_body.add_child(holder)
+
+## One clue, fact, interpretation, question or operation record. Status and
+## type are words, never only colours; links name entries already shown.
+func _entry_card(entry: Dictionary) -> PanelContainer:
+	var rows: Array = []
+	var title := _label(String(entry.get("title", "")), 16, IVORY)
+	title.name = "Title"
+	rows.append(title)
+	var badge := "%s · %s" % [String(STATUS_BADGES.get(String(entry.get("status", "")), "• " + String(entry.get("status", "")))), String(entry.get("type", "")).replace("_", " ").to_upper()]
+	var evidence_label := String(entry.get("evidence_label", ""))
+	if not evidence_label.is_empty():
+		badge += " · " + evidence_label
+	rows.append(_label(badge, 11, CYAN))
+	var body := String(entry.get("body", ""))
+	if not body.is_empty():
+		rows.append(_label(body, 14, IVORY))
+	var meta: Array[String] = []
+	for key in ["source", "scene_title", "date_label"]:
+		var piece := String(entry.get(key, ""))
+		if not piece.is_empty():
+			meta.append(piece)
+	if not meta.is_empty():
+		rows.append(_label(" · ".join(meta), 11, MUTED))
+	var links: Array = entry.get("links", []) if entry.get("links", []) is Array else []
+	if not links.is_empty():
+		var names: Array[String] = []
+		for link in links:
+			if link is Dictionary:
+				names.append("› " + String(link.get("title", "")))
+		rows.append(_label("Linked: " + "   ".join(names), 12, CYAN))
+	if bool(entry.get("updated", false)):
+		rows.append(_label("UPDATED · see " + String(entry.get("superseded_title", "")), 12, MUSTARD))
+	return _card(rows)
+
+## Growth Record (doc 24 §6.2): paired photographs or a paired conditions
+## table, in the layout chosen at EX-CH01-S04, with the other view one tap away,
+## then the life-cycle track with each plant's marker.
+func _render_garden_tab(data: Dictionary) -> void:
+	var plants: Array = data.get("plants", []) if data.get("plants", []) is Array else []
+	var layouts: Array = data.get("layouts", []) if data.get("layouts", []) is Array else []
+	var layout := _garden_layout_override if not _garden_layout_override.is_empty() else String(data.get("layout", "paired_photographs"))
+	var layout_label := layout.replace("_", " ").to_upper()
+	for candidate in layouts:
+		if candidate is Dictionary and String(candidate.get("id", "")) == layout:
+			layout_label = String(candidate.get("label", layout_label)).to_upper()
+	_section("GROWTH RECORD · " + layout_label)
+	_body.add_child(_label("Layout chosen at the notebook decision. The other view is one tap away." if bool(data.get("layout_chosen", false)) else "Default layout until the notebook decision is made.", 12, MUTED))
+	if layouts.size() > 1:
+		var other := ""
+		var other_label := ""
+		for candidate in layouts:
+			if candidate is Dictionary and String(candidate.get("id", "")) != layout:
+				other = String(candidate.get("id", ""))
+				other_label = String(candidate.get("label", other)).to_upper()
+		var toggle := _button("VIEW AS " + other_label)
+		toggle.name = "GrowthLayoutToggle"
+		toggle.pressed.connect(func() -> void:
+			_garden_layout_override = other
+			_render_active_panel()
+			var again := _body.get_node_or_null("GrowthLayoutToggle") as Button
+			if again != null:
+				again.grab_focus()
+		)
+		_body.add_child(toggle)
+	var records: Array = data.get("records", []) if data.get("records", []) is Array else []
+	if plants.is_empty():
+		_body.add_child(_card([_label("The Growth Record opens when Alo and Tara are planted.", 15, MUTED)]))
+	elif layout == "paired_conditions":
+		_render_growth_table(plants, records)
+	else:
+		_render_growth_photos(plants, records)
+	if not plants.is_empty():
+		_render_lifecycle_track(data.get("lifecycle", {}) if data.get("lifecycle", {}) is Dictionary else {}, plants)
+	for line in data.get("ledger", []):
+		_body.add_child(_label(String(line), 13, MUTED))
+
+func _render_growth_photos(plants: Array, records: Array) -> void:
+	if records.is_empty():
+		_body.add_child(_label("No dated photograph yet.", 14, MUTED))
+	var stacked := text_scale() > 1.0
+	for record in records:
+		if not record is Dictionary:
+			continue
+		_body.add_child(_label(String(record.get("date_label", "")), 13, CYAN))
+		var strip: BoxContainer = VBoxContainer.new() if stacked else HBoxContainer.new()
+		strip.add_theme_constant_override("separation", 12)
+		strip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var frames: Dictionary = record.get("frames", {}) if record.get("frames", {}) is Dictionary else {}
+		for plant in plants:
+			if not plant is Dictionary:
+				continue
+			var frame = frames.get(String(plant.get("id", "")), {})
+			var tile := _photo_tile(String(plant.get("name", "")), String(frame.get("stage_id", "")).replace("_", " ") if frame is Dictionary and not frame.is_empty() else "")
+			var caption := _label(String(frame.get("body", "")) if frame is Dictionary and not frame.is_empty() else "No photograph that day.", 13, IVORY if frame is Dictionary and not frame.is_empty() else MUTED)
+			var card := _card([tile, _label("%s · %s" % [String(plant.get("name", "")).to_upper(), String(plant.get("chamber", ""))], 11, CYAN), caption])
+			card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			card.size_flags_stretch_ratio = 1.0
+			strip.add_child(card)
+		_body.add_child(strip)
+
+## A framed stage tile stands in for the chamber camera image.
+func _photo_tile(plant_name: String, stage: String) -> PanelContainer:
+	var tile := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.02, 0.04, 0.08, 1.0)
+	style.border_width_left = 1
+	style.border_width_top = 1
+	style.border_width_right = 1
+	style.border_width_bottom = 1
+	style.border_color = Color(0.32, 0.52, 0.72, 0.6)
+	style.corner_radius_top_left = 6
+	style.corner_radius_top_right = 6
+	style.corner_radius_bottom_left = 6
+	style.corner_radius_bottom_right = 6
+	tile.add_theme_stylebox_override("panel", style)
+	tile.custom_minimum_size = Vector2(0, 64)
+	var text := _label(("%s · %s" % [plant_name.to_upper(), stage.to_upper()]) if not stage.is_empty() else "NO IMAGE", 15, MUSTARD if not stage.is_empty() else MUTED)
+	text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	tile.add_child(text)
+	return tile
+
+func _render_growth_table(plants: Array, records: Array) -> void:
+	if records.is_empty():
+		_body.add_child(_label("No dated row yet.", 14, MUTED))
+		return
+	var grid := GridContainer.new()
+	grid.name = "GrowthTable"
+	grid.columns = 1 + plants.size()
+	grid.add_theme_constant_override("h_separation", 14)
+	grid.add_theme_constant_override("v_separation", 8)
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	grid.add_child(_label("DATE", 12, CYAN))
+	for plant in plants:
+		var header := _label("%s · %s" % [String(plant.get("name", "")).to_upper(), String(plant.get("chamber", ""))], 12, CYAN)
+		header.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid.add_child(header)
+	for record in records:
+		if not record is Dictionary:
+			continue
+		var date := _label(String(record.get("date_label", "")), 13, IVORY)
+		date.custom_minimum_size.x = 120
+		grid.add_child(date)
+		var frames: Dictionary = record.get("frames", {}) if record.get("frames", {}) is Dictionary else {}
+		for plant in plants:
+			var frame = frames.get(String(plant.get("id", "")), {})
+			var has_frame: bool = frame is Dictionary and not frame.is_empty()
+			var cell := _label(("%s · %s" % [String(frame.get("stage_id", "")).replace("_", " ").to_upper(), String(frame.get("body", ""))]) if has_frame else "No row that day.", 13, IVORY if has_frame else MUTED)
+			cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			grid.add_child(cell)
+	_body.add_child(grid)
+
+## Seed → sprout → bud → flower → pods → ripe seeds, with each plant's name
+## under its current stage (doc 24 §3.8: the far end reads "seeds" from day one).
+func _render_lifecycle_track(lifecycle: Dictionary, plants: Array) -> void:
+	_section("LIFE CYCLE")
+	var stages: Array = lifecycle.get("stages", []) if lifecycle.get("stages", []) is Array else []
+	var markers: Dictionary = lifecycle.get("markers", {}) if lifecycle.get("markers", {}) is Dictionary else {}
+	var track := HFlowContainer.new()
+	track.name = "LifecycleTrack"
+	track.add_theme_constant_override("h_separation", 6)
+	track.add_theme_constant_override("v_separation", 6)
+	track.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	for index in stages.size():
+		var stage: Dictionary = stages[index] if stages[index] is Dictionary else {}
+		var names: Array[String] = []
+		for plant in plants:
+			if plant is Dictionary and int(markers.get(String(plant.get("id", "")), -1)) == index:
+				names.append(String(plant.get("name", "")).to_upper())
+		var cell := VBoxContainer.new()
+		cell.custom_minimum_size.x = 150
+		cell.add_theme_constant_override("separation", 2)
+		var head := _label("%d · %s" % [index + 1, String(stage.get("label", ""))], 13, IVORY)
+		head.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		cell.add_child(head)
+		var marker := _label("› " + " + ".join(names) + " ‹" if not names.is_empty() else "·", 13, MUSTARD if not names.is_empty() else MUTED)
+		marker.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		cell.add_child(marker)
+		track.add_child(_card([cell]))
+	_body.add_child(track)
+	for plant in plants:
+		if not plant is Dictionary:
+			continue
+		var caption := String(plant.get("caption", ""))
+		if not bool(plant.get("alive", true)):
+			caption += " Her record is kept as it was written."
+		_body.add_child(_label(caption, 13, MUTED))
+
+## What we chose / what it did / where it showed up again (doc 24 §6.2). A
+## "recorded" line means this is written down, never that it will matter.
+func _render_decisions_tab(data: Dictionary) -> void:
+	var outcome: Dictionary = data.get("outcome", {}) if data.get("outcome", {}) is Dictionary else {}
+	if not outcome.is_empty():
+		_section("NIGHT ONE OUTCOME")
+		_body.add_child(_card([
+			_label(String(outcome.get("title", "")), 18, MUSTARD),
+			_label(String(outcome.get("summary", "")), 15, IVORY),
+			_label("• RECORDED · " + String(outcome.get("date_label", "")), 11, CYAN),
+		]))
+	_section("DECISIONS")
+	var entries: Array = data.get("entries", []) if data.get("entries", []) is Array else []
+	if entries.is_empty():
+		_body.add_child(_card([_label("Confirm a decision review to record your first choice. Previews are never recorded.", 15, MUTED)]))
+	for entry in entries:
 		if not entry is Dictionary:
 			continue
-		_card_text(String(entry.get("title", "Acquired record")).to_upper(), true)
-		_card_text(String(entry.get("evidence_label", "Recorded observation")))
-		for observation in entry.get("observations", []):
-			_card_text(String(observation.get("text", "")))
+		var rows: Array = [
+			_label(String(entry.get("title", "")), 17, IVORY),
+			_label("• RECORDED · %s · %s" % [String(entry.get("recorded_label", entry.get("date_label", ""))), String(entry.get("scene_title", ""))], 11, CYAN),
+		]
+		var prompt := String(entry.get("prompt", ""))
+		if not prompt.is_empty():
+			rows.append(_label(prompt, 13, MUTED))
+		rows.append(_label("WHAT WE CHOSE", 11, MUSTARD))
+		rows.append(_label(String(entry.get("chose", "")), 15, IVORY))
+		rows.append(_label("WHAT IT DID", 11, MUSTARD))
+		var did := String(entry.get("did", ""))
+		var body := String(entry.get("body", ""))
+		rows.append(_label((did + "\n" + body).strip_edges() if not did.is_empty() else body, 14, IVORY))
+		var echoes: Array = entry.get("echoes", []) if entry.get("echoes", []) is Array else []
+		if not echoes.is_empty():
+			rows.append(_label("WHERE IT SHOWED UP AGAIN", 11, MUSTARD))
+			for echo in echoes:
+				if echo is Dictionary:
+					rows.append(_label("%s · %s" % [String(echo.get("scene_title", "")), String(echo.get("text", ""))], 14, IVORY))
+		_body.add_child(_card(rows))
+
+## "Previously at Aurora" (doc 24 §6.6): at most six lines from the snapshot.
+func _render_resume_card(journal: Dictionary, with_header: bool = true) -> void:
+	var lines: Array = journal.get("resume", []) if journal.get("resume", []) is Array else []
+	var rows: Array = []
+	if with_header:
+		rows.append(_label("PREVIOUSLY AT AURORA", 13, MUSTARD))
+	if lines.is_empty():
+		rows.append(_label("No saved progress to summarise yet.", 14, MUTED))
+	for index in mini(lines.size(), 6):
+		var line := _label(String(lines[index]), 16, IVORY)
+		line.name = "ResumeLine%d" % (index + 1)
+		rows.append(line)
+	var card := _card(rows)
+	card.name = "ResumeCard"
+	_body.add_child(card)
+
+func _render_pause() -> void:
+	_render_data("The expedition is paused. Close this panel to resume.")
+	_render_resume_card(_journal_data())
+	var note := Label.new()
+	note.text = "CAPTIONS ON BY DEFAULT  ·  TIMER-FREE LABELS  ·  REDUCED MOTION AVAILABLE"
+	note.add_theme_color_override("font_color", MUTED)
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_body.add_child(note)
+
+func _render_resume_panel(value) -> void:
+	var journal := _journal_data(value)
+	_render_resume_card(journal, false)
+	_source_button("OPEN THE JOURNAL · NOW", func(): open_journal("now"))
+
+func _section(text: String) -> void:
+	var header := _label(text, 13, MUSTARD)
+	header.name = "Section_" + text.to_lower().replace(" ", "_")
+	_body.add_child(header)
+
+func _label(text: String, size: int, color: Color) -> Label:
+	var label := Label.new()
+	label.text = text
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.add_theme_font_size_override("font_size", size)
+	label.add_theme_color_override("font_color", color)
+	return label
+
+func _card(rows: Array) -> PanelContainer:
+	var card := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.07, 0.10, 0.17, 0.92)
+	style.border_width_left = 1
+	style.border_width_top = 1
+	style.border_width_right = 1
+	style.border_width_bottom = 1
+	style.border_color = Color(0.26, 0.40, 0.62, 0.55)
+	style.corner_radius_top_left = 10
+	style.corner_radius_top_right = 10
+	style.corner_radius_bottom_left = 10
+	style.corner_radius_bottom_right = 10
+	style.content_margin_left = 12
+	style.content_margin_right = 12
+	style.content_margin_top = 10
+	style.content_margin_bottom = 10
+	card.add_theme_stylebox_override("panel", style)
+	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var column := VBoxContainer.new()
+	column.add_theme_constant_override("separation", 4)
+	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	for row in rows:
+		if row is Control:
+			column.add_child(row)
+	card.add_child(column)
+	return card
 
 func _render_outcome(value) -> void:
 	var data: Dictionary = value if value is Dictionary else {}

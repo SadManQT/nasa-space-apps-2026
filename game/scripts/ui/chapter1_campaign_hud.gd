@@ -40,6 +40,9 @@ var _modal_button_states := {}
 var _dialogue_index := 0
 var _scene_id := ""
 var _decision_review: Button
+## Continue (title → saved checkpoint) opens "Previously at Aurora" once the
+## world and any scene-entry film are done; direct fixtures never trigger it.
+var _resume_pending := false
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -57,6 +60,7 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
 	mission_table.closed.connect(func(_target: String) -> void: _on_panel_closed("mission_table"))
 	mission_table.commit_requested.connect(_on_mission_table_commit)
+	_resume_pending = bool(runtime.incremental_loading) and not runtime.initial_snapshot.is_empty()
 	_refresh_query()
 	refresh_scene({})
 
@@ -78,6 +82,7 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 	_build_targets()
 	_refresh_query()
 	apply_accessibility()
+	_offer_resume_card()
 
 func refresh_after_action(result: Dictionary) -> void:
 	_forecast = {}
@@ -411,7 +416,31 @@ func _on_advance_pressed() -> void:
 
 func _on_journal_pressed() -> void:
 	if runtime != null and panels != null:
-		panels.open_panel("journal_discovery", {"entries": runtime.query().get("journal_entries", [])})
+		_refresh_query()
+		panels.open_journal("now")
+
+## Opens the "Previously at Aurora" resume card (doc 24 §6.6) over the live
+## scene. Returns false while another panel, the Mission Table or a film is up.
+func show_resume_card() -> bool:
+	if runtime == null or panels == null or not panels.active_panel().is_empty():
+		return false
+	if (mission_table != null and mission_table.is_open()) or runtime.is_cutscene_active():
+		return false
+	_refresh_query()
+	return panels.open_panel("resume")
+
+func _offer_resume_card() -> void:
+	if not _resume_pending or runtime == null or runtime.loading:
+		return
+	if runtime.is_cutscene_active():
+		if not runtime.cutscene_closed.is_connected(_on_resume_cutscene_closed):
+			runtime.cutscene_closed.connect(_on_resume_cutscene_closed, CONNECT_ONE_SHOT)
+		return
+	_resume_pending = false
+	show_resume_card()
+
+func _on_resume_cutscene_closed(_result: Dictionary) -> void:
+	_offer_resume_card.call_deferred()
 
 func _on_save_pressed() -> void:
 	if runtime != null:

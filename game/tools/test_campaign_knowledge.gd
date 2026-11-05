@@ -25,10 +25,12 @@ func _run() -> void:
 		_check(route.perform(target).accepted, "owning evidence operation " + target)
 	var acquired := director.snapshot()
 	_check(acquired.acquired_evidence_ids.has("EX-CH01-S03"), "record uses its canonical content ID")
-	var entries := CampaignKnowledge.journal(acquired)
-	var record: Dictionary = entries.filter(func(item): return item.get("id") == "EX-CH01-S03")[0]
-	_check(record.observations.any(func(item): return item.id == "inspect_packet"), "packet observation enters the journal")
-	_check(not JSON.stringify(entries).contains("Noor"), "early journal exposes no future identity")
+	var journal_state := acquired.duplicate(true)
+	journal_state["scene_id"] = route.current_scene_id()
+	var journal := CampaignKnowledge.journal(journal_state)
+	var observed: Array = journal.tabs.evidence.columns.observed
+	_check(observed.any(func(item): return item.get("id") == "J-CH01-S03-TARGET-INSPECT-PACKET" and item.get("scene_id") == "EX-CH01-S03"), "packet clue enters the journal's Observed column")
+	_check(not JSON.stringify(journal).contains("Noor"), "early journal exposes no future identity")
 	route.perform("inspect_packet")
 	_check(director.snapshot().knowledge == acquired.knowledge, "duplicate evidence does not duplicate journal observations")
 	route.focus("compare_atmosphere")
@@ -96,21 +98,22 @@ func _runtime_journal(snapshot: Dictionary) -> void:
 	runtime.initial_snapshot = snapshot
 	root.add_child(runtime)
 	await process_frame
-	_check(runtime.query().journal_entries.any(func(entry): return entry.get("observations", []).any(func(item): return item.id == "inspect_packet")), "production query refreshes Journal from saved acquisitions")
+	var production_journal: Dictionary = runtime.query().journal_entries
+	_check(production_journal.tabs.evidence.entries.any(func(entry): return entry.get("id") == "J-CH01-S03-TARGET-INSPECT-PACKET"), "production query refreshes Journal from saved acquisitions")
 	for large in [false, true]:
 		var next := runtime.director.snapshot()
 		next.accessibility.large_text = large
 		runtime.director.restore_snapshot(next)
 		runtime.hud.apply_accessibility()
 		runtime.hud.panels.bind_query(runtime.query())
-		runtime.hud.panels.open_panel("journal_discovery")
+		runtime.hud.panels.open_journal("evidence")
 		for i in 8:
 			await process_frame
 		var labels := _text(runtime.hud.panels)
-		_check(labels.contains("Inspect sealed packet and record") and not labels.contains("Noor"), "journal shows acquired English observations at text size " + str(large))
+		_check(labels.contains("Seed packet") and not labels.contains("Noor"), "journal shows acquired English observations at text size " + str(large))
 		var packet: Label
 		for label in runtime.hud.panels._body.find_children("*", "Label", true, false):
-			if label.text == "Inspect sealed packet and record":
+			if label.text == "Seed packet":
 				packet = label
 		var scroll := runtime.hud.panels._body.get_parent() as ScrollContainer
 		scroll.ensure_control_visible(packet)
