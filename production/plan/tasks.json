@@ -433,7 +433,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Assemble the Chapter 1 rooms from the kit",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-05",
@@ -463,7 +463,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 1 missing assets: Alo's early stages, Earth desk, UI kit",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [],
    "paths": [
@@ -525,7 +525,7 @@
    "prompt": "Look at production/concept/lookdev_exterior_v1/ and pick A or B (or ask for changes). The AI records it in handbook §3."
   },
   {
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [],
    "paths": [
@@ -633,7 +633,7 @@
    "priority": "P0",
    "tool": "antigravity",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M0-02"
@@ -903,7 +903,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Chapter 1 endings, decision replay and the science debrief",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-09",
@@ -918,7 +918,7 @@
     "execution/ENDING_GOLDEN_BLOOM.md",
     "execution/UI_13_OUTCOME.md"
    ],
-   "note": "",
+   "note": "5 Nov: the earlier attempt is saved on branch night/M1-19-saved (3f67b01); it no longer merges cleanly, so port what is still right (git diff origin/main...origin/night/M1-19-saved).",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Goal: the four canonical endings from P-02 (Golden Bloom: Z≤3, no blackout, Alo alive, H≥5; Bloom: crew safe, H>0 — unlocks the story;\nAlo Lost: crew safe, H=0 — retry only; Mission Stopped: A≤0 or exposure breach) each end with an outcome screen and a debrief that shows\npredict -> what happened -> why, linking the NASA Data Cards (M0-15) behind the numbers.\nDo: per execution/ENDING_*.md and UI_13_OUTCOME.md; retry from the correct checkpoint; Continue only on Bloom/Golden Bloom.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. a test per ending predicate including the boundaries; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nRegistered promise (docs/TEAM.md): include a replay of the player's decisions shift by shift (what they chose, what the forecast said, what happened) before the debrief questions.",
@@ -1248,7 +1248,7 @@
    "prompt": "Goal: the challenge is about balancing life support, radiation shielding, power and food; the player should see those four at all times.\nDo: a compact HUD panel with four meters, Power (E), Life support (air A and water), Shielding (S and accumulated exposure Z), Food (crops C\nand rations R), labelled in plain words with icons; every puzzle preview shows the forecast change on each meter (arrows plus the number)\nbefore the player commits; red/amber thresholds come from data, not code; accessible (colour plus shape, screen-reader text, scales to 150%).\nValues come from the authoritative director state; no second source of truth.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-09",
@@ -1573,7 +1573,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 2 assets: EN_Airlock, PR_PaperBee",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-05"
@@ -1625,7 +1625,7 @@
    "priority": "P1",
    "tool": "antigravity",
    "title": "Chapter 2 puzzles P-03 and P-04 as real interactive panels",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-09",
@@ -1821,7 +1821,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 3 assets: EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-05"
@@ -1876,7 +1876,7 @@
    "priority": "P1",
    "tool": "antigravity",
    "title": "Chapter 3 puzzles P-05 and P-06 as real interactive panels",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-09",
@@ -2126,7 +2126,7 @@
    "priority": "P1",
    "tool": "antigravity",
    "title": "Chapter 4 puzzles P-07 and P-08 as real interactive panels",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-09",
@@ -2326,7 +2326,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 5 assets: PL_Cotton_Seedling, PR_ImpactMonitor, CH_Ferreira_Duty, CH_Cadet_DutyLayer",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-05"
@@ -2380,7 +2380,7 @@
    "priority": "P1",
    "tool": "antigravity",
    "title": "Chapter 5 puzzles P-09 and P-10 as real interactive panels",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-09",
@@ -2604,7 +2604,7 @@
    "priority": "P1",
    "tool": "antigravity",
    "title": "Chapter 6 puzzles P-11 and P-12 as real interactive panels",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-09",
@@ -2827,7 +2827,7 @@
    "priority": "P1",
    "tool": "antigravity",
    "title": "Chapter 7 puzzles P-13 and P-14 as real interactive panels",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-09",
@@ -3081,7 +3081,7 @@
    "priority": "P1",
    "tool": "antigravity",
    "title": "Chapter 8 puzzles P-15 and P-16 as real interactive panels",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [
     "M1-09",
@@ -3700,7 +3700,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges",
-   "status": "blocked",
+   "status": "todo",
    "deps": [
     "M1-47"
    ],
@@ -3721,7 +3721,8 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Problem: Alo's growth is told, not seen; Tara has no care of her own; the CH01-S02 -> S03 join has no cause; the four nameless mugs never get names.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.2 (Care Round loop), §7.1 beats 5-10, §2.9 (CH01 joins), §3.8 (dated stages); plant_service.gd apply_care() (receipts are keyed care@date); campaign_rules.json; execution/SYS_21_COMPANION_BEHAVIOUR.md.\nDo: (1) A Care Round interaction at the Alo glove ports and the Tara reference bay in EX-CH01-S04/S05: observe, measure (calibrated moisture and temperature side by side for both plants), photograph with a faint ghost of the previous photo (wide tolerance, Family Mode snaps), one small care task, record. A photo is apply_care(plant, \"photo\", date): one per plant per day. (2) In EX-CH01-S02 the inventory lamp on the dry-storage drawer blinks once in the background (reuse an existing UI tick until SFX_INVENTORY_LAMP_TICK exists); S03 opens on it. (3) At the end of EX-CH01-S12 the four mugs gain name decals (text labels on the existing mug prop are enough) and record_moment CH01-MUGS-NAMED. (4) Only if M1-51 is done: play EX-CH01-S01-L01..L04 in-engine at the mission table (L01-L02 on arrival, L03 at the route preview, L04 before commit), with captions, and point presentation_media.json at the re-edited CS-01; otherwise leave CS-01 unchanged and say so in the evidence.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). Tests: two photos on two dates appear for each plant; a second photo on the same date is refused; Tara and Alo both have entries before 25 Apr. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. Required shots: the Care Round with the ghost overlay for each plant, the S02 blink, the named mugs.",
-   "blocker": "Night shift parked the work on branch night/M1-49: "
+   "blocker": "Night shift parked the work on branch night/M1-49: ",
+   "owner": ""
   },
   {
    "id": "M1-51",
@@ -3865,7 +3866,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Cutscene staging from the narrative revision: CS-15 call, CS-17 final garden, CS-18 lamp blink",
-   "status": "blocked",
+   "status": "todo",
    "deps": [],
    "paths": [
     "production/cutscenes/v8/",
@@ -3919,7 +3920,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Narrative props, plant stages and effects: Alo and Tara growth variants, nameplates, named mugs, clue props, two new SFX",
-   "status": "blocked",
+   "status": "todo",
    "deps": [],
    "paths": [
     "production/concept/narrative_props/",
@@ -3937,7 +3938,7 @@
     "execution/ASSET_PL_Alo_Sprout.md",
     "execution/ASSET_PL_Tara_Bloom.md"
    ],
-   "note": "From doc 24 NR-12. Get Sadman's approval on the 2D sheets before spending Tripo credits. APPROVED by Sadman 5 Nov 2026: the 2D sheets on main (production/concept/narrative_props/) — build the 3D props and plant stages from them. Tara's senescent/dry dates wait on M3-94.",
+   "note": "From doc 24 NR-12. Get Sadman's approval on the 2D sheets before spending Tripo credits. APPROVED by Sadman 5 Nov 2026: the 2D sheets on main (production/concept/narrative_props/) — build the 3D props and plant stages from them. Tara's senescent/dry dates wait on M3-94. 5 Nov: the earlier attempt is saved on branch night/M3-99-saved (33ffca6); it no longer merges cleanly, so port what is still right (git diff origin/main...origin/night/M3-99-saved).",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Problem: Alo has no cotyledon, true-leaf, senescent or dry state; Tara has only a bloom model; the clue and memory props in doc 24 do not exist.\nRead first: game-design/24_NARRATIVE_REVISION.md §3.8 (stage table), §3.9, §4 (clues 2, 12, 14), §7.6, §2.11 (new SFX); production/ART_BIBLE.md §2, §6 (Brassica rapa botany, no faces); the existing ASSET_PL_* prompts.\nDo: (1) 2D sheets for approval: Alo cotyledon, true-leaf, senescent (yellowing, pods straw-coloured, leaning) and dry variants; Tara pods, senescent and dry (green stem); Alo and Tara nameplates; five mug name decals; the gear-wheel tool tag; the drawer-lid pencil note; the 'N.' label holder; the 'Working stock - Tara x Alo' envelope. (2) After approval, build them (blend-shape or texture variants of the existing plant models where possible; Tripo only where a new mesh is needed). (3) Generate SFX_INVENTORY_LAMP_TICK and SFX_DHAKA_ROOFTOP_MORNING with captions in sfx_list.csv.\nAcceptance: Sadman's approval quoted; every flower has four petals in a cross; no plant has eyes, a face or a mouth; English text only; registry and AI log rows added; a contact sheet in production/qa/evidence/M3-99_contact.png. Log every AI generation in production/AI_PROMPT_LOG.md.",
@@ -3950,7 +3951,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Rule out a threaded-loading deadlock at full-cast entry",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [],
    "paths": [
@@ -4021,7 +4022,7 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Clean, professional HUD: one plain-language goal, the UI design system, no developer text",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [],
    "paths": [
@@ -4128,7 +4129,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Carrying payloads, and the shift-5 STACK as a real carry-and-place task",
-   "status": "blocked",
+   "status": "todo",
    "owner": "",
    "deps": [],
    "paths": [

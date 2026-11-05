@@ -280,16 +280,18 @@ def land(slot, tid, title, status):
     return False, out
 
 
-def park(slot, tid, reason):
-    """Keep unfinished work on a branch for the morning and block the task on main."""
+def park(slot, tid, reason, block=True):
+    """Keep unfinished work on night/<tid> for a later round; block the task on main unless it only waits for a limit."""
     br = f"night/{tid}"
-    sh(["git", "checkout", "-q", "-B", br], slot)
-    sh(["git", "add", "-A"], slot)
-    sh(["git", *GIT_ID, "commit", "-q", "-m", f"wip: {tid} (night shift, not landed)", "-m", reason[:1500]], slot)
-    sh(["git", "push", "-q", "-f", "origin", br], slot)
+    if changes(slot).strip():  # a clean checkout must never overwrite earlier parked work
+        sh(["git", "checkout", "-q", "-B", br], slot)
+        sh(["git", "add", "-A"], slot)
+        sh(["git", *GIT_ID, "commit", "-q", "-m", f"wip: {tid} (night shift, not landed)", "-m", reason[:1500]], slot)
+        sh(["git", "push", "-q", "-f", "origin", br], slot)
     prepare(slot)
-    sh(["python3", "production/plan/board.py", "block", tid, "--reason", f"Night shift parked the work on branch {br}: {reason[:400]}"], slot)
-    land(slot, tid, "", "blocked")
+    if block:
+        sh(["python3", "production/plan/board.py", "block", tid, "--reason", f"Night shift parked the work on branch {br}: {reason[:400]}"], slot)
+        land(slot, tid, "", "blocked")
 
 
 # Shared logs and registries (append-only; .md files union-merge when landing) and folders so broad that every task
@@ -388,23 +390,25 @@ def do_task(slot, tid, lane):
     if fix:
         fix += "\n" + str(info.get("blocker", ""))[:1500]
         log(f"[{slot.name}] {tid} resumes the parked work on night/{tid}")
-    for round_ in range(3):  # first pass + two fix rounds
+    rounds = 0
+    while rounds < 3:  # first pass + two fix rounds; a usage limit or an idle worker does not use up a round
         cands = free(accounts)
         if not cands:
             return "deferred", "all accounts for this lane are at their usage limit"
         worker = cands[0]
-        log(f"[{slot.name}] {tid} round {round_ + 1} on {worker} (effort {effort})")
+        log(f"[{slot.name}] {tid} round {rounds + 1} on {worker} (effort {effort})")
         before = changes(slot)
         eff = "xhigh" if ACCOUNTS[worker]["engine"] == "codex" else effort  # Codex always extra-high (Sadman, 5 Nov)
         ok, out = run_agent(worker, worker_prompt(tid, slot, f"Sadman/night-{worker}", fix), slot, eff)
         if not ok and limit_wait(out[-3000:]):
-            continue  # same round again on the lane's next account
+            continue  # same round again on the lane's next account (this one is asleep now)
         status = task_info(slot, tid).get("status")
         if status not in ("done", "blocked") and changes(slot) == before:
             # ponytail: a silent quota/permission failure looks like this; 2 h rest, no smarter diagnosis
             asleep[worker] = time.time() + 7200
             log(f"[{slot.name}] {worker} changed nothing on {tid}; resting it 2 h")
             continue
+        rounds += 1
         if status == "blocked":
             t = task_info(slot, tid)
             return "blocked", t.get("blocker") or t.get("note") or "blocked by the worker"
@@ -452,6 +456,8 @@ def slot_loop(n):
                     park(slot, tid, note)
             elif outcome == "failed":
                 park(slot, tid, note)
+            elif outcome == "deferred":  # keep partial work for the next try; the task stays todo on main
+                park(slot, tid, note, block=False)
             with lock:  # the claim is only a run-time lock; the board status stops a retry
                 taken.discard(tid)
                 (CLAIMS / tid).rmdir()
