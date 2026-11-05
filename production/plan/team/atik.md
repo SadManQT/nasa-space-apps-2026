@@ -8,7 +8,7 @@ You own the game's runtime: missions and routes, the campaign, the player, carry
 
 Type **`continue(atik)`** to your AI. It pulls, claims your next ready tasks (`board.py take --by "<Name>/<AI>"`), does them one by one inside your folders, tests, reviews, commits under your GitHub account and pushes ([GO_NEXT.md](../GO_NEXT.md) §0). Say **`go next`** instead for exactly one task.
 
-**Your AI:** Any strong coding AI (Codex at extra-high effort is a good fit for runtime work). Ask it to read the task's read-first files and the existing tests in `game/tools/` before changing a system.
+**Your AI:** Codex (ChatGPT Codex, `gpt-6.1-sol` with high reasoning; any GPT works). Every task on your list is in the `codex` lane. Set `git config user.name` and `user.email` to your own GitHub account first, so your commits count for you.
 
 ## Your folders (only you edit these)
 

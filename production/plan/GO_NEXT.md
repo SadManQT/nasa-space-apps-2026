@@ -46,17 +46,15 @@ git pull --rebase          # stash or commit your own unfinished work first
 
 ## 2. Pick the task
 
-**Since 5 Nov 2026 every task is assigned to one member (`reserved_for`) and that decides who takes it; the lane below only says which kind of AI suits the task, and `continue(<name>)` (§0) needs no `--tool`.** Use your own lane name. **The `claude`, `antigravity`, `muse` and `gemini` lanes, and every cutscene and audio task (including the code that plays them), are Sadman's only** (Claude Code, Antigravity, Muse, ElevenLabs and Veo are on his machines); the board refuses to give them to anyone else (`reserved_lanes` in tasks.json). **Teammates take `--tool codex` (the code tasks, with whatever coding AI they have: Codex/ChatGPT, Gemini CLI, Cursor, Copilot…)**, and always pass `--by "<your name>/<your AI>"` so the board knows who you are.
+**From 5 Nov 2026, 23:55 (Sadman): one AI per member, and every task is assigned (`reserved_for`).** `continue(<name>)` (§0) needs no `--tool`: it hands out only that member's ready tasks.
 
-| Lane | Who | Strengths it gets | Recommended model / effort |
-|---|---|---|---|
-| `claude` | Claude Code (incl. Opus thinking) | design docs, data and science mapping, generation pipelines (Tripo, Meshy, ElevenLabs), orchestration, video scripts | Opus, default effort |
-| `codex` | Any teammate's coding AI (Codex/ChatGPT, Gemini CLI, Cursor, Copilot); Sadman's Codex is on ChatGPT Plus (low limits) | game code, bug fixes, refactors, tests, builds | `gpt-6.1-sol` medium; high only for tricky bugs. Long coding sessions go to Antigravity instead |
-| `antigravity` | Antigravity (Pro plan) | long coding sessions, UI panels, visual verification with screenshots, game-feel | Gemini 4 Argon medium for long UI sessions; high for the Mission Table (P-02) and Mission Trainer; Claude Opus 5.5 high for science/data/docs; Claude Sonnet 5.5 medium for bulk content |
-| `muse` | Muse AI | Blender: terrain, environment kits, clean-up, lighting, renders | Muse default |
-| `gemini` | Gemini (Argon) | `any` tasks, Veo cutscenes, image concepts and paint-overs, research | Gemini 4 Argon medium |
+| Member | AI | Lane on the board |
+|---|---|---|
+| **Sadman** | Claude Code (Claude Opus 5.5, extra-high effort) for almost everything; Codex (GPT) only for small jobs (effort 1) or help | `claude` (most), `codex` (small) |
+| **Ramim, Atik, member4, member5** | **Codex** (ChatGPT Codex, `gpt-6.1-sol`, high reasoning; any GPT works) | `codex` |
+| Anyone | the human steps (record, approve, upload, play-test by hand) | `human` |
 
-Any AI may also take `any` tasks, or run `next` with no `--tool` to see every ready AI task.
+All video work (cutscenes, explainer and hint videos, the judging videos) and everything that needs Claude, Tripo, Meshy, ElevenLabs, Veo or Blender is Sadman's; the board refuses the `claude` lane to anyone else (`reserved_lanes` in tasks.json). The Antigravity, Muse and Gemini lanes are retired. The game ships as a working release on **12 Nov** (M3-93); until then every task goes into finishing Chapters 1–8.
 
 ```bash
 python3 production/plan/board.py next --tool codex

@@ -34,7 +34,7 @@ STOP = LOGDIR / ("STOP_NIGHT" if SLOT_PREFIX == "slot" else f"STOP_NIGHT_{SLOT_P
 CLAIMS = NIGHT / "claims"  # one directory per task: an atomic lock shared by every running night shift
 DEADLINE = time.time() + float(os.environ.get("HOURS", "12")) * 3600
 WORKER_TIMEOUT = 4 * 3600
-GIT_ID = ["-c", "user.name=sadmanqt", "-c", "user.email=2405167@ugrad.cse.buet.ac.bd"]
+GIT_ID = ["-c", "user.name=sadmanqt", "-c", "user.email=sadmansakib.wd@gmail.com"]  # SadManQT's verified email; the BUET address belongs to Ramim's GitHub account (2405167-hub)
 
 # account -> how to run a prompt (prompt file path substituted for {p}); review runs read-only
 ACCOUNTS = {

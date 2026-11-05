@@ -14,7 +14,7 @@ From then on your tasks are assigned to `<yourname>` and you always run `continu
 
 Type **`continue(<your name>)`** to your AI. It pulls, claims your next ready tasks (`board.py take --by "<Name>/<AI>"`), does them one by one inside your folders, tests, reviews, commits under your GitHub account and pushes ([GO_NEXT.md](../GO_NEXT.md) §0). Say **`go next`** instead for exactly one task.
 
-**Your AI:** Any AI that can read the repository and help you write reports (Claude, ChatGPT/Codex, Gemini). You do not need to write game code.
+**Your AI:** Codex (ChatGPT Codex, `gpt-6.1-sol` with high reasoning; any GPT works). Every task on your list is in the `codex` lane. Set `git config user.name` and `user.email` to your own GitHub account first, so your commits count for you.
 
 ## Your folders (only you edit these)
 

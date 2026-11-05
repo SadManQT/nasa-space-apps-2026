@@ -8,7 +8,7 @@ You lead everything the player sees and touches in 2D: the HUD, menus, panels, p
 
 Type **`continue(ramim)`** to your AI. It pulls, claims your next ready tasks (`board.py take --by "<Name>/<AI>"`), does them one by one inside your folders, tests, reviews, commits under your GitHub account and pushes ([GO_NEXT.md](../GO_NEXT.md) §0). Say **`go next`** instead for exactly one task.
 
-**Your AI:** Any strong coding AI (Codex, Claude Code, Gemini CLI, Cursor). Ask it to read `game/scripts/ui/ui_design.gd` and `game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md` §1–§3 before any UI work.
+**Your AI:** Codex (ChatGPT Codex, `gpt-6.1-sol` with high reasoning; any GPT works). Every task on your list is in the `codex` lane. Set `git config user.name` and `user.email` to your own GitHub account first, so your commits count for you.
 
 ## Your folders (only you edit these)
 

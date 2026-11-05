@@ -8,7 +8,7 @@ You are the producer, the art and media lead and the integrator. Everything that
 
 Type **`continue(sadman)`** to your AI. It pulls, claims your next ready tasks (`board.py take --by "<Name>/<AI>"`), does them one by one inside your folders, tests, reviews, commits under your GitHub account and pushes ([GO_NEXT.md](../GO_NEXT.md) §0). Say **`go next`** instead for exactly one task.
 
-**Your AI:** Claude Code with Claude Fable 5.1 (3D environments, rooms, terrain — the environment lead) and Opus 5.5 at extra-high effort (writing, science, reviews; it continues Fable's work when Fable hits its limit), Antigravity, Muse (Blender), Gemini 4 Argon, Codex. Premium: Tripo and Meshy (3D), ElevenLabs (voice, music, effects), Veo/Flow and Seedance (video), Claude Motion — the Tweenkit plugin (science explainers). Your night shift (`production/tools/night_supervisor.sh`) works only your tasks.
+**Your AI:** Claude Code with Claude Opus 5.5 at extra-high effort for almost everything (3D environments, rooms, terrain, writing, science, video, reviews); Codex (GPT) for small jobs and a second opinion. Premium: Tripo and Meshy (3D), ElevenLabs (voice, music, effects), Veo/Flow and Seedance (video), Claude Motion (the Tweenkit plugin) for science explainers and hint videos. All video work is yours. Your night shift (`production/tools/night_supervisor.sh`) works only your tasks, on Opus 5.5 extra-high. Commit as `sadmanqt <sadmansakib.wd@gmail.com>` (the BUET address is on Ramim's GitHub account).
 
 ## Your folders (only you edit these)
 
