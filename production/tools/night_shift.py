@@ -41,20 +41,21 @@ ACCOUNTS = {
     "codex-main":  {"engine": "codex",  "cmd": ["sh", "-c", 'codex exec -s workspace-write -m gpt-6.1-sol -c model_reasoning_effort="$EFFORT" < "$0"', "{p}"]},
     "claude2":     {"engine": "claude", "cmd": [GOCODE_RUN, "claude2", "{p}", "claude-opus-5-5"]},
     "fable":       {"engine": "claude", "cmd": [GOCODE_RUN, "claude2", "{p}", "claude-fable-5-1"]},
-    "claude-main": {"engine": "claude", "cmd": ["sh", "-c", 'claude -p "$(cat "$0")" --permission-mode auto --model claude-opus-5-5 --effort "$EFFORT"', "{p}"]},
+    # second Claude subscription (lamppost); Opus only: Fable there needs paid usage credits
+    "claude3":     {"engine": "claude", "cmd": [GOCODE_RUN, "claude3", "{p}", "claude-opus-5-5"]},
     "buet":        {"engine": "gemini", "cmd": [GOCODE_RUN, "buet", "{p}", "gemini-4-argon-high"]},
 }
-LANES = {  # board lane -> accounts in order of preference (Sadman, 5 Nov: Claude takes most work)
-    "codex": ["codex", "codex-main", "claude2"],
-    "claude": ["claude2", "fable", "claude-main"],
-    "antigravity": ["buet", "claude2"],
-    "gemini": ["buet", "claude2"],
-    "muse": ["fable", "claude2"],
-    "any": ["claude2", "fable", "codex", "buet"],
+LANES = {  # board lane -> accounts in order of preference (Sadman, 5 Nov: Claude takes most work, Fable first)
+    "codex": ["codex", "codex-main", "fable", "claude3"],
+    "claude": ["fable", "claude2", "claude3"],
+    "antigravity": ["buet", "fable", "claude3"],
+    "gemini": ["buet", "fable", "claude3"],
+    "muse": ["fable", "claude2", "claude3"],
+    "any": ["fable", "claude3", "claude2", "codex", "buet"],
 }
-REVIEWER = {"codex": ["claude2", "buet", "claude-main"], "claude": ["codex", "codex-main", "buet", "claude-main"], "gemini": ["codex", "claude2"]}
-# Fable 5.1 leads the photoreal environment and 3D scene work (5 Nov decision)
-FABLE_HINTS = re.compile(r"habitat kit|environment|main scene|terrain|exterior|interior|photoreal|LOLA|\b3D\b|Blender|M1-03|M1-05", re.I)
+REVIEWER = {"codex": ["claude3", "claude2", "buet"], "claude": ["codex", "codex-main", "buet", "claude3"], "gemini": ["codex", "claude3", "claude2"]}
+# Fable 5.1 leads the photoreal environment, 3D assets and room builds (5 Nov decision)
+FABLE_HINTS = re.compile(r"habitat kit|environment|main scene|terrain|exterior|interior|photoreal|LOLA|\b3D\b|Blender|\bassets\b|rooms and locations|M1-03|M1-05|M1-06", re.I)
 
 asleep: dict[str, float] = {}       # account -> epoch when usable again
 taken: set[str] = set()             # task ids picked this run
@@ -148,7 +149,8 @@ project's repository; work only here). Do board task {tid} — exactly this one 
 1. Claim it: python3 production/plan/board.py claim {tid} --by "{by}"  (do not commit or push: the night-shift script commits after review).
 2. Read AGENTS.md, production/plan/GO_NEXT.md, `python3 production/plan/board.py show {tid}`, every read-first file, and the
    PRODUCTION_HANDBOOK.md sections you need (§3 locked decisions are binding, e.g. 5 Nov: photoreal environment, cel-shaded cast).
-   Canon: story text word for word, numbers from game-design/08_PUZZLE_DESIGNS.md, English only (no Bangla script), no NASA logos,
+   Canon: story text word for word, numbers from game-design/08_PUZZLE_DESIGNS.md, every scene connected to the next as listed
+   in game-design/24_NARRATIVE_REVISION.md §2.9 (build the joins your task touches), English only (no Bangla script), no NASA logos,
    plants have no faces, Moon science rules in production/ART_BIBLE.md §2, scientifically accurate missions.
 3. If the task needs something you cannot do unattended (Sadman's approval of canon or of 2D concept sheets, buying anything,
    spending credits the task says need approval, a human action), do not fake it: python3 production/plan/board.py block {tid}
@@ -178,7 +180,8 @@ def review_prompt(tid, slot):
     return f"""You are an independent senior reviewer. In {slot}, review the uncommitted work for board task {tid}
 (`git status`, `git diff`, new files; the task: `python3 production/plan/board.py show {tid}`; rules: AGENTS.md and
 PRODUCTION_HANDBOOK.md §3). Do not modify any file. Check: every acceptance point is really met (not claimed), correctness,
-canon (story text, 08 numbers, English only, no NASA logos, plants without faces), Moon/biology science accuracy,
+canon (story text, 08 numbers, English only, no NASA logos, plants without faces), the scene joins in
+game-design/24_NARRATIVE_REVISION.md §2.9 that the task touches (no scene left disconnected), Moon/biology science accuracy,
 code quality and tests that would catch regressions, evidence files exist, AI_PROMPT_LOG row and board entry are honest.
 Reply with exactly one line "VERDICT: PASS" or "VERDICT: FIX", then for FIX a numbered list of concrete defects with file:line."""
 

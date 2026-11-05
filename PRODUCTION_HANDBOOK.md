@@ -34,6 +34,7 @@ Last updated: 5 November 2026.
 | Topic | Authority (latest pulled, final) | Notes |
 |---|---|---|
 | **Story, scenes, dialogue, chronology** | [full-game-story/STORY_FULL.md](full-game-story/STORY_FULL.md) and its data [full-game-story/story-data.json](full-game-story/story-data.json) | 10–14 h edition (commit `30e9728`). Supersedes the older 4-hour scope and the SC-xxxx scene list. Scene IDs are `EX-CHxx-Sxx`. |
+| **How scenes connect (no gaps), clues, decisions, journal** | [game-design/24_NARRATIVE_REVISION.md](game-design/24_NARRATIVE_REVISION.md) | Binding on top of the story (Sadman, 5 Nov). §2.9 lists all 100 scene-to-scene joins; every join must play in the game, and each row marked **Fix** must be built by its chapter's tasks. Canon changes in it apply only as approved (§3, M3-94 approved in full on 5 Nov). |
 | **Scene index for production** | [production/manifest/scene_index.csv](production/manifest/scene_index.csv) | Generated from story-data.json: all 96 scenes with mission, legacy SC ID, location and story time. |
 | **Game rules and numbers** | [game-design/08_PUZZLE_DESIGNS.md](game-design/08_PUZZLE_DESIGNS.md) (P-01 to P-16), [docs/GAMEPLAY_DESIGN_FINAL.md](docs/GAMEPLAY_DESIGN_FINAL.md), [game-design/10_GAMEPLAY_SYSTEMS.md](game-design/10_GAMEPLAY_SYSTEMS.md) | Numeric contracts (energy 14/20, air 6/10, PUMP/STACK/WAIT, etc.) are unchanged by the story expansion. |
 | **Places** | [game-design/09_WORLD_AND_LEVEL_DESIGN.md](game-design/09_WORLD_AND_LEVEL_DESIGN.md) | LOC-01 to LOC-12 sizes and connections. |

@@ -6,7 +6,7 @@
 cd "$(dirname "$0")/../.." || exit 1
 END=$(( $(date +%s) + ${HOURS:-10} * 3600 ))
 while [ "$(date +%s)" -lt "$END" ] && [ ! -f production/session-logs/STOP_ALL ]; do
-  for spec in "nslot|" "gslot|LANES_ONLY=antigravity,gemini,any,claude PREFER=buet" "mslot|" "cslot|PREFER=claude2"; do
+  for spec in "nslot|" "gslot|LANES_ONLY=antigravity,gemini,any,claude PREFER=buet" "mslot|" "cslot|PREFER=fable" "lslot|PREFER=claude3"; do
     pfx=${spec%%|*}; extra=${spec#*|}
     pidf=.night/$pfx.pid
     if [ -f "$pidf" ] && kill -0 "$(cat "$pidf")" 2>/dev/null; then continue; fi

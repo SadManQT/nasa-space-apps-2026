@@ -24,7 +24,7 @@ Last Light Academy is a 3D story game for ages 10–15, for classrooms and famil
 
 ## Play it
 
-**Download.** Windows (x86_64) and macOS (universal) builds of version `0.1.0-preview.20261104` are built and pass a start-up test on fresh GitHub machines ([run 41712680810](https://github.com/SadManQT/nasa-space-apps-2026/actions/runs/41712680810)). They are not published yet: the team approves the release first. When they are, they will be on the [Releases page](https://github.com/SadManQT/nasa-space-apps-2026/releases).
+**Download.** Windows (x86_64) and macOS (universal) builds of version `0.1.0-preview.20261105` are on the [Releases page](https://github.com/SadManQT/nasa-space-apps-2026/releases/tag/v0.1.0-preview.20261105), with run steps and SHA-256 hashes. Both start on fresh GitHub machines and enter Chapter 1 ([run 41970276437](https://github.com/SadManQT/nasa-space-apps-2026/actions/runs/41970276437)).
 
 - **Windows:** unzip, keep `LastLightAcademy.exe` and `LastLightAcademy.pck` together, run the EXE.
 - **macOS:** unzip, move the app to Applications and open it. The build is not signed. If macOS blocks it, use **Privacy & Security → Open Anyway**.
