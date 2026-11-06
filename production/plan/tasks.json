@@ -4308,7 +4308,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): content is arriving before the system: game/resources/campaign/content/messages/ch01.json (33 messages) now, ch05-ch08 next. Run check_messages.py on them when it exists and file any fix as a task for Sadman.",
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Goal: every scene connects to the next with text messages (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5; joins in game-design/24_NARRATIVE_REVISION.md §2.9).\nDo: a Messages system: threads (crew, commander, earth, academy, archive), unread counts, a toast on arrival (never during\ndialogue), key M and the pause menu entry, messages flagged goal feed the goal card. Load every\ngame/resources/campaign/content/messages/ch*.json (schema in §5) and unlock on scene_enter / scene_exit / mission_done /\njob_done / found; record read state in the save. Write production/tools/check_messages.py (stdlib): parses game-design/24_NARRATIVE_REVISION.md §2.9 and fails\nunless every join present in the loaded chapter files has ≥ 2 messages, IDs are unique, unlock scene IDs exist in\nfull-game-story/story-data.json, bodies are ≤ 60 words, text is English (no U+0980–U+09FF), and \"Noor\"/\"Rahman\" never unlock\nbefore EX-CH05-S10. Add a two-message sample ch00 fixture for tests only. game/tools/test_comms.gd covers load, unlock, toast,\ngoal handoff and save.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
@@ -4322,11 +4322,9 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Chapter 1 messages: every scene joined to the next (at least 30 messages)",
-   "status": "todo",
-   "owner": "",
-   "deps": [
-    "M1-56"
-   ],
+   "status": "done",
+   "owner": "Sadman/claude",
+   "deps": [],
    "paths": [
     "game/resources/campaign/content/messages/ch01.json"
    ],
@@ -4336,9 +4334,9 @@
     "full-game-story/STORY_FULL.md",
     "game-design/04_CHARACTER_BIBLE.md"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
-   "updated": "2026-11-05",
+   "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): the message format is fixed in doc 25 §5, so the content is written now; showing it in game (and check_messages.py) is M1-56's acceptance, which loads these files.",
+   "evidence": "game/resources/campaign/content/messages/ch01.json: 33 messages in doc 25 §5 format (crew, earth, academy, archive threads), at least 2 on every Chapter 1 join incl. CH01→CH02, each ≤ 60 words, English, N. only, unlocks on real scene and mission ids, dated in story time. Canon-checked against the catalog prose: Earth-desk messages only before the shift-4 training cutoff and after it ends; the 2017 storm labelled a historical replay; the shutter line quoted from doc 24 §2.9. Validated by script (all §5/§8.4 rules: OK). In-game display and check_messages.py ride on M1-56.",
+   "updated": "2026-11-06",
    "prompt": "Do: write game/resources/campaign/content/messages/ch01.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 1 join in game-design/24_NARRATIVE_REVISION.md §2.9 (12 joins\nincluding CH01→CH02) at least 2 messages (what just happened and why it matters; what comes next and where), plus briefing,\nreport and character messages: at least 30 in all. Each in the sender's voice from the character bible, dated in story time,\n≤ 60 words, English only, consistent with STORY_FULL.md word for word where it quotes canon, no future names (N. only).\nMessages must make the plan legible to a new player: why air, battery, the shelter water and the plants matter tonight.\nRun production/tools/check_messages.py (must pass) and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "sadman",
    "effort": 2
@@ -4718,9 +4716,7 @@
    "title": "Chapter 5 messages: every scene joined to the next",
    "status": "todo",
    "owner": "",
-   "deps": [
-    "M1-56"
-   ],
+   "deps": [],
    "paths": [
     "game/resources/campaign/content/messages/ch05.json"
    ],
@@ -4730,7 +4726,7 @@
     "full-game-story/STORY_FULL.md",
     "game-design/04_CHARACTER_BIBLE.md"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): the message format is fixed in doc 25 §5, so the content is written now; showing it in game (and check_messages.py) is M1-56's acceptance, which loads these files.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Do: write game/resources/campaign/content/messages/ch05.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 5 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
@@ -4745,9 +4741,7 @@
    "title": "Chapter 6 messages: every scene joined to the next",
    "status": "todo",
    "owner": "",
-   "deps": [
-    "M1-56"
-   ],
+   "deps": [],
    "paths": [
     "game/resources/campaign/content/messages/ch06.json"
    ],
@@ -4757,7 +4751,7 @@
     "full-game-story/STORY_FULL.md",
     "game-design/04_CHARACTER_BIBLE.md"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): the message format is fixed in doc 25 §5, so the content is written now; showing it in game (and check_messages.py) is M1-56's acceptance, which loads these files.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Do: write game/resources/campaign/content/messages/ch06.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 6 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
@@ -4772,9 +4766,7 @@
    "title": "Chapter 7 messages: every scene joined to the next",
    "status": "todo",
    "owner": "",
-   "deps": [
-    "M1-56"
-   ],
+   "deps": [],
    "paths": [
     "game/resources/campaign/content/messages/ch07.json"
    ],
@@ -4784,7 +4776,7 @@
     "full-game-story/STORY_FULL.md",
     "game-design/04_CHARACTER_BIBLE.md"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): the message format is fixed in doc 25 §5, so the content is written now; showing it in game (and check_messages.py) is M1-56's acceptance, which loads these files.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Do: write game/resources/campaign/content/messages/ch07.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 7 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
@@ -4799,9 +4791,7 @@
    "title": "Chapter 8 messages: every scene joined to the next",
    "status": "todo",
    "owner": "",
-   "deps": [
-    "M1-56"
-   ],
+   "deps": [],
    "paths": [
     "game/resources/campaign/content/messages/ch08.json"
    ],
@@ -4811,7 +4801,7 @@
     "full-game-story/STORY_FULL.md",
     "game-design/04_CHARACTER_BIBLE.md"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026).",
+   "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): the message format is fixed in doc 25 §5, so the content is written now; showing it in game (and check_messages.py) is M1-56's acceptance, which loads these files.",
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Do: write game/resources/campaign/content/messages/ch08.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 8 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",

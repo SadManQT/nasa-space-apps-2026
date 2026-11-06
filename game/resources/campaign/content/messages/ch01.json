@@ -1,0 +1,467 @@
+{
+ "chapter": 1,
+ "messages": [
+  {
+   "id": "MSG-CH01-001",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-04-11T06:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH01-S01"
+   },
+   "join": "",
+   "subject": "Welcome to Aurora",
+   "body": "First task: decide where spare sunlight goes. A full battery cannot take more power, so anything extra is lost unless you use it. Storing air and lighting the planting bay are both safe choices. Try each preview before you lock one in.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-002",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-04-11T06:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S01"
+   },
+   "join": "CH01 S01→S02",
+   "subject": "Seats first",
+   "body": "Good choice on the sunlight. Before anything else, I want every seat on the emergency card checked. Meet me at the Safe Room board. I have four name tokens and I am not trading any of them.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-003",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-04-11T06:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S01"
+   },
+   "join": "CH01 S01→S02",
+   "subject": "Re: Seats first",
+   "body": "Four tokens, four of us. I asked if mine could be gold. Rafi said no. Rafi says no very kindly.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-004",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-04-11T08:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S02"
+   },
+   "join": "CH01 S02→S03",
+   "subject": "Rules that work without Earth",
+   "body": "Remember the sort: local sensors, stored guidance, things that need Earth. If the Earth screen goes dark, the retreat sequence, suit radios and station network still work here. The printed card stays by the door.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-005",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-04-11T09:55Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S02"
+   },
+   "join": "CH01 S02→S03",
+   "subject": "That blinking lamp",
+   "body": "Did anyone else hear a soft tick during roll call? The inventory lamp on the dry-storage drawer blinked once. Probably a sensor check, but I want to look after the bench calibration. Come with me?",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-006",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-04-11T10:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S03"
+   },
+   "join": "CH01 S03→S04",
+   "subject": "Two seeds, two labels",
+   "body": "Inventory updated: one sealed dry packet, two seeds, marked ALO and N. I wrote two blank identity labels. They stay blank until each plant has a record of its own. Kai, Light One and Light Two are not official.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-007",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-04-11T10:50Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S03"
+   },
+   "join": "CH01 S03→S04",
+   "subject": "Where they will grow",
+   "body": "Plan: one seed in the exterior test chamber, one in the indoor reference bay. Two places, the same care, so we can compare them honestly. Glove ports first. I will guide the transfer step by step.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-008",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-04-11T10:55Z",
+   "unlock": {
+    "on": "found",
+    "id": "EX-CH01-S03"
+   },
+   "join": "",
+   "subject": "Field note: the Chang'e-4 cotton",
+   "body": "In 2019 a cotton seed sprouted inside a sealed can on China's Chang'e-4 lander. It was a seedling, not a flowering plant. Your goal is further: a flower, and one day, seeds.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-009",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-04-11T12:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S04"
+   },
+   "join": "CH01 S04→S05",
+   "subject": "Alo and Tara are planted",
+   "body": "Alo is in the chamber, Tara in the reference bay. Same light schedule, same water, same records. The packet's unanswered initial can wait; the next care visit cannot. I have put visits on the board.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-010",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-04-11T12:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S04"
+   },
+   "join": "CH01 S04→S05",
+   "subject": "Work light",
+   "body": "I held the light steady the whole time. I only helped once, which Amara says is the correct number of times. The corridor switch is next to my bunk. That is not a complaint.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-011",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-04-11T13:00Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0101"
+   },
+   "join": "",
+   "subject": "Earth desk: commissioning received",
+   "body": "Aurora, Earth desk. Your commissioning record and both planting logs arrived clean. Nice work separating local rules from things that need us. Message us any time before the night drill. Keep the daily care records dated.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-012",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-04-11T21:15Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH01-S05"
+   },
+   "join": "",
+   "subject": "Hand light",
+   "body": "There is a hand light by the locker now, handle out. It belongs to everyone. Mark its home on the equipment board so it is always where we expect it.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-013",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-04-24T20:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S05"
+   },
+   "join": "CH01 S05→S06",
+   "subject": "A bud is a useful result",
+   "body": "Thirteen days of visits, and Alo has a bud. Tara is a little behind, which is useful too: two plants, two records. Your latest bud photo is on the date card. Tomorrow we plan the night.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-014",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-04-24T21:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S05"
+   },
+   "join": "CH01 S05→S06",
+   "subject": "Schedule at 03:36",
+   "body": "Mission table at 03:36. We will lay out the next stretch shift by shift: what makes power, what stores it, what the plants need. Bring questions, not guesses.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-015",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-04-25T04:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S06"
+   },
+   "join": "CH01 S06→S07",
+   "subject": "The night has a shape",
+   "body": "Two daylight shifts, then five dark ones: about thirty-six hours without solar power. This is a training scenario based on polar science, not a forecast of our exact sky. Sun, Earth link and station systems are separate tracks.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-016",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-04-25T04:35Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S06"
+   },
+   "join": "CH01 S06→S07",
+   "subject": "Why the night matters",
+   "body": "In the dark, nothing refills the battery. Air, heat, light and the garden all draw from what you stored in daylight. Plan the night before it starts.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-017",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-04-25T04:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S06"
+   },
+   "join": "CH01 S06→S07",
+   "subject": "Shifts",
+   "body": "I counted the dark shifts on my fingers twice. Still five. Watching the overflow arrow first, like Amara said.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-018",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-04-25T14:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S07"
+   },
+   "join": "CH01 S07→S08",
+   "subject": "Shift 2 staged",
+   "body": "Daylight shift 2 is staged and paused. Spare power went where it will still help after sunset. Before we commit it, Rafi wants a shelter drill while we still have light.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-019",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-04-25T14:25Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S07"
+   },
+   "join": "CH01 S07→S08",
+   "subject": "Drill in the Safe Room",
+   "body": "Practice only: no air, no power, no water spent. I will show how garden water can line the shelter wall and then go back. Count yourselves in at the door.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-020",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-04-25T17:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S08"
+   },
+   "join": "CH01 S08→S09",
+   "subject": "Borrowing includes returning",
+   "body": "Drill done. Water we move into the wall is borrowed from the garden: it shields people, but Alo still needs it. If a storm warning comes, it goes in. When the danger has passed, it goes home.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-021",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-04-25T17:35Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S08"
+   },
+   "join": "CH01 S08→S09",
+   "subject": "About the storm warning",
+   "body": "The warning in this scenario replays a real 2017 proton storm measured near Earth. It is a historical replay, labelled as such, not a new flare.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-022",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-04-25T17:50Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S08"
+   },
+   "join": "CH01 S08→S09",
+   "subject": "18:00",
+   "body": "The masts reach sunset at 18:00. Last check before dark: battery, air store, shelter plan. After that, every choice spends what we have.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-023",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-04-25T19:10Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH01-S09"
+   },
+   "join": "",
+   "subject": "Alo in the cold",
+   "body": "First dark shift. For Alo, cold and thirst are the real threats tonight. If we borrow garden water for the shelter wall, I need it back before the chamber dries out.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-024",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-04-26T01:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S09"
+   },
+   "join": "CH01 S09→S10",
+   "subject": "Earth-link cutoff drill",
+   "body": "From shift 4 the Earth link is cut on purpose. It is a training event: the crew decides with local rules and stored guidance, exactly as practised.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-025",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-04-26T02:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S09"
+   },
+   "join": "CH01 S09→S10",
+   "subject": "It is quiet",
+   "body": "Fans still humming. Hand light still in its place. I switched off the decorative lamp, my idea. The Earth-link button is grey now: that is the drill, not a fault.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-026",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-04-26T15:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S10"
+   },
+   "join": "CH01 S10→S11",
+   "subject": "Everyone answered",
+   "body": "Four names called, four answers. The alarm is easing, but the shelter wall is still full of borrowed water. It stays until the exposure step is truly finished.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-027",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-04-26T15:50Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S10"
+   },
+   "join": "CH01 S10→S11",
+   "subject": "Send the water home",
+   "body": "As soon as the exposure step closes, the water goes back to the garden line. Draining early would undo the shelter; keeping it too long would leave Alo thirsty.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-028",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-04-27T05:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S11"
+   },
+   "join": "CH01 S11→S12",
+   "subject": "Before the shutter",
+   "body": "Light is coming back. Confirm opening the chamber's viewing shutter will be safe: temperature, pressure, seal. Then we look.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-029",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-04-27T05:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S11"
+   },
+   "join": "CH01 S11→S12",
+   "subject": "Final shifts committed",
+   "body": "All seven shifts committed. Whatever we see behind the shutter, the record of how we got here is complete and honest.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-030",
+   "thread": "archive",
+   "sender": "Archive",
+   "story_time": "2046-04-27T06:20Z",
+   "unlock": {
+    "on": "found",
+    "id": "EX-CH01-S12"
+   },
+   "join": "",
+   "subject": "Stored care message, signed N.",
+   "body": "A stored care message played when the bloom was tagged. It is a recording, not a call: no one is speaking through the Earth link. It is signed only N.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-031",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-04-27T06:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S12"
+   },
+   "join": "CH01→CH02",
+   "subject": "Alo needs a friend",
+   "body": "Alo has flowered, and it cannot pollinate itself. It needs pollen from another plant. Tara's bud is the friend. One photo a day, same frame, until Tara opens.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH01-032",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-04-28T12:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH01-S12"
+   },
+   "join": "CH01→CH02",
+   "subject": "Daily photo",
+   "body": "Tara photo, day two. Still a bud. I am told plants do not respond to encouragement. I am encouraging anyway.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH01-033",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-04-30T09:00Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0104"
+   },
+   "join": "CH01→CH02",
+   "subject": "Earth desk: link restored",
+   "body": "Aurora, Earth desk. The training cutoff is over and the link is open. We have your night record: shelter held, water returned, nobody hurt, and a flower. Congratulations. Send Tara's photos when she opens.",
+   "goal": false
+  }
+ ]
+}
