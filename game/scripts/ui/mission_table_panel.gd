@@ -17,27 +17,16 @@ signal opened(target_id: String)
 signal closed(target_id: String)
 
 const TableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
-const INK := Color("#05060A")
-const NAVY := Color("#1F2A44")
-const NAVY_DEEP := Color("#0B1426")
-const IVORY := Color("#ECEEF0")
-const MUTED := Color("#A8B4C8")
-const MUSTARD := Color("#F2C230")
-const CYAN := Color("#20B8C9")
-const GREEN := Color("#4CAF50")
-const RED := Color("#E56B6F")
+var INK := UiDesign.colour("ink")
+var NAVY := UiDesign.colour("navy")
+var NAVY_DEEP := UiDesign.colour("glass")
+var IVORY := UiDesign.colour("ivory")
+var MUTED := UiDesign.colour("muted")
+var MUSTARD := UiDesign.colour("accent")
+var CYAN := UiDesign.colour("amara")
+var GREEN := UiDesign.colour("good")
+var RED := UiDesign.colour("danger")
 const MIN_TARGET := 44.0
-const RESOURCE_ROWS := [
-	["E", "Battery", "energy_capacity"],
-	["A", "Air", "air_capacity"],
-	["H", "Alo", "health_capacity"],
-	["C", "Crop", "crop_capacity"],
-	["W", "Water wall", "water_capacity"],
-	["K", "Crates", "crate_capacity"],
-	["Z", "Exposure", ""],
-	["R", "Rations", ""],
-]
-
 var _route: RefCounted
 var _target_id := ""
 var _settings := {"large_text": false, "timer_free": true}
@@ -51,12 +40,20 @@ var _focus_name := ""
 var _overlay: ColorRect
 var _frame: PanelContainer
 var _content: VBoxContainer
+var _body: VBoxContainer
+var _more := false
+var _card_more := {}
+var _portraits := {}
+var _portrait_loading := {}
+const Simulation = preload("res://scripts/simulation/expedition_simulation.gd")
+const Debrief = preload("res://scripts/debrief/chapter1_debrief.gd")
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	# Above the HUD's outpost readout (z 70): the table carries its own summary.
 	z_index = 100
+	theme = UiKit.theme()
 	_overlay = ColorRect.new()
 	_overlay.color = Color(0.0, 0.01, 0.03, 0.82)
 	_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -87,6 +84,10 @@ func open(route: RefCounted, target_id: String, settings: Dictionary = {}) -> vo
 	_notice = ""
 	_previewed_key = ""
 	_focus_name = ""
+	_more = false
+	_refresh_view()
+	if _target_id == "p02_shift1" and not _table().selection(1).has("transfer"):
+		_table().set_choice(1, "transfer", "HOLD", _committed())
 	show()
 	_layout()
 	_render()
@@ -116,8 +117,31 @@ func view() -> Dictionary:
 ## Sets one plan field for one shift.
 func choose(shift: int, field: String, value) -> Dictionary:
 	var result: Dictionary = _table().set_choice(shift, field, value, _committed())
-	_after_action(result, "Choice_%d_%s_%s" % [shift, field, str(value)])
+	if result.get("accepted", false):
+		for option in TableScript.field_options(field):
+			if TableScript._normalise(field, option.value) == _table().selection(shift).get(field):
+				result.reason = "Shift %d: %s set to %s: %s." % [shift, _field_word(field), _option_word(field, option.value, option.label), _option_cost(option.cost)]
+				break
+	_after_action(result, "Choice_1_light_OFF" if shift == 1 and field == "air_production" and not _table().selection(1).has("light") else "Choice_%d_%s_%s" % [shift, field, str(value)])
 	return result
+
+func _option_cost(cost: String) -> String:
+	if cost.begins_with("E"):
+		var energy := cost.get_slice(" ", 0)
+		return cost.replace(energy, "Battery cost " + energy.trim_prefix("E") + " per shift")
+	return cost
+
+func _field_word(field: String) -> String:
+	return _sentence_case(TableScript.field_label(field))
+
+func _sentence_case(value: String) -> String:
+	var label := value.to_lower()
+	return label.left(1).to_upper() + label.substr(1)
+
+func _option_word(field: String, value, label: String) -> String:
+	if field == "action":
+		return {"PUMP": "Pump water", "STACK": "Stack supplies", "WAIT": "Wait"}.get(String(value), label)
+	return ["Off", "Low", "High"][int(value)] if field == "air_production" else label.capitalize()
 
 ## Shares one delivered role card with the crew.
 func share_card(role_id: String) -> Dictionary:
@@ -140,7 +164,7 @@ func preview() -> Dictionary:
 		_render()
 		return {"accepted": false, "reason": _notice}
 	_previewed_key = _plan_key()
-	_notice = "Preview ready. Read the forecast, then commit with Space."
+	_notice = "Forecast ready. Nothing changed. Lock in shift when you are ready."
 	_focus_name = "Commit"
 	_render()
 	return {"accepted": true, "reason": _notice, "forecast": forecast}
@@ -279,135 +303,171 @@ func _render() -> void:
 		_content.remove_child(child)
 		child.queue_free()
 	_render_header()
+	_body = VBoxContainer.new()
+	_body.add_theme_constant_override("separation", 14)
+	var scroll := _scroll(_body, "TableBodyScroll")
+	_content.add_child(scroll)
 	if _confirming:
 		_render_confirmation()
 	else:
-		# Each column scrolls on its own, so focusing a card never scrolls the
-		# plan or the forecast out of view.
-		var columns := HBoxContainer.new()
+		var columns := GridContainer.new()
+		columns.columns = 2 if get_viewport_rect().size.x >= 1100 and _scale() == 1.0 else 1
 		columns.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		columns.add_theme_constant_override("separation", 14)
-		_content.add_child(columns)
-		columns.add_child(_scroll(_render_cards(), "CardsScroll"))
-		columns.add_child(_scroll(_render_plan(), "PlanScroll"))
-		columns.add_child(_scroll(_render_forecast(), "ForecastScroll"))
+		columns.add_theme_constant_override("h_separation", 24)
+		columns.add_theme_constant_override("v_separation", 18)
+		_body.add_child(columns)
+		columns.add_child(_render_plan())
+		columns.add_child(_render_forecast())
+		_body.add_child(_render_cards())
+		if _more:
+			var more := _column("More about this plan", 0)
+			more.name = "MoreDetails"
+			_body.add_child(more)
+			var pin := _button("Save as Plan A", "PinPlanA")
+			pin.pressed.connect(pin_plan_a)
+			more.add_child(pin)
+			_render_projection(more)
+			_render_hints(more)
 		_render_footer()
+	_layout()
 	_restore_focus()
 
 func _render_header() -> void:
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 14)
-	_content.add_child(row)
-	var title := _label("MISSION TABLE", 22, MUSTARD)
-	row.add_child(title)
-	var gate: Dictionary = _view.get("gate", {})
-	var gate_label := _label("P-02 SEVEN SHIFTS · " + String(gate.get("label", "")).to_upper(), 15, IVORY)
-	gate_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	gate_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	row.add_child(gate_label)
-	var committed := _committed()
-	var meta := _wrap("%s · %d OF 7 SHIFTS COMMITTED · 7.2 h EACH · TIME PAUSED WHILE THE TABLE IS OPEN" % [String(_view.get("scenario_datetime", "")), committed], 12, MUTED)
-	meta.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	meta.size_flags_horizontal = Control.SIZE_FILL
-	meta.custom_minimum_size.x = 300
-	row.add_child(meta)
+	var title := _wrap("Mission Table · Seven Shifts", 22, MUSTARD)
+	_content.add_child(title)
+	var strip := GridContainer.new()
+	strip.name = "NightStrip"
+	strip.columns = 7 if get_viewport_rect().size.x >= 1000 else 4
+	strip.add_theme_constant_override("h_separation", 6)
+	_content.add_child(strip)
+	for shift in range(1, 8):
+		var cell := VBoxContainer.new()
+		cell.name = "NightShift%d" % shift
+		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var head := HBoxContainer.new()
+		head.add_child(UiKit.icon("sun" if shift <= 2 else "moon", "accent", 18))
+		head.add_child(_label("%d · %s" % [shift, "Sun" if shift <= 2 else "Dark"], 12, MUTED if shift <= _committed() else IVORY))
+		cell.add_child(head)
+		var event: String = {2: "Drill", 4: "Earth link ends", 7: "Sunrise after"}.get(shift, "")
+		if shift in [5, 6] and _arrived("rafi"):
+			event = "Storm outlook"
+		cell.add_child(_wrap(event, 11, MUTED))
+		strip.add_child(cell)
 
 func _render_cards() -> Control:
-	var column := _column("CREW CARDS · SHARE WHAT EACH ROLE KNOWS", 300)
+	var column := _column("Crew notes · share what you know", 0)
 	for card in _view.get("cards", []):
-		var box := _card_box(bool(card.get("shared", false)), bool(card.get("arrived", false)))
+		if not bool(card.get("arrived", false)):
+			continue
+		var id := String(card.role_id)
+		var box := _card_box(false, true)
+		box.name = "Crew_" + id
+		column.add_child(box)
 		var inner := VBoxContainer.new()
-		inner.add_theme_constant_override("separation", 4)
 		box.add_child(inner)
 		var head := HBoxContainer.new()
-		head.add_theme_constant_override("separation", 8)
 		inner.add_child(head)
-		var chip := _label(" %s " % String(card.get("role", "")), 11, INK)
-		chip.add_theme_stylebox_override("normal", _box(MUSTARD if bool(card.arrived) else MUTED, Color(0, 0, 0, 0), 4, 0))
-		head.add_child(chip)
-		head.add_child(_label(String(card.get("name", "")), 16, IVORY))
-		if not bool(card.get("arrived", false)):
-			inner.add_child(_wrap("Arrives at shift %d. Not yet available." % int(card.get("arrives_shift", 1)), 13, MUTED))
-		else:
-			if not String(card.get("quote", "")).is_empty():
-				inner.add_child(_wrap("“%s”" % String(card.quote), 13, CYAN))
-			for fact in card.get("facts", []):
-				inner.add_child(_wrap("• " + String(fact), 13, IVORY))
-			if bool(card.get("shared", false)):
-				inner.add_child(_wrap("✓ SHARED · READ BY THE CREW", 12, GREEN))
-			else:
-				var share := _button("SHARE %s'S CARD" % String(card.get("name", "")).to_upper(), "Share_" + String(card.get("role_id", "")))
-				var role_id := String(card.get("role_id", ""))
-				share.pressed.connect(func() -> void: share_card(role_id))
-				inner.add_child(share)
-		column.add_child(box)
+		var portrait := TextureRect.new()
+		portrait.name = "Portrait_" + id
+		portrait.custom_minimum_size = Vector2(72, 84)
+		portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		portrait.texture = _portraits.get(id)
+		head.add_child(portrait)
+		if not _portraits.has(id) and not _portrait_loading.has(id) and DisplayServer.get_name() != "headless":
+			_portrait_loading[id] = true
+			_prepare_portrait.call_deferred(id)
+		var words := VBoxContainer.new()
+		words.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		head.add_child(words)
+		words.add_child(_wrap("%s · %s" % [card.name, _sentence_case(String(card.role))], 16, IVORY))
+		var facts: Array = card.get("facts", [])
+		if not facts.is_empty():
+			words.add_child(_wrap(String(facts[0]), 14, IVORY))
+		var actions := HFlowContainer.new()
+		inner.add_child(actions)
+		var share := _button("Shared" if card.shared else "Share " + String(card.name) + "’s note", "Share_" + id)
+		share.disabled = bool(card.shared)
+		share.pressed.connect(func() -> void: share_card(id))
+		actions.add_child(share)
+		var more := _button("Less" if _card_more.get(id, false) else "More", "More_" + id)
+		more.pressed.connect(func() -> void:
+			_card_more[id] = not bool(_card_more.get(id, false))
+			_focus_name = "More_" + id
+			_render())
+		actions.add_child(more)
+		if _card_more.get(id, false):
+			inner.add_child(_wrap(String(card.get("quote", "")), 14, CYAN))
+			for fact in facts.slice(1):
+				inner.add_child(_wrap(String(fact), 14, IVORY))
 	return column
 
 func _render_plan() -> Control:
-	var column := _column("YOUR PLAN", 0)
+	var column := _column("Choose this shift’s settings", 0)
 	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var committed := _committed()
-	var prerequisite := String(_view.get("prerequisite_reason", ""))
-	if not prerequisite.is_empty():
-		column.add_child(_wrap("BLOCKED · " + prerequisite, 14, MUSTARD))
+	var guide := _guide_step()
+	if guide > 0:
+		var instruction := _wrap(["1 of 3 · Set the air maker", "2 of 3 · Set the garden light", "3 of 3 · Try it, then lock in shift"][guide - 1], 18, MUSTARD)
+		instruction.name = "GuideStep%d" % guide
+		column.add_child(instruction)
+		column.add_child(_wrap(["The crew uses 1 air each shift; making air spends battery.", "The light uses battery and changes Alo and the garden each shift.", "Try it shows the real consequences. Water stays in place unless your saved plan says otherwise."][guide - 1], 14, IVORY))
 	for raw_shift in _view.get("shifts", []):
 		var shift := int(raw_shift)
-		var day := TableScript.is_day_shift(shift)
-		var heading := "SHIFT %d · %s" % [shift, "DAYLIGHT · battery +8 · heat automatic" if day else ("PARTICLE ALARM · one exclusive response" if TableScript.is_alarm_shift(shift) else "DARK · no solar income")]
-		if shift <= committed:
-			heading += " · COMMITTED"
-		column.add_child(_wrap(heading, 15, CYAN))
+		column.add_child(_wrap("Shift %d · %s" % [shift, "Sunlight adds 8 battery units before spending" if TableScript.is_day_shift(shift) else "Dark · no solar charging"], 15, CYAN))
 		var current: Dictionary = _view.get("selections", {}).get(shift, {})
-		var stacked := TableScript.is_alarm_shift(shift) and String(current.get("action", "")) == "STACK"
+		var stacked := shift == 5 and String(current.get("action", "")) == "STACK"
 		for field in TableScript.fields_for_shift(shift):
-			var forced: bool = stacked and field != "action"
-			column.add_child(_field_row(shift, String(field), current, shift <= committed or forced))
-			if forced and field == "heat":
-				column.add_child(_wrap("STACK sets heat COOL, air maker OFF and light OFF for this shift.", 12, MUTED))
-		if TableScript.is_alarm_shift(shift):
+			if field == "transfer" and not _arrived("rafi"):
+				continue
+			if guide == 1 and field != "air_production":
+				continue
+			column.add_child(_field_row(shift, String(field), current, shift <= _committed() or (stacked and field != "action")))
+		if stacked:
+			column.add_child(_wrap("Stacking sets heat to Cool, air maker Off and light Off.", 14, MUTED))
+		if shift == 5:
 			_render_task(column, current)
-	_render_hints(column)
 	return column
 
 func _field_row(shift: int, field: String, current: Dictionary, locked: bool) -> Control:
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 6)
-	var name_label := _label(TableScript.field_label(field), 12, MUTED)
-	name_label.custom_minimum_size.x = 96 * (1.25 if _scale() > 1.0 else 1.0)
-	name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	row.add_child(name_label)
-	var chosen = current.get(field, null)
+	var active := (_guide_step() == 1 and field == "air_production") or (_guide_step() == 2 and field == "light")
+	var box := _card_box(false, true)
+	if active:
+		box.add_theme_stylebox_override("panel", _box(NAVY, MUSTARD, 9, 2))
+	box.name = "Row_%d_%s" % [shift, field]
+	var column := VBoxContainer.new()
+	box.add_child(column)
+	var heading := HBoxContainer.new()
+	heading.add_child(UiKit.icon(String({"air_production": "life", "light": "plant", "heat": "power", "transfer": "water", "action": "shielding"}.get(field, "goal"))))
+	heading.add_child(_label(("Next · " if active else "") + _field_word(field), 14, MUSTARD if active else IVORY))
+	column.add_child(heading)
+	var row := HFlowContainer.new()
+	row.add_theme_constant_override("h_separation", 6)
+	row.add_theme_constant_override("v_separation", 6)
+	column.add_child(row)
 	for option in TableScript.field_options(field):
 		var value = TableScript._normalise(field, option.get("value"))
-		var selected: bool = chosen != null and typeof(chosen) == typeof(value) and chosen == value
-		var text := "%s%s\n%s" % ["● " if selected else "", String(option.get("label", "")), String(option.get("cost", ""))]
-		var button := _button(text, "Choice_%d_%s_%s" % [shift, field, str(value)])
+		var selected: bool = current.has(field) and current[field] == value
+		var word := _option_word(field, value, option.label)
+		var button := _button(("✓ " if selected else "") + word, "Choice_%d_%s_%s" % [shift, field, str(value)])
 		button.toggle_mode = true
 		button.button_pressed = selected
 		button.disabled = locked
-		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		button.custom_minimum_size.y = 52 * _scale()
-		button.add_theme_font_size_override("font_size", _fs(12))
-		button.tooltip_text = "%s %s for shift %d: %s" % [TableScript.field_label(field), String(option.get("label", "")), shift, String(option.get("cost", ""))]
+		button.tooltip_text = display_text(_option_cost(option.cost))
 		if selected:
-			button.add_theme_stylebox_override("normal", _box(Color("#2C3D63"), MUSTARD, 7, 2))
-			button.add_theme_stylebox_override("pressed", _box(Color("#2C3D63"), MUSTARD, 7, 2))
-			button.add_theme_stylebox_override("disabled", _box(Color("#2C3D63"), MUSTARD, 7, 2))
+			button.add_theme_stylebox_override("normal", _box(NAVY, MUSTARD, 7, 2))
+			button.add_theme_stylebox_override("pressed", _box(NAVY, MUSTARD, 7, 2))
 		var picked = value
 		button.pressed.connect(func() -> void: choose(shift, field, picked))
 		row.add_child(button)
-	if chosen == null:
-		var missing := _label("CHOOSE", 11, MUSTARD)
-		row.add_child(missing)
-	return row
+		if selected and (active or _guide_step() == 0):
+			column.add_child(_wrap(_option_cost(option.cost), 13, MUTED))
+	return box
 
 func _render_task(column: VBoxContainer, current: Dictionary) -> void:
 	var action := String(current.get("action", ""))
 	if not action in ["PUMP", "STACK"]:
 		if action == "WAIT":
-			column.add_child(_wrap("WAIT has no task. The shelter you prepared is what protects the crew.", 13, MUTED))
+			column.add_child(_wrap("Waiting has no task. The shelter you prepared is what protects the crew.", 13, MUTED))
 		return
 	var alarm: Dictionary = _view.get("alarm", {})
 	var steps := int(alarm.get("steps", 0))
@@ -418,7 +478,7 @@ func _render_task(column: VBoxContainer, current: Dictionary) -> void:
 	var inner := VBoxContainer.new()
 	inner.add_theme_constant_override("separation", 5)
 	box.add_child(inner)
-	var title := "PUMP · confirm the three valves in order" if action == "PUMP" else "STACK · place the four supply bundles in the outlined bunk slots"
+	var title := "Pump water · confirm the three valves in order" if action == "PUMP" else "Stack supplies · place the four bundles in the outlined bunk slots"
 	inner.add_child(_wrap(title, 13, IVORY))
 	var outcome := ""
 	if action == "PUMP":
@@ -427,7 +487,7 @@ func _render_task(column: VBoxContainer, current: Dictionary) -> void:
 		outcome = "Crates 2 when all four bundles are placed; 1 if partial."
 	inner.add_child(_wrap(outcome, 12, MUTED))
 	if state == "idle":
-		var start := _button("START %s TASK%s" % [action, " · NO TIMER (ASSISTED)" if assisted else " · %d s" % int(alarm.get("timer_seconds", 0))], "TaskStep_0")
+		var start := _button("Start %s%s" % ["pumping water" if action == "PUMP" else "placing supplies", " · no timer (assisted)" if assisted else " · %d seconds" % int(alarm.get("timer_seconds", 0))], "TaskStep_0")
 		start.pressed.connect(func() -> void: start_task())
 		inner.add_child(start)
 	else:
@@ -440,82 +500,87 @@ func _render_task(column: VBoxContainer, current: Dictionary) -> void:
 		inner.add_child(grid)
 		for index in steps:
 			var is_done := done.has(index) or done.has(float(index))
-			var text := "%s %d. %s" % ["✓" if is_done else "○", index + 1, String(labels[index]) if index < labels.size() else "STEP"]
+			var text := "%s %d. %s" % ["✓" if is_done else "○", index + 1, _sentence_case(String(labels[index])) if index < labels.size() else "Step"]
 			var step := _button(text, "TaskStep_%d" % (index + 1))
 			step.disabled = is_done or state != "running"
 			step.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			var step_index := index
 			step.pressed.connect(func() -> void: task_step(step_index))
 			grid.add_child(step)
-		inner.add_child(_wrap("PROGRESS %d / %d%s" % [progress, steps, " · RESOLVED" if state == "resolved" else ""], 13, GREEN if state == "resolved" else MUSTARD))
+		inner.add_child(_wrap("Steps complete: %d of %d%s" % [progress, steps, " · finished" if state == "resolved" else ""], 13, GREEN if state == "resolved" else MUSTARD))
 		if state == "running":
 			if not bool(alarm.get("assisted", true)):
 				var timer := _label("%d s left · the task resolves with the steps done" % ceili(_task_time_left), 12, MUSTARD)
 				timer.name = "TaskTimer"
 				inner.add_child(timer)
-			var end := _button("END TASK WITH %d / %d" % [progress, steps], "EndTask")
+			var end := _button("Finish with %d of %d steps" % [progress, steps], "EndTask")
 			end.pressed.connect(func() -> void: end_task())
 			inner.add_child(end)
 	column.add_child(box)
 
 func _render_hints(column: VBoxContainer) -> void:
-	column.add_child(_wrap("HINTS · they never change your ending", 13, CYAN))
+	column.add_child(_wrap("Hints · they never change your ending", 13, CYAN))
 	for hint in _view.get("hints", []):
-		column.add_child(_wrap("%s · %s" % [String(hint.level), String(hint.text)], 13, IVORY))
+		column.add_child(_wrap("%s · %s" % [String(hint.level).replace("H", "Hint ").replace("G", "Golden hint "), String(hint.text)], 13, IVORY))
 	var row := HFlowContainer.new()
 	row.add_theme_constant_override("h_separation", 6)
 	row.add_theme_constant_override("v_separation", 6)
 	column.add_child(row)
-	var hint := _button("SHOW NEXT HINT", "Hint")
+	var hint := _button("Show next hint", "Hint")
 	hint.pressed.connect(func() -> void: reveal_hint())
 	row.add_child(hint)
 	for plan_id in _view.get("worked_plans", []):
-		var worked := _button("OPEN WORKED %s PLAN" % String(plan_id).to_upper(), "Worked_" + String(plan_id))
+		var worked := _button("Use worked %s plan" % String(plan_id).capitalize(), "Worked_" + String(plan_id))
 		var id := String(plan_id)
 		worked.pressed.connect(func() -> void: use_worked_plan(id))
 		row.add_child(worked)
 
 func _render_forecast() -> Control:
-	var column := _column("STATION NOW → FORECAST", 330)
-	var resources: Dictionary = _view.get("resources", {})
-	var gate_preview: Dictionary = _view.get("gate_preview", {})
-	var after: Dictionary = gate_preview.get("final_state", {}) if bool(gate_preview.get("accepted", false)) else {}
 	var shifts: Array = _view.get("shifts", [])
-	var last_shift := int(shifts.back()) if not shifts.is_empty() else 0
-	column.add_child(_wrap("NOW%s" % ("  →  AFTER SHIFT %d" % last_shift if not after.is_empty() else ""), 12, MUTED))
-	var grid := GridContainer.new()
-	grid.columns = 2
-	grid.add_theme_constant_override("h_separation", 10)
-	column.add_child(grid)
-	for row in RESOURCE_ROWS:
-		var key := String(row[0])
-		grid.add_child(_label(String(row[1]), 13, MUTED))
-		var cap := "/%d" % int(resources.get(String(row[2]), 0)) if not String(row[2]).is_empty() and resources.has(String(row[2])) else ""
-		var text := "%s%s" % [_amount(resources.get(key, 0)), cap]
-		var color := IVORY
-		if not after.is_empty():
-			var delta := float(after.get(key, 0)) - float(resources.get(key, 0))
-			text += "  →  %s%s  (%s)" % [_amount(after.get(key, 0)), cap, _signed(delta)]
-			color = IVORY if is_zero_approx(delta) else (GREEN if (delta > 0) != (key in ["Z"]) else MUSTARD)
-		grid.add_child(_label(text, 13, color))
+	var heading := "Now → after this plan" if shifts.is_empty() else "Now → after shift %d" % int(shifts.back())
+	if shifts.size() > 1:
+		heading = "Now → after shifts %d to %d" % [int(shifts.front()), int(shifts.back())]
+	var column := _column(heading, 0)
+	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var resources: Dictionary = _view.get("resources", {})
+	var forecast: Dictionary = _view.get("gate_preview", {})
+	var after: Dictionary = forecast.get("final_state", {}) if forecast.get("accepted", false) else {}
+	for row in [["E", "Battery", "energy_capacity", "battery units"], ["A", "Air", "air_capacity", "air units"], ["H", "Alo", "health_capacity", "health"], ["C", "Garden", "crop_capacity", "condition"]]:
+		_forecast_bar(column, row[1], float(resources.get(row[0], 0)), float(after.get(row[0], resources.get(row[0], 0))), float(resources.get(row[2], 10)), row[3], not after.is_empty())
+	var tara := _tara_status(_route.director().snapshot())
+	var tara_row := _column("Tara · current reference", 0)
+	tara_row.name = "Forecast_Tara"
+	tara_row.add_child(_wrap(tara + " → unchanged by this shift model", 14, IVORY))
+	var reference := ProgressBar.new()
+	reference.show_percentage = false
+	reference.max_value = 1
+	reference.value = 1 if tara.begins_with("Alive") else 0
+	reference.tooltip_text = "Current alive status only; this model has no numeric Tara health forecast."
+	reference.custom_minimum_size.y = 8
+	tara_row.add_child(reference)
+	column.add_child(tara_row)
+	var sim := Simulation.new()
+	var now: Dictionary = sim.outpost_readouts(_route.director().snapshot())
+	var later: Dictionary = sim.outpost_readouts(forecast.snapshot) if not after.is_empty() else now
+	_forecast_bar(column, "Shelter", now.shelter_capacity, later.shelter_capacity, now.shelter_max, "shielding units", not after.is_empty(), "Storm shelter")
+	_forecast_bar(column, "Radiation", float(resources.get("Z", 0)), float(after.get("Z", resources.get("Z", 0))), 3, "training units · safe limit 3", not after.is_empty(), "Radiation dose")
+	column.add_child(_wrap("Water in wall: %s of %s → %s · Supplies: %s of %s → %s" % [_amount(resources.get("W", 0)), _amount(resources.get("water_capacity", 0)), _amount(after.get("W", resources.get("W", 0))), _amount(resources.get("K", 0)), _amount(resources.get("crate_capacity", 0)), _amount(after.get("K", resources.get("K", 0)))], 13, MUTED))
+
 	if not after.is_empty():
-		for record in gate_preview.get("trace", []):
-			column.add_child(_wrap(_trace_text(record), 12, RED if bool(record.get("blackout", false)) else IVORY))
-		for warning in gate_preview.get("warnings", []):
-			if not String(warning).begins_with("PREVIEW ONLY"):
-				column.add_child(_wrap("! " + String(warning), 12, MUSTARD))
-		for predicate in gate_preview.get("unsafe_predicates", []):
-			column.add_child(_wrap("STOP · " + _predicate_text(String(predicate)), 13, RED))
-	elif not String(_view.get("block_reason", "")).is_empty():
-		column.add_child(_wrap("Forecast appears when every choice for this commit is set.", 12, MUTED))
-	column.add_child(HSeparator.new())
-	_render_projection(column)
+		var consequence := _wrap(_consequence(forecast), 15, RED if not forecast.get("unsafe_predicates", []).is_empty() else MUSTARD)
+		consequence.name = "ForecastConsequence"
+		column.add_child(consequence)
+		if _more:
+			for record in forecast.get("trace", []):
+				column.add_child(_wrap(_trace_text(record), 13, IVORY))
+	else:
+		column.add_child(_wrap("Choose the missing settings to see their forecast. Nothing changes until you lock in.", 14, MUTED))
 	return column
 
 func _render_projection(column: VBoxContainer) -> void:
 	var through := int(_view.get("planned_through", 0))
 	var projection: Dictionary = _view.get("night_projection", {})
-	column.add_child(_wrap("WHOLE NIGHT · PLANNED THROUGH SHIFT %d OF 7" % through, 13, CYAN))
+	column.add_child(_wrap("Whole night · planned through shift %d of 7" % through, 13, CYAN))
 	if projection.is_empty() or not bool(projection.get("accepted", false)):
 		column.add_child(_wrap("Plan later shifts to project the rest of the night.", 12, MUTED))
 	else:
@@ -526,7 +591,7 @@ func _render_projection(column: VBoxContainer) -> void:
 		var report: Dictionary = _view.get("ending_report", {})
 		if not report.is_empty():
 			var stars: Dictionary = report.get("stars", {})
-			column.add_child(_wrap("PROJECTED: " + String(report.get("title", report.get("ending", ""))), 14, GREEN if bool(report.get("unlocks_chapter2", false)) else RED))
+			column.add_child(_wrap("Projected: " + String(report.get("title", report.get("ending", ""))), 14, GREEN if bool(report.get("unlocks_chapter2", false)) else RED))
 			column.add_child(_wrap("%s Crew exposure ≤ 3   %s No blackout   %s Alo alive" % [_star(stars.get("safe_exposure", false)), _star(stars.get("no_blackout", false)), _star(stars.get("alo_alive", false))], 12, IVORY))
 			for predicate in report.get("unsafe_predicates", []):
 				column.add_child(_wrap("Cause: " + _predicate_text(String(predicate)), 12, RED))
@@ -536,66 +601,47 @@ func _render_projection(column: VBoxContainer) -> void:
 
 func _render_footer() -> void:
 	var reason := _commit_reason()
-	var status := _wrap(_notice if not _notice.is_empty() else (reason if not reason.is_empty() else "Ready. Press Space to commit, then Space again to confirm."), 14, MUSTARD if not reason.is_empty() else GREEN)
+	var status := _wrap(_notice if not _notice.is_empty() else (reason if not reason.is_empty() else "Ready. Lock in shift, then confirm. Nothing changes before confirmation."), 13, MUSTARD if not reason.is_empty() else GREEN)
 	status.name = "TableStatus"
 	_content.add_child(status)
 	var row := HFlowContainer.new()
-	row.alignment = FlowContainer.ALIGNMENT_END
+	row.name = "TableFooter"
 	row.add_theme_constant_override("h_separation", 8)
 	row.add_theme_constant_override("v_separation", 6)
 	_content.add_child(row)
-	var pin := _button("PIN AS PLAN A", "PinPlanA")
-	pin.pressed.connect(pin_plan_a)
-	row.add_child(pin)
-	var preview_button := _button("PREVIEW", "Preview")
-	preview_button.pressed.connect(func() -> void: preview())
-	row.add_child(preview_button)
-	var gate: Dictionary = _view.get("gate", {})
-	var commit := _button(String(gate.get("commit_label", "COMMIT")) + " · SPACE", "Commit")
+	var try_button := _button("Try it", "Preview")
+	try_button.pressed.connect(func() -> void: preview())
+	if _guide_step() == 3:
+		try_button.add_theme_stylebox_override("normal", _box(NAVY, MUSTARD, 7, 2))
+	row.add_child(try_button)
+	var commit := _button("Prepare shift (Space)" if _view.get("gate", {}).get("preview_only", false) else "Lock in shift (Space)", "Commit")
 	commit.disabled = not reason.is_empty()
-	commit.tooltip_text = reason if not reason.is_empty() else "Opens the confirmation. Space or Enter confirms."
+	commit.tooltip_text = display_text(reason) if not reason.is_empty() else "Opens the confirmation. Space or controller Y confirms."
 	commit.pressed.connect(func() -> void: request_commit())
 	row.add_child(commit)
-	var close_button := _button("CLOSE · ESC", "CloseTable")
+	var close_button := _button("Close (Esc)", "CloseTable")
 	close_button.pressed.connect(close)
 	row.add_child(close_button)
+	var more := _button("Less" if _more else "More", "TableMore")
+	more.pressed.connect(func() -> void:
+		_more = not _more
+		_focus_name = "TableMore"
+		_render())
+	row.add_child(more)
 
 func _render_confirmation() -> void:
-	var gate: Dictionary = _view.get("gate", {})
-	var forecast: Dictionary = _view.get("gate_preview", {})
-	var box := _card_box(false, true)
-	box.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_content.add_child(box)
-	var inner := VBoxContainer.new()
-	inner.add_theme_constant_override("separation", 8)
-	box.add_child(inner)
-	inner.add_child(_wrap("CONFIRM · " + String(gate.get("commit_label", "COMMIT")), 20, MUSTARD))
-	if bool(gate.get("preview_only", false)):
-		inner.add_child(_wrap("This stages the shift 2 forecast for the drill. Nothing is committed and no time passes.", 15, IVORY))
-	else:
-		inner.add_child(_wrap("These consequences are final for this attempt. RETRY restores the checkpoint before this commit.", 15, IVORY))
-	for record in forecast.get("trace", []):
-		inner.add_child(_wrap(_trace_text(record), 14, RED if bool(record.get("blackout", false)) else IVORY))
-	var resources: Dictionary = _view.get("resources", {})
-	var final_state: Dictionary = forecast.get("final_state", {})
-	inner.add_child(_wrap("Station after: " + _summary(final_state) + "   (now " + _summary(resources) + ")", 14, CYAN))
-	for predicate in forecast.get("unsafe_predicates", []):
-		inner.add_child(_wrap("FLIGHT RULES STOP THE MISSION · " + _predicate_text(String(predicate)), 15, RED))
-	var report := TableScript.ending_report(forecast)
-	if not report.is_empty():
-		inner.add_child(_wrap("SUNRISE RESULT · %s · %s" % [String(report.get("title", "")), String(report.get("summary", ""))], 15, GREEN if bool(report.get("unlocks_chapter2", false)) else RED))
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_END
-	row.add_theme_constant_override("separation", 8)
+	_body.add_child(_wrap("Lock in this plan?", 22, MUSTARD))
+	_body.add_child(_wrap("This prepares shift 2 for the drill. No time passes." if _view.get("gate", {}).get("preview_only", false) else "These choices will change the station. Retry can restore the checkpoint before this shift.", 16, IVORY))
+	_body.add_child(_render_forecast())
+	var row := HFlowContainer.new()
+	row.add_theme_constant_override("h_separation", 8)
 	_content.add_child(row)
-	var back := _button("BACK · ESC", "CancelCommit")
+	var back := _button("Back (Esc)", "CancelCommit")
 	back.pressed.connect(cancel_confirm)
 	row.add_child(back)
-	var confirm := _button("CONFIRM · SPACE", "ConfirmCommit")
+	var confirm := _button("Confirm (Space)", "ConfirmCommit")
 	confirm.pressed.connect(func() -> void: confirm_commit())
 	row.add_child(confirm)
-
-# --- Text helpers ------------------------------------------------------------
 
 func _trace_text(record: Dictionary) -> String:
 	var parts: Array = []
@@ -609,30 +655,22 @@ func _trace_text(record: Dictionary) -> String:
 	parts.append("Alo %s→%s" % [_amount(before.get("H", 0)), _amount(after.get("H", 0))])
 	parts.append("wall %s→%s" % [_amount(before.get("W", 0)), _amount(after.get("W", 0))])
 	if int(record.get("dose", 0)) > 0 or shift in [5, 6]:
-		parts.append("shelter %d, dose %d" % [int(record.get("shelter", 0)), int(record.get("dose", 0))])
+		parts.append("storm shelter %d shielding units, radiation dose %d training units" % [int(record.get("shelter", 0)), int(record.get("dose", 0))])
 	if String(record.get("action", "")) in ["PUMP", "STACK"]:
-		parts.append("%s %d step%s%s" % [String(record.action), int(record.get("action_progress", 0)), "" if int(record.get("action_progress", 0)) == 1 else "s", "" if bool(record.get("action_success", false)) else " (partial)"])
+		parts.append("%s: %d step%s%s" % [_option_word("action", record.action, record.action), int(record.get("action_progress", 0)), "" if int(record.get("action_progress", 0)) == 1 else "s", "" if bool(record.get("action_success", false)) else " (partly finished)"])
 	if bool(record.get("crates_removed", false)):
 		parts.append("crates removed")
 	if bool(record.get("blackout", false)):
-		parts.append("BLACKOUT: demand went below zero; air, Alo and crop −2")
+		parts.append("Blackout: demand exceeded available battery; air, Alo and garden health −2")
 	elif int(after.get("E", 1)) == 0:
 		parts.append("battery empty (exactly 0 is not a blackout)")
 	return " · ".join(parts)
 
 func _predicate_text(predicate: String) -> String:
-	if predicate.begins_with("air_depleted"):
-		return "air reached 0 in shift %s" % predicate.get_slice("_", predicate.get_slice_count("_") - 1)
-	if predicate.begins_with("exposure_limit"):
-		return "crew exposure went above 3 in shift %s" % predicate.get_slice("_", predicate.get_slice_count("_") - 1)
-	if predicate.begins_with("crew_shelter_breach"):
-		return "the crew was outside the shelter during the storm"
-	if predicate.begins_with("resupply_required"):
-		return "rations ran short; resupply is required"
-	return predicate.replace("_", " ")
+	return display_text(predicate)
 
 func _known_events_text() -> String:
-	var lines: Array = ["KNOWN AHEAD:"]
+	var lines: Array = ["Known ahead:"]
 	if _committed() < 4:
 		lines.append("Shift 4 · Earth-link cutoff (training event). Local radios keep working.")
 	var rafi_known := false
@@ -647,16 +685,11 @@ func _known_events_text() -> String:
 	return "\n".join(lines)
 
 func _summary(values: Dictionary) -> String:
-	return "E%s A%s H%s C%s W%s K%s Z%s R%s" % [_amount(values.get("E", 0)), _amount(values.get("A", 0)), _amount(values.get("H", 0)), _amount(values.get("C", 0)), _amount(values.get("W", 0)), _amount(values.get("K", 0)), _amount(values.get("Z", 0)), _amount(values.get("R", 0))]
+	return Debrief.readings(values)
 
 func _amount(value) -> String:
 	var number := float(value)
 	return str(int(number)) if is_equal_approx(number, round(number)) else "%.1f" % number
-
-func _signed(value: float) -> String:
-	if is_zero_approx(value):
-		return "±0"
-	return ("+" if value > 0 else "−") + _amount(absf(value))
 
 func _star(value) -> String:
 	return "★" if bool(value) else "☆"
@@ -716,8 +749,20 @@ func _focus_later(target: Control) -> void:
 func _apply_focus(target: Control) -> void:
 	if is_instance_valid(target) and target.is_inside_tree() and not target.is_queued_for_deletion() and visible:
 		target.grab_focus()
+		if _guide_step() > 0 and String(target.name).begins_with("Choice_1_"):
+			var scroll := find_child("TableBodyScroll", true, false) as ScrollContainer
+			# Follow-focus can scroll before the rebuilt rows have their final size.
+			await get_tree().process_frame
+			await get_tree().process_frame
+			if is_instance_valid(scroll) and scroll.is_inside_tree():
+				scroll.scroll_vertical = 0
 
 func _grab_first_focus() -> void:
+	if _guide_step() > 0:
+		var choice := find_child("Choice_1_air_production_0" if _guide_step() == 1 else "Choice_1_light_OFF", true, false) as Control
+		if choice != null:
+			_focus_later(choice)
+			return
 	for card in _view.get("cards", []):
 		if bool(card.get("arrived", false)) and not bool(card.get("shared", false)):
 			var share := find_child("Share_" + String(card.role_id), true, false) as Control
@@ -739,18 +784,17 @@ func _scale() -> float:
 	return 1.5 if bool(_settings.get("large_text", false)) else 1.0
 
 func _fs(size: int) -> int:
-	return int(round(size * _scale()))
+	return int(round(maxi(12, size) * _scale()))
 
 # --- Widget helpers ------------------------------------------------------------
 
 func _scroll(column: Control, node_name: String) -> ScrollContainer:
 	var scroll := ScrollContainer.new()
 	scroll.name = node_name
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.size_flags_horizontal = column.size_flags_horizontal
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.follow_focus = true
-	scroll.custom_minimum_size.x = column.custom_minimum_size.x + 12
+	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(column)
 	return scroll
@@ -766,7 +810,7 @@ func _column(title: String, width: float) -> VBoxContainer:
 func _card_box(highlight: bool, available: bool) -> PanelContainer:
 	var box := PanelContainer.new()
 	var border := GREEN if highlight else (Color(0.26, 0.40, 0.62, 0.8) if available else Color(0.3, 0.33, 0.4, 0.6))
-	var style := _box(NAVY if available else Color("#141B2B"), border, 9, 1)
+	var style := _box(NAVY if available else NAVY_DEEP, border, 9, 1)
 	style.content_margin_left = 10
 	style.content_margin_right = 10
 	style.content_margin_top = 8
@@ -776,7 +820,7 @@ func _card_box(highlight: bool, available: bool) -> PanelContainer:
 
 func _label(text: String, size: int, color: Color) -> Label:
 	var label := Label.new()
-	label.text = text
+	label.text = display_text(text)
 	label.add_theme_font_size_override("font_size", _fs(size))
 	label.add_theme_color_override("font_color", color)
 	return label
@@ -791,10 +835,10 @@ func _wrap(text: String, size: int, color: Color) -> Label:
 func _button(text: String, node_name: String) -> Button:
 	var button := Button.new()
 	button.name = node_name.validate_node_name()
-	button.text = text
-	button.custom_minimum_size = Vector2(0, MIN_TARGET)
+	button.text = display_text(text)
+	button.custom_minimum_size = Vector2(0, maxf(MIN_TARGET, 32 * _scale()))
 	button.focus_mode = Control.FOCUS_ALL
-	button.add_theme_font_size_override("font_size", _fs(13))
+	button.add_theme_font_size_override("font_size", _fs(14))
 	button.add_theme_color_override("font_color", IVORY)
 	button.add_theme_color_override("font_pressed_color", IVORY)
 	button.add_theme_color_override("font_hover_color", INK)
@@ -804,7 +848,7 @@ func _button(text: String, node_name: String) -> Button:
 	button.add_theme_stylebox_override("pressed", _box(NAVY, Color(0.32, 0.45, 0.66, 0.9), 7, 1))
 	button.add_theme_stylebox_override("hover", _box(MUSTARD, INK, 7, 2))
 	button.add_theme_stylebox_override("focus", _box(Color(0, 0, 0, 0), IVORY, 7, 3))
-	button.add_theme_stylebox_override("disabled", _box(Color("#151C2C"), Color(0.25, 0.28, 0.36, 0.8), 7, 1))
+	button.add_theme_stylebox_override("disabled", _box(NAVY_DEEP, MUTED, 7, 1))
 	return button
 
 func _box(fill: Color, border: Color, radius: int, width: int) -> StyleBoxFlat:
@@ -818,3 +862,134 @@ func _box(fill: Color, border: Color, radius: int, width: int) -> StyleBoxFlat:
 	style.content_margin_top = 4
 	style.content_margin_bottom = 4
 	return style
+
+func _arrived(id: String) -> bool:
+	for card in _view.get("cards", []):
+		if card.role_id == id:
+			return bool(card.arrived)
+	return false
+
+func _guide_step() -> int:
+	if _target_id != "p02_shift1" or _committed() > 0:
+		return 0
+	var choice: Dictionary = _table().selection(1)
+	return 1 if not choice.has("air_production") else (2 if not choice.has("light") else 3)
+
+func _forecast_bar(column: VBoxContainer, id: String, before: float, after: float, maximum: float, unit: String, predicted: bool, word: String = "") -> void:
+	var row := VBoxContainer.new()
+	row.name = "Forecast_" + id
+	column.add_child(row)
+	row.add_child(_wrap("%s · %s of %s → %s · %s" % [id if word.is_empty() else word, _amount(before), _amount(maximum), _amount(after) if predicted else "choose settings", unit], 14, IVORY))
+	var bars := HBoxContainer.new()
+	row.add_child(bars)
+	for value in [before, after]:
+		var bar := ProgressBar.new()
+		bar.max_value = maximum
+		bar.value = value
+		bar.show_percentage = false
+		bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		bar.custom_minimum_size.y = 8
+		bar.add_theme_stylebox_override("fill", _box(MUTED if bars.get_child_count() == 0 else CYAN, Color.TRANSPARENT, 3, 0))
+		bars.add_child(bar)
+
+func _tara_status(state: Dictionary) -> String:
+	for plant in state.get("plants", []):
+		if String(plant.get("individual_id", "")) == "TARA-01":
+			var stress: Dictionary = plant.get("stress", {})
+			var concerns: Array[String] = []
+			for key in stress:
+				if float(stress[key]) > 0:
+					concerns.append(String(key).replace("_", " "))
+			return "%s · %s · %s" % ["Alive" if plant.get("alive", false) else "Not alive", String(plant.get("stage", "unknown")).replace("_", " "), "No stress recorded" if concerns.is_empty() else "Stress: " + ", ".join(concerns)]
+	return "Not yet recorded"
+
+func _consequence(forecast: Dictionary) -> String:
+	var unsafe: Array = forecast.get("unsafe_predicates", [])
+	if not unsafe.is_empty():
+		return _predicate_text(String(unsafe[0])).capitalize() + ". Retry is available after locking in."
+	for record in forecast.get("trace", []):
+		if record.get("blackout", false):
+			return "Demand exceeds the battery: a blackout reduces air, Alo and garden health."
+		if int(record.get("dose", 0)) > 0:
+			return "Storm shelter %d gives +%d training radiation units this shift, before any ordinary water return." % [int(record.shelter), int(record.dose)]
+	var before: Dictionary = _view.get("resources", {})
+	var after: Dictionary = forecast.get("final_state", {})
+	var biggest := -1.0
+	var message := "The displayed readings stay unchanged."
+	for spec in [["E", "Battery", "energy_capacity"], ["A", "Air", "air_capacity"], ["H", "Alo health", "health_capacity"], ["C", "Garden health", "crop_capacity"]]:
+		var change := float(after.get(spec[0], 0)) - float(before.get(spec[0], 0))
+		var fraction := absf(change) / maxf(1, float(before.get(spec[2], 10)))
+		if fraction > biggest:
+			biggest = fraction
+			message = "%s %s to %s of %s after this plan." % [spec[1], "rises" if change > 0 else ("drops" if change < 0 else "stays"), _amount(after.get(spec[0], 0)), _amount(before.get(spec[2], 10))]
+	return message
+
+## One display mapper for the table and the HUD's failed-plan result.
+static func display_text(value: String) -> String:
+	var result := value
+	var task_words := {
+		"Run the STACK task and finish or end it before committing.": "Place the supplies, then finish the task before locking in.",
+		"Run the PUMP task and finish or end it before committing.": "Confirm the valves, then finish the task before locking in.",
+		"bundle task": "Place supplies", "valve task": "Confirm valves",
+		"forces COOL, air OFF, light OFF": "sets heat to Cool, air maker Off and garden light Off",
+		"STACK task": "Supply placement", "PUMP task": "Water pumping",
+		"already resolved": "already finished", "Task resolved": "Task finished",
+	}
+	for phrase in task_words:
+		result = result.replace(phrase, task_words[phrase])
+	for spec in [["crates ([0-9]+) \\(partial ([0-9]+)\\)", "$1 supply bundles ($2 if partly finished)"], ["wall ([+][0-9]+) \\(partial ([+][0-9]+)\\)", "shelter water $1 ($2 if partly finished)"]]:
+		var task_cost := RegEx.new()
+		task_cost.compile(spec[0])
+		result = task_cost.sub(result, spec[1], true)
+	var unsafe := RegEx.new()
+	unsafe.compile("(air_depleted|exposure_limit_exceeded|crew_shelter_breach|resupply_required)_shift_([0-9]+)")
+	for hit in unsafe.search_all(result):
+		var cause: String = {"air_depleted": "Air reached zero", "exposure_limit_exceeded": "Radiation dose exceeded the safe limit of 3 training units", "crew_shelter_breach": "The crew was outside the storm shelter", "resupply_required": "Food ran short; resupply is required"}[hit.get_string(1)]
+		result = result.replace(hit.get_string(), cause + " in shift " + hit.get_string(2))
+	result = result.replace("MISSION_STOPPED", "Attempt stopped safely").replace("MISSION STOPPED", "Attempt stopped safely")
+	var units := RegEx.new()
+	units.compile("\\b([EAWHKCSZR])([0-9]+)\\b")
+	for hit in units.search_all(result):
+		result = result.replace(hit.get_string(), String({"E": "Battery ", "A": "Air ", "H": "Alo health ", "C": "Garden health ", "W": "Shelter water ", "K": "Shelter supplies ", "S": "Storm shelter ", "Z": "Radiation dose ", "R": "Food "}[hit.get_string(1)]) + hit.get_string(2))
+	result = result.replace("Shelter S =", "Storm shelter =").replace("S 0", "Storm shelter 0")
+	return UiDesign.player_words(result)
+
+## Prepare approved cast art only after the table opens; title preparation stays unchanged.
+func _prepare_portrait(id: String) -> void:
+	var person := "CH_" + id.capitalize()
+	var path := "res://assets/characters/%s/%s.glb" % [person, person]
+	if not await AssetGeometry.prepare(path, get_tree()) or not is_inside_tree():
+		return
+	var view := SubViewport.new()
+	view.size = Vector2i(144, 168)
+	view.own_world_3d = true
+	view.transparent_bg = true
+	view.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	add_child(view)
+	var actor := AssetGeometry.load_glb(path)
+	view.add_child(actor)
+	var bounds := AssetGeometry.bounds(actor)
+	var camera := Camera3D.new()
+	view.add_child(camera)
+	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
+	camera.size = bounds.size.y * 0.48
+	var face := Vector3(bounds.get_center().x, bounds.position.y + bounds.size.y * 0.82, bounds.get_center().z)
+	camera.position = face + Vector3(0, 0, bounds.size.y)
+	camera.look_at(face)
+	var light := DirectionalLight3D.new()
+	light.rotation_degrees = Vector3(-25, -25, 0)
+	light.light_energy = 1.5
+	view.add_child(light)
+	var environment := WorldEnvironment.new()
+	environment.environment = Environment.new()
+	environment.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	environment.environment.ambient_light_color = Color.WHITE
+	environment.environment.ambient_light_energy = 0.7
+	view.add_child(environment)
+	await RenderingServer.frame_post_draw
+	await RenderingServer.frame_post_draw
+	_portraits[id] = ImageTexture.create_from_image(view.get_texture().get_image())
+	view.queue_free()
+	var portrait := find_child("Portrait_" + id, true, false) as TextureRect
+	if portrait != null:
+		portrait.texture = _portraits[id]

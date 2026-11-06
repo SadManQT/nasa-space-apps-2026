@@ -691,6 +691,16 @@ func _on_mission_table_commit(target_id: String, plan: Dictionary) -> void:
 	var result := runtime.perform_target(target_id, {"plan": plan})
 	if not bool(result.get("accepted", false)):
 		return
+	var actual: Dictionary = result.get("result", result)
+	var causes: Array = actual.get("unsafe_predicates", [])
+	if not causes.is_empty():
+		var notes: Array = []
+		for cause in causes:
+			notes.append(MissionTablePanel.display_text(String(cause)))
+		var line := "Attempt stopped safely. " + String(notes[0]) + ". Retry the last shift to change the plan."
+		_last_outcome = {"result": line, "changes": actual.get("deltas", []), "notes": notes}
+		panels.bind_query(runtime.query().merged({"outcome": _last_outcome}, true))
+		show_status(line)
 	show_chapter1_outcome()
 
 ## Reads only the existing route ending, complete receipts and checkpoint. The

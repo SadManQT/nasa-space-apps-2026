@@ -1236,7 +1236,7 @@ func _render_chapter1_outcome(value) -> void:
 	if data.is_empty():
 		_card_text("Finish the night to review its results.")
 		return
-	_title.text = String(data.get("title", "First light"))
+	_title.text = MissionTablePanel.display_text(String(data.get("title", "First light")))
 	var replay: Array = data.get("replay", [])
 	if _ending_page == "summary":
 		if bool(data.get("trainer", false)):

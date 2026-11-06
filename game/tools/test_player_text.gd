@@ -24,7 +24,7 @@ var _seen := {}
 func _init() -> void:
 	CampaignCutscenePlayer.autoplay = false
 	# §8.1's patterns, plus the project's other internal ID prefixes (LOC-02, MSG-CH01-001, CS-03, SFX-…, CUE-…, J-CH01-…).
-	for source in ["EX-CH\\d", "\\bP-\\d\\d\\b", "\\b[EAWKSZCRH] ?\\d", "\\b(LOC|MSG|CS|SFX|CUE|J)-[A-Z0-9]{2}", "(?i)\\b(commit\\w*|stage[sd]?|acknowledg\\w*|role constraints?|operations?)\\b"]:
+	for source in ["EX-CH\\d", "\\bP-\\d\\d\\b", "\\b[EAWKSZCRH] ?\\d", "\\b(LOC|MSG|CS|SFX|CUE|J)-[A-Z0-9]{2}", "air_depleted_shift_|exposure_limit_exceeded_shift_|MISSION[ _]STOPPED|BUNK SLOT|Run the STACK task|bundle task|forces COOL", "(?i)\\b(commit\\w*|stage[sd]?|acknowledg\\w*|role constraints?|operations?)\\b"]:
 		var regex := RegEx.new()
 		regex.compile(source)
 		_patterns.append(regex)
@@ -44,6 +44,7 @@ func _run() -> void:
 	if hud == null or campaign.route == null:
 		_finish()
 		return
+	await _walk_first_table(campaign)
 	PlanFixture.prepare(campaign.route)
 	var scenes := Gates.scene_ids()
 	for scene_id in scenes:
@@ -94,6 +95,8 @@ func _run() -> void:
 			targets.push_back(targets.pop_front())
 			targets.push_back(targets.pop_at(3))
 		for target in targets:
+			if P02MissionTable.is_gate(String(target.target_id)):
+				await _walk_table(campaign, String(target.target_id))
 			var result: Dictionary = campaign.route.perform(String(target.target_id))
 			hud.refresh_after_action(result)
 			await _walk_state(hud, "%s after %s" % [scene_id, target.target_id])
@@ -113,6 +116,7 @@ func _run() -> void:
 		hud.panels.open_panel("data_card", {"source_id": source_id})
 		await _walk_state(hud, "data card " + String(source_id))
 	hud.panels.close_panel()
+	await _walk_failed_table()
 	_check(_seen.size() > 150, "the walk read many distinct player strings (%d)" % _seen.size())
 	_finish()
 
@@ -134,8 +138,6 @@ func _walk_state(hud: Control, state: String) -> void:
 
 func _visible_text(node: Node, out: Array[String]) -> void:
 	if (node is CanvasItem and not (node as CanvasItem).is_visible_in_tree()) or (node is Node3D and not (node as Node3D).is_visible_in_tree()):
-		return
-	if node is MissionTablePanel:
 		return
 	if node is Label:
 		out.append(("\u0001" if node.has_meta("verbatim") else "") + (node as Label).text)
@@ -182,3 +184,120 @@ func _finish() -> void:
 	storage.cleanup()
 	print("PLAYER TEXT RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
+
+func _walk_first_table(campaign: Chapter1Campaign) -> void:
+	var route = preload("res://scripts/missions/chapter1_route.gd").new(preload("res://scripts/core/campaign_director.gd").new())
+	_reach_route(route, "EX-CH01-S07")
+	route.perform("role_cards")
+	var table := campaign.hud.mission_table
+	table.open(route, "p02_shift1")
+	await _walk_state(campaign.hud, "Mission Table guide air")
+	table.choose(1, "air_production", 2)
+	await _walk_state(campaign.hud, "Mission Table guide light")
+	table.choose(1, "light", "FULL")
+	await _walk_state(campaign.hud, "Mission Table guide try")
+	for id in ["kai", "amara"]:
+		table.share_card(id)
+		(table.find_child("More_" + id, true, false) as Button).pressed.emit()
+		await _walk_state(campaign.hud, "Mission Table full note " + id)
+	(table.find_child("TableMore", true, false) as Button).pressed.emit()
+	await _walk_state(campaign.hud, "Mission Table More")
+	table.preview()
+	table.request_commit()
+	await _walk_state(campaign.hud, "Mission Table first confirmation")
+	table.cancel_confirm()
+	table.close()
+
+func _walk_table(campaign: Chapter1Campaign, id: String) -> void:
+	var table := campaign.hud.mission_table
+	for card in campaign.route.mission_table().role_cards(int(campaign.director.query().current_shift)):
+		if card.arrived:
+			campaign.route.mission_table().share(card.role_id, int(campaign.director.query().current_shift))
+	table.open(campaign.route, id)
+	await _walk_state(campaign.hud, "Mission Table " + id)
+	if id == "p02_shift5_alarm":
+		await _walk_alarm_text(table, campaign.hud)
+	for card in table.view().cards:
+		if card.arrived:
+			(table.find_child("More_" + String(card.role_id), true, false) as Button).pressed.emit()
+	await _walk_state(campaign.hud, "Mission Table all arrived notes " + id)
+	(table.find_child("TableMore", true, false) as Button).pressed.emit()
+	for hint in 3:
+		table.reveal_hint()
+	await _walk_state(campaign.hud, "Mission Table More and hints " + id)
+	table.preview()
+	table.request_commit()
+	await _walk_state(campaign.hud, "Mission Table confirmation " + id)
+	table.cancel_confirm()
+	table.close()
+
+func _walk_alarm_text(table: MissionTablePanel, hud: Control) -> void:
+	var saved: Dictionary = table._table().snapshot()
+	for action in ["PUMP", "STACK", "WAIT"]:
+		table.choose(5, "action", action)
+		await _walk_state(hud, "Mission Table alarm choice " + action)
+		if action == "WAIT":
+			continue
+		table.start_task()
+		table.task_step(0)
+		await _walk_state(hud, "Mission Table running task " + action)
+		table.end_task()
+		await _walk_state(hud, "Mission Table partial task " + action)
+		table._table().reset_alarm_task()
+		table.start_task()
+		for index in table._table().alarm_task_steps():
+			table.task_step(index)
+		table.end_task()
+		await _walk_state(hud, "Mission Table complete task " + action)
+	_check(table._table().restore(saved).accepted, "text walk restores the actual written alarm plan")
+	table._render()
+
+func _walk_failed_table() -> void:
+	var campaign := CampaignScene.instantiate() as Chapter1Campaign
+	storage.configure(campaign)
+	root.add_child(campaign)
+	await process_frame
+	PlanFixture.prepare(campaign.route)
+	campaign.route.mission_table().set_choice(1, "air_production", 0)
+	_reach_route(campaign.route, "EX-CH01-S11")
+	campaign._sync_route_projection()
+	campaign._refresh_world()
+	await campaign.wait_loading()
+	campaign.route.perform("verify_exposure_order")
+	campaign.route.perform("return_water")
+	campaign.hud.refresh_scene()
+	_check(campaign.hud.open_mission_table("p02_shifts6_7"), "a failing plan opens through the real campaign HUD")
+	var table := campaign.hud.mission_table
+	for card in table.view().cards:
+		if card.arrived:
+			table.share_card(String(card.role_id))
+	var prediction: Dictionary = table.preview()
+	_check(prediction.accepted and not prediction.forecast.unsafe_predicates.is_empty(), "the failed plan has a real unsafe forecast")
+	await _walk_state(campaign.hud, "Mission Table failing forecast")
+	table.request_commit()
+	await _walk_state(campaign.hud, "Mission Table failing confirmation")
+	var target := campaign.physical_target("p02_shifts6_7")
+	campaign._player.global_position = Vector3(target.global_position.x, 0, target.global_position.z + 1)
+	await physics_frame
+	await physics_frame
+	table.confirm_commit()
+	await _walk_state(campaign.hud, "failed plan actual toast and ending")
+	_check(String(campaign.route.chapter_ready().ending) == "MISSION_STOPPED", "real failed lock-in reaches stopped attempt")
+	_check(String(campaign.hud._status.text).contains("Air reached zero"), "actual toast explains the failed plan")
+	campaign.hud.panels.close_panel()
+	await _walk_state(campaign.hud, "failed plan actual visible toast")
+	_check(campaign.hud._status.is_visible_in_tree(), "failed plan toast is visible after closing its report")
+	campaign.hud.panels.open_panel("outcome", campaign.hud._last_outcome)
+	await _walk_state(campaign.hud, "failed plan actual Last result")
+	_check(String(campaign.hud._last_outcome.result).contains("Air reached zero"), "actual Last result keeps the helpful cause")
+	campaign.free()
+
+func _reach_route(route: RefCounted, destination: String) -> void:
+	while route.current_scene_id() != destination:
+		var scene_id: String = route.current_scene_id()
+		var ids: Array = ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"] if scene_id == "EX-CH01-S03" else Gates.targets_for_scene(scene_id).map(func(spec): return String(spec.target_id))
+		for id in ids:
+			route.perform(id)
+		if not route.advance_scene().accepted:
+			_check(false, "text walk reaches " + destination + " from " + scene_id)
+			return

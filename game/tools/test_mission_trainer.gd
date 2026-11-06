@@ -179,6 +179,7 @@ func _test_ui() -> void:
 		gates += 1
 		Fixture.share(trainer.exercise)
 		trainer.table.share_card("kai")
+		_walk_new_text(trainer.table, "trainer shared table gate %d" % gates)
 		_check(trainer.table.preview().accepted and trainer.table.request_commit().accepted, "real panel preview and confirmation")
 		_check(trainer.table.confirm_commit().accepted, "real panel submits genuine choice plan")
 		await process_frame
@@ -266,7 +267,7 @@ func _cancel(controller: bool) -> void:
 	await process_frame
 	await process_frame
 
-# New trainer screens only; the unchanged Mission Table has its own M1-55 work.
+# Trainer pages and the shared Mission Table must use plain player text.
 func _walk_new_text(node: Node, context: String) -> void:
 	if node is CanvasItem and not node.is_visible_in_tree():
 		return
