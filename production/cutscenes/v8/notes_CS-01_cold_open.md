@@ -1,4 +1,4 @@
-# CS-01 cold open — v8 re-edit of the v7 shots (5 Nov 2026, task M1-51)
+# CS-01 cold open — v8 re-edit of the v7 shots (5 Nov 2026, task M1-51), with the Earth field (6 Nov, M1-52)
 
 No generation, no credits: `production/cutscenes/v8/src/CS-01.json` re-cuts the v7 Seedance shots
 (`production/cutscenes/v7/src/shots/CS-01-A/B.mp4`) into the opening that
@@ -58,3 +58,28 @@ and runs the campaign windowed for the screenshots. Results:
 Shot objects (`in`/`out` trims, `ramp`, `zoom`), `transitions` with an overlap (`dissolve:0.9`), `captions`
 (sound captions without a speaker), `texts` (slate with an optional chip), `title`, and `beds` (looped sound
 beds faded in on a cue). Old specs (plain shot paths, `card`, `music`, `lines`) are unchanged.
+
+## 6 Nov 2026: opening beat 1, the Earth field (M1-52)
+
+The cut now opens on Earth (doc 24 §7.1 beat 1). `shots/CS-01-F.mp4` is 6 s of a mustard field in winter morning
+wind: Veo 3.1 Quality, frames-to-video from Sadman's approved start frame
+(`production/concept/opening_field/field_anime_v1_start_frame.png`, "A, anime"), take 1 of two. It hard-cuts to the
+silent Moon exterior, so the wind-to-nothing cut teaches the vacuum rule with no words. Every later cue moved 6 s later.
+
+| Time | Picture | Sound | Layer |
+|---|---|---|---|
+| 0.0–6.0 | The field: four-petal cross flowers in the foreground, mist, bare winter trees; a slow drift right and in; 0.8 s fade from black | `SFX_EARTH_FIELD_MORNING` (gain 0.7, about −27 LUFS), 0.8 s fade in, ends at 5.96 s | caption `[wind and birds]` 0.8–5.6 |
+| 6.0 | **Hard cut** to shot A | wind stops; digital silence | |
+| 6.0–20.2 | The M1-51 cut, unchanged, 6 s later | as before | `[no sound outside]` 6.5–8.7, `[ventilation fans]` 12.3–14.5, slate 12.4–16.6, title 16.9–19.7 |
+
+- **Yellow matched to the band** (beat 4): the field's yellows measured 47.9° hue against the battery band's 39.1°
+  (median) and 43.3° (highlights) in the title frame. `ffmpeg huesaturation=hue=-6:colors=y+r:strength=40` moved
+  the field to 42.1°, between the two, and left the sky alone. The grade is baked into `CS-01-F.mp4`.
+- **Sound caption:** doc 24 beat 1 says "no caption", meaning no slate over the field. The sound still gets
+  `[wind and birds]`, like the film's other two sound captions, so a player with the sound off sees the wind stop at the cut.
+- **Silence after the cut:** the wind bed ends 40 ms before the cut, so the mix is exactly 0 from 5.994 s to 11.371 s.
+  The game `.ogv`'s Vorbis spreads ±1 LSB (−90 dBFS) for 27 ms after the cut, then 0 until the dissolve (M1-51 noted the same spread at the fan onset).
+- **Length:** 20.2 s. The 12–15 s budget in beat 2–4 was for the M1-51 cut alone; beat 1 adds its 6 s.
+
+Measurements and screenshots: `production/qa/evidence/M1-52_capture.sh` → `M1-52_probe.txt`, `M1-52_film_*.png`,
+`M1-52_master_*.png` (either side of the cut), `M1-52_after_film_first_line.png`. Prompts: `production/ai_log_parts/M1-52.md`.

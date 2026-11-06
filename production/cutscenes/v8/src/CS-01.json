@@ -1,7 +1,8 @@
 {
  "id": "CS-01",
- "note": "Cold open (24_NARRATIVE_REVISION §7.1 beats 2-4, task M1-51): the v7 shots re-edited with no dialogue. Shot A holds wide for 2 s in total silence, then accelerates to the station and dives through the porthole into the commons (shot B) as the fans fade in; a push-in ends on the gold band of the battery hologram under the title. The EX-CH01-S01 lines play in-engine at the mission table (M1-49); CUE-01 enters after the charter. Shot C (Ferreira on the Earth screen) is unused.",
+ "note": "Cold open (24_NARRATIVE_REVISION §7.1 beats 1-4, tasks M1-51 and M1-52): beat 1 is 6 s of an Earth mustard field in the wind (shot F, Veo 3.1 from the approved start frame, yellows graded -6° toward the battery band's gold) with SFX_EARTH_FIELD_MORNING, then a hard cut to the Moon: shot A holds wide for 2 s in total silence, then accelerates to the station and dives through the porthole into the commons (shot B) as the fans fade in; a push-in ends on the gold band of the battery hologram under the title. The EX-CH01-S01 lines play in-engine at the mission table (M1-49); CUE-01 enters after the charter. Shot C (Ferreira on the Earth screen) is unused.",
  "shots": [
+  {"file": "shots/CS-01-F.mp4", "in": 0.0, "out": 6.0},
   {
    "file": "../../v7/src/shots/CS-01-A.mp4",
    "ramp": {"hold": 2.0, "rate": 0.4},
@@ -14,17 +15,19 @@
    "zoom": {"center": [0.576, 0.70], "from": 1.0, "to": 2.3, "start": 1.3, "end": 6.3}
   }
  ],
- "transitions": ["dissolve:0.9"],
+ "transitions": ["cut", "dissolve:0.9"],
  "captions": [
-  {"at": 0.5, "until": 2.7, "text": "[no sound outside]"},
-  {"at": 6.3, "until": 8.5, "text": "[ventilation fans]"}
+  {"at": 0.8, "until": 5.6, "text": "[wind and birds]"},
+  {"at": 6.5, "until": 8.7, "text": "[no sound outside]"},
+  {"at": 12.3, "until": 14.5, "text": "[ventilation fans]"}
  ],
  "texts": [
-  {"at": 6.4, "until": 10.6, "text": "Aurora Station · lunar south pole · 11 April 2046 · 06:00 UTC", "chip": "Story (2046)"}
+  {"at": 12.4, "until": 16.6, "text": "Aurora Station · lunar south pole · 11 April 2046 · 06:00 UTC", "chip": "Story (2046)"}
  ],
- "title": {"at": 10.9, "until": 13.7, "text": "LAST LIGHT ACADEMY"},
+ "title": {"at": 16.9, "until": 19.7, "text": "LAST LIGHT ACADEMY"},
  "beds": [
-  {"file": "../../../audio/sfx_masters/SFX_FAN_NORMAL.mp3", "at": 5.4, "fade_in": 2.0, "gain": 0.5}
+  {"file": "../../../../game/assets/audio/sfx/SFX_EARTH_FIELD_MORNING.ogg", "at": 0.0, "until": 5.96, "fade_in": 0.8, "fade_out": 0.04, "gain": 0.7},
+  {"file": "../../../audio/sfx_masters/SFX_FAN_NORMAL.mp3", "at": 11.4, "fade_in": 2.0, "gain": 0.5}
  ],
  "lines": [],
  "out": "../CS-01_Arrival"
