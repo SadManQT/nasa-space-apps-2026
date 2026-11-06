@@ -9,8 +9,7 @@
   {
    "at": 3.8,
    "file": "../../../../game/assets/audio/sfx/SFX_INVENTORY_LAMP_TICK.ogg",
-   "gain_db": 0,
-   "pending": "M3-94R owns generation; this cue slot remains silent."
+   "gain_db": 0
   }
  ],
  "tail_black": 1.0,

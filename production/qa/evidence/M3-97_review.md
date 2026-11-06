@@ -36,7 +36,7 @@ ART_BIBLE §2, checked on the frames: black sky through every lunar window; the 
 
 - CH08 S09→S10 and S10→S11: Rao's open channel invites Noor's voice; "Return departs 03:00" hands off to the return.
 - CH08 S11→S12: the five named mugs, Ferreira's beside the others.
-- CH08→credits→CS-18 (Fix): the inventory lamp is in the film, which plays on `campaign_complete`. The chosen dedication ("For the gardens we leave for others", D13) depends on the save, so a pre-rendered film cannot carry it; **M4-01** (new board task) draws it over CS-18's closing 6.0–8.0 s at runtime.
+- CH08→credits→CS-18 (Fix): the inventory lamp is in the film, which plays on `campaign_complete`. The chosen dedication ("For the gardens we leave for others", D13) depends on the save, so a pre-rendered film cannot carry it; **M4-01** (new board task) draws it over CS-18's closing 6.0–8.0 s at runtime. (Corrected 6 Nov by M4-02: that board task is **M4-03**; M4-01 is the eclipse-props visual review.)
 
 ## For Sadman
 
