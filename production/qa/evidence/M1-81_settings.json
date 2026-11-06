@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/AGENTS.md)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/PRODUCTION_HANDBOOK.md)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/AI_PROMPT_LOG.md)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/plan/GO_NEXT.md)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/plan/tasks.json)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/plan/BOARD.html)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/qa/evidence/M1-55_test_results.txt)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/qa/evidence/M1-55_qa.md)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/qa/evidence/M1-29_qa.md)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/qa/evidence/M1-81_test_results.txt)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/qa/evidence/M1-81_fix_test_results.txt)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/qa/evidence/M1-81_host_test_results.txt)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/qa/evidence/M1-81_capture.sh)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/qa/evidence/M1-81_review.sh)",
+      "read_file(/Users/sadmansakib/nasa-space-apps-2026/.night/nslot1/production/qa/evidence/M1-81_settings.json)",
+      "read_file(/Users/sadmansakib/Library/Application Support/GoCode/profiles/cc889fbd-1f66-482a-a8be-7607cb318b5f/home/.gemini/antigravity-cli/brain)",
+      "read_file(/Users/sadmansakib/Library/Application Support/GoCode/profiles/cc889fbd-1f66-482a-a8be-7607cb318b5f/gemini/antigravity-cli/brain)",
+      "command(git status)",
+      "command(git diff)",
+      "command(git show)",
+      "command(git ls-files)",
+      "command(python3 production/plan/board.py show M1-81)",
+      "command(python3 production/plan/board.py check)"
+    ],
+    "deny": [
+      "command(git commit)",
+      "command(git push)",
+      "command(git reset)",
+      "command(git clean)",
+      "command(git checkout)",
+      "command(git rebase)",
+      "command(git stash)",
+      "command(rm)",
+      "command(sudo)"
+    ]
+  }
+}

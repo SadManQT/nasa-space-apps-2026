@@ -1,0 +1,4 @@
+M1-81 REVIEW SETTINGS: PASS
+Settings: /Users/sadmansakib/.local/share/night_shift/agy_settings.json
+Rule: read_file(/Users/sadmansakib/Library/Application Support/GoCode/profiles/cc889fbd-1f66-482a-a8be-7607cb318b5f/home/.gemini/antigravity-cli/brain)
+Added: True

@@ -5653,15 +5653,15 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Record reviewed Ramim UI implementation and performance-blocked status in handbook",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-codex",
    "deps": [],
    "paths": [
     "PRODUCTION_HANDBOOK.md"
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-06.",
-   "evidence": "",
+   "evidence": "PRODUCTION_HANDBOOK.md section 10 records reviewed 66aed53 M1-19/M1-29/M1-55 implementations as WIP, historical Windows 53/54 gate (performance_runtime 537 checks/8 timings), outstanding Atik M1-68, Tara current-reference qualification, and exact M1-55/M1-29 QA links. Existing host proof M1-81_host_test_results.txt: 54/54 suites passed; saved task-session review M1-81_review_output.txt: VERDICT: PASS and M1-81 READ_FILE: PASS. Fresh sandbox runner M1-81_fix_test_results.txt: 53/54, solely four trainer cache/canary write failures; performance_runtime 537/537 passes. Fix round: the normal nightly review uses shared AGY_SETTINGS, so the earlier task-only permission fix did not reach it. M1-81_capture.sh now adds only the missing home/.gemini brain read_file alias to that shared settings file on the host, verifies the resolved directory is already allowed, and preserves all other settings/denials/file mode. It reruns the full gate and uses those same shared settings for the review retry. Actual host alias application and shared-settings re-review are queued for the automatic capture step; M1-81_permission_probe.txt will record application. M1-81_permissions_validation.txt proves the exact addition, idempotence, refusal of malformed or unapproved input, and the differing settings/denial in the observed CLI logs; validation used temporary settings only. Task-session M1-81_settings.json remains available. JSON, bash syntax and board check pass. Only M1-81 board state changed; M1-19/M1-29/M1-55 remain blocked and M1-68 todo. One updated AI log row; no player-facing changes or new screenshots; no commit or push.",
    "updated": "2026-11-06",
    "prompt": "Ramim owns UI and must not edit Sadman's PRODUCTION_HANDBOOK.md. Add a dated section10 status line for reviewed M1-19 debrief, M1-29 isolated P02 trainer and M1-55 shared guided Mission Table at source66aed53. These are delivered implementations, not completed board tasks: final game/tools/run_tests.sh ended53/54, solely Atik M1-68 performance_runtime537checks/8timingfailures. All UI/trainer/text/campaign/P02 suites pass. Source and screenshots are reviewed; exact evidence production/qa/evidence/M1-55_test_results.txt, M1-55_qa.md and M1-29_qa.md. Tara display is a clearly qualified current reference, not a numeric forecast. No paid generation, rule changes, imports or local editor changes were pushed. Acceptance: handbook accurately records implemented WIP and outstanding M1-68 gate without marking tasks done or changing canon; board check passes.",
    "reserved_for": "sadman",

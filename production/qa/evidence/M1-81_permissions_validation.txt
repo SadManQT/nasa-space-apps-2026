@@ -1,0 +1,9 @@
+PASS: host patch adds only the missing lexical read_file rule; unrelated settings, deny rules and file mode preserved.
+PASS: repeat host patch is idempotent and does not rewrite existing settings.
+PASS: malformed allow fails without writing settings or a success probe.
+PASS: unapproved resolved path fails without writing settings or a success probe.
+PASS: task-session allow-list contains both GoCode brain aliases; all read_file targets exist.
+PASS: saved task-session host review contains VERDICT: PASS and M1-81 READ_FILE: PASS.
+PASS: host capture passes the shared nightly settings to the review retry; standalone retry retains task-session defaults.
+Host application and review with shared settings are deferred to M1-81_capture.sh; this validation used temporary settings only.
+Observed CLI logs: normal nightly launch cli-20261106_213259.log lacks the lexical brain rule and soft-denies ReadFile at step 2; successful task-session launch cli-20261106_212117.log includes it and has no soft-denial.
