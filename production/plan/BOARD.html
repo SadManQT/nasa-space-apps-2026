@@ -178,9 +178,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-79">M1-79</a> Commons wall sign hidden behind the Earth screen <span class="chip ">claude</span> <span class="chip ">P2</span><div class="meta">run_tests.sh 48/48 suites passed (habitat_rooms 342 checks; its new reads_from sightline/legibility and kit-run-vs-display checks fail on t…</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">5 blocked</span><span class="chip s-todo">32 todo</span></div><div class="bar"><i style="width:0%"></i></div>
-<details open><summary>Working now (3)</summary><ul>
-<li><a class="id" href="#M1-29">M1-29</a> Mission Trainer mode: every puzzle as a 5–10 minute training scenario <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-06</div></li>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">6 blocked</span><span class="chip s-todo">32 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<details open><summary>Working now (2)</summary><ul>
 <li><a class="id" href="#M1-55">M1-55</a> Mission Table made simple: guided first shift, plain toggles, before-and-after forecast <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-06</div></li>
 <li><a class="id" href="#M1-64">M1-64</a> Hint player: three progressive levels (nudge, animated explainer, worked method) in a polished overlay <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-06</div></li>
 </ul></details>
@@ -191,11 +190,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-75">M1-75</a> Keep dark text on focused gold title and briefing buttons <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-74">M1-74</a> Stop the &#x27;no meta lla_fade&#x27; error in the HUD fade <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 </ul></details>
-<details open><summary>Blocked (5)</summary><ul>
+<details open><summary>Blocked (6)</summary><ul>
 <li><a class="id" href="#M1-37">M1-37</a> Four-player co-op Class mode: shared decisions, private role clues (as registered) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Night shift parked the work on branch night/M1-37: run_tests.sh is not green: run_tests.sh timed out</div></li>
 <li><a class="id" href="#M1-08">M1-08</a> P-01 Commission &amp; Plant: a real, interactive puzzle panel <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs M1-66 (Atik): P-01 mission and route still auto-supply answers and lack authoritative chosen-value calibration/moisture validation and panel hooks. No UI-only bypass; analys…</div></li>
 <li><a class="id" href="#M1-18">M1-18</a> First five minutes: title screen, onboarding and UX polish <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">M1-67 real explainer is now done and its suite passes321 checks. M1-18 remains unimplemented and blocked by the existing Atik M1-68 Windows loading-performance gate; latest integr…</div></li>
 <li><a class="id" href="#M1-19">M1-19</a> Chapter 1 endings, decision replay and the science debrief <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Reviewed WIP implementation52fb20d is delivered; full acceptance remains blocked by Atik M1-68. Integrated full atce1fe28: 51/52 suites passed, solely537-check performance suite w…</div></li>
+<li><a class="id" href="#M1-29">M1-29</a> Mission Trainer mode: every puzzle as a 5–10 minute training scenario <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Reviewed prototype43cbcde is locally saved, not pushed yet. Complete M1-55 shared table clarity/layout first (normal alarm and150% controls clip), then run full final-source gate;…</div></li>
 <li><a class="id" href="#M1-56">M1-56</a> Messages: inbox, arrival toasts, unlock triggers and the message validator <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs Atik M1-69: message reads must update presentation_resume.messages without Director.restore_snapshot replacing PuzzleHost rollback checkpoint. Existing save store is reusabl…</div></li>
 </ul></details>
 <details><summary>To do (27)</summary><ul>
@@ -1662,12 +1662,13 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "prompt": "Goal: the challenge is about balancing life support, radiation shielding, power and food; the player should see those four at all times.\nDo: a compact HUD panel with four meters, Power (E), Life support (air A and water), Shielding (S and accumulated exposure Z), Food (crops C\nand rations R), labelled in plain words with icons; every puzzle preview shows the forecast change on each meter (arrows plus the number)\nbefore the player commits; red/amber thresholds come from data, not code; accessible (colour plus shape, screen-reader text, scales to 150%).\nValues come from the authoritative director state; no second source of truth.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [
     "M1-09",
     "M0-15",
-    "M1-27"
+    "M1-27",
+    "M1-55"
    ],
    "paths": [
     "game/scripts/ui/",
@@ -1681,7 +1682,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "Ownership: campaign hooks (game/scripts/campaign/) are Atik's - ask with a board task.",
-   "evidence": "",
+   "evidence": "Unpublished reviewed WIP43cbcde: trainer559/0, focused regressions green, native29PNG/probe pass. New brief-focus finding fixed; shared MissionTable clarity/layout finding and final full gate remain open. Capture evidence: production/qa/evidence/M1-29_capture_probe.txt and M1-29_*.png. Not complete; continue M1-55 dependency then validate integrated final source.",
    "updated": "2026-11-06",
    "id": "M1-29",
    "milestone": "M1",
@@ -1689,7 +1690,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "tool": "codex",
    "title": "Mission Trainer mode: every puzzle as a 5–10 minute training scenario",
    "prompt": "Goal: the challenge is called 'Junior Astronaut Mission Trainer'; a teacher or a judge can open any training scenario in one click without\nplaying 12 hours.\nDo: a 'Mission Trainer' entry on the title screen listing the 16 scenarios (P-01..P-16) grouped by demand (Power, Life support, Shielding,\nFood), each with a 20-second NASA data briefing (plain-language takeaway + visual), the real decision, the outcome, a debrief with the\npredict/observe/explain question and a star rating; scenarios unlock as their puzzle is implemented, others show 'coming soon'; reuses the\ncampaign puzzle panels and simulation with a scenario entry profile from data (no copied logic); results saved separately from the campaign.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nFollow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 (clarity rules) in every trainer screen; M3-67 later adds Moon sorties on top of this mode.",
-   "blocker": "Night shift parked the work on branch night/M1-29: ",
+   "blocker": "Reviewed prototype43cbcde is locally saved, not pushed yet. Complete M1-55 shared table clarity/layout first (normal alarm and150% controls clip), then run full final-source gate; prior full51/52 has known AtikM1-68 performance failure. New trainer brief-focus defect is fixed and scoped review approved. No completion claim.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -4648,7 +4649,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game-design/08_PUZZLE_DESIGNS.md",
     "production/qa/evidence/M1-09_shift1_cards.png"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026). M1-54 review: the failure path of a locked-in plan shows developer text (unsafe predicates such as air_depleted_shift_5 in Last result, 'MISSION STOPPED' in the toast; chapter1_campaign_hud.gd _on_mission_table_commit); put it in player words here and add the Mission Table (including a failing plan) to game/tools/test_player_text.gd.",
+   "note": "From doc 25 (Sadman, 5 Nov 2026). M1-54 review: the failure path of a locked-in plan shows developer text (unsafe predicates such as air_depleted_shift_5 in Last result, 'MISSION STOPPED' in the toast; chapter1_campaign_hud.gd _on_mission_table_commit); put it in player words here and add the Mission Table (including a failing plan) to game/tools/test_player_text.gd.\n6 Nov Ramim M1-29 integration: the trainer reuses this same MissionTablePanel through a P02 trainer adapter exposing mission_table(), mission_table_view(target), director(); no trainer fork. Native1280x720 at150% measured frame1256x1831 at(12,12), Close y1777, and normal alarm screenshot also clips footer. Evidence production/qa/evidence/M1-29_retry_150.png, M1-29_alarm_task.png and M1-29_capture_probe.txt. Fix shared layout/plain text for BOTH campaign and trainer; preserve P02 tests unchanged and trainer559 checks. Re-capture trainer table states after restyle. This is now a concrete M1-29 acceptance dependency.",
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Problem: the Seven Shifts Mission Table (M1-09) works but reads like a spreadsheet (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §0.5).\nDo: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §3 exactly: three-step guided first shift, rows that appear when their information arrives (08's schedule),\nlabelled toggles with icons, before→after forecast bars with one consequence sentence, short crew-note cards with More, the\n7-shift night strip, buttons Try it · Lock in shift (Space) · Close (Esc), Save as Plan A under More. Same simulation and preview\nfunction as M1-09; existing P-02 tests must still pass unchanged. Screenshot every step of the guided first shift and shift 5.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",

@@ -1288,12 +1288,13 @@
    "prompt": "Goal: the challenge is about balancing life support, radiation shielding, power and food; the player should see those four at all times.\nDo: a compact HUD panel with four meters, Power (E), Life support (air A and water), Shielding (S and accumulated exposure Z), Food (crops C\nand rations R), labelled in plain words with icons; every puzzle preview shows the forecast change on each meter (arrows plus the number)\nbefore the player commits; red/amber thresholds come from data, not code; accessible (colour plus shape, screen-reader text, scales to 150%).\nValues come from the authoritative director state; no second source of truth.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence."
   },
   {
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [
     "M1-09",
     "M0-15",
-    "M1-27"
+    "M1-27",
+    "M1-55"
    ],
    "paths": [
     "game/scripts/ui/",
@@ -1307,7 +1308,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "Ownership: campaign hooks (game/scripts/campaign/) are Atik's - ask with a board task.",
-   "evidence": "",
+   "evidence": "Unpublished reviewed WIP43cbcde: trainer559/0, focused regressions green, native29PNG/probe pass. New brief-focus finding fixed; shared MissionTable clarity/layout finding and final full gate remain open. Capture evidence: production/qa/evidence/M1-29_capture_probe.txt and M1-29_*.png. Not complete; continue M1-55 dependency then validate integrated final source.",
    "updated": "2026-11-06",
    "id": "M1-29",
    "milestone": "M1",
@@ -1315,7 +1316,7 @@
    "tool": "codex",
    "title": "Mission Trainer mode: every puzzle as a 5–10 minute training scenario",
    "prompt": "Goal: the challenge is called 'Junior Astronaut Mission Trainer'; a teacher or a judge can open any training scenario in one click without\nplaying 12 hours.\nDo: a 'Mission Trainer' entry on the title screen listing the 16 scenarios (P-01..P-16) grouped by demand (Power, Life support, Shielding,\nFood), each with a 20-second NASA data briefing (plain-language takeaway + visual), the real decision, the outcome, a debrief with the\npredict/observe/explain question and a star rating; scenarios unlock as their puzzle is implemented, others show 'coming soon'; reuses the\ncampaign puzzle panels and simulation with a scenario entry profile from data (no copied logic); results saved separately from the campaign.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nFollow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 (clarity rules) in every trainer screen; M3-67 later adds Moon sorties on top of this mode.",
-   "blocker": "Night shift parked the work on branch night/M1-29: ",
+   "blocker": "Reviewed prototype43cbcde is locally saved, not pushed yet. Complete M1-55 shared table clarity/layout first (normal alarm and150% controls clip), then run full final-source gate; prior full51/52 has known AtikM1-68 performance failure. New trainer brief-focus defect is fixed and scoped review approved. No completion claim.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -4274,7 +4275,7 @@
     "game-design/08_PUZZLE_DESIGNS.md",
     "production/qa/evidence/M1-09_shift1_cards.png"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026). M1-54 review: the failure path of a locked-in plan shows developer text (unsafe predicates such as air_depleted_shift_5 in Last result, 'MISSION STOPPED' in the toast; chapter1_campaign_hud.gd _on_mission_table_commit); put it in player words here and add the Mission Table (including a failing plan) to game/tools/test_player_text.gd.",
+   "note": "From doc 25 (Sadman, 5 Nov 2026). M1-54 review: the failure path of a locked-in plan shows developer text (unsafe predicates such as air_depleted_shift_5 in Last result, 'MISSION STOPPED' in the toast; chapter1_campaign_hud.gd _on_mission_table_commit); put it in player words here and add the Mission Table (including a failing plan) to game/tools/test_player_text.gd.\n6 Nov Ramim M1-29 integration: the trainer reuses this same MissionTablePanel through a P02 trainer adapter exposing mission_table(), mission_table_view(target), director(); no trainer fork. Native1280x720 at150% measured frame1256x1831 at(12,12), Close y1777, and normal alarm screenshot also clips footer. Evidence production/qa/evidence/M1-29_retry_150.png, M1-29_alarm_task.png and M1-29_capture_probe.txt. Fix shared layout/plain text for BOTH campaign and trainer; preserve P02 tests unchanged and trainer559 checks. Re-capture trainer table states after restyle. This is now a concrete M1-29 acceptance dependency.",
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Problem: the Seven Shifts Mission Table (M1-09) works but reads like a spreadsheet (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §0.5).\nDo: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §3 exactly: three-step guided first shift, rows that appear when their information arrives (08's schedule),\nlabelled toggles with icons, before→after forecast bars with one consequence sentence, short crew-note cards with More, the\n7-shift night strip, buttons Try it · Lock in shift (Space) · Close (Esc), Save as Plan A under More. Same simulation and preview\nfunction as M1-09; existing P-02 tests must still pass unchanged. Screenshot every step of the guided first shift and shift 5.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
