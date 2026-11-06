@@ -5562,15 +5562,15 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Use supported room shadows in the Compatibility renderer",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/scripts/world/room_presentation.gd"
    ],
    "refs": [],
    "note": "Filed by Tanvir/codex on 2026-11-06.",
-   "evidence": "",
+   "evidence": "room_presentation.gd: omni_shadow_mode_for() gives SHADOW_CUBE under gl_compatibility and keeps SHADOW_DUAL_PARABOLOID (the measured 18.3 -> 16.7 ms saving) for Forward+ and Mobile. Compatibility errors 12 -> 0 on macOS (production/qa/evidence/M1-76_compat_shadows.txt); test_room_presentation.gd 138/138 with two new checks.",
    "updated": "2026-11-06",
    "prompt": "M1-65 assisted capture on source 9fd29ef, Windows Intel Arc 130V, Godot 4.7.2, --rendering-method gl_compatibility: entering the Commons emits 560 ERROR records saying dual paraboloid shadow mode is unsupported and CubeMap mode is required. game/scripts/world/room_presentation.gd _build_practicals sets OmniLight3D.SHADOW_DUAL_PARABOLOID unconditionally. Evidence: production/qa/evidence/M1-65_capture.txt and M1-65_08_arrival_walking.png; harness production/qa/playtests/first_impressions/capture_m1_65.gd. Expected: choose a supported shadow mode for Compatibility while preserving the measured Forward+ optimisation and motivated room lighting. Acceptance: opening room in both renderers, no unsupported-shadow errors, verify character/furniture shadows and run_tests.sh. Investigate shader cache write errors separately before attributing them to project code; they may be local environment failures.",
    "reserved_for": "sadman",

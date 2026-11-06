@@ -153,6 +153,12 @@ static func selection_frame(parent: Node3D, bounds: AABB, color: Color = Color("
 			mesh_box(frame, "Edge", Vector3(center.x, y, z), Vector3(box.size.x, 0.012, 0.012), color, true)
 	return frame
 
+## Compatibility (OpenGL) supports only cube shadows for omni lights; asking for dual-paraboloid there logs an
+## error per light per frame (M1-76: 560 errors entering the Commons on Intel Arc). Forward+ and Mobile keep the
+## measured two-pass dual-paraboloid saving.
+static func omni_shadow_mode_for(rendering_method: String) -> OmniLight3D.ShadowMode:
+	return OmniLight3D.SHADOW_CUBE if rendering_method == "gl_compatibility" else OmniLight3D.SHADOW_DUAL_PARABOLOID
+
 static func _build_practicals(room: Node3D, layout: Dictionary) -> void:
 	var settings: Dictionary = layout.lighting
 	for index in layout.ceiling_strips.size():
@@ -169,7 +175,7 @@ static func _build_practicals(room: Node3D, layout: Dictionary) -> void:
 		# Dual-paraboloid shadows take two passes instead of a cube's six; with the staged cast in
 		# LOC-01 this measured 18.3 -> 16.7 ms p50 (vsync). The light's axis points down so the
 		# paraboloid seam lies in the horizontal plane at fixture height, away from floor shadows.
-		light.omni_shadow_mode = OmniLight3D.SHADOW_DUAL_PARABOLOID
+		light.omni_shadow_mode = omni_shadow_mode_for(RenderingServer.get_current_rendering_method())
 		light.rotation_degrees.x = -90.0
 		light.light_size = 0.16
 		room.get_node("RoomLighting").add_child(light)

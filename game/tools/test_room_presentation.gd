@@ -83,6 +83,9 @@ func _run() -> void:
 	_check(runtime.nearby_target().is_empty(), "targets behind the camera cannot receive the E interaction")
 	runtime.free()
 	storage.cleanup()
+	# M1-76: Compatibility gets cube shadows (the only omni mode OpenGL supports); Forward+ and Mobile keep dual-paraboloid
+	_check(RoomPresentation.omni_shadow_mode_for("gl_compatibility") == OmniLight3D.SHADOW_CUBE, "Compatibility renderer uses supported cube shadows")
+	_check(RoomPresentation.omni_shadow_mode_for("forward_plus") == OmniLight3D.SHADOW_DUAL_PARABOLOID and RoomPresentation.omni_shadow_mode_for("mobile") == OmniLight3D.SHADOW_DUAL_PARABOLOID, "Forward+ and Mobile keep the dual-paraboloid saving")
 	print("ROOM PRESENTATION RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
 
