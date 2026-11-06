@@ -1,0 +1,17 @@
+{
+ "collision_cells": 32,
+ "collision_ring": 1,
+ "rock_chunk_m": 32.0,
+ "rock_sample_m": 4.0,
+ "rock_ring": 1,
+ "rock_seed": 361106,
+ "lod_hysteresis_m": 100.0,
+ "resource_timeout_ms": 10000,
+ "vista_lod": 1,
+ "detail_albedo": "res://assets/environment/terrain/textures/T_Regolith_Fresh_BaseColor.png",
+ "detail_normal": "res://assets/environment/terrain/textures/T_Regolith_Fresh_Normal.png",
+ "sun_energy": 6.0,
+ "shadow_distance_m": 20000.0,
+ "shadow_splits": [0.003, 0.025, 0.2],
+ "vista_regions": {"aurora_ridge": "aurora_vista", "malapert_summit": "malapert_vista"}
+}

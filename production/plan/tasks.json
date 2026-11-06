@@ -591,7 +591,7 @@
    "reserved_for": "Tanvir"
   },
   {
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "atik/codex",
    "deps": [
     "M1-34",
@@ -617,7 +617,8 @@
    "title": "Terrain in Godot: streaming, collision, lighting and performance",
    "prompt": "Integrate the LOLA terrain tiles (M1-34) and the rock kit (M1-35) into the exterior scenes: choose a terrain approach that works on Godot 4.7\n(check the current Terrain3D release's Godot compatibility; otherwise chunked MeshInstance3D LODs), collision for walking and the rover,\nrock scatter by slope, the low hard Sun with long shadows (directional shadow splits tuned for kilometre views), Earth and a star-free or\ncorrectly exposed black sky, no fog or atmosphere scattering; Forward+ with a Compatibility fallback. Target 60 fps on a mid laptop.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. including a wide vista and a boots-on-the-ground view.",
    "reserved_for": "atik",
-   "effort": 3
+   "effort": 3,
+   "blocker": "Provider and 55/55 tests ready; full playable integration requires Sadman M1-82 terrain placement/room-floor/target and Earth hooks. See production/qa/perf/M1-36.md; final independent review and supported-machine gameplay performance remain."
   },
   {
    "status": "blocked",
@@ -5688,6 +5689,48 @@
    "prompt": "M1-36 has an Atik-owned staged terrain provider at game/scripts/terrain/terrain_stream.gd (configure(region_id, local_start, exclusions); move_focus(local_position); lighting(scene_id)). It preserves all existing authored rooms. Current LOC-06 and later exterior stages use flat floors/anchors at Y=0, which cannot be silently overlaid with LOLA elevations without buried or floating props and changed pressure/navigation boundaries. Publish owner-approved region/site-frame placements for each playable exterior, reachable player/crew/focus/prop anchors and exclusions, plus an explicit way for the campaign to omit the staging floor when the terrain provider supplies ground. Preserve existing doors/targets/pressure locks and scene IDs. Supply dated, true-angular-size Earth presentation where the bundled Horizons row says Earth clears the terrain; do not invent a generic Earth on hidden dates. Verify existing staged areas remain playable; screenshots wide/ground for affected rooms. Coordinate the exact metadata/API in evidence so Atik can wire M1-36 through campaign/loading without editing your folders. Scope owns room/art integration only, not terrain_stream.gd. Do not mark M1-36 complete from a standalone terrain capture.",
    "reserved_for": "sadman",
    "effort": 3
+  },
+  {
+   "id": "M1-83",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Care Round photo and measurement panel for M1-49",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/"
+   ],
+   "refs": [],
+   "note": "Filed by atik/codex on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Ownership handoff from Atik M1-49, per MASTER_PLAN §7. Build the reusable 2D Care Round presentation from doc24 §7.2: paired Alo/Tara readings, observe/measure/photo/care/record sequence, previous-photo ghost, generous alignment, Family Mode snap, keyboard/controller confirm, no automatic gameplay mutation. Proposed presentation contract: open(view: Dictionary); signal action_requested(action: String, payload: Dictionary); render_result(result: Dictionary). View carries scene_id, date, plants (individual_id/name/stage/moisture/temperature/current_photo_path/previous_photo_path), allowed_actions and family_mode. Actions identify individual_id and selected values; photograph includes resulting local photo path only after a successful capture. Runtime will validate date, stage, calibration, action order and one photo per plant per day through existing PlantService/Director in Atik M1-49. Publish any contract adjustments in evidence before wiring; do not edit Atik campaign or routes. Accept screenshots for both plants with ghost, duplicate-date feedback and large text, existing runner green. This is the missing UI portion of M1-49, not a second plant simulation.",
+   "reserved_for": "ramim",
+   "effort": 2
+  },
+  {
+   "id": "M1-84",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "claude",
+   "title": "Care Round room hooks and scene bridges for M1-49",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/world/",
+    "game/resources/campaign/rooms/",
+    "game/resources/campaign/content/presentation_media.json"
+   ],
+   "refs": [],
+   "note": "Filed by atik/codex on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Ownership handoff from Atik M1-49 under MASTER_PLAN §7. Inspect current CH01-S02 inventory-lamp blink, S03 drawer opening, S04/S05 garden care locations and S12 four named mugs. Publish room/staging hooks allowing the campaign to trigger exactly one lamp blink, visit both real garden plant anchors during dated care, and name the existing mugs Kai/Amara/Mei/Rafi at S12. Preserve current authored rooms, doors and scene joins; reuse assets and approved lines. M1-51 is done, so confirm existing CS-01 has no duplicate dialogue and publish how L01/L02 arrival, L03 route preview and L04 before commit should be requested through the existing audio/dialogue interface; media edits remain yours. Provide exact hook names/anchor IDs in evidence and screenshots of blink/mugs. Atik will wire these into M1-49 and record CH01-MUGS-NAMED through the Director; do not edit Atik campaign/routes or invent canon.",
+   "reserved_for": "sadman",
+   "effort": 2
   }
  ],
  "requirements": [
