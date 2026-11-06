@@ -152,6 +152,10 @@ func _test_ui() -> void:
 	await process_frame
 	_check(trainer._page == "brief" and trainer.exercise.director().query().current_shift == 0, "one scenario click opens NASA brief without spending a shift")
 	_check(trainer.find_child("BeginTraining", true, false) != null, "reading has an explicit continue and no countdown gate")
+	for large in [false, true]:
+		trainer.settings.large_text = large
+		trainer.select_scenario("P-02")
+		await _check_brief_entry(trainer, "brief initial large=%s" % large)
 	await _check_page(trainer, "brief at 150 percent")
 	_walk_new_text(trainer._body, "brief")
 	(trainer.find_child("BriefSource", true, false) as Button).pressed.emit()
@@ -273,3 +277,27 @@ func _walk_new_text(node: Node, context: String) -> void:
 		_check(regex.search(value) == null, context + " plain player text: " + value.left(75))
 	for child in node.get_children():
 		_walk_new_text(child, context)
+
+func _check_brief_entry(trainer: Control, context: String) -> void:
+	# Wait through deferred focus and container layout before observing entry.
+	await process_frame
+	await process_frame
+	await process_frame
+	var reading := trainer._scroll.get_global_rect() as Rect2
+	for index in 4:
+		var line := trainer._body.get_child(index) as Label
+		_check(reading.encloses(line.get_global_rect()), context + " initially shows " + line.text)
+	var focus := root.gui_get_focus_owner()
+	_check(focus == trainer._scroll or focus == trainer._body.get_child(0), context + " focus starts at reading top")
+	var tab := InputEventKey.new()
+	tab.keycode = KEY_TAB
+	tab.physical_keycode = KEY_TAB
+	tab.pressed = true
+	root.push_input(tab, true)
+	tab = tab.duplicate()
+	tab.pressed = false
+	root.push_input(tab, true)
+	await process_frame
+	await process_frame
+	var source := trainer.find_child("BriefSource", true, false) as Button
+	_check(root.gui_get_focus_owner() == source and reading.intersects(source.get_global_rect()), context + " Tab reaches source and scroll follows button focus")

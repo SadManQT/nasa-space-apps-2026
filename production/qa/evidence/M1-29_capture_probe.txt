@@ -7,7 +7,11 @@ ok scroll reaches @Label@181
 ok screenshot catalog_shielding
 ok scroll reaches @Label@182
 ok screenshot catalog_food
-ok screenshot brief
+ok brief_top initially shows Seven Shifts, One Night
+ok brief_top initially shows Keep the crew and garden safe until dawn.
+ok brief_top initially shows Store daylight power before the long darkness.
+ok brief_top initially shows Allow about 5–10 minutes; take longer whenever you need.
+ok brief_top starts with reading focus
 ok screenshot brief_top
 ok screenshot brief_source
 ok screenshot day_choices
@@ -51,6 +55,11 @@ ok scroll reaches @Label@2685
 ok screenshot catalog_150_shielding
 ok scroll reaches @Label@2686
 ok screenshot catalog_150_food
+ok brief_150_top initially shows Seven Shifts, One Night
+ok brief_150_top initially shows Keep the crew and garden safe until dawn.
+ok brief_150_top initially shows Store daylight power before the long darkness.
+ok brief_150_top initially shows Allow about 5–10 minutes; take longer whenever you need.
+ok brief_150_top starts with reading focus
 ok screenshot brief_150_top
 ok scroll reaches BeginTraining
 ok screenshot brief_150_actions

@@ -219,14 +219,19 @@ func _button(value: String, id: String, action: Callable, disabled: bool = false
 	_body.add_child(button)
 
 func _finish_page() -> void:
+	_scroll.focus_mode = Control.FOCUS_ALL if _page == "brief" else Control.FOCUS_NONE
 	_scale()
-	_restore_page_focus.call_deferred()
+	_restore_page_focus.call_deferred(_page == "brief")
 
 func _scale() -> void:
 	UiDesign.apply_type(self, get_viewport_rect().size.y, 1.5 if settings.get("large_text", false) else 1.0, [table, panels])
 
-func _restore_page_focus() -> void:
+func _restore_page_focus(reading_start: bool = false) -> void:
 	if is_queued_for_deletion() or table.is_open() or not panels.active_panel().is_empty():
+		return
+	if reading_start:
+		_scroll.grab_focus()
+		_scroll.scroll_vertical = 0
 		return
 	for child in _body.get_children():
 		if child is Button and not child.disabled:

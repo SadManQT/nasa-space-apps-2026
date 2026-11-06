@@ -35,9 +35,7 @@ func _run() -> void:
 	for group in ["Power", "Life support", "Shielding", "Food"]:
 		await _group_capture(group, "catalog_")
 	trainer.select_scenario("P-02")
-	await _capture("brief")
-	trainer._scroll.scroll_vertical = 0
-	await _capture("brief_top")
+	await _brief_initial("brief_top")
 	(trainer.find_child("BriefSource", true, false) as Button).pressed.emit()
 	await _capture("brief_source")
 	trainer.panels.close_panel()
@@ -94,8 +92,7 @@ func _run() -> void:
 	for group in ["Power", "Life support", "Shielding", "Food"]:
 		await _group_capture(group, "catalog_150_")
 	trainer.select_scenario("P-02")
-	trainer._scroll.scroll_vertical = 0
-	await _capture("brief_150_top")
+	await _brief_initial("brief_150_top")
 	await _reach(trainer.find_child("BeginTraining", true, false), trainer._scroll)
 	await _capture("brief_150_actions")
 	var prior_results := FileAccess.get_file_as_bytes(main.trainer_results_path)
@@ -158,3 +155,14 @@ func _expect(condition: bool, message: String) -> void:
 	if not condition:
 		failures += 1
 		push_error("FAIL " + message)
+
+func _brief_initial(label: String) -> void:
+	await process_frame
+	await process_frame
+	await process_frame
+	var reading: Rect2 = trainer._scroll.get_global_rect()
+	for index in 4:
+		var line := trainer._body.get_child(index) as Label
+		_expect(reading.encloses(line.get_global_rect()), label + " initially shows " + line.text)
+	_expect(root.gui_get_focus_owner() == trainer._scroll, label + " starts with reading focus")
+	await _capture(label)
