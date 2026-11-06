@@ -178,9 +178,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-79">M1-79</a> Commons wall sign hidden behind the Earth screen <span class="chip ">claude</span> <span class="chip ">P2</span><div class="meta">run_tests.sh 48/48 suites passed (habitat_rooms 342 checks; its new reads_from sightline/legibility and kit-run-vs-display checks fail on t…</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">4 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">32 todo</span></div><div class="bar"><i style="width:0%"></i></div>
-<details open><summary>Working now (4)</summary><ul>
-<li><a class="id" href="#M1-19">M1-19</a> Chapter 1 endings, decision replay and the science debrief <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-06</div></li>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">5 blocked</span><span class="chip s-todo">32 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<details open><summary>Working now (3)</summary><ul>
 <li><a class="id" href="#M1-29">M1-29</a> Mission Trainer mode: every puzzle as a 5–10 minute training scenario <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-06</div></li>
 <li><a class="id" href="#M1-55">M1-55</a> Mission Table made simple: guided first shift, plain toggles, before-and-after forecast <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-06</div></li>
 <li><a class="id" href="#M1-64">M1-64</a> Hint player: three progressive levels (nudge, animated explainer, worked method) in a polished overlay <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-06</div></li>
@@ -192,10 +191,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-75">M1-75</a> Keep dark text on focused gold title and briefing buttons <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-74">M1-74</a> Stop the &#x27;no meta lla_fade&#x27; error in the HUD fade <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 </ul></details>
-<details open><summary>Blocked (4)</summary><ul>
+<details open><summary>Blocked (5)</summary><ul>
 <li><a class="id" href="#M1-37">M1-37</a> Four-player co-op Class mode: shared decisions, private role clues (as registered) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Night shift parked the work on branch night/M1-37: run_tests.sh is not green: run_tests.sh timed out</div></li>
 <li><a class="id" href="#M1-08">M1-08</a> P-01 Commission &amp; Plant: a real, interactive puzzle panel <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs M1-66 (Atik): P-01 mission and route still auto-supply answers and lack authoritative chosen-value calibration/moisture validation and panel hooks. No UI-only bypass; analys…</div></li>
-<li><a class="id" href="#M1-18">M1-18</a> First five minutes: title screen, onboarding and UX polish <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Fresh baseline is 35/37: missing Sadman explainer clip (M1-67) and reproduced Atik loading/performance failures (M1-68; retry 0/1). Required full-suite gate prevents UI acceptance…</div></li>
+<li><a class="id" href="#M1-18">M1-18</a> First five minutes: title screen, onboarding and UX polish <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">M1-67 real explainer is now done and its suite passes321 checks. M1-18 remains unimplemented and blocked by the existing Atik M1-68 Windows loading-performance gate; latest integr…</div></li>
+<li><a class="id" href="#M1-19">M1-19</a> Chapter 1 endings, decision replay and the science debrief <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Reviewed WIP implementation52fb20d is delivered; full acceptance remains blocked by Atik M1-68. Integrated full atce1fe28: 51/52 suites passed, solely537-check performance suite w…</div></li>
 <li><a class="id" href="#M1-56">M1-56</a> Messages: inbox, arrival toasts, unlock triggers and the message validator <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs Atik M1-69: message reads must update presentation_resume.messages without Director.restore_snapshot replacing PuzzleHost rollback checkpoint. Existing save store is reusabl…</div></li>
 </ul></details>
 <details><summary>To do (27)</summary><ul>
@@ -228,7 +228,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-77">M1-77</a> Avoid missing fade metadata errors on the first campaign caption <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">2 blocked</span><span class="chip s-todo">27 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">2 blocked</span><span class="chip s-todo">28 todo</span></div><div class="bar"><i style="width:0%"></i></div>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M1-49">M1-49</a> Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -240,7 +240,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Draft pre-release v0.1.0-preview.20261105 is on GitHub with both ZIPs (built from 57b837b; CI run 41970276437 green on Windows and macOS; production/qa/release_2026-11-05.md). Sad…</div></li>
 <li><a class="id" href="#M1-58">M1-58</a> Carrying payloads, and the shift-5 STACK as a real carry-and-place task <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Night shift parked the work on branch night/M1-58: could not land: rebase conflict: real carry-and-place task hint: Resolve all conflicts manually, mark them as resolved with hint…</div></li>
 </ul></details>
-<details><summary>To do (22)</summary><ul>
+<details><summary>To do (23)</summary><ul>
 <li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-2M">M3-2M</a> Chapter 2 missions EX-M0201 to EX-M0204: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-3M">M3-3M</a> Chapter 3 missions EX-M0301 to EX-M0304: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
@@ -263,6 +263,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-100">M3-100</a> Preload Alo&#x27;s and Tara&#x27;s dated stage models for the garden (M3-99 variants) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-101">M3-101</a> Use the M3-99 narrative props where the Care Round, the mugs beat and the clue scenes place them <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-78">M1-78</a> Fail the test runner when its class-cache refresh crashes <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M1-80">M1-80</a> Fail the test runner when its import refresh crashes <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
 <div class="panel" data-member="tanvir"><b>Abu Sayem Mohammed Tanvir</b> <span class="id">tanvir</span><div class="meta">QA and playtest lead · 5% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">6 todo</span></div><div class="bar"><i style="width:22%"></i></div>
@@ -1293,7 +1294,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Goal: 'User experience 5 = anyone can use it' — a judge or a 12-year-old plays the first five minutes without help.\nDo: (1) hide the DEVELOPER ASSET SHOWCASE button in exported builds (feature flag / OS.has_feature('editor')) and fix the footer that\noverlaps it; (2) New Expedition flow per execution/UI_01_MAIN_MENU.md and UI_02; (3) contextual first-time prompts for move, look, use,\nMission Table and the journal, shown once and replayable from Settings; (4) HUD and objective readability (UI_03, UI_04, UI_05, UI_06):\nfont sizes, contrast, text scaling to 150%, focus order for keyboard and controller; (5) remap controls (UI_15).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second screen recording of a cold start to the first objective.\n\nClarity and menus (Sadman, 5 Nov): follow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 for every first-five-minutes screen and build the title and menus in §2.3 (live Moon backdrop, Moon trainer entry, Story/Cadet/Expedition assist modes, settings categories) on the M1-54 design system.",
-   "blocker": "Fresh baseline is 35/37: missing Sadman explainer clip (M1-67) and reproduced Atik loading/performance failures (M1-68; retry 0/1). Required full-suite gate prevents UI acceptance. Analysis handoff/evidence recorded; no product edits.",
+   "blocker": "M1-67 real explainer is now done and its suite passes321 checks. M1-18 remains unimplemented and blocked by the existing Atik M1-68 Windows loading-performance gate; latest integrated M1-19 run51/52, performance537checks/8timingfailures. Do not mark UI tasks done until their final full gate passes.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -1303,7 +1304,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Chapter 1 endings, decision replay and the science debrief",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [
     "M1-09",
@@ -1319,10 +1320,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/UI_13_OUTCOME.md"
    ],
    "note": "5 Nov: the earlier attempt is saved on branch night/M1-19-saved (3f67b01); it no longer merges cleanly, so port what is still right (git diff origin/main...origin/night/M1-19-saved). Ownership: mission-side ending data comes from Atik's route API; add a board task for Atik if a hook is missing.",
-   "evidence": "",
+   "evidence": "Reviewed WIP source52fb20d: outcomes134/0, playertext388/0, campaignflow448/0; each run_tests.sh ends 1/1 suites passed. Native capture PASS0,29probes; independent review and fix re-review approved. Prior full run atce1fe28: 51/52 suites passed, solely performance_runtime537checks/8timingfailures (Atik M1-68). Full final-source gate still required before done. Logs: production/qa/evidence/M1-19_test_results.txt; production/qa/evidence/M1-19_capture_probe.txt. Screenshots: production/qa/evidence/M1-19_alo_lost.png, production/qa/evidence/M1-19_bloom.png, production/qa/evidence/M1-19_debrief_large_text.png, production/qa/evidence/M1-19_decision_replay.png, production/qa/evidence/M1-19_golden.png, production/qa/evidence/M1-19_golden_large_text.png, production/qa/evidence/M1-19_mission_stopped.png, production/qa/evidence/M1-19_nasa_data_card.png, production/qa/evidence/M1-19_replay_large_text.png, production/qa/evidence/M1-19_retry_checkpoint.png, production/qa/evidence/M1-19_science_debrief_1.png, production/qa/evidence/M1-19_science_debrief_2.png, production/qa/evidence/M1-19_science_debrief_3.png, production/qa/evidence/M1-19_science_feedback.png",
    "updated": "2026-11-06",
    "prompt": "Goal: the four canonical endings from P-02 (Golden Bloom: Z≤3, no blackout, Alo alive, H≥5; Bloom: crew safe, H>0 — unlocks the story;\nAlo Lost: crew safe, H=0 — retry only; Mission Stopped: A≤0 or exposure breach) each end with an outcome screen and a debrief that shows\npredict -> what happened -> why, linking the NASA Data Cards (M0-15) behind the numbers.\nDo: per execution/ENDING_*.md and UI_13_OUTCOME.md; retry from the correct checkpoint; Continue only on Bloom/Golden Bloom.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. a test per ending predicate including the boundaries; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nRegistered promise (docs/TEAM.md): include a replay of the player's decisions shift by shift (what they chose, what the forecast said, what happened) before the debrief questions.",
-   "blocker": "Night shift parked the work on branch night/M1-19: An earlier attempt is parked on origin/night/M1-19 but no longer merges cleanly: read `git diff origin/main...origin/night/M1-19` and port what is still right.\n",
+   "blocker": "Reviewed WIP implementation52fb20d is delivered; full acceptance remains blocked by Atik M1-68. Integrated full atce1fe28: 51/52 suites passed, solely537-check performance suite with8timingfailures. Final focused fix checks134/388/448 and native14screens/29probes pass; source quality review approved. Full runner must pass on final integrated source before completion.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -5660,7 +5661,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/qa/perf/"
    ],
    "refs": [],
-   "note": "Filed by Ramim/codex on 2026-11-06.\n6 Nov (Sadman/claude, macOS, Mac under load from two renders and the night shift): three full runs failed 2-3 main-thread interval checks, each time different ones, all just over 50 ms: Ferreira raw load 57.0; title 64.6; new campaign 64.7 / Amara 53.4; Mei 54.4; new campaign 52.8. Every other suite passes (37/38). Looks load-sensitive near the budget; worth measuring on an idle machine before changing the loader.\n6 Nov, Tanvir/Codex M1-65 baseline: test_performance_runtime failed five intervals: Amara 67.948 ms, Mei 52.398 ms, Rafi 54.455 ms, title 66.395 ms, new campaign 96.077 ms (all require <50 ms). Raw output: production/qa/evidence/M1-65_tests_clean.txt. No performance source changed.",
+   "note": "Filed by Ramim/codex on 2026-11-06.\n6 Nov (Sadman/claude, macOS, Mac under load from two renders and the night shift): three full runs failed 2-3 main-thread interval checks, each time different ones, all just over 50 ms: Ferreira raw load 57.0; title 64.6; new campaign 64.7 / Amara 53.4; Mei 54.4; new campaign 52.8. Every other suite passes (37/38). Looks load-sensitive near the budget; worth measuring on an idle machine before changing the loader.\n6 Nov, Tanvir/Codex M1-65 baseline: test_performance_runtime failed five intervals: Amara 67.948 ms, Mei 52.398 ms, Rafi 54.455 ms, title 66.395 ms, new campaign 96.077 ms (all require <50 ms). Raw output: production/qa/evidence/M1-65_tests_clean.txt. No performance source changed.\n6 Nov Ramim: integrated M1-19 fullrun atce1fe28 was51/52 suites passed; performance537checks/8failures. First5 raw-load intervals Kai61.056ms, Amara89.549ms, Mei58.707ms, Rafi59.733ms, Ferreira60.649ms. See production/qa/evidence/M1-19_test_results.txt. No timing expectations changed.",
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Ramim fresh baseline on Windows at main 990126b, Godot 4.7.2, fails the production loading performance gate before any feature source changes. Full game/tools/run_tests.sh: 35/37 suites passed; test_performance_runtime.gd reports 537 checks / 2 failures: production title main-thread interval 59.455ms and production new campaign interval 128.056ms (limit <50ms). The other failure is the separate missing-explainer request M1-67.\nA single focused retry through run_tests.sh performance_runtime after cache warmup fails 537 checks / 7 failures (0/1 suites passed). Runner prints the first five details: Kai raw load 51.280ms, Amara 50.826ms, Mei 57.054ms, Rafi 57.689ms, Ferreira 52.718ms; remaining two details were suppressed by the runner, so do not invent them. Logs: production/qa/evidence/M1-18_baseline.txt and M1-18_performance_retry.txt.\nInvestigate the shared loading/performance path and the Windows test/runtime behavior, then fix the cause within Atik-owned runtime/loading/performance paths. Profile whether scheduling/raw glTF import or timing measurement is responsible; do not silently relax/skip the 50ms gate or claim reference-Mac performance based on this PC. Any necessary Ramim UI or Sadman asset/test changes need owner requests. Preserve campaign/save behavior and incremental-loading contract. Publish the fix/evidence and notify Ramim to resume blocked M1-18.\nAcceptance: focused real production performance runner passes on the documented supported machine without weakening its intent; full run_tests.sh green after M1-67 also lands, with truthful hardware/timing evidence and no unrelated changes.",
@@ -5993,6 +5994,26 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "updated": "2026-11-06",
    "prompt": "In the kit-built commons (game/resources/campaign/rooms/LOC-01.json) the sign 'AURORA / COMMONS' is at [0, 2.18, -5.8], behind the earth_screen fixture (centre [0, 1.7, -5.7], 3 x 1.5 m), so it never shows (see production/qa/evidence/M1-07_earth_desk_wide.png). Found while landing M1-07. Move the sign above the screen (top edge 2.45 m) or onto another wall. Acceptance: the sign reads from the commons_player anchor; screenshot in production/qa/evidence/; run_tests.sh green.",
    "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M1-80",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Fail the test runner when its import refresh crashes",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/tools/run_tests.sh"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Observed during Ramim M1-19 on Godot 4.7.2 Windows: run_tests.sh line 17 editor import refresh segfaulted, yet the script continued and reported the focused outcomes suite 1/1 passed. The first failed refresh and a clean retry are recorded in production/qa/evidence/M1-19_test_results.txt. The runner currently ignores the editor refresh exit because it has set -u without checking this command. Fix only the runner-owned path: if class-cache/import refresh exits nonzero, stop with a nonzero status and print the import diagnostics instead of declaring passing suite totals. Keep normal per-suite parse-error detection and timeouts. Add a small shell regression with an injected GODOT stub whose editor invocation fails while script invocation would report PASS; assert the runner fails before any suite. Verify the normal runner still runs suites and reports actual failures. Do not weaken performance or asset expectations. This does not claim the one import crash is reproducible; the swallowed nonzero status is the deterministic bug.",
+   "reserved_for": "atik",
    "effort": 1
   }
  ],

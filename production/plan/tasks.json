@@ -920,7 +920,7 @@
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Goal: 'User experience 5 = anyone can use it' — a judge or a 12-year-old plays the first five minutes without help.\nDo: (1) hide the DEVELOPER ASSET SHOWCASE button in exported builds (feature flag / OS.has_feature('editor')) and fix the footer that\noverlaps it; (2) New Expedition flow per execution/UI_01_MAIN_MENU.md and UI_02; (3) contextual first-time prompts for move, look, use,\nMission Table and the journal, shown once and replayable from Settings; (4) HUD and objective readability (UI_03, UI_04, UI_05, UI_06):\nfont sizes, contrast, text scaling to 150%, focus order for keyboard and controller; (5) remap controls (UI_15).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second screen recording of a cold start to the first objective.\n\nClarity and menus (Sadman, 5 Nov): follow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 for every first-five-minutes screen and build the title and menus in §2.3 (live Moon backdrop, Moon trainer entry, Story/Cadet/Expedition assist modes, settings categories) on the M1-54 design system.",
-   "blocker": "Fresh baseline is 35/37: missing Sadman explainer clip (M1-67) and reproduced Atik loading/performance failures (M1-68; retry 0/1). Required full-suite gate prevents UI acceptance. Analysis handoff/evidence recorded; no product edits.",
+   "blocker": "M1-67 real explainer is now done and its suite passes321 checks. M1-18 remains unimplemented and blocked by the existing Atik M1-68 Windows loading-performance gate; latest integrated M1-19 run51/52, performance537checks/8timingfailures. Do not mark UI tasks done until their final full gate passes.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -930,7 +930,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Chapter 1 endings, decision replay and the science debrief",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [
     "M1-09",
@@ -946,10 +946,10 @@
     "execution/UI_13_OUTCOME.md"
    ],
    "note": "5 Nov: the earlier attempt is saved on branch night/M1-19-saved (3f67b01); it no longer merges cleanly, so port what is still right (git diff origin/main...origin/night/M1-19-saved). Ownership: mission-side ending data comes from Atik's route API; add a board task for Atik if a hook is missing.",
-   "evidence": "",
+   "evidence": "Reviewed WIP source52fb20d: outcomes134/0, playertext388/0, campaignflow448/0; each run_tests.sh ends 1/1 suites passed. Native capture PASS0,29probes; independent review and fix re-review approved. Prior full run atce1fe28: 51/52 suites passed, solely performance_runtime537checks/8timingfailures (Atik M1-68). Full final-source gate still required before done. Logs: production/qa/evidence/M1-19_test_results.txt; production/qa/evidence/M1-19_capture_probe.txt. Screenshots: production/qa/evidence/M1-19_alo_lost.png, production/qa/evidence/M1-19_bloom.png, production/qa/evidence/M1-19_debrief_large_text.png, production/qa/evidence/M1-19_decision_replay.png, production/qa/evidence/M1-19_golden.png, production/qa/evidence/M1-19_golden_large_text.png, production/qa/evidence/M1-19_mission_stopped.png, production/qa/evidence/M1-19_nasa_data_card.png, production/qa/evidence/M1-19_replay_large_text.png, production/qa/evidence/M1-19_retry_checkpoint.png, production/qa/evidence/M1-19_science_debrief_1.png, production/qa/evidence/M1-19_science_debrief_2.png, production/qa/evidence/M1-19_science_debrief_3.png, production/qa/evidence/M1-19_science_feedback.png",
    "updated": "2026-11-06",
    "prompt": "Goal: the four canonical endings from P-02 (Golden Bloom: Z≤3, no blackout, Alo alive, H≥5; Bloom: crew safe, H>0 — unlocks the story;\nAlo Lost: crew safe, H=0 — retry only; Mission Stopped: A≤0 or exposure breach) each end with an outcome screen and a debrief that shows\npredict -> what happened -> why, linking the NASA Data Cards (M0-15) behind the numbers.\nDo: per execution/ENDING_*.md and UI_13_OUTCOME.md; retry from the correct checkpoint; Continue only on Bloom/Golden Bloom.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. a test per ending predicate including the boundaries; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nRegistered promise (docs/TEAM.md): include a replay of the player's decisions shift by shift (what they chose, what the forecast said, what happened) before the debrief questions.",
-   "blocker": "Night shift parked the work on branch night/M1-19: An earlier attempt is parked on origin/night/M1-19 but no longer merges cleanly: read `git diff origin/main...origin/night/M1-19` and port what is still right.\n",
+   "blocker": "Reviewed WIP implementation52fb20d is delivered; full acceptance remains blocked by Atik M1-68. Integrated full atce1fe28: 51/52 suites passed, solely537-check performance suite with8timingfailures. Final focused fix checks134/388/448 and native14screens/29probes pass; source quality review approved. Full runner must pass on final integrated source before completion.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -5287,7 +5287,7 @@
     "production/qa/perf/"
    ],
    "refs": [],
-   "note": "Filed by Ramim/codex on 2026-11-06.\n6 Nov (Sadman/claude, macOS, Mac under load from two renders and the night shift): three full runs failed 2-3 main-thread interval checks, each time different ones, all just over 50 ms: Ferreira raw load 57.0; title 64.6; new campaign 64.7 / Amara 53.4; Mei 54.4; new campaign 52.8. Every other suite passes (37/38). Looks load-sensitive near the budget; worth measuring on an idle machine before changing the loader.\n6 Nov, Tanvir/Codex M1-65 baseline: test_performance_runtime failed five intervals: Amara 67.948 ms, Mei 52.398 ms, Rafi 54.455 ms, title 66.395 ms, new campaign 96.077 ms (all require <50 ms). Raw output: production/qa/evidence/M1-65_tests_clean.txt. No performance source changed.",
+   "note": "Filed by Ramim/codex on 2026-11-06.\n6 Nov (Sadman/claude, macOS, Mac under load from two renders and the night shift): three full runs failed 2-3 main-thread interval checks, each time different ones, all just over 50 ms: Ferreira raw load 57.0; title 64.6; new campaign 64.7 / Amara 53.4; Mei 54.4; new campaign 52.8. Every other suite passes (37/38). Looks load-sensitive near the budget; worth measuring on an idle machine before changing the loader.\n6 Nov, Tanvir/Codex M1-65 baseline: test_performance_runtime failed five intervals: Amara 67.948 ms, Mei 52.398 ms, Rafi 54.455 ms, title 66.395 ms, new campaign 96.077 ms (all require <50 ms). Raw output: production/qa/evidence/M1-65_tests_clean.txt. No performance source changed.\n6 Nov Ramim: integrated M1-19 fullrun atce1fe28 was51/52 suites passed; performance537checks/8failures. First5 raw-load intervals Kai61.056ms, Amara89.549ms, Mei58.707ms, Rafi59.733ms, Ferreira60.649ms. See production/qa/evidence/M1-19_test_results.txt. No timing expectations changed.",
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Ramim fresh baseline on Windows at main 990126b, Godot 4.7.2, fails the production loading performance gate before any feature source changes. Full game/tools/run_tests.sh: 35/37 suites passed; test_performance_runtime.gd reports 537 checks / 2 failures: production title main-thread interval 59.455ms and production new campaign interval 128.056ms (limit <50ms). The other failure is the separate missing-explainer request M1-67.\nA single focused retry through run_tests.sh performance_runtime after cache warmup fails 537 checks / 7 failures (0/1 suites passed). Runner prints the first five details: Kai raw load 51.280ms, Amara 50.826ms, Mei 57.054ms, Rafi 57.689ms, Ferreira 52.718ms; remaining two details were suppressed by the runner, so do not invent them. Logs: production/qa/evidence/M1-18_baseline.txt and M1-18_performance_retry.txt.\nInvestigate the shared loading/performance path and the Windows test/runtime behavior, then fix the cause within Atik-owned runtime/loading/performance paths. Profile whether scheduling/raw glTF import or timing measurement is responsible; do not silently relax/skip the 50ms gate or claim reference-Mac performance based on this PC. Any necessary Ramim UI or Sadman asset/test changes need owner requests. Preserve campaign/save behavior and incremental-loading contract. Publish the fix/evidence and notify Ramim to resume blocked M1-18.\nAcceptance: focused real production performance runner passes on the documented supported machine without weakening its intent; full run_tests.sh green after M1-67 also lands, with truthful hardware/timing evidence and no unrelated changes.",
@@ -5620,6 +5620,26 @@
    "updated": "2026-11-06",
    "prompt": "In the kit-built commons (game/resources/campaign/rooms/LOC-01.json) the sign 'AURORA / COMMONS' is at [0, 2.18, -5.8], behind the earth_screen fixture (centre [0, 1.7, -5.7], 3 x 1.5 m), so it never shows (see production/qa/evidence/M1-07_earth_desk_wide.png). Found while landing M1-07. Move the sign above the screen (top edge 2.45 m) or onto another wall. Acceptance: the sign reads from the commons_player anchor; screenshot in production/qa/evidence/; run_tests.sh green.",
    "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M1-80",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Fail the test runner when its import refresh crashes",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/tools/run_tests.sh"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Observed during Ramim M1-19 on Godot 4.7.2 Windows: run_tests.sh line 17 editor import refresh segfaulted, yet the script continued and reported the focused outcomes suite 1/1 passed. The first failed refresh and a clean retry are recorded in production/qa/evidence/M1-19_test_results.txt. The runner currently ignores the editor refresh exit because it has set -u without checking this command. Fix only the runner-owned path: if class-cache/import refresh exits nonzero, stop with a nonzero status and print the import diagnostics instead of declaring passing suite totals. Keep normal per-suite parse-error detection and timeouts. Add a small shell regression with an injected GODOT stub whose editor invocation fails while script invocation would report PASS; assert the runner fails before any suite. Verify the normal runner still runs suites and reports actual failures. Do not weaken performance or asset expectations. This does not claim the one import crash is reproducible; the swallowed nonzero status is the deterministic bug.",
+   "reserved_for": "atik",
    "effort": 1
   }
  ],
