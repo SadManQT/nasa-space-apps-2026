@@ -1,0 +1,369 @@
+{
+ "chapter": 6,
+ "messages": [
+  {
+   "id": "MSG-CH06-001",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2047-01-12T00:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH06-S01"
+   },
+   "join": "",
+   "subject": "Eclipse day",
+   "body": "Today Earth passes between the Sun and the Moon. For a while our panels will see almost nothing. Plan with the facts you have, and show the forecast before committing.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-002",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-01-12T00:06Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S01"
+   },
+   "join": "CH06 S01→S02",
+   "subject": "The lamp is still here",
+   "body": "Kai found the hand light without looking at the label. Battery charged by measurement, clipped to his belt. The lamp still matters, and so does asking for company.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-003",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-01-12T00:08Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S01"
+   },
+   "join": "CH06 S01→S02",
+   "subject": "Protected list",
+   "body": "Guide light goes on the protected list, next to air circulation, minimum heat and dim growth light.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-004",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-01-12T00:14Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S02"
+   },
+   "join": "CH06 S02→S03",
+   "subject": "A memory with a switch",
+   "body": "I shared one log about a storm when I was small. I did not know when the light would return. This time we can read the plan, and the guide light runs through every segment.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-005",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-01-12T00:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S02"
+   },
+   "join": "CH06 S02→S03",
+   "subject": "Label the limits",
+   "body": "A forecast still has limits. We will label them on the board, as Kai asked.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-006",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2047-01-12T00:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S03"
+   },
+   "join": "CH06 S03→S04",
+   "subject": "Five segments",
+   "body": "Precharge, ingress, totality, egress, recovery. Essentials travel in every segment as one protected package. The rehearsal forecast spends nothing: compare before you commit.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-007",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-01-12T00:21Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S03"
+   },
+   "join": "CH06 S03→S04",
+   "subject": "Pump once, camera once",
+   "body": "Amara's rule for tonight: pump once, camera once. Everything else waits for the Sun.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-008",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-01-12T00:26Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S04"
+   },
+   "join": "CH06 S04→S05",
+   "subject": "Small light, protected supply",
+   "body": "I wanted the whole corridor bright. The preview shows the floods cost more than the plan can spare. A small labelled guide light gives a known way through instead. Small light. Protected supply.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-009",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-01-12T00:27Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S04"
+   },
+   "join": "CH06 S04→S05",
+   "subject": "Keep that way",
+   "body": "Keep the guide-light branch in the plan. I walked it twice with the label on; I can find the garden in the dark.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-010",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2047-01-12T00:33Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S05"
+   },
+   "join": "CH06 S05→S06",
+   "subject": "Test panel",
+   "body": "A rehearsal pass does not sign the watch.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-011",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-01-12T00:34Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S05"
+   },
+   "join": "CH06 S05→S06",
+   "subject": "Fault predicted, fault found",
+   "body": "Test branch disconnected, the predicted indicator changed and essentials stayed on. Bring your checks to the table: ready has to be a shared word.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-012",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-01-12T00:44Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S06"
+   },
+   "join": "CH06 S06→S07",
+   "subject": "Ready means all of us",
+   "body": "Plants, atmosphere, shelter, lamp and local channel: all checked by the people who checked them. The filtered camera is protected and ready.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-013",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2047-01-12T00:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S06"
+   },
+   "join": "CH06 S06→S07",
+   "subject": "Watch on the monitor",
+   "body": "Watch the eclipse on the filtered camera monitor. It is a protected instrument view; never look at the Sun directly, even when it is mostly covered.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-014",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-01-12T01:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S07"
+   },
+   "join": "CH06 S07→S08",
+   "subject": "Every sunrise and sunset at once",
+   "body": "The ring is real. Sunlight passing through Earth's air turns red at the edge, like every sunrise and sunset at once. Kai said home helps us understand the dark.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-015",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-01-12T01:21Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S07"
+   },
+   "join": "CH06 S07→S08",
+   "subject": "Home",
+   "body": "Home helps us understand the dark.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-016",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-01-12T01:35Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S08"
+   },
+   "join": "CH06 S08→S09",
+   "subject": "A call within the window",
+   "body": "The path check passed, so I called home inside the window. They asked if someone was here with me. I said the whole crew, and a plan. Rafi said hello from the lamp department.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-017",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2047-01-12T01:36Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S08"
+   },
+   "join": "CH06 S08→S09",
+   "subject": "Text packet",
+   "body": "Aurora, Earth desk. A text packet is on its way through the checked link. It is signed N.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-018",
+   "thread": "earth",
+   "sender": "Noor",
+   "story_time": "2047-01-12T01:40Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH06-S09"
+   },
+   "join": "",
+   "subject": "Red ring",
+   "body": "I watched a red ring from there once. — N.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-019",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-01-12T01:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S09"
+   },
+   "join": "CH06 S09→S10",
+   "subject": "Saved locally",
+   "body": "Observation saved locally, camera state included. If the feed drops, the record does not.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-020",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-01-12T01:46Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S09"
+   },
+   "join": "CH06 S09→S10",
+   "subject": "We know that name",
+   "body": "We know that name now: Noor. The earlier date of her red ring stays unspecified, and we will not guess it.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-021",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-01-12T02:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S10"
+   },
+   "join": "CH06 S10→S11",
+   "subject": "F2 isolated",
+   "body": "The view screen dropped; essentials held. The fault was camera feeder F2, not the habitat. Isolated, checked, reset. The camera image is back before the last observation gate.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-022",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-01-12T02:11Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S10"
+   },
+   "join": "CH06 S10→S11",
+   "subject": "Stayed on the channel",
+   "body": "My hand went to the lamp first. Then I read the indicators. Rafi stayed on the channel the whole time.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-023",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-01-12T04:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S11"
+   },
+   "join": "CH06 S11→S12",
+   "subject": "Egress is a result",
+   "body": "Egress recorded. The interruption stays in the record. I was afraid, and I still followed the steps. The lamp is back in its clip.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-024",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2047-01-12T04:25Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S11"
+   },
+   "join": "CH06 S11→S12",
+   "subject": "Repeatable",
+   "body": "You stayed on the channel and kept the failure in the report. That is something you can repeat.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH06-025",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-01-13T07:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S12"
+   },
+   "join": "CH06→CH07",
+   "subject": "That region needs watching",
+   "body": "This morning's solar image shows an active region. I pinned it to the calendar. It is a reason to watch, not a forecast of a storm date.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH06-026",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-02-14T07:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH06-S12"
+   },
+   "join": "CH06→CH07",
+   "subject": "Breakfast",
+   "body": "Rafi stood up from breakfast without a joke and went straight to the monitoring calendar. Whatever he saw, I want the shelter checklist on the table by noon.",
+   "goal": false
+  }
+ ]
+}

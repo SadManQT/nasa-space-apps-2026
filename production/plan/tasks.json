@@ -4739,8 +4739,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 6 messages: every scene joined to the next",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/resources/campaign/content/messages/ch06.json"
@@ -4752,8 +4752,8 @@
     "game-design/04_CHARACTER_BIBLE.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): the message format is fixed in doc 25 §5, so the content is written now; showing it in game (and check_messages.py) is M1-56's acceptance, which loads these files.",
-   "evidence": "",
-   "updated": "2026-11-05",
+   "evidence": "game/resources/campaign/content/messages/ch06.json: 26 messages, at least 2 on all 12 Chapter 6 joins incl. CH06→CH07; canon lines quoted word for word (EX-CH06-S05-L04, EX-CH06-S07-L03, EX-CH06-S09-L01); times follow the game's 12 Jan stamps and the NASA eclipse contacts (ring during totality 00:49-01:59 UTC, egress after U3); camera safety note in the Academy thread. Validated by script (doc 25 §5/§8.4: OK). In-game display rides on M1-56.",
+   "updated": "2026-11-06",
    "prompt": "Do: write game/resources/campaign/content/messages/ch06.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 6 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "sadman",
    "effort": 2
