@@ -903,7 +903,8 @@
    "owner": "Ramim/codex",
    "deps": [
     "M0-02",
-    "M1-54"
+    "M1-54",
+    "M1-68"
    ],
    "paths": [
     "game/scripts/ui/",
@@ -920,7 +921,7 @@
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Goal: 'User experience 5 = anyone can use it' — a judge or a 12-year-old plays the first five minutes without help.\nDo: (1) hide the DEVELOPER ASSET SHOWCASE button in exported builds (feature flag / OS.has_feature('editor')) and fix the footer that\noverlaps it; (2) New Expedition flow per execution/UI_01_MAIN_MENU.md and UI_02; (3) contextual first-time prompts for move, look, use,\nMission Table and the journal, shown once and replayable from Settings; (4) HUD and objective readability (UI_03, UI_04, UI_05, UI_06):\nfont sizes, contrast, text scaling to 150%, focus order for keyboard and controller; (5) remap controls (UI_15).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second screen recording of a cold start to the first objective.\n\nClarity and menus (Sadman, 5 Nov): follow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 for every first-five-minutes screen and build the title and menus in §2.3 (live Moon backdrop, Moon trainer entry, Story/Cadet/Expedition assist modes, settings categories) on the M1-54 design system.",
-   "blocker": "M1-67 real explainer is now done and its suite passes321 checks. M1-18 remains unimplemented and blocked by the existing Atik M1-68 Windows loading-performance gate; latest integrated M1-19 run51/52, performance537checks/8timingfailures. Do not mark UI tasks done until their final full gate passes.",
+   "blocker": "M1-67 explainer is done (321 checks pass). M1-18 remains unimplemented and blocked on Atik M1-68. Latest integrated66aed53 full53/54, solely performance_runtime537checks/8timingfailures. Full gate must be green before completion.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -934,7 +935,8 @@
    "owner": "Ramim/codex",
    "deps": [
     "M1-09",
-    "M0-15"
+    "M0-15",
+    "M1-68"
    ],
    "paths": [
     "game/scripts/ui/",
@@ -946,10 +948,10 @@
     "execution/UI_13_OUTCOME.md"
    ],
    "note": "5 Nov: the earlier attempt is saved on branch night/M1-19-saved (3f67b01); it no longer merges cleanly, so port what is still right (git diff origin/main...origin/night/M1-19-saved). Ownership: mission-side ending data comes from Atik's route API; add a board task for Atik if a hook is missing.",
-   "evidence": "Reviewed WIP source52fb20d: outcomes134/0, playertext388/0, campaignflow448/0; each run_tests.sh ends 1/1 suites passed. Native capture PASS0,29probes; independent review and fix re-review approved. Prior full run atce1fe28: 51/52 suites passed, solely performance_runtime537checks/8timingfailures (Atik M1-68). Full final-source gate still required before done. Logs: production/qa/evidence/M1-19_test_results.txt; production/qa/evidence/M1-19_capture_probe.txt. Screenshots: production/qa/evidence/M1-19_alo_lost.png, production/qa/evidence/M1-19_bloom.png, production/qa/evidence/M1-19_debrief_large_text.png, production/qa/evidence/M1-19_decision_replay.png, production/qa/evidence/M1-19_golden.png, production/qa/evidence/M1-19_golden_large_text.png, production/qa/evidence/M1-19_mission_stopped.png, production/qa/evidence/M1-19_nasa_data_card.png, production/qa/evidence/M1-19_replay_large_text.png, production/qa/evidence/M1-19_retry_checkpoint.png, production/qa/evidence/M1-19_science_debrief_1.png, production/qa/evidence/M1-19_science_debrief_2.png, production/qa/evidence/M1-19_science_debrief_3.png, production/qa/evidence/M1-19_science_feedback.png",
+   "evidence": "Reviewed WIP source52fb20d: outcomes134/0, playertext388/0, campaignflow448/0; each run_tests.sh ends 1/1 suites passed. Native capture PASS0,29probes; independent review and fix re-review approved. Prior full run atce1fe28: 51/52 suites passed, solely performance_runtime537checks/8timingfailures (Atik M1-68). Full final-source gate still required before done. Logs: production/qa/evidence/M1-19_test_results.txt; production/qa/evidence/M1-19_capture_probe.txt. Screenshots: production/qa/evidence/M1-19_alo_lost.png, production/qa/evidence/M1-19_bloom.png, production/qa/evidence/M1-19_debrief_large_text.png, production/qa/evidence/M1-19_decision_replay.png, production/qa/evidence/M1-19_golden.png, production/qa/evidence/M1-19_golden_large_text.png, production/qa/evidence/M1-19_mission_stopped.png, production/qa/evidence/M1-19_nasa_data_card.png, production/qa/evidence/M1-19_replay_large_text.png, production/qa/evidence/M1-19_retry_checkpoint.png, production/qa/evidence/M1-19_science_debrief_1.png, production/qa/evidence/M1-19_science_debrief_2.png, production/qa/evidence/M1-19_science_debrief_3.png, production/qa/evidence/M1-19_science_feedback.png Final integration at66aed53 now ran53/54, solely M1-68; outcomes134/text391/flow448 pass. Full exact output production/qa/evidence/M1-55_test_results.txt.",
    "updated": "2026-11-06",
    "prompt": "Goal: the four canonical endings from P-02 (Golden Bloom: Z≤3, no blackout, Alo alive, H≥5; Bloom: crew safe, H>0 — unlocks the story;\nAlo Lost: crew safe, H=0 — retry only; Mission Stopped: A≤0 or exposure breach) each end with an outcome screen and a debrief that shows\npredict -> what happened -> why, linking the NASA Data Cards (M0-15) behind the numbers.\nDo: per execution/ENDING_*.md and UI_13_OUTCOME.md; retry from the correct checkpoint; Continue only on Bloom/Golden Bloom.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. a test per ending predicate including the boundaries; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nRegistered promise (docs/TEAM.md): include a replay of the player's decisions shift by shift (what they chose, what the forecast said, what happened) before the debrief questions.",
-   "blocker": "Reviewed WIP implementation52fb20d is delivered; full acceptance remains blocked by Atik M1-68. Integrated full atce1fe28: 51/52 suites passed, solely537-check performance suite with8timingfailures. Final focused fix checks134/388/448 and native14screens/29probes pass; source quality review approved. Full runner must pass on final integrated source before completion.",
+   "blocker": "Reviewed integrated source66aed53: full run_tests.sh ended 53/54 suites passed (exit1, 954s). Sole failure is Atik M1-68 performance_runtime537checks/8timingfailures. All UI/trainer/text/campaign/P02 suites pass. Full output production/qa/evidence/M1-55_test_results.txt. No completion claim.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -1308,7 +1310,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "Ownership: campaign hooks (game/scripts/campaign/) are Atik's - ask with a board task.",
-   "evidence": "Unpublished reviewed WIP43cbcde: trainer559/0, focused regressions green, native29PNG/probe pass. New brief-focus finding fixed; shared MissionTable clarity/layout finding and final full gate remain open. Capture evidence: production/qa/evidence/M1-29_capture_probe.txt and M1-29_*.png. Not complete; continue M1-55 dependency then validate integrated final source.",
+   "evidence": "Reviewed trainer43cbcde plus shared panel66aed53: trainer925/0, table109/0, text391/0; native29M129 PNGs including5 refreshed shared-table screens, normal/150 bounds PASS. Review findings1(shared table) and3(brief focus) addressed; only non-green full gate remains. Full53/54 solely M1-68. Indices production/qa/evidence/M1-29_qa.md and M1-55_qa.md; results M1-29_test_results.txt and M1-55_test_results.txt.",
    "updated": "2026-11-06",
    "id": "M1-29",
    "milestone": "M1",
@@ -1316,7 +1318,7 @@
    "tool": "codex",
    "title": "Mission Trainer mode: every puzzle as a 5–10 minute training scenario",
    "prompt": "Goal: the challenge is called 'Junior Astronaut Mission Trainer'; a teacher or a judge can open any training scenario in one click without\nplaying 12 hours.\nDo: a 'Mission Trainer' entry on the title screen listing the 16 scenarios (P-01..P-16) grouped by demand (Power, Life support, Shielding,\nFood), each with a 20-second NASA data briefing (plain-language takeaway + visual), the real decision, the outcome, a debrief with the\npredict/observe/explain question and a star rating; scenarios unlock as their puzzle is implemented, others show 'coming soon'; reuses the\ncampaign puzzle panels and simulation with a scenario entry profile from data (no copied logic); results saved separately from the campaign.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nFollow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 (clarity rules) in every trainer screen; M3-67 later adds Moon sorties on top of this mode.",
-   "blocker": "Reviewed prototype43cbcde is locally saved, not pushed yet. Complete M1-55 shared table clarity/layout first (normal alarm and150% controls clip), then run full final-source gate; prior full51/52 has known AtikM1-68 performance failure. New trainer brief-focus defect is fixed and scoped review approved. No completion claim.",
+   "blocker": "Reviewed integrated source66aed53: full run_tests.sh ended 53/54 suites passed (exit1, 954s). Sole failure is Atik M1-68 performance_runtime537checks/8timingfailures. All UI/trainer/text/campaign/P02 suites pass. Full output production/qa/evidence/M1-55_test_results.txt. No completion claim.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -4261,10 +4263,11 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Mission Table made simple: guided first shift, plain toggles, before-and-after forecast",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [
-    "M1-54"
+    "M1-54",
+    "M1-68"
    ],
    "paths": [
     "game/scripts/ui/mission_table_panel.gd",
@@ -4275,12 +4278,13 @@
     "game-design/08_PUZZLE_DESIGNS.md",
     "production/qa/evidence/M1-09_shift1_cards.png"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026). M1-54 review: the failure path of a locked-in plan shows developer text (unsafe predicates such as air_depleted_shift_5 in Last result, 'MISSION STOPPED' in the toast; chapter1_campaign_hud.gd _on_mission_table_commit); put it in player words here and add the Mission Table (including a failing plan) to game/tools/test_player_text.gd.\n6 Nov Ramim M1-29 integration: the trainer reuses this same MissionTablePanel through a P02 trainer adapter exposing mission_table(), mission_table_view(target), director(); no trainer fork. Native1280x720 at150% measured frame1256x1831 at(12,12), Close y1777, and normal alarm screenshot also clips footer. Evidence production/qa/evidence/M1-29_retry_150.png, M1-29_alarm_task.png and M1-29_capture_probe.txt. Fix shared layout/plain text for BOTH campaign and trainer; preserve P02 tests unchanged and trainer559 checks. Re-capture trainer table states after restyle. This is now a concrete M1-29 acceptance dependency.",
-   "evidence": "",
+   "note": "From doc 25 (Sadman, 5 Nov 2026). M1-54 review: the failure path of a locked-in plan shows developer text (unsafe predicates such as air_depleted_shift_5 in Last result, 'MISSION STOPPED' in the toast; chapter1_campaign_hud.gd _on_mission_table_commit); put it in player words here and add the Mission Table (including a failing plan) to game/tools/test_player_text.gd.\n6 Nov Ramim M1-29 integration: the trainer reuses this same MissionTablePanel through a P02 trainer adapter exposing mission_table(), mission_table_view(target), director(); no trainer fork. Native1280x720 at150% measured frame1256x1831 at(12,12), Close y1777, and normal alarm screenshot also clips footer. Evidence production/qa/evidence/M1-29_retry_150.png, M1-29_alarm_task.png and M1-29_capture_probe.txt. Fix shared layout/plain text for BOTH campaign and trainer; preserve P02 tests unchanged and trainer559 checks. Re-capture trainer table states after restyle. This is now a concrete M1-29 acceptance dependency.\n6 Nov reviewed66aed53 resolves shared layout/plain text; trainer925 tests and five refreshed captures replace old overflow evidence. Frame1256x696, Close visible normal/150. Tara is explicitly current/reference alive-stage-stress, not an invented numeric forecast. Full53/54 remains blocked by M1-68.",
+   "evidence": "Reviewed source66aed53; table109/0, text391/0, trainer925/0, outcomes134/0, flow448/0, unchangedP0278/0. Native28M155 PNGs +5 refreshed trainer PNGs/probes PASS; guides initial normal/150 and alarm/footer accessible. Source review:0 blocking code defects; full53/54 solely M1-68. Index production/qa/evidence/M1-55_qa.md; exact full production/qa/evidence/M1-55_test_results.txt; screenshots production/qa/evidence/M1-55_*.png.",
    "updated": "2026-11-06",
    "prompt": "Problem: the Seven Shifts Mission Table (M1-09) works but reads like a spreadsheet (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §0.5).\nDo: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §3 exactly: three-step guided first shift, rows that appear when their information arrives (08's schedule),\nlabelled toggles with icons, before→after forecast bars with one consequence sentence, short crew-note cards with More, the\n7-shift night strip, buttons Try it · Lock in shift (Space) · Close (Esc), Save as Plan A under More. Same simulation and preview\nfunction as M1-09; existing P-02 tests must still pass unchanged. Screenshot every step of the guided first shift and shift 5.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
-   "effort": 3
+   "effort": 3,
+   "blocker": "Reviewed integrated source66aed53: full run_tests.sh ended 53/54 suites passed (exit1, 954s). Sole failure is Atik M1-68 performance_runtime537checks/8timingfailures. All UI/trainer/text/campaign/P02 suites pass. Full output production/qa/evidence/M1-55_test_results.txt. No completion claim."
   },
   {
    "id": "M1-56",
@@ -5288,7 +5292,7 @@
     "production/qa/perf/"
    ],
    "refs": [],
-   "note": "Filed by Ramim/codex on 2026-11-06.\n6 Nov (Sadman/claude, macOS, Mac under load from two renders and the night shift): three full runs failed 2-3 main-thread interval checks, each time different ones, all just over 50 ms: Ferreira raw load 57.0; title 64.6; new campaign 64.7 / Amara 53.4; Mei 54.4; new campaign 52.8. Every other suite passes (37/38). Looks load-sensitive near the budget; worth measuring on an idle machine before changing the loader.\n6 Nov, Tanvir/Codex M1-65 baseline: test_performance_runtime failed five intervals: Amara 67.948 ms, Mei 52.398 ms, Rafi 54.455 ms, title 66.395 ms, new campaign 96.077 ms (all require <50 ms). Raw output: production/qa/evidence/M1-65_tests_clean.txt. No performance source changed.\n6 Nov Ramim: integrated M1-19 fullrun atce1fe28 was51/52 suites passed; performance537checks/8failures. First5 raw-load intervals Kai61.056ms, Amara89.549ms, Mei58.707ms, Rafi59.733ms, Ferreira60.649ms. See production/qa/evidence/M1-19_test_results.txt. No timing expectations changed.",
+   "note": "Filed by Ramim/codex on 2026-11-06.\n6 Nov (Sadman/claude, macOS, Mac under load from two renders and the night shift): three full runs failed 2-3 main-thread interval checks, each time different ones, all just over 50 ms: Ferreira raw load 57.0; title 64.6; new campaign 64.7 / Amara 53.4; Mei 54.4; new campaign 52.8. Every other suite passes (37/38). Looks load-sensitive near the budget; worth measuring on an idle machine before changing the loader.\n6 Nov, Tanvir/Codex M1-65 baseline: test_performance_runtime failed five intervals: Amara 67.948 ms, Mei 52.398 ms, Rafi 54.455 ms, title 66.395 ms, new campaign 96.077 ms (all require <50 ms). Raw output: production/qa/evidence/M1-65_tests_clean.txt. No performance source changed.\n6 Nov Ramim: integrated M1-19 fullrun atce1fe28 was51/52 suites passed; performance537checks/8failures. First5 raw-load intervals Kai61.056ms, Amara89.549ms, Mei58.707ms, Rafi59.733ms, Ferreira60.649ms. See production/qa/evidence/M1-19_test_results.txt. No timing expectations changed.\n6 Nov Ramim final integrated66aed53 full:53/54 suites passed,954s, performance537checks/8timingfailures, sole failing suite. First5 raw Kai62.482ms, Amara61.641ms, Mei58.396ms, Rafi56.892ms, Ferreira57.187ms. Remaining3 details suppressed by runner and not inferred. Exact output production/qa/evidence/M1-55_test_results.txt. One Godot test runner, no concurrent team Godot/native captures. No timing or loader changes.",
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Ramim fresh baseline on Windows at main 990126b, Godot 4.7.2, fails the production loading performance gate before any feature source changes. Full game/tools/run_tests.sh: 35/37 suites passed; test_performance_runtime.gd reports 537 checks / 2 failures: production title main-thread interval 59.455ms and production new campaign interval 128.056ms (limit <50ms). The other failure is the separate missing-explainer request M1-67.\nA single focused retry through run_tests.sh performance_runtime after cache warmup fails 537 checks / 7 failures (0/1 suites passed). Runner prints the first five details: Kai raw load 51.280ms, Amara 50.826ms, Mei 57.054ms, Rafi 57.689ms, Ferreira 52.718ms; remaining two details were suppressed by the runner, so do not invent them. Logs: production/qa/evidence/M1-18_baseline.txt and M1-18_performance_retry.txt.\nInvestigate the shared loading/performance path and the Windows test/runtime behavior, then fix the cause within Atik-owned runtime/loading/performance paths. Profile whether scheduling/raw glTF import or timing measurement is responsible; do not silently relax/skip the 50ms gate or claim reference-Mac performance based on this PC. Any necessary Ramim UI or Sadman asset/test changes need owner requests. Preserve campaign/save behavior and incremental-loading contract. Publish the fix/evidence and notify Ramim to resume blocked M1-18.\nAcceptance: focused real production performance runner passes on the documented supported machine without weakening its intent; full run_tests.sh green after M1-67 also lands, with truthful hardware/timing evidence and no unrelated changes.",
@@ -5641,6 +5645,26 @@
    "updated": "2026-11-06",
    "prompt": "Observed during Ramim M1-19 on Godot 4.7.2 Windows: run_tests.sh line 17 editor import refresh segfaulted, yet the script continued and reported the focused outcomes suite 1/1 passed. The first failed refresh and a clean retry are recorded in production/qa/evidence/M1-19_test_results.txt. The runner currently ignores the editor refresh exit because it has set -u without checking this command. Fix only the runner-owned path: if class-cache/import refresh exits nonzero, stop with a nonzero status and print the import diagnostics instead of declaring passing suite totals. Keep normal per-suite parse-error detection and timeouts. Add a small shell regression with an injected GODOT stub whose editor invocation fails while script invocation would report PASS; assert the runner fails before any suite. Verify the normal runner still runs suites and reports actual failures. Do not weaken performance or asset expectations. This does not claim the one import crash is reproducible; the swallowed nonzero status is the deterministic bug.",
    "reserved_for": "atik",
+   "effort": 1
+  },
+  {
+   "id": "M1-81",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Record reviewed Ramim UI implementation and performance-blocked status in handbook",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "PRODUCTION_HANDBOOK.md"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "Ramim owns UI and must not edit Sadman's PRODUCTION_HANDBOOK.md. Add a dated section10 status line for reviewed M1-19 debrief, M1-29 isolated P02 trainer and M1-55 shared guided Mission Table at source66aed53. These are delivered implementations, not completed board tasks: final game/tools/run_tests.sh ended53/54, solely Atik M1-68 performance_runtime537checks/8timingfailures. All UI/trainer/text/campaign/P02 suites pass. Source and screenshots are reviewed; exact evidence production/qa/evidence/M1-55_test_results.txt, M1-55_qa.md and M1-29_qa.md. Tara display is a clearly qualified current reference, not a numeric forecast. No paid generation, rule changes, imports or local editor changes were pushed. Acceptance: handbook accurately records implemented WIP and outstanding M1-68 gate without marking tasks done or changing canon; board check passes.",
+   "reserved_for": "sadman",
    "effort": 1
   }
  ],
