@@ -86,19 +86,17 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">50 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">25 todo</span></div><div class="bar"><i style="width:62%"></i></div>
-<details open><summary>Working now (2)</summary><ul>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">50 done</span><span class="chip s-in_progress">6 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">25 todo</span></div><div class="bar"><i style="width:62%"></i></div>
+<details open><summary>Working now (6)</summary><ul>
 <li><a class="id" href="#M0-11">M0-11</a> Team roster, roles and both registrations <span class="chip ">human</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/human on 2026-11-03</div></li>
+<li><a class="id" href="#M1-07">M1-07</a> Chapter 1 missing assets: Alo&#x27;s early stages, Earth desk, UI kit <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-06</div></li>
+<li><a class="id" href="#M3-2A">M3-2A</a> Chapter 2 assets: EN_Airlock, PR_PaperBee <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-06</div></li>
+<li><a class="id" href="#M3-3A">M3-3A</a> Chapter 3 assets: EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-06</div></li>
+<li><a class="id" href="#M3-5A">M3-5A</a> Chapter 5 assets: PL_Cotton_Seedling, PR_ImpactMonitor, CH_Ferreira_Duty, CH_Cadet_DutyLayer <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-06</div></li>
 <li><a class="id" href="#M3-7R">M3-7R</a> Chapter 7 rooms and locations <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-06</div></li>
 </ul></details>
 <details open><summary>Next up today (1)</summary><ul>
 <li><a class="id" href="#M3-94R">M3-94R</a> Record the three approved M3-94 lines and the two M3-97 sound effects with ElevenLabs <span class="chip ">human</span> <span class="chip ">P1</span></li>
-</ul></details>
-<details open><summary>Blocked (4)</summary><ul>
-<li><a class="id" href="#M1-07">M1-07</a> Chapter 1 missing assets: Alo&#x27;s early stages, Earth desk, UI kit <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Night shift parked the work on branch night/M1-07: Built and verified; waits only for Sadman&#x27;s approval of two 2D sheets (one combined answer is fine): production/concept/ui_kit/U…</div></li>
-<li><a class="id" href="#M3-2A">M3-2A</a> Chapter 2 assets: EN_Airlock, PR_PaperBee <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Night shift parked the work on branch night/M3-2A: Needs Sadman&#x27;s approval of the 2D sheets in production/concept/chapter2_v1/ (approve or change the 7 decisions in its README). B…</div></li>
-<li><a class="id" href="#M3-3A">M3-3A</a> Chapter 3 assets: EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Night shift parked the work on branch night/M3-3A: Needs Sadman: approve, change or decline the five fitted-EVA 2D sheets for CH_Cadet_EVA on one page, production/concept/turnarou…</div></li>
-<li><a class="id" href="#M3-5A">M3-5A</a> Chapter 5 assets: PL_Cotton_Seedling, PR_ImpactMonitor, CH_Ferreira_Duty, CH_Cadet_DutyLayer <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Night shift parked the work on branch night/M3-5A: Needs Sadman: pick CH_Ferreira_Duty take A or B (or ask for changes) on production/concept/ch05_assets/M3-5A_ferreira_duty_v1.pn…</div></li>
 </ul></details>
 <details><summary>To do (24)</summary><ul>
 <li><a class="id" href="#M1-24">M1-24</a> Fix the playtest and QA findings, then freeze the demo build <span class="chip ">claude</span> <span class="chip ">P0</span></li>
@@ -853,8 +851,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 1 missing assets: Alo's early stages, Earth desk, UI kit",
-   "status": "blocked",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "production/concept/",
@@ -867,11 +865,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/ASSET_EN_EarthDesk.md",
     "execution/ASSET_UI_Kit.md"
    ],
-   "note": "",
+   "note": "Approved by Sadman in chat, 6 Nov 2026 10:58: \"Approve, Space weather\" (both sheets, UI kit and Earth desk, as built; Rafi's role word everywhere is \"Space weather\").",
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Goal: the remaining Chapter 1 registry rows exist: PL_Alo_Sprout (seed, sprout and seedling stages for planting and care), EN_EarthDesk\n(Ferreira's and Rao's Earth-screen backdrop), UI_Kit (icons, panel frames, meters in the approved palette).\nDo: concept sheets first and the user's approval (one combined approval message is fine), then generate/build per each execution prompt.\nPlants never have faces. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; registry updated; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
-   "blocker": "Night shift parked the work on branch night/M1-07: Built and verified; waits only for Sadman's approval of two 2D sheets (one combined answer is fine): production/concept/ui_kit/UI_Kit_sheet_v1.png (UI kit look; 6 decisions in its README, incl. Rafi's role word) and production/concept/earth_desk/EN_EarthDesk_sheet_v1.png (Rao's room behind Earth-screen callers; 5 decisions in its README). The seedlings PL_Alo_Sprout/PL_Tara_Sprout follow the M3-99",
    "reserved_for": "sadman",
    "effort": 3
   },
@@ -2013,8 +2010,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 2 assets: EN_Airlock, PR_PaperBee",
-   "status": "blocked",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M1-05"
    ],
@@ -2028,11 +2025,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/ASSET_PR_PaperBee.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "",
+   "note": "Approved by Sadman in chat, 6 Nov 2026 10:58: \"Approve all as built\" (the three chapter2_v1 sheets and the 7 README decisions).",
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Goal: the Chapter 2 (Be the Bee) registry rows that are still planned become installed, gated assets.\nDo: for each of EN_Airlock, PR_PaperBee: read execution/ASSET_<name>.md; make a 2D sheet; batch the sheets into one approval request to the\nuser (do not spend 3D credits before approval); then generate (Tripo/Meshy), clean up in Blender, gate, sync to Godot and update\nproduction/ASSET_REGISTRY.csv. Characters reuse the v8 pipeline (production/tools/build_character_v7.sh) and must pass the side-view\nmirrored-arm check. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; contact sheet in production/review/; registry rows set to verified.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); build every object that this chapter's bridges and §4 clues need (the 'What carries over' column names them) as part of this asset set.",
-   "blocker": "Night shift parked the work on branch night/M3-2A: Needs Sadman's approval of the 2D sheets in production/concept/chapter2_v1/ (approve or change the 7 decisions in its README). Built, gated (136 assets, 0 failing), installed, tested; Godot evidence production/qa/evidence/M3-2A_godot_*.png. After approval: set the 12 M3-2A verdicts in production/review/visual_review.md, run build_registry.py, mark done.",
    "reserved_for": "sadman",
    "effort": 3
   },
@@ -2271,8 +2267,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 3 assets: EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA",
-   "status": "blocked",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M1-05"
    ],
@@ -2289,11 +2285,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/ASSET_CH_Cadet_EVA.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "",
+   "note": "Approved by Sadman in chat, 6 Nov 2026 10:58: \"Approve all five\" (EVA suit design, Amara's low coil, Ferreira's gear-wheel patch, Mei/Rafi chest patch as a 3D decal, upscale before multiview); Tripo credits allowed for the 3D suits.",
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Goal: the Chapter 3 (Moonquake) registry rows that are still planned become installed, gated assets.\nDo: for each of EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA: read execution/ASSET_<name>.md; make a 2D sheet; batch the sheets into one approval request to the\nuser (do not spend 3D credits before approval); then generate (Tripo/Meshy), clean up in Blender, gate, sync to Godot and update\nproduction/ASSET_REGISTRY.csv. Characters reuse the v8 pipeline (production/tools/build_character_v7.sh) and must pass the side-view\nmirrored-arm check. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; contact sheet in production/review/; registry rows set to verified.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); build every object that this chapter's bridges and §4 clues need (the 'What carries over' column names them) as part of this asset set.",
-   "blocker": "Night shift parked the work on branch night/M3-3A: Needs Sadman: approve, change or decline the five fitted-EVA 2D sheets for CH_Cadet_EVA on one page, production/concept/turnarounds_eva_v1/00_Approval_Sheet.png (decisions 1-5 in its README: suit design, Amara's low coil, Ferreira's gear-wheel patch, Mei/Rafi chest patch, upscale before multiview) before any Tripo/Meshy credit, and confirm the helmet fit scales (1.16-1.63). Everything else is done",
    "reserved_for": "sadman",
    "effort": 3
   },
@@ -2796,8 +2791,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 5 assets: PL_Cotton_Seedling, PR_ImpactMonitor, CH_Ferreira_Duty, CH_Cadet_DutyLayer",
-   "status": "blocked",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M1-05"
    ],
@@ -2813,11 +2808,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/ASSET_CH_Cadet_DutyLayer.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "",
+   "note": "Approved by Sadman in chat, 6 Nov 2026 10:58: \"Take A\" for CH_Ferreira_Duty.",
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Goal: the Chapter 5 (Shooting Stars) registry rows that are still planned become installed, gated assets.\nDo: for each of PL_Cotton_Seedling, PR_ImpactMonitor, CH_Ferreira_Duty, CH_Cadet_DutyLayer: read execution/ASSET_<name>.md; make a 2D sheet; batch the sheets into one approval request to the\nuser (do not spend 3D credits before approval); then generate (Tripo/Meshy), clean up in Blender, gate, sync to Godot and update\nproduction/ASSET_REGISTRY.csv. Characters reuse the v8 pipeline (production/tools/build_character_v7.sh) and must pass the side-view\nmirrored-arm check. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; contact sheet in production/review/; registry rows set to verified.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); build every object that this chapter's bridges and §4 clues need (the 'What carries over' column names them) as part of this asset set.",
-   "blocker": "Night shift parked the work on branch night/M3-5A: Needs Sadman: pick CH_Ferreira_Duty take A or B (or ask for changes) on production/concept/ch05_assets/M3-5A_ferreira_duty_v1.png (she is only on the Earth screen before 12 Dec, so the duty layer is a screen portrait, no 3D body; say if you want a 3D variant instead). Everything else is done, ported onto main on 6 Nov and re-verified: PL_Cotton_Seed/Sprout/Seedling, PR_ImpactMonitor (+ game/assets",
    "reserved_for": "sadman",
    "effort": 3
   },
