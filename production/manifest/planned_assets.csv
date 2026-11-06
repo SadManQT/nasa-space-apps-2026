@@ -3,7 +3,6 @@ EN_Commons,environment,Blender modular kit + reused props,EX-CH01-S01,22x12 m co
 EN_ServiceRooms,environment,Blender modular + reused props,EX-CH01-S07,power room + atmosphere room and service corridor (LOC-02)
 EN_Garden,environment,Blender modular + new props,EX-CH01-S04,"growth chambers, Tara bay, benches, glovebox, lineage board (LOC-03)"
 EN_SafeRoom,environment,Blender modular + reused props,EX-CH01-S08,"5 seats, water wall, bundle slots, hatch (LOC-04)"
-EN_Airlock,environment,Blender + PR_HatchDoor,EX-CH02-S03,double interlock and pass-through (LOC-05)
 EN_Garage,environment,Blender + VH_Rover,EX-CH04-S02,rover bay and departure boards (LOC-08)
 EN_ZeroAnnex,environment,Blender + PL_ZeroSeedlingTray + PR_AnnexDrum,EX-CH03-S06,2034 annex with N.R. hatch and viewing port (LOC-07)
 EN_Exterior,environment,Blender terrain from NASA LOLA DEM + EN_SolarMast,EX-CH01-S09,"mast courtyard, horizon, landing pad (LOC-06)"
@@ -19,5 +18,4 @@ PR_Helmet_Roles,prop,Blender recolour of PR_Helmet,EX-CH03-S07,role-colour strip
 PL_Descendants,plant,Blender instancing of PL_Alo_* and PL_Tara_*,EX-CH03-S11,12-position tray; CH04 7 purple + 5 green
 PL_Cotton_Seedling,plant,Blender (scaled from PL_Cotton_Young),EX-CH05-S12,early cotton
 PR_PressedPetal,prop,Blender (small),EX-CH03-S10,petal in dated sleeve
-PR_PaperBee,prop,Blender (small),EX-CH02-S02,origami bee
 PR_ImpactMonitor,prop,UI + screen frames,EX-CH05-S07,impact-camera frames (A-40)

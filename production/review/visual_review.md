@@ -216,3 +216,33 @@ Built procedurally from the M3-99 seedling sheet (approved 5 Nov) by `production
 |---|---|---|
 | PL_Alo_Sprout | ✅ PASS | PL_Alo_Bud pot; sown seed in the soil, two heart-shaped seed leaves on a purple hypocotyl, then the first true leaves; Droop and Cup posture morphs; no face, eyes or mouth |
 | PL_Tara_Sprout | ✅ PASS | PL_Tara_Bloom pot; same three stages on a green hypocotyl; Droop and Cup posture morphs; no face, eyes or mouth |
+
+## M3-2A Chapter 2 assets (5 Nov 2026, first-pass notes by Sadman/night-fable, Claude Fable 5.1; approved by Sadman 6 Nov 2026)
+
+The sheets are in `production/concept/chapter2_v1/` and the contact sheet is `M3-2A_chapter2_contact.png`. The build is
+procedural Blender (no generation), so the renders are the shipped geometry; the automated gate passes for all twelve
+files (`asset_verification.md`). Sadman approved the three sheets and the seven README decisions in chat on 6 Nov 2026
+(about 10:58): "Approve all as built". The twelve verdicts below are PASS from that approval.
+
+| Asset | Verdict | Notes |
+|---|---|---|
+| EN_Airlock_SuitLocker_LOD0 | ✅ PASS | open-front locker with rail, helmet shelf, boot tray, retaining bar and orange latch; RoleTab slot tints per cadet in Godot (checked in test_en_airlock.gd); blank plate, no text |
+| EN_Airlock_SuitLocker_LOD1 | ✅ PASS | same silhouette, fewer segments, no vent slots or helmet rings |
+| EN_Airlock_Bench_LOD0 | ✅ PASS | brushed steel seat (grain repeated four times as often as on the kit's rails, so it reads as fine brushing up close) on navy pedestals; orange boot rail reads at a glance |
+| EN_Airlock_Bench_LOD1 | ✅ PASS | same silhouette and colours |
+| EN_Airlock_GlovePort_LOD0 | ✅ PASS | kit window frame reused at 1.75 m, two flanged ports with dark sleeves on the far side; quilt above and below matches the kit walls |
+| EN_Airlock_GlovePort_LOD1 | ✅ PASS | flat quilt, 10-segment rings |
+| EN_Airlock_PassThrough_LOD0 | ✅ PASS | chamber box with navy seal frames on both faces, round viewports in both lids, gauge and orange lever; the far face is finished (two-sided module); lids swing 100 deg as the catalogue says (physics-checked) |
+| EN_Airlock_PassThrough_LOD1 | ✅ PASS | same, fewer segments; the flat quilt sits 2 mm proud of the body face (the parked build z-fought there and showed vertical stripes) |
+| EN_Airlock_InterlockPanel_LOD0 | ✅ PASS | console in the kit's equipment-bay language: Screen slot, two gauges, three lamps, wheel, grille, lever child; words are live (Label3D) in Godot |
+| EN_Airlock_InterlockPanel_LOD1 | ✅ PASS | same, fewer segments |
+| PR_PaperBee | ✅ PASS | reads as an origami bee from every view: pleated gold/navy abdomen, pointed head, kite wings folded from a root panel on the thorax, strip legs, antennae rooted inside the head; no face and nothing on the head that reads as an eye (the parked build had a stub there and floating wings); sockets present |
+| PR_SeedTray | ✅ PASS | clean 12-cell tray, 0.50 m like PL_ZeroSeedlingTray, navy rim, orange tabs |
+
+Port and rebuild, 6 Nov (Sadman/night-claude2, Claude Opus 5.5): the parked GLBs, previews, sheets, UI icon and
+`airlock.json` predated the build scripts' last fixes, so everything was rebuilt from the scripts (a second run is
+byte-identical). Changed: PR_PaperBee (wings and antennae as above, 152 triangles), EN_Airlock_PassThrough LOD0/LOD1
+(quilt offset), EN_Airlock_Bench (seat grain), `airlock.json` (the six ceiling light strips now sit under the ceiling at
+z = 1 and 3 instead of on the near-wall line; interlock `time_compression` note), the plan on the airlock sheet (numbered
+anchors that step clear of every label) and the UI icon. The other eight GLBs are byte-identical to the parked build.
+Inspected: every Cycles preview, the three sheets, the contact sheet and the Godot captures listed in the board evidence.
