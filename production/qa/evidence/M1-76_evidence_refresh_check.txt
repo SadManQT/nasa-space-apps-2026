@@ -1,0 +1,4 @@
+PASS: stale counts/provenance/windowed fields replaced from current PNGs and probes; hash-matching review retained.
+PASS: replacement artifacts refresh runner/timestamps and invalidate the previous visual review.
+PASS: sandbox capture guard preserves existing screenshots/reports before any Godot launch.
+M1-76 EVIDENCE REFRESH RESULT: PASS (2 isolated rerun scenarios and sandbox guard; no production captures modified)

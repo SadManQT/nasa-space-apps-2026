@@ -1,0 +1,50 @@
+{
+	"capture_finished_at_utc": "2026-11-06T04:34:46Z",
+	"capture_runner": "M1-76_capture.sh desktop runner (OS user: sadmansakib)",
+	"capture_started_at_utc": "2026-11-06T04:34:37Z",
+	"character": {
+		"brighter_pixels": 411,
+		"caster_count": 28
+	},
+	"checks": 31,
+	"control_brighter_pixels": 0,
+	"display": "macOS",
+	"driver": "metal",
+	"failures": 0,
+	"furniture": {
+		"brighter_pixels": 1170,
+		"caster_count": 11
+	},
+	"lights": [
+		{
+			"energy": 0.699999988079071,
+			"name": "Practical_0",
+			"range_m": 10.0,
+			"shadow_enabled": true,
+			"shadow_mode": 0
+		},
+		{
+			"energy": 0.699999988079071,
+			"name": "Practical_1",
+			"range_m": 10.0,
+			"shadow_enabled": true,
+			"shadow_mode": 0
+		},
+		{
+			"energy": 0.699999988079071,
+			"name": "Practical_2",
+			"range_m": 10.0,
+			"shadow_enabled": false,
+			"shadow_mode": 0
+		},
+		{
+			"energy": 0.699999988079071,
+			"name": "Practical_3",
+			"range_m": 10.0,
+			"shadow_enabled": false,
+			"shadow_mode": 0
+		}
+	],
+	"rendered": true,
+	"renderer": "forward_plus"
+}

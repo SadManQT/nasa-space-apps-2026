@@ -1,0 +1,210 @@
+{
+  "task": "M1-76",
+  "date": "2026-11-06",
+  "test_runner_last_line": "44/44 suites passed",
+  "configuration_probes": {
+    "forward_plus": {
+      "renderer": "forward_plus",
+      "driver": "metal",
+      "display": "headless",
+      "checks": 16,
+      "failures": 0,
+      "rendered": false,
+      "capture_runner": "OpenAI Codex / GPT-6 night shift (Sadman/night-codex), headless configuration probe",
+      "capture_started_at_utc": "2026-11-06T04:33:22Z",
+      "capture_finished_at_utc": "2026-11-06T04:33:24Z",
+      "shadow_modes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "other_errors": [
+        "ERROR: Condition \"ret != noErr\" is true. Returning: \"\"",
+        "ERROR: The object does not have any 'meta' values with the key 'lla_fade'."
+      ]
+    },
+    "gl_compatibility": {
+      "renderer": "gl_compatibility",
+      "driver": "opengl3",
+      "display": "headless",
+      "checks": 16,
+      "failures": 0,
+      "rendered": false,
+      "capture_runner": "OpenAI Codex / GPT-6 night shift (Sadman/night-codex), headless configuration probe",
+      "capture_started_at_utc": "2026-11-06T04:33:25Z",
+      "capture_finished_at_utc": "2026-11-06T04:33:27Z",
+      "shadow_modes": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "other_errors": [
+        "ERROR: Condition \"ret != noErr\" is true. Returning: \"\"",
+        "ERROR: The object does not have any 'meta' values with the key 'lla_fade'."
+      ]
+    }
+  },
+  "windowed_verification": {
+    "status": "passed",
+    "validated_at_utc": "2026-11-06T04:34:57.232424+00:00",
+    "method": "GPU probe reports, PASS markers, error logs and decoded 1280x720 PNGs; in-memory probe and saved-PNG counts are distinct measurements.",
+    "renderers": {
+      "forward_plus": {
+        "probe": "M1-76_forward_plus_probe.json",
+        "log": "M1-76_forward_plus_capture.txt",
+        "driver": "metal",
+        "display": "macOS",
+        "checks": 31,
+        "failures": 0,
+        "shadow_modes": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "control_brighter_pixels": 0,
+        "character": {
+          "brighter_pixels": 411,
+          "caster_count": 28
+        },
+        "furniture": {
+          "brighter_pixels": 1170,
+          "caster_count": 11
+        },
+        "unsupported_shadow_errors": 0,
+        "shader_cache_write_errors": 18,
+        "other_engine_errors": 19
+      },
+      "gl_compatibility": {
+        "probe": "M1-76_gl_compatibility_probe.json",
+        "log": "M1-76_gl_compatibility_capture.txt",
+        "driver": "opengl3",
+        "display": "macOS",
+        "checks": 31,
+        "failures": 0,
+        "shadow_modes": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "control_brighter_pixels": 0,
+        "character": {
+          "brighter_pixels": 89,
+          "caster_count": 28
+        },
+        "furniture": {
+          "brighter_pixels": 812,
+          "caster_count": 11
+        },
+        "unsupported_shadow_errors": 0,
+        "shader_cache_write_errors": 0,
+        "other_engine_errors": 1
+      }
+    },
+    "screenshot_count": 8
+  },
+  "expected_screenshots": [
+    "M1-76_forward_plus_opening.png",
+    "M1-76_forward_plus_shadows.png",
+    "M1-76_forward_plus_character_shadows_off.png",
+    "M1-76_forward_plus_furniture_shadows_off.png",
+    "M1-76_gl_compatibility_opening.png",
+    "M1-76_gl_compatibility_shadows.png",
+    "M1-76_gl_compatibility_character_shadows_off.png",
+    "M1-76_gl_compatibility_furniture_shadows_off.png"
+  ],
+  "visual_review": {
+    "status": "pending",
+    "reason": "Current PNGs require visual inspection; automatic ablation checks passed.",
+    "screenshot_sha256": {
+      "M1-76_forward_plus_opening.png": "08e00a91f5cfdf6c89f4cb7289064305dcec33761f03ec96f30084ce980ba1fa",
+      "M1-76_forward_plus_shadows.png": "8591f9c6b9a5c40b8f97edb6e9afda9de79b2c50ce3a63e83e2b5488c6cb1040",
+      "M1-76_forward_plus_character_shadows_off.png": "33a583ea07f91ca6b176692f75a9d476671fea7deedc4bd6d33088b2d65245e7",
+      "M1-76_forward_plus_furniture_shadows_off.png": "cb96f7ae45b517852d8cc448a4934f2e60f24846f22c615054312946fb6a4f04",
+      "M1-76_gl_compatibility_opening.png": "c06fb570534cca35b059816d2b381b53c3bd40a5c7ce73f48036966168af16e2",
+      "M1-76_gl_compatibility_shadows.png": "06e5057558e162eb855b1e8cd37496539d55d21e865c8e3a9e3c12333631ef03",
+      "M1-76_gl_compatibility_character_shadows_off.png": "b12a9d327b5aa6ec8cebceee831ed7aa9b12ce67f977154361bfe4b84cb2ee9e",
+      "M1-76_gl_compatibility_furniture_shadows_off.png": "a31b10849314bcb34886869a6f3a614138e1e52356f72faeb16fd196271083f7"
+    }
+  },
+  "other_errors": {
+    "M1-65_original": "560 unsupported-shadow errors and 79 shader-cache _save_to_cache failures; separate signatures. Cache file-open failures are not attributed to game code or claimed fixed.",
+    "headless_probes": "Configuration probes pass 16/16 checks per renderer with explicit renderer selection; runner and UTC timestamps are recorded in configuration_probes. Other engine errors are listed there separately. Headless checks do not exercise GPU rendering or shader-cache writes.",
+    "capture_behavior": "Capture script rejects script/unsupported-shadow failures and records other engine errors separately in M1-76_<renderer>_other_errors.txt.",
+    "windowed_captures": {
+      "forward_plus": {
+        "unsupported_shadow_errors": 0,
+        "shader_cache_write_errors": 18,
+        "other_engine_errors": 19
+      },
+      "gl_compatibility": {
+        "unsupported_shadow_errors": 0,
+        "shader_cache_write_errors": 0,
+        "other_engine_errors": 1
+      }
+    },
+    "cache_investigation": {
+      "finding": "Godot ShaderRD::_save_to_cache and ShaderGLES3::_save_to_cache open a cache file for writing then report f.is_null() when FileAccess::open fails. This signature identifies cache filesystem IO, separately from the unsupported-shadow error. The logs do not reveal the failing path or OS error, so the specific cause is unconfirmed; no cache or shader project setting was changed.",
+      "possible_local_causes": "Permissions, unavailable cache directories or storage/path setup remain possibilities, not verified causes. The shared isolated-storage helper changes the user directory at runtime; this is also a possible capture-environment factor, not a proven project defect.",
+      "sources": [
+        "https://raw.githubusercontent.com/godotengine/godot/ed1daf0bf/servers/rendering/renderer_rd/shader_rd.cpp",
+        "https://raw.githubusercontent.com/godotengine/godot/ed1daf0bf/drivers/gles3/shader_gles3.cpp",
+        "game/tools/support/isolated_storage.gd",
+        "production/qa/evidence/M1-65_capture.txt",
+        "production/qa/evidence/M1-76_forward_plus_other_errors.txt",
+        "production/qa/evidence/M1-76_gl_compatibility_other_errors.txt"
+      ]
+    }
+  },
+  "fix_round": "Repairs capture-rerun consistency: derives both sets of counts and capture runner/timestamps from current artifacts, refreshes handbook/AI log/board records, and retains visual review only for the reviewed image hashes. Adds renderer assertions to the room suite and explicit Forward+/Compatibility runs to the required test runner. Intentional old-bug mutation is rejected. No commit or push.",
+  "regression_coverage": "run_tests.sh executes test_room_presentation.gd with explicit forward_plus and gl_compatibility renderer selections. The suite asserts the actual renderer and every authored practical omni_shadow_mode. M1-76_tests.txt records both passing; M1-76_regression_check.txt records rejection of an intentional always-dual-paraboloid mutation; production source was restored. M1-76_evidence_refresh_check.txt verifies stale-field replacement and changed-image review invalidation in isolated copies.",
+  "capture_provenance": {
+    "renderers": {
+      "forward_plus": {
+        "runner": "M1-76_capture.sh desktop runner (OS user: sadmansakib)",
+        "time_basis": "probe launch/finish timestamps",
+        "started_at_utc": "2026-11-06T04:34:37Z",
+        "first_png_written_at_utc": "2026-11-06T04:34:44.085455+00:00",
+        "finished_at_utc": "2026-11-06T04:34:46Z",
+        "probe_sha256": "42c7d1fa45e97da43944dfd4563ec2041c99ff23fe100287e763d88a19c828d9",
+        "log_sha256": "0a81ca37e623cceabc97f667d5aeeff4788e1fd807d5ec1d813d697ceae9df84"
+      },
+      "gl_compatibility": {
+        "runner": "M1-76_capture.sh desktop runner (OS user: sadmansakib)",
+        "time_basis": "probe launch/finish timestamps",
+        "started_at_utc": "2026-11-06T04:34:47Z",
+        "first_png_written_at_utc": "2026-11-06T04:34:54.884766+00:00",
+        "finished_at_utc": "2026-11-06T04:34:56Z",
+        "probe_sha256": "32a3813dbb0c9f410813dd1ee07fa8efdf88afb516f846bbdf3c44ab733b617c",
+        "log_sha256": "d73dc47f204b4afd0fbee8f28d26b5ededf6581bfc9f9a402e31c197cc3c403c"
+      }
+    },
+    "validated_at_utc": "2026-11-06T04:34:57.232424+00:00",
+    "validated_by": "M1-76_verify.py (OS user: sadmansakib)",
+    "screenshot_sha256": {
+      "M1-76_forward_plus_opening.png": "08e00a91f5cfdf6c89f4cb7289064305dcec33761f03ec96f30084ce980ba1fa",
+      "M1-76_forward_plus_shadows.png": "8591f9c6b9a5c40b8f97edb6e9afda9de79b2c50ce3a63e83e2b5488c6cb1040",
+      "M1-76_forward_plus_character_shadows_off.png": "33a583ea07f91ca6b176692f75a9d476671fea7deedc4bd6d33088b2d65245e7",
+      "M1-76_forward_plus_furniture_shadows_off.png": "cb96f7ae45b517852d8cc448a4934f2e60f24846f22c615054312946fb6a4f04",
+      "M1-76_gl_compatibility_opening.png": "c06fb570534cca35b059816d2b381b53c3bd40a5c7ce73f48036966168af16e2",
+      "M1-76_gl_compatibility_shadows.png": "06e5057558e162eb855b1e8cd37496539d55d21e865c8e3a9e3c12333631ef03",
+      "M1-76_gl_compatibility_character_shadows_off.png": "b12a9d327b5aa6ec8cebceee831ed7aa9b12ce67f977154361bfe4b84cb2ee9e",
+      "M1-76_gl_compatibility_furniture_shadows_off.png": "a31b10849314bcb34886869a6f3a614138e1e52356f72faeb16fd196271083f7"
+    }
+  },
+  "saved_png_shadow_crosscheck": {
+    "method": "Decoded RGB PNGs as float64 byte values; every other pixel in lower half; separate before/after luminances with weights 0.2126/0.7152/0.0722; ablation increase >2 byte levels (equivalent to >2/255 normalized). Float precision at the threshold can differ from Godot Color.get_luminance; exact equality with the pre-save probe is not required.",
+    "validated_at_utc": "2026-11-06T04:34:57.232424+00:00",
+    "forward_plus": {
+      "character_brighter_pixels": 410,
+      "furniture_brighter_pixels": 1178
+    },
+    "gl_compatibility": {
+      "character_brighter_pixels": 89,
+      "furniture_brighter_pixels": 812
+    }
+  }
+}

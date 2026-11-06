@@ -11,6 +11,10 @@ func _init() -> void:
 
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
+	var renderer := RenderingServer.get_current_rendering_method()
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--expect-renderer="):
+			_check(renderer == arg.trim_prefix("--expect-renderer="), "requested renderer is active: " + renderer)
 	for number in range(1, 7):
 		var id := "LOC-%02d" % number
 		var layout := Contract.layout(id)
@@ -22,6 +26,12 @@ func _run() -> void:
 		root.add_child(room)
 		_check(room.collision_root.has_node("FloorCollision") and (room.visual_root.has_node("HabitatKit") or room.collision_root.get_node("FloorCollision").get_child_count() == 2), id + " floor has visible geometry aligned with collision")
 		_check(room.get_node("RoomLighting/KeyLight").shadow_enabled or room.get_node("RoomLighting").get_children().any(func(n): return n is OmniLight3D and n.shadow_enabled), id + " has motivated shadow-casting lighting")
+		if layout.get("assembly") == "habitat_kit" and id != "LOC-06":
+			var practicals := room.get_node("RoomLighting").find_children("Practical_*", "OmniLight3D", false, false)
+			_check(practicals.size() == layout.ceiling_strips.size(), id + " has every authored practical")
+			for practical in practicals:
+				var expected_mode := OmniLight3D.SHADOW_CUBE if renderer == "gl_compatibility" else OmniLight3D.SHADOW_DUAL_PARABOLOID
+				_check(practical.omni_shadow_mode == expected_mode, id + " " + practical.name + " shadow mode supports " + renderer)
 		var environment: Environment = room.get_node("RoomLighting/RoomEnvironment").environment
 		_check(not environment.fog_enabled and not environment.volumetric_fog_enabled, id + " has no fog")
 		for target in definition.focus_targets:

@@ -1,0 +1,41 @@
+{
+	"capture_finished_at_utc": "2026-11-06T04:33:27Z",
+	"capture_runner": "OpenAI Codex / GPT-6 night shift (Sadman/night-codex), headless configuration probe",
+	"capture_started_at_utc": "2026-11-06T04:33:25Z",
+	"checks": 16,
+	"display": "headless",
+	"driver": "opengl3",
+	"failures": 0,
+	"lights": [
+		{
+			"energy": 0.699999988079071,
+			"name": "Practical_0",
+			"range_m": 10.0,
+			"shadow_enabled": true,
+			"shadow_mode": 1
+		},
+		{
+			"energy": 0.699999988079071,
+			"name": "Practical_1",
+			"range_m": 10.0,
+			"shadow_enabled": true,
+			"shadow_mode": 1
+		},
+		{
+			"energy": 0.699999988079071,
+			"name": "Practical_2",
+			"range_m": 10.0,
+			"shadow_enabled": false,
+			"shadow_mode": 1
+		},
+		{
+			"energy": 0.699999988079071,
+			"name": "Practical_3",
+			"range_m": 10.0,
+			"shadow_enabled": false,
+			"shadow_mode": 1
+		}
+	],
+	"rendered": false,
+	"renderer": "gl_compatibility"
+}

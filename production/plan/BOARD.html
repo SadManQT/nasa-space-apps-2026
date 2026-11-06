@@ -86,12 +86,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">40 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">8 blocked</span><span class="chip s-todo">32 todo</span></div><div class="bar"><i style="width:49%"></i></div>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">41 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">8 blocked</span><span class="chip s-todo">31 todo</span></div><div class="bar"><i style="width:51%"></i></div>
 <details open><summary>Working now (1)</summary><ul>
 <li><a class="id" href="#M0-11">M0-11</a> Team roster, roles and both registrations <span class="chip ">human</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/human on 2026-11-03</div></li>
 </ul></details>
-<details open><summary>Next up today (2)</summary><ul>
-<li><a class="id" href="#M1-76">M1-76</a> Use supported room shadows in the Compatibility renderer <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<details open><summary>Next up today (1)</summary><ul>
 <li><a class="id" href="#M3-94R">M3-94R</a> Record the three approved M3-94 lines and the two M3-97 sound effects with ElevenLabs <span class="chip ">human</span> <span class="chip ">P1</span></li>
 </ul></details>
 <details open><summary>Blocked (8)</summary><ul>
@@ -136,7 +135,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-76">M3-76</a> Explainer clips for every Chapter 5-8 mechanic <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M4-04">M4-04</a> CS-15: install the Dhaka rooftop bed with M3-94R&#x27;s Rao and Noor recordings, encode once <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details><summary>Done (40)</summary><ul>
+<details><summary>Done (41)</summary><ul>
 <li><a class="id" href="#M1-06">M1-06</a> Assemble the Chapter 1 rooms from the kit <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">run_tests.sh last line: 38/38 suites passed (production/qa/evidence/M1-06_tests.txt): habitat rooms 333/0, campaign crew 927/0, room presen…</div></li>
 <li><a class="id" href="#M1-10">M1-10</a> Play CS-01, CS-02 and CS-03 inside the campaign <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">commit feat: campaign plays media; run_tests 31/31; screenshots production/qa/evidence/M1-10_*.png; perf render_m110_m111.json</div></li>
 <li><a class="id" href="#M1-11">M1-11</a> Audio runtime in the campaign: voice with captions, music, effects <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">commit feat: campaign plays media; run_tests 31/31; screenshots production/qa/evidence/M1-11_*.png; perf render_m110_m111.json</div></li>
@@ -177,6 +176,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-67">M1-67</a> Restore the second M1-63 explainer sample required by the test gate <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">sci_proton_flux_chart rendered through build.py and registered; test_explainers.gd PASS (41 checks, 0 failures). Ramim: the explainer suite…</div></li>
 <li><a class="id" href="#M4-02">M4-02</a> Fill the CS-18 lamp tick and CS-15 Dhaka bed with the M3-99 effects <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">CS-18: lamp tick installed (pending key removed), master recomposed and OGV re-encoded via heavy.py/godot_gated; tick onset 3.8045 s master…</div></li>
 <li><a class="id" href="#M4-03">M4-03</a> Draw the chosen D13 dedication on CS-18&#x27;s closing black (two seconds from 7.0 s) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">run_tests.sh 43/43 suites passed (production/qa/evidence/M4-03_tests.txt); new suite game/tools/test_cutscene_choice_card.gd 47/47 plays th…</div></li>
+<li><a class="id" href="#M1-76">M1-76</a> Use supported room shadows in the Compatibility renderer <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Fix round completed: retained active-renderer CubeMap/dual-paraboloid runtime fix. Minimal cross-path edits in game/tools/test_room_present…</div></li>
 </ul></details>
 </div>
 <div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">4 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">32 todo</span></div><div class="bar"><i style="width:0%"></i></div>
@@ -5936,15 +5936,15 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Use supported room shadows in the Compatibility renderer",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-codex",
    "deps": [],
    "paths": [
     "game/scripts/world/room_presentation.gd"
    ],
    "refs": [],
    "note": "Filed by Tanvir/codex on 2026-11-06.",
-   "evidence": "",
+   "evidence": "Fix round completed: retained active-renderer CubeMap/dual-paraboloid runtime fix. Minimal cross-path edits in game/tools/test_room_presentation.gd and run_tests.sh add automatic Forward+ and Compatibility mode assertions. Required gated runner: 44/44 suites passed (157 checks per renderer in the room suite); capture-harness headless probes 16/16 each. Test proof: production/qa/evidence/M1-76_tests.txt; intentional old-bug rejection: M1-76_regression_check.txt. [M1-76 capture]Forward+: M1-76_capture.sh desktop runner (OS user: sadmansakib); first PNG 2026-11-06T04:34:44.085455+00:00, report finished 2026-11-06T04:34:46Z; Godot probe character/furniture 411/1170 pixels, saved-PNG recount 410/1178, control drift 0, 18 cache-write errors and 19 total other engine errors. Compatibility: M1-76_capture.sh desktop runner (OS user: sadmansakib); first PNG 2026-11-06T04:34:54.884766+00:00, report finished 2026-11-06T04:34:56Z; Godot probe character/furniture 89/812 pixels, saved-PNG recount 89/812, control drift 0, 0 cache-write errors and 1 total other engine errors. Forward+ 31 and Compatibility 31 checks passed, eight PNGs total, zero unsupported-shadow errors. Required test runner: 44/44 suites passed. Visual review: pending. Details: production/qa/evidence/M1-76_verification.json. [/M1-76 capture] Isolated evidence-rerun checks: M1-76_evidence_refresh_check.txt. M1-76_capture.sh and M1-76_verify.py refresh all capture-derived fields and these records on rerun; visual review is bound to current PNG hashes. Separate cache-write/HUD errors disclosed; Sadman should confirm original Windows Intel Arc appearance. No commit or push.",
    "updated": "2026-11-06",
    "prompt": "M1-65 assisted capture on source 9fd29ef, Windows Intel Arc 130V, Godot 4.7.2, --rendering-method gl_compatibility: entering the Commons emits 560 ERROR records saying dual paraboloid shadow mode is unsupported and CubeMap mode is required. game/scripts/world/room_presentation.gd _build_practicals sets OmniLight3D.SHADOW_DUAL_PARABOLOID unconditionally. Evidence: production/qa/evidence/M1-65_capture.txt and M1-65_08_arrival_walking.png; harness production/qa/playtests/first_impressions/capture_m1_65.gd. Expected: choose a supported shadow mode for Compatibility while preserving the measured Forward+ optimisation and motivated room lighting. Acceptance: opening room in both renderers, no unsupported-shadow errors, verify character/furniture shadows and run_tests.sh. Investigate shader cache write errors separately before attributing them to project code; they may be local environment failures.",
    "reserved_for": "sadman",

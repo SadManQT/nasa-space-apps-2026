@@ -155,6 +155,11 @@ static func selection_frame(parent: Node3D, bounds: AABB, color: Color = Color("
 
 static func _build_practicals(room: Node3D, layout: Dictionary) -> void:
 	var settings: Dictionary = layout.lighting
+	var shadow_mode := OmniLight3D.SHADOW_DUAL_PARABOLOID
+	# Use the active renderer, including command-line overrides and hardware fallbacks.
+	# Compatibility only supports cubemap omni shadows.
+	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
+		shadow_mode = OmniLight3D.SHADOW_CUBE
 	for index in layout.ceiling_strips.size():
 		var at := vector(layout.ceiling_strips[index])
 		# Preserve the four named fixture clusters used by presentation/QA callers.
@@ -166,10 +171,10 @@ static func _build_practicals(room: Node3D, layout: Dictionary) -> void:
 		light.light_energy = float(settings.practical_energy)
 		light.omni_range = float(settings.practical_range_m)
 		light.shadow_enabled = index < int(settings.shadow_lights)
-		# Dual-paraboloid shadows take two passes instead of a cube's six; with the staged cast in
+		# On Forward+, dual-paraboloid shadows take two passes instead of a cube's six; with the cast in
 		# LOC-01 this measured 18.3 -> 16.7 ms p50 (vsync). The light's axis points down so the
 		# paraboloid seam lies in the horizontal plane at fixture height, away from floor shadows.
-		light.omni_shadow_mode = OmniLight3D.SHADOW_DUAL_PARABOLOID
+		light.omni_shadow_mode = shadow_mode
 		light.rotation_degrees.x = -90.0
 		light.light_size = 0.16
 		room.get_node("RoomLighting").add_child(light)

@@ -1,0 +1,10 @@
+Intentional mutation: force dual-paraboloid on every renderer; production source restored in finally.
+ok   tools/test_room_presentation.gd [forward_plus] :: ROOM PRESENTATION RESULT: PASS (157 checks, 0 failures)
+FAIL tools/test_room_presentation.gd [gl_compatibility] :: exit 1 :: ROOM PRESENTATION RESULT: FAIL (157 checks, 16 failures)
+       ERROR: FAIL LOC-01 Practical_0 shadow mode supports gl_compatibility
+       ERROR: FAIL LOC-01 Practical_1 shadow mode supports gl_compatibility
+       ERROR: FAIL LOC-01 Practical_2 shadow mode supports gl_compatibility
+       ERROR: FAIL LOC-01 Practical_3 shadow mode supports gl_compatibility
+       ERROR: FAIL LOC-02 Practical_0 shadow mode supports gl_compatibility
+1/2 suites passed
+M1-76 REGRESSION GUARD RESULT: PASS (old bug rejected; production source restored)
