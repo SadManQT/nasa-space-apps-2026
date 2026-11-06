@@ -229,11 +229,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-77">M1-77</a> Avoid missing fade metadata errors on the first campaign caption <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">2 blocked</span><span class="chip s-todo">25 todo</span></div><div class="bar"><i style="width:0%"></i></div>
-<details open><summary>Working now (3)</summary><ul>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">2 blocked</span><span class="chip s-todo">25 todo</span></div><div class="bar"><i style="width:7%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
 <li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by atik/codex on 2026-11-06</div></li>
-<li><a class="id" href="#M1-78">M1-78</a> Fail the test runner when its class-cache refresh crashes <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by atik/codex on 2026-11-06</div></li>
-<li><a class="id" href="#M1-80">M1-80</a> Fail the test runner when its import refresh crashes <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by atik/codex on 2026-11-06</div></li>
 </ul></details>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M1-49">M1-49</a> Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -267,6 +265,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-71">M1-71</a> Export presets: include the LOLA terrain heightmaps (*.r16) in every build <span class="chip ">any</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-100">M3-100</a> Preload Alo&#x27;s and Tara&#x27;s dated stage models for the garden (M3-99 variants) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-101">M3-101</a> Use the M3-99 narrative props where the Care Round, the mugs beat and the clue scenes place them <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+</ul></details>
+<details><summary>Done (2)</summary><ul>
+<li><a class="id" href="#M1-78">M1-78</a> Fail the test runner when its class-cache refresh crashes <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">production/qa/perf/M1-78_M1-80.md; 7 injected scenarios pass; independent review PASS; real Godot setup and 54/54 suites passed.</div></li>
+<li><a class="id" href="#M1-80">M1-80</a> Fail the test runner when its import refresh crashes <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Duplicate of M1-78, fixed and verified together: production/qa/perf/M1-78_M1-80.md; 7 injected scenarios pass; 54/54 suites passed.</div></li>
 </ul></details>
 </div>
 <div class="panel" data-member="tanvir"><b>Abu Sayem Mohammed Tanvir</b> <span class="id">tanvir</span><div class="meta">QA and playtest lead · 5% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">6 todo</span></div><div class="bar"><i style="width:22%"></i></div>
@@ -5970,7 +5972,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Fail the test runner when its class-cache refresh crashes",
-   "status": "in_progress",
+   "status": "done",
    "owner": "atik/codex",
    "deps": [],
    "paths": [
@@ -5978,7 +5980,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Tanvir/codex on 2026-11-06.",
-   "evidence": "",
+   "evidence": "production/qa/perf/M1-78_M1-80.md; 7 injected scenarios pass; independent review PASS; real Godot setup and 54/54 suites passed.",
    "updated": "2026-11-06",
    "prompt": "M1-65 final baseline, Godot 4.7.2 Windows Git Bash: production/qa/evidence/M1-65_tests_clean.txt records a Segmentation fault at game/tools/run_tests.sh line 17 in the initial --headless --path . --editor --quit command, then the runner proceeds to passing suite lines. The runner uses set -u and does not check this import/editor command status. Do not assume the engine crash root cause; the demonstrated runner defect is that a failed mandatory setup step cannot affect the final result. Expected: fail closed on non-zero cache refresh/import status, emit a readable setup failure and diagnostic output, avoid claiming a green full run from stale imports. Preserve the existing per-suite parse-error/pass-marker checks and timeout behavior. Acceptance: with a small fake GODOT executable that exits non-zero only for the editor/setup invocation but would print a passing marker for suites, run_tests.sh exits non-zero and identifies setup failure; normal successful setup still runs suites. Reproduce actual Windows setup separately and route any engine/import issue to its owner.",
    "reserved_for": "atik",
@@ -6010,7 +6012,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Fail the test runner when its import refresh crashes",
-   "status": "in_progress",
+   "status": "done",
    "owner": "atik/codex",
    "deps": [],
    "paths": [
@@ -6018,7 +6020,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-06.",
-   "evidence": "",
+   "evidence": "Duplicate of M1-78, fixed and verified together: production/qa/perf/M1-78_M1-80.md; 7 injected scenarios pass; 54/54 suites passed.",
    "updated": "2026-11-06",
    "prompt": "Observed during Ramim M1-19 on Godot 4.7.2 Windows: run_tests.sh line 17 editor import refresh segfaulted, yet the script continued and reported the focused outcomes suite 1/1 passed. The first failed refresh and a clean retry are recorded in production/qa/evidence/M1-19_test_results.txt. The runner currently ignores the editor refresh exit because it has set -u without checking this command. Fix only the runner-owned path: if class-cache/import refresh exits nonzero, stop with a nonzero status and print the import diagnostics instead of declaring passing suite totals. Keep normal per-suite parse-error detection and timeouts. Add a small shell regression with an injected GODOT stub whose editor invocation fails while script invocation would report PASS; assert the runner fails before any suite. Verify the normal runner still runs suites and reports actual failures. Do not weaken performance or asset expectations. This does not claim the one import crash is reproducible; the swallowed nonzero status is the deterministic bug.",
    "reserved_for": "atik",

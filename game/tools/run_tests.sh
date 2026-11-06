@@ -14,7 +14,18 @@ GODOT="${GODOT:-/Applications/Godot.app/Contents/MacOS/Godot}"
 [ -x "$GODOT" ] || GODOT="$(command -v godot || command -v godot4 || true)"
 [ -n "$GODOT" ] || { echo "Godot 4.7 not found; set GODOT=/path/to/godot"; exit 2; }
 
-"$GODOT" --headless --path . --editor --quit >/dev/null 2>&1
+# Setup is mandatory: a crash must not let stale imports produce a green run.
+setup_log=$(mktemp) || exit 2
+"$GODOT" --headless --path . --editor --quit >"$setup_log" 2>&1
+setup_rc=$?
+if [ "$setup_rc" -ne 0 ] || grep -qE 'SCRIPT ERROR|Parse Error|Could not find type|Failed to load script' "$setup_log"; then
+  echo "FAIL setup: Godot class-cache/import refresh failed (exit $setup_rc); no suites were run."
+  cat "$setup_log"
+  rm -f "$setup_log"
+  [ "$setup_rc" -ne 0 ] && exit "$setup_rc"
+  exit 1
+fi
+rm -f "$setup_log"
 
 failed=0; count=0
 for t in tools/test_*${1:-}*.gd; do
