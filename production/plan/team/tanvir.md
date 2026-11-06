@@ -1,14 +1,12 @@
-# member4 — QA and playtest lead
+# Tanvir — QA and playtest lead
 
-**Share:** 5% of the team's work · **Board id:** `member4` · Read with [MASTER_PLAN.md](../MASTER_PLAN.md) (your AI reads it; you do not have to).
+**Member:** Abu Sayem Mohammed Tanvir · **GitHub:** `SayemTanvir` · **Share:** 5% of the team's work · **Board id:** `tanvir` · Read with [MASTER_PLAN.md](../MASTER_PLAN.md) (your AI reads it; you do not have to).
 
-You are the QA and playtest lead: you play the game with fresh eyes, run playtests with new players, and turn every problem into a clear task for the right person. Rename this slot to your name the first time (see below).
+You are the QA and playtest lead: you play the game with fresh eyes, run playtests with new players, and turn every problem into a clear task for the right person. Tanvir chose this role on 6 November 2026.
 
-## First time: name this slot
+## Start a session
 
-Type `continue(<your name>)`. Your AI renames this slot to you on the board:
-`python3 production/plan/board.py rename-member member4 <yourname> --name "<Your Full Name>"` (then commit and push `production/plan/`).
-From then on your tasks are assigned to `<yourname>` and you always run `continue(<yourname>)`.
+Type `continue(tanvir)`. Your AI checks existing claims with `python3 production/plan/board.py mine --by "Tanvir/codex"`, then takes ready tasks assigned to `tanvir`.
 
 ## How you work
 

@@ -208,7 +208,7 @@ Shares are measured in effort points on the board (`python3 production/plan/boar
 | **member4** (name it, §12) | 5% | QA and playtest lead | `production/qa/chapters/`, `production/qa/playtests/` | [team/member4.md](team/member4.md) |
 | **member5** (name it, §12) | 5% | Science, story and accessibility reviewer | `production/review/`, `production/qa/act1/`, `production/qa/full_campaign/`, `production/qa/dry_run/` | [team/member5.md](team/member5.md) |
 
-The registered team also lists Abu Sayem Mohammed Tanvir (art direction M1-32 and the rock kit M1-35 are his), Md. Asif Iqbal and Shahariar Rahman Shanto; members 4 and 5 are two of them, named the first time they run `continue(<name>)`.
+Abu Sayem Mohammed Tanvir (`SayemTanvir`) chose the QA and playtest lead slot on 6 Nov 2026; use `continue(tanvir)`. The remaining `member5` reviewer slot is unnamed. The registered team also lists Md. Asif Iqbal and Shahariar Rahman Shanto. Historical art direction M1-32 and the rock kit M1-35 were Tanvir's; current folder ownership follows the table above.
 
 **Why this split has the fewest merge conflicts:** each folder has exactly one owner, so two people never edit the same file. Chapters move *through* owners (assets → rooms → puzzles → missions → QA) instead of one person editing everything for a chapter. `board.py check` fails if two members' open tasks own the same folder. Shared files are handled safely: the board (one field per line, merges itself), the AI log and the asset registry (`merge=union` in `.gitattributes`: both sides' new rows are kept), and the handbook (only Sadman edits it; everyone else puts status in their task evidence). When you need a change in someone else's folder, you do not make it — you file a task for them with `board.py add`.
 
@@ -220,7 +220,7 @@ The registered team also lists Abu Sayem Mohammed Tanvir (art direction M1-32 an
 - Sadman: rooms M1-06, terrain M1-34, Claude Motion pipeline M1-63, Chapter 1 assets M1-07, messages M1-57, Chapter 2–4 assets.
 - Ramim: P-01 panel M1-08, onboarding M1-18, Mission Table M1-55, hint player M1-64, messages system M1-56, endings and debrief M1-19, goal text M1-62.
 - Atik: care round M1-49, loading M1-53, save slots M3-71, then terrain streaming M1-36 (after M1-34) and EVA M3-61.
-- member4: first-impressions playtest M1-65. member5: the challenge statement M0-12, then the science fact-check M3-75 (after M1-57).
+- Tanvir: first-impressions playtest M1-65. member5: the challenge statement M0-12, then the science fact-check M3-75 (after M1-57).
 
 **Per-chapter flow:** assets (Sadman) → rooms (Sadman) → puzzle panels (Ramim; can start on greybox) → missions and wiring (Atik) → messages (Sadman / Ramim) and explainers (Sadman) → chapter QA (member4 or member5) → gate sign-off (Sadman). The board encodes every one of these as `deps`; `board.py take` only hands out ready tasks.
 

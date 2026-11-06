@@ -1023,7 +1023,7 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play the release build from title to the CH02 readiness point twice (one Golden Bloom attempt, one deliberate Alo Lost then retry), with\nkeyboard and with a controller. Capture a screenshot per scene into production/qa/evidence/ch01/. For every defect, add a new board task\n(next free M1-3x id, tool by type, prompt with exact repro and expected result, dep none) via editing production/plan/tasks.json, then run\n`python3 production/plan/board.py check`. Check canon on screen: no Bangla text, no plant faces, no NASA logos, science rules.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 items 1–3 and 5 (no developer text, clear centre, teaching coverage, five-second test at 10 checkpoints) and log first-time play times per mission.\n\nAlso check the Chapter 1 science explainers (M1-60) play from their data cards and clues.",
-   "reserved_for": "member4",
+   "reserved_for": "tanvir",
    "effort": 2
   },
   {
@@ -1045,7 +1045,7 @@
    "evidence": "",
    "updated": "2026-11-03",
    "prompt": "Why: Validity scores 'usability tested, accessible beyond experts, with clear performance metrics'.\nDo: run the build with at least five first-time players in the target range (junior learners; minors only with a guardian present and\nconsent; record no names, faces or voices of anyone under 18). Measure: time to first objective, P-01 and P-02 attempts, ending reached,\nwhich numbers they could explain afterwards (one predict/explain question each), confusion points. Write production/qa/playtest-<date>.md.",
-   "reserved_for": "member4",
+   "reserved_for": "tanvir",
    "effort": 2
   },
   {
@@ -1888,7 +1888,7 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play Chapter 2 from a Chapter 1 save to the Chapter 3 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch02/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6.",
-   "reserved_for": "member4",
+   "reserved_for": "tanvir",
    "effort": 2
   },
   {
@@ -2413,7 +2413,7 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play Chapter 4 from a Chapter 3 save to the Chapter 5 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch04/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6.",
-   "reserved_for": "member4",
+   "reserved_for": "tanvir",
    "effort": 2
   },
   {
@@ -2938,7 +2938,7 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play Chapter 6 from a Chapter 5 save to the Chapter 7 boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch06/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6.",
-   "reserved_for": "member4",
+   "reserved_for": "tanvir",
    "effort": 2
   },
   {
@@ -3467,7 +3467,7 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Play Chapter 8 from a Chapter 7 save to the Chapter campaign end boundary with keyboard and controller;\nscreenshot every scene to production/qa/evidence/ch08/; check canon and science rules on screen; add each defect as a new board\ntask (prompt with exact repro), then `python3 production/plan/board.py check`.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); verify every §2.9 join of this chapter, including the join into the next chapter, actually plays; attach a screenshot for each row marked Fix. A missing join is a defect.\n\nAlso verify game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §8 for this chapter: no developer text, the chapter's messages for every join, teaching coverage, and first-time play time against §6.",
-   "reserved_for": "member4",
+   "reserved_for": "tanvir",
    "effort": 2
   },
   {
@@ -5239,7 +5239,7 @@
    "evidence": "",
    "updated": "2026-11-05",
    "prompt": "Goal: fresh eyes catch what the team no longer sees (doc 25 started exactly like this).\nDo: pull main, open the game (README 'Run the game'), start a New campaign and play 20-30 minutes of Chapter 1 without help; note every moment you did not know what to do or why, every bit of text you skipped, anything that looked broken or ugly, and what felt good; take a screenshot of each. Then ask 1-2 friends who have never seen the game to do the same while you watch silently. Write production/qa/playtests/first_impressions/report.md (moment, screenshot, what the player expected, severity) and file each real problem as a board task for the owner of that area (MASTER_PLAN.md §7).\nAcceptance: report.md with at least 10 observations and screenshots; every problem is a task with an owner.",
-   "reserved_for": "member4",
+   "reserved_for": "tanvir",
    "effort": 2
   },
   {
@@ -5943,12 +5943,12 @@
    ]
   },
   {
-   "id": "member4",
-   "name": "Fourth member (rename when they say who they are)",
-   "github": "",
+   "id": "tanvir",
+   "name": "Abu Sayem Mohammed Tanvir",
+   "github": "SayemTanvir",
    "share": 5,
    "role": "QA and playtest lead",
-   "card": "production/plan/team/member4.md",
+   "card": "production/plan/team/tanvir.md",
    "areas": [
     "production/qa/chapters/",
     "production/qa/playtests/"
