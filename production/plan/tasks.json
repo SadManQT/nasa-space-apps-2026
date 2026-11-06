@@ -5608,15 +5608,15 @@
    "priority": "P2",
    "tool": "claude",
    "title": "Commons wall sign hidden behind the Earth screen",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-claude2",
    "deps": [],
    "paths": [
     "game/resources/campaign/rooms/"
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-06.",
-   "evidence": "",
+   "evidence": "run_tests.sh 48/48 suites passed (habitat_rooms 342 checks; its new reads_from sightline/legibility and kit-run-vs-display checks fail on the old layout: blocked by earth_screen, 8.9 px em, tray across the screen). Sign on navy commons_sign_plate right of the Earth screen, 0.2 m letters, 17 px em at 1080p from commons_player; cable tray raised to y 2.46 clear of the screen. M1-79_capture.sh -> SIGN PROBE RESULT: PASS, letters render 17-21% of the text box in all six frames: production/qa/evidence/M1-79_{player,player_sign_x2,anchor_eye,display_wall,ch06_player,ch07_pin_board}.png, M1-79_capture_output.txt",
    "updated": "2026-11-06",
    "prompt": "In the kit-built commons (game/resources/campaign/rooms/LOC-01.json) the sign 'AURORA / COMMONS' is at [0, 2.18, -5.8], behind the earth_screen fixture (centre [0, 1.7, -5.7], 3 x 1.5 m), so it never shows (see production/qa/evidence/M1-07_earth_desk_wide.png). Found while landing M1-07. Move the sign above the screen (top edge 2.45 m) or onto another wall. Acceptance: the sign reads from the commons_player anchor; screenshot in production/qa/evidence/; run_tests.sh green.",
    "reserved_for": "sadman",

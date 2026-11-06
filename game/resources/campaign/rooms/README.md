@@ -8,7 +8,7 @@ supersedes the older toon-room prompt: kit and equipment retain PBR materials;
 
 | Location | Footprint and assembly | Runtime scene |
 |---|---|---|
-| LOC-01 | 22 × 12 m; central table, four seats/mugs, west lockers, east galley, north Earth screen, south garden view, storage drawer | `commons.tscn` |
+| LOC-01 | 22 × 12 m; central table, four seats/mugs, west lockers, east galley, north Earth screen with the AURORA / COMMONS name plate to its right (cable tray along the ceiling line, clear of the screen), south garden view, storage drawer | `commons.tscn` |
 | LOC-02 | Two adjacent 6 × 5 m work bays plus a 3 m shared service aisle (12 × 8 m overall); glass divider/protected trunk, power west/air east; three kit corridor segments behind the Commons portal | `service_rooms.tscn` |
 | LOC-03 | 12 × 8 m; Tara reference bay, care bench/glovebox, seed archive; Alo cassette behind south pressure glazing (seedling in view at the glass front, chamber unit behind it, magenta-white growth lamps) and a separate shutter | `garden.tscn` |
 | LOC-04 | 8 × 6 m; five seats at 1.04 m pitch (≈1.5 m aisles at both ends), perimeter water panels, four indexed bundle rails, seed latch, roll-call board, hatch flush on the west wall | `safe_room.tscn` |
@@ -41,8 +41,12 @@ other fixtures keep the kit paint (texture-driven roughness, as on the walls),
 mapped triplanar at the kit walls' texel density. `local_lights` lists unshadowed
 practicals inside an enclosure (`id`, `position`, `color`, `energy`, `range_m`). `signs[].yaw` turns a sign;
 every sign and door destination plate is single-sided, so a sign authored the
-wrong way disappears instead of reading mirrored. `review_views` are the
-evidence camera positions.
+wrong way disappears instead of reading mirrored. `signs[].font_size` (default 40; letters are
+`font_size` × `size` metres) and `signs[].reads_from` (an anchor id): such a sign must face that anchor, show
+every corner of its text to a 1.6 m eye there past furniture, fixtures, kit runs and every staging layer's
+fixtures and obstacles, and cover at least 14 px of em height in a 1080-line FollowCamera frame (M1-79: the
+commons name once hung behind the Earth screen in 0.1 m letters). No kit run may cross a display fixture.
+`review_views` are the evidence camera positions.
 
 The story joins retain their physical carriers: Commons emergency card, shelter
 roll-call board, seed packet/drawer, paired garden bays, Mission Table and shelter
@@ -53,13 +57,16 @@ dialogue, resource arithmetic, sounds and scene-exit receipts retain their owner
 
 Run `game/tools/run_tests.sh habitat_rooms` for player traversal, solid walls and
 furniture, open/closed door rays, navigation paths, the doc 09 clearances (1 m
-reachable approach at every door), signs readable from the walkable side, props
+reachable approach at every door), signs readable from the walkable side (and from their
+`reads_from` anchor), kit runs clear of displays, props
 resting on the deck or a surface inside the footprint, collision under every
 large floor-standing prop, source assembly and counts.
 Run `production/qa/evidence/M1-06_capture.sh` (windowed; the night-shift Claude
 session can open a window) for fresh room/player/chamber PNGs and windowed frame
 timings in `M1-06_runtime.txt`. A blank (shader-compile) frame is retried and a
 still-blank capture fails the run.
+`production/qa/evidence/M1-79_capture.sh` (windowed) re-takes the commons name plate from the
+commons_player anchor in Chapters 1, 6 and 7 and reports how much of its text box rendered as letters.
 
 # Chapter staging (M3-6R, first used for Chapter 6)
 

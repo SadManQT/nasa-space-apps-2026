@@ -4,8 +4,13 @@ extends SceneTree
 
 const Contract = preload("res://scripts/world/room_contract.gd")
 const Presentation = preload("res://scripts/world/room_presentation.gd")
+const Kit = preload("res://assets/environment/kit/habitat_kit.gd")
 const Player = preload("res://scenes/player/player.tscn")
 const SCENES := ["commons", "service_rooms", "garden", "safe_room"]
+# A sign that names a "reads_from" anchor is read from a standing eye there; its em height must cover at least this
+# many pixels of a 1080-line frame through the gameplay FollowCamera's lens (14 px em = 10 px Open Sans capitals).
+const SIGN_EYE_HEIGHT_M := 1.6
+const SIGN_MIN_EM_PX_1080 := 14.0
 var checks := 0
 var failures := 0
 var report: Array[String] = []
@@ -79,6 +84,8 @@ func _run() -> void:
 			var edge: Vector3 = side * extent + Vector3(0, 2.5, 0)
 			_check(not _ray(edge - side * 0.4, edge + side * 0.4).is_empty(), id + " perimeter remains solid " + str(side))
 		_check_signs(room, map)
+		_check_sign_sightlines(room, layout, player.follow_camera.camera.fov)
+		_check_kit_runs_clear_displays(room.room_id, layout)
 		_check_prop_support(room, layout)
 		_check_door_approaches(room, map, spawn)
 		if id == "LOC-01":
@@ -126,6 +133,91 @@ func _check_signs(room: CampaignRoom, map: RID) -> void:
 			front = minf(front, NavigationServer3D.map_get_closest_point(map, probe).distance_to(probe))
 		var back := NavigationServer3D.map_get_closest_point(map, at - facing).distance_to(at - facing)
 		_check(front < 0.35 and front < back and not label.double_sided, room.room_id + " sign reads from the walkable side, never mirrored: " + label.text)
+
+## M1-79: a sign that names the anchor it is read from ("reads_from") faces that anchor, a standing eye there sees
+## every corner of its text past the furniture, fixtures, kit runs and every chapter's staged fixtures and
+## obstacles, and its letters are large enough to read through the FollowCamera lens at 1080p. The commons name
+## once sat 0.16 m behind the Earth screen, and its 0.1 m letters would not have read across the room anyway.
+func _check_sign_sightlines(room: CampaignRoom, layout: Dictionary, fov_degrees: float) -> void:
+	var names := PackedStringArray()
+	var boxes: Array[AABB] = []
+	for node in room.visual_root.get_children():
+		if node is Label3D or not node is Node3D or not (node as Node3D).visible or String(node.name) == "HabitatKit":
+			continue
+		var bounds := _mesh_bounds(room, node)
+		if bounds.size != Vector3.ZERO:
+			names.append(String(node.name))
+			boxes.append(bounds)
+	for run in layout.get("kit_runs", []):
+		for box in _kit_run_boxes(run):
+			names.append(String(run.piece))
+			boxes.append(box)
+	for stage in layout.get("staging", []):
+		for spec in stage.get("fixtures", []) + stage.get("obstacles", []):
+			var size := Presentation.vector(spec.size)
+			names.append(String(stage.id) + "/" + String(spec.id))
+			boxes.append(AABB(Presentation.vector(spec.position) - size * 0.5, size))
+	var lens := 1080.0 / (2.0 * tan(deg_to_rad(fov_degrees) * 0.5))
+	for spec in layout.get("signs", []):
+		if not spec.has("reads_from"):
+			continue
+		var label: Label3D = null
+		for node in room.visual_root.get_children():
+			var candidate := node as Label3D
+			if candidate != null and candidate.text == String(spec.text) and candidate.position.is_equal_approx(Presentation.vector(spec.position)):
+				label = candidate
+		var known: bool = layout.anchors.has(spec.reads_from)
+		_check(label != null and known, room.room_id + " sign and its reads_from anchor exist: " + String(spec.text))
+		if label == null or not known:
+			continue
+		var eye := Presentation.vector(layout.anchors[spec.reads_from]) + Vector3.UP * SIGN_EYE_HEIGHT_M
+		var xf: Transform3D = room.global_transform.affine_inverse() * label.global_transform
+		_check(xf.basis.z.dot(eye - xf.origin) > 0.0, room.room_id + " sign faces " + String(spec.reads_from) + ": " + label.text)
+		var text := label.get_aabb()
+		var blocked := PackedStringArray()
+		for corner in [text.get_center(), text.position, text.position + Vector3(text.size.x, 0, 0), text.position + Vector3(0, text.size.y, 0), text.end]:
+			var point: Vector3 = xf * corner
+			var end := point + (eye - point).normalized() * 0.01  # stop short of the sign's own backing plate
+			for index in boxes.size():
+				if boxes[index].intersects_segment(eye, end) and not blocked.has(names[index]):
+					blocked.append(names[index])
+		_check(blocked.is_empty(), room.room_id + " sign is in clear sight of " + String(spec.reads_from) + ": " + label.text + " (blocked by " + ", ".join(blocked) + ")")
+		var em_px := float(label.font_size) * label.pixel_size / eye.distance_to(xf.origin) * lens
+		_check(em_px >= SIGN_MIN_EM_PX_1080, room.room_id + " sign letters read from %s (%.1f px em at 1080p, need %.0f): %s" % [spec.reads_from, em_px, SIGN_MIN_EM_PX_1080, label.text])
+
+## M1-79: no kit run crosses a display, in the base layout or any chapter staging. The commons cable tray once ran
+## across the top 0.2 m of the Earth screen and cut through the caller's picture.
+func _check_kit_runs_clear_displays(room_id: String, layout: Dictionary) -> void:
+	var fixtures: Array = layout.get("fixtures", []).duplicate()
+	for stage in layout.get("staging", []):
+		fixtures.append_array(stage.get("fixtures", []))
+	for fixture in fixtures:
+		if String(fixture.get("finish", "")) != "screen":
+			continue
+		var size := Presentation.vector(fixture.size)
+		var display := AABB(Presentation.vector(fixture.position) - size * 0.5, size)
+		for run in layout.get("kit_runs", []):
+			var crossing := false
+			for box in _kit_run_boxes(run):
+				crossing = crossing or box.intersects(display)
+			_check(not crossing, room_id + " kit run clears the display: " + String(run.piece) + " / " + String(fixture.id))
+
+## The room-space boxes of one kit run's pieces, from the catalogue's measured bounds, with the mount offset and
+## yaw that HabitatRoomBuilder places them with.
+func _kit_run_boxes(run: Dictionary) -> Array[AABB]:
+	var id := String(run.piece)
+	var entry := Kit.piece(id)
+	var low := Presentation.vector(entry.bounds_min_m)
+	var size := Presentation.vector(entry.size_m)
+	var basis := Basis(Vector3.UP, deg_to_rad(float(run.get("yaw", 0))))
+	var boxes: Array[AABB] = []
+	for index in int(run.count):
+		var at := Presentation.vector(run.position) + Presentation.vector(run.step) * index + Vector3(0, Kit.mount_y(id), 0)
+		var box := AABB(at + basis * low, Vector3.ZERO)
+		for corner in 8:
+			box = box.expand(at + basis * (low + size * Vector3(corner & 1, (corner >> 1) & 1, (corner >> 2) & 1)))
+		boxes.append(box)
+	return boxes
 
 ## No floating, sunken or wall-piercing props: each authored prop's real mesh bounds rest on the deck
 ## or on the top of another authored surface (fixture or prop) and stay inside the room footprint.

@@ -336,6 +336,22 @@
    "finish": "screen"
   },
   {
+   "id": "commons_sign_plate",
+   "position": [
+    2.77,
+    2.31,
+    -5.985
+   ],
+   "size": [
+    2.25,
+    0.28,
+    0.03
+   ],
+   "color": "#1F2A44",
+   "transparent": false,
+   "finish": "satin"
+  },
+  {
    "id": "charter",
    "position": [
     -4,
@@ -668,7 +684,7 @@
    "piece": "EN_Kit_CableRun",
    "position": [
     -8,
-    2.25,
+    2.46,
     -5.7
    ],
    "step": [
@@ -705,10 +721,12 @@
   {
    "text": "AURORA / COMMONS",
    "position": [
-    0,
-    2.18,
-    -5.8
-   ]
+    2.77,
+    2.315,
+    -5.966
+   ],
+   "font_size": 80,
+   "reads_from": "commons_player"
   },
   {
    "text": "CREW STORAGE",
