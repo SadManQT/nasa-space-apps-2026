@@ -264,3 +264,37 @@ Cycles previews (the sheets `production/concept/ch05_assets/M3-5A_*_v1.png`, all
 Port round, 6 Nov (same reviewer): the parked work was ported onto current main and the eight Godot captures were re-taken from it (`production/qa/evidence/M3-5A_godot_*.png`, windowed, toon materials): same content and verdicts as above. The marker-tape shot is re-centred with a shorter stand-in cable, and the capture now retakes a frame that comes back blank.
 
 CH_Ferreira_Duty (screen portrait, no 3D body): Sadman picked take A in chat on 6 Nov 2026 ("Take A"; sheet `production/concept/ch05_assets/M3-5A_ferreira_duty_v1.png`), installed unchanged as `game/assets/ui/portraits/CH_Ferreira_screen.png`. Checked on landing: her v8 face, pixie cut greying at the temples and eyebrow scar; charcoal fleece, one gear-wheel patch, field watch; no flags, badges, lettering or logos; the screens behind her show only a grey Moon disc and plain graphs. In the game: `production/qa/evidence/M1-07_earth_desk_ferreira.png`. Registry: `production/manifest/screen_assets.csv` (2D assets have no GLB gate).
+
+## M3-3A Chapter 3 assets review — 6 November 2026, Sadman/night-claude2 (Claude Opus 5.5)
+
+Inspected: the Cycles previews on [M3-3A_annex_contact.png](M3-3A_annex_contact.png) and [M3-3A_ch03_assets_contact.png](M3-3A_ch03_assets_contact.png) and the Godot captures `production/qa/evidence/M3-3A_*.png` (pieces stage, corridor with the displaced cover hood, open hatch lit by a hand light, cold annex by headlamp, five helmets, both racks and the rack close-up, the petal flat and mounted), against ART_BIBLE.md §2–§3, the 5 Nov photoreal-environment decision, the approved source assets (PR_Helmet, PL_Alo_Bloom, PL_Tara_Bloom, PL_ZeroSeedlingTray) and the canon counts (7 purple + 5 green; planting day has nothing sprouted). No text or logos on any surface, no NASA marks, no plant faces, metre scale, pivots at the base. Defects found and fixed this round: the planting-day rack exported no cassettes in a render run and then kept the bloom models' leaves (now clean procedural cassettes); the service cover was a 4 cm plate pierced by the leaf's wheel and handles in its rest pose (now a 0.30 m hood standing on the deck); every 1 m ceiling tile carried a fixture coplanar with its face, which z-fought into rows of black dashes, and the ribs sat inside the panel (now plain panels with visible ribs plus a separate fixture tile every 3 m); the frost was ±45 % camouflage blotches (now an even crystalline film); the petal's apex was cut square and its veins read as wood grain; a 2.4 cm notch at the corner piece's rib; the grating's hard bar edges.
+
+Second opinion: Codex (`gpt-6-astra`, high), shown the two contact sheets and five captures: 12 PASS, 3 FIX, all three acted on: the dark open-hatch shot did not show the ladder (hand light added), the rack's stem colours were not readable at rack distance (close-up capture added), and the grating shimmered (texture softened; project anti-aliasing filed as M3-100).
+
+| Asset | Verdict | Notes |
+|---|---|---|
+| EN_ZeroAnnex_FloorHatch_LOD0 | ✅ PASS | 2 x 2 m deck module: round 0.9 m coaming with orange seat ring, N.R. leaf with dogging wheel, two handles, camera port and sliding shutter, blank nameplate slot; the 1.3 x 0.30 m service cover hood hides the whole hatch at rest and sits 1.2 m aside on the deck in the quake pose; leaf open 100 deg clears the opening (Cycles and Godot) |
+| EN_ZeroAnnex_FloorHatch_LOD1 | ✅ PASS | Compatibility LOD: same silhouette, cover hood and moving parts, fewer segments, rivets dropped, 512 px textures |
+| EN_ZeroAnnex_Ladder_LOD0 | ✅ PASS | two rails 0.5 m apart, rungs every 0.3 m, wall brackets; reaches the corridor deck 3.0 m up, lit in the open-hatch capture |
+| EN_ZeroAnnex_Ladder_LOD1 | ✅ PASS | Compatibility LOD: same silhouette, fewer segments |
+| EN_ZeroAnnex_Wall_LOD0 | ✅ PASS | olive-grey 2034 panel under an even hoar-frost film (no blotches, no haze), stiffener rib, dark skirting, conduit, rivets |
+| EN_ZeroAnnex_Wall_LOD1 | ✅ PASS | Compatibility LOD: flat panel, same colours and frost, rivets dropped |
+| EN_ZeroAnnex_Wall_Corner_LOD0 | ✅ PASS | inside corner, ribs and skirting now meet at the corner (the 2.4 cm notch is closed) |
+| EN_ZeroAnnex_Wall_Corner_LOD1 | ✅ PASS | Compatibility LOD: same geometry, 512 px textures |
+| EN_ZeroAnnex_Floor_LOD0 | ✅ PASS | open steel grating over a dark pit, bars with rounded shoulders; still shimmers without project anti-aliasing (board M3-100) |
+| EN_ZeroAnnex_Floor_LOD1 | ✅ PASS | Compatibility LOD: same geometry, 512 px textures |
+| EN_ZeroAnnex_Ceiling_LOD0 | ✅ PASS | frosted panel with five visible stiffener ribs hanging below the face, frosted face meets the 2.6 m wall tops; plain (no fixture) |
+| EN_ZeroAnnex_Ceiling_LOD1 | ✅ PASS | Compatibility LOD: same geometry, 512 px textures |
+| EN_ZeroAnnex_CeilingLamp_LOD0 | ✅ PASS | the same panel with one dead 0.9 m linear luminaire (dark housing, DeadLamp diffuser slot, grey end caps); eight in the 10 x 6 m sample, no z-fighting |
+| EN_ZeroAnnex_CeilingLamp_LOD1 | ✅ PASS | Compatibility LOD: same geometry, 512 px textures |
+| EN_ZeroAnnex_TrayBench_LOD0 | ✅ PASS | frosted bench top at 0.9 m with the two PL_ZeroSeedlingTray sockets filled in the sample (young unflowered seedlings only), dead grow-lamp bar, blank label slot |
+| EN_ZeroAnnex_TrayBench_LOD1 | ✅ PASS | Compatibility LOD: same geometry, 512 px textures |
+| EN_ZeroAnnex_ChartArchive_LOD0 | ✅ PASS | drawer cabinet with the sloped growth-chart board (blank Document_Chart), route sheet under the hinged clear SealedCover (opens 110 deg), map pouch, photo frame and 2034 service tag slots; nothing written on any surface |
+| EN_ZeroAnnex_ChartArchive_LOD1 | ✅ PASS | Compatibility LOD: same silhouette and parts, fewer segments |
+| EN_ZeroAnnex_SupportStation_LOD0 | ✅ PASS | navy warm-side cart, sloped console with blank Screen and Screen_Gauge slots, two radio handsets, tool-tag hook and hand-light bracket sockets, blank status plate |
+| EN_ZeroAnnex_SupportStation_LOD1 | ✅ PASS | Compatibility LOD: same silhouette, fewer segments |
+| PL_Descendants | ✅ PASS | 21 Oct rack: 7 purple-stem and 5 green-stem plants instanced from the approved Alo and Tara bloom models (four-petal yellow crosses, lobed leaves, no faces), grow lamp, 12 blank label plates, blank dedication card |
+| PL_Descendants_Planted | ✅ PASS | 21 May rack: twelve clean procedural cassettes (the bloom models' footprint and rim) with levelled soil and nothing sprouted, labels and dedication card slots |
+| PR_Helmet_Roles | ✅ PASS | approved PR_Helmet with a separate gold visor (lowers 78 deg), crown closed under it, role stripe down the back of the shell in each cadet's colour, Bangladesh flag decal on the wearer's left, Aurora patch on the right; no text, no agency marks |
+| PR_PressedPetal | ✅ PASS | one dried Brassica rapa petal (obovate, rounded apex, paler claw, veins fanning from the claw) on a blank archival card in a clear sleeve, blank date label slot |
+| PR_PressedPetal_Mounted | ✅ PASS | the same sleeve standing in a navy board clip with steel spring clips |

@@ -1,0 +1,127 @@
+{
+ "task": "M3-3A",
+ "source": "game/assets/props/PR_Helmet/PR_Helmet.glb (reuse_props: space_helmet, visually approved)",
+ "stripe_material": "RoleStripe",
+ "visor_node": "Visor",
+ "visor_closed_rotation_deg_x": 78.0,
+ "patches": {
+  "left_sleeve_side": "PatchFlag",
+  "right_side": "PatchAurora"
+ },
+ "sockets": {
+  "Socket_Head": "the head centre when equipped (the visor hinge point)",
+  "Socket_Lamp": "a helmet lamp mount above the brow"
+ },
+ "interior_clearance_m": {
+  "width": 0.368,
+  "depth": 0.261,
+  "height": 0.371
+ },
+ "states": {
+  "stored": "helmet on its base, visor open (the GLB rest pose)",
+  "equipped": "parented to the Head bone with equip_offset_from_head_bone_m and scale",
+  "visor": "rotate the Visor child about +X by visor_closed_rotation_deg_x times the closed fraction"
+ },
+ "roles": {
+  "kai": {
+   "display": "Kai",
+   "role_colour": "orange",
+   "stripe_rgb": [
+    0.949,
+    0.42,
+    0.129
+   ],
+   "scale": 1.28,
+   "equip_offset_from_head_bone_m": [
+    0.0,
+    -0.173,
+    0.021
+   ],
+   "head_clearance_m": {
+    "width": 0.198,
+    "depth": 0.043,
+    "height": 0.152
+   }
+  },
+  "amara": {
+   "display": "Amara",
+   "role_colour": "cyan",
+   "stripe_rgb": [
+    0.102,
+    0.737,
+    0.824
+   ],
+   "scale": 1.49,
+   "equip_offset_from_head_bone_m": [
+    0.0,
+    -0.124,
+    -0.038
+   ],
+   "head_clearance_m": {
+    "width": 0.327,
+    "depth": 0.04,
+    "height": 0.14
+   }
+  },
+  "mei": {
+   "display": "Mei",
+   "role_colour": "green",
+   "stripe_rgb": [
+    0.231,
+    0.682,
+    0.337
+   ],
+   "scale": 1.61,
+   "equip_offset_from_head_bone_m": [
+    0.0,
+    -0.124,
+    -0.042
+   ],
+   "head_clearance_m": {
+    "width": 0.313,
+    "depth": 0.041,
+    "height": 0.251
+   }
+  },
+  "rafi": {
+   "display": "Rafi",
+   "role_colour": "purple",
+   "stripe_rgb": [
+    0.541,
+    0.286,
+    0.741
+   ],
+   "scale": 1.63,
+   "equip_offset_from_head_bone_m": [
+    0.0,
+    -0.145,
+    -0.03
+   ],
+   "head_clearance_m": {
+    "width": 0.243,
+    "depth": 0.041,
+    "height": 0.3
+   }
+  },
+  "ferreira": {
+   "display": "Ferreira",
+   "role_colour": "gold",
+   "stripe_rgb": [
+    0.949,
+    0.76,
+    0.188
+   ],
+   "scale": 1.16,
+   "equip_offset_from_head_bone_m": [
+    0.0,
+    -0.135,
+    0.001
+   ],
+   "head_clearance_m": {
+    "width": 0.202,
+    "depth": 0.04,
+    "height": 0.119
+   }
+  }
+ }
+}

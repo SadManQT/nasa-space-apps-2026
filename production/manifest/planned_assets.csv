@@ -4,7 +4,6 @@ EN_ServiceRooms,environment,Blender modular + reused props,EX-CH01-S07,power roo
 EN_Garden,environment,Blender modular + new props,EX-CH01-S04,"growth chambers, Tara bay, benches, glovebox, lineage board (LOC-03)"
 EN_SafeRoom,environment,Blender modular + reused props,EX-CH01-S08,"5 seats, water wall, bundle slots, hatch (LOC-04)"
 EN_Garage,environment,Blender + VH_Rover,EX-CH04-S02,rover bay and departure boards (LOC-08)
-EN_ZeroAnnex,environment,Blender + PL_ZeroSeedlingTray + PR_AnnexDrum,EX-CH03-S06,2034 annex with N.R. hatch and viewing port (LOC-07)
 EN_Exterior,environment,Blender terrain from NASA LOLA DEM + EN_SolarMast,EX-CH01-S09,"mast courtyard, horizon, landing pad (LOC-06)"
 EN_ColdTrap,environment,Blender terrain,EX-CH04-S03,ridge road with 3 beacons and vault shelf (LOC-09/10)
 EN_RelayRoad,environment,Blender terrain + PR_SurveyBeacon,EX-CH08-S02,five short road segments; repeaters R1-R3 (LOC-11)
@@ -12,6 +11,3 @@ EN_MalapertSummit,environment,Blender terrain + PR_MalapertRelay,EX-CH08-S06,sum
 EN_NoorRooftop,environment,Generated cutscene plate,EX-CH08-S10,Dhaka rooftop at night (screen scene)
 CH_Rao,character,Portrait/bust (screen only),EX-CH01-S01,headset; Earth desk
 CH_Noor,character,Portraits: 2034 archive + present + rooftop,EX-CH05-S10,older Bangladeshi botanist
-PR_Helmet_Roles,prop,Blender recolour of PR_Helmet,EX-CH03-S07,role-colour stripe per cadet
-PL_Descendants,plant,Blender instancing of PL_Alo_* and PL_Tara_*,EX-CH03-S11,12-position tray; CH04 7 purple + 5 green
-PR_PressedPetal,prop,Blender (small),EX-CH03-S10,petal in dated sleeve

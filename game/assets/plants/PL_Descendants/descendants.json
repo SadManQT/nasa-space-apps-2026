@@ -1,0 +1,128 @@
+{
+ "task": "M3-3A",
+ "scene": "EX-CH04-S01 sample: seven purple stems and five green in this authored observation (not a ratio claim)",
+ "lineage": "Alo x Tara (founders); descendants carry the lineage label, the original Alo is never revived",
+ "counts": {
+  "purple": 7,
+  "green": 5,
+  "positions": 12
+ },
+ "label_material": "Label",
+ "dedication_material": "Document_Dedication",
+ "dedication_options": [
+  "Light and Star",
+  "For Alo and Tara",
+  "The Next Small Thing"
+ ],
+ "planted_variant": "res://assets/plants/PL_Descendants_Planted/PL_Descendants_Planted.glb",
+ "positions": [
+  {
+   "position": 1,
+   "node": "Pos_01",
+   "stem": "purple",
+   "line": "Alo-type descendant",
+   "yaw_degrees": 151,
+   "scale": 0.956,
+   "lean_degrees": 2.1
+  },
+  {
+   "position": 2,
+   "node": "Pos_02",
+   "stem": "green",
+   "line": "Tara-type descendant",
+   "yaw_degrees": 285,
+   "scale": 0.927,
+   "lean_degrees": 2.9
+  },
+  {
+   "position": 3,
+   "node": "Pos_03",
+   "stem": "green",
+   "line": "Tara-type descendant",
+   "yaw_degrees": 344,
+   "scale": 0.951,
+   "lean_degrees": 0.2
+  },
+  {
+   "position": 4,
+   "node": "Pos_04",
+   "stem": "purple",
+   "line": "Alo-type descendant",
+   "yaw_degrees": 87,
+   "scale": 0.974,
+   "lean_degrees": 1.1
+  },
+  {
+   "position": 5,
+   "node": "Pos_05",
+   "stem": "green",
+   "line": "Tara-type descendant",
+   "yaw_degrees": 90,
+   "scale": 1.035,
+   "lean_degrees": 3.1
+  },
+  {
+   "position": 6,
+   "node": "Pos_06",
+   "stem": "purple",
+   "line": "Alo-type descendant",
+   "yaw_degrees": 253,
+   "scale": 0.961,
+   "lean_degrees": 2.8
+  },
+  {
+   "position": 7,
+   "node": "Pos_07",
+   "stem": "green",
+   "line": "Tara-type descendant",
+   "yaw_degrees": 112,
+   "scale": 1.025,
+   "lean_degrees": 2.1
+  },
+  {
+   "position": 8,
+   "node": "Pos_08",
+   "stem": "purple",
+   "line": "Alo-type descendant",
+   "yaw_degrees": 311,
+   "scale": 0.947,
+   "lean_degrees": 2.8
+  },
+  {
+   "position": 9,
+   "node": "Pos_09",
+   "stem": "purple",
+   "line": "Alo-type descendant",
+   "yaw_degrees": 262,
+   "scale": 1.038,
+   "lean_degrees": 1.9
+  },
+  {
+   "position": 10,
+   "node": "Pos_10",
+   "stem": "purple",
+   "line": "Alo-type descendant",
+   "yaw_degrees": 207,
+   "scale": 0.989,
+   "lean_degrees": 2.5
+  },
+  {
+   "position": 11,
+   "node": "Pos_11",
+   "stem": "green",
+   "line": "Tara-type descendant",
+   "yaw_degrees": 200,
+   "scale": 0.924,
+   "lean_degrees": 0.5
+  },
+  {
+   "position": 12,
+   "node": "Pos_12",
+   "stem": "purple",
+   "line": "Alo-type descendant",
+   "yaw_degrees": 31,
+   "scale": 1.037,
+   "lean_degrees": 1.9
+  }
+ ]
+}
