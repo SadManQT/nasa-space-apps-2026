@@ -1,0 +1,369 @@
+{
+ "chapter": 5,
+ "messages": [
+  {
+   "id": "MSG-CH05-001",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-12-12T08:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH05-S01"
+   },
+   "join": "",
+   "subject": "The fifth mug",
+   "body": "Relief lander on the camera. The fifth mug is off its clip and on the table. I did not polish it this morning. Again.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-002",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-12-12T09:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S01"
+   },
+   "join": "CH05 S01→S02",
+   "subject": "Five on the roster",
+   "body": "Inner airlock opened on two agreeing checks. The Safe Room board now has five name tokens. Commander Ferreira takes the first watch; please show her the corridor routes and the hand-light locker.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-003",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-12-12T09:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S01"
+   },
+   "join": "CH05 S01→S02",
+   "subject": "Her mug",
+   "body": "Ferreira carried her own mug to the table before she unpacked anything else. Roster and watch rota are updated for five.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-004",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-12-12T20:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S02"
+   },
+   "join": "CH05 S02→S03",
+   "subject": "An uneventful watch",
+   "body": "The commander's first watch was quiet: labels checked, times written, readings waited for. Rafi logged the sealed relay-controller crate by serial. It stays packed.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-005",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2046-12-13T18:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S02"
+   },
+   "join": "CH05 S02→S03",
+   "subject": "A document sleeve",
+   "body": "I have left a sealed document sleeve on my shelf. On the 14th I will bring it to the table. Read it with me before you ask me what I remember.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-006",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-12-14T15:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S03"
+   },
+   "join": "CH05 S03→S04",
+   "subject": "The order we left in",
+   "body": "Four records rebuilt in order from timestamps and signatures: relay fault, greenhouse service note, evacuation order, ascent manifest. No accusations, only sequence. Mei wants to set the frozen-tray photograph beside them.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-007",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-12-14T15:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S03"
+   },
+   "join": "CH05 S03→S04",
+   "subject": "The photograph",
+   "body": "Bring the frozen-tray photograph to the table. I want to read the growth sheet with it, not my old guesses.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-008",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-12-14T16:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S04"
+   },
+   "join": "CH05 S04→S05",
+   "subject": "Revised caption",
+   "body": "I have changed the caption. Expedition Zero's trays held young seedlings with curled leaves. They had not flowered. Alo's bloom is still the first. I would rather be accurate than flattered.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-009",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-12-14T16:25Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S04"
+   },
+   "join": "CH05 S04→S05",
+   "subject": "Ferreira was watching",
+   "body": "The commander watched Mei change the caption and did not say anything. I think that was a good sign? Hard to tell with commanders.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-010",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-12-14T17:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S05"
+   },
+   "join": "CH05 S05→S06",
+   "subject": "Kept visible",
+   "body": "We did not settle the disagreement, and that is fine. It stays on the table, with the record the commander left there. Kai is comparing the old relay diagram with the new controller next.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-011",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2046-12-14T17:35Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S05"
+   },
+   "join": "CH05 S05→S06",
+   "subject": "What I didn't say",
+   "body": "Thank you for asking before you guessed. I should have told you sooner. The records stay on the table; read them as they are.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-012",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-12-14T18:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S06"
+   },
+   "join": "CH05 S06→S07",
+   "subject": "Not interchangeable",
+   "body": "Old relay diagram versus the new controller's service card: similar housings, different connectors. The spare stays packed, and the uplink we have is working normally. Repair plan written without needing Earth.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-013",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-12-14T18:35Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S06"
+   },
+   "join": "CH05 S06→S07",
+   "subject": "Tonight: impact watch",
+   "body": "Night observation starts soon. Small meteoroids strike the Moon and make brief flashes. With no air, there are no streaks. Log candidates frame by frame; one sighting is not enough.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-014",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-12-14T20:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S07"
+   },
+   "join": "CH05 S07→S08",
+   "subject": "Observation log",
+   "body": "Candidates logged by frame. One stayed at the same detector spot across several frames: that is the camera, not the Moon. Keep the observation clock running into maintenance.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-015",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-12-14T20:35Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S07"
+   },
+   "join": "CH05 S07→S08",
+   "subject": "No shooting stars",
+   "body": "No streaks, no whoosh. Just tiny flashes, enlarged. Still the coolest thing I have seen on a screen.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-016",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-12-14T21:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S08"
+   },
+   "join": "CH05 S08→S09",
+   "subject": "Two observations, two causes",
+   "body": "Maintenance done. Panel output below its reference and a small leak on an isolated garden branch: separate observations, separate fixes. The observation report is complete and on the evidence table.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-017",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-12-14T21:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S08"
+   },
+   "join": "CH05 S08→S09",
+   "subject": "Dust has a cost",
+   "body": "Fine dust on panels lowers their output a little at a time. Compare against a reference reading before deciding what is wrong.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-018",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-12-14T22:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S09"
+   },
+   "join": "CH05 S09→S10",
+   "subject": "Records finish it",
+   "body": "An initial leads us. A record finishes it.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-019",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-12-14T22:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S09"
+   },
+   "join": "CH05 S09→S10",
+   "subject": "Different dates",
+   "body": "Tonight's flashes and the old damage report stay side by side, with their different dates. A hazard explains why we watch; it does not prove what broke a relay years ago. Rao is calling with a signed page.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-020",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-12-14T22:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S10"
+   },
+   "join": "CH05 S10→S11",
+   "subject": "A name, with permission",
+   "body": "Aurora, Earth desk. The signed page is hers and the permission note is in the packet. N.R. is Dr. Noor Rahman, botanist, the person who left the seeds. She has read your transmitted reports.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-021",
+   "thread": "archive",
+   "sender": "Archive",
+   "story_time": "2046-12-14T22:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S10"
+   },
+   "join": "CH05 S10→S11",
+   "subject": "Journal updated",
+   "body": "The seed packet's initial now reads Dr. Noor Rahman: botanist, Expedition Zero. She returned to Bangladesh and founded Last Light Academy.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-022",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-12-14T23:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S11"
+   },
+   "join": "CH05 S11→S12",
+   "subject": "Invitation sent",
+   "body": "Delivered. No immediate reply, which is right: it was an invitation, not an answer owed. The graphs went as attachments, as Amara said.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-023",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-12-14T23:35Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S11"
+   },
+   "join": "CH05 S11→S12",
+   "subject": "Waiting",
+   "body": "I checked the inbox three times. Rafi says that is two more than useful.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-024",
+   "thread": "earth",
+   "sender": "Noor",
+   "story_time": "2046-12-15T14:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH05-S12"
+   },
+   "join": "",
+   "subject": "Thank you for asking",
+   "body": "Thank you for asking. I would like to see what you grow next.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH05-025",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-12-16T09:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S12"
+   },
+   "join": "CH05→CH06",
+   "subject": "One more seed",
+   "body": "One cotton specimen is cleared from quarantine for the indoor reference bay, and Tara's name stays on the frame. A new seed, not the old flower returning. Dated care into January, same as before.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH05-026",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-01-05T10:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH05-S12"
+   },
+   "join": "CH05→CH06",
+   "subject": "Marker tape",
+   "body": "I taped markers along the guide-light circuit so we can find each segment in the dark. Ferreira says the eclipse is coming. I have more tape.",
+   "goal": false
+  }
+ ]
+}
