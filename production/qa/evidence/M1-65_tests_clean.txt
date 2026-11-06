@@ -1,0 +1,58 @@
+Final full runner after hydration of ALL game LFS files, including test audio fixtures.
+game/tools/run_tests.sh: line 17:  1053 Segmentation fault      "$GODOT" --headless --path . --editor --quit > /dev/null 2>&1
+ok   tools/test_asset_showcase.gd :: SHOWCASE RESULT: PASS (1717 checks, 0 failures)
+ok   tools/test_campaign_boot.gd :: CAMPAIGN BOOT RESULT: PASS (5 checks, 0 failures)
+ok   tools/test_campaign_crew.gd :: CAMPAIGN CREW RESULT: PASS (927 checks, 0 failures)
+ok   tools/test_campaign_knowledge.gd :: CAMPAIGN KNOWLEDGE RESULT: PASS (46 checks, 0 failures)
+ok   tools/test_campaign_later_runtime.gd :: LATER CAMPAIGN RUNTIME RESULT: PASS (60 checks, 0 failures)
+FAIL tools/test_campaign_media.gd :: exit 1 :: CAMPAIGN MEDIA RESULT: FAIL (108 checks, 3 failures)
+       ERROR: FAIL scene music starts from the manifest
+       ERROR: FAIL looping music keeps playing past its 1 s end at its base level
+       ERROR: FAIL voice plays for the line whose caption is shown
+       SCRIPT ERROR: Invalid access to property or key 'volume_db' on a base object of type 'Nil'.
+       CAMPAIGN MEDIA RESULT: FAIL (108 checks, 3 failures)
+ok   tools/test_campaign_session.gd :: CAMPAIGN SESSION RESULT: PASS (15/15 checks, 0 failures)
+ok   tools/test_ch01_s03_route.gd :: CH01 S03 ROUTE RESULT: PASS (7 checks, 0 failures)
+ok   tools/test_chapter1_campaign_flow.gd :: CHAPTER 1 CAMPAIGN FLOW RESULT: PASS (447 checks, 0 failures)
+ok   tools/test_chapter1_logic_regressions.gd :: CHAPTER 1 LOGIC REGRESSIONS: 34 checks, 0 failures
+ok   tools/test_chapter1_ui_regressions.gd :: CHAPTER 1 UI REGRESSIONS: PASS (41 checks, 0 failures)
+ok   tools/test_chapter2_route.gd :: CHAPTER 2 ROUTE RESULT: PASS (104 checks, 0 failures)
+ok   tools/test_cutscene_choice_card.gd :: CUTSCENE CHOICE CARD RESULT: PASS (47 checks, 0 failures)
+ok   tools/test_eclipse_props.gd :: ECLIPSE PROPS RESULT: PASS (567 checks, 0 failures)
+ok   tools/test_explainers.gd :: EXPLAINERS RESULT: PASS (321 checks, 0 failures)
+ok   tools/test_extended_campaign_route.gd :: EXTENDED CAMPAIGN ROUTE RESULT: PASS (639 checks, 0 failures)
+ok   tools/test_face_atlas.gd :: PASS FaceAtlas (17 checks, 16 cue frames checked)
+ok   tools/test_face_expression.gd :: PASS FaceExpression / HeadAccent (68 checks, including runtime Kai GLTF integration)
+ok   tools/test_habitat_kit.gd :: HABITAT KIT RESULT: PASS (224 checks, 0 failures)
+ok   tools/test_habitat_rooms.gd :: HABITAT ROOMS RESULT: PASS (333 checks, 0 failures)
+ok   tools/test_hair_springs.gd :: PASS HairSprings (5 checks, 3 chains)
+ok   tools/test_journal_tabs.gd :: JOURNAL TABS RESULT: PASS (281 checks, 0 failures)
+ok   tools/test_later_numeric.gd :: LATER NUMERIC RESULT: PASS (388 checks, 0 failures)
+ok   tools/test_lip_sync.gd :: PASS LipSync coarticulation, closures, loudness, release and errors
+ok   tools/test_lunar_kit.gd :: LUNAR KIT RESULT: PASS (89 checks, 0 failures)
+ok   tools/test_narrative_props.gd :: NARRATIVE PROPS RESULT: PASS (401 checks, 0 failures)
+ok   tools/test_outpost_status.gd :: OUTPOST STATUS RESULT: PASS (62 checks, 0 failures)
+ok   tools/test_p02_mission_table.gd :: P02 MISSION TABLE RESULT: PASS (78 checks, 0 failures)
+FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (537 checks, 5 failures)
+       FAIL Amara raw load main-thread interval <50 ms (67.948)
+       FAIL Mei raw load main-thread interval <50 ms (52.398)
+       FAIL Rafi raw load main-thread interval <50 ms (54.455)
+       FAIL production title main-thread interval <50 ms (66.395)
+       FAIL production new campaign main-thread interval <50 ms (96.077)
+ok   tools/test_player_controller.gd :: PLAYER RESULT: PASS (105 checks, 0 failures)
+ok   tools/test_player_text.gd :: PLAYER TEXT RESULT: PASS (354 checks, 0 failures)
+ok   tools/test_review_scene.gd :: REVIEW RESULT: PASS (447 checks, 0 failures)
+ok   tools/test_room_presentation.gd :: ROOM PRESENTATION RESULT: PASS (136 checks, 0 failures)
+ok   tools/test_save_service_recovery.gd :: SAVE RECOVERY RESULT: 92/92 checks, 0 failures
+ok   tools/test_science_data.gd :: SCIENCE DATA RESULT: PASS (146 checks, 0 failures)
+ok   tools/test_sound_captions.gd :: SOUND CAPTIONS RESULT: PASS (82 checks, 0 failures)
+ok   tools/test_story_log.gd :: STORY LOG RESULT: PASS (64 checks, 0 failures)
+ok   tools/test_tara_lifecycle.gd :: TARA LIFECYCLE RESULT: PASS (75 checks, 0 failures)
+ok   tools/test_terrain_lola.gd :: TERRAIN LOLA RESULT: PASS (1090 checks, 0 failures)
+ok   tools/test_toon_materials.gd :: PASS ToonMaterials (12 checks, 2 swapped materials)
+ok   tools/test_worker_a_systems.gd :: WORKER A SYSTEMS RESULT: PASS (108 checks, 0 failures)
+ok   tools/test_worker_b_world_missions.gd :: WORKER B WORLD/MISSIONS RESULT: PASS (429 checks, 0 failures)
+ok   tools/test_worker_c_content.gd :: WORKER C CONTENT RESULT: PASS (571 checks, 0 failures)
+41/43 suites passed
+
+Runner exit: 1; elapsed seconds: 526.0

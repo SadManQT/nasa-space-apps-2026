@@ -1,0 +1,3042 @@
+[
+	{
+		"capture": "M1-65_01_title.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@47",
+				"rect": [
+					58.0,
+					43.0,
+					33.0,
+					53.0
+				],
+				"text": "◒"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@49",
+				"rect": [
+					107.0,
+					34.0,
+					354.0,
+					42.0
+				],
+				"text": "LAST LIGHT ACADEMY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@50",
+				"rect": [
+					107.0,
+					76.0,
+					354.0,
+					18.0
+				],
+				"text": "AURORA STATION  /  SOUTH-POLAR TRAINING SCENARIO"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@52",
+				"rect": [
+					979.0,
+					50.0,
+					243.0,
+					39.0
+				],
+				"text": "SPACE APPS 2026\nJUNIOR ASTRONAUT MISSION TRAINER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@57",
+				"rect": [
+					87.0,
+					153.0,
+					422.0,
+					18.0
+				],
+				"text": "MISSION CONTROL / OFFLINE READY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@58",
+				"rect": [
+					87.0,
+					185.0,
+					422.0,
+					93.0
+				],
+				"text": "Run a real\nmission decision."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@59",
+				"rect": [
+					87.0,
+					292.0,
+					422.0,
+					78.0
+				],
+				"text": "Observe → discuss → preview → commit → learn.\nYour first choice changes what the crew can see next."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@61",
+				"rect": [
+					87.0,
+					402.0,
+					422.0,
+					48.0
+				],
+				"text": "NEW EXPEDITION  ›"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@62",
+				"rect": [
+					87.0,
+					464.0,
+					422.0,
+					48.0
+				],
+				"text": "CONTINUE · NO CHECKPOINT"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@63",
+				"rect": [
+					87.0,
+					526.0,
+					422.0,
+					18.0
+				],
+				"text": "No saved expedition yet. New Expedition is always safe to start."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@65",
+				"rect": [
+					87.0,
+					572.0,
+					422.0,
+					48.0
+				],
+				"text": "SCIENCE + SOURCES"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@66",
+				"rect": [
+					87.0,
+					634.0,
+					422.0,
+					48.0
+				],
+				"text": "DEVELOPER ASSET SHOWCASE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@67",
+				"rect": [
+					87.0,
+					696.0,
+					422.0,
+					48.0
+				],
+				"text": "SETTINGS / ACCESSIBILITY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@68",
+				"rect": [
+					87.0,
+					758.0,
+					422.0,
+					48.0
+				],
+				"text": "CREDITS"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@72",
+				"rect": [
+					593.0,
+					153.0,
+					592.0,
+					18.0
+				],
+				"text": "THE TRAINING QUESTION"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@73",
+				"rect": [
+					593.0,
+					189.0,
+					592.0,
+					153.0
+				],
+				"text": "How do you keep people safe\nwhen power, air, shielding\nand a living garden share\none small station?"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@76/@Label@75",
+				"rect": [
+					594.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nPOWER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@78/@Label@77",
+				"rect": [
+					744.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nAIR"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@80/@Label@79",
+				"rect": [
+					894.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nCARE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@82/@Label@81",
+				"rect": [
+					1044.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nSAFETY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@83",
+				"rect": [
+					593.0,
+					450.0,
+					592.0,
+					49.0
+				],
+				"text": "Chapter 1: twelve caption-first scenes\nfor judges, classrooms and families."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@85",
+				"rect": [
+					593.0,
+					767.0,
+					592.0,
+					39.0
+				],
+				"text": "SIMULATED · Aurora Station, cadets and 2046 timeline are fictional.\nScience displays identify observed, computed and simulated content."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@87",
+				"rect": [
+					58.0,
+					673.0,
+					249.0,
+					17.0
+				],
+				"text": "CAPTIONS ON  •  TIMER-FREE  •  ENGLISH UI"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@89",
+				"rect": [
+					905.0,
+					673.0,
+					317.0,
+					17.0
+				],
+				"text": "INDEPENDENT TEAM PROJECT  ·  NOT NASA-ENDORSED"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_02_briefing.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@47",
+				"rect": [
+					58.0,
+					43.0,
+					33.0,
+					53.0
+				],
+				"text": "◒"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@49",
+				"rect": [
+					107.0,
+					34.0,
+					354.0,
+					42.0
+				],
+				"text": "LAST LIGHT ACADEMY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@50",
+				"rect": [
+					107.0,
+					76.0,
+					354.0,
+					18.0
+				],
+				"text": "AURORA STATION  /  SOUTH-POLAR TRAINING SCENARIO"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@52",
+				"rect": [
+					979.0,
+					50.0,
+					243.0,
+					39.0
+				],
+				"text": "SPACE APPS 2026\nJUNIOR ASTRONAUT MISSION TRAINER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@57",
+				"rect": [
+					87.0,
+					153.0,
+					422.0,
+					18.0
+				],
+				"text": "MISSION CONTROL / OFFLINE READY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@58",
+				"rect": [
+					87.0,
+					185.0,
+					422.0,
+					93.0
+				],
+				"text": "Run a real\nmission decision."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@59",
+				"rect": [
+					87.0,
+					292.0,
+					422.0,
+					78.0
+				],
+				"text": "Observe → discuss → preview → commit → learn.\nYour first choice changes what the crew can see next."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@61",
+				"rect": [
+					87.0,
+					402.0,
+					422.0,
+					48.0
+				],
+				"text": "NEW EXPEDITION  ›"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@62",
+				"rect": [
+					87.0,
+					464.0,
+					422.0,
+					48.0
+				],
+				"text": "CONTINUE · NO CHECKPOINT"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@63",
+				"rect": [
+					87.0,
+					526.0,
+					422.0,
+					18.0
+				],
+				"text": "No saved expedition yet. New Expedition is always safe to start."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@65",
+				"rect": [
+					87.0,
+					572.0,
+					422.0,
+					48.0
+				],
+				"text": "SCIENCE + SOURCES"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@66",
+				"rect": [
+					87.0,
+					634.0,
+					422.0,
+					48.0
+				],
+				"text": "DEVELOPER ASSET SHOWCASE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@67",
+				"rect": [
+					87.0,
+					696.0,
+					422.0,
+					48.0
+				],
+				"text": "SETTINGS / ACCESSIBILITY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@68",
+				"rect": [
+					87.0,
+					758.0,
+					422.0,
+					48.0
+				],
+				"text": "CREDITS"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@72",
+				"rect": [
+					593.0,
+					153.0,
+					592.0,
+					18.0
+				],
+				"text": "THE TRAINING QUESTION"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@73",
+				"rect": [
+					593.0,
+					189.0,
+					592.0,
+					153.0
+				],
+				"text": "How do you keep people safe\nwhen power, air, shielding\nand a living garden share\none small station?"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@76/@Label@75",
+				"rect": [
+					594.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nPOWER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@78/@Label@77",
+				"rect": [
+					744.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nAIR"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@80/@Label@79",
+				"rect": [
+					894.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nCARE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@82/@Label@81",
+				"rect": [
+					1044.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nSAFETY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@83",
+				"rect": [
+					593.0,
+					450.0,
+					592.0,
+					49.0
+				],
+				"text": "Chapter 1: twelve caption-first scenes\nfor judges, classrooms and families."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@85",
+				"rect": [
+					593.0,
+					767.0,
+					592.0,
+					39.0
+				],
+				"text": "SIMULATED · Aurora Station, cadets and 2046 timeline are fictional.\nScience displays identify observed, computed and simulated content."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@87",
+				"rect": [
+					58.0,
+					673.0,
+					249.0,
+					17.0
+				],
+				"text": "CAPTIONS ON  •  TIMER-FREE  •  ENGLISH UI"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@89",
+				"rect": [
+					905.0,
+					673.0,
+					317.0,
+					17.0
+				],
+				"text": "INDEPENDENT TEAM PROJECT  ·  NOT NASA-ENDORSED"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@91/@MarginContainer@92/@VBoxContainer@93/@Label@94",
+				"rect": [
+					283.0,
+					119.0,
+					714.0,
+					36.0
+				],
+				"text": "MISSION BRIEFING  /  CHAPTER 1"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@91/@MarginContainer@92/@VBoxContainer@93/@Label@95",
+				"rect": [
+					283.0,
+					167.0,
+					714.0,
+					171.0
+				],
+				"text": "Aurora Station is preparing for a 36-hour training scenario at the Moon's south pole.\n\nKeep the crew safe.\nKeep the station running.\nCare for Alo inside a pressurised chamber."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@91/@MarginContainer@92/@VBoxContainer@93/@Label@96",
+				"rect": [
+					283.0,
+					350.0,
+					714.0,
+					21.0
+				],
+				"text": "OBSERVE  →  DISCUSS  →  CHOOSE  →  EXECUTE  →  SEE IMPACT  →  DEBRIEF"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@91/@MarginContainer@92/@VBoxContainer@93/@GridContainer@97/@PanelContainer@100/@MarginContainer@98/@Label@99",
+				"rect": [
+					296.0,
+					392.0,
+					189.0,
+					18.0
+				],
+				"text": "KAI  /  POWER & HEAT"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@91/@MarginContainer@92/@VBoxContainer@93/@GridContainer@97/@PanelContainer@103/@MarginContainer@101/@Label@102",
+				"rect": [
+					521.0,
+					392.0,
+					227.0,
+					18.0
+				],
+				"text": "AMARA  /  AIR & MEASUREMENT"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@91/@MarginContainer@92/@VBoxContainer@93/@GridContainer@97/@PanelContainer@106/@MarginContainer@104/@Label@105",
+				"rect": [
+					296.0,
+					438.0,
+					189.0,
+					18.0
+				],
+				"text": "MEI  /  GARDEN & PLANT CARE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@91/@MarginContainer@92/@VBoxContainer@93/@GridContainer@97/@PanelContainer@109/@MarginContainer@107/@Label@108",
+				"rect": [
+					521.0,
+					438.0,
+					227.0,
+					18.0
+				],
+				"text": "RAFI  /  SAFETY & FIELD OPERATIONS"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@91/@MarginContainer@92/@VBoxContainer@93/@Label@110",
+				"rect": [
+					283.0,
+					477.0,
+					714.0,
+					39.0
+				],
+				"text": "SIMULATED · Training scenario\nThe station, cadets, 2046 dates and game resources are fictional."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@91/@MarginContainer@92/@VBoxContainer@93/@HBoxContainer@112/@Button@113",
+				"rect": [
+					727.0,
+					553.0,
+					94.0,
+					48.0
+				],
+				"text": "CANCEL"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@91/@MarginContainer@92/@VBoxContainer@93/@HBoxContainer@112/@Button@114",
+				"rect": [
+					831.0,
+					553.0,
+					166.0,
+					48.0
+				],
+				"text": "ENTER AURORA  ›"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_03_title_settings.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@47",
+				"rect": [
+					58.0,
+					43.0,
+					33.0,
+					53.0
+				],
+				"text": "◒"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@49",
+				"rect": [
+					107.0,
+					34.0,
+					354.0,
+					42.0
+				],
+				"text": "LAST LIGHT ACADEMY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@50",
+				"rect": [
+					107.0,
+					76.0,
+					354.0,
+					18.0
+				],
+				"text": "AURORA STATION  /  SOUTH-POLAR TRAINING SCENARIO"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@52",
+				"rect": [
+					979.0,
+					50.0,
+					243.0,
+					39.0
+				],
+				"text": "SPACE APPS 2026\nJUNIOR ASTRONAUT MISSION TRAINER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@57",
+				"rect": [
+					87.0,
+					153.0,
+					422.0,
+					18.0
+				],
+				"text": "MISSION CONTROL / OFFLINE READY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@58",
+				"rect": [
+					87.0,
+					185.0,
+					422.0,
+					93.0
+				],
+				"text": "Run a real\nmission decision."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@59",
+				"rect": [
+					87.0,
+					292.0,
+					422.0,
+					78.0
+				],
+				"text": "Observe → discuss → preview → commit → learn.\nYour first choice changes what the crew can see next."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@61",
+				"rect": [
+					87.0,
+					402.0,
+					422.0,
+					48.0
+				],
+				"text": "NEW EXPEDITION  ›"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@62",
+				"rect": [
+					87.0,
+					464.0,
+					422.0,
+					48.0
+				],
+				"text": "CONTINUE · NO CHECKPOINT"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@63",
+				"rect": [
+					87.0,
+					526.0,
+					422.0,
+					18.0
+				],
+				"text": "No saved expedition yet. New Expedition is always safe to start."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@65",
+				"rect": [
+					87.0,
+					572.0,
+					422.0,
+					48.0
+				],
+				"text": "SCIENCE + SOURCES"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@66",
+				"rect": [
+					87.0,
+					634.0,
+					422.0,
+					48.0
+				],
+				"text": "DEVELOPER ASSET SHOWCASE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@67",
+				"rect": [
+					87.0,
+					696.0,
+					422.0,
+					48.0
+				],
+				"text": "SETTINGS / ACCESSIBILITY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@68",
+				"rect": [
+					87.0,
+					758.0,
+					422.0,
+					48.0
+				],
+				"text": "CREDITS"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@72",
+				"rect": [
+					593.0,
+					153.0,
+					592.0,
+					18.0
+				],
+				"text": "THE TRAINING QUESTION"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@73",
+				"rect": [
+					593.0,
+					189.0,
+					592.0,
+					153.0
+				],
+				"text": "How do you keep people safe\nwhen power, air, shielding\nand a living garden share\none small station?"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@76/@Label@75",
+				"rect": [
+					594.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nPOWER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@78/@Label@77",
+				"rect": [
+					744.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nAIR"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@80/@Label@79",
+				"rect": [
+					894.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nCARE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@82/@Label@81",
+				"rect": [
+					1044.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nSAFETY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@83",
+				"rect": [
+					593.0,
+					450.0,
+					592.0,
+					49.0
+				],
+				"text": "Chapter 1: twelve caption-first scenes\nfor judges, classrooms and families."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@85",
+				"rect": [
+					593.0,
+					767.0,
+					592.0,
+					39.0
+				],
+				"text": "SIMULATED · Aurora Station, cadets and 2046 timeline are fictional.\nScience displays identify observed, computed and simulated content."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@87",
+				"rect": [
+					58.0,
+					673.0,
+					249.0,
+					17.0
+				],
+				"text": "CAPTIONS ON  •  TIMER-FREE  •  ENGLISH UI"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@89",
+				"rect": [
+					905.0,
+					673.0,
+					317.0,
+					17.0
+				],
+				"text": "INDEPENDENT TEAM PROJECT  ·  NOT NASA-ENDORSED"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@Label@139",
+				"rect": [
+					278.0,
+					112.0,
+					724.0,
+					27.0
+				],
+				"text": "Settings"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@Label@140",
+				"rect": [
+					278.0,
+					149.0,
+					724.0,
+					17.0
+				],
+				"text": "Captions, text size, reduced motion and timer-free play."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@Label@154",
+				"rect": [
+					278.0,
+					190.0,
+					716.0,
+					17.0
+				],
+				"text": "These change how the game looks and sounds. They never change the station or the story."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/captions",
+				"rect": [
+					278.0,
+					216.0,
+					716.0,
+					28.0
+				],
+				"text": "Captions on"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/large_text",
+				"rect": [
+					278.0,
+					253.0,
+					716.0,
+					28.0
+				],
+				"text": "Large text (150%)"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/timer_free",
+				"rect": [
+					278.0,
+					290.0,
+					716.0,
+					28.0
+				],
+				"text": "Timer-free alternatives"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/reduced_motion",
+				"rect": [
+					278.0,
+					327.0,
+					716.0,
+					28.0
+				],
+				"text": "Reduced motion"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@157/@Label@155",
+				"rect": [
+					278.0,
+					364.0,
+					220.0,
+					20.0
+				],
+				"text": "Master volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@157/@Label@156",
+				"rect": [
+					938.0,
+					365.0,
+					56.0,
+					17.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@160/@Label@158",
+				"rect": [
+					278.0,
+					393.0,
+					220.0,
+					20.0
+				],
+				"text": "Dialogue volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@160/@Label@159",
+				"rect": [
+					938.0,
+					394.0,
+					56.0,
+					17.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@163/@Label@161",
+				"rect": [
+					278.0,
+					422.0,
+					220.0,
+					20.0
+				],
+				"text": "Music volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@163/@Label@162",
+				"rect": [
+					938.0,
+					423.0,
+					56.0,
+					17.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@166/@Label@164",
+				"rect": [
+					278.0,
+					451.0,
+					220.0,
+					20.0
+				],
+				"text": "Effects volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@166/@Label@165",
+				"rect": [
+					938.0,
+					452.0,
+					56.0,
+					17.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@169/@Label@167",
+				"rect": [
+					278.0,
+					480.0,
+					220.0,
+					20.0
+				],
+				"text": "Interface volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@169/@Label@168",
+				"rect": [
+					938.0,
+					481.0,
+					56.0,
+					17.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/Controls",
+				"rect": [
+					278.0,
+					509.0,
+					716.0,
+					77.0
+				],
+				"text": "Controls\nMove: W A S D · Look: hold the right mouse button\nUse: E · What now: H · Pause: Esc\nNext line: Space · Continue: Enter"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@Label@170",
+				"rect": [
+					278.0,
+					595.0,
+					716.0,
+					77.0
+				],
+				"text": "Captions keep every line readable when a voice is missing, and caption the sounds that matter.\nTimer-free: nothing needs a quick reaction.\nReduced motion is available here.\nNone of these skip a safety check."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@147/@Button@148",
+				"rect": [
+					905.0,
+					566.0,
+					97.0,
+					44.0
+				],
+				"text": "Close · Esc"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_04_title_settings_large.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@47",
+				"rect": [
+					58.0,
+					40.0,
+					49.0,
+					79.0
+				],
+				"text": "◒"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@49",
+				"rect": [
+					123.0,
+					34.0,
+					545.0,
+					63.0
+				],
+				"text": "LAST LIGHT ACADEMY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@50",
+				"rect": [
+					123.0,
+					97.0,
+					545.0,
+					28.0
+				],
+				"text": "AURORA STATION  /  SOUTH-POLAR TRAINING SCENARIO"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@52",
+				"rect": [
+					849.0,
+					50.0,
+					373.0,
+					59.0
+				],
+				"text": "SPACE APPS 2026\nJUNIOR ASTRONAUT MISSION TRAINER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@57",
+				"rect": [
+					87.0,
+					172.0,
+					422.0,
+					28.0
+				],
+				"text": "MISSION CONTROL / OFFLINE READY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@58",
+				"rect": [
+					87.0,
+					214.0,
+					422.0,
+					137.0
+				],
+				"text": "Run a real\nmission decision."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@59",
+				"rect": [
+					87.0,
+					365.0,
+					422.0,
+					155.0
+				],
+				"text": "Observe → discuss → preview → commit → learn.\nYour first choice changes what the crew can see next."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@61",
+				"rect": [
+					87.0,
+					552.0,
+					422.0,
+					48.0
+				],
+				"text": "NEW EXPEDITION  ›"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@62",
+				"rect": [
+					87.0,
+					614.0,
+					422.0,
+					48.0
+				],
+				"text": "CONTINUE · NO CHECKPOINT"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@63",
+				"rect": [
+					87.0,
+					676.0,
+					422.0,
+					59.0
+				],
+				"text": "No saved expedition yet. New Expedition is always safe to start."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@65",
+				"rect": [
+					87.0,
+					763.0,
+					422.0,
+					48.0
+				],
+				"text": "SCIENCE + SOURCES"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@66",
+				"rect": [
+					87.0,
+					825.0,
+					422.0,
+					48.0
+				],
+				"text": "DEVELOPER ASSET SHOWCASE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@67",
+				"rect": [
+					87.0,
+					887.0,
+					422.0,
+					48.0
+				],
+				"text": "SETTINGS / ACCESSIBILITY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@68",
+				"rect": [
+					87.0,
+					949.0,
+					422.0,
+					48.0
+				],
+				"text": "CREDITS"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@72",
+				"rect": [
+					593.0,
+					172.0,
+					592.0,
+					28.0
+				],
+				"text": "THE TRAINING QUESTION"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@73",
+				"rect": [
+					593.0,
+					218.0,
+					592.0,
+					225.0
+				],
+				"text": "How do you keep people safe\nwhen power, air, shielding\nand a living garden share\none small station?"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@76/@Label@75",
+				"rect": [
+					594.0,
+					462.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nPOWER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@78/@Label@77",
+				"rect": [
+					744.0,
+					462.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nAIR"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@80/@Label@79",
+				"rect": [
+					894.0,
+					462.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nCARE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@82/@Label@81",
+				"rect": [
+					1044.0,
+					462.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nSAFETY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@83",
+				"rect": [
+					593.0,
+					551.0,
+					592.0,
+					71.0
+				],
+				"text": "Chapter 1: twelve caption-first scenes\nfor judges, classrooms and families."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@85",
+				"rect": [
+					593.0,
+					876.0,
+					592.0,
+					121.0
+				],
+				"text": "SIMULATED · Aurora Station, cadets and 2046 timeline are fictional.\nScience displays identify observed, computed and simulated content."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@87",
+				"rect": [
+					58.0,
+					664.0,
+					373.0,
+					26.0
+				],
+				"text": "CAPTIONS ON  •  TIMER-FREE  •  ENGLISH UI"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@89",
+				"rect": [
+					748.0,
+					664.0,
+					474.0,
+					26.0
+				],
+				"text": "INDEPENDENT TEAM PROJECT  ·  NOT NASA-ENDORSED"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@Label@139",
+				"rect": [
+					278.0,
+					112.0,
+					724.0,
+					39.0
+				],
+				"text": "Settings"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@Label@140",
+				"rect": [
+					278.0,
+					161.0,
+					724.0,
+					26.0
+				],
+				"text": "Captions, text size, reduced motion and timer-free play."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@Label@172",
+				"rect": [
+					278.0,
+					211.0,
+					716.0,
+					55.0
+				],
+				"text": "These change how the game looks and sounds. They never change the station or the story."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/captions",
+				"rect": [
+					278.0,
+					275.0,
+					716.0,
+					36.0
+				],
+				"text": "Captions on"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/large_text",
+				"rect": [
+					278.0,
+					320.0,
+					716.0,
+					36.0
+				],
+				"text": "Large text (150%)"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/timer_free",
+				"rect": [
+					278.0,
+					365.0,
+					716.0,
+					36.0
+				],
+				"text": "Timer-free alternatives"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/reduced_motion",
+				"rect": [
+					278.0,
+					410.0,
+					716.0,
+					36.0
+				],
+				"text": "Reduced motion"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@175/@Label@173",
+				"rect": [
+					278.0,
+					455.0,
+					220.0,
+					28.0
+				],
+				"text": "Master volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@175/@Label@174",
+				"rect": [
+					938.0,
+					456.0,
+					56.0,
+					26.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@178/@Label@176",
+				"rect": [
+					278.0,
+					492.0,
+					220.0,
+					28.0
+				],
+				"text": "Dialogue volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@178/@Label@177",
+				"rect": [
+					938.0,
+					493.0,
+					56.0,
+					26.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@181/@Label@179",
+				"rect": [
+					278.0,
+					529.0,
+					220.0,
+					28.0
+				],
+				"text": "Music volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@181/@Label@180",
+				"rect": [
+					938.0,
+					530.0,
+					56.0,
+					26.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@184/@Label@182",
+				"rect": [
+					278.0,
+					566.0,
+					220.0,
+					28.0
+				],
+				"text": "Effects volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@184/@Label@183",
+				"rect": [
+					938.0,
+					567.0,
+					56.0,
+					26.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@187/@Label@185",
+				"rect": [
+					278.0,
+					603.0,
+					220.0,
+					28.0
+				],
+				"text": "Interface volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@HBoxContainer@187/@Label@186",
+				"rect": [
+					938.0,
+					604.0,
+					56.0,
+					26.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/Controls",
+				"rect": [
+					278.0,
+					640.0,
+					716.0,
+					113.0
+				],
+				"text": "Controls\nMove: W A S D · Look: hold the right mouse button\nUse: E · What now: H · Pause: Esc\nNext line: Space · Continue: Enter"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@142/@ScrollContainer@145/@VBoxContainer@146/@Label@188",
+				"rect": [
+					278.0,
+					762.0,
+					716.0,
+					142.0
+				],
+				"text": "Captions keep every line readable when a voice is missing, and caption the sounds that matter.\nTimer-free: nothing needs a quick reaction.\nReduced motion is available here.\nNone of these skip a safety check."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/CampaignPanels/@PanelContainer@136/@MarginContainer@137/@VBoxContainer@138/@HBoxContainer@147/@Button@148",
+				"rect": [
+					875.0,
+					566.0,
+					127.0,
+					44.0
+				],
+				"text": "Close · Esc"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_05_title_large.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@47",
+				"rect": [
+					58.0,
+					40.0,
+					49.0,
+					79.0
+				],
+				"text": "◒"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@49",
+				"rect": [
+					123.0,
+					34.0,
+					545.0,
+					63.0
+				],
+				"text": "LAST LIGHT ACADEMY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@50",
+				"rect": [
+					123.0,
+					97.0,
+					545.0,
+					28.0
+				],
+				"text": "AURORA STATION  /  SOUTH-POLAR TRAINING SCENARIO"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@52",
+				"rect": [
+					849.0,
+					50.0,
+					373.0,
+					59.0
+				],
+				"text": "SPACE APPS 2026\nJUNIOR ASTRONAUT MISSION TRAINER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@57",
+				"rect": [
+					87.0,
+					172.0,
+					422.0,
+					28.0
+				],
+				"text": "MISSION CONTROL / OFFLINE READY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@58",
+				"rect": [
+					87.0,
+					214.0,
+					422.0,
+					137.0
+				],
+				"text": "Run a real\nmission decision."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@59",
+				"rect": [
+					87.0,
+					365.0,
+					422.0,
+					155.0
+				],
+				"text": "Observe → discuss → preview → commit → learn.\nYour first choice changes what the crew can see next."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@61",
+				"rect": [
+					87.0,
+					552.0,
+					422.0,
+					48.0
+				],
+				"text": "NEW EXPEDITION  ›"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@62",
+				"rect": [
+					87.0,
+					614.0,
+					422.0,
+					48.0
+				],
+				"text": "CONTINUE · NO CHECKPOINT"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@63",
+				"rect": [
+					87.0,
+					676.0,
+					422.0,
+					59.0
+				],
+				"text": "No saved expedition yet. New Expedition is always safe to start."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@65",
+				"rect": [
+					87.0,
+					763.0,
+					422.0,
+					48.0
+				],
+				"text": "SCIENCE + SOURCES"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@66",
+				"rect": [
+					87.0,
+					825.0,
+					422.0,
+					48.0
+				],
+				"text": "DEVELOPER ASSET SHOWCASE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@67",
+				"rect": [
+					87.0,
+					887.0,
+					422.0,
+					48.0
+				],
+				"text": "SETTINGS / ACCESSIBILITY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@68",
+				"rect": [
+					87.0,
+					949.0,
+					422.0,
+					48.0
+				],
+				"text": "CREDITS"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@72",
+				"rect": [
+					593.0,
+					172.0,
+					592.0,
+					28.0
+				],
+				"text": "THE TRAINING QUESTION"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@73",
+				"rect": [
+					593.0,
+					218.0,
+					592.0,
+					225.0
+				],
+				"text": "How do you keep people safe\nwhen power, air, shielding\nand a living garden share\none small station?"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@76/@Label@75",
+				"rect": [
+					594.0,
+					462.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nPOWER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@78/@Label@77",
+				"rect": [
+					744.0,
+					462.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nAIR"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@80/@Label@79",
+				"rect": [
+					894.0,
+					462.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nCARE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@82/@Label@81",
+				"rect": [
+					1044.0,
+					462.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nSAFETY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@83",
+				"rect": [
+					593.0,
+					551.0,
+					592.0,
+					71.0
+				],
+				"text": "Chapter 1: twelve caption-first scenes\nfor judges, classrooms and families."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@85",
+				"rect": [
+					593.0,
+					876.0,
+					592.0,
+					121.0
+				],
+				"text": "SIMULATED · Aurora Station, cadets and 2046 timeline are fictional.\nScience displays identify observed, computed and simulated content."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@87",
+				"rect": [
+					58.0,
+					664.0,
+					373.0,
+					26.0
+				],
+				"text": "CAPTIONS ON  •  TIMER-FREE  •  ENGLISH UI"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@89",
+				"rect": [
+					748.0,
+					664.0,
+					474.0,
+					26.0
+				],
+				"text": "INDEPENDENT TEAM PROJECT  ·  NOT NASA-ENDORSED"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_06_sources.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@47",
+				"rect": [
+					58.0,
+					43.0,
+					33.0,
+					53.0
+				],
+				"text": "◒"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@49",
+				"rect": [
+					107.0,
+					34.0,
+					354.0,
+					42.0
+				],
+				"text": "LAST LIGHT ACADEMY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@VBoxContainer@48/@Label@50",
+				"rect": [
+					107.0,
+					76.0,
+					354.0,
+					18.0
+				],
+				"text": "AURORA STATION  /  SOUTH-POLAR TRAINING SCENARIO"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@53/@Label@52",
+				"rect": [
+					979.0,
+					50.0,
+					243.0,
+					39.0
+				],
+				"text": "SPACE APPS 2026\nJUNIOR ASTRONAUT MISSION TRAINER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@57",
+				"rect": [
+					87.0,
+					153.0,
+					422.0,
+					18.0
+				],
+				"text": "MISSION CONTROL / OFFLINE READY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@58",
+				"rect": [
+					87.0,
+					185.0,
+					422.0,
+					93.0
+				],
+				"text": "Run a real\nmission decision."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@59",
+				"rect": [
+					87.0,
+					292.0,
+					422.0,
+					78.0
+				],
+				"text": "Observe → discuss → preview → commit → learn.\nYour first choice changes what the crew can see next."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@61",
+				"rect": [
+					87.0,
+					402.0,
+					422.0,
+					48.0
+				],
+				"text": "NEW EXPEDITION  ›"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@62",
+				"rect": [
+					87.0,
+					464.0,
+					422.0,
+					48.0
+				],
+				"text": "CONTINUE · NO CHECKPOINT"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Label@63",
+				"rect": [
+					87.0,
+					526.0,
+					422.0,
+					18.0
+				],
+				"text": "No saved expedition yet. New Expedition is always safe to start."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@65",
+				"rect": [
+					87.0,
+					572.0,
+					422.0,
+					48.0
+				],
+				"text": "SCIENCE + SOURCES"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@66",
+				"rect": [
+					87.0,
+					634.0,
+					422.0,
+					48.0
+				],
+				"text": "DEVELOPER ASSET SHOWCASE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@67",
+				"rect": [
+					87.0,
+					696.0,
+					422.0,
+					48.0
+				],
+				"text": "SETTINGS / ACCESSIBILITY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@69/Margin/Content/@Button@68",
+				"rect": [
+					87.0,
+					758.0,
+					422.0,
+					48.0
+				],
+				"text": "CREDITS"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@72",
+				"rect": [
+					593.0,
+					153.0,
+					592.0,
+					18.0
+				],
+				"text": "THE TRAINING QUESTION"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@73",
+				"rect": [
+					593.0,
+					189.0,
+					592.0,
+					153.0
+				],
+				"text": "How do you keep people safe\nwhen power, air, shielding\nand a living garden share\none small station?"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@76/@Label@75",
+				"rect": [
+					594.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nPOWER"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@78/@Label@77",
+				"rect": [
+					744.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nAIR"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@80/@Label@79",
+				"rect": [
+					894.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nCARE"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@HBoxContainer@74/@PanelContainer@82/@Label@81",
+				"rect": [
+					1044.0,
+					361.0,
+					140.0,
+					70.0
+				],
+				"text": "●\nSAFETY"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@83",
+				"rect": [
+					593.0,
+					450.0,
+					592.0,
+					49.0
+				],
+				"text": "Chapter 1: twelve caption-first scenes\nfor judges, classrooms and families."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/TitleContentScroll/@HBoxContainer@56/@PanelContainer@86/@MarginContainer@70/@VBoxContainer@71/@Label@85",
+				"rect": [
+					593.0,
+					767.0,
+					592.0,
+					39.0
+				],
+				"text": "SIMULATED · Aurora Station, cadets and 2046 timeline are fictional.\nScience displays identify observed, computed and simulated content."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@87",
+				"rect": [
+					58.0,
+					673.0,
+					249.0,
+					17.0
+				],
+				"text": "CAPTIONS ON  •  TIMER-FREE  •  ENGLISH UI"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@MarginContainer@45/@VBoxContainer@46/@HBoxContainer@90/@Label@89",
+				"rect": [
+					905.0,
+					673.0,
+					317.0,
+					17.0
+				],
+				"text": "INDEPENDENT TEAM PROJECT  ·  NOT NASA-ENDORSED"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@115/Margin/Content/@Label@116",
+				"rect": [
+					193.0,
+					69.0,
+					894.0,
+					36.0
+				],
+				"text": "SCIENCE + SOURCES"
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@115/Margin/Content/@Label@117",
+				"rect": [
+					193.0,
+					117.0,
+					894.0,
+					49.0
+				],
+				"text": "Every decision is labelled by what the player can responsibly know.\nThis demo keeps the Aurora scenario fictional and does not hide an unbundled NASA data claim."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@115/Margin/Content/@ScrollContainer@120/@VBoxContainer@121/@PanelContainer@124/@MarginContainer@122/@Label@123",
+				"rect": [
+					206.0,
+					187.0,
+					868.0,
+					39.0
+				],
+				"text": "SIMULATED  ·  Aurora Station / 2046 mission\nFictional station, cadets, dates and game resources. Used for the training scenario."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@115/Margin/Content/@ScrollContainer@120/@VBoxContainer@121/@PanelContainer@127/@MarginContainer@125/@Label@126",
+				"rect": [
+					206.0,
+					252.0,
+					868.0,
+					60.0
+				],
+				"text": "TRAINING SCENARIO  ·  36-hour night and Earth-link cutoff\nThe night is sized to a published Shackleton-rim site (Mazarico et al. 2011). In the computed April 2046 sky (JPL Horizons), Earth is below the exact pole's horizon and rising all night, so the shift-4 Earth-link cutoff is an authored training event."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@115/Margin/Content/@ScrollContainer@120/@VBoxContainer@121/@PanelContainer@130/@MarginContainer@128/@Label@129",
+				"rect": [
+					206.0,
+					338.0,
+					868.0,
+					81.0
+				],
+				"text": "OBSERVED + COMPUTED  ·  Chapter 1 sources (each Data Card shows its dataset ID and link)\nNASA JPL Horizons (Sun and Earth positions) · NASA DONKI and NOAA GOES-13 (the 10 Sep 2017 storm) · LRO LOLA illumination study, Mazarico et al. 2011 · NASA BVAD 2022 (air and food) · NASA 10 kW solar array study · Townsend et al. 1988 and Clowdsley 2021, NASA Langley (water shielding) · NASA OSDR and Wisconsin Fast Plants (Brassica rapa)."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@115/Margin/Content/@ScrollContainer@120/@VBoxContainer@121/@PanelContainer@133/@MarginContainer@131/@Label@132",
+				"rect": [
+					206.0,
+					445.0,
+					868.0,
+					39.0
+				],
+				"text": "DOCUMENTED  ·  NASA Space Apps Challenge 2026\nMade by an independent team for the challenge. No NASA endorsement is implied."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@115/Margin/Content/@ScrollContainer@120/@VBoxContainer@121/@Label@134",
+				"rect": [
+					193.0,
+					501.0,
+					894.0,
+					81.0
+				],
+				"text": "AI disclosure: AI tools made this game's 3D models and animation, cutscene images and video, and all voices, music and sound effects, and wrote the game code to the team's specifications. The story, dialogue, puzzle rules, numbers and science mapping are the team's. Every generation is logged in production/AI_PROMPT_LOG.md (summary: docs/AI_USE.md).\nAccessibility: captions, readable text, pause-safe decisions and timer-free progression are the default route."
+			},
+			{
+				"node": "/root/LastLightAcademy/TitleLayer/MainMenu/@PanelContainer@115/Margin/Content/BackToTitle",
+				"rect": [
+					193.0,
+					607.0,
+					894.0,
+					48.0
+				],
+				"text": "BACK TO TITLE"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_07_arrival_dialogue.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/Audio/@CanvasLayer@218/SoundCaptionPanel/SoundCaption",
+				"rect": [
+					56.0,
+					526.0,
+					99.0,
+					17.0
+				],
+				"text": "[ventilation fans]"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/@Label@258",
+				"rect": [
+					54.0,
+					54.0,
+					350.0,
+					17.0
+				],
+				"text": "Chapter 1 · Night One · 11 April 2046, 06:00"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/@HBoxContainer@259/@Label@261",
+				"rect": [
+					86.0,
+					75.0,
+					318.0,
+					57.0
+				],
+				"text": "Trace the power route at the Mission Table"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/@Label@262",
+				"rect": [
+					54.0,
+					136.0,
+					350.0,
+					43.0
+				],
+				"text": "Sunlight makes more power than the battery can store"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/WhatNowKey",
+				"rect": [
+					54.0,
+					183.0,
+					350.0,
+					17.0
+				],
+				"text": "H · What now"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalMarker/@Label@263",
+				"rect": [
+					542.5361328125,
+					233.995483398438,
+					96.0,
+					23.0
+				],
+				"text": "3 m"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/Dialogue/@VBoxContainer@295/@HBoxContainer@296/@Label@297",
+				"rect": [
+					294.0,
+					581.0,
+					656.0,
+					17.0
+				],
+				"text": "Kai"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/Dialogue/@VBoxContainer@295/@HBoxContainer@296/@Label@298",
+				"rect": [
+					954.0,
+					581.0,
+					32.0,
+					17.0
+				],
+				"text": "1 of 4"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/Dialogue/@VBoxContainer@295/@Label@299",
+				"rect": [
+					294.0,
+					604.0,
+					692.0,
+					20.0
+				],
+				"text": "A full battery sounds like a good problem."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/Dialogue/@VBoxContainer@295/@HBoxContainer@300/Auto",
+				"rect": [
+					806.0,
+					630.0,
+					61.0,
+					36.0
+				],
+				"text": "Auto"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/Dialogue/@VBoxContainer@295/@HBoxContainer@300/Next",
+				"rect": [
+					875.0,
+					630.0,
+					111.0,
+					36.0
+				],
+				"text": "Next · Space"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_08_arrival_walking.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/Audio/@CanvasLayer@218/SoundCaptionPanel/SoundCaption",
+				"rect": [
+					56.0,
+					647.0,
+					235.0,
+					17.0
+				],
+				"text": "[ventilation fans]   [Earth link connected]"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/@Label@258",
+				"rect": [
+					54.0,
+					54.0,
+					350.0,
+					17.0
+				],
+				"text": "Chapter 1 · Night One · 11 April 2046, 06:00"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/@HBoxContainer@259/@Label@261",
+				"rect": [
+					86.0,
+					75.0,
+					318.0,
+					57.0
+				],
+				"text": "Trace the power route at the Mission Table"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/@Label@262",
+				"rect": [
+					54.0,
+					136.0,
+					350.0,
+					43.0
+				],
+				"text": "Sunlight makes more power than the battery can store"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/WhatNowKey",
+				"rect": [
+					54.0,
+					183.0,
+					350.0,
+					17.0
+				],
+				"text": "H · What now"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalMarker/@Label@263",
+				"rect": [
+					542.5361328125,
+					233.995483398438,
+					96.0,
+					23.0
+				],
+				"text": "3 m"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_09_what_now.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@Label@315",
+				"rect": [
+					278.0,
+					65.0,
+					724.0,
+					27.0
+				],
+				"text": "What now"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@Label@316",
+				"rect": [
+					278.0,
+					102.0,
+					724.0,
+					17.0
+				],
+				"text": "Your goal, why it matters, where to go and a hint."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/@Label@301",
+				"rect": [
+					278.0,
+					143.0,
+					724.0,
+					27.0
+				],
+				"text": "Trace the power route at the Mission Table"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/@Label@302",
+				"rect": [
+					278.0,
+					180.0,
+					724.0,
+					20.0
+				],
+				"text": "Sunlight makes more power than the battery can store"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/@HBoxContainer@305/@Label@304",
+				"rect": [
+					310.0,
+					212.0,
+					692.0,
+					20.0
+				],
+				"text": "Mission Table · 3 m"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/@HBoxContainer@308/@Label@307",
+				"rect": [
+					310.0,
+					246.0,
+					692.0,
+					20.0
+				],
+				"text": "Follow the power from the arrays to the battery, then to the loads."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/@Label@309",
+				"rect": [
+					278.0,
+					278.0,
+					724.0,
+					17.0
+				],
+				"text": "Jobs here"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/Jobs/@HBoxContainer@367/@Label@365",
+				"rect": [
+					278.0,
+					306.0,
+					72.0,
+					17.0
+				],
+				"text": "▸ Now"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/Jobs/@HBoxContainer@367/@Label@366",
+				"rect": [
+					360.0,
+					305.0,
+					642.0,
+					20.0
+				],
+				"text": "Trace the power route at the Mission Table"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/Jobs/@HBoxContainer@370/@Label@368",
+				"rect": [
+					278.0,
+					330.0,
+					72.0,
+					17.0
+				],
+				"text": "· Later"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/Jobs/@HBoxContainer@370/@Label@369",
+				"rect": [
+					360.0,
+					329.0,
+					642.0,
+					20.0
+				],
+				"text": "Check the result at the Mission Table"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/Jobs/@HBoxContainer@373/@Label@371",
+				"rect": [
+					278.0,
+					354.0,
+					72.0,
+					17.0
+				],
+				"text": "· Later"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/Jobs/@HBoxContainer@373/@Label@372",
+				"rect": [
+					360.0,
+					353.0,
+					642.0,
+					20.0
+				],
+				"text": "Read the charter and emergency card"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/@HFlowContainer@310/LastResult",
+				"rect": [
+					278.0,
+					383.0,
+					99.0,
+					44.0
+				],
+				"text": "Last result"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/@HFlowContainer@310/DecisionReview",
+				"rect": [
+					385.0,
+					383.0,
+					107.0,
+					44.0
+				],
+				"text": "Your choice"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow/@HFlowContainer@310/Retry",
+				"rect": [
+					500.0,
+					383.0,
+					233.0,
+					44.0
+				],
+				"text": "Retry from the last checkpoint"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@323/@Button@324",
+				"rect": [
+					905.0,
+					613.0,
+					97.0,
+					44.0
+				],
+				"text": "Close · Esc"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_10_pause.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@Label@315",
+				"rect": [
+					278.0,
+					65.0,
+					724.0,
+					27.0
+				],
+				"text": "Paused"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@Label@316",
+				"rect": [
+					278.0,
+					102.0,
+					724.0,
+					17.0
+				],
+				"text": "The clock stops while you read and plan."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/Resume",
+				"rect": [
+					278.0,
+					143.0,
+					724.0,
+					44.0
+				],
+				"text": "Resume"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/WhatNow",
+				"rect": [
+					278.0,
+					196.0,
+					724.0,
+					44.0
+				],
+				"text": "What now"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/Journal",
+				"rect": [
+					278.0,
+					249.0,
+					724.0,
+					44.0
+				],
+				"text": "Journal"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/Settings",
+				"rect": [
+					278.0,
+					302.0,
+					724.0,
+					44.0
+				],
+				"text": "Settings"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/Save",
+				"rect": [
+					278.0,
+					355.0,
+					724.0,
+					44.0
+				],
+				"text": "Save"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/SaveAndQuit",
+				"rect": [
+					278.0,
+					408.0,
+					724.0,
+					44.0
+				],
+				"text": "Save and quit"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/ResumeCard/@VBoxContainer@375/@Label@374",
+				"rect": [
+					290.0,
+					471.0,
+					700.0,
+					18.0
+				],
+				"text": "PREVIOUSLY AT AURORA"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/ResumeCard/@VBoxContainer@375/ResumeLine1",
+				"rect": [
+					290.0,
+					493.0,
+					700.0,
+					23.0
+				],
+				"text": "Aurora · Commons · 11 April 2046 · 06:00 UTC."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/ResumeCard/@VBoxContainer@375/ResumeLine2",
+				"rect": [
+					290.0,
+					520.0,
+					700.0,
+					49.0
+				],
+				"text": "Now: Trace where the spare sunlight goes, choose stored air or the planting bay, and read the station charter."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@323/@Button@324",
+				"rect": [
+					905.0,
+					613.0,
+					97.0,
+					44.0
+				],
+				"text": "Close · Esc"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_11_journal.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@Label@315",
+				"rect": [
+					78.0,
+					65.0,
+					1124.0,
+					27.0
+				],
+				"text": "Journal"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@Label@316",
+				"rect": [
+					78.0,
+					102.0,
+					1124.0,
+					17.0
+				],
+				"text": "What the crew has found so far. Up and down change tabs; right opens the page."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/JournalTabs/Tab_now",
+				"rect": [
+					78.0,
+					143.0,
+					200.0,
+					44.0
+				],
+				"text": "› Now · 1"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/JournalTabs/Tab_evidence",
+				"rect": [
+					78.0,
+					195.0,
+					200.0,
+					44.0
+				],
+				"text": "   Evidence"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/JournalTabs/Tab_garden",
+				"rect": [
+					78.0,
+					247.0,
+					200.0,
+					44.0
+				],
+				"text": "   Garden"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/JournalTabs/Tab_decisions",
+				"rect": [
+					78.0,
+					299.0,
+					200.0,
+					44.0
+				],
+				"text": "   Decisions"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/Section_objective",
+				"rect": [
+					296.0,
+					143.0,
+					906.0,
+					18.0
+				],
+				"text": "OBJECTIVE"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@PanelContainer@381/@VBoxContainer@380/@Label@376",
+				"rect": [
+					308.0,
+					180.0,
+					882.0,
+					28.0
+				],
+				"text": "Sunlight We Cannot Keep"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@PanelContainer@381/@VBoxContainer@380/@Label@377",
+				"rect": [
+					308.0,
+					212.0,
+					882.0,
+					24.0
+				],
+				"text": "Trace where the spare sunlight goes, choose stored air or the planting bay, and read the station charter."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@PanelContainer@381/@VBoxContainer@380/@Label@378",
+				"rect": [
+					308.0,
+					240.0,
+					882.0,
+					20.0
+				],
+				"text": "This is the crew's first decision at Aurora."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@PanelContainer@381/@VBoxContainer@380/@Label@379",
+				"rect": [
+					308.0,
+					264.0,
+					882.0,
+					17.0
+				],
+				"text": "Mission · Give the Station a Crew · 11 April 2046 · 06:00 UTC"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/Section_done_so_far",
+				"rect": [
+					296.0,
+					300.0,
+					906.0,
+					18.0
+				],
+				"text": "DONE SO FAR"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@Label@382",
+				"rect": [
+					296.0,
+					327.0,
+					906.0,
+					20.0
+				],
+				"text": "Nothing is finished yet. Start with the objective above."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/Section_what_now?",
+				"rect": [
+					296.0,
+					356.0,
+					906.0,
+					18.0
+				],
+				"text": "WHAT NOW?"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/RevealHint",
+				"rect": [
+					296.0,
+					383.0,
+					906.0,
+					44.0
+				],
+				"text": "Show hint 1 of 3 · Nudge"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@Label@383",
+				"rect": [
+					296.0,
+					436.0,
+					906.0,
+					16.0
+				],
+				"text": "Hints never change an ending, a star or a reward."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@Button@384",
+				"rect": [
+					296.0,
+					461.0,
+					906.0,
+					44.0
+				],
+				"text": "Sources · all data cards"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@323/@Button@324",
+				"rect": [
+					1105.0,
+					613.0,
+					97.0,
+					44.0
+				],
+				"text": "Close · Esc"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_12_campaign_settings_large.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@Label@315",
+				"rect": [
+					278.0,
+					65.0,
+					724.0,
+					39.0
+				],
+				"text": "Settings"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@Label@316",
+				"rect": [
+					278.0,
+					114.0,
+					724.0,
+					26.0
+				],
+				"text": "Captions, text size, reduced motion and timer-free play."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@Label@402",
+				"rect": [
+					278.0,
+					164.0,
+					716.0,
+					55.0
+				],
+				"text": "These change how the game looks and sounds. They never change the station or the story."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/captions",
+				"rect": [
+					278.0,
+					228.0,
+					716.0,
+					36.0
+				],
+				"text": "Captions on"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/large_text",
+				"rect": [
+					278.0,
+					273.0,
+					716.0,
+					36.0
+				],
+				"text": "Large text (150%)"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/timer_free",
+				"rect": [
+					278.0,
+					318.0,
+					716.0,
+					36.0
+				],
+				"text": "Timer-free alternatives"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/reduced_motion",
+				"rect": [
+					278.0,
+					363.0,
+					716.0,
+					36.0
+				],
+				"text": "Reduced motion"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@HBoxContainer@405/@Label@403",
+				"rect": [
+					278.0,
+					408.0,
+					220.0,
+					28.0
+				],
+				"text": "Master volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@HBoxContainer@405/@Label@404",
+				"rect": [
+					938.0,
+					409.0,
+					56.0,
+					26.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@HBoxContainer@408/@Label@406",
+				"rect": [
+					278.0,
+					445.0,
+					220.0,
+					28.0
+				],
+				"text": "Dialogue volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@HBoxContainer@408/@Label@407",
+				"rect": [
+					938.0,
+					446.0,
+					56.0,
+					26.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@HBoxContainer@411/@Label@409",
+				"rect": [
+					278.0,
+					482.0,
+					220.0,
+					28.0
+				],
+				"text": "Music volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@HBoxContainer@411/@Label@410",
+				"rect": [
+					938.0,
+					483.0,
+					56.0,
+					26.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@HBoxContainer@414/@Label@412",
+				"rect": [
+					278.0,
+					519.0,
+					220.0,
+					28.0
+				],
+				"text": "Effects volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@HBoxContainer@414/@Label@413",
+				"rect": [
+					938.0,
+					520.0,
+					56.0,
+					26.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@HBoxContainer@417/@Label@415",
+				"rect": [
+					278.0,
+					556.0,
+					220.0,
+					28.0
+				],
+				"text": "Interface volume"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@HBoxContainer@417/@Label@416",
+				"rect": [
+					938.0,
+					557.0,
+					56.0,
+					26.0
+				],
+				"text": "100%"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/Controls",
+				"rect": [
+					278.0,
+					593.0,
+					716.0,
+					113.0
+				],
+				"text": "Controls\nMove: W A S D · Look: hold the right mouse button\nUse: E · What now: H · Pause: Esc\nNext line: Space · Continue: Enter"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@318/@ScrollContainer@321/@VBoxContainer@322/@Label@418",
+				"rect": [
+					278.0,
+					715.0,
+					716.0,
+					142.0
+				],
+				"text": "Captions keep every line readable when a voice is missing, and caption the sounds that matter.\nTimer-free: nothing needs a quick reaction.\nReduced motion is available here.\nNone of these skip a safety check."
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/CampaignPanels/@PanelContainer@312/@MarginContainer@313/@VBoxContainer@314/@HBoxContainer@323/@Button@324",
+				"rect": [
+					875.0,
+					613.0,
+					127.0,
+					44.0
+				],
+				"text": "Close · Esc"
+			}
+		]
+	},
+	{
+		"capture": "M1-65_13_campaign_large.png",
+		"error": 0,
+		"viewport": [
+			1280,
+			720
+		],
+		"visible_text": [
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/@Label@258",
+				"rect": [
+					54.0,
+					54.0,
+					350.0,
+					55.0
+				],
+				"text": "Chapter 1 · Night One · 11 April 2046, 06:00"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/@HBoxContainer@259/@Label@261",
+				"rect": [
+					86.0,
+					113.0,
+					318.0,
+					81.0
+				],
+				"text": "Trace the power route at the Mission Table"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/@Label@262",
+				"rect": [
+					54.0,
+					198.0,
+					350.0,
+					59.0
+				],
+				"text": "Sunlight makes more power than the battery can store"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalCard/@VBoxContainer@257/WhatNowKey",
+				"rect": [
+					54.0,
+					261.0,
+					350.0,
+					26.0
+				],
+				"text": "H · What now"
+			},
+			{
+				"node": "/root/LastLightAcademy/Chapter1Campaign/CampaignHUDLayer/Chapter1CampaignHUD/GoalMarker/@Label@263",
+				"rect": [
+					542.5361328125,
+					233.995483398438,
+					96.0,
+					26.0
+				],
+				"text": "3 m"
+			}
+		]
+	}
+]

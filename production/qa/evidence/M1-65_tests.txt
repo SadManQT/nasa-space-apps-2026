@@ -1,0 +1,31 @@
+M1-65 clean worktree baseline; Godot 4.7.2; Git Bash; timeout 300 seconds
+FAIL tools/test_asset_showcase.gd :: exit 1 :: SHOWCASE RESULT: FAIL (1287 checks, 1 failures)
+       ERROR: FAIL every GLB has exactly one catalog exhibit (318)
+       SHOWCASE RESULT: FAIL (1287 checks, 1 failures)
+ok   tools/test_campaign_boot.gd :: CAMPAIGN BOOT RESULT: PASS (5 checks, 0 failures)
+ok   tools/test_campaign_crew.gd :: CAMPAIGN CREW RESULT: PASS (927 checks, 0 failures)
+ok   tools/test_campaign_knowledge.gd :: CAMPAIGN KNOWLEDGE RESULT: PASS (46 checks, 0 failures)
+ok   tools/test_campaign_later_runtime.gd :: LATER CAMPAIGN RUNTIME RESULT: PASS (60 checks, 0 failures)
+FAIL tools/test_campaign_media.gd :: exit 1 :: CAMPAIGN MEDIA RESULT: FAIL (108 checks, 5 failures)
+       ERROR: FAIL SFX_INVENTORY_LAMP_TICK imports with loop=false
+       ERROR: FAIL SFX_DHAKA_ROOFTOP_MORNING imports with loop=true
+       ERROR: FAIL scene music starts from the manifest
+       ERROR: FAIL looping music keeps playing past its 1 s end at its base level
+       ERROR: FAIL voice plays for the line whose caption is shown
+ok   tools/test_campaign_session.gd :: CAMPAIGN SESSION RESULT: PASS (15/15 checks, 0 failures)
+ok   tools/test_ch01_s03_route.gd :: CH01 S03 ROUTE RESULT: PASS (7 checks, 0 failures)
+ok   tools/test_chapter1_campaign_flow.gd :: CHAPTER 1 CAMPAIGN FLOW RESULT: PASS (447 checks, 0 failures)
+ok   tools/test_chapter1_logic_regressions.gd :: CHAPTER 1 LOGIC REGRESSIONS: 34 checks, 0 failures
+ok   tools/test_chapter1_ui_regressions.gd :: CHAPTER 1 UI REGRESSIONS: PASS (41 checks, 0 failures)
+ok   tools/test_chapter2_route.gd :: CHAPTER 2 ROUTE RESULT: PASS (104 checks, 0 failures)
+ok   tools/test_cutscene_choice_card.gd :: CUTSCENE CHOICE CARD RESULT: PASS (47 checks, 0 failures)
+FAIL tools/test_eclipse_props.gd :: exit 1 :: ECLIPSE PROPS RESULT: FAIL (99 checks, 32 failures)
+       FAIL load res://assets/props/eclipse_power/PR_EclipseBoard_LOD0.glb
+       FAIL load res://assets/props/eclipse_power/PR_EclipseBoard_LOD1.glb
+       SCRIPT ERROR: Cannot call method 'find_children' on a null value.
+       FAIL load res://assets/props/eclipse_power/PR_SegmentCard_LOD0.glb
+       FAIL load res://assets/props/eclipse_power/PR_SegmentCard_LOD1.glb
+ok   tools/test_explainers.gd :: EXPLAINERS RESULT: PASS (321 checks, 0 failures)
+
+Runner exit: 124; elapsed seconds: 300.2
+TIMEOUT: runner did not complete within 300 seconds; no passing suite count may be inferred.
