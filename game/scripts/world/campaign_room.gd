@@ -12,6 +12,10 @@ const ToonMaterialsScript = preload("res://scripts/toon_materials.gd")
 const Staging = preload("res://scripts/world/room_staging.gd")
 ## PR_CrewSeat: cushion runs from 0.2 m behind to 0.5 m in front of the pivot at 0.44 m high.
 const SEAT_SIT_OFFSET_M := 0.3
+const PlantServiceScript = preload("res://scripts/biology/plant_service.gd")
+## Stage node inside PL_Alo_Sprout / PL_Tara_Sprout for each PlantService.seedling_form, and its words.
+const SEEDLING_NODES := {"seed": "Stage_Seed", "cotyledon": "Stage_Cotyledon", "true_leaf": "Stage_TrueLeaf"}
+const SEEDLING_WORDS := {"seed": "SOWN SEED", "cotyledon": "SEED LEAVES", "true_leaf": "TRUE LEAVES"}
 
 @export var room_id := "LOC-01"
 @export var load_approved_assets := true
@@ -141,21 +145,27 @@ func set_door_open(boundary_id: String, is_open: bool) -> bool:
 			return true
 	return false
 
-## Displays the canonical plant stage at its sealed chamber anchor.
+## Shows each garden plant's model for its dated stage at its sealed chamber anchor. The biology service decides
+## the stage and, before the bud, the seedling form; this only picks the matching model and stage node.
 func apply_plant_state(plants: Array) -> void:
 	if room_id != "LOC-03" or visual_root == null:
 		return
+	var biology := PlantServiceScript.new()
 	for individual in ["ALO-01", "TARA-01"]:
 		var stage := "seed"
+		var form := "seed"
 		for plant in plants:
 			if plant is Dictionary and String(plant.get("individual_id", "")) == individual:
 				stage = String(plant.get("stage", "seed"))
+				form = biology.seedling_form(plant)
 		var prefix := "PL_Alo_" if individual == "ALO-01" else "PL_Tara_"
 		for model in visual_root.get_children():
 			if String(model.name).begins_with(prefix):
 				model.hide()
 		var asset := ""
-		if individual == "ALO-01":
+		if SEEDLING_NODES.has(form):
+			asset = prefix + "Sprout"
+		elif individual == "ALO-01":
 			asset = {"bud": "PL_Alo_Bud", "bloom": "PL_Alo_Bloom", "pollinated": "PL_Alo_Bloom", "pod_bearing": "PL_Alo_Pods", "mature_pods": "PL_Alo_Pods", "mature_dry": "PL_Alo_Pods"}.get(stage, "")
 		elif stage in ["bloom", "pollinated"]:
 			asset = "PL_Tara_Bloom"
@@ -163,8 +173,9 @@ func apply_plant_state(plants: Array) -> void:
 		var focus_id := "garden_alo_glove_port" if individual == "ALO-01" else "garden_tara_bay"
 		var focus := focus_root.get_node_or_null("Focus_" + focus_id) as Node3D
 		if focus != null:
-			(focus.get_child(0) as Label3D).text = String(focus.get_meta("focus_label")) + " · " + stage.to_upper()
-		# shortcut: label early stages until approved Alo/Tara seedlings and Tara buds exist.
+			var words := stage.to_upper() + (" · " + String(SEEDLING_WORDS[form]) if SEEDLING_WORDS.has(form) else "")
+			(focus.get_child(0) as Label3D).text = String(focus.get_meta("focus_label")) + " · " + words
+		# shortcut: label Tara's bud until an approved Tara bud model exists.
 		if asset.is_empty() or not load_approved_assets:
 			continue
 		var model := visual_root.get_node_or_null(asset) as Node3D
@@ -181,6 +192,11 @@ func apply_plant_state(plants: Array) -> void:
 			model.position = Presentation.vector(_layout.plant_positions[individual])
 		elif focus != null:
 			model.position = Vector3(focus.position.x, 0.0, focus.position.z)
+		if SEEDLING_NODES.has(form):
+			for stage_name in SEEDLING_NODES.values():
+				var stage_node := model.find_child(String(stage_name), true, false) as Node3D
+				if stage_node != null:
+					stage_node.visible = stage_name == SEEDLING_NODES[form]
 		model.show()
 
 ## The dated stage variant of a garden plant's model (M3-99: green pods, senescent, dry), or `fallback` when the

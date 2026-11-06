@@ -215,6 +215,22 @@ func validate_plant(plant: Dictionary) -> Dictionary:
 	var canonical_reason := _canonical_identity_reason(plant)
 	return {"valid": canonical_reason.is_empty(), "reason": canonical_reason}
 
+## Visible form of an Alo or Tara plant before its bud, from the plant's own dates (never a playback timer):
+## "seed" on the sowing day, "cotyledon" (two seed leaves) from day 1 and "true_leaf" from
+## `biology.true_leaf_day` (Fast Plants life cycle; doc 24 §3.8). Returns "" for later stages and for cotton,
+## which has its own art. The day counted is `last_advanced_at`, the date the service last evaluated.
+func seedling_form(plant: Dictionary) -> String:
+	if String(plant.get("plant_type", "mustard")) != "mustard":
+		return ""
+	var stage := String(plant.get("stage", ""))
+	if stage == "seed":
+		return "seed"
+	if stage != "sprout":
+		return ""
+	var planted := _day_number(String(plant.get("planted_at", "")))
+	var evaluated := _day_number(String(plant.get("last_advanced_at", plant.get("planted_at", ""))))
+	return "true_leaf" if evaluated - planted >= int(CampaignRules.data.biology.true_leaf_day) else "cotyledon"
+
 func advance_to(plant: Dictionary, scenario_datetime: String) -> Dictionary:
 	var base := plant.duplicate(true)
 	var result := _operation("advance", base, scenario_datetime)

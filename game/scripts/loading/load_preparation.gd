@@ -115,7 +115,8 @@ func wait_campaign() -> bool:
 static func room_paths(room_id: String) -> Array:
 	var paths: Array = Contract.room(room_id).get("asset_paths", []).duplicate()
 	if room_id == "LOC-03":
-		for id in ["PL_Alo_Bloom", "PL_Alo_Pods"]:
+		# Every dated plant model CampaignRoom.apply_plant_state can show (seedlings from M1-07), so a stage swap never decodes on the main thread.
+		for id in ["PL_Alo_Sprout", "PL_Tara_Sprout", "PL_Alo_Bloom", "PL_Alo_Pods"]:
 			paths.append("res://assets/plants/%s/%s.glb" % [id, id])
 	return paths
 

@@ -7,6 +7,8 @@ tools can find any asset, its source, its game path and its verification status 
 Sources: every production/manifest/*.csv with gate columns (verify_gate.gate_manifests()), planned_assets.csv,
 the files in game/assets/, production/review/asset_verification.md (automated gate) and
 production/review/visual_review.md. An asset is "verified" only when it passes both.
+2D assets (screen renders, portraits, UI art) have no GLB to gate: screen_assets.csv lists them, and one is
+"verified" when every path in its game_path (";"-separated) is installed and its approved column names the approval.
 """
 import argparse, csv, re
 from pathlib import Path
@@ -62,6 +64,14 @@ for r in csv.DictReader(open(M / "planned_assets.csv", encoding="utf-8")):
         continue
     rows.append([r["name"], r["category"], "planned", "", r["method"], "", "manifest/planned_assets.csv",
                  f'first used {r["first_scenes"]}; {r["notes"]}'])
+
+for r in csv.DictReader(open(M / "screen_assets.csv", encoding="utf-8")):
+    if args.manifest:
+        continue
+    installed = all((ROOT / p).exists() for p in r["game_path"].split(";"))
+    status = "verified" if installed and r["approved"] else "in game, unchecked" if installed else "in progress"
+    rows.append([r["name"], r["category"], status, r["game_path"], r["source"], "", "manifest/screen_assets.csv",
+                 f'approved {r["approved"]}; {r["notes"]}' if r["approved"] else r["notes"]])
 
 out = ROOT / "production/ASSET_REGISTRY.csv"
 with open(out, "w", newline="", encoding="utf-8") as f:

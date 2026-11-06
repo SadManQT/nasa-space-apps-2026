@@ -479,7 +479,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 1 missing assets: Alo's early stages, Earth desk, UI kit",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -494,7 +494,7 @@
     "execution/ASSET_UI_Kit.md"
    ],
    "note": "Approved by Sadman in chat, 6 Nov 2026 10:58: \"Approve, Space weather\" (both sheets, UI kit and Earth desk, as built; Rafi's role word everywhere is \"Space weather\").",
-   "evidence": "",
+   "evidence": "Approved by Sadman in chat, 6 Nov 2026 ~10:58: \"Approve, Space weather\" (UI_Kit_sheet_v1 with its 6 README decisions and EN_EarthDesk_sheet_v1 with its 5, as built; Rafi's role word everywhere is Space weather, handbook §3/§4 updated). Landed night/M1-07 (a7140a3) on main: PL_Alo_Sprout + PL_Tara_Sprout (gate PASS, visual PASS, registry verified), EN_EarthDesk + UI_Kit (new production/manifest/screen_assets.csv, registry verified); Earth screen re-fitted to main's kit commons fixture; seedlings merged with M3-99 stage models. Gate: verify_gate.py 171 assets, 0 failing. run_tests.sh: 48/48 suites passed. Evidence re-taken in the kit rooms: production/qa/evidence/M1-07_earth_desk_{rao,ferreira,recording,wide}.png, M1-07_garden_*.png, M1-07_hud_*.png, M1-07_sprout_review_contact.png, M1-07_ui_kit_sheet_{100,150}.png. Outside the task's paths (minimal): game/scripts/ui, game/resources/ui, campaign_rules.json true_leaf_day, plant_service.seedling_form, load_preparation.gd garden preload, AssetGeometry.CACHE_LIMIT 20. Filed M1-79 (commons sign hidden behind the Earth screen). No credits.",
    "updated": "2026-11-06",
    "prompt": "Goal: the remaining Chapter 1 registry rows exist: PL_Alo_Sprout (seed, sprout and seedling stages for planting and care), EN_EarthDesk\n(Ferreira's and Rao's Earth-screen backdrop), UI_Kit (icons, panel frames, meters in the approved palette).\nDo: concept sheets first and the user's approval (one combined approval message is fine), then generate/build per each execution prompt.\nPlants never have faces. This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; registry updated; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
    "reserved_for": "sadman",
@@ -5600,6 +5600,26 @@
    "updated": "2026-11-06",
    "prompt": "M1-65 final baseline, Godot 4.7.2 Windows Git Bash: production/qa/evidence/M1-65_tests_clean.txt records a Segmentation fault at game/tools/run_tests.sh line 17 in the initial --headless --path . --editor --quit command, then the runner proceeds to passing suite lines. The runner uses set -u and does not check this import/editor command status. Do not assume the engine crash root cause; the demonstrated runner defect is that a failed mandatory setup step cannot affect the final result. Expected: fail closed on non-zero cache refresh/import status, emit a readable setup failure and diagnostic output, avoid claiming a green full run from stale imports. Preserve the existing per-suite parse-error/pass-marker checks and timeout behavior. Acceptance: with a small fake GODOT executable that exits non-zero only for the editor/setup invocation but would print a passing marker for suites, run_tests.sh exits non-zero and identifies setup failure; normal successful setup still runs suites. Reproduce actual Windows setup separately and route any engine/import issue to its owner.",
    "reserved_for": "atik",
+   "effort": 1
+  },
+  {
+   "id": "M1-79",
+   "milestone": "M1",
+   "priority": "P2",
+   "tool": "claude",
+   "title": "Commons wall sign hidden behind the Earth screen",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/resources/campaign/rooms/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-06.",
+   "evidence": "",
+   "updated": "2026-11-06",
+   "prompt": "In the kit-built commons (game/resources/campaign/rooms/LOC-01.json) the sign 'AURORA / COMMONS' is at [0, 2.18, -5.8], behind the earth_screen fixture (centre [0, 1.7, -5.7], 3 x 1.5 m), so it never shows (see production/qa/evidence/M1-07_earth_desk_wide.png). Found while landing M1-07. Move the sign above the screen (top edge 2.45 m) or onto another wall. Acceptance: the sign reads from the commons_player anchor; screenshot in production/qa/evidence/; run_tests.sh green.",
+   "reserved_for": "sadman",
    "effort": 1
   }
  ],

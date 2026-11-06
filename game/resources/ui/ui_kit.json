@@ -1,0 +1,150 @@
+{
+ "schema_version": 1,
+ "source": "UI_Kit (M1-07): one line-icon set at 24 px, each kind with its word (doc 25 section 2.1), source chips for the dialogue origins in ui_text.json, meter levels in words, role markers from ART_BIBLE section 3, and the four panel states. Icons are SVG files in game/assets/ui/kit/icons/, written by production/concept/ui_kit/build_ui_kit.py.",
+ "icon_px": 24,
+ "min_interaction_px": 44,
+ "icons": {
+  "power": "Power",
+  "life": "Air",
+  "water": "Water",
+  "shielding": "Shielding",
+  "radiation": "Radiation",
+  "plant": "Garden",
+  "food": "Food",
+  "goal": "Goal",
+  "message": "Message",
+  "place": "Where",
+  "journal": "Journal",
+  "settings": "Settings",
+  "save": "Save",
+  "pause": "Pause",
+  "what_now": "What now",
+  "info": "Note",
+  "check": "Done",
+  "close": "Close",
+  "warning": "Caution",
+  "clock": "Time",
+  "arrow_right": "Next",
+  "lock": "Locked",
+  "key": "Key",
+  "earth_link": "Earth link",
+  "radio": "Radio",
+  "recording": "Recording",
+  "text_message": "Text message",
+  "people": "Crew",
+  "person": "Person",
+  "battery": "Battery",
+  "tank": "Air tank",
+  "sun": "Space weather",
+  "leaf": "Plant",
+  "heat": "Heat",
+  "light": "Light",
+  "seed": "Seed",
+  "rover": "Rover",
+  "route": "Route",
+  "moon": "Moon"
+ },
+ "mission_table_icons": {
+  "BATTERY": "battery",
+  "TANK": "tank",
+  "SUN": "sun",
+  "LEAF": "leaf"
+ },
+ "sources": {
+  "LOCAL LIVE": "",
+  "EARTH LINK": "earth_link",
+  "LOCAL RADIO": "radio",
+  "STORED RECORDING": "recording",
+  "QUEUED TEXT": "text_message"
+ },
+ "states": {
+  "empty": {
+   "icon": "info",
+   "word": "Nothing here yet",
+   "colour": "muted"
+  },
+  "error": {
+   "icon": "warning",
+   "word": "Something went wrong",
+   "colour": "danger"
+  },
+  "loading": {
+   "icon": "clock",
+   "word": "Loading",
+   "colour": "muted"
+  },
+  "disabled": {
+   "icon": "lock",
+   "word": "Not available now",
+   "colour": "muted"
+  }
+ },
+ "meter": {
+  "bar_px": 10,
+  "levels": [
+   {
+    "id": "good",
+    "word": "OK",
+    "colour": "good",
+    "from": 0.5
+   },
+   {
+    "id": "caution",
+    "word": "Low",
+    "colour": "caution",
+    "from": 0.25
+   },
+   {
+    "id": "danger",
+    "word": "Critical",
+    "colour": "danger",
+    "from": 0.0
+   }
+  ]
+ },
+ "roles": {
+  "kai": {
+   "name": "Kai",
+   "role": "Power",
+   "colour": "kai",
+   "icon": "battery"
+  },
+  "amara": {
+   "name": "Amara",
+   "role": "Air",
+   "colour": "amara",
+   "icon": "tank"
+  },
+  "rafi": {
+   "name": "Rafi",
+   "role": "Space weather",
+   "colour": "rafi",
+   "icon": "sun"
+  },
+  "mei": {
+   "name": "Mei",
+   "role": "Garden",
+   "colour": "mei",
+   "icon": "leaf"
+  },
+  "ferreira": {
+   "name": "Ferreira",
+   "role": "Commander",
+   "colour": "ferreira",
+   "icon": "earth_link"
+  },
+  "rao": {
+   "name": "Rao",
+   "role": "Earth flight controller",
+   "colour": "muted",
+   "icon": "earth_link"
+  }
+ },
+ "earth_screen": {
+  "base": "res://assets/ui/screens/EN_EarthDesk.png",
+  "variants": {
+   "STORED RECORDING": "res://assets/ui/screens/EN_EarthDesk_archive.png"
+  },
+  "note": "EN_EarthDesk: the room behind an Earth-side caller, drawn behind the portrait on the station's Earth screen; the archive variant is used for stored recordings. Its size and place come from the commons' earth_screen fixture (game/resources/campaign/rooms/LOC-01.json): as large as fits inside the screen's bezel at 16:9."
+ }
+}

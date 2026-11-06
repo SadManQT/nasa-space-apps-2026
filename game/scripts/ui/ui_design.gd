@@ -12,6 +12,7 @@ const TEXT_PATH := "res://resources/campaign/content/ui_text.json"
 
 static var _tokens: Dictionary = {}
 static var _text: Dictionary = {}
+static var _icon_textures: Dictionary = {}
 static var _word_rules: Array = []
 static var _banned: RegEx
 
@@ -26,6 +27,11 @@ class LineIcon extends Control:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 	func _draw() -> void:
 		var c := colour
+		# The UI kit's SVG of this kind (M1-07) when it exists; the drawn glyph below is the fallback.
+		var kit_texture := UiDesign.kit_icon(kind)
+		if kit_texture != null:
+			draw_texture_rect(kit_texture, Rect2(Vector2.ZERO, size if size.x > 0 else custom_minimum_size), false, c)
+			return
 		match kind:
 			"power":
 				draw_rect(Rect2(2, 6, 16, 12), c, false, 2)
@@ -63,6 +69,13 @@ class LineIcon extends Control:
 				draw_line(Vector2(12, 16), Vector2(12, 22), c, 2)
 			_:
 				draw_arc(Vector2(12, 12), 8, 0, TAU, 24, c, 2)
+
+## The kit's SVG icon for `kind` (res://assets/ui/kit/icons/<kind>.svg), or null when there is none.
+static func kit_icon(kind: String) -> Texture2D:
+	if not _icon_textures.has(kind):
+		var path := "res://assets/ui/kit/icons/%s.svg" % kind
+		_icon_textures[kind] = load(path) if ResourceLoader.exists(path) else null
+	return _icon_textures[kind]
 
 ## Design tokens (sizes at 1080p, colours, panel, motion, keys).
 static func tokens() -> Dictionary:
@@ -164,14 +177,18 @@ static func label(text_value: String, token: String = "body", colour_name: Strin
 	result.text = text_value
 	return style_label(result, token, colour_name)
 
-## Sizes every typed label and button under `node` for the canvas height and
-## text scale; subtrees listed in `skip` are left alone.
+## Sizes every typed label, button and kit icon under `node` for the canvas
+## height and text scale; subtrees listed in `skip` are left alone.
 static func apply_type(node: Node, viewport_height: float, scale: float, skip: Array = []) -> void:
 	for child in node.get_children():
 		if skip.has(child):
 			continue
 		if child is Control:
 			var control := child as Control
+			if control.has_meta("lla_icon_px"):
+				# Kit icons (UiKit.icon) grow with the text beside them, so 150 % text keeps icon and word in proportion.
+				var icon_side := px(float(control.get_meta("lla_icon_px")) * scale, viewport_height)
+				control.custom_minimum_size = Vector2(icon_side, icon_side)
 			if control.has_meta("lla_type"):
 				control.add_theme_font_size_override("font_size", font_px(String(control.get_meta("lla_type")), viewport_height, scale))
 			elif control is Button or control is CheckButton:

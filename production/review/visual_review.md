@@ -207,3 +207,12 @@ Reviewed on the Cycles previews and the review sheets `production/qa/evidence/M3
 | EN_Fabrication_Bench_LOD1 | ✅ PASS | Compatibility LOD: same layout, fewer segments |
 | EN_Fabrication_RouteSimulator_LOD0 | ✅ PASS | navy table with a relief of the real LOLA corridor (crater detail from the 80 m data, no grid banding after the tangent-frame normal fix), orange computed road, Aurora mast and summit dish markers, three repeater pins, tilted monitor with a live screen |
 | EN_Fabrication_RouteSimulator_LOD1 | ✅ PASS | Compatibility LOD: relief at half density with 1024 px maps, road and pins kept |
+
+## M1-07 Alo and Tara seedlings — 6 November 2026, approved by Sadman
+
+Built procedurally from the M3-99 seedling sheet (approved 5 Nov) by `production/concept/plants/build_sprout_glb.py`. Reviewed on `production/qa/evidence/M1-07_sprout_review_contact.png` (seed, cotyledon and true-leaf nodes from four sides, above and with the thirst/cold morphs) and in the garden (`M1-07_garden_*.png`). Sadman approved M1-07 as built in chat on 6 Nov 2026 (about 10:58): "Approve, Space weather".
+
+| Asset | Verdict | Notes |
+|---|---|---|
+| PL_Alo_Sprout | ✅ PASS | PL_Alo_Bud pot; sown seed in the soil, two heart-shaped seed leaves on a purple hypocotyl, then the first true leaves; Droop and Cup posture morphs; no face, eyes or mouth |
+| PL_Tara_Sprout | ✅ PASS | PL_Tara_Bloom pot; same three stages on a green hypocotyl; Droop and Cup posture morphs; no face, eyes or mouth |
