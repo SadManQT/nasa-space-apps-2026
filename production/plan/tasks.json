@@ -591,8 +591,8 @@
    "reserved_for": "Tanvir"
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "atik/codex",
    "deps": [
     "M1-34",
     "M1-35"
@@ -609,7 +609,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-06",
    "id": "M1-36",
    "milestone": "M1",
    "priority": "P0",
