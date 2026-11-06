@@ -1310,6 +1310,11 @@ func _ending_actions(data: Dictionary) -> void:
 	_ending_button("Retry from shift %d checkpoint" % int(data.retry_shift), "EndingRetry", func():
 		ending_retry_requested.emit(), not bool(data.can_retry))
 	if bool(data.safe_ending):
-		_ending_button("Continue the story", "EndingContinue", func(): ending_continue_requested.emit())
+		var can_continue := bool(data.get("can_continue", false))
+		_ending_button("Continue the story", "EndingContinue", func(): ending_continue_requested.emit(), not can_continue)
+		if not can_continue:
+			var reason := UiDesign.label(String(data.get("continue_reason", "Close this review and finish the jobs here to continue.")), "body", "accent")
+			reason.name = "EndingContinueReason"
+			_body.add_child(reason)
 	else:
 		_card_text("Review what happened, then retry the checkpoint to continue this expedition.")

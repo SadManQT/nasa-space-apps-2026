@@ -77,6 +77,7 @@ func _run() -> void:
 			if panel_id == "chapter1_outcome" and hud.show_chapter1_outcome():
 				for large in [false, true]:
 					hud.panels.set_accessibility({"large_text": large})
+					await _walk_state(hud, "ending summary large=%s" % large)
 					(hud.panels.find_child("ReviewDecisions", true, false) as Button).pressed.emit()
 					for shift in 7:
 						await _walk_state(hud, "ending replay %d large=%s" % [shift, large])

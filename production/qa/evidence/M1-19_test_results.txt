@@ -1,5 +1,5 @@
-M1-19 integrated verification ? 6 November 2026
-Review base: 64a1f8a. Product/source commit: ce1fe28 (same source as f915008; final screenshots amended).
+M1-19 pre-review integrated verification ? 6 November 2026
+Review base: 64a1f8a. Pre-fix full-run/source commit: ce1fe28 (same source as f915008; final screenshots amended).
 Status: DONE_WITH_CONCERNS ? full acceptance blocked by Atik-owned M1-68 runtime performance.
 Godot: 4.7.2 stable, Windows; native capture: Forward+, Vulkan, RTX4060.
 
@@ -83,3 +83,34 @@ ok   tools/test_worker_a_systems.gd :: WORKER A SYSTEMS RESULT: PASS (108 checks
 ok   tools/test_worker_b_world_missions.gd :: WORKER B WORLD/MISSIONS RESULT: PASS (429 checks, 0 failures)
 ok   tools/test_worker_c_content.gd :: WORKER C CONTENT RESULT: PASS (572 checks, 0 failures)
 51/52 suites passed
+
+
+POST-REVIEW FIX1 ? blocked Continue explanation (source in this fix commit)
+Review base: ce1fe28 (HEAD before fix0b984f5 adds previous evidence only).
+Final fix source hash is recorded in task-3-report.md; this evidence accompanies that source/test/capture commit.
+HUD reads live route.gate_status, supplies can_continue and existing goal/place copy.
+Blocked safe Continue is disabled with visible reason; stale callback checks the route before closing and keeps the explanation open.
+No mission, simulator, model classification, story gate flag or grading changes.
+
+RED: game/tools/run_tests.sh chapter1_outcomes
+CHAPTER 1 OUTCOMES RESULT: FAIL (126 checks, 24 failures)
+0/1 suites passed
+Expected failures: blocked Continue enabled, missing reason, stale callback closes explanation; both safe endings, both late physical gates, normal and150% text.
+
+Final GREEN: game/tools/run_tests.sh chapter1_outcomes
+CHAPTER 1 OUTCOMES RESULT: PASS (134 checks, 0 failures)
+1/1 suites passed
+Final GREEN: game/tools/run_tests.sh player_text
+PLAYER TEXT RESULT: PASS (388 checks, 0 failures)
+1/1 suites passed
+Final GREEN: game/tools/run_tests.sh chapter1_campaign_flow
+CHAPTER 1 CAMPAIGN FLOW RESULT: PASS (448 checks, 0 failures)
+1/1 suites passed
+Native recapture: Godot --path game --script res://tools/capture_chapter1_outcomes.gd
+M1-19 CAPTURE RESULT: PASS (0 failures)
+All14PNGs refreshed6Nov14:51:52?14:52:01+06:00;29probe assertions; no ERROR/SCRIPT ERROR.
+Safe normal/large summaries explicitly show disabled Continue plus actual missing physical task/place.
+
+Full runner above is PRE-FIX ce1fe28:51/52 suites passed; sole failure performance_runtime537checks/8failures.
+No full rerun for this display/guard fix round, per coordinator's explicit covering-test instruction.
+Full acceptance remains blocked by M1-68; a later full gate must test updated source before task completion.

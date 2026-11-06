@@ -37,6 +37,8 @@ func _run() -> void:
 		_expect(campaign.hud.show_chapter1_outcome(), ending + " opens from actual saved route")
 		var panels := campaign.hud.panels
 		_expect((panels.find_child("EndingContinue", true, false) != null) == (ending in ["BLOOM", "GOLDEN"]), ending + " Continue follows safe-ending gate")
+		if ending in ["BLOOM", "GOLDEN"]:
+			_expect((panels.find_child("EndingContinue", true, false) as Button).disabled, ending + " waits for the physical review task")
 		await _capture(ending.to_lower())
 		if ending == "GOLDEN":
 			(panels.find_child("ReviewDecisions", true, false) as Button).pressed.emit()
@@ -76,6 +78,11 @@ func _run() -> void:
 
 func _capture(label: String) -> void:
 	await create_timer(0.35).timeout
+	if label in ["bloom", "golden", "golden_large_text"]:
+		var reason := campaign.hud.panels.find_child("EndingContinueReason", true, false) as Control
+		_expect(reason != null, label + " shows the next physical task")
+		if reason != null:
+			campaign.hud.panels._scroll.ensure_control_visible(reason)
 	await process_frame
 	await RenderingServer.frame_post_draw
 	var path := ProjectSettings.globalize_path("res://../production/qa/evidence/M1-19_%s.png" % label)

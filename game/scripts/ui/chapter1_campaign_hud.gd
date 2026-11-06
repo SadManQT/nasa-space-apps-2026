@@ -131,9 +131,11 @@ func setup(value: Chapter1Campaign) -> void:
 		panels.close_panel()
 		runtime.retry_checkpoint())
 	panels.ending_continue_requested.connect(func() -> void:
+		if not bool(runtime.route.gate_status().get("ready", false)):
+			show_chapter1_outcome()
+			return
 		panels.close_panel()
-		if bool(runtime.route.gate_status().get("ready", false)):
-			runtime.advance_scene())
+		runtime.advance_scene())
 	panels.set_panel_builder("what_now", _build_what_now)
 	panels.set_pause_actions([
 		{"label": String(_words.get("what_now", "What now")), "name": "WhatNow", "action": func() -> void: panels.open_panel("what_now")},
@@ -699,6 +701,12 @@ func show_chapter1_outcome(page: String = "summary") -> bool:
 	var data := Debrief.view(runtime.director.snapshot(), runtime.route.snapshot())
 	if data.is_empty():
 		return false
+	data["can_continue"] = bool(runtime.route.gate_status().get("ready", false))
+	if not data.can_continue:
+		_build_targets()
+		data["continue_reason"] = "Close this review, then follow this goal:\n" + String(_goal_info.goal)
+		if not String(_goal_info.place).is_empty():
+			data.continue_reason += "\nFind it at " + String(_goal_info.place) + "."
 	return panels.open_chapter1_outcome(data, page)
 
 func _render_caption() -> void:

@@ -129,15 +129,23 @@ func _test_ui() -> void:
 		safe_campaign.initial_snapshot = safe_state
 		root.add_child(safe_campaign)
 		await process_frame
+		_test_blocked_continue(safe_campaign, safe_ending, "Review how the night ended")
 		safe_campaign.route.perform("review_outcome")
-		safe_campaign.hud.show_chapter1_outcome()
+		for large in [false, true]:
+			safe_campaign.hud.panels.set_accessibility({"large_text": large})
+			safe_campaign.hud.show_chapter1_outcome()
+			_check(not (safe_campaign.hud.panels.find_child("EndingContinue", true, false) as Button).disabled, "%s ready physical gate enables Continue at large=%s" % [safe_ending, large])
 		(safe_campaign.hud.panels.find_child("EndingContinue", true, false) as Button).pressed.emit()
 		_check(safe_campaign.route.current_scene_id() == "EX-CH01-S12", safe_ending + " continues only into the final story scene")
+		_test_blocked_continue(safe_campaign, safe_ending, "Check Alo's chamber at the glove port")
 		for target_id in ["verify_chamber", "open_shutter", "tag_bloom", "inspect_tara", "complete_debrief"]:
 			safe_campaign.hud.refresh_after_action(safe_campaign.route.perform(target_id))
 		_check(safe_campaign.hud.panels.find_child("ReplayChoice", true, false) != null, "the physical science debrief opens with decision replay")
 		safe_campaign.hud.panels.close_panel()
-		safe_campaign.hud.show_chapter1_outcome()
+		for large in [false, true]:
+			safe_campaign.hud.panels.set_accessibility({"large_text": large})
+			safe_campaign.hud.show_chapter1_outcome()
+			_check(not (safe_campaign.hud.panels.find_child("EndingContinue", true, false) as Button).disabled, "%s ready physical gate enables Continue at large=%s" % [safe_ending, large])
 		(safe_campaign.hud.panels.find_child("EndingContinue", true, false) as Button).pressed.emit()
 		_check(safe_campaign.route.current_scene_id() == "EX-CH02-S01", safe_ending + " Continue advances after all final gates")
 		safe_campaign.free()
@@ -152,6 +160,22 @@ func _test_ui() -> void:
 		_check(not bool(failure_route.advance_scene().accepted), ending + " cannot exit the real physical scene gate")
 		failure_panels.free()
 	storage.cleanup()
+
+func _test_blocked_continue(campaign: Chapter1Campaign, ending: String, goal: String) -> void:
+	var scene_id: String = campaign.route.current_scene_id()
+	for large in [false, true]:
+		campaign.hud.panels.set_accessibility({"large_text": large})
+		campaign.hud.show_chapter1_outcome()
+		var panels := campaign.hud.panels
+		var button := panels.find_child("EndingContinue", true, false) as Button
+		var reason := panels.find_child("EndingContinueReason", true, false) as Label
+		_check(button != null and button.disabled, "%s incomplete physical task disables Continue at large=%s" % [ending, large])
+		_check(reason != null and reason.is_visible_in_tree() and reason.text.contains(goal) and reason.text.contains("Close this review"), "%s explains the next physical task at large=%s" % [ending, large])
+		# A stale queued signal must recheck the live route, even for a disabled button.
+		panels.ending_continue_requested.emit()
+		_check(campaign.route.current_scene_id() == scene_id and panels.active_panel() == "chapter1_outcome" and panels.find_child("EndingContinueReason", true, false) != null, "%s stale Continue keeps the explanation open at large=%s" % [ending, large])
+	campaign.hud.panels.close_panel()
+	campaign.hud.panels.set_accessibility({"large_text": false})
 
 func _check(condition: bool, label: String) -> void:
 	checks += 1
