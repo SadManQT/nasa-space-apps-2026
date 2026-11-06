@@ -1,0 +1,355 @@
+{
+ "chapter": 8,
+ "messages": [
+  {
+   "id": "MSG-CH08-001",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-04-08T00:05Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S01"
+   },
+   "join": "CH08 S01→S02",
+   "subject": "Travel clock started",
+   "body": "Twenty-four out. Three repair. Twenty-four back. The travel clock is running and the rover carries seventy-two hours of independent supplies.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-002",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-04-08T00:06Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S01"
+   },
+   "join": "CH08 S01→S02",
+   "subject": "I have the garden",
+   "body": "I have the garden. Amara has the station. Send position packets; we will answer every one.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-003",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-04-08T00:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S02"
+   },
+   "join": "CH08 S02→S03",
+   "subject": "The return is already in the battery",
+   "body": "The shorter line looked cheaper until Rafi laid the slope map over it. We take the surveyed road, and the energy to come back is counted before we leave.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-004",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2047-04-08T00:31Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S02"
+   },
+   "join": "CH08 S02→S03",
+   "subject": "Road, not shortcut",
+   "body": "A reserve cannot rescue an impossible road. Cruise begins on the surveyed road.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-005",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-04-08T06:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH08-S03"
+   },
+   "join": "",
+   "subject": "Position packet received",
+   "body": "Position packet received. You are on the surveyed road, on time. The garden is fine and so are we.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-006",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-04-08T10:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S03"
+   },
+   "join": "CH08 S03→S04",
+   "subject": "Marker two is dark",
+   "body": "Marker two is dark. Brake set at the surveyed pad. We match markers to the map, not to silhouettes. Suit and tether checks next.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-007",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2047-04-08T10:05Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S03"
+   },
+   "join": "CH08 S03→S04",
+   "subject": "Repeaters",
+   "body": "Radio needs a clear line. Repeaters along the road pass the signal hop by hop around the terrain; one dark marker breaks the chain for everyone behind it.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-008",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-04-08T17:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S04"
+   },
+   "join": "CH08 S04→S05",
+   "subject": "Light is not yet a link",
+   "body": "Repeater battery replaced, power isolated first. Both neighbours tested, so it is a link and not just a light. Control returns to Aurora while we drive on.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-009",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2047-04-08T17:05Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S04"
+   },
+   "join": "CH08 S04→S05",
+   "subject": "Field position held",
+   "body": "Field position recorded on the time card. Aurora has the watch for the night ahead.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-010",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-04-08T18:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S05"
+   },
+   "join": "CH08 S05→S06",
+   "subject": "Same darkness, different garden",
+   "body": "The final thirty-six-hour night has started. Home forecast checked against the independent gauge. The guide light is exactly where we planned it. Two here until the return.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-011",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-04-08T18:05Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S05"
+   },
+   "join": "CH08 S05→S06",
+   "subject": "Different us",
+   "body": "Same darkness, different garden, different us. Then five for the last three hours.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-012",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-04-09T00:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S06"
+   },
+   "join": "CH08 S06→S07",
+   "subject": "Summit reached",
+   "body": "Summit reached. Three aboard. The relay housing is dark beyond the window. Repair window opens now.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-013",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-04-09T00:02Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S06"
+   },
+   "join": "CH08 S06→S07",
+   "subject": "Home first",
+   "body": "Home checks first: air, temperature, return path. Then the summit packet was acknowledged.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-014",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-04-09T00:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S07"
+   },
+   "join": "CH08 S07→S08",
+   "subject": "The spare has a history",
+   "body": "My December note was still in the crate. Connectors and serial checked again anyway. Power isolated, zero verified, housing closed before reconnecting. The antenna panel just woke up.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-015",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-04-09T00:46Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S07"
+   },
+   "join": "CH08 S07→S08",
+   "subject": "Two unverified channels",
+   "body": "Two signal panels live, neither verified yet. Aurora first.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-016",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-04-09T01:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S08"
+   },
+   "join": "CH08 S08→S09",
+   "subject": "Both shores",
+   "body": "Local leg to Aurora locked, then the Earth leg with obstruction checked. Both shores, not just the bright one.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-017",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2047-04-09T01:46Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S08"
+   },
+   "join": "CH08 S08→S09",
+   "subject": "Line of sight",
+   "body": "A picture of Earth above a ridge does not prove the base below can hear you. A relay must see both ends.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-018",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-04-09T02:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S09"
+   },
+   "join": "CH08 S09→S10",
+   "subject": "Exact match",
+   "body": "ALO42 sent, exact match returned. Strong is not the same as correct, and this was correct. The transmit button is ready for a voice.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-019",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-04-09T02:16Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S09"
+   },
+   "join": "CH08 S09→S10",
+   "subject": "Telemetry",
+   "body": "Current telemetry follows through the relay. Now verify the voices at both ends.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-020",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2047-04-09T03:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S10"
+   },
+   "join": "CH08 S10→S11",
+   "subject": "Route restored",
+   "body": "Aurora, Earth desk. The route through Malapert is restored and logged. Thank you for leaving room on the channel. Drive home safely.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-021",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-04-09T03:01Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S10"
+   },
+   "join": "CH08 S10→S11",
+   "subject": "Return departure",
+   "body": "Return departs now: same road, new timestamps. Return is part of the mission.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-022",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-04-10T03:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S11"
+   },
+   "join": "CH08 S11→S12",
+   "subject": "Five home",
+   "body": "Five home. Ferreira's mug is back beside the others. Three hours to first light.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-023",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-04-10T03:02Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S11"
+   },
+   "join": "CH08 S11→S12",
+   "subject": "Arrivals checked",
+   "body": "Three arrivals expected and checked. Provisions used against the forecast are in the report.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH08-024",
+   "thread": "earth",
+   "sender": "Noor",
+   "story_time": "2047-04-10T07:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S12"
+   },
+   "join": "CH08→credits→CS-18",
+   "subject": "By the window",
+   "body": "Show me the cotton by the window.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH08-025",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-04-10T07:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH08-S12"
+   },
+   "join": "CH08→credits→CS-18",
+   "subject": "What we grew",
+   "body": "Temperature and pressure steady. Thirty founder seeds protected, eleven vault specimens kept, everyone home. The shutter is open. Thank you for growing this with us.",
+   "goal": false
+  }
+ ]
+}
