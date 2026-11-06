@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "groups": {"power": "Power", "life": "Life support", "shielding": "Shielding", "food": "Food"},
+  "scenarios": [
+    {"id":"P-01","title":"Commission and Plant","demand":"food"},
+    {"id":"P-02","title":"Seven Shifts, One Night","demand":"power","adapter":"p02","profile":"chapter1_base","mission":"EX-M0103","scene":"EX-CH01-S07","brief_mission":"EX-M0103","estimate":"Allow about 5–10 minutes; take longer whenever you need."},
+    {"id":"P-03","title":"Alo Meets Tara","demand":"food"},
+    {"id":"P-04","title":"Recorder Reconstruction","demand":"food"},
+    {"id":"P-05","title":"Find the Falling Pressure","demand":"life"},
+    {"id":"P-06","title":"A Harvest With a Future","demand":"food"},
+    {"id":"P-07","title":"Survey and Return","demand":"life"},
+    {"id":"P-08","title":"Recover Without Ruining","demand":"food"},
+    {"id":"P-09","title":"Reconstruct the Departure","demand":"food"},
+    {"id":"P-10","title":"Flashes and a Signature","demand":"power"},
+    {"id":"P-11","title":"Protect the Small Light","demand":"power"},
+    {"id":"P-12","title":"Observe, Isolate, Restore","demand":"power"},
+    {"id":"P-13","title":"One Integrated Storm Plan","demand":"shielding"},
+    {"id":"P-14","title":"Three Waves and a Broken Link","demand":"shielding"},
+    {"id":"P-15","title":"Two Teams, One Road","demand":"life"},
+    {"id":"P-16","title":"The Link and the Living Garden","demand":"power"}
+  ]
+}

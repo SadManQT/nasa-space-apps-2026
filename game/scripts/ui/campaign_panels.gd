@@ -1239,6 +1239,13 @@ func _render_chapter1_outcome(value) -> void:
 	_title.text = String(data.get("title", "First light"))
 	var replay: Array = data.get("replay", [])
 	if _ending_page == "summary":
+		if bool(data.get("trainer", false)):
+			var rating := UiDesign.label("%d of 3 stars" % int(data.star_count), "heading", "accent")
+			rating.name = "TrainerStarRating"
+			_body.add_child(rating)
+			var save_status := UiDesign.label(String(data.get("trainer_save_status", "")), "body", "accent")
+			save_status.name = "TrainerSaveStatus"
+			_body.add_child(save_status)
 		_card_text(String(data.get("summary", "")), true)
 		var resources: Dictionary = data.resources
 		_card_text("Crew \u00b7 " + ("The night is complete and the crew is safe." if data.safe_ending or data.ending == "ALO_LOST" else "Flight rules stopped this attempt at the safety limit."))
@@ -1309,6 +1316,9 @@ func _render_chapter1_outcome(value) -> void:
 func _ending_actions(data: Dictionary) -> void:
 	_ending_button("Retry from shift %d checkpoint" % int(data.retry_shift), "EndingRetry", func():
 		ending_retry_requested.emit(), not bool(data.can_retry))
+	if bool(data.get("trainer", false)):
+		_ending_button("Back to training scenarios", "TrainerReportBack", func(): ending_continue_requested.emit())
+		return
 	if bool(data.safe_ending):
 		var can_continue := bool(data.get("can_continue", false))
 		_ending_button("Continue the story", "EndingContinue", func(): ending_continue_requested.emit(), not can_continue)

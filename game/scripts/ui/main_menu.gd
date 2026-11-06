@@ -5,6 +5,7 @@ signal new_expedition_requested
 signal continue_requested
 signal science_requested
 signal showcase_requested
+signal trainer_requested
 signal command_emitted(command: Dictionary)
 signal accessibility_requested
 
@@ -263,6 +264,10 @@ func _build_command_panel() -> Control:
 		continue_requested.emit()
 	)
 	content.add_child(_continue_button)
+	var trainer_button := _button("MISSION TRAINER", Color(0.15, 0.20, 0.31), IVORY)
+	trainer_button.name = "MissionTrainerEntry"
+	trainer_button.pressed.connect(func(): trainer_requested.emit())
+	content.add_child(trainer_button)
 	_save_note = Label.new()
 	_save_note.text = "No saved expedition yet. New Expedition is always safe to start."
 	_save_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

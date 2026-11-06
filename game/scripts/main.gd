@@ -19,6 +19,8 @@ var _campaign: Node3D
 var _replace_dialog: ConfirmationDialog
 var _save_service: SaveService
 var _load_notice := ""
+var _trainer: Control
+var trainer_results_path := "user://mission_trainer_results.json"
 var save_path: String = SaveScript.DEFAULT_PATH
 var legacy_save_path: String = LegacySave.SAVE_PATH
 
@@ -111,10 +113,33 @@ func _show_title() -> void:
 	_menu.continue_requested.connect(_continue_expedition)
 	_menu.science_requested.connect(_menu.open_science)
 	_menu.showcase_requested.connect(_open_showcase)
+	_menu.trainer_requested.connect(_open_trainer)
 	_menu.setup(_load_campaign_snapshot())
 	_show_load_notice()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	preparation.prepare_campaign.call_deferred()
+
+func _open_trainer() -> void:
+	if is_instance_valid(_trainer) or _launching:
+		return
+	# Trainer resources stay out of the cold title's load path.
+	var script = load("res://scripts/trainer/mission_trainer.gd")
+	_trainer = script.new()
+	_trainer.set("settings", _menu.accessibility_settings())
+	_trainer.set("results_path", trainer_results_path)
+	_menu.hide()
+	_menu.process_mode = Node.PROCESS_MODE_DISABLED
+	_trainer.connect("exit_requested", _close_trainer)
+	_menu_layer.add_child(_trainer)
+
+func _close_trainer() -> void:
+	_trainer.queue_free()
+	_trainer = null
+	_menu.process_mode = Node.PROCESS_MODE_INHERIT
+	_menu.show()
+	var entry := _menu.find_child("MissionTrainerEntry", true, false) as Control
+	if entry != null:
+		entry.grab_focus()
 
 func _start_new_expedition() -> void:
 	if _save_slot_exists():

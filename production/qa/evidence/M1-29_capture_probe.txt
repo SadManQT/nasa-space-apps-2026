@@ -1,0 +1,69 @@
+ok screenshot title
+ok scroll reaches @Label@179
+ok screenshot catalog_power
+ok scroll reaches @Label@180
+ok screenshot catalog_life_support
+ok scroll reaches @Label@181
+ok screenshot catalog_shielding
+ok scroll reaches @Label@182
+ok screenshot catalog_food
+ok screenshot brief
+ok screenshot brief_top
+ok screenshot brief_source
+ok screenshot day_choices
+ok real panel preview gate 0
+ok real confirmation gate 0
+ok real commit gate 0
+ok screenshot dark_choices
+ok real panel preview gate 1
+ok real confirmation gate 1
+ok real commit gate 1
+ok real panel preview gate 2
+ok real confirmation gate 2
+ok real commit gate 2
+ok screenshot alarm_task
+ok real panel preview gate 3
+ok real confirmation gate 3
+ok screenshot alarm_confirmation
+ok real commit gate 3
+ok real panel preview gate 4
+ok real confirmation gate 4
+ok real commit gate 4
+ok actual five-gate Golden result
+ok screenshot outcome
+ok screenshot replay
+ok screenshot science_debrief
+ok screenshot debrief_source
+ok screenshot science_150
+ok scroll reaches DebriefSource
+ok screenshot science_150_actions
+ok screenshot outcome_150
+ok scroll reaches TrainerReportBack
+ok screenshot outcome_150_actions
+ok Retry uses actual pre-final checkpoint
+ok screenshot retry_150
+OBSERVED inherited M1-55 table frame: [P: (12.0, 12.0), S: (1256.0, 1831.0)]; Close button: [P: (1113.0, 1777.0), S: (129.0, 44.0)]; viewport: [P: (0.0, 0.0), S: (1280.0, 720.0)]
+ok scroll reaches @Label@2683
+ok screenshot catalog_150_power
+ok scroll reaches @Label@2684
+ok screenshot catalog_150_life_support
+ok scroll reaches @Label@2685
+ok screenshot catalog_150_shielding
+ok scroll reaches @Label@2686
+ok screenshot catalog_150_food
+ok screenshot brief_150_top
+ok scroll reaches BeginTraining
+ok screenshot brief_150_actions
+ok real write-failure attempt gate 0
+ok real write-failure attempt gate 1
+ok real write-failure attempt gate 2
+ok real write-failure attempt gate 3
+ok real write-failure attempt gate 4
+ok actual save failure is on active report
+ok actual save failure preserves earlier results
+ok screenshot outcome_write_failure
+ok screenshot title_150
+ok screenshot title_150_entry
+title preparation before teardown: preparing=true ready=false
+ok title background preparation finishes before capture teardown
+title preparation after wait: preparing=false ready=true
