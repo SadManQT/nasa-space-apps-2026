@@ -1,0 +1,7 @@
+M4-03 screenshot: M4-03_dedication_opt02_7.5s.png at 7.521 s; words on screen: 'For the gardens we leave for others' (lit pixels in the bottom band: true); error 0
+M4-03 screenshot: M4-03_dedication_opt02_8.5s.png at 8.517 s; words on screen: 'For the gardens we leave for others' (lit pixels in the bottom band: true); error 0
+M4-03 opt02 closed at 8.98 s after play
+M4-03 screenshot: M4-03_dedication_opt01_7.5s.png at 7.533 s; words on screen: '' (lit pixels in the bottom band: false); error 0
+M4-03 opt01 closed at 7.98 s after play
+M4-03 CAPTURE RESULT: PASS (0 failures)
+M4-03 capture complete

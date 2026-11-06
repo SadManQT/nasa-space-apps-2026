@@ -2,6 +2,9 @@
 ## CampaignCutsceneRuntime: the OGV (captions are burned into every film) or,
 ## when the file is missing, the scene's exact lines as a text card. Hold Esc,
 ## Enter, controller B or the on-screen button to skip; Space, P or Start pauses.
+## A plan's choice_card (CS-18's D13 dedication) puts the chosen option's words
+## small at the bottom of the closing black, holding the silent black past the
+## film's end until the card's hide time.
 ## Closing reports what was seen; it never completes a predicate, scene or puzzle.
 extends CanvasLayer
 class_name CampaignCutscenePlayer
@@ -15,6 +18,20 @@ var skip_hold_s := 1.0
 var plan: Dictionary = {}
 var video: VideoStreamPlayer
 var held_s := 0.0
+## Returns the campaign snapshot this player reads (never writes) for a
+## save-dependent card: story_log.choices and accessibility. Unset, the player
+## asks the node it was added to for its `director` (the campaign has one).
+var snapshot_source: Callable
+## The plan's choice_card when the save recorded its option, else {}.
+var choice_card: Dictionary = {}
+var _card: Label
+var _card_scale := 1.0
+var _card_reduced_motion := false
+var _card_shown := false
+var _film_ended := false
+var _film_s := 0.0
+var _end_position_s := 0.0
+var _hold_s := 0.0
 var _frame: AspectRatioContainer
 var _fallback: PanelContainer
 var _fallback_text: Label
@@ -41,7 +58,18 @@ func _ready() -> void:
 	video.expand = true
 	video.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_frame.add_child(video)
-	video.finished.connect(func() -> void: _close(false, true))
+	video.finished.connect(_on_film_finished)
+	# Sits in the film's own 16:9 box, where the burned captions sit.
+	var card_box := Control.new()
+	card_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_frame.add_child(card_box)
+	_card = UiDesign.label("", "body", "ivory")
+	_card.name = "ChoiceCard"
+	_card.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_card.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	_card.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_card.visible = false
+	card_box.add_child(_card)
 	_fallback = PanelContainer.new()
 	_fallback.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 	_fallback.custom_minimum_size = Vector2(760, 0)
@@ -106,6 +134,13 @@ func play(next_plan: Dictionary) -> void:
 	held_s = 0.0
 	_pointer_hold = false
 	_armed = false
+	_film_ended = false
+	_film_s = 0.0
+	_end_position_s = 0.0
+	_hold_s = 0.0
+	_card_shown = false
+	choice_card = _chosen_card(plan)
+	_card.visible = false
 	var is_video := String(plan.get("mode", "")) == "video"
 	_frame.visible = is_video
 	_fallback.visible = not is_video
@@ -119,6 +154,8 @@ func play(next_plan: Dictionary) -> void:
 		var rows: Array = []
 		for line in plan.get("captions", []):
 			rows.append("%s  ·  %s\n%s" % [String(line.get("speaker", "")), String(line.get("origin_label", "")), String(line.get("text", ""))])
+		if not choice_card.is_empty():
+			rows.append(String(choice_card.text))
 		_fallback_text.text = "%s  ·  %s\nThe film is not installed; the scene's exact lines follow.\n\n%s" % [String(plan.get("cutscene_id", "")), String(plan.get("title", "")), "\n\n".join(rows)]
 	_update_hint()
 
@@ -132,9 +169,30 @@ func toggle_pause() -> void:
 func skip() -> void:
 	_close(true)
 
-## Seconds of the film shown so far (0 for the text card).
+## Seconds of the film shown so far (0 for the text card); past the film's end
+## it keeps counting through a choice card's silent hold.
 func position_s() -> float:
-	return video.stream_position if visible and _frame.visible else 0.0
+	if not visible or not _frame.visible:
+		return 0.0
+	return _end_position_s + _hold_s if _film_ended else video.stream_position
+
+## The choice card's words while they are on screen, else "".
+func choice_card_text() -> String:
+	return _card.text if _card.visible else ""
+
+## Opacity of a choice card at film time `t`: 0 before show_at_s and from
+## hide_at_s, rising and falling over fade_s (a cut when motion is reduced).
+static func card_alpha(card: Dictionary, t: float, reduced_motion: bool = false) -> float:
+	if card.is_empty():
+		return 0.0
+	var show_at := float(card.get("show_at_s", 0.0))
+	var hide_at := float(card.get("hide_at_s", 0.0))
+	if t < show_at or t >= hide_at:
+		return 0.0
+	var fade := 0.0 if reduced_motion else float(card.get("fade_s", 0.0))
+	if fade <= 0.0:
+		return 1.0
+	return clampf(minf(t - show_at, hide_at - t) / fade, 0.0, 1.0)
 
 func _process(delta: float) -> void:
 	if not visible:
@@ -150,6 +208,13 @@ func _process(delta: float) -> void:
 	var texture := video.get_video_texture()
 	if _frame.visible and texture != null and texture.get_height() > 0:
 		_frame.ratio = float(texture.get_width()) / texture.get_height()
+	if _film_ended and not video.paused:
+		_hold_s += delta
+	elif _frame.visible and not _film_ended:
+		_film_s = maxf(_film_s, video.stream_position)
+	_update_card()
+	if _film_ended and position_s() >= float(choice_card.get("hide_at_s", 0.0)):
+		_close(false, true)
 
 ## Every key and button press belongs to the film while it is up, so nothing
 ## underneath (USE, ADVANCE, pause panel) can be triggered through it.
@@ -166,13 +231,75 @@ func _input(event: InputEvent) -> void:
 	elif not _frame.visible and (key in [KEY_SPACE, KEY_ENTER, KEY_KP_ENTER] or start):
 		_close(false)
 
+## The film's last frame: close, unless a choice card still needs the black.
+func _on_film_finished() -> void:
+	if not visible:
+		return
+	# The playback clock resets to 0 at the end; keep the film's own time.
+	var at := maxf(_film_s, video.get_stream_length())
+	if choice_card.is_empty() or at >= float(choice_card.get("hide_at_s", 0.0)):
+		_close(false, true)
+		return
+	_film_ended = true
+	_end_position_s = at
+
+func _chosen_card(next_plan: Dictionary) -> Dictionary:
+	var card: Variant = next_plan.get("choice_card", {})
+	if not card is Dictionary or (card as Dictionary).is_empty():
+		return {}
+	var snapshot := _campaign_snapshot()
+	var story_log: Variant = snapshot.get("story_log", {})
+	var choices: Variant = (story_log as Dictionary).get("choices", {}) if story_log is Dictionary else {}
+	var entry: Variant = (choices as Dictionary).get(String((card as Dictionary).get("choice_id", "")), {}) if choices is Dictionary else {}
+	var recorded := String((entry as Dictionary).get("option_id", "")) if entry is Dictionary else ""
+	if recorded.is_empty() or recorded != String((card as Dictionary).get("option_id", "")):
+		return {}
+	var settings: Variant = snapshot.get("accessibility", {})
+	var accessibility: Dictionary = settings if settings is Dictionary else {}
+	_card_scale = float(UiDesign.tokens().get("type", {}).get("large_text_scale", 1.5)) if bool(accessibility.get("large_text", false)) else 1.0
+	_card_reduced_motion = UiDesign.reduced_motion(accessibility)
+	return (card as Dictionary).duplicate(true)
+
+func _campaign_snapshot() -> Dictionary:
+	var value: Variant = null
+	if snapshot_source.is_valid():
+		value = snapshot_source.call()
+	else:
+		var host := get_parent()
+		var director: Object = host.get("director") as Object if host != null and "director" in host else null
+		if director != null and director.has_method("snapshot"):
+			value = director.call("snapshot")
+	return value if value is Dictionary else {}
+
+func _update_card() -> void:
+	var alpha := card_alpha(choice_card, position_s(), _card_reduced_motion) if _frame.visible else 0.0
+	_card.visible = alpha > 0.0
+	if not _card.visible:
+		return
+	if _card.text != String(choice_card.text):
+		_card.text = String(choice_card.text)
+		UiDesign.style_label(_card, String(choice_card.get("type", "body")), String(choice_card.get("colour", "ivory")))
+	var height := _frame.size.y if _frame.size.y > 0.0 else get_viewport().get_visible_rect().size.y
+	_card.add_theme_font_size_override("font_size", UiDesign.font_px(String(choice_card.get("type", "body")), height, _card_scale))
+	var margin := float(UiDesign.px(float(UiDesign.tokens().get("panel", {}).get("safe_margin", 64)), height))
+	_card.offset_left = margin
+	_card.offset_right = -margin
+	_card.offset_bottom = -margin
+	_card.offset_top = -margin
+	_card.modulate.a = alpha
+	_card_shown = true
+
 func _close(skipped: bool, reached_end: bool = false) -> void:
 	if not visible:
 		return
 	var position := INF if reached_end else position_s()
 	var mode := String(plan.get("mode", ""))
+	var card_text := String(choice_card.get("text", "")) if _card_shown else ""
 	video.stop()
 	video.stream = null
+	choice_card = {}
+	_film_ended = false
+	_card.visible = false
 	hide()
 	var result := {
 		"cutscene_id": String(plan.get("cutscene_id", "")),
@@ -183,6 +310,7 @@ func _close(skipped: bool, reached_end: bool = false) -> void:
 		"completes_predicate": false,
 		"completes_scene": false,
 		"completes_mission": false,
+		"choice_card": card_text,
 		"events": [{"type": "cutscene_skipped" if skipped else "cutscene_finished", "cutscene_id": String(plan.get("cutscene_id", ""))}],
 	}
 	plan = {}

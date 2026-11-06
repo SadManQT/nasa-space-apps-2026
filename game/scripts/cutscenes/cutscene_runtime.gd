@@ -59,6 +59,7 @@ func playback_plan(cutscene_id: String, scene_id: String = "", acquired_flags: A
 			"media_present": true,
 			"caption_line_ids": line_ids,
 			"caption_fallback": true,
+			"choice_card": _choice_card_from(metadata),
 			"skip_completes_predicate": false,
 		}
 	return {
@@ -70,6 +71,7 @@ func playback_plan(cutscene_id: String, scene_id: String = "", acquired_flags: A
 		"caption_line_ids": line_ids,
 		"captions": lines,
 		"caption_fallback": true,
+		"choice_card": _choice_card_from(metadata),
 		"reason": "Cutscene media is not installed; exact dialogue/caption text is the runtime presentation.",
 		"skip_completes_predicate": false,
 	}
@@ -94,6 +96,25 @@ func heard_line_ids(cutscene_id: String, position_s: float) -> Array:
 			result.append(String(cue.get("line_id", "")))
 	return result
 
+## The save-dependent words a film closes on (manifest choice_card): timing and
+## type from the manifest, the words from the catalog label of the named choice
+## option, never retyped. {} when the cutscene has no card or the catalog has no
+## such option. The player shows it only when the save recorded that option.
+func choice_card(cutscene_id: String) -> Dictionary:
+	return _choice_card_from(metadata_for_id(cutscene_id))
+
+func _choice_card_from(metadata: Dictionary) -> Dictionary:
+	var spec: Variant = metadata.get("choice_card", {})
+	if not spec is Dictionary or (spec as Dictionary).is_empty():
+		return {}
+	var card: Dictionary = (spec as Dictionary).duplicate(true)
+	card.erase("note")
+	var text := _option_label(String(card.get("choice_id", "")), String(card.get("option_id", "")))
+	if text.is_empty():
+		return {}
+	card["text"] = text
+	return card
+
 ## Seconds a skip input must be held (manifest cutscene_controls.skip_hold_s).
 func skip_hold_seconds() -> float:
 	var controls = _metadata.get("cutscene_controls", {})
@@ -114,6 +135,17 @@ func skip(cutscene_id: String, scene_id: String = "") -> Dictionary:
 		"completes_mission": false,
 		"warnings": ["A cutscene skip never satisfies a physical operation or scene exit predicate."],
 	}
+
+func _option_label(choice_id: String, option_id: String) -> String:
+	var content := _content if _content.has("scenes") else ContentScript.load_full()
+	for scene in content.get("scenes", []):
+		var choice: Variant = (scene as Dictionary).get("choice", {}) if scene is Dictionary else {}
+		if not choice is Dictionary or String((choice as Dictionary).get("id", "")) != choice_id:
+			continue
+		for option in (choice as Dictionary).get("options", []):
+			if option is Dictionary and String((option as Dictionary).get("id", "")) == option_id:
+				return String((option as Dictionary).get("label", ""))
+	return ""
 
 func _read_metadata() -> Dictionary:
 	if not FileAccess.file_exists(MEDIA_PATH):

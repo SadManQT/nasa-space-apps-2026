@@ -532,7 +532,17 @@
       "skip_completes_predicate": false,
       "source": "game/assets/cutscenes/CS-18_The_Closed_Drawer.ogv",
       "trigger": "campaign_complete",
-      "caption_cues": []
+      "caption_cues": [],
+      "choice_card": {
+        "choice_id": "EX-CH08-S12-CHOICE",
+        "option_id": "EX-CH08-S12-OPT02",
+        "show_at_s": 7.0,
+        "hide_at_s": 9.0,
+        "fade_s": 0.4,
+        "type": "body",
+        "colour": "ivory",
+        "note": "Doc 24 section 7.7 beat 3 (D13): when the save recorded this option, the option's catalog label sits small and centred at the bottom of the closing black from show_at_s to hide_at_s. The film is black and silent from 7.0 s and ends at 8.0 s, so the player holds the silent black until hide_at_s; any other option or no choice ends with the film. The words are read from campaign_catalog.json, never typed here."
+      }
     }
   ],
   "not_installed_cutscene_ids": [],

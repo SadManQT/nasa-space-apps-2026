@@ -86,12 +86,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">39 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">8 blocked</span><span class="chip s-todo">32 todo</span></div><div class="bar"><i style="width:49%"></i></div>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">40 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">8 blocked</span><span class="chip s-todo">31 todo</span></div><div class="bar"><i style="width:50%"></i></div>
 <details open><summary>Working now (1)</summary><ul>
 <li><a class="id" href="#M0-11">M0-11</a> Team roster, roles and both registrations <span class="chip ">human</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/human on 2026-11-03</div></li>
 </ul></details>
-<details open><summary>Next up today (2)</summary><ul>
-<li><a class="id" href="#M4-03">M4-03</a> Draw the chosen D13 dedication on CS-18&#x27;s closing black (two seconds from 7.0 s) <span class="chip ">claude</span> <span class="chip ">P1</span></li>
+<details open><summary>Next up today (1)</summary><ul>
 <li><a class="id" href="#M3-94R">M3-94R</a> Record the three approved M3-94 lines and the two M3-97 sound effects with ElevenLabs <span class="chip ">human</span> <span class="chip ">P1</span></li>
 </ul></details>
 <details open><summary>Blocked (8)</summary><ul>
@@ -136,7 +135,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-76">M3-76</a> Explainer clips for every Chapter 5-8 mechanic <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M4-04">M4-04</a> CS-15: install the Dhaka rooftop bed with M3-94R&#x27;s Rao and Noor recordings, encode once <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details><summary>Done (39)</summary><ul>
+<details><summary>Done (40)</summary><ul>
 <li><a class="id" href="#M1-06">M1-06</a> Assemble the Chapter 1 rooms from the kit <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">run_tests.sh last line: 38/38 suites passed (production/qa/evidence/M1-06_tests.txt): habitat rooms 333/0, campaign crew 927/0, room presen…</div></li>
 <li><a class="id" href="#M1-10">M1-10</a> Play CS-01, CS-02 and CS-03 inside the campaign <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">commit feat: campaign plays media; run_tests 31/31; screenshots production/qa/evidence/M1-10_*.png; perf render_m110_m111.json</div></li>
 <li><a class="id" href="#M1-11">M1-11</a> Audio runtime in the campaign: voice with captions, music, effects <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">commit feat: campaign plays media; run_tests 31/31; screenshots production/qa/evidence/M1-11_*.png; perf render_m110_m111.json</div></li>
@@ -176,6 +175,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-77">M3-77</a> Science explainers for Chapters 5-8 <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Chapters 5-8 explainers: sci_impact_flashes (38 s), sci_cotton_moon (34 s), sci_red_ring (40 s, Earth drawn 3.7x the Sun as seen from the M…</div></li>
 <li><a class="id" href="#M1-67">M1-67</a> Restore the second M1-63 explainer sample required by the test gate <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">sci_proton_flux_chart rendered through build.py and registered; test_explainers.gd PASS (41 checks, 0 failures). Ramim: the explainer suite…</div></li>
 <li><a class="id" href="#M4-02">M4-02</a> Fill the CS-18 lamp tick and CS-15 Dhaka bed with the M3-99 effects <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">CS-18: lamp tick installed (pending key removed), master recomposed and OGV re-encoded via heavy.py/godot_gated; tick onset 3.8045 s master…</div></li>
+<li><a class="id" href="#M4-03">M4-03</a> Draw the chosen D13 dedication on CS-18&#x27;s closing black (two seconds from 7.0 s) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">run_tests.sh 43/43 suites passed (production/qa/evidence/M4-03_tests.txt); new suite game/tools/test_cutscene_choice_card.gd 47/47 plays th…</div></li>
 </ul></details>
 </div>
 <div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">4 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">30 todo</span></div><div class="bar"><i style="width:0%"></i></div>
@@ -5866,15 +5866,15 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Draw the chosen D13 dedication on CS-18's closing black (two seconds from 7.0 s)",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-claude2",
    "deps": [],
    "paths": [
     "game/scripts/cutscenes/"
    ],
    "refs": [],
    "note": "Filed by Sadman/night-claude2 on 2026-11-06.",
-   "evidence": "",
+   "evidence": "run_tests.sh 43/43 suites passed (production/qa/evidence/M4-03_tests.txt); new suite game/tools/test_cutscene_choice_card.gd 47/47 plays the real CS-18 OGV for OPT02 (words 7.009-8.993 s, film ends 8.0 s, silent black held 0.99 s, closes 8.98 s), OPT01 and no choice (close 7.98 s, nothing drawn), plus pause in the hold, large text, reduced motion, skip, text fallback and the real Chapter1Campaign director path; window captures production/qa/evidence/M4-03_dedication_opt02_7.5s.png, M4-03_dedication_opt02_8.5s.png, M4-03_dedication_opt01_7.5s.png (M4-03_capture.sh, log M4-03_capture_output.txt); review M4-03_review.md names the 7.0-9.0 s + 1 s hold choice over 6.0-8.0 s for Sadman. Words read from campaign_catalog.json; timing in CS-18 choice_card (presentation_media.json). In play D13 becomes recordable with M3-8M (record_choice is Chapter 1 only today); credits-before-CS-18 is M3-90.",
    "updated": "2026-11-06",
    "prompt": "Problem: doc 24 section 7.7 beat 3 (and the section 2.9 join CH08 -> credits -> CS-18, marked Fix) says that if the player chose 'For the gardens we leave for others' (D13, EX-CH08-S12-CHOICE OPT02, kept in story_log.choices) those words sit small at the bottom of CS-18's black for two seconds. A pre-rendered film cannot carry a save-dependent line, so M3-97 left it to a runtime overlay and its notes pointed at board task M4-01, but M4-01 is a different task and no task covered it (found in M4-02). Do: in the cutscene player (game/scripts/cutscenes/cutscene_player.gd or a small helper beside it), when CS-18 plays on campaign_complete and the D13 choice is OPT02, show the exact catalog label 'For the gardens we leave for others' (read it from campaign_catalog.json, never retyped) small and centred near the bottom of the black for two seconds, in the UiDesign text style; nothing for OPT01 or no choice. Timing: the film has only 1 s of black (picture fades 6-7 s, black and silence 7-8 s), so fade the words in at 7.0 s, when the picture is fully black, and with OPT02 hold the silent black for one second after the film ends, removing the words at 9.0 s; with OPT01 or no choice the film ends at 8.0 s as now. Starting the words over the fade at 6.0 s would need no hold but puts them over the picture, which section 7.7 does not ask for; name this choice in the review for Sadman. English only; no new audio (the closing 7-8 s stays silent; M4-02 put the lamp tick at 3.8 s). Acceptance: a test that plays CS-18 with OPT02, OPT01 and no choice and checks the overlay text and timing; window captures production/qa/evidence/<id>_dedication_opt02_{7.5s,8.5s}.png and <id>_dedication_opt01_7.5s.png; game/tools/run_tests.sh last line in the evidence.",
    "reserved_for": "sadman",

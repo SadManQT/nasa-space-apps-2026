@@ -6,8 +6,8 @@ Computed here, never typed by hand:
 - audio: presence flags, file lists and counts from game/assets/audio; music cues and their scenes from
   production/audio/music_cues.csv; effects, loops and captions from production/audio/sfx_list.csv; every
   loop flag is read from the file's .import (the flag Godot actually uses).
-Hand-authored design keys (cutscene trigger, mix, room_beds, scene_beds, scene_sfx, operation_sfx, line_sfx,
-ui_sfx, music_variant_by_scene, cutscene_controls) are kept exactly as they are in the JSON.
+Hand-authored design keys (cutscene trigger and choice_card, mix, room_beds, scene_beds, scene_sfx, operation_sfx,
+line_sfx, ui_sfx, music_variant_by_scene, cutscene_controls) are kept exactly as they are in the JSON.
 
 Run from the repository root:  python3 -I production/tools/build_presentation_media.py [--check]
 --check exits 1 if the JSON on disk differs from what the files say (nothing is written).
