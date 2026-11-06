@@ -246,3 +246,21 @@ byte-identical). Changed: PR_PaperBee (wings and antennae as above, 152 triangle
 z = 1 and 3 instead of on the near-wall line; interlock `time_compression` note), the plan on the airlock sheet (numbered
 anchors that step clear of every label) and the UI icon. The other eight GLBs are byte-identical to the parked build.
 Inspected: every Cycles preview, the three sheets, the contact sheet and the Godot captures listed in the board evidence.
+
+## M3-5A Chapter 5 assets review — 6 November 2026, Sadman/night-claude2 (Claude Opus 5.5)
+
+Cycles previews (the sheets `production/concept/ch05_assets/M3-5A_*_v1.png`, all five stacked in [M3-5A_ch05_assets_contact.png](M3-5A_ch05_assets_contact.png)) and the Godot captures (`production/qa/evidence/M3-5A_godot_*.png`, toon materials as in play) inspected against ART_BIBLE §2–§3, doc 24 §2.5, §2.9 (CH05 bridges), §4 clues 17–18 and §5 D9, and the cotton botany in `build_cotton_stages.py`: no eyes, faces or mouths on any plant; no words, numbers, logos or flags on any surface (every record word, timestamp, signature and Ferreira's margin note is live text on a `Page_*` slot); metre scale; pivots at the base. All seven are procedural Blender builds (no generation, no credits), so no 2D approval preceded them; Sadman can still mark any of them FIX from the sheets. Second opinion not run on the night shift.
+
+| Asset | Verdict | Notes |
+|---|---|---|
+| PL_Cotton_Seed | ✅ PASS | dark ovoid 9.5 mm acid-delinted seed half-buried in a clean sowing dimple in the reused PL_Cotton_Young pot; fix round: the old Tripo soil no longer pokes through the dimple |
+| PL_Cotton_Sprout | ✅ PASS | reddish hypocotyl, two kidney-shaped cotyledons, no true leaf yet; Thirst (droop, lean) and Cold (cupped blades) change the silhouette |
+| PL_Cotton_Seedling | ✅ PASS | cotyledons plus the first heart-shaped true leaf and a folded second leaf; reads between the sprout and PL_Cotton_Young; same two stress shapes |
+| PR_ImpactMonitor | ✅ PASS | navy plinth, deck tilted 18° on a wedge riser (fix round: the deck no longer dips into the plinth), white head, navy bezel, orange grab handles, blank keys and jog wheel; the `Screen` surface shows the authored frames as live UI; fix round: screen 1.5 mm proud of the bezel (it z-fought in Godot) and the import keeps the shared kit textures |
+| PR_DocumentSleeve | ✅ PASS | rigid navy A4 case, orange tamper seal, steel latch, blank label window; lid opens about its hinge; fix round: the import keeps the shared kit textures |
+| PR_Records2034 | ✅ PASS | four blank 2034 forms told apart by header colour (fault orange, service green, order red with a striped border, manifest navy with a boarding tick per row) under four clear acrylic weights, set down unarranged |
+| PR_MarkerTape | ✅ PASS | 19 mm vinyl roll in Kai's orange on a kraft core, and one strip wrapped on a 12 mm cable with a pressed flag |
+
+Port round, 6 Nov (same reviewer): the parked work was ported onto current main and the eight Godot captures were re-taken from it (`production/qa/evidence/M3-5A_godot_*.png`, windowed, toon materials): same content and verdicts as above. The marker-tape shot is re-centred with a shorter stand-in cable, and the capture now retakes a frame that comes back blank.
+
+CH_Ferreira_Duty (screen portrait, no 3D body): Sadman picked take A in chat on 6 Nov 2026 ("Take A"; sheet `production/concept/ch05_assets/M3-5A_ferreira_duty_v1.png`), installed unchanged as `game/assets/ui/portraits/CH_Ferreira_screen.png`. Checked on landing: her v8 face, pixie cut greying at the temples and eyebrow scar; charcoal fleece, one gear-wheel patch, field watch; no flags, badges, lettering or logos; the screens behind her show only a grey Moon disc and plain graphs. In the game: `production/qa/evidence/M1-07_earth_desk_ferreira.png`. Registry: `production/manifest/screen_assets.csv` (2D assets have no GLB gate).

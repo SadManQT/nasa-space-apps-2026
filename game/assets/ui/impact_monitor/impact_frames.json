@@ -1,0 +1,309 @@
+{
+ "schema_version": 1,
+ "source": "authored teaching set (M3-5A); not an imported observation. Method: NASA Meteoroid Environment Office lunar impact monitoring, two synchronized cameras (SRC-IMPACTS).",
+ "numbers_from": "game-design/08_PUZZLE_DESIGNS.md P-10",
+ "detector_size": [
+  320,
+  200
+ ],
+ "cameras": {
+  "a": "Aurora mast camera (map reference)",
+  "b": "second synchronized camera"
+ },
+ "camera_b_offset_px": [
+  3,
+  -2
+ ],
+ "frame_roles": [
+  "before",
+  "event",
+  "after"
+ ],
+ "counts": {
+  "genuine": 8,
+  "artifacts": 2,
+  "verified_required": 6,
+  "mastery_all": 8
+ },
+ "artifact_detector_xy": [
+  [
+   214,
+   61
+  ],
+  [
+   77,
+   142
+  ]
+ ],
+ "states": {
+  "candidate": "one frame of one candidate from camera a, enlarged",
+  "paired_reference": "the same frame index from camera b beside camera a (a real flash is in both; a hot pixel is in a only)",
+  "artifact_rejection": "frames 0, 1 and 2 of camera a side by side (a real flash has an onset; a hot pixel is in all three)",
+  "verified_six": "the supported-event list reaches six with a reason on every row: mission exit gate",
+  "mastery_eight": "all eight genuine events verified and no false report: Golden criterion"
+ },
+ "candidates": [
+  {
+   "id": "C01",
+   "kind": "artifact",
+   "frames": {
+    "a": [
+     "frames/C01_a_0.png",
+     "frames/C01_a_1.png",
+     "frames/C01_a_2.png"
+    ],
+    "b": [
+     "frames/C01_b_0.png",
+     "frames/C01_b_1.png",
+     "frames/C01_b_2.png"
+    ]
+   },
+   "detector_xy": [
+    214,
+    61
+   ],
+   "map_xy": null,
+   "onset_frame": null,
+   "persistent": true
+  },
+  {
+   "id": "C02",
+   "kind": "genuine",
+   "frames": {
+    "a": [
+     "frames/C02_a_0.png",
+     "frames/C02_a_1.png",
+     "frames/C02_a_2.png"
+    ],
+    "b": [
+     "frames/C02_b_0.png",
+     "frames/C02_b_1.png",
+     "frames/C02_b_2.png"
+    ]
+   },
+   "detector_xy": [
+    118,
+    92
+   ],
+   "map_xy": [
+    118,
+    92
+   ],
+   "onset_frame": 1,
+   "peak_amplitude": 0.371,
+   "duration_frames": 1
+  },
+  {
+   "id": "C03",
+   "kind": "genuine",
+   "frames": {
+    "a": [
+     "frames/C03_a_0.png",
+     "frames/C03_a_1.png",
+     "frames/C03_a_2.png"
+    ],
+    "b": [
+     "frames/C03_b_0.png",
+     "frames/C03_b_1.png",
+     "frames/C03_b_2.png"
+    ]
+   },
+   "detector_xy": [
+    248,
+    57
+   ],
+   "map_xy": [
+    248,
+    57
+   ],
+   "onset_frame": 1,
+   "peak_amplitude": 0.481,
+   "duration_frames": 1
+  },
+  {
+   "id": "C04",
+   "kind": "genuine",
+   "frames": {
+    "a": [
+     "frames/C04_a_0.png",
+     "frames/C04_a_1.png",
+     "frames/C04_a_2.png"
+    ],
+    "b": [
+     "frames/C04_b_0.png",
+     "frames/C04_b_1.png",
+     "frames/C04_b_2.png"
+    ]
+   },
+   "detector_xy": [
+    63,
+    38
+   ],
+   "map_xy": [
+    63,
+    38
+   ],
+   "onset_frame": 1,
+   "peak_amplitude": 0.417,
+   "duration_frames": 1
+  },
+  {
+   "id": "C05",
+   "kind": "artifact",
+   "frames": {
+    "a": [
+     "frames/C05_a_0.png",
+     "frames/C05_a_1.png",
+     "frames/C05_a_2.png"
+    ],
+    "b": [
+     "frames/C05_b_0.png",
+     "frames/C05_b_1.png",
+     "frames/C05_b_2.png"
+    ]
+   },
+   "detector_xy": [
+    77,
+    142
+   ],
+   "map_xy": null,
+   "onset_frame": null,
+   "persistent": true
+  },
+  {
+   "id": "C06",
+   "kind": "genuine",
+   "frames": {
+    "a": [
+     "frames/C06_a_0.png",
+     "frames/C06_a_1.png",
+     "frames/C06_a_2.png"
+    ],
+    "b": [
+     "frames/C06_b_0.png",
+     "frames/C06_b_1.png",
+     "frames/C06_b_2.png"
+    ]
+   },
+   "detector_xy": [
+    196,
+    151
+   ],
+   "map_xy": [
+    196,
+    151
+   ],
+   "onset_frame": 1,
+   "peak_amplitude": 0.355,
+   "duration_frames": 1
+  },
+  {
+   "id": "C07",
+   "kind": "genuine",
+   "frames": {
+    "a": [
+     "frames/C07_a_0.png",
+     "frames/C07_a_1.png",
+     "frames/C07_a_2.png"
+    ],
+    "b": [
+     "frames/C07_b_0.png",
+     "frames/C07_b_1.png",
+     "frames/C07_b_2.png"
+    ]
+   },
+   "detector_xy": [
+    151,
+    118
+   ],
+   "map_xy": [
+    151,
+    118
+   ],
+   "onset_frame": 1,
+   "peak_amplitude": 0.36,
+   "duration_frames": 1
+  },
+  {
+   "id": "C08",
+   "kind": "genuine",
+   "frames": {
+    "a": [
+     "frames/C08_a_0.png",
+     "frames/C08_a_1.png",
+     "frames/C08_a_2.png"
+    ],
+    "b": [
+     "frames/C08_b_0.png",
+     "frames/C08_b_1.png",
+     "frames/C08_b_2.png"
+    ]
+   },
+   "detector_xy": [
+    287,
+    123
+   ],
+   "map_xy": [
+    287,
+    123
+   ],
+   "onset_frame": 1,
+   "peak_amplitude": 0.341,
+   "duration_frames": 1
+  },
+  {
+   "id": "C09",
+   "kind": "genuine",
+   "frames": {
+    "a": [
+     "frames/C09_a_0.png",
+     "frames/C09_a_1.png",
+     "frames/C09_a_2.png"
+    ],
+    "b": [
+     "frames/C09_b_0.png",
+     "frames/C09_b_1.png",
+     "frames/C09_b_2.png"
+    ]
+   },
+   "detector_xy": [
+    34,
+    171
+   ],
+   "map_xy": [
+    34,
+    171
+   ],
+   "onset_frame": 1,
+   "peak_amplitude": 0.598,
+   "duration_frames": 1
+  },
+  {
+   "id": "C10",
+   "kind": "genuine",
+   "frames": {
+    "a": [
+     "frames/C10_a_0.png",
+     "frames/C10_a_1.png",
+     "frames/C10_a_2.png"
+    ],
+    "b": [
+     "frames/C10_b_0.png",
+     "frames/C10_b_1.png",
+     "frames/C10_b_2.png"
+    ]
+   },
+   "detector_xy": [
+    229,
+    24
+   ],
+   "map_xy": [
+    229,
+    24
+   ],
+   "onset_frame": 1,
+   "peak_amplitude": 0.616,
+   "duration_frames": 1
+  }
+ ]
+}

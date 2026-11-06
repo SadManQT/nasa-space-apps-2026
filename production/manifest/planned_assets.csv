@@ -12,10 +12,6 @@ EN_MalapertSummit,environment,Blender terrain + PR_MalapertRelay,EX-CH08-S06,sum
 EN_NoorRooftop,environment,Generated cutscene plate,EX-CH08-S10,Dhaka rooftop at night (screen scene)
 CH_Rao,character,Portrait/bust (screen only),EX-CH01-S01,headset; Earth desk
 CH_Noor,character,Portraits: 2034 archive + present + rooftop,EX-CH05-S10,older Bangladeshi botanist
-CH_Ferreira_Duty,character,Turnaround + Tripo multiview,EX-CH01-S01,Earth duty-layer outfit for screen scenes before 12 Dec
-CH_Cadet_DutyLayer,character,Turnaround + Tripo multiview x4,EX-CH01-S05,indoor navy coverall variants
 PR_Helmet_Roles,prop,Blender recolour of PR_Helmet,EX-CH03-S07,role-colour stripe per cadet
 PL_Descendants,plant,Blender instancing of PL_Alo_* and PL_Tara_*,EX-CH03-S11,12-position tray; CH04 7 purple + 5 green
-PL_Cotton_Seedling,plant,Blender (scaled from PL_Cotton_Young),EX-CH05-S12,early cotton
 PR_PressedPetal,prop,Blender (small),EX-CH03-S10,petal in dated sleeve
-PR_ImpactMonitor,prop,UI + screen frames,EX-CH05-S07,impact-camera frames (A-40)

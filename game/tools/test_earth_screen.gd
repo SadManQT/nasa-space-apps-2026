@@ -20,8 +20,10 @@ func _run() -> void:
 	if base != null and archive != null:
 		_check(absf(float(base.get_width()) / base.get_height() - 16.0 / 9.0) < 0.01, "the Earth room is 16:9 like the screen")
 		_check(archive.get_size() == base.get_size(), "the archive room matches the live room's size")
-	var ferreira := Image.load_from_file(ProjectSettings.globalize_path("res://assets/ui/portraits/CH_Ferreira_screen.png"))
-	_check(ferreira != null and ferreira.detect_alpha() != Image.ALPHA_NONE and ferreira.get_pixel(4, 4).a < 0.05, "Ferreira's portrait is cut out, so the Earth room shows behind her")
+	# Ferreira's portrait is her approved Earth duty layer (M3-5A take A): 16:9 with its own control room, like Rao's.
+	var ferreira := load("res://assets/ui/portraits/CH_Ferreira_screen.png") as Texture2D
+	var rao := load("res://assets/ui/portraits/CH_Rao_screen.png") as Texture2D
+	_check(ferreira != null and rao != null and ferreira.get_size() == rao.get_size(), "Ferreira's duty portrait matches Rao's screen portrait size")
 
 	var crew := Crew.new()
 	root.add_child(crew)

@@ -2419,7 +2419,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 5 assets: PL_Cotton_Seedling, PR_ImpactMonitor, CH_Ferreira_Duty, CH_Cadet_DutyLayer",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-05"
@@ -2437,7 +2437,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "Approved by Sadman in chat, 6 Nov 2026 10:58: \"Take A\" for CH_Ferreira_Duty.",
-   "evidence": "",
+   "evidence": "Approved by Sadman in chat, 6 Nov 2026 ~10:58: \"Take A\" for CH_Ferreira_Duty (production/concept/ch05_assets/M3-5A_ferreira_duty_v1.png; charcoal fleece, hands folded, mission control at night; a screen portrait, no 3D body). Nothing of M3-5A was on main before this: landed night/M3-5A (a167216) whole: PL_Cotton_Seed/Sprout/Seedling, PR_ImpactMonitor + game/assets/ui/impact_monitor frame set, PR_DocumentSleeve, PR_Records2034, PR_MarkerTape (registry verified), CH_Cadet_DutyLayer resolved by reuse (arm check PASS x4); take A installed unchanged as game/assets/ui/portraits/CH_Ferreira_screen.png (1376x768, same as Rao's) and registered as CH_Ferreira_Duty in production/manifest/screen_assets.csv (verified); probe_earth_screen.gd --portrait removed so it can no longer overwrite it; test_earth_screen updated. Gate: verify_gate.py 190 assets, 0 failing. run_tests.sh: 50/50 suites passed. Evidence (re-taken on main): production/qa/evidence/M3-5A_godot_*.png incl. M3-5A_godot_ferreira_duty_screen.png, M1-07_earth_desk_{ferreira,recording}.png; contact sheet production/review/M3-5A_ch05_assets_contact.png. No new generation or credits on landing.",
    "updated": "2026-11-06",
    "prompt": "Goal: the Chapter 5 (Shooting Stars) registry rows that are still planned become installed, gated assets.\nDo: for each of PL_Cotton_Seedling, PR_ImpactMonitor, CH_Ferreira_Duty, CH_Cadet_DutyLayer: read execution/ASSET_<name>.md; make a 2D sheet; batch the sheets into one approval request to the\nuser (do not spend 3D credits before approval); then generate (Tripo/Meshy), clean up in Blender, gate, sync to Godot and update\nproduction/ASSET_REGISTRY.csv. Characters reuse the v8 pipeline (production/tools/build_character_v7.sh) and must pass the side-view\nmirrored-arm check. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; contact sheet in production/review/; registry rows set to verified.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); build every object that this chapter's bridges and §4 clues need (the 'What carries over' column names them) as part of this asset set.",
    "reserved_for": "sadman",

@@ -6,10 +6,9 @@
 #   M1-07_garden_{alo_cutaway,tara,wide}_{seed,cotyledon,true_leaf,bud}.png   the seedlings in LOC-03
 #   M1-07_hud_what_now.png, M1-07_hud_toast_and_strip.png     the clean HUD drawing the kit's SVG icons
 #       (taken with the M1-54 capture, which also refreshes the M1-54_*.png shots to the current HUD)
-# Order matters: Ferreira's portrait is re-rendered in its own Godot process and re-imported, and the Earth-desk
-# grade is rebuilt from production/concept/earth_desk/EN_EarthDesk_render.png and re-imported, BEFORE the shots run
-# in a fresh process. A Godot session that rewrites a texture keeps showing the old import (the first M1-07 shots
-# showed the old opaque navy portrait for this reason).
+# Order matters: the Earth-desk grade is rebuilt from production/concept/earth_desk/EN_EarthDesk_render.png and
+# re-imported BEFORE the shots run in a fresh process (a Godot session that rewrites a texture keeps showing the old
+# import). Ferreira's portrait is no longer re-rendered here: since M3-5A it is the approved duty-layer take A.
 # GODOT defaults to production/tools/godot_gated (waits for a heavy-process slot), so nothing here is wrapped twice.
 set -u
 ROOT=$(cd "$(dirname "$0")/../../.." && pwd)
@@ -23,11 +22,8 @@ run() {  # run <result line> <godot args...>; the printed result line is the onl
   "$GODOT" --path "$ROOT/game" --windowed "$@" 2>&1 | grep -E "RESULT|FAIL|SCRIPT ERROR|Parse Error|evidence|PROBE|SHEET" | tee -a "$OUT"
   grep -q "$want" "$OUT" || { echo "missing: $want" | tee -a "$OUT"; exit 1; }
 }
-import
-run "EARTH SCREEN PROBE RESULT: PASS" --resolution 1376x768 --script res://tools/probe_earth_screen.gd -- --portrait
 python3 "$ROOT/production/concept/earth_desk/compose_earth_desk.py" | tee -a "$OUT"
 import
-sed -i '' '/EARTH SCREEN PROBE RESULT: PASS/d' "$OUT"
 run "EARTH SCREEN PROBE RESULT: PASS" --resolution 1280x720 --script res://tools/probe_earth_screen.gd -- --shots
 run "UI KIT SHEET RESULT: PASS" --resolution 1600x1000 --script res://tools/probe_ui_kit_sheet.gd -- --out "$EV"
 run "PLANT SEEDLINGS RESULT: PASS" --resolution 1600x900 --script res://tools/test_plant_seedlings.gd -- --evidence
