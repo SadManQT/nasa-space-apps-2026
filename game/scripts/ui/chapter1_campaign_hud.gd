@@ -13,6 +13,7 @@ class_name Chapter1CampaignHUD
 const Outpost = preload("res://scripts/ui/outpost_status.gd")
 const PANELS_SCENE: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
 const MISSION_TABLE_SCENE: PackedScene = preload("res://scenes/ui/mission_table_panel.tscn")
+const Debrief = preload("res://scripts/debrief/chapter1_debrief.gd")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
 
 var runtime: Chapter1Campaign
@@ -126,6 +127,13 @@ func setup(value: Chapter1Campaign) -> void:
 	panels.set_command_sink(Callable(runtime, "handle_ui_command"))
 	panels.panel_opened.connect(_on_panel_opened)
 	panels.panel_closed.connect(_on_panel_closed)
+	panels.ending_retry_requested.connect(func() -> void:
+		panels.close_panel()
+		runtime.retry_checkpoint())
+	panels.ending_continue_requested.connect(func() -> void:
+		panels.close_panel()
+		if bool(runtime.route.gate_status().get("ready", false)):
+			runtime.advance_scene())
 	panels.set_panel_builder("what_now", _build_what_now)
 	panels.set_pause_actions([
 		{"label": String(_words.get("what_now", "What now")), "name": "WhatNow", "action": func() -> void: panels.open_panel("what_now")},
@@ -190,6 +198,8 @@ func refresh_after_action(result: Dictionary) -> void:
 			var line := _result_line(String(newly_done[0]))
 			_last_outcome["result"] = line
 			show_status(line)
+		if newly_done.has("complete_debrief"):
+			show_chapter1_outcome("replay")
 		return
 	if result.has("reason"):
 		show_status(String(result.get("reason", "")))
@@ -373,7 +383,9 @@ func _build() -> void:
 	_what_now.add_child(tools)
 	_last_result_button = UiDesign.button(String(_words.get("last_result", "Last result")))
 	_last_result_button.name = "LastResult"
-	_last_result_button.pressed.connect(func() -> void: panels.open_panel("outcome", _last_outcome if not _last_outcome.is_empty() else {"result": String(_words.get("no_result", "Nothing to show yet."))}))
+	_last_result_button.pressed.connect(func() -> void:
+		if not show_chapter1_outcome():
+			panels.open_panel("outcome", _last_outcome if not _last_outcome.is_empty() else {"result": String(_words.get("no_result", "Nothing to show yet."))}))
 	tools.add_child(_last_result_button)
 	_data_cards_button = UiDesign.button(String(_words.get("data_cards", "Data cards")))
 	_data_cards_button.name = "DataCards"
@@ -677,15 +689,17 @@ func _on_mission_table_commit(target_id: String, plan: Dictionary) -> void:
 	var result := runtime.perform_target(target_id, {"plan": plan})
 	if not bool(result.get("accepted", false)):
 		return
-	var outcome: Dictionary = result.get("result", {}) if result.get("result", {}) is Dictionary else {}
-	var report := MissionTableScript.ending_report(outcome)
-	if report.is_empty():
-		return
-	var stars: Dictionary = report.get("stars", {})
-	var star_line := "%s Crew dose 3 or under · %s No blackout · %s Alo alive" % ["★" if stars.get("safe_exposure", false) else "☆", "★" if stars.get("no_blackout", false) else "☆", "★" if stars.get("alo_alive", false) else "☆"]
-	_last_outcome = {"result": "%s · %s" % [String(report.get("title", "")), String(report.get("summary", ""))], "changes": outcome.get("deltas", []), "notes": [star_line] + outcome.get("warnings", []) + report.get("unsafe_predicates", [])}
-	show_status("%s · %s\n%s" % [String(report.get("title", "")), String(report.get("summary", "")), star_line])
-	panels.open_panel("outcome", _last_outcome)
+	show_chapter1_outcome()
+
+## Reads only the existing route ending, complete receipts and checkpoint. The
+## route remains responsible for every retry and physical scene/Chapter 2 gate.
+func show_chapter1_outcome(page: String = "summary") -> bool:
+	if runtime == null or not runtime.route.current_scene_id().begins_with("EX-CH01-"):
+		return false
+	var data := Debrief.view(runtime.director.snapshot(), runtime.route.snapshot())
+	if data.is_empty():
+		return false
+	return panels.open_chapter1_outcome(data, page)
 
 func _render_caption() -> void:
 	if runtime == null:
@@ -961,7 +975,7 @@ func _fade(control: Control, shown: bool) -> void:
 		control.modulate.a = 1.0
 		control.set_meta("lla_shown", shown)
 		return
-	var previous = control.get_meta("lla_fade", null)
+	var previous = control.get_meta("lla_fade") if control.has_meta("lla_fade") else null
 	if previous is Tween and (previous as Tween).is_valid():
 		(previous as Tween).kill()  # a late hide callback must not hide what was just shown
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)

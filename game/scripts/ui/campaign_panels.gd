@@ -10,6 +10,8 @@ signal command_emitted(command: Dictionary)
 signal panel_opened(panel_id: String)
 signal panel_closed(panel_id: String)
 signal accessibility_changed(settings: Dictionary)
+signal ending_retry_requested
+signal ending_continue_requested
 
 const ScienceScript = preload("res://scripts/science/science_data.gd")
 const ChartScript = preload("res://scripts/ui/data_chart.gd")
@@ -30,6 +32,7 @@ const PANEL_IDS := [
 	"mission_table",
 	"puzzle",
 	"outcome",
+	"chapter1_outcome",
 	"pause",
 	"settings_accessibility",
 	"credits",
@@ -49,6 +52,7 @@ const PANEL_DEFINITIONS := {
 	"resume": {"title": "Previously at Aurora", "query_key": "journal_entries", "description": "Where you were when you last saved. Reading does not move the clock."},
 	"mission_table": {"title": "Mission Table", "query_key": "mission_table", "description": "The night plan and its forecast."},
 	"puzzle": {"title": "Your choice", "query_key": "puzzle", "description": "Try an option to see what it would mean."},
+	"chapter1_outcome": {"title": "First light", "query_key": "chapter1_outcome", "description": "Your night, your decisions, and the science behind them."},
 	"outcome": {"title": "Last result", "query_key": "outcome", "description": "What the last job changed."},
 	"pause": {"title": "Paused", "query_key": "pause", "description": "The clock stops while you read and plan."},
 	"settings_accessibility": {"title": "Settings", "query_key": "accessibility", "description": "Captions, text size, reduced motion and timer-free play."},
@@ -93,6 +97,11 @@ var _scroll: ScrollContainer
 var _journal_tab := "now"
 var _hint_levels := {}
 var _garden_layout_override := ""
+var _ending_page := "summary"
+var _replay_index := 0
+var _lesson_index := 0
+var _ending_answers := {}
+const Debrief = preload("res://scripts/debrief/chapter1_debrief.gd")
 
 const JOURNAL_TABS := [
 	{"id": "now", "label": "Now"},
@@ -359,6 +368,8 @@ func _render_active_panel() -> void:
 		_render_dialogue(value)
 	elif _active_panel == "puzzle":
 		_render_puzzle(value)
+	elif _active_panel == "chapter1_outcome":
+		_render_chapter1_outcome(value)
 	elif _active_panel == "outcome":
 		_render_outcome(value)
 		_render_puzzle_sources(_query.get("source_puzzle_ids", []))
@@ -730,6 +741,8 @@ func _render_card(value) -> void:
 		_card_text(UiDesign.player_words("What the game computed\n" + ScienceScript.describe(card.get("derived", [])) + "\nGame resource units are training rules; the fixture does not validate every game number."), false, true)
 		_card_text("Limits\n" + String(card.get("boundary", "")), true)
 		_card_text("Source\n" + String(card.get("url", "")) + "\n" + String(card.get("citation", "")) + "\nRetrieved: " + String(card.get("retrieved", "")) + "\nLicence: " + String(card.get("licence", "")))
+	if value is Dictionary and bool(value.get("return_to_debrief", false)):
+		_ending_button("Back to science debrief", "BackToDebrief", func(): open_panel("chapter1_outcome"))
 	_source_button("Back to all sources", func(): open_panel("sources", {"ids": []}))
 
 ## ---------------------------------------------------------------------------
@@ -1191,3 +1204,112 @@ func _render_outcome(value) -> void:
 			_card_text("%s: %s → %s%s" % [String(fields[key].get("word", key)), _display_value(change.get("from")), _display_value(change.get("to")), (" " + unit) if not unit.is_empty() else ""])
 	for note in data.get("notes", []):
 		_card_text(UiDesign.player_words(str(note)))
+
+## The shared shell supplies scrolling, focus, pause, large text and source cards.
+## These controls are created only when the player opens the ending review.
+func open_chapter1_outcome(data: Dictionary, page: String = "summary") -> bool:
+	_ending_page = page
+	_replay_index = 0
+	_lesson_index = 0
+	var opened := open_panel("chapter1_outcome", data)
+	_scroll.scroll_vertical = 0
+	return opened
+
+func _ending_button(text: String, node_name: String, action: Callable, disabled: bool = false) -> void:
+	var button := _button(text)
+	button.name = node_name
+	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	button.disabled = disabled
+	button.pressed.connect(action)
+	_body.add_child(button)
+
+func _ending_go(page: String, focus_name: String) -> void:
+	_ending_page = page
+	_render_active_panel()
+	_scroll.scroll_vertical = 0
+	var focus := _body.find_child(focus_name, true, false) as Control
+	if focus != null:
+		focus.grab_focus()
+
+func _render_chapter1_outcome(value) -> void:
+	var data: Dictionary = value if value is Dictionary else {}
+	if data.is_empty():
+		_card_text("Finish the night to review its results.")
+		return
+	_title.text = String(data.get("title", "First light"))
+	var replay: Array = data.get("replay", [])
+	if _ending_page == "summary":
+		_card_text(String(data.get("summary", "")), true)
+		var resources: Dictionary = data.resources
+		_card_text("Crew \u00b7 " + ("The night is complete and the crew is safe." if data.safe_ending or data.ending == "ALO_LOST" else "Flight rules stopped this attempt at the safety limit."))
+		_card_text("Base \u00b7 " + Debrief.readings(resources, ["E", "A", "C", "R"]))
+		_card_text("Alo \u00b7 " + ("Alive. " if int(resources.H) > 0 else "Lost in this attempt. ") + Debrief.readings(resources, ["H"]))
+		var stars: Dictionary = data.stars
+		for item in [["safe_exposure", "Training radiation dose 3 or under"], ["no_blackout", "No blackout"], ["alo_alive", "Alo alive"]]:
+			_card_text(("Met: " if stars.get(item[0], false) else "Not met: ") + item[1])
+		_card_text(String(UiDesign.text().chapter1_debrief.golden_requirement))
+		_ending_button("Review decisions \u00b7 shift by shift", "ReviewDecisions", func(): _ending_go("replay", "ReplayNext"), replay.is_empty())
+		if replay.is_empty():
+			_card_text("This older checkpoint has no shift receipts to replay.")
+		_ending_actions(data)
+	elif _ending_page == "replay":
+		if replay.is_empty():
+			_card_text("No shift receipts are available for this checkpoint.")
+			_ending_button("Back to the result", "EndingSummary", func(): _ending_go("summary", "ReviewDecisions"))
+			return
+		_replay_index = clampi(_replay_index, 0, replay.size() - 1)
+		var row: Dictionary = replay[_replay_index]
+		_card_text("Shift %d of %d \u00b7 your decision" % [int(row.shift), replay.size()], true)
+		var choice := UiDesign.label(String(row.choice), "body")
+		choice.name = "ReplayChoice"
+		_body.add_child(choice)
+		_card_text("Replayed forecast\n" + Debrief.readings(row.forecast))
+		_card_text("Recomputed from this shift's recorded starting resources and choices; the original forecast was not saved.")
+		_card_text("What happened\n" + Debrief.readings(row.actual.after))
+		_card_text("Why\n" + String(row.why))
+		_ending_button("Previous shift" if _replay_index > 0 else "Back to the result", "ReplayPrevious", func():
+			if _replay_index > 0:
+				_replay_index -= 1
+				_ending_go("replay", "ReplayPrevious")
+			else:
+				_ending_go("summary", "ReviewDecisions"))
+		_ending_button("Next shift" if _replay_index < replay.size() - 1 else "Science debrief", "ReplayNext", func():
+			if _replay_index < replay.size() - 1:
+				_replay_index += 1
+				_ending_go("replay", "ReplayNext")
+			else:
+				_ending_go("debrief", "Answer0"))
+	else:
+		var lesson: Dictionary = data.lessons[_lesson_index]
+		_card_text("What you learned \u00b7 %d of 3\n%s" % [_lesson_index + 1, String(lesson.title)], true)
+		_card_text("Predict\n" + String(lesson.question))
+		_card_text("What happened\n" + Debrief.readings(data.resources, lesson.fields))
+		_card_text("Why\n" + String(lesson.why))
+		var question := UiDesign.label("Check your understanding \u00b7 " + String(lesson.question), "body", "accent")
+		question.name = "DebriefQuestion"
+		_body.add_child(question)
+		for index in lesson.options.size():
+			_ending_button(String(lesson.options[index]), "Answer%d" % index, func():
+				_ending_answers[_lesson_index] = index
+				_ending_go("debrief", "Answer%d" % index))
+		var feedback := UiDesign.label("", "body")
+		feedback.name = "AnswerFeedback"
+		if _ending_answers.has(_lesson_index):
+			feedback.text = ("Yes. " if int(_ending_answers[_lesson_index]) == int(lesson.correct) else "Try this explanation. ") + String(lesson.why)
+		_body.add_child(feedback)
+		_ending_button("NASA Data Card \u00b7 " + String(science.card(lesson.source).get("title", "Evidence")), "DebriefSource", func(): open_panel("data_card", {"source_id": lesson.source, "return_to_debrief": true}))
+		_ending_button("Back to decision replay", "DebriefReplay", func(): _ending_go("replay", "ReplayNext"))
+		if _lesson_index < data.lessons.size() - 1:
+			_ending_button("Next thing learned", "DebriefNext", func():
+				_lesson_index += 1
+				_ending_go("debrief", "Answer0"))
+		else:
+			_ending_actions(data)
+
+func _ending_actions(data: Dictionary) -> void:
+	_ending_button("Retry from shift %d checkpoint" % int(data.retry_shift), "EndingRetry", func():
+		ending_retry_requested.emit(), not bool(data.can_retry))
+	if bool(data.safe_ending):
+		_ending_button("Continue the story", "EndingContinue", func(): ending_continue_requested.emit())
+	else:
+		_card_text("Review what happened, then retry the checkpoint to continue this expedition.")

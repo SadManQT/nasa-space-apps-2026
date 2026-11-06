@@ -11,7 +11,7 @@ extends SceneTree
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
-const PANELS := ["what_now", "pause", "settings_accessibility", "journal_discovery", "outcome", "puzzle", "dialogue_captions", "sources", "resume"]
+const PANELS := ["what_now", "pause", "settings_accessibility", "journal_discovery", "outcome", "puzzle", "dialogue_captions", "sources", "resume", "chapter1_outcome"]
 ## The HUD pieces that may show while the player walks (doc 25 §2.2).
 const FREE_MOVEMENT := ["GoalCard", "TopRight", "Prompt", "GoalMarker"]
 
@@ -74,6 +74,19 @@ func _run() -> void:
 					hud.panels.select_journal_tab(tab)
 					await _walk_state(hud, "%s journal %s" % [scene_id, tab])
 				hud.panels.select_journal_tab("now")
+			if panel_id == "chapter1_outcome" and hud.show_chapter1_outcome():
+				for large in [false, true]:
+					hud.panels.set_accessibility({"large_text": large})
+					(hud.panels.find_child("ReviewDecisions", true, false) as Button).pressed.emit()
+					for shift in 7:
+						await _walk_state(hud, "ending replay %d large=%s" % [shift, large])
+						(hud.panels.find_child("ReplayNext", true, false) as Button).pressed.emit()
+					for lesson in 3:
+						await _walk_state(hud, "science debrief %d large=%s" % [lesson, large])
+						if lesson < 2:
+							(hud.panels.find_child("DebriefNext", true, false) as Button).pressed.emit()
+					hud.show_chapter1_outcome()
+				hud.panels.set_accessibility({"large_text": false})
 			hud.panels.close_panel()
 		var targets := Gates.targets_for_scene(scene_id)
 		if scene_id == "EX-CH01-S03":
@@ -84,6 +97,8 @@ func _run() -> void:
 			hud.refresh_after_action(result)
 			await _walk_state(hud, "%s after %s" % [scene_id, target.target_id])
 		if scene_id == scenes[-1]:
+			if hud.panels.active_panel() == "chapter1_outcome":
+				hud.panels.close_panel()
 			var completed: Dictionary = campaign.route.advance_scene()
 			campaign._sync_route_projection()
 			hud.refresh_scene({"chapter_complete": completed.get("chapter_complete", false)})

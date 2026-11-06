@@ -101,6 +101,9 @@ func _run() -> void:
 			_check(campaign.route.current_flags() == expected and bool(campaign.route.gate_status().get("ready", false)), "garden physical evidence survives runtime reload")
 		if index == ACTIONS.size() - 1:
 			_check(String(campaign.director.snapshot().get("scenario_datetime", "")).begins_with("2046-04-27"), "completed chapter reaches its canonical bloom date")
+		if campaign.hud.panels.active_panel() == "chapter1_outcome":
+			_check(campaign.hud.panels.find_child("ReplayChoice", true, false) != null, "physical debrief starts with the real decision replay")
+			campaign.hud.panels.close_panel()
 		var advance := campaign.advance_scene()
 		_check(bool(advance.get("accepted", false)), scene_id + " advances through the production controller")
 		var locked: Dictionary = campaign.director.commit({"command_id": "change-after-exit:" + scene_id, "issuer": "test", "owning_mission_id": campaign.director.query().mission_id, "owning_scene_id": scene_id, "expected_state_revision": campaign.director.query().state_revision, "target_id": choice_id, "verb": "record_choice", "payload": {"choice_id": choice_id, "option_id": scene_id + "-OPT02"}})

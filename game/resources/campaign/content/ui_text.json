@@ -181,6 +181,9 @@
    "Commander Ferreira": "ferreira"
   }
  },
+ "chapter1_debrief": {
+  "golden_requirement": "Golden Bloom also needs Alo health at least 5."
+ },
  "station": {
   "status_words": {
    "OK": "",
