@@ -764,7 +764,7 @@
   {
    "id": "ch05_five_at_the_table",
    "from": "EX-CH05-S01",
-   "about": "From 12 Dec 2046 Ferreira lives at Aurora: four seats become five (doc 09 LOC-01) and the fifth mug joins the four (doc 24 §1.1). Her chair is at the head of the table until she gives it up in EX-CH07-S01 (doc 24 §2.7); the Chapter 7 rooms move it.",
+   "about": "From 12 Dec 2046 Ferreira lives at Aurora: four seats become five (doc 09 LOC-01) and the fifth mug joins the four (doc 24 §1.1). Her chair is at the head of the table until she gives it up in EX-CH07-S01 (doc 24 §2.7); from EX-CH07-S02 it stands among the cadets' chairs on the east side (M3-7R).",
    "props": [
     {
      "id": "commons_seat_5",
@@ -783,7 +783,28 @@
       1,
       1,
       1
-     ]
+     ],
+     "until": "EX-CH07-S01"
+    },
+    {
+     "id": "commons_seat_5",
+     "path": "res://assets/props/PR_CrewSeat/PR_CrewSeat.glb",
+     "position": [
+      2.1,
+      0,
+      0.05
+     ],
+     "rotation_degrees": [
+      0,
+      -90,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH07-S02"
     },
     {
      "id": "commons_mug_5",
@@ -802,7 +823,28 @@
       1,
       1,
       1
-     ]
+     ],
+     "until": "EX-CH07-S01"
+    },
+    {
+     "id": "commons_mug_5",
+     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "position": [
+      0.66,
+      0.762,
+      0.08
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH07-S02"
     }
    ],
    "obstacles": [
@@ -817,7 +859,22 @@
       0.83,
       1.1,
       1.02
-     ]
+     ],
+     "until": "EX-CH07-S01"
+    },
+    {
+     "id": "seat_5",
+     "position": [
+      2.1,
+      0.55,
+      0.05
+     ],
+     "size": [
+      1.02,
+      1.1,
+      0.83
+     ],
+     "from": "EX-CH07-S02"
     }
    ],
    "anchors": {
@@ -852,7 +909,25 @@
      ],
      "color": "#ebe6d8",
      "transparent": false,
-     "finish": "satin"
+     "finish": "satin",
+     "until": "EX-CH07-S01"
+    },
+    {
+     "id": "ferreira_record",
+     "position": [
+      0.66,
+      0.761,
+      0.05
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S02"
     }
    ],
    "signs": [
@@ -868,7 +943,23 @@
      "size": 0.00045,
      "color": "#1b2433",
      "outline": 0,
-     "wrap_m": 0.18
+     "wrap_m": 0.18,
+     "until": "EX-CH07-S01"
+    },
+    {
+     "id": "ferreira_record_title",
+     "text": "ASCENT MANIFEST\n2034",
+     "position": [
+      0.66,
+      0.7625,
+      -0.04
+     ],
+     "pitch": -90,
+     "size": 0.00045,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.18,
+     "from": "EX-CH07-S02"
     }
    ]
   },
@@ -896,7 +987,25 @@
      ],
      "color": "#ebe6d8",
      "transparent": false,
-     "finish": "satin"
+     "finish": "satin",
+     "until": "EX-CH07-S01"
+    },
+    {
+     "id": "ferreira_record",
+     "position": [
+      0.66,
+      0.761,
+      0.05
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S02"
     }
    ],
    "signs": [
@@ -912,7 +1021,23 @@
      "size": 0.00045,
      "color": "#1b2433",
      "outline": 0,
-     "wrap_m": 0.18
+     "wrap_m": 0.18,
+     "until": "EX-CH07-S01"
+    },
+    {
+     "id": "ferreira_record_title",
+     "text": "GREENHOUSE SERVICE NOTE\n2034",
+     "position": [
+      0.66,
+      0.7625,
+      -0.04
+     ],
+     "pitch": -90,
+     "size": 0.00045,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.18,
+     "from": "EX-CH07-S02"
     }
    ]
   },
@@ -1432,6 +1557,1481 @@
      ]
     }
    }
+  },
+  {
+   "id": "ch07_ferreira_off_the_head",
+   "from": "EX-CH07-S02",
+   "about": "EX-CH07-S01 (canon): Ferreira moves her chair away from the head of the table and gives the planning to the cadets. From S02 her chair stands among the cadets' on the east side and her mug (and the D9 record under it) moves with her; the head stays empty. Her anchor stands behind the chair.",
+   "anchors": {
+    "commons_ferreira": [
+     3.1,
+     0,
+     0.05
+    ]
+   }
+  },
+  {
+   "id": "ch07_storm_warning",
+   "from": "EX-CH07-S01",
+   "until": "EX-CH07-S01",
+   "about": "EX-CH07-S01 'A Warning We Share' at breakfast: Rafi's shared warning with its labelled source on the Mission Table (the counterfactual 2012 replay, never a measured lunar storm) and the four specialists' observation cards in their role colours (doc 24 §2.9 S01 -> S02: the labelled source and the shared observations).",
+   "fixtures": [
+    {
+     "id": "storm_warning_sheet",
+     "position": [
+      0.12,
+      0.761,
+      -0.05
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "observation_card_kai",
+     "position": [
+      -0.27,
+      0.761,
+      0.42
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.08
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "observation_card_amara",
+     "position": [
+      -0.09,
+      0.761,
+      0.42
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.08
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "observation_card_mei",
+     "position": [
+      0.09,
+      0.761,
+      0.42
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.08
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "observation_card_rafi",
+     "position": [
+      0.27,
+      0.761,
+      0.42
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.08
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "observation_stripe_kai",
+     "position": [
+      -0.27,
+      0.7625,
+      0.39
+     ],
+     "size": [
+      0.12,
+      0.001,
+      0.014
+     ],
+     "color": "#F26B21",
+     "transparent": false
+    },
+    {
+     "id": "observation_stripe_amara",
+     "position": [
+      -0.09,
+      0.7625,
+      0.39
+     ],
+     "size": [
+      0.12,
+      0.001,
+      0.014
+     ],
+     "color": "#20B8C9",
+     "transparent": false
+    },
+    {
+     "id": "observation_stripe_mei",
+     "position": [
+      0.09,
+      0.7625,
+      0.39
+     ],
+     "size": [
+      0.12,
+      0.001,
+      0.014
+     ],
+     "color": "#4CAF50",
+     "transparent": false
+    },
+    {
+     "id": "observation_stripe_rafi",
+     "position": [
+      0.27,
+      0.7625,
+      0.39
+     ],
+     "size": [
+      0.12,
+      0.001,
+      0.014
+     ],
+     "color": "#8E5CC2",
+     "transparent": false
+    }
+   ],
+   "signs": [
+    {
+     "id": "storm_warning_text",
+     "text": "SHARED WARNING   14 FEB 2047\n\nSOURCE: THE SOLAR STORM OF 23 JULY 2012, MEASURED BY THE STEREO-A SPACECRAFT\n\nSCENARIO: WHAT IF IT HAD STRUCK THE MOON? A COUNTERFACTUAL REPLAY, NOT AN OBSERVATION\n\nTHREE WAVES   SIX PLANNING STEPS\nLUNAR DOSES HERE ARE GAME VALUES",
+     "position": [
+      0.12,
+      0.7625,
+      -0.05
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.19,
+     "pitch": -90
+    },
+    {
+     "id": "observation_text_kai",
+     "text": "POWER   KAI\nNO SOLAR INPUT\nFOR SIX STEPS",
+     "position": [
+      -0.27,
+      0.763,
+      0.43
+     ],
+     "size": 0.00024,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.11,
+     "pitch": -90
+    },
+    {
+     "id": "observation_text_amara",
+     "text": "AIR   AMARA\nRESERVE FIRST,\nTHEN SCRUBBERS",
+     "position": [
+      -0.09,
+      0.763,
+      0.43
+     ],
+     "size": 0.00024,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.11,
+     "pitch": -90
+    },
+    {
+     "id": "observation_text_mei",
+     "text": "GARDEN   MEI\nSEEDS AND PLANTS\nNEED DIFFERENT SHELTER",
+     "position": [
+      0.09,
+      0.763,
+      0.43
+     ],
+     "size": 0.00024,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.11,
+     "pitch": -90
+    },
+    {
+     "id": "observation_text_rafi",
+     "text": "SHIELDING   RAFI\nTHREE WAVES,\nSIX PLANNING STEPS",
+     "position": [
+      0.27,
+      0.763,
+      0.43
+     ],
+     "size": 0.00024,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.11,
+     "pitch": -90
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_storm_warning",
+     "label": "Shared warning and its source",
+     "position": [
+      0.12,
+      0.9,
+      0.0
+     ],
+     "approach_m": [
+      0.6,
+      0,
+      1.6
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "storm_warning_sheet"
+    }
+   ],
+   "stations": {
+    "p13_share_observations": "commons_mission_table",
+    "p13_label_counterfactual": "commons_storm_warning",
+    "p13_record_current_state": "commons_mission_table"
+   },
+   "review_views": {
+    "ch07_warning": {
+     "from": [
+      0.1,
+      1.4,
+      1.0
+     ],
+     "to": [
+      0.1,
+      0.76,
+      0.1
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch07_network_and_display",
+   "from": "EX-CH07-S01",
+   "about": "Chapter 7 in the Commons. The local network diagnostic (M3-7A) on the north wall by the main display: all paths pass in S01 while Rao confirms the labelled source live; the exposed radio branch isolated from S05; in S09 Earth does not answer (S08 -> S09) while the local network still carries voices and garden data; from S10 the branch tests read local pass, dish and feedthrough fail, the data card is out with the saved relay-bypass diagram (S09 -> S10) and the exposed-branch fault label hangs under the cabinet (doc 09 'CH07 exposed-branch fault label'). The main display shows the Earth desk (S01), the outside-clearance readings (S09) and the stable care board (S10).",
+   "chapter7_props": [
+    {
+     "id": "network_diagnostic",
+     "asset": "PR_NetworkDiagnostic",
+     "position": [
+      -2.5,
+      0,
+      -6.0
+     ],
+     "yaw": 180,
+     "isolated": false,
+     "lamps": {
+      "Lamp_Local": "pass",
+      "Lamp_Dish": "pass",
+      "Lamp_Feed": "pass"
+     },
+     "screens": {
+      "Screen_Diag": {
+       "text": "LOCAL NETWORK   PASS\nDIRECT DISH PATH   PASS\nEXTERNAL FEEDTHROUGH   PASS\nEARTH LINK   LIVE"
+      }
+     },
+     "by_scene": {
+      "EX-CH07-S05..EX-CH07-S08": {
+       "isolated": true,
+       "lamps": {
+        "Lamp_Local": "pass",
+        "Lamp_Dish": "idle",
+        "Lamp_Feed": "idle"
+       },
+       "screens": {
+        "Screen_Diag": {
+         "text": "EXPOSED RADIO BRANCH   ISOLATED\nLOCAL NETWORK   PASS\nEARTH LINK   PAUSED FOR THE STORM"
+        }
+       }
+      },
+      "EX-CH07-S09": {
+       "isolated": true,
+       "lamps": {
+        "Lamp_Local": "pass",
+        "Lamp_Dish": "idle",
+        "Lamp_Feed": "idle"
+       },
+       "screens": {
+        "Screen_Diag": {
+         "text": "EARTH UPLINK   NO ANSWER\nLOCAL NETWORK   PASS\nDIRECT DISH PATH   NOT TESTED\nEXTERNAL FEEDTHROUGH   NOT TESTED"
+        }
+       }
+      },
+      "EX-CH07-S10..EX-CH08-S12": {
+       "isolated": true,
+       "card_out": true,
+       "lamps": {
+        "Lamp_Local": "pass",
+        "Lamp_Dish": "fail",
+        "Lamp_Feed": "fail"
+       },
+       "screens": {
+        "Screen_Diag": {
+         "text": "LOCAL NETWORK   PASS\nDIRECT DISH PATH   FAIL\nEXTERNAL FEEDTHROUGH   FAIL\nRELAY BYPASS DIAGRAM SAVED"
+        }
+       }
+      }
+     }
+    }
+   ],
+   "fixtures": [
+    {
+     "id": "fault_tag",
+     "position": [
+      -2.5,
+      0.88,
+      -5.998
+     ],
+     "size": [
+      0.34,
+      0.12,
+      0.004
+     ],
+     "color": "#F2C230",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S10"
+    }
+   ],
+   "signs": [
+    {
+     "id": "fault_tag_text",
+     "text": "FAULT: EXTERNAL UPLINK FEEDTHROUGH\nLOCAL NETWORK GOOD, DO NOT RESET IT",
+     "position": [
+      -2.5,
+      0.88,
+      -5.994
+     ],
+     "size": 0.00042,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.32,
+     "from": "EX-CH07-S10"
+    },
+    {
+     "id": "main_display_text",
+     "text": "EARTH DESK   LIVE LINK\n\nRAO:   “{line}”\nLAST PACKET BEFORE THE STORM: RECEIVED",
+     "position": [
+      0,
+      1.72,
+      -5.634
+     ],
+     "size": 0.0016,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 2.8,
+     "line": "EX-CH07-S01-L02",
+     "until": "EX-CH07-S11",
+     "by_scene": {
+      "EX-CH07-S02..EX-CH07-S09": {
+       "text": "EARTH LINK   NO ANSWER SINCE 16 FEB 2047, 01:12\nLOCAL NETWORK: VOICES AND GARDEN DATA\n\nOUTSIDE CLEARANCE   TWO READINGS, SEPARATED\nREADING 1: PENDING\nREADING 2: PENDING"
+      },
+      "EX-CH07-S10..EX-CH07-S11": {
+       "text": "STABLE CARE BOARD   16 FEB TO MARCH 2047\nLOCAL CARE   RATIONS   MAINTENANCE\nTHREE DATED MAINTENANCE GATES\nEARTH UPLINK: UNAVAILABLE\nTHE PLAN USES LOCAL PROCEDURES AND STORES"
+      }
+     }
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_network_diagnostic",
+     "label": "Local network diagnostic",
+     "position": [
+      -2.5,
+      1.33,
+      -5.75
+     ],
+     "approach_m": [
+      -2.5,
+      0,
+      -4.8
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "network_diagnostic"
+    }
+   ],
+   "focus_labels": {
+    "commons_earth_screen": "Earth desk link"
+   },
+   "stations": {
+    "p14_diagnose_external_branch": "commons_network_diagnostic",
+    "p14_route_reading_1": "commons_earth_screen",
+    "p14_route_reading_2": "commons_earth_screen",
+    "p14_reconcile_local_stability": "commons_earth_screen",
+    "p14_date_march_gate": "commons_earth_screen"
+   },
+   "by_scene": {
+    "EX-CH07-S09": {
+     "focus_labels": {
+      "commons_earth_screen": "Main display: Earth link and clearance"
+     },
+     "anchors": {
+      "commons_kai": [
+       -1.6,
+       0,
+       -4.4
+      ],
+      "commons_ferreira": [
+       0.9,
+       0,
+       -3.0
+      ],
+      "commons_rafi": [
+       6.9,
+       0,
+       -4.4
+      ],
+      "commons_mei": [
+       2.0,
+       0,
+       -3.7
+      ]
+     }
+    },
+    "EX-CH07-S10..EX-CH07-S11": {
+     "focus_labels": {
+      "commons_earth_screen": "Stable care board"
+     },
+     "anchors": {
+      "commons_amara": [
+       3.6,
+       0,
+       -4.6
+      ],
+      "commons_kai": [
+       2.2,
+       0,
+       -4.4
+      ],
+      "commons_ferreira": [
+       0.9,
+       0,
+       -3.7
+      ]
+     }
+    },
+    "EX-CH07-S12": {
+     "focus_labels": {
+      "commons_earth_screen": "Departure boards"
+     },
+     "anchors": {
+      "commons_ferreira": [
+       -1.35,
+       0,
+       -3.3
+      ],
+      "commons_kai": [
+       -0.7,
+       0,
+       -3.45
+      ],
+      "commons_rafi": [
+       -0.05,
+       0,
+       -3.3
+      ],
+      "commons_amara": [
+       1.0,
+       0,
+       -3.3
+      ]
+     }
+    }
+   },
+   "review_views": {
+    "ch07_table": {
+     "from": [
+      -2.7,
+      1.75,
+      2.5
+     ],
+     "to": [
+      0.2,
+      0.8,
+      -0.6
+     ]
+    },
+    "ch07_main_display": {
+     "from": [
+      -0.6,
+      1.65,
+      -2.3
+     ],
+     "to": [
+      -0.7,
+      1.55,
+      -5.8
+     ]
+    },
+    "ch07_diagnostic": {
+     "from": [
+      -2.15,
+      1.5,
+      -4.35
+     ],
+     "to": [
+      -2.5,
+      1.2,
+      -6.0
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch07_care_desk",
+   "from": "EX-CH07-S10",
+   "about": "EX-CH07-S10 'A Base That Can Wait Safely' (16 Feb to March): the maintenance and care-planning desk where the eclipse desk stood, under the January keepsakes. The founder case checked without opening, the retained vault register, the saved relay-bypass diagram (S09 -> S10), the 'Queued for Earth' outbox that cannot send (doc 24 §2.9 montage; it sends in CH08-S09, clue 22) and, in S10, the spare relay controller's sealed case from the December relief flight with Kai's note clipped inside (S10 -> S11).",
+   "fixtures": [
+    {
+     "id": "care_desk",
+     "position": [
+      3.0,
+      0.37,
+      -5.6
+     ],
+     "size": [
+      2.0,
+      0.74,
+      0.75
+     ],
+     "color": "#3c4b5d",
+     "transparent": false
+    },
+    {
+     "id": "outbox_stand",
+     "position": [
+      3.65,
+      0.79,
+      -5.78
+     ],
+     "size": [
+      0.07,
+      0.1,
+      0.07
+     ],
+     "color": "#1F2A44",
+     "transparent": false
+    },
+    {
+     "id": "outbox_screen",
+     "position": [
+      3.65,
+      1.01,
+      -5.77
+     ],
+     "size": [
+      0.5,
+      0.34,
+      0.03
+     ],
+     "color": "#0b1220",
+     "transparent": false,
+     "finish": "screen"
+    },
+    {
+     "id": "bypass_diagram",
+     "position": [
+      2.98,
+      0.741,
+      -5.37
+     ],
+     "size": [
+      0.297,
+      0.002,
+      0.18
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "until": "EX-CH07-S11"
+    },
+    {
+     "id": "vault_register",
+     "position": [
+      3.35,
+      0.741,
+      -5.36
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.15
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "spare_case",
+     "position": [
+      2.4,
+      0.99,
+      -5.62
+     ],
+     "size": [
+      0.6,
+      0.5,
+      0.5
+     ],
+     "color": "#2b3a4f",
+     "transparent": false,
+     "until": "EX-CH07-S10"
+    },
+    {
+     "id": "spare_case_label",
+     "position": [
+      2.4,
+      1.07,
+      -5.369
+     ],
+     "size": [
+      0.4,
+      0.14,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "until": "EX-CH07-S10"
+    },
+    {
+     "id": "home_ledger",
+     "position": [
+      2.98,
+      0.741,
+      -5.37
+     ],
+     "size": [
+      0.297,
+      0.002,
+      0.18
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S12"
+    }
+   ],
+   "chapter7_props": [
+    {
+     "id": "founder_case",
+     "asset": "PR_SeedCase",
+     "position": [
+      2.98,
+      0.74,
+      -5.72
+     ],
+     "yaw": 180,
+     "case": {
+      "lid": 0,
+      "latched": true
+     },
+     "lamps": {
+      "Lamp_SealA": "pass",
+      "Lamp_SealB": "pass"
+     },
+     "screens": {
+      "Screen_Case": {
+       "text": "SEALED   15 + 15\nCHECKED WITHOUT OPENING"
+      }
+     }
+    }
+   ],
+   "signs": [
+    {
+     "id": "outbox_text",
+     "text": "QUEUED FOR EARTH   NOT SENT\n\nCARE REPORTS SINCE 16 FEB\nNO REPLY RECEIVED",
+     "position": [
+      3.65,
+      1.025,
+      -5.753
+     ],
+     "size": 0.00046,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 0.46,
+     "by_scene": {
+      "EX-CH07-S12": {
+       "text": "QUEUED FOR EARTH   NOT SENT\n\nCARE REPORTS SINCE 16 FEB\nDEPARTURE PLAN, 7 APR\nNO REPLY RECEIVED"
+      }
+     }
+    },
+    {
+     "id": "bypass_diagram_text",
+     "text": "RELAY BYPASS   SAVED 16 FEB\nAURORA, THREE ROAD REPEATERS, MALAPERT SUMMIT DISH, EARTH\nTWO LEGS, EACH TESTED ON ITS OWN",
+     "position": [
+      2.98,
+      0.7425,
+      -5.43
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.28,
+     "pitch": -90,
+     "until": "EX-CH07-S11"
+    },
+    {
+     "id": "vault_register_text",
+     "text": "VAULT REGISTER\n11 SPECIMENS\nRETAINED, SEALED",
+     "position": [
+      3.35,
+      0.7425,
+      -5.4
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.19,
+     "pitch": -90
+    },
+    {
+     "id": "spare_case_text",
+     "text": "SPARE RELAY CONTROLLER\nRELIEF FLIGHT, 12 DEC 2046\nSEALED",
+     "position": [
+      2.4,
+      1.07,
+      -5.367
+     ],
+     "size": 0.00048,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.38,
+     "until": "EX-CH07-S10"
+    },
+    {
+     "id": "home_ledger_text",
+     "text": "HOME-NIGHT LEDGER\n2 PEOPLE FOR THE FIRST 33 H\n5 PEOPLE FOR THE LAST 3 H BEFORE DAWN\nNOT A FOUR-PERSON COPY OF APRIL",
+     "position": [
+      2.98,
+      0.7425,
+      -5.43
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.28,
+     "pitch": -90,
+     "from": "EX-CH07-S12"
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "care_desk",
+     "position": [
+      3.0,
+      0.37,
+      -5.6
+     ],
+     "size": [
+      2.0,
+      0.74,
+      0.75
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_planning_desk",
+     "label": "Care-planning desk",
+     "position": [
+      3.0,
+      1.0,
+      -5.3
+     ],
+     "approach_m": [
+      3.0,
+      0,
+      -4.6
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "care_desk"
+    }
+   ],
+   "stations": {
+    "p14_reconcile_supplies": "commons_planning_desk"
+   },
+   "review_views": {
+    "ch07_care_desk": {
+     "from": [
+      2.55,
+      1.6,
+      -3.95
+     ],
+     "to": [
+      3.0,
+      0.95,
+      -5.75
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch07_d10_photo_strip",
+   "from": "EX-CH07-S10",
+   "choice": {
+    "choice_id": "EX-CH05-S11-CHOICE",
+    "option_id": "EX-CH05-S11-OPT01"
+   },
+   "about": "Doc 24 §5.2 D10 'Would you like to see what grows next?': Mei's monthly photo strip for Noor waits in the queued outbox (CH07-S10).",
+   "signs": [
+    {
+     "id": "outbox_photo_strip",
+     "text": "WHAT GROWS NEXT: MARCH PHOTO STRIP, FOR N.",
+     "position": [
+      3.65,
+      0.88,
+      -5.753
+     ],
+     "size": 0.0004,
+     "color": "#9ff0c4",
+     "outline": 0,
+     "wrap_m": 0.46
+    }
+   ]
+  },
+  {
+   "id": "ch07_departure",
+   "from": "EX-CH07-S12",
+   "until": "EX-CH07-S12",
+   "about": "EX-CH07-S12 'Who Stays With the Garden' (7 Apr to 8 Apr 00:00). EN_Garage (rover bay, departure boards; M3-4A) is not built yet, so the scene uses the Commons, where the roster puts all five: the main display becomes the two destination boards (the rover team and the home team) and the rover loadout stands on a table by the airlock door. Packed: the spare controller Kai labelled on the bench and the spare battery (S11 -> S12: the packed equipment and the route), three road-repeater cases under the table, three helmets, the three-site route card and the duplicate route and shelter checklists dated 8 Apr 00:00 (CH07 -> CH08). The small guide light is in the plan.",
+   "fixtures": [
+    {
+     "id": "loadout_table_top",
+     "position": [
+      8.8,
+      0.74,
+      -5.6
+     ],
+     "size": [
+      2.4,
+      0.04,
+      0.7
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "loadout_table_leg_w",
+     "position": [
+      7.68,
+      0.36,
+      -5.6
+     ],
+     "size": [
+      0.05,
+      0.72,
+      0.6
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "loadout_table_leg_e",
+     "position": [
+      9.92,
+      0.36,
+      -5.6
+     ],
+     "size": [
+      0.05,
+      0.72,
+      0.6
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "board_divider",
+     "position": [
+      0,
+      1.62,
+      -5.638
+     ],
+     "size": [
+      0.015,
+      1.1,
+      0.004
+     ],
+     "color": "#5d6b80",
+     "transparent": false,
+     "emissive": true
+    },
+    {
+     "id": "packed_case",
+     "position": [
+      7.95,
+      1.01,
+      -5.72
+     ],
+     "size": [
+      0.6,
+      0.5,
+      0.5
+     ],
+     "color": "#2b3a4f",
+     "transparent": false
+    },
+    {
+     "id": "packed_case_label",
+     "position": [
+      7.95,
+      1.09,
+      -5.469
+     ],
+     "size": [
+      0.42,
+      0.14,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "spare_battery",
+     "position": [
+      7.95,
+      1.3599999999999999,
+      -5.72
+     ],
+     "size": [
+      0.3,
+      0.2,
+      0.22
+     ],
+     "color": "#3a3f47",
+     "transparent": false
+    },
+    {
+     "id": "checklist_rover",
+     "position": [
+      8.5,
+      0.761,
+      -5.37
+     ],
+     "size": [
+      0.297,
+      0.002,
+      0.21
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "checklist_aurora",
+     "position": [
+      8.85,
+      0.761,
+      -5.37
+     ],
+     "size": [
+      0.297,
+      0.002,
+      0.21
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_card",
+     "position": [
+      9.3,
+      0.761,
+      -5.37
+     ],
+     "size": [
+      0.297,
+      0.002,
+      0.18
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "repeater_case_1",
+     "position": [
+      8.2,
+      0.13,
+      -5.65
+     ],
+     "size": [
+      0.5,
+      0.26,
+      0.4
+     ],
+     "color": "#5d6b80",
+     "transparent": false
+    },
+    {
+     "id": "repeater_case_2",
+     "position": [
+      8.8,
+      0.13,
+      -5.65
+     ],
+     "size": [
+      0.5,
+      0.26,
+      0.4
+     ],
+     "color": "#5d6b80",
+     "transparent": false
+    },
+    {
+     "id": "repeater_case_3",
+     "position": [
+      9.4,
+      0.13,
+      -5.65
+     ],
+     "size": [
+      0.5,
+      0.26,
+      0.4
+     ],
+     "color": "#5d6b80",
+     "transparent": false
+    },
+    {
+     "id": "repeater_label_1",
+     "position": [
+      8.2,
+      0.14,
+      -5.449
+     ],
+     "size": [
+      0.3,
+      0.09,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "repeater_label_2",
+     "position": [
+      8.8,
+      0.14,
+      -5.449
+     ],
+     "size": [
+      0.3,
+      0.09,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "repeater_label_3",
+     "position": [
+      9.4,
+      0.14,
+      -5.449
+     ],
+     "size": [
+      0.3,
+      0.09,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "props": [
+    {
+     "id": "helmet_1",
+     "path": "res://assets/props/PR_Helmet/PR_Helmet.glb",
+     "position": [
+      8.55,
+      0.76,
+      -5.75
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "id": "helmet_2",
+     "path": "res://assets/props/PR_Helmet/PR_Helmet.glb",
+     "position": [
+      8.95,
+      0.76,
+      -5.75
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "id": "helmet_3",
+     "path": "res://assets/props/PR_Helmet/PR_Helmet.glb",
+     "position": [
+      9.35,
+      0.76,
+      -5.75
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "id": "board_title",
+     "text": "DEPARTURE   8 APR 2047, 00:00",
+     "position": [
+      0,
+      2.28,
+      -5.634
+     ],
+     "size": 0.0016,
+     "color": "#d9f2ff",
+     "outline": 0
+    },
+    {
+     "id": "board_rover",
+     "text": "ROVER TO MALAPERT\n\nFERREIRA\nKAI\nRAFI\n\n24 H OUT, 3 H REPAIR, 24 H BACK\nPROVISIONS FOR 72 H",
+     "position": [
+      -0.75,
+      1.55,
+      -5.634
+     ],
+     "size": 0.0015,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 1.4
+    },
+    {
+     "id": "board_aurora",
+     "text": "AURORA\n\nMEI\nAMARA\n\n2 AT HOME FOR THE FIRST 33 H\nTHEN 5 FOR THE LAST 3 H",
+     "position": [
+      0.75,
+      1.55,
+      -5.634
+     ],
+     "size": 0.0015,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 1.4
+    },
+    {
+     "id": "packed_case_text",
+     "text": "SPARE RELAY CONTROLLER   PACKED\nBENCH CHECKED, FIELD TEST STILL NEEDED\nKAI",
+     "position": [
+      7.95,
+      1.09,
+      -5.467
+     ],
+     "size": 0.00042,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.4
+    },
+    {
+     "id": "checklist_rover_text",
+     "text": "ROUTE AND SHELTER CHECKLISTS\nCOPY FOR THE ROVER   8 APR 2047, 00:00\n\nROVER: FERREIRA, KAI, RAFI\n24 H OUT, 3 H REPAIR, 24 H BACK\nPROVISIONS FOR 72 H\n\nAURORA: MEI, AMARA\n2 AT HOME FOR 33 H, THEN 5 FOR 3 H\nSMALL GUIDE LIGHT: IN THE PLAN\nLOCAL CHECK-IN MARKERS SET",
+     "position": [
+      8.5,
+      0.7625,
+      -5.37
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.28,
+     "pitch": -90
+    },
+    {
+     "id": "checklist_aurora_text",
+     "text": "ROUTE AND SHELTER CHECKLISTS\nCOPY FOR AURORA   8 APR 2047, 00:00\n\nROVER: FERREIRA, KAI, RAFI\n24 H OUT, 3 H REPAIR, 24 H BACK\nPROVISIONS FOR 72 H\n\nAURORA: MEI, AMARA\n2 AT HOME FOR 33 H, THEN 5 FOR 3 H\nSMALL GUIDE LIGHT: IN THE PLAN\nLOCAL CHECK-IN MARKERS SET",
+     "position": [
+      8.85,
+      0.7625,
+      -5.37
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.28,
+     "pitch": -90
+    },
+    {
+     "id": "route_card_text",
+     "text": "THREE-SITE ROUTE\nAURORA, THREE ROAD REPEATERS, MALAPERT SUMMIT\nFOUR LINKS PASSED IN THE SIMULATOR\nFIELD CHECKS STILL REQUIRED",
+     "position": [
+      9.3,
+      0.7625,
+      -5.37
+     ],
+     "size": 0.00032,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.28,
+     "pitch": -90
+    },
+    {
+     "id": "repeater_text_1",
+     "text": "ROAD REPEATER\nSITE 1 OF 3",
+     "position": [
+      8.2,
+      0.14,
+      -5.447
+     ],
+     "size": 0.00036,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.28
+    },
+    {
+     "id": "repeater_text_2",
+     "text": "ROAD REPEATER\nSITE 2 OF 3",
+     "position": [
+      8.8,
+      0.14,
+      -5.447
+     ],
+     "size": 0.00036,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.28
+    },
+    {
+     "id": "repeater_text_3",
+     "text": "ROAD REPEATER\nSITE 3 OF 3",
+     "position": [
+      9.4,
+      0.14,
+      -5.447
+     ],
+     "size": 0.00036,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.28
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "loadout_table",
+     "position": [
+      8.8,
+      0.38,
+      -5.6
+     ],
+     "size": [
+      2.4,
+      0.76,
+      0.7
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_rover_loadout",
+     "label": "Rover loadout",
+     "position": [
+      8.8,
+      1.0,
+      -5.25
+     ],
+     "approach_m": [
+      8.8,
+      0,
+      -4.55
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "loadout_table_top"
+    }
+   ],
+   "stations": {
+    "p14_assign_field_team": "commons_earth_screen",
+    "p14_assign_home_team": "commons_earth_screen",
+    "p14_sign_departure_prep": "commons_rover_loadout"
+   },
+   "review_views": {
+    "ch07_departure": {
+     "from": [
+      0.3,
+      1.9,
+      1.8
+     ],
+     "to": [
+      0,
+      1.5,
+      -5.7
+     ]
+    },
+    "ch07_loadout": {
+     "from": [
+      7.6,
+      1.75,
+      -3.55
+     ],
+     "to": [
+      8.9,
+      0.85,
+      -5.7
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch07_d12_ex-ch06-s08-opt01",
+   "from": "EX-CH07-S12",
+   "until": "EX-CH07-S12",
+   "choice": {
+    "choice_id": "EX-CH06-S08-CHOICE",
+    "option_id": "EX-CH06-S08-OPT01"
+   },
+   "about": "Doc 24 §5.2 D12: Kai packs his family's copy of the observation he sent home; it rides on the rover dash in CH08.",
+   "fixtures": [
+    {
+     "id": "kai_family_copy",
+     "position": [
+      9.68,
+      0.761,
+      -5.37
+     ],
+     "size": [
+      0.15,
+      0.002,
+      0.21
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "kai_family_copy_text",
+     "text": "KAI'S COPY\nTHE RING DIAGRAM\nSENT HOME 12 JAN 2047",
+     "position": [
+      9.68,
+      0.7625,
+      -5.4
+     ],
+     "size": 0.0003,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.14,
+     "pitch": -90
+    }
+   ]
+  },
+  {
+   "id": "ch07_d12_ex-ch06-s08-opt02",
+   "from": "EX-CH07-S12",
+   "until": "EX-CH07-S12",
+   "choice": {
+    "choice_id": "EX-CH06-S08-CHOICE",
+    "option_id": "EX-CH06-S08-OPT02"
+   },
+   "about": "Doc 24 §5.2 D12: Kai packs his family's copy of the observation he sent home; it rides on the rover dash in CH08.",
+   "fixtures": [
+    {
+     "id": "kai_family_copy",
+     "position": [
+      9.68,
+      0.761,
+      -5.37
+     ],
+     "size": [
+      0.15,
+      0.002,
+      0.21
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "kai_family_copy_text",
+     "text": "KAI'S COPY\nTHE PROTECTED-SERVICE PLAN\nSENT HOME 12 JAN 2047",
+     "position": [
+      9.68,
+      0.7625,
+      -5.4
+     ],
+     "size": 0.0003,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.14,
+     "pitch": -90
+    }
+   ]
   }
  ]
 }

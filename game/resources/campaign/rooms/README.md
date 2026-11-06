@@ -82,8 +82,11 @@ Doc 09's revisit rule applies: props accumulate between chapters; only mission-s
 - Additions: `props` (GLBs through AssetGeometry), `fixtures`, `signs` (`line` fills `{line}` with a canon
   catalog line word for word; `pitch`, `wrap_m`, `color`, `outline`), `eclipse_props` (M3-6A props through
   `eclipse_props.gd`: `state`, `board`, `screens`, `parts_visible`, `monitor` with `phase`/`track`/`mode`/
-  `logged`), `prints` (`solar_image`, `eclipse_frame`), `local_lights`, `obstacles` (collision and the
-  rebuilt navigation map), `focus_targets` (stations).
+  `logged`), `chapter7_props` (M3-7A props through `chapter7_assets.gd`, added by M3-7R: `markers` role -> slot with
+  each name beside its marker, `case` lid/latch, `water_units`, `selector`, `lamps`, `isolated`, `card_out`, `pins`,
+  `attach` (a GLB seated in one of its sockets) and `screens`, plain words on a `Screen_*` slot; `line` quotes a catalog
+  line), `prints` (`solar_image`, `eclipse_frame`), `local_lights`, `obstacles` (collision and the rebuilt
+  navigation map), `focus_targets` (stations).
 - Changes: `hide` (base node ids, including their obstacles), `hide_signs` (base sign texts),
   `focus_labels`, `anchors` (merged by key; later layers win), `lighting` (`practical_scale`,
   `strip_scale`, `ambient_energy`), `carried` (an object on a cast member's bone, e.g. Kai's lamp).
@@ -100,7 +103,17 @@ Doc 09's revisit rule applies: props accumulate between chapters; only mission-s
 | EX-CH06-S08 on | LOC-01 | Pin board: the held ring frame; from S10 Noor's note indexed as personal recollection, date unspecified |
 | EX-CH06-S01 on | LOC-03 | Cotton in Tara's bay (Alo and Tara archived), the bay sign and focus renamed |
 | EX-CH06-S12..CH07-S12 | LOC-03 | Monitoring calendar with the 13 Jan routine solar image (CH06 → CH07 join) |
+| EX-CH07-S01 | LOC-01 | Rafi's shared warning on the Mission Table with its labelled source (the 23 July 2012 storm measured by STEREO-A, a counterfactual replay, game doses) and the four role-colour observation cards (S01 → S02); Rao confirms the source live on the main display, word for word; Ferreira's chair still at the head |
+| EX-CH07-S02 on | LOC-01 | Ferreira's chair among the cadets' on the east side; her mug and the D9 record move with her (canon S01); the head stays empty |
+| EX-CH07-S01 on | LOC-01 | Local network diagnostic (M3-7A) by the main display: all paths pass (S01), exposed branch isolated (S05–S08), Earth silent with the tests waiting (S09: S08 → S09), then local pass, dish and feedthrough fail, data card out and the exposed-branch fault label (S10 on, doc 09); main display: outside-clearance readings (S09), stable care board (S10) |
+| EX-CH07-S10 on | LOC-01 | Care-planning desk where the eclipse desk stood: founder case checked without opening, vault register, the saved relay-bypass diagram (S09 → S10), the "Queued for Earth" outbox (clue 22 setup; D10 OPT01 adds Mei's photo strip for N.), and in S10 the December spare's sealed case (S10 → S11); the home-night ledger in S12 |
+| EX-CH07-S02 on | LOC-04 | The storm shelter: roll-call board names five with April's four-name first-night card beside it; shelter diagram by the hatch (markers parked S02, on the five seats from S03: S02 → S03); hatch latch and seal indications (both agree S06–S08: S05 → S06); valve diagram on the water wall from S04 (four units held, return after the step-6 sample: S03 → S04); founder case on the seed latch S04–S09 (latched 15 + 15 from S05: S04 → S05); life-support and response board; forecast table under the local telemetry ("four steps left" in S07: S07 → S08); archive player with the last log quoted word for word in S07 (clue 21), the packet, signed page and founder ledger beside it and Alo's pressed petal by the case; storm steps at 50 % practicals (42 % in the lull) with amber guide strips |
+| EX-CH07-S11 on | LOC-02 | EN_Fabrication: the bench facing the walkway with the December spare in its cradle, the case open beside it with Kai's note clipped inside the lid (S10 → S11), battery, connectors, echo unit and isolation checklist; the surveyed-route simulator with its three pins parked. Chapter 6's guide light, test panel and lamp clip stay |
+| EX-CH07-S12 | LOC-01 | **EN_Garage (M3-4A) is not built**, so the departure plays in the Commons, where the roster puts all five: the main display shows the two destination boards (rover: Ferreira, Kai, Rafi; Aurora: Mei, Amara) and the rover loadout stands on a table by the airlock door (packed spare Kai labelled, battery, three helmets, three-site route card, three repeater cases, duplicate route and shelter checklists dated 8 Apr 00:00: S11 → S12, CH07 → CH08); D12 packs Kai's copy of the observation he sent home. Restage it in EN_Garage when that room exists |
 
-Run `game/tools/run_tests.sh chapter6_rooms` (mapping, rosters, stations, navigation, collision, resting
-props, readable signs, every §2.9 join, echoes, re-staging back to Chapter 1, cast placement), and
-`production/qa/evidence/M3-6R_capture.sh` for the windowed screenshots and frame timings.
+In the Safe Room a cast member whose scene anchor is an installed seat sits (the storm steps, S05–S08); one at a staged
+work anchor stands (S02–S04). There are no stand-in benches.
+
+Run `game/tools/run_tests.sh chapter6_rooms` / `chapter7_rooms` (mapping, rosters, stations, navigation, collision,
+resting props, readable signs and screens, every §2.9 join, echoes, re-staging back to Chapter 1, cast placement), and
+`production/qa/evidence/M3-6R_capture.sh` / `M3-7R_capture.sh` for the windowed screenshots and frame timings.

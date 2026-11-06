@@ -1,5 +1,6 @@
 ## M3-6R: builds a room's chapter staging (RoomContract.staging for the staged scene) on top of the base Chapter 1
-## assembly: dated furniture and fixtures, the M3-6A eclipse props in the scene's state, prints, signs and screens,
+## assembly: dated furniture and fixtures, the M3-6A eclipse props and the M3-7A Chapter 7 props in the scene's state
+## (M3-7R), prints, signs and screens,
 ## per-scene practical-light levels, collision for every floor-standing addition and the staged focus stations.
 ## clear() puts the base room back exactly. Presentation only: puzzles, missions and the director own every rule.
 extends RefCounted
@@ -8,6 +9,11 @@ const Presentation = preload("res://scripts/world/room_presentation.gd")
 const Habitat = preload("res://scripts/world/habitat_room_builder.gd")
 const Geometry = preload("res://scripts/asset_geometry.gd")
 const EclipseProps = preload("res://assets/props/eclipse_power/eclipse_props.gd")
+const C7 = preload("res://assets/props/chapter7_assets.gd")
+## Pixel size of each M3-7A live screen (its Screen_* slot's aspect, as the M3-7A evidence renders them).
+const C7_SCREEN_PX := {"Screen_Roster": [1040, 100], "Screen_Return": [760, 150], "Screen_Systems": [640, 400],
+	"Screen_Garden": [640, 400], "Screen_Diag": [680, 360], "Screen_Case": [360, 140], "Screen_Archive": [400, 160],
+	"Screen_Echo": [480, 200], "Screen_Checklist": [420, 560], "Screen_Route": [900, 520]}
 const CATALOG_PATH := "res://resources/campaign/dialogue_catalog.json"
 const ROOT_NAME := "ChapterStaging"
 ## A routine white-light solar image printed in greyscale on paper: limb darkening I(mu) = 1 - u (1 - mu) with
@@ -77,6 +83,8 @@ static func build(room: CampaignRoom, stage: Dictionary, layout: Dictionary) -> 
 		visuals.add_child(model)
 	for spec in stage.eclipse_props:
 		_eclipse_prop(visuals, spec)
+	for spec in stage.chapter7_props:
+		_chapter7_prop(visuals, spec)
 	for spec in stage.prints:
 		_print(visuals, spec)
 	for spec in stage.signs:
@@ -218,6 +226,102 @@ static func _eclipse_prop(parent: Node3D, spec: Dictionary) -> Node3D:
 			tween.tween_method(screen.set_phase, float(track[0]), float(track[1]), float(track[2])).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 			node.set_meta("monitor_track", tween)
 	return node
+
+## Places one M3-7A Chapter 7 asset (chapter7_assets.gd) in the scene's pose: seat "markers" (role -> slot, each with
+## its name beside it), "case" lid and latch, "water_units" and the return "selector", "lamps", "isolated", "card_out",
+## repeater "pins", objects seated in its sockets ("attach") and its live "screens" (plain words on the Screen_* slot;
+## "line" quotes a catalog line). Presentation only: the P-13/P-14 puzzles own the rules.
+static func _chapter7_prop(parent: Node3D, spec: Dictionary) -> Node3D:
+	var id := String(spec.asset)
+	var node := C7.place(parent, id, Presentation.vector(spec.position), float(spec.get("yaw", 0)))
+	if node == null:
+		return null
+	node.name = String(spec.id)
+	var markers: Dictionary = spec.get("markers", {})
+	var offset: Array = C7.entry(id).get("states", {}).get("label_offset_m", [0, 0.032, -0.012])
+	for role in markers:
+		C7.set_marker(node, String(role), String(markers[role]))
+		_name_label(node, String(role), C7.socket_position(id, String(markers[role])) + Presentation.vector(offset))
+	if spec.has("case"):
+		C7.set_case(node, float(spec.case.get("lid", 0)), bool(spec.case.get("latched", true)))
+	if spec.has("water_units"):
+		C7.set_water_units(node, int(spec.water_units))
+	if spec.has("selector"):
+		C7.set_return_selector(node, String(spec.selector))
+	if spec.has("isolated"):
+		C7.set_isolated(node, bool(spec.isolated))
+	if spec.has("card_out"):
+		C7.set_card_out(node, bool(spec.card_out))
+	for lamp in spec.get("lamps", {}):
+		C7.set_lamp(node, String(lamp), String(spec.lamps[lamp]))
+	for pin in spec.get("pins", {}):
+		C7.place_pin(node, int(pin), String(spec.pins[pin]))
+	for item in spec.get("attach", []):
+		var model := Geometry.load_glb(String(item.path))
+		if model != null:
+			model.name = String(item.id)
+			model.position = C7.socket_position(id, String(item.socket))
+			model.rotation_degrees.y = float(item.get("yaw", 0))
+			node.add_child(model)
+	for screen in spec.get("screens", {}):
+		_chapter7_screen(node, String(screen), spec.screens[screen])
+	return node
+
+## A seat marker's name beside it, single-sided and facing the board's front (-Z in the prop's own space).
+static func _name_label(parent: Node3D, text: String, at: Vector3) -> Label3D:
+	var label := Label3D.new()
+	label.name = "Label_" + text
+	label.text = text
+	label.position = at
+	label.rotation_degrees.y = 180.0
+	label.font_size = 20
+	label.pixel_size = 0.0009
+	label.modulate = Color("#1f2944")
+	label.outline_size = 0
+	label.double_sided = false
+	parent.add_child(label)
+	return label
+
+## Plain words on an M3-7A Screen_* slot in every LOD: an unshaded SubViewport picture rendered once, its font the
+## largest at which every authored line fits. The Label is kept in the prop's "screen_text" meta.
+static func _chapter7_screen(node: Node3D, screen: String, spec: Dictionary) -> Label:
+	var px: Array = spec.get("px", C7_SCREEN_PX.get(screen, [640, 360]))
+	var size := Vector2i(int(px[0]), int(px[1]))
+	var view := SubViewport.new()
+	view.name = "ScreenView_" + screen
+	view.size = size
+	view.render_target_update_mode = SubViewport.UPDATE_ONCE
+	var back := ColorRect.new()
+	back.color = Color(spec.get("bg", "#0b1220"))
+	back.size = Vector2(size)
+	view.add_child(back)
+	var text := String(spec.get("text", ""))
+	if spec.has("line"):
+		text = text.replace("{line}", line_text(String(spec.line)))
+	var label := Label.new()
+	label.name = "Text"
+	label.text = text
+	label.position = Vector2(size) * Vector2(0.05, 0.05)
+	label.size = Vector2(size) * Vector2(0.9, 0.9)
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_color_override("font_color", Color(spec.get("fg", "#d9f2ff")))
+	var lines := text.split("\n")
+	var longest := 1
+	for one in lines:
+		longest = maxi(longest, one.length())
+	label.add_theme_font_size_override("font_size", maxi(8, int(minf(size.y * 0.8 / (lines.size() * 1.25), size.x * 0.88 / (longest * 0.58)))))
+	view.add_child(label)
+	node.add_child(view)
+	var material := StandardMaterial3D.new()
+	material.resource_name = "Screen_live"
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.albedo_texture = view.get_texture()
+	for slot in C7.screen_surfaces(node, screen):
+		(slot.mesh as MeshInstance3D).set_surface_override_material(int(slot.surface), material)
+	var texts: Dictionary = node.get_meta("screen_text", {})
+	texts[screen] = label
+	node.set_meta("screen_text", texts)
+	return label
 
 static func _pose_monitor(screen, settings: Dictionary) -> void:
 	screen.set_filter(bool(settings.get("filter", true)))

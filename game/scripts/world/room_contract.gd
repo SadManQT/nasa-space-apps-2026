@@ -321,6 +321,14 @@ const _SCENE_ROOMS := {
 	"EX-CH06-S04": "LOC-02", "EX-CH06-S05": "LOC-02", "EX-CH06-S06": "LOC-01",
 	"EX-CH06-S07": "LOC-01", "EX-CH06-S08": "LOC-01", "EX-CH06-S09": "LOC-01",
 	"EX-CH06-S10": "LOC-02", "EX-CH06-S11": "LOC-02", "EX-CH06-S12": "LOC-03",
+	# Chapter 7 (M3-7R), from STORY_FULL.md, the CHAPTER_07 scene scripts (SC-0701..0706) and scene_rosters.json: the
+	# warning at the Mission Table (S01); the Safe Room for preparation, roll call and the six storm steps (S02-S08); the
+	# Commons network diagnostic and care-planning desk (S09-S10); the fabrication bench and route simulator in the
+	# service rooms (S11); the departure boards and rover loadout by the Commons airlock until EN_Garage exists (S12).
+	"EX-CH07-S01": "LOC-01", "EX-CH07-S02": "LOC-04", "EX-CH07-S03": "LOC-04",
+	"EX-CH07-S04": "LOC-04", "EX-CH07-S05": "LOC-04", "EX-CH07-S06": "LOC-04",
+	"EX-CH07-S07": "LOC-04", "EX-CH07-S08": "LOC-04", "EX-CH07-S09": "LOC-01",
+	"EX-CH07-S10": "LOC-01", "EX-CH07-S11": "LOC-02", "EX-CH07-S12": "LOC-01",
 }
 
 ## Returns every stable location ID in the campaign.
@@ -420,7 +428,7 @@ static func validate(room_id: String) -> Dictionary:
 # "FROM..UNTIL" range) overrides fields for those scenes; "choice" / "unless" gate an echo layer on a recorded
 # story_log option (doc 24 §5.2). The base layout stays the Chapter 1 room; staging only adds and hides.
 
-const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "prints", "hide", "hide_signs"]
+const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "chapter7_props", "prints", "hide", "hide_signs"]
 const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views"]
 
 ## Story order of a canon scene id (chapter * 100 + scene number), or -1 for anything that is not one.
@@ -442,7 +450,7 @@ static func in_window(item: Dictionary, scene_id: String) -> bool:
 	return true
 
 ## The chapter staging a room shows in one scene: every active layer's additions (props, fixtures, obstacles,
-## focus targets, signs, lights, M3-6A eclipse props, prints), what it hides from the base layout, merged anchors,
+## focus targets, signs, lights, M3-6A eclipse props, M3-7A Chapter 7 props, prints), what it hides from the base layout, merged anchors,
 ## focus relabels, per-scene lighting, the stations each scene action uses, and objects a cast member carries.
 ## choices is story_log.choices (choice_id -> {"option_id", ...}); it only gates echo layers.
 static func staging(room_id: String, scene_id: String, choices: Dictionary = {}) -> Dictionary:

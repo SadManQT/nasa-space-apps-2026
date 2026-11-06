@@ -716,5 +716,1339 @@
     -1.5
    ]
   }
- }
+ },
+ "staging": [
+  {
+   "id": "ch07_storm_shelter",
+   "from": "EX-CH07-S02",
+   "about": "EX-CH07-S02..S08 (doc 24 §2.7, §2.9; STORY_FULL; doc 09 LOC-04): the Safe Room equipped for the storm with the M3-7A props. West: the shelter diagram by the hatch with its five role-colour seat markers (parked in S02, on the five seats from S03: the S02 -> S03 join) and the hatch's two indications (both agree from S06: S05 -> S06). North: the roll-call board now names five, April's four-name first-night card pinned beside it (S02); the valve diagram on the water wall from S04 with the return after the step-6 sample (S03 -> S04); the founder case on the seed latch from S04, latched 15 + 15 from S05 (S04 -> S05); the response board as the life-support board. South: the storm forecast table under the local telemetry, where the role plans meet (S03), the archive player plays the last log in the lull (S07, clue 21) and Mei lays it beside the packet, the signed page and the founder ledger; 'four steps left' on the telemetry (S07 -> S08). Storm steps S06-S08 run on reduced practicals with low amber guide strips (doc 09). Installed equipment: it stays after the chapter.",
+   "hide_signs": [
+    "KAI   AMARA   MEI   RAFI"
+   ],
+   "fixtures": [
+    {
+     "id": "forecast_table_top",
+     "position": [
+      2.72,
+      0.74,
+      2.775
+     ],
+     "size": [
+      2.2,
+      0.04,
+      0.45
+     ],
+     "color": "#3c4b5d",
+     "transparent": false
+    },
+    {
+     "id": "forecast_table_leg_w",
+     "position": [
+      1.7,
+      0.36,
+      2.775
+     ],
+     "size": [
+      0.05,
+      0.72,
+      0.35
+     ],
+     "color": "#3c4b5d",
+     "transparent": false
+    },
+    {
+     "id": "forecast_table_leg_e",
+     "position": [
+      3.74,
+      0.36,
+      2.775
+     ],
+     "size": [
+      0.05,
+      0.72,
+      0.35
+     ],
+     "color": "#3c4b5d",
+     "transparent": false
+    },
+    {
+     "id": "april_card",
+     "position": [
+      -1.6,
+      1.45,
+      -2.759
+     ],
+     "size": [
+      0.26,
+      0.18,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "hatch_latch_lamp",
+     "position": [
+      -3.99,
+      1.5,
+      -0.26
+     ],
+     "size": [
+      0.02,
+      0.08,
+      0.08
+     ],
+     "color": "#F2A01C",
+     "transparent": false,
+     "emissive": true,
+     "by_scene": {
+      "EX-CH07-S06..EX-CH07-S08": {
+       "color": "#3CC86E"
+      }
+     }
+    },
+    {
+     "id": "hatch_seal_lamp",
+     "position": [
+      -3.99,
+      1.32,
+      -0.26
+     ],
+     "size": [
+      0.02,
+      0.08,
+      0.08
+     ],
+     "color": "#F2A01C",
+     "transparent": false,
+     "emissive": true,
+     "by_scene": {
+      "EX-CH07-S06..EX-CH07-S08": {
+       "color": "#3CC86E"
+      }
+     }
+    },
+    {
+     "id": "guide_strip_west",
+     "position": [
+      -3.99,
+      0.22,
+      1.45
+     ],
+     "size": [
+      0.02,
+      0.03,
+      2.2
+     ],
+     "color": "#5a4220",
+     "transparent": false,
+     "by_scene": {
+      "EX-CH07-S06..EX-CH07-S08": {
+       "color": "#FFB347",
+       "emissive": true
+      }
+     }
+    },
+    {
+     "id": "guide_strip_east",
+     "position": [
+      3.99,
+      0.22,
+      2.25
+     ],
+     "size": [
+      0.02,
+      0.03,
+      1.3
+     ],
+     "color": "#5a4220",
+     "transparent": false,
+     "by_scene": {
+      "EX-CH07-S06..EX-CH07-S08": {
+       "color": "#FFB347",
+       "emissive": true
+      }
+     }
+    },
+    {
+     "id": "plan_sheet",
+     "position": [
+      1.9,
+      0.761,
+      2.775
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "role_card_kai",
+     "position": [
+      2.2,
+      0.761,
+      2.62
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.08
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "role_card_amara",
+     "position": [
+      2.2,
+      0.761,
+      2.72
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.08
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "role_card_mei",
+     "position": [
+      2.2,
+      0.761,
+      2.82
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.08
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "role_card_rafi",
+     "position": [
+      2.2,
+      0.761,
+      2.92
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.08
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "role_stripe_kai",
+     "position": [
+      2.15,
+      0.7625,
+      2.62
+     ],
+     "size": [
+      0.012,
+      0.001,
+      0.08
+     ],
+     "color": "#F26B21",
+     "transparent": false,
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "role_stripe_amara",
+     "position": [
+      2.15,
+      0.7625,
+      2.72
+     ],
+     "size": [
+      0.012,
+      0.001,
+      0.08
+     ],
+     "color": "#20B8C9",
+     "transparent": false,
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "role_stripe_mei",
+     "position": [
+      2.15,
+      0.7625,
+      2.82
+     ],
+     "size": [
+      0.012,
+      0.001,
+      0.08
+     ],
+     "color": "#4CAF50",
+     "transparent": false,
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "role_stripe_rafi",
+     "position": [
+      2.15,
+      0.7625,
+      2.92
+     ],
+     "size": [
+      0.012,
+      0.001,
+      0.08
+     ],
+     "color": "#8E5CC2",
+     "transparent": false,
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "founder_ledger",
+     "position": [
+      2.5,
+      0.761,
+      2.775
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S07"
+    },
+    {
+     "id": "signed_page",
+     "position": [
+      2.85,
+      0.761,
+      2.775
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S07"
+    },
+    {
+     "id": "petal_sleeve",
+     "position": [
+      0.3,
+      1.101,
+      -1.95
+     ],
+     "size": [
+      0.07,
+      0.002,
+      0.1
+     ],
+     "color": "#dfe7ea",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH07-S07",
+     "until": "EX-CH07-S09"
+    },
+    {
+     "id": "alo_petal",
+     "position": [
+      0.3,
+      1.1025,
+      -1.955
+     ],
+     "size": [
+      0.026,
+      0.001,
+      0.036
+     ],
+     "color": "#F2C230",
+     "transparent": false,
+     "from": "EX-CH07-S07",
+     "until": "EX-CH07-S09"
+    }
+   ],
+   "props": [
+    {
+     "id": "first_seed_packet",
+     "path": "res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+     "from": "EX-CH07-S07",
+     "position": [
+      3.65,
+      0.76,
+      2.76
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "chapter7_props": [
+    {
+     "id": "shelter_diagram",
+     "asset": "PR_ShelterDiagram",
+     "position": [
+      -4.0,
+      0,
+      0.65
+     ],
+     "yaw": -90,
+     "markers": {
+      "Kai": "Park_1",
+      "Amara": "Park_2",
+      "Mei": "Park_3",
+      "Rafi": "Park_4",
+      "Ferreira": "Park_5"
+     },
+     "screens": {
+      "Screen_Roster": {
+       "text": "SHELTER ROSTER   5 NAMES   PLACES SET 0 / 5"
+      }
+     },
+     "by_scene": {
+      "EX-CH07-S03..EX-CH08-S12": {
+       "markers": {
+        "Kai": "Seat_1",
+        "Amara": "Seat_2",
+        "Ferreira": "Seat_3",
+        "Mei": "Seat_4",
+        "Rafi": "Seat_5"
+       },
+       "screens": {
+        "Screen_Roster": {
+         "text": "SHELTER ROSTER   5 NAMES   PLACES SET 5 / 5"
+        }
+       }
+      },
+      "EX-CH07-S05": {
+       "markers": {
+        "Kai": "Seat_1",
+        "Amara": "Seat_2",
+        "Ferreira": "Seat_3",
+        "Mei": "Seat_4",
+        "Rafi": "Seat_5"
+       },
+       "screens": {
+        "Screen_Roster": {
+         "text": "ROLL CALL   PLACES 5 / 5   ANSWERS 0 / 5"
+        }
+       }
+      },
+      "EX-CH07-S06..EX-CH08-S12": {
+       "markers": {
+        "Kai": "Seat_1",
+        "Amara": "Seat_2",
+        "Ferreira": "Seat_3",
+        "Mei": "Seat_4",
+        "Rafi": "Seat_5"
+       },
+       "screens": {
+        "Screen_Roster": {
+         "text": "ROLL CALL   SEATED 5 / 5   ANSWERED 5 / 5"
+        }
+       }
+      }
+     }
+    },
+    {
+     "id": "valve_diagram",
+     "asset": "PR_ValveDiagram",
+     "from": "EX-CH07-S04",
+     "position": [
+      1.53,
+      0.15,
+      -2.76
+     ],
+     "yaw": 180,
+     "water_units": 4,
+     "selector": "after",
+     "lamps": {
+      "Lamp_Supply": "off",
+      "Lamp_Return": "idle"
+     },
+     "screens": {
+      "Screen_Return": {
+       "text": "RETURN TO THE GARDEN: AFTER THE STEP 6 SAMPLE\nWATER WALL 4 UNITS   GARDEN 2 UNITS"
+      }
+     },
+     "by_scene": {
+      "EX-CH07-S09..EX-CH08-S12": {
+       "water_units": 2,
+       "lamps": {
+        "Lamp_Supply": "off",
+        "Lamp_Return": "pass"
+       },
+       "screens": {
+        "Screen_Return": {
+         "text": "RETURNED AFTER THE STEP 6 SAMPLE\nWATER WALL 2 UNITS   GARDEN 4 UNITS"
+        }
+       }
+      }
+     }
+    },
+    {
+     "id": "seed_case",
+     "asset": "PR_SeedCase",
+     "from": "EX-CH07-S04",
+     "until": "EX-CH07-S09",
+     "position": [
+      0,
+      1.1,
+      -2.0
+     ],
+     "yaw": 180,
+     "case": {
+      "lid": 0,
+      "latched": false
+     },
+     "lamps": {
+      "Lamp_SealA": "pass",
+      "Lamp_SealB": "pass"
+     },
+     "screens": {
+      "Screen_Case": {
+       "text": "15 + 15 = 30 FOUNDERS\nSEALS CHECKED, LATCH NEXT"
+      }
+     },
+     "by_scene": {
+      "EX-CH07-S05..EX-CH07-S09": {
+       "case": {
+        "lid": 0,
+        "latched": true
+       },
+       "screens": {
+        "Screen_Case": {
+         "text": "LATCHED   15 + 15\nSEALS INTACT"
+        }
+       }
+      }
+     }
+    },
+    {
+     "id": "telemetry",
+     "asset": "PR_TelemetryDisplay",
+     "position": [
+      2.75,
+      0,
+      3.0
+     ],
+     "yaw": 0,
+     "lamps": {
+      "Lamp_E": "idle",
+      "Lamp_A": "idle",
+      "Lamp_H": "idle",
+      "Lamp_C": "idle",
+      "Lamp_R": "idle",
+      "Lamp_Z": "idle"
+     },
+     "screens": {
+      "Screen_Systems": {
+       "text": "STORM FORECAST\nSIX STEPS OF 7.2 H\nNOT STARTED"
+      },
+      "Screen_Garden": {
+       "text": "GARDEN   LOCAL TELEMETRY\nPRESSURE   STEADY\nTEMPERATURE   STEADY\nCOTTON AND MUSTARD   CARED FOR\nENCLOSURES   CLOSED"
+      }
+     },
+     "by_scene": {
+      "EX-CH07-S06": {
+       "screens": {
+        "Screen_Systems": {
+         "text": "STEP 1 OF 6\nENERGY   AS FORECAST\nAIR   AS FORECAST\nFOOD   AS FORECAST\nEXPOSURE   SHIELDED"
+        },
+        "Screen_Garden": {
+         "text": "GARDEN   LOCAL TELEMETRY\nPRESSURE   STEADY\nTEMPERATURE   STEADY\nCOTTON AND MUSTARD   CARED FOR\nENCLOSURES   CLOSED"
+        }
+       },
+       "lamps": {
+        "Lamp_E": "pass",
+        "Lamp_A": "pass",
+        "Lamp_H": "pass",
+        "Lamp_C": "pass",
+        "Lamp_R": "pass",
+        "Lamp_Z": "pass"
+       }
+      },
+      "EX-CH07-S07": {
+       "screens": {
+        "Screen_Systems": {
+         "text": "STEPS 1 AND 2 CHECKED\nFIRST WAVE OVER, THE LULL\nFOUR STEPS LEFT"
+        },
+        "Screen_Garden": {
+         "text": "GARDEN   LOCAL TELEMETRY\nPRESSURE   STEADY\nTEMPERATURE   STEADY\nCOTTON AND MUSTARD   CARED FOR\nENCLOSURES   CLOSED"
+        }
+       },
+       "lamps": {
+        "Lamp_E": "pass",
+        "Lamp_A": "pass",
+        "Lamp_H": "pass",
+        "Lamp_C": "pass",
+        "Lamp_R": "pass",
+        "Lamp_Z": "pass"
+       }
+      },
+      "EX-CH07-S08": {
+       "screens": {
+        "Screen_Systems": {
+         "text": "STEP 3 OF 6   PEAK ON THE CHART\nCHECK THE SHIELD BEFORE EACH SAMPLE\nNO NEW SOLAR INPUT\nFIVE-PERSON DRAW"
+        },
+        "Screen_Garden": {
+         "text": "GARDEN   LOCAL TELEMETRY\nPRESSURE   STEADY\nTEMPERATURE   STEADY\nCOTTON AND MUSTARD   CARED FOR\nENCLOSURES   CLOSED"
+        }
+       },
+       "lamps": {
+        "Lamp_E": "pass",
+        "Lamp_A": "pass",
+        "Lamp_H": "pass",
+        "Lamp_C": "pass",
+        "Lamp_R": "pass",
+        "Lamp_Z": "pass"
+       }
+      },
+      "EX-CH07-S09..EX-CH08-S12": {
+       "screens": {
+        "Screen_Systems": {
+         "text": "SIX OF SIX STEPS DONE\nFINAL LINE ON THE CHART\n16 FEB 2047, 01:12"
+        },
+        "Screen_Garden": {
+         "text": "GARDEN   LOCAL TELEMETRY\nPRESSURE   STEADY\nTEMPERATURE   STEADY\nCOTTON AND MUSTARD   CARED FOR\nENCLOSURES   CLOSED"
+        }
+       },
+       "lamps": {
+        "Lamp_E": "pass",
+        "Lamp_A": "pass",
+        "Lamp_H": "pass",
+        "Lamp_C": "pass",
+        "Lamp_R": "pass",
+        "Lamp_Z": "pass"
+       }
+      }
+     }
+    },
+    {
+     "id": "archive_player",
+     "asset": "PR_ArchivePlayer",
+     "position": [
+      3.3,
+      0.76,
+      2.72
+     ],
+     "yaw": 0,
+     "lamps": {
+      "Lamp_Stored": "on"
+     },
+     "screens": {
+      "Screen_Archive": {
+       "text": "LOCAL ARCHIVE\n1 RECORDING STORED"
+      }
+     },
+     "by_scene": {
+      "EX-CH07-S07": {
+       "screens": {
+        "Screen_Archive": {
+         "text": "STORED 2034, DEPARTURE DAY\n“{line}”",
+         "line": "EX-CH07-S07-L01"
+        }
+       }
+      },
+      "EX-CH07-S08..EX-CH08-S12": {
+       "card_out": true,
+       "screens": {
+        "Screen_Archive": {
+         "text": "LOCAL ARCHIVE, STORED 2034\nPLAYED 14 FEB 2047"
+        }
+       }
+      }
+     }
+    }
+   ],
+   "signs": [
+    {
+     "id": "roster_names",
+     "text": "KAI   AMARA   MEI   RAFI   FERREIRA",
+     "position": [
+      -2.5,
+      1.32,
+      -2.68
+     ],
+     "size": 0.0011,
+     "color": "#f2c230",
+     "outline": 12
+    },
+    {
+     "id": "april_card_text",
+     "text": "FIRST NIGHT\n11 APR 2046\n\nKAI   AMARA\nMEI   RAFI",
+     "position": [
+      -1.6,
+      1.45,
+      -2.757
+     ],
+     "size": 0.0006,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.24
+    },
+    {
+     "id": "shelter_plan_title",
+     "text": "SHELTER PLAN",
+     "position": [
+      -3.985,
+      1.8,
+      0.65
+     ],
+     "size": 0.0011,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "hatch_title",
+     "text": "HATCH",
+     "position": [
+      -3.985,
+      1.68,
+      0.0
+     ],
+     "size": 0.0011,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "hatch_latch_text",
+     "text": "LATCH   OPEN",
+     "position": [
+      -3.985,
+      1.5,
+      0.0
+     ],
+     "size": 0.001,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90,
+     "by_scene": {
+      "EX-CH07-S06..EX-CH07-S08": {
+       "text": "LATCH   CLOSED"
+      }
+     }
+    },
+    {
+     "id": "hatch_seal_text",
+     "text": "SEAL   OPEN",
+     "position": [
+      -3.985,
+      1.32,
+      0.0
+     ],
+     "size": 0.001,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90,
+     "by_scene": {
+      "EX-CH07-S06..EX-CH07-S08": {
+       "text": "SEAL   CLOSED"
+      }
+     }
+    },
+    {
+     "id": "life_support_text",
+     "text": "LIFE SUPPORT   FORECAST PREPARATION\nAPRIL'S CARD: 4 PEOPLE\nTODAY: 5 PEOPLE\nAIR AND FOOD: FIVE-PERSON PROFILE\nGARDEN: CARED FOR, NOT THE AIR SUPPLY",
+     "position": [
+      2.5,
+      1.65,
+      -2.596
+     ],
+     "size": 0.0008,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 1.12,
+     "by_scene": {
+      "EX-CH07-S03": {
+       "text": "ONE PLAN   SIX STEPS OF 7.2 H\nNO SOLAR INPUT IN THE DARK\nPOWER   AIR   GARDEN   SHIELDING\nWATER RETURNS AFTER THE STEP 6 SAMPLE"
+      },
+      "EX-CH07-S04": {
+       "text": "SHIELDING\nWATER WALL: 4 UNITS HELD\nCARGO BUNDLES: 4 SLOTS FILLED\nRETURN: AFTER THE STEP 6 SAMPLE"
+      },
+      "EX-CH07-S05..EX-CH08-S12": {
+       "text": "RESPONSE CHECKS\nPROTECTED BRANCH: ON\nEXPOSED RADIO BRANCH: ISOLATED\nGARDEN FEED: LOCAL NETWORK"
+      }
+     }
+    },
+    {
+     "id": "plan_sheet_text",
+     "text": "ONE STORM PLAN\nSIX STEPS OF 7.2 H\nPOWER, AIR, GARDEN, SHIELDING\nWATER RETURNS AFTER THE STEP 6 SAMPLE\nFOUNDER 30 SEALED",
+     "position": [
+      1.9,
+      0.7625,
+      2.775
+     ],
+     "size": 0.0004,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.19,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH07-S03",
+     "by_scene": {
+      "EX-CH07-S07..EX-CH08-S12": {
+       "text": "FORECAST COMPARISON\nSTEPS 1 AND 2: RESULT AS FORECAST\nFOUNDER 30 SEALED\nFOUR STEPS LEFT"
+      }
+     }
+    },
+    {
+     "id": "role_card_text_kai",
+     "text": "POWER\nKAI",
+     "position": [
+      2.205,
+      0.763,
+      2.62
+     ],
+     "size": 0.0003,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.1,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "role_card_text_amara",
+     "text": "AIR\nAMARA",
+     "position": [
+      2.205,
+      0.763,
+      2.72
+     ],
+     "size": 0.0003,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.1,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "role_card_text_mei",
+     "text": "GARDEN\nMEI",
+     "position": [
+      2.205,
+      0.763,
+      2.82
+     ],
+     "size": 0.0003,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.1,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "role_card_text_rafi",
+     "text": "SHIELDING\nRAFI",
+     "position": [
+      2.205,
+      0.763,
+      2.92
+     ],
+     "size": 0.0003,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.1,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH07-S03"
+    },
+    {
+     "id": "founder_ledger_text",
+     "text": "FOUNDER LEDGER\n30 RESERVE SEEDS\n15 + 15, SEALED\n12 PLANTED FROM ALO'S HARVEST",
+     "position": [
+      2.5,
+      0.7625,
+      2.775
+     ],
+     "size": 0.0004,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.19,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH07-S07"
+    },
+    {
+     "id": "signed_page_text",
+     "text": "SIGNED PAGE\nDR NOOR RAHMAN, BOTANIST\nSHARED WITH HER CONSENT\n14 DEC 2046",
+     "position": [
+      2.85,
+      0.7625,
+      2.775
+     ],
+     "size": 0.0004,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.19,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH07-S07"
+    },
+    {
+     "id": "petal_text",
+     "text": "ALO\nPRESSED PETAL",
+     "position": [
+      0.3,
+      1.1025,
+      -1.925
+     ],
+     "size": 0.00022,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.065,
+     "pitch": -90,
+     "from": "EX-CH07-S07",
+     "until": "EX-CH07-S09"
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "forecast_table",
+     "position": [
+      2.72,
+      0.38,
+      2.775
+     ],
+     "size": [
+      2.2,
+      0.76,
+      0.45
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "safe_shelter_diagram",
+     "label": "Shelter diagram and seat markers",
+     "position": [
+      -3.85,
+      1.38,
+      0.65
+     ],
+     "approach_m": [
+      -3.2,
+      0,
+      0.65
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "shelter_diagram"
+    },
+    {
+     "target_id": "safe_hatch_indications",
+     "label": "Hatch indications",
+     "position": [
+      -3.9,
+      1.41,
+      -0.1
+     ],
+     "approach_m": [
+      -2.45,
+      0,
+      -0.15
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "hatch_latch_lamp"
+    },
+    {
+     "target_id": "safe_valve_diagram",
+     "label": "Water-wall valve diagram",
+     "position": [
+      1.53,
+      1.52,
+      -2.6
+     ],
+     "approach_m": [
+      1.53,
+      0,
+      -1.05
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "valve_diagram",
+     "from": "EX-CH07-S04"
+    },
+    {
+     "target_id": "safe_bundle_rail",
+     "label": "Cargo bundle rail",
+     "position": [
+      2.2,
+      0.75,
+      -1.5
+     ],
+     "approach_m": [
+      2.2,
+      0,
+      -0.95
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "from": "EX-CH07-S04"
+    },
+    {
+     "target_id": "safe_seed_case",
+     "label": "Founder reserve case",
+     "position": [
+      0,
+      1.32,
+      -1.9
+     ],
+     "approach_m": [
+      0,
+      0,
+      -1.05
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "seed_case",
+     "from": "EX-CH07-S04",
+     "until": "EX-CH07-S09"
+    },
+    {
+     "target_id": "safe_telemetry",
+     "label": "Local telemetry",
+     "position": [
+      2.75,
+      1.46,
+      2.8
+     ],
+     "approach_m": [
+      2.75,
+      0,
+      1.88
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "telemetry"
+    },
+    {
+     "target_id": "safe_forecast_table",
+     "label": "Storm forecast table",
+     "position": [
+      2.0,
+      0.95,
+      2.75
+     ],
+     "approach_m": [
+      2.0,
+      0,
+      1.88
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "forecast_table_top"
+    },
+    {
+     "target_id": "safe_archive_player",
+     "label": "Archive player",
+     "position": [
+      3.3,
+      0.98,
+      2.7
+     ],
+     "approach_m": [
+      3.3,
+      0,
+      1.88
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "archive_player"
+    }
+   ],
+   "focus_labels": {
+    "safe_response_controls": "Life-support and response board"
+   },
+   "local_lights": [
+    {
+     "id": "guide_amber_west",
+     "from": "EX-CH07-S06",
+     "until": "EX-CH07-S08",
+     "position": [
+      -3.75,
+      0.3,
+      1.45
+     ],
+     "color": "#FFB347",
+     "energy": 0.45,
+     "range_m": 2.6
+    },
+    {
+     "id": "guide_amber_east",
+     "from": "EX-CH07-S06",
+     "until": "EX-CH07-S08",
+     "position": [
+      3.75,
+      0.3,
+      2.25
+     ],
+     "color": "#FFB347",
+     "energy": 0.45,
+     "range_m": 2.6
+    }
+   ],
+   "stations": {
+    "p13_confirm_five_person_profile": "safe_response_controls",
+    "p13_confirm_shelter_roster": "safe_shelter_diagram",
+    "p13_confirm_shared_resources": "safe_response_controls",
+    "p13_commit_plan": "safe_forecast_table",
+    "p13_latch_founder_reserve": "safe_seed_case",
+    "p13_verify_water_shield": "safe_valve_diagram",
+    "p13_verify_crate_shield": "safe_bundle_rail",
+    "p13_verify_drain_order": "safe_valve_diagram",
+    "p14_confirm_five_occupants": "safe_shelter_diagram",
+    "p14_check_hatch_one": "safe_hatch_indications",
+    "p14_check_hatch_two": "safe_hatch_indications",
+    "p14_commit_steps_1_2": "safe_telemetry",
+    "p14_save_forecast_comparison": "safe_forecast_table",
+    "p14_confirm_case_sealed": "safe_seed_case",
+    "p14_read_final_log": "safe_archive_player",
+    "p14_record_academy_name": "safe_forecast_table",
+    "p14_save_progress_report": "safe_forecast_table",
+    "p14_commit_steps_3_6": "safe_telemetry",
+    "p14_confirm_crops_safe": "safe_telemetry",
+    "p14_confirm_reserve_30": "safe_seed_case"
+   },
+   "by_scene": {
+    "EX-CH07-S02": {
+     "anchors": {
+      "safe_rafi": [
+       -3.25,
+       0,
+       1.5
+      ],
+      "safe_ferreira": [
+       -2.2,
+       0,
+       -0.75
+      ],
+      "safe_kai": [
+       2.3,
+       0,
+       -0.95
+      ],
+      "safe_mei": [
+       1.0,
+       0,
+       -0.3
+      ]
+     }
+    },
+    "EX-CH07-S03": {
+     "anchors": {
+      "safe_amara": [
+       1.9,
+       0,
+       1.88
+      ],
+      "safe_mei": [
+       2.6,
+       0,
+       1.88
+      ],
+      "safe_rafi": [
+       3.35,
+       0,
+       1.88
+      ],
+      "safe_ferreira": [
+       0.9,
+       0,
+       2.3
+      ]
+     }
+    },
+    "EX-CH07-S04": {
+     "anchors": {
+      "safe_rafi": [
+       2.25,
+       0,
+       -0.95
+      ],
+      "safe_amara": [
+       1.3,
+       0,
+       -0.9
+      ],
+      "safe_ferreira": [
+       -0.75,
+       0,
+       -0.7
+      ],
+      "safe_kai": [
+       -1.4,
+       0,
+       -0.9
+      ]
+     }
+    },
+    "EX-CH07-S06..EX-CH07-S08": {
+     "lighting": {
+      "practical_scale": 0.5,
+      "ambient_energy": 0.15
+     }
+    },
+    "EX-CH07-S07": {
+     "lighting": {
+      "practical_scale": 0.42,
+      "ambient_energy": 0.13
+     }
+    }
+   },
+   "review_views": {
+    "ch07_shelter": {
+     "from": [
+      3.4,
+      2.05,
+      2.45
+     ],
+     "to": [
+      -1.4,
+      0.95,
+      -2.1
+     ]
+    },
+    "ch07_roll_call": {
+     "from": [
+      -0.55,
+      1.55,
+      -0.35
+     ],
+     "to": [
+      -2.05,
+      1.4,
+      -2.8
+     ]
+    },
+    "ch07_west_wall": {
+     "from": [
+      -1.35,
+      1.6,
+      0.25
+     ],
+     "to": [
+      -4.0,
+      1.3,
+      0.2
+     ]
+    },
+    "ch07_water_wall": {
+     "from": [
+      0.2,
+      1.8,
+      -0.35
+     ],
+     "to": [
+      1.2,
+      1.3,
+      -2.8
+     ]
+    },
+    "ch07_seed_case": {
+     "from": [
+      0.35,
+      1.6,
+      -1.15
+     ],
+     "to": [
+      0.05,
+      1.15,
+      -2.0
+     ]
+    },
+    "ch07_forecast_table": {
+     "from": [
+      2.6,
+      2.25,
+      1.7
+     ],
+     "to": [
+      2.6,
+      0.95,
+      2.85
+     ]
+    },
+    "ch07_archive": {
+     "from": [
+      3.25,
+      1.18,
+      2.22
+     ],
+     "to": [
+      3.3,
+      0.84,
+      2.72
+     ]
+    }
+   }
+  }
+ ]
 }

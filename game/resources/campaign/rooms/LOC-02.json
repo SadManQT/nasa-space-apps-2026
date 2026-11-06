@@ -1486,6 +1486,295 @@
      2.6
     ]
    }
+  },
+  {
+   "id": "ch07_fabrication",
+   "from": "EX-CH07-S11",
+   "about": "EX-CH07-S11 'Make the Road Hear Us' (March to 7 April): EN_Fabrication in the power bay and the air bay. The bench faces the walkway: the spare controller from December in its cradle and its case open beside the bench with Kai's compatibility note still clipped inside the lid (S10 -> S11), the spare battery, the connector tray (one wrong connector), the echo unit and the isolation checklist Ferreira signs. The surveyed-route simulator (the real LOLA corridor) waits with its three repeater pins parked: every neighbouring link must clear the terrain, and a desk plan is not field proof. Installed equipment: it stays after the chapter.",
+   "chapter7_props": [
+    {
+     "id": "fabrication_bench",
+     "asset": "EN_Fabrication_Bench",
+     "position": [
+      -2.2,
+      0,
+      0.6
+     ],
+     "yaw": 180,
+     "lamps": {
+      "Lamp_Battery": "pass",
+      "Lamp_Echo": "idle"
+     },
+     "attach": [
+      {
+       "id": "spare_controller",
+       "path": "res://assets/props/PR_RelayController/PR_RelayController.glb",
+       "socket": "Socket_Controller",
+       "yaw": 180
+      }
+     ],
+     "screens": {
+      "Screen_Checklist": {
+       "text": "ISOLATION CHECKLIST\n[ ] HOUSING CHECKED\n[ ] CONNECTORS MATCHED\n[ ] BATTERY LOADED\n[ ] BENCH ECHO TEST\n[ ] FIELD TEST AT THE SUMMIT\nSIGNED:",
+       "bg": "#ebe9e2",
+       "fg": "#1b2433"
+      },
+      "Screen_Echo": {
+       "text": "ECHO TEST   KNOWN CONTENT\nNOT YET RUN\nBENCH RESULT ONLY"
+      }
+     }
+    },
+    {
+     "id": "route_simulator",
+     "asset": "EN_Fabrication_RouteSimulator",
+     "position": [
+      2.8,
+      0,
+      0.95
+     ],
+     "yaw": 180,
+     "screens": {
+      "Screen_Route": {
+       "text": "SURVEYED ROAD MODEL   AURORA TO MALAPERT\nPLACE THREE REPEATER SITES\nEVERY NEIGHBOURING LINK MUST CLEAR THE TERRAIN\nKEEP TO THE SURVEYED ROAD\nA DESK PLAN IS NOT FIELD PROOF"
+      }
+     }
+    }
+   ],
+   "fixtures": [
+    {
+     "id": "spare_case_open",
+     "position": [
+      -0.85,
+      0.21,
+      0.6
+     ],
+     "size": [
+      0.6,
+      0.42,
+      0.5
+     ],
+     "color": "#2b3a4f",
+     "transparent": false
+    },
+    {
+     "id": "spare_case_lid",
+     "position": [
+      -0.85,
+      0.67,
+      0.37
+     ],
+     "size": [
+      0.6,
+      0.5,
+      0.04
+     ],
+     "color": "#2b3a4f",
+     "transparent": false
+    },
+    {
+     "id": "kai_note",
+     "position": [
+      -0.85,
+      0.7,
+      0.391
+     ],
+     "size": [
+      0.22,
+      0.13,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "kai_note_text",
+     "text": "FOR THE MALAPERT HOUSING\nCHECK EVERY CONNECTOR BEFORE USE\nKAI, 12 DEC 2046",
+     "position": [
+      -0.85,
+      0.7,
+      0.393
+     ],
+     "size": 0.0004,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.2
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "fabrication_bench",
+     "position": [
+      -2.2,
+      0.975,
+      0.614
+     ],
+     "size": [
+      1.8,
+      1.95,
+      0.8
+     ]
+    },
+    {
+     "id": "route_simulator",
+     "position": [
+      2.8,
+      0.81,
+      0.956
+     ],
+     "size": [
+      2.0,
+      1.62,
+      0.84
+     ]
+    },
+    {
+     "id": "spare_case_open",
+     "position": [
+      -0.85,
+      0.46,
+      0.58
+     ],
+     "size": [
+      0.6,
+      0.92,
+      0.54
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "power_fabrication_bench",
+     "label": "Fabrication bench",
+     "position": [
+      -2.2,
+      1.1,
+      1.06
+     ],
+     "approach_m": [
+      -2.2,
+      0,
+      1.75
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "fabrication_bench"
+    },
+    {
+     "target_id": "power_route_simulator",
+     "label": "Surveyed-route simulator",
+     "position": [
+      2.8,
+      1.15,
+      1.45
+     ],
+     "approach_m": [
+      2.8,
+      0,
+      1.95
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "route_simulator"
+    },
+    {
+     "target_id": "power_spare_case",
+     "label": "Spare controller case",
+     "position": [
+      -0.85,
+      0.98,
+      0.6
+     ],
+     "approach_m": [
+      -0.85,
+      0,
+      1.45
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "spare_case_open"
+    }
+   ],
+   "stations": {
+    "p14_pack_controller": "power_fabrication_bench",
+    "p14_pack_battery": "power_fabrication_bench",
+    "p14_pack_three_site_route": "power_route_simulator",
+    "p14_bench_test": "power_fabrication_bench"
+   },
+   "anchors": {
+    "service_kai": [
+     -2.6,
+     0,
+     1.75
+    ],
+    "service_ferreira": [
+     -1.6,
+     0,
+     1.8
+    ],
+    "service_amara": [
+     -3.5,
+     0,
+     1.7
+    ],
+    "service_mei": [
+     3.9,
+     0,
+     2.3
+    ]
+   },
+   "review_views": {
+    "ch07_bench": {
+     "from": [
+      -2.2,
+      2.15,
+      2.7
+     ],
+     "to": [
+      -2.2,
+      1.0,
+      0.5
+     ]
+    },
+    "ch07_simulator": {
+     "from": [
+      2.8,
+      1.95,
+      2.55
+     ],
+     "to": [
+      2.8,
+      0.95,
+      0.85
+     ]
+    },
+    "ch07_spare_case": {
+     "from": [
+      -0.55,
+      1.25,
+      1.55
+     ],
+     "to": [
+      -0.85,
+      0.62,
+      0.45
+     ]
+    }
+   }
   }
  ]
 }

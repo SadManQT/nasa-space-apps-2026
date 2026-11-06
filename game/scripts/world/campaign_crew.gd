@@ -11,7 +11,6 @@ var local_ids: Array[String] = []
 var player: PlayerController
 var room: CampaignRoom
 var _speaker := ""
-var _seats: Node3D
 var _screen: Sprite3D
 var _screen_label: Label3D
 var _screen_area := Vector2(2.8, 1.4)
@@ -56,21 +55,16 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choice
 			body.position = _anchor_in(anchors, room.room_id, id)
 		body.face_towards(Vector3(0, 0, -2))
 		body.reset_placement()
-	# Seated listeners use the room's installed crew seats; a simple stand-in bench backs
-	# them only where a room has none. No fictitious hand/tool contact.
-	_seats = Node3D.new()
-	_seats.name = "CrewSeats"
-	room.add_child(_seats)
+	# In the Safe Room a listener at an installed crew seat sits in it (doc 09: no wandering during exposure); one at a
+	# staged work anchor (e.g. EX-CH07-S02 at the shelter diagram) stands. No fictitious hand/tool contact.
 	if room.room_id == "LOC-04":
 		for id in local_ids:
-			if id == active:
-				continue
 			var body: PlayerController = bodies[id]
+			if id == active or not room.has_installed_seat_at(body.position):
+				continue
 			body.face_towards(body.position + Vector3.FORWARD)
 			body.animation.set_rest_clip("SitIdle_loop")
 			body.foot_ik_enabled = false
-			if not room.has_installed_seat_at(body.position):
-				_add_seat(body.position)
 	_build_screen()
 	_attach_carried(room.stage().get("carried", {}))
 	return player
@@ -182,15 +176,6 @@ func react(result: Dictionary, reduced_motion: bool) -> void:
 func set_paused(value: bool) -> void:
 	for id in local_ids:
 		bodies[id].process_mode = Node.PROCESS_MODE_DISABLED if value else Node.PROCESS_MODE_INHERIT
-
-func _add_seat(at: Vector3) -> void:
-	var mesh := MeshInstance3D.new()
-	var box := BoxMesh.new()
-	box.size = Vector3(0.65, 0.12, 0.6)
-	mesh.mesh = box
-	mesh.position = at + Vector3(0, 0.43, 0.1)
-	_seats.add_child(mesh)
-	ToonMaterials.apply_to_tree(mesh, false, false)
 
 ## The Earth screen: EN_EarthDesk (the room behind the caller) as a 16:9 backdrop,
 ## the caller's portrait over it, and the caller's name with the source word.

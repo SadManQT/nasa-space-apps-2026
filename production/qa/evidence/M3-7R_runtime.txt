@@ -1,0 +1,6 @@
+LOC-01 EX-CH07-S01 windowed frame ms with cast: p50=16.64 p95=17.71; draw calls=652
+LOC-04 EX-CH07-S06 windowed frame ms with cast: p50=16.66 p95=16.98; draw calls=837
+LOC-04 EX-CH07-S07 windowed frame ms with cast: p50=16.66 p95=16.94; draw calls=585
+LOC-02 EX-CH07-S11 windowed frame ms with cast: p50=17.03 p95=20.87; draw calls=1010
+LOC-01 EX-CH07-S12 windowed frame ms with cast: p50=16.63 p95=18.60; draw calls=785
+CHAPTER 7 ROOMS RESULT: PASS (3186 checks, 0 failures)
