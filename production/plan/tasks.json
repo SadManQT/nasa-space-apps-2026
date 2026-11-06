@@ -5225,8 +5225,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "First-impressions playtest of today's Chapter 1: what confuses a new player",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
     "production/qa/playtests/first_impressions/"
@@ -5237,7 +5237,7 @@
    ],
    "note": "From MASTER_PLAN.md (Sadman, 5 Nov 2026).",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-06",
    "prompt": "Goal: fresh eyes catch what the team no longer sees (doc 25 started exactly like this).\nDo: pull main, open the game (README 'Run the game'), start a New campaign and play 20-30 minutes of Chapter 1 without help; note every moment you did not know what to do or why, every bit of text you skipped, anything that looked broken or ugly, and what felt good; take a screenshot of each. Then ask 1-2 friends who have never seen the game to do the same while you watch silently. Write production/qa/playtests/first_impressions/report.md (moment, screenshot, what the player expected, severity) and file each real problem as a board task for the owner of that area (MASTER_PLAN.md §7).\nAcceptance: report.md with at least 10 observations and screenshots; every problem is a task with an owner.",
    "reserved_for": "tanvir",
    "effort": 2
