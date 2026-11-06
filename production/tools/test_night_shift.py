@@ -23,7 +23,7 @@ with mock.patch.multiple(ns, run_agent=limited, log=lambda m: None, resume_parke
 
 calls = []
 with mock.patch.multiple(ns, sh=lambda args, *a, **k: calls.append(args) or (0, ""), changes=lambda s: "", prepare=lambda s: None,
-                         land=lambda *a: (True, "")):
+                         land=lambda *a: (True, ""), task_info=lambda s, t: {"status": "in_progress"}):
     ns.park(Path("/nowhere"), "M9-01", "limit", block=False)
     assert not any("push" in c for c in calls), calls  # a clean checkout force-pushed main over night/M1-19 and night/M3-99
     ns.park(Path("/nowhere"), "M9-01", "failed")
@@ -51,5 +51,12 @@ with tempfile.TemporaryDirectory() as tmp:
     with mock.patch.multiple(ns, sh=lambda *a, **k: (0, listing), free=lambda a: a, overlaps=lambda s, t: False, CLAIMS=slot / "claims"):
         ns.taken.clear(); (slot / "claims").mkdir()
         assert ns.pick(slot)[0] == "M9-02", "a hand-claimed task must be skipped"
+
+# a task that is already done is never blocked by a late park
+calls = []
+with mock.patch.multiple(ns, sh=lambda args, *a, **k: calls.append(args) or (0, ""), changes=lambda s: "", prepare=lambda s: None,
+                         land=lambda *a: (True, ""), task_info=lambda s, t: {"status": "done"}):
+    ns.park(Path("/nowhere"), "M9-03", "failed")
+    assert not any("block" in c for c in calls), calls
 
 print("night_shift self-check: PASS")

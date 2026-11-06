@@ -291,7 +291,8 @@ def park(slot, tid, reason, block=True):
         sh(["git", *GIT_ID, "commit", "-q", "-m", f"wip: {tid} (night shift, not landed)", "-m", reason[:1500]], slot)
         sh(["git", "push", "-q", "-f", "origin", br], slot)
     prepare(slot)
-    if block:
+    # someone may have finished it meanwhile (6 Nov: a stale run re-blocked M1-34 after it landed); never undo a done task
+    if block and task_info(slot, tid).get("status") != "done":
         sh(["python3", "production/plan/board.py", "block", tid, "--reason", f"Night shift parked the work on branch {br}: {reason[:400]}"], slot)
         land(slot, tid, "", "blocked")
 
