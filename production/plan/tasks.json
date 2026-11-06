@@ -5593,8 +5593,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Fail the test runner when its class-cache refresh crashes",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "atik/codex",
    "deps": [],
    "paths": [
     "game/tools/run_tests.sh"
@@ -5633,8 +5633,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Fail the test runner when its import refresh crashes",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "atik/codex",
    "deps": [],
    "paths": [
     "game/tools/run_tests.sh"
