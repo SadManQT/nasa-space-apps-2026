@@ -86,11 +86,19 @@ def limit_wait(out: str) -> float:
     m = re.search(r"[Rr]esets in (\d+)h(\d+)m", out)
     if m:
         return int(m[1]) * 3600 + int(m[2]) * 60 + 120
+    now = dt.datetime.now()
+    # a weekly limit names the day: "resets Nov 10 at 5pm" (6 Nov: read as 30 min, so the account kept retrying)
+    m = re.search(r"resets\s+([A-Z][a-z]{2})\w*\s+(\d{1,2}),?\s+at\s+(\d{1,2})(?::(\d{2}))?\s*([ap])\.?m", out)
+    if m:
+        h = int(m[3]) % 12 + (12 if m[5].lower() == "p" else 0)
+        t = dt.datetime.strptime(f"{m[1]} {m[2]} {now.year} {h}:{m[4] or '00'}", "%b %d %Y %H:%M")
+        if t < now - dt.timedelta(days=180):
+            t = t.replace(year=now.year + 1)
+        return max((t - now).total_seconds(), 0) + 120
     m = re.search(r"(?:resets|try again at)\s+(\d{1,2})(?::(\d{2}))?\s*([ap])\.?m", out, re.I)
     if not m:
         return 1800
     h = int(m[1]) % 12 + (12 if m[3].lower() == "p" else 0)
-    now = dt.datetime.now()
     t = now.replace(hour=h, minute=int(m[2] or 0), second=0, microsecond=0)
     if t <= now:
         t += dt.timedelta(days=1)
@@ -432,6 +440,8 @@ def do_task(slot, tid, lane):
         if not reviewers:
             return "deferred", "no reviewer account available"
         _, verdict = run_agent(reviewers[0], review_prompt(tid, slot), slot, "xhigh")
+        if limit_wait(verdict[-3000:]):  # a reviewer at its limit is not a failed review (6 Nov: it blocked M1-76)
+            return "deferred", f"reviewer {reviewers[0]} hit its usage limit"
         if re.search(r"VERDICT:\s*PASS", verdict):
             return "done", f"worker {worker}, reviewer {reviewers[0]}"
         fix = verdict[-4000:]

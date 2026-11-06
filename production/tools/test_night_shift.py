@@ -59,4 +59,24 @@ with mock.patch.multiple(ns, sh=lambda args, *a, **k: calls.append(args) or (0, 
     ns.park(Path("/nowhere"), "M9-03", "failed")
     assert not any("block" in c for c in calls), calls
 
+# a reviewer at its usage limit defers the task; it is not a failed review (6 Nov: three "failed" reviews blocked M1-76)
+ns.asleep.clear()
+def worker_then_limited_reviewer(account, prompt, cwd, effort):
+    return limited(account) if prompt == "review" else (True, "done")
+with mock.patch.multiple(ns, run_agent=worker_then_limited_reviewer, log=lambda m: None, resume_parked=lambda s, t: "",
+                         changes=lambda s: "", worker_prompt=lambda *a: "work", review_prompt=lambda *a: "review",
+                         run_capture=lambda s, t: None, tests_pass=lambda s: (True, ""),
+                         task_info=lambda s, t: {"priority": "P1", "title": "x", "status": "done"}):
+    outcome, note = ns.do_task(Path("/nowhere"), "M9-04", "codex")
+    assert outcome == "deferred", (outcome, note)
+
+# a weekly limit sleeps until the named day, not 30 minutes
+import datetime as _dt
+wait = ns.limit_wait("You've hit your weekly limit · resets Nov 10 at 5pm (Asia/Dhaka)")
+target = _dt.datetime(_dt.datetime.now().year, 11, 10, 17, 0)
+if target < _dt.datetime.now() - _dt.timedelta(days=180):
+    target = target.replace(year=target.year + 1)
+assert abs(wait - max((target - _dt.datetime.now()).total_seconds(), 0) - 120) < 5, wait
+assert ns.limit_wait("You've hit your usage limit · resets 5pm") <= 86400 + 120
+
 print("night_shift self-check: PASS")
