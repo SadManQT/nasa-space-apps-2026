@@ -1,0 +1,383 @@
+{
+ "chapter": 7,
+ "messages": [
+  {
+   "id": "MSG-CH07-001",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2047-02-14T04:40Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH07-S01"
+   },
+   "join": "",
+   "subject": "Storm warning",
+   "body": "Aurora, Earth desk. Historical source received and labelled. Particle observations are rising. Start your shelter planning now; I will relay what we see as long as the link holds.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-002",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2047-02-14T04:45Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH07-S01"
+   },
+   "join": "",
+   "subject": "A labelled what-if",
+   "body": "This storm replays the real July 2012 event that hit the STEREO-A spacecraft, as if it had struck the Moon. The data is real; the strike on Aurora is a labelled counterfactual.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-003",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-02-14T04:55Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S01"
+   },
+   "join": "CH07 S01→S02",
+   "subject": "Everyone reads",
+   "body": "Observations are on the table with their source label. Each of you reads the part the others need. Then we size the shelter for five.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-004",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2047-02-14T04:56Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S01"
+   },
+   "join": "CH07 S01→S02",
+   "subject": "Your plan",
+   "body": "Your plan, cadets. I retain command responsibility.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-005",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-02-14T05:05Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S02"
+   },
+   "join": "CH07 S02→S03",
+   "subject": "Five seats",
+   "body": "April's card counted four. Today it must count five: breathing, food and shelter places all change. Five seat markers are on the shelter diagram.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-006",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-02-14T05:06Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S02"
+   },
+   "join": "CH07 S02→S03",
+   "subject": "Not our whole life support",
+   "body": "The plants matter, but they are not our whole life-support system. Size the air and food for five people first.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-007",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-02-14T05:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S03"
+   },
+   "join": "CH07 S03→S04",
+   "subject": "One schedule",
+   "body": "Four good ideas collided: power margin, circulation, warm roots, full shielding. Now it is one schedule with every dependency, including when the borrowed water returns.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-008",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-02-14T05:21Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S03"
+   },
+   "join": "CH07 S03→S04",
+   "subject": "Return time",
+   "body": "The return-water time is written into the plan: after the last exposure step, not before, and not forgotten.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-009",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-02-14T05:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S04"
+   },
+   "join": "CH07 S04→S05",
+   "subject": "Fifteen and fifteen",
+   "body": "Seed case latched in the shelter: fifteen and fifteen, thirty founders. The twelve from Alo's first harvest are already growing in the garden.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-010",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2047-02-14T05:41Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S04"
+   },
+   "join": "CH07 S04→S05",
+   "subject": "Valves",
+   "body": "Name the valve, then touch it. Bundles stay through the last exposure.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-011",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-02-14T05:55Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S05"
+   },
+   "join": "CH07 S05→S06",
+   "subject": "Everyone inside",
+   "body": "Five names called, five answers on the local channel. Both hatch indications agree. A chair icon is not proof; your voices are.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-012",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-02-14T05:56Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S05"
+   },
+   "join": "CH07 S05→S06",
+   "subject": "Here",
+   "body": "Here. Protected branch checked. Guide light on, small and steady.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-013",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-02-14T20:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S06"
+   },
+   "join": "CH07 S06→S07",
+   "subject": "First wave checked",
+   "body": "Steps 1 and 2 matched the forecast: energy, atmosphere, food, garden telemetry. First wave checked, not merely endured. We are in the lull.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-014",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-02-14T20:31Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S06"
+   },
+   "join": "CH07 S06→S07",
+   "subject": "Garden on local data",
+   "body": "The living garden is still reporting on local telemetry. Roots warm enough. I will open the archive player while we wait.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-015",
+   "thread": "archive",
+   "sender": "Archive",
+   "story_time": "2047-02-14T20:40Z",
+   "unlock": {
+    "on": "found",
+    "id": "EX-CH07-S07"
+   },
+   "join": "",
+   "subject": "Last recovered log",
+   "body": "Expedition Zero's final recording, stored locally. It is a historical archive: it does not cross the current storm or open the Earth link.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-016",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-02-14T21:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S07"
+   },
+   "join": "CH07 S07→S08",
+   "subject": "A hope, not a prediction",
+   "body": "She called the seeds Alo, light. The name was a hope, not a prediction. Four steps left; the next one needs checking, not courage.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-017",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-02-14T21:12Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S07"
+   },
+   "join": "CH07 S07→S08",
+   "subject": "Four steps left",
+   "body": "Four steps left. Our report needs more than a good line. It needs the next checked step.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-018",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-02-16T01:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S08"
+   },
+   "join": "CH07 S08→S09",
+   "subject": "Final line on the chart",
+   "body": "Peak passed in steps 3 and 4; the shield did what we predicted. Final exposure first, then the water went home. Rao has not answered since the last step.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-019",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-02-16T01:16Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S08"
+   },
+   "join": "CH07 S08→S09",
+   "subject": "No reply",
+   "body": "Earth link quiet. Before we call every radio broken, we test what still works.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-020",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-02-16T03:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S09"
+   },
+   "join": "CH07 S09→S10",
+   "subject": "Local pass, external fail",
+   "body": "Local network passes; the direct dish path and the external feedthrough fail. I saved the relay-bypass diagram. Two clear readings before anyone prepares to go outside.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-021",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2047-02-16T03:01Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S09"
+   },
+   "join": "CH07 S09→S10",
+   "subject": "Isolation",
+   "body": "Correct isolation was still the right decision. We have local procedures and stores.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-022",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-03-01T09:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S10"
+   },
+   "join": "CH07 S10→S11",
+   "subject": "Ordinary days",
+   "body": "The garden needs ordinary days too. Care, food, atmosphere and observation run on the stable-operation board with no reply from Earth in the plan. Rafi is opening the spare controller from December.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-023",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2047-03-01T09:05Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S10"
+   },
+   "join": "CH07 S10→S11",
+   "subject": "My note",
+   "body": "The spare controller still has my compatibility note clipped inside. Past me was helpful. Rare.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-024",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2047-04-07T12:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S11"
+   },
+   "join": "CH07 S11→S12",
+   "subject": "Make the road hear us",
+   "body": "Controller checked against the Malapert service housing; repeaters packed for every neighbouring link. A bench pass is not field verification, so the route and the kit go together.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-025",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2047-04-07T12:05Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S11"
+   },
+   "join": "CH07 S11→S12",
+   "subject": "Packed",
+   "body": "Equipment packed and the surveyed route loaded. Next: who goes and who stays with the garden.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH07-026",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2047-04-07T20:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S12"
+   },
+   "join": "CH07→CH08",
+   "subject": "Departure board",
+   "body": "Kai and Rafi with me. Mei and Amara hold Aurora. Duplicate checklists at both boards. We leave at 00:00 on the 8th.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH07-027",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2047-04-07T20:05Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH07-S12"
+   },
+   "join": "CH07→CH08",
+   "subject": "Small guide light",
+   "body": "Kai asked us to keep the small guide light. It is already in the plan.",
+   "goal": false
+  }
+ ]
+}
