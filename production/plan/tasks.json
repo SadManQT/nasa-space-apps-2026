@@ -2972,7 +2972,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 7 rooms and locations",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-06",
@@ -2987,7 +2987,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "Every Chapter 7 scene staged in its proper room: S01 Commons Mission Table (shared warning and its labelled 23 July 2012 source, role cards, Rao's line verbatim); S02-S08 Safe Room (five-name roll call with April's four-name card, shelter markers, valve return, founder case latched 15+15, archive player quoting the last log verbatim, crew seated only at the five installed seats, storm lighting); S09-S10 Commons diagnostic and care desk; S11 fabrication bench and route simulator; S12 departure boards and rover loadout by the airlock (EN_Garage not built yet). D10/D12 echo objects. Code: room_contract.gd explicit CH07 map + chapter7_props, room_staging.gd places the M3-7A props, campaign_crew.gd drops stand-in benches. Tests after rebase onto 08f1fb3: run_tests.sh chapter7_rooms PASS (3109 checks); full run_tests.sh 51/51 suites passed (production/qa/evidence/M3-7R_tests.txt). Windowed capture M3-7R_capture.sh PASS (3186 checks, 0 failures), about 60 fps in every timed room (M3-7R_runtime.txt); 26 screenshots production/qa/evidence/M3-7R_S01_mission_table.png .. M3-7R_S12_chair_off_the_head.png, re-taken on the rebased build. PR_UplinkFeedthrough not staged: it mounts outside and no CH07 scene is outdoors.",
    "updated": "2026-11-06",
    "prompt": "Goal: every location the Chapter 7 scenes use (production/manifest/scene_index.csv, CH07 rows; LOC ids in\ngame-design/09_WORLD_AND_LEVEL_DESIGN.md) is a real scene built the same way as the Chapter 1 rooms (M1-06), with layout data in\ngame/resources/campaign/rooms/, collision, navigation, lighting and valid RoomContract targets. Chapters 3–8 currently reuse the five\nChapter 1 rooms; give each scene its proper location. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.7 (Chapter 7) and the §2.9 bridge-list rows for CH07 (including the join into the next chapter); place this chapter's bridge objects, §4 clue objects and §5.2 story-echo objects in the rooms so each join can play in the world.",
    "reserved_for": "sadman",
