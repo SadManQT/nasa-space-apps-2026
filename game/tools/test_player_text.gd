@@ -12,6 +12,7 @@ const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
+const CarePanel = preload("res://scripts/ui/care_round_panel.gd")
 const PANELS := ["what_now", "pause", "settings_accessibility", "journal_discovery", "outcome", "puzzle", "dialogue_captions", "sources", "resume", "chapter1_outcome"]
 ## The HUD pieces that may show while the player walks (doc 25 §2.2).
 const FREE_MOVEMENT := ["GoalCard", "TopRight", "Prompt", "GoalMarker"]
@@ -25,7 +26,7 @@ var _seen := {}
 func _init() -> void:
 	CampaignCutscenePlayer.autoplay = false
 	# §8.1's patterns, plus the project's other internal ID prefixes (LOC-02, MSG-CH01-001, CS-03, SFX-…, CUE-…, J-CH01-…).
-	for source in ["EX-CH\\d", "\\bP-\\d\\d\\b", "\\b[EAWKSZCRH] ?\\d", "\\b(LOC|MSG|CS|SFX|CUE|J)-[A-Z0-9]{2}", "air_depleted_shift_|exposure_limit_exceeded_shift_|MISSION[ _]STOPPED|BUNK SLOT|Run the STACK task|bundle task|forces COOL", "(?i)\\b(commit\\w*|stage[sd]?|acknowledg\\w*|role constraints?|operations?)\\b"]:
+	for source in ["EX-CH\\d", "\\bP-\\d\\d\\b", "\\b[EAWKSZCRH] ?\\d", "\\b(LOC|MSG|CS|SFX|CUE|J)-[A-Z0-9]{2}", "air_depleted_shift_|exposure_limit_exceeded_shift_|MISSION[ _]STOPPED|BUNK SLOT|Run the STACK task|bundle task|forces COOL", "(?i)\\b(commit\\w*|stage[sd]?|acknowledg\\w*|role constraints?|operations?)\\b", "\\b(pod_bearing|mature_pods|mature_dry|naturally_dead|archived_petal|archived_nameplate)\\b"]:
 		var regex := RegEx.new()
 		regex.compile(source)
 		_patterns.append(regex)
@@ -36,6 +37,7 @@ func _init() -> void:
 
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
+	await _walk_care_round()
 	var campaign := CampaignScene.instantiate() as Chapter1Campaign
 	storage.configure(campaign)
 	root.add_child(campaign)
@@ -125,8 +127,11 @@ func _run() -> void:
 ## Every string the player can read right now, with no developer language in it.
 func _walk_state(hud: Control, state: String) -> void:
 	await process_frame
+	_walk_text(hud.get("runtime"), state)
+
+func _walk_text(node: Node, state: String) -> void:
 	var texts: Array[String] = []
-	_visible_text(hud.get("runtime"), texts)  # the HUD, its panels and 3D signs in the world
+	_visible_text(node, texts)
 	var bad: Array[String] = []
 	for entry in texts:
 		var story := entry.begins_with("\u0001")
@@ -137,6 +142,29 @@ func _walk_state(hud: Control, state: String) -> void:
 			if found != null:
 				bad.append("\"%s\" in \"%s\"" % [found.get_string(), text.left(90)])
 	_check(bad.is_empty(), "no developer language: %s %s" % [state, "; ".join(bad)])
+
+func _walk_care_round() -> void:
+	var panel := CarePanel.new()
+	root.add_child(panel)
+	var view := {"scene_id": "EX-CH03-S10", "date": "2046-05-21", "family_mode": false,
+		"plants": [{"individual_id": "ALO-01", "name": "Alo", "stage": "pod_bearing", "moisture": 40.25, "temperature": 21.0, "care_options": [{"id": "note_leaf", "label": "Note a new leaf"}]},
+			{"individual_id": "TARA-01", "name": "Tara", "stage": "archived_nameplate"}],
+		"allowed_actions": {"ALO-01": ["observe", "measure", "photograph", "care", "record"], "TARA-01": []}}
+	for large in [false, true]:
+		panel.set_settings({"large_text": large})
+		for stage in ["pod_bearing", "mature_pods", "mature_dry", "archived_petal", "naturally_dead", "archived_nameplate"]:
+			view.plants[0].stage = stage
+			panel.open(view)
+			await process_frame
+			_walk_text(panel, "Care Round readings %s large=%s" % [stage, large])
+			for action in ["observe", "measure", "photograph", "care", "record"]:
+				await panel.request_action("ALO-01", action)
+				_walk_text(panel, "Care Round %s %s large=%s" % [action, stage, large])
+			for result in [{"accepted": true}, {"accepted": false}, {"accepted": false, "code": "duplicate_date", "message": "Alo already has a photograph for this date."}]:
+				panel.render_result(result)
+				_walk_text(panel, "Care Round result %s large=%s" % [stage, large])
+	panel.close()
+	panel.free()
 
 func _visible_text(node: Node, out: Array[String]) -> void:
 	if (node is CanvasItem and not (node as CanvasItem).is_visible_in_tree()) or (node is Node3D and not (node as Node3D).is_visible_in_tree()):

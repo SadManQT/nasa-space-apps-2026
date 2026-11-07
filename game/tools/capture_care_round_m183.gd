@@ -43,6 +43,10 @@ func _run() -> void:
 		entry.care_options = [{"id": "note_leaf", "label": "Note a new leaf"}, {"id": "compare_roots", "label": "Compare root photographs"}]
 		view.plants.append(entry)
 		view.allowed_actions[plant.individual_id] = ["observe", "measure", "photograph", "care", "record"]
+	if OS.get_cmdline_user_args().has("--lifecycle"):
+		await _lifecycle_labels()
+		_finish_capture("M1-83_lifecycle_probe.txt")
+		return
 	panel.open(view)
 	await _settle()
 	await _probe("normal")
@@ -91,10 +95,32 @@ func _run() -> void:
 	_expect(root.gui_get_focus_owner() != last and panel.is_ancestor_of(root.gui_get_focus_owner()), "controller D-pad cycles within panel")
 	await _pad(JOY_BUTTON_B)
 	_expect(not panel.visible and root.gui_get_focus_owner() == prior, "controller Back restores exact prior focus")
+	_finish_capture("M1-83_capture_probe.txt")
+
+func _lifecycle_labels() -> void:
+	probes.append("Lifecycle labels are supplied provider fixtures; no matching later-life photos are supplied, so both image paths are empty.")
+	for plant in view.plants:
+		plant.current_photo_path = ""
+		plant.previous_photo_path = ""
+	for example in [{"large": false, "stages": ["pod_bearing", "mature_pods"], "labels": ["Growing pods", "Mature pods"], "suffix": "lifecycle_labels"}, {"large": true, "stages": ["mature_dry", "archived_nameplate"], "labels": ["Dry pods", "Nameplate kept"], "suffix": "lifecycle_labels_150"}]:
+		panel.set_settings({"large_text": example.large})
+		view.plants[0].stage = example.stages[0]
+		view.plants[1].stage = example.stages[1]
+		panel.open(view)
+		await _settle()
+		await _probe(example.suffix)
+		for i in 2:
+			var card: Control = panel.find_child("Plant_" + view.plants[i].individual_id, true, false)
+			var heading := card.get_child(0).get_child(0) as Label
+			_expect(heading.text.ends_with(example.labels[i]), "native plain lifecycle label " + example.labels[i])
+		await _save(example.suffix)
+	_expect(actions.is_empty(), "lifecycle wording captures emit no gameplay request")
+
+func _finish_capture(probe_name: String) -> void:
 	for file in DirAccess.get_files_at(temp_directory):
 		DirAccess.remove_absolute(temp_directory.path_join(file))
 	DirAccess.remove_absolute(temp_directory)
-	var log := FileAccess.open(output.path_join("M1-83_capture_probe.txt"), FileAccess.WRITE)
+	var log := FileAccess.open(output.path_join(probe_name), FileAccess.WRITE)
 	log.store_string("Provider fixture only: real M1-84 room images, explicit fixture readings/dates; no campaign progress.\n" + "\n".join(probes) + "\nFailures: %d\n" % failures)
 	log.close()
 	print("CARE ROUND CAPTURE RESULT: %s (%d failures)" % ["PASS" if failures == 0 else "FAIL", failures])
@@ -119,7 +145,8 @@ func _probe(context: String) -> void:
 	for id in ["ALO-01", "TARA-01"]:
 		var card: Control = panel.find_child("Plant_" + id, true, false)
 		_expect(card.size.x <= 610 and card.size.x > 0, context + " paired card fits width " + id)
-		_expect((panel.find_child("Ghost_" + id, true, false) as TextureRect).texture != null, context + " supplied ghost loaded " + id)
+		var plant: Dictionary = view.plants[0] if id == "ALO-01" else view.plants[1]
+		_expect(((panel.find_child("Ghost_" + id, true, false) as TextureRect).texture != null) == not String(plant.get("previous_photo_path", "")).is_empty(), context + " ghost reflects supplied or unavailable image " + id)
 	for node in panel._body.find_children("*", "Control", true, false):
 		if node is Label or node is Button:
 			_expect(node.get_global_rect().position.x >= panel._scroll.global_position.x - 1 and node.get_global_rect().end.x <= panel._scroll.get_global_rect().end.x + 1, context + " horizontal text/control bounds " + node.name)
@@ -134,7 +161,7 @@ func _save(suffix: String) -> void:
 	var sequence: Label = panel.find_child("CareSequence", true, false)
 	probes.append("CAPTURE %s frame=%s scroll=%d title=%s sequence=%s" % [suffix, frame, panel._scroll.scroll_vertical, title.get_global_rect(), sequence.get_global_rect()])
 	_expect(root.get_visible_rect().encloses(frame), "capture-time frame bounds " + suffix)
-	if suffix in ["paired_ghost", "paired_ghost_150"]:
+	if suffix in ["paired_ghost", "paired_ghost_150"] or suffix.begins_with("lifecycle_"):
 		_expect(panel._scroll.scroll_vertical == 0 and frame.encloses(title.get_global_rect()) and panel._scroll.get_global_rect().encloses(sequence.get_global_rect()), "capture-time fresh title/date/sequence remain within frame " + suffix)
 	_expect(root.get_texture().get_image().save_png(output.path_join("M1-83_" + suffix + ".png")) == OK, "saved native screenshot " + suffix)
 

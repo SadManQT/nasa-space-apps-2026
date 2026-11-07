@@ -34,6 +34,8 @@ panel.open({
 
 `plants` is an array of dictionaries with unique nonempty `individual_id`s; M1-49 supplies Alo and Tara. All names/stages/dates/readings/images come from the caller. Missing/nonfinite readings display `Unavailable`; missing/unreadable images remain empty with explicit text. No placeholder measurement or generated photo is substituted. Moisture preserves fractions; the reference band is 40–60. Both readings are required before the panel emits `measure`. Omitted actions are disabled. No care action is available without a supplied care option.
 
+The supplied `stage` remains the authoritative ID in the view. Headings convert lifecycle IDs to plain labels: `pod_bearing` → Growing pods, `mature_pods` → Mature pods, `mature_dry` → Dry pods, `naturally_dead` → Life cycle complete, `archived_petal` → Pressed petal, `archived_nameplate` → Nameplate kept. Other supplied labels replace underscores with spaces, following the existing Journal presentation pattern. No lifecycle ID or biology state is rewritten.
+
 `signal action_requested(action: String, payload: Dictionary)` sends a request, never a receipt. Common payload:
 
 ```gdscript
@@ -81,4 +83,8 @@ Fresh open focuses the reading scroll at the title/date/sequence. Tab and direct
 
 Native fixture images are Sadman's real `M1-84_care_{alo,tara}_{0412,0416}.png` room captures. The readings 40.25/59.75 and 21/22°C and dates are explicitly supplied provider fixtures, not a campaign measurement. The capture fixture waits a rendered frame and saves a real supplied image to a process-specific OS cache directory, then removes only those fixture files. It does not stage a runtime camera or prove a two-date campaign/save/reload flow. The older frame overlay is visible but the source room photographs contain very small plants; no replacement image or unsupported visual upgrade is claimed.
 
-No asset generation, paid tool, new dependency, handbook decision, campaign transaction, board change or AI generation occurred. Full runner/independent review results are recorded in the task report; runtime M1-49 acceptance remains Atik's.
+`game/tools/test_player_text.gd` explicitly instantiates the un-wired provider and scans readings, all five action states, unavailable-camera feedback, accepted/rejected/duplicate-date results at normal and 150% text for all six multiword/terminal lifecycle IDs above. These states use disclosed provider data and do not require campaign wiring.
+
+Round-1 wording evidence uses `capture_care_round_m183.gd -- --lifecycle`: `M1-83_lifecycle_labels.png` shows Growing pods/Mature pods at normal text; `M1-83_lifecycle_labels_150.png` shows Dry pods/Nameplate kept at 150%. `M1-83_lifecycle_probe.txt` records 143 passed probes including same-frame capture-time title/date/sequence bounds. These are lifecycle-label fixtures with independent supplied readings/date, not a dated biological state: no corresponding later-life images were supplied, so the image paths are empty and unavailable text is visible. No photo request or campaign transaction occurs. The six earlier accepted image/ghost/input screenshots and their probe remain unchanged.
+
+No asset/media generation, paid tool, new dependency, handbook decision, campaign transaction or board change occurred. Code and tests were AI-assisted; the controller records that work in AI_PROMPT_LOG. Full runner/independent review results are recorded in the task report; runtime M1-49 acceptance remains Atik's.

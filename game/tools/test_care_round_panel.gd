@@ -92,6 +92,12 @@ func _run() -> void:
 	care.grab_focus()
 	await _confirm(true)
 	_check(requests[-1].payload.care_id == "compare_roots", "controller selected care value reaches the runtime request")
+	var stage_view: Dictionary = view.duplicate(true)
+	for example in [["pod_bearing", "Growing pods"], ["mature_pods", "Mature pods"], ["mature_dry", "Dry pods"], ["naturally_dead", "Life cycle complete"], ["archived_petal", "Pressed petal"], ["archived_nameplate", "Nameplate kept"]]:
+		stage_view.plants[0].stage = example[0]
+		panel.open(stage_view)
+		var heading: Label = panel.find_child("Plant_ALO-01", true, false).get_child(0).get_child(0)
+		_check(heading.text.ends_with(example[1]) and stage_view.plants[0].stage == example[0], "lifecycle heading uses plain words without changing authoritative stage " + example[0])
 	panel.close()
 	_check(not panel.visible and view.plants == before.plants, "close preserves caller plant state")
 	panel.free()

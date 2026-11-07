@@ -12,6 +12,7 @@ signal closed
 
 const ACTIONS := ["observe", "measure", "photograph", "care", "record"]
 const ALIGNMENT_TOLERANCE := 0.3
+const STAGE_WORDS := {"pod_bearing": "Growing pods", "mature_pods": "Mature pods", "mature_dry": "Dry pods", "naturally_dead": "Life cycle complete", "archived_petal": "Pressed petal", "archived_nameplate": "Nameplate kept"}
 var _view: Dictionary = {}
 var _alignment: Dictionary = {}
 var _settings := {"large_text": false}
@@ -215,7 +216,8 @@ func _add_plant(pair: HBoxContainer, plant: Dictionary) -> void:
 	var stack := VBoxContainer.new()
 	stack.add_theme_constant_override("separation", 10)
 	card.add_child(stack)
-	stack.add_child(UiDesign.label(String(plant.get("name", "Plant")) + " · " + String(plant.get("stage", "Growth unavailable")), "heading"))
+	var stage := String(plant.get("stage", "Growth unavailable"))
+	stack.add_child(UiDesign.label(String(plant.get("name", "Plant")) + " · " + String(STAGE_WORDS.get(stage, stage.replace("_", " "))), "heading"))
 	var readings := UiDesign.label("Moisture: %s\nTemperature: %s" % [_reading(plant, "moisture", ""), _reading(plant, "temperature", " °C")])
 	readings.name = "Readings_" + id
 	stack.add_child(readings)
