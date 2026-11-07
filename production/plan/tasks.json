@@ -161,7 +161,7 @@
    "priority": "P0",
    "tool": "human",
    "title": "Team roster, roles and both registrations",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/human",
    "deps": [],
    "paths": [
@@ -169,8 +169,8 @@
    ],
    "refs": [],
    "note": "docs/TEAM.md written on 4 Nov from the Bangladesh registration (6 members, 0 women, NASA team page linked). Still needed: each member's role and GitHub username, the under-18 yes/no answer, and confirmation that all six are on the NASA team page with photo and role.",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "docs/TEAM.md complete (Sadman in chat, 7 Nov 2026): all six members listed with role and GitHub; both registrations confirmed (\"Yes, all done\": Bangladesh registration and NASA team page with photo and role, team photo uploaded); no one under 18 (\"No one under 18\"); women members 0 (no bonus); licence Apache-2.0 (LICENSE).",
+   "updated": "2026-11-07",
    "prompt": "Do: create docs/TEAM.md with every member: name as registered, role (build / design / research / story / presenter), GitHub username,\nwhether they are on the Bangladesh pre-registration AND on the NASA team page (spaceappschallenge.org, Members tab, with photo and role).\nRecord (yes/no only, no birthdates) whether anyone is under 18: under-18 names, voices and faces must not appear in any video or submission.\nRecord whether the team has one or more women members (+5% score bonus). Choose the project licence (recommended Apache-2.0, matching the\nopen-source rule) and write it in TEAM.md. Upload the team photo to the NASA page.\nAcceptance: TEAM.md lists all members with both registrations confirmed; the licence choice is recorded.",
    "reserved_for": "sadman",
    "effort": 1

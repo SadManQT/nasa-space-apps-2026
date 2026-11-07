@@ -8,18 +8,18 @@ Contact details (email, phone) are kept in the Bangladesh registration, not in t
 
 | # | Name (as registered) | Role | GitHub | Bangladesh registration | NASA team page (photo + role) |
 |---|---|---|---|---|---|
-| Leader | Nafis Mohtasim Ramim | _to confirm_ | _to confirm_ | Yes | _to confirm_ |
-| 1 | Khandaker Shadman Sakib Siddiquee | _to confirm_ | SadManQT | Yes | _to confirm_ |
-| 2 | Md. Asif Iqbal | _to confirm_ | _to confirm_ | Yes | _to confirm_ |
-| 3 | Abu Sayem Mohammed Tanvir | _to confirm_ | SayemTanvir | Yes | _to confirm_ |
-| 4 | Shahariar Rahman Shanto | _to confirm_ | _to confirm_ | Yes | _to confirm_ |
-| 5 | MD ATIK KHAN | _to confirm_ | ProgrammerAtik | Yes | _to confirm_ |
+| Leader | Nafis Mohtasim Ramim | Build (UI/UX and player-facing systems) | 2405167-hub | Yes | Yes |
+| 1 | Khandaker Shadman Sakib Siddiquee | Design and build (producer, art and media lead, integrator) | SadManQT | Yes | Yes |
+| 2 | Md. Asif Iqbal | Research (science and accessibility review) | _not on GitHub yet_ | Yes | Yes |
+| 3 | Abu Sayem Mohammed Tanvir | Research (QA and playtest lead) | SayemTanvir | Yes | Yes |
+| 4 | Shahariar Rahman Shanto | Presenter | _not on GitHub yet_ | Yes | Yes |
+| 5 | MD ATIK KHAN | Build (gameplay runtime, Moon systems and builds) | ProgrammerAtik | Yes | Yes |
 
-GitHub usernames above come from the repository's commit history; confirm them, and add the missing ones.
+Confirmed by Sadman on 7 Nov 2026: all six members are on both the Bangladesh registration and the NASA team page (photo and role), the team photo is uploaded, and the roles are as listed. GitHub usernames come from the repository's commit history (Ramim's commits appear as 2405167-hub).
 
 - **Team size:** 6 (the maximum allowed).
 - **Women members:** 0 as registered, so the +5% women-participation bonus does not apply.
-- **Anyone under 18?** _To confirm (yes/no only)._ Under-18 names, voices and faces must not appear in any video or submission.
+- **Anyone under 18?** No (Sadman, 7 Nov 2026). Every member may be named in the videos and submission, and an adult member or a credited AI narrator may voice them.
 - **Licence:** Apache-2.0 (`LICENSE`), matching the open-source rule.
 
 ## Registered project (Bangladesh form, as submitted)
