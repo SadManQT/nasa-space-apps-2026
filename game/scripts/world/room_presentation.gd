@@ -130,11 +130,14 @@ static func wall_sign(parent: Node3D, spec: Dictionary, layout: Dictionary) -> L
 	var label := Label3D.new()
 	label.text = spec.text
 	label.position = vector(spec.position)
-	label.rotation_degrees = Vector3(float(spec.get("pitch", 0)), float(spec.get("yaw", 0)), 0)
+	# "roll" tilts a sign in its own plane (a label the quake knocked crooked, M3-3R)
+	label.rotation_degrees = Vector3(float(spec.get("pitch", 0)), float(spec.get("yaw", 0)), float(spec.get("roll", 0)))
 	label.double_sided = false
 	label.font_size = int(spec.get("font_size", 40))
 	label.pixel_size = float(spec.get("size", 0.0025))
 	label.modulate = Color(spec.get("color", layout.get("accent_color", "#ffffff")))
+	if spec.has("font_path"):
+		label.font = load(String(spec.font_path)) as Font  # e.g. Mei's handwriting on Tara's card (M3-3R)
 	if spec.has("wrap_m"):
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.width = float(spec.wrap_m) / label.pixel_size

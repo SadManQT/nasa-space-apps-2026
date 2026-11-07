@@ -242,3 +242,46 @@ Run `game/tools/run_tests.sh exterior_terrain` (placements against the heightfie
 the terrain-mode and flat rooms, a real player walking on the provider's collision to every approach and crew anchor,
 the Earth rules) and `production/qa/evidence/M1-82_capture.sh` (windowed wide and ground views on the terrain, and the
 rendered Earth's measured size).
+
+# Chapter 3 and LOC-07, the Expedition Zero annex (M3-3R)
+
+`LOC-07.json` / `annex.tscn` is a real two-deck room. The **warm-side access bay** (8 × 6 m, the approved kit, its
+pressure door `door_service_annex` to the service rooms) has the M3-3A `EN_ZeroAnnex_FloorHatch` module in its deck;
+`floor_openings` leaves the kit floor tiles and floor collision out of the 2 × 2 m hatch well. The **2034 annex**
+(`lower_deck`: 10 × 6 m, 3 m below, `EN_ZeroAnnex` grating, frosted ceiling with eight dead fixtures, riveted walls) is
+batched like the kit, with its own floor, wall and ceiling collision and a lined well. The ladder stands in the well.
+Navigation has two decks that are not joined (the ladder is climbed, not walked); each obstacle belongs to the deck its
+centre stands on. A walking-height obstacle round the coaming keeps anyone from stepping into an open well. The N.R.
+leaf is the `annex_hatch` boundary (`hatch_doors`): `set_door_open("annex_hatch", ...)` swings it, and the leaf's own
+collision blocks or clears the opening.
+
+New layout and staging keys (all optional):
+- `kit_props`: live kit or annex pieces with collision, named by `id`: `parts` (moving part → open fraction, e.g. the
+  quake's displaced `Cover`), `texts` (words on a full-UV `Screen`/`Document_*` slot through a SubViewport; `paper`,
+  `font` hand/print, `flip` h/v for a slot whose UVs run mirrored; `camera` {from, to, fov} shows a live camera view
+  instead, the S06 hatch camera), `inks` (Label3D words on small plates, optionally riding a moving `part`, e.g. N.R.
+  on the leaf) and `attach` (a GLB or M3-99 narrative prop seated in a socket, e.g. the frozen trays).
+- Staging maps `kit_parts`, `kit_texts`, `kit_attach` change those per scene; `clear()` restores the base room's.
+- Staging map `outfits` (cast id → `eva`): `CampaignCrew` puts that cadet in the fitted EVA suit (`CH_<Name>_EVA`) with the
+  role helmet seated, visor up, and a helmet lamp. Bodies are kept per outfit, so a cut never duplicates anyone.
+- A staged `<room>_player` anchor replaces the base player anchor the caller passes (S07 starts on the cold side).
+- A staged `earth_screen` fixture gives `CampaignCrew` an Earth-link screen in any room (Ferreira in S03 and S06).
+- `local_lights[].shadow` (a lamp on one deck never lights the other); `signs[].roll` (a crooked label);
+  `signs[].font_path` (Mei's handwriting on Tara's card).
+- `walk_probe` points may carry a third value, the deck height.
+
+| Scenes | Room | What the staging shows |
+|---|---|---|
+| EX-CH03-S01..S05 | LOC-02 | The atmosphere service corridor: M3-2R's air-console status screen keeps the red TANK PRESSURE warning (CH02 → CH03, no time jump) until the five checks clear it (S05); the independent gauge on its work stand by the recorder bench (which stays the same night); taps 1–3 on the real service points (main 100/100, garden spur 82/74, return 100/100); the free-standing diagnostic board at the air bay's mouth with the simplified piping diagram, Kai's hypothesis (S01 → S02), the saved readings and proposed boundary (S02 → S03), the paused previews and rollback (S03 → S04), the approved sequence (S04) and the five checks, corrected note and camera-only annex handover (S05 → S06); Ferreira's repair diagram with her line word for word under an Earth-link panel in the power bay (S03); the work boundary (S04); practicals at 85 % until the warning clears |
+| EX-CH03-S01 on / S04 on / S05 on | LOC-02 | The crooked GARDEN SPUR label (straight from S06); the seated clamp; the gauge on its hook. They stay (doc 09) |
+| EX-CH03-S06 | LOC-07 | The camera-only inspection: displaced cover, N.R. hatch (clue 10), feed isolated, zero differential, port open, the hatch camera's live view on the warm-side screen, the safety drawing, the 8 May entry schedule, Ferreira's Earth link |
+| EX-CH03-S07 | LOC-07 | The suited entry: hatch open; Mei and Rafi in EVA suits below, Kai and Amara at the station on the local radio; frozen trays, the growth chart ending "Day 12. Leaves curling. Heat" (clue 12), the 2034 tag and the route sheet under its sealed cover (clue 11), the gear-wheel tool tag on the station (clue 12, S07–S08), the return boundary at the ladder foot |
+| EX-CH03-S08 | LOC-07 | The warm-side evidence table: the scanned route sheet, the tray photograph, the care visits to 16 May (S08 → S09); the planning board's provenance and present-day checks (clue 13) |
+| EX-CH03-S08, S12 | LOC-03 | `care_round` (doc 24 §7.2): Alo and Tara in S08, Tara only in S12 |
+| EX-CH03-S09..S11 | LOC-03 | The drying bench: the five-day dry-down card, the pod record; the contained tray, 42 = 12 + 30, the open founder case and the sleeved petal (S10 → S11); the sealed case and seal record (S11). Vigil photos per moment `CH03-ALO-VIGIL-1..5` (Kai's tea from the fourth) |
+| EX-CH03-S10 on | LOC-03 | The lineage board: Alo's nameplate and record (S10), her pressed petal (S11), Tara's nameplate level with it, Tara × Alo working stock and the first lineage photograph (S12). It stays |
+| EX-CH03-S11..CH04-S01 | LOC-03 | The planting rack (PL_Descendants_Planted, then the October PL_Descendants with a few green stems among purple), parent line Alo × Tara, Kai's position 1; D6 dedication `EX-CH03-S11-DEDICATION-OPT01..03` (Light and Star / For Alo and Tara / The Next Small Thing); the May prediction (D4, M3-2R's card) stays on the lineage board through CH04-S01 (CH03 → CH04) |
+| EX-CH03-S12 | LOC-03 | Tara's farewell in her bay (dry pods, the sealed Tara × Alo envelope with no count, Mei's card, her name kept on the frame), the care ledger for the days between, the survey board's preparation list; D2 at the bench (S09–S10) and the bay (S12); Tara's last photograph with `CH03-TARA-FAREWELL` |
+
+Run `game/tools/run_tests.sh chapter3_rooms` and `production/qa/evidence/M3-3R_capture.sh` (windowed, 37 screenshots and
+frame timings).

@@ -3,11 +3,15 @@
 ## (M3-7R), prints, signs and screens,
 ## per-scene practical-light levels, collision for every floor-standing addition and the staged focus stations.
 ## clear() puts the base room back exactly. Presentation only: puzzles, missions and the director own every rule.
+## M3-3R adds live kit pieces (the M3-3A annex pieces): kit_prop() places one with its collision, moving-part poses,
+## live words on its Label*, Document* and Screen* slots and objects seated in its sockets; a stage's "kit_parts",
+## "kit_texts" and "kit_attach" change those per scene and clear() restores the base room's.
 extends RefCounted
 
 const Presentation = preload("res://scripts/world/room_presentation.gd")
 const Habitat = preload("res://scripts/world/habitat_room_builder.gd")
 const Geometry = preload("res://scripts/asset_geometry.gd")
+const Kit = preload("res://assets/environment/kit/habitat_kit.gd")
 const EclipseProps = preload("res://assets/props/eclipse_power/eclipse_props.gd")
 const C7 = preload("res://assets/props/chapter7_assets.gd")
 const NarrativeProps = preload("res://assets/props/narrative/narrative_props.gd")
@@ -185,8 +189,26 @@ static func build(room: CampaignRoom, stage: Dictionary, layout: Dictionary) -> 
 			lamp.light_color = Color(spec.color)
 			lamp.light_energy = float(spec.energy)
 			lamp.omni_range = float(spec.range_m)
-			lamp.shadow_enabled = false
+			# a work lamp on a deck under another deck casts shadows, so it never lights the room above (M3-3R)
+			lamp.shadow_enabled = bool(spec.get("shadow", false))
 			lamps.add_child(lamp)
+	for node_id in stage.get("kit_parts", {}):
+		var piece := room.visual_root.get_node_or_null(String(node_id)) as Node3D
+		if piece != null:
+			for part in stage.kit_parts[node_id]:
+				Kit.set_part_open(piece, String(part), float(stage.kit_parts[node_id][part]))
+	for node_id in stage.get("kit_texts", {}):
+		var piece := room.visual_root.get_node_or_null(String(node_id)) as Node3D
+		if piece != null:
+			for slot in stage.kit_texts[node_id]:
+				slot_text(piece, String(slot), stage.kit_texts[node_id][slot])
+	for node_id in stage.get("kit_attach", {}):
+		var piece := room.visual_root.get_node_or_null(String(node_id)) as Node3D
+		if piece != null:
+			for item in stage.kit_attach[node_id]:
+				var model := attach(piece, item)
+				if model != null:
+					model.set_meta("staging_attached", true)
 	set_light_level(room, stage.lighting)
 	for target in stage.focus_targets:
 		room.add_staged_focus_target(target)
@@ -225,6 +247,29 @@ static func clear(room: CampaignRoom) -> void:
 				(focus.get_child(0) as Label3D).text = String(focus.get_meta("base_label"))
 			focus.remove_meta("base_label")
 	room.remove_staged_focus_targets()
+	# kit pieces return to the base room's poses and words; seated staging objects leave their sockets
+	var stage: Dictionary = room.stage()
+	for map_key in ["kit_parts", "kit_texts", "kit_attach"]:
+		for node_id in stage.get(map_key, {}):
+			var piece := room.visual_root.get_node_or_null(String(node_id)) as Node3D
+			if piece == null:
+				continue
+			var base: Dictionary = room.kit_prop(String(node_id))
+			match map_key:
+				"kit_parts":
+					for part in stage.kit_parts[node_id]:
+						Kit.set_part_open(piece, String(part), float(base.get("parts", {}).get(part, 0.0)))
+				"kit_texts":
+					for slot in stage.kit_texts[node_id]:
+						if base.get("texts", {}).has(slot):
+							slot_text(piece, String(slot), base.texts[slot])
+						else:
+							clear_slot(piece, String(slot))
+				"kit_attach":
+					for child in piece.get_children():
+						if child.has_meta("staging_attached"):
+							piece.remove_child(child)
+							child.queue_free()
 	set_light_level(room, {})
 
 ## Scales the room's practical lights and ceiling-strip diffusers and sets the ambient level for the staged scene
@@ -660,3 +705,181 @@ static func _rattle(model: Node3D, spec: Dictionary) -> void:
 	tween.tween_property(model, "position", rest_position, 0.08)
 	tween.parallel().tween_property(model, "rotation", rest_rotation, 0.08)
 	model.set_meta("rattle", tween)
+
+# ------------------------------------------------------------------------------------------- live kit pieces (M3-3R)
+
+## Places one live kit piece (a habitat-kit or M3-3A annex catalogue id) with its game-LOD collision, named spec.id:
+## "piece", "position", "yaw", "parts" (moving part -> open fraction, e.g. the displaced service cover), "texts" (slot ->
+## words on a full-UV screen or document slot, see slot_text), "inks" (small printed plates, see ink) and "attach"
+## (objects seated in its sockets, see attach). The base room's kit_props use it.
+static func kit_prop(parent: Node3D, spec: Dictionary) -> Node3D:
+	var node := Kit.place(parent, String(spec.piece), Presentation.vector(spec.position), float(spec.get("yaw", 0)))
+	if node == null:
+		return null
+	node.name = String(spec.id)
+	for item in spec.get("inks", []):
+		ink(node, item)
+	for part in spec.get("parts", {}):
+		Kit.set_part_open(node, String(part), float(spec.parts[part]))
+	for slot in spec.get("texts", {}):
+		slot_text(node, String(slot), spec.texts[slot])
+	for item in spec.get("attach", []):
+		attach(node, item)
+	return node
+
+## Printed or handwritten words on a piece's small plates (stamped nameplates, service tags, a page under a clear
+## cover), whose slots are too small for a screen texture: a lit, single-sided Label3D in the piece's own space ("part"
+## rides on a moving part, e.g. the N.R. nameplate on the hatch leaf). spec: "id", "text", "position", "pitch", "yaw",
+## "size" (em height in metres), "color", "font" (hand / print).
+static func ink(piece: Node3D, spec: Dictionary) -> Label3D:
+	var parent: Node3D = piece
+	var offset := Vector3.ZERO
+	if spec.has("part"):
+		var lod := piece.get_node_or_null("LOD0")
+		var part := (lod if lod != null else piece).find_child(String(spec.part), true, false) as Node3D
+		if part != null:
+			parent = part
+			var rest := Transform3D.IDENTITY
+			var current: Node = part
+			while current != null and current != piece:
+				if current is Node3D:
+					rest = (current as Node3D).transform * rest
+				current = current.get_parent()
+			# the authored point is in the piece's space with the part at rest (kit_prop inks before it poses parts)
+			offset = -rest.origin
+	var label := Label3D.new()
+	label.name = String(spec.get("id", "Ink"))
+	label.text = String(spec.text)
+	label.position = Presentation.vector(spec.position) + offset
+	label.rotation_degrees = Vector3(float(spec.get("pitch", 0)), float(spec.get("yaw", 0)), 0)
+	label.double_sided = false
+	label.font_size = 64
+	label.pixel_size = float(spec.get("size", 0.01)) / 64.0
+	label.outline_size = 0
+	label.modulate = Color(spec.get("color", "#1F2A44"))
+	if spec.has("font"):
+		label.font = NarrativeProps.font(String(spec.font))
+	if spec.has("wrap_m"):
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.width = float(spec.wrap_m) / label.pixel_size
+	parent.add_child(label)
+	return label
+
+## Seats an object in one of a piece's sockets (a node named spec.socket inside it): a GLB ("path") or an M3-99
+## narrative prop ("narrative" id with an optional "variant", e.g. PR_ToolTag_Gear on the support station's
+## Socket_ToolTag), turned by "yaw". Returns the object, named spec.id.
+static func attach(piece: Node3D, spec: Dictionary) -> Node3D:
+	var socket := piece.find_child(String(spec.socket), true, false) as Node3D
+	if socket == null:
+		return null
+	var model: Node3D = NarrativeProps.instance(String(spec.narrative), String(spec.get("variant", ""))) if spec.has("narrative") else Geometry.load_glb(String(spec.path))
+	if model == null:
+		return null
+	model.name = String(spec.id)
+	var at := Transform3D.IDENTITY
+	var current: Node = socket
+	while current != null and current != piece:
+		if current is Node3D:
+			at = (current as Node3D).transform * at
+		current = current.get_parent()
+	model.position = at.origin
+	model.rotation_degrees.y = float(spec.get("yaw", 0))
+	piece.add_child(model)
+	return model
+
+## Live words on a piece's material slot (the annex's Label*, Document* and Screen* slots carry no baked text): a
+## SubViewport picture rendered once, at the largest font at which every line fits. spec: "text" ("{line}" is a canon
+## catalog line word for word via "line"), "px" [w, h] (the slot's aspect), "bg", "fg", "font" (hand / print, the M3-99
+## open fonts), "align" (left / center), "paper" (lit like paper instead of a glowing screen) and "flip" (h / v / hv,
+## for a slot whose UVs run the other way). Returns the Label (kept in the piece's "slot_text" meta).
+static func slot_text(piece: Node3D, slot: String, spec: Dictionary) -> Label:
+	clear_slot(piece, slot)
+	var px: Array = spec.get("px", [512, 256])
+	var size := Vector2i(int(px[0]), int(px[1]))
+	var view := SubViewport.new()
+	view.name = "SlotView_" + slot
+	view.size = size
+	view.render_target_update_mode = SubViewport.UPDATE_ONCE
+	var back := ColorRect.new()
+	back.color = Color(spec.get("bg", "#0b1220"))
+	back.size = Vector2(size)
+	view.add_child(back)
+	var text := String(spec.get("text", ""))
+	if spec.has("line"):
+		text = text.replace("{line}", line_text(String(spec.line)))
+	var label := Label.new()
+	label.name = "Text"
+	label.text = text
+	label.position = Vector2(size) * 0.05
+	label.size = Vector2(size) * 0.9
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	if spec.get("camera") is Dictionary and piece.is_inside_tree():
+		# a live inspection camera (EX-CH03-S06: the camera that goes through the N.R. hatch port before anyone does):
+		# the shared world seen from "from" towards "to" (room metres), the caption along the bottom edge
+		var room_space: Transform3D = piece.get_parent().global_transform
+		var eye := Camera3D.new()
+		eye.fov = float(spec.camera.get("fov", 70))
+		var from: Vector3 = room_space * Presentation.vector(spec.camera.from)
+		eye.transform = Transform3D(Basis.looking_at(room_space * Presentation.vector(spec.camera.to) - from, Vector3.UP), from)
+		eye.current = true
+		view.add_child(eye)
+		back.color = Color(0, 0, 0, 0)
+		view.transparent_bg = false
+		label.position = Vector2(size) * Vector2(0.04, 0.78)
+		label.size = Vector2(size) * Vector2(0.92, 0.18)
+		var refresh := view.create_tween()
+		refresh.tween_interval(0.8)  # once more after the scene's shaders and shadow maps settle
+		refresh.tween_callback(func() -> void: view.render_target_update_mode = SubViewport.UPDATE_ONCE)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT if String(spec.get("align", "center")) == "left" else HORIZONTAL_ALIGNMENT_CENTER
+	if spec.has("font"):
+		label.add_theme_font_override("font", NarrativeProps.font(String(spec.font)))
+	label.add_theme_color_override("font_color", Color(spec.get("fg", "#d9f2ff")))
+	var lines := text.split("\n")
+	var longest := 1
+	for one in lines:
+		longest = maxi(longest, one.length())
+	label.add_theme_font_size_override("font_size", maxi(8, int(minf(label.size.y * 0.89 / (lines.size() * 1.25), label.size.x * 0.98 / (longest * 0.58)))))
+	view.add_child(label)
+	piece.add_child(view)
+	var material := StandardMaterial3D.new()
+	material.resource_name = slot + "_live"
+	if bool(spec.get("paper", false)):
+		material.roughness = 0.85
+	else:
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.albedo_texture = view.get_texture()
+	var flip := String(spec.get("flip", ""))
+	material.uv1_scale = Vector3(-1.0 if flip.contains("h") else 1.0, -1.0 if flip.contains("v") else 1.0, 1.0)
+	material.uv1_offset = Vector3(1.0 if flip.contains("h") else 0.0, 1.0 if flip.contains("v") else 0.0, 0.0)
+	for found in slot_surfaces(piece, slot):
+		(found.mesh as MeshInstance3D).set_surface_override_material(int(found.surface), material)
+	var texts: Dictionary = piece.get_meta("slot_text", {})
+	texts[slot] = label
+	piece.set_meta("slot_text", texts)
+	return label
+
+## Takes a slot's live words off again (the imported blank material shows).
+static func clear_slot(piece: Node3D, slot: String) -> void:
+	var old := piece.get_node_or_null("SlotView_" + slot)
+	if old == null:
+		return
+	piece.remove_child(old)
+	old.queue_free()
+	for found in slot_surfaces(piece, slot):
+		(found.mesh as MeshInstance3D).set_surface_override_material(int(found.surface), null)
+	var texts: Dictionary = piece.get_meta("slot_text", {})
+	texts.erase(slot)
+	piece.set_meta("slot_text", texts)
+
+## Every surface of a piece (all LODs) whose imported material is named exactly slot.
+static func slot_surfaces(piece: Node3D, slot: String) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for mesh in piece.find_children("*", "MeshInstance3D", true, false):
+		var instance := mesh as MeshInstance3D
+		if instance.mesh == null:
+			continue
+		for surface in instance.mesh.get_surface_count():
+			var material := instance.mesh.surface_get_material(surface)
+			if material != null and String(material.resource_name) == slot:
+				out.append({"mesh": instance, "surface": surface})
+	return out

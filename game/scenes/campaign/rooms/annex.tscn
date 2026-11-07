@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/campaign_room.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://scenes/campaign/rooms/habitat_kit_preload.tscn" id="2_kit"]
+
+; M3-3R: LOC-07, the warm-side access bay and the 2034 annex below it. Layout, the annex deck, kit pieces and
+; staging are authored in resources/campaign/rooms/LOC-07.json; CampaignRoom builds the room from it.
+[node name="Annex" type="Node3D"]
+script = ExtResource("1_room")
+room_id = "LOC-07"
+
+[node name="HabitatKitPreload" parent="." instance=ExtResource("2_kit")]

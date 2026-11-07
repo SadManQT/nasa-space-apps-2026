@@ -701,6 +701,1719 @@
  ],
  "staging": [
   {
+   "id": "ch03_care_round_s08",
+   "from": "EX-CH03-S08",
+   "until": "EX-CH03-S08",
+   "about": "Doc 24 7.2: the Care Round reused in EX-CH03-S08 (dated visits 8 to 16 May while the annex record is archived); the same frame every visit for the ghost overlay.",
+   "care_round": {
+    "ALO-01": {
+     "focus_target": "garden_alo_glove_port",
+     "plant_anchor": "ALO-01",
+     "stand": [
+      2.4,
+      0,
+      1.2
+     ],
+     "photo_view": {
+      "from": [
+       2.08,
+       1.25,
+       2.25
+      ],
+      "to": [
+       2.15,
+       0.86,
+       3.15
+      ]
+     },
+     "reach": "glove_ports",
+     "view_boundary": "garden_viewing_shutter"
+    },
+    "TARA-01": {
+     "focus_target": "garden_tara_bay",
+     "plant_anchor": "TARA-01",
+     "stand": [
+      -3.2,
+      0,
+      0.5
+     ],
+     "photo_view": {
+      "from": [
+       -3.2,
+       1.22,
+       -0.8
+      ],
+      "to": [
+       -3.2,
+       0.86,
+       -1.5
+      ]
+     },
+     "reach": "direct"
+    }
+   }
+  },
+  {
+   "id": "ch03_care_round_s12",
+   "from": "EX-CH03-S12",
+   "until": "EX-CH03-S12",
+   "about": "Doc 24 7.2 / 3.9: EX-CH03-S12 care visits to Tara until her harvest on 31 May.",
+   "care_round": {
+    "TARA-01": {
+     "focus_target": "garden_tara_bay",
+     "plant_anchor": "TARA-01",
+     "stand": [
+      -3.2,
+      0,
+      0.5
+     ],
+     "photo_view": {
+      "from": [
+       -3.2,
+       1.22,
+       -0.8
+      ],
+      "to": [
+       -3.2,
+       0.86,
+       -1.5
+      ]
+     },
+     "reach": "direct"
+    }
+   }
+  },
+  {
+   "id": "ch03_drying_bench",
+   "from": "EX-CH03-S09",
+   "until": "EX-CH03-S11",
+   "about": "EX-CH03-S09..S11 (STORY_FULL; P-06): the garden maturity and drying bench in front of Alo's cassette. S09: the dry-down date card names the five days (16 to 21 May, moisture 70 to 20, irrigation off to Alo only); the dated pod record 8 to 16 May (S08 -> S09). S10: the contained tray, six pods of seven, 42 = 12 + 30 read on the bench, the open founder case taking the 30 and the pressed petal in its sleeve (S10 -> S11). S11: the founder case sealed beside its seal record (\"Thirty founder seeds remain sealed.\").",
+   "fixtures": [
+    {
+     "id": "ch03_drying_bench",
+     "position": [
+      0.15,
+      0.45,
+      2.85
+     ],
+     "size": [
+      1.3,
+      0.9,
+      0.7
+     ],
+     "color": "#3c4b5d",
+     "transparent": false
+    },
+    {
+     "id": "drydown_card",
+     "position": [
+      1.235,
+      1.55,
+      3.1
+     ],
+     "size": [
+      0.03,
+      0.5,
+      0.7
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "pod_record_card",
+     "position": [
+      0.5,
+      0.905,
+      2.95
+     ],
+     "size": [
+      0.36,
+      0.01,
+      0.24
+     ],
+     "color": "#ece6d6",
+     "transparent": false,
+     "until": "EX-CH03-S09"
+    },
+    {
+     "id": "moisture_card",
+     "position": [
+      -0.25,
+      0.905,
+      2.95
+     ],
+     "size": [
+      0.36,
+      0.01,
+      0.24
+     ],
+     "color": "#ece6d6",
+     "transparent": false,
+     "until": "EX-CH03-S09"
+    },
+    {
+     "id": "ledger_card",
+     "position": [
+      -0.25,
+      0.905,
+      3.07
+     ],
+     "size": [
+      0.38,
+      0.01,
+      0.24
+     ],
+     "color": "#ece6d6",
+     "transparent": false,
+     "from": "EX-CH03-S10"
+    },
+    {
+     "id": "seal_record",
+     "position": [
+      0.6,
+      0.905,
+      2.57
+     ],
+     "size": [
+      0.3,
+      0.01,
+      0.12
+     ],
+     "color": "#ece6d6",
+     "transparent": false,
+     "from": "EX-CH03-S11"
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "ch03_drying_bench",
+     "position": [
+      0.15,
+      0.45,
+      2.85
+     ],
+     "size": [
+      1.3,
+      0.9,
+      0.7
+     ]
+    }
+   ],
+   "props": [
+    {
+     "id": "counting_tray",
+     "path": "res://assets/props/PR_SeedTray/PR_SeedTray.glb",
+     "position": [
+      0.05,
+      0.9,
+      2.78
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH03-S10",
+     "until": "EX-CH03-S10"
+    },
+    {
+     "id": "alo_petal_sleeve",
+     "path": "res://assets/props/PR_PressedPetal/PR_PressedPetal.glb",
+     "position": [
+      -0.38,
+      0.9,
+      2.6
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH03-S10",
+     "until": "EX-CH03-S10"
+    }
+   ],
+   "chapter7_props": [
+    {
+     "id": "founder_case",
+     "asset": "PR_SeedCase",
+     "position": [
+      0.55,
+      0.9,
+      2.8
+     ],
+     "yaw": 0,
+     "from": "EX-CH03-S10",
+     "case": {
+      "lid": 1.0,
+      "latched": false
+     },
+     "by_scene": {
+      "EX-CH03-S11": {
+       "case": {
+        "lid": 0.0,
+        "latched": true
+       }
+      }
+     }
+    }
+   ],
+   "signs": [
+    {
+     "id": "drydown_text",
+     "text": "DRY-DOWN  -  16 TO 21 MAY\nFIVE DAYS\nMOISTURE 70 -> 20\nIRRIGATION OFF: ALO ONLY",
+     "position": [
+      1.218,
+      1.62,
+      3.1
+     ],
+     "yaw": -90,
+     "size": 0.0007,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "pod_record_text",
+     "text": "PODS  -  8 MAY FORMING\n12 MAY SWELLING\n16 MAY MATURE, BROWNING",
+     "position": [
+      0.5,
+      0.912,
+      2.95
+     ],
+     "yaw": 180,
+     "size": 0.00058,
+     "color": "#1F2A44",
+     "outline": 0,
+     "pitch": -90,
+     "until": "EX-CH03-S09"
+    },
+    {
+     "id": "moisture_text",
+     "text": "MOISTURE PROFILE\n70 TODAY  -  20 ON 21 MAY\nOPEN THE PODS AFTER THE FINAL CHECK",
+     "position": [
+      -0.25,
+      0.912,
+      2.95
+     ],
+     "yaw": 180,
+     "size": 0.00052,
+     "color": "#1F2A44",
+     "outline": 0,
+     "pitch": -90,
+     "until": "EX-CH03-S09"
+    },
+    {
+     "id": "ledger_text",
+     "text": "HARVEST  -  21 MAY 2046\nSIX PODS  x  7 SEEDS  =  42\n42 = 12 + 30\nPLANTING 12  -  FOUNDER RESERVE 30",
+     "position": [
+      -0.25,
+      0.912,
+      3.07
+     ],
+     "yaw": 180,
+     "size": 0.00058,
+     "color": "#1F2A44",
+     "outline": 0,
+     "pitch": -90,
+     "from": "EX-CH03-S10"
+    },
+    {
+     "id": "seal_record_text",
+     "text": "FOUNDER RESERVE 30\nSEALED 21 MAY 2046",
+     "position": [
+      0.6,
+      0.912,
+      2.57
+     ],
+     "yaw": 180,
+     "size": 0.0005,
+     "color": "#1F2A44",
+     "outline": 0,
+     "pitch": -90,
+     "from": "EX-CH03-S11"
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "ch03_drying_bench",
+     "label": "Drying and harvest bench",
+     "verb": "Inspect",
+     "position": [
+      0.15,
+      1.15,
+      2.4
+     ],
+     "approach_m": [
+      0.15,
+      0,
+      1.75
+     ],
+     "asset_id": "ch03_drying_bench",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p06_confirm_maturity": "garden_alo_glove_port",
+    "p06_configure_drydown": "ch03_drying_bench",
+    "p06_drydown_five_days": "garden_alo_glove_port",
+    "p06_open_six_pods": "ch03_drying_bench",
+    "p06_count_42": "ch03_drying_bench",
+    "p06_allocate_12_30": "ch03_drying_bench",
+    "p06_sleeve_petal": "ch03_drying_bench",
+    "p06_seal_reserve_30": "ch03_drying_bench"
+   },
+   "by_scene": {
+    "EX-CH03-S09": {
+     "anchors": {
+      "garden_player": [
+       2.4,
+       0,
+       1.25
+      ],
+      "garden_mei": [
+       2.4,
+       0,
+       1.25
+      ],
+      "garden_amara": [
+       0.8,
+       0,
+       0.9
+      ],
+      "garden_kai": [
+       1.4,
+       0,
+       1.6
+      ],
+      "garden_rafi": [
+       -1.6,
+       0,
+       1.2
+      ]
+     }
+    },
+    "EX-CH03-S10": {
+     "anchors": {
+      "garden_player": [
+       -0.3,
+       0,
+       1.85
+      ],
+      "garden_mei": [
+       -0.3,
+       0,
+       1.85
+      ],
+      "garden_amara": [
+       -1.2,
+       0,
+       1.75
+      ],
+      "garden_kai": [
+       1.4,
+       0,
+       1.4
+      ],
+      "garden_rafi": [
+       -1.9,
+       0,
+       1.15
+      ]
+     }
+    },
+    "EX-CH03-S11": {
+     "anchors": {
+      "garden_player": [
+       -1.6,
+       0,
+       2.7
+      ],
+      "garden_mei": [
+       -1.6,
+       0,
+       2.7
+      ],
+      "garden_amara": [
+       -1.0,
+       0,
+       2.2
+      ],
+      "garden_rafi": [
+       0.15,
+       0,
+       1.85
+      ],
+      "garden_kai": [
+       -3.9,
+       0,
+       2.2
+      ]
+     }
+    }
+   },
+   "review_views": {
+    "s09_maturity": {
+     "from": [
+      3.3,
+      1.55,
+      0.9
+     ],
+     "to": [
+      2.2,
+      1.0,
+      3.2
+     ]
+    },
+    "s09_bench": {
+     "from": [
+      0.15,
+      1.6,
+      1.85
+     ],
+     "to": [
+      0.15,
+      0.9,
+      2.95
+     ]
+    },
+    "s10_harvest": {
+     "from": [
+      1.0,
+      1.55,
+      2.05
+     ],
+     "to": [
+      0.1,
+      0.9,
+      2.88
+     ]
+    },
+    "s10_vigil": {
+     "from": [
+      0.25,
+      1.55,
+      2.25
+     ],
+     "to": [
+      1.25,
+      1.5,
+      3.1
+     ]
+    },
+    "s11_reserve": {
+     "from": [
+      0.75,
+      1.5,
+      1.85
+     ],
+     "to": [
+      0.55,
+      0.92,
+      2.8
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch03_vigil_1",
+   "from": "EX-CH03-S10",
+   "until": "EX-CH03-S11",
+   "moment": "CH03-ALO-VIGIL-1",
+   "about": "Doc 24 7.3 beat 4: vigil visit 1, 17 May - one photo in the same frame, pinned on the cassette side.",
+   "fixtures": [
+    {
+     "id": "vigil_photo_1",
+     "position": [
+      1.215,
+      1.38,
+      2.84
+     ],
+     "size": [
+      0.01,
+      0.1,
+      0.1
+     ],
+     "color": "#9a9a62",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "vigil_date_1",
+     "text": "17 MAY",
+     "position": [
+      1.208,
+      1.31,
+      2.84
+     ],
+     "yaw": -90,
+     "size": 0.0005,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch03_vigil_2",
+   "from": "EX-CH03-S10",
+   "until": "EX-CH03-S11",
+   "moment": "CH03-ALO-VIGIL-2",
+   "about": "Doc 24 7.3 beat 4: vigil visit 2, 18 May - one photo in the same frame, pinned on the cassette side.",
+   "fixtures": [
+    {
+     "id": "vigil_photo_2",
+     "position": [
+      1.215,
+      1.38,
+      2.9699999999999998
+     ],
+     "size": [
+      0.01,
+      0.1,
+      0.1
+     ],
+     "color": "#9a9a62",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "vigil_date_2",
+     "text": "18 MAY",
+     "position": [
+      1.208,
+      1.31,
+      2.9699999999999998
+     ],
+     "yaw": -90,
+     "size": 0.0005,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch03_vigil_3",
+   "from": "EX-CH03-S10",
+   "until": "EX-CH03-S11",
+   "moment": "CH03-ALO-VIGIL-3",
+   "about": "Doc 24 7.3 beat 4: vigil visit 3, 19 May - one photo in the same frame, pinned on the cassette side.",
+   "fixtures": [
+    {
+     "id": "vigil_photo_3",
+     "position": [
+      1.215,
+      1.38,
+      3.0999999999999996
+     ],
+     "size": [
+      0.01,
+      0.1,
+      0.1
+     ],
+     "color": "#9a9a62",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "vigil_date_3",
+     "text": "19 MAY",
+     "position": [
+      1.208,
+      1.31,
+      3.0999999999999996
+     ],
+     "yaw": -90,
+     "size": 0.0005,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch03_vigil_4",
+   "from": "EX-CH03-S10",
+   "until": "EX-CH03-S11",
+   "moment": "CH03-ALO-VIGIL-4",
+   "about": "Doc 24 7.3 beat 4: vigil visit 4, 20 May - one photo in the same frame, pinned on the cassette side. Kai leaves Mei's mug of tea on the bench and goes without speaking.",
+   "fixtures": [
+    {
+     "id": "vigil_photo_4",
+     "position": [
+      1.215,
+      1.38,
+      3.23
+     ],
+     "size": [
+      0.01,
+      0.1,
+      0.1
+     ],
+     "color": "#9a9a62",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "vigil_date_4",
+     "text": "20 MAY",
+     "position": [
+      1.208,
+      1.31,
+      3.23
+     ],
+     "yaw": -90,
+     "size": 0.0005,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ],
+   "props": [
+    {
+     "id": "mei_tea",
+     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "position": [
+      -0.42,
+      0.9,
+      2.76
+     ],
+     "rotation_degrees": [
+      0,
+      30,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "until": "EX-CH03-S10"
+    }
+   ]
+  },
+  {
+   "id": "ch03_vigil_5",
+   "from": "EX-CH03-S10",
+   "until": "EX-CH03-S11",
+   "moment": "CH03-ALO-VIGIL-5",
+   "about": "Doc 24 7.3 beat 4: vigil visit 5, 21 May - one photo in the same frame, pinned on the cassette side.",
+   "fixtures": [
+    {
+     "id": "vigil_photo_5",
+     "position": [
+      1.215,
+      1.38,
+      3.36
+     ],
+     "size": [
+      0.01,
+      0.1,
+      0.1
+     ],
+     "color": "#9a9a62",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "vigil_date_5",
+     "text": "21 MAY",
+     "position": [
+      1.208,
+      1.31,
+      3.36
+     ],
+     "yaw": -90,
+     "size": 0.0005,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch03_d2_ex-ch01-s04-opt01",
+   "from": "EX-CH03-S09",
+   "until": "EX-CH03-S12",
+   "choice": {
+    "choice_id": "EX-CH01-S04-CHOICE",
+    "option_id": "EX-CH01-S04-OPT01"
+   },
+   "about": "Doc 24 5.2 D2 (story_echoes ECHO-D2-OPT01-CH03-S09/S10/S12): the Growth Record in the layout chosen on day one, on the drying bench and at Tara's bay.",
+   "fixtures": [
+    {
+     "id": "d2_record",
+     "position": [
+      0.12,
+      0.905,
+      3.05
+     ],
+     "size": [
+      0.36,
+      0.01,
+      0.22
+     ],
+     "color": "#d9dde2",
+     "transparent": false,
+     "until": "EX-CH03-S10"
+    },
+    {
+     "id": "d2_record_tara",
+     "position": [
+      -3.75,
+      0.805,
+      -1.7
+     ],
+     "size": [
+      0.34,
+      0.01,
+      0.2
+     ],
+     "color": "#d9dde2",
+     "transparent": false,
+     "from": "EX-CH03-S12"
+    }
+   ],
+   "signs": [
+    {
+     "id": "d2_record_text",
+     "text": "GROWTH RECORD  -  PAIRED PHOTOGRAPHS\n12 APR SEED LEAVES  /  TODAY",
+     "position": [
+      0.12,
+      0.912,
+      3.05
+     ],
+     "yaw": 180,
+     "size": 0.00048,
+     "color": "#1F2A44",
+     "outline": 0,
+     "pitch": -90,
+     "until": "EX-CH03-S10"
+    },
+    {
+     "id": "d2_record_tara_text",
+     "text": "GROWTH RECORD  -  PAIRED PHOTOGRAPHS\nTARA: 12 APR SEED LEAVES  /  31 MAY DRY PODS",
+     "position": [
+      -3.75,
+      0.812,
+      -1.7
+     ],
+     "yaw": 0,
+     "size": 0.00038,
+     "color": "#1F2A44",
+     "outline": 0,
+     "pitch": -90,
+     "from": "EX-CH03-S12"
+    }
+   ]
+  },
+  {
+   "id": "ch03_d2_ex-ch01-s04-opt02",
+   "from": "EX-CH03-S09",
+   "until": "EX-CH03-S12",
+   "choice": {
+    "choice_id": "EX-CH01-S04-CHOICE",
+    "option_id": "EX-CH01-S04-OPT02"
+   },
+   "about": "Doc 24 5.2 D2 (story_echoes ECHO-D2-OPT02-CH03-S09/S10/S12): the Growth Record in the layout chosen on day one, on the drying bench and at Tara's bay.",
+   "fixtures": [
+    {
+     "id": "d2_record",
+     "position": [
+      0.12,
+      0.905,
+      3.05
+     ],
+     "size": [
+      0.36,
+      0.01,
+      0.22
+     ],
+     "color": "#d9dde2",
+     "transparent": false,
+     "until": "EX-CH03-S10"
+    },
+    {
+     "id": "d2_record_tara",
+     "position": [
+      -3.75,
+      0.805,
+      -1.7
+     ],
+     "size": [
+      0.34,
+      0.01,
+      0.2
+     ],
+     "color": "#d9dde2",
+     "transparent": false,
+     "from": "EX-CH03-S12"
+    }
+   ],
+   "signs": [
+    {
+     "id": "d2_record_text",
+     "text": "GROWTH RECORD  -  PAIRED CONDITIONS\nALO OUTER CHAMBER  /  TARA INDOOR BAY",
+     "position": [
+      0.12,
+      0.912,
+      3.05
+     ],
+     "yaw": 180,
+     "size": 0.00048,
+     "color": "#1F2A44",
+     "outline": 0,
+     "pitch": -90,
+     "until": "EX-CH03-S10"
+    },
+    {
+     "id": "d2_record_tara_text",
+     "text": "GROWTH RECORD  -  PAIRED CONDITIONS\nTARA FINISHED LATER: THE COOLER INDOOR BAY",
+     "position": [
+      -3.75,
+      0.812,
+      -1.7
+     ],
+     "yaw": 0,
+     "size": 0.00038,
+     "color": "#1F2A44",
+     "outline": 0,
+     "pitch": -90,
+     "from": "EX-CH03-S12"
+    }
+   ]
+  },
+  {
+   "id": "ch03_descendant_rack",
+   "from": "EX-CH03-S11",
+   "until": "EX-CH04-S01",
+   "about": "EX-CH03-S11 (canon): twelve labelled positions, parent line Alo x Tara; position 1 is Kai's Very Important Scientific Plant, after its lineage label (EX-CH03-S11-L03/L04). EX-CH03-S12: on 21 October the same rack holds the current descendants, a few green stems among purple ones (M3-3A PL_Descendants, CH04-S01's authored seven and five, not a ratio claim): the last montage frame and the opening of CH04-S01.",
+   "props": [
+    {
+     "id": "descendant_rack",
+     "path": "res://assets/plants/PL_Descendants_Planted/PL_Descendants_Planted.glb",
+     "position": [
+      -2.95,
+      0,
+      3.75
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "by_scene": {
+      "EX-CH03-S12..EX-CH04-S01": {
+       "path": "res://assets/plants/PL_Descendants/PL_Descendants.glb"
+      }
+     }
+    }
+   ],
+   "fixtures": [
+    {
+     "id": "rack_card",
+     "position": [
+      -2.95,
+      2.02,
+      3.975
+     ],
+     "size": [
+      1.3,
+      0.62,
+      0.03
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "descendant_rack",
+     "position": [
+      -2.95,
+      0.78,
+      3.75
+     ],
+     "size": [
+      1.35,
+      1.55,
+      0.5
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "id": "rack_parent_line",
+     "text": "PARENT LINE: ALO × TARA",
+     "position": [
+      -2.95,
+      2.24,
+      3.958
+     ],
+     "yaw": 180,
+     "size": 0.0011,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "rack_positions",
+     "text": "TWELVE POSITIONS SOWN 21 MAY 2046",
+     "position": [
+      -2.95,
+      2.12,
+      3.958
+     ],
+     "yaw": 180,
+     "size": 0.00075,
+     "color": "#1F2A44",
+     "outline": 0,
+     "by_scene": {
+      "EX-CH03-S12..EX-CH04-S01": {
+       "text": "TWELVE CURRENT DESCENDANTS  -  21 OCTOBER 2046"
+      }
+     }
+    },
+    {
+     "id": "rack_position_1",
+     "text": "POSITION 1: VERY IMPORTANT SCIENTIFIC PLANT",
+     "position": [
+      -2.95,
+      2.02,
+      3.958
+     ],
+     "yaw": 180,
+     "size": 0.0006,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "ch03_planting_rack",
+     "label": "Planting rack",
+     "verb": "Inspect",
+     "position": [
+      -2.95,
+      1.1,
+      3.35
+     ],
+     "approach_m": [
+      -2.95,
+      0,
+      2.75
+     ],
+     "asset_id": "descendant_rack",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p06_plant_12_positions": "ch03_planting_rack"
+   },
+   "review_views": {
+    "s11_rack": {
+     "from": [
+      -3.3,
+      1.55,
+      2.05
+     ],
+     "to": [
+      -2.95,
+      1.25,
+      3.8
+     ]
+    },
+    "s12_rack": {
+     "from": [
+      -2.2,
+      1.6,
+      1.75
+     ],
+     "to": [
+      -2.95,
+      1.1,
+      3.8
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch03_d6_opt01",
+   "from": "EX-CH03-S11",
+   "until": "EX-CH04-S01",
+   "choice": {
+    "choice_id": "EX-CH03-S11-DEDICATION",
+    "option_id": "EX-CH03-S11-DEDICATION-OPT01"
+   },
+   "about": "Doc 24 5.2 D6: the tray dedication the player chose after the scientific labels, on the rack's dedication card and its wall card; it travels with the rack into CH04-S01.",
+   "signs": [
+    {
+     "id": "dedication_card",
+     "text": "Light and Star",
+     "position": [
+      -2.95,
+      0.94,
+      3.5185
+     ],
+     "yaw": 180,
+     "size": 0.0002,
+     "color": "#1F2A44",
+     "outline": 0,
+     "wrap_m": 0.11
+    },
+    {
+     "id": "dedication_wall",
+     "text": "DEDICATION: LIGHT AND STAR",
+     "position": [
+      -2.95,
+      1.9,
+      3.958
+     ],
+     "yaw": 180,
+     "size": 0.0007,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch03_d6_opt02",
+   "from": "EX-CH03-S11",
+   "until": "EX-CH04-S01",
+   "choice": {
+    "choice_id": "EX-CH03-S11-DEDICATION",
+    "option_id": "EX-CH03-S11-DEDICATION-OPT02"
+   },
+   "about": "Doc 24 5.2 D6: the tray dedication the player chose after the scientific labels, on the rack's dedication card and its wall card; it travels with the rack into CH04-S01.",
+   "signs": [
+    {
+     "id": "dedication_card",
+     "text": "For Alo and Tara",
+     "position": [
+      -2.95,
+      0.94,
+      3.5185
+     ],
+     "yaw": 180,
+     "size": 0.0002,
+     "color": "#1F2A44",
+     "outline": 0,
+     "wrap_m": 0.11
+    },
+    {
+     "id": "dedication_wall",
+     "text": "DEDICATION: FOR ALO AND TARA",
+     "position": [
+      -2.95,
+      1.9,
+      3.958
+     ],
+     "yaw": 180,
+     "size": 0.0007,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch03_d6_opt03",
+   "from": "EX-CH03-S11",
+   "until": "EX-CH04-S01",
+   "choice": {
+    "choice_id": "EX-CH03-S11-DEDICATION",
+    "option_id": "EX-CH03-S11-DEDICATION-OPT03"
+   },
+   "about": "Doc 24 5.2 D6: the tray dedication the player chose after the scientific labels, on the rack's dedication card and its wall card; it travels with the rack into CH04-S01.",
+   "signs": [
+    {
+     "id": "dedication_card",
+     "text": "The Next Small Thing",
+     "position": [
+      -2.95,
+      0.94,
+      3.5185
+     ],
+     "yaw": 180,
+     "size": 0.0002,
+     "color": "#1F2A44",
+     "outline": 0,
+     "wrap_m": 0.11
+    },
+    {
+     "id": "dedication_wall",
+     "text": "DEDICATION: THE NEXT SMALL THING",
+     "position": [
+      -2.95,
+      1.9,
+      3.958
+     ],
+     "yaw": 180,
+     "size": 0.0007,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch03_lineage_board",
+   "from": "EX-CH03-S10",
+   "about": "Doc 24 7.3 beat 10 (S10): Alo's nameplate lifted from its holder onto the lineage board; S11 (canon): the pressed petal placed where it can be seen without being mistaken for a living plant; S12 (approved 5 Nov 2026, 3.9): Tara's nameplate level with Alo's petal, Tara x Alo beside Alo x Tara, and the first lineage photograph. Props accumulate (doc 09): the board stays.",
+   "props": [
+    {
+     "id": "alo_nameplate",
+     "path": "res://assets/props/narrative/PR_LabelHolder.glb",
+     "variant": "alo",
+     "position": [
+      -0.2,
+      1.88,
+      -3.825
+     ],
+     "rotation_degrees": [
+      90,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "id": "alo_petal",
+     "path": "res://assets/props/PR_PressedPetal_Mounted/PR_PressedPetal_Mounted.glb",
+     "position": [
+      -0.2,
+      1.68,
+      -3.821
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH03-S11"
+    },
+    {
+     "id": "tara_nameplate",
+     "path": "res://assets/props/narrative/PR_LabelHolder.glb",
+     "variant": "tara",
+     "position": [
+      0.15,
+      1.72,
+      -3.825
+     ],
+     "rotation_degrees": [
+      90,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH03-S12"
+    }
+   ],
+   "fixtures": [
+    {
+     "id": "first_lineage_photo",
+     "position": [
+      0.6,
+      1.72,
+      -3.8205
+     ],
+     "size": [
+      0.2,
+      0.15,
+      0.005
+     ],
+     "color": "#9db37a",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH03-S12"
+    }
+   ],
+   "signs": [
+    {
+     "id": "alo_record",
+     "text": "ALO  -  11 APRIL TO 21 MAY 2046\nCOMPLETED HER LIFE CYCLE: FLOWER, PODS, FORTY-TWO SEEDS\nPARENT OF EVERY PLANT IN THIS GARDEN",
+     "position": [
+      0.3,
+      1.97,
+      -3.82
+     ],
+     "yaw": 0,
+     "size": 0.00052,
+     "color": "#e9eef5",
+     "outline": 0,
+     "wrap_m": 1.5
+    },
+    {
+     "id": "founder_line",
+     "text": "ALO × TARA  -  FOUNDER RESERVE 30, SEALED",
+     "position": [
+      0.3,
+      1.535,
+      -3.82
+     ],
+     "yaw": 0,
+     "size": 0.0006,
+     "color": "#e9eef5",
+     "outline": 0,
+     "from": "EX-CH03-S11"
+    },
+    {
+     "id": "working_line",
+     "text": "TARA × ALO  -  WORKING STOCK, NO FIXED COUNT",
+     "position": [
+      0.3,
+      1.46,
+      -3.82
+     ],
+     "yaw": 0,
+     "size": 0.0006,
+     "color": "#e9eef5",
+     "outline": 0,
+     "from": "EX-CH03-S12"
+    },
+    {
+     "id": "first_photo_caption",
+     "text": "FIRST LINEAGE\nPHOTOGRAPH",
+     "position": [
+      0.6,
+      1.6,
+      -3.82
+     ],
+     "yaw": 0,
+     "size": 0.00032,
+     "color": "#e9eef5",
+     "outline": 0,
+     "from": "EX-CH03-S12"
+    },
+    {
+     "id": "alo_nameplate_caption",
+     "text": "ALO'S NAMEPLATE",
+     "position": [
+      -0.2,
+      1.835,
+      -3.82
+     ],
+     "yaw": 0,
+     "size": 0.0003,
+     "color": "#e9eef5",
+     "outline": 0
+    },
+    {
+     "id": "alo_petal_caption",
+     "text": "PRESSED PETAL, 21 MAY",
+     "position": [
+      -0.2,
+      1.645,
+      -3.82
+     ],
+     "yaw": 0,
+     "size": 0.0003,
+     "color": "#e9eef5",
+     "outline": 0,
+     "from": "EX-CH03-S11"
+    },
+    {
+     "id": "tara_nameplate_caption",
+     "text": "TARA'S NAMEPLATE\nHARVESTED 31 MAY 2046",
+     "position": [
+      0.15,
+      1.665,
+      -3.82
+     ],
+     "yaw": 0,
+     "size": 0.0003,
+     "color": "#e9eef5",
+     "outline": 0,
+     "from": "EX-CH03-S12"
+    }
+   ],
+   "review_views": {
+    "lineage_board": {
+     "from": [
+      0.3,
+      1.62,
+      -2.55
+     ],
+     "to": [
+      0.3,
+      1.6,
+      -3.9
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch03_lineage_station",
+   "from": "EX-CH03-S10",
+   "until": "EX-CH03-S12",
+   "focus_targets": [
+    {
+     "target_id": "ch03_lineage_board",
+     "label": "Lineage board",
+     "verb": "Inspect",
+     "position": [
+      0.3,
+      1.55,
+      -3.6
+     ],
+     "approach_m": [
+      0.3,
+      0,
+      -2.9
+     ],
+     "asset_id": "lineage_board",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p06_preserve_lineage": "ch03_lineage_board"
+   }
+  },
+  {
+   "id": "ch03_s12_continuity",
+   "from": "EX-CH03-S12",
+   "until": "EX-CH03-S12",
+   "about": "EX-CH03-S12 (STORY_FULL, Tara beat approved 5 Nov 2026): 31 May in the indoor reference bay, Tara's dry pods (her watering stopped 26 May), the sealed working-stock envelope \"Tara x Alo\" with no count (M3-99 PR_WorkingStockEnvelope) and Mei's card; her name stays on the bay frame. The care ledger accounts for the days between May and October (doc 24 2.9 montage beats); the survey board turns the old map into a preparation list, not a departure stamp (CH03 -> CH04).",
+   "props": [
+    {
+     "id": "working_stock",
+     "path": "res://assets/props/narrative/PR_WorkingStockEnvelope.glb",
+     "position": [
+      -2.6,
+      0.8,
+      -1.2
+     ],
+     "rotation_degrees": [
+      0,
+      15,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "fixtures": [
+    {
+     "id": "tara_card",
+     "position": [
+      -3.75,
+      0.801,
+      -1.18
+     ],
+     "size": [
+      0.38,
+      0.002,
+      0.15
+     ],
+     "color": "#ece6d6",
+     "transparent": false
+    },
+    {
+     "id": "care_ledger",
+     "position": [
+      -1.33,
+      1.55,
+      -3.96
+     ],
+     "size": [
+      1.1,
+      0.95,
+      0.05
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "survey_board",
+     "position": [
+      2.2,
+      1.6,
+      -3.96
+     ],
+     "size": [
+      1.4,
+      0.85,
+      0.05
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "survey_map",
+     "position": [
+      1.82,
+      1.6,
+      -3.931
+     ],
+     "size": [
+      0.5,
+      0.42,
+      0.008
+     ],
+     "color": "#d9d2bf",
+     "transparent": false
+    }
+   ],
+   "signs": [
+    {
+     "id": "tara_card_text",
+     "text": "Thank you, Tara. Your seeds are the ones we use,\nso Alo's thirty can stay sealed.",
+     "position": [
+      -3.75,
+      0.805,
+      -1.18
+     ],
+     "yaw": 0,
+     "size": 0.00042,
+     "color": "#26303f",
+     "outline": 0,
+     "pitch": -90,
+     "font_path": "res://assets/props/narrative/fonts/GochiHand-Regular.ttf"
+    },
+    {
+     "id": "care_ledger_text",
+     "text": "MAY TO OCTOBER  -  THE DAYS IN BETWEEN\n31 MAY  TARA HARVESTED, WORKING STOCK SEALED\nJUNE  FIRST DESCENDANT FLOWERS, BRUSHES A AND B\nJULY  SCHEDULED RESUPPLY UNPACKED\nAUGUST  AMARA READS THE GAUGE WITH KAI\nSEPTEMBER  NEXT SEEDS TO THE WORKING STOCK\n21 OCTOBER  TWELVE CURRENT DESCENDANTS",
+     "position": [
+      -1.33,
+      1.55,
+      -3.932
+     ],
+     "yaw": 0,
+     "size": 0.00068,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "survey_map_text",
+     "text": "ROUTE SHEET\nSCANNED COPY",
+     "position": [
+      1.82,
+      1.6,
+      -3.925
+     ],
+     "yaw": 0,
+     "size": 0.0006,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "survey_text",
+     "text": "COLD-TRAP SURVEY\nPREPARATION\nROUTE SLOPE: TO CHECK\nRETURN RESERVE: TO CHECK\nRADIO LINK HOME: TO CHECK\nROVER SEALS: TO CHECK\nNO DEPARTURE STAMP",
+     "position": [
+      2.55,
+      1.6,
+      -3.932
+     ],
+     "yaw": 0,
+     "size": 0.00062,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "ch03_care_ledger",
+     "label": "Care and maintenance ledger",
+     "verb": "Inspect",
+     "position": [
+      -1.33,
+      1.55,
+      -3.7
+     ],
+     "approach_m": [
+      -1.33,
+      0,
+      -2.9
+     ],
+     "asset_id": "care_ledger",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch03_survey_board",
+     "label": "Survey preparation board",
+     "verb": "Inspect",
+     "position": [
+      2.2,
+      1.6,
+      -3.7
+     ],
+     "approach_m": [
+      2.0,
+      0,
+      -2.9
+     ],
+     "asset_id": "survey_board",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p06_reconcile_continuity": "ch03_care_ledger",
+    "p06_confirm_descendant_survey": "ch03_survey_board"
+   },
+   "anchors": {
+    "garden_player": [
+     -0.9,
+     0,
+     -1.9
+    ],
+    "garden_amara": [
+     -0.9,
+     0,
+     -1.9
+    ],
+    "garden_mei": [
+     -3.9,
+     0,
+     -0.45
+    ],
+    "garden_kai": [
+     0.95,
+     0,
+     -2.0
+    ],
+    "garden_rafi": [
+     3.0,
+     0,
+     -2.75
+    ]
+   },
+   "review_views": {
+    "s12_tara": {
+     "from": [
+      -1.55,
+      1.5,
+      -0.3
+     ],
+     "to": [
+      -3.2,
+      0.85,
+      -1.3
+     ]
+    },
+    "s12_ledger": {
+     "from": [
+      -1.33,
+      1.6,
+      -2.35
+     ],
+     "to": [
+      -1.33,
+      1.55,
+      -3.95
+     ]
+    },
+    "s12_survey": {
+     "from": [
+      2.15,
+      1.62,
+      -2.35
+     ],
+     "to": [
+      2.2,
+      1.6,
+      -3.95
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch03_tara_last_photo",
+   "from": "EX-CH03-S12",
+   "moment": "CH03-TARA-FAREWELL",
+   "about": "Doc 24 5.2 moment CH03-TARA-FAREWELL: Tara's last photograph in her own frame, pinned beside her nameplate.",
+   "fixtures": [
+    {
+     "id": "tara_last_photo",
+     "position": [
+      0.85,
+      1.72,
+      -3.8205
+     ],
+     "size": [
+      0.15,
+      0.12,
+      0.005
+     ],
+     "color": "#a8b98a",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "tara_last_photo_caption",
+     "text": "TARA\n31 MAY",
+     "position": [
+      0.85,
+      1.62,
+      -3.82
+     ],
+     "yaw": 0,
+     "size": 0.00032,
+     "color": "#e9eef5",
+     "outline": 0
+    }
+   ]
+  },
+  {
    "id": "ch01_care_round",
    "from": "EX-CH01-S04",
    "until": "EX-CH01-S05",

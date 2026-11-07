@@ -78,6 +78,9 @@ func build_room() -> Dictionary:
 	var stamp := LoadTrace.begin()
 	if _layout.get("assembly") == "habitat_kit":
 		Habitat.build(self, _layout)
+		# M3-3R: live kit pieces with moving parts and live words (the annex hatch, station, archive and bench)
+		for spec in _layout.get("kit_props", []):
+			Staging.kit_prop(visual_root, spec)
 	elif _terrain.is_empty():
 		_build_floor_and_walls(contract)
 	LoadTrace.end("room_shell:" + room_id, stamp)
@@ -177,6 +180,11 @@ func set_door_open(boundary_id: String, is_open: bool) -> bool:
 	for node in door_root.get_children():
 		if String(node.get_meta("boundary_id", "")) == boundary_id and node is CampaignDoor:
 			(node as CampaignDoor).set_open(is_open)
+			# a floor hatch boundary (M3-3R: the N.R. hatch) swings its kit piece's leaf with the legal state
+			if node.has_meta("kit_prop"):
+				var hatch := visual_root.get_node_or_null(String(node.get_meta("kit_prop"))) as Node3D
+				if hatch != null:
+					Kit.set_part_open(hatch, String(node.get_meta("part")), 1.0 if is_open else 0.0)
 			if boundary_id == "garden_viewing_shutter" and _layout.get("assembly") == "habitat_kit":
 				var shutter := visual_root.get_node_or_null("shutter") as Node3D
 				if shutter != null:
@@ -522,6 +530,13 @@ func fixture(id: String) -> Dictionary:
 			return spec.duplicate(true)
 	return {}
 
+## The base layout's live kit piece spec ("kit_props") with this id, or {} if absent (M3-3R).
+func kit_prop(id: String) -> Dictionary:
+	for spec in _layout.get("kit_props", []):
+		if String(spec.get("id", "")) == id:
+			return spec.duplicate(true)
+	return {}
+
 ## LOC-05's running double interlock (en_airlock.gd: hatches, panels, pump, pass-through lids), or null in a room
 ## without one. The room owner drives it and saves its snapshot().
 func airlock() -> Node3D:
@@ -678,6 +693,19 @@ func _build_kit_doors() -> void:
 		plate.pixel_size = 0.002
 		plate.modulate = Color(_layout.get("accent_color", "#ffffff"))
 		door.add_child(plate)
+	# A floor hatch boundary (LOC-07's N.R. hatch between the warm bay and the cold annex) has no door collision of its
+	# own: the kit piece's leaf collides and swings with the legal state (set_door_open).
+	for spec in _layout.get("hatch_doors", []):
+		var hatch := DoorScript.new()
+		hatch.name = "Door_" + String(spec.boundary_id)
+		hatch.set_meta("boundary_id", spec.boundary_id)
+		hatch.set_meta("kit_prop", String(spec.kit_prop))
+		hatch.set_meta("part", String(spec.part))
+		var piece := visual_root.get_node_or_null(String(spec.kit_prop)) as Node3D
+		if piece != null:
+			hatch.position = piece.position
+		hatch.setup(String(spec.boundary_id), false)
+		door_root.add_child(hatch)
 	# The shutter controls a view, never the room's pressure glazing or a walking exit.
 	if room_id == "LOC-03":
 		var shutter := DoorScript.new()

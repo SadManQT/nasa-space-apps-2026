@@ -652,6 +652,1169 @@
  },
  "staging": [
   {
+   "id": "ch03_quake_diagnosis",
+   "from": "EX-CH03-S01",
+   "until": "EX-CH03-S05",
+   "about": "EX-CH03-S01..S05 (STORY_FULL; SC-0301/0302; P-05 in 08_PUZZLE_DESIGNS): the red tank warning on the atmosphere panel at 22:05 (CH02 -> CH03: no time jump), the independent gauge on its work stand, the three labelled taps on the real service points (MAIN 100/100, GARDEN 82/74, RETURN 100/100), the diagnostic board in the atmosphere service corridor (Kai's hypothesis filed, S01 -> S02; three saved readings and the proposed boundary, S02 -> S03; the paused previews and the rollback condition, S03 -> S04; the approved sequence, S04; five checks, the corrected copied note and the monitoring handover with the camera-only annex inspection, S05 -> S06), Ferreira's repair diagram from Earth (S03), the work boundary round the spur (S04)",
+   "fixtures": [
+    {
+     "id": "ch03_board_stand",
+     "position": [
+      2.9,
+      0.475,
+      0.85
+     ],
+     "size": [
+      1.8,
+      0.95,
+      0.05
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "ch03_diagnostic_board",
+     "position": [
+      2.9,
+      1.45,
+      0.85
+     ],
+     "size": [
+      1.8,
+      1.0,
+      0.05
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "ch03_tap_main_plate",
+     "position": [
+      0.85,
+      1.1,
+      -1.433
+     ],
+     "size": [
+      0.26,
+      0.12,
+      0.02
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "ch03_tap_return_plate",
+     "position": [
+      1.95,
+      1.1,
+      -1.433
+     ],
+     "size": [
+      0.3,
+      0.12,
+      0.02
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "ch03_tap_main",
+     "position": [
+      0.85,
+      0.95,
+      -1.42
+     ],
+     "size": [
+      0.12,
+      0.12,
+      0.05
+     ],
+     "color": "#F26B21",
+     "transparent": false
+    },
+    {
+     "id": "ch03_tap_return",
+     "position": [
+      1.95,
+      0.95,
+      -1.42
+     ],
+     "size": [
+      0.12,
+      0.12,
+      0.05
+     ],
+     "color": "#F26B21",
+     "transparent": false
+    },
+    {
+     "id": "ch03_tap_garden",
+     "position": [
+      3.5,
+      0.66,
+      -1.275
+     ],
+     "size": [
+      0.12,
+      0.12,
+      0.05
+     ],
+     "color": "#F26B21",
+     "transparent": false
+    },
+    {
+     "id": "ch03_gauge_stand",
+     "position": [
+      4.6,
+      0.45,
+      3.5
+     ],
+     "size": [
+      0.7,
+      0.9,
+      0.5
+     ],
+     "color": "#3c4b5d",
+     "transparent": false
+    },
+    {
+     "id": "ch03_repair_drawing",
+     "position": [
+      -2.2,
+      0.85,
+      -3.96
+     ],
+     "size": [
+      0.9,
+      0.5,
+      0.05
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH03-S03"
+    },
+    {
+     "id": "ch03_boundary_front",
+     "position": [
+      3.45,
+      0.003,
+      -0.8
+     ],
+     "size": [
+      1.05,
+      0.006,
+      0.05
+     ],
+     "color": "#f2c230",
+     "transparent": false,
+     "from": "EX-CH03-S04",
+     "until": "EX-CH03-S04"
+    },
+    {
+     "id": "ch03_boundary_west",
+     "position": [
+      2.95,
+      0.003,
+      -1.05
+     ],
+     "size": [
+      0.05,
+      0.006,
+      0.5
+     ],
+     "color": "#f2c230",
+     "transparent": false,
+     "from": "EX-CH03-S04",
+     "until": "EX-CH03-S04"
+    },
+    {
+     "id": "ch03_boundary_east",
+     "position": [
+      3.95,
+      0.003,
+      -1.05
+     ],
+     "size": [
+      0.05,
+      0.006,
+      0.5
+     ],
+     "color": "#f2c230",
+     "transparent": false,
+     "from": "EX-CH03-S04",
+     "until": "EX-CH03-S04"
+    },
+    {
+     "id": "earth_screen",
+     "position": [
+      -2.2,
+      1.55,
+      -3.95
+     ],
+     "size": [
+      1.2,
+      0.7,
+      0.06
+     ],
+     "color": "#0b1220",
+     "transparent": false,
+     "finish": "screen",
+     "from": "EX-CH03-S03",
+     "until": "EX-CH03-S03"
+    },
+    {
+     "id": "diagram_tank",
+     "position": [
+      2.12,
+      1.6,
+      0.88
+     ],
+     "size": [
+      0.2,
+      0.26,
+      0.01
+     ],
+     "color": "#2E8BC0",
+     "transparent": false
+    },
+    {
+     "id": "diagram_trunk",
+     "position": [
+      2.46,
+      1.62,
+      0.88
+     ],
+     "size": [
+      0.5,
+      0.025,
+      0.01
+     ],
+     "color": "#1F2A44",
+     "transparent": false
+    },
+    {
+     "id": "diagram_spur",
+     "position": [
+      2.4,
+      1.47,
+      0.88
+     ],
+     "size": [
+      0.025,
+      0.3,
+      0.01
+     ],
+     "color": "#1F2A44",
+     "transparent": false
+    },
+    {
+     "id": "diagram_return",
+     "position": [
+      2.6799999999999997,
+      1.47,
+      0.88
+     ],
+     "size": [
+      0.025,
+      0.3,
+      0.01
+     ],
+     "color": "#1F2A44",
+     "transparent": false
+    },
+    {
+     "id": "diagram_tap_1",
+     "position": [
+      2.28,
+      1.62,
+      0.882
+     ],
+     "size": [
+      0.05,
+      0.05,
+      0.01
+     ],
+     "color": "#F26B21",
+     "transparent": false
+    },
+    {
+     "id": "diagram_tap_2",
+     "position": [
+      2.4,
+      1.38,
+      0.882
+     ],
+     "size": [
+      0.05,
+      0.05,
+      0.01
+     ],
+     "color": "#F26B21",
+     "transparent": false
+    },
+    {
+     "id": "diagram_tap_3",
+     "position": [
+      2.6799999999999997,
+      1.38,
+      0.882
+     ],
+     "size": [
+      0.05,
+      0.05,
+      0.01
+     ],
+     "color": "#F26B21",
+     "transparent": false
+    },
+    {
+     "id": "diagram_chambers",
+     "position": [
+      2.4,
+      1.12,
+      0.88
+     ],
+     "size": [
+      0.52,
+      0.12,
+      0.01
+     ],
+     "color": "#4F8A3A",
+     "transparent": false
+    }
+   ],
+   "props": [
+    {
+     "id": "manual_gauge",
+     "path": "res://assets/props/PR_ManualGauge/PR_ManualGauge.glb",
+     "position": [
+      4.45,
+      0.9,
+      3.45
+     ],
+     "rotation_degrees": [
+      0,
+      200,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "until": "EX-CH03-S04"
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "ch03_gauge_stand",
+     "position": [
+      4.6,
+      0.45,
+      3.5
+     ],
+     "size": [
+      0.7,
+      0.9,
+      0.5
+     ]
+    },
+    {
+     "id": "ch03_diagnostic_board",
+     "position": [
+      2.9,
+      0.975,
+      0.85
+     ],
+     "size": [
+      1.8,
+      1.95,
+      0.3
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "id": "ch03_board_title",
+     "text": "PRESSURE WARNING",
+     "position": [
+      2.9,
+      1.86,
+      0.888
+     ],
+     "yaw": 0,
+     "size": 0.0012,
+     "color": "#1F2A44",
+     "outline": 0,
+     "by_scene": {
+      "EX-CH03-S01..EX-CH03-S02": {
+       "text": "PRESSURE WARNING  -  6 MAY, 22:05"
+      },
+      "EX-CH03-S03": {
+       "text": "ISOLATION PREVIEW  -  A PAUSED COPY"
+      },
+      "EX-CH03-S04": {
+       "text": "APPROVED REPAIR SEQUENCE  -  7 MAY"
+      },
+      "EX-CH03-S05": {
+       "text": "FIVE CHECKS  -  7 MAY, BEFORE DAWN"
+      }
+     }
+    },
+    {
+     "id": "ch03_board_readings",
+     "text": "",
+     "position": [
+      3.32,
+      1.42,
+      0.888
+     ],
+     "yaw": 0,
+     "size": 0.0007,
+     "color": "#1F2A44",
+     "outline": 0,
+     "by_scene": {
+      "EX-CH03-S01": {
+       "text": "ELECTRONIC PANEL: OXYGEN TANK, PRESSURE WARNING\nINDEPENDENT GAUGE: REFERENCE CHECKED\nHYPOTHESIS (KAI): TANK LEAK  -  NOT A FAULT YET\nPLANT CHAMBERS: OWN SEALED AIR, CHECKED (MEI)"
+      },
+      "EX-CH03-S02": {
+       "text": "SAME 10 MIN INTERVAL AT EVERY TAP (TEST UNITS)\nTAP 1   MAIN TANK      100 -> 100\nTAP 2   GARDEN SPUR      82 -> 74\nTAP 3   RETURN LINE    100 -> 100\nFALLING: GARDEN SPUR ONLY\nPROPOSED BOUNDARY: THE GARDEN SPUR"
+      },
+      "EX-CH03-S03": {
+       "text": "PREVIEW A  -  CLOSE THE HABITAT TRUNK\nEVERY ROOM LOSES SUPPLY: NOT SUPPORTED\nPREVIEW B  -  CLOSE THE GARDEN SPUR ONLY\nTHE HABITAT STAYS SUPPLIED: SUPPORTED\nROLLBACK: IF TAP 1 FALLS, REOPEN AND STOP\nANNEX BRANCH: AUTOMATIC ISOLATION VERIFIED"
+      },
+      "EX-CH03-S04": {
+       "text": "1  CLOSE THE GARDEN SPUR VALVE\n2  TAP 1 HOLDS 100, THE SPUR HOLDS 74\n3  SEAT THE CLAMP FROM THE SAFE SIDE\n4  REOPEN SLOWLY\n5  FIVE STEADY READINGS\nA SEATED CLAMP IS NOT A VERIFIED REPAIR"
+      },
+      "EX-CH03-S05": {
+       "text": "FIVE CHECKS   100  100  100  100  100   STABLE\nCOPIED NOTE: SPUR VALVE CLOSED  -  WRONG\nCORRECTED 7 MAY: SPUR VALVE OPEN, AS TESTED\nREPAIR APPROVED  -  MONITORING TO 8 MAY\nANNEX: CAMERA INSPECTION 7 MAY\nSUITED ENTRY AFTER THE EXTENDED CHECKS, 8 MAY"
+      }
+     }
+    },
+    {
+     "id": "ch03_tap_main_text",
+     "text": "TAP 1\nMAIN TANK",
+     "position": [
+      0.85,
+      1.1,
+      -1.39
+     ],
+     "yaw": 0,
+     "size": 0.0011,
+     "color": "#ffffff",
+     "outline": 0
+    },
+    {
+     "id": "ch03_tap_return_text",
+     "text": "TAP 3\nRETURN LINE",
+     "position": [
+      1.95,
+      1.1,
+      -1.39
+     ],
+     "yaw": 0,
+     "size": 0.0011,
+     "color": "#ffffff",
+     "outline": 0
+    },
+    {
+     "id": "ch03_tap_garden_text",
+     "text": "TAP 2  GARDEN SPUR",
+     "position": [
+      3.5,
+      0.78,
+      -1.245
+     ],
+     "yaw": 0,
+     "size": 0.0009,
+     "color": "#ffffff",
+     "outline": 0
+    },
+    {
+     "id": "ch03_gauge_card",
+     "text": "INDEPENDENT GAUGE\nREFERENCE CHECKED",
+     "position": [
+      4.8,
+      0.902,
+      3.5
+     ],
+     "yaw": 180,
+     "size": 0.0006,
+     "color": "#1F2A44",
+     "outline": 0,
+     "pitch": -90,
+     "until": "EX-CH03-S04"
+    },
+    {
+     "id": "ch03_repair_text",
+     "text": "REPAIR DIAGRAM  -  FROM EARTH\nGARDEN SPUR CLAMP AND HOLD TEST\n\"{line}\"\nLABELS MATCH THE BRANCH (KAI)",
+     "position": [
+      -2.2,
+      0.85,
+      -3.932
+     ],
+     "yaw": 0,
+     "size": 0.00062,
+     "color": "#1F2A44",
+     "outline": 0,
+     "line": "EX-CH03-S03-L03",
+     "wrap_m": 0.84,
+     "from": "EX-CH03-S03"
+    },
+    {
+     "id": "ch03_boundary_text",
+     "text": "WORK BOUNDARY",
+     "position": [
+      3.45,
+      0.008,
+      -0.62
+     ],
+     "yaw": 0,
+     "size": 0.0011,
+     "color": "#f2c230",
+     "outline": 0,
+     "pitch": -90,
+     "from": "EX-CH03-S04",
+     "until": "EX-CH03-S04"
+    },
+    {
+     "id": "diagram_tank_text",
+     "text": "MAIN\nTANK",
+     "position": [
+      2.12,
+      1.6,
+      0.888
+     ],
+     "yaw": 0,
+     "size": 0.0007,
+     "color": "#ffffff",
+     "outline": 0
+    },
+    {
+     "id": "diagram_tap_1_text",
+     "text": "TAP 1",
+     "position": [
+      2.28,
+      1.7,
+      0.888
+     ],
+     "yaw": 0,
+     "size": 0.0006,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "diagram_tap_2_text",
+     "text": "TAP 2  GARDEN SPUR",
+     "position": [
+      2.4,
+      1.3,
+      0.888
+     ],
+     "yaw": 0,
+     "size": 0.0006,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "diagram_tap_3_text",
+     "text": "TAP 3  RETURN",
+     "position": [
+      2.7399999999999998,
+      1.3,
+      0.888
+     ],
+     "yaw": 0,
+     "size": 0.0006,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "diagram_chambers_text",
+     "text": "PLANT CHAMBERS: OWN SEALED AIR",
+     "position": [
+      2.4,
+      1.12,
+      0.888
+     ],
+     "yaw": 0,
+     "size": 0.0005,
+     "color": "#ffffff",
+     "outline": 0
+    },
+    {
+     "id": "diagram_title",
+     "text": "HABITAT TRUNK",
+     "position": [
+      2.48,
+      1.8,
+      0.888
+     ],
+     "yaw": 0,
+     "size": 0.0006,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ],
+   "local_lights": [
+    {
+     "id": "warning_glow",
+     "position": [
+      1.4,
+      2.0,
+      -1.25
+     ],
+     "color": "#ff4433",
+     "energy": 0.35,
+     "range_m": 1.6,
+     "until": "EX-CH03-S04"
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "ch03_gauge_stand",
+     "label": "Independent gauge",
+     "verb": "Inspect",
+     "position": [
+      4.6,
+      1.15,
+      3.05
+     ],
+     "approach_m": [
+      4.6,
+      0,
+      2.45
+     ],
+     "asset_id": "ch03_gauge_stand",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch03_diagnostic_board",
+     "label": "Diagnostic board",
+     "verb": "Inspect",
+     "position": [
+      2.9,
+      1.45,
+      1.1
+     ],
+     "approach_m": [
+      2.9,
+      0,
+      1.75
+     ],
+     "asset_id": "ch03_diagnostic_board",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch03_tap_main",
+     "label": "Tap 1 - main tank",
+     "verb": "Inspect",
+     "position": [
+      0.85,
+      1.0,
+      -1.2
+     ],
+     "approach_m": [
+      0.85,
+      0,
+      -0.5
+     ],
+     "asset_id": "ch03_tap_main",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch03_tap_return",
+     "label": "Tap 3 - return line",
+     "verb": "Inspect",
+     "position": [
+      1.95,
+      1.0,
+      -1.2
+     ],
+     "approach_m": [
+      1.95,
+      0,
+      -0.5
+     ],
+     "asset_id": "ch03_tap_return",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch03_tap_garden",
+     "label": "Tap 2 - garden spur",
+     "verb": "Inspect",
+     "position": [
+      3.5,
+      0.75,
+      -1.05
+     ],
+     "approach_m": [
+      3.5,
+      0,
+      -0.45
+     ],
+     "asset_id": "ch03_tap_garden",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch03_trunk",
+     "label": "Habitat trunk",
+     "verb": "Inspect",
+     "position": [
+      0.0,
+      0.7,
+      1.12
+     ],
+     "approach_m": [
+      0.0,
+      0,
+      1.75
+     ],
+     "asset_id": "",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch03_repair_drawing",
+     "label": "Repair diagram from Earth",
+     "verb": "Inspect",
+     "position": [
+      -2.2,
+      0.85,
+      -3.7
+     ],
+     "approach_m": [
+      -2.2,
+      0,
+      -2.85
+     ],
+     "asset_id": "ch03_repair_drawing",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ],
+   "focus_labels": {
+    "service_air_console": "Atmosphere panel and main tank"
+   },
+   "stations": {
+    "p05_equip_gauge": "ch03_gauge_stand",
+    "p05_read_panel_warning": "service_air_console",
+    "p05_identify_three_taps": "ch03_diagnostic_board",
+    "p05_read_main_t0": "ch03_tap_main",
+    "p05_read_garden_t0": "ch03_tap_garden",
+    "p05_read_return_t0": "ch03_tap_return",
+    "p05_inspect_tank": "ch03_tap_main",
+    "p05_inspect_habitat": "ch03_trunk",
+    "p05_inspect_garden": "service_garden_valve",
+    "p05_inspect_return": "ch03_tap_return",
+    "p05_inspect_airlock": "ch03_diagnostic_board",
+    "p05_inspect_annex": "ch03_diagnostic_board",
+    "p05_read_main_t10": "ch03_tap_main",
+    "p05_read_garden_t10": "ch03_tap_garden",
+    "p05_read_return_t10": "ch03_tap_return",
+    "p05_identify_garden_fall": "ch03_diagnostic_board",
+    "p05_verify_annex_isolation": "ch03_diagnostic_board",
+    "p05_preview_garden_isolation": "ch03_diagnostic_board",
+    "p05_rollback_check": "ch03_repair_drawing",
+    "p05_isolate_garden": "service_garden_valve",
+    "p05_verify_main_hold": "ch03_tap_main",
+    "p05_apply_garden_clamp": "service_garden_valve",
+    "p05_reopen_garden_slow": "service_garden_valve",
+    "p05_reconcile_records": "ch03_diagnostic_board",
+    "p05_save_monitoring_handover": "ch03_diagnostic_board",
+    "p05_stable_read_1": "ch03_tap_garden",
+    "p05_stable_read_2": "ch03_tap_garden",
+    "p05_stable_read_3": "ch03_tap_garden",
+    "p05_stable_read_4": "ch03_tap_garden",
+    "p05_stable_read_5": "ch03_tap_garden"
+   },
+   "by_scene": {
+    "EX-CH03-S01": {
+     "anchors": {
+      "service_player": [
+       0.75,
+       0,
+       0.0
+      ],
+      "service_amara": [
+       0.75,
+       0,
+       0.0
+      ],
+      "service_kai": [
+       2.2,
+       0,
+       1.75
+      ],
+      "service_rafi": [
+       4.0,
+       0,
+       2.6
+      ],
+      "service_mei": [
+       1.0,
+       0,
+       2.6
+      ]
+     },
+     "lighting": {
+      "practical_scale": 0.85
+     }
+    },
+    "EX-CH03-S02": {
+     "anchors": {
+      "service_player": [
+       0.85,
+       0,
+       -0.5
+      ],
+      "service_amara": [
+       0.85,
+       0,
+       -0.5
+      ],
+      "service_kai": [
+       2.3,
+       0,
+       1.75
+      ],
+      "service_mei": [
+       3.35,
+       0,
+       1.85
+      ],
+      "service_rafi": [
+       3.5,
+       0,
+       -0.45
+      ]
+     },
+     "lighting": {
+      "practical_scale": 0.85
+     }
+    },
+    "EX-CH03-S03": {
+     "anchors": {
+      "service_player": [
+       1.7,
+       0,
+       1.8
+      ],
+      "service_rafi": [
+       1.7,
+       0,
+       1.8
+      ],
+      "service_amara": [
+       3.95,
+       0,
+       1.75
+      ],
+      "service_mei": [
+       4.5,
+       0,
+       2.4
+      ],
+      "service_kai": [
+       3.5,
+       0,
+       -0.45
+      ]
+     },
+     "lighting": {
+      "practical_scale": 0.85
+     }
+    },
+    "EX-CH03-S04": {
+     "anchors": {
+      "service_player": [
+       3.8,
+       0,
+       -0.5
+      ],
+      "service_kai": [
+       3.8,
+       0,
+       -0.5
+      ],
+      "service_amara": [
+       1.4,
+       0,
+       0.0
+      ],
+      "service_rafi": [
+       1.9,
+       0,
+       0.4
+      ],
+      "service_mei": [
+       4.7,
+       0,
+       1.3
+      ]
+     },
+     "lighting": {
+      "practical_scale": 0.85
+     }
+    },
+    "EX-CH03-S05": {
+     "anchors": {
+      "service_player": [
+       1.7,
+       0,
+       1.8
+      ],
+      "service_amara": [
+       1.7,
+       0,
+       1.8
+      ],
+      "service_kai": [
+       3.95,
+       0,
+       1.8
+      ],
+      "service_rafi": [
+       2.3,
+       0,
+       2.65
+      ],
+      "service_mei": [
+       4.6,
+       0,
+       1.4
+      ]
+     }
+    }
+   },
+   "review_views": {
+    "ch03_panel": {
+     "from": [
+      1.9,
+      1.75,
+      0.5
+     ],
+     "to": [
+      1.35,
+      1.6,
+      -1.5
+     ]
+    },
+    "ch03_board": {
+     "from": [
+      2.9,
+      1.62,
+      2.55
+     ],
+     "to": [
+      2.9,
+      1.42,
+      0.85
+     ]
+    },
+    "ch03_spur": {
+     "from": [
+      2.6,
+      1.55,
+      0.3
+     ],
+     "to": [
+      3.5,
+      1.0,
+      -1.45
+     ]
+    },
+    "ch03_gauge": {
+     "from": [
+      3.8,
+      1.5,
+      2.35
+     ],
+     "to": [
+      4.5,
+      0.95,
+      3.45
+     ]
+    },
+    "ch03_repair": {
+     "from": [
+      -2.2,
+      1.45,
+      -2.45
+     ],
+     "to": [
+      -2.2,
+      0.95,
+      -3.95
+     ]
+    },
+    "ch03_earth": {
+     "from": [
+      -2.2,
+      1.6,
+      0.8
+     ],
+     "to": [
+      -2.2,
+      1.5,
+      -4.0
+     ]
+    },
+    "ch03_overview": {
+     "from": [
+      5.4,
+      2.1,
+      3.5
+     ],
+     "to": [
+      1.2,
+      0.9,
+      -1.3
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch03_spur_label",
+   "from": "EX-CH03-S01",
+   "about": "EX-CH03-S04 (canon): the quake knocked the garden spur label crooked; Kai wants to straighten it and Amara asks him to leave the evidence visible until the test is saved (S04 -> S05). It is straight from EX-CH03-S06 on.",
+   "signs": [
+    {
+     "id": "ch03_spur_label",
+     "text": "GARDEN SPUR",
+     "position": [
+      3.5,
+      0.32,
+      -1.29
+     ],
+     "yaw": 0,
+     "size": 0.0016,
+     "color": "#e9eef5",
+     "outline": 0,
+     "roll": 0,
+     "by_scene": {
+      "EX-CH03-S01..EX-CH03-S05": {
+       "roll": 8
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "ch03_spur_clamp",
+   "from": "EX-CH03-S04",
+   "about": "EX-CH03-S04 on: the captive clamp seated on the garden spur feedthrough stays (doc 09: props accumulate).",
+   "props": [
+    {
+     "id": "garden_spur_clamp",
+     "path": "res://assets/props/PR_RepairClamp/PR_RepairClamp.glb",
+     "position": [
+      3.5,
+      1.25,
+      -1.3923
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch03_gauge_on_its_hook",
+   "from": "EX-CH03-S05",
+   "about": "EX-CH03-S05 (canon): \"When the warning clears, Amara leaves the independent gauge on its hook.\" It stays there (doc 24 montage: in August she shows Kai how she reads it).",
+   "fixtures": [
+    {
+     "id": "gauge_hook",
+     "position": [
+      5.965,
+      1.36,
+      0.75
+     ],
+     "size": [
+      0.05,
+      0.05,
+      0.14
+     ],
+     "color": "#1F2A44",
+     "transparent": false
+    }
+   ],
+   "props": [
+    {
+     "id": "manual_gauge_on_hook",
+     "path": "res://assets/props/PR_ManualGauge/PR_ManualGauge.glb",
+     "position": [
+      5.85,
+      1.05,
+      0.75
+     ],
+     "rotation_degrees": [
+      0,
+      -90,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "review_views": {
+    "ch03_hook": {
+     "from": [
+      4.5,
+      1.6,
+      1.0
+     ],
+     "to": [
+      5.9,
+      1.2,
+      0.75
+     ]
+    }
+   }
+  },
+  {
    "id": "ch06_guide_light_and_test_panel",
    "from": "EX-CH06-S01",
    "about": "EX-CH06 power room (doc 24 §2.6, §2.9): the guide light leaves the protected supply at the junction box Kai taped in December (CH05 -> CH06 join) and runs low along the aisle wall to the Commons door; the protected-bus test panel with camera feeder F2 (A-42) stands by that door; two decorative wall floods light the aisle until the eclipse plan sheds them. Installed hardware: it stays after Chapter 6.",
@@ -2586,8 +3749,8 @@
   {
    "id": "ch03_join_pressure_warning",
    "from": "EX-CH03-S01",
-   "until": "EX-CH03-S01",
-   "about": "Doc 24 section 2.9 CH02 -> CH03: no time jump; the same red pressure warning the Commons atmosphere panel showed at 22:00 (same rows, the oxygen-tank symbol red) is on the air console's status screen at 22:05 ('The oxygen-tank symbol is red', EX-CH03-S01). Chapter 3 rooms (M3-3R) own how long it stays.",
+   "until": "EX-CH03-S05",
+   "about": "Doc 24 section 2.9 CH02 -> CH03: no time jump; the same red pressure warning the Commons atmosphere panel showed at 22:00 (same rows, the oxygen-tank symbol red) is on the air console's status screen at 22:05 ('The oxygen-tank symbol is red', EX-CH03-S01). It stays on the status screen until the repair is verified: TANK PRESSURE returns to OK with the five checks (EX-CH03-S05, M3-3R).",
    "fixtures": [
     {
      "id": "air_warning_panel",
@@ -2651,7 +3814,12 @@
      ],
      "color": "#e8352a",
      "transparent": false,
-     "emissive": true
+     "emissive": true,
+     "by_scene": {
+      "EX-CH03-S05": {
+       "color": "#3fbf5a"
+      }
+     }
     },
     {
      "id": "air_warning_tank_symbol_neck",
@@ -2667,7 +3835,12 @@
      ],
      "color": "#e8352a",
      "transparent": false,
-     "emissive": true
+     "emissive": true,
+     "by_scene": {
+      "EX-CH03-S05": {
+       "color": "#3fbf5a"
+      }
+     }
     }
    ],
    "signs": [
@@ -2717,7 +3890,13 @@
      ],
      "size": 0.0008,
      "color": "#ff5a4e",
-     "outline": 0
+     "outline": 0,
+     "by_scene": {
+      "EX-CH03-S05": {
+       "text": "TANK PRESSURE · OK",
+       "color": "#dfe7f2"
+      }
+     }
     }
    ]
   }

@@ -6,7 +6,11 @@ class_name CampaignCrew
 const Roster = preload("res://scripts/companions/companion_roster.gd")
 const Contract = preload("res://scripts/world/room_contract.gd")
 const PlayerScene = preload("res://scenes/player/player.tscn")
+const Helmet = preload("res://assets/props/PR_Helmet_Roles/helmet_roles.gd")
+## Each cast member's body in the outfit the current scene stages (bodies[id]); every outfit body ever built is kept
+## in _wardrobe ("<id>/<outfit>"), so a cut back to an earlier outfit reuses it and never duplicates a character.
 var bodies: Dictionary = {}
+var _wardrobe: Dictionary = {}
 var local_ids: Array[String] = []
 var player: PlayerController
 var room: CampaignRoom
@@ -33,7 +37,14 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choice
 	anchors.merge(room.stage().get("anchors", {}), true)
 	# On the terrain provider's ground the same anchors stand at the terrain height (RoomContract.terrain, M1-82).
 	anchors.merge(room.terrain_anchors(), true)
-	for body in bodies.values():
+	# A scene whose staging moves the viewpoint (M3-3R: EX-CH03-S07 starts in the cold annex under the warm bay) names
+	# its own "<room>_player" anchor; it wins over the room's base player anchor the caller passes.
+	for key in room.stage().get("anchors", {}):
+		if String(key).ends_with("_player"):
+			var staged: Array = room.stage().anchors[key]
+			player_at = Vector3(staged[0], staged[1], staged[2])
+	var outfits: Dictionary = room.stage().get("outfits", {})
+	for body in _wardrobe.values():
 		body.hide()
 		body.process_mode = Node.PROCESS_MODE_DISABLED
 		body.collision_layer = 0
@@ -41,7 +52,7 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choice
 	for id in roster:
 		if roster[id].physical_location_id != room.room_id or not roster[id].present:
 			continue
-		var body := _body(id)
+		var body := _body(id, String(outfits.get(id, "")))
 		body.show()
 		body.character.show()
 		body.process_mode = Node.PROCESS_MODE_INHERIT
@@ -126,19 +137,46 @@ static func _vector(value: Array) -> Vector3:
 static func _radians(value: Array) -> Vector3:
 	return Vector3(deg_to_rad(float(value[0])), deg_to_rad(float(value[1])), deg_to_rad(float(value[2])))
 
-func _body(id: String) -> PlayerController:
-	if bodies.has(id):
+## The cast member's body in an outfit: "" is the everyday coverall; "eva" is the fitted EVA suit (M3-3A CH_<Name>_EVA)
+## with the role-striped helmet seated on its neck ring, visor up, and a helmet lamp (EX-CH03-S07's suited annex entry).
+func _body(id: String, outfit: String = "") -> PlayerController:
+	var key := id + "/" + outfit
+	if _wardrobe.has(key):
+		bodies[id] = _wardrobe[key]
 		return bodies[id]
 	var body := PlayerScene.instantiate() as PlayerController
-	body.name = id.capitalize()
+	var cast := id.capitalize()
+	body.name = cast if outfit.is_empty() else cast + "_" + outfit.to_upper()
 	body.controlled = false
 	body.gravity = 1.62
-	body.character_glb = "res://assets/characters/CH_%s/CH_%s.glb" % [id.capitalize(), id.capitalize()]
+	var suffix := "_EVA" if outfit == "eva" else ""
+	body.character_glb = "res://assets/characters/CH_%s%s/CH_%s%s.glb" % [cast, suffix, cast, suffix]
+	if not suffix.is_empty() and ResourceLoader.exists("res://resources/player/ch_%s.tres" % id):
+		body.tuning = load("res://resources/player/ch_%s.tres" % id) as LocomotionTuning  # the cast member's own gait
 	var camera := body.get_node("FollowCamera") as FollowCamera
 	camera.active = false
 	camera.capture_mouse = false
 	add_child(body)
 	body.set_controlled(false)
+	if outfit == "eva" and body.character != null:
+		var helmet := Helmet.instance()
+		if helmet != null and Helmet.apply_role(helmet, id) and Helmet.equip(helmet, body.character, id) != null:
+			helmet.name = "Helmet"
+			Helmet.set_visor_closed(helmet, 0.0)
+			var socket := helmet.find_child("Socket_Lamp", true, false) as Node3D
+			var lamp := SpotLight3D.new()
+			lamp.name = "HelmetLamp"
+			lamp.position = socket.position if socket != null else Vector3(0, 0.35, 0.17)
+			lamp.rotation_degrees = Vector3(-12, 180, 0)  # the helmet faces +Z; a spot shines along its -Z
+			lamp.light_color = Color(1.0, 0.95, 0.88)
+			lamp.light_energy = 2.5
+			lamp.spot_range = 7.0
+			lamp.spot_angle = 32.0
+			lamp.shadow_enabled = true
+			helmet.add_child(lamp)
+		elif helmet != null and helmet.get_parent() == null:
+			helmet.free()
+	_wardrobe[key] = body
 	bodies[id] = body
 	return body
 
@@ -186,7 +224,8 @@ func _build_screen() -> void:
 	_screen = null
 	_screen_label = null
 	_screen_backdrop = null
-	# The Commons screen, or a room's staged Earth console (the garden's from EX-CH02-S01, M3-2R).
+	# The Commons screen, or a room's staged Earth console (the garden's from EX-CH02-S01, M3-2R; Ferreira's Earth link in
+	# the service rooms, EX-CH03-S03, and at the annex, EX-CH03-S06, M3-3R).
 	var spec := room.fixture("earth_screen")
 	if room.room_id != "LOC-01" and spec.is_empty():
 		return

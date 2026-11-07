@@ -26,7 +26,8 @@ static func build(room: Node3D, layout: Dictionary) -> void:
 	for x in width:
 		for z in depth:
 			var at := Vector3(x - width * 0.5 + 0.5, 0, z - depth * 0.5 + 0.5)
-			_batch(batches, "EN_Kit_FloorTile", at)
+			if not in_opening(layout, at):
+				_batch(batches, "EN_Kit_FloorTile", at)
 			_batch(batches, "EN_Kit_CeilingTile", at)
 	for side in ["north", "south", "west", "east"]:
 		var length := width if side in ["north", "south"] else depth
@@ -62,12 +63,19 @@ static func build(room: Node3D, layout: Dictionary) -> void:
 		for index in int(run.count):
 			var at := Presentation.vector(run.position) + Presentation.vector(run.step) * index
 			_batch(batches, String(run.piece), at, float(run.get("yaw", 0)))
+	if layout.has("lower_deck"):
+		_lower_deck(room, layout, batches)
 	_publish(shell, batches)
 	# Pressure connectors terminate at a second closed door. Location changes remain
 	# explicit WorldRoute transitions; the player cannot walk off a staged room's deck.
 	for portal in layout.portals:
 		connector(room, layout, portal)
-	collider(room.collision_root, "FloorCollision", Vector3(0, -0.15, 0), Vector3(width, 0.3, depth))
+	if layout.get("floor_openings", []).is_empty():
+		collider(room.collision_root, "FloorCollision", Vector3(0, -0.15, 0), Vector3(width, 0.3, depth))
+	else:
+		# The deck is solid everywhere except its openings (M3-3R: the N.R. hatch well, whose floor module brings its
+		# own deck and leaf collision): one box per run of solid 1 m cells in each row.
+		_cell_colliders(room.collision_root, "FloorCollision", layout.floor_openings, Vector2(-width * 0.5, -depth * 0.5), width, depth, -0.15, 0.3)
 	collider(room.collision_root, "CeilingCollision", Vector3(0, height + 0.1, 0), Vector3(width, 0.2, depth))
 
 ## LOC-05 (M3-2R): the approved M3-2A double-interlock vestibule (en_airlock.gd from airlock.json, 8 x 4 m) as the
@@ -168,6 +176,78 @@ static func _airlock_piece(node_name: String) -> String:
 	var id := node_name.trim_prefix("@")
 	return id.get_slice("@", 0)
 
+## True when a point lies inside one of the layout's "floor_openings" ({"center": [x, z], "size": [w, d]}).
+static func in_opening(layout: Dictionary, at: Vector3) -> bool:
+	return _inside_any(layout.get("floor_openings", []), at)
+
+static func _inside_any(openings: Array, at: Vector3) -> bool:
+	for opening in openings:
+		var half := Vector2(float(opening.size[0]), float(opening.size[1])) * 0.5
+		if absf(at.x - float(opening.center[0])) < half.x and absf(at.z - float(opening.center[1])) < half.y:
+			return true
+	return false
+
+static func _cell_colliders(parent: Node3D, id: String, openings: Array, origin: Vector2, width: int, depth: int, y: float, thickness: float) -> void:
+	for z in depth:
+		var run_start := -1
+		for x in width + 1:
+			var solid := x < width and not _inside_any(openings, Vector3(origin.x + x + 0.5, 0, origin.y + z + 0.5))
+			if solid and run_start < 0:
+				run_start = x
+			elif not solid and run_start >= 0:
+				collider(parent, id, Vector3(origin.x + (run_start + x) * 0.5, y, origin.y + z + 0.5), Vector3(x - run_start, thickness, 1.0))
+				run_start = -1
+
+## M3-3R: a lower deck under the room (LOC-07: the 2034 annex 3 m below the warm-side bay), batched from the deck's own
+## pieces (EN_ZeroAnnex grating, frosted ceiling with dead fixtures, riveted walls and corners) with metre-space
+## collision. "lower_deck": {"y", "bounds": [x0, z0, x1, z1] (whole metres), "ceiling_height_m", "pieces": {floor,
+## ceiling, lamp, wall, corner}, "lamp_cells": [[x, z], ...] (cell minimum corners), "well": {"center", "size"} (open up
+## to the deck above, lined between the two ceilings)}.
+static func _lower_deck(room: Node3D, layout: Dictionary, batches: Dictionary) -> void:
+	var deck: Dictionary = layout.lower_deck
+	var y := float(deck.y)
+	var b: Array = deck.bounds
+	var x0 := int(b[0])
+	var z0 := int(b[1])
+	var x1 := int(b[2])
+	var z1 := int(b[3])
+	var height := float(deck.get("ceiling_height_m", 2.6))
+	var pieces: Dictionary = deck.pieces
+	var wells: Array = [deck.well] if deck.has("well") else []
+	var lamps: Array = deck.get("lamp_cells", [])
+	for x in range(x0, x1):
+		for z in range(z0, z1):
+			var at := Vector3(x + 0.5, y, z + 0.5)
+			_batch(batches, String(pieces.floor), at)
+			if not _inside_any(wells, at):
+				var lamp := lamps.any(func(c): return int(c[0]) == x and int(c[1]) == z)
+				_batch(batches, String(pieces.lamp if lamp else pieces.ceiling), at)
+	for x in range(x0 + 1, x1):
+		_batch(batches, String(pieces.wall), Vector3(x, y, z1), 0)
+		_batch(batches, String(pieces.wall), Vector3(x, y, z0), 180)
+	for z in range(z0 + 1, z1):
+		_batch(batches, String(pieces.wall), Vector3(x0, y, z), -90)
+		_batch(batches, String(pieces.wall), Vector3(x1, y, z), 90)
+	for corner in [[x0, z0, 180], [x1, z0, 90], [x0, z1, -90], [x1, z1, 0]]:
+		_batch(batches, String(pieces.corner), Vector3(corner[0], y, corner[1]), corner[2])
+	var centre := Vector3((x0 + x1) * 0.5, y, (z0 + z1) * 0.5)
+	var size := Vector2(x1 - x0, z1 - z0)
+	collider(room.collision_root, "LowerFloorCollision", centre + Vector3(0, -0.15, 0), Vector3(size.x, 0.3, size.y))
+	for wall in [[Vector3(0, 0, -size.y * 0.5), Vector3(size.x, height, 0.18)], [Vector3(0, 0, size.y * 0.5), Vector3(size.x, height, 0.18)],
+			[Vector3(-size.x * 0.5, 0, 0), Vector3(0.18, height, size.y)], [Vector3(size.x * 0.5, 0, 0), Vector3(0.18, height, size.y)]]:
+		collider(room.collision_root, "LowerWall", centre + wall[0] + Vector3(0, height * 0.5, 0), wall[1])
+	_cell_colliders(room.collision_root, "LowerCeilingCollision", wells, Vector2(x0, z0), x1 - x0, z1 - z0, y + height + 0.1, 0.2)
+	for well in wells:
+		# The well's lining between the annex ceiling and the upper deck, so nobody looks into the slab.
+		var at := Vector3(float(well.center[0]), 0, float(well.center[1]))
+		var half := Vector2(float(well.size[0]), float(well.size[1])) * 0.5
+		var low := y + height
+		for side in [[Vector3(0, 0, -half.y), Vector3(half.x * 2.0, -low, 0.04)], [Vector3(0, 0, half.y), Vector3(half.x * 2.0, -low, 0.04)],
+				[Vector3(-half.x, 0, 0), Vector3(0.04, -low, half.y * 2.0)], [Vector3(half.x, 0, 0), Vector3(0.04, -low, half.y * 2.0)]]:
+			var middle: Vector3 = at + side[0] + Vector3(0, low * 0.5, 0)
+			collider(room.collision_root, "WellLining", middle, side[1])
+			Presentation.mesh_box(room.visual_root, "WellLining", middle, side[1], Color(deck.get("well_color", "#3b4034")), false, true)
+
 ## Adds the approved corridor rings behind a portal, with a pressure-rated end door.
 static func connector(room: Node3D, layout: Dictionary, portal: Dictionary) -> void:
 	var passage := Node3D.new()
@@ -234,15 +314,30 @@ static func navigation(parent: Node3D, layout: Dictionary) -> void:
 	var radius := float(layout.navigation.agent_radius_m)
 	var width := float(layout.bounds_m[0])
 	var depth := float(layout.bounds_m[1])
+	var vertices := PackedVector3Array()
+	# A lower deck (M3-3R, LOC-07) is a second, unconnected walkable grid in the same mesh: the ladder between the two
+	# is climbed, never walked. Each obstacle belongs to the deck its centre stands in.
+	var split := -1.0e9
+	if layout.has("lower_deck"):
+		split = float(layout.lower_deck.y) + float(layout.lower_deck.get("ceiling_height_m", 2.6))
+	vertices = _deck_cells(mesh, vertices, Vector2(-width * 0.5, -depth * 0.5), width, depth, 0.0, cell, radius, layout.obstacles.filter(func(o): return float(o.position[1]) >= split))
+	if layout.has("lower_deck"):
+		var b: Array = layout.lower_deck.bounds
+		vertices = _deck_cells(mesh, vertices, Vector2(float(b[0]), float(b[1])), float(b[2]) - float(b[0]), float(b[3]) - float(b[1]), float(layout.lower_deck.y), cell, radius, layout.obstacles.filter(func(o): return float(o.position[1]) < split))
+	mesh.vertices = vertices
+	region.navigation_mesh = mesh
+	parent.add_child(region)
+	region.set_navigation_map(nav_map)
+
+## Appends one deck's walkable cells: the wall clearance and each grown furniture footprint are rasterised once; a cell
+## is blocked when it overlaps a footprint by more than a touching edge.
+static func _deck_cells(mesh: NavigationMesh, vertices: PackedVector3Array, origin: Vector2, width: float, depth: float, y: float, cell: float, radius: float, obstacles: Array) -> PackedVector3Array:
 	var nx := int(width / cell)
 	var nz := int(depth / cell)
-	var vertices := PackedVector3Array()
+	var base := vertices.size()
 	for z in range(nz + 1):
 		for x in range(nx + 1):
-			vertices.append(Vector3(-width * 0.5 + x * cell, 0, -depth * 0.5 + z * cell))
-	mesh.vertices = vertices
-	# Rasterise the wall clearance and each grown furniture footprint once. A cell is
-	# blocked when it overlaps a footprint by more than a touching edge.
+			vertices.append(Vector3(origin.x + x * cell, y, origin.y + z * cell))
 	var blocked := PackedByteArray()
 	blocked.resize(nx * nz)
 	var edge := ceili(radius / cell - 0.0001)
@@ -250,20 +345,18 @@ static func navigation(parent: Node3D, layout: Dictionary) -> void:
 	_block_cells(blocked, nx, nx - edge, nx, 0, nz)
 	_block_cells(blocked, nx, 0, nx, 0, edge)
 	_block_cells(blocked, nx, 0, nx, nz - edge, nz)
-	for obstacle in layout.obstacles:
+	for obstacle in obstacles:
 		var at := Presentation.vector(obstacle.position)
 		var size := Presentation.vector(obstacle.size)
-		var low := Vector2(at.x - size.x * 0.5 - radius + width * 0.5, at.z - size.z * 0.5 - radius + depth * 0.5) / cell
-		var high := Vector2(at.x + size.x * 0.5 + radius + width * 0.5, at.z + size.z * 0.5 + radius + depth * 0.5) / cell
+		var low := Vector2(at.x - size.x * 0.5 - radius - origin.x, at.z - size.z * 0.5 - radius - origin.y) / cell
+		var high := Vector2(at.x + size.x * 0.5 + radius - origin.x, at.z + size.z * 0.5 + radius - origin.y) / cell
 		_block_cells(blocked, nx, floori(low.x + 0.0001), ceili(high.x - 0.0001), floori(low.y + 0.0001), ceili(high.y - 0.0001))
 	for z in nz:
 		for x in nx:
 			if blocked[z * nx + x] == 0:
-				var a := z * (nx + 1) + x
+				var a := base + z * (nx + 1) + x
 				mesh.add_polygon(PackedInt32Array([a, a + 1, a + nx + 2, a + nx + 1]))
-	region.navigation_mesh = mesh
-	parent.add_child(region)
-	region.set_navigation_map(nav_map)
+	return vertices
 
 static func _block_cells(blocked: PackedByteArray, nx: int, x0: int, x1: int, z0: int, z1: int) -> void:
 	var nz := blocked.size() / nx

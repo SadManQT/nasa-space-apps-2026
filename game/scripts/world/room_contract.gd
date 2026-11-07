@@ -178,23 +178,23 @@ const _ROOMS := {
 	"LOC-07": {
 		"room_id": "LOC-07",
 		"name": "Isolated Annex",
-		"canonical_name": "Expedition Zero isolated service annex",
-		"bounds_m": [10.0, 8.0],
+		"canonical_name": "Expedition Zero isolated service annex and its warm-side access bay",
+		"bounds_m": [8.0, 6.0],
 		"pressure": "pressurised",
-		"asset_ids": ["PR_HatchDoor", "PR_VaultCase", "PR_AnnexDrum", "PR_Recorder2034"],
+		"asset_ids": ["EN_ZeroAnnex_FloorHatch", "EN_ZeroAnnex_SupportStation", "EN_ZeroAnnex_TrayBench", "EN_ZeroAnnex_ChartArchive", "PL_ZeroSeedlingTray", "PR_AnnexDrum"],
 		"asset_paths": [
-			"res://assets/props/PR_HatchDoor/PR_HatchDoor.glb",
-			"res://assets/props/PR_VaultCase/PR_VaultCase.glb",
+			"res://assets/plants/PL_ZeroSeedlingTray/PL_ZeroSeedlingTray.glb",
 			"res://assets/props/PR_AnnexDrum/PR_AnnexDrum.glb",
-			"res://assets/props/PR_Recorder2034/PR_Recorder2034.glb",
 		],
-		"boundary_ids": ["door_service_safe", "annex_isolation"],
+		# M3-3R: the warm-side bay connects to the service rooms through its own pressure door; the N.R. floor hatch is
+		# the boundary between the warm bay and the cold annex 3 m below (doc 09 LOC-07).
+		"boundary_ids": ["door_service_annex", "annex_hatch"],
 		"focus_targets": [
-			{"target_id": "annex_utility_feed", "label": "Annex utility isolation", "verb": "Use", "position": [-3.0, 1.0, -1.5]},
-			{"target_id": "annex_zero_gauge", "label": "Zero differential gauge", "verb": "Inspect", "position": [0.0, 1.0, -1.5]},
-			{"target_id": "annex_hatch_view", "label": "Safe hatch viewing port", "verb": "Inspect", "position": [3.0, 1.0, -1.5]},
+			{"target_id": "annex_utility_feed", "label": "Annex utility isolation", "verb": "Use", "position": [-2.75, 0.4, -0.75]},
+			{"target_id": "annex_zero_gauge", "label": "Zero differential gauge", "verb": "Inspect", "position": [-2.6, 1.0, 2.4]},
+			{"target_id": "annex_hatch_view", "label": "N.R. hatch viewing port", "verb": "Inspect", "position": [-2.0, 0.4, -0.17]},
 		],
-		"anchors": {"annex_mei": [-2.4, 0.0, 1.5], "annex_amara": [0.0, 0.0, 1.5], "annex_rafi": [2.4, 0.0, 1.5], "annex_player": [0.0, 0.0, 2.4]},
+		"anchors": {"annex_mei": [-0.6, 0.0, 1.4], "annex_amara": [-3.2, 0.0, 1.4], "annex_rafi": [-0.8, 0.0, -1.9], "annex_kai": [-3.3, 0.0, -1.6], "annex_player": [1.6, 0.0, 0.8]},
 	},
 	"LOC-08": {
 		"room_id": "LOC-08",
@@ -318,6 +318,15 @@ const _SCENE_ROOMS := {
 	"EX-CH02-S04": "LOC-05", "EX-CH02-S05": "LOC-05", "EX-CH02-S06": "LOC-03",
 	"EX-CH02-S07": "LOC-01", "EX-CH02-S08": "LOC-02", "EX-CH02-S09": "LOC-02",
 	"EX-CH02-S10": "LOC-02", "EX-CH02-S11": "LOC-01", "EX-CH02-S12": "LOC-01",
+	# Chapter 3 (M3-3R), from each scene's location in STORY_FULL.md, the CHAPTER_03 scene scripts (SC-0301..0306),
+	# doc 09 and scene_rosters.json: the atmosphere service corridor, taps, preview board, garden spur and console in the
+	# service rooms (S01-S05); the annex access bay with the N.R. hatch and the cold annex 3 m below it (S06-S08: camera
+	# port, suited entry, map provenance at the warm-side evidence table); the garden maturity, drying and harvest
+	# benches and planting rack (S09-S11); Tara's indoor reference bay, the lineage board and the October rack (S12).
+	"EX-CH03-S01": "LOC-02", "EX-CH03-S02": "LOC-02", "EX-CH03-S03": "LOC-02",
+	"EX-CH03-S04": "LOC-02", "EX-CH03-S05": "LOC-02", "EX-CH03-S06": "LOC-07",
+	"EX-CH03-S07": "LOC-07", "EX-CH03-S08": "LOC-07", "EX-CH03-S09": "LOC-03",
+	"EX-CH03-S10": "LOC-03", "EX-CH03-S11": "LOC-03", "EX-CH03-S12": "LOC-03",
 	# Chapter 6 (M3-6R), from each scene's location in STORY_FULL.md and the CHAPTER_06 scene scripts: the power
 	# room holds the locker, plan, board, test panel and F2 (S01-S05, S10) and the debrief at the board (S11, SC-0605);
 	# the eclipse desk and its filtered monitor stand by the Mission Table (S06-S09, SC-0603/0604); S12 is the garden.
@@ -381,7 +390,7 @@ static func _extended_room_for_scene(scene_id: String) -> String:
 		2:
 			return ["LOC-03", "LOC-03", "LOC-05", "LOC-05", "LOC-05", "LOC-03", "LOC-01", "LOC-02", "LOC-02", "LOC-02", "LOC-01", "LOC-01"][order - 1]
 		3:
-			return ["LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-07", "LOC-07", "LOC-07", "LOC-03", "LOC-03", "LOC-03", "LOC-01"][order - 1]
+			return ["LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-02", "LOC-07", "LOC-07", "LOC-07", "LOC-03", "LOC-03", "LOC-03", "LOC-03"][order - 1]
 		4:
 			return ["LOC-03", "LOC-08", "LOC-08", "LOC-09", "LOC-09", "LOC-10", "LOC-10", "LOC-10", "LOC-08", "LOC-03", "LOC-01", "LOC-01"][order - 1]
 		5:
@@ -495,7 +504,7 @@ static func earth(room_id: String, scene_id: String) -> Dictionary:
 # story_log option (doc 24 §5.2). The base layout stays the Chapter 1 room; staging only adds and hides.
 
 const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "chapter7_props", "prints", "models", "hide", "hide_signs"]
-const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views", "care_round"]
+const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views", "care_round", "kit_parts", "kit_texts", "kit_attach", "outfits"]
 
 ## Story order of a canon scene id (chapter * 100 + scene number), or -1 for anything that is not one.
 static func scene_order(scene_id: String) -> int:
