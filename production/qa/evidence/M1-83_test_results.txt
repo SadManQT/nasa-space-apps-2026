@@ -1,0 +1,16 @@
+M1-83 ? reviewed Care Round provider, acceptance BLOCKED
+8 November 2026, Ramim/codex
+Tested source: 15ff10a26623eaaa2f40ccbc652d21fa9be863aa
+Game tree: 3a4d0a2e5133fc8a96b0a9cf6411638238db8c67
+Windows Godot4.7.2, AMD Ryzen7 7700 / NVIDIA RTX4060.
+Mandatory editor setup succeeded; every suite executed via game/tools/run_tests.sh.
+Focused final: care32/0; playertext524/0 (actual mandatory runner1/1 each).
+Native: original154 and lifecycle143 probes,0fail; eight PNGs independently viewed.
+Independent review: two Important findings fixed and scoped re-review approved; no new breakage.
+Full run:64/65 suites passed, exit1, 995s. Sole failure: Atik M1-68 performance_runtime537checks/3failures.
+Title main-thread78.392ms; newcampaign111.286ms; fullcastentry51.650ms; each requires<50ms.
+No timing thresholds, loader, approved assets, imports or settings changed.
+Complete console: M1-83_full_results.txt
+Complete loading suite: M1-83_performance_runtime.txt
+Provider contract/screenshots: M1-83_provider.md, M1-83_capture_probe.txt, M1-83_lifecycle_probe.txt
+No task-done/gameperformance claim. Runtime capture/date/order/biology/persistence integration remains AtikM1-49; provider screenshots are disclosed fixtures, hardwarecontroller untested.
