@@ -214,9 +214,11 @@ func reveal_hint() -> Dictionary:
 	return {"accepted": true, "reason": "Hint opened."}
 
 func teach_first_use() -> void:
-	if hint_player != null:
+	if hint_player != null and not hint_player.is_open() and not hint_player.has_seen("mission_table"):
 		hint_player.set_settings(_settings)
 		hint_player.show_how_to("mission_table", true, _hint_target())
+		# Teaching can outlast the initial focus requests queued by open().
+		hint_player.closed.connect(_grab_first_focus, CONNECT_ONE_SHOT)
 
 func _hint_target() -> Control:
 	for shift in _view.get("shifts", []):

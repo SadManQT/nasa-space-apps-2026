@@ -16,6 +16,7 @@ func _run() -> void:
 	var trainer = TrainerScene.new()
 	trainer.results_path = storage.directory.path_join("trainer.json")
 	root.add_child(trainer)
+	await _test_trainer_first_use(trainer)
 	trainer.select_scenario("P-02")
 	trainer.open_decision()
 	await process_frame
@@ -28,6 +29,7 @@ func _run() -> void:
 	if player.is_open():
 		_check(player.mode == "how_to", "first available table use teaches with HowToCard")
 		player.close()
+		DirAccess.remove_absolute(player.seen_path)
 	hint.grab_focus()
 	var before = trainer.exercise.director().snapshot()
 	var plan = trainer.exercise.mission_table().plan_for_gate(trainer.exercise.current_gate()).duplicate(true)
@@ -191,12 +193,24 @@ func _test_alarm(trainer: Control) -> void:
 	trainer.table._process(4.0)
 	await create_timer(0.1).timeout
 	_check(trainer.table._task_time_left == clock, "both real frame time and explicit tick leave nested alarm clock frozen")
+	trainer.panels.hint_player.close()
+	clock = trainer.table._task_time_left
 	trainer.panels.hint_player.show_how_to("mission_table", true)
+	_check(trainer.panels.hint_player.is_open() and trainer.panels.hint_player.mode == "how_to", "alarm test actually opens first-use teaching after closing the hint")
+	trainer.table._process(4.0)
+	await create_timer(0.1).timeout
+	_check(trainer.table._task_time_left == clock, "actual How to freezes the alarm clock")
+	trainer.panels.hint_player.close()
+	trainer.panels.hint_player.show_how_to("mission_table")
+	_check(trainer.panels.hint_player.is_open() and trainer.panels.hint_player.mode == "how_to", "alarm test actually replays the same teaching card")
+	trainer.table._process(4.0)
+	_check(trainer.table._task_time_left == clock, "replayed How to also freezes the alarm clock")
 	trainer.panels.hint_player.close()
 	_check(trainer.exercise.director().snapshot() == before and trainer.exercise.director().get("_checkpoint") == checkpoint and trainer.exercise.mission_table().snapshot() == table_before, "hint and teaching preserve resources, receipts, rollback checkpoint and alarm state")
 	trainer.table._process(1.0)
 	_check(trainer.table._task_time_left < clock, "closing hint resumes the table's own clock")
 	trainer.table.close()
+	DirAccess.remove_absolute(trainer.panels.hint_player.seen_path)
 
 func _test_campaign() -> void:
 	CampaignCutscenePlayer.autoplay = false
@@ -224,6 +238,21 @@ func _test_campaign() -> void:
 	_check(root.gui_get_focus_owner() == button, "What now request regains focus")
 	hud.panels.close_panel()
 	_check(not campaign.director.query().paused, "only last reading surface resumes campaign")
+	hud.panels.open_journal("now")
+	(hud.panels.find_child("RevealHint", true, false) as Button).pressed.emit()
+	_check(player.level == 2 and _text(player).contains("full store") and _text(player).contains("spare"), "S01 Journal H2 explains the full-store spare-power relationship")
+	_check(player.video != null and player.video.stream != null and player.video.stream.resource_path.ends_with("sci_solar_power.ogv"), "S01 H2 selects the registered solar-power/battery explainer")
+	if player.video != null and player.video.stream != null:
+		player.video.paused = true
+		player.update_caption(20.0)
+		_check(player.caption.text.contains("extra power spills"), "S01 registered clip actually explains full-store overflow")
+	player.close()
+	(hud.panels.find_child("RevealHint", true, false) as Button).pressed.emit()
+	var worked := _text(player)
+	_check(player.level == 3 and worked.contains("Different example") and worked.contains("12") and worked.contains("5") and worked.contains("3") and worked.contains("2") and worked.contains("battery"), "S01 H3 works through a different full-store routing example")
+	_check(not worked.contains("practice lamp is lit") and not worked.contains("air_tank") and not worked.contains("grow_lights") and not worked.contains("20 energy units") and not worked.contains("8 energy units"), "S01 worked method excludes unrelated evidence lesson and canonical settings")
+	player.close()
+	hud.panels.close_panel()
 	campaign.set_ui_paused(true)
 	hud.panels.open_panel("what_now")
 	button.pressed.emit()
@@ -232,7 +261,64 @@ func _test_campaign() -> void:
 	_check(campaign.director.query().paused, "pre-existing paused state survives all reading overlays")
 	_check(campaign.director.get("_checkpoint") == checkpoint and campaign.director.snapshot().resources == before.resources, "actual campaign reading never resets checkpoint or resources")
 	campaign.set_ui_paused(false)
+	await _test_campaign_first_use(campaign)
 	campaign.free()
+
+func _test_trainer_first_use(trainer: Control) -> void:
+	for dismissal in ["Close", "Esc", "B"]:
+		trainer.select_scenario("P-02")
+		trainer.panels.hint_player.seen_path = storage.directory.path_join("trainer-first-%s.cfg" % dismissal)
+		trainer.open_decision()
+		await _dismiss_first_use(trainer.panels.hint_player, trainer.table, "trainer " + dismissal, dismissal)
+		trainer.table.close()
+		DirAccess.remove_absolute(trainer.panels.hint_player.seen_path)
+
+func _test_campaign_first_use(campaign: Node) -> void:
+	campaign.route.start_at("EX-CH01-S07")
+	campaign._sync_route_projection()
+	campaign._refresh_world()
+	if campaign.loading:
+		await campaign.wait_loading()
+	campaign.route.perform("role_cards")
+	campaign.hud.refresh_scene()
+	for dismissal in ["Close", "Esc", "B"]:
+		var player = campaign.hud.panels.hint_player
+		player.seen_path = storage.directory.path_join("campaign-first-%s.cfg" % dismissal)
+		_check(campaign.hud.open_mission_table("p02_shift1"), "campaign first-use table opens " + dismissal)
+		await _dismiss_first_use(player, campaign.hud.mission_table, "campaign " + dismissal, dismissal)
+		_check(campaign.director.query().paused, "first-use dismissal preserves open-table authoritative pause " + dismissal)
+		campaign.hud.mission_table.close()
+		DirAccess.remove_absolute(player.seen_path)
+
+func _dismiss_first_use(player: Control, table: Control, label: String, dismissal: String) -> void:
+	await process_frame
+	await process_frame
+	_check(player.is_open() and player.mode == "how_to", label + " automatic first-use teaching really opens")
+	if dismissal == "Close":
+		(player.find_child("CloseHint", true, false) as Button).pressed.emit()
+	elif dismissal == "Esc":
+		_send_key(KEY_ESCAPE)
+	else:
+		_send_pad(JOY_BUTTON_B)
+	await process_frame
+	await process_frame
+	_check(not player.is_open() and table.is_open() and _table_has_focus(table), label + " dismissal restores visible enabled table focus without a manual grab")
+	var initial := root.gui_get_focus_owner()
+	var tab := InputEventAction.new()
+	tab.action = "ui_focus_next"
+	tab.pressed = true
+	Input.parse_input_event(tab)
+	Input.flush_buffered_events()
+	await process_frame
+	_check(_table_has_focus(table) and root.gui_get_focus_owner() != initial, label + " keyboard Tab navigates from restored table focus")
+	var keyboard := root.gui_get_focus_owner()
+	_send_pad(JOY_BUTTON_DPAD_RIGHT)
+	await process_frame
+	_check(_table_has_focus(table) and root.gui_get_focus_owner() != keyboard, label + " controller direction navigates inside the table")
+
+func _table_has_focus(table: Control) -> bool:
+	var focus := root.gui_get_focus_owner()
+	return is_instance_valid(focus) and table.is_ancestor_of(focus) and focus.is_visible_in_tree() and focus.focus_mode != Control.FOCUS_NONE and not (focus is BaseButton and focus.disabled)
 
 func _finish(trainer: Control) -> void:
 	trainer.free()

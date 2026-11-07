@@ -1,0 +1,7 @@
+FAIL tools/test_hint_player.gd :: exit 1 :: HINT PLAYER RESULT: FAIL (123 checks, 22 failures)
+       ERROR: FAIL: trainer Close dismissal restores visible enabled table focus without a manual grab
+       ERROR: FAIL: trainer Close keyboard Tab navigates from restored table focus
+       ERROR: FAIL: trainer Close controller direction navigates inside the table
+       ERROR: FAIL: trainer Esc dismissal restores visible enabled table focus without a manual grab
+       ERROR: FAIL: trainer Esc keyboard Tab navigates from restored table focus
+0/1 suites passed

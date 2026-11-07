@@ -1,4 +1,4 @@
-M1-64 focused verification, 7 November 2026. Each invocation used game/tools/run_tests.sh with the named filter. Final full integration remains pending.
+Historical pre-rebase M1-64 focused verification, 7 November 2026. Each invocation used game/tools/run_tests.sh with the named filter. Final full integration remains pending.
 
 m164-final-hint_player.log
 ok   tools/test_hint_player.gd :: HINT PLAYER RESULT: PASS (85 checks, 0 failures)

@@ -2,6 +2,19 @@
   "schema_version": 1,
   "about": "UI teaching only. Examples use hypothetical different numbers; never a canonical answer or autofill. Movement/look/use onboarding remains M1-18.",
   "cards": {
+    "spare_power": {
+      "title": "How to use spare sunlight",
+      "purpose": "A full battery cannot take more; compare useful places for the spare power.",
+      "steps": [
+        "Check how much room remains in the battery.",
+        "Follow the spare-power arrow to another store or useful load.",
+        "Compare each forecast before choosing."
+      ],
+      "clip": "sci_solar_power",
+      "nudge": "Follow the arrow after the battery is full.",
+      "relationship": "A full store cannot take more. Another store or a useful load can use spare daylight power before it is lost. Compare what each route saves or does while the battery stays full.",
+      "example": "Different example - hypothetical, not Aurora's power setting: a practice battery already holds its full 12 energy units. A panel offers 5 more; the battery has room for 0. A practice radio test can use 3 of those incoming units now, leaving 2 unused. The battery stays at 12. Compare useful work done before surplus is lost; read Aurora's own forecast before choosing."
+    },
     "mission_table": {
       "title": "How to plan a shift",
       "purpose": "Try a plan safely; heat choices appear for dark shifts.",
@@ -44,6 +57,7 @@
     }
   },
   "scenes": {
+    "EX-CH01-S01": "spare_power",
     "EX-CH01-S03": "probe",
     "EX-CH01-S04": "probe",
     "EX-CH01-S06": "mission_table",

@@ -28,6 +28,10 @@ func _run() -> void:
 	var player = trainer.panels.hint_player
 	active_player = player
 	player.seen_path = storage.directory.path_join("how-to.cfg")
+	if OS.get_cmdline_user_args().has("--review-fixes"):
+		await _capture_review_fixes(trainer)
+		_finish("review1_")
+		return
 	if OS.get_cmdline_user_args().has("--still-only"):
 		player.close()
 		await _capture_still(player)
@@ -153,6 +157,85 @@ func _capture_still(player: Control) -> void:
 	await _capture("reduced_motion_captions_off_150")
 	player.close()
 
+func _capture_review_fixes(trainer: Control) -> void:
+	for dismissal in ["Close", "Esc", "B"]:
+		active_player.seen_path = storage.directory.path_join("trainer-focus-%s.cfg" % dismissal)
+		if not active_player.is_open():
+			trainer.open_decision()
+		await _capture_first_use(trainer.table, "trainer", dismissal)
+		trainer.table.close()
+		DirAccess.remove_absolute(active_player.seen_path)
+	trainer.free()
+	var campaign := CampaignScene.instantiate() as Chapter1Campaign
+	storage.configure(campaign)
+	root.add_child(campaign)
+	if campaign.loading:
+		await campaign.wait_loading()
+	var hud := campaign.hud
+	active_player = hud.panels.hint_player
+	hud.panels.open_panel("what_now")
+	(hud.find_child("WhatNowHint", true, false) as Button).pressed.emit()
+	_expect(active_player.level == 1 and (active_player._body.get_child(0) as Label).text == "Follow the arrow after the battery is full.", "S01 begins with its authored H1")
+	active_player.close()
+	hud.panels.close_panel()
+	hud.panels.open_journal("now")
+	(hud.panels.find_child("RevealHint", true, false) as Button).pressed.emit()
+	_expect(active_player.level == 2 and active_player.video.stream.resource_path.ends_with("sci_solar_power.ogv"), "actual next Journal request uses registered solar-power concept")
+	await _wait_video(active_player, 20.0)
+	active_player.toggle_pause()
+	for large in [false, true]:
+		active_player.set_settings({"large_text": large})
+		await _capture("journal_shared_hint" + ("_150" if large else ""))
+	(active_player.find_child("NextHint", true, false) as Button).pressed.emit()
+	_expect(active_player.level == 3 and (active_player._body.get_child(0) as Label).text.contains("full 12 energy units"), "next request works through different full-store numbers")
+	for large in [false, true]:
+		active_player.set_settings({"large_text": large})
+		await _capture("s01_hint_3" + ("_150" if large else ""))
+	active_player.close()
+	hud.panels.close_panel()
+	campaign.route.start_at("EX-CH01-S07")
+	campaign._sync_route_projection()
+	campaign._refresh_world()
+	if campaign.loading:
+		await campaign.wait_loading()
+	campaign.route.perform("role_cards")
+	hud.refresh_scene()
+	for dismissal in ["Close", "Esc", "B"]:
+		active_player.seen_path = storage.directory.path_join("campaign-focus-%s.cfg" % dismissal)
+		_expect(hud.open_mission_table("p02_shift1"), "actual campaign first-use table opens " + dismissal)
+		await _capture_first_use(hud.mission_table, "campaign", dismissal)
+		_expect(campaign.director.query().paused, "teaching close keeps authoritative table pause " + dismissal)
+		hud.mission_table.close()
+		DirAccess.remove_absolute(active_player.seen_path)
+	campaign.free()
+
+func _capture_first_use(table: Control, source: String, dismissal: String) -> void:
+	await process_frame
+	await process_frame
+	_expect(active_player.is_open() and active_player.mode == "how_to", source + " actually opens first-use teaching " + dismissal)
+	if dismissal == "Close":
+		(active_player.find_child("CloseHint", true, false) as Button).pressed.emit()
+	else:
+		var event: InputEvent
+		if dismissal == "Esc":
+			var key := InputEventKey.new()
+			key.physical_keycode = KEY_ESCAPE
+			key.pressed = true
+			event = key
+		else:
+			var pad := InputEventJoypadButton.new()
+			pad.button_index = JOY_BUTTON_B
+			pad.pressed = true
+			event = pad
+		Input.parse_input_event(event)
+		Input.flush_buffered_events()
+	await process_frame
+	await process_frame
+	var focus := root.gui_get_focus_owner()
+	_expect(not active_player.is_open() and table.is_open() and is_instance_valid(focus) and table.is_ancestor_of(focus) and focus.is_visible_in_tree() and not (focus is BaseButton and focus.disabled), source + " restores enabled visible table focus after " + dismissal)
+	probe.append("%s %s actual focus=%s" % [source, dismissal, focus.get_path() if is_instance_valid(focus) else "none"])
+	await _capture("%s_first_use_%s" % [source, dismissal.to_lower()])
+
 func _finish(prefix: String = "") -> void:
 	DirAccess.remove_absolute(storage.directory.path_join("how-to.cfg"))
 	DirAccess.remove_absolute(storage.directory.path_join("trainer.json"))
@@ -164,7 +247,7 @@ func _finish(prefix: String = "") -> void:
 	quit(0 if failures == 0 else 1)
 
 func _wait_video(player: Control, seconds: float) -> void:
-	var deadline := Time.get_ticks_msec() + 12000
+	var deadline := Time.get_ticks_msec() + maxi(12000, ceili(seconds * 1000) + 3000)
 	while player.video.stream_position < seconds and Time.get_ticks_msec() < deadline:
 		await process_frame
 	_expect(player.video.stream_position >= seconds, "actual registered video reaches %s seconds" % seconds)
