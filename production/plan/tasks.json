@@ -1670,8 +1670,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 2 rooms and locations",
-   "status": "blocked",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M1-06",
     "M3-2A"
