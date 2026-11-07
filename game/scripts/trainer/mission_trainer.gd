@@ -66,11 +66,12 @@ func _ready() -> void:
 	panels = PANELS_SCENE.instantiate()
 	add_child(panels)
 	panels.set_accessibility(settings)
+	table.hint_player = panels.hint_player
 	panels.ending_retry_requested.connect(_retry)
 	panels.ending_continue_requested.connect(show_catalog)
 	panels.panel_opened.connect(func(_id): _set_page_enabled(false))
 	panels.panel_closed.connect(func(_id):
-		_set_page_enabled(true)
+		_set_page_enabled(not table.is_open() and not panels.hint_player.is_open())
 		call_deferred("_restore_page_focus"))
 	get_viewport().size_changed.connect(_scale)
 	show_catalog()
@@ -148,6 +149,7 @@ func open_decision() -> void:
 	_finish_page()
 	_revision = int(exercise.director().query().state_revision)
 	table.open(exercise, exercise.current_gate(), settings)
+	table.teach_first_use()
 
 func _decision_home() -> void:
 	if _page == "decision" and not table.is_open():
@@ -189,7 +191,7 @@ func _retry() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	var back_pad: bool = event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_B
 	if (event.is_action_pressed("ui_cancel") or back_pad) and not event.is_echo():
-		if table.is_open():
+		if table.is_open() or panels.hint_player.is_open():
 			return
 		if not panels.active_panel().is_empty():
 			panels.close_panel()

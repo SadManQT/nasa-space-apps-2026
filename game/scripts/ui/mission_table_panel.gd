@@ -27,6 +27,7 @@ var CYAN := UiDesign.colour("amara")
 var GREEN := UiDesign.colour("good")
 var RED := UiDesign.colour("danger")
 const MIN_TARGET := 44.0
+var hint_player: HintPlayer
 var _route: RefCounted
 var _target_id := ""
 var _settings := {"large_text": false, "timer_free": true}
@@ -206,9 +207,24 @@ func cancel_confirm() -> void:
 
 ## Reveals the next progressive hint.
 func reveal_hint() -> Dictionary:
-	var result: Dictionary = _table().next_hint()
-	_after_action(result, "Hint")
-	return result
+	if hint_player == null:
+		return {"accepted": false, "reason": "Hint reader is unavailable."}
+	hint_player.set_settings(_settings)
+	hint_player.request_hint("mission_table", HowToCard.lesson("mission_table"), _hint_target())
+	return {"accepted": true, "reason": "Hint opened."}
+
+func teach_first_use() -> void:
+	if hint_player != null:
+		hint_player.set_settings(_settings)
+		hint_player.show_how_to("mission_table", true, _hint_target())
+
+func _hint_target() -> Control:
+	for shift in _view.get("shifts", []):
+		var row := find_child("Row_%d_air_production" % int(shift), true, false) as Control
+		if row != null:
+			return row
+	return find_child("Preview", true, false) as Control
+
 
 ## Copies an unlocked worked plan into the uncommitted shifts.
 func use_worked_plan(plan_id: String) -> Dictionary:
@@ -253,7 +269,7 @@ func end_task() -> Dictionary:
 # --- Input -----------------------------------------------------------------
 
 func _input(event: InputEvent) -> void:
-	if not visible:
+	if not visible or (hint_player != null and hint_player.is_open()):
 		return
 	var commit_key: bool = event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_SPACE
 	var commit_pad: bool = event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_Y
@@ -273,7 +289,7 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _process(delta: float) -> void:
-	if not visible or _task_time_left <= 0.0:
+	if not visible or _task_time_left <= 0.0 or (hint_player != null and hint_player.is_open()):
 		return
 	var alarm: Dictionary = _table().alarm_state()
 	if String(alarm.get("state", "")) != TableScript.TASK_RUNNING or bool(alarm.get("assisted", true)):
@@ -327,7 +343,6 @@ func _render() -> void:
 			pin.pressed.connect(pin_plan_a)
 			more.add_child(pin)
 			_render_projection(more)
-			_render_hints(more)
 		_render_footer()
 	_layout()
 	_restore_focus()
@@ -518,22 +533,6 @@ func _render_task(column: VBoxContainer, current: Dictionary) -> void:
 			inner.add_child(end)
 	column.add_child(box)
 
-func _render_hints(column: VBoxContainer) -> void:
-	column.add_child(_wrap("Hints · they never change your ending", 13, CYAN))
-	for hint in _view.get("hints", []):
-		column.add_child(_wrap("%s · %s" % [String(hint.level).replace("H", "Hint ").replace("G", "Golden hint "), String(hint.text)], 13, IVORY))
-	var row := HFlowContainer.new()
-	row.add_theme_constant_override("h_separation", 6)
-	row.add_theme_constant_override("v_separation", 6)
-	column.add_child(row)
-	var hint := _button("Show next hint", "Hint")
-	hint.pressed.connect(func() -> void: reveal_hint())
-	row.add_child(hint)
-	for plan_id in _view.get("worked_plans", []):
-		var worked := _button("Use worked %s plan" % String(plan_id).capitalize(), "Worked_" + String(plan_id))
-		var id := String(plan_id)
-		worked.pressed.connect(func() -> void: use_worked_plan(id))
-		row.add_child(worked)
 
 func _render_forecast() -> Control:
 	var shifts: Array = _view.get("shifts", [])
@@ -628,6 +627,15 @@ func _render_footer() -> void:
 		_focus_name = "TableMore"
 		_render())
 	row.add_child(more)
+	var hint := _button("Hint", "Hint")
+	hint.pressed.connect(reveal_hint)
+	row.add_child(hint)
+	if hint_player != null:
+		var how_to := _button("How to", "TableHowTo")
+		how_to.pressed.connect(func():
+			hint_player.set_settings(_settings)
+			hint_player.show_how_to("mission_table", false, _hint_target()))
+		row.add_child(how_to)
 
 func _render_confirmation() -> void:
 	_body.add_child(_wrap("Lock in this plan?", 22, MUSTARD))
@@ -747,6 +755,8 @@ func _focus_later(target: Control) -> void:
 	_apply_focus.call_deferred(target)
 
 func _apply_focus(target: Control) -> void:
+	if hint_player != null and hint_player.is_open():
+		return
 	if is_instance_valid(target) and target.is_inside_tree() and not target.is_queued_for_deletion() and visible:
 		target.grab_focus()
 		if _guide_step() > 0 and String(target.name).begins_with("Choice_1_"):

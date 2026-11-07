@@ -322,6 +322,7 @@ func _test_campaign_integration() -> void:
 	campaign.hud.refresh_scene()
 	var opened := campaign.hud.open_mission_table("p02_shift1")
 	_check(opened and campaign.hud.mission_table.is_open() and bool(campaign.director.query().paused), "USE opens the Mission Table and pauses scenario time")
+	(campaign.hud.panels.hint_player.find_child("CloseHint", true, false) as Button).pressed.emit()
 	var table := campaign.hud.mission_table
 	table.share_card("kai")
 	table.share_card("amara")

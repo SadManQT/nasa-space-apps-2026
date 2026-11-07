@@ -1,0 +1,37 @@
+PASS same requested table nudge remains level one when text size changes
+PASS hint_1: NextHint has readable text and target size (148.0, 44.0)
+PASS hint_1: CloseHint has readable text and target size (121.0, 44.0)
+PASS hint_1: full nudge is visible
+PASS captured M1-64_hint_1.png
+PASS same requested table nudge remains level one when text size changes
+PASS hint_1_150: NextHint has readable text and target size (200.0, 44.0)
+PASS hint_1_150: CloseHint has readable text and target size (160.0, 44.0)
+PASS hint_1_150: full nudge is visible
+PASS captured M1-64_hint_1_150.png
+PASS captured M1-64_what_now.png
+PASS captured M1-64_what_now_150.png
+PASS what_now large=false preserves genuine requested level 1
+PASS world nudge preserves authored scene H1
+PASS world_nudge: NextHint has readable text and target size (148.0, 44.0)
+PASS world_nudge: CloseHint has readable text and target size (121.0, 44.0)
+PASS world_nudge: full nudge is visible
+PASS captured M1-64_world_nudge.png
+World nudge large=false marker visible=true target=Focus_commons_mission_table rect=[P: (542.5361, 211.9955), S: (96.0, 44.0)]
+PASS what_now large=true preserves genuine requested level 1
+PASS world nudge preserves authored scene H1
+PASS world_nudge_150: NextHint has readable text and target size (200.0, 44.0)
+PASS world_nudge_150: CloseHint has readable text and target size (160.0, 44.0)
+PASS world_nudge_150: full nudge is visible
+PASS captured M1-64_world_nudge_150.png
+World nudge large=true marker visible=true target=Focus_commons_mission_table rect=[P: (542.5361, 211.9955), S: (96.0, 44.0)]
+PASS captured M1-64_journal_hint_entry.png
+PASS captured M1-64_journal_hint_entry_150.png
+PASS journal large=false preserves genuine requested level 2
+PASS journal_shared_hint: NextHint has readable text and target size (148.0, 44.0)
+PASS journal_shared_hint: CloseHint has readable text and target size (121.0, 44.0)
+PASS captured M1-64_journal_shared_hint.png
+PASS journal large=true preserves genuine requested level 2
+PASS journal_shared_hint_150: NextHint has readable text and target size (200.0, 44.0)
+PASS journal_shared_hint_150: CloseHint has readable text and target size (160.0, 44.0)
+PASS captured M1-64_journal_shared_hint_150.png
+Screenshots: M1-64_hint_1.png, M1-64_hint_1_150.png, M1-64_what_now.png, M1-64_what_now_150.png, M1-64_world_nudge.png, M1-64_world_nudge_150.png, M1-64_journal_hint_entry.png, M1-64_journal_hint_entry_150.png, M1-64_journal_shared_hint.png, M1-64_journal_shared_hint_150.png

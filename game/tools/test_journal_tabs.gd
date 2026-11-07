@@ -222,13 +222,13 @@ func _test_panel() -> void:
 	await process_frame
 	_check(root.gui_get_focus_owner() != null and root.gui_get_focus_owner().name == "Tab_evidence", "ui_down moves focus to the next tab")
 	var reveal := panels._body.get_node_or_null("RevealHint") as Button
-	_check(reveal != null and reveal.text == "Show hint 1 of 3 · Nudge" and not _text(panels._body).contains("Check the instrument"), "What now? hides every hint until asked")
+	_check(reveal != null and not _text(panels._body).contains("Check the instrument"), "Journal hides every hint until asked")
+	reveal.grab_focus()
 	reveal.pressed.emit()
 	await process_frame
-	var body_text := _text(panels._body)
-	_check(body_text.contains("Hint 1 · Nudge") and body_text.contains("Check the instrument before trusting it.") and not body_text.contains("Use the two reference cups."), "one hint level opens per request")
-	reveal = panels._body.get_node_or_null("RevealHint") as Button
-	_check(reveal != null and reveal.text == "Show hint 2 of 3 · Direction" and root.gui_get_focus_owner() == reveal, "the next hint button keeps focus after a reveal")
+	_check(panels.hint_player.is_open() and panels.hint_player.level == 1 and _text(panels.hint_player).contains("Check the instrument before trusting it.") and not _text(panels.hint_player).contains("Dry must read 0"), "Journal preserves the authored nudge without canonical answer")
+	panels.hint_player.close()
+	_check(root.gui_get_focus_owner() == reveal, "closing shared hint restores the Journal request button")
 	panels.select_journal_tab("evidence")
 	await process_frame
 	var holder := panels._body.get_node_or_null("EvidenceColumns")

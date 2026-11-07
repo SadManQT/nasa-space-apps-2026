@@ -1,0 +1,19 @@
+PASS how_to_150: HowToClip has readable text and target size (808.0, 44.0)
+PASS how_to_150: CloseHint has readable text and target size (160.0, 44.0)
+PASS captured M1-64_how_to_150.png
+PASS reduced-motion still shows a decoded scientific caption frame, beyond the title card
+PASS reduced_motion_still_150: BackToHowTo has readable text and target size (174.0, 44.0)
+PASS reduced_motion_still_150: CloseHint has readable text and target size (160.0, 44.0)
+PASS reduced_motion_still_150: whole 16:9 picture fits the body
+PASS captured M1-64_reduced_motion_still_150.png
+PASS real reduced-motion texture and position stay identical for half a second
+Actual registered still: res://assets/explainers/science/sci_polar_sun.ogv; texture=(1280.0, 720.0); position=4.50315333333334; first_caption=4.4; hash=4203758741; paused=true
+PASS reduced_motion_still_150_held: BackToHowTo has readable text and target size (174.0, 44.0)
+PASS reduced_motion_still_150_held: CloseHint has readable text and target size (160.0, 44.0)
+PASS reduced_motion_still_150_held: whole 16:9 picture fits the body
+PASS captured M1-64_reduced_motion_still_150_held.png
+PASS reduced_motion_captions_off_150: BackToHowTo has readable text and target size (174.0, 44.0)
+PASS reduced_motion_captions_off_150: CloseHint has readable text and target size (160.0, 44.0)
+PASS reduced_motion_captions_off_150: whole 16:9 picture fits the body
+PASS captured M1-64_reduced_motion_captions_off_150.png
+Screenshots: M1-64_how_to_150.png, M1-64_reduced_motion_still_150.png, M1-64_reduced_motion_still_150_held.png, M1-64_reduced_motion_captions_off_150.png

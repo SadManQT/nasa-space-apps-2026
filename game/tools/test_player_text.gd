@@ -71,6 +71,7 @@ func _run() -> void:
 					if reveal != null:
 						reveal.pressed.emit()
 						await _walk_state(hud, "%s journal hint %d" % [scene_id, hint + 1])
+						hud.panels.hint_player.close()
 				for tab in ["evidence", "garden", "decisions"]:
 					hud.panels.select_journal_tab(tab)
 					await _walk_state(hud, "%s journal %s" % [scene_id, tab])
@@ -224,7 +225,12 @@ func _walk_table(campaign: Chapter1Campaign, id: String) -> void:
 	(table.find_child("TableMore", true, false) as Button).pressed.emit()
 	for hint in 3:
 		table.reveal_hint()
-	await _walk_state(campaign.hud, "Mission Table More and hints " + id)
+		await _walk_state(campaign.hud, "Mission Table hint %d %s" % [hint + 1, id])
+		campaign.hud.panels.hint_player.close()
+	campaign.hud.panels.hint_player.show_how_to("mission_table")
+	await _walk_state(campaign.hud, "Mission Table How to " + id)
+	campaign.hud.panels.hint_player.close()
+	await _walk_state(campaign.hud, "Mission Table More " + id)
 	table.preview()
 	table.request_commit()
 	await _walk_state(campaign.hud, "Mission Table confirmation " + id)
@@ -267,6 +273,9 @@ func _walk_failed_table() -> void:
 	campaign.route.perform("return_water")
 	campaign.hud.refresh_scene()
 	_check(campaign.hud.open_mission_table("p02_shifts6_7"), "a failing plan opens through the real campaign HUD")
+	if campaign.hud.panels.hint_player.is_open():
+		await _walk_state(campaign.hud, "Mission Table first-time How to")
+		campaign.hud.panels.hint_player.close()
 	var table := campaign.hud.mission_table
 	for card in table.view().cards:
 		if card.arrived:

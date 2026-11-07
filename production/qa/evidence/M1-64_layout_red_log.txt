@@ -1,0 +1,7 @@
+FAIL tools/test_hint_player.gd :: exit 1 :: HINT PLAYER RESULT: FAIL (71 checks, 4 failures)
+       ERROR: FAIL: request action displays a whole readable line large=false
+       ERROR: FAIL: one-line nudge is visible rather than pushed offscreen large=false
+       ERROR: FAIL: request action displays a whole readable line large=true
+       ERROR: FAIL: one-line nudge is visible rather than pushed offscreen large=true
+       HINT PLAYER RESULT: FAIL (71 checks, 4 failures)
+0/1 suites passed

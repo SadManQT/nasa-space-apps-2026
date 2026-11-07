@@ -70,6 +70,8 @@ var _forecast_source := ""
 var _pointer_preview := false
 var _focus_preview := false
 var _modal_button_states := {}
+var _modal_reading := false
+var _reading_was_paused := false
 var _dialogue_index := 0
 var _scene_id := ""
 ## Continue (title → saved checkpoint) opens "Previously at Aurora" once the
@@ -154,6 +156,10 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
 	mission_table.closed.connect(func(_target: String) -> void: _on_panel_closed("mission_table"))
 	mission_table.commit_requested.connect(_on_mission_table_commit)
+	mission_table.hint_player = panels.hint_player
+	panels.hint_player.highlight_changed.connect(func(active):
+		_marker.z_index = 210 if active else 0
+		_update_world_overlay())
 	_resume_pending = bool(runtime.incremental_loading) and not runtime.initial_snapshot.is_empty()
 	_refresh_query()
 	refresh_scene({})
@@ -372,6 +378,16 @@ func _build() -> void:
 	_what_now.add_child(_wn_where.get_parent())
 	_wn_hint = _icon_line("message", "")
 	_what_now.add_child(_wn_hint.get_parent())
+	var hint := UiDesign.button("Hint - one step at a time")
+	hint.name = "WhatNowHint"
+	hint.pressed.connect(func(): panels.request_hint())
+	_what_now.add_child(hint)
+	var how_to := UiDesign.button("How to")
+	how_to.name = "WhatNowHowTo"
+	how_to.pressed.connect(func():
+		panels.hint_player.set_settings(panels.accessibility_settings())
+		panels.hint_player.show_how_to(HowToCard.card_id(runtime.query())))
+	_what_now.add_child(how_to)
 	var jobs_title := UiDesign.label(String(_words.get("jobs_here", "Jobs here")), "caption", "muted")
 	_what_now.add_child(jobs_title)
 	_targets = VBoxContainer.new()
@@ -586,7 +602,7 @@ func _apply_goal() -> void:
 	_wn_why.text = _why.text
 	_wn_why.visible = _why.visible
 	_wn_hint.text = String(_goal_info.get("hint", ""))
-	_wn_hint.get_parent().visible = not _wn_hint.text.is_empty()
+	_wn_hint.get_parent().hide()
 	_update_where()
 	if changed and not _title.text.is_empty():
 		_pulse_goal()
@@ -683,6 +699,7 @@ func open_mission_table(target_id: String) -> bool:
 	if panels != null and not panels.active_panel().is_empty():
 		return false
 	mission_table.open(runtime.route, target_id, runtime.query().get("accessibility", {}))
+	mission_table.teach_first_use()
 	return true
 
 func _on_mission_table_commit(target_id: String, plan: Dictionary) -> void:
@@ -843,15 +860,20 @@ func apply_accessibility() -> void:
 		outpost.set_settings(settings)
 
 func _on_panel_opened(_panel_id: String) -> void:
+	if not _modal_reading:
+		_reading_was_paused = bool(runtime.query().get("paused", false))
+		_modal_reading = true
 	runtime.set_ui_paused(true)
 	_set_modal_buttons(true)
 	_set_chrome_hidden(true)
 	_ui_sound("SFX_UI_CONFIRM")
 
 func _on_panel_closed(_panel_id: String) -> void:
-	runtime.set_ui_paused(false)
-	_set_modal_buttons(false)
-	_set_chrome_hidden(false)
+	var reading := not panels.active_panel().is_empty() or mission_table.is_open() or panels.hint_player.is_open()
+	runtime.set_ui_paused(reading or _reading_was_paused)
+	_modal_reading = reading
+	_set_modal_buttons(reading)
+	_set_chrome_hidden(reading)
 	_render_caption()
 
 ## Hides the flat HUD while a panel or instrument has the screen (doc 25 §2.2).
@@ -887,7 +909,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	var key := (event as InputEventKey).physical_keycode
-	var free := panels != null and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open())
+	var free := panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open())
 	if key == KEY_ESCAPE and free:
 		panels.open_panel("pause")
 		get_viewport().set_input_as_handled()
@@ -924,7 +946,7 @@ func _process(delta: float) -> void:
 
 ## Projects the goal marker (with distance) and the prompt on the object in reach.
 func _update_world_overlay() -> void:
-	if _chrome_hidden or runtime.is_cutscene_active():
+	if (_chrome_hidden and not (panels.hint_player.is_open() and panels.hint_player.mode == "hint" and panels.hint_player.level == 1)) or runtime.is_cutscene_active():
 		_marker.visible = false
 		_prompt.visible = false
 		return
@@ -947,7 +969,7 @@ func _update_world_overlay() -> void:
 		_prompt.visible = true
 	else:
 		_prompt.visible = false
-	if _marker_node == null or not is_instance_valid(_marker_node) or (nearby_node != null and nearby_node == _marker_node):
+	if _marker_node == null or not is_instance_valid(_marker_node) or (nearby_node != null and nearby_node == _marker_node and not panels.hint_player.is_open()):
 		_marker.visible = false
 		return
 	var distance := _distance_to(_marker_node)

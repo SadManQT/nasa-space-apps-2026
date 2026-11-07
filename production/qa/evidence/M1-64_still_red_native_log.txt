@@ -1,0 +1,16 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 4060
+
+Godot_v4.7.2-stable_win64_console.exe : ERROR: reduced-motion still shows a decoded scientific caption frame, beyond
+the title card
+At line:2 char:1
++ & 'C:/Users/User/AppData/Local/Temp/opencode/godot-4.7.2/Godot_v4.7.2 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ERROR: reduced-... the title card:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tools/capture_hint_player.gd:175)
+       [1] _capture_still (res://tools/capture_hint_player.gd:125)
+M1-64 CAPTURE RESULT: FAIL (4 captures, 1 failures)

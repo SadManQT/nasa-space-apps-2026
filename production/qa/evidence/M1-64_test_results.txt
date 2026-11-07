@@ -1,0 +1,33 @@
+M1-64 focused verification, 7 November 2026. Each invocation used game/tools/run_tests.sh with the named filter. Final full integration remains pending.
+
+m164-final-hint_player.log
+ok   tools/test_hint_player.gd :: HINT PLAYER RESULT: PASS (85 checks, 0 failures)
+1/1 suites passed
+
+m164-final-journal_tabs.log
+ok   tools/test_journal_tabs.gd :: JOURNAL TABS RESULT: PASS (281 checks, 0 failures)
+1/1 suites passed
+
+m164-mission_trainer.log
+ok   tools/test_mission_trainer.gd :: MISSION TRAINER RESULT: PASS (936 checks, 0 failures)
+1/1 suites passed
+
+m164-m155.log
+ok   tools/test_m155_mission_table.gd :: M155 MISSION TABLE RESULT: PASS (109 checks, 0 failures)
+1/1 suites passed
+
+m164-final-player_text.log
+ok   tools/test_player_text.gd :: PLAYER TEXT RESULT: PASS (416 checks, 0 failures)
+1/1 suites passed
+
+m164-final-p02_mission_table.log
+ok   tools/test_p02_mission_table.gd :: P02 MISSION TABLE RESULT: PASS (78 checks, 0 failures)
+1/1 suites passed
+
+m164-final-campaign_flow.log
+ok   tools/test_chapter1_campaign_flow.gd :: CHAPTER 1 CAMPAIGN FLOW RESULT: PASS (448 checks, 0 failures)
+1/1 suites passed
+
+m164-final-chapter1_outcomes.log
+ok   tools/test_chapter1_outcomes.gd :: CHAPTER 1 OUTCOMES RESULT: PASS (134 checks, 0 failures)
+1/1 suites passed

@@ -95,7 +95,7 @@ var _scroll: ScrollContainer
 ## Journal presentation state (never saved): the open tab, which "What now?"
 ## hints the player asked for per scene, and a one-tap Growth Record view swap.
 var _journal_tab := "now"
-var _hint_levels := {}
+var hint_player: HintPlayer
 var _garden_layout_override := ""
 var _ending_page := "summary"
 var _replay_index := 0
@@ -121,6 +121,16 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_build()
+	hint_player = preload("res://scripts/ui/hint_player.gd").new()
+	add_child(hint_player)
+	hint_player.opened.connect(func():
+		_overlay.hide()
+		_panel.hide()
+		panel_opened.emit("hint"))
+	hint_player.closed.connect(func():
+		_overlay.visible = not _active_panel.is_empty()
+		_panel.visible = not _active_panel.is_empty()
+		panel_closed.emit("hint"))
 
 func bind_query(query: Dictionary) -> void:
 	_query = query.duplicate(true)
@@ -217,6 +227,9 @@ func select_journal_tab(tab: String) -> void:
 		_focus_journal_tab(tab)
 
 func close_panel() -> void:
+	if hint_player.is_open():
+		hint_player.close()
+		return
 	if _active_panel.is_empty():
 		return
 	var closed := _active_panel
@@ -687,6 +700,8 @@ func _is_panel_descendant(candidate: Control) -> bool:
 	return is_instance_valid(candidate) and candidate != self and is_ancestor_of(candidate)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if hint_player.is_open():
+		return
 	if event.is_action_pressed("ui_cancel") and not event.is_echo() and not _active_panel.is_empty():
 		close_panel()
 		get_viewport().set_input_as_handled()
@@ -842,38 +857,28 @@ func _render_now_tab(data: Dictionary) -> void:
 
 ## What now? (doc 22 §2.3): H1 nudge, H2 direction, H3 worked example, one
 ## level per request. Hints never change an ending, a star or a reward.
-func _render_hint_ladder(hints: Dictionary) -> void:
+func _render_hint_ladder(_hints: Dictionary) -> void:
 	_section("WHAT NOW?")
-	var levels: Array = hints.get("levels", []) if hints.get("levels", []) is Array else []
-	var labels: Array = hints.get("level_labels", []) if hints.get("level_labels", []) is Array else []
-	var scene_id := String(hints.get("scene_id", ""))
-	if levels.is_empty():
-		_body.add_child(_label("No hint is written for this step.", 14, MUTED))
-		return
-	var revealed := clampi(int(_hint_levels.get(scene_id, 0)), 0, levels.size())
-	for index in revealed:
-		var level: Dictionary = labels[index] if index < labels.size() and labels[index] is Dictionary else {"id": "H%d" % (index + 1), "label": ""}
-		_body.add_child(_card([
-			_label("Hint %d · %s" % [index + 1, String(level.get("label", "")).capitalize()], 12, CYAN),
-			_label(String(levels[index]), 15, IVORY),
-		]))
-	if revealed < levels.size():
-		var next_level: Dictionary = labels[revealed] if revealed < labels.size() and labels[revealed] is Dictionary else {"id": "H%d" % (revealed + 1), "label": ""}
-		var reveal := _button("Show hint %d of %d · %s" % [revealed + 1, levels.size(), String(next_level.get("label", "")).capitalize()])
-		reveal.name = "RevealHint"
-		reveal.pressed.connect(func() -> void:
-			_hint_levels[scene_id] = revealed + 1
-			_render_active_panel()
-			var again := _body.get_node_or_null("RevealHint") as Button
-			if again != null:
-				again.grab_focus()
-			else:
-				_focus_journal_tab(_journal_tab)
-		)
-		_body.add_child(reveal)
-	else:
-		_body.add_child(_label("All three hints are open.", 13, MUTED))
-	_body.add_child(_label("Hints never change an ending, a star or a reward.", 11, MUTED))
+	var reveal := _button("Hint - one step at a time")
+	reveal.name = "RevealHint"
+	reveal.pressed.connect(request_hint)
+	_body.add_child(reveal)
+	var how_to := _button("How to")
+	how_to.name = "JournalHowTo"
+	how_to.pressed.connect(func():
+		hint_player.set_settings(_settings)
+		hint_player.show_how_to(HowToCard.card_id(_query)))
+	_body.add_child(how_to)
+
+func request_hint() -> void:
+	hint_player.set_settings(_settings)
+	var scene_id := String(_query.get("scene_id", "current"))
+	var lesson := HowToCard.lesson(HowToCard.card_id(_query))
+	var hints: Dictionary = _query.get("journal_entries", {}).get("tabs", {}).get("now", {}).get("hints", CampaignKnowledge.hints_for_scene(scene_id))
+	var levels: Array = hints.get("levels", [])
+	if not levels.is_empty() and not String(levels[0]).strip_edges().is_empty():
+		lesson.nudge = String(levels[0])
+	hint_player.request_hint(scene_id, lesson)
 
 ## Observed / Inferred / Unknown (doc 22 T2). Three columns side by side; at
 ## 150% text the columns stack so every card reflows at full width.

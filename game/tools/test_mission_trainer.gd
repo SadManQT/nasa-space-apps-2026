@@ -167,6 +167,8 @@ func _test_ui() -> void:
 	_check(root.gui_get_focus_owner() != null and trainer._body.is_ancestor_of(root.gui_get_focus_owner()), "source close restores page keyboard focus")
 	(trainer.find_child("BeginTraining", true, false) as Button).pressed.emit()
 	_check(trainer.table.is_open() and trainer.table.target_id() == "p02_shift1", "brief opens the actual campaign puzzle panel")
+	_check(trainer.panels.hint_player.is_open() and trainer.panels.hint_player.mode == "how_to", "first shared table use teaches before choices")
+	trainer.panels.hint_player.close()
 	await _cancel(false)
 	await process_frame
 	_check(trainer._page == "decision" and trainer.exercise.director().query().current_shift == 0, "closing choices preserves attempt with resume")

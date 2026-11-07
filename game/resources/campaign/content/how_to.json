@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "about": "UI teaching only. Examples use hypothetical different numbers; never a canonical answer or autofill. Movement/look/use onboarding remains M1-18.",
+  "cards": {
+    "mission_table": {
+      "title": "How to plan a shift",
+      "purpose": "Try a plan safely; heat choices appear for dark shifts.",
+      "steps": [
+        "Choose the air and light rows shown for this shift.",
+        "Read the crew notes and press Try it to compare the forecast.",
+        "Lock in only when you are ready; confirm to use the plan."
+      ],
+      "clip": "sci_polar_sun",
+      "nudge": "Store air while sunlight would overflow.",
+      "relationship": "Daylight can charge a battery. In darkness, each device draws from that store; compare what remains after the shift.",
+      "example": "Different example - hypothetical, not your night plan: a store holds 9 battery units. A lamp needs 2 and a fan needs 1 for one shift. The total cost is 3; 9 minus 3 leaves 6. Repeat the subtraction for each later shift, then compare the remaining store with its reserve. Use your own forecast and crew notes for this night.",
+      "highlight": "air_production"
+    },
+    "probe": {
+      "title": "How to check a reading",
+      "purpose": "Use known references before trusting a new sample.",
+      "steps": [
+        "Read each reference label.",
+        "Compare the instrument with both references.",
+        "Recheck before measuring an unknown sample."
+      ],
+      "clip": "",
+      "nudge": "Amara: check the instrument before trusting it.",
+      "relationship": "Two known reference points show an offset and a span. Recheck both before using an unknown sample.",
+      "example": "Different example - hypothetical, not your probe settings: a practice meter reads 20 on an empty reference and 40 on a full reference. Halfway between them is 30. That is a method for comparing references, not a setting for Aurora's instrument. Read your own reference labels."
+    },
+    "evidence": {
+      "title": "How to compare evidence",
+      "purpose": "Connect the current goal with a clue you can check.",
+      "steps": [
+        "Read the goal and why it matters.",
+        "Inspect the marked object and its source.",
+        "Compare the observation with the question before choosing."
+      ],
+      "clip": "",
+      "nudge": "Compare the current goal with the marked object's evidence.",
+      "relationship": "An observation says what was measured. A claim explains it. Check whether the evidence supports the claim before making a decision.",
+      "example": "Different example - hypothetical: a practice lamp is lit for 3 of 9 checks. That observation alone does not prove why it went dark. Compare the power record with the same times before making a claim. Use the evidence from your current scene."
+    }
+  },
+  "scenes": {
+    "EX-CH01-S03": "probe",
+    "EX-CH01-S04": "probe",
+    "EX-CH01-S06": "mission_table",
+    "EX-CH01-S07": "mission_table",
+    "EX-CH01-S08": "mission_table",
+    "EX-CH01-S09": "mission_table",
+    "EX-CH01-S10": "mission_table",
+    "EX-CH01-S11": "mission_table",
+    "EX-CH01-S12": "mission_table"
+  }
+}

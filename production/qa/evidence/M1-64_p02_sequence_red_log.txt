@@ -1,0 +1,5 @@
+FAIL tools/test_p02_mission_table.gd :: exit 1 :: P02 MISSION TABLE RESULT: FAIL (78 checks, 2 failures)
+       ERROR: FAIL confirming resumes time and commits shift 1 through the physical operation
+       ERROR: FAIL the committed station equals the Mission Table preview (E17 A6 W2)
+       P02 MISSION TABLE RESULT: FAIL (78 checks, 2 failures)
+0/1 suites passed
