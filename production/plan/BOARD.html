@@ -236,11 +236,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-77">M1-77</a> Avoid missing fade metadata errors on the first campaign caption <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">5 in progress</span><span class="chip s-blocked">3 blocked</span><span class="chip s-todo">22 todo</span></div><div class="bar"><i style="width:6%"></i></div>
-<details open><summary>Working now (5)</summary><ul>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">4 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">22 todo</span></div><div class="bar"><i style="width:6%"></i></div>
+<details open><summary>Working now (4)</summary><ul>
 <li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by atik/codex on 2026-11-07</div></li>
 <li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by atik/codex on 2026-11-06</div></li>
-<li><a class="id" href="#M1-49">M1-49</a> Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by atik/codex on 2026-11-06</div></li>
 <li><a class="id" href="#M1-66">M1-66</a> P-01 runtime: validate player inputs and expose puzzle-panel route hooks <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by atik/codex on 2026-11-06</div></li>
 <li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by atik/codex on 2026-11-07</div></li>
 </ul></details>
@@ -251,8 +250,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-71">M3-71</a> Save slots, autosave and versioned save migrations at Steam quality <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-100">M3-100</a> Preload Alo&#x27;s and Tara&#x27;s dated stage models for the garden (M3-99 variants) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details open><summary>Blocked (3)</summary><ul>
+<details open><summary>Blocked (4)</summary><ul>
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Draft pre-release v0.1.0-preview.20261105 is on GitHub with both ZIPs (built from 57b837b; CI run 41970276437 green on Windows and macOS; production/qa/release_2026-11-05.md). Sad…</div></li>
+<li><a class="id" href="#M1-49">M1-49</a> Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Sadman M1-84 room/media hooks have landed and are preserved. Await Ramim M1-83 accessible Care Round capture/ghost panel and final command contract; then Atik wires dated garden v…</div></li>
 <li><a class="id" href="#M1-58">M1-58</a> Carrying payloads, and the shift-5 STACK as a real carry-and-place task <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Night shift parked the work on branch night/M1-58: could not land: rebase conflict: real carry-and-place task hint: Resolve all conflicts manually, mark them as resolved with hint…</div></li>
 <li><a class="id" href="#M1-69">M1-69</a> Expose safe message metadata updates without resetting puzzle checkpoints <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Requested Director method is in Sadman-owned core/, outside campaign-only task paths. Owner request M1-89 publishes bounded metadata/checkpoint contract; then Atik wires normal sa…</div></li>
 </ul></details>
@@ -4289,7 +4289,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges",
-   "status": "in_progress",
+   "status": "blocked",
    "deps": [
     "M1-47"
    ],
@@ -4305,9 +4305,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "From doc 24 NR-03. Uses existing assets, lines and numbers only.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-07",
    "prompt": "Problem: Alo's growth is told, not seen; Tara has no care of her own; the CH01-S02 -> S03 join has no cause; the four nameless mugs never get names.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.2 (Care Round loop), §7.1 beats 5-10, §2.9 (CH01 joins), §3.8 (dated stages); plant_service.gd apply_care() (receipts are keyed care@date); campaign_rules.json; execution/SYS_21_COMPANION_BEHAVIOUR.md.\nDo: (1) A Care Round interaction at the Alo glove ports and the Tara reference bay in EX-CH01-S04/S05: observe, measure (calibrated moisture and temperature side by side for both plants), photograph with a faint ghost of the previous photo (wide tolerance, Family Mode snaps), one small care task, record. A photo is apply_care(plant, \"photo\", date): one per plant per day. (2) In EX-CH01-S02 the inventory lamp on the dry-storage drawer blinks once in the background (reuse an existing UI tick until SFX_INVENTORY_LAMP_TICK exists); S03 opens on it. (3) At the end of EX-CH01-S12 the four mugs gain name decals (text labels on the existing mug prop are enough) and record_moment CH01-MUGS-NAMED. (4) Only if M1-51 is done: play EX-CH01-S01-L01..L04 in-engine at the mission table (L01-L02 on arrival, L03 at the route preview, L04 before commit), with captions, and point presentation_media.json at the re-edited CS-01; otherwise leave CS-01 unchanged and say so in the evidence.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). Tests: two photos on two dates appear for each plant; a second photo on the same date is refused; Tara and Alo both have entries before 25 Apr. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. Required shots: the Care Round with the ghost overlay for each plant, the S02 blink, the named mugs.",
-   "blocker": "Night shift parked the work on branch night/M1-49: ",
+   "blocker": "Sadman M1-84 room/media hooks have landed and are preserved. Await Ramim M1-83 accessible Care Round capture/ghost panel and final command contract; then Atik wires dated garden visits, real PlantService/Director photos, opening beats and mugs. See production/qa/perf/M1-49.md.",
    "owner": "atik/codex",
    "reserved_for": "atik",
    "effort": 3
