@@ -1555,7 +1555,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Seven-slide English deck (backup for the demo field)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M2-03"
@@ -1565,7 +1565,7 @@
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
+   "evidence": "production/video/deck.pdf: 7 English pages, 1280x720 (title + all six members; problem; challenge text mapped to the four P-02 demands; the game in real captures M1-55_shift1_forecast, M3-7R_S01_mission_table, M1-07_garden_alo_cutaway_bud, M3-3A_eva_front, M1-52_master_field_wind; NASA data at the core, 8 fixture-backed rows + GOES-13 explainer + 29 sources; learning evidence with M1-22 playtest marked Pending and '[metric from M1-22 when the playtest runs]'; impact and next steps). Source production/video/deck.html; export node production/video/deck_pdf.mjs (installed Chrome via playwright-core, free). All 7 pages rendered with PyMuPDF and checked by eye after two layout passes. No NASA logos. Log row + handbook §10.",
    "updated": "2026-11-07",
    "prompt": "Seven slides in English: title and team; problem; the challenge; the game (screens); NASA data at the core; learning evidence (playtest);\nimpact and next steps. Export PDF to production/video/deck.pdf.",
    "reserved_for": "sadman",

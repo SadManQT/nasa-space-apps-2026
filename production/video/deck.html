@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Last Light Academy · seven-slide deck</title>
+<!--
+  Source of production/video/deck.pdf (board M2-09). Edit this file, then re-export with the installed Chrome:
+    node production/video/deck_pdf.mjs      (playwright-core from production/tools/motion; run npm ci there once)
+  Images are the game's own captures in production/qa/evidence/ (Git LFS: git lfs pull --include="production/qa/evidence/*.png").
+  Every number on these slides comes from game/resources/data/nasa/ fixtures, game-design/08_PUZZLE_DESIGNS.md or the board evidence.
+-->
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  :root {
+    --bg: #0a0f1e; --panel: #131b2e; --line: #26324d; --text: #eceef0; --muted: #9aa4b5;
+    --gold: #f2c230; --cyan: #22b8cf; --orange: #f08a3c; --green: #6cc06b; --purple: #a98bf0; --red: #e46a6a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .slide { width: 1280px; height: 720px; position: relative; overflow: hidden; page-break-after: always; break-after: page; padding: 54px 64px 60px; background: radial-gradient(1200px 600px at 85% -10%, #18233f 0%, var(--bg) 60%); }
+  .slide:last-child { page-break-after: auto; break-after: auto; }
+  .kicker { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); font-weight: 600; }
+  h1 { font-size: 40px; line-height: 1.12; font-weight: 700; margin-top: 10px; letter-spacing: -.01em; }
+  h1 .gold { color: var(--gold); }
+  p, li { font-size: 19px; line-height: 1.45; }
+  .muted { color: var(--muted); }
+  .foot { position: absolute; left: 64px; right: 64px; bottom: 22px; display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); letter-spacing: .02em; }
+  .chip { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+  .chip.obs { color: #7fd88a; border-color: #2f5a3a; } .chip.cmp { color: var(--cyan); border-color: #1f4f5a; } .chip.trn { color: var(--gold); border-color: #5a4a1a; }
+  .chip.pending { color: var(--gold); border-color: var(--gold); }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  figure { margin: 0; }
+  figure img { display: block; width: 100%; border-radius: 10px; border: 1px solid var(--line); }
+  figcaption { font-size: 13.5px; color: var(--muted); margin-top: 6px; line-height: 1.35; }
+
+  /* 1 · title */
+  .s1 { padding: 0; background: #0a0f1e; }
+  .s1 .bg { position: absolute; inset: 0; background: url("../qa/evidence/M1-52_master_field_wind.png") center top / 120% auto no-repeat; }
+  .s1 .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,15,30,.94) 0%, rgba(10,15,30,.86) 42%, rgba(10,15,30,.15) 72%, rgba(10,15,30,0) 100%); }
+  .s1 .body { position: relative; padding: 58px 64px; width: 860px; }
+  .s1 .band { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: linear-gradient(0deg, rgba(10,15,30,.9) 0%, rgba(10,15,30,.55) 60%, rgba(10,15,30,0) 100%); }
+  .s1 h1 { font-size: 68px; margin-top: 14px; }
+  .s1 .tag { font-size: 23px; margin-top: 14px; color: #f6e7b0; line-height: 1.35; }
+  .s1 .team { margin-top: 34px; }
+  .s1 .team h2 { font-size: 20px; font-weight: 700; color: var(--gold); }
+  .s1 .team h2 span { color: var(--text); font-weight: 500; }
+  .s1 ul { list-style: none; margin-top: 12px; display: grid; grid-template-columns: 330px 420px; gap: 11px 26px; }
+  .s1 li { font-size: 16px; line-height: 1.3; }
+  .s1 li b { display: block; font-size: 17px; }
+  .s1 li span { color: var(--muted); font-size: 14.5px; }
+  .s1 .foot { color: #c9ced8; }
+
+  /* 2 · problem */
+  .two { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; margin-top: 24px; }
+  blockquote { border-left: 4px solid var(--gold); padding: 4px 0 4px 20px; font-size: 22px; line-height: 1.45; }
+  blockquote cite { display: block; font-style: normal; font-size: 14px; color: var(--muted); margin-top: 10px; }
+  .flow { display: grid; gap: 12px; }
+  .flow .card { padding: 14px 18px; }
+  .flow .src { font-size: 15px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .flow .row { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+  .pill { font-size: 16px; padding: 7px 13px; border-radius: 9px; background: #0e1526; border: 1px solid var(--line); }
+  .flow .card p { font-size: 16.5px; margin-top: 8px; line-height: 1.4; }
+
+  /* 3 · challenge */
+  .quote-xl { font-size: 25px; line-height: 1.42; margin-top: 22px; max-width: 1110px; }
+  .quote-xl mark { background: none; color: var(--gold); font-weight: 600; }
+  .four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 26px; }
+  .four .card { border-top: 4px solid var(--line); padding-top: 14px; }
+  .four h3 { font-size: 19px; } .four p { font-size: 16.5px; margin-top: 8px; line-height: 1.42; }
+  .loop { margin-top: 26px; font-size: 19px; line-height: 1.5; }
+  .loop b { color: var(--gold); }
+
+  /* 4 · game */
+  .game { display: grid; grid-template-columns: 1.45fr 1fr; gap: 22px; margin-top: 18px; }
+  .thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 14px; }
+  .crop { width: 100%; aspect-ratio: 16 / 9; border-radius: 10px; border: 1px solid var(--line); background-size: cover; background-repeat: no-repeat; }
+  .stats { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .stats div { font-size: 15px; padding: 6px 12px; border-radius: 9px; background: var(--panel); border: 1px solid var(--line); }
+  .stats b { color: var(--gold); }
+
+  /* 5 · data */
+  .data { display: grid; grid-template-columns: 1.32fr 1fr; gap: 26px; margin-top: 20px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); font-size: 14.5px; line-height: 1.35; }
+  th { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td:first-child { font-weight: 700; white-space: nowrap; }
+  td .n { color: var(--gold); font-weight: 600; }
+  .note { font-size: 14.5px; margin-top: 12px; line-height: 1.45; }
+
+  /* 6 · learning */
+  .learn { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 20px; }
+  .learn ul { margin: 8px 0 0 20px; } .learn li { font-size: 15.5px; line-height: 1.4; margin-top: 3px; }
+  .learn h3 { font-size: 18px; display: flex; gap: 10px; align-items: center; }
+  .placeholder { margin-top: 10px; font-size: 16px; color: var(--gold); border: 1px dashed var(--gold); border-radius: 9px; padding: 9px 12px; }
+
+  /* 7 · impact */
+  .impact { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 22px; }
+  .impact ul { margin: 10px 0 0 20px; } .impact li { font-size: 17.5px; line-height: 1.45; margin-top: 6px; }
+  .id { white-space: nowrap; }
+  .impact h3 { font-size: 19px; color: var(--gold); }
+  .links { margin-top: 26px; font-size: 16.5px; line-height: 1.6; }
+  .links b { color: var(--cyan); font-weight: 600; }
+  .ai { margin-top: 18px; font-size: 14px; color: var(--muted); line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<!-- 1 · Title and team -->
+<section class="slide s1">
+  <div class="bg"></div><div class="shade"></div><div class="band"></div>
+  <div class="body">
+    <div class="kicker">NASA Space Apps Challenge 2026 · Build a Junior Astronaut Mission Trainer</div>
+    <h1>Last Light Academy</h1>
+    <p class="tag">Run a Moon base. Keep the crew safe.<br>Help the first flower bloom on the Moon.</p>
+    <div class="team">
+      <h2>Team The Last BrainCell <span>· Dhaka, Bangladesh</span></h2>
+      <ul>
+        <li><b>Nafis Mohtasim Ramim</b><span>Team leader · UI/UX and player systems</span></li>
+        <li><b>Khandaker Shadman Sakib Siddiquee</b><span>Producer, art and media lead, integrator</span></li>
+        <li><b>Md. Asif Iqbal</b><span>Science and accessibility review</span></li>
+        <li><b>Abu Sayem Mohammed Tanvir</b><span>QA and playtest lead</span></li>
+        <li><b>Shahariar Rahman Shanto</b><span>Presenter</span></li>
+        <li><b>MD Atik Khan</b><span>Gameplay runtime, Moon systems and builds</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>An independent team project, not endorsed by NASA · background: the game's opening shot (Google Veo 3.1, AI, from our start frame)</span><span>1 / 7</span></div>
+</section>
+
+<!-- 2 · Problem -->
+<section class="slide">
+  <div class="kicker">The problem</div>
+  <h1>Real missions are trade-offs.<br><span class="gold">Most space lessons hide them.</span></h1>
+  <div class="two">
+    <div>
+      <blockquote>Space-themed STEM content often oversimplifies the engineering trade-offs that define a real mission or presents them at a level too complex to hold a young learner's attention. Few tools make those trade-offs both tangible and fun.
+        <cite>Challenge statement, Build a Junior Astronaut Mission Trainer (NASA Space Apps 2026)</cite></blockquote>
+      <p class="muted" style="margin-top:26px">A trade-off is only felt when it costs something you care about. So we gave the player one small, living thing to protect: Alo, a mustard plant, through one lunar night.</p>
+    </div>
+    <div class="flow">
+      <div class="card">
+        <div class="src" style="color:var(--orange)">One battery of sun-drops</div>
+        <div class="row"><span class="pill">Heat for the crew</span><span class="pill">Air maker</span><span class="pill">Grow lamp for Alo</span></div>
+        <p>The power that keeps the crew warm also makes their air.</p>
+      </div>
+      <div class="card">
+        <div class="src" style="color:var(--cyan)">One tank of water</div>
+        <div class="row"><span class="pill">Shelter wall against a solar storm</span><span class="pill">Alo's roots</span></div>
+        <p>The water that shields the crew from a solar storm is the water Alo drinks.</p>
+      </div>
+      <div class="card">
+        <div class="src" style="color:var(--red)">No help from Earth</div>
+        <p style="margin-top:6px">36 hours of dark, the Earth link cut in a training exercise, and a replay of a real solar storm. The crew must decide for themselves.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Last Light Academy · Team The Last BrainCell</span><span>2 / 7</span></div>
+</section>
+
+<!-- 3 · The challenge -->
+<section class="slide">
+  <div class="kicker">The challenge · theme "The Next Frontier"</div>
+  <h1>Build a Junior Astronaut Mission Trainer</h1>
+  <p class="quote-xl">"Your challenge is to design and build an interactive game or app that lets students <mark>run a lunar or Martian outpost</mark>, balancing competing demands like <mark>life support, radiation shielding, power, and food production</mark>, so they <mark>experience firsthand the decisions</mark> that determine whether a mission fails or succeeds."</p>
+  <div class="four">
+    <div class="card" style="border-top-color:var(--cyan)"><h3>Life support</h3><p>An air tank of 10 units. Four crew breathe 1 unit per 7.2-hour shift (NASA BVAD). Air at 0 stops the mission.</p></div>
+    <div class="card" style="border-top-color:var(--purple)"><h3>Radiation shielding</h3><p>A water wall of up to 6 units (20 g/cm² of water) plus supply crates. Storm dose must stay at 3 or less.</p></div>
+    <div class="card" style="border-top-color:var(--orange)"><h3>Power</h3><p>A battery of 20 sun-drops (≈ 10 kWh each). Daylight adds 8 per shift; the 36-hour night adds none.</p></div>
+    <div class="card" style="border-top-color:var(--green)"><h3>Food production</h3><p>The garden, Alo's health and 12 crew-days of rations. Light and warmth cost power; water is shared with the shield.</p></div>
+  </div>
+  <div class="loop"><b>Experience it firsthand:</b> plan the shift → <b>Try it</b> shows the real forecast → <b>Lock in</b> → the station lives with it → four endings, a decision replay and a science debrief.</div>
+  <div class="foot"><span>Numbers: Chapter 1 puzzle P-02 (game-design/08_PUZZLE_DESIGNS.md)</span><span>3 / 7</span></div>
+</section>
+
+<!-- 4 · The game -->
+<section class="slide">
+  <div class="kicker">The game · Godot 4.7 · Windows and macOS</div>
+  <h1>A 3D story game where <span class="gold">you</span> make every call</h1>
+  <div class="game">
+    <figure>
+      <img src="../qa/evidence/M1-55_shift1_forecast.png" alt="The Mission Table: shift 1 settings and the forecast bars">
+      <figcaption><b style="color:var(--text)">The Mission Table (P-02).</b> Set the air maker and garden light, press Try it, and see the real forecast: battery 14 → 15, air 6 → 7. Each cadet's note holds facts the others need.</figcaption>
+    </figure>
+    <div class="thumbs">
+      <figure><div class="crop" style="background-image:url('../qa/evidence/M3-7R_S01_mission_table.png'); background-position:center 60%"></div><figcaption>The crew in the Commons around the Mission Table</figcaption></figure>
+      <figure><div class="crop" style="background-image:url('../qa/evidence/M1-07_garden_alo_cutaway_bud.png'); background-position:center 40%"></div><figcaption>Alo, <i>Brassica rapa</i>: a real plant, never with a face</figcaption></figure>
+      <figure><div class="crop" style="background-image:url('../qa/evidence/M3-3A_eva_front.png'); background-size:118% auto; background-position:center 78%"></div><figcaption>Kai, Amara, Mei, Rafi and Commander Ferreira in their EVA suits</figcaption></figure>
+      <figure><div class="crop" style="background-image:url('../qa/evidence/M1-52_master_field_wind.png'); background-size:120% auto; background-position:center top"></div><figcaption>The opening: an Earth mustard field, then a hard cut to the silent Moon</figcaption></figure>
+    </div>
+  </div>
+  <div class="stats">
+    <div><b>8</b> chapters</div><div><b>32</b> missions</div><div><b>96</b> scenes</div><div><b>18</b> cutscenes</div><div><b>383</b> voice lines, all captioned</div><div><b>19</b> science explainers</div><div><b>16</b> puzzles with Data Cards</div>
+  </div>
+  <div class="foot"><span>All images are captures from the game (production/qa/evidence/)</span><span>4 / 7</span></div>
+</section>
+
+<!-- 5 · NASA data -->
+<section class="slide">
+  <div class="kicker">NASA data at the core</div>
+  <h1>Every key number has a source <span class="gold">the player can open</span></h1>
+  <div class="data">
+    <table>
+      <tr><th>In the game</th><th>Dataset</th><th>What it gives</th></tr>
+      <tr><td>Storm warning</td><td>NASA DONKI, 10 Sep 2017</td><td>X8.2 flare 15:35 UT; protons above 10 MeV at 16:45 UT → a <span class="n">70-minute</span> warning</td></tr>
+      <tr><td>Storm curve</td><td>NOAA GOES-13 proton flux</td><td>Above 10 MeV, peak <span class="n">1,493.5 pfu</span> on 11 Sep, 11:45 UT</td></tr>
+      <tr><td>Air</td><td>NASA BVAD Rev 2 (2022)</td><td><span class="n">0.895 kg</span> O₂ per person per day → 1 air unit = 1.07 kg</td></tr>
+      <tr><td>Power</td><td>NASA LaRC 10 kW south-pole array</td><td>8 sun-drops per shift = <span class="n">11.1 kW</span>, 56 % of two arrays</td></tr>
+      <tr><td>Shielding</td><td>NASA LaRC (Townsend 1988; Clowdsley 2021)</td><td><span class="n">20 g/cm²</span> of water = the full 6-unit wall</td></tr>
+      <tr><td>The night</td><td>LRO LOLA illumination (Mazarico 2011)</td><td>Longest darkness on Shackleton's rim ≈ 1.5 days → a <span class="n">36-hour</span> night</td></tr>
+      <tr><td>Ground and sky</td><td>LRO LOLA elevation; JPL Horizons</td><td>Aurora at <span class="n">89.44° S</span>, 1,959.5 m; Earth below the pole's horizon 15–28 Apr 2046</td></tr>
+      <tr><td>Storm at the Moon</td><td>LRO CRaTER dose, Jul 2012</td><td>0.57 → <span class="n">3.92 mGy/day</span> (×6.8) in Chapter 7's "what if"</td></tr>
+    </table>
+    <div>
+      <figure>
+        <img src="../qa/evidence/explainer_sci_proton_flux_chart_30s.png" alt="Explainer: the measured 2017 proton flux and the 70-minute warning">
+        <figcaption>An in-game explainer, drawn by code from the fixture numbers: GOES-13 protons and the DONKI flare time.</figcaption>
+      </figure>
+      <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap"><span class="chip obs">Observed</span><span class="chip cmp">Computed</span><span class="chip trn">Training assumption</span></div>
+      <p class="note"><b>29 sources ship offline</b>: 21 NASA and 8 partner (NOAA, USGS/IAU, ESA, ISRO, JAXA, CNSA, UW–Madison). Each Data Card names the dataset, what was measured, what the game computed, and the link. Numbers no dataset supports are tagged as gameplay values and listed publicly.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Every row is a JSON fixture in game/resources/data/nasa/ · full map: docs/SCIENCE_AND_DATA.md §B</span><span>5 / 7</span></div>
+</section>
+
+<!-- 6 · Learning evidence -->
+<section class="slide">
+  <div class="kicker">Learning evidence</div>
+  <h1>Built into every night. <span class="gold">Measured with learners next.</span></h1>
+  <div class="learn">
+    <figure>
+      <img src="../qa/evidence/M1-19_science_debrief_1.png" alt="The science debrief: predict, what happened, why, and a check question">
+      <figcaption>After the night: predict → what happened → why, then a check question. A replay shows each shift's choice, its forecast and what really happened.</figcaption>
+    </figure>
+    <div>
+      <div class="card">
+        <h3>Learner playtest <span class="chip pending">Pending · board M1-22</span></h3>
+        <ul>
+          <li>5 or more first-time players in the target age range, minors only with a guardian present</li>
+          <li>Time to the first objective</li>
+          <li>P-02 attempts and the ending reached</li>
+          <li>Can they explain the numbers? One predict and one explain question each</li>
+          <li>Where they got confused</li>
+        </ul>
+        <p class="placeholder">Results: [metric from M1-22 when the playtest runs]</p>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h3>What we can show today</h3>
+        <ul>
+          <li>58 automated test suites; the latest full run passed 57 (one loading-time gate is being fixed)</li>
+          <li>About 60 fps on an Apple M4 Mac in the timed rooms; other hardware not measured yet</li>
+          <li>Captions on and nothing timed by default; 1.5× text; reduced motion</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Debrief and decision replay: built and reviewed; final test gate pending (board M1-19, M1-68)</span><span>6 / 7</span></div>
+</section>
+
+<!-- 7 · Impact and next steps -->
+<section class="slide">
+  <div class="kicker">Impact and next steps</div>
+  <h1>A free mission trainer <span class="gold">any classroom can run</span></h1>
+  <div class="impact">
+    <div>
+      <h3>Who it reaches</h3>
+      <ul>
+        <li>Learners aged 10 to 15, in classrooms and at home</li>
+        <li>Runs offline on Windows and macOS, no account, no internet</li>
+        <li>Free and open source (Apache-2.0): schools can copy, translate and adapt it</li>
+        <li>One Chapter 1 night is designed to take about 20 minutes: it fits in a lesson</li>
+        <li>From Bangladesh to the Moon: Alo is <i>Brassica rapa</i>, the species of Bangladesh's mustard and of the Fast Plants grown in classrooms worldwide</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Next steps</h3>
+      <ul>
+        <li>Four-player Class mode: shared decisions, private role clues on one machine (in progress, <span class="id">M1-37</span>)</li>
+        <li>Interactive puzzle panels for Chapters 2–8 (<span class="id">M3-2P</span> to <span class="id">M3-8P</span>)</li>
+        <li>The learner playtest, then fixes from what players show us (<span class="id">M1-22</span>, <span class="id">M1-24</span>)</li>
+        <li>The release build for judging on 12 November (<span class="id">M3-93</span>)</li>
+        <li>Two registered sources still to process: the LROC illumination map and the 2017 CRaTER storm curve</li>
+      </ul>
+    </div>
+  </div>
+  <div class="links"><b>Code, builds and data:</b> github.com/SadManQT/nasa-space-apps-2026 &nbsp;·&nbsp; <b>Team:</b> spaceappschallenge.org/2026/find-a-team/the-last-braincell</div>
+  <p class="ai">Made with AI tools, every generation logged in production/AI_PROMPT_LOG.md: Claude Code (Anthropic), OpenAI Codex, Google Antigravity, Nano Banana Pro (Gemini 3 Pro Image), GPT Image 2.5, Topaz Image Upscale, Tripo AI, Meshy, ElevenLabs, Seedance 2.5, Google Veo 3.1. The story, dialogue, puzzles and numbers, science mapping and art direction are the team's.</p>
+  <div class="foot"><span>An independent team project, not endorsed by NASA · no NASA logos</span><span>7 / 7</span></div>
+</section>
+
+</body>
+</html>
