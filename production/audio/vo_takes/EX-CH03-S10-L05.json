@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH03-S10-L05",
+ "speaker": "Amara",
+ "text": "Forty-two.",
+ "delivery": "live",
+ "prompt": "[quietly, softly amazed, almost to herself] Forty-two.",
+ "chosen_take": 1,
+ "seconds": 1.53,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/aecdfacb9d7a4dabab7fc7dfc2bb1b6b/content_generation/ApAN2FTCz9q34ud3srCv/mivicbzeynUgVhDKODpa/content.mp3",
+   "heard": "42",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/aecdfacb9d7a4dabab7fc7dfc2bb1b6b/content_generation/1GGvnLKVudWxo2Jgk0cw/og3jsXX1UvqLJOHAUjJk/content.mp3",
+   "heard": "42",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH03-S10-L05.mp3",
+ "game_file": "game/assets/audio/voice/Amara/VO_EX-CH03-S10-L05.ogg"
+}

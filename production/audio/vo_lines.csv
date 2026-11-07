@@ -136,7 +136,7 @@ EX-CH03-S10-L01,EX-CH03-S10,Mei,live,,I thought keeping her alive meant longer.,
 EX-CH03-S10-L02,EX-CH03-S10,Amara,live,,It meant she could finish.,game/assets/audio/voice/Amara/VO_EX-CH03-S10-L02.ogg,"done (take 1, match 1.0)"
 EX-CH03-S10-L03,EX-CH03-S10,Kai,live,,Do you want us to wait?,game/assets/audio/voice/Kai/VO_EX-CH03-S10-L03.ogg,"done (take 1, match 1.0)"
 EX-CH03-S10-L04,EX-CH03-S10,Mei,live,,Stay. Then help me count.,game/assets/audio/voice/Mei/VO_EX-CH03-S10-L04.ogg,"done (take 1, match 0.909)"
-EX-CH03-S10-L05,EX-CH03-S10,Amara,live,"quietly, after three seconds of only the fans",Forty-two.,,text-only (M3-94R records it)
+EX-CH03-S10-L05,EX-CH03-S10,Amara,live,"quietly, after three seconds of only the fans",Forty-two.,game/assets/audio/voice/Amara/VO_EX-CH03-S10-L05.ogg,"done (take 1, match 1.0)"
 EX-CH03-S11-L01,EX-CH03-S11,Amara,live,,Parent line first: Alo times Tara.,game/assets/audio/voice/Amara/VO_EX-CH03-S11-L01.ogg,"done (take 1, match 1.0)"
 EX-CH03-S11-L02,EX-CH03-S11,Rafi,live,,Thirty founder seeds remain sealed.,game/assets/audio/voice/Rafi/VO_EX-CH03-S11-L02.ogg,"done (take 1, match 1.0)"
 EX-CH03-S11-L03,EX-CH03-S11,Kai,live,,May one plant be Very Important Scientific Plant?,game/assets/audio/voice/Kai/VO_EX-CH03-S11-L03.ogg,"done (take 1, match 1.0)"
@@ -377,8 +377,8 @@ EX-CH08-S10-L01,EX-CH08-S10,Noor,earth_link,first live Earth voice,"Hello, Auror
 EX-CH08-S10-L02,EX-CH08-S10,Mei,live,,We kept a place for you.,game/assets/audio/voice/Mei/VO_EX-CH08-S10-L02.ogg,"done (take 1, match 1.0)"
 EX-CH08-S10-L03,EX-CH08-S10,Ferreira,live,,You brought us the seeds.,game/assets/audio/voice/Ferreira/VO_EX-CH08-S10-L03.ogg,"done (take 1, match 1.0)"
 EX-CH08-S10-L04,EX-CH08-S10,Amara,live,,The garden has more than one gardener.,game/assets/audio/voice/Amara/VO_EX-CH08-S10-L04.ogg,"done (take 1, match 1.0)"
-EX-CH08-S10-L05,EX-CH08-S10,Rao,earth_link,live Earth link; the channel opens before Noor speaks,"Aurora, Earth. We hear you. Go ahead.",,text-only (M3-94R records it)
-EX-CH08-S10-L06,EX-CH08-S10,Noor,earth_link,live Earth link; after the 2.6-second round trip,You finished what we could not.,,text-only (M3-94R records it)
+EX-CH08-S10-L05,EX-CH08-S10,Rao,earth_link,live Earth link; the channel opens before Noor speaks,"Aurora, Earth. We hear you. Go ahead.",game/assets/audio/voice/Rao/VO_EX-CH08-S10-L05.ogg,"done (take 1, match 1.0)"
+EX-CH08-S10-L06,EX-CH08-S10,Noor,earth_link,live Earth link; after the 2.6-second round trip,You finished what we could not.,game/assets/audio/voice/Noor/VO_EX-CH08-S10-L06.ogg,"done (take 1, match 1.0)"
 EX-CH08-S11-L01,EX-CH08-S11,Rafi,live,,Return is part of the mission.,game/assets/audio/voice/Rafi/VO_EX-CH08-S11-L01.ogg,"done (take 1, match 1.0)"
 EX-CH08-S11-L02,EX-CH08-S11,Kai,live,,Same road. New timestamps.,game/assets/audio/voice/Kai/VO_EX-CH08-S11-L02.ogg,"done (take 1, match 1.0)"
 EX-CH08-S11-L03,EX-CH08-S11,Amara,radio,Aurora local radio,Three arrivals expected and checked.,game/assets/audio/voice/Amara/VO_EX-CH08-S11-L03.ogg,"done (take 1, match 1.0)"

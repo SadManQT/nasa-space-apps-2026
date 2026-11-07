@@ -8,9 +8,9 @@ does not run in Godot; the generated JSON files are the engine inputs.
 Line ids are stable keys, not a play order: a line added later keeps the next
 free suffix (EX-CH08-S10-L05 is spoken first in its scene).  The play order is
 the dialogue array order in story-data.json, which the catalog exposes as
-``order`` and ``dialogue_ids``.  Three lines approved on 5 Nov 2026 (M3-94)
-ship text-only until M3-94R records them: their ``voice_file`` is empty and the
-runtime falls back to captions, as for the two on-screen text lines.
+``order`` and ``dialogue_ids``.  The three lines approved on 5 Nov 2026 (M3-94)
+were recorded on 7 Nov (M3-94R) and are voiced like the rest; the two on-screen
+text lines keep an empty ``voice_file`` and the runtime shows them as captions.
 """
 
 from __future__ import annotations

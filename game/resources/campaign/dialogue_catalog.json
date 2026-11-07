@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "catalog_kind": "dialogue",
-  "content_revision": "campaign-content-1-dc4e79f2208c7126",
+  "content_revision": "campaign-content-1-ca4909115003c8e4",
   "source_hashes": {
     "story_data_sha256": "2db1f13eda8264db5b16d1dc51138a5397555bda33aa10953260173d2306729f",
     "scene_index_sha256": "8c0b8cda424d6bc6abb32ef64fd090c9afca53a0eedf16dee74e84dc4d51a934",
-    "vo_lines_sha256": "aa2bbc83148781d48802796101cc194bea528a78dd15199a1214d4045598b5f7"
+    "vo_lines_sha256": "8a4e62aef4f3164d01362fc5a9b000cdc63d3c02331480a569734eb2ba73cba9"
   },
   "counts": {
     "dialogue_lines": 388,
@@ -4205,7 +4205,7 @@
       "origin_label": "LOCAL LIVE",
       "text": "Forty-two.",
       "line": "Forty-two.",
-      "voice_file": "",
+      "voice_file": "game/assets/audio/voice/Amara/VO_EX-CH03-S10-L05.ogg",
       "knowledge_required": [],
       "knowledge_reveals": [],
       "acknowledgement_completes_predicate": false,
@@ -11321,7 +11321,7 @@
       "origin_label": "EARTH LINK",
       "text": "Aurora, Earth. We hear you. Go ahead.",
       "line": "Aurora, Earth. We hear you. Go ahead.",
-      "voice_file": "",
+      "voice_file": "game/assets/audio/voice/Rao/VO_EX-CH08-S10-L05.ogg",
       "knowledge_required": [
         "relay_local_verified",
         "relay_earth_verified"
@@ -11418,7 +11418,7 @@
       "origin_label": "EARTH LINK",
       "text": "You finished what we could not.",
       "line": "You finished what we could not.",
-      "voice_file": "",
+      "voice_file": "game/assets/audio/voice/Noor/VO_EX-CH08-S10-L06.ogg",
       "knowledge_required": [
         "noor_identity_revealed",
         "relay_local_verified",
@@ -11748,5 +11748,5 @@
     "grants_knowledge": [],
     "note": "Acknowledging a caption is not a physical operation or scene/mission completion."
   },
-  "catalog_hash": "1d5bb4f1a73f4870db5983fdaa9ddab764f5c22b92c9c13c94bfab40fe44e8b6"
+  "catalog_hash": "f2bad3c37b8f1ab2d5664ee5ca190010a927c85c12de1d803ce0cd26f82e0c1f"
 }

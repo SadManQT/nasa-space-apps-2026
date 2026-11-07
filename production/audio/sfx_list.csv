@@ -36,4 +36,4 @@ SFX_UI_SOFT_ERROR,Gentle error (never a humiliating buzzer),no,[try again],all,g
 SFX_UI_SHIFT_COMMIT,Committing a shift / plan,no,[plan committed],EX-CH01-S07,game/assets/audio/sfx/SFX_UI_SHIFT_COMMIT.ogg,done
 SFX_INVENTORY_LAMP_TICK,Soft relay tick as the dry-storage inventory lamp blinks,no,[inventory lamp],"EX-CH01-S02, EX-CH01-S03",game/assets/audio/sfx/SFX_INVENTORY_LAMP_TICK.ogg,done
 SFX_DHAKA_ROOFTOP_MORNING,"Dhaka rooftop at morning (Earth air): distant traffic, birds, a kettle",yes,[city morning],EX-CH08-S10,game/assets/audio/sfx/SFX_DHAKA_ROOFTOP_MORNING.ogg,done
-SFX_EARTH_FIELD_MORNING,"Earth field on a winter morning: breeze through flowering mustard, distant birds",no,[wind and birds],opening beat before CS-01 (M1-52),game/assets/audio/sfx/SFX_EARTH_FIELD_MORNING.ogg,done
+SFX_EARTH_FIELD_MORNING,"Earth field on a winter morning: breeze through flowering mustard, distant birds",no,[wind and birds],EX-CH01-S01,game/assets/audio/sfx/SFX_EARTH_FIELD_MORNING.ogg,done

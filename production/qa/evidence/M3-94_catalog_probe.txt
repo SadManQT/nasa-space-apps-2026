@@ -1,4 +1,4 @@
-campaign catalog campaign-content-1-dc4e79f2208c7126, dialogue_lines=388, valid=true []
+campaign catalog campaign-content-1-ca4909115003c8e4, dialogue_lines=388, valid=true []
 ok   frozen catalog validates
 
 EX-CH03-S10 with no flags:
@@ -26,9 +26,9 @@ EX-CH08-S10 with identity + both relay legs verified:
 ok   EX-CH03-S10-L05 is Amara's tally line, played fifth
 ok   EX-CH08-S10-L05 opens the scene on the Earth link and waits for both relay legs
 ok   EX-CH08-S10-L06 answers Mei fourth and is identity- and relay-gated
-ok   EX-CH03-S10-L05 ships text-only until M3-94R records it (captions fallback)
-ok   EX-CH08-S10-L05 ships text-only until M3-94R records it (captions fallback)
-ok   EX-CH08-S10-L06 ships text-only until M3-94R records it (captions fallback)
+ok   EX-CH03-S10-L05 is voiced (M3-94R, 7 Nov 2026)
+ok   EX-CH08-S10-L05 is voiced (M3-94R, 7 Nov 2026)
+ok   EX-CH08-S10-L06 is voiced (M3-94R, 7 Nov 2026)
 ok   EX-CH08-S10-L01 keeps its recorded voice file
 ok   EX-CH08-S10-L02 keeps its recorded voice file
 ok   EX-CH08-S10-L03 keeps its recorded voice file

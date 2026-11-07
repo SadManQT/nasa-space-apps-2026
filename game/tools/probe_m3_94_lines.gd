@@ -31,7 +31,8 @@ func _run() -> void:
 	var noor: Dictionary = service.dialogue_by_id("EX-CH08-S10-L06")
 	_expect(int(noor.get("order", 0)) == 4 and noor.get("knowledge_required", []) == ["noor_identity_revealed", "relay_local_verified", "relay_earth_verified"], "EX-CH08-S10-L06 answers Mei fourth and is identity- and relay-gated")
 	for line_id in ["EX-CH03-S10-L05", "EX-CH08-S10-L05", "EX-CH08-S10-L06"]:
-		_expect(String(service.dialogue_by_id(line_id).get("voice_file", "")).is_empty(), line_id + " ships text-only until M3-94R records it (captions fallback)")
+		var voice := String(service.dialogue_by_id(line_id).get("voice_file", ""))
+		_expect(voice.ends_with("VO_%s.ogg" % line_id) and FileAccess.file_exists("res://" + voice.trim_prefix("game/")), line_id + " is voiced (M3-94R, 7 Nov 2026)")
 	for line_id in ["EX-CH08-S10-L01", "EX-CH08-S10-L02", "EX-CH08-S10-L03", "EX-CH08-S10-L04"]:
 		_expect(ResourceLoader.exists("res://" + String(service.dialogue_by_id(line_id).get("voice_file", "")).trim_prefix("game/")), line_id + " keeps its recorded voice file")
 	_line("M3-94 PROBE RESULT: %s (%d failures)" % ["PASS" if _failures == 0 else "FAIL", _failures])

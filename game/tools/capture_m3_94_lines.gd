@@ -1,5 +1,5 @@
 ## Windowed M3-94 evidence: the three approved lines as a player sees them in the
-## campaign HUD caption bar (text-only until M3-94R records them).
+## campaign HUD caption bar (voiced since M3-94R, 7 Nov 2026).
 ## Godot --path game --windowed --script res://tools/capture_m3_94_lines.gd
 ## Writes production/qa/evidence/M3-94_*.png and M3-94_capture_probes.json. A Godot
 ## exit code alone is never accepted: the last line must read M3-94 CAPTURE RESULT: PASS.

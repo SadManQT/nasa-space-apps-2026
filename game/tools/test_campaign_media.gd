@@ -48,7 +48,7 @@ func _test_manifest(metadata: Dictionary) -> void:
 		if not ResourceLoader.exists("res://" + file.trim_prefix("game/")):
 			missing.append(line.id)
 	_check(voiced == int(audio.get("voice_files_present", -1)) and missing.is_empty(), "every catalog voice file the manifest counts (%d) opens; missing %s" % [voiced, missing])
-	_check(audio.get("music_runtime_files", []).size() == 16 and audio.get("sfx_runtime_files", []).size() == 37, "16 music files and 37 effects are listed (M3-99 added the lamp tick and the Dhaka rooftop)")
+	_check(audio.get("music_runtime_files", []).size() == 16 and audio.get("sfx_runtime_files", []).size() == 38, "16 music files and 38 effects are listed (M3-99 added the lamp tick and the Dhaka rooftop, M1-52 the Earth field)")
 	var runtime := CampaignAudioRuntime.new(content, metadata)
 	_check(runtime.music_for_scene("EX-CH01-S01").get("cue_id", "") == "CUE-01", "CUE-01 opens the campaign")
 	_check(runtime.music_for_scene("EX-CH08-S05").get("cue_id", "") == "CUE-03", "a scene named on its own (CUE-03 at EX-CH08-S05) beats a range")

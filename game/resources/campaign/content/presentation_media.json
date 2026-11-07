@@ -758,8 +758,8 @@
       "EX-CH07-S09": "mid"
     },
     "voice_lines_total": 388,
-    "voice_lines_with_file": 383,
-    "voice_files_present": 383,
+    "voice_lines_with_file": 386,
+    "voice_files_present": 386,
     "music_runtime_files": [
       "res://assets/audio/music/MUS_CUE-01_HomeNotYet.ogg",
       "res://assets/audio/music/MUS_CUE-02_SmallWork.ogg",
@@ -815,7 +815,8 @@
       "res://assets/audio/sfx/SFX_UI_SOFT_ERROR.ogg",
       "res://assets/audio/sfx/SFX_UI_SHIFT_COMMIT.ogg",
       "res://assets/audio/sfx/SFX_INVENTORY_LAMP_TICK.ogg",
-      "res://assets/audio/sfx/SFX_DHAKA_ROOFTOP_MORNING.ogg"
+      "res://assets/audio/sfx/SFX_DHAKA_ROOFTOP_MORNING.ogg",
+      "res://assets/audio/sfx/SFX_EARTH_FIELD_MORNING.ogg"
     ],
     "music_cues": [
       {
@@ -1431,6 +1432,17 @@
         "bus": "SFX",
         "first_scenes": [
           "EX-CH08-S10"
+        ]
+      },
+      {
+        "id": "SFX_EARTH_FIELD_MORNING",
+        "runtime_path": "res://assets/audio/sfx/SFX_EARTH_FIELD_MORNING.ogg",
+        "media_present": true,
+        "loop": false,
+        "caption": "[wind and birds]",
+        "bus": "SFX",
+        "first_scenes": [
+          "EX-CH01-S01"
         ]
       }
     ]

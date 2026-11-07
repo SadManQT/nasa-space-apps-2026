@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S10-L06",
+ "speaker": "Noor",
+ "text": "You finished what we could not.",
+ "delivery": "earth_link",
+ "prompt": "[moved, gentle, quietly grateful, unhurried] You finished what we could not.",
+ "chosen_take": 1,
+ "seconds": 2.42,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/aecdfacb9d7a4dabab7fc7dfc2bb1b6b/content_generation/SVkB8yPGZV4XZX1pFxq1/4hDIUKceoqWUm90GDE7Q/content.mp3",
+   "heard": "You finished what we could not.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/aecdfacb9d7a4dabab7fc7dfc2bb1b6b/content_generation/nfO5oo4ByiStnEGmc6wk/vGBNo3d6Fn0KSXSDUcSY/content.mp3",
+   "heard": "You finished what we could not.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S10-L06.mp3",
+ "game_file": "game/assets/audio/voice/Noor/VO_EX-CH08-S10-L06.ogg"
+}

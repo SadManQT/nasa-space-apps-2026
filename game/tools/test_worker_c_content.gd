@@ -80,7 +80,7 @@ func _test_dialogue_and_knowledge(content: Dictionary) -> void:
 	_check(live_before_relay.size() == 3 and live_after_relay.size() == 6, "first live Noor voice, her reply and Rao's channel wait for both relay flags")
 	var relay_order: Array = live_after_relay.map(func(line) -> String: return String(line.get("id", "")))
 	_check(relay_order == ["EX-CH08-S10-L05", "EX-CH08-S10-L01", "EX-CH08-S10-L02", "EX-CH08-S10-L06", "EX-CH08-S10-L03", "EX-CH08-S10-L04"], "Rao opens the channel before Noor speaks and Noor answers Mei before Ferreira (stable ids, narrative order)")
-	_check(String(service.dialogue_by_id("EX-CH03-S10-L05").get("text", "")) == "Forty-two." and String(service.dialogue_by_id("EX-CH03-S10-L05").get("voice_file", "")).is_empty(), "the approved tally line is in the catalog and ships text-only until M3-94R records it")
+	_check(String(service.dialogue_by_id("EX-CH03-S10-L05").get("text", "")) == "Forty-two." and String(service.dialogue_by_id("EX-CH03-S10-L05").get("voice_file", "")) == "game/assets/audio/voice/Amara/VO_EX-CH03-S10-L05.ogg", "the approved tally line is in the catalog and voiced (M3-94R)")
 	var caption := service.caption_for_line("EX-CH08-S10-L01", ["noor_identity_revealed", "relay_local_verified", "relay_earth_verified"])
 	_check(String(caption.get("text", "")) == "Hello, Aurora. This is Noor.", "caption service preserves the exact first live line")
 	var ack := service.acknowledgement_command("EX-CH01-S01-L01", 0, "EX-M0101", "EX-CH01-S01")

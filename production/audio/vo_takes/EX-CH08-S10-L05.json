@@ -1,0 +1,25 @@
+{
+ "line_id": "EX-CH08-S10-L05",
+ "speaker": "Rao",
+ "text": "Aurora, Earth. We hear you. Go ahead.",
+ "delivery": "earth_link",
+ "prompt": "[warm, calm authority, clear and steady over a radio link] Aurora, Earth. We hear you. Go ahead.",
+ "chosen_take": 1,
+ "seconds": 3.19,
+ "takes": [
+  {
+   "take": 1,
+   "source": "https://elevenlabsusercontent.com/database/workspace/aecdfacb9d7a4dabab7fc7dfc2bb1b6b/content_generation/iniq2AudZES1m91ln87d/8Do4BNi9Dud3GDDf0FiK/content.mp3",
+   "heard": "Aurora Earth, we hear you. Go ahead.",
+   "score": 1.0
+  },
+  {
+   "take": 2,
+   "source": "https://elevenlabsusercontent.com/database/workspace/aecdfacb9d7a4dabab7fc7dfc2bb1b6b/content_generation/jIVC8Rzrdp4JBxYMM1n4/RbTBCG199fEntDFkmztM/content.mp3",
+   "heard": "Aurora Earth, we hear you. Go ahead.",
+   "score": 1.0
+  }
+ ],
+ "dry_master": "production/audio/vo_masters/VO_EX-CH08-S10-L05.mp3",
+ "game_file": "game/assets/audio/voice/Rao/VO_EX-CH08-S10-L05.ogg"
+}
