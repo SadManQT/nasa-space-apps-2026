@@ -214,6 +214,70 @@ static func screen_surfaces(node: Node3D) -> Array[Dictionary]:
 				out.append({"mesh": instance_mesh, "surface": surface})
 	return out
 
+## M3-4R: the plane of one named live-UI slot ("Screen", "Screen2", "Label"...) of a built piece's LOD0, in the piece's
+## local space: {"centre" (on its outer face), "normal" (out of the face), "right", "up" (in the face, up as near +Y as
+## the face allows), "size": Vector2 (along right, up)}, or {} when the piece has no such slot. A slot modelled as a thin
+## plate keeps only its front faces (pieces face -Z), so its back and edges do not cancel the normal. Rooms lay their
+## live words on it.
+static func surface_frame(node: Node3D, material_name: String) -> Dictionary:
+	var group := node.get_node_or_null("LOD0")
+	if group == null:
+		return {}
+	var triangles: Array = []
+	for mesh in group.find_children("*", "MeshInstance3D", true, false):
+		var instance_mesh := mesh as MeshInstance3D
+		if instance_mesh.mesh == null:
+			continue
+		var xf := node.global_transform.affine_inverse() * instance_mesh.global_transform if node.is_inside_tree() else _local_transform(instance_mesh, node)
+		for surface in instance_mesh.mesh.get_surface_count():
+			var material := instance_mesh.get_active_material(surface)
+			if material == null or material.resource_name != material_name:
+				continue
+			var arrays := instance_mesh.mesh.surface_get_arrays(surface)
+			var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+			var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX] is PackedInt32Array else PackedInt32Array()
+			var count := indices.size() if not indices.is_empty() else vertices.size()
+			for t in count / 3:
+				var a := xf * vertices[indices[t * 3] if not indices.is_empty() else t * 3]
+				var b := xf * vertices[indices[t * 3 + 1] if not indices.is_empty() else t * 3 + 1]
+				var c := xf * vertices[indices[t * 3 + 2] if not indices.is_empty() else t * 3 + 2]
+				# Godot's front faces wind clockwise, so (c - a) x (b - a) points out of the visible side
+				var area := (c - a).cross(b - a)
+				if area.length() > 0.0000001:
+					triangles.append([a, b, c, area])
+	var front := triangles.filter(func(t): return (t[3] as Vector3).normalized().z < -0.2)
+	if not front.is_empty():
+		triangles = front
+	var normal := Vector3.ZERO
+	var points := PackedVector3Array()
+	for t in triangles:
+		normal += t[3]
+		points.append(t[0])
+		points.append(t[1])
+		points.append(t[2])
+	if points.is_empty() or normal.length() < 0.000001:
+		return {}
+	normal = normal.normalized()
+	var right := Vector3.UP.cross(normal)
+	right = right.normalized() if right.length() > 0.1 else Vector3.RIGHT
+	var up := normal.cross(right).normalized()
+	var low := Vector2(INF, INF)
+	var high := Vector2(-INF, -INF)
+	var mid := Vector3.ZERO
+	for p in points:
+		mid += p
+	mid /= points.size()
+	for p in points:
+		var d := p - mid
+		var uv := Vector2(d.dot(right), d.dot(up))
+		low = Vector2(minf(low.x, uv.x), minf(low.y, uv.y))
+		high = Vector2(maxf(high.x, uv.x), maxf(high.y, uv.y))
+	var centre := mid + right * (low.x + high.x) * 0.5 + up * (low.y + high.y) * 0.5
+	var depth := -INF
+	for p in points:
+		depth = maxf(depth, (p - centre).dot(normal))
+	return {"centre": centre + normal * depth, "normal": normal, "right": right, "up": up, "size": high - low}
+
 ## Axis-aligned bounds of a built piece's visual meshes, in the piece's local space.
 static func bounds(node: Node3D, lod: int = 0) -> AABB:
 	var box := AABB()

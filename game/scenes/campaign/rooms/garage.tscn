@@ -1,0 +1,52 @@
+[gd_scene load_steps=38 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/campaign_room.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://scenes/campaign/rooms/habitat_kit_preload.tscn" id="2_kit"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_BayDoor_LOD0.glb" id="3_g3"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_BayDoor_LOD1.glb" id="4_g4"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_BayEndWall_LOD0.glb" id="5_g5"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_BayEndWall_LOD1.glb" id="6_g6"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_BayFrame_LOD0.glb" id="7_g7"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_BayFrame_LOD1.glb" id="8_g8"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_BayMarkings_LOD0.glb" id="9_g9"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_BayMarkings_LOD1.glb" id="10_g10"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_BayWindow_LOD0.glb" id="11_g11"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_BayWindow_LOD1.glb" id="12_g12"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_Berm_LOD0.glb" id="13_g13"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_Berm_LOD1.glb" id="14_g14"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_CargoLock_LOD0.glb" id="15_g15"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_CargoLock_LOD1.glb" id="16_g16"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_CargoRack_LOD0.glb" id="17_g17"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_CargoRack_LOD1.glb" id="18_g18"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_DepartureBoard_LOD0.glb" id="19_g19"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_DepartureBoard_LOD1.glb" id="20_g20"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_DockingPort_LOD0.glb" id="21_g21"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_DockingPort_LOD1.glb" id="22_g22"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_EVAPorch_LOD0.glb" id="23_g23"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_EVAPorch_LOD1.glb" id="24_g24"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_HandoverConsole_LOD0.glb" id="25_g25"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_HandoverConsole_LOD1.glb" id="26_g26"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_Plinth_LOD0.glb" id="27_g27"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_Plinth_LOD1.glb" id="28_g28"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_ReliefLocker_LOD0.glb" id="29_g29"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_ReliefLocker_LOD1.glb" id="30_g30"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_RouteBoard_LOD0.glb" id="31_g31"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_RouteBoard_LOD1.glb" id="32_g32"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_SuitSealPanel_LOD0.glb" id="33_g33"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_SuitSealPanel_LOD1.glb" id="34_g34"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_Umbilical_LOD0.glb" id="35_g35"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Garage/EN_Garage_Umbilical_LOD1.glb" id="36_g36"]
+[ext_resource type="PackedScene" path="res://assets/vehicles/VH_Rover/VH_Rover.glb" id="37_g37"]
+
+; LOC-08 (M3-105). The approved M3-4A EN_Garage (12 x 9 m: the pressurised ready room on its plinth, the vacuum
+; rover bay with the EVA porch, VH_Rover docked at the tunnel) is the room shell: resources/campaign/rooms/LOC-08.json
+; names it ("shell": "garage") and authors everything else. HabitatKitPreload and GaragePreload make the kit, garage
+; and rover GLBs dependencies of this scene, so a threaded room load decodes them off the main thread.
+[node name="GarageRoom" type="Node3D"]
+script = ExtResource("1_room")
+room_id = "LOC-08"
+
+[node name="HabitatKitPreload" parent="." instance=ExtResource("2_kit")]
+
+[node name="GaragePreload" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("EN_Garage_BayDoor_LOD0", "EN_Garage_BayDoor_LOD1", "EN_Garage_BayEndWall_LOD0", "EN_Garage_BayEndWall_LOD1", "EN_Garage_BayFrame_LOD0", "EN_Garage_BayFrame_LOD1", "EN_Garage_BayMarkings_LOD0", "EN_Garage_BayMarkings_LOD1", "EN_Garage_BayWindow_LOD0", "EN_Garage_BayWindow_LOD1", "EN_Garage_Berm_LOD0", "EN_Garage_Berm_LOD1", "EN_Garage_CargoLock_LOD0", "EN_Garage_CargoLock_LOD1", "EN_Garage_CargoRack_LOD0", "EN_Garage_CargoRack_LOD1", "EN_Garage_DepartureBoard_LOD0", "EN_Garage_DepartureBoard_LOD1", "EN_Garage_DockingPort_LOD0", "EN_Garage_DockingPort_LOD1", "EN_Garage_EVAPorch_LOD0", "EN_Garage_EVAPorch_LOD1", "EN_Garage_HandoverConsole_LOD0", "EN_Garage_HandoverConsole_LOD1", "EN_Garage_Plinth_LOD0", "EN_Garage_Plinth_LOD1", "EN_Garage_ReliefLocker_LOD0", "EN_Garage_ReliefLocker_LOD1", "EN_Garage_RouteBoard_LOD0", "EN_Garage_RouteBoard_LOD1", "EN_Garage_SuitSealPanel_LOD0", "EN_Garage_SuitSealPanel_LOD1", "EN_Garage_Umbilical_LOD0", "EN_Garage_Umbilical_LOD1", "VH_Rover"), [ExtResource("3_g3"), ExtResource("4_g4"), ExtResource("5_g5"), ExtResource("6_g6"), ExtResource("7_g7"), ExtResource("8_g8"), ExtResource("9_g9"), ExtResource("10_g10"), ExtResource("11_g11"), ExtResource("12_g12"), ExtResource("13_g13"), ExtResource("14_g14"), ExtResource("15_g15"), ExtResource("16_g16"), ExtResource("17_g17"), ExtResource("18_g18"), ExtResource("19_g19"), ExtResource("20_g20"), ExtResource("21_g21"), ExtResource("22_g22"), ExtResource("23_g23"), ExtResource("24_g24"), ExtResource("25_g25"), ExtResource("26_g26"), ExtResource("27_g27"), ExtResource("28_g28"), ExtResource("29_g29"), ExtResource("30_g30"), ExtResource("31_g31"), ExtResource("32_g32"), ExtResource("33_g33"), ExtResource("34_g34"), ExtResource("35_g35"), ExtResource("36_g36"), ExtResource("37_g37")]]

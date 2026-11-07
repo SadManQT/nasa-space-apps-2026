@@ -16,14 +16,15 @@ const Roster = preload("res://scripts/companions/companion_roster.gd")
 const Crew = preload("res://scripts/world/campaign_crew.gd")
 const C7 = preload("res://assets/props/chapter7_assets.gd")
 const Player = preload("res://scenes/player/player.tscn")
-const SCENE_FILES := {"LOC-01": "commons", "LOC-02": "service_rooms", "LOC-03": "garden", "LOC-04": "safe_room"}
-const PLAYER_ANCHOR := {"LOC-01": "commons_player", "LOC-02": "service_player", "LOC-03": "garden_player", "LOC-04": "safe_player"}
+const SCENE_FILES := {"LOC-01": "commons", "LOC-02": "service_rooms", "LOC-03": "garden", "LOC-04": "safe_room", "LOC-08": "garage"}
+const PLAYER_ANCHOR := {"LOC-01": "commons_player", "LOC-02": "service_player", "LOC-03": "garden_player", "LOC-04": "safe_player", "LOC-08": "rover_player"}
 ## STORY_FULL.md / CHAPTER_07: the warning at the Mission Table (S01); the Safe Room S02-S08; the Commons network
-## diagnostic and care desk (S09-S10); the fabrication bench and route simulator (S11); departure boards and loadout (S12).
+## diagnostic and care desk (S09-S10); the fabrication bench and route simulator (S11); the garage's two destination
+## boards and the rover loadout (S12; M3-105 moved it from the Commons main display to EN_Garage, decision 7).
 const EXPECTED_ROOM := {
 	"EX-CH07-S01": "LOC-01", "EX-CH07-S02": "LOC-04", "EX-CH07-S03": "LOC-04", "EX-CH07-S04": "LOC-04",
 	"EX-CH07-S05": "LOC-04", "EX-CH07-S06": "LOC-04", "EX-CH07-S07": "LOC-04", "EX-CH07-S08": "LOC-04",
-	"EX-CH07-S09": "LOC-01", "EX-CH07-S10": "LOC-01", "EX-CH07-S11": "LOC-02", "EX-CH07-S12": "LOC-01",
+	"EX-CH07-S09": "LOC-01", "EX-CH07-S10": "LOC-01", "EX-CH07-S11": "LOC-02", "EX-CH07-S12": "LOC-08",
 }
 ## Canon lines quoted word for word on staged words (exempt from the player-text patterns).
 const CANON_LINES := ["EX-CH07-S01-L02", "EX-CH07-S07-L01", "EX-CH06-S09-L01"]
@@ -259,9 +260,11 @@ func _check_staged_text(room: CampaignRoom, map: RID, scene_id: String) -> void:
 		var at: Vector3 = label.global_position
 		at.y = 0
 		var front := 99.0
-		for reach in [0.8, 1.2, 1.6, 2.0]:
-			var probe: Vector3 = at + facing * reach
-			front = minf(front, NavigationServer3D.map_get_closest_point(map, probe).distance_to(probe))
+		# within a 50-degree cone, as in the Chapter 2 and 4 rooms: the garage's supply ledger is read at an angle
+		for angle in [0.0, -25.0, 25.0, -50.0, 50.0]:
+			for reach in [0.8, 1.2, 1.6, 2.0]:
+				var probe: Vector3 = at + Basis(Vector3.UP, deg_to_rad(angle)) * facing * reach
+				front = minf(front, NavigationServer3D.map_get_closest_point(map, probe).distance_to(probe))
 		_check(front < 0.35, scene_id + " staged label reads from walkable deck: " + String(label.text).left(40))
 		_check(not label.double_sided, scene_id + " staged label is single-sided: " + String(label.text).left(40))
 		_check(not String(label.text).contains("{line}"), scene_id + " sign template is filled: " + String(label.name))
@@ -330,16 +333,17 @@ func _check_bridges(room: CampaignRoom, scene_id: String) -> void:
 				_check(display.contains("THREE DATED MAINTENANCE GATES"), scene_id + " the stable care board is on the main display")
 				var case := staged.get_node("founder_case") as Node3D
 				_check(C7.count_seeds(case) == 30 and is_equal_approx(_part(case, "Latch").rotation_degrees.x, 0.0), scene_id + " the founder case is checked latched, 15 + 15, without opening")
-			12:
-				_check(_text(staged, "board_rover").contains("FERREIRA\nKAI\nRAFI") and _text(staged, "board_aurora").contains("MEI\nAMARA"), scene_id + " five names face two destination boards")
-				_check(not staged.has_node("spare_case") and staged.has_node("packed_case") and _text(staged, "packed_case_text").contains("PACKED"), scene_id + " the controller Kai labelled is packed (S11 -> S12)")
-				_check(_text(staged, "route_card_text").contains("THREE ROAD REPEATERS") and staged.has_node("repeater_case_3"), scene_id + " the three-site route and its repeaters are packed (S11 -> S12)")
-				for id in ["checklist_rover_text", "checklist_aurora_text"]:
-					var sheet := _text(staged, id)
-					_check(sheet.contains("8 APR 2047, 00:00") and sheet.contains("SMALL GUIDE LIGHT: IN THE PLAN"), scene_id + " duplicate checklist dated 8 Apr 00:00 with the guide light in the plan (CH07 -> CH08): " + id)
-				_check(_text(staged, "home_ledger_text").contains("33 H") and _text(staged, "home_ledger_text").contains("LAST 3 H"), scene_id + " the home-night ledger counts two, then five")
-				_check(["helmet_1", "helmet_2", "helmet_3"].all(func(h): return staged.has_node(h)), scene_id + " three travellers, three helmets")
 		_check((staged.has_node("care_desk")) == (order >= 10), scene_id + " the care desk stands from the stable-care interval on")
+	elif room.room_id == "LOC-08":
+		# EX-CH07-S12 in the garage (M3-105): the departure boards, the packed loadout and the duplicate checklists.
+		_check(_text(staged, "board_rover").contains("FERREIRA\nKAI\nRAFI") and _text(staged, "board_aurora").contains("MEI\nAMARA"), scene_id + " five names face two destination boards")
+		_check(not staged.has_node("spare_case") and staged.has_node("packed_case") and _text(staged, "packed_case_text").contains("PACKED"), scene_id + " the controller Kai labelled is packed (S11 -> S12)")
+		_check(_text(staged, "route_card_text").contains("THREE ROAD REPEATERS") and staged.has_node("repeater_case_3"), scene_id + " the three-site route and its repeaters are packed (S11 -> S12)")
+		for id in ["checklist_rover_text", "checklist_aurora_text"]:
+			var sheet := _text(staged, id)
+			_check(sheet.contains("8 APR 2047, 00:00") and sheet.contains("SMALL GUIDE LIGHT: IN THE PLAN"), scene_id + " duplicate checklist dated 8 Apr 00:00 with the guide light in the plan (CH07 -> CH08): " + id)
+		_check(_text(staged, "home_ledger_text").contains("33 H") and _text(staged, "home_ledger_text").contains("LAST 3 H"), scene_id + " the home-night ledger counts two, then five")
+		_check(["helmet_1", "helmet_2", "helmet_3"].all(func(h): return staged.has_node(h)), scene_id + " three travellers, three helmets")
 	elif room.room_id == "LOC-04":
 		_check(not _visible_sign(room, "KAI   AMARA   MEI   RAFI") and _text(staged, "roster_names").contains("FERREIRA"), scene_id + " the roll-call board names five")
 		_check(staged.has_node("april_card") and _text(staged, "april_card_text").contains("11 APR 2046"), scene_id + " April's four-name card is pinned beside the roster")
@@ -464,17 +468,24 @@ func _check_echoes() -> void:
 	staged = commons.visual_root.get_node(Staging.ROOT_NAME)
 	_check(_text(staged, "outbox_photo_strip").contains("WHAT GROWS NEXT") and not staged.has_node("n_holder_card"), "D10 'Would you like to see what grows next?' queues Mei's photo strip for N.")
 	commons.set_story_choices({"EX-CH05-S11-CHOICE": {"option_id": "EX-CH05-S11-OPT02"}})
-	commons.set_scene_context("EX-CH07-S12")
 	await process_frame
 	staged = commons.visual_root.get_node(Staging.ROOT_NAME)
-	_check(staged.has_node("n_holder_card") and not staged.has_node("outbox_photo_strip") and not staged.has_node("kai_family_copy"), "D10 'We kept a place for your work.' keeps the N. holder at the table; no D12 copy without its choice")
+	_check(staged.has_node("n_holder_card") and not staged.has_node("outbox_photo_strip"), "D10 'We kept a place for your work.' keeps the N. holder at the table")
+	commons.free()
+	await process_frame
+	# D12 packs on the rover loadout, which stands in the garage since M3-105 moved EX-CH07-S12 there.
+	var garage := await _room("LOC-08")
+	garage.set_scene_context("EX-CH07-S12")
+	await process_frame
+	staged = garage.visual_root.get_node(Staging.ROOT_NAME)
+	_check(not staged.has_node("kai_family_copy"), "no D12 copy without its choice")
 	for option in {"EX-CH06-S08-OPT01": "THE RING DIAGRAM", "EX-CH06-S08-OPT02": "THE PROTECTED-SERVICE PLAN"}.keys():
 		var words: String = {"EX-CH06-S08-OPT01": "THE RING DIAGRAM", "EX-CH06-S08-OPT02": "THE PROTECTED-SERVICE PLAN"}[option]
-		commons.set_story_choices({"EX-CH06-S08-CHOICE": {"option_id": option}})
+		garage.set_story_choices({"EX-CH06-S08-CHOICE": {"option_id": option}})
 		await process_frame
-		staged = commons.visual_root.get_node(Staging.ROOT_NAME)
+		staged = garage.visual_root.get_node(Staging.ROOT_NAME)
 		_check(_text(staged, "kai_family_copy_text").contains(words), "D12 %s: Kai packs his family's copy for the rover" % option)
-	commons.free()
+	garage.free()
 	await process_frame
 
 ## The real cast placement: the room is staged before anyone stands in it, bodies stand at the scene anchors, and in the

@@ -275,12 +275,46 @@ func _prop_ids(room_id: String) -> Array:
 func _r3(v: Vector3) -> Array:
 	return [snappedf(v.x, 0.001), snappedf(v.y, 0.001), snappedf(v.z, 0.001)]
 
+## M3-105: a room that builds its own floor on a graded pad near a site (LOC-08: the garage 80 m from Aurora at
+## azimuth 150, its rover door facing azimuth 100; garage.json "site", decision 3), placed with the same frame as the
+## terrain rooms: origin_xz_m from the site's local north, yaw_deg turning room +X (the rover door's outward normal) onto
+## the bearing, origin_m with the room's floor level ("floor_y_m", the bay floor) on the ground at the apron, and the
+## pad's ground relative to that floor and its steepest cell under the berm's footprint.
+func _derive_pad(place: Dictionary) -> Dictionary:
+	var field := _field(String(place.region_id))
+	var spec: Dictionary = place.site_from
+	var site: Dictionary = Heightfield.sun_table().sites[String(spec.site)]
+	var at := _site_in_region(site, field)
+	var out_dir := Heightfield.sun_direction_at(float(site.x_m), float(site.y_m), float(spec.azimuth_deg), 0.0)
+	var o := at + Vector2(out_dir.x, out_dir.z) * float(spec.distance_m)
+	var door := Heightfield.sun_direction_at(float(site.x_m), float(site.y_m), float(spec.door_bearing_deg), 0.0)
+	var yaw := atan2(-door.z, door.x)
+	var turn := Basis(Vector3.UP, yaw)
+	var apron := turn * Presentation.vector(spec.apron_local_m)
+	var floor_height := field.height_at(o.x + apron.x, o.y + apron.z)
+	var origin := Vector3(o.x, floor_height - float(spec.apron_local_m[1]), o.y)
+	var low := INF
+	var high := -INF
+	var slope := 0.0
+	var foot: Array = spec.pad_footprint_m
+	for gx in int(float(foot[0]) / 2.0) + 1:
+		for gz in int(float(foot[1]) / 2.0) + 1:
+			var p := turn * Vector3(-float(foot[0]) * 0.5 + gx * 2.0, 0, -float(foot[1]) * 0.5 + gz * 2.0)
+			var h := field.height_at(o.x + p.x, o.y + p.z) - floor_height
+			low = minf(low, h)
+			high = maxf(high, h)
+			slope = maxf(slope, field.slope_deg_at(o.x + p.x, o.y + p.z))
+	return {"origin_xz_m": [snappedf(o.x, 0.001), snappedf(o.y, 0.001)], "yaw_deg": snappedf(rad_to_deg(yaw), 0.01), "origin_m": _r3(origin),
+			"pad_ground_m": [snappedf(low, 0.001), snappedf(high, 0.001)], "pad_max_slope_deg": snappedf(slope, 0.01)}
+
 func _write() -> void:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(Contract.TERRAIN_PATH))
 	for room_id in data.rooms:
 		var place: Dictionary = data.rooms[room_id]
 		if bool(place.get("omit_staging_floor", false)):
 			place.merge(_derive(String(room_id), place), true)
+		elif place.has("site_from"):
+			place.merge(_derive_pad(place), true)
 	var file := FileAccess.open(Contract.TERRAIN_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data, " ", false) + "\n")
 	file.close()
@@ -330,6 +364,13 @@ func _check_placements() -> void:
 		_check(not String(place.get("placement", "")).is_empty(), room_id + " says why it stands there")
 		if not bool(place.omit_staging_floor):
 			_check(not String(place.get("pending", "")).is_empty(), room_id + " keeps its flat staging and says why")
+			if place.has("site_from"):
+				_check(_same(place, _derive_pad(place)), room_id + " pad placement matches the heightfield (run -- --write after a change)")
+				var pad: Array = place.pad_ground_m
+				_check(float(pad[1]) - float(pad[0]) < float(place.site_from.pad_relief_limit_m), "%s pad relief %.2f m stays inside its berm and grading (limit %.1f m)" % [room_id, float(pad[1]) - float(pad[0]), float(place.site_from.pad_relief_limit_m)])
+				var placed := Basis(Vector3.UP, deg_to_rad(float(place.yaw_deg))) * Vector3.RIGHT
+				var bearing := Heightfield.sun_direction_at(float(sites[String(place.site_from.site)].x_m), float(sites[String(place.site_from.site)].y_m), float(place.site_from.door_bearing_deg), 0.0)
+				_check(placed.distance_to(bearing) < 0.001, "%s rover door faces azimuth %.0f" % [room_id, float(place.site_from.door_bearing_deg)])
 			continue
 		var derived := _derive(String(room_id), place)
 		_check(_same(place, derived), room_id + " published numbers match the heightfield (run -- --write after a room or terrain change)")

@@ -198,24 +198,28 @@ const _ROOMS := {
 	},
 	"LOC-08": {
 		"room_id": "LOC-08",
-		"name": "Rover Bay",
-		"canonical_name": "Aurora rover bay and handover",
-		"bounds_m": [14.0, 10.0],
+		"name": "Rover Garage",
+		"canonical_name": "Aurora rover garage: pressurised ready room and vacuum rover bay",
+		"bounds_m": [12.0, 9.0],
+		# The ready room (the deck people walk unsuited) is pressurised; the rover bay and the EVA porch are vacuum and
+		# entered only in suits through the rover's suitports (decisions 1 and 4; LOC-08.json "zones").
 		"pressure": "pressurised",
-		"asset_ids": ["VH_Rover", "PR_VaultCase", "PR_SupplyBundles", "PR_Dosimeter"],
+		"asset_ids": ["EN_Garage_DockingPort", "EN_Garage_CargoLock", "EN_Garage_HandoverConsole", "VH_Rover"],
 		"asset_paths": [
+			"res://assets/environment/EN_Garage/EN_Garage_DockingPort_LOD0.glb",
+			"res://assets/environment/EN_Garage/EN_Garage_CargoLock_LOD0.glb",
+			"res://assets/environment/EN_Garage/EN_Garage_HandoverConsole_LOD0.glb",
 			"res://assets/vehicles/VH_Rover/VH_Rover.glb",
-			"res://assets/props/PR_VaultCase/PR_VaultCase.glb",
-			"res://assets/props/PR_SupplyBundles/PR_SupplyBundles.glb",
-			"res://assets/props/PR_Dosimeter/PR_Dosimeter.glb",
 		],
-		"boundary_ids": ["airlock_exterior", "rover_bay_door"],
+		# The inner door to the pressurised kit corridor to the Commons (decision 2), the dock hatch to the docked rover's
+		# cabin, and the rover door from the vacuum bay to the apron and the marked path to the courtyard (LOC-06).
+		"boundary_ids": ["door_commons_garage", "garage_dock_hatch", "rover_bay_door"],
 		"focus_targets": [
-			{"target_id": "rover_seal", "label": "Pressurised rover seal", "verb": "Inspect", "position": [-3.0, 1.0, -1.5]},
-			{"target_id": "rover_loadout", "label": "Rover loadout and provisions", "verb": "Inspect", "position": [0.0, 1.0, -1.5]},
-			{"target_id": "base_handover", "label": "Base handover screen", "verb": "Inspect", "position": [3.0, 1.0, -1.5]},
+			{"target_id": "rover_seal", "label": "Suit seals and dock seal", "verb": "Inspect", "position": [-5.0, 1.84, -1.53]},
+			{"target_id": "rover_loadout", "label": "Cargo rack and supply ledger", "verb": "Inspect", "position": [5.17, 1.32, -3.9]},
+			{"target_id": "base_handover", "label": "Handover console", "verb": "Inspect", "position": [2.5, 1.42, -4.2]},
 		],
-		"anchors": {"rover_rafi": [-3.0, 0.0, 1.5], "rover_kai": [0.0, 0.0, 1.5], "rover_player": [3.0, 0.0, 1.5]},
+		"anchors": {"rover_rafi": [2.5, 0.0, -2.0], "rover_kai": [1.6, 0.0, -2.1], "rover_player": [-1.8, 0.0, -2.9]},
 	},
 	"LOC-09": {
 		"room_id": "LOC-09",
@@ -337,11 +341,21 @@ const _SCENE_ROOMS := {
 	# Chapter 7 (M3-7R), from STORY_FULL.md, the CHAPTER_07 scene scripts (SC-0701..0706) and scene_rosters.json: the
 	# warning at the Mission Table (S01); the Safe Room for preparation, roll call and the six storm steps (S02-S08); the
 	# Commons network diagnostic and care-planning desk (S09-S10); the fabrication bench and route simulator in the
-	# service rooms (S11); the departure boards and rover loadout by the Commons airlock until EN_Garage exists (S12).
+	# service rooms (S11); the departure boards and rover loadout in the garage (S12; moved from the Commons in M3-105).
 	"EX-CH07-S01": "LOC-01", "EX-CH07-S02": "LOC-04", "EX-CH07-S03": "LOC-04",
 	"EX-CH07-S04": "LOC-04", "EX-CH07-S05": "LOC-04", "EX-CH07-S06": "LOC-04",
 	"EX-CH07-S07": "LOC-04", "EX-CH07-S08": "LOC-04", "EX-CH07-S09": "LOC-01",
-	"EX-CH07-S10": "LOC-01", "EX-CH07-S11": "LOC-02", "EX-CH07-S12": "LOC-01",
+	"EX-CH07-S10": "LOC-01", "EX-CH07-S11": "LOC-02", "EX-CH07-S12": "LOC-08",
+	# Chapter 4 (M3-4R), from STORY_FULL.md and the CHAPTER_04 scene scripts: the descendant rack in the garden (S01); the
+	# rover garage's ready room for the departure checks and the route cards (S02-S03, M3-105) and for the return through
+	# the dock and the dry cargo lock (S09); the three beacon segments of the ridge road (S04-S05) and the vault shelf
+	# (S06-S08) on the LOLA terrain (M3-106); the dry quarantine glovebox in the garden (S10); the Earth console (S11) and
+	# the mission table with the fifth mug (S12) in the Commons. CH07-S12's two destination boards are the garage's
+	# departure boards (decision 7), so that scene moved here from the Commons.
+	"EX-CH04-S01": "LOC-03", "EX-CH04-S02": "LOC-08", "EX-CH04-S03": "LOC-08",
+	"EX-CH04-S04": "LOC-09", "EX-CH04-S05": "LOC-09", "EX-CH04-S06": "LOC-10",
+	"EX-CH04-S07": "LOC-10", "EX-CH04-S08": "LOC-10", "EX-CH04-S09": "LOC-08",
+	"EX-CH04-S10": "LOC-03", "EX-CH04-S11": "LOC-01", "EX-CH04-S12": "LOC-01",
 }
 
 ## Returns every stable location ID in the campaign.
@@ -503,8 +517,8 @@ static func earth(room_id: String, scene_id: String) -> Dictionary:
 # "FROM..UNTIL" range) overrides fields for those scenes; "choice" / "unless" gate an echo layer on a recorded
 # story_log option (doc 24 §5.2). The base layout stays the Chapter 1 room; staging only adds and hides.
 
-const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "chapter7_props", "prints", "models", "hide", "hide_signs"]
-const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views", "care_round", "kit_parts", "kit_texts", "kit_attach", "outfits"]
+const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "chapter7_props", "prints", "models", "hide", "hide_signs", "kit_screens"]
+const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views", "care_round", "kit_parts", "kit_texts", "kit_attach", "outfits", "garage"]
 
 ## Story order of a canon scene id (chapter * 100 + scene number), or -1 for anything that is not one.
 static func scene_order(scene_id: String) -> int:

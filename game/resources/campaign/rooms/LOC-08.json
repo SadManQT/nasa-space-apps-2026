@@ -1,0 +1,2332 @@
+{
+ "schema_version": 1,
+ "room_id": "LOC-08",
+ "description": "Approved M3-4A EN_Garage (Sadman, 7 Nov 2026, 'Approve all 12'): the pressurised ready room on its sintered plinth and the vacuum rover bay with the EVA porch, assembled as a kit room (M3-105); fictional Aurora architecture.",
+ "about": "Room coordinates are garage.json's coordinates minus (6, 1.4, 4.5): the room centre is the origin and the ready-room deck (habitat air, 12 x 3 m) is y 0, so the vacuum bay floor is y -1.40 and the EVA porch, level with the deck, is y 0 (decisions 1 and 4). The ready room runs along the north wall (inner door to the Commons corridor, route board, the two departure boards, the handover console, the relief locker, the cargo rack); its south wall is the pressure wall with the suit-seal station, the dry cargo lock, the bay windows and the dock hatch (decisions 1, 5 and 7). People walk the deck unsuited; the porch, its stair and the bay floor are entered only in suits from the rover's suitports.",
+ "bounds_m": [
+  12.0,
+  9.0
+ ],
+ "ceiling_height_m": 2.6,
+ "floor_color": "#263343",
+ "wall_color": "#939ba6",
+ "accent_color": "#e8792b",
+ "assembly": "habitat_kit",
+ "shell": "garage",
+ "shell_offset_m": [
+  -6.0,
+  -1.4,
+  -4.5
+ ],
+ "garage_roles": [
+  "docking_port",
+  "cargo_lock",
+  "suit_seals",
+  "window_porch",
+  "window_rover",
+  "window_door",
+  "route_board",
+  "departure_a",
+  "departure_b",
+  "pad_camera_bay",
+  "handover_console",
+  "relief_locker",
+  "cargo_rack",
+  "eva_porch",
+  "rover_door",
+  "umbilical",
+  "berm",
+  "VH_Rover"
+ ],
+ "zones": {
+  "ready_room": {
+   "min": [
+    -6.0,
+    -4.5
+   ],
+   "max": [
+    6.0,
+    -1.5
+   ],
+   "floor_y": 0.0,
+   "pressure": "pressurised"
+  },
+  "eva_porch": {
+   "min": [
+    -6.0,
+    -1.35
+   ],
+   "max": [
+    -2.7,
+    4.5
+   ],
+   "floor_y": 0.0,
+   "pressure": "vacuum"
+  },
+  "rover_bay": {
+   "min": [
+    -2.7,
+    -1.35
+   ],
+   "max": [
+    6.0,
+    4.45
+   ],
+   "floor_y": -1.4,
+   "pressure": "vacuum"
+  }
+ },
+ "deck": {
+  "min": [
+   -6.0,
+   -4.5
+  ],
+  "max": [
+   6.0,
+   -1.5
+  ]
+ },
+ "sealed_enclosures": [
+  {
+   "id": "cargo_lock_chamber",
+   "about": "the dry cargo lock's chamber (EN_Garage_CargoLock: 0.72 x 0.56 m opening, back-filled with dry nitrogen, one door open at a time; decision 5); what rests in it rests on its cradle",
+   "min": [
+    -4.41,
+    0.86,
+    -1.84
+   ],
+   "max": [
+    -3.59,
+    1.47,
+    -1.05
+   ]
+  }
+ ],
+ "interior_walls": [
+  {
+   "axis": "z",
+   "at": -1.5,
+   "about": "the pressure wall between the ready room and the vacuum bay"
+  }
+ ],
+ "stair": {
+  "top": [
+   -2.7,
+   0.0,
+   4.175
+  ],
+  "bottom": [
+   -0.5,
+   -1.4,
+   4.175
+  ],
+  "width_m": 0.65,
+  "about": "EN_Garage_EVAPorch's stair (measured on the GLB: 8 steps of 0.175 m from x -2.7 to -0.5 at z 3.85-4.45) has no collision of its own; the room adds one ramp over the nosings"
+ },
+ "props": [],
+ "portals": [
+  {
+   "boundary_id": "door_commons_garage",
+   "wall": "north",
+   "offset_m": -4.0,
+   "destination": "Commons",
+   "corridor_segments": 2
+  }
+ ],
+ "lighting": {
+  "key_rotation_degrees": [
+   -65,
+   155,
+   0
+  ],
+  "key_color": "#ffd1a8",
+  "key_energy": 0,
+  "fill_energy": 0,
+  "ambient_energy": 0.12,
+  "strip_color": "#ffe7cf",
+  "practical_energy": 0.85,
+  "practical_range_m": 5.5,
+  "shadow_lights": 2
+ },
+ "ceiling_strips": [
+  [
+   -4.5,
+   2.52,
+   -3.0
+  ],
+  [
+   -1.5,
+   2.52,
+   -3.0
+  ],
+  [
+   1.5,
+   2.52,
+   -3.0
+  ],
+  [
+   4.5,
+   2.52,
+   -3.0
+  ]
+ ],
+ "bay_floods": [
+  {
+   "position": [
+    -1.6,
+    3.6,
+    1.6
+   ],
+   "energy": 7.0,
+   "range_m": 8.0,
+   "angle_deg": 64.0,
+   "shadow": true
+  },
+  {
+   "position": [
+    2.0,
+    3.6,
+    1.6
+   ],
+   "energy": 7.0,
+   "range_m": 8.0,
+   "angle_deg": 64.0,
+   "shadow": true
+  },
+  {
+   "position": [
+    5.0,
+    3.6,
+    1.6
+   ],
+   "energy": 5.0,
+   "range_m": 8.0,
+   "angle_deg": 64.0,
+   "shadow": false
+  }
+ ],
+ "earth_visibility": "interior",
+ "navigation": {
+  "cell_m": 0.25,
+  "agent_radius_m": 0.3,
+  "areas": [
+   {
+    "id": "deck",
+    "min": [
+     -6.0,
+     -4.5
+    ],
+    "max": [
+     6.0,
+     -1.5
+    ],
+    "y": 0.0
+   },
+   {
+    "id": "porch",
+    "min": [
+     -6.0,
+     -1.25
+    ],
+    "max": [
+     -2.75,
+     4.5
+    ],
+    "y": 0.0
+   },
+   {
+    "id": "stair",
+    "min": [
+     -3.25,
+     3.75
+    ],
+    "max": [
+     -0.5,
+     4.5
+    ],
+    "open": [
+     "west",
+     "east",
+     "north",
+     "south"
+    ],
+    "ramp": {
+     "axis": "x",
+     "from": [
+      -2.75,
+      0.0
+     ],
+     "to": [
+      -0.5,
+      -1.4
+     ]
+    }
+   },
+   {
+    "id": "bay",
+    "min": [
+     -0.5,
+     -1.25
+    ],
+    "max": [
+     6.0,
+     4.5
+    ],
+    "y": -1.4,
+    "open": [
+     "west"
+    ]
+   }
+  ]
+ },
+ "obstacles": [
+  {
+   "id": "handover_console_body",
+   "position": [
+    2.5,
+    0.65,
+    -3.97
+   ],
+   "size": [
+    1.8,
+    1.3,
+    0.72
+   ]
+  },
+  {
+   "id": "relief_locker_body",
+   "position": [
+    4.0,
+    1.1,
+    -4.03
+   ],
+   "size": [
+    1.2,
+    2.2,
+    0.6
+   ]
+  },
+  {
+   "id": "cargo_rack_body",
+   "position": [
+    5.53,
+    1.1,
+    -3.0
+   ],
+   "size": [
+    0.6,
+    2.2,
+    2.0
+   ]
+  },
+  {
+   "id": "cargo_lock_box",
+   "position": [
+    -4.0,
+    1.14,
+    -1.67
+   ],
+   "size": [
+    0.82,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "id": "rover_body",
+   "area": "bay",
+   "position": [
+    0.7,
+    0.8,
+    0.72
+   ],
+   "size": [
+    6.0,
+    4.4,
+    3.76
+   ]
+  },
+  {
+   "id": "rover_wheel_rear",
+   "area": "bay",
+   "position": [
+    -1.65,
+    -0.9,
+    3.03
+   ],
+   "size": [
+    1.1,
+    1.0,
+    0.86
+   ]
+  },
+  {
+   "id": "rover_wheel_mid",
+   "area": "bay",
+   "position": [
+    0.35,
+    -0.9,
+    2.85
+   ],
+   "size": [
+    1.1,
+    1.0,
+    0.5
+   ]
+  },
+  {
+   "id": "rover_wheel_front",
+   "area": "bay",
+   "position": [
+    3.0,
+    -0.9,
+    2.83
+   ],
+   "size": [
+    1.4,
+    1.0,
+    0.46
+   ]
+  },
+  {
+   "id": "umbilical_post",
+   "area": "bay",
+   "position": [
+    4.9,
+    -0.55,
+    -0.9
+   ],
+   "size": [
+    0.4,
+    1.7,
+    0.4
+   ]
+  }
+ ],
+ "focus_targets": [
+  {
+   "target_id": "rover_seal",
+   "label": "Suit seals and dock seal",
+   "position": [
+    -5.0,
+    1.84,
+    -1.53
+   ],
+   "approach_m": [
+    -5.0,
+    0.0,
+    -2.45
+   ],
+   "verb": "Inspect",
+   "label_offset": [
+    0,
+    0.5,
+    -0.1
+   ],
+   "asset_id": "suit_seals"
+  },
+  {
+   "target_id": "garage_cargo_lock",
+   "label": "Dry cargo lock",
+   "position": [
+    -4.0,
+    1.14,
+    -1.95
+   ],
+   "approach_m": [
+    -4.0,
+    0.0,
+    -2.75
+   ],
+   "verb": "Use",
+   "label_offset": [
+    0,
+    0.7,
+    -0.1
+   ],
+   "asset_id": "cargo_lock"
+  },
+  {
+   "target_id": "garage_dock",
+   "label": "Rover dock hatch",
+   "position": [
+    2.5,
+    1.1,
+    -1.7
+   ],
+   "approach_m": [
+    2.5,
+    0.0,
+    -2.6
+   ],
+   "verb": "OpenDoor",
+   "label_offset": [
+    0,
+    1.0,
+    -0.1
+   ],
+   "asset_id": "docking_port"
+  },
+  {
+   "target_id": "base_handover",
+   "label": "Handover console",
+   "position": [
+    2.5,
+    1.2,
+    -3.52
+   ],
+   "approach_m": [
+    2.5,
+    0.0,
+    -2.75
+   ],
+   "verb": "Inspect",
+   "label_offset": [
+    0,
+    0.6,
+    0.1
+   ],
+   "asset_id": "handover_console"
+  },
+  {
+   "target_id": "garage_pad_camera",
+   "label": "Landing-pad camera",
+   "position": [
+    1.84,
+    1.25,
+    -3.52
+   ],
+   "approach_m": [
+    1.84,
+    0.0,
+    -2.75
+   ],
+   "verb": "Inspect",
+   "label_offset": [
+    0,
+    0.6,
+    0.1
+   ],
+   "asset_id": "handover_console"
+  },
+  {
+   "target_id": "garage_route_board",
+   "label": "Route board",
+   "position": [
+    -1.5,
+    1.3,
+    -4.4
+   ],
+   "approach_m": [
+    -1.5,
+    0.0,
+    -3.3
+   ],
+   "verb": "Inspect",
+   "label_offset": [
+    0,
+    1.0,
+    0.1
+   ],
+   "asset_id": "route_board"
+  },
+  {
+   "target_id": "garage_departure_boards",
+   "label": "Departure boards",
+   "position": [
+    0.5,
+    1.43,
+    -4.42
+   ],
+   "approach_m": [
+    0.5,
+    0.0,
+    -3.3
+   ],
+   "verb": "Inspect",
+   "label_offset": [
+    0,
+    0.9,
+    0.1
+   ],
+   "asset_id": "departure_a"
+  },
+  {
+   "target_id": "garage_relief_locker",
+   "label": "Relief locker",
+   "position": [
+    4.0,
+    1.1,
+    -3.72
+   ],
+   "approach_m": [
+    4.0,
+    0.0,
+    -2.75
+   ],
+   "verb": "Inspect",
+   "label_offset": [
+    0,
+    1.2,
+    0.1
+   ],
+   "asset_id": "relief_locker"
+  },
+  {
+   "target_id": "rover_loadout",
+   "label": "Cargo rack and supply ledger",
+   "position": [
+    5.15,
+    1.2,
+    -3.0
+   ],
+   "approach_m": [
+    4.25,
+    0.0,
+    -2.6
+   ],
+   "verb": "Inspect",
+   "label_offset": [
+    0,
+    0.9,
+    0
+   ],
+   "asset_id": "cargo_rack"
+  }
+ ],
+ "anchors": {
+  "rover_player": [
+   -1.8,
+   0.0,
+   -2.9
+  ],
+  "rover_rafi": [
+   1.15,
+   0.0,
+   -2.0
+  ],
+  "rover_kai": [
+   -0.45,
+   0.0,
+   -2.05
+  ],
+  "rover_mei": [
+   -2.9,
+   0.0,
+   -2.2
+  ],
+  "rover_amara": [
+   3.35,
+   0.0,
+   -2.05
+  ],
+  "rover_ferreira": [
+   -3.0,
+   0.0,
+   -3.7
+  ]
+ },
+ "walk_probe": [
+  [
+   -1.8,
+   -2.9
+  ],
+  [
+   -4.6,
+   -2.6
+  ],
+  [
+   -5.3,
+   -3.9
+  ],
+  [
+   -2.9,
+   -4.0
+  ],
+  [
+   0.0,
+   -3.2
+  ],
+  [
+   3.2,
+   -2.4
+  ],
+  [
+   4.4,
+   -2.3
+  ],
+  [
+   1.0,
+   -1.9
+  ],
+  [
+   -1.8,
+   -2.9
+  ]
+ ],
+ "signs": [
+  {
+   "text": "ROVER DOCK",
+   "position": [
+    2.5,
+    2.4,
+    -1.52
+   ],
+   "yaw": 180,
+   "size": 0.0022
+  },
+  {
+   "text": "CARGO LOCK · DRY NITROGEN",
+   "position": [
+    -4.0,
+    2.3,
+    -1.52
+   ],
+   "yaw": 180,
+   "size": 0.0016
+  },
+  {
+   "text": "SUIT SEALS",
+   "position": [
+    -5.0,
+    2.36,
+    -1.52
+   ],
+   "yaw": 180,
+   "size": 0.0018
+  },
+  {
+   "text": "BAY IS VACUUM · SUITS ONLY",
+   "position": [
+    -0.5,
+    2.37,
+    -1.52
+   ],
+   "yaw": 180,
+   "size": 0.0016
+  }
+ ],
+ "review_views": {
+  "overview": {
+   "from": [
+    -5.4,
+    1.75,
+    -2.0
+   ],
+   "to": [
+    4.0,
+    1.0,
+    -3.6
+   ]
+  },
+  "pressure_wall": {
+   "from": [
+    0.5,
+    1.65,
+    -4.2
+   ],
+   "to": [
+    -1.5,
+    1.2,
+    -1.5
+   ]
+  },
+  "boards": {
+   "from": [
+    0.0,
+    1.6,
+    -2.0
+   ],
+   "to": [
+    0.0,
+    1.35,
+    -4.5
+   ]
+  },
+  "bay": {
+   "from": [
+    -4.6,
+    1.65,
+    3.6
+   ],
+   "to": [
+    2.0,
+    -0.4,
+    0.4
+   ]
+  }
+ },
+ "staging": [
+  {
+   "id": "garage_screens",
+   "from": "EX-CH04-S02",
+   "about": "Every word on the garage's live slots (decision 7: nothing is baked), scene by scene: the route board, the two departure boards (one ledger per destination: CH04-S02 'two seats out, two voices home', CH07-S12 and CH08-S01 'two destination boards'), Amara's three-screen handover console (route map and beacon chain, slope card, landing-pad camera), the suit-seal station, the dry cargo lock and the supply ledger on the cargo rack.",
+   "kit_screens": [
+    {
+     "id": "route_board_text",
+     "node": "route_board",
+     "slot": "Screen",
+     "text": "SURVEYED RIDGE ROAD\n2034 MAP, CHECKED AGAINST TODAY\nROUTE CARDS NEXT",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "by_scene": {
+      "EX-CH04-S03": {
+       "text": "THREE ROUTE CARDS · BOTH LIMITS MUST HOLD\nROVER SLOPE LIMIT 15°\nRETURN RESERVE NEEDED: 30 OF 100"
+      },
+      "EX-CH04-S04..EX-CH05-S12": {
+       "text": "RIDGE ROAD · BEACONS LINKED\nAURORA · 1.0 KM · 1.9 KM · 5.2 KM · SHELF\nSAME ROAD HOME"
+      },
+      "EX-CH06-S01..EX-CH08-S10": {
+       "text": "RELAY ROAD TO MALAPERT\nABOUT 120 KM EACH WAY\nTHREE ROAD REPEATERS"
+      },
+      "EX-CH08-S11..EX-CH08-S12": {
+       "text": "RELAY ROAD · SAME ROAD HOME\nTHREE REPEATERS RESTORED"
+      }
+     }
+    },
+    {
+     "id": "board_rover",
+     "node": "departure_a",
+     "slot": "Screen",
+     "text": "ROVER\n\nRAFI · LEAD\nKAI\n\nOWN MANIFEST\n48 H",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "by_scene": {
+      "EX-CH04-S04..EX-CH04-S12": {
+       "text": "ROVER · BACK\n\nRAFI\nKAI\n\n2 SEALED CARGO\nRECORDS"
+      },
+      "EX-CH05-S01..EX-CH07-S11": {
+       "text": "ARRIVAL\n\nFERREIRA\n\nRELIEF FLIGHT\n8–12 DEC"
+      },
+      "EX-CH07-S12..EX-CH08-S10": {
+       "text": "ROVER\n\nFERREIRA\nKAI\nRAFI\n\n72 H SUPPLIES"
+      },
+      "EX-CH08-S11..EX-CH08-S12": {
+       "text": "ROVER · HOME\n\nFERREIRA\nKAI\nRAFI\n\n10 APR 03:00"
+      }
+     }
+    },
+    {
+     "id": "board_aurora",
+     "node": "departure_b",
+     "slot": "Screen",
+     "text": "AURORA\n\nMEI\nAMARA\n\nBASE LEDGER\n2 PEOPLE",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "by_scene": {
+      "EX-CH05-S01..EX-CH07-S11": {
+       "text": "AURORA\n\nKAI · AMARA\nMEI · RAFI\nFERREIRA\n\nFIVE FROM TODAY"
+      },
+      "EX-CH07-S12..EX-CH08-S10": {
+       "text": "AURORA\n\nMEI\nAMARA\n\nHOME NIGHT\n2, THEN 5"
+      },
+      "EX-CH08-S11..EX-CH08-S12": {
+       "text": "AURORA\n\nFIVE HOME\n\n3 H TO\nFIRST LIGHT"
+      }
+     }
+    },
+    {
+     "id": "console_map",
+     "node": "handover_console",
+     "slot": "Screen",
+     "text": "HANDOVER · TWO FIELD, TWO HOME\nMAP AND GARDEN STATUS FROM MEI\nLOCAL RADIO CHECKED",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "by_scene": {
+      "EX-CH04-S03": {
+       "text": "BEACON PLAN · BEFORE EACH BLIND CORNER\n1.0 KM · 1.9 KM · 5.2 KM"
+      },
+      "EX-CH04-S04..EX-CH04-S12": {
+       "text": "RETURN LINK CHAIN\nSHELF · 5.2 · 1.9 · 1.0 KM · AURORA\nEVERY LINK TESTED"
+      },
+      "EX-CH05-S01..EX-CH07-S11": {
+       "text": "ARRIVAL HANDOVER\nNAME AND SEAL INDICATION\nTWO AGREEING CHECKS"
+      },
+      "EX-CH07-S12..EX-CH08-S10": {
+       "text": "JOURNEY CARD\n24 H OUT · 3 H REPAIR · 24 H BACK\n72 H OF INDEPENDENT SUPPLIES"
+      },
+      "EX-CH08-S11..EX-CH08-S12": {
+       "text": "RETURN · 24 H\nACTUAL USE BESIDE THE FORECAST\nTHREE ARRIVALS EXPECTED"
+      }
+     }
+    },
+    {
+     "id": "console_slope",
+     "node": "handover_console",
+     "slot": "Screen2",
+     "text": "SLOPE CARD · AMARA\nROUTE B MAX 12°\nROVER LIMIT 15°",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "until": "EX-CH07-S11",
+     "by_scene": {
+      "EX-CH04-S04..EX-CH04-S12": {
+       "text": "STATUS REPORT\nCREW 2 · CARGO 2 SEALED\nPRESSURE NORMAL\nRESERVE: FORECAST, THEN RESULT"
+      },
+      "EX-CH05-S01..EX-CH07-S11": {
+       "text": "OCCUPANCY LEDGER\nREVISING FOR FIVE"
+      }
+     }
+    },
+    {
+     "id": "home_ledger_text",
+     "node": "handover_console",
+     "slot": "Screen2",
+     "text": "HOME-NIGHT LEDGER\n2 PEOPLE FOR THE FIRST 33 H\n5 FOR THE LAST 3 H BEFORE DAWN",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "from": "EX-CH07-S12",
+     "until": "EX-CH08-S10"
+    },
+    {
+     "id": "occupancy_text",
+     "node": "handover_console",
+     "slot": "Screen2",
+     "text": "OCCUPANCY · 5 HOME\nLAST 3 DARK HOURS",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "from": "EX-CH08-S11"
+    },
+    {
+     "id": "pad_camera_text",
+     "node": "handover_console",
+     "slot": "Screen3",
+     "text": "LANDING-PAD CAMERA\n500 M · PAD EMPTY",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "by_scene": {
+      "EX-CH05-S01": {
+       "text": "LANDING-PAD CAMERA · 500 M\nLANDER DOWN · DUST SETTLED\nONE SUITED FIGURE BY THE CARGO\nPAD CLEAR: TWO CHECKS NEEDED"
+      }
+     }
+    },
+    {
+     "id": "seal_status",
+     "node": "suit_seals",
+     "slot": "Screen",
+     "text": "SUITPORT 1 · SEALED\nSUITPORT 2 · SEALED\nDOCK SEAL · HOLDING",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220"
+    },
+    {
+     "id": "lock_status",
+     "node": "cargo_lock",
+     "slot": "Screen",
+     "text": "LOCK EMPTY\nDRY NITROGEN READY",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "by_scene": {
+      "EX-CH04-S09": {
+       "text": "SEALED CASE\nIN ITS SLEEVE\nDRY FILL DONE"
+      },
+      "EX-CH05-S01": {
+       "text": "RELIEF CARGO\nSEALS TO CHECK"
+      }
+     }
+    },
+    {
+     "id": "supply_ledger",
+     "node": "cargo_rack",
+     "slot": "Screen2",
+     "text": "ROVER\nMANIFEST\n2 PEOPLE\n48 H\nNOT ON THE\nBASE LEDGER",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "by_scene": {
+      "EX-CH04-S04..EX-CH04-S12": {
+       "text": "ROVER\nMANIFEST\n2 BACK\n48 H\nCOVERED"
+      },
+      "EX-CH05-S01..EX-CH07-S11": {
+       "text": "RELIEF\nCARGO\nCHECKED\nAGAINST THE\nMANIFEST"
+      },
+      "EX-CH07-S12..EX-CH08-S10": {
+       "text": "ROVER\nMANIFEST\n3 PEOPLE\n72 H FOR\n51 H OF\nTRAVEL"
+      },
+      "EX-CH08-S11..EX-CH08-S12": {
+       "text": "ROVER\nMANIFEST\nACTUAL USE\nLOGGED"
+      }
+     }
+    },
+    {
+     "id": "relief_locker_plate",
+     "node": "relief_locker",
+     "slot": "Label",
+     "text": "RELIEF LOCKER",
+     "fg": "#1b2433",
+     "bg": "#ebe6d8",
+     "by_scene": {
+      "EX-CH04-S12..EX-CH05-S12": {
+       "text": "RELIEF CARGO\n8–12 DEC FLIGHT"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "ch04_departure",
+   "from": "EX-CH04-S02",
+   "until": "EX-CH04-S03",
+   "about": "EX-CH04-S02 'Two Seats Out, Two Voices Home' and S03 'The Short Road Is Not the Safe Road' (P-07): the closed recovery carrier and the calibrated ice scanner wait by the cargo lock to go out with the rover (S02 checks seal, scanner, carrier and the independent manifest); Kai's spare light hangs in its labelled clip by the dock; the departure boards keep one ledger per destination (two field, two home); in S03 the route board carries the three route cards, A rejected for its slope, C for its slope and the return reserve, B passing both (12 km, max 12 deg, 30 + 30 of 100, 40 left against 30). The hatch closes on two field and two home (S02 -> S03).",
+   "props": [
+    {
+     "id": "PR_VaultCarrier",
+     "path": "res://assets/props/PR_VaultCarrier/PR_VaultCarrier.glb",
+     "position": [
+      -2.65,
+      0.0,
+      -2.0
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "id": "PR_IceScanner",
+     "path": "res://assets/props/PR_IceScanner/PR_IceScanner.glb",
+     "position": [
+      -1.6,
+      0.0,
+      -1.85
+     ],
+     "rotation_degrees": [
+      0,
+      90,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "id": "spare_light",
+     "path": "res://assets/props/PR_HandLight/PR_HandLight.glb",
+     "position": [
+      1.0,
+      0.87,
+      -1.565
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    }
+   ],
+   "fixtures": [
+    {
+     "id": "spare_light_clip",
+     "position": [
+      1.0,
+      0.85,
+      -1.54
+     ],
+     "size": [
+      0.3,
+      0.04,
+      0.07
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "spare_light_plate",
+     "position": [
+      1.0,
+      0.74,
+      -1.508
+     ],
+     "size": [
+      0.36,
+      0.08,
+      0.004
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "spare_light_label",
+     "text": "SPARE LIGHT · STAYS HERE",
+     "position": [
+      1.0,
+      0.74,
+      -1.512
+     ],
+     "size": 0.0005,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180
+    },
+    {
+     "id": "carrier_tag",
+     "text": "CLOSED CARRIER · FOR THE ROVER",
+     "position": [
+      -2.65,
+      0.45,
+      -2.305
+     ],
+     "size": 0.0006,
+     "color": "#d9f2ff",
+     "outline": 8,
+     "yaw": 180
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "carrier_footprint",
+     "position": [
+      -2.65,
+      0.3,
+      -2.0
+     ],
+     "size": [
+      1.1,
+      0.6,
+      0.6
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "garage_departure_kit",
+     "label": "Scanner and closed carrier",
+     "position": [
+      -2.65,
+      0.45,
+      -2.38
+     ],
+     "approach_m": [
+      -2.6,
+      0.0,
+      -2.95
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.6,
+      0
+     ],
+     "asset_id": "PR_VaultCarrier"
+    }
+   ],
+   "anchors": {
+    "rover_kai": [
+     1.3,
+     0.0,
+     -2.0
+    ]
+   },
+   "stations": {
+    "p07_check_rover_seal": "rover_seal",
+    "p07_check_scanner": "garage_departure_kit",
+    "p07_check_closed_carrier": "garage_departure_kit",
+    "p07_complete_base_handover": "base_handover",
+    "p07_choose_route_b": "garage_route_board",
+    "p07_verify_slope": "base_handover",
+    "p07_verify_return_reserve": "garage_route_board",
+    "p07_prepare_departure": "garage_dock"
+   },
+   "by_scene": {
+    "EX-CH04-S03": {
+     "anchors": {
+      "rover_kai": [
+       -0.4,
+       0.0,
+       -2.2
+      ]
+     }
+    }
+   },
+   "review_views": {
+    "ch04_departure": {
+     "from": [
+      -0.2,
+      1.55,
+      -3.9
+     ],
+     "to": [
+      -3.0,
+      0.6,
+      -1.8
+     ]
+    },
+    "ch04_boards": {
+     "from": [
+      0.6,
+      1.55,
+      -2.1
+     ],
+     "to": [
+      0.0,
+      1.35,
+      -4.5
+     ]
+    },
+    "ch04_spare_light": {
+     "from": [
+      0.6,
+      1.35,
+      -2.5
+     ],
+     "to": [
+      1.0,
+      0.85,
+      -1.55
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch04_route_cards",
+   "from": "EX-CH04-S03",
+   "until": "EX-CH04-S03",
+   "about": "EX-CH04-S03: route cards A, B and C on the route board's card rail, each with the reason it passes or fails (canon P-07 profile values, not a surveyed road certification). Kai moves the short-route card aside himself at the end of the scene.",
+   "fixtures": [
+    {
+     "id": "card_a",
+     "position": [
+      -1.95,
+      0.93,
+      -4.448
+     ],
+     "size": [
+      0.4,
+      0.27,
+      0.004
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "card_b",
+     "position": [
+      -1.5,
+      0.93,
+      -4.448
+     ],
+     "size": [
+      0.4,
+      0.27,
+      0.004
+     ],
+     "color": "#e3f2e6",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "card_c",
+     "position": [
+      -1.05,
+      0.93,
+      -4.448
+     ],
+     "size": [
+      0.4,
+      0.27,
+      0.004
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "card_a_text",
+     "text": "ROUTE A · SHORTEST\nSLOPE OVER THE 15° LIMIT\nNOT SAFE",
+     "position": [
+      -1.95,
+      0.93,
+      -4.444
+     ],
+     "size": 0.00056,
+     "color": "#1b2433",
+     "outline": 0
+    },
+    {
+     "id": "card_b_text",
+     "text": "ROUTE B · THE RIDGE\n12 KM · MAX 12°\n30 OUT + 30 BACK OF 100\n40 LEFT · 30 NEEDED",
+     "position": [
+      -1.5,
+      0.93,
+      -4.444
+     ],
+     "size": 0.00052,
+     "color": "#1b2433",
+     "outline": 0
+    },
+    {
+     "id": "card_c_text",
+     "text": "ROUTE C · DARKER\nSLOPE OVER THE LIMIT\nUSES THE RETURN RESERVE",
+     "position": [
+      -1.05,
+      0.93,
+      -4.444
+     ],
+     "size": 0.00052,
+     "color": "#1b2433",
+     "outline": 0
+    }
+   ],
+   "review_views": {
+    "ch04_route_cards": {
+     "from": [
+      -1.5,
+      1.25,
+      -3.2
+     ],
+     "to": [
+      -1.5,
+      1.05,
+      -4.45
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch04_return",
+   "from": "EX-CH04-S09",
+   "until": "EX-CH04-S09",
+   "about": "EX-CH04-S09 'Bring Back the Evidence and the People' (22 Oct): the rover is back on the tunnel, which starts SEALED until the player equalises it; Kai, still suited from the vault shelf, has passed the sealed case in its sleeve through the dry cargo lock from the EVA porch (decision 5: dry nitrogen, never cabin air, so the cold case does not frost), and the lock's inner door is open on it; the sealed sample travels on its own record. The same report shape every time (crew, cargo, pressure, reserve). Mei: 'The glovebox is ready.' (S09 -> S10: the dry glovebox in the garden).",
+   "props": [
+    {
+     "id": "vault_case",
+     "path": "res://assets/props/PR_VaultCase/PR_VaultCase.glb",
+     "position": [
+      -4.0,
+      0.925,
+      -1.445
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "id": "sealed_sample",
+     "path": "res://assets/props/PR_SampleHolder/PR_SampleHolder.glb",
+     "position": [
+      -4.83,
+      0.9625,
+      -1.61
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    }
+   ],
+   "fixtures": [
+    {
+     "id": "sleeve_base",
+     "position": [
+      -4.0,
+      0.916,
+      -1.445
+     ],
+     "size": [
+      0.44,
+      0.012,
+      0.64
+     ],
+     "color": "#c9a85c",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "sleeve_side_w",
+     "position": [
+      -4.214,
+      1.03,
+      -1.445
+     ],
+     "size": [
+      0.012,
+      0.24,
+      0.64
+     ],
+     "color": "#c9a85c",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "sleeve_side_e",
+     "position": [
+      -3.786,
+      1.03,
+      -1.445
+     ],
+     "size": [
+      0.012,
+      0.24,
+      0.64
+     ],
+     "color": "#c9a85c",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "sleeve_end_n",
+     "position": [
+      -4.0,
+      1.03,
+      -1.759
+     ],
+     "size": [
+      0.44,
+      0.24,
+      0.012
+     ],
+     "color": "#c9a85c",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "sleeve_end_s",
+     "position": [
+      -4.0,
+      1.03,
+      -1.131
+     ],
+     "size": [
+      0.44,
+      0.24,
+      0.012
+     ],
+     "color": "#c9a85c",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "sample_shelf",
+     "position": [
+      -4.75,
+      0.9375,
+      -1.61
+     ],
+     "size": [
+      0.26,
+      0.025,
+      0.2
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "sample_card",
+     "position": [
+      -4.69,
+      0.951,
+      -1.6
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.08
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "sample_tag",
+     "text": "SEALED SAMPLE\nITS OWN RECORD",
+     "position": [
+      -4.69,
+      0.9525,
+      -1.6
+     ],
+     "size": 0.00022,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90
+    }
+   ],
+   "garage": {
+    "lock_door": "InnerDoor",
+    "dock": "vacuum"
+   },
+   "outfits": {
+    "kai": "eva"
+   },
+   "anchors": {
+    "rover_kai": [
+     -3.7,
+     0.0,
+     1.1
+    ]
+   },
+   "stations": {
+    "p08_scan_lid": "garage_cargo_lock",
+    "p08_save_viability_pending": "base_handover",
+    "p08_transfer_case": "garage_cargo_lock"
+   },
+   "obstacles": [
+    {
+     "id": "lock_inner_door_open",
+     "position": [
+      -4.5,
+      1.14,
+      -2.27
+     ],
+     "size": [
+      0.2,
+      0.68,
+      0.84
+     ]
+    }
+   ],
+   "walk_probe": [
+    [
+     -1.8,
+     -2.9
+    ],
+    [
+     -3.9,
+     -3.0
+    ],
+    [
+     -5.3,
+     -3.9
+    ],
+    [
+     0.0,
+     -3.2
+    ],
+    [
+     3.2,
+     -2.4
+    ],
+    [
+     4.4,
+     -2.3
+    ],
+    [
+     1.0,
+     -1.9
+    ],
+    [
+     -1.8,
+     -2.9
+    ]
+   ],
+   "review_views": {
+    "ch04_return_lock": {
+     "from": [
+      -3.3,
+      1.55,
+      -2.9
+     ],
+     "to": [
+      -4.3,
+      0.95,
+      -1.5
+     ]
+    },
+    "ch04_return_porch": {
+     "from": [
+      -1.2,
+      1.6,
+      -2.4
+     ],
+     "to": [
+      -3.7,
+      0.9,
+      1.0
+     ]
+    },
+    "ch04_return_dock": {
+     "from": [
+      0.6,
+      1.6,
+      -3.9
+     ],
+     "to": [
+      2.8,
+      1.2,
+      -1.5
+     ]
+    },
+    "ch04_dock_panel": {
+     "from": [
+      2.75,
+      1.65,
+      -2.15
+     ],
+     "to": [
+      3.3,
+      1.55,
+      -1.53
+     ]
+    }
+   }
+  },
+  {
+   "id": "relief_cargo",
+   "from": "EX-CH04-S12",
+   "until": "EX-CH05-S01",
+   "about": "Decision 6: the relief locker holds the relief cargo for the 8-12 Dec flight. EX-CH04-S12 (played at the Commons table) checks the cargo order, a relay controller, quarantine supplies and the parts of one more suit locker (SC-0406), so from S12 the locker is labelled for it; on 12 Dec (CH05-S01) it stands shut and labelled, ready, while the cargo from the lander waits in the cargo lock until its seals are checked: it passes through before anyone removes a glove.",
+   "fixtures": []
+  },
+  {
+   "id": "ch05_arrival",
+   "from": "EX-CH05-S01",
+   "until": "EX-CH05-S01",
+   "about": "EX-CH05-S01 'The Fifth Mug' (12 Dec): Ferreira is a small moving shape on the landing-pad camera (the console's third screen) beside the relief cargo until the pad is declared clear; the rover brings her to the tunnel, which starts SEALED: the open command waits for two agreeing checks. Inside, she takes the corridor watch by the inner door. The relief cargo waits in the cargo lock for its seal check; the relief locker is labelled and ready for it. The five-person roster on the departure boards (CH05 S01 -> S02: her mug carried to the table in the Commons).",
+   "garage": {
+    "dock": "vacuum"
+   },
+   "anchors": {
+    "rover_kai": [
+     -0.6,
+     0.0,
+     -2.1
+    ],
+    "rover_amara": [
+     3.6,
+     0.0,
+     -2.0
+    ],
+    "rover_mei": [
+     -2.3,
+     0.0,
+     -2.2
+    ],
+    "rover_ferreira": [
+     -4.6,
+     0.0,
+     -3.7
+    ]
+   },
+   "stations": {
+    "p09_check_lander_clearance": "garage_pad_camera",
+    "p09_check_seals": "garage_dock",
+    "p09_verify_five_person_roster": "garage_departure_boards"
+   },
+   "review_views": {
+    "ch05_pad_camera": {
+     "from": [
+      1.9,
+      1.5,
+      -2.7
+     ],
+     "to": [
+      2.3,
+      1.3,
+      -4.2
+     ]
+    },
+    "ch05_relief_locker": {
+     "from": [
+      2.9,
+      1.55,
+      -2.3
+     ],
+     "to": [
+      4.0,
+      1.25,
+      -3.8
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch07_departure",
+   "from": "EX-CH07-S12",
+   "until": "EX-CH08-S01",
+   "about": "EX-CH07-S12 'Who Stays With the Garden' (7 Apr to 8 Apr 00:00) and EX-CH08-S01 'Before the Road' (8 Apr 00:00): five names face the garage's two destination boards (decision 7; M3-105 moved S12 here from the Commons main display): Ferreira, Kai and Rafi take the rover, Mei and Amara hold Aurora. The rover loadout stands on a table by the corridor door: the spare controller Kai labelled (S11 -> S12) and the spare battery, three road-repeater cases, three helmets, the three-site route card and the duplicate route and shelter checklists dated 8 Apr 00:00 (CH07 -> CH08). The journey card and the home-night ledger are on the handover console; the small guide light is in the plan.",
+   "fixtures": [
+    {
+     "id": "loadout_table_top",
+     "position": [
+      -5.6,
+      0.74,
+      -3.45
+     ],
+     "size": [
+      0.7,
+      0.04,
+      2.0
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "loadout_table_leg_n",
+     "position": [
+      -5.6,
+      0.36,
+      -4.35
+     ],
+     "size": [
+      0.6,
+      0.72,
+      0.05
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "loadout_table_leg_s",
+     "position": [
+      -5.6,
+      0.36,
+      -2.55
+     ],
+     "size": [
+      0.6,
+      0.72,
+      0.05
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "packed_case",
+     "position": [
+      -5.619999999999999,
+      1.01,
+      -4.1
+     ],
+     "size": [
+      0.5,
+      0.5,
+      0.6
+     ],
+     "color": "#2b3a4f",
+     "transparent": false
+    },
+    {
+     "id": "packed_case_label",
+     "position": [
+      -5.369,
+      1.09,
+      -4.1
+     ],
+     "size": [
+      0.002,
+      0.14,
+      0.42
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "spare_battery",
+     "position": [
+      -5.619999999999999,
+      1.36,
+      -4.1
+     ],
+     "size": [
+      0.22,
+      0.2,
+      0.3
+     ],
+     "color": "#3a3f47",
+     "transparent": false
+    },
+    {
+     "id": "checklist_rover",
+     "position": [
+      -5.43,
+      0.761,
+      -3.55
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "checklist_aurora",
+     "position": [
+      -5.43,
+      0.761,
+      -3.2
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_card",
+     "position": [
+      -5.43,
+      0.761,
+      -2.9
+     ],
+     "size": [
+      0.18,
+      0.002,
+      0.25
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "repeater_case_1",
+     "position": [
+      -5.6499999999999995,
+      0.13,
+      -4.0
+     ],
+     "size": [
+      0.4,
+      0.26,
+      0.5
+     ],
+     "color": "#5d6b80",
+     "transparent": false
+    },
+    {
+     "id": "repeater_case_2",
+     "position": [
+      -5.6499999999999995,
+      0.13,
+      -3.45
+     ],
+     "size": [
+      0.4,
+      0.26,
+      0.5
+     ],
+     "color": "#5d6b80",
+     "transparent": false
+    },
+    {
+     "id": "repeater_case_3",
+     "position": [
+      -5.6499999999999995,
+      0.13,
+      -2.9
+     ],
+     "size": [
+      0.4,
+      0.26,
+      0.5
+     ],
+     "color": "#5d6b80",
+     "transparent": false
+    },
+    {
+     "id": "repeater_label_1",
+     "position": [
+      -5.449,
+      0.14,
+      -4.0
+     ],
+     "size": [
+      0.002,
+      0.09,
+      0.3
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "repeater_label_2",
+     "position": [
+      -5.449,
+      0.14,
+      -3.45
+     ],
+     "size": [
+      0.002,
+      0.09,
+      0.3
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "repeater_label_3",
+     "position": [
+      -5.449,
+      0.14,
+      -2.9
+     ],
+     "size": [
+      0.002,
+      0.09,
+      0.3
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "props": [
+    {
+     "id": "helmet_1",
+     "path": "res://assets/props/PR_Helmet/PR_Helmet.glb",
+     "position": [
+      -5.75,
+      0.76,
+      -3.55
+     ],
+     "rotation_degrees": [
+      0,
+      90,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "id": "helmet_2",
+     "path": "res://assets/props/PR_Helmet/PR_Helmet.glb",
+     "position": [
+      -5.75,
+      0.76,
+      -3.13
+     ],
+     "rotation_degrees": [
+      0,
+      90,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "id": "helmet_3",
+     "path": "res://assets/props/PR_Helmet/PR_Helmet.glb",
+     "position": [
+      -5.75,
+      0.76,
+      -2.71
+     ],
+     "rotation_degrees": [
+      0,
+      90,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "id": "packed_case_text",
+     "text": "SPARE RELAY CONTROLLER   PACKED\nBENCH CHECKED, FIELD TEST STILL NEEDED\nKAI",
+     "position": [
+      -5.367,
+      1.09,
+      -4.1
+     ],
+     "size": 0.00042,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90,
+     "wrap_m": 0.4
+    },
+    {
+     "id": "checklist_rover_text",
+     "text": "ROUTE AND SHELTER CHECKLISTS\nCOPY FOR THE ROVER   8 APR 2047, 00:00\n\nROVER: FERREIRA, KAI, RAFI\n24 H OUT, 3 H REPAIR, 24 H BACK\nPROVISIONS FOR 72 H\n\nAURORA: MEI, AMARA\n2 AT HOME FOR 33 H, THEN 5 FOR 3 H\nSMALL GUIDE LIGHT: IN THE PLAN\nLOCAL CHECK-IN MARKERS SET",
+     "position": [
+      -5.43,
+      0.7625,
+      -3.55
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.19,
+     "pitch": -90,
+     "yaw": 90
+    },
+    {
+     "id": "checklist_aurora_text",
+     "text": "ROUTE AND SHELTER CHECKLISTS\nCOPY FOR AURORA   8 APR 2047, 00:00\n\nROVER: FERREIRA, KAI, RAFI\n24 H OUT, 3 H REPAIR, 24 H BACK\nPROVISIONS FOR 72 H\n\nAURORA: MEI, AMARA\n2 AT HOME FOR 33 H, THEN 5 FOR 3 H\nSMALL GUIDE LIGHT: IN THE PLAN\nLOCAL CHECK-IN MARKERS SET",
+     "position": [
+      -5.43,
+      0.7625,
+      -3.2
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.19,
+     "pitch": -90,
+     "yaw": 90
+    },
+    {
+     "id": "route_card_text",
+     "text": "THREE-SITE ROUTE\nAURORA, THREE ROAD REPEATERS, MALAPERT SUMMIT\nFOUR LINKS PASSED IN THE SIMULATOR\nFIELD CHECKS STILL REQUIRED",
+     "position": [
+      -5.43,
+      0.7625,
+      -2.9
+     ],
+     "size": 0.00032,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.17,
+     "pitch": -90,
+     "yaw": 90
+    },
+    {
+     "id": "repeater_text_1",
+     "text": "ROAD REPEATER\nSITE 1 OF 3",
+     "position": [
+      -5.447,
+      0.14,
+      -4.0
+     ],
+     "size": 0.00036,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90,
+     "wrap_m": 0.28
+    },
+    {
+     "id": "repeater_text_2",
+     "text": "ROAD REPEATER\nSITE 2 OF 3",
+     "position": [
+      -5.447,
+      0.14,
+      -3.45
+     ],
+     "size": 0.00036,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90,
+     "wrap_m": 0.28
+    },
+    {
+     "id": "repeater_text_3",
+     "text": "ROAD REPEATER\nSITE 3 OF 3",
+     "position": [
+      -5.447,
+      0.14,
+      -2.9
+     ],
+     "size": 0.00036,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90,
+     "wrap_m": 0.28
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "loadout_table",
+     "position": [
+      -5.6,
+      0.38,
+      -3.45
+     ],
+     "size": [
+      0.7,
+      0.76,
+      2.0
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "garage_loadout",
+     "label": "Rover loadout",
+     "position": [
+      -5.3999999999999995,
+      1.0,
+      -3.45
+     ],
+     "approach_m": [
+      -4.55,
+      0.0,
+      -3.45
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "loadout_table_top"
+    }
+   ],
+   "anchors": {
+    "rover_ferreira": [
+     -3.0,
+     0.0,
+     -2.1
+    ],
+    "rover_kai": [
+     -1.0,
+     0.0,
+     -2.0
+    ],
+    "rover_rafi": [
+     1.8,
+     0.0,
+     -2.1
+    ],
+    "rover_amara": [
+     3.0,
+     0.0,
+     -2.2
+    ],
+    "rover_mei": [
+     -1.8,
+     0.0,
+     -2.9
+    ]
+   },
+   "stations": {
+    "p14_assign_field_team": "garage_departure_boards",
+    "p14_assign_home_team": "garage_departure_boards",
+    "p14_sign_departure_prep": "garage_loadout",
+    "p15_confirm_teams": "garage_departure_boards",
+    "p15_confirm_loadout": "garage_loadout",
+    "p15_confirm_roundtrip_provisions": "rover_loadout"
+   },
+   "walk_probe": [
+    [
+     -1.8,
+     -2.9
+    ],
+    [
+     -4.4,
+     -2.6
+    ],
+    [
+     -4.4,
+     -3.9
+    ],
+    [
+     0.0,
+     -3.2
+    ],
+    [
+     3.2,
+     -2.4
+    ],
+    [
+     4.4,
+     -2.3
+    ],
+    [
+     1.0,
+     -1.9
+    ],
+    [
+     -1.8,
+     -2.9
+    ]
+   ],
+   "review_views": {
+    "ch07_departure": {
+     "from": [
+      0.5,
+      1.55,
+      -2.0
+     ],
+     "to": [
+      0.5,
+      1.35,
+      -4.5
+     ]
+    },
+    "ch07_loadout": {
+     "from": [
+      -3.9,
+      1.65,
+      -2.6
+     ],
+     "to": [
+      -5.6,
+      0.85,
+      -3.6
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch07_d12_ex-ch06-s08-opt01",
+   "from": "EX-CH07-S12",
+   "until": "EX-CH07-S12",
+   "choice": {
+    "choice_id": "EX-CH06-S08-CHOICE",
+    "option_id": "EX-CH06-S08-OPT01"
+   },
+   "about": "Doc 24 section 5.2 D12: Kai packs his family's copy of the observation he sent home; it rides on the rover dash in CH08.",
+   "fixtures": [
+    {
+     "id": "kai_family_copy",
+     "position": [
+      -5.43,
+      0.761,
+      -2.6
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.15
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "kai_family_copy_text",
+     "text": "KAI'S COPY\nTHE RING DIAGRAM\nSENT HOME 12 JAN 2047",
+     "position": [
+      -5.43,
+      0.7625,
+      -2.6
+     ],
+     "size": 0.0003,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.19,
+     "pitch": -90,
+     "yaw": 90
+    }
+   ]
+  },
+  {
+   "id": "ch07_d12_ex-ch06-s08-opt02",
+   "from": "EX-CH07-S12",
+   "until": "EX-CH07-S12",
+   "choice": {
+    "choice_id": "EX-CH06-S08-CHOICE",
+    "option_id": "EX-CH06-S08-OPT02"
+   },
+   "about": "Doc 24 section 5.2 D12: Kai packs his family's copy of the observation he sent home; it rides on the rover dash in CH08.",
+   "fixtures": [
+    {
+     "id": "kai_family_copy",
+     "position": [
+      -5.43,
+      0.761,
+      -2.6
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.15
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "kai_family_copy_text",
+     "text": "KAI'S COPY\nTHE PROTECTED-SERVICE PLAN\nSENT HOME 12 JAN 2047",
+     "position": [
+      -5.43,
+      0.7625,
+      -2.6
+     ],
+     "size": 0.0003,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.19,
+     "pitch": -90,
+     "yaw": 90
+    }
+   ]
+  },
+  {
+   "id": "ch08_departure",
+   "from": "EX-CH08-S01",
+   "until": "EX-CH08-S01",
+   "about": "EX-CH08-S01 'Before the Road': three occupied seats and two people outside the sealed cabin; the player reads every name against a destination and checks the packed hardware against the signed preparation record (controller, battery spare, service diagram, three repeater checkpoints) before both destination boards agree.",
+   "anchors": {
+    "rover_kai": [
+     -1.0,
+     0.0,
+     -2.0
+    ],
+    "rover_ferreira": [
+     -3.0,
+     0.0,
+     -2.1
+    ]
+   }
+  },
+  {
+   "id": "ch08_return",
+   "from": "EX-CH08-S11",
+   "until": "EX-CH08-S11",
+   "about": "EX-CH08-S11 'The Same Road Home' (10 Apr 03:00): the rover back on the tunnel, which starts SEALED (the airlock does not open because a reunion is due); three arrivals checked by name and pressure, then five lunar crew physically home and the home ledger changed for the last three dark hours.",
+   "garage": {
+    "dock": "vacuum"
+   },
+   "anchors": {
+    "rover_kai": [
+     -1.0,
+     0.0,
+     -2.0
+    ],
+    "rover_ferreira": [
+     -3.0,
+     0.0,
+     -2.1
+    ]
+   },
+   "stations": {
+    "p16_confirm_return_24h": "base_handover",
+    "p16_confirm_five_at_aurora": "garage_departure_boards",
+    "p16_update_occupancy": "base_handover"
+   }
+  }
+ ]
+}

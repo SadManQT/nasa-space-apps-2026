@@ -6062,7 +6062,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "LOC-08 garage room from the approved EN_Garage layout (M3-4A follow-up)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M3-4A"
@@ -6074,8 +6074,8 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07.",
-   "evidence": "",
-   "updated": "2026-11-07",
+   "evidence": "run_tests.sh 67/67 suites passed on the rebased tree (test_chapter4_rooms 1490 checks, chapter7_rooms 3145, exterior_terrain 455); LOC-08 garage room (garage.tscn, LOC-08.json, build_garage, navigation areas, dock SEALED/EQUALISING/SAFE TO OPEN with time card and pump hum), staged EX-CH04-S02/S03/S09, the relief locker from S12, EX-CH05-S01, EX-CH07-S12 (moved from the Commons), EX-CH08-S01/S11; exterior on the Aurora ridge (exterior_terrain.json LOC-08); screenshots production/qa/evidence/M3-105_*.png (19); Atik wiring M3-109",
+   "updated": "2026-11-08",
    "prompt": "Build the LOC-08 room scene from game/assets/environment/EN_Garage/en_garage.gd and garage.json, the layout Sadman approved on 7 Nov 2026 ('Approve all 12', production/concept/chapter4_v1/README.md decisions 1-7): the pressurised ready room on its 1.40 m plinth, the vacuum rover bay with the EVA porch, VH_Rover docked at the telescoping tunnel, the regolith berm. Replace the greybox LOC-08 contract in room_contract.gd (bounds 14 x 10 -> 12 x 9; the ready room is pressurised and the bay is vacuum; boundaries: the dock hatch, the rover door, the inner door to the pressurised corridor of decision 2). Stage EX-CH04-S02, S03, S09 (vault in its sleeve through the dry cargo lock), S12 (relief locker), EX-CH05-S01 (the pad camera on Screen3), EX-CH07-S12 and EX-CH08-S01 (the two departure boards: move S12 off the Commons main display), EX-CH08-S11. Run the dock's SEALED / EQUALISING / SAFE TO OPEN cycle and pump hum from garage.json 'dock' with a labelled time card; navigation on the deck, the porch and the bay floor; set the exterior on the Aurora ridge at garage.json 'site' (80 m from Aurora at azimuth 150, door facing azimuth 100) with the M1-82 method. Acceptance: game/tools/run_tests.sh, every suite passes (paste the last line); screenshots of the room in production/qa/evidence/<task id>_*.png.",
    "reserved_for": "sadman",
    "effort": 3
@@ -6187,6 +6187,31 @@
    "updated": "2026-11-07",
    "prompt": "Found in the M3-3R screenshot review (production/qa/evidence/M3-3R_S11_petal_on_board.png, M3-3R_S12_lineage_board.png). In game/assets/props/PR_PressedPetal_Mounted/PR_PressedPetal_Mounted.glb the materials M_Card and M_Petal import with metallic 1.0 and roughness 1.0 (the glTF default metallicFactor when the exporter leaves it out), so Alo's mounted petal on the lineage board (LOC-03 layer ch03_lineage_board, EX-CH03-S11 on) shows a dull grey card and a dark 12 mm petal instead of paper and a mustard petal. M_Sleeve (alpha 0.16) and the clip are fine. Re-export with metallic 0 on the paper and petal materials (check PR_PressedPetal, the bench sleeve used at EX-CH03-S10, for the same fault), re-run the asset gate, and retake the two M3-3R shots with production/qa/evidence/M3-3R_capture.sh. Acceptance: probe the imported materials (metallic 0 on M_Card and M_Petal), the petal reads as a pressed mustard petal on the lineage board at the review view, game/tools/run_tests.sh passes.",
    "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M3-109",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Wire the Chapter 4 garage (LOC-08) into the campaign: room scene, boundaries, dock cycle",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-105"
+   ],
+   "paths": [
+    "game/scripts/loading/",
+    "game/scripts/navigation/",
+    "game/scripts/campaign/",
+    "game/scripts/missions/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-08.",
+   "evidence": "",
+   "updated": "2026-11-08",
+   "prompt": "M3-105 (Sadman, rooms) built LOC-08, the approved M3-4A rover garage: game/scenes/campaign/rooms/garage.tscn, game/resources/campaign/rooms/LOC-08.json, RoomContract LOC-08 (12 x 9 m; boundaries door_commons_garage, garage_dock_hatch, rover_bay_door). EX-CH04-S02/S03/S09, EX-CH05-S01, EX-CH07-S12 (moved from the Commons; scene_rosters.json now puts all five in LOC-08) and EX-CH08-S01/S11 are staged there. Please make these changes in your folders (do not edit game/scripts/world/ or game/resources/campaign/rooms/; file a task for Sadman if the room data needs a change).\n1. game/scripts/loading/load_preparation.gd ROOM_SCENES: add \"LOC-08\": \"res://scenes/campaign/rooms/garage.tscn\". Why: garage.tscn carries HabitatKitPreload and a GaragePreload of the 34 EN_Garage GLBs and VH_Rover, so the loading card decodes them off the main thread; without it Chapter1Campaign builds LOC-08 as CampaignRoom.new() from LOC-08.json (works, but loads them on the main thread).\n2. game/scripts/navigation/route_navigation.gd _BOUNDARIES: add \"door_commons_garage\": {\"from\": \"LOC-01\", \"to\": \"LOC-08\", \"kind\": INTERNAL, \"default_open\": true} (the pressurised kit corridor, decision 2; the Commons has no portal drawn for it yet), \"garage_dock_hatch\" (LOC-08 to the docked rover's cabin; a pressure boundary, default closed: CampaignRoom.set_door_open(\"garage_dock_hatch\", true) is refused unless the tunnel reads SAFE TO OPEN) and \"rover_bay_door\" (LOC-08 vacuum bay to the apron and LOC-06; not a pressure door, default closed; set_door_open coils it up). Extend WorldRoute.restore's missing-boundary default the same way it fills door_commons_airlock (game/scripts/world/world_route.gd is Sadman's: file a task if it needs more).\n3. game/scripts/campaign/chapter1_campaign.gd: the dock cycle. CampaignRoom.garage() returns en_garage.gd: dock_state() SEALED / EQUALISING / SAFE TO OPEN, request_dock_cycle(\"habitat\") (equalise before the hatch opens) or (\"vacuum\") (pump down before undocking), time_card() (the labelled time card: TUNNEL EQUALISING · ABOUT 2.5 MIN, SHOWN IN 8 S), signals dock_state_changed / dock_cycle_finished, dock_snapshot() / dock_restore() for saves. EX-CH04-S09, EX-CH05-S01 and EX-CH08-S11 start SEALED (LOC-08.json staging \"garage\": {\"dock\": \"vacuum\"}): when the player uses the garage_dock station, request the habitat cycle, show the time card on the HUD while it runs (doc 09 LOC-08 exit behaviour: a labelled time card, not invisible teleportation), and open the hatch through WorldRoute when it reads SAFE TO OPEN. Save dock_snapshot() with the room state. Bind each action to the room station (RoomContract.station_focus, as in M3-103).\n4. game/scripts/campaign/terrain_session.gd (optional, for the open rover door): exterior_terrain.json LOC-08 has omit_staging_floor false and yaw_deg 127.14: the garage builds its own floors and turns by yaw_deg about origin_m. To show the Aurora ridge outside the door, put the TerrainStream and stream.lighting(scene_id) under a node with Transform3D(Basis(Vector3.UP, deg_to_rad(yaw_deg)), origin_m).affine_inverse() and free the room's RoomLighting/RoomEnvironment, as game/tools/test_chapter4_rooms.gd _capture_garage_exterior does.\n5. game/scripts/missions/extended_gate_catalog.gd, a canon mismatch to decide: the CH04 action lists are shifted against STORY_FULL. S08 (the vault shelf, LOC-10) lists p08_return_to_base, p08_dock_dry_glovebox, p08_warm_cold/cool/room, p08_check_condensation, p08_open_inner_seal and p08_inventory_12, but canon returns and docks in S09 and warms, opens and inventories in S10 in the garden's dry glovebox (\"Only now ... breaking the biological seal inside that protected workspace\"); S09 lists p08_scan_lid / p08_save_viability_pending / p08_transfer_case (the lid scan is S10-S11). The rooms give each listed action a station where the catalog puts it (S09: the dry cargo lock and the console); if you realign the catalog, tell Sadman so the station maps follow.\nTests: add to one of your suites LoadPreparation.ROOM_SCENES[\"LOC-08\"] == \"res://scenes/campaign/rooms/garage.tscn\" and WorldRoute.new().boundary_state(id) non-empty for the three LOC-08 boundaries; a played EX-CH04-S09 cycles the dock with the time card and opens the hatch. Acceptance: game/tools/run_tests.sh green (every suite), including test_chapter4_rooms.",
+   "reserved_for": "atik",
    "effort": 1
   }
  ],

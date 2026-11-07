@@ -2080,23 +2080,23 @@
       "playable_actor_id": "mei",
       "actors": {
         "kai": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-08",
           "team_id": "base"
         },
         "amara": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-08",
           "team_id": "base"
         },
         "mei": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-08",
           "team_id": "base"
         },
         "rafi": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-08",
           "team_id": "base"
         },
         "ferreira": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-08",
           "team_id": "base"
         }
       }

@@ -177,6 +177,14 @@ func named_roots() -> Dictionary:
 func set_door_open(boundary_id: String, is_open: bool) -> bool:
 	if door_root == null:
 		return false
+	# LOC-08 (M3-105): the dock hatch keeps its tunnel interlock (it opens only on SAFE TO OPEN); the rover door is
+	# not a pressure door (the bay is vacuum) and simply coils up or down.
+	var bay := garage()
+	if bay != null and boundary_id == "garage_dock_hatch":
+		return bool(bay.set_dock_hatch_open(is_open).get("accepted", false))
+	if bay != null and boundary_id == "rover_bay_door":
+		bay.set_rover_door_open(is_open)
+		return true
 	for node in door_root.get_children():
 		if String(node.get_meta("boundary_id", "")) == boundary_id and node is CampaignDoor:
 			(node as CampaignDoor).set_open(is_open)
@@ -541,6 +549,11 @@ func kit_prop(id: String) -> Dictionary:
 ## without one. The room owner drives it and saves its snapshot().
 func airlock() -> Node3D:
 	return visual_root.get_node_or_null("Airlock") as Node3D if visual_root != null else null
+
+## LOC-08's running garage (en_garage.gd: the dock tunnel cycle and hatch, rover door, cargo lock, relief locker), or
+## null in a room without one. The room owner drives it and saves its dock_snapshot().
+func garage() -> Node3D:
+	return visual_root.get_node_or_null("Garage") as Node3D if visual_root != null else null
 
 ## True when an installed PR_CrewSeat's sitting position is at this floor point, so a seated
 ## companion needs no stand-in bench. The sitter's origin is SEAT_SIT_OFFSET_M in front of

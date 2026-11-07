@@ -170,6 +170,11 @@ static func build(room: CampaignRoom, stage: Dictionary, layout: Dictionary) -> 
 		_chapter7_prop(visuals, spec)
 	for spec in stage.prints:
 		_print(visuals, spec)
+	for spec in stage.kit_screens:
+		_kit_screen(room, visuals, spec)
+	var bay := room.garage()
+	if bay != null and not stage.garage.is_empty():
+		_pose_garage(bay, stage.garage)
 	for spec in stage.signs:
 		var shown: Dictionary = spec.duplicate()
 		if spec.has("line"):
@@ -271,6 +276,13 @@ static func clear(room: CampaignRoom) -> void:
 							piece.remove_child(child)
 							child.queue_free()
 	set_light_level(room, {})
+	for slot in room.get_meta("staged_screen_slots", []):
+		if is_instance_valid(slot.mesh):
+			(slot.mesh as MeshInstance3D).set_surface_override_material(int(slot.surface), null)
+	room.set_meta("staged_screen_slots", [])
+	var bay := room.garage()
+	if bay != null:
+		_pose_garage(bay, {})
 
 ## Scales the room's practical lights and ceiling-strip diffusers and sets the ambient level for the staged scene
 ## (e.g. the eclipse's protected plan: "practical_scale" 0.3). An empty settings dictionary restores the base rig.
@@ -315,6 +327,75 @@ static func _root(parent: Node) -> Node3D:
 	node.name = ROOT_NAME
 	parent.add_child(node)
 	return node
+
+## M3-105: live words on a named slot of a placed kit piece (a garage screen, a slope sign's face, a tag): "node" is the
+## piece under VisualRoot (a room role, e.g. "route_board", or a staged piece), "slot" the material ("Screen",
+## "Screen2", "Label"...), "text" (with "{line}" filled from "line"), "fg" and "bg". Unlike kit_texts (slot_text, M3-3R),
+## which paints a SubViewport through the slot's UVs, the words are a Label3D laid on the slot's own plane
+## (Kit.surface_frame), fitted to it and read the right way round whatever the UVs, so the M3-4A garage and cold-trap
+## pieces need no per-slot flips; the slot glows dark behind them like a lit display.
+static func _kit_screen(room: CampaignRoom, parent: Node3D, spec: Dictionary) -> Label3D:
+	var piece := room.visual_root.get_node_or_null(String(spec.node)) as Node3D
+	if piece == null:
+		piece = parent.get_node_or_null(String(spec.node)) as Node3D
+	if piece == null:
+		return null
+	var frame := Kit.surface_frame(piece, String(spec.slot))
+	if frame.is_empty():
+		return null
+	var text := String(spec.get("text", ""))
+	if spec.has("line"):
+		text = text.replace("{line}", line_text(String(spec.line)))
+	var label := Label3D.new()
+	label.name = String(spec.id)
+	label.text = text
+	label.font_size = 48
+	label.outline_size = 0
+	label.double_sided = false
+	label.modulate = Color(spec.get("fg", "#d9f2ff"))
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER if bool(spec.get("centred", true)) else HORIZONTAL_ALIGNMENT_LEFT
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	var size: Vector2 = frame.size
+	var lines := text.split("\n")
+	var longest := 1
+	for one in lines:
+		longest = maxi(longest, one.length())
+	label.pixel_size = minf(size.x * 0.9 / (longest * 0.6 * 48.0), size.y * 0.86 / (lines.size() * 1.3 * 48.0))
+	label.width = size.x * 0.94 / label.pixel_size
+	label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	var normal: Vector3 = frame.normal
+	# the piece stands directly under VisualRoot or under ChapterStaging, which sits at VisualRoot's origin
+	label.transform = piece.transform * Transform3D(Basis(frame.right, frame.up, normal), frame.centre + normal * 0.004)
+	parent.add_child(label)
+	var glow := StandardMaterial3D.new()
+	glow.resource_name = "Screen_live"
+	glow.albedo_color = Color(spec.get("bg", "#0b1220"))
+	glow.emission_enabled = true
+	glow.emission = Color(spec.get("bg", "#0b1220"))
+	glow.emission_energy_multiplier = 0.6
+	glow.roughness = 0.85
+	glow.metallic_specular = 0.15
+	var slots: Array = room.get_meta("staged_screen_slots", [])
+	for found in slot_surfaces(piece, String(spec.slot)):
+		(found.mesh as MeshInstance3D).set_surface_override_material(int(found.surface), glow)
+		slots.append(found)
+	room.set_meta("staged_screen_slots", slots)
+	return label
+
+## M3-105: the garage's scene pose ("garage" staging map): "lock_door" ("InnerDoor", "OuterDoor" or "" for both
+## shut), "relief_locker_open", "rover_door_open" and "dock" (the tunnel at the scene's start: "habitat" for SAFE TO
+## OPEN, "vacuum" for SEALED). {} puts the garage back to its rest: both lock doors and the locker shut, the rover door
+## down, the docked tunnel at cabin pressure with the hatch shut. Presentation only: the scene's mission drives the
+## dock cycle and the doors from there.
+static func _pose_garage(bay: Node3D, pose: Dictionary) -> void:
+	for which in ["InnerDoor", "OuterDoor"]:
+		bay.set_lock_door(which, false)
+	var lock := String(pose.get("lock_door", ""))
+	if not lock.is_empty():
+		bay.set_lock_door(lock, true)
+	bay.set_relief_locker_open(bool(pose.get("relief_locker_open", false)))
+	bay.set_rover_door_open(bool(pose.get("rover_door_open", false)))
+	bay.dock_restore({"docked": true, "tunnel_side": String(pose.get("dock", "habitat")), "hatch_open": false})
 
 ## Places one M3-6A prop with the scene's pose: board cards/plan, text screens, state preset, part visibility and
 ## the monitor's live picture (phase, mode, filter, logged observations; "track" eases the phase over seconds).

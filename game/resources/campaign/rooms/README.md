@@ -285,3 +285,54 @@ New layout and staging keys (all optional):
 
 Run `game/tools/run_tests.sh chapter3_rooms` and `production/qa/evidence/M3-3R_capture.sh` (windowed, 37 screenshots and
 frame timings).
+
+# LOC-08, the rover garage (M3-105, Chapter 4 rooms M3-4R)
+
+`LOC-08.json` / `garage.tscn` is the approved M3-4A garage (`en_garage.gd` from `garage.json`, Sadman's "Approve all 12",
+decisions 1-7) built as a kit room by `HabitatRoomBuilder.build_garage`. Room coordinates are garage.json's minus
+(6, 1.4, 4.5) (`shell_offset_m`), so the room centre is the origin and the **ready room** (habitat air, 12 x 3 m along
+the north wall) has its deck at y 0 like every kit room; the **vacuum bay** floor is y -1.40 and the **EVA porch** at the
+rover's rear is level with the deck (decision 4). The pieces named in `garage_roles` and the docked VH_Rover stand under
+VisualRoot by role; floor and ceiling tiles are batched; the room's four practicals replace the kit light strips; the
+bay keeps three 5,000 K floods (`bay_floods`, under `VisualRoot/BayFloods`); the porch stair, drawn on the porch piece
+without collision, gets one ramp (`stair`). The inner door is the room's portal `door_commons_garage` with its kit
+corridor (decision 2); the dock hatch (`garage_dock_hatch`) and the rover door (`rover_bay_door`) are driven through
+`CampaignRoom.set_door_open` / `garage()`. The ready room is the room's pressure (`pressurised`); `zones` names the
+vacuum porch and bay.
+
+Navigation uses the new `navigation.areas` (walkable rectangles at their own height, a `ramp` for the stair, `open`
+edges that join another area; an obstacle with `area` blocks only that area): the deck, the porch, the stair and the
+bay floor. The pressure wall keeps the deck and the vacuum apart; a suited cadet can walk the porch, the stair and the
+aisle beside the rover's wheels to the rover door. `sealed_enclosures` names the dry cargo lock's chamber (what rests
+in it rests on its cradle) and `interior_walls` the pressure wall, for the staging checks.
+
+The dock (garage.json `dock`, en_garage.gd): the tunnel is equalised to the cabin (`habitat`, SAFE TO OPEN) or pumped
+down (`vacuum`, SEALED); `request_dock_cycle()` runs EQUALISING for 8 s on screen (about 2.5 min real, the labelled time
+card on the panel and from `time_card()`), with the pump hum (SFX_PUMP_PRESSURE) in the ready room only; the hatch opens
+only on SAFE TO OPEN; `dock_snapshot()` / `dock_restore()` save it. The staging map `garage` sets each scene's start
+(`dock`, `lock_door`, `relief_locker_open`, `rover_door_open`); `clear()` puts the garage back at rest.
+
+New staging list `kit_screens`: live words on a piece's named slot (`node`, `slot` Screen / Screen2 / Screen3 / Label,
+`text`, `fg`, `bg`), laid as a Label3D on the slot's own plane (`Kit.surface_frame`) and fitted to it, so they read the
+right way round whatever the slot's UVs; the slot glows dark behind them. (`kit_texts`, M3-3R, paints the slot's UVs
+instead.)
+
+| Scenes | What the garage shows |
+|---|---|
+| EX-CH04-S02 | One ledger per destination on the two departure boards (ROVER: Rafi, Kai, own 48 h manifest; AURORA: Mei, Amara, base ledger), the closed recovery carrier and the ice scanner by the cargo lock, Kai's spare light in its labelled clip, the suit seals, the rover manifest on the cargo rack apart from the base ledger, Amara's handover console; the tunnel SAFE TO OPEN |
+| EX-CH04-S03 | Route cards A / B / C on the route board with the reason each passes or fails (B: 12 km, max 12 deg, 30 + 30 of 100, 40 left against 30), the beacon plan on the console (S03 -> S04) |
+| EX-CH04-S09 | The return: the tunnel starts SEALED (the player equalises it), the sealed case in its MLI sleeve in the dry cargo lock with the inner door open (decision 5), the sealed sample on its own shelf and record, the same report shape on the console, the return link chain; Kai suited on the EVA porch (outfit `eva`) (S09 -> S10, the garden glovebox) |
+| EX-CH04-S12 .. CH05-S01 | The relief locker labelled for the 8-12 Dec flight (decision 6); CH05-S01: Ferreira on the landing-pad camera (Screen3), the relief cargo in the lock awaiting its seal check, the tunnel SEALED until two checks agree, the five-person roster, Ferreira's corridor watch by the inner door |
+| EX-CH07-S12, EX-CH08-S01 | The two destination boards (ROVER: Ferreira, Kai, Rafi; AURORA: Mei, Amara), the journey card and the home-night ledger on the console, the rover loadout on a table by the corridor door (Kai's packed controller, battery, three repeater cases, three helmets, the route card, the duplicate checklists dated 8 Apr 00:00); D12 Kai's family copy. CH07-S12 moved here from the Commons (decision 7): its roster is LOC-08 and the Commons' S12-only layers are gone |
+| EX-CH08-S11 | The return home: the tunnel starts SEALED, ROVER HOME 10 Apr 03:00, FIVE HOME |
+
+`exterior_terrain.json` LOC-08 places the garage on the Aurora ridge with the M1-82 frame (`site_from`: 80 m from Aurora at
+azimuth 150, the rover door turned to azimuth 100, `yaw_deg`; the bay floor on the ground at the apron; the pad's relief
+and slope under the berm), derived by `test_exterior_terrain.gd -- --write`. Its floors are the room's own
+(`omit_staging_floor` false); the terrain is the ground outside the berm and the rover door.
+
+Campaign-side steps are Atik's (board task M3-109): registering `garage.tscn` in `LoadPreparation.ROOM_SCENES`, the three
+boundaries in `RouteNavigation`, driving the dock cycle and its time card from the scenes that start SEALED, and the
+turned TerrainStream outside the rover door. Run `game/tools/run_tests.sh chapter4_rooms` and
+`production/qa/evidence/M3-105_capture.sh` (windowed, 19 screenshots).
+

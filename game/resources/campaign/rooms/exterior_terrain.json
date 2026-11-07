@@ -395,6 +395,46 @@
    },
    "detours": {}
   },
+  "LOC-08": {
+   "region_id": "aurora_ridge",
+   "ephemeris_site": "aurora",
+   "horizon_site": "",
+   "omit_staging_floor": false,
+   "placement": "The rover garage (M3-105) stands 80 m from Aurora's site at azimuth 150 on the courtyard edge, its rover door facing azimuth 100, under a 1 m regolith berm (garage.json 'site', decision 3, approved 7 Nov 2026). Sun directions use the Aurora rows (80 m away, under 0.003 deg of difference); no terrain horizon was computed at the garage, so Earth is never drawn from here (it is outside every garage frame at EX-CH04-S02).",
+   "pending": "The garage builds its own floors: the ready-room deck and the porch at room y 0 and the vacuum bay floor at y -1.40 on a graded sintered pad. The LOLA ground matters only outside the berm and the rover door, so the terrain provider needs the room turned by yaw_deg about its origin (TerrainStream at -origin_m in the turned frame); until the campaign does that, the flat room stays.",
+   "site_from": {
+    "site": "aurora",
+    "distance_m": 80.0,
+    "azimuth_deg": 150.0,
+    "door_bearing_deg": 100.0,
+    "apron_local_m": [
+     7.5,
+     -1.4,
+     1.575
+    ],
+    "pad_footprint_m": [
+     30.0,
+     27.0
+    ],
+    "pad_relief_limit_m": 4.0,
+    "about": "apron_local_m is the rover door apron in room coordinates (garage.json anchor rover_door_apron); pad_footprint_m the berm's footprint, centred on the room"
+   },
+   "origin_xz_m": [
+    17.801,
+    -77.994
+   ],
+   "yaw_deg": 127.14,
+   "origin_m": [
+    17.801,
+    -2.238,
+    -77.994
+   ],
+   "pad_ground_m": [
+    -1.337,
+    1.961
+   ],
+   "pad_max_slope_deg": 16.62
+  },
   "LOC-09": {
    "region_id": "cold_trap",
    "origin_xz_m": [

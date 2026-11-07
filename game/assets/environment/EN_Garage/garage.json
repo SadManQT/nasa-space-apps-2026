@@ -2071,7 +2071,16 @@
    "SAFE TO OPEN"
   ],
   "rule": "the dock hatch opens only when the tunnel between it and the rover's hatch is SAFE TO OPEN; the pump runs only while EQUALISING (the ready room's pump hum); a trip pumps down about 1 m3 of tunnel, never the bay",
-  "time_compression": "a real tunnel takes minutes; the room owner compresses the cycle and shows a labelled time card (LOC-08 exit behaviour)"
+  "time_compression": "a real tunnel takes minutes; the room owner compresses the cycle and shows a labelled time card (LOC-08 exit behaviour)",
+  "equalise_seconds": 8.0,
+  "real_seconds": 150.0,
+  "sides": [
+   "habitat",
+   "vacuum"
+  ],
+  "start_side": "habitat",
+  "pump_sfx": "res://assets/audio/sfx/SFX_PUMP_PRESSURE.ogg",
+  "time_card": "TUNNEL {action} · ABOUT 2.5 MIN, SHOWN IN 8 S"
  },
  "site": {
   "distance_from_aurora_m": 80.0,
