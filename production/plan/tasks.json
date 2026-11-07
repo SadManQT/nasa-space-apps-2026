@@ -5902,6 +5902,47 @@
    "prompt": "M1-69 requests a public Director method but its campaign-only paths and MASTER_PLAN §7 reserve core/ for Sadman. Current CampaignDirector.restore_snapshot resets _checkpoint, so a message read must not be implemented via restore or a direct _state write in campaign. Please add update_message_metadata(metadata: Dictionary) -> Dictionary limited to presentation_resume.messages, validated delivered_ids/read_ids arrays of unique nonempty strings (read is a subset of delivered), and any explicitly documented primitive metadata needed by Ramim. Reject extra/root keys and malformed types atomically, duplicates harmless. Preserve gameplay revision, receipts, resources, flags, phase and the existing pre-shift checkpoint. Test real PuzzleHost preview -> update -> commit/retry, malformed/duplicate/no-existing-state cases, normal save/restore and old saves. Publish exact schema plus whether presentation metadata intentionally survives gameplay retry; do not reset gameplay checkpoint. Atik will wire the bounded campaign wrapper/save path in M1-69; Ramim owns inbox/UI M1-56. Do not edit campaign or UI. Required to honor ownership while completing M1-69.",
    "reserved_for": "sadman",
    "effort": 2
+  },
+  {
+   "id": "M1-90",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "any",
+   "title": "Run complete Windows loading diagnostics for M1-68",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "production/qa/evidence/M1-68_windows/"
+   ],
+   "refs": [],
+   "note": "Filed by atik/codex on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "M1-68 needs the originally failing Windows machine. Atik added opt-in full setup/suite log retention to game/tools/run_tests.sh and production/qa/perf/collect_loading.py, preserving every existing 50 ms assertion. After pulling Atik runtime work, run from the repository: python production/qa/perf/collect_loading.py --godot <absolute Godot4.7.2 console exe path> --output production/qa/evidence/M1-68_windows/<new dated directory> --hardware-note \"CPU/GPU/RAM and other workloads\". Requires Python3 and Git Bash. Default two sequential fresh processes, existing caches retained (not a cold-cache claim); script refuses existing output directories. Run with other Godot/render jobs stopped. Preserve manifest.json, runner.txt, setup.log and test_performance_runtime.gd.log for BOTH runs, including every failure beyond the first five and any startup139. Commit evidence under your account; do not alter timing thresholds, loader, assets or imports. If no Windows machine is available, record that explicitly. Atik will use exact timing/trace evidence to fix the responsible owned path; Apple M4 passes do not close the Windows issue.",
+   "reserved_for": "ramim",
+   "effort": 2
+  },
+  {
+   "id": "M1-91",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "any",
+   "title": "Authored work lighting for terrain-backed cold-trap rooms",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/world/",
+    "game/resources/campaign/rooms/"
+   ],
+   "refs": [],
+   "note": "Filed by atik/codex on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "M1-36 adoption check after M1-82/M1-88: both LOC-09/CH04S04 and LOC-10/CH04S06 have real dated Sun rows marked dark (Sun ~1.6deg but below local terrain). CampaignRoom terrain_ground explicitly removes RoomLighting, so adopting ready terrain makes the staged work area and physical puzzle targets black. M1-82 capture script compensates with an optional diagnostic OmniLight3D (shot[2], work.light_energy=3, range40); that light is not part of the room contract/game. Please supply owner-approved visible practical work-light/rover/hand-light placement and actual light sources in these staged vacuum rooms, with terrain-ready positions and shadows, linked to real approved props. Publish a room/staging hook/ready flag Atik can trust before switching production to the terrain provider. Preserve hard Sun/black sky/no ambient fill and all doors/targets/collision. Verify target readability and approach walking in the real dated scene without the capture-only Omni, in Forward+ and Compatibility, with screenshots. Do not edit Atik terrain/campaign. Atik has a tested composition helper ready but will not replace playable staging with an unlit work area. Relay-road geometry remains separate M1-87.",
+   "reserved_for": "sadman",
+   "effort": 2
   }
  ],
  "requirements": [
