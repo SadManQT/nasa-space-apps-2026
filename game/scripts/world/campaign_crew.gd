@@ -19,6 +19,8 @@ var _screen: Sprite3D
 var _screen_label: Label3D
 var _screen_area := Vector2(2.8, 1.4)
 var _screen_backdrop: Sprite3D
+## Cast members sitting in an installed seat this scene (they keep the seated base: no full-body Talk or gestures).
+var _seated: Array[String] = []
 
 ## Stages next_room for scene_id (chapter staging, scene anchors, carried objects) and places the scene's roster in
 ## it: the playable actor at player_at, everyone else at the scene's anchors. choices is story_log.choices; it only
@@ -79,16 +81,20 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choice
 		if aboard.has(id):
 			_board(body, aboard[id], id == active)
 		body.reset_placement()
-	# In the Safe Room a listener at an installed crew seat sits in it (doc 09: no wandering during exposure); one at a
-	# staged work anchor (e.g. EX-CH07-S02 at the shelter diagram) stands. No fictitious hand/tool contact.
-	if room.room_id == "LOC-04":
-		for id in local_ids:
-			var body: PlayerController = bodies[id]
-			if id == active or not room.has_installed_seat_at(body.position):
-				continue
-			body.face_towards(body.position + Vector3.FORWARD)
-			body.animation.set_rest_clip("SitIdle_loop")
-			body.foot_ik_enabled = false
+	# A listener whose scene anchor is an installed crew seat sits in it, facing the way the seat faces: the Safe Room's
+	# storm steps (doc 09: no wandering during exposure) and, from M3-5R, the Commons table where a scene seats the
+	# crew (EX-CH05-S05's shared frame, Ferreira at the head). One at a staged work anchor (e.g. EX-CH07-S02 at the
+	# shelter diagram) stands. No fictitious hand/tool contact.
+	_seated.clear()
+	for id in local_ids:
+		var body: PlayerController = bodies[id]
+		var facing := room.installed_seat_facing(body.position)
+		if id == active or facing == Vector3.ZERO:
+			continue
+		body.face_towards(body.position + facing)
+		body.animation.set_rest_clip("SitIdle_loop")
+		body.foot_ik_enabled = false
+		_seated.append(id)
 	_build_screen()
 	_attach_carried(room.stage().get("carried", {}))
 	return player
@@ -233,10 +239,11 @@ func present_line(line: Dictionary, reduced_motion: bool) -> void:
 		var body: PlayerController = bodies[id]
 		body.attention_target = speaker if body != speaker else player
 		body.look_at_enabled = not reduced_motion
-		body.animation.idle_variations = not reduced_motion and room.room_id != "LOC-04"
+		var still := room.room_id == "LOC-04" or _seated.has(id)
+		body.animation.idle_variations = not reduced_motion and not still
 		# Full-body Talk would lift a seated listener off the bench. Keep the
 		# seated base and its gaze; captions identify that speaker exactly.
-		body.animation.set_talking(not line.is_empty() and not reduced_motion and room.room_id != "LOC-04", body != speaker)
+		body.animation.set_talking(not line.is_empty() and not reduced_motion and not still, body != speaker)
 	if _screen != null:
 		var earth := _speaker in ["rao", "ferreira"] and not local_ids.has(_speaker)
 		_screen.visible = earth
@@ -255,7 +262,7 @@ func react(result: Dictionary, reduced_motion: bool) -> void:
 		return
 	for id in local_ids:
 		var body: PlayerController = bodies[id]
-		if body != player and id != _speaker:
+		if body != player and id != _speaker and not _seated.has(id):
 			body.animation.request_action("Inspect" if room.room_id == "LOC-03" else "Agree")
 			break
 

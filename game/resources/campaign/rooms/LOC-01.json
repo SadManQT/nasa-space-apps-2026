@@ -889,7 +889,7 @@
   {
    "id": "ch05_five_at_the_table",
    "from": "EX-CH05-S01",
-   "about": "From 12 Dec 2046 Ferreira lives at Aurora: four seats become five (doc 09 LOC-01) and the fifth mug joins the four (doc 24 §1.1). Her chair is at the head of the table until she gives it up in EX-CH07-S01 (doc 24 §2.7); from EX-CH07-S02 it stands among the cadets' chairs on the east side (M3-7R). CH08 (M3-8R): while Ferreira is on the road (8-10 Apr) her mug waits on the care desk beside the home-night ledger; from EX-CH08-S11 it is back beside the others (doc 24 2.9 S11 -> S12).",
+   "about": "From 12 Dec 2046 Ferreira lives at Aurora: four seats become five (doc 09 LOC-01) and the fifth mug joins the four (doc 24 §1.1). Until she lands the mug hangs on its clip above the table (ch05_fifth_mug_clip, CH04-S12 to EX-CH05-S01, which plays at the garage dock, LOC-08); it stands at her place from S02; she takes it to the corridor watch in S06 and places it beside the four in S11 (canon, M3-5R). Her chair is at the head of the table until she gives it up in EX-CH07-S01 (doc 24 §2.7); from EX-CH07-S02 it stands among the cadets' chairs on the east side (M3-7R). CH08 (M3-8R): while Ferreira is on the road (8-10 Apr) her mug waits on the care desk beside the home-night ledger; from EX-CH08-S11 it is back beside the others (doc 24 2.9 S11 -> S12).",
    "props": [
     {
      "id": "commons_seat_5",
@@ -934,11 +934,6 @@
     {
      "id": "commons_mug_5",
      "path": "res://assets/props/PR_Mug/PR_Mug.glb",
-     "position": [
-      -0.22,
-      0.762,
-      -0.6
-     ],
      "rotation_degrees": [
       0,
       0,
@@ -949,6 +944,33 @@
       1,
       1
      ],
+     "position": [
+      -0.22,
+      0.762,
+      -0.6
+     ],
+     "from": "EX-CH05-S02",
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "commons_mug_5",
+     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "position": [
+      -0.22,
+      0.762,
+      -0.6
+     ],
+     "from": "EX-CH05-S11",
      "until": "EX-CH07-S01"
     },
     {
@@ -1210,12 +1232,12 @@
   },
   {
    "id": "ch05_place_for_noor",
-   "from": "EX-CH05-S12",
+   "from": "EX-CH05-S11",
    "choice": {
     "choice_id": "EX-CH05-S11-CHOICE",
     "option_id": "EX-CH05-S11-OPT02"
    },
-   "about": "Doc 24 §5.2 D10: 'We kept a place for your work.' A seed-label holder marked N. waits at the table until Noor speaks (EX-CH08-S10).",
+   "about": "Doc 24 §5.2 D10: 'We kept a place for your work.' From EX-CH05-S11 (doc 24 5.2), a seed-label holder marked N. waits at the table until Noor speaks (EX-CH08-S10).",
    "fixtures": [
     {
      "id": "n_holder_base",
@@ -1261,6 +1283,2795 @@
      "size": 0.0009,
      "color": "#1b2433",
      "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch05_fifth_mug_clip",
+   "from": "EX-CH04-S12",
+   "until": "EX-CH05-S01",
+   "about": "Doc 24 2.4 / 2.9 CH04 -> CH05: the fifth mug has spent months clipped above the table (EX-CH05-S01 canon: Kai polished it once and denied doing so); a slim rail hangs from the ceiling over the head of the table with the mug on its clip, a clip bracket and a name tag. S01 itself plays at the garage dock (LOC-08, M3-105); from EX-CH05-S02 the mug stands at her place (ch05_five_at_the_table).",
+   "fixtures": [
+    {
+     "id": "mug_clip_rail",
+     "position": [
+      0,
+      2.236,
+      -0.55
+     ],
+     "size": [
+      0.7,
+      0.024,
+      0.024
+     ],
+     "color": "#939BA6",
+     "transparent": false
+    },
+    {
+     "id": "mug_clip_hanger_w",
+     "position": [
+      -0.3,
+      2.424,
+      -0.55
+     ],
+     "size": [
+      0.012,
+      0.352,
+      0.012
+     ],
+     "color": "#939BA6",
+     "transparent": false
+    },
+    {
+     "id": "mug_clip_hanger_e",
+     "position": [
+      0.3,
+      2.424,
+      -0.55
+     ],
+     "size": [
+      0.012,
+      0.352,
+      0.012
+     ],
+     "color": "#939BA6",
+     "transparent": false
+    },
+    {
+     "id": "mug_clip_bracket",
+     "position": [
+      0,
+      2.206,
+      -0.55
+     ],
+     "size": [
+      0.13,
+      0.012,
+      0.13
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "mug_clip_tag",
+     "position": [
+      0,
+      2.165,
+      -0.483
+     ],
+     "size": [
+      0.12,
+      0.05,
+      0.003
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "mug_clip_tag_text",
+     "text": "FERREIRA",
+     "position": [
+      0,
+      2.165,
+      -0.481
+     ],
+     "size": 0.0005,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.12
+    }
+   ],
+   "props": [
+    {
+     "id": "commons_mug_5",
+     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "position": [
+      0.0,
+      2.212,
+      -0.55
+     ]
+    }
+   ],
+   "review_views": {
+    "ch05_mug_clip": {
+     "from": [
+      0.5,
+      1.8,
+      0.15
+     ],
+     "to": [
+      0,
+      2.18,
+      -0.55
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_spare_locker",
+   "from": "EX-CH05-S02",
+   "until": "EX-CH05-S12",
+   "about": "EX-CH05-S02 'Spare stored once' and S06 'Local records desk and spare locker': an open spare-parts locker on the north wall beside the records desk; the relief flight's sealed relay-controller crate on its bottom shelf (out on the records desk for the S06 check, back from S07). It travels to the care desk in EX-CH07-S10.",
+   "fixtures": [
+    {
+     "id": "spare_locker_back",
+     "position": [
+      4.65,
+      0.7,
+      -5.97
+     ],
+     "size": [
+      0.8,
+      1.4,
+      0.03
+     ],
+     "color": "#6b7584",
+     "transparent": false
+    },
+    {
+     "id": "spare_locker_side_w",
+     "position": [
+      4.265,
+      0.7,
+      -5.73
+     ],
+     "size": [
+      0.03,
+      1.4,
+      0.5
+     ],
+     "color": "#6b7584",
+     "transparent": false
+    },
+    {
+     "id": "spare_locker_side_e",
+     "position": [
+      5.035,
+      0.7,
+      -5.73
+     ],
+     "size": [
+      0.03,
+      1.4,
+      0.5
+     ],
+     "color": "#6b7584",
+     "transparent": false
+    },
+    {
+     "id": "spare_locker_floor",
+     "position": [
+      4.65,
+      0.03,
+      -5.73
+     ],
+     "size": [
+      0.8,
+      0.06,
+      0.5
+     ],
+     "color": "#6b7584",
+     "transparent": false
+    },
+    {
+     "id": "spare_locker_shelf",
+     "position": [
+      4.65,
+      1.0,
+      -5.73
+     ],
+     "size": [
+      0.74,
+      0.03,
+      0.48
+     ],
+     "color": "#6b7584",
+     "transparent": false
+    },
+    {
+     "id": "spare_locker_top",
+     "position": [
+      4.65,
+      1.385,
+      -5.73
+     ],
+     "size": [
+      0.8,
+      0.03,
+      0.5
+     ],
+     "color": "#6b7584",
+     "transparent": false
+    },
+    {
+     "id": "spare_locker_plate",
+     "position": [
+      4.65,
+      1.2,
+      -5.9535
+     ],
+     "size": [
+      0.5,
+      0.12,
+      0.003
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "spare_crate",
+     "position": [
+      4.65,
+      0.31,
+      -5.74
+     ],
+     "size": [
+      0.6,
+      0.5,
+      0.46
+     ],
+     "color": "#2b3a4f",
+     "transparent": false,
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "spare_crate_label",
+     "position": [
+      4.65,
+      0.37,
+      -5.508
+     ],
+     "size": [
+      0.42,
+      0.15,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "spare_crate",
+     "position": [
+      4.65,
+      0.31,
+      -5.74
+     ],
+     "size": [
+      0.6,
+      0.5,
+      0.46
+     ],
+     "color": "#2b3a4f",
+     "transparent": false,
+     "from": "EX-CH05-S07"
+    },
+    {
+     "id": "spare_crate_label",
+     "position": [
+      4.65,
+      0.37,
+      -5.508
+     ],
+     "size": [
+      0.42,
+      0.15,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH05-S07"
+    }
+   ],
+   "signs": [
+    {
+     "id": "spare_locker_plate_text",
+     "text": "SPARES   BOTTOM SHELF: RELAY CONTROLLER",
+     "position": [
+      4.65,
+      1.2,
+      -5.951
+     ],
+     "size": 0.00042,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.48
+    },
+    {
+     "id": "spare_crate_text",
+     "text": "SPARE RELAY CONTROLLER\nRELIEF FLIGHT, 12 DEC 2046\nSEALED",
+     "position": [
+      4.65,
+      0.37,
+      -5.5055
+     ],
+     "size": 0.00042,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.4,
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "spare_crate_text",
+     "text": "SPARE RELAY CONTROLLER\nRELIEF FLIGHT, 12 DEC 2046\nSEALED",
+     "position": [
+      4.65,
+      0.37,
+      -5.5055
+     ],
+     "size": 0.00042,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.4,
+     "from": "EX-CH05-S07"
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "spare_locker",
+     "position": [
+      4.65,
+      0.7,
+      -5.76
+     ],
+     "size": [
+      1.0,
+      1.4,
+      0.62
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_spare_locker",
+     "label": "Spare locker",
+     "position": [
+      4.65,
+      0.62,
+      -5.38
+     ],
+     "approach_m": [
+      4.65,
+      0,
+      -4.5
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "spare_crate"
+    }
+   ],
+   "local_lights": [
+    {
+     "id": "spare_locker_lamp",
+     "position": [
+      4.65,
+      1.33,
+      -5.62
+     ],
+     "color": "#fff1e0",
+     "energy": 0.6,
+     "range_m": 1.2
+    }
+   ],
+   "review_views": {
+    "ch05_spare_locker": {
+     "from": [
+      4.65,
+      1.2,
+      -4.6
+     ],
+     "to": [
+      4.65,
+      0.62,
+      -5.85
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_records_2034",
+   "from": "EX-CH05-S03",
+   "until": "EX-CH05-S05",
+   "about": "EX-CH05-S03..S05 (doc 24 2.9 S02 -> S03, 7.4; clue 17, clue 18): Ferreira brings the sealed sleeve from her locker shelf to the table on 14 Dec and sets the four 2034 records under their clear weights without arranging them (S03: set down out of order). The relay fault report, greenhouse service note, evacuation order and ascent manifest carry the 08 P-09 times (3 Apr chart and degraded connector; 4 Apr 12:00 fault, 12:10 order, 12:40 boarding) and the boarding marks; FER and N.R. are the two highlighted signatures, never expanded (08). From S04 they lie in the supported order, numbered (S03 -> S04); in S05 Ferreira turns the evacuation order over, and its back carries her margin note (clue 18, approved 5 Nov 2026). The opened sleeve stays beside them.",
+   "props": [
+    {
+     "id": "records_2034",
+     "path": "res://assets/props/PR_Records2034/PR_Records2034.glb",
+     "position": [
+      0,
+      0.76,
+      0
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "parts": {
+      "Record_ServiceNote": {
+       "position": [
+        0.1656,
+        0.0,
+        0.6182
+       ],
+       "rotation_degrees": [
+        0,
+        15,
+        0
+       ]
+      },
+      "Weight_02": {
+       "position": [
+        0.263,
+        0.002,
+        0.7112
+       ]
+      },
+      "Record_RelayFault": {
+       "position": [
+        0.4525,
+        0.0,
+        0.4525
+       ],
+       "rotation_degrees": [
+        0,
+        45,
+        0
+       ]
+      },
+      "Weight_01": {
+       "position": [
+        0.5834,
+        0.002,
+        0.4844
+       ]
+      },
+      "Record_EvacuationOrder": {
+       "position": [
+        -0.4525,
+        0.0,
+        0.4525
+       ],
+       "rotation_degrees": [
+        0,
+        -45,
+        0
+       ]
+      },
+      "Weight_03": {
+       "position": [
+        -0.4844,
+        0.002,
+        0.5834
+       ]
+      },
+      "Record_AscentManifest": {
+       "position": [
+        -0.1656,
+        0.0,
+        0.6182
+       ],
+       "rotation_degrees": [
+        0,
+        -15,
+        0
+       ]
+      },
+      "Weight_04": {
+       "position": [
+        -0.1278,
+        0.002,
+        0.7474
+       ]
+      }
+     },
+     "by_scene": {
+      "EX-CH05-S04": {
+       "parts": {
+        "Record_ServiceNote": {
+         "position": [
+          -0.4525,
+          0.0,
+          0.4525
+         ],
+         "rotation_degrees": [
+          0,
+          -45,
+          0
+         ]
+        },
+        "Weight_02": {
+         "position": [
+          -0.4844,
+          0.002,
+          0.5834
+         ]
+        },
+        "Record_RelayFault": {
+         "position": [
+          -0.1656,
+          0.0,
+          0.6182
+         ],
+         "rotation_degrees": [
+          0,
+          -15,
+          0
+         ]
+        },
+        "Weight_01": {
+         "position": [
+          -0.1278,
+          0.002,
+          0.7474
+         ]
+        },
+        "Record_EvacuationOrder": {
+         "position": [
+          0.1656,
+          0.0,
+          0.6182
+         ],
+         "rotation_degrees": [
+          0,
+          15,
+          0
+         ]
+        },
+        "Weight_03": {
+         "position": [
+          0.263,
+          0.002,
+          0.7112
+         ]
+        },
+        "Record_AscentManifest": {
+         "position": [
+          0.4525,
+          0.0,
+          0.4525
+         ],
+         "rotation_degrees": [
+          0,
+          45,
+          0
+         ]
+        },
+        "Weight_04": {
+         "position": [
+          0.5834,
+          0.002,
+          0.4844
+         ]
+        }
+       }
+      },
+      "EX-CH05-S05": {
+       "parts": {
+        "Record_ServiceNote": {
+         "position": [
+          -0.4525,
+          0.0,
+          0.4525
+         ],
+         "rotation_degrees": [
+          0,
+          -45,
+          0
+         ]
+        },
+        "Weight_02": {
+         "position": [
+          -0.4844,
+          0.002,
+          0.5834
+         ]
+        },
+        "Record_RelayFault": {
+         "position": [
+          -0.1656,
+          0.0,
+          0.6182
+         ],
+         "rotation_degrees": [
+          0,
+          -15,
+          0
+         ]
+        },
+        "Weight_01": {
+         "position": [
+          -0.1278,
+          0.002,
+          0.7474
+         ]
+        },
+        "Record_EvacuationOrder": {
+         "position": [
+          0.1656,
+          0.0022,
+          0.6182
+         ],
+         "rotation_degrees": [
+          0,
+          15,
+          180
+         ]
+        },
+        "Weight_03": {
+         "position": [
+          0.263,
+          0.002,
+          0.7112
+         ]
+        },
+        "Record_AscentManifest": {
+         "position": [
+          0.4525,
+          0.0,
+          0.4525
+         ],
+         "rotation_degrees": [
+          0,
+          45,
+          0
+         ]
+        },
+        "Weight_04": {
+         "position": [
+          0.5834,
+          0.002,
+          0.4844
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "id": "document_sleeve",
+     "path": "res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb",
+     "position": [
+      0.33,
+      0.761,
+      -0.5716
+     ],
+     "rotation_degrees": [
+      0,
+      150,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "parts": {
+      "Lid": {
+       "rotation_degrees": [
+        -105,
+        0,
+        0
+       ]
+      },
+      "Seal": {
+       "visible": false
+      }
+     },
+     "by_scene": {
+      "EX-CH05-S04..EX-CH05-S05": {
+       "parts": {
+        "Lid": {
+         "rotation_degrees": [
+          0,
+          0,
+          0
+         ]
+        },
+        "Seal": {
+         "visible": false
+        }
+       }
+      }
+     }
+    }
+   ],
+   "signs": [
+    {
+     "id": "record_text_servicenote",
+     "text": "GREENHOUSE SERVICE NOTE\n3 APR 2034\nSEEDLINGS, DAY 12:\nLEAVES CURLING\nGARDEN POWER CONNECTOR\nDEGRADED, SERVICE ASKED\nSIGNED  FER",
+     "position": [
+      0.1605,
+      0.765,
+      0.5989
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": 15,
+     "pitch": -90,
+     "from": "EX-CH05-S03",
+     "until": "EX-CH05-S03"
+    },
+    {
+     "id": "record_text_relayfault",
+     "text": "RELAY FAULT REPORT\n4 APR 2034, 12:00\nRELAY CONTROLLER FAILED\nEARTH LINK LOST\nPOWER HARDWARE\nALREADY DEGRADED\nNO VERIFIED STRIKE",
+     "position": [
+      0.4384,
+      0.765,
+      0.4384
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": 45,
+     "pitch": -90,
+     "from": "EX-CH05-S03",
+     "until": "EX-CH05-S03"
+    },
+    {
+     "id": "record_text_evacuationorder",
+     "text": "EVACUATION ORDER\n4 APR 2034, 12:10\nRADIO NOT RESTORED\nCREW RETREAT ORDERED\nGARDEN TRIAL SUSPENDED",
+     "position": [
+      -0.4384,
+      0.765,
+      0.4384
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": -45,
+     "pitch": -90,
+     "from": "EX-CH05-S03",
+     "until": "EX-CH05-S03"
+    },
+    {
+     "id": "record_text_ascentmanifest",
+     "text": "ASCENT MANIFEST\n4 APR 2034, 12:40\nDEPARTED 4, BOARDED 4\n1 COMMANDER: BOARDED\n2 PILOT: BOARDED\n3 ENGINEER FER: BOARDED\n4 GARDENER N.R.: BOARDED",
+     "position": [
+      -0.1605,
+      0.765,
+      0.5989
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": -15,
+     "pitch": -90,
+     "from": "EX-CH05-S03",
+     "until": "EX-CH05-S03"
+    },
+    {
+     "id": "record_text_servicenote",
+     "text": "GREENHOUSE SERVICE NOTE\n3 APR 2034\nSEEDLINGS, DAY 12:\nLEAVES CURLING\nGARDEN POWER CONNECTOR\nDEGRADED, SERVICE ASKED\nSIGNED  FER",
+     "position": [
+      -0.4384,
+      0.765,
+      0.4384
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": -45,
+     "pitch": -90,
+     "from": "EX-CH05-S04",
+     "until": "EX-CH05-S04"
+    },
+    {
+     "id": "record_order_servicenote",
+     "text": "1",
+     "position": [
+      -0.5975,
+      0.765,
+      0.4985
+     ],
+     "size": 0.0011,
+     "outline": 0,
+     "color": "#1b2433",
+     "yaw": -45,
+     "pitch": -90,
+     "from": "EX-CH05-S04",
+     "until": "EX-CH05-S04"
+    },
+    {
+     "id": "record_text_relayfault",
+     "text": "RELAY FAULT REPORT\n4 APR 2034, 12:00\nRELAY CONTROLLER FAILED\nEARTH LINK LOST\nPOWER HARDWARE\nALREADY DEGRADED\nNO VERIFIED STRIKE",
+     "position": [
+      -0.1605,
+      0.765,
+      0.5989
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": -15,
+     "pitch": -90,
+     "from": "EX-CH05-S04",
+     "until": "EX-CH05-S04"
+    },
+    {
+     "id": "record_order_relayfault",
+     "text": "2",
+     "position": [
+      -0.2682,
+      0.765,
+      0.7305
+     ],
+     "size": 0.0011,
+     "outline": 0,
+     "color": "#1b2433",
+     "yaw": -15,
+     "pitch": -90,
+     "from": "EX-CH05-S04",
+     "until": "EX-CH05-S04"
+    },
+    {
+     "id": "record_text_evacuationorder",
+     "text": "EVACUATION ORDER\n4 APR 2034, 12:10\nRADIO NOT RESTORED\nCREW RETREAT ORDERED\nGARDEN TRIAL SUSPENDED",
+     "position": [
+      0.1605,
+      0.765,
+      0.5989
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": 15,
+     "pitch": -90,
+     "from": "EX-CH05-S04",
+     "until": "EX-CH05-S04"
+    },
+    {
+     "id": "record_order_evacuationorder",
+     "text": "3",
+     "position": [
+      0.133,
+      0.765,
+      0.7667
+     ],
+     "size": 0.0011,
+     "outline": 0,
+     "color": "#1b2433",
+     "yaw": 15,
+     "pitch": -90,
+     "from": "EX-CH05-S04",
+     "until": "EX-CH05-S04"
+    },
+    {
+     "id": "record_text_ascentmanifest",
+     "text": "ASCENT MANIFEST\n4 APR 2034, 12:40\nDEPARTED 4, BOARDED 4\n1 COMMANDER: BOARDED\n2 PILOT: BOARDED\n3 ENGINEER FER: BOARDED\n4 GARDENER N.R.: BOARDED",
+     "position": [
+      0.4384,
+      0.765,
+      0.4384
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": 45,
+     "pitch": -90,
+     "from": "EX-CH05-S04",
+     "until": "EX-CH05-S04"
+    },
+    {
+     "id": "record_order_ascentmanifest",
+     "text": "4",
+     "position": [
+      0.4985,
+      0.765,
+      0.5975
+     ],
+     "size": 0.0011,
+     "outline": 0,
+     "color": "#1b2433",
+     "yaw": 45,
+     "pitch": -90,
+     "from": "EX-CH05-S04",
+     "until": "EX-CH05-S04"
+    },
+    {
+     "id": "record_text_servicenote",
+     "text": "GREENHOUSE SERVICE NOTE\n3 APR 2034\nSEEDLINGS, DAY 12:\nLEAVES CURLING\nGARDEN POWER CONNECTOR\nDEGRADED, SERVICE ASKED\nSIGNED  FER",
+     "position": [
+      -0.4384,
+      0.765,
+      0.4384
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": -45,
+     "pitch": -90,
+     "from": "EX-CH05-S05",
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "record_order_servicenote",
+     "text": "1",
+     "position": [
+      -0.5975,
+      0.765,
+      0.4985
+     ],
+     "size": 0.0011,
+     "outline": 0,
+     "color": "#1b2433",
+     "yaw": -45,
+     "pitch": -90,
+     "from": "EX-CH05-S05",
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "record_text_relayfault",
+     "text": "RELAY FAULT REPORT\n4 APR 2034, 12:00\nRELAY CONTROLLER FAILED\nEARTH LINK LOST\nPOWER HARDWARE\nALREADY DEGRADED\nNO VERIFIED STRIKE",
+     "position": [
+      -0.1605,
+      0.765,
+      0.5989
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": -15,
+     "pitch": -90,
+     "from": "EX-CH05-S05",
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "record_order_relayfault",
+     "text": "2",
+     "position": [
+      -0.2682,
+      0.765,
+      0.7305
+     ],
+     "size": 0.0011,
+     "outline": 0,
+     "color": "#1b2433",
+     "yaw": -15,
+     "pitch": -90,
+     "from": "EX-CH05-S05",
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "record_text_evacuationorder",
+     "text": "BACK OF THE ORDER\nIN FERREIRA'S HAND, 2034\n\nRADIO NOT RESTORED. RETREAT ORDERED. GARDEN LEFT ON MINIMUM HEAT. I TOLD HER SOMEONE WOULD COME BACK FOR IT.\n— FERREIRA",
+     "position": [
+      0.1605,
+      0.765,
+      0.5989
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": 15,
+     "pitch": -90,
+     "from": "EX-CH05-S05",
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "record_order_evacuationorder",
+     "text": "3",
+     "position": [
+      0.133,
+      0.765,
+      0.7667
+     ],
+     "size": 0.0011,
+     "outline": 0,
+     "color": "#1b2433",
+     "yaw": 15,
+     "pitch": -90,
+     "from": "EX-CH05-S05",
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "record_text_ascentmanifest",
+     "text": "ASCENT MANIFEST\n4 APR 2034, 12:40\nDEPARTED 4, BOARDED 4\n1 COMMANDER: BOARDED\n2 PILOT: BOARDED\n3 ENGINEER FER: BOARDED\n4 GARDENER N.R.: BOARDED",
+     "position": [
+      0.4384,
+      0.765,
+      0.4384
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": 45,
+     "pitch": -90,
+     "from": "EX-CH05-S05",
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "record_order_ascentmanifest",
+     "text": "4",
+     "position": [
+      0.4985,
+      0.765,
+      0.5975
+     ],
+     "size": 0.0011,
+     "outline": 0,
+     "color": "#1b2433",
+     "yaw": 45,
+     "pitch": -90,
+     "from": "EX-CH05-S05",
+     "until": "EX-CH05-S05"
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_records_2034",
+     "label": "Four 2034 records",
+     "position": [
+      0,
+      0.85,
+      0.62
+     ],
+     "approach_m": [
+      0,
+      0,
+      1.6
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "records_2034"
+    }
+   ],
+   "focus_labels": {
+    "commons_mission_table": "Mission Table"
+   },
+   "review_views": {
+    "ch05_records": {
+     "from": [
+      0.0,
+      1.22,
+      1.3
+     ],
+     "to": [
+      0.0,
+      0.76,
+      0.52
+     ]
+    },
+    "ch05_sleeve": {
+     "from": [
+      0.8,
+      1.25,
+      -1.2
+     ],
+     "to": [
+      0.33,
+      0.78,
+      -0.57
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_d5_opt01",
+   "from": "EX-CH05-S03",
+   "until": "EX-CH05-S03",
+   "choice": {
+    "choice_id": "EX-CH02-S10-CHOICE",
+    "option_id": "EX-CH02-S10-OPT01"
+   },
+   "about": "Doc 24 5.2 D5: in EX-CH05-S03 the Evidence card beside the records says how the player first handled the familiar 2034 voice (the CH02-S10 board card, M3-2R).",
+   "fixtures": [
+    {
+     "id": "voice_card",
+     "position": [
+      -0.6657,
+      0.761,
+      0.2163
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.26
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "voice_card_text",
+     "text": "ENGINEER'S VOICE RESEMBLES FERREIRA\nCORRECTED TO AN INFERENCE ON 6 MAY",
+     "position": [
+      -0.6657,
+      0.7625,
+      0.2163
+     ],
+     "size": 0.00026,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.24,
+     "yaw": -90,
+     "pitch": -90
+    }
+   ]
+  },
+  {
+   "id": "ch05_d5_opt02",
+   "from": "EX-CH05-S03",
+   "until": "EX-CH05-S03",
+   "choice": {
+    "choice_id": "EX-CH02-S10-CHOICE",
+    "option_id": "EX-CH02-S10-OPT02"
+   },
+   "about": "Doc 24 5.2 D5: in EX-CH05-S03 the Evidence card beside the records says how the player first handled the familiar 2034 voice (the CH02-S10 board card, M3-2R).",
+   "fixtures": [
+    {
+     "id": "voice_card",
+     "position": [
+      -0.6657,
+      0.761,
+      0.2163
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.26
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "voice_card_text",
+     "text": "ENGINEER'S VOICE RESEMBLES FERREIRA\nKEPT AS AN INFERENCE SINCE 6 MAY",
+     "position": [
+      -0.6657,
+      0.7625,
+      0.2163
+     ],
+     "size": 0.00026,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.24,
+     "yaw": -90,
+     "pitch": -90
+    }
+   ]
+  },
+  {
+   "id": "ch05_archive_images",
+   "from": "EX-CH05-S03",
+   "until": "EX-CH05-S05",
+   "about": "EX-CH05-S03 clue 6 (doc 22 7.1): a photograph of the frozen annex trays, a consequence that cannot date the fault. EX-CH05-S04 'Archive images at the mission table' (doc 22 7.2): Mei brings the frozen-garden photographs (a wide and a close one of the 2034 seedling tray) beside Alo's pressed petal; the 2034 growth sheet (young seedlings, curled leaves, evacuated before flowering) and Alo's own record (flower, Tara's pollen, mature pods, dry-down, 42 seeds) lie apart, so two timelines stay two. Mei's caption: the draft 'old garden' in S04, revised in S05 (S04 -> S05).",
+   "prints": [
+    {
+     "id": "frozen_trays_photo",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_ZeroSeedlingTray/PL_ZeroSeedlingTray.glb",
+     "position": [
+      -0.6376,
+      0.764,
+      -0.0558
+     ],
+     "size": [
+      0.2,
+      0.15
+     ],
+     "pitch": -90,
+     "yaw": -95,
+     "border": 0.006,
+     "caption": "ANNEX, 8 MAY 2046\nTHE 2034 TRAYS, FROZEN",
+     "caption_size": 0.00024,
+     "view": [
+      30,
+      -35
+     ],
+     "zoom": 1.15
+    },
+    {
+     "id": "frozen_trays_close",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_ZeroSeedlingTray/PL_ZeroSeedlingTray.glb",
+     "position": [
+      -0.5543,
+      0.764,
+      -0.32
+     ],
+     "size": [
+      0.2,
+      0.15
+     ],
+     "pitch": -90,
+     "yaw": -120,
+     "border": 0.006,
+     "caption": "CLOSE: CURLED LEAVES\nNO BUDS, NO PETALS",
+     "caption_size": 0.00024,
+     "view": [
+      10,
+      -55
+     ],
+     "zoom": 0.55,
+     "from": "EX-CH05-S04"
+    }
+   ],
+   "props": [
+    {
+     "id": "alo_petal",
+     "path": "res://assets/props/PR_PressedPetal/PR_PressedPetal.glb",
+     "position": [
+      -0.7418,
+      0.761,
+      -0.241
+     ],
+     "rotation_degrees": [
+      0,
+      -108,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH05-S04"
+    }
+   ],
+   "fixtures": [
+    {
+     "id": "growth_sheet_2034",
+     "position": [
+      -0.6456,
+      0.761,
+      0.1372
+     ],
+     "size": [
+      0.297,
+      0.002,
+      0.21
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH05-S04"
+    },
+    {
+     "id": "alo_record_sheet",
+     "position": [
+      0.6376,
+      0.761,
+      -0.0558
+     ],
+     "size": [
+      0.297,
+      0.002,
+      0.21
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH05-S04"
+    },
+    {
+     "id": "caption_card",
+     "position": [
+      -0.4015,
+      0.761,
+      -0.5734
+     ],
+     "size": [
+      0.22,
+      0.002,
+      0.11
+     ],
+     "color": "#f4f1e6",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH05-S04"
+    }
+   ],
+   "signs": [
+    {
+     "id": "growth_sheet_2034_text",
+     "text": "2034 GROWTH SHEET, HORT-01 TRIAL\nYOUNG SEEDLINGS, CURLED LEAVES\nNO FLOWER BUDS RECORDED\nEVACUATED 4 APR 2034,\nBEFORE FLOWERING",
+     "position": [
+      -0.6456,
+      0.7625,
+      0.1372
+     ],
+     "size": 0.00032,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.28,
+     "yaw": -90,
+     "pitch": -90,
+     "from": "EX-CH05-S04"
+    },
+    {
+     "id": "alo_record_text",
+     "text": "ALO, 2046   OUR RECORD\nFLOWER 27 APR\nTARA'S POLLEN 30 APR TO 6 MAY\nMATURE PODS, DRY-DOWN\n42 SEEDS HARVESTED 21 MAY",
+     "position": [
+      0.6376,
+      0.7625,
+      -0.0558
+     ],
+     "size": 0.00032,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.28,
+     "yaw": 90,
+     "pitch": -90,
+     "from": "EX-CH05-S04"
+    },
+    {
+     "id": "caption_card_text",
+     "text": "MEI'S CAPTION\nAN OLD GARDEN, 2034?",
+     "position": [
+      -0.4015,
+      0.7625,
+      -0.5734
+     ],
+     "size": 0.00034,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH05-S04",
+     "until": "EX-CH05-S04"
+    },
+    {
+     "id": "caption_card_text",
+     "text": "MEI'S CAPTION, REVISED\nYOUNG UNFLOWERED SEEDLINGS\n2034, TRIAL STOPPED\nBEFORE FLOWERING",
+     "position": [
+      -0.4015,
+      0.7625,
+      -0.5734
+     ],
+     "size": 0.00027,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH05-S05",
+     "until": "EX-CH05-S05"
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_archive_images",
+     "label": "Archive images and growth records",
+     "position": [
+      -0.6376,
+      0.85,
+      -0.0558
+     ],
+     "approach_m": [
+      -0.95,
+      0,
+      1.75
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "frozen_trays_photo"
+    }
+   ],
+   "review_views": {
+    "ch05_archive": {
+     "from": [
+      -1.3,
+      1.25,
+      0.42
+     ],
+     "to": [
+      -0.6,
+      0.76,
+      -0.12
+     ]
+    },
+    "ch05_caption": {
+     "from": [
+      -0.5,
+      1.2,
+      -1.28
+     ],
+     "to": [
+      -0.4,
+      0.76,
+      -0.57
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_at_the_table",
+   "from": "EX-CH05-S03",
+   "until": "EX-CH05-S05",
+   "review_views": {
+    "ch05_shared_frame": {
+     "from": [
+      0.0,
+      1.38,
+      2.3
+     ],
+     "to": [
+      0.0,
+      0.95,
+      -1.3
+     ]
+    }
+   },
+   "about": "Crew, stations and light for the records (S03), the archive images (S04) and the shared seating (S05). S05 is CS-09's static shared frame (doc 24 7.4 beat 4): Ferreira sits where a commander would usually stand, in her chair at the head of the table, level with the cadets in theirs, her hands away from the records; the Commons practicals are a late-afternoon 80 %.",
+   "by_scene": {
+    "EX-CH05-S03": {
+     "anchors": {
+      "commons_ferreira": [
+       -0.85,
+       0,
+       -1.95
+      ],
+      "commons_rafi": [
+       1.0,
+       0,
+       1.75
+      ],
+      "commons_mei": [
+       -0.95,
+       0,
+       1.75
+      ],
+      "commons_kai": [
+       2.75,
+       0,
+       0.0
+      ]
+     },
+     "stations": {
+      "p09_commit_sequence": "commons_records_2034"
+     }
+    },
+    "EX-CH05-S04": {
+     "anchors": {
+      "commons_ferreira": [
+       0.85,
+       0,
+       -1.95
+      ],
+      "commons_amara": [
+       -2.75,
+       0,
+       0.05
+      ],
+      "commons_kai": [
+       2.75,
+       0,
+       0.0
+      ],
+      "commons_rafi": [
+       1.0,
+       0,
+       1.75
+      ]
+     },
+     "stations": {
+      "p10_document_young_trial": "commons_archive_images",
+      "p10_exclude_flower_claim": "commons_archive_images",
+      "p10_save_source_scope": "commons_archive_images"
+     }
+    },
+    "EX-CH05-S05": {
+     "anchors": {
+      "commons_ferreira": [
+       0,
+       0,
+       -1.45
+      ],
+      "commons_kai": [
+       -1.5,
+       0,
+       -0.8
+      ],
+      "commons_amara": [
+       -1.5,
+       0,
+       0.9
+      ],
+      "commons_rafi": [
+       1.5,
+       0,
+       0.9
+      ]
+     },
+     "stations": {
+      "p10_acknowledge_ferreira_facts": "commons_records_2034",
+      "p10_acknowledge_personal_question": "commons_mission_table",
+      "p10_preserve_safety_facts": "commons_records_2034"
+     },
+     "lighting": {
+      "practical_scale": 0.8,
+      "strip_scale": 0.8
+     }
+    }
+   }
+  },
+  {
+   "id": "ch05_records_desk",
+   "from": "EX-CH05-S06",
+   "until": "EX-CH05-S12",
+   "about": "EX-CH05-S06 'Local records desk and spare locker' (doc 22 7.2): Kai lays the old 2034 relay diagram beside the spare's service card and compares connector, rating, isolation points, mounting and the actual serial; the replacement procedure is stored locally and opens without Earth. From S07 the desk is the night observation desk: PR_ImpactMonitor with an authored candidate frame from the M3-5A teaching set on its Screen (a dark plain, a small enlarged flash, no streaks), Rafi's frame-based log, and a reminder that this is an amplified camera view. The monitor stays for the report (S09) and the reveal (S10-S11).",
+   "fixtures": [
+    {
+     "id": "records_desk",
+     "position": [
+      3.0,
+      0.37,
+      -5.62
+     ],
+     "size": [
+      1.6,
+      0.74,
+      0.7
+     ],
+     "color": "#3c4b5d",
+     "transparent": false
+    },
+    {
+     "id": "relay_diagram_2034",
+     "position": [
+      3.1,
+      0.741,
+      -5.43
+     ],
+     "size": [
+      0.297,
+      0.002,
+      0.21
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "service_card",
+     "position": [
+      3.5,
+      0.741,
+      -5.41
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.148
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "procedure_stand",
+     "position": [
+      3.5,
+      0.79,
+      -5.82
+     ],
+     "size": [
+      0.07,
+      0.1,
+      0.07
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "procedure_screen",
+     "position": [
+      3.5,
+      1.01,
+      -5.81
+     ],
+     "size": [
+      0.5,
+      0.34,
+      0.03
+     ],
+     "color": "#0b1220",
+     "transparent": false,
+     "finish": "screen",
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "spare_crate",
+     "position": [
+      2.52,
+      0.95,
+      -5.66
+     ],
+     "size": [
+      0.6,
+      0.42,
+      0.46
+     ],
+     "color": "#2b3a4f",
+     "transparent": false,
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "spare_crate_label",
+     "position": [
+      2.52,
+      0.98,
+      -5.429
+     ],
+     "size": [
+      0.42,
+      0.15,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "spare_crate_foam",
+     "position": [
+      2.52,
+      1.15,
+      -5.66
+     ],
+     "size": [
+      0.56,
+      0.02,
+      0.42
+     ],
+     "color": "#3a3f47",
+     "transparent": false,
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "spare_crate_lid",
+     "position": [
+      2.52,
+      1.39,
+      -5.87
+     ],
+     "size": [
+      0.6,
+      0.46,
+      0.04
+     ],
+     "color": "#2b3a4f",
+     "transparent": false,
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "kai_note",
+     "position": [
+      2.52,
+      1.42,
+      -5.849
+     ],
+     "size": [
+      0.27,
+      0.15,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "observation_log",
+     "position": [
+      2.42,
+      0.741,
+      -5.45
+     ],
+     "size": [
+      0.297,
+      0.002,
+      0.21
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH05-S07"
+    },
+    {
+     "id": "amplified_view_tag",
+     "position": [
+      3.0,
+      0.741,
+      -5.31
+     ],
+     "size": [
+      0.3,
+      0.002,
+      0.05
+     ],
+     "color": "#F2C230",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH05-S07"
+    }
+   ],
+   "props": [
+    {
+     "id": "impact_monitor",
+     "path": "res://assets/props/PR_ImpactMonitor/PR_ImpactMonitor.glb",
+     "position": [
+      3.12,
+      0.74,
+      -5.68
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH05-S07",
+     "surfaces": {
+      "Screen": {
+       "texture": "res://assets/ui/impact_monitor/frames/C02_a_1.png"
+      }
+     }
+    }
+   ],
+   "signs": [
+    {
+     "id": "relay_diagram_2034_text",
+     "text": "RELAY CONTROLLER, 2034 DIAGRAM\nMALAPERT HOUSING\nCONNECTOR, RATING\nISOLATION POINTS, MOUNTING",
+     "position": [
+      3.1,
+      0.7425,
+      -5.43
+     ],
+     "size": 0.00034,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.28,
+     "pitch": -90,
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "service_card_text",
+     "text": "SERVICE CARD\nSPARE RELAY CONTROLLER\nSERIAL RC-0417\nCOMPARE THE SPECIFICATION,\nNOT THE SHAPE",
+     "position": [
+      3.5,
+      0.7425,
+      -5.41
+     ],
+     "size": 0.00028,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "pitch": -90,
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "procedure_screen_text",
+     "text": "REPLACEMENT PROCEDURE\nSTORED LOCALLY\n\nOPENS WITHOUT EARTH",
+     "position": [
+      3.5,
+      1.01,
+      -5.7935
+     ],
+     "size": 0.00046,
+     "outline": 0,
+     "color": "#d9f2ff",
+     "wrap_m": 0.46,
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "observation_log_text",
+     "text": "OBSERVATION LOG, IMPACT CAMERA\n14 DEC 2046, NIGHT\nEVERY CANDIDATE: THREE FRAMES\nCONFIRMED, WITH A REASON: 0 OF 6\nREJECTED, WITH A REASON: 0 OF 2",
+     "position": [
+      2.42,
+      0.7425,
+      -5.45
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.28,
+     "pitch": -90,
+     "from": "EX-CH05-S07",
+     "by_scene": {
+      "EX-CH05-S09..EX-CH05-S12": {
+       "text": "OBSERVATION LOG, IMPACT CAMERA\n14 DEC 2046, NIGHT\nEVERY CANDIDATE: THREE FRAMES\nCONFIRMED, WITH A REASON: 6\nREJECTED, WITH A REASON: 2"
+      }
+     }
+    },
+    {
+     "id": "spare_crate_text",
+     "text": "SPARE RELAY CONTROLLER\nOPEN FOR THE CHECK, STAYS PACKED",
+     "position": [
+      2.52,
+      0.98,
+      -5.4265
+     ],
+     "size": 0.00042,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.4,
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "kai_note_text",
+     "text": "FOR THE MALAPERT HOUSING\nCHECK EVERY CONNECTOR BEFORE USE\nKAI, 14 DEC 2046",
+     "position": [
+      2.52,
+      1.42,
+      -5.847
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.26,
+     "until": "EX-CH05-S06"
+    },
+    {
+     "id": "amplified_view_text",
+     "text": "AMPLIFIED CAMERA VIEW, NOT NAKED-EYE",
+     "position": [
+      3.0,
+      0.7425,
+      -5.31
+     ],
+     "size": 0.00028,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.29,
+     "pitch": -90,
+     "from": "EX-CH05-S07"
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "records_desk",
+     "position": [
+      3.0,
+      0.37,
+      -5.62
+     ],
+     "size": [
+      1.6,
+      0.74,
+      0.7
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_records_desk",
+     "label": "Records desk",
+     "position": [
+      3.3,
+      0.85,
+      -5.35
+     ],
+     "approach_m": [
+      3.3,
+      0,
+      -4.5
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "records_desk"
+    },
+    {
+     "target_id": "commons_spare_crate",
+     "label": "Spare controller crate",
+     "position": [
+      2.52,
+      1.25,
+      -5.4
+     ],
+     "approach_m": [
+      2.4,
+      0,
+      -4.5
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "spare_crate"
+    },
+    {
+     "target_id": "commons_impact_monitor",
+     "label": "Impact-camera monitor",
+     "position": [
+      3.12,
+      1.0,
+      -5.5
+     ],
+     "approach_m": [
+      3.3,
+      0,
+      -4.5
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "impact_monitor"
+    }
+   ],
+   "review_views": {
+    "ch05_records_desk": {
+     "from": [
+      3.0,
+      1.45,
+      -4.35
+     ],
+     "to": [
+      3.0,
+      0.9,
+      -5.55
+     ]
+    },
+    "ch05_kai_note": {
+     "from": [
+      2.5,
+      1.45,
+      -4.75
+     ],
+     "to": [
+      2.52,
+      1.25,
+      -5.85
+     ]
+    },
+    "ch05_monitor": {
+     "from": [
+      3.12,
+      1.25,
+      -4.75
+     ],
+     "to": [
+      3.12,
+      0.95,
+      -5.7
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_two_kinds_of_repair",
+   "from": "EX-CH05-S06",
+   "until": "EX-CH05-S06",
+   "about": "EX-CH05-S06 (canon): across the table Mei rewrites the unanswered question as one line (who wrote N., and does she want to hear from us?) and keeps it beside a current photograph of the descendants; the personal identity page stays with Rao for consented release later. Ferreira has taken her mug back to the watch station in the service corridor (it is on the watch desk in LOC-02 until S11).",
+   "fixtures": [
+    {
+     "id": "mei_question_card",
+     "position": [
+      0.5597,
+      0.761,
+      0.3497
+     ],
+     "size": [
+      0.12,
+      0.002,
+      0.24
+     ],
+     "color": "#f4f1e6",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "prints": [
+    {
+     "id": "current_garden_photo",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Descendants/PL_Descendants.glb",
+     "position": [
+      0.6338,
+      0.764,
+      0.0891
+     ],
+     "size": [
+      0.2,
+      0.15
+     ],
+     "pitch": -90,
+     "yaw": 82,
+     "border": 0.006,
+     "caption": "THE DESCENDANTS, 14 DEC 2046",
+     "caption_size": 0.00024,
+     "view": [
+      25,
+      -20
+     ],
+     "zoom": 1.1
+    }
+   ],
+   "signs": [
+    {
+     "id": "mei_question_text",
+     "text": "OUR QUESTION\nWHO WROTE N.?\nDOES SHE WANT TO HEAR FROM US?",
+     "position": [
+      0.5597,
+      0.7625,
+      0.3497
+     ],
+     "size": 0.00028,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.22,
+     "yaw": 90,
+     "pitch": -90
+    }
+   ],
+   "anchors": {
+    "commons_ferreira": [
+     -2.6,
+     0,
+     -2.3
+    ],
+    "commons_rafi": [
+     1.55,
+     0,
+     -4.35
+    ],
+    "commons_mei": [
+     1.0,
+     0,
+     1.75
+    ],
+    "commons_amara": [
+     -1.0,
+     0,
+     1.75
+    ]
+   },
+   "stations": {
+    "p10_compare_dust_repair": "commons_records_desk",
+    "p10_compare_leak_repair": "commons_records_desk",
+    "p10_keep_spare_present": "commons_spare_crate"
+   },
+   "review_views": {
+    "ch05_question": {
+     "from": [
+      1.3,
+      1.18,
+      0.62
+     ],
+     "to": [
+      0.6,
+      0.76,
+      0.22
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_night_observation",
+   "from": "EX-CH05-S07",
+   "until": "EX-CH05-S07",
+   "about": "EX-CH05-S07 'Aurora impact-camera monitor' (doc 22 7.3 set piece): a dark room lit by the monitor; the crew leans round the screen, nobody goes outside for a better view. Practicals at 30 %, the ceiling strips at 25 % and a faint cool spill from the screen.",
+   "local_lights": [
+    {
+     "id": "monitor_spill",
+     "position": [
+      3.12,
+      1.1,
+      -5.15
+     ],
+     "color": "#9fb6d6",
+     "energy": 0.35,
+     "range_m": 2.4
+    }
+   ],
+   "lighting": {
+    "practical_scale": 0.3,
+    "strip_scale": 0.25,
+    "ambient_energy": 0.08
+   },
+   "anchors": {
+    "commons_kai": [
+     2.35,
+     0,
+     -4.4
+    ],
+    "commons_amara": [
+     3.95,
+     0,
+     -4.4
+    ],
+    "commons_mei": [
+     2.0,
+     0,
+     -3.65
+    ],
+    "commons_ferreira": [
+     4.5,
+     0,
+     -3.5
+    ]
+   },
+   "stations": {
+    "p10_verify_flashes": "commons_impact_monitor"
+   }
+  },
+  {
+   "id": "ch05_bounded_report",
+   "from": "EX-CH05-S09",
+   "until": "EX-CH05-S09",
+   "about": "EX-CH05-S09 'Aurora evidence table' (doc 22 7.3): Rafi lays tonight's observation record beside Expedition Zero's damage report and leaves their dates apart; the main display holds the report being built: what is supported, the strong claim moved to unsupported, and the honest blank for the 2034 cause (CH08 keeps it 'Not established').",
+   "fixtures": [
+    {
+     "id": "damage_report_2034",
+     "position": [
+      -0.2397,
+      0.761,
+      0.5934
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "observation_record",
+     "position": [
+      0.2397,
+      0.761,
+      0.5934
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "damage_report_text",
+     "text": "EXPEDITION ZERO\nDAMAGE REPORT, 4 APR 2034\nRELAY FAILURE\nPOWER HARDWARE\nALREADY DEGRADED\nNO VERIFIED STRIKE",
+     "position": [
+      -0.2397,
+      0.7625,
+      0.5934
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.19,
+     "pitch": -90
+    },
+    {
+     "id": "observation_record_text",
+     "text": "TONIGHT'S OBSERVATION\nRECORD, 14 DEC 2046\nSIX FLASHES CONFIRMED\nTWO DETECTOR ARTIFACTS\nREJECTED\nA REASON FOR EACH EVENT",
+     "position": [
+      0.2397,
+      0.7625,
+      0.5934
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.19,
+     "pitch": -90
+    },
+    {
+     "id": "main_display_text",
+     "text": "REPORT   14 DEC 2046\n\nSUPPORTED: SIX FLASHES CONFIRMED, TWO DETECTOR ARTIFACTS REJECTED\nSUPPORTED: IMPACTS ARE A HAZARD WE MONITOR\nUNSUPPORTED: AN IMPACT CAUSED THE 2034 RELAY FAULT\n\nCAUSE OF THE 2034 RELAY FAULT:   ________\nNOT ESTABLISHED",
+     "position": [
+      0,
+      1.72,
+      -5.634
+     ],
+     "size": 0.0017,
+     "outline": 0,
+     "color": "#d9f2ff",
+     "wrap_m": 2.85
+    }
+   ],
+   "focus_labels": {
+    "commons_mission_table": "Evidence table",
+    "commons_earth_screen": "Report on the main display"
+   },
+   "anchors": {
+    "commons_mei": [
+     -1.0,
+     0,
+     1.75
+    ],
+    "commons_amara": [
+     1.0,
+     0,
+     1.75
+    ],
+    "commons_kai": [
+     2.75,
+     0,
+     0.0
+    ],
+    "commons_ferreira": [
+     -2.75,
+     0,
+     -0.1
+    ]
+   },
+   "stations": {
+    "p10_exclude_unsupported_impact_claim": "commons_mission_table",
+    "p10_save_report": "commons_earth_screen"
+   },
+   "review_views": {
+    "ch05_report": {
+     "from": [
+      0,
+      1.65,
+      -2.2
+     ],
+     "to": [
+      0,
+      1.68,
+      -5.7
+     ]
+    },
+    "ch05_evidence_table": {
+     "from": [
+      0.0,
+      1.2,
+      1.3
+     ],
+     "to": [
+      0,
+      0.76,
+      0.52
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_name_on_the_page",
+   "from": "EX-CH05-S10",
+   "until": "EX-CH05-S10",
+   "about": "EX-CH05-S10 'Mission table, live Earth data link' (doc 22 7.4; clue 19): Rao's call (on the Earth screen) brings a signed page and a permission note; the signature card sets the recovered manifest's N.R. beside the page's; the receipt list compares when each report was made with when it reached Earth (the first bloom photo made 27 Apr, delivered 30 Apr after contact returned; the harvest entry made and delivered 21 May); the signed page lies beside the ALO / N. packet. The 2034 portrait appears only on the signed page, after identification.",
+   "fixtures": [
+    {
+     "id": "signed_page",
+     "position": [
+      -0.4756,
+      0.761,
+      0.4282
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "permission_note",
+     "position": [
+      -0.6456,
+      0.761,
+      0.1372
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.12
+     ],
+     "color": "#f4f1e6",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "signature_card",
+     "position": [
+      -0.2257,
+      0.761,
+      0.6202
+     ],
+     "size": [
+      0.2,
+      0.002,
+      0.11
+     ],
+     "color": "#f4f1e6",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "receipt_tablet",
+     "position": [
+      0.3005,
+      0.766,
+      0.5651
+     ],
+     "size": [
+      0.26,
+      0.012,
+      0.18
+     ],
+     "color": "#0b1220",
+     "transparent": false,
+     "finish": "screen"
+    }
+   ],
+   "prints": [
+    {
+     "id": "noor_2034_portrait",
+     "kind": "texture",
+     "texture": "res://assets/ui/portraits/CH_Noor_2034_portrait.png",
+     "uv_rect": [
+      0.277,
+      0.0,
+      0.447,
+      1.0
+     ],
+     "position": [
+      -0.4756,
+      0.7635,
+      0.3532
+     ],
+     "size": [
+      0.085,
+      0.11
+     ],
+     "pitch": -90
+    }
+   ],
+   "signs": [
+    {
+     "id": "signed_page_text",
+     "text": "SIGNED PAGE\nSHARED WITH HER CONSENT\nDR NOOR RAHMAN, BOTANIST\nGARDENER, EXPEDITION ZERO\nRETURNED TO BANGLADESH\nFOUNDED LAST LIGHT\nACADEMY\nSIGNED  N.R.",
+     "position": [
+      -0.4756,
+      0.7625,
+      0.4862
+     ],
+     "size": 0.00027,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.19,
+     "pitch": -90
+    },
+    {
+     "id": "permission_note_text",
+     "text": "PERMISSION NOTE, RAO\nEARTH DESK\nNOOR AGREED TO SHARE\nTHIS PAGE WITH THE\nAURORA CREW",
+     "position": [
+      -0.6456,
+      0.7625,
+      0.1372
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.19,
+     "pitch": -90
+    },
+    {
+     "id": "signature_card_text",
+     "text": "SIGNATURE CHECK\nASCENT MANIFEST, 2034: N.R.\nSIGNED PAGE, 2046: N.R.",
+     "position": [
+      -0.2257,
+      0.7625,
+      0.6202
+     ],
+     "size": 0.00027,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.19,
+     "pitch": -90
+    },
+    {
+     "id": "receipt_text",
+     "text": "REPORT RECEIPTS   EARTH DESK\nFIRST BLOOM PHOTO\nMADE 27 APR 2046, DELIVERED 30 APR\nAFTER CONTACT RETURNED\nHARVEST, 42 SEEDS\nMADE 21 MAY 2046, DELIVERED 21 MAY",
+     "position": [
+      0.3005,
+      0.7725,
+      0.5651
+     ],
+     "size": 0.00027,
+     "outline": 0,
+     "color": "#d9f2ff",
+     "wrap_m": 0.24,
+     "pitch": -90
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_signed_page",
+     "label": "Signed page and permission note",
+     "position": [
+      -0.4756,
+      0.85,
+      0.4282
+     ],
+     "approach_m": [
+      -0.65,
+      0,
+      1.6
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "signed_page"
+    },
+    {
+     "target_id": "commons_receipts",
+     "label": "Report receipts",
+     "position": [
+      0.3005,
+      0.85,
+      0.5651
+     ],
+     "approach_m": [
+      0.55,
+      0,
+      1.6
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "receipt_tablet"
+    }
+   ],
+   "focus_labels": {
+    "commons_earth_screen": "Rao on the live Earth link"
+   },
+   "anchors": {
+    "commons_ferreira": [
+     -1.5,
+     0,
+     -1.8
+    ],
+    "commons_kai": [
+     -2.8,
+     0,
+     1.6
+    ],
+    "commons_amara": [
+     1.0,
+     0,
+     1.75
+    ],
+    "commons_rafi": [
+     2.5,
+     0,
+     -1.7
+    ]
+   },
+   "stations": {
+    "p10_match_noor_identity": "commons_signed_page",
+    "p10_record_consent": "commons_signed_page",
+    "p10_confirm_founder_role": "commons_earth_screen"
+   },
+   "review_views": {
+    "ch05_signed_page": {
+     "from": [
+      -0.45,
+      1.2,
+      1.25
+     ],
+     "to": [
+      -0.38,
+      0.76,
+      0.42
+     ]
+    },
+    "ch05_rao": {
+     "from": [
+      0.4,
+      1.6,
+      -1.0
+     ],
+     "to": [
+      0,
+      1.65,
+      -5.7
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_invitation",
+   "from": "EX-CH05-S11",
+   "until": "EX-CH05-S11",
+   "about": "EX-CH05-S11 'Message composer at the mission table' (doc 22 7.4): Mei's composer with the two authored openings, the current garden photograph and the checked report as attachments; Ferreira has placed her mug beside the four familiar ones and sits at the head for the first meal she sits down for (doc 24 3.5). Once the opening is chosen (EX-CH05-S11-CHOICE) the composer shows it delivered once, with its receipt and no reply yet.",
+   "fixtures": [
+    {
+     "id": "composer_tablet",
+     "position": [
+      0.32,
+      0.766,
+      0.5543
+     ],
+     "size": [
+      0.26,
+      0.012,
+      0.18
+     ],
+     "color": "#0b1220",
+     "transparent": false,
+     "finish": "screen"
+    }
+   ],
+   "prints": [
+    {
+     "id": "invitation_photo",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Descendants/PL_Descendants.glb",
+     "position": [
+      0.5716,
+      0.764,
+      0.33
+     ],
+     "size": [
+      0.2,
+      0.15
+     ],
+     "pitch": -90,
+     "yaw": 60,
+     "border": 0.006,
+     "caption": "ATTACHED: THE GARDEN, 14 DEC 2046",
+     "caption_size": 0.00024,
+     "view": [
+      25,
+      -20
+     ],
+     "zoom": 1.1
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_message_composer",
+     "label": "Message composer",
+     "position": [
+      0.32,
+      0.85,
+      0.5543
+     ],
+     "approach_m": [
+      0.55,
+      0,
+      1.6
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "composer_tablet"
+    }
+   ],
+   "anchors": {
+    "commons_ferreira": [
+     0,
+     0,
+     -1.45
+    ],
+    "commons_kai": [
+     -1.5,
+     0,
+     -0.8
+    ],
+    "commons_amara": [
+     -1.5,
+     0,
+     0.9
+    ],
+    "commons_rafi": [
+     2.75,
+     0,
+     1.75
+    ]
+   },
+   "stations": {
+    "p10_send_invitation": "commons_message_composer"
+   },
+   "review_views": {
+    "ch05_composer": {
+     "from": [
+      0.45,
+      1.15,
+      1.22
+     ],
+     "to": [
+      0.36,
+      0.76,
+      0.5
+     ]
+    },
+    "ch05_head_of_table": {
+     "from": [
+      0.2,
+      1.5,
+      2.2
+     ],
+     "to": [
+      0.0,
+      0.85,
+      -1.2
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_composer_draft",
+   "from": "EX-CH05-S11",
+   "until": "EX-CH05-S11",
+   "unless": [
+    {
+     "choice_id": "EX-CH05-S11-CHOICE",
+     "option_id": "EX-CH05-S11-OPT01"
+    },
+    {
+     "choice_id": "EX-CH05-S11-CHOICE",
+     "option_id": "EX-CH05-S11-OPT02"
+    }
+   ],
+   "about": "EX-CH05-S11 until the invitation's opening is chosen: the composer offers both authored openings (no free typing, doc 22 7.4).",
+   "signs": [
+    {
+     "id": "composer_text",
+     "text": "TO: DR NOOR RAHMAN, BY THE EARTH DESK\nATTACHED: GARDEN PHOTO, CHECKED REPORT\n\nHOW SHOULD THE INVITATION BEGIN?\nWOULD YOU LIKE TO SEE WHAT GROWS NEXT?\nWE KEPT A PLACE FOR YOUR WORK.",
+     "position": [
+      0.32,
+      0.7725,
+      0.5543
+     ],
+     "size": 0.00025,
+     "outline": 0,
+     "color": "#d9f2ff",
+     "wrap_m": 0.24,
+     "pitch": -90
+    }
+   ]
+  },
+  {
+   "id": "ch05_d10_composer_opt01",
+   "from": "EX-CH05-S11",
+   "until": "EX-CH05-S11",
+   "choice": {
+    "choice_id": "EX-CH05-S11-CHOICE",
+    "option_id": "EX-CH05-S11-OPT01"
+   },
+   "about": "Doc 24 5.2 D10: the composer shows the opening the player chose, delivered once with its receipt kept and no immediate reply (canon).",
+   "signs": [
+    {
+     "id": "composer_text",
+     "text": "TO: DR NOOR RAHMAN, BY THE EARTH DESK\nATTACHED: GARDEN PHOTO, CHECKED REPORT\n\nWOULD YOU LIKE TO SEE WHAT GROWS NEXT?\n\nDELIVERED ONCE, 14 DEC 2046\nRECEIPT KEPT   NO REPLY YET",
+     "position": [
+      0.32,
+      0.7726,
+      0.5543
+     ],
+     "size": 0.00025,
+     "outline": 0,
+     "color": "#d9f2ff",
+     "wrap_m": 0.24,
+     "pitch": -90
+    }
+   ]
+  },
+  {
+   "id": "ch05_d10_composer_opt02",
+   "from": "EX-CH05-S11",
+   "until": "EX-CH05-S11",
+   "choice": {
+    "choice_id": "EX-CH05-S11-CHOICE",
+    "option_id": "EX-CH05-S11-OPT02"
+   },
+   "about": "Doc 24 5.2 D10: the composer shows the opening the player chose, delivered once with its receipt kept and no immediate reply (canon).",
+   "signs": [
+    {
+     "id": "composer_text",
+     "text": "TO: DR NOOR RAHMAN, BY THE EARTH DESK\nATTACHED: GARDEN PHOTO, CHECKED REPORT\n\nWE KEPT A PLACE FOR YOUR WORK.\n\nDELIVERED ONCE, 14 DEC 2046\nRECEIPT KEPT   NO REPLY YET",
+     "position": [
+      0.32,
+      0.7726,
+      0.5543
+     ],
+     "size": 0.00025,
+     "outline": 0,
+     "color": "#d9f2ff",
+     "wrap_m": 0.24,
+     "pitch": -90
     }
    ]
   },

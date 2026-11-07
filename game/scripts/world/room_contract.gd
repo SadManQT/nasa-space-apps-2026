@@ -346,6 +346,16 @@ const _SCENE_ROOMS := {
 	"EX-CH03-S04": "LOC-02", "EX-CH03-S05": "LOC-02", "EX-CH03-S06": "LOC-07",
 	"EX-CH03-S07": "LOC-07", "EX-CH03-S08": "LOC-07", "EX-CH03-S09": "LOC-03",
 	"EX-CH03-S10": "LOC-03", "EX-CH03-S11": "LOC-03", "EX-CH03-S12": "LOC-03",
+	# Chapter 5 (M3-5R), from each scene's location in STORY_FULL.md, the CHAPTER_05 scene scripts and doc 22 7.1-7.4: the
+	# arrival at the garage dock, with the landing-pad camera, the sealed tunnel and the relief cargo in the lock
+	# (S01, staged by M3-105); Ferreira's first watch in the service corridor, the spare's crate and the atmosphere panel with its second gauge (S02);
+	# the Mission Table for the records, the archive images, the shared seating, the records desk and spare locker,
+	# the impact-camera monitor, the evidence table, the live Earth link and the message composer (S03-S07,
+	# S09-S11); the maintenance console and the isolated garden spur in the service rooms (S08); Tara's bay (S12).
+	"EX-CH05-S01": "LOC-08", "EX-CH05-S02": "LOC-02", "EX-CH05-S03": "LOC-01",
+	"EX-CH05-S04": "LOC-01", "EX-CH05-S05": "LOC-01", "EX-CH05-S06": "LOC-01",
+	"EX-CH05-S07": "LOC-01", "EX-CH05-S08": "LOC-02", "EX-CH05-S09": "LOC-01",
+	"EX-CH05-S10": "LOC-01", "EX-CH05-S11": "LOC-01", "EX-CH05-S12": "LOC-03",
 	# Chapter 6 (M3-6R), from each scene's location in STORY_FULL.md and the CHAPTER_06 scene scripts: the power
 	# room holds the locker, plan, board, test panel and F2 (S01-S05, S10) and the debrief at the board (S11, SC-0605);
 	# the eclipse desk and its filtered monitor stand by the Mission Table (S06-S09, SC-0603/0604); S12 is the garden.
@@ -433,7 +443,7 @@ static func _extended_room_for_scene(scene_id: String) -> String:
 		4:
 			return ["LOC-03", "LOC-08", "LOC-08", "LOC-09", "LOC-09", "LOC-10", "LOC-10", "LOC-10", "LOC-08", "LOC-03", "LOC-01", "LOC-01"][order - 1]
 		5:
-			return ["LOC-08", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-02", "LOC-01", "LOC-01", "LOC-01", "LOC-03"][order - 1]
+			return ["LOC-08", "LOC-02", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-01", "LOC-02", "LOC-01", "LOC-01", "LOC-01", "LOC-03"][order - 1]
 		7:
 			return ["LOC-01", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-04", "LOC-01", "LOC-01", "LOC-02", "LOC-01"][order - 1]
 		8:
@@ -670,6 +680,32 @@ static func staged_layout_for(base: Dictionary, scene_id: String, choices: Dicti
 	result["stage"] = stage
 	return result
 
+## Every model a room's chapter staging shows in one scene beyond its base furniture (staged props, photographed print
+## subjects, carried objects and objects attached to M3-7A props), echo layers included whatever was chosen, so loading
+## can prepare them off the main thread before the scene is staged (M3-5R). An empty scene_id lists every scene's.
+static func staging_asset_paths(room_layout: Dictionary, scene_id: String = "") -> Array:
+	var base: Array = room_layout.get("props", []).map(func(prop): return String(prop.get("path", "")))
+	var result: Array = []
+	for raw_layer in room_layout.get("staging", []):
+		var layer: Dictionary = raw_layer if scene_id.is_empty() else _resolve(raw_layer, scene_id)
+		var items: Array = []
+		for key in ["props", "prints", "chapter7_props"]:
+			for item in layer.get(key, []):
+				var one: Dictionary = item if scene_id.is_empty() else _resolve(item, scene_id)
+				if not one.is_empty():
+					items.append(one)
+		var paths: Array = []
+		for item in items:
+			paths.append(String(item.get("path", item.get("subject", ""))))
+			for attached in item.get("attach", []):
+				paths.append(String(attached.get("path", "")))
+		for spec in layer.get("carried", {}).values():
+			paths.append(String(spec.get("path", "")))
+		for path in paths:
+			if not path.is_empty() and path not in base and path not in result:
+				result.append(path)
+	return result
+
 ## Crew and player anchors for one scene (base anchors with the active staging's overrides).
 static func staged_anchors(room_id: String, scene_id: String, choices: Dictionary = {}, moments: Array = []) -> Dictionary:
 	var result := anchors(room_id)
@@ -702,13 +738,15 @@ static func _resolve(item: Dictionary, scene_id: String) -> Dictionary:
 				result[field] = value.duplicate(true) if value is Dictionary or value is Array else value
 	return result
 
+## "choice" and "unless" each take one {"choice_id", "option_id"} or (M3-5R) a list of them: every "choice" must be
+## recorded and no "unless" may be, e.g. the S11 composer draft shows only until either opening is chosen.
 static func _choice_met(layer: Dictionary, choices: Dictionary) -> bool:
 	for gate in ["choice", "unless"]:
 		if not layer.has(gate):
 			continue
-		var spec: Dictionary = layer[gate]
-		var recorded = choices.get(String(spec.get("choice_id", "")), {})
-		var picked := String(recorded.get("option_id", "")) if recorded is Dictionary else String(recorded)
-		if (picked == String(spec.get("option_id", ""))) != (gate == "choice"):
-			return false
+		for spec in (layer[gate] if layer[gate] is Array else [layer[gate]]):
+			var recorded = choices.get(String(spec.get("choice_id", "")), {})
+			var picked := String(recorded.get("option_id", "")) if recorded is Dictionary else String(recorded)
+			if (picked == String(spec.get("option_id", ""))) != (gate == "choice"):
+				return false
 	return true

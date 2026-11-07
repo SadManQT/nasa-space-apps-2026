@@ -1230,23 +1230,23 @@
       "playable_actor_id": "amara",
       "actors": {
         "kai": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-02",
           "team_id": "base"
         },
         "amara": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-02",
           "team_id": "base"
         },
         "mei": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-02",
           "team_id": "base"
         },
         "rafi": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-02",
           "team_id": "base"
         },
         "ferreira": {
-          "location_id": "LOC-01",
+          "location_id": "LOC-02",
           "team_id": "base"
         }
       }

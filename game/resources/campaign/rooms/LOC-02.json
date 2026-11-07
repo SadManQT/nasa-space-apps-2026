@@ -2651,6 +2651,1013 @@
    }
   },
   {
+   "id": "ch05_corridor_watch",
+   "from": "EX-CH05-S02",
+   "until": "EX-CH05-S12",
+   "about": "Ferreira's corridor watch (EX-CH05-S01 canon: she takes the corridor watch instead of a chair): her locker shelf, where in S02 she leaves the sealed document sleeve from her relief cargo unopened (doc 24 2.9 S02 -> S03: on 14 Dec she brings it to the table), a standing watch desk on the aisle wall by the Commons door, her watch log (EX-CH05-S02: she checks a label, writes the time, waits for the next reading; her round passes the annex hatch N.R., doc 24 3.5 F11) and, from S06 until she brings it back to the table in S11, her mug (EX-CH05-S06 canon: 'Ferreira takes her mug back to the watch station').",
+   "fixtures": [
+    {
+     "id": "watch_desk",
+     "position": [
+      -1.6,
+      1.0,
+      3.7
+     ],
+     "size": [
+      0.8,
+      0.04,
+      0.45
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "watch_desk_post",
+     "position": [
+      -1.6,
+      0.49,
+      3.8
+     ],
+     "size": [
+      0.3,
+      0.98,
+      0.22
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "watch_log",
+     "position": [
+      -1.75,
+      1.021,
+      3.68
+     ],
+     "size": [
+      0.297,
+      0.002,
+      0.21
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "locker_shelf",
+     "position": [
+      -0.75,
+      1.3,
+      3.83
+     ],
+     "size": [
+      0.46,
+      0.03,
+      0.34
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "locker_shelf_bracket",
+     "position": [
+      -0.75,
+      1.2,
+      3.985
+     ],
+     "size": [
+      0.4,
+      0.17,
+      0.03
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "locker_shelf_tag",
+     "position": [
+      -0.75,
+      1.19,
+      3.969
+     ],
+     "size": [
+      0.2,
+      0.05,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "locker_shelf_tag_text",
+     "text": "FERREIRA",
+     "position": [
+      -0.75,
+      1.19,
+      3.967
+     ],
+     "size": 0.0005,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.19,
+     "yaw": 180
+    },
+    {
+     "id": "watch_log_text",
+     "text": "WATCH LOG, 12 DEC 2046, FERREIRA\nATMOSPHERE PANEL: READ, GAUGE AGREES\nSPARE CRATE: SEALED, SERIAL MATCHED\nANNEX HATCH N.R.: CLOSED\nNEXT READING ON THE HOUR",
+     "position": [
+      -1.75,
+      1.0225,
+      3.68
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.28,
+     "yaw": 180,
+     "pitch": -90,
+     "by_scene": {
+      "EX-CH05-S03..EX-CH05-S12": {
+       "text": "WATCH LOG, 14 DEC 2046, FERREIRA\nATMOSPHERE PANEL: READ\nSPARE: COMMONS LOCKER, SEALED\nANNEX HATCH N.R.: CLOSED\nMAINTENANCE AFTER THE OBSERVATION"
+      }
+     }
+    }
+   ],
+   "props": [
+    {
+     "id": "ferreira_mug_watch",
+     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "position": [
+      -1.38,
+      1.02,
+      3.6500000000000004
+     ],
+     "rotation_degrees": [
+      0,
+      30,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH05-S06",
+     "until": "EX-CH05-S10"
+    },
+    {
+     "id": "sealed_sleeve",
+     "path": "res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb",
+     "position": [
+      -0.75,
+      1.316,
+      3.83
+     ],
+     "rotation_degrees": [
+      0,
+      180,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "until": "EX-CH05-S02"
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "watch_desk",
+     "position": [
+      -1.6,
+      0.51,
+      3.7
+     ],
+     "size": [
+      0.8,
+      1.02,
+      0.45
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "service_watch_desk",
+     "label": "Corridor watch desk",
+     "position": [
+      -1.6,
+      1.1,
+      3.55
+     ],
+     "approach_m": [
+      -1.6,
+      0,
+      2.7
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "watch_desk"
+    }
+   ],
+   "review_views": {
+    "ch05_watch_desk": {
+     "from": [
+      -1.1,
+      1.55,
+      2.45
+     ],
+     "to": [
+      -1.15,
+      1.12,
+      3.9
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_atmosphere_panel",
+   "from": "EX-CH05-S02",
+   "until": "EX-CH05-S12",
+   "about": "EX-CH05-S02 'Aurora corridor and atmosphere panel' (doc 22 7.1 clue 4): the atmosphere panel on the oxygen unit keeps Amara's months-old handwritten correction visible beside the value it corrects, with its date and reason (the printed band struck through), and the reading the player signs after comparing the independent gauge on its hook (M3-3R, CH03-S05 on). It stays for S08 (props accumulate, doc 09).",
+   "fixtures": [
+    {
+     "id": "atmosphere_panel",
+     "position": [
+      1.4,
+      1.55,
+      -1.425
+     ],
+     "size": [
+      0.72,
+      0.42,
+      0.03
+     ],
+     "color": "#0b1220",
+     "transparent": false,
+     "finish": "screen"
+    },
+    {
+     "id": "correction_tag",
+     "position": [
+      1.95,
+      1.62,
+      -1.439
+     ],
+     "size": [
+      0.34,
+      0.2,
+      0.002
+     ],
+     "color": "#f4f1e6",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "correction_strike",
+     "position": [
+      1.95,
+      1.679,
+      -1.437
+     ],
+     "size": [
+      0.15,
+      0.004,
+      0.002
+     ],
+     "color": "#b23a2a",
+     "transparent": false
+    },
+    {
+     "id": "reading_sheet",
+     "position": [
+      1.95,
+      1.37,
+      -1.439
+     ],
+     "size": [
+      0.34,
+      0.17,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "atmosphere_panel_text",
+     "text": "ATMOSPHERE\nOXYGEN SUPPLY    OK\nCARBON DIOXIDE    OK\nTANK PRESSURE    100    BAND 97-103",
+     "position": [
+      1.4,
+      1.55,
+      -1.408
+     ],
+     "size": 0.00055,
+     "outline": 0,
+     "color": "#d9f2ff",
+     "wrap_m": 0.68
+    },
+    {
+     "id": "correction_tag_text",
+     "text": "TANK BAND 95-105\nCORRECTED 7 MAY 2046: 97-103\nREASON: THE PRINTED BAND WAS WRONG\nCHECKED ON THE SECOND GAUGE, A.",
+     "position": [
+      1.95,
+      1.62,
+      -1.4365
+     ],
+     "size": 0.00036,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.32
+    },
+    {
+     "id": "reading_sheet_text",
+     "text": "READING, 12 DEC 2046\nPANEL 100, SECOND GAUGE 100: AGREE\nSIGNED  ______",
+     "position": [
+      1.95,
+      1.37,
+      -1.4365
+     ],
+     "size": 0.00036,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.32,
+     "by_scene": {
+      "EX-CH05-S03..EX-CH05-S12": {
+       "text": "READING, 12 DEC 2046\nPANEL 100, SECOND GAUGE 100: AGREE\nSIGNED  A."
+      }
+     }
+    }
+   ],
+   "focus_labels": {
+    "service_air_console": "Atmosphere panel"
+   },
+   "review_views": {
+    "ch05_atmosphere_panel": {
+     "from": [
+      1.85,
+      1.55,
+      -0.6
+     ],
+     "to": [
+      1.75,
+      1.48,
+      -1.5
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_second_gauge",
+   "from": "EX-CH05-S02",
+   "until": "EX-CH05-S12",
+   "about": "The independent gauge Amara left on its hook in EX-CH03-S05 (M3-3R) is the 'second gauge' of EX-CH05-S02: its station. M3-3R's ch03_gauge_on_its_hook hangs it; if that layer is missing this layer hangs the gauge itself at the same spot.",
+   "focus_targets": [
+    {
+     "target_id": "service_second_gauge",
+     "label": "Independent gauge",
+     "position": [
+      5.85,
+      1.2,
+      0.75
+     ],
+     "approach_m": [
+      5.05,
+      0,
+      1.0
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "manual_gauge_on_hook"
+    }
+   ],
+   "review_views": {
+    "ch05_second_gauge": {
+     "from": [
+      4.4,
+      1.6,
+      1.1
+     ],
+     "to": [
+      5.9,
+      1.2,
+      0.75
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_spare_arrives",
+   "from": "EX-CH05-S02",
+   "until": "EX-CH05-S02",
+   "about": "EX-CH05-S02 (doc 22 7.1 clue 3): the replacement relay controller sits in its sealed crate in the corridor; Rafi reads its serial against the received manifest clipped to the lid, Kai checks that its service diagram is saved locally, and the facts go on the inventory board: one spare, stored once (in the Commons spare locker), needing a compatible housing, an isolation procedure and a crew who know where it is. The spare does not fix anything by arriving.",
+   "fixtures": [
+    {
+     "id": "corridor_crate",
+     "position": [
+      -4.4,
+      0.25,
+      3.35
+     ],
+     "size": [
+      0.6,
+      0.5,
+      0.5
+     ],
+     "color": "#2b3a4f",
+     "transparent": false
+    },
+    {
+     "id": "corridor_crate_label",
+     "position": [
+      -4.4,
+      0.3,
+      3.099
+     ],
+     "size": [
+      0.42,
+      0.15,
+      0.002
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "received_manifest",
+     "position": [
+      -4.4,
+      0.501,
+      3.35
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.297
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "inventory_board",
+     "position": [
+      0.3,
+      1.5,
+      3.965
+     ],
+     "size": [
+      1.1,
+      0.72,
+      0.03
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "corridor_crate_text",
+     "text": "SPARE RELAY CONTROLLER\nRELIEF FLIGHT, 12 DEC 2046\nSEALED",
+     "position": [
+      -4.4,
+      0.3,
+      3.0965
+     ],
+     "size": 0.00042,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.4,
+     "yaw": 180
+    },
+    {
+     "id": "received_manifest_text",
+     "text": "RECEIVED MANIFEST\nRELIEF FLIGHT 12 DEC 2046\nSPARE RELAY CONTROLLER\nSERIAL RC-0417\nSERVICE DIAGRAM ENCLOSED",
+     "position": [
+      -4.4,
+      0.5025,
+      3.35
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.19,
+     "yaw": 180,
+     "pitch": -90
+    },
+    {
+     "id": "inventory_board_text",
+     "text": "INVENTORY BOARD, 12 DEC 2046\n\nSPARE RELAY CONTROLLER: 1\nSERIAL RC-0417, MATCHES THE RECEIVED MANIFEST\nSERVICE DIAGRAM AND PROCEDURE SAVED HERE\nTHEY OPEN WITHOUT EARTH\nNEEDS A COMPATIBLE HOUSING, AN ISOLATION\nPROCEDURE AND A CREW WHO KNOW WHERE IT IS\nSTORED ONCE: COMMONS SPARE LOCKER",
+     "position": [
+      0.3,
+      1.5,
+      3.948
+     ],
+     "size": 0.00072,
+     "outline": 0,
+     "color": "#d9f2ff",
+     "wrap_m": 1.04,
+     "yaw": 180
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "corridor_crate",
+     "position": [
+      -4.4,
+      0.25,
+      3.35
+     ],
+     "size": [
+      0.6,
+      0.5,
+      0.5
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "service_spare_crate",
+     "label": "Sealed spare crate",
+     "position": [
+      -4.4,
+      0.6,
+      3.05
+     ],
+     "approach_m": [
+      -4.4,
+      0,
+      2.4
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "corridor_crate"
+    },
+    {
+     "target_id": "service_inventory_board",
+     "label": "Inventory board",
+     "position": [
+      0.3,
+      1.5,
+      3.85
+     ],
+     "approach_m": [
+      0.3,
+      0,
+      2.9
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "inventory_board"
+    }
+   ],
+   "anchors": {
+    "service_ferreira": [
+     -2.45,
+     0,
+     2.95
+    ],
+    "service_rafi": [
+     -2.9,
+     0,
+     2.2
+    ],
+    "service_kai": [
+     1.7,
+     0,
+     2.6
+    ],
+    "service_mei": [
+     2.6,
+     0,
+     1.3
+    ]
+   },
+   "stations": {
+    "p09_store_spare_once": "service_spare_crate",
+    "p09_run_arrival_readings": "service_air_console",
+    "p09_reconcile_readings": "service_second_gauge"
+   },
+   "review_views": {
+    "ch05_corridor": {
+     "from": [
+      -4.4,
+      1.4,
+      2.15
+     ],
+     "to": [
+      -4.4,
+      0.42,
+      3.35
+     ]
+    },
+    "ch05_inventory_board": {
+     "from": [
+      0.3,
+      1.55,
+      2.55
+     ],
+     "to": [
+      0.3,
+      1.5,
+      4.0
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch05_maintenance",
+   "from": "EX-CH05-S08",
+   "until": "EX-CH05-S08",
+   "about": "EX-CH05-S08 'Maintenance console and isolated garden spur' (doc 22 7.3; 08 P-10): two symptoms, two causes, two measurements. The maintenance console in the power bay shows the solar panel trend below its reference (dust: income 8 -> 6 until cleaned) with the scheduled cleaning card and kit; the isolated garden spur's own pressure trace shows a slow fall on that branch only, with the patch kit at the spur's safe side; the living enclosure stays closed. Neither protective upgrade is owned yet. Ferreira's mug is on the watch desk.",
+   "fixtures": [
+    {
+     "id": "maintenance_desk",
+     "position": [
+      -1.6,
+      0.37,
+      -1.9
+     ],
+     "size": [
+      1.2,
+      0.74,
+      0.6
+     ],
+     "color": "#3c4b5d",
+     "transparent": false
+    },
+    {
+     "id": "maintenance_screen_stand",
+     "position": [
+      -1.6,
+      0.79,
+      -2.05
+     ],
+     "size": [
+      0.07,
+      0.1,
+      0.07
+     ],
+     "color": "#1F2A44",
+     "transparent": false
+    },
+    {
+     "id": "maintenance_screen",
+     "position": [
+      -1.6,
+      1.03,
+      -2.04
+     ],
+     "size": [
+      0.62,
+      0.38,
+      0.03
+     ],
+     "color": "#0b1220",
+     "transparent": false,
+     "finish": "screen"
+    },
+    {
+     "id": "cleaning_card",
+     "position": [
+      -1.25,
+      0.741,
+      -1.75
+     ],
+     "size": [
+      0.21,
+      0.002,
+      0.148
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "cleaning_kit",
+     "position": [
+      -1.96,
+      0.81,
+      -1.78
+     ],
+     "size": [
+      0.3,
+      0.14,
+      0.2
+     ],
+     "color": "#d8dde3",
+     "transparent": false
+    },
+    {
+     "id": "spur_trace_post",
+     "position": [
+      2.65,
+      0.6,
+      -1.72
+     ],
+     "size": [
+      0.05,
+      1.2,
+      0.05
+     ],
+     "color": "#4a5566",
+     "transparent": false
+    },
+    {
+     "id": "spur_trace_screen",
+     "position": [
+      2.65,
+      1.36,
+      -1.7
+     ],
+     "size": [
+      0.6,
+      0.38,
+      0.03
+     ],
+     "color": "#0b1220",
+     "transparent": false,
+     "finish": "screen"
+    },
+    {
+     "id": "spur_patch_kit",
+     "position": [
+      2.85,
+      0.1,
+      -1.0
+     ],
+     "size": [
+      0.36,
+      0.2,
+      0.26
+     ],
+     "color": "#F26B21",
+     "transparent": false
+    },
+    {
+     "id": "enclosure_tag",
+     "position": [
+      3.5,
+      0.58,
+      -1.299
+     ],
+     "size": [
+      0.26,
+      0.08,
+      0.002
+     ],
+     "color": "#F2C230",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "maintenance_screen_text",
+     "text": "SOLAR PANEL OUTPUT   14 DEC 2046\nAFTER THE FIRST OBSERVATION PHASE\nREFERENCE 8   TODAY 6   DUST ON THE PANEL FACE\nSCHEDULED CLEANING, THEN READ IT AGAIN",
+     "position": [
+      -1.6,
+      1.03,
+      -2.0235
+     ],
+     "size": 0.00048,
+     "outline": 0,
+     "color": "#d9f2ff",
+     "wrap_m": 0.58
+    },
+    {
+     "id": "cleaning_card_text",
+     "text": "PANEL CLEANING   SCHEDULED\n1  READ THE PANEL TREND\n2  RUN THE CLEANING CYCLE\n3  READ THE OUTPUT AGAIN",
+     "position": [
+      -1.25,
+      0.7425,
+      -1.75
+     ],
+     "size": 0.0003,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.2,
+     "pitch": -90
+    },
+    {
+     "id": "cleaning_kit_text",
+     "text": "PANEL-CLEANING KIT",
+     "position": [
+      -1.96,
+      0.881,
+      -1.78
+     ],
+     "size": 0.00042,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.28,
+     "pitch": -90
+    },
+    {
+     "id": "spur_trace_text",
+     "text": "GARDEN SPUR   ISOLATED BRANCH\nPRESSURE: SLOW FALL ON THIS BRANCH ONLY\nHABITAT TRUNK STEADY\nPATCH FROM THE SAFE SIDE, THEN RETEST",
+     "position": [
+      2.65,
+      1.36,
+      -1.6835
+     ],
+     "size": 0.00045,
+     "outline": 0,
+     "color": "#d9f2ff",
+     "wrap_m": 0.56
+    },
+    {
+     "id": "spur_patch_kit_text",
+     "text": "SPUR PATCH KIT",
+     "position": [
+      2.85,
+      0.201,
+      -1.0
+     ],
+     "size": 0.00045,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.34,
+     "pitch": -90
+    },
+    {
+     "id": "enclosure_tag_text",
+     "text": "LIVING ENCLOSURE STAYS CLOSED",
+     "position": [
+      3.5,
+      0.58,
+      -1.297
+     ],
+     "size": 0.00028,
+     "outline": 0,
+     "color": "#1b2433",
+     "wrap_m": 0.25
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "maintenance_desk",
+     "position": [
+      -1.6,
+      0.37,
+      -1.9
+     ],
+     "size": [
+      1.2,
+      0.74,
+      0.6
+     ]
+    },
+    {
+     "id": "spur_trace",
+     "position": [
+      2.65,
+      0.6,
+      -1.72
+     ],
+     "size": [
+      0.2,
+      1.2,
+      0.2
+     ]
+    },
+    {
+     "id": "spur_patch_kit",
+     "position": [
+      2.85,
+      0.1,
+      -1.0
+     ],
+     "size": [
+      0.36,
+      0.2,
+      0.26
+     ]
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "service_maintenance_console",
+     "label": "Maintenance console",
+     "position": [
+      -1.6,
+      1.0,
+      -1.75
+     ],
+     "approach_m": [
+      -1.6,
+      0,
+      -0.55
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "maintenance_screen"
+    },
+    {
+     "target_id": "service_spur_trace",
+     "label": "Garden spur pressure trace",
+     "position": [
+      2.65,
+      1.36,
+      -1.6
+     ],
+     "approach_m": [
+      2.4,
+      0,
+      -0.35
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "spur_trace_screen"
+    }
+   ],
+   "focus_labels": {
+    "service_garden_valve": "Isolated garden spur"
+   },
+   "anchors": {
+    "service_kai": [
+     -2.45,
+     0,
+     -0.75
+    ],
+    "service_mei": [
+     3.95,
+     0,
+     0.6
+    ],
+    "service_rafi": [
+     1.2,
+     0,
+     0.55
+    ],
+    "service_ferreira": [
+     -2.45,
+     0,
+     2.95
+    ]
+   },
+   "stations": {
+    "p10_clean_panel": "service_maintenance_console",
+    "p10_patch_dome_spur": "service_garden_valve",
+    "p10_verify_pressure": "service_spur_trace"
+   },
+   "review_views": {
+    "ch05_maintenance_console": {
+     "from": [
+      -1.45,
+      1.4,
+      -0.85
+     ],
+     "to": [
+      -1.6,
+      0.95,
+      -2.0
+     ]
+    },
+    "ch05_spur": {
+     "from": [
+      2.3,
+      1.55,
+      0.2
+     ],
+     "to": [
+      3.1,
+      0.9,
+      -1.5
+     ]
+    }
+   }
+  },
+  {
    "id": "ch07_fabrication",
    "from": "EX-CH07-S11",
    "about": "EX-CH07-S11 'Make the Road Hear Us' (March to 7 April): EN_Fabrication in the power bay and the air bay. The bench faces the walkway: the spare controller from December in its cradle and its case open beside the bench with Kai's compatibility note still clipped inside the lid (S10 -> S11), the spare battery, the connector tray (one wrong connector), the echo unit and the isolation checklist Ferreira signs. The surveyed-route simulator (the real LOLA corridor) waits with its three repeater pins parked: every neighbouring link must clear the terrain, and a desk plan is not field proof. Installed equipment: it stays after the chapter.",
@@ -2754,7 +3761,7 @@
    "signs": [
     {
      "id": "kai_note_text",
-     "text": "FOR THE MALAPERT HOUSING\nCHECK EVERY CONNECTOR BEFORE USE\nKAI, 12 DEC 2046",
+     "text": "FOR THE MALAPERT HOUSING\nCHECK EVERY CONNECTOR BEFORE USE\nKAI, 14 DEC 2046",
      "position": [
       -0.85,
       0.7,

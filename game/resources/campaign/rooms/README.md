@@ -119,7 +119,11 @@ Doc 09's revisit rule applies: props accumulate between chapters; only mission-s
   line), `prints` (`solar_image`, `eclipse_frame`; M3-2R adds `plant_photo`, image `texture` and labelled
   `flower_diagram`, with `pitch`, `roll`, photographic `border` and optional `caption`), `models` (the nonliving
   mustard-flower practice model: four petals, four long and two short stamens), `local_lights`, `obstacles` (collision and the rebuilt
-  navigation map), `focus_targets` (stations).
+  navigation map), `focus_targets` (stations). M3-5R: a `texture` print with `"screen": true` is a lit display and
+  `uv_rect` crops its image; a prop may carry `parts` (node name -> `visible`, `position`, `rotation_degrees` in the
+  prop's own space, e.g. one 2034 record moved or turned over alone; or M3-4R's bare `[x, y, z]` rotation, both read by
+  `_pose_parts`) and `surfaces` (material name -> `texture`, drawn
+  unshaded, e.g. the impact monitor's `Screen`).
 - Changes: `hide` (base node ids, including their obstacles), `hide_signs` (base sign texts),
   `focus_labels`, `anchors` (merged by key; later layers win), `lighting` (`practical_scale`,
   `strip_scale`, `ambient_energy`), `carried` (an object on a cast member's bone, e.g. Kai's lamp).
@@ -129,9 +133,9 @@ Doc 09's revisit rule applies: props accumulate between chapters; only mission-s
 | Scenes | Room | What the staging shows |
 |---|---|---|
 | EX-CH06-S01..S05, S10, S11 | LOC-02 | Guide light leaving the protected supply at Kai's taped junction box (CH05 → CH06) and running low along the aisle to the Commons door; protected-bus test panel with F2 (A-42) beside that door; two decorative floods (shed in S10–S11); allocation board above the guide line (five cards from S01, the P-11 accepted plan and 7-unit forecast from S04); camera repeater desk with Kai's dated log; the lamp in its clip in the wall locker (S01, and from S12), on Kai's hip S02–S11; per-scene crew anchors (Ferreira in the Commons doorway; D11 companion at Kai's shoulder in S10); practicals at 18 % in S10 (the amber guide line is the only warm light), 55 % in S11 |
-| EX-CH05-S01 on | LOC-01 | Five seats and five mugs; Ferreira's chair at the head until EX-CH07-S01 moves it |
-| EX-CH05-S06..CH07-S12 | LOC-01 | D9: the ascent manifest or greenhouse service note at her place, under her mug |
-| EX-CH05-S12 on | LOC-01 | D10 (OPT02): the seed-label holder marked "N." |
+| EX-CH05-S01 on | LOC-01 | Five seats and five mugs; Ferreira's chair at the head until EX-CH07-S01 moves it. Her mug: on its clip above the table (S01), at her place (S02–S05), at the corridor watch in LOC-02 (S06–S10, canon), beside the four again from S11 |
+| EX-CH05-S06..CH07-S12 | LOC-01 | D9: the ascent manifest or greenhouse service note at her place (under her mug from S11) |
+| EX-CH05-S11 on | LOC-01 | D10 (OPT02): the seed-label holder marked "N." |
 | EX-CH06-S06..S09 | LOC-01 | Eclipse desk with the filtered monitor (S06 protected, S07 ingress → ring, S08–S09 ring logged) and the message log (Noor's text in S09); Commons practicals at 35 % while the eclipse lasts |
 | EX-CH06-S08 on | LOC-01 | Pin board: the held ring frame; from S10 Noor's note indexed as personal recollection, date unspecified |
 | EX-CH06-S01 on | LOC-03 | Cotton in Tara's bay (Alo and Tara archived), the bay sign and focus renamed |
@@ -144,12 +148,45 @@ Doc 09's revisit rule applies: props accumulate between chapters; only mission-s
 | EX-CH07-S11 on | LOC-02 | EN_Fabrication: the bench facing the walkway with the December spare in its cradle, the case open beside it with Kai's note clipped inside the lid (S10 → S11), battery, connectors, echo unit and isolation checklist; the surveyed-route simulator with its three pins parked. Chapter 6's guide light, test panel and lamp clip stay |
 | EX-CH07-S12 | LOC-01 | **EN_Garage (M3-4A) is not built**, so the departure plays in the Commons, where the roster puts all five: the main display shows the two destination boards (rover: Ferreira, Kai, Rafi; Aurora: Mei, Amara) and the rover loadout stands on a table by the airlock door (packed spare Kai labelled, battery, three helmets, three-site route card, three repeater cases, duplicate route and shelter checklists dated 8 Apr 00:00: S11 → S12, CH07 → CH08); D12 packs Kai's copy of the observation he sent home. Restage it in EN_Garage when that room exists |
 
-In the Safe Room a cast member whose scene anchor is an installed seat sits (the storm steps, S05–S08); one at a staged
-work anchor stands (S02–S04). There are no stand-in benches.
+A cast member whose scene anchor is an installed seat's sitting point sits in it, facing the way the seat faces
+(`CampaignRoom.installed_seat_facing`, base or staged seats): the Safe Room's storm steps (S05–S08) and, from M3-5R, the
+Commons table where a scene seats the crew (EX-CH05-S05, S11). One at a staged work anchor stands (EX-CH07-S02–S04).
+There are no stand-in benches.
 
 Run `game/tools/run_tests.sh chapter6_rooms` / `chapter7_rooms` (mapping, rosters, stations, navigation, collision,
 resting props, readable signs and screens, every §2.9 join, echoes, re-staging back to Chapter 1, cast placement), and
 `production/qa/evidence/M3-6R_capture.sh` / `M3-7R_capture.sh` for the windowed screenshots and frame timings.
+
+# Chapter 5 rooms (M3-5R)
+
+The CH05 scene map is explicit in `room_contract.gd` (and `scene_rosters.json` agrees): S01 LOC-08, S02 LOC-02,
+S03–S07 LOC-01, S08 LOC-02, S09–S11 LOC-01, S12 LOC-03. From EX-CH05-S01 Ferreira is a physical cast member at Aurora.
+
+| Scenes | Room | Physical story carriers (doc 24 §2.5, §2.9, §4, §5.2; doc 22 §7.1–7.4) |
+|---|---|---|
+| EX-CH04-S12..CH05-S01 | LOC-01 | The fifth mug on its clip above the table on a ceiling rail, with Ferreira's name tag (CH04 → CH05); from S02 it stands at her place |
+| EX-CH05-S01 | LOC-08 | The arrival at the garage dock, staged by M3-105 (see "LOC-08, the rover garage"): Ferreira on the landing-pad camera, dust settled; the tunnel SEALED until two checks agree; the relief cargo in the cargo lock for its seal check; the five-person roster on the departure boards (S01 → S02) |
+| EX-CH05-S02 | LOC-02 | Ferreira's corridor watch: her locker shelf with the sealed document sleeve, unopened (S02 → S03), the watch desk and log (her round passes the annex hatch N.R., doc 24 §3.5 F11); the spare's sealed crate with the received manifest; the inventory board (stored once in the Commons spare locker, procedure saved locally); the atmosphere panel with Amara's dated, reasoned correction still visible and the reading to sign against the independent gauge on its hook (M3-3R's CH03-S05 gauge, hung by `ch03_gauge_on_its_hook`) |
+| EX-CH05-S02..S12 | LOC-01 | The Commons spare locker beside the records desk with the sealed crate; in S06 the crate open, the controller packed, Kai's compatibility note clipped inside the lid (the note CH07-S11 finds there) |
+| EX-CH05-S03..S05 | LOC-01 | PR_Records2034 on the near arc of the table, each sheet moved alone: S03 set down out of order, S04–S05 in the supported order (numbered 1–4; 08 P-09 times; FER and N.R. the highlighted signatures; four departed, four boarded); S05 the evacuation order turned over with Ferreira's margin note (clue 18). The opened PR_DocumentSleeve beside them. D5 (CH02-S10 choice): the voice card in S03. The frozen-tray photograph (S03 → S04); S04 the close photograph, Alo's pressed petal, the 2034 growth sheet and Alo's own record apart, Mei's draft caption, revised in S05 (S04 → S05). S05: CS-09's shared frame, Ferreira seated at the head with Kai, Amara and Rafi in theirs, practicals 80 % |
+| EX-CH05-S06..S12 | LOC-01 | The records desk on the north wall (where the CH06 eclipse desk and CH07 care desk stand later): S06 the 2034 relay diagram beside the spare's service card and the replacement procedure that opens without Earth (S06 → S07); from S07 PR_ImpactMonitor with an authored M3-5A candidate frame on its Screen, Rafi's frame log (0 of 6 in S07, complete from S09) and "amplified camera view"; S06 Mei's question card beside a current photograph |
+| EX-CH05-S07 | LOC-01 | Night observation: practicals 30 %, strips 25 %, a cool spill from the monitor; the crew round the screen |
+| EX-CH05-S08 | LOC-02 | Maintenance console (panel trend: reference 8, today 6, after the first observation phase: S07 → S08) with the cleaning card and kit; the isolated garden spur's own pressure trace, patch kit at its safe side, "living enclosure stays closed"; Ferreira's mug on the watch desk |
+| EX-CH05-S09 | LOC-01 | Tonight's observation record beside the 2034 damage report on the evidence table; the main display's bounded report (supported, unsupported, the honest blank "not established") |
+| EX-CH05-S10 | LOC-01 | Rao on the Earth screen; the signed page (consented; the 2034 portrait only here) beside the ALO / N. packet, the permission note, the signature card (manifest N.R. beside the page's), the report receipts (made versus delivered) |
+| EX-CH05-S11 | LOC-01 | The message composer addressed to Dr Noor Rahman with both authored openings and the current garden photograph; D10: once chosen, the opening shows delivered once, receipt kept, no reply yet (and OPT02's N. holder); Ferreira seated at the head beside her mug, Kai and Amara seated |
+| EX-CH05-S12 | LOC-03 | One cotton seed planted in Tara's bay (PL_Cotton_Seed in Tara's pot; Alo and Tara hidden: records now), Tara's name on the frame, Alo's pressed petal beside the label (M3-3R's lineage-board petal and its caption, moved there for this scene by `by_scene`), a pin board at eye height with Noor's text word for word (clue 20), the vault manifest note "Let one grow further." (clue 14) and the dated care card into January; the quarantine record and vault ledger (1 planted + 11 stored = 12) on the care bench, the founder reserve's separate ledger (30, sealed) on the seed archive; Kai carries the marker tape (CH05 → CH06, which opens beside his taped junction box) |
+
+`CampaignRoom.load_assets_incremental()` also prepares, on the loader thread, the models the coming scene's staging shows
+(`RoomContract.staging_asset_paths(layout, scene)`: staged props, photographed print subjects, carried and attached
+objects; the scene is `upcoming_scene` or the owning campaign's route scene), so staging it decodes nothing on the main
+thread (the EX-CH05-S02 full-cast entry in `test_performance_runtime`).
+
+Not staged as their own models: the panel-cleaning kit, spur patch kit, relay-controller crate,
+message composer and signed identity page are fixtures and words until their assets exist (board task filed by M3-5R).
+Run `game/tools/run_tests.sh chapter5_rooms` (every check) and `production/qa/evidence/M3-5R_capture.sh` (windowed
+screenshots and frame timings; that pass only renders, and draws its frames itself when macOS reports the window covered,
+leaving the timings "not measured").
 
 # Chapter 2 rooms (M3-2R)
 

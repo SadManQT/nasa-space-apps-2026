@@ -1,7 +1,7 @@
 ## M3-6R: builds a room's chapter staging (RoomContract.staging for the staged scene) on top of the base Chapter 1
 ## assembly: dated furniture and fixtures, the M3-6A eclipse props and the M3-7A Chapter 7 props in the scene's state
-## (M3-7R), prints, signs and screens,
-## per-scene practical-light levels, collision for every floor-standing addition and the staged focus stations.
+## (M3-7R), prints, signs and screens, a prop's own parts and live surfaces in the scene's pose (M3-5R: the 2034 records,
+## the document sleeve, the impact monitor), per-scene practical-light levels, collision for every floor-standing addition and the staged focus stations.
 ## clear() puts the base room back exactly. Presentation only: puzzles, missions and the director own every rule.
 ## M3-3R adds live kit pieces (the M3-3A annex pieces): kit_prop() places one with its collision, moving-part poses,
 ## live words on its Label*, Document* and Screen* slots and objects seated in its sockets; a stage's "kit_parts",
@@ -169,14 +169,13 @@ static func build(room: CampaignRoom, stage: Dictionary, layout: Dictionary) -> 
 			# An M3-99 narrative prop (e.g. PR_Mug_Named "KAI"): its tape and words are drawn at runtime.
 			model.set_meta("narrative_prop", String(spec.path).get_file().get_basename())
 			NarrativeProps.apply_variant(model, String(spec.variant))
-		# M3-4R: words on a prop's plate ("inks", see ink(); "part" rides on a moving part) and its moving parts posed by
-		# name ("parts": node -> rotation in degrees, e.g. PR_VaultCase's hinged Lid open in the dry glovebox)
+		# M3-4R: words on a prop's plate ("inks", see ink(); "part" rides on a moving part); its moving parts are posed by
+		# name in _pose_parts ("parts", both forms)
 		for item in spec.get("inks", []):
 			ink(model, item)
-		for part in spec.get("parts", {}):
-			for leaf in model.find_children(String(part), "Node3D", true, false):
-				(leaf as Node3D).rotation_degrees = Presentation.vector(spec.parts[part])
 		visuals.add_child(model)
+		if spec.has("parts") or spec.has("surfaces"):
+			_pose_parts(model, spec)
 		if spec.get("rattle") is Dictionary:
 			_rattle(model, spec.rattle)
 	for spec in stage.models:
@@ -617,10 +616,13 @@ static func _print(parent: Node3D, spec: Dictionary) -> Node3D:
 			material.roughness = 0.45
 			quad.material_override = material
 		"texture":
-			var material := StandardMaterial3D.new()
-			material.albedo_texture = load(String(spec.texture)) as Texture2D
-			material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
-			material.roughness = 0.9
+			# "screen": true draws it as a lit display (M3-5R: the landing camera); "uv_rect" crops the image
+			var material := _image_material(spec) if bool(spec.get("screen", false)) else StandardMaterial3D.new()
+			if not bool(spec.get("screen", false)):
+				material.albedo_texture = load(String(spec.texture)) as Texture2D
+				material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+				material.roughness = 0.9
+				_crop(material, spec)
 			quad.material_override = material
 		"flower_diagram":
 			if _flower_shader == null:
@@ -664,6 +666,64 @@ static func _print(parent: Node3D, spec: Dictionary) -> Node3D:
 		caption.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 		holder.add_child(caption)
 	return holder
+
+## M3-5R: poses a prop's own named parts and live surfaces for the scene, e.g. one 2034 record moved alone or turned
+## over (PR_Records2034's per-sheet pivots), the document sleeve's lid open with its seal gone, the impact monitor's
+## Screen showing one authored frame. "parts": node name -> {"visible", "position", "rotation_degrees"}, in the prop's
+## own space, or (M3-4R) a bare [x, y, z] rotation in degrees set on every node of that name in its own parent's space,
+## e.g. PR_VaultCase's hinged Lid open in the dry glovebox; "surfaces": material name -> {"texture", "uv_rect"}, drawn
+## unshaded like a lit screen.
+static func _pose_parts(model: Node3D, spec: Dictionary) -> void:
+	var parts: Dictionary = spec.get("parts", {})
+	for part in parts:
+		if parts[part] is Array:
+			for leaf in model.find_children(String(part), "Node3D", true, false):
+				(leaf as Node3D).rotation_degrees = Presentation.vector(parts[part])
+			continue
+		var node := model.find_child(String(part), true, false) as Node3D
+		if node == null:
+			continue
+		var pose: Dictionary = parts[part]
+		if pose.has("visible"):
+			node.visible = bool(pose.visible)
+		if pose.has("position") or pose.has("rotation_degrees"):
+			var to_model := Transform3D()
+			var parent := node.get_parent()
+			while parent != model and parent is Node3D:
+				to_model = (parent as Node3D).transform * to_model
+				parent = parent.get_parent()
+			var wanted := to_model * node.transform
+			if pose.has("rotation_degrees"):
+				var degrees := Presentation.vector(pose.rotation_degrees)
+				wanted.basis = Basis.from_euler(Vector3(deg_to_rad(degrees.x), deg_to_rad(degrees.y), deg_to_rad(degrees.z)))
+			if pose.has("position"):
+				wanted.origin = Presentation.vector(pose.position)
+			node.transform = to_model.affine_inverse() * wanted
+	var surfaces: Dictionary = spec.get("surfaces", {})
+	if surfaces.is_empty():
+		return
+	for mesh in model.find_children("*", "MeshInstance3D", true, false):
+		var instance := mesh as MeshInstance3D
+		if instance.mesh == null:
+			continue
+		for i in instance.mesh.get_surface_count():
+			var material := instance.mesh.surface_get_material(i)
+			if material != null and surfaces.has(material.resource_name):
+				instance.set_surface_override_material(i, _image_material(surfaces[material.resource_name]))
+
+## An image drawn unshaded, like a lit display ("texture", optional "uv_rect" [x, y, w, h] crop in 0..1).
+static func _image_material(spec: Dictionary) -> StandardMaterial3D:
+	var material := StandardMaterial3D.new()
+	material.resource_name = "Screen_live"
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.albedo_texture = load(String(spec.texture)) as Texture2D
+	_crop(material, spec)
+	return material
+
+static func _crop(material: StandardMaterial3D, spec: Dictionary) -> void:
+	var rect: Array = spec.get("uv_rect", [0, 0, 1, 1])
+	material.uv1_offset = Vector3(float(rect[0]), float(rect[1]), 0)
+	material.uv1_scale = Vector3(float(rect[2]), float(rect[3]), 1)
 
 ## The SubViewport that photographs an installed plant (or tray) model for a "plant_photo" print, rendered once: the
 ## subject GLB on its own in a dark chamber-like backdrop, one soft key and fill, framed from "view" (yaw, pitch in

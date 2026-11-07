@@ -52,6 +52,8 @@ const PLANT_STAGE_MODELS_PATH := "res://assets/plants/plant_stage_models.json"
 static var _plant_stage_models: Dictionary = {}
 var _choices: Dictionary = {}
 var _moments: Array = []
+## The scene this room will be staged for next, so load_assets_incremental() can prepare its staging models (M3-5R).
+var upcoming_scene := ""
 var _stage: Dictionary = {}
 var _stage_signature := ""
 ## Fixture cues that already pulsed in the current scene context (one each).
@@ -448,6 +450,14 @@ func load_assets_incremental() -> void:
 	for index in paths.size():
 		_add_approved_asset(String(paths[index].path) if paths[index] is Dictionary else String(paths[index]), index, paths.size(), paths[index] if paths[index] is Dictionary else {})
 		await get_tree().process_frame
+	# M3-5R: the models the coming scene's staging shows (props, photographed subjects, carried and attached objects) are
+	# prepared on the loader thread too, so staging it never decodes a model on the main thread. Only that scene's:
+	# preparing every chapter's would put their main-thread scene builds into an unrelated room entry.
+	var scene := upcoming_scene_id()
+	if not scene.is_empty():
+		for path in RoomContract.staging_asset_paths(_layout, scene):
+			if not AssetGeometryScript.is_prepared(path):
+				await AssetGeometryScript.prepare(path, get_tree())
 	if RoomContract.room(room_id).get("pressure") == "vacuum":
 		_style_vacuum(visual_root)
 	_build_selection_frames(RoomContract.room(room_id))
@@ -593,18 +603,35 @@ func airlock() -> Node3D:
 func garage() -> Node3D:
 	return visual_root.get_node_or_null("Garage") as Node3D if visual_root != null else null
 
+## The scene this room is about to be staged for: upcoming_scene when its owner set it, else the owning campaign's
+## current route scene (the room is its child), else "".
+func upcoming_scene_id() -> String:
+	if not upcoming_scene.is_empty():
+		return upcoming_scene
+	var owner_node := get_parent()
+	var route = owner_node.get("route") if owner_node != null else null
+	if route is Object and route.has_method("current_scene_id"):
+		return String(route.current_scene_id())
+	return ""
+
 ## True when an installed PR_CrewSeat's sitting position is at this floor point, so a seated
 ## companion needs no stand-in bench. The sitter's origin is SEAT_SIT_OFFSET_M in front of
 ## the seat pivot (measured from the approved PR_CrewSeat cushion and backrest).
 func has_installed_seat_at(at: Vector3) -> bool:
-	for prop in _layout.get("props", []):
-		if not prop is Dictionary or String(prop.get("path", "")).get_file() != "PR_CrewSeat.glb":
+	return installed_seat_facing(at) != Vector3.ZERO
+
+## The way a sitter faces at the installed PR_CrewSeat whose sitting position is this floor point, or ZERO when there
+## is none: the base furniture or, from M3-5R, a seat of the applied chapter staging (Ferreira's chair at the head of
+## the Commons table from EX-CH05-S01). A seat that staging hides does not count.
+func installed_seat_facing(at: Vector3) -> Vector3:
+	for prop in _layout.get("props", []) + _stage.get("props", []):
+		if not prop is Dictionary or String(prop.get("path", "")).get_file() != "PR_CrewSeat.glb" or String(prop.get("id", "")) in _stage.get("hide", []):
 			continue
-		var yaw := deg_to_rad(float(prop.get("rotation_degrees", [0, 0, 0])[1]))
-		var sit := Presentation.vector(prop.position) + Basis(Vector3.UP, yaw) * Vector3(0, 0, SEAT_SIT_OFFSET_M)
+		var facing := Basis(Vector3.UP, deg_to_rad(float(prop.get("rotation_degrees", [0, 0, 0])[1]))) * Vector3.BACK
+		var sit := Presentation.vector(prop.position) + facing * SEAT_SIT_OFFSET_M
 		if Vector2(sit.x - at.x, sit.z - at.z).length() < 0.15:
-			return true
-	return false
+			return facing
+	return Vector3.ZERO
 
 ## Stages the room for one scene: applies the chapter staging that RoomContract.staging reports for it (dated
 ## furniture, the scene's prop states and light level, stations, collision and a rebuilt navigation map; see
