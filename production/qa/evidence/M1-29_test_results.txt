@@ -1,3 +1,6 @@
 
 Final integrated follow-up - 6 November 2026
 Reviewed source66aed53: game/tools/run_tests.sh ended 53/54 suites passed (exit1, 954s), solely Atik M1-68 performance_runtime537checks/8timingfailures. Explicit editor import exited0. All M1-29 focused/integration suites pass; acceptance remains blocked. Exact full output: production/qa/evidence/M1-55_test_results.txt.
+
+Final integration follow-up - 7 November 2026
+Reviewed sourcefbdcd67, game tree22b507fcac0701e13c412598c980d0e306d953cf: run_tests.sh57/58, exit1,833s. Sole failure is Atik M1-68 title55.308ms/newcampaign100.068ms (537checks/2timings). All feature suites pass. Exact full output: production/qa/evidence/M1-64_full_results.txt. Task acceptance remains blocked; no done claim.

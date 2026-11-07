@@ -31,3 +31,6 @@ ok   tools/test_chapter1_campaign_flow.gd :: CHAPTER 1 CAMPAIGN FLOW RESULT: PAS
 m164-final-chapter1_outcomes.log
 ok   tools/test_chapter1_outcomes.gd :: CHAPTER 1 OUTCOMES RESULT: PASS (134 checks, 0 failures)
 1/1 suites passed
+
+Final integration follow-up - 7 November 2026
+Reviewed sourcefbdcd67, game tree22b507fcac0701e13c412598c980d0e306d953cf: run_tests.sh57/58, exit1,833s. Sole failure is Atik M1-68 title55.308ms/newcampaign100.068ms (537checks/2timings). All feature suites pass. Exact full output: production/qa/evidence/M1-64_full_results.txt. Task acceptance remains blocked; no done claim.
