@@ -657,7 +657,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [
     "M0-02"
@@ -676,7 +676,7 @@
    "evidence": "",
    "updated": "2026-11-08",
    "prompt": "Problem: puzzles are receipt gates: each step is a 'USE' button that submits the correct answer pre-filled.\nGoal: the player calibrates the moisture probe (zero at dry 10 -> 0, span at wet 110 -> 100) and plants with moisture in 40–60, choosing\nthe values themselves, with predict -> test -> observe -> explain feedback and a Data Card link (M0-15) when available.\nDo: implement the P-01 panel per execution/PUZZLE_P01.md and execution/UI_09_SCIENTIFIC_PUZZLE.md through the existing PuzzleHost; remove\nP-01's pre-filled payloads; wrong answers give a helpful, non-punishing hint (SYS_22); keyboard, mouse and controller; text scaling; no\ntimer pressure in Family mode. Numbers come from game-design/08_PUZZLE_DESIGNS.md only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
-   "blocker": "Needs M1-66 (Atik): P-01 mission and route still auto-supply answers and lack authoritative chosen-value calibration/moisture validation and panel hooks. No UI-only bypass; analysis complete, no runtime edits.",
+   "blocker": "Needs Atik M1-95: nearby_target checks current-scene flags and misses S03 p01_scanned in S04, blocking real planting USE. UI WIP afe0c747 parked locally on ramim/m108-await-runtime-20261108, not pushed; preserve/resume after API fix. Public evidence production/qa/evidence/M1-08_runtime_blocker.md. No native/full acceptance.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -6100,6 +6100,26 @@
    "prompt": "Sadman approved M3-4A decision 8 on 7 Nov 2026 ('Approve all 12'): LOC-09 is three 100 m segments at the computed beacon corners in game/assets/environment/EN_ColdTrap/coldtrap.json 'survey.beacons': B1 1.02 km and B2 1.88 km (both sunlit at EX-CH04-S04) and B3 5.24 km (terrain shadow), with beacons on EN_ColdTrap_BeaconMast (5 m, decision 9). M1-82 placed LOC-09 at one point, the 7.82 km bend (sees the shelf but not B2). In game/resources/campaign/rooms/exterior_terrain.json stage EX-CH04-S04 as the three segments (the mast beside the road before each corner, the return marker and the slope sign from coldtrap.json 'staging'); keep or retire the 7.82 km point as the last-bend viewpoint; add JPL Horizons scene_lighting rows for B1 and B2 with the M1-88 method; place the EX-CH04-S05 sample station and the LOC-10 shelf staging (vault, 2034 marker, two tether anchors, carrier, two suited cadets, the rover 15 m back) from coldtrap.json 'staging'; re-run game/tools/test_exterior_terrain.gd -- --write. Moon rules (ART_BIBLE section 2): the shelf is never sunlit; only headlights and helmet lamps. Acceptance: game/tools/run_tests.sh, every suite passes; screenshots of each segment and the shelf at their dated Sun in production/qa/evidence/<task id>_*.png.",
    "reserved_for": "sadman",
    "effort": 2
+  },
+  {
+   "id": "M1-95",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Fix cross-scene prerequisite eligibility for P-01 nearby planting",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/campaign/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-08.",
+   "evidence": "",
+   "updated": "2026-11-08",
+   "prompt": "M1-08 real-campaign integration exposed a cross-scene prerequisite mismatch in Chapter1Campaign.nearby_target(). After calibration and packet scan in EX-CH01-S03, advance normally to EX-CH01-S04 and stand at plant_alo (or plant_tara) within range, facing it with clear line of sight. route.current_flags() is empty in the new scene; route.p01_view(\"plant_alo\") reports missing_flags=[] and route.snapshot().p01.packet_scanned=true. nearby_target() currently checks required_flags only against current_flags(), so both planting targets requiring p01_scanned are skipped and interact_nearby returns Walk up to the next job instead of requesting the panel. No UI pause is active. Read production/qa/evidence/M1-08_runtime_blocker.md and retained diagnostic log.\nAlign nearby eligibility with the existing authoritative cross-scene prerequisite contract; preserve physical room/range/frustum/line-of-sight checks, target completion/idempotency and all chosen-input validation. Do not inject flags from UI, auto-fill player choices, or change Ramim UI. Add real nearby USE regression for previous-scene packet scan -> S04 plant_alo/tara; unsatisfied prerequisites and out-of-range/blocked targets still reject. Run focused P01 and full runner. Publish handoff to M1-08; its source candidate is parked locally at afe0c747 (not main) and cannot complete until this runtime fix. Existing M1-66 test pass did not cover this actual S04 nearby path.",
+   "reserved_for": "atik",
+   "effort": 1
   }
  ],
  "requirements": [
