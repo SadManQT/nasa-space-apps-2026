@@ -1,0 +1,27 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/campaign_room.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD0.glb" id="2_p2"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb" id="3_p3"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD0.glb" id="4_p4"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb" id="5_p5"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD0.glb" id="6_p6"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb" id="7_p7"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD0.glb" id="8_p8"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb" id="9_p9"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD0.glb" id="10_p10"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb" id="11_p11"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD0.glb" id="12_p12"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb" id="13_p13"]
+[ext_resource type="PackedScene" path="res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn" id="14_p14"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_RelayRoad/EN_RelayRoad_BatteryModule_LOD0.glb" id="15_p15"]
+
+; LOC-11 (M3-8R). The approved M3-8A pieces are authored in resources/campaign/rooms/LOC-11.json ("assembly": "exterior_kit");
+; PiecePreload makes their GLBs (both LODs) and VH_Rover_Lit dependencies of this scene, so a threaded room load
+; decodes them off the main thread before the room is built.
+[node name="RelayRoad" type="Node3D"]
+script = ExtResource("1_room")
+room_id = "LOC-11"
+
+[node name="PiecePreload" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("EN_RelayRoad_Repeater_LOD0", "EN_RelayRoad_Repeater_LOD1", "EN_MalapertSummit_TetherAnchor_LOD0", "EN_MalapertSummit_TetherAnchor_LOD1", "EN_RelayRoad_SlopeSign_LOD0", "EN_RelayRoad_SlopeSign_LOD1", "EN_RelayRoad_TurnbackBarrier_LOD0", "EN_RelayRoad_TurnbackBarrier_LOD1", "EN_MalapertSummit_PerimeterMarker_LOD0", "EN_MalapertSummit_PerimeterMarker_LOD1", "EN_RelayRoad_GuideLight_LOD0", "EN_RelayRoad_GuideLight_LOD1", "VH_Rover_Lit", "EN_RelayRoad_BatteryModule_LOD0"), [ExtResource("2_p2"), ExtResource("3_p3"), ExtResource("4_p4"), ExtResource("5_p5"), ExtResource("6_p6"), ExtResource("7_p7"), ExtResource("8_p8"), ExtResource("9_p9"), ExtResource("10_p10"), ExtResource("11_p11"), ExtResource("12_p12"), ExtResource("13_p13"), ExtResource("14_p14"), ExtResource("15_p15")]]

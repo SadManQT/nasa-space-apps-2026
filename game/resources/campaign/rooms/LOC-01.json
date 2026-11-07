@@ -889,7 +889,7 @@
   {
    "id": "ch05_five_at_the_table",
    "from": "EX-CH05-S01",
-   "about": "From 12 Dec 2046 Ferreira lives at Aurora: four seats become five (doc 09 LOC-01) and the fifth mug joins the four (doc 24 §1.1). Her chair is at the head of the table until she gives it up in EX-CH07-S01 (doc 24 §2.7); from EX-CH07-S02 it stands among the cadets' chairs on the east side (M3-7R).",
+   "about": "From 12 Dec 2046 Ferreira lives at Aurora: four seats become five (doc 09 LOC-01) and the fifth mug joins the four (doc 24 §1.1). Her chair is at the head of the table until she gives it up in EX-CH07-S01 (doc 24 §2.7); from EX-CH07-S02 it stands among the cadets' chairs on the east side (M3-7R). CH08 (M3-8R): while Ferreira is on the road (8-10 Apr) her mug waits on the care desk beside the home-night ledger; from EX-CH08-S11 it is back beside the others (doc 24 2.9 S11 -> S12).",
    "props": [
     {
      "id": "commons_seat_5",
@@ -969,7 +969,49 @@
       1,
       1
      ],
-     "from": "EX-CH07-S02"
+     "from": "EX-CH07-S02",
+     "until": "EX-CH07-S12"
+    },
+    {
+     "id": "commons_mug_5",
+     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "position": [
+      2.3,
+      0.74,
+      -5.5
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH08-S01",
+     "until": "EX-CH08-S10"
+    },
+    {
+     "id": "commons_mug_5",
+     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "position": [
+      0.66,
+      0.762,
+      0.08
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH08-S11"
     }
    ],
    "obstacles": [
@@ -2022,6 +2064,20 @@
          "text": "LOCAL NETWORK   PASS\nDIRECT DISH PATH   FAIL\nEXTERNAL FEEDTHROUGH   FAIL\nRELAY BYPASS DIAGRAM SAVED"
         }
        }
+      },
+      "EX-CH08-S09..EX-CH08-S12": {
+       "isolated": true,
+       "card_out": true,
+       "lamps": {
+        "Lamp_Local": "pass",
+        "Lamp_Dish": "fail",
+        "Lamp_Feed": "fail"
+       },
+       "screens": {
+        "Screen_Diag": {
+         "text": "LOCAL NETWORK   PASS\nDIRECT DISH PATH   FAIL\nEXTERNAL FEEDTHROUGH   FAIL\nEARTH LINK   LIVE VIA THE MALAPERT RELAY"
+        }
+       }
       }
      }
     }
@@ -2366,6 +2422,12 @@
      "by_scene": {
       "EX-CH07-S12": {
        "text": "QUEUED FOR EARTH   NOT SENT\n\nCARE REPORTS SINCE 16 FEB\nDEPARTURE PLAN, 7 APR\nNO REPLY RECEIVED"
+      },
+      "EX-CH08-S09..EX-CH08-S12": {
+       "text": "SENT TO EARTH   9 APR 2047, 01:45\n\nCARE REPORTS SINCE 16 FEB: DELIVERED\nEARTH LISTENING LOG RECEIVED, 52 DAYS:\n\"AURORA, EARTH. LISTENING.\""
+      },
+      "EX-CH08-S10": {
+       "text": "VOICE CHECKS   AURORA: PASS   EARTH: PASS\n\nGARDEN TELEMETRY: SENT 02:20\nLINEAGE PHOTOGRAPH: SENT\nROVER RETURN DEPARTS 03:00"
       }
      }
     },
@@ -4092,6 +4154,213 @@
      "size": 0.0009,
      "color": "#1b2433",
      "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch08_home_ledger",
+   "from": "EX-CH08-S02",
+   "until": "EX-CH08-S11",
+   "about": "While the rover is out (8-10 Apr) Aurora's copy of the home-night ledger lies on the care desk: two here for the first 33 h, five for the last 3 h (canon S05; the S01 duplicate checklist went with Kai; M3-105 moved the CH07-S12 departure set, with its ledger, to the garage).",
+   "fixtures": [
+    {
+     "id": "home_ledger",
+     "position": [
+      2.98,
+      0.741,
+      -5.37
+     ],
+     "size": [
+      0.297,
+      0.002,
+      0.18
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "home_ledger_text",
+     "text": "HOME-NIGHT LEDGER, AURORA COPY\n2 PEOPLE FOR THE FIRST 33 H\n5 PEOPLE FOR THE LAST 3 H BEFORE DAWN",
+     "position": [
+      2.98,
+      0.7425,
+      -5.43
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.28,
+     "pitch": -90
+    }
+   ]
+  },
+  {
+   "id": "ch08_summit_packet",
+   "from": "EX-CH08-S06",
+   "until": "EX-CH08-S06",
+   "about": "EX-CH08-S06 at Aurora (8 Apr 18:00 to 9 Apr 00:00): the main display carries the local radio through the three road repeaters: the new summit packet (sender, position, time) above the earlier approach packet it must not be mistaken for, and the home checks done first, with the small guide light on where it was planned (S05 -> S06). The Earth uplink is still down. The home-night ledger lies on the care desk.",
+   "signs": [
+    {
+     "id": "ch08_packet_board",
+     "position": [
+      0,
+      1.72,
+      -5.634
+     ],
+     "size": 0.0015,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 2.8,
+     "text": "LOCAL RADIO   THREE ROAD REPEATERS, FOUR HOPS\n\nNEW   RAFI   MALAPERT SUMMIT PAD   9 APR 2047, 00:00   THREE ABOARD\nOLD   RAFI   100 KM APPROACH   8 APR, 17:00\n\nHOME CHECKS FIRST: AIR, TEMPERATURE, RETURN PATH OPEN\nSMALL GUIDE LIGHT: ON, WHERE PLANNED\nEARTH UPLINK: STILL DOWN"
+    }
+   ],
+   "focus_labels": {
+    "commons_earth_screen": "Local radio: summit packet"
+   },
+   "anchors": {
+    "commons_mei": [
+     2.2,
+     0,
+     -4.4
+    ]
+   },
+   "stations": {
+    "p15_confirm_summit": "commons_earth_screen",
+    "p15_confirm_home_checks": "commons_planning_desk",
+    "p15_receive_summit_packet": "commons_earth_screen"
+   },
+   "review_views": {
+    "ch08_packet_board": {
+     "from": [
+      -0.6,
+      1.65,
+      -2.3
+     ],
+     "to": [
+      -0.2,
+      1.55,
+      -5.8
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch08_three_place_call",
+   "from": "EX-CH08-S10",
+   "until": "EX-CH08-S10",
+   "about": "EX-CH08-S10 at Aurora's table (9 Apr 02:15-03:00): the Earth link is live through the Malapert relay; Rao, then Noor, on the Commons Earth screen (drawn by CampaignCrew, M4-06), the voice checks and telemetry on the care desk, and the invitation Mei sent in December open on her tablet at her place (doc 24 5.2 D10).",
+   "fixtures": [
+    {
+     "id": "mei_tablet",
+     "position": [
+      0.45,
+      0.766,
+      0.5
+     ],
+     "size": [
+      0.24,
+      0.012,
+      0.17
+     ],
+     "color": "#0b1220",
+     "transparent": false,
+     "finish": "screen"
+    }
+   ],
+   "focus_labels": {
+    "commons_earth_screen": "Earth link: Rao and Noor"
+   },
+   "anchors": {
+    "commons_amara": [
+     2.6,
+     0,
+     -4.5
+    ]
+   },
+   "stations": {
+    "p16_noor_live_voice": "commons_earth_screen",
+    "p16_confirm_telemetry": "commons_planning_desk",
+    "p16_start_return": "commons_planning_desk"
+   },
+   "review_views": {
+    "ch08_call_table": {
+     "from": [
+      1.6,
+      1.55,
+      2.4
+     ],
+     "to": [
+      0.1,
+      0.9,
+      0.2
+     ]
+    },
+    "ch08_call_screen": {
+     "from": [
+      0.0,
+      1.6,
+      1.0
+     ],
+     "to": [
+      0.0,
+      1.6,
+      -5.6
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch08_d10_invitation_opt01",
+   "from": "EX-CH08-S10",
+   "until": "EX-CH08-S10",
+   "choice": {
+    "choice_id": "EX-CH05-S11-CHOICE",
+    "option_id": "EX-CH05-S11-OPT01"
+   },
+   "about": "Doc 24 5.2 D10: the invitation Mei sent is open on her screen when Noor speaks.",
+   "signs": [
+    {
+     "id": "mei_tablet_text",
+     "position": [
+      0.45,
+      0.7735,
+      0.5
+     ],
+     "size": 0.00028,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 0.21,
+     "pitch": -90,
+     "text": "SENT IN DECEMBER, TO N.\nWOULD YOU LIKE TO SEE WHAT GROWS NEXT?"
+    }
+   ]
+  },
+  {
+   "id": "ch08_d10_invitation_opt02",
+   "from": "EX-CH08-S10",
+   "until": "EX-CH08-S10",
+   "choice": {
+    "choice_id": "EX-CH05-S11-CHOICE",
+    "option_id": "EX-CH05-S11-OPT02"
+   },
+   "about": "Doc 24 5.2 D10: the invitation Mei sent is open on her screen when Noor speaks; the N. holder waits beside it.",
+   "signs": [
+    {
+     "id": "mei_tablet_text",
+     "position": [
+      0.45,
+      0.7735,
+      0.5
+     ],
+     "size": 0.00028,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 0.21,
+     "pitch": -90,
+     "text": "SENT IN DECEMBER, TO N.\nWE KEPT A PLACE FOR YOUR WORK."
     }
    ]
   }

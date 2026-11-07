@@ -34,14 +34,14 @@ func _run() -> void:
 	var crew := Crew.new()
 	root.add_child(crew)
 	var seen := {}
-	for scene_id in ["EX-CH01-S01", "EX-CH01-S02", "EX-CH01-S04", "EX-CH01-S05", "EX-CH02-S03", "EX-CH03-S06", "EX-CH04-S02", "EX-CH04-S04", "EX-CH04-S06", "EX-CH05-S02", "EX-CH08-S03", "EX-CH08-S07", "EX-CH01-S01"]:
+	for scene_id in ["EX-CH01-S01", "EX-CH01-S02", "EX-CH01-S04", "EX-CH01-S05", "EX-CH02-S03", "EX-CH03-S06", "EX-CH04-S02", "EX-CH04-S04", "EX-CH04-S06", "EX-CH05-S02", "EX-CH08-S04", "EX-CH08-S07", "EX-CH01-S01"]:
 		var room := Room.new()
 		room.room_id = Contract.room_for_scene(scene_id)
 		root.add_child(room)
-		# Stage the player where Chapter1Campaign does: the room's authored *_player anchor. The kit
-		# rooms (M1-06) put furniture at the origin, e.g. the Commons Mission Table.
+		# Stage the player where Chapter1Campaign does: the room's authored *_player anchor (a scene's staging may move it,
+		# e.g. EX-CH08-S07 starts at the controller housing). The kit rooms (M1-06) put furniture at the origin.
 		var player_at := Vector3.ZERO
-		var anchors := Contract.anchors(room.room_id)
+		var anchors := Contract.staged_anchors(room.room_id, scene_id)
 		for key in anchors:
 			if String(key).ends_with("_player"):
 				player_at = Vector3(anchors[key][0], anchors[key][1], anchors[key][2])

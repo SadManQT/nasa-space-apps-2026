@@ -10,6 +10,12 @@ const DoorScript = preload("res://scripts/navigation/campaign_door.gd")
 const AssetGeometryScript = preload("res://scripts/asset_geometry.gd")
 const ToonMaterialsScript = preload("res://scripts/toon_materials.gd")
 const Staging = preload("res://scripts/world/room_staging.gd")
+const Chapter8Assets = preload("res://assets/environment/EN_MalapertSummit/chapter8_assets.gd")
+## M3-8R: layouts that author every placed piece, obstacle and navigation cell themselves (the habitat kit rooms, and
+## the "exterior_kit" relay road and Malapert summit, whose ground is the flat staging floor or the terrain provider).
+const AUTHORED_ASSEMBLIES := ["habitat_kit", "exterior_kit"]
+## Layouts whose JSON lists every placed prop (the kit rooms, the M3-106 site_kit road and shelf, the exterior_kit).
+const PROP_ASSEMBLIES := ["habitat_kit", "site_kit", "exterior_kit"]
 ## PR_CrewSeat: cushion runs from 0.2 m behind to 0.5 m in front of the pivot at 0.44 m high.
 const SEAT_SIT_OFFSET_M := 0.3
 const PlantServiceScript = preload("res://scripts/biology/plant_service.gd")
@@ -97,13 +103,13 @@ func build_room() -> Dictionary:
 	_build_pressure_markers(contract)
 	_build_anchors(contract)
 	_stand_on_terrain()
-	if _layout.get("assembly") == "habitat_kit":
-		for obstacle in _layout.obstacles:
+	if _layout.get("assembly") in AUTHORED_ASSEMBLIES:
+		for obstacle in _layout.get("obstacles", []):
 			Habitat.collider(collision_root, String(obstacle.id), Presentation.vector(obstacle.position), Presentation.vector(obstacle.size))
 	LoadTrace.end("room_fixtures_doors:" + room_id, stamp)
 	stamp = LoadTrace.begin()
 	if build_navigation and _terrain.is_empty():
-		if _layout.get("assembly") == "habitat_kit":
+		if _layout.get("assembly") in AUTHORED_ASSEMBLIES:
 			Habitat.navigation(navigation_root, _layout)
 		else:
 			_build_navigation(contract)
@@ -321,7 +327,10 @@ func _build_doors(contract: Dictionary) -> void:
 		box.size = Vector3(1.2, 2.2, 0.18)
 		shape.shape = box
 		door.add_child(shape)
-		door.position = _door_position(boundary_id, index)
+		# An authored exterior places its boundary markers itself: [x, y, z, yaw degrees] (M3-8R).
+		var authored: Array = _layout.get("door_positions", {}).get(boundary_id, [])
+		door.position = Presentation.vector(authored) if authored.size() >= 3 else _door_position(boundary_id, index)
+		door.rotation.y = deg_to_rad(float(authored[3])) if authored.size() >= 4 else 0.0
 		door.setup(boundary_id, boundary_id.begins_with("door_"))
 		door_root.add_child(door)
 		var label := Label3D.new()
@@ -429,13 +438,13 @@ func _build_navigation(contract: Dictionary) -> void:
 	navigation_root.add_child(region)
 
 func _load_approved_assets(contract: Dictionary) -> void:
-	var paths: Array = _layout.get("props", []) if _layout.get("assembly") in ["habitat_kit", "site_kit"] else contract.get("asset_paths", [])
+	var paths: Array = _layout.get("props", []) if _layout.get("assembly") in PROP_ASSEMBLIES else contract.get("asset_paths", [])
 	for index in paths.size():
 		_add_approved_asset(String(paths[index].path) if paths[index] is Dictionary else String(paths[index]), index, paths.size(), paths[index] if paths[index] is Dictionary else {})
 
 ## Loads approved prop instances over frames using the existing geometry cache.
 func load_assets_incremental() -> void:
-	var paths: Array = _layout.get("props", []) if _layout.get("assembly") in ["habitat_kit", "site_kit"] else RoomContract.room(room_id).get("asset_paths", [])
+	var paths: Array = _layout.get("props", []) if _layout.get("assembly") in PROP_ASSEMBLIES else RoomContract.room(room_id).get("asset_paths", [])
 	for index in paths.size():
 		_add_approved_asset(String(paths[index].path) if paths[index] is Dictionary else String(paths[index]), index, paths.size(), paths[index] if paths[index] is Dictionary else {})
 		await get_tree().process_frame
@@ -449,13 +458,18 @@ func _add_approved_asset(path: String, index: int, count: int, authored: Diction
 		return
 	var model: Node3D = null
 	if authored.has("piece"):
-		# M3-106: a kit or site piece (EN_ColdTrap) with its LOD0 collision; its mount offset sinks driven stakes
-		model = Kit.instance(String(authored.piece))
-	elif authored.has("scene"):
-		var packed := load(String(authored.scene)) as PackedScene  # e.g. VH_Rover_Lit.tscn: the rover with its lamps
+		# M3-106: a kit or site piece (EN_ColdTrap) with its LOD0 collision; its mount offset sinks driven stakes. M3-8R: an
+		# M3-8A summit or road piece from its own catalogue (both LODs, the game LOD's collision).
+		model = Kit.instance(String(authored.piece)) if not Kit.piece(String(authored.piece)).is_empty() else Chapter8Assets.instance(String(authored.piece))
+	elif authored.has("scene") or path.ends_with(".tscn"):
+		var packed := load(String(authored.get("scene", path))) as PackedScene  # e.g. VH_Rover_Lit.tscn: the rover with its lamps
 		model = packed.instantiate() as Node3D if packed != null else null
 	else:
 		model = AssetGeometryScript.load_glb(path)
+	if model != null and bool(authored.get("walk_over", false)):
+		# a low piece people step over (the summit's 6 cm cable trays) keeps no collision
+		for shape in model.find_children("*", "CollisionShape3D", true, false):
+			(shape as CollisionShape3D).disabled = true
 	if model == null:
 		return
 	model.name = asset_name
@@ -485,7 +499,7 @@ func _add_approved_asset(path: String, index: int, count: int, authored: Diction
 		var size := Presentation.vector(transform_data.box_collider)
 		Habitat.collider(model, "BoxCollider", Vector3(0, size.y * 0.5, 0), size)
 	visual_root.add_child(model)
-	if _layout.get("assembly") not in ["habitat_kit", "site_kit"]:
+	if _layout.get("assembly") not in PROP_ASSEMBLIES:
 		ToonMaterialsScript.apply_to_tree(model, false, true)
 
 func _asset_position(index: int, count: int) -> Vector3:
@@ -605,6 +619,8 @@ func set_scene_context(scene_id: String) -> int:
 	_cues_run.clear()
 	_apply_staging()
 	_date_the_sun()
+	if _layout.get("assembly") == "exterior_kit":
+		Staging.apply_sky(self, scene_id, _stage)
 	var started := 0
 	for spec in _layout.get("fixtures", []):
 		var delays: Dictionary = spec.get("cue", {}).get("delay_s", {})
@@ -693,7 +709,7 @@ func _apply_staging() -> void:
 	_stage_signature = signature
 	if not next.layers.is_empty():
 		Staging.build(self, next, _layout)
-	if changes_floor and build_navigation and _layout.get("assembly") == "habitat_kit":
+	if changes_floor and build_navigation and _terrain.is_empty() and _layout.get("assembly") in AUTHORED_ASSEMBLIES:
 		_rebuild_navigation(RoomContract.staged_layout_for(_layout, _scene_context, _choices, _moments, terrain_segment))
 
 ## Swaps the room's private navigation map for one built from the staged obstacles (same rasteriser and agent

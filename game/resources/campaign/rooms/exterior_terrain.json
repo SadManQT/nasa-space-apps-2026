@@ -3003,6 +3003,23 @@
    "omit_staging_floor": false,
    "placement": "The first repeater sector is the computed relay road's midpoint (sun_positions.json site relay_road_mid, the EX-CH08-S03 row).",
    "pending": "Not on terrain yet: the relay road exists only as the 80 m corridor grid with a 200 m visual mesh, too coarse to walk (props would float or sink by metres). It needs the 10 m playable patch the M1-34 README plans (make_terrain.window_m); until then the flat staging stays."
+  },
+  "LOC-12": {
+   "region_id": "malapert_summit",
+   "origin_xz_m": [
+    0.0,
+    0.0
+   ],
+   "ephemeris_site": "malapert_summit",
+   "horizon_site": "malapert_summit",
+   "omit_staging_floor": false,
+   "placement": "The relay work platform is the summit site itself: the highest LOLA pixel of PGDA Site23 on Mons Malapert (sun_positions.json malapert_summit), where the EX-CH08-S06 / S08 / S10 rows and the terrain horizon were computed.",
+   "pending": "Not on the raw tile yet: M3-8A cuts the 30 x 20 m pad level 0.3 m under the crown and fills it outward (decision 1), but the raw 5 m LOLA ground falls up to 2.4 m across it (under the parked rover; lanes reach 16.4 deg), so pieces would float or sink. Terrain mode needs the provider to grade the pad rectangle to a level with a fill skirt; until then the flat staging floor is the graded pad. The dated sky (Earth, Sun) already comes from this site.",
+   "sky_rows": {
+    "EX-CH08-S07": "EX-CH08-S06",
+    "EX-CH08-S09": "EX-CH08-S10"
+   },
+   "sky_rows_reason": "EX-CH08-S07 (00:00-00:45) and S09 (01:45-02:15) have no row of their own; the S06 row (00:00) and the S10 row (02:00) lie inside their canon windows, and Earth moves less than 0.2 deg across the night."
   }
  }
 }

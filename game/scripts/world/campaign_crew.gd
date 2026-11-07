@@ -44,6 +44,9 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choice
 			var staged: Array = room.stage().anchors[key]
 			player_at = Vector3(staged[0], staged[1], staged[2])
 	var outfits: Dictionary = room.stage().get("outfits", {})
+	# M3-8R: cast members inside a pressurised vehicle (staging "aboard": id -> {"at", "facing"}, the rover's cab).
+	var aboard: Dictionary = room.stage().get("aboard", {})
+	var vacuum := String(Contract.room(room.room_id).get("pressure", "")) == "vacuum"
 	for body in _wardrobe.values():
 		body.hide()
 		body.process_mode = Node.PROCESS_MODE_DISABLED
@@ -61,6 +64,7 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choice
 		body.animation.reset_presentation()
 		body.foot_ik_enabled = true
 		body.attention_target = null
+		_unboard(body)
 		local_ids.append(id)
 		if id == active:
 			player = body
@@ -68,6 +72,12 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choice
 		else:
 			body.position = _anchor_in(anchors, room.room_id, id)
 		body.face_towards(Vector3(0, 0, -2))
+		# Outside in vacuum the suit's visor is down; indoors it rides up (M3-3A helmet, ART_BIBLE section 2).
+		var helmet := body.character.find_child("Helmet", true, false) as Node3D if body.character != null else null
+		if helmet != null:
+			Helmet.set_visor_closed(helmet, 1.0 if vacuum else 0.0)
+		if aboard.has(id):
+			_board(body, aboard[id], id == active)
 		body.reset_placement()
 	# In the Safe Room a listener at an installed crew seat sits in it (doc 09: no wandering during exposure); one at a
 	# staged work anchor (e.g. EX-CH07-S02 at the shelter diagram) stands. No fictitious hand/tool contact.
@@ -82,6 +92,41 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choice
 	_build_screen()
 	_attach_carried(room.stage().get("carried", {}))
 	return player
+
+## M3-8R: a cast member riding inside the sealed rover cabin (doc 25 section 4.5: passengers ride inside and talk on
+## the intercom). Nobody is drawn outside in vacuum without a suit: the body is hidden at its cab seat, collides with
+## nothing and does not fall. A passenger is switched off; the playable rider keeps input, interaction with the cab
+## console within reach and a chase view over the rover roof (the follow camera's pivot raised above the roof, its arm
+## lengthened). Driving and the cab view proper belong to the rover runtime.
+const ABOARD_CAMERA_HEIGHT_M := 5.4
+const ABOARD_CAMERA_DISTANCE_M := 8.5
+func _board(body: PlayerController, seat: Dictionary, playable: bool) -> void:
+	body.position = Vector3(float(seat.at[0]), float(seat.at[1]), float(seat.at[2]))
+	var facing: Array = seat.get("facing", [0, 0, -1])
+	body.face_towards(body.position + Vector3(float(facing[0]), 0.0, float(facing[2])))
+	body.follow_camera.yaw = atan2(-float(facing[0]), -float(facing[2]))
+	body.character.hide()
+	body.collision_layer = 0
+	body.collision_mask = 0
+	body.foot_ik_enabled = false
+	body.set_meta("aboard", {"gravity": body.gravity, "height": body.follow_camera.target_height, "distance": body.follow_camera.distance})
+	body.gravity = 0.0
+	if playable:
+		body.follow_camera.target_height = ABOARD_CAMERA_HEIGHT_M
+		body.follow_camera.distance = ABOARD_CAMERA_DISTANCE_M
+	else:
+		body.process_mode = Node.PROCESS_MODE_DISABLED
+
+## Back on foot: the gravity, collision mask and follow-camera rig a body had before it boarded.
+func _unboard(body: PlayerController) -> void:
+	if not body.has_meta("aboard"):
+		return
+	var saved: Dictionary = body.get_meta("aboard")
+	body.gravity = float(saved.gravity)
+	body.follow_camera.target_height = float(saved.height)
+	body.follow_camera.distance = float(saved.distance)
+	body.collision_mask = 3 if body.controlled else 1
+	body.remove_meta("aboard")
 
 ## The floor point where cast member id stands in a room: the scene's staged anchor when scene_id is given
 ## (RoomContract.staged_anchors), else the room's base anchor, else a safe rear lane.

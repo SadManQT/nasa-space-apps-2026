@@ -384,3 +384,38 @@ degrees, `"inks"` as on a kit prop, with `"part"` to ride on one): vault V12's h
 | EX-CH04-S12 | LOC-01 | The relief flight notice (8-12 Dec 2046, Rao stays at the Earth desk, Ferreira's "I owe you the story"); the relief cargo manifest on the table; the fifth locker in the crew locker bank named FERREIRA from 1 Dec (kept from then on) with the fifth-occupant handover sheet; the dated board of the days in between (22 Oct to 12 Dec). The fifth mug on its clip above the table comes with M3-5R's `ch05_fifth_mug_clip` (CH04-S12 to her arrival); the garage's relief locker is labelled from this scene (M3-105) |
 
 Run `game/tools/run_tests.sh chapter4_rooms` and `production/qa/evidence/M3-4R_capture.sh` (windowed, 15 screenshots).
+
+
+
+# Chapter 8 rooms (M3-8R)
+
+| Scenes | Room | Physical story carriers |
+|---|---|---|
+| S01, S11 | LOC-08 | The departure boards and the arrival dock are EN_Garage's (M3-4A); M3-105 builds and stages that room. Commons: Ferreira's mug waits on the care desk S01–S10 and is back beside the others from S11 (S11 → S12); Aurora's copy of the home-night ledger lies on the care desk S02–S11 |
+| S02–S04 | LOC-11 `relay_road.tscn` | The marker-two sector of the surveyed road (M3-8A EN_RelayRoad): 6 m road, amber guide lights every 18 m on alternate sides, the 20 × 15 m service pad of repeater R2 (dark, bay closed) with its tether anchor and eight markers, the unsupported bypass closed by the turnback barrier and slope sign. S02 the start of cruise (no pad on this stretch); S03 the rover braking on the road at the known pad (S03 → S04); S04 the rover braked on the pad with its roof floods on, Kai and Rafi suited, Ferreira aboard with the cabin checklist, the replacement battery module by the repeater. Dark by the dated rows: no Sun, no Earth, faint stars (ART_BIBLE §2 rule 12; 0.35 under the work floods) |
+| S05, S12 | LOC-03 | Home-loop panel on the north wall (COOL, DIM, return OPEN, two independent readings, the 33 h + 3 h home forecast: S05 → S06), Amara's manual gauge, the small guide light by the Commons door, the flowering descendants on the rack, D1 day-one photo; S12: final records (five home, 30 sealed, 11 retained, cotton alive), the first-light photo board with the D2, D9, D10, D11 echoes and D6 on the lineage board, the D13 dedication plaque once chosen, the Earth console live |
+| S06, S10 | LOC-01 | S06: the main display carries the new summit packet beside the stale approach packet, home checks first and the guide light where planned; S10: the three-place call (Rao and Noor on the Earth screen, M4-06), voice checks, telemetry and the 03:00 return on the care desk, the invitation open on Mei's tablet (D10). From S09 the outbox has sent and the diagnostic reads the Earth link live via the relay (clue 22) |
+| S07–S09 (and the S06/S10 cut) | LOC-12 `malapert_summit.tscn` | The approved EN_MalapertSummit platform: relay deck (dish on the dated Earth, local antenna on R3), housing, isolator, pedestal, solar mast, tether anchors, 20 markers, umbilical, viewpoint rail, cable trays, VH_Rover_Lit parked west-facing. S06 housing dark beyond the cabin window (S06 → S07); S07 door braced open, spare beside it, panel unpowered; S08 two amber lamps, labelled scenario bearings and a separate blockage check (S07 → S08); S09 three green lamps, ALO42 and the two backlogs crossing (S08 → S09, clue 22); S10 the return time on the cabin console (S10 → S11). Sunlit by the dated row; Earth the 3 % crescent at 1.9 deg |
+
+- **`assembly: "exterior_kit"`** (LOC-11, LOC-12): an exterior whose JSON authors every piece, obstacle and navigation cell like the
+  habitat kit rooms, on the flat staging floor with apron rails. A prop with `"piece"` is instanced from the M3-8A catalogue
+  (`chapter8_assets.gd`: both LODs, the game LOD's collision); a `.tscn` path is a packed scene (VH_Rover_Lit); `"walk_over": true`
+  drops a low piece's collision (the 6 cm cable trays). `door_positions` (`[x, y, z, yaw]`) places each boundary marker. Navigation
+  cells are 0.5 m outside (a 0.25 m grid on a 60 m road exceeds the path query's 4,096-polygon search).
+- **LOC-12's frame** is the LOLA tile frame (exterior_terrain.json): the M3-8A layout is turned `platform_yaw_deg` (2.33 deg) so the
+  platform's -Z is true north, and the dish stays on the dated Earth within 0.5 deg (tested).
+- **`piece_states`** (staging map, piece id -> `{lamps, parts, screens, lights}`): lamp slots (`"#rrggbb"` or `"off"`), moving parts'
+  rotation (the housing `DoorHinge`, the isolator `Handle`), live screen slots in plain words and the rover's light state
+  (`rover_lights.json`: driving, eva_stop, parked_dark). `clear()` restores every piece.
+- **`aboard`** (staging map, cast id -> `{at, facing}`): who rides inside the sealed rover cabin. `CampaignCrew` never draws them outside;
+  passengers are switched off; the playable rider sits hidden at the cab seat, collides with nothing, reaches the cab console station
+  (`"cab": true` focus) and gets a chase view over the roof. Driving and the cab view proper are the rover runtime's (board task for Atik).
+- **`outfits`** (`id -> "eva"`, M3-3R's shape): the M3-3A EVA suit and role helmet; outside in vacuum the visor is down, indoors up.
+- **Sky on the flat floor** (`RoomStaging.apply_sky`): the dated Earth where `RoomContract.earth` presents it, with the key light turned to
+  the same dated Sun; otherwise black, with `lighting.stars` (a faint sparse field, `sky_env_stars.gdshader`) only on the dark road.
+  `exterior_terrain.json` LOC-12 `sky_rows` gives S07 the S06 row (00:00) and S09 the S10 row (02:00), both inside their windows.
+- **Terrain:** LOC-11 waits for the 10 m patch (M1-87). LOC-12 has its summit placement and dated sky but stays on the flat floor: the raw
+  5 m tile falls up to 2.4 m across the pad M3-8A cuts and fills level, and the provider cannot grade a pad yet (board task).
+
+Run `game/tools/run_tests.sh chapter8_rooms` (mapping and the two teams, stations, navigation, walking, collision, words, aboard and EVA
+cast, the Moon rules and the dish aim, every §2.9 join, the echoes, re-staging) and `production/qa/evidence/M3-8R_capture.sh`.

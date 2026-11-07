@@ -1,0 +1,1153 @@
+{
+ "schema_version": 2,
+ "room_id": "LOC-11",
+ "description": "M3-8R: the marker-two sector of the surveyed relay road (approved M3-8A EN_RelayRoad, Sadman 7 Nov 2026): the graded 6 m road with amber guide lights every 18 m on alternate sides, the 20 x 15 m service pad of repeater R2 (marker two) with its tether anchor and eight perimeter markers, and the unsupported cliff bypass closed by the turnback barrier and slope sign (S03). Flat staging floor until the walkable 10 m patch exists (M1-87); the dated rows leave the whole sector dark (sun_positions.json relay_road_mid), so only rover, guide and suit lights light it.",
+ "assembly": "exterior_kit",
+ "bounds_m": [
+  60.0,
+  30.0
+ ],
+ "ceiling_height_m": 3.6,
+ "floor_color": "#6b6763",
+ "wall_color": "#939ba6",
+ "accent_color": "#f2c230",
+ "apron_rail_height_m": 0.6,
+ "lighting": {
+  "key_rotation_degrees": [
+   -4,
+   -35,
+   0
+  ],
+  "key_color": "#ffffff",
+  "key_energy": 0.0,
+  "fill_energy": 0.0,
+  "ambient_energy": 0.0,
+  "strip_color": "#ffffff",
+  "about": "Dark: EX-CH08-S03 / S04 rows put the Sun below the 5 deg skyline at relay_road_mid."
+ },
+ "earth_visibility": "Never: Earth is below the local terrain horizon in the EX-CH08-S03 and S04 rows.",
+ "navigation": {
+  "cell_m": 0.5,
+  "agent_radius_m": 0.3
+ },
+ "door_positions": {
+  "relay_route_boundary": [
+   29.3,
+   1.1,
+   6.0,
+   90
+  ]
+ },
+ "props": [
+  {
+   "id": "repeater_r2",
+   "piece": "EN_RelayRoad_Repeater",
+   "path": "res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD0.glb",
+   "position": [
+    0.0,
+    0.0,
+    -7.0
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "pad_tether",
+   "piece": "EN_MalapertSummit_TetherAnchor",
+   "path": "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD0.glb",
+   "position": [
+    -2.5,
+    0.0,
+    -6.2
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "bypass_slope_sign",
+   "piece": "EN_RelayRoad_SlopeSign",
+   "path": "res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD0.glb",
+   "position": [
+    15.2,
+    0.0,
+    10.4
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "bypass_barrier",
+   "piece": "EN_RelayRoad_TurnbackBarrier",
+   "path": "res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD0.glb",
+   "position": [
+    18.0,
+    0.0,
+    12.4
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "pad_marker_1",
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "path": "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD0.glb",
+   "position": [
+    -10.0,
+    0.0,
+    2.6
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "pad_marker_2",
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "path": "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD0.glb",
+   "position": [
+    10.0,
+    0.0,
+    2.6
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "pad_marker_3",
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "path": "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD0.glb",
+   "position": [
+    -10.0,
+    0.0,
+    -4.5
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "pad_marker_4",
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "path": "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD0.glb",
+   "position": [
+    10.0,
+    0.0,
+    -4.5
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "pad_marker_5",
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "path": "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD0.glb",
+   "position": [
+    -10.0,
+    0.0,
+    -12.0
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "pad_marker_6",
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "path": "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD0.glb",
+   "position": [
+    -3.3,
+    0.0,
+    -12.0
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "pad_marker_7",
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "path": "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD0.glb",
+   "position": [
+    3.3,
+    0.0,
+    -12.0
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "pad_marker_8",
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "path": "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD0.glb",
+   "position": [
+    10.0,
+    0.0,
+    -12.0
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "guide_light_1",
+   "piece": "EN_RelayRoad_GuideLight",
+   "path": "res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD0.glb",
+   "position": [
+    -27.0,
+    0.0,
+    2.6
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "guide_light_2",
+   "piece": "EN_RelayRoad_GuideLight",
+   "path": "res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD0.glb",
+   "position": [
+    -9.0,
+    0.0,
+    9.4
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "guide_light_3",
+   "piece": "EN_RelayRoad_GuideLight",
+   "path": "res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD0.glb",
+   "position": [
+    9.0,
+    0.0,
+    2.6
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "guide_light_4",
+   "piece": "EN_RelayRoad_GuideLight",
+   "path": "res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD0.glb",
+   "position": [
+    27.0,
+    0.0,
+    9.4
+   ],
+   "rotation_degrees": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ]
+  }
+ ],
+ "fixtures": [
+  {
+   "id": "road_bed",
+   "position": [
+    0,
+    0.006,
+    6.0
+   ],
+   "size": [
+    60,
+    0.012,
+    6.0
+   ],
+   "color": "#5c5955",
+   "transparent": false
+  },
+  {
+   "id": "service_pad",
+   "position": [
+    0,
+    0.005,
+    -4.75
+   ],
+   "size": [
+    20,
+    0.01,
+    15.5
+   ],
+   "color": "#76726d",
+   "transparent": false
+  },
+  {
+   "id": "bypass_track",
+   "position": [
+    18.0,
+    0.004,
+    12.0
+   ],
+   "size": [
+    3.4,
+    0.008,
+    6.0
+   ],
+   "color": "#625f5b",
+   "transparent": false
+  }
+ ],
+ "obstacles": [
+  {
+   "id": "repeater_r2",
+   "position": [
+    0.0,
+    1.7,
+    -7.2
+   ],
+   "size": [
+    1.24,
+    3.4,
+    1.1
+   ]
+  },
+  {
+   "id": "pad_tether",
+   "position": [
+    -2.5,
+    0.4,
+    -6.2
+   ],
+   "size": [
+    0.34,
+    0.8,
+    0.34
+   ]
+  },
+  {
+   "id": "bypass_slope_sign",
+   "position": [
+    15.2,
+    0.9,
+    10.42
+   ],
+   "size": [
+    0.96,
+    1.8,
+    0.2
+   ]
+  },
+  {
+   "id": "bypass_barrier",
+   "position": [
+    18.0,
+    0.525,
+    12.4
+   ],
+   "size": [
+    4.2,
+    1.05,
+    0.2
+   ]
+  },
+  {
+   "id": "guide_light_1",
+   "position": [
+    -27.0,
+    0.35,
+    2.6
+   ],
+   "size": [
+    0.16,
+    0.7,
+    0.16
+   ]
+  },
+  {
+   "id": "guide_light_2",
+   "position": [
+    -9.0,
+    0.35,
+    9.4
+   ],
+   "size": [
+    0.16,
+    0.7,
+    0.16
+   ]
+  },
+  {
+   "id": "guide_light_3",
+   "position": [
+    9.0,
+    0.35,
+    2.6
+   ],
+   "size": [
+    0.16,
+    0.7,
+    0.16
+   ]
+  },
+  {
+   "id": "guide_light_4",
+   "position": [
+    27.0,
+    0.35,
+    9.4
+   ],
+   "size": [
+    0.16,
+    0.7,
+    0.16
+   ]
+  }
+ ],
+ "focus_targets": [
+  {
+   "target_id": "repeater_chain",
+   "label": "Marker two repeater",
+   "verb": "Use",
+   "position": [
+    0.0,
+    0.6,
+    -7.0
+   ],
+   "approach_m": [
+    0.0,
+    0,
+    -5.9
+   ],
+   "asset_id": "repeater_r2",
+   "label_offset": [
+    0,
+    0.9,
+    0
+   ]
+  }
+ ],
+ "anchors": {
+  "relay_kai": [
+   1.2,
+   0,
+   -5.6
+  ],
+  "relay_rafi": [
+   -2.4,
+   0,
+   -5.2
+  ],
+  "relay_ferreira": [
+   3.2,
+   0,
+   -2.6
+  ],
+  "relay_player": [
+   -1.2,
+   0,
+   -3.4
+  ]
+ },
+ "walk_probe": [
+  [
+   -1.2,
+   -3.4
+  ],
+  [
+   0.0,
+   -5.9
+  ],
+  [
+   -6.0,
+   -8.0
+  ],
+  [
+   6.0,
+   -9.0
+  ],
+  [
+   6.0,
+   0.5
+  ],
+  [
+   12.0,
+   1.0
+  ],
+  [
+   24.0,
+   6.0
+  ],
+  [
+   12.0,
+   1.0
+  ],
+  [
+   6.0,
+   -3.5
+  ],
+  [
+   -6.0,
+   -3.5
+  ],
+  [
+   -14.0,
+   1.5
+  ],
+  [
+   -12.0,
+   12.0
+  ],
+  [
+   -15.0,
+   -2.0
+  ],
+  [
+   -1.2,
+   -3.4
+  ]
+ ],
+ "review_views": {
+  "road_overview": {
+   "from": [
+    -14.0,
+    7.0,
+    16.0
+   ],
+   "to": [
+    2.0,
+    0.5,
+    -2.0
+   ]
+  }
+ },
+ "staging": [
+  {
+   "id": "ch08_road_lights",
+   "from": "EX-CH08-S02",
+   "until": "EX-CH08-S12",
+   "about": "The road's amber guide lights (every 18 m, alternate sides), lit through the whole trip: meaningful against black terrain (doc 09).",
+   "piece_states": {
+    "guide_light_1": {
+     "lamps": {
+      "Lamp_Guide": "#ffb347"
+     }
+    },
+    "guide_light_2": {
+     "lamps": {
+      "Lamp_Guide": "#ffb347"
+     }
+    },
+    "guide_light_3": {
+     "lamps": {
+      "Lamp_Guide": "#ffb347"
+     }
+    },
+    "guide_light_4": {
+     "lamps": {
+      "Lamp_Guide": "#ffb347"
+     }
+    }
+   },
+   "local_lights": [
+    {
+     "id": "guide_glow_1",
+     "position": [
+      -27.0,
+      0.75,
+      2.6
+     ],
+     "color": "#ffb347",
+     "energy": 0.5,
+     "range_m": 5.0
+    },
+    {
+     "id": "guide_glow_2",
+     "position": [
+      -9.0,
+      0.75,
+      9.4
+     ],
+     "color": "#ffb347",
+     "energy": 0.5,
+     "range_m": 5.0
+    },
+    {
+     "id": "guide_glow_3",
+     "position": [
+      9.0,
+      0.75,
+      2.6
+     ],
+     "color": "#ffb347",
+     "energy": 0.5,
+     "range_m": 5.0
+    },
+    {
+     "id": "guide_glow_4",
+     "position": [
+      27.0,
+      0.75,
+      9.4
+     ],
+     "color": "#ffb347",
+     "energy": 0.5,
+     "range_m": 5.0
+    }
+   ],
+   "lighting": {
+    "stars": 1.0,
+    "key_energy": 0.0
+   }
+  },
+  {
+   "id": "ch08_road_start",
+   "from": "EX-CH08-S02",
+   "until": "EX-CH08-S02",
+   "about": "EX-CH08-S02 (8 Apr, the departure forecast before cruise): the rover on the surveyed road with the three aboard its pressurised cabin, headlights on the guide lights ahead; the route screen with the shorter, steeper line is a cab console, not a place to walk. This stretch has no service pad (hidden).",
+   "hide": [
+    "repeater_r2",
+    "pad_tether",
+    "service_pad",
+    "pad_marker_1",
+    "pad_marker_2",
+    "pad_marker_3",
+    "pad_marker_4",
+    "pad_marker_5",
+    "pad_marker_6",
+    "pad_marker_7",
+    "pad_marker_8"
+   ],
+   "props": [
+    {
+     "id": "rover",
+     "path": "res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn",
+     "position": [
+      -22.0,
+      0,
+      6.0
+     ],
+     "rotation_degrees": [
+      0,
+      90,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "rover",
+     "position": [
+      -22.0,
+      2.2,
+      6.0
+     ],
+     "size": [
+      6.04,
+      4.4,
+      4.7
+     ]
+    }
+   ],
+   "piece_states": {
+    "rover": {
+     "lights": "driving"
+    }
+   },
+   "aboard": {
+    "ferreira": {
+     "at": [
+      -20.4,
+      0.0,
+      6.6
+     ],
+     "facing": [
+      1.0,
+      0.0,
+      0.0
+     ]
+    },
+    "kai": {
+     "at": [
+      -20.4,
+      0.0,
+      6.0
+     ],
+     "facing": [
+      1.0,
+      0.0,
+      0.0
+     ]
+    },
+    "rafi": {
+     "at": [
+      -20.4,
+      0.0,
+      5.4
+     ],
+     "facing": [
+      1.0,
+      0.0,
+      0.0
+     ]
+    }
+   },
+   "focus_targets": [
+    {
+     "target_id": "relay_route_console",
+     "label": "Rover route console",
+     "verb": "Use",
+     "position": [
+      -19.6,
+      1.6,
+      6.0
+     ],
+     "approach_m": [
+      -20.4,
+      0.0,
+      6.0
+     ],
+     "cab": true,
+     "label_offset": [
+      0,
+      0.5,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p15_choose_surveyed_route": "relay_route_console",
+    "p15_confirm_return_reserve": "relay_route_console"
+   },
+   "review_views": {
+    "cab_s02": {
+     "from": [
+      -28.9,
+      4.9,
+      6.0
+     ],
+     "to": [
+      12.0,
+      0.4,
+      6.0
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch08_dark_marker",
+   "from": "EX-CH08-S03",
+   "until": "EX-CH08-S03",
+   "about": "EX-CH08-S03 (8 Apr): marker two is dark. The rover, all three aboard, brakes at the entrance of the known service pad with its headlights on the dark repeater; the apparent bypass over the unsupported cliff is closed by the turnback barrier and slope sign. The brake is set at the pad (S03 -> S04).",
+   "props": [
+    {
+     "id": "rover",
+     "path": "res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn",
+     "position": [
+      -3.0,
+      0,
+      3.0
+     ],
+     "rotation_degrees": [
+      0,
+      160,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "rover",
+     "position": [
+      -3.0,
+      2.2,
+      3.0
+     ],
+     "size": [
+      6.482,
+      4.4,
+      7.283
+     ]
+    }
+   ],
+   "piece_states": {
+    "rover": {
+     "lights": "driving"
+    },
+    "repeater_r2": {
+     "lamps": {
+      "Lamp_Beacon": "off",
+      "Lamp_Link_0": "off",
+      "Lamp_Link_1": "off"
+     }
+    }
+   },
+   "aboard": {
+    "ferreira": {
+     "at": [
+      -1.889,
+      0.0,
+      1.702
+     ],
+     "facing": [
+      0.342,
+      0.0,
+      -0.94
+     ]
+    },
+    "kai": {
+     "at": [
+      -2.453,
+      0.0,
+      1.496
+     ],
+     "facing": [
+      0.342,
+      0.0,
+      -0.94
+     ]
+    },
+    "rafi": {
+     "at": [
+      -3.017,
+      0.0,
+      1.291
+     ],
+     "facing": [
+      0.342,
+      0.0,
+      -0.94
+     ]
+    }
+   },
+   "focus_targets": [
+    {
+     "target_id": "relay_route_console",
+     "label": "Rover route console",
+     "verb": "Use",
+     "position": [
+      -2.179,
+      1.6,
+      0.744
+     ],
+     "approach_m": [
+      -2.453,
+      0.0,
+      1.496
+     ],
+     "cab": true,
+     "label_offset": [
+      0,
+      0.5,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p15_reach_marker_two": "relay_route_console",
+    "p15_set_brake": "relay_route_console",
+    "p15_save_position_packet": "relay_route_console"
+   },
+   "review_views": {
+    "cab_s03": {
+     "from": [
+      5.0,
+      3.0,
+      7.0
+     ],
+     "to": [
+      -0.5,
+      1.2,
+      -6.5
+     ]
+    },
+    "road_s03": {
+     "from": [
+      8.0,
+      2.6,
+      12.5
+     ],
+     "to": [
+      -1.0,
+      1.0,
+      -3.0
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch08_battery_swap",
+   "from": "EX-CH08-S04",
+   "until": "EX-CH08-S04",
+   "about": "EX-CH08-S04 (8 Apr 10:00-17:00): EVA at the marker-two pad. The rover braked on the pad with its roof work floods on; Kai and Rafi suited (Rafi at the tether point), Ferreira holds the cabin checklist aboard. The repeater is still dark with its battery bay closed; the replacement battery module waits on the pad beside it.",
+   "props": [
+    {
+     "id": "rover",
+     "path": "res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn",
+     "position": [
+      0.0,
+      0,
+      1.0
+     ],
+     "rotation_degrees": [
+      0,
+      180,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "id": "spare_battery_module",
+     "path": "res://assets/environment/EN_RelayRoad/EN_RelayRoad_BatteryModule_LOD0.glb",
+     "position": [
+      1.1,
+      0,
+      -6.1
+     ],
+     "rotation_degrees": [
+      0,
+      15,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "rover",
+     "position": [
+      0.0,
+      2.2,
+      1.0
+     ],
+     "size": [
+      4.7,
+      4.4,
+      6.04
+     ]
+    }
+   ],
+   "piece_states": {
+    "rover": {
+     "lights": "eva_stop"
+    },
+    "repeater_r2": {
+     "lamps": {
+      "Lamp_Beacon": "off",
+      "Lamp_Link_0": "off",
+      "Lamp_Link_1": "off"
+     }
+    }
+   },
+   "outfits": {
+    "kai": "eva",
+    "rafi": "eva"
+   },
+   "aboard": {
+    "ferreira": {
+     "at": [
+      0.6,
+      0.0,
+      -0.6
+     ],
+     "facing": [
+      0.0,
+      0.0,
+      -1.0
+     ]
+    }
+   },
+   "anchors": {
+    "relay_rafi": [
+     -2.4,
+     0,
+     -5.2
+    ]
+   },
+   "lighting": {
+    "stars": 0.35,
+    "key_energy": 0.0
+   },
+   "focus_targets": [
+    {
+     "target_id": "relay_rover_door",
+     "label": "Rover cabin checklist",
+     "verb": "Use",
+     "position": [
+      -2.45,
+      1.3,
+      0.5
+     ],
+     "approach_m": [
+      -3.1,
+      0,
+      -0.6
+     ],
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p15_restore_marker_2": "repeater_chain",
+    "p15_test_repeater_chain": "repeater_chain",
+    "p15_reach_approach": "relay_rover_door"
+   },
+   "review_views": {
+    "s04_pad": {
+     "from": [
+      3.6,
+      1.9,
+      -2.4
+     ],
+     "to": [
+      0.0,
+      0.9,
+      -7.0
+     ]
+    },
+    "s04_wide": {
+     "from": [
+      -9.0,
+      3.2,
+      -1.0
+     ],
+     "to": [
+      0.0,
+      0.9,
+      -5.5
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -2715,6 +2715,9 @@
      "by_scene": {
       "EX-CH02-S01": {
        "text": "EARTH LINK · CONTACT RETURNED 30 APR"
+      },
+      "EX-CH08-S09..EX-CH08-S12": {
+       "text": "EARTH LINK · LIVE VIA THE MALAPERT RELAY"
       }
      }
     }
@@ -4746,6 +4749,819 @@
      ]
     }
    }
+  },
+  {
+   "id": "ch08_home_loop",
+   "from": "EX-CH08-S05",
+   "until": "EX-CH08-S12",
+   "about": "EX-CH08-S05 \"Two at Home\" (8 Apr 18:00, the final 36-hour night): the home-loop panel on the garden's north wall (COOL, DIM, return OPEN, two independent pressure readings) with the home forecast, two here for 33 h then five for 3 h (S05 -> S06); Amara's independent manual gauge on the care bench; the flowering descendants, labelled, in the sealed cassette where Alo first bloomed; and the small guide light on the floor by the Commons door exactly where the plan put it. In S12 the panel shows the final records before the shutter opens.",
+   "fixtures": [
+    {
+     "id": "home_panel",
+     "position": [
+      2.6,
+      1.5,
+      -3.97
+     ],
+     "size": [
+      1.3,
+      0.85,
+      0.06
+     ],
+     "color": "#0b1220",
+     "transparent": false,
+     "finish": "screen"
+    },
+    {
+     "id": "guide_light_small",
+     "position": [
+      -2.25,
+      0.03,
+      -3.78
+     ],
+     "size": [
+      0.1,
+      0.06,
+      0.1
+     ],
+     "color": "#ffb347",
+     "transparent": false,
+     "emissive": true
+    },
+    {
+     "id": "descendants_card",
+     "position": [
+      -2.95,
+      2.02,
+      3.975
+     ],
+     "size": [
+      1.3,
+      0.62,
+      0.03
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "props": [
+    {
+     "id": "manual_gauge",
+     "path": "res://assets/props/PR_ManualGauge/PR_ManualGauge.glb",
+     "position": [
+      2.85,
+      0.8,
+      -1.3
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "id": "descendant_rack",
+     "path": "res://assets/plants/PL_Descendants/PL_Descendants.glb",
+     "position": [
+      -2.95,
+      0,
+      3.75
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "descendant_rack",
+     "position": [
+      -2.95,
+      0.78,
+      3.75
+     ],
+     "size": [
+      1.35,
+      1.55,
+      0.5
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "id": "home_panel_text",
+     "text": "HOME LOOP PLAN   8 APR 2047, 18:00\nHEAT: MINIMUM, COOL PROFILE\nGROWTH LAMPS: DIM\nWATER RETURN: OPEN\nPRESSURE: TWO INDEPENDENT READINGS\n\nHOME FORECAST: 2 HERE FOR 33 H, THEN 5 FOR THE LAST 3 H",
+     "position": [
+      2.6,
+      1.5,
+      -3.9370000000000003
+     ],
+     "size": 0.00062,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 1.2,
+     "by_scene": {
+      "EX-CH08-S12": {
+       "text": "FINAL RECORDS   10 APR 2047, 06:00\nFIVE PEOPLE HOME\nFOUNDER RESERVE: 30 SEEDS, SEALED\nVAULT SPECIMENS: 11, RETAINED\nPRESSURE AND TEMPERATURE: STEADY\nCOTTON: ALIVE",
+       "color": "#7dffa8"
+      }
+     }
+    },
+    {
+     "id": "descendants_card_text",
+     "text": "DESCENDANTS OF ALO × TARA\nIN FLOWER, APRIL 2047",
+     "position": [
+      -2.95,
+      2.02,
+      3.958
+     ],
+     "size": 0.0007,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 1.2
+    }
+   ],
+   "local_lights": [
+    {
+     "id": "guide_light_small_glow",
+     "position": [
+      -2.25,
+      0.25,
+      -3.6
+     ],
+     "color": "#ffb347",
+     "energy": 0.35,
+     "range_m": 2.2
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "garden_home_panel",
+     "label": "Home-loop panel",
+     "verb": "Use",
+     "position": [
+      2.6,
+      1.4,
+      -3.8
+     ],
+     "approach_m": [
+      2.6,
+      0,
+      -2.95
+     ],
+     "asset_id": "home_panel",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p15_confirm_home_occupancy": "garden_home_panel",
+    "p15_confirm_segment_forecast": "garden_home_panel",
+    "p15_confirm_home_pressure": "garden_probe",
+    "p16_save_final_records": "garden_home_panel"
+   },
+   "by_scene": {
+    "EX-CH08-S05": {
+     "anchors": {
+      "garden_mei": [
+       1.9,
+       0,
+       -2.6
+      ],
+      "garden_amara": [
+       2.9,
+       0,
+       -0.5
+      ]
+     }
+    }
+   },
+   "review_views": {
+    "ch08_home_panel": {
+     "from": [
+      1.4,
+      1.6,
+      -1.5
+     ],
+     "to": [
+      2.6,
+      1.45,
+      -4.0
+     ]
+    },
+    "ch08_guide_light": {
+     "from": [
+      -0.6,
+      1.2,
+      -1.8
+     ],
+     "to": [
+      -2.25,
+      0.05,
+      -3.78
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch08_d1_day_one_opt01",
+   "from": "EX-CH08-S05",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH01-S01-CHOICE",
+    "option_id": "EX-CH01-S01-OPT01"
+   },
+   "about": "Doc 24 5.2 D1: the framed Day-one photo beside the home console: the air unit after \"Store air\", dated 11 Apr 2046.",
+   "prints": [
+    {
+     "id": "day_one_photo",
+     "kind": "plant_photo",
+     "subject": "res://assets/props/PR_OxygenUnit/PR_OxygenUnit.glb",
+     "position": [
+      3.62,
+      1.52,
+      -3.936
+     ],
+     "size": [
+      0.3,
+      0.22
+     ],
+     "border": 0.008,
+     "caption": "DAY ONE, 11 APR 2046\nSPARE ENERGY STORED AS AIR",
+     "caption_size": 0.0005
+    }
+   ]
+  },
+  {
+   "id": "ch08_d1_day_one_opt02",
+   "from": "EX-CH08-S05",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH01-S01-CHOICE",
+    "option_id": "EX-CH01-S01-OPT02"
+   },
+   "about": "Doc 24 5.2 D1: the framed Day-one photo beside the home console: the empty planting bay lit, dated 11 Apr 2046.",
+   "prints": [
+    {
+     "id": "day_one_photo",
+     "kind": "plant_photo",
+     "subject": "res://assets/props/PR_GrowthChamber/PR_GrowthChamber.glb",
+     "position": [
+      3.62,
+      1.52,
+      -3.936
+     ],
+     "size": [
+      0.3,
+      0.22
+     ],
+     "border": 0.008,
+     "light": "#ffd9a0",
+     "caption": "DAY ONE, 11 APR 2046\nTHE PLANTING BAY LIT",
+     "caption_size": 0.0005
+    }
+   ]
+  },
+  {
+   "id": "ch08_first_light",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "about": "EX-CH08-S12 \"What We Grew\" (10 Apr 06:00): five home in the garden before the shutter opens; the final records on the panel; the first-light photo board beside the Commons door for the shared photograph, gathering the story echoes (doc 24 7.6); the dedication plaque under the lineage board takes the player's words (D13). Noor watches on the Earth console; cotton stands by the window in Tara's bay, her name beneath it.",
+   "fixtures": [
+    {
+     "id": "photo_board",
+     "position": [
+      -1.05,
+      1.5,
+      -3.96
+     ],
+     "size": [
+      1.0,
+      0.75,
+      0.05
+     ],
+     "color": "#e6e8ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "photo_frame",
+     "position": [
+      -1.3,
+      1.58,
+      -3.932
+     ],
+     "size": [
+      0.34,
+      0.25,
+      0.004
+     ],
+     "color": "#1b2433",
+     "transparent": false
+    }
+   ],
+   "signs": [
+    {
+     "id": "photo_board_title",
+     "text": "FIRST LIGHT   10 APR 2047",
+     "position": [
+      -1.05,
+      1.8,
+      -3.934
+     ],
+     "size": 0.00075,
+     "color": "#1b2433",
+     "outline": 0
+    },
+    {
+     "id": "photo_frame_text",
+     "text": "SHARED PHOTO\nTAKE IT WHEN THE SHUTTER OPENS",
+     "position": [
+      -1.3,
+      1.58,
+      -3.929
+     ],
+     "size": 0.00042,
+     "color": "#e9eef5",
+     "outline": 0,
+     "wrap_m": 0.3
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "garden_photo_board",
+     "label": "First-light photo board",
+     "verb": "Use",
+     "position": [
+      -1.05,
+      1.45,
+      -3.8
+     ],
+     "approach_m": [
+      -1.05,
+      0,
+      -2.9
+     ],
+     "asset_id": "photo_board",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "garden_dedication",
+     "label": "Dedication plaque",
+     "verb": "Use",
+     "position": [
+      0.3,
+      0.95,
+      -3.8
+     ],
+     "approach_m": [
+      0.3,
+      0,
+      -2.9
+     ],
+     "label_offset": [
+      0,
+      0.9,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p16_save_photo": "garden_photo_board",
+    "p16_save_dedication": "garden_dedication",
+    "p16_make_credits_available": "garden_photo_board"
+   },
+   "anchors": {
+    "garden_mei": [
+     -0.4,
+     0,
+     1.6
+    ],
+    "garden_amara": [
+     3.3,
+     0,
+     0.3
+    ],
+    "garden_kai": [
+     -2.2,
+     0,
+     1.9
+    ],
+    "garden_rafi": [
+     -3.9,
+     0,
+     0.6
+    ],
+    "garden_ferreira": [
+     1.0,
+     0,
+     2.3
+    ]
+   },
+   "review_views": {
+    "ch08_photo_board": {
+     "from": [
+      -0.8,
+      1.6,
+      -2.0
+     ],
+     "to": [
+      -0.9,
+      1.5,
+      -4.0
+     ]
+    },
+    "ch08_first_light": {
+     "from": [
+      -1.6,
+      1.7,
+      -1.6
+     ],
+     "to": [
+      2.3,
+      1.3,
+      3.0
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch08_d2_notebook_opt01",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH01-S04-CHOICE",
+    "option_id": "EX-CH01-S04-OPT01"
+   },
+   "about": "Doc 24 5.2 D2: the notebook layout the crew chose on day one, pinned beside the shared photo.",
+   "signs": [
+    {
+     "size": 0.00046,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.4,
+     "id": "ch08_d2_notebook_opt01_text",
+     "text": "GROWTH RECORD: PAIRED PHOTOGRAPHS, FROM 12 APR 2046",
+     "position": [
+      -0.82,
+      1.38,
+      -3.934
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch08_d2_notebook_opt02",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH01-S04-CHOICE",
+    "option_id": "EX-CH01-S04-OPT02"
+   },
+   "about": "Doc 24 5.2 D2: the notebook layout the crew chose on day one, pinned beside the shared photo.",
+   "signs": [
+    {
+     "size": 0.00046,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.4,
+     "id": "ch08_d2_notebook_opt02_text",
+     "text": "GROWTH RECORD: PAIRED CONDITIONS TABLE, FROM 12 APR 2046",
+     "position": [
+      -0.82,
+      1.38,
+      -3.934
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch08_d11_light_opt01",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH06-S01-CHOICE",
+    "option_id": "EX-CH06-S01-OPT01"
+   },
+   "about": "Doc 24 5.2 D11: the companion who clipped the hand light to Kai before the road.",
+   "signs": [
+    {
+     "size": 0.00046,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.4,
+     "id": "ch08_d11_light_opt01_text",
+     "text": "THE HAND LIGHT RAFI CLIPPED TO KAI, 8 APR 2047",
+     "position": [
+      -0.82,
+      1.3,
+      -3.934
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch08_d11_light_opt02",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH06-S01-CHOICE",
+    "option_id": "EX-CH06-S01-OPT02"
+   },
+   "about": "Doc 24 5.2 D11: the companion who clipped the hand light to Kai before the road.",
+   "signs": [
+    {
+     "size": 0.00046,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.4,
+     "id": "ch08_d11_light_opt02_text",
+     "text": "THE HAND LIGHT AMARA CLIPPED TO KAI, 8 APR 2047",
+     "position": [
+      -0.82,
+      1.3,
+      -3.934
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch08_d10_strip_opt01",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH05-S11-CHOICE",
+    "option_id": "EX-CH05-S11-OPT01"
+   },
+   "about": "Doc 24 5.2 D10: the monthly photo strip for Noor.",
+   "signs": [
+    {
+     "size": 0.00046,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.4,
+     "id": "ch08_d10_strip_opt01_text",
+     "text": "WHAT GROWS NEXT: APRIL PHOTO STRIP, FOR N.",
+     "position": [
+      -0.82,
+      1.22,
+      -3.934
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch08_d10_place_opt02",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH05-S11-CHOICE",
+    "option_id": "EX-CH05-S11-OPT02"
+   },
+   "about": "Doc 24 5.2 D10: the place kept for Noor's work.",
+   "signs": [
+    {
+     "size": 0.00046,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.4,
+     "id": "ch08_d10_place_opt02_text",
+     "text": "A PLACE KEPT FOR N.",
+     "position": [
+      -0.82,
+      1.22,
+      -3.934
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch08_d9_record_opt01",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH05-S05-CHOICE",
+    "option_id": "EX-CH05-S05-OPT01"
+   },
+   "about": "Doc 24 5.2 D9: the 2034 record Ferreira left at her place, propped against the lineage board beside Alo's petal.",
+   "signs": [
+    {
+     "size": 0.00046,
+     "color": "#e9eef5",
+     "outline": 0,
+     "wrap_m": 0.4,
+     "id": "ch08_d9_record_opt01_text",
+     "text": "ASCENT MANIFEST, 2034",
+     "position": [
+      -0.28,
+      1.22,
+      -3.82
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch08_d9_record_opt02",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH05-S05-CHOICE",
+    "option_id": "EX-CH05-S05-OPT02"
+   },
+   "about": "Doc 24 5.2 D9: the 2034 record Ferreira left at her place, propped against the lineage board beside Alo's petal.",
+   "signs": [
+    {
+     "size": 0.00046,
+     "color": "#e9eef5",
+     "outline": 0,
+     "wrap_m": 0.4,
+     "id": "ch08_d9_record_opt02_text",
+     "text": "GREENHOUSE SERVICE NOTE, 2034:\nTHE GARDEN SHE LEFT",
+     "position": [
+      -0.28,
+      1.22,
+      -3.82
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch08_d6_tray_opt01",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH03-S11-DEDICATION",
+    "option_id": "EX-CH03-S11-DEDICATION-OPT01"
+   },
+   "about": "Doc 24 5.2 D6: the CH03-S11 tray dedication on the lineage board.",
+   "signs": [
+    {
+     "size": 0.00046,
+     "color": "#e9eef5",
+     "outline": 0,
+     "wrap_m": 0.4,
+     "id": "ch08_d6_tray_opt01_text",
+     "text": "THE FIRST TRAY: LIGHT AND STAR",
+     "position": [
+      0.8,
+      1.22,
+      -3.82
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch08_d6_tray_opt02",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH03-S11-DEDICATION",
+    "option_id": "EX-CH03-S11-DEDICATION-OPT02"
+   },
+   "about": "Doc 24 5.2 D6: the CH03-S11 tray dedication on the lineage board.",
+   "signs": [
+    {
+     "size": 0.00046,
+     "color": "#e9eef5",
+     "outline": 0,
+     "wrap_m": 0.4,
+     "id": "ch08_d6_tray_opt02_text",
+     "text": "THE FIRST TRAY: FOR ALO AND TARA",
+     "position": [
+      0.8,
+      1.22,
+      -3.82
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch08_d6_tray_opt03",
+   "from": "EX-CH08-S12",
+   "until": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH03-S11-DEDICATION",
+    "option_id": "EX-CH03-S11-DEDICATION-OPT03"
+   },
+   "about": "Doc 24 5.2 D6: the CH03-S11 tray dedication on the lineage board.",
+   "signs": [
+    {
+     "size": 0.00046,
+     "color": "#e9eef5",
+     "outline": 0,
+     "wrap_m": 0.4,
+     "id": "ch08_d6_tray_opt03_text",
+     "text": "THE FIRST TRAY: THE NEXT SMALL THING",
+     "position": [
+      0.8,
+      1.22,
+      -3.82
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch08_d13_plaque_opt01",
+   "from": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH08-S12-CHOICE",
+    "option_id": "EX-CH08-S12-OPT01"
+   },
+   "about": "Doc 24 5.2 D13: the dedication the player chose, engraved under the lineage board (also in the credits and the CS-18 still).",
+   "fixtures": [
+    {
+     "id": "dedication_plaque",
+     "position": [
+      0.3,
+      0.93,
+      -3.975
+     ],
+     "size": [
+      1.0,
+      0.14,
+      0.03
+     ],
+     "color": "#c9a24a",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "dedication_plaque_text",
+     "text": "FOR EVERY HAND THAT KEPT THE LIGHT",
+     "position": [
+      0.3,
+      0.93,
+      -3.958
+     ],
+     "size": 0.00062,
+     "color": "#1b2433",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch08_d13_plaque_opt02",
+   "from": "EX-CH08-S12",
+   "choice": {
+    "choice_id": "EX-CH08-S12-CHOICE",
+    "option_id": "EX-CH08-S12-OPT02"
+   },
+   "about": "Doc 24 5.2 D13: the dedication the player chose, engraved under the lineage board (also in the credits and the CS-18 still).",
+   "fixtures": [
+    {
+     "id": "dedication_plaque",
+     "position": [
+      0.3,
+      0.93,
+      -3.975
+     ],
+     "size": [
+      1.0,
+      0.14,
+      0.03
+     ],
+     "color": "#c9a24a",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "dedication_plaque_text",
+     "text": "FOR THE GARDENS WE LEAVE FOR OTHERS",
+     "position": [
+      0.3,
+      0.93,
+      -3.958
+     ],
+     "size": 0.00062,
+     "color": "#1b2433",
+     "outline": 0
+    }
+   ]
   }
  ]
 }

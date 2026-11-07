@@ -1,0 +1,35 @@
+[gd_scene load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/campaign_room.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_RelayDeck_LOD0.glb" id="2_p2"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_RelayDeck_LOD1.glb" id="3_p3"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ControllerHousing_LOD0.glb" id="4_p4"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ControllerHousing_LOD1.glb" id="5_p5"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PowerIsolator_LOD0.glb" id="6_p6"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PowerIsolator_LOD1.glb" id="7_p7"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ControlPedestal_LOD0.glb" id="8_p8"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ControlPedestal_LOD1.glb" id="9_p9"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_SolarMast_LOD0.glb" id="10_p10"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_SolarMast_LOD1.glb" id="11_p11"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD0.glb" id="12_p12"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb" id="13_p13"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_UmbilicalPost_LOD0.glb" id="14_p14"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_UmbilicalPost_LOD1.glb" id="15_p15"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ViewpointRail_LOD0.glb" id="16_p16"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ViewpointRail_LOD1.glb" id="17_p17"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD0.glb" id="18_p18"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb" id="19_p19"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_CableTray_LOD0.glb" id="20_p20"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_CableTray_LOD1.glb" id="21_p21"]
+[ext_resource type="PackedScene" path="res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn" id="22_p22"]
+[ext_resource type="PackedScene" path="res://assets/props/PR_RelayController/PR_RelayController.glb" id="23_p23"]
+
+; LOC-12 (M3-8R). The approved M3-8A pieces are authored in resources/campaign/rooms/LOC-12.json ("assembly": "exterior_kit");
+; PiecePreload makes their GLBs (both LODs) and VH_Rover_Lit dependencies of this scene, so a threaded room load
+; decodes them off the main thread before the room is built.
+[node name="MalapertSummit" type="Node3D"]
+script = ExtResource("1_room")
+room_id = "LOC-12"
+
+[node name="PiecePreload" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("EN_MalapertSummit_RelayDeck_LOD0", "EN_MalapertSummit_RelayDeck_LOD1", "EN_MalapertSummit_ControllerHousing_LOD0", "EN_MalapertSummit_ControllerHousing_LOD1", "EN_MalapertSummit_PowerIsolator_LOD0", "EN_MalapertSummit_PowerIsolator_LOD1", "EN_MalapertSummit_ControlPedestal_LOD0", "EN_MalapertSummit_ControlPedestal_LOD1", "EN_MalapertSummit_SolarMast_LOD0", "EN_MalapertSummit_SolarMast_LOD1", "EN_MalapertSummit_TetherAnchor_LOD0", "EN_MalapertSummit_TetherAnchor_LOD1", "EN_MalapertSummit_UmbilicalPost_LOD0", "EN_MalapertSummit_UmbilicalPost_LOD1", "EN_MalapertSummit_ViewpointRail_LOD0", "EN_MalapertSummit_ViewpointRail_LOD1", "EN_MalapertSummit_PerimeterMarker_LOD0", "EN_MalapertSummit_PerimeterMarker_LOD1", "EN_MalapertSummit_CableTray_LOD0", "EN_MalapertSummit_CableTray_LOD1", "VH_Rover_Lit", "PR_RelayController"), [ExtResource("2_p2"), ExtResource("3_p3"), ExtResource("4_p4"), ExtResource("5_p5"), ExtResource("6_p6"), ExtResource("7_p7"), ExtResource("8_p8"), ExtResource("9_p9"), ExtResource("10_p10"), ExtResource("11_p11"), ExtResource("12_p12"), ExtResource("13_p13"), ExtResource("14_p14"), ExtResource("15_p15"), ExtResource("16_p16"), ExtResource("17_p17"), ExtResource("18_p18"), ExtResource("19_p19"), ExtResource("20_p20"), ExtResource("21_p21"), ExtResource("22_p22"), ExtResource("23_p23")]]

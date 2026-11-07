@@ -287,7 +287,8 @@ const _ROOMS := {
 			"res://assets/props/PR_RelayController/PR_RelayController.glb",
 			"res://assets/props/PR_UplinkFeedthrough/PR_UplinkFeedthrough.glb",
 		],
-		"boundary_ids": ["airlock_exterior", "relay_route_boundary"],
+		# M3-8R: the road continues out of the marker-two sector at both ends (LOC-11.json places the markers).
+		"boundary_ids": ["relay_route_boundary"],
 		"focus_targets": [
 			{"target_id": "relay_route_console", "label": "Relay route console", "verb": "Inspect", "position": [-5.0, 1.0, -3.0]},
 			{"target_id": "repeater_chain", "label": "Three repeater buoys", "verb": "Use", "position": [0.0, 0.8, -3.0]},
@@ -298,9 +299,11 @@ const _ROOMS := {
 	"LOC-12": {
 		"room_id": "LOC-12",
 		"name": "Malapert Relay",
-		"canonical_name": "Malapert relay service bay",
-		"bounds_m": [18.0, 12.0],
-		"pressure": "pressurised",
+		"canonical_name": "Malapert relay summit work platform",
+		"bounds_m": [32.0, 22.0],
+		# M3-8R: the 30 x 20 m relay platform is open vacuum on the summit (doc 09 LOC-12); the pressurised space there
+		# is the rover cabin, which staging marks with "aboard".
+		"pressure": "vacuum",
 		"asset_ids": ["PR_RelayController", "PR_UplinkFeedthrough", "PR_HandLight"],
 		"asset_paths": [
 			"res://assets/props/PR_RelayController/PR_RelayController.glb",
@@ -368,6 +371,16 @@ const _SCENE_ROOMS := {
 	"EX-CH04-S04": "LOC-09", "EX-CH04-S05": "LOC-09", "EX-CH04-S06": "LOC-10",
 	"EX-CH04-S07": "LOC-10", "EX-CH04-S08": "LOC-10", "EX-CH04-S09": "LOC-08",
 	"EX-CH04-S10": "LOC-03", "EX-CH04-S11": "LOC-01", "EX-CH04-S12": "LOC-01",
+	# Chapter 8 (M3-8R), from STORY_FULL.md, the CHAPTER_08 scene scripts (SC-0801..0806), doc 24 2.8-2.9 and the
+	# approved M3-8A sets: the departure and the arrival in the rover garage (S01, S11; staged with EN_Garage by
+	# M3-105); the relay road's marker-two sector with the crew aboard the pressurised rover (S02-S03) and the EVA
+	# battery swap at its pad (S04); the garden home loop (S05); Aurora's console for the summit arrival packet (S06);
+	# the Malapert summit platform for the suited repair, both legs and ALO42 (S07-S09); the Commons table for the
+	# three-place call, with Noor on the Earth screen (S10); the garden at first light (S12).
+	"EX-CH08-S01": "LOC-08", "EX-CH08-S02": "LOC-11", "EX-CH08-S03": "LOC-11",
+	"EX-CH08-S04": "LOC-11", "EX-CH08-S05": "LOC-03", "EX-CH08-S06": "LOC-01",
+	"EX-CH08-S07": "LOC-12", "EX-CH08-S08": "LOC-12", "EX-CH08-S09": "LOC-12",
+	"EX-CH08-S10": "LOC-01", "EX-CH08-S11": "LOC-08", "EX-CH08-S12": "LOC-03",
 }
 
 ## Returns every stable location ID in the campaign.
@@ -383,7 +396,7 @@ static func room(room_id: String) -> Dictionary:
 	for key in ["bounds_m", "focus_targets", "anchors"]:
 		if authored.has(key):
 			result[key] = authored[key].duplicate(true)
-	if authored.get("assembly") in ["habitat_kit", "site_kit"]:
+	if authored.get("assembly") in ["habitat_kit", "site_kit", "exterior_kit"]:
 		result["asset_paths"] = []
 		result["asset_ids"] = []
 		for prop in authored.props:
@@ -508,6 +521,11 @@ static func terrain_segments(room_id: String) -> Array:
 static func earth(room_id: String, scene_id: String, segment: String = "") -> Dictionary:
 	var place := terrain(room_id, segment)
 	var row := Heightfield.scene_lighting(scene_id, segment)
+	# M3-8R: a scene without its own row may name the row of another scene whose dated time lies inside its story
+	# window (exterior_terrain.json "sky_rows", with the reason), e.g. EX-CH08-S07 (00:00-00:45) uses EX-CH08-S06 (00:00).
+	var alias := String(place.get("sky_rows", {}).get(scene_id, ""))
+	if row.is_empty() and not alias.is_empty():
+		row = Heightfield.scene_lighting(alias, segment)
 	var result := {"presented": false, "room_id": room_id, "scene_id": scene_id}
 	# a segment's own row carries the terrain horizon where that segment stands (make_terrain.py horizon_from)
 	var horizon_here := String(row.get("site", "")) == String(place.get("horizon_site", "")) or (not segment.is_empty() and row.has("horizon_from"))
@@ -538,7 +556,7 @@ static func earth(room_id: String, scene_id: String, segment: String = "") -> Di
 		"angular_diameter_deg": EARTH_ANGULAR_DIAMETER_DEG,
 		"direction": [to_earth.x, to_earth.y, to_earth.z], "sun_direction": [to_sun.x, to_sun.y, to_sun.z],
 		"sun_earth_elongation_deg": elongation, "illuminated_fraction": (1.0 - cos(deg_to_rad(elongation))) * 0.5,
-		"source": "JPL Horizons DE441, %s %s UTC (sun_positions.json scene_lighting; terrain horizon from LOLA)" % [row.site, row.utc],
+		"source": "JPL Horizons DE441, %s %s UTC (sun_positions.json scene_lighting %s; terrain horizon from LOLA)" % [row.site, row.utc, String(row.scene)],
 	}, true)
 	return result
 
@@ -550,7 +568,7 @@ static func earth(room_id: String, scene_id: String, segment: String = "") -> Di
 # story_log option (doc 24 §5.2). The base layout stays the Chapter 1 room; staging only adds and hides.
 
 const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "chapter7_props", "prints", "models", "hide", "hide_signs", "kit_screens"]
-const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views", "care_round", "kit_parts", "kit_texts", "kit_attach", "outfits", "garage"]
+const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views", "care_round", "kit_parts", "kit_texts", "kit_attach", "outfits", "garage", "piece_states", "aboard"]
 
 ## Story order of a canon scene id (chapter * 100 + scene number), or -1 for anything that is not one.
 static func scene_order(scene_id: String) -> int:

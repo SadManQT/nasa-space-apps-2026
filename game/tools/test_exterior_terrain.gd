@@ -36,7 +36,8 @@ const WALKER_RADIUS_M := 0.45
 const BURY_GRADE := 0.1
 const Roster = preload("res://scripts/companions/companion_roster.gd")
 ## Scenes whose exterior has a computed horizon and a Horizons row that puts Earth above it (sun_positions.json).
-const EARTH_SHOWN := {"LOC-06": ["EX-CH01-S01", "EX-CH01-S12", "EX-CH04-S02", "EX-CH04-S09", "EX-CH05-S01"]}
+const EARTH_SHOWN := {"LOC-06": ["EX-CH01-S01", "EX-CH01-S12", "EX-CH04-S02", "EX-CH04-S09", "EX-CH05-S01"],
+	"LOC-12": ["EX-CH08-S06", "EX-CH08-S08", "EX-CH08-S10"]}
 ## Capture: room, dated scene, extra evidence light (a permanently shadowed floor is black under its true Sun).
 const SHOTS := [["LOC-06", "EX-CH04-S09", false], ["LOC-09", "EX-CH04-S05", false], ["LOC-10", "EX-CH04-S06", true]]
 var checks := 0
@@ -410,7 +411,7 @@ func _check_placements() -> void:
 	for room_id in Contract.room_ids():
 		if String(Contract.room(room_id).pressure) == "vacuum":
 			_check(data.rooms.has(room_id), room_id + " (an exterior) has a terrain placement")
-	for scene_id in ["EX-CH04-S04", "EX-CH04-S05", "EX-CH04-S06", "EX-CH04-S07", "EX-CH04-S08", "EX-CH08-S03", "EX-CH08-S04", "EX-CH08-S10"]:
+	for scene_id in ["EX-CH04-S04", "EX-CH04-S05", "EX-CH04-S06", "EX-CH04-S07", "EX-CH04-S08", "EX-CH08-S03", "EX-CH08-S04", "EX-CH08-S07", "EX-CH08-S08", "EX-CH08-S09"]:
 		_check(data.rooms.has(Contract.room_for_scene(scene_id)), scene_id + " exterior room has a placement (scene map unchanged)")
 	for entry in _placements(data):
 		var room_id := String(entry[1])
@@ -616,6 +617,11 @@ func _check_earth() -> void:
 	_check(not bool(eclipse.presented) and String(eclipse.reason).contains("eclipse"), "the 12 Jan 2047 eclipse is never drawn in the open sky")
 	_check(not bool(Contract.earth("LOC-06", "EX-CH02-S03").presented) and not bool(Contract.earth("LOC-06", "EX-CH08-S08").presented), "no row, or another site's row: no Earth")
 	_check(not bool(Contract.earth("LOC-01", "EX-CH01-S01").presented), "an interior has no exterior sky")
+	# M3-8R: a summit scene without its own row takes the row whose time lies in its window (exterior_terrain.json sky_rows).
+	for pair in [["EX-CH08-S07", "EX-CH08-S06"], ["EX-CH08-S09", "EX-CH08-S10"]]:
+		var alias := Contract.earth("LOC-12", String(pair[0]))
+		_check(bool(alias.presented) and String(alias.source).contains(String(pair[1])) and Heightfield.scene_lighting(String(pair[0])).is_empty(), "LOC-12 %s shows Earth from the %s row inside its window" % pair)
+	_check(not bool(Contract.earth("LOC-11", "EX-CH08-S07").presented), "a sky row alias belongs to its own room")
 	var environment := Environment.new()
 	environment.background_mode = Environment.BG_COLOR
 	environment.background_color = Color.BLACK

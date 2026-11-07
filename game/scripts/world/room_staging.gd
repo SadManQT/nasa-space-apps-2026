@@ -15,6 +15,10 @@ const Kit = preload("res://assets/environment/kit/habitat_kit.gd")
 const EclipseProps = preload("res://assets/props/eclipse_power/eclipse_props.gd")
 const C7 = preload("res://assets/props/chapter7_assets.gd")
 const NarrativeProps = preload("res://assets/props/narrative/narrative_props.gd")
+const C8 = preload("res://assets/environment/EN_MalapertSummit/chapter8_assets.gd")
+const EarthSky = preload("res://assets/environment/terrain/earth_sky.gd")
+const Contract = preload("res://scripts/world/room_contract.gd")
+const ROVER_LIGHTS := "res://assets/vehicles/VH_Rover/rover_lights.json"
 ## Pixel size of each M3-7A live screen (its Screen_* slot's aspect, as the M3-7A evidence renders them).
 const C7_SCREEN_PX := {"Screen_Roster": [1040, 100], "Screen_Return": [760, 150], "Screen_Systems": [640, 400],
 	"Screen_Garden": [640, 400], "Screen_Diag": [680, 360], "Screen_Case": [360, 140], "Screen_Archive": [400, 160],
@@ -140,6 +144,11 @@ static func build(room: CampaignRoom, stage: Dictionary, layout: Dictionary) -> 
 		if node is Node3D and node.visible and (String(node.name) in stage.hide or (node is Label3D and String(node.text) in stage.hide_signs)):
 			node.hide()
 			node.set_meta("staging_hidden", true)
+			# A hidden M3-8A piece carries its collision inside it (M3-8R): it goes with the piece.
+			for shape in node.find_children("*", "CollisionShape3D", true, false):
+				if not (shape as CollisionShape3D).disabled:
+					(shape as CollisionShape3D).disabled = true
+					shape.set_meta("staging_disabled", true)
 	for body in room.collision_root.get_children():
 		if String(body.name) in stage.hide:
 			for shape in body.find_children("*", "CollisionShape3D", true, false):
@@ -148,7 +157,8 @@ static func build(room: CampaignRoom, stage: Dictionary, layout: Dictionary) -> 
 	for spec in stage.fixtures:
 		Presentation.fixture(visuals, spec, habitat)
 	for spec in stage.props:
-		var model := Geometry.load_glb(String(spec.path))
+		# A packed scene (VH_Rover_Lit with its light sockets, M3-8R) or a GLB.
+		var model: Node3D = (load(String(spec.path)) as PackedScene).instantiate() as Node3D if String(spec.path).ends_with(".tscn") else Geometry.load_glb(String(spec.path))
 		if model == null:
 			continue
 		model.name = String(spec.id)
@@ -191,6 +201,9 @@ static func build(room: CampaignRoom, stage: Dictionary, layout: Dictionary) -> 
 		label.outline_size = int(spec.get("outline", 12))
 	for spec in stage.obstacles:
 		Habitat.collider(colliders, String(spec.id), Presentation.vector(spec.position), Presentation.vector(spec.size))
+	for id in stage.get("piece_states", {}):
+		var piece := room.visual_root.get_node_or_null(String(id)) as Node3D
+		_piece_state(piece if piece != null else visuals.get_node_or_null(String(id)) as Node3D, stage.piece_states[id])
 	var lighting := room.get_node_or_null("RoomLighting") as Node3D
 	if lighting != null:
 		var lamps := _root(lighting)
@@ -247,6 +260,10 @@ static func clear(room: CampaignRoom) -> void:
 		if node.has_meta("staging_hidden"):
 			node.show()
 			node.remove_meta("staging_hidden")
+			for shape in node.find_children("*", "CollisionShape3D", true, false):
+				if shape.has_meta("staging_disabled"):
+					(shape as CollisionShape3D).disabled = false
+					shape.remove_meta("staging_disabled")
 	for body in room.collision_root.get_children():
 		if body.has_meta("staging_disabled"):
 			for shape in body.find_children("*", "CollisionShape3D", true, false):
@@ -282,6 +299,9 @@ static func clear(room: CampaignRoom) -> void:
 						if child.has_meta("staging_attached"):
 							piece.remove_child(child)
 							child.queue_free()
+	for node in room.visual_root.get_children():
+		if node.has_meta("piece_state"):
+			_restore_piece(node)
 	set_light_level(room, {})
 	for slot in room.get_meta("staged_screen_slots", []):
 		if is_instance_valid(slot.mesh):
@@ -311,6 +331,12 @@ static func set_light_level(room: CampaignRoom, settings: Dictionary) -> void:
 				mesh.set_meta("base_color", material.albedo_color)
 			var base: Color = mesh.get_meta("base_color")
 			material.albedo_color = Color(base.r * strip, base.g * strip, base.b * strip, base.a)
+	# An exterior's Sun (M3-8R): "key_energy" 0 is a scene the dated row leaves dark (the relay road at night).
+	var key := lighting.get_node_or_null("KeyLight") as DirectionalLight3D
+	if key != null:
+		if not key.has_meta("base_energy"):
+			key.set_meta("base_energy", key.light_energy)
+		key.light_energy = float(settings.get("key_energy", key.get_meta("base_energy")))
 	var world := lighting.get_node_or_null("RoomEnvironment") as WorldEnvironment
 	if world != null and world.environment != null:
 		if not world.has_meta("base_ambient"):
@@ -971,3 +997,188 @@ static func slot_surfaces(piece: Node3D, slot: String) -> Array[Dictionary]:
 			if material != null and String(material.resource_name) == slot:
 				out.append({"mesh": instance, "surface": surface})
 	return out
+
+# ------------------------------------------------------------------------------------------- Chapter 8 exteriors
+
+## M3-8R: the scene's state of an authored exterior piece (an M3-8A summit or road piece, or VH_Rover_Lit placed by
+## LOC-11 / LOC-12): lamp slots ("lamps": slot -> "#rrggbb", or "off"), moving parts ("parts": node -> rotation in
+## degrees, e.g. the housing's DoorHinge or the isolator Handle), live screen slots ("screens": slot -> {text, fg, bg,
+## px}; "line" quotes a catalog line) and the rover's light state ("lights": driving, eva_stop or parked_dark,
+## rover_lights.json). clear() puts every piece back as built. Presentation only: P-15 / P-16 own the rules.
+static func _piece_state(node: Node3D, spec: Dictionary) -> void:
+	if node == null:
+		return
+	node.set_meta("piece_state", true)
+	for slot in spec.get("lamps", {}):
+		var colour := String(spec.lamps[slot])
+		C8.set_lamp(node, String(slot), Color.BLACK if colour == "off" else Color(colour))
+	for part in spec.get("parts", {}):
+		for found in node.find_children(String(part), "Node3D", true, false):
+			if not found.has_meta("rest_rotation"):
+				found.set_meta("rest_rotation", (found as Node3D).rotation_degrees)
+			(found as Node3D).rotation_degrees = Presentation.vector(spec.parts[part])
+	for slot in spec.get("screens", {}):
+		_piece_screen(node, String(slot), spec.screens[slot])
+	if spec.has("lights"):
+		set_rover_lights(node, String(spec.lights))
+
+static func _restore_piece(node: Node) -> void:
+	node.remove_meta("piece_state")
+	for mesh in node.find_children("*", "MeshInstance3D", true, false):
+		for surface in (mesh as MeshInstance3D).get_surface_override_material_count():
+			(mesh as MeshInstance3D).set_surface_override_material(surface, null)
+	for part in node.find_children("*", "Node3D", true, false):
+		if part.has_meta("rest_rotation"):
+			(part as Node3D).rotation_degrees = part.get_meta("rest_rotation")
+			part.remove_meta("rest_rotation")
+	for quad in node.find_children("PieceScreenQuad_*", "MeshInstance3D", true, false):
+		quad.get_parent().remove_child(quad)
+		quad.queue_free()
+	for view in node.find_children("PieceScreen_*", "SubViewport", false, false):
+		node.remove_child(view)
+		view.queue_free()
+	if node.has_meta("screen_text"):
+		node.remove_meta("screen_text")
+	if node.has_meta("rover_lights"):
+		set_rover_lights(node as Node3D, "")
+
+## VH_Rover_Lit's lights for one state of rover_lights.json (driving: headlights and cabin glow; eva_stop adds the two
+## roof work floods; parked_dark: none); "" restores the scene file's own defaults.
+static func set_rover_lights(rover: Node3D, state: String) -> void:
+	var table = JSON.parse_string(FileAccess.get_file_as_string(ROVER_LIGHTS))
+	var on: Array = table.get("states", {}).get(state, []) if table is Dictionary else []
+	for light in rover.get_children():
+		if not light is Light3D:
+			continue
+		if not light.has_meta("rest_visible"):
+			light.set_meta("rest_visible", light.visible)
+		light.visible = bool(light.get_meta("rest_visible")) if state.is_empty() else on.has(String(light.name))
+	if state.is_empty():
+		rover.remove_meta("rover_lights")
+	else:
+		rover.set_meta("rover_lights", state)
+
+## Plain words on an M3-8A Screen_* slot (both LODs): an unshaded SubViewport picture rendered once, like the M3-7A
+## screens. The Label is kept in the piece's "screen_text" meta.
+static func _piece_screen(node: Node3D, slot: String, spec: Dictionary) -> Label:
+	var px: Array = spec.get("px", [640, 400])
+	var size := Vector2i(int(px[0]), int(px[1]))
+	var view := SubViewport.new()
+	view.name = "PieceScreen_" + slot
+	view.size = size
+	view.render_target_update_mode = SubViewport.UPDATE_ONCE
+	var back := ColorRect.new()
+	back.color = Color(spec.get("bg", "#0b1220"))
+	back.size = Vector2(size)
+	view.add_child(back)
+	var text := String(spec.get("text", ""))
+	if spec.has("line"):
+		text = text.replace("{line}", line_text(String(spec.line)))
+	var label := Label.new()
+	label.name = "Text"
+	label.text = text
+	label.position = Vector2(size) * 0.05
+	label.size = Vector2(size) * 0.9
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_color_override("font_color", Color(spec.get("fg", "#d9f2ff")))
+	var lines := text.split("\n")
+	var longest := 1
+	for one in lines:
+		longest = maxi(longest, one.length())
+	label.add_theme_font_size_override("font_size", maxi(8, int(minf(size.y * 0.8 / (lines.size() * 1.25), size.x * 0.88 / (longest * 0.58)))))
+	view.add_child(label)
+	node.add_child(view)
+	var material := StandardMaterial3D.new()
+	material.resource_name = "Screen_live"
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.albedo_texture = view.get_texture()
+	# The M3-8A screen slots carry box-projected UVs, not a picture layout, so the slot itself shows the dark glass and
+	# the picture lies on a quad over the slot's largest flat face (each LOD's own, so it hides with its LOD).
+	var glass := StandardMaterial3D.new()
+	glass.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	glass.albedo_color = back.color
+	for pair in C8.surfaces(node, slot):
+		var mesh := pair[0] as MeshInstance3D
+		mesh.set_surface_override_material(int(pair[1]), glass)
+		var quad := _face_quad(mesh, int(pair[1]), material)
+		if quad != null:
+			quad.name = "PieceScreenQuad_" + slot
+			mesh.add_child(quad)
+	var texts: Dictionary = node.get_meta("screen_text", {})
+	texts[slot] = label
+	node.set_meta("screen_text", texts)
+	return label
+
+## A quad 1 mm in front of the largest flat face of one surface (triangles grouped by normal, areas summed), sized to
+## that face with its +X to the viewer's right and +Y up, in the mesh's own space; it copies the mesh's LOD range.
+static func _face_quad(mesh: MeshInstance3D, surface: int, material: Material) -> MeshInstance3D:
+	var arrays := mesh.mesh.surface_get_arrays(surface)
+	var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+	var index: PackedInt32Array = arrays[Mesh.ARRAY_INDEX] if arrays[Mesh.ARRAY_INDEX] != null else PackedInt32Array()
+	var count := index.size() if not index.is_empty() else verts.size()
+	var faces := {}
+	for t in range(0, count - 2, 3):
+		var ids := [index[t], index[t + 1], index[t + 2]] if not index.is_empty() else [t, t + 1, t + 2]
+		var area := (verts[ids[1]] - verts[ids[0]]).cross(verts[ids[2]] - verts[ids[0]]).length() * 0.5
+		var normal := (normals[ids[0]] + normals[ids[1]] + normals[ids[2]]).normalized()
+		if area < 1e-9 or normal == Vector3.ZERO:
+			continue
+		var key := Vector3i(roundi(normal.x * 20.0), roundi(normal.y * 20.0), roundi(normal.z * 20.0))
+		var face: Array = faces.get(key, [0.0, normal, []])
+		face[0] = float(face[0]) + area
+		face[2] = face[2] + [verts[ids[0]], verts[ids[1]], verts[ids[2]]]
+		faces[key] = face
+	var best: Array = []
+	for key in faces:
+		if best.is_empty() or float(faces[key][0]) > float(best[0]):
+			best = faces[key]
+	if best.is_empty():
+		return null
+	var n: Vector3 = best[1]
+	var u := Vector3.UP.cross(n)
+	u = (u if u.length() > 0.1 else Vector3.RIGHT).normalized()
+	var v := n.cross(u).normalized()
+	var low := Vector2(INF, INF)
+	var high := Vector2(-INF, -INF)
+	var depth := 0.0
+	for p in best[2]:
+		var at := Vector2((p as Vector3).dot(u), (p as Vector3).dot(v))
+		low = low.min(at)
+		high = high.max(at)
+		depth = maxf(depth, (p as Vector3).dot(n))
+	var quad := MeshInstance3D.new()
+	var shape := QuadMesh.new()
+	shape.size = high - low
+	quad.mesh = shape
+	quad.material_override = material
+	quad.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var centre := (low + high) * 0.5
+	quad.transform = Transform3D(Basis(u, v, n), u * centre.x + v * centre.y + n * (depth + 0.001))
+	quad.visibility_range_begin = mesh.visibility_range_begin
+	quad.visibility_range_end = mesh.visibility_range_end
+	return quad
+
+## An exterior's sky for one scene on the flat staging floor (M3-8R; on the terrain the provider's rig does this):
+## the dated Earth where RoomContract.earth presents it, with the key light turned to the same dated Sun, else the
+## black sky, with a faint sparse star field only where the scene's staging asks for one ("stars": intensity), which
+## ART_BIBLE section 2 rule 12 allows only in frames with no sunlit ground at all.
+static func apply_sky(room: CampaignRoom, scene_id: String, stage: Dictionary) -> void:
+	var lighting := room.get_node_or_null("RoomLighting") as Node3D
+	if lighting == null or String(Contract.room(room.room_id).get("pressure", "")) != "vacuum":
+		return
+	var world := lighting.get_node_or_null("RoomEnvironment") as WorldEnvironment
+	var key := lighting.get_node_or_null("KeyLight") as DirectionalLight3D
+	if world == null or world.environment == null:
+		return
+	var spec := Contract.earth(room.room_id, scene_id)
+	var stars := float(stage.get("lighting", {}).get("stars", 0.0))
+	if bool(spec.get("presented", false)):
+		var to_sun := Presentation.vector(spec.sun_direction)
+		if key != null:
+			key.basis = Basis.looking_at(-to_sun, Vector3.UP)
+		EarthSky.apply(world.environment, spec, key.light_energy if key != null else 2.0)
+	elif stars > 0.0 and (key == null or is_zero_approx(key.light_energy)):
+		EarthSky.stars(world.environment, stars)
+	else:
+		EarthSky.clear(world.environment)

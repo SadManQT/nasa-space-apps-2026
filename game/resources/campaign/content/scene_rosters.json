@@ -2130,7 +2130,7 @@
       "playable_actor_id": "kai",
       "actors": {
         "kai": {
-          "location_id": "LOC-08",
+          "location_id": "LOC-11",
           "team_id": "rover"
         },
         "amara": {
@@ -2142,11 +2142,11 @@
           "team_id": "home"
         },
         "rafi": {
-          "location_id": "LOC-08",
+          "location_id": "LOC-11",
           "team_id": "rover"
         },
         "ferreira": {
-          "location_id": "LOC-08",
+          "location_id": "LOC-11",
           "team_id": "rover"
         }
       }
@@ -2227,10 +2227,10 @@
       }
     },
     "EX-CH08-S06": {
-      "playable_actor_id": "rafi",
+      "playable_actor_id": "amara",
       "actors": {
         "kai": {
-          "location_id": "LOC-08",
+          "location_id": "LOC-12",
           "team_id": "rover"
         },
         "amara": {
@@ -2242,11 +2242,11 @@
           "team_id": "home"
         },
         "rafi": {
-          "location_id": "LOC-08",
+          "location_id": "LOC-12",
           "team_id": "rover"
         },
         "ferreira": {
-          "location_id": "LOC-08",
+          "location_id": "LOC-12",
           "team_id": "rover"
         }
       }
@@ -2327,10 +2327,10 @@
       }
     },
     "EX-CH08-S10": {
-      "playable_actor_id": "rafi",
+      "playable_actor_id": "mei",
       "actors": {
         "kai": {
-          "location_id": "LOC-11",
+          "location_id": "LOC-12",
           "team_id": "rover"
         },
         "amara": {
@@ -2342,11 +2342,11 @@
           "team_id": "home"
         },
         "rafi": {
-          "location_id": "LOC-11",
+          "location_id": "LOC-12",
           "team_id": "rover"
         },
         "ferreira": {
-          "location_id": "LOC-11",
+          "location_id": "LOC-12",
           "team_id": "rover"
         }
       }
