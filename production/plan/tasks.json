@@ -591,7 +591,7 @@
    "reserved_for": "Tanvir"
   },
   {
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "atik/codex",
    "deps": [
     "M1-34",
@@ -607,9 +607,9 @@
     "execution/SYS_16_PERFORMANCE_STREAMING.md",
     "execution/SYS_12_PHYSICS_NAVIGATION.md"
    ],
-   "note": "",
+   "note": "7 Nov (Sadman/claude): unblocked: the blocker named Sadman's M1-82, which landed on 7 Nov (01fdfbe; API in production/qa/evidence/M1-82_staging.md and game/resources/campaign/rooms/README.md). Back to atik/codex.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-07",
    "id": "M1-36",
    "milestone": "M1",
    "priority": "P0",
@@ -617,8 +617,7 @@
    "title": "Terrain in Godot: streaming, collision, lighting and performance",
    "prompt": "Integrate the LOLA terrain tiles (M1-34) and the rock kit (M1-35) into the exterior scenes: choose a terrain approach that works on Godot 4.7\n(check the current Terrain3D release's Godot compatibility; otherwise chunked MeshInstance3D LODs), collision for walking and the rover,\nrock scatter by slope, the low hard Sun with long shadows (directional shadow splits tuned for kilometre views), Earth and a star-free or\ncorrectly exposed black sky, no fog or atmosphere scattering; Forward+ with a Compatibility fallback. Target 60 fps on a mid laptop.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. including a wide vista and a boots-on-the-ground view.",
    "reserved_for": "atik",
-   "effort": 3,
-   "blocker": "Provider and 55/55 tests ready; full playable integration requires Sadman M1-82 terrain placement/room-floor/target and Earth hooks. See production/qa/perf/M1-36.md; final independent review and supported-machine gameplay performance remain."
+   "effort": 3
   },
   {
    "status": "blocked",
@@ -2162,11 +2161,10 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 4 assets: EN_Garage, EN_ColdTrap",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
-    "M1-05",
-    "M1-36"
+    "M1-05"
    ],
    "paths": [
     "production/concept/",
@@ -2178,9 +2176,9 @@
     "execution/ASSET_EN_ColdTrap.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "",
+   "note": "7 Nov (Sadman/claude): M1-36 removed from deps: the 2D sheets need no terrain, and exterior placement uses the M1-34 LOLA tiles, M1-82 placements (exterior_terrain.json, CampaignRoom.terrain_ground) and Atik's TerrainStream provider (05463e0); only the final streaming integration is M1-36.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-07",
    "prompt": "Goal: the Chapter 4 (Into the Cold Trap) registry rows that are still planned become installed, gated assets.\nDo: for each of EN_Garage, EN_ColdTrap: read execution/ASSET_<name>.md; make a 2D sheet; batch the sheets into one approval request to the\nuser (do not spend 3D credits before approval); then generate (Tripo/Meshy), clean up in Blender, gate, sync to Godot and update\nproduction/ASSET_REGISTRY.csv. Characters reuse the v8 pipeline (production/tools/build_character_v7.sh) and must pass the side-view\nmirrored-arm check. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; contact sheet in production/review/; registry rows set to verified.\nExterior locations (cold trap, relay road, Malapert summit) are built on the real LOLA terrain from M1-34/M1-36.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); build every object that this chapter's bridges and §4 clues need (the 'What carries over' column names them) as part of this asset set.",
    "reserved_for": "sadman",
    "effort": 3
@@ -3209,11 +3207,10 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 8 assets: EN_MalapertSummit, EN_RelayRoad, EN_NoorRooftop, CH_Noor, CH_Rao",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
-    "M1-05",
-    "M1-36"
+    "M1-05"
    ],
    "paths": [
     "production/concept/",
@@ -3228,9 +3225,9 @@
     "execution/ASSET_CH_Rao.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "",
+   "note": "7 Nov (Sadman/claude): M1-36 removed from deps: the 2D sheets need no terrain, and exterior placement uses the M1-34 LOLA tiles, M1-82 placements (exterior_terrain.json, CampaignRoom.terrain_ground) and Atik's TerrainStream provider (05463e0); only the final streaming integration is M1-36.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-07",
    "prompt": "Goal: the Chapter 8 (The Lighthouse) registry rows that are still planned become installed, gated assets.\nDo: for each of EN_MalapertSummit, EN_RelayRoad, EN_NoorRooftop, CH_Noor, CH_Rao: read execution/ASSET_<name>.md; make a 2D sheet; batch the sheets into one approval request to the\nuser (do not spend 3D credits before approval); then generate (Tripo/Meshy), clean up in Blender, gate, sync to Godot and update\nproduction/ASSET_REGISTRY.csv. Characters reuse the v8 pipeline (production/tools/build_character_v7.sh) and must pass the side-view\nmirrored-arm check. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; contact sheet in production/review/; registry rows set to verified.\nExterior locations (cold trap, relay road, Malapert summit) are built on the real LOLA terrain from M1-34/M1-36.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); build every object that this chapter's bridges and §4 clues need (the 'What carries over' column names them) as part of this asset set.",
    "reserved_for": "sadman",
    "effort": 5
