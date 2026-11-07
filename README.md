@@ -99,7 +99,7 @@ The hackathon is on 13–14 November 2026. Work started earlier, with the Dhaka 
 - Six lit Chapter 1 rooms with the five 3D characters; the crew stand, talk and look at the speaker.
 - Outpost Status cards for power, life support, shielding and food, with forecasts before a choice is committed.
 - Data Cards for all 16 puzzles, from the 28 offline NASA and partner extracts.
-- Audio made and installed: all 383 spoken voice lines, 12 music cues and 35 sound effects.
+- Audio made and installed: all 386 spoken voice lines, 12 music cues and 38 sound effects.
 - Cutscenes CS-01 to CS-09 and CS-18 made and installed in the game folder.
 - Speed: on an Apple M4 Mac (Metal, 1280×720), 95 % of frames take 9.7–11.3 ms in the Greenhouse and the five-character Commons, inside the 16.7 ms needed for 60 fps ([perf report](production/qa/perf_2026-11-04.md)). Other hardware is not measured yet.
 - Windows and macOS release builds that start on clean machines (not yet published, see [Play it](#play-it)).
@@ -128,7 +128,7 @@ We used AI tools, and we disclose all of them. Every generation is logged with i
 | Topaz Image Upscale v2 | Topaz Labs | 4× upscales of turnaround views |
 | Tripo AI | VAST | 3D models of the characters, plants and props, and character skeletons |
 | Meshy | Meshy | Motion-capture animation clips and five text-to-motion story actions |
-| ElevenLabs (eleven_v4, eleven_music_v2_5, Sound Effects v2) | ElevenLabs | All 383 voice lines, 12 music cues and 35 sound effects; the Flows workspace that ran the image and video models |
+| ElevenLabs (eleven_v4, eleven_music_v2_5, Sound Effects v2) | ElevenLabs | All 386 voice lines, 12 music cues and 38 sound effects; the Flows workspace that ran the image and video models |
 | Seedance 2.5 | ByteDance | Short cutscene video shots from our start frames |
 
 Google Veo 3.1 (in Google Flow) made one shot: the 6-second mustard field that opens the game (M1-52). The tool behind the 2–3 November campaign code is not recorded; the team is confirming it ([docs/AI_USE.md](docs/AI_USE.md)).

@@ -21,7 +21,7 @@ Tools used: **Claude Code** (Anthropic; Claude Opus 5.5, one Sonnet 5.5 task) fo
 | Topaz Image Upscale v2 (Topaz Labs) | CGI model, 4x | Upscales of the chosen turnaround views before 3D generation |
 | Tripo AI (VAST) | multiview_to_model / image_to_model v3.1; rigging v1.0 and v3.0 (Mixamo spec, 65 bones) | 3D models of the five characters, the plants and props, and the character skeletons; 22 props and vehicles first made for the pitch video and reused |
 | Meshy | auto-rig, preset animation library, text-to-motion (prime), multi-image-to-3d meshy-7.1 (replaced) | Motion-source rigs and animation clips for all five characters and five story motions (Pollinate, Water, Inspect, Type, Repair) |
-| ElevenLabs | eleven_v4 (voices); eleven_music_v2_5 (music); Sound Effects v2 | All 383 voice lines, the 12-cue score (16 files), all 35 sound effects; the Flows workspace (and, for Chapters 7–8 voices, the ElevenLabs connector) that ran the image and video models |
+| ElevenLabs | eleven_v4 (voices); eleven_music_v2_5 (music); Sound Effects v2 | All 386 voice lines, the 12-cue score (16 files), all 38 sound effects; the Flows workspace (and, for Chapters 7–8 voices, the ElevenLabs connector) that ran the image and video models |
 | Seedance 2.5 (ByteDance) | bytedance-seedance-v2.5, including Video Extend | The animated shots in cutscenes CS-01 to CS-17, generated from our start frames |
 
 Also in the log but not generative AI: Python, Blender, Godot, ffmpeg, OpenCV and Windows System.Drawing, used by scripts to clean up, measure, compose and lay out results (rows marked "No AI"). One AI model checks results without making anything the player sees: **Whisper** (mlx-whisper, run locally by [production/tools/master_vo.py](../production/tools/master_vo.py)) transcribes each voice take so the take whose words match the script is picked; it is named in the handbook's 4 November status entry rather than in a log row.
@@ -153,7 +153,7 @@ Claude Code wrote the Blender scene and animation scripts, the motion-graphics a
 | `plants/`, `props/` | PL_* and PR_* models | Nano Banana Pro concepts, Tripo models; PL_CropRack and 13 props are Tripo models reused from the pitch video | *2026-10-25 · Plant and prop concepts, Glovebox, crew seat, pollination kit concepts, 15 props and plants, 22 reused props, PR_PollinationKit 3D model*; *2026-10-26 · 8 prop concepts, 3D models of the 8 props above* |
 | `environment/`, `vehicles/` | EN_CorridorSegment, EN_ExteriorModule, EN_SolarMast, VH_Rover, VH_ReliefLander, VH_ZeroAscent | Tripo, made for the pitch video | *2026-10-25 · 22 reused props* |
 | `environment/terrain/` | Lunar rock and regolith kit, scatter code | Blender scripts written by Codex; no image or 3D generation | *2026-11-04 · M1-35 lunar rock/regolith kit and scatter code; M1-35 final surface review* |
-| `audio/voice/` | 383 voice lines | ElevenLabs eleven_v4 | See ElevenLabs above |
+| `audio/voice/` | 386 voice lines | ElevenLabs eleven_v4 | See ElevenLabs above |
 | `audio/music/` | 16 files, cues CUE-01..12 | ElevenLabs eleven_music_v2_5 | *MUS_CUE-xx* rows |
 | `audio/sfx/` | 35 effects | ElevenLabs Sound Effects v2 | *SFX_xx* rows |
 | `cutscenes/` | CS-01 to CS-18 (18 films) | Nano Banana Pro and GPT Image frames, Seedance 2.5 shots, ElevenLabs voices and music, assembled by script | See Seedance above; per-cutscene notes in [production/cutscenes/v8/](../production/cutscenes/v8/) |

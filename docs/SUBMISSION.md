@@ -71,7 +71,7 @@ Four cadets (Kai on power and heat, Amara on air, Mei on the garden, Rafi on spa
 - Chapter 1 played as designed: the crew in lit 3D rooms built from a modular habitat kit, the interactive P-02 Mission Table, the four Outpost Status cards and the endings.
 - Data Cards for all 16 puzzles and 19 short science explainer clips, every number drawn from the NASA fixtures.
 - The exteriors stand on real south-pole terrain built from LRO LOLA elevation data, lit by JPL Horizons Sun positions for each scene's date.
-- 383 voice lines, a 12-cue score, 38 sound effects and 18 cutscenes, all installed.
+- 386 voice lines, a 12-cue score, 38 sound effects and 18 cutscenes, all installed.
 - 58 automated test suites (`game/tools/run_tests.sh`). The latest full run passed 57 of 58; the one failure is a loading-time gate being fixed (board M1-68). Rendering holds about 60 fps on an Apple M4 Mac in the timed rooms ([perf report](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/qa/perf_2026-11-04.md)); other hardware is not measured yet.
 - In progress: the four-player Class mode with private role clues (board M1-37), interactive puzzle panels for Chapters 2–8 (M3-2P to M3-8P), the remaining Chapter 4 and 8 rooms, and the learner playtest (M1-22).
 
