@@ -20,6 +20,11 @@ const SEEDLING_WORDS := {"seed": "SOWN SEED", "cotyledon": "SEED LEAVES", "true_
 @export var room_id := "LOC-01"
 @export var load_approved_assets := true
 @export var build_navigation := true
+## M1-82: set before the room enters the tree when the terrain provider (TerrainStream) supplies the ground. With a
+## placement that omits the staging floor (RoomContract.terrain), the flat floor, apron rails, flat navigation and the
+## greybox light rig are not built, and anchors, focus targets, props, fixtures and doors stand on the published
+## terrain positions. Ids, doors, pressure markers and scene staging stay the same.
+@export var terrain_ground := false
 
 var visual_root: Node3D
 var collision_root: Node3D
@@ -41,6 +46,7 @@ var _stage: Dictionary = {}
 var _stage_signature := ""
 ## Fixture cues that already pulsed in the current scene context (one each).
 var _cues_run: Dictionary = {}
+var _terrain: Dictionary = {}
 
 ## A fixture cue lights (the start of its pulse), with the effect id its room JSON names ("sfx"), e.g.
 ## SFX_INVENTORY_LAMP_TICK for the inventory lamp. The campaign plays it: CampaignAudioDirector.play_effect(sfx_id).
@@ -58,6 +64,9 @@ func build_room() -> Dictionary:
 		push_error("CampaignRoom has no contract for " + room_id)
 		return {"accepted": false, "reason": "Unknown room contract."}
 	_layout = RoomContract.layout(room_id)
+	_terrain = RoomContract.terrain(room_id) if terrain_ground else {}
+	if not bool(_terrain.get("omit_staging_floor", false)):
+		_terrain = {}
 	set_meta("room_name", contract.get("name", "AURORA"))
 	visual_root = _node_root("VisualRoot")
 	collision_root = _node_root("CollisionRoot")
@@ -69,21 +78,24 @@ func build_room() -> Dictionary:
 	var stamp := LoadTrace.begin()
 	if _layout.get("assembly") == "habitat_kit":
 		Habitat.build(self, _layout)
-	else:
+	elif _terrain.is_empty():
 		_build_floor_and_walls(contract)
 	LoadTrace.end("room_shell:" + room_id, stamp)
 	stamp = LoadTrace.begin()
 	Presentation.build(self, _layout, contract.get("pressure") == "vacuum")
+	if not _terrain.is_empty():
+		get_node("RoomLighting").free()  # the provider's dated Sun rig lights the terrain
 	_build_doors(contract)
 	_build_focus_targets(contract)
 	_build_pressure_markers(contract)
 	_build_anchors(contract)
+	_stand_on_terrain()
 	if _layout.get("assembly") == "habitat_kit":
 		for obstacle in _layout.obstacles:
 			Habitat.collider(collision_root, String(obstacle.id), Presentation.vector(obstacle.position), Presentation.vector(obstacle.size))
 	LoadTrace.end("room_fixtures_doors:" + room_id, stamp)
 	stamp = LoadTrace.begin()
-	if build_navigation:
+	if build_navigation and _terrain.is_empty():
 		if _layout.get("assembly") == "habitat_kit":
 			Habitat.navigation(navigation_root, _layout)
 		else:
@@ -111,6 +123,26 @@ func build_room() -> Dictionary:
 		"door_count": door_root.get_child_count(),
 		"anchor_count": anchor_root.get_child_count(),
 	}
+
+## True when the room stands on the terrain provider's ground (terrain_ground with a ready placement).
+func on_terrain() -> bool:
+	return not _terrain.is_empty()
+
+## The room-local crew and player anchors on the terrain ({} on the flat floor); CampaignCrew.place uses them.
+func terrain_anchors() -> Dictionary:
+	return _terrain.get("anchors", {}).duplicate(true)
+
+## Moves the built anchors, focus targets, fixtures and doors onto the published terrain positions (props are placed
+## as they load). Names and ids are unchanged.
+func _stand_on_terrain() -> void:
+	if _terrain.is_empty():
+		return
+	for pair in [[anchor_root, "anchors", ""], [focus_root, "focus_targets", "Focus_"], [visual_root, "fixtures", ""], [door_root, "doors", "Door_"]]:
+		var spots: Dictionary = _terrain.get(pair[1], {})
+		for id in spots:
+			var node := (pair[0] as Node3D).get_node_or_null(String(pair[2]) + String(id)) as Node3D
+			if node != null:
+				node.position = Presentation.vector(spots[id])
 
 ## Returns the authored focus anchors for the existing interaction dispatcher.
 func focus_targets() -> Array:
@@ -410,6 +442,8 @@ func _add_approved_asset(path: String, index: int, count: int, authored: Diction
 		# Later-chapter staging is still owned by its room/art tasks.
 		model.position = _asset_position(index, count)
 		model.scale = Vector3.ONE * 0.85
+	if _terrain.get("props", {}).has(asset_name):
+		model.position = Presentation.vector(_terrain.props[asset_name])
 	visual_root.add_child(model)
 	if _layout.get("assembly") != "habitat_kit":
 		ToonMaterialsScript.apply_to_tree(model, false, true)

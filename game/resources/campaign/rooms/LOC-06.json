@@ -204,6 +204,6 @@
   "ambient_energy": 0.0,
   "strip_color": "#ffffff"
  },
- "earth_visibility": "Not rendered: Aurora coordinate and terrain horizon remain unverified.",
+ "earth_visibility": "Flat greybox: not rendered. On the LOLA terrain (M1-82): RoomContract.earth, only for dated Horizons rows where Earth clears Aurora's terrain horizon.",
  "apron_rail_height_m": 0.9
 }

@@ -12,7 +12,7 @@ supersedes the older toon-room prompt: kit and equipment retain PBR materials;
 | LOC-02 | Two adjacent 6 × 5 m work bays plus a 3 m shared service aisle (12 × 8 m overall); glass divider/protected trunk, power west/air east; three kit corridor segments behind the Commons portal | `service_rooms.tscn` |
 | LOC-03 | 12 × 8 m; Tara reference bay, care bench/glovebox, seed archive; Alo cassette behind south pressure glazing (seedling in view at the glass front, chamber unit behind it, magenta-white growth lamps) and a separate shutter | `garden.tscn` |
 | LOC-04 | 8 × 6 m; five seats at 1.04 m pitch (≈1.5 m aisles at both ends), perimeter water panels, four indexed bundle rails, seed latch, roll-call board, hatch flush on the west wall | `safe_room.tscn` |
-| LOC-06 | Existing 120 × 120 m greybox retained; no LOLA/dated-horizon claim until M1-34/M1-36 | `exterior.tscn` |
+| LOC-06 | Existing 120 × 120 m greybox retained as the flat staging; on the LOLA terrain it stands at Aurora's site (exterior terrain below, M1-82) | `exterior.tscn` |
 
 All interiors use the kit's 2.6 m finished ceiling. `portals` replace three wall
 slots, with a genuine 1.2 × 2.1 m opening. `HabitatPressureDoor` mirrors
@@ -144,3 +144,47 @@ work anchor stands (S02–S04). There are no stand-in benches.
 Run `game/tools/run_tests.sh chapter6_rooms` / `chapter7_rooms` (mapping, rosters, stations, navigation, collision,
 resting props, readable signs and screens, every §2.9 join, echoes, re-staging back to Chapter 1, cast placement), and
 `production/qa/evidence/M3-6R_capture.sh` / `M3-7R_capture.sh` for the windowed screenshots and frame timings.
+
+# Exterior terrain (M1-82, for Atik's M1-36)
+
+`exterior_terrain.json` places each playable exterior on the real LOLA terrain (M1-34) for the terrain provider
+(`game/scripts/terrain/terrain_stream.gd`, Atik's). Authored per room: `region_id`, `origin_xz_m` (site frame),
+`ephemeris_site` (whose JPL Horizons rows give the Sun and Earth directions), `horizon_site` (whose computed terrain
+horizon holds where the room stands, or ""), `omit_staging_floor` and `placement` (why there). `game/tools/
+test_exterior_terrain.gd -- --write` derives the rest from the region's detail heightfield; every test run re-derives
+and compares, so a moved prop or a new heightfield fails until it is re-written.
+
+| Room | Region, origin | Why | Earth |
+|---|---|---|---|
+| LOC-06 mast courtyard | `aurora_ridge` at the Aurora site | the site of the Horizons rows and terrain horizon | dated rows where Earth clears the horizon |
+| LOC-09 surveyed ridge | `cold_trap` at the computed road's last bend (-620, -1000) | EX-CH04-S04's corner, 146 m above the basin | never: no horizon computed there |
+| LOC-10 vault approach | `cold_trap` at the cold-trap site | the PSR floor of the S05/S06 rows | its rows put Earth below the horizon |
+| LOC-11 relay route | `relay_road` at relay_road_mid, **pending** | the 80 m corridor is too coarse to walk; needs the 10 m patch | — |
+
+Frame: room-local = site frame - `origin_m`, same axes, no rotation. The campaign keeps the room at its origin, puts
+the stream at `-origin_m`, `configure(region_id, origin_m + player anchor, exclusions)` and `move_focus(player.position
++ origin_m)`. Published (room-local unless noted): `origin_m`, `anchors`, `focus_targets`, `focus_approaches` (1.5 m from
+each target, a straight lane from the player anchor), `detours` (one waypoint where a door or prop collider cuts the
+lane), `props`, `fixtures`, `doors` (resting at the lowest ground under the part that meets the ground: nothing floats;
+`bury_m`, `footprint_m`), `exclusions` (site frame, the provider's rock clear areas over every spot and lane),
+`max_walk_slope_deg` (at most 15 deg), `ground_y_range_m`.
+
+- `CampaignRoom.terrain_ground = true` (before the room enters the tree) is the explicit flag: with a placement that
+  sets `omit_staging_floor`, the room builds no staging floor, apron rails, flat navigation or greybox light rig, and
+  stands its anchors, focus targets, props, fixtures and doors on the published spots. Every id, door, pressure marker
+  and scene id is the same; `on_terrain()` reports it, `terrain_anchors()` gives the anchors, and `CampaignCrew.place`
+  uses them. Without the flag (or for LOC-11) the flat greybox is exactly as before.
+- `RoomContract.terrain(room_id)` returns the placement; `RoomContract.earth(room_id, scene_id)` the dated Earth:
+  `presented` only when the room stands at the row's site with a computed horizon, the scene has a bundled row
+  (`lola/sun_positions.json` `scene_lighting`) that puts Earth above the terrain horizon, and Earth is not over the Sun
+  (the EX-CH06-S07 eclipse is canon only through the filtered camera). It carries `direction`, `sun_direction`,
+  `angular_diameter_deg` (1.899: 2 atan(6,371 / 384,400 km)), `illuminated_fraction` and its source; otherwise a
+  `reason`. `EarthSky.apply(environment, spec, sun_energy)` (`game/assets/environment/terrain/earth_sky.gd`) draws it
+  in the sky pass of the provider's rig environment (`sky_env_earth.gdshader`), lit by the dated Sun, so the terrain
+  in front hides it; a hidden date leaves the black sky. LOC-06 shows Earth in EX-CH01-S01, EX-CH01-S12, EX-CH04-S02,
+  EX-CH04-S09 and EX-CH05-S01.
+
+Run `game/tools/run_tests.sh exterior_terrain` (placements against the heightfields, walkable lanes, rock clearance,
+the terrain-mode and flat rooms, a real player walking on the provider's collision to every approach and crew anchor,
+the Earth rules) and `production/qa/evidence/M1-82_capture.sh` (windowed wide and ground views on the terrain, and the
+rendered Earth's measured size).

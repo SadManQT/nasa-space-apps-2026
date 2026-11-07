@@ -31,6 +31,8 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choice
 	# The scene's anchors once per placement: the room's base anchors under its applied staging.
 	var anchors := Contract.anchors(room.room_id)
 	anchors.merge(room.stage().get("anchors", {}), true)
+	# On the terrain provider's ground the same anchors stand at the terrain height (RoomContract.terrain, M1-82).
+	anchors.merge(room.terrain_anchors(), true)
 	for body in bodies.values():
 		body.hide()
 		body.process_mode = Node.PROCESS_MODE_DISABLED

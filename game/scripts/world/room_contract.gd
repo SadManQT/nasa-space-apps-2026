@@ -421,6 +421,68 @@ static func validate(room_id: String) -> Dictionary:
 			errors.append(room_id + " must declare width and depth")
 	return {"valid": errors.is_empty(), "errors": errors}
 
+# ------------------------------------------------------------------------------------------- exterior terrain
+# M1-82: each playable exterior's placement on the real LOLA terrain (rooms/exterior_terrain.json) for the terrain
+# provider (Atik's TerrainStream, M1-36), and the dated Earth in its sky. The flat greybox rooms stay as they are.
+
+const TERRAIN_PATH := "res://resources/campaign/rooms/exterior_terrain.json"
+const Heightfield = preload("res://assets/environment/terrain/lola/terrain_heightfield.gd")
+## Earth seen from the Moon at the mean distance: 2 atan(6,371 km / 384,400 km) (NSSDCA fact sheets); 1.80 deg at
+## apogee to 2.07 deg at perigee. The bundled Horizons rows carry no range, so the mean is used.
+const EARTH_ANGULAR_DIAMETER_DEG := 1.899
+## The Sun's mean angular diameter (0.533 deg); Earth overlaps it when the centres are closer than the radii sum.
+const SUN_ANGULAR_DIAMETER_DEG := 0.533
+static var _terrain: Dictionary = {}
+
+## An exterior's terrain placement: region_id, origin_m (the room origin in the region's site frame; put the
+## TerrainStream at -origin_m), omit_staging_floor, ephemeris_site / horizon_site, and the derived room-local anchors,
+## focus_targets, focus_approaches, props, fixtures and doors on the ground, ground_y_range_m, and the site-frame
+## exclusions for TerrainStream.configure. {} for a room without a placement; "pending" says why one is not ready.
+static func terrain(room_id: String) -> Dictionary:
+	if _terrain.is_empty():
+		var parsed = JSON.parse_string(FileAccess.get_file_as_string(TERRAIN_PATH))
+		_terrain = parsed if parsed is Dictionary else {"rooms": {}}
+	return (_terrain.get("rooms", {}).get(room_id, {}) as Dictionary).duplicate(true)
+
+## The dated Earth for an exterior in one scene, from its bundled JPL Horizons row (lola/sun_positions.json
+## scene_lighting, M1-34). {"presented": true, "direction", "sun_direction" (unit vectors in the room / site frame),
+## "angular_diameter_deg", "earth_az_deg", "earth_el_deg", "utc", "site", "sun_earth_elongation_deg",
+## "illuminated_fraction", "source"} only when the room stands at the row's site with a computed terrain horizon and
+## the row says Earth clears it; an eclipse (Earth over the Sun) is canon only through the filtered camera. Otherwise
+## {"presented": false, "reason"}: never a generic Earth.
+static func earth(room_id: String, scene_id: String) -> Dictionary:
+	var place := terrain(room_id)
+	var row := Heightfield.scene_lighting(scene_id)
+	var result := {"presented": false, "room_id": room_id, "scene_id": scene_id}
+	if place.is_empty():
+		result.reason = "The room has no terrain placement."
+	elif row.is_empty():
+		result.reason = "No bundled Horizons row for this scene."
+	elif String(row.site) != String(place.get("ephemeris_site", "")):
+		result.reason = "The scene's row belongs to another site (%s)." % row.site
+	elif String(row.site) != String(place.get("horizon_site", "")):
+		result.reason = "No terrain horizon was computed where this room stands."
+	elif not bool(row.get("earth_above_terrain", false)):
+		result.reason = "Earth is below the local terrain horizon."
+	if result.has("reason"):
+		return result
+	var site: Dictionary = Heightfield.sun_table().sites[String(row.site)]
+	var to_earth := Heightfield.sun_direction_at(float(site.x_m), float(site.y_m), float(row.earth_az_deg), float(row.earth_el_deg))
+	var to_sun := Heightfield.sun_direction_at(float(site.x_m), float(site.y_m), float(row.sun_az_deg), float(row.sun_el_deg))
+	var elongation := rad_to_deg(to_earth.angle_to(to_sun))
+	if elongation < (EARTH_ANGULAR_DIAMETER_DEG + SUN_ANGULAR_DIAMETER_DEG) * 0.5:
+		result.reason = "Earth is in front of the Sun (an eclipse): shown only through the filtered camera."
+		return result
+	result.merge({
+		"presented": true, "site": String(row.site), "utc": String(row.utc),
+		"earth_az_deg": float(row.earth_az_deg), "earth_el_deg": float(row.earth_el_deg),
+		"angular_diameter_deg": EARTH_ANGULAR_DIAMETER_DEG,
+		"direction": [to_earth.x, to_earth.y, to_earth.z], "sun_direction": [to_sun.x, to_sun.y, to_sun.z],
+		"sun_earth_elongation_deg": elongation, "illuminated_fraction": (1.0 - cos(deg_to_rad(elongation))) * 0.5,
+		"source": "JPL Horizons DE441, %s %s UTC (sun_positions.json scene_lighting; terrain horizon from LOLA)" % [row.site, row.utc],
+	}, true)
+	return result
+
 # ------------------------------------------------------------------------------------------- chapter staging
 # A room JSON's optional "staging" array holds dated layers (doc 09 revisit rules: props accumulate between
 # chapters; only mission-specific controls change state). A layer, and any item inside it, is active from its
