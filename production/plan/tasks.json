@@ -657,7 +657,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M0-02"
@@ -674,7 +674,7 @@
    ],
    "note": "Ownership (MASTER_PLAN.md §7): the panel and puzzles/ are Ramim's; game/scripts/missions/p01_commission_plant.gd is Atik's - ask for rule changes there with a board task.\n7 Nov Atik/codex: prerequisite M1-66 delivered. Subscribe campaign.p01_panel_requested; read p01_view; preview via forecast_target and confirm explicit payload via perform_target. Exact version1 contract: production/qa/perf/M1-66.md. Independent review and full61/61 green. Please release/resume M1-08 and wire the owned panel; status/owner left to Ramim.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-08",
    "prompt": "Problem: puzzles are receipt gates: each step is a 'USE' button that submits the correct answer pre-filled.\nGoal: the player calibrates the moisture probe (zero at dry 10 -> 0, span at wet 110 -> 100) and plants with moisture in 40–60, choosing\nthe values themselves, with predict -> test -> observe -> explain feedback and a Data Card link (M0-15) when available.\nDo: implement the P-01 panel per execution/PUZZLE_P01.md and execution/UI_09_SCIENTIFIC_PUZZLE.md through the existing PuzzleHost; remove\nP-01's pre-filled payloads; wrong answers give a helpful, non-punishing hint (SYS_22); keyboard, mouse and controller; text scaling; no\ntimer pressure in Family mode. Numbers come from game-design/08_PUZZLE_DESIGNS.md only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
    "blocker": "Needs M1-66 (Atik): P-01 mission and route still auto-supply answers and lack authoritative chosen-value calibration/moisture validation and panel hooks. No UI-only bypass; analysis complete, no runtime edits.",
    "reserved_for": "ramim",
@@ -4870,8 +4870,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Goal card text for Chapters 2-8: an authored goal, why, prompt, result and hint for every job",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-54"
    ],
@@ -4886,7 +4886,7 @@
    ],
    "note": "Found by the M1-54 review (5 Nov 2026).",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-08",
    "prompt": "Problem: M1-54 gave every Chapter 1 job authored player text in game/resources/campaign/content/ui_text.json (targets.<target_id>: goal <= 8 words, why <= 12 words, prompt, result, hint). Jobs in Chapters 2-8 have none, so the goal card falls back to the job's focus label ('Do the next job: lock in reciprocal cycle one'), with no why line and no hint.\nDo: write targets entries for every Chapter 2-8 job (game/scripts/missions/extended_gate_catalog.gd and the chapter gate data list them) following doc 25 §1 (verb + thing + place; a why that names the stake; the §1.1 player words; numbers from 08_PUZZLE_DESIGNS.md; no future names before EX-CH05-S10). Extend game/tools/test_player_text.gd to walk Chapters 2-8 the same way it walks Chapter 1 and to fail when a job has no authored goal.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass, including test_player_text.gd over all eight chapters.\nKnown fallback problems (M1-54 review): Chapters 3-8 build job labels with action.capitalize() ('p 05 equip gauge'); Chapter 2 labels pass through the word table ('trial-prepare chart', 'Try it one'); both 'Run two' jobs read the same; _goal_for_flag shows raw flag names; ledger summaries put 'E 14; A 6' into Last result; the Z note and data-card formulas name '08_PUZZLE_DESIGNS'. Authored text removes the need for the fallback.",
    "reserved_for": "ramim",
    "effort": 2
@@ -5330,8 +5330,8 @@
    "priority": "P1",
    "tool": "any",
    "title": "Data cards: show a source's credit line (the LOLA terrain card first)",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/"
@@ -5339,7 +5339,7 @@
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-06.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-08",
    "prompt": "Why: M1-34 added a 'credit_line' field to game/resources/data/nasa/lro_lola_south_pole_terrain.json (the 'made from NASA data' credit for the terrain). The night-shift change to show it touched game/scripts/ui/campaign_panels.gd, which is your folder, so it was left out when M1-34 landed. Do: in _render_card(), after the Source block, show a 'Credit' block with card.credit_line when it is not empty, in the same player-words style as the other blocks ('Credit', not 'CREDIT'). Acceptance: the LOLA terrain data card shows its credit line; cards without one are unchanged; run_tests.sh passes; screenshot production/qa/evidence/<task id>_credit.png.",
    "reserved_for": "ramim",
    "effort": 2
@@ -5700,8 +5700,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Care Round photo and measurement panel for M1-49",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/"
@@ -5709,7 +5709,7 @@
    "refs": [],
    "note": "Filed by atik/codex on 2026-11-06.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-08",
    "prompt": "Ownership handoff from Atik M1-49, per MASTER_PLAN §7. Build the reusable 2D Care Round presentation from doc24 §7.2: paired Alo/Tara readings, observe/measure/photo/care/record sequence, previous-photo ghost, generous alignment, Family Mode snap, keyboard/controller confirm, no automatic gameplay mutation. Proposed presentation contract: open(view: Dictionary); signal action_requested(action: String, payload: Dictionary); render_result(result: Dictionary). View carries scene_id, date, plants (individual_id/name/stage/moisture/temperature/current_photo_path/previous_photo_path), allowed_actions and family_mode. Actions identify individual_id and selected values; photograph includes resulting local photo path only after a successful capture. Runtime will validate date, stage, calibration, action order and one photo per plant per day through existing PlantService/Director in Atik M1-49. Publish any contract adjustments in evidence before wiring; do not edit Atik campaign or routes. Accept screenshots for both plants with ghost, duplicate-date feedback and large text, existing runner green. This is the missing UI portion of M1-49, not a second plant simulation.",
    "reserved_for": "ramim",
    "effort": 2
@@ -5912,8 +5912,8 @@
    "priority": "P0",
    "tool": "any",
    "title": "Run complete Windows loading diagnostics for M1-68",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "production/qa/evidence/M1-68_windows/"
@@ -5921,7 +5921,7 @@
    "refs": [],
    "note": "Filed by atik/codex on 2026-11-07.",
    "evidence": "",
-   "updated": "2026-11-07",
+   "updated": "2026-11-08",
    "prompt": "M1-68 needs the originally failing Windows machine. Atik added opt-in full setup/suite log retention to game/tools/run_tests.sh and production/qa/perf/collect_loading.py, preserving every existing 50 ms assertion. After pulling Atik runtime work, run from the repository: python production/qa/perf/collect_loading.py --godot <absolute Godot4.7.2 console exe path> --output production/qa/evidence/M1-68_windows/<new dated directory> --hardware-note \"CPU/GPU/RAM and other workloads\". Requires Python3 and Git Bash. Default two sequential fresh processes, existing caches retained (not a cold-cache claim); script refuses existing output directories. Run with other Godot/render jobs stopped. Preserve manifest.json, runner.txt, setup.log and test_performance_runtime.gd.log for BOTH runs, including every failure beyond the first five and any startup139. Commit evidence under your account; do not alter timing thresholds, loader, assets or imports. If no Windows machine is available, record that explicitly. Atik will use exact timing/trace evidence to fix the responsible owned path; Apple M4 passes do not close the Windows issue.",
    "reserved_for": "ramim",
    "effort": 2
