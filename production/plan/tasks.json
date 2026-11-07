@@ -5654,16 +5654,16 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Record reviewed Ramim UI implementation and performance-blocked status in handbook",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "PRODUCTION_HANDBOOK.md"
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-06.",
-   "evidence": "",
-   "updated": "2026-11-06",
+   "evidence": "PRODUCTION_HANDBOOK.md §10, 7 Nov line: M1-19 debrief, M1-29 isolated P-02 trainer and M1-55 guided Mission Table implemented and reviewed at 66aed53, not marked done; run_tests.sh 53/54 with the only failure Atik's M1-68 test_performance_runtime (537 checks, 8 timing failures), quoted from production/qa/evidence/M1-55_test_results.txt; evidence M1-55_qa.md, M1-29_qa.md. No board status of M1-19/M1-29/M1-55 changed; no canon changed.",
+   "updated": "2026-11-07",
    "prompt": "Ramim owns UI and must not edit Sadman's PRODUCTION_HANDBOOK.md. Add a dated section10 status line for reviewed M1-19 debrief, M1-29 isolated P02 trainer and M1-55 shared guided Mission Table at source66aed53. These are delivered implementations, not completed board tasks: final game/tools/run_tests.sh ended53/54, solely Atik M1-68 performance_runtime537checks/8timingfailures. All UI/trainer/text/campaign/P02 suites pass. Source and screenshots are reviewed; exact evidence production/qa/evidence/M1-55_test_results.txt, M1-55_qa.md and M1-29_qa.md. Tara display is a clearly qualified current reference, not a numeric forecast. No paid generation, rule changes, imports or local editor changes were pushed. Acceptance: handbook accurately records implemented WIP and outstanding M1-68 gate without marking tasks done or changing canon; board check passes.",
    "reserved_for": "sadman",
    "effort": 1
@@ -5674,8 +5674,8 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Publish surveyed exterior staging and Earth presentation for M1-36",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/scripts/world/",
@@ -5685,7 +5685,7 @@
    "refs": [],
    "note": "Filed by atik/codex on 2026-11-06.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-07",
    "prompt": "M1-36 has an Atik-owned staged terrain provider at game/scripts/terrain/terrain_stream.gd (configure(region_id, local_start, exclusions); move_focus(local_position); lighting(scene_id)). It preserves all existing authored rooms. Current LOC-06 and later exterior stages use flat floors/anchors at Y=0, which cannot be silently overlaid with LOLA elevations without buried or floating props and changed pressure/navigation boundaries. Publish owner-approved region/site-frame placements for each playable exterior, reachable player/crew/focus/prop anchors and exclusions, plus an explicit way for the campaign to omit the staging floor when the terrain provider supplies ground. Preserve existing doors/targets/pressure locks and scene IDs. Supply dated, true-angular-size Earth presentation where the bundled Horizons row says Earth clears the terrain; do not invent a generic Earth on hidden dates. Verify existing staged areas remain playable; screenshots wide/ground for affected rooms. Coordinate the exact metadata/API in evidence so Atik can wire M1-36 through campaign/loading without editing your folders. Scope owns room/art integration only, not terrain_stream.gd. Do not mark M1-36 complete from a standalone terrain capture.",
    "reserved_for": "sadman",
    "effort": 3
@@ -5716,8 +5716,8 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Care Round room hooks and scene bridges for M1-49",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/scripts/world/",
@@ -5727,7 +5727,7 @@
    "refs": [],
    "note": "Filed by atik/codex on 2026-11-06.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-07",
    "prompt": "Ownership handoff from Atik M1-49 under MASTER_PLAN §7. Inspect current CH01-S02 inventory-lamp blink, S03 drawer opening, S04/S05 garden care locations and S12 four named mugs. Publish room/staging hooks allowing the campaign to trigger exactly one lamp blink, visit both real garden plant anchors during dated care, and name the existing mugs Kai/Amara/Mei/Rafi at S12. Preserve current authored rooms, doors and scene joins; reuse assets and approved lines. M1-51 is done, so confirm existing CS-01 has no duplicate dialogue and publish how L01/L02 arrival, L03 route preview and L04 before commit should be requested through the existing audio/dialogue interface; media edits remain yours. Provide exact hook names/anchor IDs in evidence and screenshots of blink/mugs. Atik will wire these into M1-49 and record CH01-MUGS-NAMED through the Director; do not edit Atik campaign/routes or invent canon.",
    "reserved_for": "sadman",
    "effort": 2
