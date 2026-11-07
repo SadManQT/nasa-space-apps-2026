@@ -67,6 +67,11 @@ func _run() -> void:
 		root.always_on_top = true
 		root.grab_focus()
 	_check_mapping()
+	if OS.get_cmdline_user_args().has("--shots-only"):
+		# M3-3R_capture.sh runs the checks headless first (the physics walks are slow in a window), then only the shots
+		await _capture_all()
+		await _finish()
+		return
 	await _check_annex_room()
 	var player := Player.instantiate() as PlayerController
 	player.character_glb = "res://assets/characters/CH_Kai/CH_Kai.glb"
@@ -88,6 +93,9 @@ func _run() -> void:
 	await _check_crew()
 	if capture:
 		await _capture_all()
+	await _finish()
+
+func _finish() -> void:
 	var line := "CHAPTER 3 ROOMS RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures]
 	print(line)
 	report.append(line)
@@ -467,6 +475,7 @@ func _check_bridges(room: CampaignRoom, scene_id: String) -> void:
 				_check(not _has_material(staged.get_node("descendant_rack"), "M_Rack_Soil") and staged.get_node("descendant_rack").find_children("*", "MeshInstance3D", true, false).size() > 12, scene_id + " the October rack: a few green stems among purple ones (CH03 -> CH04)")
 				_check(_text(staged, "survey_text").contains("NO DEPARTURE STAMP") and _text(staged, "survey_text").contains("RETURN RESERVE"), scene_id + " the map's preparation list on the survey board (CH03 -> CH04)")
 				_check(_text(staged, "care_ledger_text").contains("21 OCTOBER") and _text(staged, "care_ledger_text").contains("31 MAY"), scene_id + " the days between May and October are accounted for")
+				_check(_text(staged, "family_tree_text").contains("TWELVE GROWING") and _text(staged, "prediction_test").contains("IN OCTOBER"), scene_id + " the stem prediction stays attached to the October comparison while twelve descendants grow (canon)")
 				_check(staged.has_node("working_stock") and _text(staged, "tara_card_text").contains("Alo's thirty can stay sealed"), scene_id + " Tara's working stock, sealed with no count, and Mei's card (approved 5 Nov 2026)")
 				var tara := (staged.get_node("tara_nameplate") as Node3D).position
 				var petal := (staged.get_node("alo_petal") as Node3D).position
@@ -773,6 +782,8 @@ func _bounds(room: CampaignRoom, node: Node) -> AABB:
 	for mesh in meshes:
 		if (mesh as GeometryInstance3D).visibility_range_begin > 0.0 or not mesh.is_visible_in_tree() or mesh.name == "Edge":
 			continue
+		if mesh.get_viewport() != room.get_viewport():
+			continue  # a plant_photo print's subject lives in the print's own SubViewport world, not in the room
 		var local: AABB = room.global_transform.affine_inverse() * mesh.global_transform * mesh.get_aabb()
 		box = local if first else box.merge(local)
 		first = false

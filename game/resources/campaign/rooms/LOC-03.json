@@ -1000,7 +1000,7 @@
     },
     {
      "id": "moisture_text",
-     "text": "MOISTURE PROFILE\n70 TODAY  -  20 ON 21 MAY\nOPEN THE PODS AFTER THE FINAL CHECK",
+     "text": "MOISTURE PROFILE\n70 TODAY  -  20 ON 21 MAY\nOPEN THE PODS\nAFTER THE FINAL CHECK",
      "position": [
       -0.25,
       0.912,
@@ -1182,8 +1182,8 @@
     "s09_bench": {
      "from": [
       0.15,
-      1.6,
-      1.85
+      1.45,
+      2.05
      ],
      "to": [
       0.15,
@@ -1235,24 +1235,6 @@
    "until": "EX-CH03-S11",
    "moment": "CH03-ALO-VIGIL-1",
    "about": "Doc 24 7.3 beat 4: vigil visit 1, 17 May - one photo in the same frame, pinned on the cassette side.",
-   "fixtures": [
-    {
-     "id": "vigil_photo_1",
-     "position": [
-      1.215,
-      1.38,
-      2.84
-     ],
-     "size": [
-      0.01,
-      0.1,
-      0.1
-     ],
-     "color": "#9a9a62",
-     "transparent": false,
-     "finish": "satin"
-    }
-   ],
    "signs": [
     {
      "id": "vigil_date_1",
@@ -1267,6 +1249,24 @@
      "color": "#1F2A44",
      "outline": 0
     }
+   ],
+   "prints": [
+    {
+     "id": "vigil_photo_1",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Alo_Senescent/PL_Alo_Senescent.glb",
+     "position": [
+      1.212,
+      1.38,
+      2.84
+     ],
+     "size": [
+      0.1,
+      0.1
+     ],
+     "border": 0.006,
+     "yaw": -90
+    }
    ]
   },
   {
@@ -1275,24 +1275,6 @@
    "until": "EX-CH03-S11",
    "moment": "CH03-ALO-VIGIL-2",
    "about": "Doc 24 7.3 beat 4: vigil visit 2, 18 May - one photo in the same frame, pinned on the cassette side.",
-   "fixtures": [
-    {
-     "id": "vigil_photo_2",
-     "position": [
-      1.215,
-      1.38,
-      2.9699999999999998
-     ],
-     "size": [
-      0.01,
-      0.1,
-      0.1
-     ],
-     "color": "#9a9a62",
-     "transparent": false,
-     "finish": "satin"
-    }
-   ],
    "signs": [
     {
      "id": "vigil_date_2",
@@ -1307,6 +1289,24 @@
      "color": "#1F2A44",
      "outline": 0
     }
+   ],
+   "prints": [
+    {
+     "id": "vigil_photo_2",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Alo_Senescent/PL_Alo_Senescent.glb",
+     "position": [
+      1.212,
+      1.38,
+      2.97
+     ],
+     "size": [
+      0.1,
+      0.1
+     ],
+     "border": 0.006,
+     "yaw": -90
+    }
    ]
   },
   {
@@ -1315,24 +1315,6 @@
    "until": "EX-CH03-S11",
    "moment": "CH03-ALO-VIGIL-3",
    "about": "Doc 24 7.3 beat 4: vigil visit 3, 19 May - one photo in the same frame, pinned on the cassette side.",
-   "fixtures": [
-    {
-     "id": "vigil_photo_3",
-     "position": [
-      1.215,
-      1.38,
-      3.0999999999999996
-     ],
-     "size": [
-      0.01,
-      0.1,
-      0.1
-     ],
-     "color": "#9a9a62",
-     "transparent": false,
-     "finish": "satin"
-    }
-   ],
    "signs": [
     {
      "id": "vigil_date_3",
@@ -1347,6 +1329,24 @@
      "color": "#1F2A44",
      "outline": 0
     }
+   ],
+   "prints": [
+    {
+     "id": "vigil_photo_3",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Alo_Dry/PL_Alo_Dry.glb",
+     "position": [
+      1.212,
+      1.38,
+      3.1
+     ],
+     "size": [
+      0.1,
+      0.1
+     ],
+     "border": 0.006,
+     "yaw": -90
+    }
    ]
   },
   {
@@ -1355,24 +1355,6 @@
    "until": "EX-CH03-S11",
    "moment": "CH03-ALO-VIGIL-4",
    "about": "Doc 24 7.3 beat 4: vigil visit 4, 20 May - one photo in the same frame, pinned on the cassette side. Kai leaves Mei's mug of tea on the bench and goes without speaking.",
-   "fixtures": [
-    {
-     "id": "vigil_photo_4",
-     "position": [
-      1.215,
-      1.38,
-      3.23
-     ],
-     "size": [
-      0.01,
-      0.1,
-      0.1
-     ],
-     "color": "#9a9a62",
-     "transparent": false,
-     "finish": "satin"
-    }
-   ],
    "signs": [
     {
      "id": "vigil_date_4",
@@ -1409,6 +1391,24 @@
      ],
      "until": "EX-CH03-S10"
     }
+   ],
+   "prints": [
+    {
+     "id": "vigil_photo_4",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Alo_Dry/PL_Alo_Dry.glb",
+     "position": [
+      1.212,
+      1.38,
+      3.23
+     ],
+     "size": [
+      0.1,
+      0.1
+     ],
+     "border": 0.006,
+     "yaw": -90
+    }
    ]
   },
   {
@@ -1417,24 +1417,6 @@
    "until": "EX-CH03-S11",
    "moment": "CH03-ALO-VIGIL-5",
    "about": "Doc 24 7.3 beat 4: vigil visit 5, 21 May - one photo in the same frame, pinned on the cassette side.",
-   "fixtures": [
-    {
-     "id": "vigil_photo_5",
-     "position": [
-      1.215,
-      1.38,
-      3.36
-     ],
-     "size": [
-      0.01,
-      0.1,
-      0.1
-     ],
-     "color": "#9a9a62",
-     "transparent": false,
-     "finish": "satin"
-    }
-   ],
    "signs": [
     {
      "id": "vigil_date_5",
@@ -1448,6 +1430,24 @@
      "size": 0.0005,
      "color": "#1F2A44",
      "outline": 0
+    }
+   ],
+   "prints": [
+    {
+     "id": "vigil_photo_5",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Alo_Dry/PL_Alo_Dry.glb",
+     "position": [
+      1.212,
+      1.38,
+      3.36
+     ],
+     "size": [
+      0.1,
+      0.1
+     ],
+     "border": 0.006,
+     "yaw": -90
     }
    ]
   },
@@ -1497,7 +1497,7 @@
    "signs": [
     {
      "id": "d2_record_text",
-     "text": "GROWTH RECORD  -  PAIRED PHOTOGRAPHS\n12 APR SEED LEAVES  /  TODAY",
+     "text": "GROWTH RECORD\nPAIRED PHOTOGRAPHS\n12 APR SEED LEAVES  /  TODAY",
      "position": [
       0.12,
       0.912,
@@ -1512,7 +1512,7 @@
     },
     {
      "id": "d2_record_tara_text",
-     "text": "GROWTH RECORD  -  PAIRED PHOTOGRAPHS\nTARA: 12 APR SEED LEAVES  /  31 MAY DRY PODS",
+     "text": "GROWTH RECORD\nPAIRED PHOTOGRAPHS\nTARA: 12 APR SEED LEAVES\n31 MAY DRY PODS",
      "position": [
       -3.75,
       0.812,
@@ -1573,7 +1573,7 @@
    "signs": [
     {
      "id": "d2_record_text",
-     "text": "GROWTH RECORD  -  PAIRED CONDITIONS\nALO OUTER CHAMBER  /  TARA INDOOR BAY",
+     "text": "GROWTH RECORD\nPAIRED CONDITIONS\nALO OUTER CHAMBER\nTARA INDOOR BAY",
      "position": [
       0.12,
       0.912,
@@ -1588,7 +1588,7 @@
     },
     {
      "id": "d2_record_tara_text",
-     "text": "GROWTH RECORD  -  PAIRED CONDITIONS\nTARA FINISHED LATER: THE COOLER INDOOR BAY",
+     "text": "GROWTH RECORD\nPAIRED CONDITIONS\nTARA FINISHED LATER:\nTHE COOLER INDOOR BAY",
      "position": [
       -3.75,
       0.812,
@@ -1950,25 +1950,6 @@
      "from": "EX-CH03-S12"
     }
    ],
-   "fixtures": [
-    {
-     "id": "first_lineage_photo",
-     "position": [
-      0.6,
-      1.72,
-      -3.8205
-     ],
-     "size": [
-      0.2,
-      0.15,
-      0.005
-     ],
-     "color": "#9db37a",
-     "transparent": false,
-     "finish": "satin",
-     "from": "EX-CH03-S12"
-    }
-   ],
    "signs": [
     {
      "id": "alo_record",
@@ -2021,7 +2002,7 @@
       -3.82
      ],
      "yaw": 0,
-     "size": 0.00032,
+     "size": 0.00045,
      "color": "#e9eef5",
      "outline": 0,
      "from": "EX-CH03-S12"
@@ -2035,7 +2016,7 @@
       -3.82
      ],
      "yaw": 0,
-     "size": 0.0003,
+     "size": 0.00045,
      "color": "#e9eef5",
      "outline": 0
     },
@@ -2048,7 +2029,7 @@
       -3.82
      ],
      "yaw": 0,
-     "size": 0.0003,
+     "size": 0.00045,
      "color": "#e9eef5",
      "outline": 0,
      "from": "EX-CH03-S11"
@@ -2062,7 +2043,7 @@
       -3.82
      ],
      "yaw": 0,
-     "size": 0.0003,
+     "size": 0.00045,
      "color": "#e9eef5",
      "outline": 0,
      "from": "EX-CH03-S12"
@@ -2072,16 +2053,34 @@
     "lineage_board": {
      "from": [
       0.3,
-      1.62,
-      -2.55
+      1.6,
+      -2.95
      ],
      "to": [
       0.3,
-      1.6,
+      1.58,
       -3.9
      ]
     }
-   }
+   },
+   "prints": [
+    {
+     "id": "first_lineage_photo",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Descendants/PL_Descendants.glb",
+     "position": [
+      0.6,
+      1.72,
+      -3.8205
+     ],
+     "size": [
+      0.2,
+      0.15
+     ],
+     "border": 0.006,
+     "from": "EX-CH03-S12"
+    }
+   ]
   },
   {
    "id": "ch03_lineage_station",
@@ -2159,13 +2158,13 @@
     {
      "id": "care_ledger",
      "position": [
-      -1.33,
+      5.0,
       1.55,
       -3.96
      ],
      "size": [
-      1.1,
       0.95,
+      0.9,
       0.05
      ],
      "color": "#ECEEF0",
@@ -2224,12 +2223,12 @@
      "id": "care_ledger_text",
      "text": "MAY TO OCTOBER  -  THE DAYS IN BETWEEN\n31 MAY  TARA HARVESTED, WORKING STOCK SEALED\nJUNE  FIRST DESCENDANT FLOWERS, BRUSHES A AND B\nJULY  SCHEDULED RESUPPLY UNPACKED\nAUGUST  AMARA READS THE GAUGE WITH KAI\nSEPTEMBER  NEXT SEEDS TO THE WORKING STOCK\n21 OCTOBER  TWELVE CURRENT DESCENDANTS",
      "position": [
-      -1.33,
+      5.0,
       1.55,
       -3.932
      ],
      "yaw": 0,
-     "size": 0.00068,
+     "size": 0.00064,
      "color": "#1F2A44",
      "outline": 0
     },
@@ -2266,12 +2265,12 @@
      "label": "Care and maintenance ledger",
      "verb": "Inspect",
      "position": [
-      -1.33,
+      5.0,
       1.55,
       -3.7
      ],
      "approach_m": [
-      -1.33,
+      5.0,
       0,
       -2.9
      ],
@@ -2350,12 +2349,12 @@
     },
     "s12_ledger": {
      "from": [
-      -1.33,
+      5.0,
       1.6,
-      -2.35
+      -2.45
      ],
      "to": [
-      -1.33,
+      5.0,
       1.55,
       -3.95
      ]
@@ -2379,24 +2378,6 @@
    "from": "EX-CH03-S12",
    "moment": "CH03-TARA-FAREWELL",
    "about": "Doc 24 5.2 moment CH03-TARA-FAREWELL: Tara's last photograph in her own frame, pinned beside her nameplate.",
-   "fixtures": [
-    {
-     "id": "tara_last_photo",
-     "position": [
-      0.85,
-      1.72,
-      -3.8205
-     ],
-     "size": [
-      0.15,
-      0.12,
-      0.005
-     ],
-     "color": "#a8b98a",
-     "transparent": false,
-     "finish": "satin"
-    }
-   ],
    "signs": [
     {
      "id": "tara_last_photo_caption",
@@ -2407,9 +2388,26 @@
       -3.82
      ],
      "yaw": 0,
-     "size": 0.00032,
+     "size": 0.00045,
      "color": "#e9eef5",
      "outline": 0
+    }
+   ],
+   "prints": [
+    {
+     "id": "tara_last_photo",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Tara_Dry/PL_Tara_Dry.glb",
+     "position": [
+      0.85,
+      1.72,
+      -3.8205
+     ],
+     "size": [
+      0.15,
+      0.12
+     ],
+     "border": 0.006
     }
    ]
   },
@@ -3378,7 +3376,12 @@
      "size": 0.0003,
      "color": "#1b2433",
      "outline": 0,
-     "wrap_m": 0.4
+     "wrap_m": 0.4,
+     "by_scene": {
+      "EX-CH03-S12": {
+       "text": "TEST: COMPARE DESCENDANT STEMS IN OCTOBER\nOBSERVED: EMPTY UNTIL THEN"
+      }
+     }
     },
     {
      "id": "family_tree_text",
@@ -3391,7 +3394,12 @@
      "size": 0.00032,
      "color": "#1b2433",
      "outline": 0,
-     "wrap_m": 0.36
+     "wrap_m": 0.36,
+     "by_scene": {
+      "EX-CH03-S12": {
+       "text": "FAMILY TREE\nALO (PURPLE STEM) × TARA (GREEN STEM)\nDESCENDANTS: TWELVE GROWING"
+      }
+     }
     }
    ],
    "focus_targets": [

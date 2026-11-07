@@ -1478,9 +1478,9 @@
        1.75
       ],
       "service_rafi": [
-       4.0,
+       5.35,
        0,
-       2.6
+       2.85
       ],
       "service_mei": [
        1.0,
@@ -1670,13 +1670,13 @@
     "ch03_repair": {
      "from": [
       -2.2,
-      1.45,
-      -2.45
+      1.2,
+      -3.0
      ],
      "to": [
       -2.2,
-      0.95,
-      -3.95
+      0.86,
+      -3.96
      ]
     },
     "ch03_earth": {
@@ -1741,8 +1741,8 @@
      "path": "res://assets/props/PR_RepairClamp/PR_RepairClamp.glb",
      "position": [
       3.5,
-      1.25,
-      -1.3923
+      0.84,
+      -1.355
      ],
      "rotation_degrees": [
       0,
@@ -3750,7 +3750,7 @@
    "id": "ch03_join_pressure_warning",
    "from": "EX-CH03-S01",
    "until": "EX-CH03-S05",
-   "about": "Doc 24 section 2.9 CH02 -> CH03: no time jump; the same red pressure warning the Commons atmosphere panel showed at 22:00 (same rows, the oxygen-tank symbol red) is on the air console's status screen at 22:05 ('The oxygen-tank symbol is red', EX-CH03-S01). It stays on the status screen until the repair is verified: TANK PRESSURE returns to OK with the five checks (EX-CH03-S05, M3-3R).",
+   "about": "Doc 24 section 2.9 CH02 -> CH03: no time jump; the same red pressure warning the Commons atmosphere panel showed at 22:00 (same rows, the oxygen-tank symbol red) is on the air console's status screen at 22:05 ('The oxygen-tank symbol is red', EX-CH03-S01). It stays on the status screen until the repair is verified: TANK PRESSURE returns to OK with the five checks (EX-CH03-S05, M3-3R). It stays on the status screen until the repair is verified: TANK PRESSURE returns to OK with the five checks (EX-CH03-S05, M3-3R).",
    "fixtures": [
     {
      "id": "air_warning_panel",

@@ -217,9 +217,16 @@ func _check_staged_objects(room: CampaignRoom, layout: Dictionary, scene_id: Str
 		var wall := absf(box.end.z - half.y) < 0.12 or absf(box.position.z + half.y) < 0.12 or absf(box.end.x - half.x) < 0.12 or absf(box.position.x + half.x) < 0.12
 		var centre := box.get_center()
 		for surface in surfaces:
-			if surface == box or surface.end.y > base + 0.03 or surface.end.y < base - 0.04:
+			if surface == box:
 				continue
-			if centre.x >= surface.position.x and centre.x <= surface.end.x and centre.z >= surface.position.z and centre.z <= surface.end.z:
+			if surface.end.y <= base + 0.03 and surface.end.y >= base - 0.04 and centre.x >= surface.position.x and centre.x <= surface.end.x and centre.z >= surface.position.z and centre.z <= surface.end.z:
+				supported = true
+			# a plate, card or clip mounted flush on a panel's face (the Chapter 3 lineage board's petal and nameplates,
+			# which stay; the same rule as test_chapter7_rooms.gd)
+			var overlaps_y := box.position.y < surface.end.y and box.end.y > surface.position.y
+			var flush_z := (absf(box.position.z - surface.end.z) < 0.01 or absf(box.end.z - surface.position.z) < 0.01) and box.position.x < surface.end.x and box.end.x > surface.position.x
+			var flush_x := (absf(box.position.x - surface.end.x) < 0.01 or absf(box.end.x - surface.position.x) < 0.01) and box.position.z < surface.end.z and box.end.z > surface.position.z
+			if overlaps_y and (flush_z or flush_x) and box.size.y < surface.size.y:
 				supported = true
 		_check((supported or wall) and base > -0.03, scene_id + " staged object rests on the deck, a wall or a surface (base %.3f m): %s" % [base, id])
 		if absf(base) < 0.03 and box.size.y >= 0.5:
@@ -557,8 +564,8 @@ func _bounds(room: CampaignRoom, node: Node) -> AABB:
 	if node is MeshInstance3D:
 		meshes.append(node)
 	for mesh in meshes:
-		if (mesh as GeometryInstance3D).visibility_range_begin > 0.0 or not mesh.is_visible_in_tree() or mesh.name == "Edge":
-			continue
+		if (mesh as GeometryInstance3D).visibility_range_begin > 0.0 or not mesh.is_visible_in_tree() or mesh.name == "Edge" or mesh.get_viewport() != room.get_viewport():
+			continue  # a plant_photo print's subject lives in the print's own SubViewport world, not in the room
 		var local: AABB = room.global_transform.affine_inverse() * mesh.global_transform * mesh.get_aabb()
 		box = local if first else box.merge(local)
 		first = false
