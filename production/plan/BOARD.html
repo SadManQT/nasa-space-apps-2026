@@ -100,7 +100,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M2-04">M2-04</a> Record gameplay captures and narration for the videos <span class="chip ">human</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M2-05">M2-05</a> Edit Video 2 (≤240 s) with burned-in English subtitles <span class="chip ">claude</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M2-06">M2-06</a> Upload Video 2 by 13 Nov 18:30 <span class="chip ">human</span> <span class="chip ">P0</span></li>
-<li><a class="id" href="#M2-07">M2-07</a> Video 3 (30 s global) with English subtitles <span class="chip ">claude</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M2-07">M2-07</a> Video 3: a 30 s cinematic promo of the finished game, with English subtitles <span class="chip ">claude</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M2-08">M2-08</a> Upload Video 3 by 14 Nov 09:00 <span class="chip ">human</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M2-10">M2-10</a> Fill in and submit the NASA project page <span class="chip ">human</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M2-11">M2-11</a> 12 Nov offline dry run and fallback video <span class="chip ">claude</span> <span class="chip ">P0</span></li>
@@ -1845,9 +1845,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/video/captures.md"
    ],
    "refs": [],
-   "note": "",
+   "note": "Sadman, 7 Nov 2026: make the videos only after the game is finished (all chapters at the highest quality, before 12 Nov); Video 3 becomes a 30 s cinematic promo cut from the finished game, in the style of a big-budget game trailer: the graphics and scenes, real missions and physics, the story, why it trains junior astronauts, and the NASA data records, all shown in play. Do not record captures or narration before then.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-07",
    "prompt": "From the frozen demo build (M1-24), capture each shot in production/video/V2_script.md at 1080p60 with OBS (no system notifications, no\npersonal desktop), plus the narration (adult voice). Put raw files in the team Drive and list them in production/video/captures.md.",
    "reserved_for": "sadman",
    "effort": 2
@@ -1867,9 +1867,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/video/"
    ],
    "refs": [],
-   "note": "",
+   "note": "Sadman, 7 Nov 2026: make the videos only after the game is finished (all chapters at the highest quality, before 12 Nov); Video 3 becomes a 30 s cinematic promo cut from the finished game, in the style of a big-budget game trailer: the graphics and scenes, real missions and physics, the story, why it trains junior astronauts, and the NASA data records, all shown in play. Do not record captures or narration before then.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-07",
    "prompt": "Cut the captures to the script with ffmpeg (or Remotion if installed), music from our own cues, burned-in subtitles plus a separate .srt,\na credits card naming every tool and generated asset source. Check: duration < 240 s, every member named on screen, NASA datasets named\naloud and on screen. Output production/video/V2_local_judging.mp4 (gitignored if >100 MB; store in Drive).",
    "reserved_for": "sadman",
    "effort": 3
@@ -1899,7 +1899,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "milestone": "M2",
    "priority": "P0",
    "tool": "claude",
-   "title": "Video 3 (30 s global) with English subtitles",
+   "title": "Video 3: a 30 s cinematic promo of the finished game, with English subtitles",
    "status": "todo",
    "owner": "",
    "deps": [
@@ -1909,9 +1909,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/video/"
    ],
    "refs": [],
-   "note": "",
+   "note": "Sadman, 7 Nov 2026: make the videos only after the game is finished (all chapters at the highest quality, before 12 Nov); Video 3 becomes a 30 s cinematic promo cut from the finished game, in the style of a big-budget game trailer: the graphics and scenes, real missions and physics, the story, why it trains junior astronauts, and the NASA data records, all shown in play. Do not record captures or narration before then.",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-07",
    "prompt": "Under 30 s: team name, every member named, problem and challenge, the game working, NASA data named; English subtitles required. Script\nthe 30 s beat sheet in production/video/V3_script.md, cut from the same captures, export V3_global.mp4 + .srt.",
    "reserved_for": "sadman",
    "effort": 2
