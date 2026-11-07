@@ -12,6 +12,7 @@ supersedes the older toon-room prompt: kit and equipment retain PBR materials;
 | LOC-02 | Two adjacent 6 × 5 m work bays plus a 3 m shared service aisle (12 × 8 m overall); glass divider/protected trunk, power west/air east; three kit corridor segments behind the Commons portal | `service_rooms.tscn` |
 | LOC-03 | 12 × 8 m; Tara reference bay, care bench/glovebox, seed archive; Alo cassette behind south pressure glazing (seedling in view at the glass front, chamber unit behind it, magenta-white growth lamps) and a separate shutter | `garden.tscn` |
 | LOC-04 | 8 × 6 m; five seats at 1.04 m pitch (≈1.5 m aisles at both ends), perimeter water panels, four indexed bundle rails, seed latch, roll-call board, hatch flush on the west wall | `safe_room.tscn` |
+| LOC-05 | 8 × 4 m approved M3-2A double interlock; suit-up vestibule, isolated cycle chamber, glove-port access to Alo and sealed sample pass-through to Tara | `airlock.tscn` (M3-2R) |
 | LOC-06 | Existing 120 × 120 m greybox retained as the flat staging; on the LOLA terrain it stands at Aurora's site (exterior terrain below, M1-82) | `exterior.tscn` |
 
 All interiors use the kit's 2.6 m finished ceiling. `portals` replace three wall
@@ -77,7 +78,10 @@ Presentation only; the campaign owns when each is called and records every recei
   four Chapter 1 mugs for M3-99 `PR_Mug_Named` at the same spots (`commons_mug_kai`, `_amara`, `_mei`, `_rafi`; names
   facing the commons). Pass `story_log.moments` with `CampaignRoom.set_story_choices(choices, moments)` or
   `CampaignCrew.place(scene, room, at, choices, moments)`: recording the moment re-stages the room in place. Any layer
-  may carry `"moment"`; staging props may carry `"variant"` (an M3-99 narrative prop variant).
+  may carry `"moment"` (shown only once it is recorded) or `"unless_moment"` (shown only while it is not); staging
+  props may carry `"variant"` (an M3-99 narrative prop variant). In EX-CH02-S11..S12 the cup by the pending-reply
+  indicator is Amara's named mug moved there (`by_scene` in this layer), or the nameless mug (`ch02_reply_cup`,
+  `"unless_moment"`), never both.
 
 Run `game/tools/run_tests.sh ch01_room_hooks`; `production/qa/evidence/M1-84_capture.sh` (windowed) re-takes the blink,
 mug and Care Round frames.
@@ -112,7 +116,9 @@ Doc 09's revisit rule applies: props accumulate between chapters; only mission-s
   `logged`), `chapter7_props` (M3-7A props through `chapter7_assets.gd`, added by M3-7R: `markers` role -> slot with
   each name beside its marker, `case` lid/latch, `water_units`, `selector`, `lamps`, `isolated`, `card_out`, `pins`,
   `attach` (a GLB seated in one of its sockets) and `screens`, plain words on a `Screen_*` slot; `line` quotes a catalog
-  line), `prints` (`solar_image`, `eclipse_frame`), `local_lights`, `obstacles` (collision and the rebuilt
+  line), `prints` (`solar_image`, `eclipse_frame`; M3-2R adds `plant_photo`, image `texture` and labelled
+  `flower_diagram`, with `pitch`, `roll`, photographic `border` and optional `caption`), `models` (the nonliving
+  mustard-flower practice model: four petals, four long and two short stamens), `local_lights`, `obstacles` (collision and the rebuilt
   navigation map), `focus_targets` (stations).
 - Changes: `hide` (base node ids, including their obstacles), `hide_signs` (base sign texts),
   `focus_labels`, `anchors` (merged by key; later layers win), `lighting` (`practical_scale`,
@@ -144,6 +150,54 @@ work anchor stands (S02–S04). There are no stand-in benches.
 Run `game/tools/run_tests.sh chapter6_rooms` / `chapter7_rooms` (mapping, rosters, stations, navigation, collision,
 resting props, readable signs and screens, every §2.9 join, echoes, re-staging back to Chapter 1, cast placement), and
 `production/qa/evidence/M3-6R_capture.sh` / `M3-7R_capture.sh` for the windowed screenshots and frame timings.
+
+# Chapter 2 rooms (M3-2R)
+
+The explicit CH02 scene map already used by the mission gates is retained:
+
+| Scenes | Room | Physical story carriers |
+|---|---|---|
+| S01–S02, S06 | LOC-03 | Earth console beside Tara (contact returns 30 Apr), equal-size paired flower portraits and identity records; cross-pollination protocol, labelled brushes, magnifier, nonliving practice flower and paper bee; seven-date care strip with three bee stamps (one crooked), prediction threaded to the family-tree page, clean seed tray |
+| S03–S05 | LOC-05 | Approved airlock kit and its running pressure interlock; Alo behind sealed glove-port glazing, sealed carrier pass-through, sample bench and microscope, separate brush directions; real out-and-back route with four boundaries beside Kai's incomplete sketch, space-weather check reminder, paired care record and saved contact image |
+| S07 | LOC-01 | Life-cycle cards distinguish current flower, old unflowered seedlings and a reference drawing of later pods; clean tray beside the care strip, paper bee's wing at the recorder's HORT-01 label. The mission-table top is a ring (r 0.42–0.86 m) round a recessed display, so the record sits on the near side, the strip and tray on the far side and the recorder on the display |
+| S08–S10 | LOC-02 | Recorder service bench, original plate beneath the service sticker, three sourced metadata cards, Observed / Inferred / Unknown board with the person's space blank; reconstruction slots, dated playback and both 2034 transcripts loaded word for word from the catalog |
+| S11–S12 | LOC-01 | Sent/receipt/reply columns kept separate; cup by the pending indicator (rattles in S12); marked brace zone with four name tokens, moved service cover; on the atmosphere panel the tank row turns red in S12 (the oxygen-tank symbol and TANK PRESSURE · WARNING) |
+| CH03 S01 | LOC-02 | Same red pressure warning at 22:05 on the air console's status screen, standing on PR_OxygenUnit: the S12 panel's rows word for word, the oxygen-tank symbol red; recorder and evidence board remain through the same night's work (S05) |
+
+The LOC-05 shell reuses `en_airlock.gd` from M3-2A, turned half a revolution about the room centre
+(`"shell_yaw_deg": 180` in `LOC-05.json`, applied by `HabitatRoomBuilder.build_airlock`): the garden wall with the
+glove ports, pass-through and sample bench is the north wall, the inner door to the Commons the east wall and the
+surface hatch the west wall, so every station is approached from +Z like the other rooms' equipment walls (the
+campaign flow test reaches each station from 1 m on +Z). Its hatches, lids, panels and pump retain that service's rules;
+floor/ceiling tiles are batched, room practicals replace its standalone lighting, and the Commons portal uses the
+existing pressure-door and corridor builder. Samples cross the garden interface; people stay on the vestibule side.
+Collision, navigation clearance, furniture footprints and crew positions are authored in `LOC-05.json`. Alo stands on
+a 0.2 m stand at the back of the sealed chamber so her flowers sit in the pressure window's sightline. The
+`EN_Airlock_GlovePort` GLB closes its back with a grey plate behind the window, so the room builder drops that plate
+from its placed copy (`HabitatRoomBuilder.open_window_back`) until M3-104 fixes the asset build.
+Chapter 1, 6 and 7 layers and the Chapter 1 base layouts are preserved; returning to Chapter 1 removes the Chapter 2
+staging. Three campaign-side steps are Atik's (board task M3-103): `LoadPreparation` registering `airlock.tscn` for
+LOC-05 (until then the campaign builds LOC-05 as a bare `CampaignRoom` from `LOC-05.json`, so the kit and airlock
+GLBs load on the main thread instead of with the loading card), the `door_commons_airlock` boundary in
+`RouteNavigation` (until then that door reads closed; `WorldRoute.restore` already gives older checkpoints its
+default once it exists), and `Chapter1Campaign` passing `story_log.choices` to `CampaignCrew.place` and binding
+mission targets to the room's `stations` (until then D4's prediction and D5's inference card show only where the
+caller passes the choices, as `test_chapter2_rooms.gd` does).
+
+`test_chapter2_rooms.gd` checks all twelve scenes in their room state, physical traversal, interaction sightlines,
+navigation, prop support, sign orientation, crew placement, echoes and the CH02 → CH03 join. Crew anchors keep 0.8 m
+from every station approach the scene uses and 0.4 m from its line to the station (crew bodies block the player and
+the interaction ray), except the brace zone where all four stand. Anything resting on furniture is ray-tested against
+the visible meshes over its whole footprint, not the square collision boxes, and a 1.6 m eye at the glove-port
+station must see Alo's flowers through glass only. The S12 panel and the CH03-S01 screen must show the same rows with
+the tank symbol red on both, and the S11–S12 cup is one of the table's four mugs with or without the named mugs.
+
+`production/qa/evidence/M3-2R_capture.sh` writes the 25 screenshots and four frame-time probes; the `--capture` pass
+only renders (the checks stay headless). Its watchdog starts when Godot starts, not while it queues for the two-slot
+gate; a stalled pass is stack-sampled and retried once. macOS stops Godot drawing when the window is reported covered
+(another capture window, the lock screen), which used to hang the capture on `frame_post_draw`; the test now renders
+those frames itself and records any frame timing it could not measure as not measured. Narrative timing, dated
+cards, puzzle receipts and resource charges stay with their existing mission services.
 
 # Exterior terrain (M1-82, for Atik's M1-36)
 

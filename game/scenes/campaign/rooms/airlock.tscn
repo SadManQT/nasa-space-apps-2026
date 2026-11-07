@@ -1,0 +1,27 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/campaign_room.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://scenes/campaign/rooms/habitat_kit_preload.tscn" id="2_kit"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Airlock/EN_Airlock_SuitLocker_LOD0.glb" id="3_al3"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Airlock/EN_Airlock_SuitLocker_LOD1.glb" id="4_al4"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Airlock/EN_Airlock_Bench_LOD0.glb" id="5_al5"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Airlock/EN_Airlock_Bench_LOD1.glb" id="6_al6"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD0.glb" id="7_al7"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD1.glb" id="8_al8"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Airlock/EN_Airlock_PassThrough_LOD0.glb" id="9_al9"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Airlock/EN_Airlock_PassThrough_LOD1.glb" id="10_al10"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Airlock/EN_Airlock_InterlockPanel_LOD0.glb" id="11_al11"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_Airlock/EN_Airlock_InterlockPanel_LOD1.glb" id="12_al12"]
+
+; LOC-05 (M3-2R). The approved M3-2A EN_Airlock vestibule (8 x 4 m double interlock) is the room shell:
+; resources/campaign/rooms/LOC-05.json names it ("shell": "airlock") and authors everything else.
+; HabitatKitPreload and AirlockPreload make the kit and airlock GLBs dependencies of this scene, so a
+; threaded room load decodes them off the main thread before the room is built.
+[node name="AirlockRoom" type="Node3D"]
+script = ExtResource("1_room")
+room_id = "LOC-05"
+
+[node name="HabitatKitPreload" parent="." instance=ExtResource("2_kit")]
+
+[node name="AirlockPreload" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("EN_Airlock_SuitLocker_LOD0", "EN_Airlock_SuitLocker_LOD1", "EN_Airlock_Bench_LOD0", "EN_Airlock_Bench_LOD1", "EN_Airlock_GlovePort_LOD0", "EN_Airlock_GlovePort_LOD1", "EN_Airlock_PassThrough_LOD0", "EN_Airlock_PassThrough_LOD1", "EN_Airlock_InterlockPanel_LOD0", "EN_Airlock_InterlockPanel_LOD1"), [ExtResource("3_al3"), ExtResource("4_al4"), ExtResource("5_al5"), ExtResource("6_al6"), ExtResource("7_al7"), ExtResource("8_al8"), ExtResource("9_al9"), ExtResource("10_al10"), ExtResource("11_al11"), ExtResource("12_al12")]]

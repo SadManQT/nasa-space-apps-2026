@@ -1670,7 +1670,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 2 rooms and locations",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-06",
@@ -1685,7 +1685,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "Rooms per scene: EX-CH02-S01, S02, S06 LOC-03 garden; S03-S05 LOC-05 airlock (new game/scenes/campaign/rooms/airlock.tscn, the approved M3-2A vestibule turned half a revolution so stations face +Z); S07, S11, S12 LOC-01 Commons; S08-S10 LOC-02 recorder service bench; CH02->CH03 join (same red warning) in LOC-02 at EX-CH03-S01. game/tools/run_tests.sh chapter2_rooms: CHAPTER 2 ROOMS RESULT: PASS (3510 checks, 0 failures); full game/tools/run_tests.sh: 60/60 suites passed (production/qa/evidence/M3-2R_tests.txt). Capture production/qa/evidence/M3-2R_capture.sh PASS (50 checks): 25 screenshots production/qa/evidence/M3-2R_S01..S12_*.png and M3-2R_CH03_S01_same_warning.png, all inspected; review and decisions (recorder kept on the table display; S12 and CH03-S01 warnings made the same panel) in production/qa/evidence/M3-2R_review.md. Atik follow-up M3-103 (LoadPreparation LOC-05 scene, door_commons_airlock boundary, story_log choices/moments to crew placement and station binding, with their tests); asset follow-up M3-104 (glove-port back plate).",
    "updated": "2026-11-07",
    "prompt": "Goal: every location the Chapter 2 scenes use (production/manifest/scene_index.csv, CH02 rows; LOC ids in\ngame-design/09_WORLD_AND_LEVEL_DESIGN.md) is a real scene built the same way as the Chapter 1 rooms (M1-06), with layout data in\ngame/resources/campaign/rooms/, collision, navigation, lighting and valid RoomContract targets. Chapters 3–8 currently reuse the five\nChapter 1 rooms; give each scene its proper location. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); place this chapter's bridge objects, §4 clue objects and §5.2 story-echo objects in the rooms so each join can play in the world.",
    "reserved_for": "sadman",
@@ -5835,6 +5835,53 @@
    "evidence": "Hours chosen by Sadman in chat, 7 Nov 2026: \"Use proposed hours\". Rows added through make_terrain.py sun (JPL Horizons) in game/assets/environment/terrain/lola/sun_positions.json and the lro_lola_south_pole_terrain fixture: EX-CH04-S04 cold_trap 2046-10-21 08:00 dark (ridge's own horizon via horizon_from at LOC-09, +11.08 deg toward the Sun az 82.2, Sun el +1.60), EX-CH04-S07/S08 cold_trap 11:00 dark (horizon +9.94, Sun +1.61), EX-CH08-S04 relay_road_mid 2047-04-08 10:00 dark (Sun -0.06, horizon +5.14), EX-CH08-S10 malapert_summit 2047-04-09 02:00 lit (Earth -2.32 clears the summit horizon). The 16 earlier rows are unchanged. EARTH_SHOWN not extended: no new row puts Earth above a computed horizon in a room that presents it. run_tests.sh 59/59 suites passed (terrain_lola, exterior_terrain, explainers, science_data included).",
    "updated": "2026-11-07",
    "prompt": "Found by M1-82. Exterior scenes staged in LOC-09/LOC-10/LOC-11 without a scene_lighting row in game/assets/environment/terrain/lola/sun_positions.json get no dated Sun rig from TerrainStream.lighting() (it returns null) and never an Earth (RoomContract.earth returns presented false, 'No bundled Horizons row'): EX-CH04-S04 (surveyed ridge, '21 Oct morning'), EX-CH04-S07 and S08 (vault, 'late morning'), EX-CH08-S04 (8 Apr 10:00-17:00) and EX-CH08-S10 (9 Apr 02:15-03:00). The hourly rows already exist in the same file (windows ch04_cold_trap, ch08_road_mid, ch08_summit), so no new download is needed. Do: pick each scene's UTC from STORY_FULL.md (Sadman decides the exact hour where the story says only 'morning'), add the scene_lighting rows from the hourly window rows (same columns and terrain-horizon flags as M1-34), update the M1-34 README table, and re-run game/tools/test_terrain_lola.gd and test_exterior_terrain.gd (extend its EARTH_SHOWN only if a new row puts Earth above a computed horizon). Acceptance: every exterior scene in the scene map has a row; run_tests.sh green.",
+   "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M3-103",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Wire the Chapter 2 airlock (LOC-05) into the campaign",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-2R"
+   ],
+   "paths": [
+    "game/scripts/loading/",
+    "game/scripts/navigation/",
+    "game/scripts/campaign/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "M3-2R (Sadman, rooms) landed the Chapter 2 rooms: LOC-05 is now the approved 8 x 4 m M3-2A airlock (game/scenes/campaign/rooms/airlock.tscn, game/resources/campaign/rooms/LOC-05.json), and the Commons north portal plus LOC-05's east portal are a new internal boundary \"door_commons_airlock\" (RoomContract boundary_ids: LOC-01 has door_commons_service/garden/safe/airlock; LOC-05 has door_commons_airlock and airlock_exterior). The night shift's commit 310b817 (branch origin/night/M3-2R) also edited your files; those edits were NOT landed (folder ownership). Please make these changes in your folders. Diffs are against current main (M1-84 already added a `moments` argument to CampaignCrew.place, and your M1-49 may already pass it; keep whichever is there).\n\n1. game/scripts/loading/load_preparation.gd, ROOM_SCENES: add\n\t\"LOC-05\": \"res://scenes/campaign/rooms/airlock.tscn\",\nbetween LOC-04 and LOC-06. Why: airlock.tscn carries HabitatKitPreload and an AirlockPreload of the ten EN_Airlock GLBs, so the loading card decodes them off the main thread. Without it Chapter1Campaign._refresh_world_now builds LOC-05 (EX-CH02-S03..S05) as a bare CampaignRoom.new() from LOC-05.json, which works but loads those GLBs on the main thread (a hitch on entering S03).\n\n2. game/scripts/navigation/route_navigation.gd, _BOUNDARIES: add\n\t\"door_commons_airlock\": {\"from\": \"LOC-01\", \"to\": \"LOC-05\", \"kind\": INTERNAL, \"default_open\": true},\nafter door_commons_safe. Why: WorldRoute has no state for that id, so _sync_world_boundaries shows the Commons north door and the airlock's inner door closed, and LOC-01 -> LOC-05 is not a legal traversal. Old checkpoints are already handled: WorldRoute.restore (game/scripts/world/world_route.gd, Sadman's, landed in M3-2R) fills door_commons_airlock with NavigationContract.default_boundary_state() when a snapshot lacks it and the boundary is defined. Note for you to decide (not part of 310b817): airlock_exterior is still defined from LOC-01 to LOC-06, while in the rooms the surface hatch is now LOC-05's outer hatch and the Commons no longer lists airlock_exterior; leave it unless your Chapter 1 EVA flow needs the Commons door to mirror the airlock state.\n\n3. game/scripts/campaign/chapter1_campaign.gd:\n a. _targets_for_scene(): bind each mission action to the room's authored station (RoomContract staging \"stations\"; RoomContract.station_focus() gives the same answer):\n\tfunc _targets_for_scene() -> Array:\n\t\tvar targets: Array = route.targets_for_current_scene() if route != null else []\n\t\tif _room != null:\n\t\t\t# The mission owns the action; the room owns the physical station where it happens.\n\t\t\tvar stations: Dictionary = _room.stage().get(\"stations\", {})\n\t\t\tfor target in targets:\n\t\t\t\tvar station := String(stations.get(String(target.target_id), \"\"))\n\t\t\t\tif not station.is_empty():\n\t\t\t\t\ttarget.world_focus_id = station\n\t\treturn targets\n Why: in the Chapter 2 rooms each action happens at a specific station (e.g. the glove ports, the recorder bench, the brace zone); the gate catalogue's world_focus_id is only the room-level default, so the prompt and selection frame can sit on the wrong object.\n b. _place_crew(): pass the story log to the crew so the room echoes show on New game, Continue and chapter joins:\n\tvar story_log: Dictionary = director.snapshot().story_log\n\t_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]), story_log.choices, story_log.get(\"moments\", []))\n Why: D4 (EX-CH02-S06 prediction card in the garden, still pinned for CH04-S01) and D5 (EX-CH02-S10 voice card in the service rooms, kept across CH02 -> CH03) only appear when choices are passed; M1-84's named mugs need the moments (and from EX-CH02-S11 Amara's named mug is the cup by the pending-reply indicator).\n\n4. Tests (adapt to current main):\n - game/tools/test_chapter1_campaign_flow.gd _test_chapter2_handoff (passes on main today; M3-2R turned LOC-05 so its garden wall is north and +Z 1 m from the room-level gate focus stays inside): together with 3a, check String(target.get_meta(\"target_id\", \"\")) == RoomContract.station_focus(scene_id, target_id) (\"Chapter 2 operation uses its authored room station\"), and place the player at that station's approach_m from RoomContract.staged_layout(room_id, scene_id).focus_targets instead of target + 1 m on +Z (several stations are on south walls, e.g. the LOC-02 evidence board at z 3.85 and the garden bench at z 3.4, where +Z is outside the room); include action.reason in the commit-failure message. Needs `const RoomContract = preload(\"res://scripts/world/room_contract.gd\")` and `const RoomPresentation = preload(\"res://scripts/world/room_presentation.gd\")`.\n - game/tools/test_campaign_later_runtime.gd (EX-CH02-S12 -> EX-CH03-S01 join): record state.story_log.choices[\"EX-CH02-S10-CHOICE\"] = {\"option_id\": \"EX-CH02-S10-OPT02\", \"scene_id\": \"EX-CH02-S10\", \"scenario_datetime\": \"2046-05-06 18:00 UTC\", \"state_revision\": state.state_revision} before the restore, then after advance_scene check _campaign._room.visual_root.get_node_or_null(\"ChapterStaging/card_voice_text\") as Label3D contains \"KEPT AS AN INFERENCE\" (\"the production room restores the player's recorded voice classification across the chapter join\").\n - Add, in one of your suites: LoadPreparation.ROOM_SCENES[\"LOC-05\"] == \"res://scenes/campaign/rooms/airlock.tscn\"; for each id in RoomContract.room(\"LOC-05\").boundary_ids, WorldRoute.new().boundary_state(id) is not empty; WorldRoute.new().can_traverse_to(\"LOC-05\") is accepted from the Commons; a WorldRoute snapshot with boundaries.door_commons_airlock erased still restores. (These were in the night shift's test_chapter2_rooms.gd; they moved out so Sadman's suite passes without your wiring.)\n\nThe full night-shift diff of your files: `git show 310b817 -- game/scripts/campaign/chapter1_campaign.gd game/scripts/loading/load_preparation.gd game/scripts/navigation/route_navigation.gd game/tools/test_chapter1_campaign_flow.gd game/tools/test_campaign_later_runtime.gd`. Do not edit game/scripts/world/ or game/resources/campaign/rooms/ (Sadman's); file a task for him if the room data needs a change.\n\nAcceptance: game/tools/run_tests.sh green (every suite, never a bare Godot exit code), including test_chapter2_rooms, test_chapter1_campaign_flow and test_campaign_later_runtime; in a played EX-CH02-S03 the Commons-to-airlock door shows open, and the D5 card shows after Continue into EX-CH03-S01.",
+   "reserved_for": "atik",
+   "effort": 1
+  },
+  {
+   "id": "M3-104",
+   "milestone": "M3",
+   "priority": "P2",
+   "tool": "claude",
+   "title": "Open the back of EN_Airlock_GlovePort so its window sees Alo's chamber",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-2R"
+   ],
+   "paths": [
+    "production/tools/build_chapter2_assets.py",
+    "game/assets/environment/EN_Airlock/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "Found by M3-2R (7 Nov night shift; filed as M3-102 on the parked branch, but main's M3-102 is the anti-aliasing task, so it is refiled here): EN_Airlock_GlovePort reuses the kit window frame and closes its back face with one 1.0 x 2.6 m plate (two triangles at local z 0.15, material M_Kit_PaintGrey, drawn double-sided), so the pressure window shows grey paint instead of the sealed plant chamber the asset notes promise. LOC-05 drops that plate from its placed copy at runtime (HabitatRoomBuilder.open_window_back in game/scripts/world/habitat_room_builder.gd, called from build_airlock for the \"glove_ports\" role), and game/tools/test_chapter2_rooms.gd checks that a 1.6 m eye at the glove-port station sees Alo's flowers through glass only. Fix it at the source: in production/tools/build_chapter2_assets.py leave the back of the GlovePort module open (or cut the window opening through the plate), rebuild both LODs (byte-check that the other pieces stay identical), re-run the M3-2A gate (production/tools/verify_gate.py) and its capture, then remove open_window_back and its call so the room uses the GLB as built. This changes an approved asset, so show Sadman the before/after M3-2A_godot_* and M3-2R_S04_alo_glove_ports screenshots. Optional while there: the two bright ovals in the pressure glass are ceiling lights mirrored at roughness 0.05; a slightly rougher glass would soften them. Acceptance: game/tools/run_tests.sh all suites pass; test_chapter2_rooms.gd still passes its Alo-through-glass check without the runtime opening.",
    "reserved_for": "sadman",
    "effort": 1
   }

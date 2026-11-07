@@ -1,0 +1,13 @@
+# Final landing capture, 7 Nov 2026 12:55 (the 25 PNGs here). Another session's capture window and the user's own apps covered the Godot window, so the test rendered every frame itself (force_draw) and did not measure timings:
+LOC-03 EX-CH02-S01 windowed frame ms with cast: not measured (window drew 0 of 180 frames; macOS reported it covered)
+LOC-05 EX-CH02-S04 windowed frame ms with cast: not measured (window drew 0 of 180 frames; macOS reported it covered)
+LOC-01 EX-CH02-S07 windowed frame ms with cast: not measured (window drew 0 of 180 frames; macOS reported it covered)
+LOC-02 EX-CH02-S10 windowed frame ms with cast: not measured (window drew 0 of 180 frames; macOS reported it covered)
+CHAPTER 2 ROOMS CAPTURE RESULT: PASS (50 checks, 0 failures)
+
+# Earlier landing capture in the same session, 12:22, window drawing (same rooms, before the S11 package type size, the CH03-S01 screen position and the LOC-05 overview camera were changed):
+LOC-03 EX-CH02-S01 windowed frame ms with cast: p50=16.69 p95=17.75; draw calls=347
+LOC-05 EX-CH02-S04 windowed frame ms with cast: p50=16.67 p95=17.60; draw calls=378
+LOC-01 EX-CH02-S07 windowed frame ms with cast: p50=16.67 p95=43.53; draw calls=447
+LOC-02 EX-CH02-S10 windowed frame ms with cast: p50=16.86 p95=19.96; draw calls=385
+CHAPTER 2 ROOMS CAPTURE RESULT: PASS (50 checks, 0 failures)

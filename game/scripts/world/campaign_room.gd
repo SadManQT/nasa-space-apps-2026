@@ -514,12 +514,18 @@ func set_focus_target(id: String) -> void:
 		if node.get_child_count() > 0:
 			(node.get_child(0) as Label3D).visible = node.get_meta("target_id", "") == id
 
-## The authored fixture spec (position, size, colour, cue) with this id, or {} if absent.
+## The authored fixture spec (position, size, colour, cue) with this id, or {} if absent. Fixtures of the applied
+## chapter staging count too (e.g. the garden's Earth console from EX-CH02-S01, M3-2R).
 func fixture(id: String) -> Dictionary:
-	for spec in _layout.get("fixtures", []):
+	for spec in _layout.get("fixtures", []) + _stage.get("fixtures", []):
 		if String(spec.get("id", "")) == id:
 			return spec.duplicate(true)
 	return {}
+
+## LOC-05's running double interlock (en_airlock.gd: hatches, panels, pump, pass-through lids), or null in a room
+## without one. The room owner drives it and saves its snapshot().
+func airlock() -> Node3D:
+	return visual_root.get_node_or_null("Airlock") as Node3D if visual_root != null else null
 
 ## True when an installed PR_CrewSeat's sitting position is at this floor point, so a seated
 ## companion needs no stand-in bench. The sitter's origin is SEAT_SIT_OFFSET_M in front of

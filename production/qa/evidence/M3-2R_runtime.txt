@@ -1,0 +1,5 @@
+LOC-03 EX-CH02-S01 windowed frame ms with cast: not measured (window drew 0 of 180 frames; macOS reported it covered)
+LOC-05 EX-CH02-S04 windowed frame ms with cast: not measured (window drew 0 of 180 frames; macOS reported it covered)
+LOC-01 EX-CH02-S07 windowed frame ms with cast: not measured (window drew 0 of 180 frames; macOS reported it covered)
+LOC-02 EX-CH02-S10 windowed frame ms with cast: not measured (window drew 0 of 180 frames; macOS reported it covered)
+CHAPTER 2 ROOMS CAPTURE RESULT: PASS (50 checks, 0 failures)

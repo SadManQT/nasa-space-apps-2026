@@ -186,21 +186,26 @@ func _build_screen() -> void:
 	_screen = null
 	_screen_label = null
 	_screen_backdrop = null
-	if room.room_id != "LOC-01":
+	# The Commons screen, or a room's staged Earth console (the garden's from EX-CH02-S01, M3-2R).
+	var spec := room.fixture("earth_screen")
+	if room.room_id != "LOC-01" and spec.is_empty():
 		return
 	var at := Vector3(0, 2, -5.2)
 	_screen_area = Vector2(2.8, 1.4)
-	var spec := room.fixture("earth_screen")
+	# "yaw" turns a wall-mounted screen (90: on a west wall, facing +X); its box size then runs along that wall.
+	var facing := Basis(Vector3.UP, deg_to_rad(float(spec.get("yaw", 0.0))))
 	if not spec.is_empty():
-		# The portrait lies on the north screen's room-facing surface, inset from its bezel.
+		# The portrait lies on the screen's room-facing surface, inset from its bezel.
 		var centre: Array = spec.position
 		var size: Array = spec.size
-		at = Vector3(float(centre[0]), float(centre[1]), float(centre[2]) + float(size[2]) * 0.5 + 0.01)
-		_screen_area = Vector2(float(size[0]), float(size[1])) * 0.94
+		var across_x := absf(facing.z.z) >= absf(facing.z.x)
+		var depth := float(size[2]) if across_x else float(size[0])
+		at = Vector3(float(centre[0]), float(centre[1]), float(centre[2])) + facing.z * (depth * 0.5 + 0.01)
+		_screen_area = Vector2(float(size[0]) if across_x else float(size[2]), float(size[1])) * 0.94
 	# EN_EarthDesk lies just behind the caller, on the same screen.
 	_screen_backdrop = Sprite3D.new()
 	_screen_backdrop.name = "EarthDesk"
-	_screen_backdrop.position = at - Vector3(0, 0, 0.005)
+	_screen_backdrop.position = at - facing.z * 0.005
 	_screen_backdrop.shaded = false
 	_screen_backdrop.transparent = false  # opaque pass: the caller and caption always draw over it
 	room.add_child(_screen_backdrop)
@@ -211,7 +216,7 @@ func _build_screen() -> void:
 	_screen.shaded = false
 	room.add_child(_screen)
 	_screen_label = Label3D.new()
-	_screen_label.position = at + Vector3(0, -_screen_area.y * 0.5 - 0.12, 0.005)
+	_screen_label.position = at + facing * Vector3(0, -_screen_area.y * 0.5 - 0.12, 0.005)
 	_screen_label.font_size = 32
 	_screen_label.pixel_size = 0.005
 	# Caller and caption are both see-through; sorting by centre distance alone put the portrait over
@@ -219,6 +224,7 @@ func _build_screen() -> void:
 	_screen_label.render_priority = 1
 	room.add_child(_screen_label)
 	for layer in [_screen_backdrop, _screen, _screen_label]:
+		layer.basis = facing
 		layer.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF  # a lit screen throws no shadow on its wall
 	_screen.hide()
 	_screen_label.hide()

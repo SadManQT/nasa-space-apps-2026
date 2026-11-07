@@ -1,61 +1,80 @@
 {
- "schema_version": 1,
+ "schema_version": 2,
  "room_id": "LOC-05",
- "description": "Authored training greybox; architecture is fictional, not a surveyed lunar site.",
+ "description": "Approved M3-2A EN_Airlock vestibule (8 x 4 m double interlock) on the M1-05 kit, assembled as a kit room (M3-2R); fictional Aurora architecture.",
  "bounds_m": [
-  10.0,
-  8.0
+  8.0,
+  4.0
  ],
- "ceiling_height_m": 3.6,
+ "ceiling_height_m": 2.6,
  "floor_color": "#263343",
  "wall_color": "#939ba6",
  "accent_color": "#20b8c9",
  "props": [
   {
-   "id": "PR_Glovebox",
-   "path": "res://assets/props/PR_Glovebox/PR_Glovebox.glb",
+   "id": "glove_ports",
+   "path": "res://assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD0.glb",
    "position": [
-    0,
-    0.8,
-    -1.6
+    2.0,
+    0.0,
+    -2.0
    ],
    "rotation_degrees": [
     0,
-    0,
+    180,
     0
    ],
    "scale": [
-    1,
-    1,
-    1
+    1.0,
+    1.0,
+    1.0
    ]
   },
   {
-   "id": "PR_PollinationKit",
-   "path": "res://assets/props/PR_PollinationKit/PR_PollinationKit.glb",
+   "id": "pass_through",
+   "path": "res://assets/environment/EN_Airlock/EN_Airlock_PassThrough_LOD0.glb",
    "position": [
-    -2.5,
-    0.9,
-    -1.6
+    1.0,
+    0.0,
+    -2.0
    ],
    "rotation_degrees": [
     0,
-    0,
+    180,
     0
    ],
    "scale": [
-    1,
-    1,
-    1
+    1.0,
+    1.0,
+    1.0
    ]
   },
   {
-   "id": "PR_SampleHolder",
-   "path": "res://assets/props/PR_SampleHolder/PR_SampleHolder.glb",
+   "id": "vestibule_panel",
+   "path": "res://assets/environment/EN_Airlock/EN_Airlock_InterlockPanel_LOD0.glb",
    "position": [
-    2.5,
-    0.9,
-    -1.6
+    -1.0,
+    0.0,
+    1.5
+   ],
+   "rotation_degrees": [
+    0,
+    -90,
+    0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "locker_mei",
+   "path": "res://assets/environment/EN_Airlock/EN_Airlock_SuitLocker_LOD0.glb",
+   "position": [
+    2.3,
+    0.0,
+    1.705
    ],
    "rotation_degrees": [
     0,
@@ -63,142 +82,1918 @@
     0
    ],
    "scale": [
-    1,
-    1,
-    1
+    1.0,
+    1.0,
+    1.0
    ]
   }
  ],
  "focus_targets": [
   {
-   "label": "Sealed transfer carrier",
-   "position": [
-    -2.5,
-    1.0,
-    -1.6
-   ],
-   "target_id": "transfer_carrier",
-   "verb": "Inspect",
-   "asset_id": "PR_PollinationKit",
-   "label_offset": [
-    0,
-    1.0,
-    0
-   ]
-  },
-  {
-   "label": "Paired glove ports",
-   "position": [
-    0.0,
-    1.0,
-    -1.6
-   ],
    "target_id": "transfer_glove_ports",
+   "label": "Alo glove ports",
+   "position": [
+    2.0,
+    1.2,
+    -1.88
+   ],
+   "approach_m": [
+    2.0,
+    0.0,
+    -1.15
+   ],
    "verb": "Inspect",
-   "asset_id": "PR_Glovebox",
    "label_offset": [
     0,
-    1.0,
+    0.7,
     0
-   ]
+   ],
+   "asset_id": "glove_ports"
   },
   {
+   "target_id": "transfer_carrier",
+   "label": "Sealed carrier pass-through",
+   "position": [
+    1.0,
+    1.22,
+    -1.44
+   ],
+   "approach_m": [
+    1.0,
+    0.0,
+    -0.8
+   ],
+   "verb": "Inspect",
+   "label_offset": [
+    0,
+    0.7,
+    0
+   ],
+   "asset_id": "pass_through"
+  },
+  {
+   "target_id": "transfer_microscope",
    "label": "Pollen microscope",
    "position": [
-    2.5,
-    1.0,
-    -1.6
+    -0.2,
+    1.05,
+    -1.72
    ],
-   "target_id": "transfer_microscope",
+   "approach_m": [
+    -0.2,
+    0.0,
+    -1.0
+   ],
    "verb": "Inspect",
-   "asset_id": "PR_SampleHolder",
    "label_offset": [
     0,
-    1.0,
+    0.7,
     0
-   ]
+   ],
+   "asset_id": "microscope_head"
+  },
+  {
+   "target_id": "airlock_interlock",
+   "label": "Pressure interlock panel",
+   "position": [
+    -0.8,
+    1.5,
+    1.5
+   ],
+   "approach_m": [
+    -0.2,
+    0.0,
+    0.95
+   ],
+   "verb": "Inspect",
+   "label_offset": [
+    0,
+    0.7,
+    0
+   ],
+   "asset_id": "vestibule_panel"
+  },
+  {
+   "target_id": "airlock_suit_lockers",
+   "label": "Suit lockers",
+   "position": [
+    2.3,
+    1.2,
+    1.36
+   ],
+   "approach_m": [
+    2.3,
+    0.0,
+    0.75
+   ],
+   "verb": "Inspect",
+   "label_offset": [
+    0,
+    0.7,
+    0
+   ],
+   "asset_id": "locker_mei"
   }
  ],
  "anchors": {
-  "transfer_amara": [
-   0.0,
-   0.0,
-   1.5
+  "transfer_player": [
+   2.0,
+   0,
+   0.45
   ],
   "transfer_mei": [
-   -2.2,
-   0.0,
-   1.5
+   2.7,
+   0,
+   -0.75
   ],
-  "transfer_player": [
+  "transfer_amara": [
+   1.2,
    0,
-   0,
-   0.1
+   -0.55
   ],
   "transfer_rafi": [
-   2.2,
-   0.0,
-   1.5
+   0.3,
+   0,
+   0.85
+  ],
+  "transfer_kai": [
+   3.3,
+   0,
+   -0.35
   ]
  },
  "fixtures": [
   {
-   "id": "carrier_bench",
+   "id": "sample_bench",
    "position": [
-    -2.5,
+    0.0,
     0.45,
-    -1.6
+    -1.775
    ],
    "size": [
-    1.2,
     0.9,
-    0.7
+    0.9,
+    0.42
    ],
-   "color": "#3c4b5d",
+   "color": "#1F2A44",
    "transparent": false
   },
   {
-   "id": "glove_bench",
+   "id": "sample_bench_top",
    "position": [
-    0,
-    0.4,
-    -1.6
+    0.0,
+    0.915,
+    -1.77
+   ],
+   "size": [
+    0.94,
+    0.03,
+    0.46
+   ],
+   "color": "#939BA6",
+   "transparent": false
+  },
+  {
+   "id": "microscope_base",
+   "position": [
+    -0.2,
+    0.94,
+    -1.8
+   ],
+   "size": [
+    0.16,
+    0.02,
+    0.2
+   ],
+   "color": "#2a3446",
+   "transparent": false
+  },
+  {
+   "id": "microscope_column",
+   "position": [
+    -0.2,
+    1.08,
+    -1.87
+   ],
+   "size": [
+    0.035,
+    0.26,
+    0.035
+   ],
+   "color": "#d7dbe0",
+   "transparent": false
+  },
+  {
+   "id": "microscope_head",
+   "position": [
+    -0.2,
+    1.16,
+    -1.8
+   ],
+   "size": [
+    0.075,
+    0.075,
+    0.16
+   ],
+   "color": "#e6e8ea",
+   "transparent": false
+  },
+  {
+   "id": "microscope_lens",
+   "position": [
+    -0.2,
+    1.1,
+    -1.75
+   ],
+   "size": [
+    0.032,
+    0.05,
+    0.032
+   ],
+   "color": "#1b2433",
+   "transparent": false
+  },
+  {
+   "id": "microscope_screen",
+   "position": [
+    0.0,
+    1.6,
+    -1.95
+   ],
+   "size": [
+    0.62,
+    0.38,
+    0.03
+   ],
+   "color": "#0f1a28",
+   "transparent": false,
+   "finish": "screen"
+  },
+  {
+   "id": "alo_port_chamber_back",
+   "position": [
+    2.0,
+    1.55,
+    -2.79
+   ],
+   "size": [
+    0.96,
+    1.0,
+    0.04
+   ],
+   "color": "#1F2A44",
+   "transparent": false,
+   "finish": "satin"
+  },
+  {
+   "id": "alo_port_chamber_shelf",
+   "position": [
+    2.0,
+    1.08,
+    -2.42
+   ],
+   "size": [
+    0.96,
+    0.04,
+    0.72
+   ],
+   "color": "#ECEEF0",
+   "transparent": false,
+   "finish": "satin"
+  },
+  {
+   "id": "alo_port_chamber_roof",
+   "position": [
+    2.0,
+    2.08,
+    -2.42
+   ],
+   "size": [
+    0.96,
+    0.04,
+    0.72
+   ],
+   "color": "#ECEEF0",
+   "transparent": false,
+   "finish": "satin"
+  },
+  {
+   "id": "alo_port_chamber_side_w",
+   "position": [
+    2.47,
+    1.58,
+    -2.42
+   ],
+   "size": [
+    0.03,
+    0.96,
+    0.72
+   ],
+   "color": "#ECEEF0",
+   "transparent": false,
+   "finish": "satin"
+  },
+  {
+   "id": "alo_port_chamber_side_e",
+   "position": [
+    1.53,
+    1.58,
+    -2.42
+   ],
+   "size": [
+    0.03,
+    0.96,
+    0.72
+   ],
+   "color": "#ECEEF0",
+   "transparent": false,
+   "finish": "satin"
+  },
+  {
+   "id": "chamber_light_strip",
+   "position": [
+    -2.65,
+    2.535,
+    0.0
    ],
    "size": [
     1.6,
-    0.8,
-    0.8
+    0.03,
+    0.12
    ],
-   "color": "#3c4b5d",
-   "transparent": false
-  },
-  {
-   "id": "sample_bench",
-   "position": [
-    2.5,
-    0.45,
-    -1.6
-   ],
-   "size": [
-    1.2,
-    0.9,
-    0.7
-   ],
-   "color": "#3c4b5d",
-   "transparent": false
+   "color": "#fff1e0",
+   "transparent": false,
+   "emissive": true
   }
  ],
  "lighting": {
   "key_rotation_degrees": [
    -65,
-   -25,
+   155,
    0
   ],
-  "key_color": "#dfeeff",
-  "key_energy": 1.6,
-  "fill_energy": 0.45,
-  "ambient_energy": 0.3,
-  "strip_color": "#dfeeff"
+  "key_color": "#ffcfa6",
+  "key_energy": 0,
+  "fill_energy": 0,
+  "ambient_energy": 0.22,
+  "strip_color": "#ffe9d6",
+  "practical_energy": 0.75,
+  "practical_range_m": 6,
+  "shadow_lights": 2
  },
- "earth_visibility": "interior"
+ "earth_visibility": "interior",
+ "assembly": "habitat_kit",
+ "shell": "airlock",
+ "airlock_roles": [
+  "glove_ports",
+  "pass_through",
+  "vestibule_panel",
+  "chamber_panel",
+  "inner_hatch",
+  "outer_hatch",
+  "bench",
+  "locker_kai",
+  "locker_amara",
+  "locker_mei",
+  "locker_rafi",
+  "locker_ferreira"
+ ],
+ "about": "Room coordinates are airlock.json's vestibule coordinates minus (4, 0, 2), turned half a revolution about the room centre (shell_yaw_deg 180: x -> -x, z -> -z), so the garden wall is the north wall and every station is approached from +Z like the other rooms' equipment walls: suit-up vestibule x -1..4 (inner door to the Commons on the east wall), partition with the inner hatch at x -1, cycled chamber x -4..-1.3 with the outer hatch to the surface on the west wall; the garden wall (z -2) carries the glove ports into Alo's sealed chamber and the sealed carrier pass-through. Samples cross to the garden, people never do (M3-2A decision 1).",
+ "sealed_enclosures": [
+  {
+   "id": "alo_port_chamber",
+   "about": "Alo's sealed chamber behind the glove-port window (EN_Airlock_GlovePort: 'the sealed plant chamber lies behind it'), seen only through the pressure window; plants stay inside pressurised enclosures (ART_BIBLE section 2).",
+   "min": [
+    1.5,
+    1.06,
+    -2.82
+   ],
+   "max": [
+    2.5,
+    2.1,
+    -1.95
+   ]
+  }
+ ],
+ "local_lights": [
+  {
+   "id": "ChamberLight",
+   "position": [
+    -2.65,
+    2.3,
+    0.0
+   ],
+   "color": "#ffe3cf",
+   "energy": 0.6,
+   "range_m": 1.6
+  }
+ ],
+ "portals": [
+  {
+   "boundary_id": "door_commons_airlock",
+   "wall": "east",
+   "offset_m": 0,
+   "destination": "Commons"
+  }
+ ],
+ "navigation": {
+  "cell_m": 0.25,
+  "agent_radius_m": 0.3
+ },
+ "walk_probe": [
+  [
+   2.0,
+   0.45
+  ],
+  [
+   3.3,
+   0.6
+  ],
+  [
+   3.3,
+   -0.9
+  ],
+  [
+   2.0,
+   -1.3
+  ],
+  [
+   0.2,
+   -0.95
+  ],
+  [
+   -0.25,
+   0.9
+  ],
+  [
+   2.0,
+   0.45
+  ]
+ ],
+ "obstacles": [
+  {
+   "id": "lockers",
+   "position": [
+    2.3,
+    1.1,
+    1.71
+   ],
+   "size": [
+    3.0,
+    2.2,
+    0.58
+   ]
+  },
+  {
+   "id": "suit_bench",
+   "position": [
+    -0.1,
+    0.23,
+    1.755
+   ],
+   "size": [
+    1.6,
+    0.46,
+    0.42
+   ]
+  },
+  {
+   "id": "pass_through_body",
+   "position": [
+    1.0,
+    1.3,
+    -1.74
+   ],
+   "size": [
+    1.0,
+    2.6,
+    0.52
+   ]
+  },
+  {
+   "id": "sample_bench",
+   "position": [
+    0.0,
+    0.45,
+    -1.775
+   ],
+   "size": [
+    0.9,
+    0.9,
+    0.42
+   ]
+  },
+  {
+   "id": "partition_south",
+   "position": [
+    -1.15,
+    1.3,
+    1.5
+   ],
+   "size": [
+    0.6,
+    2.6,
+    1.0
+   ]
+  },
+  {
+   "id": "inner_hatch_closed",
+   "position": [
+    -1.15,
+    1.3,
+    0.0
+   ],
+   "size": [
+    0.6,
+    2.6,
+    2.0
+   ]
+  },
+  {
+   "id": "partition_north",
+   "position": [
+    -1.15,
+    1.3,
+    -1.5
+   ],
+   "size": [
+    0.6,
+    2.6,
+    1.0
+   ]
+  }
+ ],
+ "kit_runs": [],
+ "ceiling_strips": [
+  [
+   2.75,
+   2.52,
+   0.7
+  ],
+  [
+   0.85,
+   2.52,
+   -0.7
+  ],
+  [
+   2.75,
+   2.52,
+   -0.7
+  ],
+  [
+   0.85,
+   2.52,
+   0.7
+  ]
+ ],
+ "signs": [
+  {
+   "text": "GARDEN · SAMPLES ONLY",
+   "position": [
+    1.5,
+    2.3,
+    -1.93
+   ],
+   "yaw": 0,
+   "size": 0.0016
+  }
+ ],
+ "review_views": {
+  "overview": {
+   "from": [
+    3.6,
+    2.0,
+    1.15
+   ],
+   "to": [
+    -1.2,
+    0.9,
+    -0.8
+   ]
+  },
+  "garden_wall": {
+   "from": [
+    2.4,
+    1.65,
+    1.05
+   ],
+   "to": [
+    1.4,
+    1.25,
+    -2.0
+   ]
+  },
+  "interlock": {
+   "from": [
+    1.2,
+    1.7,
+    -0.7
+   ],
+   "to": [
+    -1.0,
+    1.3,
+    1.3
+   ]
+  }
+ },
+ "staging": [
+  {
+   "id": "ch02_pollination_route",
+   "from": "EX-CH02-S03",
+   "until": "EX-CH02-S05",
+   "about": "EX-CH02-S03..S05 'Garden service corridor and transfer interlock', 'Tara bench, transfer route and Alo glove ports', 'Paired care stations and transfer route' (P-03, doc 22 section 4.1-4.2): Alo in bloom behind the glove-port window; the pass-through to Tara's bench (one lid open at a time); brushes A and B in the carrier on the sample bench with its latch word; the digital microscope's magnified view; the station route with its four sealed boundaries and Kai's straight line beside it (S03, clue 6); the space-weather status checked before every run (clue 7); the care and route record with the paired photographs and the seven-date strip (S05, clue 4) and the saved contact image (S04 -> S05).",
+   "props": [
+    {
+     "id": "PL_Alo_Bloom",
+     "path": "res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb",
+     "position": [
+      2.0,
+      1.3,
+      -2.55
+     ],
+     "rotation_degrees": [
+      0,
+      20,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "id": "PR_PollinationKit",
+     "path": "res://assets/props/PR_PollinationKit/PR_PollinationKit.glb",
+     "position": [
+      0.2,
+      0.93,
+      -1.74
+     ],
+     "rotation_degrees": [
+      0,
+      180,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    }
+   ],
+   "fixtures": [
+    {
+     "id": "alo_port_stand",
+     "position": [
+      2.0,
+      1.2,
+      -2.55
+     ],
+     "size": [
+      0.26,
+      0.2,
+      0.26
+     ],
+     "color": "#D5DAE0",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "alo_port_grow_lamp",
+     "position": [
+      2.0,
+      2.05,
+      -2.42
+     ],
+     "size": [
+      0.7,
+      0.02,
+      0.08
+     ],
+     "color": "#FFD6F0",
+     "transparent": false,
+     "emissive": true
+    },
+    {
+     "id": "care_record_board",
+     "position": [
+      3.0,
+      1.5,
+      -1.965
+     ],
+     "size": [
+      0.92,
+      0.88,
+      0.03
+     ],
+     "color": "#e6e8ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_board",
+     "position": [
+      -0.975,
+      1.48,
+      -1.47
+     ],
+     "size": [
+      0.03,
+      0.62,
+      0.9
+     ],
+     "color": "#e6e8ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_box_tara",
+     "position": [
+      -0.958,
+      1.63,
+      -1.13
+     ],
+     "size": [
+      0.004,
+      0.08,
+      0.25
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_box_pass",
+     "position": [
+      -0.958,
+      1.63,
+      -1.47
+     ],
+     "size": [
+      0.004,
+      0.08,
+      0.25
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_box_alo",
+     "position": [
+      -0.958,
+      1.63,
+      -1.81
+     ],
+     "size": [
+      0.004,
+      0.08,
+      0.25
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_line_out",
+     "position": [
+      -0.956,
+      1.545,
+      -1.47
+     ],
+     "size": [
+      0.003,
+      0.012,
+      0.68
+     ],
+     "color": "#e8792b",
+     "transparent": false
+    },
+    {
+     "id": "route_line_back",
+     "position": [
+      -0.956,
+      1.47,
+      -1.47
+     ],
+     "size": [
+      0.003,
+      0.012,
+      0.68
+     ],
+     "color": "#20b8c9",
+     "transparent": false
+    },
+    {
+     "id": "route_tick_1",
+     "position": [
+      -0.955,
+      1.545,
+      -1.3
+     ],
+     "size": [
+      0.004,
+      0.05,
+      0.012
+     ],
+     "color": "#1b2433",
+     "transparent": false
+    },
+    {
+     "id": "route_tick_2",
+     "position": [
+      -0.955,
+      1.545,
+      -1.64
+     ],
+     "size": [
+      0.004,
+      0.05,
+      0.012
+     ],
+     "color": "#1b2433",
+     "transparent": false
+    },
+    {
+     "id": "route_tick_3",
+     "position": [
+      -0.955,
+      1.47,
+      -1.64
+     ],
+     "size": [
+      0.004,
+      0.05,
+      0.012
+     ],
+     "color": "#1b2433",
+     "transparent": false
+    },
+    {
+     "id": "route_tick_4",
+     "position": [
+      -0.955,
+      1.47,
+      -1.3
+     ],
+     "size": [
+      0.004,
+      0.05,
+      0.012
+     ],
+     "color": "#1b2433",
+     "transparent": false
+    },
+    {
+     "id": "kai_sketch_card",
+     "position": [
+      -0.957,
+      1.245,
+      -1.2
+     ],
+     "size": [
+      0.003,
+      0.13,
+      0.24
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "kai_sketch_line",
+     "position": [
+      -0.955,
+      1.255,
+      -1.2
+     ],
+     "size": [
+      0.002,
+      0.005,
+      0.15
+     ],
+     "color": "#5a5f66",
+     "transparent": false
+    },
+    {
+     "id": "space_weather_screen",
+     "position": [
+      -0.975,
+      2.07,
+      -1.47
+     ],
+     "size": [
+      0.03,
+      0.24,
+      0.62
+     ],
+     "color": "#0f1a28",
+     "transparent": false,
+     "finish": "screen"
+    },
+    {
+     "id": "carrier_latch_lamp",
+     "position": [
+      0.05,
+      0.945,
+      -1.62
+     ],
+     "size": [
+      0.016,
+      0.01,
+      0.016
+     ],
+     "color": "#3fbf5a",
+     "transparent": false,
+     "emissive": true
+    },
+    {
+     "id": "brush_tag_a",
+     "position": [
+      0.27,
+      0.932,
+      -1.63
+     ],
+     "size": [
+      0.11,
+      0.003,
+      0.035
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "brush_tag_b",
+     "position": [
+      0.13,
+      0.932,
+      -1.63
+     ],
+     "size": [
+      0.11,
+      0.003,
+      0.035
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "contact_card",
+     "position": [
+      3.3,
+      1.17,
+      -1.948
+     ],
+     "size": [
+      0.22,
+      0.17,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S05"
+    },
+    {
+     "id": "route_cell_0",
+     "position": [
+      2.655,
+      1.43,
+      -1.947
+     ],
+     "size": [
+      0.105,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_cell_1",
+     "position": [
+      2.77,
+      1.43,
+      -1.947
+     ],
+     "size": [
+      0.105,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_cell_2",
+     "position": [
+      2.885,
+      1.43,
+      -1.947
+     ],
+     "size": [
+      0.105,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_cell_3",
+     "position": [
+      3.0,
+      1.43,
+      -1.947
+     ],
+     "size": [
+      0.105,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_cell_4",
+     "position": [
+      3.115,
+      1.43,
+      -1.947
+     ],
+     "size": [
+      0.105,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_cell_5",
+     "position": [
+      3.23,
+      1.43,
+      -1.947
+     ],
+     "size": [
+      0.105,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "route_cell_6",
+     "position": [
+      3.345,
+      1.43,
+      -1.947
+     ],
+     "size": [
+      0.105,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "prints": [
+    {
+     "id": "route_photo_alo",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb",
+     "position": [
+      2.78,
+      1.765,
+      -1.947
+     ],
+     "size": [
+      0.3,
+      0.2
+     ],
+     "yaw": 0,
+     "border": 0.008,
+     "caption": "ALO · 27 APR",
+     "caption_size": 0.0004
+    },
+    {
+     "id": "route_photo_tara",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Tara_Bloom/PL_Tara_Bloom.glb",
+     "position": [
+      3.22,
+      1.765,
+      -1.947
+     ],
+     "size": [
+      0.3,
+      0.2
+     ],
+     "yaw": 0,
+     "border": 0.008,
+     "caption": "TARA · 30 APR",
+     "caption_size": 0.0004
+    },
+    {
+     "id": "magnified_view",
+     "kind": "flower_diagram",
+     "position": [
+      0.0,
+      1.6,
+      -1.933
+     ],
+     "size": [
+      0.58,
+      0.34
+     ],
+     "yaw": 0,
+     "glow": 0.55,
+     "by_scene": {
+      "EX-CH02-S05": {
+       "contact": true,
+       "labels": {
+        "anther": "ANTHER\nmakes pollen",
+        "stigma": "STIGMA\npollen grains on it"
+       }
+      }
+     }
+    },
+    {
+     "id": "contact_image",
+     "kind": "flower_diagram",
+     "position": [
+      3.3,
+      1.19,
+      -1.945
+     ],
+     "size": [
+      0.17,
+      0.1
+     ],
+     "yaw": 0,
+     "contact": true,
+     "from": "EX-CH02-S05",
+     "labels": {
+      "stigma": "STIGMA"
+     },
+     "caption": "30 APR · CONTACT RECORDED · SEEDS COME LATER",
+     "caption_size": 0.00026
+    },
+    {
+     "id": "route_bee_0",
+     "kind": "texture",
+     "texture": "res://assets/ui/diagrams/PR_PaperBee.png",
+     "position": [
+      2.655,
+      1.4,
+      -1.9435
+     ],
+     "size": [
+      0.042,
+      0.042
+     ],
+     "yaw": 0,
+     "from": "EX-CH02-S05"
+    },
+    {
+     "id": "route_bee_3",
+     "kind": "texture",
+     "texture": "res://assets/ui/diagrams/PR_PaperBee.png",
+     "position": [
+      3.0,
+      1.4,
+      -1.9435
+     ],
+     "size": [
+      0.042,
+      0.042
+     ],
+     "yaw": 0,
+     "roll": 11,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "route_bee_6",
+     "kind": "texture",
+     "texture": "res://assets/ui/diagrams/PR_PaperBee.png",
+     "position": [
+      3.345,
+      1.4,
+      -1.9435
+     ],
+     "size": [
+      0.042,
+      0.042
+     ],
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    }
+   ],
+   "signs": [
+    {
+     "id": "care_record_title",
+     "text": "CARE AND ROUTE RECORD",
+     "position": [
+      3.0,
+      1.91,
+      -1.945
+     ],
+     "size": 0.00055,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0
+    },
+    {
+     "id": "route_record_text",
+     "text": "RUN 1 · 30 APR · PLANNED\nCHECK SPACE WEATHER FIRST",
+     "position": [
+      2.85,
+      1.2,
+      -1.944
+     ],
+     "size": 0.00036,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0,
+     "wrap_m": 0.42,
+     "by_scene": {
+      "EX-CH02-S04": {
+       "text": "RUN 1 · 30 APR · TODAY\nA: TARA TO ALO · B: ALO TO TARA"
+      },
+      "EX-CH02-S05": {
+       "text": "RUN 1 · 30 APR · DONE, SEALS HELD\nRUN 2 · 3 MAY · PLANNED\nRUN 3 · 6 MAY · PLANNED\nCARE EVERY DAY · RUNS ON THEIR OWN DATES"
+      }
+     }
+    },
+    {
+     "id": "route_title",
+     "text": "THE REAL ROUTE",
+     "position": [
+      -0.953,
+      1.745,
+      -1.47
+     ],
+     "size": 0.0005,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "route_word_tara",
+     "text": "TARA'S BENCH",
+     "position": [
+      -0.953,
+      1.632,
+      -1.13
+     ],
+     "size": 0.00034,
+     "color": "#ffffff",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "route_word_pass",
+     "text": "PASS-THROUGH",
+     "position": [
+      -0.953,
+      1.632,
+      -1.47
+     ],
+     "size": 0.00034,
+     "color": "#ffffff",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "route_word_alo",
+     "text": "ALO'S PORTS",
+     "position": [
+      -0.953,
+      1.632,
+      -1.81
+     ],
+     "size": 0.00034,
+     "color": "#ffffff",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "route_word_out",
+     "text": "OUT · BRUSH A",
+     "position": [
+      -0.952,
+      1.567,
+      -1.47
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "route_word_back",
+     "text": "BACK · BRUSH B",
+     "position": [
+      -0.952,
+      1.448,
+      -1.47
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "route_ticks",
+     "text": "1          2",
+     "position": [
+      -0.952,
+      1.588,
+      -1.47
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "route_ticks_back",
+     "text": "4          3",
+     "position": [
+      -0.952,
+      1.428,
+      -1.47
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "route_caption",
+     "text": "ONE WHOLE CYCLE IS OUT AND BACK\nFOUR SEALED BOUNDARIES, CHARGED ONCE\n1 ENERGY · 1 AIR",
+     "position": [
+      -0.953,
+      1.33,
+      -1.62
+     ],
+     "size": 0.0003,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 90,
+     "wrap_m": 0.5
+    },
+    {
+     "id": "kai_sketch_words",
+     "text": "TARA                    ALO",
+     "position": [
+      -0.953,
+      1.27,
+      -1.2
+     ],
+     "size": 0.0003,
+     "color": "#3c4048",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "kai_sketch_caption",
+     "text": "KAI'S LINE (NO DOORS, NO AIR)",
+     "position": [
+      -0.953,
+      1.205,
+      -1.2
+     ],
+     "size": 0.00024,
+     "color": "#3c4048",
+     "outline": 0,
+     "yaw": 90
+    },
+    {
+     "id": "space_weather_text",
+     "text": "SPACE WEATHER\nVERIFY CURRENT STATUS\nCHECK BEFORE EACH RUN",
+     "position": [
+      -0.957,
+      2.07,
+      -1.47
+     ],
+     "size": 0.00042,
+     "color": "#8fe39b",
+     "outline": 0,
+     "yaw": 90,
+     "by_scene": {
+      "EX-CH02-S05": {
+       "text": "SPACE WEATHER\n3 MAY, 6 MAY · NEW CHECKS\nCHECK BEFORE EACH RUN"
+      }
+     }
+    },
+    {
+     "id": "brush_word_a",
+     "text": "A · TARA TO ALO",
+     "position": [
+      0.27,
+      0.9345,
+      -1.63
+     ],
+     "size": 0.00018,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90,
+     "yaw": 180
+    },
+    {
+     "id": "brush_word_b",
+     "text": "B · ALO TO TARA",
+     "position": [
+      0.13,
+      0.9345,
+      -1.63
+     ],
+     "size": 0.00018,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90,
+     "yaw": 180
+    },
+    {
+     "id": "carrier_latch_word",
+     "text": "CARRIER LATCHED",
+     "position": [
+      0.05,
+      0.9345,
+      -1.585
+     ],
+     "size": 0.0002,
+     "color": "#1f6b31",
+     "outline": 0,
+     "pitch": -90,
+     "yaw": 180
+    },
+    {
+     "id": "glove_port_label",
+     "text": "ALO · RECIPIENT FOR BRUSH A\nDONOR FOR BRUSH B",
+     "position": [
+      2.0,
+      1.44,
+      -1.935
+     ],
+     "size": 0.00034,
+     "color": "#dfe7f2",
+     "outline": 6,
+     "yaw": 0
+    },
+    {
+     "id": "pass_through_label",
+     "text": "PASS-THROUGH · TARA'S BENCH ON THE FAR SIDE\nONE LID OPEN AT A TIME",
+     "position": [
+      1.0,
+      1.62,
+      -1.93
+     ],
+     "size": 0.00032,
+     "color": "#dfe7f2",
+     "outline": 6,
+     "yaw": 0
+    },
+    {
+     "id": "route_date_0",
+     "text": "30 APR",
+     "position": [
+      2.655,
+      1.46,
+      -1.944
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0
+    },
+    {
+     "id": "route_cared_0",
+     "text": "CARED",
+     "position": [
+      2.655,
+      1.428,
+      -1.944
+     ],
+     "size": 0.000306,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S05"
+    },
+    {
+     "id": "route_date_1",
+     "text": "1 MAY",
+     "position": [
+      2.77,
+      1.46,
+      -1.944
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0
+    },
+    {
+     "id": "route_cared_1",
+     "text": "CARED",
+     "position": [
+      2.77,
+      1.428,
+      -1.944
+     ],
+     "size": 0.000306,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "route_date_2",
+     "text": "2 MAY",
+     "position": [
+      2.885,
+      1.46,
+      -1.944
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0
+    },
+    {
+     "id": "route_cared_2",
+     "text": "CARED",
+     "position": [
+      2.885,
+      1.428,
+      -1.944
+     ],
+     "size": 0.000306,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "route_date_3",
+     "text": "3 MAY",
+     "position": [
+      3.0,
+      1.46,
+      -1.944
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0
+    },
+    {
+     "id": "route_cared_3",
+     "text": "CARED",
+     "position": [
+      3.0,
+      1.428,
+      -1.944
+     ],
+     "size": 0.000306,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "route_date_4",
+     "text": "4 MAY",
+     "position": [
+      3.115,
+      1.46,
+      -1.944
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0
+    },
+    {
+     "id": "route_cared_4",
+     "text": "CARED",
+     "position": [
+      3.115,
+      1.428,
+      -1.944
+     ],
+     "size": 0.000306,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "route_date_5",
+     "text": "5 MAY",
+     "position": [
+      3.23,
+      1.46,
+      -1.944
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0
+    },
+    {
+     "id": "route_cared_5",
+     "text": "CARED",
+     "position": [
+      3.23,
+      1.428,
+      -1.944
+     ],
+     "size": 0.000306,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "route_date_6",
+     "text": "6 MAY",
+     "position": [
+      3.345,
+      1.46,
+      -1.944
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0
+    },
+    {
+     "id": "route_cared_6",
+     "text": "CARED",
+     "position": [
+      3.345,
+      1.428,
+      -1.944
+     ],
+     "size": 0.000306,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    }
+   ],
+   "local_lights": [
+    {
+     "id": "AloPortGrowLamp",
+     "position": [
+      2.0,
+      1.95,
+      -2.42
+     ],
+     "color": "#FFC8EC",
+     "energy": 0.9,
+     "range_m": 0.7
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "transfer_care_record",
+     "label": "Care and route record",
+     "position": [
+      3.0,
+      1.45,
+      -1.86
+     ],
+     "approach_m": [
+      3.0,
+      0.0,
+      -1.15
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "care_record_board"
+    },
+    {
+     "target_id": "transfer_route_diagram",
+     "label": "Station route and Kai's line",
+     "position": [
+      -0.82,
+      1.5,
+      -1.47
+     ],
+     "approach_m": [
+      -0.3,
+      0.0,
+      -1.05
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "route_board"
+    },
+    {
+     "target_id": "transfer_space_weather",
+     "label": "Space-weather status",
+     "position": [
+      -0.82,
+      2.05,
+      -1.47
+     ],
+     "approach_m": [
+      -0.3,
+      0.0,
+      -1.05
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "space_weather_screen"
+    },
+    {
+     "target_id": "transfer_brush_kit",
+     "label": "Brushes A and B in the carrier",
+     "position": [
+      0.2,
+      1.0,
+      -1.66
+     ],
+     "approach_m": [
+      0.25,
+      0.0,
+      -1.0
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "PR_PollinationKit"
+    }
+   ],
+   "stations": {
+    "check_space_weather": "transfer_space_weather",
+    "prepare_closed_carrier": "transfer_brush_kit",
+    "verify_transfer_boundaries": "transfer_carrier",
+    "preview_cycle_budget": "transfer_route_diagram",
+    "p03_scan_tara": "transfer_carrier",
+    "p03_collect_tara": "transfer_carrier",
+    "p03_seal_a": "transfer_brush_kit",
+    "p03_transfer_alo": "transfer_glove_ports",
+    "p03_scan_alo": "transfer_glove_ports",
+    "p03_collect_alo": "transfer_glove_ports",
+    "p03_seal_b": "transfer_brush_kit",
+    "p03_transfer_tara": "transfer_carrier",
+    "p03_complete_run_1": "transfer_care_record",
+    "p03_care_day_2": "transfer_care_record",
+    "p03_care_day_3": "transfer_care_record",
+    "p03_run_2_forward": "transfer_glove_ports",
+    "p03_run_2_reverse": "transfer_carrier",
+    "p03_complete_run_2": "transfer_care_record",
+    "p03_care_day_4": "transfer_care_record",
+    "p03_care_day_5": "transfer_care_record",
+    "p03_care_day_6": "transfer_care_record",
+    "p03_care_day_7": "transfer_care_record",
+    "p03_run_3_forward": "transfer_glove_ports",
+    "p03_run_3_reverse": "transfer_carrier",
+    "p03_complete_run_3": "transfer_care_record"
+   },
+   "by_scene": {
+    "EX-CH02-S03": {
+     "anchors": {
+      "transfer_kai": [
+       -0.45,
+       0,
+       -0.05
+      ],
+      "transfer_amara": [
+       1.8,
+       0,
+       -0.65
+      ],
+      "transfer_mei": [
+       2.7,
+       0,
+       -0.75
+      ]
+     }
+    },
+    "EX-CH02-S04": {
+     "anchors": {
+      "transfer_amara": [
+       1.7,
+       0,
+       -0.4
+      ],
+      "transfer_kai": [
+       -0.45,
+       0,
+       -0.6
+      ],
+      "transfer_rafi": [
+       3.4,
+       0,
+       -0.45
+      ]
+     }
+    },
+    "EX-CH02-S05": {
+     "anchors": {
+      "transfer_kai": [
+       3.4,
+       0,
+       -0.45
+      ],
+      "transfer_rafi": [
+       -0.3,
+       0,
+       -0.6
+      ],
+      "transfer_amara": [
+       1.7,
+       0,
+       -0.4
+      ]
+     }
+    }
+   },
+   "review_views": {
+    "ch02_route_wall": {
+     "from": [
+      0.9,
+      1.6,
+      0.5
+     ],
+     "to": [
+      -0.95,
+      1.65,
+      -1.45
+     ]
+    },
+    "ch02_care_record": {
+     "from": [
+      2.75,
+      1.55,
+      -0.55
+     ],
+     "to": [
+      3.0,
+      1.5,
+      -2.0
+     ]
+    },
+    "ch02_glove_ports": {
+     "from": [
+      2.0,
+      1.64,
+      -1.6
+     ],
+     "to": [
+      2.0,
+      1.42,
+      -2.55
+     ]
+    },
+    "ch02_bench": {
+     "from": [
+      0.55,
+      1.45,
+      -0.75
+     ],
+     "to": [
+      0.0,
+      1.15,
+      -1.85
+     ]
+    }
+   }
+  }
+ ],
+ "shell_yaw_deg": 180
 }

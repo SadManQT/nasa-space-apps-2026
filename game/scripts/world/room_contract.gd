@@ -21,7 +21,7 @@ const _ROOMS := {
 			"res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
 			"res://assets/props/PR_Mug/PR_Mug.glb",
 		],
-		"boundary_ids": ["door_commons_service", "door_commons_garden", "door_commons_safe", "airlock_exterior"],
+		"boundary_ids": ["door_commons_service", "door_commons_garden", "door_commons_safe", "door_commons_airlock"],
 		"focus_targets": [
 			{"target_id": "commons_mission_table", "label": "Mission Table", "verb": "Inspect", "position": [0.0, 0.9, 0.0]},
 			{"target_id": "commons_earth_screen", "label": "Earth screen", "verb": "Inspect", "position": [0.0, 1.6, -5.0]},
@@ -127,23 +127,27 @@ const _ROOMS := {
 	},
 	"LOC-05": {
 		"room_id": "LOC-05",
-		"name": "Transfer Interlock",
-		"canonical_name": "Sealed pollination transfer corridor",
-		"bounds_m": [10.0, 8.0],
+		"name": "Airlock",
+		"canonical_name": "Airlock and sealed transfer vestibule",
+		"bounds_m": [8.0, 4.0],
 		"pressure": "pressurised",
-		"asset_ids": ["PR_Glovebox", "PR_PollinationKit", "PR_SampleHolder"],
+		"asset_ids": ["EN_Airlock_GlovePort", "EN_Airlock_PassThrough", "EN_Airlock_InterlockPanel", "EN_Airlock_SuitLocker", "EN_Airlock_Bench"],
 		"asset_paths": [
-			"res://assets/props/PR_Glovebox/PR_Glovebox.glb",
-			"res://assets/props/PR_PollinationKit/PR_PollinationKit.glb",
-			"res://assets/props/PR_SampleHolder/PR_SampleHolder.glb",
+			"res://assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD0.glb",
+			"res://assets/environment/EN_Airlock/EN_Airlock_PassThrough_LOD0.glb",
+			"res://assets/environment/EN_Airlock/EN_Airlock_InterlockPanel_LOD0.glb",
+			"res://assets/environment/EN_Airlock/EN_Airlock_SuitLocker_LOD0.glb",
+			"res://assets/environment/EN_Airlock/EN_Airlock_Bench_LOD0.glb",
 		],
-		"boundary_ids": ["door_service_garden", "garden_viewing_shutter"],
+		# The inner door to the Commons (east wall) and the outer hatch to the surface (west; the M3-2A interlock). The
+		# module is turned half a revolution (LOC-05.json shell_yaw_deg), so its garden wall is the north wall.
+		"boundary_ids": ["door_commons_airlock", "airlock_exterior"],
 		"focus_targets": [
-			{"target_id": "transfer_carrier", "label": "Sealed transfer carrier", "verb": "Inspect", "position": [-2.5, 1.0, -1.6]},
-			{"target_id": "transfer_glove_ports", "label": "Paired glove ports", "verb": "Inspect", "position": [0.0, 1.0, -1.6]},
-			{"target_id": "transfer_microscope", "label": "Pollen microscope", "verb": "Inspect", "position": [2.5, 1.0, -1.6]},
+			{"target_id": "transfer_glove_ports", "label": "Alo glove ports", "verb": "Inspect", "position": [2.0, 1.2, -1.9]},
+			{"target_id": "transfer_carrier", "label": "Sealed carrier pass-through", "verb": "Inspect", "position": [1.0, 1.22, -1.6]},
+			{"target_id": "transfer_microscope", "label": "Pollen microscope", "verb": "Inspect", "position": [0.0, 1.05, -1.75]},
 		],
-		"anchors": {"transfer_mei": [-2.2, 0.0, 1.5], "transfer_amara": [0.0, 0.0, 1.5], "transfer_rafi": [2.2, 0.0, 1.5], "transfer_player": [0.0, 0.0, 2.4]},
+		"anchors": {"transfer_mei": [2.6, 0.0, -0.4], "transfer_amara": [1.4, 0.0, -0.2], "transfer_rafi": [-0.3, 0.0, 0.6], "transfer_kai": [3.3, 0.0, 0.6], "transfer_player": [2.0, 0.0, 0.4]},
 	},
 	"LOC-06": {
 		"room_id": "LOC-06",
@@ -490,7 +494,7 @@ static func earth(room_id: String, scene_id: String) -> Dictionary:
 # "FROM..UNTIL" range) overrides fields for those scenes; "choice" / "unless" gate an echo layer on a recorded
 # story_log option (doc 24 §5.2). The base layout stays the Chapter 1 room; staging only adds and hides.
 
-const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "chapter7_props", "prints", "hide", "hide_signs"]
+const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "chapter7_props", "prints", "models", "hide", "hide_signs"]
 const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views", "care_round"]
 
 ## Story order of a canon scene id (chapter * 100 + scene number), or -1 for anything that is not one.
@@ -515,7 +519,7 @@ static func in_window(item: Dictionary, scene_id: String) -> bool:
 ## focus targets, signs, lights, M3-6A eclipse props, M3-7A Chapter 7 props, prints), what it hides from the base layout, merged anchors,
 ## focus relabels, per-scene lighting, the stations each scene action uses, and objects a cast member carries.
 ## choices is story_log.choices (choice_id -> {"option_id", ...}) and moments story_log.moments (e.g. "CH01-MUGS-NAMED");
-## they only gate echo layers ("choice" / "unless" / "moment").
+## they only gate echo layers ("choice" / "unless" / "moment" / "unless_moment").
 static func staging(room_id: String, scene_id: String, choices: Dictionary = {}, moments: Array = []) -> Dictionary:
 	return staging_for(layout(room_id), scene_id, choices, moments)
 
@@ -527,7 +531,7 @@ static func staging_for(room_layout: Dictionary, scene_id: String, choices: Dict
 	for key in _STAGING_MAPS:
 		result[key] = {}
 	for raw_layer in room_layout.get("staging", []):
-		if not raw_layer is Dictionary or not _choice_met(raw_layer, choices) or (raw_layer.has("moment") and not moments.has(raw_layer.moment)):
+		if not raw_layer is Dictionary or not _choice_met(raw_layer, choices) or (raw_layer.has("moment") and not moments.has(raw_layer.moment)) or moments.has(raw_layer.get("unless_moment", "")):
 			continue
 		var layer := _resolve(raw_layer, scene_id)
 		if layer.is_empty():

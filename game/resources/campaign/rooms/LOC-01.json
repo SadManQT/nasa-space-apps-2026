@@ -525,7 +525,7 @@
    "destination": "Safe Room"
   },
   {
-   "boundary_id": "airlock_exterior",
+   "boundary_id": "door_commons_airlock",
    "wall": "north",
    "offset_m": 6,
    "destination": "Airlock"
@@ -766,7 +766,7 @@
    "id": "ch01_named_mugs",
    "from": "EX-CH01-S12",
    "moment": "CH01-MUGS-NAMED",
-   "about": "M1-84 (doc 24 §5 optional moment CH01-MUGS-NAMED, M3-99 PR_Mug_Named): at the end of EX-CH01-S12 the four nameless mugs of EX-CH01-S01 gain masking tape and the cadets' names, and keep them for the rest of the game (the CH04-S12 echo; CS-17's five named mugs). The layer shows once the moment is in story_log.moments (CampaignRoom.set_story_choices(choices, moments)); each mug stands where it stood, its name facing the commons. Front row from the commons side, west to east: KAI, AMARA; back row: MEI, RAFI (role order, as the CH07-S01 observation cards). Ferreira's fifth mug is not part of this moment.",
+   "about": "M1-84 (doc 24 §5 optional moment CH01-MUGS-NAMED, M3-99 PR_Mug_Named): at the end of EX-CH01-S12 the four nameless mugs of EX-CH01-S01 gain masking tape and the cadets' names, and keep them for the rest of the game (the CH04-S12 echo; CS-17's five named mugs). The layer shows once the moment is in story_log.moments (CampaignRoom.set_story_choices(choices, moments)); each mug stands where it stood, its name facing the commons. Front row from the commons side, west to east: KAI, AMARA; back row: MEI, RAFI (role order, as the CH07-S01 observation cards). Ferreira's fifth mug is not part of this moment. In EX-CH02-S11..S12 Amara's mug is the cup set down by the pending-reply indicator (M3-2R): it moves 3 cm toward the indicator and rattles in S12; ch02_reply_cup stands in for it while the mugs are nameless.",
    "hide": [
     "commons_mug_4",
     "PR_Mug",
@@ -812,7 +812,23 @@
       1,
       1,
       1
-     ]
+     ],
+     "by_scene": {
+      "EX-CH02-S11..EX-CH02-S12": {
+       "position": [
+        0.42,
+        0.76,
+        0.2
+       ]
+      },
+      "EX-CH02-S12": {
+       "rattle": {
+        "seconds": 3.0,
+        "delay_s": 0.5,
+        "amplitude_m": 0.0035
+       }
+      }
+     }
     },
     {
      "id": "commons_mug_mei",
@@ -3141,6 +3157,1110 @@
      "pitch": -90
     }
    ]
+  },
+  {
+   "id": "ch02_finished_record",
+   "from": "EX-CH02-S07",
+   "until": "EX-CH02-S12",
+   "about": "EX-CH02-S07 'Aurora mission table' (doc 22 4.3 clues 1-2): the three life-cycle cards (the old trial's young unflowered seedlings with curled leaves, today's pollinated flower, a reference drawing of mature pods; photographed and drawn from the installed models), the dated care strip with the three bee runs and Kai's clean seed tray beside it (S06 -> S07), Rafi's paper bee beside the finished record with its wing at the horticulture recorder, whose equipment number HORT-01 matches the old trial card (S07 -> S08). The recorder moves to the service bench for S08.",
+   "props": [
+    {
+     "id": "PR_Recorder2034",
+     "path": "res://assets/props/PR_Recorder2034/PR_Recorder2034.glb",
+     "position": [
+      0.04,
+      0.751,
+      0.03
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "until": "EX-CH02-S07"
+    },
+    {
+     "id": "PR_PaperBee",
+     "path": "res://assets/props/PR_PaperBee/PR_PaperBee.glb",
+     "position": [
+      -0.13,
+      0.751,
+      0.34
+     ],
+     "rotation_degrees": [
+      0,
+      -35,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "id": "PR_SeedTray",
+     "path": "res://assets/props/PR_SeedTray/PR_SeedTray.glb",
+     "position": [
+      0.04,
+      0.759,
+      -0.3935
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    }
+   ],
+   "fixtures": [
+    {
+     "id": "lifecycle_sheet",
+     "position": [
+      0.0,
+      0.7615,
+      0.57
+     ],
+     "size": [
+      0.76,
+      0.003,
+      0.26
+     ],
+     "color": "#e6e8ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "care_strip",
+     "position": [
+      0.0,
+      0.762,
+      -0.615
+     ],
+     "size": [
+      0.95,
+      0.003,
+      0.1
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "recorder_sticker",
+     "position": [
+      -0.04,
+      1.011,
+      0.295
+     ],
+     "size": [
+      0.16,
+      0.08,
+      0.004
+     ],
+     "color": "#f4f2ea",
+     "transparent": false,
+     "finish": "satin",
+     "until": "EX-CH02-S07"
+    }
+   ],
+   "prints": [
+    {
+     "id": "lifecycle_old_trial",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_ZeroSeedlingTray/PL_ZeroSeedlingTray.glb",
+     "position": [
+      -0.24,
+      0.764,
+      0.56
+     ],
+     "size": [
+      0.2,
+      0.15
+     ],
+     "pitch": -90,
+     "border": 0.006,
+     "caption": "OLD TRIAL CARD · EQUIPMENT HORT-01\nYOUNG SEEDLINGS, CURLED LEAVES, NO FLOWERS",
+     "caption_size": 0.00024
+    },
+    {
+     "id": "lifecycle_ours_now",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb",
+     "position": [
+      0.0,
+      0.764,
+      0.56
+     ],
+     "size": [
+      0.2,
+      0.15
+     ],
+     "pitch": -90,
+     "border": 0.006,
+     "caption": "OURS, NOW · 6 MAY 2046\nPOLLINATED FLOWER",
+     "caption_size": 0.00024
+    },
+    {
+     "id": "lifecycle_reference",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Alo_Pods/PL_Alo_Pods.glb",
+     "position": [
+      0.24,
+      0.764,
+      0.56
+     ],
+     "size": [
+      0.2,
+      0.15
+     ],
+     "pitch": -90,
+     "border": 0.006,
+     "caption": "REFERENCE DRAWING ONLY\nMATURE PODS COME LATER",
+     "caption_size": 0.00024,
+     "illustration": true,
+     "backdrop": "#f1f0ea"
+    },
+    {
+     "id": "table_strip_bee_0",
+     "kind": "texture",
+     "texture": "res://assets/ui/diagrams/PR_PaperBee.png",
+     "position": [
+      -0.39,
+      0.765,
+      -0.635
+     ],
+     "size": [
+      0.035,
+      0.035
+     ],
+     "pitch": -90
+    },
+    {
+     "id": "table_strip_bee_3",
+     "kind": "texture",
+     "texture": "res://assets/ui/diagrams/PR_PaperBee.png",
+     "position": [
+      0.0,
+      0.765,
+      -0.635
+     ],
+     "size": [
+      0.035,
+      0.035
+     ],
+     "pitch": -90,
+     "roll": 11
+    },
+    {
+     "id": "table_strip_bee_6",
+     "kind": "texture",
+     "texture": "res://assets/ui/diagrams/PR_PaperBee.png",
+     "position": [
+      0.39,
+      0.765,
+      -0.635
+     ],
+     "size": [
+      0.035,
+      0.035
+     ],
+     "pitch": -90
+    }
+   ],
+   "signs": [
+    {
+     "id": "recorder_sticker_text",
+     "text": "SERVICE STICKER\nEQUIPMENT HORT-01",
+     "position": [
+      -0.04,
+      1.011,
+      0.298
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "until": "EX-CH02-S07"
+    },
+    {
+     "id": "lifecycle_title",
+     "text": "FLOWER · PODS · DRYING · HARVEST",
+     "position": [
+      0.0,
+      0.7655,
+      0.42
+     ],
+     "size": 0.00028,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90
+    },
+    {
+     "id": "table_strip_date_0",
+     "text": "30 APR",
+     "position": [
+      -0.39,
+      0.7655,
+      -0.6
+     ],
+     "size": 0.00024,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90
+    },
+    {
+     "id": "table_strip_date_1",
+     "text": "1 MAY",
+     "position": [
+      -0.26,
+      0.7655,
+      -0.6
+     ],
+     "size": 0.00024,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90
+    },
+    {
+     "id": "table_strip_date_2",
+     "text": "2 MAY",
+     "position": [
+      -0.13,
+      0.7655,
+      -0.6
+     ],
+     "size": 0.00024,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90
+    },
+    {
+     "id": "table_strip_date_3",
+     "text": "3 MAY",
+     "position": [
+      0.0,
+      0.7655,
+      -0.6
+     ],
+     "size": 0.00024,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90
+    },
+    {
+     "id": "table_strip_date_4",
+     "text": "4 MAY",
+     "position": [
+      0.13,
+      0.7655,
+      -0.6
+     ],
+     "size": 0.00024,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90
+    },
+    {
+     "id": "table_strip_date_5",
+     "text": "5 MAY",
+     "position": [
+      0.26,
+      0.7655,
+      -0.6
+     ],
+     "size": 0.00024,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90
+    },
+    {
+     "id": "table_strip_date_6",
+     "text": "6 MAY",
+     "position": [
+      0.39,
+      0.7655,
+      -0.6
+     ],
+     "size": 0.00024,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_lifecycle_cards",
+     "label": "Life-cycle cards",
+     "position": [
+      0.0,
+      0.85,
+      0.56
+     ],
+     "approach_m": [
+      0.0,
+      0.0,
+      1.6
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "lifecycle_sheet"
+    },
+    {
+     "target_id": "commons_recorder",
+     "label": "Horticulture recorder",
+     "position": [
+      0.04,
+      0.991,
+      0.37
+     ],
+     "approach_m": [
+      0.6,
+      0.0,
+      1.6
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "PR_Recorder2034"
+    }
+   ],
+   "stations": {
+    "order_lifecycle": "commons_lifecycle_cards",
+    "separate_current_evidence": "commons_lifecycle_cards",
+    "inspect_recorder_identifier": "commons_recorder",
+    "acknowledge_handover": "commons_mission_table"
+   },
+   "review_views": {
+    "ch02_table": {
+     "from": [
+      0.1,
+      1.55,
+      1.85
+     ],
+     "to": [
+      0.0,
+      0.78,
+      0.0
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch02_pending_reply",
+   "from": "EX-CH02-S11",
+   "until": "EX-CH02-S12",
+   "about": "EX-CH02-S11 'Aurora Earth-link console' (doc 22 4.4 clues 4-5): the evidence package to Commander Ferreira with its sent, receipt and reply columns apart ('Delivered is not the same as answered'), the cup set down beside the pending-reply indicator at the mission table; in S12 the cup trembles first (S11 -> S12) and the atmosphere panel shows the one red warning (S12 -> CH03-S01). The cup is the table's own mug, moved: Amara's named mug once CH01-MUGS-NAMED is recorded (by_scene in ch01_named_mugs), otherwise the nameless one (ch02_reply_cup).",
+   "props": [],
+   "fixtures": [
+    {
+     "id": "reply_indicator_base",
+     "position": [
+      0.6,
+      0.7735,
+      0.22
+     ],
+     "size": [
+      0.12,
+      0.025,
+      0.08
+     ],
+     "color": "#1F2A44",
+     "transparent": false
+    },
+    {
+     "id": "reply_indicator_lamp",
+     "position": [
+      0.6,
+      0.7935,
+      0.2
+     ],
+     "size": [
+      0.03,
+      0.015,
+      0.03
+     ],
+     "color": "#ffb347",
+     "transparent": false,
+     "emissive": true
+    },
+    {
+     "id": "package_panel",
+     "position": [
+      -2.4,
+      1.55,
+      -5.93
+     ],
+     "size": [
+      1.0,
+      0.62,
+      0.04
+     ],
+     "color": "#0f1a28",
+     "transparent": false,
+     "finish": "screen"
+    },
+    {
+     "id": "atmosphere_panel",
+     "position": [
+      2.4,
+      1.45,
+      -5.93
+     ],
+     "size": [
+      0.64,
+      0.5,
+      0.04
+     ],
+     "color": "#0f1a28",
+     "transparent": false,
+     "finish": "screen"
+    },
+    {
+     "id": "atmosphere_lamp_oxygen",
+     "position": [
+      2.15,
+      1.538,
+      -5.905
+     ],
+     "size": [
+      0.035,
+      0.035,
+      0.01
+     ],
+     "color": "#3fbf5a",
+     "transparent": false,
+     "emissive": true
+    },
+    {
+     "id": "atmosphere_lamp_co2",
+     "position": [
+      2.15,
+      1.438,
+      -5.905
+     ],
+     "size": [
+      0.035,
+      0.035,
+      0.01
+     ],
+     "color": "#3fbf5a",
+     "transparent": false,
+     "emissive": true
+    },
+    {
+     "id": "atmosphere_tank_symbol",
+     "position": [
+      2.15,
+      1.332,
+      -5.905
+     ],
+     "size": [
+      0.032,
+      0.05,
+      0.01
+     ],
+     "color": "#3fbf5a",
+     "transparent": false,
+     "emissive": true,
+     "by_scene": {
+      "EX-CH02-S12": {
+       "color": "#e8352a"
+      }
+     }
+    },
+    {
+     "id": "atmosphere_tank_symbol_neck",
+     "position": [
+      2.15,
+      1.364,
+      -5.905
+     ],
+     "size": [
+      0.014,
+      0.012,
+      0.01
+     ],
+     "color": "#3fbf5a",
+     "transparent": false,
+     "emissive": true,
+     "by_scene": {
+      "EX-CH02-S12": {
+       "color": "#e8352a"
+      }
+     }
+    }
+   ],
+   "signs": [
+    {
+     "id": "reply_indicator_word",
+     "text": "REPLY PENDING",
+     "position": [
+      0.6,
+      0.787,
+      0.275
+     ],
+     "size": 0.00024,
+     "color": "#f3d27a",
+     "outline": 4,
+     "pitch": -90
+    },
+    {
+     "id": "package_title",
+     "text": "EVIDENCE PACKAGE · TO COMMANDER FERREIRA",
+     "position": [
+      -2.4,
+      1.79,
+      -5.905
+     ],
+     "size": 0.0007,
+     "color": "#dfe7f2",
+     "outline": 0
+    },
+    {
+     "id": "package_sent",
+     "text": "SENT 6 MAY\nINTACT COPY\nSOURCE PHOTOS\nCHECKSUM\nTRANSCRIPT",
+     "position": [
+      -2.72,
+      1.5,
+      -5.905
+     ],
+     "size": 0.0007,
+     "color": "#dfe7f2",
+     "outline": 0
+    },
+    {
+     "id": "package_receipt",
+     "text": "RECEIPT\nDELIVERED",
+     "position": [
+      -2.33,
+      1.58,
+      -5.905
+     ],
+     "size": 0.0007,
+     "color": "#8fe39b",
+     "outline": 0
+    },
+    {
+     "id": "package_reply",
+     "text": "REPLY\nPENDING",
+     "position": [
+      -2.03,
+      1.58,
+      -5.905
+     ],
+     "size": 0.0007,
+     "color": "#f3d27a",
+     "outline": 0
+    },
+    {
+     "id": "atmosphere_title",
+     "text": "ATMOSPHERE",
+     "position": [
+      2.4,
+      1.638,
+      -5.905
+     ],
+     "size": 0.0008,
+     "color": "#dfe7f2",
+     "outline": 0
+    },
+    {
+     "id": "atmosphere_row_oxygen",
+     "text": "OXYGEN SUPPLY · OK",
+     "position": [
+      2.445,
+      1.538,
+      -5.905
+     ],
+     "size": 0.0008,
+     "color": "#dfe7f2",
+     "outline": 0
+    },
+    {
+     "id": "atmosphere_row_co2",
+     "text": "CARBON DIOXIDE · OK",
+     "position": [
+      2.445,
+      1.438,
+      -5.905
+     ],
+     "size": 0.0008,
+     "color": "#dfe7f2",
+     "outline": 0
+    },
+    {
+     "id": "atmosphere_row_tank",
+     "text": "TANK PRESSURE · OK",
+     "position": [
+      2.445,
+      1.338,
+      -5.905
+     ],
+     "size": 0.0008,
+     "color": "#dfe7f2",
+     "outline": 0,
+     "by_scene": {
+      "EX-CH02-S12": {
+       "text": "TANK PRESSURE · WARNING",
+       "color": "#ff5a4e"
+      }
+     }
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_package_panel",
+     "label": "Evidence package",
+     "position": [
+      -2.4,
+      1.5,
+      -5.8
+     ],
+     "approach_m": [
+      -2.4,
+      0.0,
+      -4.6
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "package_panel"
+    },
+    {
+     "target_id": "commons_atmosphere_panel",
+     "label": "Atmosphere panel",
+     "position": [
+      2.4,
+      1.45,
+      -5.8
+     ],
+     "approach_m": [
+      2.4,
+      0.0,
+      -4.7
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "atmosphere_panel"
+    }
+   ],
+   "stations": {
+    "send_fragment_copy": "commons_package_panel",
+    "finish_quake_beat": "commons_atmosphere_panel"
+   },
+   "review_views": {
+    "ch02_package": {
+     "from": [
+      -1.6,
+      1.6,
+      -3.6
+     ],
+     "to": [
+      -2.4,
+      1.5,
+      -5.95
+     ]
+    },
+    "ch02_cup": {
+     "from": [
+      0.95,
+      1.05,
+      0.95
+     ],
+     "to": [
+      0.5,
+      0.8,
+      0.2
+     ]
+    },
+    "ch02_atmosphere": {
+     "from": [
+      1.9,
+      1.6,
+      -4.1
+     ],
+     "to": [
+      2.4,
+      1.42,
+      -5.95
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch02_reply_cup",
+   "from": "EX-CH02-S11",
+   "until": "EX-CH02-S12",
+   "unless_moment": "CH01-MUGS-NAMED",
+   "about": "EX-CH02-S11..S12 (M3-2R): the table's own nameless mug set down beside the pending-reply indicator; in S12 it trembles first. Only while CH01-MUGS-NAMED is not recorded: with named mugs, Amara's mug is the cup (ch01_named_mugs by_scene).",
+   "hide": [
+    "PR_Mug"
+   ],
+   "props": [
+    {
+     "id": "reply_cup",
+     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "position": [
+      0.42,
+      0.76,
+      0.2
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "by_scene": {
+      "EX-CH02-S12": {
+       "rattle": {
+        "seconds": 3.0,
+        "delay_s": 0.5,
+        "amplitude_m": 0.0035
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "ch02_brace_zone",
+   "from": "EX-CH02-S07",
+   "about": "EX-CH02-S12 'Interior brace zone beside mission table': the marked floor zone away from walls, windows and hanging fixtures (painted, so it stays), the four name tokens for the roll call in S12 with the crew standing on them, and the newly displaced service cover Kai points out (S12; the CH03 annex investigation starts from it).",
+   "fixtures": [
+    {
+     "id": "brace_edge_n",
+     "position": [
+      3.6,
+      0.003,
+      -1.0
+     ],
+     "size": [
+      2.0,
+      0.006,
+      0.06
+     ],
+     "color": "#F2C230",
+     "transparent": false
+    },
+    {
+     "id": "brace_edge_s",
+     "position": [
+      3.6,
+      0.003,
+      1.0
+     ],
+     "size": [
+      2.0,
+      0.006,
+      0.06
+     ],
+     "color": "#F2C230",
+     "transparent": false
+    },
+    {
+     "id": "brace_edge_w",
+     "position": [
+      2.6,
+      0.003,
+      0.0
+     ],
+     "size": [
+      0.06,
+      0.006,
+      2.06
+     ],
+     "color": "#F2C230",
+     "transparent": false
+    },
+    {
+     "id": "brace_edge_e",
+     "position": [
+      4.6,
+      0.003,
+      0.0
+     ],
+     "size": [
+      0.06,
+      0.006,
+      2.06
+     ],
+     "color": "#F2C230",
+     "transparent": false
+    },
+    {
+     "id": "brace_token_kai",
+     "position": [
+      3.1,
+      0.003,
+      -0.13
+     ],
+     "size": [
+      0.34,
+      0.006,
+      0.12
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "from": "EX-CH02-S12",
+     "until": "EX-CH02-S12"
+    },
+    {
+     "id": "brace_token_amara",
+     "position": [
+      4.1,
+      0.003,
+      -0.13
+     ],
+     "size": [
+      0.34,
+      0.006,
+      0.12
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "from": "EX-CH02-S12",
+     "until": "EX-CH02-S12"
+    },
+    {
+     "id": "brace_token_mei",
+     "position": [
+      3.1,
+      0.003,
+      0.67
+     ],
+     "size": [
+      0.34,
+      0.006,
+      0.12
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "from": "EX-CH02-S12",
+     "until": "EX-CH02-S12"
+    },
+    {
+     "id": "brace_token_rafi",
+     "position": [
+      4.1,
+      0.003,
+      0.67
+     ],
+     "size": [
+      0.34,
+      0.006,
+      0.12
+     ],
+     "color": "#1F2A44",
+     "transparent": false,
+     "from": "EX-CH02-S12",
+     "until": "EX-CH02-S12"
+    },
+    {
+     "id": "service_cover_gap",
+     "position": [
+      5.6,
+      0.002,
+      -1.4
+     ],
+     "size": [
+      0.8,
+      0.004,
+      0.6
+     ],
+     "color": "#07090d",
+     "transparent": false,
+     "from": "EX-CH02-S12",
+     "until": "EX-CH02-S12"
+    },
+    {
+     "id": "service_cover",
+     "position": [
+      5.66,
+      0.016,
+      -1.36
+     ],
+     "size": [
+      0.8,
+      0.025,
+      0.6
+     ],
+     "color": "#7d8590",
+     "transparent": false,
+     "from": "EX-CH02-S12",
+     "until": "EX-CH02-S12"
+    }
+   ],
+   "signs": [
+    {
+     "id": "brace_zone_word",
+     "text": "BRACE ZONE",
+     "position": [
+      3.6,
+      0.007,
+      0.75
+     ],
+     "size": 0.0026,
+     "color": "#F2C230",
+     "outline": 0,
+     "pitch": -90
+    },
+    {
+     "id": "brace_token_word_kai",
+     "text": "KAI",
+     "position": [
+      3.1,
+      0.0065,
+      -0.13
+     ],
+     "size": 0.0011,
+     "color": "#ffffff",
+     "outline": 0,
+     "pitch": -90,
+     "from": "EX-CH02-S12",
+     "until": "EX-CH02-S12"
+    },
+    {
+     "id": "brace_token_word_amara",
+     "text": "AMARA",
+     "position": [
+      4.1,
+      0.0065,
+      -0.13
+     ],
+     "size": 0.0011,
+     "color": "#ffffff",
+     "outline": 0,
+     "pitch": -90,
+     "from": "EX-CH02-S12",
+     "until": "EX-CH02-S12"
+    },
+    {
+     "id": "brace_token_word_mei",
+     "text": "MEI",
+     "position": [
+      3.1,
+      0.0065,
+      0.67
+     ],
+     "size": 0.0011,
+     "color": "#ffffff",
+     "outline": 0,
+     "pitch": -90,
+     "from": "EX-CH02-S12",
+     "until": "EX-CH02-S12"
+    },
+    {
+     "id": "brace_token_word_rafi",
+     "text": "RAFI",
+     "position": [
+      4.1,
+      0.0065,
+      0.67
+     ],
+     "size": 0.0011,
+     "color": "#ffffff",
+     "outline": 0,
+     "pitch": -90,
+     "from": "EX-CH02-S12",
+     "until": "EX-CH02-S12"
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "commons_brace_zone",
+     "label": "Brace zone",
+     "position": [
+      3.6,
+      0.5,
+      -0.3
+     ],
+     "approach_m": [
+      3.6,
+      0.0,
+      0.0
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "brace_edge_s"
+    }
+   ],
+   "stations": {
+    "reach_interior_brace": "commons_brace_zone",
+    "account_four_cadets": "commons_brace_zone"
+   },
+   "by_scene": {
+    "EX-CH02-S12": {
+     "anchors": {
+      "commons_kai": [
+       3.1,
+       0,
+       -0.45
+      ],
+      "commons_amara": [
+       4.1,
+       0,
+       -0.45
+      ],
+      "commons_mei": [
+       3.1,
+       0,
+       0.35
+      ],
+      "commons_rafi": [
+       4.1,
+       0,
+       0.35
+      ]
+     }
+    }
+   },
+   "review_views": {
+    "ch02_brace_zone": {
+     "from": [
+      1.6,
+      2.1,
+      2.6
+     ],
+     "to": [
+      3.8,
+      0.2,
+      -0.4
+     ]
+    }
+   }
   }
  ]
 }

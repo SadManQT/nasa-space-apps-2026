@@ -1775,6 +1775,951 @@
      ]
     }
    }
+  },
+  {
+   "id": "ch02_recorder_bench",
+   "from": "EX-CH02-S08",
+   "until": "EX-CH03-S05",
+   "about": "EX-CH02-S08..S10 'Recorder service bench', 'Local evidence reconstruction board', 'Recorder playback station' (P-04, doc 22 4.3-4.4): the horticulture recorder on its service bench with the newer sticker lifting over the older plate and its channel label; the evidence board in Observed / Inferred / Unknown columns with the three source cards, the excluded guess and the clean empty space where a person might belong (S08 -> S09); the three recorder files filled from the cards once the mapping holds (S09); the playback screen locked until then and showing both 2034 transcripts word for word with the date above them (S09 -> S10, S10). The board stays through the same night (CH03 S01..S05).",
+   "fixtures": [
+    {
+     "id": "recorder_bench",
+     "position": [
+      2.55,
+      0.45,
+      3.62
+     ],
+     "size": [
+      1.7,
+      0.9,
+      0.7
+     ],
+     "color": "#3c4b5d",
+     "transparent": false
+    },
+    {
+     "id": "recorder_bench_top",
+     "position": [
+      2.55,
+      0.915,
+      3.6
+     ],
+     "size": [
+      1.76,
+      0.03,
+      0.74
+     ],
+     "color": "#939BA6",
+     "transparent": false
+    },
+    {
+     "id": "recorder_old_plate",
+     "position": [
+      3.07,
+      1.08,
+      3.352
+     ],
+     "size": [
+      0.14,
+      0.08,
+      0.004
+     ],
+     "color": "#9aa1a8",
+     "transparent": false
+    },
+    {
+     "id": "recorder_new_sticker",
+     "position": [
+      3.04,
+      1.1,
+      3.348
+     ],
+     "size": [
+      0.15,
+      0.08,
+      0.004
+     ],
+     "color": "#f4f2ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "recorder_channel_label",
+     "position": [
+      2.88,
+      1.22,
+      3.348
+     ],
+     "size": [
+      0.12,
+      0.03,
+      0.004
+     ],
+     "color": "#1F2A44",
+     "transparent": false
+    },
+    {
+     "id": "evidence_board",
+     "position": [
+      1.0,
+      1.55,
+      3.965
+     ],
+     "size": [
+      1.7,
+      1.0,
+      0.03
+     ],
+     "color": "#e6e8ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "evidence_col_rule_1",
+     "position": [
+      1.28,
+      1.6,
+      3.947
+     ],
+     "size": [
+      0.006,
+      0.82,
+      0.003
+     ],
+     "color": "#8a8f99",
+     "transparent": false
+    },
+    {
+     "id": "evidence_col_rule_2",
+     "position": [
+      0.72,
+      1.6,
+      3.947
+     ],
+     "size": [
+      0.006,
+      0.82,
+      0.003
+     ],
+     "color": "#8a8f99",
+     "transparent": false
+    },
+    {
+     "id": "card_serial",
+     "position": [
+      1.56,
+      1.84,
+      3.947
+     ],
+     "size": [
+      0.5,
+      0.1,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "card_date",
+     "position": [
+      1.56,
+      1.72,
+      3.947
+     ],
+     "size": [
+      0.5,
+      0.1,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "card_trial",
+     "position": [
+      1.56,
+      1.6,
+      3.947
+     ],
+     "size": [
+      0.5,
+      0.1,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "card_retreat",
+     "position": [
+      1.56,
+      1.48,
+      3.947
+     ],
+     "size": [
+      0.5,
+      0.1,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S10"
+    },
+    {
+     "id": "card_person_empty",
+     "position": [
+      0.43,
+      1.84,
+      3.947
+     ],
+     "size": [
+      0.48,
+      0.1,
+      0.004
+     ],
+     "color": "#fbfbf8",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "card_writer",
+     "position": [
+      0.43,
+      1.72,
+      3.947
+     ],
+     "size": [
+      0.48,
+      0.1,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S10"
+    },
+    {
+     "id": "files_card",
+     "position": [
+      1.0,
+      1.2,
+      3.947
+     ],
+     "size": [
+      0.66,
+      0.2,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S09"
+    },
+    {
+     "id": "playback_screen",
+     "position": [
+      3.0,
+      1.72,
+      3.95
+     ],
+     "size": [
+      0.66,
+      0.42,
+      0.03
+     ],
+     "color": "#0f1a28",
+     "transparent": false,
+     "finish": "screen"
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "recorder_bench",
+     "position": [
+      2.55,
+      0.45,
+      3.62
+     ],
+     "size": [
+      1.7,
+      0.9,
+      0.7
+     ]
+    }
+   ],
+   "props": [
+    {
+     "id": "PR_Recorder2034",
+     "path": "res://assets/props/PR_Recorder2034/PR_Recorder2034.glb",
+     "position": [
+      3.05,
+      0.93,
+      3.62
+     ],
+     "rotation_degrees": [
+      0,
+      180,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "id": "recorder_sticker_text",
+     "text": "SERVICE STICKER · HORT-01",
+     "position": [
+      3.04,
+      1.1,
+      3.345
+     ],
+     "size": 0.00022,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180
+    },
+    {
+     "id": "recorder_channel_text",
+     "text": "CHANNEL: ENGINEERING",
+     "position": [
+      2.88,
+      1.22,
+      3.345
+     ],
+     "size": 0.00018,
+     "color": "#ffffff",
+     "outline": 0,
+     "yaw": 180
+    },
+    {
+     "id": "evidence_title",
+     "text": "EVIDENCE BOARD · RECORDER HORT-01",
+     "position": [
+      1.0,
+      2.0,
+      3.944
+     ],
+     "size": 0.00045,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180
+    },
+    {
+     "id": "evidence_head_observed",
+     "text": "OBSERVED",
+     "position": [
+      1.56,
+      1.925,
+      3.944
+     ],
+     "size": 0.0004,
+     "color": "#1f6b31",
+     "outline": 0,
+     "yaw": 180
+    },
+    {
+     "id": "evidence_head_inferred",
+     "text": "INFERRED",
+     "position": [
+      1.0,
+      1.925,
+      3.944
+     ],
+     "size": 0.0004,
+     "color": "#7a5a00",
+     "outline": 0,
+     "yaw": 180
+    },
+    {
+     "id": "evidence_head_unknown",
+     "text": "UNKNOWN",
+     "position": [
+      0.43,
+      1.925,
+      3.944
+     ],
+     "size": 0.0004,
+     "color": "#5a2f80",
+     "outline": 0,
+     "yaw": 180
+    },
+    {
+     "id": "card_serial_text",
+     "text": "SERIAL PLATE: HORT-01\nSOURCE: RECORDER, UNDER THE NEWER STICKER",
+     "position": [
+      1.56,
+      1.84,
+      3.944
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 0.48
+    },
+    {
+     "id": "card_date_text",
+     "text": "MAINTENANCE DATE: 2034-04\nSOURCE: THE OLDER PLATE",
+     "position": [
+      1.56,
+      1.72,
+      3.944
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 0.48
+    },
+    {
+     "id": "card_trial_text",
+     "text": "TRIAL CHART: FLOWERING NOT REACHED\nSOURCE: THE OLDER PLATE · SEEDLINGS ONLY",
+     "position": [
+      1.56,
+      1.6,
+      3.944
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 0.48
+    },
+    {
+     "id": "card_retreat_text",
+     "text": "RECORDED IN 2034: CREW RETREAT ORDERED\nSOURCE: RESTORED LOCAL COPY",
+     "position": [
+      1.56,
+      1.48,
+      3.944
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 0.48,
+     "from": "EX-CH02-S10"
+    },
+    {
+     "id": "card_writer_text",
+     "text": "THE GARDENER'S NAME\nSIGNED ONLY “N.”",
+     "position": [
+      0.43,
+      1.72,
+      3.944
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 0.46,
+     "from": "EX-CH02-S10"
+    },
+    {
+     "id": "excluded_text",
+     "text": "SET ASIDE · NO SOURCE: A GUESSED OWNER'S NAME",
+     "position": [
+      0.43,
+      1.12,
+      3.944
+     ],
+     "size": 0.00024,
+     "color": "#8a8f99",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 0.5
+    },
+    {
+     "id": "files_text",
+     "text": "FILE A · DATE: ?\nFILE B · DEVICE: ?\nFILE C · CHANNEL: ?",
+     "position": [
+      1.0,
+      1.2,
+      3.944
+     ],
+     "size": 0.00028,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 0.62,
+     "from": "EX-CH02-S09",
+     "by_scene": {
+      "EX-CH02-S10..EX-CH03-S05": {
+       "text": "FILE A · DATE: 2034-04\nFILE B · DEVICE: HORT-01\nFILE C · CHANNEL: ENGINEERING\nCHECKSUM MATCHES · LOCAL COPY · ORIGINAL UNTOUCHED"
+      }
+     }
+    },
+    {
+     "id": "playback_text",
+     "text": "PLAYBACK LOCKED\nMATCH DATE, DEVICE AND CHANNEL FIRST",
+     "position": [
+      3.0,
+      1.72,
+      3.932
+     ],
+     "size": 0.00042,
+     "color": "#dfe7f2",
+     "outline": 0,
+     "yaw": 180,
+     "until": "EX-CH02-S09"
+    },
+    {
+     "id": "playback_header",
+     "text": "LOCAL COPY · RECORDED 2034-04 · DEVICE HORT-01",
+     "position": [
+      3.0,
+      1.88,
+      3.932
+     ],
+     "size": 0.00028,
+     "color": "#8fd3ff",
+     "outline": 0,
+     "yaw": 180,
+     "from": "EX-CH02-S10"
+    },
+    {
+     "id": "playback_engineer",
+     "text": "2034 ENGINEER (RECORDING): {line}",
+     "position": [
+      3.0,
+      1.76,
+      3.932
+     ],
+     "size": 0.00026,
+     "color": "#dfe7f2",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 0.6,
+     "line": "EX-CH02-S10-L01",
+     "from": "EX-CH02-S10"
+    },
+    {
+     "id": "playback_n",
+     "text": "N. (RECORDING): {line}",
+     "position": [
+      3.0,
+      1.6,
+      3.932
+     ],
+     "size": 0.00026,
+     "color": "#dfe7f2",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 0.6,
+     "line": "EX-CH02-S10-L03",
+     "from": "EX-CH02-S10"
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "service_recorder",
+     "label": "Horticulture recorder",
+     "position": [
+      3.05,
+      1.25,
+      3.3
+     ],
+     "approach_m": [
+      3.0,
+      0.0,
+      2.6
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "PR_Recorder2034"
+    },
+    {
+     "target_id": "service_evidence_board",
+     "label": "Evidence board",
+     "position": [
+      1.0,
+      1.55,
+      3.85
+     ],
+     "approach_m": [
+      1.0,
+      0.0,
+      2.9
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "evidence_board"
+    },
+    {
+     "target_id": "service_playback",
+     "label": "Playback and transcript",
+     "position": [
+      3.0,
+      1.72,
+      3.85
+     ],
+     "approach_m": [
+      3.4,
+      0.0,
+      2.6
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "playback_screen"
+    }
+   ],
+   "stations": {
+    "collect_serial_card": "service_recorder",
+    "collect_date_card": "service_recorder",
+    "collect_trial_stage_card": "service_recorder",
+    "exclude_identity_claim": "service_evidence_board",
+    "assign_date_token": "service_evidence_board",
+    "assign_device_token": "service_evidence_board",
+    "assign_channel_token": "service_evidence_board",
+    "verify_local_checksum": "service_recorder",
+    "open_reconstructed_transcript": "service_playback",
+    "play_engineer_fragment": "service_playback",
+    "play_n_memory": "service_playback",
+    "classify_voice_inference": "service_evidence_board"
+   },
+   "by_scene": {
+    "EX-CH02-S08": {
+     "anchors": {
+      "service_mei": [
+       2.75,
+       0,
+       1.8
+      ],
+      "service_amara": [
+       1.6,
+       0,
+       2.35
+      ],
+      "service_rafi": [
+       -0.45,
+       0,
+       2.75
+      ]
+     }
+    },
+    "EX-CH02-S09": {
+     "anchors": {
+      "service_kai": [
+       4.25,
+       0,
+       2.6
+      ],
+      "service_mei": [
+       2.2,
+       0,
+       2.55
+      ],
+      "service_rafi": [
+       0.2,
+       0,
+       2.9
+      ]
+     }
+    },
+    "EX-CH02-S10": {
+     "anchors": {
+      "service_kai": [
+       4.15,
+       0,
+       2.3
+      ],
+      "service_amara": [
+       1.6,
+       0,
+       2.35
+      ],
+      "service_rafi": [
+       0.2,
+       0,
+       2.9
+      ]
+     }
+    }
+   },
+   "review_views": {
+    "ch02_recorder_bench": {
+     "from": [
+      2.1,
+      1.6,
+      1.9
+     ],
+     "to": [
+      2.8,
+      1.3,
+      3.9
+     ]
+    },
+    "ch02_evidence_board": {
+     "from": [
+      1.0,
+      1.6,
+      2.95
+     ],
+     "to": [
+      1.0,
+      1.55,
+      3.95
+     ]
+    },
+    "ch02_playback": {
+     "from": [
+      3.0,
+      1.66,
+      3.05
+     ],
+     "to": [
+      3.0,
+      1.72,
+      3.95
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch02_d5_opt01",
+   "from": "EX-CH02-S10",
+   "until": "EX-CH03-S05",
+   "choice": {
+    "choice_id": "EX-CH02-S10-CHOICE",
+    "option_id": "EX-CH02-S10-OPT01"
+   },
+   "about": "Doc 24 section 5.2 D5: the board files the familiar voice under Inferred; the note says how the player first handled it (the CH05-S03 card repeats it).",
+   "fixtures": [
+    {
+     "id": "card_voice",
+     "position": [
+      1.0,
+      1.84,
+      3.947
+     ],
+     "size": [
+      0.5,
+      0.1,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "card_voice_text",
+     "text": "ENGINEER'S VOICE RESEMBLES FERREIRA\nCORRECTED TO AN INFERENCE · 6 MAY 2046",
+     "position": [
+      1.0,
+      1.84,
+      3.944
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 0.48
+    }
+   ]
+  },
+  {
+   "id": "ch02_d5_opt02",
+   "from": "EX-CH02-S10",
+   "until": "EX-CH03-S05",
+   "choice": {
+    "choice_id": "EX-CH02-S10-CHOICE",
+    "option_id": "EX-CH02-S10-OPT02"
+   },
+   "about": "Doc 24 section 5.2 D5: the board files the familiar voice under Inferred; the note says how the player first handled it (the CH05-S03 card repeats it).",
+   "fixtures": [
+    {
+     "id": "card_voice",
+     "position": [
+      1.0,
+      1.84,
+      3.947
+     ],
+     "size": [
+      0.5,
+      0.1,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "card_voice_text",
+     "text": "ENGINEER'S VOICE RESEMBLES FERREIRA\nKEPT AS AN INFERENCE · 6 MAY 2046",
+     "position": [
+      1.0,
+      1.84,
+      3.944
+     ],
+     "size": 0.00026,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "wrap_m": 0.48
+    }
+   ]
+  },
+  {
+   "id": "ch03_join_pressure_warning",
+   "from": "EX-CH03-S01",
+   "until": "EX-CH03-S01",
+   "about": "Doc 24 section 2.9 CH02 -> CH03: no time jump; the same red pressure warning the Commons atmosphere panel showed at 22:00 (same rows, the oxygen-tank symbol red) is on the air console's status screen at 22:05 ('The oxygen-tank symbol is red', EX-CH03-S01). Chapter 3 rooms (M3-3R) own how long it stays.",
+   "fixtures": [
+    {
+     "id": "air_warning_panel",
+     "position": [
+      1.4,
+      2.087,
+      -1.6
+     ],
+     "size": [
+      0.64,
+      0.34,
+      0.03
+     ],
+     "color": "#0f1a28",
+     "transparent": false,
+     "finish": "screen"
+    },
+    {
+     "id": "air_warning_lamp_oxygen",
+     "position": [
+      1.15,
+      2.1355,
+      -1.583
+     ],
+     "size": [
+      0.035,
+      0.035,
+      0.01
+     ],
+     "color": "#3fbf5a",
+     "transparent": false,
+     "emissive": true
+    },
+    {
+     "id": "air_warning_lamp_co2",
+     "position": [
+      1.15,
+      2.0605,
+      -1.583
+     ],
+     "size": [
+      0.035,
+      0.035,
+      0.01
+     ],
+     "color": "#3fbf5a",
+     "transparent": false,
+     "emissive": true
+    },
+    {
+     "id": "air_warning_tank_symbol",
+     "position": [
+      1.15,
+      1.9795,
+      -1.583
+     ],
+     "size": [
+      0.032,
+      0.05,
+      0.01
+     ],
+     "color": "#e8352a",
+     "transparent": false,
+     "emissive": true
+    },
+    {
+     "id": "air_warning_tank_symbol_neck",
+     "position": [
+      1.15,
+      2.0115,
+      -1.583
+     ],
+     "size": [
+      0.014,
+      0.012,
+      0.01
+     ],
+     "color": "#e8352a",
+     "transparent": false,
+     "emissive": true
+    }
+   ],
+   "signs": [
+    {
+     "id": "air_warning_title",
+     "text": "ATMOSPHERE",
+     "position": [
+      1.4,
+      2.2105,
+      -1.583
+     ],
+     "size": 0.0008,
+     "color": "#dfe7f2",
+     "outline": 0
+    },
+    {
+     "id": "air_warning_row_oxygen",
+     "text": "OXYGEN SUPPLY · OK",
+     "position": [
+      1.445,
+      2.1355,
+      -1.583
+     ],
+     "size": 0.0008,
+     "color": "#dfe7f2",
+     "outline": 0
+    },
+    {
+     "id": "air_warning_row_co2",
+     "text": "CARBON DIOXIDE · OK",
+     "position": [
+      1.445,
+      2.0605,
+      -1.583
+     ],
+     "size": 0.0008,
+     "color": "#dfe7f2",
+     "outline": 0
+    },
+    {
+     "id": "air_warning_row_tank",
+     "text": "TANK PRESSURE · WARNING",
+     "position": [
+      1.445,
+      1.9855,
+      -1.583
+     ],
+     "size": 0.0008,
+     "color": "#ff5a4e",
+     "outline": 0
+    }
+   ]
   }
  ]
 }

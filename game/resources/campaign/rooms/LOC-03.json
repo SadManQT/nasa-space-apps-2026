@@ -949,6 +949,1295 @@
      ]
     }
    }
+  },
+  {
+   "id": "ch02_earth_console",
+   "from": "EX-CH02-S01",
+   "about": "EX-CH02-S01 'Tara reference bay and Earth console': the garden's Earth-link console on the west wall, in view with Tara's bay, where Ferreira's delayed praise arrives on 30 Apr as Tara opens (doc 24 section 2.9 CH01 -> CH02; doc 22 4.1 clue 2). CampaignCrew draws the caller on it like the Commons screen ('earth_screen', yaw 90 = facing +X). It stays installed (props accumulate).",
+   "fixtures": [
+    {
+     "id": "earth_screen",
+     "position": [
+      -5.96,
+      1.78,
+      -1.05
+     ],
+     "size": [
+      0.06,
+      0.84,
+      1.5
+     ],
+     "color": "#192b42",
+     "transparent": false,
+     "finish": "screen",
+     "yaw": 90
+    },
+    {
+     "id": "earth_console_shelf",
+     "position": [
+      -5.82,
+      0.9,
+      -1.05
+     ],
+     "size": [
+      0.3,
+      0.04,
+      1.2
+     ],
+     "color": "#1F2A44",
+     "transparent": false
+    }
+   ],
+   "signs": [
+    {
+     "id": "earth_console_title",
+     "text": "EARTH LINK",
+     "position": [
+      -5.92,
+      2.31,
+      -1.05
+     ],
+     "size": 0.0011,
+     "color": "#20b8c9",
+     "outline": 8,
+     "yaw": 90,
+     "by_scene": {
+      "EX-CH02-S01": {
+       "text": "EARTH LINK · CONTACT RETURNED 30 APR"
+      }
+     }
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "garden_earth_console",
+     "label": "Earth console",
+     "position": [
+      -5.85,
+      1.68,
+      -1.05
+     ],
+     "approach_m": [
+      -4.9,
+      0.0,
+      -1.05
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "earth_screen"
+    }
+   ],
+   "stations": {
+    "ack_live_link": "garden_earth_console"
+   },
+   "review_views": {
+    "ch02_earth_console": {
+     "from": [
+      -3.4,
+      1.65,
+      -0.2
+     ],
+     "to": [
+      -5.9,
+      1.6,
+      -1.1
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch02_growth_record",
+   "from": "EX-CH02-S01",
+   "until": "EX-CH02-S12",
+   "about": "The lineage board as the paired Growth Record: Tara's new photograph beside Alo's at equal size with each plant's identity card under it (EX-CH02-S01: compare the identity cards; S01 -> S02 'Tara's photo now beside Alo's'), then from S06 the seven-date strip with three bee-run marks under them (S05 -> S06 'the seventh date card under the paired photographs', one stamp slightly crooked) and the stem colours in words. Photographs are the installed plant models photographed in the room (no generation).",
+   "fixtures": [
+    {
+     "id": "alo_id_card",
+     "position": [
+      -0.02,
+      1.585,
+      -3.818
+     ],
+     "size": [
+      0.34,
+      0.15,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "tara_id_card",
+     "position": [
+      0.62,
+      1.585,
+      -3.818
+     ],
+     "size": [
+      0.34,
+      0.15,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "care_cell_0",
+     "position": [
+      -0.36,
+      1.4,
+      -3.818
+     ],
+     "size": [
+      0.2,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cell_1",
+     "position": [
+      -0.14,
+      1.4,
+      -3.818
+     ],
+     "size": [
+      0.2,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cell_2",
+     "position": [
+      0.08,
+      1.4,
+      -3.818
+     ],
+     "size": [
+      0.2,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cell_3",
+     "position": [
+      0.3,
+      1.4,
+      -3.818
+     ],
+     "size": [
+      0.2,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cell_4",
+     "position": [
+      0.52,
+      1.4,
+      -3.818
+     ],
+     "size": [
+      0.2,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cell_5",
+     "position": [
+      0.74,
+      1.4,
+      -3.818
+     ],
+     "size": [
+      0.2,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cell_6",
+     "position": [
+      0.96,
+      1.4,
+      -3.818
+     ],
+     "size": [
+      0.2,
+      0.1,
+      0.004
+     ],
+     "color": "#f7f6f1",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S06"
+    }
+   ],
+   "prints": [
+    {
+     "id": "growth_photo_alo",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb",
+     "position": [
+      -0.02,
+      1.8,
+      -3.818
+     ],
+     "size": [
+      0.32,
+      0.22
+     ],
+     "border": 0.008
+    },
+    {
+     "id": "growth_photo_tara",
+     "kind": "plant_photo",
+     "subject": "res://assets/plants/PL_Tara_Bloom/PL_Tara_Bloom.glb",
+     "position": [
+      0.62,
+      1.8,
+      -3.818
+     ],
+     "size": [
+      0.32,
+      0.22
+     ],
+     "border": 0.008
+    },
+    {
+     "id": "care_bee_0",
+     "kind": "texture",
+     "texture": "res://assets/ui/diagrams/PR_PaperBee.png",
+     "position": [
+      -0.36,
+      1.37,
+      -3.8145
+     ],
+     "size": [
+      0.042,
+      0.042
+     ],
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_bee_3",
+     "kind": "texture",
+     "texture": "res://assets/ui/diagrams/PR_PaperBee.png",
+     "position": [
+      0.3,
+      1.37,
+      -3.8145
+     ],
+     "size": [
+      0.042,
+      0.042
+     ],
+     "yaw": 0,
+     "roll": 11,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_bee_6",
+     "kind": "texture",
+     "texture": "res://assets/ui/diagrams/PR_PaperBee.png",
+     "position": [
+      0.96,
+      1.37,
+      -3.8145
+     ],
+     "size": [
+      0.042,
+      0.042
+     ],
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    }
+   ],
+   "signs": [
+    {
+     "id": "growth_record_title",
+     "text": "ALO AND TARA",
+     "position": [
+      0.3,
+      1.985,
+      -3.815
+     ],
+     "size": 0.0007,
+     "color": "#dfe7f2",
+     "outline": 0
+    },
+    {
+     "id": "alo_id_text",
+     "text": "ALO · FIELD MUSTARD (BRASSICA RAPA)\nSTEM: PURPLE · FIRST FLOWER 27 APR 2046\nSAME VARIETY AS TARA\nNEEDS POLLEN FROM A PARTNER PLANT",
+     "position": [
+      -0.02,
+      1.585,
+      -3.815
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.33
+    },
+    {
+     "id": "tara_id_text",
+     "text": "TARA · FIELD MUSTARD (BRASSICA RAPA)\nSTEM: GREEN · FIRST FLOWER 30 APR 2046\nSAME VARIETY AS ALO\nNEEDS POLLEN FROM A PARTNER PLANT",
+     "position": [
+      0.62,
+      1.585,
+      -3.815
+     ],
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.33
+    },
+    {
+     "id": "care_date_0",
+     "text": "30 APR",
+     "position": [
+      -0.36,
+      1.43,
+      -3.815
+     ],
+     "size": 0.00042,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cared_0",
+     "text": "CARED",
+     "position": [
+      -0.36,
+      1.398,
+      -3.815
+     ],
+     "size": 0.000378,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_date_1",
+     "text": "1 MAY",
+     "position": [
+      -0.14,
+      1.43,
+      -3.815
+     ],
+     "size": 0.00042,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cared_1",
+     "text": "CARED",
+     "position": [
+      -0.14,
+      1.398,
+      -3.815
+     ],
+     "size": 0.000378,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_date_2",
+     "text": "2 MAY",
+     "position": [
+      0.08,
+      1.43,
+      -3.815
+     ],
+     "size": 0.00042,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cared_2",
+     "text": "CARED",
+     "position": [
+      0.08,
+      1.398,
+      -3.815
+     ],
+     "size": 0.000378,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_date_3",
+     "text": "3 MAY",
+     "position": [
+      0.3,
+      1.43,
+      -3.815
+     ],
+     "size": 0.00042,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cared_3",
+     "text": "CARED",
+     "position": [
+      0.3,
+      1.398,
+      -3.815
+     ],
+     "size": 0.000378,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_date_4",
+     "text": "4 MAY",
+     "position": [
+      0.52,
+      1.43,
+      -3.815
+     ],
+     "size": 0.00042,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cared_4",
+     "text": "CARED",
+     "position": [
+      0.52,
+      1.398,
+      -3.815
+     ],
+     "size": 0.000378,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_date_5",
+     "text": "5 MAY",
+     "position": [
+      0.74,
+      1.43,
+      -3.815
+     ],
+     "size": 0.00042,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cared_5",
+     "text": "CARED",
+     "position": [
+      0.74,
+      1.398,
+      -3.815
+     ],
+     "size": 0.000378,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_date_6",
+     "text": "6 MAY",
+     "position": [
+      0.96,
+      1.43,
+      -3.815
+     ],
+     "size": 0.00042,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    },
+    {
+     "id": "care_cared_6",
+     "text": "CARED",
+     "position": [
+      0.96,
+      1.398,
+      -3.815
+     ],
+     "size": 0.000378,
+     "color": "#2e6b3a",
+     "outline": 0,
+     "yaw": 0,
+     "from": "EX-CH02-S06"
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "garden_alo_card",
+     "label": "Alo's identity card",
+     "position": [
+      -0.02,
+      1.58,
+      -3.75
+     ],
+     "approach_m": [
+      -0.02,
+      0.0,
+      -2.9
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "alo_id_card"
+    },
+    {
+     "target_id": "garden_tara_card",
+     "label": "Tara's identity card",
+     "position": [
+      0.62,
+      1.58,
+      -3.75
+     ],
+     "approach_m": [
+      0.62,
+      0.0,
+      -2.9
+     ],
+     "verb": "Inspect",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "tara_id_card"
+    }
+   ],
+   "stations": {
+    "inspect_alo_identity": "garden_alo_card",
+    "inspect_tara_identity": "garden_tara_card"
+   },
+   "review_views": {
+    "ch02_growth_record": {
+     "from": [
+      0.3,
+      1.6,
+      -2.75
+     ],
+     "to": [
+      0.3,
+      1.55,
+      -3.85
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch02_prediction",
+   "from": "EX-CH02-S06",
+   "until": "EX-CH04-S01",
+   "about": "EX-CH02-S06 'Paired plant observation bench': the dated prediction kept beside a blank future observation and a thread to the family-tree page (S06 -> S07). The card stays pinned until the descendant count in EX-CH04-S01 (doc 24 section 5.2 D4); the player's own prediction appears from the D4 layers below. No ratio is promised.",
+   "fixtures": [
+    {
+     "id": "prediction_card",
+     "position": [
+      0.05,
+      1.19,
+      -3.818
+     ],
+     "size": [
+      0.42,
+      0.2,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "family_tree_page",
+     "position": [
+      0.74,
+      1.19,
+      -3.818
+     ],
+     "size": [
+      0.38,
+      0.2,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "prediction_thread",
+     "position": [
+      0.405,
+      1.205,
+      -3.816
+     ],
+     "size": [
+      0.29,
+      0.004,
+      0.002
+     ],
+     "color": "#c0392b",
+     "transparent": false
+    }
+   ],
+   "signs": [
+    {
+     "id": "prediction_title",
+     "text": "PREDICTION · 6 MAY 2046",
+     "position": [
+      0.05,
+      1.268,
+      -3.815
+     ],
+     "size": 0.00036,
+     "color": "#1b2433",
+     "outline": 0
+    },
+    {
+     "id": "prediction_test",
+     "text": "TEST AFTER HARVEST: COMPARE DESCENDANT STEMS\nOBSERVED: EMPTY UNTIL THEN",
+     "position": [
+      0.05,
+      1.125,
+      -3.815
+     ],
+     "size": 0.0003,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.4
+    },
+    {
+     "id": "family_tree_text",
+     "text": "FAMILY TREE\nALO (PURPLE STEM) × TARA (GREEN STEM)\nDESCENDANTS: NOT GROWN YET",
+     "position": [
+      0.74,
+      1.19,
+      -3.815
+     ],
+     "size": 0.00032,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.36
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "garden_growth_record",
+     "label": "Prediction and family tree",
+     "position": [
+      0.4,
+      1.2,
+      -3.75
+     ],
+     "approach_m": [
+      0.4,
+      0.0,
+      -2.9
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "prediction_card"
+    }
+   ],
+   "stations": {
+    "record_stem_prediction": "garden_growth_record"
+   }
+  },
+  {
+   "id": "ch02_d4_opt01",
+   "from": "EX-CH02-S06",
+   "until": "EX-CH04-S01",
+   "choice": {
+    "choice_id": "EX-CH02-S06-CHOICE",
+    "option_id": "EX-CH02-S06-OPT01"
+   },
+   "about": "Doc 24 section 5.2 D4: the prediction the player recorded, in the catalog's words.",
+   "signs": [
+    {
+     "id": "prediction_choice",
+     "text": "“Both visible colours may appear”",
+     "position": [
+      0.05,
+      1.205,
+      -3.815
+     ],
+     "size": 0.00036,
+     "color": "#7a1f17",
+     "outline": 0,
+     "wrap_m": 0.4
+    }
+   ]
+  },
+  {
+   "id": "ch02_d4_opt02",
+   "from": "EX-CH02-S06",
+   "until": "EX-CH04-S01",
+   "choice": {
+    "choice_id": "EX-CH02-S06-CHOICE",
+    "option_id": "EX-CH02-S06-OPT02"
+   },
+   "about": "Doc 24 section 5.2 D4: the prediction the player recorded, in the catalog's words.",
+   "signs": [
+    {
+     "id": "prediction_choice",
+     "text": "“Available evidence is insufficient to choose a pattern”",
+     "position": [
+      0.05,
+      1.205,
+      -3.815
+     ],
+     "size": 0.00036,
+     "color": "#7a1f17",
+     "outline": 0,
+     "wrap_m": 0.4
+    }
+   ]
+  },
+  {
+   "id": "ch02_botanical_bench",
+   "from": "EX-CH02-S01",
+   "until": "EX-CH02-S12",
+   "about": "EX-CH02-S02 'Indoor botanical bench' against the garden's south wall: the cross-pollination protocol Mei opened (S01), Rafi's paper bee beside it (S02 -> S06; S02 -> S03 'the paper bee left on the bench'), brushes A and B with their direction tags, the magnified flower images with word-and-shape labels and the nonliving practice model (doc 22 4.1 clues 3-5); in S06 Kai brings the clean seed tray (S06 -> S07).",
+   "fixtures": [
+    {
+     "id": "botanical_bench",
+     "position": [
+      -1.25,
+      0.45,
+      3.62
+     ],
+     "size": [
+      2.5,
+      0.9,
+      0.7
+     ],
+     "color": "#3c4b5d",
+     "transparent": false
+    },
+    {
+     "id": "botanical_bench_top",
+     "position": [
+      -1.25,
+      0.915,
+      3.6
+     ],
+     "size": [
+      2.56,
+      0.03,
+      0.74
+     ],
+     "color": "#939BA6",
+     "transparent": false
+    },
+    {
+     "id": "protocol_sheet",
+     "position": [
+      -1.0,
+      0.932,
+      3.45
+     ],
+     "size": [
+      0.3,
+      0.004,
+      0.21
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "magnifier_stand",
+     "position": [
+      -2.2,
+      0.96,
+      3.88
+     ],
+     "size": [
+      0.08,
+      0.06,
+      0.06
+     ],
+     "color": "#2a3446",
+     "transparent": false
+    },
+    {
+     "id": "magnifier_screen",
+     "position": [
+      -2.2,
+      1.17,
+      3.9
+     ],
+     "size": [
+      0.56,
+      0.36,
+      0.03
+     ],
+     "color": "#0f1a28",
+     "transparent": false,
+     "finish": "screen"
+    },
+    {
+     "id": "brush_tag_a",
+     "position": [
+      -1.7,
+      0.932,
+      3.33
+     ],
+     "size": [
+      0.12,
+      0.003,
+      0.035
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S02"
+    },
+    {
+     "id": "brush_tag_b",
+     "position": [
+      -1.53,
+      0.932,
+      3.33
+     ],
+     "size": [
+      0.12,
+      0.003,
+      0.035
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin",
+     "from": "EX-CH02-S02"
+    }
+   ],
+   "obstacles": [
+    {
+     "id": "botanical_bench",
+     "position": [
+      -1.25,
+      0.45,
+      3.62
+     ],
+     "size": [
+      2.5,
+      0.9,
+      0.7
+     ]
+    }
+   ],
+   "props": [
+    {
+     "id": "PR_PaperBee",
+     "path": "res://assets/props/PR_PaperBee/PR_PaperBee.glb",
+     "position": [
+      -1.28,
+      0.93,
+      3.44
+     ],
+     "rotation_degrees": [
+      0,
+      25,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "from": "EX-CH02-S02",
+     "until": "EX-CH02-S06"
+    },
+    {
+     "id": "PR_PollinationKit",
+     "path": "res://assets/props/PR_PollinationKit/PR_PollinationKit.glb",
+     "position": [
+      -1.62,
+      0.93,
+      3.44
+     ],
+     "rotation_degrees": [
+      0,
+      180,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "from": "EX-CH02-S02"
+    },
+    {
+     "id": "PR_SeedTray",
+     "path": "res://assets/props/PR_SeedTray/PR_SeedTray.glb",
+     "position": [
+      -0.62,
+      0.93,
+      3.55
+     ],
+     "rotation_degrees": [
+      0,
+      8,
+      0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "from": "EX-CH02-S06",
+     "until": "EX-CH02-S06"
+    }
+   ],
+   "models": [
+    {
+     "id": "practice_flower_model",
+     "position": [
+      -2.05,
+      0.93,
+      3.45
+     ],
+     "yaw": 180,
+     "from": "EX-CH02-S02"
+    }
+   ],
+   "prints": [
+    {
+     "id": "magnified_flower",
+     "kind": "flower_diagram",
+     "position": [
+      -2.2,
+      1.17,
+      3.883
+     ],
+     "size": [
+      0.52,
+      0.32
+     ],
+     "yaw": 180,
+     "glow": 0.5,
+     "from": "EX-CH02-S02"
+    }
+   ],
+   "signs": [
+    {
+     "id": "protocol_text",
+     "text": "CROSS-POLLINATION PROTOCOL\nTHESE PLANTS NEED EACH OTHER'S POLLEN\nBRUSH A: TARA TO ALO\nBRUSH B: ALO TO TARA\nCARRY POLLEN SEALED, BOTH WAYS",
+     "position": [
+      -1.0,
+      0.9345,
+      3.45
+     ],
+     "size": 0.00031,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "pitch": -90,
+     "wrap_m": 0.28
+    },
+    {
+     "id": "brush_word_a",
+     "text": "A · TARA TO ALO",
+     "position": [
+      -1.7,
+      0.9345,
+      3.33
+     ],
+     "size": 0.00019,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH02-S02"
+    },
+    {
+     "id": "brush_word_b",
+     "text": "B · ALO TO TARA",
+     "position": [
+      -1.53,
+      0.9345,
+      3.33
+     ],
+     "size": 0.00019,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH02-S02"
+    },
+    {
+     "id": "model_word",
+     "text": "PRACTICE MODEL · NOT A PLANT",
+     "position": [
+      -2.05,
+      0.9345,
+      3.3
+     ],
+     "size": 0.00019,
+     "color": "#1b2433",
+     "outline": 0,
+     "yaw": 180,
+     "pitch": -90,
+     "from": "EX-CH02-S02"
+    },
+    {
+     "id": "bench_title",
+     "text": "BOTANICAL BENCH",
+     "position": [
+      -1.6,
+      0.62,
+      3.265
+     ],
+     "size": 0.0011,
+     "color": "#dfe7f2",
+     "outline": 0,
+     "yaw": 180
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "garden_protocol",
+     "label": "Cross-pollination protocol",
+     "position": [
+      -1.0,
+      1.0,
+      3.42
+     ],
+     "approach_m": [
+      -1.0,
+      0.0,
+      2.65
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "protocol_sheet"
+    },
+    {
+     "target_id": "garden_magnifier",
+     "label": "Magnified flower images",
+     "position": [
+      -2.2,
+      1.17,
+      3.82
+     ],
+     "approach_m": [
+      -2.2,
+      0.0,
+      2.65
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "magnifier_screen"
+    },
+    {
+     "target_id": "garden_brush_kit",
+     "label": "Brushes A and B",
+     "position": [
+      -1.62,
+      1.0,
+      3.4
+     ],
+     "approach_m": [
+      -1.6,
+      0.0,
+      2.65
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "PR_PollinationKit"
+    },
+    {
+     "target_id": "garden_flower_model",
+     "label": "Practice flower model",
+     "position": [
+      -2.05,
+      1.1,
+      3.42
+     ],
+     "approach_m": [
+      -2.0,
+      0.0,
+      2.65
+     ],
+     "verb": "Use",
+     "label_offset": [
+      0,
+      0.7,
+      0
+     ],
+     "asset_id": "practice_flower_model"
+    }
+   ],
+   "stations": {
+    "open_pollination_protocol": "garden_protocol",
+    "identify_anther": "garden_magnifier",
+    "identify_stigma": "garden_magnifier",
+    "assign_brush_directions": "garden_brush_kit",
+    "practice_transfer_model": "garden_flower_model"
+   },
+   "by_scene": {
+    "EX-CH02-S01": {
+     "anchors": {
+      "garden_kai": [
+       -2.2,
+       0,
+       -0.2
+      ],
+      "garden_amara": [
+       1.35,
+       0,
+       -2.55
+      ],
+      "garden_rafi": [
+       -4.6,
+       0,
+       -2.0
+      ]
+     }
+    },
+    "EX-CH02-S02": {
+     "anchors": {
+      "garden_rafi": [
+       -0.45,
+       0,
+       2.5
+      ],
+      "garden_amara": [
+       -2.9,
+       0,
+       2.25
+      ],
+      "garden_kai": [
+       0.25,
+       0,
+       2.55
+      ]
+     }
+    },
+    "EX-CH02-S06": {
+     "anchors": {
+      "garden_mei": [
+       -0.6,
+       0,
+       -2.75
+      ],
+      "garden_kai": [
+       -0.35,
+       0,
+       2.6
+      ],
+      "garden_rafi": [
+       1.4,
+       0,
+       -2.5
+      ]
+     }
+    }
+   },
+   "review_views": {
+    "ch02_bench": {
+     "from": [
+      -1.6,
+      1.62,
+      1.95
+     ],
+     "to": [
+      -1.6,
+      0.98,
+      3.6
+     ]
+    },
+    "ch02_overview": {
+     "from": [
+      4.4,
+      2.0,
+      1.1
+     ],
+     "to": [
+      -3.0,
+      1.0,
+      -1.2
+     ]
+    }
+   }
   }
  ]
 }
