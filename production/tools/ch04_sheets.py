@@ -664,7 +664,64 @@ def approval_sheet(layout, survey):
     return sheet.crop((0, 0, W, min(H, y + 110)))
 
 
+def contact():
+    """production/review/M3-4A_ch04_contact.png: every published GLB (LOD0 beside LOD1 for the environment pieces), the
+    four vault-set props, then the room views (the approved Cycles renders and the Godot captures)."""
+    pre = STAGE / "publish_preview"
+    pieces = sorted({p.stem.rsplit("_LOD", 1)[0] for p in pre.glob("EN_*_LOD0.png")}, key=lambda n: (not n.startswith("EN_Garage"), n))
+    props = ["PR_VaultCase", "PR_VaultProbe", "PR_VaultCarrier", "PR_RoverCargoMount"]
+    views = [(PREVIEW / "EN_Garage_view_exterior.png", "Cycles: exterior at the S02 Sun"), (PREVIEW / "EN_Garage_view_bay.png", "Cycles: the bay"),
+             (PREVIEW / "EN_ColdTrap_view_B3.png", "Cycles: segment B3, dark"), (PREVIEW / "EN_ColdTrap_view_shelf.png", "Cycles: the vault shelf"),
+             (ROOT / "production/qa/evidence/M3-4A_godot_bay.png", "Godot: the bay"), (ROOT / "production/qa/evidence/M3-4A_godot_ready.png", "Godot: the ready room"),
+             (ROOT / "production/qa/evidence/M3-4A_godot_porch.png", "Godot: porch and cargo lock"), (ROOT / "production/qa/evidence/M3-4A_godot_vault_set.png", "Godot: the vault set")]
+    cell, gap, cols = 230, 14, 4
+    pair_w = 2 * cell + 8
+    rows = (len(pieces) + cols - 1) // cols
+    prow = 1
+    vrow = 2
+    W = cols * (pair_w + gap) + 30
+    H = 110 + rows * (cell + 46) + 50 + prow * (cell + 46) + 50 + vrow * (int(cell * 1.15) + 40) + 30
+    sheet = Image.new("RGB", (W, H), PAPER)
+    d = ImageDraw.Draw(sheet)
+    title_bar(d, W, "M3-4A review contact sheet: EN_Garage, EN_ColdTrap and the vault set as published",
+              "Each environment piece LOD0 (game, collision) beside LOD1 (Compatibility); the props; the room views. Studio renders of the exported pieces.", h=90)
+    y = 106
+    for k, name in enumerate(pieces):
+        x = 15 + (k % cols) * (pair_w + gap)
+        yy = y + (k // cols) * (cell + 46)
+        for j, lod in enumerate((0, 1)):
+            im = fit(pre / f"{name}_LOD{lod}.png", cell, cell)
+            sheet.paste(im, (x + j * (cell + 8) + (cell - im.width) // 2, yy + (cell - im.height) // 2))
+            d.rectangle([x + j * (cell + 8), yy, x + j * (cell + 8) + cell, yy + cell], outline=(190, 192, 196))
+        d.text((x, yy + cell + 4), name, fill=NAVY, font=font(14, True))
+        d.text((x, yy + cell + 22), "LOD0 | LOD1", fill=SOFT, font=font(12))
+    y += rows * (cell + 46) + 10
+    d.text((15, y), "Vault set (props, one LOD each)", fill=NAVY, font=font(17, True))
+    y += 28
+    for k, name in enumerate(props):
+        x = 15 + k * (pair_w + gap)
+        im = fit(pre / f"{name}.png", cell, cell)
+        sheet.paste(im, (x + (cell - im.width) // 2, y + (cell - im.height) // 2))
+        d.rectangle([x, y, x + cell, y + cell], outline=(190, 192, 196))
+        d.text((x, y + cell + 4), name, fill=NAVY, font=font(14, True))
+    y += cell + 50
+    d.text((15, y), "Room views", fill=NAVY, font=font(17, True))
+    y += 28
+    vw, vh = (W - 30 - 3 * gap) // 4, int(cell * 1.15)
+    for k, (path, label) in enumerate(views):
+        x = 15 + (k % 4) * (vw + gap)
+        yy = y + (k // 4) * (vh + 40)
+        sheet.paste(cover(path, vw, vh), (x, yy))
+        d.text((x, yy + vh + 4), label, fill=INK, font=font(14))
+    out = ROOT / "production/review/M3-4A_ch04_contact.png"
+    sheet.save(out, optimize=True)
+    print("CH04_CONTACT", out.relative_to(ROOT), sheet.size)
+
+
 def main():
+    if "contact" in sys.argv[1:]:
+        contact()
+        return
     OUT.mkdir(parents=True, exist_ok=True)
     layout = json.loads((STAGE / "garage_layout.json").read_text())
     survey = json.loads((STAGE / "coldtrap_survey.json").read_text())

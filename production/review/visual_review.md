@@ -351,3 +351,64 @@ Reviewed by eye against the approved sheets in production/concept/chapter8_v1/ f
 | EN_RelayRoad_TurnbackBarrier_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
 | EN_RelayRoad_SupplyCache_LOD0 | ✅ PASS | navy rack with two white crates and orange latches |
 | EN_RelayRoad_SupplyCache_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+
+## M3-4A Chapter 4 environments review — 7 November 2026, Sadman/claude (Claude Opus 5.5); approved by Sadman 7 Nov 2026 ("Approve all 12")
+
+Inspected: every published GLB as a studio render, LOD0 beside LOD1, on [M3-4A_ch04_contact.png](M3-4A_ch04_contact.png); the approved Cycles views; the Godot captures `production/qa/evidence/M3-4A_godot_bay.png`, `_exterior`, `_ready`, `_dock`, `_porch`, `_coldtrap_pieces` and `_vault_set` (`M3-4A_capture.sh`, suite PASS). Against the sheets in `production/concept/chapter4_v1/` and ART_BIBLE §2: no text, logos or plant faces; black sky, no haze or beams; every word is a live Screen or Label slot.
+
+Second opinion: Codex (`gpt-6-astra`, high, read-only), shown the contact sheet and the vault-set capture. First pass 25 PASS, 3 FIX, all acted on: the LOD1 base plates of the return marker and the slope sign read square (now 12 segments), and the tether anchor's LOD1 had dropped its helix (kept, coarser). Second pass: 28 PASS.
+
+| Asset | Verdict | Notes |
+|---|---|---|
+| EN_Garage_DockingPort_LOD0 | ✅ PASS | dock hatch 0.90 x 1.15 m (sill 0.45 m) with its vestibule panel (Screen, three state lamps, gauge); bellows collar meets VH_Rover's side hatch at 1.10 m (test checks the docked plane); HatchLeaf and DockCollar move; game LOD with collision |
+| EN_Garage_DockingPort_LOD1 | ✅ PASS | dock hatch 0.90 x 1.15 m (sill 0.45 m) with its vestibule panel (Screen, three state lamps, gauge); bellows collar meets VH_Rover's side hatch at 1.10 m (test checks the docked plane); HatchLeaf and DockCollar move; Compatibility LOD, same silhouette |
+| EN_Garage_BayWindow_LOD0 | ✅ PASS | 1.70 x 1.00 m window, navy room frame, white bay frame, two clear panes; handrail; game LOD with collision |
+| EN_Garage_BayWindow_LOD1 | ✅ PASS | 1.70 x 1.00 m window, navy room frame, white bay frame, two clear panes; handrail; Compatibility LOD, same silhouette |
+| EN_Garage_CargoLock_LOD0 | ✅ PASS | 0.72 x 0.56 m lock through the wall, LampDry and LampSafe, Screen; inner and outer doors never open together (en_garage.gd, tested); game LOD with collision |
+| EN_Garage_CargoLock_LOD1 | ✅ PASS | 0.72 x 0.56 m lock through the wall, LampDry and LampSafe, Screen; inner and outer doors never open together (en_garage.gd, tested); Compatibility LOD, same silhouette |
+| EN_Garage_SuitSealPanel_LOD0 | ✅ PASS | three seal gauges and lamps over blank plates (two suitports and the dock), Screen; no text; game LOD with collision |
+| EN_Garage_SuitSealPanel_LOD1 | ✅ PASS | three seal gauges and lamps over blank plates (two suitports and the dock), Screen; no text; Compatibility LOD, same silhouette |
+| EN_Garage_RouteBoard_LOD0 | ✅ PASS | 1.80 x 0.95 m Screen and three blank route cards on a rail; quilted kit panels; game LOD with collision |
+| EN_Garage_RouteBoard_LOD1 | ✅ PASS | 1.80 x 0.95 m Screen and three blank route cards on a rail; quilted kit panels; Compatibility LOD, same silhouette |
+| EN_Garage_DepartureBoard_LOD0 | ✅ PASS | portrait 0.74 x 1.20 m Screen with a status lamp; two side by side; game LOD with collision |
+| EN_Garage_DepartureBoard_LOD1 | ✅ PASS | portrait 0.74 x 1.20 m Screen with a status lamp; two side by side; Compatibility LOD, same silhouette |
+| EN_Garage_HandoverConsole_LOD0 | ✅ PASS | sloped desk with three screens (Screen, Screen2, Screen3: map, slope card, pad camera); blank keys; game LOD with collision |
+| EN_Garage_HandoverConsole_LOD1 | ✅ PASS | sloped desk with three screens (Screen, Screen2, Screen3: map, slope card, pad camera); blank keys; Compatibility LOD, same silhouette |
+| EN_Garage_CargoRack_LOD0 | ✅ PASS | sealed bins with blank plates and orange straps; the ledger tablet is Screen2; game LOD with collision |
+| EN_Garage_CargoRack_LOD1 | ✅ PASS | sealed bins with blank plates and orange straps; the ledger tablet is Screen2; Compatibility LOD, same silhouette |
+| EN_Garage_ReliefLocker_LOD0 | ✅ PASS | white double-door locker, blank plate, navy stripe; DoorL and DoorR swing out 110 deg; game LOD with collision |
+| EN_Garage_ReliefLocker_LOD1 | ✅ PASS | white double-door locker, blank plate, navy stripe; DoorL and DoorR swing out 110 deg; Compatibility LOD, same silhouette |
+| EN_Garage_BayFrame_LOD0 | ✅ PASS | steel portal, ribbed shield on the far wall and roof, LED flood panel, sintered floor slab (mount -0.06, top = finished floor); game LOD with collision |
+| EN_Garage_BayFrame_LOD1 | ✅ PASS | steel portal, ribbed shield on the far wall and roof, LED flood panel, sintered floor slab (mount -0.06, top = finished floor); Compatibility LOD, same silhouette |
+| EN_Garage_BayDoor_LOD0 | ✅ PASS | portal and drum; the ribbed panel coils into the drum (part kind scale), clear of the 4.41 m rover; game LOD with collision |
+| EN_Garage_BayDoor_LOD1 | ✅ PASS | portal and drum; the ribbed panel coils into the drum (part kind scale), clear of the 4.41 m rover; Compatibility LOD, same silhouette |
+| EN_Garage_BayEndWall_LOD0 | ✅ PASS | ribbed shield on the frame behind the EVA porch; game LOD with collision |
+| EN_Garage_BayEndWall_LOD1 | ✅ PASS | ribbed shield on the frame behind the EVA porch; Compatibility LOD, same silhouette |
+| EN_Garage_EVAPorch_LOD0 | ✅ PASS | grating deck at +1.40 m on sintered piers, rail with the suitport gate, stair along the far wall clear of the rover's wheels; game LOD with collision |
+| EN_Garage_EVAPorch_LOD1 | ✅ PASS | grating deck at +1.40 m on sintered piers, rail with the suitport gate, stair along the far wall clear of the rover's wheels; Compatibility LOD, same silhouette |
+| EN_Garage_Umbilical_LOD0 | ✅ PASS | navy post, orange connector head, hanging cable loop, status lamp; game LOD with collision |
+| EN_Garage_Umbilical_LOD1 | ✅ PASS | navy post, orange connector head, hanging cable loop, status lamp; Compatibility LOD, same silhouette |
+| EN_Garage_Plinth_LOD0 | ✅ PASS | sintered block 2 x 1.34 x 3.30 m with steel nosing and a navy kick strip; game LOD with collision |
+| EN_Garage_Plinth_LOD1 | ✅ PASS | sintered block 2 x 1.34 x 3.30 m with steel nosing and a navy kick strip; Compatibility LOD, same silhouette |
+| EN_Garage_BayMarkings_LOD0 | ✅ PASS | orange stall lines and white dashes only; no text, no collision; game LOD with collision |
+| EN_Garage_BayMarkings_LOD1 | ✅ PASS | orange stall lines and white dashes only; no text, no collision; Compatibility LOD, same silhouette |
+| EN_Garage_Berm_LOD0 | ✅ PASS | regolith overburden (M1-35 compacted set) with 35 deg sides, the door band clear, sintered headwall and wing walls; trimesh collision; game LOD with collision |
+| EN_Garage_Berm_LOD1 | ✅ PASS | regolith overburden (M1-35 compacted set) with 35 deg sides, the door band clear, sintered headwall and wing walls; trimesh collision; Compatibility LOD, same silhouette |
+| EN_ColdTrap_BeaconMast_LOD0 | ✅ PASS | 5 m guyed telescoping mast on a tripod, beacon head with Screen and status lamp, two retro bands (decision 9); game LOD with collision |
+| EN_ColdTrap_BeaconMast_LOD1 | ✅ PASS | 5 m guyed telescoping mast on a tripod, beacon head with Screen and status lamp, two retro bands (decision 9); Compatibility LOD, same silhouette |
+| EN_ColdTrap_ReturnMarker_LOD0 | ✅ PASS | 2 m pole, three retro bands, stiff flag plate (nothing flutters in vacuum); LOD1 base kept round after Codex's first pass; game LOD with collision |
+| EN_ColdTrap_ReturnMarker_LOD1 | ✅ PASS | 2 m pole, three retro bands, stiff flag plate (nothing flutters in vacuum); LOD1 base kept round after Codex's first pass; Compatibility LOD, same silhouette |
+| EN_ColdTrap_SlopeSign_LOD0 | ✅ PASS | blank Label face with a retro border on a 1.5 m post; LOD1 base kept round after Codex's first pass; game LOD with collision |
+| EN_ColdTrap_SlopeSign_LOD1 | ✅ PASS | blank Label face with a retro border on a 1.5 m post; LOD1 base kept round after Codex's first pass; Compatibility LOD, same silhouette |
+| EN_ColdTrap_ReferencePlate_LOD0 | ✅ PASS | four dry-standard tiles 0.30 m up on a low tripod, scanner socket; game LOD with collision |
+| EN_ColdTrap_ReferencePlate_LOD1 | ✅ PASS | four dry-standard tiles 0.30 m up on a low tripod, scanner socket; Compatibility LOD, same silhouette |
+| EN_ColdTrap_SampleStake_LOD0 | ✅ PASS | 0.60 m stake (0.10 m driven, mount), stiff orange tag with a blank Label, retro tip; game LOD with collision |
+| EN_ColdTrap_SampleStake_LOD1 | ✅ PASS | 0.60 m stake (0.10 m driven, mount), stiff orange tag with a blank Label, retro tip; Compatibility LOD, same silhouette |
+| EN_ColdTrap_TetherAnchor_LOD0 | ✅ PASS | helical anchor (0.40 m driven), bearing plate, orange D-ring; LOD1 keeps the helix after Codex's first pass; game LOD with collision |
+| EN_ColdTrap_TetherAnchor_LOD1 | ✅ PASS | helical anchor (0.40 m driven), bearing plate, orange D-ring; LOD1 keeps the helix after Codex's first pass; Compatibility LOD, same silhouette |
+| EN_ColdTrap_SurveyMarker2034_LOD0 | ✅ PASS | faded-yellow bands, blank archival tag (live text; nothing names Noor before CH05), 0.30 m driven; game LOD with collision |
+| EN_ColdTrap_SurveyMarker2034_LOD1 | ✅ PASS | faded-yellow bands, blank archival tag (live text; nothing names Noor before CH05), 0.30 m driven; Compatibility LOD, same silhouette |
+| PR_VaultCase | ✅ PASS | rebuilt hinged in the installed case's 0.60 x 0.39 m footprint: ID window, recessed probe socket, latches, 12 capped wells with blank tabs, Lid with Label_Lid underneath (clue 15); exterior_terrain.json LOC-10 re-derived for it; prop |
+| PR_VaultProbe | ✅ PASS | 0.45 m thermal wand with a Screen in the grip and a coiled cable; prop |
+| PR_VaultCarrier | ✅ PASS | cradle with two lift handles and a tether eye; the MLI sleeve reads dark in a sky-less studio, as foil does under a black lunar sky (the room adds reflection probes); prop |
+| PR_RoverCargoMount | ✅ PASS | latch rails, latch with its orange position flag, separate lock pin with its own lamp (S08: position vs lock); prop |

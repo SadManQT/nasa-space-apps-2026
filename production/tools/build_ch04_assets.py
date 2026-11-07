@@ -23,6 +23,7 @@ No text on any surface: screens are material slots (Screen, Screen2, Screen3) an
 """
 import json
 import math
+import os
 import sys
 from pathlib import Path
 
@@ -193,6 +194,8 @@ def ch04_materials():
         "Screen2": (hk.pbr_material("Screen2", None, 0.12, (0.02, 0.025, 0.03)), 1.0),
         "Screen3": (hk.pbr_material("Screen3", None, 0.12, (0.02, 0.025, 0.03)), 1.0),
         "Label": (node_material("Label", (0.80, 0.80, 0.78), 0.55), 0.25),
+        "LabelLid": (node_material("Label_Lid", (0.80, 0.80, 0.78), 0.55), 0.25),
+        "Regolith": (regolith_material(), 4.0),
         "LampSealed": (node_material("LampSealed", (0.55, 0.06, 0.04), 0.25, emission=((1.0, 0.10, 0.06), 1.5)), 1.0),
         "LampEqualising": (node_material("LampEqualising", (0.60, 0.38, 0.05), 0.25, emission=((1.0, 0.62, 0.10), 0.8)), 1.0),
         "LampSafe": (node_material("LampSafe", (0.08, 0.45, 0.14), 0.25, emission=((0.20, 1.0, 0.35), 0.6)), 1.0),
@@ -359,8 +362,8 @@ def dock_collar(b, lod):
     seal_i = [(x, cy + y, length - 0.03) for x, y in rr(DOCK_W + 0.10, DOCK_H + 0.10, 0.26, n)]
     b.ring_prism(seal_i, seal_o, (0, 0, 0.03), "Rubber", (0, 0, -1), centre=(0, cy, length))
     for sx in (-1, 1):
-        p = Vector((sx * (DOCK_W / 2 + 0.17), cy + DOCK_H / 2 + 0.10, length - 0.03))
-        b.cylinder(p, p + Vector((0, 0, 0.12)), 0.03, "PaintOrange", segs=12, radius1=0.004)
+        p = Vector((sx * (DOCK_W / 2 + 0.17), cy + DOCK_H / 2 + 0.10, length - 0.16))
+        b.cylinder(p, p + Vector((0, 0, 0.13)), 0.03, "PaintOrange", segs=12, radius1=0.004)
     b.box((0, cy - DOCK_H / 2 - 0.02, z1 + (length - z1) / 2), (DOCK_W, 0.04, length - z1), "PaintDark")
     return [("DockCollar_Col-convcolonly", (0, cy, length / 2), (DOCK_W + 0.44, DOCK_H + 0.44, length))]
 
@@ -648,18 +651,16 @@ def piece_bay_door(b, lod):
 
 
 def bay_door_panel(b, lod):
+    """Ribbed roll-up panel hanging from its pivot on the top edge (y = 0 at the drum, down to -4.90 m); the part kind
+    "scale" in garage.json coils it up into the drum (scale y 1 -> 0.04)."""
     w, h = DOOR_OPEN_W + 0.10, DOOR_OPEN_H
     n = 12 if lod == 0 else 6
     for k in range(n):
-        y0 = h * k / n
+        y0 = -h + h * k / n
         b.box((0, y0 + h / n / 2, 0.06), (w, h / n - 0.012, 0.05), "PaintWhite")
         b.box((0, y0 + 0.006, 0.03), (w, 0.012, 0.02), "PaintGrey")
-    b.box((0, 0.04, 0.06), (w, 0.08, 0.08), "Rubber")
-    for sx in (-1, 1):
-        for k in range(5):
-            y = 0.5 + k * 0.08
-            b.box((sx * 0.9 + sx * 0.08 * k, y + 0.6, 0.02), (0.30, 0.05, 0.01), "PaintOrange") if False else None
-    return [("DoorPanel_Col-convcolonly", (0, h / 2, 0.06), (w, h, 0.08))]
+    b.box((0, -h + 0.04, 0.06), (w, 0.08, 0.08), "Rubber")
+    return [("DoorPanel_Col-convcolonly", (0, -h / 2, 0.06), (w, h, 0.08))]
 
 
 def piece_bay_end_wall(b, lod):
@@ -717,6 +718,91 @@ def piece_umbilical(b, lod):
     lamp(b, 0.10, 1.30, -0.18, "LampSafe")
     return [("Umbilical_Col-convcolonly", (0, 0.85, 0), (0.40, 1.70, 0.40))]
 
+def piece_plinth(b, lod):
+    """2 m module of the sintered-regolith plinth under the ready room (decision 1): 2.0 x 1.34 x 3.30 m, centred on
+    the ready room's depth; the kit floor tiles sit on it at +1.34 (finished deck +1.40). Steel nosing and a navy kick
+    strip on the bay face (+z)."""
+    h = DECK_Y - 0.06
+    b.box((0, h / 2, 0), (2.0, h, 3.30), "Sintered")
+    b.box((0, h - 0.02, 1.66), (2.0, 0.04, 0.02), "Steel")
+    b.box((0, 0.15, 1.655), (2.0, 0.30, 0.01), "PaintNavy")
+    return [("Plinth_Col-convcolonly", (0, h / 2, 0), (2.0, h, 3.30))]
+
+
+def piece_bay_markings(b, lod):
+    """Bay floor paint, centred on the bay (room x 6, z on the bay's centre line): the rover stall's two orange edge
+    lines and the white docking-side dashes along the plinth."""
+    zc = BAY_D / 2
+    for z in (0.30 - zc, BAY_D - 0.70 - zc):
+        b.box((0.75, 0.002, z), (6.5, 0.004, 0.08), "PaintOrange")
+    for k in range(9):
+        b.box((-2.4 + 0.8 * k, 0.002, 0.18 - zc), (0.40, 0.004, 0.12), "PaintWhite")
+    return []
+
+
+BERM_OX, BERM_OZ = 6.0, 4.5
+
+
+def berm_height(X, Z):
+    """Berm surface height over room coordinates: 1 m over the 5.6 m roof, 35 deg sides, clipped at the apron."""
+    dx = np.maximum(np.maximum(-0.2 - X, X - 12.2), 0.0)
+    dz = np.maximum(np.maximum(-0.4 - Z, Z - 9.3), 0.0)
+    return np.clip(BAY_H + 1.0 - np.hypot(dx, dz) * math.tan(math.radians(35)), 0.0, BAY_H + 1.0)
+
+
+def berm_grid(b, step, key, lod, noise=True):
+    xs = np.arange(-9.0, 21.0 + 1e-6, step)
+    zs = np.arange(-9.0, 18.0 + 1e-6, step)
+    X, Z = np.meshgrid(xs, zs)
+    Y = berm_height(X, Z)
+    if noise:
+        rng = np.random.default_rng(SEED + 9)
+        n = fractal2d(rng, 256, 3, 60, 2.0)[: Y.shape[0], : Y.shape[1]]
+        Y = np.where(Y > 0.05, np.maximum(Y + 0.06 * n, 0.0), Y)
+    door = (X > 12.0) & (Z > 2.9) & (Z < 9.5)
+    base = len(b.verts)
+    b.add_verts([(float(X[j, i]) - BERM_OX, float(Y[j, i]), float(Z[j, i]) - BERM_OZ) for j in range(len(zs)) for i in range(len(xs))])
+    nx = len(xs)
+    tile = b.tile(key)
+    for j in range(len(zs) - 1):
+        for i in range(nx - 1):
+            cx, cz = (xs[i] + xs[i + 1]) / 2, (zs[j] + zs[j + 1]) / 2
+            if door[j, i] and door[j + 1, i + 1]:
+                continue
+            if max(Y[j, i], Y[j, i + 1], Y[j + 1, i], Y[j + 1, i + 1]) < 0.02:
+                continue
+            idx = [base + j * nx + i, base + j * nx + i + 1, base + (j + 1) * nx + i + 1, base + (j + 1) * nx + i]
+            uvs = [(xs[i] / tile, zs[j] / tile), (xs[i + 1] / tile, zs[j] / tile), (xs[i + 1] / tile, zs[j + 1] / tile), (xs[i] / tile, zs[j + 1] / tile)]
+            b.add_face(idx, uvs, key, smooth=True, outward=(0, 1, 0))
+
+
+def piece_berm(b, lod):
+    """The garage's regolith shield (decision 3): 1 m of overburden over the 12 x 9 m footprint, 35 deg sides down to
+    the apron, the rover door's band left clear; the sintered headwall round the door and two wedge wing walls along
+    the band. Authored around the footprint centre (room x 6, z 4.5): place at (6, 0, 4.5)."""
+    berm_grid(b, 0.5 if lod == 0 else 1.0, "Regolith", lod, noise=lod == 0)
+    ox, oz = BERM_OX, BERM_OZ
+    top = BAY_H + 1.0
+    for (x0, x1, z0, z1, y0, y1) in ((12.0, 12.45, -0.6, 3.25, 0.0, top), (12.0, 12.45, 8.95, 9.9, 0.0, top), (12.0, 12.45, 3.25, 8.95, DOOR_OPEN_H + 0.70, top)):
+        b.box(((x0 + x1) / 2 - ox, (y0 + y1) / 2, (z0 + z1) / 2 - oz), (x1 - x0, y1 - y0, z1 - z0), "Sintered")
+    run = top / math.tan(math.radians(35)) + 0.4
+    for zw in (2.9, 9.5):
+        pts = []
+        for dz in (-0.2, 0.2):
+            pts += [(12.0 - ox, 0.0, zw + dz - oz), (12.0 + run - ox, 0.0, zw + dz - oz), (12.0 - ox, top, zw + dz - oz)]
+        base = b.add_verts(pts)
+        for idx, out in (((0, 1, 2), (0, 0, -1)), ((3, 4, 5), (0, 0, 1)), ((0, 3, 4, 1), (0, -1, 0)), ((1, 4, 5, 2), (1, 1, 0)), ((2, 5, 3, 0), (-1, 0, 0))):
+            q = [pts[k] for k in idx]
+            b.add_face([base + k for k in idx], hk.planar_uv(q, b.tile("Sintered")), "Sintered", outward=out)
+
+    def coarse(cb):
+        berm_grid(cb, 1.5, "PaintGrey", lod, noise=False)
+    return [("Berm_Col-colonly", coarse),
+            ("Headwall_Col-convcolonly", (12.225 - ox, top / 2, 1.325 - oz), (0.45, top, 3.85)),
+            ("HeadwallB_Col-convcolonly", (12.225 - ox, top / 2, 9.425 - oz), (0.45, top, 0.95)),
+            ("Lintel_Col-convcolonly", (12.225 - ox, (DOOR_OPEN_H + 0.70 + top) / 2, 6.1 - oz), (0.45, top - DOOR_OPEN_H - 0.70, 5.7))]
+
+
 # ----------------------------------------------------------------------------------------------- EN_ColdTrap pieces
 
 MAST_H = 5.0   # decision 9: the beacon antenna on a 5 m mast gives canon's three beacons on the real road
@@ -754,7 +840,7 @@ def piece_return_marker(b, lod):
     """Return marker: 2.0 m pole on a base plate with three retroreflective bands and a stiff orange flag plate (no
     cloth: nothing flutters in vacuum); marks the way back to the rover at each segment."""
     segs = 12 if lod == 0 else 6
-    b.cylinder((0, 0, 0), (0, 0.03, 0), 0.20, "Steel", segs=segs)
+    b.cylinder((0, 0, 0), (0, 0.03, 0), 0.20, "Steel", segs=24 if lod == 0 else 12)
     b.cylinder((0, 0.03, 0), (0, 2.0, 0), 0.025, "PaintWhite", segs=segs)
     for y in (0.6, 1.1, 1.6):
         b.cylinder((0, y, 0), (0, y + 0.15, 0), 0.028, "RetroOrange", segs=segs)
@@ -767,7 +853,7 @@ def piece_slope_sign(b, lod):
     """Slope sign: a 0.55 x 0.40 m blank sign face (Label slot; the slope value is live text) with a retroreflective
     border on a 1.5 m post; stands at each segment's steepest point."""
     segs = 10 if lod == 0 else 6
-    b.cylinder((0, 0, 0), (0, 0.03, 0), 0.16, "Steel", segs=segs)
+    b.cylinder((0, 0, 0), (0, 0.03, 0), 0.16, "Steel", segs=20 if lod == 0 else 12)
     b.cylinder((0, 0.03, 0), (0, 1.50, 0), 0.022, "Anodised", segs=segs)
     b.box((0, 1.40, -0.02), (0.55, 0.40, 0.012), "PaintNavy")
     for (x, y, sx, sy) in ((0, 1.585, 0.55, 0.03), (0, 1.215, 0.55, 0.03), (-0.26, 1.40, 0.03, 0.40), (0.26, 1.40, 0.03, 0.40)):
@@ -805,10 +891,9 @@ def piece_tether_anchor(b, lod):
     """Helical ground anchor (driven into the regolith) with a bearing plate and a D-ring for the carrier tether."""
     segs = 10 if lod == 0 else 6
     b.cylinder((0, -0.40, 0), (0, 0.10, 0), 0.02, "Steel", segs=segs)
-    if lod == 0:
-        for k in range(6):
-            b.torus((0, -0.35 + 0.07 * k, 0), (0, 1, 0), 0.05, 0.004, "Steel", segs=12, rings=4)
-    b.cylinder((0, 0.0, 0), (0, 0.02, 0), 0.10, "PaintGrey", segs=segs)
+    for k in range(6):
+        b.torus((0, -0.35 + 0.07 * k, 0), (0, 1, 0), 0.05, 0.004, "Steel", segs=12 if lod == 0 else 8, rings=4 if lod == 0 else 3)
+    b.cylinder((0, 0.0, 0), (0, 0.02, 0), 0.10, "PaintGrey", segs=20 if lod == 0 else 12)
     b.torus((0, 0.15, 0), (0, 0, 1), 0.045, 0.008, "PaintOrange", segs=14, rings=6)
     return [("Anchor_Col-convcolonly", (0, 0.10, 0), (0.20, 0.20, 0.20))]
 
@@ -833,53 +918,58 @@ VC_L, VC_W, VC_H = 0.60, 0.39, 0.27
 
 
 def piece_vault_open(b, lod):
-    """PR_VaultCase rebuilt hinged (decision 12): the installed case's look (white shell, navy corner guards, latches,
-    identification window), the outer probe socket on the end, and inside a 12-well inner container (4 x 3 wells,
-    each with a capped specimen tube and a blank label tab) in grey foam. Child Lid (hinged at the back, opens 105 deg)
-    carries the inscription slot Label_Lid on its underside (live text, clue 15)."""
+    """PR_VaultCase rebuilt hinged (decision 11), in the installed Tripo case's size and orientation: 0.60 m long
+    along z, 0.39 m wide, 0.27 m tall; white shell, navy corner guards, two latches on the front (-x) long side, the
+    identification window on the lid and the outer probe socket recessed in the -z end. Inside: a 12-well container
+    (4 along z x 3 across, each a capped specimen tube with a blank label tab) in grey foam. Child Lid, hinged along
+    the back (+x) top edge, opens 105 deg; its underside carries Label_Lid, the slot for clue 15's inscription."""
     L, W, H = VC_L, VC_W, VC_H
     base_h = H * 0.62
     t = 0.02
-    b.box((0, 0.01, 0), (L, 0.02, W), "PaintWhite")
-    for (cx, cz, sx, sz) in ((0, -W / 2 + t / 2, L, t), (0, W / 2 - t / 2, L, t), (-L / 2 + t / 2, 0, t, W), (L / 2 - t / 2, 0, t, W)):
-        b.box((cx, base_h / 2, cz), (sx, base_h, sz), "PaintWhite")
-    b.box((0, base_h - 0.03, 0), (L - 2 * t, 0.04, W - 2 * t), "Foam")
+    bw = W - 0.024
     segs = 12 if lod == 0 else 6
+    b.box((0, 0.01, 0), (bw, 0.02, L), "PaintWhite")
+    for (cx, cz, sx, sz) in ((-bw / 2 + t / 2, 0, t, L), (bw / 2 - t / 2, 0, t, L), (0, -L / 2 + t / 2, bw, t), (0, L / 2 - t / 2, bw, t)):
+        b.box((cx, base_h / 2, cz), (sx, base_h, sz), "PaintWhite")
+    b.box((0, base_h - 0.03, 0), (bw - 2 * t, 0.04, L - 2 * t), "Foam")
     for i in range(4):
         for j in range(3):
-            x = -0.20 + 0.133 * i
-            z = -0.11 + 0.11 * j
-            b.cylinder((x, base_h - 0.10, z), (x, base_h - 0.005, z), 0.028, "PaintDark", segs=segs)
-            b.cylinder((x, base_h - 0.06, z), (x, base_h + 0.02, z), 0.020, "Glass", segs=segs)
-            b.cylinder((x, base_h + 0.02, z), (x, base_h + 0.035, z), 0.021, "PaintNavy" if (i + j) % 3 else "PaintOrange", segs=segs)
-            b.box((x + 0.042, base_h - 0.0, z), (0.03, 0.004, 0.05), "Label")
+            z = -0.20 + 0.133 * i
+            x = -0.10 + 0.10 * j
+            b.cylinder((x, base_h - 0.10, z), (x, base_h - 0.005, z), 0.026, "PaintDark", segs=segs)
+            b.cylinder((x, base_h - 0.06, z), (x, base_h + 0.02, z), 0.019, "Glass", segs=segs)
+            b.cylinder((x, base_h + 0.02, z), (x, base_h + 0.035, z), 0.020, "PaintNavy" if (i + j) % 3 else "PaintOrange", segs=segs)
+            b.box((x, base_h, z + 0.040), (0.05, 0.004, 0.026), "Label")
     for sx in (-1, 1):
         for sz in (-1, 1):
-            b.box((sx * (L / 2 - 0.035), base_h / 2, sz * (W / 2 - 0.035)), (0.08, base_h + 0.01, 0.08), "PaintNavy")
+            b.box((sx * (W / 2 - 0.04), base_h / 2, sz * (L / 2 - 0.04)), (0.08, base_h + 0.01, 0.08), "PaintNavy")
     for sz in (-1, 1):
-        b.box((sz * 0.17, base_h - 0.03, -W / 2 - 0.012), (0.05, 0.06, 0.02), "Steel")
-    b.cylinder((L / 2, base_h * 0.5, 0), (L / 2 + 0.03, base_h * 0.5, 0), 0.025, "Steel", segs=segs)
-    b.cylinder((L / 2 + 0.03, base_h * 0.5, 0), (L / 2 + 0.035, base_h * 0.5, 0), 0.012, "PaintDark", segs=segs)
-    b.torus((L / 2 + 0.032, base_h * 0.5, 0), (1, 0, 0), 0.03, 0.005, "PaintOrange", segs=14, rings=5)
-    return [("VaultBase_Col-convcolonly", (0, base_h / 2, 0), (L, base_h, W))]
+        b.box((-W / 2 + 0.006, base_h - 0.03, sz * 0.17), (0.012, 0.06, 0.05), "Steel")
+    b.cylinder((0, base_h * 0.5, -L / 2 - 0.0005), (0, base_h * 0.5, -L / 2 + 0.006), 0.024, "PaintDark", segs=segs)
+    b.torus((0, base_h * 0.5, -L / 2 + 0.004), (0, 0, 1), 0.028, 0.004, "PaintOrange", segs=14, rings=5)
+    return [("VaultBase_Col-convcolonly", (0, base_h / 2, 0), (W, base_h, L))]
 
 
 def vault_lid(b, lod):
-    """Lid, pivot on the back hinge line; closed it sits on the base. Label_Lid: the inscription plate underneath."""
+    """Lid, pivot on the back (+x) hinge line at the rim; closed it sits on the base. Label_Lid underneath."""
     L, W, H = VC_L, VC_W, VC_H
     lh = H * 0.38
     t = 0.02
-    b.box((0, lh - t / 2, -W / 2), (L, t, W), "PaintWhite")
-    for (cx, cz, sx, sz) in ((0, -t / 2, L, t), (0, -W + t / 2, L, t), (-L / 2 + t / 2, -W / 2, t, W), (L / 2 - t / 2, -W / 2, t, W)):
-        b.box((cx, lh / 2, cz), (sx, lh, sz), "PaintWhite")
-    b.box((0, lh + 0.002, -W / 2), (0.16, 0.004, 0.10), "PaintDark")
-    b.box((0, lh + 0.004, -W / 2), (0.14, 0.002, 0.08), "Glass")
-    for sx in (-1, 1):
-        for sz in (0, -1):
-            b.box((sx * (L / 2 - 0.035), lh / 2, -0.035 if sz == 0 else -W + 0.035), (0.08, lh + 0.01, 0.08), "PaintNavy")
-    b.box((0, 0.012, -W / 2), (L - 0.12, 0.004, W - 0.12), "Foam")
-    b.box((0, 0.016, -W / 2), (0.34, 0.002, 0.14), "Label")
-    return [("VaultLid_Col-convcolonly", (0, lh / 2, -W / 2), (L, lh, W))]
+    bw = W - 0.024
+    xc = -W / 2
+    b.box((xc, lh - t / 2, 0), (bw, t, L), "PaintWhite")
+    for (cx, sx) in ((-0.012 - t / 2, t), (-W + 0.012 + t / 2, t)):
+        b.box((cx, lh / 2, 0), (sx, lh, L), "PaintWhite")
+    for sz in (-1, 1):
+        b.box((xc, lh / 2, sz * (L / 2 - t / 2)), (bw, lh, t), "PaintWhite")
+    b.box((xc, lh + 0.002, 0.10), (0.10, 0.004, 0.16), "PaintDark")
+    b.box((xc, lh + 0.0045, 0.10), (0.08, 0.001, 0.14), "Glass")
+    for x in (-0.04, -W + 0.04):
+        for sz in (-1, 1):
+            b.box((x, lh / 2, sz * (L / 2 - 0.04)), (0.08, lh + 0.01, 0.08), "PaintNavy")
+    b.box((xc, 0.012, 0), (bw - 0.10, 0.004, L - 0.12), "Foam")
+    b.box((xc, 0.0095, 0), (0.14, 0.001, 0.34), "LabelLid")
+    return [("VaultLid_Col-convcolonly", (xc, lh / 2, 0), (W, lh, L))]
 
 
 def piece_vault_probe(b, lod):
@@ -961,11 +1051,14 @@ GARAGE_PIECES = [
          children=[("DoorL", (-LOCKER_W / 2 + 0.005, 0.08, -LOCKER_D / 2), locker_door("L")), ("DoorR", (LOCKER_W / 2 - 0.005, 0.08, -LOCKER_D / 2), locker_door("R"))],
          lines=["1.2 x 0.6 x 2.2 m", "relief cargo, blank plate"]),
     dict(id="EN_Garage_BayFrame", display="Bay module (vacuum)", build=piece_bay_frame, lines=["2 m x 5.85 m x 5.6 m", "portal, shield, flood, floor"]),
-    dict(id="EN_Garage_BayDoor", display="Rover door", build=piece_bay_door, children=[("DoorPanel", (0, 0, -0.10), bay_door_panel)],
+    dict(id="EN_Garage_BayDoor", display="Rover door", build=piece_bay_door, children=[("DoorPanel", (0, DOOR_OPEN_H, -0.10), bay_door_panel)],
          lines=["opening 5.55 x 4.90 m", "panel rolls up 4.95 m"]),
     dict(id="EN_Garage_BayEndWall", display="Bay end wall", build=piece_bay_end_wall, lines=["5.85 x 5.60 m", "ribbed shield"]),
     dict(id="EN_Garage_EVAPorch", display="EVA porch", build=piece_eva_porch, lines=["3.30 x 5.85 m deck at 1.40 m", "rail, suitport gate, stair"]),
     dict(id="EN_Garage_Umbilical", display="Charge umbilical", build=piece_umbilical, lines=["0.36 x 1.70 m post", "power + coolant"]),
+    dict(id="EN_Garage_Plinth", display="Ready-room plinth module", build=piece_plinth, lines=["2.0 x 1.34 x 3.30 m", "sintered, steel nosing"]),
+    dict(id="EN_Garage_BayMarkings", display="Bay floor markings", build=piece_bay_markings, lines=["rover stall lines", "docking-side dashes"]),
+    dict(id="EN_Garage_Berm", display="Regolith berm and headwall", build=piece_berm, lines=["1 m overburden, 35 deg", "headwall, wing walls"]),
 ]
 COLDTRAP_PIECES = [
     dict(id="EN_ColdTrap_BeaconMast", display="Beacon on 5 m mast", build=piece_beacon_mast, lines=["5.0 m; tripod 1.5 m across", "retro bands, status lamp"]),
@@ -975,7 +1068,7 @@ COLDTRAP_PIECES = [
     dict(id="EN_ColdTrap_SampleStake", display="Sample stake", build=piece_sample_stake, lines=["0.60 m, stiff tag", "three per station"]),
     dict(id="EN_ColdTrap_TetherAnchor", display="Tether anchor", build=piece_tether_anchor, lines=["helical, D-ring", "two on the shelf"]),
     dict(id="EN_ColdTrap_SurveyMarker2034", display="2034 marker + tag", build=piece_survey_marker_2034, lines=["1.5 m, archival tag", "unfaded: no UV in a PSR"]),
-    dict(id="PR_VaultCase_Open", display="Vault V12, open", build=piece_vault_open, children=[("Lid", (0, VC_H * 0.62, VC_W / 2), vault_lid)],
+    dict(id="PR_VaultCase", display="Vault V12 (hinged)", build=piece_vault_open, children=[("Lid", (VC_W / 2, VC_H * 0.62, 0), vault_lid)],
          lines=["0.60 x 0.39 x 0.27 m", "12 wells, lid inscription slot"]),
     dict(id="PR_VaultProbe", display="Thermal probe", build=piece_vault_probe, lines=["0.45 m wand", "Screen, cable"]),
     dict(id="PR_VaultCarrier", display="Recovery carrier", build=piece_vault_carrier, lines=["0.86 x 0.58 x 0.52 m", "cradle + MLI sleeve"]),
@@ -1232,9 +1325,9 @@ def run_pieces(table):
             panel.scale.z, panel.location.z = 0.04, panel.location.z + DOOR_OPEN_H * 0.96
             render_piece_preview(root, objs, spec["id"] + "_open", direction)
             panel.scale.z, panel.location.z = 1.0, panel.location.z - DOOR_OPEN_H * 0.96
-        if spec["id"] == "PR_VaultCase_Open":
+        if spec["id"] == "PR_VaultCase":
             lid = child(objs, "Lid")
-            lid.rotation_euler = (math.radians(105), 0, 0)
+            lid.rotation_euler = (0, math.radians(105), 0)  # Godot z -105 deg = Blender y +105 deg
             render_piece_preview(root, objs, spec["id"], (0.7, 1.0, 0.9))
             render_piece_preview(root, objs, spec["id"] + "_lid", (0.0, 1.0, 0.35), pad=1.3)
             lid.rotation_euler = (0, 0, 0)
@@ -1539,7 +1632,9 @@ GARAGE_SITE = (80.0, 150.0)  # (distance m, azimuth deg) from Aurora's site orig
 
 
 def garage_layout():
-    """Room-frame placements (Godot x right, y up, z from the ready room's back wall into the bay), 12 x 9 m."""
+    """Room-frame placements (Godot x right, y up, z from the ready room's back wall into the bay), 12 x 9 m.
+    Positions are finished-floor positions: habitat_kit.gd place() adds each piece's mount_y (floor and ceiling tiles,
+    light strips, the bay modules' floor slab), so the ready-room pieces stand at y = DECK_Y and the bay's at 0."""
     P = []
 
     def put(pid, x, y, z, yaw=0.0, role=""):
@@ -1547,8 +1642,8 @@ def garage_layout():
     D = DECK_Y
     for x in range(12):
         for z in range(3):
-            put("EN_Kit_FloorTile", x + 0.5, D - 0.06, z + 0.5)
-            put("EN_Kit_CeilingTile", x + 0.5, D + WALL_H, z + 0.5)
+            put("EN_Kit_FloorTile", x + 0.5, D, z + 0.5)
+            put("EN_Kit_CeilingTile", x + 0.5, D, z + 0.5)
     # pressure wall (z = 3), room face towards the ready room
     put("EN_Kit_Wall_Corner", 0, D, 3, -90)
     put("EN_Garage_SuitSealPanel", 1.0, D, 3, 0, "suit_seals")
@@ -1579,11 +1674,14 @@ def garage_layout():
     put("EN_Garage_ReliefLocker", 10.0, D, 0.15 + LOCKER_D / 2 + 0.02, 180, "relief_locker")
     put("EN_Garage_CargoRack", 12 - 0.15 - RACK_D / 2 - 0.02, D, 1.5, 90, "cargo_rack")
     for x in (1.5, 4.5, 7.5, 10.5):
-        put("EN_Kit_LightStrip", x, D + WALL_H - 0.08, 1.5)
+        put("EN_Kit_LightStrip", x, D, 1.5)
     # the vacuum bay
     zb = 3.0 + WALL_D
     for x in (1, 3, 5, 7, 9, 11):
+        put("EN_Garage_Plinth", x, 0, 1.5)
         put("EN_Garage_BayFrame", x, 0, zb)
+    put("EN_Garage_BayMarkings", 6.0, 0, zb + BAY_D / 2)
+    put("EN_Garage_Berm", BERM_OX, 0, BERM_OZ, 0, "berm")
     put("EN_Garage_BayEndWall", 0, 0, zb + BAY_D / 2, -90)
     put("EN_Garage_BayDoor", 12, 0, zb + BAY_D / 2, 90, "rover_door")
     put("EN_Garage_EVAPorch", 0, 0, zb, 0, "eva_porch")
@@ -1628,6 +1726,8 @@ def build_garage(table, origin=Vector((0, 0, 0)), yaw_deg=0.0, rover=True):
     roles = {}
     for pl in layout["placements"]:
         pid = pl["piece"]
+        if pid == "EN_Garage_Berm":  # the preview scene builds its own berm (build_berm)
+            continue
         if pid.startswith("EN_Kit_"):
             tpl = kit_template(pid, table)
         else:
@@ -1638,7 +1738,7 @@ def build_garage(table, origin=Vector((0, 0, 0)), yaw_deg=0.0, rover=True):
             tpl = templates[pid]
         r, objs = instance(tpl, holder)
         x, y, z = pl["position"]
-        y = y + (mounts.get(pid, 0.0) if pid.startswith("EN_Kit_") and pid not in ("EN_Kit_FloorTile", "EN_Kit_CeilingTile", "EN_Kit_LightStrip") else 0.0)
+        y = y + mounts.get(pid, 0.0)
         place(r, x, y, z, pl["yaw"])
         roles.setdefault(pl["role"] or pid, []).append((r, objs))
     # sintered plinth under the ready room, the floor markings and the wheel guide
@@ -2128,10 +2228,377 @@ def shelf_props(piece, z_at):
     return [(0.3, 0.5, 2.6), (1.6, 1.4, 1.0), (-1.0, -0.5, 1.5), (-12.0, -9.0, 6.0), (-1.9, 0.2, 1.0), (2.6, 1.9, 1.0), (0, 0, 9.0)]
 
 
+# ----------------------------------------------------------------------------------------------- phase 2: publish
+
+ENV_DIR = ROOT / "game/assets/environment"
+GARAGE_DIR = ENV_DIR / "EN_Garage"
+COLD_DIR = ENV_DIR / "EN_ColdTrap"
+PROPS_DIR = ROOT / "game/assets/props"
+PUBLISH_PREVIEW = STAGE / "publish_preview"
+TASK = "M3-4A"
+APPROVAL = 'approved by Sadman in chat on 7 Nov 2026: "Approve all 12" (decisions 1-12 of production/concept/chapter4_v1/README.md)'
+SOURCE = "tools/build_ch04_assets.py (seed 20261107): approved sheets production/concept/chapter4_v1/ (M3-4A, decisions 1-12), M1-05 kit conventions"
+PROP_IDS = ("PR_VaultCase", "PR_VaultProbe", "PR_VaultCarrier", "PR_RoverCargoMount")
+# what each piece does in the game, for the catalogue (sockets the room owner and the missions use)
+PIECE_INFO = {
+    "EN_Garage_DockingPort": dict(kind="wall", notes="2 m pressure-wall module: dock hatch 0.90 x 1.15 m with its sill 0.45 m above the deck, vestibule panel (Screen slot for the live words SEALED / EQUALISING / SAFE TO OPEN, lamps LampSealed / LampEqualising / LampSafe, a gauge); on the bay side the fixed sleeve and child DockCollar, the telescoping tunnel that meets VH_Rover's side hatch 1.10 m from the wall; child HatchLeaf (room side, hinged left)",
+                                  sockets=dict(parts=dict(HatchLeaf=dict(kind="rotate", axis="y", degrees=100.0), DockCollar=dict(kind="slide", axis="z", metres=-0.40, note="0 = extended to the docked rover's hatch, 1 = retracted (rover away)")),
+                                               opening_centre=[0.0, DOCK_SILL + DOCK_H / 2, 0.0], opening_size=[DOCK_W, DOCK_H], tunnel_reach_m=TUNNEL_L, states=["SEALED", "EQUALISING", "SAFE TO OPEN"], screen_material="Screen")),
+    "EN_Garage_BayWindow": dict(kind="wall", notes="2 m pressure-wall module, 1.70 x 1.00 m window with its sill at 1.0 m, navy room frame, white bay frame, two panes, handrail", sockets=dict(window_centre=[0.0, 1.5, 0.0], window_size=[1.70, 1.00])),
+    "EN_Garage_CargoLock": dict(kind="wall", notes="1 m pressure-wall module, 0.72 x 0.56 m cargo lock at bench height through the wall (0.34 m into the room, 0.30 m over the EVA porch); back-filled with dry nitrogen, never cabin air (decision 5); child InnerDoor (room, hinged left) and OuterDoor (porch, hinged on top), one open at a time; LampDry while filling, LampSafe when equalised; Screen",
+                                sockets=dict(parts=dict(InnerDoor=dict(kind="rotate", axis="y", degrees=100.0), OuterDoor=dict(kind="rotate", axis="x", degrees=-100.0)),
+                                             cradle_socket=[0.0, LOCK_Y0 + 0.05, (-LOCK_ROOM + WALL_D + LOCK_BAY) / 2], rule="one door open at a time; the fill is dry nitrogen", lamps=["LampDry", "LampSafe"], screen_material="Screen")),
+    "EN_Garage_SuitSealPanel": dict(kind="wall", notes="1 m wall module, the ready room's 'suit seals' station: three gauges and three LampSafe lamps (the two rear suitports and the dock seal) over blank label plates, a Screen with the leak-check trace", sockets=dict(gauges=[[-0.27, 1.40, 0.008], [0.0, 1.40, 0.008], [0.27, 1.40, 0.008]], screen_material="Screen")),
+    "EN_Garage_RouteBoard": dict(kind="wall", notes="2 m wall module: the route board, a 1.80 x 0.95 m Screen (route cards A/B/C, slope map, beacon chain) and a rail with three blank route cards", sockets=dict(screen_centre=[0.0, 1.62, -0.034], screen_size=[1.80, 0.95], cards=[[-0.45, 0.93, -0.05], [0.0, 0.93, -0.05], [0.45, 0.93, -0.05]])),
+    "EN_Garage_DepartureBoard": dict(kind="wall", notes="1 m wall module: one destination board, a portrait 0.74 x 1.20 m Screen (destination, roster in role colours, provisions, time) and a status lamp; two stand side by side (EX-CH07-S12, EX-CH08-S01)", sockets=dict(screen_centre=[0.0, 1.43, -0.034], screen_size=[0.74, 1.20])),
+    "EN_Garage_HandoverConsole": dict(kind="standing", notes="1.80 x 0.72 m standing console, desk at 0.95 m: Screen (route map and beacon chain), Screen2 (Amara's slope card), Screen3 (the landing-pad camera, CH05-S01)", sockets=dict(screens=dict(Screen="route map and beacon chain", Screen2="slope card", Screen3="landing-pad camera"), operator=[0.0, 0.0, -0.75])),
+    "EN_Garage_CargoRack": dict(kind="standing", notes="2.0 x 0.6 x 2.2 m rack of sealed bins with blank plates and orange straps; the supply-ledger tablet is Screen2 on the right upright", sockets=dict(ledger_screen="Screen2")),
+    "EN_Garage_ReliefLocker": dict(kind="standing", notes="1.2 x 0.6 x 2.2 m locker for the 8-12 Dec relief cargo (decision 6), blank label plate; children DoorL and DoorR swing out 110 degrees",
+                                   sockets=dict(parts=dict(DoorL=dict(kind="rotate", axis="y", degrees=110.0), DoorR=dict(kind="rotate", axis="y", degrees=-110.0)), shelves_y=[0.55, 1.05, 1.55])),
+    "EN_Garage_BayFrame": dict(kind="bay", notes="2 m bay module of the unpressurised rover shelter (repeat along x): steel portal, ribbed shield on the far wall and the roof, cladding above the ready room, one 5,000 K LED flood (emissive Flood material; the room adds the light), sintered floor; local z from the pressure wall's bay face (0) to the far wall (5.85)", sockets=dict(flood=[0.0, BAY_H - 0.53, BAY_D / 2])),
+    "EN_Garage_BayDoor": dict(kind="bay", notes="end wall with the 5.55 x 4.90 m rover door: portal and the drum; child DoorPanel coils up into the drum (part kind scale). Not a pressure door (decision 1)", sockets=dict(parts=dict(DoorPanel=dict(kind="scale", axis="y", value=0.04)), opening_size=[DOOR_OPEN_W, DOOR_OPEN_H])),
+    "EN_Garage_BayEndWall": dict(kind="bay", notes="the bay's closed end wall behind the EVA porch, 5.85 x 5.60 m ribbed shield"),
+    "EN_Garage_EVAPorch": dict(kind="bay", notes="EVA porch at the rover's rear, deck +1.40 m like the ready room (decision 4): 3.30 x 5.85 m grating on sintered piers, rail with the suitport gate, stair down to the bay floor; pivot at the end-wall corner by the pressure wall", sockets=dict(deck_y=DECK_Y, deck_x=PORCH_X, gate_z=[1.40, 3.80])),
+    "EN_Garage_Umbilical": dict(kind="standing", notes="charge and coolant umbilical post on the bay floor with an orange connector head and a hanging cable loop; the room draws the live cable to the rover", sockets=dict(connector=[0.0, 1.55, -0.24])),
+    "EN_Garage_Plinth": dict(kind="standing", notes="2 m module of the sintered plinth under the ready room: 2.0 x 1.34 x 3.30 m; the kit floor tiles sit on it (finished deck +1.40)"),
+    "EN_Garage_BayMarkings": dict(kind="decal", notes="bay floor paint: the rover stall's orange edge lines and the white docking-side dashes; place at room (6, 0, 6.075)"),
+    "EN_Garage_Berm": dict(kind="shell", notes="the garage's exterior shield (decision 3): 1 m regolith overburden over the 12 x 9 m footprint, 35 deg sides, the door band clear, sintered headwall and wing walls; textures M1-35 compacted regolith; place at room (6, 0, 4.5)"),
+    "EN_ColdTrap_BeaconMast": dict(kind="site", notes="survey beacon on its 5 m telescoping mast (decision 9): tripod on screw anchors, guy lines, the beacon head with a status lamp (LampSafe) and Screen, two retroreflective bands (Retro) at 1.2 m and 2.2 m", sockets=dict(antenna_top=[0.0, MAST_H, 0.0], retro_bands_y=[1.2, 2.2], head=[0.0, MAST_H - 0.42, 0.0])),
+    "EN_ColdTrap_ReturnMarker": dict(kind="site", notes="2.0 m return marker: base plate, three retroreflective bands (RetroOrange), a stiff orange flag plate (no cloth in vacuum)"),
+    "EN_ColdTrap_SlopeSign": dict(kind="site", notes="1.5 m slope sign: a blank 0.55 x 0.40 m face (Label: the slope is live text) with a retroreflective border", sockets=dict(label_centre=[0.0, 1.40, -0.03])),
+    "EN_ColdTrap_ReferencePlate": dict(kind="site", notes="dry reference plate (EX-CH04-S05, the scanner's dry reference): four dry-standard tiles 0.30 m up on a low tripod, socket for the scanner's nose", sockets=dict(scanner_socket=[0.0, 0.31, 0.0])),
+    "EN_ColdTrap_SampleStake": dict(kind="site", notes="sample-point stake, 0.60 m above the ground (0.10 m driven in: mount_y), stiff orange tag with a blank Label for the sample number, retro tip; three per station"),
+    "EN_ColdTrap_TetherAnchor": dict(kind="site", notes="helical ground anchor (0.40 m driven in: mount_y), bearing plate, orange D-ring for the carrier tether", sockets=dict(ring=[0.0, 0.15, 0.0])),
+    "EN_ColdTrap_SurveyMarker2034": dict(kind="site", notes="the 2034 survey marker on the vault shelf (0.30 m driven in): faded-yellow bands, the archival tag (blank Label: live text, never names Noor before CH05); unfaded paint because no UV reaches a PSR", sockets=dict(tag=[0.0, 1.15, -0.04])),
+}
+PROP_INFO = {
+    "PR_VaultCase": dict(notes="vault V12 rebuilt hinged (decision 11) in the installed case's size and orientation (0.60 m along z): closed and open states, identification window on the lid, outer probe socket recessed in the -z end, a 12-well inner container (capped tubes, blank Label tabs); child Lid (hinged on the +x top edge) carries Label_Lid underneath, the slot for clue 15's inscription",
+                         sockets=dict(parts=dict(Lid=dict(kind="rotate", axis="z", degrees=-105.0)), probe_socket=[0.0, VC_H * 0.31, -VC_L / 2], id_window=[-0.0, VC_H, 0.10],
+                                      wells=[[round(-0.10 + 0.10 * j, 3), round(VC_H * 0.62, 3), round(-0.20 + 0.133 * i, 3)] for i in range(4) for j in range(3)], lid_label_material="Label_Lid")),
+    "PR_VaultProbe": dict(notes="thermal contact probe for the outer case (EX-CH04-S07): 0.45 m wand, a small Screen in the grip, coiled cable", sockets=dict(tip=[0.0, 0.03, -0.235])),
+    "PR_VaultCarrier": dict(notes="recovery carrier (the 'closed carrier' of S02 and S06): rigid cradle with two lift handles (two support points), the MLI sleeve seated round the case, a tether eye and latch rails that lock onto PR_RoverCargoMount",
+                            sockets=dict(lift_points=[[-(CARRIER_L / 2 + 0.10), CARRIER_H - 0.02, 0.0], [CARRIER_L / 2 + 0.10, CARRIER_H - 0.02, 0.0]], tether_eye=[0.0, CARRIER_H + 0.04, CARRIER_W / 2 - 0.02], case_socket=[0.0, 0.06, 0.0])),
+    "PR_RoverCargoMount": dict(notes="cargo mount on VH_Rover's rear rack (EX-CH04-S08): two latch rails, the latch with its position flag ('shows closed') and the separate lock pin with its own lamp ('testing locked')",
+                               sockets=dict(latch_flag=[0.47, 0.22, -0.06], lock_pin=[0.55, 0.18, 0.10], carrier_socket=[0.0, 0.105, 0.0])),
+}
+
+
+def make_ch04_textures():
+    """The procedural surfaces of the phase 1 previews as tileable PBR sets (seeded numpy, like the kit's): sintered
+    regolith pavers and the bellows fabric for the garage, multi-layer insulation for the carrier's sleeve. LOD0 sets
+    and half-size LOD1 sets, written once to the asset folders and referenced by uri."""
+    rng = np.random.default_rng(SEED + 41)
+    out = {0: {}, 1: {}}
+
+    def save_set(key, folder, prefix, base, height, tile, rough, metal, base_name=None, normal_name=None):
+        for lod in (0, 1):
+            d = folder / ("textures" if lod == 0 else "textures/lod1")
+            d.mkdir(parents=True, exist_ok=True)
+            sfx = "" if lod == 0 else "_LOD1"
+            b_ = base if lod == 0 else np.stack([hk.half(base[:, :, c]) for c in range(3)], axis=-1)
+            h_ = height if lod == 0 else hk.half(height)
+            orm = np.ones(h_.shape + (3,), dtype=np.float32)
+            orm[:, :, 1] = np.clip(rough + 0.04 * (h_ / (np.abs(h_).max() + 1e-9)), 0, 1)
+            orm[:, :, 2] = metal
+            out[lod][key] = dict(
+                base=hk.save_image(f"{base_name or prefix}_BaseColor{sfx}", b_, d),
+                normal=bpy.data.images.get(f"{normal_name or prefix}_Normal{sfx}") or hk.save_image(f"{normal_name or prefix}_Normal{sfx}", hk.normal_map(h_, tile), d, srgb=False),
+                orm=bpy.data.images.get(f"{normal_name or prefix}_ORM{sfx}") or hk.save_image(f"{normal_name or prefix}_ORM{sfx}", orm, d, srgb=False), tile=tile)
+    # sintered pavers: 0.5 m units on a 1 m tile, 6 mm joints, per-paver tone, fine grain
+    n = 1024
+    yy, xx = np.mgrid[0:n, 0:n] / n
+    units = 2
+    cu, cv = np.floor(xx * units), np.floor(yy * units)
+    fu, fv = xx * units - cu, yy * units - cv
+    joint = np.minimum(np.minimum(fu, 1 - fu), np.minimum(fv, 1 - fv)) * (1.0 / units)
+    groove = np.clip(1 - joint / 0.004, 0, 1)
+    tone = (np.sin(cu * 12.9898 + cv * 78.233) * 43758.5453) % 1.0
+    grain = hk.fractal(rng, n, 8, n / 3, 1.2)
+    height = -0.003 * groove + 0.0004 * grain
+    g = 0.33 + 0.05 * tone + 0.025 * grain
+    g = g * (1 - 0.45 * groove)
+    save_set("Sintered", GARAGE_DIR, "T_Garage_Sintered", np.stack([g, g * 0.985, g * 0.96], axis=-1), height, 1.0, 0.92, 0.0)
+    # bellows fabric: a plain weave on a 0.25 m tile
+    n = 512
+    yy, xx = np.mgrid[0:n, 0:n] / n
+    k = 64
+    weave = np.sin(2 * np.pi * k * xx) * np.sign(np.sin(np.pi * k * yy)) + np.sin(2 * np.pi * k * yy) * np.sign(np.sin(np.pi * k * xx))
+    height = 0.0002 * weave + 0.0001 * hk.fractal(rng, n, 4, n / 4, 1.5)
+    f = 0.20 + 0.02 * weave / 2
+    save_set("Fabric", GARAGE_DIR, "T_Garage_Fabric", np.stack([f, f, f * 1.03], axis=-1), height, 0.25, 0.85, 0.0)
+    # MLI crinkle for the carrier sleeve (silver)
+    height = 0.0008 * hk.fractal(rng, n, 3, 80, 1.3)
+    shade = 1.0 + 0.10 * height / (np.abs(height).max() + 1e-9)
+    save_set("MLISilver", COLD_DIR, "T_ColdTrap_MLI", np.stack([0.80 * shade, 0.81 * shade, 0.82 * shade], axis=-1), height, 0.5, 0.25, 1.0, base_name="T_ColdTrap_MLISilver")
+    return out
+
+
+def regolith_export_material(lod):
+    """The M1-35 compacted-regolith set (base and normal) for the berm, referenced in ../terrain/textures."""
+    mat = bpy.data.materials.new("M_CH4_Regolith" + ("" if lod == 0 else "_LOD1"))
+    t = mat.node_tree
+    bsdf = t.nodes["Principled BSDF"]
+    bsdf.inputs["Roughness"].default_value = 1.0
+    for kind, stem, srgb in (("Base Color", "T_Regolith_Compacted_BaseColor", True), ("Normal", "T_Regolith_Compacted_Normal", False)):
+        img = bpy.data.images.get(stem) or bpy.data.images.load(str(ENV_DIR / "terrain/textures" / (stem + ".png")), check_existing=True)
+        img.name = stem
+        img.colorspace_settings.name = "sRGB" if srgb else "Non-Color"
+        tex = t.nodes.new("ShaderNodeTexImage")
+        tex.image = img
+        if kind == "Normal":
+            nm = t.nodes.new("ShaderNodeNormalMap")
+            t.links.new(tex.outputs["Color"], nm.inputs["Color"])
+            t.links.new(nm.outputs["Normal"], bsdf.inputs["Normal"])
+        else:
+            t.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
+    return mat
+
+
+def export_tables():
+    """Per-LOD material tables for the published GLBs: the kit's sets, the Chapter 4 sets above and plain glTF
+    materials for the small parts (live-UI slots Screen / Screen2 / Screen3 / Label / Label_Lid, the lamps, the flood,
+    rubber, retroreflective tape, brass, anodised aluminium, foam and the 2034 marker's old paint)."""
+    kit = hk.make_materials(load_kit_images())
+    tex = make_ch04_textures()
+    plain = {"Screen2": ((0.02, 0.025, 0.03), 0.12, None), "Screen3": ((0.02, 0.025, 0.03), 0.12, None), "Label": ((0.80, 0.80, 0.78), 0.55, None),
+             "LabelLid": ((0.80, 0.80, 0.78), 0.55, None), "LampSealed": ((0.55, 0.06, 0.04), 0.25, ((1.0, 0.10, 0.06), 1.5)),
+             "LampEqualising": ((0.60, 0.38, 0.05), 0.25, ((1.0, 0.62, 0.10), 0.8)), "LampSafe": ((0.08, 0.45, 0.14), 0.25, ((0.20, 1.0, 0.35), 0.6)),
+             "LampDry": ((0.06, 0.20, 0.55), 0.25, ((0.25, 0.55, 1.0), 0.8)), "Flood": ((0.95, 0.96, 1.0), 0.4, ((0.92, 0.95, 1.0), 6.0)),
+             "Rubber": ((0.025, 0.025, 0.027), 0.8, None), "Retro": ((0.92, 0.92, 0.88), 0.35, None), "RetroOrange": ((0.95, 0.36, 0.08), 0.35, None),
+             "Brass": ((0.75, 0.55, 0.25), 0.35, None), "Anodised": ((0.20, 0.22, 0.26), 0.35, None), "Foam": ((0.72, 0.72, 0.70), 0.95, None),
+             "OldPaint": ((0.80, 0.62, 0.10), 0.7, None)}
+    names = {"Screen2": "Screen2", "Screen3": "Screen3", "Label": "Label", "LabelLid": "Label_Lid", "LampSealed": "LampSealed", "LampEqualising": "LampEqualising",
+             "LampSafe": "LampSafe", "LampDry": "LampDry"}
+    tables = {}
+    for lod in (0, 1):
+        sfx = "" if lod == 0 else "_LOD1"
+        t = dict(kit[lod])
+        for key, (col, rough, emis) in plain.items():
+            mat = hk.pbr_material(names.get(key, "M_CH4_" + key) + sfx, None, rough, col, emission=emis)
+            if key in ("Brass", "Anodised"):
+                mat.node_tree.nodes["Principled BSDF"].inputs["Metallic"].default_value = 1.0
+            t[key] = (mat, 1.0)
+        for key in ("Sintered", "Fabric", "MLISilver"):
+            t[key] = (hk.pbr_material("M_CH4_" + key + sfx, tex[lod][key]), tex[lod][key]["tile"])
+        t["Regolith"] = (regolith_export_material(lod), 4.0)
+        tables[lod] = t
+    return tables
+
+
+def texture_resolver(glb_dir):
+    """Image name -> folder relative to the GLB: the kit's sets, the garage's, the cold trap's, M1-35's regolith."""
+    def resolve(name):
+        lod1 = name.endswith("_LOD1")
+        if name.startswith("T_Kit_"):
+            base = ENV_DIR / "kit/textures"
+        elif name.startswith("T_Garage_"):
+            base = GARAGE_DIR / "textures"
+        elif name.startswith("T_ColdTrap_"):
+            base = COLD_DIR / "textures"
+        elif name.startswith("T_Regolith_"):
+            base, lod1 = ENV_DIR / "terrain/textures", False
+        else:
+            raise ValueError(f"no shared folder for image {name}")
+        return os.path.relpath(base / "lod1" if lod1 else base, glb_dir)
+    return resolve
+
+
+def write_texture_imports(folder):
+    """Godot import settings for a texture folder, as the kit writes them (VRAM compressed, mipmaps, normal maps
+    flagged, ORM packed as data); an existing .import keeps its uid."""
+    for png in sorted(folder.rglob("*.png")):
+        import_file = png.with_name(png.name + ".import")
+        uid = ""
+        if import_file.exists():
+            uid = next((line + "\n" for line in import_file.read_text(encoding="utf-8").splitlines() if line.startswith("uid=")), "")
+        kind = "normal" if "_Normal" in png.stem else "orm" if "_ORM" in png.stem else "color"
+        import_file.write_text(
+            '[remap]\n\nimporter="texture"\ntype="CompressedTexture2D"\n' + uid +
+            '\n[deps]\n\nsource_file="res://' + png.relative_to(ROOT / "game").as_posix() + '"\n\n[params]\n\n'
+            'compress/mode=2\ncompress/high_quality=false\ncompress/lossy_quality=0.7\ncompress/uastc_level=0\n'
+            'compress/rdo_quality_loss=0.0\ncompress/hdr_compression=1\n'
+            f'compress/normal_map={1 if kind == "normal" else 2}\n'
+            f'compress/channel_pack={1 if kind != "color" else 0}\n'
+            'mipmaps/generate=true\nmipmaps/limit=-1\nroughness/mode=0\nroughness/src_normal=""\n'
+            'process/channel_remap/red=0\nprocess/channel_remap/green=1\nprocess/channel_remap/blue=2\nprocess/channel_remap/alpha=3\n'
+            'process/fix_alpha_border=true\nprocess/premult_alpha=false\nprocess/normal_map_invert_y=false\n'
+            'process/hdr_as_srgb=false\nprocess/hdr_clamp_exposure=false\nprocess/size_limit=0\ndetect_3d/compress_to=1\n',
+            encoding="utf-8")
+
+
+def build_lod(spec, lod, table):
+    """(root, objects, mount_y) for one piece at one LOD in Godot's frame, children named plainly (HatchLeaf,
+    DockCollar...), collision on LOD0 only, the lowest point moved to y = 0 (the kit's floor rule) with the offset
+    returned as the mount (stakes, anchors and the 2034 marker are driven into the ground; the bay floor's top is the
+    finished floor), then baked to Blender's axes."""
+    root = hk.make_empty(spec["id"] + f"_LOD{lod}")
+    b = Builder(table)
+    cols = spec["build"](b, lod)
+    body = b.to_object(spec["id"] + f"_Mesh_LOD{lod}")
+    body.parent = root
+    objs = [body] + (hk.collision_objects(cols, body, table) if lod == 0 else [])
+    for name, pivot, fn in spec.get("children", []):
+        child = hk.make_empty(name, pivot, root)
+        cb = Builder(table)
+        ccols = fn(cb, lod)
+        cmesh = cb.to_object(name + f"_Mesh_LOD{lod}")
+        cmesh.parent = child
+        objs += [child, cmesh] + (hk.collision_objects(ccols, cmesh, table) if lod == 0 else [])
+    bpy.context.view_layer.update()
+    lo, hi = hk.bounds(objs)
+    mount = round(lo.y, 4)
+    if abs(mount) > 1e-5:
+        for o in objs:
+            if o.parent is root:
+                o.location.y -= mount
+        bpy.context.view_layer.update()
+    return root, objs, mount
+
+
+def image_px(objs):
+    px = 0
+    for o in hk.visual(objs):
+        for m in o.data.materials:
+            if m is None or m.node_tree is None:
+                continue
+            for node in m.node_tree.nodes:
+                if node.type == "TEX_IMAGE" and node.image is not None:
+                    px = max(px, *node.image.size)
+    return px
+
+
+def export_glb(root, objs, path):
+    bpy.ops.object.select_all(action="DESELECT")
+    root.select_set(True)
+    for o in objs:
+        o.select_set(True)
+    bpy.context.view_layer.objects.active = root
+    bpy.ops.export_scene.gltf(filepath=str(path), export_format="GLB", use_selection=True, export_yup=True, export_apply=True,
+                              export_animations=False, export_cameras=False, export_lights=False, export_extras=False,
+                              export_image_format="AUTO", export_texcoords=True, export_normals=True)
+    from glb_external_textures import externalise
+    externalise(path, texture_resolver(path.parent), write_files=False)
+
+
+def write_scene_import(glb):
+    """Godot scene import with the shared textures loaded as already imported (handling 1, like the kit and M3-2A)."""
+    import build_chapter2_assets as c2
+    c2.write_scene_import(glb, 1)
+
+
+def preview_lod(root, objs, name, rig):
+    hk.set_visible(bpy.context.scene.objects, False)
+    hk.set_visible(rig, True)
+    hk.set_visible([root] + objs, True)
+    hk.set_visible([o for o in objs if "colonly" in o.name], False)
+    bpy.context.view_layer.update()
+    lo, hi = hk.bounds(objs)
+    c = (lo + hi) / 2
+    ext = max(hi - lo)
+    camera_at(c + Vector((0.75, 1.0, 0.6)).normalized() * (ext * 4 + 3), c, ortho=ext * 1.2)
+    bpy.context.scene.render.filepath = str(PUBLISH_PREVIEW / f"{name}.png")
+    bpy.ops.render.render(write_still=True)
+    hk.set_visible([o for o in objs if "colonly" in o.name], True)  # the export takes selected, visible objects only
+    for o in objs:
+        if "colonly" in o.name:
+            o.hide_render = True
+
+
+def run_publish():
+    """Phase 2: every approved piece as LOD0 (collision) + LOD1 GLBs and the four vault-set props, the catalogues,
+    the gate manifest, the Godot import files and a studio preview of each GLB for the review contact sheet."""
+    for o in list(bpy.data.objects):
+        bpy.data.objects.remove(o)
+    PUBLISH_PREVIEW.mkdir(parents=True, exist_ok=True)
+    for d in (GARAGE_DIR, COLD_DIR):
+        d.mkdir(parents=True, exist_ok=True)
+        for old in d.glob("*.glb"):
+            old.unlink()
+    tables = export_tables()
+    write_texture_imports(GARAGE_DIR / "textures")
+    write_texture_imports(COLD_DIR / "textures")
+    setup_cycles(min(SAMPLES, 32), 640, 640)
+    rig = studio_rig()
+    rows, garage, cold, props = [], [], [], []
+    for spec in ALL_PIECES:
+        pid = spec["id"]
+        is_prop = pid in PROP_IDS
+        folder = (PROPS_DIR / pid) if is_prop else (GARAGE_DIR if pid.startswith("EN_Garage") else COLD_DIR)
+        folder.mkdir(parents=True, exist_ok=True)
+        info = (PROP_INFO if is_prop else PIECE_INFO)[pid]
+        entry = dict(id=pid, display=spec["display"], notes=info["notes"], kind=info.get("kind", "prop"), lods=[], triangles=[], lod_distance_m=hk.LOD_DISTANCE_M, collision=True)
+        for lod in ((0,) if is_prop else (0, 1)):
+            root, objs, mount = build_lod(spec, lod, tables[lod])
+            lo, hi = hk.bounds(objs)
+            size = hi - lo
+            tris = hk.triangles(objs)
+            budget = 5000 if is_prop else 8000
+            assert tris <= budget, f"{pid} LOD{lod} has {tris} triangles, over {budget}"
+            assert abs(lo.y) < 0.002, f"{pid} LOD{lod} lowest point {lo.y:.4f}"
+            px = image_px(objs)
+            name = pid if is_prop else f"{pid}_LOD{lod}"
+            path = folder / f"{name}.glb"
+            hk.bake_blender_space(objs)
+            bpy.context.view_layer.update()
+            preview_lod(root, objs, name, rig)
+            export_glb(root, objs, path)
+            write_scene_import(path)
+            flag = "--height" if size.y >= 0.6 * max(size.x, size.z) else "--longest"
+            rows.append(dict(name=name, concept_or_source=SOURCE, size_flag=flag, size_m=round(size.y if flag == "--height" else max(size), 3), tris=tris, tex=px,
+                             game_path=path.relative_to(ROOT).as_posix(), art_status="approved_m3-4a",
+                             notes=f"{TASK} {spec['display']}; " + ("prop, collision" if is_prop else ("game LOD with collision" if lod == 0 else "Compatibility LOD, no collision"))))
+            entry["lods"].append("res://" + path.relative_to(ROOT / "game").as_posix())
+            entry["triangles"].append(tris)
+            if lod == 0:
+                entry.update(mount_y=mount, footprint_m=[round(size.x, 3), round(size.z, 3)], size_m=[round(v, 3) for v in size], bounds_min_m=[round(v, 3) for v in lo])
+                entry["sockets"] = info.get("sockets", {})
+            print(f"CH04 {name}: {tris} tris, size {[round(v, 3) for v in size]}, mount {mount}, tex {px}, {path.stat().st_size // 1024} KB")
+            for o in [root] + objs:
+                bpy.data.objects.remove(o)
+        (props if is_prop else garage if pid.startswith("EN_Garage") else cold).append(entry)
+    survey = json.loads((STAGE / "coldtrap_survey.json").read_text())
+    conventions = dict(units="metres", up="+Y", front="-Z (Godot forward); wall faces lie on z=0 and face -Z, bodies extend to +z; standing pieces face -Z with the pivot at the base centre",
+                       grid_m=1.0, wall_height_m=WALL_H, lod_distance_m=hk.LOD_DISTANCE_M, mount="habitat_kit.gd place() adds mount_y; positions are finished-floor positions",
+                       textures="the kit's sets in ../kit/textures, the garage's in EN_Garage/textures, the cold trap's in EN_ColdTrap/textures, the berm's M1-35 regolith in ../terrain/textures; every GLB references them by uri",
+                       live_ui="material slots named Screen*, Label* and Label_Lid carry no text; every word is drawn at runtime")
+    (GARAGE_DIR / "garage.json").write_text(json.dumps(dict(
+        task=TASK, seed=SEED, approval=APPROVAL, extends="res://assets/environment/kit/kit.json (same conventions; habitat_kit.gd reads this file as an extension catalogue)",
+        canon="LOC-08 rover garage (09_WORLD_AND_LEVEL_DESIGN.md): 12 x 9 m with a pressure-rated rover bay, cargo rack, route board, supply ledger, suit seals, relief locker, the landing pad 500 m away on a camera; EX-CH04-S02, S03, S09, S12, EX-CH05-S01, EX-CH07-S12, EX-CH08-S01, S11",
+        conventions=conventions, pieces=garage, layout=garage_layout(),
+        dock=dict(states=["SEALED", "EQUALISING", "SAFE TO OPEN"], rule="the dock hatch opens only when the tunnel between it and the rover's hatch is SAFE TO OPEN; the pump runs only while EQUALISING (the ready room's pump hum); a trip pumps down about 1 m3 of tunnel, never the bay",
+                  time_compression="a real tunnel takes minutes; the room owner compresses the cycle and shows a labelled time card (LOC-08 exit behaviour)"),
+        site=dict(distance_from_aurora_m=GARAGE_SITE[0], azimuth_from_aurora_deg=GARAGE_SITE[1], door_bearing_deg=GARAGE_BEARING_DEG, landing_pad_m=500.0,
+                  note="decision 3; the exterior (berm) stands on the M1-34 Aurora ridge, the marked path joins LOC-06"),
+        rover=dict(asset="res://assets/vehicles/VH_Rover/VH_Rover.glb", yaw_degrees=90.0, note="VH_Rover's front faces +Z in its GLB; yaw 90 turns it to the rover door (+x); its side hatch (1.85-2.96 m up) faces the docking port")), indent=1), encoding="utf-8")
+    shelf = survey["vault_shelf"]
+    (COLD_DIR / "coldtrap.json").write_text(json.dumps(dict(
+        task=TASK, seed=SEED, approval=APPROVAL, extends="res://assets/environment/kit/kit.json (same conventions; habitat_kit.gd reads this file as an extension catalogue)",
+        canon="LOC-09 surveyed cold-trap approach (three 100 m segments, three beacons, dry reference plate, sample points, slope sign, return marker) and LOC-10 vault shelf (20 x 15 m, old marker, the insulated box, two tether anchors, probe socket, carrier tether, archival tag); EX-CH04-S04..S09, doc 24 clues 14-15",
+        conventions=conventions, pieces=cold, props=props,
+        survey=dict(source="production/tools/coldtrap_survey.py (Computed from NASA LRO LOLA, PGDA product 90; JPL Horizons rows)", road=survey["road"], beacons=survey["beacons"],
+                    chain_weakest_link_clearance_m=survey["chain_weakest_link_clearance_m"], road_coverage_fraction=survey["road_coverage_fraction"], shelf_link=survey["shelf_link"],
+                    vault_shelf=shelf, m182_loc09_corner=survey["m182_loc09_corner"], segment_length_m=100.0,
+                    note="decision 8: LOC-09 = the three segments at B1, B2, B3; decision 9: 5 m masts (the 1.8 m tripod would need five beacons); the game keeps P-07's canon numbers"),
+        staging=dict(beacon_offset_m=dict(left_of_road=5.2, note="the mast stands beside the road before the corner, the return marker 9 m on and 4 m left, the slope sign 16 m on, right"),
+                     sample_station=dict(reference_plate=[0.0, 0.0, 0.0], stakes=[[1.5, 0.0, 0.6], [2.6, 0.0, -0.4], [3.4, 0.0, 0.9]], note="S05: dry reference 2, threshold 12, samples 2 / 18 / 19 stay UI values"),
+                     shelf=dict(size_m=[20.0, 15.0], vault=[0.3, 0.0, -0.5], marker_2034=[1.6, 0.0, -1.4], tether_anchors=[[-1.6, 0.0, -0.9], [2.4, 0.0, 0.6]], carrier=[-1.0, 0.0, 0.5],
+                                field_cadets=dict(Kai=[-1.9, 0.0, -0.2], Rafi=[2.6, 0.0, -1.9]), rover=[-12.0, 0.0, 9.0], light="headlights and helmet lamps only: the Sun never reaches the floor",
+                                note="room-local Godot positions (x east of the shelf centre, z = -(map y offset)); two suited cadets in the field, two at home"))), indent=1), encoding="utf-8")
+    with (ROOT / "production/manifest/ch04_assets.csv").open("w", newline="", encoding="utf-8") as f:
+        import csv
+        writer = csv.DictWriter(f, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+    print(f"CH04_PUBLISH_PASS: {len(garage)} garage pieces, {len(cold)} cold-trap pieces, {len(props)} props, {len(rows)} manifest rows")
+
+
 if __name__ == "__main__":
     PREVIEW.mkdir(parents=True, exist_ok=True)
     for _o in list(bpy.data.objects):  # the factory startup scene (cube, light, camera)
         bpy.data.objects.remove(_o)
+    if "publish" in WHAT:  # a clean session: the phase 1 preview materials would take the export names
+        run_publish()
+        sys.exit(0)
     TABLE = ch04_materials()
     KIT_TABLE[0] = TABLE
     if WHAT & {"layout", "garage", "all"}:

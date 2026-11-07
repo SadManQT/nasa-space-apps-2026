@@ -5,15 +5,22 @@
 extends RefCounted
 
 const CATALOG_PATH := "res://assets/environment/kit/kit.json"
-## Extension catalogues in the same schema (M3-3A: the Expedition Zero annex pieces). Their pieces are placed,
-## bounded and driven exactly like kit pieces; catalog() and ids() stay the kit's own.
-const EXTENSION_CATALOGS: Array[String] = ["res://assets/environment/EN_ZeroAnnex/annex.json"]
+## Extension catalogues in the same schema (M3-3A: the Expedition Zero annex pieces; M3-4A: the rover garage and the
+## cold-trap site pieces). Their pieces are placed, bounded and driven exactly like kit pieces; catalog() and ids()
+## stay the kit's own.
+const EXTENSION_CATALOGS: Array[String] = ["res://assets/environment/EN_ZeroAnnex/annex.json",
+		"res://assets/environment/EN_Garage/garage.json", "res://assets/environment/EN_ColdTrap/coldtrap.json"]
+## The id prefix of each extension catalogue's pieces: piece() parses a catalogue only when one of its own ids is asked
+## for, so rooms that never use these pieces never pay for the parse (test_performance_runtime's launch-hitch budget).
+const EXTENSION_PREFIXES := {"EN_ZeroAnnex_": "res://assets/environment/EN_ZeroAnnex/annex.json",
+		"EN_Garage_": "res://assets/environment/EN_Garage/garage.json", "EN_ColdTrap_": "res://assets/environment/EN_ColdTrap/coldtrap.json"}
 const DOOR_LEAF := "DoorLeaf"
 const HATCH_LEAF := "HatchLeaf"
 const SCREEN_MATERIAL := "Screen"
 const PIECE_META := "piece_id"
 static var _catalog: Dictionary = {}
 static var _extensions: Array = []
+static var _extension_by_path: Dictionary = {}
 static var _scenes: Dictionary = {}
 
 ## The whole catalogue: conventions, pieces (id, lods, triangles, footprint_m, mount_y, sockets) and materials.
@@ -44,11 +51,20 @@ static func piece(id: String) -> Dictionary:
 	for entry in catalog().pieces:
 		if entry.id == id:
 			return entry
-	for ext in extensions():
-		for entry in ext.pieces:
-			if entry.id == id:
-				return entry
+	for prefix in EXTENSION_PREFIXES:
+		if id.begins_with(prefix):
+			var ext := _extension(String(EXTENSION_PREFIXES[prefix]))
+			for entry in ext.get("pieces", []):
+				if entry.id == id:
+					return entry
 	return {}
+
+## One extension catalogue, parsed once on first use ({} when the file is missing).
+static func _extension(path: String) -> Dictionary:
+	if not _extension_by_path.has(path):
+		var parsed = JSON.parse_string(FileAccess.get_file_as_string(path)) if FileAccess.file_exists(path) else null
+		_extension_by_path[path] = parsed if parsed is Dictionary and parsed.has("pieces") else {}
+	return _extension_by_path[path]
 
 ## Every piece id of one extension catalogue (by its res:// path), in catalogue order.
 static func extension_ids(path: String) -> PackedStringArray:
@@ -139,7 +155,9 @@ static func set_hatch_open(node: Node3D, fraction: float) -> void:
 
 ## Drives a named moving part of a piece from its catalogue "sockets.parts" entry (M3-3A annex pieces): fraction 0 is
 ## the GLB rest pose, 1 the open or displaced pose. Kinds: "rotate" (degrees about the part's local axis x, y or z),
-## "slide" (metres along that axis) and "pose" (lerp from rest_position to position, with a yaw). Every child named
+## "slide" (metres along that axis), "scale" (the part's scale on that axis goes from 1 to "value": the M3-4A rover
+## door coils up into its drum about a pivot on its top edge) and "pose" (lerp from rest_position to position, with a
+## yaw). Every child named
 ## after the part is driven (one per LOD). The node must be a piece built by instance(): the piece id travels in its
 ## "piece_id" meta, so a level may rename the node (falls back to the node name for pieces built another way).
 static func set_part_open(node: Node3D, part: String, fraction: float) -> void:
@@ -170,6 +188,12 @@ static func set_part_open(node: Node3D, part: String, fraction: float) -> void:
 					"y": axis = Vector3.UP
 					"z": axis = Vector3.BACK
 				child.position = rest + axis * float(spec.get("metres", 0.0)) * t
+			"scale":
+				var s := lerpf(1.0, float(spec.get("value", 1.0)), t)
+				match String(spec.get("axis", "y")):
+					"x": child.scale = Vector3(s, 1.0, 1.0)
+					"z": child.scale = Vector3(1.0, 1.0, s)
+					_: child.scale = Vector3(1.0, s, 1.0)
 			"pose":
 				var rest_pose: Array = spec.get("rest_position", [child.position.x, child.position.y, child.position.z])
 				var open_pose: Array = spec.get("position", rest_pose)

@@ -3,6 +3,4 @@ EN_Commons,environment,Blender modular kit + reused props,EX-CH01-S01,22x12 m co
 EN_ServiceRooms,environment,Blender modular + reused props,EX-CH01-S07,power room + atmosphere room and service corridor (LOC-02)
 EN_Garden,environment,Blender modular + new props,EX-CH01-S04,"growth chambers, Tara bay, benches, glovebox, lineage board (LOC-03)"
 EN_SafeRoom,environment,Blender modular + reused props,EX-CH01-S08,"5 seats, water wall, bundle slots, hatch (LOC-04)"
-EN_Garage,environment,Blender + VH_Rover,EX-CH04-S02,rover bay and departure boards (LOC-08)
 EN_Exterior,environment,Blender terrain from NASA LOLA DEM + EN_SolarMast,EX-CH01-S09,"mast courtyard, horizon, landing pad (LOC-06)"
-EN_ColdTrap,environment,Blender terrain,EX-CH04-S03,ridge road with 3 beacons and vault shelf (LOC-09/10)

@@ -76,7 +76,8 @@ def externalise(glb_path, texture_dir="textures", write_files=True):
     images is left untouched. Image files land in <glb folder>/<texture_dir>/<image name><ext>.
     With write_files False nothing is written to the texture folder: the GLB only *references* the files that
     are already there (a kit extension in another folder pointing at "../kit/textures", board M3-2A), so the
-    shared set is never rewritten by a second build."""
+    shared set is never rewritten by a second build. texture_dir may also be a callable image name -> folder, for a
+    GLB that references more than one shared set (M3-4A: the kit's sets beside the garage's own)."""
     glb_path = Path(glb_path)
     before = glb_path.stat().st_size
     doc, binary = _read_glb(glb_path)
@@ -84,9 +85,6 @@ def externalise(glb_path, texture_dir="textures", write_files=True):
     embedded = [i for i, image in enumerate(images) if "bufferView" in image]
     if not embedded:
         return 0, before, before
-    out_dir = glb_path.parent / texture_dir
-    if write_files:
-        out_dir.mkdir(parents=True, exist_ok=True)
     removed = set()
     for i in embedded:
         image = images[i]
@@ -95,13 +93,17 @@ def externalise(glb_path, texture_dir="textures", write_files=True):
         payload = binary[start: start + view["byteLength"]]
         mime = image.get("mimeType", "image/png")
         name = image.get("name") or f"{glb_path.stem}_image{i}"
+        folder = texture_dir(name) if callable(texture_dir) else texture_dir
+        out_dir = glb_path.parent / folder
+        if write_files:
+            out_dir.mkdir(parents=True, exist_ok=True)
         target = out_dir / (name + EXTENSIONS.get(mime, ".png"))
         if write_files and (not target.exists() or target.read_bytes() != payload):
             target.write_bytes(payload)
         elif not write_files and not target.exists():
             raise FileNotFoundError(f"{glb_path.name} references {target}, which does not exist")
         removed.add(image["bufferView"])
-        images[i] = {"name": name, "mimeType": mime, "uri": f"{texture_dir}/{target.name}"}
+        images[i] = {"name": name, "mimeType": mime, "uri": f"{folder}/{target.name}"}
     keep = [i for i in range(len(doc["bufferViews"])) if i not in removed]
     new_binary = bytearray()
     new_views = []

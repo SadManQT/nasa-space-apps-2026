@@ -1,0 +1,2088 @@
+{
+ "task": "M3-4A",
+ "seed": 20261107,
+ "approval": "approved by Sadman in chat on 7 Nov 2026: \"Approve all 12\" (decisions 1-12 of production/concept/chapter4_v1/README.md)",
+ "extends": "res://assets/environment/kit/kit.json (same conventions; habitat_kit.gd reads this file as an extension catalogue)",
+ "canon": "LOC-08 rover garage (09_WORLD_AND_LEVEL_DESIGN.md): 12 x 9 m with a pressure-rated rover bay, cargo rack, route board, supply ledger, suit seals, relief locker, the landing pad 500 m away on a camera; EX-CH04-S02, S03, S09, S12, EX-CH05-S01, EX-CH07-S12, EX-CH08-S01, S11",
+ "conventions": {
+  "units": "metres",
+  "up": "+Y",
+  "front": "-Z (Godot forward); wall faces lie on z=0 and face -Z, bodies extend to +z; standing pieces face -Z with the pivot at the base centre",
+  "grid_m": 1.0,
+  "wall_height_m": 2.6,
+  "lod_distance_m": 12.0,
+  "mount": "habitat_kit.gd place() adds mount_y; positions are finished-floor positions",
+  "textures": "the kit's sets in ../kit/textures, the garage's in EN_Garage/textures, the cold trap's in EN_ColdTrap/textures, the berm's M1-35 regolith in ../terrain/textures; every GLB references them by uri",
+  "live_ui": "material slots named Screen*, Label* and Label_Lid carry no text; every word is drawn at runtime"
+ },
+ "pieces": [
+  {
+   "id": "EN_Garage_DockingPort",
+   "display": "Rover docking port",
+   "notes": "2 m pressure-wall module: dock hatch 0.90 x 1.15 m with its sill 0.45 m above the deck, vestibule panel (Screen slot for the live words SEALED / EQUALISING / SAFE TO OPEN, lamps LampSealed / LampEqualising / LampSafe, a gauge); on the bay side the fixed sleeve and child DockCollar, the telescoping tunnel that meets VH_Rover's side hatch 1.10 m from the wall; child HatchLeaf (room side, hinged left)",
+   "kind": "wall",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_DockingPort_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_DockingPort_LOD1.glb"
+   ],
+   "triangles": [
+    5556,
+    2300
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    2.0,
+    1.471
+   ],
+   "size_m": [
+    2.0,
+    2.6,
+    1.471
+   ],
+   "bounds_min_m": [
+    -1.0,
+    0.0,
+    -0.221
+   ],
+   "sockets": {
+    "parts": {
+     "HatchLeaf": {
+      "kind": "rotate",
+      "axis": "y",
+      "degrees": 100.0
+     },
+     "DockCollar": {
+      "kind": "slide",
+      "axis": "z",
+      "metres": -0.4,
+      "note": "0 = extended to the docked rover's hatch, 1 = retracted (rover away)"
+     }
+    },
+    "opening_centre": [
+     0.0,
+     1.025,
+     0.0
+    ],
+    "opening_size": [
+     0.9,
+     1.15
+    ],
+    "tunnel_reach_m": 1.1,
+    "states": [
+     "SEALED",
+     "EQUALISING",
+     "SAFE TO OPEN"
+    ],
+    "screen_material": "Screen"
+   }
+  },
+  {
+   "id": "EN_Garage_BayWindow",
+   "display": "Bay window",
+   "notes": "2 m pressure-wall module, 1.70 x 1.00 m window with its sill at 1.0 m, navy room frame, white bay frame, two panes, handrail",
+   "kind": "wall",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_BayWindow_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_BayWindow_LOD1.glb"
+   ],
+   "triangles": [
+    1388,
+    356
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    2.0,
+    0.26
+   ],
+   "size_m": [
+    2.0,
+    2.6,
+    0.26
+   ],
+   "bounds_min_m": [
+    -1.0,
+    0.0,
+    -0.06
+   ],
+   "sockets": {
+    "window_centre": [
+     0.0,
+     1.5,
+     0.0
+    ],
+    "window_size": [
+     1.7,
+     1.0
+    ]
+   }
+  },
+  {
+   "id": "EN_Garage_CargoLock",
+   "display": "Dry cargo lock",
+   "notes": "1 m pressure-wall module, 0.72 x 0.56 m cargo lock at bench height through the wall (0.34 m into the room, 0.30 m over the EVA porch); back-filled with dry nitrogen, never cabin air (decision 5); child InnerDoor (room, hinged left) and OuterDoor (porch, hinged on top), one open at a time; LampDry while filling, LampSafe when equalised; Screen",
+   "kind": "wall",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_CargoLock_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_CargoLock_LOD1.glb"
+   ],
+   "triangles": [
+    1344,
+    1200
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    1.0,
+    1.036
+   ],
+   "size_m": [
+    1.0,
+    2.6,
+    1.036
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.476
+   ],
+   "sockets": {
+    "parts": {
+     "InnerDoor": {
+      "kind": "rotate",
+      "axis": "y",
+      "degrees": 100.0
+     },
+     "OuterDoor": {
+      "kind": "rotate",
+      "axis": "x",
+      "degrees": -100.0
+     }
+    },
+    "cradle_socket": [
+     0.0,
+     0.91,
+     0.05499999999999998
+    ],
+    "rule": "one door open at a time; the fill is dry nitrogen",
+    "lamps": [
+     "LampDry",
+     "LampSafe"
+    ],
+    "screen_material": "Screen"
+   }
+  },
+  {
+   "id": "EN_Garage_SuitSealPanel",
+   "display": "Suit seal station",
+   "notes": "1 m wall module, the ready room's 'suit seals' station: three gauges and three LampSafe lamps (the two rear suitports and the dock seal) over blank label plates, a Screen with the leak-check trace",
+   "kind": "wall",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_SuitSealPanel_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_SuitSealPanel_LOD1.glb"
+   ],
+   "triangles": [
+    1836,
+    1692
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    1.0,
+    0.226
+   ],
+   "size_m": [
+    1.0,
+    2.6,
+    0.226
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.076
+   ],
+   "sockets": {
+    "gauges": [
+     [
+      -0.27,
+      1.4,
+      0.008
+     ],
+     [
+      0.0,
+      1.4,
+      0.008
+     ],
+     [
+      0.27,
+      1.4,
+      0.008
+     ]
+    ],
+    "screen_material": "Screen"
+   }
+  },
+  {
+   "id": "EN_Garage_RouteBoard",
+   "display": "Route board",
+   "notes": "2 m wall module: the route board, a 1.80 x 0.95 m Screen (route cards A/B/C, slope map, beacon chain) and a rail with three blank route cards",
+   "kind": "wall",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_RouteBoard_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_RouteBoard_LOD1.glb"
+   ],
+   "triangles": [
+    1780,
+    436
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    2.0,
+    0.22
+   ],
+   "size_m": [
+    2.0,
+    2.6,
+    0.22
+   ],
+   "bounds_min_m": [
+    -1.0,
+    0.0,
+    -0.07
+   ],
+   "sockets": {
+    "screen_centre": [
+     0.0,
+     1.62,
+     -0.034
+    ],
+    "screen_size": [
+     1.8,
+     0.95
+    ],
+    "cards": [
+     [
+      -0.45,
+      0.93,
+      -0.05
+     ],
+     [
+      0.0,
+      0.93,
+      -0.05
+     ],
+     [
+      0.45,
+      0.93,
+      -0.05
+     ]
+    ]
+   }
+  },
+  {
+   "id": "EN_Garage_DepartureBoard",
+   "display": "Departure board",
+   "notes": "1 m wall module: one destination board, a portrait 0.74 x 1.20 m Screen (destination, roster in role colours, provisions, time) and a status lamp; two stand side by side (EX-CH07-S12, EX-CH08-S01)",
+   "kind": "wall",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_DepartureBoard_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_DepartureBoard_LOD1.glb"
+   ],
+   "triangles": [
+    860,
+    356
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    1.0,
+    0.194
+   ],
+   "size_m": [
+    1.0,
+    2.6,
+    0.194
+   ],
+   "bounds_min_m": [
+    -0.5,
+    0.0,
+    -0.044
+   ],
+   "sockets": {
+    "screen_centre": [
+     0.0,
+     1.43,
+     -0.034
+    ],
+    "screen_size": [
+     0.74,
+     1.2
+    ]
+   }
+  },
+  {
+   "id": "EN_Garage_HandoverConsole",
+   "display": "Base handover console",
+   "notes": "1.80 x 0.72 m standing console, desk at 0.95 m: Screen (route map and beacon chain), Screen2 (Amara's slope card), Screen3 (the landing-pad camera, CH05-S01)",
+   "kind": "standing",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_HandoverConsole_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_HandoverConsole_LOD1.glb"
+   ],
+   "triangles": [
+    198,
+    62
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    1.8,
+    0.74
+   ],
+   "size_m": [
+    1.8,
+    1.83,
+    0.74
+   ],
+   "bounds_min_m": [
+    -0.9,
+    0.0,
+    -0.38
+   ],
+   "sockets": {
+    "screens": {
+     "Screen": "route map and beacon chain",
+     "Screen2": "slope card",
+     "Screen3": "landing-pad camera"
+    },
+    "operator": [
+     0.0,
+     0.0,
+     -0.75
+    ]
+   }
+  },
+  {
+   "id": "EN_Garage_CargoRack",
+   "display": "Cargo rack + supply ledger",
+   "notes": "2.0 x 0.6 x 2.2 m rack of sealed bins with blank plates and orange straps; the supply-ledger tablet is Screen2 on the right upright",
+   "kind": "standing",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_CargoRack_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_CargoRack_LOD1.glb"
+   ],
+   "triangles": [
+    806,
+    806
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    1.99,
+    0.657
+   ],
+   "size_m": [
+    1.99,
+    2.2,
+    0.657
+   ],
+   "bounds_min_m": [
+    -0.995,
+    0.0,
+    -0.362
+   ],
+   "sockets": {
+    "ledger_screen": "Screen2"
+   }
+  },
+  {
+   "id": "EN_Garage_ReliefLocker",
+   "display": "Relief locker",
+   "notes": "1.2 x 0.6 x 2.2 m locker for the 8-12 Dec relief cargo (decision 6), blank label plate; children DoorL and DoorR swing out 110 degrees",
+   "kind": "standing",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_ReliefLocker_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_ReliefLocker_LOD1.glb"
+   ],
+   "triangles": [
+    586,
+    442
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    1.2,
+    0.711
+   ],
+   "size_m": [
+    1.2,
+    2.2,
+    0.711
+   ],
+   "bounds_min_m": [
+    -0.6,
+    0.0,
+    -0.411
+   ],
+   "sockets": {
+    "parts": {
+     "DoorL": {
+      "kind": "rotate",
+      "axis": "y",
+      "degrees": 110.0
+     },
+     "DoorR": {
+      "kind": "rotate",
+      "axis": "y",
+      "degrees": -110.0
+     }
+    },
+    "shelves_y": [
+     0.55,
+     1.05,
+     1.55
+    ]
+   }
+  },
+  {
+   "id": "EN_Garage_BayFrame",
+   "display": "Bay module (vacuum)",
+   "notes": "2 m bay module of the unpressurised rover shelter (repeat along x): steel portal, ribbed shield on the far wall and the roof, cladding above the ready room, one 5,000 K LED flood (emissive Flood material; the room adds the light), sintered floor; local z from the pressure wall's bay face (0) to the far wall (5.85)",
+   "kind": "bay",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_BayFrame_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_BayFrame_LOD1.glb"
+   ],
+   "triangles": [
+    494,
+    482
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": -0.06,
+   "footprint_m": [
+    2.118,
+    6.15
+   ],
+   "size_m": [
+    2.118,
+    5.7,
+    6.15
+   ],
+   "bounds_min_m": [
+    -1.1,
+    0.0,
+    -0.15
+   ],
+   "sockets": {
+    "flood": [
+     0.0,
+     5.069999999999999,
+     2.925
+    ]
+   }
+  },
+  {
+   "id": "EN_Garage_BayDoor",
+   "display": "Rover door",
+   "notes": "end wall with the 5.55 x 4.90 m rover door: portal and the drum; child DoorPanel coils up into the drum (part kind scale). Not a pressure door (decision 1)",
+   "kind": "bay",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_BayDoor_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_BayDoor_LOD1.glb"
+   ],
+   "triangles": [
+    448,
+    264
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    5.85,
+    0.83
+   ],
+   "size_m": [
+    5.85,
+    5.6,
+    0.83
+   ],
+   "bounds_min_m": [
+    -2.925,
+    0.0,
+    -0.56
+   ],
+   "sockets": {
+    "parts": {
+     "DoorPanel": {
+      "kind": "scale",
+      "axis": "y",
+      "value": 0.04
+     }
+    },
+    "opening_size": [
+     5.55,
+     4.9
+    ]
+   }
+  },
+  {
+   "id": "EN_Garage_BayEndWall",
+   "display": "Bay end wall",
+   "notes": "the bay's closed end wall behind the EVA porch, 5.85 x 5.60 m ribbed shield",
+   "kind": "bay",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_BayEndWall_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_BayEndWall_LOD1.glb"
+   ],
+   "triangles": [
+    348,
+    348
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    5.885,
+    0.3
+   ],
+   "size_m": [
+    5.885,
+    5.6,
+    0.3
+   ],
+   "bounds_min_m": [
+    -2.942,
+    0.0,
+    -0.12
+   ],
+   "sockets": {}
+  },
+  {
+   "id": "EN_Garage_EVAPorch",
+   "display": "EVA porch",
+   "notes": "EVA porch at the rover's rear, deck +1.40 m like the ready room (decision 4): 3.30 x 5.85 m grating on sintered piers, rail with the suitport gate, stair down to the bay floor; pivot at the end-wall corner by the pressure wall",
+   "kind": "bay",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_EVAPorch_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_EVAPorch_LOD1.glb"
+   ],
+   "triangles": [
+    720,
+    312
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    5.232,
+    5.85
+   ],
+   "size_m": [
+    5.232,
+    2.472,
+    5.85
+   ],
+   "bounds_min_m": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "sockets": {
+    "deck_y": 1.4,
+    "deck_x": 3.3,
+    "gate_z": [
+     1.4,
+     3.8
+    ]
+   }
+  },
+  {
+   "id": "EN_Garage_Umbilical",
+   "display": "Charge umbilical",
+   "notes": "charge and coolant umbilical post on the bay floor with an orange connector head and a hanging cable loop; the room draws the live cable to the rover",
+   "kind": "standing",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_Umbilical_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_Umbilical_LOD1.glb"
+   ],
+   "triangles": [
+    476,
+    476
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    0.5,
+    0.586
+   ],
+   "size_m": [
+    0.5,
+    1.7,
+    0.586
+   ],
+   "bounds_min_m": [
+    -0.25,
+    0.0,
+    -0.336
+   ],
+   "sockets": {
+    "connector": [
+     0.0,
+     1.55,
+     -0.24
+    ]
+   }
+  },
+  {
+   "id": "EN_Garage_Plinth",
+   "display": "Ready-room plinth module",
+   "notes": "2 m module of the sintered plinth under the ready room: 2.0 x 1.34 x 3.30 m; the kit floor tiles sit on it (finished deck +1.40)",
+   "kind": "standing",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_Plinth_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_Plinth_LOD1.glb"
+   ],
+   "triangles": [
+    36,
+    36
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    2.0,
+    3.32
+   ],
+   "size_m": [
+    2.0,
+    1.34,
+    3.32
+   ],
+   "bounds_min_m": [
+    -1.0,
+    0.0,
+    -1.65
+   ],
+   "sockets": {}
+  },
+  {
+   "id": "EN_Garage_BayMarkings",
+   "display": "Bay floor markings",
+   "notes": "bay floor paint: the rover stall's orange edge lines and the white docking-side dashes; place at room (6, 0, 6.075)",
+   "kind": "decal",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_BayMarkings_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_BayMarkings_LOD1.glb"
+   ],
+   "triangles": [
+    132,
+    132
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    6.8,
+    5.07
+   ],
+   "size_m": [
+    6.8,
+    0.004,
+    5.07
+   ],
+   "bounds_min_m": [
+    -2.6,
+    0.0,
+    -2.805
+   ],
+   "sockets": {}
+  },
+  {
+   "id": "EN_Garage_Berm",
+   "display": "Regolith berm and headwall",
+   "notes": "the garage's exterior shield (decision 3): 1 m regolith overburden over the 12 x 9 m footprint, 35 deg sides, the door band clear, sintered headwall and wing walls; textures M1-35 compacted regolith; place at room (6, 0, 4.5)",
+   "kind": "shell",
+   "lods": [
+    "res://assets/environment/EN_Garage/EN_Garage_Berm_LOD0.glb",
+    "res://assets/environment/EN_Garage/EN_Garage_Berm_LOD1.glb"
+   ],
+   "triangles": [
+    5882,
+    1528
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    30.826,
+    27.0
+   ],
+   "size_m": [
+    30.826,
+    6.726,
+    27.0
+   ],
+   "bounds_min_m": [
+    -15.0,
+    0.0,
+    -13.5
+   ],
+   "sockets": {}
+  }
+ ],
+ "layout": {
+  "bounds_m": [
+   12.0,
+   9.0
+  ],
+  "deck_y": 1.4,
+  "bay_floor_y": 0.0,
+  "bay_clear_height_m": 5.6,
+  "ready_room": {
+   "x": [
+    0,
+    12
+   ],
+   "z": [
+    0,
+    3
+   ],
+   "pressure": "habitat"
+  },
+  "bay": {
+   "x": [
+    0,
+    12
+   ],
+   "z": [
+    3.15,
+    9.0
+   ],
+   "pressure": "vacuum"
+  },
+  "placements": [
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     0.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     0.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     0.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     0.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     0.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     0.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     1.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     1.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     1.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     1.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     1.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     1.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     2.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     2.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     2.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     2.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     2.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     2.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     3.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     3.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     3.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     3.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     3.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     3.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     4.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     4.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     4.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     4.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     4.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     4.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     5.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     5.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     5.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     5.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     5.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     5.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     6.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     6.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     6.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     6.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     6.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     6.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     7.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     7.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     7.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     7.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     7.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     7.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     8.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     8.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     8.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     8.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     8.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     8.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     9.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     9.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     9.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     9.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     9.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     9.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     10.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     10.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     10.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     10.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     10.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     10.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     11.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     11.5,
+     1.4,
+     0.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     11.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     11.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_FloorTile",
+    "position": [
+     11.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_CeilingTile",
+    "position": [
+     11.5,
+     1.4,
+     2.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Corner",
+    "position": [
+     0,
+     1.4,
+     3
+    ],
+    "yaw": -90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_SuitSealPanel",
+    "position": [
+     1.0,
+     1.4,
+     3
+    ],
+    "yaw": 0,
+    "role": "suit_seals"
+   },
+   {
+    "piece": "EN_Garage_CargoLock",
+    "position": [
+     2.0,
+     1.4,
+     3
+    ],
+    "yaw": 0,
+    "role": "cargo_lock"
+   },
+   {
+    "piece": "EN_Garage_BayWindow",
+    "position": [
+     3.5,
+     1.4,
+     3
+    ],
+    "yaw": 0,
+    "role": "window_porch"
+   },
+   {
+    "piece": "EN_Garage_BayWindow",
+    "position": [
+     5.5,
+     1.4,
+     3
+    ],
+    "yaw": 0,
+    "role": "window_rover"
+   },
+   {
+    "piece": "EN_Kit_Wall_Window",
+    "position": [
+     7.0,
+     1.4,
+     3
+    ],
+    "yaw": 0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_DockingPort",
+    "position": [
+     8.5,
+     1.4,
+     3
+    ],
+    "yaw": 0,
+    "role": "docking_port"
+   },
+   {
+    "piece": "EN_Garage_BayWindow",
+    "position": [
+     10.5,
+     1.4,
+     3
+    ],
+    "yaw": 0,
+    "role": "window_door"
+   },
+   {
+    "piece": "EN_Kit_Wall_Corner",
+    "position": [
+     12,
+     1.4,
+     3
+    ],
+    "yaw": 0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Corner",
+    "position": [
+     0,
+     1.4,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_DoorFrame",
+    "position": [
+     2.0,
+     1.4,
+     0
+    ],
+    "yaw": 180,
+    "role": "inner_door"
+   },
+   {
+    "piece": "EN_Garage_RouteBoard",
+    "position": [
+     4.5,
+     1.4,
+     0
+    ],
+    "yaw": 180,
+    "role": "route_board"
+   },
+   {
+    "piece": "EN_Garage_DepartureBoard",
+    "position": [
+     6.0,
+     1.4,
+     0
+    ],
+    "yaw": 180,
+    "role": "departure_a"
+   },
+   {
+    "piece": "EN_Garage_DepartureBoard",
+    "position": [
+     7.0,
+     1.4,
+     0
+    ],
+    "yaw": 180,
+    "role": "departure_b"
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     8.0,
+     1.4,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     9.0,
+     1.4,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     10.0,
+     1.4,
+     0
+    ],
+    "yaw": 180,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_EquipBay",
+    "position": [
+     11.0,
+     1.4,
+     0
+    ],
+    "yaw": 180,
+    "role": "pad_camera_bay"
+   },
+   {
+    "piece": "EN_Kit_Wall_Corner",
+    "position": [
+     12,
+     1.4,
+     0
+    ],
+    "yaw": 90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     0,
+     1.4,
+     1.0
+    ],
+    "yaw": -90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_EquipBay",
+    "position": [
+     0,
+     1.4,
+     2.0
+    ],
+    "yaw": -90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     12,
+     1.4,
+     1.0
+    ],
+    "yaw": 90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_Wall_Straight",
+    "position": [
+     12,
+     1.4,
+     2.0
+    ],
+    "yaw": 90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_HandoverConsole",
+    "position": [
+     8.5,
+     1.4,
+     0.53
+    ],
+    "yaw": 180,
+    "role": "handover_console"
+   },
+   {
+    "piece": "EN_Garage_ReliefLocker",
+    "position": [
+     10.0,
+     1.4,
+     0.47
+    ],
+    "yaw": 180,
+    "role": "relief_locker"
+   },
+   {
+    "piece": "EN_Garage_CargoRack",
+    "position": [
+     11.53,
+     1.4,
+     1.5
+    ],
+    "yaw": 90,
+    "role": "cargo_rack"
+   },
+   {
+    "piece": "EN_Kit_LightStrip",
+    "position": [
+     1.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_LightStrip",
+    "position": [
+     4.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_LightStrip",
+    "position": [
+     7.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Kit_LightStrip",
+    "position": [
+     10.5,
+     1.4,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_Plinth",
+    "position": [
+     1,
+     0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_BayFrame",
+    "position": [
+     1,
+     0,
+     3.15
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_Plinth",
+    "position": [
+     3,
+     0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_BayFrame",
+    "position": [
+     3,
+     0,
+     3.15
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_Plinth",
+    "position": [
+     5,
+     0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_BayFrame",
+    "position": [
+     5,
+     0,
+     3.15
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_Plinth",
+    "position": [
+     7,
+     0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_BayFrame",
+    "position": [
+     7,
+     0,
+     3.15
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_Plinth",
+    "position": [
+     9,
+     0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_BayFrame",
+    "position": [
+     9,
+     0,
+     3.15
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_Plinth",
+    "position": [
+     11,
+     0,
+     1.5
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_BayFrame",
+    "position": [
+     11,
+     0,
+     3.15
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_BayMarkings",
+    "position": [
+     6.0,
+     0,
+     6.074999999999999
+    ],
+    "yaw": 0.0,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_Berm",
+    "position": [
+     6.0,
+     0,
+     4.5
+    ],
+    "yaw": 0,
+    "role": "berm"
+   },
+   {
+    "piece": "EN_Garage_BayEndWall",
+    "position": [
+     0,
+     0,
+     6.074999999999999
+    ],
+    "yaw": -90,
+    "role": ""
+   },
+   {
+    "piece": "EN_Garage_BayDoor",
+    "position": [
+     12,
+     0,
+     6.074999999999999
+    ],
+    "yaw": 90,
+    "role": "rover_door"
+   },
+   {
+    "piece": "EN_Garage_EVAPorch",
+    "position": [
+     0,
+     0,
+     3.15
+    ],
+    "yaw": 0,
+    "role": "eva_porch"
+   },
+   {
+    "piece": "EN_Garage_Umbilical",
+    "position": [
+     10.9,
+     0,
+     3.6
+    ],
+    "yaw": 0,
+    "role": "umbilical"
+   }
+  ],
+  "rover": {
+   "centre": [
+    6.7,
+    0.0,
+    5.67
+   ],
+   "front": "+x",
+   "length_m": 6.0,
+   "track_m": 4.66,
+   "hatch": [
+    8.5,
+    1.8499999999999999,
+    4.25
+   ]
+  },
+  "anchors": {
+   "player": [
+    4.2,
+    1.4,
+    1.6
+   ],
+   "amara_handover": [
+    8.5,
+    1.4,
+    1.25
+   ],
+   "mei_handover": [
+    6.5,
+    1.4,
+    1.4
+   ],
+   "rafi_rover_slot": [
+    8.5,
+    1.4,
+    2.5
+   ],
+   "kai_rover_slot": [
+    7.6,
+    1.4,
+    2.4
+   ],
+   "suit_seals": [
+    1.0,
+    1.4,
+    2.4
+   ],
+   "cargo_lock_room": [
+    2.0,
+    1.4,
+    2.2
+   ],
+   "porch_eva": [
+    2.2,
+    1.4,
+    5.65
+   ],
+   "rover_door_apron": [
+    13.5,
+    0.0,
+    6.074999999999999
+   ],
+   "route_board": [
+    4.5,
+    1.4,
+    0.9
+   ],
+   "departure_boards": [
+    6.5,
+    1.4,
+    1.0
+   ],
+   "relief_locker": [
+    10.0,
+    1.4,
+    1.3
+   ],
+   "pad_camera_bay": [
+    11.0,
+    1.4,
+    0.9
+   ]
+  },
+  "connections": {
+   "inner_door": "pressurised corridor to the habitat (decision 2)",
+   "rover_door": "apron and the marked path to LOC-06 (courtyard), the roads to LOC-09 and LOC-11",
+   "docking_port": "VH_Rover cabin",
+   "cargo_lock": "EVA porch (vacuum side)"
+  }
+ },
+ "dock": {
+  "states": [
+   "SEALED",
+   "EQUALISING",
+   "SAFE TO OPEN"
+  ],
+  "rule": "the dock hatch opens only when the tunnel between it and the rover's hatch is SAFE TO OPEN; the pump runs only while EQUALISING (the ready room's pump hum); a trip pumps down about 1 m3 of tunnel, never the bay",
+  "time_compression": "a real tunnel takes minutes; the room owner compresses the cycle and shows a labelled time card (LOC-08 exit behaviour)"
+ },
+ "site": {
+  "distance_from_aurora_m": 80.0,
+  "azimuth_from_aurora_deg": 150.0,
+  "door_bearing_deg": 100.0,
+  "landing_pad_m": 500.0,
+  "note": "decision 3; the exterior (berm) stands on the M1-34 Aurora ridge, the marked path joins LOC-06"
+ },
+ "rover": {
+  "asset": "res://assets/vehicles/VH_Rover/VH_Rover.glb",
+  "yaw_degrees": 90.0,
+  "note": "VH_Rover's front faces +Z in its GLB; yaw 90 turns it to the rover door (+x); its side hatch (1.85-2.96 m up) faces the docking port"
+ }
+}

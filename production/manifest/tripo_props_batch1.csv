@@ -7,7 +7,6 @@ PL_Alo_Bud,concept/plants/alo_bud.png,--height,0.20,12000,2048,bud stage; CH01-S
 PL_Alo_Pods,concept/plants/alo_pods.png,--height,0.35,15000,2048,mature dry pods; CH03-S09/S10
 PL_ZeroSeedlingTray,concept/plants/zero_seedling_tray.png,--longest,0.50,15000,2048,2034 unflowered seedlings only; CH03-S07
 PL_Cotton_Young,concept/plants/cotton_young.png,--height,0.32,15000,2048,no boll; CH05-S12 to CH08-S12
-PR_VaultCase,concept/props/vault_case/vault_case_v1.png,--longest,0.60,15000,2048,CH04 insulated case (closed)
 PR_Glovebox,concept/props/glovebox/glovebox_v1.png,--longest,1.20,25000,2048,CH04-S10 dry quarantine
 PR_MalapertRelay,concept/props/malapert_relay/malapert_relay_v1.png,--longest,4.00,40000,2048,CH08 summit relay
 PR_SurveyBeacon,concept/props/survey_beacon/survey_beacon_v1.png,--height,1.80,15000,2048,CH04 beacons + CH08 repeaters

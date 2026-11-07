@@ -1,0 +1,760 @@
+{
+ "task": "M3-4A",
+ "seed": 20261107,
+ "approval": "approved by Sadman in chat on 7 Nov 2026: \"Approve all 12\" (decisions 1-12 of production/concept/chapter4_v1/README.md)",
+ "extends": "res://assets/environment/kit/kit.json (same conventions; habitat_kit.gd reads this file as an extension catalogue)",
+ "canon": "LOC-09 surveyed cold-trap approach (three 100 m segments, three beacons, dry reference plate, sample points, slope sign, return marker) and LOC-10 vault shelf (20 x 15 m, old marker, the insulated box, two tether anchors, probe socket, carrier tether, archival tag); EX-CH04-S04..S09, doc 24 clues 14-15",
+ "conventions": {
+  "units": "metres",
+  "up": "+Y",
+  "front": "-Z (Godot forward); wall faces lie on z=0 and face -Z, bodies extend to +z; standing pieces face -Z with the pivot at the base centre",
+  "grid_m": 1.0,
+  "wall_height_m": 2.6,
+  "lod_distance_m": 12.0,
+  "mount": "habitat_kit.gd place() adds mount_y; positions are finished-floor positions",
+  "textures": "the kit's sets in ../kit/textures, the garage's in EN_Garage/textures, the cold trap's in EN_ColdTrap/textures, the berm's M1-35 regolith in ../terrain/textures; every GLB references them by uri",
+  "live_ui": "material slots named Screen*, Label* and Label_Lid carry no text; every word is drawn at runtime"
+ },
+ "pieces": [
+  {
+   "id": "EN_ColdTrap_BeaconMast",
+   "display": "Beacon on 5 m mast",
+   "notes": "survey beacon on its 5 m telescoping mast (decision 9): tripod on screw anchors, guy lines, the beacon head with a status lamp (LampSafe) and Screen, two retroreflective bands (Retro) at 1.2 m and 2.2 m",
+   "kind": "site",
+   "lods": [
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_BeaconMast_LOD0.glb",
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_BeaconMast_LOD1.glb"
+   ],
+   "triangles": [
+    868,
+    532
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    1.439,
+    1.265
+   ],
+   "size_m": [
+    1.439,
+    5.0,
+    1.265
+   ],
+   "bounds_min_m": [
+    -0.72,
+    0.0,
+    -0.445
+   ],
+   "sockets": {
+    "antenna_top": [
+     0.0,
+     5.0,
+     0.0
+    ],
+    "retro_bands_y": [
+     1.2,
+     2.2
+    ],
+    "head": [
+     0.0,
+     4.58,
+     0.0
+    ]
+   }
+  },
+  {
+   "id": "EN_ColdTrap_ReturnMarker",
+   "display": "Return marker",
+   "notes": "2.0 m return marker: base plate, three retroreflective bands (RetroOrange), a stiff orange flag plate (no cloth in vacuum)",
+   "kind": "site",
+   "lods": [
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReturnMarker_LOD0.glb",
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReturnMarker_LOD1.glb"
+   ],
+   "triangles": [
+    292,
+    148
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    0.52,
+    0.4
+   ],
+   "size_m": [
+    0.52,
+    2.0,
+    0.4
+   ],
+   "bounds_min_m": [
+    -0.2,
+    0.0,
+    -0.2
+   ],
+   "sockets": {}
+  },
+  {
+   "id": "EN_ColdTrap_SlopeSign",
+   "display": "Slope sign",
+   "notes": "1.5 m slope sign: a blank 0.55 x 0.40 m face (Label: the slope is live text) with a retroreflective border",
+   "kind": "site",
+   "lods": [
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_SlopeSign_LOD0.glb",
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_SlopeSign_LOD1.glb"
+   ],
+   "triangles": [
+    184,
+    136
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    0.55,
+    0.32
+   ],
+   "size_m": [
+    0.55,
+    1.6,
+    0.32
+   ],
+   "bounds_min_m": [
+    -0.275,
+    0.0,
+    -0.16
+   ],
+   "sockets": {
+    "label_centre": [
+     0.0,
+     1.4,
+     -0.03
+    ]
+   }
+  },
+  {
+   "id": "EN_ColdTrap_ReferencePlate",
+   "display": "Dry reference plate",
+   "notes": "dry reference plate (EX-CH04-S05, the scanner's dry reference): four dry-standard tiles 0.30 m up on a low tripod, socket for the scanner's nose",
+   "kind": "site",
+   "lods": [
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReferencePlate_LOD0.glb",
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReferencePlate_LOD1.glb"
+   ],
+   "triangles": [
+    204,
+    140
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": -0.0078,
+   "footprint_m": [
+    0.45,
+    0.449
+   ],
+   "size_m": [
+    0.45,
+    0.348,
+    0.449
+   ],
+   "bounds_min_m": [
+    -0.22,
+    0.0,
+    -0.22
+   ],
+   "sockets": {
+    "scanner_socket": [
+     0.0,
+     0.31,
+     0.0
+    ]
+   }
+  },
+  {
+   "id": "EN_ColdTrap_SampleStake",
+   "display": "Sample stake",
+   "notes": "sample-point stake, 0.60 m above the ground (0.10 m driven in: mount_y), stiff orange tag with a blank Label for the sample number, retro tip; three per station",
+   "kind": "site",
+   "lods": [
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD0.glb",
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD1.glb"
+   ],
+   "triangles": [
+    80,
+    56
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": -0.1,
+   "footprint_m": [
+    0.144,
+    0.028
+   ],
+   "size_m": [
+    0.144,
+    0.74,
+    0.028
+   ],
+   "bounds_min_m": [
+    -0.014,
+    0.0,
+    -0.014
+   ],
+   "sockets": {}
+  },
+  {
+   "id": "EN_ColdTrap_TetherAnchor",
+   "display": "Tether anchor",
+   "notes": "helical ground anchor (0.40 m driven in: mount_y), bearing plate, orange D-ring for the carrier tether",
+   "kind": "site",
+   "lods": [
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_TetherAnchor_LOD0.glb",
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_TetherAnchor_LOD1.glb"
+   ],
+   "triangles": [
+    856,
+    520
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": -0.4,
+   "footprint_m": [
+    0.2,
+    0.2
+   ],
+   "size_m": [
+    0.2,
+    0.602,
+    0.2
+   ],
+   "bounds_min_m": [
+    -0.1,
+    0.0,
+    -0.1
+   ],
+   "sockets": {
+    "ring": [
+     0.0,
+     0.15,
+     0.0
+    ]
+   }
+  },
+  {
+   "id": "EN_ColdTrap_SurveyMarker2034",
+   "display": "2034 marker + tag",
+   "notes": "the 2034 survey marker on the vault shelf (0.30 m driven in): faded-yellow bands, the archival tag (blank Label: live text, never names Noor before CH05); unfaded paint because no UV reaches a PSR",
+   "kind": "site",
+   "lods": [
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_SurveyMarker2034_LOD0.glb",
+    "res://assets/environment/EN_ColdTrap/EN_ColdTrap_SurveyMarker2034_LOD1.glb"
+   ],
+   "triangles": [
+    204,
+    124
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": -0.3,
+   "footprint_m": [
+    0.16,
+    0.077
+   ],
+   "size_m": [
+    0.16,
+    1.83,
+    0.077
+   ],
+   "bounds_min_m": [
+    -0.08,
+    0.0,
+    -0.039
+   ],
+   "sockets": {
+    "tag": [
+     0.0,
+     1.15,
+     -0.04
+    ]
+   }
+  }
+ ],
+ "props": [
+  {
+   "id": "PR_VaultCase",
+   "display": "Vault V12 (hinged)",
+   "notes": "vault V12 rebuilt hinged (decision 11) in the installed case's size and orientation (0.60 m along z): closed and open states, identification window on the lid, outer probe socket recessed in the -z end, a 12-well inner container (capped tubes, blank Label tabs); child Lid (hinged on the +x top edge) carries Label_Lid underneath, the slot for clue 15's inscription",
+   "kind": "prop",
+   "lods": [
+    "res://assets/props/PR_VaultCase/PR_VaultCase.glb"
+   ],
+   "triangles": [
+    2212
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": -0.005,
+   "footprint_m": [
+    0.39,
+    0.6
+   ],
+   "size_m": [
+    0.39,
+    0.28,
+    0.6
+   ],
+   "bounds_min_m": [
+    -0.195,
+    0.0,
+    -0.301
+   ],
+   "sockets": {
+    "parts": {
+     "Lid": {
+      "kind": "rotate",
+      "axis": "z",
+      "degrees": -105.0
+     }
+    },
+    "probe_socket": [
+     0.0,
+     0.08370000000000001,
+     -0.3
+    ],
+    "id_window": [
+     -0.0,
+     0.27,
+     0.1
+    ],
+    "wells": [
+     [
+      -0.1,
+      0.167,
+      -0.2
+     ],
+     [
+      0.0,
+      0.167,
+      -0.2
+     ],
+     [
+      0.1,
+      0.167,
+      -0.2
+     ],
+     [
+      -0.1,
+      0.167,
+      -0.067
+     ],
+     [
+      0.0,
+      0.167,
+      -0.067
+     ],
+     [
+      0.1,
+      0.167,
+      -0.067
+     ],
+     [
+      -0.1,
+      0.167,
+      0.066
+     ],
+     [
+      0.0,
+      0.167,
+      0.066
+     ],
+     [
+      0.1,
+      0.167,
+      0.066
+     ],
+     [
+      -0.1,
+      0.167,
+      0.199
+     ],
+     [
+      0.0,
+      0.167,
+      0.199
+     ],
+     [
+      0.1,
+      0.167,
+      0.199
+     ]
+    ],
+    "lid_label_material": "Label_Lid"
+   }
+  },
+  {
+   "id": "PR_VaultProbe",
+   "display": "Thermal probe",
+   "notes": "thermal contact probe for the outer case (EX-CH04-S07): 0.45 m wand, a small Screen in the grip, coiled cable",
+   "kind": "prop",
+   "lods": [
+    "res://assets/props/PR_VaultProbe/PR_VaultProbe.glb"
+   ],
+   "triangles": [
+    348
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0063,
+   "footprint_m": [
+    0.172,
+    0.641
+   ],
+   "size_m": [
+    0.172,
+    0.052,
+    0.641
+   ],
+   "bounds_min_m": [
+    -0.086,
+    -0.0,
+    -0.235
+   ],
+   "sockets": {
+    "tip": [
+     0.0,
+     0.03,
+     -0.235
+    ]
+   }
+  },
+  {
+   "id": "PR_VaultCarrier",
+   "display": "Recovery carrier",
+   "notes": "recovery carrier (the 'closed carrier' of S02 and S06): rigid cradle with two lift handles (two support points), the MLI sleeve seated round the case, a tether eye and latch rails that lock onto PR_RoverCargoMount",
+   "kind": "prop",
+   "lods": [
+    "res://assets/props/PR_VaultCarrier/PR_VaultCarrier.glb"
+   ],
+   "triangles": [
+    600
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    1.094,
+    0.597
+   ],
+   "size_m": [
+    1.094,
+    0.597,
+    0.597
+   ],
+   "bounds_min_m": [
+    -0.547,
+    0.0,
+    -0.29
+   ],
+   "sockets": {
+    "lift_points": [
+     [
+      -0.53,
+      0.5,
+      0.0
+     ],
+     [
+      0.53,
+      0.5,
+      0.0
+     ]
+    ],
+    "tether_eye": [
+     0.0,
+     0.56,
+     0.26999999999999996
+    ],
+    "case_socket": [
+     0.0,
+     0.06,
+     0.0
+    ]
+   }
+  },
+  {
+   "id": "PR_RoverCargoMount",
+   "display": "Rover cargo mount",
+   "notes": "cargo mount on VH_Rover's rear rack (EX-CH04-S08): two latch rails, the latch with its position flag ('shows closed') and the separate lock pin with its own lamp ('testing locked')",
+   "kind": "prop",
+   "lods": [
+    "res://assets/props/PR_RoverCargoMount/PR_RoverCargoMount.glb"
+   ],
+   "triangles": [
+    296
+   ],
+   "lod_distance_m": 12.0,
+   "collision": true,
+   "mount_y": 0.0,
+   "footprint_m": [
+    1.03,
+    0.66
+   ],
+   "size_m": [
+    1.03,
+    0.25,
+    0.66
+   ],
+   "bounds_min_m": [
+    -0.48,
+    0.0,
+    -0.33
+   ],
+   "sockets": {
+    "latch_flag": [
+     0.47,
+     0.22,
+     -0.06
+    ],
+    "lock_pin": [
+     0.55,
+     0.18,
+     0.1
+    ],
+    "carrier_socket": [
+     0.0,
+     0.105,
+     0.0
+    ]
+   }
+  }
+ ],
+ "survey": {
+  "source": "production/tools/coldtrap_survey.py (Computed from NASA LRO LOLA, PGDA product 90; JPL Horizons rows)",
+  "road": {
+   "length_m": 8557.8,
+   "max_slope_deg": 11.88,
+   "descent_m": 802.3,
+   "climb_m": 20.8,
+   "cells": 368,
+   "ends_at_psr_edge": {
+    "x_m": -4570.0,
+    "y_m": -11590.0,
+    "height_m": 1177.9
+   }
+  },
+  "beacons": [
+   {
+    "id": "B1",
+    "road_index": 39,
+    "x_m": -10790.0,
+    "y_m": -11890.0,
+    "height_m": 1945.1,
+    "road_distance_m": 1020.2,
+    "local_slope_deg": 1.77,
+    "blind_corner_distance_m": 1374.8,
+    "light": {
+     "scene": "EX-CH04-S04",
+     "utc": "2046-10-21 08:00",
+     "sun_az_deg": 82.17,
+     "sun_el_deg": 1.597,
+     "terrain_horizon_deg": -0.49,
+     "sun_state": "lit"
+    },
+    "link_back": {
+     "to": "aurora",
+     "clearance_m": 6.1,
+     "distance_m": 972.0
+    },
+    "segment": {
+     "from_m": 972.0,
+     "to_m": 1068.5,
+     "max_slope_deg": 2.33,
+     "climb_m": -0.6
+    }
+   },
+   {
+    "id": "B2",
+    "road_index": 71,
+    "x_m": -10150.0,
+    "y_m": -11370.0,
+    "height_m": 1917.2,
+    "road_distance_m": 1875.6,
+    "local_slope_deg": 6.28,
+    "blind_corner_distance_m": 1903.9,
+    "light": {
+     "scene": "EX-CH04-S04",
+     "utc": "2046-10-21 08:00",
+     "sun_az_deg": 82.17,
+     "sun_el_deg": 1.597,
+     "terrain_horizon_deg": -2.19,
+     "sun_state": "lit"
+    },
+    "link_back": {
+     "to": "B1",
+     "clearance_m": 1.7,
+     "distance_m": 825.0
+    },
+    "segment": {
+     "from_m": 1847.4,
+     "to_m": 1903.9,
+     "max_slope_deg": 6.28,
+     "climb_m": -4.9
+    }
+   },
+   {
+    "id": "B3",
+    "road_index": 225,
+    "x_m": -7070.0,
+    "y_m": -11290.0,
+    "height_m": 1636.7,
+    "road_distance_m": 5237.3,
+    "local_slope_deg": 8.5,
+    "blind_corner_distance_m": 5277.3,
+    "light": {
+     "scene": "EX-CH04-S04",
+     "utc": "2046-10-21 08:00",
+     "sun_az_deg": 82.17,
+     "sun_el_deg": 1.597,
+     "terrain_horizon_deg": 5.42,
+     "sun_state": "dark"
+    },
+    "link_back": {
+     "to": "B2",
+     "clearance_m": 2.7,
+     "distance_m": 3081.0
+    },
+    "segment": {
+     "from_m": 5197.3,
+     "to_m": 5277.3,
+     "max_slope_deg": 9.45,
+     "climb_m": -9.7
+    }
+   }
+  ],
+  "chain_weakest_link_clearance_m": 1.7,
+  "road_coverage_fraction": 0.726,
+  "shelf_link": {
+   "from_relay": "B3",
+   "clearance_m": 3.5
+  },
+  "vault_shelf": {
+   "x_m": -4230.0,
+   "y_m": -11970.0,
+   "height_m": 1128.0,
+   "size_m": [
+    20.0,
+    15.0
+   ],
+   "fitted_slope_deg": 3.69,
+   "relief_m": 2.08,
+   "walk_from_road_end_m": 510.0,
+   "below_road_end_m": 49.9,
+   "light": {
+    "scene": "EX-CH04-S06",
+    "utc": "2046-10-21 10:30",
+    "sun_az_deg": 80.902,
+    "sun_el_deg": 1.606,
+    "terrain_horizon_deg": 9.96,
+    "sun_state": "dark"
+   }
+  },
+  "m182_loc09_corner": {
+   "x_m": -4850.0,
+   "y_m": -10970.0,
+   "sees_B2": false,
+   "light": {
+    "scene": "EX-CH04-S04",
+    "utc": "2046-10-21 08:00",
+    "sun_az_deg": 82.17,
+    "sun_el_deg": 1.597,
+    "terrain_horizon_deg": 11.14,
+    "sun_state": "dark"
+   }
+  },
+  "segment_length_m": 100.0,
+  "note": "decision 8: LOC-09 = the three segments at B1, B2, B3; decision 9: 5 m masts (the 1.8 m tripod would need five beacons); the game keeps P-07's canon numbers"
+ },
+ "staging": {
+  "beacon_offset_m": {
+   "left_of_road": 5.2,
+   "note": "the mast stands beside the road before the corner, the return marker 9 m on and 4 m left, the slope sign 16 m on, right"
+  },
+  "sample_station": {
+   "reference_plate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "stakes": [
+    [
+     1.5,
+     0.0,
+     0.6
+    ],
+    [
+     2.6,
+     0.0,
+     -0.4
+    ],
+    [
+     3.4,
+     0.0,
+     0.9
+    ]
+   ],
+   "note": "S05: dry reference 2, threshold 12, samples 2 / 18 / 19 stay UI values"
+  },
+  "shelf": {
+   "size_m": [
+    20.0,
+    15.0
+   ],
+   "vault": [
+    0.3,
+    0.0,
+    -0.5
+   ],
+   "marker_2034": [
+    1.6,
+    0.0,
+    -1.4
+   ],
+   "tether_anchors": [
+    [
+     -1.6,
+     0.0,
+     -0.9
+    ],
+    [
+     2.4,
+     0.0,
+     0.6
+    ]
+   ],
+   "carrier": [
+    -1.0,
+    0.0,
+    0.5
+   ],
+   "field_cadets": {
+    "Kai": [
+     -1.9,
+     0.0,
+     -0.2
+    ],
+    "Rafi": [
+     2.6,
+     0.0,
+     -1.9
+    ]
+   },
+   "rover": [
+    -12.0,
+    0.0,
+    9.0
+   ],
+   "light": "headlights and helmet lamps only: the Sun never reaches the floor",
+   "note": "room-local Godot positions (x east of the shelf centre, z = -(map y offset)); two suited cadets in the field, two at home"
+  }
+ }
+}

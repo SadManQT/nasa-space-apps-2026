@@ -1,11 +1,11 @@
-# Chapter 4 (Into the Cold Trap) environments: 2D sheets for approval (M3-4A)
+# Chapter 4 (Into the Cold Trap) environments: approved sheets and the published assets (M3-4A)
 
-Board task M3-4A. **Status: phase 1 done, waiting for Sadman's approval (7 Nov 2026).** The two sheets show what the
-assets will look like, their measured plans, their pieces and states, the scenes and story objects they serve, and the
-canon and science checks. **No Tripo, Meshy or other AI credits were spent, and no AI image was generated:** every
-picture is a Blender 5.2 Cycles render of procedural geometry (the route the M3-2A airlock and the M3-3A annex took),
-set on the real NASA LRO LOLA terrain and lit by the JPL Horizons Sun rows in `sun_positions.json`. Phase 2 rebuilds
-the same pieces from the same functions, so what is approved is what ships.
+Board task M3-4A. **Status: approved and verified. Sadman, in chat on 7 Nov 2026: "Approve all 12"** (all twelve
+decisions below, exactly as written, on [00_Approval_Sheet.png](00_Approval_Sheet.png)). Phase 2 then built and published
+both assets from the same piece functions the sheets were rendered from, fully procedurally: no Tripo, Meshy or other AI
+credits were spent and no AI image, mesh or texture was generated. Every picture here is a Blender 5.2 Cycles render of
+procedural geometry (the route the M3-2A airlock and the M3-3A annex took), set on the real NASA LRO LOLA terrain and lit
+by the JPL Horizons Sun rows in `sun_positions.json`.
 
 | File | What it shows |
 |---|---|
@@ -69,7 +69,7 @@ python3 production/tools/ch04_sheets.py
   The real 10 m cells under the 20 x 15 m footprint fit a 3.7 deg slope with 2.1 m of relief, so the shelf is graded
   flat. The Sun never reaches it: the terrain horizon at S06 is 9.9 deg against a 1.6 deg Sun.
 
-## Decisions (please approve or change each)
+## Decisions (all approved, 7 Nov 2026: "Approve all 12")
 
 1. **Garage section: a loading-dock garage, not a pump-down hangar.** The ready room is pressurised and stands on a
    sintered plinth with its deck 1.40 m above the floor of a vacuum (unpressurised) rover bay, level with the rover's
@@ -133,17 +133,26 @@ tracks, lunar gravity, and the PSR floor never sunlit. Earth is below the terrai
 frame at S02, so it is never shown. There is no airborne sound outside: the pump hum is in the ready room. The NASA
 data credit line for the terrain is in the handbook §5.
 
-## After approval (phase 2)
+## Phase 2 (done 7 Nov 2026)
 
-1. Extend `build_ch04_assets.py` with LOD1 (Compatibility), the collision export, the `garage.json` and `coldtrap.json`
-   catalogues (sizes, pivots, sockets, states, the layout and the survey), `production/manifest/ch04_assets.csv` gate
-   rows and `.import` files. Publish into `game/assets/environment/EN_Garage/`, `game/assets/environment/EN_ColdTrap/`
-   and the props folders. Bake the procedural sintered, MLI and fabric shaders into PBR sets beside the kit's.
-2. Rebuild PR_VaultCase as decided in 11, keeping its path so existing references hold; add PR_VaultProbe,
-   PR_VaultCarrier and PR_RoverCargoMount.
-3. Sync to Godot and run the quality gate (`verify_gate.py`, a 0 cm floor, ±2 % size, triangle and texture budgets).
-   Then make a contact sheet in `production/review/`, record visual verdicts with a Codex second opinion in
-   `visual_review.md`, take Godot evidence captures, and run `game/tools/run_tests.sh`.
-4. Set the registry rows (EN_Garage, EN_ColdTrap and the new pieces) to `verified` with
-   `production/tools/build_registry.py`, update the handbook (§8.3, §8.4, §10), log in `production/AI_PROMPT_LOG.md`, and
-   file the M3-4R follow-up for the LOC-08 room and the LOC-09 move (decision 8).
+- **Published** by `build_ch04_assets.py -- publish`: 17 EN_Garage pieces and 7 EN_ColdTrap pieces, each as a game LOD
+  with collision and a Compatibility LOD (48 GLBs), in `game/assets/environment/EN_Garage/` and `EN_ColdTrap/`; the vault
+  set in `game/assets/props/` (`PR_VaultCase` rebuilt hinged on its old path, `PR_VaultProbe`, `PR_VaultCarrier`,
+  `PR_RoverCargoMount`). The pieces tile the kit's PBR sets plus three new seeded sets (sintered pavers, bellows fabric, MLI),
+  all referenced by uri and stored once; the berm uses the M1-35 compacted regolith. Three pieces were added for Godot that
+  were scene objects in the phase 1 renders: the plinth module, the bay floor markings and the berm with its headwall.
+- **Catalogues:** `garage.json` (pieces, sockets, moving parts, the approved layout with anchors, the dock rules, the site,
+  the rover placement) and `coldtrap.json` (pieces, the vault set, the LOLA survey with the beacon chain and light states,
+  the S05 and shelf staging) are extension catalogues of `habitat_kit.gd`, which gained the part kind `scale` for the rover
+  door. `en_garage.gd` assembles LOC-08 and drives the dock collar and hatch, the rover door, the cargo-lock doors (never
+  both open) and the relief locker.
+- **Checks:** the asset gate is **0 failing** (271 assets when built; 303 on the tree merged with M3-8A) (all 52 new GLBs pass: triangles, textures, floor, size).
+  `test_ch04_assets.gd` passes (314 checks headless, 321 with the evidence captures). `run_tests.sh`: **64/64 suites passed** on the tree merged with M3-8A (63/63 before the merge). `habitat_kit.gd` now parses each extension catalogue only when one of its own ids is asked for, so the Chapter 1 launch stays inside `test_performance_runtime.gd`'s 50 ms main-thread budget (the first full run caught a 59 ms hitch from parsing every catalogue up front). The rebuilt case changed two derived LOC-10 numbers, re-derived
+  with `test_exterior_terrain.gd -- --write` (bury 0.040 to 0.041 m, footprint 0.604 to 0.609 m; that suite 403/403).
+  The visual review is in `production/review/visual_review.md`: Codex (`gpt-6-astra`, high) flagged three LOD1
+  silhouettes on its first pass (fixed) and passed all 28 on the second. Registry rows: 52 `verified`.
+- **Evidence:** [../../review/M3-4A_ch04_contact.png](../../review/M3-4A_ch04_contact.png) and
+  `production/qa/evidence/M3-4A_godot_{bay,exterior,ready,dock,porch,coldtrap_pieces,vault_set}.png` (`M3-4A_capture.sh`).
+- **Follow-ups for M3-4R (Sadman):** M3-105, the LOC-08 room from `en_garage.gd` (contract, staging, dock cycle,
+  navigation, exterior placement); M3-106, moving LOC-09 to the three computed segments, Sun rows for B1 and B2, and the S05
+  and shelf staging (decision 8).

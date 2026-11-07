@@ -2163,7 +2163,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 4 assets: EN_Garage, EN_ColdTrap",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-05"
@@ -2179,7 +2179,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "7 Nov (Sadman/claude): M1-36 removed from deps: the 2D sheets need no terrain, and exterior placement uses the M1-34 LOLA tiles, M1-82 placements (exterior_terrain.json, CampaignRoom.terrain_ground) and Atik's TerrainStream provider (05463e0); only the final streaming integration is M1-36.",
-   "evidence": "",
+   "evidence": "Approved by Sadman 7 Nov 2026 ('Approve all 12'); 24 procedural pieces x 2 LODs + vault set published (game/assets/environment/EN_Garage/, EN_ColdTrap/, props/PR_Vault*, PR_RoverCargoMount); verify_gate.py 0 failing; run_tests.sh all suites passed; test_ch04_assets.gd PASS; registry 52 verified; contact production/review/M3-4A_ch04_contact.png; Godot production/qa/evidence/M3-4A_godot_*.png; follow-ups M3-105, M3-106",
    "updated": "2026-11-07",
    "prompt": "Goal: the Chapter 4 (Into the Cold Trap) registry rows that are still planned become installed, gated assets.\nDo: for each of EN_Garage, EN_ColdTrap: read execution/ASSET_<name>.md; make a 2D sheet; batch the sheets into one approval request to the\nuser (do not spend 3D credits before approval); then generate (Tripo/Meshy), clean up in Blender, gate, sync to Godot and update\nproduction/ASSET_REGISTRY.csv. Characters reuse the v8 pipeline (production/tools/build_character_v7.sh) and must pass the side-view\nmirrored-arm check. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; contact sheet in production/review/; registry rows set to verified.\nExterior locations (cold trap, relay road, Malapert summit) are built on the real LOLA terrain from M1-34/M1-36.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); build every object that this chapter's bridges and §4 clues need (the 'What carries over' column names them) as part of this asset set.",
    "reserved_for": "sadman",
@@ -6052,6 +6052,54 @@
    "prompt": "M3-8A installed the 2D assets for Noor's live calls (Sadman, 7 Nov 2026: \"Approve all\" and \"2D portraits only\"): game/assets/ui/screens/EN_NoorRooftop.png (EX-CH08-S10, 9 Apr 2047 08:15 Dhaka, painted grade, 1536 x 864), game/assets/ui/screens/EN_NoorRooftop_noon.png (EX-CH08-S12, 10 Apr 12:00) and the cel-shaded cut-out game/assets/ui/portraits/CH_Noor_live.png (transparent, 587 x 1376). CampaignCrew._build_screen (game/scripts/world/campaign_crew.gd) today always draws EN_EarthDesk behind the caller and looks the portrait up as CH_<Speaker>_screen.png, so Noor would get Rao's room and no portrait. Do: when the Earth-link speaker is Noor, draw EN_NoorRooftop (S10) or EN_NoorRooftop_noon (S12) as the backdrop and CH_Noor_live.png over it, fitted to the backdrop's height like Ferreira's cut-out over EN_EarthDesk, with the caption 'Noor' and the EARTH LINK - LIVE tag (doc 24 7.5 beat 8). Keep Rao and Ferreira on EN_EarthDesk. If the backdrop table should live in game/resources/ui/ui_kit.json (earth_screen, Ramim's file), file that one-line data task for ramim instead of editing it. Acceptance: game/tools/test_earth_screen.gd extended for Noor (backdrop path per scene, portrait loaded, never past the bezel); a windowed capture production/qa/evidence/<task>_noor_screen.png of the commons screen during EX-CH08-S10; run_tests.sh green.",
    "reserved_for": "sadman",
    "effort": 1
+  },
+  {
+   "id": "M3-105",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "LOC-08 garage room from the approved EN_Garage layout (M3-4A follow-up)",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-4A"
+   ],
+   "paths": [
+    "game/scenes/campaign/rooms/",
+    "game/resources/campaign/rooms/",
+    "game/scripts/world/room_contract.gd"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "Build the LOC-08 room scene from game/assets/environment/EN_Garage/en_garage.gd and garage.json, the layout Sadman approved on 7 Nov 2026 ('Approve all 12', production/concept/chapter4_v1/README.md decisions 1-7): the pressurised ready room on its 1.40 m plinth, the vacuum rover bay with the EVA porch, VH_Rover docked at the telescoping tunnel, the regolith berm. Replace the greybox LOC-08 contract in room_contract.gd (bounds 14 x 10 -> 12 x 9; the ready room is pressurised and the bay is vacuum; boundaries: the dock hatch, the rover door, the inner door to the pressurised corridor of decision 2). Stage EX-CH04-S02, S03, S09 (vault in its sleeve through the dry cargo lock), S12 (relief locker), EX-CH05-S01 (the pad camera on Screen3), EX-CH07-S12 and EX-CH08-S01 (the two departure boards: move S12 off the Commons main display), EX-CH08-S11. Run the dock's SEALED / EQUALISING / SAFE TO OPEN cycle and pump hum from garage.json 'dock' with a labelled time card; navigation on the deck, the porch and the bay floor; set the exterior on the Aurora ridge at garage.json 'site' (80 m from Aurora at azimuth 150, door facing azimuth 100) with the M1-82 method. Acceptance: game/tools/run_tests.sh, every suite passes (paste the last line); screenshots of the room in production/qa/evidence/<task id>_*.png.",
+   "reserved_for": "sadman",
+   "effort": 3
+  },
+  {
+   "id": "M3-106",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Move LOC-09 to the three computed beacon segments and stage LOC-10 (M3-4A decision 8)",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-4A"
+   ],
+   "paths": [
+    "game/resources/campaign/rooms/",
+    "game/assets/environment/terrain/lola/sun_positions.json",
+    "production/terrain/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "Sadman approved M3-4A decision 8 on 7 Nov 2026 ('Approve all 12'): LOC-09 is three 100 m segments at the computed beacon corners in game/assets/environment/EN_ColdTrap/coldtrap.json 'survey.beacons': B1 1.02 km and B2 1.88 km (both sunlit at EX-CH04-S04) and B3 5.24 km (terrain shadow), with beacons on EN_ColdTrap_BeaconMast (5 m, decision 9). M1-82 placed LOC-09 at one point, the 7.82 km bend (sees the shelf but not B2). In game/resources/campaign/rooms/exterior_terrain.json stage EX-CH04-S04 as the three segments (the mast beside the road before each corner, the return marker and the slope sign from coldtrap.json 'staging'); keep or retire the 7.82 km point as the last-bend viewpoint; add JPL Horizons scene_lighting rows for B1 and B2 with the M1-88 method; place the EX-CH04-S05 sample station and the LOC-10 shelf staging (vault, 2034 marker, two tether anchors, carrier, two suited cadets, the rover 15 m back) from coldtrap.json 'staging'; re-run game/tools/test_exterior_terrain.gd -- --write. Moon rules (ART_BIBLE section 2): the shelf is never sunlit; only headlights and helmet lamps. Acceptance: game/tools/run_tests.sh, every suite passes; screenshots of each segment and the shelf at their dated Sun in production/qa/evidence/<task id>_*.png.",
+   "reserved_for": "sadman",
+   "effort": 2
   }
  ],
  "requirements": [

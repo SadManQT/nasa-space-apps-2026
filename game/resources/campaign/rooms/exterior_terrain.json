@@ -850,7 +850,7 @@
    "bury_m": {
     "Door_ridge_route_boundary": 0.057,
     "Door_vault_recovery_boundary": 0.057,
-    "PR_VaultCase": 0.04,
+    "PR_VaultCase": 0.041,
     "PR_SampleHolder": 0.006,
     "PR_RepairClamp": 0.01
    },
@@ -1086,7 +1086,7 @@
     2.125
    ],
    "footprint_m": {
-    "PR_VaultCase": 0.604,
+    "PR_VaultCase": 0.609,
     "PR_SampleHolder": 0.084,
     "PR_RepairClamp": 0.174
    },
