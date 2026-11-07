@@ -186,7 +186,7 @@ def summit_sheet():
     H = 3150
     sheet = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(sheet)
-    y = title(d, "EN_MalapertSummit: LOC-12 Malapert relay summit (M3-8A, for approval)",
+    y = title(d, "EN_MalapertSummit: LOC-12 Malapert relay summit (M3-8A, approved 7 Nov 2026)",
               "Blender 5.2 Cycles on the real Moon: LOLA PGDA Site23 5 m summit tile + authored sub-5 m craters, malapert_vista 40 m to the horizon, lunar curvature.",
               "Sun and Earth are the JPL Horizons rows of EX-CH08-S10 (9 Apr 2047). No AI image generation, no credits. Photoreal environment; the cel-shaded cast is added at runtime.")
     y += 20
@@ -310,12 +310,12 @@ def road_sheet():
     H = 3000
     sheet = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(sheet)
-    y = title(d, "EN_RelayRoad: LOC-11 Aurora to Malapert relay road (M3-8A, for approval)",
+    y = title(d, "EN_RelayRoad: LOC-11 Aurora to Malapert relay road (M3-8A, approved 7 Nov 2026)",
               "Blender 5.2 Cycles at repeater R2, the marker-two service pad, in the dark of EX-CH08-S04 (8 Apr 2047 10:00 UTC: the Sun 0.06 deg below the horizon at azimuth 53).",
               "Ground: LOLA LDEM_80S_40MPP round the pad + authored sub-40 m craters, the 80 m corridor to the horizon, lunar curvature. No AI image generation, no credits.")
     y += 20
     panel(sheet, d, Image.open(R / "road_A_marker_two.png").crop((150, 120, 1650, 964)), 20, y, 1260, 709, "S04: the marker-two pad worked under the rover's lights; the repeater dark, its bay open",
-          ["Light comes only from the rover, the guide lights and suit lamps: the terrain is in the shadow of its own horizon. Black sky; no stars drawn (lit ground in frame)."])
+          ["Light comes only from the rover, the guide lights and suit lamps: the terrain is in the shadow of its own horizon. Faint stars at the top: no sunlit surface is in this frame (ART_BIBLE 2 rule 12, 7 Nov 2026)."])
     sheet.paste(route_map(880, 709), (1300, y))
     d.text((1300, y + 715), "The road, the pads and the hops are the M3-7A route simulator's (fabrication bench, CH07-S11), so CH07's model and CH08's road agree", fill=MUTE, font=font(14))
     y += 709 + 80
@@ -420,7 +420,7 @@ def rooftop_sheet():
     H = 2700
     sheet = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(sheet)
-    y = title(d, "EN_NoorRooftop: Noor's rooftop in Dhaka, Bangladesh (Earth screen scene, M3-8A, for approval)",
+    y = title(d, "EN_NoorRooftop: Noor's rooftop in Dhaka, Bangladesh (Earth screen scene, M3-8A, approved 7 Nov 2026)",
               "Blender 5.2 Cycles, procedural; the EN_EarthDesk method: a 3D room rendered once and shown behind the caller on Aurora's Earth screen, with the approved painted grade.",
               "S10 = 9 Apr 2047 08:15 Dhaka (Sun 34 deg up in the east); S12 = 10 Apr 12:00 (Sun 74 deg). No signs or writing anywhere; no Moon in her sky. No AI image generation, no credits.")
     y += 20
@@ -526,7 +526,7 @@ def noor_sheet():
         "Noor", fixed, Image.open(CH / "noor_34_take2.png"),
         [(Image.open(ROOT / "game/assets/ui/portraits/CH_Noor_present_portrait.png"), "Installed present-day portrait", ["the face, hair and clothes followed here"]),
          (Image.open(REF / "cs15_rooftop_back.png"), "CS-15-B (accepted)", ["grey low bun, green kameez, pale dupatta"])],
-        "CH_Noor: Dr Noor Rahman, present day (M3-8A, for approval)",
+        "CH_Noor: Dr Noor Rahman, present day (M3-8A, approved 7 Nov 2026)",
         "Tripo CLI image, gemini_3_pro_image_preview, image-to-image from the installed portrait; the three-quarter view from the sheet. Balance 810 before and after (no credit charged).",
         "Cel-shaded like the v8 cast; adult Bangladeshi botanist about sixty; Earth only (rooftop call CH08-S10, S12). Nothing is built from this yet; no 3D credit spent.",
         {"views": ["Front", "Left side", "Back", "Right side (mirrored left)"],
@@ -545,7 +545,7 @@ def rao_sheet():
         "Rao", s, Image.open(CH / "rao_34_take1.png"),
         [(Image.open(ROOT / "game/assets/ui/portraits/CH_Rao_screen.png"), "Installed screen portrait (CH_Rao_screen.png)", ["face, hair, headset and polo followed here"]),
          (Image.open(ROOT / "game/assets/ui/screens/EN_EarthDesk.png"), "EN_EarthDesk backdrop (approved 6 Nov)", ["his room; decision 5 there: a cut-out Rao"])],
-        "CH_Rao: Rao, Earth flight controller (M3-8A, for approval)",
+        "CH_Rao: Rao, Earth flight controller (M3-8A, approved 7 Nov 2026)",
         "Tripo CLI image, gemini_3_pro_image_preview, image-to-image from the installed screen portrait; the three-quarter view from the sheet. Balance 810 before and after (no credit charged).",
         "Cel-shaded like the v8 cast; adult; Earth only, always (the Earth desk on Aurora's screen). Nothing is built from this yet; no 3D credit spent.",
         {"views": ["Front", "Right side", "Back", "Left side"],
@@ -568,9 +568,9 @@ def approval(sheets):
     page = Image.new("RGB", (tw, H), (226, 228, 232))
     d = ImageDraw.Draw(page)
     d.rectangle([0, 0, tw, head], fill=NAVY)
-    d.text((24, 14), "M3-8A Chapter 8 (The Lighthouse): five assets for approval", fill=WHITE, font=font(32, True))
-    d.text((24, 58), "EN_MalapertSummit, EN_RelayRoad, EN_NoorRooftop, CH_Noor, CH_Rao. Approve, change or decline per numbered decision", fill=(200, 206, 220), font=font(17))
-    d.text((24, 80), "(production/concept/chapter8_v1/README.md). Nothing is built in 3D yet; no Tripo or Meshy 3D credit spent.", fill=(200, 206, 220), font=font(17))
+    d.text((24, 14), "M3-8A Chapter 8 (The Lighthouse): five assets, approved 7 Nov 2026", fill=WHITE, font=font(32, True))
+    d.text((24, 58), "Sadman in chat: \"Approve all\" (decisions 1-11), \"Fix CS-15\" (board M4-05), \"Faint stars there\" (ART_BIBLE 2 rule 12), \"2D portraits only\".", fill=(200, 206, 220), font=font(17))
+    d.text((24, 80), "Built 7 Nov: game/assets/environment/EN_MalapertSummit and EN_RelayRoad, the rooftop screens and Noor's cut-out (README.md). No credits spent.", fill=(200, 206, 220), font=font(17))
     y = head + 12
     for im in ims:
         page.paste(im, (0, y))
@@ -579,8 +579,43 @@ def approval(sheets):
     print("approval page", page.size)
 
 
+def contact():
+    """production/review/M3-8A_chapter8_contact.png: every exported piece (LOD0 studio still of the GLB itself), the Godot
+    LOD lineup, the Godot summit, housing and road captures and the two rooftop screens (phase 2 review)."""
+    prev = ROOT / "production/models/chapter8/preview"
+    ev = ROOT / "production/qa/evidence"
+    cat = json.loads((ROOT / "game/assets/environment/EN_MalapertSummit/malapert_summit.json").read_text())["pieces"] + \
+        json.loads((ROOT / "game/assets/environment/EN_RelayRoad/relay_road.json").read_text())["pieces"]
+    cell = 262
+    H = 112 + 2 * (cell + 70) + 3 * 470 + 40
+    sheet = Image.new("RGB", (W, H), PAPER)
+    d = ImageDraw.Draw(sheet)
+    title(d, "M3-8A review contact sheet: the sixteen Chapter 8 pieces as exported, and in Godot",
+          "Top: Blender Cycles studio stills of each LOD0 GLB (kit PBR textures by uri). Below: Godot 4.7 captures from game/tools/test_chapter8_assets.gd --evidence.",
+          "Gate: production/review/asset_verification.md (32 GLBs). Verdicts: production/review/visual_review.md (M3-8A section).")
+    y = 132
+    for k, e in enumerate(cat):
+        x = 20 + (k % 8) * (cell + 9)
+        yy = y + (k // 8) * (cell + 70)
+        panel(sheet, d, Image.open(prev / f"{e['id']}.png"), x, yy, cell, cell, e["id"].replace("EN_MalapertSummit_", "Summit ").replace("EN_RelayRoad_", "Road "),
+              [f"{e['triangles'][0]} / {e['triangles'][1]} tris, {e['size_m'][1]} m high", f"{len(e.get('sockets', {}))} sockets, {len(e.get('moving_nodes', {}))} moving"], bg=(110, 110, 112))
+    y += 2 * (cell + 70) + 10
+    panel(sheet, d, Image.open(ev / "M3-8A_godot_lods.png"), 20, y, W - 40, 420, "Godot: game LOD (front) and Compatibility LOD (back) of every piece", None)
+    y += 470
+    w2 = (W - 60) // 2
+    panel(sheet, d, Image.open(ev / "M3-8A_godot_summit.png"), 20, y, w2, 420, "Godot: the summit layout from malapert_summit.json under the dated Sun", None)
+    panel(sheet, d, Image.open(ev / "M3-8A_godot_housing.png"), 40 + w2, y, w2, 420, "Godot: housing door on its hinge, amber status lamps, live pedestal screens", None)
+    y += 470
+    panel(sheet, d, Image.open(ev / "M3-8A_godot_road.png"), 20, y, w2, 420, "Godot: the marker-two pad at night (VH_Rover_Lit eva_stop, guide lights, lit beacon)", None)
+    panel(sheet, d, Image.open(ev / "M3-8A_godot_rooftop_screen.png"), 40 + w2, y, w2, 420, "Godot: EN_NoorRooftop with CH_Noor_live (S10)", None)
+    out = ROOT / "production/review/M3-8A_chapter8_contact.png"
+    sheet.crop((0, 0, W, y + 470)).save(out, optimize=True)
+    print("contact", out.relative_to(ROOT))
+
+
 def main():
     which = sys.argv[1:] or ["summit", "road", "rooftop", "noor", "rao", "approval"]
+    if "contact" in which: contact()
     if "summit" in which: summit_sheet()
     if "road" in which: road_sheet()
     if "rooftop" in which: rooftop_sheet()

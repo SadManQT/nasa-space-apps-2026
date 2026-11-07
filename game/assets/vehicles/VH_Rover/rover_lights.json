@@ -1,0 +1,139 @@
+{
+ "task": "M3-8A",
+ "decision": "7: roof work floods added to VH_Rover as light sockets (Sadman, 7 Nov 2026: \"Approve all\")",
+ "frame": "VH_Rover.glb's own frame in Godot: +Z is the rover's front (the cabin end), +Y up, metres; directions are unit vectors",
+ "bounds_min": [
+  -2.327,
+  0.0,
+  -3.0
+ ],
+ "bounds_max": [
+  2.327,
+  4.413,
+  3.0
+ ],
+ "sides": "facing +Z with +Y up, the rover's left is +X",
+ "states": {
+  "driving": [
+   "Headlight_L",
+   "Headlight_R",
+   "CabinGlow"
+  ],
+  "eva_stop": [
+   "Headlight_L",
+   "Headlight_R",
+   "RoofFlood_L",
+   "RoofFlood_R",
+   "CabinGlow"
+  ],
+  "parked_dark": []
+ },
+ "lights": [
+  {
+   "name": "Headlight_L",
+   "type": "spot",
+   "position": [
+    0.9,
+    1.15,
+    3.05
+   ],
+   "direction": [
+    0.0,
+    -0.1191,
+    0.9929
+   ],
+   "energy": 6.0,
+   "range_m": 45.0,
+   "angle_deg": 27.5,
+   "color": [
+    0.92,
+    0.95,
+    1.0
+   ]
+  },
+  {
+   "name": "Headlight_R",
+   "type": "spot",
+   "position": [
+    -0.9,
+    1.15,
+    3.05
+   ],
+   "direction": [
+    0.0,
+    -0.1191,
+    0.9929
+   ],
+   "energy": 6.0,
+   "range_m": 45.0,
+   "angle_deg": 27.5,
+   "color": [
+    0.92,
+    0.95,
+    1.0
+   ]
+  },
+  {
+   "name": "RoofFlood_L",
+   "type": "spot",
+   "position": [
+    1.6,
+    3.7,
+    2.0
+   ],
+   "direction": [
+    0.1756,
+    -0.7317,
+    0.6586
+   ],
+   "energy": 4.0,
+   "range_m": 24.0,
+   "angle_deg": 47.5,
+   "color": [
+    0.95,
+    0.97,
+    1.0
+   ]
+  },
+  {
+   "name": "RoofFlood_R",
+   "type": "spot",
+   "position": [
+    -1.6,
+    3.7,
+    2.0
+   ],
+   "direction": [
+    -0.1756,
+    -0.7317,
+    0.6586
+   ],
+   "energy": 4.0,
+   "range_m": 24.0,
+   "angle_deg": 47.5,
+   "color": [
+    0.95,
+    0.97,
+    1.0
+   ]
+  },
+  {
+   "name": "CabinGlow",
+   "type": "omni",
+   "position": [
+    0.0,
+    1.9,
+    1.4
+   ],
+   "energy": 0.6,
+   "range_m": 3.0,
+   "color": [
+    1.0,
+    0.8,
+    0.55
+   ]
+  }
+ ],
+ "scene": "res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn",
+ "note": "Exterior lights only light the ground and hardware they hit: no beams or haze in vacuum (ART_BIBLE 2)."
+}

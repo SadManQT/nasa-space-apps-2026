@@ -1,0 +1,1 @@
+CHAPTER8 ASSETS RESULT: PASS (222 checks, 0 failures)

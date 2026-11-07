@@ -476,3 +476,35 @@ def point_light(name, loc, energy, color=(1, 1, 1), radius=0.05, kind="POINT", s
     if direction is not None:
         ob.rotation_euler = Vector(direction).to_track_quat("-Z", "Y").to_euler()
     return ob
+
+
+def faint_stars(on=True, density=420.0, brightness=0.9):
+    """ART_BIBLE 2 rule 12 (Sadman, 7 Nov 2026): a faint, sparse star field, only for frames with no sunlit surface in
+    view; off (pure black) otherwise. Fixed to the sky directions, no glow, no colour."""
+    nt = bpy.context.scene.world.node_tree
+    bg = nt.nodes["Background"]
+    for link in list(bg.inputs["Color"].links):
+        nt.links.remove(link)
+    if not on:
+        bg.inputs["Color"].default_value = (0, 0, 0, 1)
+        bg.inputs["Strength"].default_value = 0.0
+        return
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    vor = nt.nodes.new("ShaderNodeTexVoronoi")
+    vor.inputs["Scale"].default_value = density
+    vor.inputs["Randomness"].default_value = 1.0
+    nt.links.new(tc.outputs["Generated"], vor.inputs["Vector"])
+    dot = nt.nodes.new("ShaderNodeMapRange")
+    dot.inputs["From Min"].default_value = 0.1
+    dot.inputs["From Max"].default_value = 0.0
+    nt.links.new(vor.outputs["Distance"], dot.inputs["Value"])
+    keep = nt.nodes.new("ShaderNodeMath"); keep.operation = "GREATER_THAN"; keep.inputs[1].default_value = 0.82
+    sep = nt.nodes.new("ShaderNodeSeparateColor")
+    nt.links.new(vor.outputs["Color"], sep.inputs["Color"])
+    nt.links.new(sep.outputs["Red"], keep.inputs[0])  # only one Voronoi cell in six carries a star
+    mag = nt.nodes.new("ShaderNodeMath"); mag.operation = "MULTIPLY"
+    nt.links.new(dot.outputs["Result"], mag.inputs[0]); nt.links.new(keep.outputs["Value"], mag.inputs[1])
+    var = nt.nodes.new("ShaderNodeMath"); var.operation = "MULTIPLY"
+    nt.links.new(mag.outputs["Value"], var.inputs[0]); nt.links.new(sep.outputs["Green"], var.inputs[1])  # brightness spread
+    nt.links.new(var.outputs["Value"], bg.inputs["Color"])
+    bg.inputs["Strength"].default_value = brightness

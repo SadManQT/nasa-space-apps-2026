@@ -27,6 +27,44 @@ def no_fetch(*_a, **_k):
     raise RuntimeError("road_data.py reads cached LOLA tiles only")
 
 
+def ten_metre(segs, pads, at):
+    """Heights and slopes on LDEM_83S_10MPP (cached tiles only) for segments A-D, the pads and their spurs.
+    Segment E sits inside the Malapert summit's 5 m Site23 tile and needs no 10 m data."""
+    out = {"product": "pgda90_10mpp (LDEM_83S_10MPP_ADJ, PGDA product 90)", "segments": {}, "pads": {}}
+
+    def sample(x, y, size=400.0):
+        a, g = mt.window_m("pgda90_10mpp", x, y, size)
+        a = mt.fill_nan(a.astype(np.float64))
+        s = mt.slope_deg(a, g["mpp"])
+        c = g["center_col"]
+        r = int(round(60.0 / g["mpp"]))
+        return float(a[c, c]), float(s[c - r:c + r + 1, c - r:c + r + 1].max()), float(np.median(s[c - r:c + r + 1, c - r:c + r + 1]))
+
+    def profile(x0, y0, x1, y1, step=20.0):
+        n = max(2, int(math.hypot(x1 - x0, y1 - y0) / step))
+        hs = []
+        for k in range(n + 1):
+            x, y = x0 + (x1 - x0) * k / n, y0 + (y1 - y0) * k / n
+            a, g = mt.window_m("pgda90_10mpp", x, y, 40.0)
+            hs.append(float(mt.fill_nan(a.astype(np.float64))[g["center_row"], g["center_col"]]))
+        d = math.hypot(x1 - x0, y1 - y0) / n
+        steepest = max(math.degrees(math.atan(abs(b - a) / d)) for a, b in zip(hs, hs[1:]))
+        return {"length_m": round(math.hypot(x1 - x0, y1 - y0)), "climb_m": round(hs[-1] - hs[0], 1), "steepest_20m_deg": round(steepest, 1)}
+
+    for s in segs:
+        if s["id"] == "E":
+            out["segments"]["E"] = {"source": "malapert_summit 5 m tile (Site23)"}
+            continue
+        h, smax, smed = sample(s["x"], s["y"])
+        out["segments"][s["id"]] = {"height_m": round(h, 1), "slope_max_deg_60m": round(smax, 1), "slope_median_deg_60m": round(smed, 1)}
+    for k, p in enumerate(pads, 1):
+        h, smax, smed = sample(p["x"], p["y"])
+        road_pt = at(p["road_m"])
+        out["pads"][f"R{k}"] = {"height_m": round(h, 1), "slope_max_deg_60m": round(smax, 1), "slope_median_deg_60m": round(smed, 1),
+                                "spur": profile(road_pt[0], road_pt[1], p["x"], p["y"])}
+    return out
+
+
 def main():
     mt.http_get = no_fetch
     d = rs.compute()
@@ -68,6 +106,7 @@ def main():
            "road_xy": [[p[0], p[1]] for p in pts],
            "spur_r2": {"from": at(pads[1]["road_m"])[:2], "to": [r2["x"], r2["y"]]},
            "hops": d["hops"]}
+    out["lola_10m"] = ten_metre(segs, pads, at)
     (OUT / "road.json").write_text(json.dumps(out, indent=1, default=float))
     print("segments", [(s["id"], s["game_km"], s["road_m"]) for s in segs])
     print("pads", [(round(p["road_m"]), p["game_km"]) for p in pads])

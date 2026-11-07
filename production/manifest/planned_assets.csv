@@ -6,8 +6,3 @@ EN_SafeRoom,environment,Blender modular + reused props,EX-CH01-S08,"5 seats, wat
 EN_Garage,environment,Blender + VH_Rover,EX-CH04-S02,rover bay and departure boards (LOC-08)
 EN_Exterior,environment,Blender terrain from NASA LOLA DEM + EN_SolarMast,EX-CH01-S09,"mast courtyard, horizon, landing pad (LOC-06)"
 EN_ColdTrap,environment,Blender terrain,EX-CH04-S03,ridge road with 3 beacons and vault shelf (LOC-09/10)
-EN_RelayRoad,environment,Blender terrain + PR_SurveyBeacon,EX-CH08-S02,five short road segments; repeaters R1-R3 (LOC-11)
-EN_MalapertSummit,environment,Blender terrain + PR_MalapertRelay,EX-CH08-S06,summit worksite (LOC-12)
-EN_NoorRooftop,environment,Generated cutscene plate,EX-CH08-S10,Dhaka rooftop at night (screen scene)
-CH_Rao,character,Portrait/bust (screen only),EX-CH01-S01,headset; Earth desk
-CH_Noor,character,Portraits: 2034 archive + present + rooftop,EX-CH05-S10,older Bangladeshi botanist

@@ -111,12 +111,12 @@ def main():
     R3 = P.matrix_world.to_3x3()
 
     def park(x, y, heading, roof=True):
-        """Place the rover (GLB front is +X) and rebuild its lights for this stop."""
+        """Place the rover (the GLB's cabin end is -Y, so rotation = 180 - heading) and rebuild its lights."""
         for o in [o for o in bpy.data.objects if o.name.startswith(("Headlight", "RoofFlood", "CabinGlow"))]:
             bpy.data.objects.remove(o)
         h = math.radians(heading)
         rov.location = (x, y, 0.0)
-        rov.rotation_euler = (0, 0, math.radians(90 - heading))
+        rov.rotation_euler = (0, 0, math.radians(180 - heading))
         bpy.context.view_layer.update()
         rov.location.z -= min((rov.matrix_world @ Vector(cn)).z for cn in rov.bound_box) - grade
         bpy.context.view_layer.update()
@@ -153,7 +153,9 @@ def main():
     res = (960, 540) if QUICK else (1920, 1080)
     smp = 32 if QUICK else 192
     camA = C.camera("A", (-15.0, -23.0, 8.0), (-1.5, 1.0, 0.4), 30, parent=P)
+    C.faint_stars(True)  # ART_BIBLE 2 rule 12: no sunlit surface in this frame, so faint stars
     C.render(camA, C.OUT / "road_A_marker_two.png", res, smp)
+    C.faint_stars(False)  # B has no sky; C shows the sunlit far horizon, so its sky stays black
     camB = C.camera("B", (-1.6, 1.9, 1.45), (0.05, 3.95, 0.5), 30, parent=P)
     C.render(camB, C.OUT / "road_B_battery_bay.png", res, smp)
     # after the swap: beacon and both link lamps lit, bay closed

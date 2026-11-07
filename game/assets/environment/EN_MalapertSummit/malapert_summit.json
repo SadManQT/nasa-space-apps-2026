@@ -1,0 +1,903 @@
+{
+ "task": "M3-8A",
+ "location": "LOC-12 Malapert relay summit",
+ "approved": "Sadman, 7 Nov 2026: \"Approve all\" (sheet production/concept/chapter8_v1/M3-8A_EN_MalapertSummit_sheet.png)",
+ "conventions": {
+  "units": "metres",
+  "up": "+Y",
+  "platform_frame": "room origin at the summit site of sun_positions.json (malapert_summit, the highest LOLA pixel of PGDA Site23); +X local east, -Z local north (away from the pole); the frame is the LOLA tile frame rotated 2.34 deg about Y so -Z is true local north",
+  "piece_front": "pieces are authored with Blender +Y = Godot -Z = local north; yaw_deg rotates about +Y",
+  "lod_distance_m": 25.0,
+  "textures": "the kit's PBR sets by uri in ../kit/textures (stored once)"
+ },
+ "terrain": {
+  "region": "malapert_summit",
+  "pad_bounds_xz": [
+   [
+    -15,
+    -10
+   ],
+   [
+    15,
+    10
+   ]
+  ],
+  "pad_level_m": -0.3,
+  "pad_rule": "cut level 0.3 m under the summit crown and filled outward (decision 1): from a pad at the median ground height the crown hides Earth, which clears the summit skyline by about 2 deg",
+  "platform_yaw_deg_from_tile": 2.335
+ },
+ "dated_sky": {
+  "source": "game/assets/environment/terrain/lola/sun_positions.json scene_lighting EX-CH08-S10 (2047-04-09 02:00 UTC)",
+  "sun_az_deg": 18.107,
+  "sun_el_deg": 2.313,
+  "earth_az_deg": 358.694,
+  "earth_el_deg": -2.32,
+  "terrain_horizon_toward_earth_deg": -4.6,
+  "earth_phase_note": "Sun and Earth are 19.9 deg apart in the summit sky, so Earth is a 3 % crescent (phase angle about 160 deg): a thin bright arc, lit on the side toward the Sun"
+ },
+ "aims": {
+  "earth_dish": {
+   "node": "DishAzimuth/DishElevation",
+   "az_deg": 358.7,
+   "el_deg": -2.3,
+   "rule": "boresight 2.3 deg below level: Earth is below the mathematical horizon from a 5 km summit"
+  },
+  "local_antenna": {
+   "node": "LocalAzimuth/LocalElevation",
+   "az_deg": 216.7,
+   "el_deg": -4.8,
+   "target": "R3, 54.3 km, 3.7 km lower (route_simulator_data.py)"
+  }
+ },
+ "states": {
+  "housing": {
+   "dark": [
+    "Lamp_Status_0",
+    "Lamp_Status_1",
+    "Lamp_Status_2"
+   ],
+   "two_unverified": {
+    "amber": [
+     "Lamp_Status_0",
+     "Lamp_Status_1"
+    ]
+   },
+   "locked": {
+    "green": [
+     "Lamp_Status_0",
+     "Lamp_Status_1",
+     "Lamp_Status_2"
+    ]
+   },
+   "bridge": "EX-CH08-S06 -> S07: the dark relay housing beyond the rover window (all lamps off)"
+  },
+  "isolator": {
+   "node": "Handle",
+   "isolated_rotation_deg_x": 90,
+   "live_rotation_deg_x": 0,
+   "lockout_socket": "Socket_LockoutTag"
+  },
+  "door": {
+   "node": "DoorHinge",
+   "open_rotation_deg_z": 105,
+   "axis": "+Y in Godot (vertical hinge on the north edge of the opening)"
+  },
+  "pedestal": {
+   "screens": [
+    "Screen_LocalLeg",
+    "Screen_EarthLeg",
+    "Screen_Checksum"
+   ],
+   "rule": "all words, bearings, signal and obstruction meters and the ALO42 echo are live UI; the bearings stay labelled scenario values (STORY_FULL S08)"
+  }
+ },
+ "placements": [
+  {
+   "piece": "EN_MalapertSummit_RelayDeck",
+   "at_xz": [
+    -5.0,
+    -5.5
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_ControllerHousing",
+   "at_xz": [
+    -4.0,
+    -1.4
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PowerIsolator",
+   "at_xz": [
+    -3.3,
+    -0.2
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_ControlPedestal",
+   "at_xz": [
+    -1.8,
+    -2.8
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_SolarMast",
+   "at_xz": [
+    -11.5,
+    -5.0
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_TetherAnchor",
+   "at_xz": [
+    -8.5,
+    0.5
+   ],
+   "yaw_deg": 0.0,
+   "name": "anchor_0"
+  },
+  {
+   "piece": "EN_MalapertSummit_TetherAnchor",
+   "at_xz": [
+    -0.5,
+    0.5
+   ],
+   "yaw_deg": 0.0,
+   "name": "anchor_1"
+  },
+  {
+   "piece": "EN_MalapertSummit_TetherAnchor",
+   "at_xz": [
+    -8.5,
+    -9.0
+   ],
+   "yaw_deg": 0.0,
+   "name": "anchor_2"
+  },
+  {
+   "piece": "EN_MalapertSummit_TetherAnchor",
+   "at_xz": [
+    -0.5,
+    -9.0
+   ],
+   "yaw_deg": 0.0,
+   "name": "anchor_3"
+  },
+  {
+   "piece": "EN_MalapertSummit_UmbilicalPost",
+   "at_xz": [
+    3.2,
+    -0.4
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_ViewpointRail",
+   "at_xz": [
+    6.0,
+    -9.3
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    -15,
+    10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    -15,
+    -10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    -10,
+    10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    -10,
+    -10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    -5,
+    10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    -5,
+    -10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    0,
+    10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    0,
+    -10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    5,
+    10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    5,
+    -10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    10,
+    10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    10,
+    -10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    15,
+    10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    15,
+    -10
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    -15,
+    5
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    15,
+    5
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    -15,
+    0
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    15,
+    0
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    -15,
+    -5
+   ],
+   "yaw_deg": 0.0
+  },
+  {
+   "piece": "EN_MalapertSummit_PerimeterMarker",
+   "at_xz": [
+    15,
+    -5
+   ],
+   "yaw_deg": 0.0
+  }
+ ],
+ "cable_runs": [
+  {
+   "from_xz": [
+    -11.5,
+    -3.5
+   ],
+   "to_xz": [
+    -11.5,
+    -0.2
+   ],
+   "piece": "EN_MalapertSummit_CableTray",
+   "piece_length_m": 2.0
+  },
+  {
+   "from_xz": [
+    -11.5,
+    -0.2
+   ],
+   "to_xz": [
+    -3.5,
+    -0.2
+   ],
+   "piece": "EN_MalapertSummit_CableTray",
+   "piece_length_m": 2.0
+  },
+  {
+   "from_xz": [
+    -4.0,
+    -2.2
+   ],
+   "to_xz": [
+    -4.0,
+    -3.2
+   ],
+   "piece": "EN_MalapertSummit_CableTray",
+   "piece_length_m": 2.0
+  },
+  {
+   "from_xz": [
+    -1.8,
+    -2.2
+   ],
+   "to_xz": [
+    -1.8,
+    -0.6
+   ],
+   "piece": "EN_MalapertSummit_CableTray",
+   "piece_length_m": 2.0
+  },
+  {
+   "from_xz": [
+    -1.8,
+    -0.6
+   ],
+   "to_xz": [
+    3.0,
+    -0.6
+   ],
+   "piece": "EN_MalapertSummit_CableTray",
+   "piece_length_m": 2.0
+  }
+ ],
+ "rover": {
+  "piece": "res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn",
+  "at_xz": [
+   7.6,
+   1.0
+  ],
+  "heading": "west: the rover's +Z (cabin end) toward room -X, i.e. rotation_y = -90 deg; its cabin window looks at the housing",
+  "umbilical_socket": "EN_MalapertSummit_UmbilicalPost/Socket_Port"
+ },
+ "anchors": {
+  "rover_door": [
+   4.6,
+   1.0
+  ],
+  "kai_housing": [
+   -3.0,
+   -1.4
+  ],
+  "ferreira_door_brace": [
+   -3.2,
+   -2.3
+  ],
+  "rafi_tether": [
+   -0.5,
+   0.2
+  ],
+  "pedestal_operator": [
+   -1.0,
+   -2.8
+  ],
+  "earth_view": [
+   6.0,
+   -8.6
+  ],
+  "summit_entry": [
+   12.0,
+   10.0
+  ]
+ },
+ "scenes": [
+  "EX-CH08-S06 summit reached (cabin, dark housing beyond the window)",
+  "EX-CH08-S07 controller replacement (EVA at the housing)",
+  "EX-CH08-S08 local leg then Earth leg (pedestal)",
+  "EX-CH08-S09 ALO42 data check (pedestal and cabin console)",
+  "EX-CH08-S10 Hello, Aurora (rover cabin, CS-15)",
+  "EX-CH08-S11 departure (cabin)"
+ ],
+ "pieces": [
+  {
+   "id": "EN_MalapertSummit_RelayDeck",
+   "display": "Legacy relay deck (2034) with the Earth dish and the local antenna",
+   "lods": [
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_RelayDeck_LOD0.glb",
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_RelayDeck_LOD1.glb"
+   ],
+   "triangles": [
+    7272,
+    3274
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    4.25,
+    5.704,
+    4.408
+   ],
+   "material_slots": [
+    "M_Kit_PaintDark",
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintOrange",
+    "M_Kit_PaintWhite",
+    "M_Kit_Steel"
+   ],
+   "sockets": {
+    "Socket_Ladder": [
+     -0.15,
+     0.0,
+     2.4
+    ],
+    "Socket_DeckTop": [
+     0.0,
+     1.25,
+     0.8
+    ],
+    "Socket_DishFeed": [
+     -0.02,
+     2.965,
+     -1.68
+    ],
+    "Socket_LocalFeed": [
+     -1.824,
+     5.329,
+     1.8
+    ],
+    "Socket_CableEntry": [
+     1.0,
+     0.0,
+     -1.0
+    ]
+   },
+   "moving_nodes": {
+    "DishAzimuth": [
+     0.0,
+     2.5,
+     -0.8
+    ],
+    "DishElevation": [
+     0.0,
+     3.0,
+     -0.8
+    ],
+    "LocalAzimuth": [
+     -1.6,
+     5.35,
+     1.5
+    ],
+    "LocalElevation": [
+     -1.672,
+     5.35,
+     1.596
+    ]
+   },
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_MalapertSummit_ControllerHousing",
+   "display": "Controller housing (service door east, controller bay, test point, three status lamps)",
+   "lods": [
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ControllerHousing_LOD0.glb",
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ControllerHousing_LOD1.glb"
+   ],
+   "triangles": [
+    1840,
+    822
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    0.875,
+    1.78,
+    1.55
+   ],
+   "material_slots": [
+    "Lamp_Status_0",
+    "Lamp_Status_1",
+    "Lamp_Status_2",
+    "M_Kit_PaintDark",
+    "M_Kit_PaintGrey",
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintOrange",
+    "M_Kit_PaintWhite",
+    "M_Kit_Steel"
+   ],
+   "sockets": {
+    "Socket_ControllerSlot": [
+     0.15,
+     0.76,
+     0.1
+    ],
+    "Socket_TestPoint": [
+     0.33,
+     1.3,
+     0.42
+    ],
+    "Socket_StatusLamps": [
+     0.37,
+     1.66,
+     -0.0
+    ],
+    "Socket_DoorBrace": [
+     0.42,
+     0.94,
+     -0.01
+    ],
+    "Socket_Operator": [
+     1.0,
+     0.0,
+     -0.0
+    ]
+   },
+   "moving_nodes": {
+    "Controller": [
+     0.15,
+     0.64,
+     0.1
+    ],
+    "DoorHinge": [
+     0.37,
+     0.94,
+     -0.56
+    ]
+   },
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_MalapertSummit_PowerIsolator",
+   "display": "Power isolator (rotary handle, lock-out hasp and tag)",
+   "lods": [
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PowerIsolator_LOD0.glb",
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PowerIsolator_LOD1.glb"
+   ],
+   "triangles": [
+    444,
+    196
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    0.962,
+    1.26,
+    1.085
+   ],
+   "material_slots": [
+    "M_Kit_PaintDark",
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintOrange",
+    "M_Kit_PaintWhite",
+    "M_Kit_Steel"
+   ],
+   "sockets": {
+    "Socket_Handle": [
+     0.15,
+     1.05,
+     -0.0
+    ],
+    "Socket_Operator": [
+     0.6,
+     0.0,
+     -0.0
+    ],
+    "Socket_LockoutTag": [
+     0.2,
+     0.84,
+     -0.08
+    ]
+   },
+   "moving_nodes": {
+    "Handle": [
+     0.15,
+     1.05,
+     -0.0
+    ]
+   },
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_MalapertSummit_ControlPedestal",
+   "display": "L/E tuner and ALO42 checksum pedestal (three live screens, two dials)",
+   "lods": [
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ControlPedestal_LOD0.glb",
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ControlPedestal_LOD1.glb"
+   ],
+   "triangles": [
+    584,
+    254
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    1.857,
+    1.277,
+    1.404
+   ],
+   "material_slots": [
+    "M_Kit_PaintDark",
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintOrange",
+    "M_Kit_PaintWhite",
+    "Screen_Checksum",
+    "Screen_EarthLeg",
+    "Screen_LocalLeg"
+   ],
+   "sockets": {
+    "Socket_Operator": [
+     0.75,
+     0.0,
+     -0.0
+    ],
+    "Socket_Screen_LocalLeg": [
+     0.005,
+     1.099,
+     0.3
+    ],
+    "Socket_Screen_EarthLeg": [
+     0.005,
+     1.099,
+     -0.3
+    ],
+    "Socket_Screen_Checksum": [
+     0.022,
+     1.089,
+     -0.0
+    ]
+   },
+   "moving_nodes": {},
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_MalapertSummit_SolarMast",
+   "display": "Solar mast and battery (vertical wing tracking the circling polar Sun)",
+   "lods": [
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_SolarMast_LOD0.glb",
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_SolarMast_LOD1.glb"
+   ],
+   "triangles": [
+    468,
+    208
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    2.25,
+    4.425,
+    2.07
+   ],
+   "material_slots": [
+    "M_Kit_PaintDark",
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintWhite",
+    "M_Kit_Steel",
+    "SolarCell"
+   ],
+   "sockets": {
+    "Socket_Battery": [
+     0.0,
+     0.9,
+     1.3
+    ],
+    "Socket_CableOut": [
+     0.1,
+     0.0,
+     1.0
+    ]
+   },
+   "moving_nodes": {
+    "Wing": [
+     0.0,
+     2.6,
+     -0.0
+    ]
+   },
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_MalapertSummit_TetherAnchor",
+   "display": "Tether anchor (stake, plate and ring)",
+   "lods": [
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD0.glb",
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb"
+   ],
+   "triangles": [
+    1304,
+    586
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    0.32,
+    0.782,
+    0.32
+   ],
+   "material_slots": [
+    "M_Kit_PaintOrange",
+    "M_Kit_Steel"
+   ],
+   "sockets": {
+    "Socket_Ring": [
+     0.0,
+     0.7,
+     -0.0
+    ]
+   },
+   "moving_nodes": {},
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_MalapertSummit_PerimeterMarker",
+   "display": "Perimeter marker (orange reflective cap)",
+   "lods": [
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD0.glb",
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb"
+   ],
+   "triangles": [
+    24,
+    24
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    0.08,
+    0.57,
+    0.08
+   ],
+   "material_slots": [
+    "M_Kit_PaintWhite",
+    "Reflector"
+   ],
+   "sockets": {},
+   "moving_nodes": {},
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_MalapertSummit_UmbilicalPost",
+   "display": "Umbilical post (rover power and data)",
+   "lods": [
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_UmbilicalPost_LOD0.glb",
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_UmbilicalPost_LOD1.glb"
+   ],
+   "triangles": [
+    304,
+    136
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    0.4,
+    1.09,
+    0.4
+   ],
+   "material_slots": [
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintOrange",
+    "M_Kit_PaintWhite"
+   ],
+   "sockets": {
+    "Socket_Port": [
+     0.16,
+     0.98,
+     -0.0
+    ]
+   },
+   "moving_nodes": {},
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_MalapertSummit_ViewpointRail",
+   "display": "Earth viewpoint rail and standing plate",
+   "lods": [
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ViewpointRail_LOD0.glb",
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_ViewpointRail_LOD1.glb"
+   ],
+   "triangles": [
+    224,
+    99
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    3.05,
+    1.021,
+    1.125
+   ],
+   "material_slots": [
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintOrange"
+   ],
+   "sockets": {
+    "Socket_Stand": [
+     0.0,
+     0.0,
+     0.4
+    ]
+   },
+   "moving_nodes": {},
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_MalapertSummit_CableTray",
+   "display": "Cable tray, 2 m straight (tiles along the runs)",
+   "lods": [
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_CableTray_LOD0.glb",
+    "res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_CableTray_LOD1.glb"
+   ],
+   "triangles": [
+    24,
+    24
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    2.0,
+    0.062,
+    0.16
+   ],
+   "material_slots": [
+    "M_Kit_PaintNavy",
+    "M_Kit_Steel"
+   ],
+   "sockets": {},
+   "moving_nodes": {},
+   "floor_lift_m": 0.0
+  }
+ ]
+}

@@ -141,7 +141,7 @@ def build(state="dark", door=0.0):
     rov.parent = P
     rov.rotation_mode = "XYZ"  # the glTF importer leaves quaternion mode, which ignores rotation_euler
     rov.location = (7.6, -1.0, 0.0)
-    rov.rotation_euler = (0, 0, math.radians(180))  # GLB front is +X; heading west
+    rov.rotation_euler = (0, 0, math.radians(-90))  # the GLB's cabin end is -Y: rotation 180 - heading, heading west (270)
     bpy.context.view_layer.update()
     lo = min((rov.matrix_world @ Vector(cn)).z for cn in rov.bound_box)
     rov.location.z -= lo - grade

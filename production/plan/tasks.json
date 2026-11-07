@@ -3209,7 +3209,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 8 assets: EN_MalapertSummit, EN_RelayRoad, EN_NoorRooftop, CH_Noor, CH_Rao",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-05"
@@ -3228,7 +3228,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "7 Nov (Sadman/claude): M1-36 removed from deps: the 2D sheets need no terrain, and exterior placement uses the M1-34 LOLA tiles, M1-82 placements (exterior_terrain.json, CampaignRoom.terrain_ground) and Atik's TerrainStream provider (05463e0); only the final streaming integration is M1-36.",
-   "evidence": "",
+   "evidence": "Sadman approved 7 Nov 2026 (\"Approve all\"; \"Fix CS-15\" -> M4-05; \"Faint stars there\" -> ART_BIBLE 2 rule 12; \"2D portraits only\"). Built: 16 pieces x 2 LODs in game/assets/environment/EN_MalapertSummit and EN_RelayRoad (malapert_summit.json, relay_road.json, chapter8_assets.gd), VH_Rover_Lit.tscn + rover_lights.json, EN_NoorRooftop(.png, _noon.png), CH_Noor_live.png. verify_gate.py: 252 assets, 0 failing (32 new GLBs pass); test_chapter8_assets.gd PASS (222 checks with --evidence); run_tests.sh 63/63; evidence production/qa/evidence/M3-8A_godot_*.png; review production/review/M3-8A_chapter8_contact.png + visual_review.md; registry rows verified; screen wiring filed as M4-06; 7 LOLA 10 m tiles committed for M1-87.",
    "updated": "2026-11-07",
    "prompt": "Goal: the Chapter 8 (The Lighthouse) registry rows that are still planned become installed, gated assets.\nDo: for each of EN_MalapertSummit, EN_RelayRoad, EN_NoorRooftop, CH_Noor, CH_Rao: read execution/ASSET_<name>.md; make a 2D sheet; batch the sheets into one approval request to the\nuser (do not spend 3D credits before approval); then generate (Tripo/Meshy), clean up in Blender, gate, sync to Godot and update\nproduction/ASSET_REGISTRY.csv. Characters reuse the v8 pipeline (production/tools/build_character_v7.sh) and must pass the side-view\nmirrored-arm check. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; contact sheet in production/review/; registry rows set to verified.\nExterior locations (cold trap, relay road, Malapert summit) are built on the real LOLA terrain from M1-34/M1-36.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); build every object that this chapter's bridges and §4 clues need (the 'What carries over' column names them) as part of this asset set.",
    "reserved_for": "sadman",
@@ -5812,7 +5812,7 @@
     "game/resources/campaign/rooms/"
    ],
    "refs": [],
-   "note": "Filed by Sadman/claude on 2026-11-07.",
+   "note": "Filed by Sadman/claude on 2026-11-07. | 7 Nov (Sadman/claude, M3-8A decision 9, Sadman: \"Approve all\"): M3-8A fetched 7 LDEM_83S_10MPP tiles (about 4 MB) for the road segments it places, into production/terrain/cache/pgda90_10mpp/ where make_terrain.py reads them, and committed them (force-added; the cache folder is ignored): t_0026_0035, t_0027_0035 (R3, segment D), t_0031_0037, t_0031_0038, t_0032_0037 (R2 marker two, segments B and C), t_0036_0037, t_0036_0038 (R1, segment A). Their heights and slopes are in game/assets/environment/EN_RelayRoad/relay_road.json (lola_10m). M3-8A did not cut a patch: the walkable patch stays this task's. The parked night/M1-87 patch is centred on relay_road_mid (99 km) and its 9 fetched tiles were not committed there, so its landing must fetch or commit them (Python 3.14 here needs SSL_CERT_FILE set to certifi's cacert.pem to fetch). Finding for the patch: the straight road-to-pad spurs cross 15-25 deg stretches on the 10 m grid, so spurs must be routed slope-limited. Also: the parked branch names a board task M4-05 that main now uses for the CS-15 fix; renumber it on landing.",
    "evidence": "",
    "updated": "2026-11-07",
    "prompt": "Found by M1-82. LOC-11 (relay route, EX-CH08-S03/S04/S10) has a placement in game/resources/campaign/rooms/exterior_terrain.json (relay_road at the relay_road_mid site, origin_xz_m [-24227.5, -76912.5]) but stays 'pending' with omit_staging_floor false: the relay road exists only as the 80 m corridor grid with a 200 m visual mesh, so props and anchors would float or sink by metres against the visual terrain. Do: cut the 10 m playable patch the M1-34 README plans (production/tools/make_terrain.py window_m from the cached pgda90_10mpp/LDEM_83S data, which covers -87.6 deg; build tiles with build_terrain_tiles.py as for cold_trap, no credits), register it as a hero region whose site is relay_road_mid, move LOC-11's placement onto it, set omit_staging_floor true, run game/tools/test_exterior_terrain.gd -- --write and the windowed M1-82_capture.sh with LOC-11 added to SHOTS. Note for Atik: TerrainStream.lighting() accepts only rows whose site equals the field's site, so the new region's site must be relay_road_mid for the EX-CH08-S03 row to light it. Acceptance: test_exterior_terrain PASS with LOC-11 ready (walk on the provider's collision to every approach), run_tests.sh green, wide and ground screenshots production/qa/evidence/M1-82_LOC11_*.png.",
@@ -6010,6 +6010,48 @@
    "prompt": "M1-23 Forward+/Metal native 1920x1080 AppleM4/Godot4.7.2 all-room sweep retained in production/qa/perf/M1-23_m4_2026-11-07/forward_plus.json/.csv/.log. p95 frame intervals: Commons22.936ms, SafeRoom21.730ms, Garden24.281ms, Services26.765ms (60fps budget16.7ms); first-use garden/service spikes~1.09s, handled separately Atik M1-92. Walk medians:385-496 draw calls,1.05-1.78million primitives, renderer texture monitor2.86-3.11GB. GPU time column returns0 on this Metal backend, so do not infer shader/GPU timings from it; TIME_PROCESS is periodic monitor not independent per-frame CPU samples. Review measured candidate costs in your assets/AssetGeometry/room staging: redundant visible props/material draws, available LOD use, retained/raw texture memory. Atik keeps runtime fixes; Ramim owns2D UI. M1-93 requests original IntelArc integrated-laptop measurement. Pick fixes from measured owner causes, preserve all teammates assets/content and approved look, publish before/after screenshots and exact source/performance comparison; do not delete props blindly, change canon/geometry science, relax budgets or claim Windows improvement from Mac. The raw runtime GLTF pipeline intentionally decodes uncompressed, so changing .import compression alone may not affect live VRAM. This is a measured investigation request, not a claim these candidates are proven top3 causes.",
    "reserved_for": "sadman",
    "effort": 2
+  },
+  {
+   "id": "M4-05",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "CS-15: Earth as the true 3% crescent near the Malapert skyline",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "production/cutscenes/v8/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "Sadman, 7 Nov 2026 (M3-8A decision 4): \"Fix CS-15\". The accepted CS-15 Hello, Aurora (production/cutscenes/v8/CS-15_Hello_Aurora.mp4, spec production/cutscenes/v8/src/CS-15.json) shows Earth from the Malapert summit cabin as a nearly full blue disc high above the ridge. The dated sky says otherwise. JPL Horizons row EX-CH08-S10 in game/assets/environment/terrain/lola/sun_positions.json (site malapert_summit, 2047-04-09 02:00 UTC; the call runs 02:15-03:00): Sun azimuth 18.107 deg, elevation +2.313 deg; Earth azimuth 358.694 deg, elevation -2.320 deg; terrain horizon toward Earth about -4.4 deg seen from 1.7 m on the summit crown (LOLA PGDA Site23 5 m), so Earth's centre sits about 2.1 deg above the skyline (its lower limb about 1.1 deg above it). Earth's angular diameter is 1.90 deg. The Sun and Earth stand 19.95 deg apart, so Earth's phase angle is about 160 deg and only about 3 % of its disc is lit: a thin crescent whose lit limb faces the Sun, i.e. on the right-hand side and slightly up for a view facing north (Sun 19.4 deg to the right and 4.6 deg higher than Earth). The night side is nearly black, with no visible city lights at this size; the thin crescent throws no noticeable Earthshine on the terrain. Frames to change: the start frames of shot CS-15-A (rover cabin wide, 0 to 5.04 s; Earth upper middle, behind the windscreen, with the dish and mast at left) and CS-15-D (the Seedance extend of A, 18.75 s to the end; Earth upper middle-left above Kai and Ferreira). CS-15-B (Dhaka rooftop) and CS-15-C (Aurora table) show no Moon or Earth and stay. Do: repaint Earth in the CS-15-A start frame as the crescent at the true size for that frame's field of view, low over the skyline beyond the dish (the dish must face it), re-animate A and its D extension from the corrected frame (prompt: one continuous shot, no cuts; consistent characters, no deformation), recompose with compose_cutscene.py (same timings, captions and the M4-04 audio), rebuild the runtime OGV and presentation_media.json, and log the generations in production/AI_PROMPT_LOG.md. Reference renders of the true sky: production/concept/chapter8_v1/M3-8A_EN_MalapertSummit_sheet.png (panels A and D). Acceptance: in both shots Earth is a thin right-facing crescent about one Earth diameter or less above the skyline, at most about 1.9 deg wide in the frame's field of view; verify_staging.py passes; nothing else in CS-15 changes.",
+   "reserved_for": "sadman",
+   "effort": 2
+  },
+  {
+   "id": "M4-06",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Commons Earth screen: Noor's live call on the Dhaka rooftop backdrop (S10 morning, S12 noon)",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-8A"
+   ],
+   "paths": [
+    "game/scripts/world/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "M3-8A installed the 2D assets for Noor's live calls (Sadman, 7 Nov 2026: \"Approve all\" and \"2D portraits only\"): game/assets/ui/screens/EN_NoorRooftop.png (EX-CH08-S10, 9 Apr 2047 08:15 Dhaka, painted grade, 1536 x 864), game/assets/ui/screens/EN_NoorRooftop_noon.png (EX-CH08-S12, 10 Apr 12:00) and the cel-shaded cut-out game/assets/ui/portraits/CH_Noor_live.png (transparent, 587 x 1376). CampaignCrew._build_screen (game/scripts/world/campaign_crew.gd) today always draws EN_EarthDesk behind the caller and looks the portrait up as CH_<Speaker>_screen.png, so Noor would get Rao's room and no portrait. Do: when the Earth-link speaker is Noor, draw EN_NoorRooftop (S10) or EN_NoorRooftop_noon (S12) as the backdrop and CH_Noor_live.png over it, fitted to the backdrop's height like Ferreira's cut-out over EN_EarthDesk, with the caption 'Noor' and the EARTH LINK - LIVE tag (doc 24 7.5 beat 8). Keep Rao and Ferreira on EN_EarthDesk. If the backdrop table should live in game/resources/ui/ui_kit.json (earth_screen, Ramim's file), file that one-line data task for ramim instead of editing it. Acceptance: game/tools/test_earth_screen.gd extended for Noor (backdrop path per scene, portrait loaded, never past the bezel); a windowed capture production/qa/evidence/<task>_noor_screen.png of the commons screen during EX-CH08-S10; run_tests.sh green.",
+   "reserved_for": "sadman",
+   "effort": 1
   }
  ],
  "requirements": [

@@ -26,6 +26,7 @@ Anime cel-shaded style A is locked (27 Oct 2026; realistic was dropped the same 
 9. No NASA logos (meatball or worm). Mission patch is the Aurora/Last Light patch plus the Bangladesh flag patch (user confirmed 25 Oct 2026).
 10. Later plants are descendants; the original Alo never reappears alive after Chapter 3.
 11. Plants never have eyes, faces or mouths (decided 25 Oct 2026: faces on flowers read as creepy). Every prompt for a plant must say "no eyes, no face".
+12. **Stars (Sadman, 7 Nov 2026, M3-8A: "Faint stars there").** The sky is pure black whenever any sunlit ground, hardware or Earth's lit limb is in the frame: a camera or an eye exposed for sunlit regolith cannot see stars. Faint stars appear only in frames with no sunlit surface at all (a shadowed valley, a crater floor, the dark road of EX-CH08-S03/S04), where dark-adapted eyes and a night-exposed camera do see them. Decide per frame, from what the frame shows: if the dated Sun row (sun_positions.json) leaves the whole visible terrain dark, and nothing lit by the Sun (distant peaks, the far horizon) is in view, draw a faint, sparse star field (no Milky Way glow, no twinkling, no colour); if any sunlit pixel is in view, draw none. Artificial lights (rover lamps, guide lights) do not switch the stars off by themselves, but a frame whose exposure is set for a brightly lit work area keeps them barely visible at most.
 
 ## 3. Palette
 

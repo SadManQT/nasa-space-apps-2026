@@ -63,7 +63,7 @@ def relay_deck(P, at, pal, z0=0.0):
     for s in (-1, 1):
         C.box("yoke_arm", (0.08, 0.16, 0.55), (s * 0.42, 0, 0.27), pal["white"], yoke, bevel=0.01)
     C.box("yoke_base", (0.92, 0.2, 0.08), (0, 0, 0.0), pal["white"], yoke)
-    el_ax = C.empty("el_axis", (0, 0, 0.5), (math.radians(90 - (-2.3)), 0, 0), parent=yoke)  # +Z of el_axis -> aim
+    el_ax = C.empty("el_axis", (0, 0, 0.5), (-math.radians(90 - (-2.3)), 0, 0), parent=yoke)  # Rx(-(90 - el)) turns +Z to (0, cos el, sin el): the boresight
     C.cyl("el_shaft", 0.06, 0.98, (0, 0, 0), pal["steel"], el_ax, rot=(0, math.pi / 2, 0), verts=16)
     C.box("dish_back", (0.5, 0.5, 0.2), (0, 0, -0.05), pal["white"], el_ax, bevel=0.02)
     refl, f = C.dish("earth_dish", 2.0, 0.32, pal["white"], el_ax)
@@ -83,7 +83,7 @@ def relay_deck(P, at, pal, z0=0.0):
     aim2 = aim_vector(216.7, -4.8)
     yaw2 = math.atan2(aim2.x, aim2.y)
     head = C.empty("local_head", (0, 0, 4.1), (0, 0, -yaw2), parent=mast)
-    tilt = C.empty("local_tilt", (0, 0.12, 0), (math.radians(90 + 4.8), 0, 0), parent=head)
+    tilt = C.empty("local_tilt", (0, 0.12, 0), (-math.radians(90 + 4.8), 0, 0), parent=head)  # boresight 4.8 deg below level toward R3
     C.box("bracket", (0.08, 0.2, 0.08), (0, -0.06, 0), pal["steel"], head)
     loc_dish, f2 = C.dish("local_dish", 0.7, 0.12, pal["white"], tilt)
     C.cyl("local_feed", 0.03, 0.1, (0, 0, f2), pal["navy"], tilt, verts=12)
@@ -206,8 +206,7 @@ def solar_mast(P, at, pal, face_az=18.1):
     C.box("arm2", (0.1, 0.25, 0.1), (0, 0.0, -1.4), pal["steel"], wing)
     C.box("battery", (0.8, 0.5, 0.9), (0.0, -1.3, 0.45), pal["white"], M, bevel=0.02)
     C.box("battery_band", (0.82, 0.52, 0.08), (0.0, -1.3, 0.8), pal["navy"], M)
-    for k in range(5):
-        C.box("bat_fin", (0.8, 0.02, 0.5), (0, -1.56 - 0.0 * k, 0.15 + 0.0 * k), pal["white"], M) if k == 0 else None
+    C.box("bat_fin", (0.8, 0.02, 0.5), (0, -1.56, 0.4), pal["white"], M)  # radiator fin on the shaded face
     C.tube("bat_cable", [(0.0, -0.2, 2.0), (0.05, -0.12, 0.1), (0.1, -1.0, 0.05)], 0.018, pal["rubber"], M)
     return M
 

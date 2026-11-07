@@ -1,0 +1,591 @@
+{
+ "task": "M3-8A",
+ "location": "LOC-11 Aurora to Malapert relay road",
+ "approved": "Sadman, 7 Nov 2026: \"Approve all\" (sheet production/concept/chapter8_v1/M3-8A_EN_RelayRoad_sheet.png)",
+ "conventions": {
+  "units": "metres",
+  "up": "+Y",
+  "map_frame": "LOLA south polar stereographic metres (x toward 90 E, y toward 0 E); game distances 120 km each way (P-15), computed road 198 km on the 80 m grid",
+  "lod_distance_m": 25.0,
+  "textures": "the kit's PBR sets by uri in ../kit/textures"
+ },
+ "road": {
+  "source": "production/terrain/routes.json relay_road (make_terrain.py, 80 m grid, slope limit 12 deg, 15 deg hard limit)",
+  "length_m": 198255.4,
+  "game_km": 120.0
+ },
+ "repeaters": [
+  {
+   "id": "R1",
+   "x_m": -20920.0,
+   "y_m": 30120.0,
+   "height_m": -359.1,
+   "road_m": 55420.8,
+   "game_km": 33.5,
+   "offset_from_road_m": 1553.0,
+   "lola_10m": {
+    "height_m": -358.6,
+    "slope_max_deg_60m": 9.9,
+    "slope_median_deg_60m": 5.2,
+    "spur": {
+     "length_m": 1553,
+     "climb_m": 116.0,
+     "steepest_20m_deg": 23.5
+    }
+   },
+   "piece": "EN_RelayRoad_Repeater",
+   "mast_m": 3.0
+  },
+  {
+   "id": "R2",
+   "x_m": -23320.0,
+   "y_m": 55560.0,
+   "height_m": -386.9,
+   "road_m": 81994.1,
+   "game_km": 49.6,
+   "offset_from_road_m": 2464.0,
+   "lola_10m": {
+    "height_m": -387.0,
+    "slope_max_deg_60m": 5.6,
+    "slope_median_deg_60m": 1.7,
+    "spur": {
+     "length_m": 2464,
+     "climb_m": 228.8,
+     "steepest_20m_deg": 24.8
+    }
+   },
+   "piece": "EN_RelayRoad_Repeater",
+   "mast_m": 3.0
+  },
+  {
+   "id": "R3",
+   "x_m": -35640.0,
+   "y_m": 77480.0,
+   "height_m": 1275.2,
+   "road_m": 112842.1,
+   "game_km": 68.3,
+   "offset_from_road_m": 2471.0,
+   "lola_10m": {
+    "height_m": 1275.9,
+    "slope_max_deg_60m": 15.5,
+    "slope_median_deg_60m": 8.2,
+    "spur": {
+     "length_m": 2471,
+     "climb_m": 427.0,
+     "steepest_20m_deg": 15.3
+    }
+   },
+   "piece": "EN_RelayRoad_Repeater",
+   "mast_m": 3.0
+  }
+ ],
+ "hops": [
+  {
+   "frm": "Aurora",
+   "to": "R1",
+   "chain_link": true,
+   "clear": true,
+   "min_clearance_m": 14.6,
+   "at_m": 520.0,
+   "distance_m": 43606.0,
+   "point": [
+    -11684.0,
+    -11964.5,
+    1918.5
+   ]
+  },
+  {
+   "frm": "Aurora",
+   "to": "R2",
+   "chain_link": false,
+   "clear": true,
+   "min_clearance_m": 18.6,
+   "at_m": 520.0,
+   "distance_m": 69039.0,
+   "point": [
+    -11661.0,
+    -11959.8,
+    1920.7
+   ]
+  },
+  {
+   "frm": "Aurora",
+   "to": "R3",
+   "chain_link": false,
+   "clear": true,
+   "min_clearance_m": 33.2,
+   "at_m": 520.0,
+   "distance_m": 93117.0,
+   "point": [
+    -11707.0,
+    -11970.0,
+    1916.4
+   ]
+  },
+  {
+   "frm": "Aurora",
+   "to": "Summit",
+   "chain_link": false,
+   "clear": true,
+   "min_clearance_m": 27.9,
+   "at_m": 520.0,
+   "distance_m": 134961.0,
+   "point": [
+    -11547.1,
+    -11953.1,
+    1931.0
+   ]
+  },
+  {
+   "frm": "R1",
+   "to": "R2",
+   "chain_link": true,
+   "clear": true,
+   "min_clearance_m": 12.1,
+   "at_m": 25032.0,
+   "distance_m": 25553.0,
+   "point": [
+    -23271.1,
+    55041.6,
+    -399.2
+   ]
+  },
+  {
+   "frm": "R1",
+   "to": "R3",
+   "chain_link": false,
+   "clear": true,
+   "min_clearance_m": 48.4,
+   "at_m": 49074.0,
+   "distance_m": 49595.0,
+   "point": [
+    -35485.6,
+    76983.1,
+    1205.3
+   ]
+  },
+  {
+   "frm": "R1",
+   "to": "Summit",
+   "chain_link": false,
+   "clear": true,
+   "min_clearance_m": 23.8,
+   "at_m": 93054.0,
+   "distance_m": 93574.0,
+   "point": [
+    -5076.1,
+    121815.0,
+    4927.6
+   ]
+  },
+  {
+   "frm": "R2",
+   "to": "R3",
+   "chain_link": true,
+   "clear": true,
+   "min_clearance_m": 37.0,
+   "at_m": 24624.0,
+   "distance_m": 25145.0,
+   "point": [
+    -35385.0,
+    77026.2,
+    1203.2
+   ]
+  },
+  {
+   "frm": "R2",
+   "to": "Summit",
+   "chain_link": false,
+   "clear": true,
+   "min_clearance_m": 15.2,
+   "at_m": 68718.0,
+   "distance_m": 69239.0,
+   "point": [
+    -5125.3,
+    121825.8,
+    4929.1
+   ]
+  },
+  {
+   "frm": "R3",
+   "to": "Summit",
+   "chain_link": true,
+   "clear": true,
+   "min_clearance_m": 12.1,
+   "at_m": 53802.0,
+   "distance_m": 54322.0,
+   "point": [
+    -5280.9,
+    121898.2,
+    4939.2
+   ]
+  }
+ ],
+ "segments": [
+  {
+   "id": "A",
+   "name": "Marker one",
+   "scene": "EX-CH08-S03",
+   "road_m": 55420.8,
+   "length_m": 140,
+   "what": "match map, marker and bearing; R1 adjacent-link test; local check-in to Aurora",
+   "x": -20040.0,
+   "y": 28840.0,
+   "h": -475.1,
+   "game_km": 33.5,
+   "lola_10m": {
+    "height_m": -474.6,
+    "slope_max_deg_60m": 10.6,
+    "slope_median_deg_60m": 6.0
+   }
+  },
+  {
+   "id": "B",
+   "name": "The dark marker",
+   "scene": "EX-CH08-S03",
+   "road_m": 80494.1,
+   "length_m": 160,
+   "what": "marker two dark; the apparent bypass over the unsupported slope; turnback zone; brake at the pad",
+   "x": -23640.0,
+   "y": 51880.0,
+   "h": -800.5,
+   "game_km": 48.7,
+   "lola_10m": {
+    "height_m": -801.1,
+    "slope_max_deg_60m": 10.9,
+    "slope_median_deg_60m": 6.8
+   }
+  },
+  {
+   "id": "C",
+   "name": "Marker-two service pad",
+   "scene": "EX-CH08-S04",
+   "road_m": 81994.1,
+   "length_m": 120,
+   "what": "EVA: isolate, swap the battery, close the bay, test both neighbours",
+   "x": -23880.0,
+   "y": 53160.0,
+   "h": -616.5,
+   "game_km": 49.6,
+   "lola_10m": {
+    "height_m": -615.8,
+    "slope_max_deg_60m": 16.0,
+    "slope_median_deg_60m": 8.8
+   }
+  },
+  {
+   "id": "D",
+   "name": "Marker three",
+   "scene": "EX-CH08-S04",
+   "road_m": 112842.1,
+   "length_m": 140,
+   "what": "R3 adjacent links; the 100 km approach begins",
+   "x": -34440.0,
+   "y": 75320.0,
+   "h": 850.4,
+   "game_km": 68.3,
+   "lola_10m": {
+    "height_m": 848.9,
+    "slope_max_deg_60m": 15.2,
+    "slope_median_deg_60m": 11.8
+   }
+  },
+  {
+   "id": "E",
+   "name": "Summit approach",
+   "scene": "EX-CH08-S06",
+   "road_m": 197355.4,
+   "length_m": 140,
+   "what": "the last climb (up to 15 deg on the 80 m grid) onto the LOC-12 pad",
+   "x": -5960.0,
+   "y": 122200.0,
+   "h": 4929.8,
+   "game_km": 119.5,
+   "lola_10m": {
+    "source": "malapert_summit 5 m tile (Site23)"
+   }
+  }
+ ],
+ "laybys": [
+  {
+   "id": "L1",
+   "road_m": 35686,
+   "x": -19960.0,
+   "y": 9640.0,
+   "h": -604.3,
+   "game_km": 21.6
+  },
+  {
+   "id": "L2",
+   "road_m": 142744,
+   "x": -31000.0,
+   "y": 101240.0,
+   "h": 1127.6,
+   "game_km": 86.4
+  }
+ ],
+ "service_pad": {
+  "at": "R2 (marker two)",
+  "size_m": [
+   20,
+   15
+  ],
+  "pieces": [
+   "EN_RelayRoad_Repeater",
+   "EN_MalapertSummit_TetherAnchor",
+   "EN_MalapertSummit_PerimeterMarker x8"
+  ],
+  "guide_lights": {
+   "piece": "EN_RelayRoad_GuideLight",
+   "spacing_m": 18,
+   "offset_m": 3.4,
+   "alternate_sides": true
+  },
+  "bypass": {
+   "pieces": [
+    "EN_RelayRoad_TurnbackBarrier",
+    "EN_RelayRoad_SlopeSign"
+   ],
+   "rule": "closes the unsupported cliff bypass (S03); the shortcut's slope is a hard boundary"
+  }
+ },
+ "spurs_note": "The straight lines from the road to the pads cross 15-25 deg stretches on the 10 m grid (lola_10m.spur.steepest_20m_deg), so each playable spur must follow a slope-limited path (<= 12 deg, 15 deg hard), routed on the 10 m tiles when the walkable patches are cut (M1-87 / M3-8R).",
+ "lighting": "EX-CH08-S03 and S04 are dark (sun_positions.json relay_road_mid rows): rover lights (VH_Rover_Lit.tscn eva_stop state), guide lights and suit lamps only; faint stars only in frames with no sunlit ground (ART_BIBLE 2, 7 Nov 2026)",
+ "ten_metre_tiles": "production/terrain/cache/pgda90_10mpp/t_0026_0035, t_0027_0035, t_0031_0037, t_0031_0038, t_0032_0037, t_0036_0037, t_0036_0038 (LDEM_83S_10MPP_ADJ, fetched 7 Nov 2026 for M3-8A; decision 9)",
+ "pieces": [
+  {
+   "id": "EN_RelayRoad_Repeater",
+   "display": "Repeater R1-R3 (3 m mast, ring beacon, two panel antennas, two link lamps, battery bay)",
+   "lods": [
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD0.glb",
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb"
+   ],
+   "triangles": [
+    2564,
+    1351
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    1.81,
+    3.372,
+    1.535
+   ],
+   "material_slots": [
+    "Lamp_Beacon",
+    "Lamp_Link_0",
+    "Lamp_Link_1",
+    "M_Kit_PaintDark",
+    "M_Kit_PaintGrey",
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintOrange",
+    "M_Kit_PaintWhite",
+    "M_Kit_Steel"
+   ],
+   "sockets": {
+    "Socket_BatteryBay": [
+     0.0,
+     0.521,
+     -0.0
+    ],
+    "Socket_Beacon": [
+     0.0,
+     2.772,
+     -0.0
+    ],
+    "Socket_LinkBack": [
+     -0.0,
+     2.222,
+     0.32
+    ],
+    "Socket_LinkForward": [
+     0.0,
+     2.222,
+     -0.32
+    ],
+    "Socket_Operator": [
+     0.0,
+     0.021,
+     0.85
+    ]
+   },
+   "moving_nodes": {
+    "BayLid": [
+     0.0,
+     0.516,
+     0.18
+    ],
+    "PanelBack": [
+     0.0,
+     2.222,
+     -0.0
+    ],
+    "PanelForward": [
+     0.0,
+     2.222,
+     -0.0
+    ]
+   },
+   "floor_lift_m": 0.0215
+  },
+  {
+   "id": "EN_RelayRoad_BatteryModule",
+   "display": "Repeater battery module (removable, orange handle)",
+   "lods": [
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_BatteryModule_LOD0.glb",
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_BatteryModule_LOD1.glb"
+   ],
+   "triangles": [
+    228,
+    102
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    0.42,
+    0.4,
+    0.28
+   ],
+   "material_slots": [
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintOrange",
+    "M_Kit_PaintWhite"
+   ],
+   "sockets": {
+    "Socket_Grip": [
+     0.0,
+     0.4,
+     -0.0
+    ]
+   },
+   "moving_nodes": {},
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_RelayRoad_GuideLight",
+   "display": "Guide light (amber, every 18 m on spurs and the road edge)",
+   "lods": [
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD0.glb",
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb"
+   ],
+   "triangles": [
+    164,
+    164
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    0.11,
+    0.7,
+    0.11
+   ],
+   "material_slots": [
+    "Lamp_Guide",
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintWhite"
+   ],
+   "sockets": {
+    "Socket_Light": [
+     0.0,
+     0.66,
+     -0.0
+    ]
+   },
+   "moving_nodes": {},
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_RelayRoad_SlopeSign",
+   "display": "Slope warning sign (pictogram only)",
+   "lods": [
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD0.glb",
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb"
+   ],
+   "triangles": [
+    156,
+    70
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    0.933,
+    1.817,
+    0.11
+   ],
+   "material_slots": [
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintWhite",
+    "M_Kit_Steel",
+    "Reflector"
+   ],
+   "sockets": {},
+   "moving_nodes": {},
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_RelayRoad_TurnbackBarrier",
+   "display": "Turnback barrier (closes the unsupported bypass)",
+   "lods": [
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD0.glb",
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb"
+   ],
+   "triangles": [
+    696,
+    312
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    4.15,
+    1.04,
+    0.15
+   ],
+   "material_slots": [
+    "M_Kit_PaintOrange",
+    "M_Kit_PaintWhite",
+    "Reflector"
+   ],
+   "sockets": {},
+   "moving_nodes": {},
+   "floor_lift_m": 0.0
+  },
+  {
+   "id": "EN_RelayRoad_SupplyCache",
+   "display": "Layby supply cache (rack with two latched crates)",
+   "lods": [
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_SupplyCache_LOD0.glb",
+    "res://assets/environment/EN_RelayRoad/EN_RelayRoad_SupplyCache_LOD1.glb"
+   ],
+   "triangles": [
+    324,
+    136
+   ],
+   "collision": true,
+   "lod_distance_m": 25.0,
+   "size_m": [
+    1.6,
+    0.795,
+    0.7
+   ],
+   "material_slots": [
+    "M_Kit_PaintNavy",
+    "M_Kit_PaintOrange",
+    "M_Kit_PaintWhite"
+   ],
+   "sockets": {
+    "Socket_Crate0": [
+     -0.38,
+     0.8,
+     -0.0
+    ],
+    "Socket_Crate1": [
+     0.38,
+     0.8,
+     -0.0
+    ]
+   },
+   "moving_nodes": {},
+   "floor_lift_m": 0.0
+  }
+ ]
+}

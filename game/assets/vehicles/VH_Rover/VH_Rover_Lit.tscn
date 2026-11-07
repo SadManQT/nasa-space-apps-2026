@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/vehicles/VH_Rover/VH_Rover.glb" id="1_rover"]
+
+[node name="VH_Rover_Lit" type="Node3D"]
+
+[node name="VH_Rover" parent="." instance=ExtResource("1_rover")]
+
+[node name="Headlight_L" type="SpotLight3D" parent="."]
+transform = Transform3D(-1.00000, 0.00000, -0.00000, 0.00000, 0.99288, 0.11910, 0.00000, 0.11910, -0.99288, 0.90000, 1.15000, 3.05000)
+light_color = Color(0.920, 0.950, 1.000, 1)
+light_energy = 6.0
+shadow_enabled = true
+spot_range = 45.0
+spot_angle = 27.5
+spot_angle_attenuation = 0.6
+
+[node name="Headlight_R" type="SpotLight3D" parent="."]
+transform = Transform3D(-1.00000, 0.00000, -0.00000, 0.00000, 0.99288, 0.11910, 0.00000, 0.11910, -0.99288, -0.90000, 1.15000, 3.05000)
+light_color = Color(0.920, 0.950, 1.000, 1)
+light_energy = 6.0
+shadow_enabled = true
+spot_range = 45.0
+spot_angle = 27.5
+spot_angle_attenuation = 0.6
+
+[node name="RoofFlood_L" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.96624, 0.18851, -0.17560, 0.00000, 0.68162, 0.73171, 0.25763, 0.70701, -0.65861, 1.60000, 3.70000, 2.00000)
+light_color = Color(0.950, 0.970, 1.000, 1)
+light_energy = 4.0
+shadow_enabled = true
+spot_range = 24.0
+spot_angle = 47.5
+spot_angle_attenuation = 0.6
+visible = false
+
+[node name="RoofFlood_R" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.96624, -0.18851, 0.17560, 0.00000, 0.68162, 0.73171, -0.25763, 0.70701, -0.65861, -1.60000, 3.70000, 2.00000)
+light_color = Color(0.950, 0.970, 1.000, 1)
+light_energy = 4.0
+shadow_enabled = true
+spot_range = 24.0
+spot_angle = 47.5
+spot_angle_attenuation = 0.6
+visible = false
+
+[node name="CabinGlow" type="OmniLight3D" parent="."]
+transform = Transform3D(1.00000, 0.00000, 0.00000, 0.00000, 1.00000, 0.00000, 0.00000, 0.00000, 1.00000, 0.00000, 1.90000, 1.40000)
+light_color = Color(1.000, 0.800, 0.550, 1)
+light_energy = 0.6
+shadow_enabled = true
+omni_range = 3.0

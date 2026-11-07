@@ -1,10 +1,19 @@
-# Chapter 8 (The Lighthouse) assets: 2D sheets for approval (M3-8A)
+# Chapter 8 (The Lighthouse) assets: approved sheets and the built set (M3-8A)
 
-Board task M3-8A, phase 1 (7 Nov 2026, Sadman/claude, Claude Opus 5.5). **Status: waiting for Sadman's approval.
-Nothing is built in 3D yet: no Tripo or Meshy 3D credit has been spent.** Approve, change or decline each numbered
-decision below; phase 2 starts from the answers.
+Board task M3-8A (Sadman/claude, Claude Opus 5.5). **Status: approved by Sadman in chat on 7 Nov 2026 and built (phase 2,
+7 Nov).** His answers, word for word:
 
-**One page to approve from:** [00_Approval_Sheet.png](00_Approval_Sheet.png) stacks the five sheets.
+- **"Approve all"**: the five sheets and decisions 1-11 as proposed, including downloading the free public NASA LOLA 10 m
+  tiles for the relay road (decision 9).
+- **"Fix CS-15"** (decision 4): filed as board task **M4-05**, "CS-15: Earth as the true 3% crescent near the Malapert
+  skyline", with the Horizons numbers and the frames to change.
+- **"Faint stars there"** (decision 7): faint stars only in frames with no sunlit surface; black sky whenever lit ground
+  is in view. Written as rule 12 of production/ART_BIBLE.md §2 and followed in the renders (the dark road hero frame
+  has them; every sunlit frame stays black).
+- **"2D portraits only"** (decision 12): Noor and Rao stay screen portraits; no Tripo character models (0 credits). The
+  approved turnarounds stay here as reference.
+
+**The approval page:** [00_Approval_Sheet.png](00_Approval_Sheet.png) stacks the five sheets. The summit and road sheets were re-rendered after approval with three geometry fixes found while exporting (below); nothing else on them changed.
 
 | Sheet | Asset | How it was made |
 |---|---|---|
@@ -44,7 +53,7 @@ Credits: Tripo web plan 810 before and 810 after the six image generations (the 
   stars drawn over sunlit ground; Earth at its true 1.9 deg and dated phase. The Dhaka haze is Earth's air.
 - Hands: every hand on both character sheets counted at 3x (five fingers each).
 
-## Decisions for Sadman (approve, change or decline each)
+## Decisions (answered 7 Nov 2026: 1-11 "Approve all", 4 "Fix CS-15", 7 "Faint stars there", 12 "2D portraits only")
 
 1. **Summit layout and pad level.** The 30 x 20 m pad is cut level 0.3 m under the summit crown and filled outward. A
    pad at the median ground height puts the crown between the crew and Earth (Earth sits only about 2 deg above the
@@ -105,7 +114,41 @@ Credits: Tripo web plan 810 before and 810 after the six image generations (the 
     This costs about 150 Tripo credits. Alternative: keep both as the installed 2D portraits (no credits), and
     Noor's rooftop shows her portrait as a cut-out.
 
-## After approval (phase 2)
+## Built in phase 2 (7 Nov 2026)
+
+- **EN_MalapertSummit:** ten pieces x two LODs in game/assets/environment/EN_MalapertSummit/ (relay deck with the aimable
+  Earth dish and local antenna, controller housing, power isolator, L/E and checksum pedestal, solar mast, tether anchor,
+  perimeter marker, umbilical post, viewpoint rail, cable tray). Each LOD0 has convex collision boxes (the door's rides on
+  its hinge) and Socket_* nodes; the moving parts are their own nodes (DishAzimuth/DishElevation, LocalAzimuth/
+  LocalElevation, DoorHinge, Controller, Handle, Wing). Live surfaces are named slots (Screen_LocalLeg, Screen_EarthLeg,
+  Screen_Checksum, Lamp_Status_0..2). Kit PBR textures are referenced by uri. `malapert_summit.json` holds the layout, the
+  pad level, the dated sky, the aims, the states and the crew anchors; `chapter8_assets.gd` instances LOD0 and LOD1 and
+  drives the lamps and screens.
+- **EN_RelayRoad:** six pieces x two LODs in game/assets/environment/EN_RelayRoad/ (repeater with lid, panel antennas,
+  beacon and link lamps; battery module; guide light; slope sign; turnback barrier; supply cache). `relay_road.json` holds
+  the road, the three pads, the hops, the five segments, the two laybys, the service pad and the 10 m LOLA heights and
+  slopes of segments A-D and the pads (seven LDEM_83S tiles fetched for decision 9 and committed in
+  production/terrain/cache/pgda90_10mpp/; the walkable patch itself stays M1-87's, noted on that task).
+- **VH_Rover lights (decision 7):** game/assets/vehicles/VH_Rover/rover_lights.json and VH_Rover_Lit.tscn: two headlights,
+  two roof work floods (off until an EVA stop) and the cabin glow at the cabin end (+Z). The GLB is unchanged.
+- **EN_NoorRooftop:** game/assets/ui/screens/EN_NoorRooftop.png (S10, 08:15) and EN_NoorRooftop_noon.png (S12, 12:00), with
+  the painted grade. **CH_Noor:** game/assets/ui/portraits/CH_Noor_live.png, the cel-shaded cut-out of the approved
+  three-quarter take, beside the two installed portraits. **CH_Rao:** the installed screen portrait. Drawing Noor on the
+  commons screen is board task **M4-06** (game/scripts/world/).
+- **Checks:** verify_gate.py (32 GLBs, all pass), game/tools/test_chapter8_assets.gd (catalogue, LODs, collision,
+  sockets, slots, the dish and antenna aims within 0.3 deg, rover lights, screens, rays on the deck and the door), run_tests.sh,
+  Godot captures production/qa/evidence/M3-8A_godot_*.png, review sheet production/review/M3-8A_chapter8_contact.png,
+  verdicts in production/review/visual_review.md, registry rows verified.
+
+**Fixed while exporting (the approved design is unchanged; the drawings now match their captions):**
+1. The Earth dish and the local antenna pointed 180 deg the wrong way in the first summit renders (an elevation sign
+   error). They now aim at Earth (358.7 deg, -2.3 deg) and at R3 (216.7 deg, -4.8 deg), and a test holds them there.
+2. VH_Rover's cabin end is its -Y axis in Blender, not +X. The summit rover now really heads west with its window on
+   the housing, and the road rover faces the repeater.
+3. The pedestal console faced away from its operator; it now faces east. The slope-sign pictogram is a vehicle on a
+   slope (its earlier dashes-over-a-triangle could read as a face).
+
+## The phase 2 plan as proposed (kept for the record)
 
 - **EN_MalapertSummit:** export the summit pieces (relay deck with the aimable dish and local antenna, controller
   housing with door, controller bay and three lamp states, isolator, pedestal with the L, E and checksum screen slots,
@@ -134,7 +177,9 @@ Credits: Tripo web plan 810 before and 810 after the six image generations (the 
 ## Files here
 
 - `ch08_common.py`, `summit_kit.py`, `road_kit.py`: the Blender helpers and the procedural pieces.
-- `build_summit.py`, `build_road.py`, `build_rooftop.py`, `build_pieces.py`: the Cycles renders. Run each through
+- `build_summit.py`, `build_road.py`, `build_rooftop.py`, `build_pieces.py`: the Cycles renders of the sheets.
+- `production/tools/build_chapter8_assets.py`: the phase 2 export (GLBs, catalogues, manifest rows, rover lights).
+- `publish_screens.py`: the rooftop backdrops and Noor's cut-out. Run each through
   `python3 production/tools/heavy.py blender -b --factory-startup --python <script>`. The renders go to the
   git-ignored `production/models/chapter8/render/`.
 - `road_data.py` (system Python, no network): the 40 m window round R2 and the road, pad, segment and layby table.

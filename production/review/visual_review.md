@@ -312,3 +312,42 @@ Inspected: Blender orthographic sheets (front, left, back, right, top) and horiz
 | CH_Ferreira_EVA | ✅ PASS | gold tabs, faded and worn suit, gear-wheel patch on the left chest (decision 3), dark brown pixie cut with grey; patches as locked |
 
 Every suit carries its wearer's 44 clips (copied from the installed coverall character; the walk, run and idle poses match), stands 1.62–1.82 m on the wearer's joints, and wears PR_Helmet_Roles at the measured scale (Kai 1.17, Amara 1.28, Mei 1.35, Rafi 1.29, Ferreira 1.16), seated on the neck ring and carried by the Head bone, so the face stays inside the shell in every clip (a chest-bone mount let the clips' head pitch push the faces out: fixed before capture). No independent second opinion this round (Codex not run); Sadman's eye on the captures is the remaining check.
+
+## M3-8A Chapter 8 pieces — 7 November 2026, Sadman/claude (Claude Opus 5.5), approved by Sadman ("Approve all")
+
+Reviewed by eye against the approved sheets in production/concept/chapter8_v1/ from the Cycles stills of the exported GLBs and the Godot captures ([M3-8A_chapter8_contact.png](M3-8A_chapter8_contact.png); production/qa/evidence/M3-8A_godot_*.png). No Codex second opinion was requested for this set (the brief asked for my own review). Canon checks on every piece: no words or numbers baked into any surface (all readouts are named slots), no logos or agency marks, hard-surface hardware only (no plants), lunar exterior pieces with no glow or haze baked in. Science checks in game/tools/test_chapter8_assets.gd: the dish boresight is within 0.3 deg of azimuth 358.7 / elevation -2.3 and the local antenna within 0.3 deg of R3 (216.7 / -4.8).
+
+| Asset | Verdict | Notes |
+|---|---|---|
+| EN_MalapertSummit_RelayDeck_LOD0 | ✅ PASS | matches the approved sheet: navy truss deck, orange rails, ladder gap on the south side, white RF box; the 2.0 m dish now faces local north and dips 2.3 deg (the sheet's first renders had it facing south, a sign error fixed before export and re-rendered); local antenna aims down-road at R3; four moving nodes |
+| EN_MalapertSummit_RelayDeck_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_MalapertSummit_ControllerHousing_LOD0 | ✅ PASS | white housing on a navy plinth, door on its north hinge with orange latches and brace handle, controller on rails, orange test-point plate, three dark status lamps; reads as serviceable hardware; no lettering |
+| EN_MalapertSummit_ControllerHousing_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_MalapertSummit_PowerIsolator_LOD0 | ✅ PASS | post-mounted white box, orange rotary handle (live position in the file; isolated = 90 deg), lock-out tag socket; cables lie on the ground |
+| EN_MalapertSummit_PowerIsolator_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_MalapertSummit_ControlPedestal_LOD0 | ✅ PASS | console faces the operator (+X) after the sheet fix; three screen slots and two orange dials read clearly; screens are blank until the live UI fills them |
+| EN_MalapertSummit_ControlPedestal_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_MalapertSummit_SolarMast_LOD0 | ✅ PASS | vertical cell wing with a navy frame on a steel pole, battery cabinet at the foot; stands on its base after the stray fin was removed |
+| EN_MalapertSummit_SolarMast_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_MalapertSummit_TetherAnchor_LOD0 | ✅ PASS | orange stake, steel plate and ring; reads at a glance |
+| EN_MalapertSummit_TetherAnchor_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_MalapertSummit_PerimeterMarker_LOD0 | ✅ PASS | white post with an orange reflective cap |
+| EN_MalapertSummit_PerimeterMarker_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_MalapertSummit_UmbilicalPost_LOD0 | ✅ PASS | white post, navy head, orange socket at the rover's side |
+| EN_MalapertSummit_UmbilicalPost_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_MalapertSummit_ViewpointRail_LOD0 | ✅ PASS | low orange rail and navy standing plate |
+| EN_MalapertSummit_ViewpointRail_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_MalapertSummit_CableTray_LOD0 | ✅ PASS | flat navy tray with a steel lid; tiles in 2 m steps |
+| EN_MalapertSummit_CableTray_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_RelayRoad_Repeater_LOD0 | ✅ PASS | PR_SurveyBeacon language at 3 m: ballasted tripod, white head with navy trim, amber ring beacon, two panel antennas, two link lamps, battery bay with a hinged lid; dark and lit states driven by slots |
+| EN_RelayRoad_Repeater_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_RelayRoad_BatteryModule_LOD0 | ✅ PASS | navy cell block, white cap, orange handle; sits in the bay socket |
+| EN_RelayRoad_BatteryModule_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_RelayRoad_GuideLight_LOD0 | ✅ PASS | short white post with the amber lamp slot |
+| EN_RelayRoad_GuideLight_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_RelayRoad_SlopeSign_LOD0 | ✅ PASS | navy diamond with a white rim and an orange vehicle-on-slope pictogram; no words; the first pictogram (dashes over a triangle) was redrawn because it could read as a face |
+| EN_RelayRoad_SlopeSign_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_RelayRoad_TurnbackBarrier_LOD0 | ✅ PASS | orange and white banded bollards and bar; reflective caps |
+| EN_RelayRoad_TurnbackBarrier_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
+| EN_RelayRoad_SupplyCache_LOD0 | ✅ PASS | navy rack with two white crates and orange latches |
+| EN_RelayRoad_SupplyCache_LOD1 | ✅ PASS | same silhouette, colours and slots at about 45 % of the triangles; no collision |
