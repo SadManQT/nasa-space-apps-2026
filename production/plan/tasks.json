@@ -5306,7 +5306,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Expose safe message metadata updates without resetting puzzle checkpoints",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "atik/codex",
    "deps": [],
    "paths": [
@@ -5315,10 +5315,11 @@
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-06.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-07",
    "prompt": "M1-56 message persistence needs a safe authoritative metadata update API. Existing Director.snapshot -> Chapter1Campaign._save_snapshot -> SaveService already retains presentation_resume, and fresh New starts it empty. However Director.restore_snapshot also replaces _checkpoint. PuzzleHost.retry calls Director.restore_checkpoint, so using load/restore merely to mark a message read would overwrite the pre-shift rollback. No public bounded presentation-message setter exists.\nExpose a small public Director method for updating only presentation_resume.messages, with validated message metadata (delivered/read IDs and any explicitly agreed primitive state). Publish its exact method/payload contract for Ramim's comms/KnowledgeService integration. Preserve the gameplay checkpoint, current gameplay revision semantics, receipts, phase, resources, dialogue and flags; duplicate updates must be harmless. Never accept arbitrary state/root changes through this API. Do not add a second save store; existing runtime.save_campaign can persist the normal snapshot. Keep message pack/inbox implementation in Ramim folders, and Chapter1 prose in Sadman M1-57.\nAcceptance: focused tests with a real PuzzleHost/Director prove preview/read/update/retry returns to the same pre-message gameplay checkpoint; only message metadata changes; duplicate, malformed and missing state are safe; save/restore round-trips existing presentation_resume.messages, fresh New resets it, and old saves lacking it load. Run the full repository runner and disclose the existing M1-67/M1-68 failures if still present; do not weaken those checks. This prerequisite unblocks M1-56; tell Ramim to release/resume it when ready.",
    "reserved_for": "atik",
-   "effort": 1
+   "effort": 1,
+   "blocker": "Requested Director method is in Sadman-owned core/, outside campaign-only task paths. Owner request M1-89 publishes bounded metadata/checkpoint contract; then Atik wires normal save wrapper and verifies real PuzzleHost retry. See production/qa/perf/M1-69.md."
   },
   {
    "id": "M1-70",
@@ -5881,6 +5882,26 @@
    "prompt": "Found by M3-2R (7 Nov night shift; filed as M3-102 on the parked branch, but main's M3-102 is the anti-aliasing task, so it is refiled here): EN_Airlock_GlovePort reuses the kit window frame and closes its back face with one 1.0 x 2.6 m plate (two triangles at local z 0.15, material M_Kit_PaintGrey, drawn double-sided), so the pressure window shows grey paint instead of the sealed plant chamber the asset notes promise. LOC-05 drops that plate from its placed copy at runtime (HabitatRoomBuilder.open_window_back in game/scripts/world/habitat_room_builder.gd, called from build_airlock for the \"glove_ports\" role), and game/tools/test_chapter2_rooms.gd checks that a 1.6 m eye at the glove-port station sees Alo's flowers through glass only. Fix it at the source: in production/tools/build_chapter2_assets.py leave the back of the GlovePort module open (or cut the window opening through the plate), rebuild both LODs (byte-check that the other pieces stay identical), re-run the M3-2A gate (production/tools/verify_gate.py) and its capture, then remove open_window_back and its call so the room uses the GLB as built. This changes an approved asset, so show Sadman the before/after M3-2A_godot_* and M3-2R_S04_alo_glove_ports screenshots. Optional while there: the two bright ovals in the pressure glass are ceiling lights mirrored at roughness 0.05; a slightly rougher glass would soften them. Acceptance: game/tools/run_tests.sh all suites pass; test_chapter2_rooms.gd still passes its Alo-through-glass check without the runtime opening.",
    "reserved_for": "sadman",
    "effort": 1
+  },
+  {
+   "id": "M1-89",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "any",
+   "title": "Bounded Director message metadata API for M1-69",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/core/"
+   ],
+   "refs": [],
+   "note": "Filed by atik/codex on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "M1-69 requests a public Director method but its campaign-only paths and MASTER_PLAN §7 reserve core/ for Sadman. Current CampaignDirector.restore_snapshot resets _checkpoint, so a message read must not be implemented via restore or a direct _state write in campaign. Please add update_message_metadata(metadata: Dictionary) -> Dictionary limited to presentation_resume.messages, validated delivered_ids/read_ids arrays of unique nonempty strings (read is a subset of delivered), and any explicitly documented primitive metadata needed by Ramim. Reject extra/root keys and malformed types atomically, duplicates harmless. Preserve gameplay revision, receipts, resources, flags, phase and the existing pre-shift checkpoint. Test real PuzzleHost preview -> update -> commit/retry, malformed/duplicate/no-existing-state cases, normal save/restore and old saves. Publish exact schema plus whether presentation metadata intentionally survives gameplay retry; do not reset gameplay checkpoint. Atik will wire the bounded campaign wrapper/save path in M1-69; Ramim owns inbox/UI M1-56. Do not edit campaign or UI. Required to honor ownership while completing M1-69.",
+   "reserved_for": "sadman",
+   "effort": 2
   }
  ],
  "requirements": [
