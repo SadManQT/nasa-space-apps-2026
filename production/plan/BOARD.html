@@ -86,18 +86,20 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">60 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">26 todo</span></div><div class="bar"><i style="width:67%"></i></div>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">60 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">25 todo</span></div><div class="bar"><i style="width:67%"></i></div>
 <details open><summary>Working now (3)</summary><ul>
 <li><a class="id" href="#M0-11">M0-11</a> Team roster, roles and both registrations <span class="chip ">human</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/human on 2026-11-03</div></li>
 <li><a class="id" href="#M3-3R">M3-3R</a> Chapter 3 rooms and locations <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-07</div></li>
 <li><a class="id" href="#M1-88">M1-88</a> Dated Sun/Earth rows for exterior scenes that have none (CH04-S04, S07, S08; CH08-S04, S10) <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-07</div></li>
 </ul></details>
-<details open><summary>Next up today (5)</summary><ul>
+<details open><summary>Next up today (4)</summary><ul>
 <li><a class="id" href="#M1-86">M1-86</a> Record reviewed M1-64 hint reader and runtime-blocked acceptance in handbook <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-87">M1-87</a> Walkable 10 m relay-road patch so LOC-11 can stand on the LOLA terrain <span class="chip ">claude</span> <span class="chip ">P1</span></li>
-<li><a class="id" href="#M3-2R">M3-2R</a> Chapter 2 rooms and locations <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-5R">M3-5R</a> Chapter 5 rooms and locations <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-94R">M3-94R</a> Record the three approved M3-94 lines and the two M3-97 sound effects with ElevenLabs <span class="chip ">human</span> <span class="chip ">P1</span></li>
+</ul></details>
+<details open><summary>Blocked (1)</summary><ul>
+<li><a class="id" href="#M3-2R">M3-2R</a> Chapter 2 rooms and locations <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Night shift parked the work on branch night/M3-2R: could not land: rebase conflict: ror: could not apply 310b817... feat: Chapter 2 rooms and locations hint: Resolve all conflicts…</div></li>
 </ul></details>
 <details><summary>To do (21)</summary><ul>
 <li><a class="id" href="#M1-24">M1-24</a> Fix the playtest and QA findings, then freeze the demo build <span class="chip ">claude</span> <span class="chip ">P0</span></li>
@@ -2055,7 +2057,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 2 rooms and locations",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [
     "M1-06",
@@ -2071,10 +2073,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-07",
    "prompt": "Goal: every location the Chapter 2 scenes use (production/manifest/scene_index.csv, CH02 rows; LOC ids in\ngame-design/09_WORLD_AND_LEVEL_DESIGN.md) is a real scene built the same way as the Chapter 1 rooms (M1-06), with layout data in\ngame/resources/campaign/rooms/, collision, navigation, lighting and valid RoomContract targets. Chapters 3–8 currently reuse the five\nChapter 1 rooms; give each scene its proper location. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); place this chapter's bridge objects, §4 clue objects and §5.2 story-echo objects in the rooms so each join can play in the world.",
    "reserved_for": "sadman",
-   "effort": 3
+   "effort": 3,
+   "blocker": "Night shift parked the work on branch night/M3-2R: could not land: rebase conflict: ror: could not apply 310b817... feat: Chapter 2 rooms and locations\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Di"
   },
   {
    "id": "M3-2P",
