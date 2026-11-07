@@ -29,9 +29,11 @@ SLOTS = int(os.environ.get("SLOTS", "2"))
 LANES_ONLY = [l for l in os.environ.get("LANES_ONLY", "").split(",") if l]  # e.g. antigravity,gemini,any
 SLOT_PREFIX = os.environ.get("SLOT_PREFIX", "slot")
 SUMMARY = os.environ.get("SUMMARY", "night_summary.md")
+CLAUDE = ["claude2"]  # Opus 5.5 at extra-high effort on Sadman's own account only (7 Nov: "Claude only", then "use this account only";
+# claude3, Codex and Gemini stay defined but unused)
 PREFER = os.environ.get("PREFER", "")  # account tried first in every lane, e.g. buet for a Gemini-first shift
 PREFER = "claude2" if PREFER == "fable" else PREFER  # Opus 5.5 for all Claude work (Sadman, 5 Nov 23:40)
-PREFER = PREFER if PREFER in ("claude2", "claude3") else ""  # Claude only (7 Nov): the supervisor's buet/codex-main preferences are ignored
+PREFER = PREFER if PREFER in CLAUDE else ""  # this account only (7 Nov): the supervisor's buet/codex-main/claude3 preferences are ignored
 STOP = LOGDIR / ("STOP_NIGHT" if SLOT_PREFIX == "slot" else f"STOP_NIGHT_{SLOT_PREFIX}")
 CLAIMS = NIGHT / "claims"  # one directory per task: an atomic lock shared by every running night shift
 DEADLINE = time.time() + float(os.environ.get("HOURS", "12")) * 3600
@@ -48,9 +50,8 @@ ACCOUNTS = {
     "claude3":     {"engine": "claude", "cmd": [GOCODE_RUN, "claude3", "{p}", "claude-opus-5-5"]},
     "buet":        {"engine": "gemini", "cmd": [GOCODE_RUN, "buet", "{p}", "gemini-4-argon-high"]},
 }
-CLAUDE = ["claude2", "claude3"]  # Opus 5.5 at extra-high effort only (Sadman, 7 Nov: "Claude only"; the Codex/Gemini accounts stay defined but unused)
 LANES = {lane: list(CLAUDE) for lane in ("codex", "claude", "antigravity", "gemini", "muse", "any")}  # board lane -> accounts in order
-REVIEWER = {"claude": list(CLAUDE)}  # the other Claude account reviews first (do_task), then the same account in a fresh session
+REVIEWER = {"claude": list(CLAUDE)}  # a fresh review session on the same account (another account first if one is ever added)
 MAX_CLAUDE = 2  # Claude workers at once across every night-shift slot: claude2 shares its weekly limit with Sadman's day sessions
 # Claude (Opus 5.5) leads the photoreal environment, 3D assets and room builds (5 Nov decision; Opus replaced Fable 5 Nov 23:40)
 FABLE_HINTS = re.compile(r"habitat kit|environment|main scene|terrain|exterior|interior|photoreal|LOLA|\b3D\b|Blender|\bassets\b|rooms and locations|M1-03|M1-05|M1-06", re.I)

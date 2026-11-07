@@ -93,11 +93,11 @@ with mock.patch.multiple(ns, sh=lambda args, *a, **k: calls.append(args) or (0, 
 
 # Claude only (Sadman, 7 Nov): every lane and every reviewer is a Claude account, and supervisor preferences cannot bring
 # back Codex or Gemini
-assert all(set(a) <= {"claude2", "claude3"} for a in ns.LANES.values()), ns.LANES
-assert all(set(a) <= {"claude2", "claude3"} for a in ns.REVIEWER.values()), ns.REVIEWER
+assert all(a == ["claude2"] for a in ns.LANES.values()), ns.LANES  # this account only (7 Nov)
+assert all(a == ["claude2"] for a in ns.REVIEWER.values()), ns.REVIEWER
 assert all(ns.ACCOUNTS[a]["engine"] == "claude" and "claude-opus-5-5" in ns.ACCOUNTS[a]["cmd"] for a in ns.CLAUDE)
 
-# the reviewer is the other Claude account when it is free
+# the review is its own run on the account (a fresh session), after the worker
 seen = []
 ns.asleep.clear()
 def record(account, prompt, cwd, effort):
@@ -107,7 +107,7 @@ with mock.patch.multiple(ns, run_agent=record, log=lambda m: None, resume_parked
                          worker_prompt=lambda *a: "work", review_prompt=lambda *a: "review", run_capture=lambda s, t: None,
                          tests_pass=lambda s: (True, ""), task_info=lambda s, t: {"priority": "P1", "title": "x", "status": "done"}):
     outcome, _ = ns.do_task(Path("/nowhere"), "M9-07", "claude")
-    assert outcome == "done" and seen[0][0] != seen[-1][0] and seen[-1][1] == "review", seen
+    assert outcome == "done" and seen[0][1] == "work" and seen[-1] == ("claude2", "review"), seen
 
 # at most MAX_CLAUDE Claude workers hold a seat at once
 import fcntl as _fcntl
