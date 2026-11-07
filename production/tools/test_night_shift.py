@@ -79,4 +79,16 @@ if target < _dt.datetime.now() - _dt.timedelta(days=180):
 assert abs(wait - max((target - _dt.datetime.now()).total_seconds(), 0) - 120) < 5, wait
 assert ns.limit_wait("You've hit your usage limit · resets 5pm") <= 86400 + 120
 
+# a task claimed by a day session is never blocked by a night park (7 Nov: M3-5R)
+calls = []
+with mock.patch.multiple(ns, sh=lambda args, *a, **k: calls.append(args) or (0, ""), changes=lambda s: "", prepare=lambda s: None,
+                         land=lambda *a: (True, ""), task_info=lambda s, t: {"status": "in_progress", "owner": "Sadman/claude"}):
+    ns.park(Path("/nowhere"), "M9-05", "day-session claim")
+    assert not any("block" in c for c in calls), calls
+calls = []
+with mock.patch.multiple(ns, sh=lambda args, *a, **k: calls.append(args) or (0, ""), changes=lambda s: "", prepare=lambda s: None,
+                         land=lambda *a: (True, ""), task_info=lambda s, t: {"status": "in_progress", "owner": "Sadman/night-claude2"}):
+    ns.park(Path("/nowhere"), "M9-06", "failed")
+    assert any("block" in c for c in calls), calls  # its own failed night claim still blocks
+
 print("night_shift self-check: PASS")
