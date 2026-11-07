@@ -5740,15 +5740,15 @@
    "priority": "P2",
    "tool": "claude",
    "title": "Project anti-aliasing: fine floor grating and rails shimmer (no MSAA, TAA or FXAA set)",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/project.godot"
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07.",
-   "evidence": "",
+   "evidence": "game/project.godot: anti_aliasing/quality/msaa_3d=1 (2x) and use_taa=true, use_taa.web=false (TAA is Forward+ only; Compatibility and web keep MSAA 2x). Chosen from game/tools/capture_aa_m3102.gd: 8 modes on the annex grating by headlamp and the service-room kit floor (production/qa/evidence/M3-102_aa_compare.txt). MSAA alone cleans edges but leaves the grating moire; with MSAA 2x + TAA the half-pixel shimmer score falls from 2.09 to 1.90 (grating) and 1.92 to 1.22 (kit room); every mode held 60 fps at 1600x900 on the M4. Before/after stills M3-102_{annex_grating,kit_room}_{off,msaa4,msaa2_taa}.png. test_performance_runtime PASS (537 checks, 0 failures); run_tests.sh 57/57 suites passed. No graphics settings screen exists to expose it in (only the four accessibility toggles).",
    "updated": "2026-11-07",
    "prompt": "Found in M3-3A (6 Nov, night shift; re-filed 7 Nov when the port onto main reused the id M3-100): game/project.godot sets no 3D anti-aliasing (rendering/anti_aliasing/quality/msaa_3d, screen_space_aa and use_taa are at their off defaults), so fine repeating detail shimmers and shows moire in motion and in stills: the EN_ZeroAnnex grating deck, the habitat-kit anti-slip tiles and handrails (Codex's visual second opinion on production/qa/evidence/M3-3A_annex_cold.png flagged the grating), and the quilting lines of the CH_Cadet_EVA suits. M3-3A softened the grating's bar edges in its texture, which helps but cannot replace AA. Do: choose the project default (e.g. MSAA 2x or 4x on Forward+, or FXAA/SMAA plus TAA) and a lower setting for the Compatibility renderer, expose it in the graphics settings if they exist, and keep the performance budget. Acceptance: game/tools/test_performance_runtime.gd still passes on Sadman's Mac; before/after captures of the annex grating and a kit corridor in production/qa/evidence/<id>_*.png show no moire; run_tests.sh all suites pass.",
    "reserved_for": "sadman",

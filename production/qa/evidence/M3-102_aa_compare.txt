@@ -1,0 +1,19 @@
+M3-102 anti-aliasing comparison, 2026-11-07T11:15:28, forward_plus, window (1600, 900)
+view            mode       frame_ms  shimmer
+annex_grating   off           16.68    2.087
+annex_grating   msaa2         16.68    2.034
+annex_grating   msaa4         16.63    2.009
+annex_grating   fxaa          16.70    1.949
+annex_grating   smaa          16.62    2.009
+annex_grating   taa           16.65    1.810
+annex_grating   msaa2_smaa    16.57    1.998
+annex_grating   msaa2_taa     16.67    1.899
+kit_room        off           16.64    1.918
+kit_room        msaa2         16.66    1.820
+kit_room        msaa4         16.69    1.732
+kit_room        fxaa          16.66    1.759
+kit_room        smaa          16.67    1.821
+kit_room        taa           16.66    1.342
+kit_room        msaa2_smaa    16.64    1.766
+kit_room        msaa2_taa     16.67    1.222
+run_tests.sh with msaa_3d=1, use_taa=true (7 Nov 2026): 57/57 suites passed; test_performance_runtime PASS (537 checks, 0 failures)

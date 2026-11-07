@@ -103,5 +103,8 @@ enabled=PackedStringArray("res://addons/runtime_assets/plugin.cfg")
 
 [rendering]
 
+anti_aliasing/quality/msaa_3d=1
+anti_aliasing/quality/use_taa=true
+anti_aliasing/quality/use_taa.web=false
 renderer/rendering_method.web="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
