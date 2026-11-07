@@ -1,5 +1,6 @@
 ## Godot --headless --path game --script res://tools/test_worker_b_world_missions.gd
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const SaveScript = preload("res://scripts/save/save_service.gd")
@@ -205,20 +206,20 @@ func _test_chapter1_route_order_and_physical_gates() -> void:
 	_check(bool(route.perform("charter_card").get("accepted", false)), "S01 charter acknowledgement is a physical card read")
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S02", "S01 advances only after all physical predicates")
 	for target_id in ["classify_information", "roll_call", "practice_fault"]:
-		_check(bool(route.perform(target_id).get("accepted", false)), "S02 physical action committed: " + target_id)
+		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S02 physical action committed: " + target_id)
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S03", "S02 advances in canonical order")
 	for target_id in ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"]:
 		print("BEGIN S03 ", target_id)
-		_check(bool(route.perform(target_id).get("accepted", false)), "S03 P-01 physical action committed: " + target_id)
+		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S03 P-01 physical action committed: " + target_id)
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S04", "S03 advances only after calibration, provenance and atmosphere checks")
 	for target_id in ["plant_alo", "plant_tara", "water_alo", "water_tara", "label_alo", "label_tara", "seal_alo", "seal_tara", "record_paired_conditions", "confirm_services"]:
-		_check(bool(route.perform(target_id).get("accepted", false)), "S04 P-01/garden action committed: " + target_id)
+		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S04 P-01/garden action committed: " + target_id)
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S05", "S04 plants both cassettes and advances")
 	for target_id in ["test_hand_light", "care_montage", "confirm_date_transition"]:
-		_check(bool(route.perform(target_id).get("accepted", false)), "S05 dated-care action committed: " + target_id)
+		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S05 dated-care action committed: " + target_id)
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S06", "S05 requires explicit date transition")
 	for target_id in ["arrange_timeline", "ack_schedule"]:
-		_check(bool(route.perform(target_id).get("accepted", false)), "S06 timeline action committed: " + target_id)
+		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S06 timeline action committed: " + target_id)
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S07", "S06 advances without dialogue-only completion")
 	_check(bool(route.perform("role_cards").get("accepted", false)), "S07 role acknowledgement is a physical role-card check")
 	_check(bool(route.perform("p02_shift1").get("accepted", false)), "P-02 shift 1 goes through PuzzleHost and ExpeditionSimulation")
@@ -226,20 +227,20 @@ func _test_chapter1_route_order_and_physical_gates() -> void:
 	_check(int(route.director().snapshot().get("current_shift", -1)) == 1, "staged shift 2 does not advance the authoritative shift")
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S08", "S07 requires committed shift 1 plus staged shift 2")
 	for target_id in ["shelter_drill", "verify_drill_baseline", "p02_shift2"]:
-		_check(bool(route.perform(target_id).get("accepted", false)), "S08 physical/P-02 action committed: " + target_id)
+		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S08 physical/P-02 action committed: " + target_id)
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S09", "S08 commits shift 2 only after no-cost drill verification")
 	for target_id in ["combine_cards", "ack_earth_set", "p02_shifts3_4"]:
-		_check(bool(route.perform(target_id).get("accepted", false)), "S09 physical/P-02 action committed: " + target_id)
+		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S09 physical/P-02 action committed: " + target_id)
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S10", "S09 resolves shifts 3-4 in order")
 	for target_id in ["confirm_four_sheltered", "p02_shift5_alarm"]:
-		_check(bool(route.perform(target_id).get("accepted", false)), "S10 shelter/alarm action committed: " + target_id)
+		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S10 shelter/alarm action committed: " + target_id)
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S11", "S10 commits exactly one exclusive alarm response")
 	for target_id in ["verify_exposure_order", "return_water", "p02_shifts6_7", "review_outcome"]:
-		_check(bool(route.perform(target_id).get("accepted", false)), "S11 recovery/P-02 action committed: " + target_id)
+		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S11 recovery/P-02 action committed: " + target_id)
 	_check(String(route.last_result().get("result", {}).get("ending", route.director().snapshot().get("status", ""))) in ["BLOOM", "GOLDEN", "complete"], "S11 produces a safe Bloom-family outcome")
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S12", "S11 advances after outcome review")
 	for target_id in ["verify_chamber", "open_shutter", "tag_bloom", "inspect_tara", "complete_debrief"]:
-		_check(bool(route.perform(target_id).get("accepted", false)), "S12 bloom/debrief action committed: " + target_id)
+		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S12 bloom/debrief action committed: " + target_id)
 	var final_advance := route.advance_scene()
 	_check(bool(final_advance.get("accepted", false)) and bool(final_advance.get("chapter_complete", false)), "S12 closes the Chapter 1 physical route")
 	_check(route.completed_scene_ids().size() == 12 and bool(route.chapter_ready().get("ready", false)), "all twelve canonical scenes and CH02 readiness require physical gates")

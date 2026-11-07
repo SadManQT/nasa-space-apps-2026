@@ -1,0 +1,24 @@
+{
+  "contract_version": 1,
+  "references": {
+    "dry": {"raw": 10, "calibrated": 0},
+    "wet": {"raw": 110, "calibrated": 100}
+  },
+  "moisture_min": 40,
+  "moisture_max": 60,
+  "scale_min": 0,
+  "scale_max": 100,
+  "seeds_per_cassette": 1,
+  "prerequisite_messages": {
+    "p01_zeroed": "Set zero with the dry reference first.",
+    "p01_spanned": "Set the wet reference span first.",
+    "p01_rechecked": "Recheck both references first.",
+    "p01_scanned": "Scan the sealed seed packet first.",
+    "alo_planted": "Place one seed in Alo's cassette first.",
+    "tara_planted": "Place one seed in Tara's cassette first.",
+    "alo_watered": "Set Alo's moisture within the calibrated band first.",
+    "tara_watered": "Set Tara's moisture within the calibrated band first.",
+    "alo_labelled": "Label Alo's cassette first.",
+    "tara_labelled": "Label Tara's cassette first."
+  }
+}

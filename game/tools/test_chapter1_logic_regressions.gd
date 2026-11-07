@@ -1,4 +1,5 @@
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const Director = preload("res://scripts/core/campaign_director.gd")
 const Route = preload("res://scripts/missions/chapter1_route.gd")
@@ -42,7 +43,7 @@ func _targets(scene: String) -> Array:
 func _reach(route: RefCounted, scene: String) -> void:
 	while route.current_scene_id() != scene:
 		for target_id in _targets(route.current_scene_id()):
-			var action: Dictionary = route.perform(target_id)
+			var action: Dictionary = route.perform(target_id, PlantInput.payload(target_id))
 			if not bool(action.get("accepted", false)):
 				_check(false, "fixture action rejected: " + target_id + " " + String(action.get("reason", "")))
 				return
@@ -54,8 +55,8 @@ func _reach(route: RefCounted, scene: String) -> void:
 func _test_plant_payload_and_prerequisites() -> void:
 	var route := _new_route()
 	_reach(route, "EX-CH01-S04")
-	route.perform("plant_alo")
-	route.perform("plant_tara")
+	route.perform("plant_alo", PlantInput.payload("plant_alo"))
+	route.perform("plant_tara", PlantInput.payload("plant_tara"))
 	var before: Dictionary = route.director().snapshot()
 	var invalid: Dictionary = route.perform("water_alo", {"moisture": 99})
 	_check(not bool(invalid.get("accepted", false)) and route.director().snapshot() == before, "out-of-band watering rejects before writing an authoritative receipt")
@@ -108,7 +109,7 @@ func _test_restore_and_retry() -> void:
 	_check(rejection.has("accepted") and not bool(rejection.accepted) and route.snapshot() == before, "structured world scene ID rejects before scalar conversion")
 	_reach(route, "EX-CH01-S11")
 	for target_id in _targets("EX-CH01-S11"):
-		route.perform(target_id)
+		route.perform(target_id, PlantInput.payload(target_id))
 	route.retry()
 	_check(int(route.director().query().current_shift) == 5 and not bool(route.current_flags().get("final_shifts_resolved", false)), "outcome review does not replace the pre-final-shifts retry checkpoint")
 	_check(bool(route.perform("p02_shifts6_7").get("accepted", false)), "retry can resolve the final shifts again without stale receipts")
@@ -116,7 +117,7 @@ func _test_restore_and_retry() -> void:
 func _test_plant_receipt_size() -> void:
 	var puzzle := PlantPuzzle.new()
 	for action in PlantPuzzle.ORDER:
-		puzzle.commit(action, "size:" + action)
+		puzzle.commit(action, "size:" + action, PlantInput.payload(action))
 	_check(JSON.stringify(puzzle.snapshot()).length() < 32000, "the twelve planting steps keep a small serializable retry/save payload")
 
 func _test_phase_boundaries_and_dates() -> void:
@@ -129,7 +130,7 @@ func _test_phase_boundaries_and_dates() -> void:
 	_check(not bool(short_plan.get("accepted", false)) and route.director().snapshot() == before, "a two-shift scene rejects a one-shift plan before committing")
 	_reach(route, "EX-CH01-S12")
 	for target_id in _targets("EX-CH01-S12"):
-		route.perform(target_id)
+		route.perform(target_id, PlantInput.payload(target_id))
 	route.advance_scene()
 	var final: Dictionary = route.director().snapshot()
 	_check(String(final.scenario_datetime) == "2046-04-27 06:00 UTC", "dated care and seven explicit 7.2-hour shifts reach the canonical sunrise")

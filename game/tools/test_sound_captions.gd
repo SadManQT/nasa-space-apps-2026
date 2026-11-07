@@ -1,6 +1,7 @@
 ## M1-61: integrated caption layout, settings, expiry and UI sound filtering.
 ## Add -- --capture to save windowed evidence using the same probes and isolated save.
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
@@ -71,7 +72,7 @@ func _run() -> void:
 	hud.apply_accessibility()
 	# Complete only the isolated first scene's authored work, then acknowledge its lines.
 	for target in Gates.targets_for_scene(campaign.route.current_scene_id()):
-		hud.refresh_after_action(campaign.route.perform(String(target.target_id)))
+		hud.refresh_after_action(campaign.route.perform(String(target.target_id), PlantInput.payload(String(target.target_id))))
 	var guard := 0
 	while hud._dialogue_bar.visible and not hud._next_line.disabled and guard < 20:
 		hud._on_next_line()

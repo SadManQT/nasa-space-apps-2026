@@ -4,6 +4,7 @@
 ##   Godot --path game --windowed --resolution 1280x720 --script res://tools/capture_hud_m154.gd
 ## Writes production/qa/evidence/M1-54_*.png; the printed RESULT line is the evidence.
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
@@ -36,7 +37,7 @@ func _run() -> void:
 			targets.push_back(targets.pop_front())
 			targets.push_back(targets.pop_at(3))
 		for target in targets:
-			campaign.route.perform(String(target.target_id))
+			campaign.route.perform(String(target.target_id), PlantInput.payload(String(target.target_id)))
 		campaign.advance_scene()
 		if campaign.loading:
 			await campaign.wait_loading()

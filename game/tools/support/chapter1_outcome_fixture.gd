@@ -1,4 +1,5 @@
 extends RefCounted
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 ## Test/capture-only route fixture. Plays the authored gates and documented
 ## plans; the failure variants change actual choices, never the ending label.
@@ -25,7 +26,7 @@ static func play(ending: String) -> RefCounted:
 		for target in targets:
 			if target == "review_outcome":
 				break
-			var result: Dictionary = route.perform(target)
+			var result: Dictionary = route.perform(target, PlantInput.payload(target))
 			if not result.get("accepted", false):
 				push_error("Outcome fixture rejected %s: %s" % [target, str(result)])
 				return route

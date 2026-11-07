@@ -69,6 +69,23 @@ func current_flags() -> Dictionary:
 func last_result() -> Dictionary:
 	return _last_result.duplicate(true)
 
+## Read-only P-01 contract. The panel keeps its choices locally and submits
+## explicit payloads through the existing physical perform/preview flow.
+func p01_view(target_id: String) -> Dictionary:
+	for target in GateCatalog.targets_for_scene(current_scene_id()):
+		if String(target.target_id) == target_id and target.has("puzzle_action"):
+			var view: Dictionary = _p01.view()
+			var missing: Array = []
+			var flags := _context_flags()
+			for flag in target.get("required_flags", []):
+				if not flags.get(flag, false):
+					missing.append(flag)
+			var messages: Dictionary = view.profile.prerequisite_messages
+			var reason := String(messages.get(missing[0], "Complete the preceding P-01 step first.")) if not missing.is_empty() else ""
+			view.merge({"accepted": true, "target_id": target_id, "action": target.puzzle_action, "scene_id": current_scene_id(), "missing_flags": missing, "prerequisite_reason": reason})
+			return view
+	return {"accepted": false, "reason": "This is not a P-01 target in the current scene."}
+
 ## The player's P-02 plan (P02MissionTable). The Mission Table UI edits it;
 ## P-02 gates commit exactly its plan.
 func mission_table() -> RefCounted:
@@ -417,6 +434,8 @@ func _submit_command(command: Dictionary, preview_only: bool) -> Dictionary:
 	if not bool(prerequisite.get("accepted", false)):
 		return prerequisite
 	var command_id := String(command.get("command_id", ""))
+	if target.has("puzzle_action") and command_id != String(target.get("command_id", "interaction:" + target_id)):
+		return {"accepted": false, "reason": "P-01 requires this target's own command ID; no state changed."}
 	var previous: Dictionary = _director.snapshot().get("receipts", {})
 	if previous.has(command_id):
 		if not preview_only:
@@ -474,8 +493,6 @@ func _apply_target_result(target_id: String, payload: Dictionary, result: Dictio
 		var action := String(target.get("puzzle_action", ""))
 		var p01_payload := payload.duplicate(true)
 		p01_payload.erase("_puzzle_action")
-		if action in ["water_alo", "water_tara"] and not p01_payload.has("moisture"):
-			p01_payload["moisture"] = 50
 		var p01_result: Dictionary = _p01.commit(action, "p01:" + target_id, p01_payload)
 		if bool(p01_result.get("accepted", false)) or bool(p01_result.get("duplicate", false)):
 			_apply_p01_flag(action)

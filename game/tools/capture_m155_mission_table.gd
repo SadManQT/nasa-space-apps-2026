@@ -3,6 +3,7 @@
 ##   Godot --path game --windowed --script res://tools/capture_m155_mission_table.gd
 ## Writes production/qa/evidence/M1-55_*.png and M1-55_capture_probe.txt.
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const CampaignScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
@@ -164,7 +165,7 @@ func _goto(scene_id: String) -> void:
 				var alarm: Dictionary = campaign.route.mission_table().alarm_state()
 				if String(alarm.state) == "idle" and String(alarm.action) in ["PUMP", "STACK"]:
 					break
-			campaign.route.perform(target_id)
+			campaign.route.perform(target_id, PlantInput.payload(target_id))
 		if not bool(campaign.route.advance_scene().get("accepted", false)):
 			_expect(false, "reach " + scene_id + " (stuck at " + current + ")")
 			return

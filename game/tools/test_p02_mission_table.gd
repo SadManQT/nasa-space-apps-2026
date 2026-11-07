@@ -3,6 +3,7 @@
 ## exactly, blackout is only below zero, every ending predicate holds, and the
 ## PUMP / STACK / WAIT alarm responses behave as the numeric contract says.
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const RouteScript = preload("res://scripts/missions/chapter1_route.gd")
@@ -107,10 +108,10 @@ func _test_witness_through_route(plan_id: String) -> void:
 				_run_task(route)
 			if TableScript.is_gate(target_id) and target_id != "p02_stage_shift2":
 				var forecast: Dictionary = route.mission_table_view(target_id).gate_preview
-				var result: Dictionary = route.perform(target_id)
+				var result: Dictionary = route.perform(target_id, PlantInput.payload(target_id))
 				agreed = agreed and bool(result.get("accepted", false)) and _resources(forecast.final_state) == _resources(route.director().snapshot().resources)
 			else:
-				route.perform(target_id)
+				route.perform(target_id, PlantInput.payload(target_id))
 		if scene_id != "EX-CH01-S11":
 			route.advance_scene()
 	var final_state := _resources(route.director().snapshot().resources)
@@ -194,7 +195,7 @@ func _test_ending_predicates() -> void:
 		table.set_choice(shift, "transfer", "HOLD")
 	_play_until(route, "EX-CH01-S11")
 	for target_id in ["verify_exposure_order", "return_water", "p02_shifts6_7"]:
-		route.perform(target_id)
+		route.perform(target_id, PlantInput.payload(target_id))
 	var stopped: Dictionary = route.last_result().get("result", {})
 	_check(String(stopped.get("ending", "")) == "MISSION_STOPPED" and (stopped.get("unsafe_predicates", []) as Array).has("exposure_limit_exceeded_shift_6") and int(route.director().snapshot().resources.Z) == 6, "an unshielded WAIT exceeds Z3 in shift 6 and flight rules stop the mission")
 	_check(not bool(route.chapter_ready().safe_ending) and not bool(route.chapter_ready().ready), "a stopped mission never unlocks Chapter 2")
@@ -349,7 +350,7 @@ func _test_campaign_integration() -> void:
 func _reach(route: RefCounted, scene_id: String) -> void:
 	while route.current_scene_id() != scene_id:
 		for target_id in _targets(route.current_scene_id()):
-			route.perform(target_id)
+			route.perform(target_id, PlantInput.payload(target_id))
 		if not bool(route.advance_scene().get("accepted", false)):
 			_check(false, "route reaches " + scene_id + " (stuck at " + route.current_scene_id() + ")")
 			return
@@ -359,7 +360,7 @@ func _play_until(route: RefCounted, scene_id: String) -> void:
 		if route.current_scene_id() == "EX-CH01-S10":
 			_run_task(route)
 		for target_id in _targets(route.current_scene_id()):
-			route.perform(target_id)
+			route.perform(target_id, PlantInput.payload(target_id))
 		if not bool(route.advance_scene().get("accepted", false)):
 			_check(false, "route plays to " + scene_id + " (stuck at " + route.current_scene_id() + ")")
 			return

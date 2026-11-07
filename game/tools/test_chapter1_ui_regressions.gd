@@ -1,5 +1,6 @@
 ## Isolated production UI integration checks; never touches the player's slot.
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const MainScene = preload("res://scenes/main.tscn")
 const CampaignScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
@@ -125,7 +126,7 @@ func _run() -> void:
 			var compare: Dictionary = targets.pop_at(3)
 			targets.push_back(compare)
 		for target in targets:
-			var result: Dictionary = campaign.route.perform(String(target.target_id))
+			var result: Dictionary = campaign.route.perform(String(target.target_id), PlantInput.payload(String(target.target_id)))
 			if not bool(result.get("accepted", false)):
 				traversed = false
 				push_error("Traversal failed: " + String(target.target_id) + " " + str(result))

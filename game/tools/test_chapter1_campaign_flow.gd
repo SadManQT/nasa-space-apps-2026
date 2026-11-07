@@ -1,5 +1,6 @@
 ## Exercises all twelve scenes through the real campaign controller and HUD.
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const SaveScript = preload("res://scripts/save/save_service.gd")
@@ -80,7 +81,7 @@ func _run() -> void:
 			campaign._player.global_position = Vector3(target.global_position.x, 0.0, target.global_position.z + 1.0)
 			campaign._player.velocity = Vector3.ZERO
 			await physics_frame
-			var result := campaign.perform_target(String(target_id))
+			var result := campaign.perform_target(String(target_id), PlantInput.payload(String(target_id)))
 			_check(bool(result.get("accepted", false)), scene_id + ": " + String(target_id) + " — " + String(result.get("reason", "")))
 			if not bool(result.get("accepted", false)):
 				_finish()

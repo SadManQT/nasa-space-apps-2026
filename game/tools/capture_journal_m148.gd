@@ -5,6 +5,7 @@
 ## Writes production/qa/evidence/M1-48_*.png and M1-48_probes.json; a Godot
 ## exit code alone is never evidence, the printed RESULT line is.
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const MainScene: PackedScene = preload("res://scenes/main.tscn")
@@ -51,7 +52,7 @@ func _run() -> void:
 			var compare: Dictionary = targets.pop_at(3)
 			targets.push_back(compare)
 		for target in targets:
-			var result: Dictionary = campaign.route.perform(String(target.target_id))
+			var result: Dictionary = campaign.route.perform(String(target.target_id), PlantInput.payload(String(target.target_id)))
 			if not bool(result.get("accepted", false)):
 				_probe("perform_" + String(target.target_id), false)
 		if scene_id == "EX-CH01-S12":

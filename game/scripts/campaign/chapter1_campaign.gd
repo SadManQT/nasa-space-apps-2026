@@ -2,6 +2,8 @@ extends Node3D
 class_name Chapter1Campaign
 
 signal exit_requested
+## Ramim's panel subscribes here. Opening/cancelling never submits choices.
+signal p01_panel_requested(view: Dictionary)
 ## A cutscene closed (watched to the end, skipped, or its text card dismissed).
 signal cutscene_closed(result: Dictionary)
 
@@ -227,7 +229,17 @@ func forecast_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 	var predicted = result.get("snapshot", {})
 	if predicted is Dictionary and predicted.get("schema_version") == state.get("schema_version") and predicted.get("resources", {}).has("E"):
 		projected.director.restore_snapshot(predicted)
-	return {"accepted": true, "target_id": target_id, "input_revision": state.state_revision, "query": projected.director.query(), "reason": result.get("reason", "Read-only forecast")}
+	var forecast := {"accepted": true, "target_id": target_id, "input_revision": state.state_revision, "query": projected.director.query(), "reason": result.get("reason", "Read-only forecast")}
+	if projected.route.has_method("p01_view"):
+		var plant_view: Dictionary = projected.route.p01_view(target_id)
+		if plant_view.get("accepted", false):
+			forecast["p01"] = plant_view
+	return forecast
+
+func p01_view(target_id: String) -> Dictionary:
+	if route == null or not route.has_method("p01_view"):
+		return {"accepted": false, "reason": "P-01 is unavailable in this chapter."}
+	return route.p01_view(target_id)
 
 func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 	if loading or not _startup_error.is_empty() or route == null:
@@ -331,6 +343,12 @@ func nearby_target() -> Dictionary:
 
 func interact_nearby() -> Dictionary:
 	var selected := nearby_target()
+	if not selected.is_empty() and String(selected.get("puzzle_id", "")) == "P-01":
+		var view := p01_view(String(selected.target_id))
+		if not view.get("accepted", false):
+			return view
+		p01_panel_requested.emit(view)
+		return {"accepted": true, "p01_panel_requested": true, "physical_commit": false, "reason": "Choose the P-01 inputs before confirming."}
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) == "P-02" and hud != null and hud.open_mission_table(String(selected.target_id)):
 		return {"accepted": true, "reason": "Mission Table open.", "mission_table": true}
 	if not selected.is_empty():

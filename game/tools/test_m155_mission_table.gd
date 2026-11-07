@@ -1,4 +1,5 @@
 ﻿extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 const Route = preload("res://scripts/missions/chapter1_route.gd")
 const Director = preload("res://scripts/core/campaign_director.gd")
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
@@ -17,7 +18,7 @@ func _run() -> void:
 		if route.current_scene_id() == "EX-CH01-S03":
 			ids = ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"]
 		for id in ids:
-			route.perform(id)
+			route.perform(id, PlantInput.payload(id))
 		route.advance_scene()
 	route.perform("role_cards")
 	var panel = PanelScene.instantiate()

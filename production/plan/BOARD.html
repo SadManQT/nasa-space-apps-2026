@@ -238,11 +238,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-77">M1-77</a> Avoid missing fade metadata errors on the first campaign caption <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">4 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">22 todo</span></div><div class="bar"><i style="width:6%"></i></div>
-<details open><summary>Working now (4)</summary><ul>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">3 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">22 todo</span></div><div class="bar"><i style="width:9%"></i></div>
+<details open><summary>Working now (3)</summary><ul>
 <li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by atik/codex on 2026-11-07</div></li>
 <li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by atik/codex on 2026-11-06</div></li>
-<li><a class="id" href="#M1-66">M1-66</a> P-01 runtime: validate player inputs and expose puzzle-panel route hooks <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by atik/codex on 2026-11-06</div></li>
 <li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by atik/codex on 2026-11-07</div></li>
 </ul></details>
 <details open><summary>Next up today (5)</summary><ul>
@@ -277,7 +276,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-101">M3-101</a> Use the M3-99 narrative props where the Care Round, the mugs beat and the clue scenes place them <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-103">M3-103</a> Wire the Chapter 2 airlock (LOC-05) into the campaign <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details><summary>Done (2)</summary><ul>
+<details><summary>Done (3)</summary><ul>
+<li><a class="id" href="#M1-66">M1-66</a> P-01 runtime: validate player inputs and expose puzzle-panel route hooks <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">P01 explicit-input runtime/query/physical USE hook delivered; independent review approved, focused317PASS and full run_tests.sh61/61 PASS. …</div></li>
 <li><a class="id" href="#M1-78">M1-78</a> Fail the test runner when its class-cache refresh crashes <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">production/qa/perf/M1-78_M1-80.md; 7 injected scenarios pass; independent review PASS; real Godot setup and 54/54 suites passed.</div></li>
 <li><a class="id" href="#M1-80">M1-80</a> Fail the test runner when its import refresh crashes <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Duplicate of M1-78, fixed and verified together: production/qa/perf/M1-78_M1-80.md; 7 injected scenarios pass; 54/54 suites passed.</div></li>
 </ul></details>
@@ -1061,7 +1061,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "execution/UI_09_SCIENTIFIC_PUZZLE.md",
     "execution/SYS_22_PUZZLE_HOST_HINTS.md"
    ],
-   "note": "Ownership (MASTER_PLAN.md §7): the panel and puzzles/ are Ramim's; game/scripts/missions/p01_commission_plant.gd is Atik's - ask for rule changes there with a board task.",
+   "note": "Ownership (MASTER_PLAN.md §7): the panel and puzzles/ are Ramim's; game/scripts/missions/p01_commission_plant.gd is Atik's - ask for rule changes there with a board task.\n7 Nov Atik/codex: prerequisite M1-66 delivered. Subscribe campaign.p01_panel_requested; read p01_view; preview via forecast_target and confirm explicit payload via perform_target. Exact version1 contract: production/qa/perf/M1-66.md. Independent review and full61/61 green. Please release/resume M1-08 and wire the owned panel; status/owner left to Ramim.",
    "evidence": "",
    "updated": "2026-11-06",
    "prompt": "Problem: puzzles are receipt gates: each step is a 'USE' button that submits the correct answer pre-filled.\nGoal: the player calibrates the moisture probe (zero at dry 10 -> 0, span at wet 110 -> 100) and plants with moisture in 40–60, choosing\nthe values themselves, with predict -> test -> observe -> explain feedback and a Data Card link (M0-15) when available.\nDo: implement the P-01 panel per execution/PUZZLE_P01.md and execution/UI_09_SCIENTIFIC_PUZZLE.md through the existing PuzzleHost; remove\nP-01's pre-filled payloads; wrong answers give a helpful, non-punishing hint (SYS_22); keyboard, mouse and controller; text scaling; no\ntimer pressure in Family mode. Numbers come from game-design/08_PUZZLE_DESIGNS.md only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
@@ -5631,7 +5631,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "P-01 runtime: validate player inputs and expose puzzle-panel route hooks",
-   "status": "in_progress",
+   "status": "done",
    "owner": "atik/codex",
    "deps": [],
    "paths": [
@@ -5640,8 +5640,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-06.",
-   "evidence": "",
-   "updated": "2026-11-06",
+   "evidence": "P01 explicit-input runtime/query/physical USE hook delivered; independent review approved, focused317PASS and full run_tests.sh61/61 PASS. Exact Ramim contract in production/qa/perf/M1-66.md; full summary M1-66_tests.txt. M1-08 can be released/resumed by Ramim.",
+   "updated": "2026-11-07",
    "prompt": "M1-08 is blocked by missing authoritative P-01 input and route hooks. Repro: campaign/chapter1_campaign.gd interact_nearby handles P-02 as a panel but sends P-01 to perform_target with no user payload; missions/p01_commission_plant.gd _validate accepts set_zero/set_span/recheck based on action order only, water defaults to 50, and chapter1_route.gd _apply_target_result also supplies missing moisture=50. This lets a USE action solve the puzzle automatically.\nExpose the P-01 query and explicit selected-input command interface for Ramim's UI/PuzzleHost without changing P-02 or other puzzle behavior. Authoritatively validate calibration against the documented dry 10 -> 0 and wet 110 -> 100 references, require the recheck, require explicit planting/watering inputs, accept moisture 40..60 inclusive, and remove missing-value success defaults. Wrong, missing, non-finite and out-of-range inputs must give explanatory retry feedback without changing state, costs, flags or receipts. Preserve save/load, cancel/reopen and duplicate-action idempotence. The nearby use flow must request the UI rather than automatically supply successful values. Keep UI implementation in Ramim folders; publish the exact route/query/payload contract in evidence and notify Ramim to release/resume blocked M1-08 once available.\nRead execution/PUZZLE_P01.md, execution/SYS_22_PUZZLE_HOST_HINTS.md, game-design/08_PUZZLE_DESIGNS.md P-01 and the current PuzzleHost/Mission Table contracts. Acceptance: current runner green, focused real-route tests for correct/wrong/missing/non-finite calibration and moisture 39/40/60/61, unchanged snapshots after rejected/preview/cancelled actions, one receipt per valid action, no auto-solved physical USE path.",
    "reserved_for": "atik",
    "effort": 2

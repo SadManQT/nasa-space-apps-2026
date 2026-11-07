@@ -1,4 +1,5 @@
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 const Director = preload("res://scripts/core/campaign_director.gd")
 const Route = preload("res://scripts/missions/chapter1_route.gd")
 const Extended = preload("res://scripts/missions/extended_campaign_route.gd")
@@ -22,7 +23,7 @@ func _run() -> void:
 	var before := director.snapshot()
 	_check(not route.perform("inspect_packet").accepted and director.snapshot() == before, "unready evidence operation grants nothing")
 	for target in ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet"]:
-		_check(route.perform(target).accepted, "owning evidence operation " + target)
+		_check(route.perform(target, PlantInput.payload(target)).accepted, "owning evidence operation " + target)
 	var acquired := director.snapshot()
 	_check(acquired.acquired_evidence_ids.has("EX-CH01-S03"), "record uses its canonical content ID")
 	var journal_state := acquired.duplicate(true)

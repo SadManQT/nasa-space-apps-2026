@@ -3,6 +3,7 @@
 ## HUD entry points. Headless; the windowed screenshots come from
 ## tools/capture_journal_m148.gd.
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const Director = preload("res://scripts/core/campaign_director.gd")
 const Route = preload("res://scripts/missions/chapter1_route.gd")
@@ -113,7 +114,7 @@ func _test_pure_and_spoiler_free() -> void:
 				mid["scene_id"] = scene_id
 				var mid_journal := CampaignKnowledge.journal(mid)
 				_check(not mid_journal.tabs.garden.entries.any(func(entry): return entry.get("id") == "J-CH01-S05-GROWTH-ALO-SPROUT"), "12 April photo waits until the dated transition passes")
-			var result: Dictionary = route.perform(String(target.target_id))
+			var result: Dictionary = route.perform(String(target.target_id), PlantInput.payload(String(target.target_id)))
 			_check(bool(result.get("accepted", false)), scene_id + " performs " + String(target.target_id))
 		_sync(director, route)
 		var snapshot := director.snapshot()

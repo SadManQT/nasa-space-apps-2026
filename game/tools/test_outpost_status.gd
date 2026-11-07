@@ -1,4 +1,5 @@
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
@@ -91,7 +92,7 @@ func _run() -> void:
 			var comparison = targets.pop_at(3)
 			targets.push_back(comparison)
 		for target in targets:
-			_check(runtime.route.perform(target.target_id).get("accepted", false), "setup follows real prerequisite: " + target.target_id)
+			_check(runtime.route.perform(target.target_id, PlantInput.payload(String(target.target_id))).get("accepted", false), "setup follows real prerequisite: " + target.target_id)
 		_check(runtime.route.advance_scene().get("accepted", false), "setup advances real scene: " + scene_id)
 	var first = Gates.targets_for_scene("EX-CH01-S07")[0]
 	_check(runtime.route.perform(first.target_id).get("accepted", false), "read the shift role facts before forecasting")

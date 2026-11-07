@@ -7,6 +7,7 @@
 ## adds it to this walk).
 ##   Godot --headless --path game --script res://tools/test_player_text.gd
 extends SceneTree
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
@@ -98,7 +99,7 @@ func _run() -> void:
 		for target in targets:
 			if P02MissionTable.is_gate(String(target.target_id)):
 				await _walk_table(campaign, String(target.target_id))
-			var result: Dictionary = campaign.route.perform(String(target.target_id))
+			var result: Dictionary = campaign.route.perform(String(target.target_id), PlantInput.payload(String(target.target_id)))
 			hud.refresh_after_action(result)
 			await _walk_state(hud, "%s after %s" % [scene_id, target.target_id])
 		if scene_id == scenes[-1]:
@@ -306,7 +307,7 @@ func _reach_route(route: RefCounted, destination: String) -> void:
 		var scene_id: String = route.current_scene_id()
 		var ids: Array = ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"] if scene_id == "EX-CH01-S03" else Gates.targets_for_scene(scene_id).map(func(spec): return String(spec.target_id))
 		for id in ids:
-			route.perform(id)
+			route.perform(id, PlantInput.payload(id))
 		if not route.advance_scene().accepted:
 			_check(false, "text walk reaches " + destination + " from " + scene_id)
 			return
