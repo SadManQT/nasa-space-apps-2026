@@ -4,6 +4,8 @@ extends SceneTree
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const SaveScript = preload("res://scripts/save/save_service.gd")
 const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
+const RoomContract = preload("res://scripts/world/room_contract.gd")
+const RoomPresentation = preload("res://scripts/world/room_presentation.gd")
 const ACTIONS := [
 	["commission_route", "commission_result", "charter_card"],
 	["classify_information", "roll_call", "practice_fault"],
@@ -179,15 +181,21 @@ func _test_chapter2_handoff() -> void:
 	for number in range(1, 13):
 		var scene_id := "EX-CH02-S%02d" % number
 		_check(campaign.route.current_scene_id() == scene_id, "production Chapter 2 reaches " + scene_id)
+		var layout := RoomContract.staged_layout(campaign.route.current_room_id(), scene_id)
 		for spec in campaign.targets_for_current_scene():
 			var target := campaign.physical_target(String(spec.target_id))
 			_check(target != null, "B01 physical target exists: " + String(spec.target_id))
 			if target == null: return
-			campaign._player.global_position = Vector3(target.global_position.x, 0, target.global_position.z + 1)
+			var station := RoomContract.station_focus(scene_id, String(spec.target_id))
+			_check(String(target.get_meta("target_id", "")) == station, "Chapter 2 operation uses its authored room station: " + String(spec.target_id))
+			# A north/south/east wall target has its own walkable approach; +Z can be outside the airlock.
+			for focus in layout.focus_targets:
+				if String(focus.target_id) == station:
+					campaign._player.global_position = RoomPresentation.vector(focus.approach_m)
 			campaign._player.velocity = Vector3.ZERO
 			await physics_frame
 			var action := campaign.perform_target(String(spec.target_id))
-			_check(bool(action.get("accepted", false)), "production Chapter 2 commits " + String(spec.target_id))
+			_check(bool(action.get("accepted", false)), "production Chapter 2 commits " + String(spec.target_id) + ": " + String(action.get("reason", "")))
 			if not bool(action.get("accepted", false)): return
 		if number == 5:
 			var values: Dictionary = campaign.director.snapshot().resources

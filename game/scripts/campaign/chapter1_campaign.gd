@@ -179,11 +179,20 @@ func current_scene_data() -> Dictionary:
 func current_dialogue() -> Array:
 	return _dialogue.lines_for_scene(route.current_scene_id(), director.snapshot().get("knowledge_flags", []))
 
+## Returns the current mission actions bound to their authored room stations; the route still owns each action.
 func targets_for_current_scene() -> Array:
 	return _targets_for_scene()
 
 func _targets_for_scene() -> Array:
-	return route.targets_for_current_scene() if route != null else []
+	var targets: Array = route.targets_for_current_scene() if route != null else []
+	if _room != null:
+		# The mission owns the action; the room owns the physical station where it happens.
+		var stations: Dictionary = _room.stage().get("stations", {})
+		for target in targets:
+			var station := String(stations.get(String(target.target_id), ""))
+			if not station.is_empty():
+				target.world_focus_id = station
+	return targets
 
 func query() -> Dictionary:
 	var result := director.query()
@@ -633,7 +642,8 @@ func _place_crew() -> void:
 		_crew = CampaignCrew.new()
 		_crew.name = "Crew"
 		add_child(_crew)
-	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]))
+	# Room echoes use the saved choices too, including on Continue and chapter transitions.
+	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]), director.snapshot().story_log.choices)
 	_crew.set_paused(_ui_paused)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_sync_world_boundaries()

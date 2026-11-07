@@ -21,7 +21,7 @@ const _ROOMS := {
 			"res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
 			"res://assets/props/PR_Mug/PR_Mug.glb",
 		],
-		"boundary_ids": ["door_commons_service", "door_commons_garden", "door_commons_safe", "airlock_exterior"],
+		"boundary_ids": ["door_commons_service", "door_commons_garden", "door_commons_safe", "door_commons_airlock"],
 		"focus_targets": [
 			{"target_id": "commons_mission_table", "label": "Mission Table", "verb": "Inspect", "position": [0.0, 0.9, 0.0]},
 			{"target_id": "commons_earth_screen", "label": "Earth screen", "verb": "Inspect", "position": [0.0, 1.6, -5.0]},
@@ -127,23 +127,26 @@ const _ROOMS := {
 	},
 	"LOC-05": {
 		"room_id": "LOC-05",
-		"name": "Transfer Interlock",
-		"canonical_name": "Sealed pollination transfer corridor",
-		"bounds_m": [10.0, 8.0],
+		"name": "Airlock",
+		"canonical_name": "Airlock and sealed transfer vestibule",
+		"bounds_m": [8.0, 4.0],
 		"pressure": "pressurised",
-		"asset_ids": ["PR_Glovebox", "PR_PollinationKit", "PR_SampleHolder"],
+		"asset_ids": ["EN_Airlock_GlovePort", "EN_Airlock_PassThrough", "EN_Airlock_InterlockPanel", "EN_Airlock_SuitLocker", "EN_Airlock_Bench"],
 		"asset_paths": [
-			"res://assets/props/PR_Glovebox/PR_Glovebox.glb",
-			"res://assets/props/PR_PollinationKit/PR_PollinationKit.glb",
-			"res://assets/props/PR_SampleHolder/PR_SampleHolder.glb",
+			"res://assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD0.glb",
+			"res://assets/environment/EN_Airlock/EN_Airlock_PassThrough_LOD0.glb",
+			"res://assets/environment/EN_Airlock/EN_Airlock_InterlockPanel_LOD0.glb",
+			"res://assets/environment/EN_Airlock/EN_Airlock_SuitLocker_LOD0.glb",
+			"res://assets/environment/EN_Airlock/EN_Airlock_Bench_LOD0.glb",
 		],
-		"boundary_ids": ["door_service_garden", "garden_viewing_shutter"],
+		# The inner door to the Commons and the outer hatch to the surface (the hatch itself is the M3-2A interlock).
+		"boundary_ids": ["door_commons_airlock", "airlock_exterior"],
 		"focus_targets": [
-			{"target_id": "transfer_carrier", "label": "Sealed transfer carrier", "verb": "Inspect", "position": [-2.5, 1.0, -1.6]},
-			{"target_id": "transfer_glove_ports", "label": "Paired glove ports", "verb": "Inspect", "position": [0.0, 1.0, -1.6]},
-			{"target_id": "transfer_microscope", "label": "Pollen microscope", "verb": "Inspect", "position": [2.5, 1.0, -1.6]},
+			{"target_id": "transfer_glove_ports", "label": "Alo glove ports", "verb": "Inspect", "position": [-2.0, 1.2, 1.9]},
+			{"target_id": "transfer_carrier", "label": "Sealed carrier pass-through", "verb": "Inspect", "position": [-1.0, 1.22, 1.6]},
+			{"target_id": "transfer_microscope", "label": "Pollen microscope", "verb": "Inspect", "position": [0.0, 1.05, 1.75]},
 		],
-		"anchors": {"transfer_mei": [-2.2, 0.0, 1.5], "transfer_amara": [0.0, 0.0, 1.5], "transfer_rafi": [2.2, 0.0, 1.5], "transfer_player": [0.0, 0.0, 2.4]},
+		"anchors": {"transfer_mei": [-2.6, 0.0, 0.4], "transfer_amara": [-1.4, 0.0, 0.2], "transfer_rafi": [0.3, 0.0, -0.6], "transfer_kai": [-3.3, 0.0, -0.6], "transfer_player": [-2.0, 0.0, -0.4]},
 	},
 	"LOC-06": {
 		"room_id": "LOC-06",
@@ -428,7 +431,7 @@ static func validate(room_id: String) -> Dictionary:
 # "FROM..UNTIL" range) overrides fields for those scenes; "choice" / "unless" gate an echo layer on a recorded
 # story_log option (doc 24 §5.2). The base layout stays the Chapter 1 room; staging only adds and hides.
 
-const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "chapter7_props", "prints", "hide", "hide_signs"]
+const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "chapter7_props", "prints", "models", "hide", "hide_signs"]
 const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views"]
 
 ## Story order of a canon scene id (chapter * 100 + scene number), or -1 for anything that is not one.

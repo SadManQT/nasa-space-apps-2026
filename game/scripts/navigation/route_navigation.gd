@@ -13,6 +13,7 @@ const _BOUNDARIES := {
 	"door_commons_service": {"from": "LOC-01", "to": "LOC-02", "kind": INTERNAL, "default_open": true},
 	"door_commons_garden": {"from": "LOC-01", "to": "LOC-03", "kind": INTERNAL, "default_open": true},
 	"door_commons_safe": {"from": "LOC-01", "to": "LOC-04", "kind": INTERNAL, "default_open": true},
+	"door_commons_airlock": {"from": "LOC-01", "to": "LOC-05", "kind": INTERNAL, "default_open": true},
 	"door_service_garden": {"from": "LOC-02", "to": "LOC-03", "kind": INTERNAL, "default_open": true},
 	"door_service_safe": {"from": "LOC-02", "to": "LOC-04", "kind": INTERNAL, "default_open": true},
 	"airlock_exterior": {

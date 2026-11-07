@@ -9,6 +9,7 @@ const ROOM_SCENES := {
 	"LOC-02": "res://scenes/campaign/rooms/service_rooms.tscn",
 	"LOC-03": "res://scenes/campaign/rooms/garden.tscn",
 	"LOC-04": "res://scenes/campaign/rooms/safe_room.tscn",
+	"LOC-05": "res://scenes/campaign/rooms/airlock.tscn",
 	"LOC-06": "res://scenes/campaign/rooms/exterior.tscn",
 }
 var resources: Dictionary = {}

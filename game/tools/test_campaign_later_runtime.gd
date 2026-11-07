@@ -35,6 +35,10 @@ func _run() -> void:
 	state["scene_id"] = "EX-CH02-S12"
 	state["completed_scene_ids"] = ["EX-CH02-S12"]
 	state["scenario_datetime"] = "2046-05-06 18:00 UTC"
+	state.story_log.choices["EX-CH02-S10-CHOICE"] = {
+		"option_id": "EX-CH02-S10-OPT02", "scene_id": "EX-CH02-S10",
+		"scenario_datetime": "2046-05-06 18:00 UTC", "state_revision": state.state_revision,
+	}
 	state["route_runtime"] = route_snapshot
 	_campaign = CampaignScene.instantiate() as Chapter1Campaign
 	storage.configure(_campaign)
@@ -46,6 +50,8 @@ func _run() -> void:
 	var transition: Dictionary = _campaign.advance_scene()
 	_check(bool(transition.get("accepted", false)) and _campaign.route.current_scene_id() == "EX-CH03-S01", "production controller crosses into Chapter 3")
 	_check(String(_campaign.director.snapshot().get("chapter_id", "")) == "CH03" and _campaign.route.current_room_id() == "LOC-02", "Chapter 3 projection and service-room viewpoint are authoritative")
+	var voice_card := _campaign._room.visual_root.get_node_or_null("ChapterStaging/card_voice_text") as Label3D
+	_check(voice_card != null and voice_card.text.contains("KEPT AS AN INFERENCE"), "the production room restores the player's recorded voice classification across the chapter join")
 	var target: Node3D = _campaign.physical_target("p05_equip_gauge")
 	_check(target != null, "Chapter 3 exposes a physical P-05 gauge target")
 	if target != null:

@@ -4,10 +4,18 @@ extends RefCounted
 
 const Kit = preload("res://assets/environment/kit/habitat_kit.gd")
 const Presentation = preload("res://scripts/world/room_presentation.gd")
+const Airlock = preload("res://assets/environment/EN_Airlock/en_airlock.gd")
+## Airlock shell pieces the room replaces: floor and ceiling tiles become MultiMesh batches over the room's floor and
+## ceiling collision proxies, and the kit light strips give way to the room's practical fixtures (ceiling_strips).
+const AIRLOCK_BATCHED := ["EN_Kit_FloorTile", "EN_Kit_CeilingTile"]
+const AIRLOCK_DROPPED := ["EN_Kit_LightStrip"]
 static var _templates: Dictionary = {}
 
 ## Builds batched kit geometry and a closed physical shell with actual portal holes.
 static func build(room: Node3D, layout: Dictionary) -> void:
+	if String(layout.get("shell", "")) == "airlock":
+		build_airlock(room, layout)
+		return
 	var shell := Node3D.new()
 	shell.name = "HabitatKit"
 	room.visual_root.add_child(shell)
@@ -61,6 +69,101 @@ static func build(room: Node3D, layout: Dictionary) -> void:
 		connector(room, layout, portal)
 	collider(room.collision_root, "FloorCollision", Vector3(0, -0.15, 0), Vector3(width, 0.3, depth))
 	collider(room.collision_root, "CeilingCollision", Vector3(0, height + 0.1, 0), Vector3(width, 0.2, depth))
+
+## LOC-05 (M3-2R): the approved M3-2A double-interlock vestibule (en_airlock.gd from airlock.json, 8 x 4 m) as the
+## room shell, moved so the room centre is the origin like every kit room. The interlock keeps running on its own
+## node ("Airlock": hatches, panels, lamps, pump, pass-through lids); the pieces named in layout "airlock_roles" move
+## under VisualRoot with their role as name, so focus targets and selection frames find them like any other prop;
+## the inner door becomes the room's portal (a KitDoor that mirrors WorldRoute, with its corridor connector).
+static func build_airlock(room: Node3D, layout: Dictionary) -> void:
+	var airlock := Airlock.new()
+	airlock.name = "Airlock"
+	airlock.build_on_ready = false
+	airlock.with_lights = false
+	airlock.position = Vector3(-float(layout.bounds_m[0]) * 0.5, 0, -float(layout.bounds_m[1]) * 0.5)
+	room.visual_root.add_child(airlock)
+	airlock.build()
+	var door: Node3D = airlock.nodes.get("inner_door")
+	if door != null:
+		airlock.nodes.erase("inner_door")
+		airlock.remove_child(door)
+		door.free()
+	var batches: Dictionary = {}
+	for child in airlock.get_children():
+		var id := _airlock_piece(String(child.name))
+		if id in AIRLOCK_BATCHED or id in AIRLOCK_DROPPED:
+			if id in AIRLOCK_BATCHED:
+				if not batches.has(id):
+					batches[id] = []
+				batches[id].append(airlock.transform * (child as Node3D).transform)
+			airlock.remove_child(child)
+			child.free()
+	var shell := Node3D.new()
+	shell.name = "HabitatKit"
+	room.visual_root.add_child(shell)
+	_publish(shell, batches)
+	for role in layout.get("airlock_roles", []):
+		var node: Node3D = airlock.nodes.get(String(role))
+		if node == null:
+			continue
+		var placed := airlock.transform * node.transform
+		airlock.remove_child(node)
+		node.name = String(role)
+		node.transform = placed
+		room.visual_root.add_child(node)
+		if String(role) == "glove_ports":
+			open_window_back(node)
+	for portal in layout.portals:
+		connector(room, layout, portal)
+	var width := float(layout.bounds_m[0])
+	var depth := float(layout.bounds_m[1])
+	collider(room.collision_root, "FloorCollision", Vector3(0, -0.15, 0), Vector3(width, 0.3, depth))
+	collider(room.collision_root, "CeilingCollision", Vector3(0, float(layout.ceiling_height_m) + 0.1, 0), Vector3(width, 0.2, depth))
+
+## Opens the back of a wall module that reuses the kit window frame. EN_Airlock_GlovePort closes its back face with
+## one 1.0 x 2.6 m plate (two triangles, drawn double-sided), so its pressure window showed grey paint instead of
+## Alo's sealed chamber. This drops only that plate from the placed copy (the GLB is unchanged): the room data builds
+## the chamber walls behind the module, and the window and ports seal the wall as before. Returns triangles dropped.
+static func open_window_back(module: Node3D) -> int:
+	var dropped := 0
+	for child in module.find_children("*", "MeshInstance3D", true, false):
+		var instance := child as MeshInstance3D
+		var source := instance.mesh as ArrayMesh
+		if source == null:
+			continue
+		var opened := ArrayMesh.new()
+		var removed := 0
+		for surface in source.get_surface_count():
+			var arrays := source.surface_get_arrays(surface)
+			var index_data: Variant = arrays[Mesh.ARRAY_INDEX]
+			if index_data is PackedInt32Array:
+				var indices: PackedInt32Array = index_data
+				var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+				var kept := PackedInt32Array()
+				for t in indices.size() / 3:
+					var a := vertices[indices[t * 3]]
+					var b := vertices[indices[t * 3 + 1]]
+					var c := vertices[indices[t * 3 + 2]]
+					# the back plate: behind the module's front face, flat, and larger than any other part (> 0.5 m2)
+					if a.z > 0.1 and absf(a.z - b.z) < 0.001 and absf(a.z - c.z) < 0.001 and (b - a).cross(c - a).length() * 0.5 > 0.5:
+						removed += 1
+						continue
+					kept.append(indices[t * 3])
+					kept.append(indices[t * 3 + 1])
+					kept.append(indices[t * 3 + 2])
+				arrays[Mesh.ARRAY_INDEX] = kept
+			opened.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+			opened.surface_set_material(surface, source.surface_get_material(surface))
+			opened.surface_set_name(surface, source.surface_get_name(surface))
+		if removed > 0:
+			instance.mesh = opened
+			dropped += removed
+	return dropped
+
+## The kit or airlock piece id a placed node was named after (Godot adds "@...@n" to repeated sibling names).
+static func _airlock_piece(node_name: String) -> String:
+	var id := node_name.trim_prefix("@")
+	return id.get_slice("@", 0)
 
 ## Adds the approved corridor rings behind a portal, with a pressure-rated end door.
 static func connector(room: Node3D, layout: Dictionary, portal: Dictionary) -> void:

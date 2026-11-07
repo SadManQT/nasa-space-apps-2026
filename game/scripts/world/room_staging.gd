@@ -52,8 +52,78 @@ void fragment() {
 	SPECULAR = 0.2;
 }
 """
+## M3-2R: a labelled side-view diagram of one flower of the Chapter 2 mustard (Brassica rapa): four petals (two seen
+## edge-on), four long and two short stamens with pollen-bearing anthers, and the central pistil with its stigma.
+## Shapes carry the meaning as well as colour (dotted anthers, ridged stigma, outlined parts), and the labels are
+## words beside them. "contact" = 1 draws pollen grains on the stigma: the saved contact image after a transfer.
+const FLOWER_DIAGRAM_SHADER := """
+shader_type spatial;
+uniform float aspect = 1.4;
+uniform float contact = 0.0;
+uniform float glow = 0.0;
+float seg(vec2 p, vec2 a, vec2 b) {
+	vec2 pa = p - a, ba = b - a;
+	float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);
+	return length(pa - ba * h);
+}
+float ell(vec2 p, vec2 c, vec2 r, float angle) {
+	vec2 q = p - c;
+	float s = sin(angle), k = cos(angle);
+	q = vec2(k * q.x + s * q.y, -s * q.x + k * q.y);
+	return (length(q / r) - 1.0) * min(r.x, r.y);
+}
+void paint(inout vec3 col, float d, vec3 fill, vec3 edge) {
+	col = mix(col, fill, step(d, 0.0));
+	col = mix(col, edge, step(abs(d), 0.007));
+}
+void fragment() {
+	vec2 p = vec2((UV.x * 2.0 - 1.0) * aspect, 1.0 - UV.y * 2.0);
+	vec3 col = vec3(0.95, 0.95, 0.92);
+	vec3 ink = vec3(0.12, 0.14, 0.18);
+	vec3 green = vec3(0.33, 0.55, 0.25);
+	vec3 petal = vec3(0.95, 0.78, 0.20);
+	vec3 anther = vec3(0.86, 0.62, 0.12);
+	// pedicel, receptacle and sepals
+	paint(col, seg(p, vec2(0.0, -1.05), vec2(0.0, -0.56)) - 0.035, green, ink);
+	paint(col, ell(p, vec2(-0.14, -0.40), vec2(0.04, 0.15), 0.45), green, ink);
+	paint(col, ell(p, vec2(0.14, -0.40), vec2(0.04, 0.15), -0.45), green, ink);
+	// two petals in profile, spread outwards from their claws
+	paint(col, ell(p, vec2(-0.47, -0.20), vec2(0.34, 0.11), -0.35), petal, ink);
+	paint(col, ell(p, vec2(0.47, -0.20), vec2(0.34, 0.11), 0.35), petal, ink);
+	paint(col, ell(p, vec2(0.0, -0.50), vec2(0.14, 0.07), 0.0), green, ink);
+	// six stamens: four long inside, two short outside; anthers dotted with pollen
+	vec2 tips[6] = vec2[6](vec2(-0.16, 0.40), vec2(-0.06, 0.44), vec2(0.06, 0.44), vec2(0.16, 0.40), vec2(-0.30, 0.14), vec2(0.30, 0.14));
+	for (int i = 0; i < 6; i++) {
+		vec2 root = vec2(tips[i].x * 0.3, -0.44);
+		paint(col, seg(p, root, tips[i]) - 0.012, vec3(0.80, 0.84, 0.62), ink);
+		float a = ell(p, tips[i] + vec2(0.0, 0.06), vec2(0.035, 0.075), 0.0);
+		paint(col, a, anther, ink);
+		vec2 g = fract((p - tips[i]) * 42.0) - 0.5;
+		if (a < -0.006 && length(g) < 0.22) { col = vec3(0.55, 0.38, 0.06); }
+	}
+	// pistil: ovary, style and the ridged stigma on top
+	paint(col, ell(p, vec2(0.0, -0.22), vec2(0.065, 0.22), 0.0), green, ink);
+	paint(col, seg(p, vec2(0.0, -0.05), vec2(0.0, 0.46)) - 0.03, green, ink);
+	float st = ell(p, vec2(0.0, 0.53), vec2(0.085, 0.05), 0.0);
+	paint(col, st, vec3(0.80, 0.86, 0.52), ink);
+	if (st < -0.004 && abs(fract((p.x + 0.085) * 36.0) - 0.5) < 0.12) { col = mix(col, ink, 0.45); }
+	// pollen grains carried to the stigma (the contact image)
+	if (contact > 0.5) {
+		vec2 grains[7] = vec2[7](vec2(-0.05, 0.57), vec2(0.0, 0.59), vec2(0.045, 0.565), vec2(-0.025, 0.55), vec2(0.03, 0.535), vec2(0.065, 0.55), vec2(-0.065, 0.545));
+		for (int i = 0; i < 7; i++) { paint(col, length(p - grains[i]) - 0.016, vec3(0.96, 0.70, 0.10), ink); }
+	}
+	// leader lines from the labels to the anther and the stigma
+	paint(col, seg(p, vec2(0.66, 0.66), vec2(0.20, 0.47)) - 0.004, ink, ink);
+	paint(col, seg(p, vec2(-0.66, 0.66), vec2(-0.09, 0.55)) - 0.004, ink, ink);
+	ALBEDO = col;
+	EMISSION = col * glow;
+	ROUGHNESS = 0.85;
+	SPECULAR = 0.15;
+}
+"""
 static var _lines: Dictionary = {}
 static var _solar_shader: Shader
+static var _flower_shader: Shader
 
 ## Builds stage into room (base nodes named in "hide" are hidden, everything else is added under ChapterStaging
 ## roots) and returns the visual root of the additions.
@@ -81,6 +151,10 @@ static func build(room: CampaignRoom, stage: Dictionary, layout: Dictionary) -> 
 		model.rotation_degrees = Presentation.vector(spec.get("rotation_degrees", [0, 0, 0]))
 		model.scale = Presentation.vector(spec.get("scale", [1, 1, 1]))
 		visuals.add_child(model)
+		if spec.get("rattle") is Dictionary:
+			_rattle(model, spec.rattle)
+	for spec in stage.models:
+		_teaching_model(visuals, spec)
 	for spec in stage.eclipse_props:
 		_eclipse_prop(visuals, spec)
 	for spec in stage.chapter7_props:
@@ -334,12 +408,16 @@ static func _pose_monitor(screen, settings: Dictionary) -> void:
 
 ## A print pinned to a board: a quad facing +Z like a sign ("yaw" turns it), with a caption below. "solar_image"
 ## is the procedural white-light solar image; "eclipse_frame" is one held frame of the filtered camera, rendered
-## once from the M3-6A monitor screen at the authored phase.
+## once from the M3-6A monitor screen at the authored phase. M3-2R adds "plant_photo" (an installed plant or tray
+## model photographed in its own world, "subject" GLB, optional "view", "zoom", "illustration"), "texture" (an image
+## file, e.g. the paper-bee stamp) and "flower_diagram" (the labelled flower; "contact" adds pollen on the stigma,
+## "glow" lights it as a screen). "border" (metres) adds a white photographic border.
 static func _print(parent: Node3D, spec: Dictionary) -> Node3D:
 	var holder := Node3D.new()
 	holder.name = String(spec.id)
 	holder.position = Presentation.vector(spec.position)
-	holder.rotation_degrees.y = float(spec.get("yaw", 0))
+	# "pitch" -90 lays a print on a table (top edge away from the reader); "roll" tilts it in its own plane
+	holder.rotation_degrees = Vector3(float(spec.get("pitch", 0)), float(spec.get("yaw", 0)), float(spec.get("roll", 0)))
 	parent.add_child(holder)
 	var size := Vector2(float(spec.size[0]), float(spec.size[1]))
 	var quad := MeshInstance3D.new()
@@ -369,6 +447,42 @@ static func _print(parent: Node3D, spec: Dictionary) -> Node3D:
 			material.albedo_texture = view.get_texture()
 			material.roughness = 0.6
 			quad.material_override = material
+		"plant_photo":
+			var material := StandardMaterial3D.new()
+			material.albedo_texture = _photo_view(holder, spec, size).get_texture()
+			material.roughness = 0.45
+			quad.material_override = material
+		"texture":
+			var material := StandardMaterial3D.new()
+			material.albedo_texture = load(String(spec.texture)) as Texture2D
+			material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+			material.roughness = 0.9
+			quad.material_override = material
+		"flower_diagram":
+			if _flower_shader == null:
+				_flower_shader = Shader.new()
+				_flower_shader.code = FLOWER_DIAGRAM_SHADER
+			var material := ShaderMaterial.new()
+			material.shader = _flower_shader
+			material.set_shader_parameter("aspect", size.x / size.y)
+			material.set_shader_parameter("contact", 1.0 if bool(spec.get("contact", false)) else 0.0)
+			material.set_shader_parameter("glow", float(spec.get("glow", 0.0)))
+			quad.material_override = material
+			_diagram_labels(holder, size, spec)
+	if spec.has("border"):
+		# a white photographic border, a millimetre behind the picture
+		var back := MeshInstance3D.new()
+		back.name = "Border"
+		var card := QuadMesh.new()
+		card.size = size + Vector2.ONE * float(spec.border) * 2.0
+		back.mesh = card
+		back.position.z = -0.001
+		var paper := StandardMaterial3D.new()
+		paper.albedo_color = Color("#f1f0ea")
+		paper.roughness = 0.8
+		back.material_override = paper
+		back.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		holder.add_child(back)
 	holder.add_child(quad)
 	if spec.has("caption"):
 		var caption := Label3D.new()
@@ -386,3 +500,158 @@ static func _print(parent: Node3D, spec: Dictionary) -> Node3D:
 		caption.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 		holder.add_child(caption)
 	return holder
+
+## The SubViewport that photographs an installed plant (or tray) model for a "plant_photo" print, rendered once: the
+## subject GLB on its own in a dark chamber-like backdrop, one soft key and fill, framed from "view" (yaw, pitch in
+## degrees) so the same frame repeats on every date. "illustration": true renders it unshaded, flat like a drawing
+## (a reference illustration, never a photograph of the crew's own plant).
+static func _photo_view(holder: Node3D, spec: Dictionary, size: Vector2) -> SubViewport:
+	var view := SubViewport.new()
+	view.name = "PhotoView"
+	view.size = Vector2i(640, int(round(640.0 * size.y / size.x)))
+	view.own_world_3d = true
+	view.msaa_3d = Viewport.MSAA_4X
+	view.render_target_update_mode = SubViewport.UPDATE_ONCE
+	if bool(spec.get("illustration", false)):
+		view.debug_draw = Viewport.DEBUG_DRAW_UNSHADED
+	holder.add_child(view)
+	var world := WorldEnvironment.new()
+	var environment := Environment.new()
+	environment.background_mode = Environment.BG_COLOR
+	environment.background_color = Color(spec.get("backdrop", "#1b2433"))
+	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	environment.ambient_light_color = Color("#c9d3e0")
+	environment.ambient_light_energy = 0.45
+	environment.tonemap_mode = Environment.TONE_MAPPER_AGX
+	world.environment = environment
+	view.add_child(world)
+	var key := DirectionalLight3D.new()
+	key.rotation_degrees = Vector3(-42, -35, 0)
+	key.light_color = Color(spec.get("light", "#fff1e0"))
+	key.light_energy = 1.3
+	view.add_child(key)
+	var fill := DirectionalLight3D.new()
+	fill.rotation_degrees = Vector3(-15, 150, 0)
+	fill.light_energy = 0.35
+	view.add_child(fill)
+	var subject := Geometry.load_glb(String(spec.subject))
+	var camera := Camera3D.new()
+	camera.fov = 30.0
+	view.add_child(camera)
+	camera.current = true
+	if subject == null:
+		return view
+	view.add_child(subject)
+	var box := Geometry.bounds(subject) if subject.is_inside_tree() else AABB(Vector3(-0.15, 0, -0.15), Vector3(0.3, 0.4, 0.3))
+	var aim: Array = spec.get("view", [25, -12])
+	var direction := Basis.from_euler(Vector3(deg_to_rad(float(aim[1])), deg_to_rad(float(aim[0])), 0)) * Vector3.BACK
+	var fit := maxf(box.size.y, maxf(box.size.x, box.size.z) * size.y / size.x) * 0.5 * float(spec.get("zoom", 1.2))
+	var centre := box.get_center()
+	camera.transform = Transform3D(Basis(), centre + direction * fit / tan(deg_to_rad(camera.fov) * 0.5)).looking_at(centre, Vector3.UP)
+	return view
+
+## The words of a flower diagram, beside the parts the leader lines point to (diagram space: x across the picture's
+## height-relative width, y up, both -1..1 of the height).
+static func _diagram_labels(holder: Node3D, size: Vector2, spec: Dictionary) -> void:
+	var words: Dictionary = spec.get("labels", {"anther": "ANTHER\nmakes pollen", "stigma": "STIGMA\nreceives pollen"})
+	var spots := {"anther": Vector2(0.98, 0.78), "stigma": Vector2(-0.98, 0.78)}
+	for part in words:
+		var label := Label3D.new()
+		label.name = "Label_" + String(part)
+		label.text = String(words[part])
+		var at: Vector2 = spots.get(String(part), Vector2.ZERO) * size.y * 0.5
+		label.position = Vector3(at.x, at.y, 0.002)
+		label.double_sided = false
+		label.font_size = 40
+		label.pixel_size = size.y / 900.0
+		label.modulate = Color("#1b2433")
+		label.outline_size = 0
+		holder.add_child(label)
+
+## A nonliving teaching model of one mustard flower on a stand (EX-CH02-S02's practice model): four petals in a cross,
+## four long and two short stamens with anthers, the pistil and its stigma, each part a separate primitive so the
+## practice runs on contact points; tagged in words. Never a living plant, and like every plant here it has no face.
+static func _teaching_model(parent: Node3D, spec: Dictionary) -> Node3D:
+	var model := Node3D.new()
+	model.name = String(spec.id)
+	model.position = Presentation.vector(spec.position)
+	model.rotation_degrees.y = float(spec.get("yaw", 0))
+	parent.add_child(model)
+	var parts := [
+		["Base", "cylinder", Vector3(0, 0.008, 0), Vector3(0.14, 0.016, 0.14), Vector3.ZERO, "#1f2a44"],
+		["Stem", "cylinder", Vector3(0, 0.09, 0), Vector3(0.012, 0.16, 0.012), Vector3.ZERO, "#4f8a3a"],
+		["Receptacle", "sphere", Vector3(0, 0.172, 0), Vector3(0.03, 0.022, 0.03), Vector3.ZERO, "#4f8a3a"],
+		["Pistil", "cylinder", Vector3(0, 0.205, 0), Vector3(0.011, 0.06, 0.011), Vector3.ZERO, "#5c9a44"],
+		["Stigma", "sphere", Vector3(0, 0.238, 0), Vector3(0.022, 0.012, 0.022), Vector3.ZERO, "#cfd98a"],
+	]
+	for index in 4:
+		var yaw := index * 90.0 + 45.0
+		var out := Basis(Vector3.UP, deg_to_rad(yaw)) * Vector3(0, 0, 0.038)
+		parts.append(["Petal%d" % index, "sphere", Vector3(out.x, 0.182, out.z), Vector3(0.034, 0.005, 0.06), Vector3(-22, yaw, 0), "#f2c230"])
+	for index in 6:
+		var long := index < 4
+		var yaw: float = [0.0, 90.0, 180.0, 270.0, 45.0, 225.0][index]
+		var reach := 0.012 if long else 0.024
+		var out := Basis(Vector3.UP, deg_to_rad(yaw)) * Vector3(0, 0, reach)
+		var height := 0.05 if long else 0.034
+		parts.append(["Filament%d" % index, "cylinder", Vector3(out.x, 0.175 + height * 0.5, out.z), Vector3(0.003, height, 0.003), Vector3.ZERO, "#d9dcb0"])
+		parts.append(["Anther%d" % index, "sphere", Vector3(out.x, 0.178 + height, out.z), Vector3(0.008, 0.016, 0.008), Vector3.ZERO, "#d99a1c"])
+	for part in parts:
+		var mesh := MeshInstance3D.new()
+		mesh.name = String(part[0])
+		if part[1] == "cylinder":
+			var cylinder := CylinderMesh.new()
+			cylinder.top_radius = 0.5
+			cylinder.bottom_radius = 0.5
+			cylinder.height = 1.0
+			cylinder.radial_segments = 24
+			mesh.mesh = cylinder
+		else:
+			var sphere := SphereMesh.new()
+			sphere.radius = 0.5
+			sphere.height = 1.0
+			sphere.radial_segments = 24
+			sphere.rings = 12
+			mesh.mesh = sphere
+		mesh.position = part[2]
+		mesh.rotation_degrees = part[4]
+		mesh.scale = part[3]
+		var material := StandardMaterial3D.new()
+		material.albedo_color = Color(String(part[5]))
+		material.roughness = 0.55
+		mesh.material_override = material
+		model.add_child(mesh)
+	for tag in [["TagAnther", "ANTHER", Vector3(0.07, 0.25, 0.0)], ["TagStigma", "STIGMA", Vector3(-0.075, 0.26, 0.0)]]:
+		var label := Label3D.new()
+		label.name = String(tag[0])
+		label.text = String(tag[1])
+		label.position = tag[2]
+		label.font_size = 40
+		label.pixel_size = 0.00045
+		label.double_sided = false
+		label.modulate = Color("#1b2433")
+		label.outline_modulate = Color("#f1f0ea")
+		label.outline_size = 8
+		model.add_child(label)
+	return model
+
+## A short, deterministic rattle of a staged object (the cup at the EX-CH02-S11 -> S12 join): small slides and tilts
+## for "seconds", then back to rest. Presentation only; the quake beat, its sounds and timing belong to the mission.
+static func _rattle(model: Node3D, spec: Dictionary) -> void:
+	if not model.is_inside_tree():
+		return
+	var rest_position := model.position
+	var rest_rotation := model.rotation
+	var amplitude := float(spec.get("amplitude_m", 0.003))
+	var random := RandomNumberGenerator.new()
+	random.seed = 20460506
+	var tween := model.create_tween()
+	tween.tween_interval(float(spec.get("delay_s", 0.0)))
+	for step in int(float(spec.get("seconds", 2.5)) / 0.045):
+		var nudge := Vector3(random.randf_range(-amplitude, amplitude), 0, random.randf_range(-amplitude, amplitude))
+		var tilt := Vector3(random.randf_range(-0.035, 0.035), 0, random.randf_range(-0.035, 0.035))
+		tween.tween_property(model, "position", rest_position + nudge, 0.045)
+		tween.parallel().tween_property(model, "rotation", rest_rotation + tilt, 0.045)
+	tween.tween_property(model, "position", rest_position, 0.08)
+	tween.parallel().tween_property(model, "rotation", rest_rotation, 0.08)
+	model.set_meta("rattle", tween)

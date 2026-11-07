@@ -50,6 +50,7 @@ func snapshot() -> Dictionary:
 		"last_viewpoint_cut": _last_viewpoint_cut.duplicate(true),
 	}
 
+## Restores a validated route snapshot, adding the internal vestibule door to checkpoints from before M3-2R.
 func restore(snapshot_data: Dictionary) -> Dictionary:
 	# Validate every nested collection before replacing live world state.
 	for key in ["boundaries", "roster", "last_viewpoint_cut"]:
@@ -60,8 +61,11 @@ func restore(snapshot_data: Dictionary) -> Dictionary:
 	for entry in snapshot_data.history:
 		if not entry is Dictionary:
 			return {"accepted": false, "reason": "World history must contain Dictionaries."}
+	var boundaries: Dictionary = snapshot_data.boundaries.duplicate(true)
+	if not boundaries.has("door_commons_airlock"):
+		boundaries["door_commons_airlock"] = NavigationContract.default_boundary_state("door_commons_airlock")
 	for boundary_id in NavigationContract.boundary_ids():
-		var value = snapshot_data.boundaries.get(boundary_id, null)
+		var value = boundaries.get(boundary_id, null)
 		if not value is Dictionary:
 			return {"accepted": false, "reason": "World route is missing boundary " + boundary_id}
 		var defaults: Dictionary = NavigationContract.default_boundary_state(boundary_id)
@@ -79,7 +83,7 @@ func restore(snapshot_data: Dictionary) -> Dictionary:
 		return {"accepted": false, "reason": "World route snapshot names an unknown scene."}
 	_current_room = room_id
 	_current_scene = String(snapshot_data.get("current_scene_id", "EX-CH01-S01"))
-	_boundaries = snapshot_data.get("boundaries", {}).duplicate(true)
+	_boundaries = boundaries
 	# Placements are authored scene facts, not player-editable save data. This
 	# also repairs older saves made before the arrival/split-team roster fix.
 	_roster = canonical_roster

@@ -12,6 +12,7 @@ supersedes the older toon-room prompt: kit and equipment retain PBR materials;
 | LOC-02 | Two adjacent 6 × 5 m work bays plus a 3 m shared service aisle (12 × 8 m overall); glass divider/protected trunk, power west/air east; three kit corridor segments behind the Commons portal | `service_rooms.tscn` |
 | LOC-03 | 12 × 8 m; Tara reference bay, care bench/glovebox, seed archive; Alo cassette behind south pressure glazing (seedling in view at the glass front, chamber unit behind it, magenta-white growth lamps) and a separate shutter | `garden.tscn` |
 | LOC-04 | 8 × 6 m; five seats at 1.04 m pitch (≈1.5 m aisles at both ends), perimeter water panels, four indexed bundle rails, seed latch, roll-call board, hatch flush on the west wall | `safe_room.tscn` |
+| LOC-05 | 8 × 4 m approved M3-2A double interlock; suit-up vestibule, isolated cycle chamber, glove-port access to Alo and sealed sample pass-through to Tara | `airlock.tscn` (M3-2R) |
 | LOC-06 | Existing 120 × 120 m greybox retained; no LOLA/dated-horizon claim until M1-34/M1-36 | `exterior.tscn` |
 
 All interiors use the kit's 2.6 m finished ceiling. `portals` replace three wall
@@ -85,7 +86,9 @@ Doc 09's revisit rule applies: props accumulate between chapters; only mission-s
   `logged`), `chapter7_props` (M3-7A props through `chapter7_assets.gd`, added by M3-7R: `markers` role -> slot with
   each name beside its marker, `case` lid/latch, `water_units`, `selector`, `lamps`, `isolated`, `card_out`, `pins`,
   `attach` (a GLB seated in one of its sockets) and `screens`, plain words on a `Screen_*` slot; `line` quotes a catalog
-  line), `prints` (`solar_image`, `eclipse_frame`), `local_lights`, `obstacles` (collision and the rebuilt
+  line), `prints` (`solar_image`, `eclipse_frame`; M3-2R adds `plant_photo`, image `texture` and labelled
+  `flower_diagram`, with `pitch`, `roll`, photographic `border` and optional `caption`), `models` (the nonliving
+  mustard-flower practice model: four petals, four long and two short stamens), `local_lights`, `obstacles` (collision and the rebuilt
   navigation map), `focus_targets` (stations).
 - Changes: `hide` (base node ids, including their obstacles), `hide_signs` (base sign texts),
   `focus_labels`, `anchors` (merged by key; later layers win), `lighting` (`practical_scale`,
@@ -117,3 +120,41 @@ work anchor stands (S02–S04). There are no stand-in benches.
 Run `game/tools/run_tests.sh chapter6_rooms` / `chapter7_rooms` (mapping, rosters, stations, navigation, collision,
 resting props, readable signs and screens, every §2.9 join, echoes, re-staging back to Chapter 1, cast placement), and
 `production/qa/evidence/M3-6R_capture.sh` / `M3-7R_capture.sh` for the windowed screenshots and frame timings.
+
+# Chapter 2 rooms (M3-2R)
+
+The explicit CH02 scene map already used by the mission gates is retained:
+
+| Scenes | Room | Physical story carriers |
+|---|---|---|
+| S01–S02, S06 | LOC-03 | Earth console beside Tara (contact returns 30 Apr), equal-size paired flower portraits and identity records; cross-pollination protocol, labelled brushes, magnifier, nonliving practice flower and paper bee; seven-date care strip with three bee stamps (one crooked), prediction threaded to the family-tree page, clean seed tray |
+| S03–S05 | LOC-05 | Approved airlock kit and its running pressure interlock; Alo behind sealed glove-port glazing, sealed carrier pass-through, sample bench and microscope, separate brush directions; real out-and-back route with four boundaries beside Kai's incomplete sketch, space-weather check reminder, paired care record and saved contact image |
+| S07 | LOC-01 | Life-cycle cards distinguish current flower, old unflowered seedlings and a reference drawing of later pods; clean tray beside the care strip, paper bee's wing at the recorder's HORT-01 label. The mission-table top is a ring (r 0.42–0.86 m) round a recessed display, so the record sits on the near side, the strip and tray on the far side and the recorder on the display |
+| S08–S10 | LOC-02 | Recorder service bench, original plate beneath the service sticker, three sourced metadata cards, Observed / Inferred / Unknown board with the person's space blank; reconstruction slots, dated playback and both 2034 transcripts loaded word for word from the catalog |
+| S11–S12 | LOC-01 | Sent/receipt/reply columns kept separate; cup by the pending indicator (rattles in S12); marked brace zone with four name tokens, moved service cover and the changed pressure warning |
+| CH03 S01 | LOC-02 | Same red pressure warning at 22:05; recorder and evidence board remain through the same night's work (S05) |
+
+The LOC-05 shell reuses `en_airlock.gd` from M3-2A. Its hatches, lids, panels and pump retain that service's rules;
+floor/ceiling tiles are batched, room practicals replace its standalone lighting, and the Commons portal uses the
+existing pressure-door and corridor builder. Samples cross the garden interface; people stay on the vestibule side.
+Collision, navigation clearance, furniture footprints and crew positions are authored in `LOC-05.json`. Alo stands on
+a 0.2 m stand at the back of the sealed chamber so her flowers sit in the pressure window's sightline. The
+`EN_Airlock_GlovePort` GLB closes its back with a grey plate behind the window, so the room builder drops that plate
+from its placed copy (`HabitatRoomBuilder.open_window_back`) until M3-102 fixes the asset build.
+`LoadPreparation` registers the airlock scene so kit dependencies load with it. The campaign passes saved choices to
+crew placement, preserving D4's prediction and D5's inference card on restored scenes and chapter joins. Chapter 6/7
+layers and Chapter 1 base layouts are preserved; returning to Chapter 1 removes the Chapter 2 staging.
+
+`test_chapter2_rooms.gd` checks all twelve scenes in their room state, physical traversal, interaction sightlines,
+navigation, prop support, sign orientation, crew placement, echoes and the CH02 → CH03 join. Crew anchors keep 0.8 m
+from every station approach the scene uses and 0.4 m from its line to the station (crew bodies block the player and
+the interaction ray), except the brace zone where all four stand. Anything resting on furniture is ray-tested against
+the visible meshes over its whole footprint, not the square collision boxes, and a 1.6 m eye at the glove-port
+station must see Alo's flowers through glass only. The production runtime test also restores D5 through that join.
+
+`production/qa/evidence/M3-2R_capture.sh` writes the 25 screenshots and four frame-time probes; the `--capture` pass
+only renders (the checks stay headless). Its watchdog starts when Godot starts, not while it queues for the two-slot
+gate; a stalled pass is stack-sampled and retried once. macOS stops Godot drawing when the window is reported covered
+(another capture window, the lock screen), which used to hang the capture on `frame_post_draw`; the test now renders
+those frames itself and records any frame timing it could not measure as not measured. Narrative timing, dated
+cards, puzzle receipts and resource charges stay with their existing mission services.

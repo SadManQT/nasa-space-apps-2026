@@ -1670,8 +1670,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 2 rooms and locations",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-claude2",
    "deps": [
     "M1-06",
     "M3-2A"
@@ -1685,8 +1685,8 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-05",
+   "evidence": "run_tests.sh (GODOT=godot_gated): 56/56 suites passed (production/qa/evidence/M3-2R_tests.txt); test_chapter2_rooms 3434 checks PASS incl. new station-clearance, visible-surface footprint and Alo-through-glass checks; windowed capture M3-2R_capture.sh PASS: 25 screenshots production/qa/evidence/M3-2R_*.png (inspected), 60 fps with cast in all four rooms (M3-2R_runtime.txt); fixes and Sadman's review list in M3-2R_review.md; follow-up M3-102 (glove-port asset back plate)",
+   "updated": "2026-11-07",
    "prompt": "Goal: every location the Chapter 2 scenes use (production/manifest/scene_index.csv, CH02 rows; LOC ids in\ngame-design/09_WORLD_AND_LEVEL_DESIGN.md) is a real scene built the same way as the Chapter 1 rooms (M1-06), with layout data in\ngame/resources/campaign/rooms/, collision, navigation, lighting and valid RoomContract targets. Chapters 3–8 currently reuse the five\nChapter 1 rooms; give each scene its proper location. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); place this chapter's bridge objects, §4 clue objects and §5.2 story-echo objects in the rooms so each join can play in the world.",
    "reserved_for": "sadman",
    "effort": 3
@@ -5731,6 +5731,29 @@
    "prompt": "Ownership handoff from Atik M1-49 under MASTER_PLAN §7. Inspect current CH01-S02 inventory-lamp blink, S03 drawer opening, S04/S05 garden care locations and S12 four named mugs. Publish room/staging hooks allowing the campaign to trigger exactly one lamp blink, visit both real garden plant anchors during dated care, and name the existing mugs Kai/Amara/Mei/Rafi at S12. Preserve current authored rooms, doors and scene joins; reuse assets and approved lines. M1-51 is done, so confirm existing CS-01 has no duplicate dialogue and publish how L01/L02 arrival, L03 route preview and L04 before commit should be requested through the existing audio/dialogue interface; media edits remain yours. Provide exact hook names/anchor IDs in evidence and screenshots of blink/mugs. Atik will wire these into M1-49 and record CH01-MUGS-NAMED through the Director; do not edit Atik campaign/routes or invent canon.",
    "reserved_for": "sadman",
    "effort": 2
+  },
+  {
+   "id": "M3-102",
+   "milestone": "M3",
+   "priority": "P2",
+   "tool": "claude",
+   "title": "Open the back of EN_Airlock_GlovePort so its window sees Alo's chamber",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-2R"
+   ],
+   "paths": [
+    "production/tools/build_chapter2_assets.py",
+    "game/assets/environment/EN_Airlock/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/night-claude2 on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "Found by M3-2R (7 Nov night shift): EN_Airlock_GlovePort reuses the kit window frame and closes its back face with one 1.0 x 2.6 m plate (two triangles at local z 0.15, material M_Kit_PaintGrey, drawn double-sided), so the pressure window shows grey paint instead of the sealed plant chamber the asset notes promise. LOC-05 currently drops that plate from its placed copy at runtime (HabitatRoomBuilder.open_window_back, game/scripts/world/habitat_room_builder.gd) and test_chapter2_rooms.gd checks that a 1.6 m eye at the glove-port station sees Alo's flowers through glass only. Fix it at the source: in production/tools/build_chapter2_assets.py leave the back of the GlovePort module open (or cut the window opening through the plate), rebuild both LODs (byte-check the other pieces stay identical), re-run the M3-2A gate and capture, and then remove open_window_back and its call so the room uses the GLB as built. This changes an approved asset, so show Sadman the before/after M3-2A_godot_* and M3-2R_S04_alo_glove_ports screenshots. Acceptance: run_tests.sh N/N; test_chapter2_rooms.gd still passes the window check without the runtime opening.",
+   "reserved_for": "sadman",
+   "effort": 1
   }
  ],
  "requirements": [
