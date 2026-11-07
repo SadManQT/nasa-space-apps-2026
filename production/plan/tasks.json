@@ -1932,7 +1932,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 3 rooms and locations",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-06",
@@ -1947,8 +1947,8 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-07",
+   "evidence": "Rooms: EX-CH03-S01..S05 LOC-02 service rooms; S06..S08 LOC-07 Expedition Zero annex (new: game/scenes/campaign/rooms/annex.tscn, LOC-07.json, 8x6 m warm-side kit bay with the N.R. floor hatch, 10x6 m 2034 annex 3 m below, two navigation decks, hatch as pressure boundary; Mei and Rafi in EVA suits and helmets on the cold side in S07); S09..S12 LOC-03 garden (S12 roster moved from LOC-01). Doc 24 joins, 2.9 CH03 bridges incl. CH03->CH04, clue objects and echoes D2/D6, vigil and Tara moments staged. Tests: game/tools/test_chapter3_rooms.gd PASS 4612 checks headless, 250 windowed; full game/tools/run_tests.sh on the tree rebased onto 9e64247: 66/66 suites passed (production/qa/evidence/M3-3R_run_tests.txt). Screenshots: 37 production/qa/evidence/M3-3R_S01..S12_*.png, each reviewed and fixed (crew out of the gauge view, cards inside their frames, closer views on small text, care ledger off the door frame and window, photos printed from the dated plant models); runtime p50 16.7 ms at vsync in a quiet window (M3-3R_runtime.txt). Filed M3-107 (Atik: load card and route boundaries for LOC-07, dedication ids) and M3-108 (petal prop materials).",
+   "updated": "2026-11-08",
    "prompt": "Goal: every location the Chapter 3 scenes use (production/manifest/scene_index.csv, CH03 rows; LOC ids in\ngame-design/09_WORLD_AND_LEVEL_DESIGN.md) is a real scene built the same way as the Chapter 1 rooms (M1-06), with layout data in\ngame/resources/campaign/rooms/, collision, navigation, lighting and valid RoomContract targets. Chapters 3–8 currently reuse the five\nChapter 1 rooms; give each scene its proper location. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); place this chapter's bridge objects, §4 clue objects and §5.2 story-echo objects in the rooms so each join can play in the world.",
    "reserved_for": "sadman",
    "effort": 3
