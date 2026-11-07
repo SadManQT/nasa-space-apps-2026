@@ -58,9 +58,10 @@
    "data_doi": "10.60903/gsfcpgda-lola-spole",
    "mpp": 10,
    "used_for": [
-    "heightmap cold_trap"
+    "heightmap cold_trap",
+    "heightmap relay_road_mid"
    ],
-   "cache_bytes": 9612123,
+   "cache_bytes": 19050459,
    "width": 43280,
    "height": 43280,
    "compression": 8,
@@ -96,7 +97,7 @@
    "used_for": [
     "review sheets: NASA's own hillshade beside ours"
    ],
-   "cache_bytes": 8475293,
+   "cache_bytes": 10572701,
    "width": 30400,
    "height": 30400,
    "compression": 8,
@@ -114,7 +115,7 @@
     "cold trap pick (permanently shadowed regions)",
     "preview PSR crops"
    ],
-   "cache_bytes": 35732267,
+   "cache_bytes": 37829675,
    "width": 30400,
    "height": 30400,
    "compression": 8,
@@ -227,6 +228,17 @@
     -13170.0,
     -11530.0
    ]
+  },
+  "relay_road_mid": {
+   "x_m": -35800.0,
+   "y_m": 64440.0,
+   "height_m": -643.7,
+   "lat_deg": -87.56934327060789,
+   "lon_deg_east": 330.94539590092285,
+   "distance_m": 99289.4,
+   "name": "Relay road midpoint (computed road)",
+   "product": "pgda90_80mpp",
+   "rule": "the point of the computed relay road (routes.json relay_road, 80 m grid) nearest half its length"
   }
  },
  "regions": {
@@ -276,6 +288,18 @@
    "origin_x_m": -46120.0,
    "origin_y_m": 139880.0,
    "sha256_r16": "75902720aa758185a6b1e9b3ff984180096661713daffad78d692a96e9b7b6a9",
+   "interpolated_nan_fraction": 0.0
+  },
+  "relay_road_mid": {
+   "source_product": "pgda90_10mpp",
+   "columns": 800,
+   "rows": 800,
+   "metres_per_pixel": 10.0,
+   "z_min_m": -1382.21,
+   "z_max_m": -138.614,
+   "origin_x_m": -39795.0,
+   "origin_y_m": 68435.0,
+   "sha256_r16": "c73bb3cd01dd9de5bbc1782a7c78a734a9d6a980263a945ab6be993503a59134",
    "interpolated_nan_fraction": 0.0
   },
   "malapert_summit": {

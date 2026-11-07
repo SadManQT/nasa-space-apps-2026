@@ -1,5 +1,5 @@
 {
- "about": "M1-82: where each playable exterior stands on the real LOLA terrain (M1-34) when the campaign gives it ground from the terrain provider (Atik's TerrainStream, M1-36). Authored per room: region_id, origin_xz_m, ephemeris_site, horizon_site, omit_staging_floor and the reason. Everything else is derived from the region's detail heightfield by game/tools/test_exterior_terrain.gd -- --write and checked on every test run. The flat greybox rooms are unchanged when the terrain is not used.",
+ "about": "M1-82: where each playable exterior stands on the real LOLA terrain (M1-34) when the campaign gives it ground from the terrain provider (Atik's TerrainStream, M1-36). Authored per room: region_id, origin_xz_m, ephemeris_site, horizon_site, omit_staging_floor and the reason, and flat_scenes: scenes the room map stages in the room whose dated Horizons row belongs to another site, each with why; the campaign leaves terrain_ground false for them, so they keep the flat room. Everything else is derived from the region's detail heightfield by game/tools/test_exterior_terrain.gd -- --write and checked on every test run. The flat greybox rooms are unchanged when the terrain is not used.",
  "frame": "Room-local = region site frame - origin_m, same axes (X toward 90 deg E on the map, Z = -map y, Y up), no rotation. Put the TerrainStream node at position -origin_m beside the room (room at the campaign origin), configure(region_id, origin_m + local point, exclusions) and move_focus(player.position + origin_m). exclusions are in the site frame; every other position is room-local.",
  "rules": "Anchors and focus targets keep their flat XZ and stand on the ground there (a focus target keeps its height above the floor). Props, fixtures and doors rest at the lowest ground under the part that meets the ground (vertices within 0.15 m of the base), so nothing floats; bury_m is the deepest corner, at most 0.6 m or 10 % of footprint_m (a graded pad). focus_approaches are 1.5 m from each target toward the player anchor, turned in 15 deg steps until the straight lane clears every door and prop collider; a lane that still cannot go straight goes through the one waypoint in detours (keyed by focus target or anchor id). Exclusions (site frame, TerrainStream clear areas) keep rock scatter off every anchor, approach, target, prop, fixture and door and off 2 m-spaced lanes from the player anchor to each of them. Walkable: at most 15 deg (the VIPER design incline the relay road already uses) along every lane (max_walk_slope_deg). ground_y_range_m is the room-local ground over the whole room footprint.",
  "rooms": {
@@ -1101,16 +1101,347 @@
    }
   },
   "LOC-11": {
-   "region_id": "relay_road",
+   "region_id": "relay_road_mid",
    "origin_xz_m": [
-    -24227.5,
-    -76912.5
+    0.0,
+    0.0
    ],
    "ephemeris_site": "relay_road_mid",
    "horizon_site": "relay_road_mid",
-   "omit_staging_floor": false,
-   "placement": "The first repeater sector is the computed relay road's midpoint (sun_positions.json site relay_road_mid, the EX-CH08-S03 row).",
-   "pending": "Not on terrain yet: the relay road exists only as the 80 m corridor grid with a 200 m visual mesh, too coarse to walk (props would float or sink by metres). It needs the 10 m playable patch the M1-34 README plans (make_terrain.window_m); until then the flat staging stays."
+   "omit_staging_floor": true,
+   "flat_scenes": {
+    "EX-CH08-S10": "The room map stages S10 here, but it happens in the pressurised relay rover cabin at the Malapert summit (STORY_FULL), 65.6 km from this sector in a straight line (99 km along the computed relay road, routes.json). Its Horizons row is at malapert_summit (9 Apr 2047 02:00 UTC: Sun +2.3 deg, lit; Earth -2.3 deg, above the summit's horizon), so on this patch TerrainStream.lighting gives no Sun rig and RoomContract.earth no Earth. It keeps the flat room until it has its own summit location (board M4-05)."
+   },
+   "placement": "The first repeater sector is the computed relay road's midpoint by length (routes.json relay_road_mid, map x -35,800 m, y 64,440 m), the site of the EX-CH08-S03 and S04 Horizons rows and of its terrain horizon. It stands on relay_road_mid, the 8 km hero patch cut from the 10 m LDEM_83S grid around that site (M1-87), in the site's own frame. The road descends through the room toward Malapert (room -Z) at about 6.6 deg on a valley side; the Sun stays behind the valley's terrain horizon in both rows, so the sector is dark but for lamps.",
+   "origin_m": [
+    0.0,
+    -0.511,
+    0.0
+   ],
+   "anchors": {
+    "relay_kai": [
+     -2.0,
+     0.07,
+     2.0
+    ],
+    "relay_rafi": [
+     2.0,
+     0.23,
+     2.0
+    ],
+    "relay_player": [
+     0.0,
+     0.3,
+     4.0
+    ]
+   },
+   "focus_targets": {
+    "relay_route_console": [
+     -5.0,
+     0.636,
+     -3.0
+    ],
+    "repeater_chain": [
+     0.0,
+     0.575,
+     -3.0
+    ],
+    "relay_controller": [
+     5.0,
+     0.913,
+     -3.0
+    ]
+   },
+   "focus_approaches": {
+    "relay_route_console": [
+     -4.855,
+     -0.266,
+     -1.507
+    ],
+    "repeater_chain": [
+     0.0,
+     -0.113,
+     -1.5
+    ],
+    "relay_controller": [
+     4.128,
+     -0.007,
+     -1.779
+    ]
+   },
+   "props": {
+    "VH_Rover": [
+     -2.4,
+     -0.395,
+     -1.4
+    ],
+    "PR_SurveyBeacon": [
+     0.0,
+     -0.157,
+     -1.4
+    ],
+    "PR_RelayController": [
+     2.4,
+     -0.042,
+     -1.4
+    ],
+    "PR_UplinkFeedthrough": [
+     -2.4,
+     -0.055,
+     0.7
+    ]
+   },
+   "fixtures": {},
+   "doors": {
+    "airlock_exterior": [
+     0.0,
+     1.478,
+     5.5
+    ],
+    "relay_route_boundary": [
+     -2.0,
+     1.002,
+     0.0
+    ]
+   },
+   "bury_m": {
+    "Door_airlock_exterior": 0.07,
+    "Door_relay_route_boundary": 0.055,
+    "VH_Rover": 0.453,
+    "PR_SurveyBeacon": 0.104,
+    "PR_RelayController": 0.036,
+    "PR_UplinkFeedthrough": 0.039
+   },
+   "footprint_m": {
+    "VH_Rover": 6.141,
+    "PR_SurveyBeacon": 1.43,
+    "PR_RelayController": 0.504,
+    "PR_UplinkFeedthrough": 0.518
+   },
+   "detours": {},
+   "max_walk_slope_deg": 6.27,
+   "exclusions": [
+    {
+     "position": [
+      -2.0,
+      -0.441,
+      2.0
+     ],
+     "radius_m": 2.0
+    },
+    {
+     "position": [
+      2.0,
+      -0.28,
+      2.0
+     ],
+     "radius_m": 2.0
+    },
+    {
+     "position": [
+      0.0,
+      -0.21,
+      4.0
+     ],
+     "radius_m": 2.0
+    },
+    {
+     "position": [
+      -5.0,
+      -0.875,
+      -3.0
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -4.855,
+      -0.776,
+      -1.507
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      0.0,
+      -0.736,
+      -3.0
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      0.0,
+      -0.623,
+      -1.5
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      5.0,
+      -0.597,
+      -3.0
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      4.128,
+      -0.517,
+      -1.779
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      0.0,
+      -0.133,
+      5.5
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -2.0,
+      -0.608,
+      0.0
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -2.4,
+      -0.906,
+      -1.4
+     ],
+     "radius_m": 4.227
+    },
+    {
+     "position": [
+      0.0,
+      -0.667,
+      -1.4
+     ],
+     "radius_m": 1.715
+    },
+    {
+     "position": [
+      2.4,
+      -0.553,
+      -1.4
+     ],
+     "radius_m": 1.289
+    },
+    {
+     "position": [
+      -2.4,
+      -0.566,
+      0.7
+     ],
+     "radius_m": 1.259
+    },
+    {
+     "position": [
+      -1.0,
+      -0.328,
+      3.0
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      1.0,
+      -0.243,
+      3.0
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -1.214,
+      -0.364,
+      2.623
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -2.428,
+      -0.51,
+      1.246
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -3.641,
+      -0.647,
+      -0.13
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      0.0,
+      -0.348,
+      2.167
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      0.0,
+      -0.486,
+      0.333
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      1.032,
+      -0.276,
+      2.555
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      2.064,
+      -0.349,
+      1.11
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      3.096,
+      -0.43,
+      -0.335
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -0.667,
+      -0.338,
+      2.667
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -1.333,
+      -0.462,
+      1.333
+     ],
+     "radius_m": 1.2
+    }
+   ],
+   "ground_y_range_m": [
+    -1.046,
+    2.922
+   ]
   }
  }
 }

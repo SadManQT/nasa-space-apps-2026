@@ -51,6 +51,15 @@
     "lat_deg": -89.5813,
     "lon_deg_east": 199.4626,
     "psr_area_km2": 1.858
+   },
+   "relay_road_mid": {
+    "x_m": -35800.0,
+    "y_m": 64440.0,
+    "height_m": -643.7,
+    "lat_deg": -87.5693,
+    "lon_deg_east": 330.9454,
+    "name": "Relay road midpoint (computed road)",
+    "rule": "the point of the computed relay road (routes.json relay_road, 80 m grid) nearest half its length"
    }
   },
   "heightmaps": {
@@ -85,6 +94,14 @@
     "z_min_m": -4021.135,
     "z_max_m": 5172.486,
     "source": "pgda90_80mpp"
+   },
+   "relay_road_mid": {
+    "metres_per_pixel": 10.0,
+    "columns": 800,
+    "rows": 800,
+    "z_min_m": -1382.21,
+    "z_max_m": -138.614,
+    "source": "pgda90_10mpp"
    },
    "malapert_summit": {
     "metres_per_pixel": 5.0,

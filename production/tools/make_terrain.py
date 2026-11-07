@@ -18,9 +18,9 @@ Standard library + numpy. scipy (optional) speeds up two steps; Pillow is only u
   python3 production/tools/make_terrain.py all          # everything, in order
   python3 production/tools/make_terrain.py sites        # pin the site coordinates (needs network)
   python3 production/tools/make_terrain.py routes       # slope-limited roads (the corridor crop follows them)
-  python3 production/tools/make_terrain.py heightmaps   # crop + encode the regions
+  python3 production/tools/make_terrain.py heightmaps   # crop + encode the regions (--region <id>: only one)
   python3 production/tools/make_terrain.py sun          # JPL Horizons + local horizon masks
-  python3 production/tools/make_terrain.py preview      # hillshades with cast shadows, PSR crops
+  python3 production/tools/make_terrain.py preview      # hillshades with cast shadows, PSR crops (--region <id>)
   python3 production/tools/make_terrain.py fixture      # provenance + Data Card fixture + manifest
   python3 production/tools/make_terrain.py review       # side-by-side LOLA hillshade vs in-game capture
   python3 production/tools/make_terrain.py check        # offline validation of everything written
@@ -578,6 +578,17 @@ def load_sites() -> dict:
     return read_json(p)
 
 
+def all_sites() -> dict:
+    """The pinned story sites (sites.json) plus the computed relay road's midpoint (routes.json), the
+    site of the Chapter 8 road scenes' Horizons rows and of the relay_road_mid hero region (M1-87)."""
+    sites = dict(load_sites()["sites"])
+    routes = read_json(TERRAIN / "routes.json") if (TERRAIN / "routes.json").exists() else {}
+    if "relay_road_mid" in routes:
+        sites["relay_road_mid"] = dict(routes["relay_road_mid"], name="Relay road midpoint (computed road)",
+                                       product="pgda90_80mpp", rule="the point of the computed relay road (routes.json relay_road, 80 m grid) nearest half its length")
+    return sites
+
+
 def pick_highest(product_id: str, cx: float, cy: float, radius_m: float) -> dict:
     rd = reader(product_id)
     size = 2 * radius_m + 4 * rd.mpp
@@ -818,12 +829,19 @@ def corridor_bounds(region: dict, a: dict, b: dict, routes: dict) -> tuple[float
     return lo_a, hi_a, lo_c, hi_c
 
 
-def cmd_heightmaps() -> None:
-    sites = load_sites()["sites"]
+def cmd_heightmaps(only: str = "") -> None:
+    """Crop and encode every region (or only the region `only`, keeping the other index entries)."""
+    sites = all_sites()
     routes = read_json(TERRAIN / "routes.json").get("routes", {}) if (TERRAIN / "routes.json").exists() else {}
+    index_path = TERRAIN / "heightmaps_index.json"
+    kept = read_json(index_path).get("regions", {}) if only and index_path.exists() else {}
     manifest = {"regions": {}}
     for region in CFG["regions"]:
         rid = region["id"]
+        if only and rid != only:
+            if rid in kept:
+                manifest["regions"][rid] = kept[rid]
+            continue
         if region["kind"] == "corridor":
             a, b = sites[region["from"]], sites[region["to"]]
             length = math.hypot(b["x_m"] - a["x_m"], b["y_m"] - a["y_m"])
@@ -883,7 +901,7 @@ def cmd_heightmaps() -> None:
         write_json(d / f"{name}.json", meta)
         manifest["regions"][rid] = {"heightmap": f"{rid}/{name}.r16", "meta": f"{rid}/{name}.json", "mpp": mpp, "columns": meta["columns"], "rows": meta["rows"]}
         log(f"{rid}: {pid} {meta['columns']}x{meta['rows']} @ {mpp} m, z {zmin:.0f}..{zmax:.0f} m, nan {nan_frac:.4%}")
-    write_json(TERRAIN / "heightmaps_index.json", manifest)
+    write_json(index_path, manifest)
 
 
 # ---------------------------------------------------------------- routes
@@ -1065,10 +1083,7 @@ def longest_runs(flags: list, stamps: list) -> dict:
 
 
 def cmd_sun() -> None:
-    sites = dict(load_sites()["sites"])
-    routes = read_json(TERRAIN / "routes.json") if (TERRAIN / "routes.json").exists() else {}
-    if "relay_road_mid" in routes:
-        sites["relay_road_mid"] = dict(routes["relay_road_mid"], name="Relay road midpoint (computed road)")
+    sites = all_sites()
     windows = list(CFG["sun_windows"])
     if "relay_road_mid" in sites:
         windows.append({"id": "ch08_road_mid", "site": "relay_road_mid", "start": "2047-04-07 00:00", "stop": "2047-04-11 00:00", "step": "1 h", "scenes": "EX-CH08-S03..S04 road scenes"})
@@ -1175,11 +1190,14 @@ def story_sun_for(site_id: str, sun: dict) -> dict | None:
     return None
 
 
-def cmd_preview() -> None:
+def cmd_preview(only: str = "") -> None:
+    """Hillshade previews of every region (or only the region `only`, keeping the other index entries)."""
     sun = read_json(GAME_LOLA / "sun_positions.json") if (GAME_LOLA / "sun_positions.json").exists() else {}
-    report = {}
+    report = read_json(PREVIEW / "preview_index.json") if only and (PREVIEW / "preview_index.json").exists() else {}
     for region in CFG["regions"]:
         rid = region["id"]
+        if only and rid != only:
+            continue
         h, meta = load_region(rid)
         mpp = meta["metres_per_pixel"]
         site_id = meta["site"]["id"]
@@ -1266,7 +1284,7 @@ def product_uses(index: dict) -> dict:
 
 
 def cmd_fixture() -> None:
-    sites = load_sites()["sites"]
+    sites = all_sites()
     routes = read_json(TERRAIN / "routes.json")["routes"] if (TERRAIN / "routes.json").exists() else {}
     sun = read_json(GAME_LOLA / "sun_positions.json")
     index = read_json(TERRAIN / "heightmaps_index.json")
@@ -1413,7 +1431,7 @@ def cmd_review() -> None:
 
 def cmd_check() -> int:
     problems = []
-    sites = load_sites()["sites"]
+    sites = all_sites()
     index = read_json(TERRAIN / "heightmaps_index.json")
     for rid, r in index["regions"].items():
         meta = read_json(GAME_LOLA / r["meta"])
@@ -1473,9 +1491,13 @@ def cmd_check() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("step", choices=["all", "sites", "heightmaps", "routes", "sun", "preview", "fixture", "review", "check"])
+    ap.add_argument("--region", default="", help="heightmaps and preview: only this region id (the other entries are kept)")
     a = ap.parse_args()
+    if a.region and a.region not in {r["id"] for r in CFG["regions"]}:
+        ap.error(f"unknown region {a.region}")
     CACHE.mkdir(parents=True, exist_ok=True)
-    steps = {"sites": cmd_sites, "heightmaps": cmd_heightmaps, "routes": cmd_routes, "sun": cmd_sun, "preview": cmd_preview, "fixture": cmd_fixture, "review": cmd_review}
+    steps = {"sites": cmd_sites, "heightmaps": lambda: cmd_heightmaps(a.region), "routes": cmd_routes, "sun": cmd_sun,
+             "preview": lambda: cmd_preview(a.region), "fixture": cmd_fixture, "review": cmd_review}
     if a.step == "check":
         return cmd_check()
     order = ["sites", "routes", "heightmaps", "sun", "preview", "fixture", "review"] if a.step == "all" else [a.step]

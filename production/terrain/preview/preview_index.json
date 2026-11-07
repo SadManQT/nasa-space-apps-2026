@@ -34,5 +34,11 @@
   "sun_el_deg": 2.305,
   "label": "EX-CH08-S08 2047-04-09 01:15 UTC: Sun az 18.5 deg, el +2.31 deg (JPL Horizons, lit at the site)",
   "shadow_fraction": 0.5465
+ },
+ "relay_road_mid": {
+  "sun_az_deg": 54.923,
+  "sun_el_deg": -0.126,
+  "label": "EX-CH08-S03 2047-04-08 06:00 UTC: Sun az 54.9 deg, el -0.13 deg (JPL Horizons, dark at the site)",
+  "shadow_fraction": 0.9
  }
 }

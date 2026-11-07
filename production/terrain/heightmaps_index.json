@@ -28,6 +28,13 @@
    "columns": 724,
    "rows": 2114
   },
+  "relay_road_mid": {
+   "heightmap": "relay_road_mid/heightmap_10m.r16",
+   "meta": "relay_road_mid/heightmap_10m.json",
+   "mpp": 10.0,
+   "columns": 800,
+   "rows": 800
+  },
   "malapert_summit": {
    "heightmap": "malapert_summit/heightmap_5m.r16",
    "meta": "malapert_summit/heightmap_5m.json",

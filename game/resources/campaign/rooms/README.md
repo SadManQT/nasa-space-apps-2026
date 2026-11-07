@@ -204,8 +204,9 @@ cards, puzzle receipts and resource charges stay with their existing mission ser
 `exterior_terrain.json` places each playable exterior on the real LOLA terrain (M1-34) for the terrain provider
 (`game/scripts/terrain/terrain_stream.gd`, Atik's). Authored per room: `region_id`, `origin_xz_m` (site frame),
 `ephemeris_site` (whose JPL Horizons rows give the Sun and Earth directions), `horizon_site` (whose computed terrain
-horizon holds where the room stands, or ""), `omit_staging_floor` and `placement` (why there). `game/tools/
-test_exterior_terrain.gd -- --write` derives the rest from the region's detail heightfield; every test run re-derives
+horizon holds where the room stands, or ""), `omit_staging_floor`, `placement` (why there) and `flat_scenes` (scenes
+the room map stages in the room whose dated row belongs to another site, each with why; they keep the flat room).
+`game/tools/test_exterior_terrain.gd -- --write` derives the rest from the region's detail heightfield; every test run re-derives
 and compares, so a moved prop or a new heightfield fails until it is re-written.
 
 | Room | Region, origin | Why | Earth |
@@ -213,7 +214,7 @@ and compares, so a moved prop or a new heightfield fails until it is re-written.
 | LOC-06 mast courtyard | `aurora_ridge` at the Aurora site | the site of the Horizons rows and terrain horizon | dated rows where Earth clears the horizon |
 | LOC-09 surveyed ridge | `cold_trap` at the computed road's last bend (-620, -1000) | EX-CH04-S04's corner, 146 m above the basin | never: no horizon computed there |
 | LOC-10 vault approach | `cold_trap` at the cold-trap site | the PSR floor of the S05/S06 rows | its rows put Earth below the horizon |
-| LOC-11 relay route | `relay_road` at relay_road_mid, **pending** | the 80 m corridor is too coarse to walk; needs the 10 m patch | — |
+| LOC-11 relay route | `relay_road_mid` (the 10 m relay-road patch, M1-87) at its site | the computed road's midpoint, the site of the EX-CH08-S03/S04 rows and terrain horizon; the road descends through the room toward Malapert (−Z) | S03 and S04: their rows put Earth below the horizon (the Sun too: dark but for lamps). EX-CH08-S10, which the room map also stages here, is in `flat_scenes`: it happens in the summit rover cabin and its row is at `malapert_summit` (Sun up, Earth above the summit's horizon), so it keeps the flat room until it has its own summit location (board M4-05) |
 
 Frame: room-local = site frame - `origin_m`, same axes, no rotation. The campaign keeps the room at its origin, puts
 the stream at `-origin_m`, `configure(region_id, origin_m + player anchor, exclusions)` and `move_focus(player.position
@@ -227,7 +228,13 @@ lane), `props`, `fixtures`, `doors` (resting at the lowest ground under the part
   sets `omit_staging_floor`, the room builds no staging floor, apron rails, flat navigation or greybox light rig, and
   stands its anchors, focus targets, props, fixtures and doors on the published spots. Every id, door, pressure marker
   and scene id is the same; `on_terrain()` reports it, `terrain_anchors()` gives the anchors, and `CampaignCrew.place`
-  uses them. Without the flag (or for LOC-11) the flat greybox is exactly as before.
+  uses them. Without the flag the flat greybox is exactly as before. Every exterior (LOC-06, LOC-09, LOC-10, LOC-11)
+  has a ready placement; none waits for a walkable patch. It is ready for the scenes whose dated row is at its
+  `ephemeris_site`, the only rows `TerrainStream.lighting()` and `RoomContract.earth()` accept there: whoever sets
+  `terrain_ground` for a scene leaves it false for a scene in the placement's `flat_scenes` (today only EX-CH08-S10 in
+  LOC-11; `RoomContract.terrain_for_scene` will do this, board M4-05). The test fails for any scene the room map stages
+  in a terrain room that has neither a row at the room's site nor a `flat_scenes` entry, and for an entry the room map
+  no longer stages there.
 - `RoomContract.terrain(room_id)` returns the placement; `RoomContract.earth(room_id, scene_id)` the dated Earth:
   `presented` only when the room stands at the row's site with a computed horizon, the scene has a bundled row
   (`lola/sun_positions.json` `scene_lighting`) that puts Earth above the terrain horizon, and Earth is not over the Sun
@@ -239,6 +246,7 @@ lane), `props`, `fixtures`, `doors` (resting at the lowest ground under the part
   EX-CH04-S09 and EX-CH05-S01.
 
 Run `game/tools/run_tests.sh exterior_terrain` (placements against the heightfields, walkable lanes, rock clearance,
-the terrain-mode and flat rooms, a real player walking on the provider's collision to every approach and crew anchor,
+every staged scene's dated row at its room's site or a `flat_scenes` entry, the provider's Sun rig for each terrain
+scene, the terrain-mode and flat rooms, a real player walking on the provider's collision to every approach and crew anchor,
 the Earth rules) and `production/qa/evidence/M1-82_capture.sh` (windowed wide and ground views on the terrain, and the
 rendered Earth's measured size).

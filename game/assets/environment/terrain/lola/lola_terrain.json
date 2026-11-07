@@ -42,6 +42,19 @@
     -832.72,
     -502.5
    ]
+  },
+  "relay_road_mid": {
+   "lat_deg": -87.56934327060789,
+   "lon_deg_east": 330.94539590092285,
+   "height_m": -643.7,
+   "x_m": -35800.0,
+   "y_m": 64440.0,
+   "name": "Relay road midpoint (computed road)",
+   "godot_offset_from_aurora_m": [
+    -24227.5,
+    -2603.2,
+    -76912.5
+   ]
   }
  },
  "regions": {
@@ -88,6 +101,17 @@
    "columns": 724,
    "rows": 2114,
    "tiles": "res://assets/environment/terrain/lola/relay_road/tiles.json"
+  },
+  "relay_road_mid": {
+   "kind": "hero",
+   "story": "LOC-11 relay route at the first repeater sector (EX-CH08-S03, S04): the playable 10 m patch around the computed relay road's midpoint, in that site's own frame so its Horizons rows light it (M1-87)",
+   "site": "relay_road_mid",
+   "heightmap": "res://assets/environment/terrain/lola/relay_road_mid/heightmap_10m.r16",
+   "meta": "res://assets/environment/terrain/lola/relay_road_mid/heightmap_10m.json",
+   "metres_per_pixel": 10.0,
+   "columns": 800,
+   "rows": 800,
+   "tiles": "res://assets/environment/terrain/lola/relay_road_mid/tiles.json"
   },
   "malapert_summit": {
    "kind": "hero",
@@ -4173,6 +4197,7 @@
  "preview_scenes": {
   "aurora": "EX-CH01-S07",
   "cold_trap": "EX-CH04-S05",
+  "relay_road_mid": "EX-CH08-S03",
   "malapert_summit": "EX-CH08-S08"
  },
  "frame": "Godot X = map x - site x; Z = -(map y - site y); Y = height - site height. Azimuth 0 = local north (away from the pole), 90 = east (clockwise seen from above)."

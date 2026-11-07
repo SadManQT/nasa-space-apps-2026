@@ -19,6 +19,7 @@ const Stream = preload("res://scripts/terrain/terrain_stream.gd")
 const Crew = preload("res://scripts/world/campaign_crew.gd")
 const Player = preload("res://scenes/player/player.tscn")
 const ROOM_SCENES := {"LOC-06": "res://scenes/campaign/rooms/exterior.tscn"}
+const CATALOG_PATH := "res://resources/campaign/content/campaign_catalog.json"
 ## Walkable incline (the VIPER design limit the relay road already uses) and the rock-clear radii, metres.
 const SLOPE_LIMIT_DEG := 15.0
 const BURY_LIMIT_M := 0.6
@@ -37,15 +38,22 @@ const BURY_GRADE := 0.1
 const Roster = preload("res://scripts/companions/companion_roster.gd")
 ## Scenes whose exterior has a computed horizon and a Horizons row that puts Earth above it (sun_positions.json).
 const EARTH_SHOWN := {"LOC-06": ["EX-CH01-S01", "EX-CH01-S12", "EX-CH04-S02", "EX-CH04-S09", "EX-CH05-S01"]}
-## Capture: room, dated scene, extra evidence light (a permanently shadowed floor is black under its true Sun).
-const SHOTS := [["LOC-06", "EX-CH04-S09", false], ["LOC-09", "EX-CH04-S05", false], ["LOC-10", "EX-CH04-S06", true]]
+## Capture: room, dated scene, extra evidence light (a permanently shadowed floor, or the relay road's valley with the
+## Sun behind its terrain horizon, is black under its true Sun).
+const SHOTS := [["LOC-06", "EX-CH04-S09", false], ["LOC-09", "EX-CH04-S05", false], ["LOC-10", "EX-CH04-S06", true], ["LOC-11", "EX-CH08-S03", true]]
 var checks := 0
 var failures := 0
 var _fields: Dictionary = {}
+## Every canon scene id, in story order (campaign catalog), read once.
+var _scene_ids: Array = []
+## Frames the window really drew (RenderingServer.frame_post_draw); a covered or locked-screen window draws none.
+var _draws := 0
+var _forced_draws := 0
 
 func _init() -> void:
 	if OS.get_cmdline_user_args().has("--capture") and DisplayServer.get_name() != "headless":
 		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, true)
+		RenderingServer.frame_post_draw.connect(func() -> void: _draws += 1)
 	_run.call_deferred()
 
 func _check(ok: bool, message: String) -> void:
@@ -65,6 +73,7 @@ func _run() -> void:
 	_check_earth()
 	if args.has("--capture"):
 		await _capture_all()
+		print("capture frames: %d drawn by the window, %d forced (covered window)" % [_draws, _forced_draws])
 	print("EXTERIOR TERRAIN RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
 
@@ -346,7 +355,38 @@ func _check_placements() -> void:
 			var at := Presentation.vector(place.focus_approaches[id])
 			_check(field.slope_deg_at(o.x + at.x, o.y + at.z) <= SLOPE_LIMIT_DEG, "%s approach to %s is walkable" % [room_id, id])
 			_check(at.distance_to(Presentation.vector(place.focus_targets[id])) < 3.0, "%s approach to %s is within interaction range" % [room_id, id])
-	_check(not bool(data.rooms["LOC-11"].omit_staging_floor), "LOC-11 waits for a walkable relay-road patch")
+	for room_id in data.rooms:
+		_check(bool(data.rooms[room_id].get("omit_staging_floor", false)) and not data.rooms[room_id].has("pending"), room_id + " stands on the terrain (no exterior waits for a walkable patch)")
+	# Every scene the room map stages in a terrain room is lit by its own dated row at the room's site (the only rows
+	# TerrainStream.lighting and RoomContract.earth accept there), or the placement lists it in flat_scenes, with the
+	# reason, so the campaign keeps that scene on the flat room until it has a location of its own.
+	for room_id in data.rooms:
+		var place: Dictionary = data.rooms[room_id]
+		if not bool(place.get("omit_staging_floor", false)):
+			continue
+		var flat: Dictionary = place.get("flat_scenes", {})
+		for scene_id in _staged_scenes(String(room_id)):
+			var row := Heightfield.scene_lighting(scene_id)
+			_check(flat.has(scene_id) or (not row.is_empty() and String(row.site) == String(place.ephemeris_site)), "%s, staged in %s, has a Horizons row at the room's site %s (its row: %s), or the placement keeps it flat (flat_scenes)" % [scene_id, room_id, place.ephemeris_site, "none" if row.is_empty() else String(row.site)])
+		for scene_id in flat:
+			var row := Heightfield.scene_lighting(String(scene_id))
+			_check(_staged_scenes(String(room_id)).has(scene_id), "%s flat scene %s is still staged there by the room map (drop it once the scene has its own location)" % [room_id, scene_id])
+			_check(row.is_empty() or String(row.site) != String(place.ephemeris_site), "%s keeps %s flat only because no row of its own lights the placement's site" % [room_id, scene_id])
+			_check(not String(flat[scene_id]).is_empty(), "%s says why %s stays flat" % [room_id, scene_id])
+	var relay: Dictionary = data.rooms.get("LOC-11", {})
+	_check(String(relay.get("region_id", "")) == "relay_road_mid" and _field("relay_road_mid") != null and String(_field("relay_road_mid").site.get("id", "")) == String(relay.get("ephemeris_site", "-")), "LOC-11 stands on the 10 m relay-road patch whose site is its Horizons site, so TerrainStream.lighting accepts the EX-CH08-S03/S04 rows")
+	_check(_field("relay_road_mid") != null and is_equal_approx(_field("relay_road_mid").metres_per_pixel, 10.0), "the relay-road patch is the 10 m LOLA grid, not the 80 m corridor")
+
+## The canon scenes (campaign catalog) that the room map (RoomContract.room_for_scene) stages in a room.
+func _staged_scenes(room_id: String) -> Array:
+	if _scene_ids.is_empty():
+		var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(CATALOG_PATH))
+		_scene_ids = catalog.scenes.map(func(scene): return String(scene.id))
+	return _scene_ids.filter(func(id): return Contract.room_for_scene(id) == room_id)
+
+## The scenes a terrain room stands on the terrain for: those it stages, less its flat_scenes.
+func _terrain_scenes(room_id: String, place: Dictionary) -> Array:
+	return _staged_scenes(room_id).filter(func(id): return not place.get("flat_scenes", {}).has(id))
 
 func _site_in_region(site: Dictionary, field: TerrainHeightfield) -> Vector2:
 	return Vector2(float(site.get("x_m", 0)) - float(field.site.x_m), -(float(site.get("y_m", 0)) - float(field.site.y_m)))
@@ -375,9 +415,9 @@ func _check_rooms() -> void:
 		flat.free()
 		ground.free()
 		await process_frame
-	var pending := _make_room("LOC-11", true)
-	_check(not pending.on_terrain() and pending.collision_root.has_node("FloorCollision"), "LOC-11 keeps its flat floor even when terrain is requested")
-	pending.free()
+	var relay := _make_room("LOC-11", true)
+	_check(relay.on_terrain() and not relay.collision_root.has_node("FloorCollision"), "LOC-11 stands on the relay-road terrain when terrain is requested")
+	relay.free()
 	# The crew stands on the terrain anchors (EX-CH04-S04: Kai and Rafi on the surveyed ridge).
 	var ridge := _make_room("LOC-09", true)
 	var crew := Crew.new()
@@ -406,6 +446,13 @@ func _check_walks() -> void:
 		var start: Vector3 = Presentation.vector(place.anchors[_player_anchor(place)])
 		var clear: Array = place.exclusions.map(func(e): return {"position": Presentation.vector(e.position), "radius_m": float(e.radius_m)})
 		_check(stream.configure(String(place.region_id), origin + start, clear), room_id + " TerrainStream configures from the placement")
+		# The provider lights every scene the room stands on the terrain for; a flat scene's row belongs elsewhere.
+		for scene_id in _staged_scenes(room_id):
+			var rig := stream.lighting(scene_id)
+			var on_ground: bool = _terrain_scenes(room_id, place).has(scene_id)
+			_check((rig != null) == on_ground, "%s %s: TerrainStream.lighting %s the dated Sun rig on %s" % [room_id, scene_id, "gives" if on_ground else "refuses (flat_scenes)", place.region_id])
+			if rig != null:
+				rig.free()
 		var player := Player.instantiate() as PlayerController
 		player.character_glb = "res://assets/characters/CH_Kai/CH_Kai.glb"
 		player.controlled = false
@@ -576,10 +623,19 @@ func _shot(camera: Camera3D, from: Vector3, to: Vector3, fov: float, id: String)
 	camera.position = from
 	camera.look_at(to)
 	camera.current = true
-	for frame in 8:
-		await process_frame
-	await RenderingServer.frame_post_draw
+	await _render(8)
 	_check(root.get_texture().get_image().save_png(ProjectSettings.globalize_path("res://../production/qa/evidence/M1-82_%s.png" % id)) == OK, "capture " + id)
+
+## Renders `frames` frames of the current view. macOS skips drawing a window it marks covered (another capture window,
+## the lock screen) and frame_post_draw then never fires, so every frame the window did not draw is rendered with
+## RenderingServer.force_draw into the root viewport's texture, which the shot reads either way.
+func _render(frames: int) -> void:
+	for frame in frames:
+		var drawn := _draws
+		await process_frame
+		if _draws == drawn:
+			RenderingServer.force_draw(false)
+			_forced_draws += 1
 
 ## The rendered Earth's angular size: the largest extent of its lit pixels, in degrees of the vertical field of view.
 func _disc_degrees(image: Image, fov: float) -> float:

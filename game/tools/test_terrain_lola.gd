@@ -35,7 +35,7 @@ func _run() -> void:
 	_check(credit.contains("NASA") and credit.contains("LOLA") and credit.contains("does not endorse"), "credit line names NASA LOLA and disclaims endorsement")
 	_check(Heightfield.credit_line() == credit and not Heightfield.credit_line(true).is_empty(), "loader exposes both credit lines")
 	var regions: Dictionary = manifest.get("regions", {})
-	for id in ["aurora_ridge", "aurora_vista", "cold_trap", "relay_road", "malapert_summit", "malapert_vista"]:
+	for id in ["aurora_ridge", "aurora_vista", "cold_trap", "relay_road", "relay_road_mid", "malapert_summit", "malapert_vista"]:
 		_check(regions.has(id), "manifest lists region " + id)
 	_curvature()
 	for id in regions:
@@ -253,8 +253,11 @@ func _sun(manifest: Dictionary) -> void:
 	_check(not summit.is_empty() and bool(summit.get("earth_above_terrain", false)), "Chapter 8 summit row: Earth clears the real terrain")
 	for scene_id in ["EX-CH04-S05", "EX-CH04-S06"]:
 		_check(String(Heightfield.scene_lighting(scene_id).get("sun_state", "")) == "dark", scene_id + ": the permanently shadowed cold trap stays dark")
+	for scene_id in ["EX-CH08-S03", "EX-CH08-S04"]:
+		var road := Heightfield.scene_lighting(scene_id)
+		_check(String(road.get("site", "")) == "relay_road_mid" and String(road.get("sun_state", "")) == "dark" and not bool(road.get("earth_above_terrain", true)), scene_id + ": the relay road's valley is dark, Earth below its horizon (M1-87)")
 	_check(Heightfield.scene_lighting("EX-NOPE").is_empty(), "unknown scene gets no invented lighting")
-	for sid in ["aurora", "cold_trap", "malapert_summit"]:
+	for sid in ["aurora", "cold_trap", "relay_road_mid", "malapert_summit"]:
 		var site: Dictionary = table.get("sites", {}).get(sid, {})
 		_check(site.get("terrain_horizon_deg_by_azimuth", []).size() == 360, sid + ": 360-azimuth terrain horizon recorded")
 		_check(manifest.get("sites", {}).has(sid), sid + ": manifest lists the site")

@@ -12,7 +12,8 @@ Credit line (Data Card, credits, every video that shows the terrain): `lola_terr
 | `aurora_ridge` | hero | Aurora, Shackleton–de Gerlache connecting ridge | 5 m (PGDA Site01) | 8 × 8 km | LOC-06, Chapters 1–8 at Aurora |
 | `aurora_vista` | vista | Aurora | 40 m | 64 × 64 km, 8 km hole | horizon: Shackleton, de Gerlache, the pole |
 | `cold_trap` | hero | Chapter 4 permanently shadowed basin | 10 m (LDEM_83S) | 8 × 8 km | LOC-09 / LOC-10 |
-| `relay_road` | corridor | Aurora → Malapert summit | 80 m | 58 × 169 km | LOC-11 overview (playable segments are M1-36) |
+| `relay_road` | corridor | Aurora → Malapert summit | 80 m | 58 × 169 km | relay road overview (Aurora's frame; too coarse to walk) |
+| `relay_road_mid` | hero | the computed relay road's midpoint (`routes.json`) | 10 m (LDEM_83S) | 8 × 8 km | LOC-11 first repeater sector, EX-CH08-S03/S04 (M1-87) |
 | `malapert_summit` | hero | highest point of Mons Malapert | 5 m (PGDA Site23) | 8 × 8 km | LOC-12 |
 | `malapert_vista` | vista | Malapert summit | 40 m | 64 × 64 km, 8 km hole | horizon toward Earth |
 
@@ -49,7 +50,12 @@ light.transform.basis = hf.sun_light_basis(sun.sun_az_deg, sun.sun_el_deg)
 partial against the real horizon; a scene staged away from its ephemeris site carries `horizon_from`, the point whose terrain horizon it was checked against, e.g. the Chapter 4 ridge 146 m above the cold-trap floor). Every exterior scene in the room scene map has a row (M1-88 added five, with the hours Sadman chose on 7 Nov 2026). Never clamp the Sun above the horizon: at Aurora in April 2046 it
 sits at −1.5°, and the ridge is lit only because the terrain falls away toward it.
 
+A playable road segment is its own hero region in the frame of its own site, never a crop of the corridor (whose frame and
+curvature belong to Aurora): `relay_road_mid` is cut with `make_terrain.py heightmaps --region relay_road_mid` and
+`build_terrain_tiles.py -- --region relay_road_mid`, and its site is the road midpoint whose Horizons rows light it
+(`TerrainStream.lighting()` only accepts rows of the field's own site).
+
 Rules: one hard Sun, black sky, no ambient except Earthshine (Art Bible §2); `terrain_lola.gdshader`
-uses McEwen's lunar-Lambert photometry and never multiplies the Sun by AO. Streaming, the playable
-road segments and scene integration are M1-36. Tests: `game/tools/test_terrain_lola.gd`;
+uses McEwen's lunar-Lambert photometry and never multiplies the Sun by AO. Streaming and scene
+integration are M1-36 (`terrain_stream.gd`). Tests: `game/tools/test_terrain_lola.gd`;
 captures: `game/tools/capture_terrain_m134.gd` via `production/qa/evidence/M1-34_capture.sh`.
