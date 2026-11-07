@@ -208,10 +208,14 @@ def main(runtime=False):
     noor_end = lines[1]["at"] + 3.92
     check(specs["CS-15"]["music_at"] >= noor_end + 1.5, "CUE-11 gives Noor's first words 1.5 s of room")
     check(abs(lines[3]["at"] - (lines[2]["at"] + 2.08) - 2.6) < 1e-6, "Mei's reply waits another 2.600 s round trip")
-    check([line["recording_task"] for line in lines if not line.get("file")] == ["M3-94R", "M3-94R"],
-          "approved Rao/Noor lines are caption-only pending M3-94R")
+    check(all(line.get("file") and (SRC / line["file"]).resolve().is_file() and "recording_task" not in line for line in lines)
+          and lines[0].get("radio") and lines[3].get("radio"), "every CS-15 line has its mastered voice file; Rao and Noor on the radio chain (M3-94R)")
     spans = [(b["at"], b["until"]) for b in specs["CS-15"]["beds"]]
-    check(all(abs(a[1] - b[0]) < 1e-6 for a, b in zip(spans, spans[1:])), "ambience beds never overlap across pictures")
+    # Doc 24 §7.5 beat 7: "then 2.6 s of nothing but the open channel". The Dhaka bed starts with Noor's first word
+    # (M4-04), so the one allowed gap is the hold at the cut into B; beds never overlap.
+    hold_gap = lambda a, b: abs(a[1] - 5.041667) < 1e-6 and abs(b[0] - lines[1]["at"]) < 1e-6
+    check(all(abs(a[1] - b[0]) < 1e-6 or hold_gap(a, b) for a, b in zip(spans, spans[1:])),
+          "ambience beds never overlap across pictures; the only gap is the 2.6 s open-channel hold (M4-04)")
     dhaka = [bed for bed in specs["CS-15"]["beds"] if bed["file"].endswith("SFX_DHAKA_ROOFTOP_MORNING.ogg")]
     ticks = [sfx for sfx in specs["CS-18"].get("sfx", []) if sfx["file"].endswith("SFX_INVENTORY_LAMP_TICK.ogg")]
     check(len(dhaka) == 1 and bool(dhaka[0].get("pending")) == any(not line.get("file") for line in lines),

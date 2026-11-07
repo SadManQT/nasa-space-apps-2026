@@ -136,3 +136,15 @@ The fix-round audio probe exposed timestamp-less silence from ffmpeg's adelay: a
 **The gate now hears the films.** `verify_staging.py` checks that the tick is installed and lands once on the first lit frame, with the lit frames measured in each film's own pictures (master and, with `--runtime`, the OGV, decoded at each stored frame's timestamp), so a picture that slipped a frame fails as well as a moved sound, and compares each runtime film's sound with its master (largest 50 ms level difference: 0.76–1.17 dB on matching films, 12.7 dB for the old silent CS-18 OGV; the limit is 3 dB). Before this, `--runtime` compared frames only, so `M3-97_capture.sh` would have kept the silent OGV. `--stale` lists the runtime films whose picture or sound drifted, and `M3-97_capture.sh` re-encodes only those (here: CS-18 alone; CS-15 and CS-17 kept their LFS films). The scdet evidence no longer records ffmpeg's filter address, so it only changes when the cuts do. A master or runtime film that is still a Git LFS pointer (a worktree checked out without LFS smudge) stops the gate with a fetch hint instead of being reported as stale.
 
 **CS-15, deferred to M4-04.** M3-94R (Rao's and Noor's recordings) is still open, so the Dhaka bed keeps its `pending` key and CS-15 is not re-encoded twice; `verify_staging.py` now requires the bed and the recordings to go in together. Two notes for M4-04: (1) the bed spans all of picture B (5.041667–13.708333 s) while the gate asserts digital silence over 5.2–7.5 s (the 2.6 s pause; doc 24 §7.5 beat 7: "then 2.6 s of nothing but the open channel"). Recommended: start the bed at 7.641667 s with Noor's first word, keeping the accepted silent pause, and allow that one gap in the bed-contiguity check; Sadman decides by ear. (2) Masking pre-check: Noor's first line through the composer's radio chain measures −23.6 LUFS against the bed at gain 0.199526 at −38.7 LUFS, a 15.1 LU margin.
+
+## M4-04 CS-15 voice lines and Dhaka bed (7 Nov 2026, Sadman/claude, Claude Opus 5.5)
+
+The two caption-only lines now play M3-94R's masters through the radio chain: Rao "Aurora, Earth. We hear you. Go
+ahead." at 1.25 s (3.19 s take, ends 4.44 s, before the cut into B at 5.04 s) and Noor "You finished what we could
+not." at 18.73 s (2.42 s take, ends 21.15 s, before Ferreira at 22.3 s); no line was re-timed. The Dhaka rooftop bed
+(SFX_DHAKA_ROOFTOP_MORNING, M3-99) is installed with the recommended option: it starts with Noor's first word at
+7.641667 s (0.25 s fade-in) and runs to the cut out of B at 13.708333 s, so doc 24 §7.5 beat 7's "2.6 s of nothing but
+the open channel" stays digital silence (master 5.2-7.5 s: -inf dB). verify_staging.py now checks that every CS-15
+line has its mastered file and allows that one bed gap; the silence check is unchanged. Rebuilt once: compose_cutscene.py
+(29.75 s), then M3-97_capture.sh re-encoded only CS-15's runtime OGV. The alternative (rooftop under the pause) is
+a one-line change in src/CS-15.json if Sadman prefers it by ear.
