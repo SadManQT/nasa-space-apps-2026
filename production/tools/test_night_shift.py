@@ -91,4 +91,36 @@ with mock.patch.multiple(ns, sh=lambda args, *a, **k: calls.append(args) or (0, 
     ns.park(Path("/nowhere"), "M9-06", "failed")
     assert any("block" in c for c in calls), calls  # its own failed night claim still blocks
 
+# Claude only (Sadman, 7 Nov): every lane and every reviewer is a Claude account, and supervisor preferences cannot bring
+# back Codex or Gemini
+assert all(set(a) <= {"claude2", "claude3"} for a in ns.LANES.values()), ns.LANES
+assert all(set(a) <= {"claude2", "claude3"} for a in ns.REVIEWER.values()), ns.REVIEWER
+assert all(ns.ACCOUNTS[a]["engine"] == "claude" and "claude-opus-5-5" in ns.ACCOUNTS[a]["cmd"] for a in ns.CLAUDE)
+
+# the reviewer is the other Claude account when it is free
+seen = []
+ns.asleep.clear()
+def record(account, prompt, cwd, effort):
+    seen.append((account, prompt))
+    return True, "VERDICT: PASS" if prompt == "review" else "done"
+with mock.patch.multiple(ns, run_agent=record, log=lambda m: None, resume_parked=lambda s, t: "", changes=lambda s: "",
+                         worker_prompt=lambda *a: "work", review_prompt=lambda *a: "review", run_capture=lambda s, t: None,
+                         tests_pass=lambda s: (True, ""), task_info=lambda s, t: {"priority": "P1", "title": "x", "status": "done"}):
+    outcome, _ = ns.do_task(Path("/nowhere"), "M9-07", "claude")
+    assert outcome == "done" and seen[0][0] != seen[-1][0] and seen[-1][1] == "review", seen
+
+# at most MAX_CLAUDE Claude workers hold a seat at once
+import fcntl as _fcntl
+with tempfile.TemporaryDirectory() as tmp, mock.patch.multiple(ns, NIGHT=Path(tmp), MAX_CLAUDE=1):
+    seat = ns.claude_seat()
+    probe = open(Path(tmp) / "claude0.lock", "a")
+    try:
+        _fcntl.flock(probe, _fcntl.LOCK_EX | _fcntl.LOCK_NB)
+        raise AssertionError("a second Claude worker got a seat while the only one was taken")
+    except BlockingIOError:
+        pass
+    seat.close()
+    _fcntl.flock(probe, _fcntl.LOCK_EX | _fcntl.LOCK_NB)  # free again once the worker exits
+    probe.close()
+
 print("night_shift self-check: PASS")

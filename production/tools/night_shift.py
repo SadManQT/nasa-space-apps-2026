@@ -8,7 +8,8 @@
 Each slot is a git worktree under .night/ (game assets only, via LFS include). Per task:
   1. a worker on the lane's best free account does exactly that board task (GO_NEXT "go next"), never commits;
   2. the script runs game/tools/run_tests.sh itself;
-  3. a reviewer on a different engine checks the diff against the task's acceptance criteria (PASS / FIX);
+  3. a reviewer (the other Claude account when it is free, else a fresh session on the same one) checks the diff against
+     the task's acceptance criteria (PASS / FIX);
   4. up to two fix rounds; PASS + green tests -> commit as sadmanqt and push to main;
      otherwise the work goes to branch night/<task> and the task is blocked with the reason, for the morning.
 Usage limits: the account sleeps until the reset time it printed; the lane's next account takes over.
@@ -30,6 +31,7 @@ SLOT_PREFIX = os.environ.get("SLOT_PREFIX", "slot")
 SUMMARY = os.environ.get("SUMMARY", "night_summary.md")
 PREFER = os.environ.get("PREFER", "")  # account tried first in every lane, e.g. buet for a Gemini-first shift
 PREFER = "claude2" if PREFER == "fable" else PREFER  # Opus 5.5 for all Claude work (Sadman, 5 Nov 23:40)
+PREFER = PREFER if PREFER in ("claude2", "claude3") else ""  # Claude only (7 Nov): the supervisor's buet/codex-main preferences are ignored
 STOP = LOGDIR / ("STOP_NIGHT" if SLOT_PREFIX == "slot" else f"STOP_NIGHT_{SLOT_PREFIX}")
 CLAIMS = NIGHT / "claims"  # one directory per task: an atomic lock shared by every running night shift
 DEADLINE = time.time() + float(os.environ.get("HOURS", "12")) * 3600
@@ -46,15 +48,10 @@ ACCOUNTS = {
     "claude3":     {"engine": "claude", "cmd": [GOCODE_RUN, "claude3", "{p}", "claude-opus-5-5"]},
     "buet":        {"engine": "gemini", "cmd": [GOCODE_RUN, "buet", "{p}", "gemini-4-argon-high"]},
 }
-LANES = {  # board lane -> accounts in order of preference (Sadman, 5 Nov 23:40: Claude work runs on Opus 5.5, never Fable)
-    "codex": ["codex", "codex-main", "claude2", "claude3"],
-    "claude": ["claude2", "claude3"],
-    "antigravity": ["buet", "claude2", "claude3"],
-    "gemini": ["buet", "claude2", "claude3"],
-    "muse": ["claude2", "claude3"],
-    "any": ["claude3", "claude2", "codex", "buet"],
-}
-REVIEWER = {"codex": ["claude3", "claude2", "buet"], "claude": ["codex", "codex-main", "buet", "claude3"], "gemini": ["codex", "claude3", "claude2"]}
+CLAUDE = ["claude2", "claude3"]  # Opus 5.5 at extra-high effort only (Sadman, 7 Nov: "Claude only"; the Codex/Gemini accounts stay defined but unused)
+LANES = {lane: list(CLAUDE) for lane in ("codex", "claude", "antigravity", "gemini", "muse", "any")}  # board lane -> accounts in order
+REVIEWER = {"claude": list(CLAUDE)}  # the other Claude account reviews first (do_task), then the same account in a fresh session
+MAX_CLAUDE = 2  # Claude workers at once across every night-shift slot: claude2 shares its weekly limit with Sadman's day sessions
 # Claude (Opus 5.5) leads the photoreal environment, 3D assets and room builds (5 Nov decision; Opus replaced Fable 5 Nov 23:40)
 FABLE_HINTS = re.compile(r"habitat kit|environment|main scene|terrain|exterior|interior|photoreal|LOLA|\b3D\b|Blender|\bassets\b|rooms and locations|M1-03|M1-05|M1-06", re.I)
 
@@ -110,6 +107,19 @@ def free(accounts):
     return [a for a in accounts if asleep.get(a, 0) <= now]
 
 
+def claude_seat():
+    """Wait for one of MAX_CLAUDE lock files shared by every slot; the caller closes it when the worker exits."""
+    while True:
+        for i in range(MAX_CLAUDE):
+            f = open(NIGHT / f"claude{i}.lock", "a")
+            try:
+                fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                return f
+            except BlockingIOError:
+                f.close()
+        time.sleep(20)
+
+
 def run_agent(account, prompt, cwd, effort="xhigh"):
     """Run a prompt on an account. Returns (ok, output); puts the account to sleep on a usage limit."""
     pf = Path(cwd) / ".night_prompt.md"
@@ -117,12 +127,15 @@ def run_agent(account, prompt, cwd, effort="xhigh"):
     cmd = [c.replace("{p}", str(pf)) for c in ACCOUNTS[account]["cmd"]]
     env = {**os.environ, "EFFORT": effort, "AGY_SETTINGS": AGY_SETTINGS, "GODOT": GODOT, "SUITE_TIMEOUT": "1200"}
     env.pop("CLAUDECODE", None)
+    seat = claude_seat() if ACCOUNTS[account]["engine"] == "claude" else None
     try:
         _, out = sh(cmd, cwd, timeout=WORKER_TIMEOUT, env=env)
     except subprocess.TimeoutExpired:
         return False, "worker timed out"
     finally:
         pf.unlink(missing_ok=True)
+        if seat:
+            seat.close()  # releases the flock
     tr = LOGDIR / "transcripts"
     tr.mkdir(exist_ok=True)
     (tr / f"{time.strftime('%m%d_%H%M%S')}_{Path(cwd).name}_{account}.txt").write_text(out[-30000:])
@@ -440,7 +453,7 @@ def do_task(slot, tid, lane):
             fix = "The task is not marked done on the board: finish it (or block it with a real reason)."
             continue
         engine = ACCOUNTS[worker]["engine"]
-        reviewers = free(REVIEWER[engine])
+        reviewers = sorted(free(REVIEWER[engine]), key=lambda r: r == worker)  # another account first, if one is free
         if not reviewers:
             return "deferred", "no reviewer account available"
         _, verdict = run_agent(reviewers[0], review_prompt(tid, slot), slot, "xhigh")
