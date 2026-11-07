@@ -6,12 +6,15 @@
 extends SceneTree
 
 const MAIN := preload("res://scenes/main.tscn")
+const RoomContract = preload("res://scripts/world/room_contract.gd")
+var _storage = preload("res://tools/support/isolated_storage.gd").new()
 const PANELS := ["objective", "journal_discovery", "puzzle", "dialogue_captions", "sources", "pause"]
 var _main: Node3D
 var _campaign: Chapter1Campaign
 var _seconds := 20.0
 var _output := "/tmp/lla-perf"
 var _cpu_only := false
+var _chapter1_rooms := false
 var _frames: Array = []
 var _events: Array = []
 var _summaries: Array = []
@@ -42,12 +45,21 @@ func _run() -> void:
 		if arg.begins_with("--perf-output="):
 			_output = arg.trim_prefix("--perf-output=")
 	_cpu_only = args.has("--perf-cpu-only")
+	_chapter1_rooms = args.has("--perf-chapter1-rooms")
+	if _chapter1_rooms:
+		root.size = Vector2i(1920, 1080)
+		root.always_on_top = true
 	if DisplayServer.get_name() == "headless" and not _cpu_only:
 		push_error("NO RENDER DATA: run windowed, or explicitly select --perf-cpu-only")
 		quit(2)
 		return
-	_slot = OS.get_temp_dir().path_join("lla-perf-%d.json" % OS.get_process_id())
+	if not _storage.setup("perf_probe") or (not _cpu_only and not _storage.prepare_rendering_cache()):
+		push_error("Unable to isolate performance-probe data and rendering cache.")
+		quit(2)
+		return
+	_slot = _storage.path
 	_metadata = {"engine": Engine.get_version_info(), "display": DisplayServer.get_name(), "renderer": RenderingServer.get_current_rendering_method(), "driver": RenderingServer.get_current_rendering_driver_name(), "cpu_only": _cpu_only, "window": root.size, "transition_schema": 3, "seconds": _seconds, "vsync": DisplayServer.window_get_vsync_mode(), "max_fps": Engine.max_fps, "physics_ticks": Engine.physics_ticks_per_second}
+	_metadata.merge({"os": OS.get_name(), "cpu": OS.get_processor_name(), "gpu": RenderingServer.get_video_adapter_name(), "chapter1_room_sweep": _chapter1_rooms})
 	print("PERF metadata ", JSON.stringify(_metadata))
 	physics_frame.connect(_stamp_physics)
 	if not _cpu_only:
@@ -58,7 +70,7 @@ func _run() -> void:
 	process_frame.connect(_event_heartbeat)
 	_main = MAIN.instantiate()
 	_main.save_path = _slot
-	_main.legacy_save_path = _slot + ".legacy"
+	_main.legacy_save_path = _storage.legacy_path
 	await _transition_event("title_build", func():
 		root.add_child(_main)
 		while not _main.title_ready:
@@ -73,39 +85,42 @@ func _run() -> void:
 		push_error("Campaign failed to start")
 		quit(1)
 		return
-	if _cpu_only:
-		await _cpu_samples("hub")
-		await _cpu_walk("hub")
+	if _chapter1_rooms:
+		await _sample_chapter1_rooms()
 	else:
-		await _sample("hub_walk", true, false)
-		await _sample("hub_panels", false, true)
-	await _transition_event("garden_enter", func():
-		_campaign.route.start_at("EX-CH01-S04")
-		_campaign._sync_route_projection()
-		_campaign._refresh_world()
-		_campaign.hud.refresh_scene()
-	)
-	await physics_frame
-	if _cpu_only:
-		await _cpu_samples("garden")
-		await _cpu_walk("garden")
-	else:
-		await _sample("garden_walk", true, false)
-		await _sample("garden_panels", false, true)
-	# Visit the same room again: room/asset reloads must be visible in event timings.
-	await _transition_event("garden_rebuild", func(): _campaign._refresh_world())
-	await _transition_event("full_cast_enter", func():
-		_campaign._start_extended("EX-CH05-S02")
-		_campaign.hud.refresh_scene()
-	)
-	await physics_frame
-	if _cpu_only:
-		await _cpu_samples("full_cast")
-		await _cpu_walk("full_cast")
-	else:
-		await _sample("full_cast_walk", true, false)
-		await _sample("full_cast_panels", false, true)
-		await _sample_cutscenes()
+		if _cpu_only:
+			await _cpu_samples("hub")
+			await _cpu_walk("hub")
+		else:
+			await _sample("hub_walk", true, false)
+			await _sample("hub_panels", false, true)
+		await _transition_event("garden_enter", func():
+			_campaign.route.start_at("EX-CH01-S04")
+			_campaign._sync_route_projection()
+			_campaign._refresh_world()
+			_campaign.hud.refresh_scene()
+		)
+		await physics_frame
+		if _cpu_only:
+			await _cpu_samples("garden")
+			await _cpu_walk("garden")
+		else:
+			await _sample("garden_walk", true, false)
+			await _sample("garden_panels", false, true)
+		# Visit the same room again: room/asset reloads must be visible in event timings.
+		await _transition_event("garden_rebuild", func(): _campaign._refresh_world())
+		await _transition_event("full_cast_enter", func():
+			_campaign._start_extended("EX-CH05-S02")
+			_campaign.hud.refresh_scene()
+		)
+		await physics_frame
+		if _cpu_only:
+			await _cpu_samples("full_cast")
+			await _cpu_walk("full_cast")
+		else:
+			await _sample("full_cast_walk", true, false)
+			await _sample("full_cast_panels", false, true)
+			await _sample_cutscenes()
 	_release_input()
 	_main.free()
 	await process_frame
@@ -113,11 +128,48 @@ func _run() -> void:
 	for suffix in ["", ".bak", ".tmp"]:
 		if FileAccess.file_exists(_slot + suffix):
 			DirAccess.remove_absolute(_slot + suffix)
+	_storage.cleanup()
 	if not _write_results():
 		quit(1)
 		return
-	print("PERF RESULT: PASS (", "CPU OPERATIONS ONLY; rendered frame times NOT ASSESSED" if _cpu_only else "rendered samples recorded", ")")
-	quit()
+	var complete := not _chapter1_rooms or bool(_metadata.get("room_coverage_complete", false))
+	print("PERF RESULT: ", "PASS" if complete else "FAIL", " (", "CPU OPERATIONS ONLY; rendered frame times NOT ASSESSED" if _cpu_only else "rendered samples recorded", ")")
+	quit(0 if complete else 1)
+
+## Visit one real authored scene per Chapter 1 room. A coverage check below
+## refuses to silently omit a room if the chapter's room mapping later changes.
+func _sample_chapter1_rooms() -> void:
+	var scenes := ["EX-CH01-S01", "EX-CH01-S02", "EX-CH01-S04", "EX-CH01-S05"]
+	var measured: Array = []
+	for scene_id in scenes:
+		_campaign.hud.panels.hint_player.close()
+		_campaign.hud.panels.close_panel()
+		await _transition_event("room_enter_" + scene_id, func():
+			_campaign.route.start_at(scene_id)
+			_campaign._sync_route_projection()
+			_campaign._refresh_world()
+			_campaign.hud.refresh_scene()
+		)
+		await physics_frame
+		var room_id := String(_campaign.route.current_room_id())
+		measured.append(room_id)
+		if _cpu_only:
+			await _cpu_samples(room_id)
+			await _cpu_walk(room_id)
+		else:
+			await _sample(room_id + "_walk", true, false)
+			await _sample(room_id + "_panels", false, true)
+	var expected: Array = []
+	for scene_id in preload("res://scripts/missions/chapter1_gate_catalog.gd").SCENE_ORDER:
+		var room_id := RoomContract.room_for_scene(scene_id)
+		if not expected.has(room_id):
+			expected.append(room_id)
+	_metadata["measured_rooms"] = measured
+	_metadata["expected_rooms"] = expected
+	_metadata["room_coverage_complete"] = expected.all(func(id): return measured.has(id))
+	if not _metadata.room_coverage_complete:
+		push_error("Chapter 1 room mapping changed; extend the performance sweep before claiming full coverage.")
+
 
 func _event_heartbeat() -> void:
 	if _event_last == 0:
@@ -341,11 +393,15 @@ func _sample(label: String, walking: bool, panels: bool) -> void:
 				# Sweep around the real player so previously hidden materials render.
 				_campaign._player.follow_camera.yaw += 0.35
 			if panels:
+				if _chapter1_rooms:
+					_campaign.hud.panels.hint_player.close()
 				_campaign.hud.panels.close_panel()
 				if step % 2 == 0:
 					_campaign.hud.panels.open_panel(PANELS[int(step / 2) % PANELS.size()])
 	_release_input()
 	if _campaign != null:
+		if _chapter1_rooms:
+			_campaign.hud.panels.hint_player.close()
 		_campaign.hud.panels.close_panel()
 	_summarize(label, values)
 

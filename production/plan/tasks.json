@@ -1056,7 +1056,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Performance and low-spec pass",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "atik/codex",
    "deps": [
     "M1-06"
@@ -1070,10 +1070,11 @@
    ],
    "note": "Fixes inside another member's folder are filed as board tasks for that member.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-07",
    "prompt": "Per execution/QA_06_PERFORMANCE_AND_PORTABILITY.md: profile every Chapter 1 room on the team's weakest laptop; target 60 fps at 1080p on a\nmid laptop and 30 fps on integrated graphics with the Compatibility renderer + LODs; fix the top three costs (draw calls, shadow casters,\ntexture sizes, character shader cost). Record before/after in production/qa/perf_<date>.md.",
    "reserved_for": "atik",
-   "effort": 2
+   "effort": 2,
+   "blocker": "1080p four-room M4 Forward+/Compatibility captures delivered with complete coverage; Forward+ p95 misses60fps and first-use hitches remain. Await measured runtime fixes M1-92, Sadman asset review M1-94 and Tanvir integrated-laptop verification M1-93/weakest-machine confirmation. See production/qa/perf/M1-23.md."
   },
   {
    "id": "M1-24",
@@ -5942,6 +5943,70 @@
    "evidence": "",
    "updated": "2026-11-07",
    "prompt": "M1-36 adoption check after M1-82/M1-88: both LOC-09/CH04S04 and LOC-10/CH04S06 have real dated Sun rows marked dark (Sun ~1.6deg but below local terrain). CampaignRoom terrain_ground explicitly removes RoomLighting, so adopting ready terrain makes the staged work area and physical puzzle targets black. M1-82 capture script compensates with an optional diagnostic OmniLight3D (shot[2], work.light_energy=3, range40); that light is not part of the room contract/game. Please supply owner-approved visible practical work-light/rover/hand-light placement and actual light sources in these staged vacuum rooms, with terrain-ready positions and shadows, linked to real approved props. Publish a room/staging hook/ready flag Atik can trust before switching production to the terrain provider. Preserve hard Sun/black sky/no ambient fill and all doors/targets/collision. Verify target readability and approach walking in the real dated scene without the capture-only Omni, in Forward+ and Compatibility, with screenshots. Do not edit Atik terrain/campaign. Atik has a tested composition helper ready but will not replace playable staging with an unlit work area. Relay-road geometry remains separate M1-87.",
+   "reserved_for": "sadman",
+   "effort": 2
+  },
+  {
+   "id": "M1-92",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "any",
+   "title": "Profile and remove native first campaign draw hitch on M4",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/loading/",
+    "game/scripts/campaign/",
+    "production/qa/perf/"
+   ],
+   "refs": [],
+   "note": "Filed by atik/codex on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "Observed during M1-23 native 1080p Forward+/Metal sweep on Apple M4/Godot4.7.2 at49bdcac/bc5eaf7 plus owned benchmark WIP. Fresh isolated user-data/cache-directory layout: title p95~9ms but first campaign transition duration7731.121ms and max process-frame interval7284.349ms. LoadTrace lists room_fixtures_doors LOC01 363.235ms and campaign_ui53.133ms, neither explains the full gap, so investigate native first draw/shader/font/pipeline work rather than guessing or claiming a threaded deadlock. Full headless61/61 including performance537 checks passes; it does not assess this native hitch. M1-23 retained final JSON/CSV/native log under production/qa/perf/M1-23_m4_2026-11-07 (final run timings may differ; use those actual values). Probe isolates first-use preferences and checkpoint, retains first-use frames and labels transition latency separately. Profile exact stages/main-thread/GPU behavior, keep animated loading presentation moving, preserve all assets/UI quality and real first-use costs. Own loading/campaign/performance only; request Sadman renderer/asset or Ramim UI work if measurements identify their path. Acceptance: reproduced then measured improved native first campaign entry on documented hardware, no masking warmup/threshold changes, screenshots/loading trace, appropriate runner green and independent review.",
+   "reserved_for": "atik",
+   "effort": 2
+  },
+  {
+   "id": "M1-93",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "any",
+   "title": "Capture 1080p Chapter 1 room performance on the Intel Arc laptop",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "production/qa/chapters/ch01/performance/"
+   ],
+   "refs": [],
+   "note": "Filed by atik/codex on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "Atik M1-23 requires supported integrated-GPU/weak-laptop evidence. Your M1-65 capture documents Intel Arc130V8GB; Atik only has M4. After pulling the benchmark update, run the existing Godot4.7.2 console executable with --path game --rendering-method gl_compatibility --resolution1920x1080 --script res://tools/perf_probe.gd -- --perf-probe --perf-chapter1-rooms --perf-seconds=20 --perf-output=<absolute existing output directory>/compatibility . Use normal flag spacing --resolution 1920x1080. The absolute output base creates .json/.csv; redirect complete stdout/stderr to a .txt file. Script uses isolated save/preferences, real scenes S01/S02/S04/S05, 20s walk+panels each, hardware/renderer metadata and explicit room coverage; do not use --headless or interpret PERF RESULT:PASS as an FPS-budget pass. Stop other Godot/render jobs. Commit raw outputs and CPU/GPU/RAM/OS/display notes under production/qa/chapters/ch01/performance/. Report p95/max frame intervals per room, first-entry hitches and whether it is the teams weakest laptop (ask teammate if unknown). Target integrated Compatibility30fps; no threshold/settings/asset edits or invented results. Atik will use measured costs to fix owned paths and request others. If machine unavailable, record that rather than claiming coverage.",
+   "reserved_for": "tanvir",
+   "effort": 2
+  },
+  {
+   "id": "M1-94",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "any",
+   "title": "Review room asset costs from measured 1080p M4 profiles",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/asset_geometry.gd",
+    "game/scripts/world/",
+    "game/assets/"
+   ],
+   "refs": [],
+   "note": "Filed by atik/codex on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "M1-23 Forward+/Metal native 1920x1080 AppleM4/Godot4.7.2 all-room sweep retained in production/qa/perf/M1-23_m4_2026-11-07/forward_plus.json/.csv/.log. p95 frame intervals: Commons22.936ms, SafeRoom21.730ms, Garden24.281ms, Services26.765ms (60fps budget16.7ms); first-use garden/service spikes~1.09s, handled separately Atik M1-92. Walk medians:385-496 draw calls,1.05-1.78million primitives, renderer texture monitor2.86-3.11GB. GPU time column returns0 on this Metal backend, so do not infer shader/GPU timings from it; TIME_PROCESS is periodic monitor not independent per-frame CPU samples. Review measured candidate costs in your assets/AssetGeometry/room staging: redundant visible props/material draws, available LOD use, retained/raw texture memory. Atik keeps runtime fixes; Ramim owns2D UI. M1-93 requests original IntelArc integrated-laptop measurement. Pick fixes from measured owner causes, preserve all teammates assets/content and approved look, publish before/after screenshots and exact source/performance comparison; do not delete props blindly, change canon/geometry science, relax budgets or claim Windows improvement from Mac. The raw runtime GLTF pipeline intentionally decodes uncompressed, so changing .import compression alone may not affect live VRAM. This is a measured investigation request, not a claim these candidates are proven top3 causes.",
    "reserved_for": "sadman",
    "effort": 2
   }
