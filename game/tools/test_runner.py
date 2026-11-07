@@ -31,6 +31,9 @@ case "$RUNNER_CASE" in
   suite_parse) echo 'SCRIPT ERROR: Parse Error: suite fixture' ;;
   suite_error) echo 'PROBE RESULT: PASS'; exit 7 ;;
   timeout) exec sleep 30 ;;
+  suite_many_failures)
+    for index in $(seq 8); do echo "FAIL detail $index"; done
+    echo 'PROBE RESULT: FAIL'; exit 1 ;;
 esac
 echo 'PROBE RESULT: PASS'
 ''')
@@ -39,9 +42,18 @@ echo 'PROBE RESULT: PASS'
             result = subprocess.run(
                 ["bash", str(tools / "run_tests.sh")],
                 env={**os.environ, "GODOT": str(engine), "RUNNER_CASE": mode,
-                     "RUNNER_CALLS": str(calls), "SUITE_TIMEOUT": "1"},
+                     "RUNNER_CALLS": str(calls), "SUITE_TIMEOUT": "1",
+                     "TEST_LOG_DIR": str(root / "logs")},
                 capture_output=True, text=True, timeout=10,
             )
+            self.assertTrue((root / "logs" / "setup.log").is_file())
+            if mode.startswith("setup_"):
+                self.assertFalse((root / "logs" / "test_probe.gd.log").exists())
+            else:
+                self.assertTrue((root / "logs" / "test_probe.gd.log").is_file())
+            if mode == "suite_many_failures":
+                self.assertIn("FAIL detail 8", (root / "logs" / "test_probe.gd.log").read_text())
+                self.assertNotIn("FAIL detail 8", result.stdout)
             return result, calls.exists()
 
     def test_failed_setup_stops_before_any_suite(self):
@@ -61,7 +73,7 @@ echo 'PROBE RESULT: PASS'
         self.assertIn("1/1 suites passed", result.stdout)
 
     def test_existing_failure_checks_remain_effective(self):
-        for mode in ["suite_parse", "suite_error", "timeout"]:
+        for mode in ["suite_parse", "suite_error", "timeout", "suite_many_failures"]:
             with self.subTest(mode=mode):
                 result, invoked = self.run_case(mode)
                 self.assertTrue(invoked)

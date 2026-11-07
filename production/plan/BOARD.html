@@ -239,10 +239,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-77">M1-77</a> Avoid missing fade metadata errors on the first campaign caption <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">3 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">6 blocked</span><span class="chip s-todo">23 todo</span></div><div class="bar"><i style="width:9%"></i></div>
-<details open><summary>Working now (1)</summary><ul>
-<li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by atik/codex on 2026-11-07</div></li>
-</ul></details>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">3 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">7 blocked</span><span class="chip s-todo">23 todo</span></div><div class="bar"><i style="width:9%"></i></div>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
@@ -250,12 +247,13 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-85">M1-85</a> Investigate Windows cold editor-import crash captured before UI tests <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-71">M3-71</a> Save slots, autosave and versioned save migrations at Steam quality <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details open><summary>Blocked (6)</summary><ul>
+<details open><summary>Blocked (7)</summary><ul>
 <li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">M1-82/M1-88 delivered; composed and tested all three ready regions (37 checks). Production still needs incremental preparation (measured87-205ms sync), Sadman M1-91 real work ligh…</div></li>
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Draft pre-release v0.1.0-preview.20261105 is on GitHub with both ZIPs (built from 57b837b; CI run 41970276437 green on Windows and macOS; production/qa/release_2026-11-05.md). Sad…</div></li>
 <li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">1080p four-room M4 Forward+/Compatibility captures delivered with complete coverage; Forward+ p95 misses60fps and first-use hitches remain. Await measured runtime fixes M1-92, Sad…</div></li>
 <li><a class="id" href="#M1-49">M1-49</a> Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Sadman M1-84 room/media hooks have landed and are preserved. Await Ramim M1-83 accessible Care Round capture/ghost panel and final command contract; then Atik wires dated garden v…</div></li>
 <li><a class="id" href="#M1-58">M1-58</a> Carrying payloads, and the shift-5 STACK as a real carry-and-place task <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Night shift parked the work on branch night/M1-58: could not land: rebase conflict: real carry-and-place task hint: Resolve all conflicts manually, mark them as resolved with hint…</div></li>
+<li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Complete diagnostic retention/collector delivered and reviewed; full61/61 and two fresh M4 focused runs537PASS each. Original Windows failure not reproduced here; await Ramim M1-9…</div></li>
 <li><a class="id" href="#M1-69">M1-69</a> Expose safe message metadata updates without resetting puzzle checkpoints <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Requested Director method is in Sadman-owned core/, outside campaign-only task paths. Owner request M1-89 publishes bounded metadata/checkpoint contract; then Atik wires normal sa…</div></li>
 </ul></details>
 <details><summary>To do (18)</summary><ul>
@@ -5682,7 +5680,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "atik/codex",
    "deps": [],
    "paths": [
@@ -5695,7 +5693,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "updated": "2026-11-07",
    "prompt": "Ramim fresh baseline on Windows at main 990126b, Godot 4.7.2, fails the production loading performance gate before any feature source changes. Full game/tools/run_tests.sh: 35/37 suites passed; test_performance_runtime.gd reports 537 checks / 2 failures: production title main-thread interval 59.455ms and production new campaign interval 128.056ms (limit <50ms). The other failure is the separate missing-explainer request M1-67.\nA single focused retry through run_tests.sh performance_runtime after cache warmup fails 537 checks / 7 failures (0/1 suites passed). Runner prints the first five details: Kai raw load 51.280ms, Amara 50.826ms, Mei 57.054ms, Rafi 57.689ms, Ferreira 52.718ms; remaining two details were suppressed by the runner, so do not invent them. Logs: production/qa/evidence/M1-18_baseline.txt and M1-18_performance_retry.txt.\nInvestigate the shared loading/performance path and the Windows test/runtime behavior, then fix the cause within Atik-owned runtime/loading/performance paths. Profile whether scheduling/raw glTF import or timing measurement is responsible; do not silently relax/skip the 50ms gate or claim reference-Mac performance based on this PC. Any necessary Ramim UI or Sadman asset/test changes need owner requests. Preserve campaign/save behavior and incremental-loading contract. Publish the fix/evidence and notify Ramim to resume blocked M1-18.\nAcceptance: focused real production performance runner passes on the documented supported machine without weakening its intent; full run_tests.sh green after M1-67 also lands, with truthful hardware/timing evidence and no unrelated changes.",
    "reserved_for": "atik",
-   "effort": 2
+   "effort": 2,
+   "blocker": "Complete diagnostic retention/collector delivered and reviewed; full61/61 and two fresh M4 focused runs537PASS each. Original Windows failure not reproduced here; await Ramim M1-90 complete failing-host traces, then measured scoped fix. Native first-draw followup is Atik M1-92. See production/qa/perf/M1-68.md."
   },
   {
    "id": "M1-69",
@@ -6356,7 +6355,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/qa/perf/"
    ],
    "refs": [],
-   "note": "Filed by atik/codex on 2026-11-07.",
+   "note": "Filed by atik/codex on 2026-11-07.\nM1-23 final captures: Services entry wall35.45s Forward+/46.14s Compatibility, max frame180.723/92.312ms (distinguish long async wait from one blocked frame). Separate CPU-only probe reports22 ObjectDB/8 resources at exit after PASS; check pending look-ahead/loader teardown. Raw logs/JSON/CSV are retained; do not infer a deadlock or GPU cause without profiling.",
    "evidence": "",
    "updated": "2026-11-07",
    "prompt": "Observed during M1-23 native 1080p Forward+/Metal sweep on Apple M4/Godot4.7.2 at49bdcac/bc5eaf7 plus owned benchmark WIP. Fresh isolated user-data/cache-directory layout: title p95~9ms but first campaign transition duration7731.121ms and max process-frame interval7284.349ms. LoadTrace lists room_fixtures_doors LOC01 363.235ms and campaign_ui53.133ms, neither explains the full gap, so investigate native first draw/shader/font/pipeline work rather than guessing or claiming a threaded deadlock. Full headless61/61 including performance537 checks passes; it does not assess this native hitch. M1-23 retained final JSON/CSV/native log under production/qa/perf/M1-23_m4_2026-11-07 (final run timings may differ; use those actual values). Probe isolates first-use preferences and checkpoint, retains first-use frames and labels transition latency separately. Profile exact stages/main-thread/GPU behavior, keep animated loading presentation moving, preserve all assets/UI quality and real first-use costs. Own loading/campaign/performance only; request Sadman renderer/asset or Ramim UI work if measurements identify their path. Acceptance: reproduced then measured improved native first campaign entry on documented hardware, no masking warmup/threshold changes, screenshots/loading trace, appropriate runner green and independent review.",

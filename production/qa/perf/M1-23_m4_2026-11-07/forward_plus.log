@@ -1,0 +1,91 @@
+sandbox_extension_issue_file_to_process failed for /tmp/last-light-tools/Godot.app: 1 (Operation not permitted)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
+
+PERF metadata {"chapter1_room_sweep":true,"cpu":"Apple M4","cpu_only":false,"display":"macOS","driver":"metal","engine":{"build":"official","hash":"ed1daf0bf001b61586d9930840f2f1394092c079","hex":263938,"major":4,"minor":7,"patch":2,"status":"stable","string":"4.7.2-stable (official)","timestamp":0},"gpu":"Apple M4 (Apple9)","max_fps":0,"os":"macOS","physics_ticks":60,"renderer":"forward_plus","seconds":20.0,"transition_schema":3,"vsync":1,"window":"(1920, 1080)"}
+PERF transition {"duration_ms":1530.223,"event":"title_build","max_frame_interval_ms":1146.844,"steps":[{"ms":82.587,"step":"worker_decode:res://assets/props/PR_MissionTable/PR_MissionTable.glb"},{"ms":5.235,"step":"worker_mipmaps:res://assets/props/PR_MissionTable/PR_MissionTable.glb"},{"ms":4.024,"step":"glb_generate_scene:res://assets/props/PR_MissionTable/PR_MissionTable.glb"},{"ms":0.167,"step":"glb_pack:res://assets/props/PR_MissionTable/PR_MissionTable.glb"},{"ms":95.827,"step":"worker_decode:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"},{"ms":5.171,"step":"worker_mipmaps:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"},{"ms":1.034,"step":"glb_generate_scene:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"},{"ms":0.105,"step":"glb_pack:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"},{"ms":31.045,"step":"worker_decode:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"},{"ms":1.706,"step":"worker_mipmaps:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"},{"ms":0.182,"step":"glb_generate_scene:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"},{"ms":0.121,"step":"glb_pack:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"},{"ms":0.829,"step":"toon:PR_MissionTable"},{"ms":0.012,"step":"toon:PR_BatteryJar"},{"ms":0.01,"step":"toon:PR_SeedPacket"},{"ms":2.244,"step":"title_stage"},{"ms":26.618,"step":"title_ui_save_validation"},{"ms":167.723,"step":"worker_content_validation"}],"transition_frames":41}
+ROOT Agree distance=1.220700 m speed=0.093600 m/s (removed)
+ROOT Cheer distance=0.256177 m speed=0.086595 m/s (removed)
+ROOT KneelStand distance=0.373088 m speed=0.144421 m/s (removed)
+ROOT PickUp distance=0.317017 m speed=0.043979 m/s (removed)
+ROOT Push distance=0.978741 m speed=0.206051 m/s (removed)
+ROOT RunToWalk distance=2.918988 m speed=1.273740 m/s (removed)
+ROOT SitDown distance=1.215443 m speed=0.212924 m/s (removed)
+ROOT SprintStop distance=2.927942 m speed=1.463971 m/s (removed)
+ROOT StandUp distance=0.562202 m speed=0.090556 m/s (removed)
+ROOT TurnRunL distance=2.290534 m speed=1.409560 m/s (removed)
+ROOT TurnRunR distance=2.454483 m speed=1.510451 m/s (removed)
+ROOT TurnWalkL distance=1.745754 m speed=0.872877 m/s (removed)
+ROOT TurnWalkR distance=2.028554 m speed=0.918590 m/s (removed)
+ROOT Water distance=0.431812 m speed=0.086362 m/s (removed)
+ROOT Agree distance=1.205120 m speed=0.092405 m/s (removed)
+ROOT Cheer distance=0.252908 m speed=0.085490 m/s (removed)
+ROOT KneelStand distance=0.368326 m speed=0.142578 m/s (removed)
+ROOT PickUp distance=0.267955 m speed=0.027961 m/s (removed)
+ROOT Push distance=0.966248 m speed=0.203421 m/s (removed)
+ROOT RunToWalk distance=2.881732 m speed=1.257483 m/s (removed)
+ROOT SitDown distance=1.199930 m speed=0.210207 m/s (removed)
+ROOT SprintStop distance=2.890571 m speed=1.445286 m/s (removed)
+ROOT StandUp distance=0.416585 m speed=0.087702 m/s (removed)
+ROOT TurnRunL distance=2.261299 m speed=1.391568 m/s (removed)
+ROOT TurnRunR distance=2.423155 m speed=1.491173 m/s (removed)
+ROOT TurnWalkL distance=1.723472 m speed=0.861736 m/s (removed)
+ROOT TurnWalkR distance=1.997036 m speed=0.538527 m/s (removed)
+ROOT Water distance=0.427766 m speed=0.085553 m/s (removed)
+ROOT Agree distance=1.210064 m speed=0.092784 m/s (removed)
+ROOT Cheer distance=0.253945 m speed=0.085841 m/s (removed)
+ROOT KneelStand distance=0.369837 m speed=0.143163 m/s (removed)
+ROOT PickUp distance=0.269054 m speed=0.028075 m/s (removed)
+ROOT Push distance=0.970212 m speed=0.204255 m/s (removed)
+ROOT RunToWalk distance=2.893553 m speed=1.262641 m/s (removed)
+ROOT SitDown distance=1.204853 m speed=0.211069 m/s (removed)
+ROOT SprintStop distance=2.902430 m speed=1.451215 m/s (removed)
+ROOT StandUp distance=0.418294 m speed=0.088062 m/s (removed)
+ROOT TurnRunL distance=2.270577 m speed=1.397278 m/s (removed)
+ROOT TurnRunR distance=2.433097 m speed=1.497290 m/s (removed)
+ROOT TurnWalkL distance=1.730543 m speed=0.865272 m/s (removed)
+ROOT TurnWalkR distance=2.005229 m speed=0.540736 m/s (removed)
+ROOT Water distance=0.427506 m speed=0.085501 m/s (removed)
+ROOT Agree distance=1.278081 m speed=0.098000 m/s (removed)
+ROOT Cheer distance=0.268219 m speed=0.090666 m/s (removed)
+ROOT KneelStand distance=0.390625 m speed=0.151210 m/s (removed)
+ROOT PickUp distance=0.331919 m speed=0.046047 m/s (removed)
+ROOT Push distance=1.024748 m speed=0.215736 m/s (removed)
+ROOT RunToWalk distance=3.056199 m speed=1.333614 m/s (removed)
+ROOT SitDown distance=1.272577 m speed=0.222933 m/s (removed)
+ROOT SprintStop distance=3.065574 m speed=1.532787 m/s (removed)
+ROOT StandUp distance=0.588629 m speed=0.094813 m/s (removed)
+ROOT TurnRunL distance=2.398204 m speed=1.475818 m/s (removed)
+ROOT TurnRunR distance=2.569859 m speed=1.581452 m/s (removed)
+ROOT TurnWalkL distance=1.827816 m speed=0.913908 m/s (removed)
+ROOT TurnWalkR distance=2.123908 m speed=0.961770 m/s (removed)
+ROOT Water distance=0.454003 m speed=0.090801 m/s (removed)
+ROOT Agree distance=1.244742 m speed=0.095444 m/s (removed)
+ROOT Cheer distance=0.261223 m speed=0.088301 m/s (removed)
+ROOT KneelStand distance=0.380436 m speed=0.147265 m/s (removed)
+ROOT PickUp distance=0.276765 m speed=0.028880 m/s (removed)
+ROOT Push distance=0.998017 m speed=0.210109 m/s (removed)
+ROOT RunToWalk distance=2.976479 m speed=1.298827 m/s (removed)
+ROOT SitDown distance=1.239383 m speed=0.217118 m/s (removed)
+ROOT SprintStop distance=2.985609 m speed=1.492804 m/s (removed)
+ROOT StandUp distance=0.430282 m speed=0.090586 m/s (removed)
+ROOT TurnRunL distance=2.335648 m speed=1.437322 m/s (removed)
+ROOT TurnRunR distance=2.502826 m speed=1.540200 m/s (removed)
+ROOT TurnWalkL distance=1.780137 m speed=0.890069 m/s (removed)
+ROOT TurnWalkR distance=2.062696 m speed=0.556233 m/s (removed)
+ROOT Water distance=0.439854 m speed=0.087971 m/s (removed)
+PERF summary {"frames_or_calls":2161,"max_ms":387.915,"over_33ms":6,"p50_ms":8.412,"p95_ms":9.162,"p99_ms":16.312,"sample":"title"}
+PERF transition {"duration_ms":7731.121,"event":"new_campaign","max_frame_interval_ms":7284.349,"steps":[{"ms":0.029,"step":"campaign_scene_instance"},{"ms":6.592,"step":"content_validation"},{"ms":12.037,"step":"route_profile"},{"ms":3.353,"step":"room_shell:LOC-01"},{"ms":363.235,"step":"room_fixtures_doors:LOC-01"},{"ms":1.072,"step":"room_navigation:LOC-01"},{"ms":372.148,"step":"room_rebuild"},{"ms":53.133,"step":"campaign_ui"}],"transition_frames":20}
+PERF transition {"duration_ms":69.55,"event":"room_enter_EX-CH01-S01","max_frame_interval_ms":46.441,"steps":[{"ms":2.132,"step":"room_shell:LOC-01"},{"ms":3.995,"step":"room_fixtures_doors:LOC-01"},{"ms":1.64,"step":"room_navigation:LOC-01"},{"ms":17.047,"step":"room_rebuild"}],"transition_frames":2}
+PERF summary {"frames_or_calls":1065,"max_ms":65.086,"over_33ms":6,"p50_ms":18.281,"p95_ms":22.936,"p99_ms":27.358,"sample":"LOC-01_walk"}
+PERF summary {"frames_or_calls":1190,"max_ms":48.259,"over_33ms":3,"p50_ms":18.855,"p95_ms":21.348,"p99_ms":22.712,"sample":"LOC-01_panels"}
+PERF transition {"duration_ms":90.327,"event":"room_enter_EX-CH01-S02","max_frame_interval_ms":45.548,"steps":[{"ms":0.989,"step":"room_shell:LOC-04"},{"ms":4.5,"step":"room_fixtures_doors:LOC-04"},{"ms":0.259,"step":"room_navigation:LOC-04"},{"ms":12.71,"step":"room_rebuild"}],"transition_frames":2}
+PERF summary {"frames_or_calls":1053,"max_ms":45.348,"over_33ms":6,"p50_ms":19.04,"p95_ms":21.73,"p99_ms":22.977,"sample":"LOC-04_walk"}
+PERF summary {"frames_or_calls":1110,"max_ms":46.985,"over_33ms":11,"p50_ms":17.617,"p95_ms":20.147,"p99_ms":25.921,"sample":"LOC-04_panels"}
+PERF transition {"duration_ms":679.187,"event":"room_enter_EX-CH01-S04","max_frame_interval_ms":666.151,"steps":[{"ms":1.242,"step":"room_shell:LOC-03"},{"ms":7.736,"step":"room_fixtures_doors:LOC-03"},{"ms":0.475,"step":"room_navigation:LOC-03"},{"ms":16.805,"step":"room_rebuild"}],"transition_frames":2}
+PERF summary {"frames_or_calls":949,"max_ms":1090.721,"over_33ms":1,"p50_ms":19.74,"p95_ms":24.281,"p99_ms":26.323,"sample":"LOC-03_walk"}
+PERF summary {"frames_or_calls":2097,"max_ms":54.18,"over_33ms":10,"p50_ms":6.982,"p95_ms":16.121,"p99_ms":17.465,"sample":"LOC-03_panels"}
+PERF transition {"duration_ms":35449.615,"event":"room_enter_EX-CH01-S05","max_frame_interval_ms":180.723,"steps":[{"ms":92.467,"step":"worker_decode:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"},{"ms":4.947,"step":"worker_mipmaps:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"},{"ms":1.041,"step":"glb_generate_scene:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"},{"ms":0.158,"step":"glb_pack:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"},{"ms":1.085,"step":"room_shell:LOC-02"},{"ms":3.915,"step":"room_fixtures_doors:LOC-02"},{"ms":0.323,"step":"room_navigation:LOC-02"},{"ms":7.279,"step":"room_rebuild"}],"transition_frames":5097}
+PERF summary {"frames_or_calls":944,"max_ms":43.498,"over_33ms":2,"p50_ms":21.026,"p95_ms":26.765,"p99_ms":28.398,"sample":"LOC-02_walk"}
+PERF summary {"frames_or_calls":1267,"max_ms":1084.45,"over_33ms":8,"p50_ms":17.202,"p95_ms":22.375,"p99_ms":27.837,"sample":"LOC-02_panels"}
+PERF RESULT: PASS (rendered samples recorded)

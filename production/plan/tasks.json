@@ -5287,7 +5287,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "atik/codex",
    "deps": [],
    "paths": [
@@ -5300,7 +5300,8 @@
    "updated": "2026-11-07",
    "prompt": "Ramim fresh baseline on Windows at main 990126b, Godot 4.7.2, fails the production loading performance gate before any feature source changes. Full game/tools/run_tests.sh: 35/37 suites passed; test_performance_runtime.gd reports 537 checks / 2 failures: production title main-thread interval 59.455ms and production new campaign interval 128.056ms (limit <50ms). The other failure is the separate missing-explainer request M1-67.\nA single focused retry through run_tests.sh performance_runtime after cache warmup fails 537 checks / 7 failures (0/1 suites passed). Runner prints the first five details: Kai raw load 51.280ms, Amara 50.826ms, Mei 57.054ms, Rafi 57.689ms, Ferreira 52.718ms; remaining two details were suppressed by the runner, so do not invent them. Logs: production/qa/evidence/M1-18_baseline.txt and M1-18_performance_retry.txt.\nInvestigate the shared loading/performance path and the Windows test/runtime behavior, then fix the cause within Atik-owned runtime/loading/performance paths. Profile whether scheduling/raw glTF import or timing measurement is responsible; do not silently relax/skip the 50ms gate or claim reference-Mac performance based on this PC. Any necessary Ramim UI or Sadman asset/test changes need owner requests. Preserve campaign/save behavior and incremental-loading contract. Publish the fix/evidence and notify Ramim to resume blocked M1-18.\nAcceptance: focused real production performance runner passes on the documented supported machine without weakening its intent; full run_tests.sh green after M1-67 also lands, with truthful hardware/timing evidence and no unrelated changes.",
    "reserved_for": "atik",
-   "effort": 2
+   "effort": 2,
+   "blocker": "Complete diagnostic retention/collector delivered and reviewed; full61/61 and two fresh M4 focused runs537PASS each. Original Windows failure not reproduced here; await Ramim M1-90 complete failing-host traces, then measured scoped fix. Native first-draw followup is Atik M1-92. See production/qa/perf/M1-68.md."
   },
   {
    "id": "M1-69",
@@ -5961,7 +5962,7 @@
     "production/qa/perf/"
    ],
    "refs": [],
-   "note": "Filed by atik/codex on 2026-11-07.",
+   "note": "Filed by atik/codex on 2026-11-07.\nM1-23 final captures: Services entry wall35.45s Forward+/46.14s Compatibility, max frame180.723/92.312ms (distinguish long async wait from one blocked frame). Separate CPU-only probe reports22 ObjectDB/8 resources at exit after PASS; check pending look-ahead/loader teardown. Raw logs/JSON/CSV are retained; do not infer a deadlock or GPU cause without profiling.",
    "evidence": "",
    "updated": "2026-11-07",
    "prompt": "Observed during M1-23 native 1080p Forward+/Metal sweep on Apple M4/Godot4.7.2 at49bdcac/bc5eaf7 plus owned benchmark WIP. Fresh isolated user-data/cache-directory layout: title p95~9ms but first campaign transition duration7731.121ms and max process-frame interval7284.349ms. LoadTrace lists room_fixtures_doors LOC01 363.235ms and campaign_ui53.133ms, neither explains the full gap, so investigate native first draw/shader/font/pipeline work rather than guessing or claiming a threaded deadlock. Full headless61/61 including performance537 checks passes; it does not assess this native hitch. M1-23 retained final JSON/CSV/native log under production/qa/perf/M1-23_m4_2026-11-07 (final run timings may differ; use those actual values). Probe isolates first-use preferences and checkpoint, retains first-use frames and labels transition latency separately. Profile exact stages/main-thread/GPU behavior, keep animated loading presentation moving, preserve all assets/UI quality and real first-use costs. Own loading/campaign/performance only; request Sadman renderer/asset or Ramim UI work if measurements identify their path. Acceptance: reproduced then measured improved native first campaign entry on documented hardware, no masking warmup/threshold changes, screenshots/loading trace, appropriate runner green and independent review.",

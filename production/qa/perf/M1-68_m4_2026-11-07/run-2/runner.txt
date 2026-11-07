@@ -1,0 +1,2 @@
+ok   tools/test_performance_runtime.gd :: PERFORMANCE RUNTIME RESULT: PASS (537 checks, 0 failures)
+1/1 suites passed
