@@ -44,7 +44,7 @@ Generated assets were produced with the tools below on accounts and plans the te
 | **Codex** | OpenAI | Game code, code review, bug hunting |
 | **Antigravity** | Google | One asset-review second opinion (rejected); nothing in the game |
 
-Google Veo was not used.
+Google Veo 3.1 (in Google Flow) made one shot: the 6-second mustard field that opens CS-01 (M1-52; production/ai_log_parts/M1-52.md).
 
 ## 5. Every file in `game/assets`
 

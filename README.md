@@ -131,7 +131,7 @@ We used AI tools, and we disclose all of them. Every generation is logged with i
 | ElevenLabs (eleven_v4, eleven_music_v2_5, Sound Effects v2) | ElevenLabs | All 383 voice lines, 12 music cues and 35 sound effects; the Flows workspace that ran the image and video models |
 | Seedance 2.5 | ByteDance | Short cutscene video shots from our start frames |
 
-Google Veo was not used. The tool behind the 2–3 November campaign code is not recorded; the team is confirming it ([docs/AI_USE.md](docs/AI_USE.md)).
+Google Veo 3.1 (in Google Flow) made one shot: the 6-second mustard field that opens the game (M1-52). The tool behind the 2–3 November campaign code is not recorded; the team is confirming it ([docs/AI_USE.md](docs/AI_USE.md)).
 
 **What the team did itself:** the story, characters and every line of dialogue; all puzzle rules and numbers; the science mapping; the art direction and every approval and rejection; and the review of AI-written code, which is also checked by a second AI and the test suites. AI tools turned our written designs and approved images into assets, and wrote code against our specifications. The NASA data extracts come from a plain Python script ([production/tools/fetch_nasa_data.py](production/tools/fetch_nasa_data.py)) that downloads the original records, or records values quoted from the cited papers; no AI model produces the data values.
 
