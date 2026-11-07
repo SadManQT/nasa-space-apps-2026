@@ -1,5 +1,5 @@
 {
- "_about": "Rough feature boxes [x0, y0, x1, y1] in the 2048 px flat face render of the v8 models (production/tools/render_face_flat.py, default framing). eyeR/browR are the character's right (viewer's left). make_toon_face_atlas.py refines each box from the paint itself. \"no_brows\": true skips the brow layers (Kai: his brows sit behind his fringe; Mei: hers run into the fringe line, so a moving brow layer would copy part of it). \"render_drop\" is the --drop used for that face render.",
+ "_about": "Rough feature boxes [x0, y0, x1, y1] in the 2048 px flat face render of the v8 models (production/tools/render_face_flat.py, default framing). eyeR/browR are the character's right (viewer's left). make_toon_face_atlas.py refines each box from the paint itself. \"no_brows\": true skips the brow layers (Kai: his brows sit behind his fringe; Mei: hers run into the fringe line, so a moving brow layer would copy part of it). \"render_drop\" is the --drop used for that face render. The CH_<Name>_EVA rows (M3-3A) are the fitted EVA suit models (production/concept/turnarounds_eva_v1), same default framing; brows follow each character's v8 choice.",
  "CH_Kai": {
   "eyeR": [
    610,
@@ -137,6 +137,145 @@
    1650,
    1260,
    1750
+  ]
+ },
+ "CH_Kai_EVA": {
+  "eyeR": [
+   680,
+   1250,
+   975,
+   1390
+  ],
+  "eyeL": [
+   1190,
+   1250,
+   1480,
+   1390
+  ],
+  "mouth": [
+   840,
+   1700,
+   1300,
+   1830
+  ],
+  "no_brows": true
+ },
+ "CH_Amara_EVA": {
+  "eyeR": [
+   550,
+   1265,
+   855,
+   1465
+  ],
+  "eyeL": [
+   1165,
+   1265,
+   1480,
+   1465
+  ],
+  "browR": [
+   530,
+   1095,
+   890,
+   1235
+  ],
+  "browL": [
+   1140,
+   1095,
+   1495,
+   1235
+  ],
+  "mouth": [
+   815,
+   1755,
+   1190,
+   1865
+  ]
+ },
+ "CH_Mei_EVA": {
+  "eyeR": [
+   500,
+   1120,
+   850,
+   1270
+  ],
+  "eyeL": [
+   1190,
+   1120,
+   1540,
+   1270
+  ],
+  "mouth": [
+   850,
+   1620,
+   1210,
+   1730
+  ],
+  "no_brows": true,
+  "render_drop": 0.17
+ },
+ "CH_Rafi_EVA": {
+  "eyeR": [
+   560,
+   1100,
+   860,
+   1245
+  ],
+  "eyeL": [
+   1130,
+   1100,
+   1445,
+   1245
+  ],
+  "browR": [
+   500,
+   940,
+   915,
+   1085
+  ],
+  "browL": [
+   1095,
+   940,
+   1500,
+   1085
+  ],
+  "mouth": [
+   710,
+   1620,
+   1200,
+   1760
+  ]
+ },
+ "CH_Ferreira_EVA": {
+  "eyeR": [
+   620,
+   1180,
+   925,
+   1345
+  ],
+  "eyeL": [
+   1145,
+   1180,
+   1460,
+   1345
+  ],
+  "browR": [
+   600,
+   1080,
+   960,
+   1172
+  ],
+  "browL": [
+   1105,
+   1080,
+   1505,
+   1172
+  ],
+  "mouth": [
+   845,
+   1660,
+   1265,
+   1755
   ]
  }
 }

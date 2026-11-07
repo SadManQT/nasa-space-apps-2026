@@ -269,7 +269,7 @@ CH_Ferreira_Duty (screen portrait, no 3D body): Sadman picked take A in chat on 
 
 Inspected: the Cycles previews on [M3-3A_annex_contact.png](M3-3A_annex_contact.png) and [M3-3A_ch03_assets_contact.png](M3-3A_ch03_assets_contact.png) and the Godot captures `production/qa/evidence/M3-3A_*.png` (pieces stage, corridor with the displaced cover hood, open hatch lit by a hand light, cold annex by headlamp, five helmets, both racks and the rack close-up, the petal flat and mounted), against ART_BIBLE.md §2–§3, the 5 Nov photoreal-environment decision, the approved source assets (PR_Helmet, PL_Alo_Bloom, PL_Tara_Bloom, PL_ZeroSeedlingTray) and the canon counts (7 purple + 5 green; planting day has nothing sprouted). No text or logos on any surface, no NASA marks, no plant faces, metre scale, pivots at the base. Defects found and fixed this round: the planting-day rack exported no cassettes in a render run and then kept the bloom models' leaves (now clean procedural cassettes); the service cover was a 4 cm plate pierced by the leaf's wheel and handles in its rest pose (now a 0.30 m hood standing on the deck); every 1 m ceiling tile carried a fixture coplanar with its face, which z-fought into rows of black dashes, and the ribs sat inside the panel (now plain panels with visible ribs plus a separate fixture tile every 3 m); the frost was ±45 % camouflage blotches (now an even crystalline film); the petal's apex was cut square and its veins read as wood grain; a 2.4 cm notch at the corner piece's rib; the grating's hard bar edges.
 
-Second opinion: Codex (`gpt-6-astra`, high), shown the two contact sheets and five captures: 12 PASS, 3 FIX, all three acted on: the dark open-hatch shot did not show the ladder (hand light added), the rack's stem colours were not readable at rack distance (close-up capture added), and the grating shimmered (texture softened; project anti-aliasing filed as M3-100).
+Second opinion: Codex (`gpt-6-astra`, high), shown the two contact sheets and five captures: 12 PASS, 3 FIX, all three acted on: the dark open-hatch shot did not show the ladder (hand light added), the rack's stem colours were not readable at rack distance (close-up capture added), and the grating shimmered (texture softened; project anti-aliasing filed as M3-102).
 
 | Asset | Verdict | Notes |
 |---|---|---|
@@ -281,7 +281,7 @@ Second opinion: Codex (`gpt-6-astra`, high), shown the two contact sheets and fi
 | EN_ZeroAnnex_Wall_LOD1 | ✅ PASS | Compatibility LOD: flat panel, same colours and frost, rivets dropped |
 | EN_ZeroAnnex_Wall_Corner_LOD0 | ✅ PASS | inside corner, ribs and skirting now meet at the corner (the 2.4 cm notch is closed) |
 | EN_ZeroAnnex_Wall_Corner_LOD1 | ✅ PASS | Compatibility LOD: same geometry, 512 px textures |
-| EN_ZeroAnnex_Floor_LOD0 | ✅ PASS | open steel grating over a dark pit, bars with rounded shoulders; still shimmers without project anti-aliasing (board M3-100) |
+| EN_ZeroAnnex_Floor_LOD0 | ✅ PASS | open steel grating over a dark pit, bars with rounded shoulders; still shimmers without project anti-aliasing (board M3-102) |
 | EN_ZeroAnnex_Floor_LOD1 | ✅ PASS | Compatibility LOD: same geometry, 512 px textures |
 | EN_ZeroAnnex_Ceiling_LOD0 | ✅ PASS | frosted panel with five visible stiffener ribs hanging below the face, frosted face meets the 2.6 m wall tops; plain (no fixture) |
 | EN_ZeroAnnex_Ceiling_LOD1 | ✅ PASS | Compatibility LOD: same geometry, 512 px textures |
@@ -298,3 +298,17 @@ Second opinion: Codex (`gpt-6-astra`, high), shown the two contact sheets and fi
 | PR_Helmet_Roles | ✅ PASS | approved PR_Helmet with a separate gold visor (lowers 78 deg), crown closed under it, role stripe down the back of the shell in each cadet's colour, Bangladesh flag decal on the wearer's left, Aurora patch on the right; no text, no agency marks |
 | PR_PressedPetal | ✅ PASS | one dried Brassica rapa petal (obovate, rounded apex, paler claw, veins fanning from the claw) on a blank archival card in a clear sleeve, blank date label slot |
 | PR_PressedPetal_Mounted | ✅ PASS | the same sleeve standing in a navy board clip with steel spring clips |
+
+## M3-3A CH_Cadet_EVA fitted EVA suits — 7 November 2026, Sadman/claude (Claude Opus 5.5)
+
+Inspected: Blender orthographic sheets (front, left, back, right, top) and horizontal slices of every model take (the mirrored-arm test: torso plus two arms in every band from hip to shoulder), pose sheets (idle, walk, run, sit, kneel, type, wave, carry), the hand-to-body clearance of every standing and gait clip, and Godot close-ups in the game look (toon materials, drawn face layers) from both sides and the back, plus the windowed captures `production/qa/evidence/M3-3A_eva_*.png` and [M3-3A_eva_contact.png](M3-3A_eva_contact.png). Against the five sheets Sadman approved on 6 Nov (production/concept/turnarounds_eva_v1), ART_BIBLE §3 role colours and the 25 Oct patch lock. No text, no logos, no NASA marks, no Bangla script; hands are five-fingered gloves with clean wrists; no extra limbs in any slice of the used takes. Rejected on review (logged in production/ai_log_parts/M3-3A.md): Kai take 1 (sheet sides swapped: it faced backwards), six Mei takes (ponytail behind her ear, doubled or split), the first Amara and Ferreira models (white shoulder domes and stray marks on the arms from the arm-free side views) and a Ferreira take built from arm-keeping side views (extra arm).
+
+| Asset | Verdict | Notes |
+|---|---|---|
+| CH_Kai_EVA | ✅ PASS | orange role tabs and shoulder trim, lean build, his face and untidy hair; flag LEFT sleeve, Aurora RIGHT sleeve and RIGHT chest (the sheet's wrong-side chest badge removed). Known minor: faint pale marks remain on the pack's round cover (Tripo relief under the repaint) |
+| CH_Amara_EVA | ✅ PASS | cyan tabs, braids in the low coil at the nape (decision 2), her face; patches as locked. Known minor: a speckled edge where the shoulder trim meets the repainted sleeve |
+| CH_Mei_EVA | ✅ PASS | green tabs, blunt fringe, one centred low ponytail on three bones (68 in all) that tucks inside the helmet; freckles; patches as locked, right-chest Aurora decal added (decision 4) |
+| CH_Rafi_EVA | ✅ PASS | purple tabs, heavy-set build, beard and fade; right-chest Aurora decal added (decision 4). Known minor: a faint outline of Tripo's painted placeholder below the right-sleeve patch |
+| CH_Ferreira_EVA | ✅ PASS | gold tabs, faded and worn suit, gear-wheel patch on the left chest (decision 3), dark brown pixie cut with grey; patches as locked |
+
+Every suit carries its wearer's 44 clips (copied from the installed coverall character; the walk, run and idle poses match), stands 1.62–1.82 m on the wearer's joints, and wears PR_Helmet_Roles at the measured scale (Kai 1.17, Amara 1.28, Mei 1.35, Rafi 1.29, Ferreira 1.16), seated on the neck ring and carried by the Head bone, so the face stays inside the shell in every clip (a chest-bone mount let the clips' head pitch push the faces out: fixed before capture). No independent second opinion this round (Codex not run); Sadman's eye on the captures is the remaining check.

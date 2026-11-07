@@ -1,7 +1,7 @@
 ## M3-3A: the Chapter 3 (Moonquake) assets load, snap, carry collision and moving parts, and keep their canon counts:
 ## the Expedition Zero annex pieces (annex.json, read by habitat_kit.gd as an extension catalogue), the helmet role
-## variants (helmet_roles.json), the descendant rack (descendants.json: seven purple stems, five green) and the pressed
-## petal in its sleeve.
+## variants (helmet_roles.json), the descendant rack (descendants.json: seven purple stems, five green), the pressed
+## petal in its sleeve, and the five fitted EVA suits (CH_<Name>_EVA) with their helmets locked on.
 ## Headless: game/tools/run_tests.sh ch03_assets
 ## Evidence (needs a window): Godot --path game --script res://tools/test_ch03_assets.gd -- --evidence
 extends SceneTree
@@ -23,6 +23,9 @@ const PETAL := "res://assets/props/PR_PressedPetal/PR_PressedPetal.glb"
 const PETAL_MOUNTED := "res://assets/props/PR_PressedPetal_Mounted/PR_PressedPetal_Mounted.glb"
 const TRAY := "res://assets/plants/PL_ZeroSeedlingTray/PL_ZeroSeedlingTray.glb"
 const DRUM := "res://assets/props/PR_AnnexDrum/PR_AnnexDrum.glb"
+## The fitted EVA suits and their skeletons (Mei's carries three ponytail bones); every suit has the cast's 44 clips.
+const EVA_BONES := {"kai": 65, "amara": 65, "mei": 68, "rafi": 65, "ferreira": 65}
+const EVA_LAYERS := ["Body", "FaceEyeL", "FaceEyeR", "FaceMouth", "PatchFlagL", "PatchAuroraR", "PatchAuroraChest"]
 const ANNEX_DROP := 3.0  # the lower annex floor is 3 m below the corridor deck (annex.json conventions)
 var checks := 0
 var failures := 0
@@ -45,6 +48,7 @@ func _run() -> void:
 	_test_helmet()
 	_test_descendants()
 	_test_petal()
+	_test_eva()
 	if OS.get_cmdline_user_args().has("--evidence"):
 		await _evidence()
 	print("CH03 ASSETS RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
@@ -248,13 +252,15 @@ func _ray(space: PhysicsDirectSpaceState3D, from: Vector3, to: Vector3) -> Dicti
 func _test_helmet() -> void:
 	var data := Helmet.data()
 	_check(data.roles.size() == 5 and Array(Helmet.role_ids()) == ["kai", "amara", "mei", "rafi", "ferreira"], "helmet_roles.json carries the four cadets and Ferreira")
+	_check(String(data.get("equip_bone", "")) == "Head", "the Head bone carries the helmet, so the face stays inside it in every clip")
 	for key in data.roles:
 		var role: Dictionary = data.roles[key]
-		# the fit scale is measured against the whole v8 head above the Neck bone, hair volume included, so the shell
-		# can grow up to 1.7x the approved helmet (Rafi 1.63) and never shrinks below the approved size
-		_check(role.stripe_rgb.size() == 3 and float(role.scale) >= 1.0 and float(role.scale) <= 1.7, "%s: stripe colour and a fit scale between 1.0 and 1.7 (%.2f)" % [key, float(role.scale)])
+		# measured on the installed EVA suits (production/tools/fit_helmets_eva.py): never below the approved helmet, and
+		# no wider than 1.4x (the suits' neck rings alone need about 1.17x)
+		_check(role.stripe_rgb.size() == 3 and float(role.scale) >= 1.0 and float(role.scale) <= 1.4, "%s: stripe colour and a fit scale between 1.0 and 1.4 (%.2f)" % [key, float(role.scale)])
 		var clearance: Dictionary = role.head_clearance_m
-		_check(float(clearance.width) >= 0.03 and float(clearance.depth) >= 0.03 and float(clearance.height) >= 0.02, "%s: at least 3 cm around the head and 2 cm above it at that scale" % key)
+		_check(float(clearance.width) >= 0.03 and float(clearance.depth) >= 0.03 and float(clearance.height) >= 0.015, "%s: at least 3 cm round the head and 1.5 cm above it at that scale" % key)
+		_check(String(role.get("suit", "")) == "CH_%s_EVA" % key.capitalize() and role.equip_origin_m.size() == 3, "%s: fitted to CH_%s_EVA" % [key, key.capitalize()])
 	var helmet := Helmet.instance()
 	_check(helmet != null, "PR_Helmet_Roles.glb instances")
 	if helmet == null:
@@ -280,8 +286,98 @@ func _test_helmet() -> void:
 	Helmet.set_visor_closed(helmet, 0.0)
 	_check(absf(visor.rotation_degrees.x) < 0.01, "and raises again")
 	var xf := Helmet.equip_transform("kai")
-	_check(xf.origin.y < -0.1 and xf.origin.y > -0.3, "Kai's equip offset puts the neck ring below the Head bone")
+	_check(xf.origin.y > 1.3 and xf.origin.y < 1.5 and absf(xf.basis.get_scale().x - float(data.roles.kai.scale)) < 0.001, "Kai's helmet base sits on his suit's neck ring (1.3 to 1.5 m) at his fit scale")
 	helmet.free()
+
+# ----------------------------------------------------------------------------------------------- fitted EVA suits
+
+func _eva_path(key: String) -> String:
+	return "res://assets/characters/CH_%s_EVA/CH_%s_EVA.glb" % [key.capitalize(), key.capitalize()]
+
+func _test_eva() -> void:
+	var clips_of_cast := {}
+	for key in EVA_BONES:
+		var packed := load(_eva_path(key)) as PackedScene
+		_check(packed != null, "CH_%s_EVA.glb loads" % key.capitalize())
+		if packed == null:
+			continue
+		var suit := packed.instantiate() as Node3D
+		root.add_child(suit)
+		var skeleton := suit.find_child("Skeleton3D", true, false) as Skeleton3D
+		var player := suit.find_child("AnimationPlayer", true, false) as AnimationPlayer
+		_check(skeleton != null and skeleton.get_bone_count() == EVA_BONES[key], "%s: %d bones" % [key, EVA_BONES[key]])
+		var names := player.get_animation_list() if player != null else PackedStringArray()
+		var loops := 0
+		for clip in names:   # the importer turns a "_loop" name into a looping animation
+			loops += int(player.get_animation(clip).loop_mode != Animation.LOOP_NONE)
+		_check(names.size() == 44 and loops == 13, "%s: the cast's 44 clips, 13 looping (%d, %d)" % [key, names.size(), loops])
+		var coverall := (load("res://assets/characters/CH_%s/CH_%s.glb" % [key.capitalize(), key.capitalize()]) as PackedScene).instantiate()
+		var cast_names := (coverall.find_child("AnimationPlayer", true, false) as AnimationPlayer).get_animation_list()
+		coverall.free()
+		var same := true
+		for clip in cast_names:
+			same = same and names.has(clip)
+		_check(same, "%s: every clip the coverall character has, by the same name (the game swaps outfits without retargeting)" % key)
+		for layer in EVA_LAYERS:
+			_check(suit.find_child(layer, true, false) is MeshInstance3D, "%s: has %s" % [key, layer])
+		var flag := suit.find_child("PatchFlagL", true, false) as MeshInstance3D
+		var aurora := suit.find_child("PatchAuroraR", true, false) as MeshInstance3D
+		var chest := suit.find_child("PatchAuroraChest", true, false) as MeshInstance3D
+		if flag != null and aurora != null and chest != null:
+			_check(flag.get_aabb().get_center().x > 0.1, "%s: the Bangladesh flag on the LEFT sleeve (+X)" % key)
+			_check(aurora.get_aabb().get_center().x < -0.1, "%s: the Aurora patch on the RIGHT sleeve (-X)" % key)
+			var c := chest.get_aabb().get_center()
+			_check(c.x < -0.03 and c.x > -0.14 and c.z > 0.0, "%s: the Aurora patch on the RIGHT chest, on the front (%.3f, %.3f)" % [key, c.x, c.z])
+		# helmet: every head and hair vertex (ponytail tucked) inside the scaled interior, the base on the neck ring
+		var helmet := Helmet.instance()
+		Helmet.apply_role(helmet, key)
+		var mount := Helmet.equip(helmet, suit, key)
+		_check(mount != null and mount.bone_name.ends_with("Head"), "%s: helmet mounted on the Head bone" % key)
+		var outside := _head_outside_helmet(suit, skeleton, key)
+		_check(outside == 0, "%s: no head or hair vertex outside the helmet interior (%d outside)" % [key, outside])
+		if key == "mei":
+			var tuck := skeleton.find_bone("mixamorig:Ponytail1") if skeleton.find_bone("mixamorig:Ponytail1") >= 0 else skeleton.find_bone("mixamorig_Ponytail1")
+			_check(tuck >= 0 and skeleton.get_bone_pose_scale(tuck).x < 0.01, "mei: her ponytail is tucked while the helmet is on")
+			Helmet.untuck(suit)
+			_check(tuck >= 0 and is_equal_approx(skeleton.get_bone_pose_scale(tuck).x, 1.0), "mei: and let out again when it comes off")
+		suit.free()
+
+## Head-weighted vertices of the suit's Body (rest pose) that fall outside the role's helmet interior box.
+func _head_outside_helmet(suit: Node, skeleton: Skeleton3D, key: String) -> int:
+	var body := suit.find_child("Body", true, false) as MeshInstance3D
+	var head := -1
+	for i in skeleton.get_bone_count():
+		if skeleton.get_bone_name(i).ends_with("Head"):
+			head = i
+	if body == null or head < 0:
+		return -1
+	var data := Helmet.data()
+	var inner: Dictionary = data.interior_clearance_m
+	var to_helmet := Helmet.equip_transform(key).affine_inverse()
+	var bind_bone := PackedInt32Array()
+	for b in body.skin.get_bind_count():
+		var bone := body.skin.get_bind_bone(b)
+		bind_bone.append(bone if bone >= 0 else skeleton.find_bone(body.skin.get_bind_name(b)))
+	var outside := 0
+	for surface in body.mesh.get_surface_count():
+		var arrays := body.mesh.surface_get_arrays(surface)
+		var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+		var bones: PackedInt32Array = arrays[Mesh.ARRAY_BONES]
+		var weights: PackedFloat32Array = arrays[Mesh.ARRAY_WEIGHTS]
+		var per := bones.size() / verts.size()
+		for v in verts.size():
+			var best := 0
+			for k in per:
+				if weights[v * per + k] > weights[v * per + best]:
+					best = k
+			if bind_bone[bones[v * per + best]] != head:
+				continue
+			var p := to_helmet * verts[v]
+			if p.y < 0.0:
+				continue  # the neck below the helmet's base ring, inside the suit collar
+			if absf(p.x) > float(inner.width) / 2.0 + 0.003 or absf(p.z) > float(inner.depth) / 2.0 + 0.003 or p.y > float(inner.height) + 0.003:
+				outside += 1
+	return outside
 
 func _test_descendants() -> void:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(DESCENDANTS_DATA))
@@ -607,7 +703,90 @@ func _evidence() -> void:
 		"A real-size Brassica rapa petal (about 13 mm with its claw) on an archival card; the date label is a live-UI slot. A memory of the original Alo, never a living flower.")
 	await _capture("M3-3A_pressed_petal")
 	stage.free()
+	await _eva_evidence(caption)
 	caption.get_parent().get_parent().free()
+
+## 8: the five fitted EVA suits in the game look (toon materials, drawn face layers), standing in Idle_loop: front,
+## left side and back with the helmets locked on (visors up), a close-up of the helmets, and the bare heads.
+func _eva_evidence(caption: Label) -> void:
+	var stage := _studio()
+	root.add_child(stage)
+	var cam := stage.find_children("*", "Camera3D", true, false)[0] as Camera3D
+	var suits: Array[Node3D] = []
+	var helmets: Array[Node3D] = []
+	var ids := Helmet.role_ids()
+	for i in ids.size():
+		var suit := (load(_eva_path(ids[i])) as PackedScene).instantiate() as Node3D
+		suit.position = Vector3(-1.64 + i * 0.82, 0.0, 0.0)   # Kai on the left as the camera (on +Z) sees them
+		stage.add_child(suit)
+		ToonMaterials.apply_to_tree(suit, true, true)
+		var face := FaceAtlas.new()
+		face.name = "FaceAtlas"
+		suit.add_child(face)
+		var player := suit.find_child("AnimationPlayer", true, false) as AnimationPlayer
+		player.play("Idle")
+		player.seek(0.4, true)
+		player.pause()
+		var helmet := Helmet.instance()
+		Helmet.apply_role(helmet, ids[i])
+		Helmet.equip(helmet, suit, ids[i])
+		suits.append(suit)
+		helmets.append(helmet)
+	var label := func(text: String, at: Vector3) -> Label3D:
+		var l := Label3D.new()
+		l.text = text
+		l.font_size = 36
+		l.pixel_size = 0.006
+		l.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		l.no_depth_test = true
+		l.outline_size = 10
+		l.outline_modulate = Color(1, 1, 1, 0.9)
+		l.modulate = Color(0.12, 0.16, 0.27)
+		l.position = at
+		stage.add_child(l)
+		return l
+	var labels: Array = []
+	for i in ids.size():
+		labels.append(label.call(String(Helmet.data().roles[ids[i]].display), suits[i].position + Vector3(0, 0.08, 0.6)))
+	cam.size = 2.75
+	cam.position = Vector3(0, 1.15, 8.0)
+	cam.basis = Basis.looking_at(Vector3(0, 1.05, 0) - cam.position, Vector3.UP)
+	_set_caption(caption, "M3-3A CH_Cadet_EVA: the fitted EVA suits, front, helmets seated on the neck rings (visors up), Idle_loop",
+		"Kai, Amara, Mei, Rafi, Ferreira (left to right) in the approved suit: quilted off-white, navy trim, orange accents, navy pack; role tabs; Bangladesh flag on the LEFT sleeve, Aurora patch on the RIGHT sleeve and RIGHT chest (Ferreira keeps her gear patch). Helmet scale per cadet from helmet_roles.json.")
+	await _capture("M3-3A_eva_front")
+	for suit in suits:   # each turned in place so its LEFT side (+X, the flag sleeve) faces the camera
+		suit.rotation_degrees.y = -90.0
+	_set_caption(caption, "M3-3A CH_Cadet_EVA: the suits from their LEFT side (flag side), helmets on",
+		"Profile: helmet seated over the navy neck ring, life-support pack, over-boots; nothing intersects at rest.")
+	await _capture("M3-3A_eva_side")
+	for suit in suits:
+		suit.rotation_degrees.y = 180.0
+	_set_caption(caption, "M3-3A CH_Cadet_EVA: the suits from behind (turned in place, Kai still on the left), helmets on",
+		"Role stripe on each helmet's back, navy life-support packs (stray marks Tripo copied from the side views painted back to the pack's navy), Mei's ponytail tucked inside her helmet.")
+	await _capture("M3-3A_eva_back")
+	for suit in suits:
+		suit.rotation_degrees.y = 0.0
+	# close-up of the five helmets from the front, a little from the side so the visor opening and the ring read
+	cam.projection = Camera3D.PROJECTION_PERSPECTIVE
+	cam.fov = 26.0
+	cam.position = Vector3(-0.4, 1.75, 6.2)
+	cam.basis = Basis.looking_at(Vector3(0, 1.45, 0) - cam.position, Vector3.UP)
+	for l in labels:
+		(l as Label3D).visible = false
+	_set_caption(caption, "M3-3A PR_Helmet_Roles on CH_Cadet_EVA: helmet fit per cadet (visors up)",
+		"Scales from fit_helmets_eva.py measured on these suits: Kai %.2f, Amara %.2f, Mei %.2f, Rafi %.2f, Ferreira %.2f; seated on the neck ring at rest, carried by the head." % [
+			float(Helmet.data().roles.kai.scale), float(Helmet.data().roles.amara.scale), float(Helmet.data().roles.mei.scale),
+			float(Helmet.data().roles.rafi.scale), float(Helmet.data().roles.ferreira.scale)])
+	await _capture("M3-3A_eva_helmets")
+	# the bare heads: faces, Amara's low coil, Mei's ponytail let out
+	for i in ids.size():
+		helmets[i].get_parent().queue_free()
+		Helmet.untuck(suits[i])
+	await process_frame
+	_set_caption(caption, "M3-3A CH_Cadet_EVA: the heads without helmets",
+		"Faces from the approved sheets with the drawn face layers, Amara's braids in the low coil at the nape (decision 2), Mei's ponytail, the navy neck rings.")
+	await _capture("M3-3A_eva_heads")
+	stage.free()
 
 ## A caption panel across the top of the capture: a heading line and a wrapped detail line on a dark backing.
 func _caption() -> Label:

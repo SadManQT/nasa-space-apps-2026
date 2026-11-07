@@ -14,12 +14,12 @@
  },
  "interior_clearance_m": {
   "width": 0.368,
-  "depth": 0.261,
+  "depth": 0.288,
   "height": 0.371
  },
  "states": {
   "stored": "helmet on its base, visor open (the GLB rest pose)",
-  "equipped": "parented to the Head bone with equip_offset_from_head_bone_m and scale",
+  "equipped": "carried by the suit's Head bone (equip_bone), so the face stays inside the shell in every clip: its base centre at equip_origin_m in the rest pose (character space, Godot axes) with scale; a ponytail is tucked (tuck_bones scaled down)",
   "visor": "rotate the Visor child about +X by visor_closed_rotation_deg_x times the closed fraction"
  },
  "roles": {
@@ -31,16 +31,17 @@
     0.42,
     0.129
    ],
-   "scale": 1.28,
-   "equip_offset_from_head_bone_m": [
-    0.0,
-    -0.173,
-    0.021
+   "scale": 1.17,
+   "equip_origin_m": [
+    0.0003,
+    1.4005,
+    0.0553
    ],
+   "suit": "CH_Kai_EVA",
    "head_clearance_m": {
-    "width": 0.198,
-    "depth": 0.043,
-    "height": 0.152
+    "width": 0.164,
+    "depth": 0.064,
+    "height": 0.085
    }
   },
   "amara": {
@@ -51,16 +52,17 @@
     0.737,
     0.824
    ],
-   "scale": 1.49,
-   "equip_offset_from_head_bone_m": [
-    0.0,
-    -0.124,
-    -0.038
+   "scale": 1.28,
+   "equip_origin_m": [
+    0.0004,
+    1.2997,
+    -0.0228
    ],
+   "suit": "CH_Amara_EVA",
    "head_clearance_m": {
-    "width": 0.327,
+    "width": 0.239,
     "depth": 0.04,
-    "height": 0.14
+    "height": 0.15
    }
   },
   "mei": {
@@ -71,16 +73,17 @@
     0.682,
     0.337
    ],
-   "scale": 1.61,
-   "equip_offset_from_head_bone_m": [
-    0.0,
-    -0.124,
-    -0.042
+   "scale": 1.35,
+   "equip_origin_m": [
+    -0.0016,
+    1.2601,
+    0.0285
    ],
+   "suit": "CH_Mei_EVA",
    "head_clearance_m": {
-    "width": 0.313,
-    "depth": 0.041,
-    "height": 0.251
+    "width": 0.239,
+    "depth": 0.043,
+    "height": 0.146
    }
   },
   "rafi": {
@@ -91,16 +94,17 @@
     0.286,
     0.741
    ],
-   "scale": 1.63,
-   "equip_offset_from_head_bone_m": [
-    0.0,
-    -0.145,
-    -0.03
+   "scale": 1.29,
+   "equip_origin_m": [
+    0.0067,
+    1.507,
+    0.0292
    ],
+   "suit": "CH_Rafi_EVA",
    "head_clearance_m": {
-    "width": 0.243,
-    "depth": 0.041,
-    "height": 0.3
+    "width": 0.166,
+    "depth": 0.04,
+    "height": 0.162
    }
   },
   "ferreira": {
@@ -112,16 +116,22 @@
     0.188
    ],
    "scale": 1.16,
-   "equip_offset_from_head_bone_m": [
-    0.0,
-    -0.135,
-    0.001
+   "equip_origin_m": [
+    -0.0003,
+    1.3702,
+    0.0131
    ],
+   "suit": "CH_Ferreira_EVA",
    "head_clearance_m": {
-    "width": 0.202,
-    "depth": 0.04,
-    "height": 0.119
+    "width": 0.174,
+    "depth": 0.076,
+    "height": 0.111
    }
   }
- }
+ },
+ "fit": "Measured on the installed CH_<Name>_EVA suits by production/tools/fit_helmets_eva.py: the smallest scale (never below 1.0) leaving 2 cm round the head and hair, 1.5 cm over the crown and an opening 1 cm wider than the suit's neck ring; the base sits 2 cm down over the ring and the shell is centred on the head. A ponytail (its own bones) is tucked while the helmet is on.",
+ "equip_bone": "Head",
+ "tuck_bones": [
+  "Ponytail1"
+ ]
 }

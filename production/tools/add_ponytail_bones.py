@@ -2,7 +2,7 @@
 ponytail to it, so the game's hair springs can swing it. Every clip is kept (NLA tracks, as retarget_clips.py exports).
 
   blender -b -P add_ponytail_bones.py -- <in.glb> <out.glb> --ztop 1.56 --zbottom 1.18 [--ztie 1.47 --skull-back 0.065]
-         [--xmax 0.075] [--debug out.png]
+         [--xmax 0.075] [--dark] [--debug out.png]
 
 The ponytail is the narrow band (|x| < xmax) between ztop and zbottom: above ztie, whatever lies behind the back of
 the skull (y > skull-back); below it, whatever hangs beyond the air gap behind the neck and upper back. Weights ramp from the Head bone at the tie into the chain, so the root never tears.
@@ -14,6 +14,7 @@ from mathutils import Vector
 a = argparse.ArgumentParser(); a.add_argument("src"); a.add_argument("dst")
 a.add_argument("--ztop", type=float, required=True); a.add_argument("--zbottom", type=float, required=True)
 a.add_argument("--xmax", type=float, default=0.075); a.add_argument("--debug")
+a.add_argument("--dark", action="store_true")   # also grow into near-black hair the rigger gave to the back (EVA: tips on the pack)
 a.add_argument("--ztie", type=float, default=1.47); a.add_argument("--skull-back", dest="skull_back", type=float, default=0.065)
 a = a.parse_args(sys.argv[sys.argv.index("--") + 1:])
 bpy.ops.wm.read_factory_settings(use_empty=True); bpy.ops.import_scene.gltf(filepath=a.src)
@@ -74,6 +75,16 @@ adj = {}
 for e in body.data.edges:
     ki, kj = key(body.data.vertices[e.vertices[0]].co), key(body.data.vertices[e.vertices[1]].co)
     if ki != kj: adj.setdefault(ki, set()).add(kj); adj.setdefault(kj, set()).add(ki)
+dark = None
+if a.dark:   # per-vertex base colour: near-black and neutral is hair (the navy pack and collar are blue)
+    import numpy as np
+    img = next(n.image for n in body.active_material.node_tree.nodes if n.type == "TEX_IMAGE" and n.image and n.outputs["Color"].links
+               and any(l.to_socket.name == "Base Color" for l in n.outputs["Color"].links))
+    W, H = img.size; px = np.empty(W * H * 4, np.float32); img.pixels.foreach_get(px); px = px.reshape(H, W, 4)
+    uvl = body.data.uv_layers.active.data; col = np.zeros((len(body.data.vertices), 3), np.float32)
+    for l in body.data.loops:
+        u, v = uvl[l.index].uv; col[l.vertex_index] = px[int(min(max(v, 0), 0.9999) * H), int(min(max(u, 0), 0.9999) * W), :3]
+    dark = (col @ np.array([0.299, 0.587, 0.114]) < 0.25) & (col[:, 2] - col[:, 0] < 0.04) & (col.max(1) - col.min(1) < 0.08)
 front = {canon[i] for i in pony}; added = 0
 while front:
     nxt = set()
@@ -82,7 +93,7 @@ while front:
             vs = allkey[w]
             if vs[0] in pony: continue
             p = P[vs[0]]
-            if a.zbottom - 0.05 <= p.z < a.ztie and abs(p.x) < a.xmax + 0.03 and p.y > 0.04 and head_held(vs[0]):
+            if a.zbottom - 0.05 <= p.z < a.ztie and abs(p.x) < a.xmax + 0.03 and p.y > 0.04 and (head_held(vs[0]) or (dark is not None and dark[vs[0]])):
                 for i in vs: pony[i] = P[i]
                 added += len(vs); nxt.add(w)
     front = nxt

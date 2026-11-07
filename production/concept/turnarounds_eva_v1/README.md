@@ -1,6 +1,6 @@
 # Fitted EVA suits (CH_Cadet_EVA): 2D turnaround sheets for approval (M3-3A)
 
-**Status: waiting for Sadman's approval. No Tripo multiview, rig or Meshy credit has been spent on these; nothing is built into the game.**
+**Status: approved by Sadman in chat, 6 Nov 2026 about 10:58 ("Approve all five": decisions 1–5 below), built and installed 7 Nov (M3-3A): `game/assets/characters/CH_<Name>_EVA/`.**
 
 **One page to approve from:** [00_Approval_Sheet.png](00_Approval_Sheet.png) stacks the five sheets at full size with the five helmet colourways underneath (`production/tools/ch03_contact.py`, 6 Nov).
 
@@ -28,6 +28,26 @@ Tripo CLI 0.8.1 `image` with `gemini_3_pro_image_preview`, image-to-image from e
 4. **Mei's and Rafi's missing right-chest patch:** accept as is (the 3D build adds the patch decal procedurally with `tools/add_patches.py`, as for the coveralls) or ask for a retake.
 5. **Resolution:** the sheets are 1376x768. Before `multiview_to_model` they need the same 4x upscale the v8 sheets had (Topaz on Sadman's machine) or a second pass at higher resolution.
 
-## After approval (not started)
+## Built (6–7 Nov 2026)
+
+- **Upscale (decision 5), free route:** no Topaz on this Mac, so each sheet view was redrawn once more by Tripo `image`
+  (gemini_3_pro_image_preview, 9:16, 2x the figure's pixels; Kai's and Amara's fronts also lose the badge the sheets drew on
+  the wrong, left, chest) and Lanczos-scaled to a 2,600 px figure on a 2,900 px square: `<name>/views/`. The sheets in this
+  folder run front, LEFT side, back, RIGHT side.
+- **Models:** Kai and Rafi from all four views (side views with the near arm removed, as for v8); Amara, Mei and Ferreira from
+  the front and back views only (`<name>/views/` holds just those), because the arm-free side views made Tripo put a white
+  shoulder dome and stray marks on their arms and tie Mei's ponytail behind her ear in every four-view take.
+- **Rig and clips:** Tripo Mixamo rig (65 bones, Mei 68 with her ponytail bones); the 44 clips are copied from the installed
+  coverall character (`production/tools/transfer_clips.py`), so every suit moves exactly like its wearer.
+- **Patches (decision 4):** crisp flag (left sleeve), Aurora (right sleeve) and right-chest Aurora layers on all five; Tripo's
+  painted placeholders and their copies are painted back to the suit fabric (`add_patches.py --chest --pack --fabric light`).
+  Ferreira's gear-wheel patch stays on the left chest (decision 3); Amara's braids are in the low coil (decision 2).
+- **Helmet fit:** measured on these suits by `production/tools/fit_helmets_eva.py` (the 1.16–1.63 coverall estimates replaced):
+  Kai 1.17, Amara 1.28, Mei 1.35, Rafi 1.29, Ferreira 1.16; the helmet sits on the suit's neck ring at rest and the Head bone
+  carries it (so the face never leaves the shell), and Mei's ponytail tucks away while it is on (`helmet_roles.json`, `helmet_roles.gd equip()`).
+- Every generation, prompt, task id and credit: [production/ai_log_parts/M3-3A.md](../../ai_log_parts/M3-3A.md). Evidence:
+  `production/qa/evidence/M3-3A_eva_*.png`.
+
+## Original plan (before approval)
 
 Per cadet, the v8 pipeline: `split_turnaround.py` → `build_character_v7.sh` (Tripo multiview quad model ~55 credits, Tripo Mixamo rig 20, re-export with animation, 42 Meshy clips retargeted) → `finish_character_v7.sh` (toon face, sleeve patches, hold poses) → the side-view mirrored-arm check and the 65/68-bone, 44-clip gate → `CH_<Name>_EVA` rows in `production/manifest/characters.csv`. Budget about 75 Tripo credits per cadet (375 for five) plus Meshy clips; the balance was 1,325 on 5 Nov 2026.

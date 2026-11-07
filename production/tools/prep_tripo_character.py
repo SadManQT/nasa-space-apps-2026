@@ -1,16 +1,18 @@
 """Prepare a static Tripo character for rigging: one mesh, facing -Y (glTF +Z), arms along X,
 scaled to the character's height, feet on the floor at the origin, transforms applied.
 
-  blender -b -P prep_tripo_character.py -- <in.glb|in.fbx> <height_m> <out.glb>
+  blender -b -P prep_tripo_character.py -- <in.glb|in.fbx> <height_m> <out.glb> [--facing +X|-X|+Y|-Y]
 
 Tripo's multiview models come out about 1 m tall and facing +-X. The facing is found from the feet: toes
-reach further forward than the shins.
+reach further forward than the shins. Big boots (the EVA over-boots) defeat that test: pass --facing (the axis the
+character faces in the input) after checking a preview.
 """
 import math, sys
 import bpy
 from mathutils import Matrix, Vector
 
-src, height, dst = sys.argv[sys.argv.index("--") + 1:]
+src, height, dst, *opt = sys.argv[sys.argv.index("--") + 1:]
+force = opt[opt.index("--facing") + 1] if "--facing" in opt else None
 height = float(height)
 bpy.ops.wm.read_factory_settings(use_empty=True)
 (bpy.ops.import_scene.fbx if src.lower().endswith(".fbx") else bpy.ops.import_scene.gltf)(filepath=src)
@@ -36,12 +38,16 @@ feet = [v for v in V if v.z < zmin + 0.035 * H]
 shins = [v for v in V if zmin + 0.10 * H < v.z < zmin + 0.22 * H]
 toes_ahead = sum(v[fwd] for v in feet) / len(feet) - sum(v[fwd] for v in shins) / len(shins)
 facing = Vector((0, 0, 0)); facing[fwd] = 1 if toes_ahead > 0 else -1
+if force:   # an explicit facing wins over the feet test
+    fwd = "XY".index(force[1]); lat = 1 - fwd; facing = Vector((0, 0, 0)); facing[fwd] = 1 if force[0] == "+" else -1
 angle = math.atan2(facing.x, -facing.y)          # rotate the facing direction onto -Y
 R = Matrix.Rotation(-angle, 4, "Z")
 s = height / H
 ob.data.transform(Matrix.Scale(s, 4) @ R)
 V = [v.co for v in ob.data.vertices]
-c = Vector(((max(v.x for v in V) + min(v.x for v in V)) / 2, (max(v.y for v in V) + min(v.y for v in V)) / 2, min(v.z for v in V)))
+# pivot under the feet (the centre of the soles' bounding box), not the whole bounding box, which a backpack shifts back
+zlo = min(v.z for v in V); soles = [v for v in V if v.z < zlo + 0.035 * height]
+c = Vector(((max(v.x for v in soles) + min(v.x for v in soles)) / 2, (max(v.y for v in soles) + min(v.y for v in soles)) / 2, zlo))
 ob.data.transform(Matrix.Translation(-c))
 ob.name = ob.data.name = "Body"
 V = [v.co for v in ob.data.vertices]

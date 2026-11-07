@@ -1899,7 +1899,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 3 assets: EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-05"
@@ -1918,8 +1918,8 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "Approved by Sadman in chat, 6 Nov 2026 10:58: \"Approve all five\" (EVA suit design, Amara's low coil, Ferreira's gear-wheel patch, Mei/Rafi chest patch as a 3D decal, upscale before multiview); Tripo credits allowed for the 3D suits.",
-   "evidence": "",
-   "updated": "2026-11-06",
+   "evidence": "Approved by Sadman in chat, 6 Nov 2026 10:58: \"Approve all five\" (EVA suit design, Amara's low coil, Ferreira's gear-wheel patch, Mei/Rafi chest patch as a 3D decal, upscale before multiview). Landed: CH_Kai_EVA, CH_Amara_EVA, CH_Mei_EVA, CH_Rafi_EVA, CH_Ferreira_EVA (Tripo multiview + Mixamo rig, the wearer's 44 clips via tools/transfer_clips.py, 65 bones / Mei 68, toon face, flag/Aurora/right-chest patches) built by tools/finish_character_eva.sh; helmet fit measured on the suits (fit_helmets_eva.py: Kai 1.17, Amara 1.28, Mei 1.35, Rafi 1.29, Ferreira 1.16, seated on the neck ring, carried by the Head bone); plus the night shift's EN_ZeroAnnex (10 pieces), PL_Descendants + _Planted, PR_Helmet_Roles, PR_PressedPetal + _Mounted ported onto main. Credits: Tripo web plan 715 (1,325 -> 610), Tripo API pool 395 (450 -> 55), no Meshy, no money; every generation in production/ai_log_parts/M3-3A.md. verify_gate.py: 220 assets, 0 failing (rig 65/68 bones, 44 clips, 13 loop on all five); registry 194 verified; CH03 suite 331 checks (318 headless). run_tests.sh: 57/57 suites passed (rebased on 80cb281). Evidence: production/qa/evidence/M3-3A_eva_front.png, _eva_side.png, _eva_back.png, _eva_helmets.png, _eva_heads.png, M3-3A_test_results.txt; production/review/M3-3A_eva_contact.png. Anti-aliasing follow-up filed as M3-102.",
+   "updated": "2026-11-07",
    "prompt": "Goal: the Chapter 3 (Moonquake) registry rows that are still planned become installed, gated assets.\nDo: for each of EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA: read execution/ASSET_<name>.md; make a 2D sheet; batch the sheets into one approval request to the\nuser (do not spend 3D credits before approval); then generate (Tripo/Meshy), clean up in Blender, gate, sync to Godot and update\nproduction/ASSET_REGISTRY.csv. Characters reuse the v8 pipeline (production/tools/build_character_v7.sh) and must pass the side-view\nmirrored-arm check. Canon rules that reject work on sight: English only in the game (no Bangla script); plants never have eyes, faces or mouths; no NASA logos or anything implying NASA endorsement; Moon science rules in production/ART_BIBLE.md §2 (black sky, no fog/wind/dust plumes, hard shadows, lunar gravity, no sound in vacuum, radiation never visible). This step spends AI credits: check the balance first, never repeat a generation call to 'retry' (it charges again), log every generation in production/AI_PROMPT_LOG.md (tool, model, prompt, inputs, output file, human changes), and stop with the board task blocked if credits run out. Never buy anything; paid top-ups are the user's decision.\nAcceptance: gate passes; contact sheet in production/review/; registry rows set to verified.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); build every object that this chapter's bridges and §4 clues need (the 'What carries over' column names them) as part of this asset set.",
    "reserved_for": "sadman",
    "effort": 3
@@ -5731,6 +5731,26 @@
    "prompt": "Ownership handoff from Atik M1-49 under MASTER_PLAN §7. Inspect current CH01-S02 inventory-lamp blink, S03 drawer opening, S04/S05 garden care locations and S12 four named mugs. Publish room/staging hooks allowing the campaign to trigger exactly one lamp blink, visit both real garden plant anchors during dated care, and name the existing mugs Kai/Amara/Mei/Rafi at S12. Preserve current authored rooms, doors and scene joins; reuse assets and approved lines. M1-51 is done, so confirm existing CS-01 has no duplicate dialogue and publish how L01/L02 arrival, L03 route preview and L04 before commit should be requested through the existing audio/dialogue interface; media edits remain yours. Provide exact hook names/anchor IDs in evidence and screenshots of blink/mugs. Atik will wire these into M1-49 and record CH01-MUGS-NAMED through the Director; do not edit Atik campaign/routes or invent canon.",
    "reserved_for": "sadman",
    "effort": 2
+  },
+  {
+   "id": "M3-102",
+   "milestone": "M3",
+   "priority": "P2",
+   "tool": "claude",
+   "title": "Project anti-aliasing: fine floor grating and rails shimmer (no MSAA, TAA or FXAA set)",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/project.godot"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "Found in M3-3A (6 Nov, night shift; re-filed 7 Nov when the port onto main reused the id M3-100): game/project.godot sets no 3D anti-aliasing (rendering/anti_aliasing/quality/msaa_3d, screen_space_aa and use_taa are at their off defaults), so fine repeating detail shimmers and shows moire in motion and in stills: the EN_ZeroAnnex grating deck, the habitat-kit anti-slip tiles and handrails (Codex's visual second opinion on production/qa/evidence/M3-3A_annex_cold.png flagged the grating), and the quilting lines of the CH_Cadet_EVA suits. M3-3A softened the grating's bar edges in its texture, which helps but cannot replace AA. Do: choose the project default (e.g. MSAA 2x or 4x on Forward+, or FXAA/SMAA plus TAA) and a lower setting for the Compatibility renderer, expose it in the graphics settings if they exist, and keep the performance budget. Acceptance: game/tools/test_performance_runtime.gd still passes on Sadman's Mac; before/after captures of the annex grating and a kit corridor in production/qa/evidence/<id>_*.png show no moire; run_tests.sh all suites pass.",
+   "reserved_for": "sadman",
+   "effort": 1
   }
  ],
  "requirements": [
