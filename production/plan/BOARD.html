@@ -238,9 +238,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-77">M1-77</a> Avoid missing fade metadata errors on the first campaign caption <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">3 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">22 todo</span></div><div class="bar"><i style="width:9%"></i></div>
-<details open><summary>Working now (3)</summary><ul>
-<li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by atik/codex on 2026-11-07</div></li>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">3 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">5 blocked</span><span class="chip s-todo">22 todo</span></div><div class="bar"><i style="width:9%"></i></div>
+<details open><summary>Working now (2)</summary><ul>
 <li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by atik/codex on 2026-11-06</div></li>
 <li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by atik/codex on 2026-11-07</div></li>
 </ul></details>
@@ -251,7 +250,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-71">M3-71</a> Save slots, autosave and versioned save migrations at Steam quality <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-100">M3-100</a> Preload Alo&#x27;s and Tara&#x27;s dated stage models for the garden (M3-99 variants) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details open><summary>Blocked (4)</summary><ul>
+<details open><summary>Blocked (5)</summary><ul>
+<li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">M1-82/M1-88 delivered; composed and tested all three ready regions (37 checks). Production still needs incremental preparation (measured87-205ms sync), Sadman M1-91 real work ligh…</div></li>
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Draft pre-release v0.1.0-preview.20261105 is on GitHub with both ZIPs (built from 57b837b; CI run 41970276437 green on Windows and macOS; production/qa/release_2026-11-05.md). Sad…</div></li>
 <li><a class="id" href="#M1-49">M1-49</a> Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Sadman M1-84 room/media hooks have landed and are preserved. Await Ramim M1-83 accessible Care Round capture/ghost panel and final command contract; then Atik wires dated garden v…</div></li>
 <li><a class="id" href="#M1-58">M1-58</a> Carrying payloads, and the shift-5 STACK as a real carry-and-place task <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Night shift parked the work on branch night/M1-58: could not land: rebase conflict: real carry-and-place task hint: Resolve all conflicts manually, mark them as resolved with hint…</div></li>
@@ -981,7 +981,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "reserved_for": "Tanvir"
   },
   {
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "atik/codex",
    "deps": [
     "M1-34",
@@ -1007,7 +1007,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "title": "Terrain in Godot: streaming, collision, lighting and performance",
    "prompt": "Integrate the LOLA terrain tiles (M1-34) and the rock kit (M1-35) into the exterior scenes: choose a terrain approach that works on Godot 4.7\n(check the current Terrain3D release's Godot compatibility; otherwise chunked MeshInstance3D LODs), collision for walking and the rover,\nrock scatter by slope, the low hard Sun with long shadows (directional shadow splits tuned for kilometre views), Earth and a star-free or\ncorrectly exposed black sky, no fog or atmosphere scattering; Forward+ with a Compatibility fallback. Target 60 fps on a mid laptop.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. including a wide vista and a boots-on-the-ground view.",
    "reserved_for": "atik",
-   "effort": 3
+   "effort": 3,
+   "blocker": "M1-82/M1-88 delivered; composed and tested all three ready regions (37 checks). Production still needs incremental preparation (measured87-205ms sync), Sadman M1-91 real work lights for dark cold-trap targets, and M1-87 relay patch. Keep existing playable staging until ready. See production/qa/perf/M1-36.md."
   },
   {
    "status": "blocked",

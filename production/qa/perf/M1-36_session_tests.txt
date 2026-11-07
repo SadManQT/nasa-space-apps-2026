@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TERRAIN session prepare LOC-06 197.707 ms
+TERRAIN session prepare LOC-06 205.377 ms
+TERRAIN session prepare LOC-09 87.216 ms
+TERRAIN session prepare LOC-10 89.601 ms
+TERRAIN SESSION RESULT: PASS (37 checks, 0 failures)
