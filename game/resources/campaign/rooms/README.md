@@ -50,10 +50,37 @@ commons name once hung behind the Earth screen in 0.1 m letters). No kit run may
 
 The story joins retain their physical carriers: Commons emergency card, shelter
 roll-call board, seed packet/drawer, paired garden bays, Mission Table and shelter
-water wall. `set_scene_context()` gives the shared inventory lamp one pulse at
-CH01 S02→S03; world refreshes do not restart it. The viewing shutter changes only
+water wall. The inventory lamp pulses once per scene at the CH01 S02→S03 join (campaign hooks below);
+re-staging the same scene does not restart it. The viewing shutter changes only
 the view; pressure glazing and the cassette remain closed. Narrative timing,
 dialogue, resource arithmetic, sounds and scene-exit receipts retain their owners.
+
+## Campaign hooks for Chapter 1 (M1-84, for Atik's M1-49 Care Round)
+
+Presentation only; the campaign owns when each is called and records every receipt and moment through the Director.
+
+- **Inventory lamp.** A fixture `cue` runs automatically `delay_s` after `set_scene_context(scene)`, or only when the
+  campaign asks, for scenes listed in `on_request`. `CampaignRoom.trigger_cue("inventory_lamp") -> Dictionary` gives one
+  pulse now (`{"accepted", "fixture_id", "scene_id", "sfx_id"}`); a second request in the same staged scene, or a scene
+  the cue does not list, is refused (`duplicate` / `reason`). `signal cue_lit(fixture_id, sfx_id)` fires as the lamp
+  lights; connect it to `CampaignAudioDirector.play_effect(sfx_id)` for `SFX_INVENTORY_LAMP_TICK`. EX-CH01-S02 (LOC-04,
+  the lamp at the roll-call board) is `on_request`: call it at the roll-call beat. EX-CH01-S03 (LOC-01, the lamp on
+  the dry-storage drawer) opens on its automatic pulse 1.5 s after staging. One pulse per scene, never restarted.
+- **Care Round.** `RoomContract.care_round(scene_id)` (EX-CH01-S04 and S05; `{}` otherwise) maps `ALO-01` and `TARA-01`
+  to `focus_target` (`garden_alo_glove_port`, `garden_tara_bay`), `plant_anchor` (`plant_positions`), `stand` (the
+  focus approach, reachable on the garden's navigation), `photo_view` (`from`/`to`, the same frame every visit for the
+  ghost overlay), `reach` (`glove_ports` / `direct`) and, for Alo, `view_boundary: garden_viewing_shutter` (the photo
+  is taken through the pressure glazing). The care always happens in LOC-03: S05's corridor scene stays in LOC-02, so
+  the campaign stages a garden room with `set_scene_context("EX-CH01-S05")` for its care visits (layer
+  `ch01_care_round`).
+- **Named mugs.** Layer `ch01_named_mugs` (LOC-01, from EX-CH01-S12, gated by `"moment": "CH01-MUGS-NAMED"`) swaps the
+  four Chapter 1 mugs for M3-99 `PR_Mug_Named` at the same spots (`commons_mug_kai`, `_amara`, `_mei`, `_rafi`; names
+  facing the commons). Pass `story_log.moments` with `CampaignRoom.set_story_choices(choices, moments)` or
+  `CampaignCrew.place(scene, room, at, choices, moments)`: recording the moment re-stages the room in place. Any layer
+  may carry `"moment"`; staging props may carry `"variant"` (an M3-99 narrative prop variant).
+
+Run `game/tools/run_tests.sh ch01_room_hooks`; `production/qa/evidence/M1-84_capture.sh` (windowed) re-takes the blink,
+mug and Care Round frames.
 
 Run `game/tools/run_tests.sh habitat_rooms` for player traversal, solid walls and
 furniture, open/closed door rays, navigation paths, the doc 09 clearances (1 m

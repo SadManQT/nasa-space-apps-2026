@@ -10,6 +10,7 @@ const Habitat = preload("res://scripts/world/habitat_room_builder.gd")
 const Geometry = preload("res://scripts/asset_geometry.gd")
 const EclipseProps = preload("res://assets/props/eclipse_power/eclipse_props.gd")
 const C7 = preload("res://assets/props/chapter7_assets.gd")
+const NarrativeProps = preload("res://assets/props/narrative/narrative_props.gd")
 ## Pixel size of each M3-7A live screen (its Screen_* slot's aspect, as the M3-7A evidence renders them).
 const C7_SCREEN_PX := {"Screen_Roster": [1040, 100], "Screen_Return": [760, 150], "Screen_Systems": [640, 400],
 	"Screen_Garden": [640, 400], "Screen_Diag": [680, 360], "Screen_Case": [360, 140], "Screen_Archive": [400, 160],
@@ -80,6 +81,10 @@ static func build(room: CampaignRoom, stage: Dictionary, layout: Dictionary) -> 
 		model.position = Presentation.vector(spec.position)
 		model.rotation_degrees = Presentation.vector(spec.get("rotation_degrees", [0, 0, 0]))
 		model.scale = Presentation.vector(spec.get("scale", [1, 1, 1]))
+		if spec.has("variant"):
+			# An M3-99 narrative prop (e.g. PR_Mug_Named "KAI"): its tape and words are drawn at runtime.
+			model.set_meta("narrative_prop", String(spec.path).get_file().get_basename())
+			NarrativeProps.apply_variant(model, String(spec.variant))
 		visuals.add_child(model)
 	for spec in stage.eclipse_props:
 		_eclipse_prop(visuals, spec)

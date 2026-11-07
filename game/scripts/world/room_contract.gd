@@ -429,7 +429,7 @@ static func validate(room_id: String) -> Dictionary:
 # story_log option (doc 24 §5.2). The base layout stays the Chapter 1 room; staging only adds and hides.
 
 const _STAGING_LISTS := ["props", "fixtures", "obstacles", "focus_targets", "signs", "local_lights", "eclipse_props", "chapter7_props", "prints", "hide", "hide_signs"]
-const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views"]
+const _STAGING_MAPS := ["anchors", "focus_labels", "lighting", "stations", "carried", "review_views", "care_round"]
 
 ## Story order of a canon scene id (chapter * 100 + scene number), or -1 for anything that is not one.
 static func scene_order(scene_id: String) -> int:
@@ -452,19 +452,20 @@ static func in_window(item: Dictionary, scene_id: String) -> bool:
 ## The chapter staging a room shows in one scene: every active layer's additions (props, fixtures, obstacles,
 ## focus targets, signs, lights, M3-6A eclipse props, M3-7A Chapter 7 props, prints), what it hides from the base layout, merged anchors,
 ## focus relabels, per-scene lighting, the stations each scene action uses, and objects a cast member carries.
-## choices is story_log.choices (choice_id -> {"option_id", ...}); it only gates echo layers.
-static func staging(room_id: String, scene_id: String, choices: Dictionary = {}) -> Dictionary:
-	return staging_for(layout(room_id), scene_id, choices)
+## choices is story_log.choices (choice_id -> {"option_id", ...}) and moments story_log.moments (e.g. "CH01-MUGS-NAMED");
+## they only gate echo layers ("choice" / "unless" / "moment").
+static func staging(room_id: String, scene_id: String, choices: Dictionary = {}, moments: Array = []) -> Dictionary:
+	return staging_for(layout(room_id), scene_id, choices, moments)
 
 ## staging() for a layout the caller already holds (a built room keeps its own), so the JSON is not read again.
-static func staging_for(room_layout: Dictionary, scene_id: String, choices: Dictionary = {}) -> Dictionary:
+static func staging_for(room_layout: Dictionary, scene_id: String, choices: Dictionary = {}, moments: Array = []) -> Dictionary:
 	var result := {"layers": [], "walk_probe": []}
 	for key in _STAGING_LISTS:
 		result[key] = []
 	for key in _STAGING_MAPS:
 		result[key] = {}
 	for raw_layer in room_layout.get("staging", []):
-		if not raw_layer is Dictionary or not _choice_met(raw_layer, choices):
+		if not raw_layer is Dictionary or not _choice_met(raw_layer, choices) or (raw_layer.has("moment") and not moments.has(raw_layer.moment)):
 			continue
 		var layer := _resolve(raw_layer, scene_id)
 		if layer.is_empty():
@@ -489,14 +490,14 @@ static func staging_for(room_layout: Dictionary, scene_id: String, choices: Dict
 ## The location as it stands in one scene: the base layout with hidden items removed and the active staging
 ## added (the shape the M1-06 checks read: props, fixtures, obstacles, focus_targets, anchors, signs, walk_probe).
 ## The applied staging itself is under "stage".
-static func staged_layout(room_id: String, scene_id: String, choices: Dictionary = {}) -> Dictionary:
-	return staged_layout_for(layout(room_id), scene_id, choices)
+static func staged_layout(room_id: String, scene_id: String, choices: Dictionary = {}, moments: Array = []) -> Dictionary:
+	return staged_layout_for(layout(room_id), scene_id, choices, moments)
 
 ## staged_layout() for a layout the caller already holds.
-static func staged_layout_for(base: Dictionary, scene_id: String, choices: Dictionary = {}) -> Dictionary:
+static func staged_layout_for(base: Dictionary, scene_id: String, choices: Dictionary = {}, moments: Array = []) -> Dictionary:
 	if base.is_empty():
 		return {}
-	var stage := staging_for(base, scene_id, choices)
+	var stage := staging_for(base, scene_id, choices, moments)
 	var result := base.duplicate(true)
 	result.erase("staging")
 	for key in ["props", "fixtures", "obstacles", "local_lights"]:
@@ -527,15 +528,22 @@ static func staged_layout_for(base: Dictionary, scene_id: String, choices: Dicti
 	return result
 
 ## Crew and player anchors for one scene (base anchors with the active staging's overrides).
-static func staged_anchors(room_id: String, scene_id: String, choices: Dictionary = {}) -> Dictionary:
+static func staged_anchors(room_id: String, scene_id: String, choices: Dictionary = {}, moments: Array = []) -> Dictionary:
 	var result := anchors(room_id)
-	result.merge(staging(room_id, scene_id, choices).anchors, true)
+	result.merge(staging(room_id, scene_id, choices, moments).anchors, true)
 	return result
 
 ## The room station (a focus target id) that a scene's action happens at, from the active staging's "stations",
 ## or "" when the room data names none (callers keep their own fallback).
 static func station_focus(scene_id: String, action: String) -> String:
 	return String(staging(room_for_scene(scene_id), scene_id).stations.get(action, ""))
+
+## M1-84: where a dated Care Round (doc 24 §7.2) visits each real plant, from the garden's staging ("care_round"):
+## plant id (ALO-01, TARA-01) -> {"focus_target", "plant_anchor", "stand", "face", "photo_view", "reach"}. The care
+## always happens in the garden (LOC-03), also in EX-CH01-S05, whose corridor scene plays in the service rooms.
+## {} outside a care window.
+static func care_round(scene_id: String) -> Dictionary:
+	return staging("LOC-03", scene_id).care_round
 
 static func _resolve(item: Dictionary, scene_id: String) -> Dictionary:
 	if not in_window(item, scene_id):

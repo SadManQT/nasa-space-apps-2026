@@ -436,16 +436,17 @@
    "transparent": false,
    "emissive": true,
    "cue": {
-    "note": "Doc 24 §2.9 CH01 S02→S03: the shared inventory status lamp blinks once, delay_s after the scene is staged.",
+    "note": "Doc 24 §2.9 CH01 S02→S03: during the S02 roll call the shared inventory status lamp blinks once in the background. on_request: the campaign fires it at the roll-call beat with CampaignRoom.trigger_cue(\"inventory_lamp\") (M1-84); one pulse per staged scene, cue_lit carries the tick.",
     "lit_color": "#F2C230",
     "pulse_s": [
      0.2,
      0.5,
      0.3
     ],
-    "delay_s": {
-     "EX-CH01-S02": 6.0
-    }
+    "on_request": [
+     "EX-CH01-S02"
+    ],
+    "sfx": "SFX_INVENTORY_LAMP_TICK"
    }
   }
  ],

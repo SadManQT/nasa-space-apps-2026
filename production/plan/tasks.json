@@ -5716,7 +5716,7 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Care Round room hooks and scene bridges for M1-49",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -5726,7 +5726,7 @@
    ],
    "refs": [],
    "note": "Filed by atik/codex on 2026-11-06.",
-   "evidence": "",
+   "evidence": "Hooks: CampaignRoom.trigger_cue(\"inventory_lamp\") (LOC-04 EX-CH01-S02 on_request, one pulse per staged scene, duplicate refused) + signal cue_lit(fixture_id, sfx_id) -> CampaignAudioDirector.play_effect(\"SFX_INVENTORY_LAMP_TICK\"); S03 LOC-01 drawer lamp auto pulse 1.5 s; RoomContract.care_round(scene) for EX-CH01-S04/S05 (LOC-03 layer ch01_care_round): ALO-01 garden_alo_glove_port stand [2.4,0,1.2] view_boundary garden_viewing_shutter, TARA-01 garden_tara_bay stand [-3.2,0,0.5], photo_view per plant; LOC-01 layer ch01_named_mugs (moment CH01-MUGS-NAMED, from EX-CH01-S12): commons_mug_kai/amara/mei/rafi (PR_Mug_Named) at the Chapter 1 mug spots; moments pass via CampaignRoom.set_story_choices(choices, moments) / CampaignCrew.place(..., choices, moments). CS-01 v8 lines [] and caption_cues [] confirmed; L01/L02 arrival, L03 forecast_target(commission_route), L04 before perform_target(commission_route) via present_dialogue(_dialogue.dialogue_by_id(id)) + acknowledge_dialogue. Tests: test_ch01_room_hooks.gd PASS (128 checks with --capture); run_tests.sh 56/56 suites passed (production/qa/evidence/M1-84_test_results.txt). Screenshots production/qa/evidence/M1-84_S02_lamp_{dark,blink}.png, M1-84_S02_roll_call_wide_dark.png, M1-84_S03_drawer_{dark,blink}.png, M1-84_S12_mugs_{nameless,named}.png, M1-84_care_{alo,tara}_{0412,0416}.png; API in M1-84_hooks.md",
    "updated": "2026-11-07",
    "prompt": "Ownership handoff from Atik M1-49 under MASTER_PLAN §7. Inspect current CH01-S02 inventory-lamp blink, S03 drawer opening, S04/S05 garden care locations and S12 four named mugs. Publish room/staging hooks allowing the campaign to trigger exactly one lamp blink, visit both real garden plant anchors during dated care, and name the existing mugs Kai/Amara/Mei/Rafi at S12. Preserve current authored rooms, doors and scene joins; reuse assets and approved lines. M1-51 is done, so confirm existing CS-01 has no duplicate dialogue and publish how L01/L02 arrival, L03 route preview and L04 before commit should be requested through the existing audio/dialogue interface; media edits remain yours. Provide exact hook names/anchor IDs in evidence and screenshots of blink/mugs. Atik will wire these into M1-49 and record CH01-MUGS-NAMED through the Director; do not edit Atik campaign/routes or invent canon.",
    "reserved_for": "sadman",

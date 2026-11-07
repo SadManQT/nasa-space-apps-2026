@@ -78,7 +78,7 @@
    ],
    "rotation_degrees": [
     0,
-    0,
+    62.6,
     0
    ],
    "scale": [
@@ -173,7 +173,7 @@
    ],
    "rotation_degrees": [
     0,
-    0,
+    62.6,
     0
    ],
    "scale": [
@@ -192,7 +192,7 @@
    ],
    "rotation_degrees": [
     0,
-    0,
+    62.6,
     0
    ],
    "scale": [
@@ -211,7 +211,7 @@
    ],
    "rotation_degrees": [
     0,
-    0,
+    62.6,
     0
    ],
    "scale": [
@@ -443,7 +443,7 @@
    "transparent": false,
    "emissive": true,
    "cue": {
-    "note": "Doc 24 §2.9 CH01 S02→S03: the shared inventory status lamp blinks once, delay_s after the scene is staged.",
+    "note": "Doc 24 §2.9 CH01 S02→S03: S03 opens on the inventory lamp beside the dry-storage drawer, which blinks once delay_s after the scene is staged (canon S03: \"The inventory lamp blinks beside a drawer\"). cue_lit carries the tick (M1-84).",
     "lit_color": "#F2C230",
     "pulse_s": [
      0.2,
@@ -452,7 +452,8 @@
     ],
     "delay_s": {
      "EX-CH01-S03": 1.5
-    }
+    },
+    "sfx": "SFX_INVENTORY_LAMP_TICK"
    }
   },
   {
@@ -761,6 +762,114 @@
   }
  },
  "staging": [
+  {
+   "id": "ch01_named_mugs",
+   "from": "EX-CH01-S12",
+   "moment": "CH01-MUGS-NAMED",
+   "about": "M1-84 (doc 24 §5 optional moment CH01-MUGS-NAMED, M3-99 PR_Mug_Named): at the end of EX-CH01-S12 the four nameless mugs of EX-CH01-S01 gain masking tape and the cadets' names, and keep them for the rest of the game (the CH04-S12 echo; CS-17's five named mugs). The layer shows once the moment is in story_log.moments (CampaignRoom.set_story_choices(choices, moments)); each mug stands where it stood, its name facing the commons. Front row from the commons side, west to east: KAI, AMARA; back row: MEI, RAFI (role order, as the CH07-S01 observation cards). Ferreira's fifth mug is not part of this moment.",
+   "hide": [
+    "commons_mug_4",
+    "PR_Mug",
+    "commons_mug_2",
+    "commons_mug_3"
+   ],
+   "props": [
+    {
+     "id": "commons_mug_kai",
+     "path": "res://assets/props/narrative/PR_Mug_Named.glb",
+     "variant": "KAI",
+     "position": [
+      -0.45,
+      0.76,
+      0.2
+     ],
+     "rotation_degrees": [
+      0,
+      62.6,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "id": "commons_mug_amara",
+     "path": "res://assets/props/narrative/PR_Mug_Named.glb",
+     "variant": "AMARA",
+     "position": [
+      0.45,
+      0.76,
+      0.2
+     ],
+     "rotation_degrees": [
+      0,
+      62.6,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "id": "commons_mug_mei",
+     "path": "res://assets/props/narrative/PR_Mug_Named.glb",
+     "variant": "MEI",
+     "position": [
+      -0.45,
+      0.76,
+      -0.2
+     ],
+     "rotation_degrees": [
+      0,
+      62.6,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "id": "commons_mug_rafi",
+     "path": "res://assets/props/narrative/PR_Mug_Named.glb",
+     "variant": "RAFI",
+     "position": [
+      0.45,
+      0.76,
+      -0.2
+     ],
+     "rotation_degrees": [
+      0,
+      62.6,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "review_views": {
+    "named_mugs": {
+     "from": [
+      0.0,
+      1.3,
+      1.45
+     ],
+     "to": [
+      0.0,
+      0.8,
+      0.0
+     ]
+    }
+   }
+  },
   {
    "id": "ch05_five_at_the_table",
    "from": "EX-CH05-S01",

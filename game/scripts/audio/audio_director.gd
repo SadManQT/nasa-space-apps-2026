@@ -122,6 +122,12 @@ func play_operation(target_id: String, label: String, accepted: bool) -> void:
 	if runtime != null:
 		_play_oneshot(runtime.operation_sfx(target_id, label, accepted))
 
+## One effect by its sfx_list.csv id, e.g. SFX_INVENTORY_LAMP_TICK when CampaignRoom.cue_lit fires (M1-84);
+## a missing file shows its caption instead.
+func play_effect(sfx_id: String) -> void:
+	if runtime != null and not sfx_id.is_empty():
+		_play_oneshot(runtime.sfx_plan(sfx_id))
+
 ## The campaign is complete: the credits loop replaces the scene cue.
 func play_credits() -> void:
 	if runtime != null:

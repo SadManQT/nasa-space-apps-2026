@@ -36,8 +36,15 @@ var _scene_context := ""
 const PLANT_STAGE_MODELS_PATH := "res://assets/plants/plant_stage_models.json"
 static var _plant_stage_models: Dictionary = {}
 var _choices: Dictionary = {}
+var _moments: Array = []
 var _stage: Dictionary = {}
 var _stage_signature := ""
+## Fixture cues that already pulsed in the current scene context (one each).
+var _cues_run: Dictionary = {}
+
+## A fixture cue lights (the start of its pulse), with the effect id its room JSON names ("sfx"), e.g.
+## SFX_INVENTORY_LAMP_TICK for the inventory lamp. The campaign plays it: CampaignAudioDirector.play_effect(sfx_id).
+signal cue_lit(fixture_id: String, sfx_id: String)
 
 func _ready() -> void:
 	build_room()
@@ -497,34 +504,59 @@ func has_installed_seat_at(at: Vector3) -> bool:
 ## furniture, the scene's prop states and light level, stations, collision and a rebuilt navigation map; see
 ## room_staging.gd), then plays the room's authored fixture cues, e.g. the shared inventory lamp's single blink at
 ## the CH01 S02→S03 join (doc 24 §2.9; fixture "cue" in the room JSON). Presentation only: repeating the same
-## scene cannot restart a cue or change progression. Returns the number of cues started.
+## scene cannot restart a cue or change progression. A cue whose scene is listed in "on_request" instead of
+## "delay_s" waits for trigger_cue(). Returns the number of cues started.
 func set_scene_context(scene_id: String) -> int:
 	if _scene_context == scene_id or visual_root == null:
 		return 0
 	_scene_context = scene_id
+	_cues_run.clear()
 	_apply_staging()
 	var started := 0
-	for fixture in _layout.get("fixtures", []):
-		var cue: Dictionary = fixture.get("cue", {})
-		if not cue.get("delay_s", {}).has(scene_id):
-			continue
-		var lamp := visual_root.get_node_or_null(String(fixture.id)) as MeshInstance3D
-		var material := lamp.material_override as StandardMaterial3D if lamp != null else null
-		if material == null:
-			continue
-		var pulse: Array = cue.get("pulse_s", [0.2, 0.5, 0.3])
-		var blink := create_tween()
-		blink.tween_interval(float(cue.delay_s[scene_id]))
-		blink.tween_property(material, "albedo_color", Color(cue.lit_color), float(pulse[0]))
-		blink.tween_interval(float(pulse[1]))
-		blink.tween_property(material, "albedo_color", Color(fixture.color), float(pulse[2]))
-		started += 1
+	for spec in _layout.get("fixtures", []):
+		var delays: Dictionary = spec.get("cue", {}).get("delay_s", {})
+		if delays.has(scene_id) and _pulse(spec, float(delays[scene_id])):
+			started += 1
 	return started
 
-## Records the story choices (story_log.choices: choice_id -> {"option_id", ...}) that gate echo staging, e.g. the
-## 2034 record Ferreira leaves at her place (doc 24 §5.2 D9), and re-stages the current scene if they change it.
-func set_story_choices(choices: Dictionary) -> void:
+## M1-84 campaign hook: one pulse of a fixture cue now, for a scene the room JSON lists in the cue's "on_request"
+## (the inventory lamp during the EX-CH01-S02 roll call, doc 24 §2.9). Exactly one per staged scene: a repeat, or a
+## scene the cue does not list, is refused. cue_lit fires as the lamp lights. Presentation only.
+## Returns {"accepted": true, "fixture_id", "scene_id", "sfx_id"} or {"accepted": false, "reason"[, "duplicate"]}.
+func trigger_cue(fixture_id: String) -> Dictionary:
+	var spec := fixture(fixture_id)
+	var cue: Dictionary = spec.get("cue", {})
+	if not cue.get("on_request", []).has(_scene_context):
+		return {"accepted": false, "reason": "%s has no requested cue in %s." % [fixture_id, _scene_context]}
+	if _cues_run.has(fixture_id):
+		return {"accepted": false, "duplicate": true, "reason": "%s already blinked in %s." % [fixture_id, _scene_context]}
+	if not _pulse(spec, 0.0):
+		return {"accepted": false, "reason": "%s is not built in %s." % [fixture_id, room_id]}
+	return {"accepted": true, "fixture_id": fixture_id, "scene_id": _scene_context, "sfx_id": String(cue.get("sfx", ""))}
+
+func _pulse(spec: Dictionary, delay_s: float) -> bool:
+	var lamp := visual_root.get_node_or_null(String(spec.id)) as MeshInstance3D
+	var material := lamp.material_override as StandardMaterial3D if lamp != null else null
+	if material == null or _cues_run.has(String(spec.id)):
+		return false
+	_cues_run[String(spec.id)] = true
+	var cue: Dictionary = spec.cue
+	var pulse: Array = cue.get("pulse_s", [0.2, 0.5, 0.3])
+	var blink := create_tween()
+	if delay_s > 0.0:
+		blink.tween_interval(delay_s)
+	blink.tween_callback(func() -> void: cue_lit.emit(String(spec.id), String(cue.get("sfx", ""))))
+	blink.tween_property(material, "albedo_color", Color(cue.lit_color), float(pulse[0]))
+	blink.tween_interval(float(pulse[1]))
+	blink.tween_property(material, "albedo_color", Color(spec.color), float(pulse[2]))
+	return true
+
+## Records the story choices (story_log.choices: choice_id -> {"option_id", ...}) and recorded moments
+## (story_log.moments, e.g. "CH01-MUGS-NAMED") that gate echo staging, e.g. the 2034 record Ferreira leaves at her
+## place (doc 24 §5.2 D9) or the four named mugs, and re-stages the current scene if they change it.
+func set_story_choices(choices: Dictionary, moments: Array = []) -> void:
 	_choices = choices.duplicate(true)
+	_moments = moments.duplicate()
 	if not _scene_context.is_empty():
 		_apply_staging()
 
@@ -537,7 +569,7 @@ func scene_context() -> String:
 	return _scene_context
 
 func _apply_staging() -> void:
-	var next := RoomContract.staging_for(_layout, _scene_context, _choices)
+	var next := RoomContract.staging_for(_layout, _scene_context, _choices, _moments)
 	var signature := JSON.stringify(next)
 	if signature == _stage_signature:
 		return
@@ -549,7 +581,7 @@ func _apply_staging() -> void:
 	if not next.layers.is_empty():
 		Staging.build(self, next, _layout)
 	if changes_floor and build_navigation and _layout.get("assembly") == "habitat_kit":
-		_rebuild_navigation(RoomContract.staged_layout_for(_layout, _scene_context, _choices))
+		_rebuild_navigation(RoomContract.staged_layout_for(_layout, _scene_context, _choices, _moments))
 
 ## Swaps the room's private navigation map for one built from the staged obstacles (same rasteriser and agent
 ## clearance as the base room, so staged furniture is walked around like Chapter 1 furniture).

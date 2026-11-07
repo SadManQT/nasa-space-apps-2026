@@ -18,12 +18,13 @@ var _screen_backdrop: Sprite3D
 
 ## Stages next_room for scene_id (chapter staging, scene anchors, carried objects) and places the scene's roster in
 ## it: the playable actor at player_at, everyone else at the scene's anchors. choices is story_log.choices; it only
-## moves relationship staging, e.g. who stands at Kai's shoulder in EX-CH06-S10 (doc 24 §5.2 D11).
-func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choices: Dictionary = {}) -> PlayerController:
+## moves relationship staging, e.g. who stands at Kai's shoulder in EX-CH06-S10 (doc 24 §5.2 D11); moments is
+## story_log.moments (e.g. the CH01-MUGS-NAMED mugs).
+func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choices: Dictionary = {}, moments: Array = []) -> PlayerController:
 	room = next_room
 	local_ids.clear()
 	# The room is staged first, so its scene furniture, stations and anchors exist before anyone stands in it.
-	room.set_story_choices(choices)
+	room.set_story_choices(choices, moments)
 	room.set_scene_context(scene_id)
 	var active := Roster.playable_actor(scene_id)
 	var roster := Roster.scene_roster(scene_id)

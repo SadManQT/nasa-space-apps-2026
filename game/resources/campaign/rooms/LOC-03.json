@@ -701,6 +701,59 @@
  ],
  "staging": [
   {
+   "id": "ch01_care_round",
+   "from": "EX-CH01-S04",
+   "until": "EX-CH01-S05",
+   "about": "M1-84 (doc 24 §7.2, for M1-49): the dated Care Round visits both real plants here, in the garden, on every care day of EX-CH01-S04 and S05 (S05's corridor and hand light play in the service rooms, LOC-02; its care visits come here). Alo is reached through the sealed glove ports of the exterior test chamber, Tara directly in the indoor reference bay. stand is the floor point (the focus target's approach), plant_anchor names plant_positions, and photo_view is the same camera frame on every visit (Alo is seen through the pressure glazing, so view_boundary names the viewing shutter that must be open; it changes only the view), so the Growth Record's ghost of the previous photo lines up. RoomContract.care_round(scene_id) answers it.",
+   "care_round": {
+    "ALO-01": {
+     "focus_target": "garden_alo_glove_port",
+     "plant_anchor": "ALO-01",
+     "stand": [
+      2.4,
+      0,
+      1.2
+     ],
+     "photo_view": {
+      "from": [
+       2.08,
+       1.25,
+       2.25
+      ],
+      "to": [
+       2.15,
+       0.86,
+       3.15
+      ]
+     },
+     "reach": "glove_ports",
+     "view_boundary": "garden_viewing_shutter"
+    },
+    "TARA-01": {
+     "focus_target": "garden_tara_bay",
+     "plant_anchor": "TARA-01",
+     "stand": [
+      -3.2,
+      0,
+      0.5
+     ],
+     "photo_view": {
+      "from": [
+       -3.2,
+       1.22,
+       -0.8
+      ],
+      "to": [
+       -3.2,
+       0.86,
+       -1.5
+      ]
+     },
+     "reach": "direct"
+    }
+   }
+  },
+  {
    "id": "ch06_cotton_in_taras_bay",
    "from": "EX-CH06-S01",
    "about": "Cotton, planted 15 Dec 2046 in Tara's old bay (M3-94), has its first leaves by 13 Jan (EX-CH06-S12). Alo and Tara are archived records by now (petal and nameplate), never living plants again.",
