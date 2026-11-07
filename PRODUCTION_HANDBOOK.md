@@ -2,7 +2,7 @@
 
 **Read this first.** This is the single source of truth for making the game's assets and cutscenes: what is canon, what has been decided, how the pipeline works, what exists, and what is next. It is written for every team member and for AI agents (Claude Code, Codex, Antigravity). If you change a decision, change it here in the same commit.
 
-Last updated: 6 November 2026.
+Last updated: 7 November 2026.
 
 ---
 
@@ -318,6 +318,8 @@ Rules from the cinematic guide and the final story: cutscenes are short, embedde
 Optional opening (from the gameplay entry flow): mustard fields to the Moon chamber, 20–30 s, with no claim that Alo existed before the story.
 
 ## 10. Status (latest first)
+
+**7 Nov 2026 — M1-64's shared hint reader is implemented and reviewed WIP; runtime acceptance remains blocked (M1-86, recorded by Sadman/night-codex for Ramim/codex):** reviewed source `fbdcd67` delivers shared campaign, Mission Trainer, What now and Journal hints: authored nudges, registered explainer clips, reduced-motion scientific stills, worked examples using different numbers, safe clock pause/resume and focus restoration, and device-only first-time teaching for available Mission Tables (broader onboarding remains M1-18). All source review findings are addressed; the hint suite passes 124 checks with 0 failures, and the other UI, trainer, text, campaign and P-02 suites pass. The reviewed Windows `game/tools/run_tests.sh` ended **57/58 suites passed**: the sole failure was Atik's existing M1-68 `test_performance_runtime` gate (537 checks, 2 timing failures), production title **55.308 ms** and new campaign **100.068 ms**, both against a **<50 ms** limit. M1-64 remains blocked on M1-68, not complete. A separate cold editor-import exit 139 before any suite, followed by an unchanged warm retry (85 hint checks, 0 failures), is recorded for owner investigation in M1-85; its cause remains unknown and no fix is claimed. Exact reviewed-run evidence: [M1-64_full_results.txt](production/qa/evidence/M1-64_full_results.txt); review and screenshot index: [M1-64_qa.md](production/qa/evidence/M1-64_qa.md).
 
 **7 Nov 2026 — The exteriors can stand on the real LOLA terrain, with a dated Earth (M1-82, Sadman/claude, Claude Opus 5.5; for Atik's M1-36):** `game/resources/campaign/rooms/exterior_terrain.json` places LOC-06 at Aurora's own site, LOC-09 at the computed cold-trap road's last bend before the basin and LOC-10 at the cold-trap site, with every anchor, focus target and approach on the ground, every prop, fixture and door resting without floating, rock-clear exclusions for the provider and walkable lanes (at most 7.2° here, 15° allowed). `CampaignRoom.terrain_ground = true` is the explicit flag: the room then builds no staging floor, rails, flat navigation or greybox lights, and keeps every id, door, pressure marker and scene id; without it the flat rooms are unchanged. A real player walks on Atik's TerrainStream collision to every approach. `RoomContract.earth()` with `EarthSky.apply()` draws Earth at its true 1.9° in the sky pass, lit by the dated Sun, only where a bundled Horizons row says it clears the computed terrain horizon (LOC-06 in EX-CH01-S01, S12, EX-CH04-S02, S09, EX-CH05-S01); the EX-CH06-S07 eclipse stays filtered-camera only, and no other date or room shows a generic Earth. LOC-11 stays flat until a 10 m relay-road patch exists (M1-87); five exterior scenes still lack a dated row (M1-88). Evidence: `production/qa/evidence/M1-82_staging.md`, `M1-82_*.png`.
 

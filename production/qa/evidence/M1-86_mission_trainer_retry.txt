@@ -1,0 +1,7 @@
+FAIL tools/test_mission_trainer.gd :: exit 1 :: MISSION TRAINER RESULT: FAIL (1035 checks, 6 failures)
+       ERROR: FAIL isolated rendering cache parents prepared
+       ERROR: FAIL isolated canary/file writable
+       ERROR: FAIL isolated canary/file writable
+       ERROR: FAIL isolated canary/file writable
+       ERROR: FAIL Back restores exact title entry focus and settings
+0/1 suites passed

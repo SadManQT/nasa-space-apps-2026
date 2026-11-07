@@ -5781,15 +5781,15 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Record reviewed M1-64 hint reader and runtime-blocked acceptance in handbook",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-codex",
    "deps": [],
    "paths": [
     "PRODUCTION_HANDBOOK.md"
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-07.",
-   "evidence": "",
+   "evidence": "PRODUCTION_HANDBOOK.md section 10 dated 7 Nov: reviewed fbdcd67 hint reader delivered WIP, historical Windows 57/58 solely M1-68, cold-import139/warm-retry observation remains M1-85; links to M1-64_full_results.txt and M1-64_qa.md. M1-64 stays blocked. board check OK; git diff --check and bash -n M1-86_capture.sh pass. Current sandbox full runner M1-86_tests.txt ends 57/59; campaign-media unchanged retry 1/1, trainer retry 0/1 (cache/canary writes and focus). production/qa/evidence/M1-86_capture.sh runs full official verification outside sandbox for night-shift review. One AI log row. No game-screen changes, no commit or push.",
    "updated": "2026-11-07",
    "prompt": "Add a dated section10 status line for reviewed M1-64 at fbdcd67: shared campaign/trainer/WhatNow/Journal hints, authored nudges, registered clips and reduced-motion scientific stills, different-number examples, safe clock/focus and device-only first-time teaching. All source review findings addressed; hint124 and other UI suites pass. Final run_tests.sh is57/58, solely existing Atik M1-68 performance title55.308ms/newcampaign100.068ms. Source is delivered WIP, not a completed board task. Exact full evidence production/qa/evidence/M1-64_full_results.txt, index M1-64_qa.md; separate cold-import139/warm-retry observation is recorded for owner investigation, not claimed fixed. Ramim cannot edit your handbook. Acceptance: accurate implemented-WIP/runtime-gate status without canon changes or marking done; board check passes.",
    "reserved_for": "sadman",
