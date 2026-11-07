@@ -1,0 +1,81 @@
+{
+ "generator": "Tripo CLI 0.8.1 `tripo image -m gemini_3_pro_image_preview -i <input> --scale <ratio>`, web account default, 7 Nov 2026 (M3-8A phase 1, Sadman/claude, Claude Opus 5.5)",
+ "balances_read": {
+  "before_sheets": "810",
+  "after_rao_sheet": "810",
+  "after_noor_sheet": "810",
+  "before_fix_and_three_quarters": "810",
+  "after_fix_and_three_quarters": "810",
+  "before_noor_34_take2": "810",
+  "after_noor_34_take2": "810"
+ },
+ "credits_spent": 0,
+ "items": [
+  {
+   "file": "rao_sheet_take1.png",
+   "what": "CH_Rao turnaround sheet, take 1",
+   "task_id": "d7625428-541a-414e-bb84-9a90f56f7da5",
+   "model": "gemini_3_pro_image_preview",
+   "input": "game/assets/ui/portraits/CH_Rao_screen.png",
+   "scale": "16:9",
+   "prompt": "Using the man in this portrait as the exact character reference, draw a full-body character turnaround sheet of him for 3D modelling: four views side by side, left to right: front, left side (he faces the viewer's left), back, right side (he faces the viewer's right), all at the same scale and evenly spaced, the whole body from the top of the head to the soles of the shoes visible in every view, on a flat plain white background. Keep his face, warm brown skin, short neat black hair, clean-shaven face and friendly calm expression exactly as in the portrait. Adult man, 1.78 m tall, average slim build, natural adult proportions. Clothing: the same light grey short-sleeved polo shirt with a soft collar and a three-button placket, tucked into charcoal-navy chino trousers with a plain dark brown belt, dark grey lace-up shoes. The same black over-ear headset with a thin headband and a slim boom microphone on his left side, exactly as in the portrait. A simple steel wristwatch on his left wrist. He stands in a relaxed A-pose: both arms straight, angled about 35 degrees down and away from the body, hands open and relaxed with five fingers each, feet slightly apart. Clean anime cel-shaded line art with two-tone shading, exactly like the portrait's style. Exactly two arms and two hands in every view, no arm behind the back, no hand in front of the hips. No text, no letters, no numbers, no logos, no badges, no watermark.",
+   "sha256": "ae369d522d5b884af838bfd01a8123f068cf98f4c5b6aeeda732a626d37021a8",
+   "review": "kept: the CH_Rao sheet (its views run front, RIGHT side, back, LEFT side)"
+  },
+  {
+   "file": "noor_sheet_take1.png",
+   "what": "CH_Noor turnaround sheet, take 1",
+   "task_id": "0a2541f6-d407-4e52-b3c7-d992ba3318fb",
+   "model": "gemini_3_pro_image_preview",
+   "input": "game/assets/ui/portraits/CH_Noor_present_portrait.png",
+   "scale": "16:9",
+   "prompt": "Using the woman in this portrait as the exact character reference, draw a full-body character turnaround sheet of her for 3D modelling: four views side by side, left to right: front, left side (she faces the viewer's left), back, right side (she faces the viewer's right), all at the same scale and evenly spaced, the whole body from the top of the head to the soles of the feet visible in every view, on a flat plain white background. Keep her face exactly as in the portrait: an older Bangladeshi woman of about sixty, warm medium-brown skin, a kind lined face and a soft smile; grey hair with darker streaks pulled back into a neat low bun at the nape of the neck; thin dark reading glasses pushed up on top of her head. Height 1.55 m, slim, upright, natural adult proportions. Modest, practical everyday clothing: a sage-green cotton kameez (a long tunic to just below the knee, three-quarter sleeves, a small notched neckline), loose pale green salwar trousers gathered at the ankles, a pale sage-green cotton dupatta worn as a shawl over both shoulders with its two ends hanging straight down the front of the body to the knees, flat brown leather sandals. She stands in a relaxed A-pose: both arms straight, angled about 30 degrees down and away from the body and clear of the shawl, hands open and relaxed with five fingers each, feet slightly apart. Clean anime cel-shaded line art with two-tone shading, exactly like the portrait's style. Exactly two arms and two hands in every view, no arm behind the back, no hand in front of the hips. No text, no letters, no numbers, no logos, no script of any kind, no watermark.",
+   "sha256": "9e697c268c482dbe37fca2e14028a251db95e51f275f072e66670cb3e23565fc",
+   "review": "kept: the CH_Noor sheet; its fourth view faced left like the second, so the composed sheet shows the second view mirrored there"
+  },
+  {
+   "file": "noor_sheet_take2_fix.png",
+   "what": "CH_Noor sheet edit: turn the fourth view to face right",
+   "task_id": "9c786bbe-cf0f-477f-a660-28c57a3c9989",
+   "model": "gemini_3_pro_image_preview",
+   "input": "production/concept/chapter8_v1/characters/noor_sheet_take1.png",
+   "scale": "16:9",
+   "prompt": "Edit this character turnaround sheet. Keep the first three views (front, left side, back) exactly as they are. Redraw ONLY the fourth view at the far right so that she faces the viewer's RIGHT and shows her RIGHT side: the mirror image of the second view, with the same face, the same reading glasses pushed up on her head, the same low grey bun (now on the left of her head in the picture), the same sage-green kameez, pale green salwar, pale sage-green dupatta over both shoulders, brown sandals, the same relaxed pose, height and scale. Same flat plain white background, same clean anime cel-shaded line art with two-tone shading. Exactly two arms and two hands in every view, five fingers each. No text, no letters, no numbers, no logos, no script of any kind, no watermark.",
+   "sha256": "d083884be9110863fdb0b6a997580595a84f8fe754ba73e6282a03579040d801",
+   "review": "rejected and deleted: the fourth view still faced left (no visible change)"
+  },
+  {
+   "file": "rao_34_take1.png",
+   "what": "CH_Rao three-quarter view, take 1",
+   "task_id": "93fdfd04-7bd6-4dd0-a1a1-7c389b5e66f9",
+   "model": "gemini_3_pro_image_preview",
+   "input": "production/concept/chapter8_v1/characters/rao_sheet_take1.png",
+   "scale": "3:4",
+   "prompt": "From this character turnaround sheet, draw the same man as one single full-body three-quarter front view: his body turned about 45 degrees towards the viewer's left, his face towards the viewer with the same friendly calm expression, standing in the same relaxed A-pose (both arms straight and angled out from the body, hands open and relaxed with five fingers each, feet slightly apart). Keep everything identical to the sheet: the same face, warm brown skin, short neat black hair, the black over-ear headset with its boom microphone on his left side, the light grey short-sleeved polo shirt, charcoal-navy chinos with the dark brown belt, the steel watch on his left wrist and the dark grey lace-up shoes. The whole body from the top of the head to the shoes, centred, on a flat plain white background, in the same clean anime cel-shaded line art with two-tone shading. Exactly two arms and two hands. No text, no letters, no numbers, no logos, no watermark.",
+   "sha256": "d00ad82869a7e013826bb794c2ff335a6726a3c1ed921d598e7cf55ce6459a3a",
+   "review": "kept"
+  },
+  {
+   "file": "noor_34_take1.png",
+   "what": "CH_Noor three-quarter view, take 1",
+   "task_id": "09b0c564-2312-456b-ae88-0a97ff01067e",
+   "model": "gemini_3_pro_image_preview",
+   "input": "production/concept/chapter8_v1/characters/noor_sheet_take1.png",
+   "scale": "3:4 requested, 2741x1530 returned",
+   "prompt": "From this character turnaround sheet, draw the same woman as one single full-body three-quarter front view: her body turned about 45 degrees towards the viewer's left, her face towards the viewer with the same kind soft smile, standing in the same relaxed A-pose (both arms straight and angled out from the body, clear of the shawl, hands open and relaxed with five fingers each, feet slightly apart). Keep everything identical to the sheet: the same face, warm medium-brown skin, grey hair with darker streaks in a low bun at the nape, the thin dark reading glasses pushed up on top of her head, the sage-green kameez to below the knee with three-quarter sleeves, the loose pale green salwar gathered at the ankles, the pale sage-green dupatta draped over both shoulders, and the flat brown leather sandals. The whole body from the top of the head to the feet, centred, on a flat plain white background, in the same clean anime cel-shaded line art with two-tone shading. Exactly two arms and two hands. No text, no letters, no numbers, no logos, no script of any kind, no watermark.",
+   "sha256": "7df0f967c0d4ffa0ea6df4ce8ed5e3511bf1e9e101ee78e262cb39776d53af6c",
+   "review": "rejected and deleted: a front view, not a three-quarter view"
+  },
+  {
+   "file": "noor_34_take2.png",
+   "what": "CH_Noor three-quarter view, take 2",
+   "task_id": "dbc7cfd8-e15b-4d71-b9a8-37f9fd6fe73f",
+   "model": "gemini_3_pro_image_preview",
+   "input": "production/concept/chapter8_v1/characters/noor_sheet_take1.png",
+   "scale": "3:4 requested, 2741x1530 returned",
+   "prompt": "Draw the woman from this turnaround sheet in a THREE-QUARTER view, not a front view: her whole body and her head are rotated 45 degrees towards the viewer's left, so her left shoulder, left arm and the left side of her face are nearer to the viewer and her right shoulder is partly hidden; her nose points towards the left edge of the picture while her eyes look at the viewer. Halfway between the sheet's front view and its left side view. Same relaxed pose as the sheet (arms straight and angled out from the body, clear of the shawl, hands open with five fingers each). Keep everything identical: her face, warm medium-brown skin, grey hair with darker streaks in a low bun at the nape (the bun visible behind her head), the thin dark reading glasses pushed up on top of her head, the sage-green kameez with three-quarter sleeves, the loose pale green salwar, the pale sage-green dupatta over both shoulders, the brown leather sandals. Whole body from head to feet, centred, portrait format, flat plain white background, the same clean anime cel-shaded line art with two-tone shading. Exactly two arms and two hands. No text, no letters, no numbers, no logos, no script of any kind, no watermark.",
+   "sha256": "b3689c680396f4fbf6cea0cc7cd304f1c78f00a3fd3b41db9eaf6dbb900db657",
+   "review": "kept"
+  }
+ ]
+}
