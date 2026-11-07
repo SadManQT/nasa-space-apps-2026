@@ -1400,8 +1400,8 @@
    "priority": "P0",
    "tool": "claude",
    "title": "NASA project page text, ready to paste",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M0-11",
     "M0-13",
@@ -1413,7 +1413,7 @@
    "refs": [],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-07",
    "prompt": "Write docs/SUBMISSION.md with one section per field, in order: High-Level Summary (with 240 s video and GitHub links), Project Demo (30 s\nvideo link; deck as alternative), Final Project, Project Details (the why/what/how with every dataset in detail; community involvement and\nbenefits; tools and technologies with generous credits), GitHub access, Use of AI (from docs/AI_USE.md), NASA data sources used (from\ndocs/SCIENCE_AND_DATA.md: what and how — judges check claims), References. Mention the pre-event work with the Local Lead's written\npermission if M0-10 recommends disclosure. Write for the score sheet: Impact, Creativity, Validity (cite the playtest metrics),\nRelevance (NASA-data-first), Presentation.",
    "reserved_for": "sadman",
    "effort": 2
@@ -1424,8 +1424,8 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Video 2 (240 s local judging) script, shot list and subtitles",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M0-11",
     "M0-13",
@@ -1437,7 +1437,7 @@
    "refs": [],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-07",
    "prompt": "Rules: under 240 s (over-length is cut off); team name; every member named; problem and challenge statement; the solution with a demo of\nit working ('a slideshow about a thing is not a demo'); NASA data usage said out loud; credit generated content; English subtitles;\nno under-18 names/voices/faces. Write production/video/V2_script.md: a beat sheet with timings (hook 0–15 s, problem 15–40, solution and\nlive demo 40–170 with P-02 planning, a cutscene beat and a Data Card, NASA data 170–205, impact and team 205–235), the narration text,\nthe gameplay captures needed (exact scene ids and actions), and the .srt draft. Narrator: an adult team member or a credited AI narrator.",
    "reserved_for": "sadman",
    "effort": 2
