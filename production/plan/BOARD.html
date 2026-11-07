@@ -86,18 +86,18 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">62 done</span><span class="chip s-in_progress">5 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">22 todo</span></div><div class="bar"><i style="width:70%"></i></div>
-<details open><summary>Working now (5)</summary><ul>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">62 done</span><span class="chip s-in_progress">6 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">21 todo</span></div><div class="bar"><i style="width:70%"></i></div>
+<details open><summary>Working now (6)</summary><ul>
 <li><a class="id" href="#M2-02">M2-02</a> NASA project page text, ready to paste <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/claude on 2026-11-07</div></li>
 <li><a class="id" href="#M2-03">M2-03</a> Video 2 (240 s local judging) script, shot list and subtitles <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/claude on 2026-11-07</div></li>
 <li><a class="id" href="#M3-2R">M3-2R</a> Chapter 2 rooms and locations <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-07</div></li>
 <li><a class="id" href="#M3-3R">M3-3R</a> Chapter 3 rooms and locations <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-07</div></li>
 <li><a class="id" href="#M3-5R">M3-5R</a> Chapter 5 rooms and locations <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-07</div></li>
+<li><a class="id" href="#M3-94R">M3-94R</a> Record the three approved M3-94 lines and the two M3-97 sound effects with ElevenLabs <span class="chip ">human</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-07</div></li>
 </ul></details>
-<details open><summary>Next up today (3)</summary><ul>
+<details open><summary>Next up today (2)</summary><ul>
 <li><a class="id" href="#M1-86">M1-86</a> Record reviewed M1-64 hint reader and runtime-blocked acceptance in handbook <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-87">M1-87</a> Walkable 10 m relay-road patch so LOC-11 can stand on the LOLA terrain <span class="chip ">claude</span> <span class="chip ">P1</span></li>
-<li><a class="id" href="#M3-94R">M3-94R</a> Record the three approved M3-94 lines and the two M3-97 sound effects with ElevenLabs <span class="chip ">human</span> <span class="chip ">P1</span></li>
 </ul></details>
 <details><summary>To do (19)</summary><ul>
 <li><a class="id" href="#M1-24">M1-24</a> Fix the playtest and QA findings, then freeze the demo build <span class="chip ">claude</span> <span class="chip ">P0</span></li>
@@ -4594,8 +4594,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "human",
    "title": "Record the three approved M3-94 lines and the two M3-97 sound effects with ElevenLabs",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M3-94"
    ],
@@ -4610,7 +4610,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "Needs a Claude session with the ElevenLabs connector (Sadman: say 'do M3-94R' in such a session). Not for the night shift. 6 Nov (M4-02): both sound effects already exist (M3-99) and CS-18's tick is installed; record only the three voice lines. Installing Rao and Noor in CS-15 with the Dhaka bed is M4-04.",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-07",
    "prompt": "Record Amara \"Forty-two.\" (EX-CH03-S10), Rao \"Aurora, Earth. We hear you. Go ahead.\" (EX-CH08-S10) and Noor \"You finished what we could not.\" (EX-CH08-S10) with eleven_v4 in each speaker's voice from production/audio/voice_cast.csv; pick and master takes with production/tools/master_vo.py (delivery treatment per line); generate SFX_DHAKA_ROOFTOP_MORNING and SFX_INVENTORY_LAMP_TICK for M3-97. Log every generation in production/AI_PROMPT_LOG.md. Acceptance: vo_lines.csv rows say done; captions match; game/tools/run_tests.sh last line in the evidence.",
    "reserved_for": "sadman",
    "effort": 1

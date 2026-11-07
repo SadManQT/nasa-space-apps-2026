@@ -4209,8 +4209,8 @@
    "priority": "P1",
    "tool": "human",
    "title": "Record the three approved M3-94 lines and the two M3-97 sound effects with ElevenLabs",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M3-94"
    ],
@@ -4225,7 +4225,7 @@
    ],
    "note": "Needs a Claude session with the ElevenLabs connector (Sadman: say 'do M3-94R' in such a session). Not for the night shift. 6 Nov (M4-02): both sound effects already exist (M3-99) and CS-18's tick is installed; record only the three voice lines. Installing Rao and Noor in CS-15 with the Dhaka bed is M4-04.",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-07",
    "prompt": "Record Amara \"Forty-two.\" (EX-CH03-S10), Rao \"Aurora, Earth. We hear you. Go ahead.\" (EX-CH08-S10) and Noor \"You finished what we could not.\" (EX-CH08-S10) with eleven_v4 in each speaker's voice from production/audio/voice_cast.csv; pick and master takes with production/tools/master_vo.py (delivery treatment per line); generate SFX_DHAKA_ROOFTOP_MORNING and SFX_INVENTORY_LAMP_TICK for M3-97. Log every generation in production/AI_PROMPT_LOG.md. Acceptance: vo_lines.csv rows say done; captions match; game/tools/run_tests.sh last line in the evidence.",
    "reserved_for": "sadman",
    "effort": 1
