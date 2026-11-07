@@ -1424,7 +1424,7 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Video 2 (240 s local judging) script, shot list and subtitles",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M0-11",
@@ -1436,7 +1436,7 @@
    ],
    "refs": [],
    "note": "",
-   "evidence": "",
+   "evidence": "production/video/V2_script.md: beat sheet 0:00-3:58 (hook 0-15, problem + exact challenge text 15-40, live demo 40-170 with P-02 shift 1 at EX-CH01-S07, CS-02 at S09, shift-5 alarm at S10, GOES-13/DONKI Data Card, outcome + decision replay + CS-03; NASA data aloud 170-205; impact + all six members named 205-235; end card to 238), narration (52 cues, 483 words), fact-to-fixture list, 13 gameplay captures (scene ids + actions) and 7 file clips for M2-04, AI credit chips and card, narrator options (Shanto; ElevenLabs 'KJ- Signature Tone' from voice_cast.csv). production/video/V2_subtitles.srt: 52 cues, last ends 00:03:55,000, validated (no overlaps, within sections, <=2 lines of <=42 chars). No under-18 content (TEAM.md). Log row + handbook §10.",
    "updated": "2026-11-07",
    "prompt": "Rules: under 240 s (over-length is cut off); team name; every member named; problem and challenge statement; the solution with a demo of\nit working ('a slideshow about a thing is not a demo'); NASA data usage said out loud; credit generated content; English subtitles;\nno under-18 names/voices/faces. Write production/video/V2_script.md: a beat sheet with timings (hook 0–15 s, problem 15–40, solution and\nlive demo 40–170 with P-02 planning, a cutscene beat and a Data Card, NASA data 170–205, impact and team 205–235), the narration text,\nthe gameplay captures needed (exact scene ids and actions), and the .srt draft. Narrator: an adult team member or a credited AI narrator.",
    "reserved_for": "sadman",
