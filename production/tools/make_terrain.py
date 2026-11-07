@@ -1128,6 +1128,12 @@ def cmd_sun() -> None:
         u1, sun = horizons(10, site["lon_deg_east"], site["lat_deg"], site["height_m"] / 1000.0, s["utc"], (t + dt.timedelta(minutes=1)).strftime("%Y-%m-%d %H:%M"), "1 m")
         u2, earth = horizons(399, site["lon_deg_east"], site["lat_deg"], site["height_m"] / 1000.0, s["utc"], (t + dt.timedelta(minutes=1)).strftime("%Y-%m-%d %H:%M"), "1 m")
         mask = masks[s["site"]]
+        hp = s.get("horizon_from")  # a scene staged away from its ephemeris site (M1-88: the CH04-S04 ridge, 146 m above the
+        if hp:                      # cold-trap floor) takes its terrain horizon where it stands; Sun/Earth directions stay the site's
+            hero_h, geo = heightmap_for_site(s["site"])
+            mask = horizon_mask(hp["x_m"], hp["y_m"], hp["height_m"])
+            if hero_h is not None:
+                mask = np.maximum(mask, horizon_mask_hero(hp["x_m"], hp["y_m"], hp["height_m"], hero_h, geo))
         saz, sel = sun[0][1], sun[0][2]
         eaz, eel = earth[0][1], earth[0][2]
         hz = float(mask[int(round(saz)) % 360])
@@ -1135,6 +1141,8 @@ def cmd_sun() -> None:
         out["scene_lighting"].append({"scene": s["scene"], "site": s["site"], "utc": s["utc"], "note": s["note"], "sun_az_deg": round(saz, 3), "sun_el_deg": round(sel, 3),
                                       "terrain_horizon_deg": round(hz, 2), "sun_state": state, "earth_az_deg": round(eaz, 3), "earth_el_deg": round(eel, 3),
                                       "earth_above_terrain": above(mask, eaz, eel), "request_urls": [u1, u2]})
+        if hp:
+            out["scene_lighting"][-1]["horizon_from"] = hp
         log(f"{s['scene']} {s['site']} {s['utc']}: Sun az {saz:.1f} el {sel:+.2f} (horizon {hz:+.2f}) -> {state}; Earth el {eel:+.2f}")
     write_json(GAME_LOLA / "sun_positions.json", out)
     log(f"wrote {(GAME_LOLA / 'sun_positions.json').relative_to(ROOT)}")

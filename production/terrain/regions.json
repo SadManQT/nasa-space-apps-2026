@@ -68,16 +68,21 @@
   {"scene": "EX-CH01-S09", "site": "aurora", "utc": "2046-04-25 18:00", "note": "authored night begins"},
   {"scene": "EX-CH01-S12", "site": "aurora", "utc": "2046-04-27 06:00", "note": "authored night ends"},
   {"scene": "EX-CH04-S02", "site": "aurora", "utc": "2046-10-21 06:00", "note": "rover departure"},
+  {"scene": "EX-CH04-S04", "site": "cold_trap", "utc": "2046-10-21 08:00", "note": "surveyed ridge on the cold-trap road (story: morning; hour chosen by Sadman 7 Nov 2026, M1-88)", "horizon_from": {"x_m": -4850.0, "y_m": -10970.0, "height_m": 1272.58, "place": "LOC-09, the cold-trap road's last bend before the basin (exterior_terrain.json origin)"}},
   {"scene": "EX-CH04-S05", "site": "cold_trap", "utc": "2046-10-21 09:00", "note": "cold-trap reference station"},
   {"scene": "EX-CH04-S06", "site": "cold_trap", "utc": "2046-10-21 10:30", "note": "vault approach"},
+  {"scene": "EX-CH04-S07", "site": "cold_trap", "utc": "2046-10-21 11:00", "note": "vault recovery (story: late morning; hour chosen by Sadman 7 Nov 2026, M1-88)"},
+  {"scene": "EX-CH04-S08", "site": "cold_trap", "utc": "2046-10-21 11:00", "note": "vault cradle and rover cargo mount (story: late morning; hour chosen by Sadman 7 Nov 2026, M1-88)"},
   {"scene": "EX-CH04-S09", "site": "aurora", "utc": "2046-10-22 06:00", "note": "ridge return"},
   {"scene": "EX-CH05-S01", "site": "aurora", "utc": "2046-12-12 12:00", "note": "landing camera (arrival hour is authored)"},
   {"scene": "EX-CH06-S07", "site": "aurora", "utc": "2047-01-12 01:00", "note": "eclipse totality window (00:00-02:42 UT per docs)"},
   {"scene": "EX-CH07-S05", "site": "aurora", "utc": "2047-02-14 06:00", "note": "everyone inside"},
   {"scene": "EX-CH08-S01", "site": "aurora", "utc": "2047-04-08 00:00", "note": "rover departure"},
   {"scene": "EX-CH08-S03", "site": "relay_road_mid", "utc": "2047-04-08 06:00", "note": "first repeater sector (road midpoint)"},
+  {"scene": "EX-CH08-S04", "site": "relay_road_mid", "utc": "2047-04-08 10:00", "note": "marker-two service pad (story: 10:00-17:00; its start, chosen by Sadman 7 Nov 2026, M1-88)"},
   {"scene": "EX-CH08-S06", "site": "malapert_summit", "utc": "2047-04-09 00:00", "note": "summit reached"},
   {"scene": "EX-CH08-S08", "site": "malapert_summit", "utc": "2047-04-09 01:15", "note": "Earth dish lock window 00:45-01:45"},
+  {"scene": "EX-CH08-S10", "site": "malapert_summit", "utc": "2047-04-09 02:00", "note": "summit rover cabin (story: 02:15-03:00; nearest hour before its start, chosen by Sadman 7 Nov 2026, M1-88)"},
   {"scene": "EX-CH08-S11", "site": "aurora", "utc": "2047-04-10 03:00", "note": "return"}
  ]
 }

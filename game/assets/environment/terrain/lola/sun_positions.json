@@ -1,6 +1,6 @@
 {
  "about": "Sun and Earth azimuth/elevation from JPL Horizons (DE441; airless apparent, i.e. light-time and aberration corrected, no refraction; site in the MEAN_ME frame on the 1,737.4 km sphere like LOLA) at the pinned story sites, hourly, plus whether each body's centre clears the local LOLA terrain horizon seen from a 2 m eye (Computed). Azimuth is degrees from local north through east; elevation is degrees above the local horizontal. Use sun_direction() in terrain_heightfield.gd to turn a row into a Godot light direction.",
- "retrieved": "2026-11-05",
+ "retrieved": "2026-11-07",
  "citation": "JPL Horizons On-Line Ephemeris System, https://ssd.jpl.nasa.gov/horizons/ ; LOLA horizon from PGDA products 78 and 90",
  "columns": [
   "utc",
@@ -12389,6 +12389,29 @@
    ]
   },
   {
+   "scene": "EX-CH04-S04",
+   "site": "cold_trap",
+   "utc": "2046-10-21 08:00",
+   "note": "surveyed ridge on the cold-trap road (story: morning; hour chosen by Sadman 7 Nov 2026, M1-88)",
+   "sun_az_deg": 82.17,
+   "sun_el_deg": 1.597,
+   "terrain_horizon_deg": 11.08,
+   "sun_state": "dark",
+   "earth_az_deg": 153.807,
+   "earth_el_deg": 1.653,
+   "earth_above_terrain": false,
+   "request_urls": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-21+08%3A00%27&STOP_TIME=%272046-10-21+08%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-21+08%3A00%27&STOP_TIME=%272046-10-21+08%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "horizon_from": {
+    "x_m": -4850.0,
+    "y_m": -10970.0,
+    "height_m": 1272.58,
+    "place": "LOC-09, the cold-trap road's last bend before the basin (exterior_terrain.json origin)"
+   }
+  },
+  {
    "scene": "EX-CH04-S05",
    "site": "cold_trap",
    "utc": "2046-10-21 09:00",
@@ -12420,6 +12443,40 @@
    "request_urls": [
     "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-21+10%3A30%27&STOP_TIME=%272046-10-21+10%3A31%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
     "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-21+10%3A30%27&STOP_TIME=%272046-10-21+10%3A31%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ]
+  },
+  {
+   "scene": "EX-CH04-S07",
+   "site": "cold_trap",
+   "utc": "2046-10-21 11:00",
+   "note": "vault recovery (story: late morning; hour chosen by Sadman 7 Nov 2026, M1-88)",
+   "sun_az_deg": 80.648,
+   "sun_el_deg": 1.607,
+   "terrain_horizon_deg": 9.94,
+   "sun_state": "dark",
+   "earth_az_deg": 153.77,
+   "earth_el_deg": 1.477,
+   "earth_above_terrain": false,
+   "request_urls": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-21+11%3A00%27&STOP_TIME=%272046-10-21+11%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-21+11%3A00%27&STOP_TIME=%272046-10-21+11%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ]
+  },
+  {
+   "scene": "EX-CH04-S08",
+   "site": "cold_trap",
+   "utc": "2046-10-21 11:00",
+   "note": "vault cradle and rover cargo mount (story: late morning; hour chosen by Sadman 7 Nov 2026, M1-88)",
+   "sun_az_deg": 80.648,
+   "sun_el_deg": 1.607,
+   "terrain_horizon_deg": 9.94,
+   "sun_state": "dark",
+   "earth_az_deg": 153.77,
+   "earth_el_deg": 1.477,
+   "earth_above_terrain": false,
+   "request_urls": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-21+11%3A00%27&STOP_TIME=%272046-10-21+11%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-21+11%3A00%27&STOP_TIME=%272046-10-21+11%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
    ]
   },
   {
@@ -12525,6 +12582,23 @@
    ]
   },
   {
+   "scene": "EX-CH08-S04",
+   "site": "relay_road_mid",
+   "utc": "2047-04-08 10:00",
+   "note": "marker-two service pad (story: 10:00-17:00; its start, chosen by Sadman 7 Nov 2026, M1-88)",
+   "sun_az_deg": 52.898,
+   "sun_el_deg": -0.056,
+   "terrain_horizon_deg": 5.14,
+   "sun_state": "dark",
+   "earth_az_deg": 24.084,
+   "earth_el_deg": -3.63,
+   "earth_above_terrain": false,
+   "request_urls": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27330.94540%2C-87.56934%2C-0.6437%27&START_TIME=%272047-04-08+10%3A00%27&STOP_TIME=%272047-04-08+10%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27330.94540%2C-87.56934%2C-0.6437%27&START_TIME=%272047-04-08+10%3A00%27&STOP_TIME=%272047-04-08+10%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ]
+  },
+  {
    "scene": "EX-CH08-S06",
    "site": "malapert_summit",
    "utc": "2047-04-09 00:00",
@@ -12556,6 +12630,23 @@
    "request_urls": [
     "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27357.66525%2C-85.96422%2C4.9936%27&START_TIME=%272047-04-09+01%3A15%27&STOP_TIME=%272047-04-09+01%3A16%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
     "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27357.66525%2C-85.96422%2C4.9936%27&START_TIME=%272047-04-09+01%3A15%27&STOP_TIME=%272047-04-09+01%3A16%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ]
+  },
+  {
+   "scene": "EX-CH08-S10",
+   "site": "malapert_summit",
+   "utc": "2047-04-09 02:00",
+   "note": "summit rover cabin (story: 02:15-03:00; nearest hour before its start, chosen by Sadman 7 Nov 2026, M1-88)",
+   "sun_az_deg": 18.107,
+   "sun_el_deg": 2.313,
+   "terrain_horizon_deg": -4.37,
+   "sun_state": "lit",
+   "earth_az_deg": 358.694,
+   "earth_el_deg": -2.32,
+   "earth_above_terrain": true,
+   "request_urls": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27357.66525%2C-85.96422%2C4.9936%27&START_TIME=%272047-04-09+02%3A00%27&STOP_TIME=%272047-04-09+02%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27357.66525%2C-85.96422%2C4.9936%27&START_TIME=%272047-04-09+02%3A00%27&STOP_TIME=%272047-04-09+02%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
    ]
   },
   {

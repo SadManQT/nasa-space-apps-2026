@@ -5824,7 +5824,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Dated Sun/Earth rows for exterior scenes that have none (CH04-S04, S07, S08; CH08-S04, S10)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -5832,7 +5832,7 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07.",
-   "evidence": "",
+   "evidence": "Hours chosen by Sadman in chat, 7 Nov 2026: \"Use proposed hours\". Rows added through make_terrain.py sun (JPL Horizons) in game/assets/environment/terrain/lola/sun_positions.json and the lro_lola_south_pole_terrain fixture: EX-CH04-S04 cold_trap 2046-10-21 08:00 dark (ridge's own horizon via horizon_from at LOC-09, +11.08 deg toward the Sun az 82.2, Sun el +1.60), EX-CH04-S07/S08 cold_trap 11:00 dark (horizon +9.94, Sun +1.61), EX-CH08-S04 relay_road_mid 2047-04-08 10:00 dark (Sun -0.06, horizon +5.14), EX-CH08-S10 malapert_summit 2047-04-09 02:00 lit (Earth -2.32 clears the summit horizon). The 16 earlier rows are unchanged. EARTH_SHOWN not extended: no new row puts Earth above a computed horizon in a room that presents it. run_tests.sh 59/59 suites passed (terrain_lola, exterior_terrain, explainers, science_data included).",
    "updated": "2026-11-07",
    "prompt": "Found by M1-82. Exterior scenes staged in LOC-09/LOC-10/LOC-11 without a scene_lighting row in game/assets/environment/terrain/lola/sun_positions.json get no dated Sun rig from TerrainStream.lighting() (it returns null) and never an Earth (RoomContract.earth returns presented false, 'No bundled Horizons row'): EX-CH04-S04 (surveyed ridge, '21 Oct morning'), EX-CH04-S07 and S08 (vault, 'late morning'), EX-CH08-S04 (8 Apr 10:00-17:00) and EX-CH08-S10 (9 Apr 02:15-03:00). The hourly rows already exist in the same file (windows ch04_cold_trap, ch08_road_mid, ch08_summit), so no new download is needed. Do: pick each scene's UTC from STORY_FULL.md (Sadman decides the exact hour where the story says only 'morning'), add the scene_lighting rows from the hourly window rows (same columns and terrain-horizon flags as M1-34), update the M1-34 README table, and re-run game/tools/test_terrain_lola.gd and test_exterior_terrain.gd (extend its EARTH_SHOWN only if a new row puts Earth above a computed horizon). Acceptance: every exterior scene in the scene map has a row; run_tests.sh green.",
    "reserved_for": "sadman",

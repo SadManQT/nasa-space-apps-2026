@@ -46,7 +46,7 @@ light.transform.basis = hf.sun_light_basis(sun.sun_az_deg, sun.sun_el_deg)
 
 `sun_positions.json` holds hourly Sun and Earth azimuth/elevation for every story window, the
 360-azimuth terrain horizon of each site and a `scene_lighting` row per exterior scene (lit, dark or
-partial against the real horizon). Never clamp the Sun above the horizon: at Aurora in April 2046 it
+partial against the real horizon; a scene staged away from its ephemeris site carries `horizon_from`, the point whose terrain horizon it was checked against, e.g. the Chapter 4 ridge 146 m above the cold-trap floor). Every exterior scene in the room scene map has a row (M1-88 added five, with the hours Sadman chose on 7 Nov 2026). Never clamp the Sun above the horizon: at Aurora in April 2046 it
 sits at −1.5°, and the ridge is lit only because the terrain falls away toward it.
 
 Rules: one hard Sun, black sky, no ambient except Earthshine (Art Bible §2); `terrain_lola.gdshader`

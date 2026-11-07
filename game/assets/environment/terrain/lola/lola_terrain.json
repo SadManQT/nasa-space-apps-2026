@@ -2,7 +2,7 @@
  "about": "Index of the LOLA terrain for Godot (board M1-34). Heightmaps are r16 (see each region's .json); tiles are GLB LODs built by production/tools/build_terrain_tiles.py; sun_positions.json holds the dated light directions.",
  "credit_line": "Terrain made from NASA data: Lunar Reconnaissance Orbiter, Lunar Orbiter Laser Altimeter (LOLA) elevation models from NASA Goddard's Planetary Geodynamics Data Archive (Barker et al. 2021, 2023) and the NASA PDS; Sun and Earth positions from NASA JPL Horizons. NASA does not endorse this game.",
  "credit_line_short": "Terrain made from NASA LRO LOLA data (GSFC PGDA / PDS); sky geometry from JPL Horizons.",
- "retrieved": "2026-11-05",
+ "retrieved": "2026-11-07",
  "sites": {
   "aurora": {
    "lat_deg": -89.43890921454619,

@@ -1,6 +1,6 @@
 {
  "source_id": "lro_lola_south_pole_terrain",
- "retrieved": "2026-11-05",
+ "retrieved": "2026-11-07",
  "title": "The real south-pole terrain: LRO LOLA elevation models of the connecting ridge, a cold trap and Mons Malapert",
  "agency": "NASA Goddard Space Flight Center, Planetary Geodynamics Data Archive (PGDA); LRO LOLA team; NASA PDS Geosciences Node",
  "dataset_id": "PGDA product 90 (LDEM_80S_20MPP_ADJ, LDEM_80S_40MPP_ADJ, LDEM_80S_80MPP_ADJ, LPSR_80S_20MPP_ADJ; data DOI 10.60903/gsfcpgda-lola-spole), PGDA product 78 (Site01, Site04, Site23 5 m/px), PDS LRO-L-LOLA-4-GDR-V1.0 LDEM_80S_20M (cross-check)",
@@ -166,6 +166,16 @@
    ],
    [
     "Chapter 4",
+    1.597,
+    82.17,
+    11.08,
+    "dark",
+    "cold_trap",
+    "2046-10-21 08:00",
+    1.653
+   ],
+   [
+    "Chapter 4",
     1.601,
     81.663,
     9.89,
@@ -183,6 +193,26 @@
     "cold_trap",
     "2046-10-21 10:30",
     1.506
+   ],
+   [
+    "Chapter 4",
+    1.607,
+    80.648,
+    9.94,
+    "dark",
+    "cold_trap",
+    "2046-10-21 11:00",
+    1.477
+   ],
+   [
+    "Chapter 4",
+    1.607,
+    80.648,
+    9.94,
+    "dark",
+    "cold_trap",
+    "2046-10-21 11:00",
+    1.477
    ],
    [
     "Chapter 4",
@@ -246,6 +276,16 @@
    ],
    [
     "Chapter 8",
+    -0.056,
+    52.898,
+    5.14,
+    "dark",
+    "relay_road_mid",
+    "2047-04-08 10:00",
+    -3.63
+   ],
+   [
+    "Chapter 8",
     2.291,
     19.12,
     -4.34,
@@ -263,6 +303,16 @@
     "malapert_summit",
     "2047-04-09 01:15",
     -2.301
+   ],
+   [
+    "Chapter 8",
+    2.313,
+    18.107,
+    -4.37,
+    "lit",
+    "malapert_summit",
+    "2047-04-09 02:00",
+    -2.32
    ],
    [
     "Chapter 8",
