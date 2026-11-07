@@ -6143,6 +6143,51 @@
    "prompt": "Update handbook status for reviewed CareRound UI provider M1-83 delivered to main, contract production/qa/evidence/M1-83_provider.md. EqualAlo/Tara readings/ghosts, image-only async capture handshake, FamilyMode and keyboard/controller/150text; independentreview twofindingsfixed; care32/text524 andnative297probes/eightPNGs. Fullsource15ff10a64/65,soleM1-68 timing failures, no taskdone/performancefix. AtikM1-49 owns actual worldcamera/date/order/photoledger/persistence and integration; M1-83 remains blocked on fullgate, sourceavailableforruntimewiring. Add short accurate datedstatus, no canondecision. Fullresults M1-83_test_results.txt/full_results.txt/performance_runtime.txt. No new assets, paidgeneration or changed numeric rules.",
    "reserved_for": "sadman",
    "effort": 1
+  },
+  {
+   "id": "M3-107",
+   "milestone": "M3",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Wire the Chapter 3 annex (LOC-07) and the tray dedication into the campaign",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M3-3R"
+   ],
+   "paths": [
+    "game/scripts/loading/",
+    "game/scripts/navigation/",
+    "game/scripts/campaign/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "M3-3R (Sadman, rooms) landed the Chapter 3 rooms: EX-CH03-S06..S08 play in LOC-07, the Expedition Zero annex (game/scenes/campaign/rooms/annex.tscn, game/resources/campaign/rooms/LOC-07.json): a warm-side kit bay with the N.R. floor hatch and the 2034 annex 3 m below. RoomContract.room('LOC-07').boundary_ids are now [door_service_annex, annex_hatch]. Please, in your folders: (1) game/scripts/loading/load_preparation.gd ROOM_SCENES: add \"LOC-07\": \"res://scenes/campaign/rooms/annex.tscn\" (it carries HabitatKitPreload; without it Chapter1Campaign builds LOC-07 as a bare CampaignRoom.new(), which works but loads the kit on the main thread). (2) game/scripts/navigation/route_navigation.gd _BOUNDARIES: add \"door_service_annex\": {from LOC-02, to LOC-07, kind INTERNAL, default_open true} and \"annex_hatch\" (the warm bay to cold annex hatch inside LOC-07; closed by default; it opens only with leak_sealed, the annex feed isolated, zero differential and the suit check, doc 09 LOC-07); CampaignRoom.set_door_open(\"annex_hatch\", open) already swings the leaf. (3) Record the EX-CH03-S11 tray dedication (CampaignState.EXTRA_STORY_CHOICES id EX-CH03-S11-DEDICATION) with option ids EX-CH03-S11-DEDICATION-OPT01 (Light and Star), -OPT02 (For Alo and Tara), -OPT03 (The Next Small Thing): LOC-03 staging (layers ch03_d6_opt01..03) shows the chosen words on the rack's dedication card from EX-CH03-S11 through EX-CH04-S01; add the D6 rows to story_echoes.json as part of M3-95. Note: CampaignCrew.place now uses a scene's staged <room>_player anchor when the staging names one (EX-CH03-S07 starts the player on the cold side, y = -3), so _place_crew can keep passing the base anchor. Acceptance: game/tools/run_tests.sh passes (chapter3_rooms included); in a campaign run, EX-CH03-S06..S08 load LOC-07 through annex.tscn on the loading card and a dedication choice shows its words on the rack.",
+   "reserved_for": "atik",
+   "effort": 1
+  },
+  {
+   "id": "M3-108",
+   "milestone": "M3",
+   "priority": "P2",
+   "tool": "claude",
+   "title": "Pressed-petal props: card and petal import as fully metallic, so they render dull grey",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/assets/props/PR_PressedPetal_Mounted/",
+    "game/assets/props/PR_PressedPetal/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-07.",
+   "evidence": "",
+   "updated": "2026-11-07",
+   "prompt": "Found in the M3-3R screenshot review (production/qa/evidence/M3-3R_S11_petal_on_board.png, M3-3R_S12_lineage_board.png). In game/assets/props/PR_PressedPetal_Mounted/PR_PressedPetal_Mounted.glb the materials M_Card and M_Petal import with metallic 1.0 and roughness 1.0 (the glTF default metallicFactor when the exporter leaves it out), so Alo's mounted petal on the lineage board (LOC-03 layer ch03_lineage_board, EX-CH03-S11 on) shows a dull grey card and a dark 12 mm petal instead of paper and a mustard petal. M_Sleeve (alpha 0.16) and the clip are fine. Re-export with metallic 0 on the paper and petal materials (check PR_PressedPetal, the bench sleeve used at EX-CH03-S10, for the same fault), re-run the asset gate, and retake the two M3-3R shots with production/qa/evidence/M3-3R_capture.sh. Acceptance: probe the imported materials (metallic 0 on M_Card and M_Petal), the petal reads as a pressed mustard petal on the lineage board at the review view, game/tools/run_tests.sh passes.",
+   "reserved_for": "sadman",
+   "effort": 1
   }
  ],
  "requirements": [
