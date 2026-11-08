@@ -175,7 +175,7 @@ func terrain_lighting() -> Dictionary:
 func _build_work_lights() -> void:
 	var spec := RoomContract.work_lights(room_id)
 	if not spec.is_empty():
-		WorkLights.build(spec, terrain_segment, on_terrain(), visual_root, focus_root, _layout.get("assembly") not in PROP_ASSEMBLIES)
+		WorkLights.build(spec, terrain_segment, on_terrain(), visual_root, focus_root, _layout.get("assembly") not in PROP_ASSEMBLIES, _scene_context)
 
 ## Moves the built anchors, focus targets, fixtures and doors onto the published terrain positions (props are placed
 ## as they load). Names and ids are unchanged.
@@ -188,6 +188,35 @@ func _stand_on_terrain() -> void:
 			var node := (pair[0] as Node3D).get_node_or_null(String(pair[2]) + String(id)) as Node3D
 			if node != null:
 				node.position = Presentation.vector(spots[id])
+	if _layout.get("assembly") == "exterior_kit":
+		_drape_fixtures()
+
+## M4-14: on the terrain an exterior_kit fixture (the relay road's graded bed, the service pad, the bypass track) is a
+## decal projected onto the visible ground, so it follows the terrain as graded regolith instead of a flat slab that
+## shows only where the ground dips under it. Its node keeps its id and published spot; the decal reaches from 0.25 m
+## under that spot (the lowest ground under it) to 0.35 m over the highest (bury_m), and fades on steep faces so it
+## paints the ground, not the sides of the props standing on it. The Compatibility renderer draws no decals: there the
+## bare regolith shows.
+func _drape_fixtures() -> void:
+	var white := Image.create(4, 4, false, Image.FORMAT_RGBA8)
+	white.fill(Color.WHITE)
+	var texture := ImageTexture.create_from_image(white)
+	for spec in _layout.get("fixtures", []):
+		var box := visual_root.get_node_or_null(String(spec.id)) as MeshInstance3D
+		if box == null or bool(spec.get("transparent", false)) or bool(spec.get("emissive", false)):
+			continue
+		var size := Presentation.vector(spec.size)
+		var depth := float(_terrain.get("bury_m", {}).get(String(spec.id), 0.0)) + 0.6
+		var decal := Decal.new()
+		decal.name = "GroundDecal"
+		decal.size = Vector3(size.x, depth, size.z)
+		decal.position = Vector3.UP * (depth * 0.5 - 0.25)
+		decal.texture_albedo = texture
+		decal.modulate = Color(String(spec.color))
+		decal.albedo_mix = 0.55
+		decal.normal_fade = 0.5
+		box.mesh = ArrayMesh.new()  # no surfaces: the decal is the fixture here
+		box.add_child(decal)
 
 ## Returns the authored focus anchors for the existing interaction dispatcher.
 func focus_targets() -> Array:
@@ -776,6 +805,8 @@ func _apply_staging() -> void:
 	_stage_signature = signature
 	if not next.layers.is_empty():
 		Staging.build(self, next, _layout)
+		if RoomContract.work_lights(room_id).get("rover", {}).has("states"):
+			_build_work_lights()  # M4-14: the rover this scene's staging places (LOC-11) runs its work lights
 	if changes_floor and build_navigation and _terrain.is_empty() and _layout.get("assembly") in AUTHORED_ASSEMBLIES:
 		_rebuild_navigation(RoomContract.staged_layout_for(_layout, _scene_context, _choices, _moments, terrain_segment))
 

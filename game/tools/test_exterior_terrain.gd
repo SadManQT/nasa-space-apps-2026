@@ -40,7 +40,7 @@ const EARTH_SHOWN := {"LOC-06": ["EX-CH01-S01", "EX-CH01-S12", "EX-CH04-S02", "E
 	"LOC-12": ["EX-CH08-S06", "EX-CH08-S08", "EX-CH08-S10"]}
 ## Capture: room, dated scene, extra evidence light (a permanently shadowed floor, or the relay road with the Sun
 ## behind its terrain horizon, is black under its true Sun).
-const SHOTS := [["LOC-06", "EX-CH04-S09", false], ["LOC-09", "EX-CH04-S05", false], ["LOC-10", "EX-CH04-S06", true], ["LOC-11", "EX-CH08-S03", true]]
+const SHOTS := [["LOC-06", "EX-CH04-S09", false], ["LOC-09", "EX-CH04-S05", false], ["LOC-10", "EX-CH04-S06", true], ["LOC-11", "EX-CH08-S03", false]]
 var checks := 0
 var failures := 0
 var _fields: Dictionary = {}

@@ -602,7 +602,7 @@ static func terrain_lighting(room_id: String, scene_id: String, segment: String 
 	var row := Heightfield.scene_lighting(scene_id, segment)
 	var work := work_lights(room_id)
 	var result := {"ready": false, "room_id": room_id, "scene_id": scene_id, "segment": segment, "sun_state": String(row.get("sun_state", "")),
-		"work_lights": TerrainWorkLights.lamp_ids(work), "asset_paths": work_light_asset_paths(room_id)}
+		"work_lights": TerrainWorkLights.lamp_ids(work, scene_id), "asset_paths": work_light_asset_paths(room_id)}
 	if place.is_empty():
 		result.reason = "The room has no terrain placement%s." % ("" if segment.is_empty() else " for segment " + segment)
 	elif not bool(place.get("omit_staging_floor", false)):

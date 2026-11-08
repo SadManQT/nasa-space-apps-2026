@@ -1,5 +1,5 @@
 {
- "about": "M1-91: the work lights of the dark Chapter 4 exteriors, built by game/scripts/world/terrain_work_lights.gd through CampaignRoom on the terrain provider's ground and on the flat fallback floor alike. Below the cold-trap rim the dated Sun is under the terrain horizon (rows EX-CH04-S04 at B3, S05 and S06..S08 are 'dark': the Sun 1.6 deg up behind a 5.4-9.9 deg terrain horizon) and nothing adds ambient fill, so the work area is lit only by the field team's lamps: the staged VH_Rover (LOC-09.json, LOC-10.json; M3-106) in its approved EVA-stop state (rover_lights.json, M3-8A decision 7: headlights, roof work floods, cabin glow) with its floods turned onto the room's work targets, Kai's hand light at the vault (STORY_FULL EX-CH04-S06 'As Kai turns the light back towards the survey marker', S07 'Kai moves the light to make the actual labels readable', S08 'within the lit work area'), and the suited crew's helmet lamps (CampaignCrew 'eva'; M3-4A decision 10: 'the rover's headlights and the helmet lamps'). Authored per room: scenes (placement -> the dark-Sun scenes the lights are verified for; '' is the room's own placement, else a segment), rover (the staged prop, its rig state, floods aimed at focus target ids), props (added lamp props: id, asset_id, path, xz, yaw_deg, lamps). Derived by game/tools/test_terrain_work_lights.gd -- --write and checked on every run: on_ground (placement -> added prop poses on the visible terrain). RoomContract.work_lights(room_id) reads it; RoomContract.terrain_lighting(room_id, scene_id, segment) is the ready flag.",
+ "about": "M1-91: the work lights of the dark Chapter 4 exteriors, built by game/scripts/world/terrain_work_lights.gd through CampaignRoom on the terrain provider's ground and on the flat fallback floor alike. Below the cold-trap rim the dated Sun is under the terrain horizon (rows EX-CH04-S04 at B3, S05 and S06..S08 are 'dark': the Sun 1.6 deg up behind a 5.4-9.9 deg terrain horizon) and nothing adds ambient fill, so the work area is lit only by the field team's lamps: the staged VH_Rover (LOC-09.json, LOC-10.json; M3-106) in its approved EVA-stop state (rover_lights.json, M3-8A decision 7: headlights, roof work floods, cabin glow) with its floods turned onto the room's work targets, Kai's hand light at the vault (STORY_FULL EX-CH04-S06 'As Kai turns the light back towards the survey marker', S07 'Kai moves the light to make the actual labels readable', S08 'within the lit work area'), and the suited crew's helmet lamps (CampaignCrew 'eva'; M3-4A decision 10: 'the rover's headlights and the helmet lamps'). LOC-11 (M4-14) runs the rover its scene's staging places (ChapterStaging/rover), in the rig state of each scene (rover.states). Authored per room: scenes (placement -> the dark-Sun scenes the lights are verified for; '' is the room's own placement, else a segment), rover (the staged prop, its rig state, floods aimed at focus target ids), props (added lamp props: id, asset_id, path, xz, yaw_deg, lamps). Derived by game/tools/test_terrain_work_lights.gd -- --write and checked on every run: on_ground (placement -> added prop poses on the visible terrain). RoomContract.work_lights(room_id) reads it; RoomContract.terrain_lighting(room_id, scene_id, segment) is the ready flag.",
  "frame": "Room-local, as exterior_terrain.json and the room layouts (a segment room's frame turned by its yaw_deg). An added prop's lamp 'at' and 'axis' are in the prop's own frame (PR_HandLight: +X along its barrel to the lens). An 'aim' names a focus target of the room, so it follows the target onto its published terrain spot.",
  "rules": "An added prop rests on the visible ground on the terrain (the finest tile mesh TerrainStream shows, sampled by game/tools/terrain_visual_ground.gd; it smooths the 10 m heightfield by up to ~0.3 m here), tilted to the least-squares plane under its base and lifted until its lowest contact touches: on_ground position, rotation_degrees, float_m (the largest gap left under a base corner), tilt_deg (at most 15 deg), visible_above_field_m; on the flat floor it lies at its xz and yaw. It stays clear of every walking lane by a walker's half-width and inside the placement's rock exclusions. Lamps cast hard shadows; the room adds no WorldEnvironment, ambient, sky or directional light.",
  "compatibility_energy_scale": {
@@ -105,6 +105,45 @@
      }
     }
    }
+  },
+  "LOC-11": {
+   "why": "M4-14: the marker-two sector of the relay road on the 10 m relay_road_mid patch (M1-87) is dark in both its rows (EX-CH08-S03 and S04: the Sun -0.1 deg behind a 4.9-5.1 deg horizon). Its rover is staged per scene (LOC-11.json staging), not a room prop, so its rig state follows the scene: in S03 it brakes at the pad entrance with all three aboard, headlights on the dark repeater ('driving': headlights and cabin glow); in S04 it stands braked on the pad for the EVA ('eva_stop') with both roof floods turned onto the repeater, where Kai and Rafi swap the battery. The suited crew add their helmet lamps; the amber guide lights are road markers, not work lights.",
+   "scenes": {
+    "": [
+     "EX-CH08-S03",
+     "EX-CH08-S04"
+    ]
+   },
+   "rover": {
+    "prop": "rover",
+    "states": {
+     "EX-CH08-S03": "driving",
+     "EX-CH08-S04": "eva_stop"
+    },
+    "aim": {
+     "RoofFlood_L": "repeater_chain",
+     "RoofFlood_R": "repeater_chain"
+    }
+   },
+   "outside_work_area": {
+    "ids": [
+     "bypass_slope_sign",
+     "bypass_barrier",
+     "pad_marker_1",
+     "pad_marker_2",
+     "pad_marker_3",
+     "pad_marker_4",
+     "pad_marker_5",
+     "pad_marker_6",
+     "pad_marker_8",
+     "guide_light_1",
+     "guide_light_2",
+     "guide_light_3",
+     "guide_light_4"
+    ],
+    "why": "The 60 x 30 m sector is larger than its work area. The rover's beams light the repeater, its tether point, the near pad markers and the crew, and the rest of the dark sector stays dark (S03 'marker two is dark'). The four guide lights show by their own amber lamps (staging ch08_road_lights); the outer pad markers (marker 6 at the edge of the S03 headlights, lit by the S04 floods), the slope sign and the turnback barrier stand beyond the beams, and the bypass is read on the cab's route console in S03. test_terrain_work_lights.gd reports their light and does not gate it."
+   },
+   "props": []
   }
  }
 }

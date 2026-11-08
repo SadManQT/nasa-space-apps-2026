@@ -18,21 +18,24 @@ const ROOT_NAME := "WorkLights"
 const META := "work_light"
 ## A prop's own lamp starts this far in front of its lens point, so the prop's shell never shadows it.
 const LENS_CLEARANCE_M := 0.04
+## Where a scene's staging puts its props (room_staging.gd ROOT_NAME): LOC-11's rover is staged per scene (M4-14).
+const STAGING_ROOT := "ChapterStaging"
 static var _rigs: Dictionary = {}
 
 ## Puts the room's work lights up once its approved props have loaded: the staged rover (spec.rover.prop, a child of
 ## visual_root) in its rig state with its floods aimed, and each added prop with its lamps: on the terrain at its derived
 ## pose for the placement (spec.on_ground[segment]; "" is the room's own placement), on the flat floor at its xz and yaw.
 ## focus_root holds the room's built focus targets ("Focus_<id>", on the terrain already at their published spots), which
-## the aims name. toon: the room cel-shades its props (not a site_kit or habitat_kit room). Returns every work light the
-## room has afterwards.
-static func build(spec: Dictionary, segment: String, on_terrain: bool, visual_root: Node3D, focus_root: Node3D, toon: bool) -> Array:
+## the aims name. toon: the room cel-shades its props (not a site_kit or habitat_kit room). scene_id: the staged scene,
+## which picks a staged rover's rig state (rover_state). Returns every work light the room has afterwards.
+static func build(spec: Dictionary, segment: String, on_terrain: bool, visual_root: Node3D, focus_root: Node3D, toon: bool, scene_id: String = "") -> Array:
 	if spec.is_empty():
 		return []
 	var method := RenderingServer.get_current_rendering_method()
-	var rover := visual_root.get_node_or_null(String(spec.get("rover", {}).get("prop", ""))) as Node3D
-	if rover != null and not rover.has_meta(META):
-		_rover(rover, spec, focus_root, method)
+	var rover := rover_node(visual_root, spec)
+	var state := rover_state(spec, scene_id)
+	if rover != null and not state.is_empty() and not rover.has_meta(META):
+		_rover(rover, spec, state, focus_root, method)
 	var poses: Dictionary = spec.get("on_ground", {}).get(segment, {})
 	var added := _root(visual_root)
 	for prop in spec.get("props", []):
@@ -72,18 +75,33 @@ static func energy_scale(spec: Dictionary, rendering_method: String, lamp: Strin
 static func lights(visual_root: Node3D) -> Array:
 	return visual_root.find_children("*", "Light3D", true, false).filter(func(light): return (light as Node).has_meta(META) and (light as Light3D).is_visible_in_tree() and (light as Light3D).light_energy > 0.0)
 
+## The rover the work lights run: the room's own prop (visual_root/<prop>, LOC-09, LOC-10) or the one a scene's staging
+## places (ChapterStaging/<prop>, LOC-11, M4-14); null when neither is there.
+static func rover_node(visual_root: Node3D, spec: Dictionary) -> Node3D:
+	var id := String(spec.get("rover", {}).get("prop", ""))
+	if id.is_empty():
+		return null
+	var own := visual_root.get_node_or_null(id) as Node3D
+	return own if own != null else visual_root.get_node_or_null("%s/%s" % [STAGING_ROOT, id]) as Node3D
+
+## The rover's rig state in a scene: rover.states[scene_id] for a rover whose state the scene's staging sets (LOC-11:
+## driving in EX-CH08-S03, eva_stop in S04), else rover.state; "" for none.
+static func rover_state(spec: Dictionary, scene_id: String = "") -> String:
+	var rover: Dictionary = spec.get("rover", {})
+	return String(rover.get("states", {}).get(scene_id, rover.get("state", "")))
+
 ## The id of one work light as lamp_ids() lists it: "<prop>/<lamp>" (the rover's lamps and the added props' lamps are
 ## children of their prop).
 static func lamp_id(light: Light3D) -> String:
 	return "%s/%s" % [light.get_parent().name, light.name]
 
-## The ids of the lamps a room's work lights switch on ("VH_Rover/RoofFlood_L", "KaiHandLight/HandLightBeam"), for the
-## ready flag; [] for a room without work lights.
-static func lamp_ids(spec: Dictionary) -> Array:
+## The ids of the lamps a room's work lights switch on in a scene ("VH_Rover/RoofFlood_L", "KaiHandLight/HandLightBeam"),
+## for the ready flag; [] for a room without work lights.
+static func lamp_ids(spec: Dictionary, scene_id: String = "") -> Array:
 	var ids: Array = []
 	var rover: Dictionary = spec.get("rover", {})
 	if not rover.is_empty():
-		for name in _rig(String(spec.get("rover_rig", ""))).get("states", {}).get(String(rover.state), []):
+		for name in _rig(String(spec.get("rover_rig", ""))).get("states", {}).get(rover_state(spec, scene_id), []):
 			ids.append("%s/%s" % [rover.prop, name])
 	for prop in spec.get("props", []):
 		for lamp in prop.get("lamps", []):
@@ -93,9 +111,9 @@ static func lamp_ids(spec: Dictionary) -> Array:
 ## The rover in its rig state (the approved lamps of rover_lights.json "states"; the others stay off), each lamp at its
 ## rig energy times its renderer's fraction, hard-shadowed, and the ones in "aim" turned on their mounts onto a focus target of the
 ## room.
-static func _rover(rover: Node3D, spec: Dictionary, focus_root: Node3D, method: String) -> void:
+static func _rover(rover: Node3D, spec: Dictionary, state: String, focus_root: Node3D, method: String) -> void:
 	var rig := _rig(String(spec.rover_rig))
-	var wanted: Array = rig.get("states", {}).get(String(spec.rover.state), [])
+	var wanted: Array = rig.get("states", {}).get(state, [])
 	var aims: Dictionary = spec.rover.get("aim", {})
 	for lamp in rig.get("lights", []):
 		var light := rover.get_node_or_null(String(lamp.name)) as Light3D
@@ -109,7 +127,7 @@ static func _rover(rover: Node3D, spec: Dictionary, focus_root: Node3D, method: 
 			var target = _focus_point(focus_root, String(aims[lamp.name]))
 			if target != null:
 				_aim(light, rover.transform.affine_inverse() * (target as Vector3) - light.position)
-	rover.set_meta(META, String(spec.rover.state))
+	rover.set_meta(META, state)
 
 ## A focus target's built position in the room (Focus_<id>, on its published terrain spot on the terrain), or null.
 static func _focus_point(focus_root: Node3D, target_id: String) -> Variant:

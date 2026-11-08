@@ -29,13 +29,13 @@ const ROVER_SCENE := "res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn"
 ## covered here.
 ## M1-87: terrain-ready rooms whose dark rows have no verified work lights yet (board task named), so the campaign keeps
 ## them unready on the terrain; remove an entry once its lights are verified.
-const UNVERIFIED_DARK := {"LOC-11": "M4-14: LOC-11's staged per-scene rover and guide lights are not yet work lights"}
-const LIT := [["LOC-09", "B3", "EX-CH04-S04"], ["LOC-09", "", "EX-CH04-S05"], ["LOC-10", "", "EX-CH04-S06"], ["LOC-10", "", "EX-CH04-S07"], ["LOC-10", "", "EX-CH04-S08"]]
+const UNVERIFIED_DARK := {}  # M4-14: LOC-11 left it; its staged rover is verified per scene
+const LIT := [["LOC-09", "B3", "EX-CH04-S04"], ["LOC-09", "", "EX-CH04-S05"], ["LOC-10", "", "EX-CH04-S06"], ["LOC-10", "", "EX-CH04-S07"], ["LOC-10", "", "EX-CH04-S08"], ["LOC-11", "", "EX-CH08-S03"], ["LOC-11", "", "EX-CH08-S04"]]
 ## The scenes the windowed capture measures on screen: [room, segment, scene, full] (full: also the wide view and the lamp
 ## strip, which show the same rig in the other scenes of a placement). S07 brings the tethered carrier and the probe to
 ## S06's shelf; S08 plays on S07's staging (LOC-10.json "ch04_vault_recovery" spans both), which the headless run checks,
 ## so S07's screen checks hold for it.
-const CAPTURE := [["LOC-09", "B3", "EX-CH04-S04", true], ["LOC-09", "", "EX-CH04-S05", true], ["LOC-10", "", "EX-CH04-S06", true], ["LOC-10", "", "EX-CH04-S07", false]]
+const CAPTURE := [["LOC-09", "B3", "EX-CH04-S04", true], ["LOC-09", "", "EX-CH04-S05", true], ["LOC-10", "", "EX-CH04-S06", true], ["LOC-10", "", "EX-CH04-S07", false], ["LOC-11", "", "EX-CH08-S03", true], ["LOC-11", "", "EX-CH08-S04", false]]
 ## A prop rests on the ground: tilt at most the walkable incline, gap under its highest contact at most this.
 const TILT_LIMIT_DEG := 15.0
 const FLOAT_LIMIT_M := 0.15
@@ -153,8 +153,13 @@ func _lit_rooms() -> Array:
 func _placements(room_id: String) -> Array:
 	return [""] + Contract.terrain_segments(room_id)
 
-func _lamp_count(room_id: String) -> int:
-	return WorkLights.lamp_ids(Contract.work_lights(room_id)).size()
+func _lamp_count(room_id: String, scene_id: String = "") -> int:
+	return WorkLights.lamp_ids(Contract.work_lights(room_id), scene_id).size()
+
+## The scenes a room's rover runs its lamps in: [""] for a room prop in one state, else each scene its staging sets
+## a state for (LOC-11, M4-14).
+func _rover_scenes(spec: Dictionary) -> Array:
+	return [""] if spec.rover.has("state") else spec.rover.states.keys()
 
 # ------------------------------------------------------------------------------------------- derivation
 
@@ -269,18 +274,30 @@ func _same(stored: Variant, derived: Variant) -> bool:
 # ------------------------------------------------------------------------------------------- data
 
 func _check_data() -> void:
-	_check(_lit_rooms() == ["LOC-09", "LOC-10"], "work lights are authored for the two dark cold-trap rooms")
+	_check(_lit_rooms() == ["LOC-09", "LOC-10", "LOC-11"], "work lights are authored for the two dark cold-trap rooms and the dark relay-road pad")
 	var rig: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/vehicles/VH_Rover/rover_lights.json"))
 	for room_id in _lit_rooms():
 		var spec := Contract.work_lights(room_id)
 		var layout := Contract.layout(room_id)
-		# The staged rover is the room's own (M3-106): the lit VH_Rover_Lit scene, never a second rover.
-		var staged: Array = layout.get("props", []).filter(func(p): return String(p.get("id", "")) == String(spec.rover.prop))
-		_check(staged.size() == 1 and String(staged[0].get("scene", "")) == ROVER_SCENE and layout.props.filter(func(p): return String(p.path).ends_with("VH_Rover.glb")).size() == 1, "%s work lights run the room's one staged rover (%s, VH_Rover_Lit)" % [room_id, spec.rover.prop])
-		_check(rig.states.has(String(spec.rover.state)) and String(spec.rover.state) == "eva_stop", "%s rover runs its approved EVA-stop state (M3-8A decision 7)" % room_id)
+		if spec.rover.has("state"):
+			# The staged rover is the room's own (M3-106): the lit VH_Rover_Lit scene, never a second rover.
+			var staged: Array = layout.get("props", []).filter(func(p): return String(p.get("id", "")) == String(spec.rover.prop))
+			_check(staged.size() == 1 and String(staged[0].get("scene", "")) == ROVER_SCENE and layout.props.filter(func(p): return String(p.path).ends_with("VH_Rover.glb")).size() == 1, "%s work lights run the room's one staged rover (%s, VH_Rover_Lit)" % [room_id, spec.rover.prop])
+			_check(rig.states.has(String(spec.rover.state)) and String(spec.rover.state) == "eva_stop", "%s rover runs its approved EVA-stop state (M3-8A decision 7)" % room_id)
+		else:
+			# M4-14: a rover the scene's staging places runs the rig state that staging sets, in every verified scene.
+			_check(spec.rover.states.keys() == spec.scenes.get("", []), "%s rover has a rig state for exactly its verified scenes" % room_id)
+			for scene_id in spec.rover.states:
+				var stage := Contract.staging(room_id, String(scene_id), {}, [], "")
+				var placed: Array = stage.get("props", []).filter(func(p): return String(p.get("id", "")) == String(spec.rover.prop))
+				var set_state := String(stage.get("piece_states", {}).get(String(spec.rover.prop), {}).get("lights", ""))
+				_check(placed.size() == 1 and String(placed[0].path) == ROVER_SCENE and set_state == String(spec.rover.states[scene_id]) and rig.states.has(set_state), "%s %s stages the lit rover in the state its work lights run (%s)" % [room_id, scene_id, set_state])
 		var targets: Array = Contract.room(room_id).focus_targets.map(func(t): return String(t.target_id))
 		for lamp in spec.rover.get("aim", {}):
 			_check(rig.states.eva_stop.has(String(lamp)) and targets.has(String(spec.rover.aim[lamp])), "%s %s is an EVA-stop lamp turned onto the focus target %s" % [room_id, lamp, spec.rover.aim[lamp]])
+		var asset_targets: Array = Contract.room(room_id).focus_targets.map(func(t): return String(t.get("asset_id", "")))
+		for id in spec.get("outside_work_area", {}).get("ids", []):
+			_check(layout.props.any(func(p): return String(p.id) == String(id)) and not asset_targets.has(String(id)), "%s %s, outside the work area, is a room prop and no focus target's" % [room_id, id])
 		for prop in spec.get("props", []):
 			for lamp in prop.lamps:
 				_check(not lamp.has("aim") or targets.has(String(lamp.aim)), "%s %s aims at a focus target of the room" % [room_id, lamp.id])
@@ -415,14 +432,15 @@ func _check_ready_flags() -> void:
 			_check(ready, "%s%s in %s on the terrain is lit (%s Sun)" % [row.scene, "" if segment.is_empty() else " " + segment, room_id, row.sun_state])
 	for lit in LIT:
 		var flag := Contract.terrain_lighting(String(lit[0]), String(lit[2]), String(lit[1]))
-		_check(flag.ready and flag.sun_state == "dark" and String(flag.reason).contains("work lights") and flag.work_lights.size() == _lamp_count(String(lit[0])), "%s%s (%s, dark Sun) is ready on the terrain through its %d work lights" % [lit[2], "" if String(lit[1]).is_empty() else " " + String(lit[1]), lit[0], _lamp_count(String(lit[0]))])
+		_check(flag.ready and flag.sun_state == "dark" and String(flag.reason).contains("work lights") and flag.work_lights.size() == _lamp_count(String(lit[0]), String(lit[2])), "%s%s (%s, dark Sun) is ready on the terrain through its %d work lights" % [lit[2], "" if String(lit[1]).is_empty() else " " + String(lit[1]), lit[0], _lamp_count(String(lit[0]), String(lit[2]))])
 	_check(_lamp_count("LOC-09") == 5 and _lamp_count("LOC-10") == 6, "the rover's five EVA-stop lamps light both rooms, Kai's hand light the shelf too")
 	for segment in ["B1", "B2"]:
 		var sunlit := Contract.terrain_lighting("LOC-09", "EX-CH04-S04", segment)
 		_check(sunlit.ready and sunlit.sun_state == "lit" and String(sunlit.reason).contains("Sun"), "LOC-09 %s is ready by its dated Sun (sunlit at 08:00 UTC)" % segment)
 	_check(not bool(Contract.terrain_lighting("LOC-10", "EX-CH04-S05").ready), "a dark scene the room's lights were not verified for is not ready (LOC-10 with the last bend's S05 row)")
 	_check(not bool(Contract.terrain_lighting("LOC-10", "EX-CH04-S04", "B3").ready), "a segment the room does not have is not ready")
-	_check(not bool(Contract.terrain_lighting("LOC-11", "EX-CH08-S03").ready), "LOC-11 is not ready: its placement stands on the terrain (M1-87) but its dark rows have no verified work lights (M4-14)")
+	_check(_lamp_count("LOC-11") == 0 and _lamp_count("LOC-11", "EX-CH08-S03") == 3 and _lamp_count("LOC-11", "EX-CH08-S04") == 5, "LOC-11's staged rover lights its driving lamps at the dark marker (S03) and its EVA-stop lamps on the pad (S04), none outside them (M4-14)")
+	_check(not bool(Contract.terrain_lighting("LOC-11", "EX-CH08-S02").ready), "LOC-11 in a scene without a relay_road_mid row is not ready")
 	_check(not bool(Contract.terrain_lighting("LOC-08", "EX-CH04-S02").ready), "LOC-08 is not ready: the garage keeps its own floors")
 	_check(not bool(Contract.terrain_lighting("LOC-01", "EX-CH01-S01").ready), "an interior has no terrain lighting")
 	var aurora := Contract.terrain_lighting("LOC-06", "EX-CH04-S09")
@@ -466,11 +484,15 @@ func _check_rig() -> void:
 	for room_id in _lit_rooms():
 		var spec := Contract.work_lights(room_id)
 		var aims: Dictionary = spec.rover.get("aim", {})
-		for case in [["B3" if room_id == "LOC-09" else "", true], ["", false]]:
+		for case in [["B3" if room_id == "LOC-09" else "", true, ""], ["", false, ""]] if spec.rover.has("state") else _rover_scenes(spec).map(func(scene): return ["", true, scene]) + _rover_scenes(spec).map(func(scene): return ["", false, scene]):
 			var room := _make_room(room_id, String(case[0]), bool(case[1]))
-			var tag := "%s%s %s" % [room_id, "" if String(case[0]).is_empty() else " " + String(case[0]), "terrain" if bool(case[1]) else "flat"]
-			var rover := room.visual_root.get_node_or_null(String(spec.rover.prop)) as Node3D
-			_check(rover != null and String(rover.get_meta(WorkLights.META, "")) == "eva_stop", tag + " the staged rover runs its EVA-stop state")
+			if not String(case[2]).is_empty():
+				room.set_scene_context(String(case[2]))
+			var state := WorkLights.rover_state(spec, String(case[2]))
+			var lamps: Array = rig.states[state]
+			var tag := "%s%s %s%s" % [room_id, "" if String(case[0]).is_empty() else " " + String(case[0]), "terrain" if bool(case[1]) else "flat", "" if String(case[2]).is_empty() else " " + String(case[2])]
+			var rover := WorkLights.rover_node(room.visual_root, spec)
+			_check(rover != null and String(rover.get_meta(WorkLights.META, "")) == state, "%s the staged rover runs its %s state" % [tag, state])
 			if rover == null:
 				room.free()
 				continue
@@ -479,8 +501,8 @@ func _check_rig() -> void:
 			await physics_frame
 			var space := room.get_world_3d().direct_space_state
 			var on: Array = rover.find_children("*", "Light3D", false, false).filter(func(l): return (l as Light3D).visible)
-			_check(on.map(func(l): return String(l.name)) == rig.states.eva_stop, "%s rover lights exactly its approved EVA-stop lamps %s" % [tag, str(rig.states.eva_stop)])
-			for name in rig.states.eva_stop:
+			_check(on.map(func(l): return String(l.name)) == lamps, "%s rover lights exactly its approved %s lamps %s" % [tag, state, str(lamps)])
+			for name in lamps:
 				var light := rover.get_node_or_null(String(name)) as Light3D
 				var model := approved.get_node(String(name)) as Light3D
 				if light == null:
@@ -543,7 +565,8 @@ func _check_rooms() -> void:
 		room.set_scene_context(scene_id)
 		flat.set_scene_context(scene_id)
 		var lamps := room.work_lights()
-		_check(lamps.size() == _lamp_count(room_id) and flat.work_lights().size() == _lamp_count(room_id), "%s switches on its %d work lights on the terrain (%d) and on the flat floor (%d)" % [tag, _lamp_count(room_id), lamps.size(), flat.work_lights().size()])
+		var count := _lamp_count(room_id, scene_id)
+		_check(lamps.size() == count and flat.work_lights().size() == count, "%s switches on its %d work lights on the terrain (%d) and on the flat floor (%d)" % [tag, count, lamps.size(), flat.work_lights().size()])
 		_check(flat.has_node("RoomLighting"), tag + " the flat floor keeps its room rig (the dated key light, out on a dark row)")
 		# On the terrain nothing in the room adds ambient light, a sky or a second sun: its only lights are the work lights.
 		_check(room.find_children("*", "WorldEnvironment", true, false).is_empty() and room.find_children("*", "DirectionalLight3D", true, false).is_empty() and not room.has_node("RoomLighting"), tag + " terrain room adds no environment, ambient fill or directional light")
@@ -571,9 +594,9 @@ func _check_rooms() -> void:
 		_check(not bool(flat.terrain_lighting().on_terrain) and int(flat.terrain_lighting().built) == lamps.size(), tag + " flat room reports its lamps but not the terrain")
 		# A lamp the scene does not show lights nothing: hiding its prop (as a staging "hide" would) takes its lamps out of
 		# work_lights() and the room out of ready under the dark Sun, until it is shown again.
-		var hidden_props: Array = [String(spec.rover.prop)] + spec.get("props", []).map(func(p): return "%s/%s" % [WorkLights.ROOT_NAME, p.id])
-		for path in hidden_props:
-			var node := room.visual_root.get_node(String(path)) as Node3D
+		var hidden_props: Array = [WorkLights.rover_node(room.visual_root, spec)] + spec.get("props", []).map(func(p): return room.visual_root.get_node("%s/%s" % [WorkLights.ROOT_NAME, p.id]))
+		for node: Node3D in hidden_props:
+			var path := String(node.name)
 			var own: Array = lamps.filter(func(light): return node.is_ancestor_of(light))
 			node.hide()
 			var hidden := room.terrain_lighting()
@@ -621,9 +644,13 @@ func _check_rooms() -> void:
 
 ## What a scene asks the player to see on a placement: [name, point, needed light, prop id or ""] for every focus target
 ## whose prop is shown in the scene (not the rover's own cargo mount, which the crew reach in their helmet lamps' light),
-## its approach (on the visible ground), every shown prop and each crew anchor.
+## its approach (on the visible ground), every shown prop and each crew anchor. A prop the room lists outside its work area
+## (LOC-11's road markers beyond the beams, M4-14) is reported with no floor, and a crew member who stays aboard the
+## rover in the scene has no anchor to light.
 func _scene_points(room: CampaignRoom, place: Dictionary) -> Array:
 	var points: Array = []
+	var outside: Array = Contract.work_lights(room.room_id).get("outside_work_area", {}).get("ids", [])
+	var aboard: Dictionary = room.stage().get("aboard", {})
 	var shown := func(asset: String) -> bool:
 		var node := room.visual_root.get_node_or_null(asset) as Node3D
 		return node != null and node.is_visible_in_tree()
@@ -650,8 +677,10 @@ func _scene_points(room: CampaignRoom, place: Dictionary) -> Array:
 		var seen := _seen_at(place, foot.x, foot.z)
 		var bottom := (model.global_transform * box.position).y
 		var low := maxf(bottom, seen) if not is_nan(seen) else bottom
-		points.append(["prop " + id, Vector3(foot.x, low + minf(box.size.y, 1.2) * 0.5, foot.z), MIN_TARGET_LIGHT, id])
+		points.append(["prop " + id, Vector3(foot.x, low + minf(box.size.y, 1.2) * 0.5, foot.z), 0.0 if outside.has(id) else MIN_TARGET_LIGHT, id])
 	for id in place.anchors:
+		if aboard.has(String(id).get_slice("_", 1)):
+			continue
 		points.append(["crew " + String(id), Presentation.vector(place.anchors[id]) + Vector3.UP * 1.0, MIN_GROUND_LIGHT, ""])
 	return points
 
@@ -829,7 +858,7 @@ func _capture_all() -> void:
 		var occluders := _occluders(room)
 		await physics_frame
 		# The wide view looks over the work area from behind the player, to the side away from the rover, with the crew.
-		var rover := room.visual_root.get_node(String(Contract.work_lights(room_id).rover.prop)) as Node3D
+		var rover := WorkLights.rover_node(room.visual_root, Contract.work_lights(room_id))
 		var side := signf((rover.position - start).cross(focus - start).y)
 		var wide_from := start + away * 11.0 + away.cross(Vector3.UP) * 5.0 * (side if side != 0.0 else 1.0) + Vector3.UP * 6.0
 		if bool(shot[3]):
@@ -1009,7 +1038,7 @@ func _approach_strip(room: CampaignRoom, place: Dictionary, player: PlayerContro
 		var suit_lit: bool = cargo_targets.has(String(id))
 		var spot := _ground_spot(place, target)
 		if suit_lit:
-			var rover := room.visual_root.get_node(String(Contract.work_lights(room.room_id).rover.prop)) as Node3D
+			var rover := WorkLights.rover_node(room.visual_root, Contract.work_lights(room.room_id))
 			var cargo := rover.global_transform * Vector3(0.0, 1.5, -2.0)
 			var hit := room.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(player.global_position + Vector3.UP * 1.4, cargo, 1 << 19))
 			spot = hit.position if not hit.is_empty() else cargo
@@ -1092,7 +1121,7 @@ func _in_sight(room: CampaignRoom, eye: Vector3, point: Vector3, mask: int = 1 <
 ## floods are turned onto, and, at the shelf, a close-up of Kai's hand light, in the dark scene.
 func _lamp_strip(room: CampaignRoom, camera: Camera3D, tag: String) -> void:
 	var spec := Contract.work_lights(room.room_id)
-	var rover := room.visual_root.get_node_or_null(String(spec.rover.prop)) as Node3D
+	var rover := WorkLights.rover_node(room.visual_root, spec)
 	var views: Array = []
 	if rover != null:
 		var aimed := Vector3.ZERO

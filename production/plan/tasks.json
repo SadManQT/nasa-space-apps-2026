@@ -6653,7 +6653,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Verified work lights for LOC-11 on the relay-road terrain (staged rover)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-87"
@@ -6665,7 +6665,7 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-08.",
-   "evidence": "",
+   "evidence": "LOC-11 EX-CH08-S03/S04 lit by the staged rover (driving / eva_stop, floods on repeater_chain) via terrain_work_lights.json; UNVERIFIED_DARK empty; exterior_kit fixtures drape as decals on the terrain; test_terrain_work_lights PASS 1044/0, test_exterior_terrain PASS 950/0 (capture), run_tests 74/74; production/qa/evidence/M1-82_LOC11_CH08S03_{wide,ground}.png",
    "updated": "2026-11-09",
    "prompt": "Found by M1-87. LOC-11 now stands on the 10 m relay_road_mid patch (exterior_terrain.json omit_staging_floor true), and its EX-CH08-S03/S04 rows are dark (Sun -0.1 deg behind a 4.9-5.1 deg horizon), so RoomContract.terrain_lighting('LOC-11', S03/S04).ready is false: terrain_work_lights.json has no LOC-11 entry, and terrain_work_lights.gd only lights a rover that is a base-layout prop (visual_root/<prop>, VH_Rover.glb in layout.props), while LOC-11's rover is staged per scene (LOC-11.json staging: S03 'driving' lights at (-3,0,3), S04 'eva_stop' at (0,0,1), under ChapterStaging) with the road's guide lights as staged local lights. Do: let terrain_work_lights.gd (and RoomContract.work_lights/terrain_lighting) light and verify a staged per-scene rover and staged local lights, author LOC-11's entry (floods on repeater_chain), run test_terrain_work_lights.gd -- --write and M1-91_capture.sh, then remove the LOC-11 entry from UNVERIFIED_DARK in game/tools/test_terrain_work_lights.gd so the 'is lit' invariant covers it again.",
    "reserved_for": "sadman",
