@@ -6567,7 +6567,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Record reviewed M1-72 science access and pending batch gate",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -6575,7 +6575,7 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.",
-   "evidence": "",
+   "evidence": "PRODUCTION_HANDBOOK.md §10 9 Nov line: M1-72 reviewed science Watch/Journal source (focused Science206/Watch65/Journal281/hints124, native79/0 at 9de251d; post-pull Science206+Watch65 at 7ff8f61) recorded; integrated full + all8/32-card player_text walk still PENDING for the batch gate; M1-68 unresolved, M1-100 uncertified. Record only, no tests run.",
    "updated": "2026-11-09",
    "prompt": "Record a dated handbook section10 status line for Ramim M1-72 reviewed science Watch/Journal source. Source adds real current-mission data card route and science clip Watch matching, using the existing16:9 hint player without spending hint/HowTo progress, reduced-motion sampled still/captions, reached-mission Journal Science grouped/deduplicated by chapter. Source review findings fixed; final focused206 Science +65 Watch +281 Journal +124 hints, native79/0 clean at source9de251d before the later team audio/world pull. Published task source blobs are identical after rebase; current post-pull runner Science206/0 +Watch65/0 at7ff8f61/game dc553550 passes. Evidence production/qa/evidence/M1-72_README.md and final PNGs. This is reviewed source delivery, NOT task/full-game completion: current integrated full and expanded all8/32-card player_text are PENDING for the batch, watchdog1500 only (no runtime/performance threshold changed); initial900s timeout124 is retained. Existing M1-68 acceptance remains unresolved, M1-100 owner fix has landed but not yet certified by this Windows full. Do not claim all suites pass or full Journal M3-98 implemented. Update only owned handbook status and keep local import/editor exclusions out of commits.",
    "reserved_for": "sadman",
