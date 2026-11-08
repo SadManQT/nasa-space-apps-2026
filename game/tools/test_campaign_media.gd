@@ -114,7 +114,8 @@ func _test_director_fixtures() -> void:
 	var base_db := director.runtime.mix("music_db", -8.0)
 	_check(music != null and music.playing and absf(music.volume_db - base_db) < 0.5, "looping music keeps playing past its 1 s end at its base level")
 	director.present_line(line)
-	await _frames(3)
+	var ready := await _wait_for_voice_ready(director, line.id, 0.5)
+	_check(ready, "voice reports bounded readiness for the line whose caption is shown")
 	_check(director.voice.playing and director.voice.stream.resource_path == VOICE_FIXTURE and director.voice_line_id == line.id, "voice plays for the line whose caption is shown")
 	await _seconds(0.3)
 	var duck := director.runtime.mix("music_duck_db", 0.0)
@@ -239,6 +240,14 @@ func _seconds(value: float) -> void:
 	var until := Time.get_ticks_msec() + int(value * 1000.0)
 	while Time.get_ticks_msec() < until:
 		await process_frame
+
+func _wait_for_voice_ready(director: CampaignAudioDirector, line_id: String, timeout_s: float) -> bool:
+	var until := Time.get_ticks_msec() + int(timeout_s * 1000.0)
+	while Time.get_ticks_msec() < until:
+		if director.voice_readiness == "ready" and director.voice_line_id == line_id:
+			return true
+		await process_frame
+	return director.voice_readiness == "ready" and director.voice_line_id == line_id
 
 func _check(condition: bool, message: String) -> void:
 	checks += 1

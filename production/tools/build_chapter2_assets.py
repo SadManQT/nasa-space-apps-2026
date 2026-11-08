@@ -90,16 +90,31 @@ def load_kit_images():
     return images
 
 
+# The glove-port window's glazing (M3-104): the kit glass at roughness 0.05 mirrored the room's practical lights as two
+# blown-out discs over Alo from the station; 0.20 keeps a soft reflection that still reads as a pane. Same tint and alpha.
+PRESSURE_GLASS_ROUGHNESS = 0.20
+
+
 def airlock_materials(images):
-    """The kit's material table per LOD plus the airlock's own plain slots (role tab, three state lamps)."""
+    """The kit's material table per LOD plus the airlock's own plain slots (role tab, three state lamps), and the
+    glove-port glazing per LOD as a separate (material, tile) pair: piece_table swaps it into that piece's "Glass" slot,
+    so the other pieces keep the kit glass and their slot order."""
     mats = hk.make_materials(images)
+    glazing = {}
     for lod, table in mats.items():
         suffix = "" if lod == 0 else "_LOD1"
         table["RoleTab"] = (hk.pbr_material("RoleTab" + suffix, None, 0.45, (0.52, 0.54, 0.57)), 1.0)
         table["LampSealed"] = (hk.pbr_material("LampSealed" + suffix, None, 0.25, (0.55, 0.06, 0.04), emission=((1.0, 0.10, 0.06), 1.5)), 1.0)
         table["LampEqualising"] = (hk.pbr_material("LampEqualising" + suffix, None, 0.25, (0.60, 0.38, 0.05), emission=((1.0, 0.62, 0.10), 0.8)), 1.0)
         table["LampSafe"] = (hk.pbr_material("LampSafe" + suffix, None, 0.25, (0.08, 0.45, 0.14), emission=((0.20, 1.0, 0.35), 0.6)), 1.0)
-    return mats
+        glazing[lod] = (hk.pbr_material("M_Airlock_PressureGlass" + suffix, None, PRESSURE_GLASS_ROUGHNESS, (0.75, 0.85, 0.95), alpha=0.22), 1.0)
+    return mats, glazing
+
+
+def piece_table(spec, lod, mats, glazing):
+    """The material table one piece is built with: the airlock table, with the pressure glazing in "Glass" for a piece
+    whose spec asks for it (the dict keeps its key order, so the material slot indices stay the same)."""
+    return dict(mats[lod], Glass=glazing[lod]) if spec.get("pressure_glass") else mats[lod]
 
 
 def surface_family(rng, name, size, fibre, rough, tile, directory):
@@ -202,16 +217,64 @@ def piece_bench(b, lod):
 
 
 def window_frame(b, w, h, cy, lip, lod):
-    """The kit window's navy pressure frame, pane and bolts (piece_wall_window), reused by the glove-port module."""
+    """The kit window's navy pressure frame, pane and bolts (piece_wall_window), reused by the glove-port module.
+    Returns the frame's inner and outer outlines, its corner arcs' segment count and the z of its back face."""
     n_arc = 6 if lod == 0 else 2
+    z0, depth = -0.05, 0.12
     inner, outer = hk.rounded_rect(w, h, 0.10, n_arc), hk.rounded_rect(w + 2 * lip, h + 2 * lip, 0.18, n_arc)
-    b.ring_prism([(x, cy + y, -0.05) for x, y in inner], [(x, cy + y, -0.05) for x, y in outer], (0, 0, 0.12), "PaintNavy", (0, 0, -1), centre=(0, cy, -0.05), smooth_inner=True)
+    b.ring_prism([(x, cy + y, z0) for x, y in inner], [(x, cy + y, z0) for x, y in outer], (0, 0, depth), "PaintNavy", (0, 0, -1), centre=(0, cy, z0), smooth_inner=True)
     pane = [(x * 0.98, cy + y * 0.98, 0.03) for x, y in inner]
     base = b.add_verts(pane)
     b.add_face([base + i for i in range(len(pane))], [(x, y) for x, y, _ in pane], "Glass", False, outward=(0, 0, -1))
     if lod == 0:
         for x, y in hk.rounded_rect(w + lip, h + lip, 0.14, 3):
-            b.cylinder((x, cy + y, -0.05), (x, cy + y, -0.056), 0.009, "Steel", segs=8)
+            b.cylinder((x, cy + y, z0), (x, cy + y, z0 - 0.006), 0.009, "Steel", segs=8)
+    return inner, outer, n_arc, z0 + depth
+
+
+def open_back_wall_frame(b):
+    """hk.wall_frame(b, 1.0) for a module whose far face is built on its own (far_face_with_opening): the same rails,
+    skirting and body sides, with the body box open at the back as well as at the front."""
+    b.box((0, WALL_H / 2, WALL_D / 2 + 0.02), (1.0, WALL_H, WALL_D - 0.04), "PaintGrey", skip=((0, 0, -1), (0, 0, 1)))
+    b.box((-0.5 + RAIL / 2, WALL_H / 2, 0.025), (RAIL, WALL_H, 0.05), "PaintGrey")
+    b.box((0.5 - RAIL / 2, WALL_H / 2, 0.025), (RAIL, WALL_H, 0.05), "PaintGrey")
+    b.box((0, WALL_H - RAIL / 2, 0.025), (1.0 - 2 * RAIL, RAIL, 0.05), "PaintGrey")
+    b.box((0, 0.15, 0.03), (1.0 - 2 * RAIL, 0.30, 0.06), "PaintNavy")
+    b.box((0, 0.315, 0.02), (1.0 - 2 * RAIL, 0.03, 0.04), "PaintGrey")
+
+
+def splayed_reveal(b, inner, outer, cy, z0, z1, key):
+    """The window's reveal from the back of the room-side frame (the inner outline at z0) out to the far face (the outer
+    outline at z1): splayed, as viewports are, so the far side widens the view instead of narrowing it. The two outlines
+    are matching rounded rectangles round (0, cy); the faces look into the opening and towards the far side."""
+    fi, fo = b.add_verts([(x, cy + y, z0) for x, y in inner]), b.add_verts([(x, cy + y, z1) for x, y in outer])
+    n, t = len(inner), b.tile(key)
+    for i in range(n):
+        j = (i + 1) % n
+        q = [b.verts[fi + i], b.verts[fi + j], b.verts[fo + j], b.verts[fo + i]]
+        mid = sum(q, Vector()) / 4
+        b.add_face([fi + i, fi + j, fo + j, fo + i], hk.planar_uv(q, t), key, True, outward=Vector((-mid.x, cy - mid.y, 0.3)))
+
+
+def far_face_with_opening(b, w, h, r, n_arc, cy, key):
+    """The module's far face (z = WALL_D, facing +Z) with the window opening cut through it: the w x h rounded rectangle
+    (corner radius r) round (0, cy) that the frame's outer outline and the splayed reveal end on, so the face is closed
+    everywhere but the window. Quads round the opening's box share every vertex on its edges; a fan fills each corner."""
+    outline = hk.rounded_rect(w, h, r, n_arc)
+    hx, hy, z = w / 2, h / 2, WALL_D
+    y0, y1 = cy - hy, cy + hy
+    xs = [-0.5, -hx, -hx + r, hx - r, hx, 0.5]
+    for ya, yb in ((0.0, y0), (y1, WALL_H)):
+        for xa, xb in zip(xs, xs[1:]):
+            b.quad([(xa, ya, z), (xb, ya, z), (xb, yb, z), (xa, yb, z)], key, outward=(0, 0, 1))
+    ys = [y0, y0 + r, y1 - r, y1]
+    for xa, xb in ((-0.5, -hx), (hx, 0.5)):
+        for ya, yb in zip(ys, ys[1:]):
+            b.quad([(xa, ya, z), (xb, ya, z), (xb, yb, z), (xa, yb, z)], key, outward=(0, 0, 1))
+    for k, (sx, sy) in enumerate(((1, -1), (1, 1), (-1, 1), (-1, -1))):  # rounded_rect's corners, n_arc + 1 points each
+        arc = outline[k * (n_arc + 1):(k + 1) * (n_arc + 1)]
+        for (ax, ay), (bx, by) in zip(arc, arc[1:]):
+            b.quad([(sx * hx, cy + sy * hy, z), (ax, cy + ay, z), (bx, cy + by, z)], key, outward=(0, 0, 1))
 
 
 PORT_Y, PORT_X, PORT_R = 1.19, 0.22, 0.135
@@ -219,8 +282,10 @@ PORT_Y, PORT_X, PORT_R = 1.19, 0.22, 0.135
 
 def piece_glove_port(b, lod):
     """Wall module with the pressure window at 1.75 m and a pair of glove ports at 1.19 m into the sealed plant
-    chamber on its far side; the sleeves hang on the far side so they read through the window."""
-    hk.wall_frame(b, 1.0)
+    chamber on its far side; the sleeves hang on the far side so they read through the window. The window opens
+    through the module (M3-104): its reveal splays from the room-side frame to an opening in the far face, which is
+    closed everywhere else, so the pane shows the chamber the room builds behind the module."""
+    open_back_wall_frame(b)
     w, h, cy, lip = 0.56, 0.42, 1.75, 0.08
     band_y0, band_y1 = 0.92, cy - h / 2 - lip
     segs = 24 if lod == 0 else 10
@@ -230,7 +295,9 @@ def piece_glove_port(b, lod):
     side = (0.92 - w - 2 * lip) / 2
     for sx in (-1, 1):
         b.box((sx * (w / 2 + lip + side / 2), cy, 0.03), (side, h + 2 * lip, 0.02), "PaintGrey")
-    window_frame(b, w, h, cy, lip, lod)
+    inner, outer, n_arc, frame_back = window_frame(b, w, h, cy, lip, lod)
+    splayed_reveal(b, inner, outer, cy, frame_back, WALL_D, "PaintNavy")
+    far_face_with_opening(b, w + 2 * lip, h + 2 * lip, 0.18, n_arc, cy, "PaintGrey")
     for sx in (-1, 1):
         cx = sx * PORT_X
         circle = lambda rad, z: [(cx + rad * math.cos(a), PORT_Y + rad * math.sin(a), z) for a in (2 * math.pi * i / segs for i in range(segs))]
@@ -490,8 +557,8 @@ ENV_PIECES = [
          notes="0.6 x 0.55 x 2.2 m open-front locker: hanger rail 1.78 m, helmet shelf 1.86 m, boot tray, backpack brackets, retaining bar with orange latch; blank name plate; material slot RoleTab (0.04 x 0.40 m strip) takes the cadet's role colour; stands against a wall, open front faces -Z"),
     dict(id="EN_Airlock_Bench", display="Suit-up bench", kind="standing", flag="--longest", size=BENCH_L, footprint=(BENCH_L, BENCH_D), mount_y=0.0, build=piece_bench,
          notes="1.6 x 0.45 x 0.45 m brushed steel seat on navy pedestals, cross rail, orange boot rail, tie-down rings; seat at 0.45 m"),
-    dict(id="EN_Airlock_GlovePort", display="Glove-port wall module", kind="wall", flag="--height", size=WALL_H, footprint=(1.0, 0.15), mount_y=0.0, build=piece_glove_port,
-         notes="1 m wall: pressure window 0.56 x 0.42 m at 1.75 m, two glove ports (0.27 m flanges at x +-0.22, 1.19 m) with sleeves on the far side; the sealed plant chamber lies behind it"),
+    dict(id="EN_Airlock_GlovePort", display="Glove-port wall module", kind="wall", flag="--height", size=WALL_H, footprint=(1.0, 0.15), mount_y=0.0, build=piece_glove_port, pressure_glass=True,
+         notes="1 m wall: pressure window 0.56 x 0.42 m at 1.75 m (M_Airlock_PressureGlass), open through the module: the reveal splays to a 0.72 x 0.58 m opening in the far face, which is closed elsewhere; two glove ports (0.27 m flanges at x +-0.22, 1.19 m) with sleeves on the far side; the sealed plant chamber the room builds behind it shows through the window"),
     dict(id="EN_Airlock_PassThrough", display="Sealed carrier pass-through", kind="wall", flag="--height", size=WALL_H, footprint=(1.0, 0.57), mount_y=0.0, build=piece_pass_through,
          notes="1 m two-sided bulkhead: 0.50 x 0.44 m chamber at 1.00-1.44 m through the wall, standing 0.42 m into the room; LidA (room side, hinge on the left) and LidB (far side, hinge on the right) open +Y 100 deg; gauge, orange equalisation lever, LampSafe lamp",
          children=[("LidA", (-(PT_W / 2 + 0.03), (PT_Y0 + PT_H / 2), -PT_DEPTH - 0.02), pass_through_lid(-1)),
@@ -644,7 +711,7 @@ def render_pieces(built, camera):
             views = {"": (0.7, 1.0, 0.55)}  # Blender frame after the bake: the finished face (Godot -Z) points to +Y
             if spec["kind"] == "prop":
                 views = {"": (0.7, 1.0, 0.55), "_front": (0, 1, 0.25), "_side": (1, 0, 0.25), "_back": (0, -1, 0.25), "_top": (0.0001, 0.0001, 1)}
-            elif spec["id"] == "EN_Airlock_PassThrough":
+            elif spec["id"] in ("EN_Airlock_PassThrough", "EN_Airlock_GlovePort"):  # pieces with a finished far face
                 views["_far"] = (-0.7, -1.0, 0.55)
             for suffix, direction in views.items():
                 hk.render_piece(camera, objs, STAGE / "preview" / f"{spec['id']}_LOD{lod}{suffix}.png", direction, pad=1.15 if spec["kind"] == "prop" else 1.25)
@@ -816,7 +883,7 @@ def main():
         for old in OUT_ENV.glob("*.glb"):
             old.unlink()
     global ENV_MATS
-    env_mats = airlock_materials(load_kit_images())
+    env_mats, glazing = airlock_materials(load_kit_images())
     ENV_MATS = env_mats
     prop_mats = prop_materials()
     rows, catalogue, built = [], [], {}
@@ -824,7 +891,7 @@ def main():
         entry = dict(id=spec["id"], display=spec["display"], notes=spec["notes"], kind=spec["kind"], footprint_m=list(spec["footprint"]),
                      mount_y=spec["mount_y"], lods=[], triangles=[], lod_distance_m=LOD_DISTANCE_M, collision=True)
         for lod in (0, 1):
-            root, objs = build_piece(spec, lod, env_mats[lod])
+            root, objs = build_piece(spec, lod, piece_table(spec, lod, env_mats, glazing))
             bpy.context.view_layer.update()
             lo, hi = hk.bounds(objs)
             tris = hk.triangles(objs)

@@ -17,12 +17,12 @@ plain `StandardMaterial3D`, so the toon pass can restyle them. No text on any su
 |---|---|---|
 | `EN_Airlock_SuitLocker` | 0.6 x 0.55, 2.2 tall | open-front EVA suit locker: hanger rail 1.78 m, helmet shelf 1.86 m, boot tray, backpack brackets, retaining bar with an orange latch, blank name plate; material slot **`RoleTab`** takes the cadet's role colour (`en_airlock.gd` tints it from `cadets` in the catalogue) |
 | `EN_Airlock_Bench` | 1.6 x 0.45, 0.45 tall | brushed steel seat on navy pedestals, cross rail, orange boot rail, tie-down rings; the seat repeats the kit's steel four times as often (`SEAT_GRAIN`), so the brushing reads at a real scale up close |
-| `EN_Airlock_GlovePort` | 1.0 x 0.15 wall (sleeves reach 0.79 behind) | pressure window 0.56 x 0.42 m at 1.75 m and a pair of glove ports (0.27 m flanges at x +-0.22, 1.19 m); the sleeves hang on the far side, inside the sealed plant chamber |
+| `EN_Airlock_GlovePort` | 1.0 x 0.15 wall (sleeves reach 0.79 behind) | pressure window 0.56 x 0.42 m at 1.75 m and a pair of glove ports (0.27 m flanges at x +-0.22, 1.19 m); the sleeves hang on the far side, inside the sealed plant chamber. The window opens through the module (M3-104): behind the room-side frame the navy reveal splays to a 0.72 x 0.58 m opening in the far face, which is closed everywhere else, so the pane shows whatever the room builds behind it (LOC-05: Alo's chamber). Its pane is **`M_Airlock_PressureGlass`** (the kit glass at roughness 0.20, so the room's practicals reflect as soft glows, not mirrored discs) |
 | `EN_Airlock_PassThrough` | 1.0 x 0.15 wall, chamber 0.42 into the room | two-sided bulkhead with the sealed carrier pass-through: 0.50 x 0.44 m white-lined chamber at 1.00–1.44 m through the wall; children **`LidA`** (room side, hinge on the left) and **`LidB`** (far side, hinge on the right) open +Y 100°; `carrier_socket` inside; `LampSafe` lamp lit while both lids are shut |
 | `EN_Airlock_InterlockPanel` | 1.0 x 0.15 wall | recessed console: **`Screen`** slot 0.5 x 0.3 m at 1.70 m for the live words, two pressure gauges, three lamps (**`LampSealed`**, **`LampEqualising`**, **`LampSafe`** materials), orange equalisation wheel, pump grille; child **`CycleLever`** (pull = -70° about X) |
 
 Each piece has `<id>_LOD0.glb` (game LOD, Godot collision nodes) and `<id>_LOD1.glb` (Compatibility LOD, no
-collision); all LOD0 pieces are under 3.5k triangles (art bible: 2–8k for a modular piece).
+collision); all LOD0 pieces are under 3.6k triangles (art bible: 2–8k for a modular piece).
 
 ## The vestibule (`airlock.json` → `vestibule`)
 

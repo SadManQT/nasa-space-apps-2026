@@ -5874,7 +5874,7 @@
    "priority": "P2",
    "tool": "claude",
    "title": "Open the back of EN_Airlock_GlovePort so its window sees Alo's chamber",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/antigravity",
    "deps": [
     "M3-2R"
@@ -5885,7 +5885,7 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07.",
-   "evidence": "",
+   "evidence": "production/tools/build_chapter2_assets.py, game/assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD0.glb, game/assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD1.glb, game/assets/environment/EN_Airlock/README.md, game/scripts/world/habitat_room_builder.gd, game/tools/test_en_airlock.gd (153/153 PASS), game/tools/test_chapter2_rooms.gd (3510/3510 PASS), game/tools/capture_m3_104.gd (11/11 PASS), verify_gate.py (303 assets, 0 failing), production/qa/evidence/M3-104_*.png; run_tests.sh 71/71 suites passed",
    "updated": "2026-11-08",
    "prompt": "Found by M3-2R (7 Nov night shift; filed as M3-102 on the parked branch, but main's M3-102 is the anti-aliasing task, so it is refiled here): EN_Airlock_GlovePort reuses the kit window frame and closes its back face with one 1.0 x 2.6 m plate (two triangles at local z 0.15, material M_Kit_PaintGrey, drawn double-sided), so the pressure window shows grey paint instead of the sealed plant chamber the asset notes promise. LOC-05 drops that plate from its placed copy at runtime (HabitatRoomBuilder.open_window_back in game/scripts/world/habitat_room_builder.gd, called from build_airlock for the \"glove_ports\" role), and game/tools/test_chapter2_rooms.gd checks that a 1.6 m eye at the glove-port station sees Alo's flowers through glass only. Fix it at the source: in production/tools/build_chapter2_assets.py leave the back of the GlovePort module open (or cut the window opening through the plate), rebuild both LODs (byte-check that the other pieces stay identical), re-run the M3-2A gate (production/tools/verify_gate.py) and its capture, then remove open_window_back and its call so the room uses the GLB as built. This changes an approved asset, so show Sadman the before/after M3-2A_godot_* and M3-2R_S04_alo_glove_ports screenshots. Optional while there: the two bright ovals in the pressure glass are ceiling lights mirrored at roughness 0.05; a slightly rougher glass would soften them. Acceptance: game/tools/run_tests.sh all suites pass; test_chapter2_rooms.gd still passes its Alo-through-glass check without the runtime opening.",
    "reserved_for": "sadman",
@@ -5937,7 +5937,7 @@
    "priority": "P0",
    "tool": "any",
    "title": "Authored work lighting for terrain-backed cold-trap rooms",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/antigravity",
    "deps": [],
    "paths": [
@@ -5946,7 +5946,7 @@
    ],
    "refs": [],
    "note": "Filed by atik/codex on 2026-11-07.",
-   "evidence": "",
+   "evidence": "game/resources/campaign/rooms/terrain_work_lights.json, game/resources/campaign/rooms/README.md, game/scripts/world/terrain_work_lights.gd, game/scripts/world/room_contract.gd, game/scripts/world/campaign_room.gd, game/tools/terrain_visual_ground.gd, game/tools/test_terrain_work_lights.gd (884/884 headless, 1070/1070 forward_plus, 1070/1070 gl_compatibility PASS), production/qa/evidence/M1-91_capture_output.txt, production/qa/evidence/M1-91_tests.txt, production/qa/evidence/M1-91_{fplus,compat}_*.png; run_tests.sh 71/71 suites passed",
    "updated": "2026-11-08",
    "prompt": "M1-36 adoption check after M1-82/M1-88: both LOC-09/CH04S04 and LOC-10/CH04S06 have real dated Sun rows marked dark (Sun ~1.6deg but below local terrain). CampaignRoom terrain_ground explicitly removes RoomLighting, so adopting ready terrain makes the staged work area and physical puzzle targets black. M1-82 capture script compensates with an optional diagnostic OmniLight3D (shot[2], work.light_energy=3, range40); that light is not part of the room contract/game. Please supply owner-approved visible practical work-light/rover/hand-light placement and actual light sources in these staged vacuum rooms, with terrain-ready positions and shadows, linked to real approved props. Publish a room/staging hook/ready flag Atik can trust before switching production to the terrain provider. Preserve hard Sun/black sky/no ambient fill and all doors/targets/collision. Verify target readability and approach walking in the real dated scene without the capture-only Omni, in Forward+ and Compatibility, with screenshots. Do not edit Atik terrain/campaign. Atik has a tested composition helper ready but will not replace playable staging with an unlit work area. Relay-road geometry remains separate M1-87.",
    "reserved_for": "sadman",
@@ -6399,7 +6399,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate Windows campaign-media voice readiness failure",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/copilot",
    "deps": [],
    "paths": [
@@ -6408,7 +6408,7 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.\n8 Nov follow-up: the next full run (M1-70 candidate defddc9, before final team pull) passed campaign_media 113/0 without an audio/test/voice-fixture change. Full raw log production/qa/evidence/M1-70_campaign_media.txt. The earlier M1-62 source 3cf82b1 failure 113/1 remains valid evidence. Treat as intermittent readiness, not a confirmed cause or fix; status unchanged.",
-   "evidence": "",
+   "evidence": "Cause proven: delayed threaded load left playing=false/path=null while line_id was correct after 3 frames. Added bounded voice_readiness state and 500 ms fixture wait while retaining strict playback/path/line assertion. Evidence: production/qa/evidence/M1-100.md, M1-100_slow_load_before_full.txt, M1-100_slow_load_after_full.txt, M1-100_campaign_media.txt, M1-100_full.txt; focused 114/0 and full 71/71 suites.",
    "updated": "2026-11-08",
    "prompt": "Final Windows full gate for M1-62 on source 3cf82b1 / game tree f5686325d9e28a2924ce6997ae22043a65020bf3 failed campaign_media (113 checks, 1 failure): voice plays for the line whose caption is shown (test_campaign_media.gd:118). Preserve full raw log at production/qa/evidence/M1-62_campaign_media.txt and full summary. The isolated audio fixture runs before CampaignScene/HUD instantiation: present_line then exactly 3 process frames, asserting playing/path/lineid. AudioDirector._start_voice awaits threaded _stream. Readiness after 3 frames is a hypothesis, not established cause; collect actual playing/path/id/load state and identify which predicate fails. Test/audio_runtime/audio_director/voice_fixture gitblobs are identical at 15ff10a, f105f68 and 3cf82b1; the same 113 checks passed in the prior 15ff Windows full. Do not blame new goal text or claim a regression cause without evidence. Investigate and fix in owned audio/test scope with bounded observable readiness if warranted, preserving real voice/caption identity, duplicate/heard behavior and ducking. Never skip or soften the assertion, force fake playback or change gameplay. Run focused runner retaining complete logs, then full; disclose independent M1-68 performance failures if remaining. Publish exact handoff for Ramim acceptance gate.",
    "reserved_for": "sadman",

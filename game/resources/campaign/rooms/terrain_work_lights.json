@@ -1,0 +1,110 @@
+{
+ "about": "M1-91: the work lights of the dark Chapter 4 exteriors, built by game/scripts/world/terrain_work_lights.gd through CampaignRoom on the terrain provider's ground and on the flat fallback floor alike. Below the cold-trap rim the dated Sun is under the terrain horizon (rows EX-CH04-S04 at B3, S05 and S06..S08 are 'dark': the Sun 1.6 deg up behind a 5.4-9.9 deg terrain horizon) and nothing adds ambient fill, so the work area is lit only by the field team's lamps: the staged VH_Rover (LOC-09.json, LOC-10.json; M3-106) in its approved EVA-stop state (rover_lights.json, M3-8A decision 7: headlights, roof work floods, cabin glow) with its floods turned onto the room's work targets, Kai's hand light at the vault (STORY_FULL EX-CH04-S06 'As Kai turns the light back towards the survey marker', S07 'Kai moves the light to make the actual labels readable', S08 'within the lit work area'), and the suited crew's helmet lamps (CampaignCrew 'eva'; M3-4A decision 10: 'the rover's headlights and the helmet lamps'). Authored per room: scenes (placement -> the dark-Sun scenes the lights are verified for; '' is the room's own placement, else a segment), rover (the staged prop, its rig state, floods aimed at focus target ids), props (added lamp props: id, asset_id, path, xz, yaw_deg, lamps). Derived by game/tools/test_terrain_work_lights.gd -- --write and checked on every run: on_ground (placement -> added prop poses on the visible terrain). RoomContract.work_lights(room_id) reads it; RoomContract.terrain_lighting(room_id, scene_id, segment) is the ready flag.",
+ "frame": "Room-local, as exterior_terrain.json and the room layouts (a segment room's frame turned by its yaw_deg). An added prop's lamp 'at' and 'axis' are in the prop's own frame (PR_HandLight: +X along its barrel to the lens). An 'aim' names a focus target of the room, so it follows the target onto its published terrain spot.",
+ "rules": "An added prop rests on the visible ground on the terrain (the finest tile mesh TerrainStream shows, sampled by game/tools/terrain_visual_ground.gd; it smooths the 10 m heightfield by up to ~0.3 m here), tilted to the least-squares plane under its base and lifted until its lowest contact touches: on_ground position, rotation_degrees, float_m (the largest gap left under a base corner), tilt_deg (at most 15 deg), visible_above_field_m; on the flat floor it lies at its xz and yaw. It stays clear of every walking lane by a walker's half-width and inside the placement's rock exclusions. Lamps cast hard shadows; the room adds no WorldEnvironment, ambient, sky or directional light.",
+ "compatibility_energy_scale": {
+  "Headlight_L": 0.008,
+  "Headlight_R": 0.008,
+  "RoofFlood_L": 0.12,
+  "RoofFlood_R": 0.70,
+  "CabinGlow": 0.25,
+  "HandLightBeam": 0.10
+ },
+ "why_compatibility": "Compatibility energy fractions retained from the parked M1-91 lighting study to limit clipping where shadowed lamp passes overlap. Forward+ and Mobile keep the approved rig energies; Compatibility keeps the same sockets, aims, cones and hard shadows with the authored per-lamp fractions. The current checkout must be measured by M1-91_capture.sh in both renderers: every near target must read, lamps must add measurable light, and target windows and ground views must stay below the clipping limits. Earlier branch screenshots are not verification of this port.",
+ "rover_rig": "res://assets/vehicles/VH_Rover/rover_lights.json",
+ "rooms": {
+  "LOC-09": {
+   "why": "The cold-trap road (M3-106): the B3 beacon corner (EX-CH04-S04, 08:00 UTC, the Sun 1.6 deg up behind a 5.4 deg horizon) and the last bend's sample station (S05, 09:00 UTC, behind 9.9 deg) are dark; B1 and B2 are sunlit. The rover stands 8 m back on the road with its nose down it, so its headlights light the road and the sample station ('Headlights brighten a patch of ground', S05); its left roof flood is turned onto the beacon mast left of the road (S04) and the right one onto the dry reference plate and scanner (S05). Rafi and Kai are suited with their helmet lamps.",
+   "scenes": {
+    "": [
+     "EX-CH04-S05"
+    ],
+    "B3": [
+     "EX-CH04-S04"
+    ]
+   },
+   "rover": {
+    "prop": "VH_Rover",
+    "state": "eva_stop",
+    "aim": {
+     "RoofFlood_L": "ridge_beacon_pad",
+     "RoofFlood_R": "ice_scanner"
+    }
+   },
+   "props": []
+  },
+  "LOC-10": {
+   "why": "The vault shelf is the floor of a permanently shadowed basin (EX-CH04-S06..S08: the Sun 1.6 deg up behind a 9.9 deg terrain horizon); M3-4A decision 10 (approved 7 Nov 2026) lights it with 'the rover's headlights and the helmet lamps'. The rover stands where coldtrap.json staging.shelf.rover and LOC-10.json put it, 15 m back with its nose to the shelf; its left roof flood is turned onto the vault and the right one onto the sealed sample point. Kai's hand light lies on the regolith between Kai's place and the vault, aimed between the case and the 2034 marker (S06 'As Kai turns the light back towards the survey marker', S07 'Kai moves the light to make the actual labels readable', S08 'within the lit work area').",
+   "scenes": {
+    "": [
+     "EX-CH04-S06",
+     "EX-CH04-S07",
+     "EX-CH04-S08"
+    ]
+   },
+   "rover": {
+    "prop": "VH_Rover",
+    "state": "eva_stop",
+    "aim": {
+     "RoofFlood_L": "vault_case",
+     "RoofFlood_R": "vault_sample"
+    }
+   },
+   "props": [
+    {
+     "id": "KaiHandLight",
+     "asset_id": "PR_HandLight",
+     "path": "res://assets/props/PR_HandLight/PR_HandLight.glb",
+     "xz": [
+      -1.0,
+      -1.2
+     ],
+     "yaw_deg": -12.0,
+     "lamps": [
+      {
+       "id": "HandLightBeam",
+       "at": [
+        0.125,
+        0.048,
+        0.0
+       ],
+       "axis": [
+        1.0,
+        0.0,
+        0.0
+       ],
+       "lens": {
+        "radius": 0.042
+       },
+       "color": "#FFF0E6",
+       "energy": 0.8,
+       "range_m": 14.0,
+       "angle_deg": 25.0,
+       "edge": 0.7,
+       "decay": 2.0
+      }
+     ]
+    }
+   ],
+   "on_ground": {
+    "": {
+     "KaiHandLight": {
+      "position": [
+       -1.0,
+       0.123,
+       -1.2
+      ],
+      "rotation_degrees": [
+       5.816,
+       -12.058,
+       -1.137
+      ],
+      "float_m": 0.0,
+      "tilt_deg": 5.93,
+      "visible_above_field_m": 0.097
+     }
+    }
+   }
+  }
+ }
+}

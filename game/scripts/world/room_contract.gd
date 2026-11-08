@@ -487,6 +487,10 @@ static func validate(room_id: String) -> Dictionary:
 # M1-82: each playable exterior's placement on the real LOLA terrain (rooms/exterior_terrain.json) for the terrain
 # provider (Atik's TerrainStream, M1-36), and the dated Earth in its sky. The flat greybox rooms stay as they are.
 
+## M1-91: approved practical lamps for the dark cold-trap rooms.
+const WORK_LIGHTS_PATH := "res://resources/campaign/rooms/terrain_work_lights.json"
+const TerrainWorkLights = preload("res://scripts/world/terrain_work_lights.gd")
+static var _work_lights: Dictionary = {}
 const TERRAIN_PATH := "res://resources/campaign/rooms/exterior_terrain.json"
 const Heightfield = preload("res://assets/environment/terrain/lola/terrain_heightfield.gd")
 ## Earth seen from the Moon at the mean distance: 2 atan(6,371 km / 384,400 km) (NSSDCA fact sheets); 1.80 deg at
@@ -569,6 +573,59 @@ static func earth(room_id: String, scene_id: String, segment: String = "") -> Di
 		"source": "JPL Horizons DE441, %s %s UTC (sun_positions.json scene_lighting %s; terrain horizon from LOLA)" % [row.site, row.utc, String(row.scene)],
 	}, true)
 	return result
+
+## M1-91: a room's work lights (rooms/terrain_work_lights.json), {} for a room without them: "scenes" (placement -> the
+## dark-Sun scenes they are verified for; "" is the room's own placement, else a segment), "rover" (the staged rover prop,
+## its rig "state" and the floods' "aim" at focus targets), "props" (added lamp props: Kai's hand light) and the derived
+## "on_ground" (placement -> prop poses on the visible terrain), with the file's "rover_rig" and
+## "compatibility_energy_scale" (per-lamp energy fractions in Compatibility). CampaignRoom builds them
+## through terrain_work_lights.gd on either floor.
+static func work_lights(room_id: String) -> Dictionary:
+	if _work_lights.is_empty():
+		var parsed = JSON.parse_string(FileAccess.get_file_as_string(WORK_LIGHTS_PATH))
+		_work_lights = parsed if parsed is Dictionary else {"rooms": {}}
+	var lit := (_work_lights.get("rooms", {}).get(room_id, {}) as Dictionary).duplicate(true)
+	if not lit.is_empty():
+		lit.rover_rig = String(_work_lights.get("rover_rig", ""))
+		lit.compatibility_energy_scale = _work_lights.get("compatibility_energy_scale", {}).duplicate(true)
+	return lit
+
+## M1-91: whether an exterior on the terrain provider's ground is lit well enough to play one scene in: the ready flag to
+## trust before switching a room (or one of its segments) to the provider. {"ready", "room_id", "scene_id", "segment",
+## "sun_state" (the dated row's), "work_lights" (the lamps the room switches on: "<prop>/<lamp>"), "asset_paths" (the
+## added work-light props' GLBs, for loading), "reason"}. Ready when the placement omits the staging floor, the scene has a
+## bundled Horizons row for the placement (the segment's own row on a segment) at its ephemeris site, and either that row
+## is not "dark" or the room's work lights are verified for the scene there (work_lights.scenes: the dark Sun, no ambient
+## fill). The room builds its work lights itself (CampaignRoom); the provider adds only the dated Sun rig.
+static func terrain_lighting(room_id: String, scene_id: String, segment: String = "") -> Dictionary:
+	var place := terrain(room_id, segment)
+	var row := Heightfield.scene_lighting(scene_id, segment)
+	var work := work_lights(room_id)
+	var result := {"ready": false, "room_id": room_id, "scene_id": scene_id, "segment": segment, "sun_state": String(row.get("sun_state", "")),
+		"work_lights": TerrainWorkLights.lamp_ids(work), "asset_paths": work_light_asset_paths(room_id)}
+	if place.is_empty():
+		result.reason = "The room has no terrain placement%s." % ("" if segment.is_empty() else " for segment " + segment)
+	elif not bool(place.get("omit_staging_floor", false)):
+		result.reason = String(place.get("pending", "The placement keeps its flat staging floor."))
+	elif row.is_empty():
+		result.reason = "No bundled Horizons row for this scene here: the provider builds no dated Sun rig."
+	elif String(row.site) != String(place.get("ephemeris_site", "")):
+		result.reason = "The scene's row belongs to another site (%s)." % row.site
+	elif String(row.sun_state) == "dark" and not work.get("scenes", {}).get(segment, []).has(scene_id):
+		result.reason = "The dated Sun is below the terrain horizon and the room has no work lights verified for this scene here."
+	else:
+		result.ready = true
+		result.reason = "Lit by the room's work lights under a dark Sun." if String(row.sun_state) == "dark" else "Lit by the dated Sun."
+	return result
+
+## M1-91: the GLBs of a room's added work-light props (PR_HandLight), which the room loads with its approved props; the
+## staged rover is already one of them. [] for a room without added work lights.
+static func work_light_asset_paths(room_id: String) -> Array:
+	var paths: Array = []
+	for prop in work_lights(room_id).get("props", []):
+		if String(prop.path) not in paths:
+			paths.append(String(prop.path))
+	return paths
 
 # ------------------------------------------------------------------------------------------- chapter staging
 # A room JSON's optional "staging" array holds dated layers (doc 09 revisit rules: props accumulate between

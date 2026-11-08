@@ -424,6 +424,59 @@ Run `game/tools/run_tests.sh chapter4_rooms` and `production/qa/evidence/M3-4R_c
 
 
 
+## Work lights in the dark exteriors (M1-91, for Atik's M1-36 and M3-110)
+
+Below the cold-trap rim the dated Sun is under the terrain horizon: the EX-CH04-S04 row at B3, S05 at the last bend and
+S06..S08 on the shelf are `dark` (the Sun 1.6 deg up behind a 5.4-9.9 deg horizon), and nothing adds ambient fill. The
+rooms therefore light their own work areas with the field team's lamps, as STORY_FULL says, on the terrain provider's
+ground and on the flat fallback floor alike (`terrain_work_lights.json`, built by `scripts/world/terrain_work_lights.gd`):
+
+- **The staged rover** (`VH_Rover` in `LOC-09.json` and `LOC-10.json`, the lit `VH_Rover_Lit.tscn`) runs its approved
+  EVA-stop state (`rover_lights.json`, M3-8A decision 7): headlights, roof work floods and cabin glow, the floods turned
+  on their mounts onto focus targets of the room (`rover.aim`: target ids, so they follow the targets onto their terrain
+  spots and onto every segment). LOC-09: the left flood on the beacon mast, the right one on the dry reference plate and
+  scanner (S05 "Headlights brighten a patch of ground"). LOC-10: the left flood on the vault, the right one on the sealed
+  sample point. The sockets and beam shapes remain the approved `VH_Rover_Lit.tscn` rig's.
+- **Kai's hand light** (PR_HandLight, `props`) lies on the regolith between Kai's place and the vault, aimed between the
+  case and the 2034 marker (S06 "As Kai turns the light back towards the survey marker", S07 "Kai moves the light to
+  make the actual labels readable", S08 "within the lit work area"). On the terrain it rests on the **visible** ground
+  (`on_ground[placement]`, derived by `test_terrain_work_lights.gd -- --write` from the finest tile mesh, sampled by
+  `game/tools/terrain_visual_ground.gd`); on the flat floor it lies at `xz` and `yaw_deg`. It stays off every walking
+  lane and inside the placement's rock exclusions. The incremental loader prepares its GLB through the existing
+  `AssetGeometry.prepare` service before instancing it; it retains the newer chapter-staging preparation too.
+- **The helmet lamps** are the suited crew's (`CampaignCrew` `eva` outfits staged by M3-106; M3-4A decision 10: "the
+  rover's headlights and the helmet lamps"); the room's readability is verified without them.
+- `scenes` lists, per placement (`""` the room's own, else a segment), the dark scenes the lights are verified for.
+- `compatibility_energy_scale` (0.25 per lamp) retains the parked lighting study's adjustment for overlapping shadowed
+  lights in Compatibility. Forward+ and Mobile keep the rig's approved energies. Both renderers keep hard shadows.
+  `M1-91_capture.sh` measures brightness, lamp gain and clipping on the current checkout; previous branch images
+  do not validate this port.
+- Every lamp is a real hard-shadowed light on an approved prop. The rooms add nothing else: no WorldEnvironment,
+  ambient, sky or directional light on the terrain; the provider's rig keeps the hard dated Sun and the black sky.
+
+**Ready flag:** `RoomContract.terrain_lighting(room_id, scene_id, segment = "")` is `ready` only when the placement omits
+the staging floor, the scene has a bundled Horizons row for that placement (the segment's own row on a segment) at its
+ephemeris site, and the row is not `dark` or the room's work lights are verified for the scene there. It also gives
+`sun_state`, the lamp ids (`"<prop>/<lamp>"`), `asset_paths` (the added work-light GLBs, also
+`RoomContract.work_light_asset_paths`) and a `reason`. Ready today: B1 and B2 by their dated Sun; B3 (S04), the last
+bend (S05) and the shelf (S06..S08) by their work lights. `CampaignRoom.terrain_lighting()` answers for the staged
+scene on the room's `terrain_segment` and adds `on_terrain`, `built` and `missing`; hiding a lamp or its prop, or
+setting its energy to zero, takes that lamp out of the live result and makes a dark scene unready.
+`CampaignRoom.work_lights()` lists the lamps switched on and visible in the tree. The room puts them up with its
+approved props, in `load_assets_incremental()` too.
+
+Run `game/tools/run_tests.sh terrain_work_lights` (the hand light's poses, lanes and rocks; the ready flag for every room,
+placement and dated row; the rover's EVA-stop lamps and aims; no added ambient; direct light at every target, approach,
+prop and crew anchor each dark scene shows, through the terrain and every visible mesh) and
+`production/qa/evidence/M1-91_capture.sh` (Forward+ and Compatibility: B3, the last bend and the shelf on the terrain
+under their dated Sun with M3-106's stand-in for the far crater rim, the suited crew, the player walking to every
+approach, the measured target brightness with the lamps on and off, S07's probe and tethered carrier as well as S06's
+initial discovery). The sandbox refuses windowed Godot, so the night-shift runner must execute the script outside it
+before visual review. The script also requires a fresh passing full test run there: two existing fixture suites cannot
+write their native macOS cache/user-data files inside the sandbox. The cargo mount at the rover's rear is walked to and measured with the suit lamps on; work-area
+targets must read by the room lamps alone. Without the horizon stand-in the dated Sun still reaches the dark floor
+through TerrainStream's cascades (board M3-110, item 4).
+
 # Chapter 8 rooms (M3-8R)
 
 | Scenes | Room | Physical story carriers |

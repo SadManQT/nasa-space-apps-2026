@@ -119,7 +119,7 @@
   {
    "id": "EN_Airlock_GlovePort",
    "display": "Glove-port wall module",
-   "notes": "1 m wall: pressure window 0.56 x 0.42 m at 1.75 m, two glove ports (0.27 m flanges at x +-0.22, 1.19 m) with sleeves on the far side; the sealed plant chamber lies behind it",
+   "notes": "1 m wall: pressure window 0.56 x 0.42 m at 1.75 m (M_Airlock_PressureGlass), open through the module: the reveal splays to a 0.72 x 0.58 m opening in the far face, which is closed elsewhere; two glove ports (0.27 m flanges at x +-0.22, 1.19 m) with sleeves on the far side; the sealed plant chamber the room builds behind it shows through the window",
    "kind": "wall",
    "footprint_m": [
     1.0,
@@ -131,8 +131,8 @@
     "res://assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD1.glb"
    ],
    "triangles": [
-    3428,
-    908
+    3538,
+    970
    ],
    "lod_distance_m": 12.0,
    "collision": true,

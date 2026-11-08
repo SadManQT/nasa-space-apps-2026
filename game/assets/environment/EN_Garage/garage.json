@@ -338,8 +338,8 @@
     "res://assets/environment/EN_Garage/EN_Garage_HandoverConsole_LOD1.glb"
    ],
    "triangles": [
-    198,
-    62
+    200,
+    64
    ],
    "lod_distance_m": 12.0,
    "collision": true,

@@ -9,6 +9,7 @@ const EVIDENCE_DIR := "res://../production/qa/evidence/"
 const CANON_STATES := ["SEALED", "EQUALISING", "SAFE TO OPEN"]  # 09_WORLD_AND_LEVEL_DESIGN.md LOC-05
 var checks := 0
 var failures := 0
+var _drawn_frames := 0
 
 func _init() -> void:
 	call_deferred("_run")
@@ -29,6 +30,7 @@ func _run() -> void:
 	for entry in catalog.pieces:
 		_test_piece(entry)
 	_test_props()
+	_test_glove_port_window()
 	_test_moving_parts()
 	var airlock := await _test_vestibule()
 	_test_interlock(airlock)
@@ -100,6 +102,74 @@ func _test_props() -> void:
 	_check(absf(tray_box.size.x - 0.5) <= 0.01 and tray_box.size.y < 0.07, "seed tray is 0.50 m long like the 2034 seedling tray and under 7 cm tall")
 	_check(absf(tray_box.position.y) <= 0.002, "seed tray stands on the floor")
 	tray.free()
+
+## M3-104: the glove-port window opens through the module as built. In both LODs, lines through the pane (its axis, and
+## from a standing eye 0.85 m in front towards the four corners of the view) cross the glazing and no other face, and
+## the far face is closed everywhere else: lines through the wall above, below and beside the window, behind both ports
+## and through the frame's four rounded corners meet it at z = 0.15.
+func _test_glove_port_window() -> void:
+	var node := Airlock.instance("EN_Airlock_GlovePort")
+	root.add_child(node)
+	var sockets: Dictionary = Airlock.piece("EN_Airlock_GlovePort").sockets
+	var centre := Vector3(sockets.window_centre[0], sockets.window_centre[1], 0.0)
+	var half := Vector2(sockets.window_size[0], sockets.window_size[1]) * 0.5
+	var eye := Vector3(0.0, 1.6, -0.85)
+	var through: Array = [[centre + Vector3(0, 0, -0.4), centre + Vector3(0, 0, 0.6)]]
+	for corner in [Vector2(-1, -1), Vector2(1, -1), Vector2(-1, 1), Vector2(1, 1)]:
+		var aim := centre + Vector3(corner.x * half.x * 0.7, corner.y * half.y * 0.7, 0.03)
+		through.append([eye, eye + (aim - eye) * (0.6 - eye.z) / (aim.z - eye.z)])
+	var closed: Array[Vector2] = [Vector2(0, 0.6), Vector2(0, 2.3), Vector2(-0.43, centre.y), Vector2(0.43, centre.y)]
+	for port in sockets.ports:
+		closed.append(Vector2(port[0], port[1]))
+	for corner in [Vector2(-1, -1), Vector2(1, -1), Vector2(-1, 1), Vector2(1, 1)]:
+		closed.append(Vector2(corner.x * 0.35, centre.y + corner.y * 0.28))  # outside the frame's 0.18 m corner arcs, inside its box
+	for lod in ["LOD0", "LOD1"]:
+		var part := node.get_node(lod) as Node3D
+		var clear := true
+		for line in through:
+			var crossed := _crossings(node, part, line[0], line[1])
+			clear = clear and not crossed.is_empty()
+			for hit in crossed:
+				clear = clear and bool(hit.glass)
+		_check(clear, "EN_Airlock_GlovePort %s: lines through the pressure window cross its pane and nothing else (the window opens through the module)" % lod)
+		var sealed := true
+		for at in closed:
+			var back := false
+			for hit in _crossings(node, part, Vector3(at.x, at.y, 0.10), Vector3(at.x, at.y, 0.20)):
+				back = back or (not bool(hit.glass) and absf(float(hit.z) - 0.15) < 0.005)
+			sealed = sealed and back
+		_check(sealed, "EN_Airlock_GlovePort %s: the far face is closed at z = 0.15 everywhere but the window" % lod)
+		var glazing := 0
+		for mesh in part.find_children("*", "MeshInstance3D", true, false):
+			for surface in (mesh as MeshInstance3D).mesh.get_surface_count():
+				var material := (mesh as MeshInstance3D).get_active_material(surface) as StandardMaterial3D
+				if material != null and material.resource_name.begins_with("M_Airlock_PressureGlass"):
+					glazing += 1
+					_check(material.transparency != BaseMaterial3D.TRANSPARENCY_DISABLED and material.roughness > 0.1, "EN_Airlock_GlovePort %s pane is clear glazing with softened reflections (roughness %.2f)" % [lod, material.roughness])
+		_check(glazing == 1, "EN_Airlock_GlovePort %s has one pressure-glazing surface" % lod)
+	node.free()
+
+## Every face of the meshes under part that the segment from -> to (in the piece's frame) crosses, as
+## {"glass": the face is pressure glazing, "z": the crossing's z in the piece's frame}.
+func _crossings(piece: Node3D, part: Node3D, from: Vector3, to: Vector3) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for child in part.find_children("*", "MeshInstance3D", true, false):
+		var mesh := child as MeshInstance3D
+		var to_mesh := mesh.global_transform.affine_inverse() * piece.global_transform
+		var to_piece := piece.global_transform.affine_inverse() * mesh.global_transform
+		var a := to_mesh * from
+		var b := to_mesh * to
+		for surface in mesh.mesh.get_surface_count():
+			var material := mesh.get_active_material(surface)
+			var glass: bool = material != null and material.resource_name.begins_with("M_Airlock_PressureGlass")
+			var arrays := mesh.mesh.surface_get_arrays(surface)
+			var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+			var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+			for t in indices.size() / 3:
+				var hit: Variant = Geometry3D.segment_intersects_triangle(a, b, vertices[indices[t * 3]], vertices[indices[t * 3 + 1]], vertices[indices[t * 3 + 2]])
+				if hit != null:
+					out.append({"glass": glass, "z": (to_piece * (hit as Vector3)).z})
+	return out
 
 func _test_moving_parts() -> void:
 	var pt := Airlock.instance("EN_Airlock_PassThrough")
@@ -269,6 +339,8 @@ func _subtree_bounds(leaf: Node3D, ancestor: Node3D) -> AABB:
 func _evidence() -> void:
 	root.size = Vector2i(1600, 1000)
 	root.always_on_top = true
+	root.grab_focus()
+	RenderingServer.frame_post_draw.connect(func(): _drawn_frames += 1)
 	var stage := _studio()
 	root.add_child(stage)
 	var env := Environment.new()
@@ -395,11 +467,18 @@ func _studio() -> Node3D:
 	camera.current = true
 	return stage
 
+## A covered macOS window may stop drawing: bound the wait and draw explicitly, as the M3-2R capture does.
 func _capture(label: String) -> void:
 	await process_frame
 	await process_frame
 	await process_frame
-	await RenderingServer.frame_post_draw
+	var drawn := _drawn_frames
+	for frame in 30:
+		await process_frame
+		if _drawn_frames > drawn:
+			break
+	if _drawn_frames == drawn:
+		RenderingServer.force_draw(false)
 	var path := ProjectSettings.globalize_path(EVIDENCE_DIR + label + ".png")
 	var error := root.get_texture().get_image().save_png(path)
 	_check(error == OK, "evidence written: " + label)

@@ -10,6 +10,7 @@ const DoorScript = preload("res://scripts/navigation/campaign_door.gd")
 const AssetGeometryScript = preload("res://scripts/asset_geometry.gd")
 const ToonMaterialsScript = preload("res://scripts/toon_materials.gd")
 const Staging = preload("res://scripts/world/room_staging.gd")
+const WorkLights = preload("res://scripts/world/terrain_work_lights.gd")
 const Chapter8Assets = preload("res://assets/environment/EN_MalapertSummit/chapter8_assets.gd")
 ## M3-8R: layouts that author every placed piece, obstacle and navigation cell themselves (the habitat kit rooms, and
 ## the "exterior_kit" relay road and Malapert summit, whose ground is the flat staging floor or the terrain provider).
@@ -30,6 +31,7 @@ const SEEDLING_WORDS := {"seed": "SOWN SEED", "cotyledon": "SEED LEAVES", "true_
 ## placement that omits the staging floor (RoomContract.terrain), the flat floor, apron rails, flat navigation and the
 ## greybox light rig are not built, and anchors, focus targets, props, fixtures and doors stand on the published
 ## terrain positions. Ids, doors, pressure markers and scene staging stay the same.
+## M1-91: work_lights() and terrain_lighting() report the room-owned practical lamps on either floor.
 @export var terrain_ground := false
 ## M3-106: which playable segment of an exterior the room stands on (LOC-09: "B1", "B2", "B3", the beacon corners of
 ## EX-CH04-S04; "" = the room's own placement, the last bend). Set with terrain_ground before the room enters the tree:
@@ -147,6 +149,33 @@ func on_terrain() -> bool:
 ## The room-local crew and player anchors on the terrain ({} on the flat floor); CampaignCrew.place uses them.
 func terrain_anchors() -> Dictionary:
 	return _terrain.get("anchors", {}).duplicate(true)
+
+## M1-91: the work lights this room has switched on and shows (the staged rover's EVA-stop lamps, Kai's hand light; see
+## terrain_work_lights.gd), [] in a room without them, before its approved props load, or where the staged scene hides
+## their prop.
+func work_lights() -> Array:
+	return WorkLights.lights(visual_root) if visual_root != null else []
+
+## M1-91: RoomContract.terrain_lighting for the staged scene on this room's placement (terrain_segment), checked against
+## this built room: "on_terrain", "built" (how many of its work lights are on and shown, work_lights()) and "missing"
+## (the listed lamp ids that are not). Under a dark Sun the room is ready only when none is missing, so a scene whose
+## staging hides the rover or the hand light, or a room whose props have not loaded yet, is not ready.
+func terrain_lighting() -> Dictionary:
+	var result := RoomContract.terrain_lighting(room_id, _scene_context, terrain_segment)
+	var shown: Array = work_lights().map(func(light): return WorkLights.lamp_id(light as Light3D))
+	result.on_terrain = on_terrain()
+	result.built = shown.size()
+	result.missing = result.work_lights.filter(func(id): return not shown.has(id))
+	if bool(result.ready) and String(result.sun_state) == "dark" and not result.missing.is_empty():
+		result.ready = false
+		result.reason = "The dated Sun is below the terrain horizon and %d of the room's work lights are not on or not shown here: %s." % [result.missing.size(), ", ".join(result.missing)]
+	return result
+
+## Puts up the room's work lights once its approved props have loaded (once; nothing in a room without them).
+func _build_work_lights() -> void:
+	var spec := RoomContract.work_lights(room_id)
+	if not spec.is_empty():
+		WorkLights.build(spec, terrain_segment, on_terrain(), visual_root, focus_root, _layout.get("assembly") not in PROP_ASSEMBLIES)
 
 ## Moves the built anchors, focus targets, fixtures and doors onto the published terrain positions (props are placed
 ## as they load). Names and ids are unchanged.
@@ -446,6 +475,7 @@ func _load_approved_assets(contract: Dictionary) -> void:
 	var paths: Array = _layout.get("props", []) if _layout.get("assembly") in PROP_ASSEMBLIES else contract.get("asset_paths", [])
 	for index in paths.size():
 		_add_approved_asset(String(paths[index].path) if paths[index] is Dictionary else String(paths[index]), index, paths.size(), paths[index] if paths[index] is Dictionary else {})
+	_build_work_lights()
 
 ## Loads approved prop instances over frames using the existing geometry cache.
 func load_assets_incremental() -> void:
@@ -453,6 +483,10 @@ func load_assets_incremental() -> void:
 	for index in paths.size():
 		_add_approved_asset(String(paths[index].path) if paths[index] is Dictionary else String(paths[index]), index, paths.size(), paths[index] if paths[index] is Dictionary else {})
 		await get_tree().process_frame
+	for path in RoomContract.work_light_asset_paths(room_id):
+		if not AssetGeometryScript.is_prepared(String(path)):
+			await AssetGeometryScript.prepare(String(path), get_tree())
+	_build_work_lights()
 	# M3-5R: the models the coming scene's staging shows (props, photographed subjects, carried and attached objects) are
 	# prepared on the loader thread too, so staging it never decodes a model on the main thread. Only that scene's:
 	# preparing every chapter's would put their main-thread scene builds into an unrelated room entry.

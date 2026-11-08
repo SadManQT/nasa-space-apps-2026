@@ -7,8 +7,12 @@
 extends Node
 class_name CampaignAudioDirector
 
+signal voice_ready(line_id: String)
+
 var runtime: CampaignAudioRuntime
 var preparation: LoadPreparation
+## Voice loading state for presentation tests and bounded UI readiness waits.
+var voice_readiness := "idle"
 ## Essential-sound captions follow the player's Captions setting.
 var captions_enabled := true
 ## Line currently voiced or waiting to be voiced ("" for none).
@@ -94,11 +98,14 @@ func present_line(line: Dictionary, acquired_flags: Array = []) -> void:
 		return
 	_stop_voice()
 	voice_line_id = line_id
+	voice_readiness = "idle"
 	if line_id.is_empty() or _heard.has(line_id) or runtime == null:
 		return
 	_voice_plan = runtime.voice_plan(line_id, acquired_flags)
 	_voice_origin = String(line.get("origin", line.get("delivery", "")))
 	_voice_pending = String(_voice_plan.get("mode", "")) == "voice"
+	if _voice_pending:
+		voice_readiness = "pending"
 
 ## Lines the player has already heard this session are shown without voice.
 func mark_heard(line_ids: Array) -> void:
@@ -221,8 +228,13 @@ func _set_music(path: String) -> void:
 
 func _start_voice() -> void:
 	var line_id := voice_line_id
+	voice_readiness = "loading"
 	var stream := await _stream(String(_voice_plan.get("runtime_path", "")))
-	if stream == null or line_id != voice_line_id:
+	if stream == null:
+		voice_readiness = "failed"
+		return
+	if line_id != voice_line_id:
+		voice_readiness = "idle"
 		return
 	var channel := runtime.line_sfx(_voice_origin)
 	if bool(channel.get("media_present", false)) and (bool(channel.loop) or not _opened_channels.has(_voice_origin)):
@@ -230,6 +242,8 @@ func _start_voice() -> void:
 		_start(_channel, channel.runtime_path, channel.caption)
 	voice.stream = stream
 	voice.play()
+	voice_readiness = "ready"
+	voice_ready.emit(line_id)
 	_hold_streams()
 
 func _stop_voice() -> void:

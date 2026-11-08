@@ -126,8 +126,6 @@ static func build_airlock(room: Node3D, layout: Dictionary) -> void:
 		node.name = String(role)
 		node.transform = placed
 		room.visual_root.add_child(node)
-		if String(role) == "glove_ports":
-			open_window_back(node)
 	for portal in layout.portals:
 		connector(room, layout, portal)
 	var width := float(layout.bounds_m[0])
@@ -211,46 +209,6 @@ static func build_garage(room: Node3D, layout: Dictionary) -> void:
 		flood.spot_angle = float(spec.get("angle_deg", 66.0))
 		flood.shadow_enabled = bool(spec.get("shadow", false))
 		floods.add_child(flood)
-
-## Opens the back of a wall module that reuses the kit window frame. EN_Airlock_GlovePort closes its back face with
-## one 1.0 x 2.6 m plate (two triangles, drawn double-sided), so its pressure window showed grey paint instead of
-## Alo's sealed chamber. This drops only that plate from the placed copy (the GLB is unchanged): the room data builds
-## the chamber walls behind the module, and the window and ports seal the wall as before. Returns triangles dropped.
-static func open_window_back(module: Node3D) -> int:
-	var dropped := 0
-	for child in module.find_children("*", "MeshInstance3D", true, false):
-		var instance := child as MeshInstance3D
-		var source := instance.mesh as ArrayMesh
-		if source == null:
-			continue
-		var opened := ArrayMesh.new()
-		var removed := 0
-		for surface in source.get_surface_count():
-			var arrays := source.surface_get_arrays(surface)
-			var index_data: Variant = arrays[Mesh.ARRAY_INDEX]
-			if index_data is PackedInt32Array:
-				var indices: PackedInt32Array = index_data
-				var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
-				var kept := PackedInt32Array()
-				for t in indices.size() / 3:
-					var a := vertices[indices[t * 3]]
-					var b := vertices[indices[t * 3 + 1]]
-					var c := vertices[indices[t * 3 + 2]]
-					# the back plate: behind the module's front face, flat, and larger than any other part (> 0.5 m2)
-					if a.z > 0.1 and absf(a.z - b.z) < 0.001 and absf(a.z - c.z) < 0.001 and (b - a).cross(c - a).length() * 0.5 > 0.5:
-						removed += 1
-						continue
-					kept.append(indices[t * 3])
-					kept.append(indices[t * 3 + 1])
-					kept.append(indices[t * 3 + 2])
-				arrays[Mesh.ARRAY_INDEX] = kept
-			opened.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-			opened.surface_set_material(surface, source.surface_get_material(surface))
-			opened.surface_set_name(surface, source.surface_get_name(surface))
-		if removed > 0:
-			instance.mesh = opened
-			dropped += removed
-	return dropped
 
 ## The kit or airlock piece id a placed node was named after (Godot adds "@...@n" to repeated sibling names).
 static func _airlock_piece(node_name: String) -> String:

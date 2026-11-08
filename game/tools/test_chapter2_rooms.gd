@@ -35,6 +35,8 @@ const SHARED_STATIONS := ["commons_brace_zone"]
 ## Test-only physics layer for the visible-surface copies the footprint check rays against (layer 16).
 const FOOTPRINT_LAYER := 1 << 15
 const PLANTS_IN_BLOOM := [{"individual_id": "ALO-01", "stage": "pollinated"}, {"individual_id": "TARA-01", "stage": "bloom"}]
+## Window pane materials: the kit glass and the glove-port module's pressure glazing (M3-104).
+const GLAZING := ["M_Kit_Glass", "M_Airlock_PressureGlass"]
 var checks := 0
 var failures := 0
 var capture := false
@@ -461,7 +463,7 @@ func _check_bridges(room: CampaignRoom, scene_id: String) -> void:
 		"LOC-05":
 			var airlock := room.airlock()
 			_check(staged.has_node("PL_Alo_Bloom") and staged.has_node("PR_PollinationKit"), scene_id + " Alo flowers behind the glove ports; brushes A and B wait in the carrier")
-			_check(_alo_in_window(room, staged, Contract.staged_layout(room.room_id, scene_id)), scene_id + " Alo's flowers show through the glove-port window from the station (glass only, the module's back is open)")
+			_check(_alo_in_window(room, staged, Contract.staged_layout(room.room_id, scene_id)), scene_id + " Alo's flowers show through the glove-port window from the station (glass only: the window opens through the module as built)")
 			_check(not airlock.is_lid_open("LidA") and not airlock.is_lid_open("LidB") and airlock.state_text("inner") == "SAFE TO OPEN", scene_id + " both pass-through lids shut, pressure unchanged (S03 -> S04)")
 			_check(_text(staged, "carrier_latch_word") == "CARRIER LATCHED", scene_id + " the carrier latch shows a word as well as a lamp (S02 -> S03, Kai's latch)")
 			_check(_text(staged, "space_weather_text").begins_with("SPACE WEATHER") and _text(staged, "space_weather_text").contains("CHECK BEFORE EACH RUN"), scene_id + " space weather is checked before each run (clue 7, S05 Rafi)")
@@ -503,7 +505,8 @@ func _check_bridges(room: CampaignRoom, scene_id: String) -> void:
 				_check(_text(staged, "playback_header").contains("2034-04"), scene_id + " the date stays visible above both transcripts")
 
 ## The line from a 1.6 m eye at the glove-port station to the top of Alo's flowers crosses the module's window
-## glass and no other face of the module (M3-2A's kit window frame had a closed back plate behind the glass).
+## glass and no other face of the module, as the GLB is built: the window opens through to the far face (M3-104; M3-2A's
+## kit window frame had a closed back plate behind the glass).
 func _alo_in_window(room: CampaignRoom, staged: Node3D, layout: Dictionary) -> bool:
 	var eye := Vector3.ZERO
 	for focus in layout.focus_targets:
@@ -521,7 +524,7 @@ func _alo_in_window(room: CampaignRoom, staged: Node3D, layout: Dictionary) -> b
 		var to := to_local * flowers
 		for surface in instance.mesh.get_surface_count():
 			var material := instance.get_active_material(surface)
-			var glass := material != null and material.resource_name == "M_Kit_Glass"
+			var glass: bool = material != null and material.resource_name in GLAZING
 			var faces: PackedVector3Array = instance.mesh.surface_get_arrays(surface)[Mesh.ARRAY_VERTEX]
 			var indices: PackedInt32Array = instance.mesh.surface_get_arrays(surface)[Mesh.ARRAY_INDEX]
 			for t in indices.size() / 3:
