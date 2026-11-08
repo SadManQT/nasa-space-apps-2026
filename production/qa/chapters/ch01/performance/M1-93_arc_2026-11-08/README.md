@@ -17,7 +17,7 @@
 2. compatibility.txt / capture.json retain the first attempt. It ended after 23.443 seconds with console exit 0 but no summaries, PERF RESULT marker, JSON or CSV. **Tanvir confirmed he closed that window.** This is an interrupted sample, not evidence of a crash or benchmark completion.
 3. tests_performance_runtime.txt and test_logs/ retain the subsequent focused runner, including its setup and full failed-suite output.
 4. compatibility_retry.json/.csv/.txt and capture_retry.json are the complete second attempt, a fresh process with retained caches. It exited 0 after 189.373 seconds, printed PERF RESULT: PASS (rendered samples recorded), and covered all four expected rooms. Neither sample duration nor any threshold, setting, asset or authored game script was edited.
-5. hardware.json retains the OS hardware query; verification.json hashes the raw artifacts and cross-checks every sample count plus p95/max against the CSV.
+5. Local .gitattributes preserves raw capture bytes across platform newline settings; hardware.json retains the OS hardware query; verification.json hashes the raw artifacts and cross-checks every sample count plus p95/max against the CSV.
 
 ## Rendered frame intervals
 
