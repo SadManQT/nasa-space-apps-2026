@@ -1,0 +1,4 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PROFILE SNAPSHOTS: accepted operations=283 early=EX-CH01-S01 late=EX-CH08-S12 late completed=84
+M1-72 PROFILE: {"failures":0,"mode":"cached CPU timing; not suite acceptance or rendered FPS","results":{"early":{"clips":4,"completed":0,"journal_ms":{"max":14.412,"median":9.362,"p95":11.941},"matching_ms":{"max":1.891,"median":0.256,"p95":0.758},"scene_id":"EX-CH01-S01","science_ms":{"max":1.663,"median":0.706,"p95":1.295},"unchanged":true},"late":{"clips":18,"completed":84,"journal_ms":{"max":35.815,"median":31.055,"p95":34.147},"matching_ms":{"max":0.823,"median":0.194,"p95":0.406},"scene_id":"EX-CH08-S12","science_ms":{"max":10.08,"median":6.815,"p95":9.234},"unchanged":true}},"samples":100,"snapshots_sha256":"8f8897ff0ec7fbb0133d50c1df8f5bf7f51ddfa315ca695d9cd83e7edbaecd52","source":"d8243e430fb9214ceebd50cd1640b24adc1e3bb7","warmups":8}
