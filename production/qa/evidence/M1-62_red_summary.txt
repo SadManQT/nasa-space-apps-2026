@@ -1,0 +1,26 @@
+M1-62 genuine behavioral RED
+
+Command: GODOT=<Windows Godot4.7.2> game/tools/run_tests.sh player_text
+Mandatory setup passed. The real HUD/panel walk logged1877 feature-failure lines, then timed out in Chapter5 at300s: suite exit124, runner0/1 suites passed. This was not a completed all8 walk.
+
+Representative actual failures:
+ERROR: FAIL inspect_alo_identity authored goal
+ERROR: FAIL inspect_alo_identity actual hint shows job nudge
+ERROR: FAIL inspect_alo_identity actual Last result uses authored success
+ERROR: FAIL no developer language: p05_equip_gauge query-bound Last result "R 4" in "Dated station ledger: R 4.0 + scheduled supply 14.0 + mature crop harvest 0.0 - background"
+
+Separate narrow card RED (before display substitution):
+FAIL tools/test_science_data.gd :: exit 1 :: SCIENCE DATA RESULT: FAIL (157 checks, 2 failures)
+
+       ERROR: FAIL visible computation uses Mission model with exact formula large=false
+
+       ERROR: FAIL visible computation uses Mission model with exact formula large=true
+
+       SCIENCE DATA RESULT: FAIL (157 checks, 2 failures)
+
+0/1 suites passed
+
+
+Footer transition RED: SCIENCE DATA RESULT: FAIL (181 checks, 1 failure); runner0/1. Actual150% Close label measured99px in97px immediately after text scaling and before container reflow. The shared footer correction then passed181/0, runner1/1, both before and after integration. Additional native/settled/footer RED diagnostics are retained locally, not final QA images.
+
+The optional clean helper first failed parsing an inferred string; an explicit String type fixed it. The final integrated helper including actual H1/result pairs passed627/0. Original failed/obsolete/verbose attempts and diagnostic PNGs remain in ignored task-11-local-diagnostics or M1-62_* raw-log folders.

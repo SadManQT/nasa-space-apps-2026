@@ -1,0 +1,6 @@
+PASS: integrated HEAD 8828f7f4c2d3d8a4b6da01d7bb99a6d0f8c7c620, game tree f5686325d9e28a2924ce6997ae22043a65020bf3.
+Six source SHA256 values match before/after both captures and current delivered files.
+22 PNG hashes and modification times match actual completed capture intervals.
+20 helper capture-time text/layout/UTC probes match source and modal image hashes.
+Chapter 2 and 8 final approved why strings match their actual native probes.
+All assertions executed by task-11-package.py; no image editing or hash backfill.

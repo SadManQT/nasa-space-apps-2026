@@ -1,0 +1,1 @@
+Authored data check: 329 targets, 283 additions; 46 originals and all other data unchanged; five nonempty fields and goal<=8/why<=12 word limits PASS.

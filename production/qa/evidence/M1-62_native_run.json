@@ -1,0 +1,7 @@
+{
+    "command":  "Godot_v4.7.2-stable_win64_console.exe --path game --windowed --resolution 1280x720 --script res://tools/test_player_text.gd -- --capture",
+    "started_utc":  "2026-11-08T01:10:27.3540549Z",
+    "ended_utc":  "2026-11-08T01:21:50.0818364Z",
+    "elapsed_seconds":  682.728,
+    "exit_code":  0
+}
