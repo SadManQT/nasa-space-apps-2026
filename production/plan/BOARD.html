@@ -86,9 +86,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">93 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">14 todo</span></div><div class="bar"><i style="width:87%"></i></div>
-<details open><summary>Next up today (1)</summary><ul>
-<li><a class="id" href="#M4-13">M4-13</a> Route the R1-R3 road-to-pad spurs slope-limited on the 10 m LOLA tiles <span class="chip ">claude</span> <span class="chip ">P2</span></li>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">93 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">13 todo</span></div><div class="bar"><i style="width:87%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
+<li><a class="id" href="#M4-13">M4-13</a> Route the R1-R3 road-to-pad spurs slope-limited on the 10 m LOLA tiles <span class="chip ">claude</span> <span class="chip ">P2</span><div class="meta">claimed by Sadman/claude on 2026-11-09</div></li>
 </ul></details>
 <details><summary>To do (13)</summary><ul>
 <li><a class="id" href="#M1-24">M1-24</a> Fix the playtest and QA findings, then freeze the demo build <span class="chip ">claude</span> <span class="chip ">P0</span></li>
@@ -7056,8 +7056,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P2",
    "tool": "claude",
    "title": "Route the R1-R3 road-to-pad spurs slope-limited on the 10 m LOLA tiles",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/assets/environment/EN_RelayRoad/"
@@ -7065,7 +7065,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-08.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "Found by M1-87. relay_road.json (EN_RelayRoad) records straight road-to-pad spurs for repeaters R1-R3 whose steepest 20 m stretches are 23.5, 24.8 and 15.3 deg on the 10 m grid (lola_10m.spur.steepest_20m_deg), above the 12 deg road limit and the 15 deg VIPER hard limit; spurs_note says they must follow slope-limited paths. LOC-11 does not use a spur (its marker-two pad abuts the road on the relay_road_mid patch, lanes max 0.57 deg), so nothing in the game is blocked. Do: route each spur with the make_terrain.py routes method (<= 12 deg, 15 deg hard) on the committed 10 m tiles (production/terrain/cache/pgda90_10mpp/; fetch any missing with make_terrain.py, SSL_CERT_FILE set), store length, climb and max slope per spur in relay_road.json and drop or update spurs_note; re-run test_chapter8_assets.gd. No credits.",
    "reserved_for": "sadman",
    "effort": 1
