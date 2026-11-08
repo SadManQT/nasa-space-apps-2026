@@ -4870,7 +4870,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Goal card text for Chapters 2-8: an authored goal, why, prompt, result and hint for every job",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [
     "M1-54"
@@ -4885,11 +4885,12 @@
     "full-game-story/STORY_FULL.md"
    ],
    "note": "Found by the M1-54 review (5 Nov 2026).",
-   "evidence": "",
+   "evidence": "Reviewed source 8828f7f and 22 verified native PNGs. Final full source 3cf82b1 / game tree f5686325: 68/70 suites passed, exit 1, 2223 s. Player text 12839/0; Science Data 181/0. Campaign media 113/1 -> M1-100; performance 537/5 -> M1-68/M1-97. See production/qa/evidence/M1-62.md and M1-62_full_results.txt. Reviewed WIP, not complete.",
    "updated": "2026-11-08",
    "prompt": "Problem: M1-54 gave every Chapter 1 job authored player text in game/resources/campaign/content/ui_text.json (targets.<target_id>: goal <= 8 words, why <= 12 words, prompt, result, hint). Jobs in Chapters 2-8 have none, so the goal card falls back to the job's focus label ('Do the next job: lock in reciprocal cycle one'), with no why line and no hint.\nDo: write targets entries for every Chapter 2-8 job (game/scripts/missions/extended_gate_catalog.gd and the chapter gate data list them) following doc 25 §1 (verb + thing + place; a why that names the stake; the §1.1 player words; numbers from 08_PUZZLE_DESIGNS.md; no future names before EX-CH05-S10). Extend game/tools/test_player_text.gd to walk Chapters 2-8 the same way it walks Chapter 1 and to fail when a job has no authored goal.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass, including test_player_text.gd over all eight chapters.\nKnown fallback problems (M1-54 review): Chapters 3-8 build job labels with action.capitalize() ('p 05 equip gauge'); Chapter 2 labels pass through the word table ('trial-prepare chart', 'Try it one'); both 'Run two' jobs read the same; _goal_for_flag shows raw flag names; ledger summaries put 'E 14; A 6' into Last result; the Z note and data-card formulas name '08_PUZZLE_DESIGNS'. Authored text removes the need for the fallback.",
    "reserved_for": "ramim",
-   "effort": 2
+   "effort": 2,
+   "blocker": "Source review approved. Final Windows full gate: 68/70 suites (2223 s), with campaign-media voice readiness failure (Sadman M1-100) and five unchanged 50 ms timing failures (Atik M1-68/M1-97). Player text 12839/0, Science Data 181/0 and 22 native images verified. Reviewed WIP is delivered. Evidence: production/qa/evidence/M1-62.md. Existing HUD teardown noise is tracked separately by Ramim M1-101."
   },
   {
    "id": "M3-68",
@@ -5295,7 +5296,7 @@
     "production/qa/perf/"
    ],
    "refs": [],
-   "note": "Filed by Ramim/codex on 2026-11-06.\n6 Nov (Sadman/claude, macOS, Mac under load from two renders and the night shift): three full runs failed 2-3 main-thread interval checks, each time different ones, all just over 50 ms: Ferreira raw load 57.0; title 64.6; new campaign 64.7 / Amara 53.4; Mei 54.4; new campaign 52.8. Every other suite passes (37/38). Looks load-sensitive near the budget; worth measuring on an idle machine before changing the loader.\n6 Nov, Tanvir/Codex M1-65 baseline: test_performance_runtime failed five intervals: Amara 67.948 ms, Mei 52.398 ms, Rafi 54.455 ms, title 66.395 ms, new campaign 96.077 ms (all require <50 ms). Raw output: production/qa/evidence/M1-65_tests_clean.txt. No performance source changed.\n6 Nov Ramim: integrated M1-19 fullrun atce1fe28 was51/52 suites passed; performance537checks/8failures. First5 raw-load intervals Kai61.056ms, Amara89.549ms, Mei58.707ms, Rafi59.733ms, Ferreira60.649ms. See production/qa/evidence/M1-19_test_results.txt. No timing expectations changed.\n6 Nov Ramim final integrated66aed53 full:53/54 suites passed,954s, performance537checks/8timingfailures, sole failing suite. First5 raw Kai62.482ms, Amara61.641ms, Mei58.396ms, Rafi56.892ms, Ferreira57.187ms. Remaining3 details suppressed by runner and not inferred. Exact output production/qa/evidence/M1-55_test_results.txt. One Godot test runner, no concurrent team Godot/native captures. No timing or loader changes.\n7 Nov Ramim current integratedfbdcd67 full57/58 in833s (all58executed, setupcompleted). Sole failure performance537checks/2timings: productiontitle55.308ms,newcampaign100.068ms against50ms. Raw asset-load intervals passed in this run; this is not a fix claim. Windows AMD Ryzen7 7700/RTX4060/Godot4.7.2, one runner/no concurrent team Godot. Exact M1-64_full_results.txt. Separate pre-suite coldimport139/warmretry85 is M1-85; M1-80 fail-fast works.\n8Nov Ramim Windows full source15ff10a again reproduces three intervals; complete raw loading log production/qa/evidence/M1-83_performance_runtime.txt. M1-90 two fresh-process traces next; status unchanged.\n8 Nov, Ramim/codex: M1-90 is complete and independently reviewed with no findings. Original Windows evidence: production/qa/evidence/M1-68_windows/2026-11-08_0130_ramim/README.md. Run1 failed title51.869ms and campaign66.577ms; run2 failed campaign69.960ms, against50ms. Both setups succeeded; complete raw logs, hardware and source metadata are retained. Existing caches were kept. The current suite does not print per-stage LoadTrace durations, so causality remains unmeasured. Atik can resume M1-68 from this handoff; its status is unchanged.",
+   "note": "Filed by Ramim/codex on 2026-11-06.\n6 Nov (Sadman/claude, macOS, Mac under load from two renders and the night shift): three full runs failed 2-3 main-thread interval checks, each time different ones, all just over 50 ms: Ferreira raw load 57.0; title 64.6; new campaign 64.7 / Amara 53.4; Mei 54.4; new campaign 52.8. Every other suite passes (37/38). Looks load-sensitive near the budget; worth measuring on an idle machine before changing the loader.\n6 Nov, Tanvir/Codex M1-65 baseline: test_performance_runtime failed five intervals: Amara 67.948 ms, Mei 52.398 ms, Rafi 54.455 ms, title 66.395 ms, new campaign 96.077 ms (all require <50 ms). Raw output: production/qa/evidence/M1-65_tests_clean.txt. No performance source changed.\n6 Nov Ramim: integrated M1-19 fullrun atce1fe28 was51/52 suites passed; performance537checks/8failures. First5 raw-load intervals Kai61.056ms, Amara89.549ms, Mei58.707ms, Rafi59.733ms, Ferreira60.649ms. See production/qa/evidence/M1-19_test_results.txt. No timing expectations changed.\n6 Nov Ramim final integrated66aed53 full:53/54 suites passed,954s, performance537checks/8timingfailures, sole failing suite. First5 raw Kai62.482ms, Amara61.641ms, Mei58.396ms, Rafi56.892ms, Ferreira57.187ms. Remaining3 details suppressed by runner and not inferred. Exact output production/qa/evidence/M1-55_test_results.txt. One Godot test runner, no concurrent team Godot/native captures. No timing or loader changes.\n7 Nov Ramim current integratedfbdcd67 full57/58 in833s (all58executed, setupcompleted). Sole failure performance537checks/2timings: productiontitle55.308ms,newcampaign100.068ms against50ms. Raw asset-load intervals passed in this run; this is not a fix claim. Windows AMD Ryzen7 7700/RTX4060/Godot4.7.2, one runner/no concurrent team Godot. Exact M1-64_full_results.txt. Separate pre-suite coldimport139/warmretry85 is M1-85; M1-80 fail-fast works.\n8Nov Ramim Windows full source15ff10a again reproduces three intervals; complete raw loading log production/qa/evidence/M1-83_performance_runtime.txt. M1-90 two fresh-process traces next; status unchanged.\n8 Nov, Ramim/codex: M1-90 is complete and independently reviewed with no findings. Original Windows evidence: production/qa/evidence/M1-68_windows/2026-11-08_0130_ramim/README.md. Run1 failed title51.869ms and campaign66.577ms; run2 failed campaign69.960ms, against50ms. Both setups succeeded; complete raw logs, hardware and source metadata are retained. Existing caches were kept. The current suite does not print per-stage LoadTrace durations, so causality remains unmeasured. Atik can resume M1-68 from this handoff; its status is unchanged.\n8 Nov Ramim M1-62 integrated full gate: source 3cf82b1 / game tree f5686325, 68/70 suites in 2223 s. Performance 537/5: Kai 51.215, title 78.668, new campaign 162.874, garden 60.623, full cast 56.103 ms against 50 ms limits. Complete raw log: production/qa/evidence/M1-62_performance_runtime.txt. Stage cause remains unknown; M1-97 is still needed before M1-98 recollection. The other failed suite, campaign_media 113/1, is Sadman M1-100. Your task status is unchanged.",
    "evidence": "",
    "updated": "2026-11-07",
    "prompt": "Ramim fresh baseline on Windows at main 990126b, Godot 4.7.2, fails the production loading performance gate before any feature source changes. Full game/tools/run_tests.sh: 35/37 suites passed; test_performance_runtime.gd reports 537 checks / 2 failures: production title main-thread interval 59.455ms and production new campaign interval 128.056ms (limit <50ms). The other failure is the separate missing-explainer request M1-67.\nA single focused retry through run_tests.sh performance_runtime after cache warmup fails 537 checks / 7 failures (0/1 suites passed). Runner prints the first five details: Kai raw load 51.280ms, Amara 50.826ms, Mei 57.054ms, Rafi 57.689ms, Ferreira 52.718ms; remaining two details were suppressed by the runner, so do not invent them. Logs: production/qa/evidence/M1-18_baseline.txt and M1-18_performance_retry.txt.\nInvestigate the shared loading/performance path and the Windows test/runtime behavior, then fix the cause within Atik-owned runtime/loading/performance paths. Profile whether scheduling/raw glTF import or timing measurement is responsible; do not silently relax/skip the 50ms gate or claim reference-Mac performance based on this PC. Any necessary Ramim UI or Sadman asset/test changes need owner requests. Preserve campaign/save behavior and incremental-loading contract. Publish the fix/evidence and notify Ramim to resume blocked M1-18.\nAcceptance: focused real production performance runner passes on the documented supported machine without weakening its intent; full run_tests.sh green after M1-67 also lands, with truthful hardware/timing evidence and no unrelated changes.",
@@ -6140,7 +6141,7 @@
    "note": "Filed by Ramim/codex on 2026-11-08.",
    "evidence": "",
    "updated": "2026-11-08",
-   "prompt": "Update handbook status for reviewed CareRound UI provider M1-83 delivered to main, contract production/qa/evidence/M1-83_provider.md. EqualAlo/Tara readings/ghosts, image-only async capture handshake, FamilyMode and keyboard/controller/150text; independentreview twofindingsfixed; care32/text524 andnative297probes/eightPNGs. Fullsource15ff10a64/65,soleM1-68 timing failures, no taskdone/performancefix. AtikM1-49 owns actual worldcamera/date/order/photoledger/persistence and integration; M1-83 remains blocked on fullgate, sourceavailableforruntimewiring. Add short accurate datedstatus, no canondecision. Fullresults M1-83_test_results.txt/full_results.txt/performance_runtime.txt. No new assets, paidgeneration or changed numeric rules.\nRelated update: M1-90 original Windows collection is complete and reviewed: production/qa/evidence/M1-68_windows/2026-11-08_0130_ramim/README.md. The two fresh-process runs failed2/1 timing checks; both setups succeeded and every raw log is retained. M1-68 remains unresolved; no cause or fix is claimed. Include this related acceptance limit briefly.",
+   "prompt": "Update handbook status for reviewed CareRound UI provider M1-83 delivered to main, contract production/qa/evidence/M1-83_provider.md. EqualAlo/Tara readings/ghosts, image-only async capture handshake, FamilyMode and keyboard/controller/150text; independentreview twofindingsfixed; care32/text524 andnative297probes/eightPNGs. Fullsource15ff10a64/65,soleM1-68 timing failures, no taskdone/performancefix. AtikM1-49 owns actual worldcamera/date/order/photoledger/persistence and integration; M1-83 remains blocked on fullgate, sourceavailableforruntimewiring. Add short accurate datedstatus, no canondecision. Fullresults M1-83_test_results.txt/full_results.txt/performance_runtime.txt. No new assets, paidgeneration or changed numeric rules.\nRelated update: M1-90 original Windows collection is complete and reviewed: production/qa/evidence/M1-68_windows/2026-11-08_0130_ramim/README.md. The two fresh-process runs failed2/1 timing checks; both setups succeeded and every raw log is retained. M1-68 remains unresolved; no cause or fix is claimed. Include this related acceptance limit briefly.\nRelated 8 Nov status: M1-62 authored all 283 Chapter 2-8 job entries while preserving 46 Chapter 1 entries. Current all-chapter text: 12839/0; Science Data: 181/0; 22 normal/150% native PNGs verified. Independent source review has no findings. Full source 3cf82b1 / game tree f5686325: 68/70 suites, 2223 s. Reviewed WIP remains blocked on audio fixture M1-100 and Windows timings M1-68/M1-97. Existing HUD transform noise is separate M1-101. See production/qa/evidence/M1-62.md. Please record a concise status; no canon, model, asset or numeric rules changed.",
    "reserved_for": "sadman",
    "effort": 1
   },
@@ -6390,6 +6391,47 @@
    "prompt": "Seen in M3-5R's capture of EX-CH05-S01 (production/qa/evidence/M3-5R_S01_pad_camera.png), which now plays at the garage dock M3-105 built. 1) On EN_Garage_HandoverConsole the 'Screen' slot cuts off the top line of a three-line text: 'ARRIVAL HANDOVER / NAME AND SEAL INDICATION / TWO AGREEING CHECKS' (LOC-08.json garage_screens console_map, by_scene EX-CH05-S01..EX-CH07-S11) shows only the lower half of 'ARRIVAL HANDOVER'. RoomStaging.slot_text fits the label to the 512 x 256 texture by height and width, so the likely cause is the Screen surface's UVs (or the px aspect) cropping the texture; fix it at the piece or slot so every text on that screen shows whole (CH04-S04..S12 and CH07-S12.. texts too), and add a check in test_chapter4_rooms.gd. 2) STORY_FULL EX-CH05-S01: Ferreira is 'a small moving shape on the landing camera, waiting beside relief cargo'. Screen3 shows that only in words. Consider a camera picture on Screen3 (slot_text supports a live 'camera'; or a still of the existing CS-08-A shot, e.g. frame 3.3 s, Ferreira by the relief cargo with the dust settled) with the words as its caption. Re-run production/qa/evidence/M3-105_capture.sh and M3-5R_capture.sh and look at the S01 shots.",
    "reserved_for": "sadman",
    "effort": 2
+  },
+  {
+   "id": "M1-100",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Investigate Windows campaign-media voice readiness failure",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/audio/",
+    "game/tools/test_campaign_media.gd"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-08.",
+   "evidence": "",
+   "updated": "2026-11-08",
+   "prompt": "Final Windows full gate for M1-62 on source 3cf82b1 / game tree f5686325d9e28a2924ce6997ae22043a65020bf3 failed campaign_media (113 checks, 1 failure): voice plays for the line whose caption is shown (test_campaign_media.gd:118). Preserve full raw log at production/qa/evidence/M1-62_campaign_media.txt and full summary. The isolated audio fixture runs before CampaignScene/HUD instantiation: present_line then exactly 3 process frames, asserting playing/path/lineid. AudioDirector._start_voice awaits threaded _stream. Readiness after 3 frames is a hypothesis, not established cause; collect actual playing/path/id/load state and identify which predicate fails. Test/audio_runtime/audio_director/voice_fixture gitblobs are identical at 15ff10a, f105f68 and 3cf82b1; the same 113 checks passed in the prior 15ff Windows full. Do not blame new goal text or claim a regression cause without evidence. Investigate and fix in owned audio/test scope with bounded observable readiness if warranted, preserving real voice/caption identity, duplicate/heard behavior and ducking. Never skip or soften the assertion, force fake playback or change gameplay. Run focused runner retaining complete logs, then full; disclose independent M1-68 performance failures if remaining. Publish exact handoff for Ramim acceptance gate.",
+   "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M1-101",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Guard HUD world overlays while rebuilt player nodes leave the tree",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/chapter1_campaign_hud.gd"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-08.",
+   "evidence": "",
+   "updated": "2026-11-08",
+   "prompt": "Existing campaign_media windowed/headless rebuilds log six ERROR Condition !is_inside_tree returning Transform3D during CS-02/CS-03 scene rebuild. Full raw log production/qa/evidence/M1-62_campaign_media.txt: _distance_to line 642 -> _update_world_overlay 1003 -> _process 973; direct global-transform access also 1006/1007. Same errors occur in the prior 15ff baseline full at old lines 614/975/978/979, so not newly introduced by M1-62. Investigate the real player/target lifetime contract and guard shared HUD readers until relevant 3D nodes are actually inside the tree; preserve valid markers, distances, focus, reduced motion and scene transitions. Do not edit Atik campaign/runtime or hide valid gameplay errors indiscriminately. Grep all callers before one shared fix. Add actual campaign room-rebuild regression and verify first/repeated transitions without these errors using mandatory runner; run full and retain unrelated audio/performance failures honestly. This task is separate from M1-62 authored guidance; source candidate already reviewed and is frozen during its final gate.",
+   "reserved_for": "ramim",
+   "effort": 1
   }
  ],
  "requirements": [
