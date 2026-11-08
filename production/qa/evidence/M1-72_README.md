@@ -17,3 +17,10 @@ Public logs normalized losslessly to UTF8 after capture. M1-72_log_encoding.json
 Acceptance PENDING: the controller consolidated the expensive all8/32-card/Science text walk into the batch integrated full gate. No fresh1500 walk was started here; controller explicitly approved1500 as a watchdog-only allowance before consolidation. No gameplay/performance threshold or test assertion changed. This evidence does not establish final full run_tests.sh PASS or task done. Hardware controller/physical all-eight-chapter playthrough unperformed.
 
 The public initial native warning transcript trims trailing whitespace only on lines61,68,69 after exact preformat bytes were verified in the private archive. Meaningful output and line endings are unchanged. M1-72_log_encoding.json records preformat/final hashes and this formatting step. Scoped source and final staged evidence diffs are whitespace-clean.
+
+
+## Team integration and current focused verification
+
+After the native capture, the branch incorporated team commits00c804f/fbf6340 (voice-readiness, glove-port and work-light changes). Task source commits rebased to a196fc8 and4dc19fb; all10 task game blobs are byte-identical to the reviewed/visible9de251d candidate. The native79/0 evidence is pre-integration and is not claimed as a post-pull native capture. The original candidate remains preserved locally at ramim/m172-validated-20261108. Source/data SHA256s in the native manifest still match the published files.
+
+On source7ff8f61 / game dc5535507e15c37aa90dca5f1dc69268545bc727, mandatory setup and run_tests.sh science_ pass206/0 and65/0 (2/2 suites,50.874s), with complete logs/run metadata in M1-72_postpull_science/. No warning, error or parse diagnostic appears in these final logs. Current integrated full and the expanded all-eight-chapter/32-card text walk remain pending for the batch; the initial900-second timeout is retained, and the final watchdog is explicitly1500 seconds. No gameplay/performance threshold was changed.

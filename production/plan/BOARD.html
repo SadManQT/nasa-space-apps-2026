@@ -86,13 +86,14 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">87 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">15 todo</span></div><div class="bar"><i style="width:84%"></i></div>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">87 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">16 todo</span></div><div class="bar"><i style="width:83%"></i></div>
 <details open><summary>Working now (2)</summary><ul>
 <li><a class="id" href="#M1-87">M1-87</a> Walkable 10 m relay-road patch so LOC-11 can stand on the LOLA terrain <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/antigravity on 2026-11-08</div></li>
 <li><a class="id" href="#M1-102">M1-102</a> Validate saved Solo/Class crew configuration for Ramim M1-37 <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/claude on 2026-11-08</div></li>
 </ul></details>
-<details open><summary>Next up today (2)</summary><ul>
+<details open><summary>Next up today (3)</summary><ul>
 <li><a class="id" href="#M1-104">M1-104</a> Publish P03/P04 authored data for Ramim Chapter 2 panels <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M1-106">M1-106</a> Record reviewed M1-72 science access and pending batch gate <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M4-09">M4-09</a> Chapter 5 props: replace M3-5R&#x27;s stand-in boxes and cards with real models <span class="chip ">claude</span> <span class="chip ">P2</span></li>
 </ul></details>
 <details><summary>To do (13)</summary><ul>
@@ -5802,7 +5803,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-06.",
-   "evidence": "",
+   "evidence": "Reviewed source delivered (task blobs identical after team rebase): a196fc8 +4dc19fb, evidence7ff8f61. Focused Science206/0, Watch65/0, Journal281/0, Hint124/0; final sequential native79/0 at9de251d/game ace451,11 PNGs/8 source-data hashes verified. Post-pull source7ff8f61/game dc553550 Science206/0 +Watch65/0 (2/2 suites,50.874s), clean mandatory setup/logs. Current integrated full and all8/32-card text walk PENDING for batch (explicit1500s watchdog; no timing assertions changed). Initial900s run124/no finalcount retained; no full pass or M1-68 fix claimed. See production/qa/evidence/M1-72_README.md; handbook owner request M1-106.",
    "updated": "2026-11-08",
    "prompt": "Why: Sadman's science explainers (M1-60, M3-68, M3-77: 17 clips, 34-45 s each) are registered in game/resources/campaign/content/explainers.json with 'sources' (NASA fixture ids) and 'used_by' (mission ids such as EX-M0101, puzzle ids). The hint player (M1-64) plays them as hint level 2, but a player reading a mission data card or Journal -> Science cannot watch them yet. Do: on a data card, show 'Watch: <explainer title>' for each explainer whose used_by contains the card's mission id or whose sources overlap the card's source_ids; play it in the same 16:9 card player as the hint player (captions are burned in; pause, replay, Esc closes; reduced motion shows a still). In Journal -> Science (M3-98), list every explainer the player has unlocked (its mission reached), grouped by chapter. Reuse UiDesign. Acceptance: EX-M0101's card offers the polar Sun, crew needs and solar power clips; run_tests.sh passes; screenshots production/qa/evidence/<task id>_*.png.",
    "reserved_for": "ramim",
@@ -6981,6 +6982,26 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "updated": "2026-11-08",
    "prompt": "M3-2P read-only audit on main018b297: Chapter1Campaign.interact_nearby intercepts only P01/P02; P03/P04 fall through perform_target with catalog payload_defaults. Chapter2Route keeps authoritative _p03/_p04 state in snapshot but publishes no panel view. Saved origin/night/M3-2P tip5203a6f has a larger unlanded runtime patch; do not copy it wholesale or duplicate its temporary-director preview framework. Provide a bounded public chosen-input provider seam following current P01 pattern, for P03/P04 only: real nearby USE requests the owned Ramim panel and cannot commit prefilled correct inputs; a read-only primitive view exposes current target/action, authoritative P03/P04 progress and required inputs; preview/confirmation receives explicit player choices through existing forecast_target/perform_target/dispatcher and validates paused-modal handoff, scene/revision, range/line-of-sight/prerequisites, cancellation, malformed/missing/wrong choices, costs/idempotence, retry/save/load. Reuse the real pure puzzle models and existing forecast route; no second store/simulator and no assigning model state from UI. Publish exact signal/provider/view/payload API before UI implementation. Coordinate with Sadman authored P03/P04 data and Ramim changes to pure models; keep current normal campaign tests meaningful via explicit selected inputs, never auto-sign Class or introduce dependencies on unfinished Class mode for Solo. Do not edit Ramim UI/puzzles. Test actual nearby USE and chosen-input preview/confirm/save/retry in real Chapter2. Focused/full runner with honest M1-68/M1-100 limits. Saved source is reference only.",
    "reserved_for": "atik",
+   "effort": 1
+  },
+  {
+   "id": "M1-106",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Record reviewed M1-72 science access and pending batch gate",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "PRODUCTION_HANDBOOK.md"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-08.",
+   "evidence": "",
+   "updated": "2026-11-08",
+   "prompt": "Record a dated handbook section10 status line for Ramim M1-72 reviewed science Watch/Journal source. Source adds real current-mission data card route and science clip Watch matching, using the existing16:9 hint player without spending hint/HowTo progress, reduced-motion sampled still/captions, reached-mission Journal Science grouped/deduplicated by chapter. Source review findings fixed; final focused206 Science +65 Watch +281 Journal +124 hints, native79/0 clean at source9de251d before the later team audio/world pull. Published task source blobs are identical after rebase; current post-pull runner Science206/0 +Watch65/0 at7ff8f61/game dc553550 passes. Evidence production/qa/evidence/M1-72_README.md and final PNGs. This is reviewed source delivery, NOT task/full-game completion: current integrated full and expanded all8/32-card player_text are PENDING for the batch, watchdog1500 only (no runtime/performance threshold changed); initial900s timeout124 is retained. Existing M1-68 acceptance remains unresolved, M1-100 owner fix has landed but not yet certified by this Windows full. Do not claim all suites pass or full Journal M3-98 implemented. Update only owned handbook status and keep local import/editor exclusions out of commits.",
+   "reserved_for": "sadman",
    "effort": 1
   }
  ],
