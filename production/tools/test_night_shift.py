@@ -37,7 +37,7 @@ ns.asleep.clear()
 with mock.patch.multiple(ns, run_agent=first_call, log=lambda m: None, resume_parked=lambda s, t: "", changes=lambda s: "",
                          worker_prompt=lambda *a: "", task_info=lambda s, t: {"priority": "P1", "title": "Assemble the Chapter 1 rooms from the kit", "status": "todo"}):
     ns.do_task(Path("/nowhere"), "M1-06", "codex")
-    assert calls[0] == ("claude2", "xhigh"), calls  # 3D work goes to Claude: Opus 5.5 at extra-high effort
+    assert calls[0] == ("buet", "xhigh"), calls  # 3D work goes to Antigravity first (8 Nov: no Claude in the night shift)
 assert not any("fable" in accounts for accounts in ns.LANES.values()), ns.LANES  # Opus 5.5 for all tasks (5 Nov 23:40)
 
 # a task claimed by hand in a day session is never picked by the night shift (6 Nov: nslot1 resumed M1-34 while Sadman/claude landed it)
@@ -91,13 +91,12 @@ with mock.patch.multiple(ns, sh=lambda args, *a, **k: calls.append(args) or (0, 
     ns.park(Path("/nowhere"), "M9-06", "failed")
     assert any("block" in c for c in calls), calls  # its own failed night claim still blocks
 
-# Claude only (Sadman, 7 Nov): every lane and every reviewer is a Claude account, and supervisor preferences cannot bring
-# back Codex or Gemini
-assert all(a == ["claude2"] for a in ns.LANES.values()), ns.LANES  # this account only (7 Nov)
-assert all(a == ["claude2"] for a in ns.REVIEWER.values()), ns.REVIEWER
-assert all(ns.ACCOUNTS[a]["engine"] == "claude" and "claude-opus-5-5" in ns.ACCOUNTS[a]["cmd"] for a in ns.CLAUDE)
+# Codex and Antigravity only (Sadman, 8 Nov): no lane or reviewer is a Claude account, and a review is always by the other engine
+assert all(set(a) <= set(ns.ALLOWED) for a in ns.LANES.values()), ns.LANES
+assert not any(ns.ACCOUNTS[a]["engine"] == "claude" for a in ns.ALLOWED)
+assert all(ns.ACCOUNTS[r]["engine"] != engine for engine, rs in ns.REVIEWER.items() for r in rs if engine != "claude"), ns.REVIEWER
 
-# the review is its own run on the account (a fresh session), after the worker
+# the reviewer is on the other engine
 seen = []
 ns.asleep.clear()
 def record(account, prompt, cwd, effort):
@@ -107,16 +106,17 @@ with mock.patch.multiple(ns, run_agent=record, log=lambda m: None, resume_parked
                          worker_prompt=lambda *a: "work", review_prompt=lambda *a: "review", run_capture=lambda s, t: None,
                          tests_pass=lambda s: (True, ""), task_info=lambda s, t: {"priority": "P1", "title": "x", "status": "done"}):
     outcome, _ = ns.do_task(Path("/nowhere"), "M9-07", "claude")
-    assert outcome == "done" and seen[0][1] == "work" and seen[-1] == ("claude2", "review"), seen
+    assert outcome == "done" and seen[0][1] == "work" and seen[-1][1] == "review", seen
+    assert ns.ACCOUNTS[seen[0][0]]["engine"] != ns.ACCOUNTS[seen[-1][0]]["engine"], seen
 
-# at most MAX_CLAUDE Claude workers hold a seat at once
+# at most SEATS[engine] workers of one engine hold a seat at once
 import fcntl as _fcntl
-with tempfile.TemporaryDirectory() as tmp, mock.patch.multiple(ns, NIGHT=Path(tmp), MAX_CLAUDE=1):
-    seat = ns.claude_seat()
-    probe = open(Path(tmp) / "claude0.lock", "a")
+with tempfile.TemporaryDirectory() as tmp, mock.patch.multiple(ns, NIGHT=Path(tmp), SEATS={"gemini": 1}):
+    seat = ns.seat("gemini")
+    probe = open(Path(tmp) / "gemini0.lock", "a")
     try:
         _fcntl.flock(probe, _fcntl.LOCK_EX | _fcntl.LOCK_NB)
-        raise AssertionError("a second Claude worker got a seat while the only one was taken")
+        raise AssertionError("a second Antigravity worker got a seat while the only one was taken")
     except BlockingIOError:
         pass
     seat.close()
