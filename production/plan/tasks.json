@@ -6132,15 +6132,15 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Record reviewed Care Round provider and runtime acceptance limits",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "PRODUCTION_HANDBOOK.md"
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.",
-   "evidence": "",
+   "evidence": "PRODUCTION_HANDBOOK.md §10, 8 Nov line: M1-83 Care Round UI provider reviewed on main (provider contract, review fixes, probe counts, full run 64/65 with only M1-68 timing failures; Atik M1-49 owns integration; M1-83 stays blocked on the full gate); M1-90 Windows timing collection complete (2 and 1 timing failures; M1-68 unresolved, no cause claimed); M1-62 Chapter 2-8 job text (283 + 46 entries, text 12839/0, Science Data 181/0, 68/70 suites at 3cf82b1; blocked on M1-100 and M1-68/M1-97, M1-101 separate). No board status of M1-83/M1-62/M1-68 changed; no canon, asset or numeric rule changed.",
    "updated": "2026-11-08",
    "prompt": "Update handbook status for reviewed CareRound UI provider M1-83 delivered to main, contract production/qa/evidence/M1-83_provider.md. EqualAlo/Tara readings/ghosts, image-only async capture handshake, FamilyMode and keyboard/controller/150text; independentreview twofindingsfixed; care32/text524 andnative297probes/eightPNGs. Fullsource15ff10a64/65,soleM1-68 timing failures, no taskdone/performancefix. AtikM1-49 owns actual worldcamera/date/order/photoledger/persistence and integration; M1-83 remains blocked on fullgate, sourceavailableforruntimewiring. Add short accurate datedstatus, no canondecision. Fullresults M1-83_test_results.txt/full_results.txt/performance_runtime.txt. No new assets, paidgeneration or changed numeric rules.\nRelated update: M1-90 original Windows collection is complete and reviewed: production/qa/evidence/M1-68_windows/2026-11-08_0130_ramim/README.md. The two fresh-process runs failed2/1 timing checks; both setups succeeded and every raw log is retained. M1-68 remains unresolved; no cause or fix is claimed. Include this related acceptance limit briefly.\nRelated 8 Nov status: M1-62 authored all 283 Chapter 2-8 job entries while preserving 46 Chapter 1 entries. Current all-chapter text: 12839/0; Science Data: 181/0; 22 normal/150% native PNGs verified. Independent source review has no findings. Full source 3cf82b1 / game tree f5686325: 68/70 suites, 2223 s. Reviewed WIP remains blocked on audio fixture M1-100 and Windows timings M1-68/M1-97. Existing HUD transform noise is separate M1-101. See production/qa/evidence/M1-62.md. Please record a concise status; no canon, model, asset or numeric rules changed.\nRelated M1-70 status: three-line optional Credit block after Source, exact supplied text, blank/absent unchanged; no source fixture or service change. Review approved without findings; focused Science 206/0, native 207/0 with two verified normal/150% images. Full candidate defddc9 / game tree 4e62dda9: 69/70 in 2349 s, only performance 537/4 failed. Team Noor/garage updates subsequently integrated with all task source blobs unchanged; current focused Science 206/0, no post-pull full pass claimed. M1-70 remains reviewed WIP blocked on M1-68/M1-97. See production/qa/evidence/M1-70.md. Please record concise status; no canon or numeric rule changed.",
    "reserved_for": "sadman",
