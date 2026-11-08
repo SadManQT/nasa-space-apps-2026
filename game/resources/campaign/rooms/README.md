@@ -336,3 +336,35 @@ boundaries in `RouteNavigation`, driving the dock cycle and its time card from t
 turned TerrainStream outside the rover door. Run `game/tools/run_tests.sh chapter4_rooms` and
 `production/qa/evidence/M3-105_capture.sh` (windowed, 19 screenshots).
 
+# LOC-09 and LOC-10, the cold-trap road and the vault shelf (M3-106)
+
+`LOC-09.json` / `ridge.tscn` and `LOC-10.json` / `vault_shelf.tscn` are exterior sites built from the approved M3-4A
+EN_ColdTrap pieces and the vault set (new assembly `site_kit`: props are kit pieces by `piece` with their LOD0 collision
+and mount offset, a GLB by `path`, or a scene by `scene`, e.g. `VH_Rover_Lit.tscn` with its headlights; `box_collider`
+makes the rover solid; `follow_ground` lets it pitch and roll with the terrain; PBR materials; no door nodes on open
+ground). `dated_sun` turns the flat fallback floor's key light into the scene's dated Sun from its Horizons row (in the
+room's frame), and puts it out when that row says the Sun is below the local terrain horizon.
+
+LOC-09 (decision 8) is played at the three computed beacon corners of EX-CH04-S04 and at the last bend: its room frame
+runs the road along -Z with the corner's road cell at the origin; `exterior_terrain.json` LOC-09 `segments` B1 (1.02 km,
+aurora_ridge, sunlit), B2 (1.88 km, sunlit) and B3 (5.24 km, cold_trap, in terrain shadow) each carry their own region,
+origin and `yaw_deg` (the road's bearing), and `sun_positions.json` has a row per segment with the horizon where it
+stands; the room's own placement stays the 7.82 km bend, EX-CH04-S05's reference and sample station. `clear_lanes` keeps
+scattered rock off the road. Staging layers or items with `segment` show only on that segment (the slope sign's value).
+LOC-10 is the shelf in the cold-trap site frame (coldtrap.json `staging.shelf`), bounds 34 x 34 m so the rover stands
+15 m back inside them. A fixture laid at an angle (the boot prints, the tether) carries `rotation_degrees` [pitch, yaw,
+roll]; a bare `yaw` on a fixture stays the wall an Earth-screen fixture hangs on (CampaignCrew) and does not turn its box.
+
+| Scenes | Room | What stands there |
+|---|---|---|
+| EX-CH04-S04 B1 / B2 / B3 | LOC-09 segments | The 5 m beacon mast left of the road before the blind corner, its head reading BEACON n, NEXT HOP and LINK NOT TESTED (a mounted beacon with no test does not count); the return marker; the slope sign with that corner's own slope (2, 6, 9 deg, under the rover's 15); the rover 8 m back, lamps on; Rafi and Kai suited. B1 and B2 sunlit at 08:00 UTC with Earth low on the horizon, B3 in terrain shadow (S04 -> S05: an unbroken chain home) |
+| EX-CH04-S05 | LOC-09 (last bend) | The dry reference plate with the calibrated scanner on its socket and three numbered sample stakes in the headlights; the readings stay in the scanner (reference 2, threshold 12, samples 2/18/19); the Sun below the terrain |
+| EX-CH04-S06 | LOC-10 | The sealed sample's holder at its stake; vault V12 as deposited (thin dust film on its window), the unfaded 2034 marker with its archival tag (SURVEY MARK 2034, DEPOSIT V12: names nobody), two tether anchors, the 2034 crew's crisp boot prints; the closed carrier still on the rover |
+| EX-CH04-S07 .. S08 | LOC-10 | The carrier tethered beside the vault to the first anchor (S06 -> S07), the thermal probe by the outer socket, the lid shut (probe, sleeve, cradle: S07 -> S08); the cargo mount station at the rover's rear rack |
+
+On the terrain the far crater rims that shade the shelf and B3 lie outside the cold_trap heightfield, so the evidence
+captures stand a shadow-only wall 400 m toward the Sun at the row's terrain horizon (`test_chapter4_rooms.gd`
+`_dated_rig`); the campaign side (segments, turned stream, segment rows, that occluder or a cold_trap vista) is Atik's
+board task M3-110. Run `game/tools/run_tests.sh chapter4_rooms`, `game/tools/run_tests.sh exterior_terrain` and
+`production/qa/evidence/M3-106_capture.sh` (windowed, 10 screenshots).
+

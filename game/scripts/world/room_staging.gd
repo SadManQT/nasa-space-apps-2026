@@ -135,7 +135,7 @@ static var _flower_shader: Shader
 static func build(room: CampaignRoom, stage: Dictionary, layout: Dictionary) -> Node3D:
 	var visuals := _root(room.visual_root)
 	var colliders := _root(room.collision_root)
-	var habitat: bool = layout.get("assembly") == "habitat_kit"
+	var habitat: bool = layout.get("assembly") in ["habitat_kit", "site_kit"]  # PBR fixtures (site_kit: M3-106 exteriors)
 	for node in room.visual_root.get_children():
 		if node is Node3D and node.visible and (String(node.name) in stage.hide or (node is Label3D and String(node.text) in stage.hide_signs)):
 			node.hide()

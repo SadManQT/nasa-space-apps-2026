@@ -25,6 +25,10 @@ const SEEDLING_WORDS := {"seed": "SOWN SEED", "cotyledon": "SEED LEAVES", "true_
 ## greybox light rig are not built, and anchors, focus targets, props, fixtures and doors stand on the published
 ## terrain positions. Ids, doors, pressure markers and scene staging stay the same.
 @export var terrain_ground := false
+## M3-106: which playable segment of an exterior the room stands on (LOC-09: "B1", "B2", "B3", the beacon corners of
+## EX-CH04-S04; "" = the room's own placement, the last bend). Set with terrain_ground before the room enters the tree:
+## it picks the segment's terrain placement (RoomContract.terrain), its dated Sun row and its segment staging.
+@export var terrain_segment := ""
 
 var visual_root: Node3D
 var collision_root: Node3D
@@ -64,7 +68,7 @@ func build_room() -> Dictionary:
 		push_error("CampaignRoom has no contract for " + room_id)
 		return {"accepted": false, "reason": "Unknown room contract."}
 	_layout = RoomContract.layout(room_id)
-	_terrain = RoomContract.terrain(room_id) if terrain_ground else {}
+	_terrain = RoomContract.terrain(room_id, terrain_segment) if terrain_ground else {}
 	if not bool(_terrain.get("omit_staging_floor", false)):
 		_terrain = {}
 	set_meta("room_name", contract.get("name", "AURORA"))
@@ -302,6 +306,8 @@ func _build_doors(contract: Dictionary) -> void:
 	if _layout.get("assembly") == "habitat_kit":
 		_build_kit_doors()
 		return
+	if _layout.get("assembly") == "site_kit":
+		return  # an open road or shelf: its boundaries are route transitions (the rover), never invisible walls (doc 09)
 	var boundaries: Array = contract.get("boundary_ids", [])
 	for index in boundaries.size():
 		var boundary_id := String(boundaries[index])
@@ -423,13 +429,13 @@ func _build_navigation(contract: Dictionary) -> void:
 	navigation_root.add_child(region)
 
 func _load_approved_assets(contract: Dictionary) -> void:
-	var paths: Array = _layout.get("props", []) if _layout.get("assembly") == "habitat_kit" else contract.get("asset_paths", [])
+	var paths: Array = _layout.get("props", []) if _layout.get("assembly") in ["habitat_kit", "site_kit"] else contract.get("asset_paths", [])
 	for index in paths.size():
 		_add_approved_asset(String(paths[index].path) if paths[index] is Dictionary else String(paths[index]), index, paths.size(), paths[index] if paths[index] is Dictionary else {})
 
 ## Loads approved prop instances over frames using the existing geometry cache.
 func load_assets_incremental() -> void:
-	var paths: Array = _layout.get("props", []) if _layout.get("assembly") == "habitat_kit" else RoomContract.room(room_id).get("asset_paths", [])
+	var paths: Array = _layout.get("props", []) if _layout.get("assembly") in ["habitat_kit", "site_kit"] else RoomContract.room(room_id).get("asset_paths", [])
 	for index in paths.size():
 		_add_approved_asset(String(paths[index].path) if paths[index] is Dictionary else String(paths[index]), index, paths.size(), paths[index] if paths[index] is Dictionary else {})
 		await get_tree().process_frame
@@ -441,7 +447,15 @@ func _add_approved_asset(path: String, index: int, count: int, authored: Diction
 	var asset_name := String(authored.get("id", path.get_file().get_basename()))
 	if visual_root.has_node(asset_name):
 		return
-	var model := AssetGeometryScript.load_glb(path)
+	var model: Node3D = null
+	if authored.has("piece"):
+		# M3-106: a kit or site piece (EN_ColdTrap) with its LOD0 collision; its mount offset sinks driven stakes
+		model = Kit.instance(String(authored.piece))
+	elif authored.has("scene"):
+		var packed := load(String(authored.scene)) as PackedScene  # e.g. VH_Rover_Lit.tscn: the rover with its lamps
+		model = packed.instantiate() as Node3D if packed != null else null
+	else:
+		model = AssetGeometryScript.load_glb(path)
 	if model == null:
 		return
 	model.name = asset_name
@@ -452,6 +466,8 @@ func _add_approved_asset(path: String, index: int, count: int, authored: Diction
 			break
 	if not transform_data.is_empty():
 		model.position = Presentation.vector(transform_data.position)
+		if transform_data.has("piece"):
+			model.position.y += Kit.mount_y(String(transform_data.piece))
 		model.rotation_degrees = Presentation.vector(transform_data.rotation_degrees)
 		model.scale = Presentation.vector(transform_data.scale)
 	else:
@@ -460,8 +476,16 @@ func _add_approved_asset(path: String, index: int, count: int, authored: Diction
 		model.scale = Vector3.ONE * 0.85
 	if _terrain.get("props", {}).has(asset_name):
 		model.position = Presentation.vector(_terrain.props[asset_name])
+	if _terrain.get("props_tilt", {}).has(asset_name):
+		# a vehicle on the terrain pitches and rolls with the ground under its wheels (exterior_terrain.json props_tilt)
+		model.rotation_degrees.x = float(_terrain.props_tilt[asset_name][0])
+		model.rotation_degrees.z = float(_terrain.props_tilt[asset_name][1])
+	if transform_data.has("box_collider"):
+		# a vehicle without collision of its own (VH_Rover) stands solid: a box over its footprint, in its own frame
+		var size := Presentation.vector(transform_data.box_collider)
+		Habitat.collider(model, "BoxCollider", Vector3(0, size.y * 0.5, 0), size)
 	visual_root.add_child(model)
-	if _layout.get("assembly") != "habitat_kit":
+	if _layout.get("assembly") not in ["habitat_kit", "site_kit"]:
 		ToonMaterialsScript.apply_to_tree(model, false, true)
 
 func _asset_position(index: int, count: int) -> Vector3:
@@ -580,12 +604,33 @@ func set_scene_context(scene_id: String) -> int:
 	_scene_context = scene_id
 	_cues_run.clear()
 	_apply_staging()
+	_date_the_sun()
 	var started := 0
 	for spec in _layout.get("fixtures", []):
 		var delays: Dictionary = spec.get("cue", {}).get("delay_s", {})
 		if delays.has(scene_id) and _pulse(spec, float(delays[scene_id])):
 			started += 1
 	return started
+
+## M3-106: on the flat fallback floor of an exterior with "dated_sun", the key light is the scene's Sun from its bundled
+## JPL Horizons row (the segment's row for a segment room), turned into the room's frame (exterior_terrain.json yaw_deg),
+## and goes out when that row puts the Sun below the local terrain horizon (a permanently shadowed shelf, the B3 corner).
+## On the terrain provider's ground the provider's own dated rig lights the room instead.
+func _date_the_sun() -> void:
+	var key := get_node_or_null("RoomLighting/KeyLight") as DirectionalLight3D
+	if key == null or not bool(_layout.get("dated_sun", false)):
+		return
+	var row := RoomContract.Heightfield.scene_lighting(_scene_context, terrain_segment)
+	if row.is_empty():
+		return
+	var site: Dictionary = RoomContract.Heightfield.sun_table().sites.get(String(row.site), {})
+	if site.is_empty():
+		return
+	var yaw := deg_to_rad(float(RoomContract.terrain(room_id, terrain_segment).get("yaw_deg", 0.0)))
+	var to_sun := Basis(Vector3.UP, -yaw) * RoomContract.Heightfield.sun_direction_at(float(site.x_m), float(site.y_m), float(row.sun_az_deg), float(row.sun_el_deg))
+	key.basis = Basis.looking_at(-to_sun, Vector3.UP)
+	key.light_energy = 0.0 if String(row.sun_state) == "dark" else float(_layout.get("lighting", {}).get("key_energy", 1.6))
+	key.set_meta("ephemeris", row.duplicate(true))
 
 ## M1-84 campaign hook: one pulse of a fixture cue now, for a scene the room JSON lists in the cue's "on_request"
 ## (the inventory lamp during the EX-CH01-S02 roll call, doc 24 §2.9). Exactly one per staged scene: a repeat, or a
@@ -637,7 +682,7 @@ func scene_context() -> String:
 	return _scene_context
 
 func _apply_staging() -> void:
-	var next := RoomContract.staging_for(_layout, _scene_context, _choices, _moments)
+	var next := RoomContract.staging_for(_layout, _scene_context, _choices, _moments, terrain_segment)
 	var signature := JSON.stringify(next)
 	if signature == _stage_signature:
 		return
@@ -649,7 +694,7 @@ func _apply_staging() -> void:
 	if not next.layers.is_empty():
 		Staging.build(self, next, _layout)
 	if changes_floor and build_navigation and _layout.get("assembly") == "habitat_kit":
-		_rebuild_navigation(RoomContract.staged_layout_for(_layout, _scene_context, _choices, _moments))
+		_rebuild_navigation(RoomContract.staged_layout_for(_layout, _scene_context, _choices, _moments, terrain_segment))
 
 ## Swaps the room's private navigation map for one built from the staged obstacles (same rasteriser and agent
 ## clearance as the base room, so staged furniture is walked around like Chapter 1 furniture).

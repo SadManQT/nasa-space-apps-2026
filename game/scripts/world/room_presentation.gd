@@ -41,6 +41,9 @@ static func mesh_box(parent: Node3D, id: String, position: Vector3, size: Vector
 ## Stages the room's authored fixtures and static, bounded practical-light rig.
 static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 	var habitat: bool = layout.get("assembly") == "habitat_kit"
+	# M3-106: an exterior site built from kit pieces (LOC-09, LOC-10) keeps PBR fixtures and the AgX look, and its key
+	# light (the Sun on the flat fallback floor) keeps its shadows
+	var pbr: bool = habitat or layout.get("assembly") == "site_kit"
 	var lighting := Node3D.new()
 	lighting.name = "RoomLighting"
 	room.add_child(lighting)
@@ -55,7 +58,7 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 	environment.ambient_light_energy = float(settings.get("ambient_energy", 0.0 if vacuum else 0.3))
 	environment.fog_enabled = false
 	environment.volumetric_fog_enabled = false
-	if habitat:
+	if pbr:
 		environment.tonemap_mode = Environment.TONE_MAPPER_AGX
 	world.environment = environment
 	lighting.add_child(world)
@@ -78,7 +81,7 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 		return
 	var visuals := room.get_node("VisualRoot") as Node3D
 	for spec in layout.get("fixtures", []):
-		fixture(visuals, spec, habitat)
+		fixture(visuals, spec, pbr)
 	if vacuum:
 		return
 	if habitat:
@@ -109,6 +112,10 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 ## chapter staging.
 static func fixture(parent: Node3D, spec: Dictionary, habitat: bool) -> MeshInstance3D:
 	var mesh := mesh_box(parent, spec.id, vector(spec.position), vector(spec.size), Color(spec.color), bool(spec.get("emissive", false)), habitat)
+	if spec.has("rotation_degrees"):
+		# a fixture laid at an angle (M3-106: a boot print, the tether between the carrier and its ground anchor); a bare
+		# "yaw" stays what it is on an Earth-screen fixture, the wall it hangs on (CampaignCrew), not a turn of its box
+		mesh.rotation_degrees = vector(spec.rotation_degrees)
 	if habitat and spec.has("finish"):
 		mesh.material_override = finish_material(String(spec.finish), Color(spec.color))
 	if bool(spec.get("transparent", false)):

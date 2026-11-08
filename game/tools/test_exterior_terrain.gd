@@ -73,7 +73,7 @@ func _field(region_id: String) -> TerrainHeightfield:
 		_fields[region_id] = Heightfield.load_region(region_id, true)
 	return _fields[region_id]
 
-func _make_room(room_id: String, on_terrain: bool) -> CampaignRoom:
+func _make_room(room_id: String, on_terrain: bool, segment: String = "") -> CampaignRoom:
 	var room: CampaignRoom
 	if ROOM_SCENES.has(room_id):
 		room = (load(ROOM_SCENES[room_id]) as PackedScene).instantiate() as CampaignRoom
@@ -81,12 +81,32 @@ func _make_room(room_id: String, on_terrain: bool) -> CampaignRoom:
 		room = CampaignRoom.new()
 		room.room_id = room_id
 	room.terrain_ground = on_terrain
+	room.terrain_segment = segment
 	root.add_child(room)
 	return room
+
+## Every placement to check: [label, room id, placement, segment]: each room's own placement, then each of its playable
+## segments (M3-106: LOC-09's beacon corners B1, B2, B3).
+func _placements(data: Dictionary) -> Array:
+	var out: Array = []
+	for room_id in data.rooms:
+		out.append([String(room_id), String(room_id), data.rooms[room_id], ""])
+		for segment in data.rooms[room_id].get("segments", {}):
+			out.append(["%s %s" % [room_id, segment], String(room_id), data.rooms[room_id].segments[segment], String(segment)])
+	return out
 
 func _ready_rooms() -> Array:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(Contract.TERRAIN_PATH))
 	return data.rooms.keys().filter(func(id): return bool(data.rooms[id].get("omit_staging_floor", false)))
+
+## [room id, segment] for every ready placement: each terrain room, then each of its segments.
+func _ready_places() -> Array:
+	var out: Array = []
+	for room_id in _ready_rooms():
+		out.append([String(room_id), ""])
+		for segment in Contract.terrain_segments(String(room_id)):
+			out.append([String(room_id), String(segment)])
+	return out
 
 # ------------------------------------------------------------------------------------------- derivation
 
@@ -96,7 +116,11 @@ func _derive(room_id: String, place: Dictionary) -> Dictionary:
 	var room := _make_room(room_id, false)
 	var origin := Vector3(float(place.origin_xz_m[0]), 0, float(place.origin_xz_m[1]))
 	origin.y = field.height_at(origin.x, origin.z)
-	var ground := func(x: float, z: float) -> float: return field.height_at(origin.x + x, origin.z + z) - origin.y
+	# M3-106: a segment turned by yaw_deg (the road's bearing) samples the ground in its turned frame
+	var turn := Basis(Vector3.UP, deg_to_rad(float(place.get("yaw_deg", 0.0))))
+	var ground := func(x: float, z: float) -> float:
+		var p := turn * Vector3(x, 0, z)
+		return field.height_at(origin.x + p.x, origin.z + p.z) - origin.y
 	var out := {"origin_m": _r3(origin), "anchors": {}, "focus_targets": {}, "focus_approaches": {}, "props": {}, "fixtures": {}, "doors": {}, "bury_m": {}}
 	var clear: Array = []
 	var targets: Array = []
@@ -154,14 +178,29 @@ func _derive(room_id: String, place: Dictionary) -> Dictionary:
 		var box := AssetGeometry.bounds(model)
 		var base := _base_box(model, box)
 		var rest := _rest(ground, model.transform, base)
-		out.props[String(id)] = _r3(model.position + Vector3(0, rest.x, 0))
-		out.bury_m[String(id)] = snappedf(rest.y - rest.x, 0.001)
+		if _follows_ground(room_id, String(id)):
+			# M3-106: a vehicle pitches and rolls with the ground under its four wheel corners (VH_Rover on the 8.5 deg road)
+			var fit := _ground_fit(ground, model.transform, base)
+			out.props[String(id)] = _r3(model.position + Vector3(0, fit.y, 0))
+			out.props_tilt = out.get("props_tilt", {})
+			out.props_tilt[String(id)] = [snappedf(fit.pitch, 0.01), snappedf(fit.roll, 0.01)]
+			out.bury_m[String(id)] = snappedf(fit.residual, 0.001)
+		else:
+			out.props[String(id)] = _r3(model.position + Vector3(0, rest.x, 0))
+			out.bury_m[String(id)] = snappedf(rest.y - rest.x, 0.001)
 		var corner := model.transform * box.position
 		var base_low := model.transform * base.position
 		var base_high := model.transform * base.end
 		out.footprint_m = out.get("footprint_m", {})
 		out.footprint_m[String(id)] = snappedf(Vector2(base_high.x - base_low.x, base_high.z - base_low.z).length(), 0.001)
 		clear.append([Vector3(model.position.x, rest.x, model.position.z), Vector2(corner.x - model.position.x, corner.z - model.position.z).length() + PROP_CLEAR_M])
+	# M3-106: lanes the room data keeps clear of scattered rock (LOC-09: the road the rover drove), every 2 m
+	for lane in Contract.layout(room_id).get("clear_lanes", []):
+		var a := Presentation.vector(lane.from)
+		var b := Presentation.vector(lane.to)
+		for index in int(a.distance_to(b) / LANE_STEP_M) + 1:
+			var p := a.lerp(b, float(index) * LANE_STEP_M / a.distance_to(b))
+			clear.append([Vector3(p.x, ground.call(p.x, p.z), p.z), float(lane.radius_m)])
 	# Rock-clear lanes from the player's anchor to everyone and everything the scene sends them to; a lane a door or
 	# prop collider would cut goes round it through one waypoint (published under "detours").
 	var bounds: Array = Contract.room(room_id).bounds_m
@@ -186,9 +225,10 @@ func _derive(room_id: String, place: Dictionary) -> Dictionary:
 			if bool(target[2]):
 				for index in int(span.length() / 0.5) + 1:
 					var p := from + span.normalized() * 0.5 * index
-					slope = maxf(slope, field.slope_deg_at(origin.x + p.x, origin.z + p.y))
+					var q := turn * Vector3(p.x, 0, p.y)
+					slope = maxf(slope, field.slope_deg_at(origin.x + q.x, origin.z + q.z))
 	out.max_walk_slope_deg = snappedf(slope, 0.01)
-	out.exclusions = clear.map(func(item): return {"position": _r3(item[0] + origin), "radius_m": snappedf(item[1], 0.001)})
+	out.exclusions = clear.map(func(item): return {"position": _r3(turn * item[0] + origin), "radius_m": snappedf(item[1], 0.001)})
 	var low := INF
 	var high := -INF
 	for gx in int(float(bounds[0]) / 2.0) + 1:
@@ -266,6 +306,30 @@ func _rest(ground: Callable, transform: Transform3D, box: AABB) -> Vector2:
 		high = maxf(high, h)
 	return Vector2(low, high)
 
+func _follows_ground(room_id: String, id: String) -> bool:
+	for prop in Contract.layout(room_id).get("props", []):
+		if String(prop.get("id", "")) == id:
+			return bool(prop.get("follow_ground", false))
+	return false
+
+## The plane through the ground under a footprint's four corners (box in the node's own frame): the room-local ground
+## height at its centre ("y"), the pitch about its own X and roll about its own Z that lay its base on that plane (degrees,
+## for rotation_degrees.x / .z), and the deepest corner or centre into the ground from that plane ("residual").
+func _ground_fit(ground: Callable, transform: Transform3D, box: AABB) -> Dictionary:
+	var h := func(x: float, z: float) -> float:
+		var at: Vector3 = transform * Vector3(x, 0, z)
+		return ground.call(at.x, at.z)
+	var a: float = h.call(box.position.x, box.position.z)
+	var b: float = h.call(box.end.x, box.position.z)
+	var c: float = h.call(box.position.x, box.end.z)
+	var d: float = h.call(box.end.x, box.end.z)
+	var mid := (a + b + c + d) * 0.25
+	var rise_z := ((c + d) - (a + b)) * 0.5
+	var rise_x := ((b + d) - (a + c)) * 0.5
+	var centre: float = h.call((box.position.x + box.end.x) * 0.5, (box.position.z + box.end.z) * 0.5)
+	var twist := absf(a + d - b - c) * 0.25
+	return {"y": mid, "pitch": -rad_to_deg(atan2(rise_z, box.size.z)), "roll": rad_to_deg(atan2(rise_x, box.size.x)), "residual": maxf(twist, centre - mid)}
+
 func _prop_ids(room_id: String) -> Array:
 	var layout := Contract.layout(room_id)
 	if not layout.get("props", []).is_empty():
@@ -313,6 +377,8 @@ func _write() -> void:
 		var place: Dictionary = data.rooms[room_id]
 		if bool(place.get("omit_staging_floor", false)):
 			place.merge(_derive(String(room_id), place), true)
+			for segment in place.get("segments", {}):
+				place.segments[segment].merge(_derive(String(room_id), place.segments[segment]), true)
 		elif place.has("site_from"):
 			place.merge(_derive_pad(place), true)
 	var file := FileAccess.open(Contract.TERRAIN_PATH, FileAccess.WRITE)
@@ -346,8 +412,11 @@ func _check_placements() -> void:
 			_check(data.rooms.has(room_id), room_id + " (an exterior) has a terrain placement")
 	for scene_id in ["EX-CH04-S04", "EX-CH04-S05", "EX-CH04-S06", "EX-CH04-S07", "EX-CH04-S08", "EX-CH08-S03", "EX-CH08-S04", "EX-CH08-S10"]:
 		_check(data.rooms.has(Contract.room_for_scene(scene_id)), scene_id + " exterior room has a placement (scene map unchanged)")
-	for room_id in data.rooms:
-		var place: Dictionary = data.rooms[room_id]
+	for entry in _placements(data):
+		var room_id := String(entry[1])
+		var label := String(entry[0])
+		var place: Dictionary = entry[2]
+		var segment := String(entry[3])
 		var field := _field(String(place.region_id))
 		_check(field != null, room_id + " region " + String(place.region_id) + " loads")
 		if field == null:
@@ -355,13 +424,24 @@ func _check_placements() -> void:
 		var ext := field.extent()
 		var half := Vector2(Contract.room(room_id).bounds_m[0], Contract.room(room_id).bounds_m[1]) * 0.5
 		var o := Vector2(place.origin_xz_m[0], place.origin_xz_m[1])
-		_check(o.x - half.x > ext.x_min and o.x + half.x < ext.x_max and o.y - half.y > ext.z_min and o.y + half.y < ext.z_max, room_id + " room footprint lies inside the heightfield")
+		var reach := half.length() if place.has("yaw_deg") else 0.0  # a turned room's corners sweep its circumscribed circle
+		var span := Vector2(reach, reach) if reach > 0.0 else half
+		_check(o.x - span.x > ext.x_min and o.x + span.x < ext.x_max and o.y - span.y > ext.z_min and o.y + span.y < ext.z_max, label + " room footprint lies inside the heightfield")
 		_check(sites.has(String(place.ephemeris_site)), room_id + " ephemeris site has Horizons rows")
 		var site_at := _site_in_region(sites.get(String(place.ephemeris_site), {}), field)
-		_check(o.distance_to(site_at) < 2000.0, "%s stands %.0f m from its ephemeris site (direction error < 0.07 deg)" % [room_id, o.distance_to(site_at)])
+		# a segment of a road scene may stand up to 3 km from its row's site (B3: 2.9 km, under 0.1 deg of direction, a fifth
+		# of the Sun's radius; it lies in terrain shadow anyway); its own row carries the horizon where it stands
+		var far := 3000.0 if not segment.is_empty() else 2000.0
+		_check(o.distance_to(site_at) < far, "%s stands %.0f m from its ephemeris site (direction error < %.2f deg)" % [label, o.distance_to(site_at), rad_to_deg(far / 1737400.0)])
+		if not segment.is_empty():
+			var row := Heightfield.scene_lighting(String(place.scene), segment)
+			_check(not row.is_empty() and String(row.site) == String(place.ephemeris_site) and row.has("horizon_from"), label + " has its own dated Horizons row with the terrain horizon where it stands")
+			if not row.is_empty() and row.has("horizon_from"):
+				var at := _site_in_region({"x_m": row.horizon_from.x_m, "y_m": row.horizon_from.y_m}, field)
+				_check(at.distance_to(o) < 1.0, label + " row horizon is computed at the segment's own road cell")
 		var horizon := String(place.horizon_site)
-		_check(horizon.is_empty() or (horizon == String(place.ephemeris_site) and o.distance_to(site_at) < 50.0), room_id + " horizon site, if any, is where the room stands")
-		_check(not String(place.get("placement", "")).is_empty(), room_id + " says why it stands there")
+		_check(horizon.is_empty() or (horizon == String(place.ephemeris_site) and o.distance_to(site_at) < 50.0), label + " horizon site, if any, is where the room stands")
+		_check(not String(place.get("placement", "")).is_empty(), label + " says why it stands there")
 		if not bool(place.omit_staging_floor):
 			_check(not String(place.get("pending", "")).is_empty(), room_id + " keeps its flat staging and says why")
 			if place.has("site_from"):
@@ -373,20 +453,22 @@ func _check_placements() -> void:
 				_check(placed.distance_to(bearing) < 0.001, "%s rover door faces azimuth %.0f" % [room_id, float(place.site_from.door_bearing_deg)])
 			continue
 		var derived := _derive(String(room_id), place)
-		_check(_same(place, derived), room_id + " published numbers match the heightfield (run -- --write after a room or terrain change)")
-		_check(float(place.get("max_walk_slope_deg", 99)) <= SLOPE_LIMIT_DEG, "%s lanes stay walkable (max %.1f deg)" % [room_id, float(place.get("max_walk_slope_deg", 99))])
+		_check(_same(place, derived), label + " published numbers match the heightfield (run -- --write after a room or terrain change)")
+		_check(float(place.get("max_walk_slope_deg", 99)) <= SLOPE_LIMIT_DEG, "%s lanes stay walkable (max %.1f deg)" % [label, float(place.get("max_walk_slope_deg", 99))])
 		for key in place.get("bury_m", {}):
 			var limit := maxf(BURY_LIMIT_M, BURY_GRADE * float(place.get("footprint_m", {}).get(key, 0.0)))
-			_check(float(place.bury_m[key]) <= limit, "%s %s rests without floating, its deepest corner %.2f m in (limit %.2f)" % [room_id, key, float(place.bury_m[key]), limit])
-		var circles: Array = place.get("exclusions", []).map(func(e): return [Presentation.vector(e.position) - Presentation.vector(place.origin_m), float(e.radius_m)])
+			_check(float(place.bury_m[key]) <= limit, "%s %s rests without floating, its deepest corner %.2f m in (limit %.2f)" % [label, key, float(place.bury_m[key]), limit])
+		var turn := Basis(Vector3.UP, deg_to_rad(float(place.get("yaw_deg", 0.0))))
+		var circles: Array = place.get("exclusions", []).map(func(e): return [turn.inverse() * (Presentation.vector(e.position) - Presentation.vector(place.origin_m)), float(e.radius_m)])
 		for group in ["anchors", "focus_approaches", "props", "doors"]:
 			for id in place.get(group, {}):
 				var at := Presentation.vector(place[group][id])
-				_check(circles.any(func(c): return Vector2(c[0].x - at.x, c[0].z - at.z).length() < c[1]), "%s %s %s is clear of rocks" % [room_id, group, id])
+				_check(circles.any(func(c): return Vector2(c[0].x - at.x, c[0].z - at.z).length() < c[1]), "%s %s %s is clear of rocks" % [label, group, id])
 		for id in place.get("focus_approaches", {}):
 			var at := Presentation.vector(place.focus_approaches[id])
-			_check(field.slope_deg_at(o.x + at.x, o.y + at.z) <= SLOPE_LIMIT_DEG, "%s approach to %s is walkable" % [room_id, id])
-			_check(at.distance_to(Presentation.vector(place.focus_targets[id])) < 3.0, "%s approach to %s is within interaction range" % [room_id, id])
+			var site_at_approach := turn * at
+			_check(field.slope_deg_at(o.x + site_at_approach.x, o.y + site_at_approach.z) <= SLOPE_LIMIT_DEG, "%s approach to %s is walkable" % [label, id])
+			_check(at.distance_to(Presentation.vector(place.focus_targets[id])) < 3.0, "%s approach to %s is within interaction range" % [label, id])
 	_check(not bool(data.rooms["LOC-11"].omit_staging_floor), "LOC-11 waits for a walkable relay-road patch")
 
 func _site_in_region(site: Dictionary, field: TerrainHeightfield) -> Vector2:
@@ -395,13 +477,16 @@ func _site_in_region(site: Dictionary, field: TerrainHeightfield) -> Vector2:
 # ------------------------------------------------------------------------------------------- rooms
 
 func _check_rooms() -> void:
-	for room_id in _ready_rooms():
-		var place := Contract.terrain(room_id)
-		var flat := _make_room(room_id, false)
-		var ground := _make_room(room_id, true)
+	for entry in _ready_places():
+		var room_id := String(entry[0])
+		var segment := String(entry[1])
+		var place := Contract.terrain(room_id, segment)
+		var flat := _make_room(room_id, false, segment)
+		var ground := _make_room(room_id, true, segment)
+		room_id = room_id if segment.is_empty() else room_id + " " + segment
 		_check(flat.collision_root.has_node("FloorCollision") and flat.collision_root.has_node("ApronRail") and flat.has_node("RoomLighting") and flat.navigation_root.get_child_count() == 1 and not flat.on_terrain(), room_id + " flat staging is unchanged when the terrain is not used")
 		for marker in flat.anchor_root.get_children():
-			_check(marker.position == Presentation.vector(Contract.anchors(room_id)[marker.name]), room_id + " flat anchor unchanged: " + marker.name)
+			_check(marker.position == Presentation.vector(Contract.anchors(String(entry[0]))[marker.name]), room_id + " flat anchor unchanged: " + marker.name)
 		_check(ground.on_terrain() and not ground.collision_root.has_node("FloorCollision") and not ground.collision_root.has_node("ApronRail"), room_id + " terrain mode omits the staging floor and apron rails")
 		_check(not ground.has_node("RoomLighting") and ground.navigation_root.get_child_count() == 0, room_id + " terrain mode leaves lighting and navigation to the provider")
 		for root_name in ["anchor_root", "focus_root", "door_root", "pressure_root"]:
@@ -437,16 +522,20 @@ func _check_rooms() -> void:
 
 ## A real player stands and walks on the provider's collision (Atik's TerrainStream, configured from the placement).
 func _check_walks() -> void:
-	for room_id in _ready_rooms():
-		var place := Contract.terrain(room_id)
+	for entry in _ready_places():
+		var room_id := String(entry[0])
+		var segment := String(entry[1])
+		var place := Contract.terrain(room_id, segment)
 		var origin := Presentation.vector(place.origin_m)
-		var room := _make_room(room_id, true)
+		var room := _make_room(room_id, true, segment)
+		# the provider's ground sits at -origin_m in the room's frame, turned by a segment's yaw_deg (M3-106)
+		var turn := Basis(Vector3.UP, deg_to_rad(float(place.get("yaw_deg", 0.0))))
 		var stream := Stream.new()
-		stream.position = -origin
+		stream.transform = Transform3D(turn, origin).affine_inverse()
 		root.add_child(stream)
 		var start: Vector3 = Presentation.vector(place.anchors[_player_anchor(place)])
 		var clear: Array = place.exclusions.map(func(e): return {"position": Presentation.vector(e.position), "radius_m": float(e.radius_m)})
-		_check(stream.configure(String(place.region_id), origin + start, clear), room_id + " TerrainStream configures from the placement")
+		_check(stream.configure(String(place.region_id), origin + turn * start, clear), room_id + " " + segment + " TerrainStream configures from the placement")
 		var player := Player.instantiate() as PlayerController
 		player.character_glb = "res://assets/characters/CH_Kai/CH_Kai.glb"
 		player.controlled = false
@@ -477,7 +566,7 @@ func _check_walks() -> void:
 						break
 					player.velocity = delta.normalized() * 3.0 + Vector3.DOWN
 					player.move_and_slide()
-					stream.move_focus(player.position + origin)
+					stream.move_focus(origin + turn * player.position)
 					await physics_frame
 			var reached := Vector2(player.position.x - goal.x, player.position.z - goal.z).length() < 0.15
 			_check(reached and absf(player.position.y - goal.y) < 0.2, "%s player walks on the terrain to %s (at %s)" % [room_id, str(goal), str(player.position)])
@@ -512,6 +601,17 @@ func _check_earth() -> void:
 			_check(fraction > 0.0 and fraction < 1.0 and bool(row.earth_above_terrain), "%s %s lit fraction %.2f from the Sun-Earth elongation" % [room_id, row.scene, fraction])
 			var field := _field(String(data.rooms[room_id].region_id))
 			_check(Presentation.vector(spec.sun_direction).distance_to(field.sun_direction(float(row.sun_az_deg), float(row.sun_el_deg))) < 0.001, "%s %s Earth is lit by the same Sun as the dated rig" % [room_id, row.scene])
+	# M3-106: a segment's Earth follows its own row (the horizon where it stands), turned into the segment's frame
+	for room_id in data.rooms:
+		for segment in data.rooms[room_id].get("segments", {}):
+			var place: Dictionary = data.rooms[room_id].segments[segment]
+			var row := Heightfield.scene_lighting(String(place.scene), String(segment))
+			var spec := Contract.earth(String(room_id), String(place.scene), String(segment))
+			_check(bool(spec.presented) == bool(row.get("earth_above_terrain", false)), "%s %s Earth %s where the segment stands: %s" % [room_id, segment, "shown" if bool(row.get("earth_above_terrain", false)) else "hidden", spec.get("reason", "presented")])
+			if bool(spec.presented):
+				var site: Dictionary = Heightfield.sun_table().sites[String(row.site)]
+				var seen := Basis(Vector3.UP, deg_to_rad(float(place.get("yaw_deg", 0.0)))) * Presentation.vector(spec.direction)
+				_check(seen.distance_to(Heightfield.sun_direction_at(float(site.x_m), float(site.y_m), float(row.earth_az_deg), float(row.earth_el_deg))) < 1e-4, "%s %s Earth's direction is turned into the segment's frame" % [room_id, segment])
 	var eclipse := Contract.earth("LOC-06", "EX-CH06-S07")
 	_check(not bool(eclipse.presented) and String(eclipse.reason).contains("eclipse"), "the 12 Jan 2047 eclipse is never drawn in the open sky")
 	_check(not bool(Contract.earth("LOC-06", "EX-CH02-S03").presented) and not bool(Contract.earth("LOC-06", "EX-CH08-S08").presented), "no row, or another site's row: no Earth")

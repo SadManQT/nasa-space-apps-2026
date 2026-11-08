@@ -1,0 +1,465 @@
+{
+ "schema_version": 1,
+ "room_id": "LOC-09",
+ "description": "The cold-trap ridge road (M3-106, decision 8): the approved M3-4A EN_ColdTrap pieces at each computed beacon corner (B1 1.02 km, B2 1.88 km, B3 5.24 km) and at the last bend before the basin (EX-CH04-S05), on the real LOLA terrain (exterior_terrain.json); fictional equipment, surveyed ground.",
+ "about": "Room-local frame: the road runs along -Z toward the cold trap with its cell at the origin; each segment's placement turns the room by the road's bearing (exterior_terrain.json LOC-09 segments, yaw_deg). The beacon stands on its 5 m mast 5.2 m left of the road before the blind corner (decision 9), the return marker 9 m on and 4 m left, the slope sign 14 m on, right; the rover waits 8 m back on the road with its headlights on. At the last bend (the room's own placement) the dry reference plate, the calibrated scanner on its socket and three sample stakes stand left of the road in the headlights (EX-CH04-S05). Every word is live text; the slope value changes per segment.",
+ "bounds_m": [
+  30.0,
+  30.0
+ ],
+ "floor_color": "#7a7672",
+ "accent_color": "#f2c230",
+ "assembly": "site_kit",
+ "dated_sun": true,
+ "apron_rail_height_m": 0.9,
+ "clear_lanes": [
+  {
+   "from": [
+    0.0,
+    0.0,
+    15.0
+   ],
+   "to": [
+    0.0,
+    0.0,
+    -15.0
+   ],
+   "radius_m": 3.0,
+   "about": "the road itself: the rover has driven it, so no scattered rock sits on it"
+  }
+ ],
+ "props": [
+  {
+   "id": "beacon_mast",
+   "piece": "EN_ColdTrap_BeaconMast",
+   "path": "res://assets/environment/EN_ColdTrap/EN_ColdTrap_BeaconMast_LOD0.glb",
+   "position": [
+    -5.2,
+    0.0,
+    0.0
+   ],
+   "rotation_degrees": [
+    0,
+    -90.0,
+    0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "return_marker",
+   "piece": "EN_ColdTrap_ReturnMarker",
+   "path": "res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReturnMarker_LOD0.glb",
+   "position": [
+    -4.0,
+    0.0,
+    -9.0
+   ],
+   "rotation_degrees": [
+    0,
+    -90.0,
+    0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "slope_sign",
+   "piece": "EN_ColdTrap_SlopeSign",
+   "path": "res://assets/environment/EN_ColdTrap/EN_ColdTrap_SlopeSign_LOD0.glb",
+   "position": [
+    3.5,
+    0.0,
+    -14.0
+   ],
+   "rotation_degrees": [
+    0,
+    180.0,
+    0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "reference_plate",
+   "piece": "EN_ColdTrap_ReferencePlate",
+   "path": "res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReferencePlate_LOD0.glb",
+   "position": [
+    -4.0,
+    0.0,
+    -4.0
+   ],
+   "rotation_degrees": [
+    0,
+    0.0,
+    0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "PR_IceScanner",
+   "path": "res://assets/props/PR_IceScanner/PR_IceScanner.glb",
+   "position": [
+    -4.0,
+    0.31,
+    -4.0
+   ],
+   "rotation_degrees": [
+    0,
+    90.0,
+    0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sample_stake_1",
+   "piece": "EN_ColdTrap_SampleStake",
+   "path": "res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD0.glb",
+   "position": [
+    -2.5,
+    0.0,
+    -3.4
+   ],
+   "rotation_degrees": [
+    0,
+    180.0,
+    0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sample_stake_2",
+   "piece": "EN_ColdTrap_SampleStake",
+   "path": "res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD0.glb",
+   "position": [
+    -1.4,
+    0.0,
+    -4.4
+   ],
+   "rotation_degrees": [
+    0,
+    180.0,
+    0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sample_stake_3",
+   "piece": "EN_ColdTrap_SampleStake",
+   "path": "res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD0.glb",
+   "position": [
+    -0.6000000000000001,
+    0.0,
+    -3.1
+   ],
+   "rotation_degrees": [
+    0,
+    180.0,
+    0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "VH_Rover",
+   "path": "res://assets/vehicles/VH_Rover/VH_Rover.glb",
+   "position": [
+    0.0,
+    0.0,
+    8.0
+   ],
+   "rotation_degrees": [
+    0,
+    180.0,
+    0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "scene": "res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn",
+   "box_collider": [
+    4.66,
+    4.41,
+    6.0
+   ],
+   "follow_ground": true
+  }
+ ],
+ "focus_targets": [
+  {
+   "target_id": "ridge_beacon_pad",
+   "label": "Beacon mast",
+   "position": [
+    -5.2,
+    1.0,
+    0.0
+   ],
+   "verb": "Use",
+   "label_offset": [
+    0,
+    1.2,
+    0
+   ],
+   "asset_id": "beacon_mast"
+  },
+  {
+   "target_id": "ice_scanner",
+   "label": "Dry reference and calibrated scanner",
+   "position": [
+    -4.0,
+    0.5,
+    -4.0
+   ],
+   "verb": "Use",
+   "label_offset": [
+    0,
+    0.8,
+    0
+   ],
+   "asset_id": "reference_plate"
+  },
+  {
+   "target_id": "ridge_sample_points",
+   "label": "Sample points",
+   "position": [
+    -1.4,
+    0.5,
+    -4.4
+   ],
+   "verb": "Use",
+   "label_offset": [
+    0,
+    0.8,
+    0
+   ],
+   "asset_id": "sample_stake_2"
+  }
+ ],
+ "anchors": {
+  "ridge_player": [
+   -2.2,
+   0.0,
+   3.0
+  ],
+  "ridge_rafi": [
+   -3.2,
+   0.0,
+   1.2
+  ],
+  "ridge_kai": [
+   -0.6,
+   0.0,
+   4.2
+  ]
+ },
+ "lighting": {
+  "key_rotation_degrees": [
+   -2,
+   -35,
+   0
+  ],
+  "key_color": "#ffffff",
+  "key_energy": 2.2,
+  "fill_energy": 0.0,
+  "ambient_energy": 0.0
+ },
+ "earth_visibility": "On the LOLA terrain only (M1-82): RoomContract.earth for the segment's own Horizons row where Earth clears the terrain there; never on the flat fallback floor.",
+ "staging": [
+  {
+   "id": "ch04_beacon_corner",
+   "from": "EX-CH04-S04",
+   "until": "EX-CH04-S04",
+   "about": "EX-CH04-S04 'Put the Link Before the Corner': at each blind corner the surveyed 5 m mount stands beside the road before the bend, its beacon head waiting for the link test (a mounted beacon with no test does not count); the return marker and the slope sign with that segment's real slope. B1 and B2 are sunlit at 08:00 UTC, B3 lies in terrain shadow (the light diminishes in discrete terrain occlusion). Rafi and Kai in their suits; the rover's headlights on.",
+   "hide": [
+    "reference_plate",
+    "PR_IceScanner",
+    "sample_stake_1",
+    "sample_stake_2",
+    "sample_stake_3"
+   ],
+   "kit_screens": [
+    {
+     "id": "beacon_b1",
+     "node": "beacon_mast",
+     "slot": "Screen",
+     "text": "BEACON 1\nNEXT HOP: AURORA MAST\nLINK NOT TESTED",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "segment": "B1"
+    },
+    {
+     "id": "beacon_b2",
+     "node": "beacon_mast",
+     "slot": "Screen",
+     "text": "BEACON 2\nNEXT HOP: BEACON 1\nLINK NOT TESTED",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "segment": "B2"
+    },
+    {
+     "id": "beacon_b3",
+     "node": "beacon_mast",
+     "slot": "Screen",
+     "text": "BEACON 3\nNEXT HOP: BEACON 2\nLINK NOT TESTED",
+     "fg": "#d9f2ff",
+     "bg": "#0b1220",
+     "segment": "B3"
+    },
+    {
+     "id": "slope_b1",
+     "node": "slope_sign",
+     "slot": "Label",
+     "text": "SLOPE 2°\nROVER LIMIT 15°",
+     "fg": "#1b2433",
+     "bg": "#ebe6d8",
+     "segment": "B1"
+    },
+    {
+     "id": "slope_b2",
+     "node": "slope_sign",
+     "slot": "Label",
+     "text": "SLOPE 6°\nROVER LIMIT 15°",
+     "fg": "#1b2433",
+     "bg": "#ebe6d8",
+     "segment": "B2"
+    },
+    {
+     "id": "slope_b3",
+     "node": "slope_sign",
+     "slot": "Label",
+     "text": "SLOPE 9°\nROVER LIMIT 15°",
+     "fg": "#1b2433",
+     "bg": "#ebe6d8",
+     "segment": "B3"
+    }
+   ],
+   "outfits": {
+    "rafi": "eva",
+    "kai": "eva"
+   },
+   "stations": {
+    "p07_place_beacon_1": "ridge_beacon_pad",
+    "p07_place_beacon_2": "ridge_beacon_pad",
+    "p07_place_beacon_3": "ridge_beacon_pad"
+   },
+   "review_views": {
+    "ch04_corner": {
+     "from": [
+      4.6,
+      2.3,
+      3.2
+     ],
+     "to": [
+      -5.0,
+      1.7,
+      -5.5
+     ]
+    },
+    "ch04_mast": {
+     "from": [
+      -1.0,
+      1.7,
+      3.5
+     ],
+     "to": [
+      -5.2,
+      2.6,
+      0.0
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch04_sample_station",
+   "from": "EX-CH04-S05",
+   "until": "EX-CH04-S05",
+   "about": "EX-CH04-S05 'A Bright Patch Is Not a Report' at the last bend before the basin: the rover's headlights brighten a patch beside the road; the dry reference plate with the calibrated scanner on its socket and three numbered sample stakes (reference 2, threshold 12, samples 2, 18 and 19 stay the scanner's UI values, never painted on the ground). Rafi and Kai suited; the Sun is below the terrain here.",
+   "hide": [
+    "beacon_mast",
+    "return_marker",
+    "slope_sign"
+   ],
+   "kit_screens": [
+    {
+     "id": "stake_tag_1",
+     "node": "sample_stake_1",
+     "slot": "Label",
+     "text": "SAMPLE 1",
+     "fg": "#1b2433",
+     "bg": "#f2c230"
+    },
+    {
+     "id": "stake_tag_2",
+     "node": "sample_stake_2",
+     "slot": "Label",
+     "text": "SAMPLE 2",
+     "fg": "#1b2433",
+     "bg": "#f2c230"
+    },
+    {
+     "id": "stake_tag_3",
+     "node": "sample_stake_3",
+     "slot": "Label",
+     "text": "SAMPLE 3",
+     "fg": "#1b2433",
+     "bg": "#f2c230"
+    }
+   ],
+   "outfits": {
+    "rafi": "eva",
+    "kai": "eva"
+   },
+   "stations": {
+    "p07_record_dry_reference": "ice_scanner",
+    "p07_set_threshold_12": "ice_scanner",
+    "p07_tag_positive_18": "ridge_sample_points",
+    "p07_tag_positive_19": "ridge_sample_points",
+    "p07_retain_negative_2": "ridge_sample_points"
+   },
+   "review_views": {
+    "ch04_samples": {
+     "from": [
+      1.5,
+      2.4,
+      6.0
+     ],
+     "to": [
+      -2.5,
+      0.2,
+      -4.0
+     ]
+    }
+   }
+  }
+ ]
+}

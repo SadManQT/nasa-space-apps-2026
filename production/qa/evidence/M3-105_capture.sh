@@ -10,7 +10,7 @@ ROOT=$(cd "$(dirname "$0")/../../.." && pwd)
 GODOT=${GODOT:-$ROOT/production/tools/godot_gated}
 OUT=$(mktemp)
 "$GODOT" --headless --path "$ROOT/game" --editor --quit >/dev/null 2>&1 || true
-"$GODOT" --path "$ROOT/game" --script res://tools/test_chapter4_rooms.gd -- --capture 2>&1 \
+"$GODOT" --path "$ROOT/game" --script res://tools/test_chapter4_rooms.gd -- --capture --only=M3-105 2>&1 \
   | grep -E "CHAPTER 4 ROOMS CAPTURE RESULT|FAIL|SCRIPT ERROR|Parse Error" | tee "$OUT"
 grep -q "CHAPTER 4 ROOMS CAPTURE RESULT: PASS" "$OUT" || { rm -f "$OUT"; exit 1; }
 rm -f "$OUT"

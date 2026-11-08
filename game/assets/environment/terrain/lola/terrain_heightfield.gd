@@ -190,10 +190,12 @@ static func sun_table() -> Dictionary:
 	return _read_json(SUN_TABLE)
 
 
-## The Sun/Earth row computed for one story scene (e.g. "EX-CH08-S08"), or {} when none exists.
-static func scene_lighting(scene_id: String) -> Dictionary:
+## The Sun/Earth row computed for one story scene (e.g. "EX-CH08-S08"), or {} when none exists. A scene played in
+## several segments (M3-106: EX-CH04-S04 at the beacon corners B1, B2, B3) has one row per segment, each with the terrain
+## horizon where that segment stands; "" asks for the scene's own row.
+static func scene_lighting(scene_id: String, segment: String = "") -> Dictionary:
 	for row in sun_table().get("scene_lighting", []):
-		if String(row.get("scene", "")) == scene_id:
+		if String(row.get("scene", "")) == scene_id and String(row.get("segment", "")) == segment:
 			return row
 	return {}
 

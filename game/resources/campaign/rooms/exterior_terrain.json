@@ -444,337 +444,442 @@
    "ephemeris_site": "cold_trap",
    "horizon_site": "",
    "omit_staging_floor": true,
-   "placement": "The surveyed ridge stands on the computed cold_trap_road (production/terrain/routes.json) at its last bend before the road drops into the basin (map x -4,850 m, y -10,970 m), 1.2 km and 146 m above the cold-trap site: the corner of EX-CH04-S04 'Put the Link Before the Corner'. Sun and Earth directions use the cold-trap rows (0.04 deg away); no terrain horizon was computed here, so Earth is never presented.",
+   "placement": "The surveyed ridge's own placement stands on the computed cold_trap_road (production/terrain/routes.json) at its last bend before the road drops into the basin (map x -4,850 m, y -10,970 m), 1.2 km and 146 m above the cold-trap site: the last bend's viewpoint over the shelf (it sees the shelf but not B2) and EX-CH04-S05's reference and sample station. EX-CH04-S04 'Put the Link Before the Corner' plays at the three computed beacon corners under \"segments\" (M3-106, decision 8). Sun and Earth directions use the cold-trap rows (0.04 deg away); no terrain horizon was computed here, so Earth is never presented.",
    "origin_m": [
     -620.0,
     145.797,
     -1000.0
    ],
    "anchors": {
+    "ridge_player": [
+     -2.2,
+     -0.258,
+     3.0
+    ],
     "ridge_rafi": [
-     -2.0,
-     -0.161,
-     2.0
+     -3.2,
+     -0.051,
+     1.2
     ],
     "ridge_kai": [
-     2.0,
-     -0.255,
-     2.0
-    ],
-    "ridge_player": [
-     0.0,
-     -0.416,
-     4.0
+     -0.6,
+     -0.421,
+     4.2
     ]
    },
    "focus_targets": {
-    "ridge_route_card": [
-     -5.0,
-     1.514,
-     -4.0
-    ],
     "ridge_beacon_pad": [
-     0.0,
-     1.015,
-     -4.0
+     -5.2,
+     1.131,
+     0.0
     ],
     "ice_scanner": [
-     5.0,
-     1.117,
+     -4.0,
+     0.994,
      -4.0
+    ],
+    "ridge_sample_points": [
+     -1.4,
+     0.984,
+     -4.4
     ]
    },
    "focus_approaches": {
-    "ridge_route_card": [
-     -6.023,
-     0.496,
-     -2.903
-    ],
     "ridge_beacon_pad": [
-     0.0,
-     0.26,
-     -2.5
+     -4.139,
+     -0.015,
+     1.061
     ],
     "ice_scanner": [
-     4.205,
-     0.197,
-     -2.728
+     -3.626,
+     0.339,
+     -2.547
+    ],
+    "ridge_sample_points": [
+     -1.561,
+     0.334,
+     -2.909
     ]
    },
    "props": {
-    "EN_ExteriorModule": [
-     -2.4,
+    "beacon_mast": [
+     -5.2,
      0.025,
-     -1.4
+     0.0
     ],
-    "EN_SolarMast": [
-     0.0,
-     -0.178,
-     -1.4
+    "return_marker": [
+     -4.0,
+     1.139,
+     -9.0
+    ],
+    "slope_sign": [
+     3.5,
+     1.511,
+     -14.0
+    ],
+    "reference_plate": [
+     -4.0,
+     0.451,
+     -4.0
     ],
     "PR_IceScanner": [
-     2.4,
-     0.069,
-     -1.4
+     -4.0,
+     0.774,
+     -4.0
     ],
-    "PR_SurveyBeacon": [
-     -2.4,
-     -0.078,
-     0.7
+    "sample_stake_1": [
+     -2.5,
+     0.302,
+     -3.4
+    ],
+    "sample_stake_2": [
+     -1.4,
+     0.374,
+     -4.4
+    ],
+    "sample_stake_3": [
+     -0.6,
+     0.233,
+     -3.1
+    ],
+    "VH_Rover": [
+     0.0,
+     -0.717,
+     8.0
     ]
    },
    "fixtures": {},
-   "doors": {
-    "airlock_exterior": [
-     0.0,
-     0.524,
-     5.5
-    ],
-    "ridge_route_boundary": [
-     -2.0,
-     1.122,
-     0.0
-    ]
-   },
+   "doors": {},
    "bury_m": {
-    "Door_airlock_exterior": 0.047,
-    "Door_ridge_route_boundary": 0.045,
-    "EN_ExteriorModule": 0.377,
-    "EN_SolarMast": 0.638,
-    "PR_IceScanner": 0.049,
-    "PR_SurveyBeacon": 0.12
+    "beacon_mast": 0.272,
+    "return_marker": 0.071,
+    "slope_sign": 0.054,
+    "reference_plate": 0.07,
+    "PR_IceScanner": 0.059,
+    "sample_stake_1": 0.002,
+    "sample_stake_2": 0.022,
+    "sample_stake_3": 0.002,
+    "VH_Rover": 0.047
    },
-   "max_walk_slope_deg": 7.2,
+   "max_walk_slope_deg": 6.87,
    "exclusions": [
     {
      "position": [
-      -622.0,
-      145.637,
-      -998.0
+      -622.2,
+      145.539,
+      -997.0
      ],
      "radius_m": 2.0
     },
     {
      "position": [
-      -618.0,
-      145.543,
-      -998.0
+      -623.2,
+      145.746,
+      -998.8
      ],
      "radius_m": 2.0
     },
     {
      "position": [
-      -620.0,
-      145.382,
-      -996.0
+      -620.6,
+      145.376,
+      -995.8
      ],
      "radius_m": 2.0
     },
     {
      "position": [
-      -625.0,
-      146.311,
-      -1004.0
-     ],
-     "radius_m": 1.5
-    },
-    {
-     "position": [
-      -626.023,
-      146.294,
-      -1002.903
-     ],
-     "radius_m": 1.5
-    },
-    {
-     "position": [
-      -620.0,
-      146.213,
-      -1004.0
-     ],
-     "radius_m": 1.5
-    },
-    {
-     "position": [
-      -620.0,
-      146.057,
-      -1002.5
-     ],
-     "radius_m": 1.5
-    },
-    {
-     "position": [
-      -615.0,
-      146.114,
-      -1004.0
-     ],
-     "radius_m": 1.5
-    },
-    {
-     "position": [
-      -615.795,
-      145.995,
-      -1002.728
-     ],
-     "radius_m": 1.5
-    },
-    {
-     "position": [
-      -620.0,
-      145.221,
-      -994.5
-     ],
-     "radius_m": 1.5
-    },
-    {
-     "position": [
-      -622.0,
-      145.819,
+      -625.2,
+      145.929,
       -1000.0
      ],
      "radius_m": 1.5
     },
     {
      "position": [
-      -622.4,
-      145.823,
-      -1001.4
+      -624.139,
+      145.782,
+      -998.939
      ],
-     "radius_m": 3.402
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -624.0,
+      146.292,
+      -1004.0
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -623.626,
+      146.137,
+      -1002.547
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -621.4,
+      146.282,
+      -1004.4
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -621.561,
+      146.131,
+      -1002.909
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -625.2,
+      145.822,
+      -1000.0
+     ],
+     "radius_m": 1.937
+    },
+    {
+     "position": [
+      -624.0,
+      146.937,
+      -1009.0
+     ],
+     "radius_m": 1.283
+    },
+    {
+     "position": [
+      -616.5,
+      147.308,
+      -1014.0
+     ],
+     "radius_m": 1.318
+    },
+    {
+     "position": [
+      -624.0,
+      146.256,
+      -1004.0
+     ],
+     "radius_m": 1.404
+    },
+    {
+     "position": [
+      -624.0,
+      146.262,
+      -1004.0
+     ],
+     "radius_m": 1.336
+    },
+    {
+     "position": [
+      -622.5,
+      146.199,
+      -1003.4
+     ],
+     "radius_m": 1.02
+    },
+    {
+     "position": [
+      -621.4,
+      146.272,
+      -1004.4
+     ],
+     "radius_m": 1.113
+    },
+    {
+     "position": [
+      -620.6,
+      146.13,
+      -1003.1
+     ],
+     "radius_m": 1.02
     },
     {
      "position": [
       -620.0,
-      145.619,
-      -1001.4
+      144.74,
+      -992.0
      ],
-     "radius_m": 4.789
+     "radius_m": 4.797
     },
     {
      "position": [
-      -617.6,
-      145.867,
-      -1001.4
+      -620.0,
+      144.616,
+      -985.0
      ],
-     "radius_m": 1.286
+     "radius_m": 3.0
     },
     {
      "position": [
-      -622.4,
-      145.719,
-      -999.3
+      -620.0,
+      144.748,
+      -987.0
      ],
-     "radius_m": 1.715
+     "radius_m": 3.0
     },
     {
      "position": [
-      -621.0,
-      145.51,
+      -620.0,
+      144.881,
+      -989.0
+     ],
+     "radius_m": 3.0
+    },
+    {
+     "position": [
+      -620.0,
+      145.013,
+      -991.0
+     ],
+     "radius_m": 3.0
+    },
+    {
+     "position": [
+      -620.0,
+      145.146,
+      -993.0
+     ],
+     "radius_m": 3.0
+    },
+    {
+     "position": [
+      -620.0,
+      145.278,
+      -995.0
+     ],
+     "radius_m": 3.0
+    },
+    {
+     "position": [
+      -620.0,
+      145.486,
       -997.0
      ],
-     "radius_m": 1.2
-    },
-    {
-     "position": [
-      -619.0,
-      145.462,
-      -997.0
-     ],
-     "radius_m": 1.2
-    },
-    {
-     "position": [
-      -621.205,
-      145.554,
-      -997.381
-     ],
-     "radius_m": 1.2
-    },
-    {
-     "position": [
-      -622.409,
-      145.724,
-      -998.761
-     ],
-     "radius_m": 1.2
-    },
-    {
-     "position": [
-      -623.614,
-      145.892,
-      -1000.142
-     ],
-     "radius_m": 1.2
-    },
-    {
-     "position": [
-      -624.818,
-      146.058,
-      -1001.522
-     ],
-     "radius_m": 1.2
+     "radius_m": 3.0
     },
     {
      "position": [
       -620.0,
-      145.551,
-      -997.625
+      145.693,
+      -999.0
      ],
-     "radius_m": 1.2
+     "radius_m": 3.0
     },
     {
      "position": [
       -620.0,
-      145.719,
-      -999.25
+      145.901,
+      -1001.0
      ],
-     "radius_m": 1.2
+     "radius_m": 3.0
     },
     {
      "position": [
       -620.0,
-      145.888,
-      -1000.875
+      146.109,
+      -1003.0
+     ],
+     "radius_m": 3.0
+    },
+    {
+     "position": [
+      -620.0,
+      146.317,
+      -1005.0
+     ],
+     "radius_m": 3.0
+    },
+    {
+     "position": [
+      -620.0,
+      146.58,
+      -1007.0
+     ],
+     "radius_m": 3.0
+    },
+    {
+     "position": [
+      -620.0,
+      146.844,
+      -1009.0
+     ],
+     "radius_m": 3.0
+    },
+    {
+     "position": [
+      -620.0,
+      147.108,
+      -1011.0
+     ],
+     "radius_m": 3.0
+    },
+    {
+     "position": [
+      -620.0,
+      147.372,
+      -1013.0
+     ],
+     "radius_m": 3.0
+    },
+    {
+     "position": [
+      -620.0,
+      147.635,
+      -1015.0
+     ],
+     "radius_m": 3.0
+    },
+    {
+     "position": [
+      -622.7,
+      145.643,
+      -997.9
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      -618.949,
-      145.532,
-      -997.682
+      -623.17,
+      145.661,
+      -997.97
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      -617.898,
-      145.684,
-      -999.364
+      -622.675,
+      145.739,
+      -998.849
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      -616.846,
-      145.838,
-      -1001.046
+      -623.151,
+      145.939,
+      -1000.698
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      -620.667,
-      145.536,
-      -997.333
+      -621.987,
+      145.736,
+      -998.97
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      -621.333,
-      145.69,
-      -998.667
+      -621.774,
+      145.933,
+      -1000.939
      ],
      "radius_m": 1.2
     }
@@ -784,12 +889,1447 @@
     2.952
    ],
    "footprint_m": {
-    "EN_ExteriorModule": 4.518,
-    "EN_SolarMast": 7.577,
-    "PR_IceScanner": 0.572,
-    "PR_SurveyBeacon": 1.43
+    "beacon_mast": 2.102,
+    "return_marker": 0.566,
+    "slope_sign": 0.453,
+    "reference_plate": 0.822,
+    "PR_IceScanner": 0.673,
+    "sample_stake_1": 0.028,
+    "sample_stake_2": 0.319,
+    "sample_stake_3": 0.028,
+    "VH_Rover": 7.225
    },
-   "detours": {}
+   "detours": {},
+   "segments": {
+    "B1": {
+     "scene": "EX-CH04-S04",
+     "region_id": "aurora_ridge",
+     "origin_xz_m": [
+      782.5,
+      -582.5
+     ],
+     "yaw_deg": -71.57,
+     "ephemeris_site": "aurora",
+     "horizon_site": "",
+     "omit_staging_floor": true,
+     "placement": "LOC-09 segment B1 (M3-106, decision 8): the computed beacon 1 corner at road 1.02 km (coldtrap.json survey.beacons), lit at EX-CH04-S04 08:00 UTC; the room turned so the road runs along its -Z (bearing from the 20 m road cells either side). Sun and Earth from the aurora rows, 1.0 km away; its own row (sun_positions.json segment B1) carries the terrain horizon where it stands.",
+     "origin_m": [
+      782.5,
+      -14.897,
+      -582.5
+     ],
+     "anchors": {
+      "ridge_player": [
+       -2.2,
+       0.083,
+       3.0
+      ],
+      "ridge_rafi": [
+       -3.2,
+       0.074,
+       1.2
+      ],
+      "ridge_kai": [
+       -0.6,
+       0.065,
+       4.2
+      ]
+     },
+     "focus_targets": {
+      "ridge_beacon_pad": [
+       -5.2,
+       1.101,
+       0.0
+      ],
+      "ice_scanner": [
+       -4.0,
+       0.422,
+       -4.0
+      ],
+      "ridge_sample_points": [
+       -1.4,
+       0.382,
+       -4.4
+      ]
+     },
+     "focus_approaches": {
+      "ridge_beacon_pad": [
+       -4.139,
+       0.101,
+       1.061
+      ],
+      "ice_scanner": [
+       -3.626,
+       -0.034,
+       -2.547
+      ],
+      "ridge_sample_points": [
+       -1.561,
+       -0.094,
+       -2.909
+      ]
+     },
+     "props": {
+      "beacon_mast": [
+       -5.2,
+       0.057,
+       0.0
+      ],
+      "return_marker": [
+       -4.0,
+       -0.242,
+       -9.0
+      ],
+      "slope_sign": [
+       3.5,
+       -0.569,
+       -14.0
+      ],
+      "reference_plate": [
+       -4.0,
+       -0.097,
+       -4.0
+      ],
+      "PR_IceScanner": [
+       -4.0,
+       0.223,
+       -4.0
+      ],
+      "sample_stake_1": [
+       -2.5,
+       -0.192,
+       -3.4
+      ],
+      "sample_stake_2": [
+       -1.4,
+       -0.219,
+       -4.4
+      ],
+      "sample_stake_3": [
+       -0.6,
+       -0.193,
+       -3.1
+      ],
+      "VH_Rover": [
+       0.0,
+       0.095,
+       8.0
+      ]
+     },
+     "fixtures": {},
+     "doors": {},
+     "bury_m": {
+      "beacon_mast": 0.096,
+      "return_marker": 0.018,
+      "slope_sign": 0.052,
+      "reference_plate": 0.029,
+      "PR_IceScanner": 0.024,
+      "sample_stake_1": 0.001,
+      "sample_stake_2": 0.004,
+      "sample_stake_3": 0.001,
+      "VH_Rover": 0.002
+     },
+     "footprint_m": {
+      "beacon_mast": 2.102,
+      "return_marker": 0.566,
+      "slope_sign": 0.453,
+      "reference_plate": 0.822,
+      "PR_IceScanner": 0.673,
+      "sample_stake_1": 0.028,
+      "sample_stake_2": 0.319,
+      "sample_stake_3": 0.028,
+      "VH_Rover": 7.225
+     },
+     "detours": {},
+     "max_walk_slope_deg": 1.9,
+     "exclusions": [
+      {
+       "position": [
+        778.958,
+        -14.814,
+        -583.639
+       ],
+       "radius_m": 2.0
+      },
+      {
+       "position": [
+        780.35,
+        -14.822,
+        -585.156
+       ],
+       "radius_m": 2.0
+      },
+      {
+       "position": [
+        778.326,
+        -14.832,
+        -581.741
+       ],
+       "radius_m": 2.0
+      },
+      {
+       "position": [
+        780.856,
+        -14.796,
+        -587.433
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        780.185,
+        -14.796,
+        -586.092
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        785.03,
+        -14.974,
+        -587.559
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        783.77,
+        -14.931,
+        -586.746
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        786.232,
+        -15.015,
+        -585.219
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        784.766,
+        -14.99,
+        -584.901
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        780.856,
+        -14.839,
+        -587.433
+       ],
+       "radius_m": 1.937
+      },
+      {
+       "position": [
+        789.774,
+        -15.139,
+        -589.14
+       ],
+       "radius_m": 1.283
+      },
+      {
+       "position": [
+        796.888,
+        -15.466,
+        -583.606
+       ],
+       "radius_m": 1.318
+      },
+      {
+       "position": [
+        785.03,
+        -14.986,
+        -587.559
+       ],
+       "radius_m": 1.404
+      },
+      {
+       "position": [
+        785.03,
+        -14.984,
+        -587.559
+       ],
+       "radius_m": 1.336
+      },
+      {
+       "position": [
+        784.935,
+        -14.989,
+        -585.947
+       ],
+       "radius_m": 1.02
+      },
+      {
+       "position": [
+        786.232,
+        -15.016,
+        -585.219
+       ],
+       "radius_m": 1.113
+      },
+      {
+       "position": [
+        785.251,
+        -14.989,
+        -584.049
+       ],
+       "radius_m": 1.02
+      },
+      {
+       "position": [
+        774.91,
+        -14.872,
+        -579.971
+       ],
+       "radius_m": 4.797
+      },
+      {
+       "position": [
+        768.269,
+        -14.732,
+        -577.758
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        770.167,
+        -14.758,
+        -578.39
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        772.064,
+        -14.778,
+        -579.022
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        773.962,
+        -14.798,
+        -579.655
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        775.859,
+        -14.817,
+        -580.287
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        777.756,
+        -14.836,
+        -580.919
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        779.654,
+        -14.857,
+        -581.552
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        781.551,
+        -14.88,
+        -582.184
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        783.449,
+        -14.918,
+        -582.816
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        785.346,
+        -14.984,
+        -583.448
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        787.244,
+        -15.062,
+        -584.081
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        789.141,
+        -15.075,
+        -584.713
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        791.038,
+        -15.089,
+        -585.345
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        792.936,
+        -15.141,
+        -585.978
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        794.833,
+        -15.189,
+        -586.61
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        796.731,
+        -15.25,
+        -587.242
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        779.654,
+        -14.815,
+        -584.398
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        779.572,
+        -14.806,
+        -584.865
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        780.562,
+        -14.837,
+        -584.674
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        782.166,
+        -14.882,
+        -585.71
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        780.894,
+        -14.854,
+        -584.059
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        782.83,
+        -14.916,
+        -584.48
+       ],
+       "radius_m": 1.2
+      }
+     ],
+     "ground_y_range_m": [
+      -2.8,
+      0.5
+     ],
+     "props_tilt": {
+      "VH_Rover": [
+       0.54,
+       1.13
+      ]
+     }
+    },
+    "B2": {
+     "scene": "EX-CH04-S04",
+     "region_id": "aurora_ridge",
+     "origin_xz_m": [
+      1422.5,
+      -1102.5
+     ],
+     "yaw_deg": -50.19,
+     "ephemeris_site": "aurora",
+     "horizon_site": "",
+     "omit_staging_floor": true,
+     "placement": "LOC-09 segment B2 (M3-106, decision 8): the computed beacon 2 corner at road 1.88 km (coldtrap.json survey.beacons), lit at EX-CH04-S04 08:00 UTC; the room turned so the road runs along its -Z (bearing from the 20 m road cells either side). Sun and Earth from the aurora rows, 1.8 km away; its own row (sun_positions.json segment B2) carries the terrain horizon where it stands.",
+     "origin_m": [
+      1422.5,
+      -43.295,
+      -1102.5
+     ],
+     "anchors": {
+      "ridge_player": [
+       -2.2,
+       -0.162,
+       3.0
+      ],
+      "ridge_rafi": [
+       -3.2,
+       -0.34,
+       1.2
+      ],
+      "ridge_kai": [
+       -0.6,
+       0.026,
+       4.2
+      ]
+     },
+     "focus_targets": {
+      "ridge_beacon_pad": [
+       -5.2,
+       0.411,
+       0.0
+      ],
+      "ice_scanner": [
+       -4.0,
+       -0.207,
+       -4.0
+      ],
+      "ridge_sample_points": [
+       -1.4,
+       0.088,
+       -4.4
+      ]
+     },
+     "focus_approaches": {
+      "ridge_beacon_pad": [
+       -4.139,
+       -0.417,
+       1.061
+      ],
+      "ice_scanner": [
+       -3.626,
+       -0.573,
+       -2.547
+      ],
+      "ridge_sample_points": [
+       -1.561,
+       -0.34,
+       -2.909
+      ]
+     },
+     "props": {
+      "beacon_mast": [
+       -5.2,
+       -0.726,
+       0.0
+      ],
+      "return_marker": [
+       -4.0,
+       -1.136,
+       -9.0
+      ],
+      "slope_sign": [
+       3.5,
+       -0.944,
+       -14.0
+      ],
+      "reference_plate": [
+       -4.0,
+       -0.767,
+       -4.0
+      ],
+      "PR_IceScanner": [
+       -4.0,
+       -0.439,
+       -4.0
+      ],
+      "sample_stake_1": [
+       -2.5,
+       -0.59,
+       -3.4
+      ],
+      "sample_stake_2": [
+       -1.4,
+       -0.543,
+       -4.4
+      ],
+      "sample_stake_3": [
+       -0.6,
+       -0.327,
+       -3.1
+      ],
+      "VH_Rover": [
+       0.0,
+       0.245,
+       8.0
+      ]
+     },
+     "fixtures": {},
+     "doors": {},
+     "bury_m": {
+      "beacon_mast": 0.24,
+      "return_marker": 0.071,
+      "slope_sign": 0.054,
+      "reference_plate": 0.106,
+      "PR_IceScanner": 0.086,
+      "sample_stake_1": 0.004,
+      "sample_stake_2": 0.046,
+      "sample_stake_3": 0.004,
+      "VH_Rover": 0.044
+     },
+     "footprint_m": {
+      "beacon_mast": 2.102,
+      "return_marker": 0.566,
+      "slope_sign": 0.453,
+      "reference_plate": 0.822,
+      "PR_IceScanner": 0.673,
+      "sample_stake_1": 0.028,
+      "sample_stake_2": 0.319,
+      "sample_stake_3": 0.028,
+      "VH_Rover": 7.225
+     },
+     "detours": {},
+     "max_walk_slope_deg": 7.7,
+     "exclusions": [
+      {
+       "position": [
+        1418.787,
+        -43.457,
+        -1102.269
+       ],
+       "radius_m": 2.0
+      },
+      {
+       "position": [
+        1419.529,
+        -43.635,
+        -1104.19
+       ],
+       "radius_m": 2.0
+      },
+      {
+       "position": [
+        1418.89,
+        -43.269,
+        -1100.272
+       ],
+       "radius_m": 2.0
+      },
+      {
+       "position": [
+        1419.171,
+        -43.885,
+        -1106.495
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        1419.035,
+        -43.712,
+        -1105.001
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        1423.012,
+        -44.002,
+        -1108.134
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        1422.135,
+        -43.868,
+        -1106.917
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        1424.984,
+        -43.707,
+        -1106.392
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        1423.735,
+        -43.636,
+        -1105.562
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        1419.171,
+        -44.021,
+        -1106.495
+       ],
+       "radius_m": 1.937
+      },
+      {
+       "position": [
+        1426.853,
+        -44.431,
+        -1111.335
+       ],
+       "radius_m": 1.283
+      },
+      {
+       "position": [
+        1435.495,
+        -44.24,
+        -1108.775
+       ],
+       "radius_m": 1.318
+      },
+      {
+       "position": [
+        1423.012,
+        -44.054,
+        -1108.134
+       ],
+       "radius_m": 1.404
+      },
+      {
+       "position": [
+        1423.012,
+        -44.045,
+        -1108.134
+       ],
+       "radius_m": 1.336
+      },
+      {
+       "position": [
+        1423.511,
+        -43.785,
+        -1106.597
+       ],
+       "radius_m": 1.02
+      },
+      {
+       "position": [
+        1424.984,
+        -43.738,
+        -1106.392
+       ],
+       "radius_m": 1.113
+      },
+      {
+       "position": [
+        1424.497,
+        -43.523,
+        -1104.946
+       ],
+       "radius_m": 1.02
+      },
+      {
+       "position": [
+        1416.355,
+        -43.337,
+        -1097.378
+       ],
+       "radius_m": 4.797
+      },
+      {
+       "position": [
+        1410.977,
+        -42.305,
+        -1092.896
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1412.514,
+        -42.608,
+        -1094.177
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1414.05,
+        -42.862,
+        -1095.457
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1415.586,
+        -43.036,
+        -1096.738
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1417.123,
+        -43.124,
+        -1098.018
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1418.659,
+        -43.202,
+        -1099.299
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1420.195,
+        -43.276,
+        -1100.579
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1421.732,
+        -43.276,
+        -1101.86
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1423.268,
+        -43.327,
+        -1103.14
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1424.805,
+        -43.427,
+        -1104.421
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1426.341,
+        -43.632,
+        -1105.701
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1427.877,
+        -43.829,
+        -1106.982
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1429.414,
+        -44.016,
+        -1108.262
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1430.95,
+        -44.204,
+        -1109.543
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1432.486,
+        -44.384,
+        -1110.823
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1434.023,
+        -44.553,
+        -1112.104
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        1419.158,
+        -43.546,
+        -1103.229
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        1418.911,
+        -43.585,
+        -1103.635
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        1419.903,
+        -43.599,
+        -1103.818
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        1421.019,
+        -43.713,
+        -1105.367
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        1420.436,
+        -43.53,
+        -1103.367
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        1422.086,
+        -43.561,
+        -1104.464
+       ],
+       "radius_m": 1.2
+      }
+     ],
+     "ground_y_range_m": [
+      -2.405,
+      2.002
+     ],
+     "props_tilt": {
+      "VH_Rover": [
+       3.39,
+       -1.94
+      ]
+     }
+    },
+    "B3": {
+     "scene": "EX-CH04-S04",
+     "region_id": "cold_trap",
+     "origin_xz_m": [
+      -2840.0,
+      -680.0
+     ],
+     "yaw_deg": -90.0,
+     "ephemeris_site": "cold_trap",
+     "horizon_site": "",
+     "omit_staging_floor": true,
+     "placement": "LOC-09 segment B3 (M3-106, decision 8): the computed beacon 3 corner at road 5.24 km (coldtrap.json survey.beacons), dark at EX-CH04-S04 08:00 UTC; the room turned so the road runs along its -Z (bearing from the 20 m road cells either side). Sun and Earth from the cold_trap rows, 2.9 km away; its own row (sun_positions.json segment B3) carries the terrain horizon where it stands.",
+     "origin_m": [
+      -2840.0,
+      506.795,
+      -680.0
+     ],
+     "anchors": {
+      "ridge_player": [
+       -2.2,
+       0.391,
+       3.0
+      ],
+      "ridge_rafi": [
+       -3.2,
+       0.21,
+       1.2
+      ],
+      "ridge_kai": [
+       -0.6,
+       0.459,
+       4.2
+      ]
+     },
+     "focus_targets": {
+      "ridge_beacon_pad": [
+       -5.2,
+       1.108,
+       0.0
+      ],
+      "ice_scanner": [
+       -4.0,
+       0.076,
+       -4.0
+      ],
+      "ridge_sample_points": [
+       -1.4,
+       0.04,
+       -4.4
+      ]
+     },
+     "focus_approaches": {
+      "ridge_beacon_pad": [
+       -4.139,
+       0.218,
+       1.061
+      ],
+      "ice_scanner": [
+       -3.626,
+       -0.243,
+       -2.547
+      ],
+      "ridge_sample_points": [
+       -1.561,
+       -0.294,
+       -2.909
+      ]
+     },
+     "props": {
+      "beacon_mast": [
+       -5.2,
+       -0.008,
+       0.0
+      ],
+      "return_marker": [
+       -4.0,
+       -1.068,
+       -9.0
+      ],
+      "slope_sign": [
+       3.5,
+       -1.761,
+       -14.0
+      ],
+      "reference_plate": [
+       -4.0,
+       -0.469,
+       -4.0
+      ],
+      "PR_IceScanner": [
+       -4.0,
+       -0.147,
+       -4.0
+      ],
+      "sample_stake_1": [
+       -2.5,
+       -0.45,
+       -3.4
+      ],
+      "sample_stake_2": [
+       -1.4,
+       -0.57,
+       -4.4
+      ],
+      "sample_stake_3": [
+       -0.6,
+       -0.419,
+       -3.1
+      ],
+      "VH_Rover": [
+       0.0,
+       0.965,
+       8.0
+      ]
+     },
+     "fixtures": {},
+     "doors": {},
+     "bury_m": {
+      "beacon_mast": 0.258,
+      "return_marker": 0.049,
+      "slope_sign": 0.048,
+      "reference_plate": 0.075,
+      "PR_IceScanner": 0.064,
+      "sample_stake_1": 0.002,
+      "sample_stake_2": 0.019,
+      "sample_stake_3": 0.002,
+      "VH_Rover": 0.001
+     },
+     "footprint_m": {
+      "beacon_mast": 2.102,
+      "return_marker": 0.566,
+      "slope_sign": 0.453,
+      "reference_plate": 0.822,
+      "PR_IceScanner": 0.673,
+      "sample_stake_1": 0.028,
+      "sample_stake_2": 0.319,
+      "sample_stake_3": 0.028,
+      "VH_Rover": 7.225
+     },
+     "detours": {},
+     "max_walk_slope_deg": 8.02,
+     "exclusions": [
+      {
+       "position": [
+        -2843.0,
+        507.186,
+        -682.2
+       ],
+       "radius_m": 2.0
+      },
+      {
+       "position": [
+        -2841.2,
+        507.005,
+        -683.2
+       ],
+       "radius_m": 2.0
+      },
+      {
+       "position": [
+        -2844.2,
+        507.254,
+        -680.6
+       ],
+       "radius_m": 2.0
+      },
+      {
+       "position": [
+        -2840.0,
+        506.903,
+        -685.2
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        -2841.061,
+        507.013,
+        -684.139
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        -2836.0,
+        506.371,
+        -684.0
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        -2837.453,
+        506.552,
+        -683.626
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        -2835.6,
+        506.335,
+        -681.4
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        -2837.091,
+        506.501,
+        -681.561
+       ],
+       "radius_m": 1.5
+      },
+      {
+       "position": [
+        -2840.0,
+        506.787,
+        -685.2
+       ],
+       "radius_m": 1.937
+      },
+      {
+       "position": [
+        -2831.0,
+        505.727,
+        -684.0
+       ],
+       "radius_m": 1.283
+      },
+      {
+       "position": [
+        -2826.0,
+        505.034,
+        -676.5
+       ],
+       "radius_m": 1.318
+      },
+      {
+       "position": [
+        -2836.0,
+        506.333,
+        -684.0
+       ],
+       "radius_m": 1.404
+      },
+      {
+       "position": [
+        -2836.0,
+        506.338,
+        -684.0
+       ],
+       "radius_m": 1.336
+      },
+      {
+       "position": [
+        -2836.6,
+        506.445,
+        -682.5
+       ],
+       "radius_m": 1.02
+      },
+      {
+       "position": [
+        -2835.6,
+        506.325,
+        -681.4
+       ],
+       "radius_m": 1.113
+      },
+      {
+       "position": [
+        -2836.9,
+        506.476,
+        -680.6
+       ],
+       "radius_m": 1.02
+      },
+      {
+       "position": [
+        -2848.0,
+        507.227,
+        -680.0
+       ],
+       "radius_m": 4.797
+      },
+      {
+       "position": [
+        -2855.0,
+        508.811,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2853.0,
+        508.511,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2851.0,
+        508.21,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2849.0,
+        507.91,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2847.0,
+        507.609,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2845.0,
+        507.309,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2843.0,
+        507.103,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2841.0,
+        506.898,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2839.0,
+        506.692,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2837.0,
+        506.487,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2835.0,
+        506.281,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2833.0,
+        506.017,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2831.0,
+        505.753,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2829.0,
+        505.49,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2827.0,
+        505.226,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2825.0,
+        504.962,
+        -680.0
+       ],
+       "radius_m": 3.0
+      },
+      {
+       "position": [
+        -2842.1,
+        507.098,
+        -682.7
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        -2842.03,
+        507.105,
+        -683.17
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        -2841.151,
+        506.985,
+        -682.675
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        -2839.302,
+        506.774,
+        -683.151
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        -2841.031,
+        506.953,
+        -681.987
+       ],
+       "radius_m": 1.2
+      },
+      {
+       "position": [
+        -2839.061,
+        506.724,
+        -681.774
+       ],
+       "radius_m": 1.2
+      }
+     ],
+     "ground_y_range_m": [
+      -2.667,
+      2.85
+     ],
+     "props_tilt": {
+      "VH_Rover": [
+       8.54,
+       2.78
+      ]
+     }
+    }
+   },
+   "props_tilt": {
+    "VH_Rover": [
+     -3.78,
+     2.71
+    ]
+   }
   },
   "LOC-10": {
    "region_id": "cold_trap",
@@ -807,336 +2347,648 @@
     0.0
    ],
    "anchors": {
-    "vault_rafi": [
-     -2.0,
-     -0.184,
-     2.0
+    "vault_player": [
+     0.6,
+     -0.105,
+     2.2
     ],
     "vault_kai": [
-     2.0,
-     -0.044,
-     2.0
+     -1.9,
+     -0.065,
+     -0.2
     ],
-    "vault_player": [
-     0.0,
-     -0.228,
-     4.0
+    "vault_rafi": [
+     2.6,
+     0.224,
+     -1.9
     ]
    },
    "focus_targets": {
+    "vault_case": [
+     0.3,
+     0.341,
+     -0.5
+    ],
     "vault_probe": [
-     -4.0,
-     0.783,
-     -3.0
+     0.3,
+     0.179,
+     -0.82
     ],
     "vault_sleeve": [
-     0.0,
-     0.971,
-     -3.0
+     -1.0,
+     0.383,
+     0.5
     ],
-    "vault_case": [
-     4.0,
-     1.159,
-     -3.0
+    "vault_marker": [
+     1.6,
+     1.299,
+     -1.4
+    ],
+    "vault_sample": [
+     -3.3,
+     0.121,
+     3.0
+    ],
+    "vault_rover": [
+     -12.6,
+     2.058,
+     12.7
     ]
    },
    "focus_approaches": {
+    "vault_case": [
+     0.466,
+     -0.039,
+     0.991
+    ],
     "vault_probe": [
-     -3.256,
-     -0.046,
-     -1.698
+     0.448,
+     -0.021,
+     0.673
     ],
     "vault_sleeve": [
-     0.0,
-     0.086,
-     -1.5
+     0.028,
+     -0.09,
+     1.592
     ],
-    "vault_case": [
-     3.256,
-     0.24,
-     -1.698
+    "vault_marker": [
+     1.199,
+     0.045,
+     0.045
+    ],
+    "vault_sample": [
+     -1.831,
+     -0.215,
+     2.699
+    ],
+    "vault_rover": [
+     -11.116,
+     0.591,
+     12.478
     ]
    },
    "props": {
-    "PR_VaultCase": [
-     -2.4,
-     -0.044,
+    "vault_case": [
+     0.3,
+     0.009,
+     -0.5
+    ],
+    "marker_2034": [
+     1.6,
+     -0.164,
      -1.4
+    ],
+    "tether_anchor_1": [
+     -1.6,
+     -0.421,
+     -0.9
+    ],
+    "tether_anchor_2": [
+     2.4,
+     -0.348,
+     0.6
+    ],
+    "PR_VaultCarrier": [
+     -1.0,
+     -0.111,
+     0.5
+    ],
+    "PR_VaultProbe": [
+     0.85,
+     0.036,
+     -0.55
+    ],
+    "sample_stake": [
+     -3.4,
+     -0.393,
+     3.0
     ],
     "PR_SampleHolder": [
-     0.0,
-     0.077,
-     -1.4
+     -3.15,
+     -0.28,
+     3.05
     ],
-    "PR_RepairClamp": [
-     2.4,
-     0.179,
-     -1.4
+    "VH_Rover": [
+     -12.0,
+     0.578,
+     9.0
     ]
    },
-   "fixtures": {},
-   "doors": {
-    "ridge_route_boundary": [
+   "fixtures": {
+    "boot_print_01": [
+     -4.6,
+     -0.39,
+     4.4
+    ],
+    "boot_print_02": [
+     -4.1,
+     -0.337,
+     3.6
+    ],
+    "boot_print_03": [
+     -3.5,
+     -0.285,
+     2.9
+    ],
+    "boot_print_04": [
      -3.0,
-     0.952,
-     0.0
+     -0.228,
+     2.1
     ],
-    "vault_recovery_boundary": [
-     -2.0,
-     0.992,
-     0.0
+    "boot_print_05": [
+     -2.4,
+     -0.172,
+     1.4
+    ],
+    "boot_print_06": [
+     -1.8,
+     -0.112,
+     0.7
+    ],
+    "boot_print_07": [
+     -0.9,
+     -0.051,
+     0.2
+    ],
+    "boot_print_08": [
+     -0.4,
+     -0.007,
+     -0.25
+    ],
+    "boot_print_09": [
+     0.9,
+     0.009,
+     0.35
+    ],
+    "boot_print_10": [
+     1.3,
+     -0.019,
+     1.1
+    ],
+    "boot_print_11": [
+     1.9,
+     -0.041,
+     1.8
+    ],
+    "boot_print_12": [
+     2.3,
+     -0.077,
+     2.6
+    ],
+    "carrier_tether": [
+     -1.3,
+     0.272,
+     -0.065
     ]
    },
+   "doors": {},
    "bury_m": {
-    "Door_ridge_route_boundary": 0.057,
-    "Door_vault_recovery_boundary": 0.057,
-    "PR_VaultCase": 0.041,
+    "boot_print_01": 0.013,
+    "boot_print_02": 0.012,
+    "boot_print_03": 0.014,
+    "boot_print_04": 0.013,
+    "boot_print_05": 0.014,
+    "boot_print_06": 0.013,
+    "boot_print_07": 0.015,
+    "boot_print_08": 0.017,
+    "boot_print_09": 0.017,
+    "boot_print_10": 0.016,
+    "boot_print_11": 0.018,
+    "boot_print_12": 0.017,
+    "carrier_tether": 0.068,
+    "vault_case": 0.064,
+    "marker_2034": 0.025,
+    "tether_anchor_1": 0.01,
+    "tether_anchor_2": 0.011,
+    "PR_VaultCarrier": 0.087,
+    "PR_VaultProbe": 0.053,
+    "sample_stake": 0.017,
     "PR_SampleHolder": 0.006,
-    "PR_RepairClamp": 0.01
+    "VH_Rover": 0.012
    },
-   "max_walk_slope_deg": 6.78,
+   "max_walk_slope_deg": 6.75,
    "exclusions": [
     {
      "position": [
-      -2.0,
-      1.085,
-      2.0
+      0.6,
+      1.165,
+      2.2
      ],
      "radius_m": 2.0
     },
     {
      "position": [
-      2.0,
-      1.225,
-      2.0
+      -1.9,
+      1.204,
+      -0.2
      ],
      "radius_m": 2.0
     },
     {
      "position": [
-      0.0,
-      1.041,
-      4.0
+      2.6,
+      1.493,
+      -1.9
      ],
      "radius_m": 2.0
     },
     {
      "position": [
-      -4.0,
-      1.253,
-      -3.0
+      0.3,
+      1.31,
+      -0.5
      ],
      "radius_m": 1.5
     },
     {
      "position": [
-      -3.256,
-      1.224,
-      -1.698
+      0.466,
+      1.23,
+      0.991
      ],
      "radius_m": 1.5
     },
     {
      "position": [
-      0.0,
-      1.441,
-      -3.0
+      0.3,
+      1.329,
+      -0.82
      ],
      "radius_m": 1.5
     },
     {
      "position": [
-      0.0,
-      1.355,
-      -1.5
+      0.448,
+      1.248,
+      0.673
      ],
      "radius_m": 1.5
     },
     {
      "position": [
-      4.0,
-      1.628,
-      -3.0
+      -1.0,
+      1.202,
+      0.5
      ],
      "radius_m": 1.5
     },
     {
      "position": [
-      3.256,
-      1.509,
-      -1.698
+      0.028,
+      1.18,
+      1.592
      ],
      "radius_m": 1.5
+    },
+    {
+     "position": [
+      1.6,
+      1.418,
+      -1.4
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      1.199,
+      1.314,
+      0.045
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -3.3,
+      0.99,
+      3.0
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -1.831,
+      1.054,
+      2.699
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -12.6,
+      2.027,
+      12.7
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -11.116,
+      1.861,
+      12.478
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -4.6,
+      0.876,
+      4.4
+     ],
+     "radius_m": 1.155
+    },
+    {
+     "position": [
+      -4.1,
+      0.93,
+      3.6
+     ],
+     "radius_m": 1.155
+    },
+    {
+     "position": [
+      -3.5,
+      0.981,
+      2.9
+     ],
+     "radius_m": 1.155
     },
     {
      "position": [
       -3.0,
-      1.122,
-      0.0
+      1.039,
+      2.1
      ],
-     "radius_m": 1.5
-    },
-    {
-     "position": [
-      -2.0,
-      1.161,
-      0.0
-     ],
-     "radius_m": 1.5
+     "radius_m": 1.155
     },
     {
      "position": [
       -2.4,
-      1.226,
-      -1.4
+      1.095,
+      1.4
      ],
-     "radius_m": 1.304
+     "radius_m": 1.155
     },
     {
      "position": [
-      0.0,
-      1.346,
+      -1.8,
+      1.154,
+      0.7
+     ],
+     "radius_m": 1.155
+    },
+    {
+     "position": [
+      -0.9,
+      1.215,
+      0.2
+     ],
+     "radius_m": 1.155
+    },
+    {
+     "position": [
+      -0.4,
+      1.259,
+      -0.25
+     ],
+     "radius_m": 1.155
+    },
+    {
+     "position": [
+      0.9,
+      1.276,
+      0.35
+     ],
+     "radius_m": 1.155
+    },
+    {
+     "position": [
+      1.3,
+      1.247,
+      1.1
+     ],
+     "radius_m": 1.155
+    },
+    {
+     "position": [
+      1.9,
+      1.225,
+      1.8
+     ],
+     "radius_m": 1.155
+    },
+    {
+     "position": [
+      2.3,
+      1.19,
+      2.6
+     ],
+     "radius_m": 1.155
+    },
+    {
+     "position": [
+      -1.3,
+      1.187,
+      -0.065
+     ],
+     "radius_m": 1.911
+    },
+    {
+     "position": [
+      0.3,
+      1.279,
+      -0.5
+     ],
+     "radius_m": 1.45
+    },
+    {
+     "position": [
+      1.6,
+      1.406,
       -1.4
      ],
-     "radius_m": 1.042
+     "radius_m": 1.18
+    },
+    {
+     "position": [
+      -1.6,
+      1.249,
+      -0.9
+     ],
+     "radius_m": 1.141
     },
     {
      "position": [
       2.4,
-      1.448,
-      -1.4
+      1.322,
+      0.6
      ],
-     "radius_m": 1.087
+     "radius_m": 1.141
     },
     {
      "position": [
       -1.0,
-      1.065,
+      1.159,
+      0.5
+     ],
+     "radius_m": 1.711
+    },
+    {
+     "position": [
+      0.85,
+      1.306,
+      -0.55
+     ],
+     "radius_m": 1.337
+    },
+    {
+     "position": [
+      -3.4,
+      0.977,
       3.0
      ],
-     "radius_m": 1.2
+     "radius_m": 1.113
     },
     {
      "position": [
-      1.0,
-      1.131,
-      3.0
+      -3.15,
+      0.99,
+      3.05
+     ],
+     "radius_m": 1.049
+    },
+    {
+     "position": [
+      -12.0,
+      1.404,
+      9.0
+     ],
+     "radius_m": 4.89
+    },
+    {
+     "position": [
+      -0.65,
+      1.188,
+      1.0
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      -0.333,
-      1.125,
-      2.333
+      1.4,
+      1.277,
+      0.8
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      -0.667,
-      1.206,
-      0.667
+      2.2,
+      1.394,
+      -0.6
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      -2.128,
-      1.255,
-      -1.349
+      0.899,
+      1.239,
+      1.123
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      0.0,
-      1.146,
-      2.167
+      -0.615,
+      1.109,
+      2.449
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      0.0,
-      1.25,
-      0.333
+      -0.865,
+      1.043,
+      3.485
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      0.814,
-      1.15,
-      2.576
+      -2.329,
+      0.931,
+      4.77
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      1.628,
-      1.264,
-      1.151
+      -3.794,
+      0.929,
+      6.054
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      2.442,
-      1.384,
-      -0.273
+      -5.258,
+      0.987,
+      7.339
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      -1.0,
-      1.084,
-      2.667
+      -6.723,
+      1.221,
+      8.624
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      -2.0,
-      1.12,
-      1.333
+      -8.187,
+      1.445,
+      9.909
      ],
      "radius_m": 1.2
     },
     {
      "position": [
-      -0.667,
-      1.095,
-      2.667
-     ],
-     "radius_m": 1.2
-    },
-    {
-     "position": [
-      -1.333,
-      1.144,
-      1.333
+      -9.652,
+      1.658,
+      11.193
      ],
      "radius_m": 1.2
     }
    ],
    "ground_y_range_m": [
-    -0.35,
-    2.125
+    -0.425,
+    2.453
    ],
    "footprint_m": {
-    "PR_VaultCase": 0.609,
-    "PR_SampleHolder": 0.084,
-    "PR_RepairClamp": 0.174
+    "vault_case": 0.899,
+    "marker_2034": 0.359,
+    "tether_anchor_1": 0.153,
+    "tether_anchor_2": 0.153,
+    "PR_VaultCarrier": 1.432,
+    "PR_VaultProbe": 0.831,
+    "sample_stake": 0.319,
+    "PR_SampleHolder": 0.099,
+    "VH_Rover": 7.779
    },
    "detours": {
-    "vault_probe": [
+    "vault_rafi": [
      [
-      -1.0,
-      0.015,
-      -1.0
+      3.0,
+      0.248,
+      -2.0
      ]
+    ]
+   },
+   "props_tilt": {
+    "VH_Rover": [
+     6.2,
+     2.61
     ]
    }
   },

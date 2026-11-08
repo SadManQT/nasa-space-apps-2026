@@ -1143,7 +1143,9 @@ def cmd_sun() -> None:
                                       "earth_above_terrain": above(mask, eaz, eel), "request_urls": [u1, u2]})
         if hp:
             out["scene_lighting"][-1]["horizon_from"] = hp
-        log(f"{s['scene']} {s['site']} {s['utc']}: Sun az {saz:.1f} el {sel:+.2f} (horizon {hz:+.2f}) -> {state}; Earth el {eel:+.2f}")
+        if s.get("segment"):  # M3-106: one row per playable segment of a scene (LOC-09 B1, B2, B3), horizon where it stands
+            out["scene_lighting"][-1]["segment"] = s["segment"]
+        log(f"{s['scene']}{' ' + s['segment'] if s.get('segment') else ''} {s['site']} {s['utc']}: Sun az {saz:.1f} el {sel:+.2f} (horizon {hz:+.2f}) -> {state}; Earth el {eel:+.2f}")
     write_json(GAME_LOLA / "sun_positions.json", out)
     log(f"wrote {(GAME_LOLA / 'sun_positions.json').relative_to(ROOT)}")
 
@@ -1288,9 +1290,9 @@ def cmd_fixture() -> None:
     write_json(TERRAIN / "provenance.json", prov)
     log(f"wrote {(TERRAIN / 'provenance.json').relative_to(ROOT)}")
     # Data Card fixture (ScienceData schema)
-    scene_rows = [[f"Chapter {int(s['scene'][5:7])}", s["sun_el_deg"], s["sun_az_deg"], s["terrain_horizon_deg"], s["sun_state"], s["site"], s["utc"], s["earth_el_deg"]] for s in sun["scene_lighting"]]
+    scene_rows = [[f"Chapter {int(s['scene'][5:7])}" + (f" {s['segment']}" if s.get("segment") else ""), s["sun_el_deg"], s["sun_az_deg"], s["terrain_horizon_deg"], s["sun_state"], s["site"], s["utc"], s["earth_el_deg"]] for s in sun["scene_lighting"]]
     ch01 = sun["windows"].get("ch01_april_2046", {})
-    scene = {s["scene"]: s for s in sun["scene_lighting"]}
+    scene = {s["scene"]: s for s in sun["scene_lighting"] if not s.get("segment")}  # a scene's own row, not its segments' (M3-106)
     summit_mask = sun["sites"]["malapert_summit"]["terrain_horizon_deg_by_azimuth"]
     s08 = scene.get("EX-CH08-S08", {})
     s08_hz = summit_mask[int(round(s08.get("earth_az_deg", 0.0))) % 360] if s08 else None

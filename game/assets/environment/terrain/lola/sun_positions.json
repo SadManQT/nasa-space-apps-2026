@@ -1,6 +1,6 @@
 {
  "about": "Sun and Earth azimuth/elevation from JPL Horizons (DE441; airless apparent, i.e. light-time and aberration corrected, no refraction; site in the MEAN_ME frame on the 1,737.4 km sphere like LOLA) at the pinned story sites, hourly, plus whether each body's centre clears the local LOLA terrain horizon seen from a 2 m eye (Computed). Azimuth is degrees from local north through east; elevation is degrees above the local horizontal. Use sun_direction() in terrain_heightfield.gd to turn a row into a Godot light direction.",
- "retrieved": "2026-11-07",
+ "retrieved": "2026-11-08",
  "citation": "JPL Horizons On-Line Ephemeris System, https://ssd.jpl.nasa.gov/horizons/ ; LOLA horizon from PGDA products 78 and 90",
  "columns": [
   "utc",
@@ -12410,6 +12410,78 @@
     "height_m": 1272.58,
     "place": "LOC-09, the cold-trap road's last bend before the basin (exterior_terrain.json origin)"
    }
+  },
+  {
+   "scene": "EX-CH04-S04",
+   "site": "aurora",
+   "utc": "2046-10-21 08:00",
+   "note": "LOC-09 segment B1: beacon 1 before its blind corner, road 1.02 km (M3-106, decision 8); Sun and Earth from Aurora 1.0 km away",
+   "sun_az_deg": 58.779,
+   "sun_el_deg": 1.831,
+   "terrain_horizon_deg": 0.12,
+   "sun_state": "lit",
+   "earth_az_deg": 130.422,
+   "earth_el_deg": 1.664,
+   "earth_above_terrain": true,
+   "request_urls": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272046-10-21+08%3A00%27&STOP_TIME=%272046-10-21+08%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272046-10-21+08%3A00%27&STOP_TIME=%272046-10-21+08%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "horizon_from": {
+    "x_m": -10790.0,
+    "y_m": -11890.0,
+    "height_m": 1945.1,
+    "place": "LOC-09 segment B1 (coldtrap.json survey.beacons; exterior_terrain.json LOC-09 segments)"
+   },
+   "segment": "B1"
+  },
+  {
+   "scene": "EX-CH04-S04",
+   "site": "aurora",
+   "utc": "2046-10-21 08:00",
+   "note": "LOC-09 segment B2: beacon 2 before its blind corner, road 1.88 km (M3-106, decision 8); Sun and Earth from Aurora 1.8 km away",
+   "sun_az_deg": 58.779,
+   "sun_el_deg": 1.831,
+   "terrain_horizon_deg": -1.35,
+   "sun_state": "lit",
+   "earth_az_deg": 130.422,
+   "earth_el_deg": 1.664,
+   "earth_above_terrain": true,
+   "request_urls": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272046-10-21+08%3A00%27&STOP_TIME=%272046-10-21+08%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27222.85643%2C-89.43891%2C1.9595%27&START_TIME=%272046-10-21+08%3A00%27&STOP_TIME=%272046-10-21+08%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "horizon_from": {
+    "x_m": -10150.0,
+    "y_m": -11370.0,
+    "height_m": 1917.2,
+    "place": "LOC-09 segment B2 (coldtrap.json survey.beacons; exterior_terrain.json LOC-09 segments)"
+   },
+   "segment": "B2"
+  },
+  {
+   "scene": "EX-CH04-S04",
+   "site": "cold_trap",
+   "utc": "2046-10-21 08:00",
+   "note": "LOC-09 segment B3: beacon 3 before its blind corner, road 5.24 km, in terrain shadow (M3-106, decision 8); Sun and Earth from the cold-trap site 2.9 km away",
+   "sun_az_deg": 82.17,
+   "sun_el_deg": 1.597,
+   "terrain_horizon_deg": 5.4,
+   "sun_state": "dark",
+   "earth_az_deg": 153.807,
+   "earth_el_deg": 1.653,
+   "earth_above_terrain": true,
+   "request_urls": [
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-21+08%3A00%27&STOP_TIME=%272046-10-21+08%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27199.46257%2C-89.58133%2C1.1268%27&START_TIME=%272046-10-21+08%3A00%27&STOP_TIME=%272046-10-21+08%3A01%27&STEP_SIZE=%271+m%27&QUANTITIES=%274%27&ANG_FORMAT=%27DEG%27&CSV_FORMAT=%27YES%27"
+   ],
+   "horizon_from": {
+    "x_m": -7070.0,
+    "y_m": -11290.0,
+    "height_m": 1636.7,
+    "place": "LOC-09 segment B3 (coldtrap.json survey.beacons; exterior_terrain.json LOC-09 segments)"
+   },
+   "segment": "B3"
   },
   {
    "scene": "EX-CH04-S05",

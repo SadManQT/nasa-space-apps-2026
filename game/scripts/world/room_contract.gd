@@ -224,43 +224,55 @@ const _ROOMS := {
 	"LOC-09": {
 		"room_id": "LOC-09",
 		"name": "Surveyed Ridge",
-		"canonical_name": "Cold-trap surveyed ridge",
+		"canonical_name": "Cold-trap surveyed ridge road",
 		"bounds_m": [30.0, 30.0],
 		"pressure": "vacuum",
-		"asset_ids": ["EN_ExteriorModule", "EN_SolarMast", "PR_IceScanner", "PR_SurveyBeacon"],
+		# M3-106 (decision 8): three 100 m segments at the computed beacon corners B1, B2, B3 (EX-CH04-S04) and the last
+		# bend before the basin (EX-CH04-S05's reference and sample station), built from the M3-4A EN_ColdTrap pieces
+		# (LOC-09.json, "site_kit"); placements in exterior_terrain.json, one per segment.
+		"asset_ids": ["EN_ColdTrap_BeaconMast", "EN_ColdTrap_ReturnMarker", "EN_ColdTrap_SlopeSign", "EN_ColdTrap_ReferencePlate", "EN_ColdTrap_SampleStake", "PR_IceScanner", "VH_Rover"],
 		"asset_paths": [
-			"res://assets/environment/EN_ExteriorModule/EN_ExteriorModule.glb",
-			"res://assets/environment/EN_SolarMast/EN_SolarMast.glb",
+			"res://assets/environment/EN_ColdTrap/EN_ColdTrap_BeaconMast_LOD0.glb",
+			"res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReturnMarker_LOD0.glb",
+			"res://assets/environment/EN_ColdTrap/EN_ColdTrap_SlopeSign_LOD0.glb",
+			"res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReferencePlate_LOD0.glb",
+			"res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD0.glb",
 			"res://assets/props/PR_IceScanner/PR_IceScanner.glb",
-			"res://assets/props/PR_SurveyBeacon/PR_SurveyBeacon.glb",
+			"res://assets/vehicles/VH_Rover/VH_Rover.glb",
 		],
-		"boundary_ids": ["airlock_exterior", "ridge_route_boundary"],
+		# The road from the garage's rover door (LOC-08) and the walk down to the vault shelf (LOC-10): route
+		# transitions in the rover or on foot, never doors standing on the open ridge.
+		"boundary_ids": ["rover_bay_door", "ridge_route_boundary"],
 		"focus_targets": [
-			{"target_id": "ridge_route_card", "label": "Surveyed ridge route card", "verb": "Inspect", "position": [-5.0, 1.0, -4.0]},
-			{"target_id": "ridge_beacon_pad", "label": "Repeater beacon pad", "verb": "Use", "position": [0.0, 0.6, -4.0]},
-			{"target_id": "ice_scanner", "label": "Calibrated ice scanner", "verb": "Use", "position": [5.0, 0.8, -4.0]},
+			{"target_id": "ridge_beacon_pad", "label": "Beacon mast", "verb": "Use", "position": [-5.2, 1.0, 0.0]},
+			{"target_id": "ice_scanner", "label": "Calibrated ice scanner", "verb": "Use", "position": [0.0, 0.6, -3.0]},
 		],
-		"anchors": {"ridge_rafi": [-2.0, 0.0, 2.0], "ridge_kai": [2.0, 0.0, 2.0], "ridge_player": [0.0, 0.0, 4.0]},
+		"anchors": {"ridge_rafi": [-3.0, 0.0, 2.5], "ridge_kai": [-1.0, 0.0, 4.0], "ridge_player": [-2.0, 0.0, 3.0]},
 	},
 	"LOC-10": {
 		"room_id": "LOC-10",
 		"name": "Cold-trap Vault",
-		"canonical_name": "Sealed cold-trap vault approach",
+		"canonical_name": "Cold-trap vault shelf",
 		"bounds_m": [24.0, 24.0],
 		"pressure": "vacuum",
-		"asset_ids": ["PR_VaultCase", "PR_SampleHolder", "PR_RepairClamp"],
+		# M3-106: the 20 x 15 m shelf in permanent shadow (decision 10) with vault V12 as deposited, the 2034 marker, two
+		# tether anchors, the recovery carrier and VH_Rover 15 m back with its lamps (LOC-10.json, "site_kit").
+		"asset_ids": ["PR_VaultCase", "EN_ColdTrap_SurveyMarker2034", "EN_ColdTrap_TetherAnchor", "PR_VaultCarrier", "PR_VaultProbe", "VH_Rover"],
 		"asset_paths": [
 			"res://assets/props/PR_VaultCase/PR_VaultCase.glb",
-			"res://assets/props/PR_SampleHolder/PR_SampleHolder.glb",
-			"res://assets/props/PR_RepairClamp/PR_RepairClamp.glb",
+			"res://assets/environment/EN_ColdTrap/EN_ColdTrap_SurveyMarker2034_LOD0.glb",
+			"res://assets/environment/EN_ColdTrap/EN_ColdTrap_TetherAnchor_LOD0.glb",
+			"res://assets/props/PR_VaultCarrier/PR_VaultCarrier.glb",
+			"res://assets/props/PR_VaultProbe/PR_VaultProbe.glb",
+			"res://assets/vehicles/VH_Rover/VH_Rover.glb",
 		],
 		"boundary_ids": ["ridge_route_boundary", "vault_recovery_boundary"],
 		"focus_targets": [
-			{"target_id": "vault_probe", "label": "Vault external probe", "verb": "Use", "position": [-4.0, 0.8, -3.0]},
-			{"target_id": "vault_sleeve", "label": "Insulated sleeve and cradle", "verb": "Use", "position": [0.0, 0.8, -3.0]},
-			{"target_id": "vault_case", "label": "Closed biological case", "verb": "Inspect", "position": [4.0, 0.8, -3.0]},
+			{"target_id": "vault_probe", "label": "Vault outer probe socket", "verb": "Use", "position": [0.3, 0.2, -0.85]},
+			{"target_id": "vault_sleeve", "label": "Insulated sleeve and cradle", "verb": "Use", "position": [-1.0, 0.45, 0.5]},
+			{"target_id": "vault_case", "label": "Closed biological case", "verb": "Inspect", "position": [0.3, 0.3, -0.5]},
 		],
-		"anchors": {"vault_rafi": [-2.0, 0.0, 2.0], "vault_kai": [2.0, 0.0, 2.0], "vault_player": [0.0, 0.0, 4.0]},
+		"anchors": {"vault_rafi": [2.6, 0.0, -1.9], "vault_kai": [-1.9, 0.0, -0.2], "vault_player": [0.8, 0.0, 1.8]},
 	},
 	"LOC-11": {
 		"room_id": "LOC-11",
@@ -371,7 +383,7 @@ static func room(room_id: String) -> Dictionary:
 	for key in ["bounds_m", "focus_targets", "anchors"]:
 		if authored.has(key):
 			result[key] = authored[key].duplicate(true)
-	if authored.get("assembly") == "habitat_kit":
+	if authored.get("assembly") in ["habitat_kit", "site_kit"]:
 		result["asset_paths"] = []
 		result["asset_ids"] = []
 		for prop in authored.props:
@@ -465,11 +477,27 @@ static var _terrain: Dictionary = {}
 ## TerrainStream at -origin_m), omit_staging_floor, ephemeris_site / horizon_site, and the derived room-local anchors,
 ## focus_targets, focus_approaches, props, fixtures and doors on the ground, ground_y_range_m, and the site-frame
 ## exclusions for TerrainStream.configure. {} for a room without a placement; "pending" says why one is not ready.
-static func terrain(room_id: String) -> Dictionary:
+## M3-106: a room played in segments (LOC-09: the beacon corners "B1", "B2", "B3" of EX-CH04-S04) keeps one placement
+## per segment under "segments" (region, origin, yaw_deg, ephemeris site and the derived numbers); segment returns it
+## over the room's own placement (which stays the last bend, EX-CH04-S05), or {} for an unknown segment.
+static func terrain(room_id: String, segment: String = "") -> Dictionary:
 	if _terrain.is_empty():
 		var parsed = JSON.parse_string(FileAccess.get_file_as_string(TERRAIN_PATH))
 		_terrain = parsed if parsed is Dictionary else {"rooms": {}}
-	return (_terrain.get("rooms", {}).get(room_id, {}) as Dictionary).duplicate(true)
+	var place := (_terrain.get("rooms", {}).get(room_id, {}) as Dictionary).duplicate(true)
+	if segment.is_empty():
+		return place
+	var segments: Dictionary = place.get("segments", {})
+	if not segments.has(segment):
+		return {}
+	var result: Dictionary = segments[segment].duplicate(true)
+	result["segment"] = segment
+	result["room_placement"] = String(place.get("placement", ""))
+	return result
+
+## The segment ids a room is played in ([] for a one-place room).
+static func terrain_segments(room_id: String) -> Array:
+	return terrain(room_id).get("segments", {}).keys()
 
 ## The dated Earth for an exterior in one scene, from its bundled JPL Horizons row (lola/sun_positions.json
 ## scene_lighting, M1-34). {"presented": true, "direction", "sun_direction" (unit vectors in the room / site frame),
@@ -477,25 +505,29 @@ static func terrain(room_id: String) -> Dictionary:
 ## "illuminated_fraction", "source"} only when the room stands at the row's site with a computed terrain horizon and
 ## the row says Earth clears it; an eclipse (Earth over the Sun) is canon only through the filtered camera. Otherwise
 ## {"presented": false, "reason"}: never a generic Earth.
-static func earth(room_id: String, scene_id: String) -> Dictionary:
-	var place := terrain(room_id)
-	var row := Heightfield.scene_lighting(scene_id)
+static func earth(room_id: String, scene_id: String, segment: String = "") -> Dictionary:
+	var place := terrain(room_id, segment)
+	var row := Heightfield.scene_lighting(scene_id, segment)
 	var result := {"presented": false, "room_id": room_id, "scene_id": scene_id}
+	# a segment's own row carries the terrain horizon where that segment stands (make_terrain.py horizon_from)
+	var horizon_here := String(row.get("site", "")) == String(place.get("horizon_site", "")) or (not segment.is_empty() and row.has("horizon_from"))
 	if place.is_empty():
 		result.reason = "The room has no terrain placement."
 	elif row.is_empty():
 		result.reason = "No bundled Horizons row for this scene."
 	elif String(row.site) != String(place.get("ephemeris_site", "")):
 		result.reason = "The scene's row belongs to another site (%s)." % row.site
-	elif String(row.site) != String(place.get("horizon_site", "")):
+	elif not horizon_here:
 		result.reason = "No terrain horizon was computed where this room stands."
 	elif not bool(row.get("earth_above_terrain", false)):
 		result.reason = "Earth is below the local terrain horizon."
 	if result.has("reason"):
 		return result
 	var site: Dictionary = Heightfield.sun_table().sites[String(row.site)]
-	var to_earth := Heightfield.sun_direction_at(float(site.x_m), float(site.y_m), float(row.earth_az_deg), float(row.earth_el_deg))
-	var to_sun := Heightfield.sun_direction_at(float(site.x_m), float(site.y_m), float(row.sun_az_deg), float(row.sun_el_deg))
+	# a turned segment room (yaw_deg) sees the sky in its own frame
+	var into_room := Basis(Vector3.UP, -deg_to_rad(float(place.get("yaw_deg", 0.0))))
+	var to_earth := into_room * Heightfield.sun_direction_at(float(site.x_m), float(site.y_m), float(row.earth_az_deg), float(row.earth_el_deg))
+	var to_sun := into_room * Heightfield.sun_direction_at(float(site.x_m), float(site.y_m), float(row.sun_az_deg), float(row.sun_el_deg))
 	var elongation := rad_to_deg(to_earth.angle_to(to_sun))
 	if elongation < (EARTH_ANGULAR_DIAMETER_DEG + SUN_ANGULAR_DIAMETER_DEG) * 0.5:
 		result.reason = "Earth is in front of the Sun (an eclipse): shown only through the filtered camera."
@@ -543,11 +575,13 @@ static func in_window(item: Dictionary, scene_id: String) -> bool:
 ## focus relabels, per-scene lighting, the stations each scene action uses, and objects a cast member carries.
 ## choices is story_log.choices (choice_id -> {"option_id", ...}) and moments story_log.moments (e.g. "CH01-MUGS-NAMED");
 ## they only gate echo layers ("choice" / "unless" / "moment" / "unless_moment").
-static func staging(room_id: String, scene_id: String, choices: Dictionary = {}, moments: Array = []) -> Dictionary:
-	return staging_for(layout(room_id), scene_id, choices, moments)
+static func staging(room_id: String, scene_id: String, choices: Dictionary = {}, moments: Array = [], segment: String = "") -> Dictionary:
+	return staging_for(layout(room_id), scene_id, choices, moments, segment)
 
 ## staging() for a layout the caller already holds (a built room keeps its own), so the JSON is not read again.
-static func staging_for(room_layout: Dictionary, scene_id: String, choices: Dictionary = {}, moments: Array = []) -> Dictionary:
+## A layer or item with "segment" shows only on that segment of a room played in segments (M3-106: the slope sign's value
+## at each beacon corner); one without it shows on every segment.
+static func staging_for(room_layout: Dictionary, scene_id: String, choices: Dictionary = {}, moments: Array = [], segment: String = "") -> Dictionary:
 	var result := {"layers": [], "walk_probe": []}
 	for key in _STAGING_LISTS:
 		result[key] = []
@@ -555,6 +589,8 @@ static func staging_for(room_layout: Dictionary, scene_id: String, choices: Dict
 		result[key] = {}
 	for raw_layer in room_layout.get("staging", []):
 		if not raw_layer is Dictionary or not _choice_met(raw_layer, choices) or (raw_layer.has("moment") and not moments.has(raw_layer.moment)) or moments.has(raw_layer.get("unless_moment", "")):
+			continue
+		if raw_layer.has("segment") and String(raw_layer.segment) != segment:
 			continue
 		var layer := _resolve(raw_layer, scene_id)
 		if layer.is_empty():
@@ -564,7 +600,7 @@ static func staging_for(room_layout: Dictionary, scene_id: String, choices: Dict
 			for item in layer.get(key, []):
 				if item is Dictionary:
 					var one := _resolve(item, scene_id)
-					if not one.is_empty():
+					if not one.is_empty() and (not one.has("segment") or String(one.segment) == segment):
 						result[key].append(one)
 				else:
 					result[key].append(item)
@@ -579,14 +615,14 @@ static func staging_for(room_layout: Dictionary, scene_id: String, choices: Dict
 ## The location as it stands in one scene: the base layout with hidden items removed and the active staging
 ## added (the shape the M1-06 checks read: props, fixtures, obstacles, focus_targets, anchors, signs, walk_probe).
 ## The applied staging itself is under "stage".
-static func staged_layout(room_id: String, scene_id: String, choices: Dictionary = {}, moments: Array = []) -> Dictionary:
-	return staged_layout_for(layout(room_id), scene_id, choices, moments)
+static func staged_layout(room_id: String, scene_id: String, choices: Dictionary = {}, moments: Array = [], segment: String = "") -> Dictionary:
+	return staged_layout_for(layout(room_id), scene_id, choices, moments, segment)
 
 ## staged_layout() for a layout the caller already holds.
-static func staged_layout_for(base: Dictionary, scene_id: String, choices: Dictionary = {}, moments: Array = []) -> Dictionary:
+static func staged_layout_for(base: Dictionary, scene_id: String, choices: Dictionary = {}, moments: Array = [], segment: String = "") -> Dictionary:
 	if base.is_empty():
 		return {}
-	var stage := staging_for(base, scene_id, choices, moments)
+	var stage := staging_for(base, scene_id, choices, moments, segment)
 	var result := base.duplicate(true)
 	result.erase("staging")
 	for key in ["props", "fixtures", "obstacles", "local_lights"]:

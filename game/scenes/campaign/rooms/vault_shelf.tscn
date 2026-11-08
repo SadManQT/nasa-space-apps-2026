@@ -1,0 +1,24 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/campaign_room.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD0.glb" id="2_p2"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD1.glb" id="3_p3"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_SurveyMarker2034_LOD0.glb" id="4_p4"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_SurveyMarker2034_LOD1.glb" id="5_p5"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_TetherAnchor_LOD0.glb" id="6_p6"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_TetherAnchor_LOD1.glb" id="7_p7"]
+[ext_resource type="PackedScene" path="res://assets/props/PR_VaultCase/PR_VaultCase.glb" id="8_p8"]
+[ext_resource type="PackedScene" path="res://assets/props/PR_VaultCarrier/PR_VaultCarrier.glb" id="9_p9"]
+[ext_resource type="PackedScene" path="res://assets/props/PR_VaultProbe/PR_VaultProbe.glb" id="10_p10"]
+[ext_resource type="PackedScene" path="res://assets/props/PR_SampleHolder/PR_SampleHolder.glb" id="11_p11"]
+[ext_resource type="PackedScene" path="res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn" id="12_p12"]
+
+; LOC-10 (M3-106). The vault shelf in permanent shadow: vault V12, the 2034 marker, the tether anchors, the recovery
+; carrier and the lit rover, from resources/campaign/rooms/LOC-10.json ("site_kit"). SitePreload makes its GLBs and the
+; lit rover dependencies of this scene.
+[node name="VaultShelf" type="Node3D"]
+script = ExtResource("1_room")
+room_id = "LOC-10"
+
+[node name="SitePreload" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("EN_ColdTrap_SampleStake_LOD0", "EN_ColdTrap_SampleStake_LOD1", "EN_ColdTrap_SurveyMarker2034_LOD0", "EN_ColdTrap_SurveyMarker2034_LOD1", "EN_ColdTrap_TetherAnchor_LOD0", "EN_ColdTrap_TetherAnchor_LOD1", "PR_VaultCase", "PR_VaultCarrier", "PR_VaultProbe", "PR_SampleHolder", "VH_Rover_Lit"), [ExtResource("2_p2"), ExtResource("3_p3"), ExtResource("4_p4"), ExtResource("5_p5"), ExtResource("6_p6"), ExtResource("7_p7"), ExtResource("8_p8"), ExtResource("9_p9"), ExtResource("10_p10"), ExtResource("11_p11"), ExtResource("12_p12")]]

@@ -19,8 +19,13 @@ const Crew = preload("res://scripts/world/campaign_crew.gd")
 const Garage = preload("res://assets/environment/EN_Garage/en_garage.gd")
 const Player = preload("res://scenes/player/player.tscn")
 const Stream = preload("res://scripts/terrain/terrain_stream.gd")
-const SCENE_FILES := {"LOC-01": "commons", "LOC-02": "service_rooms", "LOC-03": "garden", "LOC-04": "safe_room", "LOC-05": "airlock", "LOC-08": "garage"}
-const PLAYER_ANCHOR := {"LOC-01": "commons_player", "LOC-03": "garden_player", "LOC-08": "rover_player"}
+const SCENE_FILES := {"LOC-01": "commons", "LOC-02": "service_rooms", "LOC-03": "garden", "LOC-04": "safe_room", "LOC-05": "airlock", "LOC-08": "garage", "LOC-09": "ridge", "LOC-10": "vault_shelf"}
+const Heightfield = preload("res://assets/environment/terrain/lola/terrain_heightfield.gd")
+const COLD_CATALOG := "res://assets/environment/EN_ColdTrap/coldtrap.json"
+## The exterior scenes (M3-106): the three beacon corners of S04, the last bend's sample station (S05), the vault shelf.
+const EXTERIOR_SCENES := {"EX-CH04-S04": ["B1", "B2", "B3"], "EX-CH04-S05": [""], "EX-CH04-S06": [""], "EX-CH04-S07": [""], "EX-CH04-S08": [""]}
+const PLAYER_ANCHOR := {"LOC-01": "commons_player", "LOC-03": "garden_player", "LOC-08": "rover_player", "LOC-09": "ridge_player", "LOC-10": "vault_player"}
+const EarthSky = preload("res://assets/environment/terrain/earth_sky.gd")
 ## The garage's scenes (M3-105): CH04 departure (S02-S03) and return (S09), Ferreira's arrival (CH05-S01), and the two
 ## destination boards of CH07-S12, CH08-S01 and the CH08-S11 return.
 const GARAGE_SCENES := ["EX-CH04-S02", "EX-CH04-S03", "EX-CH04-S09", "EX-CH05-S01", "EX-CH07-S12", "EX-CH08-S01", "EX-CH08-S11"]
@@ -39,6 +44,8 @@ var failures := 0
 var capture := false
 var _patterns: Array[RegEx] = []
 var _drawn_frames := 0
+## --only=<prefix> (e.g. M3-106) renders only the evidence shots whose file name starts with it.
+var _only := ""
 
 func _init() -> void:
 	# doc 25 section 8.1 player-text patterns (test_player_text.gd): no internal ids or engineering verbs on any sign.
@@ -56,6 +63,9 @@ func _check(ok: bool, message: String) -> void:
 
 func _run() -> void:
 	capture = OS.get_cmdline_user_args().has("--capture")
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--only="):
+			_only = arg.trim_prefix("--only=")
 	root.size = Vector2i(1600, 900)
 	if capture:
 		root.always_on_top = true
@@ -89,6 +99,7 @@ func _check_all() -> void:
 	await _check_restaging()
 	await _check_echoes()
 	await _check_crew()
+	await _check_exteriors()
 
 ## Builds a real room scene the way the campaign's loading card does (incremental prop binding).
 func _room(room_id: String) -> CampaignRoom:
@@ -578,6 +589,101 @@ func _check_crew() -> void:
 	crew.free()
 	await process_frame
 
+# ------------------------------------------------------------------------------------------------- LOC-09, LOC-10
+
+## Builds an exterior room scene (flat fallback floor, or on the provider's ground) for one segment.
+func _exterior(room_id: String, segment: String, on_terrain: bool = false) -> CampaignRoom:
+	var room := (load("res://scenes/campaign/rooms/%s.tscn" % SCENE_FILES[room_id]) as PackedScene).instantiate() as CampaignRoom
+	room.terrain_segment = segment
+	room.terrain_ground = on_terrain
+	root.add_child(room)
+	return room
+
+## M3-106 (decision 8): LOC-09 is three 100 m segments at the computed beacon corners plus the last bend; LOC-10 the
+## shelf in permanent shadow. Placements stand on the surveyed road cells, each segment lit by its own dated row; the
+## pieces, words, suits, lamps and stations of every scene are there; the Sun never reaches the shelf.
+func _check_exteriors() -> void:
+	var survey: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(COLD_CATALOG)).survey
+	_check(Contract.terrain_segments("LOC-09") == ["B1", "B2", "B3"], "LOC-09 is played in canon's three segments at the computed beacon corners (decision 8)")
+	for beacon in survey.beacons:
+		var id := String(beacon.id)
+		var place := Contract.terrain("LOC-09", id)
+		_check(not place.is_empty() and bool(place.omit_staging_floor) and String(place.scene) == "EX-CH04-S04", id + " has its own terrain placement for EX-CH04-S04")
+		if place.is_empty():
+			continue
+		var field := Heightfield.load_region(String(place.region_id), true)
+		var cell := Vector2(float(beacon.x_m) - float(field.site.x_m), -(float(beacon.y_m) - float(field.site.y_m)))
+		_check(cell.distance_to(Vector2(place.origin_xz_m[0], place.origin_xz_m[1])) < 0.01, "%s stands on its computed road cell (%.2f km)" % [id, float(beacon.road_distance_m) / 1000.0])
+		var row := Heightfield.scene_lighting("EX-CH04-S04", id)
+		_check(not row.is_empty() and String(row.sun_state) == String(beacon.light.sun_state), "%s is %s at 08:00 UTC from its own Horizons row, as surveyed" % [id, beacon.light.sun_state])
+		var forward := Basis(Vector3.UP, deg_to_rad(float(place.yaw_deg))) * Vector3.FORWARD
+		_check(forward.y == 0.0 and absf(forward.length() - 1.0) < 0.001, "%s turns the room so the road runs along its -Z" % id)
+	_check(not Contract.terrain("LOC-09").is_empty() and Contract.terrain("LOC-09", "B4").is_empty(), "the last bend stays the room's own placement; no fourth corner")
+	for scene_id in ["EX-CH04-S06", "EX-CH04-S07", "EX-CH04-S08"]:
+		var row := Heightfield.scene_lighting(scene_id)
+		_check(String(row.sun_state) == "dark" and float(row.terrain_horizon_deg) > float(row.sun_el_deg) + 0.27, "%s the Sun's whole disc is below the shelf's terrain horizon (%.1f vs %.1f deg)" % [scene_id, float(row.terrain_horizon_deg), float(row.sun_el_deg)])
+		_check(not bool(Contract.earth("LOC-10", scene_id).presented), scene_id + " Earth is below the shelf's terrain and never drawn")
+	var crew := Crew.new()
+	root.add_child(crew)
+	for scene_id in EXTERIOR_SCENES:
+		for segment in EXTERIOR_SCENES[scene_id]:
+			var room_id := Contract.room_for_scene(scene_id)
+			var room := _exterior(room_id, segment)
+			var tag: String = scene_id + (" " + segment if not segment.is_empty() else "")
+			var start: Array = Contract.anchors(room_id)[PLAYER_ANCHOR[room_id]]
+			crew.place(scene_id, room, Vector3(start[0], start[1], start[2]))
+			for frame in 3:
+				await physics_frame
+			var stage: Dictionary = room.stage()
+			var staged := room.visual_root.get_node(Staging.ROOT_NAME) as Node3D
+			_check(not stage.layers.is_empty(), tag + " the exterior carries its staging")
+			_check(room.door_root.get_child_count() == 0, tag + " no invisible doors stand on the open ground (doc 09)")
+			var focus_ids: Array = room.focus_targets().map(func(t): return String(t.target_id))
+			for target in Gates.targets_for_scene(scene_id):
+				_check(focus_ids.has(String(target.world_focus_id)), tag + " gate focus exists: " + String(target.world_focus_id))
+				_check(focus_ids.has(Contract.station_focus(scene_id, String(target.target_id))), tag + " station exists for " + String(target.target_id))
+			for id in crew.local_ids:
+				var body: PlayerController = crew.bodies[id]
+				_check(String(body.loaded_path).ends_with("_EVA.glb") and body.character.find_children("HelmetLamp", "SpotLight3D", true, false).size() == 1, "%s %s wears the EVA suit, helmet and lamp in the vacuum" % [tag, id])
+			var rover := room.visual_root.get_node_or_null("VH_Rover") as Node3D
+			_check(rover != null and rover.find_children("Headlight_*", "SpotLight3D", false, false).size() == 2 and not rover.find_children("BoxCollider", "StaticBody3D", false, false).is_empty(), tag + " the rover stands solid with its headlights on")
+			var key := room.get_node("RoomLighting/KeyLight") as DirectionalLight3D
+			var row := Heightfield.scene_lighting(scene_id, segment)
+			var site: Dictionary = Heightfield.sun_table().sites[String(row.site)]
+			var to_sun := Basis(Vector3.UP, -deg_to_rad(float(Contract.terrain(room_id, segment).get("yaw_deg", 0.0)))) * Heightfield.sun_direction_at(float(site.x_m), float(site.y_m), float(row.sun_az_deg), float(row.sun_el_deg))
+			_check(key.global_basis.z.distance_to(to_sun) < 0.001 and (key.light_energy > 0.0) == (String(row.sun_state) != "dark"), "%s the flat floor's key light is the dated Sun (%s, el %.2f deg)" % [tag, row.sun_state, float(row.sun_el_deg)])
+			var environment := (room.get_node("RoomLighting/RoomEnvironment") as WorldEnvironment).environment
+			_check(environment.background_mode == Environment.BG_COLOR and environment.background_color.v < 0.05 and not environment.fog_enabled and is_zero_approx(environment.ambient_light_energy), tag + " black sky, no fog, no fill: hard shadows and no stars")
+			match scene_id:
+				"EX-CH04-S04":
+					var slope: String = {"B1": "SLOPE 2°", "B2": "SLOPE 6°", "B3": "SLOPE 9°"}[segment]
+					var beacon_words := _text(staged, "beacon_" + segment.to_lower())
+					_check(_text(staged, "slope_" + segment.to_lower()).contains(slope) and staged.find_children("slope_*", "Label3D", false, false).size() == 1, "%s the slope sign shows this corner's own slope (%s, under the rover's 15 deg)" % [tag, slope])
+					_check(beacon_words.contains("BEACON " + segment.substr(1)) and beacon_words.contains("NOT TESTED"), tag + " the beacon waits for its link test: a mounted beacon with no test does not count")
+					_check((room.visual_root.get_node("beacon_mast") as Node3D).visible and not (room.visual_root.get_node("reference_plate") as Node3D).visible, tag + " the 5 m mast stands at the corner; the sample station is at the last bend")
+				"EX-CH04-S05":
+					_check(not (room.visual_root.get_node("beacon_mast") as Node3D).visible and (room.visual_root.get_node("reference_plate") as Node3D).visible and (room.visual_root.get_node("sample_stake_3") as Node3D).visible, tag + " the dry reference plate and three sample stakes at the last bend")
+					_check(_text(staged, "stake_tag_1") == "SAMPLE 1" and _text(staged, "stake_tag_3") == "SAMPLE 3", tag + " the stakes carry only their numbers; the readings stay in the scanner")
+					var lit := rover.global_transform * Vector3(0, 0, 10)
+					_check(Vector2(lit.x, lit.z).distance_to(Vector2(-2.5, -4.0)) < 4.0, tag + " the headlights brighten the patch beside the road")
+				"EX-CH04-S06":
+					_check((room.visual_root.get_node("vault_case") as Node3D).visible and not (room.visual_root.get_node("PR_VaultCarrier") as Node3D).visible, tag + " the case as deposited; the closed carrier is still on the rover")
+					_check(_text(staged, "marker_tag").contains("2034") and not _text(staged, "marker_tag").contains("NOOR"), tag + " the 2034 marker's tag matches the map and names nobody")
+					_check((room.visual_root.get_node("PR_SampleHolder") as Node3D).visible, tag + " the sealed sample enters its holder at the sample point")
+				"EX-CH04-S07", "EX-CH04-S08":
+					var carrier := room.visual_root.get_node("PR_VaultCarrier") as Node3D
+					var tether := room.visual_root.get_node("carrier_tether") as Node3D
+					_check(carrier.visible and tether.visible and carrier.position.distance_to((room.visual_root.get_node("vault_case") as Node3D).position) < 2.0, tag + " the carrier tethered beside the vault (S06 -> S07)")
+					_check((room.visual_root.get_node("PR_VaultProbe") as Node3D).visible and (room.visual_root.get_node("vault_case") as Node3D).visible, tag + " probe, sleeve, cradle: the lid stays shut (S07 -> S08)")
+			if room_id == "LOC-10":
+				_check(room.visual_root.find_children("boot_print_*", "MeshInstance3D", false, false).size() >= 10, tag + " the 2034 crew's boot prints are still crisp (no wind)")
+				var marker := room.visual_root.get_node("marker_2034") as Node3D
+				_check(marker.visible, tag + " the 2034 marker stands unfaded (no UV in a permanently shadowed region)")
+			room.free()
+			await process_frame
+	crew.free()
+	await process_frame
+
 # ------------------------------------------------------------------------------------------------- capture
 
 const SHOTS := [
@@ -608,7 +714,7 @@ func _capture_all() -> void:
 	root.add_child(camera)
 	var room: CampaignRoom = null
 	var current := ""
-	for shot in SHOTS:
+	for shot in SHOTS.filter(func(s): return String(s[2]).begins_with(_only)):
 		var scene_id := String(shot[0])
 		if scene_id != current:
 			if room != null:
@@ -636,7 +742,9 @@ func _capture_all() -> void:
 		room.free()
 	camera.free()
 	crew.free()
-	await _capture_garage_exterior()
+	if "M3-105_exterior".begins_with(_only):
+		await _capture_garage_exterior()
+	await _capture_exteriors()
 
 ## The garage on the real Aurora ridge (M1-82 frame, exterior_terrain.json LOC-08: 80 m from Aurora at azimuth 150, the
 ## rover door turned to azimuth 100) under the dated EX-CH04-S02 Sun from its JPL Horizons row, rover door open.
@@ -678,6 +786,122 @@ func _capture_garage_exterior() -> void:
 	site.free()
 	room.free()
 	await process_frame
+
+## M3-106: each beacon corner, the last bend and the vault shelf on the real LOLA terrain (TerrainStream from the segment's
+## placement, turned by its yaw_deg) under the segment's own dated JPL Horizons Sun, the crew suited, the rover's lamps on.
+const EXTERIOR_SHOTS := [
+	["EX-CH04-S04", "B1", "ch04_corner", "M3-106_S04_B1_corner_sunlit"],
+	["EX-CH04-S04", "B1", "ch04_mast", "M3-106_S04_B1_beacon_mast"],
+	["EX-CH04-S04", "B2", "ch04_corner", "M3-106_S04_B2_corner_sunlit"],
+	["EX-CH04-S04", "B2", "ch04_mast", "M3-106_S04_B2_beacon_mast"],
+	["EX-CH04-S04", "B3", "ch04_corner", "M3-106_S04_B3_corner_in_shadow"],
+	["EX-CH04-S04", "B3", "ch04_mast", "M3-106_S04_B3_beacon_mast"],
+	["EX-CH04-S05", "", "ch04_samples", "M3-106_S05_sample_station"],
+	["EX-CH04-S06", "", "ch04_shelf", "M3-106_S06_vault_shelf_dark"],
+	["EX-CH04-S06", "", "ch04_vault_close", "M3-106_S06_vault_as_deposited"],
+	["EX-CH04-S07", "", "ch04_recovery", "M3-106_S07_carrier_tethered"],
+]
+
+func _capture_exteriors() -> void:
+	var crew := Crew.new()
+	root.add_child(crew)
+	var camera := Camera3D.new()
+	camera.far = 70000.0
+	root.add_child(camera)
+	var room: CampaignRoom = null
+	var site: Node3D = null
+	var current := ""
+	var lift := 0.0
+	for shot in EXTERIOR_SHOTS.filter(func(s): return String(s[3]).begins_with(_only)):
+		var scene_id := String(shot[0])
+		var segment := String(shot[1])
+		if scene_id + segment != current:
+			if room != null:
+				site.free()
+				room.free()
+				await process_frame
+			var room_id := Contract.room_for_scene(scene_id)
+			var place := Contract.terrain(room_id, segment)
+			var origin := Presentation.vector(place.origin_m)
+			var turn := Basis(Vector3.UP, deg_to_rad(float(place.get("yaw_deg", 0.0))))
+			room = _exterior(room_id, segment, true)
+			site = Node3D.new()
+			site.transform = Transform3D(turn, origin).affine_inverse()
+			root.add_child(site)
+			var stream := Stream.new()
+			site.add_child(stream)
+			var start := Presentation.vector(place.anchors[PLAYER_ANCHOR[room_id]])
+			stream.configure(String(place.region_id), origin + turn * start, place.exclusions.map(func(e): return {"position": Presentation.vector(e.position), "radius_m": float(e.radius_m)}))
+			var row := Heightfield.scene_lighting(scene_id, segment)
+			var rig := _dated_rig(stream, row, origin)
+			site.add_child(rig)
+			var world := rig.get_node("World") as WorldEnvironment
+			EarthSky.apply(world.environment, Contract.earth(room_id, scene_id, segment), float(stream.config.sun_energy))
+			crew.place(scene_id, room, start)
+			lift = start.y
+			current = scene_id + segment
+			for frame in 600:
+				await process_frame
+				if stream.pending.is_empty() and frame > 60:
+					break
+		var spec: Dictionary = Contract.staged_layout(room.room_id, scene_id, {}, [], segment).review_views.get(String(shot[2]), {})
+		camera.fov = 66.0
+		camera.position = Presentation.vector(spec.from) + Vector3.UP * lift
+		camera.look_at(Presentation.vector(spec.to) + Vector3.UP * lift)
+		camera.current = true
+		for frame in 30:
+			await process_frame
+		await _draw_frame()
+		await _save(String(shot[3]))
+		print("saved ", shot[3])
+	if room != null:
+		site.free()
+		room.free()
+	camera.free()
+	crew.free()
+
+## The dated light of one bundled Horizons row in the region's frame: black sky, no ambient or reflected fill, one Sun
+## with hard four-split shadows (the same rig TerrainStream.lighting builds for a scene's own row).
+##
+## When the row puts the Sun below the terrain horizon where the room stands (B3, the last bend, the shelf), a shadow-only
+## wall 400 m toward the Sun with its top at that horizon's elevation stands in for the far crater rim, which lies
+## outside the region's heightfield, so the local ground stays in shadow while the rims beyond it stay sunlit.
+func _dated_rig(stream: Node3D, row: Dictionary, at: Vector3) -> Node3D:
+	var rig := Node3D.new()
+	rig.name = "DatedLunarLighting"
+	var world := WorldEnvironment.new()
+	world.name = "World"
+	world.environment = Environment.new()
+	world.environment.background_mode = Environment.BG_COLOR
+	world.environment.background_color = Color.BLACK
+	world.environment.ambient_light_source = Environment.AMBIENT_SOURCE_DISABLED
+	world.environment.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
+	world.environment.fog_enabled = false
+	world.environment.tonemap_mode = Environment.TONE_MAPPER_AGX
+	rig.add_child(world)
+	var sun := DirectionalLight3D.new()
+	sun.name = "Sun"
+	sun.light_energy = float(stream.config.sun_energy)
+	sun.shadow_enabled = true
+	sun.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_4_SPLITS
+	sun.directional_shadow_max_distance = float(stream.config.shadow_distance_m)
+	sun.shadow_normal_bias = 1.5
+	sun.shadow_bias = 0.03
+	sun.basis = stream.field.sun_light_basis(float(row.sun_az_deg), float(row.sun_el_deg))
+	rig.add_child(sun)
+	if String(row.get("sun_state", "")) == "dark":
+		var toward: Vector3 = stream.field.sun_direction(float(row.sun_az_deg), 0.0)
+		var distance := 400.0
+		var top := distance * tan(deg_to_rad(float(row.terrain_horizon_deg)))
+		var wall := MeshInstance3D.new()
+		wall.name = "HorizonOccluder"
+		var box := BoxMesh.new()
+		box.size = Vector3(6000.0, 3000.0, 20.0)
+		wall.mesh = box
+		wall.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
+		wall.transform = Transform3D(Basis.looking_at(-toward, Vector3.UP), at + toward * distance + Vector3.UP * (top - 1500.0))
+		rig.add_child(wall)
+	return rig
 
 ## Waits for the next drawn frame; when macOS reports the window covered, renders the viewports itself.
 func _draw_frame() -> void:

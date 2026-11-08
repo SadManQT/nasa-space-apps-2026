@@ -1,0 +1,26 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/campaign_room.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_BeaconMast_LOD0.glb" id="2_p2"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_BeaconMast_LOD1.glb" id="3_p3"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReferencePlate_LOD0.glb" id="4_p4"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReferencePlate_LOD1.glb" id="5_p5"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReturnMarker_LOD0.glb" id="6_p6"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReturnMarker_LOD1.glb" id="7_p7"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD0.glb" id="8_p8"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD1.glb" id="9_p9"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_SlopeSign_LOD0.glb" id="10_p10"]
+[ext_resource type="PackedScene" path="res://assets/environment/EN_ColdTrap/EN_ColdTrap_SlopeSign_LOD1.glb" id="11_p11"]
+[ext_resource type="PackedScene" path="res://assets/props/PR_IceScanner/PR_IceScanner.glb" id="12_p12"]
+[ext_resource type="PackedScene" path="res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn" id="13_p13"]
+
+; LOC-09 (M3-106). The cold-trap ridge road: the M3-4A EN_ColdTrap pieces at each beacon corner (B1, B2, B3) and at the
+; last bend, from resources/campaign/rooms/LOC-09.json ("site_kit"); set terrain_segment (and terrain_ground) before it enters
+; the tree. SitePreload makes its GLBs and the lit rover dependencies of this scene, so a threaded load decodes them off the
+; main thread.
+[node name="RidgeRoad" type="Node3D"]
+script = ExtResource("1_room")
+room_id = "LOC-09"
+
+[node name="SitePreload" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("EN_ColdTrap_BeaconMast_LOD0", "EN_ColdTrap_BeaconMast_LOD1", "EN_ColdTrap_ReferencePlate_LOD0", "EN_ColdTrap_ReferencePlate_LOD1", "EN_ColdTrap_ReturnMarker_LOD0", "EN_ColdTrap_ReturnMarker_LOD1", "EN_ColdTrap_SampleStake_LOD0", "EN_ColdTrap_SampleStake_LOD1", "EN_ColdTrap_SlopeSign_LOD0", "EN_ColdTrap_SlopeSign_LOD1", "PR_IceScanner", "VH_Rover_Lit"), [ExtResource("2_p2"), ExtResource("3_p3"), ExtResource("4_p4"), ExtResource("5_p5"), ExtResource("6_p6"), ExtResource("7_p7"), ExtResource("8_p8"), ExtResource("9_p9"), ExtResource("10_p10"), ExtResource("11_p11"), ExtResource("12_p12"), ExtResource("13_p13")]]
