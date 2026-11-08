@@ -761,6 +761,9 @@ func _render_card(value) -> void:
 		_card_text(UiDesign.player_words("What the game computed\n" + computation + "\nGame resource units are training rules; the fixture does not validate every game number."), false, true)
 		_card_text("Limits\n" + String(card.get("boundary", "")), true)
 		_card_text("Source\n" + String(card.get("url", "")) + "\n" + String(card.get("citation", "")) + "\nRetrieved: " + String(card.get("retrieved", "")) + "\nLicence: " + String(card.get("licence", "")))
+		var credit := String(card.get("credit_line", ""))
+		if not credit.strip_edges().is_empty():
+			_card_text("Credit\n" + credit, false, true)
 	if value is Dictionary and bool(value.get("return_to_debrief", false)):
 		_ending_button("Back to science debrief", "BackToDebrief", func(): open_panel("chapter1_outcome"))
 	_source_button("Back to all sources", func(): open_panel("sources", {"ids": []}))

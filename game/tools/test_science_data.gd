@@ -56,6 +56,7 @@ func _run() -> void:
 	_check(root.get_visible_rect().encloses(panels._panel.get_global_rect()), "large-text Data Card shell fits 1280x720")
 	_check(_text(panels).contains("What this means for Aurora") and _text(panels).contains("What the game computed") and _text(panels).contains("ntrs.nasa.gov"), "card includes explanation, computations and citation")
 	await _test_model_reference(panels, science)
+	await _test_credit_line(panels)
 	var cancel := InputEventAction.new()
 	cancel.action = "ui_cancel"
 	cancel.pressed = true
@@ -72,7 +73,7 @@ func _run() -> void:
 	source.free()
 	var storage = preload("res://tools/support/isolated_storage.gd").new()
 	_check(storage.setup("science_data"), "isolate production save")
-	if OS.get_cmdline_user_args().has("--model-evidence"):
+	if OS.get_cmdline_user_args().has("--model-evidence") or OS.get_cmdline_user_args().has("--credit-evidence"):
 		_check(storage.prepare_rendering_cache(), "native model-card rendering cache parents prepared")
 	var campaign = load("res://scenes/campaign/chapter1_campaign.tscn").instantiate()
 	storage.configure(campaign)
@@ -84,6 +85,28 @@ func _run() -> void:
 	campaign.hud.panels.open_panel("data_card", {"source_id": "fast_plants_lifecycle"})
 	campaign.hud.panels.close_panel()
 	_check(campaign.director.snapshot() == before, "reading and closing cards preserves the full authoritative state")
+	for large in [false, true]:
+		campaign.hud.panels.set_accessibility({"large_text": large})
+		var credit_before: Dictionary = campaign.director.snapshot()
+		campaign.hud.panels.open_panel("data_card", {"source_id": "lro_lola_south_pole_terrain"})
+		await process_frame
+		await process_frame
+		var credit := _credit_label(campaign.hud.panels)
+		_check(credit != null, "production LOLA card includes credit large=%s" % large)
+		if credit != null:
+			var scroll: ScrollContainer = campaign.hud.panels._scroll
+			scroll.scroll_vertical = int(credit.position.y)
+			await process_frame
+			await process_frame
+			_check(scroll.get_global_rect().encloses(credit.get_global_rect()), "complete LOLA credit fits the reader large=%s" % large)
+			_check_footer_bounds(campaign.hud.panels, "LOLA credit large=%s" % large)
+			if OS.get_cmdline_user_args().has("--credit-evidence"):
+				await create_timer(0.25).timeout
+				await _capture("M1-70_credit" + ("_150" if large else ""))
+		_button(campaign.hud.panels, "Back to all sources").pressed.emit()
+		_check(campaign.hud.panels.active_panel() == "sources", "LOLA Back returns to all sources large=%s" % large)
+		campaign.hud.panels.close_panel()
+		_check(campaign.director.snapshot() == credit_before, "reading and closing LOLA preserves the full authoritative state large=%s" % large)
 	_button(campaign.hud, "Last result").pressed.emit()
 	_check(campaign.hud.panels.active_panel() == "outcome", "production HUD exposes the debrief source entry")
 	for large in [false, true]:
@@ -98,6 +121,42 @@ func _run() -> void:
 	storage.cleanup()
 	print("SCIENCE DATA RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
+
+func _test_credit_line(panels: CampaignPanels) -> void:
+	var id := "lro_lola_south_pole_terrain"
+	var raw: Dictionary = panels.science.card(id)
+	var fixture: Dictionary = panels.science._fixtures[id].duplicate(true)
+	var before := JSON.stringify(raw)
+	for large in [false, true]:
+		panels.set_accessibility({"large_text": large})
+		panels.open_panel("data_card", {"source_id": id})
+		await process_frame
+		var credit := _credit_label(panels)
+		_check(credit != null and credit.text == "Credit\n" + String(raw.credit_line), "LOLA credit renders supplied text exactly large=%s" % large)
+		if credit != null:
+			var previous: Node = panels._body.get_child(credit.get_index() - 1)
+			_check(previous is Label and previous.text.begins_with("Source\n"), "Credit appears immediately after Source large=%s" % large)
+	panels.science._fixtures[id].erase("credit_line")
+	panels.open_panel("data_card", {"source_id": id})
+	var without_credit := _text(panels)
+	_check(_credit_label(panels) == null, "absent credit adds no block")
+	for blank in ["", " \t\n"]:
+		panels.science._fixtures[id].credit_line = blank
+		panels.open_panel("data_card", {"source_id": id})
+		_check(_text(panels) == without_credit, "blank credit leaves the card unchanged: " + str(blank))
+	# Exercise exact supplied text independently of player-word substitutions.
+	panels.science._fixtures[id].credit_line = "  supplied  stage credit  "
+	panels.open_panel("data_card", {"source_id": id})
+	var supplied := _credit_label(panels)
+	_check(supplied != null and supplied.text == "Credit\n  supplied  stage credit  ", "credit preserves supplied spacing and words")
+	panels.science._fixtures[id] = fixture
+	_check(JSON.stringify(panels.science.card(id)) == before, "credit display leaves the source record unchanged")
+
+func _credit_label(panels: CampaignPanels) -> Label:
+	for child in panels._body.get_children():
+		if child is Label and child.text.begins_with("Credit\n"):
+			return child
+	return null
 
 func _test_model_reference(panels: CampaignPanels, science: ScienceData) -> void:
 	var raw := science.card("nasa_eclipse_2047_01_12")

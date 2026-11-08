@@ -126,6 +126,9 @@ func _run() -> void:
 	for source_id in hud.panels.science.source_ids():
 		hud.panels.open_panel("data_card", {"source_id": source_id})
 		await _walk_state(hud, "data card " + String(source_id))
+		var credit: String = hud.panels.science.card(source_id).get("credit_line", "")
+		if not credit.strip_edges().is_empty():
+			_check(hud.panels._body.get_children().any(func(child): return child is Label and child.text == "Credit\n" + credit), "data card includes exact source credit: " + String(source_id))
 	hud.panels.close_panel()
 	await _walk_later_chapters(campaign)
 	await _walk_failed_table()
