@@ -4349,8 +4349,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Carrying payloads, and the shift-5 STACK as a real carry-and-place task",
-   "status": "blocked",
-   "owner": "Sadman/night-shift",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/scripts/payload/",
@@ -4362,9 +4362,9 @@
     "game-design/08_PUZZLE_DESIGNS.md",
     "game/scripts/player/held_prop.gd"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026). 5 Nov: being finished by Sadman's night shift; if it ends blocked with a parked branch, the assignee releases it and continues from night/M1-58.",
+   "note": "From doc 25 (Sadman, 5 Nov 2026). 5 Nov: being finished by Sadman's night shift; if it ends blocked with a parked branch, the assignee releases it and continues from night/M1-58. 9 Nov: Sadman asked Claude to finish it (\"do the teammates task\"), continuing from night/M1-58.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-09",
    "prompt": "Do: a payload system per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.3: payloads with mass, size, handling (fragile, sealed, keep-cold) and destination; carry\nplaces (hands 1, back frame up to 3 small; sled and trailer hooks for later chapters); pickup refused with the reason when over\ncapacity; load and weight shown; delivery to a marked place checks condition. Reuse HeldProp for hand poses. Chapter 1: the\nshift-5 STACK becomes the physical task 08 defines (four supply bundles into outlined bunk slots in 30 s; partial = K1,\ncomplete = K2; assisted input before start; untimed in Family Mode; no falling-crate physics). Tests cover capacity, delivery\ncondition, STACK K0/K1/K2 and the assisted path; P-02 numbers unchanged.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "blocker": "Night shift parked the work on branch night/M1-58: could not land: rebase conflict: real carry-and-place task\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with \"git config set ad",
    "reserved_for": "atik",

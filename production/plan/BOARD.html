@@ -257,7 +257,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-90">M1-90</a> Run complete Windows loading diagnostics for M1-68 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">Completed the two requested fresh-process Windows runs with the unchanged collector. Run1:537 checks,2 failures (title51.869ms,campaign66.5…</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">3 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">7 blocked</span><span class="chip s-todo">36 todo</span></div><div class="bar"><i style="width:7%"></i></div>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">3 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">6 blocked</span><span class="chip s-todo">36 todo</span></div><div class="bar"><i style="width:7%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
+<li><a class="id" href="#M1-58">M1-58</a> Carrying payloads, and the shift-5 STACK as a real carry-and-place task <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/claude on 2026-11-09</div></li>
+</ul></details>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M1-95">M1-95</a> Fix cross-scene prerequisite eligibility for P-01 nearby planting <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -265,12 +268,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-103">M1-103</a> Expose the Solo/Class session and team-plan bridge for M1-37 <span class="chip ">codex</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details open><summary>Blocked (7)</summary><ul>
+<details open><summary>Blocked (6)</summary><ul>
 <li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">M1-82/M1-88 delivered; composed and tested all three ready regions (37 checks). Production still needs incremental preparation (measured87-205ms sync), Sadman M1-91 real work ligh…</div></li>
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Draft pre-release v0.1.0-preview.20261105 is on GitHub with both ZIPs (built from 57b837b; CI run 41970276437 green on Windows and macOS; production/qa/release_2026-11-05.md). Sad…</div></li>
 <li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">1080p four-room M4 Forward+/Compatibility captures delivered with complete coverage; Forward+ p95 misses60fps and first-use hitches remain. Await measured runtime fixes M1-92, Sad…</div></li>
 <li><a class="id" href="#M1-49">M1-49</a> Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Sadman M1-84 room/media hooks have landed and are preserved. Await Ramim M1-83 accessible Care Round capture/ghost panel and final command contract; then Atik wires dated garden v…</div></li>
-<li><a class="id" href="#M1-58">M1-58</a> Carrying payloads, and the shift-5 STACK as a real carry-and-place task <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Night shift parked the work on branch night/M1-58: could not land: rebase conflict: real carry-and-place task hint: Resolve all conflicts manually, mark them as resolved with hint…</div></li>
 <li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Complete diagnostic retention/collector delivered and reviewed; full61/61 and two fresh M4 focused runs537PASS each. Original Windows failure not reproduced here; await Ramim M1-9…</div></li>
 <li><a class="id" href="#M1-69">M1-69</a> Expose safe message metadata updates without resetting puzzle checkpoints <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Requested Director method is in Sadman-owned core/, outside campaign-only task paths. Owner request M1-89 publishes bounded metadata/checkpoint contract; then Atik wires normal sa…</div></li>
 </ul></details>
@@ -4771,8 +4773,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Carrying payloads, and the shift-5 STACK as a real carry-and-place task",
-   "status": "blocked",
-   "owner": "Sadman/night-shift",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/scripts/payload/",
@@ -4784,9 +4786,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game-design/08_PUZZLE_DESIGNS.md",
     "game/scripts/player/held_prop.gd"
    ],
-   "note": "From doc 25 (Sadman, 5 Nov 2026). 5 Nov: being finished by Sadman's night shift; if it ends blocked with a parked branch, the assignee releases it and continues from night/M1-58.",
+   "note": "From doc 25 (Sadman, 5 Nov 2026). 5 Nov: being finished by Sadman's night shift; if it ends blocked with a parked branch, the assignee releases it and continues from night/M1-58. 9 Nov: Sadman asked Claude to finish it (\"do the teammates task\"), continuing from night/M1-58.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-09",
    "prompt": "Do: a payload system per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.3: payloads with mass, size, handling (fragile, sealed, keep-cold) and destination; carry\nplaces (hands 1, back frame up to 3 small; sled and trailer hooks for later chapters); pickup refused with the reason when over\ncapacity; load and weight shown; delivery to a marked place checks condition. Reuse HeldProp for hand poses. Chapter 1: the\nshift-5 STACK becomes the physical task 08 defines (four supply bundles into outlined bunk slots in 30 s; partial = K1,\ncomplete = K2; assisted input before start; untimed in Family Mode; no falling-crate physics). Tests cover capacity, delivery\ncondition, STACK K0/K1/K2 and the assisted path; P-02 numbers unchanged.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "blocker": "Night shift parked the work on branch night/M1-58: could not land: rebase conflict: real carry-and-place task\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with \"git config set ad",
    "reserved_for": "atik",
