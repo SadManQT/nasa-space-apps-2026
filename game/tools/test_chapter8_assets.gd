@@ -169,7 +169,36 @@ func _test_road_data(cat: Dictionary) -> void:
 		if s.id != "E":
 			ten = ten and s.lola_10m is Dictionary and s.lola_10m.has("height_m")
 	_check(ten, "segments A-D carry heights from the 10 m LOLA tiles")
+	_check_spurs(cat)
 	_check(int(cat.road.game_km) == 120, "the game keeps 120 km each way")
+
+## M4-13: each road-to-pad spur is a routed 10 m path. Every 20 m of it climbs at most 12 deg (the road limit,
+## production/terrain/regions.json), no cell is over the 15 deg hard limit, cells over 12 deg add up to at most the
+## reported length, and the path runs from the road to the pad.
+func _check_spurs(cat: Dictionary) -> void:
+	for r in cat.repeaters:
+		var s: Dictionary = r.lola_10m.spur
+		var pts: Array = s.points
+		var ok := pts.size() > 2
+		var over := 0.0
+		var steepest := 0.0
+		for i in range(1, pts.size()):
+			var a: Array = pts[i - 1]
+			var b: Array = pts[i]
+			var step := Vector2(b[0] - a[0], b[1] - a[1]).length()
+			ok = ok and step > 0.0 and step < 14.2 and absf(b[3] - a[3] - step) < 0.2 and float(b[4]) <= 15.0
+			if maxf(a[4], b[4]) > 12.0:
+				over += step
+			var j := i - 1
+			while j < pts.size() - 1 and float(pts[j][3]) - float(a[3]) < 20.0:
+				j += 1
+			var run := float(pts[j][3]) - float(a[3])
+			if run >= 20.0:
+				steepest = maxf(steepest, rad_to_deg(atan(absf(float(pts[j][2]) - float(a[2])) / run)))
+		var last: Array = pts[pts.size() - 1]
+		ok = ok and Vector2(last[0] - r.x_m, last[1] - r.y_m).length() < 25.0
+		ok = ok and steepest <= 12.0 and over <= float(s.length_over_12_deg_m) + 0.5 and absf(float(last[3]) - float(s.length_m)) < 0.5
+		_check(ok, "%s spur: %.0f m routed path, steepest 20 m %.1f deg (<= 12), no cell over 15 deg, ends at the pad" % [r.id, float(s.length_m), steepest])
 
 func _test_rover() -> void:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/vehicles/VH_Rover/rover_lights.json"))
