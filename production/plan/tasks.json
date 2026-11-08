@@ -6040,8 +6040,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Commons Earth screen: Noor's live call on the Dhaka rooftop backdrop (S10 morning, S12 noon)",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [
     "M3-8A"
    ],
@@ -6051,7 +6051,7 @@
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07.",
    "evidence": "",
-   "updated": "2026-11-07",
+   "updated": "2026-11-08",
    "prompt": "M3-8A installed the 2D assets for Noor's live calls (Sadman, 7 Nov 2026: \"Approve all\" and \"2D portraits only\"): game/assets/ui/screens/EN_NoorRooftop.png (EX-CH08-S10, 9 Apr 2047 08:15 Dhaka, painted grade, 1536 x 864), game/assets/ui/screens/EN_NoorRooftop_noon.png (EX-CH08-S12, 10 Apr 12:00) and the cel-shaded cut-out game/assets/ui/portraits/CH_Noor_live.png (transparent, 587 x 1376). CampaignCrew._build_screen (game/scripts/world/campaign_crew.gd) today always draws EN_EarthDesk behind the caller and looks the portrait up as CH_<Speaker>_screen.png, so Noor would get Rao's room and no portrait. Do: when the Earth-link speaker is Noor, draw EN_NoorRooftop (S10) or EN_NoorRooftop_noon (S12) as the backdrop and CH_Noor_live.png over it, fitted to the backdrop's height like Ferreira's cut-out over EN_EarthDesk, with the caption 'Noor' and the EARTH LINK - LIVE tag (doc 24 7.5 beat 8). Keep Rao and Ferreira on EN_EarthDesk. If the backdrop table should live in game/resources/ui/ui_kit.json (earth_screen, Ramim's file), file that one-line data task for ramim instead of editing it. Acceptance: game/tools/test_earth_screen.gd extended for Noor (backdrop path per scene, portrait loaded, never past the bezel); a windowed capture production/qa/evidence/<task>_noor_screen.png of the commons screen during EX-CH08-S10; run_tests.sh green.",
    "reserved_for": "sadman",
    "effort": 1
@@ -6376,8 +6376,8 @@
    "priority": "P2",
    "tool": "claude",
    "title": "Garage console: Screen crops the top line of three-line texts; the landing-pad camera shows words only",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [],
    "paths": [
     "game/assets/environment/EN_Garage/",
