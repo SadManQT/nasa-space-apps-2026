@@ -8,7 +8,7 @@ var failures := 0
 
 func _init() -> void:
 	capture = OS.get_cmdline_user_args().has("--capture")
-	if not storage.setup("main-menu-contrast"):
+	if not storage.setup("main-menu-contrast") or (capture and not storage.prepare_rendering_cache()):
 		quit(1)
 		return
 	call_deferred("_run")
@@ -82,6 +82,9 @@ func _run() -> void:
 
 func _states(button: Button, label: String) -> void:
 	_mouse(Vector2(1, 1))
+	button.grab_focus()
+	await process_frame
+	await process_frame
 	button.release_focus()
 	await process_frame
 	await _contrast(button, "normal", label + "_normal", false)
@@ -135,7 +138,7 @@ func _contrast(button: Button, state: String, label: String, focused: bool) -> v
 		await RenderingServer.frame_post_draw
 		var image := root.get_texture().get_image()
 		var rect := button.get_global_rect()
-		var point := rect.position + Vector2(rect.size.x - 20, rect.size.y / 2)
+		var point := rect.position + Vector2(rect.size.x - 24, rect.size.y - 7)
 		_check(Rect2(Vector2.ZERO, Vector2(root.size)).has_point(point), label + " native sample is inside viewport")
 		var pixel := image.get_pixelv(Vector2i(point)) if Rect2(Vector2.ZERO, Vector2(root.size)).has_point(point) else Color.BLACK
 		_check(_ratio(ink, pixel) >= 4.5, "%s native fill/text contrast %.2f >= 4.5" % [label, _ratio(ink, pixel)])
