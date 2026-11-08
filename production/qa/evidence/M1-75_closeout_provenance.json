@@ -1,0 +1,60 @@
+{
+  "raw_archive_local": ".superpowers/sdd/2026-11-06-ramim-continue/task14-closeout-raw-6b85ef49",
+  "raw_archive_inventory_sha256": "594cd4d302c24c903b3da1a4e99dd16ec487dfec41f802bd5d3f34652c58a462",
+  "raw_files_preserved": 41,
+  "normalization": "Public logs: UTF8, LF, trailing transcript whitespace removed only. Exact original bytes and hashes retained privately. No assertion/result text removed.",
+  "native_original_sha256": "67cc03272a3b9513c2e48063079ea864c98cf9fca89ff45cee0eec172bbf4047",
+  "native_public_sha256": "67cc03272a3b9513c2e48063079ea864c98cf9fca89ff45cee0eec172bbf4047",
+  "actual_native_source": "c33c19912d96338e174fc9a8c7474cc1dba1d075",
+  "actual_native_game_tree": "f874f7ef3290126cb06fefd62b9bd484e5e71d3b",
+  "rebased_source_commits": [
+    "17876bf",
+    "4a101db"
+  ],
+  "source_blobs_identical": true,
+  "full_acceptance": "Deferred by user on2026-11-09; no full/all-eight-chapter pass claimed.",
+  "post_rebase_input_verification": [
+    {
+      "path": "game/scripts/ui/main_menu.gd",
+      "native_sha256": "c73b2d57101d2e72701eff41deeb44da271d7c4a422a57241fa29fe13fc53499",
+      "current_raw_sha256": "c73b2d57101d2e72701eff41deeb44da271d7c4a422a57241fa29fe13fc53499",
+      "lf_sha256": "cde47d449a82c615c8745add02aaf5d87f1e00c10f2dedd40854af42a11ea0c1",
+      "equivalence": "exact"
+    },
+    {
+      "path": "game/scenes/ui/main_menu.tscn",
+      "native_sha256": "8bc64099852c15bb9bab8a784f9dd982154c03549cee8ab508bb474f1d8ab3a6",
+      "current_raw_sha256": "8bc64099852c15bb9bab8a784f9dd982154c03549cee8ab508bb474f1d8ab3a6",
+      "lf_sha256": "7124497884e564313b0d1b2f528c668e84478ebd569a8f05605d9d0212c928ae",
+      "equivalence": "exact"
+    },
+    {
+      "path": "game/resources/ui/lla_theme.tres",
+      "native_sha256": "6349a38d5a5cf0e489d51db4977f3b34d8098f4afd4e5aed744729f796091431",
+      "current_raw_sha256": "6349a38d5a5cf0e489d51db4977f3b34d8098f4afd4e5aed744729f796091431",
+      "lf_sha256": "d49dd941b0ad346d580dd54137027fe4a1dcf81479b12d6c5761d3db7013d26e",
+      "equivalence": "exact"
+    },
+    {
+      "path": "game/tools/test_main_menu_contrast.gd",
+      "native_sha256": "e9c7d532e597d2e6a9c42c6b17dc917dc42f88e8152ccd6ce3048f38092053e7",
+      "current_raw_sha256": "e1bc753564dd94100367d3323f0660c59341291afe9af0d2690f91bc02d6ebc1",
+      "lf_sha256": "e9c7d532e597d2e6a9c42c6b17dc917dc42f88e8152ccd6ce3048f38092053e7",
+      "equivalence": "checkout line endings only; normalized Git content identical"
+    },
+    {
+      "path": "game/tools/support/isolated_storage.gd",
+      "native_sha256": "9663124fcce898b14643f9659ea41f137a46bc6e378ea2150a8141b616134846",
+      "current_raw_sha256": "9663124fcce898b14643f9659ea41f137a46bc6e378ea2150a8141b616134846",
+      "lf_sha256": "40ea50387d747b92d734f08f32b892f9f498fa54dbe0a9c5c5b49fbdeefd8cda",
+      "equivalence": "exact"
+    },
+    {
+      "path": "game/scripts/ui/campaign_panels.gd",
+      "native_sha256": "a63689eddc75625daed25ff8a6229876582d76f574b836f0eaa223da99060471",
+      "current_raw_sha256": "a63689eddc75625daed25ff8a6229876582d76f574b836f0eaa223da99060471",
+      "lf_sha256": "dac9ec63845d763dee9cc2782adf89a1605ba0085841f681460a868d01348d21",
+      "equivalence": "exact"
+    }
+  ]
+}

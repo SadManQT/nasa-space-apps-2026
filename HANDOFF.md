@@ -206,3 +206,6 @@ Open items:
   Run it in the background and write output to a file.
 - **Safety hook:** `rm -f` and `rm -rf $VAR` are blocked; don't retry them.
 - **OCR:** none is installed. macOS Vision via a short Swift script works; it was used for the text sweep of the cutscenes.
+
+
+**9 November2026 - Ramim source closeout:** user requested safe integration/push, with remaining work afterward. M1-72 science access source is published; M1-75 contrast/briefing source is reviewed (C0/I0/M0), focused1218/0 and native146/0, with diagnostics and provenance in production/qa/evidence/M1-75_README.md. Both tasks remain blocked only on their explicitly pending current integrated full/all-eight-chapter acceptance and any failures that run reveals; no all-suite/full-game pass is claimed. Do not reimplement delivered source. Resume full runner with documented1500-second watchdog and unchanged50ms assertions. Unstarted M1-101/M1-74/M1-77 claims released. Separate disabled Continue followup M1-109 and Sadman handbook request M1-110 recorded. Original local import exclusions/editor settings remain machine-local.

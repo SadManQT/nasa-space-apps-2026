@@ -1,0 +1,93 @@
+{
+  "source": "c33c19912d96338e174fc9a8c7474cc1dba1d075",
+  "gameTree": "f874f7ef3290126cb06fefd62b9bd484e5e71d3b",
+  "startUtc": "2026-11-08T16:26:49.8350782Z",
+  "endUtc": "2026-11-08T16:26:54.5198687Z",
+  "exit": 0,
+  "command": "Godot_v4.7.2-stable_win64_console.exe --path game --windowed --resolution 1280x720 --rendering-method gl_compatibility --script res://tools/test_main_menu_contrast.gd -- --capture",
+  "engineBefore": [
+    {
+      "Id": 22348,
+      "Path": "E:\\godot exe\\Godot_v4.7-stable_win64.exe"
+    }
+  ],
+  "engineAfter": [
+    {
+      "Id": 22348,
+      "Path": "E:\\godot exe\\Godot_v4.7-stable_win64.exe"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "game/scripts/ui/main_menu.gd",
+      "sha256": "c73b2d57101d2e72701eff41deeb44da271d7c4a422a57241fa29fe13fc53499"
+    },
+    {
+      "path": "game/scenes/ui/main_menu.tscn",
+      "sha256": "8bc64099852c15bb9bab8a784f9dd982154c03549cee8ab508bb474f1d8ab3a6"
+    },
+    {
+      "path": "game/resources/ui/lla_theme.tres",
+      "sha256": "6349a38d5a5cf0e489d51db4977f3b34d8098f4afd4e5aed744729f796091431"
+    },
+    {
+      "path": "game/tools/test_main_menu_contrast.gd",
+      "sha256": "e9c7d532e597d2e6a9c42c6b17dc917dc42f88e8152ccd6ce3048f38092053e7"
+    },
+    {
+      "path": "game/tools/support/isolated_storage.gd",
+      "sha256": "9663124fcce898b14643f9659ea41f137a46bc6e378ea2150a8141b616134846"
+    },
+    {
+      "path": "game/scripts/ui/campaign_panels.gd",
+      "sha256": "a63689eddc75625daed25ff8a6229876582d76f574b836f0eaa223da99060471"
+    }
+  ],
+  "pngs": [
+    {
+      "path": "production/qa/evidence/M1-75_briefing_100_focus.png",
+      "sha256": "4b5b872c79248704d3828f58e287e59863516cf83b8a2ccc748e5fd6c30216cf",
+      "mtimeUtc": "2026-11-08T16:26:53.5653590Z"
+    },
+    {
+      "path": "production/qa/evidence/M1-75_briefing_150_focus.png",
+      "sha256": "7abd724b830c16274ac5e171a2580d4a0be489d69c0b3fcf8fd3a93de8fb9224",
+      "mtimeUtc": "2026-11-08T16:26:54.0817340Z"
+    },
+    {
+      "path": "production/qa/evidence/M1-75_briefing_150_scrolled_focus.png",
+      "sha256": "7fe6436350e49c6724d5276ab1b380eab4aadf54cfd220749c1db9928def4825",
+      "mtimeUtc": "2026-11-08T16:26:54.1697415Z"
+    },
+    {
+      "path": "production/qa/evidence/M1-75_restored_100.png",
+      "sha256": "d9e38c91b54d69eeef2a7dff3f46955eca423f72789b7a7942259cba518b0730",
+      "mtimeUtc": "2026-11-08T16:26:53.6759703Z"
+    },
+    {
+      "path": "production/qa/evidence/M1-75_restored_150.png",
+      "sha256": "c773af55ba2c277db056c0da7d198a17a1ca0f53130383932efc296ec9021b4f",
+      "mtimeUtc": "2026-11-08T16:26:54.2477026Z"
+    },
+    {
+      "path": "production/qa/evidence/M1-75_secondary_100_focus.png",
+      "sha256": "f1d787538b1a704a200415b3445536f839096901afc4d1feee60e38ea57eaf46",
+      "mtimeUtc": "2026-11-08T16:26:53.7365287Z"
+    },
+    {
+      "path": "production/qa/evidence/M1-75_secondary_150_focus.png",
+      "sha256": "01a89b7bab0a70c1184ea997d749aa50fa752b48d0dc9e9cb1e7e2e8bc1b5e15",
+      "mtimeUtc": "2026-11-08T16:26:54.3090211Z"
+    },
+    {
+      "path": "production/qa/evidence/M1-75_title_100_focus.png",
+      "sha256": "d9e38c91b54d69eeef2a7dff3f46955eca423f72789b7a7942259cba518b0730",
+      "mtimeUtc": "2026-11-08T16:26:53.4314021Z"
+    },
+    {
+      "path": "production/qa/evidence/M1-75_title_150_focus.png",
+      "sha256": "5db08daa7c241753c96effcee5e6a49ab4f7211b97f2caf81a2dbbe1e465886b",
+      "mtimeUtc": "2026-11-08T16:26:53.9470915Z"
+    }
+  ]
+}
