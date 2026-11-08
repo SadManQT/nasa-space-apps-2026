@@ -638,7 +638,7 @@
     "docs/GAMEPLAY_DESIGN_FINAL.md",
     "game-design/10_GAMEPLAY_SYSTEMS.md"
    ],
-   "note": "5 Nov: being finished by Sadman's night shift; if it ends blocked with a parked branch, the assignee releases it and continues from night/M1-37.",
+   "note": "5 Nov: being finished by Sadman's night shift; if it ends blocked with a parked branch, the assignee releases it and continues from night/M1-37.\n9Nov recheck: core crew contract M1-102 is done; runtime bridge M1-103 is still todo. Saved8a792c1 port/human Class capture remain pending; no source port started in this small task.",
    "evidence": "",
    "updated": "2026-11-08",
    "id": "M1-37",
@@ -6679,20 +6679,22 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Skip unavailable Continue during keyboard navigation",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/main_menu.gd",
+    "game/scripts/ui/campaign_panels.gd",
     "game/tools/test_main_menu_contrast.gd"
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-09.",
-   "evidence": "",
+   "evidence": "Reviewed source7ffabe8. Mandatory focused menu154/0 +worker572/0 +hints124/0=850/0; nativeForward+229/0 clean100/150,13 PNGs/nine input hashes verified; C0/I0/M0. Production-restorable saved checkpoint/unchanged bytes and all modal availability transitions covered. See production/qa/evidence/M1-109_README.md. Handbook owner request M1-111.",
    "updated": "2026-11-09",
    "prompt": "M1-75 diagnostic at100/150 text underGodot4.7.2: Tab from New Expedition reaches CONTINUE ? NO CHECKPOINT while Button.disabled=true and focus_mode=2(FOCUS_ALL). Saved contrast source is already reviewed; do not undo its factory colors or briefing scrolling. Fix the smallest shared Continue availability/focus path in main_menu.gd after reading every caller: unavailable Continue must be skipped and cannot activate; a real available checkpoint restores normal focusability. Opening/closing briefing, Science or Settings must restore a valid enabled control and must not resurrect disabled focus. Preserve enabled action order, save/Continue commands and data, no navigation redesign. Add actual Tab/ShiftTab at100/150 and availability-toggle regressions with isolated house storage, plus native evidence; run mandatory runner. Source diagnostic/evidence: production/qa/evidence/M1-75_README.md and test_main_menu_contrast.gd. No source for this followup was written; the user requested remaining work later. Full acceptance of M1-75 is a separate pending gate, not a reason to reimplement the completed contrast fix.",
    "reserved_for": "ramim",
-   "effort": 1
+   "effort": 1,
+   "blocker": "Source fix and targeted/native verification complete; acceptance waits for current full game/tools/run_tests.sh including expanded all8 player_text (documented1500s watchdog; all50ms assertions unchanged). No current full pass claimed. Ramim should run pending full gate and investigate any failures before marking done; preserve/reuse published source7ffabe8 rather than reimplement."
   },
   {
    "id": "M1-110",
@@ -6732,6 +6734,26 @@
    "evidence": "road_data.py spur() routes R1-R3 (make_terrain dijkstra_route + path_profile, 12/15 deg, bbox+1200 m, 3x3 goal); builder spurs_note updated; re-run replay gives relay_road.json repeaters byte-identical to M4-13; chapter8 2/2, full 75/75 suites passed",
    "updated": "2026-11-09",
    "prompt": "M4-13 routed the R1-R3 road-to-pad spurs on the 10 m LOLA tiles and stored them (lola_10m.spur: method, length, climb, max slope, steepest_20m_deg, straight_line_before, 10 m points) plus a new spurs_note in game/assets/environment/EN_RelayRoad/relay_road.json. build_chapter8_assets.py (spurs_note at line ~592) and road_data.py ten_metre().profile still produce the old straight-line spur data, so a re-run would undo it. Move the routing into road_data.py (make_terrain.dijkstra_route on pgda90_10mpp, window = spur bbox + 1200 m, goal = 3x3 cells round the pad, limit 12 deg, hard 15 deg only if no path; then path_profile) and drop the stale spurs_note in the builder; re-run and confirm relay_road.json is unchanged; test_chapter8_assets.gd must stay green.",
+   "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M1-111",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Record M1-109 reviewed Continue navigation fix",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "PRODUCTION_HANDBOOK.md"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-09.",
+   "evidence": "",
+   "updated": "2026-11-09",
+   "prompt": "Record a dated handbook status line for Ramim M1-109 reviewed UI source: unavailable Continue is skipped by Tab, valid checkpoint restores focus, losing checkpoint redirects to New Expedition; updates while a modal is open preserve its disabled background/current restore state. Shared panel close retains a valid owner fallback. Source7ffabe8; evidence production/qa/evidence/M1-109_README.md, focused850/0 and nativeForward+229/0 clean at100/150, independentC0/I0/M0. Full integrated runner/all8 text still pending; do not claim full-game or full-suite acceptance. No new save model, commands, palettes, assets, thresholds or import changes. Existing M1-75 contrast/scroll remains intact. Update only owned handbook status; retain machine-local import/editor exclusions.",
    "reserved_for": "sadman",
    "effort": 1
   }

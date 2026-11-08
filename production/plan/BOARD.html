@@ -86,7 +86,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">96 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">13 todo</span></div><div class="bar"><i style="width:88%"></i></div>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">96 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">14 todo</span></div><div class="bar"><i style="width:87%"></i></div>
+<details open><summary>Next up today (1)</summary><ul>
+<li><a class="id" href="#M1-111">M1-111</a> Record M1-109 reviewed Continue navigation fix <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+</ul></details>
 <details><summary>To do (13)</summary><ul>
 <li><a class="id" href="#M1-24">M1-24</a> Fix the playtest and QA findings, then freeze the demo build <span class="chip ">claude</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M2-04">M2-04</a> Record gameplay captures and narration for the videos <span class="chip ">human</span> <span class="chip ">P0</span></li>
@@ -201,10 +204,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M4-15">M4-15</a> Keep the routed relay-road spurs when build_chapter8_assets.py re-runs <span class="chip ">claude</span> <span class="chip ">P2</span><div class="meta">road_data.py spur() routes R1-R3 (make_terrain dijkstra_route + path_profile, 12/15 deg, bbox+1200 m, 3x3 goal); builder spurs_note updated…</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">1 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">13 blocked</span><span class="chip s-todo">31 todo</span></div><div class="bar"><i style="width:2%"></i></div>
-<details open><summary>Working now (1)</summary><ul>
-<li><a class="id" href="#M1-109">M1-109</a> Skip unavailable Continue during keyboard navigation <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-09</div></li>
-</ul></details>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">1 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">14 blocked</span><span class="chip s-todo">31 todo</span></div><div class="bar"><i style="width:2%"></i></div>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M1-101">M1-101</a> Guard HUD world overlays while rebuilt player nodes leave the tree <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-74">M1-74</a> Stop the &#x27;no meta lla_fade&#x27; error in the HUD fade <span class="chip ">codex</span> <span class="chip ">P2</span></li>
@@ -212,7 +212,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-2P">M3-2P</a> Chapter 2 puzzles P-03 and P-04 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-3P">M3-3P</a> Chapter 3 puzzles P-05 and P-06 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details open><summary>Blocked (13)</summary><ul>
+<details open><summary>Blocked (14)</summary><ul>
 <li><a class="id" href="#M1-37">M1-37</a> Four-player co-op Class mode: shared decisions, private role clues (as registered) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs Sadman M1-102 core crew configuration and Atik M1-103 runtime/query/team-plan bridge. The saved branch edits core/campaign/crew/docs/tools outside Ramim ownership and uses a…</div></li>
 <li><a class="id" href="#M1-08">M1-08</a> P-01 Commission &amp; Plant: a real, interactive puzzle panel <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs Atik M1-95 to fix cross-scene nearby planting eligibility, then resume this exact UI candidate, address remaining input/focus concerns and perform actual native/review/full …</div></li>
 <li><a class="id" href="#M1-18">M1-18</a> First five minutes: title screen, onboarding and UX polish <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Declared dependency Atik M1-68 remains blocked. Resume the unimplemented title/onboarding feature after its dependency is released; do not mistake shared HowTo source for complete…</div></li>
@@ -226,6 +226,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-72">M1-72</a> Data cards and Journal Science: a Watch button that plays the card&#x27;s science explainer <span class="chip ">any</span> <span class="chip ">P1</span><div class="meta">M1-72 acceptance deferred at user request on2026-11-09: reviewed science Watch/Journal source is already published (2ec3af5/993df85; production/qa/evidence/M1-72_README.md). Focus…</div></li>
 <li><a class="id" href="#M1-75">M1-75</a> Keep dark text on focused gold title and briefing buttons <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">M1-75 source/spec and quality reviewed C0/I0/M0; saved contrast/briefing fix17876bf +4a101db (pre-integration actual nativec33c199) is ready for WIP source delivery. Focused1218 c…</div></li>
 <li><a class="id" href="#M1-83">M1-83</a> Care Round photo and measurement panel for M1-49 <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs Atik M1-68 full acceptance; world camera/date/photo/receipt/save integration stays with Atik M1-49. Preserve the published provider and async image-only capture contract. Sa…</div></li>
+<li><a class="id" href="#M1-109">M1-109</a> Skip unavailable Continue during keyboard navigation <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Source fix and targeted/native verification complete; acceptance waits for current full game/tools/run_tests.sh including expanded all8 player_text (documented1500s watchdog; all5…</div></li>
 </ul></details>
 <details><summary>To do (26)</summary><ul>
 <li><a class="id" href="#M1-31">M1-31</a> Make it fun: Chapter 1 game-feel and reward pass <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -1064,7 +1065,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "docs/GAMEPLAY_DESIGN_FINAL.md",
     "game-design/10_GAMEPLAY_SYSTEMS.md"
    ],
-   "note": "5 Nov: being finished by Sadman's night shift; if it ends blocked with a parked branch, the assignee releases it and continues from night/M1-37.",
+   "note": "5 Nov: being finished by Sadman's night shift; if it ends blocked with a parked branch, the assignee releases it and continues from night/M1-37.\n9Nov recheck: core crew contract M1-102 is done; runtime bridge M1-103 is still todo. Saved8a792c1 port/human Class capture remain pending; no source port started in this small task.",
    "evidence": "",
    "updated": "2026-11-08",
    "id": "M1-37",
@@ -7105,20 +7106,22 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Skip unavailable Continue during keyboard navigation",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/main_menu.gd",
+    "game/scripts/ui/campaign_panels.gd",
     "game/tools/test_main_menu_contrast.gd"
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-09.",
-   "evidence": "",
+   "evidence": "Reviewed source7ffabe8. Mandatory focused menu154/0 +worker572/0 +hints124/0=850/0; nativeForward+229/0 clean100/150,13 PNGs/nine input hashes verified; C0/I0/M0. Production-restorable saved checkpoint/unchanged bytes and all modal availability transitions covered. See production/qa/evidence/M1-109_README.md. Handbook owner request M1-111.",
    "updated": "2026-11-09",
    "prompt": "M1-75 diagnostic at100/150 text underGodot4.7.2: Tab from New Expedition reaches CONTINUE ? NO CHECKPOINT while Button.disabled=true and focus_mode=2(FOCUS_ALL). Saved contrast source is already reviewed; do not undo its factory colors or briefing scrolling. Fix the smallest shared Continue availability/focus path in main_menu.gd after reading every caller: unavailable Continue must be skipped and cannot activate; a real available checkpoint restores normal focusability. Opening/closing briefing, Science or Settings must restore a valid enabled control and must not resurrect disabled focus. Preserve enabled action order, save/Continue commands and data, no navigation redesign. Add actual Tab/ShiftTab at100/150 and availability-toggle regressions with isolated house storage, plus native evidence; run mandatory runner. Source diagnostic/evidence: production/qa/evidence/M1-75_README.md and test_main_menu_contrast.gd. No source for this followup was written; the user requested remaining work later. Full acceptance of M1-75 is a separate pending gate, not a reason to reimplement the completed contrast fix.",
    "reserved_for": "ramim",
-   "effort": 1
+   "effort": 1,
+   "blocker": "Source fix and targeted/native verification complete; acceptance waits for current full game/tools/run_tests.sh including expanded all8 player_text (documented1500s watchdog; all50ms assertions unchanged). No current full pass claimed. Ramim should run pending full gate and investigate any failures before marking done; preserve/reuse published source7ffabe8 rather than reimplement."
   },
   {
    "id": "M1-110",
@@ -7158,6 +7161,26 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "evidence": "road_data.py spur() routes R1-R3 (make_terrain dijkstra_route + path_profile, 12/15 deg, bbox+1200 m, 3x3 goal); builder spurs_note updated; re-run replay gives relay_road.json repeaters byte-identical to M4-13; chapter8 2/2, full 75/75 suites passed",
    "updated": "2026-11-09",
    "prompt": "M4-13 routed the R1-R3 road-to-pad spurs on the 10 m LOLA tiles and stored them (lola_10m.spur: method, length, climb, max slope, steepest_20m_deg, straight_line_before, 10 m points) plus a new spurs_note in game/assets/environment/EN_RelayRoad/relay_road.json. build_chapter8_assets.py (spurs_note at line ~592) and road_data.py ten_metre().profile still produce the old straight-line spur data, so a re-run would undo it. Move the routing into road_data.py (make_terrain.dijkstra_route on pgda90_10mpp, window = spur bbox + 1200 m, goal = 3x3 cells round the pad, limit 12 deg, hard 15 deg only if no path; then path_profile) and drop the stale spurs_note in the builder; re-run and confirm relay_road.json is unchanged; test_chapter8_assets.gd must stay green.",
+   "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M1-111",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Record M1-109 reviewed Continue navigation fix",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "PRODUCTION_HANDBOOK.md"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-09.",
+   "evidence": "",
+   "updated": "2026-11-09",
+   "prompt": "Record a dated handbook status line for Ramim M1-109 reviewed UI source: unavailable Continue is skipped by Tab, valid checkpoint restores focus, losing checkpoint redirects to New Expedition; updates while a modal is open preserve its disabled background/current restore state. Shared panel close retains a valid owner fallback. Source7ffabe8; evidence production/qa/evidence/M1-109_README.md, focused850/0 and nativeForward+229/0 clean at100/150, independentC0/I0/M0. Full integrated runner/all8 text still pending; do not claim full-game or full-suite acceptance. No new save model, commands, palettes, assets, thresholds or import changes. Existing M1-75 contrast/scroll remains intact. Update only owned handbook status; retain machine-local import/editor exclusions.",
    "reserved_for": "sadman",
    "effort": 1
   }

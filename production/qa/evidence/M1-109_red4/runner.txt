@@ -1,0 +1,7 @@
+FAIL tools/test_main_menu_contrast.gd :: exit 1 :: MAIN MENU CONTRAST RESULT: FAIL (154 checks, 30 failures)
+       ERROR: FAIL: unavailable Continue excluded from focus 100
+       ERROR: FAIL: Tab skips unavailable Continue 100
+       ERROR: FAIL: lost checkpoint moves focus to New Expedition 100
+       ERROR: FAIL: briefing restores current availability 100
+       ERROR: FAIL: briefing restores valid title focus 100
+0/1 suites passed

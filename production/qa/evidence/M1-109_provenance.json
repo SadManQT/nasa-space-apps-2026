@@ -1,0 +1,11 @@
+{
+  "raw_archive_local": ".superpowers/sdd/2026-11-06-ramim-continue/task18-raw-004b2212",
+  "inventory_sha256": "c52e50931a70ef7c74ae3da66f20b789f12e0522819a062f574f61ab4c3799fe",
+  "files_preserved": 51,
+  "normalization": "UTF8/LF and trailing transcript whitespace only; raw bytes retained privately.",
+  "validated_native_pngs": 13,
+  "validated_native_inputs": 9,
+  "focused_checks": 850,
+  "native_checks": 229,
+  "full_gate": "pending"
+}

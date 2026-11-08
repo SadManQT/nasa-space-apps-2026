@@ -1,0 +1,101 @@
+{
+  "source_commit": "7ffabe8d63e18a9abe3b98fe92e71f3ad4c218e0",
+  "game_tree": "172555bdc35d507564a47145482a582a9e00a7e1",
+  "command": [
+    "C:/Users/User/AppData/Local/Temp/opencode/godot-4.7.2/Godot_v4.7.2-stable_win64_console.exe",
+    "--path",
+    "game",
+    "--windowed",
+    "--resolution",
+    "1280x720",
+    "--rendering-method",
+    "forward_plus",
+    "--script",
+    "res://tools/test_main_menu_contrast.gd",
+    "--",
+    "--capture"
+  ],
+  "inputs": {
+    "game/scripts/ui/main_menu.gd": "cc099376233c419fa7dfc35c5f9e2152e26055ecc19633073f0a146afdcabc70",
+    "game/scripts/ui/campaign_panels.gd": "5abcffd6c5f3e659b93259eb9a7e255ac616f0ae19442c1ff9e231176ffb49a5",
+    "game/tools/test_main_menu_contrast.gd": "f7f38f8a27acc643a9564cf67d209278a68be5d268711011e76433c83218e2cf",
+    "game/resources/ui/lla_theme.tres": "6349a38d5a5cf0e489d51db4977f3b34d8098f4afd4e5aed744729f796091431",
+    "game/scenes/ui/main_menu.tscn": "8bc64099852c15bb9bab8a784f9dd982154c03549cee8ab508bb474f1d8ab3a6",
+    "game/tools/support/isolated_storage.gd": "9663124fcce898b14643f9659ea41f137a46bc6e378ea2150a8141b616134846",
+    "game/scripts/save/save_service.gd": "9ef56e7a2041adf433e6918138ed5bce4a46772b1bcdfbf65667c89be5172755",
+    "game/scripts/core/campaign_director.gd": "f1153b11de576df8ba98f13367fa2566a3ce0b9aaf28fbda11375aa03f75590b",
+    "game/scripts/missions/chapter1_route.gd": "a8d6a30a4c4dae11a4a570861328bc7581024308157ef1daf757a99978d4fbda"
+  },
+  "engine_before": [],
+  "start_utc": "2026-11-08T21:12:02.468443+00:00",
+  "end_utc": "2026-11-08T21:12:07.730525+00:00",
+  "exit_code": 0,
+  "engine_after": [],
+  "screenshots": [
+    {
+      "path": "production/qa/evidence/M1-109_briefing_100_focus.png",
+      "sha256": "dd8f0ae9ce9d18075bd7274d80d96fc70f49daab2c576794964bf33afb1ed99a",
+      "mtime_utc": "2026-11-08T21:12:06.397454+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_briefing_150_focus.png",
+      "sha256": "0cf5142d7b6f91232bb7016a6917a56d0252150177980c21ec08ca5287097d5a",
+      "mtime_utc": "2026-11-08T21:12:07.261291+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_briefing_150_scrolled_focus.png",
+      "sha256": "576c02d7ce725e9cc74ae8268db6931c248a4bcc854f3c12d1521e2d852b6978",
+      "mtime_utc": "2026-11-08T21:12:07.331210+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_continue_100_focus.png",
+      "sha256": "92a01bde618cd3733563c89b5f3221ba720d7c17442057c5e80b04d7c6d7f27d",
+      "mtime_utc": "2026-11-08T21:12:06.005070+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_continue_150_focus.png",
+      "sha256": "45f27931b756f052bcdcc5ab4f0682d6e6131b10fb700ad72cc2ed9cf7f9c860",
+      "mtime_utc": "2026-11-08T21:12:06.868345+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_restored_100.png",
+      "sha256": "08d2bce6617c933792859f4f7e9155c453ab2346b5739c04c51a80d8b7da2fec",
+      "mtime_utc": "2026-11-08T21:12:06.484392+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_restored_150.png",
+      "sha256": "430847aeca8ca8b2c2e667108a431d3ba49cb68982631dcf0274493267f3b751",
+      "mtime_utc": "2026-11-08T21:12:07.395986+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_secondary_100_focus.png",
+      "sha256": "085d480f5218e048b99f7dc66f06a9ff1c8a641f00dd9a3b947c755d01685e37",
+      "mtime_utc": "2026-11-08T21:12:06.533404+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_secondary_150_focus.png",
+      "sha256": "380fbf7318476389ef09950fe33979195974f967a0fb422483f2fdf47c7d6d75",
+      "mtime_utc": "2026-11-08T21:12:07.450648+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_skip_continue_100_focus.png",
+      "sha256": "085d480f5218e048b99f7dc66f06a9ff1c8a641f00dd9a3b947c755d01685e37",
+      "mtime_utc": "2026-11-08T21:12:05.966264+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_skip_continue_150_focus.png",
+      "sha256": "380fbf7318476389ef09950fe33979195974f967a0fb422483f2fdf47c7d6d75",
+      "mtime_utc": "2026-11-08T21:12:06.828954+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_title_100_focus.png",
+      "sha256": "08d2bce6617c933792859f4f7e9155c453ab2346b5739c04c51a80d8b7da2fec",
+      "mtime_utc": "2026-11-08T21:12:06.284422+00:00"
+    },
+    {
+      "path": "production/qa/evidence/M1-109_title_150_focus.png",
+      "sha256": "430847aeca8ca8b2c2e667108a431d3ba49cb68982631dcf0274493267f3b751",
+      "mtime_utc": "2026-11-08T21:12:07.146711+00:00"
+    }
+  ]
+}
