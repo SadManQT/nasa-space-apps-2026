@@ -1,0 +1,25 @@
+{
+  "published_source_delivery": "2ec3af5c0f0431cf112e210a99efaebee9ce9ea0",
+  "published_task_commits": [
+    "e04ba9a",
+    "bc041d7",
+    "dc89be4"
+  ],
+  "actual_native_commit": "9de251daf937a4c5b21e9b7946c2675abf999c1d",
+  "actual_native_game_tree": "ace451743058a1a535b31df8d42e248d234d0387",
+  "actual_postpull_runner_commit": "7ff8f61edb6b28a60d1df11cf5d33d47b1c2abb3",
+  "postpull_and_published_game_tree": "dc5535507e15c37aa90dca5f1dc69268545bc727",
+  "task_game_blobs_identical_native_to_published": {
+    "game/resources/campaign/content/ui_text.json": "9a428647236b469a5720f447bb418cb8585585e7",
+    "game/scripts/dialogue/knowledge_service.gd": "e8042bb3d12c53a6a071729a782aaea7dcc187fe",
+    "game/scripts/ui/campaign_panels.gd": "e1a3f891babc7a75b648a826c9f7992362f514db",
+    "game/scripts/ui/hint_player.gd": "3daacf9d676f06a9999e09e2072560defed1c1a2",
+    "game/scripts/ui/science_explainers.gd": "92418f80990f1ac049629a77889104eafaadf755",
+    "game/scripts/ui/science_explainers.gd.uid": "b160fcb4a4c1b5df323a67c0b1b355947fe1bf9f",
+    "game/tools/test_journal_tabs.gd": "fc153e2cd1230c335770f5c6f020e1166667ec48",
+    "game/tools/test_player_text.gd": "d7357eed4bbaf270866daaa131d5dd77c07d741c",
+    "game/tools/test_science_watch.gd": "c02e942101768ff9d60dbbe5fe44ba08102dc031",
+    "game/tools/test_science_watch.gd.uid": "1fa46efe944a5b16096993bd6e05ce5479197b78"
+  },
+  "scope": "Native was before team audio/world integration. Focused post-pull run has EXACT same whole game tree as published delivery; second rebase changed board claims only. Integrated full/all-chapter text acceptance remains pending."
+}
