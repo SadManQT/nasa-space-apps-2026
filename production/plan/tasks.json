@@ -6482,7 +6482,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Validate saved Solo/Class crew configuration for Ramim M1-37",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -6490,7 +6490,7 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.",
-   "evidence": "",
+   "evidence": "test_session_crew 135 checks 0 failures; run_tests.sh 72/72 suites passed; production/qa/evidence/M1-102.md",
    "updated": "2026-11-08",
    "prompt": "Recheck of blocked M1-37 found parked source origin/night/M1-37 at 8a792c1. It adds optional snapshot crew={mode: solo|class, players: integer}; Solo has 1, Class has 2-4. These core changes are absent from main and outside Ramim ownership. Please publish the smallest validated primitive snapshot/init/read contract for that session configuration, with old saves missing it defaulting to Solo/1. Reject malformed types, non-finite/fractional/out-of-range counts and unknown modes atomically; preserve normal gameplay revision, resources, receipts and checkpoint behavior. Prefer immutable selection on New Expedition; the task does not require changing crew mid-shift. Do not copy the parked runtime set_crew implementation that uses Director.restore_snapshot mid-session and would replace the rollback checkpoint. Keep UI, role-card content and pure puzzle sign-off logic in Ramim folders; do not introduce a dependency on the unlanded game/scripts/crew/crew_modes.gd path. Publish exact schema/signatures so Atik can expose the runtime bridge and Ramim can port owned saved UI. Focused real save/restore/old-save/checkpoint tests and repository runner, with truthful existing M1-68/M1-100 failures. Source is reference, not approved implementation.",
    "reserved_for": "sadman",

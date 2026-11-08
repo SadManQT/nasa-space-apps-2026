@@ -15,6 +15,10 @@ const EXTRA_STORY_CHOICES := {"EX-CH03-S11-DEDICATION": "EX-CH03-S11"}
 const MESSAGE_FIELDS := ["delivered_ids", "read_ids"]
 const MESSAGE_ID_MAX_LENGTH := 64
 const MESSAGE_ID_LIMIT := 2048
+# Session crew setup (M1-102), chosen once at New Expedition: mode -> the
+# inclusive [min, max] player count. Saves without "crew" read as Solo/1.
+const CREW_PLAYER_RANGE := {"solo": [1, 1], "class": [2, 4]}
+const DEFAULT_CREW := {"mode": "solo", "players": 1}
 static var _story_choices: Dictionary = {}
 
 ## Creates an independent, primitive snapshot in the current save schema.
@@ -157,6 +161,10 @@ static func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 			return {"valid": false, "reason": message_problem}
 	if snapshot.has("blackout_count") and (not _finite_number(snapshot.blackout_count) or float(snapshot.blackout_count) != floor(float(snapshot.blackout_count)) or float(snapshot.blackout_count) < 0):
 		return {"valid": false, "reason": "Campaign blackout count must be a nonnegative integer."}
+	if snapshot.has("crew"):
+		var crew_check := crew_problem(snapshot.crew)
+		if not crew_check.is_empty():
+			return {"valid": false, "reason": crew_check}
 	if snapshot.has("campaign_ledgers"):
 		var book = snapshot.campaign_ledgers
 		if not book is Dictionary:
@@ -170,6 +178,28 @@ static func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 			if not puzzle is Dictionary or not puzzle.get("operations") is Dictionary or not puzzle.get("samples") is Array or not _finite_number(puzzle.get("phase")) or float(puzzle.phase) < 0 or float(puzzle.phase) != floor(float(puzzle.phase)):
 				return {"valid": false, "reason": "Campaign puzzle ledger shape is invalid."}
 	return {"valid": true, "reason": "Campaign state shape is valid."}
+
+## Returns an empty string when crew is exactly {"mode": String, "players":
+## whole finite number} with mode in CREW_PLAYER_RANGE and players in its
+## range (Solo 1, Class 2-4). Otherwise the rejection reason.
+static func crew_problem(crew: Variant) -> String:
+	if not crew is Dictionary or crew.size() != 2 or not crew.has("mode") or not crew.has("players"):
+		return "Campaign crew must be exactly {mode, players}."
+	if not crew.mode is String or not CREW_PLAYER_RANGE.has(crew.mode):
+		return "Campaign crew mode must be solo or class."
+	var players = crew.players
+	if not _finite_number(players) or float(players) != floor(float(players)):
+		return "Campaign crew players must be a whole number."
+	var bounds: Array = CREW_PLAYER_RANGE[crew.mode]
+	if float(players) < bounds[0] or float(players) > bounds[1]:
+		return "Campaign crew players is out of range for %s: %d-%d." % [crew.mode, bounds[0], bounds[1]]
+	return ""
+
+## The snapshot's crew as {"mode": String, "players": int}; Solo/1 when the
+## save predates the field. Call on validated snapshots only.
+static func crew_of(snapshot: Dictionary) -> Dictionary:
+	var crew = snapshot.get("crew", DEFAULT_CREW)
+	return {"mode": String(crew.mode), "players": int(crew.players)}
 
 ## Returns a copy of presentation_resume.messages as
 ## {"delivered_ids": Array, "read_ids": Array}. A fresh New, or a save written

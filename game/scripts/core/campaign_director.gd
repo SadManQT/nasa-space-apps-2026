@@ -25,8 +25,13 @@ func _init() -> void:
 	_seed_initial_biology()
 	_checkpoint = _state.duplicate(true)
 
-func new_campaign(content_revision: String = "") -> Dictionary:
+## Starts a New Expedition. crew is fixed here for the whole session (see
+## CampaignState.crew_problem); an invalid crew returns {} and changes nothing.
+func new_campaign(content_revision: String = "", crew: Dictionary = {"mode": "solo", "players": 1}) -> Dictionary:
+	if not StateScript.crew_problem(crew).is_empty():
+		return {}
 	_state = StateScript.new_snapshot(content_revision)
+	_state["crew"] = StateScript.crew_of({"crew": crew})
 	_state["checkpoint_id"] = "EX-CH01-S01-CHECKPOINT"
 	_state["chapter_id"] = "CH01"
 	_state["mission_id"] = "EX-M0101"
@@ -71,6 +76,10 @@ func restore_snapshot(snapshot: Dictionary, expected_content_revision: String = 
 		"reason": "Campaign snapshot restored.",
 		"snapshot": _state.duplicate(true),
 	}
+
+## The session crew as {"mode": "solo"|"class", "players": int}.
+func crew() -> Dictionary:
+	return StateScript.crew_of(_state)
 
 func snapshot() -> Dictionary:
 	return _state.duplicate(true)
