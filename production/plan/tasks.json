@@ -5808,8 +5808,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Walkable 10 m relay-road patch so LOC-11 can stand on the LOLA terrain",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [],
    "paths": [
     "production/terrain/",
@@ -5819,7 +5819,7 @@
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07. | 7 Nov (Sadman/claude, M3-8A decision 9, Sadman: \"Approve all\"): M3-8A fetched 7 LDEM_83S_10MPP tiles (about 4 MB) for the road segments it places, into production/terrain/cache/pgda90_10mpp/ where make_terrain.py reads them, and committed them (force-added; the cache folder is ignored): t_0026_0035, t_0027_0035 (R3, segment D), t_0031_0037, t_0031_0038, t_0032_0037 (R2 marker two, segments B and C), t_0036_0037, t_0036_0038 (R1, segment A). Their heights and slopes are in game/assets/environment/EN_RelayRoad/relay_road.json (lola_10m). M3-8A did not cut a patch: the walkable patch stays this task's. The parked night/M1-87 patch is centred on relay_road_mid (99 km) and its 9 fetched tiles were not committed there, so its landing must fetch or commit them (Python 3.14 here needs SSL_CERT_FILE set to certifi's cacert.pem to fetch). Finding for the patch: the straight road-to-pad spurs cross 15-25 deg stretches on the 10 m grid, so spurs must be routed slope-limited. Also: the parked branch names a board task M4-05 that main now uses for the CS-15 fix; renumber it on landing.",
    "evidence": "",
-   "updated": "2026-11-07",
+   "updated": "2026-11-08",
    "prompt": "Found by M1-82. LOC-11 (relay route, EX-CH08-S03/S04/S10) has a placement in game/resources/campaign/rooms/exterior_terrain.json (relay_road at the relay_road_mid site, origin_xz_m [-24227.5, -76912.5]) but stays 'pending' with omit_staging_floor false: the relay road exists only as the 80 m corridor grid with a 200 m visual mesh, so props and anchors would float or sink by metres against the visual terrain. Do: cut the 10 m playable patch the M1-34 README plans (production/tools/make_terrain.py window_m from the cached pgda90_10mpp/LDEM_83S data, which covers -87.6 deg; build tiles with build_terrain_tiles.py as for cold_trap, no credits), register it as a hero region whose site is relay_road_mid, move LOC-11's placement onto it, set omit_staging_floor true, run game/tools/test_exterior_terrain.gd -- --write and the windowed M1-82_capture.sh with LOC-11 added to SHOTS. Note for Atik: TerrainStream.lighting() accepts only rows whose site equals the field's site, so the new region's site must be relay_road_mid for the EX-CH08-S03 row to light it. Acceptance: test_exterior_terrain PASS with LOC-11 ready (walk on the provider's collision to every approach), run_tests.sh green, wide and ground screenshots production/qa/evidence/M1-82_LOC11_*.png.",
    "reserved_for": "sadman",
    "effort": 2
@@ -6482,8 +6482,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Validate saved Solo/Class crew configuration for Ramim M1-37",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/copilot",
    "deps": [],
    "paths": [
     "game/scripts/core/"
