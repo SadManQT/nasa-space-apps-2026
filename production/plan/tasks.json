@@ -6483,7 +6483,7 @@
    "tool": "codex",
    "title": "Validate saved Solo/Class crew configuration for Ramim M1-37",
    "status": "in_progress",
-   "owner": "Sadman/copilot",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/scripts/core/"
