@@ -387,33 +387,38 @@ func _build_briefing() -> void:
 	title.add_theme_font_size_override("font_size", 26)
 	title.add_theme_color_override("font_color", MUSTARD)
 	content.add_child(title)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	content.add_child(scroll)
+	var body := VBoxContainer.new()
+	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	body.add_theme_constant_override("separation", 12)
+	scroll.add_child(body)
 	var copy := Label.new()
 	copy.text = "Aurora Station is preparing for a 36-hour training scenario at the Moon's south pole.\n\nKeep the crew safe.\nKeep the station running.\nCare for Alo inside a pressurised chamber."
 	copy.add_theme_font_size_override("font_size", 18)
 	copy.add_theme_color_override("font_color", IVORY)
 	copy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	content.add_child(copy)
+	body.add_child(copy)
 	var loop := Label.new()
 	loop.text = "OBSERVE  →  DISCUSS  →  CHOOSE  →  EXECUTE  →  SEE IMPACT  →  DEBRIEF"
 	loop.add_theme_font_size_override("font_size", 14)
 	loop.add_theme_color_override("font_color", CYAN)
 	loop.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	content.add_child(loop)
+	body.add_child(loop)
 	var roles := GridContainer.new()
 	roles.columns = 2
 	roles.add_theme_constant_override("h_separation", 10)
 	roles.add_theme_constant_override("v_separation", 10)
-	content.add_child(roles)
+	body.add_child(roles)
 	for item in [["KAI", "POWER & HEAT", ORANGE], ["AMARA", "AIR & MEASUREMENT", CYAN], ["MEI", "GARDEN & PLANT CARE", GREEN], ["RAFI", "SAFETY & FIELD OPERATIONS", PURPLE]]:
 		roles.add_child(_role_card(item[0], item[1], item[2]))
 	var qualifier := Label.new()
 	qualifier.text = "SIMULATED · Training scenario\nThe station, cadets, 2046 dates and game resources are fictional."
 	qualifier.add_theme_font_size_override("font_size", 13)
 	qualifier.add_theme_color_override("font_color", MUTED)
-	content.add_child(qualifier)
-	var spacer := Control.new()
-	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	content.add_child(spacer)
+	body.add_child(qualifier)
 	var actions := HBoxContainer.new()
 	actions.alignment = BoxContainer.ALIGNMENT_END
 	actions.add_theme_constant_override("separation", 10)
@@ -638,12 +643,14 @@ func _button(text: String, fill: Color, text_color: Color) -> Button:
 	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	button.add_theme_font_size_override("font_size", 16)
 	button.add_theme_color_override("font_color", text_color)
+	if fill == MUSTARD:
+		button.add_theme_color_override("font_focus_color", INK)
 	button.add_theme_color_override("font_hover_color", INK)
 	button.add_theme_color_override("font_pressed_color", INK)
 	button.add_theme_stylebox_override("normal", _button_style(fill, 0.88))
 	button.add_theme_stylebox_override("hover", _button_style(MUSTARD if fill != MUSTARD else Color("#FFD95A"), 1.0))
 	button.add_theme_stylebox_override("pressed", _button_style(Color("#D8A915"), 1.0))
-	button.add_theme_stylebox_override("focus", _button_style(Color(fill, 1.0), 1.0, MUSTARD))
+	button.add_theme_stylebox_override("focus", _button_style(Color.TRANSPARENT, 0.0, INK if fill == MUSTARD else MUSTARD))
 	button.add_theme_stylebox_override("disabled", _button_style(Color(0.12, 0.16, 0.24, 0.55), 0.55))
 	return button
 
