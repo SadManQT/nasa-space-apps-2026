@@ -1,24 +1,29 @@
 {
-    "command":  "Godot_v4.7.2-stable_win64_console.exe --path game --windowed --resolution 1280x720 --script res://tools/test_science_data.gd -- --credit-evidence",
-    "source_commit":  "258d946989e8435c01a3773f7da432adad1d4254",
-    "game_tree":  "4e62dda9f0117e5764a561ad71db65755b9db1a1",
-    "started_utc":  "2026-11-08T09:43:04.4502933Z",
-    "ended_utc":  "2026-11-08T09:43:19.9133967Z",
-    "elapsed_seconds":  15.4631034,
-    "exit_code":  0,
-    "engine":  "Godot 4.7.2 stable Windows Forward+",
-    "viewport":  [
-                     1280,
-                     720
-                 ],
-    "purpose":  "Actual campaign LOLA card at normal and 150 percent text; isolated temporary save; viewport screenshots; arrival autoplay disabled only for evidence",
-    "images":  [
-                   "M1-70_credit.png",
-                   "M1-70_credit_150.png"
-               ],
-    "image_sha256":  {
-                         "M1-70_credit.png":  "73c0c5280e3ebe36491ea9081ed33dbff9925ba00517299d8c6ffa87582bc3cc",
-                         "M1-70_credit_150.png":  "7c12f3fe4e76cec2d5074ee1e59543c82c5dd654df043b570797862be72489dc"
-                     },
-    "visual_review":  "Both final PNGs inspected by implementing agent; complete supplied credit readable at both scales; Close focus ring and Back to all sources visible; preceding source text scrolls normally"
+  "command": "Godot_v4.7.2-stable_win64_console.exe --path game --windowed --resolution 1280x720 --script res://tools/test_science_data.gd -- --credit-evidence",
+  "source_commit": "258d946989e8435c01a3773f7da432adad1d4254",
+  "game_tree": "4e62dda9f0117e5764a561ad71db65755b9db1a1",
+  "started_utc": "2026-11-08T09:43:04.4502933Z",
+  "ended_utc": "2026-11-08T09:43:19.9133967Z",
+  "elapsed_seconds": 15.4631034,
+  "exit_code": 0,
+  "engine": "Godot 4.7.2 stable Windows Forward+",
+  "viewport": [
+    1280,
+    720
+  ],
+  "purpose": "Actual campaign LOLA card at normal and 150 percent text; isolated temporary save; viewport screenshots; arrival autoplay disabled only for evidence",
+  "images": [
+    "M1-70_credit.png",
+    "M1-70_credit_150.png"
+  ],
+  "image_sha256": {
+    "M1-70_credit.png": "73c0c5280e3ebe36491ea9081ed33dbff9925ba00517299d8c6ffa87582bc3cc",
+    "M1-70_credit_150.png": "7c12f3fe4e76cec2d5074ee1e59543c82c5dd654df043b570797862be72489dc"
+  },
+  "visual_review": "Both final PNGs inspected by implementing agent; complete supplied credit readable at both scales; Close focus ring and Back to all sources visible; preceding source text scrolls normally",
+  "commit_title_reword": {
+    "original_source_commit": "258d946989e8435c01a3773f7da432adad1d4254",
+    "published_equivalent_source_commit": "1fc5b9e3e1490ef647df4fa0825c33a5dc03e756",
+    "verification": "Unpublished commit titles only; all three complete git trees are byte-identical. Original capture source fingerprint is retained."
+  }
 }
