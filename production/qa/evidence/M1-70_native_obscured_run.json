@@ -1,0 +1,19 @@
+{
+    "command":  "Godot_v4.7.2-stable_win64_console.exe --path game --windowed --resolution 1280x720 --script res://tools/test_science_data.gd -- --credit-evidence",
+    "source_commit":  "e743728a27641e6fde3186cfb16a265a6b493cd1",
+    "game_tree":  "76d9a77dd4b1aec3ded18514be8410defcc7120c",
+    "started_utc":  "2026-11-08T09:41:31.9689839Z",
+    "ended_utc":  "2026-11-08T09:41:49.3837426Z",
+    "elapsed_seconds":  17.4147587,
+    "exit_code":  0,
+    "engine":  "Godot 4.7.2 stable Windows Forward+",
+    "viewport":  [
+                     1280,
+                     720
+                 ],
+    "purpose":  "Actual campaign LOLA card at normal and 150 percent text; isolated temporary save; viewport screenshots",
+    "images":  [
+                   "M1-70_credit.png",
+                   "M1-70_credit_150.png"
+               ]
+}
