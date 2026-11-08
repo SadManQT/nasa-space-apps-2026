@@ -591,8 +591,8 @@
    "reserved_for": "Tanvir"
   },
   {
-   "status": "blocked",
-   "owner": "atik/codex",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [
     "M1-34",
     "M1-35"
@@ -607,9 +607,9 @@
     "execution/SYS_16_PERFORMANCE_STREAMING.md",
     "execution/SYS_12_PHYSICS_NAVIGATION.md"
    ],
-   "note": "7 Nov (Sadman/claude): unblocked: the blocker named Sadman's M1-82, which landed on 7 Nov (01fdfbe; API in production/qa/evidence/M1-82_staging.md and game/resources/campaign/rooms/README.md). Back to atik/codex.",
+   "note": "7 Nov (Sadman/claude): unblocked: the blocker named Sadman's M1-82, which landed on 7 Nov (01fdfbe; API in production/qa/evidence/M1-82_staging.md and game/resources/campaign/rooms/README.md). Back to atik/codex. 9 Nov: Sadman asked Claude to finish it; built on Atik's commits up to 9767014.",
    "evidence": "",
-   "updated": "2026-11-07",
+   "updated": "2026-11-09",
    "id": "M1-36",
    "milestone": "M1",
    "priority": "P0",
@@ -617,8 +617,7 @@
    "title": "Terrain in Godot: streaming, collision, lighting and performance",
    "prompt": "Integrate the LOLA terrain tiles (M1-34) and the rock kit (M1-35) into the exterior scenes: choose a terrain approach that works on Godot 4.7\n(check the current Terrain3D release's Godot compatibility; otherwise chunked MeshInstance3D LODs), collision for walking and the rover,\nrock scatter by slope, the low hard Sun with long shadows (directional shadow splits tuned for kilometre views), Earth and a star-free or\ncorrectly exposed black sky, no fog or atmosphere scattering; Forward+ with a Compatibility fallback. Target 60 fps on a mid laptop.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. including a wide vista and a boots-on-the-ground view.",
    "reserved_for": "atik",
-   "effort": 3,
-   "blocker": "M1-82/M1-88 delivered; composed and tested all three ready regions (37 checks). Production still needs incremental preparation (measured87-205ms sync), Sadman M1-91 real work lights for dark cold-trap targets, and M1-87 relay patch. Keep existing playable staging until ready. See production/qa/perf/M1-36.md."
+   "effort": 3
   },
   {
    "status": "blocked",
