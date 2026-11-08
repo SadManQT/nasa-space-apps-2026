@@ -159,6 +159,13 @@ static func build(room: CampaignRoom, stage: Dictionary, layout: Dictionary) -> 
 			# An M3-99 narrative prop (e.g. PR_Mug_Named "KAI"): its tape and words are drawn at runtime.
 			model.set_meta("narrative_prop", String(spec.path).get_file().get_basename())
 			NarrativeProps.apply_variant(model, String(spec.variant))
+		# M3-4R: words on a prop's plate ("inks", see ink(); "part" rides on a moving part) and its moving parts posed by
+		# name ("parts": node -> rotation in degrees, e.g. PR_VaultCase's hinged Lid open in the dry glovebox)
+		for item in spec.get("inks", []):
+			ink(model, item)
+		for part in spec.get("parts", {}):
+			for leaf in model.find_children(String(part), "Node3D", true, false):
+				(leaf as Node3D).rotation_degrees = Presentation.vector(spec.parts[part])
 		visuals.add_child(model)
 		if spec.get("rattle") is Dictionary:
 			_rattle(model, spec.rattle)

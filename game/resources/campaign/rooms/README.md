@@ -368,3 +368,19 @@ captures stand a shadow-only wall 400 m toward the Sun at the row's terrain hori
 board task M3-110. Run `game/tools/run_tests.sh chapter4_rooms`, `game/tools/run_tests.sh exterior_terrain` and
 `production/qa/evidence/M3-106_capture.sh` (windowed, 10 screenshots).
 
+# Chapter 4 in the base rooms (M3-4R)
+
+Every Chapter 4 scene now plays in its own location (doc 24 §2.4): the field scenes in LOC-08, LOC-09 and LOC-10
+(M3-105, M3-106) and the four base scenes below, staged on the M1-06 garden and Commons by the `ch04_*` layers of
+`LOC-03.json` and `LOC-01.json`. The October rack (`ch03_descendant_rack`) and its dedication (D6) stay in the garden
+through Chapter 4. A staged prop can now pose its moving parts and carry words on them (`"parts"`: node -> rotation in
+degrees, `"inks"` as on a kit prop, with `"part"` to ride on one): vault V12's hinged lid and clue 15.
+
+| Scene | Room | What stands there |
+|---|---|---|
+| EX-CH04-S01 | LOC-03 | The October rack with its count line (seven purple, five green in this sample, not a ratio); the observation card added beside the May prediction, which stays as written (D4 shows the player's own sentence, D2 files the count in the day-one Growth Record layout, D6 keeps the dedication on the rack); the limits card (the twelve current descendants, the sealed founder reserve of 30 and Alo's archived petal and photograph on separate lines); the rover checklist with Rafi's next-observation question (S01 -> S02) |
+| EX-CH04-S10 | LOC-03 | The vault's dry quarantine glovebox on the care bench (a glass enclosure with two glove ports: the M1 glovebox is too small for the 0.60 m case and is set aside for the scene), its status strip (sealed warming done, no condensation, viability pending, not assumed); vault V12 inside it with the lid open, twelve capped wells and, under the lid, the handwritten line (clue 15, S10 -> S11); on the north wall the reconciled manifest (12 of 12) with N.'s note beside cotton in the packet's hand (clue 14) and the three ledgers kept apart, and the survey board with both field cadets home |
+| EX-CH04-S11 | LOC-01 | The Earth screen: the lid image and the manifest sent and delivered, Ferreira's channel open on her empty chair for the quiet moment while Rao answers (EX-CH04-S11-L03), Mei's request delivered with no reply yet; on the Mission Table the exact inscription saved with its open question (stays into S12) and the claims card (what the lid supports; who N. is, abandonment and viability not supported) |
+| EX-CH04-S12 | LOC-01 | The relief flight notice (8-12 Dec 2046, Rao stays at the Earth desk, Ferreira's "I owe you the story"); the relief cargo manifest on the table; the fifth locker in the crew locker bank named FERREIRA from 1 Dec (kept from then on) with the fifth-occupant handover sheet; the dated board of the days in between (22 Oct to 12 Dec). The fifth mug on its clip above the table comes with M3-5R's `ch05_fifth_mug_clip` (CH04-S12 to her arrival); the garage's relief locker is labelled from this scene (M3-105) |
+
+Run `game/tools/run_tests.sh chapter4_rooms` and `production/qa/evidence/M3-4R_capture.sh` (windowed, 15 screenshots).

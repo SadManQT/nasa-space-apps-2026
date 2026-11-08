@@ -1606,8 +1606,8 @@
   {
    "id": "ch03_descendant_rack",
    "from": "EX-CH03-S11",
-   "until": "EX-CH04-S01",
-   "about": "EX-CH03-S11 (canon): twelve labelled positions, parent line Alo x Tara; position 1 is Kai's Very Important Scientific Plant, after its lineage label (EX-CH03-S11-L03/L04). EX-CH03-S12: on 21 October the same rack holds the current descendants, a few green stems among purple ones (M3-3A PL_Descendants, CH04-S01's authored seven and five, not a ratio claim): the last montage frame and the opening of CH04-S01.",
+   "until": "EX-CH04-S12",
+   "about": "EX-CH03-S11 (canon): twelve labelled positions, parent line Alo x Tara; position 1 is Kai's Very Important Scientific Plant, after its lineage label (EX-CH03-S11-L03/L04). EX-CH03-S12: on 21 October the same rack holds the current descendants, a few green stems among purple ones (M3-3A PL_Descendants, CH04-S01's authored seven and five, not a ratio claim): the last montage frame and the opening of CH04-S01; it stays through Chapter 4 (M3-4R: the garden beside the dry glovebox in S10).",
    "props": [
     {
      "id": "descendant_rack",
@@ -1628,7 +1628,7 @@
       1
      ],
      "by_scene": {
-      "EX-CH03-S12..EX-CH04-S01": {
+      "EX-CH03-S12..EX-CH04-S12": {
        "path": "res://assets/plants/PL_Descendants/PL_Descendants.glb"
       }
      }
@@ -1694,7 +1694,7 @@
      "color": "#1F2A44",
      "outline": 0,
      "by_scene": {
-      "EX-CH03-S12..EX-CH04-S01": {
+      "EX-CH03-S12..EX-CH04-S12": {
        "text": "TWELVE CURRENT DESCENDANTS  -  21 OCTOBER 2046"
       }
      }
@@ -1769,7 +1769,7 @@
   {
    "id": "ch03_d6_opt01",
    "from": "EX-CH03-S11",
-   "until": "EX-CH04-S01",
+   "until": "EX-CH04-S12",
    "choice": {
     "choice_id": "EX-CH03-S11-DEDICATION",
     "option_id": "EX-CH03-S11-DEDICATION-OPT01"
@@ -1808,7 +1808,7 @@
   {
    "id": "ch03_d6_opt02",
    "from": "EX-CH03-S11",
-   "until": "EX-CH04-S01",
+   "until": "EX-CH04-S12",
    "choice": {
     "choice_id": "EX-CH03-S11-DEDICATION",
     "option_id": "EX-CH03-S11-DEDICATION-OPT02"
@@ -1847,7 +1847,7 @@
   {
    "id": "ch03_d6_opt03",
    "from": "EX-CH03-S11",
-   "until": "EX-CH04-S01",
+   "until": "EX-CH04-S12",
    "choice": {
     "choice_id": "EX-CH03-S11-DEDICATION",
     "option_id": "EX-CH03-S11-DEDICATION-OPT03"
@@ -3378,7 +3378,7 @@
      "outline": 0,
      "wrap_m": 0.4,
      "by_scene": {
-      "EX-CH03-S12": {
+      "EX-CH03-S12..EX-CH04-S01": {
        "text": "TEST: COMPARE DESCENDANT STEMS IN OCTOBER\nOBSERVED: EMPTY UNTIL THEN"
       }
      }
@@ -3396,7 +3396,7 @@
      "outline": 0,
      "wrap_m": 0.36,
      "by_scene": {
-      "EX-CH03-S12": {
+      "EX-CH03-S12..EX-CH04-S01": {
        "text": "FAMILY TREE\nALO (PURPLE STEM) × TARA (GREEN STEM)\nDESCENDANTS: TWELVE GROWING"
       }
      }
@@ -3956,6 +3956,793 @@
       -3.0,
       1.0,
       -1.2
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch04_what_grew",
+   "from": "EX-CH04-S01",
+   "until": "EX-CH04-S01",
+   "about": "EX-CH04-S01 'What Actually Grew' (doc 24 2.4, 2.9 CH03 -> CH04 and S01 -> S02, 5.2 D2/D4/D6): the October rack's count line (seven purple, five green in this sample, not a ratio, EX-CH04-S01-L02), the observation card added beside the May prediction rather than over it (the D4 sentence and the D6 dedication travel in from their own layers; D2 adds the Growth Record layout below), the limits card that keeps the twelve current descendants, the sealed founder reserve of 30 and Alo's archived petal and photograph on different lines, and the rover checklist with Rafi's question (S01 -> S02). Mei plays; Kai asks which one is Alo by the lineage board.",
+   "fixtures": [
+    {
+     "id": "observation_card",
+     "position": [
+      0.05,
+      1.36,
+      -3.818
+     ],
+     "size": [
+      0.42,
+      0.11,
+      0.004
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "limits_card",
+     "position": [
+      5.0,
+      1.55,
+      -3.96
+     ],
+     "size": [
+      0.95,
+      0.9,
+      0.05
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "rover_checklist",
+     "position": [
+      2.2,
+      1.6,
+      -3.96
+     ],
+     "size": [
+      1.4,
+      0.85,
+      0.05
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "next_question_slip",
+     "position": [
+      2.55,
+      1.29,
+      -3.931
+     ],
+     "size": [
+      0.5,
+      0.13,
+      0.008
+     ],
+     "color": "#f3e6a8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "rack_count",
+     "text": "SEVEN PURPLE STEMS, FIVE GREEN  -  THIS SAMPLE ONLY, NOT A RATIO",
+     "position": [
+      -2.95,
+      1.785,
+      3.958
+     ],
+     "yaw": 180,
+     "size": 0.0007,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "observation_text",
+     "text": "OBSERVED 21 OCT 2046, ADDED BESIDE THE PREDICTION\nTWELVE DESCENDANTS: 7 PURPLE STEMS, 5 GREEN\nTHIS SAMPLE ONLY, NOT A RATIO",
+     "position": [
+      0.05,
+      1.348,
+      -3.815
+     ],
+     "yaw": 0,
+     "size": 0.0003,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.4
+    },
+    {
+     "id": "limits_text",
+     "text": "WHAT THIS SAMPLE CAN TELL US\n\nTWELVE CURRENT DESCENDANTS, 21 OCT\n7 PURPLE STEMS, 5 GREEN\nIT DESCRIBES THESE TWELVE PLANTS,\nNOT A RULE FOR EVERY CROSS\n\nCOUNTED APART, NOT SPENT OR REFILLED\nFOUNDER RESERVE: 30 ALO × TARA, SEALED\nALO: PRESSED PETAL AND FOUNDER PHOTO, ARCHIVED",
+     "position": [
+      5.0,
+      1.55,
+      -3.932
+     ],
+     "yaw": 0,
+     "size": 0.00058,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "checklist_text",
+     "text": "ROVER CHECKLIST  -  21 OCT 2046\nROVER SEAL\nSCANNER, CALIBRATED\nCLOSED CARRIER\nBASE HANDOVER: MEI AND AMARA HOME\nFIELD: RAFI AND KAI",
+     "position": [
+      1.95,
+      1.66,
+      -3.932
+     ],
+     "yaw": 0,
+     "size": 0.00062,
+     "color": "#1F2A44",
+     "outline": 0,
+     "wrap_m": 0.85
+    },
+    {
+     "id": "next_question_text",
+     "text": "NEXT OBSERVATION?\nRAFI'S QUESTION, FOR THE JOURNAL",
+     "position": [
+      2.55,
+      1.29,
+      -3.925
+     ],
+     "yaw": 0,
+     "size": 0.00042,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "ch04_trait_limits",
+     "label": "What the sample can tell us",
+     "verb": "Inspect",
+     "position": [
+      5.0,
+      1.55,
+      -3.7
+     ],
+     "approach_m": [
+      5.0,
+      0,
+      -2.9
+     ],
+     "asset_id": "limits_card",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch04_rover_checklist",
+     "label": "Rover checklist",
+     "verb": "Inspect",
+     "position": [
+      2.2,
+      1.6,
+      -3.7
+     ],
+     "approach_m": [
+      2.0,
+      0,
+      -2.9
+     ],
+     "asset_id": "rover_checklist",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ],
+   "focus_labels": {
+    "ch03_planting_rack": "Twelve current descendants",
+    "garden_growth_record": "May prediction and October count"
+   },
+   "stations": {
+    "p07_compare_prediction": "garden_growth_record",
+    "p07_inspect_twelve_descendants": "ch03_planting_rack",
+    "p07_record_trait_limits": "ch04_trait_limits"
+   },
+   "anchors": {
+    "garden_player": [
+     0.4,
+     0,
+     -2.3
+    ],
+    "garden_amara": [
+     -0.6,
+     0,
+     -2.5
+    ],
+    "garden_kai": [
+     1.4,
+     0,
+     -2.4
+    ],
+    "garden_rafi": [
+     2.9,
+     0,
+     -3.1
+    ]
+   },
+   "review_views": {
+    "ch04_count": {
+     "from": [
+      -2.5,
+      1.6,
+      2.05
+     ],
+     "to": [
+      -2.95,
+      1.45,
+      3.9
+     ]
+    },
+    "ch04_prediction": {
+     "from": [
+      0.25,
+      1.45,
+      -2.75
+     ],
+     "to": [
+      0.3,
+      1.3,
+      -3.85
+     ]
+    },
+    "ch04_limits": {
+     "from": [
+      4.75,
+      1.6,
+      -2.55
+     ],
+     "to": [
+      5.0,
+      1.55,
+      -3.95
+     ]
+    },
+    "ch04_checklist": {
+     "from": [
+      2.15,
+      1.6,
+      -2.45
+     ],
+     "to": [
+      2.2,
+      1.5,
+      -3.95
+     ]
+    },
+    "ch04_s01_overview": {
+     "from": [
+      -1.6,
+      1.9,
+      1.6
+     ],
+     "to": [
+      1.4,
+      1.0,
+      -2.6
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch04_d2_opt01",
+   "from": "EX-CH04-S01",
+   "until": "EX-CH04-S01",
+   "choice": {
+    "choice_id": "EX-CH01-S04-CHOICE",
+    "option_id": "EX-CH01-S04-OPT01"
+   },
+   "about": "Doc 24 5.2 D2 (CH04-S01 comparison): the October observation is filed in the Growth Record layout chosen on day one.",
+   "signs": [
+    {
+     "id": "observation_layout",
+     "text": "GROWTH RECORD: PAIRED PHOTOGRAPHS, MAY AND OCTOBER",
+     "position": [
+      0.05,
+      1.398,
+      -3.815
+     ],
+     "yaw": 0,
+     "size": 0.00027,
+     "color": "#1b2433",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch04_d2_opt02",
+   "from": "EX-CH04-S01",
+   "until": "EX-CH04-S01",
+   "choice": {
+    "choice_id": "EX-CH01-S04-CHOICE",
+    "option_id": "EX-CH01-S04-OPT02"
+   },
+   "about": "Doc 24 5.2 D2 (CH04-S01 comparison): the October observation is filed in the Growth Record layout chosen on day one.",
+   "signs": [
+    {
+     "id": "observation_layout",
+     "text": "GROWTH RECORD: PAIRED CONDITIONS, MAY AND OCTOBER",
+     "position": [
+      0.05,
+      1.398,
+      -3.815
+     ],
+     "yaw": 0,
+     "size": 0.00027,
+     "color": "#1b2433",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch04_twelve_wells",
+   "from": "EX-CH04-S10",
+   "until": "EX-CH04-S10",
+   "about": "EX-CH04-S10 'Twelve Wells, Twelve Questions' (doc 24 2.9 S09 -> S10 and S10 -> S11, 4 clues 14-15): on the care bench the vault's dry quarantine glovebox, a glass enclosure with two glove ports and its status strip (sealed warming done, no condensation, viability pending, not assumed); vault V12 inside it, lid open (PR_VaultCase's hinged Lid), twelve capped wells, and under the lid the line of handwriting (clue 15, read aloud in S11, EX-CH04-S11-L01). On the north wall the reconciled manifest with N.'s note beside cotton in the packet's hand (clue 14) and the three ledgers kept apart (vault 12 physical, founder reserve 30, album entries are knowledge, not seeds), and the survey board with both field cadets home (personnel home). PR_Glovebox, the M1 care-bench glovebox, is too small for the 0.60 m case and is set aside for the scene.",
+   "hide": [
+    "PR_Glovebox"
+   ],
+   "fixtures": [
+    {
+     "id": "dry_glovebox_tray",
+     "position": [
+      3.5,
+      0.83,
+      -1.72
+     ],
+     "size": [
+      1.36,
+      0.06,
+      0.76
+     ],
+     "color": "#8f98a3",
+     "transparent": false
+    },
+    {
+     "id": "dry_glovebox",
+     "position": [
+      3.5,
+      1.2,
+      -1.72
+     ],
+     "size": [
+      1.36,
+      0.68,
+      0.76
+     ],
+     "color": "#a8d8e5",
+     "transparent": true
+    },
+    {
+     "id": "glove_port_w",
+     "position": [
+      2.98,
+      1.04,
+      -1.333
+     ],
+     "size": [
+      0.18,
+      0.18,
+      0.012
+     ],
+     "color": "#2a3140",
+     "transparent": false
+    },
+    {
+     "id": "glove_port_w_sleeve",
+     "position": [
+      2.98,
+      1.04,
+      -1.326
+     ],
+     "size": [
+      0.13,
+      0.13,
+      0.004
+     ],
+     "color": "#0d1117",
+     "transparent": false
+    },
+    {
+     "id": "glove_port_e",
+     "position": [
+      4.02,
+      1.04,
+      -1.333
+     ],
+     "size": [
+      0.18,
+      0.18,
+      0.012
+     ],
+     "color": "#2a3140",
+     "transparent": false
+    },
+    {
+     "id": "glove_port_e_sleeve",
+     "position": [
+      4.02,
+      1.04,
+      -1.326
+     ],
+     "size": [
+      0.13,
+      0.13,
+      0.004
+     ],
+     "color": "#0d1117",
+     "transparent": false
+    },
+    {
+     "id": "glovebox_status",
+     "position": [
+      3.5,
+      1.595,
+      -1.4
+     ],
+     "size": [
+      0.62,
+      0.1,
+      0.012
+     ],
+     "color": "#0f1a28",
+     "transparent": false,
+     "finish": "screen"
+    },
+    {
+     "id": "manifest_board",
+     "position": [
+      5.0,
+      1.5,
+      -3.96
+     ],
+     "size": [
+      1.2,
+      1.0,
+      0.05
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "cotton_note",
+     "position": [
+      4.7,
+      1.33,
+      -3.931
+     ],
+     "size": [
+      0.56,
+      0.16,
+      0.008
+     ],
+     "color": "#f4efe2",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "survey_board_home",
+     "position": [
+      2.2,
+      1.6,
+      -3.96
+     ],
+     "size": [
+      1.4,
+      0.85,
+      0.05
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "props": [
+    {
+     "id": "vault_case",
+     "path": "res://assets/props/PR_VaultCase/PR_VaultCase.glb",
+     "position": [
+      3.5,
+      0.86,
+      -1.7
+     ],
+     "rotation_degrees": [
+      0,
+      90,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "parts": {
+      "Lid": [
+       0,
+       0,
+       -105
+      ]
+     },
+     "inks": [
+      {
+       "id": "lid_inscription",
+       "part": "Lid",
+       "text": "Ask Commander Ferreira\nabout Expedition Zero.",
+       "position": [
+        0,
+        0.17,
+        0
+       ],
+       "pitch": 90,
+       "yaw": -90,
+       "size": 0.024,
+       "color": "#1b2433",
+       "font": "hand"
+      }
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "id": "glovebox_status_text",
+     "text": "DRY QUARANTINE  ·  SEALED WARMING DONE  ·  NO CONDENSATION\nVIABILITY: PENDING, NOT ASSUMED",
+     "position": [
+      3.5,
+      1.595,
+      -1.393
+     ],
+     "yaw": 0,
+     "size": 0.00042,
+     "color": "#d9f2ff",
+     "outline": 0
+    },
+    {
+     "id": "glovebox_label",
+     "text": "DRY GLOVEBOX  ·  VAULT V12",
+     "position": [
+      3.5,
+      0.83,
+      -1.339
+     ],
+     "yaw": 0,
+     "size": 0.00045,
+     "color": "#1b2433",
+     "outline": 0
+    },
+    {
+     "id": "manifest_title",
+     "text": "VAULT V12  -  MANIFEST RECONCILED, 22 OCT 2046",
+     "position": [
+      5.0,
+      1.93,
+      -3.932
+     ],
+     "yaw": 0,
+     "size": 0.00062,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "manifest_text",
+     "text": "12 WELLS, 12 DISTINCT SPECIMENS\nEACH LABEL MATCHED TO THE MANIFEST: 12 OF 12\nCONDITION ENTRIES: 12, VIABILITY PENDING\nCOTTON: ONE OF THE TWELVE, NOT PLANTED",
+     "position": [
+      5.0,
+      1.68,
+      -3.932
+     ],
+     "yaw": 0,
+     "size": 0.00055,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "cotton_note_text",
+     "text": "Cotton sprouted in a sealed experiment on the Moon\nin 2019. Let one grow further.  — N.",
+     "position": [
+      4.7,
+      1.33,
+      -3.926
+     ],
+     "yaw": 0,
+     "size": 0.00044,
+     "color": "#2b2f6b",
+     "outline": 0,
+     "font_path": "res://assets/props/narrative/fonts/GochiHand-Regular.ttf"
+    },
+    {
+     "id": "cotton_note_caption",
+     "text": "BESIDE COTTON,\nIN THE PACKET'S HAND",
+     "position": [
+      5.33,
+      1.33,
+      -3.932
+     ],
+     "yaw": 0,
+     "size": 0.00042,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "ledgers_text",
+     "text": "VAULT: 12 PHYSICAL SPECIMENS, ALL STORED\nFOUNDER RESERVE: 30, SEALED, A SEPARATE LEDGER\nALBUM PAGES: KNOWLEDGE ABOUT THE TWELVE, NOT SEEDS",
+     "position": [
+      5.0,
+      1.13,
+      -3.932
+     ],
+     "yaw": 0,
+     "size": 0.00048,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "survey_home_text",
+     "text": "COLD-TRAP SURVEY  -  HOME 22 OCT 2046\nROUTE B, THREE BEACONS TESTED\nRAFI AND KAI: HOME, SUITS STOWED\nROVER: DOCKED, TUNNEL SEALED\nSAMPLE AND VAULT: SEALED UNTIL THE DRY GLOVEBOX\nGARDEN: TWELVE DESCENDANTS, CARE ON SCHEDULE",
+     "position": [
+      2.2,
+      1.6,
+      -3.932
+     ],
+     "yaw": 0,
+     "size": 0.00058,
+     "color": "#1F2A44",
+     "outline": 0
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "ch04_dry_glovebox",
+     "label": "Dry glovebox: vault V12",
+     "verb": "Use",
+     "position": [
+      3.5,
+      1.2,
+      -1.1
+     ],
+     "approach_m": [
+      3.5,
+      0,
+      -0.45
+     ],
+     "asset_id": "dry_glovebox",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch04_vault_manifest",
+     "label": "Vault manifest and ledgers",
+     "verb": "Inspect",
+     "position": [
+      5.0,
+      1.5,
+      -3.7
+     ],
+     "approach_m": [
+      5.0,
+      0,
+      -2.9
+     ],
+     "asset_id": "manifest_board",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch04_personnel_home",
+     "label": "Survey board: everyone home",
+     "verb": "Inspect",
+     "position": [
+      2.2,
+      1.6,
+      -3.7
+     ],
+     "approach_m": [
+      2.0,
+      0,
+      -2.9
+     ],
+     "asset_id": "survey_board_home",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p08_manifest_reconciled": "ch04_vault_manifest",
+    "p08_personnel_home": "ch04_personnel_home",
+    "p08_quarantine_complete": "ch04_dry_glovebox"
+   },
+   "anchors": {
+    "garden_player": [
+     3.5,
+     0,
+     -0.5
+    ],
+    "garden_amara": [
+     4.55,
+     0,
+     -0.65
+    ],
+    "garden_kai": [
+     2.45,
+     0,
+     -0.6
+    ],
+    "garden_rafi": [
+     5.45,
+     0,
+     -2.45
+    ]
+   },
+   "review_views": {
+    "ch04_glovebox": {
+     "from": [
+      3.5,
+      2.05,
+      -0.1
+     ],
+     "to": [
+      3.5,
+      1.15,
+      -1.8
+     ]
+    },
+    "ch04_lid": {
+     "from": [
+      3.5,
+      1.38,
+      -1.02
+     ],
+     "to": [
+      3.5,
+      1.2,
+      -2.0
+     ]
+    },
+    "ch04_manifest": {
+     "from": [
+      4.8,
+      1.6,
+      -2.55
+     ],
+     "to": [
+      5.0,
+      1.5,
+      -3.95
+     ]
+    },
+    "ch04_survey_home": {
+     "from": [
+      2.15,
+      1.6,
+      -2.45
+     ],
+     "to": [
+      2.2,
+      1.55,
+      -3.95
      ]
     }
    }

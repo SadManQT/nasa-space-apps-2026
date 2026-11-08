@@ -3596,6 +3596,504 @@
      ]
     }
    }
+  },
+  {
+   "id": "ch04_ask_ferreira",
+   "from": "EX-CH04-S11",
+   "until": "EX-CH04-S11",
+   "about": "EX-CH04-S11 'Ask Commander Ferreira' (doc 24 2.4, 4 clue 15, 2.9 S10 -> S11): the Earth screen with the lid image and the reconciled manifest sent and delivered, Ferreira's channel open on her empty chair for the quiet moment while Rao answers (EX-CH04-S11-L03), and Mei's request (EX-CH04-S11-L04) delivered with no reply yet; on the Mission Table, beside the saved inscription (ch04_saved_inscription), the claims card that keeps what the lid supports apart from conclusions nobody can draw (who N. is, that anyone was abandoned, that all twelve will grow).",
+   "fixtures": [
+    {
+     "id": "claims_card",
+     "position": [
+      0.3,
+      0.762,
+      0.48
+     ],
+     "size": [
+      0.32,
+      0.004,
+      0.22
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "prints": [
+    {
+     "id": "ferreira_feed",
+     "kind": "plant_photo",
+     "subject": "res://assets/props/PR_CrewSeat/PR_CrewSeat.glb",
+     "position": [
+      -0.78,
+      1.86,
+      -5.632
+     ],
+     "size": [
+      0.9,
+      0.6
+     ],
+     "backdrop": "#25303f",
+     "light": "#f4ead8",
+     "view": [
+      28,
+      -12
+     ],
+     "zoom": 1.5,
+     "caption": "COMMANDER FERREIRA'S DESK, EARTH  ·  CHANNEL OPEN",
+     "caption_color": "#d9f2ff",
+     "caption_size": 0.0006
+    }
+   ],
+   "signs": [
+    {
+     "id": "earth_desk_text",
+     "text": "EARTH DESK   LIVE LINK\n\nSENT: THE LID IMAGE AND THE RECONCILED MANIFEST\nRECEIPT: DELIVERED, 22 OCT 2046\n\nRAO:  “{line}”\n\nTO COMMANDER FERREIRA: WE WOULD LIKE THE WHOLE STORY WHEN YOU ARE READY.\nDELIVERED  ·  NO REPLY YET",
+     "position": [
+      0.72,
+      1.72,
+      -5.634
+     ],
+     "yaw": 0,
+     "size": 0.00105,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 1.35,
+     "line": "EX-CH04-S11-L03"
+    },
+    {
+     "id": "claims_text",
+     "text": "WHAT THE LID SUPPORTS\nTHE CASE WAS KEPT ON PURPOSE\nTHE TRIAL HAD A HUMAN HISTORY\nFERREIRA IS THE PERSON TO ASK\n\nNOT SUPPORTED\nWHO N. IS  ·  THAT ANYONE WAS ABANDONED\nTHAT ALL TWELVE WILL GROW",
+     "position": [
+      0.3,
+      0.7645,
+      0.48
+     ],
+     "yaw": 0,
+     "size": 0.00031,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90,
+     "wrap_m": 0.3
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "ch04_claims_card",
+     "label": "What the lid supports",
+     "verb": "Inspect",
+     "position": [
+      0.3,
+      0.86,
+      0.55
+     ],
+     "approach_m": [
+      0.4,
+      0,
+      1.6
+     ],
+     "asset_id": "claims_card",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ],
+   "focus_labels": {
+    "commons_earth_screen": "Earth desk link"
+   },
+   "stations": {
+    "p08_send_manifest": "commons_earth_screen",
+    "p08_record_ferreira_question": "ch04_inscription_record",
+    "p08_leave_identity_open": "ch04_claims_card"
+   },
+   "anchors": {
+    "commons_player": [
+     0.2,
+     0,
+     -3.6
+    ],
+    "commons_kai": [
+     -1.4,
+     0,
+     -3.3
+    ],
+    "commons_amara": [
+     1.5,
+     0,
+     -3.4
+    ],
+    "commons_rafi": [
+     2.6,
+     0,
+     -2.6
+    ]
+   },
+   "review_views": {
+    "ch04_earth_desk": {
+     "from": [
+      -0.9,
+      1.7,
+      -2.3
+     ],
+     "to": [
+      0.0,
+      1.7,
+      -5.7
+     ]
+    },
+    "ch04_table_cards": {
+     "from": [
+      0.0,
+      1.3,
+      1.2
+     ],
+     "to": [
+      0.0,
+      0.76,
+      0.42
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch04_saved_inscription",
+   "from": "EX-CH04-S11",
+   "until": "EX-CH04-S12",
+   "about": "Doc 24 2.9 CH04 S11 -> S12: the exact lid inscription saved with its open question on the Mission Table, from the Earth message to the relief flight.",
+   "fixtures": [
+    {
+     "id": "inscription_record",
+     "position": [
+      -0.3,
+      0.762,
+      0.48
+     ],
+     "size": [
+      0.32,
+      0.004,
+      0.22
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "inscription_record_text",
+     "text": "LID INSCRIPTION, SAVED EXACTLY\n“Ask Commander Ferreira about Expedition Zero.”\n\nOPEN QUESTION: WHAT IS HER CONNECTION TO IT?\nASKED, NOT ANSWERED",
+     "position": [
+      -0.3,
+      0.7645,
+      0.48
+     ],
+     "yaw": 0,
+     "size": 0.00034,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90,
+     "wrap_m": 0.3
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "ch04_inscription_record",
+     "label": "Saved inscription and question",
+     "verb": "Inspect",
+     "position": [
+      -0.3,
+      0.86,
+      0.55
+     ],
+     "approach_m": [
+      -0.4,
+      0,
+      1.6
+     ],
+     "asset_id": "inscription_record",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ch04_relief_flight",
+   "from": "EX-CH04-S12",
+   "until": "EX-CH04-S12",
+   "about": "EX-CH04-S12 'A Fifth Mug Has a Journey' (22 Oct to 12 Dec 2046; doc 24 2.4, 2.9 CH04 -> CH05 and the CH04-S12 montage beats): the relief flight notice on the Earth screen (departs Earth 8 Dec, arrives 12 Dec, Rao stays at the Earth desk; Ferreira's 'I owe you the story', EX-CH04-S12-L03), the relief cargo manifest on the Mission Table beside the saved inscription, the fifth locker in the crew locker bank with her name on it from 1 Dec and the fifth-occupant handover sheet, and the dated care board for the days in between. The fifth mug on its clip above the table is M3-5R's ch05_fifth_mug_clip (from this scene to her arrival).",
+   "fixtures": [
+    {
+     "id": "cargo_manifest",
+     "position": [
+      0.3,
+      0.762,
+      0.48
+     ],
+     "size": [
+      0.32,
+      0.004,
+      0.22
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "care_bridge",
+     "position": [
+      3.0,
+      1.45,
+      -5.95
+     ],
+     "size": [
+      1.3,
+      0.85,
+      0.04
+     ],
+     "color": "#ECEEF0",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "handover_sheet",
+     "position": [
+      -10.045,
+      1.2,
+      3.55
+     ],
+     "size": [
+      0.008,
+      0.5,
+      0.36
+     ],
+     "color": "#f1f0ea",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "relief_notice_text",
+     "text": "RELIEF FLIGHT NOTICE\n\nDEPARTS EARTH 8 DEC 2046  ·  ARRIVES AURORA 12 DEC 2046\nCOMMANDER FERREIRA TRAVELS WITH THE PLANNED RELIEF;\nHER EARTH DUTIES PAUSE FOR THE FLIGHT\nRAO STAYS AT THE EARTH DESK\n\nFERREIRA, BEFORE TRAVEL:  “{line}”",
+     "position": [
+      0,
+      1.72,
+      -5.634
+     ],
+     "yaw": 0,
+     "size": 0.0012,
+     "color": "#d9f2ff",
+     "outline": 0,
+     "wrap_m": 2.7,
+     "line": "EX-CH04-S12-L03"
+    },
+    {
+     "id": "cargo_manifest_text",
+     "text": "RELIEF CARGO, ARRIVING 12 DEC\nRELAY CONTROLLER SPARE: 1, SEALED CRATE\nQUARANTINE SUPPLIES\nROUTINE HABITAT SUPPLIES\nCHECKED AGAINST THE LIST\nGARDEN AND VAULT: CARE PLAN UNCHANGED",
+     "position": [
+      0.3,
+      0.7645,
+      0.48
+     ],
+     "yaw": 0,
+     "size": 0.00033,
+     "color": "#1b2433",
+     "outline": 0,
+     "pitch": -90,
+     "wrap_m": 0.3
+    },
+    {
+     "id": "care_bridge_text",
+     "text": "22 OCT TO 12 DEC  -  THE DAYS IN BETWEEN\n23 OCT  TWELVE-SPECIMEN REPORT SENT; RAO'S RECEIPT\nNOVEMBER  GARDEN AND VAULT CARE ON SCHEDULE\nNOVEMBER  THE SPARE MUG POLISHED, ONCE\n1 DEC  FIFTH LOCKER LABELLED\n8 DEC  DEPARTURE NOTICE ON THE EARTH SCREEN\n12 DEC  THE LANDING CAMERA",
+     "position": [
+      3.0,
+      1.45,
+      -5.928
+     ],
+     "yaw": 0,
+     "size": 0.00056,
+     "color": "#1F2A44",
+     "outline": 0
+    },
+    {
+     "id": "handover_text",
+     "text": "FIFTH OCCUPANT, ARRIVING 12 DEC\nLOCKER: THIS ONE, NAMED 1 DEC\nSEAT AT THE TABLE: READY\nARRIVAL: GARAGE DOCK, CARGO HELD IN THE DRY LOCK\nEARTH SUPPORT DURING THE FLIGHT: RAO",
+     "position": [
+      -10.039,
+      1.2,
+      3.55
+     ],
+     "yaw": 90,
+     "size": 0.0004,
+     "color": "#1b2433",
+     "outline": 0,
+     "wrap_m": 0.33
+    }
+   ],
+   "focus_targets": [
+    {
+     "target_id": "ch04_fifth_locker",
+     "label": "Fifth locker and handover sheet",
+     "verb": "Inspect",
+     "position": [
+      -10.0,
+      1.35,
+      3.55
+     ],
+     "approach_m": [
+      -9.0,
+      0,
+      3.55
+     ],
+     "asset_id": "handover_sheet",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch04_care_bridge",
+     "label": "The days in between",
+     "verb": "Inspect",
+     "position": [
+      3.0,
+      1.45,
+      -5.8
+     ],
+     "approach_m": [
+      3.0,
+      0,
+      -4.6
+     ],
+     "asset_id": "care_bridge",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    },
+    {
+     "target_id": "ch04_cargo_manifest",
+     "label": "Relief cargo manifest",
+     "verb": "Inspect",
+     "position": [
+      0.3,
+      0.86,
+      0.55
+     ],
+     "approach_m": [
+      0.4,
+      0,
+      1.6
+     ],
+     "asset_id": "cargo_manifest",
+     "label_offset": [
+      0,
+      0.8,
+      0
+     ]
+    }
+   ],
+   "stations": {
+    "p08_check_relief_flight": "commons_earth_screen",
+    "p08_prepare_locker": "ch04_fifth_locker",
+    "p08_confirm_december_transition": "ch04_care_bridge"
+   },
+   "review_views": {
+    "ch04_relief_notice": {
+     "from": [
+      0.0,
+      1.65,
+      -2.4
+     ],
+     "to": [
+      0.0,
+      1.7,
+      -5.7
+     ]
+    },
+    "ch04_fifth_locker": {
+     "from": [
+      -8.85,
+      1.55,
+      3.0
+     ],
+     "to": [
+      -10.05,
+      1.35,
+      3.55
+     ]
+    },
+    "ch04_care_bridge": {
+     "from": [
+      2.85,
+      1.6,
+      -4.15
+     ],
+     "to": [
+      3.0,
+      1.45,
+      -5.95
+     ]
+    },
+    "ch04_s12_table": {
+     "from": [
+      0.6,
+      1.6,
+      1.6
+     ],
+     "to": [
+      0.0,
+      1.2,
+      -0.2
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch04_fifth_locker",
+   "from": "EX-CH04-S12",
+   "about": "Doc 24 2.9 CH04-S12 montage, 1 Dec 2046: the fifth locker in the Commons crew locker bank is labelled for Commander Ferreira before she lands, and keeps her name from then on.",
+   "fixtures": [
+    {
+     "id": "fifth_locker_tag",
+     "position": [
+      -10.045,
+      1.62,
+      3.55
+     ],
+     "size": [
+      0.008,
+      0.07,
+      0.34
+     ],
+     "color": "#ebe6d8",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "fifth_locker_tag_text",
+     "text": "FERREIRA",
+     "position": [
+      -10.039,
+      1.62,
+      3.55
+     ],
+     "yaw": 90,
+     "size": 0.0009,
+     "color": "#1b2433",
+     "outline": 0
+    }
+   ]
   }
  ]
 }

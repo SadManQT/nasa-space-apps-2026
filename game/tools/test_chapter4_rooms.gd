@@ -29,6 +29,12 @@ const EarthSky = preload("res://assets/environment/terrain/earth_sky.gd")
 ## The garage's scenes (M3-105): CH04 departure (S02-S03) and return (S09), Ferreira's arrival (CH05-S01), and the two
 ## destination boards of CH07-S12, CH08-S01 and the CH08-S11 return.
 const GARAGE_SCENES := ["EX-CH04-S02", "EX-CH04-S03", "EX-CH04-S09", "EX-CH05-S01", "EX-CH07-S12", "EX-CH08-S01", "EX-CH08-S11"]
+## M3-4R: the Chapter 4 scenes staged in the base rooms (doc 24 section 2.4): what grew and the vault's dry glovebox in
+## the garden, the Earth message and the relief flight in the Commons.
+const BASE_SCENES := {"EX-CH04-S01": "LOC-03", "EX-CH04-S10": "LOC-03", "EX-CH04-S11": "LOC-01", "EX-CH04-S12": "LOC-01"}
+const CADETS := ["kai", "amara", "mei", "rafi"]
+## The evidence shots of S01 show the echoes of three earlier choices (doc 24 section 5.2 D2, D4, D6).
+const S01_CHOICES := {"EX-CH01-S04-CHOICE": {"option_id": "EX-CH01-S04-OPT01"}, "EX-CH02-S06-CHOICE": {"option_id": "EX-CH02-S06-OPT01"}, "EX-CH03-S11-DEDICATION": {"option_id": "EX-CH03-S11-DEDICATION-OPT03"}}
 const EXPECTED_ROOM := {
 	"EX-CH04-S01": "LOC-03", "EX-CH04-S02": "LOC-08", "EX-CH04-S03": "LOC-08", "EX-CH04-S04": "LOC-09",
 	"EX-CH04-S05": "LOC-09", "EX-CH04-S06": "LOC-10", "EX-CH04-S07": "LOC-10", "EX-CH04-S08": "LOC-10",
@@ -95,6 +101,14 @@ func _check_all() -> void:
 		await _check_scene(room, scene_id, player)
 		room.free()
 		await process_frame
+	for scene_id in BASE_SCENES:
+		var room := await _room(String(BASE_SCENES[scene_id]))
+		room.set_scene_context(scene_id)
+		for frame in 3:
+			await physics_frame
+		await _check_base_scene(room, scene_id, player)
+		room.free()
+		await process_frame
 	player.free()
 	await _check_restaging()
 	await _check_echoes()
@@ -123,7 +137,7 @@ func _check_mapping() -> void:
 		var roster := Roster.scene_roster(scene_id)
 		var active := Roster.playable_actor(scene_id)
 		_check(String(roster[active].physical_location_id) == room_id, scene_id + " playable actor stands in the scene's room")
-		if room_id != "LOC-08":
+		if room_id != "LOC-08" and not BASE_SCENES.has(scene_id):
 			continue
 		for target in Gates.targets_for_scene(scene_id):
 			_check(not Contract.station_focus(scene_id, String(target.target_id)).is_empty(), scene_id + " action has a room station: " + String(target.target_id))
@@ -462,7 +476,153 @@ func _check_staged_text(room: CampaignRoom, map: RID, scene_id: String) -> void:
 				front = minf(front, NavigationServer3D.map_get_closest_point(map, probe).distance_to(probe))
 		_check(front < 0.35, scene_id + " staged words read from walkable deck: " + String(label.text).left(40))
 
-# ------------------------------------------------------------------------------------------------- the joins
+# ------------------------------------------------------------------------------------- M3-4R: the base rooms
+
+## A Chapter 4 scene in the garden or the Commons, staged on the M1-06 room: one navigation map after staging, every
+## catalog action's station on a reachable approach with a clear line of sight, the cast on walkable deck, the scene's
+## own objects resting on the deck, a wall, a surface or a panel face, its words in player language facing the deck,
+## and its joins and clues in place.
+func _check_base_scene(room: CampaignRoom, scene_id: String, player: PlayerController) -> void:
+	var layout := Contract.staged_layout(room.room_id, scene_id)
+	var stage: Dictionary = room.stage()
+	_check(stage.layers.any(func(id): return String(id).begins_with("ch04_")) and room.visual_root.has_node(Staging.ROOT_NAME), scene_id + " the room carries its Chapter 4 staging")
+	var region := room.navigation_root.get_node("NavigationRegion") as NavigationRegion3D
+	var map := region.get_navigation_map()
+	NavigationServer3D.map_force_update(map)
+	_check(room.navigation_root.get_child_count() == 1, scene_id + " exactly one navigation map after staging")
+	var spawn := Vector3(layout.walk_probe[0][0], 0, layout.walk_probe[0][1])
+	var focus_ids: Array = room.focus_targets().map(func(t): return String(t.target_id))
+	for target in Gates.targets_for_scene(scene_id):
+		_check(focus_ids.has(String(target.world_focus_id)), scene_id + " gate focus exists: " + String(target.world_focus_id))
+		_check(focus_ids.has(Contract.station_focus(scene_id, String(target.target_id))), scene_id + " station exists for " + String(target.target_id))
+	for target in layout.focus_targets:
+		var approach := Presentation.vector(target.approach_m)
+		var point := Presentation.vector(target.position)
+		var path := NavigationServer3D.map_get_path(map, spawn, approach, true)
+		_check(not path.is_empty() and path[path.size() - 1].distance_to(approach) < 0.4, scene_id + " reachable approach " + String(target.target_id))
+		_check(_ray(approach + Vector3.UP * 1.4, point).is_empty(), scene_id + " interaction line of sight " + String(target.target_id))
+	await _walk(player, layout, scene_id)
+	for node in room.door_root.get_children():
+		if not node is CampaignDoor or String(node.boundary_id) in ["garden_viewing_shutter"]:
+			continue
+		var inward: Vector3 = -node.global_basis.z
+		inward.y = 0
+		var approach: Vector3 = node.global_position + inward.normalized() * 1.0
+		approach.y = 0
+		var path := NavigationServer3D.map_get_path(map, spawn, approach, true)
+		_check(not path.is_empty() and path[path.size() - 1].distance_to(approach) < 0.2, scene_id + " 1 m door approach stays clear: " + String(node.boundary_id))
+	var prefix := String(PLAYER_ANCHOR[room.room_id]).trim_suffix("player")
+	var anchors := Contract.staged_anchors(room.room_id, scene_id)
+	var player_at := Presentation.vector(anchors[PLAYER_ANCHOR[room.room_id]])
+	_check(NavigationServer3D.map_get_closest_point(map, player_at).distance_to(player_at) < 0.3, scene_id + " the scene's player anchor stands on walkable deck")
+	var placed: Array[Vector3] = [player_at]
+	for id in CADETS:
+		if id == Roster.playable_actor(scene_id):
+			continue
+		var at := Crew.anchor_position(room.room_id, id, scene_id)
+		_check(anchors.has(prefix + id), "%s %s has an authored anchor" % [scene_id, id])
+		_check(NavigationServer3D.map_get_closest_point(map, at).distance_to(at) < 0.3, "%s %s stands on walkable deck %s" % [scene_id, id, str(at)])
+		for other in placed:
+			_check(at.distance_to(other) > 0.6, "%s %s keeps 0.6 m from the next person" % [scene_id, id])
+		placed.append(at)
+	await _check_base_objects(room, layout, scene_id)
+	_check_staged_text(room, map, scene_id)
+	_check_base_joins(room, scene_id)
+
+## The ids of the Chapter 4 layers' own objects in a base room (other chapters' objects are their suites').
+func _ch04_ids(room_id: String) -> Array:
+	var ids: Array = []
+	for layer in Contract.layout(room_id).get("staging", []):
+		if String(layer.get("id", "")).begins_with("ch04_"):
+			for key in ["props", "fixtures", "prints"]:
+				for item in layer.get(key, []):
+					ids.append(String(item.get("id", "")))
+	return ids
+
+func _check_base_objects(room: CampaignRoom, layout: Dictionary, scene_id: String) -> void:
+	var staged := room.visual_root.get_node(Staging.ROOT_NAME) as Node3D
+	var half := Vector2(float(layout.bounds_m[0]), float(layout.bounds_m[1])) * 0.5
+	var surfaces: Array[AABB] = []
+	for node in room.visual_root.get_children() + staged.get_children():
+		if node is Node3D and node.visible and node != staged and String(node.name) != "HabitatKit":
+			var box := _bounds(room, node)
+			if box.size != Vector3.ZERO:
+				surfaces.append(box)
+	var ours := _ch04_ids(room.room_id)
+	var resting: Array[Node3D] = []
+	for node in staged.get_children():
+		if not node is Node3D or node is Label3D or not ours.has(String(node.name)):
+			continue
+		var box := _bounds(room, node)
+		if box.size == Vector3.ZERO:
+			continue
+		var id := String(node.name)
+		_check(box.position.x >= -half.x - 0.02 and box.end.x <= half.x + 0.02 and box.position.z >= -half.y - 0.02 and box.end.z <= half.y + 0.02, scene_id + " staged object inside the room: " + id)
+		var base := box.position.y
+		var supported := absf(base) < 0.03
+		var wall := absf(box.end.z - half.y) < 0.12 or absf(box.position.z + half.y) < 0.12 or absf(box.end.x - half.x) < 0.12 or absf(box.position.x + half.x) < 0.12
+		var centre := box.get_center()
+		var on_furniture := false
+		for surface in surfaces:
+			if surface == box:
+				continue
+			if surface.end.y <= base + 0.03 and surface.end.y >= base - 0.04 and centre.x >= surface.position.x and centre.x <= surface.end.x and centre.z >= surface.position.z and centre.z <= surface.end.z:
+				on_furniture = true
+			var overlaps_y := box.position.y < surface.end.y and box.end.y > surface.position.y
+			var flush_z := (absf(box.position.z - surface.end.z) < 0.01 or absf(box.end.z - surface.position.z) < 0.01) and box.position.x < surface.end.x and box.end.x > surface.position.x
+			var flush_x := (absf(box.position.x - surface.end.x) < 0.01 or absf(box.end.x - surface.position.x) < 0.01) and box.position.z < surface.end.z and box.end.z > surface.position.z
+			if overlaps_y and (flush_z or flush_x) and box.size.y < surface.size.y:
+				wall = true
+		_check((supported or on_furniture or wall) and base > -0.03, scene_id + " staged object rests on the deck, a wall, a surface or a panel face (base %.3f m): %s" % [base, id])
+		if on_furniture and not wall and not supported:
+			resting.append(node)
+	await _check_footprints(room, staged, resting, scene_id)
+
+## Doc 24 section 2.9 (CH03 -> CH04, S01 -> S02, S09 -> S10, S10 -> S11, S11 -> S12, CH04 -> CH05), section 4 clues 14
+## and 15, and the canon numbers of each scene.
+func _check_base_joins(room: CampaignRoom, scene_id: String) -> void:
+	var staged := room.visual_root.get_node(Staging.ROOT_NAME) as Node3D
+	match scene_id:
+		"EX-CH04-S01":
+			_check(staged.has_node("descendant_rack") and _text(staged, "rack_count").contains("SEVEN PURPLE STEMS, FIVE GREEN") and _text(staged, "rack_count").contains("NOT A RATIO"), scene_id + " the October rack: seven purple, five green in this sample, not a ratio (CH03 -> CH04)")
+			var observed := _text(staged, "observation_text")
+			_check(observed.contains("7 PURPLE STEMS, 5 GREEN") and observed.contains("BESIDE THE PREDICTION") and _text(staged, "prediction_title").contains("6 MAY 2046") and _text(staged, "family_tree_text").contains("TWELVE GROWING"), scene_id + " the October count is added beside the May prediction, which stays as written; the family tree has twelve growing")
+			var limits := _text(staged, "limits_text")
+			_check(limits.contains("NOT A RULE FOR EVERY CROSS") and limits.contains("FOUNDER RESERVE: 30") and limits.contains("ARCHIVED"), scene_id + " current plants, the founder reserve and Alo's archived evidence on separate lines")
+			var checklist := _text(staged, "checklist_text")
+			_check(checklist.contains("ROVER SEAL") and checklist.contains("SCANNER") and checklist.contains("CLOSED CARRIER") and checklist.contains("BASE HANDOVER") and _text(staged, "next_question_text").contains("NEXT OBSERVATION"), scene_id + " Rafi's question and the rover checklist (S01 -> S02)")
+		"EX-CH04-S10":
+			var glass := _bounds(room, staged.get_node("dry_glovebox")).grow(0.02)
+			var vault := staged.get_node("vault_case") as Node3D
+			_check(not (room.visual_root.get_node("PR_Glovebox") as Node3D).visible and glass.encloses(_bounds(room, vault)), scene_id + " vault V12 stands inside the dry glovebox (S09 -> S10)")
+			var lid := vault.find_child("Lid", true, false) as Node3D
+			_check(lid != null and absf(lid.rotation_degrees.z + 105.0) < 0.5, scene_id + " the case is open inside the glovebox: its hinged lid stands open")
+			var words := vault.find_child("lid_inscription", true, false) as Label3D
+			_check(words != null and words.text == "Ask Commander Ferreira\nabout Expedition Zero." and words.global_basis.z.z > 0.85 and words.global_basis.z.y > 0.1, scene_id + " a line of handwriting under the lid, facing the glovebox's front (clue 15, S10 -> S11)")
+			_check(words != null and glass.has_point(room.global_transform.affine_inverse() * words.global_position), scene_id + " the inscription is read through the glovebox glass")
+			var note := _text(staged, "cotton_note_text")
+			_check(note.contains("Cotton sprouted in a sealed experiment on the Moon") and note.contains("in 2019. Let one grow further.") and note.contains("N.") and _text(staged, "cotton_note_caption").contains("PACKET'S HAND"), scene_id + " beside cotton on the manifest, N.'s note in the packet's hand (clue 14)")
+			_check(_text(staged, "manifest_text").contains("12 OF 12") and _text(staged, "manifest_text").contains("VIABILITY PENDING") and _text(staged, "manifest_text").contains("NOT PLANTED"), scene_id + " twelve labels reconciled, viability pending, nothing planted")
+			var ledgers := _text(staged, "ledgers_text")
+			_check(ledgers.contains("VAULT: 12 PHYSICAL") and ledgers.contains("FOUNDER RESERVE: 30") and ledgers.contains("NOT SEEDS"), scene_id + " three ledgers: the vault's twelve, the founder thirty, album pages that are not seeds")
+			_check(_text(staged, "glovebox_status_text").contains("NO CONDENSATION") and _text(staged, "glovebox_status_text").contains("PENDING, NOT ASSUMED"), scene_id + " sealed warming done, no condensation, viability pending")
+			_check(_text(staged, "survey_home_text").contains("RAFI AND KAI: HOME") and staged.has_node("descendant_rack"), scene_id + " both field cadets home; the current garden still growing beside the vault")
+		"EX-CH04-S11":
+			var desk := _text(staged, "earth_desk_text")
+			_check(desk.contains(Staging.line_text("EX-CH04-S11-L03")) and desk.contains("THE LID IMAGE AND THE RECONCILED MANIFEST") and desk.contains("NO REPLY YET"), scene_id + " the lid image and manifest delivered; Rao answers; the request has no reply yet")
+			var feed := staged.get_node_or_null("ferreira_feed")
+			_check(feed != null and (feed.get_node("Caption") as Label3D).text.contains("FERREIRA") and feed.has_node("PhotoView"), scene_id + " Ferreira's channel shows her empty chair for the quiet moment (clue 15)")
+			_check(_text(staged, "inscription_record_text").contains("“Ask Commander Ferreira about Expedition Zero.”") and _text(staged, "inscription_record_text").contains("OPEN QUESTION"), scene_id + " the exact inscription saved with its open question")
+			_check(_text(staged, "claims_text").contains("NOT SUPPORTED") and _text(staged, "claims_text").contains("WHO N. IS"), scene_id + " supported claims kept apart from conclusions the lid does not support")
+		"EX-CH04-S12":
+			var notice := _text(staged, "relief_notice_text")
+			_check(notice.contains("DEPARTS EARTH 8 DEC 2046") and notice.contains("ARRIVES AURORA 12 DEC 2046") and notice.contains("RAO STAYS AT THE EARTH DESK") and notice.contains(Staging.line_text("EX-CH04-S12-L03")), scene_id + " the 8-12 Dec relief flight, Rao at the Earth desk, Ferreira's 'I owe you the story' (CH04 -> CH05)")
+			_check(_text(staged, "inscription_record_text").contains("OPEN QUESTION"), scene_id + " the saved inscription and its open question stay on the table (S11 -> S12)")
+			_check(_text(staged, "cargo_manifest_text").contains("RELAY CONTROLLER SPARE: 1") and _text(staged, "cargo_manifest_text").contains("CARE PLAN UNCHANGED"), scene_id + " the relief cargo checked against its manifest")
+			_check(_text(staged, "fifth_locker_tag_text") == "FERREIRA" and _text(staged, "handover_text").contains("FIFTH OCCUPANT"), scene_id + " the fifth locker named and the fifth-occupant handover ready")
+			_check(_text(staged, "care_bridge_text").contains("1 DEC  FIFTH LOCKER LABELLED") and _text(staged, "care_bridge_text").contains("12 DEC  THE LANDING CAMERA"), scene_id + " the dated October-to-December bridge")
+	_check(_text(staged, "fifth_locker_tag_text") == ("FERREIRA" if room.room_id == "LOC-01" and Contract.scene_order(scene_id) >= 412 else ""), scene_id + " the fifth locker carries her name from CH04-S12")
+
 
 func _text(staged: Node, id: String) -> String:
 	var label := staged.get_node_or_null(id) as Label3D
@@ -534,6 +694,24 @@ func _check_echoes() -> void:
 		_check(_text(staged, "kai_family_copy_text").contains(words), "D12 %s: Kai packs his family's copy for the rover" % option)
 	room.free()
 	await process_frame
+	var garden := await _room("LOC-03")
+	garden.set_scene_context("EX-CH04-S01")
+	await process_frame
+	staged = garden.visual_root.get_node(Staging.ROOT_NAME)
+	_check(not staged.has_node("observation_layout"), "no Growth Record layout line without its day-one choice (D2)")
+	for option in ["EX-CH01-S04-OPT01", "EX-CH01-S04-OPT02"]:
+		var choices := S01_CHOICES.duplicate(true)
+		choices["EX-CH01-S04-CHOICE"] = {"option_id": option}
+		garden.set_story_choices(choices)
+		await process_frame
+		staged = garden.visual_root.get_node(Staging.ROOT_NAME)
+		_check(_text(staged, "observation_layout").contains("PAIRED PHOTOGRAPHS" if option.ends_with("1") else "PAIRED CONDITIONS"), "D2 %s: the October count is filed in the day-one Growth Record layout" % option)
+		_check(_text(staged, "prediction_choice").contains("Both visible colours may appear"), "D4: the player's own May sentence stays beside the October count (%s)" % option)
+		_check(_text(staged, "dedication_wall").contains("THE NEXT SMALL THING") and _text(staged, "dedication_card").contains("The Next Small Thing"), "D6: the tray dedication travels with the rack into CH04-S01 (%s)" % option)
+	garden.free()
+	await process_frame
+	_check(Contract.staging("LOC-01", "EX-CH06-S01").layers.has("ch04_fifth_locker") and not Contract.staging("LOC-01", "EX-CH04-S11").layers.has("ch04_fifth_locker"), "the fifth locker keeps her name from CH04-S12 on, not before")
+	_check(Contract.staging("LOC-03", "EX-CH04-S10").layers.has("ch03_descendant_rack") and not Contract.staging("LOC-03", "EX-CH05-S12").layers.has("ch03_descendant_rack"), "the October rack stays in the garden through Chapter 4")
 
 ## Re-staging puts the base garage back exactly: nodes, navigation, stations, the garage's pose and the screens.
 func _check_restaging() -> void:
@@ -584,6 +762,22 @@ func _check_crew() -> void:
 			var at := Crew.anchor_position("LOC-08", id, scene_id)
 			_check(Vector2(body.position.x - at.x, body.position.z - at.z).length() < 0.15, "%s %s placed at the scene anchor" % [scene_id, id])
 		_check(crew.get_children().filter(func(n): return n is PlayerController and n.visible).size() == crew.local_ids.size(), scene_id + " no hidden suited or unsuited twin is shown")
+		room.free()
+		await process_frame
+	for scene_id in BASE_SCENES:
+		var room_id := String(BASE_SCENES[scene_id])
+		var room := await _room(room_id)
+		var start: Array = Contract.anchors(room_id)[PLAYER_ANCHOR[room_id]]
+		var player := crew.place(scene_id, room, Vector3(start[0], start[1], start[2]))
+		for frame in 4:
+			await physics_frame
+		_check(room.scene_context() == scene_id and crew.local_ids.size() == 4, scene_id + " the four cadets are placed in " + room_id + "; Ferreira is on the Earth link")
+		for id in crew.local_ids:
+			var body: PlayerController = crew.bodies[id]
+			_check(not String(body.loaded_path).ends_with("_EVA.glb") and body.visible, "%s %s is home, unsuited" % [scene_id, id])
+			if body != player:
+				var at := Crew.anchor_position(room_id, id, scene_id)
+				_check(Vector2(body.position.x - at.x, body.position.z - at.z).length() < 0.15, "%s %s placed at the scene anchor" % [scene_id, id])
 		room.free()
 		await process_frame
 	crew.free()
@@ -704,6 +898,21 @@ const SHOTS := [
 	["EX-CH07-S12", "ch07_departure", "M3-105_CH07_S12_destination_boards"],
 	["EX-CH07-S12", "ch07_loadout", "M3-105_CH07_S12_loadout"],
 	["EX-CH08-S11", "boards", "M3-105_CH08_S11_five_home"],
+	["EX-CH04-S01", "ch04_s01_overview", "M3-4R_S01_garden", S01_CHOICES],
+	["EX-CH04-S01", "ch04_count", "M3-4R_S01_october_count", S01_CHOICES],
+	["EX-CH04-S01", "ch04_prediction", "M3-4R_S01_prediction_and_count", S01_CHOICES],
+	["EX-CH04-S01", "ch04_limits", "M3-4R_S01_what_the_sample_shows", S01_CHOICES],
+	["EX-CH04-S01", "ch04_checklist", "M3-4R_S01_rover_checklist", S01_CHOICES],
+	["EX-CH04-S10", "ch04_glovebox", "M3-4R_S10_dry_glovebox"],
+	["EX-CH04-S10", "ch04_lid", "M3-4R_S10_lid_inscription"],
+	["EX-CH04-S10", "ch04_manifest", "M3-4R_S10_manifest_cotton_note"],
+	["EX-CH04-S10", "ch04_survey_home", "M3-4R_S10_everyone_home"],
+	["EX-CH04-S11", "ch04_earth_desk", "M3-4R_S11_earth_desk_empty_chair"],
+	["EX-CH04-S11", "ch04_table_cards", "M3-4R_S11_inscription_and_claims"],
+	["EX-CH04-S12", "ch04_relief_notice", "M3-4R_S12_relief_flight"],
+	["EX-CH04-S12", "ch04_s12_table", "M3-4R_S12_table"],
+	["EX-CH04-S12", "ch04_fifth_locker", "M3-4R_S12_fifth_locker"],
+	["EX-CH04-S12", "ch04_care_bridge", "M3-4R_S12_days_in_between"],
 ]
 
 func _capture_all() -> void:
@@ -721,12 +930,16 @@ func _capture_all() -> void:
 				room.free()
 				await process_frame
 			room = await _room(Contract.room_for_scene(scene_id))
+			if shot.size() > 3 and shot[3] is Dictionary:
+				room.set_story_choices(shot[3])
 			var start: Array = Contract.anchors(room.room_id)[PLAYER_ANCHOR[room.room_id]]
 			crew.place(scene_id, room, Vector3(start[0], start[1], start[2]))
+			if shot.size() > 3 and shot[3] is Dictionary:
+				room.set_story_choices(shot[3])  # the crew placement stages the scene afresh; the echoes go on top
 			current = scene_id
 			for frame in 30:
 				await process_frame
-		if shot.size() > 3 and String(shot[3]) == "equalise":
+		if shot.size() > 3 and shot[3] is String and String(shot[3]) == "equalise":
 			room.garage().request_dock_cycle("habitat")  # the returning crew equalise the tunnel: pump hum and time card
 			room.garage().set_process(false)  # hold the cycle mid-way for the picture
 		var spec: Dictionary = Contract.staged_layout(room.room_id, scene_id).review_views.get(String(shot[1]), {})
@@ -946,6 +1159,8 @@ func _bounds(room: CampaignRoom, node: Node) -> AABB:
 	for mesh in meshes:
 		if (mesh as GeometryInstance3D).visibility_range_begin > 0.0 or not mesh.is_visible_in_tree() or mesh.name == "Edge" or mesh.get_viewport() != room.get_viewport():
 			continue
+		if String(mesh.get_parent().name) in ["PressureEnclosureFrame", "SelectionFrame"]:
+			continue  # a glass enclosure's outline is drawn 6 cm outside the glass; it is not a surface anything rests on
 		var local: AABB = room.global_transform.affine_inverse() * mesh.global_transform * mesh.get_aabb()
 		box = local if first else box.merge(local)
 		first = false
