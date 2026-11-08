@@ -5372,8 +5372,8 @@
    "priority": "P1",
    "tool": "any",
    "title": "Data cards and Journal Science: a Watch button that plays the card's science explainer",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/"
@@ -5381,7 +5381,7 @@
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-06.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-08",
    "prompt": "Why: Sadman's science explainers (M1-60, M3-68, M3-77: 17 clips, 34-45 s each) are registered in game/resources/campaign/content/explainers.json with 'sources' (NASA fixture ids) and 'used_by' (mission ids such as EX-M0101, puzzle ids). The hint player (M1-64) plays them as hint level 2, but a player reading a mission data card or Journal -> Science cannot watch them yet. Do: on a data card, show 'Watch: <explainer title>' for each explainer whose used_by contains the card's mission id or whose sources overlap the card's source_ids; play it in the same 16:9 card player as the hint player (captions are burned in; pause, replay, Esc closes; reduced motion shows a still). In Journal -> Science (M3-98), list every explainer the player has unlocked (its mission reached), grouped by chapter. Reuse UiDesign. Acceptance: EX-M0101's card offers the polar Sun, crew needs and solar power clips; run_tests.sh passes; screenshots production/qa/evidence/<task id>_*.png.",
    "reserved_for": "ramim",
    "effort": 2
@@ -5414,8 +5414,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Stop the 'no meta lla_fade' error in the HUD fade",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/"
@@ -5423,7 +5423,7 @@
    "refs": [],
    "note": "Filed by Sadman/night-claude2 on 2026-11-06 (first numbered M1-70; renumbered because main gave M1-70 to the data-card credit line).",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-08",
    "prompt": "Found during M1-06 windowed capture (production/qa/evidence/M1-06_capture.txt): starting chapter1_campaign.tscn logs 'ERROR: The object does not have any meta values with the key lla_fade' from _fade (game/scripts/ui/chapter1_campaign_hud.gd:962). In Godot 4.7 get_meta(key, null) still errors when the key is missing, because a null default counts as no default. Use control.get_meta(\"lla_fade\") only when control.has_meta(\"lla_fade\") (same for any other get_meta(..., null) in the HUD). Acceptance: the campaign starts with no get_meta error in the log; run_tests.sh passes.",
    "reserved_for": "ramim",
    "effort": 1
@@ -5540,8 +5540,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Keep dark text on focused gold title and briefing buttons",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/main_menu.gd"
@@ -5549,7 +5549,7 @@
    "refs": [],
    "note": "Filed by Tanvir/codex on 2026-11-06.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-08",
    "prompt": "M1-65 assisted QA on source 9fd29ef, Godot 4.7.2 Windows Compatibility at 1280x720: New Expedition starts with dark text, but keyboard-focused Enter Aurora and restored-focus New Expedition after closing 150% settings use light text on gold. Evidence: production/qa/evidence/M1-65_02_briefing.png and M1-65_05_title_large.png; harness production/qa/playtests/first_impressions/capture_m1_65.gd. Expected: primary action text remains readable at >=4.5:1 in normal, hover, pressed and keyboard-focus states, with a separate focus outline. Inspect main_menu.gd _button and inherited theme focus colours. Acceptance: keyboard Tab/Enter checks at 100% and 150%, focused screenshots of both buttons, existing UI suites and run_tests.sh pass. Preserve the primary action and focus order.",
    "reserved_for": "ramim",
    "effort": 2
@@ -5580,8 +5580,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Avoid missing fade metadata errors on the first campaign caption",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/chapter1_campaign_hud.gd"
@@ -5589,7 +5589,7 @@
    "refs": [],
    "note": "Filed by Tanvir/codex on 2026-11-06.",
    "evidence": "",
-   "updated": "2026-11-06",
+   "updated": "2026-11-08",
    "prompt": "M1-65 fresh production campaign capture on source 9fd29ef emits ERROR: The object does not have any meta values with the key lla_fade. Backtrace: chapter1_campaign_hud.gd:964 _fade, :721 _set_dialogue_visible, :715 _render_caption, :165 refresh_scene, chapter1_campaign.gd:136 _ready_incremental. Evidence production/qa/evidence/M1-65_capture.txt lines 732-739 and M1-65_07_arrival_dialogue.png; harness production/qa/playtests/first_impressions/capture_m1_65.gd uses real main with isolated saves. _fade calls get_meta with a null default on a control that has never faded. Expected: first-use controls need no existing tween metadata; guard missing metadata without changing cancellation or reduced motion. Acceptance: new campaign first caption and repeated show/hide produce no missing-meta errors, dialogue stays readable, run_tests.sh passes.",
    "reserved_for": "ramim",
    "effort": 2
@@ -6420,8 +6420,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Guard HUD world overlays while rebuilt player nodes leave the tree",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/chapter1_campaign_hud.gd"
