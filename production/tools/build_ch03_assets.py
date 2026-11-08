@@ -198,6 +198,19 @@ def flat(name, color, roughness=0.5, emission=None, alpha=None, metallic=0.0):
     return mat
 
 
+def dielectric(mat):
+    """A textured material with no metal in it (paper, plant tissue): Metallic becomes a constant 0 instead of the ORM's
+    blue channel, so the GLB carries metallicFactor 0. Wired to the texture, the exporter leaves the factor out (glTF
+    default 1.0) and Godot imports metallic 1.0 and roughness 1.0 times the map (M3-108). Roughness and occlusion
+    still come from the ORM's green and red channels."""
+    tree = mat.node_tree
+    socket = tree.nodes["Principled BSDF"].inputs["Metallic"]
+    for link in list(socket.links):
+        tree.links.remove(link)
+    socket.default_value = 0.0
+    return mat
+
+
 # ----------------------------------------------------------------------------------------------- shared helpers
 
 def reset_scene():
@@ -956,11 +969,10 @@ def build_petal():
     reset_scene()
     rng = np.random.default_rng(SEED + 2)
     images = petal_textures(rng, STAGE / "textures_petal")
-    table = {"Card": (K.pbr_material("M_Card", images[0]["Card"]), 0.09), "Petal": (K.pbr_material("M_Petal", images[0]["Petal"]), 0.0135),
+    table = {"Card": (dielectric(K.pbr_material("M_Card", images[0]["Card"])), 0.09), "Petal": (dielectric(K.pbr_material("M_Petal", images[0]["Petal"])), 0.0135),
              "Sleeve": (flat("M_Sleeve", (0.85, 0.90, 0.96), 0.08, alpha=0.16), 1.0), "Label": (flat("Label", (0.97, 0.97, 0.95), 0.55), 1.0),
              "Tape": (flat("M_Tape", (0.95, 0.93, 0.85), 0.7), 1.0), "ZeroNavy": (flat("M_ClipNavy", (0.122, 0.165, 0.267), 0.45), 1.0),
              "Steel": (flat("M_ClipSteel", (0.75, 0.76, 0.78), 0.35, metallic=1.0), 1.0)}
-    table["PaintGrey"] = table["ZeroNavy"]  # the kit's collision builder keys its boxes on PaintGrey
     for variant in ("flat", "mounted"):
         b = K.Builder(table)
         name = "PR_PressedPetal" if variant == "flat" else "PR_PressedPetal_Mounted"
@@ -1004,15 +1016,13 @@ def build_petal():
             holder.rotation_euler = (math.radians(-82), 0, 0)  # stands up, leaning back 8 degrees
             clip.parent = root
             parts = [card, petal, sleeve, holder, clip]
-            cols = [("Petal_Col-convcolonly", (0, 0.04, 0.006), (0.11, 0.08, 0.03))]
         else:
             for o in parts:
                 o.parent = root
-            cols = [("Petal_Col-convcolonly", (0, 0.002, 0), (SLEEVE_W, 0.004, SLEEVE_H))]
-        colliders = K.collision_objects(cols, card, table)
-        for c in colliders:
-            c.parent = root
-        objs = parts + colliders
+        # No collision hull (M3-108): rooms stage props through AssetGeometry.load_glb (GLTFDocument at runtime), which
+        # draws a -convcolonly box as a plain grey mesh over the sleeve; a 9-11 cm sleeve needs none (the bench and the
+        # board carry the room's obstacles).
+        objs = parts
         bpy.context.view_layer.update()
         K.bake_blender_space(objs)
         bpy.context.view_layer.update()

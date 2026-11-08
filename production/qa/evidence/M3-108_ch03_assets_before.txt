@@ -1,0 +1,7 @@
+FAIL tools/test_ch03_assets.gd :: exit 1 :: CH03 ASSETS RESULT: FAIL (328 checks, 8 failures)
+       FAIL PR_PressedPetal.glb: M_Card imports with metallic 0 and keeps its roughness map (paper and petal, not metal)
+       FAIL PR_PressedPetal.glb: M_Petal imports with metallic 0 and keeps its roughness map (paper and petal, not metal)
+       FAIL PR_PressedPetal.glb: M_Card is metallic 0 where the room draws it too (runtime GLB decode)
+       FAIL PR_PressedPetal.glb: M_Petal is metallic 0 where the room draws it too (runtime GLB decode)
+       FAIL PR_PressedPetal_Mounted.glb: M_Card imports with metallic 0 and keeps its roughness map (paper and petal, not metal)
+0/1 suites passed

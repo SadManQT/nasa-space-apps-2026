@@ -469,6 +469,10 @@ func _check_bridges(room: CampaignRoom, scene_id: String) -> void:
 				var case := staged.get_node("founder_case") as Node3D
 				_check(C7.count_seeds(case) == 30 and _text(staged, "seal_record_text").contains("FOUNDER RESERVE 30"), scene_id + " the thirty founder seeds remain sealed beside the seal record")
 				_check(staged.has_node("alo_petal") and not staged.has_node("alo_petal_sleeve"), scene_id + " the petal now hangs where it can be seen (S11 -> S12)")
+				# M3-108: the mounted sleeve's petal side is the kit's front (-Z); it must face the board's review view, not the board
+				var mount := staged.get_node("alo_petal") as Node3D
+				var eye := Presentation.vector(Contract.staged_layout(room.room_id, scene_id).review_views.lineage_board.from)
+				_check((-mount.global_basis.z).dot((eye - mount.global_position).normalized()) > 0.5, scene_id + " the pressed petal faces the garden, not the board")
 				_check(_has_material(staged.get_node("descendant_rack"), "M_Rack_Soil"), scene_id + " twelve planted positions on planting day")
 				_check(_text(staged, "rack_parent_line").contains("ALO × TARA") and _text(staged, "rack_position_1").contains("VERY IMPORTANT SCIENTIFIC PLANT"), scene_id + " parent line first, then Kai's name on position 1 (canon)")
 			12:

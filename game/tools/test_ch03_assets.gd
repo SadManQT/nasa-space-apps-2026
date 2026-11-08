@@ -8,6 +8,7 @@ extends SceneTree
 
 const Kit = preload("res://assets/environment/kit/habitat_kit.gd")
 const Helmet = preload("res://assets/props/PR_Helmet_Roles/helmet_roles.gd")
+const Geometry = preload("res://scripts/asset_geometry.gd")
 const EVIDENCE_DIR := "res://../production/qa/evidence/"
 const ANNEX_CATALOG := "res://assets/environment/EN_ZeroAnnex/annex.json"
 const ANNEX_IDS := ["EN_ZeroAnnex_FloorHatch", "EN_ZeroAnnex_Ladder", "EN_ZeroAnnex_Wall", "EN_ZeroAnnex_Wall_Corner", "EN_ZeroAnnex_Floor",
@@ -150,6 +151,16 @@ func _material_count(group: Node3D, prefix: String) -> int:
 			if material != null and material.resource_name.begins_with(prefix):
 				n += 1
 	return n
+
+## The first surface material named exactly `material_name` under `group`, or null.
+func _material(group: Node3D, material_name: String) -> BaseMaterial3D:
+	for child in group.find_children("*", "MeshInstance3D", true, false):
+		var mesh := child as MeshInstance3D
+		for surface in mesh.mesh.get_surface_count():
+			var material := mesh.get_active_material(surface) as BaseMaterial3D
+			if material != null and material.resource_name == material_name:
+				return material
+	return null
 
 func _test_moving_parts() -> void:
 	# Kit.place() needs a Node3D parent; the SceneTree root is a Window, so the pieces stand on a bare stage.
@@ -434,6 +445,24 @@ func _test_petal() -> void:
 				var material := mesh.get_active_material(surface) as StandardMaterial3D
 				transparent = transparent or (material != null and material.transparency != BaseMaterial3D.TRANSPARENCY_DISABLED)
 		_check(transparent, path.get_file() + ": the sleeve is a transparent material")
+		# M3-108: paper and petal are dielectrics; a textured material without metallicFactor imported as metallic 1.0
+		for paper_name in ["M_Card", "M_Petal"]:
+			var paper := _material(node, paper_name)
+			_check(paper != null and is_zero_approx(paper.metallic) and paper.roughness_texture != null,
+				"%s: %s imports with metallic 0 and keeps its roughness map (paper and petal, not metal)" % [path.get_file(), paper_name])
+		# M3-108: rooms decode staged props at runtime (AssetGeometry.load_glb), where a -colonly hull is a drawn grey mesh
+		var staged := Geometry.load_glb(path)
+		var bare := 0
+		for child in staged.find_children("*", "MeshInstance3D", true, false):
+			var drawn := child as MeshInstance3D
+			for surface in drawn.mesh.get_surface_count():
+				bare += 1 if drawn.get_active_material(surface) == null else 0
+		_check(bare == 0, path.get_file() + ": every surface a room draws has its material (no grey collision hull over the sleeve)")
+		for paper_name in ["M_Card", "M_Petal"]:
+			var drawn_paper := _material(staged, paper_name)
+			_check(drawn_paper != null and is_zero_approx(drawn_paper.metallic),
+				"%s: %s is metallic 0 where the room draws it too (runtime GLB decode)" % [path.get_file(), paper_name])
+		staged.free()
 		if path == PETAL_MOUNTED:
 			_check(node.find_children("Clip", "MeshInstance3D", true, false).size() == 1 and node.find_children("SleeveStand", "Node3D", true, false).size() == 1, "mounted variant stands the sleeve in a board clip")
 		node.free()

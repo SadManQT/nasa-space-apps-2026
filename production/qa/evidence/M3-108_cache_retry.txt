@@ -1,0 +1,2 @@
+ok   tools/test_care_round_panel.gd :: CARE ROUND PANEL RESULT: PASS (32 checks, 0 failures)
+1/1 suites passed

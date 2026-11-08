@@ -6176,8 +6176,8 @@
    "priority": "P2",
    "tool": "claude",
    "title": "Pressed-petal props: card and petal import as fully metallic, so they render dull grey",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/assets/props/PR_PressedPetal_Mounted/",
@@ -6185,8 +6185,8 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07.",
-   "evidence": "",
-   "updated": "2026-11-07",
+   "evidence": "Night-shift fix (Codex, parked on night/M3-108 when its reviewer hit the usage limit) landed and verified by Sadman/claude: build_ch03_assets.py exports M_Card and M_Petal with metallic 0; PR_PressedPetal_Mounted.glb and PR_PressedPetal.glb re-exported. Verified: M3-108 MATERIAL PROBE PASS (16 checks), M3-108 PETAL CAPTURE PASS (23 checks; mustard pixels at the S11 review view), test_ch03_assets PASS (328), test_chapter3_rooms PASS, M3-3R capture rerun PASS (250). Screenshots production/qa/evidence/M3-108_S11_review_view(.png,_zoom.png), M3-108_S11_petal_closeup.png, M3-108_S12_board_petal_and_tara.png, M3-108_S10_bench_sleeve.png; retaken M3-3R_S11_petal_on_board.png and M3-3R_S12_lineage_board.png. The capture script now ignores test_ch03_assets.gd's one expected HelmetRoles unknown-role error. Left out of the port: a stray game/Godot/editor_settings-4.7.tres and the branch's stale board files.",
+   "updated": "2026-11-08",
    "prompt": "Found in the M3-3R screenshot review (production/qa/evidence/M3-3R_S11_petal_on_board.png, M3-3R_S12_lineage_board.png). In game/assets/props/PR_PressedPetal_Mounted/PR_PressedPetal_Mounted.glb the materials M_Card and M_Petal import with metallic 1.0 and roughness 1.0 (the glTF default metallicFactor when the exporter leaves it out), so Alo's mounted petal on the lineage board (LOC-03 layer ch03_lineage_board, EX-CH03-S11 on) shows a dull grey card and a dark 12 mm petal instead of paper and a mustard petal. M_Sleeve (alpha 0.16) and the clip are fine. Re-export with metallic 0 on the paper and petal materials (check PR_PressedPetal, the bench sleeve used at EX-CH03-S10, for the same fault), re-run the asset gate, and retake the two M3-3R shots with production/qa/evidence/M3-3R_capture.sh. Acceptance: probe the imported materials (metallic 0 on M_Card and M_Petal), the petal reads as a pressed mustard petal on the lineage board at the review view, game/tools/run_tests.sh passes.",
    "reserved_for": "sadman",
    "effort": 1
