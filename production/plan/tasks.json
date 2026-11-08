@@ -5874,8 +5874,8 @@
    "priority": "P2",
    "tool": "claude",
    "title": "Open the back of EN_Airlock_GlovePort so its window sees Alo's chamber",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [
     "M3-2R"
    ],
@@ -5886,7 +5886,7 @@
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07.",
    "evidence": "",
-   "updated": "2026-11-07",
+   "updated": "2026-11-08",
    "prompt": "Found by M3-2R (7 Nov night shift; filed as M3-102 on the parked branch, but main's M3-102 is the anti-aliasing task, so it is refiled here): EN_Airlock_GlovePort reuses the kit window frame and closes its back face with one 1.0 x 2.6 m plate (two triangles at local z 0.15, material M_Kit_PaintGrey, drawn double-sided), so the pressure window shows grey paint instead of the sealed plant chamber the asset notes promise. LOC-05 drops that plate from its placed copy at runtime (HabitatRoomBuilder.open_window_back in game/scripts/world/habitat_room_builder.gd, called from build_airlock for the \"glove_ports\" role), and game/tools/test_chapter2_rooms.gd checks that a 1.6 m eye at the glove-port station sees Alo's flowers through glass only. Fix it at the source: in production/tools/build_chapter2_assets.py leave the back of the GlovePort module open (or cut the window opening through the plate), rebuild both LODs (byte-check that the other pieces stay identical), re-run the M3-2A gate (production/tools/verify_gate.py) and its capture, then remove open_window_back and its call so the room uses the GLB as built. This changes an approved asset, so show Sadman the before/after M3-2A_godot_* and M3-2R_S04_alo_glove_ports screenshots. Optional while there: the two bright ovals in the pressure glass are ceiling lights mirrored at roughness 0.05; a slightly rougher glass would soften them. Acceptance: game/tools/run_tests.sh all suites pass; test_chapter2_rooms.gd still passes its Alo-through-glass check without the runtime opening.",
    "reserved_for": "sadman",
    "effort": 1
@@ -5937,8 +5937,8 @@
    "priority": "P0",
    "tool": "any",
    "title": "Authored work lighting for terrain-backed cold-trap rooms",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [],
    "paths": [
     "game/scripts/world/",
@@ -5947,7 +5947,7 @@
    "refs": [],
    "note": "Filed by atik/codex on 2026-11-07.",
    "evidence": "",
-   "updated": "2026-11-07",
+   "updated": "2026-11-08",
    "prompt": "M1-36 adoption check after M1-82/M1-88: both LOC-09/CH04S04 and LOC-10/CH04S06 have real dated Sun rows marked dark (Sun ~1.6deg but below local terrain). CampaignRoom terrain_ground explicitly removes RoomLighting, so adopting ready terrain makes the staged work area and physical puzzle targets black. M1-82 capture script compensates with an optional diagnostic OmniLight3D (shot[2], work.light_energy=3, range40); that light is not part of the room contract/game. Please supply owner-approved visible practical work-light/rover/hand-light placement and actual light sources in these staged vacuum rooms, with terrain-ready positions and shadows, linked to real approved props. Publish a room/staging hook/ready flag Atik can trust before switching production to the terrain provider. Preserve hard Sun/black sky/no ambient fill and all doors/targets/collision. Verify target readability and approach walking in the real dated scene without the capture-only Omni, in Forward+ and Compatibility, with screenshots. Do not edit Atik terrain/campaign. Atik has a tested composition helper ready but will not replace playable staging with an unlit work area. Relay-road geometry remains separate M1-87.",
    "reserved_for": "sadman",
    "effort": 2
