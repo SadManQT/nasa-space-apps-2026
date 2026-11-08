@@ -6720,7 +6720,7 @@
    "priority": "P2",
    "tool": "claude",
    "title": "Keep the routed relay-road spurs when build_chapter8_assets.py re-runs",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -6729,7 +6729,7 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-09.",
-   "evidence": "",
+   "evidence": "road_data.py spur() routes R1-R3 (make_terrain dijkstra_route + path_profile, 12/15 deg, bbox+1200 m, 3x3 goal); builder spurs_note updated; re-run replay gives relay_road.json repeaters byte-identical to M4-13; chapter8 2/2, full 75/75 suites passed",
    "updated": "2026-11-09",
    "prompt": "M4-13 routed the R1-R3 road-to-pad spurs on the 10 m LOLA tiles and stored them (lola_10m.spur: method, length, climb, max slope, steepest_20m_deg, straight_line_before, 10 m points) plus a new spurs_note in game/assets/environment/EN_RelayRoad/relay_road.json. build_chapter8_assets.py (spurs_note at line ~592) and road_data.py ten_metre().profile still produce the old straight-line spur data, so a re-run would undo it. Move the routing into road_data.py (make_terrain.dijkstra_route on pgda90_10mpp, window = spur bbox + 1200 m, goal = 3x3 cells round the pad, limit 12 deg, hard 15 deg only if no path; then path_profile) and drop the stale spurs_note in the builder; re-run and confirm relay_road.json is unchanged; test_chapter8_assets.gd must stay green.",
    "reserved_for": "sadman",

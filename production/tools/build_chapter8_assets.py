@@ -589,7 +589,7 @@ def road_catalogue(entries):
         service_pad=dict(at="R2 (marker two)", size_m=[20, 15], pieces=["EN_RelayRoad_Repeater", "EN_MalapertSummit_TetherAnchor", "EN_MalapertSummit_PerimeterMarker x8"],
                          guide_lights=dict(piece="EN_RelayRoad_GuideLight", spacing_m=18, offset_m=3.4, alternate_sides=True),
                          bypass=dict(pieces=["EN_RelayRoad_TurnbackBarrier", "EN_RelayRoad_SlopeSign"], rule="closes the unsupported cliff bypass (S03); the shortcut's slope is a hard boundary")),
-        spurs_note="The straight lines from the road to the pads cross 15-25 deg stretches on the 10 m grid (lola_10m.spur.steepest_20m_deg), so each playable spur must follow a slope-limited path (<= 12 deg, 15 deg hard), routed on the 10 m tiles when the walkable patches are cut (M1-87 / M3-8R).",
+        spurs_note="Each repeater spur (lola_10m.spur) is routed on the 10 m LOLA tiles (M4-13) and stays within the road's 12 deg limit (slope_deg is the full cell gradient, so cross-slope is bounded too); R3 leaves the road on a 12.1 deg cell for 20 m, inside the 15 deg hard limit. The paths contour round the 15-25 deg stretches the straight lines crossed (straight_line_before), so each is 5-20 % longer.",
         lighting="EX-CH08-S03 and S04 are dark (sun_positions.json relay_road_mid rows): rover lights (VH_Rover_Lit.tscn eva_stop state), guide lights and suit lamps only; faint stars only in frames with no sunlit ground (ART_BIBLE 2, 7 Nov 2026)",
         ten_metre_tiles="production/terrain/cache/pgda90_10mpp/t_0026_0035, t_0027_0035, t_0031_0037, t_0031_0038, t_0032_0037, t_0036_0037, t_0036_0038 (LDEM_83S_10MPP_ADJ, fetched 7 Nov 2026 for M3-8A; decision 9)",
         pieces=entries)

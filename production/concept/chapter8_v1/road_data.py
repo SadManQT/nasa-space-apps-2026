@@ -61,8 +61,41 @@ def ten_metre(segs, pads, at):
         h, smax, smed = sample(p["x"], p["y"])
         road_pt = at(p["road_m"])
         out["pads"][f"R{k}"] = {"height_m": round(h, 1), "slope_max_deg_60m": round(smax, 1), "slope_median_deg_60m": round(smed, 1),
-                                "spur": profile(road_pt[0], road_pt[1], p["x"], p["y"])}
+                                "spur": spur(road_pt, p, profile(road_pt[0], road_pt[1], p["x"], p["y"]))}
     return out
+
+
+def spur(rp, pad, straight, limit=12.0, hard=15.0):
+    """M4-13: the road-to-pad spur routed on the 10 m tiles with the road's own limits (12 deg, 15 deg hard only if
+    no gentler way exists): make_terrain.dijkstra_route in a window of the spur's bounding box + 1200 m, goal the
+    3x3 cells round the pad, then path_profile. straight: the straight-line profile it replaces."""
+    cx, cy = (rp[0] + pad["x"]) / 2, (rp[1] + pad["y"]) / 2
+    a, g = mt.window_m("pgda90_10mpp", cx, cy, max(abs(rp[0] - pad["x"]), abs(rp[1] - pad["y"])) + 1200.0)
+    h, m = mt.fill_nan(a.astype(np.float64)), g["mpp"]
+
+    def rc(x, y):
+        return int(round((g["origin_y_m"] - y) / m)), int(round((x - g["origin_x_m"]) / m))
+
+    pr, pc = rc(pad["x"], pad["y"])
+    goals = np.zeros(h.shape, bool)
+    goals[pr - 1:pr + 2, pc - 1:pc + 2] = True
+    path, _ = mt.dijkstra_route(h, m, rc(rp[0], rp[1]), goals, limit)
+    used_hard = path is None
+    if used_hard:
+        path, _ = mt.dijkstra_route(h, m, rc(rp[0], rp[1]), goals, limit, hard_limit=hard)
+    prof = mt.path_profile(path, h, m, g, limit)
+    pts = prof["points"]
+    steepest = 0.0  # steepest climb over any 20 m of path (the same reading as test_chapter8_assets.gd)
+    for i, a0 in enumerate(pts):
+        j = next((j for j in range(i + 1, len(pts)) if pts[j][3] - a0[3] >= 20.0), None)
+        if j is not None:
+            steepest = max(steepest, math.degrees(math.atan(abs(pts[j][2] - a0[2]) / (pts[j][3] - a0[3]))))
+    return {"method": "make_terrain.py dijkstra_route on the cached 10 m tiles (pgda90_10mpp), road point to pad, 12 deg limit; "
+                      "15 deg hard limit only where no gentler way exists (as the relay road itself)",
+            "from_road_m": rp[3], "length_m": prof["length_m"], "climb_m": prof["climb_m"], "descent_m": prof["descent_m"],
+            "max_slope_deg": prof["max_slope_deg"], "steepest_20m_deg": round(steepest, 1),
+            "length_over_12_deg_m": prof["length_over_limit_m"], "hard_limit_used": used_hard, "straight_line_before": straight,
+            "columns": prof["columns"], "points": pts}
 
 
 def main():
