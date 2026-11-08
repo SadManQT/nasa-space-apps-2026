@@ -5809,7 +5809,7 @@
    "tool": "claude",
    "title": "Walkable 10 m relay-road patch so LOC-11 can stand on the LOLA terrain",
    "status": "in_progress",
-   "owner": "Sadman/antigravity",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "production/terrain/",
