@@ -6525,8 +6525,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Publish P03/P04 authored data for Ramim Chapter 2 panels",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/resources/campaign/content/p03_pollination.json",
