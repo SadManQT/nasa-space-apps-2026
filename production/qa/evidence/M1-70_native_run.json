@@ -23,7 +23,18 @@
   "visual_review": "Both final PNGs inspected by implementing agent; complete supplied credit readable at both scales; Close focus ring and Back to all sources visible; preceding source text scrolls normally",
   "commit_title_reword": {
     "original_source_commit": "258d946989e8435c01a3773f7da432adad1d4254",
-    "published_equivalent_source_commit": "1fc5b9e3e1490ef647df4fa0825c33a5dc03e756",
-    "verification": "Unpublished commit titles only; all three complete git trees are byte-identical. Original capture source fingerprint is retained."
+    "verification": "Unpublished commit titles only; all three complete git trees are byte-identical. Original capture source fingerprint is retained.",
+    "title_equivalent_source_commit": "1fc5b9e3e1490ef647df4fa0825c33a5dc03e756"
+  },
+  "upstream_integration": {
+    "base": "aa2e8779017b3742a68fe0f65b8a217d9d6ad792",
+    "equivalent_task_source_commit": "592b6b9874fb627c345f2c95861078ee62801dc8",
+    "game_tree_after_sync": "5dc82dd52c04ba846cc754d683ee15c299c3813e",
+    "task_source_paths_byte_identical": [
+      "game/scripts/ui/campaign_panels.gd",
+      "game/tools/test_science_data.gd",
+      "game/tools/test_player_text.gd"
+    ],
+    "scope": "Images retain their actual earlier source fingerprint; only unrelated team world/assets changed. Post-pull focused Science Data passed 206/0; no post-pull full pass claimed."
   }
 }

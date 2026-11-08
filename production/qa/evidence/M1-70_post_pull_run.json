@@ -1,0 +1,10 @@
+{
+  "source": "c9beddbeef9a51bd6751675ce4303212261b9c3a",
+  "game_tree": "5dc82dd52c04ba846cc754d683ee15c299c3813e",
+  "command": "GODOT=<Windows 4.7.2 executable> TEST_LOG_DIR=<retained directory> bash game/tools/run_tests.sh science_data",
+  "started_utc": "2026-11-08T10:37:07.830675+00:00",
+  "ended_utc": "2026-11-08T10:37:39.496432+00:00",
+  "elapsed_seconds": 31.666,
+  "exit_code": 0,
+  "scope": "Current focused integration check after team Noor/garage updates; prior full69/70 remains separately source-qualified."
+}
