@@ -6399,8 +6399,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate Windows campaign-media voice readiness failure",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/copilot",
    "deps": [],
    "paths": [
     "game/scripts/audio/",
