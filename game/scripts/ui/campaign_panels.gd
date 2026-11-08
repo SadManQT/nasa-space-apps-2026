@@ -690,6 +690,8 @@ func _restore_focus(candidate: Control) -> void:
 	if _can_restore_focus(candidate) and not _is_panel_descendant(candidate):
 		candidate.grab_focus()
 		return
+	if _focused_control() != null:
+		return
 	if get_viewport() != null:
 		get_viewport().gui_release_focus()
 

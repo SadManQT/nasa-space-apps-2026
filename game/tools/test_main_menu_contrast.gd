@@ -16,7 +16,27 @@ func _init() -> void:
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
 	root.content_scale_size = root.size
+	var director := preload("res://scripts/core/campaign_director.gd").new()
+	director.new_campaign(preload("res://scripts/content/content_loader.gd").EXPECTED_CONTENT_REVISION)
+	var route := preload("res://scripts/missions/chapter1_route.gd").new(director)
+	var saved: Dictionary = route.director().snapshot()
+	saved["route_runtime"] = route.snapshot()
+	var saves := preload("res://scripts/save/save_service.gd").new()
+	saves.session_validator = preload("res://scripts/campaign/chapter1_campaign.gd").restore_session
+	var written := saves.save(saved, storage.path)
+	_check(written.get("accepted", false), "real resumable checkpoint fixture")
+	if not written.get("accepted", false):
+		push_error(str(written))
+		storage.cleanup()
+		quit(1)
+		return
+	saved = saves.load(storage.path).snapshot
 	for large in [false, true]:
+		saved.accessibility.large_text = large
+		saved.accessibility.reduced_motion = large
+		_check(saves.save(saved, storage.path).get("accepted", false), "checkpoint preferences match text scale")
+		saved = saves.load(storage.path).snapshot
+		var saved_bytes := FileAccess.get_file_as_bytes(storage.path)
 		var menu: MainMenu = load("res://scenes/ui/main_menu.tscn").instantiate()
 		root.add_child(menu)
 		menu.setup({})
@@ -24,6 +44,7 @@ func _run() -> void:
 		await process_frame
 		await process_frame
 		var suffix := "150" if large else "100"
+		await _continue_navigation(menu, saved, suffix)
 		_mouse(Vector2(1, 1))
 		await process_frame
 		await _states(menu._begin_button, "title_" + suffix)
@@ -76,9 +97,62 @@ func _run() -> void:
 		await _states(secondary, "secondary_" + suffix)
 		menu.free()
 		await process_frame
+		_check(FileAccess.get_file_as_bytes(storage.path) == saved_bytes, "menu navigation never rewrites the checkpoint " + suffix)
 	storage.cleanup()
 	print("MAIN MENU CONTRAST RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
+
+func _continue_navigation(menu: MainMenu, saved: Dictionary, suffix: String) -> void:
+	_mouse(Vector2(1, 1))
+	var next := menu.find_child("MissionTrainerEntry", true, false) as Button
+	_check(menu._continue_button.disabled and menu._continue_button.focus_mode == Control.FOCUS_NONE, "unavailable Continue excluded from focus " + suffix)
+	menu._begin_button.grab_focus()
+	_key(KEY_TAB)
+	await process_frame
+	_check(root.gui_get_focus_owner() == next, "Tab skips unavailable Continue " + suffix)
+	await _contrast(next, "normal", "skip_continue_" + suffix + "_focus", true)
+	_key(KEY_TAB, true)
+	await process_frame
+	_check(root.gui_get_focus_owner() == menu._begin_button, "Shift Tab skips unavailable Continue " + suffix)
+	menu.setup(saved)
+	menu._begin_button.grab_focus()
+	_key(KEY_TAB)
+	await process_frame
+	_check(not menu._continue_button.disabled and root.gui_get_focus_owner() == menu._continue_button, "real checkpoint restores Continue focus " + suffix)
+	await _contrast(menu._continue_button, "normal", "continue_" + suffix + "_focus", true)
+	var continued: Array = []
+	menu.continue_requested.connect(func(): continued.append(true))
+	_key(KEY_ENTER)
+	await process_frame
+	_check(continued.size() == 1, "enabled Continue emits once " + suffix)
+	menu.setup({})
+	await process_frame
+	_check(root.gui_get_focus_owner() == menu._begin_button, "lost checkpoint moves focus to New Expedition " + suffix)
+	for modal in ["briefing", "science", "settings"]:
+		for available in [false, true]:
+			menu.setup({} if available else saved)
+			(menu._begin_button if available else menu._continue_button).grab_focus()
+			match modal:
+				"briefing": menu._show_briefing()
+				"science": menu.open_science()
+				"settings": menu.open_panel("settings_accessibility")
+			await process_frame
+			menu.setup(saved if available else {})
+			_check(menu._continue_button.disabled and menu._continue_button.focus_mode == Control.FOCUS_NONE, modal + " refresh keeps background disabled " + suffix)
+			match modal:
+				"briefing": menu._hide_briefing()
+				"science": menu.close_science()
+				"settings": menu._panels.close_panel()
+			await process_frame
+			_check(menu._continue_button.disabled == (not available) and menu._continue_button.focus_mode == (Control.FOCUS_ALL if available else Control.FOCUS_NONE), modal + " restores current availability " + suffix)
+			_check(root.gui_get_focus_owner() == menu._begin_button, modal + " restores valid title focus " + suffix)
+			_key(KEY_TAB)
+			await process_frame
+			_check(root.gui_get_focus_owner() == (menu._continue_button if available else next), modal + " Tab uses current availability " + suffix)
+	_check(continued.size() == 1, "unavailable Continue never emits " + suffix)
+	menu.setup({})
+	menu._begin_button.grab_focus()
+	await process_frame
 
 func _states(button: Button, label: String) -> void:
 	_mouse(Vector2(1, 1))
@@ -144,7 +218,7 @@ func _contrast(button: Button, state: String, label: String, focused: bool) -> v
 		_check(_ratio(ink, pixel) >= 4.5, "%s native fill/text contrast %.2f >= 4.5" % [label, _ratio(ink, pixel)])
 		print("M1-75 STATE: %s font=%s pixel=%s ratio=%.2f" % [label, ink.to_html(), pixel.to_html(), _ratio(ink, pixel)])
 		if label.ends_with("_focus") or label.begins_with("restored_"):
-			_check(image.save_png(ProjectSettings.globalize_path("res://../production/qa/evidence/M1-75_%s.png" % label)) == OK, "saved " + label)
+			_check(image.save_png(ProjectSettings.globalize_path("res://../production/qa/evidence/M1-109_%s.png" % label)) == OK, "saved " + label)
 
 func _ratio(a: Color, b: Color) -> float:
 	var x := a.srgb_to_linear().get_luminance()

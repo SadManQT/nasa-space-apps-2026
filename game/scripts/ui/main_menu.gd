@@ -54,7 +54,16 @@ func setup(save_state: Dictionary) -> void:
 	if _continue_button == null:
 		return
 	var has_save := not save_state.is_empty()
-	_continue_button.disabled = not has_save
+	var continue_focus := Control.FOCUS_ALL if has_save else Control.FOCUS_NONE
+	if _modal_states.has(_continue_button):
+		var state: Dictionary = _modal_states[_continue_button]
+		state["disabled"] = not has_save
+		state["focus_mode"] = continue_focus
+	else:
+		if not has_save and _continue_button.has_focus() and _can_restore_focus(_begin_button):
+			_begin_button.grab_focus()
+		_continue_button.disabled = not has_save
+		_continue_button.focus_mode = continue_focus
 	_continue_button.text = "CONTINUE EXPEDITION" if has_save else "CONTINUE · NO CHECKPOINT"
 	_save_note.text = "Verified checkpoint: %s" % String(save_state.get("checkpoint_id", "Chapter 1")) if has_save else "No saved expedition yet. New Expedition is always safe to start."
 	_save_note.modulate = IVORY if has_save else MUTED
