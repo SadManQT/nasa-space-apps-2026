@@ -7,6 +7,8 @@ var checks := 0
 var failures := 0
 
 func _init() -> void:
+	if OS.get_cmdline_user_args().has("--credit-evidence"):
+		CampaignCutscenePlayer.autoplay = false
 	call_deferred("_run")
 
 func _run() -> void:
