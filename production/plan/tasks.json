@@ -6720,8 +6720,8 @@
    "priority": "P2",
    "tool": "claude",
    "title": "Keep the routed relay-road spurs when build_chapter8_assets.py re-runs",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "production/tools/build_chapter8_assets.py",
