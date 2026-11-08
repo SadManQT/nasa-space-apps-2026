@@ -27,3 +27,9 @@ PR_ImpactMonitor,concept/ch05_assets/M3-5A_impact_monitor_v1.png,--height,0.562,
 PR_DocumentSleeve,concept/ch05_assets/M3-5A_bridge_props_v1.png,--longest,0.335,1000,1024,sealed A4 document sleeve; hinged Lid + Seal + Label live-text window (Blender procedural; M3-5A); CH05-S02 to S03 bridge
 PR_Records2034,concept/ch05_assets/M3-5A_bridge_props_v1.png,--longest,0.503,5000,1024,four 2034 records under clear weights; Page_* live-text slots incl. Page_EvacuationOrder_Back (clue 18) (Blender procedural; M3-5A); CH05-S03 clue 17 and D9
 PR_MarkerTape,concept/ch05_assets/M3-5A_bridge_props_v1.png,--longest,0.0975,2000,1024,Kai's orange 19 mm marker tape: Roll + Strip with Socket_Cable (Blender procedural; M3-5A); CH05 to CH06-S01 bridge
+PR_RelayCrate,concept/ch05_assets/build_ch05_fixture_props.py,--height,0.506,7240,1024,replacement relay-controller crate; hinged Lid (open = rotation_degrees -90 X) / foam / controller and coiled cable inside (Blender procedural; M4-09); CH05 spare locker / records desk / corridor
+PR_CleaningKit,concept/ch05_assets/build_ch05_fixture_props.py,--longest,0.336,1752,1024,panel-cleaning kit case with soft brush and wipes pack (Blender procedural; M4-09); CH05-S08
+PR_SpurPatchKit,concept/ch05_assets/build_ch05_fixture_props.py,--longest,0.404,2736,1024,spur patch kit / signal-orange hard case (Blender procedural; M4-09); CH05-S08
+PR_Tablet,concept/ch05_assets/build_ch05_fixture_props.py,--longest,0.266,952,1024,rugged tablet with a Screen slot: message composer (S11) and report receipts (S10) (Blender procedural; M4-09)
+PR_SignedPage,concept/ch05_assets/build_ch05_fixture_props.py,--longest,0.297,768,1024,Noor's signed identity page / A4 with portrait frame and signature scribble / no letters (Blender procedural; M4-09); CH05-S10
+PR_WatchDesk,concept/ch05_assets/build_ch05_fixture_props.py,--height,1.02,1220,1024,corridor watch stand-up desk (Blender procedural; M4-09); LOC-02 CH05

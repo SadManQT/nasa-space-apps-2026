@@ -2657,36 +2657,6 @@
    "about": "Ferreira's corridor watch (EX-CH05-S01 canon: she takes the corridor watch instead of a chair): her locker shelf, where in S02 she leaves the sealed document sleeve from her relief cargo unopened (doc 24 2.9 S02 -> S03: on 14 Dec she brings it to the table), a standing watch desk on the aisle wall by the Commons door, her watch log (EX-CH05-S02: she checks a label, writes the time, waits for the next reading; her round passes the annex hatch N.R., doc 24 3.5 F11) and, from S06 until she brings it back to the table in S11, her mug (EX-CH05-S06 canon: 'Ferreira takes her mug back to the watch station').",
    "fixtures": [
     {
-     "id": "watch_desk",
-     "position": [
-      -1.6,
-      1.0,
-      3.7
-     ],
-     "size": [
-      0.8,
-      0.04,
-      0.45
-     ],
-     "color": "#4a5566",
-     "transparent": false
-    },
-    {
-     "id": "watch_desk_post",
-     "position": [
-      -1.6,
-      0.49,
-      3.8
-     ],
-     "size": [
-      0.3,
-      0.98,
-      0.22
-     ],
-     "color": "#4a5566",
-     "transparent": false
-    },
-    {
      "id": "watch_log",
      "position": [
       -1.75,
@@ -2826,6 +2796,25 @@
       1
      ],
      "until": "EX-CH05-S02"
+    },
+    {
+     "id": "watch_desk",
+     "path": "res://assets/props/PR_WatchDesk/PR_WatchDesk.glb",
+     "position": [
+      -1.6,
+      0.0,
+      3.7
+     ],
+     "rotation_degrees": [
+      0,
+      180,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
     }
    ],
    "obstacles": [
@@ -3056,7 +3045,8 @@
       0.75
      ]
     }
-   }
+   },
+   "fixtures": []
   },
   {
    "id": "ch05_spare_arrives",
@@ -3065,26 +3055,11 @@
    "about": "EX-CH05-S02 (doc 22 7.1 clue 3): the replacement relay controller sits in its sealed crate in the corridor; Rafi reads its serial against the received manifest clipped to the lid, Kai checks that its service diagram is saved locally, and the facts go on the inventory board: one spare, stored once (in the Commons spare locker), needing a compatible housing, an isolation procedure and a crew who know where it is. The spare does not fix anything by arriving.",
    "fixtures": [
     {
-     "id": "corridor_crate",
-     "position": [
-      -4.4,
-      0.25,
-      3.35
-     ],
-     "size": [
-      0.6,
-      0.5,
-      0.5
-     ],
-     "color": "#2b3a4f",
-     "transparent": false
-    },
-    {
      "id": "corridor_crate_label",
      "position": [
       -4.4,
       0.3,
-      3.099
+      3.118
      ],
      "size": [
       0.42,
@@ -3135,7 +3110,7 @@
      "position": [
       -4.4,
       0.3,
-      3.0965
+      3.1155
      ],
      "size": 0.00042,
      "outline": 0,
@@ -3284,7 +3259,28 @@
       4.0
      ]
     }
-   }
+   },
+   "props": [
+    {
+     "id": "corridor_crate",
+     "path": "res://assets/props/PR_RelayCrate/PR_RelayCrate.glb",
+     "position": [
+      -4.4,
+      0.0,
+      3.35
+     ],
+     "rotation_degrees": [
+      0,
+      180,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ]
   },
   {
    "id": "ch05_maintenance",
@@ -3355,21 +3351,6 @@
      "finish": "satin"
     },
     {
-     "id": "cleaning_kit",
-     "position": [
-      -1.96,
-      0.81,
-      -1.78
-     ],
-     "size": [
-      0.3,
-      0.14,
-      0.2
-     ],
-     "color": "#d8dde3",
-     "transparent": false
-    },
-    {
      "id": "spur_trace_post",
      "position": [
       2.65,
@@ -3399,21 +3380,6 @@
      "color": "#0b1220",
      "transparent": false,
      "finish": "screen"
-    },
-    {
-     "id": "spur_patch_kit",
-     "position": [
-      2.85,
-      0.1,
-      -1.0
-     ],
-     "size": [
-      0.36,
-      0.2,
-      0.26
-     ],
-     "color": "#F26B21",
-     "transparent": false
     },
     {
      "id": "enclosure_tag",
@@ -3655,7 +3621,47 @@
       -1.5
      ]
     }
-   }
+   },
+   "props": [
+    {
+     "id": "cleaning_kit",
+     "path": "res://assets/props/PR_CleaningKit/PR_CleaningKit.glb",
+     "position": [
+      -1.96,
+      0.74,
+      -1.78
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "id": "spur_patch_kit",
+     "path": "res://assets/props/PR_SpurPatchKit/PR_SpurPatchKit.glb",
+     "position": [
+      2.85,
+      0.0,
+      -1.0
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ]
   },
   {
    "id": "ch07_fabrication",

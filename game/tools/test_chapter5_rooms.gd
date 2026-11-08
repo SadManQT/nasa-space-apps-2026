@@ -351,7 +351,8 @@ func _check_bridges(room: CampaignRoom, scene_id: String) -> void:
 			6:
 				_check(_text(staged, "procedure_screen_text").contains("OPENS WITHOUT EARTH"), scene_id + " the replacement procedure opens without Earth (S06 -> S07)")
 				_check(_text(staged, "relay_diagram_2034_text").contains("ISOLATION POINTS") and _text(staged, "service_card_text").contains("RC-0417"), scene_id + " the old relay diagram beside the spare's service card")
-				_check(staged.has_node("spare_crate_lid") and _text(staged, "kai_note_text").contains("CHECK EVERY CONNECTOR"), scene_id + " Kai's signed note clipped inside the open crate, the controller still packed")
+				var crate_lid: Node3D = staged.get_node("spare_crate").find_child("Lid", true, false) as Node3D if staged.has_node("spare_crate") else null
+				_check(crate_lid != null and absf(crate_lid.rotation_degrees.x + 90.0) < 1.0 and _text(staged, "kai_note_text").contains("CHECK EVERY CONNECTOR"), scene_id + " Kai's signed note clipped inside the open crate, the controller still packed")
 				_check(_text(staged, "mei_question_text").contains("WHO WROTE N.") and staged.has_node("current_garden_photo"), scene_id + " Mei's question beside a current photograph")
 			7:
 				var monitor := staged.get_node_or_null("impact_monitor") as Node3D

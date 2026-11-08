@@ -1072,7 +1072,8 @@
      0,
      -2.75
     ]
-   }
+   },
+   "fixtures": []
   },
   {
    "id": "ch05_d9_ascent_manifest",
@@ -1533,22 +1534,6 @@
      "finish": "satin"
     },
     {
-     "id": "spare_crate",
-     "position": [
-      4.65,
-      0.31,
-      -5.74
-     ],
-     "size": [
-      0.6,
-      0.5,
-      0.46
-     ],
-     "color": "#2b3a4f",
-     "transparent": false,
-     "until": "EX-CH05-S05"
-    },
-    {
      "id": "spare_crate_label",
      "position": [
       4.65,
@@ -1564,22 +1549,6 @@
      "transparent": false,
      "finish": "satin",
      "until": "EX-CH05-S05"
-    },
-    {
-     "id": "spare_crate",
-     "position": [
-      4.65,
-      0.31,
-      -5.74
-     ],
-     "size": [
-      0.6,
-      0.5,
-      0.46
-     ],
-     "color": "#2b3a4f",
-     "transparent": false,
-     "from": "EX-CH05-S07"
     },
     {
      "id": "spare_crate_label",
@@ -1706,7 +1675,49 @@
       -5.85
      ]
     }
-   }
+   },
+   "props": [
+    {
+     "id": "spare_crate",
+     "path": "res://assets/props/PR_RelayCrate/PR_RelayCrate.glb",
+     "position": [
+      4.65,
+      0.06,
+      -5.74
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "until": "EX-CH05-S05"
+    },
+    {
+     "id": "spare_crate",
+     "path": "res://assets/props/PR_RelayCrate/PR_RelayCrate.glb",
+     "position": [
+      4.65,
+      0.06,
+      -5.74
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "from": "EX-CH05-S07"
+    }
+   ]
   },
   {
    "id": "ch05_records_2034",
@@ -2406,7 +2417,8 @@
       -0.57
      ]
     }
-   }
+   },
+   "fixtures": []
   },
   {
    "id": "ch05_d5_opt01",
@@ -2856,7 +2868,8 @@
       "strip_scale": 0.8
      }
     }
-   }
+   },
+   "fixtures": []
   },
   {
    "id": "ch05_records_desk",
@@ -2947,22 +2960,6 @@
      "until": "EX-CH05-S06"
     },
     {
-     "id": "spare_crate",
-     "position": [
-      2.52,
-      0.95,
-      -5.66
-     ],
-     "size": [
-      0.6,
-      0.42,
-      0.46
-     ],
-     "color": "#2b3a4f",
-     "transparent": false,
-     "until": "EX-CH05-S06"
-    },
-    {
      "id": "spare_crate_label",
      "position": [
       2.52,
@@ -2980,43 +2977,11 @@
      "until": "EX-CH05-S06"
     },
     {
-     "id": "spare_crate_foam",
-     "position": [
-      2.52,
-      1.15,
-      -5.66
-     ],
-     "size": [
-      0.56,
-      0.02,
-      0.42
-     ],
-     "color": "#3a3f47",
-     "transparent": false,
-     "until": "EX-CH05-S06"
-    },
-    {
-     "id": "spare_crate_lid",
-     "position": [
-      2.52,
-      1.39,
-      -5.87
-     ],
-     "size": [
-      0.6,
-      0.46,
-      0.04
-     ],
-     "color": "#2b3a4f",
-     "transparent": false,
-     "until": "EX-CH05-S06"
-    },
-    {
      "id": "kai_note",
      "position": [
       2.52,
       1.42,
-      -5.849
+      -5.887
      ],
      "size": [
       0.27,
@@ -3088,6 +3053,35 @@
        "texture": "res://assets/ui/impact_monitor/frames/C02_a_1.png"
       }
      }
+    },
+    {
+     "id": "spare_crate",
+     "path": "res://assets/props/PR_RelayCrate/PR_RelayCrate.glb",
+     "position": [
+      2.52,
+      0.74,
+      -5.66
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "parts": {
+      "Lid": {
+       "rotation_degrees": [
+        -90,
+        0,
+        0
+       ]
+      }
+     },
+     "until": "EX-CH05-S06"
     }
    ],
    "signs": [
@@ -3175,7 +3169,7 @@
      "position": [
       2.52,
       1.42,
-      -5.847
+      -5.885
      ],
      "size": 0.0003,
      "outline": 0,
@@ -3473,7 +3467,8 @@
    },
    "stations": {
     "p10_verify_flashes": "commons_impact_monitor"
-   }
+   },
+   "fixtures": []
   },
   {
    "id": "ch05_bounded_report",
@@ -3621,22 +3616,6 @@
    "about": "EX-CH05-S10 'Mission table, live Earth data link' (doc 22 7.4; clue 19): Rao's call (on the Earth screen) brings a signed page and a permission note; the signature card sets the recovered manifest's N.R. beside the page's; the receipt list compares when each report was made with when it reached Earth (the first bloom photo made 27 Apr, delivered 30 Apr after contact returned; the harvest entry made and delivered 21 May); the signed page lies beside the ALO / N. packet. The 2034 portrait appears only on the signed page, after identification.",
    "fixtures": [
     {
-     "id": "signed_page",
-     "position": [
-      -0.4756,
-      0.761,
-      0.4282
-     ],
-     "size": [
-      0.21,
-      0.002,
-      0.297
-     ],
-     "color": "#ebe6d8",
-     "transparent": false,
-     "finish": "satin"
-    },
-    {
      "id": "permission_note",
      "position": [
       -0.6456,
@@ -3667,22 +3646,6 @@
      "color": "#f4f1e6",
      "transparent": false,
      "finish": "satin"
-    },
-    {
-     "id": "receipt_tablet",
-     "position": [
-      0.3005,
-      0.766,
-      0.5651
-     ],
-     "size": [
-      0.26,
-      0.012,
-      0.18
-     ],
-     "color": "#0b1220",
-     "transparent": false,
-     "finish": "screen"
     }
    ],
    "prints": [
@@ -3865,31 +3828,54 @@
       -5.7
      ]
     }
-   }
+   },
+   "props": [
+    {
+     "id": "signed_page",
+     "path": "res://assets/props/PR_SignedPage/PR_SignedPage.glb",
+     "position": [
+      -0.4756,
+      0.76,
+      0.4282
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "id": "receipt_tablet",
+     "path": "res://assets/props/PR_Tablet/PR_Tablet.glb",
+     "position": [
+      0.3005,
+      0.76,
+      0.5651
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ]
   },
   {
    "id": "ch05_invitation",
    "from": "EX-CH05-S11",
    "until": "EX-CH05-S11",
    "about": "EX-CH05-S11 'Message composer at the mission table' (doc 22 7.4): Mei's composer with the two authored openings, the current garden photograph and the checked report as attachments; Ferreira has placed her mug beside the four familiar ones and sits at the head for the first meal she sits down for (doc 24 3.5). Once the opening is chosen (EX-CH05-S11-CHOICE) the composer shows it delivered once, with its receipt and no reply yet.",
-   "fixtures": [
-    {
-     "id": "composer_tablet",
-     "position": [
-      0.32,
-      0.766,
-      0.5543
-     ],
-     "size": [
-      0.26,
-      0.012,
-      0.18
-     ],
-     "color": "#0b1220",
-     "transparent": false,
-     "finish": "screen"
-    }
-   ],
+   "fixtures": [],
    "prints": [
     {
      "id": "invitation_photo",
@@ -3989,7 +3975,28 @@
       -1.2
      ]
     }
-   }
+   },
+   "props": [
+    {
+     "id": "composer_tablet",
+     "path": "res://assets/props/PR_Tablet/PR_Tablet.glb",
+     "position": [
+      0.32,
+      0.76,
+      0.5543
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   ]
   },
   {
    "id": "ch05_composer_draft",
@@ -4021,7 +4028,8 @@
      "wrap_m": 0.24,
      "pitch": -90
     }
-   ]
+   ],
+   "fixtures": []
   },
   {
    "id": "ch05_d10_composer_opt01",
@@ -4047,7 +4055,8 @@
      "wrap_m": 0.24,
      "pitch": -90
     }
-   ]
+   ],
+   "fixtures": []
   },
   {
    "id": "ch05_d10_composer_opt02",
@@ -4073,7 +4082,8 @@
      "wrap_m": 0.24,
      "pitch": -90
     }
-   ]
+   ],
+   "fixtures": []
   },
   {
    "id": "ch06_eclipse_desk",

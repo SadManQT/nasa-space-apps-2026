@@ -1,6 +1,6 @@
-LOC-08 EX-CH05-S01 windowed frame ms with cast: p50=16.52 p95=21.02; draw calls=1342
-LOC-02 EX-CH05-S02 windowed frame ms with cast: p50=18.30 p95=22.09; draw calls=410
-LOC-01 EX-CH05-S05 windowed frame ms with cast: p50=30.28 p95=33.72; draw calls=644
-LOC-01 EX-CH05-S07 windowed frame ms with cast: p50=16.88 p95=20.98; draw calls=456
-LOC-03 EX-CH05-S12 windowed frame ms with cast: p50=20.12 p95=28.88; draw calls=424
+LOC-08 EX-CH05-S01 windowed frame ms with cast: p50=16.56 p95=18.53; draw calls=1184
+LOC-02 EX-CH05-S02 windowed frame ms with cast: p50=16.67 p95=17.94; draw calls=245
+LOC-01 EX-CH05-S05 windowed frame ms with cast: p50=16.66 p95=18.23; draw calls=415
+LOC-01 EX-CH05-S07 windowed frame ms with cast: p50=16.66 p95=18.13; draw calls=281
+LOC-03 EX-CH05-S12 windowed frame ms with cast: p50=16.66 p95=17.58; draw calls=168
 CHAPTER 5 ROOMS RESULT: PASS (99 checks, 0 failures)
