@@ -24,6 +24,13 @@ func _run() -> void:
 	var ferreira := load("res://assets/ui/portraits/CH_Ferreira_screen.png") as Texture2D
 	var rao := load("res://assets/ui/portraits/CH_Rao_screen.png") as Texture2D
 	_check(ferreira != null and rao != null and ferreira.get_size() == rao.get_size(), "Ferreira's duty portrait matches Rao's screen portrait size")
+	# Noor's live call (M4-06) uses her cut-out portrait over the Dhaka rooftop (morning at EX-CH08-S10, noon at EX-CH08-S12).
+	var noor := load(Crew.NOOR_PORTRAIT) as Texture2D
+	var rooftop_morning := load(Crew.NOOR_ROOFTOP) as Texture2D
+	var rooftop_noon := load(Crew.NOOR_ROOFTOP_NOON) as Texture2D
+	_check(noor != null and rooftop_morning != null and rooftop_noon != null, "CH_Noor_live and both EN_NoorRooftop variants load")
+	if rooftop_morning != null and rooftop_noon != null and base != null:
+		_check(rooftop_morning.get_size() == base.get_size() and rooftop_noon.get_size() == base.get_size(), "both Noor rooftop backdrops are 16:9 like the Earth room")
 
 	var crew := Crew.new()
 	root.add_child(crew)
@@ -71,6 +78,40 @@ func _run() -> void:
 	_check(not backdrop.visible and not portrait.visible and not caption.visible, "a local speaker turns the Earth screen off, room included")
 	crew.present_line({"speaker_id": "rao", "origin_label": "EARTH LINK"}, false)
 	_check(backdrop.visible and backdrop.texture == base, "the next Earth call brings the live room back")
+	var rao_height := portrait.pixel_size * portrait.texture.get_height()
+
+	# Noor's queued text messages (CH05/CH06) and 2034 audio recording (CH07) do not turn on the live video screen.
+	for non_live in ["QUEUED TEXT", "STORED RECORDING"]:
+		crew.present_line({"speaker_id": "noor", "origin_label": non_live}, false)
+		_check(not backdrop.visible and not portrait.visible and not caption.visible, "Noor's %s does not turn on the live Earth screen" % non_live)
+
+	# Noor's live Earth-link calls (M4-06): morning rooftop at EX-CH08-S10, noon rooftop at EX-CH08-S12.
+	for noor_case in [["EX-CH08-S10", rooftop_morning, "morning"], ["EX-CH08-S12", rooftop_noon, "noon"]]:
+		var scene_id: String = noor_case[0]
+		var expected_rooftop: Texture2D = noor_case[1]
+		var time_of_day: String = noor_case[2]
+		crew.place(scene_id, room, Vector3.ZERO)
+		for i in 3:
+			await physics_frame
+		backdrop = room.get_node_or_null("EarthDesk") as Sprite3D
+		portrait = room.get_node_or_null("EarthPortrait") as Sprite3D
+		caption = null
+		for child in room.get_children():
+			if child is Label3D and portrait != null and absf(child.position.z - portrait.position.z) < 0.05:
+				caption = child
+		crew.present_line({"speaker_id": "noor", "origin_label": "EARTH LINK"}, false)
+		_check(backdrop.visible and portrait.visible and caption.visible, "Noor on EARTH LINK (%s): rooftop, caller and caption show" % scene_id)
+		_check(backdrop.texture == expected_rooftop, "Noor at %s uses the %s Dhaka rooftop backdrop (%s)" % [scene_id, time_of_day, backdrop.texture.resource_path if backdrop.texture != null else "null"])
+		_check(portrait.texture == noor, "Noor at %s uses her cut-out portrait CH_Noor_live.png" % scene_id)
+		_check(caption.text == "Noor · Earth link", "Noor's caption reads 'Noor · Earth link' (got '%s')" % caption.text)
+		var rooftop_height := backdrop.pixel_size * backdrop.texture.get_height()
+		var noor_height := portrait.pixel_size * portrait.texture.get_height()
+		_check(absf(noor_height - rao_height) < 0.005 and absf(noor_height - rooftop_height) < 0.005, "Noor at %s has the same height as Rao's portrait and the backdrop (%.3f m vs %.3f m)" % [scene_id, noor_height, rao_height])
+		_check(backdrop.pixel_size * backdrop.texture.get_width() <= area.x + 0.005 and portrait.pixel_size * portrait.texture.get_width() <= area.x + 0.005, "Noor and her rooftop backdrop at %s never extend past the bezel" % scene_id)
+
+	# Verify Rao on EARTH LINK still uses EN_EarthDesk unchanged after Noor's call.
+	crew.present_line({"speaker_id": "rao", "origin_label": "EARTH LINK"}, false)
+	_check(backdrop.texture == base and portrait.texture == rao and caption.text == "Rao · Earth link", "Rao keeps EN_EarthDesk after Noor's call")
 
 	var garden := Room.new()
 	garden.room_id = "LOC-03"

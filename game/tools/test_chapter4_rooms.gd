@@ -638,6 +638,15 @@ func _check_bridges(room: CampaignRoom, scene_id: String) -> void:
 	var board_aurora := _text(staged, "board_aurora")
 	_check(not board_rover.is_empty() and not board_aurora.is_empty(), scene_id + " both departure boards carry live words (decision 7)")
 	_check(not _text(staged, "seal_status").is_empty() and not _text(staged, "supply_ledger").is_empty() and not _text(staged, "pad_camera_text").is_empty(), scene_id + " the seal station, the supply ledger and the pad camera are lit with words")
+	var console := room.visual_root.get_node("handover_console") as Node3D
+	var screen2_id := "occupancy_text" if Contract.scene_order(scene_id) >= 811 else ("home_ledger_text" if Contract.scene_order(scene_id) >= 712 else "console_slope")
+	for pair in [["Screen", "console_map"], ["Screen2", screen2_id], ["Screen3", "pad_camera_text"]]:
+		var surfaces: Array[Dictionary] = Staging.slot_surfaces(console, String(pair[0]))
+		var arrays: Array = (surfaces[0].mesh as MeshInstance3D).mesh.surface_get_arrays(int(surfaces[0].surface)) if not surfaces.is_empty() else []
+		var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX] if not arrays.is_empty() else PackedVector3Array()
+		var nrms: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL] if not arrays.is_empty() else PackedVector3Array()
+		var label := staged.get_node_or_null(String(pair[1])) as Label3D
+		_check(verts.size() == 4 and absf(nrms[0].y) < 0.01 and absf(verts[0].z - 0.213) < 0.001 and absf(verts[2].z - 0.213) < 0.001 and label != null and label.position.z > -4.211, "%s handover_console %s and %s sit whole in front of the console riser" % [scene_id, pair[0], pair[1]])
 	match scene_id:
 		"EX-CH04-S02", "EX-CH04-S03":
 			_check(board_rover.contains("RAFI") and board_rover.contains("KAI") and not board_rover.contains("MEI") and board_aurora.contains("MEI") and board_aurora.contains("AMARA") and not board_aurora.contains("KAI"), scene_id + " each person is on exactly one ledger: two field, two home (S02 -> S03)")
@@ -662,7 +671,7 @@ func _check_bridges(room: CampaignRoom, scene_id: String) -> void:
 			_check(_text(staged, "lock_status").contains("SEALED CASE"), scene_id + " the lock shows the case is in, sealed (S09 -> S10: the dry glovebox)")
 		"EX-CH05-S01":
 			_check(bay.dock_state() == "SEALED", scene_id + " the open command waits for two agreeing checks: the tunnel starts SEALED")
-			_check(_text(staged, "pad_camera_text").contains("500 M") and _text(staged, "pad_camera_text").contains("DUST SETTLED"), scene_id + " Ferreira is on the landing-pad camera, dust settled (no plume)")
+			_check(_text(staged, "pad_camera_text").contains("500 M") and _text(staged, "pad_camera_text").contains("DUST SETTLED") and staged.has_node("pad_camera_feed") and console.has_node("SlotView_CameraFeed"), scene_id + " Ferreira is on the landing-pad camera picture beside the cargo, dust settled (no plume)")
 			_check(board_aurora.contains("FERREIRA") and board_aurora.contains("FIVE"), scene_id + " the five-person roster (S01 -> S02)")
 			_check(_text(staged, "relief_locker_plate").contains("8–12 DEC") and _text(staged, "lock_status").contains("RELIEF CARGO"), scene_id + " the relief cargo waits in the cargo lock for its seal check; the relief locker is labelled for the 8-12 Dec flight")
 		"EX-CH07-S12", "EX-CH08-S01":
@@ -913,6 +922,9 @@ const SHOTS := [
 	["EX-CH04-S12", "ch04_s12_table", "M3-4R_S12_table"],
 	["EX-CH04-S12", "ch04_fifth_locker", "M3-4R_S12_fifth_locker"],
 	["EX-CH04-S12", "ch04_care_bridge", "M3-4R_S12_days_in_between"],
+	["EX-CH05-S01", "ch05_pad_camera", "M4-10_console_ch05_s01"],
+	["EX-CH04-S02", "console", "M4-10_console_ch04_s02"],
+	["EX-CH05-S01", "pad_camera_close", "M4-10_pad_camera"],
 ]
 
 func _capture_all() -> void:

@@ -7,6 +7,9 @@ const Roster = preload("res://scripts/companions/companion_roster.gd")
 const Contract = preload("res://scripts/world/room_contract.gd")
 const PlayerScene = preload("res://scenes/player/player.tscn")
 const Helmet = preload("res://assets/props/PR_Helmet_Roles/helmet_roles.gd")
+const NOOR_PORTRAIT := "res://assets/ui/portraits/CH_Noor_live.png"
+const NOOR_ROOFTOP := "res://assets/ui/screens/EN_NoorRooftop.png"
+const NOOR_ROOFTOP_NOON := "res://assets/ui/screens/EN_NoorRooftop_noon.png"
 ## Each cast member's body in the outfit the current scene stages (bodies[id]); every outfit body ever built is kept
 ## in _wardrobe ("<id>/<outfit>"), so a cut back to an earlier outfit reuses it and never duplicates a character.
 var bodies: Dictionary = {}
@@ -14,6 +17,7 @@ var _wardrobe: Dictionary = {}
 var local_ids: Array[String] = []
 var player: PlayerController
 var room: CampaignRoom
+var _scene_id := ""
 var _speaker := ""
 var _screen: Sprite3D
 var _screen_label: Label3D
@@ -28,6 +32,7 @@ var _seated: Array[String] = []
 ## story_log.moments (e.g. the CH01-MUGS-NAMED mugs).
 func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choices: Dictionary = {}, moments: Array = []) -> PlayerController:
 	room = next_room
+	_scene_id = scene_id
 	local_ids.clear()
 	# The room is staged first, so its scene furniture, stations and anchors exist before anyone stands in it.
 	room.set_story_choices(choices, moments)
@@ -245,15 +250,16 @@ func present_line(line: Dictionary, reduced_motion: bool) -> void:
 		# seated base and its gaze; captions identify that speaker exactly.
 		body.animation.set_talking(not line.is_empty() and not reduced_motion and not still, body != speaker)
 	if _screen != null:
-		var earth := _speaker in ["rao", "ferreira"] and not local_ids.has(_speaker)
+		var origin := String(line.get("origin_label", ""))
+		var earth := (_speaker in ["rao", "ferreira"] or (_speaker == "noor" and origin.to_upper() == "EARTH LINK")) and not local_ids.has(_speaker)
 		_screen.visible = earth
 		_screen_label.visible = earth
 		_screen_backdrop.visible = false  # the Earth room shows only during a call (_show_earth_desk)
 		if earth:
-			var path := "res://assets/ui/portraits/CH_%s_screen.png" % _speaker.capitalize()
+			var path := NOOR_PORTRAIT if _speaker == "noor" else "res://assets/ui/portraits/CH_%s_screen.png" % _speaker.capitalize()
 			_screen.texture = load(path) if ResourceLoader.exists(path) else null
-			var origin := String(line.get("origin_label", ""))
-			_show_earth_desk(origin)
+			var scene_id := String(line.get("scene_id", room._scene_context if room != null and not room._scene_context.is_empty() else _scene_id))
+			_show_earth_desk(origin, scene_id)
 			var origin_word := String(UiDesign.text().get("dialogue", {}).get("origins", {}).get(origin, origin.capitalize()))
 			_screen_label.text = _speaker.capitalize() + (" · " + origin_word if not origin_word.is_empty() else "")
 
@@ -273,6 +279,11 @@ func set_paused(value: bool) -> void:
 ## The Earth screen: EN_EarthDesk (the room behind the caller) as a 16:9 backdrop,
 ## the caller's portrait over it, and the caller's name with the source word.
 func _build_screen() -> void:
+	for old in [_screen_backdrop, _screen, _screen_label]:
+		if is_instance_valid(old):
+			if old.get_parent() != null:
+				old.get_parent().remove_child(old)
+			old.free()
 	_screen = null
 	_screen_label = null
 	_screen_backdrop = null
@@ -321,12 +332,16 @@ func _build_screen() -> void:
 	_screen_label.hide()
 	_screen_backdrop.hide()
 
-## Puts EN_EarthDesk behind the portrait (the archive variant for a stored recording), as large as fits inside the
-## physical screen, and fits the portrait to the backdrop's height (never past the bezel), so Rao and Ferreira
-## appear on the same screen at the same size.
-func _show_earth_desk(origin_label: String) -> void:
+## Puts EN_EarthDesk behind the portrait (the archive variant for a stored recording, or Noor's Dhaka rooftop for her
+## live Earth-link call: morning at EX-CH08-S10, noon at EX-CH08-S12), as large as fits inside the physical screen,
+## and fits the portrait to the backdrop's height (never past the bezel), so Rao, Ferreira and Noor appear on the
+## same screen at the same size.
+func _show_earth_desk(origin_label: String, scene_id: String = "") -> void:
 	var desk: Dictionary = UiKit.kit().get("earth_screen", {})
 	var path := String(desk.get("variants", {}).get(origin_label.to_upper(), desk.get("base", "")))
+	if _speaker == "noor":
+		var noor_desk: Dictionary = desk.get("noor", {})
+		path = String(noor_desk.get(scene_id, NOOR_ROOFTOP_NOON if scene_id == "EX-CH08-S12" else NOOR_ROOFTOP))
 	var texture: Texture2D = load(path) if ResourceLoader.exists(path) else null
 	_screen_backdrop.texture = texture
 	_screen_backdrop.visible = texture != null

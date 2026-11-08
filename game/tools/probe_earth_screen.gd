@@ -1,6 +1,7 @@
-## Windowed probe for the Earth screen (M1-07). Needs a window (not --headless).
+## Windowed probe for the Earth screen (M1-07, M4-06). Needs a window (not --headless).
 ##   --shots      saves production/qa/evidence/M1-07_earth_desk_{rao,ferreira,recording,wide}.png
 ##                from LOC-01 with the crew placed for EX-CH01-S01
+##   --m4-06      saves production/qa/evidence/M4-06_{noor_screen,noor_s10,noor_s12,rao_screen}.png
 ##   Godot --path game --script res://tools/probe_earth_screen.gd -- --shots
 ## (Its --portrait mode, which re-rendered Ferreira's cut-out portrait, is gone: since M3-5A her screen
 ## portrait is the approved duty-layer take A, CH_Ferreira_Duty, and must not be overwritten.)
@@ -18,6 +19,8 @@ func _run() -> void:
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, true)
 	if args.has("--shots"):
 		await _shots()
+	if args.has("--m4-06"):
+		await _m4_06_shots()
 	print("EARTH SCREEN PROBE RESULT: PASS")
 	quit(0)
 
@@ -48,6 +51,45 @@ func _shots() -> void:
 		await RenderingServer.frame_post_draw
 		root.get_texture().get_image().save_png(out + "M1-07_earth_desk_%s.png" % shot[0])
 		print("EARTH SCREEN PROBE: wrote M1-07_earth_desk_%s.png" % shot[0])
+	room.free()
+	crew.free()
+	await process_frame
+
+func _m4_06_shots() -> void:
+	root.size = SHOT_SIZE
+	DisplayServer.window_set_size(SHOT_SIZE)
+	var crew := Crew.new()
+	root.add_child(crew)
+	var room := Room.new()
+	room.room_id = "LOC-01"
+	root.add_child(room)
+	var out := ProjectSettings.globalize_path("res://../production/qa/evidence/")
+	for shot in [
+		["EX-CH08-S10", "noor", "EARTH LINK", ["M4-06_noor_screen.png", "M4-06_noor_s10.png"]],
+		["EX-CH08-S12", "noor", "EARTH LINK", ["M4-06_noor_s12.png"]],
+		["EX-CH01-S01", "rao", "EARTH LINK", ["M4-06_rao_screen.png"]],
+	]:
+		crew.place(shot[0], room, Vector3(0, 0, 3.7))
+		for i in 5:
+			await physics_frame
+		var screen := (room.get_node("EarthPortrait") as Node3D).position
+		var camera := room.get_node_or_null("ProbeCamera") as Camera3D
+		if camera == null:
+			camera = Camera3D.new()
+			camera.name = "ProbeCamera"
+			room.add_child(camera)
+		camera.current = true
+		camera.position = Vector3(0, 2.0, -1.2)
+		camera.look_at(screen)
+		camera.fov = 52.0
+		crew.present_line({"speaker_id": shot[1], "origin_label": shot[2]}, false)
+		for i in 10:
+			await physics_frame
+		await RenderingServer.frame_post_draw
+		var img := root.get_texture().get_image()
+		for filename in shot[3]:
+			img.save_png(out + filename)
+			print("EARTH SCREEN PROBE: wrote %s" % filename)
 	room.free()
 	crew.free()
 	await process_frame

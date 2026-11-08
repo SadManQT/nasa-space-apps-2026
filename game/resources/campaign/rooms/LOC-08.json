@@ -754,6 +754,30 @@
     -0.4,
     0.4
    ]
+  },
+  "console": {
+   "from": [
+    2.45,
+    1.5,
+    -2.95
+   ],
+   "to": [
+    2.45,
+    1.38,
+    -4.213
+   ]
+  },
+  "pad_camera_close": {
+   "from": [
+    1.84,
+    1.44,
+    -3.5
+   ],
+   "to": [
+    1.84,
+    1.42,
+    -4.213
+   ]
   }
  },
  "staging": [
@@ -1604,6 +1628,48 @@
    "about": "EX-CH05-S01 'The Fifth Mug' (12 Dec): Ferreira is a small moving shape on the landing-pad camera (the console's third screen) beside the relief cargo until the pad is declared clear; the rover brings her to the tunnel, which starts SEALED: the open command waits for two agreeing checks. Inside, she takes the corridor watch by the inner door. The relief cargo waits in the cargo lock for its seal check; the relief locker is labelled and ready for it. The five-person roster on the departure boards (CH05 S01 -> S02: her mug carried to the table in the Commons).",
    "garage": {
     "dock": "vacuum"
+   },
+   "prints": [
+    {
+     "id": "pad_camera_feed",
+     "position": [
+      1.84,
+      1.495,
+      -4.42
+     ],
+     "size": [
+      0.16,
+      0.116
+     ],
+     "yaw": 0,
+     "kind": "texture",
+     "screen": true,
+     "texture": "res://assets/environment/EN_Garage/textures/T_Garage_PadCamera_S01.png"
+    }
+   ],
+   "kit_texts": {
+    "handover_console": {
+     "CameraFeed": {
+      "text": "",
+      "px": [
+       640,
+       464
+      ],
+      "camera": {
+       "from": [
+        1.84,
+        1.495,
+        -4.32
+       ],
+       "to": [
+        1.84,
+        1.495,
+        -4.42
+       ],
+       "fov": 60.15
+      }
+     }
+    }
    },
    "anchors": {
     "rover_kai": [

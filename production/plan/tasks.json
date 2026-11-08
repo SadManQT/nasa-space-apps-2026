@@ -6041,7 +6041,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Commons Earth screen: Noor's live call on the Dhaka rooftop backdrop (S10 morning, S12 noon)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/antigravity",
    "deps": [
     "M3-8A"
@@ -6051,7 +6051,7 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07.",
-   "evidence": "",
+   "evidence": "game/scripts/world/campaign_crew.gd, game/tools/test_earth_screen.gd (49 checks PASS), game/tools/probe_earth_screen.gd; run_tests.sh: 70/70 suites passed; screenshots: production/qa/evidence/M4-06_noor_screen.png, production/qa/evidence/M4-06_noor_s10.png, production/qa/evidence/M4-06_noor_s12.png, production/qa/evidence/M4-06_rao_screen.png",
    "updated": "2026-11-08",
    "prompt": "M3-8A installed the 2D assets for Noor's live calls (Sadman, 7 Nov 2026: \"Approve all\" and \"2D portraits only\"): game/assets/ui/screens/EN_NoorRooftop.png (EX-CH08-S10, 9 Apr 2047 08:15 Dhaka, painted grade, 1536 x 864), game/assets/ui/screens/EN_NoorRooftop_noon.png (EX-CH08-S12, 10 Apr 12:00) and the cel-shaded cut-out game/assets/ui/portraits/CH_Noor_live.png (transparent, 587 x 1376). CampaignCrew._build_screen (game/scripts/world/campaign_crew.gd) today always draws EN_EarthDesk behind the caller and looks the portrait up as CH_<Speaker>_screen.png, so Noor would get Rao's room and no portrait. Do: when the Earth-link speaker is Noor, draw EN_NoorRooftop (S10) or EN_NoorRooftop_noon (S12) as the backdrop and CH_Noor_live.png over it, fitted to the backdrop's height like Ferreira's cut-out over EN_EarthDesk, with the caption 'Noor' and the EARTH LINK - LIVE tag (doc 24 7.5 beat 8). Keep Rao and Ferreira on EN_EarthDesk. If the backdrop table should live in game/resources/ui/ui_kit.json (earth_screen, Ramim's file), file that one-line data task for ramim instead of editing it. Acceptance: game/tools/test_earth_screen.gd extended for Noor (backdrop path per scene, portrait loaded, never past the bezel); a windowed capture production/qa/evidence/<task>_noor_screen.png of the commons screen during EX-CH08-S10; run_tests.sh green.",
    "reserved_for": "sadman",
@@ -6377,7 +6377,7 @@
    "priority": "P2",
    "tool": "claude",
    "title": "Garage console: Screen crops the top line of three-line texts; the landing-pad camera shows words only",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/antigravity",
    "deps": [],
    "paths": [
@@ -6386,7 +6386,7 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-08.",
-   "evidence": "",
+   "evidence": "game/assets/environment/EN_Garage/EN_Garage_HandoverConsole_LOD0.glb, EN_Garage_HandoverConsole_LOD1.glb, game/assets/environment/EN_Garage/textures/T_Garage_PadCamera_S01.png, game/resources/campaign/rooms/LOC-08.json, game/tools/test_chapter4_rooms.gd (2394 checks PASS); run_tests.sh: 70/70 suites passed; screenshots: production/qa/evidence/M4-10_console_ch05_s01.png, production/qa/evidence/M4-10_console_ch04_s02.png, production/qa/evidence/M4-10_pad_camera.png",
    "updated": "2026-11-08",
    "prompt": "Seen in M3-5R's capture of EX-CH05-S01 (production/qa/evidence/M3-5R_S01_pad_camera.png), which now plays at the garage dock M3-105 built. 1) On EN_Garage_HandoverConsole the 'Screen' slot cuts off the top line of a three-line text: 'ARRIVAL HANDOVER / NAME AND SEAL INDICATION / TWO AGREEING CHECKS' (LOC-08.json garage_screens console_map, by_scene EX-CH05-S01..EX-CH07-S11) shows only the lower half of 'ARRIVAL HANDOVER'. RoomStaging.slot_text fits the label to the 512 x 256 texture by height and width, so the likely cause is the Screen surface's UVs (or the px aspect) cropping the texture; fix it at the piece or slot so every text on that screen shows whole (CH04-S04..S12 and CH07-S12.. texts too), and add a check in test_chapter4_rooms.gd. 2) STORY_FULL EX-CH05-S01: Ferreira is 'a small moving shape on the landing camera, waiting beside relief cargo'. Screen3 shows that only in words. Consider a camera picture on Screen3 (slot_text supports a live 'camera'; or a still of the existing CS-08-A shot, e.g. frame 3.3 s, Ferreira by the relief cargo with the dust settled) with the words as its caption. Re-run production/qa/evidence/M3-105_capture.sh and M3-5R_capture.sh and look at the S01 shots.",
    "reserved_for": "sadman",
