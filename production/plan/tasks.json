@@ -6213,6 +6213,49 @@
    "prompt": "M3-105 (Sadman, rooms) built LOC-08, the approved M3-4A rover garage: game/scenes/campaign/rooms/garage.tscn, game/resources/campaign/rooms/LOC-08.json, RoomContract LOC-08 (12 x 9 m; boundaries door_commons_garage, garage_dock_hatch, rover_bay_door). EX-CH04-S02/S03/S09, EX-CH05-S01, EX-CH07-S12 (moved from the Commons; scene_rosters.json now puts all five in LOC-08) and EX-CH08-S01/S11 are staged there. Please make these changes in your folders (do not edit game/scripts/world/ or game/resources/campaign/rooms/; file a task for Sadman if the room data needs a change).\n1. game/scripts/loading/load_preparation.gd ROOM_SCENES: add \"LOC-08\": \"res://scenes/campaign/rooms/garage.tscn\". Why: garage.tscn carries HabitatKitPreload and a GaragePreload of the 34 EN_Garage GLBs and VH_Rover, so the loading card decodes them off the main thread; without it Chapter1Campaign builds LOC-08 as CampaignRoom.new() from LOC-08.json (works, but loads them on the main thread).\n2. game/scripts/navigation/route_navigation.gd _BOUNDARIES: add \"door_commons_garage\": {\"from\": \"LOC-01\", \"to\": \"LOC-08\", \"kind\": INTERNAL, \"default_open\": true} (the pressurised kit corridor, decision 2; the Commons has no portal drawn for it yet), \"garage_dock_hatch\" (LOC-08 to the docked rover's cabin; a pressure boundary, default closed: CampaignRoom.set_door_open(\"garage_dock_hatch\", true) is refused unless the tunnel reads SAFE TO OPEN) and \"rover_bay_door\" (LOC-08 vacuum bay to the apron and LOC-06; not a pressure door, default closed; set_door_open coils it up). Extend WorldRoute.restore's missing-boundary default the same way it fills door_commons_airlock (game/scripts/world/world_route.gd is Sadman's: file a task if it needs more).\n3. game/scripts/campaign/chapter1_campaign.gd: the dock cycle. CampaignRoom.garage() returns en_garage.gd: dock_state() SEALED / EQUALISING / SAFE TO OPEN, request_dock_cycle(\"habitat\") (equalise before the hatch opens) or (\"vacuum\") (pump down before undocking), time_card() (the labelled time card: TUNNEL EQUALISING · ABOUT 2.5 MIN, SHOWN IN 8 S), signals dock_state_changed / dock_cycle_finished, dock_snapshot() / dock_restore() for saves. EX-CH04-S09, EX-CH05-S01 and EX-CH08-S11 start SEALED (LOC-08.json staging \"garage\": {\"dock\": \"vacuum\"}): when the player uses the garage_dock station, request the habitat cycle, show the time card on the HUD while it runs (doc 09 LOC-08 exit behaviour: a labelled time card, not invisible teleportation), and open the hatch through WorldRoute when it reads SAFE TO OPEN. Save dock_snapshot() with the room state. Bind each action to the room station (RoomContract.station_focus, as in M3-103).\n4. game/scripts/campaign/terrain_session.gd (optional, for the open rover door): exterior_terrain.json LOC-08 has omit_staging_floor false and yaw_deg 127.14: the garage builds its own floors and turns by yaw_deg about origin_m. To show the Aurora ridge outside the door, put the TerrainStream and stream.lighting(scene_id) under a node with Transform3D(Basis(Vector3.UP, deg_to_rad(yaw_deg)), origin_m).affine_inverse() and free the room's RoomLighting/RoomEnvironment, as game/tools/test_chapter4_rooms.gd _capture_garage_exterior does.\n5. game/scripts/missions/extended_gate_catalog.gd, a canon mismatch to decide: the CH04 action lists are shifted against STORY_FULL. S08 (the vault shelf, LOC-10) lists p08_return_to_base, p08_dock_dry_glovebox, p08_warm_cold/cool/room, p08_check_condensation, p08_open_inner_seal and p08_inventory_12, but canon returns and docks in S09 and warms, opens and inventories in S10 in the garden's dry glovebox (\"Only now ... breaking the biological seal inside that protected workspace\"); S09 lists p08_scan_lid / p08_save_viability_pending / p08_transfer_case (the lid scan is S10-S11). The rooms give each listed action a station where the catalog puts it (S09: the dry cargo lock and the console); if you realign the catalog, tell Sadman so the station maps follow.\nTests: add to one of your suites LoadPreparation.ROOM_SCENES[\"LOC-08\"] == \"res://scenes/campaign/rooms/garage.tscn\" and WorldRoute.new().boundary_state(id) non-empty for the three LOC-08 boundaries; a played EX-CH04-S09 cycles the dock with the time card and opens the hatch. Acceptance: game/tools/run_tests.sh green (every suite), including test_chapter4_rooms.",
    "reserved_for": "atik",
    "effort": 1
+  },
+  {
+   "id": "M1-97",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Retain per-stage loading traces for the failing Windows intervals",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/tools/",
+    "production/qa/perf/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-08.",
+   "evidence": "",
+   "updated": "2026-11-08",
+   "prompt": "M1-90 fulfilled the exact original Windows collector request; complete evidence is production/qa/evidence/M1-68_windows/2026-11-08_0130_ramim/README.md. Both fresh runs failed existing 50ms intervals (title51.869/newcampaign66.577ms; newcampaign69.960ms). However test_performance_runtime.gd only checks existing LoadTrace records in memory and does not retain per-stage values. The complete raw logs prove the failures but cannot distinguish worker decode, main-thread scene generation/packing or scheduling. M1-68 is still blocked awaiting diagnosis.\nAdd the smallest opt-in retained diagnostic output for the existing captured LoadTrace records and measurement names/windows, preferably structured lines/files collected by the existing runner/collector. Preserve every threshold, assertion, transition, player/asset/config behavior and cache policy. Emit buffered records after measurement, not console/file work inside a measured interval. Include stage names/timestamps/durations/thread context available from existing records so the long interval can be correlated; do not claim a fix from the output alone. Add a focused check for complete retained trace output. Publish exact invocation/format and then resume your M1-68 investigation from the Windows evidence. The follow-up Ramim collection task will run the same two fresh processes after this task is done. No Sadman asset/AssetGeometry edit without an owner request. Acceptance: retained trace can be linked to each measured transition without weakening budgets; focused and full runner; precise handoff for original-host recollection.",
+   "reserved_for": "atik",
+   "effort": 1
+  },
+  {
+   "id": "M1-98",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "any",
+   "title": "Recollect Windows loading evidence with retained stage traces",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-97"
+   ],
+   "paths": [
+    "production/qa/evidence/M1-68_windows/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-08.",
+   "evidence": "",
+   "updated": "2026-11-08",
+   "prompt": "After Atik M1-97 publishes the retained-stage invocation, collect two sequential fresh-process loading runs on the original Windows host using that exact existing collector/runner. Preserve all setup, suite, runner, manifest and per-stage trace artifacts, including every failure and any setup139. Record source/game tree, hardware, normal desktop workloads and retained-cache policy. Do not modify product code, thresholds, assets, imports, settings or caches; no cold-cache claim. Link to the earlier baseline production/qa/evidence/M1-68_windows/2026-11-08_0130_ramim/README.md. Publish complete evidence for Atik M1-68 to correlate failing intervals with trace stages; collection completion does not mean a performance fix. If the promised trace output is absent, report that without fabricating it.",
+   "reserved_for": "ramim",
+   "effort": 1
   }
  ],
  "requirements": [
