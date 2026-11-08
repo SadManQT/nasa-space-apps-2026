@@ -6743,15 +6743,15 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Record M1-109 reviewed Continue navigation fix",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "PRODUCTION_HANDBOOK.md"
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-09.",
-   "evidence": "",
+   "evidence": "PRODUCTION_HANDBOOK.md §10 9 Nov M1-109 line",
    "updated": "2026-11-09",
    "prompt": "Record a dated handbook status line for Ramim M1-109 reviewed UI source: unavailable Continue is skipped by Tab, valid checkpoint restores focus, losing checkpoint redirects to New Expedition; updates while a modal is open preserve its disabled background/current restore state. Shared panel close retains a valid owner fallback. Source7ffabe8; evidence production/qa/evidence/M1-109_README.md, focused850/0 and nativeForward+229/0 clean at100/150, independentC0/I0/M0. Full integrated runner/all8 text still pending; do not claim full-game or full-suite acceptance. No new save model, commands, palettes, assets, thresholds or import changes. Existing M1-75 contrast/scroll remains intact. Update only owned handbook status; retain machine-local import/editor exclusions.",
    "reserved_for": "sadman",
