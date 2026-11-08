@@ -5895,16 +5895,16 @@
    "priority": "P0",
    "tool": "any",
    "title": "Bounded Director message metadata API for M1-69",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/night-claude2",
    "deps": [],
    "paths": [
     "game/scripts/core/"
    ],
    "refs": [],
    "note": "Filed by atik/codex on 2026-11-07.",
-   "evidence": "",
-   "updated": "2026-11-07",
+   "evidence": "CampaignDirector.update_message_metadata()/message_metadata() and CampaignState bounds/validation for presentation_resume.messages (delivered_ids, read_ids) in game/scripts/core/; frozen schema and retry rule in execution/03_SYSTEM_INTERFACES.md 'Message metadata'; game/tools/test_director_message_metadata.gd PASS (76 checks: PuzzleHost preview -> update -> commit/retry, duplicates, 22 malformed cases atomic, missing/fresh state, restore validation, JSON save/load, old and schema 2 saves, route retry re-apply, scene projection). run_tests.sh: 68/68 suites passed. API only, nothing player-visible. Route-retry follow-up filed as M1-99 (Atik).",
+   "updated": "2026-11-08",
    "prompt": "M1-69 requests a public Director method but its campaign-only paths and MASTER_PLAN §7 reserve core/ for Sadman. Current CampaignDirector.restore_snapshot resets _checkpoint, so a message read must not be implemented via restore or a direct _state write in campaign. Please add update_message_metadata(metadata: Dictionary) -> Dictionary limited to presentation_resume.messages, validated delivered_ids/read_ids arrays of unique nonempty strings (read is a subset of delivered), and any explicitly documented primitive metadata needed by Ramim. Reject extra/root keys and malformed types atomically, duplicates harmless. Preserve gameplay revision, receipts, resources, flags, phase and the existing pre-shift checkpoint. Test real PuzzleHost preview -> update -> commit/retry, malformed/duplicate/no-existing-state cases, normal save/restore and old saves. Publish exact schema plus whether presentation metadata intentionally survives gameplay retry; do not reset gameplay checkpoint. Atik will wire the bounded campaign wrapper/save path in M1-69; Ramim owns inbox/UI M1-56. Do not edit campaign or UI. Required to honor ownership while completing M1-69.",
    "reserved_for": "sadman",
    "effort": 2
@@ -6304,6 +6304,28 @@
    "prompt": "M3-8R (Sadman, rooms) built the Chapter 8 exteriors as real rooms: LOC-11 relay road (game/scenes/campaign/rooms/relay_road.tscn, LOC-11.json) and LOC-12 Malapert summit (malapert_summit.tscn, LOC-12.json), both \"assembly\": \"exterior_kit\". CH08 scene map: S02-S04 LOC-11, S05/S12 LOC-03, S06/S10 LOC-01, S07-S09 LOC-12, S01/S11 LOC-08 (M3-105). Three runtime changes are yours:\n\n1. game/scripts/loading/load_preparation.gd ROOM_SCENES: add \"LOC-11\": \"res://scenes/campaign/rooms/relay_road.tscn\" and \"LOC-12\": \"res://scenes/campaign/rooms/malapert_summit.tscn\". Why: their PiecePreload holds every M3-8A GLB (both LODs) and VH_Rover_Lit.tscn, so the loading card decodes them off the main thread; today Chapter1Campaign builds a bare CampaignRoom from the JSON (works, but loads 36 GLBs on the main thread). chapter1_campaign._place_crew already falls back to the room's *_player anchor (relay_player, relay_service_player).\n\n2. The rover runtime (doc 25 section 4.5) must honour room staging \"aboard\" (RoomContract.staging(room, scene).aboard: cast id -> {\"at\", \"facing\"}). EX-CH08-S02 and S03 put all three aboard the pressurised cabin with the playable rider (Kai, Rafi) aboard; S04 puts Ferreira aboard (cabin checklist); the summit cut of S06/S10 puts all three aboard. Today CampaignCrew (game/scripts/world/campaign_crew.gd, Sadman's) gives the interim: aboard bodies hidden, no collision, no gravity; passengers switched off; the playable rider keeps input and a chase camera over the roof (follow camera pivot 5.4 m, arm 8.5 m) and reaches the cab console station (\"cab\": true focus target relay_route_console within 3 m of the seat). Replace this with the drivable rover / cab view (V) when the rover runtime exists: the rider seated in VH_Rover_Lit (the staged \"rover\" prop: LOC-11 ChapterStaging/rover, LOC-12 VisualRoot/rover), no walking out into vacuum unsuited, the cab console readouts on the dashboard; restore the follow camera with CampaignCrew._unboard semantics. Light states come from piece_states.rover.lights (rover_lights.json: driving, eva_stop, parked_dark).\n\n3. TerrainStream pad grading for LOC-12 (game/scripts/terrain/terrain_stream.gd): M3-8A cut the 30 x 20 m relay pad level 0.3 m under the Malapert crown and filled it outward (production/concept/chapter8_v1 decision 1; malapert_summit.json terrain.pad_bounds_xz [[-15,-10],[15,10]] in the platform frame, turned 2.335 deg from the tile frame, pad_level_m -0.3). The raw 5 m tile falls up to 2.4 m across the pad (lanes reach 16.4 deg), so exterior_terrain.json LOC-12 stays \"pending\" with omit_staging_floor false. Add a graded pad (a level rectangle with a fill skirt at <= 15 deg) to the provider's heightfield sampling and collision for a configured region; then tell Sadman so he sets omit_staging_floor true and runs game/tools/test_exterior_terrain.gd -- --write. Its Sun and Earth rows are already wired (RoomContract.earth LOC-12, with sky_rows for S07/S09).\n\nAcceptance: run_tests.sh green (chapter8_rooms, exterior_terrain, campaign_crew); the campaign enters EX-CH08-S03 and S07 from a checkpoint without main-thread GLB decoding; a windowed capture of S03 from the rover; LOC-12 walks on the graded pad.",
    "reserved_for": "atik",
    "effort": 2
+  },
+  {
+   "id": "M1-99",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Route retry keeps delivered and read messages (M1-89 rule)",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-89"
+   ],
+   "paths": [
+    "game/scripts/missions/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/night-claude2 on 2026-11-08.",
+   "evidence": "",
+   "updated": "2026-11-08",
+   "prompt": "M1-89 (execution/03_SYSTEM_INTERFACES.md, 'Message metadata') makes delivered and read messages survive a gameplay retry: CampaignDirector.update_message_metadata() mirrors presentation_resume.messages into the director's pre-commit checkpoint, so PuzzleHost.retry()/director.restore_checkpoint() keeps them. The route-level physical retry does not yet: CampaignRoute.retry() (and Chapter1Route.retry(), which calls super.retry()) runs _director.restore_snapshot(checkpoint.director) with the director snapshot taken at the route checkpoint, so every message delivered or read after that point turns undelivered or unread again and its arrival toast can fire a second time. Fix in game/scripts/missions/campaign_route.gd only: capture var messages: Dictionary = _director.message_metadata() before restore_snapshot() and call _director.update_message_metadata(messages) right after it (a union, idempotent; an empty or unchanged record comes back accepted with duplicate=true and changes nothing). Do not edit game/scripts/core/. Acceptance: a missions test (your own test file) delivers and reads a message after a Chapter 1 route checkpoint, runs Chapter1Route.retry(), and proves the director's gameplay state equals the route checkpoint (everything except presentation_resume.messages) while message_metadata() still holds both IDs, and that a second retry is still correct; game/tools/test_director_message_metadata.gd must keep passing unchanged (it only checks that re-applying the record after a route retry works). Run game/tools/run_tests.sh and paste its last line into the evidence.",
+   "reserved_for": "atik",
+   "effort": 1
   }
  ],
  "requirements": [

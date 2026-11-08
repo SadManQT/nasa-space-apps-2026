@@ -40,6 +40,38 @@ settings_revision; accessibility; presentation_resume
 
 This schema is conceptual. Reconcile it with the actual source profile fields and typed GDScript resources before implementation. Keep founder, vault and album inventories distinct. Store stable IDs and primitive values, not nodes, callbacks or user secrets.
 
+### Message metadata: `presentation_resume.messages` (frozen 8 Nov 2026, M1-89)
+
+The inbox record for the Messages system (M1-56). `CampaignDirector` owns it; nothing else writes it. Code: `game/scripts/core/campaign_director.gd` (`update_message_metadata`, `message_metadata`) and `game/scripts/core/campaign_state.gd` (`message_metadata_problem`, the bounds). Tests: `game/tools/test_director_message_metadata.gd`.
+
+**Stored schema** (inside the save, exactly):
+
+```json
+"presentation_resume": {
+  "messages": {
+    "delivered_ids": ["MSG-CH01-001", "MSG-CH01-002"],
+    "read_ids": ["MSG-CH01-001"]
+  }
+}
+```
+
+- Only these two fields. Each is an Array of message IDs in arrival (or reading) order, unique, each a nonempty String with no surrounding whitespace and at most `CampaignState.MESSAGE_ID_MAX_LENGTH` (64) characters; at most `MESSAGE_ID_LIMIT` (2048) IDs. Every read ID is also delivered.
+- A save without `messages` (every save before M1-89, schema 2 migrations) or without one of the fields reads as empty. A fresh New starts empty. A save whose record breaks the schema is invalid like any other malformed field (`CampaignState.validate_snapshot`).
+- Other `presentation_resume` keys are left alone. Unread count, thread lists, toasts and the goal card are derived from this record plus the message packs; they are not stored.
+
+**Write:** `director.update_message_metadata(metadata: Dictionary) -> Dictionary`
+
+- `metadata` = `{"delivered_ids": [...], "read_ids": [...]}`, either field or both; Arrays or PackedStringArrays of IDs; String or StringName keys. Any other key (a root state key, `messages`, `presentation_resume`, ...), a non-Array value, a non-String, empty, padded or overlong ID, a read ID not delivered before or in the same call, or a total over the limit rejects the **whole** call with nothing changed (`accepted: false`, a `reason`).
+- It is a monotonic union: new IDs are appended in the order given; IDs already stored or repeated in the call are no-ops. A call that adds nothing returns `accepted: true, duplicate: true`, no events, no deltas, and changes nothing. There is no "unread" or "undeliver".
+- Result: the command-result contract (`accepted, duplicate, input_revision, output_revision, receipt_id, deltas, events, warnings, unsafe_predicates, reason, next_phase`) plus `messages` (the merged record) and `snapshot`. `input_revision == output_revision`, `receipt_id` is empty, `deltas` = `[{"field": "presentation_resume.messages.delivered_ids" | ".read_ids", "added": [...]}]`, one `message_metadata_updated` event at the unchanged revision.
+- Presentation only: `state_revision`, receipts, resources, knowledge flags, dialogue, scene phase, time and plants never change, so a `PuzzleHost` preview taken before the update still commits. Accepted while paused (the inbox opens from the pause menu).
+
+**Read:** `director.message_metadata() -> Dictionary` returns a copy, `{"delivered_ids": [], "read_ids": []}` when nothing is recorded.
+
+**Retry (intentional):** delivered and read messages **survive a gameplay retry**. The update also writes the merged record into the director's pre-commit checkpoint and changes nothing else there, so `PuzzleHost.retry()` / `director.restore_checkpoint()` returns exactly the pre-shift gameplay state with the newer message record. This is the rule `Chapter1Route.retry()` already applies to the P-02 plan, read cards and hints: retry rewinds resources and actions, not what the crew learned. A message is never un-read or toasted twice by a director retry. The route-level physical retry is different today: `CampaignRoute.retry()` (and `Chapter1Route.retry()`, which calls it) runs `restore_snapshot()` with the director snapshot the route captured at its checkpoint, so on its own it rolls the record back to that point. The route keeps the rule by capturing `message_metadata()` before that restore and passing it to `update_message_metadata()` afterwards (a union, so it is safe and idempotent; covered by the tests); board task M1-99 (Atik) wires this into `campaign_route.gd`. Scene changes (`project_scene()`) and gameplay commits carry the record forward unchanged. Saving is unchanged: the record is part of `director.snapshot()`, so the existing campaign save writes it, and a load (`restore_snapshot`) restores exactly the saved record.
+
+Wiring: the campaign wrapper and its save call (M1-69, Atik) and the inbox, toasts and unlock triggers (M1-56, Ramim) call these two methods only; they never write `presentation_resume` through `restore_snapshot`, which also replaces the retry checkpoint. A new stored field needs a core change (a board task for Sadman).
+
 ## Commands and results
 
 1. A command carries `command_id`, issuer/role, owning mission/scene, expected state revision, target and payload.

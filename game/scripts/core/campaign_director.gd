@@ -170,6 +170,9 @@ func commit(command: Dictionary) -> Dictionary:
 	result["snapshot"] = next.duplicate(true)
 	return result.duplicate(true)
 
+## Restores the complete state from before the last commit. Message metadata
+## recorded since then is kept: update_message_metadata() mirrors it into the
+## checkpoint, so a gameplay retry never un-delivers or un-reads a message.
 func restore_checkpoint() -> Dictionary:
 	var input_revision := int(_state.get("state_revision", 0))
 	if _checkpoint.is_empty():
@@ -189,6 +192,79 @@ func restore_checkpoint() -> Dictionary:
 		"next_phase": String(_state.get("scene_phase", "planning")),
 		"snapshot": _state.duplicate(true),
 	}
+
+## Records message deliveries and reads in presentation_resume.messages
+## without a gameplay command (M1-89 contract, execution/03_SYSTEM_INTERFACES.md).
+##
+## metadata holds delivered_ids, read_ids or both, each an Array (or
+## PackedStringArray) of message IDs; any other key is rejected. IDs are
+## appended in the order given. An ID already recorded, or repeated in the
+## call, is a harmless no-op; a read ID must be delivered before or in the same
+## call. Any malformed field rejects the whole call with nothing changed.
+##
+## Presentation only: state_revision, receipts, resources, flags, dialogue and
+## phase never change, so an accepted PuzzleHost preview stays committable. The
+## retry checkpoint keeps its gameplay state and receives only the merged
+## record, so delivered and read messages survive restore_checkpoint(). It is
+## accepted while paused, because the inbox is read from the pause menu.
+##
+## Returns the command-result contract plus "messages" (the merged record) and
+## "snapshot"; "duplicate" is true when nothing new was recorded.
+func update_message_metadata(metadata: Dictionary) -> Dictionary:
+	if metadata.is_empty():
+		return _reject("Message metadata needs delivered_ids or read_ids.")
+	var additions := {}
+	for key in metadata:
+		var field: String = String(key) if key is String or key is StringName else ""
+		if not StateScript.MESSAGE_FIELDS.has(field):
+			return _reject("Message metadata accepts only delivered_ids and read_ids, not " + str(key) + ".")
+		var ids = metadata[key]
+		if ids is PackedStringArray:
+			ids = Array(ids)
+		var shape_problem := StateScript.message_ids_problem(ids, field)
+		if not shape_problem.is_empty():
+			return _reject(shape_problem)
+		additions[field] = ids
+	var merged := StateScript.message_metadata(_state)
+	var added := {"delivered_ids": [], "read_ids": []}
+	for field in StateScript.MESSAGE_FIELDS:
+		var known := {}
+		for id in merged[field]:
+			known[id] = true
+		for id in additions.get(field, []):
+			if not known.has(id):
+				known[id] = true
+				merged[field].append(id)
+				added[field].append(id)
+	var problem := StateScript.message_metadata_problem(merged)
+	if not problem.is_empty():
+		return _reject(problem)
+	var revision := int(_state.get("state_revision", 0))
+	var result := ResultScript.empty(revision, String(_state.get("scene_phase", "planning")))
+	result["accepted"] = true
+	result["warnings"] = ["Presentation only: the gameplay revision, receipts and the retry checkpoint's gameplay state are unchanged."]
+	result["messages"] = merged.duplicate(true)
+	if added.delivered_ids.is_empty() and added.read_ids.is_empty():
+		result["duplicate"] = true
+		result["reason"] = "Message metadata was already recorded; nothing changed."
+		result["snapshot"] = _state.duplicate(true)
+		return result
+	_state = _with_messages(_state, merged)
+	if not _checkpoint.is_empty():
+		_checkpoint = _with_messages(_checkpoint, merged)
+	for field in StateScript.MESSAGE_FIELDS:
+		if not added[field].is_empty():
+			result["deltas"].append({"field": "presentation_resume.messages." + field, "added": added[field].duplicate()})
+	result["events"] = [ResultScript.event("message_metadata_updated", revision, _state)]
+	result["reason"] = "Message metadata recorded."
+	result["snapshot"] = _state.duplicate(true)
+	return result
+
+## Returns a copy of presentation_resume.messages:
+## {"delivered_ids": [...], "read_ids": [...]}, both empty for a fresh New or
+## a save written before M1-89.
+func message_metadata() -> Dictionary:
+	return StateScript.message_metadata(_state)
 
 func pause(reason: String = "user") -> Dictionary:
 	var revision := int(_state.get("state_revision", 0))
@@ -457,6 +533,16 @@ func _reject(reason: String) -> Dictionary:
 	result["reason"] = reason
 	result["snapshot"] = _state.duplicate(true)
 	return result
+
+# Copies, never edits in place: project_scene() hands its caller the live state.
+static func _with_messages(source: Dictionary, messages: Dictionary) -> Dictionary:
+	var next := source.duplicate(true)
+	var resume = next.get("presentation_resume", {})
+	if not resume is Dictionary:
+		resume = {}
+	resume["messages"] = messages.duplicate(true)
+	next["presentation_resume"] = resume
+	return next
 
 func _seed_initial_biology() -> void:
 	var alo: Dictionary = _plant_service.new_plant("ALO-01", "LINEAGE-ALO-TARA", "seed", "2046-04-11 06:00 UTC")

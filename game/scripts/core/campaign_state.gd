@@ -9,6 +9,12 @@ const PlantScript = preload("res://scripts/biology/plant_service.gd")
 const ContentScript = preload("res://scripts/content/content_loader.gd")
 # Reserved storage identity only; no proposed dedication text is introduced.
 const EXTRA_STORY_CHOICES := {"EX-CH03-S11-DEDICATION": "EX-CH03-S11"}
+# presentation_resume.messages (M1-89) is the inbox record: the message IDs
+# delivered and read, each in arrival order. These are schema bounds, not
+# tuning: the campaign ships about 400 messages with IDs like MSG-CH01-001.
+const MESSAGE_FIELDS := ["delivered_ids", "read_ids"]
+const MESSAGE_ID_MAX_LENGTH := 64
+const MESSAGE_ID_LIMIT := 2048
 static var _story_choices: Dictionary = {}
 
 ## Creates an independent, primitive snapshot in the current save schema.
@@ -144,6 +150,11 @@ static func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 	for key in defaults.accessibility:
 		if not snapshot.accessibility.get(key, null) is bool:
 			return {"valid": false, "reason": "Campaign accessibility setting must be a boolean: " + key}
+	# Saves written before M1-89 have no messages record; they read as empty.
+	if snapshot.presentation_resume.has("messages"):
+		var message_problem := message_metadata_problem(snapshot.presentation_resume.messages)
+		if not message_problem.is_empty():
+			return {"valid": false, "reason": message_problem}
 	if snapshot.has("blackout_count") and (not _finite_number(snapshot.blackout_count) or float(snapshot.blackout_count) != floor(float(snapshot.blackout_count)) or float(snapshot.blackout_count) < 0):
 		return {"valid": false, "reason": "Campaign blackout count must be a nonnegative integer."}
 	if snapshot.has("campaign_ledgers"):
@@ -159,6 +170,59 @@ static func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 			if not puzzle is Dictionary or not puzzle.get("operations") is Dictionary or not puzzle.get("samples") is Array or not _finite_number(puzzle.get("phase")) or float(puzzle.phase) < 0 or float(puzzle.phase) != floor(float(puzzle.phase)):
 				return {"valid": false, "reason": "Campaign puzzle ledger shape is invalid."}
 	return {"valid": true, "reason": "Campaign state shape is valid."}
+
+## Returns a copy of presentation_resume.messages as
+## {"delivered_ids": Array, "read_ids": Array}. A fresh New, or a save written
+## before the record existed, reads as two empty arrays.
+static func message_metadata(snapshot: Dictionary) -> Dictionary:
+	var result := {"delivered_ids": [], "read_ids": []}
+	var resume = snapshot.get("presentation_resume", {})
+	var stored = resume.get("messages", {}) if resume is Dictionary else {}
+	if stored is Dictionary:
+		for field in MESSAGE_FIELDS:
+			var ids = stored.get(field, [])
+			if ids is Array:
+				result[field] = ids.duplicate()
+	return result
+
+## Returns an empty string when a messages record follows the M1-89 schema:
+## only delivered_ids and read_ids (either may be absent), each an Array of
+## unique message IDs, and every read ID also delivered. Otherwise the reason.
+static func message_metadata_problem(messages: Variant) -> String:
+	if not messages is Dictionary:
+		return "presentation_resume.messages must be a Dictionary."
+	for key in messages:
+		if not key is String or not MESSAGE_FIELDS.has(key):
+			return "presentation_resume.messages has an unknown field: " + str(key)
+	var delivered := {}
+	for field in MESSAGE_FIELDS:
+		var ids = messages.get(field, [])
+		var problem := message_ids_problem(ids, field)
+		if not problem.is_empty():
+			return problem
+		var seen := {}
+		for id in ids:
+			if seen.has(id):
+				return "Message %s lists %s twice." % [field, id]
+			seen[id] = true
+			if field == "read_ids" and not delivered.has(id):
+				return "Message %s is marked read but was never delivered." % id
+		if field == "delivered_ids":
+			delivered = seen
+	return ""
+
+## Returns an empty string when ids is an Array of at most MESSAGE_ID_LIMIT
+## message IDs: nonempty Strings of at most MESSAGE_ID_MAX_LENGTH characters
+## with no surrounding whitespace. Otherwise the rejection reason.
+static func message_ids_problem(ids: Variant, field: String) -> String:
+	if not ids is Array:
+		return "Message %s must be an Array of message ID Strings." % field
+	if ids.size() > MESSAGE_ID_LIMIT:
+		return "Message %s holds more than %d IDs." % [field, MESSAGE_ID_LIMIT]
+	for id in ids:
+		if not id is String or String(id).is_empty() or String(id) != String(id).strip_edges() or String(id).length() > MESSAGE_ID_MAX_LENGTH:
+			return "Message %s must hold nonempty ID Strings without surrounding spaces, at most %d characters." % [field, MESSAGE_ID_MAX_LENGTH]
+	return ""
 
 ## Resolves a choice's owning scene from the existing campaign catalog.
 static func story_choice_scene_id(choice_id: String) -> String:
