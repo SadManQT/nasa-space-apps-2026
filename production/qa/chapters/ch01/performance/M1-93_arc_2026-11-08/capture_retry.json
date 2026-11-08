@@ -1,0 +1,29 @@
+{
+  "task": "M1-93",
+  "source_commit": "660e01a44abf25fbdcd2d7ed8bb1453ccc67a800",
+  "runtime_source_commit": "e0e1615",
+  "probe_sha256": "cd8ced9bea4235109cabfe6e1f65cfdb51ee72635b390c7c40dc6ce7be0f9e0a",
+  "import_exit_code": 0,
+  "command": [
+    "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64_console.exe",
+    "--path",
+    "game",
+    "--rendering-method",
+    "gl_compatibility",
+    "--resolution",
+    "1920x1080",
+    "--script",
+    "res://tools/perf_probe.gd",
+    "--",
+    "--perf-probe",
+    "--perf-chapter1-rooms",
+    "--perf-seconds=20",
+    "--perf-output=D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\production\\qa\\chapters\\ch01\\performance\\M1-93_arc_2026-11-08\\compatibility_retry"
+  ],
+  "started_utc": "2026-11-08T16:07:32.133583+00:00",
+  "other_godot_or_blender_jobs_before_launch": [],
+  "reason": "First window was closed by Tanvir before collection completed; retry leaves normal 20-second samples unchanged.",
+  "exit_code": 0,
+  "elapsed_seconds": 189.373,
+  "finished_utc": "2026-11-08T16:10:41.506489+00:00"
+}

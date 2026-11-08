@@ -5980,7 +5980,7 @@
    "priority": "P1",
    "tool": "any",
    "title": "Capture 1080p Chapter 1 room performance on the Intel Arc laptop",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
@@ -5988,7 +5988,7 @@
    ],
    "refs": [],
    "note": "Filed by atik/codex on 2026-11-07.",
-   "evidence": "",
+   "evidence": "production/qa/chapters/ch01/performance/M1-93_arc_2026-11-08/README.md; Intel Ultra 5 226V / Arc 130V, confirmed weakest team machine; 1080p Compatibility, four rooms, 20s walk/panels, 10629 CSV rows, 189.373s complete retry. Independent statistics/hash review passed. All room p95 intervals below 33.333ms; loading stalls and max-frame hitches remain. Focused run_tests.sh performance_runtime 0/1 (537 checks, 2 existing loading failures; one ObjectDB leak); no full regression, stable-FPS or chapter gate claimed. M1-65 human sessions not run.",
    "updated": "2026-11-08",
    "prompt": "Atik M1-23 requires supported integrated-GPU/weak-laptop evidence. Your M1-65 capture documents Intel Arc130V8GB; Atik only has M4. After pulling the benchmark update, run the existing Godot4.7.2 console executable with --path game --rendering-method gl_compatibility --resolution1920x1080 --script res://tools/perf_probe.gd -- --perf-probe --perf-chapter1-rooms --perf-seconds=20 --perf-output=<absolute existing output directory>/compatibility . Use normal flag spacing --resolution 1920x1080. The absolute output base creates .json/.csv; redirect complete stdout/stderr to a .txt file. Script uses isolated save/preferences, real scenes S01/S02/S04/S05, 20s walk+panels each, hardware/renderer metadata and explicit room coverage; do not use --headless or interpret PERF RESULT:PASS as an FPS-budget pass. Stop other Godot/render jobs. Commit raw outputs and CPU/GPU/RAM/OS/display notes under production/qa/chapters/ch01/performance/. Report p95/max frame intervals per room, first-entry hitches and whether it is the teams weakest laptop (ask teammate if unknown). Target integrated Compatibility30fps; no threshold/settings/asset edits or invented results. Atik will use measured costs to fix owned paths and request others. If machine unavailable, record that rather than claiming coverage.",
    "reserved_for": "tanvir",
