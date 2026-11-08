@@ -6525,7 +6525,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Publish P03/P04 authored data for Ramim Chapter 2 panels",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -6534,7 +6534,7 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.",
-   "evidence": "",
+   "evidence": "p03_pollination.json + p04_recorder_reconstruction.json published; test_p03_p04_content.gd PASS 303 checks; full suite 74/74; handoff production/qa/evidence/M1-104.md",
    "updated": "2026-11-08",
    "prompt": "Ramim next-backlog audit of M3-2P found saved origin/night/M3-2P tip5203a6f includes unlanded content/p03_pollination.json and p04_recorder_reconstruction.json; those data paths are Sadman-owned. Current main has only pure P03/P04 receipt/sequence state and prefilled catalog answers. Please review and publish the smallest canonical authored puzzle-data contract for those two panels: choices and plausible wrong options, source-labeled clues/investigation, plain feedback/hint tiers and Learn/Apply/Twist stages, preserving game-design/08 numbers, 22 section4 and 24 Chapter2 story joins/no premature Noor reveal. Reuse current profiles and registry/source IDs; do not add a second science simulator or overwrite current story data. Saved night JSON is reference, not approved wholesale content. Coordinate exact primitive schema/path with Ramim and Atik's selected-input runtime bridge. No Ramim UI/puzzles edits. Validate content/source references and numbers plus repository runner; preserve explicit unrelated Windows gate failures. Publish handoff so Ramim can implement against real data instead of hard-coding answers in a form.",
    "reserved_for": "sadman",

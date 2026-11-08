@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "content_revision": "p04-recorder-reconstruction-v1",
+  "puzzle_id": "P-04",
+  "title": "Recorder Reconstruction",
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-04; game-design/22_PUZZLE_CLUE_DESIGN.md §4.3-4.4; game-design/24_NARRATIVE_REVISION.md §2.2 and §4 rows 4-9; full-game-story/STORY_FULL.md EX-CH02-S07..S11",
+  "source_ids": ["apollo_shallow_moonquakes", "fast_plants_lifecycle"],
+  "scenes": [
+    {"scene_id": "EX-CH02-S07", "mission_id": "EX-M0203", "room_id": "LOC-01", "stage": "learn"},
+    {"scene_id": "EX-CH02-S08", "mission_id": "EX-M0203", "room_id": "LOC-02", "stage": "learn"},
+    {"scene_id": "EX-CH02-S09", "mission_id": "EX-M0203", "room_id": "LOC-02", "stage": "apply"},
+    {"scene_id": "EX-CH02-S10", "mission_id": "EX-M0204", "room_id": "LOC-02", "stage": "twist"},
+    {"scene_id": "EX-CH02-S11", "mission_id": "EX-M0204", "room_id": "LOC-01", "stage": "twist"}
+  ],
+  "stages": {
+    "learn": {
+      "label": "Learn · provenance before playback",
+      "scenes": ["EX-CH02-S07", "EX-CH02-S08"],
+      "goal": "Photograph the old labels without damaging them and keep a source attached to every claim.",
+      "takeaway": "A device match answers which device, not when it was used, what the trial reached, or who used it."
+    },
+    "apply": {
+      "label": "Apply · rebuild the local copy",
+      "scenes": ["EX-CH02-S09"],
+      "goal": "Give each file its one supported date, device or channel, check the local copy, then open the transcript.",
+      "takeaway": "An intact file supports reliable playback. It does not prove who is speaking."
+    },
+    "twist": {
+      "label": "Twist · observed, inferred, unknown",
+      "scenes": ["EX-CH02-S10", "EX-CH02-S11"],
+      "goal": "Hear both stored voices, keep the familiar voice as an inference, and send the evidence without a guessed name.",
+      "takeaway": "Sounding like someone is an inference; the date on the file is a fact. Delivered is not the same as answered."
+    }
+  },
+  "files": [
+    {"file_id": "FILE-A", "label": "File A", "missing_field": "date"},
+    {"file_id": "FILE-B", "label": "File B", "missing_field": "device"},
+    {"file_id": "FILE-C", "label": "File C", "missing_field": "channel"}
+  ],
+  "source_labels": [
+    {"id": "SRC-PLATE", "field": "device", "value": "HORT-01", "label": "Original equipment plate under the newer service sticker", "holder": "kai"},
+    {"id": "SRC-MAINT", "field": "date", "value": "2034-04", "label": "Maintenance date on the photographed plate", "holder": "mei"},
+    {"id": "SRC-CHANNEL", "field": "channel", "value": "ENGINEERING", "label": "Channel label on the recorder", "holder": "amara"}
+  ],
+  "expected": {"date": "2034-04", "device": "HORT-01", "channel": "ENGINEERING"},
+  "clues": [
+    {"id": "P04-C01", "scene_id": "EX-CH02-S07", "holder": "mei", "kind": "data_card", "source_id": "fast_plants_lifecycle", "label": "Pods take time", "text": "Fast Plant pods ripen about 20 days after pollination and seeds are ready about 40 days after planting. No action makes them faster."},
+    {"id": "P04-C02", "scene_id": "EX-CH02-S07", "holder": "rafi", "kind": "line", "line_id": "EX-CH02-S07-L04", "label": "Matching number", "text": "This equipment number matches the old trial card."},
+    {"id": "P04-C03", "scene_id": "EX-CH02-S08", "holder": "kai", "kind": "line", "line_id": "EX-CH02-S08-L02", "label": "Label under a label", "text": "Photograph it. Do not peel the only original."},
+    {"id": "P04-C04", "scene_id": "EX-CH02-S08", "holder": "mei", "kind": "object", "label": "Old trial-stage chart", "text": "The 2034 chart records seedlings only. Reproductive stage: not reached."},
+    {"id": "P04-C05", "scene_id": "EX-CH02-S08", "holder": "all", "kind": "line", "line_id": "EX-CH02-S08-L03", "label": "Unsupported owner card", "text": "A device match is not a person’s name."},
+    {"id": "P04-C06", "scene_id": "EX-CH02-S08", "holder": "rafi", "kind": "line", "line_id": "EX-CH02-S08-L04", "label": "Seedling, not flower", "text": "And a seedling record is not a previous flower."},
+    {"id": "P04-C07", "scene_id": "EX-CH02-S09", "holder": "amara", "kind": "line", "line_id": "EX-CH02-S09-L01", "label": "One match per field", "text": "Date, device, channel. Each gets one supported match."},
+    {"id": "P04-C08", "scene_id": "EX-CH02-S09", "holder": "amara", "kind": "data_card", "source_id": "apollo_shallow_moonquakes", "label": "Real archive labels", "text": "Real NASA archives label every record with its date, instrument and channel. The 2034 tokens in this puzzle are fiction."},
+    {"id": "P04-C09", "scene_id": "EX-CH02-S10", "holder": "all", "kind": "line", "line_id": "EX-CH02-S10-L01", "label": "Engineer channel, 2034", "text": "Biological trial suspended. Crew retreat is mandatory."},
+    {"id": "P04-C10", "scene_id": "EX-CH02-S10", "holder": "all", "kind": "line", "line_id": "EX-CH02-S10-L03", "label": "N.'s memory, 2034", "text": "My grandmother’s mustard fields turned yellow every winter. I wanted some of that light here."},
+    {"id": "P04-C11", "scene_id": "EX-CH02-S10", "holder": "kai", "kind": "line", "line_id": "EX-CH02-S10-L02", "label": "A familiar voice", "text": "That sounds like Ferreira. Younger, maybe."},
+    {"id": "P04-C12", "scene_id": "EX-CH02-S11", "holder": "amara", "kind": "line", "line_id": "EX-CH02-S11-L03", "label": "Receipt is not reply", "text": "Delivered is not the same as answered."}
+  ],
+  "investigation": [
+    {"scene_id": "EX-CH02-S07", "target_id": "order_lifecycle", "text": "Put flower, pods, drying and harvest in order.", "clue_ids": ["P04-C01"], "choice_id": "life_cycle"},
+    {"scene_id": "EX-CH02-S07", "target_id": "inspect_recorder_identifier", "text": "Compare the recorder's number with the old trial card.", "clue_ids": ["P04-C02"]},
+    {"scene_id": "EX-CH02-S08", "target_id": "collect_serial_card", "text": "Photograph the plate instead of peeling the sticker.", "clue_ids": ["P04-C03"], "choice_id": "label_handling"},
+    {"scene_id": "EX-CH02-S08", "target_id": "collect_trial_stage_card", "text": "Read what stage the 2034 trial reached.", "clue_ids": ["P04-C04", "P04-C06"], "choice_id": "trial_stage"},
+    {"scene_id": "EX-CH02-S08", "target_id": "exclude_identity_claim", "text": "Keep the owner card off the board; leave the person slot empty.", "clue_ids": ["P04-C05"]},
+    {"scene_id": "EX-CH02-S09", "target_id": "assign_date_token", "text": "File A needs its date.", "clue_ids": ["P04-C07", "P04-C08"], "choice_id": "date"},
+    {"scene_id": "EX-CH02-S09", "target_id": "assign_device_token", "text": "File B needs its device.", "clue_ids": ["P04-C07"], "choice_id": "device"},
+    {"scene_id": "EX-CH02-S09", "target_id": "assign_channel_token", "text": "File C needs its channel.", "clue_ids": ["P04-C07"], "choice_id": "channel"},
+    {"scene_id": "EX-CH02-S09", "target_id": "verify_local_checksum", "text": "Check that the local copy is intact. The original stays untouched.", "clue_ids": [], "choice_id": "checksum_meaning"},
+    {"scene_id": "EX-CH02-S10", "target_id": "play_engineer_fragment", "text": "Play or read the dated engineering channel.", "clue_ids": ["P04-C09"]},
+    {"scene_id": "EX-CH02-S10", "target_id": "play_n_memory", "text": "Play or read N.'s memory.", "clue_ids": ["P04-C10"]},
+    {"scene_id": "EX-CH02-S10", "target_id": "classify_voice_inference", "text": "Sort each statement into Observed, Inferred or Unknown.", "clue_ids": ["P04-C11"], "choice_id": "classification"},
+    {"scene_id": "EX-CH02-S11", "target_id": "send_fragment_copy", "text": "Pack the evidence for Ferreira without guesses.", "clue_ids": ["P04-C12"], "choice_id": "package"}
+  ],
+  "steps": [
+    {"action": "p04_assign_date", "label": "Assign File A's date"},
+    {"action": "p04_assign_device", "label": "Assign File B's device"},
+    {"action": "p04_assign_channel", "label": "Assign File C's channel"},
+    {"action": "p04_verify_checksum", "label": "Verify the local copy's checksum"},
+    {"action": "p04_open_transcript", "label": "Open the reconstructed transcript"},
+    {"action": "p04_play_engineer", "label": "Play the dated engineering fragment"},
+    {"action": "p04_play_n", "label": "Read N.'s mustard-fields memory"},
+    {"action": "p04_classify_inference", "label": "Classify the voice resemblance as an inference"},
+    {"action": "p04_send_copy", "label": "Send the intact copy to Ferreira"},
+    {"action": "p04_ack_handover", "label": "Acknowledge the evening handover"}
+  ],
+  "choices": {
+    "life_cycle": {
+      "prompt": "Which order do Fast Plants follow after pollination?",
+      "options": [
+        {"value": "flower_pods_drying_harvest", "label": "Flower, developing pods, mature pods, drying, harvest", "correct": true, "feedback": "Yes. Harvest comes after the pods mature and dry, weeks from now."},
+        {"value": "harvest_tomorrow", "label": "Pollinated today, harvest tomorrow", "correct": false, "feedback": "Pods ripen about 20 days after pollination. A finished task does not make seeds ready."}
+      ]
+    },
+    "label_handling": {
+      "prompt": "How do you read the older plate under the newer sticker?",
+      "options": [
+        {"value": "photograph", "label": "Photograph it through the lifted corner", "correct": true, "feedback": "The original stays intact and the photo becomes a source card."}
+      ],
+      "note": "Peeling is never offered as an action (22 §4.3)."
+    },
+    "trial_stage": {
+      "prompt": "What does the old trial-stage chart support?",
+      "options": [
+        {"value": "stopped_before_flowering", "label": "An earlier trial stopped before flowering", "correct": true, "feedback": "The chart and the seedling record support this. Alo's bloom is still a first."},
+        {"value": "earlier_flowering_garden", "label": "An earlier flowering garden makes Alo's first bloom false", "correct": false, "feedback": "The chart says the reproductive stage was not reached. Narrow the claim to what it shows."}
+      ]
+    },
+    "date": {
+      "prompt": "Which date belongs in File A?",
+      "action": "p04_assign_date",
+      "payload_key": "value",
+      "options": [
+        {"value": "2034-04", "label": "2034-04", "correct": true, "source_label_id": "SRC-MAINT", "feedback": "Matches the maintenance date on the plate."},
+        {"value": "2046-05-06", "label": "2046-05-06", "correct": false, "source_label_id": "SRC-MAINT", "feedback": "That is today, when the copy was made. The plate's maintenance date disagrees."},
+        {"value": "HORT-01", "label": "HORT-01", "correct": false, "source_label_id": "SRC-PLATE", "feedback": "HORT-01 is a device identifier, not a date. Dates, devices and channels are different fields."}
+      ]
+    },
+    "device": {
+      "prompt": "Which device belongs in File B?",
+      "action": "p04_assign_device",
+      "payload_key": "value",
+      "options": [
+        {"value": "HORT-01", "label": "HORT-01", "correct": true, "source_label_id": "SRC-PLATE", "feedback": "Matches the original equipment plate."},
+        {"value": "ENGINEERING", "label": "ENGINEERING", "correct": false, "source_label_id": "SRC-CHANNEL", "feedback": "ENGINEERING is a channel label, not a device. The equipment plate disagrees."},
+        {"value": "N.", "label": "N.", "correct": false, "source_label_id": "SRC-PLATE", "feedback": "A device match is not a person's name. The equipment plate names the device."}
+      ]
+    },
+    "channel": {
+      "prompt": "Which channel belongs in File C?",
+      "action": "p04_assign_channel",
+      "payload_key": "value",
+      "options": [
+        {"value": "ENGINEERING", "label": "ENGINEERING", "correct": true, "source_label_id": "SRC-CHANNEL", "feedback": "Matches the recorder's channel label."},
+        {"value": "PERSONAL", "label": "PERSONAL", "correct": false, "source_label_id": "SRC-CHANNEL", "feedback": "The personal note is a different channel. File C's channel label says ENGINEERING."},
+        {"value": "2034-04", "label": "2034-04", "correct": false, "source_label_id": "SRC-MAINT", "feedback": "2034-04 is a date, not a channel. Dates, devices and channels are different fields."}
+      ]
+    },
+    "checksum_meaning": {
+      "prompt": "What does a matching checksum prove?",
+      "options": [
+        {"value": "copy_intact", "label": "The local copy is internally intact", "correct": true, "feedback": "Yes. It supports reliable playback and nothing more."},
+        {"value": "speaker_identity", "label": "Who is speaking in the recording", "correct": false, "feedback": "A checksum tests the data, not the people. Technical checks and interpretation are separate claims."}
+      ]
+    },
+    "classification": {
+      "prompt": "Sort each statement into Observed, Inferred or Unknown.",
+      "action": "p04_classify_inference",
+      "columns": ["observed", "inferred", "unknown"],
+      "statements": [
+        {"id": "retreat_ordered", "text": "A retreat was ordered in 2034.", "answer": "observed", "feedback": "The engineering channel recorded it, with a date."},
+        {"id": "n_memory", "text": "N. remembers yellow mustard fields.", "answer": "observed", "feedback": "N.'s channel says it in N.'s own recorded words."},
+        {"id": "voice_resembles", "text": "The engineer's voice resembles Ferreira.", "answer": "inferred", "feedback": "Sounding like someone is an inference. Keep it, with its date, and ask."},
+        {"id": "writer_name", "text": "The gardener's full name.", "answer": "unknown", "feedback": "Nothing on the board names N. The person slot stays empty."}
+      ],
+      "wrong_feedback": "Which statements did someone actually record, and which are our guesses?"
+    },
+    "package": {
+      "prompt": "What goes in the evidence package for Ferreira?",
+      "action": "p04_send_copy",
+      "items": [
+        {"id": "local_copy", "label": "Intact reconstructed copy", "include": true},
+        {"id": "source_photos", "label": "Source photographs", "include": true},
+        {"id": "checksum", "label": "Checksum", "include": true},
+        {"id": "transcript", "label": "Transcript", "include": true},
+        {"id": "guessed_name", "label": "A line guessing the gardener's name", "include": false, "feedback": "Leave the name as a question. The package carries evidence, not guesses."}
+      ],
+      "receipt_note": "A delivery receipt confirms transport. It is not a reply and does not show agreement."
+    }
+  },
+  "feedback": {
+    "wrong_token": "This token disagrees with its source label. It stays removable; check which source disagrees.",
+    "playback_locked": "Playback stays locked until date, device and channel all match.",
+    "checksum_locked": "Match date, device and channel before checking the local copy.",
+    "engineer_first": "Read the dated engineering fragment before the paired memory note.",
+    "classify_first": "Keep voice resemblance as an inference before sending the evidence.",
+    "send_first": "Send the intact copy before acknowledging the handover.",
+    "reset_keeps_evidence": "Reset returns the tokens. Collected evidence stays on the board."
+  },
+  "hints": {
+    "tokens": ["Find the original equipment plate.", "Dates, devices and channels are different fields.", "2034-04, HORT-01, ENGINEERING."],
+    "life_cycle": ["Which picture is from our garden, and which only shows what comes later?", "Flowers, then pods, then drying, then harvest.", "Flower (ours, now) → mature pods (reference only) → harvest (later)."],
+    "classification": ["Which statements did someone actually record, and which are our guesses?", "A voice that 'sounds like' someone goes under Inferred.", "Example: 'Retreat ordered, 2034' → Observed. 'Voice resembles Ferreira' → Inferred. 'Writer's name' → Unknown."]
+  },
+  "limits": "The 2034 recorder, its tokens and both voices are fiction. N. stays anonymous here; the board never names the gardener."
+}

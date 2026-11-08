@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "content_revision": "p03-pollination-v1",
+  "puzzle_id": "P-03",
+  "title": "Alo Meets Tara",
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-03; game-design/22_PUZZLE_CLUE_DESIGN.md §4.1-4.2; game-design/24_NARRATIVE_REVISION.md §2.2; full-game-story/STORY_FULL.md EX-CH02-S01..S06",
+  "profile_id": "p03_pollination",
+  "source_ids": ["fast_plants_lifecycle", "mir_brassica_seed_to_seed", "donki_2017_09"],
+  "scenes": [
+    {"scene_id": "EX-CH02-S01", "mission_id": "EX-M0201", "room_id": "LOC-03", "stage": "learn"},
+    {"scene_id": "EX-CH02-S02", "mission_id": "EX-M0201", "room_id": "LOC-03", "stage": "learn"},
+    {"scene_id": "EX-CH02-S03", "mission_id": "EX-M0201", "room_id": "LOC-05", "stage": "learn"},
+    {"scene_id": "EX-CH02-S04", "mission_id": "EX-M0202", "room_id": "LOC-05", "stage": "apply"},
+    {"scene_id": "EX-CH02-S05", "mission_id": "EX-M0202", "room_id": "LOC-05", "stage": "apply"},
+    {"scene_id": "EX-CH02-S06", "mission_id": "EX-M0202", "room_id": "LOC-03", "stage": "twist"}
+  ],
+  "stages": {
+    "learn": {
+      "label": "Learn · partner, parts and route",
+      "scenes": ["EX-CH02-S01", "EX-CH02-S02", "EX-CH02-S03"],
+      "goal": "Find out how this cultivar makes seeds, which flower parts move pollen, and how to carry it without losing air.",
+      "takeaway": "Fast Plants cannot make seeds with their own pollen. Pollen goes from one plant's anther to the other plant's stigma, sealed, with one labelled brush per direction."
+    },
+    "apply": {
+      "label": "Apply · three reciprocal runs, seven care dates",
+      "scenes": ["EX-CH02-S04", "EX-CH02-S05"],
+      "goal": "Make three two-way pollen runs on 30 April, 3 May and 6 May, and care for both plants on all seven dates.",
+      "takeaway": "Care happens every day; pollen runs have their own dates. A finished transfer is a procedure result, not seeds."
+    },
+    "twist": {
+      "label": "Twist · a prediction is not a promise",
+      "scenes": ["EX-CH02-S06"],
+      "goal": "Write what you expect the next generation's stems to look like, why, and what would surprise you.",
+      "takeaway": "Two visible stem colours do not reveal the parents' full genetics, so no ratio is promised. The descendants will be counted in Chapter 4."
+    }
+  },
+  "plants": {
+    "ALO-01": {"label": "Alo", "stem": "purple stem", "donor_brush": "B", "recipient_brush": "A", "planted": "2046-04-11"},
+    "TARA-01": {"label": "Tara", "stem": "green stem", "donor_brush": "A", "recipient_brush": "B"}
+  },
+  "brushes": {
+    "A": {"label": "Brush A · Tara to Alo", "donor": "TARA-01", "recipient": "ALO-01"},
+    "B": {"label": "Brush B · Alo to Tara", "donor": "ALO-01", "recipient": "TARA-01"}
+  },
+  "numbers": {
+    "source": "game-design/08_PUZZLE_DESIGNS.md P-03; values match game/resources/campaign/profiles/p03_pollination.json",
+    "entry": {"E": 14, "E_max": 20, "A": 10, "A_max": 10, "H": 6, "C": 8, "R": 18},
+    "per_reciprocal_cycle": {"E": 1, "A": 1},
+    "after_three_sampled_operations": {"E": 16, "A": 4, "H": 9, "C": 10, "R": 14.4},
+    "background_food": {"supply_min": 14, "total_consumption": 28, "remaining": 4},
+    "run_dates": ["2046-04-30", "2046-05-03", "2046-05-06"],
+    "run_days": [1, 4, 7],
+    "care_dates": ["2046-04-30", "2046-05-01", "2046-05-02", "2046-05-03", "2046-05-04", "2046-05-05", "2046-05-06"]
+  },
+  "clues": [
+    {"id": "P03-C01", "scene_id": "EX-CH02-S01", "holder": "mei", "kind": "data_card", "source_id": "fast_plants_lifecycle", "label": "Identity cards", "text": "Alo and Tara are compatible plants of the same Fast Plant cultivar (Brassica rapa). This cultivar is self-incompatible: a flower's own pollen does not make seeds."},
+    {"id": "P03-C02", "scene_id": "EX-CH02-S01", "holder": "all", "kind": "line", "line_id": "EX-CH02-S01-L04", "label": "Read the biology first", "text": "First we read how this cultivar makes seeds."},
+    {"id": "P03-C03", "scene_id": "EX-CH02-S02", "holder": "rafi", "kind": "line", "line_id": "EX-CH02-S02-L02", "label": "The paper bee", "text": "Good. What does it actually do?"},
+    {"id": "P03-C04", "scene_id": "EX-CH02-S02", "holder": "mei", "kind": "object", "label": "Magnified flower", "text": "The anther holds the yellow pollen. The stigma is the receptive tip that takes pollen in. The petal only attracts pollinators."},
+    {"id": "P03-C05", "scene_id": "EX-CH02-S02", "holder": "amara", "kind": "line", "line_id": "EX-CH02-S02-L03", "label": "Two brushes", "text": "One brush for each recorded direction."},
+    {"id": "P03-C06", "scene_id": "EX-CH02-S03", "holder": "kai", "kind": "line", "line_id": "EX-CH02-S03-L02", "label": "Kai's straight line", "text": "It left out the air."},
+    {"id": "P03-C07", "scene_id": "EX-CH02-S03", "holder": "rafi", "kind": "data_card", "source_id": "donki_2017_09", "label": "Space-weather check", "text": "A space-weather check reads recent solar flares and particle events before anyone opens the transfer route."},
+    {"id": "P03-C08", "scene_id": "EX-CH02-S03", "holder": "amara", "kind": "line", "line_id": "EX-CH02-S03-L03", "label": "One charge per cycle", "text": "Count the whole reciprocal cycle once, not every camera cut."},
+    {"id": "P03-C09", "scene_id": "EX-CH02-S04", "holder": "amara", "kind": "line", "line_id": "EX-CH02-S04-L01", "label": "Read both labels", "text": "Donor Tara. Recipient Alo. Read the second label."},
+    {"id": "P03-C10", "scene_id": "EX-CH02-S04", "holder": "mei", "kind": "line", "line_id": "EX-CH02-S04-L04", "label": "Procedure is not seeds", "text": "The transfer did. Seeds are a later observation."},
+    {"id": "P03-C11", "scene_id": "EX-CH02-S05", "holder": "mei", "kind": "line", "line_id": "EX-CH02-S05-L03", "label": "Seven-date strip", "text": "Both plants get care every day. Pollen runs have their own schedule."},
+    {"id": "P03-C12", "scene_id": "EX-CH02-S05", "holder": "rafi", "kind": "line", "line_id": "EX-CH02-S05-L04", "label": "Fresh weather check", "text": "Weather check before each actual run. Familiar is not automatic."},
+    {"id": "P03-C13", "scene_id": "EX-CH02-S05", "holder": "mei", "kind": "data_card", "source_id": "mir_brassica_seed_to_seed", "label": "Done in space before", "text": "On the Mir space station, Brassica rapa was hand-pollinated and grew from seed to new seed during a 122-day experiment."},
+    {"id": "P03-C14", "scene_id": "EX-CH02-S06", "holder": "mei", "kind": "object", "label": "Stem labels", "text": "Alo: purple stem. Tara: green stem. Each label is written in words, so colour vision is never required."},
+    {"id": "P03-C15", "scene_id": "EX-CH02-S06", "holder": "all", "kind": "line", "line_id": "EX-CH02-S06-L03", "label": "What would change our mind?", "text": "What observation would make us change our mind?"}
+  ],
+  "investigation": [
+    {"scene_id": "EX-CH02-S01", "target_id": "inspect_alo_identity", "text": "Compare Alo's identity card with Tara's.", "clue_ids": ["P03-C01"]},
+    {"scene_id": "EX-CH02-S01", "target_id": "inspect_tara_identity", "text": "Note that both plants are compatible partners of one self-incompatible cultivar.", "clue_ids": ["P03-C01", "P03-C02"]},
+    {"scene_id": "EX-CH02-S02", "target_id": "identify_anther", "text": "Tap the word label for the pollen-bearing anther.", "clue_ids": ["P03-C03", "P03-C04"], "choice_id": "collect_from"},
+    {"scene_id": "EX-CH02-S02", "target_id": "identify_stigma", "text": "Tap the word label for the receptive stigma.", "clue_ids": ["P03-C04"], "choice_id": "deliver_to"},
+    {"scene_id": "EX-CH02-S03", "target_id": "check_space_weather", "text": "Read the space-weather panel before opening the route.", "clue_ids": ["P03-C07"], "choice_id": "weather"},
+    {"scene_id": "EX-CH02-S03", "target_id": "prepare_closed_carrier", "text": "Choose a transfer design that keeps the air in and the records apart.", "clue_ids": ["P03-C05", "P03-C06"], "choice_id": "transfer_design"},
+    {"scene_id": "EX-CH02-S03", "target_id": "verify_transfer_boundaries", "text": "Trace the route boundary by boundary.", "clue_ids": ["P03-C06"], "choice_id": "boundary_order"},
+    {"scene_id": "EX-CH02-S03", "target_id": "preview_cycle_budget", "text": "Preview one reciprocal cycle and its single E1/A1 charge.", "clue_ids": ["P03-C08"]},
+    {"scene_id": "EX-CH02-S04", "target_id": "p03_scan_tara", "text": "Run 1 starts: scan Tara as donor and read both labels.", "clue_ids": ["P03-C09"], "choice_id": "pollen_route"},
+    {"scene_id": "EX-CH02-S04", "target_id": "p03_complete_run_1", "text": "Commit the whole reciprocal cycle once; the flowers stay flowers.", "clue_ids": ["P03-C10"]},
+    {"scene_id": "EX-CH02-S05", "target_id": "p03_care_day_2", "text": "Care visits and pollen runs are different jobs.", "clue_ids": ["P03-C11", "P03-C13"], "choice_id": "schedule"},
+    {"scene_id": "EX-CH02-S05", "target_id": "p03_run_2_forward", "text": "Check space weather again before run 2 and run 3.", "clue_ids": ["P03-C12"]},
+    {"scene_id": "EX-CH02-S06", "target_id": "record_stem_prediction", "text": "Read the stem labels, then write expectation, reason and future test.", "clue_ids": ["P03-C14", "P03-C15"], "choice_id": "prediction"}
+  ],
+  "steps": [
+    {"action": "p03_scan_tara", "run": 1, "label": "Scan Tara as donor"},
+    {"action": "p03_collect_tara_pollen", "run": 1, "label": "Collect pollen from Tara's anther with brush A"},
+    {"action": "p03_seal_brush_a", "run": 1, "label": "Seal brush A in the closed carrier"},
+    {"action": "p03_transfer_to_alo", "run": 1, "label": "Through the interlock, touch Alo's stigma with brush A"},
+    {"action": "p03_scan_alo", "run": 1, "label": "Scan Alo as donor"},
+    {"action": "p03_collect_alo_pollen", "run": 1, "label": "Collect pollen from Alo's anther with clean brush B"},
+    {"action": "p03_seal_brush_b", "run": 1, "label": "Seal brush B in the closed carrier"},
+    {"action": "p03_transfer_to_tara", "run": 1, "label": "Through the interlock, touch Tara's stigma with brush B"},
+    {"action": "p03_complete_run_1", "run": 1, "label": "Commit reciprocal cycle 1 · 30 April · E1/A1"},
+    {"action": "p03_run_2_forward", "run": 2, "label": "Run 2 · Tara anther, brush A, Alo stigma"},
+    {"action": "p03_run_2_reverse", "run": 2, "label": "Run 2 · Alo anther, brush B, Tara stigma"},
+    {"action": "p03_complete_run_2", "run": 2, "label": "Commit reciprocal cycle 2 · 3 May · E1/A1"},
+    {"action": "p03_run_3_forward", "run": 3, "label": "Run 3 · Tara anther, brush A, Alo stigma"},
+    {"action": "p03_run_3_reverse", "run": 3, "label": "Run 3 · Alo anther, brush B, Tara stigma"},
+    {"action": "p03_complete_run_3", "run": 3, "label": "Commit reciprocal cycle 3 · 6 May · E1/A1"}
+  ],
+  "choices": {
+    "collect_from": {
+      "prompt": "Where does the brush pick up pollen?",
+      "options": [
+        {"value": "anther", "label": "Anther", "correct": true, "feedback": "Yes. The anther holds the pollen."},
+        {"value": "stigma", "label": "Stigma", "correct": false, "feedback": "The stigma receives pollen; it does not hold any to collect. Pick it up from the anther."},
+        {"value": "petal", "label": "Petal", "correct": false, "feedback": "Touching a petal moves no pollen. Pollen sits on the anther."}
+      ]
+    },
+    "deliver_to": {
+      "prompt": "Where must the pollen land on the partner flower?",
+      "options": [
+        {"value": "stigma", "label": "Stigma", "correct": true, "feedback": "Yes. The receptive stigma takes the pollen in."},
+        {"value": "anther", "label": "Anther", "correct": false, "feedback": "The anther makes pollen; it cannot receive it. Touch the stigma."},
+        {"value": "petal", "label": "Petal", "correct": false, "feedback": "Touching a petal moves no pollen. Touch the receptive stigma."}
+      ]
+    },
+    "transfer_design": {
+      "prompt": "Which transfer design keeps both the air and the records safe?",
+      "options": [
+        {"value": "labelled_sealed", "label": "Brush A and brush B, each in the closed carrier", "correct": true, "feedback": "Each direction keeps its own record, and the carrier keeps the route's air in."},
+        {"value": "one_brush", "label": "One unlabelled brush for both directions", "correct": false, "feedback": "With one brush you cannot tell which plant's pollen went where. Use A for Tara to Alo and clean B for Alo to Tara."},
+        {"value": "join_chambers", "label": "Move the two chambers together", "correct": false, "feedback": "The chambers have separate services and purposes. Moving them changes many things at once. Move the pollen, not the plants."}
+      ]
+    },
+    "boundary_order": {
+      "prompt": "How do the pressure doors open on the route?",
+      "options": [
+        {"value": "one_at_a_time", "label": "One boundary at a time", "correct": true, "feedback": "Both chamber pressures stay unchanged."},
+        {"value": "both_open", "label": "Open both boundaries to save time", "correct": false, "feedback": "Two boundaries can never be open together. The interlock refuses it and nothing is charged."}
+      ]
+    },
+    "weather": {
+      "prompt": "When is space weather checked?",
+      "options": [
+        {"value": "before_every_run", "label": "Before every run", "correct": true, "feedback": "A fresh GO before each run. Familiar is not automatic."},
+        {"value": "first_run_only", "label": "Once, before the first run", "correct": false, "feedback": "Conditions change between dates. Check again before each actual run."}
+      ]
+    },
+    "pollen_route": {
+      "prompt": "Which pollen route fits this self-incompatible cultivar?",
+      "options": [
+        {"value": "reciprocal", "label": "Tara's pollen to Alo, Alo's pollen to Tara, each with its labelled brush", "correct": true, "feedback": "Compatible partner pollen goes both ways and both directions stay recorded."},
+        {"value": "own_pollen", "label": "Return each plant's pollen to its own stigma", "correct": false, "feedback": "This cultivar is self-incompatible: its own pollen does not make seeds. No flower is damaged; use the partner's pollen."}
+      ]
+    },
+    "schedule": {
+      "prompt": "How do care visits and pollen runs fit across the seven dates?",
+      "options": [
+        {"value": "care_daily_runs_three", "label": "Care on all seven dates; pollen runs only on 30 April, 3 May and 6 May", "correct": true, "feedback": "Monitoring and intervention are different operations, each with its own schedule."},
+        {"value": "run_every_visit", "label": "Repeat a pollen run at every visit, to be sure", "correct": false, "feedback": "Every extra run costs another E1/A1 and the record still needs exactly three cycles."}
+      ]
+    },
+    "prediction": {
+      "prompt": "Record a stem-colour prediction for the next generation.",
+      "action": "p03_record_prediction",
+      "fields": {
+        "prediction": [
+          {"value": "Both visible colours may appear", "label": "Both purple and green stems may appear", "correct": true, "feedback": "A testable expectation, recorded with its date."},
+          {"value": "Available evidence is insufficient to choose a pattern", "label": "The evidence is not enough to choose a pattern", "correct": true, "feedback": "An honest uncertain answer is useful. The notebook records what still needs observing."},
+          {"value": "Exactly three purple to one green", "label": "Exactly three purple stems to every green one", "correct": false, "feedback": "A fixed ratio needs the parents' full genotypes, and two stem colours do not show them. Do not promise a ratio."},
+          {"value": "All stems will be purple", "label": "Every seedling will have a purple stem", "correct": false, "feedback": "That would only be certain if the parents' full genotypes were known. They are not."}
+        ],
+        "reason": [
+          {"value": "Alo has purple and Tara has green stems; the complete genotype is not established.", "label": "Alo has a purple stem and Tara a green one; their full genetics are unknown.", "correct": true, "feedback": "The reason uses only what was observed."},
+          {"value": "Seeds copy the plant that grows them.", "label": "Seeds copy the plant that grows them", "correct": false, "feedback": "Each seed gets genes from the pollen parent and the seed parent. Seedlings are not copies of one plant."}
+        ],
+        "future_test": [
+          {"value": "Compare descendant stem observations after seed harvest.", "label": "Compare the next generation's stems after the seed harvest", "correct": true, "feedback": "A clear future test. A surprise would be useful, not a penalty."},
+          {"value": "Open a pod now to check.", "label": "Open a pod now to check early", "correct": false, "feedback": "Pods take about 20 days to ripen after pollination. Opening one early destroys the evidence."}
+        ]
+      }
+    }
+  },
+  "feedback": {
+    "petal_touched": "Touching a petal moves no pollen. Collect from the anther and touch the partner's stigma.",
+    "own_pollen": "This cultivar is self-incompatible: its own pollen does not make seeds. Use the partner's pollen.",
+    "dirty_brush": "This brush tip carries pollen from the other direction. Replace the tip with a clean one; clean tips are unlimited.",
+    "unsealed_carrier": "Seal the brush in the closed carrier before the first boundary.",
+    "weather_unchecked": "Check space weather before this run. Nothing is charged until it is GO.",
+    "two_boundaries": "Two boundaries cannot open together. Close one before opening the next.",
+    "cycle_committed": "Reciprocal cycle recorded: E1/A1, charged once for the whole cycle. Seeds are a later observation.",
+    "care_logged": "Care date recorded.",
+    "prediction_incomplete": "A prediction needs an expectation, a reason and a future test."
+  },
+  "hints": {
+    "runs": ["A flower needs pollen from its partner.", "Take pollen from the anther to the other plant’s stigma.", "Use A for Tara→Alo and clean B for Alo→Tara."],
+    "prediction": ["What can two stem colours tell you, and what can't they?", "Write what you expect and what would surprise you.", "Example of the format: 'Both colours may appear. A surprise would be every plant one colour.'"]
+  },
+  "limits": "Fast Plants pollination guidance (plant days 15 to 21, stigma receptive 2 to 4 days, pods about 20 days after pollination) is ideal classroom timing on Earth. Alo was planted on 11 April 2046, so the runs fall on story plant days 19, 22 and 25, and runs 2 and 3 come after that classroom window. Lunar growth and these dates are fiction."
+}

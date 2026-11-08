@@ -86,10 +86,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">88 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">15 todo</span></div><div class="bar"><i style="width:84%"></i></div>
-<details open><summary>Working now (2)</summary><ul>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">89 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">15 todo</span></div><div class="bar"><i style="width:85%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
 <li><a class="id" href="#M1-87">M1-87</a> Walkable 10 m relay-road patch so LOC-11 can stand on the LOLA terrain <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/antigravity on 2026-11-08</div></li>
-<li><a class="id" href="#M1-104">M1-104</a> Publish P03/P04 authored data for Ramim Chapter 2 panels <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-08</div></li>
 </ul></details>
 <details open><summary>Next up today (2)</summary><ul>
 <li><a class="id" href="#M1-106">M1-106</a> Record reviewed M1-72 science access and pending batch gate <span class="chip ">codex</span> <span class="chip ">P1</span></li>
@@ -110,7 +109,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-66">M3-66</a> Explainer clips for every Chapter 2-4 mechanic (5-8 in M3-76) <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-76">M3-76</a> Explainer clips for every Chapter 5-8 mechanic <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details><summary>Done (88)</summary><ul>
+<details><summary>Done (89)</summary><ul>
 <li><a class="id" href="#M0-11">M0-11</a> Team roster, roles and both registrations <span class="chip ">human</span> <span class="chip ">P0</span><div class="meta">docs/TEAM.md complete (Sadman in chat, 7 Nov 2026): all six members listed with role and GitHub; both registrations confirmed (&quot;Yes, all do…</div></li>
 <li><a class="id" href="#M1-06">M1-06</a> Assemble the Chapter 1 rooms from the kit <span class="chip ">claude</span> <span class="chip ">P0</span><div class="meta">run_tests.sh last line: 38/38 suites passed (production/qa/evidence/M1-06_tests.txt): habitat rooms 333/0, campaign crew 927/0, room presen…</div></li>
 <li><a class="id" href="#M1-07">M1-07</a> Chapter 1 missing assets: Alo&#x27;s early stages, Earth desk, UI kit <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">Approved by Sadman in chat, 6 Nov 2026 ~10:58: &quot;Approve, Space weather&quot; (UI_Kit_sheet_v1 with its 6 README decisions and EN_EarthDesk_sheet…</div></li>
@@ -199,6 +198,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M4-10">M4-10</a> Garage console: Screen crops the top line of three-line texts; the landing-pad camera shows words only <span class="chip ">claude</span> <span class="chip ">P2</span><div class="meta">game/assets/environment/EN_Garage/EN_Garage_HandoverConsole_LOD0.glb, EN_Garage_HandoverConsole_LOD1.glb, game/assets/environment/EN_Garage…</div></li>
 <li><a class="id" href="#M1-100">M1-100</a> Investigate Windows campaign-media voice readiness failure <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Cause proven: delayed threaded load left playing=false/path=null while line_id was correct after 3 frames. Added bounded voice_readiness st…</div></li>
 <li><a class="id" href="#M1-102">M1-102</a> Validate saved Solo/Class crew configuration for Ramim M1-37 <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">test_session_crew 135 checks 0 failures; run_tests.sh 72/72 suites passed; production/qa/evidence/M1-102.md</div></li>
+<li><a class="id" href="#M1-104">M1-104</a> Publish P03/P04 authored data for Ramim Chapter 2 panels <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">p03_pollination.json + p04_recorder_reconstruction.json published; test_p03_p04_content.gd PASS 303 checks; full suite 74/74; handoff produ…</div></li>
 </ul></details>
 </div>
 <div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">1 done</span><span class="chip s-in_progress">5 in progress</span><span class="chip s-blocked">11 blocked</span><span class="chip s-todo">28 todo</span></div><div class="bar"><i style="width:2%"></i></div>
@@ -6946,7 +6946,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Publish P03/P04 authored data for Ramim Chapter 2 panels",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -6955,7 +6955,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.",
-   "evidence": "",
+   "evidence": "p03_pollination.json + p04_recorder_reconstruction.json published; test_p03_p04_content.gd PASS 303 checks; full suite 74/74; handoff production/qa/evidence/M1-104.md",
    "updated": "2026-11-08",
    "prompt": "Ramim next-backlog audit of M3-2P found saved origin/night/M3-2P tip5203a6f includes unlanded content/p03_pollination.json and p04_recorder_reconstruction.json; those data paths are Sadman-owned. Current main has only pure P03/P04 receipt/sequence state and prefilled catalog answers. Please review and publish the smallest canonical authored puzzle-data contract for those two panels: choices and plausible wrong options, source-labeled clues/investigation, plain feedback/hint tiers and Learn/Apply/Twist stages, preserving game-design/08 numbers, 22 section4 and 24 Chapter2 story joins/no premature Noor reveal. Reuse current profiles and registry/source IDs; do not add a second science simulator or overwrite current story data. Saved night JSON is reference, not approved wholesale content. Coordinate exact primitive schema/path with Ramim and Atik's selected-input runtime bridge. No Ramim UI/puzzles edits. Validate content/source references and numbers plus repository runner; preserve explicit unrelated Windows gate failures. Publish handoff so Ramim can implement against real data instead of hard-coding answers in a form.",
    "reserved_for": "sadman",
