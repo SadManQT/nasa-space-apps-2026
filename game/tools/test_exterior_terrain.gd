@@ -38,8 +38,9 @@ const Roster = preload("res://scripts/companions/companion_roster.gd")
 ## Scenes whose exterior has a computed horizon and a Horizons row that puts Earth above it (sun_positions.json).
 const EARTH_SHOWN := {"LOC-06": ["EX-CH01-S01", "EX-CH01-S12", "EX-CH04-S02", "EX-CH04-S09", "EX-CH05-S01"],
 	"LOC-12": ["EX-CH08-S06", "EX-CH08-S08", "EX-CH08-S10"]}
-## Capture: room, dated scene, extra evidence light (a permanently shadowed floor is black under its true Sun).
-const SHOTS := [["LOC-06", "EX-CH04-S09", false], ["LOC-09", "EX-CH04-S05", false], ["LOC-10", "EX-CH04-S06", true]]
+## Capture: room, dated scene, extra evidence light (a permanently shadowed floor, or the relay road with the Sun
+## behind its terrain horizon, is black under its true Sun).
+const SHOTS := [["LOC-06", "EX-CH04-S09", false], ["LOC-09", "EX-CH04-S05", false], ["LOC-10", "EX-CH04-S06", true], ["LOC-11", "EX-CH08-S03", true]]
 var checks := 0
 var failures := 0
 var _fields: Dictionary = {}
@@ -470,7 +471,12 @@ func _check_placements() -> void:
 			var site_at_approach := turn * at
 			_check(field.slope_deg_at(o.x + site_at_approach.x, o.y + site_at_approach.z) <= SLOPE_LIMIT_DEG, "%s approach to %s is walkable" % [label, id])
 			_check(at.distance_to(Presentation.vector(place.focus_targets[id])) < 3.0, "%s approach to %s is within interaction range" % [label, id])
-	_check(not bool(data.rooms["LOC-11"].omit_staging_floor), "LOC-11 waits for a walkable relay-road patch")
+	# M1-87: LOC-11 stands on the 10 m relay-road patch whose site is its Horizons site, so TerrainStream.lighting accepts
+	# the EX-CH08-S03/S04 rows (it refuses a row whose site is not the field's).
+	var relay: Dictionary = data.rooms.get("LOC-11", {})
+	var patch := _field("relay_road_mid")
+	_check(bool(relay.get("omit_staging_floor", false)) and String(relay.get("region_id", "")) == "relay_road_mid" and patch != null and String(patch.site.get("id", "")) == String(relay.get("ephemeris_site", "-")), "LOC-11 stands on the relay_road_mid patch, whose site is its Horizons site")
+	_check(patch != null and is_equal_approx(patch.metres_per_pixel, 10.0), "the relay-road patch is the 10 m LOLA grid, not the 80 m corridor")
 
 func _site_in_region(site: Dictionary, field: TerrainHeightfield) -> Vector2:
 	return Vector2(float(site.get("x_m", 0)) - float(field.site.x_m), -(float(site.get("y_m", 0)) - float(field.site.y_m)))
@@ -502,9 +508,9 @@ func _check_rooms() -> void:
 		flat.free()
 		ground.free()
 		await process_frame
-	var pending := _make_room("LOC-11", true)
-	_check(not pending.on_terrain() and pending.collision_root.has_node("FloorCollision"), "LOC-11 keeps its flat floor even when terrain is requested")
-	pending.free()
+	var relay := _make_room("LOC-11", true)
+	_check(relay.on_terrain() and not relay.collision_root.has_node("FloorCollision"), "LOC-11 stands on the relay-road terrain when terrain is requested")
+	relay.free()
 	# The crew stands on the terrain anchors (EX-CH04-S04: Kai and Rafi on the surveyed ridge).
 	var ridge := _make_room("LOC-09", true)
 	var crew := Crew.new()

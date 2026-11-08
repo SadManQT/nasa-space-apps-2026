@@ -1,6 +1,46 @@
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M4 (Apple9)
 
+ROOT Agree distance=1.218332 m speed=0.093418 m/s (removed)
+ROOT Cheer distance=0.255680 m speed=0.086427 m/s (removed)
+ROOT KneelStand distance=0.372364 m speed=0.144141 m/s (removed)
+ROOT PickUp distance=0.316402 m speed=0.043894 m/s (removed)
+ROOT Push distance=0.976842 m speed=0.205651 m/s (removed)
+ROOT RunToWalk distance=2.913324 m speed=1.271269 m/s (removed)
+ROOT SitDown distance=1.213085 m speed=0.212511 m/s (removed)
+ROOT SprintStop distance=2.922261 m speed=1.461130 m/s (removed)
+ROOT StandUp distance=0.561111 m speed=0.090380 m/s (removed)
+ROOT TurnRunL distance=2.286090 m speed=1.406824 m/s (removed)
+ROOT TurnRunR distance=2.449720 m speed=1.507520 m/s (removed)
+ROOT TurnWalkL distance=1.742367 m speed=0.871183 m/s (removed)
+ROOT TurnWalkR distance=2.024618 m speed=0.916808 m/s (removed)
+ROOT Water distance=0.430974 m speed=0.086195 m/s (removed)
+STRIDE Walk_loop speed=1.565301 m/s period=1.083333 m/cycle=1.695743 stance_samples=92 source=1.083333 s
+  authored boot surface mean=1.565301 m/s contacts=38
+STRIDE Run_loop speed=4.337359 m/s period=0.833333 m/cycle=3.614466 stance_samples=33 source=0.833333 s
+  authored boot surface mean=4.337359 m/s contacts=42
+STRIDE Sprint_loop speed=4.031034 m/s period=0.625000 m/cycle=2.519397 stance_samples=36 source=0.625000 s
+  authored boot surface mean=3.403671 m/s contacts=60
+ROOT Agree distance=1.334257 m speed=0.102307 m/s (removed)
+ROOT Cheer distance=0.280008 m speed=0.094651 m/s (removed)
+ROOT KneelStand distance=0.407794 m speed=0.157856 m/s (removed)
+ROOT PickUp distance=0.346508 m speed=0.048070 m/s (removed)
+ROOT Push distance=1.069789 m speed=0.225219 m/s (removed)
+ROOT RunToWalk distance=3.190529 m speed=1.392231 m/s (removed)
+ROOT SitDown distance=1.328511 m speed=0.232732 m/s (removed)
+ROOT SprintStop distance=3.200316 m speed=1.600158 m/s (removed)
+ROOT StandUp distance=0.614501 m speed=0.098980 m/s (removed)
+ROOT TurnRunL distance=2.503612 m speed=1.540685 m/s (removed)
+ROOT TurnRunR distance=2.682813 m speed=1.650962 m/s (removed)
+ROOT TurnWalkL distance=1.908154 m speed=0.954077 m/s (removed)
+ROOT TurnWalkR distance=2.217261 m speed=1.004043 m/s (removed)
+ROOT Water distance=0.473958 m speed=0.094792 m/s (removed)
+STRIDE Walk_loop speed=1.631352 m/s period=1.083333 m/cycle=1.767298 stance_samples=93 source=1.083333 s
+  authored boot surface mean=1.631352 m/s contacts=13
+STRIDE Run_loop speed=4.979010 m/s period=0.833333 m/cycle=4.149175 stance_samples=30 source=0.833333 s
+  authored boot surface mean=4.979010 m/s contacts=23
+STRIDE Sprint_loop speed=4.428496 m/s period=0.625000 m/cycle=2.767810 stance_samples=38 source=0.625000 s
+  authored boot surface mean=4.428496 m/s contacts=33
 ROOT Agree distance=1.220700 m speed=0.093600 m/s (removed)
 ROOT Cheer distance=0.256177 m speed=0.086595 m/s (removed)
 ROOT KneelStand distance=0.373088 m speed=0.144421 m/s (removed)
@@ -15,19 +55,5 @@ ROOT TurnRunR distance=2.454483 m speed=1.510451 m/s (removed)
 ROOT TurnWalkL distance=1.745754 m speed=0.872877 m/s (removed)
 ROOT TurnWalkR distance=2.028554 m speed=0.918590 m/s (removed)
 ROOT Water distance=0.431812 m speed=0.086362 m/s (removed)
-ROOT Agree distance=1.278081 m speed=0.098000 m/s (removed)
-ROOT Cheer distance=0.268219 m speed=0.090666 m/s (removed)
-ROOT KneelStand distance=0.390625 m speed=0.151210 m/s (removed)
-ROOT PickUp distance=0.331919 m speed=0.046047 m/s (removed)
-ROOT Push distance=1.024748 m speed=0.215736 m/s (removed)
-ROOT RunToWalk distance=3.056199 m speed=1.333614 m/s (removed)
-ROOT SitDown distance=1.272577 m speed=0.222933 m/s (removed)
-ROOT SprintStop distance=3.065574 m speed=1.532787 m/s (removed)
-ROOT StandUp distance=0.588629 m speed=0.094813 m/s (removed)
-ROOT TurnRunL distance=2.398204 m speed=1.475818 m/s (removed)
-ROOT TurnRunR distance=2.569859 m speed=1.581452 m/s (removed)
-ROOT TurnWalkL distance=1.827816 m speed=0.913908 m/s (removed)
-ROOT TurnWalkR distance=2.123908 m speed=0.961770 m/s (removed)
-ROOT Water distance=0.454003 m speed=0.090801 m/s (removed)
-LOC06_CH04S09 Earth measured 1.844 deg across in the render (published 1.899 deg, JPL Horizons DE441, aurora 2046-10-22 06:00 UTC (sun_positions.json scene_lighting; terrain horizon from LOLA))
-EXTERIOR TERRAIN RESULT: PASS (375 checks, 0 failures)
+LOC06_CH04S09 Earth measured 1.840 deg across in the render (published 1.899 deg, JPL Horizons DE441, aurora 2046-10-22 06:00 UTC (sun_positions.json scene_lighting EX-CH04-S09; terrain horizon from LOLA))
+EXTERIOR TERRAIN RESULT: PASS (950 checks, 0 failures)

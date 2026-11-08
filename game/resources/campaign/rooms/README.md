@@ -250,7 +250,7 @@ and compares, so a moved prop or a new heightfield fails until it is re-written.
 | LOC-06 mast courtyard | `aurora_ridge` at the Aurora site | the site of the Horizons rows and terrain horizon | dated rows where Earth clears the horizon |
 | LOC-09 surveyed ridge | `cold_trap` at the computed road's last bend (-620, -1000) | EX-CH04-S04's corner, 146 m above the basin | never: no horizon computed there |
 | LOC-10 vault approach | `cold_trap` at the cold-trap site | the PSR floor of the S05/S06 rows | its rows put Earth below the horizon |
-| LOC-11 relay route | `relay_road` at relay_road_mid, **pending** | the 80 m corridor is too coarse to walk; needs the 10 m patch | — |
+| LOC-11 relay route | `relay_road_mid` (10 m patch) at (-160, -1198), on the computed road 1.2 km from the site | the nearest road stretch where the road bed, pad and bypass rest within 0.21 m and the room is under 2.7 deg (M1-87) | never: the S03/S04 rows put it below the horizon |
 
 Frame: room-local = site frame - `origin_m`, same axes, no rotation. The campaign keeps the room at its origin, puts
 the stream at `-origin_m`, `configure(region_id, origin_m + player anchor, exclusions)` and `move_focus(player.position
@@ -264,7 +264,7 @@ lane), `props`, `fixtures`, `doors` (resting at the lowest ground under the part
   sets `omit_staging_floor`, the room builds no staging floor, apron rails, flat navigation or greybox light rig, and
   stands its anchors, focus targets, props, fixtures and doors on the published spots. Every id, door, pressure marker
   and scene id is the same; `on_terrain()` reports it, `terrain_anchors()` gives the anchors, and `CampaignCrew.place`
-  uses them. Without the flag (or for LOC-11) the flat greybox is exactly as before.
+  uses them. Without the flag (or for LOC-12) the flat greybox is exactly as before.
 - `RoomContract.terrain(room_id)` returns the placement; `RoomContract.earth(room_id, scene_id)` the dated Earth:
   `presented` only when the room stands at the row's site with a computed horizon, the scene has a bundled row
   (`lola/sun_positions.json` `scene_lighting`) that puts Earth above the terrain horizon, and Earth is not over the Sun
@@ -504,7 +504,7 @@ through TerrainStream's cascades (board M3-110, item 4).
 - **Sky on the flat floor** (`RoomStaging.apply_sky`): the dated Earth where `RoomContract.earth` presents it, with the key light turned to
   the same dated Sun; otherwise black, with `lighting.stars` (a faint sparse field, `sky_env_stars.gdshader`) only on the dark road.
   `exterior_terrain.json` LOC-12 `sky_rows` gives S07 the S06 row (00:00) and S09 the S10 row (02:00), both inside their windows.
-- **Terrain:** LOC-11 waits for the 10 m patch (M1-87). LOC-12 has its summit placement and dated sky but stays on the flat floor: the raw
+- **Terrain:** LOC-11 stands on the 10 m `relay_road_mid` patch (M1-87; S02–S04 staged pieces all lie within 0.03 m of its origin height). LOC-12 has its summit placement and dated sky but stays on the flat floor: the raw
   5 m tile falls up to 2.4 m across the pad M3-8A cuts and fills level, and the provider cannot grade a pad yet (board task).
 
 Run `game/tools/run_tests.sh chapter8_rooms` (mapping and the two teams, stations, navigation, walking, collision, words, aboard and EVA

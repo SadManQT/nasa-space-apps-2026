@@ -12,7 +12,8 @@ Credit line (Data Card, credits, every video that shows the terrain): `lola_terr
 | `aurora_ridge` | hero | Aurora, Shackleton–de Gerlache connecting ridge | 5 m (PGDA Site01) | 8 × 8 km | LOC-06, Chapters 1–8 at Aurora |
 | `aurora_vista` | vista | Aurora | 40 m | 64 × 64 km, 8 km hole | horizon: Shackleton, de Gerlache, the pole |
 | `cold_trap` | hero | Chapter 4 permanently shadowed basin | 10 m (LDEM_83S) | 8 × 8 km | LOC-09 / LOC-10 |
-| `relay_road` | corridor | Aurora → Malapert summit | 80 m | 58 × 169 km | LOC-11 overview (playable segments are M1-36) |
+| `relay_road` | corridor | Aurora → Malapert summit | 80 m | 58 × 169 km | LOC-11 overview (playable stretches get their own 10 m hero patch) |
+| `relay_road_mid` | hero | the computed relay road's midpoint | 10 m (LDEM_83S) | 8 × 8 km | LOC-11 marker-two sector (EX-CH08-S03/S04 rows, M1-87) |
 | `malapert_summit` | hero | highest point of Mons Malapert | 5 m (PGDA Site23) | 8 × 8 km | LOC-12 |
 | `malapert_vista` | vista | Malapert summit | 40 m | 64 × 64 km, 8 km hole | horizon toward Earth |
 

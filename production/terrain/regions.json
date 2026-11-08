@@ -43,7 +43,8 @@
   {"id": "aurora_ridge", "kind": "hero", "site": "aurora", "size_m": 8000, "mpp": 5, "sources": ["pgda78_site01", "pgda90_10mpp"], "story": "LOC-06 mast courtyard, Chapter 1 to 8 exteriors at Aurora"},
   {"id": "aurora_vista", "kind": "vista", "site": "aurora", "size_m": 64000, "mpp": 40, "sources": ["pgda90_40mpp"], "story": "horizon from Aurora: Shackleton, de Gerlache, the pole"},
   {"id": "cold_trap", "kind": "hero", "site": "cold_trap", "size_m": 8000, "mpp": 5, "sources": ["pgda78_site01", "pgda78_site04", "pgda90_10mpp"], "story": "LOC-09 surveyed approach and LOC-10 vault shelf (Chapter 4)"},
-  {"id": "relay_road", "kind": "corridor", "from": "aurora", "to": "malapert_summit", "half_width_m": 16000, "mpp": 80, "sources": ["pgda90_80mpp"], "story": "LOC-11 relay road, 120 km in five playable segments (Chapter 8); 80 m vista grid, cut 10 m patches for the playable segments with make_terrain.window_m"},
+  {"id": "relay_road", "kind": "corridor", "from": "aurora", "to": "malapert_summit", "half_width_m": 16000, "mpp": 80, "sources": ["pgda90_80mpp"], "story": "LOC-11 relay road, 120 km in five playable segments (Chapter 8); 80 m vista grid, overview only: each playable segment is its own 10 m hero region cut with make_terrain.window_m (relay_road_mid, M1-87)"},
+  {"id": "relay_road_mid", "kind": "hero", "site": "relay_road_mid", "size_m": 8000, "mpp": 10, "sources": ["pgda90_10mpp"], "story": "LOC-11 relay route at the first repeater sector (EX-CH08-S03, S04): the playable 10 m patch around the computed relay road's midpoint, in that site's own frame so its Horizons rows light it (M1-87)"},
   {"id": "malapert_summit", "kind": "hero", "site": "malapert_summit", "size_m": 8000, "mpp": 5, "sources": ["pgda78_site23", "pgda90_10mpp"], "story": "LOC-12 relay summit (Chapter 8)"},
   {"id": "malapert_vista", "kind": "vista", "site": "malapert_summit", "size_m": 64000, "mpp": 40, "sources": ["pgda90_40mpp"], "story": "horizon from the summit toward Earth"}
  ],
@@ -61,7 +62,7 @@
   {"id": "ch08_april_2047", "site": "aurora", "start": "2047-04-07 00:00", "stop": "2047-04-11 00:00", "step": "1 h", "scenes": "EX-CH08-S01 departure 8 Apr 00:00, EX-CH08-S11 return 10 Apr 03:00"},
   {"id": "ch08_summit", "site": "malapert_summit", "start": "2047-04-08 00:00", "stop": "2047-04-11 00:00", "step": "1 h", "scenes": "EX-CH08-S06..S10 summit 9 April 2047 00:00-02:15 UTC"}
  ],
- "preview_scenes": {"about": "the dated story scene whose Horizons Sun lights each site in the previews, the review sheets and the Godot captures", "aurora": "EX-CH01-S07", "cold_trap": "EX-CH04-S05", "malapert_summit": "EX-CH08-S08"},
+ "preview_scenes": {"about": "the dated story scene whose Horizons Sun lights each site in the previews, the review sheets and the Godot captures", "aurora": "EX-CH01-S07", "cold_trap": "EX-CH04-S05", "relay_road_mid": "EX-CH08-S03", "malapert_summit": "EX-CH08-S08"},
  "scene_lighting": [
   {"scene": "EX-CH01-S01", "site": "aurora", "utc": "2046-04-11 06:00", "note": "mission table; exterior seen through the viewport"},
   {"scene": "EX-CH01-S07", "site": "aurora", "utc": "2046-04-25 06:00", "note": "daylight shifts 1-2, mast status"},

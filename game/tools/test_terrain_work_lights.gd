@@ -27,6 +27,9 @@ const ROVER_SCENE := "res://assets/vehicles/VH_Rover/VH_Rover_Lit.tscn"
 ## The dark placements and scenes the work lights carry: [room, segment ("" = the room's own placement), scene]. They
 ## are exactly the scenes terrain_work_lights.json "scenes" lists as verified (checked), and every one is built, lit and
 ## covered here.
+## M1-87: terrain-ready rooms whose dark rows have no verified work lights yet (board task named), so the campaign keeps
+## them unready on the terrain; remove an entry once its lights are verified.
+const UNVERIFIED_DARK := {"LOC-11": "M4-14: LOC-11's staged per-scene rover and guide lights are not yet work lights"}
 const LIT := [["LOC-09", "B3", "EX-CH04-S04"], ["LOC-09", "", "EX-CH04-S05"], ["LOC-10", "", "EX-CH04-S06"], ["LOC-10", "", "EX-CH04-S07"], ["LOC-10", "", "EX-CH04-S08"]]
 ## The scenes the windowed capture measures on screen: [room, segment, scene, full] (full: also the wide view and the lamp
 ## strip, which show the same rig in the other scenes of a placement). S07 brings the tethered carrier and the probe to
@@ -405,7 +408,11 @@ func _check_ready_flags() -> void:
 			continue  # played on the room's segments (M3-106: EX-CH04-S04 at B1, B2, B3), not at its own placement
 		var place := Contract.terrain(room_id, segment)
 		if bool(place.get("omit_staging_floor", false)) and String(row.site) == String(place.ephemeris_site):
-			_check(bool(Contract.terrain_lighting(room_id, String(row.scene), segment).ready), "%s%s in %s on the terrain is lit (%s Sun)" % [row.scene, "" if segment.is_empty() else " " + segment, room_id, row.sun_state])
+			var ready := bool(Contract.terrain_lighting(room_id, String(row.scene), segment).ready)
+			if UNVERIFIED_DARK.has(room_id) and String(row.sun_state) == "dark":
+				_check(not ready, "%s in %s stays unready on the terrain until its work lights are verified (%s)" % [row.scene, room_id, UNVERIFIED_DARK[room_id]])
+				continue
+			_check(ready, "%s%s in %s on the terrain is lit (%s Sun)" % [row.scene, "" if segment.is_empty() else " " + segment, room_id, row.sun_state])
 	for lit in LIT:
 		var flag := Contract.terrain_lighting(String(lit[0]), String(lit[2]), String(lit[1]))
 		_check(flag.ready and flag.sun_state == "dark" and String(flag.reason).contains("work lights") and flag.work_lights.size() == _lamp_count(String(lit[0])), "%s%s (%s, dark Sun) is ready on the terrain through its %d work lights" % [lit[2], "" if String(lit[1]).is_empty() else " " + String(lit[1]), lit[0], _lamp_count(String(lit[0]))])
@@ -415,7 +422,7 @@ func _check_ready_flags() -> void:
 		_check(sunlit.ready and sunlit.sun_state == "lit" and String(sunlit.reason).contains("Sun"), "LOC-09 %s is ready by its dated Sun (sunlit at 08:00 UTC)" % segment)
 	_check(not bool(Contract.terrain_lighting("LOC-10", "EX-CH04-S05").ready), "a dark scene the room's lights were not verified for is not ready (LOC-10 with the last bend's S05 row)")
 	_check(not bool(Contract.terrain_lighting("LOC-10", "EX-CH04-S04", "B3").ready), "a segment the room does not have is not ready")
-	_check(not bool(Contract.terrain_lighting("LOC-11", "EX-CH08-S03").ready), "LOC-11 is not ready: its placement is pending (M1-87)")
+	_check(not bool(Contract.terrain_lighting("LOC-11", "EX-CH08-S03").ready), "LOC-11 is not ready: its placement stands on the terrain (M1-87) but its dark rows have no verified work lights (M4-14)")
 	_check(not bool(Contract.terrain_lighting("LOC-08", "EX-CH04-S02").ready), "LOC-08 is not ready: the garage keeps its own floors")
 	_check(not bool(Contract.terrain_lighting("LOC-01", "EX-CH01-S01").ready), "an interior has no terrain lighting")
 	var aurora := Contract.terrain_lighting("LOC-06", "EX-CH04-S09")

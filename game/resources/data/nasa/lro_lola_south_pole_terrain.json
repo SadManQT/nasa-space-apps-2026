@@ -1,6 +1,6 @@
 {
  "source_id": "lro_lola_south_pole_terrain",
- "retrieved": "2026-11-07",
+ "retrieved": "2026-11-08",
  "title": "The real south-pole terrain: LRO LOLA elevation models of the connecting ridge, a cold trap and Mons Malapert",
  "agency": "NASA Goddard Space Flight Center, Planetary Geodynamics Data Archive (PGDA); LRO LOLA team; NASA PDS Geosciences Node",
  "dataset_id": "PGDA product 90 (LDEM_80S_20MPP_ADJ, LDEM_80S_40MPP_ADJ, LDEM_80S_80MPP_ADJ, LPSR_80S_20MPP_ADJ; data DOI 10.60903/gsfcpgda-lola-spole), PGDA product 78 (Site01, Site04, Site23 5 m/px), PDS LRO-L-LOLA-4-GDR-V1.0 LDEM_80S_20M (cross-check)",
@@ -51,6 +51,15 @@
     "lat_deg": -89.5813,
     "lon_deg_east": 199.4626,
     "psr_area_km2": 1.858
+   },
+   "relay_road_mid": {
+    "x_m": -35800.0,
+    "y_m": 64440.0,
+    "height_m": -643.7,
+    "lat_deg": -87.5693,
+    "lon_deg_east": 330.9454,
+    "name": "Relay road midpoint (computed road)",
+    "rule": "the point of the computed relay road (routes.json relay_road, 80 m grid) nearest half its length"
    }
   },
   "heightmaps": {
@@ -85,6 +94,14 @@
     "z_min_m": -4021.135,
     "z_max_m": 5172.486,
     "source": "pgda90_80mpp"
+   },
+   "relay_road_mid": {
+    "metres_per_pixel": 10.0,
+    "columns": 800,
+    "rows": 800,
+    "z_min_m": -1382.21,
+    "z_max_m": -138.614,
+    "source": "pgda90_10mpp"
    },
    "malapert_summit": {
     "metres_per_pixel": 5.0,
@@ -169,6 +186,36 @@
     1.597,
     82.17,
     11.08,
+    "dark",
+    "cold_trap",
+    "2046-10-21 08:00",
+    1.653
+   ],
+   [
+    "Chapter 4 B1",
+    1.831,
+    58.779,
+    0.12,
+    "lit",
+    "aurora",
+    "2046-10-21 08:00",
+    1.664
+   ],
+   [
+    "Chapter 4 B2",
+    1.831,
+    58.779,
+    -1.35,
+    "lit",
+    "aurora",
+    "2046-10-21 08:00",
+    1.664
+   ],
+   [
+    "Chapter 4 B3",
+    1.597,
+    82.17,
+    5.4,
     "dark",
     "cold_trap",
     "2046-10-21 08:00",

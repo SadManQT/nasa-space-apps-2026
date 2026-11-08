@@ -2993,16 +2993,578 @@
    }
   },
   "LOC-11": {
-   "region_id": "relay_road",
+   "region_id": "relay_road_mid",
    "origin_xz_m": [
-    -24227.5,
-    -76912.5
+    -160.0,
+    -1198.0
    ],
    "ephemeris_site": "relay_road_mid",
-   "horizon_site": "relay_road_mid",
-   "omit_staging_floor": false,
-   "placement": "The first repeater sector is the computed relay road's midpoint (sun_positions.json site relay_road_mid, the EX-CH08-S03 row).",
-   "pending": "Not on terrain yet: the relay road exists only as the 80 m corridor grid with a 200 m visual mesh, too coarse to walk (props would float or sink by metres). It needs the 10 m playable patch the M1-34 README plans (make_terrain.window_m); until then the flat staging stays."
+   "horizon_site": "",
+   "omit_staging_floor": true,
+   "placement": "The marker-two sector stands on the computed relay road (routes.json relay_road, 80 m grid) 1.2 km south of its midpoint, on the 10 m relay_road_mid patch (M1-87) whose site carries the EX-CH08-S03 and S04 Horizons rows: the nearest stretch of that road where the 60 m road bed, the 20 x 15.5 m service pad and the bypass track each rest within 0.21 m (LOLA 10 m plus the seeded crater layer) and nothing in the 60 x 30 m room is steeper than 2.7 deg, so the kit pieces need no grading. The Sun is below the local horizon there as at the site (both rows dark); the room's horizon is not the site's, so horizon_site stays empty.",
+   "origin_m": [
+    -160.0,
+    -66.442,
+    -1198.0
+   ],
+   "anchors": {
+    "relay_kai": [
+     1.2,
+     -0.027,
+     -5.6
+    ],
+    "relay_rafi": [
+     -2.4,
+     -0.019,
+     -5.2
+    ],
+    "relay_ferreira": [
+     3.2,
+     -0.017,
+     -2.6
+    ],
+    "relay_player": [
+     -1.2,
+     -0.013,
+     -3.4
+    ]
+   },
+   "focus_targets": {
+    "repeater_chain": [
+     0.0,
+     0.569,
+     -7.0
+    ]
+   },
+   "focus_approaches": {
+    "repeater_chain": [
+     -0.474,
+     -0.024,
+     -5.577
+    ]
+   },
+   "props": {
+    "repeater_r2": [
+     0.0,
+     -0.044,
+     -7.0
+    ],
+    "pad_tether": [
+     -2.5,
+     -0.024,
+     -6.2
+    ],
+    "bypass_slope_sign": [
+     15.2,
+     -0.013,
+     10.4
+    ],
+    "bypass_barrier": [
+     18.0,
+     -0.052,
+     12.4
+    ],
+    "pad_marker_1": [
+     -10.0,
+     0.02,
+     2.6
+    ],
+    "pad_marker_2": [
+     10.0,
+     -0.062,
+     2.6
+    ],
+    "pad_marker_3": [
+     -10.0,
+     -0.005,
+     -4.5
+    ],
+    "pad_marker_4": [
+     10.0,
+     -0.053,
+     -4.5
+    ],
+    "pad_marker_5": [
+     -10.0,
+     -0.031,
+     -12.0
+    ],
+    "pad_marker_6": [
+     -3.3,
+     -0.071,
+     -12.0
+    ],
+    "pad_marker_7": [
+     3.3,
+     -0.095,
+     -12.0
+    ],
+    "pad_marker_8": [
+     10.0,
+     -0.13,
+     -12.0
+    ],
+    "guide_light_1": [
+     -27.0,
+     -0.049,
+     2.6
+    ],
+    "guide_light_2": [
+     -9.0,
+     0.063,
+     9.4
+    ],
+    "guide_light_3": [
+     9.0,
+     -0.049,
+     2.6
+    ],
+    "guide_light_4": [
+     27.0,
+     -0.125,
+     9.4
+    ]
+   },
+   "fixtures": {
+    "road_bed": [
+     0.0,
+     -0.13,
+     6.0
+    ],
+    "service_pad": [
+     0.0,
+     -0.132,
+     -4.75
+    ],
+    "bypass_track": [
+     18.0,
+     -0.078,
+     12.0
+    ]
+   },
+   "doors": {
+    "relay_route_boundary": [
+     29.3,
+     0.97,
+     6.0
+    ]
+   },
+   "bury_m": {
+    "Door_relay_route_boundary": 0.006,
+    "road_bed": 0.2,
+    "service_pad": 0.159,
+    "bypass_track": 0.112,
+    "repeater_r2": 0.017,
+    "pad_tether": 0.002,
+    "bypass_slope_sign": 0.002,
+    "bypass_barrier": 0.062,
+    "pad_marker_1": 0.0,
+    "pad_marker_2": 0.001,
+    "pad_marker_3": 0.0,
+    "pad_marker_4": 0.0,
+    "pad_marker_5": 0.001,
+    "pad_marker_6": 0.001,
+    "pad_marker_7": 0.001,
+    "pad_marker_8": 0.001,
+    "guide_light_1": 0.001,
+    "guide_light_2": 0.001,
+    "guide_light_3": 0.001,
+    "guide_light_4": 0.001
+   },
+   "footprint_m": {
+    "repeater_r2": 2.56,
+    "pad_tether": 0.453,
+    "bypass_slope_sign": 0.085,
+    "bypass_barrier": 4.142,
+    "pad_marker_1": 0.085,
+    "pad_marker_2": 0.085,
+    "pad_marker_3": 0.085,
+    "pad_marker_4": 0.085,
+    "pad_marker_5": 0.085,
+    "pad_marker_6": 0.085,
+    "pad_marker_7": 0.085,
+    "pad_marker_8": 0.085,
+    "guide_light_1": 0.085,
+    "guide_light_2": 0.085,
+    "guide_light_3": 0.085,
+    "guide_light_4": 0.085
+   },
+   "detours": {},
+   "max_walk_slope_deg": 0.57,
+   "exclusions": [
+    {
+     "position": [
+      -158.8,
+      -66.47,
+      -1203.6
+     ],
+     "radius_m": 2.0
+    },
+    {
+     "position": [
+      -162.4,
+      -66.461,
+      -1203.2
+     ],
+     "radius_m": 2.0
+    },
+    {
+     "position": [
+      -156.8,
+      -66.46,
+      -1200.6
+     ],
+     "radius_m": 2.0
+    },
+    {
+     "position": [
+      -161.2,
+      -66.455,
+      -1201.4
+     ],
+     "radius_m": 2.0
+    },
+    {
+     "position": [
+      -160.0,
+      -66.474,
+      -1205.0
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -160.474,
+      -66.466,
+      -1203.577
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -130.7,
+      -66.572,
+      -1192.0
+     ],
+     "radius_m": 1.5
+    },
+    {
+     "position": [
+      -160.0,
+      -66.578,
+      -1192.0
+     ],
+     "radius_m": 31.15
+    },
+    {
+     "position": [
+      -160.0,
+      -66.579,
+      -1202.75
+     ],
+     "radius_m": 13.652
+    },
+    {
+     "position": [
+      -142.0,
+      -66.524,
+      -1186.0
+     ],
+     "radius_m": 4.448
+    },
+    {
+     "position": [
+      -160.0,
+      -66.486,
+      -1205.0
+     ],
+     "radius_m": 2.427
+    },
+    {
+     "position": [
+      -162.5,
+      -66.467,
+      -1204.2
+     ],
+     "radius_m": 1.226
+    },
+    {
+     "position": [
+      -144.8,
+      -66.456,
+      -1187.6
+     ],
+     "radius_m": 1.468
+    },
+    {
+     "position": [
+      -142.0,
+      -66.495,
+      -1185.6
+     ],
+     "radius_m": 3.076
+    },
+    {
+     "position": [
+      -170.0,
+      -66.422,
+      -1195.4
+     ],
+     "radius_m": 1.057
+    },
+    {
+     "position": [
+      -150.0,
+      -66.504,
+      -1195.4
+     ],
+     "radius_m": 1.057
+    },
+    {
+     "position": [
+      -170.0,
+      -66.447,
+      -1202.5
+     ],
+     "radius_m": 1.057
+    },
+    {
+     "position": [
+      -150.0,
+      -66.495,
+      -1202.5
+     ],
+     "radius_m": 1.057
+    },
+    {
+     "position": [
+      -170.0,
+      -66.474,
+      -1210.0
+     ],
+     "radius_m": 1.057
+    },
+    {
+     "position": [
+      -163.3,
+      -66.513,
+      -1210.0
+     ],
+     "radius_m": 1.057
+    },
+    {
+     "position": [
+      -156.7,
+      -66.537,
+      -1210.0
+     ],
+     "radius_m": 1.057
+    },
+    {
+     "position": [
+      -150.0,
+      -66.572,
+      -1210.0
+     ],
+     "radius_m": 1.057
+    },
+    {
+     "position": [
+      -187.0,
+      -66.491,
+      -1195.4
+     ],
+     "radius_m": 1.078
+    },
+    {
+     "position": [
+      -169.0,
+      -66.38,
+      -1188.6
+     ],
+     "radius_m": 1.078
+    },
+    {
+     "position": [
+      -151.0,
+      -66.491,
+      -1195.4
+     ],
+     "radius_m": 1.078
+    },
+    {
+     "position": [
+      -133.0,
+      -66.567,
+      -1188.6
+     ],
+     "radius_m": 1.078
+    },
+    {
+     "position": [
+      -160.0,
+      -66.462,
+      -1202.5
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -161.8,
+      -66.458,
+      -1202.3
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -159.733,
+      -66.457,
+      -1201.133
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -158.267,
+      -66.458,
+      -1200.867
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -160.837,
+      -66.461,
+      -1202.489
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -159.294,
+      -66.456,
+      -1200.812
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -157.387,
+      -66.457,
+      -1200.225
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -155.481,
+      -66.458,
+      -1199.637
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -153.575,
+      -66.468,
+      -1199.05
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -151.669,
+      -66.484,
+      -1198.463
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -149.762,
+      -66.503,
+      -1197.875
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -147.856,
+      -66.524,
+      -1197.287
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -145.95,
+      -66.548,
+      -1196.7
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -144.044,
+      -66.568,
+      -1196.113
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -142.137,
+      -66.581,
+      -1195.525
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -140.231,
+      -66.587,
+      -1194.937
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -138.325,
+      -66.589,
+      -1194.35
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -136.419,
+      -66.594,
+      -1193.762
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -134.512,
+      -66.596,
+      -1193.175
+     ],
+     "radius_m": 1.2
+    },
+    {
+     "position": [
+      -132.606,
+      -66.583,
+      -1192.588
+     ],
+     "radius_m": 1.2
+    }
+   ],
+   "ground_y_range_m": [
+    -0.635,
+    0.231
+   ]
   },
   "LOC-12": {
    "region_id": "malapert_summit",

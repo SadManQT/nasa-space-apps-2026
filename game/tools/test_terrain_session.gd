@@ -20,7 +20,7 @@ func _run() -> void:
 	_check(not retryable.prepare("LOC-06", "UNKNOWN-SCENE").accepted and retryable.stream == null and retryable.get_child_count() == 0, "missing dated row releases failed terrain without invented light")
 	_check(retryable.prepare("LOC-06", "EX-CH04-S09").accepted, "failed session can retry without duplicate streams")
 	retryable.free()
-	for shot in [["LOC-06", "EX-CH04-S09", true], ["LOC-06", "EX-CH01-S07", false], ["LOC-09", "EX-CH04-S04", false], ["LOC-10", "EX-CH04-S06", false]]:
+	for shot in [["LOC-06", "EX-CH04-S09", true], ["LOC-06", "EX-CH01-S07", false], ["LOC-09", "EX-CH04-S04", false], ["LOC-10", "EX-CH04-S06", false], ["LOC-11", "EX-CH08-S03", false]]:
 		var session := Session.new()
 		root.add_child(session)
 		var stamp := Time.get_ticks_usec()
@@ -46,7 +46,7 @@ func _run() -> void:
 		_check(not is_instance_valid(queue), "terrain teardown drains outstanding loads")
 	var pending := Session.new()
 	root.add_child(pending)
-	_check(not pending.prepare("LOC-11", "EX-CH08-S03").enabled, "unfinished relay-road placement retains authored staging")
+	_check(not pending.prepare("LOC-12", "EX-CH08-S08").enabled, "unfinished summit placement retains authored staging")
 	pending.free()
 	print("TERRAIN SESSION RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)

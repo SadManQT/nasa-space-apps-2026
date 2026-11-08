@@ -1,0 +1,49 @@
+{
+ "region": "relay_road_mid",
+ "kind": "hero",
+ "story": "LOC-11 relay route at the first repeater sector (EX-CH08-S03, S04): the playable 10 m patch around the computed relay road's midpoint, in that site's own frame so its Horizons rows light it (M1-87)",
+ "source_product": "pgda90_10mpp",
+ "source_title": "A New View of the Lunar South Pole from LOLA: LDEM_83S_10MPP_ADJ (83S-90S, 10 m/px)",
+ "source_url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_83S_10MPP_ADJ.TIF",
+ "retrieved": "2026-11-07",
+ "format": "r16: little-endian uint16, row-major, top row first (north = toward 0 deg E is up); height_m = z_min_m + value * (z_max_m - z_min_m) / 65535",
+ "columns": 800,
+ "rows": 800,
+ "metres_per_pixel": 10.0,
+ "z_min_m": -1384.246,
+ "z_max_m": -138.682,
+ "height_datum": "metres above the 1,737.4 km reference sphere (LOLA)",
+ "projection": "south polar stereographic, MOON_ME (DE421); x toward 90E, y toward 0E, pole at (0,0)",
+ "origin_x_m": -39795.0,
+ "origin_y_m": 68435.0,
+ "origin_note": "map coordinates of the centre of pixel (column 0, row 0)",
+ "source_window": {
+  "col0": 17660,
+  "row0": 14796
+ },
+ "interpolated_nan_fraction": 0.0,
+ "site": {
+  "id": "relay_road_mid",
+  "x_m": -35800.0,
+  "y_m": 64440.0,
+  "height_m": -643.7,
+  "lat_deg": -87.56934327060789,
+  "lon_deg_east": 330.94539590092285,
+  "pixel_col": 399.5,
+  "pixel_row": 399.5
+ },
+ "godot": {
+  "frame": "X = map x - site x; Z = -(map y - site y); Y = height - site height (site at the origin, metres)",
+  "x_of_col": "origin_x_m + col * metres_per_pixel - site.x_m",
+  "z_of_row": "-(origin_y_m - row * metres_per_pixel - site.y_m)"
+ },
+ "sha256_r16": "d4431946a0de7846d132098f1887e496b7e0e371b8a70f144aeaa03bac17fe36",
+ "detail_layer": {
+  "count": 2237,
+  "diameter_min_m": 30.0,
+  "diameter_max_m": 60.0,
+  "seed": 961935609,
+  "law": "Trask (1966) / Gault (1970) equilibrium, N(>D) = 10^-1.1 D_km^-1.83 per km2; depth/diameter 0.04-0.16, rim 0.015-0.04 D"
+ },
+ "about": "LOLA heightmap plus the authored sub-resolution crater layer (not NASA data at these scales); use for collision so it matches the tiles"
+}

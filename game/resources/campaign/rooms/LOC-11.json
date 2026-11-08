@@ -1,7 +1,7 @@
 {
  "schema_version": 2,
  "room_id": "LOC-11",
- "description": "M3-8R: the marker-two sector of the surveyed relay road (approved M3-8A EN_RelayRoad, Sadman 7 Nov 2026): the graded 6 m road with amber guide lights every 18 m on alternate sides, the 20 x 15 m service pad of repeater R2 (marker two) with its tether anchor and eight perimeter markers, and the unsupported cliff bypass closed by the turnback barrier and slope sign (S03). Flat staging floor until the walkable 10 m patch exists (M1-87); the dated rows leave the whole sector dark (sun_positions.json relay_road_mid), so only rover, guide and suit lights light it.",
+ "description": "M3-8R: the marker-two sector of the surveyed relay road (approved M3-8A EN_RelayRoad, Sadman 7 Nov 2026): the graded 6 m road with amber guide lights every 18 m on alternate sides, the 20 x 15 m service pad of repeater R2 (marker two) with its tether anchor and eight perimeter markers, and the unsupported cliff bypass closed by the turnback barrier and slope sign (S03). On the terrain it stands on the 10 m relay_road_mid patch (M1-87, exterior_terrain.json), otherwise on the flat staging floor; the dated rows leave the whole sector dark (sun_positions.json relay_road_mid), so only rover, guide and suit lights light it.",
  "assembly": "exterior_kit",
  "bounds_m": [
   60.0,
