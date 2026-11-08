@@ -41,6 +41,24 @@ func _run() -> void:
 			_check(room.collision_root.get_node_or_null("CeilingCollision") == null, "courtyard has open sky")
 		else:
 			_check(room.collision_root.has_node("CeilingCollision") and room.visual_root.find_children("CeilingStrip*", "MeshInstance3D", true, false).size() == 4, id + " has ceiling and practical strips")
+		if room.visual_root.has_node("HabitatKit") and id in ["LOC-01", "LOC-02", "LOC-03", "LOC-04"]:
+			var kit_batches := room.visual_root.get_node("HabitatKit").find_children("*", "MultiMeshInstance3D", false, false)
+			_check(not kit_batches.is_empty() and kit_batches.all(func(b): return (b as GeometryInstance3D).cast_shadow == GeometryInstance3D.SHADOW_CASTING_SETTING_OFF), id + " boundary kit batches cast no outer omni shadows (M1-94)")
+			_check(kit_batches.any(func(b): return String(b.name).contains("_Q00_LOD0") and (b as Node3D).position.length() > 1.0), id + " large shell batches are quadrant-chunked around their centroids (M1-94)")
+		if OS.get_cmdline_user_args().has("--capture-m1-94") and id in ["LOC-01", "LOC-02", "LOC-03", "LOC-04"]:
+			root.size = Vector2i(1920, 1080)
+			var cam := Camera3D.new()
+			cam.fov = 58.0
+			room.add_child(cam)
+			var ext := Vector2(float(layout.bounds_m[0]), float(layout.bounds_m[1]))
+			cam.position = Vector3(0.0, 2.05, ext.y * 0.38)
+			cam.look_at(Vector3(0.0, 1.05, -ext.y * 0.28), Vector3.UP)
+			cam.current = true
+			for f in 24:
+				await process_frame
+			await RenderingServer.frame_post_draw
+			root.get_texture().get_image().save_png(ProjectSettings.globalize_path("res://../production/qa/evidence/M1-94_" + id + ".png"))
+			cam.free()
 		if OS.get_cmdline_user_args().has("--evidence"):
 			var player := Player.instantiate() as PlayerController
 			player.character_glb = "res://assets/characters/CH_Kai/CH_Kai.glb"
@@ -62,6 +80,8 @@ func _run() -> void:
 			root.get_texture().get_image().save_png(ProjectSettings.globalize_path("res://../production/qa/evidence/M1-01_" + id + ".png"))
 		room.free()
 		await process_frame
+	var autoplay := CampaignCutscenePlayer.autoplay
+	CampaignCutscenePlayer.autoplay = false
 	var storage = preload("res://tools/support/isolated_storage.gd").new()
 	_check(storage.setup("room_presentation"), "isolate production saves")
 	var runtime = load("res://scenes/campaign/chapter1_campaign.tscn").instantiate()
@@ -83,9 +103,28 @@ func _run() -> void:
 	_check(runtime.nearby_target().is_empty(), "targets behind the camera cannot receive the E interaction")
 	runtime.free()
 	storage.cleanup()
+	CampaignCutscenePlayer.autoplay = autoplay
 	# M1-76: Compatibility gets cube shadows (the only omni mode OpenGL supports); Forward+ and Mobile keep dual-paraboloid
 	_check(RoomPresentation.omni_shadow_mode_for("gl_compatibility") == OmniLight3D.SHADOW_CUBE, "Compatibility renderer uses supported cube shadows")
 	_check(RoomPresentation.omni_shadow_mode_for("forward_plus") == OmniLight3D.SHADOW_DUAL_PARABOLOID and RoomPresentation.omni_shadow_mode_for("mobile") == OmniLight3D.SHADOW_DUAL_PARABOLOID, "Forward+ and Mobile keep the dual-paraboloid saving")
+	# M1-94: a hidden Node3D's WorldEnvironment (TitleStage during the campaign) is suspended while hidden and restored when shown
+	var fake_stage := Node3D.new()
+	var fake_world_env := WorldEnvironment.new()
+	var fake_env := Environment.new()
+	fake_env.ssao_enabled = true
+	fake_world_env.environment = fake_env
+	fake_stage.add_child(fake_world_env)
+	root.add_child(fake_stage)
+	fake_stage.hide()
+	var test_room := Room.new()
+	test_room.room_id = "LOC-01"
+	test_room.load_approved_assets = false
+	root.add_child(test_room)
+	_check(fake_world_env.environment == null, "hidden TitleStage WorldEnvironment is suspended when CampaignRoom enters tree (M1-94)")
+	fake_stage.show()
+	_check(fake_world_env.environment == fake_env, "showing TitleStage restores its WorldEnvironment (M1-94)")
+	test_room.free()
+	fake_stage.free()
 	print("ROOM PRESENTATION RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
 

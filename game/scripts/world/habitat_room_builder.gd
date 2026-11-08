@@ -342,6 +342,8 @@ static func connector(room: Node3D, layout: Dictionary, portal: Dictionary) -> v
 		Kit.place(passage, "EN_Kit_LightStrip", Vector3(-0.5, -0.3, 0.765 + index), 90, false)
 	var end := Kit.place(passage, "EN_Kit_DoorFrame", Vector3(-1, 0, count + 0.53), 180)
 	Kit.set_door_open(end, 0)
+	for mesh in passage.find_children("*", "MeshInstance3D", true, false):
+		(mesh as MeshInstance3D).cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	collider(passage, "ThresholdDeck", Vector3(-0.5, -0.06, count + 0.36), Vector3(0.96, 0.12, 0.6))
 	var light := OmniLight3D.new()
 	light.position = Vector3(-0.5, 1.9, 0.7)
@@ -535,16 +537,41 @@ static func _publish(parent: Node3D, batches: Dictionary) -> void:
 					sources.append({"mesh": source.mesh, "name": String(source.name), "transform": xf, "lod": lod})
 			_templates[id] = sources
 			template.free()
-		for source in _templates[id]:
-			var lod := int(source.lod)
-			var batch := MultiMeshInstance3D.new()
-			batch.name = String(id) + "_" + String(source.name) + "_LOD%d" % lod
-			batch.multimesh = MultiMesh.new()
-			batch.multimesh.transform_format = MultiMesh.TRANSFORM_3D
-			batch.multimesh.mesh = source.mesh
-			batch.multimesh.instance_count = batches[id].size()
-			for index in batches[id].size():
-				batch.multimesh.set_instance_transform(index, batches[id][index] * source.transform)
-			batch.visibility_range_begin = 12.0 if lod == 1 else 0.0
-			batch.visibility_range_end = 12.0 if lod == 0 else 0.0
-			parent.add_child(batch)
+		# M1-94: chunk large shell batches into spatial quadrants centered at their centroid so frustum culling drops
+		# tiles/overhead runs behind the camera and visibility_range switches distant quadrants to LOD1; boundary shell
+		# tiles/walls/runs cast no shadows into the interior omni shadow maps.
+		var transforms: Array = batches[id]
+		var groups: Array = []
+		if transforms.size() >= 32:
+			var quadrants := {Vector2i(0, 0): [], Vector2i(1, 0): [], Vector2i(0, 1): [], Vector2i(1, 1): []}
+			for xf: Transform3D in transforms:
+				var q := Vector2i(1 if xf.origin.x >= 0.0 else 0, 1 if xf.origin.z >= 0.0 else 0)
+				quadrants[q].append(xf)
+			for q in quadrants:
+				if not quadrants[q].is_empty():
+					groups.append({"suffix": "_Q%d%d" % [q.x, q.y], "items": quadrants[q]})
+		else:
+			groups.append({"suffix": "", "items": transforms})
+		var split := 12.0
+		for group in groups:
+			var items: Array = group.items
+			var center := Vector3.ZERO
+			for xf: Transform3D in items:
+				center += xf.origin
+			center /= float(items.size())
+			for source in _templates[id]:
+				var lod := int(source.lod)
+				var batch := MultiMeshInstance3D.new()
+				batch.name = String(id) + "_" + String(source.name) + String(group.suffix) + "_LOD%d" % lod
+				batch.position = center
+				batch.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+				batch.multimesh = MultiMesh.new()
+				batch.multimesh.transform_format = MultiMesh.TRANSFORM_3D
+				batch.multimesh.mesh = source.mesh
+				batch.multimesh.instance_count = items.size()
+				for index in items.size():
+					var world_xf: Transform3D = items[index] * source.transform
+					batch.multimesh.set_instance_transform(index, Transform3D(world_xf.basis, world_xf.origin - center))
+				batch.visibility_range_begin = split if lod == 1 else 0.0
+				batch.visibility_range_end = split if lod == 0 else 0.0
+				parent.add_child(batch)

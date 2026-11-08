@@ -45,6 +45,12 @@ var _current_mouth_frame := 0
 var _expression_mouth_frame := 0
 var _eye_frame := 0
 var _brow_frame := 0
+var _applied_eye_frame := -1
+var _applied_brow_frame := -1
+var _applied_mouth_frame := -1
+var _last_face_center := Vector3(1e9, 1e9, 1e9)
+var _last_face_forward := Vector3.ZERO
+var _last_face_radius := -1.0
 var _blink_phase: BlinkPhase = BlinkPhase.WAIT
 var _blink_timer := 3.0
 var _blink_elapsed := 0.0
@@ -159,6 +165,11 @@ func _update_face_light() -> void:
 	var head := _skeleton.global_transform * _skeleton.get_bone_global_pose(_head_bone)
 	var forward := (head.basis * _head_forward).normalized()
 	var centre := head * _face_offset
+	if centre.distance_squared_to(_last_face_center) < 0.000001 and forward.distance_squared_to(_last_face_forward) < 0.000001 and absf(_face_radius - _last_face_radius) < 0.00001:
+		return
+	_last_face_center = centre
+	_last_face_forward = forward
+	_last_face_radius = _face_radius
 	var targets: Array = _materials.values()
 	if _body != null and _body.get_active_material(0) is ShaderMaterial:
 		targets.append(_body.get_active_material(0))
@@ -215,6 +226,7 @@ func _apply_face_materials() -> void:
 	_materials.clear()
 	for name in _meshes:
 		var mesh := _meshes[name] as MeshInstance3D
+		mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		if mesh.mesh == null or mesh.mesh.get_surface_count() == 0:
 			continue
 		var current := mesh.get_active_material(0)
@@ -242,6 +254,10 @@ func _apply_face_materials() -> void:
 		material.set_shader_parameter("mirror_left", name == "FaceEyeL" and mirror_left_eye)
 		mesh.set_surface_override_material(0, material)
 		_materials[name] = material
+	_applied_eye_frame = -1
+	_applied_brow_frame = -1
+	_applied_mouth_frame = -1
+	_last_face_radius = -1.0
 	_update_eye_and_brow()
 	_set_mouth_frame(_current_mouth_frame if _line_active else _expression_mouth_frame)
 
@@ -251,16 +267,21 @@ func _update_eye_and_brow() -> void:
 		eye = 1
 	elif _blink_phase == BlinkPhase.CLOSED:
 		eye = 2
-	for name in ["FaceEyeL", "FaceEyeR"]:
-		if _materials.has(name):
-			(_materials[name] as ShaderMaterial).set_shader_parameter("frame", eye)
-	for name in ["FaceBrowL", "FaceBrowR"]:
-		if _materials.has(name):
-			(_materials[name] as ShaderMaterial).set_shader_parameter("frame", _brow_frame)
+	if eye != _applied_eye_frame:
+		_applied_eye_frame = eye
+		for name in ["FaceEyeL", "FaceEyeR"]:
+			if _materials.has(name):
+				(_materials[name] as ShaderMaterial).set_shader_parameter("frame", eye)
+	if _brow_frame != _applied_brow_frame:
+		_applied_brow_frame = _brow_frame
+		for name in ["FaceBrowL", "FaceBrowR"]:
+			if _materials.has(name):
+				(_materials[name] as ShaderMaterial).set_shader_parameter("frame", _brow_frame)
 
 func _set_mouth_frame(value: int) -> void:
 	_current_mouth_frame = clampi(value, 0, 8)
-	if _materials.has("FaceMouth"):
+	if _current_mouth_frame != _applied_mouth_frame and _materials.has("FaceMouth"):
+		_applied_mouth_frame = _current_mouth_frame
 		(_materials["FaceMouth"] as ShaderMaterial).set_shader_parameter("frame", _current_mouth_frame)
 
 func _update_mouth_from_clock() -> void:

@@ -1,0 +1,376 @@
+{
+	"cpu_only": false,
+	"events": [
+		{
+			"duration_ms": 1809.904,
+			"event": "title_build",
+			"max_frame_interval_ms": 1208.101,
+			"steps": [
+				{
+					"ms": 86.18,
+					"step": "worker_decode:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 6.676,
+					"step": "worker_mipmaps:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 1.613,
+					"step": "glb_generate_scene:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 104.263,
+					"step": "glb_pack:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 122.087,
+					"step": "worker_decode:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 5.056,
+					"step": "worker_mipmaps:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 1.022,
+					"step": "glb_generate_scene:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 0.11,
+					"step": "glb_pack:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 47.647,
+					"step": "worker_decode:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 1.865,
+					"step": "worker_mipmaps:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 0.21,
+					"step": "glb_generate_scene:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 0.125,
+					"step": "glb_pack:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 1.044,
+					"step": "toon:PR_MissionTable"
+				},
+				{
+					"ms": 0.018,
+					"step": "toon:PR_BatteryJar"
+				},
+				{
+					"ms": 0.014,
+					"step": "toon:PR_SeedPacket"
+				},
+				{
+					"ms": 2.743,
+					"step": "title_stage"
+				},
+				{
+					"ms": 38.551,
+					"step": "title_ui_save_validation"
+				},
+				{
+					"ms": 188.925,
+					"step": "worker_content_validation"
+				}
+			],
+			"transition_frames": 33
+		},
+		{
+			"duration_ms": 915.092,
+			"event": "new_campaign",
+			"max_frame_interval_ms": 429.854,
+			"steps": [
+				{
+					"ms": 0.038,
+					"step": "campaign_scene_instance"
+				},
+				{
+					"ms": 4.589,
+					"step": "content_validation"
+				},
+				{
+					"ms": 14.501,
+					"step": "route_profile"
+				},
+				{
+					"ms": 3.351,
+					"step": "room_shell:LOC-01"
+				},
+				{
+					"ms": 211.053,
+					"step": "room_fixtures_doors:LOC-01"
+				},
+				{
+					"ms": 0.917,
+					"step": "room_navigation:LOC-01"
+				},
+				{
+					"ms": 221.297,
+					"step": "room_rebuild"
+				},
+				{
+					"ms": 53.813,
+					"step": "campaign_ui"
+				}
+			],
+			"transition_frames": 20
+		},
+		{
+			"duration_ms": 60.828,
+			"event": "room_enter_EX-CH01-S01",
+			"max_frame_interval_ms": 45.168,
+			"steps": [
+				{
+					"ms": 2.078,
+					"step": "room_shell:LOC-01"
+				},
+				{
+					"ms": 1.186,
+					"step": "room_fixtures_doors:LOC-01"
+				},
+				{
+					"ms": 0.806,
+					"step": "room_navigation:LOC-01"
+				},
+				{
+					"ms": 15.815,
+					"step": "room_rebuild"
+				},
+				{
+					"ms": 99.54,
+					"step": "worker_decode:res://assets/props/PR_WaterWallPanel/PR_WaterWallPanel.glb"
+				},
+				{
+					"ms": 5.166,
+					"step": "worker_mipmaps:res://assets/props/PR_WaterWallPanel/PR_WaterWallPanel.glb"
+				},
+				{
+					"ms": 0.949,
+					"step": "glb_generate_scene:res://assets/props/PR_WaterWallPanel/PR_WaterWallPanel.glb"
+				},
+				{
+					"ms": 0.186,
+					"step": "glb_pack:res://assets/props/PR_WaterWallPanel/PR_WaterWallPanel.glb"
+				}
+			],
+			"transition_frames": 2
+		},
+		{
+			"duration_ms": 95.012,
+			"event": "room_enter_EX-CH01-S02",
+			"max_frame_interval_ms": 50.88,
+			"steps": [
+				{
+					"ms": 1.082,
+					"step": "room_shell:LOC-04"
+				},
+				{
+					"ms": 1.78,
+					"step": "room_fixtures_doors:LOC-04"
+				},
+				{
+					"ms": 0.302,
+					"step": "room_navigation:LOC-04"
+				},
+				{
+					"ms": 12.938,
+					"step": "room_rebuild"
+				}
+			],
+			"transition_frames": 2
+		},
+		{
+			"duration_ms": 236.652,
+			"event": "room_enter_EX-CH01-S04",
+			"max_frame_interval_ms": 230.031,
+			"steps": [
+				{
+					"ms": 1.334,
+					"step": "room_shell:LOC-03"
+				},
+				{
+					"ms": 3.201,
+					"step": "room_fixtures_doors:LOC-03"
+				},
+				{
+					"ms": 0.395,
+					"step": "room_navigation:LOC-03"
+				},
+				{
+					"ms": 18.685,
+					"step": "room_rebuild"
+				}
+			],
+			"transition_frames": 2
+		},
+		{
+			"duration_ms": 403.751,
+			"event": "room_enter_EX-CH01-S05",
+			"max_frame_interval_ms": 41.852,
+			"steps": [
+				{
+					"ms": 127.904,
+					"step": "worker_decode:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 5.215,
+					"step": "worker_mipmaps:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 1.103,
+					"step": "glb_generate_scene:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 0.182,
+					"step": "glb_pack:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 1.551,
+					"step": "room_shell:LOC-02"
+				},
+				{
+					"ms": 1.688,
+					"step": "room_fixtures_doors:LOC-02"
+				},
+				{
+					"ms": 0.366,
+					"step": "room_navigation:LOC-02"
+				},
+				{
+					"ms": 7.963,
+					"step": "room_rebuild"
+				}
+			],
+			"transition_frames": 24
+		}
+	],
+	"metadata": {
+		"chapter1_room_sweep": true,
+		"cpu": "Apple M4",
+		"cpu_only": false,
+		"display": "macOS",
+		"driver": "metal",
+		"engine": {
+			"build": "official",
+			"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+			"hex": 263938,
+			"major": 4,
+			"minor": 7,
+			"patch": 2,
+			"status": "stable",
+			"string": "4.7.2-stable (official)",
+			"timestamp": 0
+		},
+		"expected_rooms": [
+			"LOC-01",
+			"LOC-04",
+			"LOC-03",
+			"LOC-02"
+		],
+		"gpu": "Apple M4 (Apple9)",
+		"max_fps": 0,
+		"measured_rooms": [
+			"LOC-01",
+			"LOC-04",
+			"LOC-03",
+			"LOC-02"
+		],
+		"os": "macOS",
+		"physics_ticks": 60,
+		"renderer": "forward_plus",
+		"room_coverage_complete": true,
+		"seconds": 20.0,
+		"transition_schema": 3,
+		"vsync": 1,
+		"window": "(1920, 1080)"
+	},
+	"summaries": [
+		{
+			"frames_or_calls": 1126,
+			"max_ms": 402.711,
+			"over_33ms": 13,
+			"p50_ms": 16.651,
+			"p95_ms": 17.658,
+			"p99_ms": 35.942,
+			"sample": "title"
+		},
+		{
+			"frames_or_calls": 1199,
+			"max_ms": 49.51,
+			"over_33ms": 6,
+			"p50_ms": 16.645,
+			"p95_ms": 18.412,
+			"p99_ms": 21.505,
+			"sample": "LOC-01_walk"
+		},
+		{
+			"frames_or_calls": 1196,
+			"max_ms": 50.34,
+			"over_33ms": 2,
+			"p50_ms": 16.651,
+			"p95_ms": 18.258,
+			"p99_ms": 19.66,
+			"sample": "LOC-01_panels"
+		},
+		{
+			"frames_or_calls": 1198,
+			"max_ms": 39.195,
+			"over_33ms": 4,
+			"p50_ms": 16.64,
+			"p95_ms": 17.987,
+			"p99_ms": 20.829,
+			"sample": "LOC-04_walk"
+		},
+		{
+			"frames_or_calls": 1201,
+			"max_ms": 41.339,
+			"over_33ms": 6,
+			"p50_ms": 16.6,
+			"p95_ms": 18.244,
+			"p99_ms": 19.905,
+			"sample": "LOC-04_panels"
+		},
+		{
+			"frames_or_calls": 1197,
+			"max_ms": 48.439,
+			"over_33ms": 4,
+			"p50_ms": 16.657,
+			"p95_ms": 18.004,
+			"p99_ms": 18.836,
+			"sample": "LOC-03_walk"
+		},
+		{
+			"frames_or_calls": 1198,
+			"max_ms": 35.685,
+			"over_33ms": 2,
+			"p50_ms": 16.639,
+			"p95_ms": 18.119,
+			"p99_ms": 18.875,
+			"sample": "LOC-03_panels"
+		},
+		{
+			"frames_or_calls": 1201,
+			"max_ms": 20.792,
+			"over_33ms": 0,
+			"p50_ms": 16.66,
+			"p95_ms": 17.998,
+			"p99_ms": 18.82,
+			"sample": "LOC-02_walk"
+		},
+		{
+			"frames_or_calls": 1196,
+			"max_ms": 34.656,
+			"over_33ms": 4,
+			"p50_ms": 16.624,
+			"p95_ms": 17.833,
+			"p99_ms": 18.635,
+			"sample": "LOC-02_panels"
+		}
+	]
+}

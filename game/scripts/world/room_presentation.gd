@@ -3,6 +3,8 @@ class_name RoomPresentation
 
 const Toon = preload("res://scripts/toon_materials.gd")
 const Geometry = preload("res://scripts/asset_geometry.gd")
+static var _kit_paint_base: StandardMaterial3D
+static var _edge_materials: Dictionary = {}
 
 ## Converts an authored metre-space vector from the room data.
 static func vector(value: Array) -> Vector3:
@@ -16,9 +18,25 @@ static func mesh_box(parent: Node3D, id: String, position: Vector3, size: Vector
 	var box := BoxMesh.new()
 	box.size = size
 	mesh.mesh = box
+	if size.x < 0.12 or size.y < 0.12 or size.z < 0.12:
+		mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	if id == "Edge" and luminous and not pbr:
+		var key := color.to_rgba32()
+		if not _edge_materials.has(key):
+			var edge_mat := StandardMaterial3D.new()
+			edge_mat.albedo_color = color
+			edge_mat.roughness = 0.95
+			edge_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			_edge_materials[key] = edge_mat
+		mesh.material_override = _edge_materials[key]
+		mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		parent.add_child(mesh, true)
+		return mesh
 	var material := StandardMaterial3D.new()
 	if pbr and not luminous:
-		material = (load("res://assets/environment/kit/materials/M_Kit_PaintWhite.tres") as StandardMaterial3D).duplicate()
+		if _kit_paint_base == null:
+			_kit_paint_base = load("res://assets/environment/kit/materials/M_Kit_PaintWhite.tres") as StandardMaterial3D
+		material = _kit_paint_base.duplicate()
 		# A BoxMesh maps 0..1 across each face; triplanar (with the kit's uv1_scale) keeps the paint
 		# grain at the kit walls' density on fixtures of any size instead of stretching it into ripples.
 		material.uv1_triplanar = true
@@ -62,6 +80,7 @@ static func build(room: Node3D, layout: Dictionary, vacuum: bool) -> void:
 		environment.tonemap_mode = Environment.TONE_MAPPER_AGX
 	world.environment = environment
 	lighting.add_child(world)
+	claim_world_environment(room)
 	var key := DirectionalLight3D.new()
 	key.name = "KeyLight"
 	key.rotation_degrees = vector(settings.get("key_rotation_degrees", [-4, -35, 0] if vacuum else [-65, -25, 0]))
@@ -187,6 +206,36 @@ static func selection_frame(parent: Node3D, bounds: AABB, color: Color = Color("
 		for z in [start.z, end.z]:
 			mesh_box(frame, "Edge", Vector3(center.x, y, z), Vector3(box.size.x, 0.012, 0.012), color, true)
 	return frame
+
+## WorldEnvironment is a plain Node, not a Node3D, so hiding a parent Node3D (e.g. TitleStage when the campaign opens)
+## leaves its Environment active in World3D — blocking RoomEnvironment and leaking title-screen SSAO/SSIL/glow into
+## rooms. Suspend any WorldEnvironment whose ancestor Node3D is hidden, and restore it when that ancestor is shown again.
+static func claim_world_environment(room: Node3D) -> void:
+	if room == null or not room.is_inside_tree():
+		return
+	var own := room.get_node_or_null("RoomLighting/RoomEnvironment") as WorldEnvironment
+	if own == null:
+		return
+	var root := room.get_tree().root
+	if root == null:
+		return
+	for node in root.find_children("*", "WorldEnvironment", true, false):
+		var other := node as WorldEnvironment
+		if other == null or other == own or other.environment == null:
+			continue
+		var holder := other.get_parent()
+		while holder != null and not (holder is Node3D):
+			holder = holder.get_parent()
+		var ancestor := holder as Node3D
+		if ancestor != null and not ancestor.is_visible_in_tree():
+			other.set_meta(&"_suspended_environment", other.environment)
+			other.environment = null
+			if not ancestor.has_meta(&"_world_env_restore_bound"):
+				ancestor.set_meta(&"_world_env_restore_bound", true)
+				ancestor.visibility_changed.connect(func() -> void:
+					if is_instance_valid(other) and ancestor.is_visible_in_tree() and other.environment == null and other.has_meta(&"_suspended_environment"):
+						other.environment = other.get_meta(&"_suspended_environment")
+				)
 
 ## Compatibility (OpenGL) supports only cube shadows for omni lights; asking for dual-paraboloid there logs an
 ## error per light per frame (M1-76: 560 errors entering the Commons on Intel Arc). Forward+ and Mobile keep the

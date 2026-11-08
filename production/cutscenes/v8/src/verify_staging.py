@@ -156,6 +156,11 @@ def runtime_parity(key, name, expected_length, master):
         reference = cv2.resize(frame(master, at), (actual.shape[1], actual.shape[0]))
         error = float(np.abs(actual.astype(float) - reference).mean())
         yield error < 16, f"{key} runtime/master frame {label}: mean error {error:.3f}"
+        if key == "CS-15" and label in ("rao_channel", "return"):
+            sh, sw = actual.shape[:2]
+            sky_err = float(np.abs(actual[int(sh * 0.06):int(sh * 0.43), int(sw * 0.46):int(sw * 0.57)].astype(float)
+                                   - reference[int(sh * 0.06):int(sh * 0.43), int(sw * 0.46):int(sw * 0.57)]).mean())
+            yield sky_err < 6.0, f"{key} runtime/master Earth sky window {label}: mean error {sky_err:.3f}"
     # Vorbis against AAC differs by at most ~1.2 dB per 50 ms window on matching films; a missing or
     # moved cue (the old silent lamp slot against the M4-02 master: 12.7 dB, M4-02_provenance.txt) is far outside that.
     runtime_level, master_level = envelope_db(mono(ogv)), envelope_db(mono(master))
@@ -247,6 +252,13 @@ def main(runtime=False):
                 check(ok, proof)
     silent = samples(SRC.parent / "CS-15_Hello_Aurora.mp4", 5.2, 7.5)
     check(silent.size > 0 and float(np.abs(silent).max()) < 1e-5, "CS-15 open-channel pause is digital silence (no music/cabin bleed)")
+    for at, shot_label, cy0, cy1, cx_mid in [(2.2, "CS-15-A", 270, 305, 628), (29.0, "CS-15-D", 250, 284, 619)]:
+        pic = frame(SRC.parent / "CS-15_Hello_Aurora.mp4", at)
+        old_sky = pic[55:145, 645:705]
+        left_night = pic[cy0:cy1, cx_mid - 16:cx_mid]
+        right_limb = pic[cy0:cy1, cx_mid:cx_mid + 22]
+        check(int(old_sky.max()) <= 14 and float(left_night.mean()) < 10.0 and int(right_limb.max()) > 180,
+              f"M4-05 {shot_label} ({at} s): old high Earth gone; 1.90 deg ~3%-lit crescent 2.1 deg above skyline with right-upper lit limb and dark night side")
     source = require_media(SRC / "shots/CS-18-A_blink.mp4")
     signal = np.array([frame(source, k / FPS)[356:365, 902:910].mean() for k in range(88, 98)])
     raised = (np.where(signal > np.median(signal) + 5)[0] + 88).tolist()

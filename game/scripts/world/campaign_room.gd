@@ -66,6 +66,7 @@ signal cue_lit(fixture_id: String, sfx_id: String)
 
 func _ready() -> void:
 	build_room()
+	Presentation.claim_world_environment(self)
 
 ## Builds this room once, preserving stable roots and interaction IDs.
 func build_room() -> Dictionary:
@@ -252,6 +253,8 @@ func apply_plant_state(plants: Array) -> void:
 				continue
 			model.name = asset
 			model.scale = Vector3.ONE * (1.0 if _layout.get("assembly") == "habitat_kit" else 0.85)
+			for mesh in model.find_children("*", "MeshInstance3D", true, false):
+				(mesh as MeshInstance3D).cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 			visual_root.add_child(model)
 			if _layout.get("assembly") != "habitat_kit":
 				ToonMaterialsScript.apply_to_tree(model, false, true)
@@ -509,6 +512,9 @@ func _add_approved_asset(path: String, index: int, count: int, authored: Diction
 		var size := Presentation.vector(transform_data.box_collider)
 		Habitat.collider(model, "BoxCollider", Vector3(0, size.y * 0.5, 0), size)
 	visual_root.add_child(model)
+	if _layout.get("assembly") == "habitat_kit" and path.get_file().get_basename() in ["PR_Mug", "PR_SeedPacket", "PR_HandLight", "PR_WaterValve", "PR_BatteryJar", "PR_WaterWallPanel", "PR_HatchDoor"]:
+		for mesh in model.find_children("*", "MeshInstance3D", true, false):
+			(mesh as MeshInstance3D).cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	if _layout.get("assembly") not in PROP_ASSEMBLIES:
 		ToonMaterialsScript.apply_to_tree(model, false, true)
 
@@ -781,6 +787,8 @@ func _build_kit_doors() -> void:
 		door.setup(String(portal.boundary_id), String(portal.boundary_id).begins_with("door_"))
 		door_root.add_child(door)
 		var module := Kit.place(door, "EN_Kit_DoorFrame", Vector3(0.5, -1.05, 0))
+		for mesh in module.find_children("*", "MeshInstance3D", true, false):
+			(mesh as MeshInstance3D).cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		door.bind_module(module)
 		# Kit modules face local -Z (into the room); a Label3D reads along +Z, so the
 		# header plate turns half a revolution and is single-sided (never mirrored).
