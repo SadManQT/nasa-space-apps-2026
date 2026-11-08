@@ -5999,8 +5999,8 @@
    "priority": "P1",
    "tool": "any",
    "title": "Review room asset costs from measured 1080p M4 profiles",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [],
    "paths": [
     "game/scripts/asset_geometry.gd",
@@ -6010,7 +6010,7 @@
    "refs": [],
    "note": "Filed by atik/codex on 2026-11-07.",
    "evidence": "",
-   "updated": "2026-11-07",
+   "updated": "2026-11-08",
    "prompt": "M1-23 Forward+/Metal native 1920x1080 AppleM4/Godot4.7.2 all-room sweep retained in production/qa/perf/M1-23_m4_2026-11-07/forward_plus.json/.csv/.log. p95 frame intervals: Commons22.936ms, SafeRoom21.730ms, Garden24.281ms, Services26.765ms (60fps budget16.7ms); first-use garden/service spikes~1.09s, handled separately Atik M1-92. Walk medians:385-496 draw calls,1.05-1.78million primitives, renderer texture monitor2.86-3.11GB. GPU time column returns0 on this Metal backend, so do not infer shader/GPU timings from it; TIME_PROCESS is periodic monitor not independent per-frame CPU samples. Review measured candidate costs in your assets/AssetGeometry/room staging: redundant visible props/material draws, available LOD use, retained/raw texture memory. Atik keeps runtime fixes; Ramim owns2D UI. M1-93 requests original IntelArc integrated-laptop measurement. Pick fixes from measured owner causes, preserve all teammates assets/content and approved look, publish before/after screenshots and exact source/performance comparison; do not delete props blindly, change canon/geometry science, relax budgets or claim Windows improvement from Mac. The raw runtime GLTF pipeline intentionally decodes uncompressed, so changing .import compression alone may not affect live VRAM. This is a measured investigation request, not a claim these candidates are proven top3 causes.",
    "reserved_for": "sadman",
    "effort": 2
@@ -6021,8 +6021,8 @@
    "priority": "P1",
    "tool": "claude",
    "title": "CS-15: Earth as the true 3% crescent near the Malapert skyline",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [],
    "paths": [
     "production/cutscenes/v8/"
@@ -6030,7 +6030,7 @@
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07.",
    "evidence": "",
-   "updated": "2026-11-07",
+   "updated": "2026-11-08",
    "prompt": "Sadman, 7 Nov 2026 (M3-8A decision 4): \"Fix CS-15\". The accepted CS-15 Hello, Aurora (production/cutscenes/v8/CS-15_Hello_Aurora.mp4, spec production/cutscenes/v8/src/CS-15.json) shows Earth from the Malapert summit cabin as a nearly full blue disc high above the ridge. The dated sky says otherwise. JPL Horizons row EX-CH08-S10 in game/assets/environment/terrain/lola/sun_positions.json (site malapert_summit, 2047-04-09 02:00 UTC; the call runs 02:15-03:00): Sun azimuth 18.107 deg, elevation +2.313 deg; Earth azimuth 358.694 deg, elevation -2.320 deg; terrain horizon toward Earth about -4.4 deg seen from 1.7 m on the summit crown (LOLA PGDA Site23 5 m), so Earth's centre sits about 2.1 deg above the skyline (its lower limb about 1.1 deg above it). Earth's angular diameter is 1.90 deg. The Sun and Earth stand 19.95 deg apart, so Earth's phase angle is about 160 deg and only about 3 % of its disc is lit: a thin crescent whose lit limb faces the Sun, i.e. on the right-hand side and slightly up for a view facing north (Sun 19.4 deg to the right and 4.6 deg higher than Earth). The night side is nearly black, with no visible city lights at this size; the thin crescent throws no noticeable Earthshine on the terrain. Frames to change: the start frames of shot CS-15-A (rover cabin wide, 0 to 5.04 s; Earth upper middle, behind the windscreen, with the dish and mast at left) and CS-15-D (the Seedance extend of A, 18.75 s to the end; Earth upper middle-left above Kai and Ferreira). CS-15-B (Dhaka rooftop) and CS-15-C (Aurora table) show no Moon or Earth and stay. Do: repaint Earth in the CS-15-A start frame as the crescent at the true size for that frame's field of view, low over the skyline beyond the dish (the dish must face it), re-animate A and its D extension from the corrected frame (prompt: one continuous shot, no cuts; consistent characters, no deformation), recompose with compose_cutscene.py (same timings, captions and the M4-04 audio), rebuild the runtime OGV and presentation_media.json, and log the generations in production/AI_PROMPT_LOG.md. Reference renders of the true sky: production/concept/chapter8_v1/M3-8A_EN_MalapertSummit_sheet.png (panels A and D). Acceptance: in both shots Earth is a thin right-facing crescent about one Earth diameter or less above the skyline, at most about 1.9 deg wide in the frame's field of view; verify_staging.py passes; nothing else in CS-15 changes.",
    "reserved_for": "sadman",
    "effort": 2
