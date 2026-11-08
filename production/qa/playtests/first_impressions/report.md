@@ -1,8 +1,10 @@
 # M1-65: Chapter 1 first-impressions QA
 
-**6 November 2026 · Tanvir/Codex · BLOCKED: human sessions still required.**
+**Updated 8 November 2026 - Tanvir/Codex - BLOCKED: partial human report received; full session acceptance remains incomplete.**
 
-This is an assisted inspection of the opening screens, not a completed first-impressions playtest. No human participant was observed, no 20–30 minute unassisted playthrough took place, and no enjoyment, comprehension or completion-time result is claimed. [human_sessions.md](human_sessions.md) gives Tanvir the remaining session procedure and blank records.
+On 8 November Tanvir reported approximately 10 minutes of actual play. The [T01 self-report](T01_2026-11-08.md) records abrupt/contextless dialogue, unclear tasks and reasons, an unexplained seated transition, a suffocating/confusing interface, weak action/consequence understanding, and a request for physical retrieval/placement. The art received strong positive feedback. Follow-up: the intro played and Tanvir watched it; the seated interaction involved Mei being supposed to place the zero on the table. Source inspection points to the dry-zero probe-calibration task as a likely lead, not a reproduced trigger. Existing Ramim tasks M1-18/M1-31 and new Atik requests M1-107/M1-108 carry these findings. No exact task, screenshots, per-event times, actual build/settings or fresh-player sessions are confirmed; the AI did not observe the run. M1-65 remains incomplete.
+
+The sections below preserve the **6 November assisted opening inspection**. Their favorable screenshot/layout observations do not establish human comprehension and must not override T01's player report. No human participant was observed during that earlier inspection, and its captures are not images from the 8 November session. [human_sessions.md](human_sessions.md) tracks actual session status separately.
 
 ## Build and method
 
@@ -49,4 +51,4 @@ The repetitive ceiling/floor pattern and the dark crew against the bright room s
 
 ## Completion still needed
 
-Tanvir must complete the 20–30 minute no-help run, then watch 1–2 friends who have never seen the game do the same. Record actual hesitation, skipped text, expectations, screenshots and what felt good using [human_sessions.md](human_sessions.md). File new reproduced defects for the relevant owner, reference existing tasks where appropriate, and update this report. **M1-65 stays blocked until that evidence exists.** This report is not a Chapter 1 QA gate or an M1-22 learner-study result.
+Tanvir has now supplied a partial approximately 10-minute self-report (T01, 8 November); no 20-30 minute no-help run or fresh-player session is certified. Full task acceptance still needs the specified session evidence and 1-2 friends who have never seen the game. Record actual hesitation, skipped text, expectations, screenshots and what felt good using [human_sessions.md](human_sessions.md). File new reproduced defects for the relevant owner, reference existing tasks where appropriate, and update this report. **M1-65 stays blocked until that evidence exists.** This report is not a Chapter 1 QA gate or an M1-22 learner-study result.

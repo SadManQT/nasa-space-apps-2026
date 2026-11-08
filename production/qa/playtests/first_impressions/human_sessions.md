@@ -1,6 +1,8 @@
 # M1-65: remaining human sessions
 
-**Status: not run.** These blank records contain no participant observations.
+**Status: partial human evidence received, 8 November 2026.** Tanvir self-reported around 10 minutes of play; see [T01_2026-11-08.md](T01_2026-11-08.md). Exact task/build/settings, screenshots and event times remain unconfirmed. No fresh-player session has been reported; blank records below do not contain invented observations.
+
+Follow-up: Tanvir confirms that the intro played and he watched it; the sitting incident involved Mei being supposed to place the zero on the table. See T01 for the dry-zero calibration source lead and its limits.
 
 Use the same current-main build for Tanvir's run and 1–2 friends who have never seen the game. Record the runtime commit, renderer, resolution and input device. Use a separate empty test save; preserve existing expeditions. The automated screenshots in report.md are reference states, not substitutes for screenshots of these sessions.
 
@@ -13,11 +15,11 @@ Use anonymous session IDs; screenshots should show the game. Do not fill a missi
 
 | Session | Observer/player | Runtime commit | Renderer / resolution / input | Actual duration | Status |
 |---|---|---|---|---|---|
-| T01 | Tanvir, unassisted | — | — | — | Not run |
+| T01 | Tanvir, self-reported play; independent observation/help status unconfirmed | Unconfirmed | Unconfirmed | Around 10 min (self-report) | Partial report received; details in T01_2026-11-08.md |
 | F01 | First fresh player | — | — | — | Not run |
 | F02 | Optional second fresh player | — | — | — | Not run |
 
-Copy this table for each session; add as many rows as needed.
+The actual T01 qualitative findings are in [T01_2026-11-08.md](T01_2026-11-08.md). The blank event template below remains unfilled because no per-event times or images were supplied. Copy it for later observations as needed.
 
 | Elapsed time | Screen/action and screenshot path | Player's actual behavior or words | What they expected | Observer interpretation | Severity | Owner task |
 |---|---|---|---|---|---|---|
