@@ -680,6 +680,1987 @@
    "prompt": "Complete the debrief",
    "result": "Debrief complete. Chapter 1 is in the record.",
    "hint": "Decisions first, then the evidence that supports them."
+  },
+  "inspect_alo_identity": {
+   "goal": "Read Alo's identity at the garden bay",
+   "why": "Compatible flowers are needed to make seeds",
+   "prompt": "Read Alo's identity at the garden bay",
+   "result": "Alo's identity checked against the compatible cultivar record.",
+   "hint": "Compare the plant label with the protocol, not just its flower."
+  },
+  "inspect_tara_identity": {
+   "goal": "Read Tara's identity at the reference bay",
+   "why": "Tara must have her own verified partner record",
+   "prompt": "Read Tara's identity at the reference bay",
+   "result": "Tara's identity checked; both partners have separate records.",
+   "hint": "Find Tara's label beside the indoor reference plant."
+  },
+  "ack_live_link": {
+   "goal": "Check Earth contact at the garden console",
+   "why": "A live reply needs an available Earth path",
+   "prompt": "Check Earth contact at the garden console",
+   "result": "Earth contact checked; this conversation is live.",
+   "hint": "Read the contact indicator before treating a message as live."
+  },
+  "open_pollination_protocol": {
+   "goal": "Read the transfer protocol at the garden",
+   "why": "Pollen must travel while both chambers keep their air",
+   "prompt": "Read the transfer protocol at the garden",
+   "result": "Compatible transfer protocol opened; the chambers stay separate.",
+   "hint": "Look for donor, recipient and containment checks."
+  },
+  "identify_anther": {
+   "goal": "Find the anthers on the bench diagram",
+   "why": "The donor's pollen comes from a specific flower structure",
+   "prompt": "Find the anthers on the bench diagram",
+   "result": "Pollen-bearing anthers identified on the practice diagram.",
+   "hint": "Use the diagram's structure labels as well as its colours."
+  },
+  "identify_stigma": {
+   "goal": "Find the stigma on the bench diagram",
+   "why": "Pollen needs contact with the recipient's receptive structure",
+   "prompt": "Find the stigma on the bench diagram",
+   "result": "Receptive stigma identified on the practice diagram.",
+   "hint": "Compare the receiving surface with the pollen-bearing structures."
+  },
+  "assign_brush_directions": {
+   "goal": "Label both clean brushes at the bench",
+   "why": "Separate brushes keep the two transfer records clear",
+   "prompt": "Label both clean brushes at the bench",
+   "result": "Clean brushes assigned to separate transfer directions.",
+   "hint": "Read the donor and recipient labels before labelling a brush."
+  },
+  "practice_transfer_model": {
+   "goal": "Rehearse the transfer at the practice bench",
+   "why": "Practice protects the real flowers and their records",
+   "prompt": "Rehearse the transfer at the practice bench",
+   "result": "The nonliving model transfer is complete.",
+   "hint": "Follow the labelled structures on the model before using a living flower."
+  },
+  "check_space_weather": {
+   "goal": "Check space weather at the transfer station",
+   "why": "The route needs a current safety check",
+   "prompt": "Check space weather at the transfer station",
+   "result": "Space-weather status checked for the planned transfer.",
+   "hint": "Read the dated status before preparing the carrier."
+  },
+  "prepare_closed_carrier": {
+   "goal": "Prepare the carrier at the transfer station",
+   "why": "A closed carrier protects pollen and containment",
+   "prompt": "Prepare the carrier at the transfer station",
+   "result": "The closed carrier is ready for the transfer.",
+   "hint": "Check its latch and labels before moving it."
+  },
+  "verify_transfer_boundaries": {
+   "goal": "Trace pressure boundaries at the transfer station",
+   "why": "Opening both boundaries together would lose containment",
+   "prompt": "Trace pressure boundaries at the transfer station",
+   "result": "Pressure-boundary order checked; both chambers retain their air.",
+   "hint": "Follow the interlock diagram through the outward and return legs."
+  },
+  "preview_cycle_budget": {
+   "goal": "Try the full cycle at the transfer station",
+   "why": "One route charge covers both transfer directions",
+   "prompt": "Try the full cycle at the transfer station",
+   "result": "Whole-cycle forecast checked; no resources spent by this forecast.",
+   "hint": "Include both directions when reading the cycle cost."
+  },
+  "p03_scan_tara": {
+   "goal": "Scan Tara at the transfer microscope",
+   "why": "The donor must match the pollen record",
+   "prompt": "Scan Tara at the transfer microscope",
+   "result": "Tara's donor identity scanned.",
+   "hint": "Read the plant label before collecting any pollen."
+  },
+  "p03_collect_tara": {
+   "goal": "Collect Tara's pollen at the transfer bench",
+   "why": "The receiving flower needs its partner's pollen",
+   "prompt": "Collect Tara's pollen at the transfer bench",
+   "result": "Tara's pollen collected with the labelled clean brush.",
+   "hint": "Use the pollen-bearing structure identified during practice."
+  },
+  "p03_seal_a": {
+   "goal": "Seal Tara's carrier at the transfer bench",
+   "why": "Pollen must remain contained along the route",
+   "prompt": "Seal Tara's carrier at the transfer bench",
+   "result": "Tara's labelled carrier sealed.",
+   "hint": "Check the closure indicator before the carrier moves."
+  },
+  "p03_transfer_alo": {
+   "goal": "Transfer pollen to Alo at the glove ports",
+   "why": "Useful contact must reach the recipient's receptive structure",
+   "prompt": "Transfer pollen to Alo at the glove ports",
+   "result": "Tara's pollen contact with Alo recorded; seed development remains unconfirmed.",
+   "hint": "Compare recipient and donor labels, then use the diagram's receiving surface."
+  },
+  "p03_scan_alo": {
+   "goal": "Scan Alo at the transfer microscope",
+   "why": "The return transfer needs its own donor check",
+   "prompt": "Scan Alo at the transfer microscope",
+   "result": "Alo's donor identity scanned for the return transfer.",
+   "hint": "Read Alo's label again rather than reusing Tara's donor record."
+  },
+  "p03_collect_alo": {
+   "goal": "Collect Alo's pollen at the transfer bench",
+   "why": "The reciprocal direction needs a separate clean brush",
+   "prompt": "Collect Alo's pollen at the transfer bench",
+   "result": "Alo's pollen collected with the separately labelled clean brush.",
+   "hint": "Check that this brush belongs to the return direction."
+  },
+  "p03_seal_b": {
+   "goal": "Seal Alo's carrier at the transfer bench",
+   "why": "The return leg needs the same containment checks",
+   "prompt": "Seal Alo's carrier at the transfer bench",
+   "result": "Alo's labelled return carrier sealed.",
+   "hint": "Read the closure indicator before starting the return leg."
+  },
+  "p03_transfer_tara": {
+   "goal": "Transfer pollen to Tara at the glove ports",
+   "why": "Both plants need a recorded partner transfer",
+   "prompt": "Transfer pollen to Tara at the glove ports",
+   "result": "Alo's pollen contact with Tara recorded; development takes time.",
+   "hint": "Check the recipient label before making the modelled contact."
+  },
+  "record_stem_prediction": {
+   "goal": "Save a prediction at the garden bench",
+   "why": "Visible stem colours do not establish a complete genotype",
+   "prompt": "Save a prediction at the garden bench",
+   "result": "Prediction saved with its reason and a future descendant comparison.",
+   "hint": "Separate the colour you can observe from the ratio you cannot yet know."
+  },
+  "order_lifecycle": {
+   "goal": "Order growth observations at the Mission Table",
+   "why": "Pollination does not make seeds ready tomorrow",
+   "prompt": "Order growth observations at the Mission Table",
+   "result": "Flower-to-harvest observations placed in life-cycle order.",
+   "hint": "Match each picture to its observed development before arranging the dates."
+  },
+  "separate_current_evidence": {
+   "goal": "Sort plant evidence at the Mission Table",
+   "why": "Reference pictures must not become current observations",
+   "prompt": "Sort plant evidence at the Mission Table",
+   "result": "Current flowers, old seedlings and reference images kept distinct.",
+   "hint": "Check each image's source and date before using it as evidence."
+  },
+  "inspect_recorder_identifier": {
+   "goal": "Read the recorder label at the table",
+   "why": "An equipment match can connect two records",
+   "prompt": "Read the recorder label at the table",
+   "result": "Recorder equipment identifier linked to the old trial card.",
+   "hint": "Compare the full equipment label, not a person's initials."
+  },
+  "collect_serial_card": {
+   "goal": "Photograph the serial at the service bench",
+   "why": "The original label must survive the investigation",
+   "prompt": "Photograph the serial at the service bench",
+   "result": "Serial plate photographed without peeling the original label.",
+   "hint": "Use the camera to preserve both the number and its source."
+  },
+  "collect_date_card": {
+   "goal": "Photograph the date at the service bench",
+   "why": "Historical context needs a sourced date",
+   "prompt": "Photograph the date at the service bench",
+   "result": "Maintenance date photographed with its source label.",
+   "hint": "Keep the date attached to the object it describes."
+  },
+  "collect_trial_stage_card": {
+   "goal": "Photograph the growth chart at the bench",
+   "why": "Seedlings are different evidence from flowers",
+   "prompt": "Photograph the growth chart at the bench",
+   "result": "Trial chart photographed; the old plants had not flowered.",
+   "hint": "Read the documented development rather than guessing from curled leaves."
+  },
+  "exclude_identity_claim": {
+   "goal": "Check identity claims at the service bench",
+   "why": "An equipment label cannot prove a person's name",
+   "prompt": "Check identity claims at the service bench",
+   "result": "Unsupported identity claim excluded; the question remains open.",
+   "hint": "Ask which source actually names a person."
+  },
+  "assign_date_token": {
+   "goal": "Match the date on the reconstruction board",
+   "why": "A supported date gives the recording its context",
+   "prompt": "Match the date on the reconstruction board",
+   "result": "Date field matched to the photographed source.",
+   "hint": "Compare the empty field with the maintenance-date photograph."
+  },
+  "assign_device_token": {
+   "goal": "Match the device on the reconstruction board",
+   "why": "The fragment must belong to the checked recorder",
+   "prompt": "Match the device on the reconstruction board",
+   "result": "Device field matched to the equipment record.",
+   "hint": "Use the complete serial label rather than a remembered voice."
+  },
+  "assign_channel_token": {
+   "goal": "Match the channel on the reconstruction board",
+   "why": "Technical instructions and personal memories need separate context",
+   "prompt": "Match the channel on the reconstruction board",
+   "result": "Channel field matched to its source record.",
+   "hint": "Look for the label describing the recording's purpose."
+  },
+  "verify_local_checksum": {
+   "goal": "Check the restored copy at the service bench",
+   "why": "An intact copy protects the evidence during reconstruction",
+   "prompt": "Check the restored copy at the service bench",
+   "result": "Local copy passed its integrity check; history still needs interpretation.",
+   "hint": "Check the reconstruction before opening the transcript."
+  },
+  "open_reconstructed_transcript": {
+   "goal": "Read the transcript at the service bench",
+   "why": "The restored words need their date and source",
+   "prompt": "Read the transcript at the service bench",
+   "result": "Intact reconstructed transcript opened with its source context.",
+   "hint": "Keep the source labels visible while reading the fragment."
+  },
+  "play_engineer_fragment": {
+   "goal": "Play the stored fragment at the service bench",
+   "why": "A recorded instruction is evidence from its own date",
+   "prompt": "Play the stored fragment at the service bench",
+   "result": "Dated engineering recording played; it is stored audio.",
+   "hint": "Read the date and recording label before interpreting the voice."
+  },
+  "play_n_memory": {
+   "goal": "Read N.'s stored memory at the service bench",
+   "why": "The gardener's words add context without naming her",
+   "prompt": "Read N.'s stored memory at the service bench",
+   "result": "N.'s stored mustard-fields memory read; her full identity remains unknown.",
+   "hint": "Keep the signature as written and leave unsupported identity claims open."
+  },
+  "classify_voice_inference": {
+   "goal": "Sort the voice clue at the service bench",
+   "why": "Resemblance suggests a question rather than proving identity",
+   "prompt": "Sort the voice clue at the service bench",
+   "result": "Voice resemblance recorded as an inference.",
+   "hint": "Separate the exact recorded words from your interpretation of the speaker."
+  },
+  "send_fragment_copy": {
+   "goal": "Send the copy from the service console",
+   "why": "Ferreira needs the intact fragment and its sources",
+   "prompt": "Send the copy from the service console",
+   "result": "Technical copy sent with its reconstruction context.",
+   "hint": "Send the sourced copy rather than replacing its labels with a guess."
+  },
+  "acknowledge_handover": {
+   "goal": "Read the handover at the service console",
+   "why": "The next watch needs the same checked facts",
+   "prompt": "Read the handover at the service console",
+   "result": "Evening handover read; the personal question remains open.",
+   "hint": "Check what was sent and which questions still lack evidence."
+  },
+  "reach_interior_brace": {
+   "goal": "Reach the brace in the commons",
+   "why": "The quake response begins at a supported interior position",
+   "prompt": "Reach the brace in the commons",
+   "result": "Marked interior brace reached.",
+   "hint": "Follow the interior marker rather than leaving the habitat."
+  },
+  "account_four_cadets": {
+   "goal": "Check four cadets at the commons brace",
+   "why": "Everyone must be accounted for after the quake",
+   "prompt": "Check four cadets at the commons brace",
+   "result": "All four cadets accounted for at the brace.",
+   "hint": "Read each response, not just the occupied-place icons."
+  },
+  "finish_quake_beat": {
+   "goal": "Save the quake check at the commons",
+   "why": "The next response needs the preserved local record",
+   "prompt": "Save the quake check at the commons",
+   "result": "Quake response recorded; the warning still needs investigation.",
+   "hint": "Keep the crew check and warning record together for handover."
+  },
+  "p03_complete_run_1": {
+   "goal": "Finish the first cycle at the transfer station",
+   "why": "Both directions share one battery and air charge",
+   "prompt": "Finish the first cycle at the transfer station",
+   "result": "First reciprocal cycle complete; its single route charge is recorded.",
+   "hint": "Check both transfer directions and seals before finishing this cycle."
+  },
+  "p03_complete_run_2": {
+   "goal": "Finish the second cycle at the transfer station",
+   "why": "Both directions share one battery and air charge",
+   "prompt": "Finish the second cycle at the transfer station",
+   "result": "Second reciprocal cycle complete; its single route charge is recorded.",
+   "hint": "Check both transfer directions and seals before finishing this cycle."
+  },
+  "p03_complete_run_3": {
+   "goal": "Finish the third cycle at the transfer station",
+   "why": "Both directions share one battery and air charge",
+   "prompt": "Finish the third cycle at the transfer station",
+   "result": "Third reciprocal cycle complete; its single route charge is recorded.",
+   "hint": "Check both transfer directions and seals before finishing this cycle."
+  },
+  "p03_care_day_2": {
+   "goal": "Record care visit 2 at the transfer station",
+   "why": "Both plants need daily care between pollen runs",
+   "prompt": "Record care visit 2 at the transfer station",
+   "result": "Care visit 2 of seven saved with its date and observations.",
+   "hint": "Read the visit date and both plant observations before advancing."
+  },
+  "p03_care_day_3": {
+   "goal": "Record care visit 3 at the transfer station",
+   "why": "Both plants need daily care between pollen runs",
+   "prompt": "Record care visit 3 at the transfer station",
+   "result": "Care visit 3 of seven saved with its date and observations.",
+   "hint": "Read the visit date and both plant observations before advancing."
+  },
+  "p03_care_day_4": {
+   "goal": "Record care visit 4 at the transfer station",
+   "why": "Both plants need daily care between pollen runs",
+   "prompt": "Record care visit 4 at the transfer station",
+   "result": "Care visit 4 of seven saved with its date and observations.",
+   "hint": "Read the visit date and both plant observations before advancing."
+  },
+  "p03_care_day_5": {
+   "goal": "Record care visit 5 at the transfer station",
+   "why": "Both plants need daily care between pollen runs",
+   "prompt": "Record care visit 5 at the transfer station",
+   "result": "Care visit 5 of seven saved with its date and observations.",
+   "hint": "Read the visit date and both plant observations before advancing."
+  },
+  "p03_care_day_6": {
+   "goal": "Record care visit 6 at the transfer station",
+   "why": "Both plants need daily care between pollen runs",
+   "prompt": "Record care visit 6 at the transfer station",
+   "result": "Care visit 6 of seven saved with its date and observations.",
+   "hint": "Read the visit date and both plant observations before advancing."
+  },
+  "p03_care_day_7": {
+   "goal": "Record care visit 7 at the transfer station",
+   "why": "Both plants need daily care between pollen runs",
+   "prompt": "Record care visit 7 at the transfer station",
+   "result": "Care visit 7 of seven saved with its date and observations.",
+   "hint": "Read the visit date and both plant observations before advancing."
+  },
+  "p03_run_2_forward": {
+   "goal": "Bring Tara pollen to Alo: second visit",
+   "why": "This direction needs its own dated transfer record",
+   "prompt": "Bring Tara pollen to Alo: second visit",
+   "result": "Second visit: Tara-to-Alo transfer recorded.",
+   "hint": "Check the donor and recipient labels for this direction."
+  },
+  "p03_run_2_reverse": {
+   "goal": "Bring Alo pollen to Tara: second visit",
+   "why": "The reciprocal direction must also be recorded",
+   "prompt": "Bring Alo pollen to Tara: second visit",
+   "result": "Second visit: Alo-to-Tara transfer recorded.",
+   "hint": "Check the return brush and recipient label before transfer."
+  },
+  "p03_run_3_forward": {
+   "goal": "Bring Tara pollen to Alo: third visit",
+   "why": "This direction needs its own dated transfer record",
+   "prompt": "Bring Tara pollen to Alo: third visit",
+   "result": "Third visit: Tara-to-Alo transfer recorded.",
+   "hint": "Check the donor and recipient labels for this direction."
+  },
+  "p03_run_3_reverse": {
+   "goal": "Bring Alo pollen to Tara: third visit",
+   "why": "The reciprocal direction must also be recorded",
+   "prompt": "Bring Alo pollen to Tara: third visit",
+   "result": "Third visit: Alo-to-Tara transfer recorded.",
+   "hint": "Check the return brush and recipient label before transfer."
+  },
+  "p05_equip_gauge": {
+   "goal": "Check the gauge at the service stand",
+   "why": "A warning needs an independent measurement",
+   "prompt": "Check the gauge at the service stand",
+   "result": "Independent mechanical gauge reference checked.",
+   "hint": "Compare the reference position before trusting a pressure reading."
+  },
+  "p05_read_panel_warning": {
+   "goal": "Read the warning at the atmosphere console",
+   "why": "A red symbol alone cannot locate a leak",
+   "prompt": "Read the warning at the atmosphere console",
+   "result": "Atmosphere-panel warning recorded as an observation.",
+   "hint": "Keep the display's claim separate from the gauge measurement."
+  },
+  "p05_identify_three_taps": {
+   "goal": "Locate three taps on the service diagram",
+   "why": "Measurements need known positions to distinguish fault regions",
+   "prompt": "Locate three taps on the service diagram",
+   "result": "Main, garden and return tap positions identified.",
+   "hint": "Trace each tap to the part of the pipe it measures."
+  },
+  "p05_identify_garden_fall": {
+   "goal": "Compare pressure trends at the service console",
+   "why": "The changing reading narrows the suspected fault",
+   "prompt": "Compare pressure trends at the service console",
+   "result": "Pressure trends compared; the supported falling branch is recorded.",
+   "hint": "Compare the same tap at both times before choosing a fault region."
+  },
+  "p05_verify_annex_isolation": {
+   "goal": "Check annex isolation at the service console",
+   "why": "The aftershock branch must stay safely isolated",
+   "prompt": "Check annex isolation at the service console",
+   "result": "Annex automatic isolation verified after the aftershock.",
+   "hint": "Read the branch boundary indicator before changing another valve."
+  },
+  "p05_preview_garden_isolation": {
+   "goal": "Try branch isolation at the service console",
+   "why": "The habitat must keep its required services",
+   "prompt": "Try branch isolation at the service console",
+   "result": "Proposed branch isolation checked on a paused copy; nothing spent.",
+   "hint": "Compare which services each possible boundary would interrupt."
+  },
+  "p05_rollback_check": {
+   "goal": "Read the rollback check at the service console",
+   "why": "The crew needs a safe stopping condition",
+   "prompt": "Read the rollback check at the service console",
+   "result": "Rollback condition checked against the proposed isolation.",
+   "hint": "Find the observation that would make the crew stop the repair."
+  },
+  "p05_isolate_garden": {
+   "goal": "Isolate the garden spur at the service console",
+   "why": "The leaking connection needs a safe work boundary",
+   "prompt": "Isolate the garden spur at the service console",
+   "result": "Garden service spur isolated for the approved repair.",
+   "hint": "Match the valve label to the checked diagram before closing it."
+  },
+  "p05_verify_main_hold": {
+   "goal": "Check trunk pressure at the service console",
+   "why": "The repair must preserve the main habitat supply",
+   "prompt": "Check trunk pressure at the service console",
+   "result": "Main trunk hold independently verified after branch isolation.",
+   "hint": "Compare the independent main reading with its earlier reference."
+  },
+  "p05_apply_garden_clamp": {
+   "goal": "Fit the clamp at the safe service boundary",
+   "why": "The isolated feedthrough needs a verified seal",
+   "prompt": "Fit the clamp at the safe service boundary",
+   "result": "Approved clamp fitted from the pressurised safe side.",
+   "hint": "Check isolation and the marked connection before fitting the clamp."
+  },
+  "p05_reopen_garden_slow": {
+   "goal": "Reopen the spur at the service console",
+   "why": "A controlled reopening tests the repaired boundary",
+   "prompt": "Reopen the spur at the service console",
+   "result": "Garden spur reopened slowly under the test profile.",
+   "hint": "Watch the gauge trend as the approved reopening proceeds."
+  },
+  "p05_reconcile_records": {
+   "goal": "Correct repair notes at the service console",
+   "why": "The next watch needs the actual valve positions",
+   "prompt": "Correct repair notes at the service console",
+   "result": "Repair notes reconciled with the verified physical configuration.",
+   "hint": "Correct a copied note rather than undoing a sound repair."
+  },
+  "p05_save_monitoring_handover": {
+   "goal": "Save monitoring at the atmosphere console",
+   "why": "Camera inspection and suited entry need different clearance",
+   "prompt": "Save monitoring at the atmosphere console",
+   "result": "Monitoring handover saved; camera-only access precedes later suited entry.",
+   "hint": "Check the dates and access limits before handing over."
+  },
+  "p05_isolate_annex_feed": {
+   "goal": "Isolate utilities at the annex viewing port",
+   "why": "Camera inspection needs a checked service boundary",
+   "prompt": "Isolate utilities at the annex viewing port",
+   "result": "Annex utility feed isolated for camera inspection.",
+   "hint": "Use the certified safety drawing to identify the feed."
+  },
+  "p05_confirm_zero_differential": {
+   "goal": "Check the boundary at the annex port",
+   "why": "An unverified pressure boundary must not be opened",
+   "prompt": "Check the boundary at the annex port",
+   "result": "Annex pressure-boundary check passed for the viewing port.",
+   "hint": "Read the boundary instrument before opening the camera view."
+  },
+  "p05_inspect_annex_hatch": {
+   "goal": "Inspect by camera at the annex port",
+   "why": "A camera view does not clear physical entry",
+   "prompt": "Inspect by camera at the annex port",
+   "result": "Annex hatch camera inspection saved; physical entry remains pending.",
+   "hint": "Keep the inspection camera-only until the later entry checks pass."
+  },
+  "p06_scan_growth_chart": {
+   "goal": "Scan the chart in the cold annex",
+   "why": "The earlier trial's development needs direct evidence",
+   "prompt": "Scan the chart in the cold annex",
+   "result": "Old growth chart scanned; it records seedlings before flowering.",
+   "hint": "Compare the chart's development labels with the tray observations."
+  },
+  "p06_scan_vault_map": {
+   "goal": "Scan the route sheet in the annex",
+   "why": "The old deposit needs a sourced route record",
+   "prompt": "Scan the route sheet in the annex",
+   "result": "Vault route sheet scanned with its archive context.",
+   "hint": "Keep the map's date and source attached to the copy."
+  },
+  "p06_exit_suit_check": {
+   "goal": "Check the return boundary at the annex",
+   "why": "Suited entry needs a verified safe exit",
+   "prompt": "Check the return boundary at the annex",
+   "result": "Suited annex exit and support checks completed.",
+   "hint": "Read back the exit condition with the warm-side team."
+  },
+  "p06_accept_maturity_montage": {
+   "goal": "Review dated care at the garden bench",
+   "why": "Living plants continue developing while records are studied",
+   "prompt": "Review dated care at the garden bench",
+   "result": "Dated pod-development care observations reviewed.",
+   "hint": "Follow the dated observations instead of assuming a calendar jump proves maturity."
+  },
+  "p06_save_map_provenance": {
+   "goal": "Record map sources at the archive table",
+   "why": "An old route is evidence rather than current certification",
+   "prompt": "Record map sources at the archive table",
+   "result": "Map provenance saved with its pre-evacuation deposit context.",
+   "hint": "Compare the map date with the archive chronology."
+  },
+  "p06_record_future_checks": {
+   "goal": "List survey checks at the archive table",
+   "why": "Present slope, reserves and radio still need verification",
+   "prompt": "List survey checks at the archive table",
+   "result": "Future slope, return-reserve and communication checks listed.",
+   "hint": "Ask what an old map cannot tell you about today's rover journey."
+  },
+  "p06_confirm_care_transition": {
+   "goal": "Check dated care at the garden bench",
+   "why": "Pod maturity needs continuing observations through May 16",
+   "prompt": "Check dated care at the garden bench",
+   "result": "Care transition through May 16 confirmed with dated records.",
+   "hint": "Read the care dates and current development before advancing."
+  },
+  "p06_confirm_maturity": {
+   "goal": "Check Alo's pods at the garden bench",
+   "why": "Drying starts only after mature pods are verified",
+   "prompt": "Check Alo's pods at the garden bench",
+   "result": "Alo's mature pods confirmed on May 16.",
+   "hint": "Compare the pod camera and maturity chart before changing irrigation."
+  },
+  "p06_configure_drydown": {
+   "goal": "Set Alo's drying at the garden bench",
+   "why": "Mature Alo needs a controlled final drying interval",
+   "prompt": "Set Alo's drying at the garden bench",
+   "result": "Alo's irrigation stopped for the May 16–21 dry-down.",
+   "hint": "Check the plant identity and maturity before changing its own irrigation."
+  },
+  "p06_drydown_five_days": {
+   "goal": "Check dried pods at the harvest bench",
+   "why": "Opening wet pods would skip the verified harvest condition",
+   "prompt": "Check dried pods at the harvest bench",
+   "result": "Five-day dry-down checked on May 21; final moisture is verified.",
+   "hint": "Read the moisture profile and date before opening the mature pods."
+  },
+  "p06_open_six_pods": {
+   "goal": "Open Alo's pods over the harvest tray",
+   "why": "Contained wells keep the harvest count traceable",
+   "prompt": "Open Alo's pods over the harvest tray",
+   "result": "Six mature pods opened into separate counting wells.",
+   "hint": "Keep each pod's contents in its own labelled well."
+  },
+  "p06_count_42": {
+   "goal": "Count the seeds at the harvest tray",
+   "why": "The harvest needs a checked total before allocation",
+   "prompt": "Count the seeds at the harvest tray",
+   "result": "Harvest counted and cross-checked: forty-two founder seeds.",
+   "hint": "Check each well once and compare the groups with the harvest record."
+  },
+  "p06_allocate_12_30": {
+   "goal": "Divide the harvest at the seed bench",
+   "why": "Planting and protected reserve must conserve the harvest",
+   "prompt": "Divide the harvest at the seed bench",
+   "result": "Forty-two reconciled as twelve for planting and thirty protected.",
+   "hint": "Compare both allocations with the checked total before sealing."
+  },
+  "p06_sleeve_petal": {
+   "goal": "Preserve Alo's petal at the harvest bench",
+   "why": "Alo's finished life belongs in the lineage record",
+   "prompt": "Preserve Alo's petal at the harvest bench",
+   "result": "Alo's petal sleeved and labelled; the original plant stays archived.",
+   "hint": "Keep the preserved petal distinct from the living descendant tray."
+  },
+  "p06_plant_12_positions": {
+   "goal": "Plant the allocated seeds at the garden rack",
+   "why": "These twelve use the existing harvest allocation",
+   "prompt": "Plant the allocated seeds at the garden rack",
+   "result": "Twelve allocated seeds planted in labelled positions.",
+   "hint": "Match each position to the planting allocation without drawing extra reserve."
+  },
+  "p06_seal_reserve_30": {
+   "goal": "Seal founder seeds at the reserve store",
+   "why": "Thirty original seeds must remain separately protected",
+   "prompt": "Seal founder seeds at the reserve store",
+   "result": "Thirty founder seeds sealed in the protected reserve.",
+   "hint": "Compare the reserve container with its own seal and allocation record."
+  },
+  "p06_preserve_lineage": {
+   "goal": "Label the family at the garden rack",
+   "why": "Both parents belong in the descendants' record",
+   "prompt": "Label the family at the garden rack",
+   "result": "Alo-by-Tara lineage preserved beside the planted tray.",
+   "hint": "Keep scientific parent labels alongside any tray dedication."
+  },
+  "p06_reconcile_continuity": {
+   "goal": "Review generations at the lineage board",
+   "why": "Later gardens use working stock while founder seeds stay sealed",
+   "prompt": "Review generations at the lineage board",
+   "result": "Dated continuity checked; Tara's harvest and nameplate are archived, founder thirty unchanged.",
+   "hint": "Follow the care dates and distinguish working stock from founder reserve."
+  },
+  "p06_confirm_descendant_survey": {
+   "goal": "Check current descendants at the garden rack",
+   "why": "October's plants are later generations with their own dates",
+   "prompt": "Check current descendants at the garden rack",
+   "result": "October 21 descendants and survey preparation confirmed.",
+   "hint": "Read the current generation labels rather than treating them as May's seedlings."
+  },
+  "p05_read_main_t0": {
+   "goal": "Take the first main reading at services",
+   "why": "Matched times make the pressure trend meaningful",
+   "prompt": "Take the first main reading at services",
+   "result": "First main trunk pressure reading saved with its position.",
+   "hint": "Compare this tap with its own other timed reading, not a different location."
+  },
+  "p05_read_main_t10": {
+   "goal": "Take the second main reading at services",
+   "why": "Matched times make the pressure trend meaningful",
+   "prompt": "Take the second main reading at services",
+   "result": "Second main trunk pressure reading saved with its position.",
+   "hint": "Compare this tap with its own other timed reading, not a different location."
+  },
+  "p05_read_garden_t0": {
+   "goal": "Take the first garden reading at services",
+   "why": "Matched times make the pressure trend meaningful",
+   "prompt": "Take the first garden reading at services",
+   "result": "First garden spur pressure reading saved with its position.",
+   "hint": "Compare this tap with its own other timed reading, not a different location."
+  },
+  "p05_read_garden_t10": {
+   "goal": "Take the second garden reading at services",
+   "why": "Matched times make the pressure trend meaningful",
+   "prompt": "Take the second garden reading at services",
+   "result": "Second garden spur pressure reading saved with its position.",
+   "hint": "Compare this tap with its own other timed reading, not a different location."
+  },
+  "p05_read_return_t0": {
+   "goal": "Take the first return reading at services",
+   "why": "Matched times make the pressure trend meaningful",
+   "prompt": "Take the first return reading at services",
+   "result": "First return line pressure reading saved with its position.",
+   "hint": "Compare this tap with its own other timed reading, not a different location."
+  },
+  "p05_read_return_t10": {
+   "goal": "Take the second return reading at services",
+   "why": "Matched times make the pressure trend meaningful",
+   "prompt": "Take the second return reading at services",
+   "result": "Second return line pressure reading saved with its position.",
+   "hint": "Compare this tap with its own other timed reading, not a different location."
+  },
+  "p05_inspect_tank": {
+   "goal": "Inspect the main tank at services",
+   "why": "The main tank is a candidate until evidence distinguishes it",
+   "prompt": "Inspect the main tank at services",
+   "result": "Main tank candidate inspection recorded without treating its label as proof.",
+   "hint": "Compare this candidate with all three tap trends and the inspection budget."
+  },
+  "p05_inspect_habitat": {
+   "goal": "Inspect the habitat trunk at services",
+   "why": "The habitat trunk is a candidate until evidence distinguishes it",
+   "prompt": "Inspect the habitat trunk at services",
+   "result": "Habitat trunk candidate inspection recorded without treating its label as proof.",
+   "hint": "Compare this candidate with all three tap trends and the inspection budget."
+  },
+  "p05_inspect_garden": {
+   "goal": "Inspect the garden feedthrough at services",
+   "why": "The garden feedthrough is a candidate until evidence distinguishes it",
+   "prompt": "Inspect the garden feedthrough at services",
+   "result": "Garden feedthrough candidate inspection recorded without treating its label as proof.",
+   "hint": "Compare this candidate with all three tap trends and the inspection budget."
+  },
+  "p05_inspect_return": {
+   "goal": "Inspect the return line at services",
+   "why": "The return line is a candidate until evidence distinguishes it",
+   "prompt": "Inspect the return line at services",
+   "result": "Return line candidate inspection recorded without treating its label as proof.",
+   "hint": "Compare this candidate with all three tap trends and the inspection budget."
+  },
+  "p05_inspect_airlock": {
+   "goal": "Inspect the airlock seal at services",
+   "why": "The airlock seal is a candidate until evidence distinguishes it",
+   "prompt": "Inspect the airlock seal at services",
+   "result": "Airlock seal candidate inspection recorded without treating its label as proof.",
+   "hint": "Compare this candidate with all three tap trends and the inspection budget."
+  },
+  "p05_inspect_annex": {
+   "goal": "Inspect the annex branch at services",
+   "why": "The annex branch is a candidate until evidence distinguishes it",
+   "prompt": "Inspect the annex branch at services",
+   "result": "Annex branch candidate inspection recorded without treating its label as proof.",
+   "hint": "Compare this candidate with all three tap trends and the inspection budget."
+  },
+  "p05_stable_read_1": {
+   "goal": "Save stability check 1 at the service console",
+   "why": "Repeated independent readings verify the reopened repair",
+   "prompt": "Save stability check 1 at the service console",
+   "result": "Stability check 1 of five recorded across main, garden and return.",
+   "hint": "Read all three gauges at this check rather than reusing an earlier result."
+  },
+  "p05_stable_read_2": {
+   "goal": "Save stability check 2 at the service console",
+   "why": "Repeated independent readings verify the reopened repair",
+   "prompt": "Save stability check 2 at the service console",
+   "result": "Stability check 2 of five recorded across main, garden and return.",
+   "hint": "Read all three gauges at this check rather than reusing an earlier result."
+  },
+  "p05_stable_read_3": {
+   "goal": "Save stability check 3 at the service console",
+   "why": "Repeated independent readings verify the reopened repair",
+   "prompt": "Save stability check 3 at the service console",
+   "result": "Stability check 3 of five recorded across main, garden and return.",
+   "hint": "Read all three gauges at this check rather than reusing an earlier result."
+  },
+  "p05_stable_read_4": {
+   "goal": "Save stability check 4 at the service console",
+   "why": "Repeated independent readings verify the reopened repair",
+   "prompt": "Save stability check 4 at the service console",
+   "result": "Stability check 4 of five recorded across main, garden and return.",
+   "hint": "Read all three gauges at this check rather than reusing an earlier result."
+  },
+  "p05_stable_read_5": {
+   "goal": "Save stability check 5 at the service console",
+   "why": "Repeated independent readings verify the reopened repair",
+   "prompt": "Save stability check 5 at the service console",
+   "result": "Stability check 5 of five recorded across main, garden and return.",
+   "hint": "Read all three gauges at this check rather than reusing an earlier result."
+  },
+  "p07_compare_prediction": {
+   "goal": "Compare the prediction at the garden rack",
+   "why": "An honest experiment keeps the original prediction visible",
+   "prompt": "Compare the prediction at the garden rack",
+   "result": "Original stem-colour prediction compared with current observations.",
+   "hint": "Read what was predicted before opening the descendant observations."
+  },
+  "p07_inspect_twelve_descendants": {
+   "goal": "Observe twelve descendants at the garden rack",
+   "why": "The current sample needs its own counted observations",
+   "prompt": "Observe twelve descendants at the garden rack",
+   "result": "Twelve current descendants observed: seven purple stems and five green.",
+   "hint": "Use the text readings as well as the visible stem colours."
+  },
+  "p07_record_trait_limits": {
+   "goal": "Record uncertainty at the garden rack",
+   "why": "A small observed sample cannot establish every genotype",
+   "prompt": "Record uncertainty at the garden rack",
+   "result": "Trait report saved with the limits of the observed sample.",
+   "hint": "Separate a sample count from a promised inheritance ratio."
+  },
+  "p07_check_rover_seal": {
+   "goal": "Check cabin seals at the rover bay",
+   "why": "The field team needs a closed pressurised cabin",
+   "prompt": "Check cabin seals at the rover bay",
+   "result": "Rover cabin seal checks passed.",
+   "hint": "Compare the independent closure and pressure indicators."
+  },
+  "p07_check_scanner": {
+   "goal": "Check the scanner at the rover bay",
+   "why": "Unverified instruments cannot support an ice report",
+   "prompt": "Check the scanner at the rover bay",
+   "result": "Scanner readiness checked before departure.",
+   "hint": "Find the instrument reference check in the loadout record."
+  },
+  "p07_check_closed_carrier": {
+   "goal": "Check the carrier at the rover bay",
+   "why": "The collected sample needs sealed transport home",
+   "prompt": "Check the carrier at the rover bay",
+   "result": "Closed sample carrier checked and packed.",
+   "hint": "Read the latch and sample-label indicators before departure."
+  },
+  "p07_complete_base_handover": {
+   "goal": "Share the handover at the rover bay",
+   "why": "Two home cadets must know the field plan",
+   "prompt": "Share the handover at the rover bay",
+   "result": "Base handover complete; field and home responsibilities are distinct.",
+   "hint": "Read the home observations alongside the field loadout."
+  },
+  "p07_choose_route_b": {
+   "goal": "Choose a route at the rover console",
+   "why": "Both slope and round-trip reserve must be safe",
+   "prompt": "Choose a route at the rover console",
+   "result": "Survey route selected with both operating limits checked.",
+   "hint": "Compare every route's maximum slope and complete return cost."
+  },
+  "p07_verify_slope": {
+   "goal": "Check the slope at the rover console",
+   "why": "A short route can exceed the rover's limit",
+   "prompt": "Check the slope at the rover console",
+   "result": "Selected route's maximum slope checked against the rover limit.",
+   "hint": "Use the route's steepest section rather than its average slope."
+  },
+  "p07_verify_return_reserve": {
+   "goal": "Check return reserve at the rover console",
+   "why": "Getting out is only half the journey",
+   "prompt": "Check return reserve at the rover console",
+   "result": "Round-trip forecast checked against the mandatory return reserve.",
+   "hint": "Include the return leg before comparing the remaining reserve."
+  },
+  "p07_prepare_departure": {
+   "goal": "Confirm departure at the rover console",
+   "why": "The loadout and shared plan must agree",
+   "prompt": "Confirm departure at the rover console",
+   "result": "Survey departure preparation confirmed.",
+   "hint": "Compare the selected route with the loadout and base handover."
+  },
+  "p07_record_dry_reference": {
+   "goal": "Measure dry ground at the survey station",
+   "why": "The scanner needs a local comparison before sample claims",
+   "prompt": "Measure dry ground at the survey station",
+   "result": "Dry reference signal saved on the scenario instrument scale.",
+   "hint": "Read the reference before setting a detection threshold."
+  },
+  "p07_set_threshold_12": {
+   "goal": "Set the threshold at the survey station",
+   "why": "Sample tags must use the same calibrated comparison",
+   "prompt": "Set the threshold at the survey station",
+   "result": "Detection threshold set from the dry-reference rule.",
+   "hint": "Use the stated margin above the measured dry reference."
+  },
+  "p07_tag_positive_18": {
+   "goal": "Assess the first sample at the survey station",
+   "why": "A bright image needs instrument support",
+   "prompt": "Assess the first sample at the survey station",
+   "result": "First supported positive sample tagged with its measured signal.",
+   "hint": "Compare this sample's signal with the calibrated threshold."
+  },
+  "p07_tag_positive_19": {
+   "goal": "Assess the second sample at the survey station",
+   "why": "Each sample needs its own measured evidence",
+   "prompt": "Assess the second sample at the survey station",
+   "result": "Second supported positive sample tagged with its measured signal.",
+   "hint": "Apply the same threshold to this independent sample."
+  },
+  "p07_retain_negative_2": {
+   "goal": "Save the control at the survey station",
+   "why": "Negative results belong in a trustworthy report",
+   "prompt": "Save the control at the survey station",
+   "result": "Low-signal sample retained as the negative control.",
+   "hint": "Keep the below-threshold measurement even if its image looks interesting."
+  },
+  "p07_seal_sample": {
+   "goal": "Seal the sample at the survey station",
+   "why": "The result needs protected material and source context",
+   "prompt": "Seal the sample at the survey station",
+   "result": "Survey sample sealed with its location and calibrated result.",
+   "hint": "Keep the geological sample record separate from the vault case."
+  },
+  "p07_commit_return_route": {
+   "goal": "Check the return at the survey station",
+   "why": "A new discovery must preserve the journey home",
+   "prompt": "Check the return at the survey station",
+   "result": "Approved return route and reserve checked before recovery.",
+   "hint": "Read the current reserve before adding the recovery task."
+  },
+  "p08_read_external_probe": {
+   "goal": "Read the probe at the vault case",
+   "why": "Shell temperature does not prove specimen temperature history",
+   "prompt": "Read the probe at the vault case",
+   "result": "Vault shell probe reading checked against the handling band.",
+   "hint": "Compare the probe with the carrier specification, keeping the inner seal shut."
+  },
+  "p08_fit_sleeve": {
+   "goal": "Fit the sleeve at the vault case",
+   "why": "The cold case needs insulated sealed transport",
+   "prompt": "Fit the sleeve at the vault case",
+   "result": "Insulating sleeve fitted around the closed vault case.",
+   "hint": "Check the sleeve is seated before beginning the lift."
+  },
+  "p08_latch_cradle": {
+   "goal": "Latch the cradle at the vault case",
+   "why": "The supported case needs a verified restraint",
+   "prompt": "Latch the cradle at the vault case",
+   "result": "Vault cradle latched with the inner seal intact.",
+   "hint": "Read the position and latch indicators before moving the case."
+  },
+  "p08_secure_mount": {
+   "goal": "Secure the case at the rover mount",
+   "why": "A closed latch still needs a lock check",
+   "prompt": "Secure the case at the rover mount",
+   "result": "Vault case secured to the rover cargo mount.",
+   "hint": "Test the mount lock rather than judging its appearance."
+  },
+  "p08_return_to_base": {
+   "goal": "Bring the closed case back to Aurora",
+   "why": "The specimens need controlled handling at home",
+   "prompt": "Bring the closed case back to Aurora",
+   "result": "Return to Aurora recorded with sealed cargo and crew.",
+   "hint": "Keep both cargo records and the return reserve visible in the handover."
+  },
+  "p08_dock_dry_glovebox": {
+   "goal": "Dock the case at the dry glovebox",
+   "why": "Dry controlled warming protects the unopened specimens",
+   "prompt": "Dock the case at the dry glovebox",
+   "result": "Closed vault case docked in the dry quarantine glovebox.",
+   "hint": "Check the dry workspace before starting the sealed warming sequence."
+  },
+  "p08_warm_cold": {
+   "goal": "Begin sealed warming at the dry glovebox",
+   "why": "A controlled first step limits condensation risk",
+   "prompt": "Begin sealed warming at the dry glovebox",
+   "result": "First sealed warm-up interval recorded.",
+   "hint": "Follow the displayed warming profile while leaving the inner seal closed."
+  },
+  "p08_warm_cool": {
+   "goal": "Check cool warming at the dry glovebox",
+   "why": "The middle interval needs its own confirmation",
+   "prompt": "Check cool warming at the dry glovebox",
+   "result": "Cool sealed warm-up interval checked.",
+   "hint": "Compare the current handling band with the next permitted interval."
+  },
+  "p08_warm_room": {
+   "goal": "Finish sealed warming at the dry glovebox",
+   "why": "Room conditions must be verified before opening",
+   "prompt": "Finish sealed warming at the dry glovebox",
+   "result": "Room-temperature sealed warm-up interval checked.",
+   "hint": "Read the stabilisation criterion before asking to open the seal."
+  },
+  "p08_check_condensation": {
+   "goal": "Check dryness at the quarantine glovebox",
+   "why": "Condensation would compromise the recovered specimens",
+   "prompt": "Check dryness at the quarantine glovebox",
+   "result": "Dryness and condensation checks passed before opening.",
+   "hint": "Use the dry-workspace indicators after warming is complete."
+  },
+  "p08_open_inner_seal": {
+   "goal": "Open the seal inside the dry glovebox",
+   "why": "The protected workspace makes the next inspection safe",
+   "prompt": "Open the seal inside the dry glovebox",
+   "result": "Vault inner seal opened inside dry quarantine.",
+   "hint": "Check warming and dryness records before opening the biological seal."
+  },
+  "p08_inventory_12": {
+   "goal": "Inventory the specimens at the dry glovebox",
+   "why": "Every distinct specimen needs a condition record",
+   "prompt": "Inventory the specimens at the dry glovebox",
+   "result": "Twelve distinct vault specimens inventoried; none planted here.",
+   "hint": "Match each well with its manifest rather than counting album pictures."
+  },
+  "p08_scan_lid": {
+   "goal": "Scan the inscription at the quarantine bench",
+   "why": "The exact wording matters more than an identity guess",
+   "prompt": "Scan the inscription at the quarantine bench",
+   "result": "Vault lid inscription scanned and preserved exactly.",
+   "hint": "Keep the source image beside its transcription."
+  },
+  "p08_save_viability_pending": {
+   "goal": "Record viability at the quarantine bench",
+   "why": "Recovery does not prove every specimen will grow",
+   "prompt": "Record viability at the quarantine bench",
+   "result": "Specimen viability recorded as pending evaluation.",
+   "hint": "Separate safe recovery from evidence of germination."
+  },
+  "p08_transfer_case": {
+   "goal": "Transfer the case at the quarantine bench",
+   "why": "Recovered specimens need an accountable home location",
+   "prompt": "Transfer the case at the quarantine bench",
+   "result": "Vault case transfer saved with its quarantine record.",
+   "hint": "Keep the closed case and its condition ledger together."
+  },
+  "p08_manifest_reconciled": {
+   "goal": "Check the manifest at the quarantine bench",
+   "why": "Twelve physical specimens must match twelve records",
+   "prompt": "Check the manifest at the quarantine bench",
+   "result": "Recovered vault manifest reconciled with the physical inventory.",
+   "hint": "Check each distinct label without adding a specimen for a journal unlock."
+  },
+  "p08_personnel_home": {
+   "goal": "Confirm crew return at the Aurora console",
+   "why": "Both field cadets must be home before handover",
+   "prompt": "Confirm crew return at the Aurora console",
+   "result": "Both field cadets confirmed home with the base team.",
+   "hint": "Read names and arrival responses as well as the cargo report."
+  },
+  "p08_quarantine_complete": {
+   "goal": "Finish quarantine records at the Aurora console",
+   "why": "Later planting needs the protected recovery record",
+   "prompt": "Finish quarantine records at the Aurora console",
+   "result": "Recovery quarantine record complete; viability limits remain visible.",
+   "hint": "Check the condition entries before closing the recovery handover."
+  },
+  "p08_send_manifest": {
+   "goal": "Send the manifest from the Earth console",
+   "why": "Ferreira needs the exact recovered evidence",
+   "prompt": "Send the manifest from the Earth console",
+   "result": "Manifest and lid image sent through the available Earth path.",
+   "hint": "Send the sourced record rather than an unsupported explanation."
+  },
+  "p08_record_ferreira_question": {
+   "goal": "Save the question at the Earth console",
+   "why": "The inscription earns a question rather than an accusation",
+   "prompt": "Save the question at the Earth console",
+   "result": "Question for Ferreira saved beside the exact inscription.",
+   "hint": "Ask what the lid actually supports and what still needs an answer."
+  },
+  "p08_leave_identity_open": {
+   "goal": "Check open questions at the Earth console",
+   "why": "Initials alone cannot establish the gardener's full identity",
+   "prompt": "Check open questions at the Earth console",
+   "result": "Gardener identity remains open pending supported evidence.",
+   "hint": "Keep the initials as written until a signed source supplies more."
+  },
+  "p08_check_relief_flight": {
+   "goal": "Read the flight notice at the Mission Table",
+   "why": "A fifth occupant needs a dated arrival plan",
+   "prompt": "Read the flight notice at the Mission Table",
+   "result": "December 8–12 relief flight and support manifest checked.",
+   "hint": "Read the departure and arrival dates before preparing the extra place."
+  },
+  "p08_prepare_locker": {
+   "goal": "Prepare Ferreira's locker in the commons",
+   "why": "The arriving commander needs an assigned place and supplies",
+   "prompt": "Prepare Ferreira's locker in the commons",
+   "result": "Ferreira's locker prepared against the arrival manifest.",
+   "hint": "Check the planned traveller's name and support needs."
+  },
+  "p08_confirm_december_transition": {
+   "goal": "Review dated care at the Mission Table",
+   "why": "The base needs support through the intervening weeks",
+   "prompt": "Review dated care at the Mission Table",
+   "result": "October-to-December maintenance and care transition confirmed.",
+   "hint": "Read the dated care and resupply entries before advancing to arrival."
+  },
+  "p07_place_beacon_1": {
+   "goal": "Test beacon 1 at the ridge mount",
+   "why": "A mounted marker must prove its communication link",
+   "prompt": "Test beacon 1 at the ridge mount",
+   "result": "Beacon 1 placed and its link tested before the blind corner.",
+   "hint": "Check the supported mounting position and adjacent link before moving on."
+  },
+  "p07_place_beacon_2": {
+   "goal": "Test beacon 2 at the ridge mount",
+   "why": "A mounted marker must prove its communication link",
+   "prompt": "Test beacon 2 at the ridge mount",
+   "result": "Beacon 2 placed and its link tested before the blind corner.",
+   "hint": "Check the supported mounting position and adjacent link before moving on."
+  },
+  "p07_place_beacon_3": {
+   "goal": "Test beacon 3 at the ridge mount",
+   "why": "A mounted marker must prove its communication link",
+   "prompt": "Test beacon 3 at the ridge mount",
+   "result": "Beacon 3 placed and its link tested before the blind corner.",
+   "hint": "Check the supported mounting position and adjacent link before moving on."
+  },
+  "p09_check_lander_clearance": {
+   "goal": "Check the landing area at the airlock",
+   "why": "A welcome must wait for a clear approach",
+   "prompt": "Check the landing area at the airlock",
+   "result": "Relief lander clearance verified before transfer.",
+   "hint": "Read both clearance checks before opening the transfer sequence."
+  },
+  "p09_check_seals": {
+   "goal": "Check arrival seals at the airlock",
+   "why": "Cargo and crew must cross a verified boundary",
+   "prompt": "Check arrival seals at the airlock",
+   "result": "Arrival seal checks agree.",
+   "hint": "Compare closure and pressure indicators before the inner boundary opens."
+  },
+  "p09_verify_five_person_roster": {
+   "goal": "Update the roster at the arrival console",
+   "why": "Aurora now supports five lunar occupants",
+   "prompt": "Update the roster at the arrival console",
+   "result": "Five-person arrival roster verified, including Ferreira.",
+   "hint": "Match each name to the current arrival and occupancy record."
+  },
+  "p09_store_spare_once": {
+   "goal": "Store the spare at the commons locker",
+   "why": "A spare needs a known location and compatible procedure",
+   "prompt": "Store the spare at the commons locker",
+   "result": "Replacement relay controller stored once with its local service diagram.",
+   "hint": "Check the serial and locker record without duplicating the inventory."
+  },
+  "p09_run_arrival_readings": {
+   "goal": "Take arrival readings at the commons console",
+   "why": "The new watch needs current independent measurements",
+   "prompt": "Take arrival readings at the commons console",
+   "result": "Arrival watch readings recorded for the five-person base.",
+   "hint": "Read the present instruments rather than copying the old watch."
+  },
+  "p09_reconcile_readings": {
+   "goal": "Compare arrival readings at the commons console",
+   "why": "Copied notes must agree with checked instruments",
+   "prompt": "Compare arrival readings at the commons console",
+   "result": "Arrival readings reconciled with the independent gauge.",
+   "hint": "Keep the checked correction visible when an older note disagrees."
+  },
+  "p09_commit_sequence": {
+   "goal": "Order the records at the Mission Table",
+   "why": "Timestamps and boarding evidence constrain the evacuation story",
+   "prompt": "Order the records at the Mission Table",
+   "result": "Departure sequence saved with the supported crew-return conclusion.",
+   "hint": "Compare the source timestamps and all boarding signatures before drawing a conclusion."
+  },
+  "p10_document_young_trial": {
+   "goal": "Describe the old trial at the Mission Table",
+   "why": "The archive shows seedlings before reproductive development",
+   "prompt": "Describe the old trial at the Mission Table",
+   "result": "Old trial documented as young, unflowered seedlings.",
+   "hint": "Match the growth sheet with the visible leaves rather than guessing flowers."
+  },
+  "p10_exclude_flower_claim": {
+   "goal": "Check the flower claim at the archive table",
+   "why": "An unsupported bloom claim would erase the evidence",
+   "prompt": "Check the flower claim at the archive table",
+   "result": "Unsupported old-trial flower claim excluded.",
+   "hint": "Ask which dated record actually shows reproductive development."
+  },
+  "p10_save_source_scope": {
+   "goal": "Save evidence limits at the archive table",
+   "why": "A photograph cannot prove every unseen moment",
+   "prompt": "Save evidence limits at the archive table",
+   "result": "Old-trial report saved with its source limits.",
+   "hint": "Describe only the development the archived sources support."
+  },
+  "p10_acknowledge_ferreira_facts": {
+   "goal": "Read Ferreira's account at the Mission Table",
+   "why": "The retreat's facts must stay separate from blame",
+   "prompt": "Read Ferreira's account at the Mission Table",
+   "result": "Ferreira's factual account and retreat context read.",
+   "hint": "Compare her account with the evacuation order and boarding evidence."
+  },
+  "p10_acknowledge_personal_question": {
+   "goal": "Read both perspectives at the Mission Table",
+   "why": "A working crew can keep disagreement visible",
+   "prompt": "Read both perspectives at the Mission Table",
+   "result": "Personal question and both perspectives read without a forgiveness score.",
+   "hint": "Read the other perspective before closing the conversation."
+  },
+  "p10_preserve_safety_facts": {
+   "goal": "Check safety records at the Mission Table",
+   "why": "Technical support must remain available through personal uncertainty",
+   "prompt": "Check safety records at the Mission Table",
+   "result": "Safety information retained locally and available to the crew.",
+   "hint": "Keep the procedure record separate from unanswered personal questions."
+  },
+  "p10_compare_dust_repair": {
+   "goal": "Compare panel cleaning at the Mission Table",
+   "why": "Reduced solar output needs its own explanation",
+   "prompt": "Compare panel cleaning at the Mission Table",
+   "result": "Dust-cleaning comparison saved with the affected power trace.",
+   "hint": "Ask which measurement panel cleaning should change."
+  },
+  "p10_compare_leak_repair": {
+   "goal": "Compare leak repair at the Mission Table",
+   "why": "Pressure loss needs a separate verified repair",
+   "prompt": "Compare leak repair at the Mission Table",
+   "result": "Leak-repair comparison saved with its pressure evidence.",
+   "hint": "Compare the pressure trend rather than borrowing the panel's improvement."
+  },
+  "p10_keep_spare_present": {
+   "goal": "Check the packed spare at the commons locker",
+   "why": "A compatibility note is preparation rather than a repair",
+   "prompt": "Check the packed spare at the commons locker",
+   "result": "Relay spare remains packed; the present radio is still working.",
+   "hint": "Check the actual spare and local procedure without consuming it."
+  },
+  "p10_verify_flashes": {
+   "goal": "Review flashes at the impact-camera monitor",
+   "why": "Transient events must be distinguished from detector faults",
+   "prompt": "Review flashes at the impact-camera monitor",
+   "result": "Six genuine flashes verified and two fixed artifacts rejected.",
+   "hint": "Compare neighbouring frames and detector position before accepting a candidate."
+  },
+  "p10_clean_panel": {
+   "goal": "Clean the panel from the maintenance console",
+   "why": "Dust reduces the station's solar income",
+   "prompt": "Clean the panel from the maintenance console",
+   "result": "Affected panel cleaned and its output response checked.",
+   "hint": "Compare the panel trend with its own reference before and after cleaning."
+  },
+  "p10_patch_dome_spur": {
+   "goal": "Patch the spur from the safe-side console",
+   "why": "The isolated leak costs air until repaired",
+   "prompt": "Patch the spur from the safe-side console",
+   "result": "Damaged spur patched from the authorised safe side.",
+   "hint": "Check isolation and keep the living enclosure sealed."
+  },
+  "p10_verify_pressure": {
+   "goal": "Check pressure at the maintenance console",
+   "why": "A fitted patch needs an independent hold test",
+   "prompt": "Check pressure at the maintenance console",
+   "result": "Post-repair pressure hold verified.",
+   "hint": "Read the independent pressure trace rather than judging the patch animation."
+  },
+  "p10_exclude_unsupported_impact_claim": {
+   "goal": "Check the old-fault claim at the table",
+   "why": "Tonight's flashes do not prove an old impact",
+   "prompt": "Check the old-fault claim at the table",
+   "result": "Unsupported historical impact claim excluded from the report.",
+   "hint": "Compare the dates and ask whether the old report verifies a strike."
+  },
+  "p10_save_report": {
+   "goal": "Save the investigation at the Mission Table",
+   "why": "A useful report includes evidence and its limits",
+   "prompt": "Save the investigation at the Mission Table",
+   "result": "Observation and maintenance report saved with bounded conclusions.",
+   "hint": "Keep the candidate frames, repair traces and archive dates distinct."
+  },
+  "p10_match_noor_identity": {
+   "goal": "Match the signed page at the Mission Table",
+   "why": "A consented source can finally establish the gardener's identity",
+   "prompt": "Match the signed page at the Mission Table",
+   "result": "Signed evidence identifies N.R. as Dr. Noor Rahman.",
+   "hint": "Compare the released signed page with the recovered manifest."
+  },
+  "p10_record_consent": {
+   "goal": "Read the permission note at the Mission Table",
+   "why": "A personal history needs consent for its release",
+   "prompt": "Read the permission note at the Mission Table",
+   "result": "Noor's permission and the delivered-report context recorded.",
+   "hint": "Read what was released and how the reports reached Earth."
+  },
+  "p10_confirm_founder_role": {
+   "goal": "Check Noor's history at the Mission Table",
+   "why": "The Academy connection needs the same supported source",
+   "prompt": "Check Noor's history at the Mission Table",
+   "result": "Noor's survival and Last Light Academy founder role established.",
+   "hint": "Use the consented evidence rather than inferring a role from initials."
+  },
+  "p10_send_invitation": {
+   "goal": "Send Noor an invitation from the Earth console",
+   "why": "She can choose whether and when to answer",
+   "prompt": "Send Noor an invitation from the Earth console",
+   "result": "Invitation delivered once; Noor's first live voice is still ahead.",
+   "hint": "Choose an invitation that leaves the recipient a choice."
+  },
+  "p10_plant_cotton": {
+   "goal": "Plant cotton in Tara's indoor reference bay",
+   "why": "One cleared vault specimen can continue the living experiment",
+   "prompt": "Plant cotton in Tara's indoor reference bay",
+   "result": "Cotton planted on December 15 in the pressurised reference bay.",
+   "hint": "Check the approved quarantine record and cassette before planting."
+  },
+  "p10_protect_eleven_vault": {
+   "goal": "Check vault storage at the garden console",
+   "why": "Cotton planting leaves eleven other vault specimens protected",
+   "prompt": "Check vault storage at the garden console",
+   "result": "Eleven unplanted vault specimens retained in protected storage.",
+   "hint": "Use the vault ledger separately from the founder seed record."
+  },
+  "p10_protect_founder_reserve": {
+   "goal": "Check founder storage at the garden console",
+   "why": "The thirty original seeds remain a separate reserve",
+   "prompt": "Check founder storage at the garden console",
+   "result": "Founder reserve checked: thirty original seeds still sealed.",
+   "hint": "Read the founder container's own seal record without spending working stock."
+  },
+  "p11_charge_hand_light": {
+   "goal": "Charge the lamp at the power-room locker",
+   "why": "Kai needs a reliable small light within reach",
+   "prompt": "Charge the lamp at the power-room locker",
+   "result": "Familiar hand light charged and checked.",
+   "hint": "Use its measured charge indicator rather than searching for brighter equipment."
+  },
+  "p11_assign_companion": {
+   "goal": "Choose company at the power-room locker",
+   "why": "Support can help without changing anyone's duty",
+   "prompt": "Choose company at the power-room locker",
+   "result": "Companion assigned while crew responsibilities remain clear.",
+   "hint": "Check who can accompany Kai without abandoning an assigned role."
+  },
+  "p11_check_locker": {
+   "goal": "Check the lamp locker in the power room",
+   "why": "The crew needs to know where the light is",
+   "prompt": "Check the lamp locker in the power room",
+   "result": "Hand-light locker and access checked.",
+   "hint": "Keep the useful light in the planned reachable place."
+  },
+  "p11_read_personal_log": {
+   "goal": "Read Kai's memory at the power-room desk",
+   "why": "Understanding the fear helps the crew plan support",
+   "prompt": "Read Kai's memory at the power-room desk",
+   "result": "Kai's dated personal log read with a text equivalent.",
+   "hint": "Use the log to identify what would make the present plan clearer."
+  },
+  "p11_identify_protected_path": {
+   "goal": "Trace protected power at the service board",
+   "why": "Essential services must keep their supply during darkness",
+   "prompt": "Trace protected power at the service board",
+   "result": "Protected service path identified on the current circuit map.",
+   "hint": "Follow the essentials across the isolation boundary."
+  },
+  "p11_identify_fault_method": {
+   "goal": "Find fault reporting at the service board",
+   "why": "The crew needs a local checkback when equipment trips",
+   "prompt": "Find fault reporting at the service board",
+   "result": "Local fault-reporting method identified.",
+   "hint": "Check how to call the crew without relying on the affected camera branch."
+  },
+  "p11_commit_allocation": {
+   "goal": "Lock in eclipse power at the service board",
+   "why": "Essential loads need a complete affordable schedule",
+   "prompt": "Lock in eclipse power at the service board",
+   "result": "Five-segment teaching allocation locked in without duplicate charges.",
+   "hint": "Count essentials and one-time preparations against the protected allocation."
+  },
+  "p11_remove_decorative_floods": {
+   "goal": "Switch off decorative floods at the power board",
+   "why": "Extra brightness consumes the recovery margin",
+   "prompt": "Switch off decorative floods at the power board",
+   "result": "Decorative floodlights removed from the eclipse plan.",
+   "hint": "Compare useful protected services with loads that add only brightness."
+  },
+  "p11_protect_guide_light": {
+   "goal": "Keep the guide light at the power board",
+   "why": "A small protected light supports the crew safely",
+   "prompt": "Keep the guide light at the power board",
+   "result": "Guide light retained on the protected service path.",
+   "hint": "Trace its supply separately from the decorative floodlights."
+  },
+  "p11_protect_reserve": {
+   "goal": "Check recovery reserve at the power board",
+   "why": "The plan must leave margin after observation",
+   "prompt": "Check recovery reserve at the power board",
+   "result": "Protected recovery margin checked under the same teaching model.",
+   "hint": "Compare total scheduled demand with the displayed reserve."
+  },
+  "p12_test_branch": {
+   "goal": "Test the practice branch at the service board",
+   "why": "A rehearsal can expose the isolation boundary safely",
+   "prompt": "Test the practice branch at the service board",
+   "result": "Disconnected practice branch tested and restored.",
+   "hint": "Predict which indicator should change before running the safe test."
+  },
+  "p12_verify_protected_services": {
+   "goal": "Check essentials at the service board",
+   "why": "A branch fault must not interrupt survival services",
+   "prompt": "Check essentials at the service board",
+   "result": "Protected atmosphere, heat and garden services remain stable.",
+   "hint": "Compare the protected indicators while the test branch is disconnected."
+  },
+  "p12_record_rehearsal": {
+   "goal": "Save the rehearsal at the service board",
+   "why": "Practice records must stay distinct from live events",
+   "prompt": "Save the rehearsal at the service board",
+   "result": "Safe branch rehearsal saved separately from observation.",
+   "hint": "Label the record as a rehearsal rather than a real eclipse fault."
+  },
+  "p12_check_four_roles": {
+   "goal": "Share crew checks at the Mission Table",
+   "why": "Unshared observations cannot support a shared readiness plan",
+   "prompt": "Share crew checks at the Mission Table",
+   "result": "All four cadet readiness reports shared and checked.",
+   "hint": "Read each specialist's observation before marking the matching check."
+  },
+  "p12_check_five_segments": {
+   "goal": "Review five intervals at the Mission Table",
+   "why": "Preparation and recovery belong in the same schedule",
+   "prompt": "Review five intervals at the Mission Table",
+   "result": "Five eclipse teaching intervals checked against the shared plan.",
+   "hint": "Include the preparation and recovery cards, not only the ring view."
+  },
+  "p12_ready_camera": {
+   "goal": "Check the filtered camera at the service board",
+   "why": "Observation needs a protected instrument view",
+   "prompt": "Check the filtered camera at the service board",
+   "result": "Filtered remote camera ready on its checked branch.",
+   "hint": "Read the camera's filter and power-path indicators."
+  },
+  "p12_log_ingress": {
+   "goal": "Record ingress at the camera monitor",
+   "why": "The first observation needs its time and evidence label",
+   "prompt": "Record ingress at the camera monitor",
+   "result": "Ingress recorded on the teaching timeline.",
+   "hint": "Keep the instrument-frame and scenario-timing labels with the image."
+  },
+  "p12_log_ring": {
+   "goal": "Record the ring at the camera monitor",
+   "why": "The view needs a clear physical explanation",
+   "prompt": "Record the ring at the camera monitor",
+   "result": "Ring observation saved with its conceptual atmosphere explanation.",
+   "hint": "Use the filtered view and distinguish the diagram from measured geometry."
+  },
+  "p12_deliver_family_contact": {
+   "goal": "Connect family contact at the Earth console",
+   "why": "A conversation needs a checked Earth path",
+   "prompt": "Connect family contact at the Earth console",
+   "result": "Family contact delivered or buffered through the valid path.",
+   "hint": "Read the contact-path indicator rather than assuming the eclipse opens radio."
+  },
+  "p12_preserve_observation_qualifications": {
+   "goal": "Check observation labels at the camera monitor",
+   "why": "Scenario geometry must not become a verified local measurement",
+   "prompt": "Check observation labels at the camera monitor",
+   "result": "Eclipse observation qualifications retained in the record.",
+   "hint": "Keep verified calendar facts separate from unverified viewing geometry."
+  },
+  "p12_store_known_noor_text": {
+   "goal": "Save Noor's text at the message console",
+   "why": "Her known signature adds context without another identity puzzle",
+   "prompt": "Save Noor's text at the message console",
+   "result": "Known Noor text stored with its received context.",
+   "hint": "Read it as text from the already identified writer."
+  },
+  "p12_reserve_live_voice": {
+   "goal": "Check the message type at the Earth console",
+   "why": "A text packet is different from a live voice",
+   "prompt": "Check the message type at the Earth console",
+   "result": "Noor's reply remains text; no live voice is claimed.",
+   "hint": "Compare the packet type with the channel's actual contact state."
+  },
+  "p12_reset_sequence": {
+   "goal": "Restore the camera feeder at the service board",
+   "why": "The failed camera branch needs safe isolation before reset",
+   "prompt": "Restore the camera feeder at the service board",
+   "result": "Camera feeder safely restored; protected habitat services stayed on.",
+   "hint": "Use the checked branch procedure and verify its interlocks before reset."
+  },
+  "p12_record_egress": {
+   "goal": "Record egress at the restored camera monitor",
+   "why": "Recovery is proven by the final observation",
+   "prompt": "Record egress at the restored camera monitor",
+   "result": "Egress recorded after camera restoration.",
+   "hint": "Compare the restored view with the saved ingress and ring records."
+  },
+  "p12_reconcile_recovery_reserve": {
+   "goal": "Check final power at the service board",
+   "why": "The teaching allocation must remain a single consistent ledger",
+   "prompt": "Check final power at the service board",
+   "result": "Recovery reserve reconciled with the one-time preparations and essentials.",
+   "hint": "Use the same allocation model rather than adding another fault charge."
+  },
+  "p12_save_recovery": {
+   "goal": "Save recovery at the service board",
+   "why": "A trustworthy report keeps the interruption visible",
+   "prompt": "Save recovery at the service board",
+   "result": "Interruption, restoration and final observation saved together.",
+   "hint": "Keep the camera fault in the report rather than erasing it."
+  },
+  "p12_reconcile_monitoring": {
+   "goal": "Share monitoring at the Mission Table",
+   "why": "An active solar region needs continued observations",
+   "prompt": "Share monitoring at the Mission Table",
+   "result": "Monitoring handover saved with named observations and responsibilities.",
+   "hint": "Record who checks the next instrument report."
+  },
+  "p12_date_february_warning": {
+   "goal": "Date the new warning at the Mission Table",
+   "why": "January monitoring cannot predict an exact February storm",
+   "prompt": "Date the new warning at the Mission Table",
+   "result": "New February warning explicitly dated from its own evidence.",
+   "hint": "Compare the new warning's date with the earlier monitoring entry."
+  },
+  "p12_confirm_care_ledger": {
+   "goal": "Check care records at the garden console",
+   "why": "The garden and protected stores need continuing support",
+   "prompt": "Check care records at the garden console",
+   "result": "Dated care ledger checked through the monitoring interval.",
+   "hint": "Distinguish current plants, archived originals and separately protected inventories."
+  },
+  "p13_share_observations": {
+   "goal": "Share the warning at the Mission Table",
+   "why": "Every specialist needs the current storm evidence",
+   "prompt": "Share the warning at the Mission Table",
+   "result": "Current storm observations shared across the crew.",
+   "hint": "Read the source labels before discussing a response."
+  },
+  "p13_label_counterfactual": {
+   "goal": "Label the replay at the Mission Table",
+   "why": "Historical data informs a fictional lunar storm scenario",
+   "prompt": "Label the replay at the Mission Table",
+   "result": "July 2012 source replay labelled as counterfactual lunar exposure.",
+   "hint": "Separate the historical event date from the fictional expedition and game dose."
+  },
+  "p13_record_current_state": {
+   "goal": "Record present reserves at the Mission Table",
+   "why": "This storm uses the current prepared base",
+   "prompt": "Record present reserves at the Mission Table",
+   "result": "Current storm entry state recorded.",
+   "hint": "Use the present ledger rather than copying April's ending."
+  },
+  "p13_confirm_five_person_profile": {
+   "goal": "Check five-person needs at the shelter board",
+   "why": "Ferreira changes the base's air and food demand",
+   "prompt": "Check five-person needs at the shelter board",
+   "result": "Five-person air and food profile verified.",
+   "hint": "Compare the current roster with the older four-person card."
+  },
+  "p13_confirm_shelter_roster": {
+   "goal": "Check names at the shelter board",
+   "why": "Every lunar occupant needs a confirmed shelter place",
+   "prompt": "Check names at the shelter board",
+   "result": "Complete five-person shelter roster checked.",
+   "hint": "Read the names as well as the number of places."
+  },
+  "p13_confirm_shared_resources": {
+   "goal": "Compare water needs at the shelter board",
+   "why": "Shelter shielding and garden care share stored water",
+   "prompt": "Compare water needs at the shelter board",
+   "result": "Shared water and supply constraints compared in one plan.",
+   "hint": "Track borrowed water across both shelter and garden forecasts."
+  },
+  "p13_commit_plan": {
+   "goal": "Lock in the storm plan at shelter",
+   "why": "Crew, crops and founder seeds need one feasible schedule",
+   "prompt": "Lock in the storm plan at shelter",
+   "result": "Integrated six-step storm plan locked in.",
+   "hint": "Compare shielding, heat, light and water return over the whole storm."
+  },
+  "p13_latch_founder_reserve": {
+   "goal": "Latch the founder case inside the shelter",
+   "why": "Thirty original seeds need protected sealed compartments",
+   "prompt": "Latch the founder case inside the shelter",
+   "result": "Both founder compartments latched; thirty seeds remain protected.",
+   "hint": "Match both compartment seals to the founder ledger."
+  },
+  "p13_verify_water_shield": {
+   "goal": "Check wall water inside the shelter",
+   "why": "Borrowed water contributes to the planned shielding",
+   "prompt": "Check wall water inside the shelter",
+   "result": "Shelter water shielding checked against the forecast.",
+   "hint": "Read the wall-water amount for each exposure before the return transfer."
+  },
+  "p13_verify_crate_shield": {
+   "goal": "Check supply shielding inside the shelter",
+   "why": "Water and installed supplies share the shielding job",
+   "prompt": "Check supply shielding inside the shelter",
+   "result": "Supply shielding checked and retained through the final exposure.",
+   "hint": "Compare installed bundles with the plan rather than April's removal schedule."
+  },
+  "p13_verify_drain_order": {
+   "goal": "Check water return at the shelter controls",
+   "why": "An early drain weakens a later exposure",
+   "prompt": "Check water return at the shelter controls",
+   "result": "After-exposure water-return order verified.",
+   "hint": "Follow the exposure sample and return transfer in their displayed order."
+  },
+  "p14_confirm_five_occupants": {
+   "goal": "Confirm five people inside the shelter",
+   "why": "A place icon does not prove someone arrived",
+   "prompt": "Confirm five people inside the shelter",
+   "result": "All five occupants confirmed by name and response.",
+   "hint": "Match each person's response with their shelter position."
+  },
+  "p14_check_hatch_one": {
+   "goal": "Check the inner hatch inside the shelter",
+   "why": "The pressure boundary needs a checked closure",
+   "prompt": "Check the inner hatch inside the shelter",
+   "result": "First hatch check recorded.",
+   "hint": "Compare the indicated closure with the shelter procedure."
+  },
+  "p14_check_hatch_two": {
+   "goal": "Recheck the hatch inside the shelter",
+   "why": "Independent agreement protects the shelter boundary",
+   "prompt": "Recheck the hatch inside the shelter",
+   "result": "Second hatch check agrees with the first.",
+   "hint": "Read the independent check rather than copying the first indicator."
+  },
+  "p14_commit_steps_1_2": {
+   "goal": "Run the first wave at the shelter controls",
+   "why": "The checked plan must match actual resource changes",
+   "prompt": "Run the first wave at the shelter controls",
+   "result": "Storm steps one and two completed against the locked plan.",
+   "hint": "Compare each resolved step with its forecast before continuing."
+  },
+  "p14_save_forecast_comparison": {
+   "goal": "Compare the first wave at the shelter board",
+   "why": "A forecast is useful only beside the resolved readings",
+   "prompt": "Compare the first wave at the shelter board",
+   "result": "First-wave forecast comparison saved.",
+   "hint": "Keep predicted and actual values side by side."
+  },
+  "p14_confirm_case_sealed": {
+   "goal": "Check the seed case inside the shelter",
+   "why": "The founder reserve must stay protected during every wave",
+   "prompt": "Check the seed case inside the shelter",
+   "result": "Founder case remains sealed after the first wave.",
+   "hint": "Check both compartment seals against the same reserve record."
+  },
+  "p14_read_final_log": {
+   "goal": "Play the stored log inside the shelter",
+   "why": "The archive can speak while the Earth path is unavailable",
+   "prompt": "Play the stored log inside the shelter",
+   "result": "Noor's final historical log played from local storage.",
+   "hint": "Read the archive date and source label before interpreting the voice."
+  },
+  "p14_record_academy_name": {
+   "goal": "Save the Academy history at the shelter desk",
+   "why": "The recovered log completes the name's evidence chain",
+   "prompt": "Save the Academy history at the shelter desk",
+   "result": "Alo's name and the Academy's origin recorded from the log.",
+   "hint": "Connect the log with the packet and consented identity page."
+  },
+  "p14_save_progress_report": {
+   "goal": "Save the report at the shelter desk",
+   "why": "A bounded report distinguishes local facts from missing contact",
+   "prompt": "Save the report at the shelter desk",
+   "result": "Local progress report saved without inventing an Earth reply.",
+   "hint": "Describe the observations available inside the shelter."
+  },
+  "p14_commit_steps_3_6": {
+   "goal": "Run remaining waves at the shelter controls",
+   "why": "Peak shielding must protect crew and living crops",
+   "prompt": "Run remaining waves at the shelter controls",
+   "result": "Storm steps three through six completed with safety checks.",
+   "hint": "Follow the full plan through the final exposure before returning scheduled water."
+  },
+  "p14_confirm_crops_safe": {
+   "goal": "Check living crops at the shelter monitor",
+   "why": "The surviving garden needs measured confirmation",
+   "prompt": "Check living crops at the shelter monitor",
+   "result": "Living crop safety checked after all six storm steps.",
+   "hint": "Read the local garden telemetry while keeping its pressure boundary closed."
+  },
+  "p14_confirm_reserve_30": {
+   "goal": "Check founder seeds at the shelter store",
+   "why": "Thirty original seeds must survive separately from working stock",
+   "prompt": "Check founder seeds at the shelter store",
+   "result": "Founder reserve verified: thirty protected seeds remain sealed.",
+   "hint": "Read the founder record separately from the vault and working-stock pages."
+  },
+  "p14_diagnose_external_branch": {
+   "goal": "Trace the failure at the radio console",
+   "why": "Working local radio narrows the failed Earth path",
+   "prompt": "Trace the failure at the radio console",
+   "result": "Failed external uplink branch identified; local radio remains available.",
+   "hint": "Compare the local, dish and feedthrough diagnostic results."
+  },
+  "p14_route_reading_1": {
+   "goal": "Take the first reading at the route console",
+   "why": "Exterior preparation needs a safe route measurement",
+   "prompt": "Take the first reading at the route console",
+   "result": "First route-clearance reading saved on the game scale.",
+   "hint": "Compare the reading with the displayed route threshold."
+  },
+  "p14_route_reading_2": {
+   "goal": "Take the later reading at the route console",
+   "why": "One safe reading cannot establish the required clearance",
+   "prompt": "Take the later reading at the route console",
+   "result": "Second route reading saved after the required ten-minute scenario interval.",
+   "hint": "Check both the new reading and its timestamp against the first."
+  },
+  "p14_reconcile_local_stability": {
+   "goal": "Check local support at the maintenance desk",
+   "why": "A long preparation interval still needs an operating base",
+   "prompt": "Check local support at the maintenance desk",
+   "result": "Local stability plan reconciled while the direct uplink remains failed.",
+   "hint": "Use local expertise and stored procedures rather than an imaginary Earth reply."
+  },
+  "p14_reconcile_supplies": {
+   "goal": "Check supplies at the maintenance desk",
+   "why": "Planned food and maintenance support the intervening weeks",
+   "prompt": "Check supplies at the maintenance desk",
+   "result": "Dated supplies and routine consumption reconciled.",
+   "hint": "Follow the campaign maintenance ledger rather than multiplying an old night recipe."
+  },
+  "p14_date_march_gate": {
+   "goal": "Read the March handover at the Mission Table",
+   "why": "The next preparation step needs an explicit date",
+   "prompt": "Read the March handover at the Mission Table",
+   "result": "February-to-March support and care records confirmed.",
+   "hint": "Read the dated support and care entries before advancing."
+  },
+  "p14_pack_controller": {
+   "goal": "Pack the controller at the rover bench",
+   "why": "The summit housing needs the compatible stored spare",
+   "prompt": "Pack the controller at the rover bench",
+   "result": "Compatible December controller packed with its service diagram.",
+   "hint": "Compare its serial and connector specification with the relay housing."
+  },
+  "p14_pack_battery": {
+   "goal": "Pack the battery at the rover bench",
+   "why": "A failed road repeater needs a compatible spare",
+   "prompt": "Pack the battery at the rover bench",
+   "result": "Repeater battery spare checked and packed.",
+   "hint": "Check its specification against the route repeater service record."
+  },
+  "p14_pack_three_site_route": {
+   "goal": "Pack the route at the rover bench",
+   "why": "Terrain requires a tested chain of repeater sites",
+   "prompt": "Pack the route at the rover bench",
+   "result": "Three-site surveyed repeater plan packed for field verification.",
+   "hint": "Trace neighbouring links around terrain obstructions."
+  },
+  "p14_bench_test": {
+   "goal": "Test the equipment at the rover bench",
+   "why": "A desktop plan still needs an equipment check",
+   "prompt": "Test the equipment at the rover bench",
+   "result": "Controller and route equipment bench-test record saved.",
+   "hint": "Keep this preparation result separate from future field link tests."
+  },
+  "p14_assign_field_team": {
+   "goal": "Assign travellers at the rover departure board",
+   "why": "Three seats need named crew and assigned duties",
+   "prompt": "Assign travellers at the rover departure board",
+   "result": "Ferreira, Kai and Rafi assigned to the rover.",
+   "hint": "Match each traveller to a seat and field responsibility."
+  },
+  "p14_assign_home_team": {
+   "goal": "Assign home crew at the departure board",
+   "why": "Aurora needs two cadets maintaining its living systems",
+   "prompt": "Assign home crew at the departure board",
+   "result": "Mei and Amara assigned to remain at Aurora.",
+   "hint": "Check that no name appears in both places at once."
+  },
+  "p14_sign_departure_prep": {
+   "goal": "Sign preparation at the rover departure board",
+   "why": "Travel provisions and home occupancy must cover the journey",
+   "prompt": "Sign preparation at the rover departure board",
+   "result": "Departure preparation signed with dated travel and home responsibilities.",
+   "hint": "Include the outward, repair and return intervals in the shared handover."
+  },
+  "p15_confirm_teams": {
+   "goal": "Check team names at the rover bay",
+   "why": "The rover and habitat both need a crew",
+   "prompt": "Check team names at the rover bay",
+   "result": "Three rover travellers and two home cadets confirmed.",
+   "hint": "Compare each name with its assigned destination before departure."
+  },
+  "p15_confirm_loadout": {
+   "goal": "Check the loadout at the rover bay",
+   "why": "A distant repair needs its tools and compatible spares",
+   "prompt": "Check the loadout at the rover bay",
+   "result": "Controller, battery, service diagram and repeater loadout checked.",
+   "hint": "Compare packed equipment with the signed preparation record."
+  },
+  "p15_confirm_roundtrip_provisions": {
+   "goal": "Check provisions at the rover bay",
+   "why": "Independent supplies must cover the complete journey",
+   "prompt": "Check provisions at the rover bay",
+   "result": "Seventy-two-hour independent travel provisions verified.",
+   "hint": "Include both travel legs and the planned repair window."
+  },
+  "p15_choose_surveyed_route": {
+   "goal": "Choose the road at the rover console",
+   "why": "A cheaper-looking shortcut can exceed the slope limit",
+   "prompt": "Choose the road at the rover console",
+   "result": "Surveyed road selected against slope and round-trip limits.",
+   "hint": "Compare maximum slope as well as displayed travel cost."
+  },
+  "p15_confirm_return_reserve": {
+   "goal": "Check return power at the rover console",
+   "why": "The arrival at Malapert is only halfway home",
+   "prompt": "Check return power at the rover console",
+   "result": "Whole-trip rover reserve checked against the minimum.",
+   "hint": "Deduct outward work and the return allowance before comparing the reserve."
+  },
+  "p15_reach_marker_two": {
+   "goal": "Reach marker two on the surveyed road",
+   "why": "The repeater repair needs the verified service position",
+   "prompt": "Reach marker two on the surveyed road",
+   "result": "Surveyed marker-two service pad reached.",
+   "hint": "Match the map marker with the local bearing rather than the sky alone."
+  },
+  "p15_set_brake": {
+   "goal": "Set the brake at marker two",
+   "why": "Exterior work needs a secured rover",
+   "prompt": "Set the brake at marker two",
+   "result": "Rover brake set at the marker-two service pad.",
+   "hint": "Read the secured-vehicle indicator before preparing exterior work."
+  },
+  "p15_save_position_packet": {
+   "goal": "Send the position from marker two",
+   "why": "The home team needs a fresh local update",
+   "prompt": "Send the position from marker two",
+   "result": "Timestamped marker-two position packet saved for Aurora.",
+   "hint": "Check sender, location and packet age before sending the update."
+  },
+  "p15_restore_marker_2": {
+   "goal": "Repair the repeater at marker two",
+   "why": "Power at this site supports the road's local chain",
+   "prompt": "Repair the repeater at marker two",
+   "result": "Marker-two battery replaced under isolation and the repeater restored.",
+   "hint": "Follow the service drawing and closure checks before reconnecting power."
+  },
+  "p15_test_repeater_chain": {
+   "goal": "Test neighbouring links at the repeater pad",
+   "why": "A lit repeater does not prove communication",
+   "prompt": "Test neighbouring links at the repeater pad",
+   "result": "Three-site repeater chain tested across its adjacent links.",
+   "hint": "Check both neighbouring paths separately from the power indicator."
+  },
+  "p15_reach_approach": {
+   "goal": "Reach the approach on the surveyed road",
+   "why": "The remaining journey needs a checked local handover",
+   "prompt": "Reach the approach on the surveyed road",
+   "result": "Field team reached the surveyed approach with local links verified.",
+   "hint": "Keep the approach timestamp and route position with the update."
+  },
+  "p15_confirm_home_occupancy": {
+   "goal": "Check home names at Aurora's life-support console",
+   "why": "Two people breathe at home until the travellers return",
+   "prompt": "Check home names at Aurora's life-support console",
+   "result": "Two-cadet home occupancy confirmed for the initial night interval.",
+   "hint": "Compare the home roster with the separate rover manifest."
+  },
+  "p15_confirm_segment_forecast": {
+   "goal": "Try home support at Aurora's life-support console",
+   "why": "The final night includes a later occupancy change",
+   "prompt": "Try home support at Aurora's life-support console",
+   "result": "Segmented home forecast checked without spending live reserves.",
+   "hint": "Include two occupants first and all five for the final interval."
+  },
+  "p15_confirm_home_pressure": {
+   "goal": "Check pressure at Aurora's garden console",
+   "why": "The home loop needs an independent local measurement",
+   "prompt": "Check pressure at Aurora's garden console",
+   "result": "Aurora's independent pressure and home-loop checks passed.",
+   "hint": "Read the gauge alongside heat, dim lamps and the return path."
+  },
+  "p15_confirm_summit": {
+   "goal": "Confirm arrival at the relay summit",
+   "why": "Location and time matter to the shared repair window",
+   "prompt": "Confirm arrival at the relay summit",
+   "result": "Summit arrival confirmed at the dated handover.",
+   "hint": "Compare the current position and time with the approach packet."
+  },
+  "p15_confirm_home_checks": {
+   "goal": "Read home checks at the summit console",
+   "why": "Radio success cannot replace Aurora's life-support checks",
+   "prompt": "Read home checks at the summit console",
+   "result": "Aurora home checks confirmed through the local chain.",
+   "hint": "Read the latest home observation before accepting the field handover."
+  },
+  "p15_receive_summit_packet": {
+   "goal": "Check the packet at Aurora's radio console",
+   "why": "A stale position could mislead the other team",
+   "prompt": "Check the packet at Aurora's radio console",
+   "result": "Fresh summit packet received through the verified local chain.",
+   "hint": "Compare packet age and location with an older saved position."
+  },
+  "p16_isolate_power": {
+   "goal": "Isolate power at the relay service bay",
+   "why": "Controller work begins at a safe electrical boundary",
+   "prompt": "Isolate power at the relay service bay",
+   "result": "Relay controller power isolated.",
+   "hint": "Read the service diagram's boundary before touching the housing."
+  },
+  "p16_zero_test": {
+   "goal": "Verify zero at the relay service bay",
+   "why": "Isolation needs an independent check before replacement",
+   "prompt": "Verify zero at the relay service bay",
+   "result": "Zero-power test passed at the controller boundary.",
+   "hint": "Check the instrument after isolation rather than trusting the switch position."
+  },
+  "p16_install_controller": {
+   "goal": "Replace the controller at the relay housing",
+   "why": "The damaged unit needs the compatible stored spare",
+   "prompt": "Replace the controller at the relay housing",
+   "result": "Compatible replacement controller installed in the checked housing.",
+   "hint": "Match actual connectors and serials with the local service record."
+  },
+  "p16_close_housing": {
+   "goal": "Close the housing at the relay bay",
+   "why": "Reconnection must wait for the protected enclosure",
+   "prompt": "Close the housing at the relay bay",
+   "result": "Relay controller housing closed and checked.",
+   "hint": "Read the housing closure indicator before restoring power."
+  },
+  "p16_restore_power": {
+   "goal": "Restore power at the relay service bay",
+   "why": "The closed replacement needs a controlled supply test",
+   "prompt": "Restore power at the relay service bay",
+   "result": "Power restored to the closed controller housing.",
+   "hint": "Check the zero-test and closure records before reconnection."
+  },
+  "p16_local_bearing": {
+   "goal": "Tune the local antenna at the summit",
+   "why": "Aurora needs its own unobstructed surface path",
+   "prompt": "Tune the local antenna at the summit",
+   "result": "Local scenario bearing set toward Aurora's repeater chain.",
+   "hint": "Compare signal and obstruction indicators on the local path."
+  },
+  "p16_earth_bearing": {
+   "goal": "Tune the Earth dish at the summit",
+   "why": "The Earth leg must pass its own test",
+   "prompt": "Tune the Earth dish at the summit",
+   "result": "Earth scenario bearing set on the separate dish path.",
+   "hint": "Use the Earth-path indicators rather than reusing the local antenna result."
+  },
+  "p16_stable_lock": {
+   "goal": "Verify both locks at the summit console",
+   "why": "A brief signal peak cannot certify either path",
+   "prompt": "Verify both locks at the summit console",
+   "result": "Local and Earth links independently locked and stable.",
+   "hint": "Check sustained stability on both paths; assisted confirmation is equally valid."
+  },
+  "p16_checksum": {
+   "goal": "Check the echo at the relay console",
+   "why": "Strong signal alone cannot prove intact content",
+   "prompt": "Check the echo at the relay console",
+   "result": "Current test phrase returned as an exact match.",
+   "hint": "Compare every returned character and the current packet time."
+  },
+  "p16_confirm_path_records": {
+   "goal": "Save both paths at the relay console",
+   "why": "Each communication leg needs a current evidence record",
+   "prompt": "Save both paths at the relay console",
+   "result": "Local and Earth path records independently saved.",
+   "hint": "Check that each record belongs to this test rather than an old packet."
+  },
+  "p16_voice_verification_ready": {
+   "goal": "Prepare voice checks at the relay console",
+   "why": "A data echo does not replace a conversation",
+   "prompt": "Prepare voice checks at the relay console",
+   "result": "Both path checks ready for separate voice verification.",
+   "hint": "Read the remaining voice checks after the data test passes."
+  },
+  "p16_noor_live_voice": {
+   "goal": "Confirm live voices at the relay cabin",
+   "why": "Both restored paths must carry the first live call",
+   "prompt": "Confirm live voices at the relay cabin",
+   "result": "Aurora and Earth voice checks passed; Noor's first live call completed.",
+   "hint": "Confirm each path's current voice response before calling the link complete."
+  },
+  "p16_confirm_telemetry": {
+   "goal": "Check telemetry at the relay cabin",
+   "why": "The conversation needs a working data path too",
+   "prompt": "Check telemetry at the relay cabin",
+   "result": "Current telemetry received across the checked route.",
+   "hint": "Compare current telemetry receipts with the voice verification records."
+  },
+  "p16_start_return": {
+   "goal": "Begin the return from the summit cabin",
+   "why": "The field team still needs to reach home",
+   "prompt": "Begin the return from the summit cabin",
+   "result": "Return journey started from the pressurised cabin at 03:00.",
+   "hint": "Check the surveyed return plan and provision margin before departure."
+  },
+  "p16_confirm_return_24h": {
+   "goal": "Confirm the return at Aurora's arrival console",
+   "why": "The whole journey includes twenty-four hours homebound",
+   "prompt": "Confirm the return at Aurora's arrival console",
+   "result": "Twenty-four-hour return completed with the route and provisions checked.",
+   "hint": "Compare homebound timestamps with the forecast rather than reusing outward updates."
+  },
+  "p16_confirm_five_at_aurora": {
+   "goal": "Check five names at Aurora's arrival console",
+   "why": "Every traveller must be physically home",
+   "prompt": "Check five names at Aurora's arrival console",
+   "result": "All five crew confirmed at Aurora after the return.",
+   "hint": "Match each returning response to the current home roster."
+  },
+  "p16_update_occupancy": {
+   "goal": "Update occupancy at Aurora's life-support console",
+   "why": "The last three night hours support all five people",
+   "prompt": "Update occupancy at Aurora's life-support console",
+   "result": "Final three-hour home occupancy updated to five.",
+   "hint": "Use the actual arrival time when changing the home ledger."
+  },
+  "p16_save_final_records": {
+   "goal": "Check final records at Aurora's garden console",
+   "why": "Living crops and protected stores need separate confirmation",
+   "prompt": "Check final records at Aurora's garden console",
+   "result": "Crew, founder thirty, vault eleven, pressure, temperature and living cotton verified.",
+   "hint": "Read every final safety record before opening the viewing shutter."
+  },
+  "p16_save_photo": {
+   "goal": "Save the photograph at Aurora's garden window",
+   "why": "Dawn reveals the garden the crew already kept alive",
+   "prompt": "Save the photograph at Aurora's garden window",
+   "result": "Shared garden photograph saved with living descendants and cotton.",
+   "hint": "Keep archived Alo and Tara distinct from the living garden in the record."
+  },
+  "p16_save_dedication": {
+   "goal": "Choose a dedication at Aurora's garden table",
+   "why": "The crew can name what its shared work means",
+   "prompt": "Choose a dedication at Aurora's garden table",
+   "result": "Chosen garden dedication saved beside the lineage record.",
+   "hint": "Choose the dedication you want; it does not change the scientific record."
+  },
+  "p16_make_credits_available": {
+   "goal": "Open the credits at Aurora's garden table",
+   "why": "The completed journey should credit its people and sources",
+   "prompt": "Open the credits at Aurora's garden table",
+   "result": "Campaign credits available after the final records and dedication.",
+   "hint": "Review the shared record when you are ready to finish the journey."
   }
  }
 }

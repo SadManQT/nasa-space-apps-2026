@@ -199,13 +199,13 @@ func refresh_after_action(result: Dictionary) -> void:
 		if not before.has(id):
 			newly_done.append(id)
 	if result.get("accepted", false):
-		_last_outcome = {"result": result.get("reason", "Done."), "changes": result.get("deltas", []), "notes": result.get("warnings", []) + result.get("ledger_summary", [])}
-		if panels != null and runtime != null:
-			panels.bind_query(runtime.query().merged({"outcome": _last_outcome}, true))
-		if not newly_done.is_empty():
+		_last_outcome = {"result": result.get("reason", "Done."), "changes": result.get("deltas", []), "notes": _result_notes(result.get("warnings", []) + result.get("ledger_summary", []))}
+		if not newly_done.is_empty() and result.get("result", result).get("unsafe_predicates", []).is_empty():
 			var line := _result_line(String(newly_done[0]))
 			_last_outcome["result"] = line
 			show_status(line)
+		if panels != null and runtime != null:
+			panels.bind_query(runtime.query().merged({"outcome": _last_outcome}, true))
 		if newly_done.has("complete_debrief"):
 			show_chapter1_outcome("replay")
 		return
@@ -380,7 +380,7 @@ func _build() -> void:
 	_what_now.add_child(_wn_hint.get_parent())
 	var hint := UiDesign.button("Hint - one step at a time")
 	hint.name = "WhatNowHint"
-	hint.pressed.connect(func(): panels.request_hint())
+	hint.pressed.connect(_request_job_hint)
 	_what_now.add_child(hint)
 	var how_to := UiDesign.button("How to")
 	how_to.name = "WhatNowHowTo"
@@ -644,11 +644,39 @@ func _distance_to(node: Node3D) -> float:
 
 ## The goal of the job whose flag a "do this first" reason names.
 func _goal_for_flag(flag: String) -> String:
-	for raw_target in runtime.targets_for_current_scene():
+	var candidates := runtime.targets_for_current_scene()
+	if not candidates.any(func(target): return String(target.get("physical_flag", "")) == flag):
+		for catalog in [preload("res://scripts/missions/chapter2_gate_catalog.gd"), preload("res://scripts/missions/extended_gate_catalog.gd")]:
+			for scene_id in catalog.scene_ids():
+				if String(scene_id) <= _scene_id:
+					candidates.append_array(catalog.targets_for_scene(scene_id))
+	for raw_target in candidates:
 		if raw_target is Dictionary and String(raw_target.get("physical_flag", "")) == flag:
 			var goal := _goal_text(raw_target)
 			return goal[0].to_lower() + goal.substr(1) if goal.length() > 1 else goal
-	return UiDesign.player_words(flag.replace("_", " "))
+	return "finish the earlier jobs here"
+
+## Ledger measurements keep their values; only internal resource letters change.
+func _result_notes(notes: Array) -> Array:
+	var translated: Array = []
+	for note in notes:
+		var line := str(note)
+		for key in UiDesign.text().get("station", {}).get("fields", {}):
+			var regex := RegEx.new()
+			regex.compile("\\b" + String(key) + "\\s*(?=[=+−-]?\\d)")
+			line = regex.sub(line, String(UiDesign.text().station.fields[key].word) + " ", true)
+		translated.append(UiDesign.player_words(line))
+	return translated
+
+func _request_job_hint() -> void:
+	var id := String(_goal_info.get("target_id", ""))
+	if _scene_id.begins_with("EX-CH01-") or id.is_empty():
+		panels.request_hint()
+		return
+	var lesson := HowToCard.lesson(HowToCard.card_id(runtime.query()))
+	lesson.nudge = String(_goal_info.get("hint", ""))
+	panels.hint_player.set_settings(panels.accessibility_settings())
+	panels.hint_player.request_hint(_scene_id + ":" + id, lesson, _marker)
 
 func _result_line(target_id: String) -> String:
 	var authored = UiDesign.text().get("targets", {}).get(target_id, {})

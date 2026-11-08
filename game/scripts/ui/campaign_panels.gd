@@ -668,6 +668,10 @@ func _apply_accessibility() -> void:
 	set_meta("accessibility_settings", _settings.duplicate(true))
 	set_meta("presentation_transition_seconds", presentation_transition_seconds())
 	_apply_text_scale(self)
+	# Keep the measured button inside the footer while containers await reflow.
+	var width := _close_button.get_theme_font("font").get_string_size(_close_button.text, HORIZONTAL_ALIGNMENT_LEFT, -1, _close_button.get_theme_font_size("font_size")).x + _close_button.get_theme_stylebox("normal").get_minimum_size().x
+	_close_button.size.x = maxf(width, _close_button.get_combined_minimum_size().x)
+	_close_button.position.x = maxf(0, _close_button.get_parent_control().size.x - _close_button.size.x)
 
 func _apply_text_scale(node: Node) -> void:
 	UiDesign.apply_type(node, get_viewport_rect().size.y, text_scale())
@@ -752,8 +756,9 @@ func _render_card(value) -> void:
 		_card_text(String(card.get("title", "")), true)
 		_card_text("Evidence · " + String(card.get("evidence_label", "")) + "\n" + String(card.get("agency", "")) + "\nDataset: " + String(card.get("dataset_id", "")))
 		_card_text("What was measured or supplied\n" + ScienceScript.describe(card.get("fields_used", [])) + "\n" + ScienceScript.describe(card.get("values", {})), false, true)
-		# The computation trail keeps every caveat ("not applied", "proposal") word for word; only puzzle codes become names.
-		_card_text(UiDesign.player_words("What the game computed\n" + ScienceScript.describe(card.get("derived", [])) + "\nGame resource units are training rules; the fixture does not validate every game number."), false, true)
+		# Keep formulas and caveats exact; only repository references and puzzle codes become player words.
+		var computation := ScienceScript.describe(card.get("derived", [])).replace("game-design/08_PUZZLE_DESIGNS.md", "Mission model").replace("08_PUZZLE_DESIGNS.md", "Mission model").replace("08_PUZZLE_DESIGNS", "Mission model")
+		_card_text(UiDesign.player_words("What the game computed\n" + computation + "\nGame resource units are training rules; the fixture does not validate every game number."), false, true)
 		_card_text("Limits\n" + String(card.get("boundary", "")), true)
 		_card_text("Source\n" + String(card.get("url", "")) + "\n" + String(card.get("citation", "")) + "\nRetrieved: " + String(card.get("retrieved", "")) + "\nLicence: " + String(card.get("licence", "")))
 	if value is Dictionary and bool(value.get("return_to_debrief", false)):

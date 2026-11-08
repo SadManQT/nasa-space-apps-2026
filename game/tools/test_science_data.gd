@@ -55,6 +55,7 @@ func _run() -> void:
 	await process_frame
 	_check(root.get_visible_rect().encloses(panels._panel.get_global_rect()), "large-text Data Card shell fits 1280x720")
 	_check(_text(panels).contains("What this means for Aurora") and _text(panels).contains("What the game computed") and _text(panels).contains("ntrs.nasa.gov"), "card includes explanation, computations and citation")
+	await _test_model_reference(panels, science)
 	var cancel := InputEventAction.new()
 	cancel.action = "ui_cancel"
 	cancel.pressed = true
@@ -71,6 +72,8 @@ func _run() -> void:
 	source.free()
 	var storage = preload("res://tools/support/isolated_storage.gd").new()
 	_check(storage.setup("science_data"), "isolate production save")
+	if OS.get_cmdline_user_args().has("--model-evidence"):
+		_check(storage.prepare_rendering_cache(), "native model-card rendering cache parents prepared")
 	var campaign = load("res://scenes/campaign/chapter1_campaign.tscn").instantiate()
 	storage.configure(campaign)
 	root.add_child(campaign)
@@ -83,6 +86,11 @@ func _run() -> void:
 	_check(campaign.director.snapshot() == before, "reading and closing cards preserves the full authoritative state")
 	_button(campaign.hud, "Last result").pressed.emit()
 	_check(campaign.hud.panels.active_panel() == "outcome", "production HUD exposes the debrief source entry")
+	for large in [false, true]:
+		campaign.hud.panels.set_accessibility({"large_text": large})
+		await process_frame
+		await process_frame
+		_check_footer_bounds(campaign.hud.panels, "actual HUD Last result large=%s" % large)
 	campaign.hud.panels.close_panel()
 	if OS.get_cmdline_user_args().has("--evidence"):
 		await _capture("M0-15_campaign_hud")
@@ -90,6 +98,45 @@ func _run() -> void:
 	storage.cleanup()
 	print("SCIENCE DATA RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
+
+func _test_model_reference(panels: CampaignPanels, science: ScienceData) -> void:
+	var raw := science.card("nasa_eclipse_2047_01_12")
+	var before := JSON.stringify(raw)
+	for large in [false, true]:
+		panels.set_accessibility({"large_text": large})
+		_check_footer_bounds(panels, "scale change before deferred footer reflow large=%s" % large)
+		panels.open_panel("data_card", {"source_id": raw.source_id})
+		await process_frame
+		await process_frame
+		var computed: Label
+		for child in panels._body.get_children():
+			if child is Label and child.text.begins_with("What the game computed"):
+				computed = child
+		_check(computed != null and computed.is_visible_in_tree(), "actual computation label renders large=%s" % large)
+		if computed == null:
+			continue
+		_check(computed.text.contains("minutes / 60 / 7.2 (Mission model Protect the Small Light verified-data rule)") and not computed.text.contains("08_PUZZLE_DESIGNS"), "visible computation uses Mission model with exact formula large=%s" % large)
+		_check(computed.text.contains("0.161") and computed.text.contains("0.162") and computed.text.contains("proposal B3-10"), "computation keeps exact values and proposal warning large=%s" % large)
+		_check(_text(panels).contains(String(raw.url)), "source URL is unchanged large=%s" % large)
+		_check(root.get_visible_rect().encloses(panels._panel.get_global_rect()), "model-reference card shell fits large=%s" % large)
+		_check_footer_bounds(panels, "model-reference card large=%s" % large)
+		if OS.get_cmdline_user_args().has("--model-evidence"):
+			var scroll := panels._body.get_parent() as ScrollContainer
+			scroll.scroll_vertical = int(computed.position.y + computed.size.y - scroll.size.y)
+			await _capture("M1-62_model_reference" + ("_150" if large else "_normal"))
+	_check(JSON.stringify(science.card(raw.source_id)) == before and String(raw.derived[-1].formula) == "minutes / 60 / 7.2 (08_PUZZLE_DESIGNS P-11 verified-data rule)", "display wording leaves raw fixture and formula unchanged")
+
+func _check_footer_bounds(panels: CampaignPanels, state: String) -> void:
+	var panel: Rect2 = panels._panel.get_global_rect()
+	var close: Rect2 = panels._close_button.get_global_rect()
+	var footer: Rect2 = panels._close_button.get_parent().get_global_rect()
+	print("M1-62 FOOTER PROBE: ", state, " close=", close, " footer=", footer, " panel=", panel)
+	_check(panel.encloses(close.grow(2)), state + " complete close button and focus border fit panel: " + str(close) + " in " + str(panel))
+	_check(footer.encloses(close), state + " close stays within the footer's house margins")
+	var measured: float = panels._close_button.get_theme_font("font").get_string_size(panels._close_button.text, HORIZONTAL_ALIGNMENT_LEFT, -1, panels._close_button.get_theme_font_size("font_size")).x
+	_check(close.size.x >= measured, state + " close label has its measured font width: " + str(measured) + " in " + str(close.size.x))
+	panels._close_button.grab_focus()
+	_check(panels._close_button.has_focus(), state + " close remains keyboard/controller focusable")
 
 func _test_fixture_corrections(science: ScienceData) -> void:
 	var sky := science.card("jpl_horizons_ch1_sky")

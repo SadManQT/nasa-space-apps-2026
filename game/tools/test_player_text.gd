@@ -1,4 +1,4 @@
-## Doc 25 §8.1–8.2 (M1-54): walks every Chapter 1 scene through the flat HUD,
+## Doc 25 §8.1–8.2 (M1-54/M1-62): walks all eight chapters through the flat HUD,
 ## the shared panels and the 3D room signs, and fails on any visible developer language (scene
 ## IDs, puzzle codes, single-letter variables, engineering verbs), and checks
 ## that free movement keeps the centre third of the screen clear.
@@ -13,6 +13,8 @@ const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campa
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
 const CarePanel = preload("res://scripts/ui/care_round_panel.gd")
+const LaterGates = preload("res://scripts/missions/extended_gate_catalog.gd")
+const Chapter2Gates = preload("res://scripts/missions/chapter2_gate_catalog.gd")
 const PANELS := ["what_now", "pause", "settings_accessibility", "journal_discovery", "outcome", "puzzle", "dialogue_captions", "sources", "resume", "chapter1_outcome"]
 ## The HUD pieces that may show while the player walks (doc 25 §2.2).
 const FREE_MOVEMENT := ["GoalCard", "TopRight", "Prompt", "GoalMarker"]
@@ -22,6 +24,7 @@ var checks := 0
 var failures := 0
 var _patterns: Array[RegEx] = []
 var _seen := {}
+var _goal_bounds := {}
 
 func _init() -> void:
 	CampaignCutscenePlayer.autoplay = false
@@ -30,7 +33,7 @@ func _init() -> void:
 		var regex := RegEx.new()
 		regex.compile(source)
 		_patterns.append(regex)
-	if not storage.setup("M1-54-player-text"):
+	if not storage.setup("M1-54-player-text") or (OS.get_cmdline_user_args().has("--capture") and not storage.prepare_rendering_cache()):
 		quit(1)
 		return
 	call_deferred("_run")
@@ -59,10 +62,14 @@ func _run() -> void:
 			guard += 1
 		await create_timer(0.5).timeout  # the dialogue bar fades out
 		_check_free_movement(hud, scene_id)
+		if OS.get_cmdline_user_args().has("--capture") and scene_id == "EX-CH01-S01":
+			await _capture_goal(hud, "CH01_normal")
 		hud.panels.set_accessibility({"large_text": true})
 		hud.apply_accessibility()
 		await process_frame
 		_check_free_movement(hud, scene_id + " at 150% text")
+		if OS.get_cmdline_user_args().has("--capture") and scene_id == "EX-CH01-S01":
+			await _capture_goal(hud, "CH01_150")
 		hud.panels.set_accessibility({"large_text": false})
 		hud.apply_accessibility()
 		for panel_id in PANELS:
@@ -120,9 +127,160 @@ func _run() -> void:
 		hud.panels.open_panel("data_card", {"source_id": source_id})
 		await _walk_state(hud, "data card " + String(source_id))
 	hud.panels.close_panel()
+	await _walk_later_chapters(campaign)
 	await _walk_failed_table()
 	_check(_seen.size() > 150, "the walk read many distinct player strings (%d)" % _seen.size())
 	_finish()
+
+## Scripted catalog witnesses exercise actual route commands and HUD/panels.
+## This is a text walk, not physical traversal or an all-chapter playtest.
+func _walk_later_chapters(campaign: Chapter1Campaign) -> void:
+	var hud := campaign.hud
+	var moved := campaign.advance_scene()
+	_check(moved.get("accepted", false), "text walk enters Chapter 2")
+	var scene_count := 0
+	var target_count := 0
+	for scene_id in Chapter2Gates.scene_ids() + LaterGates.scene_ids():
+		if campaign.loading:
+			await campaign.wait_loading()
+		_check(campaign.route.current_scene_id() == scene_id, "text walk reaches " + scene_id)
+		if String(scene_id).ends_with("S01"):
+			print("M1-62 TEXT WALK: ", scene_id, " after ", target_count, " later jobs")
+		if String(scene_id) < "EX-CH05-S10":
+			hud.show_status("Complete physical prerequisite: p10_match_noor_identity_done")
+			_check(not hud._status.text.contains("Noor") and not hud._status.text.contains("Rahman"), scene_id + " prerequisite lookup cannot reveal a future name")
+		await _walk_state(hud, scene_id + " entry")
+		for line in campaign.current_dialogue():
+			await _walk_state(hud, scene_id + " dialogue " + String(line.id))
+			campaign.route.acknowledge_dialogue(String(line.id))
+			hud._dialogue_index = hud._first_unacknowledged_line()
+			hud._render_caption()
+		hud.refresh_scene()
+		await create_timer(0.3).timeout
+		for target in campaign.targets_for_current_scene():
+			var id := String(target.target_id)
+			var authored: Dictionary = UiDesign.text().get("targets", {}).get(id, {})
+			for field in ["goal", "why", "prompt", "result", "hint"]:
+				_check(not String(authored.get(field, "")).strip_edges().is_empty(), id + " authored " + field)
+				if String(scene_id) < "EX-CH05-S10":
+					_check(not String(authored.get(field, "")).contains("Noor") and not String(authored.get(field, "")).contains("Rahman"), id + " keeps the later identity unrevealed")
+			_check(String(authored.get("goal", "")).split(" ", false).size() <= 8, id + " goal at most eight words")
+			_check(String(authored.get("why", "")).split(" ", false).size() <= 12, id + " why at most twelve words")
+			_check(String(hud._goal_info.get("target_id", "")) == id, id + " is the actual current goal")
+			_check(hud._title.text == authored.get("goal", "") and hud._why.text == authored.get("why", ""), id + " HUD uses authored goal and why")
+			_check(hud._prompt_text(id) == authored.get("prompt", ""), id + " prompt uses authored text")
+			if OS.get_cmdline_user_args().has("--capture") and String(scene_id).ends_with("S01") and target == campaign.targets_for_current_scene()[0]:
+				var physical := campaign.physical_target(id)
+				_check(physical != null, id + " native representative has an actual room target")
+				if physical != null:
+					campaign._player.global_position = Vector3(physical.global_position.x, 0, physical.global_position.z + 1.2)
+					campaign._player.velocity = Vector3.ZERO
+					await physics_frame
+					await physics_frame
+			for large in [false, true]:
+				_set_text_scale(campaign, large)
+				await process_frame
+				await process_frame
+				_check_goal_bounds(hud, id + " large=%s" % large)
+				if OS.get_cmdline_user_args().has("--capture") and target == campaign.targets_for_current_scene()[0] and String(scene_id).ends_with("S01"):
+					await _capture_goal(hud, String(scene_id).substr(3, 4) + ("_150" if large else "_normal"))
+			_set_text_scale(campaign, false)
+			hud.panels.open_panel("what_now")
+			await _walk_state(hud, id + " What now")
+			(hud.find_child("WhatNowHint", true, false) as Button).pressed.emit()
+			await _walk_state(hud, id + " job nudge")
+			var hint_texts: Array[String] = []
+			_visible_text(hud.panels.hint_player, hint_texts)
+			_check(hint_texts.has(String(authored.get("hint", "missing authored hint"))), id + " actual hint shows job nudge")
+			if OS.get_cmdline_user_args().has("--capture") and id == "inspect_alo_identity":
+				for large in [false, true]:
+					hud.panels.hint_player.set_settings({"large_text": large})
+					await _capture_goal(hud, "job_nudge" + ("_150" if large else "_normal"))
+			hud.panels.hint_player.close()
+			hud.panels.close_panel()
+			for flag in target.get("required_flags", []):
+				hud.show_status("Complete physical prerequisite: " + String(flag))
+				await _walk_state(hud, id + " prerequisite " + String(flag))
+				_check(not hud._status.text.contains(String(flag)), id + " prerequisite hides internal flag")
+			var result: Dictionary
+			if String(scene_id).ends_with("S01") and target == campaign.targets_for_current_scene()[0]:
+				var before := campaign.director.snapshot()
+				campaign.route.focus(id)
+				campaign.route.inspect()
+				campaign.route.use(target.get("payload_defaults", {}).merged({"_puzzle_action": target.get("puzzle_action", "")}))
+				var preview: Dictionary = campaign.route.preview()
+				_check(preview.get("accepted", false) and campaign.director.snapshot() == before, id + " real preview preserves state")
+				hud.refresh_after_action(preview)
+				_check(hud._last_outcome.get("result", "") != authored.get("result", ""), id + " preview never claims completed success")
+				hud.refresh_after_action({"accepted": false, "reason": "Move closer to the checked target."})
+				_check(hud._status.text == "Move closer to the checked target.", id + " rejection keeps its actual cause")
+				result = campaign.route.confirm()
+			else:
+				result = campaign.route.perform(id, target.get("payload_defaults", {}))
+			_check(result.get("accepted", false), id + " real route witness succeeds: " + String(result.get("reason", "")))
+			hud.refresh_after_action(result.get("result", result))
+			await _walk_state(hud, id + " result toast")
+			_check(hud._last_outcome.get("result", "") == authored.get("result", ""), id + " authored success result")
+			hud.panels.open_panel("outcome")
+			await _walk_state(hud, id + " query-bound Last result")
+			var outcome_texts: Array[String] = []
+			_visible_text(hud.panels, outcome_texts)
+			_check(outcome_texts.has(String(authored.get("result", "missing authored result"))), id + " actual Last result uses authored success")
+			if OS.get_cmdline_user_args().has("--capture") and id == "p05_equip_gauge":
+				for large in [false, true]:
+					hud.panels.set_accessibility({"large_text": large})
+					await _capture_goal(hud, "last_result" + ("_150" if large else "_normal"))
+			hud.panels.close_panel()
+			target_count += 1
+		_check(campaign.route.gate_status().get("ready", false), scene_id + " route witness ready")
+		# Text fixtures advance the real route without loading every 3D room/media.
+		# Native representatives below still rebuild the current room per chapter.
+		var advanced: Dictionary = campaign.route.advance_scene()
+		_check(advanced.get("accepted", false), scene_id + " text walk advances")
+		if advanced.get("chapter_complete", false) and not advanced.get("campaign_complete", false):
+			var next_scene := "EX-CH%02d-S01" % (int(String(scene_id).substr(5, 2)) + 1)
+			if campaign.route is Chapter2Route:
+				campaign._start_extended(next_scene)
+			else:
+				campaign.route.start_at(next_scene)
+				campaign._sync_route_projection()
+				campaign._refresh_world()
+		else:
+			campaign._sync_route_projection()
+		hud.refresh_scene()
+		scene_count += 1
+	_check(scene_count == 84 and target_count == 283, "text walk covers 84 later scenes and all 283 catalog jobs")
+	print("M1-62 TEXT COVERAGE: 8 chapters, 96 scenes; %d later jobs" % target_count)
+
+func _check_goal_bounds(hud: Control, state: String) -> void:
+	var card := hud.get_node("GoalCard") as Control
+	var centre := Rect2(Vector2(1280, 720) / 3.0, Vector2(1280, 720) / 3.0)
+	_check(hud.get_viewport_rect().encloses(card.get_global_rect()) and not card.get_global_rect().intersects(centre), state + " goal card fits and centre stays clear")
+	for label in [hud._title, hud._why, hud._chapter_line]:
+		_check(card.get_global_rect().encloses(label.get_global_rect()), state + " goal text stays inside card")
+		_check(label.get_visible_line_count() == label.get_line_count(), state + " goal text is not truncated")
+	var key: String = hud.runtime.route.current_scene_id().substr(3, 4) + ("_150" if hud.panels.text_scale() > 1.0 else "_normal")
+	var worst: Dictionary = _goal_bounds.get(key, {"jobs": 0, "height": 0})
+	worst.jobs += 1
+	if card.size.y > float(worst.height):
+		worst.merge({"height": card.size.y, "width": card.size.x, "target": hud._goal_info.target_id, "goal": hud._title.text}, true)
+	_goal_bounds[key] = worst
+
+## Same snapshot/settings fixture as the existing journal and table captures;
+## scale probes do not write hundreds of unrelated autosaves.
+func _set_text_scale(campaign: Chapter1Campaign, large: bool) -> void:
+	var state := campaign.director.snapshot()
+	state.accessibility.large_text = large
+	_check(campaign.director.restore_snapshot(state).get("accepted", false), "text-size fixture restores the real director")
+	campaign.hud.apply_accessibility()
+	campaign.hud.panels.bind_query(campaign.query())
+
+func _capture_goal(hud: Control, name: String) -> void:
+	await process_frame
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var path := ProjectSettings.globalize_path("res://../production/qa/evidence/M1-62_" + name + ".png")
+	_check(root.get_texture().get_image().save_png(path) == OK, "capture " + name)
 
 ## Every string the player can read right now, with no developer language in it.
 func _walk_state(hud: Control, state: String) -> void:
@@ -211,6 +369,10 @@ func _check(condition: bool, label: String) -> void:
 		push_error("FAIL " + label)
 
 func _finish() -> void:
+	if OS.get_cmdline_user_args().has("--capture"):
+		var file := FileAccess.open("res://../production/qa/evidence/M1-62_bounds.json", FileAccess.WRITE)
+		file.store_string(JSON.stringify({"scope": "Scripted actual HUD and route witnesses; chapter-start native rooms; every later job at both scales. No physical campaign playtest.", "engine": Engine.get_version_info(), "viewport": [1280, 720], "worst_goal_cards": _goal_bounds, "checks": checks, "failures": failures}, " "))
+		file.close()
 	storage.cleanup()
 	print("PLAYER TEXT RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
