@@ -42,7 +42,11 @@ func _test_selection() -> void:
 	_check(_ids(clips.matching(["P-01"])).has("sci_plant_growth"), "puzzle references match the registry")
 	var copy: Array = clips.matching(["EX-M0101"])
 	copy[0].title = "changed"
-	_check(clips.matching(["EX-M0101"])[0].title != "changed", "registry callers cannot mutate cached records")
+	copy[0].sources.append("unrelated-source")
+	_check(clips.matching(["EX-M0101"])[0].title != "changed" and clips.matching([], ["unrelated-source"]).is_empty(), "matching callers cannot mutate cached records or nested sources")
+	var selected: Dictionary = clips.find("sci_polar_sun")
+	selected.captions[0].text = "changed"
+	_check(clips.find("sci_polar_sun").captions[0].text != "changed", "player lookup returns an isolated deep record")
 
 func _test_unlocks() -> void:
 	for snapshot in [{}, {"scene_id": "EX-CH99-S99", "mission_id": "EX-M0804"}, {"scene_id": "bad", "completed_scene_ids": "bad", "acquired_evidence_ids": ["EX-CH99-S99"]}]:
@@ -214,19 +218,19 @@ func _text(node: Node) -> String:
 	return text
 
 func _click(button: Control) -> void:
-	var event := InputEventMouseButton.new()
-	event.position = button.get_global_rect().get_center()
-	event.button_index = MOUSE_BUTTON_LEFT
 	for pressed in [true, false]:
+		var event := InputEventMouseButton.new()
+		event.position = button.get_global_rect().get_center()
+		event.button_index = MOUSE_BUTTON_LEFT
 		event.pressed = pressed
 		Input.parse_input_event(event)
 		Input.flush_buffered_events()
 
 func _send_key(key: Key) -> void:
-	var event := InputEventKey.new()
-	event.physical_keycode = key
-	event.keycode = key
 	for pressed in [true, false]:
+		var event := InputEventKey.new()
+		event.physical_keycode = key
+		event.keycode = key
 		event.pressed = pressed
 		Input.parse_input_event(event)
 		Input.flush_buffered_events()
