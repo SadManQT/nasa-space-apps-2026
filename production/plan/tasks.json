@@ -2454,7 +2454,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Chapter 5 rooms and locations",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-06",
@@ -2469,8 +2469,8 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-07",
+   "evidence": "Scene to room: S01 LOC-08 garage dock (as M3-105 staged it); S02 and S08 LOC-02 service rooms; S03-S07 and S09-S11 LOC-01 Commons; S12 LOC-03 garden (Tara's bay). Explicit _SCENE_ROOMS map, dated ch05_* staging layers in LOC-01/02/03.json, echoes D5/D9/D10, the fifth mug on its clip in the Commons until she lands. test_chapter5_rooms.gd: PASS (2571 checks, 0 failures). Full run_tests.sh on the commit rebased onto 779d189 (M3-8R): 69/69 suites passed; quick re-check after the clean rebase onto 9266f71: chapter 14/14, room 10/10, worker_c_content 1/1, campaign_media 1/1 (production/qa/evidence/M3-5R_tests.txt). Capture: production/qa/evidence/M3-5R_capture.sh, 34 screenshots production/qa/evidence/M3-5R_*.png, all inspected. Follow-ups filed for atik (loading look-ahead for staging models) and sadman (CH05 stand-in props; garage console screen crop and pad-camera picture).",
+   "updated": "2026-11-08",
    "prompt": "Goal: every location the Chapter 5 scenes use (production/manifest/scene_index.csv, CH05 rows; LOC ids in\ngame-design/09_WORLD_AND_LEVEL_DESIGN.md) is a real scene built the same way as the Chapter 1 rooms (M1-06), with layout data in\ngame/resources/campaign/rooms/, collision, navigation, lighting and valid RoomContract targets. Chapters 3–8 currently reuse the five\nChapter 1 rooms; give each scene its proper location. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); place this chapter's bridge objects, §4 clue objects and §5.2 story-echo objects in the rooms so each join can play in the world.",
    "reserved_for": "sadman",
    "effort": 3
@@ -6326,6 +6326,70 @@
    "prompt": "M1-89 (execution/03_SYSTEM_INTERFACES.md, 'Message metadata') makes delivered and read messages survive a gameplay retry: CampaignDirector.update_message_metadata() mirrors presentation_resume.messages into the director's pre-commit checkpoint, so PuzzleHost.retry()/director.restore_checkpoint() keeps them. The route-level physical retry does not yet: CampaignRoute.retry() (and Chapter1Route.retry(), which calls super.retry()) runs _director.restore_snapshot(checkpoint.director) with the director snapshot taken at the route checkpoint, so every message delivered or read after that point turns undelivered or unread again and its arrival toast can fire a second time. Fix in game/scripts/missions/campaign_route.gd only: capture var messages: Dictionary = _director.message_metadata() before restore_snapshot() and call _director.update_message_metadata(messages) right after it (a union, idempotent; an empty or unchanged record comes back accepted with duplicate=true and changes nothing). Do not edit game/scripts/core/. Acceptance: a missions test (your own test file) delivers and reads a message after a Chapter 1 route checkpoint, runs Chapter1Route.retry(), and proves the director's gameplay state equals the route checkpoint (everything except presentation_resume.messages) while message_metadata() still holds both IDs, and that a second retry is still correct; game/tools/test_director_message_metadata.gd must keep passing unchanged (it only checks that re-applying the record after a route retry works). Run game/tools/run_tests.sh and paste its last line into the evidence.",
    "reserved_for": "atik",
    "effort": 1
+  },
+  {
+   "id": "M4-08",
+   "milestone": "M4",
+   "priority": "P2",
+   "tool": "codex",
+   "title": "Loading look-ahead prepares a scene's staging models; perf test evicts the right room for EX-CH05-S02",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/loading/",
+    "game/tools/test_performance_runtime.gd"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-08.",
+   "evidence": "",
+   "updated": "2026-11-08",
+   "prompt": "M3-5R (8 Nov) maps EX-CH05-S01 to the garage (LOC-08) and EX-CH05-S02 to the service rooms (LOC-02). In game/tools/test_performance_runtime.gd the 'production full cast entry' step still evicts LOC-01 before campaign._start_extended(\"EX-CH05-S02\"); it passes, but it now measures a garden-to-service-rooms transition without the eviction it meant. Evict LOC-02 there (or choose a scene that is still in LOC-01) and keep the step's intent. M3-5R also made CampaignRoom.load_assets_incremental (game/scripts/world/campaign_room.gd) prepare the coming scene's staging models off the main thread: RoomContract.staging_asset_paths(layout, scene_id), with the scene taken from CampaignRoom.upcoming_scene, else the campaign route's current scene. LoadPreparation (game/scripts/loading/load_preparation.gd, room_paths/prepare_room) still prepares only a room's base models. Add the next scene's staging paths to the look-ahead so a transition never decodes a staging GLB synchronously, set CampaignRoom.upcoming_scene where the campaign knows the target scene before the room loads, and keep 'production transitions never escape to synchronous GLB decode' and the main-thread interval checks passing on an idle machine. Do not change the rooms' staging data (Sadman's folder).",
+   "reserved_for": "atik",
+   "effort": 2
+  },
+  {
+   "id": "M4-09",
+   "milestone": "M4",
+   "priority": "P2",
+   "tool": "claude",
+   "title": "Chapter 5 props: replace M3-5R's stand-in boxes and cards with real models",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/assets/props/",
+    "production/concept/",
+    "game/resources/campaign/rooms/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-08.",
+   "evidence": "",
+   "updated": "2026-11-08",
+   "prompt": "M3-5R staged Chapter 5 in its rooms with simple boxes and flat cards where no model exists (staging layers ch05_* in game/resources/campaign/rooms/LOC-01.json, LOC-02.json, LOC-03.json; each stand-in is a 'fixtures' entry). Missing models: the replacement relay-controller crate with foam and lid (spare_crate in ch05_spare_locker and ch05_records_desk, corridor_crate in ch05_spare_arrives); the panel-cleaning kit and the spur patch kit (ch05_maintenance cleaning_kit, spur_patch_kit); the message composer tablet (ch05_invitation composer_tablet); the signed identity page and the receipts tablet (ch05_name_on_the_page signed_page, receipt_tablet); and the corridor watch desk (LOC-02 ch05_corridor_watch). Draw 2D sheets first and get Sadman's approval before spending Tripo credits; log every generation in production/AI_PROMPT_LOG.md. Then swap each fixture for a prop entry in the same layer (same id, position, yaw and scene window; keep the obstacles for collision) and re-run game/tools/test_chapter5_rooms.gd and production/qa/evidence/M3-5R_capture.sh, looking at every screenshot.",
+   "reserved_for": "sadman",
+   "effort": 2
+  },
+  {
+   "id": "M4-10",
+   "milestone": "M4",
+   "priority": "P2",
+   "tool": "claude",
+   "title": "Garage console: Screen crops the top line of three-line texts; the landing-pad camera shows words only",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/assets/environment/EN_Garage/",
+    "game/resources/campaign/rooms/LOC-08.json"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-08.",
+   "evidence": "",
+   "updated": "2026-11-08",
+   "prompt": "Seen in M3-5R's capture of EX-CH05-S01 (production/qa/evidence/M3-5R_S01_pad_camera.png), which now plays at the garage dock M3-105 built. 1) On EN_Garage_HandoverConsole the 'Screen' slot cuts off the top line of a three-line text: 'ARRIVAL HANDOVER / NAME AND SEAL INDICATION / TWO AGREEING CHECKS' (LOC-08.json garage_screens console_map, by_scene EX-CH05-S01..EX-CH07-S11) shows only the lower half of 'ARRIVAL HANDOVER'. RoomStaging.slot_text fits the label to the 512 x 256 texture by height and width, so the likely cause is the Screen surface's UVs (or the px aspect) cropping the texture; fix it at the piece or slot so every text on that screen shows whole (CH04-S04..S12 and CH07-S12.. texts too), and add a check in test_chapter4_rooms.gd. 2) STORY_FULL EX-CH05-S01: Ferreira is 'a small moving shape on the landing camera, waiting beside relief cargo'. Screen3 shows that only in words. Consider a camera picture on Screen3 (slot_text supports a live 'camera'; or a still of the existing CS-08-A shot, e.g. frame 3.3 s, Ferreira by the relief cargo with the dust settled) with the words as its caption. Re-run production/qa/evidence/M3-105_capture.sh and M3-5R_capture.sh and look at the S01 shots.",
+   "reserved_for": "sadman",
+   "effort": 2
   }
  ],
  "requirements": [
