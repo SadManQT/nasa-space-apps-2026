@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "source": "Doc 25 section 4.3; carry limits and masses are training tuning for handling bulk (lunar weight is one sixth of Earth weight, inertia is unchanged), not engineering specifications. STACK steps, timer and the crates reward come from p02_mission_table.json and 08 (K2 complete, K1 partial, W unchanged); the bridge lines follow doc 24 section 2.9 CH01 S10 to S11 and 08 (no drain is needed when no water was borrowed).",
+  "personal_mass_kg": 18.0,
+  "places": {
+    "hands": {"label": "Hands", "slots": 1, "mass_kg": 12.0, "sizes": ["small", "medium"], "chapter": 1},
+    "back": {"label": "Back frame", "slots": 3, "mass_kg": 9.0, "sizes": ["small"], "chapter": 1},
+    "sled": {"label": "Sled", "slots": 6, "mass_kg": 60.0, "sizes": ["small", "medium", "large"], "chapter": 3},
+    "trailer": {"label": "Rover trailer", "slots": 12, "mass_kg": 200.0, "sizes": ["small", "medium", "large"], "chapter": 4}
+  },
+  "stack": {
+    "bundle": {"label": "Supply bundle", "mass_kg": 4.0, "size": "medium", "handling": ["sealed"], "destination": "bunk"},
+    "bundle_size_m": [0.48, 0.3, 0.36],
+    "source_positions": [[1.15, 0.6, -0.6], [1.75, 0.6, -0.6], [1.15, 0.6, 0.05], [1.75, 0.6, 0.05]],
+    "slot_positions": [[-2.55, 0.3, -0.15], [-2.55, 0.3, 0.5], [-2.55, 0.3, 1.15], [-2.55, 0.3, 1.8]],
+    "reach_m": 1.65,
+    "start_position": [0.0, 0.0, -0.6],
+    "return_position": [2.5, 0.0, -1.0],
+    "goal": "Place supplies in the bunk slots",
+    "why": "These bundles add shielding around the crew.",
+    "scoring": "All four placed: crates 2 (K2). One to three placed: crates 1 (K1). None placed: crates 0. Crates shield beside the water wall; they never move garden water (W).",
+    "bridge_water": "The alarm eases. The wall still holds borrowed water. Next, return it to the garden.",
+    "bridge_dry": "The alarm eases. No garden water was borrowed, so nothing needs returning. Next, plan the last two dark shifts at the mission table.",
+    "untimed_modes": ["family", "story", "class"],
+    "brief": "Carry one bundle at a time to an empty outlined bunk slot. Supplies stay fixed when placed; nothing can fall.",
+    "steps": ["Pick up a supply bundle.", "Carry it to an empty bunk slot.", "Place it, then collect the next bundle."]
+  }
+}

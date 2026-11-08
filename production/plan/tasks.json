@@ -4349,7 +4349,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Carrying payloads, and the shift-5 STACK as a real carry-and-place task",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -4363,7 +4363,7 @@
     "game/scripts/player/held_prop.gd"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026). 5 Nov: being finished by Sadman's night shift; if it ends blocked with a parked branch, the assignee releases it and continues from night/M1-58. 9 Nov: Sadman asked Claude to finish it (\"do the teammates task\"), continuing from night/M1-58.",
-   "evidence": "",
+   "evidence": "run_tests.sh: 76/76 suites passed (test_payload.gd 160 checks; production/qa/evidence/M1-58_tests.txt). Windowed capture PASS, 214 probes: production/qa/evidence/M1-58_briefing.png, _carrying.png, _bunk_slots.png, _paused.png, _partial_report.png, _empty_report.png, _assisted_select.png, _full_report.png, _large_text_briefing.png, _large_text_assisted.png. QA page production/qa/M1-58.md. Mission Table/HUD hook filed to Ramim as M1-112.",
    "updated": "2026-11-09",
    "prompt": "Do: a payload system per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.3: payloads with mass, size, handling (fragile, sealed, keep-cold) and destination; carry\nplaces (hands 1, back frame up to 3 small; sled and trailer hooks for later chapters); pickup refused with the reason when over\ncapacity; load and weight shown; delivery to a marked place checks condition. Reuse HeldProp for hand poses. Chapter 1: the\nshift-5 STACK becomes the physical task 08 defines (four supply bundles into outlined bunk slots in 30 s; partial = K1,\ncomplete = K2; assisted input before start; untimed in Family Mode; no falling-crate physics). Tests cover capacity, delivery\ncondition, STACK K0/K1/K2 and the assisted path; P-02 numbers unchanged.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "blocker": "Night shift parked the work on branch night/M1-58: could not land: rebase conflict: real carry-and-place task\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with \"git config set ad",
@@ -6755,6 +6755,29 @@
    "updated": "2026-11-09",
    "prompt": "Record a dated handbook status line for Ramim M1-109 reviewed UI source: unavailable Continue is skipped by Tab, valid checkpoint restores focus, losing checkpoint redirects to New Expedition; updates while a modal is open preserve its disabled background/current restore state. Shared panel close retains a valid owner fallback. Source7ffabe8; evidence production/qa/evidence/M1-109_README.md, focused850/0 and nativeForward+229/0 clean at100/150, independentC0/I0/M0. Full integrated runner/all8 text still pending; do not claim full-game or full-suite acceptance. No new save model, commands, palettes, assets, thresholds or import changes. Existing M1-75 contrast/scroll remains intact. Update only owned handbook status; retain machine-local import/editor exclusions.",
    "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M1-112",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Wire the shift-5 STACK Mission Table button to the physical carry activity (M1-58 hook)",
+   "status": "todo",
+   "owner": "",
+   "deps": [
+    "M1-58"
+   ],
+   "paths": [
+    "game/scripts/ui/mission_table_panel.gd",
+    "game/scripts/ui/chapter1_campaign_hud.gd"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-09.",
+   "evidence": "",
+   "updated": "2026-11-09",
+   "prompt": "M1-58 landed PayloadStackActivity (game/scripts/payload/stack_activity.gd) but left the UI hook to you, since you own these files and were editing them. Port the hook from the parked branch: git diff origin/main...origin/night/M1-58 -- game/scripts/ui/ (commit 0953cea). In mission_table_panel.gd: signal payload_requested(settings); when alarm_state().action == STACK, start_task() emits it (refuse with a reason if unconnected), task_step() refuses ('Carry a supply bundle to a bunk slot.'), _render_task shows the crates wording and a CARRY SUPPLIES · CHOOSE CONTROLS button (and the old-save FINISH WITH SAVED SUPPLIES path), and add refresh_payload_result() (the activity already calls it when present). In chapter1_campaign_hud.gd: connect payload_requested to a handler that, only in LOC-04, calls PayloadStackActivity.launch(runtime, settings) and keeps the reference (is_instance_valid checks); elsewhere show_status('Carry the supplies from the Safe Room response controls.'). Re-add to game/tools/test_payload.gd the check that Mission Table slot clicks cannot bypass physical delivery, and launch through table.start_task(). Acceptance: run game/tools/run_tests.sh and paste its last line; screenshot the shift-5 table with the carry button to production/qa/evidence/<task id>_*.png.",
+   "reserved_for": "ramim",
    "effort": 1
   }
  ],
