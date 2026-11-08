@@ -86,11 +86,13 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">90 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">17 todo</span></div><div class="bar"><i style="width:84%"></i></div>
-<details open><summary>Next up today (4)</summary><ul>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">90 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">16 todo</span></div><div class="bar"><i style="width:84%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
+<li><a class="id" href="#M4-09">M4-09</a> Chapter 5 props: replace M3-5R&#x27;s stand-in boxes and cards with real models <span class="chip ">claude</span> <span class="chip ">P2</span><div class="meta">claimed by Sadman/claude on 2026-11-09</div></li>
+</ul></details>
+<details open><summary>Next up today (3)</summary><ul>
 <li><a class="id" href="#M1-106">M1-106</a> Record reviewed M1-72 science access and pending batch gate <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M4-14">M4-14</a> Verified work lights for LOC-11 on the relay-road terrain (staged rover) <span class="chip ">claude</span> <span class="chip ">P1</span></li>
-<li><a class="id" href="#M4-09">M4-09</a> Chapter 5 props: replace M3-5R&#x27;s stand-in boxes and cards with real models <span class="chip ">claude</span> <span class="chip ">P2</span></li>
 <li><a class="id" href="#M4-13">M4-13</a> Route the R1-R3 road-to-pad spurs slope-limited on the 10 m LOLA tiles <span class="chip ">claude</span> <span class="chip ">P2</span></li>
 </ul></details>
 <details><summary>To do (13)</summary><ul>
@@ -6779,8 +6781,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P2",
    "tool": "claude",
    "title": "Chapter 5 props: replace M3-5R's stand-in boxes and cards with real models",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
    "deps": [],
    "paths": [
     "game/assets/props/",
@@ -6790,7 +6792,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-08.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "M3-5R staged Chapter 5 in its rooms with simple boxes and flat cards where no model exists (staging layers ch05_* in game/resources/campaign/rooms/LOC-01.json, LOC-02.json, LOC-03.json; each stand-in is a 'fixtures' entry). Missing models: the replacement relay-controller crate with foam and lid (spare_crate in ch05_spare_locker and ch05_records_desk, corridor_crate in ch05_spare_arrives); the panel-cleaning kit and the spur patch kit (ch05_maintenance cleaning_kit, spur_patch_kit); the message composer tablet (ch05_invitation composer_tablet); the signed identity page and the receipts tablet (ch05_name_on_the_page signed_page, receipt_tablet); and the corridor watch desk (LOC-02 ch05_corridor_watch). Draw 2D sheets first and get Sadman's approval before spending Tripo credits; log every generation in production/AI_PROMPT_LOG.md. Then swap each fixture for a prop entry in the same layer (same id, position, yaw and scene window; keep the obstacles for collision) and re-run game/tools/test_chapter5_rooms.gd and production/qa/evidence/M3-5R_capture.sh, looking at every screenshot.",
    "reserved_for": "sadman",
    "effort": 2
