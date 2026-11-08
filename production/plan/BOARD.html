@@ -303,9 +303,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-80">M1-80</a> Fail the test runner when its import refresh crashes <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Duplicate of M1-78, fixed and verified together: production/qa/perf/M1-78_M1-80.md; 7 injected scenarios pass; 54/54 suites passed.</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="tanvir"><b>Abu Sayem Mohammed Tanvir</b> <span class="id">tanvir</span><div class="meta">QA and playtest lead · 5% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">7 todo</span></div><div class="bar"><i style="width:20%"></i></div>
-<details open><summary>Next up today (1)</summary><ul>
-<li><a class="id" href="#M1-93">M1-93</a> Capture 1080p Chapter 1 room performance on the Intel Arc laptop <span class="chip ">any</span> <span class="chip ">P1</span></li>
+<div class="panel" data-member="tanvir"><b>Abu Sayem Mohammed Tanvir</b> <span class="id">tanvir</span><div class="meta">QA and playtest lead · 5% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">6 todo</span></div><div class="bar"><i style="width:20%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
+<li><a class="id" href="#M1-93">M1-93</a> Capture 1080p Chapter 1 room performance on the Intel Arc laptop <span class="chip ">any</span> <span class="chip ">P1</span><div class="meta">claimed by Tanvir/codex on 2026-11-08</div></li>
 </ul></details>
 <details open><summary>Blocked (1)</summary><ul>
 <li><a class="id" href="#M1-65">M1-65</a> First-impressions playtest of today&#x27;s Chapter 1: what confuses a new player <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Tanvir must complete a 20-30 minute unassisted Chapter 1 run and observe 1-2 fresh players. Native computer-use pipe is unavailable in this session. Assisted report, 15 observatio…</div></li>
@@ -6394,8 +6394,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "any",
    "title": "Capture 1080p Chapter 1 room performance on the Intel Arc laptop",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
     "production/qa/chapters/ch01/performance/"
@@ -6403,7 +6403,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "refs": [],
    "note": "Filed by atik/codex on 2026-11-07.",
    "evidence": "",
-   "updated": "2026-11-07",
+   "updated": "2026-11-08",
    "prompt": "Atik M1-23 requires supported integrated-GPU/weak-laptop evidence. Your M1-65 capture documents Intel Arc130V8GB; Atik only has M4. After pulling the benchmark update, run the existing Godot4.7.2 console executable with --path game --rendering-method gl_compatibility --resolution1920x1080 --script res://tools/perf_probe.gd -- --perf-probe --perf-chapter1-rooms --perf-seconds=20 --perf-output=<absolute existing output directory>/compatibility . Use normal flag spacing --resolution 1920x1080. The absolute output base creates .json/.csv; redirect complete stdout/stderr to a .txt file. Script uses isolated save/preferences, real scenes S01/S02/S04/S05, 20s walk+panels each, hardware/renderer metadata and explicit room coverage; do not use --headless or interpret PERF RESULT:PASS as an FPS-budget pass. Stop other Godot/render jobs. Commit raw outputs and CPU/GPU/RAM/OS/display notes under production/qa/chapters/ch01/performance/. Report p95/max frame intervals per room, first-entry hitches and whether it is the teams weakest laptop (ask teammate if unknown). Target integrated Compatibility30fps; no threshold/settings/asset edits or invented results. Atik will use measured costs to fix owned paths and request others. If machine unavailable, record that rather than claiming coverage.",
    "reserved_for": "tanvir",
    "effort": 2
