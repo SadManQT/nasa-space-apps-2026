@@ -6679,8 +6679,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Skip unavailable Continue during keyboard navigation",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/main_menu.gd",
