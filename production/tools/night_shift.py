@@ -60,7 +60,9 @@ LANES = {  # board lane -> accounts in order (Codex for code, Antigravity for vi
     "muse": ["buet", "codex", "codex-main"],
     "any": ["codex", "buet", "codex-main"],
 }
-REVIEWER = {"codex": ["buet"], "gemini": ["codex", "codex-main"], "claude": ["codex", "buet"]}  # always the other engine
+# the other engine reviews first; when it is resting, the other Codex account does (8 Nov: Antigravity hit a permission rule and
+# rested 2 h, which would have left every Codex task without a reviewer)
+REVIEWER = {"codex": ["buet", "codex-main", "codex"], "gemini": ["codex", "codex-main"], "claude": ["codex", "buet"]}
 SEATS = {"codex": 2, "gemini": 2}  # workers at once per engine across every slot (Antigravity ran out at 4 on 4 Nov)
 # Claude (Opus 5.5) leads the photoreal environment, 3D assets and room builds (5 Nov decision; Opus replaced Fable 5 Nov 23:40)
 FABLE_HINTS = re.compile(r"habitat kit|environment|main scene|terrain|exterior|interior|photoreal|LOLA|\b3D\b|Blender|\bassets\b|rooms and locations|M1-03|M1-05|M1-06", re.I)
@@ -463,7 +465,7 @@ def do_task(slot, tid, lane):
             fix = "The task is not marked done on the board: finish it (or block it with a real reason)."
             continue
         engine = ACCOUNTS[worker]["engine"]
-        reviewers = sorted(free(REVIEWER[engine]), key=lambda r: r == worker)  # another account first, if one is free
+        reviewers = [r for r in free(REVIEWER[engine]) if r != worker]  # never the worker's own account; order = preference
         if not reviewers:
             return "deferred", "no reviewer account available"
         _, verdict = run_agent(reviewers[0], review_prompt(tid, slot), slot, "xhigh")

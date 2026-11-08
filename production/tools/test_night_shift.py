@@ -94,7 +94,11 @@ with mock.patch.multiple(ns, sh=lambda args, *a, **k: calls.append(args) or (0, 
 # Codex and Antigravity only (Sadman, 8 Nov): no lane or reviewer is a Claude account, and a review is always by the other engine
 assert all(set(a) <= set(ns.ALLOWED) for a in ns.LANES.values()), ns.LANES
 assert not any(ns.ACCOUNTS[a]["engine"] == "claude" for a in ns.ALLOWED)
-assert all(ns.ACCOUNTS[r]["engine"] != engine for engine, rs in ns.REVIEWER.items() for r in rs if engine != "claude"), ns.REVIEWER
+assert all(ns.ACCOUNTS[rs[0]]["engine"] != engine for engine, rs in ns.REVIEWER.items()), ns.REVIEWER  # the other engine first
+# with Antigravity resting, a Codex task is reviewed by the other Codex account, never by the worker's own
+ns.asleep.clear(); ns.asleep["buet"] = time.time() + 3600
+assert [r for r in ns.free(ns.REVIEWER["codex"]) if r != "codex"] == ["codex-main"]
+ns.asleep.clear()
 
 # the reviewer is on the other engine
 seen = []
