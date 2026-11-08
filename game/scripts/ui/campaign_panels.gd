@@ -14,6 +14,7 @@ signal ending_retry_requested
 signal ending_continue_requested
 
 const ScienceScript = preload("res://scripts/science/science_data.gd")
+const Explainers = preload("res://scripts/ui/science_explainers.gd")
 const ChartScript = preload("res://scripts/ui/data_chart.gd")
 var science = ScienceScript.new()
 
@@ -108,6 +109,7 @@ const JOURNAL_TABS := [
 	{"id": "evidence", "label": "Evidence"},
 	{"id": "garden", "label": "Garden"},
 	{"id": "decisions", "label": "Decisions"},
+	{"id": "science", "label": "Science"},
 ]
 const JOURNAL_PANEL_WIDTH := 1180.0
 const PANEL_WIDTH := 780.0
@@ -208,7 +210,7 @@ func open_panel(panel_id: String, data: Dictionary = {}) -> bool:
 	return true
 
 ## Opens the Expedition Journal on one tab ("now", "evidence", "garden" or
-## "decisions"). An empty journal argument keeps the bound query's journal.
+## "decisions" or "science"). An empty journal argument keeps the bound query's journal.
 func open_journal(tab: String = "now", journal: Dictionary = {}) -> bool:
 	if JOURNAL_TABS.any(func(item): return item.id == tab):
 		_journal_tab = tab
@@ -717,6 +719,14 @@ func _source_button(text: String, action: Callable) -> void:
 	_body.add_child(button)
 
 func _render_sources() -> void:
+	var mission_id := String(_query.get("mission_id", ""))
+	var mission: Dictionary = science.mission_card(mission_id)
+	if not mission.is_empty():
+		var button := _button("Mission data card - " + String(mission.title))
+		button.name = "MissionDataCard"
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		button.pressed.connect(func(): open_panel("data_card", {"mission_id": mission_id}))
+		_body.add_child(button)
 	var filter: Array = _query.get("sources", {}).get("ids", [])
 	for id in science.source_ids() if filter.is_empty() else filter:
 		var card: Dictionary = science.card(String(id))
@@ -738,9 +748,46 @@ func _card_text(text: String, emphasis: bool = false, verbatim: bool = false) ->
 		label.set_meta("verbatim", true)
 	_body.add_child(label)
 
+func _render_watch_buttons(entries: Array) -> void:
+	for entry in entries:
+		var button := _button("Watch: " + String(entry.title))
+		button.name = "Watch_" + String(entry.id)
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		button.pressed.connect(func():
+			hint_player.set_settings(_settings)
+			hint_player.watch(String(entry.id)))
+		_body.add_child(button)
+
+func _render_mission_card(mission_id: String) -> void:
+	var card: Dictionary = science.mission_card(mission_id)
+	if card.is_empty():
+		_card_text("Mission data card unavailable.")
+		return
+	_card_text(String(card.title), true)
+	_render_watch_buttons(Explainers.matching([mission_id], card.get("source_ids", [])))
+	_card_text(String(card.get("plain", "")))
+	_card_text("What this means for Aurora\n" + String(card.get("for_aurora", {}).get("text", "")), true)
+	_card_text("Your decision\n" + String(card.get("decision", "")))
+	var visual: Dictionary = card.get("visual", {})
+	if not visual.get("values", []).is_empty():
+		var chart := ChartScript.new()
+		chart.series = visual
+		_body.add_child(chart)
+		_card_text(" - ".join(visual.get("labels", [])) + "\n" + String(visual.get("note", "")))
+	_card_text("Evidence - " + String(card.get("evidence", "")))
+	_card_text("Limits\n" + String(card.get("limits", "")))
+	_card_text("Sources\n" + "\n".join(card.get("source_lines", [])), false, true)
+	for source_id in card.get("source_ids", []):
+		_source_button("Full source - " + String(science.card(source_id).get("title", "Evidence")), func(): open_panel("data_card", {"source_id": source_id}))
+	_source_button("Back to all sources", func(): open_panel("sources", {"ids": []}))
+
 func _render_card(value) -> void:
+	if value is Dictionary and value.has("mission_id"):
+		_render_mission_card(String(value.mission_id))
+		return
 	var id := String(value.get("source_id", "")) if value is Dictionary else ""
 	var card: Dictionary = science.card(id)
+	_render_watch_buttons(Explainers.matching([], [id]))
 	_card_text("What this means for Aurora\n" + String(card.get("takeaway", "")), true)
 	if not bool(card.get("pending", true)):
 		var visual: Dictionary = card.get("visual", {})
@@ -769,7 +816,7 @@ func _render_card(value) -> void:
 	_source_button("Back to all sources", func(): open_panel("sources", {"ids": []}))
 
 ## ---------------------------------------------------------------------------
-## Expedition Journal (M1-48): four tabs over CampaignKnowledge.journal(), the
+## Expedition Journal (M1-48/M1-72): five tabs over CampaignKnowledge.journal(), the
 ## "Previously at Aurora" resume card, and the What now? hint ladder. The
 ## panel only presents the pure view model; it never computes campaign state.
 ## ---------------------------------------------------------------------------
@@ -794,6 +841,16 @@ func _render_journal(value) -> void:
 			_render_garden_tab(data)
 		"decisions":
 			_render_decisions_tab(data)
+		"science":
+			_render_science_tab(data)
+
+func _render_science_tab(data: Dictionary) -> void:
+	var chapters: Array = data.get("chapters", [])
+	if chapters.is_empty():
+		_card_text("Science clips appear here as you reach their missions.")
+	for chapter in chapters:
+		_section("Chapter %d" % int(chapter.number))
+		_render_watch_buttons(chapter.get("entries", []))
 
 ## Left tab column. The open tab is pressed and prefixed with "›", a cue that
 ## does not depend on colour; counts tell the player where new entries are.

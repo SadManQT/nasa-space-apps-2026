@@ -174,12 +174,12 @@ func _test_gate_flags_and_links() -> void:
 	snapshot["scene_id"] = "EX-CH01-S01"
 	snapshot["completed_scene_ids"] = []
 	var journal := CampaignKnowledge.journal(snapshot, pack)
-	var ids: Array = journal.entries.map(func(e): return e.id)
+	var ids: Array = journal.tabs.evidence.entries.map(func(e): return e.id)
 	_check(ids == ["T-A", "T-KEYWORD"], "entries are gated by gate_flag, never by keyword: " + str(ids))
 	_check(journal.entries[0].links.is_empty(), "links to hidden entries are suppressed")
 	snapshot.knowledge_flags.append("noor_identity_revealed")
 	journal = CampaignKnowledge.journal(snapshot, pack)
-	ids = journal.entries.map(func(e): return e.id)
+	ids = journal.tabs.evidence.entries.map(func(e): return e.id)
 	_check(ids == ["T-A", "T-GATED", "T-KEYWORD"], "the gated entry appears once its flag is known")
 	_check(journal.entries[0].links.map(func(l): return l.id) == ["T-GATED"], "a revealed link is named; a future one still is not")
 
@@ -210,11 +210,11 @@ func _test_panel() -> void:
 	await process_frame
 	await process_frame
 	var tabs := panels._side.find_children("Tab_*", "Button", false, false)
-	_check(tabs.size() == 4 and tabs.all(func(tab): return tab.size.y >= 44.0 and tab.size.x >= 44.0), "four tab buttons at least 44 px tall")
+	_check(tabs.size() == 5 and tabs.all(func(tab): return tab.size.y >= 44.0 and tab.size.x >= 44.0), "five tab buttons at least 44 px tall")
 	_check(root.gui_get_focus_owner() != null and root.gui_get_focus_owner().name == "Tab_now", "keyboard focus lands on the open tab")
 	_check(String(tabs[0].text).begins_with("› "), "the open tab carries a non-colour marker")
 	_check(root.get_visible_rect().encloses(panels._panel.get_global_rect()), "journal shell fits 1280x720")
-	_check(tabs[0].focus_neighbor_bottom == tabs[1].get_path() and tabs[3].focus_neighbor_bottom == tabs[0].get_path(), "tab focus order runs Now → Evidence → Garden → Decisions and wraps")
+	_check(tabs[0].focus_neighbor_bottom == tabs[1].get_path() and tabs[3].focus_neighbor_bottom == tabs[4].get_path() and tabs[4].focus_neighbor_bottom == tabs[0].get_path(), "tab focus order runs Now → Evidence → Garden → Decisions → Science and wraps")
 	var down := InputEventAction.new()
 	down.action = "ui_down"
 	down.pressed = true

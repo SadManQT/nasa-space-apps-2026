@@ -11,6 +11,7 @@ class_name CampaignKnowledge
 ## Every entry it returns belongs to a scene the player has completed, has
 ## acquired evidence in, or is standing in; names are gated by each entry's
 ## gate_flag, never by keyword.
+const Explainers = preload("res://scripts/ui/science_explainers.gd")
 const Content = preload("res://scripts/content/content_loader.gd")
 const Chapter1 = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const Chapter2 = preload("res://scripts/missions/chapter2_gate_catalog.gd")
@@ -22,7 +23,7 @@ const JOURNAL_TEXT_PATH := "res://resources/campaign/content/journal_text.json"
 const JOURNAL_HINTS_PATH := "res://resources/campaign/content/journal_hints.json"
 const STORY_ECHOES_PATH := "res://resources/campaign/content/story_echoes.json"
 const P02_TABLE_PATH := "res://resources/campaign/content/p02_mission_table.json"
-const JOURNAL_TABS := ["now", "evidence", "garden", "decisions"]
+const JOURNAL_TABS := ["now", "evidence", "garden", "decisions", "science"]
 const RESUME_MAX_LINES := 6
 const COMPLETED_SHOWN := 3
 const STATION_NAME := "Aurora"
@@ -59,6 +60,7 @@ static var _journal_text: Dictionary = {}
 static var _journal_hints: Dictionary = {}
 static var _story_echoes: Dictionary = {}
 static var _p02_table: Dictionary = {}
+static var _mission_cards: Dictionary = {}
 
 static func content() -> Dictionary:
 	if _content.is_empty():
@@ -169,6 +171,7 @@ static func journal(snapshot: Dictionary, pack: Dictionary = {}) -> Dictionary:
 		"evidence": _evidence_tab(ctx, shown),
 		"garden": _garden_tab(text, ctx, shown),
 		"decisions": _decisions_tab(ctx, shown),
+		"science": _science_tab(ctx),
 	}
 	var entries: Array = []
 	var counts := {}
@@ -184,6 +187,34 @@ static func journal(snapshot: Dictionary, pack: Dictionary = {}) -> Dictionary:
 		"entries": entries,
 		"counts": counts,
 	}
+
+## Mission reach comes from canonical scenes, never a claimed mission ID or
+## source overlap. First reached chapter owns a shared clip's single entry.
+static func _science_tab(ctx: Dictionary) -> Dictionary:
+	if _mission_cards.is_empty():
+		_mission_cards = _load_json("res://resources/campaign/content/mission_data_cards.json").get("missions", {})
+	var entries: Array = []
+	var chapters: Array = []
+	var missions := {}
+	var seen := {}
+	for scene in content().get("scenes", []):
+		var scene_id := String(scene.get("id", ""))
+		var mission_id := String(scene.get("mission_id", ""))
+		if not _scene_allowed(scene_id, ctx) or missions.has(mission_id):
+			continue
+		missions[mission_id] = true
+		var puzzle := String(_mission_cards.get(mission_id, {}).get("puzzle", ""))
+		for clip in Explainers.matching([mission_id, puzzle]):
+			if seen.has(clip.id):
+				continue
+			seen[clip.id] = true
+			var number := int(scene.chapter_number)
+			var entry := {"id": clip.id, "title": clip.title, "scene_id": scene_id, "chapter_number": number}
+			entries.append(entry)
+			if chapters.is_empty() or int(chapters.back().number) != number:
+				chapters.append({"number": number, "entries": []})
+			chapters.back().entries.append(entry)
+	return {"entries": entries, "chapters": chapters}
 
 ## Dates in the packs read "2046-04-11 10:00 UTC", "2046-04-11 UTC" or
 ## "2046-04-11 late morning UTC"; players read "11 April 2046 · 10:00 UTC".

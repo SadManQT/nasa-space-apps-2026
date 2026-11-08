@@ -82,7 +82,7 @@ func _run() -> void:
 						reveal.pressed.emit()
 						await _walk_state(hud, "%s journal hint %d" % [scene_id, hint + 1])
 						hud.panels.hint_player.close()
-				for tab in ["evidence", "garden", "decisions"]:
+				for tab in ["evidence", "garden", "decisions", "science"]:
 					hud.panels.select_journal_tab(tab)
 					await _walk_state(hud, "%s journal %s" % [scene_id, tab])
 				hud.panels.select_journal_tab("now")
@@ -123,6 +123,14 @@ func _run() -> void:
 		_check(bool(advanced.get("accepted", false)), "advance " + scene_id)
 		if campaign.loading:
 			await campaign.wait_loading()
+	for mission in CampaignKnowledge.content().get("missions", []):
+		hud.panels.open_panel("data_card", {"mission_id": mission.id})
+		await _walk_state(hud, "mission data card " + String(mission.id))
+		var watch := hud.panels._body.find_children("Watch_*", "Button", true, false)
+		if not watch.is_empty():
+			watch[0].pressed.emit()
+			await _walk_state(hud, "mission science viewer " + String(mission.id))
+			hud.panels.hint_player.close()
 	for source_id in hud.panels.science.source_ids():
 		hud.panels.open_panel("data_card", {"source_id": source_id})
 		await _walk_state(hud, "data card " + String(source_id))

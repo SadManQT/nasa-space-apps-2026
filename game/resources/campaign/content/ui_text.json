@@ -13,6 +13,9 @@
   "\\b(commit|commits|committed|committing|stage|staged|staging|acknowledge|acknowledged|acknowledgement|acknowledgment|role constraints?|operations?)\\b"
  ],
  "words": {
+  "shelter, s6": "shelter, shielding level 6",
+  "l2": "2",
+  "e3": "3",
   "commit shift": "lock in shift",
   "committing it": "locking it in",
   "commit it": "lock it in",

@@ -6,7 +6,7 @@ signal opened
 signal closed
 signal highlight_changed(active: bool)
 const Card = preload("res://scripts/ui/how_to_card.gd")
-const REGISTRY := "res://resources/campaign/content/explainers.json"
+const Explainers = preload("res://scripts/ui/science_explainers.gd")
 var seen_path := "user://how_to_seen.cfg"
 var level := 0
 var mode := "hint"
@@ -94,6 +94,19 @@ func show_how_to(id: String, first_time: bool = false, target: Control = null) -
 	_first_time_id = id if first_time else ""
 	mode = "how_to"
 	level = 0
+	_begin()
+
+func watch(id: String) -> void:
+	if visible:
+		return
+	var entry := Explainers.find(id)
+	if entry.is_empty() or entry.get("kind") != "science":
+		return
+	_lesson = {"title": entry.title, "clip": id, "relationship": entry.get("ends_on", "")}
+	highlight_target = null
+	_first_time_id = ""
+	level = 0
+	mode = "watch"
 	_begin()
 
 func has_seen(id: String) -> bool:
@@ -186,13 +199,13 @@ func _render() -> void:
 			_render())
 	elif level == 1 and mode == "hint":
 		_body.add_child(UiDesign.label(String(_lesson.get("nudge", "Compare the marked object with your goal."))))
-	elif level == 2 or mode == "concept":
+	elif level == 2 or mode in ["concept", "watch"]:
 		_render_media()
 	else:
 		_body.add_child(UiDesign.label(String(_lesson.get("example", "Different example unavailable. Compare the evidence with the goal."))))
 	if not _notice.is_empty():
 		_stack.add_child(UiDesign.label(_notice, "caption", "accent"))
-	_stack.add_child(UiDesign.label("Reading pauses the clock. Hints never change your ending or rewards.", "caption", "muted"))
+	_stack.add_child(UiDesign.label("Reading pauses the clock." if mode == "watch" else "Reading pauses the clock. Hints never change your ending or rewards.", "caption", "muted"))
 	var actions := HFlowContainer.new()
 	actions.add_theme_constant_override("h_separation", 8)
 	actions.add_theme_constant_override("v_separation", 8)
@@ -220,11 +233,7 @@ func _add_action(parent: Node, text: String, id: String, action: Callable) -> vo
 	parent.add_child(button)
 
 func _render_media() -> void:
-	var registry = JSON.parse_string(FileAccess.get_file_as_string(REGISTRY))
-	for entry in registry.get("explainers", []) if registry is Dictionary else []:
-		if entry is Dictionary and entry.get("id", "") == _lesson.get("clip", ""):
-			_entry = entry
-			break
+	_entry = Explainers.find(String(_lesson.get("clip", "")))
 	var path := String(_entry.get("path", ""))
 	var stream = load(path) if path.begins_with("res://assets/explainers/") and ResourceLoader.exists(path) else null
 	if not stream is VideoStream:
