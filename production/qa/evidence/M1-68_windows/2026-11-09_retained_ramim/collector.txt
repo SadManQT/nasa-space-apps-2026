@@ -1,0 +1,17 @@
+Run 1/2; full diagnostics: C:\Users\User\.codex\worktrees\nasa-ramim-20261106\production\qa\evidence\M1-68_windows\2026-11-09_retained_ramim\run-1
+FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (581 checks, 7 failures)
+       FAIL Amara raw load main-thread interval <50 ms (52.466)
+       FAIL Mei raw load main-thread interval <50 ms (57.060)
+       FAIL Rafi raw load main-thread interval <50 ms (50.830)
+       FAIL Ferreira raw load main-thread interval <50 ms (53.228)
+       FAIL production new campaign main-thread interval <50 ms (117.181)
+0/1 suites passed
+Run 2/2; full diagnostics: C:\Users\User\.codex\worktrees\nasa-ramim-20261106\production\qa\evidence\M1-68_windows\2026-11-09_retained_ramim\run-2
+FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (581 checks, 6 failures)
+       FAIL Amara raw load main-thread interval <50 ms (55.984)
+       FAIL Mei raw load main-thread interval <50 ms (57.202)
+       FAIL Ferreira raw load main-thread interval <50 ms (53.431)
+       FAIL production new campaign main-thread interval <50 ms (92.002)
+       FAIL production garden entry main-thread interval <50 ms (58.306)
+0/1 suites passed
+Evidence: C:\Users\User\.codex\worktrees\nasa-ramim-20261106\production\qa\evidence\M1-68_windows\2026-11-09_retained_ramim; thresholds and suite assertions unchanged.

@@ -1,0 +1,1 @@
+Independent review C0/I0/M1 verified all14 raw artifact hashes and both manifest trace hashes. Removed the unsupported LoadingCard/GDScript-backtrace attribution from the run2 summary: this retained run has native Godot at-sites only. Raw logs, collector metadata, trace files and hashes are unchanged. No engine rerun was needed for this factual report correction.

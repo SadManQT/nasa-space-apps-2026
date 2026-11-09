@@ -1,0 +1,4 @@
+* -text whitespace=cr-at-eol
+*.log whitespace=-blank-at-eol,cr-at-eol
+README.md text eol=lf
+.gitattributes text eol=lf
