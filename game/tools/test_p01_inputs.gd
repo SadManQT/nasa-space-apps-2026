@@ -58,7 +58,7 @@ func _run() -> void:
 		_check(route.perform(target, {"moisture": value}).accepted, "inclusive watering boundary " + str(value))
 		_duplicate(route, target, {"moisture": value})
 	for target in ["label_alo", "label_tara", "seal_alo", "seal_tara"]:
-		_check(route.perform(target).accepted, "explicit label/seal action " + target)
+		_check(route.perform(target, Inputs.payload(target)).accepted, "explicit label/seal action " + target)
 	_check(route.snapshot().p01.receipts.size() == 12 and route.p01_view("seal_tara").completion.complete, "exactly twelve P-01 receipts complete the puzzle")
 	var resumed := _fresh()
 	_check(resumed.director().restore_snapshot(JSON.parse_string(JSON.stringify(route.director().snapshot()))).accepted, "director JSON round trip")

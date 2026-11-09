@@ -9,4 +9,6 @@ static func payload(target: String) -> Dictionary:
 		"plant_alo": return {"cassette": "alo", "seed_count": 1}
 		"plant_tara": return {"cassette": "tara", "seed_count": 1}
 		"water_alo", "water_tara": return {"moisture": 50}
+		"label_alo", "label_alo_external": return {"label": "EXTERNAL_TEST"}
+		"label_tara", "label_tara_indoor": return {"label": "INDOOR_REFERENCE"}
 	return {}
