@@ -5219,7 +5219,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "First-impressions playtest of today's Chapter 1: what confuses a new player",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
