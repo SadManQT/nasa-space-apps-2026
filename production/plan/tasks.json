@@ -3531,7 +3531,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "All 128 upgrade profiles complete the campaign",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M3-8U"
@@ -3543,7 +3543,7 @@
     "execution/QA_02_NUMERIC_AND_UPGRADES.md"
    ],
    "note": "",
-   "evidence": "",
+   "evidence": "UPGRADE PROFILES RESULT: PASS (16 checks, 0 failures); 1/1 suites passed via game/tools/run_tests.sh upgrade_profiles (enumerates all 2^7 = 128 upgrade combinations in acquisition order across Chapter 1 ExpeditionSimulation and Chapters 2-8 CampaignLedgerSimulation/ExtendedCampaignRoute, verifying every numeric contract, water/founder/vault conservation, 5.1875 air normalisation, and ending predicate)",
    "updated": "2026-11-10",
    "prompt": "Per execution/QA_02_NUMERIC_AND_UPGRADES.md: an automated headless test that runs the route under all 2^7 upgrade combinations and checks\nevery numeric contract and ending predicate. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.",
    "reserved_for": "ramim",
