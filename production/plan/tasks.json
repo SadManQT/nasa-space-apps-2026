@@ -656,7 +656,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M0-02"
@@ -6113,7 +6113,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Fix cross-scene prerequisite eligibility for P-01 nearby planting",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/Ramim-codex",
    "deps": [],
    "paths": [
@@ -6121,11 +6121,12 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.",
-   "evidence": "",
+   "evidence": "production/qa/evidence/M1-95/README.md; b1b393c; 2/2 focused suites (346 checks); full/native pending.",
    "updated": "2026-11-09",
    "prompt": "M1-08 real-campaign integration exposed a cross-scene prerequisite mismatch in Chapter1Campaign.nearby_target(). After calibration and packet scan in EX-CH01-S03, advance normally to EX-CH01-S04 and stand at plant_alo (or plant_tara) within range, facing it with clear line of sight. route.current_flags() is empty in the new scene; route.p01_view(\"plant_alo\") reports missing_flags=[] and route.snapshot().p01.packet_scanned=true. nearby_target() currently checks required_flags only against current_flags(), so both planting targets requiring p01_scanned are skipped and interact_nearby returns Walk up to the next job instead of requesting the panel. No UI pause is active. Read production/qa/evidence/M1-08_runtime_blocker.md and retained diagnostic log.\nAlign nearby eligibility with the existing authoritative cross-scene prerequisite contract; preserve physical room/range/frustum/line-of-sight checks, target completion/idempotency and all chosen-input validation. Do not inject flags from UI, auto-fill player choices, or change Ramim UI. Add real nearby USE regression for previous-scene packet scan -> S04 plant_alo/tara; unsatisfied prerequisites and out-of-range/blocked targets still reject. Run focused P01 and full runner. Publish handoff to M1-08; its source candidate is parked locally at afe0c747 (not main) and cannot complete until this runtime fix. Existing M1-66 test pass did not cover this actual S04 nearby path.",
    "reserved_for": "atik",
-   "effort": 1
+   "effort": 1,
+   "blocker": "Reviewed runtime source b1b393c fixes prior-scene prerequisites. Nearby29/0 + P01inputs317/0, reviewC0/I0/M0; full/native acceptance pending integrated batch and saved M1-08 panel. Existing HUD errors are RamimM101; ObjectDB warnings retained, no clean-log claim. Saved source and production/qa/evidence/M1-95/. Resume acceptance after current full/native results; no source reimplementation."
   },
   {
    "id": "M1-96",
@@ -6422,8 +6423,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Guard HUD world overlays while rebuilt player nodes leave the tree",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/chapter1_campaign_hud.gd"
@@ -6796,7 +6797,7 @@
    "note": "Filed by Ramim/codex on 2026-11-09.",
    "evidence": "",
    "updated": "2026-11-09",
-   "prompt": "User authorized Ramim to finish Atik runtime dependencies. Record reviewed source M1-99 (d0c32b8, route31/0/core76/0) in handbook section10; see production/qa/evidence/M1-99/README.md. Full integrated gate remains pending, do not call all acceptance done. Subsequent M1-69/M1-56 evidence will be appended to this request. No decision/canon change. M1-69 source d08eef8 adds campaign message_metadata/update_message_metadata wrappers through existing save service, focused28+76+31=135/0, API handoff production/qa/perf/M1-69.md. Full gate remains pending.",
+   "prompt": "User authorized Ramim to finish Atik runtime dependencies. Record reviewed source M1-99 (d0c32b8, route31/0/core76/0) in handbook section10; see production/qa/evidence/M1-99/README.md. Full integrated gate remains pending, do not call all acceptance done. Subsequent M1-69/M1-56 evidence will be appended to this request. No decision/canon change. M1-69 source d08eef8 adds campaign message_metadata/update_message_metadata wrappers through existing save service, focused28+76+31=135/0, API handoff production/qa/perf/M1-69.md. Full gate remains pending. M1-95 source b1b393c fixes prior-scene nearby prerequisites with existing context flags; focused346/0; review0 findings; full/native pending; existing HUDM101 errors and4ObjectDB warnings disclosed in evidence/M1-95.",
    "reserved_for": "sadman",
    "effort": 1
   }
