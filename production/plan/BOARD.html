@@ -315,14 +315,16 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M4-01">M4-01</a> Visual review of the Chapter 6 eclipse power props (M3-6A) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">3 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">2 todo</span></div><div class="bar"><i style="width:0%"></i></div>
 <details open><summary>Working now (1)</summary><ul>
-<li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Atik/codex on 2026-11-10</div></li>
+<li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/codex on 2026-11-10</div></li>
 </ul></details>
-<details open><summary>Next up today (3)</summary><ul>
-<li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span></li>
+<details open><summary>Next up today (2)</summary><ul>
 <li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M1-116">M1-116</a> Investigate post-result Forward+ exit timeout on Intel Arc laptop <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+</ul></details>
+<details open><summary>Blocked (1)</summary><ul>
+<li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Saved source 072c9c7: owned watchdog components pass mandatory loading 29/0 and actual production full-cast recovery. User explicitly leaves raw AssetGeometry implementation for S…</div></li>
 </ul></details>
 <details><summary>Deferred: video, submission and manual QA (5)</summary><ul>
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -5170,7 +5172,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Rule out a threaded-loading deadlock at full-cast entry",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -5186,7 +5188,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Found 5 Nov during the round-3 rendered verification: one windowed run of game/tools/perf_probe.gd (--perf-probe, window on top) stopped right after the garden_rebuild transition, at the start of the full-cast stage: Godot idle (~2% CPU) with no progress for 17 minutes. The next run passed cleanly, so it is intermittent. Find whether the threaded preparation (ResourceLoader.load_threaded_request / WorkerThreadPool jobs in game/scripts/loading/, staged construction in campaign_room.gd and chapter1_campaign.gd) can wait forever: a job that never reports, a main-thread await on a status that never changes, a resource requested twice, or a deadlock with a mutex. Add a watchdog: any preparation step that exceeds a time limit logs its step and falls back to synchronous loading behind the loading card instead of hanging.\nAcceptance: run the windowed probe 10 times in a row (command in production/qa/perf_2026-11-04.md) with zero stalls; a test forces a stuck job and proves the fallback completes; run_tests.sh passes.",
-   "blocker": "Night shift parked the work on branch night/M1-53: This checkout already holds the earlier attempt parked on origin/night/M1-53 (uncommitted). Check it, finish the task and fix what stopped it:\nNight shift parked the work on branch night/M1-53: The task is not marked done on the board: finish it (or block it with a real reason).",
+   "blocker": "Saved source 072c9c7: owned watchdog components pass mandatory loading 29/0 and actual production full-cast recovery. User explicitly leaves raw AssetGeometry implementation for Sadman; unapplied review candidate production/qa/perf/atik_batch_2026-11-10/M1-53_asset_geometry_owner.patch, saved reference origin/night/M1-53 f6285e4. Resume after reviewed raw request/publication recovery and held-raw-job tests land, then ten full consecutive native probes plus full runner. Native first-draw stalls remain M1-92; no original-stall cause or complete M1-53 acceptance claimed. Full runner currently in progress.",
    "reserved_for": "atik",
    "effort": 2,
    "assignment_history": [
@@ -5210,18 +5212,6 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/qa/evidence/M1-53*",
     "production/qa/perf/",
     "game/tools/test_loading.gd.uid",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
-   ],
-   "edit_files": [
-    "game/scripts/loading/preparation_watchdog.gd",
-    "game/scripts/loading/preparation_watchdog.gd.uid",
-    "game/scripts/loading/resource_job.gd",
-    "game/scripts/loading/load_preparation.gd",
-    "game/scripts/campaign/chapter1_campaign.gd",
-    "game/tools/test_loading.gd",
-    "game/tools/test_loading.gd.uid",
-    "production/qa/perf/atik_batch_2026-11-10/M1-53.md",
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
@@ -6538,8 +6528,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/codex",
    "deps": [],
    "paths": [
     "game/scripts/loading/",
@@ -6569,6 +6559,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-68*",
     "production/qa/perf/"
+   ],
+   "edit_files": [
+    "production/qa/perf/atik_batch_2026-11-10/M1-68.md"
    ],
    "batch_phase": "implementation"
   },
