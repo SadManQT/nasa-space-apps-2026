@@ -4311,11 +4311,11 @@
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): content is arriving before the system: game/resources/campaign/content/messages/ch01.json (33 messages) now, ch05-ch08 next. Run check_messages.py on them when it exists and file any fix as a task for Sadman.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "Goal: every scene connects to the next with text messages (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5; joins in game-design/24_NARRATIVE_REVISION.md §2.9).\nDo: a Messages system: threads (crew, commander, earth, academy, archive), unread counts, a toast on arrival (never during\ndialogue), key M and the pause menu entry, messages flagged goal feed the goal card. Load every\ngame/resources/campaign/content/messages/ch*.json (schema in §5) and unlock on scene_enter / scene_exit / mission_done /\njob_done / found; record read state in the save. Write production/tools/check_messages.py (stdlib): parses game-design/24_NARRATIVE_REVISION.md §2.9 and fails\nunless every join present in the loaded chapter files has ≥ 2 messages, IDs are unique, unlock scene IDs exist in\nfull-game-story/story-data.json, bodies are ≤ 60 words, text is English (no U+0980–U+09FF), and \"Noor\"/\"Rahman\" never unlock\nbefore EX-CH05-S10. Add a two-message sample ch00 fixture for tests only. game/tools/test_comms.gd covers load, unlock, toast,\ngoal handoff and save.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
    "effort": 3,
-   "blocker": "Core M1-89 is now done, but Atik M1-69 runtime/save bridge and M1-99 retry preservation remain unfinished. Resume inbox/content validation when those public contracts land; never mark messages read through restore_snapshot. Saved work: read-only audit in plan workspace; no inbox implementation saved."
+   "blocker": "M1-89 core, M1-99 route retry and M1-69 campaign save bridge now have reviewed source; see production/qa/perf/M1-69.md. Resume inbox/UI against public API; full acceptance remains pending integrated runner. No inbox source saved yet. Opening P0 M1-95/M1-08 is next under latest QA escalation."
   },
   {
    "id": "M1-57",
@@ -5309,7 +5309,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Expose safe message metadata updates without resetting puzzle checkpoints",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/Ramim-codex",
    "deps": [],
    "paths": [
@@ -5317,12 +5317,12 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-06.",
-   "evidence": "",
+   "evidence": "Source d08eef8; campaign28/core76/route31; API handoff production/qa/perf/M1-69.md; full pending.",
    "updated": "2026-11-09",
    "prompt": "M1-56 message persistence needs a safe authoritative metadata update API. Existing Director.snapshot -> Chapter1Campaign._save_snapshot -> SaveService already retains presentation_resume, and fresh New starts it empty. However Director.restore_snapshot also replaces _checkpoint. PuzzleHost.retry calls Director.restore_checkpoint, so using load/restore merely to mark a message read would overwrite the pre-shift rollback. No public bounded presentation-message setter exists.\nExpose a small public Director method for updating only presentation_resume.messages, with validated message metadata (delivered/read IDs and any explicitly agreed primitive state). Publish its exact method/payload contract for Ramim's comms/KnowledgeService integration. Preserve the gameplay checkpoint, current gameplay revision semantics, receipts, phase, resources, dialogue and flags; duplicate updates must be harmless. Never accept arbitrary state/root changes through this API. Do not add a second save store; existing runtime.save_campaign can persist the normal snapshot. Keep message pack/inbox implementation in Ramim folders, and Chapter1 prose in Sadman M1-57.\nAcceptance: focused tests with a real PuzzleHost/Director prove preview/read/update/retry returns to the same pre-message gameplay checkpoint; only message metadata changes; duplicate, malformed and missing state are safe; save/restore round-trips existing presentation_resume.messages, fresh New resets it, and old saves lacking it load. Run the full repository runner and disclose the existing M1-67/M1-68 failures if still present; do not weaken those checks. This prerequisite unblocks M1-56; tell Ramim to release/resume it when ready.",
    "reserved_for": "atik",
    "effort": 1,
-   "blocker": "Requested Director method is in Sadman-owned core/, outside campaign-only task paths. Owner request M1-89 publishes bounded metadata/checkpoint contract; then Atik wires normal save wrapper and verifies real PuzzleHost retry. See production/qa/perf/M1-69.md."
+   "blocker": "Source bridge d08eef8 ready and focused135/0 (3/3), reviewed source delivery pending/published in same batch. Remaining dependency: full integrated runner (Ramim/Atik executor). Saved source + production/qa/perf/M1-69.md and evidence/M1-69/. M1-89 old blocker resolved; M1-56 can consume API now."
   },
   {
    "id": "M1-70",
@@ -6113,8 +6113,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Fix cross-scene prerequisite eligibility for P-01 nearby planting",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/Ramim-codex",
    "deps": [],
    "paths": [
     "game/scripts/campaign/"
@@ -6122,7 +6122,7 @@
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "M1-08 real-campaign integration exposed a cross-scene prerequisite mismatch in Chapter1Campaign.nearby_target(). After calibration and packet scan in EX-CH01-S03, advance normally to EX-CH01-S04 and stand at plant_alo (or plant_tara) within range, facing it with clear line of sight. route.current_flags() is empty in the new scene; route.p01_view(\"plant_alo\") reports missing_flags=[] and route.snapshot().p01.packet_scanned=true. nearby_target() currently checks required_flags only against current_flags(), so both planting targets requiring p01_scanned are skipped and interact_nearby returns Walk up to the next job instead of requesting the panel. No UI pause is active. Read production/qa/evidence/M1-08_runtime_blocker.md and retained diagnostic log.\nAlign nearby eligibility with the existing authoritative cross-scene prerequisite contract; preserve physical room/range/frustum/line-of-sight checks, target completion/idempotency and all chosen-input validation. Do not inject flags from UI, auto-fill player choices, or change Ramim UI. Add real nearby USE regression for previous-scene packet scan -> S04 plant_alo/tara; unsatisfied prerequisites and out-of-range/blocked targets still reject. Run focused P01 and full runner. Publish handoff to M1-08; its source candidate is parked locally at afe0c747 (not main) and cannot complete until this runtime fix. Existing M1-66 test pass did not cover this actual S04 nearby path.",
    "reserved_for": "atik",
    "effort": 1
@@ -6796,7 +6796,7 @@
    "note": "Filed by Ramim/codex on 2026-11-09.",
    "evidence": "",
    "updated": "2026-11-09",
-   "prompt": "User authorized Ramim to finish Atik runtime dependencies. Record reviewed source M1-99 (d0c32b8, route31/0/core76/0) in handbook section10; see production/qa/evidence/M1-99/README.md. Full integrated gate remains pending, do not call all acceptance done. Subsequent M1-69/M1-56 evidence will be appended to this request. No decision/canon change.",
+   "prompt": "User authorized Ramim to finish Atik runtime dependencies. Record reviewed source M1-99 (d0c32b8, route31/0/core76/0) in handbook section10; see production/qa/evidence/M1-99/README.md. Full integrated gate remains pending, do not call all acceptance done. Subsequent M1-69/M1-56 evidence will be appended to this request. No decision/canon change. M1-69 source d08eef8 adds campaign message_metadata/update_message_metadata wrappers through existing save service, focused28+76+31=135/0, API handoff production/qa/perf/M1-69.md. Full gate remains pending.",
    "reserved_for": "sadman",
    "effort": 1
   }

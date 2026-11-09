@@ -220,7 +220,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-19">M1-19</a> Chapter 1 endings, decision replay and the science debrief <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs Atik M1-68 loading gate, then run current full acceptance and recheck endings/replay as needed; retain existing approved implementation. Saved work: reviewed endings/replay/…</div></li>
 <li><a class="id" href="#M1-29">M1-29</a> Mission Trainer mode: every puzzle as a 5–10 minute training scenario <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs shared-table acceptance M1-55 and Atik M1-68, then current full gate; do not rebuild the trainer. Saved work: reviewed trainer source 894919c/43cbcde plus shared table 66aed…</div></li>
 <li><a class="id" href="#M1-55">M1-55</a> Mission Table made simple: guided first shift, plain toggles, before-and-after forecast <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs Atik M1-68, then current full acceptance; preserve reviewed chosen-plan, forecast and sign-off invariants. Saved work: reviewed shared table 66aed53 on main; M1-55_qa.md.</div></li>
-<li><a class="id" href="#M1-56">M1-56</a> Messages: inbox, arrival toasts, unlock triggers and the message validator <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Core M1-89 is now done, but Atik M1-69 runtime/save bridge and M1-99 retry preservation remain unfinished. Resume inbox/content validation when those public contracts land; never …</div></li>
+<li><a class="id" href="#M1-56">M1-56</a> Messages: inbox, arrival toasts, unlock triggers and the message validator <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">M1-89 core, M1-99 route retry and M1-69 campaign save bridge now have reviewed source; see production/qa/perf/M1-69.md. Resume inbox/UI against public API; full acceptance remains…</div></li>
 <li><a class="id" href="#M1-62">M1-62</a> Goal card text for Chapters 2-8: an authored goal, why, prompt, result and hint for every job <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Needs Atik M1-68/M1-97 and resolution or diagnosis of intermittent media M1-100, then current full gate. Existing 12840 text checks pass at the recorded candidate; do not rewrite …</div></li>
 <li><a class="id" href="#M1-64">M1-64</a> Hint player: three progressive levels (nudge, animated explainer, worked method) in a polished overlay <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs Atik M1-68 and current full acceptance; preserve actual media, hint level/context and focus behavior. Saved work: reviewed hints f1d02f6/fbdcd67 on main; M1-64_qa.md.</div></li>
 <li><a class="id" href="#M1-70">M1-70</a> Data cards: show a source&#x27;s credit line (the LOLA terrain card first) <span class="chip ">any</span> <span class="chip ">P1</span><div class="meta">Needs Atik M1-68/M1-97 and current full acceptance. Source and current focused 206/0 are delivered; do not add the Credit block again. Saved work: reviewed credit d956fa8/592b6b9 …</div></li>
@@ -262,26 +262,27 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-90">M1-90</a> Run complete Windows loading diagnostics for M1-68 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">Completed the two requested fresh-process Windows runs with the unchanged collector. Run1:537 checks,2 failures (title51.869ms,campaign66.5…</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">4 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">5 blocked</span><span class="chip s-todo">35 todo</span></div><div class="bar"><i style="width:9%"></i></div>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">4 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">6 blocked</span><span class="chip s-todo">34 todo</span></div><div class="bar"><i style="width:9%"></i></div>
 <details open><summary>Working now (2)</summary><ul>
 <li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/claude on 2026-11-09</div></li>
-<li><a class="id" href="#M1-69">M1-69</a> Expose safe message metadata updates without resetting puzzle checkpoints <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/Ramim-codex on 2026-11-09</div></li>
+<li><a class="id" href="#M1-95">M1-95</a> Fix cross-scene prerequisite eligibility for P-01 nearby planting <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/Ramim-codex on 2026-11-09</div></li>
 </ul></details>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span></li>
-<li><a class="id" href="#M1-95">M1-95</a> Fix cross-scene prerequisite eligibility for P-01 nearby planting <span class="chip ">codex</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M1-97">M1-97</a> Retain per-stage loading traces for the failing Windows intervals <span class="chip ">codex</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M1-103">M1-103</a> Expose the Solo/Class session and team-plan bridge for M1-37 <span class="chip ">codex</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M1-107">M1-107</a> Prevent generic E input from masking the opening calibration interaction <span class="chip ">codex</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details open><summary>Blocked (5)</summary><ul>
+<details open><summary>Blocked (6)</summary><ul>
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Draft pre-release v0.1.0-preview.20261105 is on GitHub with both ZIPs (built from 57b837b; CI run 41970276437 green on Windows and macOS; production/qa/release_2026-11-05.md). Sad…</div></li>
 <li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">1080p four-room M4 Forward+/Compatibility captures delivered with complete coverage; Forward+ p95 misses60fps and first-use hitches remain. Await measured runtime fixes M1-92, Sad…</div></li>
 <li><a class="id" href="#M1-49">M1-49</a> Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Sadman M1-84 room/media hooks have landed and are preserved. Await Ramim M1-83 accessible Care Round capture/ghost panel and final command contract; then Atik wires dated garden v…</div></li>
 <li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Complete diagnostic retention/collector delivered and reviewed; full61/61 and two fresh M4 focused runs537PASS each. Original Windows failure not reproduced here; await Ramim M1-9…</div></li>
+<li><a class="id" href="#M1-69">M1-69</a> Expose safe message metadata updates without resetting puzzle checkpoints <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Source bridge d08eef8 ready and focused135/0 (3/3), reviewed source delivery pending/published in same batch. Remaining dependency: full integrated runner (Ramim/Atik executor). S…</div></li>
 <li><a class="id" href="#M1-99">M1-99</a> Route retry keeps delivered and read messages (M1-89 rule) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Reviewed source delivered d0c32b8; focused route31/0 and unchanged core76/0 clean. Remaining dependency: integrated full runner on the combined batch (Ramim/Atik executor). Saved …</div></li>
 </ul></details>
-<details><summary>To do (30)</summary><ul>
+<details><summary>To do (29)</summary><ul>
 <li><a class="id" href="#M3-2M">M3-2M</a> Chapter 2 missions EX-M0201 to EX-M0204: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-3M">M3-3M</a> Chapter 3 missions EX-M0301 to EX-M0304: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-4M">M3-4M</a> Chapter 4 missions EX-M0401 to EX-M0404: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
@@ -292,7 +293,6 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-93">M3-93</a> 12 Nov release: the working full game (Chapters 1-8) as Windows and macOS builds, with the evidence package <span class="chip ">codex</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M2-13">M2-13</a> Browser candidate: reduce the download and bundle missing UI glyphs <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 <li><a class="id" href="#M3-95">M3-95</a> Story echoes and environmental clues for Chapters 2-8 (decisions D4-D13, the Noor and Ferreira clue objects) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
-<li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-61">M3-61</a> EVA: suit budget, scanner pulse, footing with load, and assist modes <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-62">M3-62</a> Things you build stay: markers, fixed lines, lights, repeaters and the coverage map <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-63">M3-63</a> The rover and the route planner <span class="chip ">codex</span> <span class="chip ">P1</span></li>
@@ -4740,11 +4740,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): content is arriving before the system: game/resources/campaign/content/messages/ch01.json (33 messages) now, ch05-ch08 next. Run check_messages.py on them when it exists and file any fix as a task for Sadman.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "Goal: every scene connects to the next with text messages (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5; joins in game-design/24_NARRATIVE_REVISION.md §2.9).\nDo: a Messages system: threads (crew, commander, earth, academy, archive), unread counts, a toast on arrival (never during\ndialogue), key M and the pause menu entry, messages flagged goal feed the goal card. Load every\ngame/resources/campaign/content/messages/ch*.json (schema in §5) and unlock on scene_enter / scene_exit / mission_done /\njob_done / found; record read state in the save. Write production/tools/check_messages.py (stdlib): parses game-design/24_NARRATIVE_REVISION.md §2.9 and fails\nunless every join present in the loaded chapter files has ≥ 2 messages, IDs are unique, unlock scene IDs exist in\nfull-game-story/story-data.json, bodies are ≤ 60 words, text is English (no U+0980–U+09FF), and \"Noor\"/\"Rahman\" never unlock\nbefore EX-CH05-S10. Add a two-message sample ch00 fixture for tests only. game/tools/test_comms.gd covers load, unlock, toast,\ngoal handoff and save.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
    "effort": 3,
-   "blocker": "Core M1-89 is now done, but Atik M1-69 runtime/save bridge and M1-99 retry preservation remain unfinished. Resume inbox/content validation when those public contracts land; never mark messages read through restore_snapshot. Saved work: read-only audit in plan workspace; no inbox implementation saved."
+   "blocker": "M1-89 core, M1-99 route retry and M1-69 campaign save bridge now have reviewed source; see production/qa/perf/M1-69.md. Resume inbox/UI against public API; full acceptance remains pending integrated runner. No inbox source saved yet. Opening P0 M1-95/M1-08 is next under latest QA escalation."
   },
   {
    "id": "M1-57",
@@ -5738,7 +5738,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Expose safe message metadata updates without resetting puzzle checkpoints",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/Ramim-codex",
    "deps": [],
    "paths": [
@@ -5746,12 +5746,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-06.",
-   "evidence": "",
+   "evidence": "Source d08eef8; campaign28/core76/route31; API handoff production/qa/perf/M1-69.md; full pending.",
    "updated": "2026-11-09",
    "prompt": "M1-56 message persistence needs a safe authoritative metadata update API. Existing Director.snapshot -> Chapter1Campaign._save_snapshot -> SaveService already retains presentation_resume, and fresh New starts it empty. However Director.restore_snapshot also replaces _checkpoint. PuzzleHost.retry calls Director.restore_checkpoint, so using load/restore merely to mark a message read would overwrite the pre-shift rollback. No public bounded presentation-message setter exists.\nExpose a small public Director method for updating only presentation_resume.messages, with validated message metadata (delivered/read IDs and any explicitly agreed primitive state). Publish its exact method/payload contract for Ramim's comms/KnowledgeService integration. Preserve the gameplay checkpoint, current gameplay revision semantics, receipts, phase, resources, dialogue and flags; duplicate updates must be harmless. Never accept arbitrary state/root changes through this API. Do not add a second save store; existing runtime.save_campaign can persist the normal snapshot. Keep message pack/inbox implementation in Ramim folders, and Chapter1 prose in Sadman M1-57.\nAcceptance: focused tests with a real PuzzleHost/Director prove preview/read/update/retry returns to the same pre-message gameplay checkpoint; only message metadata changes; duplicate, malformed and missing state are safe; save/restore round-trips existing presentation_resume.messages, fresh New resets it, and old saves lacking it load. Run the full repository runner and disclose the existing M1-67/M1-68 failures if still present; do not weaken those checks. This prerequisite unblocks M1-56; tell Ramim to release/resume it when ready.",
    "reserved_for": "atik",
    "effort": 1,
-   "blocker": "Requested Director method is in Sadman-owned core/, outside campaign-only task paths. Owner request M1-89 publishes bounded metadata/checkpoint contract; then Atik wires normal save wrapper and verifies real PuzzleHost retry. See production/qa/perf/M1-69.md."
+   "blocker": "Source bridge d08eef8 ready and focused135/0 (3/3), reviewed source delivery pending/published in same batch. Remaining dependency: full integrated runner (Ramim/Atik executor). Saved source + production/qa/perf/M1-69.md and evidence/M1-69/. M1-89 old blocker resolved; M1-56 can consume API now."
   },
   {
    "id": "M1-70",
@@ -6542,8 +6542,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Fix cross-scene prerequisite eligibility for P-01 nearby planting",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/Ramim-codex",
    "deps": [],
    "paths": [
     "game/scripts/campaign/"
@@ -6551,7 +6551,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "M1-08 real-campaign integration exposed a cross-scene prerequisite mismatch in Chapter1Campaign.nearby_target(). After calibration and packet scan in EX-CH01-S03, advance normally to EX-CH01-S04 and stand at plant_alo (or plant_tara) within range, facing it with clear line of sight. route.current_flags() is empty in the new scene; route.p01_view(\"plant_alo\") reports missing_flags=[] and route.snapshot().p01.packet_scanned=true. nearby_target() currently checks required_flags only against current_flags(), so both planting targets requiring p01_scanned are skipped and interact_nearby returns Walk up to the next job instead of requesting the panel. No UI pause is active. Read production/qa/evidence/M1-08_runtime_blocker.md and retained diagnostic log.\nAlign nearby eligibility with the existing authoritative cross-scene prerequisite contract; preserve physical room/range/frustum/line-of-sight checks, target completion/idempotency and all chosen-input validation. Do not inject flags from UI, auto-fill player choices, or change Ramim UI. Add real nearby USE regression for previous-scene packet scan -> S04 plant_alo/tara; unsatisfied prerequisites and out-of-range/blocked targets still reject. Run focused P01 and full runner. Publish handoff to M1-08; its source candidate is parked locally at afe0c747 (not main) and cannot complete until this runtime fix. Existing M1-66 test pass did not cover this actual S04 nearby path.",
    "reserved_for": "atik",
    "effort": 1
@@ -7225,7 +7225,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "note": "Filed by Ramim/codex on 2026-11-09.",
    "evidence": "",
    "updated": "2026-11-09",
-   "prompt": "User authorized Ramim to finish Atik runtime dependencies. Record reviewed source M1-99 (d0c32b8, route31/0/core76/0) in handbook section10; see production/qa/evidence/M1-99/README.md. Full integrated gate remains pending, do not call all acceptance done. Subsequent M1-69/M1-56 evidence will be appended to this request. No decision/canon change.",
+   "prompt": "User authorized Ramim to finish Atik runtime dependencies. Record reviewed source M1-99 (d0c32b8, route31/0/core76/0) in handbook section10; see production/qa/evidence/M1-99/README.md. Full integrated gate remains pending, do not call all acceptance done. Subsequent M1-69/M1-56 evidence will be appended to this request. No decision/canon change. M1-69 source d08eef8 adds campaign message_metadata/update_message_metadata wrappers through existing save service, focused28+76+31=135/0, API handoff production/qa/perf/M1-69.md. Full gate remains pending.",
    "reserved_for": "sadman",
    "effort": 1
   }
