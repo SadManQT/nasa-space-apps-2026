@@ -656,7 +656,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M0-02"
@@ -6798,7 +6798,7 @@
    "note": "Filed by Ramim/codex on 2026-11-09.",
    "evidence": "",
    "updated": "2026-11-09",
-   "prompt": "User authorized Ramim to finish Atik runtime dependencies. Record reviewed source M1-99 (d0c32b8, route31/0/core76/0) in handbook section10; see production/qa/evidence/M1-99/README.md. Full integrated gate remains pending, do not call all acceptance done. Subsequent M1-69/M1-56 evidence will be appended to this request. No decision/canon change. M1-69 source d08eef8 adds campaign message_metadata/update_message_metadata wrappers through existing save service, focused28+76+31=135/0, API handoff production/qa/perf/M1-69.md. Full gate remains pending. M1-95 source b1b393c fixes prior-scene nearby prerequisites with existing context flags; focused346/0; review0 findings; full/native pending; existing HUDM101 errors and4ObjectDB warnings disclosed in evidence/M1-95. M1-101 source3d03159 + da1bbc6 guards detached player/goal/nearby nodes. Reviewer1Important fixed via RED13/1->GREEN13/0; P01inputs317/0 no transform errors. Source QA evidence/M1-101; audio owner error remainsSadmanM1-114; full/native pending.",
+   "prompt": "User authorized Ramim to finish Atik runtime dependencies. Record reviewed source M1-99 (d0c32b8, route31/0/core76/0) in handbook section10; see production/qa/evidence/M1-99/README.md. Full integrated gate remains pending, do not call all acceptance done. Subsequent M1-69/M1-56 evidence will be appended to this request. No decision/canon change. M1-69 source d08eef8 adds campaign message_metadata/update_message_metadata wrappers through existing save service, focused28+76+31=135/0, API handoff production/qa/perf/M1-69.md. Full gate remains pending. M1-95 source b1b393c fixes prior-scene nearby prerequisites with existing context flags; focused346/0; review0 findings; full/native pending; existing HUDM101 errors and4ObjectDB warnings disclosed in evidence/M1-95. M1-101 source3d03159 + da1bbc6 guards detached player/goal/nearby nodes. Reviewer1Important fixed via RED13/1->GREEN13/0; P01inputs317/0 no transform errors. Source QA evidence/M1-101; audio owner error remainsSadmanM1-114; full/native pending. M1-115 source51f91cb makes cassette labels real chosen payloads via profilecontract2, preserves oldsavedstrings/receipts; focused484/0, review0; UI/full stillpending. See evidence/M1-115/README.md.",
    "reserved_for": "sadman",
    "effort": 1
   },
@@ -6828,7 +6828,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Require explicit P01 cassette label choices through shared preview and commit",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/Ramim-codex",
    "deps": [],
    "paths": [
@@ -6840,11 +6840,12 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-09.",
-   "evidence": "",
+   "evidence": "production/qa/evidence/M1-115/README.md; source51f91cb; 484 focused checks0fail; full pending.",
    "updated": "2026-11-09",
    "prompt": "M1-08 review948ef2f found labels still auto-select correct answers. Require an explicit label payload in shared P01 preview/commit: missing/wrong/malformed rejects atomically; EXTERNAL_TEST for Alo and INDOOR_REFERENCE for Tara commits chosen input once. Publish options/expected labels through existing profile/view data; preserve canonical numbers and old saved label values/receipt IDs. Update shared test-only input fixture and necessary callers, never production defaults. Test wrong/types/missing, preview/commit identity, real route flags/receipts, duplicate commands and JSON old-labelled restore. Run focused and integrated full runner without weakening timing gates. No core/world/UI edit. User authorized Ramim to finish Atik dependencies. M08 candidate948ef2f preserved on ramim/m108-ui-review-20261109; resume UI after this real contract.",
    "reserved_for": "atik",
-   "effort": 1
+   "effort": 1,
+   "blocker": "Reviewed source51f91cb publishes real label payload contract2. Focused450/0 +logic34/0, reviewC0/I0/M0. Remaining dependency: integrated full runner and actual M08UI/native acceptance (Ramim executor). Saved source/evidence/M1-115/. M08 can consume this public source now; do not repeat model work."
   }
  ],
  "requirements": [
