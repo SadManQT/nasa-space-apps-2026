@@ -98,7 +98,10 @@ func _run() -> void:
 	campaign.director.pause("external")
 	campaign.director.resume()
 	# A separately committed operation changes the snapshot even if the panel remains open.
-	campaign.route.perform("compare_atmosphere")
+	var choice: Dictionary = campaign.current_scene_data().get("choice", {})
+	var command: Dictionary = campaign.hud.panels.command_for("record_choice", String(choice.options[0].id), {"choice_id": choice.id, "option_id": choice.options[0].id})
+	var changed: Dictionary = campaign.handle_ui_command(command)
+	_check(bool(changed.get("accepted", false)) and not bool(changed.get("duplicate", false)), "real accepted story choice changes the authoritative context")
 	_check(not panel.request_commit().accepted, "changed authoritative context requires another prediction")
 	_check(panel.preview().accepted and panel.request_commit().accepted, "fresh prediction recovers")
 	campaign._player.global_position += Vector3(20, 0, 0)
@@ -121,6 +124,7 @@ func _run() -> void:
 	var restored: Dictionary = campaign.restore_session(JSON.parse_string(JSON.stringify(saved)))
 	_check(restored.accepted and restored.route.snapshot().p01.probe_zeroed, "JSON save restores calibration")
 	_check(restored.route.perform("calibrate_probe", Inputs.payload("calibrate_probe")).accepted and restored.route.snapshot().p01.receipts.size() == 1, "restored duplicate keeps exactly one receipt")
+	await _scan_feedback(campaign)
 	await _planting(campaign)
 	campaign.free()
 	await process_frame
@@ -153,8 +157,31 @@ func _planting(campaign) -> void:
 				panel.choose(key, Inputs.payload(target)[key])
 			if Inputs.payload(target).is_empty():
 				panel.choose("confirmed", true)
+		if target.begins_with("label"):
+			var wrong := "INDOOR_REFERENCE" if target == "label_alo" else "EXTERNAL_TEST"
+			var right := "EXTERNAL_TEST" if target == "label_alo" else "INDOOR_REFERENCE"
+			var wrong_button := panel.find_child("Choose_" + wrong, true, false) as Button
+			var right_button := panel.find_child("Choose_" + right, true, false) as Button
+			_check(wrong_button != null and right_button != null, "both real label choices are available for " + target)
+			if wrong_button != null:
+				await process_frame
+				await process_frame
+				wrong_button.grab_focus()
+				await _pad(JOY_BUTTON_A)
+				_check(panel.selection().get("label") == wrong and not panel.preview().accepted, "real controller chooses a wrong label and gets a safe retry")
+			panel.choose("label", right)
 		_check(panel.preview().accepted and panel.request_commit().accepted, "selected planting action predicts " + target)
+		if target.begins_with("label"):
+			var observed := panel.find_child("ProbeObserved", true, false) as Label
+			var projected := panel.find_child("ProbePrediction", true, false) as Label
+			_check(observed != null and observed.text.to_lower().contains("label: not labelled"), "observed cassette has no label before confirmation")
+			var expected := "label: external test" if target == "label_alo" else "label: indoor reference"
+			_check(projected != null and projected.text.to_lower().contains(expected), "forecast visibly shows the chosen cassette label")
 		panel.confirm_commit()
+		if target.begins_with("label"):
+			var observed := panel.find_child("ProbeObserved", true, false) as Label
+			var expected := "label: external test" if target == "label_alo" else "label: indoor reference"
+			_check(observed != null and observed.text.to_lower().contains(expected), "committed label is visible in the actual observation")
 		panel.discard()
 	_check(campaign.route.snapshot().p01.moisture_alo == 40.25 and campaign.route.snapshot().p01.moisture_tara == 60 and campaign.p01_view("seal_tara").completion.complete, "whole planting panel retains chosen moisture and completes")
 
@@ -216,3 +243,20 @@ func _pad(code: int) -> void:
 		Input.parse_input_event(event)
 		Input.flush_buffered_events()
 		await process_frame
+
+func _scan_feedback(campaign) -> void:
+	for id in ["span_probe", "recheck_probe"]:
+		_check(bool(campaign.route.perform(id, Inputs.payload(id)).get("accepted", false)), "prepare real packet scan " + id)
+	await _near(campaign, "inspect_packet")
+	campaign.interact_nearby()
+	var panel = campaign.hud.p01_panel
+	panel.choose("confirmed", true)
+	_check(panel.preview().accepted, "chosen packet scan predicts")
+	var observed := panel.find_child("ProbeObserved", true, false) as Label
+	var projected := panel.find_child("ProbePrediction", true, false) as Label
+	_check(observed != null and observed.text.contains("Seed packet: not scanned"), "packet observation is unscanned before confirmation")
+	_check(projected != null and projected.text.contains("Seed packet: scanned"), "packet forecast visibly differs from the observation")
+	_check(panel.request_commit().accepted and panel.confirm_commit().accepted, "explicit packet scan confirms")
+	observed = panel.find_child("ProbeObserved", true, false) as Label
+	_check(campaign.route.snapshot().p01.packet_scanned and observed != null and observed.text.contains("Seed packet: scanned"), "actual committed packet state is visible")
+	panel.discard()

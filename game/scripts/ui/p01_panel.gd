@@ -114,7 +114,7 @@ func preview() -> Dictionary:
 		_prediction = _campaign.forecast_target(_target, _payload())
 	_preview_context = _context() if _prediction.get("accepted", false) else ""
 	_notice = "Prediction accepted. Compare the projected observation, then confirm when ready." if _prediction.get("accepted", false) else "Try again: " + UiDesign.player_words(String(_prediction.get("reason", "Check your selection.")))
-	_focus = "LockIn" if _prediction.get("accepted", false) else "TryIt"
+	_focus = "ProbePrediction" if _prediction.get("accepted", false) else "TryIt"
 	_render()
 	return _prediction.duplicate(true)
 
@@ -190,10 +190,10 @@ func _context() -> String:
 	return JSON.stringify([_campaign.route.snapshot(), state, _choices])
 
 func _simple_action() -> bool:
-	return _view.get("action", "") in ["scan_packet", "label_alo_external", "label_tara_indoor", "seal_alo", "seal_tara"]
+	return _view.get("action", "") in ["scan_packet", "seal_alo", "seal_tara"]
 
 func _action_title() -> String:
-	return {"set_zero": "Set the dry zero", "set_span": "Set the wet span", "recheck": "Recheck both references", "scan_packet": "Scan the seed packet", "plant_alo": "Place Alo's seed", "plant_tara": "Place Tara's seed", "water_alo": "Water Alo", "water_tara": "Water Tara", "label_alo_external": "Label Alo: External test", "label_tara_indoor": "Label Tara: Indoor reference", "seal_alo": "Close Alo's seal", "seal_tara": "Close Tara's seal"}.get(_view.get("action", ""), "Check the equipment")
+	return {"set_zero": "Set the dry zero", "set_span": "Set the wet span", "recheck": "Recheck both references", "scan_packet": "Scan the seed packet", "plant_alo": "Place Alo's seed", "plant_tara": "Place Tara's seed", "water_alo": "Water Alo", "water_tara": "Water Tara", "label_alo_external": "Label Alo's cassette", "label_tara_indoor": "Label Tara's cassette", "seal_alo": "Close Alo's seal", "seal_tara": "Close Tara's seal"}.get(_view.get("action", ""), "Check the equipment")
 
 func _explanation() -> String:
 	if _target in ["calibrate_probe", "span_probe", "recheck_probe"]:
@@ -226,7 +226,8 @@ func _render() -> void:
 	columns.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(columns)
 	var observed := _column(columns, "Observed data")
-	_label(observed, _readings(_view), "body")
+	var actual := _label(observed, _readings(_view), "body")
+	actual.name = "ProbeObserved"
 	var equipment := _column(columns, "Your prediction")
 	if _leaving:
 		_label(equipment, "Discard these unconfirmed choices? The equipment will stay as it is.")
@@ -243,6 +244,7 @@ func _render() -> void:
 	var forecast := _column(columns, "Projected result")
 	var projected := _label(forecast, _readings(_prediction.p01) if _prediction.get("accepted", false) and _prediction.has("p01") else PREDICTION_PROMPT)
 	projected.name = "ProbePrediction"
+	projected.focus_mode = Control.FOCUS_ALL
 	_label(forecast, _explanation())
 	var reason := String(_view.get("prerequisite_reason", ""))
 	if not reason.is_empty():
@@ -275,6 +277,9 @@ func _render_inputs(column: VBoxContainer) -> void:
 		"plant_alo", "plant_tara":
 			_options(column, "cassette", [["alo", "Alo cassette"], ["tara", "Tara cassette"]])
 			_number(column, "seed_count", "Seeds to place", 1)
+		"label_alo_external", "label_tara_indoor":
+			_label(column, "Alo is in the outer test chamber. Tara stays in the indoor reference bay.")
+			_options(column, "label", [[_view.profile.labels.alo, "External test"], [_view.profile.labels.tara, "Indoor reference"]])
 		"water_alo", "water_tara":
 			_label(column, "Calibrated moisture · %s–%s of 100 is safe. Excess can drain to waste." % [_view.profile.moisture_min, _view.profile.moisture_max])
 			_number(column, "moisture", "Moisture of 100", 10)
@@ -310,7 +315,18 @@ func _adjust(field: String, amount: float) -> void:
 func _readings(view: Dictionary) -> String:
 	var state: Dictionary = view.get("state", {})
 	var profile: Dictionary = view.get("profile", _view.profile)
-	return "References: dry raw %s → %s; wet raw %s → %s.\nProbe: %s\nAlo: %s seed; moisture %s of 100; %s\nTara: %s seed; moisture %s of 100; %s" % [profile.references.dry.raw, profile.references.dry.calibrated, profile.references.wet.raw, profile.references.wet.calibrated, "rechecked" if state.get("probe_rechecked", false) else ("span set" if state.get("probe_spanned", false) else ("zero set" if state.get("probe_zeroed", false) else "not calibrated")), state.get("cassette_alo_seed_count", 0), state.get("moisture_alo", 0), "sealed" if state.get("alo_sealed", false) else "open", state.get("cassette_tara_seed_count", 0), state.get("moisture_tara", 0), "sealed" if state.get("tara_sealed", false) else "open"]
+	var complete: Dictionary = view.get("completion", {})
+	return "\n".join([
+		"Reference targets: dry raw %s ? %s; wet raw %s ? %s." % [profile.references.dry.raw, profile.references.dry.calibrated, profile.references.wet.raw, profile.references.wet.calibrated],
+		"Seed packet: " + ("scanned" if state.get("packet_scanned", false) else "not scanned"),
+		"Probe: " + ("rechecked" if state.get("probe_rechecked", false) else ("span set" if state.get("probe_spanned", false) else ("zero set" if state.get("probe_zeroed", false) else "not calibrated"))),
+		"Alo: %s seed; moisture %s of 100; label: %s; %s" % [state.get("cassette_alo_seed_count", 0), state.get("moisture_alo", 0), _label_text(String(state.get("alo_label", ""))), "sealed" if state.get("alo_sealed", false) else "open"],
+		"Tara: %s seed; moisture %s of 100; label: %s; %s" % [state.get("cassette_tara_seed_count", 0), state.get("moisture_tara", 0), _label_text(String(state.get("tara_label", ""))), "sealed" if state.get("tara_sealed", false) else "open"],
+		"Paired planting: " + ("complete" if complete.get("complete", false) else "not complete"),
+	])
+
+func _label_text(value: String) -> String:
+	return {"EXTERNAL_TEST": "External test", "INDOOR_REFERENCE": "Indoor reference"}.get(value, "Not labelled")
 
 func _selection_text() -> String:
 	var lines: Array[String] = []

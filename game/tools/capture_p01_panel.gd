@@ -98,6 +98,8 @@ func _run() -> void:
 		await _capture(target)
 		panel.request_commit()
 		panel.confirm_commit()
+		if target == "inspect_packet" or target.begins_with("label"):
+			await _capture(target + "_observed")
 		panel.discard()
 	campaign.route.perform("compare_atmosphere")
 	campaign.route.advance_scene()
@@ -112,6 +114,14 @@ func _run() -> void:
 			panel.choose(key, Inputs.payload(target)[key])
 		if Inputs.payload(target).is_empty():
 			panel.choose("confirmed", true)
+		if target.begins_with("label"):
+			var wrong := "INDOOR_REFERENCE" if target == "label_alo" else "EXTERNAL_TEST"
+			var right := "EXTERNAL_TEST" if target == "label_alo" else "INDOOR_REFERENCE"
+			await _press("Choose_" + wrong, "controller")
+			_expect(not panel.preview().accepted, "wrong chosen label rejects without applying it")
+			await _capture(target + "_wrong")
+			await _press("Choose_" + right, "mouse")
+			_expect(panel.selection().get("label") == right, "mouse selects actual label " + right)
 		if target == "water_alo":
 			panel.choose("moisture", 61)
 			panel.preview()
@@ -125,6 +135,8 @@ func _run() -> void:
 			await _capture(target + "_150")
 		panel.request_commit()
 		panel.confirm_commit()
+		if target == "inspect_packet" or target.begins_with("label"):
+			await _capture(target + "_observed")
 		panel.discard()
 	_expect(campaign.p01_view("seal_tara").completion.complete, "native whole panel sequence completes with chosen fractional moisture")
 	campaign.free()
@@ -205,6 +217,9 @@ func _capture(id: String) -> void:
 			_expect(button.size.y >= 44, id + " target >=44 " + String(button.name))
 			var width: float = button.get_theme_font("font").get_string_size(button.text, HORIZONTAL_ALIGNMENT_LEFT, -1, button.get_theme_font_size("font_size")).x
 			_expect(button.size.x >= width, id + " button text fits " + String(button.name))
+		if bool(panel._prediction.get("accepted", false)) and not panel._confirming and not panel._leaving:
+			var projected := panel.find_child("ProbePrediction", true, false) as Control
+			_expect(projected != null and root.get_visible_rect().encloses(projected.get_global_rect()), id + " projected observation is fully readable")
 		var close := panel.find_child("CloseProbe", true, false) as Control
 		_expect(root.get_visible_rect().encloses(close.get_global_rect()), id + " close stays visible")
 	var name := "M1-08_" + id + ".png"
