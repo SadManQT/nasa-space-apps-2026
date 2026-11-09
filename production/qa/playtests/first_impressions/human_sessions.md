@@ -1,6 +1,6 @@
 # M1-65: remaining human sessions
 
-**Status: partial human evidence and an opening progression blocker, updated 9 November 2026.** Tanvir self-reported approximately 10 minutes on 8 November. On 9 November he supplied a screenshot of the dry-zero goal and reported that E does not advance it. See [T01](T01_2026-11-08.md) and [the blocker report](T01_2026-11-09_blocker.md). Actual build/settings, exact event timing and a native replay remain unconfirmed. No fresh-player session has been reported.
+**Status: partial human evidence; automated dry-zero retest added 9 November 2026.** Tanvir self-reported approximately 10 minutes on 8 November. On 9 November he supplied a screenshot and reported E does not advance dry-zero. See [T01](T01_2026-11-08.md) and [the historical blocker](T01_2026-11-09_blocker.md). T01's actual build/settings, exact timing and original keypress/pose remain unconfirmed. The [later automated retest](retest_2026-11-09/README.md) verifies the delivered panel flow under Compatibility; Forward+ exit timed out. It supplies no new human session. No fresh-player session has been reported.
 
 Follow-up: Tanvir confirms that the intro played and he watched it; the sitting incident involved Mei being supposed to place the zero on the table. See T01 for the dry-zero calibration source lead and its limits.
 

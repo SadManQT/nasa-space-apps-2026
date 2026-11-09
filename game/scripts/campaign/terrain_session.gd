@@ -28,6 +28,19 @@ func prepare_incremental(room_id: String, scene_id: String) -> Dictionary:
 	for entry in Region.tiles_info(region).get("tiles", []):
 		if not entry.lods.is_empty() and ResourceLoader.load_threaded_request(String(entry.lods[-1].path)) == OK:
 			paths.append(String(entry.lods[-1].path))
+	var info := Region.tiles_info(region)
+	for map_key in ["normal_map", "ao_map"]:
+		if info.has(map_key):
+			var map_path := "%s/%s/%s" % [Region.LOLA, region, String(info[map_key])]
+			if ResourceLoader.exists(map_path) and ResourceLoader.load_threaded_request(map_path) == OK:
+				paths.append(map_path)
+	for detail_path in [Region.DETAIL_ALBEDO, Region.DETAIL_NORMAL]:
+		if ResourceLoader.exists(detail_path) and ResourceLoader.load_threaded_request(detail_path) == OK:
+			paths.append(detail_path)
+	for rock in Stream.Scatter.catalog().get("rocks", []):
+		for lod_path in rock.get("lods", []):
+			if ResourceLoader.exists(String(lod_path)) and ResourceLoader.load_threaded_request(String(lod_path)) == OK:
+				paths.append(String(lod_path))
 	while not WorkerThreadPool.is_task_completed(task):
 		await get_tree().process_frame
 	WorkerThreadPool.wait_for_task_completion(task)
@@ -37,10 +50,12 @@ func prepare_incremental(room_id: String, scene_id: String) -> Dictionary:
 		held.append(ResourceLoader.load_threaded_get(path))  # held so configure's load() hits the cache
 	if not is_inside_tree():
 		return {"accepted": false, "reason": "The terrain session left the tree while it was loading."}
+	await get_tree().process_frame
 	var result := prepare(room_id, scene_id, job.get("field"))
 	while result.get("enabled", false) and is_instance_valid(stream) and not stream.settled():
 		await get_tree().process_frame
 	held.clear()
+	await get_tree().process_frame
 	return result
 
 func prepare(room_id: String, scene_id: String, field: TerrainHeightfield = null) -> Dictionary:

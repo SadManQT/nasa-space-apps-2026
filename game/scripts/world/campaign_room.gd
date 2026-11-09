@@ -526,7 +526,17 @@ func load_assets_incremental() -> void:
 				await AssetGeometryScript.prepare(path, get_tree())
 	if RoomContract.room(room_id).get("pressure") == "vacuum":
 		_style_vacuum(visual_root)
-	_build_selection_frames(RoomContract.room(room_id))
+	await get_tree().process_frame
+	for spec in RoomContract.room(room_id).get("focus_targets", []):
+		if _selection_frames.has(String(spec.target_id)):
+			continue
+		var asset := visual_root.get_node_or_null(String(spec.get("asset_id", ""))) as Node3D
+		if asset == null:
+			continue
+		var frame := Presentation.selection_frame(asset, AssetGeometryScript.bounds(asset))
+		frame.hide()
+		_selection_frames[String(spec.target_id)] = frame
+		await get_tree().process_frame
 
 func _add_approved_asset(path: String, index: int, count: int, authored: Dictionary = {}) -> void:
 	var asset_name := String(authored.get("id", path.get_file().get_basename()))

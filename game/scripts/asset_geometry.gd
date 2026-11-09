@@ -4,10 +4,9 @@ class_name AssetGeometry
 # Raw glTF preserves the approved runtime look (including face layers). Reuse
 # its parsed resources instead of decoding images/meshes on every room cut.
 # Bound retained scenes; live instances keep their own resources alive on eviction.
-# 20 holds the largest working set without evicting: the garden (9 with its dated plant
-# models) plus the power room (6) as the look-ahead, plus the five cast bodies. At 16 the
-# garden's seedling models pushed the commons' props out and they decoded on the main thread.
-const CACHE_LIMIT := 20
+# 28 holds the largest working set without evicting: the garden (12 with its dated plant
+# models) plus the power room (6) as the look-ahead, plus the five cast bodies and five EVA suits.
+const CACHE_LIMIT := 28
 static var _scenes: Dictionary = {}
 static var _recent: Array[String] = []
 static var pinned: Array[String] = []
@@ -61,10 +60,12 @@ static func prepare(path: String, tree: SceneTree) -> bool:
 	LoadTrace.end("glb_generate_scene:" + path, stamp)
 	if root == null:
 		return false
+	await tree.process_frame
 	stamp = LoadTrace.begin()
 	var scene := PackedScene.new()
 	var error := scene.pack(root)
 	LoadTrace.end("glb_pack:" + path, stamp)
+	await tree.process_frame
 	root.free()
 	if error != OK:
 		return false

@@ -4,6 +4,39 @@ class_name LoadPreparation
 
 const Content = preload("res://scripts/content/content_loader.gd")
 const Contract = preload("res://scripts/world/room_contract.gd")
+const Helmet = preload("res://assets/props/PR_Helmet_Roles/helmet_roles.gd")
+const PLANT_STAGE_MODELS := {
+	"ALO-01": {
+		"seed": "PL_Alo_Sprout",
+		"sprout": "PL_Alo_Sprout",
+		"bud": "PL_Alo_Bud",
+		"bloom": "PL_Alo_Bloom",
+		"pollinated": "PL_Alo_Bloom",
+		"pod_bearing": "PL_Alo_PodsGreen",
+		"mature_pods": "PL_Alo_Senescent",
+		"mature_dry": "PL_Alo_Dry",
+	},
+	"TARA-01": {
+		"seed": "PL_Tara_Sprout",
+		"sprout": "PL_Tara_Sprout",
+		"bud": "PL_Tara_Bloom",
+		"bloom": "PL_Tara_Bloom",
+		"pollinated": "PL_Tara_Bloom",
+		"pod_bearing": "PL_Tara_Pods",
+		"mature_pods": "PL_Tara_Senescent",
+		"mature_dry": "PL_Tara_Dry",
+	},
+}
+const PLANT_STAGE_NEXT := {
+	"seed": "sprout",
+	"sprout": "bud",
+	"bud": "bloom",
+	"bloom": "pollinated",
+	"pollinated": "pod_bearing",
+	"pod_bearing": "mature_pods",
+	"mature_pods": "mature_dry",
+	"mature_dry": "mature_dry",
+}
 const ROOM_SCENES := {
 	"LOC-01": "res://scenes/campaign/rooms/commons.tscn",
 	"LOC-02": "res://scenes/campaign/rooms/service_rooms.tscn",
@@ -62,6 +95,7 @@ func prepare_content() -> void:
 
 static func _content_job() -> Dictionary:
 	var start := Time.get_ticks_usec()
+	ScienceData.new()
 	var data := Content._read_json(Content.FULL_PATH)
 	return {"content": data, "validation": Content.validate_full(data), "ms": (Time.get_ticks_usec() - start) / 1000.0}
 
@@ -117,27 +151,61 @@ func wait_campaign() -> bool:
 		await get_tree().process_frame
 	return failed.is_empty()
 
-static func room_paths(room_id: String) -> Array:
+static func room_paths(room_id: String, scene_id: String = "", plants: Array = []) -> Array:
 	var paths: Array = Contract.room(room_id).get("asset_paths", []).duplicate()
 	if room_id == "LOC-03":
-		# Every dated plant model CampaignRoom.apply_plant_state can show (seedlings from M1-07), so a stage swap never decodes on the main thread.
-		for id in ["PL_Alo_Sprout", "PL_Tara_Sprout", "PL_Alo_Bloom", "PL_Alo_Pods"]:
-			paths.append("res://assets/plants/%s/%s.glb" % [id, id])
+		# M3-100: preload the models the garden can show for the snapshot's date (each plant's current stage and its next stage),
+		# or the early sprout/bloom models when no plant state is supplied; drop the legacy PL_Alo_Pods.
+		var stage_models: Array[String] = []
+		if plants.is_empty():
+			if not scene_id.is_empty() and Contract.scene_order(scene_id) >= 300:
+				stage_models.assign(["PL_Alo_Bloom", "PL_Alo_PodsGreen", "PL_Alo_Senescent", "PL_Alo_Dry", "PL_Tara_Bloom", "PL_Tara_Pods", "PL_Tara_Senescent", "PL_Tara_Dry"])
+			else:
+				stage_models.assign(["PL_Alo_Sprout", "PL_Tara_Sprout", "PL_Alo_Bloom"])
+		else:
+			for individual in ["ALO-01", "TARA-01"]:
+				var cur_stage := "seed"
+				for plant in plants:
+					if plant is Dictionary and String(plant.get("individual_id", "")) == individual:
+						cur_stage = String(plant.get("stage", "seed"))
+				var next_stage := String(PLANT_STAGE_NEXT.get(cur_stage, cur_stage))
+				for st in [cur_stage, next_stage]:
+					var model := String(PLANT_STAGE_MODELS.get(individual, {}).get(st, ""))
+					if not model.is_empty() and model not in stage_models:
+						stage_models.append(model)
+		for id in stage_models:
+			var p := "res://assets/plants/%s/%s.glb" % [id, id]
+			if p not in paths:
+				paths.append(p)
+	if not scene_id.is_empty():
+		var layout := Contract.layout(room_id)
+		for p in Contract.staging_asset_paths(layout, scene_id):
+			if p not in paths:
+				paths.append(p)
+		for p in Contract.work_light_asset_paths(room_id):
+			if p not in paths:
+				paths.append(p)
 	return paths
 
 ## True while campaign preparation or a room look-ahead is still loading.
 func busy() -> bool:
 	return preparing or _room_busy
 
-func activate_room(room_id: String) -> void:
-	AssetGeometry.pinned.assign(room_paths(room_id))
+func activate_room(room_id: String, scene_id: String = "", plants: Array = []) -> void:
+	AssetGeometry.pinned.assign(room_paths(room_id, scene_id, plants))
 
-func room_ready(room_id: String) -> bool:
+func room_ready(room_id: String, scene_id: String = "", plants: Array = []) -> bool:
 	if ROOM_SCENES.has(room_id) and not resources.has(ROOM_SCENES[room_id]):
 		return false
-	for value in room_paths(room_id):
+	for value in room_paths(room_id, scene_id, plants):
 		if not AssetGeometry.is_prepared(String(value)) or int(_warmed.get(value, -1)) != FileAccess.get_modified_time(String(value)):
 			return false
+	if not scene_id.is_empty() and crew != null:
+		var outfits: Dictionary = Contract.staging(room_id, scene_id).get("outfits", {})
+		for id in outfits:
+			var outfit := String(outfits[id])
+			if not outfit.is_empty() and not crew._wardrobe.has(String(id) + "/" + outfit):
+				return false
 	return true
 
 func prepare_scene_media(scene_id: String) -> void:
@@ -150,7 +218,57 @@ func prepare_scene_media(scene_id: String) -> void:
 		if ResourceLoader.exists(path):
 			await resource(path)
 
-func prepare_room(room_id: String) -> bool:
+## Prepares any EVA or custom outfit bodies staged in scene_id off the main thread so CampaignCrew.place never decodes on main.
+func prepare_scene_outfits(room_id: String, scene_id: String) -> bool:
+	if scene_id.is_empty() or crew == null:
+		return true
+	var outfits: Dictionary = Contract.staging(room_id, scene_id).get("outfits", {})
+	if outfits.is_empty():
+		return true
+	var needed: Array[String] = []
+	for id in outfits:
+		var outfit := String(outfits[id])
+		if outfit == "eva" and not crew._wardrobe.has(String(id) + "/eva"):
+			needed.append(String(id))
+	if needed.is_empty():
+		return true
+	if not await AssetGeometry.prepare(Helmet.SCENE_PATH, get_tree()):
+		failed = "EVA helmet could not be prepared."
+		return false
+	for id in needed:
+		var cast := id.capitalize()
+		var path := "res://assets/characters/CH_%s_EVA/CH_%s_EVA.glb" % [cast, cast]
+		if not await AssetGeometry.prepare(path, get_tree()):
+			failed = "An EVA crew model could not be prepared."
+			return false
+		var sample := AssetGeometry.load_glb(path)
+		if sample == null:
+			failed = "An EVA crew model could not be instanced."
+			return false
+		if not await LocomotionClips.prewarm(sample, path, get_tree()):
+			_make_warm_view()
+			_warm_root.add_child(sample)
+			if not await LocomotionClips.prewarm_incremental(sample, path, get_tree()):
+				sample.free()
+				failed = "EVA crew motion could not be prepared."
+				return false
+		await get_tree().process_frame
+		var skeletons := sample.find_children("*", "Skeleton3D", true, false)
+		if not skeletons.is_empty():
+			LocomotionClips.FootSlideScript.new().setup(sample, skeletons[0] as Skeleton3D)
+		sample.free()
+		await get_tree().process_frame
+		await resource("res://resources/player/ch_%s.tres" % id)
+		var stamp := LoadTrace.begin()
+		var body := crew._body(id, "eva")
+		LoadTrace.end("cast_rig_setup:" + id + "_eva", stamp)
+		body.process_mode = Node.PROCESS_MODE_DISABLED
+		body.collision_layer = 0
+		body.hide()
+		await get_tree().process_frame
+	return true
+
+func prepare_room(room_id: String, scene_id: String = "", plants: Array = []) -> bool:
 	# Background look-ahead and foreground entry share one queue; never consume
 	# the same ResourceLoader request twice or mutate the same cached material.
 	while _room_busy:
@@ -158,7 +276,9 @@ func prepare_room(room_id: String) -> bool:
 	_room_busy = true
 	if ROOM_SCENES.has(room_id):
 		await resource(ROOM_SCENES[room_id])
-	var paths := room_paths(room_id)
+	var layout := Contract.layout(room_id)
+	var is_pbr_kit: bool = layout.get("assembly") in ["habitat_kit", "site_kit", "exterior_kit"]
+	var paths := room_paths(room_id, scene_id, plants)
 	for value in paths:
 		var path := String(value)
 		if not await AssetGeometry.prepare(path, get_tree()):
@@ -166,9 +286,10 @@ func prepare_room(room_id: String) -> bool:
 			_room_busy = false
 			return false
 		if int(_warmed.get(path, -1)) != FileAccess.get_modified_time(path):
+			# M4-12: skip ToonMaterials warm-draw on PBR habitat_kit / site_kit / exterior_kit props.
 			# The dummy renderer cannot compile pipelines and reports invalid
 			# material RIDs when temporary styled instances are destroyed.
-			if DisplayServer.get_name() != "headless":
+			if DisplayServer.get_name() != "headless" and not is_pbr_kit:
 				_make_warm_view()
 				var sample := AssetGeometry.load_glb(path)
 				_warm_root.add_child(sample)
@@ -176,6 +297,9 @@ func prepare_room(room_id: String) -> bool:
 				await _draw_warm_frames()
 				sample.free()
 			_warmed[path] = FileAccess.get_modified_time(path)
+	if not await prepare_scene_outfits(room_id, scene_id):
+		_room_busy = false
+		return false
 	_room_busy = false
 	return true
 

@@ -57,7 +57,7 @@ var _played_cutscenes := {}
 func _ready() -> void:
 	if incremental_loading:
 		loading = true
-		_ready_incremental()
+		_ready_incremental.call_deferred()
 		return
 	_start_session()
 	if _startup_error.is_empty():
@@ -127,14 +127,17 @@ func _ready_incremental() -> void:
 		prepared_content = preparation.content
 		_crew = preparation.crew
 		_crew.reparent(self)
+	await get_tree().process_frame
 	_start_session()
+	await get_tree().process_frame
 	if _startup_error.is_empty():
 		await _refresh_world_incremental()
 		var stamp := LoadTrace.begin()
-		_build_hud()
+		await _build_hud()
 		LoadTrace.end("campaign_ui", stamp)
 		await get_tree().process_frame
 		_save_campaign()
+		await get_tree().process_frame
 	loading = false
 	_on_scene_ready()
 	if hud != null:
@@ -622,7 +625,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _refresh_world() -> void:
 	if incremental_loading:
-		if not loading and preparation.room_ready(route.current_room_id()) and not _terrain_wanted():
+		var plants: Array = director.snapshot().get("plants", []) if director != null else []
+		if not loading and preparation.room_ready(route.current_room_id(), route.current_scene_id(), plants) and not _terrain_wanted():
 			_refresh_world_now()
 			_on_scene_ready()
 			_prefetch_next_room()
@@ -638,7 +642,8 @@ func _refresh_world() -> void:
 func _refresh_world_now(incremental_assets: bool = false) -> void:
 	var stamp := LoadTrace.begin()
 	if incremental_loading:
-		preparation.activate_room(route.current_room_id())
+		var plants: Array = director.snapshot().get("plants", []) if director != null else []
+		preparation.activate_room(route.current_room_id(), route.current_scene_id(), plants)
 	if not incremental_assets:
 		_clear_terrain()  # only the incremental entry prepares terrain; this path builds the flat fallback floor
 	if _room != null and is_instance_valid(_room):
@@ -652,6 +657,7 @@ func _refresh_world_now(incremental_assets: bool = false) -> void:
 	else:
 		var scene := preparation.resources[room_path] as PackedScene if incremental_loading else load(room_path) as PackedScene
 		_room = scene.instantiate() as CampaignRoom
+	_room.upcoming_scene = route.current_scene_id()
 	_room.load_approved_assets = not incremental_assets
 	_room.terrain_ground = _terrain != null
 	add_child(_room)
@@ -687,13 +693,16 @@ func _place_crew() -> void:
 func _refresh_world_incremental() -> void:
 	await get_tree().process_frame
 	await preparation.prepare_scene_media(route.current_scene_id())
-	if not await preparation.prepare_room(route.current_room_id()):
+	var plants: Array = director.snapshot().get("plants", []) if director != null else []
+	if not await preparation.prepare_room(route.current_room_id(), route.current_scene_id(), plants):
 		_fail_startup(preparation.failed)
 		return
 	await _prepare_terrain()
+	await get_tree().process_frame
 	_refresh_world_now(true)
 	await get_tree().process_frame
 	await _room.load_assets_incremental()
+	await get_tree().process_frame
 	_place_crew()
 	await get_tree().process_frame
 	# First real room draw (including its lighting/layout variants) is covered.
@@ -724,11 +733,13 @@ func _prepare_terrain() -> void:
 		_clear_terrain()
 
 func _rebuild_transition() -> void:
+	await get_tree().process_frame
 	var was_paused := _ui_paused
 	set_ui_paused(true)
 	await _refresh_world_incremental()
 	set_ui_paused(was_paused)
 	_on_scene_ready()
+	await get_tree().process_frame
 	if hud != null:
 		hud.refresh_scene({}, true)
 	await get_tree().process_frame
@@ -755,7 +766,8 @@ func _prefetch_next_room() -> void:
 			return
 
 func _prefetch_room_and_media(room_id: String, scene_id: String) -> void:
-	await preparation.prepare_room(room_id)
+	var plants: Array = director.snapshot().get("plants", []) if director != null else []
+	await preparation.prepare_room(room_id, scene_id, plants)
 	await preparation.prepare_scene_media(scene_id)
 	if audio != null:
 		await audio.prefetch(scene_id, RoomContract.room_for_scene(scene_id))
@@ -774,6 +786,8 @@ func _build_hud() -> void:
 	add_child(layer)
 	hud = HUDScene.instantiate() as Chapter1CampaignHUD
 	layer.add_child(hud)
+	if incremental_loading and is_inside_tree():
+		await get_tree().process_frame
 	hud.setup(self)
 
 func present_dialogue(line: Dictionary) -> void:

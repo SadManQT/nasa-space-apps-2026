@@ -28,11 +28,13 @@ func _run() -> void:
 	_test_loops(metadata)
 	_test_settings()
 	await _test_director_fixtures()
+	await _test_freed_owner_during_stream()
 	await _test_campaign_cutscenes()
 	await _test_missing_film_fallback()
 	storage.cleanup()
 	print("CAMPAIGN MEDIA RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
+
 
 func _test_manifest(metadata: Dictionary) -> void:
 	var audio: Dictionary = metadata.get("audio", {})
@@ -131,6 +133,21 @@ func _test_director_fixtures() -> void:
 	_check(not director.voice.playing, "a line already heard is shown without voice")
 	director.queue_free()
 	await _frames(2)
+
+func _test_freed_owner_during_stream() -> void:
+	var content := ContentScript.load_full()
+	var metadata := CampaignAudioRuntime.read_metadata()
+	var director := CampaignAudioDirector.new()
+	director.setup(CampaignAudioRuntime.new(content, metadata))
+	root.add_child(director)
+	director.enter_scene("EX-CH01-S02", "LOC-02")
+	var line := ContentScript.dialogue_by_id(content, "EX-CH01-S02-L01")
+	director.present_line(line)
+	await process_frame
+	director.free()
+	await _frames(3)
+	_check(not is_instance_valid(director), "freeing CampaignAudioDirector mid-stream completes without resuming a freed coroutine")
+
 
 func _test_campaign_cutscenes() -> void:
 	CampaignCutscenePlayer.autoplay = true

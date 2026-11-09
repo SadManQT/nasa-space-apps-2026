@@ -38,14 +38,20 @@ func _ready() -> void:
 	for path in ["res://assets/props/PR_MissionTable/PR_MissionTable.glb", "res://assets/props/PR_BatteryJar/PR_BatteryJar.glb", "res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"]:
 		if not await AssetGeometry.prepare(path, get_tree()):
 			push_error("Title equipment could not be prepared: " + path)
+	await preparation.prepare_content()
 	await preparation.resource("res://environments/look/character_look.tres")
 	await preparation.resource("res://scenes/ui/main_menu.tscn")
+	await preparation.resource("res://scenes/ui/campaign_panels.tscn")
+	await preparation.resource("res://resources/ui/lla_theme.tres")
 	_save_service = _new_save_service()
 	var stamp := LoadTrace.begin()
 	_build_stage()
 	LoadTrace.end("title_stage", stamp)
+	await get_tree().process_frame
+	var snapshot := _load_campaign_snapshot()
+	await get_tree().process_frame
 	stamp = LoadTrace.begin()
-	_show_title()
+	await _show_title(snapshot)
 	LoadTrace.end("title_ui_save_validation", stamp)
 	await get_tree().process_frame
 	_loading_card.queue_free()
@@ -97,8 +103,10 @@ func _build_stage() -> void:
 	title.outline_size = 12
 	_stage_root.add_child(title)
 
-func _show_title() -> void:
+func _show_title(preloaded_snapshot: Variant = null) -> void:
 	if _campaign != null and is_instance_valid(_campaign):
+		if preparation != null and is_instance_valid(preparation.crew):
+			preparation.crew = null
 		_campaign.queue_free()
 		_campaign = null
 	_stage_root.process_mode = Node.PROCESS_MODE_INHERIT
@@ -114,7 +122,12 @@ func _show_title() -> void:
 	_menu.science_requested.connect(_menu.open_science)
 	_menu.showcase_requested.connect(_open_showcase)
 	_menu.trainer_requested.connect(_open_trainer)
-	_menu.setup(_load_campaign_snapshot())
+	if is_inside_tree():
+		await get_tree().process_frame
+	var snapshot: Dictionary = preloaded_snapshot if preloaded_snapshot is Dictionary else _load_campaign_snapshot()
+	if is_inside_tree():
+		await get_tree().process_frame
+	_menu.setup(snapshot)
 	_show_load_notice()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	preparation.prepare_campaign.call_deferred()
@@ -203,7 +216,6 @@ func _launch_campaign(snapshot: Dictionary) -> void:
 	crew.get_parent().remove_child(crew)
 	_campaign.add_child(crew)
 	_campaign.set("_crew", crew)
-	preparation.crew = null
 	preparation.campaign_ready = false
 	_campaign.connect("exit_requested", _show_title)
 	add_child(_campaign)
@@ -292,6 +304,7 @@ func _run_export_smoke() -> void:
 	var model_path := "res://assets/characters/CH_Kai/CH_Kai.glb"
 	var model_file := FileAccess.open(model_path, FileAccess.READ)
 	checks.append(model_file != null and model_file.get_buffer(4).get_string_from_ascii() == "glTF")
+	checks.append(FileAccess.file_exists("res://assets/environment/terrain/lola/aurora_ridge/heightmap_5m.r16"))
 	await _export_smoke_capture("M1-20_native_title")
 	await _launch_campaign({})
 	for index in 6:

@@ -1,0 +1,94 @@
+{
+  "source_commit": "cc4e18075dc999a2af300edea237cd6b971162b9",
+  "command": [
+    "D:/Godot/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe",
+    "--path",
+    "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\game",
+    "--rendering-method",
+    "gl_compatibility",
+    "--resolution",
+    "1280x720",
+    "--script",
+    "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\production\\qa\\playtests\\first_impressions\\retest_2026-11-09\\capture_dry_zero.gd",
+    "--",
+    "--capture"
+  ],
+  "renderer": "Compatibility",
+  "resolution": "1280x720",
+  "start_utc_epoch": 1794215345.3154628,
+  "end_utc_epoch": 1794215358.765309,
+  "duration_seconds": 13.45,
+  "exit_code": 0,
+  "timed_out": false,
+  "markers": [
+    "CAMPAIGN INTERACTION INPUT RESULT: PASS (44 checks, 0 failures)"
+  ],
+  "checks": 44,
+  "failures": 0,
+  "capture_checks_passed": true,
+  "source_sha256": {
+    "game/scripts/ui/p01_panel.gd": "8993fca060def474095049a4636cce613e446bb1a4a273415d557cca6ccea34a",
+    "game/scenes/ui/p01_panel.tscn": "bebf0a1b54a9ea8e045d42245f02400018c2830ae29da94f0a2564769801cb9f",
+    "game/scripts/ui/chapter1_campaign_hud.gd": "b59e835d12f468e2fb55b4be91dbaa3f615b2d19703be88d0caab35911b3f318",
+    "game/scripts/campaign/chapter1_campaign.gd": "3328e3c2fc1ddfabc04ef7f97d135a2d280655c2c24c0837e085193d7744bbad",
+    "game/scripts/player/player_controller.gd": "8bfef7fe395ab198b28e7c9b16ad08f82485a29d12f0d4444cd036bcc9371328",
+    "game/scripts/missions/p01_commission_plant.gd": "04e788e35929359757e8191e515e719f583fa8b6568e29378681abf398d7a6a6",
+    "game/scripts/missions/campaign_route.gd": "c2b13000de13bdc4ff87f2684c70652031419dafed22e33305244d0e5eb29a68",
+    "game/resources/campaign/profiles/p01_commission_plant.json": "5b499ddc254cdfabf4a2012c9dedf798d7b2e46f0b2e975b37fa1e7024e82538",
+    "game/tools/test_campaign_interaction_input.gd": "31695b9ba05f1e421ac29352f3cdefb0e1c17166a921ece630235aaa91a930f1",
+    "game/tools/support/isolated_storage.gd": "9663124fcce898b14643f9659ea41f137a46bc6e378ea2150a8141b616134846",
+    "game/project.godot": "e3f172aafbfac7e52c68b9a079acf3822ff52780246b55bc9a6f3019ed55efb0",
+    "production/qa/playtests/first_impressions/retest_2026-11-09/capture_dry_zero.gd": "80730705fe64c80fc8b6c8bf11e471f37dbcd8d2732c94ae2cc7cc2cc561b89a"
+  },
+  "captures": [
+    {
+      "file": "M1-65_retest_commission_after.png",
+      "bytes": 1287933,
+      "sha256": "51a7f32dcd68fee20f4bda0219d7adf605dcf23bcd8873f17224a17b7577bec7",
+      "mtime_epoch": 1794215354.8920407,
+      "inside_run_interval": true
+    },
+    {
+      "file": "M1-65_retest_commission_before.png",
+      "bytes": 1295158,
+      "sha256": "918a4900adb7cf13e4b74776125107d610636aaa3d648e81d7fbceb735fb50ee",
+      "mtime_epoch": 1794215354.1245263,
+      "inside_run_interval": true
+    },
+    {
+      "file": "M1-65_retest_dry_zero_before.png",
+      "bytes": 1283445,
+      "sha256": "34dba23a5750f741f935bb6819777f34878a00044175d91f35a80dd0238fce1b",
+      "mtime_epoch": 1794215355.4080281,
+      "inside_run_interval": true
+    },
+    {
+      "file": "M1-65_retest_dry_zero_observed.png",
+      "bytes": 502278,
+      "sha256": "723a076c216eb58d003dc5ddeb7b1babe76eae8942eed833e4300040c6e0bd08",
+      "mtime_epoch": 1794215357.2856553,
+      "inside_run_interval": true
+    },
+    {
+      "file": "M1-65_retest_dry_zero_panel.png",
+      "bytes": 483024,
+      "sha256": "b531a106efb1f53777e4a0a044213f72e1ba175d42fe10f18d5deaa62423983f",
+      "mtime_epoch": 1794215355.880945,
+      "inside_run_interval": true
+    }
+  ],
+  "diagnostic_lines": [
+    "WARNING: TAA is only available when using the Forward+ renderer.",
+    "WARNING: 'res://assets/environment/kit/EN_Kit_BulkheadRing_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.",
+    "WARNING: 'res://assets/environment/kit/EN_Kit_CableRun_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.",
+    "WARNING: 'res://assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.",
+    "WARNING: 'res://assets/environment/kit/EN_Kit_DoorFrame_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.",
+    "WARNING: 'res://assets/environment/kit/EN_Kit_FloorTile_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.",
+    "WARNING: 'res://assets/environment/kit/EN_Kit_Hatch_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.",
+    "WARNING: 'res://assets/environment/kit/EN_Kit_PipeRun_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.",
+    "WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.",
+    "WARNING: 'res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.",
+    "WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.",
+    "WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Window_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'."
+  ]
+}

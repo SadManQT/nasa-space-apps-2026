@@ -42,6 +42,76 @@ var _opened_channels := {}
 var _duck := 0.0
 var _captions: Array = []
 
+class _StreamTask extends RefCounted:
+	static func prefetch_paths(owner: CampaignAudioDirector, paths: Array) -> void:
+		for path in paths:
+			if not is_instance_valid(owner) or not owner.is_inside_tree():
+				return
+			await load_stream(owner, String(path), owner._cache, owner.preparation)
+
+	static func start_voice(owner: CampaignAudioDirector, line_id: String, runtime_path: String, origin: String) -> void:
+		if not is_instance_valid(owner) or not owner.is_inside_tree():
+			return
+		owner.voice_readiness = "loading"
+		var stream := await load_stream(owner, runtime_path, owner._cache, owner.preparation)
+		if not is_instance_valid(owner) or not owner.is_inside_tree() or not is_instance_valid(owner.voice):
+			return
+		if stream == null:
+			owner.voice_readiness = "failed"
+			return
+		if line_id != owner.voice_line_id:
+			owner.voice_readiness = "idle"
+			return
+		var channel := owner.runtime.line_sfx(origin)
+		if bool(channel.get("media_present", false)) and (bool(channel.loop) or not owner._opened_channels.has(origin)):
+			owner._opened_channels[origin] = true
+			start_player(owner, owner._channel, channel.runtime_path, channel.caption)
+		owner.voice.stream = stream
+		owner.voice.play()
+		owner.voice_readiness = "ready"
+		owner.voice_ready.emit(line_id)
+		owner._hold_streams()
+
+	static func start_player(owner: CampaignAudioDirector, player: AudioStreamPlayer, path: String, caption: String = "") -> void:
+		if not is_instance_valid(owner) or not owner.is_inside_tree():
+			return
+		var stream := await load_stream(owner, path, owner._cache, owner.preparation)
+		if stream == null or not is_instance_valid(owner) or not owner.is_inside_tree() or not is_instance_valid(player):
+			return
+		if player in owner._music and path != owner._music_path:
+			return
+		player.stream = stream
+		player.play()
+		owner._hold_streams()
+		owner._caption(caption)
+
+	static func load_stream(owner: Node, path: String, cache: Dictionary, prep: LoadPreparation) -> AudioStream:
+		if path.is_empty() or not is_instance_valid(owner) or not owner.is_inside_tree():
+			return null
+		if cache.has(path):
+			return cache[path]
+		if prep != null and prep.resources.has(path):
+			return prep.resources[path] as AudioStream
+		var stream: AudioStream = null
+		if ResourceLoader.has_cached(path):
+			stream = load(path) as AudioStream
+		elif ResourceLoader.load_threaded_request(path) == OK:
+			var tree := owner.get_tree()
+			while is_instance_valid(owner) and owner.is_inside_tree() and tree != null and ResourceLoader.load_threaded_get_status(path) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+				await tree.process_frame
+			if not is_instance_valid(owner) or not owner.is_inside_tree():
+				return null
+			if ResourceLoader.load_threaded_get_status(path) == ResourceLoader.THREAD_LOAD_LOADED:
+				stream = ResourceLoader.load_threaded_get(path) as AudioStream
+		if not is_instance_valid(owner) or not owner.is_inside_tree():
+			return null
+		if stream == null and ResourceLoader.exists(path):
+			stream = load(path) as AudioStream
+		if stream != null and is_instance_valid(owner):
+			cache[path] = stream
+		return stream
+
+
 ## Binds the plan source and the optional shared loader, and applies saved volumes.
 func setup(audio_runtime: CampaignAudioRuntime, prepared: LoadPreparation = null) -> void:
 	runtime = audio_runtime
@@ -144,8 +214,8 @@ func play_credits() -> void:
 func prefetch(scene_id: String, room_id: String) -> void:
 	if runtime == null:
 		return
-	for path in runtime.scene_media_paths(scene_id, room_id):
-		await _stream(path)
+	_StreamTask.prefetch_paths(self, runtime.scene_media_paths(scene_id, room_id))
+
 
 ## Current music duck in dB (0 when no one speaks).
 func music_duck_db() -> float:
@@ -227,24 +297,8 @@ func _set_music(path: String) -> void:
 	_start(next, path)
 
 func _start_voice() -> void:
-	var line_id := voice_line_id
-	voice_readiness = "loading"
-	var stream := await _stream(String(_voice_plan.get("runtime_path", "")))
-	if stream == null:
-		voice_readiness = "failed"
-		return
-	if line_id != voice_line_id:
-		voice_readiness = "idle"
-		return
-	var channel := runtime.line_sfx(_voice_origin)
-	if bool(channel.get("media_present", false)) and (bool(channel.loop) or not _opened_channels.has(_voice_origin)):
-		_opened_channels[_voice_origin] = true
-		_start(_channel, channel.runtime_path, channel.caption)
-	voice.stream = stream
-	voice.play()
-	voice_readiness = "ready"
-	voice_ready.emit(line_id)
-	_hold_streams()
+	_StreamTask.start_voice(self, voice_line_id, String(_voice_plan.get("runtime_path", "")), _voice_origin)
+
 
 func _stop_voice() -> void:
 	_voice_pending = false
@@ -271,15 +325,7 @@ func _play_oneshot(plan: Dictionary) -> void:
 	_start(player, plan.runtime_path, plan.caption)
 
 func _start(player: AudioStreamPlayer, path: String, caption: String = "") -> void:
-	var stream := await _stream(path)
-	if stream == null or not is_instance_valid(player):
-		return
-	if player in _music and path != _music_path:
-		return
-	player.stream = stream
-	player.play()
-	_hold_streams()
-	_caption(caption)
+	_StreamTask.start_player(self, player, path, caption)
 
 func _hold_streams() -> void:
 	voice.stream_paused = _cinematic or _paused
@@ -289,24 +335,8 @@ func _hold_streams() -> void:
 
 ## Threaded load shared with LoadPreparation's cache; never blocks a frame on decode.
 func _stream(path: String) -> AudioStream:
-	if path.is_empty():
-		return null
-	if _cache.has(path):
-		return _cache[path]
-	if preparation != null and preparation.resources.has(path):
-		return preparation.resources[path] as AudioStream
-	var stream: AudioStream = null
-	if ResourceLoader.has_cached(path):
-		stream = load(path) as AudioStream
-	elif ResourceLoader.load_threaded_request(path) == OK:
-		while ResourceLoader.load_threaded_get_status(path) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-			await get_tree().process_frame
-		stream = ResourceLoader.load_threaded_get(path) as AudioStream
-	if stream == null and ResourceLoader.exists(path):
-		stream = load(path) as AudioStream
-	if stream != null:
-		_cache[path] = stream
-	return stream
+	return await _StreamTask.load_stream(self, path, _cache, preparation)
+
 
 func _caption(text: String) -> void:
 	if text.is_empty():

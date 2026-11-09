@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "task": "M3-60",
+  "title": "The Moon you can walk: the region around the ridge on real terrain",
+  "about": "Walkable lunar region around Aurora Station and the Cold-Trap approach on the M1-36 LOLA terrain provider (TerrainStream). Covers LOC-06 (mast courtyard), LOC-07 (Expedition Zero annex exterior), LOC-08 (rover garage and landing apron), LOC-09 (cold-trap approach segments B1, B2, B3 and last bend) and LOC-10 (cold-trap vault shelf), plus the 7 places worth visiting from game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.1, each with its structured reason hook (job, clue, view or measurement).",
+  "sectors": {
+    "aurora_ridge": {
+      "region_id": "aurora_ridge",
+      "ephemeris_site": "aurora",
+      "horizon_site": "aurora",
+      "default_scene": "EX-CH04-S02",
+      "start_m": [0.0, -0.335, 5.0],
+      "description": "The Shackleton-de Gerlache connecting ridge around Aurora Station (8 x 8 km at 5 m/px, 64 km vista)."
+    },
+    "cold_trap": {
+      "region_id": "cold_trap",
+      "ephemeris_site": "cold_trap",
+      "horizon_site": "cold_trap",
+      "default_scene": "EX-CH04-S06",
+      "start_m": [-2.0, 1.564, 3.0],
+      "description": "The permanently shadowed cold-trap basin and approach road below the ridge (8 x 8 km at 5 m/px)."
+    }
+  },
+  "locations": {
+    "LOC-06": {
+      "id": "LOC-06",
+      "room_id": "LOC-06",
+      "segment": "",
+      "sector": "aurora_ridge",
+      "title": "Aurora Mast Courtyard",
+      "default_scene": "EX-CH01-S12",
+      "earth_scene": "EX-CH04-S09",
+      "origin_m": [0.0, 0.0, 0.0],
+      "yaw_deg": 0.0,
+      "player_spawn_local_m": [0.0, -0.335, 5.0],
+      "summary": "Aurora's exterior training courtyard with Alo's exterior chamber housing, the twin solar masts, dosimeter post, and route markers."
+    },
+    "LOC-07": {
+      "id": "LOC-07",
+      "room_id": "LOC-07",
+      "segment": "",
+      "sector": "aurora_ridge",
+      "title": "Expedition Zero Annex Exterior",
+      "default_scene": "EX-CH04-S02",
+      "earth_scene": "EX-CH04-S02",
+      "origin_m": [-18.0, -1.533, -14.0],
+      "yaw_deg": 25.0,
+      "player_spawn_local_m": [0.0, 0.0, 4.2],
+      "summary": "The sealed 2034 Expedition Zero lower service annex surface bulkhead, utility isolation feed, and 2034 survey datum on Aurora's south-west flank."
+    },
+    "LOC-08": {
+      "id": "LOC-08",
+      "room_id": "LOC-08",
+      "segment": "",
+      "sector": "aurora_ridge",
+      "title": "Rover Garage and Landing Apron",
+      "default_scene": "EX-CH04-S02",
+      "earth_scene": "EX-CH05-S01",
+      "origin_m": [17.801, -2.238, -77.994],
+      "yaw_deg": 127.14,
+      "player_spawn_local_m": [12.0, -1.4, 1.5],
+      "summary": "Aurora's rover shelter and regolith berm 80 m from the station at azimuth 150 deg, with the rover door opening onto the landing apron and cold-trap road."
+    },
+    "LOC-09_B1": {
+      "id": "LOC-09_B1",
+      "room_id": "LOC-09",
+      "segment": "B1",
+      "sector": "aurora_ridge",
+      "title": "Cold-Trap Road — Beacon 1 Corner (1.02 km)",
+      "default_scene": "EX-CH04-S04",
+      "earth_scene": "EX-CH04-S04",
+      "origin_m": [782.5, -14.897, -582.5],
+      "yaw_deg": -71.57,
+      "player_spawn_local_m": [-2.0, 0.0, 3.0],
+      "summary": "First blind ridge corner on the surveyed cold-trap road (1.02 km, slope 2 deg, sunlit at 08:00 UTC)."
+    },
+    "LOC-09_B2": {
+      "id": "LOC-09_B2",
+      "room_id": "LOC-09",
+      "segment": "B2",
+      "sector": "aurora_ridge",
+      "title": "Cold-Trap Road — Beacon 2 Corner (1.88 km)",
+      "default_scene": "EX-CH04-S04",
+      "earth_scene": "EX-CH04-S04",
+      "origin_m": [1422.5, -43.295, -1102.5],
+      "yaw_deg": -50.19,
+      "player_spawn_local_m": [-2.0, 0.0, 3.0],
+      "summary": "Second blind ridge corner on the surveyed cold-trap road (1.88 km, slope 6 deg, sunlit at 08:00 UTC)."
+    },
+    "LOC-09_B3": {
+      "id": "LOC-09_B3",
+      "room_id": "LOC-09",
+      "segment": "B3",
+      "sector": "cold_trap",
+      "title": "Cold-Trap Road — Beacon 3 Corner (5.24 km)",
+      "default_scene": "EX-CH04-S04",
+      "earth_scene": "EX-CH04-S04",
+      "origin_m": [-2840.0, 506.795, -680.0],
+      "yaw_deg": -90.0,
+      "player_spawn_local_m": [-2.0, 0.0, 3.0],
+      "summary": "Third blind corner descending into terrain shadow (5.24 km, slope 9 deg, lit by rover work lights)."
+    },
+    "LOC-09": {
+      "id": "LOC-09",
+      "room_id": "LOC-09",
+      "segment": "",
+      "sector": "cold_trap",
+      "title": "Cold-Trap Approach — Last Bend Sample Station (7.82 km)",
+      "default_scene": "EX-CH04-S05",
+      "earth_scene": "EX-CH04-S05",
+      "origin_m": [-620.0, 145.797, -1000.0],
+      "yaw_deg": 0.0,
+      "player_spawn_local_m": [-2.0, 0.0, 3.0],
+      "summary": "The last bend before the permanently shadowed basin, with the dry reference plate, calibrated ice scanner, and three sample stakes."
+    },
+    "LOC-10": {
+      "id": "LOC-10",
+      "room_id": "LOC-10",
+      "segment": "",
+      "sector": "cold_trap",
+      "title": "Cold-Trap Vault Shelf",
+      "default_scene": "EX-CH04-S06",
+      "earth_scene": "EX-CH04-S06",
+      "origin_m": [0.0, 1.269, 0.0],
+      "yaw_deg": 0.0,
+      "player_spawn_local_m": [-2.0, 0.0, 3.0],
+      "summary": "The 20 x 15 m shelf in permanent shadow holding 2034 Seed Vault V12, the unfaded 2034 marker, tether anchors, and crisp 2034 boot prints."
+    }
+  },
+  "places_worth_visiting": [
+    {
+      "id": "masts_and_solar_arrays",
+      "title": "Masts and Solar Arrays",
+      "sector": "aurora_ridge",
+      "location_id": "LOC-06",
+      "position_m": [-8.0, 0.19, -4.0],
+      "approach_m": [-6.5, -0.35, -2.5],
+      "reason_kind": "job",
+      "reason_hook": "job: inspect twin solar mast generation and clear electrostatic dust at the mast status panel",
+      "focus_target_id": "place_masts_and_solar_arrays",
+      "focus_label": "Twin solar masts and array status",
+      "verb": "Inspect"
+    },
+    {
+      "id": "landing_pad",
+      "title": "Landing Pad and Relief Apron",
+      "sector": "aurora_ridge",
+      "location_id": "LOC-08",
+      "position_m": [62.0, -4.55, -88.0],
+      "approach_m": [56.0, -4.35, -85.0],
+      "reason_kind": "job",
+      "reason_hook": "job: verify landing-pad approach beacon and relief-lander handover apron alignment",
+      "focus_target_id": "place_landing_pad",
+      "focus_label": "Landing pad approach beacon",
+      "verb": "Inspect"
+    },
+    {
+      "id": "expedition_zero_survey_markers",
+      "title": "Expedition Zero Survey Markers (2034)",
+      "sector": "aurora_ridge",
+      "location_id": "LOC-07",
+      "position_m": [-18.0, -1.533, -14.0],
+      "approach_m": [-16.2, -1.42, -10.5],
+      "reason_kind": "clue",
+      "reason_hook": "clue: read the 2034 N.R. survey datum tag and trace the sealed Expedition Zero annex utility bulkhead",
+      "focus_target_id": "place_expedition_zero_survey_markers",
+      "focus_label": "2034 Expedition Zero annex bulkhead and marker",
+      "verb": "Inspect"
+    },
+    {
+      "id": "boulder_field",
+      "title": "Ridge Ejecta Boulder Field",
+      "sector": "aurora_ridge",
+      "location_id": "LOC-06",
+      "position_m": [48.0, -2.15, -34.0],
+      "approach_m": [43.5, -1.95, -31.5],
+      "reason_kind": "measurement",
+      "reason_hook": "measurement: log ejecta boulder slope and regolith compaction stakes between the courtyard and Beacon 1",
+      "focus_target_id": "place_boulder_field",
+      "focus_label": "Ejecta boulder survey stake",
+      "verb": "Measure"
+    },
+    {
+      "id": "crater_rim_lookout",
+      "title": "Shackleton-de Gerlache Crater Rim Lookout",
+      "sector": "aurora_ridge",
+      "location_id": "LOC-06",
+      "position_m": [-36.0, -2.47, -32.0],
+      "approach_m": [-32.5, -2.18, -29.0],
+      "reason_kind": "view",
+      "reason_hook": "view: overlook the Shackleton basin shadow line and sight true-size Earth above the connecting ridge",
+      "focus_target_id": "place_crater_rim_lookout",
+      "focus_label": "Crater rim lookout and Earth sightline",
+      "verb": "Observe"
+    },
+    {
+      "id": "cold_trap_edge",
+      "title": "Cold-Trap Shadow Boundary and Sample Station",
+      "sector": "cold_trap",
+      "location_id": "LOC-09",
+      "position_m": [-624.0, 146.2, -1004.0],
+      "approach_m": [-622.0, 145.9, -997.0],
+      "reason_kind": "measurement",
+      "reason_hook": "measurement: calibrate the ice scanner on the dry reference plate and compare hydrogen stakes at the PSR edge",
+      "focus_target_id": "place_cold_trap_edge",
+      "focus_label": "Cold-trap boundary reference station",
+      "verb": "Measure"
+    },
+    {
+      "id": "relay_sites",
+      "title": "Ridge Line-of-Sight Relay and Beacon Site",
+      "sector": "aurora_ridge",
+      "location_id": "LOC-09_B1",
+      "position_m": [780.0, -14.8, -588.0],
+      "approach_m": [781.5, -14.85, -580.0],
+      "reason_kind": "job",
+      "reason_hook": "job: check line-of-sight relay repeater link margin and beacon mast status along the ridge corridor",
+      "focus_target_id": "place_relay_sites",
+      "focus_label": "Ridge relay repeater and beacon station",
+      "verb": "Use"
+    }
+  ]
+}
