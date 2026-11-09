@@ -1,0 +1,11 @@
+{
+  "source_commit": "cc4e18075dc999a2af300edea237cd6b971162b9",
+  "command": [
+    "C:/Program Files/Git/bin/bash.exe",
+    "game/tools/run_tests.sh",
+    "campaign_interaction_input"
+  ],
+  "start_utc_epoch": 1794215063.5691304,
+  "duration_seconds": 12.83,
+  "exit_code": 0
+}
