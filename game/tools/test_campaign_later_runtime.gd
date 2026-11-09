@@ -6,6 +6,7 @@ const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campa
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const Chapter2RouteScript = preload("res://scripts/missions/chapter2_route.gd")
 const SaveScript = preload("res://scripts/save/save_service.gd")
+const RoomContract = preload("res://scripts/world/room_contract.gd")
 
 var storage = preload("res://tools/support/isolated_storage.gd").new()
 
@@ -133,6 +134,18 @@ func _test_later_rooms_and_choices() -> void:
 			var step_res := _campaign.perform_target(step_id)
 			var expected_seg := "B2" if step_id == "p07_place_beacon_1" else "B3"
 			_check(bool(step_res.get("accepted", false)) and _campaign._room.terrain_segment == expected_seg and not String(step_res.get("cruise_time_card", "")).is_empty(), "M3-110 advances LOC-09 segment to " + expected_seg)
+
+	# M4-07: LOC-11 / LOC-12 in LoadPreparation.ROOM_SCENES, aboard movement lock, and graded Malapert summit terrain
+	_check(LoadPreparation.ROOM_SCENES.get("LOC-11", "") == "res://scenes/campaign/rooms/relay_road.tscn" and LoadPreparation.ROOM_SCENES.get("LOC-12", "") == "res://scenes/campaign/rooms/malapert_summit.tscn", "M4-07 LoadPreparation.ROOM_SCENES maps LOC-11 and LOC-12")
+	_check(bool(_campaign._start_extended("EX-CH08-S03").get("accepted", false)) and _campaign._room.room_id == "LOC-11" and _campaign._player.has_meta("aboard"), "M4-07 EX-CH08-S03 places player aboard the pressurised rover in LOC-11")
+	var start_pos := _campaign._player.global_position
+	Input.action_press("move_forward")
+	for i in 5:
+		_campaign._player._physics_process(1.0 / 60.0)
+	Input.action_release("move_forward")
+	_check(_campaign._player.global_position.distance_to(start_pos) < 0.001, "M4-07 aboard player does not walk out of the rover cabin on WASD")
+	_check(bool(_campaign._start_extended("EX-CH08-S08").get("accepted", false)) and _campaign._room.room_id == "LOC-12" and bool(RoomContract.terrain("LOC-12").get("omit_staging_floor", false)) and bool(RoomContract.terrain_lighting("LOC-12", "EX-CH08-S08").get("ready", false)) and bool(RoomContract.earth("LOC-12", "EX-CH08-S08").get("presented", false)), "M4-07 EX-CH08-S08 loads LOC-12 with ready graded Malapert summit terrain and dated Earth")
+
 
 func _invalid_path(value, path: String = "$", depth: int = 0) -> String:
 	if depth > 64:

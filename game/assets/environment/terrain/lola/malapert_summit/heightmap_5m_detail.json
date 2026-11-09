@@ -45,5 +45,12 @@
   "seed": 90979178,
   "law": "Trask (1966) / Gault (1970) equilibrium, N(>D) = 10^-1.1 D_km^-1.83 per km2; depth/diameter 0.04-0.16, rim 0.015-0.04 D"
  },
+ "graded_pad": {
+  "half_size_m": [16.5, 11.5],
+  "skirt_m": 15.0,
+  "yaw_deg": 2.335,
+  "level_offset_m": -0.3,
+  "about": "M4-07 (decision 1): the 30 x 20 m Malapert summit relay pad (inside the 32 x 22 m room bounds) cut level 0.3 m under the summit crown with a 15 m fill skirt into the 5 m LOLA detail ground."
+ },
  "about": "LOLA heightmap plus the authored sub-resolution crater layer (not NASA data at these scales); use for collision so it matches the tiles"
 }

@@ -7,6 +7,7 @@ class_name AssetGeometry
 # 28 holds the largest working set without evicting: the garden (12 with its dated plant
 # models) plus the power room (6) as the look-ahead, plus the five cast bodies and five EVA suits.
 const CACHE_LIMIT := 28
+const ANIM_BATCH_SIZE := 8
 static var _scenes: Dictionary = {}
 static var _recent: Array[String] = []
 static var pinned: Array[String] = []
@@ -54,14 +55,62 @@ static func prepare(path: String, tree: SceneTree) -> bool:
 		LoadTrace.steps.append({"step": "worker_mipmaps:" + path, "ms": state.get_meta("mipmaps_ms")})
 	# Node creation and packing always stay on the main thread.
 	await tree.process_frame
-	var stamp := LoadTrace.begin()
 	var document := state.get_meta("raw_document") as GLTFDocument
-	var root := document.generate_scene(state) as Node3D
-	LoadTrace.end("glb_generate_scene:" + path, stamp)
-	if root == null:
-		return false
+	var all_anims: Array[GLTFAnimation] = state.get_animations().duplicate()
+	var root: Node3D = null
+	if all_anims.size() <= ANIM_BATCH_SIZE:
+		var stamp := LoadTrace.begin()
+		root = document.generate_scene(state) as Node3D
+		LoadTrace.end("glb_generate_scene:" + path, stamp)
+		if root == null:
+			return false
+	else:
+		var orig_names: PackedStringArray = []
+		for n in state.get_nodes():
+			orig_names.append(n.original_name)
+		var empty_anims: Array[GLTFAnimation] = []
+		state.set_animations(empty_anims)
+		var stamp := LoadTrace.begin()
+		root = document.generate_scene(state) as Node3D
+		var max_step_ms := (Time.get_ticks_usec() - stamp) / 1000.0
+		if root == null:
+			LoadTrace.end("glb_generate_scene:" + path, stamp)
+			return false
+		var nodes := state.get_nodes()
+		for idx in nodes.size():
+			nodes[idx].mesh = -1
+		var lib := AnimationLibrary.new()
+		var offset := 0
+		while offset < all_anims.size():
+			await tree.process_frame
+			var batch_stamp := Time.get_ticks_usec()
+			state.set_unique_names([])
+			state.set_unique_animation_names([])
+			for sk in state.get_skeletons():
+				sk.unique_names = []
+			for idx in nodes.size():
+				nodes[idx].set_name(orig_names[idx])
+			var slice: Array[GLTFAnimation] = all_anims.slice(offset, mini(offset + ANIM_BATCH_SIZE, all_anims.size()))
+			state.set_animations(slice)
+			var temp_root := document.generate_scene(state) as Node3D
+			if temp_root != null:
+				var temp_ap := temp_root.find_children("*", "AnimationPlayer", true, false)
+				if not temp_ap.is_empty():
+					var temp_lib := (temp_ap[0] as AnimationPlayer).get_animation_library("")
+					for anim_name in temp_lib.get_animation_list():
+						lib.add_animation(anim_name, temp_lib.get_animation(anim_name))
+				temp_root.free()
+			max_step_ms = maxf(max_step_ms, (Time.get_ticks_usec() - batch_stamp) / 1000.0)
+			offset += ANIM_BATCH_SIZE
+		var ap := AnimationPlayer.new()
+		ap.name = "AnimationPlayer"
+		root.add_child(ap)
+		ap.owner = root
+		ap.add_animation_library("", lib)
+		if LoadTrace.enabled:
+			LoadTrace.steps.append({"step": "glb_generate_scene:" + path, "ms": max_step_ms})
 	await tree.process_frame
-	stamp = LoadTrace.begin()
+	var stamp := LoadTrace.begin()
 	var scene := PackedScene.new()
 	var error := scene.pack(root)
 	LoadTrace.end("glb_pack:" + path, stamp)

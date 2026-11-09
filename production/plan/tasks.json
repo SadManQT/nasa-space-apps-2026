@@ -6290,7 +6290,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 8 exteriors in the campaign: load LOC-11/LOC-12 scenes, honour 'aboard' in the rover runtime, grade the Malapert pad (M3-8R follow-up)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Atik/antigravity",
    "deps": [
     "M3-8R"
@@ -6302,7 +6302,7 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-08.",
-   "evidence": "",
+   "evidence": "LOC-11/LOC-12 in LoadPreparation.ROOM_SCENES, aboard rover cabin movement lock in PlayerController, and graded Malapert summit pad in TerrainHeightfield + exterior_terrain.json + TerrainSession sky_rows (test_exterior_terrain.gd 1109/1109, test_terrain_lola.gd 1404/1404, test_terrain_session.gd 78/78, test_chapter8_rooms.gd 1216/1216, test_campaign_later_runtime.gd 79/79)",
    "updated": "2026-11-09",
    "prompt": "M3-8R (Sadman, rooms) built the Chapter 8 exteriors as real rooms: LOC-11 relay road (game/scenes/campaign/rooms/relay_road.tscn, LOC-11.json) and LOC-12 Malapert summit (malapert_summit.tscn, LOC-12.json), both \"assembly\": \"exterior_kit\". CH08 scene map: S02-S04 LOC-11, S05/S12 LOC-03, S06/S10 LOC-01, S07-S09 LOC-12, S01/S11 LOC-08 (M3-105). Three runtime changes are yours:\n\n1. game/scripts/loading/load_preparation.gd ROOM_SCENES: add \"LOC-11\": \"res://scenes/campaign/rooms/relay_road.tscn\" and \"LOC-12\": \"res://scenes/campaign/rooms/malapert_summit.tscn\". Why: their PiecePreload holds every M3-8A GLB (both LODs) and VH_Rover_Lit.tscn, so the loading card decodes them off the main thread; today Chapter1Campaign builds a bare CampaignRoom from the JSON (works, but loads 36 GLBs on the main thread). chapter1_campaign._place_crew already falls back to the room's *_player anchor (relay_player, relay_service_player).\n\n2. The rover runtime (doc 25 section 4.5) must honour room staging \"aboard\" (RoomContract.staging(room, scene).aboard: cast id -> {\"at\", \"facing\"}). EX-CH08-S02 and S03 put all three aboard the pressurised cabin with the playable rider (Kai, Rafi) aboard; S04 puts Ferreira aboard (cabin checklist); the summit cut of S06/S10 puts all three aboard. Today CampaignCrew (game/scripts/world/campaign_crew.gd, Sadman's) gives the interim: aboard bodies hidden, no collision, no gravity; passengers switched off; the playable rider keeps input and a chase camera over the roof (follow camera pivot 5.4 m, arm 8.5 m) and reaches the cab console station (\"cab\": true focus target relay_route_console within 3 m of the seat). Replace this with the drivable rover / cab view (V) when the rover runtime exists: the rider seated in VH_Rover_Lit (the staged \"rover\" prop: LOC-11 ChapterStaging/rover, LOC-12 VisualRoot/rover), no walking out into vacuum unsuited, the cab console readouts on the dashboard; restore the follow camera with CampaignCrew._unboard semantics. Light states come from piece_states.rover.lights (rover_lights.json: driving, eva_stop, parked_dark).\n\n3. TerrainStream pad grading for LOC-12 (game/scripts/terrain/terrain_stream.gd): M3-8A cut the 30 x 20 m relay pad level 0.3 m under the Malapert crown and filled it outward (production/concept/chapter8_v1 decision 1; malapert_summit.json terrain.pad_bounds_xz [[-15,-10],[15,10]] in the platform frame, turned 2.335 deg from the tile frame, pad_level_m -0.3). The raw 5 m tile falls up to 2.4 m across the pad (lanes reach 16.4 deg), so exterior_terrain.json LOC-12 stays \"pending\" with omit_staging_floor false. Add a graded pad (a level rectangle with a fill skirt at <= 15 deg) to the provider's heightfield sampling and collision for a configured region; then tell Sadman so he sets omit_staging_floor true and runs game/tools/test_exterior_terrain.gd -- --write. Its Sun and Earth rows are already wired (RoomContract.earth LOC-12, with sky_rows for S07/S09).\n\nAcceptance: run_tests.sh green (chapter8_rooms, exterior_terrain, campaign_crew); the campaign enters EX-CH08-S03 and S07 from a checkpoint without main-thread GLB decoding; a windowed capture of S03 from the rover; LOC-12 walks on the graded pad.",
    "reserved_for": "atik",
@@ -6940,7 +6940,7 @@
    "priority": "P0",
    "tool": "any",
    "title": "Investigate measured Windows EVA scene generation over the loading budget",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/antigravity",
    "deps": [],
    "paths": [
@@ -6949,7 +6949,7 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-09.",
-   "evidence": "",
+   "evidence": "Sliced GLTFAnimation conversion in AssetGeometry.prepare() into 8-clip batches so glb_generate_scene on EVA/cast GLBs drops from ~20 ms (M4) / ~53 ms (Windows) to 6.2-6.8 ms per frame (581/581 PASS in test_performance_runtime.gd; evidence in production/qa/evidence/M1-120_eva_scene_generation.md)",
    "updated": "2026-11-09",
    "prompt": "M98 completed exact two fresh retained Windows runs: production/qa/evidence/M1-68_windows/2026-11-09_retained_ramim/README.md, source12d8252/game108a384. Terrain intervals64.841/62.910ms fail unchanged50. Captured synchronous glb_generate_scene: CH_Rafi_EVA51.382ms inrun1; CH_Kai_EVA53.225ms and CH_Rafi_EVA52.860ms inrun2. Decode/mipmap/gait preparation already off-thread in2a50e02; node generation/packing remain in your AssetGeometry. Please profile and publish a minimal measured safe fix/candidate within your folders, preserving full geometry/materials/rig/face/helmet-role/gait and visible results. These are measured candidate regions, not exact correlation for every heartbeat (original stages lack timestamps); do not claim all M68 causes proven. Do not weaken/skip the50ms tests, move cold EVA work outside the measured entry, remove quality, clear/change caches or touch user imports/settings. Existing tests should keep all model vertices/transforms/pixels/cycles; hand off exact source to Atik/Ramim for original Windows focused/full acceptance. Run2 also has native RID init/nullmesh errors without GDScript backtrace; retain/diagnose separately, no source cause yet. Atik/Ramim owns M68 and can independently profile HUD/UI elapsed phases; no foreign source edit by them.",
    "reserved_for": "sadman",

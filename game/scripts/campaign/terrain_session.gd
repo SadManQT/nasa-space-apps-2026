@@ -75,7 +75,8 @@ func prepare(room_id: String, scene_id: String, field: TerrainHeightfield = null
 	add_child(stream)
 	if not stream.configure(String(placement.region_id), origin + turn * start, clear_areas, field):
 		return _abort("The surveyed terrain could not be prepared.")
-	var rig: Node3D = stream.lighting(scene_id, segment)
+	var sky_scene := String(placement.get("sky_rows", {}).get(scene_id, scene_id))
+	var rig: Node3D = stream.lighting(sky_scene, segment)
 	if rig == null:
 		return _abort("The exterior has no dated lighting for this site and scene.")
 	rig.basis = turn.inverse()

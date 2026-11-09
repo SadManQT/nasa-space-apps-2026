@@ -25,6 +25,7 @@ var z_min_m: float = 0.0
 var z_max_m: float = 0.0
 var site: Dictionary = {}
 var meta: Dictionary = {}
+var graded_pad: Dictionary = {}
 ## True when Godot Y includes the curvature drop (every kind in CURVED_KINDS).
 var curved: bool = false
 ## Absolute heights in metres above the 1,737.4 km sphere, row-major, top row first.
@@ -61,6 +62,7 @@ static func load_meta(meta_path: String) -> TerrainHeightfield:
 	hf.z_min_m = float(hf.meta.get("z_min_m", 0.0))
 	hf.z_max_m = float(hf.meta.get("z_max_m", 0.0))
 	hf.site = hf.meta.get("site", {})
+	hf.graded_pad = hf.meta.get("graded_pad", {})
 	hf.curved = String(hf.meta.get("kind", "")) in CURVED_KINDS
 	var raw_path := meta_path.get_basename() + ".r16"
 	var file := FileAccess.open(raw_path, FileAccess.READ)
@@ -109,7 +111,29 @@ func elevation_at(x: float, z: float) -> float:
 	var h10 := height_px(c0 + 1, r0)
 	var h01 := height_px(c0, r0 + 1)
 	var h11 := height_px(c0 + 1, r0 + 1)
-	return lerpf(lerpf(h00, h10, tc), lerpf(h01, h11, tc), tr)
+	var raw := lerpf(lerpf(h00, h10, tc), lerpf(h01, h11, tc), tr)
+	if graded_pad.is_empty():
+		return raw
+	return _apply_graded_pad(x, z, raw)
+
+
+func _apply_graded_pad(x: float, z: float, raw_elevation: float) -> float:
+	var half: Array = graded_pad.get("half_size_m", [15.0, 10.0])
+	var skirt := maxf(float(graded_pad.get("skirt_m", 10.0)), 0.001)
+	var yaw := deg_to_rad(float(graded_pad.get("yaw_deg", 0.0)))
+	var c := cos(yaw)
+	var s := sin(yaw)
+	var px := absf(x * c - z * s) - float(half[0])
+	var pz := absf(x * s + z * c) - float(half[1])
+	var dist := Vector2(maxf(px, 0.0), maxf(pz, 0.0)).length()
+	if dist >= skirt:
+		return raw_elevation
+	var pad_elev := float(site.get("height_m", 0.0)) + float(graded_pad.get("level_offset_m", -0.3)) + (curvature_drop(x, z) if curved else 0.0)
+	if dist <= 0.0:
+		return pad_elev
+	var t := clampf(dist / skirt, 0.0, 1.0)
+	var w := t * t * (3.0 - 2.0 * t)
+	return lerpf(pad_elev, raw_elevation, w)
 
 
 ## True local slope in degrees at Godot (x, z) (against the local vertical, so curvature does not
@@ -145,9 +169,11 @@ func to_height_map_shape() -> HeightMapShape3D:
 		var z := (float(row) - sr) * metres_per_pixel
 		for col in columns:
 			var i := row * columns + col
-			data[i] = heights[i] - site_h
+			var x := (float(col) - sc) * metres_per_pixel
+			var elev := heights[i] if graded_pad.is_empty() else _apply_graded_pad(x, z, heights[i])
+			data[i] = elev - site_h
 			if curved:
-				data[i] -= curvature_drop((float(col) - sc) * metres_per_pixel, z)
+				data[i] -= curvature_drop(x, z)
 	shape.map_data = data
 	return shape
 

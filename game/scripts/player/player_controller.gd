@@ -178,6 +178,21 @@ func _physics_process(delta: float) -> void:
 		_update_gaze(delta)
 		animation.skeleton.advance(delta)
 		return
+	if has_meta("aboard"):
+		desired_speed = 0.0
+		_speed = 0.0
+		_speed_derivative = 0.0
+		horizontal_speed = 0.0
+		velocity = Vector3.ZERO
+		animation.advance(delta, 0.0)
+		pose_modifier.feet_enabled = false
+		pose_modifier.lean_enabled = false
+		_update_gaze(delta)
+		animation.skeleton.advance(delta)
+		follow_camera.update_camera(delta, _yaw, 0.0)
+		if generic_interaction_input and Input.is_action_just_pressed("interact"):
+			interact()
+		return
 	var input := Input.get_vector("move_left", "move_right", "move_forward", "move_back", 0.15)
 	var stick := Vector2.ZERO
 	if _movement_device >= 0:

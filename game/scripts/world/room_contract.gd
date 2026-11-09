@@ -600,6 +600,9 @@ static func work_lights(room_id: String) -> Dictionary:
 static func terrain_lighting(room_id: String, scene_id: String, segment: String = "") -> Dictionary:
 	var place := terrain(room_id, segment)
 	var row := Heightfield.scene_lighting(scene_id, segment)
+	var alias := String(place.get("sky_rows", {}).get(scene_id, ""))
+	if row.is_empty() and not alias.is_empty():
+		row = Heightfield.scene_lighting(alias, segment)
 	var work := work_lights(room_id)
 	var result := {"ready": false, "room_id": room_id, "scene_id": scene_id, "segment": segment, "sun_state": String(row.get("sun_state", "")),
 		"work_lights": TerrainWorkLights.lamp_ids(work, scene_id), "asset_paths": work_light_asset_paths(room_id)}
