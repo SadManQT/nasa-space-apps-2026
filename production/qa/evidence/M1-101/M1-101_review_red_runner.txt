@@ -1,0 +1,4 @@
+FAIL tools/test_hud_world_lifetime.gd :: exit 1 :: HUD WORLD LIFETIME RESULT: FAIL (13 checks, 1 failures)
+       FAIL: detached real focus-root child never displays a nearby prompt
+       HUD WORLD LIFETIME RESULT: FAIL (13 checks, 1 failures)
+0/1 suites passed

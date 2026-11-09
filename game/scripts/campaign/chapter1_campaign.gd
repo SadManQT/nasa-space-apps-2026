@@ -316,6 +316,7 @@ func nearby_target() -> Dictionary:
 		return {}
 	var camera := _player.follow_camera.camera
 	var flags: Dictionary = route.current_flags() if route.has_method("current_flags") else route.gate_status().get("physical_flags", {})
+	var prerequisites: Dictionary = route._context_flags() if route.has_method("_context_flags") else flags
 	var director_receipts: Dictionary = director._state.get("receipts", {}) if "_state" in director else director.snapshot().get("receipts", {})
 	var p01_receipts: Variant = null
 	var closest: Dictionary = {}
@@ -327,7 +328,7 @@ func nearby_target() -> Dictionary:
 			continue
 		var missing := false
 		for flag in spec.get("required_flags", []):
-			if not bool(flags.get(flag, false)):
+			if not bool(prerequisites.get(flag, false)):
 				missing = true
 		if missing:
 			continue
@@ -470,6 +471,22 @@ func _start_extended(scene_id: String) -> Dictionary:
 	_refresh_world()
 	started["chapter_started"] = String(scene_id.substr(3, 4))
 	return started
+
+## Inbox writes use the bounded Director API and the existing checkpoint store.
+func message_metadata() -> Dictionary:
+	return director.message_metadata() if director != null else {"delivered_ids": [], "read_ids": []}
+
+func update_message_metadata(metadata: Dictionary) -> Dictionary:
+	if director == null or route == null or save_service == null or not _startup_error.is_empty():
+		return {"accepted": false, "persisted": false, "reason": "The expedition is not ready to save messages."}
+	var result := director.update_message_metadata(metadata)
+	result["persisted"] = false
+	if bool(result.get("accepted", false)):
+		var saved := _save_campaign()
+		result["persisted"] = bool(saved.get("accepted", false))
+		if not result.persisted:
+			result["reason"] = "Messages remain available in this game, but could not be saved. " + String(saved.get("reason", "Try Save again."))
+	return result
 
 func save_campaign() -> Dictionary:
 	var result := _save_campaign()

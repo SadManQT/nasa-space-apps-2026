@@ -1,0 +1,7 @@
+FAIL tools/test_p01_nearby.gd :: exit 1 :: P01 NEARBY RESULT: FAIL (29 checks, 4 failures)
+       FAIL: previous-scene scan makes nearby planting eligible: plant_alo
+       FAIL: nearby USE requests the chosen-input panel exactly once: plant_alo
+       FAIL: previous-scene scan makes nearby planting eligible: plant_tara
+       FAIL: nearby USE requests the chosen-input panel exactly once: plant_tara
+       P01 NEARBY RESULT: FAIL (29 checks, 4 failures)
+0/1 suites passed

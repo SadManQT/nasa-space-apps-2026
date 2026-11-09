@@ -1,5 +1,6 @@
 {
-  "contract_version": 1,
+  "contract_version": 2,
+  "labels": {"alo": "EXTERNAL_TEST", "tara": "INDOOR_REFERENCE"},
   "references": {
     "dry": {"raw": 10, "calibrated": 0},
     "wet": {"raw": 110, "calibrated": 100}

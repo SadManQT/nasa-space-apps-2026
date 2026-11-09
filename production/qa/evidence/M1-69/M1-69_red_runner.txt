@@ -1,0 +1,4 @@
+FAIL tools/test_campaign_messages.gd :: exit 1 :: CAMPAIGN MESSAGES RESULT: FAIL (1 checks, 1 failures)
+       FAIL: the campaign exposes bounded persisted message updates
+       CAMPAIGN MESSAGES RESULT: FAIL (1 checks, 1 failures)
+0/1 suites passed

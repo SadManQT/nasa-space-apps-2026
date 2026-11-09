@@ -1,6 +1,8 @@
 # M1-65: Chapter 1 first-impressions QA
 
-**Updated 8 November 2026 - Tanvir/Codex - BLOCKED: partial human report received; full session acceptance remains incomplete.**
+**Updated 9 November 2026 - Tanvir/Codex - BLOCKED at the dry-zero interaction; partial human evidence is recorded.**
+
+On 9 November Tanvir supplied a screenshot of the active dry-zero goal/E prompt with no visible calibration panel and reported that E produces a low/seated-looking pose without progress. [The blocker report](T01_2026-11-09_blocker.md) records the screenshot contents and the missing production P-01 panel hookup on both inspected main revisions. A separate generic E/Inspect path is a source-backed lead for the pose, not a confirmed clip diagnosis. Ramim M1-08 and Atik M1-107 now carry this P0 progression blocker; no gameplay repair is claimed.
 
 On 8 November Tanvir reported approximately 10 minutes of actual play. The [T01 self-report](T01_2026-11-08.md) records abrupt/contextless dialogue, unclear tasks and reasons, an unexplained seated transition, a suffocating/confusing interface, weak action/consequence understanding, and a request for physical retrieval/placement. The art received strong positive feedback. Follow-up: the intro played and Tanvir watched it; the seated interaction involved Mei being supposed to place the zero on the table. Source inspection points to the dry-zero probe-calibration task as a likely lead, not a reproduced trigger. Existing Ramim tasks M1-18/M1-31 and new Atik requests M1-107/M1-108 carry these findings. No exact task, screenshots, per-event times, actual build/settings or fresh-player sessions are confirmed; the AI did not observe the run. M1-65 remains incomplete.
 

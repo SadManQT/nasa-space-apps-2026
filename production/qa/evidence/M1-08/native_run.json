@@ -1,0 +1,195 @@
+{
+  "source": "46398b4c5eb576dbb65880368b6d845356c562d0",
+  "game_tree": "6abf391fedf8b0b63141e9d683eac7ec199e18f6",
+  "script": "capture_p01_panel",
+  "start": 1794209666.8214116,
+  "relevant_loaded_inputs": {
+    "game/tools/capture_p01_panel.gd": "f4e5909518884a08c509183144db5d1aa35a1d28dc8c237d04215142dcb6ae21",
+    "game/scripts/ui/p01_panel.gd": "8993fca060def474095049a4636cce613e446bb1a4a273415d557cca6ccea34a",
+    "game/scripts/ui/chapter1_campaign_hud.gd": "b59e835d12f468e2fb55b4be91dbaa3f615b2d19703be88d0caab35911b3f318",
+    "game/scripts/campaign/chapter1_campaign.gd": "34c2a781aa3f1830d263318b654f1613fa800ec899620fe0aa1bb2dbbee0e530",
+    "game/scripts/missions/campaign_route.gd": "c2b13000de13bdc4ff87f2684c70652031419dafed22e33305244d0e5eb29a68",
+    "game/scripts/missions/chapter1_route.gd": "a8d6a30a4c4dae11a4a570861328bc7581024308157ef1daf757a99978d4fbda",
+    "game/scripts/missions/p01_commission_plant.gd": "04e788e35929359757e8191e515e719f583fa8b6568e29378681abf398d7a6a6",
+    "game/scripts/ui/ui_design.gd": "4e836496899f434cebbb3112fb8b52bf037c643058be5f7300024b9826b859b5",
+    "game/scripts/ui/ui_kit.gd": "4615b44285a814e24cf5bcd0823a6765882533ae3c90ec3884876cc72d9ec7b9",
+    "game/scripts/ui/hint_player.gd": "c95e43ef1978dbb9da589b11de06c2a7e3c15c2315c1bbfb9699d2afcbd7283f",
+    "game/resources/ui/ui_design.json": "003fe163995f51ea81255643004c2c780927047bc236de2c55e6f875b99a9377",
+    "game/resources/campaign/profiles/p01_commission_plant.json": "5b499ddc254cdfabf4a2012c9dedf798d7b2e46f0b2e975b37fa1e7024e82538"
+  },
+  "scope": "Windowed Forward+; real engine-injected keyboard/mouse/controller events, no hardware-controller or human-playtest claim; existing import/render caches retained.",
+  "exit_code": 0,
+  "end": 1794209698.7090673,
+  "captures": {
+    "production\\qa\\evidence\\M1-08_calibration_confirm.png": {
+      "sha256": "b32e36fde8e99a39ec03cdab3f6384b2c7f29360b989ae5ab23d243de0a33fee",
+      "mtime": 1794209686.8984344,
+      "bytes": 372617
+    },
+    "production\\qa\\evidence\\M1-08_calibration_confirm_150.png": {
+      "sha256": "b0182e7725f18362ee52a54b521ce365b51771248d125b1072efb55b5b769e8d",
+      "mtime": 1794209688.080094,
+      "bytes": 345585
+    },
+    "production\\qa\\evidence\\M1-08_calibration_observed_150.png": {
+      "sha256": "0ac8586cc630c74cfc1cbfa17f6c9e8dd493b227202efec0fd6f84298958f55d",
+      "mtime": 1794209688.6365588,
+      "bytes": 393768
+    },
+    "production\\qa\\evidence\\M1-08_calibration_prediction.png": {
+      "sha256": "db3b228d1a138a7c6368057b95b589708ab94e278c6bfda6bc2f5b0789a13762",
+      "mtime": 1794209684.6730754,
+      "bytes": 361668
+    },
+    "production\\qa\\evidence\\M1-08_calibration_prediction_150.png": {
+      "sha256": "06fafdc562d6fa11d078adf6b67c4ab53099540deb730d5983c0786800d6ee47",
+      "mtime": 1794209687.2822552,
+      "bytes": 335282
+    },
+    "production\\qa\\evidence\\M1-08_calibration_retry.png": {
+      "sha256": "1d710db089a3ad4bd3417bc1bce8e98d1096fe3a79dfd2c07bae252e9b369ad7",
+      "mtime": 1794209684.0443633,
+      "bytes": 349340
+    },
+    "production\\qa\\evidence\\M1-08_calibration_unset.png": {
+      "sha256": "6bee57180a229adf97c8f881d5ba4436ea260f33445f2a13c6c702a3104931f1",
+      "mtime": 1794209683.3530035,
+      "bytes": 352272
+    },
+    "production\\qa\\evidence\\M1-08_data_cards.png": {
+      "sha256": "4c6609783481af199ce70c0bf9ded5e766a74779dcda73f8539a76ae38d5bd71",
+      "mtime": 1794209686.511438,
+      "bytes": 101138
+    },
+    "production\\qa\\evidence\\M1-08_discard_150.png": {
+      "sha256": "b3dfbb597f2a69aafd03310b8da48686a2a59307d4448dfd24b64c0cf4ebe798",
+      "mtime": 1794209687.6729176,
+      "bytes": 352022
+    },
+    "production\\qa\\evidence\\M1-08_first_use.png": {
+      "sha256": "c547afac982c250ff78c193e8b3359d1f5472308a19d70a3f61e995bef3d3b05",
+      "mtime": 1794209683.0807688,
+      "bytes": 593223
+    },
+    "production\\qa\\evidence\\M1-08_hint_1.png": {
+      "sha256": "1206aa2efacce6b912453ba0bac63ca8adf3d1d3e7b0454d33f4a7c8b6aee2d5",
+      "mtime": 1794209685.1853683,
+      "bytes": 696676
+    },
+    "production\\qa\\evidence\\M1-08_hint_2.png": {
+      "sha256": "0de0295816b45840cb8126f4e968b6faa1d9958ec190b5402c81e2474f99fa18",
+      "mtime": 1794209685.6679225,
+      "bytes": 583313
+    },
+    "production\\qa\\evidence\\M1-08_hint_3.png": {
+      "sha256": "953ca62e855e0ca2acffd338fd09329a1e848f2c376284d9b90aa79c96065b5f",
+      "mtime": 1794209686.1581843,
+      "bytes": 572589
+    },
+    "production\\qa\\evidence\\M1-08_inspect_packet.png": {
+      "sha256": "622dd68c5a665745f8ba32737b03109b08360cc75b5ee62c957e6054f6f9f499",
+      "mtime": 1794209689.8153758,
+      "bytes": 371427
+    },
+    "production\\qa\\evidence\\M1-08_inspect_packet_observed.png": {
+      "sha256": "e415e19e390325fc9a21e8b611efea1af3375b45b832b6ba824f3429d1b967bc",
+      "mtime": 1794209690.2769327,
+      "bytes": 364366
+    },
+    "production\\qa\\evidence\\M1-08_label_alo.png": {
+      "sha256": "b07c25f67d3dfa2ab14f1e9ab7a0d1aebbb9319334f113e3a1971e9d4e3b9179",
+      "mtime": 1794209695.023466,
+      "bytes": 83187
+    },
+    "production\\qa\\evidence\\M1-08_label_alo_150.png": {
+      "sha256": "bbe5e2c7fdac6160ba6f5c22a1d2a5926cc4ece3997e7e5c30d88a823459b3b6",
+      "mtime": 1794209695.2644634,
+      "bytes": 97321
+    },
+    "production\\qa\\evidence\\M1-08_label_alo_observed.png": {
+      "sha256": "44c55b6b9c1cc442fba21db6c10836a8838f22cafa02b4f4bfd5ba963ea69a06",
+      "mtime": 1794209695.683215,
+      "bytes": 80733
+    },
+    "production\\qa\\evidence\\M1-08_label_alo_wrong.png": {
+      "sha256": "ab21d4b6bc48976aece67f3f0955dd2f152e384926f1d0b123994628b705910b",
+      "mtime": 1794209694.6835885,
+      "bytes": 85628
+    },
+    "production\\qa\\evidence\\M1-08_label_tara.png": {
+      "sha256": "007252746412bd33ab0d792502b05e65f375d84be2cbc90d81266a192d955b38",
+      "mtime": 1794209696.382929,
+      "bytes": 89123
+    },
+    "production\\qa\\evidence\\M1-08_label_tara_observed.png": {
+      "sha256": "69ea37b8de1c7ebd2211574b658b8ea9dada021d520adf35cfa612f8250d7fe1",
+      "mtime": 1794209696.8226957,
+      "bytes": 85955
+    },
+    "production\\qa\\evidence\\M1-08_label_tara_wrong.png": {
+      "sha256": "f1708748c7a998f672afb886bbc93303b4f0b6f596d1b9b0cf2a15e7d6c502d2",
+      "mtime": 1794209696.0535636,
+      "bytes": 90434
+    },
+    "production\\qa\\evidence\\M1-08_plant_alo.png": {
+      "sha256": "3d566f9bdf3fbdf0ecc928466f015c8490d3f2457f89b6101a36a244dbc7d28c",
+      "mtime": 1794209691.8721678,
+      "bytes": 82866
+    },
+    "production\\qa\\evidence\\M1-08_plant_alo_150.png": {
+      "sha256": "0fb7953b6da920bf3afba1f5f677affd52e14fbadb7241f929c45b7676e116fc",
+      "mtime": 1794209692.1435044,
+      "bytes": 88264
+    },
+    "production\\qa\\evidence\\M1-08_plant_tara.png": {
+      "sha256": "229d2dfe5906c699fb2a4dbea97cc58d9c8e0ed7ff0b30a20b85dab44afca741",
+      "mtime": 1794209692.6126688,
+      "bytes": 86943
+    },
+    "production\\qa\\evidence\\M1-08_recheck_probe.png": {
+      "sha256": "53a59abd421251c51ad415eeaa15dec58417af563d805ffa7ac510593c8847b1",
+      "mtime": 1794209689.365064,
+      "bytes": 369336
+    },
+    "production\\qa\\evidence\\M1-08_seal_alo.png": {
+      "sha256": "9242c1ba6124160fdbdcef31d5be9fd6bfcafd27dacde520dbd2b53584ceb99b",
+      "mtime": 1794209697.0827923,
+      "bytes": 76616
+    },
+    "production\\qa\\evidence\\M1-08_seal_alo_150.png": {
+      "sha256": "eee118d1207dce30c4ad6c045451be068252d4ee40ae2c7a5cdde18ddaf3ac26",
+      "mtime": 1794209697.3337462,
+      "bytes": 99693
+    },
+    "production\\qa\\evidence\\M1-08_seal_tara.png": {
+      "sha256": "af6434f08bd7d7ab0bb3fbfd4a29276837f56b5c75f5c267b60d5ec881a85362",
+      "mtime": 1794209697.7629793,
+      "bytes": 83297
+    },
+    "production\\qa\\evidence\\M1-08_span_probe.png": {
+      "sha256": "7cbc7da07653291c097f33f821337a7817c73812753c283bd4614d36ca3dce0e",
+      "mtime": 1794209688.8952107,
+      "bytes": 362941
+    },
+    "production\\qa\\evidence\\M1-08_water_alo.png": {
+      "sha256": "ab83f24d40bb8f6c31c5cdede9e7a17b0e98a18b6846cd04036810cfa33128b6",
+      "mtime": 1794209693.294222,
+      "bytes": 87128
+    },
+    "production\\qa\\evidence\\M1-08_water_alo_150.png": {
+      "sha256": "90ab06f7fafd1081389428d480ae635f9b2e4d9d6557a9ee67d6da50e2b87247",
+      "mtime": 1794209693.5538013,
+      "bytes": 97221
+    },
+    "production\\qa\\evidence\\M1-08_water_retry.png": {
+      "sha256": "ec08b1691c13fc9dd71d4d16ac0f077da385cabade4efaa4da928a7ff4e65394",
+      "mtime": 1794209693.0345528,
+      "bytes": 82907
+    },
+    "production\\qa\\evidence\\M1-08_water_tara.png": {
+      "sha256": "e2814935989b433b63201e39cde867de8533db9546586a37b8980553bd62cd57",
+      "mtime": 1794209693.972887,
+      "bytes": 88294
+    }
+  }
+}

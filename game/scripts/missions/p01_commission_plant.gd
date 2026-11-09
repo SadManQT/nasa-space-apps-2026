@@ -158,15 +158,17 @@ func _validate(action: String, payload: Dictionary) -> Dictionary:
 			if action == "water_tara" and int(_state.cassette_tara_seed_count) != 1: return _reject("Place one seed in the Tara cassette first.")
 		"label_alo_external":
 			if int(_state.cassette_alo_seed_count) != 1 or not _in_band(float(_state.moisture_alo)): return _reject("Alo must have one seed and calibrated moisture before labeling.")
+			if not payload.get("label") is String or payload.label != _profile.labels.alo: return _reject("Alo grows in the outer chamber. Choose the External test label.")
 			if not String(_state.alo_label).is_empty(): return _reject("The Alo cassette already has a label.")
 		"label_tara_indoor":
 			if int(_state.cassette_tara_seed_count) != 1 or not _in_band(float(_state.moisture_tara)): return _reject("Tara must have one seed and calibrated moisture before labeling.")
+			if not payload.get("label") is String or payload.label != _profile.labels.tara: return _reject("Tara stays indoors for comparison. Choose the Indoor reference label.")
 			if not String(_state.tara_label).is_empty(): return _reject("The Tara cassette already has a label.")
 		"seal_alo":
-			if String(_state.alo_label) != "EXTERNAL_TEST": return _reject("Label Alo EXTERNAL TEST before sealing.")
+			if String(_state.alo_label) != _profile.labels.alo: return _reject("Label Alo EXTERNAL TEST before sealing.")
 			if bool(_state.alo_sealed): return _reject("The Alo seal is already closed.")
 		"seal_tara":
-			if String(_state.tara_label) != "INDOOR_REFERENCE": return _reject("Label Tara INDOOR REFERENCE before sealing.")
+			if String(_state.tara_label) != _profile.labels.tara: return _reject("Label Tara INDOOR REFERENCE before sealing.")
 			if bool(_state.tara_sealed): return _reject("The Tara seal is already closed.")
 	return {"accepted": true}
 
@@ -180,8 +182,8 @@ func _apply_to(target: Dictionary, action: String, payload: Dictionary) -> void:
 		"plant_tara": target["cassette_tara_seed_count"] = 1
 		"water_alo": target["moisture_alo"] = float(payload.moisture)
 		"water_tara": target["moisture_tara"] = float(payload.moisture)
-		"label_alo_external": target["alo_label"] = "EXTERNAL_TEST"
-		"label_tara_indoor": target["tara_label"] = "INDOOR_REFERENCE"
+		"label_alo_external": target["alo_label"] = String(payload.label)
+		"label_tara_indoor": target["tara_label"] = String(payload.label)
 		"seal_alo": target["alo_sealed"] = true
 		"seal_tara": target["tara_sealed"] = true
 
@@ -202,7 +204,7 @@ func _is_action_done(action: String) -> bool:
 	return false
 
 func _is_complete(state: Dictionary) -> bool:
-	return bool(state.get("probe_rechecked", false)) and bool(state.get("packet_scanned", false)) and int(state.get("cassette_alo_seed_count", 0)) == 1 and int(state.get("cassette_tara_seed_count", 0)) == 1 and _in_band(float(state.get("moisture_alo", 0))) and _in_band(float(state.get("moisture_tara", 0))) and String(state.get("alo_label", "")) == "EXTERNAL_TEST" and String(state.get("tara_label", "")) == "INDOOR_REFERENCE" and bool(state.get("alo_sealed", false)) and bool(state.get("tara_sealed", false))
+	return bool(state.get("probe_rechecked", false)) and bool(state.get("packet_scanned", false)) and int(state.get("cassette_alo_seed_count", 0)) == 1 and int(state.get("cassette_tara_seed_count", 0)) == 1 and _in_band(float(state.get("moisture_alo", 0))) and _in_band(float(state.get("moisture_tara", 0))) and String(state.get("alo_label", "")) == _profile.labels.alo and String(state.get("tara_label", "")) == _profile.labels.tara and bool(state.get("alo_sealed", false)) and bool(state.get("tara_sealed", false))
 
 func _in_band(value: float) -> bool:
 	return value >= float(_profile.moisture_min) and value <= float(_profile.moisture_max)

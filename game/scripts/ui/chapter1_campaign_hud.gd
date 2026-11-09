@@ -13,12 +13,14 @@ class_name Chapter1CampaignHUD
 const Outpost = preload("res://scripts/ui/outpost_status.gd")
 const PANELS_SCENE: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
 const MISSION_TABLE_SCENE: PackedScene = preload("res://scenes/ui/mission_table_panel.tscn")
+const P01_SCENE: PackedScene = preload("res://scenes/ui/p01_panel.tscn")
 const Debrief = preload("res://scripts/debrief/chapter1_debrief.gd")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
 
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
 var mission_table: MissionTablePanel
+var p01_panel: P01Panel
 var outpost: OutpostStatus
 
 # Goal card
@@ -157,6 +159,25 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table.closed.connect(func(_target: String) -> void: _on_panel_closed("mission_table"))
 	mission_table.commit_requested.connect(_on_mission_table_commit)
 	mission_table.hint_player = panels.hint_player
+	p01_panel = P01_SCENE.instantiate() as P01Panel
+	add_child(p01_panel)
+	p01_panel.hint_player = panels.hint_player
+	p01_panel.opened.connect(func(_target): _on_panel_opened("p01"))
+	p01_panel.closed.connect(func(_target): _on_panel_closed("p01"))
+	p01_panel.commit_requested.connect(func(target, payload):
+		var result := runtime.perform_target(target, payload)
+		p01_panel.open(runtime, target)
+		p01_panel.show_result(result))
+	p01_panel.sources_requested.connect(func():
+		var ids: Array = []
+		for card in panels.science.cards_for_puzzle("P-01"):
+			ids.append(card.source_id)
+		panels.open_panel("sources", {"ids": ids}))
+	runtime.p01_panel_requested.connect(func(view):
+		if mission_table.is_open() or p01_panel.is_open() or not panels.active_panel().is_empty() or panels.hint_player.is_open():
+			return
+		if p01_panel.open(runtime, String(view.target_id)):
+			p01_panel.teach_first_use())
 	panels.hint_player.highlight_changed.connect(func(active):
 		_marker.z_index = 210 if active else 0
 		_update_world_overlay())
@@ -633,10 +654,10 @@ func _update_where() -> void:
 	_wn_where.text = "%s · %s" % [place, UiDesign.distance_text(distance)] if distance >= 0.0 else place
 
 func _distance_to(node: Node3D) -> float:
-	if node == null or runtime == null:
+	if not is_instance_valid(node) or not node.is_inside_tree() or runtime == null:
 		return -1.0
 	var player: Node3D = runtime.get("_player") as Node3D
-	if player == null:
+	if not is_instance_valid(player) or not player.is_inside_tree():
 		return -1.0
 	var a := player.global_position
 	var b := node.global_position
@@ -722,7 +743,7 @@ func _build_what_now(body: VBoxContainer) -> void:
 func open_mission_table(target_id: String) -> bool:
 	if runtime == null or mission_table == null or runtime.is_chapter_complete() or not MissionTableScript.is_gate(target_id):
 		return false
-	if runtime.is_cutscene_active() or mission_table.is_open():
+	if runtime.is_cutscene_active() or mission_table.is_open() or p01_panel.is_open():
 		return false
 	if panels != null and not panels.active_panel().is_empty():
 		return false
@@ -837,7 +858,7 @@ func _on_journal_pressed() -> void:
 func show_resume_card() -> bool:
 	if runtime == null or panels == null or not panels.active_panel().is_empty():
 		return false
-	if (mission_table != null and mission_table.is_open()) or runtime.is_cutscene_active():
+	if (mission_table != null and mission_table.is_open()) or (p01_panel != null and p01_panel.is_open()) or runtime.is_cutscene_active():
 		return false
 	_refresh_query()
 	return panels.open_panel("resume")
@@ -881,13 +902,15 @@ func apply_accessibility() -> void:
 	_caption_line.visible = captions
 	_caption_count.visible = captions
 	var scale := 1.5 if bool(settings.get("large_text", false)) else 1.0
-	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table])
+	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, p01_panel])
 	if runtime.audio != null:
 		runtime.audio.set_caption_layout(_dialogue_bar, settings)
 	if outpost != null:
 		outpost.set_settings(settings)
 
 func _on_panel_opened(_panel_id: String) -> void:
+	if p01_panel != null and p01_panel.is_open() and _panel_id != "p01":
+		p01_panel.set_covered(true)
 	if not _modal_reading:
 		_reading_was_paused = bool(runtime.query().get("paused", false))
 		_modal_reading = true
@@ -897,7 +920,9 @@ func _on_panel_opened(_panel_id: String) -> void:
 	_ui_sound("SFX_UI_CONFIRM")
 
 func _on_panel_closed(_panel_id: String) -> void:
-	var reading := not panels.active_panel().is_empty() or mission_table.is_open() or panels.hint_player.is_open()
+	if p01_panel != null and p01_panel.is_open():
+		p01_panel.set_covered(not panels.active_panel().is_empty() or panels.hint_player.is_open())
+	var reading := not panels.active_panel().is_empty() or mission_table.is_open() or (p01_panel != null and p01_panel.is_open()) or panels.hint_player.is_open()
 	runtime.set_ui_paused(reading or _reading_was_paused)
 	_modal_reading = reading
 	_set_modal_buttons(reading)
@@ -925,7 +950,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_modal_button_states.clear()
 		return
 	for child in node.get_children():
-		if child == panels or child == mission_table or child == _what_now_home:
+		if child == panels or child == mission_table or child == p01_panel or child == _what_now_home:
 			continue
 		if child is BaseButton:
 			if not _modal_button_states.has(child):
@@ -937,7 +962,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	var key := (event as InputEventKey).physical_keycode
-	var free := panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open())
+	var free := panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (p01_panel == null or not p01_panel.is_open())
 	if key == KEY_ESCAPE and free:
 		panels.open_panel("pause")
 		get_viewport().set_input_as_handled()
@@ -974,6 +999,11 @@ func _process(delta: float) -> void:
 
 ## Projects the goal marker (with distance) and the prompt on the object in reach.
 func _update_world_overlay() -> void:
+	var player: Node3D = runtime.get("_player") as Node3D if runtime != null else null
+	if not is_instance_valid(player) or not player.is_inside_tree():
+		_marker.visible = false
+		_prompt.visible = false
+		return
 	if (_chrome_hidden and not (panels.hint_player.is_open() and panels.hint_player.mode == "hint" and panels.hint_player.level == 1)) or runtime.is_cutscene_active():
 		_marker.visible = false
 		_prompt.visible = false
@@ -988,7 +1018,7 @@ func _update_world_overlay() -> void:
 	var marker_tokens: Dictionary = UiDesign.tokens().get("world_marker", {})
 	var lift := Vector3.UP * float(marker_tokens.get("height_m", 1.35))
 	var nearby_node: Node3D = runtime.physical_target(_nearby_id) if not _nearby_id.is_empty() else null
-	if nearby_node != null:
+	if is_instance_valid(nearby_node) and nearby_node.is_inside_tree():
 		_prompt_label.text = _prompt_text(_nearby_id)
 		var point := _project(camera, nearby_node.global_position + lift * 0.6, view, margin)
 		_prompt.size = Vector2.ZERO
@@ -997,7 +1027,7 @@ func _update_world_overlay() -> void:
 		_prompt.visible = true
 	else:
 		_prompt.visible = false
-	if _marker_node == null or not is_instance_valid(_marker_node) or (nearby_node != null and nearby_node == _marker_node and not panels.hint_player.is_open()):
+	if _marker_node == null or not is_instance_valid(_marker_node) or not _marker_node.is_inside_tree() or (nearby_node != null and nearby_node == _marker_node and not panels.hint_player.is_open()):
 		_marker.visible = false
 		return
 	var distance := _distance_to(_marker_node)

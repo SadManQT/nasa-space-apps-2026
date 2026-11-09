@@ -1,0 +1,5 @@
+FAIL tools/test_p01_panel.gd :: exit 1 :: P01 PANEL RESULT: FAIL (139 checks, 2 failures)
+       ERROR: FAIL Enter after an accepted prediction opens confirmation
+       ERROR: FAIL message delivery/read preserves the accepted gameplay prediction
+       P01 PANEL RESULT: FAIL (139 checks, 2 failures)
+0/1 suites passed

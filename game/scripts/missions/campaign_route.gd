@@ -68,7 +68,9 @@ func retry() -> Dictionary:
 	var restored := restore(local)
 	if not bool(restored.get("accepted", false)):
 		return restored
+	var messages: Dictionary = _director.message_metadata()
 	_director.restore_snapshot(checkpoint.director)
+	_director.update_message_metadata(messages)
 	if was_paused:
 		pause()
 	else:

@@ -106,6 +106,8 @@ func _run() -> void:
 			targets.push_back(targets.pop_front())
 			targets.push_back(targets.pop_at(3))
 		for target in targets:
+			if String(target.get("puzzle_id", "")) == "P-01":
+				await _walk_probe(campaign, String(target.target_id))
 			if P02MissionTable.is_gate(String(target.target_id)):
 				await _walk_table(campaign, String(target.target_id))
 			var result: Dictionary = campaign.route.perform(String(target.target_id), PlantInput.payload(String(target.target_id)))
@@ -512,3 +514,27 @@ func _reach_route(route: RefCounted, destination: String) -> void:
 		if not route.advance_scene().accepted:
 			_check(false, "text walk reaches " + destination + " from " + scene_id)
 			return
+
+## Text-only panel walk; real nearby/input/commit behavior has its own suite.
+func _walk_probe(campaign: Chapter1Campaign, id: String) -> void:
+	var panel := campaign.hud.p01_panel
+	for large in [false, true]:
+		_check(panel.open(campaign, id), "probe text opens " + id)
+		panel._settings.large_text = large
+		panel._render()
+		await _walk_state(campaign.hud, "probe unset " + id)
+		panel.preview()
+		await _walk_state(campaign.hud, "probe missing input " + id)
+		var payload := PlantInput.payload(id)
+		for key in payload:
+			panel.choose(key, payload[key])
+		if payload.is_empty():
+			panel.choose("confirmed", true)
+		panel.preview()
+		await _walk_state(campaign.hud, "probe predicted or blocked " + id)
+		panel.request_commit()
+		await _walk_state(campaign.hud, "probe confirmation " + id)
+		panel.cancel_confirm()
+		panel.request_close()
+		await _walk_state(campaign.hud, "probe dirty leave " + id)
+		panel.discard()
