@@ -1,0 +1,6 @@
+FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (572 checks, 3 failures)
+       FAIL production title main-thread interval <50 ms (52.978)
+       FAIL production new campaign main-thread interval <50 ms (88.878)
+       FAIL retained trace keeps every original stage and duration without invented fields
+       PERFORMANCE RUNTIME RESULT: FAIL (572 checks, 3 failures)
+0/1 suites passed

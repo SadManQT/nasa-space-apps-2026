@@ -1,0 +1,7 @@
+FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (572 checks, 4 failures)
+       FAIL Kai raw load main-thread interval <50 ms (51.494)
+       FAIL production title main-thread interval <50 ms (55.369)
+       FAIL production new campaign main-thread interval <50 ms (95.552)
+       FAIL retained trace keeps every original stage and duration without invented fields
+       PERFORMANCE RUNTIME RESULT: FAIL (572 checks, 4 failures)
+0/1 suites passed
