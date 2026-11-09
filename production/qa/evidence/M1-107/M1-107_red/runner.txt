@@ -1,0 +1,4 @@
+FAIL tools/test_campaign_interaction_input.gd :: exit 1 :: CAMPAIGN INTERACTION INPUT RESULT: FAIL (26 checks, 1 failures)
+       FAIL: campaign E does not also request generic Inspect
+       CAMPAIGN INTERACTION INPUT RESULT: FAIL (26 checks, 1 failures)
+0/1 suites passed

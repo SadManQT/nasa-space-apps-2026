@@ -677,6 +677,7 @@ func _place_crew() -> void:
 		_crew.name = "Crew"
 		add_child(_crew)
 	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]))
+	_player.generic_interaction_input = false
 	if _player != null and _player.follow_camera != null and _player.follow_camera.camera != null:
 		_player.follow_camera.camera.far = 30000.0 if _terrain != null else 4000.0  # kilometre views on the terrain
 	_crew.set_paused(_ui_paused)
