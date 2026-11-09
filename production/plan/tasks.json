@@ -6953,6 +6953,26 @@
    "prompt": "M98 completed exact two fresh retained Windows runs: production/qa/evidence/M1-68_windows/2026-11-09_retained_ramim/README.md, source12d8252/game108a384. Terrain intervals64.841/62.910ms fail unchanged50. Captured synchronous glb_generate_scene: CH_Rafi_EVA51.382ms inrun1; CH_Kai_EVA53.225ms and CH_Rafi_EVA52.860ms inrun2. Decode/mipmap/gait preparation already off-thread in2a50e02; node generation/packing remain in your AssetGeometry. Please profile and publish a minimal measured safe fix/candidate within your folders, preserving full geometry/materials/rig/face/helmet-role/gait and visible results. These are measured candidate regions, not exact correlation for every heartbeat (original stages lack timestamps); do not claim all M68 causes proven. Do not weaken/skip the50ms tests, move cold EVA work outside the measured entry, remove quality, clear/change caches or touch user imports/settings. Existing tests should keep all model vertices/transforms/pixels/cycles; hand off exact source to Atik/Ramim for original Windows focused/full acceptance. Run2 also has native RID init/nullmesh errors without GDScript backtrace; retain/diagnose separately, no source cause yet. Atik/Ramim owns M68 and can independently profile HUD/UI elapsed phases; no foreign source edit by them.",
    "reserved_for": "sadman",
    "effort": 2
+  },
+  {
+   "id": "M1-121",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Re-audit all saved branches and prioritize explainer UI blockers",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
+   "deps": [],
+   "paths": [
+    "production/qa/evidence/M1-121/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-09.",
+   "evidence": "",
+   "updated": "2026-11-09",
+   "prompt": "User requests re-audit every local and remote branch before finishing Ramim work, prioritizing screens blocking Sadman M1-59/M3-66/M3-76. Snapshot all advertised/local refs and unique tips; inspect ancestry plus branch-specific content against current main, distinguish semantic ports from unfinished WIP/metadata-only branches, identify ownership/runtime risks and exact saved work to reuse. Preserve every branch/worktree and all local import/settings changes. No wholesale stale merges or third-owner edits. Publish one complete indexed report covering every ref, with source/hash, findings, reusable paths, dependency/owner/resume condition and explicit static-review limits. Binary asset/render and historical test evidence are not fresh validation. Reconcile findings with existing board without overwriting others; record owner requests for genuine foreign blockers. Then claim M1-56 Messages first; MissionTable code exists, formal M55/M68 gate still needs truthful handoff.",
+   "reserved_for": "ramim",
+   "effort": 2
   }
  ],
  "requirements": [
