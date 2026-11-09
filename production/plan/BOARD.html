@@ -86,7 +86,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">97 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">13 todo</span></div><div class="bar"><i style="width:88%"></i></div>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">97 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">14 todo</span></div><div class="bar"><i style="width:87%"></i></div>
+<details open><summary>Next up today (1)</summary><ul>
+<li><a class="id" href="#M1-113">M1-113</a> Record Atik and Ramim message integration source status in handbook <span class="chip ">any</span> <span class="chip ">P1</span></li>
+</ul></details>
 <details><summary>To do (13)</summary><ul>
 <li><a class="id" href="#M1-24">M1-24</a> Fix the playtest and QA findings, then freeze the demo build <span class="chip ">claude</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M2-04">M2-04</a> Record gameplay captures and narration for the videos <span class="chip ">human</span> <span class="chip ">P0</span></li>
@@ -262,7 +265,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">4 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">5 blocked</span><span class="chip s-todo">35 todo</span></div><div class="bar"><i style="width:9%"></i></div>
 <details open><summary>Working now (2)</summary><ul>
 <li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/claude on 2026-11-09</div></li>
-<li><a class="id" href="#M1-99">M1-99</a> Route retry keeps delivered and read messages (M1-89 rule) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Atik/Ramim-codex on 2026-11-09</div></li>
+<li><a class="id" href="#M1-69">M1-69</a> Expose safe message metadata updates without resetting puzzle checkpoints <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/Ramim-codex on 2026-11-09</div></li>
 </ul></details>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span></li>
@@ -276,7 +279,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">1080p four-room M4 Forward+/Compatibility captures delivered with complete coverage; Forward+ p95 misses60fps and first-use hitches remain. Await measured runtime fixes M1-92, Sad…</div></li>
 <li><a class="id" href="#M1-49">M1-49</a> Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Sadman M1-84 room/media hooks have landed and are preserved. Await Ramim M1-83 accessible Care Round capture/ghost panel and final command contract; then Atik wires dated garden v…</div></li>
 <li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Complete diagnostic retention/collector delivered and reviewed; full61/61 and two fresh M4 focused runs537PASS each. Original Windows failure not reproduced here; await Ramim M1-9…</div></li>
-<li><a class="id" href="#M1-69">M1-69</a> Expose safe message metadata updates without resetting puzzle checkpoints <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Requested Director method is in Sadman-owned core/, outside campaign-only task paths. Owner request M1-89 publishes bounded metadata/checkpoint contract; then Atik wires normal sa…</div></li>
+<li><a class="id" href="#M1-99">M1-99</a> Route retry keeps delivered and read messages (M1-89 rule) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Reviewed source delivered d0c32b8; focused route31/0 and unchanged core76/0 clean. Remaining dependency: integrated full runner on the combined batch (Ramim/Atik executor). Saved …</div></li>
 </ul></details>
 <details><summary>To do (30)</summary><ul>
 <li><a class="id" href="#M3-2M">M3-2M</a> Chapter 2 missions EX-M0201 to EX-M0204: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
@@ -5735,8 +5738,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Expose safe message metadata updates without resetting puzzle checkpoints",
-   "status": "blocked",
-   "owner": "atik/codex",
+   "status": "in_progress",
+   "owner": "Atik/Ramim-codex",
    "deps": [],
    "paths": [
     "game/scripts/campaign/"
@@ -5744,7 +5747,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-06.",
    "evidence": "",
-   "updated": "2026-11-07",
+   "updated": "2026-11-09",
    "prompt": "M1-56 message persistence needs a safe authoritative metadata update API. Existing Director.snapshot -> Chapter1Campaign._save_snapshot -> SaveService already retains presentation_resume, and fresh New starts it empty. However Director.restore_snapshot also replaces _checkpoint. PuzzleHost.retry calls Director.restore_checkpoint, so using load/restore merely to mark a message read would overwrite the pre-shift rollback. No public bounded presentation-message setter exists.\nExpose a small public Director method for updating only presentation_resume.messages, with validated message metadata (delivered/read IDs and any explicitly agreed primitive state). Publish its exact method/payload contract for Ramim's comms/KnowledgeService integration. Preserve the gameplay checkpoint, current gameplay revision semantics, receipts, phase, resources, dialogue and flags; duplicate updates must be harmless. Never accept arbitrary state/root changes through this API. Do not add a second save store; existing runtime.save_campaign can persist the normal snapshot. Keep message pack/inbox implementation in Ramim folders, and Chapter1 prose in Sadman M1-57.\nAcceptance: focused tests with a real PuzzleHost/Director prove preview/read/update/retry returns to the same pre-message gameplay checkpoint; only message metadata changes; duplicate, malformed and missing state are safe; save/restore round-trips existing presentation_resume.messages, fresh New resets it, and old saves lacking it load. Run the full repository runner and disclose the existing M1-67/M1-68 failures if still present; do not weaken those checks. This prerequisite unblocks M1-56; tell Ramim to release/resume it when ready.",
    "reserved_for": "atik",
    "effort": 1,
@@ -6740,7 +6743,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Route retry keeps delivered and read messages (M1-89 rule)",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/Ramim-codex",
    "deps": [
     "M1-89"
@@ -6750,11 +6753,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Sadman/night-claude2 on 2026-11-08.",
-   "evidence": "",
+   "evidence": "production/qa/evidence/M1-99/README.md; source d0c32b8; independent review C0/I0/M0; full pending.",
    "updated": "2026-11-09",
    "prompt": "M1-89 (execution/03_SYSTEM_INTERFACES.md, 'Message metadata') makes delivered and read messages survive a gameplay retry: CampaignDirector.update_message_metadata() mirrors presentation_resume.messages into the director's pre-commit checkpoint, so PuzzleHost.retry()/director.restore_checkpoint() keeps them. The route-level physical retry does not yet: CampaignRoute.retry() (and Chapter1Route.retry(), which calls super.retry()) runs _director.restore_snapshot(checkpoint.director) with the director snapshot taken at the route checkpoint, so every message delivered or read after that point turns undelivered or unread again and its arrival toast can fire a second time. Fix in game/scripts/missions/campaign_route.gd only: capture var messages: Dictionary = _director.message_metadata() before restore_snapshot() and call _director.update_message_metadata(messages) right after it (a union, idempotent; an empty or unchanged record comes back accepted with duplicate=true and changes nothing). Do not edit game/scripts/core/. Acceptance: a missions test (your own test file) delivers and reads a message after a Chapter 1 route checkpoint, runs Chapter1Route.retry(), and proves the director's gameplay state equals the route checkpoint (everything except presentation_resume.messages) while message_metadata() still holds both IDs, and that a second retry is still correct; game/tools/test_director_message_metadata.gd must keep passing unchanged (it only checks that re-applying the record after a route retry works). Run game/tools/run_tests.sh and paste its last line into the evidence.",
    "reserved_for": "atik",
-   "effort": 1
+   "effort": 1,
+   "blocker": "Reviewed source delivered d0c32b8; focused route31/0 and unchanged core76/0 clean. Remaining dependency: integrated full runner on the combined batch (Ramim/Atik executor). Saved source and production/qa/evidence/M1-99/. Resume acceptance after full results; do not reimplement source. M1-69/M1-56 can use the published retry fix."
   },
   {
    "id": "M4-08",
@@ -7203,6 +7207,26 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "updated": "2026-11-09",
    "prompt": "M1-58 landed PayloadStackActivity (game/scripts/payload/stack_activity.gd) but left the UI hook to you, since you own these files and were editing them. Port the hook from the parked branch: git diff origin/main...origin/night/M1-58 -- game/scripts/ui/ (commit 0953cea). In mission_table_panel.gd: signal payload_requested(settings); when alarm_state().action == STACK, start_task() emits it (refuse with a reason if unconnected), task_step() refuses ('Carry a supply bundle to a bunk slot.'), _render_task shows the crates wording and a CARRY SUPPLIES · CHOOSE CONTROLS button (and the old-save FINISH WITH SAVED SUPPLIES path), and add refresh_payload_result() (the activity already calls it when present). In chapter1_campaign_hud.gd: connect payload_requested to a handler that, only in LOC-04, calls PayloadStackActivity.launch(runtime, settings) and keeps the reference (is_instance_valid checks); elsewhere show_status('Carry the supplies from the Safe Room response controls.'). Re-add to game/tools/test_payload.gd the check that Mission Table slot clicks cannot bypass physical delivery, and launch through table.start_task(). Acceptance: run game/tools/run_tests.sh and paste its last line; screenshot the shift-5 table with the carry button to production/qa/evidence/<task id>_*.png.",
    "reserved_for": "ramim",
+   "effort": 1
+  },
+  {
+   "id": "M1-113",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "any",
+   "title": "Record Atik and Ramim message integration source status in handbook",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "PRODUCTION_HANDBOOK.md"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-09.",
+   "evidence": "",
+   "updated": "2026-11-09",
+   "prompt": "User authorized Ramim to finish Atik runtime dependencies. Record reviewed source M1-99 (d0c32b8, route31/0/core76/0) in handbook section10; see production/qa/evidence/M1-99/README.md. Full integrated gate remains pending, do not call all acceptance done. Subsequent M1-69/M1-56 evidence will be appended to this request. No decision/canon change.",
+   "reserved_for": "sadman",
    "effort": 1
   }
  ],
