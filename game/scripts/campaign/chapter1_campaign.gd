@@ -466,6 +466,22 @@ func _start_extended(scene_id: String) -> Dictionary:
 	started["chapter_started"] = String(scene_id.substr(3, 4))
 	return started
 
+## Inbox writes use the bounded Director API and the existing checkpoint store.
+func message_metadata() -> Dictionary:
+	return director.message_metadata() if director != null else {"delivered_ids": [], "read_ids": []}
+
+func update_message_metadata(metadata: Dictionary) -> Dictionary:
+	if director == null or route == null or save_service == null or not _startup_error.is_empty():
+		return {"accepted": false, "persisted": false, "reason": "The expedition is not ready to save messages."}
+	var result := director.update_message_metadata(metadata)
+	result["persisted"] = false
+	if bool(result.get("accepted", false)):
+		var saved := _save_campaign()
+		result["persisted"] = bool(saved.get("accepted", false))
+		if not result.persisted:
+			result["reason"] = "Messages remain available in this game, but could not be saved. " + String(saved.get("reason", "Try Save again."))
+	return result
+
 func save_campaign() -> Dictionary:
 	var result := _save_campaign()
 	if hud != null:
