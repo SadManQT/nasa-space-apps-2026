@@ -4097,7 +4097,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Full-campaign journal: People and Science tabs, flag-gated names, superseded entries, chapter pages, Class mode",
-   "status": "todo",
+   "status": "in_progress",
    "deps": [
     "M1-48"
    ],
@@ -4115,10 +4115,11 @@
    ],
    "note": "From doc 24 NR-11. Coordinate with M3-90: M3-90 keeps the discovery log, rover, greenhouse and credits screens; the journal follows doc 24 §6.",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-09",
    "prompt": "Problem: the Chapter 1 journal (M1-48) has four tabs; the campaign needs People and Science, name gating across the Noor reveal, superseded interpretations and chapter summaries.\nRead first: game-design/24_NARRATIVE_REVISION.md §6 (all), §4 (open-questions ledger), §5.2; execution/UI_07_EXPEDITION_JOURNAL.md; 10_GAMEPLAY_SYSTEMS.md SYS-07.\nDo: add People (facts with sources, moments, transcripts with origin labels) and Science (concept cards from each scene's learning block, earned Data Cards, the four evidence chips); gate names by gate_flag so Noor's page is 'N.' until noor_identity_revealed and re-titled with an Updated badge after; show superseded entries struck through but visible; a chapter page at each debrief; Class-mode role cards appear once delivered.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). A scripted run through EX-CH05-S10 shows 'N.' before and 'Noor' after, and no entry before its scene. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
    "reserved_for": "ramim",
-   "effort": 3
+   "effort": 3,
+   "owner": "Ramim/codex"
   },
   {
    "id": "M3-99",
