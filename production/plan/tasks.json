@@ -5865,7 +5865,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -5899,11 +5899,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "edit_files": [
-    "production/qa/perf/atik_batch_2026-11-10/M1-68.md",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
-   ]
+   "blocker": "Saved verification 7942562: existing M1-120 source reused; focused M4 581/0, all 16 windows retained under production/qa/perf/atik_batch_2026-11-10/baseline. No original Ryzen7/RTX4060 Windows run is available after batching; original-host focused two-process collection and green full acceptance remain required. Resume command and cache/hardware conditions in M1-68.md. Current unsandboxed full running on M4; no Windows repair inferred."
   },
   {
    "id": "M1-69",
@@ -6590,8 +6586,8 @@
    "priority": "P0",
    "tool": "any",
    "title": "Profile and remove native first campaign draw hitch on M4",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/codex",
    "deps": [],
    "paths": [
     "game/scripts/loading/",
@@ -6620,7 +6616,14 @@
     "game/scripts/asset_geometry.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-92*",
-    "production/qa/perf/"
+    "production/qa/perf/",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
+   ],
+   "edit_files": [
+    "production/qa/perf/atik_batch_2026-11-10/M1-92.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
    ]
   },
   {

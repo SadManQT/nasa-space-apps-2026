@@ -315,16 +315,16 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M4-01">M4-01</a> Visual review of the Chapter 6 eclipse power props (M3-6A) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">2 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">2 blocked</span><span class="chip s-todo">1 todo</span></div><div class="bar"><i style="width:0%"></i></div>
 <details open><summary>Working now (1)</summary><ul>
-<li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/codex on 2026-11-10</div></li>
+<li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/codex on 2026-11-10</div></li>
 </ul></details>
-<details open><summary>Next up today (2)</summary><ul>
-<li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span></li>
+<details open><summary>Next up today (1)</summary><ul>
 <li><a class="id" href="#M1-116">M1-116</a> Investigate post-result Forward+ exit timeout on Intel Arc laptop <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details open><summary>Blocked (1)</summary><ul>
+<details open><summary>Blocked (2)</summary><ul>
 <li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Saved source 072c9c7: owned watchdog components pass mandatory loading 29/0 and actual production full-cast recovery. User explicitly leaves raw AssetGeometry implementation for S…</div></li>
+<li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Saved verification 7942562: existing M1-120 source reused; focused M4 581/0, all 16 windows retained under production/qa/perf/atik_batch_2026-11-10/baseline. No original Ryzen7/RT…</div></li>
 </ul></details>
 <details><summary>Deferred: video, submission and manual QA (5)</summary><ul>
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -6528,7 +6528,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -6562,11 +6562,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "edit_files": [
-    "production/qa/perf/atik_batch_2026-11-10/M1-68.md",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
-   ],
+   "blocker": "Saved verification 7942562: existing M1-120 source reused; focused M4 581/0, all 16 windows retained under production/qa/perf/atik_batch_2026-11-10/baseline. No original Ryzen7/RTX4060 Windows run is available after batching; original-host focused two-process collection and green full acceptance remain required. Resume command and cache/hardware conditions in M1-68.md. Current unsandboxed full running on M4; no Windows repair inferred.",
    "batch_phase": "implementation"
   },
   {
@@ -7285,8 +7281,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "any",
    "title": "Profile and remove native first campaign draw hitch on M4",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/codex",
    "deps": [],
    "paths": [
     "game/scripts/loading/",
@@ -7315,7 +7311,14 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/asset_geometry.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-92*",
-    "production/qa/perf/"
+    "production/qa/perf/",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
+   ],
+   "edit_files": [
+    "production/qa/perf/atik_batch_2026-11-10/M1-92.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
    ],
    "batch_phase": "implementation"
   },
