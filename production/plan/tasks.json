@@ -4159,8 +4159,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Rule out a threaded-loading deadlock at full-cast entry",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/antigravity",
    "deps": [],
    "paths": [
     "game/scripts/loading/",
@@ -4173,7 +4173,7 @@
    ],
    "note": " | 5 Nov 02:30: earlier attempt was blocked only because the Codex sandbox cannot open a window; write production/qa/evidence/M1-53_capture.sh to run the 10 windowed probes (the night shift runs it outside the sandbox).",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-09",
    "prompt": "Found 5 Nov during the round-3 rendered verification: one windowed run of game/tools/perf_probe.gd (--perf-probe, window on top) stopped right after the garden_rebuild transition, at the start of the full-cast stage: Godot idle (~2% CPU) with no progress for 17 minutes. The next run passed cleanly, so it is intermittent. Find whether the threaded preparation (ResourceLoader.load_threaded_request / WorkerThreadPool jobs in game/scripts/loading/, staged construction in campaign_room.gd and chapter1_campaign.gd) can wait forever: a job that never reports, a main-thread await on a status that never changes, a resource requested twice, or a deadlock with a mutex. Add a watchdog: any preparation step that exceeds a time limit logs its step and falls back to synchronous loading behind the loading card instead of hanging.\nAcceptance: run the windowed probe 10 times in a row (command in production/qa/perf_2026-11-04.md) with zero stalls; a test forces a stuck job and proves the fallback completes; run_tests.sh passes.",
    "blocker": "Night shift parked the work on branch night/M1-53: This checkout already holds the earlier attempt parked on origin/night/M1-53 (uncommitted). Check it, finish the task and fix what stopped it:\nNight shift parked the work on branch night/M1-53: The task is not marked done on the board: finish it (or block it with a real reason).",
    "reserved_for": "atik",
@@ -6290,8 +6290,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 8 exteriors in the campaign: load LOC-11/LOC-12 scenes, honour 'aboard' in the rover runtime, grade the Malapert pad (M3-8R follow-up)",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/antigravity",
    "deps": [
     "M3-8R"
    ],
@@ -6303,7 +6303,7 @@
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-08.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "M3-8R (Sadman, rooms) built the Chapter 8 exteriors as real rooms: LOC-11 relay road (game/scenes/campaign/rooms/relay_road.tscn, LOC-11.json) and LOC-12 Malapert summit (malapert_summit.tscn, LOC-12.json), both \"assembly\": \"exterior_kit\". CH08 scene map: S02-S04 LOC-11, S05/S12 LOC-03, S06/S10 LOC-01, S07-S09 LOC-12, S01/S11 LOC-08 (M3-105). Three runtime changes are yours:\n\n1. game/scripts/loading/load_preparation.gd ROOM_SCENES: add \"LOC-11\": \"res://scenes/campaign/rooms/relay_road.tscn\" and \"LOC-12\": \"res://scenes/campaign/rooms/malapert_summit.tscn\". Why: their PiecePreload holds every M3-8A GLB (both LODs) and VH_Rover_Lit.tscn, so the loading card decodes them off the main thread; today Chapter1Campaign builds a bare CampaignRoom from the JSON (works, but loads 36 GLBs on the main thread). chapter1_campaign._place_crew already falls back to the room's *_player anchor (relay_player, relay_service_player).\n\n2. The rover runtime (doc 25 section 4.5) must honour room staging \"aboard\" (RoomContract.staging(room, scene).aboard: cast id -> {\"at\", \"facing\"}). EX-CH08-S02 and S03 put all three aboard the pressurised cabin with the playable rider (Kai, Rafi) aboard; S04 puts Ferreira aboard (cabin checklist); the summit cut of S06/S10 puts all three aboard. Today CampaignCrew (game/scripts/world/campaign_crew.gd, Sadman's) gives the interim: aboard bodies hidden, no collision, no gravity; passengers switched off; the playable rider keeps input and a chase camera over the roof (follow camera pivot 5.4 m, arm 8.5 m) and reaches the cab console station (\"cab\": true focus target relay_route_console within 3 m of the seat). Replace this with the drivable rover / cab view (V) when the rover runtime exists: the rider seated in VH_Rover_Lit (the staged \"rover\" prop: LOC-11 ChapterStaging/rover, LOC-12 VisualRoot/rover), no walking out into vacuum unsuited, the cab console readouts on the dashboard; restore the follow camera with CampaignCrew._unboard semantics. Light states come from piece_states.rover.lights (rover_lights.json: driving, eva_stop, parked_dark).\n\n3. TerrainStream pad grading for LOC-12 (game/scripts/terrain/terrain_stream.gd): M3-8A cut the 30 x 20 m relay pad level 0.3 m under the Malapert crown and filled it outward (production/concept/chapter8_v1 decision 1; malapert_summit.json terrain.pad_bounds_xz [[-15,-10],[15,10]] in the platform frame, turned 2.335 deg from the tile frame, pad_level_m -0.3). The raw 5 m tile falls up to 2.4 m across the pad (lanes reach 16.4 deg), so exterior_terrain.json LOC-12 stays \"pending\" with omit_staging_floor false. Add a graded pad (a level rectangle with a fill skirt at <= 15 deg) to the provider's heightfield sampling and collision for a configured region; then tell Sadman so he sets omit_staging_floor true and runs game/tools/test_exterior_terrain.gd -- --write. Its Sun and Earth rows are already wired (RoomContract.earth LOC-12, with sky_rows for S07/S09).\n\nAcceptance: run_tests.sh green (chapter8_rooms, exterior_terrain, campaign_crew); the campaign enters EX-CH08-S03 and S07 from a checkpoint without main-thread GLB decoding; a windowed capture of S03 from the rover; LOC-12 walks on the graded pad.",
    "reserved_for": "atik",
    "effort": 2
@@ -6504,8 +6504,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Expose the Solo/Class session and team-plan bridge for M1-37",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/antigravity",
    "deps": [
     "M1-102"
    ],
@@ -6516,7 +6516,7 @@
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "M1-37 saved UI on origin/night/M1-37 (8a792c1) depends on unlanded runtime initial_crew, query().crew and a crew-aware P-02 commit path. Ramim cannot edit campaign/missions. After the bounded core configuration contract, expose fresh New Expedition crew configuration, query a primitive crew view, and preserve the saved crew on Continue and gameplay retry through the existing save store. Publish exact UI registration/selected-plan contract for private role cards and all-role team-plan sign-offs (P-02 first, reusable for later puzzle panels). A plain physical USE/default payload must not silently bypass the Class confirmation; stale sign-offs must not authorize a changed forecast/revision/crew. Reuse existing authoritative model/dispatcher validation and make any absent Ramim provider fail clearly rather than auto-sign or auto-fill. Do not edit Ramim UI/puzzles or invent a second simulator/store. Coordinate a small provider seam that can be tested independently before the UI port; do not claim the complete Class experience from a bridge test. Never use restore_snapshot merely to update presentation configuration mid-shift. Saved night source includes that unsafe approach and is only a reference. Test fresh/continue/legacy-save/retry and malformed/missing/stale sign-off cases through real routes; run focused and full runner without relaxing known timing gates. Publish handoff and unblock Ramim implementation when the public contract is available.",
    "reserved_for": "atik",
    "effort": 1
@@ -6548,8 +6548,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/antigravity",
    "deps": [],
    "paths": [
     "game/scripts/campaign/",
@@ -6558,7 +6558,7 @@
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "M3-2P read-only audit on main018b297: Chapter1Campaign.interact_nearby intercepts only P01/P02; P03/P04 fall through perform_target with catalog payload_defaults. Chapter2Route keeps authoritative _p03/_p04 state in snapshot but publishes no panel view. Saved origin/night/M3-2P tip5203a6f has a larger unlanded runtime patch; do not copy it wholesale or duplicate its temporary-director preview framework. Provide a bounded public chosen-input provider seam following current P01 pattern, for P03/P04 only: real nearby USE requests the owned Ramim panel and cannot commit prefilled correct inputs; a read-only primitive view exposes current target/action, authoritative P03/P04 progress and required inputs; preview/confirmation receives explicit player choices through existing forecast_target/perform_target/dispatcher and validates paused-modal handoff, scene/revision, range/line-of-sight/prerequisites, cancellation, malformed/missing/wrong choices, costs/idempotence, retry/save/load. Reuse the real pure puzzle models and existing forecast route; no second store/simulator and no assigning model state from UI. Publish exact signal/provider/view/payload API before UI implementation. Coordinate with Sadman authored P03/P04 data and Ramim changes to pure models; keep current normal campaign tests meaningful via explicit selected inputs, never auto-sign Class or introduce dependencies on unfinished Class mode for Solo. Do not edit Ramim UI/puzzles. Test actual nearby USE and chosen-input preview/confirm/save/retry in real Chapter2. Focused/full runner with honest M1-68/M1-100 limits. Saved source is reference only.",
    "reserved_for": "atik",
    "effort": 1
@@ -6940,8 +6940,8 @@
    "priority": "P0",
    "tool": "any",
    "title": "Investigate measured Windows EVA scene generation over the loading budget",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Sadman/antigravity",
    "deps": [],
    "paths": [
     "game/scripts/asset_geometry.gd",
