@@ -320,6 +320,8 @@ Optional opening (from the gameplay entry flow): mustard fields to the Moon cham
 
 ## 10. Status (latest first)
 
+**10 Nov 2026 — Atik M1-92 native evidence:** Apple M4 Forward+/Metal first campaign still reaches a 6607.878 ms frame interval; one earlier attempt timed out after 300 s. The completed short probe exits 0 without watchdog recovery. Native wait stack and raw traces retained; no shader/GPU/deadlock cause or performance fix is claimed. Symbolicated native profiling, measured improvement, screenshots and review remain open. [Evidence](production/qa/perf/atik_batch_2026-11-10/M1-92.md).
+
 **10 Nov 2026 — Atik M1-68 verification:** reused the existing M1-120 animation batching; unchanged focused performance gate passes 581/0 on Apple M4 (title 43.706 ms, campaign 39.860 ms). Initial sandbox setup errors are retained; unsandboxed full is pending. Original Windows post-fix collection is still required; no Windows repair or task-complete claim. [Evidence and exact collector command](production/qa/perf/atik_batch_2026-11-10/M1-68.md).
 
 **10 Nov 2026 — Atik M1-53 saved watchdog work:** owned worker/resource/draw waits now have bounded recovery and late-result cleanup; mandatory focused loading runner 29/0, including actual production full-cast entry after forced recovery. Full suite is running. User requested that the raw AssetGeometry patch remain a Sadman handoff; its source is unchanged, raw waits and ten complete windowed acceptance probes remain open. [Evidence](production/qa/perf/atik_batch_2026-11-10/M1-53.md). No deadlock-free or task-complete claim.

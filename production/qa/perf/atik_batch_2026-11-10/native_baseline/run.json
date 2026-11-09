@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/tmp/last-light-tools/Godot.app/Contents/MacOS/Godot",
+    "--path",
+    "game",
+    "--rendering-method",
+    "forward_plus",
+    "--rendering-driver",
+    "metal",
+    "--resolution",
+    "1280x720",
+    "--log-file",
+    "/Users/atik130/Desktop/Hackathon/NASA/nasa-space-apps-2026/production/qa/perf/atik_batch_2026-11-10/native_baseline/engine.log",
+    "--script",
+    "res://tools/perf_probe.gd",
+    "--",
+    "--perf-probe",
+    "--perf-seconds=1",
+    "--perf-output=/Users/atik130/Desktop/Hackathon/NASA/nasa-space-apps-2026/production/qa/perf/atik_batch_2026-11-10/native_baseline/probe"
+  ],
+  "source": "e11809dabf82a8b4169c9e18190bacd6abc9ce00",
+  "start_epoch": 1794249960.424067,
+  "elapsed_seconds": 300.08458495140076,
+  "exit_code": 124,
+  "timed_out": true
+}
