@@ -15,6 +15,8 @@ class_name MissionTablePanel
 signal commit_requested(target_id: String, plan: Dictionary)
 signal opened(target_id: String)
 signal closed(target_id: String)
+## Requests the Safe Room carry activity before the STACK timer starts.
+signal payload_requested(settings: Dictionary)
 
 const TableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
 var INK := UiDesign.colour("ink")
@@ -255,11 +257,28 @@ func start_task() -> Dictionary:
 	_after_action(result, "TaskStep_0")
 	return result
 
+## Launches the physical Safe Room supply-bundle carry activity (doc 25 §4.3).
+func start_payload_activity() -> Dictionary:
+	if String(_table().alarm_state().action) != "STACK":
+		return {"accepted": false, "reason": "Choose Stack supplies first."}
+	if not payload_requested.has_connections():
+		return {"accepted": false, "reason": "Open the supply task from the Safe Room."}
+	payload_requested.emit(_settings.duplicate(true))
+	return {"accepted": true, "reason": "Choose your carrying controls before starting."}
+
 ## Confirms one valve or bundle step of the running task.
 func task_step(step_index: int) -> Dictionary:
 	var result: Dictionary = _table().task_step(step_index)
 	_after_action(result, "TaskStep_%d" % (step_index + 1))
 	return result
+
+## Refreshes the shared forecast after the physical supply task returns.
+func refresh_payload_result() -> void:
+	_task_time_left = 0.0
+	_previewed_key = ""
+	_notice = "Supplies checked. Try the forecast before locking in the shift."
+	_render()
+	_grab_first_focus()
 
 ## Ends the running task with its current progress.
 func end_task() -> Dictionary:
@@ -501,8 +520,15 @@ func _render_task(column: VBoxContainer, current: Dictionary) -> void:
 	if action == "PUMP":
 		outcome = "Water wall +2 when all three valves are confirmed; +1 if partial."
 	else:
-		outcome = "Crates 2 when all four bundles are placed; 1 if partial."
+		outcome = "Carry supplies into the outlined bunk slots. All four placed: crates 2. One to three: crates 1. Crates shield beside the water wall; they never move garden water."
 	inner.add_child(_wrap(outcome, 12, MUTED))
+	if action == "STACK" and (payload_requested.has_connections() or (_route != null and _route.has_method("current_room_id"))):
+		if state == "idle":
+			var carry := _button("CARRY SUPPLIES · CHOOSE CONTROLS", "StartPayload")
+			carry.pressed.connect(func() -> void: start_payload_activity())
+			inner.add_child(carry)
+		elif state == "resolved":
+			inner.add_child(_wrap("%d of %d bundles placed · condition checked" % [progress, steps], 13, GREEN))
 	if state == "idle":
 		var start := _button("Start %s%s" % ["pumping water" if action == "PUMP" else "placing supplies", " · no timer (assisted)" if assisted else " · %d seconds" % int(alarm.get("timer_seconds", 0))], "TaskStep_0")
 		start.pressed.connect(func() -> void: start_task())

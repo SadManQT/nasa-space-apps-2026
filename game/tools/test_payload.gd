@@ -203,9 +203,13 @@ func _campaign() -> void:
 	if close_hint != null and close_hint.is_visible_in_tree():
 		close_hint.pressed.emit()
 	var table := campaign.hud.mission_table
+	table.choose(5, "action", "STACK")
 	var before: Dictionary = campaign.director.snapshot().resources.duplicate(true)
 	var prior_controlled: bool = campaign._player.controlled
-	var activity := PayloadStackActivity.launch(campaign, {"timer_free": true})
+	var carry_button := table.find_child("StartPayload", true, false) as Button
+	_check(carry_button != null and carry_button.is_visible_in_tree(), "Mission Table shows the shift-5 STACK physical carry button")
+	carry_button.pressed.emit()
+	var activity := campaign.hud.payload_activity
 	# Freed without returning (room change, exit): the HUD, table, cadet and pile come back.
 	_check(activity != null and not campaign.hud.visible and not campaign.hud.mission_table.visible, "activity hides the HUD and the table while the cadet carries")
 	activity.begin(true)
@@ -216,7 +220,9 @@ func _campaign() -> void:
 		if String(child.name) == "PR_SupplyBundles":
 			_check(child.visible or pile_hidden == 0, "freeing the activity shows the original supply pile again")
 	campaign.route.mission_table().reset_alarm_task()
-	activity = PayloadStackActivity.launch(campaign, {"timer_free": true})
+	table.refresh_payload_result()
+	table.start_payload_activity()
+	activity = campaign.hud.payload_activity
 	_check(activity != null and campaign.route.mission_table().alarm_state().state == "idle", "briefing appears before the timer or progress starts")
 	activity.begin(false)
 	_check(not activity._assistance and activity._player.controlled, "timer-free manual mode keeps movement controls")
@@ -240,7 +246,9 @@ func _campaign() -> void:
 	await process_frame
 	_check(activity == null or not is_instance_valid(activity), "activity releases its scene and input")
 	campaign.route.mission_table().reset_alarm_task()
-	activity = PayloadStackActivity.launch(campaign, {"timer_free": true})
+	table.refresh_payload_result()
+	table.start_payload_activity()
+	activity = campaign.hud.payload_activity
 	activity.begin(true)
 	activity.set_physics_process(false)
 	_check(activity._player.follow_camera.camera.current and not activity._player.controlled, "assisted input retains a live camera with movement disabled")
@@ -259,7 +267,11 @@ func _campaign() -> void:
 	_check(campaign.director.snapshot().resources == before, "carrying spends no base air, battery or water")
 	activity.return_to_plan()
 	await process_frame
-	_check(not is_instance_valid(activity) and table.is_open() and campaign._ui_paused, "report returns to the paused plan, not an automatic shift commit")
+	_check(campaign.hud.payload_activity == null and table.is_open() and campaign._ui_paused, "report returns to the paused plan, not an automatic shift commit")
+	_check(not bool(table.task_step(0).accepted), "Mission Table slot clicks cannot bypass resolved physical delivery")
+	if OS.get_cmdline_user_args().has("--capture") and root.get_texture() != null and root.get_texture().get_image() != null:
+		var shot_path := ProjectSettings.globalize_path("res://../production/qa/evidence/M1-112_shift5_stack_table.png")
+		_check(root.get_texture().get_image().save_png(shot_path) == OK, "capture shift-5 STACK Mission Table result")
 	var preview := table.preview()
 	_check(bool(preview.accepted) and int(preview.forecast.final_state.K) == 2, "physical progress produces the exact K2 forecast")
 	await physics_frame

@@ -22,6 +22,7 @@ var panels: CampaignPanels
 var mission_table: MissionTablePanel
 var p01_panel: P01Panel
 var outpost: OutpostStatus
+var payload_activity: PayloadStackActivity
 
 # Goal card
 var _goal_card: PanelContainer
@@ -156,8 +157,13 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table = MISSION_TABLE_SCENE.instantiate() as MissionTablePanel
 	add_child(mission_table)
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
-	mission_table.closed.connect(func(_target: String) -> void: _on_panel_closed("mission_table"))
+	mission_table.closed.connect(func(_target: String) -> void:
+		if is_instance_valid(payload_activity):
+			payload_activity.free()
+			payload_activity = null
+		_on_panel_closed("mission_table"))
 	mission_table.commit_requested.connect(_on_mission_table_commit)
+	mission_table.payload_requested.connect(_on_payload_requested)
 	mission_table.hint_player = panels.hint_player
 	p01_panel = P01_SCENE.instantiate() as P01Panel
 	add_child(p01_panel)
@@ -768,6 +774,18 @@ func _on_mission_table_commit(target_id: String, plan: Dictionary) -> void:
 		panels.bind_query(runtime.query().merged({"outcome": _last_outcome}, true))
 		show_status(line)
 	show_chapter1_outcome()
+
+## Hosts the physical shift-5 STACK activity (doc 25 §4.3) over the paused
+## Mission Table. The job is staged in the Safe Room; anywhere else the table
+## keeps its button flow and the cadet is told where to go.
+func _on_payload_requested(settings: Dictionary) -> void:
+	if runtime == null or is_instance_valid(payload_activity):
+		return
+	if runtime.route.current_room_id() != "LOC-04":
+		show_status("Carry the supplies from the Safe Room response controls.")
+		return
+	payload_activity = PayloadStackActivity.launch(runtime, settings)
+	payload_activity.closed.connect(func() -> void: payload_activity = null)
 
 ## Reads only the existing route ending, complete receipts and checkpoint. The
 ## route remains responsible for every retry and physical scene/Chapter 2 gate.

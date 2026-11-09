@@ -6764,7 +6764,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Wire the shift-5 STACK Mission Table button to the physical carry activity (M1-58 hook)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M1-58"
@@ -6775,7 +6775,7 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-09.",
-   "evidence": "",
+   "evidence": "game/scripts/ui/mission_table_panel.gd, game/scripts/ui/chapter1_campaign_hud.gd, game/tools/test_payload.gd (163/163 PASS), test_m155_mission_table.gd (109/109 PASS), test_p02_mission_table.gd (78/78 PASS), test_player_text.gd (13060/13060 PASS), production/qa/evidence/M1-112_shift5_stack_table.png",
    "updated": "2026-11-09",
    "prompt": "M1-58 landed PayloadStackActivity (game/scripts/payload/stack_activity.gd) but left the UI hook to you, since you own these files and were editing them. Port the hook from the parked branch: git diff origin/main...origin/night/M1-58 -- game/scripts/ui/ (commit 0953cea). In mission_table_panel.gd: signal payload_requested(settings); when alarm_state().action == STACK, start_task() emits it (refuse with a reason if unconnected), task_step() refuses ('Carry a supply bundle to a bunk slot.'), _render_task shows the crates wording and a CARRY SUPPLIES · CHOOSE CONTROLS button (and the old-save FINISH WITH SAVED SUPPLIES path), and add refresh_payload_result() (the activity already calls it when present). In chapter1_campaign_hud.gd: connect payload_requested to a handler that, only in LOC-04, calls PayloadStackActivity.launch(runtime, settings) and keeps the reference (is_instance_valid checks); elsewhere show_status('Carry the supplies from the Safe Room response controls.'). Re-add to game/tools/test_payload.gd the check that Mission Table slot clicks cannot bypass physical delivery, and launch through table.start_task(). Acceptance: run game/tools/run_tests.sh and paste its last line; screenshot the shift-5 table with the carry button to production/qa/evidence/<task id>_*.png.",
    "reserved_for": "ramim",

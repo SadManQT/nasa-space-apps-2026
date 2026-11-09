@@ -210,10 +210,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-120">M1-120</a> Investigate measured Windows EVA scene generation over the loading budget <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">Sliced GLTFAnimation conversion in AssetGeometry.prepare() into 8-clip batches so glb_generate_scene on EVA/cast GLBs drops from ~20 ms (M4…</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">5 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">13 blocked</span><span class="chip s-todo">29 todo</span></div><div class="bar"><i style="width:10%"></i></div>
-<details open><summary>Working now (2)</summary><ul>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">6 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">13 blocked</span><span class="chip s-todo">29 todo</span></div><div class="bar"><i style="width:12%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
 <li><a class="id" href="#M1-56">M1-56</a> Messages: inbox, arrival toasts, unlock triggers and the message validator <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-09</div></li>
-<li><a class="id" href="#M1-112">M1-112</a> Wire the shift-5 STACK Mission Table button to the physical carry activity (M1-58 hook) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-09</div></li>
 </ul></details>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M1-74">M1-74</a> Stop the &#x27;no meta lla_fade&#x27; error in the HUD fade <span class="chip ">codex</span> <span class="chip ">P2</span></li>
@@ -263,10 +262,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-72">M3-72</a> Chapter select, mission list, progress and achievements screens <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M4-11">M4-11</a> Main TitleStage WorldEnvironment toggle &amp; HUD forecast cache across camera turns <span class="chip ">any</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details><summary>Done (5)</summary><ul>
+<details><summary>Done (6)</summary><ul>
 <li><a class="id" href="#M1-90">M1-90</a> Run complete Windows loading diagnostics for M1-68 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">Completed the two requested fresh-process Windows runs with the unchanged collector. Run1:537 checks,2 failures (title51.869ms,campaign66.5…</div></li>
 <li><a class="id" href="#M1-98">M1-98</a> Recollect Windows loading evidence with retained stage traces <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">production/qa/evidence/M1-68_windows/2026-11-09_retained_ramim/README.md; source12d8252/game108a384;2fresh runs581/7 and581/6 timing failur…</div></li>
 <li><a class="id" href="#M1-101">M1-101</a> Guard HUD world overlays while rebuilt player nodes leave the tree <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">production/qa/evidence/M1-101/README.md; final330/0 focused; review finding fixed; full/native pending. Full e78f5bc/game108a384:83/84; onl…</div></li>
+<li><a class="id" href="#M1-112">M1-112</a> Wire the shift-5 STACK Mission Table button to the physical carry activity (M1-58 hook) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">game/scripts/ui/mission_table_panel.gd, game/scripts/ui/chapter1_campaign_hud.gd, game/tools/test_payload.gd (163/163 PASS), test_m155_miss…</div></li>
 <li><a class="id" href="#M1-118">M1-118</a> Guard Mission Table layout focus when its panel is freed <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Source50db8f0; real deferred callback RED11/1 -&gt;GREEN11/0; MissionTable109/P0278/new11=198/0 pluspayload160/0; native14/0/2PNG,2ObjectDBwar…</div></li>
 <li><a class="id" href="#M1-121">M1-121</a> Re-audit all saved branches and prioritize explainer UI blockers <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Static audit PASS62/62refs,57tips; production/qa/evidence/M1-121/README.md and6 verified SHA256 artifacts. No runtime/render claim; existin…</div></li>
 </ul></details>
@@ -7208,7 +7208,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Wire the shift-5 STACK Mission Table button to the physical carry activity (M1-58 hook)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M1-58"
@@ -7219,7 +7219,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-09.",
-   "evidence": "",
+   "evidence": "game/scripts/ui/mission_table_panel.gd, game/scripts/ui/chapter1_campaign_hud.gd, game/tools/test_payload.gd (163/163 PASS), test_m155_mission_table.gd (109/109 PASS), test_p02_mission_table.gd (78/78 PASS), test_player_text.gd (13060/13060 PASS), production/qa/evidence/M1-112_shift5_stack_table.png",
    "updated": "2026-11-09",
    "prompt": "M1-58 landed PayloadStackActivity (game/scripts/payload/stack_activity.gd) but left the UI hook to you, since you own these files and were editing them. Port the hook from the parked branch: git diff origin/main...origin/night/M1-58 -- game/scripts/ui/ (commit 0953cea). In mission_table_panel.gd: signal payload_requested(settings); when alarm_state().action == STACK, start_task() emits it (refuse with a reason if unconnected), task_step() refuses ('Carry a supply bundle to a bunk slot.'), _render_task shows the crates wording and a CARRY SUPPLIES · CHOOSE CONTROLS button (and the old-save FINISH WITH SAVED SUPPLIES path), and add refresh_payload_result() (the activity already calls it when present). In chapter1_campaign_hud.gd: connect payload_requested to a handler that, only in LOC-04, calls PayloadStackActivity.launch(runtime, settings) and keeps the reference (is_instance_valid checks); elsewhere show_status('Carry the supplies from the Safe Room response controls.'). Re-add to game/tools/test_payload.gd the check that Mission Table slot clicks cannot bypass physical delivery, and launch through table.start_task(). Acceptance: run game/tools/run_tests.sh and paste its last line; screenshot the shift-5 table with the carry button to production/qa/evidence/<task id>_*.png.",
    "reserved_for": "ramim",
