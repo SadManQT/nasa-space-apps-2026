@@ -185,7 +185,9 @@ func reveal_hint() -> void:
 	hint_player.request_hint("p01", lesson)
 
 func _context() -> String:
-	return JSON.stringify([_campaign.route.snapshot(), _campaign.director.snapshot(), _choices])
+	var state := _campaign.director.snapshot()
+	state.erase("presentation_resume")
+	return JSON.stringify([_campaign.route.snapshot(), state, _choices])
 
 func _simple_action() -> bool:
 	return _view.get("action", "") in ["scan_packet", "label_alo_external", "label_tara_indoor", "seal_alo", "seal_tara"]
@@ -355,6 +357,12 @@ func _restore_focus() -> void:
 
 func _input(event: InputEvent) -> void:
 	if not visible or _covered or (hint_player != null and hint_player.is_open()):
+		return
+	if event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_A:
+		var focused := get_viewport().gui_get_focus_owner()
+		if focused is Button and is_ancestor_of(focused) and not focused.disabled:
+			focused.pressed.emit()
+			get_viewport().set_input_as_handled()
 		return
 	var back: bool = (event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE) or (event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_B)
 	var confirm: bool = event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_Y

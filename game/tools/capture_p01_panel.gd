@@ -55,7 +55,7 @@ func _run() -> void:
 	await _press("TryIt", "keyboard")
 	_expect(panel._prediction.get("accepted", false), "typed numeric selection reaches authoritative forecast")
 	await _capture("calibration_prediction")
-	var before := campaign.route.snapshot()
+	var before: Dictionary = campaign.route.snapshot()
 	for level in range(1, 4):
 		await _press("ProbeHint", "controller")
 		_expect(campaign.hud.panels.hint_player.level == level and campaign.query().paused, "hint %d keeps pause union" % level)
@@ -142,9 +142,10 @@ func _near(id: String) -> void:
 	campaign._player.velocity = Vector3.ZERO
 	await physics_frame
 	campaign._player.get_viewport().get_camera_3d().look_at(target.global_position)
-	await process_frame
 
 func _type(field: String, text: String) -> void:
+	await process_frame
+	await process_frame
 	var entry := panel.find_child("Input_" + field, true, false) as LineEdit
 	entry.grab_focus()
 	entry.select_all()
@@ -154,10 +155,13 @@ func _type(field: String, text: String) -> void:
 	await _key(KEY_TAB)
 
 func _press(id: String, device: String) -> void:
+	await process_frame
+	await process_frame
 	var control := panel.find_child(id, true, false) as Control
 	control.grab_focus()
 	await process_frame
 	await process_frame
+	_expect(root.gui_get_focus_owner() == control, "input focus reaches " + id)
 	if device == "mouse":
 		for down in [true, false]:
 			var event := InputEventMouseButton.new()
@@ -212,3 +216,4 @@ func _expect(value: bool, label: String) -> void:
 	if not value:
 		failures += 1
 		push_error(label)
+		quit(1)

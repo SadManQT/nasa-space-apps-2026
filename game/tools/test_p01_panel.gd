@@ -44,6 +44,19 @@ func _run() -> void:
 	if campaign.hud.panels.hint_player.is_open():
 		campaign.hud.panels.hint_player.close()
 	await _focus_walk(panel)
+	var dry_button := panel.find_child("Choose_dry", true, false) as Button
+	dry_button.grab_focus()
+	await process_frame
+	await process_frame
+	await _pad(JOY_BUTTON_A)
+	_check(panel.selection().get("reference") == "dry", "controller A selects the focused reference once")
+	panel.undo()
+	await process_frame
+	await process_frame
+	dry_button = panel.find_child("Choose_dry", true, false) as Button
+	dry_button.grab_focus()
+	await _pad(JOY_BUTTON_DPAD_DOWN)
+	_check(root.gui_get_focus_owner() == panel.find_child("Choose_wet", true, false), "controller down reaches the next reference")
 	_check(campaign.query().paused and panel.selection().is_empty(), "reading pauses with every input unset")
 	_check(not panel.preview().accepted and not panel.request_commit().accepted, "unset input cannot predict or submit")
 	panel.choose("reference", "wet")
@@ -55,6 +68,12 @@ func _run() -> void:
 	panel.choose("raw_reading", 10)
 	panel.choose("calibrated_reading", 0)
 	_check(panel.preview().accepted and panel.request_commit().accepted, "explicit dry 10 to 0 predicts and confirms")
+	panel.cancel_confirm()
+	await process_frame
+	await process_frame
+	var delivered: Dictionary = campaign.update_message_metadata({"delivered_ids": ["MSG-CH01-001"], "read_ids": ["MSG-CH01-001"]})
+	_check(bool(delivered.get("persisted", false)), "bounded message update persists during puzzle reading")
+	_check(panel.request_commit().accepted, "message delivery/read preserves the accepted gameplay prediction")
 	panel.cancel_confirm()
 	await process_frame
 	await process_frame
@@ -188,3 +207,12 @@ func _labels(node: Node) -> String:
 	for child in node.get_children():
 		text += _labels(child)
 	return text
+
+func _pad(code: int) -> void:
+	for down in [true, false]:
+		var event := InputEventJoypadButton.new()
+		event.button_index = code
+		event.pressed = down
+		Input.parse_input_event(event)
+		Input.flush_buffered_events()
+		await process_frame
