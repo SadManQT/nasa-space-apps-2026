@@ -6974,6 +6974,26 @@
    "prompt": "User requests re-audit every local and remote branch before finishing Ramim work, prioritizing screens blocking Sadman M1-59/M3-66/M3-76. Snapshot all advertised/local refs and unique tips; inspect ancestry plus branch-specific content against current main, distinguish semantic ports from unfinished WIP/metadata-only branches, identify ownership/runtime risks and exact saved work to reuse. Preserve every branch/worktree and all local import/settings changes. No wholesale stale merges or third-owner edits. Publish one complete indexed report covering every ref, with source/hash, findings, reusable paths, dependency/owner/resume condition and explicit static-review limits. Binary asset/render and historical test evidence are not fresh validation. Reconcile findings with existing board without overwriting others; record owner requests for genuine foreign blockers. Then claim M1-56 Messages first; MissionTable code exists, formal M55/M68 gate still needs truthful handoff.",
    "reserved_for": "ramim",
    "effort": 2
+  },
+  {
+   "id": "M4-16",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Gate eclipse monitor red rim to totality",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/assets/props/eclipse_power/monitor/"
+   ],
+   "refs": [],
+   "note": "Filed by Asif/Codex on 2026-11-09.",
+   "evidence": "",
+   "updated": "2026-11-09",
+   "prompt": "M3-6A_monitor_screen_ingress.png shows a faint red atmospheric ring around Earth before totality. M4-01 requires the red rim only at totality. The shared live screen in game/assets/props/eclipse_power/monitor/eclipse_camera_view.gdshader adds rim * gain unconditionally, although eclipse_monitor_screen.gd already computes ring_visible/visible_fraction. Gate the shader rim to totality for both PR_EclipseMonitor LODs, preserving the 3.5 Earth/Sun width ratio, the totality ring and the conceptual inset. Add a regression that checks rendered ingress and totality frames and run game/tools/run_tests.sh. Acceptance: no red atmospheric rim at ingress or egress, red rim visible at totality, all existing science labels intact. See production/review/visual_review.md M3-6A section.",
+   "reserved_for": "sadman",
+   "effort": 1
   }
  ],
  "requirements": [

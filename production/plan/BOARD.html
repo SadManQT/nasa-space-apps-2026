@@ -86,9 +86,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand that member (up to 5, in work order), then any ready steps they do by hand.</p>
 <div class="grid team">
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">102 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">12 todo</span></div><div class="bar"><i style="width:89%"></i></div>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Producer, art and media lead, integrator · 40% share</div><div class="counts"><span class="chip s-done">102 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">13 todo</span></div><div class="bar"><i style="width:88%"></i></div>
 <details open><summary>Working now (1)</summary><ul>
 <li><a class="id" href="#M1-120">M1-120</a> Investigate measured Windows EVA scene generation over the loading budget <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/antigravity on 2026-11-09</div></li>
+</ul></details>
+<details open><summary>Next up today (1)</summary><ul>
+<li><a class="id" href="#M4-16">M4-16</a> Gate eclipse monitor red rim to totality <span class="chip ">claude</span> <span class="chip ">P1</span></li>
 </ul></details>
 <details><summary>To do (12)</summary><ul>
 <li><a class="id" href="#M1-24">M1-24</a> Fix the playtest and QA findings, then freeze the demo build <span class="chip ">claude</span> <span class="chip ">P0</span></li>
@@ -7417,6 +7420,26 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "prompt": "User requests re-audit every local and remote branch before finishing Ramim work, prioritizing screens blocking Sadman M1-59/M3-66/M3-76. Snapshot all advertised/local refs and unique tips; inspect ancestry plus branch-specific content against current main, distinguish semantic ports from unfinished WIP/metadata-only branches, identify ownership/runtime risks and exact saved work to reuse. Preserve every branch/worktree and all local import/settings changes. No wholesale stale merges or third-owner edits. Publish one complete indexed report covering every ref, with source/hash, findings, reusable paths, dependency/owner/resume condition and explicit static-review limits. Binary asset/render and historical test evidence are not fresh validation. Reconcile findings with existing board without overwriting others; record owner requests for genuine foreign blockers. Then claim M1-56 Messages first; MissionTable code exists, formal M55/M68 gate still needs truthful handoff.",
    "reserved_for": "ramim",
    "effort": 2
+  },
+  {
+   "id": "M4-16",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Gate eclipse monitor red rim to totality",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/assets/props/eclipse_power/monitor/"
+   ],
+   "refs": [],
+   "note": "Filed by Asif/Codex on 2026-11-09.",
+   "evidence": "",
+   "updated": "2026-11-09",
+   "prompt": "M3-6A_monitor_screen_ingress.png shows a faint red atmospheric ring around Earth before totality. M4-01 requires the red rim only at totality. The shared live screen in game/assets/props/eclipse_power/monitor/eclipse_camera_view.gdshader adds rim * gain unconditionally, although eclipse_monitor_screen.gd already computes ring_visible/visible_fraction. Gate the shader rim to totality for both PR_EclipseMonitor LODs, preserving the 3.5 Earth/Sun width ratio, the totality ring and the conceptual inset. Add a regression that checks rendered ingress and totality frames and run game/tools/run_tests.sh. Acceptance: no red atmospheric rim at ingress or egress, red rim visible at totality, all existing science labels intact. See production/review/visual_review.md M3-6A section.",
+   "reserved_for": "sadman",
+   "effort": 1
   }
  ],
  "requirements": [
