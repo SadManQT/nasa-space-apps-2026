@@ -764,10 +764,16 @@ func _apply_focus(target: Control) -> void:
 		if _guide_step() > 0 and String(target.name).begins_with("Choice_1_"):
 			var scroll := find_child("TableBodyScroll", true, false) as ScrollContainer
 			# Follow-focus can scroll before the rebuilt rows have their final size.
-			await get_tree().process_frame
-			await get_tree().process_frame
-			if is_instance_valid(scroll) and scroll.is_inside_tree():
-				scroll.scroll_vertical = 0
+			if scroll != null:
+				_scroll_after_layout(get_tree(), weakref(scroll))
+
+# A static continuation can outlive the panel without resuming a freed instance.
+static func _scroll_after_layout(tree: SceneTree, weak_scroll: WeakRef) -> void:
+	await tree.process_frame
+	await tree.process_frame
+	var scroll := weak_scroll.get_ref() as ScrollContainer
+	if is_instance_valid(scroll) and scroll.is_inside_tree():
+		scroll.scroll_vertical = 0
 
 func _grab_first_focus() -> void:
 	if _guide_step() > 0:
