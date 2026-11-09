@@ -4589,7 +4589,18 @@
     "game/scripts/asset_geometry.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-53*",
-    "production/qa/perf/"
+    "production/qa/perf/",
+    "game/tools/test_loading.gd.uid"
+   ],
+   "edit_files": [
+    "game/scripts/loading/preparation_watchdog.gd",
+    "game/scripts/loading/preparation_watchdog.gd.uid",
+    "game/scripts/loading/resource_job.gd",
+    "game/scripts/loading/load_preparation.gd",
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "game/tools/test_loading.gd",
+    "game/tools/test_loading.gd.uid",
+    "production/qa/perf/atik_batch_2026-11-10/M1-53.md"
    ]
   },
   {
