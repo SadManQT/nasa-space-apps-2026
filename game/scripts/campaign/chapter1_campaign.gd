@@ -848,7 +848,7 @@ func _refresh_world_incremental() -> void:
 	await get_tree().process_frame
 	# First real room draw (including its lighting/layout variants) is covered.
 	if DisplayServer.get_name() != "headless":
-		await RenderingServer.frame_post_draw
+		await preparation.wait_for_draw("room_first_draw:" + route.current_room_id())
 
 func _terrain_wanted() -> bool:
 	return incremental_loading and bool(RoomContract.terrain_lighting(route.current_room_id(), route.current_scene_id(), _current_terrain_segment()).get("ready", false))
