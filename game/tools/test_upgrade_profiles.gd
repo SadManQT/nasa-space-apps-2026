@@ -12,6 +12,7 @@ const Chapter2GateCatalog = preload("res://scripts/missions/chapter2_gate_catalo
 const ExtendedRouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const ExtendedGateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
 const ProgressionScript = preload("res://scripts/progression/cadet_progression.gd")
+const Chapter8Witness = preload("res://tools/support/chapter8_witness.gd")
 
 var checks := 0
 var failures := 0
@@ -137,6 +138,7 @@ func _test_all_128_upgrade_profiles() -> void:
 			if not wanted.has(action_id):
 				continue
 			var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+			payload = Chapter8Witness.payload(action_id, {}, payload)
 			payload["_puzzle_action"] = action_id
 			cmds.append({
 				"command_id": String(target.get("command_id", "")),
@@ -319,7 +321,8 @@ func _test_boundary_and_deterministic_replay() -> void:
 		for order in range(1, 13):
 			var scene_id := "EX-CH08-S%02d" % order
 			for target in ExtendedGateCatalog.targets_for_scene(scene_id):
-				route.perform(String(target.get("target_id", "")), target.get("payload_defaults", {}))
+				var tid := String(target.get("target_id", ""))
+				route.perform(tid, Chapter8Witness.payload(tid, director.snapshot(), target.get("payload_defaults", {})))
 			var moved := route.advance_scene()
 			if scene_id == "EX-CH08-S12":
 				_check(bool(moved.get("campaign_complete", false)), "ExtendedCampaignRoute closes campaign at EX-CH08-S12 for mask " + str(mask))
@@ -356,7 +359,8 @@ func _test_boundary_and_deterministic_replay() -> void:
 		route.start_at("EX-CH08-S01")
 		for scene_id in ["EX-CH08-S01", "EX-CH08-S02", "EX-CH08-S03", "EX-CH08-S04", "EX-CH08-S05"]:
 			for target in ExtendedGateCatalog.targets_for_scene(scene_id):
-				route.perform(String(target.get("target_id", "")), target.get("payload_defaults", {}))
+				var tid := String(target.get("target_id", ""))
+				route.perform(tid, Chapter8Witness.payload(tid, director.snapshot(), target.get("payload_defaults", {})))
 			if scene_id != "EX-CH08-S05":
 				route.advance_scene()
 		hashes.append(JSON.stringify(director.snapshot().resources) + "|" + JSON.stringify(director.snapshot().route))

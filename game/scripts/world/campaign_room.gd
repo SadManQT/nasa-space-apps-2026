@@ -420,6 +420,7 @@ func _add_focus_target(target: Dictionary) -> Node3D:
 	node.set_meta("target_id", String(target.get("target_id", node.name)))
 	node.set_meta("focus_label", String(target.get("label", node.name)))
 	node.set_meta("asset_id", target.get("asset_id", ""))
+	node.set_meta("approach_m", target.get("approach_m", []))
 	node.set_meta("verb", String(target.get("verb", "Inspect")))
 	node.set_meta("room_id", room_id)
 	focus_root.add_child(node)

@@ -3,6 +3,7 @@ class_name ExtendedGateCatalog
 
 const Chapter2Catalog = preload("res://scripts/missions/chapter2_gate_catalog.gd")
 const RoomContract = preload("res://scripts/world/room_contract.gd")
+const Chapter8 = preload("res://scripts/puzzles/chapter8_puzzles.gd")
 
 static func scene_ids() -> Array:
 	var result: Array = []
@@ -69,6 +70,8 @@ static func targets_for_scene(scene_id: String) -> Array:
 	return result
 
 static func _target(action: String, room_id: String, label: String, mission_id: String, scene_id: String, puzzle_id: String, required: Array, defaults: Dictionary) -> Dictionary:
+	if Chapter8.is_step(action) and not Chapter8.focus_label(action).is_empty():
+		label = Chapter8.focus_label(action)
 	label = {"p05_inspect_tank": "Inspect main tank candidate", "p05_inspect_habitat": "Inspect habitat trunk candidate", "p05_inspect_garden": "Inspect garden feedthrough candidate", "p05_inspect_return": "Inspect return line candidate", "p05_inspect_airlock": "Inspect airlock seal candidate", "p05_inspect_annex": "Inspect annex branch candidate"}.get(action, label)
 	return {"target_id": action, "room_id": room_id, "world_focus_id": _world_focus_id(action, room_id), "focus_label": label, "verb": "Use", "command_verb": "campaign_operation", "command_target_id": puzzle_id, "command_id": "extended:%s" % action, "owning_mission_id": mission_id, "owning_scene_id": scene_id, "physical_flag": action + "_done", "required_flags": required.filter(func(value): return not String(value).is_empty()), "unmet_reason": "Complete the preceding evidence step before using this target.", "readout": label, "range_m": 3.0, "line_of_sight_required": false, "puzzle_id": puzzle_id, "puzzle_action": action, "payload_defaults": defaults}
 
@@ -220,7 +223,11 @@ static func _actions(chapter: int, order: int) -> Array:
 			][order - 1]
 	return []
 
+## Pre-filled witness payloads for Chapters 3–7 receipt gates. P-15 and P-16
+## (Chapter 8) have none: the player decides every value in the puzzle panel.
 static func _defaults(action: String) -> Dictionary:
+	if Chapter8.is_step(action):
+		return {}
 	match action:
 		"p05_read_main_t0", "p05_read_main_t10", "p05_read_return_t0", "p05_read_return_t10": return {"reading": 100}
 		"p05_read_garden_t0": return {"reading": 82}
@@ -244,9 +251,4 @@ static func _defaults(action: String) -> Dictionary:
 		"p12_reset_sequence": return {"sequence": ["isolate", "zero", "reset", "reconnect", "camera_test"]}
 		"p13_commit_plan": return {"water": 4, "crate": 2, "heat": "COZY", "light": "DIM", "reserve": 30}
 		"p14_route_reading_1", "p14_route_reading_2": return {"reading": 0.4 if action.ends_with("1") else 0.3}
-		"p15_choose_surveyed_route": return {"route": "SURVEYED", "reserve": 4}
-		"p15_restore_marker_2": return {"battery": "SPARE", "test": "PASS"}
-		"p16_local_bearing": return {"bearing": "L2"}
-		"p16_earth_bearing": return {"bearing": "E3"}
-		"p16_checksum": return {"value": "ALO42"}
 	return {}

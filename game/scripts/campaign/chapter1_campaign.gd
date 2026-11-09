@@ -397,10 +397,15 @@ func _has_line_of_sight(target: Node3D) -> bool:
 		return true
 	var collider: Object = hit.get("collider", null)
 	var asset_id := String(target.get_meta("asset_id", ""))
-	if collider is Node and not asset_id.is_empty() and _room != null and _room.visual_root != null:
-		var asset := _room.visual_root.get_node_or_null(asset_id)
-		if asset != null and (collider == asset or asset.is_ancestor_of(collider as Node)):
-			return true
+	if collider is Node and not asset_id.is_empty() and _room != null:
+		if _room.visual_root != null:
+			var asset := _room.visual_root.get_node_or_null(asset_id)
+			if asset != null and (collider == asset or asset.is_ancestor_of(collider as Node)):
+				return true
+		if _room.collision_root != null:
+			var obs := _room.collision_root.get_node_or_null(asset_id)
+			if obs != null and (collider == obs or obs.is_ancestor_of(collider as Node)):
+				return true
 	return false
 
 func interact_nearby() -> Dictionary:
@@ -413,6 +418,8 @@ func interact_nearby() -> Dictionary:
 		return {"accepted": true, "p01_panel_requested": true, "physical_commit": false, "reason": "Choose the P-01 inputs before confirming."}
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) == "P-02" and hud != null and hud.open_mission_table(String(selected.target_id)):
 		return {"accepted": true, "reason": "Mission Table open.", "mission_table": true}
+	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-15", "P-16"] and hud != null and hud.open_chapter8_panel(String(selected.target_id)):
+		return {"accepted": true, "reason": "Decision card open.", "chapter8_panel": true}
 	if not selected.is_empty():
 		return perform_target(String(selected.target_id))
 	var dock_interacted := _interact_garage_dock()

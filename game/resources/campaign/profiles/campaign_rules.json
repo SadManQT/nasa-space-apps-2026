@@ -63,5 +63,108 @@
     "reading_limit": 1,
     "reading_interval_seconds": 600,
     "repeater_spares": 1
+  },
+  "chapter8": {
+    "source": "game-design/08_PUZZLE_DESIGNS.md P-15 and P-16 (accepted solutions); game-design/22_PUZZLE_CLUE_DESIGN.md section 10; full-game-story/STORY_FULL.md EX-CH08 decision reviews. Answer keys for the Chapter 8 puzzle ledger; the three relay keys stay in `relay`.",
+    "rover_team": [
+      "ferreira",
+      "kai",
+      "rafi"
+    ],
+    "home_team": [
+      "mei",
+      "amara"
+    ],
+    "manifest_required": [
+      "controller",
+      "battery_spare",
+      "service_diagram",
+      "repeater_checkpoints"
+    ],
+    "manifest_forbidden": [
+      "old_2034_controller",
+      "decorative_floods"
+    ],
+    "provisions_min_hours": 51,
+    "provisions_max_hours": 72,
+    "surveyed_route": "SURVEYED",
+    "min_reserve": 2,
+    "marker_two_bearing": 177.0,
+    "bearing_tolerance": 2.0,
+    "brake_action": "brake_on_pad",
+    "packet_rule": "current",
+    "repair_sequence": [
+      "isolate",
+      "remove_battery",
+      "compare_spec",
+      "install_spare",
+      "close_housing",
+      "reconnect"
+    ],
+    "chain_tests": [
+      "1-2",
+      "2-3"
+    ],
+    "home_segments": [
+      [
+        2,
+        33
+      ],
+      [
+        5,
+        3
+      ]
+    ],
+    "home_loop": {
+      "heat": "COOL",
+      "light": "DIM",
+      "water_return": "OPEN"
+    },
+    "home_air_total": 2.8125,
+    "gauge": "independent",
+    "home_check_order": [
+      "air",
+      "temperature",
+      "return_path",
+      "acknowledge"
+    ],
+    "summit_packet": "summit",
+    "controller_first_step": "isolate",
+    "zero_reading": 0,
+    "controller_choice": "december_spare",
+    "housing": "closed",
+    "power_step": "reconnect",
+    "stable_lock": "stable",
+    "lock_hold_seconds": 3,
+    "checksum_packet": "current",
+    "path_records": [
+      "local",
+      "earth"
+    ],
+    "voice_plan": "explicit",
+    "voice_checks": [
+      "Aurora",
+      "Earth"
+    ],
+    "report": "both_teams",
+    "return_departure": "2047-04-09 03:00 UTC",
+    "return_gate_count": 3,
+    "arrivals": [
+      "ferreira",
+      "kai",
+      "rafi"
+    ],
+    "occupancy_change": "arrival",
+    "final_checks": [
+      "crew",
+      "seeds",
+      "pressure",
+      "temperature",
+      "cotton"
+    ],
+    "dedications": [
+      "For every hand that kept the light",
+      "For the gardens we leave for others"
+    ]
   }
 }
