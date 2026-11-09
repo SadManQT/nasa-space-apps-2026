@@ -4906,7 +4906,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Things you build stay: markers, fixed lines, lights, repeaters and the coverage map",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M3-61"
@@ -4921,7 +4921,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "NETWORK RESULT: PASS (35 checks, 0 failures) (game/tools/test_network.gd); screenshots: production/qa/evidence/M3-62_coverage_map.png",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.4: placeable survey markers, fixed lines, path lights and relay repeaters made from carried payloads;\nsaved and shown on later trips, the map and the route planner (CH04 beacons return as a layer on the CH08 route map, game-design/24_NARRATIVE_REVISION.md N1);\na coverage map whose new links can unlock messages; the finale's voice travels over player-built links (P-16). Save migration\ntested; no change to canon outcomes.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
@@ -4949,7 +4949,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "The rover and the route planner",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M3-61"
@@ -4963,7 +4963,7 @@
     "game/resources/data/nasa/viper_slope_limit.json"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026). Keep the route-planner panel inside game/scripts/rover/ and style it with UiDesign (game/scripts/ui/ is Ramim's).",
-   "evidence": "",
+   "evidence": "ROVER RESULT: PASS (23 checks, 0 failures) (game/tools/test_rover.gd); screenshots: production/qa/evidence/M3-63_route_planner.png, production/qa/evidence/M3-63_rover_cab.png",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.5: rover with the VIPER-class slope limit from the fixture, battery with return reserve, trailer payloads,\ncab dashboard readouts, assisted driving that stays inside the limit (Expedition only warns); a route planner on the map with\nwaypoints, slope profile, distance, time, battery and reserve shown before confirming. Tests for the slope limit, reserve\narithmetic and planner estimates.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.\n\nThe player drives the rover (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.5): climb in with E, chase camera and cab view (V), crew ride along on the intercom, headlights, climb out anywhere safe, low-gravity handling (long suspension travel, ballistic dust, longer braking). Drivable in the Moon trainer as soon as it exists.",
    "reserved_for": "ramim",
@@ -5039,7 +5039,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Readable hazards: moonquake, cold, impact flashes, darkness, solar-storm shelter run",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M3-61"
@@ -5053,7 +5053,7 @@
     "game-design/08_PUZZLE_DESIGNS.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "HAZARDS RESULT: PASS (19 checks, 0 failures) (game/tools/test_hazards.gd); screenshots: production/qa/evidence/M3-65_hazards_hud.png",
    "updated": "2026-11-10",
    "prompt": "Do: hazards per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.2 and §6, never combat: quake shaking with things to secure and aftershock warnings (CH03); cold shadow\nheater cost and equipment limits (CH04); impact flashes as observations and shield maintenance (CH05); darkness energy budget\n(CH06); solar storm dose that accumulates outside shelter with a dosimeter and a shelter run (CH07; untimed in Family Mode,\ndose still shown). Numbers from 08 where they exist; every hazard warns before it matters. Tests per hazard.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
