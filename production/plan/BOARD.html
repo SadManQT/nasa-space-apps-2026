@@ -317,7 +317,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 </div>
 <div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">3 todo</span></div><div class="bar"><i style="width:0%"></i></div>
 <details open><summary>Working now (1)</summary><ul>
-<li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Atik/antigravity on 2026-11-10</div></li>
+<li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Atik/codex on 2026-11-10</div></li>
 </ul></details>
 <details open><summary>Next up today (3)</summary><ul>
 <li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -5171,7 +5171,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "tool": "codex",
    "title": "Rule out a threaded-loading deadlock at full-cast entry",
    "status": "in_progress",
-   "owner": "Atik/antigravity",
+   "owner": "Atik/codex",
    "deps": [],
    "paths": [
     "game/scripts/loading/",
@@ -5196,6 +5196,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
      "owner": "Atik/antigravity",
      "status": "in_progress",
      "reason": "User-approved implementation batch"
+    },
+    {
+     "date": "2026-11-10",
+     "previous_actor": "Atik/antigravity",
+     "actor": "Atik/codex",
+     "reason": "User confirms no competing session; saved branch f6285e4 reviewed. Current rules synchronized; exact files reserved before further edits. User explicitly leaves raw AssetGeometry patch for Sadman."
     }
    ],
    "integration_paths": [

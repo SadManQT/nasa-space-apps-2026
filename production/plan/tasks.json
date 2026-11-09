@@ -4552,7 +4552,7 @@
    "tool": "codex",
    "title": "Rule out a threaded-loading deadlock at full-cast entry",
    "status": "in_progress",
-   "owner": "Atik/antigravity",
+   "owner": "Atik/codex",
    "deps": [],
    "paths": [
     "game/scripts/loading/",
@@ -4577,6 +4577,12 @@
      "owner": "Atik/antigravity",
      "status": "in_progress",
      "reason": "User-approved implementation batch"
+    },
+    {
+     "date": "2026-11-10",
+     "previous_actor": "Atik/antigravity",
+     "actor": "Atik/codex",
+     "reason": "User confirms no competing session; saved branch f6285e4 reviewed. Current rules synchronized; exact files reserved before further edits. User explicitly leaves raw AssetGeometry patch for Sadman."
     }
    ],
    "integration_paths": [
