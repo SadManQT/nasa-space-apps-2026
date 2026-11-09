@@ -138,6 +138,9 @@ func _physical_use() -> void:
 	var state: Dictionary = campaign.director.snapshot()
 	var result: Dictionary = campaign.interact_nearby()
 	_check(result.get("p01_panel_requested", false) and requests.size() == 1, "physical USE requests P-01 panel")
+	# The owned HUD now pauses for reading; dismiss it before comparing live state.
+	campaign.hud.panels.hint_player.close()
+	campaign.hud.p01_panel.discard()
 	_check(campaign.route.snapshot() == before and campaign.director.snapshot() == state, "physical USE never solves calibration")
 	_check(not campaign.perform_target("calibrate_probe").accepted, "physical commit without inputs rejects")
 	var forecast: Dictionary = campaign.forecast_target("calibrate_probe", Inputs.payload("calibrate_probe"))

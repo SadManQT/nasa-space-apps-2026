@@ -41,13 +41,13 @@ func _run() -> void:
 		var count := requests.size()
 		var result: Dictionary = campaign.interact_nearby()
 		_check(bool(result.get("p01_panel_requested", false)) and requests.size() == count + 1 and requests.back().target_id == id, "nearby USE requests the chosen-input panel exactly once: " + id)
-		_check(campaign.route.snapshot() == before and campaign.director.snapshot() == state, "USE does not auto-plant or spend a receipt")
 		# The UI may be present in future integration; close it before geometry checks.
 		var panel = campaign.hud.get("p01_panel")
 		if panel != null and panel.is_open():
 			panel.discard()
 		if campaign.hud.panels.hint_player.is_open():
 			campaign.hud.panels.hint_player.close()
+		_check(campaign.route.snapshot() == before and campaign.director.snapshot() == state, "reading and closing the panel does not auto-plant or spend a receipt")
 	var target: Node3D = campaign.physical_target("plant_alo")
 	await _near(campaign, "plant_alo")
 	campaign._player.global_position += Vector3(0, 0, 20)
