@@ -6120,7 +6120,7 @@
     "game/scripts/campaign/"
    ],
    "refs": [],
-   "note": "Filed by Ramim/codex on 2026-11-08.",
+   "note": "Filed by Ramim/codex on 2026-11-08.\n9Nov: M1-101 source da1bbc6 removes detached HUD transform errors; P01inputs317/0 on that source. Earlier raw diagnostics retained. Full/native acceptance still pending.",
    "evidence": "production/qa/evidence/M1-95/README.md; b1b393c; 2/2 focused suites (346 checks); full/native pending.",
    "updated": "2026-11-09",
    "prompt": "M1-08 real-campaign integration exposed a cross-scene prerequisite mismatch in Chapter1Campaign.nearby_target(). After calibration and packet scan in EX-CH01-S03, advance normally to EX-CH01-S04 and stand at plant_alo (or plant_tara) within range, facing it with clear line of sight. route.current_flags() is empty in the new scene; route.p01_view(\"plant_alo\") reports missing_flags=[] and route.snapshot().p01.packet_scanned=true. nearby_target() currently checks required_flags only against current_flags(), so both planting targets requiring p01_scanned are skipped and interact_nearby returns Walk up to the next job instead of requesting the panel. No UI pause is active. Read production/qa/evidence/M1-08_runtime_blocker.md and retained diagnostic log.\nAlign nearby eligibility with the existing authoritative cross-scene prerequisite contract; preserve physical room/range/frustum/line-of-sight checks, target completion/idempotency and all chosen-input validation. Do not inject flags from UI, auto-fill player choices, or change Ramim UI. Add real nearby USE regression for previous-scene packet scan -> S04 plant_alo/tara; unsatisfied prerequisites and out-of-range/blocked targets still reject. Run focused P01 and full runner. Publish handoff to M1-08; its source candidate is parked locally at afe0c747 (not main) and cannot complete until this runtime fix. Existing M1-66 test pass did not cover this actual S04 nearby path.",
@@ -6423,7 +6423,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Guard HUD world overlays while rebuilt player nodes leave the tree",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [],
    "paths": [
@@ -6431,11 +6431,12 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.\n9Nov closeout: unstarted claim released at user request; no new implementation or completion claim. Existing saved requirements/preparation remain for next continuation.",
-   "evidence": "",
+   "evidence": "production/qa/evidence/M1-101/README.md; final330/0 focused; review finding fixed; full/native pending.",
    "updated": "2026-11-09",
    "prompt": "Existing campaign_media windowed/headless rebuilds log six ERROR Condition !is_inside_tree returning Transform3D during CS-02/CS-03 scene rebuild. Full raw log production/qa/evidence/M1-62_campaign_media.txt: _distance_to line 642 -> _update_world_overlay 1003 -> _process 973; direct global-transform access also 1006/1007. Same errors occur in the prior 15ff baseline full at old lines 614/975/978/979, so not newly introduced by M1-62. Investigate the real player/target lifetime contract and guard shared HUD readers until relevant 3D nodes are actually inside the tree; preserve valid markers, distances, focus, reduced motion and scene transitions. Do not edit Atik campaign/runtime or hide valid gameplay errors indiscriminately. Grep all callers before one shared fix. Add actual campaign room-rebuild regression and verify first/repeated transitions without these errors using mandatory runner; run full and retain unrelated audio/performance failures honestly. This task is separate from M1-62 authored guidance; source candidate already reviewed and is frozen during its final gate.",
    "reserved_for": "ramim",
-   "effort": 1
+   "effort": 1,
+   "blocker": "Reviewed source3d03159 + da1bbc6 fixes detached world distance/markers/prompts. Independent review1Important addressed via real focus-root RED13/1->GREEN13/0; P01inputs317/0 no transform errors. Full/native gate pending combined batch (Ramim). Saved source/evidence production/qa/evidence/M1-101/. Separate audio coroutine error/leak owned SadmanM1-114, no audio edit or clean-engine claim."
   },
   {
    "id": "M4-11",
@@ -6797,7 +6798,27 @@
    "note": "Filed by Ramim/codex on 2026-11-09.",
    "evidence": "",
    "updated": "2026-11-09",
-   "prompt": "User authorized Ramim to finish Atik runtime dependencies. Record reviewed source M1-99 (d0c32b8, route31/0/core76/0) in handbook section10; see production/qa/evidence/M1-99/README.md. Full integrated gate remains pending, do not call all acceptance done. Subsequent M1-69/M1-56 evidence will be appended to this request. No decision/canon change. M1-69 source d08eef8 adds campaign message_metadata/update_message_metadata wrappers through existing save service, focused28+76+31=135/0, API handoff production/qa/perf/M1-69.md. Full gate remains pending. M1-95 source b1b393c fixes prior-scene nearby prerequisites with existing context flags; focused346/0; review0 findings; full/native pending; existing HUDM101 errors and4ObjectDB warnings disclosed in evidence/M1-95.",
+   "prompt": "User authorized Ramim to finish Atik runtime dependencies. Record reviewed source M1-99 (d0c32b8, route31/0/core76/0) in handbook section10; see production/qa/evidence/M1-99/README.md. Full integrated gate remains pending, do not call all acceptance done. Subsequent M1-69/M1-56 evidence will be appended to this request. No decision/canon change. M1-69 source d08eef8 adds campaign message_metadata/update_message_metadata wrappers through existing save service, focused28+76+31=135/0, API handoff production/qa/perf/M1-69.md. Full gate remains pending. M1-95 source b1b393c fixes prior-scene nearby prerequisites with existing context flags; focused346/0; review0 findings; full/native pending; existing HUDM101 errors and4ObjectDB warnings disclosed in evidence/M1-95. M1-101 source3d03159 + da1bbc6 guards detached player/goal/nearby nodes. Reviewer1Important fixed via RED13/1->GREEN13/0; P01inputs317/0 no transform errors. Source QA evidence/M1-101; audio owner error remainsSadmanM1-114; full/native pending.",
+   "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M1-114",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "any",
+   "title": "Guard streamed audio coroutine when its scene owner is freed",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/audio/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-09.",
+   "evidence": "",
+   "updated": "2026-11-09",
+   "prompt": "M1-101 real CampaignScene room-rebuild regression produces ERROR: Resumed function _stream after await, but class instance is gone, audio_director.gd:303, plus1ObjectDB warning in both baselineRED and guardedGREEN. Logs production/qa/evidence/M1-101/M1-101_red_test_hud_world_lifetime.gd.txt and green counterpart. Repro through mandatory runner hud_world_lifetime: start campaign, detach/re-add world nodes, rebuild roomsS02/S03, free campaign and await frame. Inspect audio stream lifetime/cancellation ownership; preserve actual audio on live scenes and no stale playback after free. Do not edit Ramim HUD/test or Atik runtime; test real free/rebuild/stream readiness and retain asynchronous error proof. Publish scoped fix and focused/full evidence without weakening runner. Saved work: exact logs and source3d03159, no audio edit from Ramim. Needed before claiming clean integrated engine diagnostics.",
    "reserved_for": "sadman",
    "effort": 1
   }
