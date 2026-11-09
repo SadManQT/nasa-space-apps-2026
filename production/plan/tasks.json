@@ -5895,10 +5895,14 @@
     "game/scripts/asset_geometry.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-68*",
-    "production/qa/perf/"
+    "production/qa/perf/",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
    ],
    "edit_files": [
-    "production/qa/perf/atik_batch_2026-11-10/M1-68.md"
+    "production/qa/perf/atik_batch_2026-11-10/M1-68.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
    ]
   },
   {
