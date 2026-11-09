@@ -6586,7 +6586,7 @@
    "priority": "P0",
    "tool": "any",
    "title": "Profile and remove native first campaign draw hitch on M4",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -6620,11 +6620,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "edit_files": [
-    "production/qa/perf/atik_batch_2026-11-10/M1-92.md",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
-   ]
+   "blocker": "Saved native evidence a5c1448: 300s incomplete first attempt and completed Metal probe (exit0, 84.126s) with first-campaign max6607.878ms, title20169.285ms. Watchdog did not fire; no measured improvement/cause. Native main-thread wait sample is during title, not exact campaign correlation; Godot frames unsymbolicated and xcrun cannot provide xctrace on this CLT-only host. Resume with matching symbolicated native/Metal profile across real first room draw, then measured scoped fix, controlled before/after, loading screenshots, independent review and required green runner. All artifacts and limits in production/qa/perf/atik_batch_2026-11-10/M1-92.md."
   },
   {
    "id": "M1-93",
@@ -7548,8 +7544,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Investigate post-result Forward+ exit timeout on Intel Arc laptop",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/codex",
    "deps": [],
    "paths": [
     "game/scripts/campaign/",
@@ -7576,7 +7572,16 @@
    "integration_paths": [
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-116*",
-    "production/qa/perf/"
+    "production/qa/perf/",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
+   ],
+   "edit_files": [
+    "production/qa/perf/collect_native.py",
+    "production/qa/perf/test_collect_native.py",
+    "production/qa/perf/atik_batch_2026-11-10/M1-116.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
    ]
   },
   {
