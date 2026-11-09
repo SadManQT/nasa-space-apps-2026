@@ -43,7 +43,10 @@ func _test_service_and_unlock_triggers() -> void:
 	var service := CommsServiceScript.new()
 	service.setup(director, content, true)
 
-	_check(service.total_loaded_count() >= 30, "CommsService loads ch00 fixture and campaign message packs")
+	_check(service.total_loaded_count() >= 200, "CommsService loads ch00 fixture and all 8 campaign chapter message packs")
+	_check(service.message_by_id("MSG-CH02-001").get("chapter", 0) == 2, "ch02.json message pack loaded")
+	_check(service.message_by_id("MSG-CH03-001").get("chapter", 0) == 3, "ch03.json message pack loaded")
+	_check(service.message_by_id("MSG-CH04-001").get("chapter", 0) == 4, "ch04.json message pack loaded")
 	_check(service.is_delivered("MSG-CH00-001"), "ch00 scene_enter message unlocked at EX-CH01-S01")
 	_check(service.is_delivered("MSG-CH01-001"), "ch01 scene_enter message MSG-CH01-001 unlocked at EX-CH01-S01")
 	_check(not service.is_delivered("MSG-CH01-002"), "scene_exit message MSG-CH01-002 not yet unlocked before S01 exit")
@@ -196,6 +199,23 @@ func _test_hud_inbox_toasts_and_persistence() -> void:
 		if inbox_img != null:
 			var inbox_path := ProjectSettings.globalize_path("res://../production/qa/evidence/M1-56_inbox.png")
 			inbox_img.save_png(inbox_path)
+
+		# Capture Chapter 2, 3, and 4 message inbox views for M3-2T, M3-3T, M3-4T
+		hud.comms_service.evaluate_unlocks({
+			"current_scene_id": "EX-CH04-S02",
+			"completed_scene_ids": ["EX-CH01-S01", "EX-CH02-S01", "EX-CH03-S01", "EX-CH04-S01"],
+		}, false)
+		for ch_pair in [
+			{"id": "MSG-CH02-002", "path": "res://../production/qa/evidence/M3-2T_ch02_inbox.png"},
+			{"id": "MSG-CH03-002", "path": "res://../production/qa/evidence/M3-3T_ch03_inbox.png"},
+			{"id": "MSG-CH04-002", "path": "res://../production/qa/evidence/M3-4T_ch04_inbox.png"},
+		]:
+			hud.comms_panel.select_message(String(ch_pair.id))
+			await process_frame
+			await process_frame
+			var ch_img := root.get_texture().get_image()
+			if ch_img != null:
+				ch_img.save_png(ProjectSettings.globalize_path(String(ch_pair.path)))
 
 	# Close inbox via Escape
 	var esc_event := InputEventKey.new()

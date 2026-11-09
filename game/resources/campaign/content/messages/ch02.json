@@ -1,0 +1,467 @@
+{
+ "chapter": 2,
+ "messages": [
+  {
+   "id": "MSG-CH02-001",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-04-30T08:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH02-S01"
+   },
+   "join": "",
+   "subject": "Earth desk: morning window open",
+   "body": "Aurora, Earth desk. Your morning link is green and the April 30 botany packet is waiting on your console. Check Tara in the reference bay first and tell us what you find.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-002",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-04-30T08:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S01"
+   },
+   "join": "CH02 S01→S02",
+   "subject": "Tara opened",
+   "body": "Tara's photo is pinned right beside Alo's now. Two open flowers in two rooms, and no wind or insects on the Moon. Meet me at the bench: I have opened the pollination protocol and set out the flower model.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-003",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-04-30T08:35Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S01"
+   },
+   "join": "CH02 S01→S02",
+   "subject": "Yellow paper",
+   "body": "Tara is open! I folded a very small paper bee while Mei was setting up the protocol. She has not told me to put it away yet.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-004",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-04-30T08:40Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH02-S02"
+   },
+   "join": "",
+   "subject": "Field note: self-incompatible brassicas",
+   "body": "Many brassica varieties cannot fertilise themselves with their own pollen. Cross-pollination between two individuals carries pollen from one flower's anthers to the other flower's stigma.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-005",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-04-30T09:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S02"
+   },
+   "join": "CH02 S02→S03",
+   "subject": "Brushes A and B",
+   "body": "Practice on the model is done: Brush A carries Alo to Tara, Brush B carries Tara to Alo, and each brush stays in its own tube. Kai's paper bee stays on the bench while we walk the carrier latch route.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-006",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-04-30T09:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S02"
+   },
+   "join": "CH02 S02→S03",
+   "subject": "Carrier latch checked",
+   "body": "My paper bee is guarding the bench. I checked the carrier latch twice so the brush tubes cannot roll when we step through the boundary doors.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-007",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-04-30T09:50Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S03"
+   },
+   "join": "CH02 S03→S04",
+   "subject": "Both pressure indicators steady",
+   "body": "Last practice boundary closed and both pressure indicators stayed unchanged. One door closes before the next opens, every time. You are clear for the first live reciprocal run between Alo and Tara.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-008",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-04-30T09:55Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S03"
+   },
+   "join": "CH02 S03→S04",
+   "subject": "Route timing logged",
+   "body": "Boundary pressure trace saved. Keeping each door closed before the next opens protects both rooms and keeps the pollen dry in the carrier.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-009",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-04-30T10:15Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0201"
+   },
+   "join": "",
+   "subject": "Earth desk: model and boundary drill",
+   "body": "Aurora, Earth desk. We have your model check and boundary pressure log. Clean discipline on the two brushes. Take your time at the glove ports.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-010",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-04-30T11:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S04"
+   },
+   "join": "CH02 S04→S05",
+   "subject": "A reason to keep caring tomorrow",
+   "body": "First reciprocal run complete and the contact image is saved. A flower does not applaud when you pollinate it; it just gives you a reason to keep caring tomorrow. Three dated visits come next.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-011",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-04-30T11:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S04"
+   },
+   "join": "CH02 S04→S05",
+   "subject": "Contact image filed",
+   "body": "Saved the macro contact image under April 30. Both directions are recorded with brush IDs and timestamps. The next seven days are scheduled on the garden board.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-012",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-05-03T18:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH02-S05"
+   },
+   "join": "",
+   "subject": "Mid-week care rhythm",
+   "body": "Second bee visit logged, seals green, kettle on in the Commons. Even a short walk between two rooms feels like a real expedition when you do it right.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-013",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-05-06T11:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S05"
+   },
+   "join": "CH02 S05→S06",
+   "subject": "Seven date cards",
+   "body": "The seventh date card is pinned under the paired photographs of Alo and Tara. The petals are fading and the pistils are swelling at the base. Bring the logbook to the table so we can write a testable prediction.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-014",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-05-06T11:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S05"
+   },
+   "join": "CH02 S05→S06",
+   "subject": "Seven cards in a row",
+   "body": "Seven date cards under two plants. The petals look tired, which Mei says is good news because the plant is putting its work into the pod instead of the show.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-015",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-05-06T12:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH02-S06"
+   },
+   "join": "",
+   "subject": "Why scientists write predictions first",
+   "body": "Writing down what you expect to see before the result arrives keeps you honest. A prediction is not a promise that you are right; it is a clear measure to compare against.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-016",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-05-06T13:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S06"
+   },
+   "join": "CH02 S06→S07",
+   "subject": "Prediction linked to the family tree",
+   "body": "Our dated pod prediction is linked to the family-tree page. Kai is bringing a clean seed tray to the bench so we can prepare the harvest record before a single pod matures.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-017",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-05-06T13:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S06"
+   },
+   "join": "CH02 S06→S07",
+   "subject": "Clean seed tray",
+   "body": "Brought the clean seed tray to the bench. It is completely empty right now, which feels optimistic in a scientific way.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-018",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2046-05-06T13:30Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0202"
+   },
+   "join": "",
+   "subject": "Seven-day pollination log reviewed",
+   "body": "I read your May 1 to May 6 pollination log and the pod prediction sheet. Good separation between observation and expectation. Keep the seed tray provenance just as strict.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-019",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-05-06T15:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S07"
+   },
+   "join": "CH02 S07→S08",
+   "subject": "Number under the bee wing",
+   "body": "When I moved the paper bee on the bench, its wing lined up with an old equipment sticker on the tray rim. The serial number matches the dry-storage drawer from April 11. Come look at the label.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-020",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-05-06T15:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S07"
+   },
+   "join": "CH02 S07→S08",
+   "subject": "Matching equipment number",
+   "body": "The tray is not for tomorrow's seeds yet; it is already holding a clue from an earlier mission. Let us inspect the older label underneath without tearing the top one.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-021",
+   "thread": "archive",
+   "sender": "Archive",
+   "story_time": "2046-05-06T16:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH02-S08"
+   },
+   "join": "",
+   "subject": "Equipment tag match: botany bench B-04",
+   "body": "Hardware serial B-04-2034 appears in the pre-commissioning station inventory and on the secondary label beneath the current Academy property tag.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-022",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-05-06T16:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S08"
+   },
+   "join": "CH02 S08→S09",
+   "subject": "Three source cards on the table",
+   "body": "We have three verified source cards on the table—the seed packet, the stored care note, and the bench tag—plus a clean empty space where a person might belong. Check the local archive index next.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-023",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-05-06T16:50Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S08"
+   },
+   "join": "CH02 S08→S09",
+   "subject": "Leave the gap blank",
+   "body": "Good call leaving the person slot blank until we have a record that names them. An honest gap beats a neat guess every day of the week.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-024",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-05-06T18:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S09"
+   },
+   "join": "CH02 S09→S10",
+   "subject": "Playback button unlocked",
+   "body": "The local archive index matched the equipment number to an unindexed audio log stored on the botany terminal. The playback button is available now. Gather round the bench before we press it.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-025",
+   "thread": "archive",
+   "sender": "Archive",
+   "story_time": "2046-05-06T18:25Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S09"
+   },
+   "join": "CH02 S09→S10",
+   "subject": "Local audio file verified",
+   "body": "Checksum verified for local botany voice note attached to equipment tag B-04-2034. Playback requires no Earth link and is ready at the terminal.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-026",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-05-06T18:40Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0203"
+   },
+   "join": "",
+   "subject": "Earth desk: evening packet slot ready",
+   "body": "Aurora, Earth desk. Your 21:30 uplink slot is reserved for tonight's botany summary and any station inventory attachments you want archived.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-027",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-05-06T20:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S10"
+   },
+   "join": "CH02 S10→S11",
+   "subject": "Send the evidence",
+   "body": "Send the evidence. Package the voice note, the label photographs, and our chain of custody for the Earth console, and keep our local copy intact while we wait for an answer.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-028",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-05-06T20:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S10"
+   },
+   "join": "CH02 S10→S11",
+   "subject": "Younger voice on the tape",
+   "body": "Whoever recorded that checklist knew Commander Ferreira when she was still learning the room. Let us send the packet cleanly and let the facts ask the question.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-029",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-05-06T21:55Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S11"
+   },
+   "join": "CH02 S11→S12",
+   "subject": "Did the table just shake?",
+   "body": "Packet sent. The pending-reply light is blinking on the Earth console, and the cup beside it just started to tremble. That is not the ventilation fan.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-030",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-05-06T21:58Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S11"
+   },
+   "join": "CH02 S11→S12",
+   "subject": "Ground tremor at 21:58",
+   "body": "The water ring in the cup beside the pending-reply indicator is rippling. Hold your places and check the station pressure board right now.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-031",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-05-06T22:04Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S12"
+   },
+   "join": "CH02→CH03",
+   "subject": "Red pressure warning at 22:05",
+   "body": "No waiting on Earth's reply tonight. The floor answered first, and we have a live red pressure warning at 22:05 on the atmosphere board. Everyone to stations—find the falling line.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH02-032",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-05-06T22:05Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH02-S12"
+   },
+   "join": "CH02→CH03",
+   "subject": "Same clock, live alert",
+   "body": "22:05 UTC: shallow moonquake registered on the hull sensors and the service-corridor pressure trace is dropping. Bring the independent gauge to the board immediately.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH02-033",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2046-05-06T22:05Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0204"
+   },
+   "join": "CH02→CH03",
+   "subject": "Priority one: station pressure",
+   "body": "Aurora, I see your seismic and pressure telemetry at 22:05. The archive question waits. Verify your gauges, isolate the smallest safe boundary, and keep the crew and garden breathing.",
+   "goal": false
+  }
+ ]
+}

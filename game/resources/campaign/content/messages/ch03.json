@@ -1,0 +1,439 @@
+{
+ "chapter": 3,
+ "messages": [
+  {
+   "id": "MSG-CH03-001",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-05-06T22:06Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH03-S01"
+   },
+   "join": "",
+   "subject": "Field note: shallow moonquakes",
+   "body": "Apollo seismometers recorded shallow moonquakes that rang through the dry lunar crust for many minutes. Check whether a falling reading comes from a real leak or a shaken sensor before closing valves.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-002",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-05-06T22:09Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S01"
+   },
+   "join": "CH03 S01→S02",
+   "subject": "Independent gauge and hypothesis",
+   "body": "Kai's first guess is filed under hypothesis, not fact. Take the independent hand gauge to the three test taps along the falling line so we see which readings agree.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-003",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-05-06T22:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S01"
+   },
+   "join": "CH03 S01→S02",
+   "subject": "Filed under hypothesis",
+   "body": "Amara wrote my guess in the hypothesis column instead of crossing it out. I have the independent gauge ready for the three taps.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-004",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-05-06T22:35Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S02"
+   },
+   "join": "CH03 S02→S03",
+   "subject": "Three readings on the board",
+   "body": "All three tap readings are saved and only one branch fits every measurement. Come to the diagram and choose the smallest safe boundary that isolates the leak without starving the garden.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-005",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-05-06T22:38Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S02"
+   },
+   "join": "CH03 S02→S03",
+   "subject": "Keep the garden branch open",
+   "body": "The three saved readings clear the main garden line. If we pick the smallest boundary around the service branch, Alo and Tara keep their air and heat while we repair the joint.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-006",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-05-06T23:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S03"
+   },
+   "join": "CH03 S03→S04",
+   "subject": "Approved sequence and rollback",
+   "body": "Sequence approved and the rollback condition is written at the top of the card. If pressure drops on the habitat side during the clamp step, we back out immediately. Tools in hand.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-007",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-05-06T23:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S03"
+   },
+   "join": "CH03 S03→S04",
+   "subject": "Read-back before every turn",
+   "body": "We have the approved sequence and the rollback condition. Call each step out loud and wait for the read-back before seating the clamp.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-008",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-05-06T23:30Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0301"
+   },
+   "join": "",
+   "subject": "Earth desk: boundary plan received",
+   "body": "Aurora, Earth desk. Your three-tap localization and boundary plan just arrived. Textbook isolation—your garden loop stays live while you clamp the service sleeve.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-009",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-05-07T02:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S04"
+   },
+   "join": "CH03 S04→S05",
+   "subject": "Leave the evidence visible",
+   "body": "The clamp is seated and the pressure line is holding flat. Leave the old fitting and its wear marks visible beside the clamp so we can run five timed checks before calling the room quiet.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-010",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-05-07T02:25Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S04"
+   },
+   "join": "CH03 S04→S05",
+   "subject": "Clamp seated",
+   "body": "Clamp seated, torque read back, and I did not cover the old seal mark. Amara wants the evidence visible for every single check.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-011",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2046-05-07T05:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S05"
+   },
+   "join": "CH03 S05→S06",
+   "subject": "Camera-only annex inspection granted",
+   "body": "Five post-repair checks are green. You have permission for a camera-only inspection of the service cover Kai saw move during the tremor. Do not unlatch the annex hatch until we review the feed.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-012",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-05-07T05:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S05"
+   },
+   "join": "CH03 S05→S06",
+   "subject": "The cover that moved",
+   "body": "I knew that service cover shifted when the floor shook! Camera and window only today—no heroics, just a clear look inside.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-013",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-05-07T09:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S06"
+   },
+   "join": "CH03 S06→S07",
+   "subject": "Viewing port closed, entry set for 8 May",
+   "body": "Viewing port shutter closed and the twenty-four-hour pressure hold is ticking. Scheduled annex entry is on the board for 8 May once every extended check passes.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-014",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-05-07T09:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S06"
+   },
+   "join": "CH03 S06→S07",
+   "subject": "Trays behind the glass",
+   "body": "Through the viewing port you can still see old growth trays laid out in rows. Waiting until 8 May is hard, but opening an unverified room would be worse.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-015",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-05-07T10:00Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0302"
+   },
+   "join": "",
+   "subject": "Earth desk: 24-hour hold logged",
+   "body": "Aurora, Earth desk. Your clamp hold and camera inspection images are logged. Keep the viewing port closed overnight; you are cleared for the 8 May entry check.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-016",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-05-08T11:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S07"
+   },
+   "join": "CH03 S07→S08",
+   "subject": "Route sheet under a sealed cover",
+   "body": "Inside the annex we found a route sheet preserved under a sealed cover beside the unplanted trays. Bring it to the mission table so we can compare its bearings against our current station map.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-017",
+   "thread": "archive",
+   "sender": "Archive",
+   "story_time": "2046-05-08T11:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S07"
+   },
+   "join": "CH03 S07→S08",
+   "subject": "Annex artifact logged: sealed route sheet",
+   "body": "Recovered from Annex Bay: one laminated ridge route sheet in a transparent protective sleeve, bearing hand-marked survey stations toward the southern cold-trap shelf.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-018",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-05-16T08:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S08"
+   },
+   "join": "CH03 S08→S09",
+   "subject": "Pod development 8 to 16 May",
+   "body": "The map notes are filed and eight days of dated pod development sit on the garden rack. Come check the siliques with me: a pod is ready on its own schedule, not because we are impatient.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-019",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-05-16T08:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S08"
+   },
+   "join": "CH03 S08→S09",
+   "subject": "Green pods on the stem",
+   "body": "From 8 May to 16 May the pods went from tiny threads to full green capsules. Mei says if I touch them before they dry, she will hide my favourite wrench.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-020",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-05-16T09:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH03-S09"
+   },
+   "join": "",
+   "subject": "Seed maturation and dry-down",
+   "body": "Harvesting brassica pods while they are still green and moist produces immature seeds that fail to store. Waiting through the five-day dry-down lets the embryo finish filling and cure safely.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-021",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-05-16T18:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S09"
+   },
+   "join": "CH03 S09→S10",
+   "subject": "Five-day dry-down vigil",
+   "body": "We leave the pods on the stem for the five-day dry-down: one photo a day in the exact same frame from 16 to 21 May. On the fifth day, bring the clean counting tray to the bench.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-022",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-05-19T19:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S09"
+   },
+   "join": "CH03 S09→S10",
+   "subject": "One photo a day",
+   "body": "Day four of the dry-down vigil. Everyone stops by the chamber window between watches to look at the same frame turning pale gold.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-023",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2046-05-20T12:00Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0303"
+   },
+   "join": "",
+   "subject": "Annex route sheet and dry-down discipline",
+   "body": "I have your copy of the sealed route sheet and the daily pod photographs. Good patience holding off the harvest until the dry-down finishes tomorrow.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-024",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-05-21T14:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S10"
+   },
+   "join": "CH03 S10→S11",
+   "subject": "Forty-two seeds: 12 and 30",
+   "body": "Forty-two viable seeds counted on the bench: 12 for the active working stock and 30 divided 15 + 15 in the reserve compartments, plus one pressed petal in its sleeve. Let us choose where the petal rests.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-025",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-05-21T14:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S10"
+   },
+   "join": "CH03 S10→S11",
+   "subject": "42 = 12 + 30 verified",
+   "body": "Founder harvest ledger signed: 42 total seeds, 12 allocated to working stock, 30 sealed in two reserve compartments of 15, and the pressed petal sleeve logged.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-026",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-05-21T17:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S11"
+   },
+   "join": "CH03 S11→S12",
+   "subject": "Where the petal can be seen",
+   "body": "The pressed petal is mounted where we can see it every shift, and the first working-stock seed is planted. On 31 May we say a proper farewell to Tara as her harvest joins the working stock.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-027",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-05-21T17:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S11"
+   },
+   "join": "CH03 S11→S12",
+   "subject": "Alo's petal in its sleeve",
+   "body": "Forty-two small clicks on the tray and one gold petal in its sleeve. The station feels less borrowed now.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-028",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-07-15T18:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH03-S12"
+   },
+   "join": "",
+   "subject": "Second hand light for guests",
+   "body": "July resupply unpacked. Kai hung a second hand light beside the locker 'for guests', handle out, and Amara showed him how she reads the independent gauge.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-029",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-10-21T05:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S12"
+   },
+   "join": "CH03→CH04",
+   "subject": "Green stems among purple on the October rack",
+   "body": "Five months of care are on the October rack: our saved May prediction beside the trays, a few green stems standing among the purple ones, and the cold-trap preparation list waiting on the map.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH03-030",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-10-21T05:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH03-S12"
+   },
+   "join": "CH03→CH04",
+   "subject": "May prediction and the October map",
+   "body": "The Founder 30 reserve remains untouched at 15 + 15. Meet in the garden at 06:00 to compare our saved May prediction with the October rack before we brief the ridge traverse.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH03-031",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-10-21T05:50Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0304"
+   },
+   "join": "CH03→CH04",
+   "subject": "Earth desk: October traverse window",
+   "body": "Aurora, Earth desk. Five months of unbroken generational logs received. Your October 21 ridge lighting and horizon angles match the annex route sheet—proceed with the morning garden check and rover prep.",
+   "goal": false
+  }
+ ]
+}

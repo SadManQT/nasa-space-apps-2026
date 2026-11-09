@@ -1,0 +1,439 @@
+{
+ "chapter": 4,
+ "messages": [
+  {
+   "id": "MSG-CH04-001",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-10-21T06:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH04-S01"
+   },
+   "join": "",
+   "subject": "Field note: trait ratios across generations",
+   "body": "In a small working population, observing both purple-stem and green-stem offspring across generations lets you compare real trait counts against your earlier family-tree prediction.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-002",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-10-21T06:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S01"
+   },
+   "join": "CH04 S01→S02",
+   "subject": "Next observation and the rover checklist",
+   "body": "Now that we have recorded what actually grew and what observation we should make next, bring that discipline to the garage. The rover checklist is open on the dock board.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-003",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-10-21T06:45Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S01"
+   },
+   "join": "CH04 S01→S02",
+   "subject": "What observation comes next",
+   "body": "Rafi asked the right question: not whether our May prediction looks clever, but what observation we should make next. See you at the rover checklist in the garage.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-004",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-10-21T07:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S02"
+   },
+   "join": "CH04 S02→S03",
+   "subject": "Two in the field, two at home",
+   "body": "The garage hatch closes on two in the field and two at home. Every call has a voice at both ends. Check the slope overlay on the ridge map before we roll.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-005",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-10-21T07:35Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S02"
+   },
+   "join": "CH04 S02→S03",
+   "subject": "Home watch standing by",
+   "body": "Hatch sealed: two field seats in the rover, two home voices at the Aurora console. We have your telemetry and return reserve on the big board.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-006",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-10-21T08:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S03"
+   },
+   "join": "CH04 S03→S04",
+   "subject": "Where the ridge bends out of sight",
+   "body": "The graded road keeps the slope within limits, but ahead the ridge bends out of sight of our roof antenna. Our radio plan must bend with it—place the relay beacons before the corner.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-007",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-10-21T08:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S03"
+   },
+   "join": "CH04 S03→S04",
+   "subject": "Line of sight on the Moon",
+   "body": "Radio waves travel in straight lines and the ridge does not. Good thing we packed three beacons so the link can turn the corner before we do.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-008",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-10-21T08:30Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0401"
+   },
+   "join": "",
+   "subject": "Earth desk: ridge route telemetry",
+   "body": "Aurora, Earth desk. We see the rover on the surveyed contour road and home watch on the console. Keep an unbroken line-of-sight chain all the way to the shadow boundary.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-009",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-10-21T09:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S04"
+   },
+   "join": "CH04 S04→S05",
+   "subject": "An unbroken chain home on the map",
+   "body": "Beacons B1, B2 and B3 lock in an unbroken chain home on the map. Before you touch the bright frost patch in the shadow, take a dry regolith reference reading first.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-010",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-10-21T09:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S04"
+   },
+   "join": "CH04 S04→S05",
+   "subject": "All three hops green",
+   "body": "Home console confirms an unbroken chain across all three ridge segments. Calibrate the spectrometer on dry ground before measuring the cold-trap patches.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-011",
+   "thread": "academy",
+   "sender": "Academy",
+   "story_time": "2046-10-21T09:25Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH04-S05"
+   },
+   "join": "",
+   "subject": "Why a dry reference comes first",
+   "body": "In a permanently shadowed cold trap, visual brightness alone cannot prove water ice. Recording a dry reference and keeping a negative control lets you verify which samples cross the detection threshold.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-012",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-10-21T10:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S05"
+   },
+   "join": "CH04 S05→S06",
+   "subject": "Next sealed sample on the shelf",
+   "body": "Dry reference, two positive ice-bearing samples, and one negative control are logged on the map. Move to the next sealed sample site on the inner shelf—the lamp beam just caught something with corners.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-013",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-10-21T10:20Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S05"
+   },
+   "join": "CH04 S05→S06",
+   "subject": "Three sealed tubes",
+   "body": "Clean work keeping the negative control alongside the two positives. Check the next sealed sample marker on the shelf ahead.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-014",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-10-21T10:50Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S06"
+   },
+   "join": "CH04 S06→S07",
+   "subject": "Carrier tethered beside the vault",
+   "body": "The recovery carrier is tethered beside the vault on the cold-trap shelf. Do not force the latch in the dark—check the thermal probe and seal state before we touch the case.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-015",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-10-21T10:55Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S06"
+   },
+   "join": "CH04 S06→S07",
+   "subject": "Straight edges in the shadow",
+   "body": "Moon rocks do not have ninety-degree corners or serial plates. I tethered the carrier right beside the vault housing so nothing slides on the regolith.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-016",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-10-21T11:25Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S07"
+   },
+   "join": "CH04 S07→S08",
+   "subject": "Probe, sleeve, cradle",
+   "body": "Opening the vault in vacuum would shock whatever is inside. Follow the three recovery steps in order—probe, sleeve, cradle—and bring the whole sealed box home to the dry glovebox.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-017",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-10-21T11:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S07"
+   },
+   "join": "CH04 S07→S08",
+   "subject": "Cold-mass reading stable",
+   "body": "Thermal probe logged. Wrap the insulating sleeve and lock the case into the rover cradle before the suit heaters spend any more margin.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-018",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2046-10-21T11:45Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0403"
+   },
+   "join": "",
+   "subject": "Correct call leaving the lid sealed",
+   "body": "Good restraint at the cold-trap shelf. A field recovery brings the container home intact; it does not open a cold-soaked archive in the dust.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-019",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-10-21T12:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S08"
+   },
+   "join": "CH04 S08→S09",
+   "subject": "The case is travelling home",
+   "body": "Log the status exactly as agreed: the case is travelling home, not that the mystery has been solved. Keep the beacon chain live and bring both people and the cradle back to the garage dock.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-020",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-10-21T12:15Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S08"
+   },
+   "join": "CH04 S08→S09",
+   "subject": "Cargo mount locked",
+   "body": "Cradle latched on the rover mount. Remember Amara's wording on the radio: the case is travelling home, not that the mystery has been solved.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-021",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-10-22T08:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S09"
+   },
+   "join": "CH04 S09→S10",
+   "subject": "Dry glovebox ready after controlled warming",
+   "body": "Everyone is back inside and the overnight controlled warming curve finished without condensation. My hand is steady near the lid—meet me at the dry glovebox to open the case properly.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-022",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-10-22T08:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S09"
+   },
+   "join": "CH04 S09→S10",
+   "subject": "Warming curve complete",
+   "body": "Twelve hours of slow warming and not a drop of frost on the inner seal. Mei has her hand near the lid in the dry glovebox.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-023",
+   "thread": "archive",
+   "sender": "Archive",
+   "story_time": "2046-10-22T09:15Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH04-S10"
+   },
+   "join": "",
+   "subject": "Vault inventory: twelve cryo-wells",
+   "body": "Cold-trap vault case contains twelve numbered sample wells (eleven brassica seed vials and one long-staple cotton vial) plus a handwritten line inside the inner lid.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-024",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-10-22T10:05Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S10"
+   },
+   "join": "CH04 S10→S11",
+   "subject": "A line of handwriting under the lid",
+   "body": "Twelve intact wells logged in the vault ledger, and a line of handwriting under the lid in the same hand as our April seed packet. Bring the photograph to the Earth console window.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-025",
+   "thread": "crew",
+   "sender": "Amara",
+   "story_time": "2046-10-22T10:10Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S10"
+   },
+   "join": "CH04 S10→S11",
+   "subject": "Twelve wells and the lid inscription",
+   "body": "All twelve vials stay sealed in the vault12 inventory. We photographed the handwriting under the lid so we can put the exact evidence to Commander Ferreira during the contact window.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-026",
+   "thread": "commander",
+   "sender": "Ferreira",
+   "story_time": "2046-10-22T14:30Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S11"
+   },
+   "join": "CH04 S11→S12",
+   "subject": "Keep the inscription and the question open",
+   "body": "You showed me the record cleanly. Keep the saved inscription and its open question on the board. I am booked on the December relief flight; we will finish reading the 2034 files at the same table.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-027",
+   "thread": "crew",
+   "sender": "Mei",
+   "story_time": "2046-10-22T14:40Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S11"
+   },
+   "join": "CH04 S11→S12",
+   "subject": "She is coming here",
+   "body": "Ferreira did not dodge the handwriting under the lid. She asked us to keep the saved inscription and its open question until she lands in December.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-028",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-10-23T11:00Z",
+   "unlock": {
+    "on": "scene_enter",
+    "id": "EX-CH04-S12"
+   },
+   "join": "",
+   "subject": "Earth desk: twelve-specimen report receipt",
+   "body": "Aurora, Earth desk. We have your twelve-specimen cold-trap report and the dry reference curves. December transfer manifest is confirmed: one passenger inbound to Shackleton.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-029",
+   "thread": "crew",
+   "sender": "Rafi",
+   "story_time": "2046-12-08T16:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S12"
+   },
+   "join": "CH04→CH05",
+   "subject": "The fifth mug and the 8 to 12 December flight",
+   "body": "Departure notice is up for the 8 to 12 December flight. The fifth locker is labelled, the fifth mug is ready by the rack, and the landing camera goes live on the 12th.",
+   "goal": true
+  },
+  {
+   "id": "MSG-CH04-030",
+   "thread": "crew",
+   "sender": "Kai",
+   "story_time": "2046-12-11T20:00Z",
+   "unlock": {
+    "on": "scene_exit",
+    "id": "EX-CH04-S12"
+   },
+   "join": "CH04→CH05",
+   "subject": "I did not polish the mug",
+   "body": "Whatever Rafi says, I only wiped dust off the fifth mug once in November. The 8 to 12 December flight lands tomorrow morning—meet at the garage dock camera.",
+   "goal": false
+  },
+  {
+   "id": "MSG-CH04-031",
+   "thread": "earth",
+   "sender": "Rao",
+   "story_time": "2046-12-12T07:30Z",
+   "unlock": {
+    "on": "mission_done",
+    "id": "EX-M0404"
+   },
+   "join": "CH04→CH05",
+   "subject": "Earth desk: relief lander on final approach",
+   "body": "Aurora, Earth desk. The 8 to 12 December flight is on final descent to your pad. Commander Ferreira is aboard with your December cargo manifest.",
+   "goal": false
+  }
+ ]
+}

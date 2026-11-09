@@ -4630,7 +4630,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 2 messages: every scene joined to the next",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M1-56",
@@ -4646,7 +4646,7 @@
     "game-design/04_CHARACTER_BIBLE.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "game/resources/campaign/content/messages/ch02.json (33 messages covering all CH02 joins and CH02->CH03), check_messages.py --all-chapters: PASS (0 errors), test_comms.gd: PASS (45 checks, 0 failures), screenshot production/qa/evidence/M3-2T_ch02_inbox.png",
    "updated": "2026-11-09",
    "prompt": "Do: write game/resources/campaign/content/messages/ch02.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 2 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
@@ -4658,7 +4658,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 3 messages: every scene joined to the next",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M1-56",
@@ -4674,7 +4674,7 @@
     "game-design/04_CHARACTER_BIBLE.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "game/resources/campaign/content/messages/ch03.json (31 messages covering all CH03 joins and CH03->CH04), check_messages.py --all-chapters: PASS (0 errors), test_comms.gd: PASS (45 checks, 0 failures), screenshot production/qa/evidence/M3-3T_ch03_inbox.png",
    "updated": "2026-11-09",
    "prompt": "Do: write game/resources/campaign/content/messages/ch03.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 3 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
@@ -4686,7 +4686,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 4 messages: every scene joined to the next",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M1-56",
@@ -4702,7 +4702,7 @@
     "game-design/04_CHARACTER_BIBLE.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "game/resources/campaign/content/messages/ch04.json (31 messages covering all CH04 joins and CH04->CH05), check_messages.py --all-chapters: PASS (0 errors), test_comms.gd: PASS (45 checks, 0 failures), screenshot production/qa/evidence/M3-4T_ch04_inbox.png",
    "updated": "2026-11-09",
    "prompt": "Do: write game/resources/campaign/content/messages/ch04.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 4 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",

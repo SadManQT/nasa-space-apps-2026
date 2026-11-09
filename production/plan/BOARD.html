@@ -211,12 +211,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-120">M1-120</a> Investigate measured Windows EVA scene generation over the loading budget <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">Sliced GLTFAnimation conversion in AssetGeometry.prepare() into 8-clip batches so glb_generate_scene on EVA/cast GLBs drops from ~20 ms (M4…</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">7 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">13 blocked</span><span class="chip s-todo">26 todo</span></div><div class="bar"><i style="width:14%"></i></div>
-<details open><summary>Working now (3)</summary><ul>
-<li><a class="id" href="#M3-2T">M3-2T</a> Chapter 2 messages: every scene joined to the next <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-09</div></li>
-<li><a class="id" href="#M3-3T">M3-3T</a> Chapter 3 messages: every scene joined to the next <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-09</div></li>
-<li><a class="id" href="#M3-4T">M3-4T</a> Chapter 4 messages: every scene joined to the next <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-09</div></li>
-</ul></details>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">10 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">13 blocked</span><span class="chip s-todo">26 todo</span></div><div class="bar"><i style="width:20%"></i></div>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M1-74">M1-74</a> Stop the &#x27;no meta lla_fade&#x27; error in the HUD fade <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 <li><a class="id" href="#M1-77">M1-77</a> Avoid missing fade metadata errors on the first campaign caption <span class="chip ">codex</span> <span class="chip ">P2</span></li>
@@ -262,8 +257,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-72">M3-72</a> Chapter select, mission list, progress and achievements screens <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M4-11">M4-11</a> Main TitleStage WorldEnvironment toggle &amp; HUD forecast cache across camera turns <span class="chip ">any</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details><summary>Done (7)</summary><ul>
+<details><summary>Done (10)</summary><ul>
 <li><a class="id" href="#M1-56">M1-56</a> Messages: inbox, arrival toasts, unlock triggers and the message validator <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">CommsService (game/scripts/comms/comms_service.gd), CommsPanel (game/scripts/ui/comms_panel.gd), Chapter1CampaignHUD integration (M key + P…</div></li>
+<li><a class="id" href="#M3-2T">M3-2T</a> Chapter 2 messages: every scene joined to the next <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">game/resources/campaign/content/messages/ch02.json (33 messages covering all CH02 joins and CH02-&gt;CH03), check_messages.py --all-chapters: …</div></li>
+<li><a class="id" href="#M3-3T">M3-3T</a> Chapter 3 messages: every scene joined to the next <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">game/resources/campaign/content/messages/ch03.json (31 messages covering all CH03 joins and CH03-&gt;CH04), check_messages.py --all-chapters: …</div></li>
+<li><a class="id" href="#M3-4T">M3-4T</a> Chapter 4 messages: every scene joined to the next <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">game/resources/campaign/content/messages/ch04.json (31 messages covering all CH04 joins and CH04-&gt;CH05), check_messages.py --all-chapters: …</div></li>
 <li><a class="id" href="#M1-90">M1-90</a> Run complete Windows loading diagnostics for M1-68 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">Completed the two requested fresh-process Windows runs with the unchanged collector. Run1:537 checks,2 failures (title51.869ms,campaign66.5…</div></li>
 <li><a class="id" href="#M1-98">M1-98</a> Recollect Windows loading evidence with retained stage traces <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">production/qa/evidence/M1-68_windows/2026-11-09_retained_ramim/README.md; source12d8252/game108a384;2fresh runs581/7 and581/6 timing failur…</div></li>
 <li><a class="id" href="#M1-101">M1-101</a> Guard HUD world overlays while rebuilt player nodes leave the tree <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">production/qa/evidence/M1-101/README.md; final330/0 focused; review finding fixed; full/native pending. Full e78f5bc/game108a384:83/84; onl…</div></li>
@@ -5076,7 +5074,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 2 messages: every scene joined to the next",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M1-56",
@@ -5092,7 +5090,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game-design/04_CHARACTER_BIBLE.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "game/resources/campaign/content/messages/ch02.json (33 messages covering all CH02 joins and CH02->CH03), check_messages.py --all-chapters: PASS (0 errors), test_comms.gd: PASS (45 checks, 0 failures), screenshot production/qa/evidence/M3-2T_ch02_inbox.png",
    "updated": "2026-11-09",
    "prompt": "Do: write game/resources/campaign/content/messages/ch02.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 2 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
@@ -5104,7 +5102,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 3 messages: every scene joined to the next",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M1-56",
@@ -5120,7 +5118,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game-design/04_CHARACTER_BIBLE.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "game/resources/campaign/content/messages/ch03.json (31 messages covering all CH03 joins and CH03->CH04), check_messages.py --all-chapters: PASS (0 errors), test_comms.gd: PASS (45 checks, 0 failures), screenshot production/qa/evidence/M3-3T_ch03_inbox.png",
    "updated": "2026-11-09",
    "prompt": "Do: write game/resources/campaign/content/messages/ch03.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 3 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
@@ -5132,7 +5130,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 4 messages: every scene joined to the next",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M1-56",
@@ -5148,7 +5146,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game-design/04_CHARACTER_BIBLE.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "game/resources/campaign/content/messages/ch04.json (31 messages covering all CH04 joins and CH04->CH05), check_messages.py --all-chapters: PASS (0 errors), test_comms.gd: PASS (45 checks, 0 failures), screenshot production/qa/evidence/M3-4T_ch04_inbox.png",
    "updated": "2026-11-09",
    "prompt": "Do: write game/resources/campaign/content/messages/ch04.json per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5: for every Chapter 4 join in game-design/24_NARRATIVE_REVISION.md §2.9 (including\nthe join into the next chapter) at least 2 messages, plus mission briefings, reports, job messages and character messages for the\nchapter (about 40). Sender's voice per the character bible, dated in story time, ≤ 60 words, English only, canon quotes word for\nword, no future names before their reveal. Read messages/ch01.json first if it exists, to match its voice. Run\nproduction/tools/check_messages.py and paste its output.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
