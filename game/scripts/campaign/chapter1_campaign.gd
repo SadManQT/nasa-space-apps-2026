@@ -313,6 +313,7 @@ func nearby_target() -> Dictionary:
 		return {}
 	var camera := _player.follow_camera.camera
 	var flags: Dictionary = route.current_flags() if route.has_method("current_flags") else route.gate_status().get("physical_flags", {})
+	var prerequisites: Dictionary = route._context_flags() if route.has_method("_context_flags") else flags
 	var director_receipts: Dictionary = director._state.get("receipts", {}) if "_state" in director else director.snapshot().get("receipts", {})
 	var p01_receipts: Variant = null
 	var closest: Dictionary = {}
@@ -324,7 +325,7 @@ func nearby_target() -> Dictionary:
 			continue
 		var missing := false
 		for flag in spec.get("required_flags", []):
-			if not bool(flags.get(flag, false)):
+			if not bool(prerequisites.get(flag, false)):
 				missing = true
 		if missing:
 			continue
