@@ -1,6 +1,6 @@
 # M1-65: remaining human sessions
 
-**Status: partial human evidence received, 8 November 2026.** Tanvir self-reported around 10 minutes of play; see [T01_2026-11-08.md](T01_2026-11-08.md). Exact task/build/settings, screenshots and event times remain unconfirmed. No fresh-player session has been reported; blank records below do not contain invented observations.
+**Status: partial human evidence and an opening progression blocker, updated 9 November 2026.** Tanvir self-reported approximately 10 minutes on 8 November. On 9 November he supplied a screenshot of the dry-zero goal and reported that E does not advance it. See [T01](T01_2026-11-08.md) and [the blocker report](T01_2026-11-09_blocker.md). Actual build/settings, exact event timing and a native replay remain unconfirmed. No fresh-player session has been reported.
 
 Follow-up: Tanvir confirms that the intro played and he watched it; the sitting incident involved Mei being supposed to place the zero on the table. See T01 for the dry-zero calibration source lead and its limits.
 
