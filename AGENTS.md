@@ -1,5 +1,18 @@
 # Last Light Academy — instructions for AI agents (Codex, Antigravity, others)
 
+
+## Current implementation batch (user reassignment, 10 November 2026)
+
+Read [CURRENT_BATCH.md](production/plan/CURRENT_BATCH.md) first. While `implementation_batch.active` is true in [tasks.json](production/plan/tasks.json), its exact per-member IDs override the older member/folder mappings below and in historical reports. Ramim20, Sadman11, Asif10, Atik4, Tanvir3, Shanto2. Shanto is the sixth named member, not a free QA/reviewer slot.
+
+- Work only on your active IDs. Inspect `board.py list --member <name> --phase implementation` and `mine --by "Name/AI"`; claim one exact ready ID. Do not use general take/next to select extra work or resume excluded old claims.
+- The task's paths/integration_paths are task-scoped edit permission, not ownership of every file in a folder. Before editing source, publish exact-file reservations with `board.py lock ID --by "Name/AI" --files path1,path2`. Preserve competing reservations when syncing; only edit after your reservation push succeeds. Save/push work before `unlock`. No silent lock expiry or overwriting another agent's WIP.
+- New assigned members implement their listed feature chains themselves. Do not wait solely for a former Sadman/Atik/Ramim folder owner. Real active edits require a saved-work handoff; use another ready listed task meanwhile.
+- Video creation, submission, release packaging and manual QA are deferred. Fifteen source-delivered rows are acceptance-only, not new implementation assignments. Automated tests and actual campaign/scripted UI verification remain required now.
+- Preserve all canon, science, credit/asset approvals, own-account commits, import/settings protections and test rules below. A fixture-only prototype is not a completed feature.
+
+The older workflow below applies only where it agrees with this active-batch override. Outside the batch, the historical folder defaults apply again.
+
 **`continue(<name>)`:** when a teammate types `continue(sadman)`, `continue(ramim)`, `continue(atik)` or `continue(<their name>)`, follow [production/plan/GO_NEXT.md](production/plan/GO_NEXT.md) §0: work only that member's board tasks (`board.py take --by "<Name>/<AI>"`) and edit only the folders they own ([production/plan/MASTER_PLAN.md](production/plan/MASTER_PLAN.md) §7, their card in [production/plan/team/](production/plan/team/)). A change in someone else's folder becomes a board task for them (`board.py add`), never an edit.
 
 **Teammates use Codex (GPT).** Every task on the board is assigned to one member; Ramim, Atik and the QA and science reviewers' tasks are all in the `codex` lane, so Codex can do every one of them. Before your first task: `git config user.name "<your GitHub username>"` and `git config user.email "<the email verified on your GitHub account>"`, or GitHub will not credit your commits to you. Tasks needing Claude, video or paid generation tools are Sadman's; if one of your tasks needs one, `board.py add --for sadman` and carry on. The game is released on 12 Nov (M3-93): finish the game first.

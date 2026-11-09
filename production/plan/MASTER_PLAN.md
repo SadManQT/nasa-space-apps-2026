@@ -1,5 +1,7 @@
 # Last Light Academy — Master Plan
 
+> **10 November 2026 current assignment:** [CURRENT_BATCH.md](CURRENT_BATCH.md) and `tasks.json` -> `implementation_batch` override historical member/folder names in this plan for the approved50 implementation tasks. Six named members; video/submission/manual QA/release work deferred. Older work/evidence remains history, not a current claim instruction.
+
 **For:** the five of us (Sadman, Ramim, Atik and two more teammates) and the AI each of us codes with.
 **Status:** binding from 5 Nov 2026 (Sadman). Quality over quantity; no deadline sets priorities. Where this plan and an older plan disagree, this plan wins; the canon order in [PRODUCTION_HANDBOOK.md](../../PRODUCTION_HANDBOOK.md) §2 still decides story and numbers.
 
@@ -196,21 +198,26 @@ STORY_FULL.md ──build_catalog.py──▶ campaign_catalog.json (scenes, lin
 
 ---
 
-## 7. The team and who owns what
+## 7. Current team assignment and file ownership
 
-Shares are measured in effort points on the board (`python3 production/plan/board.py team`), not in task counts. Today: Sadman 39.7%, Ramim 29.5%, Atik 20.5%, member 4 5.5%, member 5 4.8% of the open work.
+The user's10Nov batch is the current authority. The machine-readable allowlist is `implementation_batch.assignments` in [tasks.json](tasks.json); the complete instructions are [CURRENT_BATCH.md](CURRENT_BATCH.md). Every active task has one responsible member. The historical full-folder split is superseded only within that task's paths/integration_paths.
 
-| Member | Share | Role | Owns (only they edit these) | Card |
-|---|---|---|---|---|
-| **Sadman** | 40% | Producer, art and media lead, integrator | Every asset and premium tool (Tripo, Meshy, ElevenLabs, Veo/Flow, Seedance, Claude Motion, Blender/Muse, Fable), rooms and environments, terrain and the Moon region, cutscenes, audio and its code, explainer videos, Chapter 1 and 5–8 message packs, `project.godot`, `presentation_media.json`, the handbook, docs, story, tools and the night shift; tags releases and signs chapter gates | [team/sadman.md](team/sadman.md) |
-| **Ramim** | 30% | UI/UX and player-facing systems lead | Everything the player sees in 2D: HUD, menus, title, Mission Table, puzzle panels and puzzle logic, hint player, messages system, journal, settings, progression, achievements, upgrades UI, trainers, class mode; `ui_text.json`; Chapter 2–4 message packs | [team/ramim.md](team/ramim.md) |
-| **Atik** | 20% | Gameplay runtime, Moon systems and builds | Missions and routes, campaign runtime, player controller, carrying, EVA, rover, markers and network, hazards, saves, loading, terrain streaming, export presets, the test runner, builds and performance | [team/atik.md](team/atik.md) |
-| **member4** (name it, §12) | 5% | QA and playtest lead | `production/qa/chapters/`, `production/qa/playtests/` | [team/member4.md](team/member4.md) |
-| **member5** (name it, §12) | 5% | Science, story and accessibility reviewer | `production/review/`, `production/qa/act1/`, `production/qa/full_campaign/`, `production/qa/dry_run/` | [team/member5.md](team/member5.md) |
+| Priority | Member | Approved tasks | Current scope | Card |
+|---|---|---:|---|---|
+|1| Ramim |20| Shared EVA/network/rover/hazards/RPG; Chapters4/6/8; opening/progression UI | [Ramim](team/ramim.md) |
+|2| Sadman |11| Chapters5/7; Care Round and physical story integration; eclipse fix | [Sadman](team/sadman.md) |
+|3| Asif |10| Class and Chapter2 input contracts/panels/missions; Chapter3; curriculum | [Asif](team/asif.md) |
+|4| Atik |4| Loading/performance/exit stability | [Atik](team/atik.md) |
+|5| Tanvir |3| Garden collision, real-controller repair and cold-import investigation | [Tanvir](team/tanvir.md) |
+|6| Shanto |2| Save slots/autosave/migrations and settings | [Shanto](team/shanto.md) |
 
-Abu Sayem Mohammed Tanvir (`SayemTanvir`) chose the QA and playtest lead slot on 6 Nov 2026; use `continue(tanvir)`. The remaining `member5` reviewer slot is unnamed. The registered team also lists Md. Asif Iqbal and Shahariar Rahman Shanto. Historical art direction M1-32 and the rock kit M1-35 were Tanvir's; current folder ownership follows the table above.
+The priority follows user-reported token availability; task counts and board effort estimates do not measure actual token use. `members.share` records this batch's planned task-count percentages40/22/20/8/6/4; `board.py team` also shows remaining effort points separately.
 
-**Why this split has the fewest merge conflicts:** each folder has exactly one owner, so two people never edit the same file. Chapters move *through* owners (assets → rooms → puzzles → missions → QA) instead of one person editing everything for a chapter. `board.py check` fails if two members' open tasks own the same folder. Shared files are handled safely: the board (one field per line, merges itself), the AI log and the asset registry (`merge=union` in `.gitattributes`: both sides' new rows are kept), and the handbook (only Sadman edits it; everyone else puts status in their task evidence). When you need a change in someone else's folder, you do not make it — you file a task for them with `board.py add`.
+**One writer per actual file:** before source edits, claim an assigned task, reserve its exact files with `board.py lock`, and successfully push the reservation. A broad task path is authorization for relevant edits, not a whole-folder lease. Shared integration files can be handed off between task owners after saved work is pushed and reservations released. Preserve other agents' active work; locks never silently expire. `board.py check` validates published reservations, not unpublished edits on another machine.
+
+An earlier QA-only role does not prevent Tanvir fixing M1-122/M1-123/M1-85. Earlier runtime/folder names do not prevent Asif implementing M1-103/M1-105 and their consumers, or Shanto implementing M3-71/M3-70. Prior claims and attribution are retained in assignment_history. Do not wait merely for a former owner label; real in-progress edits require a saved-work handoff.
+
+31 video/submission/manual QA/release tasks and15 source-delivered acceptance tasks remain separate from implementation assignments. Preserve their work and evidence; do not resume them from an old card. New out-of-list work needs explicit assignment. Canon, asset approvals, credit controls, source validation and mandatory automated tests remain binding.
 
 ---
 
@@ -279,16 +286,8 @@ All four chapter gates PASS; the Act One QA (M3-74) has no open P0/P1 finding; t
 
 ---
 
-## 12. continue(<name>): how each of us works
+## 12. continue(<name>) during the active batch
 
-Type **`continue(<your name>)`** to your AI (for example `continue(ramim)`). The AI then follows [GO_NEXT.md](GO_NEXT.md) §0:
+Read [GO_NEXT.md](GO_NEXT.md) and [CURRENT_BATCH.md](CURRENT_BATCH.md). Names: ramim, sadman, asif, atik, tanvir, shanto. Inspect your active list and preserved claims, claim one exact ready ID, publish exact-file reservations, then implement/test/record/commit/push under your own account. Do not use the old general take/next loop to select extra tasks.
 
-1. `git pull --rebase`.
-2. Finds you in `python3 production/plan/board.py team`. If you are new and a slot is still called member4 or member5, it names that slot after you (`board.py rename-member member4 <name> --name "<full name>"`), commits and pushes. Member 4 is the QA and playtest lead, member 5 the science and accessibility reviewer — say which you prefer.
-3. Reads your card in [team/](team/) and the folders you own.
-4. Finishes anything you already have in progress (`board.py mine --by "<Name>/<AI>"`), then claims up to 5 ready tasks: `board.py take --by "<Name>/<AI>" --count 5`, and pushes the claim.
-5. Does each task: reads the prompt and its read-first files, edits **only your folders**, runs the tests, takes screenshots, gets a second-AI review, logs AI use, marks it done with evidence, commits under **your own GitHub account** (no AI co-author lines) and pushes — one task at a time.
-6. Tells you what only a human can do (`board.py list --member <name> --tool human --status todo`).
-7. Stops after about 8 tasks, or when nothing is ready, and tells you what it finished and what is next. Never leaves claims behind.
-
-**Progress tracking:** the board is the truth ([BOARD.html](BOARD.html) in a browser); `board.py team` shows everyone's share; `board.py stale` lists forgotten claims. Sadman's night shift works only Sadman's tasks.
+Skip genuine blockers and continue ready work inside your row; recheck blocked tasks before every batch. Do not duplicate saved work or wait solely for historical folder owners. Never overwrite another active writer. The board remains the task/evidence record, and its active batch is the binding current assignment.

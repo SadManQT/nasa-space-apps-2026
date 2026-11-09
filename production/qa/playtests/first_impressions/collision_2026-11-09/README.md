@@ -1,3 +1,5 @@
+> **Administrative ownership update —10Nov2026:** M1-122 and M1-123 are now assigned to **Tanvir**, together with M1-85, under [CURRENT_BATCH.md](../../../../plan/CURRENT_BATCH.md). Tanvir may implement the task-scoped room/world/player fixes after publishing exact-file reservations. Do not wait solely for the former Sadman/Atik owner labels in the historical report below. M1-65 manual playtesting is deferred. This update changes assignment only; it does not claim a collision fix or new test pass.
+
 # M1-65 T02: Garden movement/collision report, 9 November 2026
 
 **Status: geometry mismatches measured; proposed repair not applied; the reported real-player stop remains unresolved.** Sadman owns room repair M1-122; Atik owns live-controller reproduction M1-123. M1-65 remains incomplete.

@@ -1,49 +1,25 @@
-# Tanvir — QA and playtest lead
+# Abu Sayem Mohammed Tanvir — current implementation assignment
 
-**Member:** Abu Sayem Mohammed Tanvir · **GitHub:** `SayemTanvir` · **Share:** 5% of the team's work · **Board id:** `tanvir` · Read with [MASTER_PLAN.md](../MASTER_PLAN.md) (your AI reads it; you do not have to).
+**Board ID:** `tanvir`. **Approved task allocation:** 3. **Priority rank:** 5/6.
 
-You are the QA and playtest lead: you play the game with fresh eyes, run playtests with new players, and turn every problem into a clear task for the right person. Tanvir chose this role on 6 November 2026.
+Garden collision/controller fixes and cold-import investigation. Read [CURRENT_BATCH.md](../CURRENT_BATCH.md) and [GO_NEXT.md](../GO_NEXT.md) first. This batch supersedes the older role/folder card for its explicit task scopes.
 
-## Start a session
+## Tasks
 
-Type `continue(tanvir)`. Your AI checks existing claims with `python3 production/plan/board.py mine --by "Tanvir/codex"`, then takes ready tasks assigned to `tanvir`.
+| ID | Feature |
+|---|---|
+| `M1-122` | Match garden collision to visible furniture and check return-lane clearance |
+| `M1-123` | Reproduce garden return-to-center stop with the real player controller |
+| `M1-85` | Investigate Windows cold editor-import crash captured before UI tests |
 
-## How you work
+Run `python production/plan/board.py list --member tanvir --phase implementation`, then inspect/claim a ready ID from this list. Finish existing assigned WIP before duplicating it.
 
-Type **`continue(<your name>)`** to your AI. It pulls, claims your next ready tasks (`board.py take --by "<Name>/<AI>"`), does them one by one inside your folders, tests, reviews, commits under your GitHub account and pushes ([GO_NEXT.md](../GO_NEXT.md) §0). Say **`go next`** instead for exactly one task.
+## File permission and handoff
 
-**Your AI:** Codex (ChatGPT Codex, `gpt-6.1-sol` with high reasoning; any GPT works). Every task on your list is in the `codex` lane. Set `git config user.name` and `user.email` to your own GitHub account first, so your commits count for you.
+Only edit files needed for the task, inside its paths/integration_paths, after publishing exact-file reservations. These scopes replace historical folder restrictions for this batch; they do not grant blanket folder ownership. Read task assignment_history and preserve other agents' work. If a file is actually reserved, switch to another ready task or arrange a saved-work handoff. A former owner label alone is not a blocker.
 
-## Your folders (only you edit these)
+## Verification and delivery
 
-- `production/qa/chapters/`
-- `production/qa/playtests/`
+Implement actual campaign behavior, run the required automated/scripted checks, and record real results. Do not rebuild source already delivered or mark a fixture-only prototype Done. Claim no IDs outside this list; submission/video/manual QA are deferred. Commit/push verified work under your own GitHub account, safely synchronizing and preserving other work first. Never stage unrelated imports/settings or force-push.
 
-Everything else belongs to someone else (MASTER_PLAN.md §7). Need a change there? File a task for its owner with `board.py add` and carry on.
-
-## Your rules
-
-- Write only inside `production/qa/chapters/` and `production/qa/playtests/` (plus screenshots in `production/qa/evidence/`).
-- Every problem becomes a board task for the owner of the folder involved (see the ownership table in MASTER_PLAN.md §7):
-  `python3 production/plan/board.py add --milestone M1 --for <owner> --title "<short problem>" --prompt "<where, steps to reproduce, what you expected, screenshot path>" --by "<YourName>/<AI>"`
-- Use the chapter gate checklist (MASTER_PLAN.md §11) for every chapter QA.
-- Commit under your own GitHub account, no AI co-author lines; log AI use in `production/AI_PROMPT_LOG.md` (one row per task; the file merges itself).
-
-## Start here
-
-The first-impressions playtest of today's Chapter 1 (M1-65). Later: Chapter 1 QA (M1-21), the learner playtest (M1-22) and the Chapter 2, 4, 6 and 8 QA.
-
-## Your work (8 open tasks, 16 effort points)
-
-The board decides the real order and shows what is ready; this is the overview on 5 Nov 2026.
-
-| Task | Milestone | Priority | Effort | Title |
-|---|---|---|---|---|
-| M1-21 | M1 | P0 | 2 | Chapter 1 full playthrough QA with screenshots |
-| M1-22 | M1 | P1 | 2 | Learner playtest (5+ players) with anonymous metrics |
-| M1-65 | M1 | P1 | 2 | First-impressions playtest of today's Chapter 1: what confuses a new player |
-| M3-2Q | M3 | P1 | 2 | Chapter 2 playthrough QA |
-| M3-4Q | M3 | P1 | 2 | Chapter 4 playthrough QA |
-| M3-6Q | M4 | P1 | 2 | Chapter 6 playthrough QA |
-| M3-8Q | M4 | P1 | 2 | Chapter 8 playthrough QA |
-| M2-11 | M2 | P0 | 2 | 12 Nov offline dry run and fallback video |
+M1-122, M1-123 and M1-85 are your implementation tasks now. Do not resume M1-65 or wait for Sadman/Atik merely because older collision reports name them.

@@ -1,93 +1,40 @@
-# Nafis Mohtasim Ramim — UI/UX and player-facing systems lead
+# Nafis Mohtasim Ramim — current implementation assignment
 
-**Share:** 30% of the team's work · **Board id:** `ramim` · Read with [MASTER_PLAN.md](../MASTER_PLAN.md) (your AI reads it; you do not have to).
+**Board ID:** `ramim`. **Approved task allocation:** 20. **Priority rank:** 1/6.
 
-You lead everything the player sees and touches in 2D: the HUD, menus, panels, puzzles, hints, messages, journal, progress and settings. You are also the team leader on the registration, so you help unblock others.
+Shared gameplay; Chapters 4/6/8; opening and progression UI. Read [CURRENT_BATCH.md](../CURRENT_BATCH.md) and [GO_NEXT.md](../GO_NEXT.md) first. This batch supersedes the older role/folder card for its explicit task scopes.
 
-## How you work
+## Tasks
 
-Type **`continue(ramim)`** to your AI. It pulls, claims your next ready tasks (`board.py take --by "<Name>/<AI>"`), does them one by one inside your folders, tests, reviews, commits under your GitHub account and pushes ([GO_NEXT.md](../GO_NEXT.md) §0). Say **`go next`** instead for exactly one task.
+| ID | Feature |
+|---|---|
+| `M3-61` | EVA: suit budget, scanner pulse, footing with load, and assist modes |
+| `M3-64` | The RPG layer: cadet record, skills, gear loadout, jobs board and rest |
+| `M3-62` | Things you build stay: markers, fixed lines, lights, repeaters and the coverage map |
+| `M3-63` | The rover and the route planner |
+| `M3-65` | Readable hazards: moonquake, cold, impact flashes, darkness, solar-storm shelter run |
+| `M3-4P` | Chapter 4 puzzles P-07 and P-08 as real interactive panels |
+| `M3-4U` | Upgrade choice after Chapter 3 |
+| `M3-4M` | Chapter 4 missions EX-M0401 to EX-M0404: physical play, crew and retry |
+| `M3-6P` | Chapter 6 puzzles P-11 and P-12 as real interactive panels |
+| `M3-6U` | Upgrade choice after Chapter 5 |
+| `M3-6M` | Chapter 6 missions EX-M0601 to EX-M0604: physical play, crew and retry |
+| `M3-8P` | Chapter 8 puzzles P-15 and P-16 as real interactive panels |
+| `M3-8U` | Upgrade choice after Chapter 7 |
+| `M3-8M` | Chapter 8 missions EX-M0801 to EX-M0804: physical play, crew and retry |
+| `M1-18` | First five minutes: title screen, onboarding and UX polish |
+| `M1-31` | Make it fun: Chapter 1 game-feel and reward pass |
+| `M3-67` | Moon trainer: free training sorties on the real terrain from the title menu |
+| `M3-72` | Chapter select, mission list, progress and achievements screens |
+| `M3-90` | Remaining UI families: journal, discovery log, rover, greenhouse, credits |
+| `M3-91` | All 128 upgrade profiles complete the campaign |
 
-**Your AI:** Codex (ChatGPT Codex, `gpt-6.1-sol` with high reasoning; any GPT works). Every task on your list is in the `codex` lane. Set `git config user.name` and `user.email` to your own GitHub account first, so your commits count for you.
+Run `python production/plan/board.py list --member ramim --phase implementation`, then inspect/claim a ready ID from this list. Finish existing assigned WIP before duplicating it.
 
-## Your folders (only you edit these)
+## File permission and handoff
 
-- `game/scripts/ui/`
-- `game/scenes/ui/`
-- `game/resources/ui/`
-- `game/scripts/puzzles/`
-- `game/scripts/comms/`
-- `game/scripts/progression/`
-- `game/scripts/settings/`
-- `game/scripts/classmode/`
-- `game/scripts/debrief/`
-- `game/scripts/feedback/`
-- `game/scripts/trainer/`
-- `game/scenes/trainer/`
-- `game/resources/trainer/`
-- `game/scripts/main.gd`
-- `game/scripts/dialogue/knowledge_service.gd`
-- `game/resources/campaign/content/ui_text.json`
-- `game/resources/campaign/content/how_to.json`
-- `game/resources/campaign/content/journal_text.json`
-- `game/resources/campaign/content/jobs.json`
-- `game/resources/campaign/content/curriculum.json`
-- `game/resources/campaign/content/messages/ch02.json`
-- `game/resources/campaign/content/messages/ch03.json`
-- `game/resources/campaign/content/messages/ch04.json`
+Only edit files needed for the task, inside its paths/integration_paths, after publishing exact-file reservations. These scopes replace historical folder restrictions for this batch; they do not grant blanket folder ownership. Read task assignment_history and preserve other agents' work. If a file is actually reserved, switch to another ready task or arrange a saved-work handoff. A former owner label alone is not a blocker.
 
-Everything else belongs to someone else (MASTER_PLAN.md §7). Need a change there? File a task for its owner with `board.py add` and carry on.
+## Verification and delivery
 
-## Your rules
-
-- Every screen uses UiDesign (`game/scripts/ui/ui_design.gd`): its sizes, colours, glass panels and motion. No new colours or fonts.
-- Player text: plain words, one goal, no codes; run `game/tools/test_player_text.gd` and extend it for every new screen.
-- Puzzle logic stays pure in `game/scripts/puzzles/` (no UI inside it); panels follow the `open(route, target_id)` / `committed(result)` contract of `mission_table_panel.gd`. Atik wires panels into missions; do not edit `game/scripts/missions/`.
-- Build UI in code where you can; if you use a `.tscn`, it lives under `game/scenes/ui/` and only you edit it.
-- Commit under your own GitHub account, no AI co-author lines; log AI use in `production/AI_PROMPT_LOG.md` (one row per task; the file merges itself).
-
-## Start here
-
-The P-01 panel (M1-08), onboarding and the title screen (M1-18), the Mission Table restyle (M1-55), the hint player (M1-64), then the messages system (M1-56) and the endings and debrief (M1-19).
-
-## Your work (35 open tasks, 86 effort points)
-
-The board decides the real order and shows what is ready; this is the overview on 5 Nov 2026.
-
-| Task | Milestone | Priority | Effort | Title |
-|---|---|---|---|---|
-| M1-37 | M1 | P0 | 5 | Four-player co-op Class mode: shared decisions, private role clues (as registered) |
-| M1-08 | M1 | P0 | 3 | P-01 Commission & Plant: a real, interactive puzzle panel |
-| M1-18 | M1 | P0 | 3 | First five minutes: title screen, onboarding and UX polish |
-| M1-19 | M1 | P0 | 3 | Chapter 1 endings, decision replay and the science debrief |
-| M1-31 | M1 | P0 | 2 | Make it fun: Chapter 1 game-feel and reward pass |
-| M1-29 | M1 | P0 | 3 | Mission Trainer mode: every puzzle as a 5–10 minute training scenario |
-| M1-55 | M1 | P0 | 3 | Mission Table made simple: guided first shift, plain toggles, before-and-after forecast |
-| M1-56 | M1 | P0 | 3 | Messages: inbox, arrival toasts, unlock triggers and the message validator |
-| M1-64 | M1 | P0 | 3 | Hint player: three progressive levels (nudge, animated explainer, worked method) in a polished overlay |
-| M1-62 | M1 | P1 | 2 | Goal card text for Chapters 2-8: an authored goal, why, prompt, result and hint for every job |
-| M3-2P | M3 | P1 | 3 | Chapter 2 puzzles P-03 and P-04 as real interactive panels |
-| M3-3P | M3 | P1 | 3 | Chapter 3 puzzles P-05 and P-06 as real interactive panels |
-| M3-4P | M3 | P1 | 3 | Chapter 4 puzzles P-07 and P-08 as real interactive panels |
-| M3-90 | M3 | P1 | 3 | Remaining UI families: journal, discovery log, rover, greenhouse, credits |
-| M3-98 | M3 | P1 | 3 | Full-campaign journal: People and Science tabs, flag-gated names, superseded entries, chapter pages, Class mode |
-| M3-64 | M3 | P1 | 3 | The RPG layer: cadet record, skills, gear loadout, jobs board and rest |
-| M3-67 | M3 | P1 | 3 | Moon trainer: free training sorties on the real terrain from the title menu |
-| M3-2T | M3 | P1 | 2 | Chapter 2 messages: every scene joined to the next |
-| M3-3T | M3 | P1 | 2 | Chapter 3 messages: every scene joined to the next |
-| M3-4T | M3 | P1 | 2 | Chapter 4 messages: every scene joined to the next |
-| M3-69 | M3 | P1 | 3 | The junior-astronaut curriculum: competencies, the Academy manual and 'what you learned' debriefs |
-| M3-70 | M3 | P1 | 2 | Steam-quality settings, controls and saves |
-| M3-72 | M3 | P1 | 3 | Chapter select, mission list, progress and achievements screens |
-| M3-2U | M3 | P2 | 1 | Upgrade choice after Chapter 1 |
-| M3-3U | M3 | P2 | 1 | Upgrade choice after Chapter 2 |
-| M3-4U | M3 | P2 | 1 | Upgrade choice after Chapter 3 |
-| M3-5P | M4 | P1 | 3 | Chapter 5 puzzles P-09 and P-10 as real interactive panels |
-| M3-6P | M4 | P1 | 3 | Chapter 6 puzzles P-11 and P-12 as real interactive panels |
-| M3-7P | M4 | P1 | 3 | Chapter 7 puzzles P-13 and P-14 as real interactive panels |
-| M3-8P | M4 | P1 | 3 | Chapter 8 puzzles P-15 and P-16 as real interactive panels |
-| M3-91 | M4 | P1 | 2 | All 128 upgrade profiles complete the campaign |
-| M3-5U | M4 | P2 | 1 | Upgrade choice after Chapter 4 |
-| M3-6U | M4 | P2 | 1 | Upgrade choice after Chapter 5 |
-| M3-7U | M4 | P2 | 1 | Upgrade choice after Chapter 6 |
-| M3-8U | M4 | P2 | 1 | Upgrade choice after Chapter 7 |
+Implement actual campaign behavior, run the required automated/scripted checks, and record real results. Do not rebuild source already delivered or mark a fixture-only prototype Done. Claim no IDs outside this list; submission/video/manual QA are deferred. Commit/push verified work under your own GitHub account, safely synchronizing and preserving other work first. Never stage unrelated imports/settings or force-push.

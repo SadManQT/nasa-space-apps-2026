@@ -98,6 +98,14 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
       <option value="">All statuses</option><option value="ready">Ready now</option>
       <option>todo</option><option>in_progress</option><option>blocked</option><option>done</option>
     </select>
+    <select id="fb" aria-label="Batch phase">
+      <option value="">All phases</option>
+      <option value="implementation">Current implementation</option>
+      <option value="deferred">Deferred: video / submission / manual QA</option>
+      <option value="acceptance">Source delivered: acceptance only</option>
+      <option value="history">Earlier completed work</option>
+      <option value="unplanned">Unplanned</option>
+    </select>
   </div>
   <p class="sub" id="count"></p>
   <div id="tasks"></div>
@@ -106,12 +114,13 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <script>
 const data = JSON.parse(document.getElementById("data").textContent);
 const byId = Object.fromEntries(data.tasks.map(t => [t.id, t]));
-const isReady = t => t.status === "todo" && t.deps.every(d => byId[d] && byId[d].status === "done");
+const isReady = t => ["implementation", "legacy"].includes(t.batch_phase) && t.status === "todo" && t.deps.every(d => byId[d] && byId[d].status === "done");
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const $ = id => document.getElementById(id);
 
 $("updated").textContent = `Board updated ${data.updated} · ${data.tasks.filter(t => t.status === "done").length}/${data.tasks.length} tasks done`;
 $("goPrompt").textContent = data.go_next_prompt;
+if (data.implementation_batch?.active) $("fb").value = "implementation";
 $("deadlines").innerHTML = data.deadlines.map(d =>
   `<div class="panel deadline"><b>${esc(d.when)}</b>${esc(d.what)}</div>`).join("");
 $("milestones").innerHTML = data.milestones.map(m => {
@@ -133,9 +142,14 @@ for (const m of data.milestones) $("fm").insertAdjacentHTML("beforeend", `<optio
 for (const tool of [...new Set(data.tasks.map(t => t.tool))]) $("ft").insertAdjacentHTML("beforeend", `<option>${esc(tool)}</option>`);
 
 function taskPrompt(t) {
-  return `Work on Last Light Academy task ${t.id}: ${t.title}.\n` +
-    `First: git pull --rebase, then read production/plan/GO_NEXT.md and follow it for this task ` +
-    `(claim ${t.id}, work only inside its paths, verify, mark done, push).\n\n${t.prompt}`;
+  if (!["implementation", "legacy"].includes(t.batch_phase)) {
+    return `${t.id} is ${t.batch_phase}. Do not claim or implement it during the current batch. Preserve its saved work and evidence.`;
+  }
+  return `Work ONLY as ${t.reserved_for || "the assigned member"} on Last Light Academy task ${t.id}: ${t.title}.\n` +
+    `Read production/plan/CURRENT_BATCH.md and production/plan/GO_NEXT.md. Synchronize safely; preserve other work. ` +
+    `This batch overrides older member/folder mappings only for this task's scope. ` +
+    `Claim this exact ID, reserve its exact edit files with board.py lock and push the reservation before editing. ` +
+    `Do not select extra tasks or resume deferred claims. Verify actual integration and required tests before marking Done.\n\n${t.prompt}`;
 }
 function card(t) {
   const ready = isReady(t);
@@ -145,6 +159,8 @@ function card(t) {
     t.owner && `Owner: ${esc(t.owner)}`,
     deps && `Depends on: ${deps}`,
     t.paths?.length && `Paths: ${t.paths.map(esc).join(", ")}`,
+    t.integration_paths?.length && `Task integration scope: ${t.integration_paths.map(esc).join(", ")}`,
+    t.edit_files?.length && `Reserved edit files: ${t.edit_files.map(esc).join(", ")}`,
     t.refs?.length && `Read: ${t.refs.map(esc).join(", ")}`,
     t.note && `Note: ${esc(t.note)}`,
     t.blocker && `Blocked: ${esc(t.blocker)}`,
@@ -154,6 +170,7 @@ function card(t) {
     <div class="head"><span class="id">${esc(t.id)}</span><span class="title">${esc(t.title)}</span>
       <span class="chip">${esc(t.milestone)}</span><span class="chip">${esc(t.priority)}</span>
       <span class="chip">${esc(t.tool)}</span>
+      <span class="chip">${esc(t.batch_phase)}</span>
       <span class="chip ${ready ? "ready" : "s-" + esc(t.status)}">${ready ? "ready" : esc(t.status.replace("_", " "))}</span></div>
     <div class="meta">${extra}</div>
     <details class="prompt"><summary>Prompt</summary><pre id="p-${esc(t.id)}">${esc(taskPrompt(t))}</pre>
@@ -161,15 +178,16 @@ function card(t) {
   </article>`;
 }
 function draw() {
-  const q = $("q").value.toLowerCase(), fm = $("fm").value, ft = $("ft").value, fs = $("fs").value;
+  const q = $("q").value.toLowerCase(), fm = $("fm").value, ft = $("ft").value, fs = $("fs").value, fb = $("fb").value;
   const shown = data.tasks.filter(t =>
     (!fm || t.milestone === fm) && (!ft || t.tool === ft) &&
+    (!fb || t.batch_phase === fb) &&
     (!fs || (fs === "ready" ? isReady(t) : t.status === fs)) &&
-    (!q || [t.id, t.title, t.prompt, ...(t.paths || [])].join(" ").toLowerCase().includes(q)));
+    (!q || [t.id, t.title, t.prompt, t.reserved_for, t.owner, ...(t.paths || [])].join(" ").toLowerCase().includes(q)));
   $("count").textContent = `${shown.length} of ${data.tasks.length} tasks`;
   $("tasks").innerHTML = shown.map(card).join("");
 }
-for (const id of ["q", "fm", "ft", "fs"]) $(id).addEventListener("input", draw);
+for (const id of ["q", "fm", "ft", "fs", "fb"]) $(id).addEventListener("input", draw);
 document.addEventListener("click", e => {
   const id = e.target.dataset?.copy;
   if (!id) return;

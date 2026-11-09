@@ -26,6 +26,7 @@ import html
 import json
 import pathlib
 import sys
+import fnmatch
 
 HERE = pathlib.Path(__file__).resolve().parent
 TASKS = HERE / "tasks.json"
@@ -46,7 +47,7 @@ def load():
 
 def save(data):
     data.pop("updated", None)  # a board-wide stamp would make every concurrent save conflict in git
-    problems = validate(data)
+    problems = validate(data) + (merge_risks(data) if data.get("implementation_batch", {}).get("active") else [])
     if problems:
         sys.exit("board not saved:\n  " + "\n  ".join(problems))
     TASKS.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -61,14 +62,44 @@ def ready(task, tasks):
     return task["status"] == "todo" and all(tasks[d]["status"] == "done" for d in task["deps"])
 
 
+def batch_owner(data, tid):
+    batch = data.get("implementation_batch", {})
+    if batch.get("active"):
+        return next((member for member, ids in batch.get("assignments", {}).items() if tid in ids), None)
+    return None
+
+
+def batch_phase(data, task):
+    batch = data.get("implementation_batch", {})
+    if not batch.get("active"):
+        return "legacy"
+    if batch_owner(data, task["id"]):
+        return "implementation"
+    if task["id"] in batch.get("deferred_ids", []):
+        return "deferred"
+    if task["id"] in batch.get("acceptance_ids", []):
+        return "acceptance"
+    return "history" if task["status"] == "done" else "unplanned"
+
+
+def selectable(data, task):
+    return batch_phase(data, task) in ("legacy", "implementation")
+
+
+def person(identity):
+    return (identity or "").split("/", 1)[0].strip().lower()
+
+
 def allowed(data, task, by):
     """A task's `reserved_for`, or its lane in data['reserved_lanes'], limits it to that person."""
-    owner = task.get("reserved_for") or data.get("reserved_lanes", {}).get(task["tool"])
-    return not owner or (by or "").lower().startswith(owner.lower())
+    if not selectable(data, task):
+        return False
+    owner = batch_owner(data, task["id"]) or task.get("reserved_for") or data.get("reserved_lanes", {}).get(task["tool"])
+    return not owner or person(by) == owner.lower()
 
 
 def next_tasks(data, tool=None, by=None):
-    """Ready tasks in work order: milestone, then priority, then board order.
+    """Ready tasks in batch order, or milestone/priority/board order without a batch.
     With a tool, only that tool's tasks and 'any' tasks; without one, every non-human task.
     With `by`, lanes reserved for someone else are left out."""
     tasks = by_id(data)
@@ -76,8 +107,14 @@ def next_tasks(data, tool=None, by=None):
     fits = (lambda t: t["tool"] in (tool, "any")) if tool else (lambda t: t["tool"] != "human")
     pool = [(order[t["milestone"]], PRIORITY[t["priority"]], i, t)
             for i, t in enumerate(data["tasks"])
-            if fits(t) and ready(t, tasks) and (by is None or allowed(data, t, by))]
-    return [t for *_, t in sorted(pool, key=lambda x: x[:3])]
+            if selectable(data, t) and fits(t) and ready(t, tasks) and (by is None or allowed(data, t, by))]
+    batch = data.get("implementation_batch", {})
+    if batch.get("active"):
+        ranked = {tid: i for i, tid in enumerate(tid for member in batch.get("priority_order", batch["assignments"]) for tid in batch["assignments"][member])}
+        pool.sort(key=lambda row: ranked[row[-1]["id"]])
+    else:
+        pool.sort(key=lambda row: row[:3])
+    return [t for *_, t in pool]
 
 
 def member_ids(data):
@@ -91,6 +128,15 @@ def _specific(paths, shared):
 
 def merge_risks(data):
     """Open tasks of two different members that own overlapping paths would edit the same files: a merge risk."""
+    if data.get("implementation_batch", {}).get("active"):
+        locks, risks = {}, []
+        for task in data["tasks"]:
+            for path in task.get("edit_files", []):
+                key = path.lower()
+                if key in locks and locks[key] != task["id"]:
+                    risks.append(f"file lock conflict: {task['id']} and {locks[key]} both reserve {path}")
+                locks[key] = task["id"]
+        return risks
     shared = set(data.get("shared_paths", []))
     open_tasks = [t for t in data["tasks"] if t["status"] != "done" and t.get("reserved_for")]
     risks = []
@@ -105,11 +151,44 @@ def merge_risks(data):
     return risks
 
 
+def file_problems(task, paths):
+    scopes = task.get("paths", []) + task.get("integration_paths", [])
+    problems = []
+    for path in paths:
+        if not isinstance(path, str) or not path or "\\" in path or ":" in path or path.startswith("/") or any(c in path for c in "*?[]") or any(ord(c) < 32 for c in path) or any(p in ("", ".", "..", ".git") for p in path.split("/")):
+            problems.append("file locks require clean repository-relative file paths")
+            continue
+        if (HERE.parent.parent / path).is_dir():
+            problems.append("file locks require exact files, not directories")
+            continue
+        if not any(path.startswith(s) if s.endswith("/") else fnmatch.fnmatchcase(path, s) for s in scopes):
+            problems.append(f"{task['id']}: {path} is outside the task's paths/integration_paths")
+    return problems
+
+
+def reserve_files(data, tid, by, paths):
+    task = by_id(data).get(tid)
+    if task is None or not allowed(data, task, by) or task["status"] != "in_progress" or person(task.get("owner")) != person(by):
+        return ["only the current member of a claimed active task may reserve its files"]
+    if not paths:
+        return ["specify the exact files to reserve"]
+    problems = file_problems(task, paths)
+    if problems:
+        return problems
+    wanted = {p.lower() for p in paths}
+    for other in data["tasks"]:
+        if other["id"] != tid and wanted.intersection(p.lower() for p in other.get("edit_files", [])):
+            return [f"file reserved by {other['id']} ({other.get('owner', '?')}); save/hand off first or use another ready task"]
+    task["edit_files"] = list(dict.fromkeys(task.get("edit_files", []) + paths))
+    return []
+
+
 def team(data):
     """Effort per member against the target share (effort defaults to 2 points)."""
-    rows, total = [], sum(t.get("effort", 2) for t in data["tasks"] if t["status"] != "done" and t.get("reserved_for"))
+    pool = [t for t in data["tasks"] if selectable(data, t)]
+    rows, total = [], sum(t.get("effort", 2) for t in pool if t["status"] != "done" and t.get("reserved_for"))
     for m in data.get("members", []):
-        mine = [t for t in data["tasks"] if (t.get("reserved_for") or "").lower() == m["id"].lower()]
+        mine = [t for t in pool if (t.get("reserved_for") or "").lower() == m["id"].lower()]
         left = sum(t.get("effort", 2) for t in mine if t["status"] != "done")
         done = sum(t.get("effort", 2) for t in mine if t["status"] == "done")
         rows.append(f"{m['id']:<9} {m.get('role', ''):<44} target {m['share']:>3}%  open {left:>4} pts = {100 * left / max(total, 1):5.1f}%  "
@@ -132,9 +211,9 @@ def validate(data):
         if t["id"] in tasks:
             problems.append(f"duplicate id {t['id']}")
         tasks[t["id"]] = t
-        for field, allowed in (("status", STATUSES), ("tool", TOOLS), ("priority", PRIORITY),
+        for field, values in (("status", STATUSES), ("tool", TOOLS), ("priority", PRIORITY),
                                ("milestone", milestones)):
-            if t[field] not in allowed:
+            if t[field] not in values:
                 problems.append(f"{t['id']}: bad {field} {t[field]!r}")
         if not t["prompt"].strip():
             problems.append(f"{t['id']}: empty prompt")
@@ -159,21 +238,54 @@ def validate(data):
 
     for tid in tasks:
         visit(tid, [])
+    batch = data.get("implementation_batch", {})
+    if batch.get("active"):
+        assigned = {}
+        for member, ids in batch.get("assignments", {}).items():
+            if member not in members:
+                problems.append(f"batch member {member} is not in members")
+            for tid in ids:
+                if tid in assigned:
+                    problems.append(f"batch task {tid} appears more than once")
+                assigned[tid] = member
+                if tid not in tasks:
+                    problems.append(f"batch references unknown task {tid}")
+                elif tasks[tid].get("reserved_for") != member:
+                    problems.append(f"{tid}: batch assigns {member}, reserved_for must match")
+        categorized = set(assigned)
+        for phase in ("deferred_ids", "acceptance_ids"):
+            for tid in batch.get(phase, []):
+                if tid not in tasks or tid in categorized:
+                    problems.append(f"batch {phase}: unknown or repeated task {tid}")
+                categorized.add(tid)
+        for task in tasks.values():
+            if task.get("edit_files"):
+                if not selectable(data, task) or task["status"] != "in_progress" or not allowed(data, task, task.get("owner")):
+                    problems.append(f"{task['id']}: file locks require its active claimed owner")
+                problems += file_problems(task, task["edit_files"])
     return problems
 
 
-def describe(t, tasks):
+def describe(t, tasks, data=None):
     deps = ", ".join(f"{d} ({tasks[d]['status']})" for d in t["deps"]) or "none"
     lines = [f"{t['id']}  [{t['milestone']} {t['priority']} {t['tool']}]  {t['title']}",
              f"status: {t['status']}" + (f"  owner: {t['owner']}" if t.get("owner") else "")
              + (f"  assigned to: {t['reserved_for']}" if t.get("reserved_for") else "") + f"  effort: {t.get('effort', 2)}",
              f"depends on: {deps}"]
+    if data and data.get("implementation_batch", {}).get("active"):
+        lines.append("batch phase: " + batch_phase(data, t))
     if t.get("paths"):
         lines.append("owns paths: " + ", ".join(t["paths"]))
+    if t.get("integration_paths"):
+        lines.append("task-scoped integration paths (reserve exact files first): " + ", ".join(t["integration_paths"]))
+    if t.get("edit_files"):
+        lines.append("reserved files: " + ", ".join(t["edit_files"]))
     if t.get("refs"):
         lines.append("read first: " + ", ".join(t["refs"]))
     if t.get("note"):
         lines.append("note: " + t["note"])
+    if t.get("blocker"):
+        lines.append("blocker: " + t["blocker"])
     return "\n".join(lines) + "\n\nPROMPT\n" + t["prompt"]
 
 
@@ -212,8 +324,9 @@ def team_html(data):
 
     cards = []
     for mid, m in groups:
-        mine = [t for t in data["tasks"] if who(t) == mid]
-        if mid is None and not mine:
+        all_mine = [t for t in data["tasks"] if who(t) == mid]
+        mine = [t for t in all_mine if selectable(data, t)]
+        if mid is None and not all_mine:
             continue
         own = {t["id"] for t in mine}
         st = {s: [t for t in mine if t["status"] == s] for s in STATUSES}
@@ -233,15 +346,20 @@ def team_html(data):
                              for t in st["blocked"]]),
             part("To do", [li(t) for t in st["todo"] if t not in nxt], open_=False),
             part("Done", [li(t, f'<div class="meta">{e(_short(t.get("evidence"), 140))}</div>') for t in st["done"]], open_=False),
+            part("Deferred: video, submission and manual QA", [li(t) for t in all_mine if batch_phase(data, t) == "deferred"], open_=False),
+            part("Source delivered: acceptance only", [li(t) for t in all_mine if batch_phase(data, t) == "acceptance"], open_=False),
+            part("Earlier completed work", [li(t) for t in all_mine if batch_phase(data, t) == "history"], open_=False),
+            part("Unplanned: requires explicit batch assignment", [li(t) for t in all_mine if batch_phase(data, t) == "unplanned"], open_=False),
         ]
         cards.append(f'<div class="panel" data-member="{e(mid or "")}">' + head + "\n" + "\n".join(b for b in body if b) + "\n</div>")
-    return ('<h2 id="team">Team</h2>\n<p class="sub">Who is doing what. Next up is the chunk <code>board.py take</code> would hand '
-            "that member (up to 5, in work order), then any ready steps they do by hand.</p>\n"
+    return ('<h2 id="team">Team</h2>\n<p class="sub">Who is doing what. Next up lists assigned ready tasks; claim one exact ID. '
+            "Deferred and acceptance work stays visible separately.</p>\n"
             '<div class="grid team">\n' + "\n".join(cards) + "\n</div>")
 
 
 def render(data):
     view = dict(data, updated=max(t.get("updated", "") for t in data["tasks"]))
+    view["tasks"] = [dict(t, batch_phase=batch_phase(data, t)) for t in data["tasks"]]
     # One field per line, like tasks.json, so two teammates' saves merge in git like the JSON does.
     payload = json.dumps(view, indent=1, ensure_ascii=False).replace("</", "<\\/")
     page = TEMPLATE.read_text(encoding="utf-8").replace("/*BOARD_DATA*/null", payload)
@@ -249,17 +367,29 @@ def render(data):
     return page.replace(DEADLINES_ANCHOR, DEADLINES_ANCHOR + "\n\n  " + team_html(data), 1)
 
 
-def set_status(data, tid, status, **fields):
+def set_status(data, tid, status, by=None, **fields):
     tasks = by_id(data)
     if tid not in tasks:
         sys.exit(f"no task {tid}")
     t = tasks[tid]
+    if data.get("implementation_batch", {}).get("active") and status != "in_progress":
+        if not by:
+            sys.exit("status changes in the active batch require --by Name/AI")
+        acceptance_closure = batch_phase(data, t) == "acceptance" and status == "done" and person(by) == (t.get("reserved_for") or "").lower()
+        if not acceptance_closure and not allowed(data, t, by):
+            sys.exit(f"{tid}: only its assigned member may change this task's active status; deferred work stays deferred")
+        if t.get("edit_files") and person(t.get("owner")) != person(by):
+            sys.exit("only the current owner may clear this task's file reservations")
+    if status == "in_progress" and not selectable(data, t):
+        sys.exit(f"{tid} is outside the active implementation batch ({batch_phase(data, t)}); do not claim deferred work")
     if status == "in_progress" and not ready(t, tasks):
         sys.exit(f"{tid} is not ready (status {t['status']}; deps must all be done)")
     if status == "in_progress" and not allowed(data, t, fields.get("owner")):
         sys.exit(f"{tid} is reserved for {t.get('reserved_for') or data['reserved_lanes'][t['tool']]} "
                  "(their tools and their area). Take another task.")
     t.update(status=status, updated=today(), **fields)
+    if status != "in_progress":
+        t.pop("edit_files", None)
     save(data)
     print(f"{tid} -> {status}. Now commit and push production/plan/ (see GO_NEXT.md).")
 
@@ -308,12 +438,17 @@ def main():
     p = sub.add_parser("stale"); p.add_argument("--days", type=int, default=2)
     p = sub.add_parser("show"); p.add_argument("id")
     p = sub.add_parser("claim"); p.add_argument("id"); p.add_argument("--by", required=True)
-    p = sub.add_parser("done"); p.add_argument("id"); p.add_argument("--evidence", required=True)
-    p = sub.add_parser("block"); p.add_argument("id"); p.add_argument("--reason", required=True)
-    p = sub.add_parser("release"); p.add_argument("id")
+    p = sub.add_parser("lock", help="reserve exact files before editing a claimed task")
+    p.add_argument("id"); p.add_argument("--by", required=True); p.add_argument("--files", required=True)
+    p = sub.add_parser("unlock", help="release your task's files after saving and pushing its work")
+    p.add_argument("id"); p.add_argument("--by", required=True)
+    p = sub.add_parser("done"); p.add_argument("id"); p.add_argument("--evidence", required=True); p.add_argument("--by")
+    p = sub.add_parser("block"); p.add_argument("id"); p.add_argument("--reason", required=True); p.add_argument("--by")
+    p = sub.add_parser("release"); p.add_argument("id"); p.add_argument("--by")
     p = sub.add_parser("list")
     p.add_argument("--status", choices=STATUSES); p.add_argument("--tool", choices=TOOLS); p.add_argument("--milestone")
     p.add_argument("--member", help="only tasks assigned to this member (reserved_for)")
+    p.add_argument("--phase", choices=("implementation", "deferred", "acceptance", "history", "unplanned", "legacy"))
     sub.add_parser("check"); sub.add_parser("html"); sub.add_parser("team")
     p = sub.add_parser("add", help="file a task for a member (cross-folder requests, QA findings)")
     p.add_argument("--milestone", required=True); p.add_argument("--for", dest="member", required=True)
@@ -334,8 +469,10 @@ def main():
         return
     data = load()
     tasks = by_id(data)
+    if data.get("implementation_batch", {}).get("active") and a.cmd in ("take", "next"):
+        sys.exit("The active batch uses exact task IDs, not general take/next. Use list --member NAME --phase implementation, then show/claim an assigned ID.")
     if a.cmd == "next":
-        mine = [t for t in data["tasks"] if t["status"] == "in_progress" and (not a.tool or t["tool"] in (a.tool, "any"))]
+        mine = [t for t in data["tasks"] if selectable(data, t) and t["status"] == "in_progress" and (not a.by or allowed(data, t, a.by)) and (not a.tool or t["tool"] in (a.tool, "any"))]
         if mine:
             print("Already in progress (finish or release these first if one is yours): "
                   + ", ".join(f"{t['id']} by {t.get('owner') or '?'}" for t in mine) + "\n")
@@ -345,7 +482,7 @@ def main():
         if a.all:
             print("\n".join(f"{t['id']}  [{t['milestone']} {t['priority']} {t['tool']}]  {t['title']}" for t in found))
         else:
-            print(describe(found[0], tasks))
+            print(describe(found[0], tasks, data))
             print(f"\nClaim it: python3 production/plan/board.py claim {found[0]['id']} --by \"<your name>/<your AI>\"")
     elif a.cmd == "take":
         chunk = next_tasks(data, a.tool, a.by)[:a.count]
@@ -358,7 +495,7 @@ def main():
               + "\nPush the claim now, then work through them in this order (board.py show <id> for each prompt):")
         print("\n".join(f"  {t['id']}  [{t['milestone']} {t['priority']} {t['tool']}]  {t['title']}" for t in chunk))
     elif a.cmd == "mine":
-        own = [t for t in data["tasks"] if t["status"] == "in_progress" and t.get("owner") == a.by]
+        own = [t for t in data["tasks"] if selectable(data, t) and t["status"] == "in_progress" and person(t.get("owner")) == person(a.by) and allowed(data, t, a.by)]
         print("\n".join(f"{t['id']}  [{t['milestone']} {t['priority']} {t['tool']}]  {t['title']}" for t in own)
               or f"No tasks in progress for {a.by}.")
     elif a.cmd == "stale":
@@ -367,20 +504,34 @@ def main():
         print("\n".join(f"{t['id']}  claimed by {t.get('owner') or '?'} on {t.get('updated', '?')}  {t['title']}" for t in old)
               or f"No claims older than {a.days} days.")
     elif a.cmd == "show":
-        print(describe(tasks[a.id], tasks) if a.id in tasks else f"no task {a.id}")
+        print(describe(tasks[a.id], tasks, data) if a.id in tasks else f"no task {a.id}")
     elif a.cmd == "claim":
         set_status(data, a.id, "in_progress", owner=a.by)
+    elif a.cmd == "lock":
+        problems = reserve_files(data, a.id, a.by, [p.strip() for p in a.files.split(",") if p.strip()])
+        if problems:
+            sys.exit("files not reserved:\n  " + "\n  ".join(problems))
+        save(data)
+        print(f"Reserved files for {a.id}. Push this reservation before editing; preserve reservations from rejected-push merges.")
+    elif a.cmd == "unlock":
+        task = tasks.get(a.id)
+        if task is None or not allowed(data, task, a.by) or person(task.get("owner")) != person(a.by):
+            sys.exit("only the task's current member may release its file reservations")
+        task.pop("edit_files", None)
+        save(data)
+        print(f"Released files for {a.id}; push the board update.")
     elif a.cmd == "done":
-        set_status(data, a.id, "done", evidence=a.evidence)
+        set_status(data, a.id, "done", by=a.by, evidence=a.evidence)
     elif a.cmd == "block":
-        set_status(data, a.id, "blocked", blocker=a.reason)
+        set_status(data, a.id, "blocked", by=a.by, blocker=a.reason)
     elif a.cmd == "release":
-        set_status(data, a.id, "todo", owner="")
+        set_status(data, a.id, "todo", by=a.by, owner="")
     elif a.cmd == "list":
         for t in data["tasks"]:
             if all(v is None or t[k] == v for k, v in (("status", a.status), ("tool", a.tool), ("milestone", a.milestone))) \
-                    and (a.member is None or (t.get("reserved_for") or "").lower() == a.member.lower()):
-                print(f"{t['id']}  {t['status']:<11} [{t['milestone']} {t['priority']} {t['tool']}]  {t['title']}")
+                    and (a.member is None or (t.get("reserved_for") or "").lower() == a.member.lower()) \
+                    and (a.phase is None or batch_phase(data, t) == a.phase):
+                print(f"{t['id']}  {t['status']:<11} [{t['milestone']} {t['priority']} {t['tool']}] [{batch_phase(data, t)}]  {t['title']}")
     elif a.cmd == "add":
         if data.get("members") and a.member.lower() not in member_ids(data):
             sys.exit(f"no member {a.member}; members: {', '.join(sorted(member_ids(data)))}")
