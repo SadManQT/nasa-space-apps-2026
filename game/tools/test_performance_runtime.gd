@@ -88,12 +88,19 @@ func _run() -> void:
 	DirAccess.remove_absolute(invalid_glb)
 	DirAccess.remove_absolute(invalid_path)
 	await _test_loading_transitions()
+	if _retain_trace:
+		_check_retained_trace()
 	print("PERFORMANCE RUNTIME RESULT: %s (%d checks, %d failures)" % ["PASS" if _failures == 0 else "FAIL", _checks, _failures])
 	quit(0 if _failures == 0 else 1)
 
 var _last_tick := 0
 var _longest_tick := 0.0
 var _tick_count := 0
+var _retain_trace := OS.get_environment("LLA_RETAIN_LOAD_TRACE") == "1"
+var _trace_windows: Array = []
+var _window_start := 0
+var _first_step := 0
+var _trace_enabled := false
 
 func _heartbeat() -> void:
 	if _last_tick == 0:
@@ -104,14 +111,21 @@ func _heartbeat() -> void:
 	_tick_count += 1
 
 func _start_monitor() -> void:
+	if _retain_trace:
+		_first_step = LoadTrace.steps.size()
+		_trace_enabled = LoadTrace.enabled
 	_last_tick = Time.get_ticks_usec()
+	_window_start = _last_tick
 	_longest_tick = 0.0
 	_tick_count = 0
 
 func _stop_monitor(label: String) -> void:
 	_last_tick = 0
+	var end := Time.get_ticks_usec() if _retain_trace else 0
 	_check(_tick_count > 1, label + " yields moving loading frames")
 	_check(_longest_tick < 50.0, label + " main-thread interval <50 ms (%.3f)" % _longest_tick)
+	if _retain_trace:
+		_trace_windows.append({"label": label, "start_usec": _window_start, "end_usec": end, "frames": _tick_count, "max_interval_ms": _longest_tick, "trace_enabled": _trace_enabled, "first_step": _first_step, "end_step": LoadTrace.steps.size()})
 
 func _test_threaded_geometry() -> void:
 	process_frame.connect(_heartbeat)
@@ -231,6 +245,15 @@ func _test_loading_transitions() -> void:
 		terrain_sync = terrain_sync or String(step.step).begins_with("glb_decode:")
 	_check(not terrain_sync, "terrain exterior entry never escapes to synchronous GLB decode")
 	LoadTrace.enabled = false
+	if _retain_trace:
+		# Serialize only after every measurement and optional look-ahead has finished.
+		var report := {"schema": 1, "process_id": OS.get_process_id(), "window_clock": "Time.get_ticks_usec; process-relative", "window_context": "SceneTree main-thread heartbeat", "stage_context": "Original LoadTrace records have names/ms only; stage timestamps and thread IDs are unavailable. Ranges group records appended during each window; nested/background stages are not additive frame costs.", "windows": _trace_windows, "steps": LoadTrace.steps}
+		var directory := OS.get_environment("TEST_LOG_DIR")
+		if not directory.is_empty():
+			var file := FileAccess.open(directory.path_join("loading_trace.json"), FileAccess.WRITE)
+			if file != null:
+				file.store_string(JSON.stringify(report, "\t", true, true) + "\n")
+				file.close()
 	main.free()
 	for suffix in ["", ".bak", ".tmp"]:
 		if FileAccess.file_exists(slot + suffix):
@@ -240,3 +263,38 @@ func _evict_room(room_id: String) -> void:
 	for path in LoadPreparation.room_paths(room_id):
 		AssetGeometry._scenes.erase(path)
 		AssetGeometry._recent.erase(path)
+
+func _check_retained_trace() -> void:
+	var directory := OS.get_environment("TEST_LOG_DIR")
+	_check(not directory.is_empty(), "retained trace requires TEST_LOG_DIR")
+	if directory.is_empty():
+		return
+	var path := directory.path_join("loading_trace.json")
+	_check(FileAccess.file_exists(path), "opt-in loading trace is retained beside complete suite logs")
+	if not FileAccess.file_exists(path):
+		return
+	var report = JSON.parse_string(FileAccess.get_file_as_string(path))
+	_check(report is Dictionary and report.get("windows") is Array and report.get("steps") is Array, "retained loading trace is structured JSON")
+	if not report is Dictionary or not report.get("windows") is Array or not report.get("steps") is Array:
+		return
+	var complete: bool = report.steps.size() == LoadTrace.steps.size()
+	for index in mini(report.steps.size(), LoadTrace.steps.size()):
+		var saved: Dictionary = report.steps[index]
+		var original: Dictionary = LoadTrace.steps[index]
+		# JSON parsing can round by one ULP; 1e-9 ms is below the timer's 0.001 ms resolution.
+		complete = complete and saved.size() == original.size() and saved.step == original.step and absf(float(saved.ms) - float(original.ms)) < 0.000000001
+	_check(complete, "retained trace keeps every original stage at timer precision without invented fields")
+	var expected: Array = []
+	for id in ["Kai", "Amara", "Mei", "Rafi", "Ferreira", "PR_MissionTable"]:
+		expected.append(id + " raw load")
+		if not id.begins_with("PR_"):
+			expected.append(id + " gait worker")
+	expected.append_array(["production title", "production new campaign", "production garden entry", "production full cast entry", "production terrain exterior entry"])
+	_check(report.windows.map(func(window): return window.label) == expected, "all sixteen actual measurements are retained in order")
+	var previous_end := 0
+	for window in report.windows:
+		_check(window.start_usec > previous_end and window.end_usec >= window.start_usec and window.frames > 1 and window.max_interval_ms > 0.0, "measurement clock/frame data retained: " + String(window.label))
+		previous_end = int(window.end_usec)
+		var first := int(window.first_step)
+		var end := int(window.end_step)
+		_check(first >= 0 and first <= end and end <= report.steps.size() and (end > first if window.trace_enabled else first == end), "actual stage range linked: " + String(window.label))

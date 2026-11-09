@@ -5,6 +5,7 @@ Requires Python 3, Bash (Git Bash on Windows), and an existing Godot executable.
 Does not delete import caches, modify game settings, or run concurrent engines.
 """
 import argparse
+import hashlib
 from datetime import datetime, timezone
 import json
 import os
@@ -56,6 +57,8 @@ def main():
         "architecture": platform.machine(), "logical_cpus": os.cpu_count(),
         "python": platform.python_version(), "hardware_note": args.hardware_note,
         "git": output(["git", "rev-parse", "HEAD"]),
+        "game_tree": output(["git", "rev-parse", "HEAD:game"]),
+        "retain_stage_trace": os.environ.get("LLA_RETAIN_LOAD_TRACE") == "1",
         "working_changes": output(["git", "status", "--short"]),
         "engine": output([godot.as_posix(), "--version"]),
         "cache_policy": "Existing import/OS caches retained. Each run is a fresh Godot process; no cold-cache claim.",
@@ -85,8 +88,18 @@ def main():
         except OSError as error:
             (run_dir / "runner.txt").write_text(str(error), encoding="utf-8")
             code = 2
-        metadata["runs"].append({"index": index, "command": command,
-                                 "exit_code": code, "seconds": time.monotonic() - start})
+        run = {"index": index, "command": command,
+               "exit_code": code, "seconds": time.monotonic() - start}
+        if metadata["retain_stage_trace"]:
+            trace = run_dir / "loading_trace.json"
+            try:
+                raw = trace.read_bytes()
+                run["stage_trace"] = {"path": trace.relative_to(destination).as_posix(),
+                                      "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+            except OSError as error:
+                run["stage_trace"] = {"error": f"missing/unreadable retained stage trace: {error}"}
+                failed = True
+        metadata["runs"].append(run)
         manifest.write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
         failed |= code != 0
         print((run_dir / "runner.txt").read_text(encoding="utf-8", errors="replace"), end="", flush=True)
