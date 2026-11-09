@@ -1,0 +1,607 @@
+PASS actual nearby USE opens calibration panel
+PASS captured M1-08_first_use.png
+PASS calibration_unset frame fits viewport
+PASS calibration_unset target >=44 Choose_dry
+PASS calibration_unset button text fits Choose_dry
+PASS calibration_unset target >=44 Choose_wet
+PASS calibration_unset button text fits Choose_wet
+PASS calibration_unset target >=44 Minus_raw_reading
+PASS calibration_unset button text fits Minus_raw_reading
+PASS calibration_unset target >=44 Plus_raw_reading
+PASS calibration_unset button text fits Plus_raw_reading
+PASS calibration_unset target >=44 Minus_calibrated_reading
+PASS calibration_unset button text fits Minus_calibrated_reading
+PASS calibration_unset target >=44 Plus_calibrated_reading
+PASS calibration_unset button text fits Plus_calibrated_reading
+PASS calibration_unset target >=44 UndoChoices
+PASS calibration_unset button text fits UndoChoices
+PASS calibration_unset target >=44 TryIt
+PASS calibration_unset button text fits TryIt
+PASS calibration_unset target >=44 LockIn
+PASS calibration_unset button text fits LockIn
+PASS calibration_unset target >=44 ProbeHint
+PASS calibration_unset button text fits ProbeHint
+PASS calibration_unset target >=44 ProbeSources
+PASS calibration_unset button text fits ProbeSources
+PASS calibration_unset target >=44 CloseProbe
+PASS calibration_unset button text fits CloseProbe
+PASS calibration_unset close stays visible
+PASS captured M1-08_calibration_unset.png
+PASS input focus reaches Choose_wet
+PASS native mouse chooses wet reference
+PASS input focus reaches TryIt
+PASS native wrong prediction rejects without punishment
+PASS calibration_retry frame fits viewport
+PASS calibration_retry target >=44 Choose_dry
+PASS calibration_retry button text fits Choose_dry
+PASS calibration_retry target >=44 Choose_wet
+PASS calibration_retry button text fits Choose_wet
+PASS calibration_retry target >=44 Minus_raw_reading
+PASS calibration_retry button text fits Minus_raw_reading
+PASS calibration_retry target >=44 Plus_raw_reading
+PASS calibration_retry button text fits Plus_raw_reading
+PASS calibration_retry target >=44 Minus_calibrated_reading
+PASS calibration_retry button text fits Minus_calibrated_reading
+PASS calibration_retry target >=44 Plus_calibrated_reading
+PASS calibration_retry button text fits Plus_calibrated_reading
+PASS calibration_retry target >=44 UndoChoices
+PASS calibration_retry button text fits UndoChoices
+PASS calibration_retry target >=44 TryIt
+PASS calibration_retry button text fits TryIt
+PASS calibration_retry target >=44 LockIn
+PASS calibration_retry button text fits LockIn
+PASS calibration_retry target >=44 ProbeHint
+PASS calibration_retry button text fits ProbeHint
+PASS calibration_retry target >=44 ProbeSources
+PASS calibration_retry button text fits ProbeSources
+PASS calibration_retry target >=44 CloseProbe
+PASS calibration_retry button text fits CloseProbe
+PASS calibration_retry close stays visible
+PASS captured M1-08_calibration_retry.png
+PASS input focus reaches Choose_dry
+PASS native controller A chooses dry reference
+PASS input focus reaches TryIt
+PASS typed numeric selection reaches authoritative forecast
+PASS calibration_prediction frame fits viewport
+PASS calibration_prediction target >=44 Choose_dry
+PASS calibration_prediction button text fits Choose_dry
+PASS calibration_prediction target >=44 Choose_wet
+PASS calibration_prediction button text fits Choose_wet
+PASS calibration_prediction target >=44 Minus_raw_reading
+PASS calibration_prediction button text fits Minus_raw_reading
+PASS calibration_prediction target >=44 Plus_raw_reading
+PASS calibration_prediction button text fits Plus_raw_reading
+PASS calibration_prediction target >=44 Minus_calibrated_reading
+PASS calibration_prediction button text fits Minus_calibrated_reading
+PASS calibration_prediction target >=44 Plus_calibrated_reading
+PASS calibration_prediction button text fits Plus_calibrated_reading
+PASS calibration_prediction target >=44 UndoChoices
+PASS calibration_prediction button text fits UndoChoices
+PASS calibration_prediction target >=44 TryIt
+PASS calibration_prediction button text fits TryIt
+PASS calibration_prediction target >=44 LockIn
+PASS calibration_prediction button text fits LockIn
+PASS calibration_prediction target >=44 ProbeHint
+PASS calibration_prediction button text fits ProbeHint
+PASS calibration_prediction target >=44 ProbeSources
+PASS calibration_prediction button text fits ProbeSources
+PASS calibration_prediction target >=44 CloseProbe
+PASS calibration_prediction button text fits CloseProbe
+PASS calibration_prediction projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 181.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS calibration_prediction close stays visible
+PASS captured M1-08_calibration_prediction.png
+PASS input focus reaches ProbeHint
+PASS hint 1 keeps pause union
+PASS captured M1-08_hint_1.png
+PASS hint restores panel selection and pause
+PASS input focus reaches ProbeHint
+PASS hint 2 keeps pause union
+PASS captured M1-08_hint_2.png
+PASS hint restores panel selection and pause
+PASS input focus reaches ProbeHint
+PASS hint 3 keeps pause union
+PASS captured M1-08_hint_3.png
+PASS hint restores panel selection and pause
+PASS input focus reaches ProbeSources
+PASS Data Card entry uses existing source reader
+PASS captured M1-08_data_cards.png
+PASS sources return preserves exact route and pause
+PASS native controller Y requests confirmation
+PASS calibration_confirm frame fits viewport
+PASS calibration_confirm target >=44 ConfirmChoice
+PASS calibration_confirm button text fits ConfirmChoice
+PASS calibration_confirm target >=44 BackToPrediction
+PASS calibration_confirm button text fits BackToPrediction
+PASS calibration_confirm target >=44 ProbeHint
+PASS calibration_confirm button text fits ProbeHint
+PASS calibration_confirm target >=44 ProbeSources
+PASS calibration_confirm button text fits ProbeSources
+PASS calibration_confirm target >=44 CloseProbe
+PASS calibration_confirm button text fits CloseProbe
+PASS calibration_confirm close stays visible
+PASS captured M1-08_calibration_confirm.png
+PASS controller B steps back
+PASS calibration_prediction_150 frame fits viewport
+PASS calibration_prediction_150 target >=44 Choose_dry
+PASS calibration_prediction_150 button text fits Choose_dry
+PASS calibration_prediction_150 target >=44 Choose_wet
+PASS calibration_prediction_150 button text fits Choose_wet
+PASS calibration_prediction_150 target >=44 Minus_raw_reading
+PASS calibration_prediction_150 button text fits Minus_raw_reading
+PASS calibration_prediction_150 target >=44 Plus_raw_reading
+PASS calibration_prediction_150 button text fits Plus_raw_reading
+PASS calibration_prediction_150 target >=44 Minus_calibrated_reading
+PASS calibration_prediction_150 button text fits Minus_calibrated_reading
+PASS calibration_prediction_150 target >=44 Plus_calibrated_reading
+PASS calibration_prediction_150 button text fits Plus_calibrated_reading
+PASS calibration_prediction_150 target >=44 UndoChoices
+PASS calibration_prediction_150 button text fits UndoChoices
+PASS calibration_prediction_150 target >=44 TryIt
+PASS calibration_prediction_150 button text fits TryIt
+PASS calibration_prediction_150 target >=44 LockIn
+PASS calibration_prediction_150 button text fits LockIn
+PASS calibration_prediction_150 target >=44 ProbeHint
+PASS calibration_prediction_150 button text fits ProbeHint
+PASS calibration_prediction_150 target >=44 ProbeSources
+PASS calibration_prediction_150 button text fits ProbeSources
+PASS calibration_prediction_150 target >=44 CloseProbe
+PASS calibration_prediction_150 button text fits CloseProbe
+PASS calibration_prediction_150 projected observation is fully readable [P: (32.0, 369.0), S: (1208.0, 183.0)] inside [P: (32.0, 123.0), S: (1216.0, 469.0)]
+PASS calibration_prediction_150 close stays visible
+PASS captured M1-08_calibration_prediction_150.png
+PASS native Escape asks before dirty leave
+PASS discard_150 frame fits viewport
+PASS discard_150 target >=44 KeepChoosing
+PASS discard_150 button text fits KeepChoosing
+PASS discard_150 target >=44 DiscardChoices
+PASS discard_150 button text fits DiscardChoices
+PASS discard_150 target >=44 ProbeHint
+PASS discard_150 button text fits ProbeHint
+PASS discard_150 target >=44 ProbeSources
+PASS discard_150 button text fits ProbeSources
+PASS discard_150 target >=44 CloseProbe
+PASS discard_150 button text fits CloseProbe
+PASS discard_150 close stays visible
+PASS captured M1-08_discard_150.png
+PASS input focus reaches KeepChoosing
+PASS calibration_confirm_150 frame fits viewport
+PASS calibration_confirm_150 target >=44 ConfirmChoice
+PASS calibration_confirm_150 button text fits ConfirmChoice
+PASS calibration_confirm_150 target >=44 BackToPrediction
+PASS calibration_confirm_150 button text fits BackToPrediction
+PASS calibration_confirm_150 target >=44 ProbeHint
+PASS calibration_confirm_150 button text fits ProbeHint
+PASS calibration_confirm_150 target >=44 ProbeSources
+PASS calibration_confirm_150 button text fits ProbeSources
+PASS calibration_confirm_150 target >=44 CloseProbe
+PASS calibration_confirm_150 button text fits CloseProbe
+PASS calibration_confirm_150 close stays visible
+PASS captured M1-08_calibration_confirm_150.png
+PASS native confirmation performs physical calibration
+PASS calibration_observed_150 frame fits viewport
+PASS calibration_observed_150 target >=44 ProbeHint
+PASS calibration_observed_150 button text fits ProbeHint
+PASS calibration_observed_150 target >=44 ProbeSources
+PASS calibration_observed_150 button text fits ProbeSources
+PASS calibration_observed_150 target >=44 CloseProbe
+PASS calibration_observed_150 button text fits CloseProbe
+PASS calibration_observed_150 close stays visible
+PASS captured M1-08_calibration_observed_150.png
+PASS span_probe frame fits viewport
+PASS span_probe target >=44 Choose_dry
+PASS span_probe button text fits Choose_dry
+PASS span_probe target >=44 Choose_wet
+PASS span_probe button text fits Choose_wet
+PASS span_probe target >=44 Minus_raw_reading
+PASS span_probe button text fits Minus_raw_reading
+PASS span_probe target >=44 Plus_raw_reading
+PASS span_probe button text fits Plus_raw_reading
+PASS span_probe target >=44 Minus_calibrated_reading
+PASS span_probe button text fits Minus_calibrated_reading
+PASS span_probe target >=44 Plus_calibrated_reading
+PASS span_probe button text fits Plus_calibrated_reading
+PASS span_probe target >=44 UndoChoices
+PASS span_probe button text fits UndoChoices
+PASS span_probe target >=44 TryIt
+PASS span_probe button text fits TryIt
+PASS span_probe target >=44 LockIn
+PASS span_probe button text fits LockIn
+PASS span_probe target >=44 ProbeHint
+PASS span_probe button text fits ProbeHint
+PASS span_probe target >=44 ProbeSources
+PASS span_probe button text fits ProbeSources
+PASS span_probe target >=44 CloseProbe
+PASS span_probe button text fits CloseProbe
+PASS span_probe projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 181.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS span_probe close stays visible
+PASS captured M1-08_span_probe.png
+PASS recheck_probe frame fits viewport
+PASS recheck_probe target >=44 Minus_dry_reading
+PASS recheck_probe button text fits Minus_dry_reading
+PASS recheck_probe target >=44 Plus_dry_reading
+PASS recheck_probe button text fits Plus_dry_reading
+PASS recheck_probe target >=44 Minus_wet_reading
+PASS recheck_probe button text fits Minus_wet_reading
+PASS recheck_probe target >=44 Plus_wet_reading
+PASS recheck_probe button text fits Plus_wet_reading
+PASS recheck_probe target >=44 UndoChoices
+PASS recheck_probe button text fits UndoChoices
+PASS recheck_probe target >=44 TryIt
+PASS recheck_probe button text fits TryIt
+PASS recheck_probe target >=44 LockIn
+PASS recheck_probe button text fits LockIn
+PASS recheck_probe target >=44 ProbeHint
+PASS recheck_probe button text fits ProbeHint
+PASS recheck_probe target >=44 ProbeSources
+PASS recheck_probe button text fits ProbeSources
+PASS recheck_probe target >=44 CloseProbe
+PASS recheck_probe button text fits CloseProbe
+PASS recheck_probe projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 181.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS recheck_probe close stays visible
+PASS captured M1-08_recheck_probe.png
+PASS inspect_packet frame fits viewport
+PASS inspect_packet target >=44 SelectAction
+PASS inspect_packet button text fits SelectAction
+PASS inspect_packet target >=44 UndoChoices
+PASS inspect_packet button text fits UndoChoices
+PASS inspect_packet target >=44 TryIt
+PASS inspect_packet button text fits TryIt
+PASS inspect_packet target >=44 LockIn
+PASS inspect_packet button text fits LockIn
+PASS inspect_packet target >=44 ProbeHint
+PASS inspect_packet button text fits ProbeHint
+PASS inspect_packet target >=44 ProbeSources
+PASS inspect_packet button text fits ProbeSources
+PASS inspect_packet target >=44 CloseProbe
+PASS inspect_packet button text fits CloseProbe
+PASS inspect_packet projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 181.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS inspect_packet close stays visible
+PASS captured M1-08_inspect_packet.png
+PASS inspect_packet_observed frame fits viewport
+PASS inspect_packet_observed target >=44 ProbeHint
+PASS inspect_packet_observed button text fits ProbeHint
+PASS inspect_packet_observed target >=44 ProbeSources
+PASS inspect_packet_observed button text fits ProbeSources
+PASS inspect_packet_observed target >=44 CloseProbe
+PASS inspect_packet_observed button text fits CloseProbe
+PASS inspect_packet_observed close stays visible
+PASS captured M1-08_inspect_packet_observed.png
+PASS nearby planting panel plant_alo
+PASS plant_alo frame fits viewport
+PASS plant_alo target >=44 Choose_alo
+PASS plant_alo button text fits Choose_alo
+PASS plant_alo target >=44 Choose_tara
+PASS plant_alo button text fits Choose_tara
+PASS plant_alo target >=44 Minus_seed_count
+PASS plant_alo button text fits Minus_seed_count
+PASS plant_alo target >=44 Plus_seed_count
+PASS plant_alo button text fits Plus_seed_count
+PASS plant_alo target >=44 UndoChoices
+PASS plant_alo button text fits UndoChoices
+PASS plant_alo target >=44 TryIt
+PASS plant_alo button text fits TryIt
+PASS plant_alo target >=44 LockIn
+PASS plant_alo button text fits LockIn
+PASS plant_alo target >=44 ProbeHint
+PASS plant_alo button text fits ProbeHint
+PASS plant_alo target >=44 ProbeSources
+PASS plant_alo button text fits ProbeSources
+PASS plant_alo target >=44 CloseProbe
+PASS plant_alo button text fits CloseProbe
+PASS plant_alo projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 181.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS plant_alo close stays visible
+PASS captured M1-08_plant_alo.png
+PASS plant_alo_150 frame fits viewport
+PASS plant_alo_150 target >=44 Choose_alo
+PASS plant_alo_150 button text fits Choose_alo
+PASS plant_alo_150 target >=44 Choose_tara
+PASS plant_alo_150 button text fits Choose_tara
+PASS plant_alo_150 target >=44 Minus_seed_count
+PASS plant_alo_150 button text fits Minus_seed_count
+PASS plant_alo_150 target >=44 Plus_seed_count
+PASS plant_alo_150 button text fits Plus_seed_count
+PASS plant_alo_150 target >=44 UndoChoices
+PASS plant_alo_150 button text fits UndoChoices
+PASS plant_alo_150 target >=44 TryIt
+PASS plant_alo_150 button text fits TryIt
+PASS plant_alo_150 target >=44 LockIn
+PASS plant_alo_150 button text fits LockIn
+PASS plant_alo_150 target >=44 ProbeHint
+PASS plant_alo_150 button text fits ProbeHint
+PASS plant_alo_150 target >=44 ProbeSources
+PASS plant_alo_150 button text fits ProbeSources
+PASS plant_alo_150 target >=44 CloseProbe
+PASS plant_alo_150 button text fits CloseProbe
+PASS plant_alo_150 projected observation is fully readable [P: (32.0, 369.0), S: (1208.0, 183.0)] inside [P: (32.0, 123.0), S: (1216.0, 469.0)]
+PASS plant_alo_150 close stays visible
+PASS captured M1-08_plant_alo_150.png
+PASS nearby planting panel plant_tara
+PASS plant_tara frame fits viewport
+PASS plant_tara target >=44 Choose_alo
+PASS plant_tara button text fits Choose_alo
+PASS plant_tara target >=44 Choose_tara
+PASS plant_tara button text fits Choose_tara
+PASS plant_tara target >=44 Minus_seed_count
+PASS plant_tara button text fits Minus_seed_count
+PASS plant_tara target >=44 Plus_seed_count
+PASS plant_tara button text fits Plus_seed_count
+PASS plant_tara target >=44 UndoChoices
+PASS plant_tara button text fits UndoChoices
+PASS plant_tara target >=44 TryIt
+PASS plant_tara button text fits TryIt
+PASS plant_tara target >=44 LockIn
+PASS plant_tara button text fits LockIn
+PASS plant_tara target >=44 ProbeHint
+PASS plant_tara button text fits ProbeHint
+PASS plant_tara target >=44 ProbeSources
+PASS plant_tara button text fits ProbeSources
+PASS plant_tara target >=44 CloseProbe
+PASS plant_tara button text fits CloseProbe
+PASS plant_tara projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 181.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS plant_tara close stays visible
+PASS captured M1-08_plant_tara.png
+PASS nearby planting panel water_alo
+PASS water_retry frame fits viewport
+PASS water_retry target >=44 Minus_moisture
+PASS water_retry button text fits Minus_moisture
+PASS water_retry target >=44 Plus_moisture
+PASS water_retry button text fits Plus_moisture
+PASS water_retry target >=44 UndoChoices
+PASS water_retry button text fits UndoChoices
+PASS water_retry target >=44 TryIt
+PASS water_retry button text fits TryIt
+PASS water_retry target >=44 LockIn
+PASS water_retry button text fits LockIn
+PASS water_retry target >=44 ProbeHint
+PASS water_retry button text fits ProbeHint
+PASS water_retry target >=44 ProbeSources
+PASS water_retry button text fits ProbeSources
+PASS water_retry target >=44 CloseProbe
+PASS water_retry button text fits CloseProbe
+PASS water_retry close stays visible
+PASS captured M1-08_water_retry.png
+PASS water_alo frame fits viewport
+PASS water_alo target >=44 Minus_moisture
+PASS water_alo button text fits Minus_moisture
+PASS water_alo target >=44 Plus_moisture
+PASS water_alo button text fits Plus_moisture
+PASS water_alo target >=44 UndoChoices
+PASS water_alo button text fits UndoChoices
+PASS water_alo target >=44 TryIt
+PASS water_alo button text fits TryIt
+PASS water_alo target >=44 LockIn
+PASS water_alo button text fits LockIn
+PASS water_alo target >=44 ProbeHint
+PASS water_alo button text fits ProbeHint
+PASS water_alo target >=44 ProbeSources
+PASS water_alo button text fits ProbeSources
+PASS water_alo target >=44 CloseProbe
+PASS water_alo button text fits CloseProbe
+PASS water_alo projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 204.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS water_alo close stays visible
+PASS captured M1-08_water_alo.png
+PASS water_alo_150 frame fits viewport
+PASS water_alo_150 target >=44 Minus_moisture
+PASS water_alo_150 button text fits Minus_moisture
+PASS water_alo_150 target >=44 Plus_moisture
+PASS water_alo_150 button text fits Plus_moisture
+PASS water_alo_150 target >=44 UndoChoices
+PASS water_alo_150 button text fits UndoChoices
+PASS water_alo_150 target >=44 TryIt
+PASS water_alo_150 button text fits TryIt
+PASS water_alo_150 target >=44 LockIn
+PASS water_alo_150 button text fits LockIn
+PASS water_alo_150 target >=44 ProbeHint
+PASS water_alo_150 button text fits ProbeHint
+PASS water_alo_150 target >=44 ProbeSources
+PASS water_alo_150 button text fits ProbeSources
+PASS water_alo_150 target >=44 CloseProbe
+PASS water_alo_150 button text fits CloseProbe
+PASS water_alo_150 projected observation is fully readable [P: (32.0, 369.0), S: (1208.0, 183.0)] inside [P: (32.0, 123.0), S: (1216.0, 469.0)]
+PASS water_alo_150 close stays visible
+PASS captured M1-08_water_alo_150.png
+PASS nearby planting panel water_tara
+PASS water_tara frame fits viewport
+PASS water_tara target >=44 Minus_moisture
+PASS water_tara button text fits Minus_moisture
+PASS water_tara target >=44 Plus_moisture
+PASS water_tara button text fits Plus_moisture
+PASS water_tara target >=44 UndoChoices
+PASS water_tara button text fits UndoChoices
+PASS water_tara target >=44 TryIt
+PASS water_tara button text fits TryIt
+PASS water_tara target >=44 LockIn
+PASS water_tara button text fits LockIn
+PASS water_tara target >=44 ProbeHint
+PASS water_tara button text fits ProbeHint
+PASS water_tara target >=44 ProbeSources
+PASS water_tara button text fits ProbeSources
+PASS water_tara target >=44 CloseProbe
+PASS water_tara button text fits CloseProbe
+PASS water_tara projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 204.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS water_tara close stays visible
+PASS captured M1-08_water_tara.png
+PASS nearby planting panel label_alo
+PASS input focus reaches Choose_INDOOR_REFERENCE
+PASS wrong chosen label rejects without applying it
+PASS label_alo_wrong frame fits viewport
+PASS label_alo_wrong target >=44 Choose_EXTERNAL_TEST
+PASS label_alo_wrong button text fits Choose_EXTERNAL_TEST
+PASS label_alo_wrong target >=44 Choose_INDOOR_REFERENCE
+PASS label_alo_wrong button text fits Choose_INDOOR_REFERENCE
+PASS label_alo_wrong target >=44 UndoChoices
+PASS label_alo_wrong button text fits UndoChoices
+PASS label_alo_wrong target >=44 TryIt
+PASS label_alo_wrong button text fits TryIt
+PASS label_alo_wrong target >=44 LockIn
+PASS label_alo_wrong button text fits LockIn
+PASS label_alo_wrong target >=44 ProbeHint
+PASS label_alo_wrong button text fits ProbeHint
+PASS label_alo_wrong target >=44 ProbeSources
+PASS label_alo_wrong button text fits ProbeSources
+PASS label_alo_wrong target >=44 CloseProbe
+PASS label_alo_wrong button text fits CloseProbe
+PASS label_alo_wrong close stays visible
+PASS captured M1-08_label_alo_wrong.png
+PASS input focus reaches Choose_EXTERNAL_TEST
+PASS mouse selects actual label EXTERNAL_TEST
+PASS label_alo frame fits viewport
+PASS label_alo target >=44 Choose_EXTERNAL_TEST
+PASS label_alo button text fits Choose_EXTERNAL_TEST
+PASS label_alo target >=44 Choose_INDOOR_REFERENCE
+PASS label_alo button text fits Choose_INDOOR_REFERENCE
+PASS label_alo target >=44 UndoChoices
+PASS label_alo button text fits UndoChoices
+PASS label_alo target >=44 TryIt
+PASS label_alo button text fits TryIt
+PASS label_alo target >=44 LockIn
+PASS label_alo button text fits LockIn
+PASS label_alo target >=44 ProbeHint
+PASS label_alo button text fits ProbeHint
+PASS label_alo target >=44 ProbeSources
+PASS label_alo button text fits ProbeSources
+PASS label_alo target >=44 CloseProbe
+PASS label_alo button text fits CloseProbe
+PASS label_alo projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 204.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS label_alo close stays visible
+PASS captured M1-08_label_alo.png
+PASS label_alo_150 frame fits viewport
+PASS label_alo_150 target >=44 Choose_EXTERNAL_TEST
+PASS label_alo_150 button text fits Choose_EXTERNAL_TEST
+PASS label_alo_150 target >=44 Choose_INDOOR_REFERENCE
+PASS label_alo_150 button text fits Choose_INDOOR_REFERENCE
+PASS label_alo_150 target >=44 UndoChoices
+PASS label_alo_150 button text fits UndoChoices
+PASS label_alo_150 target >=44 TryIt
+PASS label_alo_150 button text fits TryIt
+PASS label_alo_150 target >=44 LockIn
+PASS label_alo_150 button text fits LockIn
+PASS label_alo_150 target >=44 ProbeHint
+PASS label_alo_150 button text fits ProbeHint
+PASS label_alo_150 target >=44 ProbeSources
+PASS label_alo_150 button text fits ProbeSources
+PASS label_alo_150 target >=44 CloseProbe
+PASS label_alo_150 button text fits CloseProbe
+PASS label_alo_150 projected observation is fully readable [P: (32.0, 369.0), S: (1208.0, 183.0)] inside [P: (32.0, 123.0), S: (1216.0, 469.0)]
+PASS label_alo_150 close stays visible
+PASS captured M1-08_label_alo_150.png
+PASS label_alo_observed frame fits viewport
+PASS label_alo_observed target >=44 ProbeHint
+PASS label_alo_observed button text fits ProbeHint
+PASS label_alo_observed target >=44 ProbeSources
+PASS label_alo_observed button text fits ProbeSources
+PASS label_alo_observed target >=44 CloseProbe
+PASS label_alo_observed button text fits CloseProbe
+PASS label_alo_observed close stays visible
+PASS captured M1-08_label_alo_observed.png
+PASS nearby planting panel label_tara
+PASS input focus reaches Choose_EXTERNAL_TEST
+PASS wrong chosen label rejects without applying it
+PASS label_tara_wrong frame fits viewport
+PASS label_tara_wrong target >=44 Choose_EXTERNAL_TEST
+PASS label_tara_wrong button text fits Choose_EXTERNAL_TEST
+PASS label_tara_wrong target >=44 Choose_INDOOR_REFERENCE
+PASS label_tara_wrong button text fits Choose_INDOOR_REFERENCE
+PASS label_tara_wrong target >=44 UndoChoices
+PASS label_tara_wrong button text fits UndoChoices
+PASS label_tara_wrong target >=44 TryIt
+PASS label_tara_wrong button text fits TryIt
+PASS label_tara_wrong target >=44 LockIn
+PASS label_tara_wrong button text fits LockIn
+PASS label_tara_wrong target >=44 ProbeHint
+PASS label_tara_wrong button text fits ProbeHint
+PASS label_tara_wrong target >=44 ProbeSources
+PASS label_tara_wrong button text fits ProbeSources
+PASS label_tara_wrong target >=44 CloseProbe
+PASS label_tara_wrong button text fits CloseProbe
+PASS label_tara_wrong close stays visible
+PASS captured M1-08_label_tara_wrong.png
+PASS input focus reaches Choose_INDOOR_REFERENCE
+PASS mouse selects actual label INDOOR_REFERENCE
+PASS label_tara frame fits viewport
+PASS label_tara target >=44 Choose_EXTERNAL_TEST
+PASS label_tara button text fits Choose_EXTERNAL_TEST
+PASS label_tara target >=44 Choose_INDOOR_REFERENCE
+PASS label_tara button text fits Choose_INDOOR_REFERENCE
+PASS label_tara target >=44 UndoChoices
+PASS label_tara button text fits UndoChoices
+PASS label_tara target >=44 TryIt
+PASS label_tara button text fits TryIt
+PASS label_tara target >=44 LockIn
+PASS label_tara button text fits LockIn
+PASS label_tara target >=44 ProbeHint
+PASS label_tara button text fits ProbeHint
+PASS label_tara target >=44 ProbeSources
+PASS label_tara button text fits ProbeSources
+PASS label_tara target >=44 CloseProbe
+PASS label_tara button text fits CloseProbe
+PASS label_tara projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 204.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS label_tara close stays visible
+PASS captured M1-08_label_tara.png
+PASS label_tara_observed frame fits viewport
+PASS label_tara_observed target >=44 ProbeHint
+PASS label_tara_observed button text fits ProbeHint
+PASS label_tara_observed target >=44 ProbeSources
+PASS label_tara_observed button text fits ProbeSources
+PASS label_tara_observed target >=44 CloseProbe
+PASS label_tara_observed button text fits CloseProbe
+PASS label_tara_observed close stays visible
+PASS captured M1-08_label_tara_observed.png
+PASS nearby planting panel seal_alo
+PASS seal_alo frame fits viewport
+PASS seal_alo target >=44 SelectAction
+PASS seal_alo button text fits SelectAction
+PASS seal_alo target >=44 UndoChoices
+PASS seal_alo button text fits UndoChoices
+PASS seal_alo target >=44 TryIt
+PASS seal_alo button text fits TryIt
+PASS seal_alo target >=44 LockIn
+PASS seal_alo button text fits LockIn
+PASS seal_alo target >=44 ProbeHint
+PASS seal_alo button text fits ProbeHint
+PASS seal_alo target >=44 ProbeSources
+PASS seal_alo button text fits ProbeSources
+PASS seal_alo target >=44 CloseProbe
+PASS seal_alo button text fits CloseProbe
+PASS seal_alo projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 204.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS seal_alo close stays visible
+PASS captured M1-08_seal_alo.png
+PASS seal_alo_150 frame fits viewport
+PASS seal_alo_150 target >=44 SelectAction
+PASS seal_alo_150 button text fits SelectAction
+PASS seal_alo_150 target >=44 UndoChoices
+PASS seal_alo_150 button text fits UndoChoices
+PASS seal_alo_150 target >=44 TryIt
+PASS seal_alo_150 button text fits TryIt
+PASS seal_alo_150 target >=44 LockIn
+PASS seal_alo_150 button text fits LockIn
+PASS seal_alo_150 target >=44 ProbeHint
+PASS seal_alo_150 button text fits ProbeHint
+PASS seal_alo_150 target >=44 ProbeSources
+PASS seal_alo_150 button text fits ProbeSources
+PASS seal_alo_150 target >=44 CloseProbe
+PASS seal_alo_150 button text fits CloseProbe
+PASS seal_alo_150 projected observation is fully readable [P: (32.0, 369.0), S: (1208.0, 183.0)] inside [P: (32.0, 123.0), S: (1216.0, 469.0)]
+PASS seal_alo_150 close stays visible
+PASS captured M1-08_seal_alo_150.png
+PASS nearby planting panel seal_tara
+PASS seal_tara frame fits viewport
+PASS seal_tara target >=44 SelectAction
+PASS seal_tara button text fits SelectAction
+PASS seal_tara target >=44 UndoChoices
+PASS seal_tara button text fits UndoChoices
+PASS seal_tara target >=44 TryIt
+PASS seal_tara button text fits TryIt
+PASS seal_tara target >=44 LockIn
+PASS seal_tara button text fits LockIn
+PASS seal_tara target >=44 ProbeHint
+PASS seal_tara button text fits ProbeHint
+PASS seal_tara target >=44 ProbeSources
+PASS seal_tara button text fits ProbeSources
+PASS seal_tara target >=44 CloseProbe
+PASS seal_tara button text fits CloseProbe
+PASS seal_tara projected observation is fully readable [P: (859.0, 142.0), S: (389.0, 204.0)] inside [P: (32.0, 103.0), S: (1216.0, 497.0)]
+PASS seal_tara close stays visible
+PASS captured M1-08_seal_tara.png
+PASS native whole panel sequence completes with chosen fractional moisture
+Screenshots: M1-08_first_use.png, M1-08_calibration_unset.png, M1-08_calibration_retry.png, M1-08_calibration_prediction.png, M1-08_hint_1.png, M1-08_hint_2.png, M1-08_hint_3.png, M1-08_data_cards.png, M1-08_calibration_confirm.png, M1-08_calibration_prediction_150.png, M1-08_discard_150.png, M1-08_calibration_confirm_150.png, M1-08_calibration_observed_150.png, M1-08_span_probe.png, M1-08_recheck_probe.png, M1-08_inspect_packet.png, M1-08_inspect_packet_observed.png, M1-08_plant_alo.png, M1-08_plant_alo_150.png, M1-08_plant_tara.png, M1-08_water_retry.png, M1-08_water_alo.png, M1-08_water_alo_150.png, M1-08_water_tara.png, M1-08_label_alo_wrong.png, M1-08_label_alo.png, M1-08_label_alo_150.png, M1-08_label_alo_observed.png, M1-08_label_tara_wrong.png, M1-08_label_tara.png, M1-08_label_tara_observed.png, M1-08_seal_alo.png, M1-08_seal_alo_150.png, M1-08_seal_tara.png

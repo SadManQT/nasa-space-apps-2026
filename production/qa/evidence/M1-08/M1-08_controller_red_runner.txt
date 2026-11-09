@@ -1,0 +1,4 @@
+FAIL tools/test_p01_panel.gd :: exit 1 :: P01 PANEL RESULT: FAIL (118 checks, 1 failures)
+       ERROR: FAIL controller A selects the focused reference once
+       P01 PANEL RESULT: FAIL (118 checks, 1 failures)
+0/1 suites passed

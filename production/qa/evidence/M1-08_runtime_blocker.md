@@ -1,3 +1,9 @@
+# M1-08 current handoff - 9 November2026
+
+The previous runtime blocker is resolved by M1-95 (b1b393c) and the additional real-label contract M1-115 (51f91cb). Final reviewed UI source46398b4 is delivered with589 focused checks and606 native assertions/34 screenshots. See [current evidence](M1-08/README.md). Full integrated text/all-suite acceptance and genuine E ownership M1-107 remain pending; no whole-game completion claim.
+
+The following is preserved historical evidence from8 November; its no-published-UI status described that date only.
+
 # M1-08 runtime blocker ? 8 November 2026
 
 **Blocked, no P-01 UI source published.** Owner request M1-95 is assigned to Atik. Main remains at the delivered runtime plus board/evidence only. The unaccepted candidate is retained locally in commit `afe0c747aa89f8d72bc99c3c2512b4b18bf97a04` on `ramim/m108-await-runtime-20261108`. Do not redo or merge it blindly: finish its known retry/prediction display concerns and verification after the runtime correction.

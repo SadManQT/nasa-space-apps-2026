@@ -1,0 +1,7 @@
+FAIL tools/test_p01_panel.gd :: exit 1 :: P01 PANEL RESULT: FAIL (135 checks, 16 failures)
+       ERROR: FAIL packet observation is unscanned before confirmation
+       ERROR: FAIL packet forecast visibly differs from the observation
+       ERROR: FAIL actual committed packet state is visible
+       ERROR: FAIL both real label choices are available for label_alo
+       ERROR: FAIL selected planting action predicts label_alo
+0/1 suites passed
