@@ -1,0 +1,50 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  ok CS-18 is the one film on campaign completion and plays as video
+  ok the D13 OPT02 catalog label is the canon dedication
+  ok the card's words are the catalog label, read not retyped (got For the gardens we leave for others)
+  ok the card is keyed to D13 OPT02
+  ok the save validator knows the card's choice and option ids
+  ok the words fade in at 7.0 s (picture fully black) and leave at 9.0 s
+  ok the manifest note stays out of the plan
+  ok the runtime's CS-18 card is the one its plan carries
+  ok the words are English in Latin letters only
+  ok CS-01 carries no choice card
+  ok CS-03 carries no choice card
+  ok CS-17 carries no choice card
+  ok card opacity 0.00 at 6.99 s
+  ok card opacity 0.00 at 7.00 s
+  ok card opacity 0.50 at 7.20 s
+  ok card opacity 1.00 at 7.40 s
+  ok card opacity 1.00 at 7.50 s
+  ok card opacity 1.00 at 8.50 s
+  ok card opacity 0.50 at 8.80 s
+  ok card opacity 0.00 at 9.00 s
+  ok card opacity 0.00 at 9.50 s
+  ok reduced motion cuts the words in and out instead of fading
+  ok no card, nothing drawn
+  ok a save holding D13 OPT02 passes the real director's validation
+  ok inside the campaign the player reads D13 from the campaign's director
+  ok OPT01 in the campaign's director: no card
+  ok no D13 choice in the campaign's director: no card
+  ok OPT02 arms the card, unseen at 0 s
+  ok a skip before 7 s reports no card and completes nothing
+  ok the text card (film missing) ends with the chosen words
+  ok opt01: nothing drawn on the black
+  ok opt01: the film ends at 8.0 s as before (closed at 7.98 s, last frame 7.96 s)
+  ok opt01: finishes unskipped with no card reported
+  ok none: nothing drawn on the black
+  ok none: the film ends at 8.0 s as before (closed at 7.99 s, last frame 7.96 s)
+  ok none: finishes unskipped with no card reported
+  ok OPT02: the words on the black are the catalog label
+  ok OPT02: the words appear at 7.0 s, not over the picture (first at 7.019 s)
+  ok OPT02: fully shown at 7.5 s and 8.5 s (1.00, 1.00)
+  ok OPT02: still on screen in the hold, gone by 9.0 s (last at 8.999 s)
+  ok OPT02: the film itself still ends at 8.0 s
+  ok OPT02: one second of silent black after the film; closes at 8.98 s (hold 0.99 s)
+  ok OPT02: finishes unskipped, reports its card, completes nothing
+  ok OPT02: small, in the UiDesign body size (14 px)
+  ok OPT02: centred near the bottom of the black ([P: (43.0, 657.0), S: (1194.0, 20.0)])
+  ok pausing in the hold stops its clock (hold 1.50 s with 0.5 s paused)
+  ok large text scales the words 150% (20 px)
+CUTSCENE CHOICE CARD RESULT: PASS (47 checks, 0 failures)
