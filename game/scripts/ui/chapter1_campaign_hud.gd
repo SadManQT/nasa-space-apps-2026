@@ -633,10 +633,10 @@ func _update_where() -> void:
 	_wn_where.text = "%s · %s" % [place, UiDesign.distance_text(distance)] if distance >= 0.0 else place
 
 func _distance_to(node: Node3D) -> float:
-	if node == null or runtime == null:
+	if not is_instance_valid(node) or not node.is_inside_tree() or runtime == null:
 		return -1.0
 	var player: Node3D = runtime.get("_player") as Node3D
-	if player == null:
+	if not is_instance_valid(player) or not player.is_inside_tree():
 		return -1.0
 	var a := player.global_position
 	var b := node.global_position
@@ -974,6 +974,11 @@ func _process(delta: float) -> void:
 
 ## Projects the goal marker (with distance) and the prompt on the object in reach.
 func _update_world_overlay() -> void:
+	var player: Node3D = runtime.get("_player") as Node3D if runtime != null else null
+	if not is_instance_valid(player) or not player.is_inside_tree():
+		_marker.visible = false
+		_prompt.visible = false
+		return
 	if (_chrome_hidden and not (panels.hint_player.is_open() and panels.hint_player.mode == "hint" and panels.hint_player.level == 1)) or runtime.is_cutscene_active():
 		_marker.visible = false
 		_prompt.visible = false
@@ -997,7 +1002,7 @@ func _update_world_overlay() -> void:
 		_prompt.visible = true
 	else:
 		_prompt.visible = false
-	if _marker_node == null or not is_instance_valid(_marker_node) or (nearby_node != null and nearby_node == _marker_node and not panels.hint_player.is_open()):
+	if _marker_node == null or not is_instance_valid(_marker_node) or not _marker_node.is_inside_tree() or (nearby_node != null and nearby_node == _marker_node and not panels.hint_player.is_open()):
 		_marker.visible = false
 		return
 	var distance := _distance_to(_marker_node)
