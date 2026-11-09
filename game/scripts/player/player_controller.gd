@@ -37,6 +37,8 @@ var placement_frames := 0
 var attention_target: Node3D
 var _gaze_target: Node3D
 var _gaze_modifiers: Array[SkeletonModifier3D] = []
+var eva_suit: RefCounted
+var eva_surface_tags: Array = []
 
 func _ready() -> void:
 	floor_snap_length = 0.3
@@ -207,6 +209,16 @@ func _physics_process(delta: float) -> void:
 		desired_speed = minf(desired_speed, tuning.run_speed * input.length())
 	if animation.movement_locked:
 		desired_speed *= animation.action_movement_scale
+	if eva_suit != null and eva_suit.has_method("step"):
+		var floor_slope_deg := rad_to_deg(get_floor_angle()) if is_on_floor() else 0.0
+		var lean_axis := 0.0
+		if Input.is_physical_key_pressed(KEY_Q):
+			lean_axis -= 1.0
+		if Input.is_physical_key_pressed(KEY_E) and not generic_interaction_input:
+			lean_axis += 1.0
+		eva_suit.set("scanner_holding", Input.is_physical_key_pressed(KEY_F))
+		var eva_res: Dictionary = eva_suit.call("step", delta, horizontal_speed, floor_slope_deg, lean_axis, eva_surface_tags)
+		desired_speed *= maxf(0.25, float(eva_res.get("speed_scale", 1.0)))
 	var angle := angle_difference(_yaw, atan2(direction.x, direction.z)) if direction.length_squared() > 0.001 else 0.0
 	if absf(angle) > deg_to_rad(105.0):
 		_pivoting = true

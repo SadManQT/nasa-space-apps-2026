@@ -4435,7 +4435,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "EVA: suit budget, scanner pulse, footing with load, and assist modes",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Atik/codex",
    "deps": [
     "M1-58"
@@ -4450,7 +4450,7 @@
     "docs/GAMEPLAY_DESIGN_FINAL.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "run_tests.sh eva: 1/1 suites passed (EVA RESULT: PASS 29/29); run_tests.sh player_controller: 1/1 suites passed (105/105); production/qa/evidence/M3-61_eva_visor_scanner.png",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.2: suit budget (oxygen, power, cooling) with cost and return reserve shown before leaving; scanner pulse\n(hold F) with slope bands carrying numbers and patterns plus boulders, soft regolith and cold shadow; footing (careful band slows;\npayload sway with Q/E lean; assisted balance in Story/Cadet); slips cost time and payload condition, never the mission; lunar\ngait and ballistic dust. Assist modes Story/Cadet/Expedition per §2.3. Build and test on a slope test level until M3-60 lands,\nthen on the region. Tests: budget arithmetic, reserve warnings, slope classification from heights, assisted vs manual balance.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "atik",
@@ -4462,8 +4462,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Things you build stay: markers, fixed lines, lights, repeaters and the coverage map",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/codex",
    "deps": [
     "M3-61"
    ],
@@ -4478,7 +4478,7 @@
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.4: placeable survey markers, fixed lines, path lights and relay repeaters made from carried payloads;\nsaved and shown on later trips, the map and the route planner (CH04 beacons return as a layer on the CH08 route map, game-design/24_NARRATIVE_REVISION.md N1);\na coverage map whose new links can unlock messages; the finale's voice travels over player-built links (P-16). Save migration\ntested; no change to canon outcomes.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "atik",
    "effort": 3
@@ -4489,8 +4489,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "The rover and the route planner",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/codex",
    "deps": [
     "M3-61"
    ],
@@ -4504,7 +4504,7 @@
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026). Keep the route-planner panel inside game/scripts/rover/ and style it with UiDesign (game/scripts/ui/ is Ramim's).",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.5: rover with the VIPER-class slope limit from the fixture, battery with return reserve, trailer payloads,\ncab dashboard readouts, assisted driving that stays inside the limit (Expedition only warns); a route planner on the map with\nwaypoints, slope profile, distance, time, battery and reserve shown before confirming. Tests for the slope limit, reserve\narithmetic and planner estimates.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.\n\nThe player drives the rover (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.5): climb in with E, chase camera and cab view (V), crew ride along on the intercom, headlights, climb out anywhere safe, low-gravity handling (long suspension travel, ballistic dust, longer braking). Drivable in the Moon trainer as soon as it exists.",
    "reserved_for": "atik",
    "effort": 5
@@ -4515,8 +4515,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "The RPG layer: cadet record, skills, gear loadout, jobs board and rest",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-56",
     "M1-58",
@@ -4535,7 +4535,7 @@
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.6: report cards after every sortie and job (training grades, never story gates); five cadet skills with\nthree ranks and visible small benefits plus a crew line per rank; gear loadout slots from the existing upgrade choices with a\nweight limit; a jobs board with optional deliveries, surveys, maintenance and science runs, each with a sender and reason in\nMessages; rest at the Safe Room bunks (save, messages, photos, record). Write at least 4 jobs per chapter region in jobs.json.\nTests: grading, rank thresholds, loadout weight, job unlocks.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
    "effort": 3
@@ -4546,8 +4546,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Readable hazards: moonquake, cold, impact flashes, darkness, solar-storm shelter run",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/codex",
    "deps": [
     "M3-61"
    ],
@@ -4561,7 +4561,7 @@
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
    "evidence": "",
-   "updated": "2026-11-05",
+   "updated": "2026-11-10",
    "prompt": "Do: hazards per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.2 and §6, never combat: quake shaking with things to secure and aftershock warnings (CH03); cold shadow\nheater cost and equipment limits (CH04); impact flashes as observations and shield maintenance (CH05); darkness energy budget\n(CH06); solar storm dose that accumulates outside shelter with a dosimeter and a shelter run (CH07; untimed in Family Mode,\ndose still shown). Numbers from 08 where they exist; every hazard warns before it matters. Tests per hazard.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "atik",
    "effort": 3
