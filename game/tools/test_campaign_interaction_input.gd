@@ -8,6 +8,7 @@ var checks := 0
 var failures := 0
 var trace: Array = []
 var shots: Array[String] = []
+var ui_input: Array = []
 
 func _init() -> void:
 	CampaignCutscenePlayer.autoplay = false
@@ -18,6 +19,9 @@ func _init() -> void:
 
 func _run() -> void:
 	root.size = Vector2i(1280, 720)
+	if _capture_enabled():
+		root.always_on_top = true
+		root.grab_focus()
 	campaign = Scene.instantiate() as Chapter1Campaign
 	storage.configure(campaign)
 	root.add_child(campaign)
@@ -106,6 +110,13 @@ func _near(id: String) -> bool:
 	return true
 
 func _press_e(player: PlayerController, phase: String) -> Array:
+	# A busy one-shot could reject Inspect and hide the original second consumer.
+	for frame in range(180):
+		if player.placement_frames == 0 and player.animation.action_name.is_empty() and player.animation._pending_action.is_empty():
+			break
+		await physics_frame
+		await process_frame
+	_check(player.animation.has_clip("Inspect") and player.animation.action_name.is_empty() and player.animation._pending_action.is_empty() and not player.animation.movement_locked and player.placement_frames == 0 and player.controlled and Input.get_vector("move_left", "move_right", "move_forward", "move_back", 0.15).is_zero_approx(), "settled actor can accept Inspect before real E: " + phase)
 	var samples: Array = [_sample(player)]
 	for down in [true, false]:
 		var event := InputEventKey.new()
@@ -123,7 +134,7 @@ func _press_e(player: PlayerController, phase: String) -> Array:
 
 func _sample(player: PlayerController) -> Dictionary:
 	var generic := player.nearest_interactable()
-	return {"body": String(player.name), "asset": player.loaded_path, "rest_clip": String(player.animation._rest_node.animation), "active_action": player.animation.action_name, "pending_action": player.animation._pending_action, "generic_target": String(generic.name) if generic != null else "", "generic_action": String(generic.get_meta("action", "Inspect")) if generic != null else ""}
+	return {"body": String(player.name), "asset": player.loaded_path, "rest_clip": String(player.animation._rest_node.animation), "active_action": player.animation.action_name, "pending_action": player.animation._pending_action, "generic_target": String(generic.name) if generic != null else "", "generic_action": String(generic.get_meta("action", "Inspect")) if generic != null else "", "move_input": str(Input.get_vector("move_left", "move_right", "move_forward", "move_back", 0.15)), "window_focus": root.has_focus()}
 
 func _has_inspect(samples: Array) -> bool:
 	return samples.any(func(sample): return sample.active_action == "Inspect" or sample.pending_action == "Inspect")
@@ -136,6 +147,9 @@ func _press_button(id: String) -> void:
 	if button == null:
 		return
 	button.grab_focus()
+	await process_frame
+	await process_frame
+	_check(root.gui_get_focus_owner() == button, "actual keyboard focus reaches " + id)
 	await _key(KEY_ENTER)
 
 func _type(field: String, text: String) -> void:
@@ -143,10 +157,16 @@ func _type(field: String, text: String) -> void:
 	await process_frame
 	var entry := campaign.hud.p01_panel.find_child("Input_" + field, true, false) as LineEdit
 	entry.grab_focus()
+	await process_frame
+	await process_frame
+	_check(root.gui_get_focus_owner() == entry, "actual keyboard focus reaches " + field)
 	entry.select_all()
 	await _key(KEY_BACKSPACE)
 	for character in text:
 		await _key(character.unicode_at(0), character.unicode_at(0))
+	_check(entry.text == text, "actual typed field " + field + " expected " + text + " got " + entry.text)
+	ui_input.append({"field": field, "text": entry.text, "focus": root.gui_get_focus_owner() == entry, "window_focus": root.has_focus()})
+	await _key(KEY_TAB)
 
 func _key(code: int, character: int = 0) -> void:
 	for down in [true, false]:
@@ -183,7 +203,7 @@ func _finish() -> void:
 	if not directory.is_empty() or _capture_enabled():
 		var file := FileAccess.open(path, FileAccess.WRITE)
 		if file != null:
-			file.store_string(JSON.stringify({"trace": trace, "captures": shots, "checks": checks, "failures": failures}, " "))
+			file.store_string(JSON.stringify({"trace": trace, "ui_input": ui_input, "captures": shots, "checks": checks, "failures": failures}, " "))
 	storage.cleanup()
 	print("CAMPAIGN INTERACTION INPUT RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
