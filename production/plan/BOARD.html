@@ -208,16 +208,17 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-114">M1-114</a> Guard streamed audio coroutine when its scene owner is freed <span class="chip ">any</span> <span class="chip ">P1</span><div class="meta">game/scripts/audio/audio_director.gd (_StreamTask owner lifetime guards), game/tools/test_campaign_media.gd (115/115 checks), production/qa…</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">13 blocked</span><span class="chip s-todo">32 todo</span></div><div class="bar"><i style="width:4%"></i></div>
-<details open><summary>Working now (1)</summary><ul>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">13 blocked</span><span class="chip s-todo">31 todo</span></div><div class="bar"><i style="width:4%"></i></div>
+<details open><summary>Working now (2)</summary><ul>
 <li><a class="id" href="#M1-98">M1-98</a> Recollect Windows loading evidence with retained stage traces <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-09</div></li>
+<li><a class="id" href="#M1-118">M1-118</a> Guard Mission Table layout focus when its panel is freed <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-09</div></li>
 </ul></details>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M1-56">M1-56</a> Messages: inbox, arrival toasts, unlock triggers and the message validator <span class="chip ">codex</span> <span class="chip ">P0</span></li>
 <li><a class="id" href="#M1-112">M1-112</a> Wire the shift-5 STACK Mission Table button to the physical carry activity (M1-58 hook) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
-<li><a class="id" href="#M1-118">M1-118</a> Guard Mission Table layout focus when its panel is freed <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-74">M1-74</a> Stop the &#x27;no meta lla_fade&#x27; error in the HUD fade <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 <li><a class="id" href="#M1-77">M1-77</a> Avoid missing fade metadata errors on the first campaign caption <span class="chip ">codex</span> <span class="chip ">P2</span></li>
+<li><a class="id" href="#M3-2P">M3-2P</a> Chapter 2 puzzles P-03 and P-04 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
 <details open><summary>Blocked (13)</summary><ul>
 <li><a class="id" href="#M1-37">M1-37</a> Four-player co-op Class mode: shared decisions, private role clues (as registered) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs Sadman M1-102 core crew configuration and Atik M1-103 runtime/query/team-plan bridge. The saved branch edits core/campaign/crew/docs/tools outside Ramim ownership and uses a…</div></li>
@@ -234,9 +235,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-83">M1-83</a> Care Round photo and measurement panel for M1-49 <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Needs Atik M1-68 full acceptance; world camera/date/photo/receipt/save integration stays with Atik M1-49. Preserve the published provider and async image-only capture contract. Sa…</div></li>
 <li><a class="id" href="#M1-109">M1-109</a> Skip unavailable Continue during keyboard navigation <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Reviewed source remains saved/on main. Current integrated e78f5bc full83/84, solely M1-68 Windows timing suite581/7 fails; text13060/0, media115/0, all UI/regression suites pass. …</div></li>
 </ul></details>
-<details><summary>To do (27)</summary><ul>
+<details><summary>To do (26)</summary><ul>
 <li><a class="id" href="#M1-31">M1-31</a> Make it fun: Chapter 1 game-feel and reward pass <span class="chip ">codex</span> <span class="chip ">P0</span></li>
-<li><a class="id" href="#M3-2P">M3-2P</a> Chapter 2 puzzles P-03 and P-04 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-2U">M3-2U</a> Upgrade choice after Chapter 1 <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 <li><a class="id" href="#M3-3P">M3-3P</a> Chapter 3 puzzles P-05 and P-06 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-3U">M3-3U</a> Upgrade choice after Chapter 2 <span class="chip ">codex</span> <span class="chip ">P2</span></li>
@@ -7330,8 +7330,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Guard Mission Table layout focus when its panel is freed",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/mission_table_panel.gd",
