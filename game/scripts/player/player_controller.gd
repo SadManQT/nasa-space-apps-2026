@@ -14,6 +14,9 @@ const OrientationScript: Script = preload("res://scripts/player/foot_orientation
 @export var lean_enabled: bool = true
 @export var interaction_distance: float = 2.0
 
+# Campaign runtime consumes E; standalone scenes keep generic interaction.
+var generic_interaction_input := true
+
 var visual: Node3D
 var character: Node3D
 var animation: PlayerAnimation
@@ -236,7 +239,7 @@ func _physics_process(delta: float) -> void:
 	_update_gaze(delta)
 	animation.skeleton.advance(delta)
 	follow_camera.update_camera(delta, _yaw, horizontal_speed)
-	if Input.is_action_just_pressed("interact"):
+	if generic_interaction_input and Input.is_action_just_pressed("interact"):
 		interact()
 
 func _smooth_speed(delta: float) -> void:

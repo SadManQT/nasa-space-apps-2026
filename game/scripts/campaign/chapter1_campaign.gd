@@ -669,6 +669,7 @@ func _place_crew() -> void:
 		_crew.name = "Crew"
 		add_child(_crew)
 	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]))
+	_player.generic_interaction_input = false
 	_crew.set_paused(_ui_paused)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_sync_world_boundaries()
