@@ -993,7 +993,7 @@ func _update_world_overlay() -> void:
 	var marker_tokens: Dictionary = UiDesign.tokens().get("world_marker", {})
 	var lift := Vector3.UP * float(marker_tokens.get("height_m", 1.35))
 	var nearby_node: Node3D = runtime.physical_target(_nearby_id) if not _nearby_id.is_empty() else null
-	if nearby_node != null:
+	if is_instance_valid(nearby_node) and nearby_node.is_inside_tree():
 		_prompt_label.text = _prompt_text(_nearby_id)
 		var point := _project(camera, nearby_node.global_position + lift * 0.6, view, margin)
 		_prompt.size = Vector2.ZERO

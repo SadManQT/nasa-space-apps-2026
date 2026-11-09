@@ -30,6 +30,14 @@ func _run() -> void:
 	_check(not hud._marker.visible, "detached real target never displays a stale world marker")
 	parent.add_child(target)
 	_check(is_equal_approx(hud._distance_to(target), 5.0), "reattached real target restores its distance")
+	var focus_root: Node3D = campaign._room.focus_root
+	var focus_parent: Node = focus_root.get_parent()
+	focus_parent.remove_child(focus_root)
+	hud._nearby_id = "commission_route"
+	hud._update_world_overlay()
+	_check(not hud._prompt.visible, "detached real focus-root child never displays a nearby prompt")
+	focus_parent.add_child(focus_root)
+	hud._nearby_id = ""
 	parent = player.get_parent()
 	parent.remove_child(player)
 	_check(hud._distance_to(target) < 0, "detached real player has no world distance")
