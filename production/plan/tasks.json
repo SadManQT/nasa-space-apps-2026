@@ -4292,8 +4292,8 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Messages: inbox, arrival toasts, unlock triggers and the message validator",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-54"
    ],
