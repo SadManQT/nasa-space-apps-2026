@@ -61,10 +61,12 @@ static func prepare(path: String, tree: SceneTree) -> bool:
 	LoadTrace.end("glb_generate_scene:" + path, stamp)
 	if root == null:
 		return false
+	await tree.process_frame
 	stamp = LoadTrace.begin()
 	var scene := PackedScene.new()
 	var error := scene.pack(root)
 	LoadTrace.end("glb_pack:" + path, stamp)
+	await tree.process_frame
 	root.free()
 	if error != OK:
 		return false

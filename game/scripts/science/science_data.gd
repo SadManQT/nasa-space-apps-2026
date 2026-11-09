@@ -38,16 +38,26 @@ const TAKEAWAYS := {
 	"vsat_relocatable_array": "Solar arrays have finite output, so Aurora balances charging against immediate loads.",
 }
 
+static var _cached_mapping: Dictionary = {}
+static var _cached_fixtures: Dictionary = {}
+
 var _root: String
 var _mapping: Dictionary
 var _fixtures: Dictionary = {}
 
 func _init(data_root: String = DATA_ROOT) -> void:
 	_root = data_root
+	if data_root == DATA_ROOT and not _cached_fixtures.is_empty():
+		_mapping = _cached_mapping
+		_fixtures = _cached_fixtures
+		return
 	_mapping = _read_json(_root.path_join("puzzle_sources.json"))
 	for file in DirAccess.get_files_at(_root) if DirAccess.dir_exists_absolute(_root) else []:
 		if file.ends_with(".json") and file != "puzzle_sources.json":
 			_fixtures[file.get_basename()] = _read_json(_root.path_join(file))
+	if data_root == DATA_ROOT:
+		_cached_mapping = _mapping
+		_cached_fixtures = _fixtures
 
 ## Sorted IDs of every bundled source, for the Journal source list.
 func source_ids() -> Array:

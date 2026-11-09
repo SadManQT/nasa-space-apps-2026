@@ -57,7 +57,7 @@ var _played_cutscenes := {}
 func _ready() -> void:
 	if incremental_loading:
 		loading = true
-		_ready_incremental()
+		_ready_incremental.call_deferred()
 		return
 	_start_session()
 	if _startup_error.is_empty():
@@ -127,14 +127,17 @@ func _ready_incremental() -> void:
 		prepared_content = preparation.content
 		_crew = preparation.crew
 		_crew.reparent(self)
+	await get_tree().process_frame
 	_start_session()
+	await get_tree().process_frame
 	if _startup_error.is_empty():
 		await _refresh_world_incremental()
 		var stamp := LoadTrace.begin()
-		_build_hud()
+		await _build_hud()
 		LoadTrace.end("campaign_ui", stamp)
 		await get_tree().process_frame
 		_save_campaign()
+		await get_tree().process_frame
 	loading = false
 	_on_scene_ready()
 	if hud != null:
@@ -691,9 +694,11 @@ func _refresh_world_incremental() -> void:
 		_fail_startup(preparation.failed)
 		return
 	await _prepare_terrain()
+	await get_tree().process_frame
 	_refresh_world_now(true)
 	await get_tree().process_frame
 	await _room.load_assets_incremental()
+	await get_tree().process_frame
 	_place_crew()
 	await get_tree().process_frame
 	# First real room draw (including its lighting/layout variants) is covered.
@@ -724,11 +729,13 @@ func _prepare_terrain() -> void:
 		_clear_terrain()
 
 func _rebuild_transition() -> void:
+	await get_tree().process_frame
 	var was_paused := _ui_paused
 	set_ui_paused(true)
 	await _refresh_world_incremental()
 	set_ui_paused(was_paused)
 	_on_scene_ready()
+	await get_tree().process_frame
 	if hud != null:
 		hud.refresh_scene({}, true)
 	await get_tree().process_frame
@@ -774,6 +781,8 @@ func _build_hud() -> void:
 	add_child(layer)
 	hud = HUDScene.instantiate() as Chapter1CampaignHUD
 	layer.add_child(hud)
+	if incremental_loading and is_inside_tree():
+		await get_tree().process_frame
 	hud.setup(self)
 
 func present_dialogue(line: Dictionary) -> void:

@@ -4406,7 +4406,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "The Moon you can walk: the region around the ridge on real terrain (Fable)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/antigravity",
    "deps": [
     "M1-36",
@@ -4423,7 +4423,7 @@
     "production/ART_BIBLE.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "game/assets/environment/moon_region/moon_region.json, game/assets/environment/moon_region/README.md, game/scripts/world/moon_region.gd, game/scenes/world/moon_region.tscn, game/tools/test_moon_region.gd (511 headless / 527 windowed checks, 0 failures; 16.64 ms median, 17.39 ms p95), production/qa/evidence/M3-60_*.png (7 frames) and M3-60_walkthrough.mp4; run_tests.sh 84/84 suites passed",
    "updated": "2026-11-09",
    "prompt": "Goal: the RPG Moon Sadman asked for: a photoreal, walkable region around Aurora on the real LOLA terrain (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.1).\nDo: assemble LOC-06 (mast courtyard), LOC-07 (Expedition Zero annex exterior), LOC-08 (garage and landing apron), LOC-09\n(cold-trap approach) and LOC-10 (vault shelf) on the M1-36 terrain with streaming, collision and the 5 Nov look (one hard low Sun\nfrom the ephemeris, black sky, true-size Earth near the horizon, long shadows, no haze). Add the places worth visiting in §4.1,\neach with a reason hook (job, clue, view or measurement). Moon science rules (ART_BIBLE §2). 60 fps target on this Mac\n(perf probe). Screenshots from each location at story-correct Sun angles; a walk-through video capture.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "sadman",

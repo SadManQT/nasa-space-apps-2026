@@ -62,6 +62,7 @@ func prepare_content() -> void:
 
 static func _content_job() -> Dictionary:
 	var start := Time.get_ticks_usec()
+	ScienceData.new()
 	var data := Content._read_json(Content.FULL_PATH)
 	return {"content": data, "validation": Content.validate_full(data), "ms": (Time.get_ticks_usec() - start) / 1000.0}
 
