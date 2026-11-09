@@ -82,7 +82,7 @@ func _run() -> void:
 						reveal.pressed.emit()
 						await _walk_state(hud, "%s journal hint %d" % [scene_id, hint + 1])
 						hud.panels.hint_player.close()
-				for tab in ["evidence", "garden", "decisions", "science"]:
+				for tab in ["evidence", "garden", "decisions", "people", "science"]:
 					hud.panels.select_journal_tab(tab)
 					await _walk_state(hud, "%s journal %s" % [scene_id, tab])
 				hud.panels.select_journal_tab("now")

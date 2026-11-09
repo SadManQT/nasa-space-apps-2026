@@ -20,6 +20,7 @@ var _journals := {}
 var _snapshots := {}
 
 func _init() -> void:
+	CampaignCutscenePlayer.autoplay = false
 	call_deferred("_run")
 
 func _run() -> void:
@@ -27,6 +28,7 @@ func _run() -> void:
 	_test_pure_and_spoiler_free()
 	_test_gate_flags_and_links()
 	_test_legacy_records_and_empty_snapshot()
+	await _test_full_campaign_journal()
 	await _test_panel()
 	await _test_campaign_entry_points()
 	print("JOURNAL TABS RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
@@ -64,7 +66,7 @@ func _assert_spoiler_free(label: String, snapshot: Dictionary, journal: Dictiona
 	var entries: Array = journal.get("entries", [])
 	_check(entries.all(func(entry): return _allowed(snapshot, String(entry.get("scene_id", "")))), label + ": every entry's scene is completed, acquired or current")
 	_check(entries.all(func(entry): return _scene_number(String(entry.get("scene_id", ""))) <= current), label + ": no entry comes from a later scene")
-	for tab in ["now", "evidence", "garden", "decisions"]:
+	for tab in ["now", "evidence", "garden", "decisions", "people", "science"]:
 		_check(journal.tabs.has(tab) and journal.tabs[tab].get("entries", []) is Array, label + ": tab " + tab + " present")
 	var resume: Array = journal.get("resume", [])
 	_check(resume.size() <= 6, label + ": resume card has at most six lines")
@@ -200,6 +202,67 @@ func _test_legacy_records_and_empty_snapshot() -> void:
 	_check(empty.tabs.now.objective.is_empty() and empty.entries.is_empty() and empty.resume.is_empty(), "an empty snapshot yields an empty, well-formed journal")
 	_check(CampaignKnowledge.format_date("2046-04-11 10:00 UTC") == "11 April 2046 · 10:00 UTC" and CampaignKnowledge.format_date("2046-04-24 UTC") == "24 April 2046" and CampaignKnowledge.format_date("2046-04-11 late morning UTC") == "11 April 2046 · late morning", "dates read in plain words")
 
+func _test_full_campaign_journal() -> void:
+	var capture := OS.get_cmdline_user_args().has("--capture")
+	var pre_noor := State.new_snapshot()
+	pre_noor["scene_id"] = "EX-CH05-S10"
+	pre_noor["chapter_id"] = "CH05"
+	pre_noor["completed_scene_ids"] = ["EX-CH01-S01", "EX-CH01-S03", "EX-CH01-S12", "EX-CH02-S10", "EX-CH03-S06", "EX-CH05-S05"]
+	pre_noor["acknowledged_line_ids"] = ["EX-CH01-S01-L01", "EX-CH01-S12-L02", "EX-CH05-S10-L01", "EX-CH05-S12-L01"]
+	pre_noor["crew"] = {"mode": "class", "players": 4}
+	pre_noor["story_log"]["moments"] = ["CH01-MUGS-NAMED", "CH05-HATCH-PAUSE"]
+	var j_before := CampaignKnowledge.journal(pre_noor)
+	var people_before: Array = j_before.tabs.people.entries
+	var n_before: Array = people_before.filter(func(p): return p.id == "noor")
+	_check(n_before.size() == 1 and n_before[0].title == "N." and not bool(n_before[0].updated), "before noor_identity_revealed the gardener page is titled N. with no Updated badge")
+	_check(not JSON.stringify(j_before).contains("Noor") and not JSON.stringify(j_before).contains("Rahman"), "before noor_identity_revealed the journal never exposes Noor or Rahman")
+	var ferreira_before: Array = people_before.filter(func(p): return p.id == "ferreira")
+	_check(ferreira_before.size() == 1 and bool(ferreira_before[0].updated) and String(ferreira_before[0].badge).contains("UPDATED"), "after EX-CH05-S05 Ferreira's page carries the Updated badge for the 2034 engineer record")
+	var voice_inf: Array = j_before.tabs.evidence.entries.filter(func(e): return e.id == "J-CH02-S10-VOICE-INFERENCE")
+	_check(voice_inf.size() == 1 and bool(voice_inf[0].updated) and bool(voice_inf[0].superseded) and voice_inf[0].superseded_title == "Ferreira was the 2034 engineer", "early 2034 voice inference stays visible and is marked superseded after EX-CH05-S05")
+	_check(j_before.tabs.now.chapter_pages.size() == 1 and j_before.tabs.now.chapter_pages[0].title == "Chapter 1 · Night One", "completed chapter debrief adds its chapter page")
+	_check(j_before.tabs.people.role_cards.size() == 4, "Class mode delivers all four specialist role cards into the journal")
+	_check(j_before.tabs.science.concepts.size() == 6 and j_before.tabs.science.data_cards.size() >= 3 and j_before.tabs.science.evidence_chips.size() == 4, "Science tab includes concept cards from completed scenes, earned data cards, and the four evidence chips")
+	var post_noor := pre_noor.duplicate(true)
+	post_noor["completed_scene_ids"].append("EX-CH05-S10")
+	post_noor["completed_scene_ids"].append("EX-CH05-S12")
+	post_noor["knowledge_flags"].append("noor_identity_revealed")
+	var j_after := CampaignKnowledge.journal(post_noor)
+	var n_after: Array = j_after.tabs.people.entries.filter(func(p): return p.id == "noor")
+	_check(n_after.size() == 1 and n_after[0].title == "Noor" and bool(n_after[0].updated) and String(n_after[0].badge).contains("UPDATED"), "after noor_identity_revealed the gardener page re-titles to Noor with an Updated badge")
+	_check(n_after[0].transcripts.any(func(t): return String(t.line_id) == "EX-CH05-S12-L01" and String(t.origin_label) == "STORED TEXT"), "People tab transcripts list acknowledged Noor lines with their origin label once unlocked")
+	var initials_inf: Array = j_after.tabs.evidence.entries.filter(func(e): return e.id == "J-CH03-S06-GARDENER-INITIALS")
+	_check(initials_inf.size() == 1 and bool(initials_inf[0].superseded) and initials_inf[0].superseded_title == "Dr Noor Rahman, founder of Last Light Academy", "annex initials inference is marked superseded once Noor's identity is revealed")
+	if capture:
+		var panels := Panels.instantiate() as CampaignPanels
+		root.add_child(panels)
+		panels.set_content_top(80)
+		panels.bind_query({"journal_entries": j_before, "scene_id": "EX-CH05-S10", "state_revision": 10})
+		panels.open_journal("people")
+		await process_frame
+		await process_frame
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png(ProjectSettings.globalize_path("res://../production/qa/evidence/M3-98_people_before_noor.png"))
+		panels.bind_query({"journal_entries": j_after, "scene_id": "EX-CH05-S10", "state_revision": 11})
+		panels.open_journal("people")
+		await process_frame
+		await process_frame
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png(ProjectSettings.globalize_path("res://../production/qa/evidence/M3-98_people_after_noor.png"))
+		panels.select_journal_tab("science")
+		await process_frame
+		await process_frame
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png(ProjectSettings.globalize_path("res://../production/qa/evidence/M3-98_science_tab.png"))
+		panels.select_journal_tab("evidence")
+		await process_frame
+		await process_frame
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png(ProjectSettings.globalize_path("res://../production/qa/evidence/M3-98_superseded_and_chapter_page.png"))
+		panels.close_panel()
+		panels.queue_free()
+		await process_frame
+
 func _test_panel() -> void:
 	var panels := Panels.instantiate() as CampaignPanels
 	root.add_child(panels)
@@ -210,11 +273,11 @@ func _test_panel() -> void:
 	await process_frame
 	await process_frame
 	var tabs := panels._side.find_children("Tab_*", "Button", false, false)
-	_check(tabs.size() == 5 and tabs.all(func(tab): return tab.size.y >= 44.0 and tab.size.x >= 44.0), "five tab buttons at least 44 px tall")
+	_check(tabs.size() == 6 and tabs.all(func(tab): return tab.size.y >= 44.0 and tab.size.x >= 44.0), "six tab buttons at least 44 px tall")
 	_check(root.gui_get_focus_owner() != null and root.gui_get_focus_owner().name == "Tab_now", "keyboard focus lands on the open tab")
 	_check(String(tabs[0].text).begins_with("› "), "the open tab carries a non-colour marker")
 	_check(root.get_visible_rect().encloses(panels._panel.get_global_rect()), "journal shell fits 1280x720")
-	_check(tabs[0].focus_neighbor_bottom == tabs[1].get_path() and tabs[3].focus_neighbor_bottom == tabs[4].get_path() and tabs[4].focus_neighbor_bottom == tabs[0].get_path(), "tab focus order runs Now → Evidence → Garden → Decisions → Science and wraps")
+	_check(tabs[0].focus_neighbor_bottom == tabs[1].get_path() and tabs[4].focus_neighbor_bottom == tabs[5].get_path() and tabs[5].focus_neighbor_bottom == tabs[0].get_path(), "tab focus order runs Now → Evidence → Garden → Decisions → People → Science and wraps")
 	var down := InputEventAction.new()
 	down.action = "ui_down"
 	down.pressed = true
@@ -262,6 +325,12 @@ func _test_panel() -> void:
 	panels.open_journal("garden")
 	await process_frame
 	_check(panels._body.get_node_or_null("GrowthTable") is GridContainer, "reopening returns to the chosen layout")
+	panels.select_journal_tab("people")
+	await process_frame
+	_check(_text(panels._body).contains("PEOPLE AT AURORA") and _text(panels._body).contains("Mei") and _text(panels._body).contains("N.") and not _text(panels._body).contains("Noor"), "People tab renders crew and N. without revealing Noor")
+	panels.select_journal_tab("science")
+	await process_frame
+	_check(_text(panels._body).contains("EVIDENCE LABELS") and _text(panels._body).contains("EARNED DATA CARDS") and _text(panels._body).contains("CONCEPT CARDS"), "Science tab renders evidence labels, earned data cards, and concept cards")
 	panels.close_panel()
 	panels.bind_query({"journal_entries": s03, "scene_id": "EX-CH01-S03", "state_revision": 3})
 	panels.open_panel("pause")

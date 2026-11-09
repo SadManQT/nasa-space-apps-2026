@@ -23,10 +23,101 @@ const JOURNAL_TEXT_PATH := "res://resources/campaign/content/journal_text.json"
 const JOURNAL_HINTS_PATH := "res://resources/campaign/content/journal_hints.json"
 const STORY_ECHOES_PATH := "res://resources/campaign/content/story_echoes.json"
 const P02_TABLE_PATH := "res://resources/campaign/content/p02_mission_table.json"
-const JOURNAL_TABS := ["now", "evidence", "garden", "decisions", "science"]
+const JOURNAL_TABS := ["now", "evidence", "garden", "decisions", "people", "science"]
 const RESUME_MAX_LINES := 6
 const COMPLETED_SHOWN := 3
 const STATION_NAME := "Aurora"
+const EVIDENCE_CHIPS := [
+	{"id": "Measured", "label": "Real observation", "meaning": "Measured or photographed by a real mission or experiment."},
+	{"id": "Computed", "label": "Model or reconstruction", "meaning": "Computed from real sources, or a teaching model of a real process."},
+	{"id": "Simulated", "label": "What-if exercise", "meaning": "A real historical event or lunar rule placed into an authored training scenario."},
+	{"id": "Fiction", "label": "Story (2046–2047)", "meaning": "Aurora, the crew, Alo, Tara, the forty-two seeds, the annex, and every date after today."},
+]
+const MOMENT_SUMMARIES := {
+	"CH01-MUGS-NAMED": {"title": "Four named mugs", "body": "Mei wrote four names on the commons mugs after the first bloom.", "person_id": "mei", "scene_id": "EX-CH01-S12"},
+	"CH03-ALO-VIGIL-1": {"title": "Dry-down vigil, day one", "body": "Leaves curling and pods drying in the same camera frame.", "person_id": "mei", "scene_id": "EX-CH03-S09"},
+	"CH03-ALO-VIGIL-2": {"title": "Dry-down vigil, day two", "body": "Pods turning straw-coloured as Alo finishes her cycle.", "person_id": "mei", "scene_id": "EX-CH03-S09"},
+	"CH03-ALO-VIGIL-3": {"title": "A fallen petal", "body": "On the third vigil day a yellow petal rested against the chamber wall.", "person_id": "mei", "scene_id": "EX-CH03-S09"},
+	"CH03-ALO-VIGIL-4": {"title": "Tea left on the bench", "body": "Kai set Mei's named mug of tea on the garden bench and stepped out quietly.", "person_id": "kai", "scene_id": "EX-CH03-S09"},
+	"CH03-ALO-VIGIL-5": {"title": "Ready for harvest", "body": "Dry pods ready to open over the contained tray.", "person_id": "mei", "scene_id": "EX-CH03-S10"},
+	"CH03-TARA-FAREWELL": {"title": "Tara's working stock", "body": "All four cadets gathered as Tara's nameplate joined the lineage board and her seeds became the working stock.", "person_id": "mei", "scene_id": "EX-CH03-S12"},
+	"CH05-HATCH-PAUSE": {"title": "A pause at the annex hatch", "body": "On her first watch Ferreira rested her hand on the N.R. hatch cover before moving on; Amara noticed.", "person_id": "ferreira", "scene_id": "EX-CH05-S02"},
+	"CH08-LIGHT-CLIPPED": {"title": "The hand light on the belt", "body": "Kai clipped the marked backup hand light to his suit before the summit drive.", "person_id": "kai", "scene_id": "EX-CH08-S01"},
+}
+const CAMPAIGN_EVIDENCE := [
+	{
+		"id": "J-CH02-S10-VOICE-INFERENCE",
+		"tab": "evidence",
+		"type": "interpretation",
+		"status": "INFERRED",
+		"title": "The 2034 engineer's voice",
+		"body": "The engineer on the 2034 horticulture recording sounds like a younger Commander Ferreira, though the voice alone is not proof.",
+		"date": "2046-05-06 20:30 UTC",
+		"scene_id": "EX-CH02-S10",
+		"source": "Playback station",
+		"evidence_label": "Fiction",
+		"links": [],
+		"gate_flag": "",
+		"superseded_by": "J-CH05-S05-ENGINEER-CONFIRMED",
+		"trigger": {"on": "scene_complete", "scene_id": "EX-CH02-S10"},
+		"surface": "journal",
+		"target_id": "",
+	},
+	{
+		"id": "J-CH05-S05-ENGINEER-CONFIRMED",
+		"tab": "evidence",
+		"type": "fact",
+		"status": "VERIFIED",
+		"title": "Ferreira was the 2034 engineer",
+		"body": "Commander Ferreira confirmed she was the Expedition Zero engineer who could not restore the radio before the retreat.",
+		"date": "2046-12-14 19:00 UTC",
+		"scene_id": "EX-CH05-S05",
+		"source": "Mission table records",
+		"evidence_label": "Fiction",
+		"links": ["J-CH02-S10-VOICE-INFERENCE"],
+		"gate_flag": "",
+		"superseded_by": "",
+		"trigger": {"on": "scene_complete", "scene_id": "EX-CH05-S05"},
+		"surface": "journal",
+		"target_id": "",
+	},
+	{
+		"id": "J-CH03-S06-GARDENER-INITIALS",
+		"tab": "evidence",
+		"type": "interpretation",
+		"status": "INFERRED",
+		"title": "The annex initials N.R.",
+		"body": "The sealed seedling annex is marked N.R., matching the initial N. on the seed packet, though the gardener's full name is still unknown.",
+		"date": "2046-05-07 01:00 UTC",
+		"scene_id": "EX-CH03-S06",
+		"source": "Annex hatch cover",
+		"evidence_label": "Fiction",
+		"links": ["J-CH01-S03-Q-WHO-IS-N"],
+		"gate_flag": "",
+		"superseded_by": "J-CH05-S10-NOOR-IDENTITY",
+		"trigger": {"on": "scene_complete", "scene_id": "EX-CH03-S06"},
+		"surface": "journal",
+		"target_id": "",
+	},
+	{
+		"id": "J-CH05-S10-NOOR-IDENTITY",
+		"tab": "evidence",
+		"type": "fact",
+		"status": "VERIFIED",
+		"title": "Dr Noor Rahman, founder of Last Light Academy",
+		"body": "With her permission, Rao shared the signed service page: N. is Dr Noor Rahman, the Expedition Zero botanist who returned to Earth and founded Last Light Academy.",
+		"date": "2046-12-15 16:00 UTC",
+		"scene_id": "EX-CH05-S10",
+		"source": "Signed service page",
+		"evidence_label": "Fiction",
+		"links": ["J-CH01-S03-Q-WHO-IS-N", "J-CH03-S06-GARDENER-INITIALS"],
+		"gate_flag": "noor_identity_revealed",
+		"superseded_by": "",
+		"trigger": {"on": "scene_complete", "scene_id": "EX-CH05-S10"},
+		"surface": "journal",
+		"target_id": "",
+	},
+]
 ## The Growth Record layout is the D2 choice (doc 24 §5.2).
 const GROWTH_LAYOUT_CHOICE := "EX-CH01-S04-CHOICE"
 ## The P-02 gate whose receipt carries the Night One ending (08 P-02).
@@ -151,7 +242,10 @@ static func journal(snapshot: Dictionary, pack: Dictionary = {}) -> Dictionary:
 	var shown: Array = []
 	var shown_ids := {}
 	var order := 0
-	for raw in text.get("entries", []):
+	var combined_entries: Array = text.get("entries", []).duplicate()
+	if pack.is_empty():
+		combined_entries.append_array(CAMPAIGN_EVIDENCE)
+	for raw in combined_entries:
 		if not raw is Dictionary:
 			continue
 		var entry: Dictionary = raw
@@ -166,12 +260,14 @@ static func journal(snapshot: Dictionary, pack: Dictionary = {}) -> Dictionary:
 		shown_ids[String(entry.get("id", ""))] = view
 	for view in shown:
 		_decorate(view, shown_ids, ctx)
+	var chapter_pages := _chapter_pages(ctx, shown)
 	var tabs := {
-		"now": _now_tab(text, ctx, shown),
+		"now": _now_tab(text, ctx, shown, chapter_pages),
 		"evidence": _evidence_tab(ctx, shown),
 		"garden": _garden_tab(text, ctx, shown),
-		"decisions": _decisions_tab(ctx, shown),
-		"science": _science_tab(ctx),
+		"decisions": _decisions_tab(ctx, shown, chapter_pages),
+		"people": _people_tab(text, ctx, shown),
+		"science": _science_tab(text, ctx, shown),
 	}
 	var entries: Array = []
 	var counts := {}
@@ -190,11 +286,12 @@ static func journal(snapshot: Dictionary, pack: Dictionary = {}) -> Dictionary:
 
 ## Mission reach comes from canonical scenes, never a claimed mission ID or
 ## source overlap. First reached chapter owns a shared clip's single entry.
-static func _science_tab(ctx: Dictionary) -> Dictionary:
+static func _science_tab(_text: Dictionary, ctx: Dictionary, shown: Array = []) -> Dictionary:
 	if _mission_cards.is_empty():
 		_mission_cards = _load_json("res://resources/campaign/content/mission_data_cards.json").get("missions", {})
 	var entries: Array = []
 	var chapters: Array = []
+	var data_cards: Array = []
 	var missions := {}
 	var seen := {}
 	for scene in content().get("scenes", []):
@@ -203,18 +300,96 @@ static func _science_tab(ctx: Dictionary) -> Dictionary:
 		if not _scene_allowed(scene_id, ctx) or missions.has(mission_id):
 			continue
 		missions[mission_id] = true
-		var puzzle := String(_mission_cards.get(mission_id, {}).get("puzzle", ""))
+		var card: Dictionary = _mission_cards.get(mission_id, {}) if _mission_cards.get(mission_id, {}) is Dictionary else {}
+		var number := int(scene.chapter_number)
+		if not card.is_empty():
+			data_cards.append({
+				"mission_id": mission_id,
+				"title": String(card.get("title", mission_id)),
+				"plain": String(card.get("plain", "")),
+				"evidence": String(card.get("evidence", "")),
+				"chapter_number": number,
+				"scene_id": scene_id,
+				"source_ids": card.get("source_ids", []).duplicate(true) if card.get("source_ids", []) is Array else [],
+			})
+		var puzzle := String(card.get("puzzle", ""))
 		for clip in Explainers.matching([mission_id, puzzle]):
 			if seen.has(clip.id):
 				continue
 			seen[clip.id] = true
-			var number := int(scene.chapter_number)
 			var entry := {"id": clip.id, "title": clip.title, "scene_id": scene_id, "chapter_number": number}
 			entries.append(entry)
 			if chapters.is_empty() or int(chapters.back().number) != number:
 				chapters.append({"number": number, "entries": []})
 			chapters.back().entries.append(entry)
-	return {"entries": entries, "chapters": chapters}
+	var authored_concepts := {}
+	for view in shown:
+		if String(view.get("tab", "")) == "science" and String(view.get("type", "")) == "concept":
+			authored_concepts[String(view.get("scene_id", ""))] = view
+	var concepts: Array = []
+	for scene in content().get("scenes", []):
+		var scene_id := String(scene.get("id", ""))
+		if not ctx.completed.has(scene_id):
+			continue
+		var learning: Dictionary = scene.get("learning", {}) if scene.get("learning", {}) is Dictionary else {}
+		if learning.is_empty():
+			continue
+		var authored: Dictionary = authored_concepts.get(scene_id, {})
+		var title := String(authored.get("title", learning.get("concept", "")))
+		var summary := String(authored.get("body", learning.get("explain", "")))
+		concepts.append({
+			"id": String(authored.get("id", "CONCEPT-" + scene_id)),
+			"scene_id": scene_id,
+			"scene_title": _scene_title(scene_id),
+			"chapter_number": int(scene.get("chapter_number", 1)),
+			"date_label": format_date(String(authored.get("date", scene.get("story_time", "")))),
+			"evidence_label": String(authored.get("evidence_label", scene.get("evidence_tag", "Simulated"))),
+			"title": _clean_learning_text(title),
+			"summary": _clean_learning_text(summary),
+			"concept": _clean_learning_text(String(learning.get("concept", ""))),
+			"predict": _clean_learning_text(String(learning.get("predict", ""))),
+			"observe": _clean_learning_text(String(learning.get("observe", ""))),
+			"explain": _clean_learning_text(String(learning.get("explain", ""))),
+			"transfer": _clean_learning_text(String(learning.get("transfer", ""))),
+			"source": _scene_title(scene_id) + " learning block",
+		})
+	return {
+		"entries": entries,
+		"chapters": chapters,
+		"concepts": concepts,
+		"data_cards": data_cards,
+		"evidence_chips": EVIDENCE_CHIPS.duplicate(true),
+	}
+
+static func _clean_learning_text(value: String) -> String:
+	var out := value
+	for pair in [
+		["operations", "jobs"],
+		["Operations", "Jobs"],
+		["operation", "job"],
+		["Operation", "Job"],
+		["committing", "locking in"],
+		["Committing", "Locking in"],
+		["committed", "locked in"],
+		["Committed", "Locked in"],
+		["commits", "locks in"],
+		["Commits", "Locks in"],
+		["commit", "lock in"],
+		["Commit", "Lock in"],
+		["acknowledged", "read"],
+		["Acknowledged", "Read"],
+		["acknowledge", "read"],
+		["Acknowledge", "Read"],
+		["stages", "phases"],
+		["Stages", "Phases"],
+		["staged", "prepared"],
+		["Staged", "Prepared"],
+		["stage", "phase"],
+		["Stage", "Phase"],
+		["Shelter S = water wall + supply crates, at most 6. Dose per storm shift: S 0–1 gives 3, 2–3 gives 2, 4–5 gives 1, 6 gives 0.", "Shelter total = water wall + supply crates, at most 6. Dose per storm shift: shelter 0–1 gives 3, 2–3 gives 2, 4–5 gives 1, 6 gives 0."],
+	]:
+		out = out.replace(pair[0], pair[1])
+	return out
 
 ## Dates in the packs read "2046-04-11 10:00 UTC", "2046-04-11 UTC" or
 ## "2046-04-11 late morning UTC"; players read "11 April 2046 · 10:00 UTC".
@@ -254,6 +429,8 @@ static func _context(snapshot: Dictionary) -> Dictionary:
 		"flags": snapshot.get("knowledge_flags", []) if snapshot.get("knowledge_flags", []) is Array else [],
 		"receipts": snapshot.get("receipts", {}) if snapshot.get("receipts", {}) is Dictionary else {},
 		"knowledge": snapshot.get("knowledge", []) if snapshot.get("knowledge", []) is Array else [],
+		"acknowledged": snapshot.get("acknowledged_line_ids", []) if snapshot.get("acknowledged_line_ids", []) is Array else [],
+		"crew": snapshot.get("crew", {}) if snapshot.get("crew", {}) is Dictionary else {},
 		"choices": story_log.get("choices", {}) if story_log.get("choices", {}) is Dictionary else {},
 		"moments": story_log.get("moments", []) if story_log.get("moments", []) is Array else [],
 		"plants": plants,
@@ -350,10 +527,15 @@ static func _decorate(view: Dictionary, shown_ids: Dictionary, _ctx: Dictionary)
 	view["links"] = links
 	var superseded := String(view.get("superseded_by", ""))
 	view["updated"] = not superseded.is_empty() and shown_ids.has(superseded)
+	view["superseded"] = view["updated"]
 	view["superseded_title"] = String(shown_ids[superseded].get("title", "")) if view["updated"] else ""
 	view["date_label"] = format_date(String(view.get("date", "")))
-	view["scene_title"] = _scene_title(String(view.get("scene_id", "")))
+	var scene_title := _scene_title(String(view.get("scene_id", "")))
+	view["scene_title"] = scene_title
 	view["scene_order"] = _scene_order(String(view.get("scene_id", "")))
+	var source := String(view.get("source", ""))
+	if source.begins_with("EX-CH"):
+		view["source"] = source.replace(String(view.get("scene_id", "")), scene_title)
 
 static func _newest_first(a: Dictionary, b: Dictionary) -> bool:
 	if int(a.scene_order) != int(b.scene_order):
@@ -371,7 +553,7 @@ static func _now_entry(text: Dictionary, scene_id: String) -> Dictionary:
 			return entry
 	return {}
 
-static func _now_tab(text: Dictionary, ctx: Dictionary, shown: Array) -> Dictionary:
+static func _now_tab(text: Dictionary, ctx: Dictionary, shown: Array, chapter_pages: Array = []) -> Dictionary:
 	var entries: Array = shown.filter(func(view): return String(view.get("tab", "")) == "now")
 	var objective := {}
 	var current := _now_entry(text, ctx.scene_id)
@@ -412,7 +594,7 @@ static func _now_tab(text: Dictionary, ctx: Dictionary, shown: Array) -> Diction
 			"completed_text": String(entry.get("completed_text", "")),
 			"date_label": format_date(String(entry.get("date", ""))),
 		})
-	return {"objective": objective, "completed": completed, "hints": hints_for_scene(ctx.scene_id), "entries": entries}
+	return {"objective": objective, "completed": completed, "hints": hints_for_scene(ctx.scene_id), "entries": entries, "chapter_pages": chapter_pages}
 
 ## The What now? ladder for one scene: {"scene_id", "source", "levels": [H1, H2, H3],
 ## "level_labels": [...]}. Authored text comes from journal_hints.json (08 and 22
@@ -466,8 +648,8 @@ static func _evidence_tab(ctx: Dictionary, shown: Array) -> Dictionary:
 			"title": String(record.get("title", scene_id)), "body": "\n".join(lines),
 			"date": String(scene.get("story_time", "")), "date_label": format_date(String(scene.get("story_time", ""))),
 			"scene_id": scene_id, "scene_title": String(scene.get("title", scene_id)), "scene_order": _scene_order(scene_id),
-			"source": "Operation record", "evidence_label": String(record.get("evidence_label", "")),
-			"links": [], "gate_flag": "", "superseded_by": "", "updated": false, "superseded_title": "", "order": order,
+			"source": "Station record", "evidence_label": String(record.get("evidence_label", "")),
+			"links": [], "gate_flag": "", "superseded_by": "", "updated": false, "superseded": false, "superseded_title": "", "order": order,
 		}
 		order += 1
 		entries.append(view)
@@ -541,7 +723,7 @@ static func _garden_tab(text: Dictionary, ctx: Dictionary, shown: Array) -> Dict
 		"ledger": ledger, "entries": entries,
 	}
 
-static func _decisions_tab(ctx: Dictionary, shown: Array) -> Dictionary:
+static func _decisions_tab(ctx: Dictionary, shown: Array, chapter_pages: Array = []) -> Dictionary:
 	var entries: Array = shown.filter(func(view): return String(view.get("tab", "")) == "decisions")
 	var echo_table: Dictionary = story_echoes().get("choices", {}) if story_echoes().get("choices", {}) is Dictionary else {}
 	for view in entries:
@@ -583,7 +765,322 @@ static func _decisions_tab(ctx: Dictionary, shown: Array) -> Dictionary:
 				"scene_id": String(NIGHT_ENDING_GATE.scene_id),
 				"date_label": format_date(dated if not dated.is_empty() else String(ctx.datetime)),
 			}
-	return {"entries": entries, "outcome": outcome}
+	return {"entries": entries, "outcome": outcome, "chapter_pages": chapter_pages}
+
+## Chapter pages added at each chapter debrief (EX-CHxx-S12 completed):
+## what we did, what we learned, and open questions carried forward.
+static func _chapter_pages(ctx: Dictionary, shown: Array) -> Array:
+	var pages: Array = []
+	var open_questions: Array = []
+	for view in shown:
+		if String(view.get("tab", "")) == "evidence" and String(view.get("status", "")) == "UNKNOWN" and not bool(view.get("updated", false)):
+			open_questions.append(String(view.get("title", "")))
+	for chapter in content().get("chapters", []):
+		if not chapter is Dictionary:
+			continue
+		var number := int(chapter.get("number", 0))
+		var debrief_scene := "EX-CH%02d-S12" % number
+		if not ctx.completed.has(debrief_scene):
+			continue
+		var learned: Array = []
+		for item in chapter.get("learning", []):
+			learned.append(_clean_learning_text(String(item)))
+		var questions := open_questions.duplicate()
+		if questions.is_empty():
+			questions.append("What grows next at Aurora?")
+		pages.append({
+			"chapter_id": String(chapter.get("id", "CH%02d" % number)),
+			"number": number,
+			"title": "Chapter %d · %s" % [number, String(chapter.get("title", ""))],
+			"subtitle": String(chapter.get("subtitle", "")),
+			"scene_id": debrief_scene,
+			"what_we_did": _clean_learning_text(String(chapter.get("summary", ""))),
+			"what_we_learned": learned,
+			"open_questions": questions,
+		})
+	return pages
+
+## People tab (doc 24 §6.2, §6.5): one page per person met so far, with what we
+## know and its source, moments, Class-mode specialist notes, and transcripts.
+## Names are gated by flag, never by keyword: N. stays "N." until
+## noor_identity_revealed; the 2034 engineer stays "Engineer (2034)" until
+## EX-CH05-S05 is completed.
+static func _people_tab(_text: Dictionary, ctx: Dictionary, shown: Array) -> Dictionary:
+	var has_started: bool = not ctx.scene_id.is_empty() or not ctx.completed.is_empty() or not ctx.acquired.is_empty()
+	if not has_started:
+		return {"entries": [], "people": [], "role_cards": []}
+	var people_moments := {}
+	for view in shown:
+		if String(view.get("tab", "")) == "people":
+			var target_person := "kai" if String(view.get("title", "")).begins_with("Kai") else "mei"
+			if not people_moments.has(target_person):
+				people_moments[target_person] = []
+			people_moments[target_person].append({
+				"id": String(view.get("id", "")),
+				"title": String(view.get("title", "")),
+				"body": String(view.get("body", "")),
+				"scene_id": String(view.get("scene_id", "")),
+				"scene_title": String(view.get("scene_title", _scene_title(String(view.get("scene_id", ""))))),
+				"date_label": String(view.get("date_label", format_date(String(view.get("date", ""))))),
+			})
+	for moment_id in ctx.moments:
+		var spec: Dictionary = MOMENT_SUMMARIES.get(String(moment_id), {})
+		var m_scene := String(spec.get("scene_id", ""))
+		if spec.is_empty() or not _scene_allowed(m_scene, ctx):
+			continue
+		var p_id := String(spec.get("person_id", "mei"))
+		if not people_moments.has(p_id):
+			people_moments[p_id] = []
+		var already: bool = people_moments[p_id].any(func(m): return String(m.get("title", "")) == String(spec.get("title", "")))
+		if not already:
+			people_moments[p_id].append({
+				"id": "MOMENT-" + String(moment_id),
+				"title": String(spec.get("title", "")),
+				"body": String(spec.get("body", "")),
+				"scene_id": m_scene,
+				"scene_title": _scene_title(m_scene),
+				"date_label": "",
+			})
+	var transcripts := _transcripts_by_person(ctx)
+	var role_cards := _delivered_role_cards(ctx)
+	var cards_by_person := {}
+	for card in role_cards:
+		var pid := String(card.get("role_id", ""))
+		if not cards_by_person.has(pid):
+			cards_by_person[pid] = []
+		cards_by_person[pid].append(card)
+	var specs := _person_specs(ctx)
+	var entries: Array = []
+	for spec in specs:
+		var pid := String(spec.get("id", ""))
+		var entry: Dictionary = spec.duplicate(true)
+		entry["moments"] = people_moments.get(pid, [])
+		entry["transcripts"] = transcripts.get(pid, [])
+		entry["role_cards"] = cards_by_person.get(pid, [])
+		entries.append(entry)
+	return {"entries": entries, "people": entries, "role_cards": role_cards}
+
+static func _person_specs(ctx: Dictionary) -> Array:
+	var result: Array = []
+	if _scene_allowed("EX-CH01-S01", ctx):
+		var mei_facts := [
+			{"text": "Horticulture and living continuity specialist at Aurora.", "source": "Sunlight We Cannot Keep"},
+		]
+		if _scene_allowed("EX-CH01-S04", ctx):
+			mei_facts.append({"text": "Planted Alo in the outer test chamber and Tara in the indoor reference bay.", "source": "Two Seeds, Two Places"})
+		if ctx.completed.has("EX-CH03-S10"):
+			mei_facts.append({"text": "Counted forty-two founder seeds with the crew and archived Alo's pressed petal.", "source": "Forty-Two"})
+		result.append({
+			"id": "mei", "tab": "people", "type": "person", "status": "VERIFIED",
+			"title": "Mei", "name": "Mei", "previous_title": "", "updated": false, "badge": "",
+			"role": "Horticulture & living continuity",
+			"scene_id": "EX-CH01-S01", "scene_title": _scene_title("EX-CH01-S01"),
+			"facts": mei_facts,
+		})
+		var kai_facts := [
+			{"text": "Power and heat specialist keeping Aurora's battery and lamps steady.", "source": "Sunlight We Cannot Keep"},
+		]
+		if _scene_allowed("EX-CH01-S05", ctx):
+			kai_facts.append({"text": "Tested the backup hand light and marked its home beside the locker.", "source": "Fourteen Days of Care"})
+		if ctx.completed.has("EX-CH06-S02"):
+			kai_facts.append({"text": "Shared his memory of waiting out a childhood blackout and built the eclipse guide-light branch.", "source": "A Light We Can Find"})
+		result.append({
+			"id": "kai", "tab": "people", "type": "person", "status": "VERIFIED",
+			"title": "Kai", "name": "Kai", "previous_title": "", "updated": false, "badge": "",
+			"role": "Power & thermal systems",
+			"scene_id": "EX-CH01-S01", "scene_title": _scene_title("EX-CH01-S01"),
+			"facts": kai_facts,
+		})
+		var amara_facts := [
+			{"text": "Atmosphere and measurement specialist who checks every instrument against a reference.", "source": "Sunlight We Cannot Keep"},
+		]
+		if _scene_allowed("EX-CH01-S03", ctx):
+			amara_facts.append({"text": "Prepared blank comparison labels and calibrated the moisture probe before planting.", "source": "The Seed Packet"})
+		if ctx.completed.has("EX-CH03-S02"):
+			amara_facts.append({"text": "Used the independent pressure gauge to prove the habitat tank was holding after the moonquake.", "source": "Three Taps on One Line"})
+		result.append({
+			"id": "amara", "tab": "people", "type": "person", "status": "VERIFIED",
+			"title": "Amara", "name": "Amara", "previous_title": "", "updated": false, "badge": "",
+			"role": "Atmosphere & measurement",
+			"scene_id": "EX-CH01-S01", "scene_title": _scene_title("EX-CH01-S01"),
+			"facts": amara_facts,
+		})
+	var rafi_scene := "EX-CH01-S01" if _scene_allowed("EX-CH01-S01", ctx) else ("EX-CH01-S02" if _scene_allowed("EX-CH01-S02", ctx) else "")
+	if not rafi_scene.is_empty():
+		var rafi_facts := [
+			{"text": "Safety and space-weather specialist who placed the stop rule in front of every seat.", "source": _scene_title(rafi_scene)},
+		]
+		if _scene_allowed("EX-CH01-S02", ctx):
+			rafi_facts.append({"text": "Led the Safe Room roll call and local-response check.", "source": "The Rule That Works Without Earth"})
+		if ctx.completed.has("EX-CH04-S04"):
+			rafi_facts.append({"text": "Surveyed the ridge road and verified the relay chain back to Aurora.", "source": "The Blind Corner"})
+		result.append({
+			"id": "rafi", "tab": "people", "type": "person", "status": "VERIFIED",
+			"title": "Rafi", "name": "Rafi", "previous_title": "", "updated": false, "badge": "",
+			"role": "Safety & field navigation",
+			"scene_id": rafi_scene, "scene_title": _scene_title(rafi_scene),
+			"facts": rafi_facts,
+		})
+	if _scene_allowed("EX-CH01-S01", ctx):
+		var ferreira_confirmed: bool = ctx.completed.has("EX-CH05-S05")
+		var ferreira_facts := [
+			{"text": "Mission commander supporting the cadet crew over the Earth link and later at Aurora.", "source": "Sunlight We Cannot Keep"},
+		]
+		if _scene_allowed("EX-CH05-S01", ctx):
+			ferreira_facts.append({"text": "Joined the crew in person at Aurora for the winter rotation.", "source": "The Fifth Mug"})
+		if ferreira_confirmed:
+			ferreira_facts.append({"text": "Served as the Expedition Zero engineer in 2034 who ordered the safe retreat when the radio could not be restored.", "source": "What I Didn't Say"})
+		result.append({
+			"id": "ferreira", "tab": "people", "type": "person", "status": "VERIFIED",
+			"title": "Commander Ferreira", "name": "Commander Ferreira",
+			"previous_title": "Engineer (2034)" if ferreira_confirmed else "",
+			"updated": ferreira_confirmed,
+			"badge": "UPDATED · 2034 engineer record linked" if ferreira_confirmed else "",
+			"role": "Mission Commander · Expedition Zero engineer (2034)" if ferreira_confirmed else "Mission Commander",
+			"scene_id": "EX-CH01-S01", "scene_title": _scene_title("EX-CH01-S01"),
+			"facts": ferreira_facts,
+		})
+	if _scene_allowed("EX-CH02-S10", ctx) and not ctx.completed.has("EX-CH05-S05"):
+		result.append({
+			"id": "engineer_2034", "tab": "people", "type": "person", "status": "INFERRED",
+			"title": "Engineer (2034)", "name": "Engineer (2034)", "previous_title": "", "updated": false, "badge": "",
+			"role": "Expedition Zero engineer (2034 recording)",
+			"scene_id": "EX-CH02-S10", "scene_title": _scene_title("EX-CH02-S10"),
+			"facts": [
+				{"text": "Ordered the mandatory retreat on the 2034 horticulture recording; the voice resembles a younger Commander Ferreira.", "source": "A Voice With Younger Edges"},
+			],
+		})
+	var n_scene := ""
+	for candidate in ["EX-CH01-S03", "EX-CH01-S12", "EX-CH02-S10", "EX-CH03-S06", "EX-CH04-S10", "EX-CH05-S10", "EX-CH05-S12", "EX-CH06-S09", "EX-CH07-S07", "EX-CH08-S10"]:
+		if _scene_allowed(candidate, ctx):
+			n_scene = candidate
+			break
+	if not n_scene.is_empty():
+		var noor_revealed: bool = ctx.flags.has("noor_identity_revealed")
+		var n_facts: Array = [
+			{"text": "Left the sealed seed packet labelled ALO and the pencilled two-chamber comparison plan in dry storage.", "source": _scene_title(n_scene)},
+		]
+		if _scene_allowed("EX-CH01-S12", ctx):
+			n_facts.append({"text": "Recorded a stored message asking a future crew to care for Alo when the first flower opened.", "source": "Alo Needs a Friend"})
+		if _scene_allowed("EX-CH02-S10", ctx):
+			n_facts.append({"text": "Spoke on the 2034 recording of yellow winter mustard fields in Bangladesh.", "source": "A Voice With Younger Edges"})
+		if noor_revealed:
+			n_facts.append({"text": "Dr Noor Rahman, Expedition Zero botanist who returned safely to Earth and founded Last Light Academy.", "source": "The Name on the Page"})
+		if ctx.flags.has("relay_local_verified") and ctx.flags.has("relay_earth_verified") and _scene_allowed("EX-CH08-S10", ctx):
+			n_facts.append({"text": "Spoke live with Aurora over the restored Earth link from Dhaka.", "source": "Hello, Aurora"})
+		result.append({
+			"id": "noor", "tab": "people", "type": "person",
+			"status": "VERIFIED" if noor_revealed else "OBSERVED",
+			"title": "Noor" if noor_revealed else "N.",
+			"name": "Dr Noor Rahman" if noor_revealed else "N.",
+			"previous_title": "N." if noor_revealed else "",
+			"updated": noor_revealed,
+			"badge": "UPDATED · formerly N." if noor_revealed else "",
+			"role": "Botanist & Founder of Last Light Academy (formerly N.)" if noor_revealed else "Previous gardener (packet & stored notes)",
+			"scene_id": n_scene, "scene_title": _scene_title(n_scene),
+			"gate_flag": "noor_identity_revealed" if noor_revealed else "",
+			"facts": n_facts,
+		})
+	var rao_scene := ""
+	for candidate in ["EX-CH04-S11", "EX-CH05-S10", "EX-CH07-S01", "EX-CH08-S10"]:
+		if _scene_allowed(candidate, ctx):
+			rao_scene = candidate
+			break
+	if not rao_scene.is_empty():
+		var rao_facts := [
+			{"text": "Earth flight-desk communicator who logs reports and keeps the link open for Aurora.", "source": _scene_title(rao_scene)},
+		]
+		if _scene_allowed("EX-CH05-S10", ctx):
+			rao_facts.append({"text": "Confirmed consent before sharing the signed identity page with the cadets.", "source": "The Name on the Page"})
+		result.append({
+			"id": "rao", "tab": "people", "type": "person", "status": "VERIFIED",
+			"title": "Rao", "name": "Rao", "previous_title": "", "updated": false, "badge": "",
+			"role": "Earth Flight Desk",
+			"scene_id": rao_scene, "scene_title": _scene_title(rao_scene),
+			"facts": rao_facts,
+		})
+	return result
+
+static func _transcripts_by_person(ctx: Dictionary) -> Dictionary:
+	var out := {}
+	if ctx.acknowledged.is_empty():
+		return out
+	var ack_set := {}
+	for line_id in ctx.acknowledged:
+		ack_set[String(line_id)] = true
+	var noor_revealed: bool = ctx.flags.has("noor_identity_revealed")
+	for raw_line in content().get("dialogue", []):
+		if not raw_line is Dictionary:
+			continue
+		var line: Dictionary = raw_line
+		var line_id := String(line.get("id", ""))
+		var scene_id := String(line.get("scene_id", ""))
+		if not ack_set.has(line_id) or not _scene_allowed(scene_id, ctx) or not line_allowed(line_id, ctx.flags, scene_id):
+			continue
+		var speaker := String(line.get("speaker", ""))
+		var person_id := speaker.to_lower()
+		if speaker in ["N.", "Noor"]:
+			if speaker == "Noor" and not noor_revealed:
+				continue
+			person_id = "noor"
+		elif speaker == "Engineer":
+			person_id = "ferreira" if ctx.completed.has("EX-CH05-S05") else "engineer_2034"
+		var origin := String(line.get("origin", "live"))
+		var origin_label: String = String({
+			"live": "IN ROOM",
+			"earth_link": "EARTH LINK",
+			"recording": "ARCHIVE 2034",
+			"text": "STORED TEXT",
+			"radio": "LOCAL RADIO",
+		}.get(origin, "IN ROOM"))
+		if not out.has(person_id):
+			out[person_id] = []
+		out[person_id].append({
+			"line_id": line_id,
+			"speaker": "Noor" if (speaker in ["N.", "Noor"] and noor_revealed) else ("N." if speaker in ["N.", "Noor"] else speaker),
+			"text": String(line.get("text", "")),
+			"origin_label": origin_label,
+			"scene_id": scene_id,
+			"scene_title": _scene_title(scene_id),
+		})
+	return out
+
+static func _delivered_role_cards(ctx: Dictionary) -> Array:
+	var result: Array = []
+	var ch1_shift := int(ctx.shift)
+	if _chapter_of(ctx.scene_id) > 1 or ctx.completed.has("EX-CH01-S07") or ctx.completed.has("EX-CH01-S11"):
+		ch1_shift = 7
+	elif ctx.scene_id == "EX-CH01-S07" and ch1_shift < 1:
+		ch1_shift = 1
+	elif ctx.scene_id == "EX-CH01-S08" and ch1_shift < 2:
+		ch1_shift = 2
+	elif ctx.scene_id in ["EX-CH01-S09", "EX-CH01-S10", "EX-CH01-S11", "EX-CH01-S12"] and ch1_shift < 3:
+		ch1_shift = 3
+	if ch1_shift <= 0 and not _scene_allowed("EX-CH01-S07", ctx):
+		return result
+	var mode := String(ctx.crew.get("mode", "solo"))
+	var players := int(ctx.crew.get("players", 1))
+	for raw in p02_table().get("role_cards", []):
+		if not raw is Dictionary:
+			continue
+		var card: Dictionary = raw
+		var arrives := int(card.get("arrives_shift", 1))
+		if arrives > ch1_shift:
+			continue
+		var facts: Array = []
+		for f in card.get("facts", []):
+			facts.append(_clean_learning_text(String(f)))
+		result.append({
+			"role_id": String(card.get("role_id", "")),
+			"name": String(card.get("name", "")),
+			"role": String(card.get("role", "")),
+			"arrives_shift": arrives,
+			"quote": String(card.get("quote", "")),
+			"facts": facts,
+			"crew_mode": mode,
+			"players": players,
+		})
+	return result
 
 ## "Previously at Aurora" (doc 24 §6.6): at most six lines from the saved
 ## snapshot only. A line whose facts are missing is left out, never invented.

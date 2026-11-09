@@ -109,6 +109,7 @@ const JOURNAL_TABS := [
 	{"id": "evidence", "label": "Evidence"},
 	{"id": "garden", "label": "Garden"},
 	{"id": "decisions", "label": "Decisions"},
+	{"id": "people", "label": "People"},
 	{"id": "science", "label": "Science"},
 ]
 const JOURNAL_PANEL_WIDTH := 1180.0
@@ -843,8 +844,58 @@ func _render_journal(value) -> void:
 			_render_garden_tab(data)
 		"decisions":
 			_render_decisions_tab(data)
+		"people":
+			_render_people_tab(data)
 		"science":
 			_render_science_tab(data)
+
+func _render_people_tab(data: Dictionary) -> void:
+	var people: Array = data.get("people", data.get("entries", [])) if data.get("people", data.get("entries", [])) is Array else []
+	_section("PEOPLE AT AURORA")
+	if people.is_empty():
+		_body.add_child(_card([_label("Crew and mission contacts appear here as you meet them.", 15, MUTED)]))
+		return
+	for person in people:
+		if not person is Dictionary:
+			continue
+		var rows: Array = []
+		var title := _label(String(person.get("title", "")), 18, MUSTARD)
+		title.name = "Person_" + String(person.get("id", ""))
+		rows.append(title)
+		var role_line := "• %s · %s" % [String(person.get("status", "VERIFIED")), String(person.get("role", ""))]
+		rows.append(_label(role_line, 12, CYAN))
+		if bool(person.get("updated", false)):
+			var badge_text := String(person.get("badge", "UPDATED"))
+			rows.append(_label(badge_text if not badge_text.is_empty() else "UPDATED", 12, MUSTARD))
+		var facts: Array = person.get("facts", []) if person.get("facts", []) is Array else []
+		if not facts.is_empty():
+			rows.append(_label("WHAT WE KNOW", 11, MUSTARD))
+			for fact in facts:
+				if fact is Dictionary:
+					rows.append(_label("• %s (%s)" % [String(fact.get("text", "")), String(fact.get("source", ""))], 14, IVORY))
+		var moments: Array = person.get("moments", []) if person.get("moments", []) is Array else []
+		if not moments.is_empty():
+			rows.append(_label("MOMENTS", 11, MUSTARD))
+			for moment in moments:
+				if moment is Dictionary:
+					rows.append(_label("• %s — %s" % [String(moment.get("title", "")), String(moment.get("body", ""))], 14, IVORY))
+		var role_cards: Array = person.get("role_cards", []) if person.get("role_cards", []) is Array else []
+		if not role_cards.is_empty():
+			rows.append(_label("SPECIALIST NOTES", 11, MUSTARD))
+			for rc in role_cards:
+				if rc is Dictionary:
+					rows.append(_label("%s · Shift %d · \"%s\"" % [String(rc.get("role", "")), int(rc.get("arrives_shift", 1)), String(rc.get("quote", ""))], 12, CYAN))
+					for rf in rc.get("facts", []):
+						rows.append(_label("• " + String(rf), 13, IVORY))
+		var transcripts: Array = person.get("transcripts", []) if person.get("transcripts", []) is Array else []
+		if not transcripts.is_empty():
+			rows.append(_label("SPOKEN & STORED LINES", 11, MUSTARD))
+			for line in transcripts:
+				if line is Dictionary:
+					var line_label := _label("[%s · %s] \"%s\"" % [String(line.get("origin_label", "IN ROOM")), String(line.get("scene_title", "")), String(line.get("text", ""))], 13, IVORY)
+					line_label.set_meta("verbatim", true)
+					rows.append(line_label)
+		_body.add_child(_card(rows))
 
 func _render_science_tab(data: Dictionary) -> void:
 	var chapters: Array = data.get("chapters", [])
@@ -853,6 +904,40 @@ func _render_science_tab(data: Dictionary) -> void:
 	for chapter in chapters:
 		_section("Chapter %d" % int(chapter.number))
 		_render_watch_buttons(chapter.get("entries", []))
+	var chips: Array = data.get("evidence_chips", []) if data.get("evidence_chips", []) is Array else []
+	if not chips.is_empty():
+		_section("EVIDENCE LABELS")
+		for chip in chips:
+			if chip is Dictionary:
+				_body.add_child(_card([
+					_label("• %s · %s" % [String(chip.get("id", "")).to_upper(), String(chip.get("label", ""))], 13, CYAN),
+					_label(String(chip.get("meaning", "")), 14, IVORY),
+				]))
+	var data_cards: Array = data.get("data_cards", []) if data.get("data_cards", []) is Array else []
+	if not data_cards.is_empty():
+		_section("EARNED DATA CARDS")
+		for card in data_cards:
+			if not card is Dictionary:
+				continue
+			var mission_id := String(card.get("mission_id", ""))
+			var btn := _button("Data card · %s (%s)" % [String(card.get("title", "")), String(card.get("evidence", "Simulated"))])
+			btn.name = "JournalCard_" + mission_id
+			btn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			btn.pressed.connect(func(): open_panel("data_card", {"mission_id": mission_id}))
+			_body.add_child(btn)
+	var concepts: Array = data.get("concepts", []) if data.get("concepts", []) is Array else []
+	if not concepts.is_empty():
+		_section("CONCEPT CARDS")
+		for concept in concepts:
+			if not concept is Dictionary:
+				continue
+			var rows: Array = [
+				_label(String(concept.get("title", "")), 16, MUSTARD),
+				_label("• %s · %s · %s" % [String(concept.get("evidence_label", "Simulated")), String(concept.get("scene_title", "")), String(concept.get("date_label", ""))], 11, CYAN),
+				_label(String(concept.get("summary", "")), 14, IVORY),
+				_label("Predict: %s\nObserve: %s\nUse it next: %s" % [String(concept.get("predict", "")), String(concept.get("observe", "")), String(concept.get("transfer", ""))], 13, MUTED),
+			]
+			_body.add_child(_card(rows))
 
 ## Left tab column. The open tab is pressed and prefixed with "›", a cue that
 ## does not depend on colour; counts tell the player where new entries are.
@@ -920,7 +1005,33 @@ func _render_now_tab(data: Dictionary) -> void:
 				_label("• " + String(row.get("date_label", "")) + " · " + String(row.get("scene_title", "")), 12, CYAN),
 				_label(String(row.get("completed_text", "")), 15, IVORY),
 			]))
+	_render_chapter_pages(data.get("chapter_pages", []) if data.get("chapter_pages", []) is Array else [])
 	_render_hint_ladder(data.get("hints", {}) if data.get("hints", {}) is Dictionary else {})
+
+func _render_chapter_pages(pages: Array) -> void:
+	if pages.is_empty():
+		return
+	_section("CHAPTER PAGES")
+	for page in pages:
+		if not page is Dictionary:
+			continue
+		var rows: Array = [
+			_label(String(page.get("title", "")), 17, MUSTARD),
+			_label(String(page.get("subtitle", "")), 13, CYAN),
+			_label("WHAT WE DID", 11, MUSTARD),
+			_label(String(page.get("what_we_did", "")), 14, IVORY),
+			_label("WHAT WE LEARNED", 11, MUSTARD),
+		]
+		for item in page.get("what_we_learned", []):
+			rows.append(_label("• " + String(item), 13, IVORY))
+		var questions: Array = page.get("open_questions", []) if page.get("open_questions", []) is Array else []
+		if not questions.is_empty():
+			rows.append(_label("OPEN QUESTIONS CARRIED FORWARD", 11, MUSTARD))
+			for q in questions:
+				rows.append(_label("• " + String(q), 13, IVORY))
+		var card := _card(rows)
+		card.name = "ChapterPage_" + String(page.get("chapter_id", ""))
+		_body.add_child(card)
 
 ## What now? (doc 22 §2.3): H1 nudge, H2 direction, H3 worked example, one
 ## level per request. Hints never change an ending, a star or a reward.
@@ -977,7 +1088,8 @@ func _render_evidence_tab(data: Dictionary) -> void:
 ## type are words, never only colours; links name entries already shown.
 func _entry_card(entry: Dictionary) -> PanelContainer:
 	var rows: Array = []
-	var title := _label(String(entry.get("title", "")), 16, IVORY)
+	var is_superseded: bool = bool(entry.get("updated", false)) or bool(entry.get("superseded", false))
+	var title := _label(String(entry.get("title", "")), 16, MUTED if is_superseded else IVORY)
 	title.name = "Title"
 	rows.append(title)
 	var badge := "%s · %s" % [String(STATUS_BADGES.get(String(entry.get("status", "")), "• " + String(entry.get("status", "")))), String(entry.get("type", "")).replace("_", " ").to_upper()]
@@ -987,7 +1099,7 @@ func _entry_card(entry: Dictionary) -> PanelContainer:
 	rows.append(_label(badge, 11, CYAN))
 	var body := String(entry.get("body", ""))
 	if not body.is_empty():
-		rows.append(_label(body, 14, IVORY))
+		rows.append(_label(("— " + body + " —") if is_superseded else body, 14, MUTED if is_superseded else IVORY))
 	var meta: Array[String] = []
 	for key in ["source", "scene_title", "date_label"]:
 		var piece := String(entry.get(key, ""))
@@ -1002,8 +1114,8 @@ func _entry_card(entry: Dictionary) -> PanelContainer:
 			if link is Dictionary:
 				names.append("› " + String(link.get("title", "")))
 		rows.append(_label("Linked: " + "   ".join(names), 12, CYAN))
-	if bool(entry.get("updated", false)):
-		rows.append(_label("UPDATED · see " + String(entry.get("superseded_title", "")), 12, MUSTARD))
+	if is_superseded:
+		rows.append(_label("UPDATED · SUPERSEDED · see " + String(entry.get("superseded_title", "")), 12, MUSTARD))
 	return _card(rows)
 
 ## Growth Record (doc 24 §6.2): paired photographs or a paired conditions
