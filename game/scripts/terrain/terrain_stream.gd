@@ -24,13 +24,15 @@ var _material: Material
 var _loads: Node
 var _collision_cell := Vector2i(2147483647, 2147483647)
 var _rock_cell := Vector2i(2147483647, 2147483647)
+var _rock_queue: Array[Vector2i] = []  # wanted scatter chunks, built one per frame (each 3-6 ms)
 
-## Returns false without modifying an existing world for invalid region ids.
-func configure(region_id: String, start: Vector3 = Vector3.ZERO, clear_areas: Array = []) -> bool:
+## Returns false without modifying an existing world for invalid region ids. A caller that loaded the region's
+## detail heightfield off the main thread (TerrainSession) passes it as prepared.
+func configure(region_id: String, start: Vector3 = Vector3.ZERO, clear_areas: Array = [], prepared: TerrainHeightfield = null) -> bool:
 	var info := Region.tiles_info(region_id)
 	if info.is_empty() or not start.is_finite() or field != null or not is_inside_tree():
 		return false
-	var candidate := Heightfield.load_region(region_id, true)
+	var candidate := prepared if prepared != null else Heightfield.load_region(region_id, true)
 	if candidate == null:
 		return false
 	var ext := candidate.extent()
@@ -144,7 +146,16 @@ func _request_tile(id: String) -> void:
 		unavailable[path] = true
 		failures.append("Could not request terrain LOD: " + path)
 
+## True once every wanted rock chunk is built and no LOD replacement is in flight.
+func settled() -> bool:
+	return _rock_queue.is_empty() and pending.is_empty()
+
 func _process(_delta: float) -> void:
+	if not _rock_queue.is_empty():
+		var cell: Vector2i = _rock_queue.pop_front()
+		var group := Scatter.build_group(rock_records(cell))
+		add_child(group)
+		rocks[cell] = group
 	# Publish at most one completed replacement per frame. The old tile remains
 	# visible if decoding fails or stalls; never block the main thread on a job.
 	for id in pending.keys():
@@ -255,18 +266,17 @@ func _sync_rocks(center: Vector2i) -> void:
 		for x in range(center.x - ring, center.x + ring + 1):
 			var cell := Vector2i(x, z)
 			keep[cell] = true
-			if not rocks.has(cell):
-				var group := Scatter.build_group(rock_records(cell))
-				add_child(group)
-				rocks[cell] = group
+			if not rocks.has(cell) and not _rock_queue.has(cell):
+				_rock_queue.append(cell)
+	_rock_queue = _rock_queue.filter(func(cell: Vector2i) -> bool: return keep.has(cell))
 	for key in rocks.keys():
 		if not keep.has(key):
 			(rocks[key] as Node3D).queue_free()
 			rocks.erase(key)
 
-## Apply a bundled, dated Horizons row only. No guessed/clamped Sun or Earth.
-func lighting(scene_id: String) -> Node3D:
-	var row := Heightfield.scene_lighting(scene_id)
+## Apply a bundled, dated Horizons row only. No guessed/clamped Sun or Earth. segment picks a segment's own row.
+func lighting(scene_id: String, segment: String = "") -> Node3D:
+	var row := Heightfield.scene_lighting(scene_id, segment)
 	if field == null or row.is_empty() or row.site != field.site.id:
 		return null
 	var rig := Node3D.new()
@@ -298,4 +308,11 @@ func lighting(scene_id: String) -> Node3D:
 	sun.shadow_bias = 0.03
 	sun.basis = field.sun_light_basis(float(row.sun_az_deg), float(row.sun_el_deg))
 	rig.add_child(sun)
+	if String(row.get("sun_state", "")) == "dark":
+		# The row puts the Sun below the terrain horizon where the room stands (ART_BIBLE section 2: a permanently
+		# shadowed shelf is never sunlit). The far rim that hides it lies outside the heightfield, and a shadow-only
+		# wall standing in for it is culled from the near shadow splits, so the Sun goes out, as on the flat floor.
+		# ponytail: higher ground inside the region that the real Sun would still light stays dark too; add a
+		# cold_trap vista region with the true rims if a dark-row wide shot needs them.
+		sun.visible = false
 	return rig

@@ -75,6 +75,8 @@ func _run() -> void:
 	while not terrain.pending.is_empty() and Time.get_ticks_msec() < deadline:
 		await process_frame
 	check(terrain.pending.is_empty() and terrain.failures.is_empty(), "asynchronous LOD work finishes")
+	check(terrain.settled() and terrain.rocks.size() == 9, "queued rock chunks build one per frame and settle")
+	await _check_dark_row()
 	check(terrain.tiles.T11.lod == 0, "near central tile reaches authored finest LOD")
 	# Simulate closing the owning terrain immediately after a real request.
 	var drain := Stream.Loads.new()
@@ -96,6 +98,22 @@ func _run() -> void:
 	check(not is_instance_valid(terrain_drain), "terrain exit releases its loader")
 	print("TERRAIN STREAM RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
+
+## M1-36: a pre-loaded heightfield is adopted, and a dark row (the Sun below the terrain horizon) turns the Sun off:
+## the vault shelf under EX-CH04-S06 is never sunlit.
+func _check_dark_row() -> void:
+	var cold := Stream.new()
+	root.add_child(cold)
+	var field := Stream.Heightfield.load_region("cold_trap", true)
+	check(cold.configure("cold_trap", Vector3.ZERO, [], field) and cold.field == field, "configure adopts a prepared heightfield")
+	var rig := cold.lighting("EX-CH04-S06")
+	var row: Dictionary = rig.get_meta("ephemeris") if rig != null else {}
+	var sun := rig.get_node_or_null("Sun") as DirectionalLight3D if rig != null else null
+	check(String(row.get("sun_state", "")) == "dark" and float(row.sun_el_deg) < float(row.terrain_horizon_deg) and sun != null and not sun.visible, "a dark row's Sun stays below the terrain horizon: no sunlight on the shelf")
+	if rig != null:
+		rig.free()
+	cold.queue_free()
+	await process_frame
 
 func _capture(terrain: Node3D, row: Dictionary) -> void:
 	print("TERRAIN CAPTURE: rendering ground and vista")

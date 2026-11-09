@@ -591,7 +591,7 @@
    "reserved_for": "Tanvir"
   },
   {
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-34",
@@ -608,7 +608,7 @@
     "execution/SYS_12_PHYSICS_NAVIGATION.md"
    ],
    "note": "7 Nov (Sadman/claude): unblocked: the blocker named Sadman's M1-82, which landed on 7 Nov (01fdfbe; API in production/qa/evidence/M1-82_staging.md and game/resources/campaign/rooms/README.md). Back to atik/codex. 9 Nov: Sadman asked Claude to finish it; built on Atik's commits up to 9767014.",
-   "evidence": "",
+   "evidence": "game/scripts/terrain/terrain_stream.gd, game/scripts/campaign/terrain_session.gd, game/scripts/campaign/chapter1_campaign.gd, game/scripts/loading/load_preparation.gd, game/tools/test_terrain.gd (104/104 headless, 106/106 windowed PASS), game/tools/test_terrain_session.gd (45/45 PASS), game/tools/test_performance_runtime.gd (543/543 PASS), production/qa/perf/M1-36.md, production/qa/evidence/M1-36_tests.txt, production/qa/evidence/M1-36_forward_plus_ground.png, production/qa/evidence/M1-36_forward_plus_vista.png, production/qa/evidence/M1-36_gl_compatibility_ground.png, production/qa/evidence/M1-36_gl_compatibility_vista.png, production/qa/evidence/M1-36_LOC06_CH04S09_wide.png; run_tests.sh: 76/76 suites passed",
    "updated": "2026-11-09",
    "id": "M1-36",
    "milestone": "M1",
@@ -6777,6 +6777,26 @@
    "updated": "2026-11-09",
    "prompt": "M1-58 landed PayloadStackActivity (game/scripts/payload/stack_activity.gd) but left the UI hook to you, since you own these files and were editing them. Port the hook from the parked branch: git diff origin/main...origin/night/M1-58 -- game/scripts/ui/ (commit 0953cea). In mission_table_panel.gd: signal payload_requested(settings); when alarm_state().action == STACK, start_task() emits it (refuse with a reason if unconnected), task_step() refuses ('Carry a supply bundle to a bunk slot.'), _render_task shows the crates wording and a CARRY SUPPLIES · CHOOSE CONTROLS button (and the old-save FINISH WITH SAVED SUPPLIES path), and add refresh_payload_result() (the activity already calls it when present). In chapter1_campaign_hud.gd: connect payload_requested to a handler that, only in LOC-04, calls PayloadStackActivity.launch(runtime, settings) and keeps the reference (is_instance_valid checks); elsewhere show_status('Carry the supplies from the Safe Room response controls.'). Re-add to game/tools/test_payload.gd the check that Mission Table slot clicks cannot bypass physical delivery, and launch through table.start_task(). Acceptance: run game/tools/run_tests.sh and paste its last line; screenshot the shift-5 table with the carry button to production/qa/evidence/<task id>_*.png.",
    "reserved_for": "ramim",
+   "effort": 1
+  },
+  {
+   "id": "M1-113",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Prepare the suited cast's EVA bodies off the main thread",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/loading/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-09.",
+   "evidence": "",
+   "updated": "2026-11-09",
+   "prompt": "Found by M1-36 (9 Nov): the first EVA scene entered through the incremental loader (EX-CH04-S06 in LOC-10, test_performance_runtime) decodes CH_Kai_EVA.glb and CH_Rafi_EVA.glb on the main thread (LoadTrace glb_decode about 390-440 ms each, gait_clips about 900 ms each), a 2.8 s stall of the loading card. LoadPreparation.room_paths / prepare_scene_media do not include the outfit bodies that CampaignCrew.place picks for 'eva' staging. Add the scene's outfit GLBs (and their gait bake) to the threaded preparation so the entry stays under the 50 ms main-thread gate. Acceptance: in test_performance_runtime, enter EX-CH04-S06 from a cold cache under _start_monitor/_stop_monitor with no glb_decode step; run_tests.sh green.",
+   "reserved_for": "atik",
    "effort": 1
   }
  ],

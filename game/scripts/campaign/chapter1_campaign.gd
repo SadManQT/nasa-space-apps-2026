@@ -14,6 +14,7 @@ const RouteScript = preload("res://scripts/missions/chapter1_route.gd")
 const Chapter2RouteScript = preload("res://scripts/missions/chapter2_route.gd")
 const ExtendedRouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const RoomContract = preload("res://scripts/world/room_contract.gd")
+const TerrainSessionScript = preload("res://scripts/campaign/terrain_session.gd")
 const CompanionRosterScript = preload("res://scripts/companions/companion_roster.gd")
 const CutsceneRuntimeScript = preload("res://scripts/cutscenes/cutscene_runtime.gd")
 const AudioRuntimeScript = preload("res://scripts/audio/audio_runtime.gd")
@@ -41,6 +42,8 @@ var hud: Chapter1CampaignHUD
 var _room: CampaignRoom
 var _crew: CampaignCrew
 var _player: PlayerController
+## M1-36: the LOLA terrain under an exterior whose placement and lighting are ready (RoomContract.terrain_lighting).
+var _terrain: Node3D
 var _startup_error := ""
 var _ui_paused := false
 var _exit_without_save_armed := false
@@ -365,6 +368,8 @@ func _physics_process(_delta: float) -> void:
 		return
 	var selected := nearby_target()
 	_room.set_focus_target(String(selected.get("world_focus_id", "")))
+	if _terrain != null and _player != null:
+		_terrain.move_focus(_terrain.to_local(_player.global_position))
 	if hud != null:
 		hud.show_nearby_forecast(String(selected.get("target_id", "")))
 
@@ -600,7 +605,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _refresh_world() -> void:
 	if incremental_loading:
-		if not loading and preparation.room_ready(route.current_room_id()):
+		if not loading and preparation.room_ready(route.current_room_id()) and not _terrain_wanted():
 			_refresh_world_now()
 			_on_scene_ready()
 			_prefetch_next_room()
@@ -617,6 +622,8 @@ func _refresh_world_now(incremental_assets: bool = false) -> void:
 	var stamp := LoadTrace.begin()
 	if incremental_loading:
 		preparation.activate_room(route.current_room_id())
+	if not incremental_assets:
+		_clear_terrain()  # only the incremental entry prepares terrain; this path builds the flat fallback floor
 	if _room != null and is_instance_valid(_room):
 		remove_child(_room)
 		_room.queue_free()
@@ -629,6 +636,7 @@ func _refresh_world_now(incremental_assets: bool = false) -> void:
 		var scene := preparation.resources[room_path] as PackedScene if incremental_loading else load(room_path) as PackedScene
 		_room = scene.instantiate() as CampaignRoom
 	_room.load_approved_assets = not incremental_assets
+	_room.terrain_ground = _terrain != null
 	add_child(_room)
 	if incremental_assets:
 		_room.load_approved_assets = true
@@ -652,6 +660,8 @@ func _place_crew() -> void:
 		_crew.name = "Crew"
 		add_child(_crew)
 	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]))
+	if _player != null and _player.follow_camera != null and _player.follow_camera.camera != null:
+		_player.follow_camera.camera.far = 30000.0 if _terrain != null else 4000.0  # kilometre views on the terrain
 	_crew.set_paused(_ui_paused)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_sync_world_boundaries()
@@ -662,6 +672,7 @@ func _refresh_world_incremental() -> void:
 	if not await preparation.prepare_room(route.current_room_id()):
 		_fail_startup(preparation.failed)
 		return
+	await _prepare_terrain()
 	_refresh_world_now(true)
 	await get_tree().process_frame
 	await _room.load_assets_incremental()
@@ -670,6 +681,29 @@ func _refresh_world_incremental() -> void:
 	# First real room draw (including its lighting/layout variants) is covered.
 	if DisplayServer.get_name() != "headless":
 		await RenderingServer.frame_post_draw
+
+func _terrain_wanted() -> bool:
+	return incremental_loading and bool(RoomContract.terrain_lighting(route.current_room_id(), route.current_scene_id()).get("ready", false))
+
+func _clear_terrain() -> void:
+	if _terrain != null:
+		remove_child(_terrain)
+		_terrain.queue_free()
+		_terrain = null
+
+## Behind the loading card: a ready exterior stands on the LOLA terrain with its dated Sun and Earth; anything the
+## session refuses keeps the room's flat staging floor (never a guessed sky).
+func _prepare_terrain() -> void:
+	_clear_terrain()
+	if not _terrain_wanted():
+		return
+	_terrain = TerrainSessionScript.new()
+	_terrain.name = "Terrain"
+	add_child(_terrain)
+	var result: Dictionary = await _terrain.prepare_incremental(route.current_room_id(), route.current_scene_id())
+	if not bool(result.get("enabled", false)):
+		push_warning("Terrain kept flat for %s: %s" % [route.current_room_id(), String(result.get("reason", ""))])
+		_clear_terrain()
 
 func _rebuild_transition() -> void:
 	var was_paused := _ui_paused

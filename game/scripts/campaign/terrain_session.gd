@@ -5,13 +5,45 @@ extends Node3D
 const Contract = preload("res://scripts/world/room_contract.gd")
 const Stream = preload("res://scripts/terrain/terrain_stream.gd")
 const EarthSky = preload("res://assets/environment/terrain/earth_sky.gd")
+const Heightfield = preload("res://assets/environment/terrain/lola/terrain_heightfield.gd")
+const Region = preload("res://assets/environment/terrain/lola/lola_region.gd")
 var stream: Node3D
 var origin := Vector3.ZERO
 var placement: Dictionary = {}
 var earth_presented := false
 var configured := false
 
-func prepare(room_id: String, scene_id: String) -> Dictionary:
+## prepare() behind a loading card without stalling it: the detail heightfield (40-165 ms) loads on a worker thread
+## and the coarse tile GLBs through threaded requests; then configure (about 25 ms) runs on one frame and the rock
+## chunks build one per frame until the stream is settled.
+func prepare_incremental(room_id: String, scene_id: String) -> Dictionary:
+	var place := Contract.terrain(room_id)
+	if configured or not is_inside_tree() or not place.get("omit_staging_floor", false):
+		return prepare(room_id, scene_id)
+	var region := String(place.region_id)
+	var job := {}
+	var task := WorkerThreadPool.add_task(func() -> void: job.field = Heightfield.load_region(region, true))
+	var held: Array = []
+	var paths: Array = []
+	for entry in Region.tiles_info(region).get("tiles", []):
+		if not entry.lods.is_empty() and ResourceLoader.load_threaded_request(String(entry.lods[-1].path)) == OK:
+			paths.append(String(entry.lods[-1].path))
+	while not WorkerThreadPool.is_task_completed(task):
+		await get_tree().process_frame
+	WorkerThreadPool.wait_for_task_completion(task)
+	for path in paths:
+		while ResourceLoader.load_threaded_get_status(path) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+			await get_tree().process_frame
+		held.append(ResourceLoader.load_threaded_get(path))  # held so configure's load() hits the cache
+	if not is_inside_tree():
+		return {"accepted": false, "reason": "The terrain session left the tree while it was loading."}
+	var result := prepare(room_id, scene_id, job.get("field"))
+	while result.get("enabled", false) and is_instance_valid(stream) and not stream.settled():
+		await get_tree().process_frame
+	held.clear()
+	return result
+
+func prepare(room_id: String, scene_id: String, field: TerrainHeightfield = null) -> Dictionary:
 	if configured or not is_inside_tree():
 		return {"accepted": false, "reason": "Terrain preparation needs a fresh campaign terrain session in the scene tree."}
 	placement = Contract.terrain(room_id)
@@ -24,7 +56,7 @@ func prepare(room_id: String, scene_id: String) -> Dictionary:
 	stream.name = "SurveyedTerrain"
 	stream.position = -origin
 	add_child(stream)
-	if not stream.configure(String(placement.region_id), origin + start, clear_areas):
+	if not stream.configure(String(placement.region_id), origin + start, clear_areas, field):
 		return _abort("The surveyed terrain could not be prepared.")
 	var rig: Node3D = stream.lighting(scene_id)
 	if rig == null:

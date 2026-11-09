@@ -206,6 +206,30 @@ func _test_loading_transitions() -> void:
 	for step in LoadTrace.steps:
 		sync_decode = sync_decode or String(step.step).begins_with("glb_decode:")
 	_check(not sync_decode, "production transitions never escape to synchronous GLB decode")
+	# M1-36: a ready exterior (LOC-10, EX-CH04-S06 under its verified work lights) enters on the LOLA terrain
+	# through the same card, its heightfield and tiles prepared off the main thread.
+	while main.preparation._room_busy:
+		await process_frame
+	# The suited cast still decodes its EVA GLBs on the main thread (board M1-113), so warm them with S06 first and
+	# measure the terrain on the next scene in the same room, which prepares its terrain again from nothing.
+	campaign._start_extended("EX-CH04-S06")
+	await campaign.wait_loading()
+	while main.preparation._room_busy:
+		await process_frame
+	var traced := LoadTrace.steps.size()
+	_start_monitor()
+	campaign._start_extended("EX-CH04-S07")
+	await campaign.wait_loading()
+	await process_frame
+	_stop_monitor("production terrain exterior entry")
+	_check(campaign._room.room_id == "LOC-10" and campaign._room.on_terrain() and campaign._terrain != null, "LOC-10 stands on the streamed LOLA terrain")
+	_check(campaign._terrain != null and campaign._terrain.stream.settled() and campaign._terrain.stream.rocks.size() > 0, "terrain rocks and LOD settled before the card closes")
+	var ground := PhysicsRayQueryParameters3D.create(campaign._player.global_position + Vector3.UP * 5.0, campaign._player.global_position + Vector3.DOWN * 5.0, 1)
+	_check(not campaign._player.get_world_3d().direct_space_state.intersect_ray(ground).is_empty(), "player stands over terrain collision")
+	var terrain_sync := false
+	for step in LoadTrace.steps.slice(traced):
+		terrain_sync = terrain_sync or String(step.step).begins_with("glb_decode:")
+	_check(not terrain_sync, "terrain exterior entry never escapes to synchronous GLB decode")
 	LoadTrace.enabled = false
 	main.free()
 	for suffix in ["", ".bak", ".tmp"]:
