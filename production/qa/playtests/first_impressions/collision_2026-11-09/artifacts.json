@@ -1,0 +1,129 @@
+{
+  "artifacts": [
+    {
+      "file": ".gitattributes",
+      "bytes": 78,
+      "sha256": "5971a03cc5717a75249e98e54618e5ab2b738e56bef73373b5935aff41cbe4a1"
+    },
+    {
+      "file": "baseline_red/candidate_trace.json",
+      "bytes": 2914,
+      "sha256": "0dd01749876cc6f89d2077aeb85fb50690e390d416e9842ce2a801fa9689ec20"
+    },
+    {
+      "file": "baseline_red/run.json",
+      "bytes": 757,
+      "sha256": "7fb28877db14979f1863f896b421b4b93bb28109cb27906ba4cc53cda6a51699"
+    },
+    {
+      "file": "baseline_red/run.txt",
+      "bytes": 8353,
+      "sha256": "9340fc108c5f5f9a9b1ed123d6f192f704a77216a73a315830c6e24e711323d1"
+    },
+    {
+      "file": "candidate_green/candidate_trace.json",
+      "bytes": 2631,
+      "sha256": "641e79c0ca0bf086194c2910a3047a87d7107bc97e359b52413423fec93b2735"
+    },
+    {
+      "file": "candidate_green/run.json",
+      "bytes": 787,
+      "sha256": "21d5182c31b5cb733f74637dfa950318a532c4dbc5dd3ddfc2d24faecf61f689"
+    },
+    {
+      "file": "candidate_green/run.txt",
+      "bytes": 8246,
+      "sha256": "623081178069afb3dbb464bf0ead67fad6a841cb99519d3d3d16d18ae542d1b1"
+    },
+    {
+      "file": "capture.txt",
+      "bytes": 8506,
+      "sha256": "0046319d91ca52eca09bc0723abbcbf9a932219f4c579e74c05df6896c546938"
+    },
+    {
+      "file": "capture_collision.gd",
+      "bytes": 3806,
+      "sha256": "223caa6a6db2d45121027e49deb4a925b8cb614133b9170415894e62df2ee954"
+    },
+    {
+      "file": "capture_initial_parse_error.json",
+      "bytes": 780,
+      "sha256": "2ec1d4f6dce2a78085315dad4372742488f69650811a4da279fc1c78c24502b1"
+    },
+    {
+      "file": "capture_initial_parse_error.txt",
+      "bytes": 777,
+      "sha256": "5f2f5fa09313a7db051ee9b2072ce2848e99f9c2c9cb6c8ac29bb7732ea209fe"
+    },
+    {
+      "file": "capture_run.json",
+      "bytes": 1048,
+      "sha256": "80ec508e8c4e148db015ff30c911458baf93825525ef5213da0d18dc5d43d235"
+    },
+    {
+      "file": "garden_probe.json",
+      "bytes": 181417,
+      "sha256": "e4d9c14af0ab293e5efd600d257762e3b3faffde831f927164d7bf72828d5207"
+    },
+    {
+      "file": "garden_probe.txt",
+      "bytes": 8215,
+      "sha256": "df785b8cb5f636c43896fc9faedb02aa4f10dc799fc87cd1327fd8c82fa90f44"
+    },
+    {
+      "file": "garden_probe_run.json",
+      "bytes": 1322,
+      "sha256": "1199361bc3fd65121ce995e303941fe15c1df28a6b93a73a4ba994406d3cc987"
+    },
+    {
+      "file": "habitat_rooms/setup.log",
+      "bytes": 41421,
+      "sha256": "57ec7c61a62a10687a5fdced9e57115d602f89c8ffff6738e75fe880fa62e03f"
+    },
+    {
+      "file": "habitat_rooms/test_habitat_rooms.gd.log",
+      "bytes": 7039,
+      "sha256": "849ebb53cae346760bae6399fa96c9ad7a22a7573d0454d77e4c11e35f00dde6"
+    },
+    {
+      "file": "habitat_run.json",
+      "bytes": 276,
+      "sha256": "17f2b4b9f967ed89fc6ad5f987f5d5e7096cc3426c96cd6e193d044d004c3b45"
+    },
+    {
+      "file": "habitat_runner.txt",
+      "bytes": 106,
+      "sha256": "87cd1e231ea0cc67a3c91f8beba166d17fd1fba0ca49a12ab44740760dbb03f9"
+    },
+    {
+      "file": "M1-65_collision_current.png",
+      "bytes": 1431884,
+      "sha256": "4e2eeeead85d45998adb625216462f44cf251000abf6b10fc12dd6f125026f03"
+    },
+    {
+      "file": "M1-65_collision_proposed.png",
+      "bytes": 1430373,
+      "sha256": "b743c0570cb9e39fb2ab1ab9bb510c8e1ae56530829c488bbbfd76f4aab64e78"
+    },
+    {
+      "file": "probe_garden.gd",
+      "bytes": 5076,
+      "sha256": "af4e14a013169dd121ffb33567c9c3bbb14bb3684afeb3ec6f8a9ce413bf0987"
+    },
+    {
+      "file": "proposed_LOC-03_collision.patch",
+      "bytes": 859,
+      "sha256": "bd182a29f9fed1ac87228c4af11cee9a3ebc4487a8e73db59446d01f9cbbbf30"
+    },
+    {
+      "file": "proposed_obstacles.json",
+      "bytes": 436,
+      "sha256": "cf4cac79ad95859165a01b4478688979663ce3af6663a98e96770410cdf9c0cb"
+    },
+    {
+      "file": "verify_candidate.gd",
+      "bytes": 2741,
+      "sha256": "78169015a3123a7ab83dff4d64ba7eb547e9cdbe0810e630cc5796d2ae85ac3c"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "D:/Godot/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe",
+    "--path",
+    "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\game",
+    "--rendering-method",
+    "gl_compatibility",
+    "--script",
+    "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\production\\qa\\playtests\\first_impressions\\collision_2026-11-09\\capture_collision.gd"
+  ],
+  "exit_code": 1,
+  "duration_seconds": 1.028,
+  "markers": [],
+  "capture_output_passed": false,
+  "captures": [],
+  "script_sha256": "e56b0f23b9dcaaf12afcf423df824a8e3d4a6eafa12d3a70422fc9b5b26a379f",
+  "fix_for_retry": "Add explicit String type to base directory variable; behavior unchanged."
+}

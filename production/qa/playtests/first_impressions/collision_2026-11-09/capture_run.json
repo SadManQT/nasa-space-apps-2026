@@ -1,0 +1,28 @@
+{
+  "command": [
+    "D:/Godot/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe",
+    "--path",
+    "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\game",
+    "--rendering-method",
+    "gl_compatibility",
+    "--script",
+    "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\production\\qa\\playtests\\first_impressions\\collision_2026-11-09\\capture_collision.gd"
+  ],
+  "exit_code": 0,
+  "duration_seconds": 4.27,
+  "markers": [
+    "GARDEN COLLISION CAPTURE RESULT: PASS (2 checks, 0 failures)"
+  ],
+  "script_sha256": "223caa6a6db2d45121027e49deb4a925b8cb614133b9170415894e62df2ee954",
+  "capture_output_passed": true,
+  "captures": [
+    {
+      "file": "M1-65_collision_current.png",
+      "sha256": "4e2eeeead85d45998adb625216462f44cf251000abf6b10fc12dd6f125026f03"
+    },
+    {
+      "file": "M1-65_collision_proposed.png",
+      "sha256": "b743c0570cb9e39fb2ab1ab9bb510c8e1ae56530829c488bbbfd76f4aab64e78"
+    }
+  ]
+}

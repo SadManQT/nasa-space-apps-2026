@@ -1,0 +1,70 @@
+--- a/game/resources/campaign/rooms/LOC-03.json
++++ b/game/resources/campaign/rooms/LOC-03.json
+@@ -522,8 +522,34 @@
+    "id": "tara_bay",
+    "position": [
+     -3.2,
++    0.4,
++    -1.5
++   ],
++   "size": [
++    1.7,
+     0.8,
++    1.1
++   ]
++  },
++  {
++   "id": "tara_enclosure",
++   "position": [
++    -3.2,
++    1.1,
+     -1.5
++   ],
++   "size": [
++    0.8,
++    0.8,
++    0.8
++   ]
++  },
++  {
++   "id": "care_bench",
++   "position": [
++    3.5,
++    0.8,
++    -1.7
+    ],
+    "size": [
+     1.7,
+@@ -532,19 +558,6 @@
+    ]
+   },
+   {
+-   "id": "care_bench",
+-   "position": [
+-    3.5,
+-    0.8,
+-    -1.7
+-   ],
+-   "size": [
+-    1.7,
+-    1.6,
+-    1.1
+-   ]
+-  },
+-  {
+    "id": "alo_cassette",
+    "position": [
+     2.4,
+@@ -565,9 +578,9 @@
+     1.3
+    ],
+    "size": [
+-    0.7,
+-    2,
+-    1.7
++    0.73,
++    2.01,
++    1.46
+    ]
+   },
+   {

@@ -2,6 +2,8 @@
 
 **Status: partial human evidence; automated dry-zero retest added 9 November 2026.** Tanvir self-reported approximately 10 minutes on 8 November. On 9 November he supplied a screenshot and reported E does not advance dry-zero. See [T01](T01_2026-11-08.md) and [the historical blocker](T01_2026-11-09_blocker.md). T01's actual build/settings, exact timing and original keypress/pose remain unconfirmed. The [later automated retest](retest_2026-11-09/README.md) verifies the delivered panel flow under Compatibility; Forward+ exit timed out. It supplies no new human session. No fresh-player session has been reported.
 
+T02 screenshot/report: Garden Seed Archive/Tara, goal Review how the night ended; intended direction back toward the room center. See [collision investigation](collision_2026-11-09/README.md). Exact input/position/build and additional duration remain unconfirmed; this does not establish a complete no-help session or fresh-player evidence.
+
 Follow-up: Tanvir confirms that the intro played and he watched it; the sitting incident involved Mei being supposed to place the zero on the table. See T01 for the dry-zero calibration source lead and its limits.
 
 Use the same current-main build for Tanvir's run and 1–2 friends who have never seen the game. Record the runtime commit, renderer, resolution and input device. Use a separate empty test save; preserve existing expeditions. The automated screenshots in report.md are reference states, not substitutes for screenshots of these sessions.
