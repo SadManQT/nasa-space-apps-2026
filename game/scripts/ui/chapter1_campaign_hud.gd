@@ -16,11 +16,15 @@ const MISSION_TABLE_SCENE: PackedScene = preload("res://scenes/ui/mission_table_
 const P01_SCENE: PackedScene = preload("res://scenes/ui/p01_panel.tscn")
 const Debrief = preload("res://scripts/debrief/chapter1_debrief.gd")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
+const CommsServiceScript = preload("res://scripts/comms/comms_service.gd")
+const CommsPanelScript = preload("res://scripts/ui/comms_panel.gd")
 
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
 var mission_table: MissionTablePanel
 var p01_panel: P01Panel
+var comms_service: RefCounted
+var comms_panel: Control
 var outpost: OutpostStatus
 var payload_activity: PayloadStackActivity
 
@@ -144,6 +148,9 @@ func setup(value: Chapter1Campaign) -> void:
 	panels.set_panel_builder("what_now", _build_what_now)
 	panels.set_pause_actions([
 		{"label": String(_words.get("what_now", "What now")), "name": "WhatNow", "action": func() -> void: panels.open_panel("what_now")},
+		{"label": String(_words.get("messages", "Messages")), "name": "Messages", "action": func() -> void:
+			panels.close_panel()
+			open_messages()},
 		{"label": String(_words.get("journal", "Journal")), "name": "Journal", "action": _on_journal_pressed},
 		{"label": String(_words.get("settings", "Settings")), "name": "Settings", "action": func() -> void: panels.open_panel("settings_accessibility")},
 		{"label": String(_words.get("save", "Save")), "name": "Save", "action": func() -> void:
@@ -154,6 +161,16 @@ func setup(value: Chapter1Campaign) -> void:
 			_on_exit_pressed()},
 	])
 	panels.set_content_top(float(UiDesign.px(64, get_viewport_rect().size.y)))
+	comms_service = CommsServiceScript.new()
+	var director_ref = runtime.get("director") if runtime != null else null
+	var content_ref: Dictionary = runtime.content if runtime != null and runtime.get("content") is Dictionary else {}
+	comms_service.setup(director_ref, content_ref, false)
+	comms_panel = CommsPanelScript.new()
+	comms_panel.name = "CommsPanel"
+	add_child(comms_panel)
+	comms_panel.bind_service(comms_service)
+	comms_panel.opened.connect(func() -> void: _on_panel_opened("comms"))
+	comms_panel.closed.connect(func() -> void: _on_panel_closed("comms"))
 	mission_table = MISSION_TABLE_SCENE.instantiate() as MissionTablePanel
 	add_child(mission_table)
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
@@ -205,11 +222,13 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 		_auto_timer = 0.0
 	_dialogue_index = _first_unacknowledged_line()
 	_decision_review.visible = next_scene.begins_with("EX-CH01-")
+	_sync_messages()
 	_render_caption()
 	_build_targets()
 	_refresh_query()
 	apply_accessibility()
 	_offer_resume_card()
+	_flush_message_toasts()
 
 ## After any runtime action: refresh what changed and answer back with one line.
 func refresh_after_action(result: Dictionary) -> void:
@@ -218,6 +237,7 @@ func refresh_after_action(result: Dictionary) -> void:
 	var before := _done_ids.duplicate()
 	if runtime != null:
 		_dialogue_index = _first_unacknowledged_line()
+		_sync_messages()
 		_render_caption()
 		_build_targets()
 		_refresh_query()
@@ -610,6 +630,10 @@ func _goal_for_state(current: Dictionary, gate: Dictionary, complete: bool) -> D
 		var next: Dictionary = scene_text.get("next", {})
 		info.goal = String(next.get("goal", String(_words.get("continue", "Continue"))))
 		info.why = String(next.get("why", ""))
+		if info.why.is_empty() and comms_service != null:
+			var goal_msg: Dictionary = comms_service.latest_goal_message()
+			if not goal_msg.is_empty():
+				info.why = String(goal_msg.get("subject", ""))
 		return info
 	info.goal = "Finish the jobs here"
 	return info
@@ -857,6 +881,7 @@ func _on_next_line() -> void:
 	if bool(result.get("accepted", false)):
 		_dialogue_index = _first_unacknowledged_line()
 	_render_caption()
+	_flush_message_toasts()
 
 func _on_auto_toggled(pressed: bool) -> void:
 	_auto_on = pressed
@@ -870,6 +895,47 @@ func _on_journal_pressed() -> void:
 	if runtime != null and panels != null:
 		_refresh_query()
 		panels.open_journal("now")
+
+## Opens the full-screen Messages inbox (5 threads: Crew, Commander, Earth, Academy, Archive).
+func open_messages(preferred_thread: String = "", preferred_message_id: String = "") -> bool:
+	if runtime == null or comms_panel == null:
+		return false
+	if runtime.is_cutscene_active() or (mission_table != null and mission_table.is_open()) or (p01_panel != null and p01_panel.is_open()):
+		return false
+	if panels != null and not panels.active_panel().is_empty():
+		return false
+	_sync_messages()
+	comms_panel.open_inbox(preferred_thread, preferred_message_id)
+	return true
+
+func _sync_messages() -> void:
+	if comms_service == null or runtime == null:
+		return
+	var extra := {}
+	if runtime.get("route") != null and runtime.route.has_method("gate_status"):
+		var gate: Dictionary = runtime.route.gate_status()
+		extra["physical_flags"] = gate.get("physical_flags", {})
+	comms_service.sync_from_director(true, extra)
+	if comms_panel != null and comms_panel.is_open():
+		comms_panel.refresh_view()
+
+func _is_dialogue_active() -> bool:
+	if _dialogue_bar != null and bool(_dialogue_bar.get_meta("lla_shown", _dialogue_bar.visible)):
+		return true
+	if runtime != null and _first_unacknowledged_line() < runtime.current_dialogue().size():
+		return true
+	return false
+
+func _flush_message_toasts() -> void:
+	if comms_service == null or not bool(comms_service.has_pending_toasts()):
+		return
+	if _chrome_hidden or _is_dialogue_active():
+		return
+	if _toast_timer > 0.0 and _toast != null and _toast.visible:
+		return
+	var next_toast: Dictionary = comms_service.pop_toast()
+	if not next_toast.is_empty():
+		show_status(String(next_toast.get("text", "")))
 
 ## Opens the "Previously at Aurora" resume card (doc 24 §6.6) over the live
 ## scene. Returns false while another panel, the Mission Table or a film is up.
@@ -920,7 +986,9 @@ func apply_accessibility() -> void:
 	_caption_line.visible = captions
 	_caption_count.visible = captions
 	var scale := 1.5 if bool(settings.get("large_text", false)) else 1.0
-	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, p01_panel])
+	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, p01_panel, comms_panel])
+	if comms_panel != null:
+		comms_panel.set_text_scale(bool(settings.get("large_text", false)))
 	if runtime.audio != null:
 		runtime.audio.set_caption_layout(_dialogue_bar, settings)
 	if outpost != null:
@@ -940,12 +1008,13 @@ func _on_panel_opened(_panel_id: String) -> void:
 func _on_panel_closed(_panel_id: String) -> void:
 	if p01_panel != null and p01_panel.is_open():
 		p01_panel.set_covered(not panels.active_panel().is_empty() or panels.hint_player.is_open())
-	var reading := not panels.active_panel().is_empty() or mission_table.is_open() or (p01_panel != null and p01_panel.is_open()) or panels.hint_player.is_open()
+	var reading: bool = not panels.active_panel().is_empty() or mission_table.is_open() or (p01_panel != null and p01_panel.is_open()) or (comms_panel != null and bool(comms_panel.is_open())) or panels.hint_player.is_open()
 	runtime.set_ui_paused(reading or _reading_was_paused)
 	_modal_reading = reading
 	_set_modal_buttons(reading)
 	_set_chrome_hidden(reading)
 	_render_caption()
+	_flush_message_toasts()
 
 ## Hides the flat HUD while a panel or instrument has the screen (doc 25 §2.2).
 func _set_chrome_hidden(hidden: bool) -> void:
@@ -968,7 +1037,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_modal_button_states.clear()
 		return
 	for child in node.get_children():
-		if child == panels or child == mission_table or child == p01_panel or child == _what_now_home:
+		if child == panels or child == mission_table or child == p01_panel or child == comms_panel or child == _what_now_home:
 			continue
 		if child is BaseButton:
 			if not _modal_button_states.has(child):
@@ -980,10 +1049,17 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	var key := (event as InputEventKey).physical_keycode
-	var free := panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (p01_panel == null or not p01_panel.is_open())
+	var free: bool = panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (p01_panel == null or not p01_panel.is_open()) and (comms_panel == null or not bool(comms_panel.is_open()))
 	if key == KEY_ESCAPE and free:
 		panels.open_panel("pause")
 		get_viewport().set_input_as_handled()
+	elif key == KEY_M:
+		if free:
+			open_messages()
+			get_viewport().set_input_as_handled()
+		elif comms_panel != null and bool(comms_panel.is_open()):
+			comms_panel.close_inbox()
+			get_viewport().set_input_as_handled()
 	elif key == KEY_H:
 		if free:
 			panels.open_panel("what_now")
@@ -1009,6 +1085,8 @@ func _process(delta: float) -> void:
 		_toast_timer -= delta
 		if _toast_timer <= 0.0:
 			_fade(_toast, false)
+	if (_toast_timer <= 0.0 or not _toast.visible) and comms_service != null and comms_service.has_pending_toasts():
+		_flush_message_toasts()
 	if _auto_on and _dialogue_bar.visible and not _next_line.disabled and not _chrome_hidden and not runtime.is_cutscene_active():
 		_auto_timer -= delta
 		if _auto_timer <= 0.0:

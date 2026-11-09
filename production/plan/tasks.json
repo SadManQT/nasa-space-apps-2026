@@ -4292,7 +4292,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Messages: inbox, arrival toasts, unlock triggers and the message validator",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M1-54"
@@ -4310,7 +4310,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).\n6 Nov (Sadman/claude): content is arriving before the system: game/resources/campaign/content/messages/ch01.json (33 messages) now, ch05-ch08 next. Run check_messages.py on them when it exists and file any fix as a task for Sadman. 9Nov: stale missing-source blocker cleared after M69/M99 bridge and real P01 delivery. Full83/84 retainsM68; inbox can start independently against published API. No inbox source saved yet; private design prepared. Claim/push before implementation.",
-   "evidence": "",
+   "evidence": "CommsService (game/scripts/comms/comms_service.gd), CommsPanel (game/scripts/ui/comms_panel.gd), Chapter1CampaignHUD integration (M key + Pause -> Messages + arrival toast suppression during dialogue + goal handoff), check_messages.py validator PASS (0 errors), test_comms.gd PASS (42/42), test_route_messages.gd PASS (31/31), test_director_message_metadata.gd PASS (76/76), test_player_text.gd PASS (13060/13060), screenshots production/qa/evidence/M1-56_inbox.png and M1-56_toast.png",
    "updated": "2026-11-09",
    "prompt": "Goal: every scene connects to the next with text messages (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §5; joins in game-design/24_NARRATIVE_REVISION.md §2.9).\nDo: a Messages system: threads (crew, commander, earth, academy, archive), unread counts, a toast on arrival (never during\ndialogue), key M and the pause menu entry, messages flagged goal feed the goal card. Load every\ngame/resources/campaign/content/messages/ch*.json (schema in §5) and unlock on scene_enter / scene_exit / mission_done /\njob_done / found; record read state in the save. Write production/tools/check_messages.py (stdlib): parses game-design/24_NARRATIVE_REVISION.md §2.9 and fails\nunless every join present in the loaded chapter files has ≥ 2 messages, IDs are unique, unlock scene IDs exist in\nfull-game-story/story-data.json, bodies are ≤ 60 words, text is English (no U+0980–U+09FF), and \"Noor\"/\"Rahman\" never unlock\nbefore EX-CH05-S10. Add a two-message sample ch00 fixture for tests only. game/tools/test_comms.gd covers load, unlock, toast,\ngoal handoff and save.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",

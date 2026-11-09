@@ -1,0 +1,33 @@
+{
+  "chapter": 0,
+  "messages": [
+    {
+      "id": "MSG-CH00-001",
+      "thread": "commander",
+      "sender": "Commander",
+      "story_time": "2046-04-11T05:50Z",
+      "unlock": {
+        "on": "scene_enter",
+        "id": "EX-CH01-S01"
+      },
+      "join": "CH00 TEST",
+      "subject": "Arrival Check at the Airlock",
+      "body": "Step inside the airlock, steady your breathing, and check your wrist display before reporting to the atrium.",
+      "goal": true
+    },
+    {
+      "id": "MSG-CH00-002",
+      "thread": "crew",
+      "sender": "Nadia",
+      "story_time": "2046-04-11T05:55Z",
+      "unlock": {
+        "on": "scene_exit",
+        "id": "EX-CH01-S01"
+      },
+      "join": "CH00 TEST",
+      "subject": "Bunk Lamp Left On",
+      "body": "I left the warm lamp on by the third bunk so you can find your locker without waking the late shift.",
+      "goal": false
+    }
+  ]
+}
