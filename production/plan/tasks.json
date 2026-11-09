@@ -4590,7 +4590,9 @@
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-53*",
     "production/qa/perf/",
-    "game/tools/test_loading.gd.uid"
+    "game/tools/test_loading.gd.uid",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
    ],
    "edit_files": [
     "game/scripts/loading/preparation_watchdog.gd",
@@ -4600,7 +4602,9 @@
     "game/scripts/campaign/chapter1_campaign.gd",
     "game/tools/test_loading.gd",
     "game/tools/test_loading.gd.uid",
-    "production/qa/perf/atik_batch_2026-11-10/M1-53.md"
+    "production/qa/perf/atik_batch_2026-11-10/M1-53.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
    ]
   },
   {
