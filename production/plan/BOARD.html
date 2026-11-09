@@ -211,12 +211,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-120">M1-120</a> Investigate measured Windows EVA scene generation over the loading budget <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">Sliced GLTFAnimation conversion in AssetGeometry.prepare() into 8-clip batches so glb_generate_scene on EVA/cast GLBs drops from ~20 ms (M4…</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">10 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">13 blocked</span><span class="chip s-todo">23 todo</span></div><div class="bar"><i style="width:20%"></i></div>
-<details open><summary>Working now (3)</summary><ul>
-<li><a class="id" href="#M1-74">M1-74</a> Stop the &#x27;no meta lla_fade&#x27; error in the HUD fade <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">claimed by Ramim/codex on 2026-11-09</div></li>
-<li><a class="id" href="#M1-77">M1-77</a> Avoid missing fade metadata errors on the first campaign caption <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">claimed by Ramim/codex on 2026-11-09</div></li>
-<li><a class="id" href="#M4-11">M4-11</a> Main TitleStage WorldEnvironment toggle &amp; HUD forecast cache across camera turns <span class="chip ">any</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-09</div></li>
-</ul></details>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">UI/UX and player-facing systems lead · 30% share</div><div class="counts"><span class="chip s-done">13 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">13 blocked</span><span class="chip s-todo">23 todo</span></div><div class="bar"><i style="width:27%"></i></div>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M3-2P">M3-2P</a> Chapter 2 puzzles P-03 and P-04 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-3P">M3-3P</a> Chapter 3 puzzles P-05 and P-06 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span></li>
@@ -259,14 +254,17 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-69">M3-69</a> The junior-astronaut curriculum: competencies, the Academy manual and &#x27;what you learned&#x27; debriefs <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-72">M3-72</a> Chapter select, mission list, progress and achievements screens <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
-<details><summary>Done (10)</summary><ul>
+<details><summary>Done (13)</summary><ul>
 <li><a class="id" href="#M1-56">M1-56</a> Messages: inbox, arrival toasts, unlock triggers and the message validator <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">CommsService (game/scripts/comms/comms_service.gd), CommsPanel (game/scripts/ui/comms_panel.gd), Chapter1CampaignHUD integration (M key + P…</div></li>
 <li><a class="id" href="#M3-2T">M3-2T</a> Chapter 2 messages: every scene joined to the next <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">game/resources/campaign/content/messages/ch02.json (33 messages covering all CH02 joins and CH02-&gt;CH03), check_messages.py --all-chapters: …</div></li>
 <li><a class="id" href="#M3-3T">M3-3T</a> Chapter 3 messages: every scene joined to the next <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">game/resources/campaign/content/messages/ch03.json (31 messages covering all CH03 joins and CH03-&gt;CH04), check_messages.py --all-chapters: …</div></li>
 <li><a class="id" href="#M3-4T">M3-4T</a> Chapter 4 messages: every scene joined to the next <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">game/resources/campaign/content/messages/ch04.json (31 messages covering all CH04 joins and CH04-&gt;CH05), check_messages.py --all-chapters: …</div></li>
+<li><a class="id" href="#M1-74">M1-74</a> Stop the &#x27;no meta lla_fade&#x27; error in the HUD fade <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">game/scripts/ui/chapter1_campaign_hud.gd, game/scripts/ui/campaign_panels.gd; test_comms.gd 45/45 PASS, test_player_text.gd 13060/13060 PAS…</div></li>
+<li><a class="id" href="#M1-77">M1-77</a> Avoid missing fade metadata errors on the first campaign caption <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">game/scripts/ui/chapter1_campaign_hud.gd (_toast and _dialogue_bar seeded with lla_shown=false and has_meta guards); test_comms.gd 45/45 PA…</div></li>
 <li><a class="id" href="#M1-90">M1-90</a> Run complete Windows loading diagnostics for M1-68 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">Completed the two requested fresh-process Windows runs with the unchanged collector. Run1:537 checks,2 failures (title51.869ms,campaign66.5…</div></li>
 <li><a class="id" href="#M1-98">M1-98</a> Recollect Windows loading evidence with retained stage traces <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">production/qa/evidence/M1-68_windows/2026-11-09_retained_ramim/README.md; source12d8252/game108a384;2fresh runs581/7 and581/6 timing failur…</div></li>
 <li><a class="id" href="#M1-101">M1-101</a> Guard HUD world overlays while rebuilt player nodes leave the tree <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">production/qa/evidence/M1-101/README.md; final330/0 focused; review finding fixed; full/native pending. Full e78f5bc/game108a384:83/84; onl…</div></li>
+<li><a class="id" href="#M4-11">M4-11</a> Main TitleStage WorldEnvironment toggle &amp; HUD forecast cache across camera turns <span class="chip ">any</span> <span class="chip ">P1</span><div class="meta">game/scripts/main.gd (_stage_env WorldEnvironment toggle on campaign launch/exit), game/scripts/ui/chapter1_campaign_hud.gd (_forecast_cach…</div></li>
 <li><a class="id" href="#M1-112">M1-112</a> Wire the shift-5 STACK Mission Table button to the physical carry activity (M1-58 hook) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">game/scripts/ui/mission_table_panel.gd, game/scripts/ui/chapter1_campaign_hud.gd, game/tools/test_payload.gd (163/163 PASS), test_m155_miss…</div></li>
 <li><a class="id" href="#M1-118">M1-118</a> Guard Mission Table layout focus when its panel is freed <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Source50db8f0; real deferred callback RED11/1 -&gt;GREEN11/0; MissionTable109/P0278/new11=198/0 pluspayload160/0; native14/0/2PNG,2ObjectDBwar…</div></li>
 <li><a class="id" href="#M1-121">M1-121</a> Re-audit all saved branches and prioritize explainer UI blockers <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Static audit PASS62/62refs,57tips; production/qa/evidence/M1-121/README.md and6 verified SHA256 artifacts. No runtime/render claim; existin…</div></li>
@@ -5859,7 +5857,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P2",
    "tool": "codex",
    "title": "Stop the 'no meta lla_fade' error in the HUD fade",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [],
    "paths": [
@@ -5867,7 +5865,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Sadman/night-claude2 on 2026-11-06 (first numbered M1-70; renumbered because main gave M1-70 to the data-card credit line).\n9Nov closeout: unstarted claim released at user request; no new implementation or completion claim. Existing saved requirements/preparation remain for next continuation.",
-   "evidence": "",
+   "evidence": "game/scripts/ui/chapter1_campaign_hud.gd, game/scripts/ui/campaign_panels.gd; test_comms.gd 45/45 PASS, test_player_text.gd 13060/13060 PASS (0 missing meta errors)",
    "updated": "2026-11-09",
    "prompt": "Found during M1-06 windowed capture (production/qa/evidence/M1-06_capture.txt): starting chapter1_campaign.tscn logs 'ERROR: The object does not have any meta values with the key lla_fade' from _fade (game/scripts/ui/chapter1_campaign_hud.gd:962). In Godot 4.7 get_meta(key, null) still errors when the key is missing, because a null default counts as no default. Use control.get_meta(\"lla_fade\") only when control.has_meta(\"lla_fade\") (same for any other get_meta(..., null) in the HUD). Acceptance: the campaign starts with no get_meta error in the log; run_tests.sh passes.",
    "reserved_for": "ramim",
@@ -6026,7 +6024,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P2",
    "tool": "codex",
    "title": "Avoid missing fade metadata errors on the first campaign caption",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [],
    "paths": [
@@ -6034,7 +6032,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Tanvir/codex on 2026-11-06.\n9Nov closeout: unstarted claim released at user request; no new implementation or completion claim. Existing saved requirements/preparation remain for next continuation.",
-   "evidence": "",
+   "evidence": "game/scripts/ui/chapter1_campaign_hud.gd (_toast and _dialogue_bar seeded with lla_shown=false and has_meta guards); test_comms.gd 45/45 PASS, test_player_text.gd 13060/13060 PASS",
    "updated": "2026-11-09",
    "prompt": "M1-65 fresh production campaign capture on source 9fd29ef emits ERROR: The object does not have any meta values with the key lla_fade. Backtrace: chapter1_campaign_hud.gd:964 _fade, :721 _set_dialogue_visible, :715 _render_caption, :165 refresh_scene, chapter1_campaign.gd:136 _ready_incremental. Evidence production/qa/evidence/M1-65_capture.txt lines 732-739 and M1-65_07_arrival_dialogue.png; harness production/qa/playtests/first_impressions/capture_m1_65.gd uses real main with isolated saves. _fade calls get_meta with a null default on a control that has never faded. Expected: first-use controls need no existing tween metadata; guard missing metadata without changing cancellation or reduced motion. Acceptance: new campaign first caption and repeated show/hide produce no missing-meta errors, dialogue stays readable, run_tests.sh passes.",
    "reserved_for": "ramim",
@@ -6888,7 +6886,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "any",
    "title": "Main TitleStage WorldEnvironment toggle & HUD forecast cache across camera turns",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [],
    "paths": [
@@ -6897,7 +6895,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Sadman/antigravity on 2026-11-08.",
-   "evidence": "",
+   "evidence": "game/scripts/main.gd (_stage_env WorldEnvironment toggle on campaign launch/exit), game/scripts/ui/chapter1_campaign_hud.gd (_forecast_cache retained across camera turns); test_comms.gd 45/45 PASS, test_player_text.gd 13060/13060 PASS",
    "updated": "2026-11-09",
    "prompt": "M1-94 profiling found two costs in Ramim's folders: (1) In game/scripts/main.gd, TitleStage's WorldEnvironment (character_look.tres: SSAO+SSIL+glow) stays registered in World3D when _stage_root.hide() runs on campaign launch because WorldEnvironment is a Node, not a Node3D (RoomPresentation.claim_world_environment now suspends it when hidden, but Main._launch_campaign() and Main._show_title() should explicitly disable/restore TitleStage's WorldEnvironment). (2) In game/scripts/ui/chapter1_campaign_hud.gd, _clear_unselected_forecast() resets _forecast_key = \"\" whenever the camera turns away from a nearby focus target, forcing show_nearby_forecast() to re-run campaign.forecast_target() (22-41 ms main-thread spike) when turning back toward the same target in the same state. Keep the last computed forecast cached by key across camera-turn hides. Verify with game/tools/run_tests.sh.",
    "reserved_for": "ramim",

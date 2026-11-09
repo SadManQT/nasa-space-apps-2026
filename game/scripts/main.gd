@@ -13,6 +13,8 @@ var _loading_card: LoadingCard
 
 var _stage_camera: Camera3D
 var _stage_root: Node3D
+var _stage_env: WorldEnvironment
+var _stage_env_resource: Environment
 var _menu_layer: CanvasLayer
 var _menu: MainMenu
 var _campaign: Node3D
@@ -65,7 +67,10 @@ func _build_stage() -> void:
 	_stage_root.name = "TitleStage"
 	add_child(_stage_root)
 	var environment := WorldEnvironment.new()
-	environment.environment = load("res://environments/look/character_look.tres") as Environment
+	environment.name = "StageEnvironment"
+	_stage_env_resource = load("res://environments/look/character_look.tres") as Environment
+	environment.environment = _stage_env_resource
+	_stage_env = environment
 	_stage_root.add_child(environment)
 	var key := DirectionalLight3D.new()
 	key.rotation_degrees = Vector3(-42, -28, 0)
@@ -110,6 +115,8 @@ func _show_title(preloaded_snapshot: Variant = null) -> void:
 		_campaign.queue_free()
 		_campaign = null
 	_stage_root.process_mode = Node.PROCESS_MODE_INHERIT
+	if _stage_env != null:
+		_stage_env.environment = _stage_env_resource
 	_stage_root.show()
 	_stage_camera.current = true
 	_menu_layer = CanvasLayer.new()
@@ -199,6 +206,8 @@ func _launch_campaign(snapshot: Dictionary) -> void:
 		return
 	_stage_root.hide()
 	_stage_root.process_mode = Node.PROCESS_MODE_DISABLED
+	if _stage_env != null:
+		_stage_env.environment = null
 	if _menu_layer != null:
 		_menu_layer.queue_free()
 		_menu_layer = null

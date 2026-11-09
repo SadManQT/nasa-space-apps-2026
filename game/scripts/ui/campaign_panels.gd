@@ -355,7 +355,7 @@ func _release_kept_children() -> void:
 	for child in _body.get_children():
 		if child.has_meta("lla_keep"):
 			_body.remove_child(child)
-			var home = child.get_meta("lla_home", null)
+			var home = child.get_meta("lla_home") if child.has_meta("lla_home") else null
 			if home is Node and is_instance_valid(home):
 				home.add_child(child)
 

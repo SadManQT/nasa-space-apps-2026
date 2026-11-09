@@ -73,6 +73,8 @@ var _debug_on := false
 var _last_outcome: Dictionary = {}
 var _forecast: Dictionary = {}
 var _forecast_key := ""
+var _forecast_cache_key := ""
+var _forecast_cache: Dictionary = {}
 var _forecast_source := ""
 var _pointer_preview := false
 var _focus_preview := false
@@ -218,6 +220,8 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 		_scene_id = next_scene
 		_forecast = {}
 		_forecast_key = ""
+		_forecast_cache_key = ""
+		_forecast_cache = {}
 		_done_ids = {}
 		_auto_timer = 0.0
 	_dialogue_index = _first_unacknowledged_line()
@@ -234,6 +238,8 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 func refresh_after_action(result: Dictionary) -> void:
 	_forecast = {}
 	_forecast_key = ""
+	_forecast_cache_key = ""
+	_forecast_cache = {}
 	var before := _done_ids.duplicate()
 	if runtime != null:
 		_dialogue_index = _first_unacknowledged_line()
@@ -362,6 +368,7 @@ func _build() -> void:
 	_toast = UiDesign.glass_panel(Color.TRANSPARENT, 12)
 	_toast.name = "Toast"
 	_toast.visible = false
+	_toast.set_meta("lla_shown", false)
 	_status = UiDesign.label("", "body", "ivory")
 	_status.accessibility_name = "Message"
 	_toast.add_child(_status)
@@ -373,6 +380,7 @@ func _build() -> void:
 	_dialogue_bar = UiDesign.glass_panel(Color.TRANSPARENT, 14)
 	_dialogue_bar.name = "Dialogue"
 	_dialogue_bar.visible = false
+	_dialogue_bar.set_meta("lla_shown", false)
 	_dialogue_bar.mouse_filter = Control.MOUSE_FILTER_STOP
 	var dialogue_box := VBoxContainer.new()
 	dialogue_box.add_theme_constant_override("separation", 6)
@@ -622,7 +630,7 @@ func _goal_for_state(current: Dictionary, gate: Dictionary, complete: bool) -> D
 		info.hint = String(text.get("hint", ""))
 		info.target_id = String(current.get("target_id", ""))
 		var node := runtime.physical_target(info.target_id)
-		info.place = String(node.get_meta("focus_label", "")) if node != null else ""
+		info.place = String(node.get_meta("focus_label", "")) if node != null and node.has_meta("focus_label") else ""
 		return info
 	var scene_text: Dictionary = UiDesign.text().get("scenes", {}).get(_scene_id, {})
 	if bool(gate.get("ready", false)):
@@ -857,7 +865,8 @@ func _render_caption() -> void:
 func _set_dialogue_visible(shown: bool) -> void:
 	if _chrome_hidden and shown:
 		return
-	if shown != bool(_dialogue_bar.get_meta("lla_shown", _dialogue_bar.visible)):  # mid-fade, `visible` is still the old state
+	var current_shown := bool(_dialogue_bar.get_meta("lla_shown", _dialogue_bar.visible)) if _dialogue_bar.has_meta("lla_shown") else _dialogue_bar.visible
+	if shown != current_shown:  # mid-fade, `visible` is still the old state
 		_fade(_dialogue_bar, shown)
 	_goal_card.modulate.a = 0.6 if shown else 1.0
 
@@ -920,7 +929,7 @@ func _sync_messages() -> void:
 		comms_panel.refresh_view()
 
 func _is_dialogue_active() -> bool:
-	if _dialogue_bar != null and bool(_dialogue_bar.get_meta("lla_shown", _dialogue_bar.visible)):
+	if _dialogue_bar != null and (bool(_dialogue_bar.get_meta("lla_shown", _dialogue_bar.visible)) if _dialogue_bar.has_meta("lla_shown") else _dialogue_bar.visible):
 		return true
 	if runtime != null and _first_unacknowledged_line() < runtime.current_dialogue().size():
 		return true
@@ -1201,7 +1210,12 @@ func show_target_forecast(target_id: String, source: String = "ui") -> void:
 		return
 	_forecast_key = key
 	_forecast_source = source
-	_forecast = runtime.forecast_target(target_id)
+	if key == _forecast_cache_key and not _forecast_cache.is_empty():
+		_forecast = _forecast_cache.duplicate(true)
+	else:
+		_forecast = runtime.forecast_target(target_id)
+		_forecast_cache_key = key
+		_forecast_cache = _forecast.duplicate(true)
 	outpost.bind_query(runtime.query(), _forecast)
 	outpost.tooltip_text = "What this job would change. Nothing changes until you do it." if bool(_forecast.get("accepted", false)) else UiDesign.player_words(String(_forecast.get("reason", "Do the earlier jobs first to see this forecast.")))
 
