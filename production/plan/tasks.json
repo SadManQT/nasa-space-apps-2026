@@ -5865,7 +5865,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -5899,7 +5899,14 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Saved verification 7942562: existing M1-120 source reused; focused M4 581/0, all 16 windows retained under production/qa/perf/atik_batch_2026-11-10/baseline. No original Ryzen7/RTX4060 Windows run is available after batching; original-host focused two-process collection and green full acceptance remain required. Resume command and cache/hardware conditions in M1-68.md. Current unsandboxed full running on M4; no Windows repair inferred."
+   "blocker": "Saved verification 7942562: existing M1-120 source reused; focused M4 581/0, all 16 windows retained under production/qa/perf/atik_batch_2026-11-10/baseline. No original Ryzen7/RTX4060 Windows run is available after batching; original-host focused two-process collection and green full acceptance remain required. Resume command and cache/hardware conditions in M1-68.md. Current unsandboxed full running on M4; no Windows repair inferred.",
+   "edit_files": [
+    "game/tools/test_comms.gd",
+    "production/qa/perf/atik_batch_2026-11-10/README.md",
+    "production/qa/perf/atik_batch_2026-11-10/M1-68.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
+   ]
   },
   {
    "id": "M1-69",
@@ -7544,7 +7551,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Investigate post-result Forward+ exit timeout on Intel Arc laptop",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -7576,13 +7583,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "edit_files": [
-    "production/qa/perf/collect_native.py",
-    "production/qa/perf/test_collect_native.py",
-    "production/qa/perf/atik_batch_2026-11-10/M1-116.md",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
-   ]
+   "blocker": "Saved collector/native evidence bd51096: M4 Forward+/Metal actual input 44/0 plus five PNGs/trace exits0 in9.225s. Collector4tests/6distinctprocessconditions pass, including PASS followed by hung process. Original Windows11 IntelArc130V post-result timeout has not been retested on that host; no teardown/driver cause or runtime fix inferred. Resume exact Vulkan original-host command in production/qa/perf/atik_batch_2026-11-10/M1-116.md, retain termination diagnostics and fix only any reproduced cause. Mandatory input test38/0 already passed during ongoing full; complete final gate recorded separately."
   },
   {
    "id": "M1-117",
