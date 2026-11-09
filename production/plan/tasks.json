@@ -5141,8 +5141,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Science fact-check: Chapters 1-4 player text, messages, hints and data cards against their sources",
-   "status": "blocked",
-   "owner": "Asif/Codex",
+   "status": "in_progress",
+   "owner": "Asif/codex",
    "deps": [
     "M1-57"
    ],
@@ -5156,7 +5156,7 @@
    ],
    "note": "From MASTER_PLAN.md (Sadman, 5 Nov 2026).",
    "evidence": "",
-   "updated": "2026-11-09",
+   "updated": "2026-11-10",
    "prompt": "Goal: every number and claim a player reads is true or honestly labelled.\nDo: with your AI, read the Chapter 1-4 messages (game/resources/campaign/content/messages/ch01-ch04.json), the goal and hint text (ui_text.json), the data cards (game/resources/data/nasa/) and the explainer scripts (production/explainers/); check each science claim against its source fixture and docs/SCIENCE_AND_DATA.md; write production/review/science_ch01_04/review.md (claim, where, source, verdict, suggested fix) and file each needed fix as a task for the file's owner.\nAcceptance: review.md covers all four chapters; every 'wrong' or 'unclear' verdict has a task.",
    "reserved_for": "asif",
    "effort": 3,

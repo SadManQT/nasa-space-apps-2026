@@ -351,12 +351,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-93">M1-93</a> Capture 1080p Chapter 1 room performance on the Intel Arc laptop <span class="chip ">any</span> <span class="chip ">P1</span><div class="meta">production/qa/chapters/ch01/performance/M1-93_arc_2026-11-08/README.md; Intel Ultra 5 226V / Arc 130V, confirmed weakest team machine; 1080…</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="asif"><b>Md. Asif Iqbal</b> <span class="id">asif</span><div class="meta">Science, story and accessibility reviewer · 5% share</div><div class="counts"><span class="chip s-done">1 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">6 todo</span></div><div class="bar"><i style="width:12%"></i></div>
+<div class="panel" data-member="asif"><b>Md. Asif Iqbal</b> <span class="id">asif</span><div class="meta">Science, story and accessibility reviewer · 5% share</div><div class="counts"><span class="chip s-done">1 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">6 todo</span></div><div class="bar"><i style="width:12%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
+<li><a class="id" href="#M3-75">M3-75</a> Science fact-check: Chapters 1-4 player text, messages, hints and data cards against their sources <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Asif/codex on 2026-11-10</div></li>
+</ul></details>
 <details open><summary>Next up today (1)</summary><ul>
 <li><a class="id" href="#M0-12">M0-12</a> Paste the official 28 Oct challenge statement into the repo <span class="chip ">human</span> <span class="chip ">P0</span></li>
-</ul></details>
-<details open><summary>Blocked (1)</summary><ul>
-<li><a class="id" href="#M3-75">M3-75</a> Science fact-check: Chapters 1-4 player text, messages, hints and data cards against their sources <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Chapter 2-4 messages ch02.json, ch03.json, ch04.json are absent. Ramim tasks M3-2T, M3-3T, M3-4T are todo and await M1-56. The four-chapter review cannot meet acceptance until tho…</div></li>
 </ul></details>
 <details><summary>To do (5)</summary><ul>
 <li><a class="id" href="#M3-3Q">M3-3Q</a> Chapter 3 playthrough QA <span class="chip ">codex</span> <span class="chip ">P1</span></li>
@@ -5587,8 +5587,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Science fact-check: Chapters 1-4 player text, messages, hints and data cards against their sources",
-   "status": "blocked",
-   "owner": "Asif/Codex",
+   "status": "in_progress",
+   "owner": "Asif/codex",
    "deps": [
     "M1-57"
    ],
@@ -5602,7 +5602,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "note": "From MASTER_PLAN.md (Sadman, 5 Nov 2026).",
    "evidence": "",
-   "updated": "2026-11-09",
+   "updated": "2026-11-10",
    "prompt": "Goal: every number and claim a player reads is true or honestly labelled.\nDo: with your AI, read the Chapter 1-4 messages (game/resources/campaign/content/messages/ch01-ch04.json), the goal and hint text (ui_text.json), the data cards (game/resources/data/nasa/) and the explainer scripts (production/explainers/); check each science claim against its source fixture and docs/SCIENCE_AND_DATA.md; write production/review/science_ch01_04/review.md (claim, where, source, verdict, suggested fix) and file each needed fix as a task for the file's owner.\nAcceptance: review.md covers all four chapters; every 'wrong' or 'unclear' verdict has a task.",
    "reserved_for": "asif",
    "effort": 3,
