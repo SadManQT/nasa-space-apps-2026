@@ -1,0 +1,82 @@
+{
+  "command": [
+    "/private/tmp/last-light-tools/Godot.app/Contents/MacOS/Godot",
+    "--path",
+    "/Users/atik130/Desktop/Hackathon/NASA/nasa-space-apps-2026/game",
+    "--rendering-method",
+    "forward_plus",
+    "--resolution",
+    "1280x720",
+    "--log-file",
+    "/Users/atik130/Desktop/Hackathon/NASA/nasa-space-apps-2026/production/qa/perf/atik_batch_2026-11-10/input_forward/engine.log",
+    "--rendering-driver",
+    "metal",
+    "--script",
+    "/Users/atik130/Desktop/Hackathon/NASA/nasa-space-apps-2026/production/qa/playtests/first_impressions/retest_2026-11-09/capture_dry_zero.gd",
+    "--",
+    "--capture"
+  ],
+  "case": "input",
+  "os": "macOS-27.0.1-arm64-arm-64bit",
+  "source_commit": "e11809dabf82a8b4169c9e18190bacd6abc9ce00",
+  "source_sha256": {
+    "game/project.godot": "9d8c0c92ff0cbf5f84d70f7b912a17c62ccf2a60b35610064c9ebe5c7aae0e8d",
+    "game/scripts/asset_geometry.gd": "eb041cffcbf6f080978e14e4be3832f8237a86e3bc41ffe181062fda741c6d82",
+    "game/scripts/campaign/chapter1_campaign.gd": "5b581545097e2524f1b5930ed35779a5187e4ffb9ccaedb716420f97359a86d5",
+    "game/scripts/loading/load_preparation.gd": "2a7544659417119b9e4e781fae784fb128d061a032acd59da534c31699f4f374",
+    "game/scripts/loading/resource_job.gd": "3fce981e73d985b28108788bdfec1905f0887c18a56f70d560041e11790247b5",
+    "game/scripts/loading/preparation_watchdog.gd": "da52193527992cca948ab4595d170b3df9b57dc5e67175faade708f152c15aa0",
+    "game/scripts/player/player_controller.gd": "28c25fc83f1860dbe22991db2ee7b8152e5499db58af3fd02cc14f230c6d85c7",
+    "game/tools/test_campaign_interaction_input.gd": "20ed5198923b2dd68c02b4f9ce6023752a81ad28d3384465047b8fcfa333373c",
+    "game/tools/support/isolated_storage.gd": "40ea50387d747b92d734f08f32b892f9f498fa54dbe0a9c5c5b49fbdeefd8cda",
+    "game/tools/perf_probe.gd": "bb75551444ce863b8302e1e4d589d87ba668b70bc8e845b7d1199e63992cb34b",
+    "production/qa/playtests/first_impressions/retest_2026-11-09/capture_dry_zero.gd": "80730705fe64c80fc8b6c8bf11e471f37dbcd8d2732c94ae2cc7cc2cc561b89a"
+  },
+  "start_epoch": 1794251221.2250931,
+  "cache_policy": "Existing caches retained; fixture isolates test saves and first-use user directories.",
+  "timeout_seconds": 180.0,
+  "elapsed_seconds": 9.225090625,
+  "exit_code": 0,
+  "raw_returncode": 0,
+  "timed_out": false,
+  "markers": [
+    "CAMPAIGN INTERACTION INPUT RESULT: PASS (44 checks, 0 failures)"
+  ],
+  "result_first_observed_seconds": 9.119870291,
+  "source_unchanged": true,
+  "artifacts": {
+    "M1-65_retest_commission_after.png": {
+      "bytes": 899552,
+      "sha256": "9abc658d031d685e981c95dc4c32837824895539fe1517a5721a502f3d18e5db"
+    },
+    "M1-65_retest_dry_zero_observed.png": {
+      "bytes": 352415,
+      "sha256": "4844f04dd608dd1b9394b490c31681b2ff034bf0ad6236a019d66986f80e5cde"
+    },
+    "M1-65_retest_commission_before.png": {
+      "bytes": 969553,
+      "sha256": "14c6af2aee411325c863c47238f73c4ac685cb7a4685f003ac2a1eecd9972c26"
+    },
+    "stdout.log": {
+      "bytes": 3691,
+      "sha256": "1794ef9dd3777b7cb27e9a42eabe3bb855b30cff6f275aa475e3080042d39666"
+    },
+    "M1-65_retest_dry_zero_panel.png": {
+      "bytes": 345982,
+      "sha256": "3f5c192a7fe7a14e5caeea683aa0fcf673aa03588d1beb958e4ea94bbc67671c"
+    },
+    "M1-65_retest_dry_zero_before.png": {
+      "bytes": 1027025,
+      "sha256": "d6b9187da9dbe0d8e8f1acec704226d6769ea1cac276835c0a6b266a370c03f6"
+    },
+    "engine.log": {
+      "bytes": 3691,
+      "sha256": "1794ef9dd3777b7cb27e9a42eabe3bb855b30cff6f275aa475e3080042d39666"
+    },
+    "input_trace.json": {
+      "bytes": 9967,
+      "sha256": "076f030349f07c94967ca7a8ed22adbd4d591107ac6c1a39469e5f1ee39a2738"
+    }
+  },
+  "capture_checks_passed": true
+}
