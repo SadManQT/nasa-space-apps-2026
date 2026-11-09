@@ -185,7 +185,7 @@ func _test_loading_transitions() -> void:
 	await process_frame
 	_stop_monitor("production garden entry")
 	_check(campaign._room.room_id == "LOC-03" and campaign._player.character != null, "garden transition keeps room/player ready")
-	_evict_room("LOC-01")
+	_evict_room("LOC-02")
 	_start_monitor()
 	campaign._start_extended("EX-CH05-S02")
 	await campaign.wait_loading()
@@ -206,19 +206,34 @@ func _test_loading_transitions() -> void:
 	for step in LoadTrace.steps:
 		sync_decode = sync_decode or String(step.step).begins_with("glb_decode:")
 	_check(not sync_decode, "production transitions never escape to synchronous GLB decode")
-	# M1-36: a ready exterior (LOC-10, EX-CH04-S06 under its verified work lights) enters on the LOLA terrain
-	# through the same card, its heightfield and tiles prepared off the main thread.
+	# M3-100: advancing the garden from 27 Apr to 31 May swaps plant stage models without decoding on the main thread.
 	while main.preparation._room_busy:
 		await process_frame
-	# The suited cast still decodes its EVA GLBs on the main thread (board M1-113), so warm them with S06 first and
-	# measure the terrain on the next scene in the same room, which prepares its terrain again from nothing.
-	campaign._start_extended("EX-CH04-S06")
-	await campaign.wait_loading()
+	var garden_traced := LoadTrace.steps.size()
+	for stage in ["bloom", "pod_bearing", "mature_pods", "mature_dry"]:
+		var snap := campaign.director.snapshot()
+		for p in snap.get("plants", []):
+			if p is Dictionary and String(p.get("individual_id", "")) in ["ALO-01", "TARA-01"]:
+				p["stage"] = stage
+		campaign.director.restore_snapshot(snap)
+		await main.preparation.prepare_room("LOC-03", "EX-CH03-S12", snap.get("plants", []))
+		if campaign._room.room_id != "LOC-03":
+			campaign._start_extended("EX-CH03-S09")
+			await campaign.wait_loading()
+		else:
+			campaign._room.apply_plant_state(snap.get("plants", []))
+		await process_frame
+	var garden_sync := false
+	for step in LoadTrace.steps.slice(garden_traced):
+		garden_sync = garden_sync or String(step.step).begins_with("glb_decode:")
+	_check(not garden_sync, "garden dated stage swaps (27 Apr to 31 May) never decode on the main thread")
+	# M1-36: a ready exterior (LOC-10, EX-CH04-S06 under its verified work lights) enters on the LOLA terrain
+	# through the same card, its heightfield, tiles and suited EVA bodies prepared off the main thread.
 	while main.preparation._room_busy:
 		await process_frame
 	var traced := LoadTrace.steps.size()
 	_start_monitor()
-	campaign._start_extended("EX-CH04-S07")
+	campaign._start_extended("EX-CH04-S06")
 	await campaign.wait_loading()
 	await process_frame
 	_stop_monitor("production terrain exterior entry")

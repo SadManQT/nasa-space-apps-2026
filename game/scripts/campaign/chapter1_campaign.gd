@@ -625,7 +625,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _refresh_world() -> void:
 	if incremental_loading:
-		if not loading and preparation.room_ready(route.current_room_id()) and not _terrain_wanted():
+		var plants: Array = director.snapshot().get("plants", []) if director != null else []
+		if not loading and preparation.room_ready(route.current_room_id(), route.current_scene_id(), plants) and not _terrain_wanted():
 			_refresh_world_now()
 			_on_scene_ready()
 			_prefetch_next_room()
@@ -641,7 +642,8 @@ func _refresh_world() -> void:
 func _refresh_world_now(incremental_assets: bool = false) -> void:
 	var stamp := LoadTrace.begin()
 	if incremental_loading:
-		preparation.activate_room(route.current_room_id())
+		var plants: Array = director.snapshot().get("plants", []) if director != null else []
+		preparation.activate_room(route.current_room_id(), route.current_scene_id(), plants)
 	if not incremental_assets:
 		_clear_terrain()  # only the incremental entry prepares terrain; this path builds the flat fallback floor
 	if _room != null and is_instance_valid(_room):
@@ -655,6 +657,7 @@ func _refresh_world_now(incremental_assets: bool = false) -> void:
 	else:
 		var scene := preparation.resources[room_path] as PackedScene if incremental_loading else load(room_path) as PackedScene
 		_room = scene.instantiate() as CampaignRoom
+	_room.upcoming_scene = route.current_scene_id()
 	_room.load_approved_assets = not incremental_assets
 	_room.terrain_ground = _terrain != null
 	add_child(_room)
@@ -690,7 +693,8 @@ func _place_crew() -> void:
 func _refresh_world_incremental() -> void:
 	await get_tree().process_frame
 	await preparation.prepare_scene_media(route.current_scene_id())
-	if not await preparation.prepare_room(route.current_room_id()):
+	var plants: Array = director.snapshot().get("plants", []) if director != null else []
+	if not await preparation.prepare_room(route.current_room_id(), route.current_scene_id(), plants):
 		_fail_startup(preparation.failed)
 		return
 	await _prepare_terrain()
@@ -762,7 +766,8 @@ func _prefetch_next_room() -> void:
 			return
 
 func _prefetch_room_and_media(room_id: String, scene_id: String) -> void:
-	await preparation.prepare_room(room_id)
+	var plants: Array = director.snapshot().get("plants", []) if director != null else []
+	await preparation.prepare_room(room_id, scene_id, plants)
 	await preparation.prepare_scene_media(scene_id)
 	if audio != null:
 		await audio.prefetch(scene_id, RoomContract.room_for_scene(scene_id))

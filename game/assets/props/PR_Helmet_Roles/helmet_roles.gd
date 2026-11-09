@@ -26,6 +26,10 @@ static func role_ids() -> PackedStringArray:
 
 ## Instances the helmet scene; returns null (with an error) if the GLB is missing.
 static func instance() -> Node3D:
+	if AssetGeometry.is_prepared(SCENE_PATH):
+		var prepared := AssetGeometry.load_glb(SCENE_PATH)
+		if prepared != null:
+			return prepared
 	var packed := load(SCENE_PATH) as PackedScene
 	if packed == null:
 		push_error("HelmetRoles: missing " + SCENE_PATH)

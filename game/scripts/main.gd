@@ -105,6 +105,8 @@ func _build_stage() -> void:
 
 func _show_title(preloaded_snapshot: Variant = null) -> void:
 	if _campaign != null and is_instance_valid(_campaign):
+		if preparation != null and is_instance_valid(preparation.crew):
+			preparation.crew = null
 		_campaign.queue_free()
 		_campaign = null
 	_stage_root.process_mode = Node.PROCESS_MODE_INHERIT
@@ -214,7 +216,6 @@ func _launch_campaign(snapshot: Dictionary) -> void:
 	crew.get_parent().remove_child(crew)
 	_campaign.add_child(crew)
 	_campaign.set("_crew", crew)
-	preparation.crew = null
 	preparation.campaign_ready = false
 	_campaign.connect("exit_requested", _show_title)
 	add_child(_campaign)
@@ -303,6 +304,7 @@ func _run_export_smoke() -> void:
 	var model_path := "res://assets/characters/CH_Kai/CH_Kai.glb"
 	var model_file := FileAccess.open(model_path, FileAccess.READ)
 	checks.append(model_file != null and model_file.get_buffer(4).get_string_from_ascii() == "glTF")
+	checks.append(FileAccess.file_exists("res://assets/environment/terrain/lola/aurora_ridge/heightmap_5m.r16"))
 	await _export_smoke_capture("M1-20_native_title")
 	await _launch_campaign({})
 	for index in 6:

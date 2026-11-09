@@ -6,7 +6,7 @@ func _init() -> void:
 	_run.call_deferred()
 
 func _run() -> void:
-	for id in ["Kai", "Amara", "Mei", "Rafi", "Ferreira"]:
+	for id in ["Kai", "Amara", "Mei", "Rafi", "Ferreira", "Kai_EVA", "Amara_EVA", "Mei_EVA", "Rafi_EVA", "Ferreira_EVA"]:
 		var path := "res://assets/characters/CH_%s/CH_%s.glb" % [id, id]
 		var actor := AssetGeometry.load_glb(path)
 		if actor == null:
@@ -33,5 +33,5 @@ func _run() -> void:
 		output.store_string(JSON.stringify(data, "\t", true, true) + "\n")
 		actor.free()
 		print("BAKE ", id, " OK")
-	print("LOCOMOTION BAKE RESULT: PASS (5 characters)")
+	print("LOCOMOTION BAKE RESULT: PASS (10 characters)")
 	quit()

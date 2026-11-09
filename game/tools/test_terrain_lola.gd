@@ -31,6 +31,11 @@ func _json(path: String) -> Dictionary:
 func _run() -> void:
 	var manifest := _json(LOLA + "/lola_terrain.json")
 	_check(not manifest.is_empty(), "manifest loads")
+	var presets := ConfigFile.new()
+	_check(presets.load("res://export_presets.cfg") == OK, "export_presets.cfg loads")
+	for idx in 3:
+		var filter := String(presets.get_value("preset.%d" % idx, "include_filter", ""))
+		_check(filter.contains("*.r16") and filter.contains("*.json"), "preset.%d include_filter includes *.r16 and *.json (%s)" % [idx, filter])
 	var credit := String(manifest.get("credit_line", ""))
 	_check(credit.contains("NASA") and credit.contains("LOLA") and credit.contains("does not endorse"), "credit line names NASA LOLA and disclaims endorsement")
 	_check(Heightfield.credit_line() == credit and not Heightfield.credit_line(true).is_empty(), "loader exposes both credit lines")
