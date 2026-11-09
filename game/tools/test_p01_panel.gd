@@ -67,7 +67,12 @@ func _run() -> void:
 	panel.choose("reference", "dry")
 	panel.choose("raw_reading", 10)
 	panel.choose("calibrated_reading", 0)
-	_check(panel.preview().accepted and panel.request_commit().accepted, "explicit dry 10 to 0 predicts and confirms")
+	_check(panel.preview().accepted, "explicit dry 10 to 0 predicts")
+	await process_frame
+	await process_frame
+	await _key(KEY_ENTER)
+	_check(panel._confirming, "Enter after an accepted prediction opens confirmation")
+	panel.request_commit()
 	panel.cancel_confirm()
 	await process_frame
 	await process_frame

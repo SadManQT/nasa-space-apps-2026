@@ -114,7 +114,7 @@ func preview() -> Dictionary:
 		_prediction = _campaign.forecast_target(_target, _payload())
 	_preview_context = _context() if _prediction.get("accepted", false) else ""
 	_notice = "Prediction accepted. Compare the projected observation, then confirm when ready." if _prediction.get("accepted", false) else "Try again: " + UiDesign.player_words(String(_prediction.get("reason", "Check your selection.")))
-	_focus = "ProbePrediction" if _prediction.get("accepted", false) else "TryIt"
+	_focus = "LockIn" if _prediction.get("accepted", false) else "TryIt"
 	_render()
 	return _prediction.duplicate(true)
 
@@ -244,7 +244,6 @@ func _render() -> void:
 	var forecast := _column(columns, "Projected result")
 	var projected := _label(forecast, _readings(_prediction.p01) if _prediction.get("accepted", false) and _prediction.has("p01") else PREDICTION_PROMPT)
 	projected.name = "ProbePrediction"
-	projected.focus_mode = Control.FOCUS_ALL
 	_label(forecast, _explanation())
 	var reason := String(_view.get("prerequisite_reason", ""))
 	if not reason.is_empty():
@@ -317,7 +316,7 @@ func _readings(view: Dictionary) -> String:
 	var profile: Dictionary = view.get("profile", _view.profile)
 	var complete: Dictionary = view.get("completion", {})
 	return "\n".join([
-		"Reference targets: dry raw %s ? %s; wet raw %s ? %s." % [profile.references.dry.raw, profile.references.dry.calibrated, profile.references.wet.raw, profile.references.wet.calibrated],
+		"Reference targets: dry raw %s to %s; wet raw %s to %s." % [profile.references.dry.raw, profile.references.dry.calibrated, profile.references.wet.raw, profile.references.wet.calibrated],
 		"Seed packet: " + ("scanned" if state.get("packet_scanned", false) else "not scanned"),
 		"Probe: " + ("rechecked" if state.get("probe_rechecked", false) else ("span set" if state.get("probe_spanned", false) else ("zero set" if state.get("probe_zeroed", false) else "not calibrated"))),
 		"Alo: %s seed; moisture %s of 100; label: %s; %s" % [state.get("cassette_alo_seed_count", 0), state.get("moisture_alo", 0), _label_text(String(state.get("alo_label", ""))), "sealed" if state.get("alo_sealed", false) else "open"],
@@ -361,6 +360,10 @@ func _restore_focus() -> void:
 	if not visible or _covered or (hint_player != null and hint_player.is_open()):
 		return
 	var target := find_child(_focus, true, false) as Control if not _focus.is_empty() else null
+	if target == null and _focus.is_empty():
+		var current := get_viewport().gui_get_focus_owner()
+		if current != null and is_ancestor_of(current) and current.is_visible_in_tree():
+			target = current
 	if target == null:
 		target = find_child("Choose_dry", true, false) as Control
 	if target == null:
@@ -370,6 +373,11 @@ func _restore_focus() -> void:
 	if target != null:
 		target.grab_focus()
 	_focus = ""
+	if bool(_prediction.get("accepted", false)) and not _confirming and not _leaving:
+		var scroll := find_child("ProbeScroll", true, false) as ScrollContainer
+		var projected := find_child("ProbePrediction", true, false) as Control
+		if scroll != null and projected != null:
+			scroll.ensure_control_visible(projected)
 
 func _input(event: InputEvent) -> void:
 	if not visible or _covered or (hint_player != null and hint_player.is_open()):

@@ -219,7 +219,8 @@ func _capture(id: String) -> void:
 			_expect(button.size.x >= width, id + " button text fits " + String(button.name))
 		if bool(panel._prediction.get("accepted", false)) and not panel._confirming and not panel._leaving:
 			var projected := panel.find_child("ProbePrediction", true, false) as Control
-			_expect(projected != null and root.get_visible_rect().encloses(projected.get_global_rect()), id + " projected observation is fully readable")
+			var scroll := panel.find_child("ProbeScroll", true, false) as ScrollContainer
+			_expect(projected != null and scroll.get_global_rect().encloses(projected.get_global_rect()), id + " projected observation is fully readable " + str(projected.get_global_rect()) + " inside " + str(scroll.get_global_rect()))
 		var close := panel.find_child("CloseProbe", true, false) as Control
 		_expect(root.get_visible_rect().encloses(close.get_global_rect()), id + " close stays visible")
 	var name := "M1-08_" + id + ".png"
