@@ -1,0 +1,2116 @@
+{
+  "baseline": "5f6f1df9d4fecaf24901625e9a88bc2f5d7930a5",
+  "metadata_merge": "59382f1d42528e898df22c21b1d077728c1e8afb",
+  "counts": {
+    "ancestry-integrated": 12,
+    "superseded": 36,
+    "unsafe-WIP": 7,
+    "metadata-only": 7
+  },
+  "refs": [
+    {
+      "ref": "refs/heads/backup/pre-sync-20261104-69c4283c",
+      "sha": "ff09cfd33bb147811a812e0a7ccae7b525b916b2",
+      "classification": "ancestry-integrated",
+      "findings": [
+        "This backup is a direct ancestor of main.",
+        "Merge base ff09cfd33bb1; ahead 0, behind 396; diff 0 paths; current main exact 0, different 0, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Preserve as history; no port.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "ff09cfd33bb147811a812e0a7ccae7b525b916b2",
+      "ahead": 0,
+      "behind": 396,
+      "subject": "feat: complete campaign route checkpoint",
+      "board": {
+        "task_id": null,
+        "status": null,
+        "owner": null,
+        "title": null,
+        "evidence_excerpt": ""
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 0,
+        "exact_on_main": 0,
+        "different_on_main": 0,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": []
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/heads/main",
+      "sha": "5f6f1df9d4fecaf24901625e9a88bc2f5d7930a5",
+      "classification": "ancestry-integrated",
+      "findings": "Current baseline main or its symbolic alias.",
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Use main; no port.",
+      "verification_limits": "Static ref/tree inspection.",
+      "review": "parent"
+    },
+    {
+      "ref": "refs/heads/ramim/atik-label-20261109",
+      "sha": "5f6f1df9d4fecaf24901625e9a88bc2f5d7930a5",
+      "classification": "ancestry-integrated",
+      "findings": "Ancestor with no branch-only files; historical board block or current main pointer.",
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "No port; use main.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/heads/ramim/continue-20261106",
+      "sha": "afe0c747aa89f8d72bc99c3c2512b4b18bf97a04",
+      "classification": "superseded",
+      "findings": "afe0c747 P01 draft; panel scene is byte-identical in main and later current panel/HUD supersede it.",
+      "reusable_paths": [
+        "game/scenes/ui/p01_panel.tscn"
+      ],
+      "blocked_by": [],
+      "next_action": "Use current P01.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/heads/ramim/continue-20261108",
+      "sha": "948ef2f024dd8c7b553bffe4be3271ee2b01830b",
+      "classification": "superseded",
+      "findings": "948ef2f controller and prediction candidate; HUD/scene blobs byte-identical in main, panel/test revised by e5d518c, 9da76ea and 46398b4.",
+      "reusable_paths": [
+        "game/scripts/ui/p01_panel.gd"
+      ],
+      "blocked_by": [],
+      "next_action": "Use current P01.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/heads/ramim/m108-await-runtime-20261108",
+      "sha": "afe0c747aa89f8d72bc99c3c2512b4b18bf97a04",
+      "classification": "superseded",
+      "findings": "Alias of afe0c747.",
+      "reusable_paths": [
+        "game/scenes/ui/p01_panel.tscn"
+      ],
+      "blocked_by": [],
+      "next_action": "No separate port.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/heads/ramim/m108-ui-review-20261109",
+      "sha": "948ef2f024dd8c7b553bffe4be3271ee2b01830b",
+      "classification": "superseded",
+      "findings": "Alias of 948ef2f.",
+      "reusable_paths": [
+        "game/scripts/ui/p01_panel.gd"
+      ],
+      "blocked_by": [],
+      "next_action": "No separate port.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/heads/ramim/m170-full-20261108",
+      "sha": "defddc9fc218c58ed1517d5240904c24ef4fd989",
+      "classification": "superseded",
+      "findings": "M1-70 credits ported by d956fa8; science test blob exact; old captures historical.",
+      "reusable_paths": [
+        "game/scripts/ui/campaign_panels.gd",
+        "game/tools/test_science_data.gd"
+      ],
+      "blocked_by": [],
+      "next_action": "Use main credits.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/heads/ramim/m172-postpull-validated-20261108",
+      "sha": "7ff8f61edb6b28a60d1df11cf5d33d47b1c2abb3",
+      "classification": "superseded",
+      "findings": "M1-72 Watch/Journal ported by e04ba9a; knowledge, hint, explainer and focused watch test blobs exact.",
+      "reusable_paths": [
+        "game/scripts/ui/science_explainers.gd",
+        "game/tools/test_science_watch.gd"
+      ],
+      "blocked_by": [],
+      "next_action": "Use main Watch.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/heads/ramim/m172-validated-20261108",
+      "sha": "0fbfeac5ae920e5f2ac66e78eff1a28de1f14d31",
+      "classification": "superseded",
+      "findings": "Earlier M1-72 pointer with same substantive Watch code.",
+      "reusable_paths": [
+        "game/scripts/ui/science_explainers.gd"
+      ],
+      "blocked_by": [],
+      "next_action": "No separate port.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/heads/ramim/m175-validated-20261109",
+      "sha": "c33c19912d96338e174fc9a8c7474cc1dba1d075",
+      "classification": "superseded",
+      "findings": "M1-75 contrast sampling ported as 4a101db; menu/test subsequently revised by 17876bf and 7ffabe8.",
+      "reusable_paths": [
+        "game/tools/test_main_menu_contrast.gd"
+      ],
+      "blocked_by": [],
+      "next_action": "Use main contrast test.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/HEAD",
+      "sha": "5f6f1df9d4fecaf24901625e9a88bc2f5d7930a5",
+      "classification": "ancestry-integrated",
+      "findings": "Current baseline main or its symbolic alias.",
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Use main; no port.",
+      "verification_limits": "Static ref/tree inspection.",
+      "review": "parent"
+    },
+    {
+      "ref": "refs/remotes/origin/main",
+      "sha": "5f6f1df9d4fecaf24901625e9a88bc2f5d7930a5",
+      "classification": "ancestry-integrated",
+      "findings": "Current baseline main or its symbolic alias.",
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Use main; no port.",
+      "verification_limits": "Static ref/tree inspection.",
+      "review": "parent"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-03",
+      "sha": "f7ec969f7f322ad326402b1c2a4b238d0f6326cd",
+      "classification": "superseded",
+      "findings": [
+        "Approved habitat concept sheets and labeling tools match main; only mutable planning and logs differ.",
+        "Merge base b06f8bc0ce03; ahead 1, behind 331; diff 21 paths; current main exact 17, different 4, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "b06f8bc0ce036e833c2dcccb809f8baf86a4f706",
+      "ahead": 1,
+      "behind": 331,
+      "subject": "feat: Habitat kit and Chapter 1 room concept sheets for approval",
+      "board": {
+        "task_id": "M1-03",
+        "status": "done",
+        "owner": null,
+        "title": "Habitat kit and Chapter 1 room concept sheets for approval",
+        "evidence_excerpt": "Sheets in production/concept/environment_v1/ (kit A/B, LOC-01..04, LOC-06, two illustrated alternates; provenance.json); review sheet production/qa/evidence/M1-03_review_sheet.png. Night shift: tests green, independent review PASS; landed 5 Nov after a board rebase conflict. Approval is M1-04."
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 21,
+        "exact_on_main": 17,
+        "different_on_main": 4,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": []
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-05",
+      "sha": "574dda3ac06d1bf71b841f655eb5cb94dd1bacf7",
+      "classification": "superseded",
+      "findings": [
+        "Habitat kit is installed on main. Later corridor, hatch and texture revisions changed 31 GLB LFS pointers; old imports must stay archived.",
+        "Merge base 4242b65ddeb4; ahead 1, behind 302; diff 118 paths; current main exact 29, different 89, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "4242b65ddeb405baebc6f6659951aa0ceae1ea1a",
+      "ahead": 1,
+      "behind": 302,
+      "subject": "wip: M1-05 (paused 5 Nov 11:45 to restart the workers safely; the next run resumes from here)",
+      "board": {
+        "task_id": "M1-05",
+        "status": "done",
+        "owner": null,
+        "title": "Generate and install the habitat kit (3D)",
+        "evidence_excerpt": "run_tests.sh 33/33 suites passed (habitat kit 224 checks incl. corridor/hatch physics rays; performance 537); verify_gate 124 assets 0 failing (24 EN_Kit_* rows); windowed capture HABITAT KIT RESULT: PASS (229 checks) via production/qa/evidence/M1-05_capture.sh; screenshots production/qa/evidence/M1-05_godot_kit_lod0.png, M1-05_godot_kit_lod1.png, M1-05_godot_room.png, M1-05_godot_room_open.png, M1-05_godot_corridor.png; contact sheets production/review/M1-05_habitat_kit_contact.png, M1-05_habit"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 118,
+        "exact_on_main": 29,
+        "different_on_main": 89,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/assets/environment/kit/EN_Kit_BulkheadRing_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_BulkheadRing_LOD1.glb",
+          "game/assets/environment/kit/EN_Kit_CableRun_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_CableRun_LOD1.glb",
+          "game/assets/environment/kit/EN_Kit_CeilingTile_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb",
+          "game/assets/environment/kit/EN_Kit_DoorFrame_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_DoorFrame_LOD1.glb",
+          "game/assets/environment/kit/EN_Kit_FloorTile_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_FloorTile_LOD1.glb",
+          "game/assets/environment/kit/EN_Kit_Hatch_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_Hatch_LOD1.glb",
+          "game/assets/environment/kit/EN_Kit_LightStrip_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_LightStrip_LOD1.glb",
+          "game/assets/environment/kit/EN_Kit_PipeRun_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_PipeRun_LOD1.glb",
+          "game/assets/environment/kit/EN_Kit_Wall_Corner_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb",
+          "game/assets/environment/kit/EN_Kit_Wall_EquipBay_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_Wall_EquipBay_LOD1.glb",
+          "game/assets/environment/kit/EN_Kit_Wall_Straight_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb",
+          "game/assets/environment/kit/EN_Kit_Wall_Window_LOD0.glb",
+          "game/assets/environment/kit/EN_Kit_Wall_Window_LOD1.glb",
+          "game/assets/environment/kit/README.md"
+        ]
+      },
+      "lfs_pointer_checks": [
+        {
+          "path": "game/assets/environment/kit/EN_Kit_BulkheadRing_LOD0.glb",
+          "branch": {
+            "oid": "sha256:80da19ff150d9fa07112a04648ba4c72f245f496c7b847d2def09ba6d7e0d55a",
+            "size": "4185240"
+          },
+          "main": {
+            "oid": "sha256:0178e2d92bd3838c8bbd48a3e21c0384e1c53e67146f362c5b4ada9b7e3f3a73",
+            "size": "175552"
+          }
+        }
+      ],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-06",
+      "sha": "1158f837d011dba5780e1f9f64b56934cfdff226",
+      "classification": "superseded",
+      "findings": [
+        "Chapter 1 rooms and builder exist on main; room and contract code evolved.",
+        "Merge base 1d7c4ef421a9; ahead 1, behind 239; diff 24 paths; current main exact 9, different 15, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "1d7c4ef421a93ece27cf48e4f3cad0c93fe033b9",
+      "ahead": 1,
+      "behind": 239,
+      "subject": "wip: M1-06 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-06",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Assemble the Chapter 1 rooms from the kit",
+        "evidence_excerpt": "run_tests.sh last line: 38/38 suites passed (production/qa/evidence/M1-06_tests.txt): habitat rooms 333/0, campaign crew 927/0, room presentation 136/0, performance 537/0, explainers 321/0. Fix round 3: test_explainers failed only because this worktree's base 1d7c4ef predates M1-67 on main; main's 43 explainer/fixture files were copied in byte-identical (no M1-06 code change; they drop out at the land rebase); round 2's HUD bug task renumbered M1-70 -> M1-74 (main reused M1-70). Windowed capture"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 24,
+        "exact_on_main": 9,
+        "different_on_main": 15,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/resources/campaign/rooms/LOC-01.json",
+          "game/resources/campaign/rooms/LOC-02.json",
+          "game/resources/campaign/rooms/LOC-03.json",
+          "game/resources/campaign/rooms/LOC-04.json",
+          "game/resources/campaign/rooms/README.md",
+          "game/scripts/world/campaign_crew.gd",
+          "game/scripts/world/campaign_room.gd",
+          "game/scripts/world/habitat_room_builder.gd",
+          "game/scripts/world/room_contract.gd",
+          "game/scripts/world/room_presentation.gd",
+          "game/tools/test_habitat_rooms.gd",
+          "game/tools/test_room_presentation.gd",
+          "game/tools/test_worker_b_world_missions.gd"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-07",
+      "sha": "a7140a30e37c50cd11fab9bb95dbad6951ba1092",
+      "classification": "superseded",
+      "findings": [
+        "Plant stages, UI icons and Earth desk exist; portrait and integration were revised later.",
+        "Merge base 5bc91c6e29c7; ahead 1, behind 219; diff 159 paths; current main exact 112, different 47, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "5bc91c6e29c778207fd4bc2cb3654d00fed23a0e",
+      "ahead": 1,
+      "behind": 219,
+      "subject": "wip: M1-07 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-07",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Chapter 1 missing assets: Alo's early stages, Earth desk, UI kit",
+        "evidence_excerpt": "Approved by Sadman in chat, 6 Nov 2026 ~10:58: \"Approve, Space weather\" (UI_Kit_sheet_v1 with its 6 README decisions and EN_EarthDesk_sheet_v1 with its 5, as built; Rafi's role word everywhere is Space weather, handbook \u00c2\u00a73/\u00c2\u00a74 updated). Landed night/M1-07 (a7140a3) on main: PL_Alo_Sprout + PL_Tara_Sprout (gate PASS, visual PASS, registry verified), EN_EarthDesk + UI_Kit (new production/manifest/screen_assets.csv, registry verified); Earth screen re-fitted to main's kit commons fixture; seedlings "
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 159,
+        "exact_on_main": 112,
+        "different_on_main": 47,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/assets/ui/portraits/CH_Ferreira_screen.md",
+          "game/assets/ui/portraits/CH_Ferreira_screen.png",
+          "game/resources/ui/ui_kit.json",
+          "game/scripts/asset_geometry.gd",
+          "game/scripts/loading/load_preparation.gd",
+          "game/scripts/world/campaign_crew.gd",
+          "game/scripts/world/campaign_room.gd",
+          "game/tools/probe_earth_screen.gd",
+          "game/tools/test_earth_screen.gd",
+          "game/tools/test_plant_seedlings.gd"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-08",
+      "sha": "1f01baaa88ee0945de826b6ad7d7763b8bfe5b08",
+      "classification": "unsafe-WIP",
+      "findings": "Old 988-line P01 panel and 601-line workbench hold zero/span/cassette choices; apply_canonical_setup prefills correct fixture values. Route reset erases private _director._state receipts. Current P01 uses p01_view/forecast_target/perform_target explicit payloads.",
+      "reusable_paths": [
+        "game/scripts/ui/p01_puzzle_panel.gd",
+        "game/scripts/puzzles/p01_commission_plant_puzzle.gd",
+        "game/resources/campaign/content/p01_commission_plant.json"
+      ],
+      "blocked_by": [
+        "Atik route/model ownership",
+        "unsafe private Director mutation",
+        "M1-115 label rule"
+      ],
+      "next_action": "Use only UI ideas, never cherry-pick route.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-100",
+      "sha": "b276bb4d3b85190cff296c3e191752a41ec3e553",
+      "classification": "superseded",
+      "findings": [
+        "Parked delayed voice-readiness test differs from current bounded readiness and freed-owner coverage; board records landed 71/71 run.",
+        "Merge base e0e1615e9c1a; ahead 1, behind 86; diff 100 paths; current main exact 0, different 6, branch-only 94, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "e0e1615e9c1a927379d95c0e28b2d709a69aa686",
+      "ahead": 1,
+      "behind": 86,
+      "subject": "wip: M1-100 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-100",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Investigate Windows campaign-media voice readiness failure",
+        "evidence_excerpt": "Cause proven: delayed threaded load left playing=false/path=null while line_id was correct after 3 frames. Added bounded voice_readiness state and 500 ms fixture wait while retaining strict playback/path/line assertion. Evidence: production/qa/evidence/M1-100.md, M1-100_slow_load_before_full.txt, M1-100_slow_load_after_full.txt, M1-100_campaign_media.txt, M1-100_full.txt; focused 114/0 and full 71/71 suites."
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 100,
+        "exact_on_main": 0,
+        "different_on_main": 6,
+        "branch_only": [
+          "production/qa/evidence/M1-100_baseline/setup.txt",
+          "production/qa/evidence/M1-100_baseline/test_campaign_media.gd.txt",
+          "production/qa/evidence/M1-100_baseline_runner.txt",
+          "production/qa/evidence/M1-100_capture.sh",
+          "production/qa/evidence/M1-100_capture_console.txt",
+          "production/qa/evidence/M1-100_capture_output.txt",
+          "production/qa/evidence/M1-100_capture_probe.json",
+          "production/qa/evidence/M1-100_capture_refused.txt",
+          "production/qa/evidence/M1-100_delayed_red/setup.txt",
+          "production/qa/evidence/M1-100_delayed_red/test_campaign_media.gd.txt",
+          "production/qa/evidence/M1-100_delayed_red_runner.txt",
+          "production/qa/evidence/M1-100_focused/setup.txt",
+          "production/qa/evidence/M1-100_focused/test_campaign_media.gd.txt",
+          "production/qa/evidence/M1-100_focused_runner.txt",
+          "production/qa/evidence/M1-100_full/setup.txt",
+          "production/qa/evidence/M1-100_full/test_asset_showcase.gd.txt",
+          "production/qa/evidence/M1-100_full/test_campaign_boot.gd.txt",
+          "production/qa/evidence/M1-100_full/test_campaign_crew.gd.txt",
+          "production/qa/evidence/M1-100_full/test_campaign_knowledge.gd.txt",
+          "production/qa/evidence/M1-100_full/test_campaign_later_runtime.gd.txt",
+          "production/qa/evidence/M1-100_full/test_campaign_media.gd.txt",
+          "production/qa/evidence/M1-100_full/test_campaign_session.gd.txt",
+          "production/qa/evidence/M1-100_full/test_care_round_panel.gd.txt",
+          "production/qa/evidence/M1-100_full/test_ch01_room_hooks.gd.txt",
+          "production/qa/evidence/M1-100_full/test_ch01_s03_route.gd.txt",
+          "production/qa/evidence/M1-100_full/test_ch03_assets.gd.txt",
+          "production/qa/evidence/M1-100_full/test_ch04_assets.gd.txt",
+          "production/qa/evidence/M1-100_full/test_ch05_assets.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter1_campaign_flow.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter1_logic_regressions.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter1_outcomes.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter1_ui_regressions.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter2_rooms.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter2_route.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter3_rooms.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter4_rooms.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter5_rooms.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter6_rooms.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter7_assets.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter7_rooms.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter8_assets.gd.txt",
+          "production/qa/evidence/M1-100_full/test_chapter8_rooms.gd.txt",
+          "production/qa/evidence/M1-100_full/test_cutscene_choice_card.gd.txt",
+          "production/qa/evidence/M1-100_full/test_director_message_metadata.gd.txt",
+          "production/qa/evidence/M1-100_full/test_earth_screen.gd.txt",
+          "production/qa/evidence/M1-100_full/test_eclipse_props.gd.txt",
+          "production/qa/evidence/M1-100_full/test_en_airlock.gd.txt",
+          "production/qa/evidence/M1-100_full/test_explainers.gd.txt",
+          "production/qa/evidence/M1-100_full/test_extended_campaign_route.gd.txt",
+          "production/qa/evidence/M1-100_full/test_exterior_terrain.gd.txt",
+          "production/qa/evidence/M1-100_full/test_face_atlas.gd.txt",
+          "production/qa/evidence/M1-100_full/test_face_expression.gd.txt",
+          "production/qa/evidence/M1-100_full/test_habitat_kit.gd.txt",
+          "production/qa/evidence/M1-100_full/test_habitat_rooms.gd.txt",
+          "production/qa/evidence/M1-100_full/test_hair_springs.gd.txt",
+          "production/qa/evidence/M1-100_full/test_hint_player.gd.txt",
+          "production/qa/evidence/M1-100_full/test_journal_tabs.gd.txt",
+          "production/qa/evidence/M1-100_full/test_later_numeric.gd.txt",
+          "production/qa/evidence/M1-100_full/test_lip_sync.gd.txt",
+          "production/qa/evidence/M1-100_full/test_lunar_kit.gd.txt",
+          "production/qa/evidence/M1-100_full/test_m155_mission_table.gd.txt",
+          "production/qa/evidence/M1-100_full/test_mission_trainer.gd.txt",
+          "production/qa/evidence/M1-100_full/test_narrative_props.gd.txt",
+          "production/qa/evidence/M1-100_full/test_outpost_status.gd.txt",
+          "production/qa/evidence/M1-100_full/test_p01_inputs.gd.txt",
+          "production/qa/evidence/M1-100_full/test_p02_mission_table.gd.txt",
+          "production/qa/evidence/M1-100_full/test_performance_runtime.gd.txt",
+          "production/qa/evidence/M1-100_full/test_plant_seedlings.gd.txt",
+          "production/qa/evidence/M1-100_full/test_player_controller.gd.txt",
+          "production/qa/evidence/M1-100_full/test_player_text.gd.txt",
+          "production/qa/evidence/M1-100_full/test_review_scene.gd.txt",
+          "production/qa/evidence/M1-100_full/test_room_presentation.gd.txt",
+          "production/qa/evidence/M1-100_full/test_save_service_recovery.gd.txt",
+          "production/qa/evidence/M1-100_full/test_science_data.gd.txt",
+          "production/qa/evidence/M1-100_full/test_sound_captions.gd.txt",
+          "production/qa/evidence/M1-100_full/test_story_log.gd.txt",
+          "production/qa/evidence/M1-100_full/test_tara_lifecycle.gd.txt",
+          "production/qa/evidence/M1-100_full/test_terrain.gd.txt",
+          "production/qa/evidence/M1-100_full/test_terrain_lola.gd.txt",
+          "production/qa/evidence/M1-100_full/test_terrain_session.gd.txt",
+          "production/qa/evidence/M1-100_full/test_toon_materials.gd.txt",
+          "production/qa/evidence/M1-100_full/test_ui_kit.gd.txt",
+          "production/qa/evidence/M1-100_full/test_worker_a_systems.gd.txt",
+          "production/qa/evidence/M1-100_full/test_worker_b_world_missions.gd.txt",
+          "production/qa/evidence/M1-100_full/test_worker_c_content.gd.txt",
+          "production/qa/evidence/M1-100_full_runner.txt",
+          "production/qa/evidence/M1-100_manifest.json",
+          "production/qa/evidence/M1-100_native_care_round_panel/setup.txt",
+          "production/qa/evidence/M1-100_native_care_round_panel/test_care_round_panel.gd.txt",
+          "production/qa/evidence/M1-100_native_care_round_panel_runner.txt",
+          "production/qa/evidence/M1-100_native_mission_trainer/setup.txt",
+          "production/qa/evidence/M1-100_native_mission_trainer/test_mission_trainer.gd.txt",
+          "production/qa/evidence/M1-100_native_mission_trainer_runner.txt",
+          "production/qa/evidence/M1-100_voice_caption.png"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/tools/test_campaign_media.gd"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-18",
+      "sha": "29877b8f739be0a12c9324bcdc0d7067a1bac8af",
+      "classification": "metadata-only",
+      "findings": "Only BOARD.html and tasks.json status/owner edits; no UI code.",
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Build from current UI and player evidence.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-19",
+      "sha": "8a253dd7f8cbf488f98f259c23e5c073a2ad55d1",
+      "classification": "ancestry-integrated",
+      "findings": "Ancestor with no branch-only files; historical board block or current main pointer.",
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "No port; use main.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-19-saved",
+      "sha": "3f67b0111292438a40248f4ff977f0b839098179",
+      "classification": "superseded",
+      "findings": "Old standalone outcome/debrief scene and route; current main has replay/debrief in CampaignPanels and scripts/debrief via ce1fe28 and 52fb20d.",
+      "reusable_paths": [
+        "game/scripts/ui/chapter1_outcome_panel.gd",
+        "game/resources/campaign/content/chapter1_debrief.json"
+      ],
+      "blocked_by": [
+        "Atik route ownership",
+        "old panel contract diverges"
+      ],
+      "next_action": "Use main debrief; acceptance still separate.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-29",
+      "sha": "a1e0a6ce6572ce8112eab988f0cc48ef6c37196d",
+      "classification": "ancestry-integrated",
+      "findings": "Ancestor with no branch-only files; historical board block or current main pointer.",
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "No port; use main.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-34",
+      "sha": "fece37e293b3063de41818a3b89111b52544bbd9",
+      "classification": "superseded",
+      "findings": [
+        "LOLA terrain heightmaps and textures are installed; terrain and astronomy manifests evolved. .night_merge is scratch.",
+        "Merge base fc8d9f5b7237; ahead 2, behind 256; diff 456 paths; current main exact 433, different 20, branch-only 3, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "fc8d9f5b723769516f597cde01312d768eba0176",
+      "ahead": 2,
+      "behind": 256,
+      "subject": "wip: M1-34 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-34",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Real south-pole terrain from NASA LRO LOLA elevation data",
+        "evidence_excerpt": "Landed on main in a5802bb (6 Nov, Sadman/claude) from night/M1-34: terrain_lola 1090/1090, science_data 146/146, player_text 354/354, explainers 237/237, gate 124 assets 0 failing. A stale night-shift run re-blocked it afterwards; night/M1-34 is superseded."
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 456,
+        "exact_on_main": 433,
+        "different_on_main": 20,
+        "branch_only": [
+          ".night_merge/base",
+          ".night_merge/ours",
+          ".night_merge/theirs"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/assets/environment/terrain/lola/README.md",
+          "game/assets/environment/terrain/lola/lola_terrain.json",
+          "game/assets/environment/terrain/lola/sun_positions.json",
+          "game/assets/environment/terrain/lola/terrain_heightfield.gd",
+          "game/resources/data/nasa/lro_lola_south_pole_terrain.json",
+          "game/scripts/science/science_data.gd",
+          "game/scripts/ui/campaign_panels.gd",
+          "game/tools/test_science_data.gd",
+          "game/tools/test_terrain_lola.gd",
+          "production/tools/make_terrain.py",
+          "production/tools/verify_gate.py"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-37",
+      "sha": "8a792c11cd549a8fe1b0d2c5568101c31ef2bf5e",
+      "classification": "unsafe-WIP",
+      "findings": "Class handoff, P02 read/share/sign-off and printable cards. Saved main.gd declares var crew twice in one function; set_crew uses restore_snapshot and risks checkpoint replacement. M1-102 landed; M1-103 todo.",
+      "reusable_paths": [
+        "game/scripts/ui/role_card_handoff.gd",
+        "game/scripts/ui/main_menu.gd",
+        "game/scripts/ui/mission_table_panel.gd",
+        "game/resources/campaign/content/crew_modes.json",
+        "game/tools/test_class_mode.gd"
+      ],
+      "blocked_by": [
+        "M1-103",
+        "Atik main/campaign/core ownership",
+        "unsafe setter"
+      ],
+      "next_action": "Port owned UI after bridge, never setter.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-47",
+      "sha": "467a16f7458da2401d85fd9a79ad7f0846ad108e",
+      "classification": "superseded",
+      "findings": [
+        "Story-log choice/moment saving exists; UI panel and campaign test evolved.",
+        "Merge base e61d6782bd37; ahead 1, behind 326; diff 17 paths; current main exact 6, different 11, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "e61d6782bd378cc6ba9f1e9ccf69facfa674f9cb",
+      "ahead": 1,
+      "behind": 326,
+      "subject": "wip: M1-47 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-47",
+        "status": "done",
+        "owner": null,
+        "title": "Save schema 3: record the player's story choices and moments (story_log)",
+        "evidence_excerpt": "Ported valid fixes from origin/night/M1-47 (467a16f7458da2401d85fd9a79ad7f0846ad108e) while preserving current main: decision-label wrapping, 144 layout checks, isolated capture/probes; capture disables film autoplay only for its UI fixture. GODOT=/Applications/Godot.app/Contents/MacOS/Godot game/tools/run_tests.sh: 31/31 suites passed (447 Chapter 1 flow, 64 story-log, 537 performance checks); unedited output: production/qa/evidence/M1-47_tests.txt. Acceptance test names from game/tools/test_st"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 17,
+        "exact_on_main": 6,
+        "different_on_main": 11,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/scripts/ui/campaign_panels.gd",
+          "game/tools/capture_story_log.gd",
+          "game/tools/test_chapter1_campaign_flow.gd"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-49",
+      "sha": "2158d1c7c88a931b7a738a56e20b0c13f6e8608d",
+      "classification": "metadata-only",
+      "findings": [
+        "Only unique files are BOARD.html and tasks.json; claim changes to Sadman/night-codex-main, no Care Round implementation.",
+        "Current board assigns atik/codex; CareRoundPanel provider and RoomContract care hooks exist, but no runtime consumer or real photo bridge."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [
+        "M1-49 runtime integration and acceptance; M1-68 full-suite gate"
+      ],
+      "next_action": "Ignore this branch for source; wire existing panel, room hooks, PlantService/Director photo ledger, world capture, persistence and scene beats in owned runtime files.",
+      "verification_limits": "Static diff/current-source review only; no Godot, native capture, tests, checkout, cherry-pick or current-runtime acceptance. Historical logs do not certify main 5f6f1df.",
+      "review": "runtime_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-50",
+      "sha": "0c79ea7b4b28ec9a74b441f0957ae631cae3dda9",
+      "classification": "metadata-only",
+      "findings": [
+        "Only board files changed; no narrative payload in this tip.",
+        "Merge base 18d4d771d0e5; ahead 1, behind 325; diff 2 paths; current main exact 0, different 2, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Retain current main and board; no port.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "18d4d771d0e5fd2f6d195a96266ddf83d537ab40",
+      "ahead": 1,
+      "behind": 325,
+      "subject": "wip: M1-50 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-50",
+        "status": "done",
+        "owner": null,
+        "title": "Chapter 1 narrative text pack: journal entries, questions, resume templates, drawer-lid note, feedback text",
+        "evidence_excerpt": "python3 -m json.tool parses journal_text.json and story_echoes.json. production/qa/evidence/M1-50_text_check.py PASS (output: M1-50_text_check.txt): 127 journal entries + 19 echo rows listed by id; every scene_id exists in story-data.json; no body contains 'Noor', 'Rahman' or 'Ferreira was'; all 46 Chapter 1 gate targets, 12 concept cards, 12 Now entries and 24 choice options covered; doc 24 drawer-lid, feedback and Alo Lost text verbatim; at most two sentences per body. New text for Sadman to r"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 2,
+        "exact_on_main": 0,
+        "different_on_main": 2,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": []
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-51",
+      "sha": "0eb7f7c2b50c79b18086bcba0238b60a0e853669",
+      "classification": "superseded",
+      "findings": [
+        "Current CS-01 cold open was rebuilt after M1-45 exterior fix; parked master and runtime pointers are older.",
+        "Merge base a9392897d9ad; ahead 1, behind 320; diff 23 paths; current main exact 1, different 22, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "a9392897d9adac80e365cf022a749c063ded1d7f",
+      "ahead": 1,
+      "behind": 320,
+      "subject": "feat: Re-edit CS-01 into a cold open: exterior silence, interior hum, title over the gold band (existing footage only)",
+      "board": {
+        "task_id": "M1-51",
+        "status": "done",
+        "owner": null,
+        "title": "Re-edit CS-01 into a cold open: exterior silence, interior hum, title over the gold band (existing footage only)",
+        "evidence_excerpt": "Fix round: ported origin/night/M1-51 and rebuilt the cut from the M1-45 fixed exterior (the parked .ogv was the conflict). v8 spec production/cutscenes/v8/src/CS-01.json -> master CS-01_Arrival.mp4 14.17 s, game .ogv 1280x720 14.21 s; scdet t=3/5/10: no hard cut; exterior on screen 0-5.13 s at -inf dB (first non-zero sample 5.346 s, inside the dissolve); no dialogue, no music; presentation_media CS-01 caption_cues empty. Windowed campaign capture PASS 0 failures (production/qa/evidence/M1-51_pro"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 23,
+        "exact_on_main": 1,
+        "different_on_main": 22,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/assets/cutscenes/CS-01_Arrival.ogv",
+          "game/assets/cutscenes/README.md",
+          "game/resources/campaign/content/presentation_media.json",
+          "production/cutscenes/v8/src/CS-01.json",
+          "production/tools/build_presentation_media.py",
+          "production/tools/compose_cutscene.py"
+        ]
+      },
+      "lfs_pointer_checks": [
+        {
+          "path": "game/assets/cutscenes/CS-01_Arrival.ogv",
+          "branch": {
+            "oid": "sha256:24a097c4dfec6fcdcb8e5ffed99b4a0bed141b1728dd0a1a02a359a7b344b6bc",
+            "size": "12730793"
+          },
+          "main": {
+            "oid": "sha256:006568891a94202875581a44dbfd37c69ba386a403608d56b7340433eb1977cb",
+            "size": "23953778"
+          }
+        }
+      ],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-52",
+      "sha": "88301efda7a8cbd9a344e4049503caabd81e1216",
+      "classification": "metadata-only",
+      "findings": [
+        "Only handbook, AI log and board changed; no branch media payload.",
+        "Merge base a20cd6688d49; ahead 1, behind 273; diff 4 paths; current main exact 0, different 4, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Retain current main and board; no port.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "a20cd6688d490e8b6fd8b3ab290f52dec23d9016",
+      "ahead": 1,
+      "behind": 273,
+      "subject": "wip: M1-52 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-52",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Opening beat 1: a 6 s Earth mustard-field shot and its wind-and-birds effect",
+        "evidence_excerpt": "Approval: Sadman in chat, 6 Nov 2026: \"A, anime\" (production/concept/opening_field/README.md). Shot: Veo 3.1 Quality frames-to-video from field_anime_v1_start_frame.png, take 1 of 2 -> production/cutscenes/v8/src/shots/CS-01-F.mp4 (first 6 s; four-petal cross flowers checked at 2.5 s and 5.5 s; no person, face, animal, text or logo; yellows graded -6 deg: field 47.9 -> 42.1 deg hue against the battery band's 39.1 median / 43.3 highlights). SFX_EARTH_FIELD_MORNING (ElevenLabs, -24.1 LUFS) in sfx_"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 4,
+        "exact_on_main": 0,
+        "different_on_main": 4,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": []
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-53",
+      "sha": "f6285e46eabae8e02274cffac9d53f9e31fb3209",
+      "classification": "unsafe-WIP",
+      "findings": [
+        "Unique commit adds PreparationWatchdog and changes raw GLB/resource/job/room/draw waits, but is based on an older loading architecture.",
+        "Candidate capture summary explicitly says forced-stall absent and 0/10 complete rendered probes validated; run 01 alone passed, then capture was interrupted. QA report has RESULT_* placeholders.",
+        "Quarantined native worker cannot be cancelled and can delay shutdown; watchdog does not repair main-thread native stalls or prove M1-68 timings."
+      ],
+      "reusable_paths": [
+        "game/scripts/loading/preparation_watchdog.gd",
+        "game/scripts/loading/load_preparation.gd",
+        "game/scripts/loading/resource_job.gd",
+        "game/scripts/asset_geometry.gd",
+        "game/tools/test_preparation_watchdog.gd",
+        "game/tools/m1_53_acceptance.py"
+      ],
+      "blocked_by": [
+        "Current-code adaptation and forced-stall proof",
+        "Ten fresh windowed probes and run_tests.sh",
+        "M1-68 is an independent measured timing failure"
+      ],
+      "next_action": "Use candidate as design reference only; inspect each current wait and implement minimal bounded recovery, then rerun fresh acceptance on current source.",
+      "verification_limits": "Static diff/current-source review only; no Godot, native capture, tests, checkout, cherry-pick or current-runtime acceptance. Historical logs do not certify main 5f6f1df.",
+      "review": "runtime_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-54",
+      "sha": "e83b8836c4af6d33e87df9973e5c30e907e0f067",
+      "classification": "superseded",
+      "findings": [
+        "Early shell commit is replaced by reviewed M1-54 delivery 1370313, an ancestor of main.",
+        "ui_design.json blob is identical; other UI/text files have advanced since."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current HUD, goal card, toast, pause-actions and text design; do not replay old shell.",
+      "verification_limits": "Static diff/current-source review only; no Godot, native capture, tests, checkout, cherry-pick or current-runtime acceptance. Historical logs do not certify main 5f6f1df.",
+      "review": "runtime_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-58",
+      "sha": "53d5fff1ffa063f9cc0d91525ba2851a3030f145",
+      "classification": "unsafe-WIP",
+      "findings": [
+        "Unique tip commit adds only .night_merge/base, ours and theirs, which are conflict dumps; no gameplay source.",
+        "Source in its parent was independently ported and corrected on main."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Do not apply tip or conflict dumps.",
+      "verification_limits": "Static diff/current-source review only; no Godot, native capture, tests, checkout, cherry-pick or current-runtime acceptance. Historical logs do not certify main 5f6f1df.",
+      "review": "runtime_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-76",
+      "sha": "b38ac3d3feecd4a7ff6a5a7db897fe8994f5707e",
+      "classification": "superseded",
+      "findings": [
+        "Compatibility shadow fix exists; branch-only QA evidence is archival and runner/test evolved.",
+        "Merge base 34fc2870a312; ahead 1, behind 205; diff 34 paths; current main exact 0, different 7, branch-only 27, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "34fc2870a312fe4733e1fcda9fe35d8af4d053d3",
+      "ahead": 1,
+      "behind": 205,
+      "subject": "wip: M1-76 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-76",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Use supported room shadows in the Compatibility renderer",
+        "evidence_excerpt": "room_presentation.gd: omni_shadow_mode_for() gives SHADOW_CUBE under gl_compatibility and keeps SHADOW_DUAL_PARABOLOID (the measured 18.3 -> 16.7 ms saving) for Forward+ and Mobile. Compatibility errors 12 -> 0 on macOS (production/qa/evidence/M1-76_compat_shadows.txt); test_room_presentation.gd 138/138 with two new checks."
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 34,
+        "exact_on_main": 0,
+        "different_on_main": 7,
+        "branch_only": [
+          "production/qa/evidence/M1-76_capture.gd",
+          "production/qa/evidence/M1-76_capture.sh",
+          "production/qa/evidence/M1-76_capture_output.txt",
+          "production/qa/evidence/M1-76_evidence_refresh_check.txt",
+          "production/qa/evidence/M1-76_evidence_validation.txt",
+          "production/qa/evidence/M1-76_forward_plus_capture.txt",
+          "production/qa/evidence/M1-76_forward_plus_character_shadows_off.png",
+          "production/qa/evidence/M1-76_forward_plus_furniture_shadows_off.png",
+          "production/qa/evidence/M1-76_forward_plus_headless.json",
+          "production/qa/evidence/M1-76_forward_plus_headless.txt",
+          "production/qa/evidence/M1-76_forward_plus_opening.png",
+          "production/qa/evidence/M1-76_forward_plus_other_errors.txt",
+          "production/qa/evidence/M1-76_forward_plus_probe.json",
+          "production/qa/evidence/M1-76_forward_plus_shadows.png",
+          "production/qa/evidence/M1-76_gl_compatibility_capture.txt",
+          "production/qa/evidence/M1-76_gl_compatibility_character_shadows_off.png",
+          "production/qa/evidence/M1-76_gl_compatibility_furniture_shadows_off.png",
+          "production/qa/evidence/M1-76_gl_compatibility_headless.json",
+          "production/qa/evidence/M1-76_gl_compatibility_headless.txt",
+          "production/qa/evidence/M1-76_gl_compatibility_opening.png",
+          "production/qa/evidence/M1-76_gl_compatibility_other_errors.txt",
+          "production/qa/evidence/M1-76_gl_compatibility_probe.json",
+          "production/qa/evidence/M1-76_gl_compatibility_shadows.png",
+          "production/qa/evidence/M1-76_regression_check.txt",
+          "production/qa/evidence/M1-76_tests.txt",
+          "production/qa/evidence/M1-76_verification.json",
+          "production/qa/evidence/M1-76_verify.py"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/scripts/world/room_presentation.gd",
+          "game/tools/run_tests.sh",
+          "game/tools/test_room_presentation.gd"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-81",
+      "sha": "4c5e4e18f4aa5fc8b03bebfcb63d3b6036c62c6c",
+      "classification": "metadata-only",
+      "findings": [
+        "Only status and QA evidence changed; newer UI status is on main.",
+        "Merge base b5372ed56d4f; ahead 1, behind 173; diff 14 paths; current main exact 0, different 4, branch-only 10, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Retain current main and board; no port.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "b5372ed56d4f0dae39f48f54f7487cae5e9a8703",
+      "ahead": 1,
+      "behind": 173,
+      "subject": "wip: M1-81 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-81",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Record reviewed Ramim UI implementation and performance-blocked status in handbook",
+        "evidence_excerpt": "PRODUCTION_HANDBOOK.md \u00c2\u00a710, 7 Nov line: M1-19 debrief, M1-29 isolated P-02 trainer and M1-55 guided Mission Table implemented and reviewed at 66aed53, not marked done; run_tests.sh 53/54 with the only failure Atik's M1-68 test_performance_runtime (537 checks, 8 timing failures), quoted from production/qa/evidence/M1-55_test_results.txt; evidence M1-55_qa.md, M1-29_qa.md. No board status of M1-19/M1-29/M1-55 changed; no canon changed."
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 14,
+        "exact_on_main": 0,
+        "different_on_main": 4,
+        "branch_only": [
+          "production/qa/evidence/M1-81_capture.sh",
+          "production/qa/evidence/M1-81_capture_output.txt",
+          "production/qa/evidence/M1-81_fix_test_results.txt",
+          "production/qa/evidence/M1-81_host_test_results.txt",
+          "production/qa/evidence/M1-81_permission_probe.txt",
+          "production/qa/evidence/M1-81_permissions_validation.txt",
+          "production/qa/evidence/M1-81_review.sh",
+          "production/qa/evidence/M1-81_review_output.txt",
+          "production/qa/evidence/M1-81_settings.json",
+          "production/qa/evidence/M1-81_test_results.txt"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": []
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-86",
+      "sha": "1bc7813455fff5fbdae4bfcc10fbd294f78d1424",
+      "classification": "metadata-only",
+      "findings": [
+        "Only status and QA evidence changed; hint reader/runtime status is on main.",
+        "Merge base 01fdfbeb92c1; ahead 1, behind 158; diff 10 paths; current main exact 0, different 5, branch-only 5, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Retain current main and board; no port.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "01fdfbeb92c14a475352cacdb4ad9bc1f743efcd",
+      "ahead": 1,
+      "behind": 158,
+      "subject": "wip: M1-86 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-86",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Record reviewed M1-64 hint reader and runtime-blocked acceptance in handbook",
+        "evidence_excerpt": "PRODUCTION_HANDBOOK.md \u00c2\u00a710, 7 Nov line (ported from parked origin/night/M1-86, every number rechecked): reviewed M1-64 at fbdcd67 is implemented WIP, not done; hint 124/0 and UI, trainer, text, campaign, P-02 suites pass; Windows run_tests.sh 57/58, sole failure Atik's M1-68 test_performance_runtime (title 55.308 ms, new campaign 100.068 ms vs < 50 ms); cold-import 139 / warm retry 85/0 left with M1-85, nothing claimed fixed; links M1-64_full_results.txt and M1-64_qa.md. This slot's macOS run_te"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 10,
+        "exact_on_main": 0,
+        "different_on_main": 5,
+        "branch_only": [
+          "production/qa/evidence/M1-86_campaign_media_retry.txt",
+          "production/qa/evidence/M1-86_capture.sh",
+          "production/qa/evidence/M1-86_capture_output.txt",
+          "production/qa/evidence/M1-86_mission_trainer_retry.txt",
+          "production/qa/evidence/M1-86_tests_outside_sandbox.txt"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": []
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-87",
+      "sha": "8bd450fd2e8dd1046bdfa29ccf488c2bda9a2399",
+      "classification": "superseded",
+      "findings": [
+        "Relay-road terrain assets exist; later terrain/provenance changed. Branch patch-map evidence is archival.",
+        "Merge base e66ccdd041a1; ahead 1, behind 133; diff 169 paths; current main exact 140, different 27, branch-only 2, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "e66ccdd041a10ecd2f2bff7a64a9b377015cb864",
+      "ahead": 1,
+      "behind": 133,
+      "subject": "wip: M1-87 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-87",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Walkable 10 m relay-road patch so LOC-11 can stand on the LOLA terrain",
+        "evidence_excerpt": "relay_road_mid hero region (8x8 km, 10 m LDEM_83S, site relay_road_mid); LOC-11 at (-160,-1198) on the computed road, omit_staging_floor true, lanes max 0.57 deg, room <2.7 deg, fixtures rest within 0.21 m; test_exterior_terrain.gd PASS (950 checks windowed); test_terrain_session prepares LOC-11; run_tests.sh 74/74 suites passed; production/qa/evidence/M1-82_LOC11_CH08S03_wide.png, _ground.png; follow-ups M4-13 (spurs), M4-14 (LOC-11 work lights)"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 169,
+        "exact_on_main": 140,
+        "different_on_main": 27,
+        "branch_only": [
+          "production/qa/evidence/M1-87_relay_patch.md",
+          "production/qa/evidence/M1-87_relay_patch_map.png"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/assets/environment/terrain/lola/README.md",
+          "game/assets/environment/terrain/lola/lola_terrain.json",
+          "game/assets/environment/terrain/lola/sun_positions.json",
+          "game/resources/campaign/rooms/README.md",
+          "game/resources/campaign/rooms/exterior_terrain.json",
+          "game/resources/data/nasa/lro_lola_south_pole_terrain.json",
+          "game/tools/test_exterior_terrain.gd",
+          "game/tools/test_terrain_lola.gd",
+          "production/tools/make_terrain.py"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-89",
+      "sha": "59ab82ea88b9462c51a067c3c097a7d0312dd193",
+      "classification": "superseded",
+      "findings": [
+        "Old Director/State proposal is superseded by main ancestor 9266f71, campaign wrapper d08eef8, and M1-99 retry preservation.",
+        "Current Director metadata validation is bounded and atomic; campaign wrapper saves and reports persisted separately."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "M1-56 should consume current message_metadata/update_message_metadata and M1-54 HUD interfaces; implement inbox/unlocks/validator/tests.",
+      "verification_limits": "Static diff/current-source review only; no Godot, native capture, tests, checkout, cherry-pick or current-runtime acceptance. Historical logs do not certify main 5f6f1df.",
+      "review": "runtime_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-91",
+      "sha": "e2336d4118f16cfc5d9acfd6f4e535f5ab00789a",
+      "classification": "superseded",
+      "findings": [
+        "Cold-trap work lights exist; main extends rover scene staging and LOC-11 states.",
+        "Merge base e0e1615e9c1a; ahead 1, behind 86; diff 19 paths; current main exact 4, different 12, branch-only 3, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "e0e1615e9c1a927379d95c0e28b2d709a69aa686",
+      "ahead": 1,
+      "behind": 86,
+      "subject": "wip: M1-91 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-91",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Authored work lighting for terrain-backed cold-trap rooms",
+        "evidence_excerpt": "game/resources/campaign/rooms/terrain_work_lights.json, game/resources/campaign/rooms/README.md, game/scripts/world/terrain_work_lights.gd, game/scripts/world/room_contract.gd, game/scripts/world/campaign_room.gd, game/tools/terrain_visual_ground.gd, game/tools/test_terrain_work_lights.gd (884/884 headless, 1070/1070 forward_plus, 1070/1070 gl_compatibility PASS), production/qa/evidence/M1-91_capture_output.txt, production/qa/evidence/M1-91_tests.txt, production/qa/evidence/M1-91_{fplus,compat}_"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 19,
+        "exact_on_main": 4,
+        "different_on_main": 12,
+        "branch_only": [
+          "production/qa/evidence/M1-91_fixture_failures.txt",
+          "production/qa/evidence/M1-91_targeted.txt",
+          "production/qa/evidence/M1-91_window_probe.txt"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/resources/campaign/rooms/README.md",
+          "game/resources/campaign/rooms/terrain_work_lights.json",
+          "game/scripts/world/campaign_room.gd",
+          "game/scripts/world/room_contract.gd",
+          "game/scripts/world/terrain_work_lights.gd",
+          "game/tools/test_terrain_work_lights.gd"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-96",
+      "sha": "879b67afce66e508290c3b3889b5db183a701f0f",
+      "classification": "metadata-only",
+      "findings": [
+        "Only status and QA evidence changed; newer Care Round status is on main.",
+        "Merge base e0e1615e9c1a; ahead 1, behind 86; diff 12 paths; current main exact 0, different 4, branch-only 8, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Retain current main and board; no port.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "e0e1615e9c1a927379d95c0e28b2d709a69aa686",
+      "ahead": 1,
+      "behind": 86,
+      "subject": "wip: M1-96 (night shift, not landed)",
+      "board": {
+        "task_id": "M1-96",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Record reviewed Care Round provider and runtime acceptance limits",
+        "evidence_excerpt": "PRODUCTION_HANDBOOK.md \u00c2\u00a710, 8 Nov line: M1-83 Care Round UI provider reviewed on main (provider contract, review fixes, probe counts, full run 64/65 with only M1-68 timing failures; Atik M1-49 owns integration; M1-83 stays blocked on the full gate); M1-90 Windows timing collection complete (2 and 1 timing failures; M1-68 unresolved, no cause claimed); M1-62 Chapter 2-8 job text (283 + 46 entries, text 12839/0, Science Data 181/0, 68/70 suites at 3cf82b1; blocked on M1-100 and M1-68/M1-97, M1-101"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 12,
+        "exact_on_main": 0,
+        "different_on_main": 4,
+        "branch_only": [
+          "production/qa/evidence/M1-96_capture.sh",
+          "production/qa/evidence/M1-96_capture_output.txt",
+          "production/qa/evidence/M1-96_care_round_sandbox.txt",
+          "production/qa/evidence/M1-96_external_source.txt",
+          "production/qa/evidence/M1-96_external_tests.txt",
+          "production/qa/evidence/M1-96_mission_trainer_sandbox.txt",
+          "production/qa/evidence/M1-96_review.txt",
+          "production/qa/evidence/M1-96_tests.txt"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": []
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-104",
+      "sha": "27a573915bf759fc115cb9c2e51a908504d1774d",
+      "classification": "superseded",
+      "findings": [
+        "Repaired glove-port exports exist; main removed runtime workaround. Branch editor/cache files are unsafe to port.",
+        "Merge base f105f68be229; ahead 1, behind 96; diff 40 paths; current main exact 19, different 8, branch-only 13, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "f105f68be229a7ebeeb88b28279aefb0e6e0badd",
+      "ahead": 1,
+      "behind": 96,
+      "subject": "wip: M3-104 (night shift, not landed)",
+      "board": {
+        "task_id": "M3-104",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Open the back of EN_Airlock_GlovePort so its window sees Alo's chamber",
+        "evidence_excerpt": "production/tools/build_chapter2_assets.py, game/assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD0.glb, game/assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD1.glb, game/assets/environment/EN_Airlock/README.md, game/scripts/world/habitat_room_builder.gd, game/tools/test_en_airlock.gd (153/153 PASS), game/tools/test_chapter2_rooms.gd (3510/3510 PASS), game/tools/capture_m3_104.gd (11/11 PASS), verify_gate.py (303 assets, 0 failing), production/qa/evidence/M3-104_*.png; run_tests.sh 71/7"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 40,
+        "exact_on_main": 19,
+        "different_on_main": 8,
+        "branch_only": [
+          "game/Godot/editor_settings-4.7.tres",
+          "game/LastLightAcademy-tests/lla-M1-29-29781-600416/how_to_seen.cfg",
+          "game/LastLightAcademy-tests/lla-M1-29-40445-630464/how_to_seen.cfg",
+          "game/override.cfg",
+          "production/qa/evidence/M3-104_capture_parse.txt",
+          "production/qa/evidence/M3-104_historical_before_after.png",
+          "production/qa/evidence/M3-104_initial_fixture_failure.txt",
+          "production/qa/evidence/M3-104_initial_trainer_failure.txt",
+          "production/qa/evidence/M3-104_review.md",
+          "production/qa/evidence/M3-104_sandbox_blender.txt",
+          "production/qa/evidence/M3-104_storage_probe.txt",
+          "production/qa/evidence/M3-104_tests.txt",
+          "production/qa/evidence/M3-104_tests_initial.txt"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/scripts/world/habitat_room_builder.gd"
+        ]
+      },
+      "lfs_pointer_checks": [
+        {
+          "path": "game/assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD0.glb",
+          "branch": {
+            "oid": "sha256:a3f5f669cf39a5914cfbffb878f58c0425d37fb025b9b4e4fa630fc37a869bdf",
+            "size": "147548"
+          },
+          "main": {
+            "oid": "sha256:a3f5f669cf39a5914cfbffb878f58c0425d37fb025b9b4e4fa630fc37a869bdf",
+            "size": "147548"
+          }
+        }
+      ],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-108",
+      "sha": "5803b88862bcc57c661a3aaec374187d9203f404",
+      "classification": "superseded",
+      "findings": [
+        "Petal GLBs match main; scripts and room placement evolved. Handbook still says native capture pending.",
+        "Merge base e0e1615e9c1a; ahead 1, behind 86; diff 19 paths; current main exact 7, different 10, branch-only 2, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "e0e1615e9c1a927379d95c0e28b2d709a69aa686",
+      "ahead": 1,
+      "behind": 86,
+      "subject": "wip: M3-108 (night shift, not landed)",
+      "board": {
+        "task_id": "M3-108",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Pressed-petal props: card and petal import as fully metallic, so they render dull grey",
+        "evidence_excerpt": "Night-shift fix (Codex, parked on night/M3-108 when its reviewer hit the usage limit) landed and verified by Sadman/claude: build_ch03_assets.py exports M_Card and M_Petal with metallic 0; PR_PressedPetal_Mounted.glb and PR_PressedPetal.glb re-exported. Verified: M3-108 MATERIAL PROBE PASS (16 checks), M3-108 PETAL CAPTURE PASS (23 checks; mustard pixels at the S11 review view), test_ch03_assets PASS (328), test_chapter3_rooms PASS, M3-3R capture rerun PASS (250). Screenshots production/qa/evide"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 19,
+        "exact_on_main": 7,
+        "different_on_main": 10,
+        "branch_only": [
+          "game/Godot/editor_settings-4.7.tres",
+          "production/qa/evidence/M3-108_chapter3_rooms_before.txt"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/tools/capture_m3108_petal.gd",
+          "game/tools/test_ch03_assets.gd"
+        ]
+      },
+      "lfs_pointer_checks": [
+        {
+          "path": "game/assets/props/PR_PressedPetal/PR_PressedPetal.glb",
+          "branch": {
+            "oid": "sha256:b2d16312c2544e00b1b04959446a52b0802b0a9f67a1e8800f38e4741c5e5b01",
+            "size": "559692"
+          },
+          "main": {
+            "oid": "sha256:b2d16312c2544e00b1b04959446a52b0802b0a9f67a1e8800f38e4741c5e5b01",
+            "size": "559692"
+          }
+        }
+      ],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-2A",
+      "sha": "8907a1f72cee598fa64c03df0b5dd9d3605ac615",
+      "classification": "superseded",
+      "findings": [
+        "Airlock and paper-bee assets exist; glove-port exports were later repaired in M3-104.",
+        "Merge base 1d7c4ef421a9; ahead 1, behind 239; diff 63 paths; current main exact 33, different 30, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "1d7c4ef421a93ece27cf48e4f3cad0c93fe033b9",
+      "ahead": 1,
+      "behind": 239,
+      "subject": "wip: M3-2A (night shift, not landed)",
+      "board": {
+        "task_id": "M3-2A",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Chapter 2 assets: EN_Airlock, PR_PaperBee",
+        "evidence_excerpt": "Approved by Sadman in chat, 6 Nov 2026 ~10:58: \"Approve all as built\" (the three production/concept/chapter2_v1/ sheets and the 7 README decisions). Landed night/M3-2A (8907a1f) on main: EN_Airlock (5 pieces x 2 LODs, airlock.json, en_airlock.gd), PR_PaperBee (+ UI icon), PR_SeedTray; the 12 visual_review.md verdicts set to PASS; build_registry.py: all 12 rows verified. Gate: verify_gate.py 183 assets, 0 failing. run_tests.sh: 49/49 suites passed (test_en_airlock 145 checks). Evidence: productio"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 63,
+        "exact_on_main": 33,
+        "different_on_main": 30,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/assets/README.md",
+          "game/assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD0.glb",
+          "game/assets/environment/EN_Airlock/EN_Airlock_GlovePort_LOD1.glb",
+          "game/assets/environment/EN_Airlock/README.md",
+          "game/assets/environment/EN_Airlock/airlock.json",
+          "game/assets/environment/kit/habitat_kit.gd",
+          "game/tools/test_en_airlock.gd",
+          "production/tools/build_chapter2_assets.py",
+          "production/tools/build_registry.py",
+          "production/tools/glb_external_textures.py",
+          "production/tools/verify_gate.py"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-2P",
+      "sha": "5203a6fb1a3f4dfbc975e489ecc25e278e776b36",
+      "classification": "unsafe-WIP",
+      "findings": "Saved P03/P04 panel uses open(route,target,settings), commit_requested(target,payload), rich models. Current M1-104 data exists but route lacks saved puzzle_view/p03/p04 and chosen-input dispatch; M1-105 todo.",
+      "reusable_paths": [
+        "game/scripts/ui/scientific_puzzle_panel.gd",
+        "game/scripts/puzzles/p03_pollination.gd",
+        "game/scripts/puzzles/p04_recorder_reconstruction.gd"
+      ],
+      "blocked_by": [
+        "Atik Chapter2Route M1-105",
+        "M3-3P panel name collision"
+      ],
+      "next_action": "Port owned panel/model against published dispatch.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-2R",
+      "sha": "b91078e8140715d69fb69c988d899f71481c02e0",
+      "classification": "superseded",
+      "findings": [
+        "Chapter 2 room staging exists with later route wiring. .night_merge is scratch.",
+        "Merge base 05463e0f28bb; ahead 2, behind 168; diff 58 paths; current main exact 4, different 51, branch-only 3, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "05463e0f28bb880d9f3ea90367b6589852a05edc",
+      "ahead": 2,
+      "behind": 168,
+      "subject": "wip: M3-2R (night shift, not landed)",
+      "board": {
+        "task_id": "M3-2R",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Chapter 2 rooms and locations",
+        "evidence_excerpt": "Rooms per scene: EX-CH02-S01, S02, S06 LOC-03 garden; S03-S05 LOC-05 airlock (new game/scenes/campaign/rooms/airlock.tscn, the approved M3-2A vestibule turned half a revolution so stations face +Z); S07, S11, S12 LOC-01 Commons; S08-S10 LOC-02 recorder service bench; CH02->CH03 join (same red warning) in LOC-02 at EX-CH03-S01. game/tools/run_tests.sh chapter2_rooms: CHAPTER 2 ROOMS RESULT: PASS (3510 checks, 0 failures); full game/tools/run_tests.sh: 60/60 suites passed (production/qa/evidence/M"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 58,
+        "exact_on_main": 4,
+        "different_on_main": 51,
+        "branch_only": [
+          ".night_merge/base",
+          ".night_merge/ours",
+          ".night_merge/theirs"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/resources/campaign/rooms/LOC-01.json",
+          "game/resources/campaign/rooms/LOC-02.json",
+          "game/resources/campaign/rooms/LOC-03.json",
+          "game/resources/campaign/rooms/LOC-05.json",
+          "game/resources/campaign/rooms/README.md",
+          "game/scripts/campaign/chapter1_campaign.gd",
+          "game/scripts/loading/load_preparation.gd",
+          "game/scripts/navigation/route_navigation.gd",
+          "game/scripts/world/campaign_crew.gd",
+          "game/scripts/world/campaign_room.gd",
+          "game/scripts/world/habitat_room_builder.gd",
+          "game/scripts/world/room_contract.gd",
+          "game/scripts/world/room_staging.gd",
+          "game/scripts/world/world_route.gd",
+          "game/tools/test_campaign_later_runtime.gd",
+          "game/tools/test_chapter1_campaign_flow.gd",
+          "game/tools/test_chapter2_rooms.gd"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-3A",
+      "sha": "6246460adadd9d37377cc9f694082c9097323bdf",
+      "classification": "superseded",
+      "findings": [
+        "Chapter 3 asset family exists; petal exports were later corrected in M3-108.",
+        "Merge base 1d7c4ef421a9; ahead 1, behind 239; diff 161 paths; current main exact 139, different 22, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "1d7c4ef421a93ece27cf48e4f3cad0c93fe033b9",
+      "ahead": 1,
+      "behind": 239,
+      "subject": "wip: M3-3A (night shift, not landed)",
+      "board": {
+        "task_id": "M3-3A",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Chapter 3 assets: EN_ZeroAnnex, PL_Descendants, PR_Helmet_Roles, PR_PressedPetal, CH_Cadet_EVA",
+        "evidence_excerpt": "Approved by Sadman in chat, 6 Nov 2026 10:58: \"Approve all five\" (EVA suit design, Amara's low coil, Ferreira's gear-wheel patch, Mei/Rafi chest patch as a 3D decal, upscale before multiview). Landed: CH_Kai_EVA, CH_Amara_EVA, CH_Mei_EVA, CH_Rafi_EVA, CH_Ferreira_EVA (Tripo multiview + Mixamo rig, the wearer's 44 clips via tools/transfer_clips.py, 65 bones / Mei 68, toon face, flag/Aurora/right-chest patches) built by tools/finish_character_eva.sh; helmet fit measured on the suits (fit_helmets_e"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 161,
+        "exact_on_main": 139,
+        "different_on_main": 22,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/assets/environment/kit/habitat_kit.gd",
+          "game/assets/props/PR_Helmet_Roles/helmet_roles.gd",
+          "game/assets/props/PR_Helmet_Roles/helmet_roles.json",
+          "game/assets/props/PR_PressedPetal/PR_PressedPetal.glb",
+          "game/assets/props/PR_PressedPetal_Mounted/PR_PressedPetal_Mounted.glb",
+          "game/tools/test_ch03_assets.gd",
+          "production/tools/build_ch03_assets.py",
+          "production/tools/build_registry.py",
+          "production/tools/verify_gate.py"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-3P",
+      "sha": "704baf3ffc5f48d60e5a13f37545793761524341",
+      "classification": "unsafe-WIP",
+      "findings": "Saved P05/P06 JSON/models and another ScientificPuzzlePanel with panel_closed and different open return/signature; route/ledger changes absent on main.",
+      "reusable_paths": [
+        "game/resources/campaign/content/p05_falling_pressure.json",
+        "game/resources/campaign/content/p06_harvest_future.json",
+        "game/scripts/puzzles/p05_falling_pressure.gd",
+        "game/scripts/puzzles/p06_harvest_future.gd",
+        "game/scripts/ui/scientific_puzzle_panel.gd"
+      ],
+      "blocked_by": [
+        "Atik ExtendedCampaignRoute/GateCatalog",
+        "M3-2P class collision"
+      ],
+      "next_action": "Define common panel contract first.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-4P",
+      "sha": "f815b1a19aeb3d9ed2b15e9819cacbc69dbd6aa1",
+      "classification": "ancestry-integrated",
+      "findings": "Ancestor with no branch-only files; historical board block or current main pointer.",
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "No port; use main.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-5A",
+      "sha": "a1672162d179657d9d2596ed33f57b862b36a858",
+      "classification": "superseded",
+      "findings": [
+        "Chapter 5 game assets match; only registry, manifest and review metadata differ.",
+        "Merge base bc32743d6b73; ahead 1, behind 223; diff 178 paths; current main exact 168, different 10, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "bc32743d6b736bd6fc817b6aa33a9dae9a431ae8",
+      "ahead": 1,
+      "behind": 223,
+      "subject": "wip: M3-5A (night shift, not landed)",
+      "board": {
+        "task_id": "M3-5A",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Chapter 5 assets: PL_Cotton_Seedling, PR_ImpactMonitor, CH_Ferreira_Duty, CH_Cadet_DutyLayer",
+        "evidence_excerpt": "Approved by Sadman in chat, 6 Nov 2026 ~10:58: \"Take A\" for CH_Ferreira_Duty (production/concept/ch05_assets/M3-5A_ferreira_duty_v1.png; charcoal fleece, hands folded, mission control at night; a screen portrait, no 3D body). Nothing of M3-5A was on main before this: landed night/M3-5A (a167216) whole: PL_Cotton_Seed/Sprout/Seedling, PR_ImpactMonitor + game/assets/ui/impact_monitor frame set, PR_DocumentSleeve, PR_Records2034, PR_MarkerTape (registry verified), CH_Cadet_DutyLayer resolved by reu"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 178,
+        "exact_on_main": 168,
+        "different_on_main": 10,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": []
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-5P",
+      "sha": "3a1112e98d9b9eb8894ad69121562d85b907bdd9",
+      "classification": "ancestry-integrated",
+      "findings": "Ancestor with no branch-only files; historical board block or current main pointer.",
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "No port; use main.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-6P",
+      "sha": "d04968d21fbd284050f0f9894c51abda96cf6f02",
+      "classification": "ancestry-integrated",
+      "findings": "Ancestor with no branch-only files; historical board block or current main pointer.",
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "No port; use main.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-6R",
+      "sha": "cd547b114db180c2525f20f870a23240a20f30f6",
+      "classification": "superseded",
+      "findings": [
+        "Chapter 6 staging exists; room/roster code evolved. .night_merge is scratch.",
+        "Merge base f534fc0fad33; ahead 2, behind 213; diff 47 paths; current main exact 29, different 15, branch-only 3, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "f534fc0fad338ad44bf3711f46b7d0369fac42ea",
+      "ahead": 2,
+      "behind": 213,
+      "subject": "wip: M3-6R (night shift, not landed)",
+      "board": {
+        "task_id": "M3-6R",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Chapter 6 rooms and locations",
+        "evidence_excerpt": "Landed from night/M3-6R (Claude Opus 5.5 night shift) by Sadman/claude: Chapter 6 staged in its rooms; campaign_room.gd merge keeps both main's plant-stage models and the stage/choice state. Full run_tests.sh 44/45 (only test_performance_runtime, M1-68); gate 169 assets, 0 failing."
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 47,
+        "exact_on_main": 29,
+        "different_on_main": 15,
+        "branch_only": [
+          ".night_merge/base",
+          ".night_merge/ours",
+          ".night_merge/theirs"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/resources/campaign/content/scene_rosters.json",
+          "game/resources/campaign/rooms/LOC-01.json",
+          "game/resources/campaign/rooms/LOC-02.json",
+          "game/resources/campaign/rooms/LOC-03.json",
+          "game/resources/campaign/rooms/README.md",
+          "game/scripts/world/campaign_crew.gd",
+          "game/scripts/world/campaign_room.gd",
+          "game/scripts/world/room_contract.gd",
+          "game/scripts/world/room_presentation.gd",
+          "game/scripts/world/room_staging.gd",
+          "game/tools/test_chapter6_rooms.gd"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-7A",
+      "sha": "0f2396f52b7709c17615b1c5ad603b6fdbe9b8e3",
+      "classification": "superseded",
+      "findings": [
+        "Chapter 7 shelter/uplink assets match; gate and registry tools evolved. .night_merge is scratch.",
+        "Merge base 9e6161cc406a; ahead 2, behind 225; diff 91 paths; current main exact 77, different 11, branch-only 3, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "9e6161cc406a66846dd1c0c629e2a77e5f3abec3",
+      "ahead": 2,
+      "behind": 225,
+      "subject": "wip: M3-7A (night shift, not landed)",
+      "board": {
+        "task_id": "M3-7A",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Chapter 7 assets: the storm shelter and uplink props",
+        "evidence_excerpt": "Landed from night/M3-7A (Claude Opus 5.5 night shift) by Sadman/claude: Chapter 7 storm-shelter and uplink props plus EN_Fabrication, test_chapter7_assets.gd; merge kept main's manifest-discovering gate (chapter7_assets.csv is picked up). Full run_tests.sh 44/45 (only the known load-sensitive test_performance_runtime, M1-68); gate 169 assets, 0 failing."
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 91,
+        "exact_on_main": 77,
+        "different_on_main": 11,
+        "branch_only": [
+          ".night_merge/base",
+          ".night_merge/ours",
+          ".night_merge/theirs"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/assets/README.md",
+          "production/tools/build_registry.py",
+          "production/tools/verify_gate.py"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-7P",
+      "sha": "d503b42e62cecc8c0be51f18b79a9fb1fd5cdae0",
+      "classification": "ancestry-integrated",
+      "findings": "Ancestor with no branch-only files; historical board block or current main pointer.",
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "No port; use main.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-8P",
+      "sha": "9a83b6822144c1c3a1b157a0cb240468fcb4b0a6",
+      "classification": "unsafe-WIP",
+      "findings": "Saved P15/P16 Chapter8 panel/model/data/rules, but chapter8_view/preview and dispatch absent on main. Saved preview clones Director/route while paused; integration needs current revision/checkpoint semantics.",
+      "reusable_paths": [
+        "game/scripts/ui/chapter8_puzzle_panel.gd",
+        "game/scripts/puzzles/chapter8_puzzles.gd",
+        "game/resources/campaign/content/chapter8_puzzles.json",
+        "game/tools/test_chapter8_puzzles.gd"
+      ],
+      "blocked_by": [
+        "Atik ExtendedCampaignRoute/GateCatalog/campaign dispatch"
+      ],
+      "next_action": "Establish owner API then port owned UI/model/data.",
+      "verification_limits": "Static merge-base/branch-code/current-main inspection; no Godot, tests or binary render. Old logs are not a current pass.",
+      "review": "ramim_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-94",
+      "sha": "c81b8eb0aeba2377109e2b77b530d26c9e07aea5",
+      "classification": "superseded",
+      "findings": [
+        "Approved canon lines/catalog are on main; media and catalog generation evolved.",
+        "Merge base 2a0e853e3493; ahead 2, behind 293; diff 25 paths; current main exact 11, different 14, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "2a0e853e34930c36ca58aae230263c08c0004dac",
+      "ahead": 2,
+      "behind": 293,
+      "subject": "wip: M3-94 (paused 5 Nov 11:45 to restart the workers safely; the next run resumes from here)",
+      "board": {
+        "task_id": "M3-94",
+        "status": "done",
+        "owner": null,
+        "title": "Canon proposal pack from the narrative revision \u00e2\u20ac\u201d needs Sadman's approval first",
+        "evidence_excerpt": "All approved doc 24 items applied to the story sources, story-data.json/STORY_FULL.md, vo_lines.csv (3 text-only rows; recording is M3-94R), the rebuilt catalog (388 lines, campaign-content-1-dc4e79f2208c7126), handbook \u00c2\u00a73/\u00c2\u00a74/\u00c2\u00a710, character bible and doc 24 \u00c2\u00a78. Decisions quoted in production/qa/evidence/M3-94_decisions.md. Fix round: three tests pinned the old content revision and hung; they now read CampaignContentFull.EXPECTED_CONTENT_REVISION. run_tests.sh: 32/32 suites passed (M3-94_tests.tx"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 25,
+        "exact_on_main": 11,
+        "different_on_main": 14,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/resources/campaign/content/campaign_catalog.json",
+          "game/resources/campaign/content/presentation_media.json",
+          "game/resources/campaign/dialogue_catalog.json",
+          "game/scripts/content/build_catalog.py",
+          "game/scripts/content/content_loader.gd",
+          "game/tools/probe_m3_94_lines.gd",
+          "game/tools/test_worker_c_content.gd"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-97",
+      "sha": "5051d6494b3f6fd8b6aaa0646d1749c406420542",
+      "classification": "superseded",
+      "findings": [
+        "CS-17 assets match; CS-15/18 were rebuilt by later M4-05/M4-02 work.",
+        "Merge base 37e98a9966ad; ahead 1, behind 272; diff 59 paths; current main exact 26, different 33, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "37e98a9966adffdc29317bb9ffed73f2eaa2f5ee",
+      "ahead": 1,
+      "behind": 272,
+      "subject": "wip: M3-97 (night shift, not landed)",
+      "board": {
+        "task_id": "M3-97",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Cutscene staging from the narrative revision: CS-15 call, CS-17 final garden, CS-18 lamp blink",
+        "evidence_excerpt": "Ported origin/night/M3-97 onto main fc72c90 (only handbook/board conflicted). CS-15 29.75 s: 2.6 s digital silence on the cut into Noor, CUE-11 1.5 s after her first words, one bed per picture, no Moon over Dhaka, approved Rao/Noor lines as exact captions pending M3-94R; CS-17 tracked TARA, Alo x Tara and five named mugs; CS-18 8 s with four-frame lamp blink (frames 91-94) and silent black. Dhaka rooftop bed and lamp tick keep silent documented slots (M3-94R). All six outputs rebuild byte-identi"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 59,
+        "exact_on_main": 26,
+        "different_on_main": 33,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/assets/cutscenes/CS-15_Hello_Aurora.ogv",
+          "game/assets/cutscenes/CS-18_The_Closed_Drawer.ogv",
+          "game/resources/campaign/content/presentation_media.json",
+          "production/cutscenes/v8/src/CS-15.json",
+          "production/cutscenes/v8/src/CS-18.json",
+          "production/cutscenes/v8/src/name_labels.py",
+          "production/cutscenes/v8/src/verify_staging.py"
+        ]
+      },
+      "lfs_pointer_checks": [
+        {
+          "path": "game/assets/cutscenes/CS-15_Hello_Aurora.ogv",
+          "branch": {
+            "oid": "sha256:6ce1927b37d63fee2663d42044882f85ff84a2b7129664193c6def6305a370c6",
+            "size": "28698932"
+          },
+          "main": {
+            "oid": "sha256:1197c42eadcfdd4ce75272752d5b16e56ffd5a9ccf4f67424bbe29b53e84b58b",
+            "size": "28739715"
+          }
+        },
+        {
+          "path": "game/assets/cutscenes/CS-17_What_We_Grew.ogv",
+          "branch": {
+            "oid": "sha256:3e8b942a2c2dacf743f16226f6ecb3d1997ca16a244c1ea47fcdb606abb38f3d",
+            "size": "38429362"
+          },
+          "main": {
+            "oid": "sha256:3e8b942a2c2dacf743f16226f6ecb3d1997ca16a244c1ea47fcdb606abb38f3d",
+            "size": "38429362"
+          }
+        },
+        {
+          "path": "game/assets/cutscenes/CS-18_The_Closed_Drawer.ogv",
+          "branch": {
+            "oid": "sha256:38552cfe3774938161ca790023d415a1c4ebb3b8950a49982a63a985a537f9e9",
+            "size": "1390131"
+          },
+          "main": {
+            "oid": "sha256:64d46ab8b5b4fb2b165f321675d153f975860572785646e8214ab58f25faf23f",
+            "size": "1390044"
+          }
+        }
+      ],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-99",
+      "sha": "a41b57155fa422b9e00daa29ac6da53e634cbd86",
+      "classification": "ancestry-integrated",
+      "findings": [
+        "This tip is a direct ancestor of main.",
+        "Merge base a41b57155fa4; ahead 0, behind 266; diff 0 paths; current main exact 0, different 0, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Preserve as history; no port.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "a41b57155fa422b9e00daa29ac6da53e634cbd86",
+      "ahead": 0,
+      "behind": 266,
+      "subject": "feat: Journal v1 for the Chapter 1 demo: Now, Evidence, Garden and Decisions tabs plus the resume card",
+      "board": {
+        "task_id": "M3-99",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Narrative props, plant stages and effects: Alo and Tara growth variants, nameplates, named mugs, clue props, two new SFX",
+        "evidence_excerpt": "Approval quoted: PRODUCTION_HANDBOOK \u00c2\u00a73, 5 Nov 2026 (Sadman, 10:40, \"all are approved\"): \"(2) the M3-99 sheets for Alo/Tara growth stages and the narrative props in production/concept/narrative_props/\"; M3-94 approved Tara's 26/31 May dates. Built by production/concept/narrative_props/build_runtime_assets.py (Blender, no Tripo/Meshy credits): PL_Alo_PodsGreen/Senescent/Dry and PL_Tara_Pods/Senescent/Dry (approved recolour+lean baked; Tara mirrored, green stem to the soil), wired by date via game"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 0,
+        "exact_on_main": 0,
+        "different_on_main": 0,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": []
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M3-99-saved",
+      "sha": "33ffca653ac6ce2347aa956015402dccf05ff5c2",
+      "classification": "superseded",
+      "findings": [
+        "This tip is a direct ancestor of main.",
+        "Merge base b013e058d8cc; ahead 1, behind 310; diff 14 paths; current main exact 6, different 8, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "b013e058d8ccccc1a4932c31042791e2dce5b387",
+      "ahead": 1,
+      "behind": 310,
+      "subject": "wip: M3-99 (night shift, not landed)",
+      "board": {
+        "task_id": "M3-99",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Narrative props, plant stages and effects: Alo and Tara growth variants, nameplates, named mugs, clue props, two new SFX",
+        "evidence_excerpt": "Approval quoted: PRODUCTION_HANDBOOK \u00c2\u00a73, 5 Nov 2026 (Sadman, 10:40, \"all are approved\"): \"(2) the M3-99 sheets for Alo/Tara growth stages and the narrative props in production/concept/narrative_props/\"; M3-94 approved Tara's 26/31 May dates. Built by production/concept/narrative_props/build_runtime_assets.py (Blender, no Tripo/Meshy credits): PL_Alo_PodsGreen/Senescent/Dry and PL_Tara_Pods/Senescent/Dry (approved recolour+lean baked; Tara mirrored, green stem to the soil), wired by date via game"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 14,
+        "exact_on_main": 6,
+        "different_on_main": 8,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": []
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M4-02",
+      "sha": "7549dfc13addf54192148dd3810e5247ddaf57bb",
+      "classification": "superseded",
+      "findings": [
+        "Current CS-18 master/runtime and tick source match; CS-15 audio/verification evolved.",
+        "Merge base f09fef13e695; ahead 1, behind 211; diff 21 paths; current main exact 6, different 15, branch-only 0, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "f09fef13e695828da94384debcf66e7d87ac8478",
+      "ahead": 1,
+      "behind": 211,
+      "subject": "wip: M4-02 (night shift, not landed)",
+      "board": {
+        "task_id": "M4-02",
+        "status": "done",
+        "owner": "sadman",
+        "title": "Fill the CS-18 lamp tick and CS-15 Dhaka bed with the M3-99 effects",
+        "evidence_excerpt": "CS-18: lamp tick installed (pending key removed), master recomposed and OGV re-encoded via heavy.py/godot_gated; tick onset 3.8045 s master / 3.8059 s runtime lands on frame 91, the first lit frame of 91-94 as measured in each film's own pictures; one click, 7.8 dB over the fan bed, picture hashes unchanged (M4-02_provenance.txt). verify_staging.py --runtime: M3-97 STAGING RESULT: PASS (masters + runtime), now with per-film blink, tick, sound and sound-length parity, --stale and LFS-pointer chec"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 21,
+        "exact_on_main": 6,
+        "different_on_main": 15,
+        "branch_only": [],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "production/cutscenes/v8/src/CS-15.json",
+          "production/cutscenes/v8/src/verify_staging.py"
+        ]
+      },
+      "lfs_pointer_checks": [
+        {
+          "path": "game/assets/cutscenes/CS-18_The_Closed_Drawer.ogv",
+          "branch": {
+            "oid": "sha256:64d46ab8b5b4fb2b165f321675d153f975860572785646e8214ab58f25faf23f",
+            "size": "1390044"
+          },
+          "main": {
+            "oid": "sha256:64d46ab8b5b4fb2b165f321675d153f975860572785646e8214ab58f25faf23f",
+            "size": "1390044"
+          }
+        }
+      ],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M4-05",
+      "sha": "f484b2caf656c3abae78941c4338f1885ca9c09f",
+      "classification": "superseded",
+      "findings": [
+        "Main uses a later true-crescent repaint with different CS-15 master/runtime LFS payloads. Parked tracked Earth/dish source is an alternate, not current production input.",
+        "Merge base a0815bb9339e; ahead 1, behind 98; diff 42 paths; current main exact 2, different 15, branch-only 25, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [
+        "production/cutscenes/v8/src/dated_earth.py",
+        "production/cutscenes/v8/src/earth/CS-15-A.json",
+        "production/cutscenes/v8/src/earth/CS-15-D.json"
+      ],
+      "blocked_by": [
+        "Owner visual review if current CS-15 shows a concrete Earth or dish defect"
+      ],
+      "next_action": "Keep current main; evaluate alternate only if current visual QA finds a defect.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "a0815bb9339e7817d8e79b4a896296781f31ec27",
+      "ahead": 1,
+      "behind": 98,
+      "subject": "wip: M4-05 (night shift, not landed)",
+      "board": {
+        "task_id": "M4-05",
+        "status": "done",
+        "owner": "sadman",
+        "title": "CS-15: Earth as the true 3% crescent near the Malapert skyline",
+        "evidence_excerpt": "Authored production/tools/repaint_cs15_earth.py to repaint Earth in post on every frame of CS-15-A.mp4 (121 frames) and CS-15-D.mp4 (192 frames) inside a sky-only mask (< 1 LSB diff outside sky) matching JPL Horizons EX-CH08-S10 (malapert_summit, 2047-04-09 02:00 UTC): 1.90 deg diameter, centre ~2.1 deg / lower limb ~1.15 deg above the Malapert skyline, ~3% lit thin crescent facing the Sun (19.4 deg right, 4.6 deg higher -> -13.3 deg axis tilt), night side #040507 with no city lights. Rebuilt pr"
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 42,
+        "exact_on_main": 2,
+        "different_on_main": 15,
+        "branch_only": [
+          "production/cutscenes/v8/src/dated_earth.py",
+          "production/cutscenes/v8/src/earth/CS-15-A.json",
+          "production/cutscenes/v8/src/earth/CS-15-A_dish_take.png",
+          "production/cutscenes/v8/src/earth/CS-15-D.json",
+          "production/cutscenes/v8/src/shots/CS-15-A_earth.mp4",
+          "production/cutscenes/v8/src/shots/CS-15-D_earth.mp4",
+          "production/qa/evidence/M4-05_CS-15-A_f000.png",
+          "production/qa/evidence/M4-05_CS-15-A_f060.png",
+          "production/qa/evidence/M4-05_CS-15-A_f120.png",
+          "production/qa/evidence/M4-05_CS-15-A_track.json",
+          "production/qa/evidence/M4-05_CS-15-D_f000.png",
+          "production/qa/evidence/M4-05_CS-15-D_f096.png",
+          "production/qa/evidence/M4-05_CS-15-D_f191.png",
+          "production/qa/evidence/M4-05_CS-15-D_track.json",
+          "production/qa/evidence/M4-05_CS15_before_after.png",
+          "production/qa/evidence/M4-05_CS15_crescent_master.png",
+          "production/qa/evidence/M4-05_CS15_crescent_runtime.png",
+          "production/qa/evidence/M4-05_CS15_ingame_A_2.2s.png",
+          "production/qa/evidence/M4-05_CS15_ingame_D_19.5s.png",
+          "production/qa/evidence/M4-05_CS15_ingame_D_29.0s.png",
+          "production/qa/evidence/M4-05_CS15_master_parity.txt",
+          "production/qa/evidence/M4-05_capture.sh",
+          "production/qa/evidence/M4-05_capture_output.txt",
+          "production/qa/evidence/M4-05_run_tests.txt",
+          "production/qa/evidence/M4-05_sheet.py"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/assets/cutscenes/CS-15_Hello_Aurora.ogv",
+          "production/cutscenes/v8/src/CS-15.json",
+          "production/cutscenes/v8/src/verify_staging.py"
+        ]
+      },
+      "lfs_pointer_checks": [
+        {
+          "path": "game/assets/cutscenes/CS-15_Hello_Aurora.ogv",
+          "branch": {
+            "oid": "sha256:f2c79ce82377bbfe009ee44ce457397a8d8a3e371ba96e278495808fcd3ef4e4",
+            "size": "28347262"
+          },
+          "main": {
+            "oid": "sha256:1197c42eadcfdd4ce75272752d5b16e56ffd5a9ccf4f67424bbe29b53e84b58b",
+            "size": "28739715"
+          }
+        },
+        {
+          "path": "production/cutscenes/v8/CS-15_Hello_Aurora.mp4",
+          "branch": {
+            "oid": "sha256:2610115407847a64b8436d035f047f205defd9018ee04ad3e0591e77530aa192",
+            "size": "9497283"
+          },
+          "main": {
+            "oid": "sha256:03e398397993f051bd29908ffa2131e51f0ffb1b422b20d075c04d0c783abfce",
+            "size": "9752920"
+          }
+        }
+      ],
+      "review": "foreign_review"
+    },
+    {
+      "ref": "refs/remotes/origin/sadman/m110-m111-media",
+      "sha": "6b7054dd9112f25982af9ff1ab2d446ea65ca24e",
+      "classification": "superseded",
+      "findings": [
+        "M1-10/M1-11 media runtime and buses exist; current audio runtime has more methods. Parked probe is archival.",
+        "Merge base 7d0622ffd8a9; ahead 1, behind 386; diff 8 paths; current main exact 4, different 2, branch-only 2, deleted on branch 0, absent on both 0."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "Keep current main; do not merge stale branch.",
+      "verification_limits": "Git history/tree/board and LFS pointer review only; no fresh render, playback, generation, native run or tests.",
+      "merge_base": "7d0622ffd8a914dce7c02913f9381b758bd6dae9",
+      "ahead": 1,
+      "behind": 386,
+      "subject": "wip: unfinished M1-10/M1-11 media runtime work (parked)",
+      "board": {
+        "task_id": null,
+        "status": null,
+        "owner": null,
+        "title": null,
+        "evidence_excerpt": ""
+      },
+      "path_comparison": {
+        "changed_against_merge_base": 8,
+        "exact_on_main": 4,
+        "different_on_main": 2,
+        "branch_only": [
+          "game/tools/_probe_media.gd",
+          "game/tools/_probe_media.gd.uid"
+        ],
+        "deleted_on_branch": [],
+        "absent_on_both": [],
+        "key_different_paths": [
+          "game/scripts/audio/audio_runtime.gd"
+        ]
+      },
+      "lfs_pointer_checks": [],
+      "review": "foreign_review"
+    }
+  ],
+  "supplemental_parent_expressions": [
+    {
+      "ref": "refs/remotes/origin/night/M1-49^",
+      "sha": "885356a085",
+      "classification": "integrated ancestry",
+      "findings": [
+        "Parent is an ancestor of main and contains only the M1-54 board-block update; older M1-49 block commit fabc573 is also an ancestor."
+      ],
+      "reusable_paths": [],
+      "blocked_by": [],
+      "next_action": "No branch action.",
+      "verification_limits": "Static diff/current-source review only; no Godot, native capture, tests, checkout, cherry-pick or current-runtime acceptance. Historical logs do not certify main 5f6f1df.",
+      "review": "runtime_review"
+    },
+    {
+      "ref": "refs/remotes/origin/night/M1-58^",
+      "sha": "0953cea",
+      "classification": "superseded; reusable unfinished UI hook",
+      "findings": [
+        "This ancestor commit is the substantive payload/STACK implementation.",
+        "Port cd04cba is an ancestor of main; current payload inventory/activity/task, HeldProp and test source already contain corrected implementation.",
+        "Current Mission Table and HUD lack payload_requested/launch hookup; board M1-112 tracks the user path."
+      ],
+      "reusable_paths": [
+        "game/scripts/ui/chapter1_campaign_hud.gd",
+        "game/scripts/ui/mission_table_panel.gd"
+      ],
+      "blocked_by": [
+        "M1-112 Mission Table/HUD hook",
+        "M1-68 full-suite acceptance"
+      ],
+      "next_action": "Implement M1-112 against current UI and PayloadStackActivity.launch; retain current ported payload source.",
+      "verification_limits": "Static diff/current-source review only; no Godot, native capture, tests, checkout, cherry-pick or current-runtime acceptance. Historical logs do not certify main 5f6f1df.",
+      "review": "runtime_review"
+    }
+  ]
+}
