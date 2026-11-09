@@ -5413,8 +5413,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Stop the 'no meta lla_fade' error in the HUD fade",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/"
@@ -5580,8 +5580,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Avoid missing fade metadata errors on the first campaign caption",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/ui/chapter1_campaign_hud.gd"
@@ -6442,8 +6442,8 @@
    "priority": "P1",
    "tool": "any",
    "title": "Main TitleStage WorldEnvironment toggle & HUD forecast cache across camera turns",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/main.gd",
@@ -6452,7 +6452,7 @@
    "refs": [],
    "note": "Filed by Sadman/antigravity on 2026-11-08.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "M1-94 profiling found two costs in Ramim's folders: (1) In game/scripts/main.gd, TitleStage's WorldEnvironment (character_look.tres: SSAO+SSIL+glow) stays registered in World3D when _stage_root.hide() runs on campaign launch because WorldEnvironment is a Node, not a Node3D (RoomPresentation.claim_world_environment now suspends it when hidden, but Main._launch_campaign() and Main._show_title() should explicitly disable/restore TitleStage's WorldEnvironment). (2) In game/scripts/ui/chapter1_campaign_hud.gd, _clear_unselected_forecast() resets _forecast_key = \"\" whenever the camera turns away from a nearby focus target, forcing show_nearby_forecast() to re-run campaign.forecast_target() (22-41 ms main-thread spike) when turning back toward the same target in the same state. Keep the last computed forecast cached by key across camera-turn hides. Verify with game/tools/run_tests.sh.",
    "reserved_for": "ramim",
    "effort": 2
