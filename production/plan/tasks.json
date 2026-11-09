@@ -2362,7 +2362,7 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Upgrade choice after Chapter 3",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M1-19"
@@ -2378,8 +2378,8 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "run_tests.sh progression: 1/1 suites passed (PROGRESSION RESULT: PASS 70/70); production/qa/evidence/M3-4U_upgrade_after_ch03.png",
+   "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH03.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
    "reserved_for": "ramim",
    "effort": 1
@@ -2886,7 +2886,7 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Upgrade choice after Chapter 5",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M1-19"
@@ -2902,8 +2902,8 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "run_tests.sh progression: 1/1 suites passed (PROGRESSION RESULT: PASS 70/70); production/qa/evidence/M3-6U_upgrade_after_ch05.png",
+   "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH05.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
    "reserved_for": "ramim",
    "effort": 1
@@ -3414,7 +3414,7 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Upgrade choice after Chapter 7",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M1-19"
@@ -3430,8 +3430,8 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "",
-   "evidence": "",
-   "updated": "2026-11-03",
+   "evidence": "run_tests.sh progression: 1/1 suites passed (PROGRESSION RESULT: PASS 70/70); production/qa/evidence/M3-8U_upgrade_after_ch07.png",
+   "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH07.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
    "reserved_for": "ramim",
    "effort": 1
@@ -3531,8 +3531,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "All 128 upgrade profiles complete the campaign",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M3-8U"
    ],
@@ -3544,7 +3544,7 @@
    ],
    "note": "",
    "evidence": "",
-   "updated": "2026-11-03",
+   "updated": "2026-11-10",
    "prompt": "Per execution/QA_02_NUMERIC_AND_UPGRADES.md: an automated headless test that runs the route under all 2^7 upgrade combinations and checks\nevery numeric contract and ending predicate. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.",
    "reserved_for": "ramim",
    "effort": 2
@@ -4515,7 +4515,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "The RPG layer: cadet record, skills, gear loadout, jobs board and rest",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M1-56",
@@ -4534,7 +4534,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "From doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "run_tests.sh progression: 1/1 suites passed (PROGRESSION RESULT: PASS 70/70); production/qa/evidence/M3-64_cadet_record_skills.png; production/qa/evidence/M3-64_gear_loadout.png; production/qa/evidence/M3-64_jobs_board.png",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.6: report cards after every sortie and job (training grades, never story gates); five cadet skills with\nthree ranks and visible small benefits plus a crew line per rank; gear loadout slots from the existing upgrade choices with a\nweight limit; a jobs board with optional deliveries, surveys, maintenance and science runs, each with a sender and reason in\nMessages; rest at the Safe Room bunks (save, messages, photos, record). Write at least 4 jobs per chapter region in jobs.json.\nTests: grading, rank thresholds, loadout weight, job unlocks.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",

@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "source": "Doc 25 section 4.6: at least 4 optional jobs per chapter region (deliveries, surveys, maintenance, science runs), each with a sender and reason in Messages, paying in skill progress and crew notes, never story gates.",
+  "skills": [
+    {
+      "id": "navigation",
+      "label": "Navigation",
+      "teacher": "Amara",
+      "thresholds": [1, 3, 6],
+      "ranks": [
+        {"rank": 1, "benefit": "Route hints show gentle contour lines.", "crew_line": "Amara: Read the contours before your boots touch the slope."},
+        {"rank": 2, "benefit": "Carry +1 survey marker on your back frame.", "crew_line": "Amara: A marker placed on the way out is a friend on the way home."},
+        {"rank": 3, "benefit": "Carry +2 survey markers and wider route preview.", "crew_line": "Amara: You know this ridge like Expedition Zero's own cartographer."}
+      ]
+    },
+    {
+      "id": "handling",
+      "label": "Handling",
+      "teacher": "Kai",
+      "thresholds": [1, 3, 6],
+      "ranks": [
+        {"rank": 1, "benefit": "+12% payload sway stability on Careful slopes.", "crew_line": "Kai: Keep the centre of mass close to your chest."},
+        {"rank": 2, "benefit": "+24% payload sway stability and gentler set-downs.", "crew_line": "Kai: Smooth steps save fragile seals every single trip."},
+        {"rank": 3, "benefit": "+36% payload sway stability on Steep ground.", "crew_line": "Kai: You could carry a tray of water across Shackleton rim without spilling a drop."}
+      ]
+    },
+    {
+      "id": "life_support",
+      "label": "Life support",
+      "teacher": "Rafi",
+      "thresholds": [1, 3, 6],
+      "ranks": [
+        {"rank": 1, "benefit": "-5% suit oxygen, power and cooling burn through steady pacing.", "crew_line": "Rafi: Slow breaths on the climb keep your reserve green."},
+        {"rank": 2, "benefit": "-10% suit budget burn and earlier reserve call-out.", "crew_line": "Rafi: Checklist discipline turns worry into margin."},
+        {"rank": 3, "benefit": "-15% suit budget burn across all EVA sorties.", "crew_line": "Rafi: That's textbook EVA pacing — you always come back above the line."}
+      ]
+    },
+    {
+      "id": "repair",
+      "label": "Repair",
+      "teacher": "Ferreira",
+      "thresholds": [1, 3, 6],
+      "ranks": [
+        {"rank": 1, "benefit": "Fault-isolation hints highlight reference gauges.", "crew_line": "Ferreira: Check the reference gauge before you touch a clamp."},
+        {"rank": 2, "benefit": "Faster valve and breaker confirmation checks.", "crew_line": "Ferreira: Good engineers verify the trend, not just the noise."},
+        {"rank": 3, "benefit": "Clearer connector pinout diagnostics on relays.", "crew_line": "Ferreira: You troubleshoot like a flight controller."}
+      ]
+    },
+    {
+      "id": "observation",
+      "label": "Observation",
+      "teacher": "Mei",
+      "thresholds": [1, 3, 6],
+      "ranks": [
+        {"rank": 1, "benefit": "+4 m scanner pulse range and clearer plant notes.", "crew_line": "Mei: Look closely — small changes tell the whole story."},
+        {"rank": 2, "benefit": "+8 m scanner pulse range and cold-shadow edge markers.", "crew_line": "Mei: Every shadow and leaf posture is data if we write it down."},
+        {"rank": 3, "benefit": "+12 m scanner pulse range and full landmark readout.", "crew_line": "Mei: Nothing on this ridge or in the garden escapes your eye."}
+      ]
+    }
+  ],
+  "gear_catalog": [
+    {"id": "taller_mast", "chapter": 1, "option": "A", "label": "Taller solar mast", "slot": "utility", "mass_kg": 2.5, "benefit": "+2 daylight battery income in solar planning."},
+    {"id": "fuel_cell", "chapter": 1, "option": "B", "label": "Auxiliary fuel cell", "slot": "pack", "mass_kg": 4.0, "benefit": "+4 starting battery and capacity 22."},
+    {"id": "red_blue_leds", "chapter": 2, "option": "A", "label": "Red-blue LED bar", "slot": "tool", "mass_kg": 1.5, "benefit": "Full garden light costs 1 battery instead of 2."},
+    {"id": "insulation_blankets", "chapter": 2, "option": "B", "label": "Chamber insulation blanket", "slot": "utility", "mass_kg": 2.0, "benefit": "Cool night heat no longer harms Alo."},
+    {"id": "moon_dirt_shelter", "chapter": 3, "option": "A", "label": "Regolith shield bags", "slot": "pack", "mass_kg": 4.5, "benefit": "+1 permanent effective storm shelter (capped at 6)."},
+    {"id": "flexible_seals", "chapter": 3, "option": "B", "label": "Flexible manifold seals", "slot": "tool", "mass_kg": 2.0, "benefit": "Unresolved air leak loss halved from 1.0 to 0.5 per phase."},
+    {"id": "ice_harvester", "chapter": 4, "option": "A", "label": "Cold-trap ice auger", "slot": "pack", "mass_kg": 5.0, "benefit": "+2 dedicated shelter water without borrowing garden water."},
+    {"id": "rover_lights_heater", "chapter": 4, "option": "B", "label": "Rover lamp & cabin heater", "slot": "utility", "mass_kg": 3.0, "benefit": "Warm cab readout and clearer dark-slope visibility."},
+    {"id": "dust_shield", "chapter": 5, "option": "A", "label": "Electrostatic dust shield", "slot": "utility", "mass_kg": 2.5, "benefit": "Prevents solar dust income loss during meteor showers."},
+    {"id": "whipple_bumper", "chapter": 5, "option": "B", "label": "Whipple dome bumper", "slot": "pack", "mass_kg": 4.0, "benefit": "Prevents micrometeoroid dome micro-leaks."},
+    {"id": "storm_early_warning", "chapter": 6, "option": "A", "label": "Particle early-warning sensor", "slot": "tool", "mass_kg": 1.5, "benefit": "Earlier proton-flux trend alert before shelter runs."},
+    {"id": "bigger_safe_room", "chapter": 6, "option": "B", "label": "Expanded Safe Room rack", "slot": "pack", "mass_kg": 3.5, "benefit": "Full supply stack adds 3 crate shielding instead of 2."},
+    {"id": "relay_parts_kit", "chapter": 7, "option": "A", "label": "Relay connector kit", "slot": "tool", "mass_kg": 2.0, "benefit": "Skips one connector diagnosis stage on the summit."},
+    {"id": "long_range_battery", "chapter": 7, "option": "B", "label": "Long-range rover battery", "slot": "pack", "mass_kg": 4.5, "benefit": "+4 rover battery capacity and entry charge (14 to 18)."}
+  ],
+  "max_gear_slots": 3,
+  "max_gear_mass_kg": 10.0,
+  "jobs": [
+    {"id": "JOB-CH01-01", "chapter": 1, "region": "aurora_station", "kind": "maintenance", "title": "Check battery bus couplers", "sender": "Kai", "message_id": "MSG-CH01-004", "skill": "repair", "xp": 1, "reason": "Verify the battery jar couplers before sunset locks us on stored power.", "crew_note": "Kai: Clean bus contacts mean zero surprise voltage drops tonight."},
+    {"id": "JOB-CH01-02", "chapter": 1, "region": "aurora_station", "kind": "science", "title": "Log baseline leaf posture", "sender": "Mei", "message_id": "MSG-CH01-006", "skill": "observation", "xp": 1, "reason": "Record Alo's leaf angle under full lamp before the dark shifts start.", "crew_note": "Mei: A healthy leaf posture baseline tells us right away if cold creeps in."},
+    {"id": "JOB-CH01-03", "chapter": 1, "region": "aurora_station", "kind": "delivery", "title": "Stage emergency ration packs", "sender": "Amara", "message_id": "MSG-CH01-010", "skill": "handling", "xp": 1, "reason": "Move two sealed ration packs to the Safe Room shelf before the drill.", "crew_note": "Amara: Staged supplies mean nobody scrambles when the alarm sounds."},
+    {"id": "JOB-CH01-04", "chapter": 1, "region": "aurora_station", "kind": "survey", "title": "Verify corridor pressure gauges", "sender": "Rafi", "message_id": "MSG-CH01-012", "skill": "life_support", "xp": 1, "reason": "Compare the corridor gauge against the air room tank readout.", "crew_note": "Rafi: Two gauges agreeing is how we sleep easy during a long night."},
+
+    {"id": "JOB-CH02-01", "chapter": 2, "region": "airlock_apron", "kind": "science", "title": "Inspect glove-port brush seal", "sender": "Mei", "message_id": "MSG-CH02-003", "skill": "observation", "xp": 1, "reason": "Check the pollen sleeve seal at the airlock glove port between runs.", "crew_note": "Mei: Dry pollen stays viable when the sleeve seal is tight."},
+    {"id": "JOB-CH02-02", "chapter": 2, "region": "airlock_apron", "kind": "maintenance", "title": "Cycle airlock equalize valve", "sender": "Amara", "message_id": "MSG-CH02-007", "skill": "life_support", "xp": 1, "reason": "Log the pump-down recovery time on the inner airlock door.", "crew_note": "Amara: Every liter of air we save in the lock stays in the station."},
+    {"id": "JOB-CH02-03", "chapter": 2, "region": "airlock_apron", "kind": "delivery", "title": "Carry spare nutrient cassettes", "sender": "Kai", "message_id": "MSG-CH02-011", "skill": "handling", "xp": 1, "reason": "Deliver two small nutrient cassettes from storage to the garden bench.", "crew_note": "Kai: Steady hands keep the cassette membranes intact."},
+    {"id": "JOB-CH02-04", "chapter": 2, "region": "airlock_apron", "kind": "survey", "title": "Chart apron shadow line", "sender": "Rafi", "message_id": "MSG-CH02-015", "skill": "navigation", "xp": 1, "reason": "Mark where the ridge shadow crosses the exterior apron walkway.", "crew_note": "Rafi: Knowing where shadow starts tells us when suit heaters kick in."},
+
+    {"id": "JOB-CH03-01", "chapter": 3, "region": "annex_ridge", "kind": "maintenance", "title": "Torque corridor pipe clamps", "sender": "Amara", "message_id": "MSG-CH03-004", "skill": "repair", "xp": 1, "reason": "Recheck the trunk clamps after the shallow moonquake tremor.", "crew_note": "Amara: Shallow moonquakes ring for minutes — tight clamps stop secondary leaks."},
+    {"id": "JOB-CH03-02", "chapter": 3, "region": "annex_ridge", "kind": "science", "title": "Weigh dry-down seed pods", "sender": "Mei", "message_id": "MSG-CH03-009", "skill": "observation", "xp": 1, "reason": "Check moisture mass on the drying rack before opening Alo's pods.", "crew_note": "Mei: Seeds stored dry can wait years for their turn to grow."},
+    {"id": "JOB-CH03-03", "chapter": 3, "region": "annex_ridge", "kind": "delivery", "title": "Haul patch kit sled to annex hatch", "sender": "Kai", "message_id": "MSG-CH03-014", "skill": "handling", "xp": 1, "reason": "Move the seal patch kit to the old annex hatchway.", "crew_note": "Kai: Having the sled at the hatch saves a trip in suits."},
+    {"id": "JOB-CH03-04", "chapter": 3, "region": "annex_ridge", "kind": "survey", "title": "Survey Expedition Zero markers", "sender": "Rafi", "message_id": "MSG-CH03-019", "skill": "navigation", "xp": 1, "reason": "Log the bearings of the old survey stakes outside the annex.", "crew_note": "Rafi: Twelve-year-old stakes still point straight along the safe ridge."},
+
+    {"id": "JOB-CH04-01", "chapter": 4, "region": "cold_trap_trail", "kind": "survey", "title": "Calibrate ridge beacon sightlines", "sender": "Amara", "message_id": "MSG-CH04-004", "skill": "navigation", "xp": 1, "reason": "Verify line-of-sight angles between B1, B2 and B3 along the ridge.", "crew_note": "Amara: No blind corners means the rover never drives out of radio reach."},
+    {"id": "JOB-CH04-02", "chapter": 4, "region": "cold_trap_trail", "kind": "delivery", "title": "Load insulated cold-case on trailer", "sender": "Kai", "message_id": "MSG-CH04-008", "skill": "handling", "xp": 1, "reason": "Secure the cold-chain vault case in the rover trailer rack.", "crew_note": "Kai: Strapped down tight, the cold-case won't shift on a 12-degree grade."},
+    {"id": "JOB-CH04-03", "chapter": 4, "region": "cold_trap_trail", "kind": "science", "title": "Sample rim frost temperature", "sender": "Mei", "message_id": "MSG-CH04-013", "skill": "observation", "xp": 1, "reason": "Log Diviner-band surface temperature at the cold-trap shadow boundary.", "crew_note": "Mei: Permanent shadow keeps water ice stable for billions of years."},
+    {"id": "JOB-CH04-04", "chapter": 4, "region": "cold_trap_trail", "kind": "maintenance", "title": "Pre-heat rover wheel actuators", "sender": "Rafi", "message_id": "MSG-CH04-018", "skill": "life_support", "xp": 1, "reason": "Check actuator heater draw against the 30% return reserve.", "crew_note": "Rafi: Warm actuators and a 30% reserve bring the crew back every time."},
+
+    {"id": "JOB-CH05-01", "chapter": 5, "region": "observatory_courtyard", "kind": "science", "title": "Cross-check dual telescope frames", "sender": "Amara", "message_id": "MSG-CH05-003", "skill": "observation", "xp": 1, "reason": "Compare frame pairs to separate real meteoroid flashes from sensor cosmic rays.", "crew_note": "Amara: Two cameras agreeing turns a bright pixel into a confirmed impact."},
+    {"id": "JOB-CH05-02", "chapter": 5, "region": "observatory_courtyard", "kind": "maintenance", "title": "Brush electrostatic dust from Mast A", "sender": "Kai", "message_id": "MSG-CH05-008", "skill": "repair", "xp": 1, "reason": "Clear levitated fines from the primary solar mast panels.", "crew_note": "Kai: Clean cells recover our full +2 daylight margin right away."},
+    {"id": "JOB-CH05-03", "chapter": 5, "region": "observatory_courtyard", "kind": "delivery", "title": "Carry dome seal tape to garden", "sender": "Mei", "message_id": "MSG-CH05-012", "skill": "handling", "xp": 1, "reason": "Deliver the pressure-seal inspection kit to the garden dome.", "crew_note": "Mei: The cotton seedling needs steady pressure while its first leaves open."},
+    {"id": "JOB-CH05-04", "chapter": 5, "region": "observatory_courtyard", "kind": "survey", "title": "Log ejecta bearing on rim lookout", "sender": "Rafi", "message_id": "MSG-CH05-016", "skill": "navigation", "xp": 1, "reason": "Sight the fresh impact flash azimuth from the crater-rim lookout.", "crew_note": "Rafi: Bearings from two known points pin down the impact site on the map."},
+
+    {"id": "JOB-CH06-01", "chapter": 6, "region": "eclipse_arrays", "kind": "maintenance", "title": "Isolate corroded array busbar", "sender": "Kai", "message_id": "MSG-CH06-004", "skill": "repair", "xp": 1, "reason": "Check the relay contact resistance before Earth's shadow covers the ridge.", "crew_note": "Kai: Isolating the bad branch keeps the battery from draining into a fault."},
+    {"id": "JOB-CH06-02", "chapter": 6, "region": "eclipse_arrays", "kind": "science", "title": "Record red-ring refraction spectrum", "sender": "Mei", "message_id": "MSG-CH06-009", "skill": "observation", "xp": 1, "reason": "Capture the copper-red twilight light refracted through Earth's atmosphere.", "crew_note": "Mei: Every sunrise and sunset on Earth shines together in that red ring."},
+    {"id": "JOB-CH06-03", "chapter": 6, "region": "eclipse_arrays", "kind": "survey", "title": "Place path lights along array walk", "sender": "Amara", "message_id": "MSG-CH06-013", "skill": "navigation", "xp": 1, "reason": "Set low-draw markers along the mast walkway before totality.", "crew_note": "Amara: A lit path lets us walk the array line in full eclipse darkness."},
+    {"id": "JOB-CH06-04", "chapter": 6, "region": "eclipse_arrays", "kind": "delivery", "title": "Stage thermal blankets in garden", "sender": "Rafi", "message_id": "MSG-CH06-017", "skill": "life_support", "xp": 1, "reason": "Pre-position thermal wraps before the five-hour eclipse chill.", "crew_note": "Rafi: Pre-warming the chamber saves battery when solar input drops to zero."},
+
+    {"id": "JOB-CH07-01", "chapter": 7, "region": "storm_shelter", "kind": "survey", "title": "Verify dosimeter alarm thresholds", "sender": "Rafi", "message_id": "MSG-CH07-004", "skill": "life_support", "xp": 1, "reason": "Check the personal dosimeter against the Safe Room wall monitor.", "crew_note": "Rafi: ALARA starts with knowing the exact flux curve before we step outside."},
+    {"id": "JOB-CH07-02", "chapter": 7, "region": "storm_shelter", "kind": "delivery", "title": "Lock water-wall bladders in place", "sender": "Kai", "message_id": "MSG-CH07-008", "skill": "handling", "xp": 1, "reason": "Confirm all Safe Room water bladders and crate latches are seated.", "crew_note": "Kai: Mass between us and the sky is the best friend we have in a storm."},
+    {"id": "JOB-CH07-03", "chapter": 7, "region": "storm_shelter", "kind": "maintenance", "title": "Test backup S-band relay coupler", "sender": "Ferreira", "message_id": "MSG-CH07-013", "skill": "repair", "xp": 1, "reason": "Verify the secondary relay coupler while the direct Earth link is noisy.", "crew_note": "Ferreira: When direct DTE fades, the relay path keeps our voice alive."},
+    {"id": "JOB-CH07-04", "chapter": 7, "region": "storm_shelter", "kind": "science", "title": "Log cotton bud resilience post-peak", "sender": "Mei", "message_id": "MSG-CH07-017", "skill": "observation", "xp": 1, "reason": "Check the garden sensors after the proton flux peak passes.", "crew_note": "Mei: Keeping heat and water steady brought every plant through the storm."},
+
+    {"id": "JOB-CH08-01", "chapter": 8, "region": "malapert_road", "kind": "survey", "title": "Confirm Ch 4 beacon layer on road map", "sender": "Amara", "message_id": "MSG-CH08-003", "skill": "navigation", "xp": 1, "reason": "Overlay the October cold-trap beacons onto the Malapert relay route.", "crew_note": "Amara: The markers we built months ago still guide our wheels today."},
+    {"id": "JOB-CH08-02", "chapter": 8, "region": "malapert_road", "kind": "delivery", "title": "Carry summit controller up the spur", "sender": "Kai", "message_id": "MSG-CH08-008", "skill": "handling", "xp": 1, "reason": "Haul the replacement relay controller up the graded Malapert summit path.", "crew_note": "Kai: Steady footing on the last climb — this box carries everyone's voice."},
+    {"id": "JOB-CH08-03", "chapter": 8, "region": "malapert_road", "kind": "maintenance", "title": "Seat dual-link transceiver harness", "sender": "Ferreira", "message_id": "MSG-CH08-012", "skill": "repair", "xp": 1, "reason": "Verify both local station link and Earth desk bearings on the summit mast.", "crew_note": "Ferreira: Twelve years later, the lighthouse is finally shining both ways."},
+    {"id": "JOB-CH08-04", "chapter": 8, "region": "malapert_road", "kind": "science", "title": "Archive full-season seed & sky ledger", "sender": "Mei", "message_id": "MSG-CH08-016", "skill": "observation", "xp": 1, "reason": "Record the complete seed lineage and horizon ephemeris for the Academy.", "crew_note": "Mei: From two seeds in a tin to a living Moon garden — every step is written here."}
+  ]
+}
