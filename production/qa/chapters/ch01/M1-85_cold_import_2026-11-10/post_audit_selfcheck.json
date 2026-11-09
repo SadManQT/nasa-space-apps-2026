@@ -1,0 +1,9 @@
+{
+  "stub_process_only": true,
+  "retained_setup_error_count": 440,
+  "clean_control_setup": true,
+  "nested_error_detected_despite_exit_zero_and_passing_summary": true,
+  "ordinary_engine_error_not_native_crash": true,
+  "executed_script_snapshots_match_recorded_run_hashes": true,
+  "collector_sha256": "84dea68f4e3ffa4fde98591081e76a89ede5660c793a609df194c52ef1416b3b"
+}

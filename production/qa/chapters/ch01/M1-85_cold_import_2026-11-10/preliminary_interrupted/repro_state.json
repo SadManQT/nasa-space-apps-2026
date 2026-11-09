@@ -1,0 +1,35 @@
+{
+  "revision": "e11809dabf82a8b4169c9e18190bacd6abc9ce00",
+  "game_tree": "e687631faf17a0eab5a773ccfd981919129938a1",
+  "source_files": 3206,
+  "source_bytes": 1075612298,
+  "lfs_files": 1197,
+  "source_manifest_sha256": "20d6238b24258bf3eb924850d9587ff822bd648627e0d2f3da2a581a54731315",
+  "godot_executable": "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64_console.exe",
+  "godot_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "hardware": {
+    "cpu": [
+      {
+        "Name": "Intel(R) Core(TM) Ultra 5 226V",
+        "NumberOfCores": 8,
+        "NumberOfLogicalProcessors": 8
+      }
+    ],
+    "gpu": [
+      {
+        "Name": "Intel(R) Arc(TM) 130V GPU (8GB)",
+        "DriverVersion": "32.0.101.9150"
+      }
+    ],
+    "os": {
+      "Caption": "Microsoft Windows 11 Home",
+      "Version": "10.0.26300",
+      "BuildNumber": "26300",
+      "TotalVisibleMemorySize": 16269228
+    }
+  },
+  "scratch_root": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\M1-85\\lla-m185-vc7ryokg",
+  "scope": "Fresh project import cache and isolated appdata; OS filesystem cache is not evicted. Copies contain the frozen game tree, not user saves or production staging files.",
+  "pairs": []
+}

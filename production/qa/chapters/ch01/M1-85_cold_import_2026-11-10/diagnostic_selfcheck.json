@@ -1,0 +1,16 @@
+{
+  "stub_process_only": true,
+  "ansi_error_detection": true,
+  "last_reimport_parsed": "GochiHand-Regular.ttf",
+  "ordinary_error_not_classified_as_crash": true,
+  "separate_log_directories": true,
+  "overwrite_refused": true,
+  "timeout_aborted": true,
+  "timeout_termination": {
+    "needed": true,
+    "tree_kill_confirmed": true,
+    "taskkill_exit": 0,
+    "parent_exit_confirmed": true
+  },
+  "timeout_duration_seconds": 0.3
+}
