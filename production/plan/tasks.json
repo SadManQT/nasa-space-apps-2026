@@ -656,7 +656,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "P-01 Commission & Plant: a real, interactive puzzle panel",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Ramim/codex",
    "deps": [
     "M0-02"
@@ -675,7 +675,7 @@
    "evidence": "",
    "updated": "2026-11-09",
    "prompt": "Problem: puzzles are receipt gates: each step is a 'USE' button that submits the correct answer pre-filled.\nGoal: the player calibrates the moisture probe (zero at dry 10 -> 0, span at wet 110 -> 100) and plants with moisture in 40–60, choosing\nthe values themselves, with predict -> test -> observe -> explain feedback and a Data Card link (M0-15) when available.\nDo: implement the P-01 panel per execution/PUZZLE_P01.md and execution/UI_09_SCIENTIFIC_PUZZLE.md through the existing PuzzleHost; remove\nP-01's pre-filled payloads; wrong answers give a helpful, non-punishing hint (SYS_22); keyboard, mouse and controller; text scaling; no\ntimer pressure in Family mode. Numbers come from game-design/08_PUZZLE_DESIGNS.md only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. add tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
-   "blocker": "Needs Atik M1-95 to fix cross-scene nearby planting eligibility, then resume this exact UI candidate, address remaining input/focus concerns and perform actual native/review/full checks. Saved work: local ramim/m108-await-runtime-20261108 at afe0c747; production/qa/evidence/M1-08_runtime_blocker.md.",
+   "blocker": "Independent review948ef2f C0/I2/M1: scan/label before-after feedback absent, labels still one-answer action. AtikM1-115 must publish bounded label-input contract, then Ramim updates UI/readings/tests/native. Saved: ramim/m108-ui-review-20261109 at948ef2f, originalafe0 retained, native4 510/0 and29PNG plus failed attempts preserved privately. No M08source onmain. Resume exact candidate afterM115; full/M107 pending.",
    "reserved_for": "ramim",
    "effort": 3
   },
@@ -6820,6 +6820,30 @@
    "updated": "2026-11-09",
    "prompt": "M1-101 real CampaignScene room-rebuild regression produces ERROR: Resumed function _stream after await, but class instance is gone, audio_director.gd:303, plus1ObjectDB warning in both baselineRED and guardedGREEN. Logs production/qa/evidence/M1-101/M1-101_red_test_hud_world_lifetime.gd.txt and green counterpart. Repro through mandatory runner hud_world_lifetime: start campaign, detach/re-add world nodes, rebuild roomsS02/S03, free campaign and await frame. Inspect audio stream lifetime/cancellation ownership; preserve actual audio on live scenes and no stale playback after free. Do not edit Ramim HUD/test or Atik runtime; test real free/rebuild/stream readiness and retain asynchronous error proof. Publish scoped fix and focused/full evidence without weakening runner. Saved work: exact logs and source3d03159, no audio edit from Ramim. Needed before claiming clean integrated engine diagnostics.",
    "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M1-115",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Require explicit P01 cassette label choices through shared preview and commit",
+   "status": "in_progress",
+   "owner": "Atik/Ramim-codex",
+   "deps": [],
+   "paths": [
+    "game/scripts/missions/p01_commission_plant.gd",
+    "game/resources/campaign/profiles/p01_commission_plant.json",
+    "game/tools/support/p01_input_fixture.gd",
+    "game/tools/test_p01_labels.gd",
+    "game/tools/test_p01_inputs.gd"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-09.",
+   "evidence": "",
+   "updated": "2026-11-09",
+   "prompt": "M1-08 review948ef2f found labels still auto-select correct answers. Require an explicit label payload in shared P01 preview/commit: missing/wrong/malformed rejects atomically; EXTERNAL_TEST for Alo and INDOOR_REFERENCE for Tara commits chosen input once. Publish options/expected labels through existing profile/view data; preserve canonical numbers and old saved label values/receipt IDs. Update shared test-only input fixture and necessary callers, never production defaults. Test wrong/types/missing, preview/commit identity, real route flags/receipts, duplicate commands and JSON old-labelled restore. Run focused and integrated full runner without weakening timing gates. No core/world/UI edit. User authorized Ramim to finish Atik dependencies. M08 candidate948ef2f preserved on ramim/m108-ui-review-20261109; resume UI after this real contract.",
+   "reserved_for": "atik",
    "effort": 1
   }
  ],
