@@ -5906,7 +5906,9 @@
     "production/qa/perf/atik_batch_2026-11-10/M1-68.md",
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md",
-    "game/tools/test_p01_inputs.gd"
+    "game/tools/test_p01_inputs.gd",
+    "game/tools/test_loading.gd",
+    "game/tools/test_performance_runtime.gd"
    ]
   },
   {
