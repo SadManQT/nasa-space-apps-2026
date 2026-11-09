@@ -6314,8 +6314,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Route retry keeps delivered and read messages (M1-89 rule)",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/Ramim-codex",
    "deps": [
     "M1-89"
    ],
@@ -6325,7 +6325,7 @@
    "refs": [],
    "note": "Filed by Sadman/night-claude2 on 2026-11-08.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "M1-89 (execution/03_SYSTEM_INTERFACES.md, 'Message metadata') makes delivered and read messages survive a gameplay retry: CampaignDirector.update_message_metadata() mirrors presentation_resume.messages into the director's pre-commit checkpoint, so PuzzleHost.retry()/director.restore_checkpoint() keeps them. The route-level physical retry does not yet: CampaignRoute.retry() (and Chapter1Route.retry(), which calls super.retry()) runs _director.restore_snapshot(checkpoint.director) with the director snapshot taken at the route checkpoint, so every message delivered or read after that point turns undelivered or unread again and its arrival toast can fire a second time. Fix in game/scripts/missions/campaign_route.gd only: capture var messages: Dictionary = _director.message_metadata() before restore_snapshot() and call _director.update_message_metadata(messages) right after it (a union, idempotent; an empty or unchanged record comes back accepted with duplicate=true and changes nothing). Do not edit game/scripts/core/. Acceptance: a missions test (your own test file) delivers and reads a message after a Chapter 1 route checkpoint, runs Chapter1Route.retry(), and proves the director's gameplay state equals the route checkpoint (everything except presentation_resume.messages) while message_metadata() still holds both IDs, and that a second retry is still correct; game/tools/test_director_message_metadata.gd must keep passing unchanged (it only checks that re-applying the record after a route retry works). Run game/tools/run_tests.sh and paste its last line into the evidence.",
    "reserved_for": "atik",
    "effort": 1

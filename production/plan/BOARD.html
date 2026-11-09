@@ -259,9 +259,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-90">M1-90</a> Run complete Windows loading diagnostics for M1-68 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">Completed the two requested fresh-process Windows runs with the unchanged collector. Run1:537 checks,2 failures (title51.869ms,campaign66.5…</div></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">4 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">5 blocked</span><span class="chip s-todo">36 todo</span></div><div class="bar"><i style="width:9%"></i></div>
-<details open><summary>Working now (1)</summary><ul>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Gameplay runtime, Moon systems and builds · 20% share</div><div class="counts"><span class="chip s-done">4 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">5 blocked</span><span class="chip s-todo">35 todo</span></div><div class="bar"><i style="width:9%"></i></div>
+<details open><summary>Working now (2)</summary><ul>
 <li><a class="id" href="#M1-36">M1-36</a> Terrain in Godot: streaming, collision, lighting and performance <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Sadman/claude on 2026-11-09</div></li>
+<li><a class="id" href="#M1-99">M1-99</a> Route retry keeps delivered and read messages (M1-89 rule) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Atik/Ramim-codex on 2026-11-09</div></li>
 </ul></details>
 <details open><summary>Next up today (5)</summary><ul>
 <li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span></li>
@@ -277,7 +278,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Complete diagnostic retention/collector delivered and reviewed; full61/61 and two fresh M4 focused runs537PASS each. Original Windows failure not reproduced here; await Ramim M1-9…</div></li>
 <li><a class="id" href="#M1-69">M1-69</a> Expose safe message metadata updates without resetting puzzle checkpoints <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Requested Director method is in Sadman-owned core/, outside campaign-only task paths. Owner request M1-89 publishes bounded metadata/checkpoint contract; then Atik wires normal sa…</div></li>
 </ul></details>
-<details><summary>To do (31)</summary><ul>
+<details><summary>To do (30)</summary><ul>
 <li><a class="id" href="#M3-2M">M3-2M</a> Chapter 2 missions EX-M0201 to EX-M0204: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-3M">M3-3M</a> Chapter 3 missions EX-M0301 to EX-M0304: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-4M">M3-4M</a> Chapter 4 missions EX-M0401 to EX-M0404: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span></li>
@@ -304,7 +305,6 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-109">M3-109</a> Wire the Chapter 4 garage (LOC-08) into the campaign: room scene, boundaries, dock cycle <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M3-110">M3-110</a> Play the Chapter 4 exteriors on their segments: LOC-09 B1/B2/B3, the last bend and the vault shelf <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M4-07">M4-07</a> Chapter 8 exteriors in the campaign: load LOC-11/LOC-12 scenes, honour &#x27;aboard&#x27; in the rover runtime, grade the Malapert pad (M3-8R follow-up) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
-<li><a class="id" href="#M1-99">M1-99</a> Route retry keeps delivered and read messages (M1-89 rule) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M4-08">M4-08</a> Loading look-ahead prepares a scene&#x27;s staging models; perf test evicts the right room for EX-CH05-S02 <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 <li><a class="id" href="#M4-12">M4-12</a> Cache director.query() in nearby_target() and skip ToonMaterials warm-draw on PBR habitat_kit props <span class="chip ">any</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-105">M1-105</a> Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2 <span class="chip ">codex</span> <span class="chip ">P1</span></li>
@@ -6740,8 +6740,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Route retry keeps delivered and read messages (M1-89 rule)",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/Ramim-codex",
    "deps": [
     "M1-89"
    ],
@@ -6751,7 +6751,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "refs": [],
    "note": "Filed by Sadman/night-claude2 on 2026-11-08.",
    "evidence": "",
-   "updated": "2026-11-08",
+   "updated": "2026-11-09",
    "prompt": "M1-89 (execution/03_SYSTEM_INTERFACES.md, 'Message metadata') makes delivered and read messages survive a gameplay retry: CampaignDirector.update_message_metadata() mirrors presentation_resume.messages into the director's pre-commit checkpoint, so PuzzleHost.retry()/director.restore_checkpoint() keeps them. The route-level physical retry does not yet: CampaignRoute.retry() (and Chapter1Route.retry(), which calls super.retry()) runs _director.restore_snapshot(checkpoint.director) with the director snapshot taken at the route checkpoint, so every message delivered or read after that point turns undelivered or unread again and its arrival toast can fire a second time. Fix in game/scripts/missions/campaign_route.gd only: capture var messages: Dictionary = _director.message_metadata() before restore_snapshot() and call _director.update_message_metadata(messages) right after it (a union, idempotent; an empty or unchanged record comes back accepted with duplicate=true and changes nothing). Do not edit game/scripts/core/. Acceptance: a missions test (your own test file) delivers and reads a message after a Chapter 1 route checkpoint, runs Chapter1Route.retry(), and proves the director's gameplay state equals the route checkpoint (everything except presentation_resume.messages) while message_metadata() still holds both IDs, and that a second retry is still correct; game/tools/test_director_message_metadata.gd must keep passing unchanged (it only checks that re-applying the record after a route retry works). Run game/tools/run_tests.sh and paste its last line into the evidence.",
    "reserved_for": "atik",
    "effort": 1
