@@ -13,8 +13,11 @@ const _BOUNDARIES := {
 	"door_commons_service": {"from": "LOC-01", "to": "LOC-02", "kind": INTERNAL, "default_open": true},
 	"door_commons_garden": {"from": "LOC-01", "to": "LOC-03", "kind": INTERNAL, "default_open": true},
 	"door_commons_safe": {"from": "LOC-01", "to": "LOC-04", "kind": INTERNAL, "default_open": true},
+	"door_commons_airlock": {"from": "LOC-01", "to": "LOC-05", "kind": INTERNAL, "default_open": true},
+	"door_commons_garage": {"from": "LOC-01", "to": "LOC-08", "kind": INTERNAL, "default_open": true},
 	"door_service_garden": {"from": "LOC-02", "to": "LOC-03", "kind": INTERNAL, "default_open": true},
 	"door_service_safe": {"from": "LOC-02", "to": "LOC-04", "kind": INTERNAL, "default_open": true},
+	"door_service_annex": {"from": "LOC-02", "to": "LOC-07", "kind": INTERNAL, "default_open": true},
 	"airlock_exterior": {
 		"from": "LOC-01",
 		"to": "LOC-06",
@@ -23,6 +26,28 @@ const _BOUNDARIES := {
 		"requires_airlock_cycle": true,
 		"requires_suit_check": true,
 		"requires_exposure_clear": true,
+	},
+	"annex_hatch": {
+		"from": "LOC-07",
+		"to": "LOC-07_COLD",
+		"kind": AIRLOCK,
+		"default_open": false,
+		"requires_airlock_cycle": true,
+		"requires_suit_check": true,
+		"requires_exposure_clear": true,
+	},
+	"garage_dock_hatch": {
+		"from": "LOC-08",
+		"to": "ROVER_CABIN",
+		"kind": AIRLOCK,
+		"default_open": false,
+		"requires_airlock_cycle": true,
+	},
+	"rover_bay_door": {
+		"from": "LOC-08",
+		"to": "LOC-06",
+		"kind": SHUTTER,
+		"default_open": false,
 	},
 	"garden_viewing_shutter": {
 		"from": "LOC-03",
@@ -90,13 +115,13 @@ static func can_traverse(from_room: String, to_room: String, state: Dictionary =
 		return {"accepted": false, "reason": "Boundary %s is closed." % matched_id, "boundary_id": matched_id}
 	var kind := String(definition.get("kind", ""))
 	if kind == AIRLOCK:
-		if not bool(effective.get("airlock_ready", false)):
+		if bool(definition.get("requires_airlock_cycle", false)) and not bool(effective.get("airlock_ready", false)):
 			return {"accepted": false, "reason": "Airlock interlock is not cycled to a safe ready state.", "boundary_id": matched_id}
-		if not bool(effective.get("suit_check", false)):
+		if bool(definition.get("requires_suit_check", false)) and not bool(effective.get("suit_check", false)):
 			return {"accepted": false, "reason": "Suit and exterior instrument check is incomplete.", "boundary_id": matched_id}
-		if bool(effective.get("exposure_lock", false)) or not bool(effective.get("exposure_clear", true)):
+		if bool(definition.get("requires_exposure_clear", false)) and (bool(effective.get("exposure_lock", false)) or not bool(effective.get("exposure_clear", true))):
 			return {"accepted": false, "reason": "Exterior route is locked during an active exposure condition.", "boundary_id": matched_id}
-	if kind == SHUTTER and not bool(effective.get("chamber_safe", false)):
+	if kind == SHUTTER and bool(definition.get("requires_chamber_safe", false)) and not bool(effective.get("chamber_safe", false)):
 		return {"accepted": false, "reason": "The garden chamber has not returned a safe pressure/condition reading.", "boundary_id": matched_id}
 	if kind == EXPOSURE_LOCK and bool(effective.get("exposure_lock", false)):
 		return {"accepted": false, "reason": "Safe Room exposure lock keeps the return boundary closed.", "boundary_id": matched_id}
@@ -108,7 +133,14 @@ static func room_bounds(room_id: String) -> Dictionary:
 		"LOC-02": [12.0, 6.0],
 		"LOC-03": [12.0, 8.0],
 		"LOC-04": [8.0, 6.0],
+		"LOC-05": [8.0, 4.0],
 		"LOC-06": [120.0, 120.0],
+		"LOC-07": [8.0, 6.0],
+		"LOC-08": [12.0, 9.0],
+		"LOC-09": [30.0, 30.0],
+		"LOC-10": [34.0, 34.0],
+		"LOC-11": [200.0, 60.0],
+		"LOC-12": [120.0, 120.0],
 	}
 	var value: Array = bounds.get(room_id, [])
 	if value.size() != 2:

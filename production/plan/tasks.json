@@ -5391,7 +5391,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Visual review of the Chapter 6 eclipse power props (M3-6A)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Asif/Codex",
    "deps": [
     "M3-6A"
@@ -5401,7 +5401,7 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/night-claude2 on 2026-11-06.",
-   "evidence": "",
+   "evidence": "production/review/visual_review.md",
    "updated": "2026-11-09",
    "prompt": "Handbook section 6 quality gate step 2 for the nine M3-6A props (18 GLBs in game/assets/props/eclipse_power/; they pass the automated gate in production/review/asset_verification.md). Inspect production/qa/evidence/M3-6A_contact.png, M3-6A_lods.png and the Godot captures M3-6A_*.png against production/ART_BIBLE.md sections 2, 3 and 7 and the story (STORY_FULL EX-CH06-S01..S12, 08 P-11/P-12): palette, no baked text or logos (every word is a Label3D or live screen), English only, metre scale, LOD1 keeps silhouette and colours, the monitor's eclipse picture (black sky, Earth 3.5x the Sun seen from the Moon, red rim only at totality, inset labelled conceptual / not to scale / not a map, NASA-catalog date checked, Aurora geometry labelled scenario). Add a dated 'M3-6A eclipse power props review' section with one row per GLB (PASS or FIX with the reason) to production/review/visual_review.md, then run python3 production/tools/build_registry.py --manifest eclipse_props so the registry shows verified (or needs fix). A FIX goes back to Sadman as a board task naming the prop and the change.",
    "reserved_for": "asif",
@@ -5850,7 +5850,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Wire the Chapter 2 airlock (LOC-05) into the campaign",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M3-2R"
@@ -5862,8 +5862,8 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07.",
-   "evidence": "",
-   "updated": "2026-11-07",
+   "evidence": "game/tools/test_campaign_later_runtime.gd",
+   "updated": "2026-11-09",
    "prompt": "M3-2R (Sadman, rooms) landed the Chapter 2 rooms: LOC-05 is now the approved 8 x 4 m M3-2A airlock (game/scenes/campaign/rooms/airlock.tscn, game/resources/campaign/rooms/LOC-05.json), and the Commons north portal plus LOC-05's east portal are a new internal boundary \"door_commons_airlock\" (RoomContract boundary_ids: LOC-01 has door_commons_service/garden/safe/airlock; LOC-05 has door_commons_airlock and airlock_exterior). The night shift's commit 310b817 (branch origin/night/M3-2R) also edited your files; those edits were NOT landed (folder ownership). Please make these changes in your folders. Diffs are against current main (M1-84 already added a `moments` argument to CampaignCrew.place, and your M1-49 may already pass it; keep whichever is there).\n\n1. game/scripts/loading/load_preparation.gd, ROOM_SCENES: add\n\t\"LOC-05\": \"res://scenes/campaign/rooms/airlock.tscn\",\nbetween LOC-04 and LOC-06. Why: airlock.tscn carries HabitatKitPreload and an AirlockPreload of the ten EN_Airlock GLBs, so the loading card decodes them off the main thread. Without it Chapter1Campaign._refresh_world_now builds LOC-05 (EX-CH02-S03..S05) as a bare CampaignRoom.new() from LOC-05.json, which works but loads those GLBs on the main thread (a hitch on entering S03).\n\n2. game/scripts/navigation/route_navigation.gd, _BOUNDARIES: add\n\t\"door_commons_airlock\": {\"from\": \"LOC-01\", \"to\": \"LOC-05\", \"kind\": INTERNAL, \"default_open\": true},\nafter door_commons_safe. Why: WorldRoute has no state for that id, so _sync_world_boundaries shows the Commons north door and the airlock's inner door closed, and LOC-01 -> LOC-05 is not a legal traversal. Old checkpoints are already handled: WorldRoute.restore (game/scripts/world/world_route.gd, Sadman's, landed in M3-2R) fills door_commons_airlock with NavigationContract.default_boundary_state() when a snapshot lacks it and the boundary is defined. Note for you to decide (not part of 310b817): airlock_exterior is still defined from LOC-01 to LOC-06, while in the rooms the surface hatch is now LOC-05's outer hatch and the Commons no longer lists airlock_exterior; leave it unless your Chapter 1 EVA flow needs the Commons door to mirror the airlock state.\n\n3. game/scripts/campaign/chapter1_campaign.gd:\n a. _targets_for_scene(): bind each mission action to the room's authored station (RoomContract staging \"stations\"; RoomContract.station_focus() gives the same answer):\n\tfunc _targets_for_scene() -> Array:\n\t\tvar targets: Array = route.targets_for_current_scene() if route != null else []\n\t\tif _room != null:\n\t\t\t# The mission owns the action; the room owns the physical station where it happens.\n\t\t\tvar stations: Dictionary = _room.stage().get(\"stations\", {})\n\t\t\tfor target in targets:\n\t\t\t\tvar station := String(stations.get(String(target.target_id), \"\"))\n\t\t\t\tif not station.is_empty():\n\t\t\t\t\ttarget.world_focus_id = station\n\t\treturn targets\n Why: in the Chapter 2 rooms each action happens at a specific station (e.g. the glove ports, the recorder bench, the brace zone); the gate catalogue's world_focus_id is only the room-level default, so the prompt and selection frame can sit on the wrong object.\n b. _place_crew(): pass the story log to the crew so the room echoes show on New game, Continue and chapter joins:\n\tvar story_log: Dictionary = director.snapshot().story_log\n\t_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]), story_log.choices, story_log.get(\"moments\", []))\n Why: D4 (EX-CH02-S06 prediction card in the garden, still pinned for CH04-S01) and D5 (EX-CH02-S10 voice card in the service rooms, kept across CH02 -> CH03) only appear when choices are passed; M1-84's named mugs need the moments (and from EX-CH02-S11 Amara's named mug is the cup by the pending-reply indicator).\n\n4. Tests (adapt to current main):\n - game/tools/test_chapter1_campaign_flow.gd _test_chapter2_handoff (passes on main today; M3-2R turned LOC-05 so its garden wall is north and +Z 1 m from the room-level gate focus stays inside): together with 3a, check String(target.get_meta(\"target_id\", \"\")) == RoomContract.station_focus(scene_id, target_id) (\"Chapter 2 operation uses its authored room station\"), and place the player at that station's approach_m from RoomContract.staged_layout(room_id, scene_id).focus_targets instead of target + 1 m on +Z (several stations are on south walls, e.g. the LOC-02 evidence board at z 3.85 and the garden bench at z 3.4, where +Z is outside the room); include action.reason in the commit-failure message. Needs `const RoomContract = preload(\"res://scripts/world/room_contract.gd\")` and `const RoomPresentation = preload(\"res://scripts/world/room_presentation.gd\")`.\n - game/tools/test_campaign_later_runtime.gd (EX-CH02-S12 -> EX-CH03-S01 join): record state.story_log.choices[\"EX-CH02-S10-CHOICE\"] = {\"option_id\": \"EX-CH02-S10-OPT02\", \"scene_id\": \"EX-CH02-S10\", \"scenario_datetime\": \"2046-05-06 18:00 UTC\", \"state_revision\": state.state_revision} before the restore, then after advance_scene check _campaign._room.visual_root.get_node_or_null(\"ChapterStaging/card_voice_text\") as Label3D contains \"KEPT AS AN INFERENCE\" (\"the production room restores the player's recorded voice classification across the chapter join\").\n - Add, in one of your suites: LoadPreparation.ROOM_SCENES[\"LOC-05\"] == \"res://scenes/campaign/rooms/airlock.tscn\"; for each id in RoomContract.room(\"LOC-05\").boundary_ids, WorldRoute.new().boundary_state(id) is not empty; WorldRoute.new().can_traverse_to(\"LOC-05\") is accepted from the Commons; a WorldRoute snapshot with boundaries.door_commons_airlock erased still restores. (These were in the night shift's test_chapter2_rooms.gd; they moved out so Sadman's suite passes without your wiring.)\n\nThe full night-shift diff of your files: `git show 310b817 -- game/scripts/campaign/chapter1_campaign.gd game/scripts/loading/load_preparation.gd game/scripts/navigation/route_navigation.gd game/tools/test_chapter1_campaign_flow.gd game/tools/test_campaign_later_runtime.gd`. Do not edit game/scripts/world/ or game/resources/campaign/rooms/ (Sadman's); file a task for him if the room data needs a change.\n\nAcceptance: game/tools/run_tests.sh green (every suite, never a bare Godot exit code), including test_chapter2_rooms, test_chapter1_campaign_flow and test_campaign_later_runtime; in a played EX-CH02-S03 the Commons-to-airlock door shows open, and the D5 card shows after Continue into EX-CH03-S01.",
    "reserved_for": "atik",
    "effort": 1
@@ -6153,7 +6153,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Wire the Chapter 3 annex (LOC-07) and the tray dedication into the campaign",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M3-3R"
@@ -6165,8 +6165,8 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-07.",
-   "evidence": "",
-   "updated": "2026-11-07",
+   "evidence": "game/tools/test_campaign_later_runtime.gd",
+   "updated": "2026-11-09",
    "prompt": "M3-3R (Sadman, rooms) landed the Chapter 3 rooms: EX-CH03-S06..S08 play in LOC-07, the Expedition Zero annex (game/scenes/campaign/rooms/annex.tscn, game/resources/campaign/rooms/LOC-07.json): a warm-side kit bay with the N.R. floor hatch and the 2034 annex 3 m below. RoomContract.room('LOC-07').boundary_ids are now [door_service_annex, annex_hatch]. Please, in your folders: (1) game/scripts/loading/load_preparation.gd ROOM_SCENES: add \"LOC-07\": \"res://scenes/campaign/rooms/annex.tscn\" (it carries HabitatKitPreload; without it Chapter1Campaign builds LOC-07 as a bare CampaignRoom.new(), which works but loads the kit on the main thread). (2) game/scripts/navigation/route_navigation.gd _BOUNDARIES: add \"door_service_annex\": {from LOC-02, to LOC-07, kind INTERNAL, default_open true} and \"annex_hatch\" (the warm bay to cold annex hatch inside LOC-07; closed by default; it opens only with leak_sealed, the annex feed isolated, zero differential and the suit check, doc 09 LOC-07); CampaignRoom.set_door_open(\"annex_hatch\", open) already swings the leaf. (3) Record the EX-CH03-S11 tray dedication (CampaignState.EXTRA_STORY_CHOICES id EX-CH03-S11-DEDICATION) with option ids EX-CH03-S11-DEDICATION-OPT01 (Light and Star), -OPT02 (For Alo and Tara), -OPT03 (The Next Small Thing): LOC-03 staging (layers ch03_d6_opt01..03) shows the chosen words on the rack's dedication card from EX-CH03-S11 through EX-CH04-S01; add the D6 rows to story_echoes.json as part of M3-95. Note: CampaignCrew.place now uses a scene's staged <room>_player anchor when the staging names one (EX-CH03-S07 starts the player on the cold side, y = -3), so _place_crew can keep passing the base anchor. Acceptance: game/tools/run_tests.sh passes (chapter3_rooms included); in a campaign run, EX-CH03-S06..S08 load LOC-07 through annex.tscn on the loading card and a dedication choice shows its words on the rack.",
    "reserved_for": "atik",
    "effort": 1
@@ -6198,7 +6198,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Wire the Chapter 4 garage (LOC-08) into the campaign: room scene, boundaries, dock cycle",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M3-105"
@@ -6211,8 +6211,8 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-08.",
-   "evidence": "",
-   "updated": "2026-11-08",
+   "evidence": "game/tools/test_campaign_later_runtime.gd",
+   "updated": "2026-11-09",
    "prompt": "M3-105 (Sadman, rooms) built LOC-08, the approved M3-4A rover garage: game/scenes/campaign/rooms/garage.tscn, game/resources/campaign/rooms/LOC-08.json, RoomContract LOC-08 (12 x 9 m; boundaries door_commons_garage, garage_dock_hatch, rover_bay_door). EX-CH04-S02/S03/S09, EX-CH05-S01, EX-CH07-S12 (moved from the Commons; scene_rosters.json now puts all five in LOC-08) and EX-CH08-S01/S11 are staged there. Please make these changes in your folders (do not edit game/scripts/world/ or game/resources/campaign/rooms/; file a task for Sadman if the room data needs a change).\n1. game/scripts/loading/load_preparation.gd ROOM_SCENES: add \"LOC-08\": \"res://scenes/campaign/rooms/garage.tscn\". Why: garage.tscn carries HabitatKitPreload and a GaragePreload of the 34 EN_Garage GLBs and VH_Rover, so the loading card decodes them off the main thread; without it Chapter1Campaign builds LOC-08 as CampaignRoom.new() from LOC-08.json (works, but loads them on the main thread).\n2. game/scripts/navigation/route_navigation.gd _BOUNDARIES: add \"door_commons_garage\": {\"from\": \"LOC-01\", \"to\": \"LOC-08\", \"kind\": INTERNAL, \"default_open\": true} (the pressurised kit corridor, decision 2; the Commons has no portal drawn for it yet), \"garage_dock_hatch\" (LOC-08 to the docked rover's cabin; a pressure boundary, default closed: CampaignRoom.set_door_open(\"garage_dock_hatch\", true) is refused unless the tunnel reads SAFE TO OPEN) and \"rover_bay_door\" (LOC-08 vacuum bay to the apron and LOC-06; not a pressure door, default closed; set_door_open coils it up). Extend WorldRoute.restore's missing-boundary default the same way it fills door_commons_airlock (game/scripts/world/world_route.gd is Sadman's: file a task if it needs more).\n3. game/scripts/campaign/chapter1_campaign.gd: the dock cycle. CampaignRoom.garage() returns en_garage.gd: dock_state() SEALED / EQUALISING / SAFE TO OPEN, request_dock_cycle(\"habitat\") (equalise before the hatch opens) or (\"vacuum\") (pump down before undocking), time_card() (the labelled time card: TUNNEL EQUALISING · ABOUT 2.5 MIN, SHOWN IN 8 S), signals dock_state_changed / dock_cycle_finished, dock_snapshot() / dock_restore() for saves. EX-CH04-S09, EX-CH05-S01 and EX-CH08-S11 start SEALED (LOC-08.json staging \"garage\": {\"dock\": \"vacuum\"}): when the player uses the garage_dock station, request the habitat cycle, show the time card on the HUD while it runs (doc 09 LOC-08 exit behaviour: a labelled time card, not invisible teleportation), and open the hatch through WorldRoute when it reads SAFE TO OPEN. Save dock_snapshot() with the room state. Bind each action to the room station (RoomContract.station_focus, as in M3-103).\n4. game/scripts/campaign/terrain_session.gd (optional, for the open rover door): exterior_terrain.json LOC-08 has omit_staging_floor false and yaw_deg 127.14: the garage builds its own floors and turns by yaw_deg about origin_m. To show the Aurora ridge outside the door, put the TerrainStream and stream.lighting(scene_id) under a node with Transform3D(Basis(Vector3.UP, deg_to_rad(yaw_deg)), origin_m).affine_inverse() and free the room's RoomLighting/RoomEnvironment, as game/tools/test_chapter4_rooms.gd _capture_garage_exterior does.\n5. game/scripts/missions/extended_gate_catalog.gd, a canon mismatch to decide: the CH04 action lists are shifted against STORY_FULL. S08 (the vault shelf, LOC-10) lists p08_return_to_base, p08_dock_dry_glovebox, p08_warm_cold/cool/room, p08_check_condensation, p08_open_inner_seal and p08_inventory_12, but canon returns and docks in S09 and warms, opens and inventories in S10 in the garden's dry glovebox (\"Only now ... breaking the biological seal inside that protected workspace\"); S09 lists p08_scan_lid / p08_save_viability_pending / p08_transfer_case (the lid scan is S10-S11). The rooms give each listed action a station where the catalog puts it (S09: the dry cargo lock and the console); if you realign the catalog, tell Sadman so the station maps follow.\nTests: add to one of your suites LoadPreparation.ROOM_SCENES[\"LOC-08\"] == \"res://scenes/campaign/rooms/garage.tscn\" and WorldRoute.new().boundary_state(id) non-empty for the three LOC-08 boundaries; a played EX-CH04-S09 cycles the dock with the time card and opens the hatch. Acceptance: game/tools/run_tests.sh green (every suite), including test_chapter4_rooms.",
    "reserved_for": "atik",
    "effort": 1
@@ -6266,7 +6266,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Play the Chapter 4 exteriors on their segments: LOC-09 B1/B2/B3, the last bend and the vault shelf",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M3-106"
@@ -6278,8 +6278,8 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-08.",
-   "evidence": "",
-   "updated": "2026-11-08",
+   "evidence": "game/tools/test_campaign_later_runtime.gd",
+   "updated": "2026-11-09",
    "prompt": "M3-106 (Sadman, rooms and terrain) rebuilt LOC-09 and LOC-10 from the approved M3-4A EN_ColdTrap pieces (game/scenes/campaign/rooms/ridge.tscn and vault_shelf.tscn; LOC-09.json and LOC-10.json, assembly \"site_kit\"). EX-CH04-S04 now plays at the three computed beacon corners (decision 8): exterior_terrain.json LOC-09 \"segments\" B1, B2, B3, each with its own region, origin_m and yaw_deg (the room turned so the road runs along its -Z), and its own JPL Horizons row (sun_positions.json scene_lighting rows with \"segment\": B1 and B2 sunlit at 08:00 UTC, B3 in terrain shadow; Earth above the terrain at all three). The room's own LOC-09 placement stays the last bend (EX-CH04-S05's sample station). API (Sadman's files): RoomContract.terrain(room_id, segment), RoomContract.terrain_segments(room_id), RoomContract.earth(room_id, scene_id, segment), RoomContract.staging(..., segment), Heightfield.scene_lighting(scene_id, segment), CampaignRoom.terrain_segment (set with terrain_ground before the room enters the tree). Please make these changes in your folders (do not edit game/scripts/world/, game/resources/campaign/rooms/ or game/assets/; file a task for Sadman if the data needs a change).\n1. game/scripts/loading/load_preparation.gd ROOM_SCENES: add \"LOC-09\": \"res://scenes/campaign/rooms/ridge.tscn\" and \"LOC-10\": \"res://scenes/campaign/rooms/vault_shelf.tscn\" (their SitePreload carries the EN_ColdTrap GLBs and VH_Rover_Lit.tscn so the loading card decodes them off the main thread; without it the campaign builds CampaignRoom.new() from the JSON, which works).\n2. game/scripts/campaign/terrain_session.gd prepare(room_id, scene_id, segment = \"\"): placement = Contract.terrain(room_id, segment); put the TerrainStream under Transform3D(Basis(Vector3.UP, deg_to_rad(placement.get(\"yaw_deg\", 0.0))), origin_m).affine_inverse() (a plain -origin_m for unturned rooms, as today); configure(region_id, origin_m + turn * player_anchor, exclusions); move_focus(origin_m + turn * room_local); light it from the segment's own row (game/scripts/terrain/terrain_stream.gd lighting(scene_id, segment) -> Heightfield.scene_lighting(scene_id, segment)) and EarthSky from Contract.earth(room_id, scene_id, segment).\n3. The EX-CH04-S04 flow: play RoomContract.terrain_segments(\"LOC-09\") in order B1, B2, B3, one room build per segment (CampaignRoom.terrain_segment, set before add_child), each with its own beacon action (p07_place_beacon_1/2/3 at the station ridge_beacon_pad) and a labelled cruise time card between segments (doc 09 LOC-09: \"cruise between the segments is labelled rather than presented as empty driving time\"; road distances 1.02, 1.88 and 5.24 km).\n4. Permanently shadowed ground on the terrain: the cold_trap region has no vista and its far crater rims lie outside the 8 km heightfield, so the directional shadow cannot darken the vault shelf (LOC-10, rows S06-S08), the last bend (S05) or B3 under their dated rows (sun_state dark). Add a cold_trap vista region, or in TerrainStream.lighting add for a dark row a shadow-only wall 400 m toward the Sun with its top at the row's terrain_horizon_deg (game/tools/test_chapter4_rooms.gd _dated_rig does this for the evidence captures). ART_BIBLE section 2: the shelf is never sunlit. Until the campaign adopts the terrain, the flat fallback floor is right: CampaignRoom's dated key light (\"dated_sun\") goes out on dark rows.\nTests: in one of your suites, prepare LOC-09 for each segment and LOC-10 and check the stream transform, that the rig's Sun is the segment row's, and that a point on the shelf is in shadow under the S06 row. Acceptance: game/tools/run_tests.sh green (every suite), including test_chapter4_rooms and test_exterior_terrain.",
    "reserved_for": "atik",
    "effort": 2
@@ -6875,7 +6875,7 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Investigate kit LOD texture UID fallback warnings after normal import",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [],
    "paths": [
@@ -6884,7 +6884,7 @@
    ],
    "refs": [],
    "note": "Filed by Tanvir/codex on 2026-11-09.",
-   "evidence": "",
+   "evidence": "production/qa/evidence/M1-117_kit_lod1_uid.md",
    "updated": "2026-11-09",
    "prompt": "Tanvir M1-65 retest on9Nov2026, sourcecc4e180, Godot4.7.2 Windows IntelArc. After mandatory run_tests.sh setup refresh, real campaign focused/native logs repeatedly warn for11 kit LOD1 GLBs: invalid UID uid://dwd3423mo0cjb, falling back to text path assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png. Evidence production/qa/playtests/first_impressions/retest_2026-11-09/p01/ and campaign_input/ logs plus native and native_compatibility/capture.txt; commands in run manifests. Both renderers show the warnings, no missing-material/image corruption or gameplay failure is established. The tracked texture .import diff has no content change; investigate local import/cache/UID consistency before deciding an authored asset fix is needed. Do not commit bulk generated metadata or replace working art. Acceptance: documented reproducible import/reopen path with consistent resource references (or a supported cache repair with evidence), real loaded campaign free of these fallback warnings, and appropriate asset/runtime verification. Existing ObjectDB teardown warnings belong to runtime/UI investigation, not this texture request.",
    "reserved_for": "sadman",
@@ -6917,7 +6917,7 @@
    "priority": "P1",
    "tool": "any",
    "title": "Record the full Atik and Ramim gate and retained Windows traces",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M1-98",
@@ -6928,7 +6928,7 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-09.\n9Nov M1-121 complete static branch re-audit: production/qa/evidence/M1-121/README.md;62refs/57tips; no hidden Messages inbox. Please include this status in owned handbook; original1193 local files remain protected. M56 is first implementation priority, then real STACK/Care Round paths and missing ch02-04 packs.",
-   "evidence": "",
+   "evidence": "PRODUCTION_HANDBOOK.md",
    "updated": "2026-11-09",
    "prompt": "After M98 collection, add concise handbook section10 status: reviewed eight-source batch e78f5bc full83/84, only unchanged M68 timing581/7; text13060/0; real E and P01 focused/native source evidence. M69/M101 task-specific acceptance and M97 diagnostic retention completed; broad UI release gates still blockedM68. Full proof production/qa/evidence/2026-11-09_ramim_atik_full/README.md. M97 exact invocation/schema production/qa/perf/M1-97.md. M98 collection evidence will be appended before marking its taskdone. Do not claim performance, human or full-game completion. No canon/numeric decision change. M98 nowcomplete: production/qa/evidence/M1-68_windows/2026-11-09_retained_ramim/README.md, two581/7 and581/6 timings,16windows/322stages, all37newretention checks pass; no perf fix.14rawartifacts verified,3178game files unchanged; reviewminor attribution corrected. Wait also for M118 bounded UIcallbacksource/evidence, then record its separate focused/native scope without claiming current full green. M118 nowdone as bounded UIlifetime follow-up: source50db8f0, focused358/0, native14/0/2PNG,2ObjectDBwarnings retained; review0 findings. production/qa/evidence/M1-118/README.md. Full83/84 sourcee78 predates this fix; no current-source full or performance/release pass claimed. M56inbox readyTODO, no source implementation yet; avoid saying explainer clips unblocked.",
    "reserved_for": "sadman",

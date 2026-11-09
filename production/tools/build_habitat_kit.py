@@ -1138,18 +1138,12 @@ def write_material_resources(images):
 def write_texture_imports():
     """Godot import settings for every kit texture: VRAM compressed with mipmaps (a plain PNG imports lossless and
     unmipped, which shimmers in 3D and costs 4x the memory), normal maps flagged, ORM packed as data. An existing
-    .import keeps its uid so scenes that already reference the texture stay valid; Godot fills the remap paths."""
+    .import keeps its uid, path.* and dest_files so scenes that already reference the texture stay valid; only the
+    [params] block is enforced."""
     for png in sorted((OUT / "textures").rglob("*.png")):
         import_file = png.with_name(png.name + ".import")
-        uid = ""
-        if import_file.exists():
-            for line in import_file.read_text(encoding="utf-8").splitlines():
-                if line.startswith("uid="):
-                    uid = line + "\n"
         kind = "normal" if "_Normal" in png.stem else "orm" if "_ORM" in png.stem else "color"
-        import_file.write_text(
-            '[remap]\n\nimporter="texture"\ntype="CompressedTexture2D"\n' + uid +
-            '\n[deps]\n\nsource_file="res://' + png.relative_to(ROOT / "game").as_posix() + '"\n\n[params]\n\n'
+        params = (
             'compress/mode=2\ncompress/high_quality=false\ncompress/lossy_quality=0.7\ncompress/uastc_level=0\n'
             'compress/rdo_quality_loss=0.0\ncompress/hdr_compression=1\n'
             f'compress/normal_map={1 if kind == "normal" else 2}\n'
@@ -1157,7 +1151,17 @@ def write_texture_imports():
             'mipmaps/generate=true\nmipmaps/limit=-1\nroughness/mode=0\nroughness/src_normal=""\n'
             'process/channel_remap/red=0\nprocess/channel_remap/green=1\nprocess/channel_remap/blue=2\nprocess/channel_remap/alpha=3\n'
             'process/fix_alpha_border=true\nprocess/premult_alpha=false\nprocess/normal_map_invert_y=false\n'
-            'process/hdr_as_srgb=false\nprocess/hdr_clamp_exposure=false\nprocess/size_limit=0\ndetect_3d/compress_to=1\n',
+            'process/hdr_as_srgb=false\nprocess/hdr_clamp_exposure=false\nprocess/size_limit=0\ndetect_3d/compress_to=1\n'
+        )
+        if import_file.exists():
+            text = import_file.read_text(encoding="utf-8")
+            if "[params]" in text:
+                prefix = text.split("[params]", 1)[0]
+                import_file.write_text(prefix + "[params]\n\n" + params, encoding="utf-8")
+                continue
+        import_file.write_text(
+            '[remap]\n\nimporter="texture"\ntype="CompressedTexture2D"\n'
+            '\n[deps]\n\nsource_file="res://' + png.relative_to(ROOT / "game").as_posix() + '"\n\n[params]\n\n' + params,
             encoding="utf-8")
 
 

@@ -26,6 +26,8 @@ func _run() -> void:
 	for material in catalog.materials:
 		var mat := load(material.path) as StandardMaterial3D
 		_check(mat != null and mat.albedo_texture != null and mat.normal_texture != null and mat.roughness_texture != null, material.id + " loads albedo, normal and ORM textures")
+	var paint_orm_uid := ResourceUID.text_to_id("uid://c4y0dt47sdboo")
+	_check(paint_orm_uid != ResourceUID.INVALID_ID and ResourceUID.has_id(paint_orm_uid) and ResourceUID.get_id_path(paint_orm_uid) == "res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png", "T_Kit_Paint_ORM_LOD1.png registers tracked uid://c4y0dt47sdboo without fallback")
 	for entry in catalog.pieces:
 		_test_piece(entry)
 	_test_grid_assembly()

@@ -62,10 +62,11 @@ func restore(snapshot_data: Dictionary) -> Dictionary:
 		if not entry is Dictionary:
 			return {"accepted": false, "reason": "World history must contain Dictionaries."}
 	var boundaries: Dictionary = snapshot_data.boundaries.duplicate(true)
-	# The inner airlock door starts at its default once RouteNavigation defines it ({} until then: nothing added).
-	var vestibule := NavigationContract.default_boundary_state("door_commons_airlock")
-	if not boundaries.has("door_commons_airlock") and not vestibule.is_empty():
-		boundaries["door_commons_airlock"] = vestibule
+	# Boundaries added after early checkpoints start at their defaults when a pre-existing save restores.
+	for added_id in ["door_commons_airlock", "door_commons_garage", "door_service_annex", "annex_hatch", "garage_dock_hatch", "rover_bay_door"]:
+		var added_default := NavigationContract.default_boundary_state(added_id)
+		if not boundaries.has(added_id) and not added_default.is_empty():
+			boundaries[added_id] = added_default
 	for boundary_id in NavigationContract.boundary_ids():
 		var value = boundaries.get(boundary_id, null)
 		if not value is Dictionary:

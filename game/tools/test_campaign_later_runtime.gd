@@ -60,6 +60,7 @@ func _run() -> void:
 		if chapter > 3:
 			_check(bool(_campaign._start_extended("EX-CH%02d-S01" % chapter).get("accepted", false)), "later panel fixture enters chapter %d" % chapter)
 		_test_panels()
+	await _test_later_rooms_and_choices()
 	var saved: Dictionary = _campaign.save_campaign()
 	if not saved.get("accepted", false):
 		print("LATER SAVE DETAIL ", saved.get("reason", ""), " ", _invalid_path(_campaign._save_snapshot()))
@@ -87,6 +88,51 @@ func _test_panels() -> void:
 		_check(not _campaign.director.query().paused and _campaign._player.process_mode == Node.PROCESS_MODE_INHERIT, "B04 " + chapter + " resumes after " + panel_id)
 	if not _campaign.is_chapter_complete():
 		_check(not _campaign.hud._retry.disabled, "B05 later chapter HUD exposes its persisted retry checkpoint")
+
+func _test_later_rooms_and_choices() -> void:
+	# M3-103: LOC-05 airlock in Chapter 2
+	var ch2_route := Chapter2RouteScript.new(_campaign.director)
+	ch2_route.start_at("EX-CH02-S03")
+	_campaign.route = ch2_route
+	_campaign._sync_route_projection()
+	_campaign._refresh_world()
+	await physics_frame
+	_check(_campaign._room != null and _campaign._room.room_id == "LOC-05" and _campaign._room.airlock() != null, "M3-103 campaign loads airlock.tscn for EX-CH02-S03")
+	_check(_campaign.physical_target("check_space_weather") != null and String(_campaign.physical_target("check_space_weather").get_meta("target_id", "")) == "transfer_space_weather", "M3-103 binds EX-CH02-S03 targets to LOC-05 stations")
+
+	# M3-107: LOC-07 annex and EX-CH03-S11-DEDICATION choice
+	_check(bool(_campaign._start_extended("EX-CH03-S06").get("accepted", false)) and _campaign._room.room_id == "LOC-07", "M3-107 campaign loads annex.tscn for EX-CH03-S06")
+	_check(bool(_campaign._start_extended("EX-CH03-S11").get("accepted", false)) and _campaign._room.room_id == "LOC-03", "M3-107 enters EX-CH03-S11 in LOC-03")
+	var bad_dedication := _campaign.handle_ui_command({"command_id": "choice:dedication:bad", "issuer": "test", "owning_mission_id": "EX-M0304", "owning_scene_id": "EX-CH03-S11", "expected_state_revision": int(_campaign.director.query().get("state_revision", 0)), "target_id": "EX-CH03-S11-DEDICATION", "verb": "record_choice", "payload": {"choice_id": "EX-CH03-S11-DEDICATION", "option_id": "UNKNOWN"}})
+	_check(not bool(bad_dedication.get("accepted", false)), "M3-107 rejects unknown dedication option")
+	var good_dedication := _campaign.handle_ui_command({"command_id": "choice:dedication:opt02", "issuer": "test", "owning_mission_id": "EX-M0304", "owning_scene_id": "EX-CH03-S11", "expected_state_revision": int(_campaign.director.query().get("state_revision", 0)), "target_id": "EX-CH03-S11-DEDICATION", "verb": "record_choice", "payload": {"choice_id": "EX-CH03-S11-DEDICATION", "option_id": "EX-CH03-S11-DEDICATION-OPT02"}})
+	_check(bool(good_dedication.get("accepted", false)) and _campaign._room.stage().get("layers", []).has("ch03_d6_opt02"), "M3-107 records dedication choice and updates LOC-03 sign")
+
+	# M3-109: LOC-08 garage and dock cycle
+	_check(bool(_campaign._start_extended("EX-CH04-S09").get("accepted", false)) and _campaign._room.room_id == "LOC-08" and _campaign._room.garage() != null, "M3-109 campaign loads garage.tscn for EX-CH04-S09")
+	var bay := _campaign._room.garage()
+	_check(bay.dock_state() == "SEALED" and not bool(_campaign.route.world().boundary_state("garage_dock_hatch").get("airlock_ready", false)), "M3-109 EX-CH04-S09 starts with rover dock SEALED")
+	var dock_focus: Node3D = _campaign._focus_node("garage_dock")
+	_campaign._player.global_position = dock_focus.global_position + Vector3(0.0, -dock_focus.global_position.y, -1.0)
+	_campaign._player.velocity = Vector3.ZERO
+	await physics_frame
+	var dock_cycle := _campaign._interact_garage_dock()
+	_check(bool(dock_cycle.get("dock_cycling", false)) and bay.dock_state() == "EQUALISING" and not String(dock_cycle.get("time_card", "")).is_empty(), "M3-109 garage dock interaction starts EQUALISING with time card")
+	bay.advance(10.0)
+	_check(bay.dock_state() == "SAFE TO OPEN" and bool(_campaign.route.world().boundary_state("garage_dock_hatch").get("airlock_ready", false)), "M3-109 garage dock cycle finishes at SAFE TO OPEN")
+
+	# M3-110: LOC-09 B1 -> B2 -> B3 segment progression in EX-CH04-S04
+	_check(bool(_campaign._start_extended("EX-CH04-S04").get("accepted", false)) and _campaign._room.room_id == "LOC-09" and _campaign._room.terrain_segment == "B1", "M3-110 EX-CH04-S04 starts on segment B1")
+	for step_id in ["p07_place_beacon_1", "p07_place_beacon_2"]:
+		var step_node: Node3D = _campaign.physical_target(step_id)
+		_check(step_node != null, "M3-110 target exists for " + step_id)
+		if step_node != null:
+			_campaign._player.global_position = step_node.global_position + Vector3(1.5, -step_node.global_position.y, 1.5)
+			_campaign._player.velocity = Vector3.ZERO
+			await physics_frame
+			var step_res := _campaign.perform_target(step_id)
+			var expected_seg := "B2" if step_id == "p07_place_beacon_1" else "B3"
+			_check(bool(step_res.get("accepted", false)) and _campaign._room.terrain_segment == expected_seg and not String(step_res.get("cruise_time_card", "")).is_empty(), "M3-110 advances LOC-09 segment to " + expected_seg)
 
 func _invalid_path(value, path: String = "$", depth: int = 0) -> String:
 	if depth > 64:

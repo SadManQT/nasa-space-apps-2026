@@ -412,3 +412,29 @@ Second opinion: Codex (`gpt-6-astra`, high, read-only), shown the contact sheet 
 | PR_VaultProbe | ✅ PASS | 0.45 m thermal wand with a Screen in the grip and a coiled cable; prop |
 | PR_VaultCarrier | ✅ PASS | cradle with two lift handles and a tether eye; the MLI sleeve reads dark in a sky-less studio, as foil does under a black lunar sky (the room adds reflection probes); prop |
 | PR_RoverCargoMount | ✅ PASS | latch rails, latch with its orange position flag, separate lock pin with its own lamp (S08: position vs lock); prop |
+
+## M3-6A eclipse power props review — 9 November 2026, Sadman/antigravity
+
+Inspected `production/qa/evidence/M3-6A_contact.png`, `M3-6A_lods.png`, and the Godot captures `production/qa/evidence/M3-6A_*.png` (`M3-6A_board_plan.png`, `M3-6A_camera_exterior.png`, `M3-6A_monitor_ring.png`, `M3-6A_monitor_screen_ingress.png`, `M3-6A_monitor_screen_no_signal.png`, `M3-6A_monitor_screen_ring.png`, `M3-6A_panel_f2_isolated.png`, `M3-6A_panel_f2_tripped.png`, `M3-6A_power_room.png`, `M3-6A_props_lod0.png`, `M3-6A_props_lod1.png`, `M3-6A_s04_floods_on.png`, `M3-6A_s04_guide_only.png`) against `production/ART_BIBLE.md` §§2, 3 and 7 and the story (`STORY_FULL.md` EX-CH06-S01..S12, `08_PUZZLE_DESIGNS.md` P-11/P-12): palette tokens (suit white, navy bezel/trim, signal orange isolation boundary and marker tape, amber guide channel), zero baked text or logos on any 3D mesh (every label is a blank plate for `Label3D` or a live `Screen` material), English only, metre scale with floor-seated pivots, LOD1 retains silhouettes, colour regions and moving-part/screen nodes at ~50 % triangles on 512 px shared kit textures, and the monitor's live eclipse picture (`eclipse_monitor_screen.gd`) shows a black sky, Earth's dark disc ~3.5x the Sun's angular diameter as seen from the Moon, the red refracted atmospheric rim at totality (`M3-6A_monitor_screen_ring.png`), the conceptual inset explicitly labelled `"Conceptual diagram - not to scale - not a map of Earth"`, `"Eclipse date: 12 Jan 2047 - NASA eclipse catalog (checked)"`, and `"Aurora's local timing and view: scenario, awaiting verified geometry"`. All 18 GLBs pass the automated gate in `production/review/asset_verification.md`.
+
+| Asset | Verdict | Notes |
+|---|---|---|
+| PR_EclipseBoard_LOD0 | ✅ PASS | 1.602 x 1.000 m navy/white allocation board: 5 segment card slots, 4 service rows, 20 magnetic tag sockets, 5 warning lamps, live forecast strip (`Screen`), 11 blank label plates (no baked text); game LOD with collision |
+| PR_EclipseBoard_LOD1 | ✅ PASS | Compatibility LOD (902 tris vs 1366): same grid, slots, lamps and screen node, 512 px shared kit textures, no collision |
+| PR_SegmentCard_LOD0 | ✅ PASS | 0.200 x 0.130 m card with colour band (`Band`) and blank `Label` plate for the five eclipse phases; game LOD with collision |
+| PR_SegmentCard_LOD1 | ✅ PASS | Compatibility LOD (52 tris vs 172): same silhouette, colour band and label slot, no collision |
+| PR_ServiceTag_LOD0 | ✅ PASS | 0.150 x 0.075 m magnetic service tag with role/branch colour band and blank `Label` plate; game LOD with collision |
+| PR_ServiceTag_LOD1 | ✅ PASS | Compatibility LOD (52 tris vs 136): same silhouette, colour band and label slot, no collision |
+| PR_GuideLightBranch_LOD0 | ✅ PASS | 0.990 m junction box, status lamp, blank branch label, vertical riser with Kai's orange marker tape (`MarkerTape`), and first 0.82 m of amber LED channel (`Diffuser`); game LOD with collision |
+| PR_GuideLightBranch_LOD1 | ✅ PASS | Compatibility LOD (326 tris vs 598): preserves junction box, orange marker tape and amber diffuser channel, no collision |
+| PR_GuideLightRun_LOD0 | ✅ PASS | 1.000 m modular low-wall amber LED channel with `Diffuser` and `EndCap` that chains on the 1 m kit grid; game LOD with collision |
+| PR_GuideLightRun_LOD1 | ✅ PASS | Compatibility LOD (82 tris vs 106): same 1 m channel silhouette and diffuser slot, no collision |
+| PR_DecorativeFlood_LOD0 | ✅ PASS | 0.286 m finned dark housing on a tilt yoke aimed 25 deg down (`Head`, `Lens`), contrasting with the low amber guide run in S04; game LOD with collision |
+| PR_DecorativeFlood_LOD1 | ✅ PASS | Compatibility LOD (192 tris vs 404): cooling fins dropped, same yoke, head and lens silhouette, no collision |
+| PR_ProtectedBusPanel_LOD0 | ✅ PASS | 0.900 x 2.000 m cabinet: mimic diagram, orange isolation boundary, sealed clear `ProtectedGuard` over the 4 essential breakers with `SealTag`, `TestSwitch`, `F2Isolator`, `F2Breaker`, `F2TestButton`, `FloodBreaker`, 8 lamps, 2 live screens and 21 blank label plates; game LOD with collision |
+| PR_ProtectedBusPanel_LOD1 | ✅ PASS | Compatibility LOD (1994 tris vs 3238): keeps all moving switches/breakers, guard, lamps and screens with fewer bevels, no collision |
+| PR_FilteredCamera_LOD0 | ✅ PASS | 1.829 m exterior mast camera: `Pan` and `Tilt` head, MLI-wrapped body, sun hood with hinged solar `Filter` (swings clear at totality), F2 junction box with status lamps and cable; game LOD with collision |
+| PR_FilteredCamera_LOD1 | ✅ PASS | Compatibility LOD (762 tris vs 1370): keeps mast, pan/tilt head, hinged solar filter and F2 box silhouette, no collision |
+| PR_EclipseMonitor_LOD0 | ✅ PASS | 0.620 x 0.600 m desk display with navy bezel, `Display` tilt, `HoldButton`, status lamp, blank label plate, and `Screen_Main` displaying the verified eclipse camera feed and conceptual limb-refraction inset; game LOD with collision |
+| PR_EclipseMonitor_LOD1 | ✅ PASS | Compatibility LOD (214 tris vs 366): same stand, bezel, screen and button nodes, no collision |
+

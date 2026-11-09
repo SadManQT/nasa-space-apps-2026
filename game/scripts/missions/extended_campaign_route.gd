@@ -252,7 +252,15 @@ func _set_current_scene(index: int, project_clock: bool = true) -> Dictionary:
 
 func _register_current_targets() -> void:
 	_dispatcher.clear_targets()
-	_dispatcher.register_targets(targets_for_current_scene())
+	var stations: Dictionary = GateCatalog.RoomContract.staging_for(GateCatalog.RoomContract.layout(current_room_id()), current_scene_id()).get("stations", {})
+	var bound: Array = []
+	for item in targets_for_current_scene():
+		var target: Dictionary = item.duplicate(true)
+		var station := String(stations.get(String(target.get("target_id", "")), ""))
+		if not station.is_empty():
+			target["world_focus_id"] = station
+		bound.append(target)
+	_dispatcher.register_targets(bound)
 
 func _context(extra: Dictionary = {}) -> Dictionary:
 	var context := {"room_id": _world.current_room_id(), "line_of_sight": true, "distance_m": 0.0, "flags": _context_flags()}

@@ -5,6 +5,7 @@ const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const SaveScript = preload("res://scripts/save/save_service.gd")
 const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
+const RoomContract = preload("res://scripts/world/room_contract.gd")
 const ACTIONS := [
 	["commission_route", "commission_result", "charter_card"],
 	["classify_information", "roll_call", "practice_fault"],
@@ -181,14 +182,24 @@ func _test_chapter2_handoff() -> void:
 		var scene_id := "EX-CH02-S%02d" % number
 		_check(campaign.route.current_scene_id() == scene_id, "production Chapter 2 reaches " + scene_id)
 		for spec in campaign.targets_for_current_scene():
-			var target := campaign.physical_target(String(spec.target_id))
-			_check(target != null, "B01 physical target exists: " + String(spec.target_id))
+			var target_id := String(spec.target_id)
+			var target := campaign.physical_target(target_id)
+			_check(target != null, "B01 physical target exists: " + target_id)
 			if target == null: return
-			campaign._player.global_position = Vector3(target.global_position.x, 0, target.global_position.z + 1)
+			var expected_station := RoomContract.station_focus(scene_id, target_id)
+			if not expected_station.is_empty():
+				_check(String(target.get_meta("target_id", "")) == expected_station, "Chapter 2 operation uses its authored room station: " + target_id)
+			var approach := Vector3(target.global_position.x, 0, target.global_position.z + 1)
+			for ft in RoomContract.staged_layout(campaign.route.current_room_id(), scene_id).get("focus_targets", []):
+				if String(ft.get("target_id", "")) == String(target.get_meta("target_id", "")) and ft.has("approach_m"):
+					var a: Array = ft.approach_m
+					approach = Vector3(float(a[0]), float(a[1]), float(a[2]))
+					break
+			campaign._player.global_position = approach
 			campaign._player.velocity = Vector3.ZERO
 			await physics_frame
-			var action := campaign.perform_target(String(spec.target_id))
-			_check(bool(action.get("accepted", false)), "production Chapter 2 commits " + String(spec.target_id))
+			var action := campaign.perform_target(target_id)
+			_check(bool(action.get("accepted", false)), "production Chapter 2 commits " + target_id + " (" + String(action.get("reason", "")) + ")")
 			if not bool(action.get("accepted", false)): return
 		if number == 5:
 			var values: Dictionary = campaign.director.snapshot().resources

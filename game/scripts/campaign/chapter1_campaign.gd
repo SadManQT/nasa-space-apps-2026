@@ -53,6 +53,7 @@ var cutscene_player: CampaignCutscenePlayer
 var audio: CampaignAudioDirector
 var _cutscene_queue: Array = []
 var _played_cutscenes := {}
+var _saved_garage_dock: Dictionary = {}
 
 func _ready() -> void:
 	if incremental_loading:
@@ -90,6 +91,9 @@ func _start_session() -> void:
 			return
 		director = session.director
 		route = session.route
+		var saved_dock = initial_snapshot.get("route_runtime", {}).get("garage_dock", {}) if initial_snapshot.get("route_runtime", null) is Dictionary else {}
+		if saved_dock is Dictionary:
+			_saved_garage_dock = saved_dock.duplicate(true)
 	var presentation := director.snapshot()
 	presentation["paused"] = false
 	for key in initial_accessibility:
@@ -191,7 +195,23 @@ func targets_for_current_scene() -> Array:
 	return _targets_for_scene()
 
 func _targets_for_scene() -> Array:
-	return route.targets_for_current_scene() if route != null else []
+	if route == null:
+		return []
+	var raw: Array = route.targets_for_current_scene()
+	if _room == null:
+		return raw
+	var stations: Dictionary = _room.stage().get("stations", {})
+	if stations.is_empty():
+		return raw
+	var bound: Array = []
+	for item in raw:
+		var target: Dictionary = item.duplicate(true)
+		var target_id := String(target.get("target_id", ""))
+		var station := String(stations.get(target_id, stations.get("p03_" + target_id, "")))
+		if not station.is_empty():
+			target["world_focus_id"] = station
+		bound.append(target)
+	return bound
 
 func query() -> Dictionary:
 	var result := director.query()
@@ -252,14 +272,25 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 		return {"accepted": false, "reason": "The expedition is unavailable."}
 	if is_chapter_complete():
 		return {"accepted": false, "reason": "Chapter 1 is complete. Return to title to keep this checkpoint."}
+	var prev_segment := _current_terrain_segment()
 	var target := physical_target(target_id)
 	var result: Dictionary
 	if target == null or _player == null:
 		result = {"accepted": false, "reason": "This operation has no physical target in the current room."}
+	elif _room != null and _room.room_id == "LOC-08" and _room.garage() != null and target == _focus_node("garage_dock") and _room.garage().dock_state() != "SAFE TO OPEN":
+		var clear := _has_line_of_sight(target)
+		if not clear:
+			result = {"accepted": false, "reason": "Move into clear view of " + String(target.get_meta("focus_label", "the target")) + "."}
+		else:
+			var bay := _room.garage()
+			var cycled: Dictionary = bay.request_dock_cycle("habitat")
+			var card: String = bay.time_card()
+			result = {"accepted": false, "dock_cycling": bool(cycled.get("accepted", false)), "time_card": card, "reason": card if not card.is_empty() else String(cycled.get("reason", "Equalising the rover dock tunnel."))}
+			if hud != null and not card.is_empty():
+				hud.show_status(card)
 	else:
 		var distance := _player.global_position.distance_to(target.global_position)
-		var ray := PhysicsRayQueryParameters3D.create(_player.global_position + Vector3.UP * 1.4, target.global_position, _player.collision_mask, [_player.get_rid()])
-		var clear := _player.get_world_3d().direct_space_state.intersect_ray(ray).is_empty()
+		var clear := _has_line_of_sight(target)
 		if not clear:
 			result = {"accepted": false, "reason": "Move into clear view of " + String(target.get_meta("focus_label", "the target")) + "."}
 		else:
@@ -268,6 +299,16 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 		for key in ["reason", "deltas", "warnings", "ledger_summary"]:
 			if result.result.has(key):
 				result[key] = result.result[key]
+	if bool(result.get("accepted", false)) and _room != null and _room.room_id == "LOC-08" and _room.garage() != null and target == _focus_node("garage_dock") and _room.garage().dock_state() == "SAFE TO OPEN":
+		route.world().set_boundary_state("garage_dock_hatch", {"airlock_ready": true, "open": true})
+	var next_segment := _current_terrain_segment()
+	if bool(result.get("accepted", false)) and next_segment != prev_segment:
+		var cruise_card := _segment_cruise_card(prev_segment, next_segment)
+		result["terrain_segment"] = next_segment
+		result["cruise_time_card"] = cruise_card
+		_refresh_world()
+		if hud != null and not cruise_card.is_empty():
+			hud.show_status(cruise_card)
 	_sync_world_boundaries()
 	if audio != null and not bool(result.get("duplicate", false)):
 		var label := ""
@@ -341,12 +382,26 @@ func nearby_target() -> Dictionary:
 		var distance := _player.global_position.distance_to(target.global_position)
 		if distance > float(spec.get("range_m", 3.0)) or distance >= nearest or not camera.is_position_in_frustum(target.global_position):
 			continue
-		var ray := PhysicsRayQueryParameters3D.create(_player.global_position + Vector3.UP * 1.4, target.global_position, _player.collision_mask, [_player.get_rid()])
-		if not _player.get_world_3d().direct_space_state.intersect_ray(ray).is_empty():
+		if not _has_line_of_sight(target):
 			continue
 		closest = spec
 		nearest = distance
 	return closest
+
+func _has_line_of_sight(target: Node3D) -> bool:
+	if _player == null or target == null:
+		return false
+	var ray := PhysicsRayQueryParameters3D.create(_player.global_position + Vector3.UP * 1.4, target.global_position, _player.collision_mask, [_player.get_rid()])
+	var hit: Dictionary = _player.get_world_3d().direct_space_state.intersect_ray(ray)
+	if hit.is_empty():
+		return true
+	var collider: Object = hit.get("collider", null)
+	var asset_id := String(target.get_meta("asset_id", ""))
+	if collider is Node and not asset_id.is_empty() and _room != null and _room.visual_root != null:
+		var asset := _room.visual_root.get_node_or_null(asset_id)
+		if asset != null and (collider == asset or asset.is_ancestor_of(collider as Node)):
+			return true
+	return false
 
 func interact_nearby() -> Dictionary:
 	var selected := nearby_target()
@@ -360,6 +415,9 @@ func interact_nearby() -> Dictionary:
 		return {"accepted": true, "reason": "Mission Table open.", "mission_table": true}
 	if not selected.is_empty():
 		return perform_target(String(selected.target_id))
+	var dock_interacted := _interact_garage_dock()
+	if not dock_interacted.is_empty():
+		return dock_interacted
 	var result := {"accepted": false, "reason": "Walk up to the next job and face it. Press H to see where it is."}
 	if hud != null:
 		hud.show_status(result.reason)
@@ -503,14 +561,19 @@ func handle_ui_command(command: Dictionary, preview_only: bool = false) -> Dicti
 	var payload: Dictionary = command.get("payload", {}) if command.get("payload", {}) is Dictionary else {}
 	if verb in ["preview_puzzle", "record_choice"]:
 		var choice: Dictionary = current_scene_data().get("choice", {})
-		if _chapter_number() != 1 or payload.get("choice_id") != choice.get("id") or not payload.get("option_id") is String:
+		var choice_id := String(payload.get("choice_id", ""))
+		var valid_scene_choice: bool = (_chapter_number() == 1 and choice_id == String(choice.get("id", ""))) or (route != null and String(route.current_scene_id()) == "EX-CH03-S11" and choice_id == "EX-CH03-S11-DEDICATION")
+		if not valid_scene_choice or not payload.get("option_id") is String:
 			return {"accepted": false, "reason": "This decision does not belong to the current Chapter 1 scene."}
-		var problem := CampaignState.story_choice_problem(String(payload.choice_id), String(payload.option_id))
+		var problem := CampaignState.story_choice_problem(choice_id, String(payload.option_id))
 		if not problem.is_empty():
 			return {"accepted": false, "reason": problem}
 		if verb == "preview_puzzle":
 			return {"accepted": true, "reason": "Decision preview only; no story record changed."}
 		var result: Dictionary = director.preview(command) if preview_only else director.commit(command)
+		if bool(result.get("accepted", false)) and not preview_only and _room != null:
+			var story_log: Dictionary = director.snapshot().get("story_log", {})
+			_room.set_story_choices(story_log.get("choices", {}), story_log.get("moments", []))
 		if hud != null and not preview_only:
 			hud.refresh_after_action(result)
 		if bool(result.get("accepted", false)) and not preview_only and not bool(result.get("duplicate", false)):
@@ -547,6 +610,8 @@ func _save_snapshot() -> Dictionary:
 	snapshot["paused"] = false
 	snapshot["route_runtime"] = route.snapshot()
 	snapshot["route_runtime"]["chapter"] = _chapter_number()
+	if _room != null and _room.room_id == "LOC-08" and _room.garage() != null:
+		snapshot["route_runtime"]["garage_dock"] = _room.garage().dock_snapshot()
 	return snapshot
 
 func _chapter_number() -> int:
@@ -658,6 +723,7 @@ func _refresh_world_now(incremental_assets: bool = false) -> void:
 		var scene := preparation.resources[room_path] as PackedScene if incremental_loading else load(room_path) as PackedScene
 		_room = scene.instantiate() as CampaignRoom
 	_room.upcoming_scene = route.current_scene_id()
+	_room.terrain_segment = _current_terrain_segment()
 	_room.load_approved_assets = not incremental_assets
 	_room.terrain_ground = _terrain != null
 	add_child(_room)
@@ -682,13 +748,88 @@ func _place_crew() -> void:
 		_crew = CampaignCrew.new()
 		_crew.name = "Crew"
 		add_child(_crew)
-	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]))
+	var story_log: Dictionary = director.snapshot().get("story_log", {}) if director != null else {}
+	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]), story_log.get("choices", {}), story_log.get("moments", []))
 	_player.generic_interaction_input = false
 	if _player != null and _player.follow_camera != null and _player.follow_camera.camera != null:
 		_player.follow_camera.camera.far = 30000.0 if _terrain != null else 4000.0  # kilometre views on the terrain
 	_crew.set_paused(_ui_paused)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_setup_garage_dock()
 	_sync_world_boundaries()
+
+func _current_terrain_segment() -> String:
+	if route == null or route.current_scene_id() != "EX-CH04-S04":
+		return ""
+	var flags: Dictionary = route.current_flags() if route.has_method("current_flags") else route.gate_status().get("physical_flags", {})
+	if not bool(flags.get("p07_place_beacon_1_done", false)):
+		return "B1"
+	if not bool(flags.get("p07_place_beacon_2_done", false)):
+		return "B2"
+	return "B3"
+
+func _segment_cruise_card(from_segment: String, to_segment: String) -> String:
+	if from_segment == "B1" and to_segment == "B2":
+		return "ROVER CRUISE · 1.02 KM TO 1.88 KM (B1 → B2)"
+	if from_segment == "B2" and to_segment == "B3":
+		return "ROVER CRUISE · 1.88 KM TO 5.24 KM (B2 → B3)"
+	return "ROVER CRUISE · %s → %s" % [from_segment, to_segment]
+
+func _setup_garage_dock() -> void:
+	if _room == null or _room.room_id != "LOC-08":
+		_saved_garage_dock = {}
+		return
+	var bay := _room.garage()
+	if bay == null:
+		return
+	if not _saved_garage_dock.is_empty():
+		bay.dock_restore(_saved_garage_dock)
+		_saved_garage_dock = {}
+	if not bay.dock_state_changed.is_connected(_on_garage_dock_state_changed):
+		bay.dock_state_changed.connect(_on_garage_dock_state_changed)
+	if not bay.dock_cycle_finished.is_connected(_on_garage_dock_cycle_finished):
+		bay.dock_cycle_finished.connect(_on_garage_dock_cycle_finished)
+	_sync_garage_dock_boundary(bay)
+
+func _on_garage_dock_state_changed(_text: String) -> void:
+	if _room != null and _room.garage() != null:
+		_sync_garage_dock_boundary(_room.garage())
+		_sync_world_boundaries()
+
+func _on_garage_dock_cycle_finished(_side: String) -> void:
+	if _room != null and _room.garage() != null:
+		_sync_garage_dock_boundary(_room.garage())
+		_sync_world_boundaries()
+
+func _sync_garage_dock_boundary(bay: Node3D) -> void:
+	if route == null or bay == null:
+		return
+	var safe: bool = bay.dock_state() == "SAFE TO OPEN"
+	route.world().set_boundary_state("garage_dock_hatch", {"airlock_ready": safe, "open": safe and bay.is_dock_hatch_open()})
+
+func _interact_garage_dock() -> Dictionary:
+	if _room == null or _room.room_id != "LOC-08" or _room.garage() == null or _player == null:
+		return {}
+	var target := _focus_node("garage_dock")
+	if target == null or _player.global_position.distance_to(target.global_position) > 3.0:
+		return {}
+	var camera := _player.follow_camera.camera
+	if camera != null and not camera.is_position_in_frustum(target.global_position):
+		return {}
+	if not _has_line_of_sight(target):
+		return {}
+	var bay := _room.garage()
+	if bay.dock_state() != "SAFE TO OPEN":
+		var cycled: Dictionary = bay.request_dock_cycle("habitat")
+		var card: String = bay.time_card()
+		if hud != null and not card.is_empty():
+			hud.show_status(card)
+		_save_campaign()
+		return {"accepted": bool(cycled.get("accepted", false)), "dock_cycling": true, "time_card": card, "reason": card if not card.is_empty() else String(cycled.get("reason", "Equalising the rover dock tunnel."))}
+	var opened: Dictionary = route.world().set_boundary_state("garage_dock_hatch", {"airlock_ready": true, "open": not bay.is_dock_hatch_open()})
+	_sync_world_boundaries()
+	_save_campaign()
+	return opened
 
 func _refresh_world_incremental() -> void:
 	await get_tree().process_frame
@@ -710,7 +851,7 @@ func _refresh_world_incremental() -> void:
 		await RenderingServer.frame_post_draw
 
 func _terrain_wanted() -> bool:
-	return incremental_loading and bool(RoomContract.terrain_lighting(route.current_room_id(), route.current_scene_id()).get("ready", false))
+	return incremental_loading and bool(RoomContract.terrain_lighting(route.current_room_id(), route.current_scene_id(), _current_terrain_segment()).get("ready", false))
 
 func _clear_terrain() -> void:
 	if _terrain != null:
@@ -727,7 +868,7 @@ func _prepare_terrain() -> void:
 	_terrain = TerrainSessionScript.new()
 	_terrain.name = "Terrain"
 	add_child(_terrain)
-	var result: Dictionary = await _terrain.prepare_incremental(route.current_room_id(), route.current_scene_id())
+	var result: Dictionary = await _terrain.prepare_incremental(route.current_room_id(), route.current_scene_id(), _current_terrain_segment())
 	if not bool(result.get("enabled", false)):
 		push_warning("Terrain kept flat for %s: %s" % [route.current_room_id(), String(result.get("reason", ""))])
 		_clear_terrain()

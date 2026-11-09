@@ -44,6 +44,31 @@ func _run() -> void:
 		while is_instance_valid(queue) and Time.get_ticks_msec() < deadline:
 			await process_frame
 		_check(not is_instance_valid(queue), "terrain teardown drains outstanding loads")
+	for seg_shot in [["B1", "sunlit"], ["B2", "sunlit"], ["B3", "dark"]]:
+		var seg := String(seg_shot[0])
+		var seg_session := Session.new()
+		root.add_child(seg_session)
+		var seg_result := seg_session.prepare("LOC-09", "EX-CH04-S04", null, seg)
+		_check(seg_result.accepted and seg_result.get("enabled", false), "surveyed session prepares LOC-09 segment " + seg)
+		if seg_result.accepted and seg_result.get("enabled", false):
+			var place := Contract.terrain("LOC-09", seg)
+			var turn := Basis(Vector3.UP, deg_to_rad(float(place.get("yaw_deg", 0.0))))
+			var start: Vector3 = seg_result.player_anchor
+			_check(seg_session.move_focus(start), "local player anchor becomes valid site-frame focus LOC-09/" + seg)
+			_check(seg_session.stream.focus.is_equal_approx(seg_session.origin + turn * start), "stream focus applies yaw_deg and origin for LOC-09/" + seg)
+			var rig := seg_session.get_node_or_null("DatedLunarLighting") as Node3D
+			var sun := rig.get_node_or_null("Sun") as DirectionalLight3D if rig != null else null
+			_check(sun != null and sun.visible == (seg_shot[1] == "sunlit"), "LOC-09/%s sun visibility matches %s" % [seg, seg_shot[1]])
+			await physics_frame
+			var ray := PhysicsRayQueryParameters3D.create(start + Vector3.UP * 2, start - Vector3.UP * 2, 1)
+			var hit := root.world_3d.direct_space_state.intersect_ray(ray)
+			_check(not hit.is_empty() and hit.position.distance_to(start) < 0.08, "campaign-frame collision matches published start LOC-09/" + seg)
+		var seg_queue = seg_session.stream._loads if seg_session.stream != null else null
+		seg_session.free()
+		var seg_deadline := Time.get_ticks_msec() + 10000
+		while is_instance_valid(seg_queue) and Time.get_ticks_msec() < seg_deadline:
+			await process_frame
+		_check(not is_instance_valid(seg_queue), "segment terrain teardown drains outstanding loads " + seg)
 	var pending := Session.new()
 	root.add_child(pending)
 	_check(not pending.prepare("LOC-12", "EX-CH08-S08").enabled, "unfinished summit placement retains authored staging")

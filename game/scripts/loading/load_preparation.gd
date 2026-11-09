@@ -42,12 +42,16 @@ const ROOM_SCENES := {
 	"LOC-02": "res://scenes/campaign/rooms/service_rooms.tscn",
 	"LOC-03": "res://scenes/campaign/rooms/garden.tscn",
 	"LOC-04": "res://scenes/campaign/rooms/safe_room.tscn",
+	"LOC-05": "res://scenes/campaign/rooms/airlock.tscn",
 	"LOC-06": "res://scenes/campaign/rooms/exterior.tscn",
+	"LOC-07": "res://scenes/campaign/rooms/annex.tscn",
+	"LOC-08": "res://scenes/campaign/rooms/garage.tscn",
 	# M1-36: the terrain exteriors; each scene's site preloader keeps its kit GLBs and VH_Rover_Lit.tscn decoded off
 	# the main thread and cached while the room is prepared.
 	"LOC-09": "res://scenes/campaign/rooms/ridge.tscn",
 	"LOC-10": "res://scenes/campaign/rooms/vault_shelf.tscn",
 	"LOC-11": "res://scenes/campaign/rooms/relay_road.tscn",
+	"LOC-12": "res://scenes/campaign/rooms/malapert_summit.tscn",
 }
 var resources: Dictionary = {}
 var content: Dictionary = {}

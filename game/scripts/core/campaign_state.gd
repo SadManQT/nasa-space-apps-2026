@@ -7,8 +7,16 @@ const SCHEMA_VERSION := 3
 const CONTENT_REVISION := "story-data-extended-02-systems-contract"
 const PlantScript = preload("res://scripts/biology/plant_service.gd")
 const ContentScript = preload("res://scripts/content/content_loader.gd")
-# Reserved storage identity only; no proposed dedication text is introduced.
+# Reserved storage identity and canonical dedication options (doc 24 §5.2 D6).
 const EXTRA_STORY_CHOICES := {"EX-CH03-S11-DEDICATION": "EX-CH03-S11"}
+const EXTRA_STORY_CHOICE_OPTIONS := {
+	"EX-CH03-S11-DEDICATION": [
+		"EX-CH03-S11-DEDICATION-OPT01",
+		"EX-CH03-S11-DEDICATION-OPT02",
+		"EX-CH03-S11-DEDICATION-OPT03",
+		"reserved-option-id",
+	],
+}
 # presentation_resume.messages (M1-89) is the inbox record: the message IDs
 # delivered and read, each in arrival order. These are schema bounds, not
 # tuning: the campaign ships about 400 messages with IDs like MSG-CH01-001.
@@ -266,6 +274,8 @@ static func story_choice_problem(choice_id: String, option_id: String) -> String
 		return "A story choice requires a nonempty option_id."
 	if _story_choices.has(choice_id):
 		return "" if _story_choices[choice_id].options.has(option_id) else "Unknown option_id for story choice " + choice_id
+	if EXTRA_STORY_CHOICE_OPTIONS.has(choice_id):
+		return "" if EXTRA_STORY_CHOICE_OPTIONS[choice_id].has(option_id) else "Unknown option_id for story choice " + choice_id
 	return "" if EXTRA_STORY_CHOICES.has(choice_id) else "Unknown story choice_id: " + choice_id
 
 ## Exit receipts lock immediately, including before the route changes scenes.
