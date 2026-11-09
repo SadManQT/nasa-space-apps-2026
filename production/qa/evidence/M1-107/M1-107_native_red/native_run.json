@@ -1,0 +1,53 @@
+{
+  "source": "ca08e721c39fdbf009547eeb11fe992d74f8872b",
+  "game_tree": "c726ac38a0764b36db5f50de3dcb66d1365527b6",
+  "script": "test_campaign_interaction_input",
+  "start": 1794211857.1496584,
+  "relevant_loaded_inputs": {
+    "game/tools/test_campaign_interaction_input.gd": "20f30227a6e58c55c2de3f95d6f98c27441e4903edcc9b0ced1a3cd825d7efec",
+    "game/scripts/player/player_controller.gd": "8bfef7fe395ab198b28e7c9b16ad08f82485a29d12f0d4444cd036bcc9371328",
+    "game/scripts/world/campaign_crew.gd": "c3e2d6128aea1bccc5049765d3da585db2a8f8423fdffe380d746ebde28a449a",
+    "game/scripts/player/locomotion_test_level.gd": "2d8b40b4bae7d3bd4dd2a116af3117472d805e3311ecb477c0e0051fab5b737a",
+    "game/scripts/ui/p01_panel.gd": "8993fca060def474095049a4636cce613e446bb1a4a273415d557cca6ccea34a",
+    "game/scripts/ui/chapter1_campaign_hud.gd": "b59e835d12f468e2fb55b4be91dbaa3f615b2d19703be88d0caab35911b3f318",
+    "game/scripts/campaign/chapter1_campaign.gd": "36f8ca6d7ffb1ee07536b698694bd920f539519cb2f5741cb341e2028cc2aa1e",
+    "game/scripts/missions/campaign_route.gd": "c2b13000de13bdc4ff87f2684c70652031419dafed22e33305244d0e5eb29a68",
+    "game/scripts/missions/chapter1_route.gd": "a8d6a30a4c4dae11a4a570861328bc7581024308157ef1daf757a99978d4fbda",
+    "game/scripts/missions/p01_commission_plant.gd": "04e788e35929359757e8191e515e719f583fa8b6568e29378681abf398d7a6a6",
+    "game/scripts/ui/ui_design.gd": "4e836496899f434cebbb3112fb8b52bf037c643058be5f7300024b9826b859b5",
+    "game/scripts/ui/ui_kit.gd": "4615b44285a814e24cf5bcd0823a6765882533ae3c90ec3884876cc72d9ec7b9",
+    "game/scripts/ui/hint_player.gd": "c95e43ef1978dbb9da589b11de06c2a7e3c15c2315c1bbfb9699d2afcbd7283f",
+    "game/resources/ui/ui_design.json": "003fe163995f51ea81255643004c2c780927047bc236de2c55e6f875b99a9377",
+    "game/resources/campaign/profiles/p01_commission_plant.json": "5b499ddc254cdfabf4a2012c9dedf798d7b2e46f0b2e975b37fa1e7024e82538"
+  },
+  "scope": "Windowed Forward+; real engine-injected keyboard/mouse/controller events, no hardware-controller or human-playtest claim; existing import/render caches retained.",
+  "exit_code": 1,
+  "end": 1794211876.7211533,
+  "captures": {
+    "production\\qa\\evidence\\M1-107_commission_after.png": {
+      "sha256": "2930c81b4e52a2929b9b7b3c20fd38c88a3132be789340a81386239a2278c232",
+      "mtime": 1794211873.8800297,
+      "bytes": 920403
+    },
+    "production\\qa\\evidence\\M1-107_commission_before.png": {
+      "sha256": "5cd2a968b12a92da72dc2209503e3584bfc7ab1690b706b32a92767e3db1e82f",
+      "mtime": 1794211873.0931468,
+      "bytes": 1051055
+    },
+    "production\\qa\\evidence\\M1-107_dry_zero_before.png": {
+      "sha256": "3eb21785f0a06463baa5615c9298dc127f63f89258f81aada373866ac2610059",
+      "mtime": 1794211874.367908,
+      "bytes": 1019291
+    },
+    "production\\qa\\evidence\\M1-107_dry_zero_observed.png": {
+      "sha256": "9bff2bb26f53bd336ea12ac3de4c3081feee626371ff5a40d826cb58315593c4",
+      "mtime": 1794211875.8838408,
+      "bytes": 361539
+    },
+    "production\\qa\\evidence\\M1-107_dry_zero_panel.png": {
+      "sha256": "81572107233334302c6280b7a25e07291ca95c8e0fdf4287385d5bc9c5433725",
+      "mtime": 1794211874.7994409,
+      "bytes": 349901
+    }
+  }
+}
