@@ -3,6 +3,8 @@ class_name ExtendedGateCatalog
 
 const Chapter2Catalog = preload("res://scripts/missions/chapter2_gate_catalog.gd")
 const RoomContract = preload("res://scripts/world/room_contract.gd")
+const Chapter4 = preload("res://scripts/puzzles/chapter4_puzzles.gd")
+const Chapter6 = preload("res://scripts/puzzles/chapter6_puzzles.gd")
 const Chapter8 = preload("res://scripts/puzzles/chapter8_puzzles.gd")
 
 static func scene_ids() -> Array:
@@ -70,6 +72,10 @@ static func targets_for_scene(scene_id: String) -> Array:
 	return result
 
 static func _target(action: String, room_id: String, label: String, mission_id: String, scene_id: String, puzzle_id: String, required: Array, defaults: Dictionary) -> Dictionary:
+	if Chapter4.is_step(action) and not Chapter4.focus_label(action).is_empty():
+		label = Chapter4.focus_label(action)
+	if Chapter6.is_step(action) and not Chapter6.focus_label(action).is_empty():
+		label = Chapter6.focus_label(action)
 	if Chapter8.is_step(action) and not Chapter8.focus_label(action).is_empty():
 		label = Chapter8.focus_label(action)
 	label = {"p05_inspect_tank": "Inspect main tank candidate", "p05_inspect_habitat": "Inspect habitat trunk candidate", "p05_inspect_garden": "Inspect garden feedthrough candidate", "p05_inspect_return": "Inspect return line candidate", "p05_inspect_airlock": "Inspect airlock seal candidate", "p05_inspect_annex": "Inspect annex branch candidate"}.get(action, label)
@@ -223,10 +229,11 @@ static func _actions(chapter: int, order: int) -> Array:
 			][order - 1]
 	return []
 
-## Pre-filled witness payloads for Chapters 3–7 receipt gates. P-15 and P-16
-## (Chapter 8) have none: the player decides every value in the puzzle panel.
+## Pre-filled witness payloads for Chapters 3, 5 and 7 receipt gates. P-07, P-08
+## (Chapter 4), P-11, P-12 (Chapter 6), and P-15, P-16 (Chapter 8) have none:
+## the player decides every value in the puzzle panel.
 static func _defaults(action: String) -> Dictionary:
-	if Chapter8.is_step(action):
+	if Chapter4.is_step(action) or Chapter6.is_step(action) or Chapter8.is_step(action):
 		return {}
 	match action:
 		"p05_read_main_t0", "p05_read_main_t10", "p05_read_return_t0", "p05_read_return_t10": return {"reading": 100}

@@ -1,0 +1,888 @@
+{
+ "schema_version": 1,
+ "content_revision": "chapter6-puzzles-v1",
+ "source": "game-design/08_PUZZLE_DESIGNS.md P-11 and P-12; game-design/22_PUZZLE_CLUE_DESIGN.md section 8; game-design/24_NARRATIVE_REVISION.md section 2.6; game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md sections 1, 2 and 6; full-game-story/STORY_FULL.md EX-CH06-S01..S12. Spoken lines are referenced by id and read from the dialogue catalog, never retyped here. Answer keys live in profiles/campaign_rules.json (chapter6).",
+ "roles": {
+  "ferreira": {
+   "name": "Ferreira",
+   "role": "commander, Expedition Zero engineer",
+   "letter": "F"
+  },
+  "kai": {
+   "name": "Kai",
+   "role": "power and heat",
+   "letter": "K"
+  },
+  "amara": {
+   "name": "Amara",
+   "role": "atmosphere and measurement",
+   "letter": "A"
+  },
+  "mei": {
+   "name": "Mei",
+   "role": "horticulture",
+   "letter": "M"
+  },
+  "rafi": {
+   "name": "Rafi",
+   "role": "safety and field operations",
+   "letter": "R"
+  }
+ },
+ "puzzles": {
+  "P-11": {
+   "title": "Protect the Small Light",
+   "hints": [
+    "Protect essential services throughout.",
+    "Five essentials plus one pump and one camera equal seven.",
+    "Keep essentials ON, prepare pump in 1 and camera in 2, with floodlights OFF."
+   ],
+   "mastery": "Five acknowledged segments, no blackout, live garden, and at least 2 battery units at recovery (accepted plan keeps 7).",
+   "first_time_card": {
+    "title": "Protect the small light",
+    "purpose": "Plan the five eclipse segments while keeping life support, the garden and the guide light warm.",
+    "steps": [
+     "Keep the essential package on in all five eclipse segments.",
+     "Prepare the return pump in segment 1 and the filtered camera in segment 2.",
+     "Leave decorative floodlights off so the 7-unit recovery reserve stays whole."
+    ],
+    "clip": "Planning the five eclipse segments (explainer clip pending)"
+   }
+  },
+  "P-12": {
+   "title": "Observe, Isolate, Restore",
+   "hints": [
+    "Keep the protected bus untouched.",
+    "Isolate the failed feeder before reset.",
+    "Feeder off, confirm zero, reset, reconnect, camera test."
+   ],
+   "mastery": "Camera branch restored in sequence without touching the protected main bus, ingress/ring/egress recorded, and recovery reserve reconciled at 7.",
+   "first_time_card": {
+    "title": "Observe, isolate, restore",
+    "purpose": "Use the filtered camera to observe the red ring and safely restore the tripped camera branch.",
+    "steps": [
+     "Log ingress and the red ring through the filtered camera.",
+     "When the camera feeder trips, isolate it and confirm zero current before resetting.",
+     "Reconnect and test the camera branch only, then record egress."
+    ],
+    "clip": "Isolating and restoring the camera feeder (explainer clip pending)"
+   }
+  }
+ },
+ "scenes": {
+  "EX-CH06-S01": {
+   "id": "EX-CH06-S01",
+   "mission": "EX-M0601",
+   "title": "The Scratched Lamp",
+   "story_date": "12 January 2047 · power room and hand-light locker",
+   "stage": "learn",
+   "goal": "Charge the hand light, assign a companion on channel, and check the locker",
+   "why": "A human need is planned as a known load, not hidden.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Object + voice",
+     "text": "The scratched hand light from the first night gets a measured charge.",
+     "where": "Locker",
+     "holders": ["kai"],
+     "line_id": "EX-CH06-S01-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument + voice",
+     "text": "The guide light goes on the protected list alongside air circulation, minimum heat and dim growth light.",
+     "where": "Allocation board",
+     "holders": ["amara"],
+     "line_id": "EX-CH06-S01-L04"
+    }
+   ],
+   "aha": "What Kai needs is a known way through the dark, not a bright room.",
+   "wrong_idea": "Hide the fear or burn decorative floodlights across the corridor.",
+   "flight_rules": [
+    "FR-04 · Protect the 7-unit recovery reserve in the 14-unit battery jar."
+   ],
+   "risk": {
+    "title": "Unprotected eclipse segment",
+    "likelihood": 3,
+    "consequence": 4,
+    "level": "HIGH"
+   },
+   "set_piece": "Kai clips the charged hand lamp where both hands stay free."
+  },
+  "EX-CH06-S02": {
+   "id": "EX-CH06-S02",
+   "mission": "EX-M0601",
+   "title": "A Known Way Through",
+   "story_date": "12 January 2047 · power room",
+   "stage": "learn",
+   "goal": "Read the personal log, trace the protected guide-light path, and review the fault-isolation method",
+   "why": "Knowing when the light returns and which branch is protected turns fear into a checklist.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Log + voice",
+     "text": "Kai's memory log explains why an unscheduled blackout felt endless.",
+     "where": "Power room",
+     "holders": ["kai"],
+     "line_id": "EX-CH06-S02-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument",
+     "text": "The guide-light branch is drawn on every one of the five eclipse segment cards.",
+     "where": "Allocation board",
+     "holders": ["rafi"]
+    }
+   ],
+   "aha": "Every segment card shows the guide-light branch and its contact time.",
+   "wrong_idea": "Switch everything off during totality to save battery.",
+   "flight_rules": [
+    "FR-04 · Keep essential services active across all five eclipse segments."
+   ],
+   "risk": {
+    "title": "Services dropped during totality",
+    "likelihood": 3,
+    "consequence": 4,
+    "level": "HIGH"
+   },
+   "set_piece": "Five eclipse segment cards line the board: precharge, ingress, totality, egress and recovery."
+  },
+  "EX-CH06-S03": {
+   "id": "EX-CH06-S03",
+   "mission": "EX-M0601",
+   "title": "Seven Units for the Eclipse",
+   "story_date": "12 January 2047 · eclipse allocation board",
+   "stage": "apply",
+   "goal": "Commit the 7-unit eclipse allocation (5 essentials + 1 pump + 1 camera) while keeping 7 in reserve",
+   "why": "Five essentials plus one pump and one camera equal seven, leaving the recovery reserve whole.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Five segments (essentials 1 each), pump readiness 1 before deadline, camera readiness 1 before deadline; decorative floods cost 3 each.",
+     "where": "Allocation board",
+     "holders": ["mei", "rafi"],
+     "line_id": "EX-CH06-S03-L03"
+    }
+   ],
+   "aha": "Five essentials plus one pump and one camera equal seven — one accounting model, seven kept for recovery.",
+   "wrong_idea": "Spend decorative floodlights (3 units each) and dip into the 7-unit recovery reserve.",
+   "flight_rules": [
+    "FR-04 · Eclipse allocation must not exceed 7 units out of the 14-unit jar."
+   ],
+   "risk": {
+    "title": "Recovery reserve breached by decorative floods",
+    "likelihood": 3,
+    "consequence": 4,
+    "level": "HIGH"
+   },
+   "set_piece": "The 14-unit battery jar locks its 7-unit recovery bracket as the five segments turn green."
+  },
+  "EX-CH06-S04": {
+   "id": "EX-CH06-S04",
+   "mission": "EX-M0602",
+   "title": "Matched Previews",
+   "story_date": "12 January 2047 · power room side-by-side preview",
+   "stage": "twist",
+   "goal": "Remove decorative floodlights, protect the guide light, and lock the 7-unit recovery reserve",
+   "why": "A matched comparison isolates one changed load and proves the guide light meets the need.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Matched preview: decorative floods versus guide light under the same equipment.",
+     "where": "Power room",
+     "holders": ["kai", "rafi"],
+     "line_id": "EX-CH06-S04-L02"
+    }
+   ],
+   "aha": "Shed decorative floods; keep the guide-light branch on every segment.",
+   "wrong_idea": "Keep the corridor floods on so the room never dims.",
+   "flight_rules": [
+    "FR-04 · Shed non-essential floodlights to preserve the 7-unit recovery reserve."
+   ],
+   "risk": {
+    "title": "Non-essential load drains recovery margin",
+    "likelihood": 3,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "The corridor dims to planned eclipse lighting while the guide-light path stays bright."
+  },
+  "EX-CH06-S05": {
+   "id": "EX-CH06-S05",
+   "mission": "EX-M0602",
+   "title": "Rehearse on the Safe Branch",
+   "story_date": "12 January 2047 · protected-bus test panel",
+   "stage": "learn",
+   "goal": "Test the non-essential branch disconnect, verify protected services hold, and record the rehearsal",
+   "why": "An isolation boundary limits what a fault can reach.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Predict the affected branch before throwing the safe test disconnect.",
+     "where": "Test panel",
+     "holders": ["amara", "kai"],
+     "line_id": "EX-CH06-S05-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Voice",
+     "text": "Ferreira reminds the crew that a rehearsal pass does not sign the watch.",
+     "where": "Power room",
+     "holders": ["ferreira"],
+     "line_id": "EX-CH06-S05-L04"
+    }
+   ],
+   "aha": "The test branch drops while the protected bus and guide light stay untouched.",
+   "wrong_idea": "Expect a camera-branch fault to black out the whole habitat.",
+   "flight_rules": [
+    "FR-04 · Never trip the protected main bus during a branch fault rehearsal."
+   ],
+   "risk": {
+    "title": "Camera feeder trip during eclipse",
+    "likelihood": 3,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "The test breaker clicks open and closed while the habitat fans hum without a hitch."
+  },
+  "EX-CH06-S06": {
+   "id": "EX-CH06-S06",
+   "mission": "EX-M0602",
+   "title": "Ready Means All of Us",
+   "story_date": "12 January 2047 · mission table and filtered camera",
+   "stage": "apply",
+   "goal": "Collect all four role reports, acknowledge all five segments, and verify the camera protective filter",
+   "why": "Ready is the sum of acknowledged specialist reports, not one confident voice.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Voice",
+     "text": "Mei checks plants, Amara checks atmosphere, Rafi checks shelter, lamp and local channel.",
+     "where": "Mission table",
+     "holders": ["mei", "amara", "rafi"],
+     "line_id": "EX-CH06-S06-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Voice",
+     "text": "Kai confirms readiness only after every station reports in.",
+     "where": "Mission table",
+     "holders": ["kai"],
+     "line_id": "EX-CH06-S06-L04"
+    }
+   ],
+   "aha": "Ready means all of us.",
+   "wrong_idea": "Sign the eclipse watch before checking the camera filter and all four role reports.",
+   "flight_rules": [
+    "FR-01 · Complete the four-role Go/No-Go poll and filter check before eclipse ingress."
+   ],
+   "risk": {
+    "title": "Unfiltered camera or unpolled station",
+    "likelihood": 2,
+    "consequence": 4,
+    "level": "MODERATE"
+   },
+   "set_piece": "Kai looks around the occupied work positions before calling the station ready."
+  },
+  "EX-CH06-S07": {
+   "id": "EX-CH06-S07",
+   "mission": "EX-M0603",
+   "title": "Every Sunrise and Sunset at Once",
+   "story_date": "12 January 2047 · 23:40 to 00:50 UTC · filtered remote-camera monitor",
+   "stage": "learn",
+   "goal": "Log eclipse ingress and the red ring through the filtered camera",
+   "why": "The red rim is sunlight bent through Earth's atmosphere at every sunrise and sunset at once.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Filtered camera shows a dark disc taking a bite, then a copper-red ring around Earth.",
+     "where": "Camera monitor",
+     "holders": ["mei"],
+     "line_id": "EX-CH06-S07-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Object + voice",
+     "text": "Conceptual cross-section diagram explains light bending through Earth's air.",
+     "where": "Camera monitor",
+     "holders": ["amara"],
+     "line_id": "EX-CH06-S07-L02"
+    }
+   ],
+   "aha": "The red is sunlight bent through Earth's air: every sunrise and sunset at once.",
+   "wrong_idea": "Claim a geographically resolved country stripe from the conceptual atmosphere diagram.",
+   "flight_rules": [
+    "FR-06 · Label camera frames as observed and the atmosphere cross-section as a conceptual diagram."
+   ],
+   "risk": {
+    "title": "Overclaimed resolution from conceptual inset",
+    "likelihood": 2,
+    "consequence": 2,
+    "level": "LOW"
+   },
+   "set_piece": "On the monitor, a thin copper-red ring circles the dark Earth."
+  },
+  "EX-CH06-S08": {
+   "id": "EX-CH06-S08",
+   "mission": "EX-M0603",
+   "title": "Hello from the Lamp Department",
+   "story_date": "13 January 2047 · 01:00 UTC · Earth family audio link",
+   "stage": "apply",
+   "goal": "Deliver the family audio greeting during the valid communication window and preserve observation qualifications",
+   "why": "Communication depends on a verified path window, and observations keep their qualification chips.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Family audio reaches Aurora through the valid Earth window.",
+     "where": "Earth audio link",
+     "holders": ["kai", "rafi"],
+     "line_id": "EX-CH06-S08-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Voice",
+     "text": "Rafi answers on the shared channel from the lamp department.",
+     "where": "Commons",
+     "holders": ["rafi"],
+     "line_id": "EX-CH06-S08-L03"
+    }
+   ],
+   "aha": "The call connects because the path window is valid, and no one stands alone.",
+   "wrong_idea": "Strip the qualification labels from the eclipse packet sent with the greeting.",
+   "flight_rules": [
+    "FR-06 · Preserve observed, diagram and scenario labels on every shared record."
+   ],
+   "risk": {
+    "title": "Unqualified observation packet",
+    "likelihood": 2,
+    "consequence": 2,
+    "level": "LOW"
+   },
+   "set_piece": "Kai's family hears Rafi's voice right beside him on the channel."
+  },
+  "EX-CH06-S09": {
+   "id": "EX-CH06-S09",
+   "mission": "EX-M0603",
+   "title": "I Watched a Red Ring From There Once",
+   "story_date": "13 January 2047 · 01:30 UTC · message log and eclipse desk",
+   "stage": "twist",
+   "goal": "Store Noor's text note as known correspondence with its earlier date left unspecified, and keep live voice reserved",
+   "why": "Inventing a date for a memory would look scientific and be less true.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Log",
+     "text": "Noor's text message recalls watching a red ring from Aurora once.",
+     "where": "Message log",
+     "holders": ["mei", "amara"],
+     "line_id": "EX-CH06-S09-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument + voice",
+     "text": "Amara leaves the earlier eclipse date field unspecified and saves records locally before the next segment.",
+     "where": "Eclipse desk",
+     "holders": ["amara", "rafi"],
+     "line_id": "EX-CH06-S09-L03"
+    }
+   ],
+   "aha": "A sincere memory is indexed honestly without inventing a date.",
+   "wrong_idea": "Fill in a guessed historical eclipse date not stated in Noor's message.",
+   "flight_rules": [
+    "FR-06 · Save observation records locally before totality ends; never invent unstated dates."
+   ],
+   "risk": {
+    "title": "Unsaved records before feeder trip",
+    "likelihood": 3,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "The local save indicator clicks green moments before the camera view screen drops."
+  },
+  "EX-CH06-S10": {
+   "id": "EX-CH06-S10",
+   "mission": "EX-M0604",
+   "title": "The Guide Light Stayed On",
+   "story_date": "13 January 2047 · 01:55 UTC · power room and camera feeder",
+   "stage": "apply",
+   "goal": "Restore the tripped camera feeder in five ordered steps: isolate, confirm zero, reset, reconnect, test camera branch",
+   "why": "A bounded fault deserves a bounded response; the protected main bus stays untouched.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "The camera screen drops, but the guide light and essential habitat services hold steady.",
+     "where": "Power room",
+     "holders": ["kai", "amara"],
+     "line_id": "EX-CH06-S10-L03"
+    },
+    {
+     "id": "c2",
+     "kind": "Voice",
+     "text": "Rafi stays on the local channel as Kai works the feeder procedure.",
+     "where": "Power room",
+     "holders": ["kai", "rafi"],
+     "line_id": "EX-CH06-S10-L01"
+    }
+   ],
+   "aha": "The guide light stayed on: the plan worked before I fixed anything.",
+   "wrong_idea": "Reset the breaker before isolating the feeder, or trip the protected main habitat bus.",
+   "flight_rules": [
+    "FR-04 · Do NOT trip the protected main bus; isolate the faulted feeder and verify zero current before reset."
+   ],
+   "risk": {
+    "title": "Reset before isolation or main-bus trip",
+    "likelihood": 3,
+    "consequence": 4,
+    "level": "HIGH"
+   },
+   "set_piece": "Under the steady glow of the guide light, the camera breaker resets and the red rim returns to the monitor."
+  },
+  "EX-CH06-S11": {
+   "id": "EX-CH06-S11",
+   "mission": "EX-M0604",
+   "title": "The Light That Returns",
+   "story_date": "13 January 2047 · 03:09 UTC · restored camera and debrief board",
+   "stage": "twist",
+   "goal": "Record eclipse egress on the restored camera, reconcile the 7-unit recovery reserve, and save the recovery log",
+   "why": "Egress waits for verified branch restoration, and the 7-unit reserve reconciles without a hidden fault penalty.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Egress frame joins ingress and ring on the debrief board; battery reconciles at 7 units.",
+     "where": "Debrief board",
+     "holders": ["mei", "amara"],
+     "line_id": "EX-CH06-S11-L01"
+    }
+   ],
+   "aha": "Three observation records — ingress, ring and restored egress — with 7 battery units in reserve.",
+   "wrong_idea": "Log egress before testing the restored camera branch.",
+   "flight_rules": [
+    "FR-04 · Verify camera branch restoration before logging egress; reconcile the 7-unit recovery reserve."
+   ],
+   "risk": {
+    "title": "Unverified egress log",
+    "likelihood": 2,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "Sunlight touches the south-polar ridge again as the battery gauge holds at 7."
+  },
+  "EX-CH06-S12": {
+   "id": "EX-CH06-S12",
+   "mission": "EX-M0604",
+   "title": "Watching Is Not a Forecast",
+   "story_date": "14 January to February 2047 · monitoring calendar and garden",
+   "stage": "twist",
+   "goal": "Assign the solar-monitoring watch, note the active region without inventing a storm date, and confirm the care ledger",
+   "why": "An active region on the Sun is a reason to watch, not a month-ahead storm prediction.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Solar image shows an active region; Amara notes that watching is not an exact storm forecast.",
+     "where": "Monitoring calendar",
+     "holders": ["amara", "rafi"],
+     "line_id": "EX-CH06-S12-L02"
+    }
+   ],
+   "aha": "Give every instrument a named watcher, and set no storm date ahead of the evidence.",
+   "wrong_idea": "Draw a line from a January active region to a specific February storm date.",
+   "flight_rules": [
+    "FR-06 · Assign monitoring ownership without claiming a month-ahead solar storm forecast."
+   ],
+   "risk": {
+    "title": "False precision on space-weather watch",
+    "likelihood": 2,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "In the garden, the young cotton plant spreads its true leaves beside the archived mustard petal."
+  }
+ },
+ "steps": {
+  "p11_charge_hand_light": {
+   "id": "p11_charge_hand_light",
+   "scene": "EX-CH06-S01",
+   "title": "Charge the hand light",
+   "goal": "Give the scratched hand lamp a measured charge and clip it ready",
+   "why": "The lamp still matters.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "kai",
+   "poll": ["kai", "rafi"]
+  },
+  "p11_assign_companion": {
+   "id": "p11_assign_companion",
+   "scene": "EX-CH06-S01",
+   "title": "Assign channel companion",
+   "goal": "Confirm Rafi on the local voice channel throughout the eclipse watch",
+   "why": "Nobody works an eclipse watch alone.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "kai"]
+  },
+  "p11_check_locker": {
+   "id": "p11_check_locker",
+   "scene": "EX-CH06-S01",
+   "title": "Check emergency locker",
+   "goal": "Verify the power-room locker and backup leads before planning the schedule",
+   "why": "Preparation happens while the lights are still normal.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "amara"]
+  },
+  "p11_read_personal_log": {
+   "id": "p11_read_personal_log",
+   "scene": "EX-CH06-S02",
+   "title": "Review Kai's log",
+   "goal": "Read or listen to Kai's note on why unscheduled darkness felt endless",
+   "why": "Turning a fear into checkable questions makes it manageable.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "kai",
+   "poll": ["kai", "mei"]
+  },
+  "p11_identify_protected_path": {
+   "id": "p11_identify_protected_path",
+   "scene": "EX-CH06-S02",
+   "title": "Trace the protected guide-light path",
+   "goal": "Verify the guide light sits on the protected essential package across all five segments",
+   "why": "Guide light goes on the protected list alongside circulation, minimum heat and dim growth light.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "rafi", "kai"]
+  },
+  "p11_identify_fault_method": {
+   "id": "p11_identify_fault_method",
+   "scene": "EX-CH06-S02",
+   "title": "Review branch fault isolation",
+   "goal": "Confirm that an auxiliary feeder fault is isolated locally without tripping the main bus",
+   "why": "Protected services stay separate from camera and flood branches.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "ferreira",
+   "poll": ["ferreira", "kai", "amara"]
+  },
+  "p11_commit_allocation": {
+   "id": "p11_commit_allocation",
+   "scene": "EX-CH06-S03",
+   "title": "Commit the 7-unit eclipse plan",
+   "goal": "Schedule essentials in all 5 segments (5 units), return pump in segment 1 (1 unit), camera in segment 2 (1 unit), and floodlights OFF (total 7)",
+   "why": "Five essentials plus one pump and one camera equal 7 units, preserving the 7-unit recovery reserve.",
+   "kind": "choice",
+   "options": [
+    {
+     "id": "floods_overspend",
+     "label": "Essentials + pump + camera + decorative floods (10 units)",
+     "detail": "Adds 3-unit corridor floodlights, breaching the 7-unit protected reserve.",
+     "payload": {"total": 10, "essentials": true, "pump": true, "camera": true, "floods": 1},
+     "feedback": "Blocked by Flight Rule FR-04: spending 10 units breaches the 7-unit recovery reserve. Keep decorative floodlights OFF."
+    },
+    {
+     "id": "drop_totality",
+     "label": "Drop essentials during totality to save power (6 units)",
+     "detail": "Leaves totality without circulation, minimum heat or the guide light.",
+     "payload": {"total": 6, "essentials": false, "pump": true, "camera": true, "floods": 0},
+     "feedback": "Omitting the essential package in totality leaves circulation, garden heat and the guide light unprotected."
+    },
+    {
+     "id": "protected_seven",
+     "label": "Five essentials (5) + pump in segment 1 (1) + camera in segment 2 (1), floods OFF (total 7)",
+     "detail": "Spends exactly 7 units from the 14-unit jar and preserves 7 units for recovery.",
+     "payload": {"total": 7, "essentials": true, "pump": true, "camera": true, "floods": 0}
+    }
+   ],
+   "no_go_role": "kai",
+   "poll": ["kai", "amara", "mei", "rafi", "ferreira"]
+  },
+  "p11_remove_decorative_floods": {
+   "id": "p11_remove_decorative_floods",
+   "scene": "EX-CH06-S04",
+   "title": "Shed decorative floodlights",
+   "goal": "Confirm decorative floodlights stay OFF in the side-by-side comparison",
+   "why": "Extra room brightness buys no essential service and spends recovery margin.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "kai",
+   "poll": ["kai", "rafi"]
+  },
+  "p11_protect_guide_light": {
+   "id": "p11_protect_guide_light",
+   "scene": "EX-CH06-S04",
+   "title": "Lock guide-light branch",
+   "goal": "Keep the low-draw guide-light path active in every segment",
+   "why": "You need a known way through the dark, not floodlights.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "kai", "mei"]
+  },
+  "p11_protect_reserve": {
+   "id": "p11_protect_reserve",
+   "scene": "EX-CH06-S04",
+   "title": "Confirm 7-unit recovery reserve",
+   "goal": "Verify 7 battery units remain reserved for post-eclipse recovery",
+   "why": "The 14-unit jar splits cleanly into 7 for the eclipse and 7 for recovery.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "kai", "ferreira"]
+  },
+  "p12_test_branch": {
+   "id": "p12_test_branch",
+   "scene": "EX-CH06-S05",
+   "title": "Predict and test safe branch disconnect",
+   "goal": "Open the test branch disconnect and observe that only the auxiliary branch drops",
+   "why": "Predicting the affected branch before switching verifies the isolation boundary.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "kai"]
+  },
+  "p12_verify_protected_services": {
+   "id": "p12_verify_protected_services",
+   "scene": "EX-CH06-S05",
+   "title": "Verify protected bus unaffected",
+   "goal": "Confirm air circulation, garden heat and the guide light hold during the branch test",
+   "why": "The isolation boundary keeps habitat services safe.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "amara", "mei"]
+  },
+  "p12_record_rehearsal": {
+   "id": "p12_record_rehearsal",
+   "scene": "EX-CH06-S05",
+   "title": "Record rehearsal pass",
+   "goal": "Restore the test branch and file the rehearsal separately from the live watch sign-off",
+   "why": "A rehearsal pass prepares the crew; the Go/No-Go signs the watch.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "ferreira",
+   "poll": ["ferreira", "kai", "rafi"]
+  },
+  "p12_check_four_roles": {
+   "id": "p12_check_four_roles",
+   "scene": "EX-CH06-S06",
+   "title": "Collect four specialist reports",
+   "goal": "Confirm plants (Mei), atmosphere (Amara), shelter/lamp/channel (Rafi) and power (Kai)",
+   "why": "Ready means all of us.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "kai",
+   "poll": ["mei", "amara", "rafi", "kai", "ferreira"]
+  },
+  "p12_check_five_segments": {
+   "id": "p12_check_five_segments",
+   "scene": "EX-CH06-S06",
+   "title": "Acknowledge five eclipse segments",
+   "goal": "Confirm precharge, ingress, totality, egress and recovery on the watch board",
+   "why": "Every contact time and segment load is known before ingress.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "kai", "rafi"]
+  },
+  "p12_ready_camera": {
+   "id": "p12_ready_camera",
+   "scene": "EX-CH06-S06",
+   "title": "Verify camera protective filter",
+   "goal": "Confirm the remote camera optical filter is seated before eclipse ingress",
+   "why": "Never observe without the verified filter configuration.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "mei"]
+  },
+  "p12_log_ingress": {
+   "id": "p12_log_ingress",
+   "scene": "EX-CH06-S07",
+   "title": "Log eclipse ingress",
+   "goal": "Record Earth's disc entering the Sun on the filtered remote camera",
+   "why": "Ingress marks the first contact of the catalog eclipse.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "mei",
+   "poll": ["mei", "amara"]
+  },
+  "p12_log_ring": {
+   "id": "p12_log_ring",
+   "scene": "EX-CH06-S07",
+   "title": "Log the red ring and atmosphere diagram",
+   "goal": "Record the copper-red ring frame alongside the conceptual Earth-atmosphere cross-section",
+   "why": "Refracted sunlight through Earth's limb lights the lunar eclipse in red.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "mei", "kai"]
+  },
+  "p12_deliver_family_contact": {
+   "id": "p12_deliver_family_contact",
+   "scene": "EX-CH06-S08",
+   "title": "Connect family audio call",
+   "goal": "Verify the Earth communication window and complete the family audio greeting",
+   "why": "The call uses the verified Earth-visible contact window.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "kai",
+   "poll": ["kai", "rafi", "amara"]
+  },
+  "p12_preserve_observation_qualifications": {
+   "id": "p12_preserve_observation_qualifications",
+   "scene": "EX-CH06-S08",
+   "title": "Keep observation qualification labels",
+   "goal": "Attach the ring observation with Observed, Diagram and Scenario labels intact",
+   "why": "Honest labels distinguish camera data, conceptual diagrams and scenario timing.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "mei"]
+  },
+  "p12_store_known_noor_text": {
+   "id": "p12_store_known_noor_text",
+   "scene": "EX-CH06-S09",
+   "title": "Index Noor's red-ring note",
+   "goal": "File Noor's text note as known correspondence with her earlier eclipse date left unspecified",
+   "why": "Leave unstated dates blank rather than guessing.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "mei"]
+  },
+  "p12_reserve_live_voice": {
+   "id": "p12_reserve_live_voice",
+   "scene": "EX-CH06-S09",
+   "title": "Save eclipse records locally",
+   "goal": "Save ingress, ring and correspondence records locally while keeping live voice reserved for the finale",
+   "why": "Local saves protect the log before any branch fault.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "amara"]
+  },
+  "p12_reset_sequence": {
+   "id": "p12_reset_sequence",
+   "scene": "EX-CH06-S10",
+   "title": "Restore tripped camera feeder",
+   "goal": "Execute the five-step feeder recovery in order without touching the protected main bus",
+   "why": "Isolate the faulted feeder and confirm zero current before resetting.",
+   "kind": "procedure",
+   "payload_key": "sequence",
+   "steps": [
+    {
+     "id": "isolate",
+     "label": "Isolate camera feeder",
+     "detail": "Open the camera branch isolation switch; leave the protected main bus closed."
+    },
+    {
+     "id": "zero",
+     "label": "Confirm current = 0 and fault cleared",
+     "detail": "Verify zero branch current and FAULT CLEARED on the manual indicator."
+    },
+    {
+     "id": "reset",
+     "label": "Reset feeder breaker",
+     "detail": "Throw the camera feeder breaker reset now that the branch is isolated."
+    },
+    {
+     "id": "reconnect",
+     "label": "Close branch isolation",
+     "detail": "Reconnect the isolated camera feeder to the bus."
+    },
+    {
+     "id": "camera_test",
+     "label": "Test camera branch only",
+     "detail": "Verify the remote camera view returns while habitat services remain steady."
+    }
+   ],
+   "distractors": [
+    {
+     "id": "trip_main_bus",
+     "label": "Reset entire habitat main bus",
+     "feedback": "Held by Flight Rule FR-04: never trip the protected main bus for a camera-branch fault."
+    }
+   ],
+   "feedback": {
+    "order": "Follow the safe feeder sequence: isolate feeder, confirm zero and fault cleared, reset breaker, reconnect, then test the camera branch."
+   },
+   "no_go_role": "kai",
+   "poll": ["kai", "amara", "rafi", "ferreira"]
+  },
+  "p12_record_egress": {
+   "id": "p12_record_egress",
+   "scene": "EX-CH06-S11",
+   "title": "Record eclipse egress",
+   "goal": "Log the restored camera's egress observation to complete the three-part eclipse record",
+   "why": "Ingress, ring and restored egress complete the observation.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "mei",
+   "poll": ["mei", "amara", "kai"]
+  },
+  "p12_reconcile_recovery_reserve": {
+   "id": "p12_reconcile_recovery_reserve",
+   "scene": "EX-CH06-S11",
+   "title": "Reconcile 7-unit recovery reserve",
+   "goal": "Confirm the battery jar holds 7 units at recovery with zero blackout penalty",
+   "why": "The 7-unit eclipse plan leaves the 7-unit recovery reserve intact.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "kai"]
+  },
+  "p12_save_recovery": {
+   "id": "p12_save_recovery",
+   "scene": "EX-CH06-S11",
+   "title": "Save eclipse debrief",
+   "goal": "Archive the three eclipse observations, the feeder recovery log and Rafi's support checkback",
+   "why": "Both the interruption and the clean recovery belong in the station record.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "kai", "amara", "mei"]
+  },
+  "p12_reconcile_monitoring": {
+   "id": "p12_reconcile_monitoring",
+   "scene": "EX-CH06-S12",
+   "title": "Assign solar-monitoring watch",
+   "goal": "Assign named watchers to the space-weather instruments after the eclipse",
+   "why": "Every instrument needs a clear owner.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "amara"]
+  },
+  "p12_date_february_warning": {
+   "id": "p12_date_february_warning",
+   "scene": "EX-CH06-S12",
+   "title": "Log active solar region",
+   "goal": "Pin the active solar region as a monitoring watch without claiming a specific storm date",
+   "why": "Watching is not an exact month-ahead storm forecast.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "rafi"]
+  },
+  "p12_confirm_care_ledger": {
+   "id": "p12_confirm_care_ledger",
+   "scene": "EX-CH06-S12",
+   "title": "Confirm January care ledger",
+   "goal": "Verify the living garden, cotton seedling and protected seed reserves entering February",
+   "why": "The garden and crew enter the storm season prepared.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "mei",
+   "poll": ["mei", "amara", "kai", "rafi"]
+  }
+ }
+}

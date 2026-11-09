@@ -16,6 +16,10 @@ const MISSION_TABLE_SCENE: PackedScene = preload("res://scenes/ui/mission_table_
 const P01_SCENE: PackedScene = preload("res://scenes/ui/p01_panel.tscn")
 const Debrief = preload("res://scripts/debrief/chapter1_debrief.gd")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
+const CHAPTER4_PANEL_SCENE: PackedScene = preload("res://scenes/ui/chapter4_puzzle_panel.tscn")
+const Chapter4Script = preload("res://scripts/puzzles/chapter4_puzzles.gd")
+const CHAPTER6_PANEL_SCENE: PackedScene = preload("res://scenes/ui/chapter6_puzzle_panel.tscn")
+const Chapter6Script = preload("res://scripts/puzzles/chapter6_puzzles.gd")
 const CHAPTER8_PANEL_SCENE: PackedScene = preload("res://scenes/ui/chapter8_puzzle_panel.tscn")
 const Chapter8Script = preload("res://scripts/puzzles/chapter8_puzzles.gd")
 const CommsServiceScript = preload("res://scripts/comms/comms_service.gd")
@@ -24,6 +28,8 @@ const CommsPanelScript = preload("res://scripts/ui/comms_panel.gd")
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
 var mission_table: MissionTablePanel
+var chapter4_panel: Chapter4PuzzlePanel
+var chapter6_panel: Chapter6PuzzlePanel
 var chapter8_panel: Chapter8PuzzlePanel
 var p01_panel: P01Panel
 var comms_service: RefCounted
@@ -187,6 +193,16 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table.commit_requested.connect(_on_mission_table_commit)
 	mission_table.payload_requested.connect(_on_payload_requested)
 	mission_table.hint_player = panels.hint_player
+	chapter4_panel = CHAPTER4_PANEL_SCENE.instantiate() as Chapter4PuzzlePanel
+	add_child(chapter4_panel)
+	chapter4_panel.opened.connect(func(_target: String) -> void: _on_panel_opened("chapter4_panel"))
+	chapter4_panel.closed.connect(func(_target: String) -> void: _on_panel_closed("chapter4_panel"))
+	chapter4_panel.commit_requested.connect(_on_chapter4_commit)
+	chapter6_panel = CHAPTER6_PANEL_SCENE.instantiate() as Chapter6PuzzlePanel
+	add_child(chapter6_panel)
+	chapter6_panel.opened.connect(func(_target: String) -> void: _on_panel_opened("chapter6_panel"))
+	chapter6_panel.closed.connect(func(_target: String) -> void: _on_panel_closed("chapter6_panel"))
+	chapter6_panel.commit_requested.connect(_on_chapter6_commit)
 	chapter8_panel = CHAPTER8_PANEL_SCENE.instantiate() as Chapter8PuzzlePanel
 	add_child(chapter8_panel)
 	chapter8_panel.opened.connect(func(_target: String) -> void: _on_panel_opened("chapter8_panel"))
@@ -797,13 +813,65 @@ func open_mission_table(target_id: String) -> bool:
 	mission_table.teach_first_use()
 	return true
 
+## Opens the Chapter 4 puzzle panel (P-07 / P-08) for one operation.
+func open_chapter4_panel(target_id: String) -> bool:
+	if runtime == null or chapter4_panel == null or runtime.is_chapter_complete() or not Chapter4Script.is_step(target_id):
+		return false
+	if runtime.is_cutscene_active() or chapter4_panel.is_open() or (chapter6_panel != null and chapter6_panel.is_open()) or (chapter8_panel != null and chapter8_panel.is_open()) or (mission_table != null and mission_table.is_open()) or (p01_panel != null and p01_panel.is_open()):
+		return false
+	if panels != null and not panels.active_panel().is_empty():
+		return false
+	if not runtime.route.has_method("chapter4_view"):
+		return false
+	var settings: Dictionary = runtime.query().get("accessibility", {}).duplicate(true)
+	chapter4_panel.open(runtime.route, target_id, settings)
+	return true
+
+func _on_chapter4_commit(target_id: String, payload: Dictionary) -> void:
+	if runtime == null:
+		return
+	var result := runtime.perform_target(target_id, payload)
+	if not bool(result.get("accepted", false)):
+		show_status("HELD · " + String(result.get("reason", "The operation was not recorded.")))
+		return
+	var title := Chapter4Script.focus_label(target_id)
+	_last_outcome = {"result": "%s · locked in" % title, "changes": result.get("deltas", []), "notes": result.get("warnings", []) + result.get("ledger_summary", [])}
+	show_status("%s · locked in. %s" % [title, String(result.get("reason", ""))])
+	panels.open_panel("outcome", _last_outcome)
+
+## Opens the Chapter 6 puzzle panel (P-11 / P-12) for one operation.
+func open_chapter6_panel(target_id: String) -> bool:
+	if runtime == null or chapter6_panel == null or runtime.is_chapter_complete() or not Chapter6Script.is_step(target_id):
+		return false
+	if runtime.is_cutscene_active() or chapter6_panel.is_open() or (chapter4_panel != null and chapter4_panel.is_open()) or (chapter8_panel != null and chapter8_panel.is_open()) or (mission_table != null and mission_table.is_open()) or (p01_panel != null and p01_panel.is_open()):
+		return false
+	if panels != null and not panels.active_panel().is_empty():
+		return false
+	if not runtime.route.has_method("chapter6_view"):
+		return false
+	var settings: Dictionary = runtime.query().get("accessibility", {}).duplicate(true)
+	chapter6_panel.open(runtime.route, target_id, settings)
+	return true
+
+func _on_chapter6_commit(target_id: String, payload: Dictionary) -> void:
+	if runtime == null:
+		return
+	var result := runtime.perform_target(target_id, payload)
+	if not bool(result.get("accepted", false)):
+		show_status("HELD · " + String(result.get("reason", "The operation was not recorded.")))
+		return
+	var title := Chapter6Script.focus_label(target_id)
+	_last_outcome = {"result": "%s · locked in" % title, "changes": result.get("deltas", []), "notes": result.get("warnings", []) + result.get("ledger_summary", [])}
+	show_status("%s · locked in. %s" % [title, String(result.get("reason", ""))])
+	panels.open_panel("outcome", _last_outcome)
+
 ## Opens the Chapter 8 puzzle panel (P-15 / P-16) for one operation. Reading
 ## and deciding pause the expedition; the physical commit happens only after
 ## the panel closes with LOCK IN.
 func open_chapter8_panel(target_id: String) -> bool:
 	if runtime == null or chapter8_panel == null or runtime.is_chapter_complete() or not Chapter8Script.is_step(target_id):
 		return false
-	if runtime.is_cutscene_active() or chapter8_panel.is_open() or (mission_table != null and mission_table.is_open()) or (p01_panel != null and p01_panel.is_open()):
+	if runtime.is_cutscene_active() or chapter8_panel.is_open() or (chapter4_panel != null and chapter4_panel.is_open()) or (chapter6_panel != null and chapter6_panel.is_open()) or (mission_table != null and mission_table.is_open()) or (p01_panel != null and p01_panel.is_open()):
 		return false
 	if panels != null and not panels.active_panel().is_empty():
 		return false
@@ -1031,7 +1099,7 @@ func apply_accessibility() -> void:
 	_caption_line.visible = captions
 	_caption_count.visible = captions
 	var scale := 1.5 if bool(settings.get("large_text", false)) else 1.0
-	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, chapter8_panel, p01_panel, comms_panel])
+	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, chapter4_panel, chapter6_panel, chapter8_panel, p01_panel, comms_panel])
 	if comms_panel != null:
 		comms_panel.set_text_scale(bool(settings.get("large_text", false)))
 	if runtime.audio != null:
@@ -1053,7 +1121,7 @@ func _on_panel_opened(_panel_id: String) -> void:
 func _on_panel_closed(_panel_id: String) -> void:
 	if p01_panel != null and p01_panel.is_open():
 		p01_panel.set_covered(not panels.active_panel().is_empty() or panels.hint_player.is_open())
-	var reading: bool = not panels.active_panel().is_empty() or mission_table.is_open() or (chapter8_panel != null and chapter8_panel.is_open()) or (p01_panel != null and p01_panel.is_open()) or (comms_panel != null and bool(comms_panel.is_open())) or panels.hint_player.is_open()
+	var reading: bool = not panels.active_panel().is_empty() or mission_table.is_open() or (chapter4_panel != null and chapter4_panel.is_open()) or (chapter6_panel != null and chapter6_panel.is_open()) or (chapter8_panel != null and chapter8_panel.is_open()) or (p01_panel != null and p01_panel.is_open()) or (comms_panel != null and bool(comms_panel.is_open())) or panels.hint_player.is_open()
 	runtime.set_ui_paused(reading or _reading_was_paused)
 	_modal_reading = reading
 	_set_modal_buttons(reading)
@@ -1082,7 +1150,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_modal_button_states.clear()
 		return
 	for child in node.get_children():
-		if child == panels or child == mission_table or child == chapter8_panel or child == p01_panel or child == comms_panel or child == _what_now_home:
+		if child == panels or child == mission_table or child == chapter4_panel or child == chapter6_panel or child == chapter8_panel or child == p01_panel or child == comms_panel or child == _what_now_home:
 			continue
 		if child is BaseButton:
 			if not _modal_button_states.has(child):
@@ -1094,7 +1162,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	var key := (event as InputEventKey).physical_keycode
-	var free: bool = panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (chapter8_panel == null or not chapter8_panel.is_open()) and (p01_panel == null or not p01_panel.is_open()) and (comms_panel == null or not bool(comms_panel.is_open()))
+	var free: bool = panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (chapter4_panel == null or not chapter4_panel.is_open()) and (chapter6_panel == null or not chapter6_panel.is_open()) and (chapter8_panel == null or not chapter8_panel.is_open()) and (p01_panel == null or not p01_panel.is_open()) and (comms_panel == null or not bool(comms_panel.is_open()))
 	if key == KEY_ESCAPE and free:
 		panels.open_panel("pause")
 		get_viewport().set_input_as_handled()

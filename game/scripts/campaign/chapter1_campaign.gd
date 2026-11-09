@@ -418,6 +418,10 @@ func interact_nearby() -> Dictionary:
 		return {"accepted": true, "p01_panel_requested": true, "physical_commit": false, "reason": "Choose the P-01 inputs before confirming."}
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) == "P-02" and hud != null and hud.open_mission_table(String(selected.target_id)):
 		return {"accepted": true, "reason": "Mission Table open.", "mission_table": true}
+	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-07", "P-08"] and hud != null and hud.open_chapter4_panel(String(selected.target_id)):
+		return {"accepted": true, "reason": "Decision card open.", "chapter4_panel": true}
+	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-11", "P-12"] and hud != null and hud.open_chapter6_panel(String(selected.target_id)):
+		return {"accepted": true, "reason": "Decision card open.", "chapter6_panel": true}
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-15", "P-16"] and hud != null and hud.open_chapter8_panel(String(selected.target_id)):
 		return {"accepted": true, "reason": "Decision card open.", "chapter8_panel": true}
 	if not selected.is_empty():

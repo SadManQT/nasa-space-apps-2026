@@ -1,6 +1,8 @@
 extends RefCounted
 class_name ExtendedPuzzleLedger
 
+const Chapter4 = preload("res://scripts/puzzles/chapter4_puzzles.gd")
+const Chapter6 = preload("res://scripts/puzzles/chapter6_puzzles.gd")
 const Chapter8 = preload("res://scripts/puzzles/chapter8_puzzles.gd")
 
 var _receipts := {}
@@ -46,8 +48,12 @@ func restore(data: Dictionary) -> Dictionary:
 func _validate(puzzle_id: String, action: String, payload: Dictionary) -> String:
 	if puzzle_id.is_empty() or action.is_empty():
 		return "Every extended puzzle action needs a stable puzzle and action ID."
-	# P-15 and P-16: the player's own decisions, checked against the answer keys
-	# in res://resources/campaign/profiles/campaign_rules.json (never pre-filled).
+	# P-07, P-08, P-11, P-12, P-15 and P-16: the player's own decisions, checked against
+	# the answer keys in res://resources/campaign/profiles/campaign_rules.json (never pre-filled).
+	if Chapter4.is_step(action):
+		return Chapter4.validate(action, payload)
+	if Chapter6.is_step(action):
+		return Chapter6.validate(action, payload)
 	if Chapter8.is_step(action):
 		return Chapter8.validate(action, payload)
 	match action:
