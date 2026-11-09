@@ -102,6 +102,17 @@ var _ending_page := "summary"
 var _replay_index := 0
 var _lesson_index := 0
 var _ending_answers := {}
+var _assist_mode := "Cadet"
+var _bindings: Dictionary = {
+	"move": "W A S D",
+	"look": "Right Mouse",
+	"use": "E",
+	"what_now": "H",
+	"journal": "J",
+	"pause": "Esc",
+}
+var _reset_confirm_pending := false
+var _onboarding_notice := ""
 const Debrief = preload("res://scripts/debrief/chapter1_debrief.gd")
 
 const JOURNAL_TABS := [
@@ -396,6 +407,8 @@ func _render_active_panel() -> void:
 		_render_sources()
 	elif _active_panel == "data_card":
 		_render_card(value)
+	elif _active_panel == "credits":
+		_render_credits(value)
 	else:
 		_render_data(value)
 		if _active_panel in ["outcome", "mission_table"]:
@@ -585,9 +598,59 @@ func _render_settings() -> void:
 		row.add_child(slider)
 		row.add_child(percent)
 		_body.add_child(row)
-	var controls := UiDesign.label("Controls\nMove: W A S D · Look: hold the right mouse button\nUse: E · What now: H · Pause: Esc\nNext line: Space · Continue: Enter", "caption", "ivory")
+	var controls := UiDesign.label("Controls\nMove: %s · Look: %s\nUse: %s · What now: %s · Journal: %s · Pause: %s\nNext line: Space · Continue: Enter" % [
+		String(_bindings.get("move", "W A S D")),
+		String(_bindings.get("look", "Right Mouse")),
+		String(_bindings.get("use", "E")),
+		String(_bindings.get("what_now", "H")),
+		String(_bindings.get("journal", "J")),
+		String(_bindings.get("pause", "Esc")),
+	], "caption", "ivory")
 	controls.name = "Controls"
 	_body.add_child(controls)
+	var assist_btn := _button("Assist Mode: %s (Click to cycle Story / Cadet / Expedition)" % _assist_mode)
+	assist_btn.name = "SettingsAssistMode"
+	assist_btn.pressed.connect(func() -> void:
+		var order := ["Story", "Cadet", "Expedition"]
+		_assist_mode = order[(order.find(_assist_mode) + 1) % order.size()]
+		emit_command("set_assist_mode", "assist_mode", {"assist_mode": _assist_mode}, "accessibility")
+		if _active_panel == "settings_accessibility":
+			_render_active_panel()
+	)
+	_body.add_child(assist_btn)
+	var replay_prompts_btn := _button("Replay first-time onboarding prompts (move, look, use, table, journal)")
+	replay_prompts_btn.name = "ReplayFirstTimePrompts"
+	replay_prompts_btn.pressed.connect(func() -> void:
+		if hint_player != null:
+			hint_player.reset_seen()
+		_onboarding_notice = "First-time prompts reset — they will appear again on your next action."
+		emit_command("reset_first_time_prompts", "onboarding", {}, "accessibility")
+		if _active_panel == "settings_accessibility":
+			_render_active_panel()
+	)
+	_body.add_child(replay_prompts_btn)
+	var remap_btn := _button("Swap Use (%s) ↔ What now (%s) binding" % [String(_bindings.get("use", "E")), String(_bindings.get("what_now", "H"))])
+	remap_btn.name = "SwapUseWhatNowBinding"
+	remap_btn.pressed.connect(func() -> void:
+		remap_binding("use", String(_bindings.get("what_now", "H")))
+	)
+	_body.add_child(remap_btn)
+	var reset_btn := _button("Confirm Reset All Bindings & Settings" if _reset_confirm_pending else "Reset Bindings & Settings to Default")
+	reset_btn.name = "ResetSettingsBindings"
+	reset_btn.pressed.connect(func() -> void:
+		if not _reset_confirm_pending:
+			_reset_confirm_pending = true
+			_onboarding_notice = "Press again to confirm resetting all bindings and settings to default."
+			if _active_panel == "settings_accessibility":
+				_render_active_panel()
+		else:
+			reset_bindings_and_settings(true)
+	)
+	_body.add_child(reset_btn)
+	if not _onboarding_notice.is_empty():
+		var notice_lbl := UiDesign.label(_onboarding_notice, "caption", "accent")
+		notice_lbl.name = "SettingsOnboardingNotice"
+		_body.add_child(notice_lbl)
 	var notes := UiDesign.label(
 		"Captions keep every line readable when a voice is missing, and caption the sounds that matter.\n"
 		+ ("Timer-free: nothing needs a quick reaction.\n" if is_timer_free() else "Standard timing: timed tasks show their clock.\n")
@@ -595,6 +658,52 @@ func _render_settings() -> void:
 		+ "None of these skip a safety check.",
 		"caption", "muted")
 	_body.add_child(notes)
+
+func remap_binding(action_id: String, new_key: String) -> Dictionary:
+	if not _bindings.has(action_id):
+		return {"accepted": false}
+	var old_key := String(_bindings[action_id])
+	var swapped_with := ""
+	for other_id in _bindings.keys():
+		if other_id != action_id and String(_bindings[other_id]) == new_key:
+			_bindings[other_id] = old_key
+			swapped_with = String(other_id)
+			break
+	_bindings[action_id] = new_key
+	_onboarding_notice = (
+		"Remapped %s to %s (swapped conflict with %s → %s)." % [action_id, new_key, swapped_with, old_key]
+		if not swapped_with.is_empty()
+		else "Remapped %s to %s." % [action_id, new_key]
+	)
+	if _active_panel == "settings_accessibility":
+		_render_active_panel()
+	return {"accepted": true, "action_id": action_id, "new_key": new_key, "swapped_with": swapped_with}
+
+func bindings_snapshot() -> Dictionary:
+	return _bindings.duplicate(true)
+
+func reset_bindings_and_settings(confirmed: bool = true) -> bool:
+	if not confirmed:
+		_reset_confirm_pending = true
+		return false
+	_reset_confirm_pending = false
+	_assist_mode = "Cadet"
+	_bindings = {
+		"move": "W A S D",
+		"look": "Right Mouse",
+		"use": "E",
+		"what_now": "H",
+		"journal": "J",
+		"pause": "Esc",
+	}
+	_onboarding_notice = "Bindings and accessibility settings restored to defaults."
+	_set_settings({
+		"captions": true,
+		"large_text": false,
+		"timer_free": true,
+		"reduced_motion": false,
+	}, true)
+	return true
 
 func _set_settings(settings: Dictionary, emit_change: bool) -> void:
 	var focus_key := ""
@@ -1512,3 +1621,9 @@ func _ending_actions(data: Dictionary) -> void:
 			_body.add_child(reason)
 	else:
 		_card_text("Review what happened, then retry the checkpoint to continue this expedition.")
+
+func _render_credits(value = {}) -> void:
+	var credits_script := preload("res://scripts/ui/credits_panel.gd")
+	var credits := credits_script.new()
+	credits.populate_into(_body)
+	credits.free()

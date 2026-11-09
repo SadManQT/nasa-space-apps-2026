@@ -6,6 +6,8 @@ signal continue_requested
 signal science_requested
 signal showcase_requested
 signal trainer_requested
+signal moon_trainer_requested
+signal chapter_select_requested
 signal command_emitted(command: Dictionary)
 signal accessibility_requested
 
@@ -38,6 +40,8 @@ var _accessibility := {
 	"timer_free": true,
 	"reduced_motion": false,
 }
+var _assist_mode := "Cadet"
+var _assist_summary: Label
 var _footer_status: Label
 
 func _ready() -> void:
@@ -90,6 +94,21 @@ func query_snapshot() -> Dictionary:
 
 func accessibility_settings() -> Dictionary:
 	return _accessibility.duplicate(true)
+
+func assist_mode() -> String:
+	return _assist_mode
+
+func set_assist_mode(mode_id: String) -> void:
+	if not ["Story", "Cadet", "Expedition"].has(mode_id):
+		return
+	_assist_mode = mode_id
+	if _assist_summary != null:
+		var descs := {
+			"Story": "Story Mode: Gentle guidance, early hints, and stress-free exploration.",
+			"Cadet": "Cadet Mode (Default): Standard guidance, 3-step hint ladder, and full science feedback.",
+			"Expedition": "Expedition Mode: Minimal automatic nudges; full instrumentation and manual checks.",
+		}
+		_assist_summary.text = String(descs.get(mode_id, ""))
 
 func captions_visible() -> bool:
 	return bool(_accessibility.get("captions", true))
@@ -277,6 +296,14 @@ func _build_command_panel() -> Control:
 	trainer_button.name = "MissionTrainerEntry"
 	trainer_button.pressed.connect(func(): trainer_requested.emit())
 	content.add_child(trainer_button)
+	var moon_trainer_button := _button("MOON TRAINER  ·  FIELD SORTIES", Color(0.15, 0.20, 0.31), IVORY)
+	moon_trainer_button.name = "MoonTrainerEntry"
+	moon_trainer_button.pressed.connect(func() -> void: moon_trainer_requested.emit())
+	content.add_child(moon_trainer_button)
+	var chapter_select_button := _button("CHAPTERS, PROGRESS & ACHIEVEMENTS", Color(0.15, 0.20, 0.31), IVORY)
+	chapter_select_button.name = "ChapterSelectEntry"
+	chapter_select_button.pressed.connect(func() -> void: chapter_select_requested.emit())
+	content.add_child(chapter_select_button)
 	_save_note = Label.new()
 	_save_note.text = "No saved expedition yet. New Expedition is always safe to start."
 	_save_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -289,8 +316,8 @@ func _build_command_panel() -> Control:
 	var science_button := _button("SCIENCE + SOURCES", Color(0.12, 0.18, 0.28), IVORY)
 	science_button.pressed.connect(func() -> void: science_requested.emit())
 	content.add_child(science_button)
-	# Developer tool: offered only in debug/editor builds, never to players.
-	if OS.is_debug_build():
+	# Developer tool: offered only in editor builds, never to players in exported builds.
+	if OS.has_feature("editor"):
 		var showcase_button := _button("DEVELOPER ASSET SHOWCASE", Color(0.10, 0.14, 0.22), MUTED)
 		showcase_button.pressed.connect(func() -> void: showcase_requested.emit())
 		content.add_child(showcase_button)
@@ -423,6 +450,39 @@ func _build_briefing() -> void:
 	body.add_child(roles)
 	for item in [["KAI", "POWER & HEAT", ORANGE], ["AMARA", "AIR & MEASUREMENT", CYAN], ["MEI", "GARDEN & PLANT CARE", GREEN], ["RAFI", "SAFETY & FIELD OPERATIONS", PURPLE]]:
 		roles.add_child(_role_card(item[0], item[1], item[2]))
+	var assist_header := Label.new()
+	assist_header.text = "ASSIST MODE  ·  CHANGE ANYTIME IN SETTINGS"
+	assist_header.add_theme_font_size_override("font_size", 13)
+	assist_header.add_theme_color_override("font_color", MUSTARD)
+	body.add_child(assist_header)
+	var assist_row := HBoxContainer.new()
+	assist_row.name = "AssistModeRow"
+	assist_row.add_theme_constant_override("separation", 8)
+	body.add_child(assist_row)
+	_assist_summary = Label.new()
+	_assist_summary.name = "AssistModeSummary"
+	_assist_summary.text = "Cadet Mode (Default): Standard guidance, 3-step hint ladder, and full science feedback."
+	_assist_summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_assist_summary.add_theme_font_size_override("font_size", 13)
+	_assist_summary.add_theme_color_override("font_color", IVORY)
+	for mode_spec in [
+		["Story", "Story Mode: Gentle guidance, early hints, and stress-free exploration."],
+		["Cadet", "Cadet Mode (Default): Standard guidance, 3-step hint ladder, and full science feedback."],
+		["Expedition", "Expedition Mode: Minimal automatic nudges; full instrumentation and manual checks."],
+	]:
+		var m_id: String = mode_spec[0]
+		var m_desc: String = mode_spec[1]
+		var m_btn := _button(m_id.to_upper(), Color(0.14, 0.20, 0.32), IVORY)
+		m_btn.name = "AssistMode_" + m_id
+		m_btn.focus_mode = Control.FOCUS_NONE
+		m_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		m_btn.pressed.connect(func() -> void:
+			_assist_mode = m_id
+			_assist_summary.text = m_desc
+			emit_command("set_assist_mode", "assist_mode", {"assist_mode": m_id})
+		)
+		assist_row.add_child(m_btn)
+	body.add_child(_assist_summary)
 	var qualifier := Label.new()
 	qualifier.text = "SIMULATED · Training scenario\nThe station, cadets, 2046 dates and game resources are fictional."
 	qualifier.add_theme_font_size_override("font_size", 13)

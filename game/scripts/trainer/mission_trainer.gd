@@ -21,6 +21,30 @@ var _entry: Dictionary = {}
 var _page := "catalog"
 var _revision := 0
 var _opening := false
+var moon_trainer: Control
+var moon_trainer_results_path := "user://moon_trainer_results.json"
+
+func _open_moon_trainer() -> void:
+	if is_instance_valid(moon_trainer):
+		return
+	var script := load("res://scripts/trainer/moon_trainer.gd")
+	moon_trainer = script.new()
+	moon_trainer.set("settings", settings.duplicate(true))
+	moon_trainer.set("results_path", moon_trainer_results_path)
+	_set_page_enabled(false)
+	moon_trainer.connect("exit_requested", _close_moon_trainer)
+	add_child(moon_trainer)
+
+func _close_moon_trainer() -> void:
+	if is_instance_valid(moon_trainer):
+		moon_trainer.queue_free()
+		moon_trainer = null
+	_set_page_enabled(true)
+	var entry := find_child("OpenMoonTrainer", true, false) as Button
+	if entry != null:
+		entry.grab_focus()
+	else:
+		_restore_page_focus()
 
 func _ready() -> void:
 	name = "MissionTrainer"
@@ -89,6 +113,7 @@ func show_catalog() -> void:
 	_clear()
 	_text("Choose a training scenario", "heading")
 	_text("Available scenarios open in one click. Others are coming soon.")
+	_button("Open Moon Trainer (Free Surface Sorties & Rover)", "OpenMoonTrainer", _open_moon_trainer)
 	for group in catalog.groups:
 		_text(catalog.groups[group], "heading")
 		for row in catalog.scenarios:
@@ -189,6 +214,8 @@ func _retry() -> void:
 		_notice.text = result.reason
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_instance_valid(moon_trainer):
+		return
 	var back_pad: bool = event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_B
 	if (event.is_action_pressed("ui_cancel") or back_pad) and not event.is_echo():
 		if table.is_open() or panels.hint_player.is_open():

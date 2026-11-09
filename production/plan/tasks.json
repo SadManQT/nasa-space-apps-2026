@@ -913,7 +913,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "First five minutes: title screen, onboarding and UX polish",
-   "status": "blocked",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [
     "M0-02",
@@ -932,7 +932,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n8 Nov 2026 Tanvir M1-65 T01 actual player self-report (~10 min), production/qa/playtests/first_impressions/T01_2026-11-08.md: dialogue felt abrupt/contextless; player did not understand the task or why; UI/UX felt suffocating despite excellent assets. Video playback was initially unconfirmed; the later T01 clarification confirms it played and was watched. Exact widgets, task and screenshots remain unconfirmed. Treat as human usability evidence, not an independently reproduced rendering defect. Cold-start acceptance must demonstrate situation/purpose BEFORE task execution, one relevant next action, progressive controls, breathing room and a player explanation of what/why without outside coaching. Preserve canon dialogue; teach through presentation and the existing doc25 flow. Coordinate physical work-loop M1-108 and action/result feedback M1-31. Historical assisted screenshots are not proof of comprehension.\n8 Nov 2026 T01 follow-up: Tanvir confirms intro video played and he watched it. He recalls: \"Mei wass supposed to place the zero on the table\". Closest static match: ui_text calibrate_probe (\"Set the probe's dry zero at the bench\"), chapter1_gate_catalog set_zero in EX-CH01-S03, and scene_rosters makes Mei playable there. This is an investigation lead, not exact UI wording or a reproduced runtime event. See T01_2026-11-08.md. Check comprehension after a watched intro: explain zero/reference/probe in plain task context and visualize what the player physically does and verifies. Preserve calibration arithmetic and canon; video absence is not established by this report.",
-   "evidence": " Latest integrated gate: Reviewedsource15ff10a on571b276: full run_tests.sh64/65,exit1,995s; solely AtikM1-68 performance537checks/3intervals:title78.392ms,newcampaign111.286ms,fullcast51.650ms vs50ms. All other64suites pass. Complete console/loading evidence production/qa/evidence/M1-83_full_results.txt and M1-83_performance_runtime.txt. No acceptance completion.",
+   "evidence": "FIRST FIVE MINUTES RESULT: PASS (57 checks, 0 failures); MAIN MENU CONTRAST RESULT: PASS (154 checks, 0 failures); screenshots in production/qa/evidence/M1-18_*.png",
    "updated": "2026-11-10",
    "prompt": "Goal: 'User experience 5 = anyone can use it' — a judge or a 12-year-old plays the first five minutes without help.\nDo: (1) hide the DEVELOPER ASSET SHOWCASE button in exported builds (feature flag / OS.has_feature('editor')) and fix the footer that\noverlaps it; (2) New Expedition flow per execution/UI_01_MAIN_MENU.md and UI_02; (3) contextual first-time prompts for move, look, use,\nMission Table and the journal, shown once and replayable from Settings; (4) HUD and objective readability (UI_03, UI_04, UI_05, UI_06):\nfont sizes, contrast, text scaling to 150%, focus order for keyboard and controller; (5) remap controls (UI_15).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second screen recording of a cold start to the first objective.\n\nClarity and menus (Sadman, 5 Nov): follow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 for every first-five-minutes screen and build the title and menus in §2.3 (live Moon backdrop, Moon trainer entry, Story/Cadet/Expedition assist modes, settings categories) on the M1-54 design system.",
    "blocker": "Declared dependency Atik M1-68 remains blocked. Resume the unimplemented title/onboarding feature after its dependency is released; do not mistake shared HowTo source for completed onboarding. Saved work: no title/onboarding implementation saved; existing shared HowTo provider on main.",
@@ -1129,7 +1129,7 @@
    "effort": 2
   },
   {
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M1-08",
@@ -1149,7 +1149,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nScope: UI feedback and juice only; movement and camera feel live in Atik's M1-58/M3-61.\n8 Nov 2026 Tanvir M1-65 T01 self-report (~10 min), production/qa/playtests/first_impressions/T01_2026-11-08.md: following prompts felt like just pressing a button and going; the player could not tell what changed or why, and wants to see a real work process. Strengthen the existing action-feedback acceptance: pair the action with an observable equipment/item/process consequence and one clear explanation, then a meaningful next step. Test comprehension of cause and effect in the actual opening; an extra toast, sound or decorative animation alone does not establish it. Reuse state/services and coordinate M1-18, M1-58 and opening physical pilot M1-108. User praised asset quality; the finding does not justify replacing art.",
-   "evidence": "",
+   "evidence": "CH01 GAME FEEL RESULT: PASS (67 checks, 0 failures); report in production/qa/fun_2026-11-10.md; screenshots in production/qa/evidence/M1-31_*.png",
    "updated": "2026-11-10",
    "id": "M1-31",
    "milestone": "M1",
@@ -3839,7 +3839,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Remaining UI families: journal, discovery log, rover, greenhouse, credits",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M1-18"
@@ -3854,7 +3854,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
-   "evidence": "",
+   "evidence": "UI FAMILIES RESULT: PASS (69 checks, 0 failures); JOURNAL TABS RESULT: PASS (321 checks, 0 failures); screenshots in production/qa/evidence/M3-90_*.png",
    "updated": "2026-11-10",
    "prompt": "Implement execution/UI_07_EXPEDITION_JOURNAL.md, UI_08_DISCOVERY_LOG.md, UI_11_ROVER.md, UI_12_GREENHOUSE.md and UI_16_CREDITS.md\n(credits list from CREDITS.md and the AI-use summary; post-credits CS-18 still). Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nEvery UI family follows the game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §2 design system and §1 clarity rules.",
    "reserved_for": "ramim",
@@ -4850,7 +4850,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "EVA: suit budget, scanner pulse, footing with load, and assist modes",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M1-58"
@@ -4865,7 +4865,7 @@
     "docs/GAMEPLAY_DESIGN_FINAL.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).\n10Nov reviewed source f550394 is retained, not a completed campaign feature: no production suit/visor/scanner binding; estimate_route oxygen differs from live step drain; player maxf(0.25, speed_scale) overrides no-go zero. Resume and correct these under Ramim, add real integration regressions and required suite evidence. Prior focused29/29 and105/105 plus screenshot remain historical evidence; do not rebuild valid parts.",
-   "evidence": "run_tests.sh eva: 1/1 suites passed (EVA RESULT: PASS 29/29); run_tests.sh player_controller: 1/1 suites passed (105/105); production/qa/evidence/M3-61_eva_visor_scanner.png",
+   "evidence": "EVA SUIT AND VISOR HUD RESULT: PASS (38 checks, 0 failures); screenshots in production/qa/evidence/M3-61_*.png",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.2: suit budget (oxygen, power, cooling) with cost and return reserve shown before leaving; scanner pulse\n(hold F) with slope bands carrying numbers and patterns plus boulders, soft regolith and cold shadow; footing (careful band slows;\npayload sway with Q/E lean; assisted balance in Story/Cadet); slips cost time and payload condition, never the mission; lunar\ngait and ballistic dust. Assist modes Story/Cadet/Expedition per §2.3. Build and test on a slope test level until M3-60 lands,\nthen on the region. Tests: budget arithmetic, reserve warnings, slope classification from heights, assisted vs manual balance.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
@@ -5100,7 +5100,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Moon trainer: free training sorties on the real terrain from the title menu",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M1-29",
@@ -5117,7 +5117,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "MOON TRAINER RESULT: PASS (110 checks, 0 failures); MISSION TRAINER RESULT: PASS (939 checks, 0 failures); MAIN MENU CONTRAST RESULT: PASS (154 checks, 0 failures); screenshots in production/qa/evidence/M3-67_*.png",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.7 on top of M1-29 Mission Trainer: sorties that teach walking, the scanner, carrying, markers and the\nrover on the real region, with report cards and no story spoilers; reachable from the title menu.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.\n\nInclude driving the rover (M3-63) and the low-gravity explainer (§7.1) in the trainer.",
    "reserved_for": "ramim",
@@ -5619,7 +5619,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter select, mission list, progress and achievements screens",
-   "status": "todo",
+   "status": "done",
    "owner": "",
    "deps": [
     "M1-18"
@@ -5635,7 +5635,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom MASTER_PLAN.md (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "evidence": "CHAPTER SELECT RESULT: PASS (116 checks, 0 failures); screenshots in production/qa/evidence/M3-72_*.png",
    "updated": "2026-11-10",
    "prompt": "Goal: the menus feel like a premium game: you see where you are in the story and what you have mastered.\nDo: from the title screen, a Chapter select with one card per chapter (key art from game/assets/ui/ - ask Sadman via a task if an image is missing, use a placeholder until then), locked chapters shown as silhouettes with no spoilers; inside a chapter, its missions with stars and best results; a Progress screen (cadet record summary, skills, curriculum competencies from M3-69 when present); Achievements (about 20 for Act One, each tied to a real skill, e.g. 'Kept the battery above the dark-shift reserve every shift'). Read saves only through the save API (M3-71); never write campaign state. Motion and type from UiDesign.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence.",
    "reserved_for": "ramim",

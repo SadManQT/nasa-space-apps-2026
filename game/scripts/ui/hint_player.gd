@@ -113,6 +113,11 @@ func has_seen(id: String) -> bool:
 	var config := _seen_config()
 	return config != null and config.get_value("seen", id, false) == true
 
+func reset_seen() -> void:
+	_levels.clear()
+	if FileAccess.file_exists(seen_path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(seen_path))
+
 func _seen_config() -> ConfigFile:
 	var config := ConfigFile.new()
 	if not FileAccess.file_exists(seen_path):

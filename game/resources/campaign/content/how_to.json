@@ -54,6 +54,58 @@
       "nudge": "Compare the current goal with the marked object's evidence.",
       "relationship": "An observation says what was measured. A claim explains it. Check whether the evidence supports the claim before making a decision.",
       "example": "Different example - hypothetical: a practice lamp is lit for 3 of 9 checks. That observation alone does not prove why it went dark. Compare the power record with the same times before making a claim. Use the evidence from your current scene."
+    },
+    "move": {
+      "title": "How to move around Aurora",
+      "purpose": "Walk between stations, benches and crew members at your own pace.",
+      "steps": [
+        "Press W, A, S, D or the Left Stick to walk through the room.",
+        "Follow the soft floor path or room signs to reach the marked station.",
+        "Take your time — walking never runs down a hidden clock."
+      ],
+      "clip": "",
+      "nudge": "Use W A S D to walk toward the Mission Table or the crew.",
+      "relationship": "Every room in Aurora connects through pressurised hatches. Moving closer to a person or console brings up its interaction prompt.",
+      "example": "Different example - hypothetical: in a practice bay, walking within two steps of the bench highlights its name and key prompt."
+    },
+    "look": {
+      "title": "How to look around",
+      "purpose": "Turn the camera to inspect room signs, crew members and wall displays.",
+      "steps": [
+        "Hold the Right Mouse Button and move the mouse, or use the Right Stick.",
+        "Center the camera on a crew member or station to read its label.",
+        "Turn on Reduced Motion in Settings if you prefer instant transitions."
+      ],
+      "clip": "",
+      "nudge": "Hold the Right Mouse Button to look around the room.",
+      "relationship": "Looking around helps you spot the gold objective marker, wall status boards and crew stations before you commit a plan.",
+      "example": "Different example - hypothetical: panning across a practice dome reveals both the air tank gauge on the left wall and the chamber lamp on the right."
+    },
+    "use": {
+      "title": "How to use equipment and talk",
+      "purpose": "Interact with highlighted consoles, plants, doors and crew members.",
+      "steps": [
+        "Walk up to a highlighted station or crew member until the prompt appears.",
+        "Press E (or the South controller button) to talk, inspect or operate.",
+        "Press Esc at any time to step back without losing progress."
+      ],
+      "clip": "",
+      "nudge": "Press E when a station or crew member prompt is highlighted.",
+      "relationship": "Using a station opens its real controls or conversation so you can observe readings before making a decision.",
+      "example": "Different example - hypothetical: pressing E at a practice workbench opens its reading card; closing it with Esc leaves every setting unchanged."
+    },
+    "journal": {
+      "title": "How to use the Expedition Journal",
+      "purpose": "Review your current goal, evidence, plant growth, decisions, people and science.",
+      "steps": [
+        "Press J (or open Journal from the top bar) at any time.",
+        "Use the left tabs — Now, Evidence, Garden, Decisions, People and Science.",
+        "Open 'What now?' (H) whenever you want a spoiler-free nudge or explainer."
+      ],
+      "clip": "",
+      "nudge": "Press J to open the Expedition Journal and check 'Now'.",
+      "relationship": "Reading the Journal pauses the clock. It keeps only what you have already observed or completed, with zero future spoilers.",
+      "example": "Different example - hypothetical: opening the Now tab during a practice shift lists the current room, why the task matters, and three optional hint steps."
     }
   },
   "scenes": {
