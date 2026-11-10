@@ -190,15 +190,47 @@ static func _prepare_threaded(path: String, tree: SceneTree, pending: Dictionary
 	await tree.process_frame
 	if _superseded(pending, root):
 		return await _recover(path, tree, pending)
+	stamp = LoadTrace.begin()
 	root.free()
 	root = null
+	LoadTrace.end("glb_free_nodes:" + path, stamp)
 	if error != OK:
 		return false
+	stamp = LoadTrace.begin()
 	_remember(path, scene)
+	LoadTrace.end("glb_publish_cache:" + path, stamp)
 	await tree.process_frame
 	if pending.recovering:
 		return await _recover(path, tree, pending)
+	stamp = LoadTrace.begin()
+	all_anims.clear()
+	LoadTrace.end("glb_release_animations:" + path, stamp)
+	await _release_raw_json(state, tree, path)
+	await tree.process_frame
+	stamp = LoadTrace.begin()
+	state = null
+	document = null
+	LoadTrace.end("glb_release_state:" + path, stamp)
+	if pending.recovering:
+		return await _recover(path, tree, pending)
 	return true
+
+static func _release_raw_json(state: GLTFState, tree: SceneTree, path: String) -> void:
+	# Releasing thousands of decoded accessors at return can stall a loading frame.
+	var json := state.get_json()
+	state.set_json({})
+	var stamp := Time.get_ticks_usec()
+	for key in json:
+		if json[key] is Array:
+			var entries: Array = json[key]
+			while not entries.is_empty():
+				entries.pop_back()
+				if Time.get_ticks_usec() - stamp >= 8000:
+					LoadTrace.end("glb_release_json:" + path, stamp)
+					await tree.process_frame
+					stamp = Time.get_ticks_usec()
+	json.clear()
+	LoadTrace.end("glb_release_json:" + path, stamp)
 
 static func _remember(path: String, scene: PackedScene) -> void:
 	_scenes[path] = {"modified": FileAccess.get_modified_time(path), "scene": scene}

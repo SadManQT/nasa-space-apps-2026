@@ -35,6 +35,9 @@ func _check(value: bool, label: String) -> void:
 func _prepare(path: String, results: Array) -> void:
 	results.append(await AssetGeometry.prepare(path, self))
 
+func _recover(path: String, pending: Dictionary, results: Array) -> void:
+	results.append(await AssetGeometry._recover(path, self, pending))
+
 func _forget(path: String) -> void:
 	AssetGeometry._scenes.erase(path)
 	AssetGeometry._recent.erase(path)
@@ -61,6 +64,7 @@ func _run() -> void:
 	await _test_failures()
 	await _test_held_recovery()
 	await _test_takeover_at_each_yield()
+	await _test_cleanup_takeover()
 	_reset()
 	_check(PreparationWatchdog._jobs.is_empty() and PreparationWatchdog._resources.is_empty(), "no abandoned work is left")
 	_check(AssetGeometry._preparing.is_empty() and AssetGeometry._requests.is_empty(), "no raw ownership is left")
@@ -160,3 +164,22 @@ func _test_takeover_at_each_yield() -> void:
 			await process_frame
 		_check(AssetGeometry._scenes[CAST].scene == published and AssetGeometry._preparing.is_empty(), "takeover %d frames into publication: the old coroutine publishes nothing" % delay)
 	_check(takeovers >= 3, "takeover was exercised at several publication yields (%d)" % takeovers)
+
+func _test_cleanup_takeover() -> void:
+	_reset()
+	_forget(PROP_A)
+	var owner: Array = []
+	_prepare(PROP_A, owner)
+	while not AssetGeometry.is_prepared(PROP_A):
+		await process_frame
+	var pending: Dictionary = AssetGeometry._preparing[PROP_A]
+	await process_frame
+	_check(owner.is_empty() and not pending.done, "owner still cleans private import data after publication")
+	var recovery: Array = []
+	_recover(PROP_A, pending, recovery)
+	await process_frame
+	_check(owner.is_empty(), "cleanup owner waits for the in-flight recovery before reporting success")
+	while owner.is_empty() or recovery.is_empty():
+		await process_frame
+	_check(owner == [true] and recovery == [true], "post-publication cleanup takeover completes for both callers")
+	_check(AssetGeometry.is_prepared(PROP_A) and AssetGeometry._preparing.is_empty() and not paused, "cleanup takeover preserves the published scene, ownership and pause state")
