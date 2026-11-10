@@ -1925,7 +1925,7 @@
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH01.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
-   "reserved_for": "asif",
+   "reserved_for": "sadman",
    "effort": 1,
    "assignment_history": [
     {
@@ -1934,6 +1934,13 @@
      "owner": "",
      "status": "todo",
      "reason": "User-approved implementation batch"
+    },
+    {
+     "date": "2026-11-10",
+     "reserved_for": "asif",
+     "owner": "",
+     "status": "todo",
+     "reason": "10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif."
     }
    ],
    "integration_paths": [
@@ -2243,7 +2250,7 @@
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH02.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
-   "reserved_for": "asif",
+   "reserved_for": "sadman",
    "effort": 1,
    "assignment_history": [
     {
@@ -2252,6 +2259,13 @@
      "owner": "",
      "status": "todo",
      "reason": "User-approved implementation batch"
+    },
+    {
+     "date": "2026-11-10",
+     "reserved_for": "asif",
+     "owner": "",
+     "status": "todo",
+     "reason": "10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif."
     }
    ],
    "integration_paths": [
@@ -4582,7 +4596,7 @@
    "updated": "2026-11-10",
    "prompt": "Found 5 Nov during the round-3 rendered verification: one windowed run of game/tools/perf_probe.gd (--perf-probe, window on top) stopped right after the garden_rebuild transition, at the start of the full-cast stage: Godot idle (~2% CPU) with no progress for 17 minutes. The next run passed cleanly, so it is intermittent. Find whether the threaded preparation (ResourceLoader.load_threaded_request / WorkerThreadPool jobs in game/scripts/loading/, staged construction in campaign_room.gd and chapter1_campaign.gd) can wait forever: a job that never reports, a main-thread await on a status that never changes, a resource requested twice, or a deadlock with a mutex. Add a watchdog: any preparation step that exceeds a time limit logs its step and falls back to synchronous loading behind the loading card instead of hanging.\nAcceptance: run the windowed probe 10 times in a row (command in production/qa/perf_2026-11-04.md) with zero stalls; a test forces a stuck job and proves the fallback completes; run_tests.sh passes.",
    "blocker": "10 Nov integration recheck under the user owner override: Sadman owner deliveryccd04a71/M1-126 is merged; its earlier missing-delivery blocker is resolved. Ramim11722b7d preserves its single-owner/node-lifetime recovery and bounds private JSON cleanup. Actual original-Windows held-raw recovery53/0 (including post-publication takeover) and native loading31/0 pass; evidence and prior failures are retained at production/qa/evidence/M1-125_117_gate_2026-11-10/raw_cleanup/. Still needs the task-specific ten consecutive full windowed perf_probe runs with zero stalls and the complete119-suite gate, which is currently running under M1-125. The one native fixture is not a substitute for those ten probes; resume that collection on the documented native host, retaining all attempts. Owner remains Atik; no Done or original Mac draw/Arc teardown claim.",
-   "reserved_for": "atik",
+   "reserved_for": "sadman",
    "effort": 2,
    "assignment_history": [
     {
@@ -4597,6 +4611,13 @@
      "previous_actor": "Atik/antigravity",
      "actor": "Atik/codex",
      "reason": "User confirms no competing session; saved branch f6285e4 reviewed. Current rules synchronized; exact files reserved before further edits. User explicitly leaves raw AssetGeometry patch for Sadman."
+    },
+    {
+     "date": "2026-11-10",
+     "reserved_for": "atik",
+     "owner": "Atik/codex",
+     "status": "blocked",
+     "reason": "10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif."
     }
    ],
    "integration_paths": [
@@ -6747,7 +6768,7 @@
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Observed during M1-23 native 1080p Forward+/Metal sweep on Apple M4/Godot4.7.2 at49bdcac/bc5eaf7 plus owned benchmark WIP. Fresh isolated user-data/cache-directory layout: title p95~9ms but first campaign transition duration7731.121ms and max process-frame interval7284.349ms. LoadTrace lists room_fixtures_doors LOC01 363.235ms and campaign_ui53.133ms, neither explains the full gap, so investigate native first draw/shader/font/pipeline work rather than guessing or claiming a threaded deadlock. Full headless61/61 including performance537 checks passes; it does not assess this native hitch. M1-23 retained final JSON/CSV/native log under production/qa/perf/M1-23_m4_2026-11-07 (final run timings may differ; use those actual values). Probe isolates first-use preferences and checkpoint, retains first-use frames and labels transition latency separately. Profile exact stages/main-thread/GPU behavior, keep animated loading presentation moving, preserve all assets/UI quality and real first-use costs. Own loading/campaign/performance only; request Sadman renderer/asset or Ramim UI work if measurements identify their path. Acceptance: reproduced then measured improved native first campaign entry on documented hardware, no masking warmup/threshold changes, screenshots/loading trace, appropriate runner green and independent review.",
-   "reserved_for": "atik",
+   "reserved_for": "sadman",
    "effort": 2,
    "assignment_history": [
     {
@@ -6756,6 +6777,13 @@
      "owner": "",
      "status": "todo",
      "reason": "User-approved implementation batch"
+    },
+    {
+     "date": "2026-11-10",
+     "reserved_for": "atik",
+     "owner": "Atik/codex",
+     "status": "blocked",
+     "reason": "10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif."
     }
    ],
    "integration_paths": [
@@ -6908,7 +6936,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Fix cross-scene prerequisite eligibility for P-01 nearby planting",
-   "status": "blocked",
+   "status": "done",
    "owner": "Atik/Ramim-codex",
    "deps": [],
    "paths": [
@@ -6916,12 +6944,21 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-08.\n9Nov: M1-101 source da1bbc6 removes detached HUD transform errors; P01inputs317/0 on that source. Earlier raw diagnostics retained. Full/native acceptance still pending.",
-   "evidence": "production/qa/evidence/M1-95/README.md; b1b393c; 2/2 focused suites (346 checks); full/native pending.",
-   "updated": "2026-11-09",
+   "evidence": "Focused suites on main after the accepted combined 119/119 gate (M1-125): test_p01_nearby 30/0 (S04 nearby USE after the previous-scene scan), test_p01_inputs 319/0, test_p01_labels 104/0, test_p01_panel 140/0, test_campaign_interaction_input 39/0, test_director_message_metadata 76/0, test_route_messages 31/0, each via game/tools/run_tests.sh. Source delivered earlier; this is acceptance closure only.",
+   "updated": "2026-11-10",
    "prompt": "M1-08 real-campaign integration exposed a cross-scene prerequisite mismatch in Chapter1Campaign.nearby_target(). After calibration and packet scan in EX-CH01-S03, advance normally to EX-CH01-S04 and stand at plant_alo (or plant_tara) within range, facing it with clear line of sight. route.current_flags() is empty in the new scene; route.p01_view(\"plant_alo\") reports missing_flags=[] and route.snapshot().p01.packet_scanned=true. nearby_target() currently checks required_flags only against current_flags(), so both planting targets requiring p01_scanned are skipped and interact_nearby returns Walk up to the next job instead of requesting the panel. No UI pause is active. Read production/qa/evidence/M1-08_runtime_blocker.md and retained diagnostic log.\nAlign nearby eligibility with the existing authoritative cross-scene prerequisite contract; preserve physical room/range/frustum/line-of-sight checks, target completion/idempotency and all chosen-input validation. Do not inject flags from UI, auto-fill player choices, or change Ramim UI. Add real nearby USE regression for previous-scene packet scan -> S04 plant_alo/tara; unsatisfied prerequisites and out-of-range/blocked targets still reject. Run focused P01 and full runner. Publish handoff to M1-08; its source candidate is parked locally at afe0c747 (not main) and cannot complete until this runtime fix. Existing M1-66 test pass did not cover this actual S04 nearby path.",
-   "reserved_for": "atik",
+   "reserved_for": "sadman",
    "effort": 1,
-   "blocker": "Reviewed source and native/required behavior checks delivered; current full e78f5bc/game108a384 completed83/84, only M1-68 Windows timing suite581/7 fails. All owned regressions and 13060 normal/150% text checks pass. Remaining dependency: M1-68 diagnosis/fix and green all-suite acceptance; no source reimplementation. Saved task evidence plus production/qa/evidence/2026-11-09_ramim_atik_full/README.md"
+   "blocker": "Reviewed source and native/required behavior checks delivered; current full e78f5bc/game108a384 completed83/84, only M1-68 Windows timing suite581/7 fails. All owned regressions and 13060 normal/150% text checks pass. Remaining dependency: M1-68 diagnosis/fix and green all-suite acceptance; no source reimplementation. Saved task evidence plus production/qa/evidence/2026-11-09_ramim_atik_full/README.md",
+   "assignment_history": [
+    {
+     "date": "2026-11-10",
+     "reserved_for": "atik",
+     "owner": "Atik/Ramim-codex",
+     "status": "blocked",
+     "reason": "10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif."
+    }
+   ]
   },
   {
    "id": "M1-96",
@@ -7110,7 +7147,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Route retry keeps delivered and read messages (M1-89 rule)",
-   "status": "blocked",
+   "status": "done",
    "owner": "Atik/Ramim-codex",
    "deps": [
     "M1-89"
@@ -7120,12 +7157,21 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/night-claude2 on 2026-11-08.",
-   "evidence": "production/qa/evidence/M1-99/README.md; source d0c32b8; independent review C0/I0/M0; full pending.",
-   "updated": "2026-11-09",
+   "evidence": "Focused suites on main after the accepted combined 119/119 gate (M1-125): test_p01_nearby 30/0 (S04 nearby USE after the previous-scene scan), test_p01_inputs 319/0, test_p01_labels 104/0, test_p01_panel 140/0, test_campaign_interaction_input 39/0, test_director_message_metadata 76/0, test_route_messages 31/0, each via game/tools/run_tests.sh. Source delivered earlier; this is acceptance closure only.",
+   "updated": "2026-11-10",
    "prompt": "M1-89 (execution/03_SYSTEM_INTERFACES.md, 'Message metadata') makes delivered and read messages survive a gameplay retry: CampaignDirector.update_message_metadata() mirrors presentation_resume.messages into the director's pre-commit checkpoint, so PuzzleHost.retry()/director.restore_checkpoint() keeps them. The route-level physical retry does not yet: CampaignRoute.retry() (and Chapter1Route.retry(), which calls super.retry()) runs _director.restore_snapshot(checkpoint.director) with the director snapshot taken at the route checkpoint, so every message delivered or read after that point turns undelivered or unread again and its arrival toast can fire a second time. Fix in game/scripts/missions/campaign_route.gd only: capture var messages: Dictionary = _director.message_metadata() before restore_snapshot() and call _director.update_message_metadata(messages) right after it (a union, idempotent; an empty or unchanged record comes back accepted with duplicate=true and changes nothing). Do not edit game/scripts/core/. Acceptance: a missions test (your own test file) delivers and reads a message after a Chapter 1 route checkpoint, runs Chapter1Route.retry(), and proves the director's gameplay state equals the route checkpoint (everything except presentation_resume.messages) while message_metadata() still holds both IDs, and that a second retry is still correct; game/tools/test_director_message_metadata.gd must keep passing unchanged (it only checks that re-applying the record after a route retry works). Run game/tools/run_tests.sh and paste its last line into the evidence.",
-   "reserved_for": "atik",
+   "reserved_for": "sadman",
    "effort": 1,
-   "blocker": "Reviewed source and native/required behavior checks delivered; current full e78f5bc/game108a384 completed83/84, only M1-68 Windows timing suite581/7 fails. All owned regressions and 13060 normal/150% text checks pass. Remaining dependency: M1-68 diagnosis/fix and green all-suite acceptance; no source reimplementation. Saved task evidence plus production/qa/evidence/2026-11-09_ramim_atik_full/README.md"
+   "blocker": "Reviewed source and native/required behavior checks delivered; current full e78f5bc/game108a384 completed83/84, only M1-68 Windows timing suite581/7 fails. All owned regressions and 13060 normal/150% text checks pass. Remaining dependency: M1-68 diagnosis/fix and green all-suite acceptance; no source reimplementation. Saved task evidence plus production/qa/evidence/2026-11-09_ramim_atik_full/README.md",
+   "assignment_history": [
+    {
+     "date": "2026-11-10",
+     "reserved_for": "atik",
+     "owner": "Atik/Ramim-codex",
+     "status": "blocked",
+     "reason": "10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif."
+    }
+   ]
   },
   {
    "id": "M4-08",
@@ -7439,7 +7485,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Prevent generic E input from masking the opening calibration interaction",
-   "status": "blocked",
+   "status": "done",
    "owner": "Atik/Ramim-codex",
    "deps": [],
    "paths": [
@@ -7448,12 +7494,21 @@
    ],
    "refs": [],
    "note": "Filed by Tanvir/codex on 2026-11-08.\n8 Nov 2026 T01 follow-up: Tanvir confirms intro video played and he watched it. He recalls: \"Mei wass supposed to place the zero on the table\". Closest static match: ui_text calibrate_probe (\"Set the probe's dry zero at the bench\"), chapter1_gate_catalog set_zero in EX-CH01-S03, and scene_rosters makes Mei playable there. This is an investigation lead, not exact UI wording or a reproduced runtime event. See T01_2026-11-08.md. CampaignCrew.place excludes the active actor from its seated-listener SitIdle_loop pass. Trace the actual job/actor/scene handoff and visible character before assigning a cause; request the world/asset owner if needed.\n9 Nov 2026 T01 screenshot-backed progression blocker: production/qa/playtests/first_impressions/T01_2026-11-09_blocker.md. Visible dry-zero goal and E prompt, no panel; player reports E causes low/seated-looking pose and no progress. Static review of cb22b5ce15ad2f54f15bd406bc6520f3e18a9fc7 confirms P-01 signal has no production receiver; runtime requests inputs without committing. Separate player physics polling can request generic Inspect from the same E press. Clip/native sequence is unverified; no Sit/SitIdle or permanent lock claim. No gameplay fix delivered by QA.\n9Nov independent Tanvir retest at cc4e180: production/qa/playtests/first_impressions/retest_2026-11-09/README.md. Mandatory focused P01 4/4 (589/0), campaign input1/1 (38/0); windowed Compatibility44/0 exit0 in13.450s. Forward+ emits44/0 plus5PNG but hits180.017s timeout124; not a passing native process run. M1-116 Atik exit investigation, M1-117 Sadman local UID/cache diagnostic. Original pose cause, checkpoint restore, full-suite gate and remaining human/fresh-player evidence not certified.",
-   "evidence": "",
-   "updated": "2026-11-09",
+   "evidence": "Focused suites on main after the accepted combined 119/119 gate (M1-125): test_p01_nearby 30/0 (S04 nearby USE after the previous-scene scan), test_p01_inputs 319/0, test_p01_labels 104/0, test_p01_panel 140/0, test_campaign_interaction_input 39/0, test_director_message_metadata 76/0, test_route_messages 31/0, each via game/tools/run_tests.sh. Source delivered earlier; this is acceptance closure only.",
+   "updated": "2026-11-10",
    "prompt": "9 Nov T01 evidence: production/qa/playtests/first_impressions/T01_2026-11-09_blocker.md. User screenshot shows Set the probe's dry zero at the bench and E Set the dry zero at Mission Table, with no calibration panel visible; user reports pressing E makes her sit/low pose and cannot advance. The AI has not reproduced the keypress/clip. Static source confirms two independent consumers: Chapter1Campaign._unhandled_input processes E and handles viewport input; PlayerController._physics_process still polls the global interact action and requests nearby generic action, default Inspect. Campaign focus nodes register verb metadata, not action. Inspect is a finite one-shot, not a confirmed Sit/SitIdle or permanent animation lock. In Atik-owned runtime/player code make campaign interaction ownership explicit and ensure handled campaign USE does not independently request unrelated generic actions; preserve intended generic interactions elsewhere. Trace actual target/body/clip natively before assigning a pose cause. The separate missing production P-01 panel receiver is Ramim M1-08; coordinate that UI hook, do not edit UI/world/assets belonging to other owners. Acceptance: native real E on the dry-zero target opens one real P-01 panel after owner integration, with no unrelated generic inspection; cancel does not solve and returns control; player-confirmed inputs advance actual calibration once. Mandatory runner and meaningful integration regression must cover input/UI behavior, not only an injected signal spy or direct fixture payload. Preserve 08 numbers/canon/accessibility and never auto-fill the answer or bypass the gate to make progress appear fixed.",
-   "reserved_for": "atik",
+   "reserved_for": "sadman",
    "effort": 1,
-   "blocker": "Reviewed source and native/required behavior checks delivered; current full e78f5bc/game108a384 completed83/84, only M1-68 Windows timing suite581/7 fails. All owned regressions and 13060 normal/150% text checks pass. Remaining dependency: M1-68 diagnosis/fix and green all-suite acceptance; no source reimplementation. Saved task evidence plus production/qa/evidence/2026-11-09_ramim_atik_full/README.md"
+   "blocker": "Reviewed source and native/required behavior checks delivered; current full e78f5bc/game108a384 completed83/84, only M1-68 Windows timing suite581/7 fails. All owned regressions and 13060 normal/150% text checks pass. Remaining dependency: M1-68 diagnosis/fix and green all-suite acceptance; no source reimplementation. Saved task evidence plus production/qa/evidence/2026-11-09_ramim_atik_full/README.md",
+   "assignment_history": [
+    {
+     "date": "2026-11-10",
+     "reserved_for": "atik",
+     "owner": "Atik/Ramim-codex",
+     "status": "blocked",
+     "reason": "10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif."
+    }
+   ]
   },
   {
    "id": "M1-108",
@@ -7692,7 +7747,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Require explicit P01 cassette label choices through shared preview and commit",
-   "status": "blocked",
+   "status": "done",
    "owner": "Atik/Ramim-codex",
    "deps": [],
    "paths": [
@@ -7704,12 +7759,21 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-09.",
-   "evidence": "production/qa/evidence/M1-115/README.md; source51f91cb; 484 focused checks0fail; full pending.",
-   "updated": "2026-11-09",
+   "evidence": "Focused suites on main after the accepted combined 119/119 gate (M1-125): test_p01_nearby 30/0 (S04 nearby USE after the previous-scene scan), test_p01_inputs 319/0, test_p01_labels 104/0, test_p01_panel 140/0, test_campaign_interaction_input 39/0, test_director_message_metadata 76/0, test_route_messages 31/0, each via game/tools/run_tests.sh. Source delivered earlier; this is acceptance closure only.",
+   "updated": "2026-11-10",
    "prompt": "M1-08 review948ef2f found labels still auto-select correct answers. Require an explicit label payload in shared P01 preview/commit: missing/wrong/malformed rejects atomically; EXTERNAL_TEST for Alo and INDOOR_REFERENCE for Tara commits chosen input once. Publish options/expected labels through existing profile/view data; preserve canonical numbers and old saved label values/receipt IDs. Update shared test-only input fixture and necessary callers, never production defaults. Test wrong/types/missing, preview/commit identity, real route flags/receipts, duplicate commands and JSON old-labelled restore. Run focused and integrated full runner without weakening timing gates. No core/world/UI edit. User authorized Ramim to finish Atik dependencies. M08 candidate948ef2f preserved on ramim/m108-ui-review-20261109; resume UI after this real contract.",
-   "reserved_for": "atik",
+   "reserved_for": "sadman",
    "effort": 1,
-   "blocker": "Reviewed source and native/required behavior checks delivered; current full e78f5bc/game108a384 completed83/84, only M1-68 Windows timing suite581/7 fails. All owned regressions and 13060 normal/150% text checks pass. Remaining dependency: M1-68 diagnosis/fix and green all-suite acceptance; no source reimplementation. Saved task evidence plus production/qa/evidence/2026-11-09_ramim_atik_full/README.md"
+   "blocker": "Reviewed source and native/required behavior checks delivered; current full e78f5bc/game108a384 completed83/84, only M1-68 Windows timing suite581/7 fails. All owned regressions and 13060 normal/150% text checks pass. Remaining dependency: M1-68 diagnosis/fix and green all-suite acceptance; no source reimplementation. Saved task evidence plus production/qa/evidence/2026-11-09_ramim_atik_full/README.md",
+   "assignment_history": [
+    {
+     "date": "2026-11-10",
+     "reserved_for": "atik",
+     "owner": "Atik/Ramim-codex",
+     "status": "blocked",
+     "reason": "10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif."
+    }
+   ]
   },
   {
    "id": "M1-116",
@@ -7731,7 +7795,7 @@
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Tanvir M1-65 independent dry-zero retest on 9 Nov2026, source cc4e180 (game from415aa23). Windows11 Intel Arc130V, Godot4.7.2, Forward+ Vulkan1280x720. Repro exact command and source hashes in production/qa/playtests/first_impressions/retest_2026-11-09/native/run.json; QA adapter capture_dry_zero.gd extends existing test_campaign_interaction_input.gd and redirects evidence only. Fixture emits PASS44/0, writes five screenshots and input trace, but subprocess does not exit within180.017s; timeout captured as124, capture_checks_passed:false. No Godot process remained at subsequent check. Do not conflate with the original missing-panel gameplay blockage, infer a driver/deadlock cause, or claim a reproduced permanent movement lock. Same fixture in Compatibility exits0 in13.450s with44/0 (native_compatibility/run.json). Focused mandatory runner input38/0 and P01 four suites589/0 pass. Investigate with existing runtime/loading/player ownership and coordinate engine/settings owner if needed; retain successful behavior and both attempts. Acceptance: identify bounded exit/teardown behavior on this weakest laptop, preserve isolated saves, and show Forward+ windowed fixture prints its valid result and terminates without forced timeout; run mandatory relevant runner with complete diagnostics. Full suite remains required by the parent owner tasks.",
-   "reserved_for": "atik",
+   "reserved_for": "sadman",
    "effort": 1,
    "assignment_history": [
     {
@@ -7740,6 +7804,13 @@
      "owner": "",
      "status": "todo",
      "reason": "User-approved implementation batch"
+    },
+    {
+     "date": "2026-11-10",
+     "reserved_for": "atik",
+     "owner": "Atik/codex",
+     "status": "blocked",
+     "reason": "10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif."
     }
    ],
    "integration_paths": [
@@ -8805,7 +8876,7 @@
  "implementation_batch": {
   "id": "2026-11-10-implementation",
   "active": true,
-  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred. User subsequently authorized Ramim to override owners for M1-125 integrated 117-suite repairs, preserving WIP. 10 Nov: Sadman told his own session to do the tasks his blocked tasks need; M4-17 (rover upgrade shape fix and after-Ch4/after-Ch6 pair verification) added to his row. Sadman then approved doing the M1-53 owner request (M1-126).",
+  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred. User subsequently authorized Ramim to override owners for M1-125 integrated 117-suite repairs, preserving WIP. 10 Nov: Sadman told his own session to do the tasks his blocked tasks need; M4-17 (rover upgrade shape fix and after-Ch4/after-Ch6 pair verification) added to his row. Sadman then approved doing the M1-53 owner request (M1-126). 10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif.",
   "priority_order": [
    "ramim",
    "sadman",
@@ -8854,25 +8925,25 @@
     "M3-7U",
     "M3-7M",
     "M4-17",
-    "M1-126"
+    "M1-126",
+    "M1-53",
+    "M1-92",
+    "M1-116",
+    "M3-2U",
+    "M3-3U"
    ],
    "asif": [
     "M1-105",
     "M3-2P",
-    "M3-2U",
     "M3-2M",
     "M1-103",
     "M1-37",
     "M3-3P",
-    "M3-3U",
     "M3-3M",
     "M3-69"
    ],
    "atik": [
-    "M1-68",
-    "M1-53",
-    "M1-92",
-    "M1-116"
+    "M1-68"
    ],
    "tanvir": [
     "M1-122",
