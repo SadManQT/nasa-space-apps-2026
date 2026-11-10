@@ -5595,8 +5595,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Save slots, autosave and versioned save migrations at Steam quality",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Shanto/Antigravity",
    "deps": [
     "M1-54"
    ],
@@ -5628,6 +5628,12 @@
     "game/scripts/ui/save_slots.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-71*"
+   ],
+   "edit_files": [
+    "game/scripts/save/save_service.gd",
+    "game/scripts/save/save_slots.gd",
+    "game/scripts/ui/save_slots.gd",
+    "game/tools/test_save_slots.gd"
    ]
   },
   {
