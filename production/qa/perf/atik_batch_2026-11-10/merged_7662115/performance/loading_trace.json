@@ -1,0 +1,1475 @@
+{
+	"process_id": 48881,
+	"schema": 1,
+	"stage_context": "Original LoadTrace records have names/ms only; stage timestamps and thread IDs are unavailable. Ranges group records appended during each window; nested/background stages are not additive frame costs.",
+	"steps": [
+		{
+			"ms": 69.18700000000001,
+			"step": "worker_decode:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+		},
+		{
+			"ms": 7.609,
+			"step": "worker_mipmaps:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+		},
+		{
+			"ms": 0.882,
+			"step": "glb_generate_scene:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+		},
+		{
+			"ms": 0.146,
+			"step": "glb_pack:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+		},
+		{
+			"ms": 21.089,
+			"step": "worker_decode:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+		},
+		{
+			"ms": 2.106,
+			"step": "worker_mipmaps:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+		},
+		{
+			"ms": 0.153,
+			"step": "glb_generate_scene:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+		},
+		{
+			"ms": 0.108,
+			"step": "glb_pack:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+		},
+		{
+			"ms": 170.414,
+			"step": "worker_content_validation"
+		},
+		{
+			"ms": 0.582,
+			"step": "toon:PR_MissionTable"
+		},
+		{
+			"ms": 0.011,
+			"step": "toon:PR_BatteryJar"
+		},
+		{
+			"ms": 0.009,
+			"step": "toon:PR_SeedPacket"
+		},
+		{
+			"ms": 1.478,
+			"step": "title_stage"
+		},
+		{
+			"ms": 22.264,
+			"step": "title_ui_save_validation"
+		},
+		{
+			"ms": 0.097,
+			"step": "character_instance:res://assets/characters/CH_Kai/CH_Kai.glb"
+		},
+		{
+			"ms": 0.916,
+			"step": "gait_clips:res://assets/characters/CH_Kai/CH_Kai.glb"
+		},
+		{
+			"ms": 2.559,
+			"step": "rig_modifiers:res://assets/characters/CH_Kai/CH_Kai.glb"
+		},
+		{
+			"ms": 0.636,
+			"step": "toon:CH_Kai"
+		},
+		{
+			"ms": 0.516,
+			"step": "face_hair:res://assets/characters/CH_Kai/CH_Kai.glb"
+		},
+		{
+			"ms": 4.924,
+			"step": "cast_rig_setup:kai"
+		},
+		{
+			"ms": 0.133,
+			"step": "character_instance:res://assets/characters/CH_Amara/CH_Amara.glb"
+		},
+		{
+			"ms": 1.031,
+			"step": "gait_clips:res://assets/characters/CH_Amara/CH_Amara.glb"
+		},
+		{
+			"ms": 3.742,
+			"step": "rig_modifiers:res://assets/characters/CH_Amara/CH_Amara.glb"
+		},
+		{
+			"ms": 0.042,
+			"step": "toon:CH_Amara"
+		},
+		{
+			"ms": 0.09,
+			"step": "face_hair:res://assets/characters/CH_Amara/CH_Amara.glb"
+		},
+		{
+			"ms": 5.293,
+			"step": "cast_rig_setup:amara"
+		},
+		{
+			"ms": 0.14,
+			"step": "character_instance:res://assets/characters/CH_Mei/CH_Mei.glb"
+		},
+		{
+			"ms": 1.118,
+			"step": "gait_clips:res://assets/characters/CH_Mei/CH_Mei.glb"
+		},
+		{
+			"ms": 2.888,
+			"step": "rig_modifiers:res://assets/characters/CH_Mei/CH_Mei.glb"
+		},
+		{
+			"ms": 0.049,
+			"step": "toon:CH_Mei"
+		},
+		{
+			"ms": 0.174,
+			"step": "face_hair:res://assets/characters/CH_Mei/CH_Mei.glb"
+		},
+		{
+			"ms": 4.57,
+			"step": "cast_rig_setup:mei"
+		},
+		{
+			"ms": 0.145,
+			"step": "character_instance:res://assets/characters/CH_Rafi/CH_Rafi.glb"
+		},
+		{
+			"ms": 1.276,
+			"step": "gait_clips:res://assets/characters/CH_Rafi/CH_Rafi.glb"
+		},
+		{
+			"ms": 3.736,
+			"step": "rig_modifiers:res://assets/characters/CH_Rafi/CH_Rafi.glb"
+		},
+		{
+			"ms": 0.04,
+			"step": "toon:CH_Rafi"
+		},
+		{
+			"ms": 0.105,
+			"step": "face_hair:res://assets/characters/CH_Rafi/CH_Rafi.glb"
+		},
+		{
+			"ms": 5.5,
+			"step": "cast_rig_setup:rafi"
+		},
+		{
+			"ms": 0.406,
+			"step": "character_instance:res://assets/characters/CH_Ferreira/CH_Ferreira.glb"
+		},
+		{
+			"ms": 2.297,
+			"step": "gait_clips:res://assets/characters/CH_Ferreira/CH_Ferreira.glb"
+		},
+		{
+			"ms": 9.275,
+			"step": "rig_modifiers:res://assets/characters/CH_Ferreira/CH_Ferreira.glb"
+		},
+		{
+			"ms": 0.097,
+			"step": "toon:CH_Ferreira"
+		},
+		{
+			"ms": 0.207,
+			"step": "face_hair:res://assets/characters/CH_Ferreira/CH_Ferreira.glb"
+		},
+		{
+			"ms": 12.774,
+			"step": "cast_rig_setup:ferreira"
+		},
+		{
+			"ms": 15.332999999999998,
+			"step": "worker_decode:res://assets/props/PR_Mug/PR_Mug.glb"
+		},
+		{
+			"ms": 1.881,
+			"step": "worker_mipmaps:res://assets/props/PR_Mug/PR_Mug.glb"
+		},
+		{
+			"ms": 0.196,
+			"step": "glb_generate_scene:res://assets/props/PR_Mug/PR_Mug.glb"
+		},
+		{
+			"ms": 0.128,
+			"step": "glb_pack:res://assets/props/PR_Mug/PR_Mug.glb"
+		},
+		{
+			"ms": 61.53,
+			"step": "worker_decode:res://assets/props/PR_CrewSeat/PR_CrewSeat.glb"
+		},
+		{
+			"ms": 7.209,
+			"step": "worker_mipmaps:res://assets/props/PR_CrewSeat/PR_CrewSeat.glb"
+		},
+		{
+			"ms": 0.753,
+			"step": "glb_generate_scene:res://assets/props/PR_CrewSeat/PR_CrewSeat.glb"
+		},
+		{
+			"ms": 0.145,
+			"step": "glb_pack:res://assets/props/PR_CrewSeat/PR_CrewSeat.glb"
+		},
+		{
+			"ms": 56.221000000000004,
+			"step": "worker_decode:res://assets/props/PR_GrowthChamber/PR_GrowthChamber.glb"
+		},
+		{
+			"ms": 7.501,
+			"step": "worker_mipmaps:res://assets/props/PR_GrowthChamber/PR_GrowthChamber.glb"
+		},
+		{
+			"ms": 1.229,
+			"step": "glb_generate_scene:res://assets/props/PR_GrowthChamber/PR_GrowthChamber.glb"
+		},
+		{
+			"ms": 0.129,
+			"step": "glb_pack:res://assets/props/PR_GrowthChamber/PR_GrowthChamber.glb"
+		},
+		{
+			"ms": 58.87100000000001,
+			"step": "worker_decode:res://assets/props/PR_Glovebox/PR_Glovebox.glb"
+		},
+		{
+			"ms": 7.276,
+			"step": "worker_mipmaps:res://assets/props/PR_Glovebox/PR_Glovebox.glb"
+		},
+		{
+			"ms": 1.105,
+			"step": "glb_generate_scene:res://assets/props/PR_Glovebox/PR_Glovebox.glb"
+		},
+		{
+			"ms": 0.134,
+			"step": "glb_pack:res://assets/props/PR_Glovebox/PR_Glovebox.glb"
+		},
+		{
+			"ms": 52.346,
+			"step": "worker_decode:res://assets/plants/PL_CropRack/PL_CropRack.glb"
+		},
+		{
+			"ms": 7.356,
+			"step": "worker_mipmaps:res://assets/plants/PL_CropRack/PL_CropRack.glb"
+		},
+		{
+			"ms": 1.909,
+			"step": "glb_generate_scene:res://assets/plants/PL_CropRack/PL_CropRack.glb"
+		},
+		{
+			"ms": 0.227,
+			"step": "glb_pack:res://assets/plants/PL_CropRack/PL_CropRack.glb"
+		},
+		{
+			"ms": 56.359,
+			"step": "worker_decode:res://assets/plants/PL_Alo_Bud/PL_Alo_Bud.glb"
+		},
+		{
+			"ms": 6.994,
+			"step": "worker_mipmaps:res://assets/plants/PL_Alo_Bud/PL_Alo_Bud.glb"
+		},
+		{
+			"ms": 0.589,
+			"step": "glb_generate_scene:res://assets/plants/PL_Alo_Bud/PL_Alo_Bud.glb"
+		},
+		{
+			"ms": 0.141,
+			"step": "glb_pack:res://assets/plants/PL_Alo_Bud/PL_Alo_Bud.glb"
+		},
+		{
+			"ms": 60.257,
+			"step": "worker_decode:res://assets/plants/PL_Tara_Bloom/PL_Tara_Bloom.glb"
+		},
+		{
+			"ms": 6.388,
+			"step": "worker_mipmaps:res://assets/plants/PL_Tara_Bloom/PL_Tara_Bloom.glb"
+		},
+		{
+			"ms": 0.656,
+			"step": "glb_generate_scene:res://assets/plants/PL_Tara_Bloom/PL_Tara_Bloom.glb"
+		},
+		{
+			"ms": 0.122,
+			"step": "glb_pack:res://assets/plants/PL_Tara_Bloom/PL_Tara_Bloom.glb"
+		},
+		{
+			"ms": 67.482,
+			"step": "worker_decode:res://assets/plants/PL_Alo_Sprout/PL_Alo_Sprout.glb"
+		},
+		{
+			"ms": 7.638,
+			"step": "worker_mipmaps:res://assets/plants/PL_Alo_Sprout/PL_Alo_Sprout.glb"
+		},
+		{
+			"ms": 0.547,
+			"step": "glb_generate_scene:res://assets/plants/PL_Alo_Sprout/PL_Alo_Sprout.glb"
+		},
+		{
+			"ms": 0.173,
+			"step": "glb_pack:res://assets/plants/PL_Alo_Sprout/PL_Alo_Sprout.glb"
+		},
+		{
+			"ms": 63.974000000000004,
+			"step": "worker_decode:res://assets/plants/PL_Tara_Sprout/PL_Tara_Sprout.glb"
+		},
+		{
+			"ms": 6.938,
+			"step": "worker_mipmaps:res://assets/plants/PL_Tara_Sprout/PL_Tara_Sprout.glb"
+		},
+		{
+			"ms": 0.557,
+			"step": "glb_generate_scene:res://assets/plants/PL_Tara_Sprout/PL_Tara_Sprout.glb"
+		},
+		{
+			"ms": 0.176,
+			"step": "glb_pack:res://assets/plants/PL_Tara_Sprout/PL_Tara_Sprout.glb"
+		},
+		{
+			"ms": 60.091,
+			"step": "worker_decode:res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb"
+		},
+		{
+			"ms": 7.233,
+			"step": "worker_mipmaps:res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb"
+		},
+		{
+			"ms": 0.707,
+			"step": "glb_generate_scene:res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb"
+		},
+		{
+			"ms": 0.108,
+			"step": "glb_pack:res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb"
+		},
+		{
+			"ms": 0.024,
+			"step": "campaign_scene_instance"
+		},
+		{
+			"ms": 2.679,
+			"step": "content_validation"
+		},
+		{
+			"ms": 10.276,
+			"step": "route_profile"
+		},
+		{
+			"ms": 2.283,
+			"step": "room_shell:LOC-01"
+		},
+		{
+			"ms": 3.395,
+			"step": "room_fixtures_doors:LOC-01"
+		},
+		{
+			"ms": 0.847,
+			"step": "room_navigation:LOC-01"
+		},
+		{
+			"ms": 12.527,
+			"step": "room_rebuild"
+		},
+		{
+			"ms": 43.228,
+			"step": "campaign_ui"
+		},
+		{
+			"ms": 60.191,
+			"step": "worker_decode:res://assets/props/PR_WaterWallPanel/PR_WaterWallPanel.glb"
+		},
+		{
+			"ms": 7.428,
+			"step": "worker_mipmaps:res://assets/props/PR_WaterWallPanel/PR_WaterWallPanel.glb"
+		},
+		{
+			"ms": 0.771,
+			"step": "glb_generate_scene:res://assets/props/PR_WaterWallPanel/PR_WaterWallPanel.glb"
+		},
+		{
+			"ms": 0.187,
+			"step": "glb_pack:res://assets/props/PR_WaterWallPanel/PR_WaterWallPanel.glb"
+		},
+		{
+			"ms": 72.096,
+			"step": "worker_decode:res://assets/props/PR_SupplyBundles/PR_SupplyBundles.glb"
+		},
+		{
+			"ms": 6.592,
+			"step": "worker_mipmaps:res://assets/props/PR_SupplyBundles/PR_SupplyBundles.glb"
+		},
+		{
+			"ms": 0.929,
+			"step": "glb_generate_scene:res://assets/props/PR_SupplyBundles/PR_SupplyBundles.glb"
+		},
+		{
+			"ms": 0.066,
+			"step": "glb_pack:res://assets/props/PR_SupplyBundles/PR_SupplyBundles.glb"
+		},
+		{
+			"ms": 56.306000000000004,
+			"step": "worker_decode:res://assets/props/PR_HatchDoor/PR_HatchDoor.glb"
+		},
+		{
+			"ms": 6.754,
+			"step": "worker_mipmaps:res://assets/props/PR_HatchDoor/PR_HatchDoor.glb"
+		},
+		{
+			"ms": 0.955,
+			"step": "glb_generate_scene:res://assets/props/PR_HatchDoor/PR_HatchDoor.glb"
+		},
+		{
+			"ms": 0.058,
+			"step": "glb_pack:res://assets/props/PR_HatchDoor/PR_HatchDoor.glb"
+		},
+		{
+			"ms": 56.454,
+			"step": "worker_decode:res://assets/props/PR_GrowthChamber/PR_GrowthChamber.glb"
+		},
+		{
+			"ms": 5.568,
+			"step": "worker_mipmaps:res://assets/props/PR_GrowthChamber/PR_GrowthChamber.glb"
+		},
+		{
+			"ms": 1.204,
+			"step": "glb_generate_scene:res://assets/props/PR_GrowthChamber/PR_GrowthChamber.glb"
+		},
+		{
+			"ms": 0.151,
+			"step": "glb_pack:res://assets/props/PR_GrowthChamber/PR_GrowthChamber.glb"
+		},
+		{
+			"ms": 56.166,
+			"step": "worker_decode:res://assets/props/PR_Glovebox/PR_Glovebox.glb"
+		},
+		{
+			"ms": 5.466,
+			"step": "worker_mipmaps:res://assets/props/PR_Glovebox/PR_Glovebox.glb"
+		},
+		{
+			"ms": 1.113,
+			"step": "glb_generate_scene:res://assets/props/PR_Glovebox/PR_Glovebox.glb"
+		},
+		{
+			"ms": 0.126,
+			"step": "glb_pack:res://assets/props/PR_Glovebox/PR_Glovebox.glb"
+		},
+		{
+			"ms": 48.364,
+			"step": "worker_decode:res://assets/plants/PL_CropRack/PL_CropRack.glb"
+		},
+		{
+			"ms": 5.554,
+			"step": "worker_mipmaps:res://assets/plants/PL_CropRack/PL_CropRack.glb"
+		},
+		{
+			"ms": 1.844,
+			"step": "glb_generate_scene:res://assets/plants/PL_CropRack/PL_CropRack.glb"
+		},
+		{
+			"ms": 0.117,
+			"step": "glb_pack:res://assets/plants/PL_CropRack/PL_CropRack.glb"
+		},
+		{
+			"ms": 54.845,
+			"step": "worker_decode:res://assets/plants/PL_Alo_Bud/PL_Alo_Bud.glb"
+		},
+		{
+			"ms": 5.445,
+			"step": "worker_mipmaps:res://assets/plants/PL_Alo_Bud/PL_Alo_Bud.glb"
+		},
+		{
+			"ms": 0.527,
+			"step": "glb_generate_scene:res://assets/plants/PL_Alo_Bud/PL_Alo_Bud.glb"
+		},
+		{
+			"ms": 0.127,
+			"step": "glb_pack:res://assets/plants/PL_Alo_Bud/PL_Alo_Bud.glb"
+		},
+		{
+			"ms": 54.757999999999996,
+			"step": "worker_decode:res://assets/plants/PL_Tara_Bloom/PL_Tara_Bloom.glb"
+		},
+		{
+			"ms": 5.472,
+			"step": "worker_mipmaps:res://assets/plants/PL_Tara_Bloom/PL_Tara_Bloom.glb"
+		},
+		{
+			"ms": 0.665,
+			"step": "glb_generate_scene:res://assets/plants/PL_Tara_Bloom/PL_Tara_Bloom.glb"
+		},
+		{
+			"ms": 0.125,
+			"step": "glb_pack:res://assets/plants/PL_Tara_Bloom/PL_Tara_Bloom.glb"
+		},
+		{
+			"ms": 58.388000000000005,
+			"step": "worker_decode:res://assets/plants/PL_Alo_Sprout/PL_Alo_Sprout.glb"
+		},
+		{
+			"ms": 5.619,
+			"step": "worker_mipmaps:res://assets/plants/PL_Alo_Sprout/PL_Alo_Sprout.glb"
+		},
+		{
+			"ms": 0.558,
+			"step": "glb_generate_scene:res://assets/plants/PL_Alo_Sprout/PL_Alo_Sprout.glb"
+		},
+		{
+			"ms": 0.155,
+			"step": "glb_pack:res://assets/plants/PL_Alo_Sprout/PL_Alo_Sprout.glb"
+		},
+		{
+			"ms": 59.423,
+			"step": "worker_decode:res://assets/plants/PL_Tara_Sprout/PL_Tara_Sprout.glb"
+		},
+		{
+			"ms": 5.515,
+			"step": "worker_mipmaps:res://assets/plants/PL_Tara_Sprout/PL_Tara_Sprout.glb"
+		},
+		{
+			"ms": 0.513,
+			"step": "glb_generate_scene:res://assets/plants/PL_Tara_Sprout/PL_Tara_Sprout.glb"
+		},
+		{
+			"ms": 0.193,
+			"step": "glb_pack:res://assets/plants/PL_Tara_Sprout/PL_Tara_Sprout.glb"
+		},
+		{
+			"ms": 4.946,
+			"step": "worker_decode:res://assets/props/narrative/PR_LabelHolder.glb"
+		},
+		{
+			"ms": 0.322,
+			"step": "worker_mipmaps:res://assets/props/narrative/PR_LabelHolder.glb"
+		},
+		{
+			"ms": 0.142,
+			"step": "glb_generate_scene:res://assets/props/narrative/PR_LabelHolder.glb"
+		},
+		{
+			"ms": 0.142,
+			"step": "glb_pack:res://assets/props/narrative/PR_LabelHolder.glb"
+		},
+		{
+			"ms": 0.825,
+			"step": "room_shell:LOC-03"
+		},
+		{
+			"ms": 1.545,
+			"step": "room_fixtures_doors:LOC-03"
+		},
+		{
+			"ms": 0.328,
+			"step": "room_navigation:LOC-03"
+		},
+		{
+			"ms": 8.499,
+			"step": "room_rebuild"
+		},
+		{
+			"ms": 63.913000000000004,
+			"step": "worker_decode:res://assets/props/PR_PowerPanel/PR_PowerPanel.glb"
+		},
+		{
+			"ms": 6.287,
+			"step": "worker_mipmaps:res://assets/props/PR_PowerPanel/PR_PowerPanel.glb"
+		},
+		{
+			"ms": 1.082,
+			"step": "glb_generate_scene:res://assets/props/PR_PowerPanel/PR_PowerPanel.glb"
+		},
+		{
+			"ms": 0.175,
+			"step": "glb_pack:res://assets/props/PR_PowerPanel/PR_PowerPanel.glb"
+		},
+		{
+			"ms": 67.502,
+			"step": "worker_decode:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+		},
+		{
+			"ms": 6.827,
+			"step": "worker_mipmaps:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+		},
+		{
+			"ms": 0.877,
+			"step": "glb_generate_scene:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+		},
+		{
+			"ms": 0.12,
+			"step": "glb_pack:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+		},
+		{
+			"ms": 54.776,
+			"step": "worker_decode:res://assets/props/PR_OxygenUnit/PR_OxygenUnit.glb"
+		},
+		{
+			"ms": 6.699,
+			"step": "worker_mipmaps:res://assets/props/PR_OxygenUnit/PR_OxygenUnit.glb"
+		},
+		{
+			"ms": 1.526,
+			"step": "glb_generate_scene:res://assets/props/PR_OxygenUnit/PR_OxygenUnit.glb"
+		},
+		{
+			"ms": 0.086,
+			"step": "glb_pack:res://assets/props/PR_OxygenUnit/PR_OxygenUnit.glb"
+		},
+		{
+			"ms": 63.197,
+			"step": "worker_decode:res://assets/props/PR_ControlConsole/PR_ControlConsole.glb"
+		},
+		{
+			"ms": 6.265,
+			"step": "worker_mipmaps:res://assets/props/PR_ControlConsole/PR_ControlConsole.glb"
+		},
+		{
+			"ms": 1.413,
+			"step": "glb_generate_scene:res://assets/props/PR_ControlConsole/PR_ControlConsole.glb"
+		},
+		{
+			"ms": 0.13,
+			"step": "glb_pack:res://assets/props/PR_ControlConsole/PR_ControlConsole.glb"
+		},
+		{
+			"ms": 19.182,
+			"step": "worker_decode:res://assets/props/PR_WaterValve/PR_WaterValve.glb"
+		},
+		{
+			"ms": 1.25,
+			"step": "worker_mipmaps:res://assets/props/PR_WaterValve/PR_WaterValve.glb"
+		},
+		{
+			"ms": 0.977,
+			"step": "glb_generate_scene:res://assets/props/PR_WaterValve/PR_WaterValve.glb"
+		},
+		{
+			"ms": 0.096,
+			"step": "glb_pack:res://assets/props/PR_WaterValve/PR_WaterValve.glb"
+		},
+		{
+			"ms": 20.270000000000003,
+			"step": "worker_decode:res://assets/props/PR_HandLight/PR_HandLight.glb"
+		},
+		{
+			"ms": 1.49,
+			"step": "worker_mipmaps:res://assets/props/PR_HandLight/PR_HandLight.glb"
+		},
+		{
+			"ms": 0.246,
+			"step": "glb_generate_scene:res://assets/props/PR_HandLight/PR_HandLight.glb"
+		},
+		{
+			"ms": 0.094,
+			"step": "glb_pack:res://assets/props/PR_HandLight/PR_HandLight.glb"
+		},
+		{
+			"ms": 17.635,
+			"step": "worker_decode:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb"
+		},
+		{
+			"ms": 1.682,
+			"step": "worker_mipmaps:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb"
+		},
+		{
+			"ms": 0.203,
+			"step": "glb_generate_scene:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb"
+		},
+		{
+			"ms": 0.098,
+			"step": "glb_pack:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb"
+		},
+		{
+			"ms": 19.086,
+			"step": "worker_decode:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb"
+		},
+		{
+			"ms": 1.797,
+			"step": "worker_mipmaps:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb"
+		},
+		{
+			"ms": 0.23,
+			"step": "glb_generate_scene:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb"
+		},
+		{
+			"ms": 0.076,
+			"step": "glb_pack:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb"
+		},
+		{
+			"ms": 48.517,
+			"step": "worker_decode:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb"
+		},
+		{
+			"ms": 0.0,
+			"step": "worker_mipmaps:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb"
+		},
+		{
+			"ms": 0.133,
+			"step": "glb_generate_scene:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb"
+		},
+		{
+			"ms": 0.188,
+			"step": "glb_pack:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb"
+		},
+		{
+			"ms": 42.193,
+			"step": "worker_decode:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb"
+		},
+		{
+			"ms": 0.0,
+			"step": "worker_mipmaps:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb"
+		},
+		{
+			"ms": 0.703,
+			"step": "glb_generate_scene:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb"
+		},
+		{
+			"ms": 0.601,
+			"step": "glb_pack:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb"
+		},
+		{
+			"ms": 60.317,
+			"step": "worker_decode:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb"
+		},
+		{
+			"ms": 0.0,
+			"step": "worker_mipmaps:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb"
+		},
+		{
+			"ms": 2.666,
+			"step": "glb_generate_scene:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb"
+		},
+		{
+			"ms": 3.386,
+			"step": "glb_pack:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb"
+		},
+		{
+			"ms": 2.304,
+			"step": "room_shell:LOC-02"
+		},
+		{
+			"ms": 2.499,
+			"step": "room_fixtures_doors:LOC-02"
+		},
+		{
+			"ms": 0.625,
+			"step": "room_navigation:LOC-02"
+		},
+		{
+			"ms": 17.829,
+			"step": "room_rebuild"
+		},
+		{
+			"ms": 24.933,
+			"step": "worker_decode:res://assets/props/narrative/PR_Mug_Named.glb"
+		},
+		{
+			"ms": 3.09,
+			"step": "worker_mipmaps:res://assets/props/narrative/PR_Mug_Named.glb"
+		},
+		{
+			"ms": 0.205,
+			"step": "glb_generate_scene:res://assets/props/narrative/PR_Mug_Named.glb"
+		},
+		{
+			"ms": 0.25,
+			"step": "glb_pack:res://assets/props/narrative/PR_Mug_Named.glb"
+		},
+		{
+			"ms": 12.74,
+			"step": "worker_decode:res://assets/props/PR_Records2034/PR_Records2034.glb"
+		},
+		{
+			"ms": 2.017,
+			"step": "worker_mipmaps:res://assets/props/PR_Records2034/PR_Records2034.glb"
+		},
+		{
+			"ms": 0.221,
+			"step": "glb_generate_scene:res://assets/props/PR_Records2034/PR_Records2034.glb"
+		},
+		{
+			"ms": 0.136,
+			"step": "glb_pack:res://assets/props/PR_Records2034/PR_Records2034.glb"
+		},
+		{
+			"ms": 73.543,
+			"step": "worker_decode:res://assets/plants/PL_ZeroSeedlingTray/PL_ZeroSeedlingTray.glb"
+		},
+		{
+			"ms": 7.047,
+			"step": "worker_mipmaps:res://assets/plants/PL_ZeroSeedlingTray/PL_ZeroSeedlingTray.glb"
+		},
+		{
+			"ms": 0.667,
+			"step": "glb_generate_scene:res://assets/plants/PL_ZeroSeedlingTray/PL_ZeroSeedlingTray.glb"
+		},
+		{
+			"ms": 0.069,
+			"step": "glb_pack:res://assets/plants/PL_ZeroSeedlingTray/PL_ZeroSeedlingTray.glb"
+		},
+		{
+			"ms": 9.395999999999999,
+			"step": "worker_decode:res://assets/props/narrative/PR_DrawerLidNote.glb"
+		},
+		{
+			"ms": 1.666,
+			"step": "worker_mipmaps:res://assets/props/narrative/PR_DrawerLidNote.glb"
+		},
+		{
+			"ms": 0.035,
+			"step": "glb_generate_scene:res://assets/props/narrative/PR_DrawerLidNote.glb"
+		},
+		{
+			"ms": 0.102,
+			"step": "glb_pack:res://assets/props/narrative/PR_DrawerLidNote.glb"
+		},
+		{
+			"ms": 58.743,
+			"step": "worker_decode:res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb"
+		},
+		{
+			"ms": 6.195,
+			"step": "worker_mipmaps:res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb"
+		},
+		{
+			"ms": 0.65,
+			"step": "glb_generate_scene:res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb"
+		},
+		{
+			"ms": 0.126,
+			"step": "glb_pack:res://assets/plants/PL_Alo_Bloom/PL_Alo_Bloom.glb"
+		},
+		{
+			"ms": 124.19999999999999,
+			"step": "worker_decode:res://assets/plants/PL_Descendants/PL_Descendants.glb"
+		},
+		{
+			"ms": 13.441,
+			"step": "worker_mipmaps:res://assets/plants/PL_Descendants/PL_Descendants.glb"
+		},
+		{
+			"ms": 2.693,
+			"step": "glb_generate_scene:res://assets/plants/PL_Descendants/PL_Descendants.glb"
+		},
+		{
+			"ms": 0.497,
+			"step": "glb_pack:res://assets/plants/PL_Descendants/PL_Descendants.glb"
+		},
+		{
+			"ms": 6.594,
+			"step": "worker_decode:res://assets/props/PR_PressedPetal_Mounted/PR_PressedPetal_Mounted.glb"
+		},
+		{
+			"ms": 0.233,
+			"step": "worker_mipmaps:res://assets/props/PR_PressedPetal_Mounted/PR_PressedPetal_Mounted.glb"
+		},
+		{
+			"ms": 0.066,
+			"step": "glb_generate_scene:res://assets/props/PR_PressedPetal_Mounted/PR_PressedPetal_Mounted.glb"
+		},
+		{
+			"ms": 0.155,
+			"step": "glb_pack:res://assets/props/PR_PressedPetal_Mounted/PR_PressedPetal_Mounted.glb"
+		},
+		{
+			"ms": 18.378,
+			"step": "worker_decode:res://assets/props/narrative/PR_WorkingStockEnvelope.glb"
+		},
+		{
+			"ms": 1.896,
+			"step": "worker_mipmaps:res://assets/props/narrative/PR_WorkingStockEnvelope.glb"
+		},
+		{
+			"ms": 0.067,
+			"step": "glb_generate_scene:res://assets/props/narrative/PR_WorkingStockEnvelope.glb"
+		},
+		{
+			"ms": 0.103,
+			"step": "glb_pack:res://assets/props/narrative/PR_WorkingStockEnvelope.glb"
+		},
+		{
+			"ms": 62.295,
+			"step": "worker_decode:res://assets/plants/PL_Tara_Dry/PL_Tara_Dry.glb"
+		},
+		{
+			"ms": 5.334,
+			"step": "worker_mipmaps:res://assets/plants/PL_Tara_Dry/PL_Tara_Dry.glb"
+		},
+		{
+			"ms": 0.589,
+			"step": "glb_generate_scene:res://assets/plants/PL_Tara_Dry/PL_Tara_Dry.glb"
+		},
+		{
+			"ms": 0.123,
+			"step": "glb_pack:res://assets/plants/PL_Tara_Dry/PL_Tara_Dry.glb"
+		},
+		{
+			"ms": 0.729,
+			"step": "room_shell:LOC-03"
+		},
+		{
+			"ms": 1.138,
+			"step": "room_fixtures_doors:LOC-03"
+		},
+		{
+			"ms": 0.311,
+			"step": "room_navigation:LOC-03"
+		},
+		{
+			"ms": 16.073,
+			"step": "room_rebuild"
+		},
+		{
+			"ms": 5.803999999999999,
+			"step": "worker_decode:res://assets/props/PR_SeedTray/PR_SeedTray.glb"
+		},
+		{
+			"ms": 0.123,
+			"step": "worker_mipmaps:res://assets/props/PR_SeedTray/PR_SeedTray.glb"
+		},
+		{
+			"ms": 0.088,
+			"step": "glb_generate_scene:res://assets/props/PR_SeedTray/PR_SeedTray.glb"
+		},
+		{
+			"ms": 0.128,
+			"step": "glb_pack:res://assets/props/PR_SeedTray/PR_SeedTray.glb"
+		},
+		{
+			"ms": 6.077999999999999,
+			"step": "worker_decode:res://assets/props/PR_PressedPetal/PR_PressedPetal.glb"
+		},
+		{
+			"ms": 0.187,
+			"step": "worker_mipmaps:res://assets/props/PR_PressedPetal/PR_PressedPetal.glb"
+		},
+		{
+			"ms": 0.09,
+			"step": "glb_generate_scene:res://assets/props/PR_PressedPetal/PR_PressedPetal.glb"
+		},
+		{
+			"ms": 0.087,
+			"step": "glb_pack:res://assets/props/PR_PressedPetal/PR_PressedPetal.glb"
+		},
+		{
+			"ms": 61.477000000000004,
+			"step": "worker_decode:res://assets/plants/PL_Alo_Senescent/PL_Alo_Senescent.glb"
+		},
+		{
+			"ms": 4.869,
+			"step": "worker_mipmaps:res://assets/plants/PL_Alo_Senescent/PL_Alo_Senescent.glb"
+		},
+		{
+			"ms": 0.651,
+			"step": "glb_generate_scene:res://assets/plants/PL_Alo_Senescent/PL_Alo_Senescent.glb"
+		},
+		{
+			"ms": 0.071,
+			"step": "glb_pack:res://assets/plants/PL_Alo_Senescent/PL_Alo_Senescent.glb"
+		},
+		{
+			"ms": 58.292,
+			"step": "worker_decode:res://assets/plants/PL_Alo_Dry/PL_Alo_Dry.glb"
+		},
+		{
+			"ms": 5.326,
+			"step": "worker_mipmaps:res://assets/plants/PL_Alo_Dry/PL_Alo_Dry.glb"
+		},
+		{
+			"ms": 0.635,
+			"step": "glb_generate_scene:res://assets/plants/PL_Alo_Dry/PL_Alo_Dry.glb"
+		},
+		{
+			"ms": 0.111,
+			"step": "glb_pack:res://assets/plants/PL_Alo_Dry/PL_Alo_Dry.glb"
+		},
+		{
+			"ms": 13.899999999999999,
+			"step": "worker_decode:res://assets/props/PR_Mug/PR_Mug.glb"
+		},
+		{
+			"ms": 1.678,
+			"step": "worker_mipmaps:res://assets/props/PR_Mug/PR_Mug.glb"
+		},
+		{
+			"ms": 0.131,
+			"step": "glb_generate_scene:res://assets/props/PR_Mug/PR_Mug.glb"
+		},
+		{
+			"ms": 0.061,
+			"step": "glb_pack:res://assets/props/PR_Mug/PR_Mug.glb"
+		},
+		{
+			"ms": 61.693,
+			"step": "worker_decode:res://assets/plants/PL_Alo_PodsGreen/PL_Alo_PodsGreen.glb"
+		},
+		{
+			"ms": 5.435,
+			"step": "worker_mipmaps:res://assets/plants/PL_Alo_PodsGreen/PL_Alo_PodsGreen.glb"
+		},
+		{
+			"ms": 0.598,
+			"step": "glb_generate_scene:res://assets/plants/PL_Alo_PodsGreen/PL_Alo_PodsGreen.glb"
+		},
+		{
+			"ms": 0.085,
+			"step": "glb_pack:res://assets/plants/PL_Alo_PodsGreen/PL_Alo_PodsGreen.glb"
+		},
+		{
+			"ms": 60.895,
+			"step": "worker_decode:res://assets/plants/PL_Tara_Pods/PL_Tara_Pods.glb"
+		},
+		{
+			"ms": 5.347,
+			"step": "worker_mipmaps:res://assets/plants/PL_Tara_Pods/PL_Tara_Pods.glb"
+		},
+		{
+			"ms": 0.593,
+			"step": "glb_generate_scene:res://assets/plants/PL_Tara_Pods/PL_Tara_Pods.glb"
+		},
+		{
+			"ms": 0.117,
+			"step": "glb_pack:res://assets/plants/PL_Tara_Pods/PL_Tara_Pods.glb"
+		},
+		{
+			"ms": 60.458000000000006,
+			"step": "worker_decode:res://assets/plants/PL_Tara_Senescent/PL_Tara_Senescent.glb"
+		},
+		{
+			"ms": 5.376,
+			"step": "worker_mipmaps:res://assets/plants/PL_Tara_Senescent/PL_Tara_Senescent.glb"
+		},
+		{
+			"ms": 0.63,
+			"step": "glb_generate_scene:res://assets/plants/PL_Tara_Senescent/PL_Tara_Senescent.glb"
+		},
+		{
+			"ms": 0.053,
+			"step": "glb_pack:res://assets/plants/PL_Tara_Senescent/PL_Tara_Senescent.glb"
+		},
+		{
+			"ms": 62.237,
+			"step": "worker_decode:res://assets/props/PR_VaultCase/PR_VaultCase.glb"
+		},
+		{
+			"ms": 0.0,
+			"step": "worker_mipmaps:res://assets/props/PR_VaultCase/PR_VaultCase.glb"
+		},
+		{
+			"ms": 0.271,
+			"step": "glb_generate_scene:res://assets/props/PR_VaultCase/PR_VaultCase.glb"
+		},
+		{
+			"ms": 0.238,
+			"step": "glb_pack:res://assets/props/PR_VaultCase/PR_VaultCase.glb"
+		},
+		{
+			"ms": 41.6,
+			"step": "worker_decode:res://assets/environment/EN_ColdTrap/EN_ColdTrap_SurveyMarker2034_LOD0.glb"
+		},
+		{
+			"ms": 0.0,
+			"step": "worker_mipmaps:res://assets/environment/EN_ColdTrap/EN_ColdTrap_SurveyMarker2034_LOD0.glb"
+		},
+		{
+			"ms": 0.081,
+			"step": "glb_generate_scene:res://assets/environment/EN_ColdTrap/EN_ColdTrap_SurveyMarker2034_LOD0.glb"
+		},
+		{
+			"ms": 0.155,
+			"step": "glb_pack:res://assets/environment/EN_ColdTrap/EN_ColdTrap_SurveyMarker2034_LOD0.glb"
+		},
+		{
+			"ms": 48.853,
+			"step": "worker_decode:res://assets/environment/EN_ColdTrap/EN_ColdTrap_TetherAnchor_LOD0.glb"
+		},
+		{
+			"ms": 0.0,
+			"step": "worker_mipmaps:res://assets/environment/EN_ColdTrap/EN_ColdTrap_TetherAnchor_LOD0.glb"
+		},
+		{
+			"ms": 0.361,
+			"step": "glb_generate_scene:res://assets/environment/EN_ColdTrap/EN_ColdTrap_TetherAnchor_LOD0.glb"
+		},
+		{
+			"ms": 0.538,
+			"step": "glb_pack:res://assets/environment/EN_ColdTrap/EN_ColdTrap_TetherAnchor_LOD0.glb"
+		},
+		{
+			"ms": 69.133,
+			"step": "worker_decode:res://assets/props/PR_VaultCarrier/PR_VaultCarrier.glb"
+		},
+		{
+			"ms": 0.0,
+			"step": "worker_mipmaps:res://assets/props/PR_VaultCarrier/PR_VaultCarrier.glb"
+		},
+		{
+			"ms": 0.457,
+			"step": "glb_generate_scene:res://assets/props/PR_VaultCarrier/PR_VaultCarrier.glb"
+		},
+		{
+			"ms": 0.455,
+			"step": "glb_pack:res://assets/props/PR_VaultCarrier/PR_VaultCarrier.glb"
+		},
+		{
+			"ms": 50.064,
+			"step": "worker_decode:res://assets/props/PR_VaultProbe/PR_VaultProbe.glb"
+		},
+		{
+			"ms": 0.0,
+			"step": "worker_mipmaps:res://assets/props/PR_VaultProbe/PR_VaultProbe.glb"
+		},
+		{
+			"ms": 0.447,
+			"step": "glb_generate_scene:res://assets/props/PR_VaultProbe/PR_VaultProbe.glb"
+		},
+		{
+			"ms": 0.547,
+			"step": "glb_pack:res://assets/props/PR_VaultProbe/PR_VaultProbe.glb"
+		},
+		{
+			"ms": 42.392,
+			"step": "worker_decode:res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD0.glb"
+		},
+		{
+			"ms": 0.0,
+			"step": "worker_mipmaps:res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD0.glb"
+		},
+		{
+			"ms": 0.352,
+			"step": "glb_generate_scene:res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD0.glb"
+		},
+		{
+			"ms": 0.507,
+			"step": "glb_pack:res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD0.glb"
+		},
+		{
+			"ms": 36.748,
+			"step": "worker_decode:res://assets/props/PR_SampleHolder/PR_SampleHolder.glb"
+		},
+		{
+			"ms": 2.487,
+			"step": "worker_mipmaps:res://assets/props/PR_SampleHolder/PR_SampleHolder.glb"
+		},
+		{
+			"ms": 0.227,
+			"step": "glb_generate_scene:res://assets/props/PR_SampleHolder/PR_SampleHolder.glb"
+		},
+		{
+			"ms": 0.088,
+			"step": "glb_pack:res://assets/props/PR_SampleHolder/PR_SampleHolder.glb"
+		},
+		{
+			"ms": 79.799,
+			"step": "worker_decode:res://assets/vehicles/VH_Rover/VH_Rover.glb"
+		},
+		{
+			"ms": 5.014,
+			"step": "worker_mipmaps:res://assets/vehicles/VH_Rover/VH_Rover.glb"
+		},
+		{
+			"ms": 1.767,
+			"step": "glb_generate_scene:res://assets/vehicles/VH_Rover/VH_Rover.glb"
+		},
+		{
+			"ms": 0.137,
+			"step": "glb_pack:res://assets/vehicles/VH_Rover/VH_Rover.glb"
+		},
+		{
+			"ms": 17.298,
+			"step": "worker_decode:res://assets/props/PR_HandLight/PR_HandLight.glb"
+		},
+		{
+			"ms": 1.556,
+			"step": "worker_mipmaps:res://assets/props/PR_HandLight/PR_HandLight.glb"
+		},
+		{
+			"ms": 0.253,
+			"step": "glb_generate_scene:res://assets/props/PR_HandLight/PR_HandLight.glb"
+		},
+		{
+			"ms": 0.101,
+			"step": "glb_pack:res://assets/props/PR_HandLight/PR_HandLight.glb"
+		},
+		{
+			"ms": 29.456000000000003,
+			"step": "worker_decode:res://assets/props/PR_Helmet_Roles/PR_Helmet_Roles.glb"
+		},
+		{
+			"ms": 2.604,
+			"step": "worker_mipmaps:res://assets/props/PR_Helmet_Roles/PR_Helmet_Roles.glb"
+		},
+		{
+			"ms": 0.79,
+			"step": "glb_generate_scene:res://assets/props/PR_Helmet_Roles/PR_Helmet_Roles.glb"
+		},
+		{
+			"ms": 0.194,
+			"step": "glb_pack:res://assets/props/PR_Helmet_Roles/PR_Helmet_Roles.glb"
+		},
+		{
+			"ms": 431.696,
+			"step": "worker_decode:res://assets/characters/CH_Rafi_EVA/CH_Rafi_EVA.glb"
+		},
+		{
+			"ms": 33.422,
+			"step": "worker_mipmaps:res://assets/characters/CH_Rafi_EVA/CH_Rafi_EVA.glb"
+		},
+		{
+			"ms": 5.818,
+			"step": "glb_generate_scene:res://assets/characters/CH_Rafi_EVA/CH_Rafi_EVA.glb"
+		},
+		{
+			"ms": 0.653,
+			"step": "glb_pack:res://assets/characters/CH_Rafi_EVA/CH_Rafi_EVA.glb"
+		},
+		{
+			"ms": 90.474,
+			"step": "worker_gait_clips:res://assets/characters/CH_Rafi_EVA/CH_Rafi_EVA.glb"
+		},
+		{
+			"ms": 0.104,
+			"step": "character_instance:res://assets/characters/CH_Rafi_EVA/CH_Rafi_EVA.glb"
+		},
+		{
+			"ms": 0.933,
+			"step": "gait_clips:res://assets/characters/CH_Rafi_EVA/CH_Rafi_EVA.glb"
+		},
+		{
+			"ms": 2.743,
+			"step": "rig_modifiers:res://assets/characters/CH_Rafi_EVA/CH_Rafi_EVA.glb"
+		},
+		{
+			"ms": 0.048,
+			"step": "toon:CH_Rafi_EVA"
+		},
+		{
+			"ms": 0.103,
+			"step": "face_hair:res://assets/characters/CH_Rafi_EVA/CH_Rafi_EVA.glb"
+		},
+		{
+			"ms": 5.139,
+			"step": "cast_rig_setup:rafi_eva"
+		},
+		{
+			"ms": 401.638,
+			"step": "worker_decode:res://assets/characters/CH_Kai_EVA/CH_Kai_EVA.glb"
+		},
+		{
+			"ms": 33.536,
+			"step": "worker_mipmaps:res://assets/characters/CH_Kai_EVA/CH_Kai_EVA.glb"
+		},
+		{
+			"ms": 5.674,
+			"step": "glb_generate_scene:res://assets/characters/CH_Kai_EVA/CH_Kai_EVA.glb"
+		},
+		{
+			"ms": 0.615,
+			"step": "glb_pack:res://assets/characters/CH_Kai_EVA/CH_Kai_EVA.glb"
+		},
+		{
+			"ms": 87.537,
+			"step": "worker_gait_clips:res://assets/characters/CH_Kai_EVA/CH_Kai_EVA.glb"
+		},
+		{
+			"ms": 0.102,
+			"step": "character_instance:res://assets/characters/CH_Kai_EVA/CH_Kai_EVA.glb"
+		},
+		{
+			"ms": 0.865,
+			"step": "gait_clips:res://assets/characters/CH_Kai_EVA/CH_Kai_EVA.glb"
+		},
+		{
+			"ms": 2.725,
+			"step": "rig_modifiers:res://assets/characters/CH_Kai_EVA/CH_Kai_EVA.glb"
+		},
+		{
+			"ms": 0.037,
+			"step": "toon:CH_Kai_EVA"
+		},
+		{
+			"ms": 0.08,
+			"step": "face_hair:res://assets/characters/CH_Kai_EVA/CH_Kai_EVA.glb"
+		},
+		{
+			"ms": 4.06,
+			"step": "cast_rig_setup:kai_eva"
+		},
+		{
+			"ms": 0.001,
+			"step": "room_shell:LOC-10"
+		},
+		{
+			"ms": 2.556,
+			"step": "room_fixtures_doors:LOC-10"
+		},
+		{
+			"ms": 0.0,
+			"step": "room_navigation:LOC-10"
+		},
+		{
+			"ms": 4.265,
+			"step": "room_rebuild"
+		}
+	],
+	"window_clock": "Time.get_ticks_usec; process-relative",
+	"window_context": "SceneTree main-thread heartbeat",
+	"windows": [
+		{
+			"end_step": 0,
+			"end_usec": 1296079,
+			"first_step": 0,
+			"frames": 70,
+			"label": "Kai raw load",
+			"max_interval_ms": 8.084,
+			"start_usec": 831795,
+			"trace_enabled": false
+		},
+		{
+			"end_step": 0,
+			"end_usec": 1758589,
+			"first_step": 0,
+			"frames": 13,
+			"label": "Kai gait worker",
+			"max_interval_ms": 8.608,
+			"start_usec": 1681165,
+			"trace_enabled": false
+		},
+		{
+			"end_step": 0,
+			"end_usec": 2233365,
+			"first_step": 0,
+			"frames": 69,
+			"label": "Amara raw load",
+			"max_interval_ms": 8.266,
+			"start_usec": 1759091,
+			"trace_enabled": false
+		},
+		{
+			"end_step": 0,
+			"end_usec": 2704464,
+			"first_step": 0,
+			"frames": 13,
+			"label": "Amara gait worker",
+			"max_interval_ms": 8.607,
+			"start_usec": 2627039,
+			"trace_enabled": false
+		},
+		{
+			"end_step": 0,
+			"end_usec": 3089627,
+			"first_step": 0,
+			"frames": 56,
+			"label": "Mei raw load",
+			"max_interval_ms": 7.957,
+			"start_usec": 2704977,
+			"trace_enabled": false
+		},
+		{
+			"end_step": 0,
+			"end_usec": 3468302,
+			"first_step": 0,
+			"frames": 12,
+			"label": "Mei gait worker",
+			"max_interval_ms": 8.61,
+			"start_usec": 3397769,
+			"trace_enabled": false
+		},
+		{
+			"end_step": 0,
+			"end_usec": 3943180,
+			"first_step": 0,
+			"frames": 69,
+			"label": "Rafi raw load",
+			"max_interval_ms": 8.191,
+			"start_usec": 3468799,
+			"trace_enabled": false
+		},
+		{
+			"end_step": 0,
+			"end_usec": 4424998,
+			"first_step": 0,
+			"frames": 14,
+			"label": "Rafi gait worker",
+			"max_interval_ms": 8.606,
+			"start_usec": 4340650,
+			"trace_enabled": false
+		},
+		{
+			"end_step": 0,
+			"end_usec": 4892997,
+			"first_step": 0,
+			"frames": 68,
+			"label": "Ferreira raw load",
+			"max_interval_ms": 8.222,
+			"start_usec": 4425524,
+			"trace_enabled": false
+		},
+		{
+			"end_step": 0,
+			"end_usec": 5359157,
+			"first_step": 0,
+			"frames": 13,
+			"label": "Ferreira gait worker",
+			"max_interval_ms": 8.61,
+			"start_usec": 5281725,
+			"trace_enabled": false
+		},
+		{
+			"end_step": 0,
+			"end_usec": 5455757,
+			"first_step": 0,
+			"frames": 14,
+			"label": "PR_MissionTable raw load",
+			"max_interval_ms": 7.144,
+			"start_usec": 5359643,
+			"trace_enabled": false
+		},
+		{
+			"end_step": 14,
+			"end_usec": 10673173,
+			"first_step": 0,
+			"frames": 54,
+			"label": "production title",
+			"max_interval_ms": 27.013,
+			"start_usec": 10285536,
+			"trace_enabled": true
+		},
+		{
+			"end_step": 92,
+			"end_usec": 12156802,
+			"first_step": 14,
+			"frames": 204,
+			"label": "production new campaign",
+			"max_interval_ms": 41.101,
+			"start_usec": 10673187,
+			"trace_enabled": true
+		},
+		{
+			"end_step": 140,
+			"end_usec": 13304974,
+			"first_step": 104,
+			"frames": 119,
+			"label": "production garden entry",
+			"max_interval_ms": 24.903,
+			"start_usec": 12473827,
+			"trace_enabled": true
+		},
+		{
+			"end_step": 188,
+			"end_usec": 14364780,
+			"first_step": 140,
+			"frames": 146,
+			"label": "production full cast entry",
+			"max_interval_ms": 29.884,
+			"start_usec": 13306316,
+			"trace_enabled": true
+		},
+		{
+			"end_step": 326,
+			"end_usec": 18395660,
+			"first_step": 260,
+			"frames": 378,
+			"label": "production terrain exterior entry",
+			"max_interval_ms": 30.138,
+			"start_usec": 15738664,
+			"trace_enabled": true
+		}
+	]
+}

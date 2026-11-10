@@ -1,0 +1,12 @@
+{
+  "source_commit": "63e40e76bd93c0c2dee397591be5adc88612641c",
+  "source_sha256": {
+    "game/scripts/loading/load_preparation.gd": "2a7544659417119b9e4e781fae784fb128d061a032acd59da534c31699f4f374",
+    "game/scripts/campaign/chapter1_campaign.gd": "be699f02f09d9a6ac07ea63bf6bf1b69d100373e0dd46172a453ae2707849eb9",
+    "game/scripts/ui/chapter1_campaign_hud.gd": "c9b8e277d06a3e13b76e46c7d0127eff31734a84ecbb05f787243526c01303db",
+    "game/tools/test_p01_inputs.gd": "c19f3c242e4842a5458261dae075ae5f9138472445a1cae70329fb79703ba669",
+    "game/tools/test_loading.gd": "39e6843854e42f9c6770af266519547055d9ba70a57e22ee767e3c2e37fa06b1",
+    "game/tools/test_performance_runtime.gd": "c20451ab149c52e92c776ac7fb53c18f53811165baf8d4dfb22e423c58f14a89"
+  },
+  "note": "Post-merge focused paths only. No integrated full pass claimed."
+}

@@ -49,7 +49,7 @@ The later successful P01 baseline correction is in `focused_p01_refreshed/`.
 
 Team commit56cd30a subsequently added/integrated Chapter8 code and two more suite
 files; it was merged without discarding either person's work. **No complete
-95-suite result is claimed.** Current-source focused validation after that merge:
+95-suite result is claimed.** Focused validation at that56cd30a checkpoint:
 
 | Check | Result | Evidence |
 |---|---|---|
@@ -95,3 +95,20 @@ the Arc native exit command. The new native collector refuses existing evidence
 folders and treats timeout/nonzero exit as failure even after a valid PASS marker.
 All native fixtures use isolated saves. No manual QA, video, release packaging,
 asset generation, credits or new tasks outside Atik's list were performed.
+
+
+## Later saved-work merge and final smoke checks
+
+Frozen checkpointd1f9a7a is published on `work/atik-loading-20261110`.
+Fourteen subsequent team commits through7662115 were merged in63e40e7. Both
+handbook entries were retained, and the P01 fixture retains the new physical
+probe-transfer setup together with its normal HUD refresh. Teammates' source,
+board updates and evidence were preserved.
+
+Post-merge mandatory focused runs pass: **P01 inputs319/0**, **loading29/0**,
+and **performance582/0**. All three process exits are0; complete setup/runner/suite
+logs, retained timing trace and exact source hashes are in `merged_7662115/`.
+The extra P01 checks come from the team's newly integrated calibration job.
+These are scoped smoke checks, not a fresh integrated full run of the expanding
+team source. The earlier full86/89 and its separate successful follow-ups remain
+reported at their original revisions. No task is marked Done.
