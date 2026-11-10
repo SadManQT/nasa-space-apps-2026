@@ -44,7 +44,7 @@ const UPGRADE_PAIRS := {
 		"title": "After Chapter 4 · Into the Cold Trap",
 		"story_bridge": "The cold-trap vault is home and twelve seeds are safe in the annex.",
 		"A": {"id": "ice_harvester", "label": "Cold-trap ice harvester", "summary": "+2 dedicated shelter water without borrowing garden water.", "before": "Separate shelter water: 0", "after": "Separate shelter water: +2"},
-		"B": {"id": "rover_lights_heater", "label": "Rover lamps & cabin heater", "summary": "Warm cab readout and clearer dark-slope visibility on traverses.", "before": "Standard rover headlamps", "after": "High-beam lamps & heated cab"},
+		"B": {"id": "rover_lights_heater", "label": "Rover lamps & cabin heater", "summary": "Lower heater draw in cold shadow and clearer dark-slope visibility on traverses.", "before": "Cold-shadow heater draw: 1.8x", "after": "Cold-shadow heater draw: 1.45x (high-beam lamps, heated cab)"},
 	},
 	5: {
 		"after_chapter": 5,
@@ -56,7 +56,7 @@ const UPGRADE_PAIRS := {
 	6: {
 		"after_chapter": 6,
 		"title": "After Chapter 6 · The Red Ring",
-		"story_bridge": " Aurora rode out the five-hour red-ring eclipse; space-weather monitors now watch for the major storm.",
+		"story_bridge": "Aurora rode out the five-hour red-ring eclipse; space-weather monitors now watch for the major storm.",
 		"A": {"id": "storm_early_warning", "label": "Particle early-warning sensor", "summary": "Earlier proton-flux trend alert before storm shelter runs.", "before": "Standard storm lead time", "after": "Early proton-flux warning"},
 		"B": {"id": "bigger_safe_room", "label": "Expanded Safe Room rack", "summary": "Full supply stack adds 3 crate shielding instead of 2 (cap 3).", "before": "Full supply stack: crates 2 (K2)", "after": "Full supply stack: crates 3 (K3)"},
 	},

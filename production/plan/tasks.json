@@ -2876,7 +2876,8 @@
    "integration_paths": [
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-5U*"
-   ]
+   ],
+   "blocker": "10 Nov recheck: the old reason is gone. The after-Chapter-4 choice screen, exclusivity, save/load and both modifiers work (M4-17: test_upgrade_pairs_ch4_ch6.gd 33/0; rover now reads the saved choice; production/qa/evidence/M3-5U_upgrade_after_ch04.png). Waits only on the board dependency M1-19 and the every-suite acceptance: integrated gate is 99/117 (M1-68 Atik, M1-125 Ramim in progress). Resume: when the full gate is green, rerun run_tests.sh and mark done. Follow-up M4-18 (Ramim): step the heater draw in Chapter 8 shadow."
   },
   {
    "id": "M3-5Q",
@@ -3482,7 +3483,8 @@
    "integration_paths": [
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-7U*"
-   ]
+   ],
+   "blocker": "10 Nov recheck: the after-Chapter-6 choice screen, exclusivity, save/load and bigger_safe_room (K3 cap) work (M4-17: test_upgrade_pairs_ch4_ch6.gd 33/0; production/qa/evidence/M3-7U_upgrade_after_ch06.png). Two things remain: (1) storm_early_warning is recorded but nothing consumes it; its consumer lives in LunarHazards / CampaignFieldSystems, which Ramim is repairing under M1-125, so it is filed as M4-18; (2) board dependency M1-19 and the every-suite acceptance (gate 99/117; M1-68 Atik, M1-125 Ramim). Resume: after M4-18 lands and the full gate is green, rerun run_tests.sh and mark done."
   },
   {
    "id": "M3-7Q",
@@ -7937,7 +7939,7 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Apply saved upgrade choices to the 3D rover and verify the after-Chapter-4 and after-Chapter-6 pairs",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -7949,16 +7951,33 @@
    ],
    "refs": [],
    "note": "Filed by Sadman/claude on 2026-11-10.",
-   "evidence": "",
+   "evidence": "Focused suites through game/tools/run_tests.sh: test_upgrade_pairs_ch4_ch6.gd 33 checks, 0 failures (3 failures before the fix); test_rover 27/0; test_hazards 19/0; test_progression 72/0; test_campaign_progression 22/0; test_campaign_field_systems 6/0; test_ch07_missions 1038/0; test_ch08_missions 132/0. Full 117-suite gate not rerun here (M1-125, Ramim, in progress). Screenshots: production/qa/evidence/M3-5U_upgrade_after_ch04.png, production/qa/evidence/M3-7U_upgrade_after_ch06.png. Open: storm_early_warning consumer and Chapter 8 heater step filed as M4-18.",
    "updated": "2026-11-10",
    "prompt": "Found 10 Nov while rechecking M3-5U/M3-7U (both formally wait on M1-19's gate): CampaignFieldSystems passes director.snapshot().upgrades ({choices: {\"4\": \"rover_lights_heater\"}}) to LunarRover.apply_preset, which only reads flat flags, so rover_lights_heater and long_range_battery never apply to the driven rover in the campaign. Fix it in apply_preset (accept both shapes). Add one focused suite proving the after-Chapter-4 and after-Chapter-6 pairs end to end: earned only after the chapter, exclusive, idempotent, saved and restored, modifier reaches the simulation (ice water +2 separate, K3 stack, heater draw), choice screen renders. Make the 4B card text state the applied numbers. Acceptance: the focused suite and test_rover, test_hazards, test_progression pass through game/tools/run_tests.sh; screenshots of both choice screens in production/qa/evidence/.",
    "reserved_for": "sadman",
-   "effort": 1,
-   "edit_files": [
-    "game/scripts/rover/lunar_rover.gd",
-    "game/scripts/progression/cadet_progression.gd",
-    "game/tools/test_upgrade_pairs_ch4_ch6.gd"
-   ]
+   "effort": 1
+  },
+  {
+   "id": "M4-18",
+   "milestone": "M4",
+   "priority": "P2",
+   "tool": "codex",
+   "title": "Consume storm_early_warning in the Chapter 7 shelter run, step the rover heater in Chapter 8 shadow, and align the hazard storm numbers with canon",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/hazards/lunar_hazards.gd",
+    "game/scripts/campaign/campaign_field_systems.gd",
+    "game/tools/test_hazards.gd"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-10.",
+   "evidence": "",
+   "updated": "2026-11-10",
+   "prompt": "Found by Sadman/claude on 10 Nov (M4-17). (1) storm_early_warning (after Chapter 6, Option A: 'one additional preparation opportunity, with no invented solar income', game-design/10 line 177) is set in ExpeditionSimulation modifiers but nothing reads it; the canon P-13 plan has no countable preparation slot, so the natural home is the shelter run in LunarHazards.step_solar_storm_shelter_run (the warning arrives earlier, so the crew gets more lead before exposure). Pass it from CampaignFieldSystems the way rover.heater_upgrade is passed. No energy income, no change to the P-13/P-14 ledger. (2) CampaignFieldSystems only calls step_cold_shadow when _chapter == 4, but rover_lights_heater is earned after Chapter 4, so its 1.8x to 1.45x heater draw is only felt on a Chapter 4 replay; step it on the dark Chapter 8 road segments too (the warning text must not say Chapter 4 there). (3) LunarHazards uses storm_step_multipliers [1,2,3,2,1,1] and storm_exposure_limit 3; canon (08 P-13/P-14, p13_campaign.json) is [1,1,2,2,1,1] and limit 6. Acceptance: test_hazards and game/tools/test_upgrade_pairs_ch4_ch6.gd pass through run_tests.sh, with a check for each of the three points; update the 6A card text in cadet_progression.gd to the applied number.",
+   "reserved_for": "ramim",
+   "effort": 1
   }
  ],
  "requirements": [
