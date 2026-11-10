@@ -34,9 +34,9 @@
     "P-05": {
       "title": "Find the Falling Pressure",
       "hints": [
-        "Which tap changes over time?",
-        "Compare the independent GARDEN readings at t0 and t10.",
-        "Close GARDEN only, clamp its feedthrough, reopen slowly and verify five steady checks."
+        "Which reading changes over time?",
+        "Compare the manual garden reading.",
+        "Close GARDEN, clamp its feedthrough, reopen and verify five steady readings."
       ],
       "mastery": "Six candidates within a two-per-phase limit, safe garden isolation and five steady 100/100/100 readings.",
       "first_time_card": {
@@ -229,6 +229,11 @@
       "stage": "twist",
       "goal": "Correct a copied paper note to match five physical checks.",
       "why": "The tested valve setting is supported; the copied note is wrong.",
+      "new_hints": [
+        "Which record was tested: the note or the valve?",
+        "Keep the tested state; correct the paper.",
+        "Strike the copied value, write the verified valve position, sign and date it."
+      ],
       "clues": [
         {
           "id": "c1",
@@ -272,6 +277,11 @@
       "stage": "twist",
       "goal": "Isolate the annex feed, confirm zero differential and look by camera.",
       "why": "An isolated hatch can be inspected without authorising entry.",
+      "new_hints": [
+        "Is seeing a room the same as being allowed in?",
+        "Isolate the feed and check the boundary before the port opens.",
+        "Feed OFF, boundary reading stable, open port, camera only, save view, close port."
+      ],
       "clues": [
         {
           "id": "c1",

@@ -34,9 +34,9 @@
     "P-06": {
       "title": "A Harvest With a Future",
       "hints": [
-        "Confirm pod maturity before changing irrigation.",
-        "Keep Tara watered; dry Alo, then protect twelve planted and thirty reserve.",
-        "Six wells of seven give 42; plant 12, seal 30 as 15 plus 15."
+        "Harvest after the pods mature.",
+        "Keep twelve for planting and thirty protected.",
+        "Six wells of seven total 42; allocate 12 and 30."
       ],
       "mastery": "Mature pods, five-day selective dry-down to moisture 20, six-by-seven count and 12/30 founder split.",
       "first_time_card": {
@@ -60,6 +60,11 @@
       "stage": "learn",
       "goal": "Classify the cold annex seedlings and scan the vault map without disturbing them.",
       "why": "Curled day-12 seedlings are not flowers or mature pods.",
+      "new_hints": [
+        "Look at the leaves, then at the chart.",
+        "Two independent records should agree.",
+        "Curled leaves and a seedling-stage chart show an interrupted seedling trial."
+      ],
       "clues": [
         {
           "id": "c1",
@@ -103,6 +108,11 @@
       "stage": "learn",
       "goal": "Keep map provenance and list present-day route checks.",
       "why": "An old location can guide a survey, but departure still needs slope, reserve and communications.",
+      "new_hints": [
+        "What does the map prove, and what does it only suggest?",
+        "List what a rover needs today that a 2034 map cannot promise.",
+        "Save the map as a survey objective with three checks: slope, return reserve, link chain."
+      ],
       "clues": [
         {
           "id": "c1",
@@ -271,6 +281,11 @@
       "stage": "twist",
       "goal": "Reconcile the living descendants with the founder reserve and survey preparation.",
       "why": "Alo continues in descendants and preserved seed, not as the same living plant.",
+      "new_hints": [
+        "Can one annual plant last five months?",
+        "Each tray is a new generation with its own dates and parents.",
+        "Link each October plant to its parent generation; keep the founder 30 on its own line."
+      ],
       "clues": [
         {
           "id": "c1",

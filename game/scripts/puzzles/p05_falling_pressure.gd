@@ -64,9 +64,8 @@ func step_ids_for_scene(scene_id: String) -> Array:
 	return result
 
 func hint_ladder(target_id: String) -> Array:
-	var ladder: Array = puzzle(puzzle_id_for_step(target_id)).get("hints", []).duplicate()
-	ladder.append_array(scene(String(step(target_id).get("scene", ""))).get("new_hints", []))
-	return ladder
+	var scene_hints: Array = scene(String(step(target_id).get("scene", ""))).get("new_hints", [])
+	return scene_hints.duplicate() if not scene_hints.is_empty() else (puzzle(puzzle_id_for_step(target_id)).get("hints", []) as Array).duplicate()
 
 func validate_action(target_id: String, payload: Dictionary) -> String:
 	if not is_step(target_id):
@@ -74,6 +73,15 @@ func validate_action(target_id: String, payload: Dictionary) -> String:
 	var answer: Dictionary = data().get("answers", {}).get(target_id, {})
 	if answer.is_empty():
 		return "This puzzle step has no authored answer key."
+	var allowed: Array = answer.keys()
+	allowed.append("_puzzle_action")
+	if target_id.begins_with("p05_inspect_") and String(step(target_id).get("scene", "")) == "EX-CH03-S02":
+		allowed.append("phase")
+	if payload.has("_puzzle_action") and payload._puzzle_action != target_id:
+		return "This decision is for a different Chapter 3 operation."
+	for key in payload:
+		if not allowed.has(key):
+			return "This decision contains an unsupported input."
 	for key in answer:
 		if not payload.has(key) or not _same_value(payload[key], answer[key]):
 			return String(step(target_id).get("wrong_reason", "That reading or decision does not match the evidence. Try the supported option."))

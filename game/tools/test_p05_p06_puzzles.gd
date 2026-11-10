@@ -89,6 +89,9 @@ func _test_content_and_catalog() -> void:
 		_check(keys_match, "each step has an answer, supported control and scene clues")
 	_check(int(a.data().simulation.investigation_phases) == 4 and int(a.data().simulation.max_inspections_per_phase) == 2 and float(a.data().simulation.phase_hours_as_abstract_budget) == 7.2, "P-05 uses the four-phase abstract budget")
 	_check(int(b.data().simulation.total_seeds) == 42 and int(b.data().simulation.planted) == 12 and int(b.data().simulation.reserve) == 30, "P-06 seed arithmetic comes from content")
+	_check(a.hint_ladder("p05_equip_gauge") == ["Which reading changes over time?", "Compare the manual garden reading.", "Close GARDEN, clamp its feedthrough, reopen and verify five steady readings."], "P-05 main hint ladder keeps the exact three canonical hints")
+	_check(b.hint_ladder("p06_confirm_maturity") == ["Harvest after the pods mature.", "Keep twelve for planting and thirty protected.", "Six wells of seven total 42; allocate 12 and 30."], "P-06 main hint ladder keeps the exact three canonical hints")
+	_check(a.hint_ladder("p05_reconcile_records").size() == 3 and a.hint_ladder("p05_inspect_annex_hatch").size() == 3 and b.hint_ladder("p06_scan_growth_chart").size() == 3 and b.hint_ladder("p06_save_map_provenance").size() == 3 and b.hint_ladder("p06_reconcile_continuity").size() == 3, "note, hatch, annex, map and continuity cards have their own three-tier hints")
 	var s02: Array = Catalog.targets_for_scene("EX-CH03-S02")
 	var candidate_flags := true
 	for target in s02:
@@ -135,6 +138,8 @@ func _test_model_and_ledger() -> void:
 	_check(not bool(ledger.preview("P-06", "p05_equip_gauge", {"instrument": "mechanical_gauge"}).get("accepted", false)), "puzzle ID mismatch cannot reuse a receipt")
 	_check(not bool(Ledger.new().preview("P-05", "p05_read_main_t0", {"reading": "100"}).get("accepted", false)), "numeric witness rejects string coercion")
 	_check(not bool(Ledger.new().preview("P-05", "p05_read_main_t0", {"reading": 100.0001}).get("accepted", false)), "direct ledger input cannot approximate a marked gauge reading")
+	_check(not bool(Ledger.new().preview("P-05", "p05_equip_gauge", {"instrument": "mechanical_gauge", "_command_id": "forged"}).get("accepted", false)), "Chapter 3 decision rejects caller-supplied command controls")
+	_check(not bool(Ledger.new().preview("P-06", "p06_count_42", {"wells": 6, "total": 42, "_puzzle_action": "p06_allocate_12_30"}).get("accepted", false)), "Chapter 3 decision cannot be sent under another puzzle action")
 	var held_selection: Dictionary = a.selection("p05_read_main_t0")
 	_check(not bool(a.select("p05_read_main_t0", "value", 99.6).accepted) and not bool(a.select("p05_read_main_t0", "value", 100.4).accepted) and a.selection("p05_read_main_t0") == held_selection, "fractional gauge readings are rejected without changing the selection")
 	_check(not bool(a.select("p05_read_main_t0", "value", -1).accepted) and not bool(a.select("p05_read_main_t0", "value", 121).accepted), "gauge readings outside the instrument scale are rejected")
@@ -167,6 +172,9 @@ func _test_model_and_ledger() -> void:
 	var malformed: Dictionary = live_snapshot.duplicate(true)
 	malformed.p05.selections["p05_equip_gauge"] = {"option": "invented"}
 	_check(not bool(live.restore(malformed).accepted) and live.snapshot() == live_snapshot, "malformed nested puzzle state cannot partly restore the ledger")
+	var forged_receipt: Dictionary = live_snapshot.duplicate(true)
+	forged_receipt.receipts["p05_equip_gauge"] = {"puzzle_id": "P-05", "payload": {"instrument": "panel_warning"}}
+	_check(not bool(live.restore(forged_receipt).accepted) and live.snapshot() == live_snapshot, "wrong saved Chapter 3 receipt cannot mark a gate complete")
 	_check(not bool(live.restore({}).accepted) and live.snapshot() == live_snapshot, "missing ledger fields cannot erase a receipt")
 	_check(bool(Ledger.new().restore({"schema_version": 1, "receipts": {}}).accepted), "legacy ledger saves without Chapter 3 selections still load")
 	live.p05().select("p05_isolate_garden", "option", "held")

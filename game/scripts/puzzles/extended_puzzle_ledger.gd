@@ -58,14 +58,19 @@ func restore(data: Dictionary) -> Dictionary:
 	if not data.get("receipts", null) is Dictionary:
 		return {"accepted": false, "reason": "Extended puzzle receipts must be a Dictionary."}
 	var receipts: Dictionary = data.receipts
+	var staged_p05: RefCounted = P05.new()
+	var staged_p06: RefCounted = P06.new()
 	for action in receipts:
 		if not action is String or not receipts[action] is Dictionary:
 			return {"accepted": false, "reason": "Extended puzzle receipt has an invalid action."}
 		var receipt: Dictionary = receipts[action]
 		if not receipt.get("puzzle_id", null) is String or not receipt.get("payload", null) is Dictionary:
 			return {"accepted": false, "reason": "Extended puzzle receipt has an invalid payload."}
-	var staged_p05: RefCounted = P05.new()
-	var staged_p06: RefCounted = P06.new()
+		if String(action).begins_with("p05_") or String(action).begins_with("p06_"):
+			var is_p05 := String(action).begins_with("p05_")
+			var model: RefCounted = staged_p05 if is_p05 else staged_p06
+			if String(receipt.puzzle_id) != ("P-05" if is_p05 else "P-06") or not model.is_step(action) or not String(model.validate_action(action, receipt.payload)).is_empty():
+				return {"accepted": false, "reason": "Chapter 3 save contains an invalid puzzle receipt."}
 	if data.has("p05"):
 		if not data.p05 is Dictionary:
 			return {"accepted": false, "reason": "P-05 save state must be a Dictionary."}
