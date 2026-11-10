@@ -14,6 +14,9 @@ signal cruise_to_stop_requested(stop_id: String)
 signal route_decision_requested(route_id: String)
 signal repair_decision_requested(stop_id: String)
 signal disembark_requested
+signal driving_requested
+signal camera_toggle_requested
+var campaign_bound := false
 
 const RoverScript = preload("res://scripts/rover/lunar_rover.gd")
 
@@ -127,10 +130,12 @@ func _build_ui() -> void:
 	_direct_drive_bar.name = "DirectDrivingControls"
 	_direct_drive_bar.add_theme_constant_override("separation", 8)
 	c_box.add_child(_direct_drive_bar)
-	var throttle_btn := UiDesign.button("Drive Forward (W)")
+	var throttle_btn := UiDesign.button("Return to driving (W / S)" if campaign_bound else "Drive Forward (W)")
 	throttle_btn.name = "DriveForwardButton"
 	throttle_btn.pressed.connect(func() -> void:
-		if rover != null:
+		if campaign_bound:
+			driving_requested.emit()
+		elif rover != null:
 			rover.step_drive(5.0, 0.85, 9.0, false)
 			refresh()
 	)
@@ -138,7 +143,9 @@ func _build_ui() -> void:
 	var view_btn := UiDesign.button("Toggle Cab / Chase (V)")
 	view_btn.name = "ToggleViewButton"
 	view_btn.pressed.connect(func() -> void:
-		if rover != null:
+		if campaign_bound:
+			camera_toggle_requested.emit()
+		elif rover != null:
 			rover.toggle_camera_view()
 			refresh()
 	)

@@ -4,7 +4,7 @@ class_name LunarRover
 ## M3-63: The rover and the route planner (doc 25 §4.5, viper_slope_limit.json).
 ## Implements:
 ## - VIPER-class 15° slope limit loaded from `res://resources/data/nasa/viper_slope_limit.json`
-## - Battery with mandatory return reserve (Ch 4 P-07: 60 cap / 30 reserve / 10 allowance;
+## - Battery with mandatory return reserve (Ch 4 P-07: 100 cap / 30 reserve / 30 allowance;
 ##   Ch 8 P-15: 14 cap (+4 with long_range_battery) / 2 reserve / 5 allowance)
 ## - Trailer payloads via PayloadInventory (`trailer` hook)
 ## - Player driving: climb in with E (`board_rover`), third-person chase camera
@@ -25,9 +25,9 @@ const PRESETS := {
 	"ch04_survey": {
 		"trip_id": "p07",
 		"label": "Chapter 4 Cold-Trap Survey",
-		"battery_capacity": 60.0,
+		"battery_capacity": 100.0,
 		"return_reserve": 30.0,
-		"one_way_allowance": 10.0,
+		"one_way_allowance": 30.0,
 		"provisions_hours": 48.0,
 		"roster": ["kai", "rafi"],
 	},
@@ -67,10 +67,10 @@ var max_incline_deg: float = 15.0
 var assist_mode: String = "Cadet"
 var preset_id: String = "ch04_survey"
 
-var battery_capacity: float = 60.0
-var battery: float = 60.0
+var battery_capacity: float = 100.0
+var battery: float = 100.0
 var return_reserve: float = 30.0
-var one_way_allowance: float = 10.0
+var one_way_allowance: float = 30.0
 var provisions_hours: float = 48.0
 var elapsed_hours: float = 0.0
 
@@ -87,6 +87,8 @@ var current_slope_deg: float = 0.0
 var distance_driven_m: float = 0.0
 var planned_route_id: String = "B"
 var planned_waypoints: Array = []
+var planned_one_way_distance_m: float = 12000.0
+var planned_one_way_energy: float = 30.0
 var passengers: Array = ["kai", "rafi"]
 var last_intercom_line: String = INTERCOM_LINES.board
 var slope_warning_active: bool = false
@@ -128,6 +130,10 @@ func apply_preset(preset: String, upgrades: Dictionary = {}) -> void:
 	if preset_id == "ch08_relay" and long_range_battery_upgrade:
 		battery_capacity += 4.0
 	battery = battery_capacity
+	planned_one_way_distance_m = 120000.0 if preset_id == "ch08_relay" else 12000.0
+	planned_one_way_energy = one_way_allowance
+	planned_route_id = "SURVEYED" if preset_id == "ch08_relay" else "B"
+	planned_waypoints.clear()
 	elapsed_hours = 0.0
 	speed_m_s = 0.0
 	distance_driven_m = 0.0
@@ -153,6 +159,8 @@ func toggle_headlights() -> bool:
 
 ## Climb out anywhere safe (slope <= max_incline_deg and speed near zero).
 func disembark_rover() -> Dictionary:
+	if speed_m_s > 0.15:
+		return {"accepted": false, "reason": "Stop the rover before climbing out."}
 	if current_slope_deg > max_incline_deg:
 		return {"accepted": false, "reason": "Slope %d° exceeds the %d° safe parking limit. Reach flatter ground before climbing out." % [int(round(current_slope_deg)), int(round(max_incline_deg))]}
 	speed_m_s = 0.0
@@ -182,20 +190,17 @@ func low_gravity_handling_profile(current_speed: float = 3.0) -> Dictionary:
 	}
 
 ## Steps rover driving physics and battery consumption over `delta` seconds.
-## Assisted driving (Story/Cadet) clamps slope to `max_incline_deg` (15°);
+## Assisted driving (Story/Cadet) stops before slopes above `max_incline_deg`;
 ## Expedition mode allows attempting the slope and raises an explicit warning.
 func step_drive(delta: float, throttle: float, terrain_slope_deg: float, in_shadow: bool = false) -> Dictionary:
 	var raw_slope := maxf(0.0, terrain_slope_deg)
 	slope_warning_active = raw_slope > max_incline_deg
+	current_slope_deg = raw_slope
 	if slope_warning_active:
-		if is_assisted_driving():
-			current_slope_deg = max_incline_deg
-			last_intercom_line = INTERCOM_LINES.slope_clamp
-		else:
-			current_slope_deg = raw_slope
-			last_intercom_line = INTERCOM_LINES.slope_warn
-	else:
-		current_slope_deg = raw_slope
+		last_intercom_line = INTERCOM_LINES.slope_clamp if is_assisted_driving() else INTERCOM_LINES.slope_warn
+	if battery <= 0.0 or (slope_warning_active and is_assisted_driving()):
+		speed_m_s = 0.0
+		return dashboard_readout()
 
 	if brake_set or not aboard:
 		speed_m_s = move_toward(speed_m_s, 0.0, delta * 2.5)
@@ -203,17 +208,30 @@ func step_drive(delta: float, throttle: float, terrain_slope_deg: float, in_shad
 
 	var target_speed := clampf(throttle, 0.0, 1.0) * max_speed_m_s
 	var slope_penalty := clampf(1.0 - (current_slope_deg / 30.0), 0.35, 1.0)
-	speed_m_s = move_toward(speed_m_s, target_speed * slope_penalty, delta * 1.8)
-	var step_dist := speed_m_s * delta
+	speed_m_s = move_toward(speed_m_s, target_speed * slope_penalty, delta * (1.8 if target_speed * slope_penalty > speed_m_s else 0.32 * MOON_G))
+	var energy_per_m := planned_one_way_energy / maxf(1.0, planned_one_way_distance_m)
+	var step_dist := minf(speed_m_s * delta, battery / maxf(0.000001, energy_per_m))
 	distance_driven_m += step_dist
 	elapsed_hours += delta / 3600.0
 
-	var slope_load := 1.0 + (current_slope_deg / max_incline_deg) * 0.5
-	var shadow_load := (1.15 if not heater_upgrade else 1.05) if in_shadow else 1.0
-	var energy_per_m := 0.008 * slope_load * shadow_load
 	battery = maxf(0.0, battery - step_dist * energy_per_m)
+	if battery <= 0.000001:
+		battery = 0.0
+		speed_m_s = 0.0
 
 	return dashboard_readout()
+
+## Canonical route costs already include the authored travel, heat and repair allowance.
+func estimate_journey(one_way_distance_m: float, one_way_energy: float, round_trip_hours: float) -> Dictionary:
+	var cost := maxf(0.0, one_way_energy) * 2.0
+	var after := battery - cost
+	return {
+		"round_trip_energy": cost,
+		"battery_after_round_trip": after,
+		"reserve_ok": after >= return_reserve,
+		"provisions_ok": round_trip_hours <= maxf(0.0, provisions_hours - elapsed_hours),
+		"energy_per_m": maxf(0.0, one_way_energy) / maxf(1.0, one_way_distance_m),
+	}
 
 ## Cab dashboard readouts (doc 25 §2.2, §4.5): speed, slope against the 15° limit,
 ## battery against the return reserve, and the planned route.

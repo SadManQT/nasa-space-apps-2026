@@ -86,24 +86,19 @@ static func validate(action: String, payload: Dictionary) -> String:
 			if String(payload.get("route", "")) != String(key.valid_route):
 				return "Route B is the only route within both slope and return-reserve limits."
 		"p07_verify_slope":
-			var slope := int(payload.get("slope", -1))
-			if slope < 0 or slope > int(key.max_slope_limit):
-				return "The surveyed route must remain at or below the 15 degree game limit."
+			if int(payload.get("slope", -1)) != int(key.route_b_slope):
+				return "Route B's measured maximum slope is 12 degrees, within the 15 degree game limit."
 		"p07_verify_return_reserve":
-			if int(payload.get("reserve", -1)) < int(key.min_return_reserve):
-				return "The rover must retain at least 30 return-reserve units."
+			if int(payload.get("reserve", -1)) != int(key.route_b_reserve):
+				return "Route B leaves 100 minus 30 minus 30, or 40 return-reserve units."
 		"p07_set_threshold_12":
 			if int(payload.get("reference", -1)) != int(key.dry_reference) or int(payload.get("threshold", -1)) != int(key.scanner_threshold):
 				return "The detection threshold is dry reference 2 plus 10, which equals 12."
 		"p07_tag_positive_18", "p07_tag_positive_19":
 			var pos: Array = key.get("positive_readings", [18, 19])
-			var reading := int(payload.get("reading", -1))
-			var found_pos := false
-			for item in pos:
-				if int(item) == reading:
-					found_pos = true
-			if not found_pos:
-				return "Only readings 18 and 19 are positive in the supplied survey."
+			var expected := int(pos[0 if action == "p07_tag_positive_18" else 1])
+			if int(payload.get("reading", -1)) != expected:
+				return "Keep each positive sample's own reading: first 18, then 19."
 		"p07_retain_negative_2":
 			if int(payload.get("reading", -1)) != int(key.negative_reading):
 				return "Reading 2 is the negative control."

@@ -139,14 +139,18 @@ static func is_noor_revealed(current_scene_id: String) -> bool:
 	var sc := int(parts[1])
 	return ch > 5 or (ch == 5 and sc >= 10)
 
-func configure(current_scene_id: String, extra_entries: Array = []) -> void:
+func configure(current_scene_id: String, extra_entries: Array = [], include_defaults: bool = true) -> void:
 	scene_id = current_scene_id if not current_scene_id.is_empty() else "EX-CH01-S01"
 	var reveal := is_noor_revealed(scene_id)
 	_evidence_rows.clear()
-	for raw in DEFAULT_EVIDENCE + extra_entries:
+	for raw in (DEFAULT_EVIDENCE if include_defaults else []) + extra_entries:
 		if not (raw is Dictionary):
 			continue
 		var entry: Dictionary = (raw as Dictionary).duplicate(true)
+		if String(entry.get("unlock_scene", "EX-CH01-S01")) > scene_id:
+			continue
+		entry["timestamp"] = entry.get("timestamp", entry.get("date_label", entry.get("date", "")))
+		entry["badge"] = entry.get("badge", String(entry.get("status", "OBSERVED")))
 		if reveal and entry.has("body_after_ch05_s10"):
 			entry["body"] = entry["body_after_ch05_s10"]
 		if reveal and entry.has("status_after_ch05_s10"):
@@ -157,7 +161,14 @@ func configure(current_scene_id: String, extra_entries: Array = []) -> void:
 			entry["title"] = String(entry.get("title", "")).replace("Noor", "N.").replace("Rahman", "")
 			entry["body"] = String(entry.get("body", "")).replace("Noor", "N.").replace("Rahman", "")
 		_evidence_rows.append(entry)
-	if pinned_id.is_empty() and not _evidence_rows.is_empty():
+	var selected := pinned_id
+	pinned_id = ""
+	pinned_entry = {}
+	for row in _evidence_rows:
+		if String(row.get("id", "")) == selected:
+			pin_source(selected)
+			return
+	if not _evidence_rows.is_empty():
 		pin_source(String(_evidence_rows[0].get("id", "")))
 	else:
 		_refresh()
@@ -260,6 +271,9 @@ func _refresh() -> void:
 		box.add_child(UiDesign.label("%s  ·  %s" % [String(row.get("badge", "• OBSERVED")), String(row.get("timestamp", ""))], "caption", "accent"))
 		box.add_child(UiDesign.label(String(row.get("body", "")), "body"))
 		var linked: Array = row.get("linked", [])
+		if linked.is_empty():
+			for link in row.get("links", []):
+				linked.append(String(link.get("title", link.get("id", ""))) if link is Dictionary else String(link))
 		if not linked.is_empty():
 			box.add_child(UiDesign.label("Linked: " + " · ".join(linked), "caption", "muted"))
 		var pin_btn := UiDesign.button("Pin Source Beside Reconstruction")

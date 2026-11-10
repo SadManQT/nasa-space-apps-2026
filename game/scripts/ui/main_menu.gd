@@ -93,7 +93,7 @@ func query_snapshot() -> Dictionary:
 	return _query.duplicate(true)
 
 func accessibility_settings() -> Dictionary:
-	return _accessibility.duplicate(true)
+	return _accessibility.merged({"assist_mode": _assist_mode, "bindings": _panels.bindings_snapshot() if _panels != null else {}}, true)
 
 func assist_mode() -> String:
 	return _assist_mode
@@ -474,12 +474,12 @@ func _build_briefing() -> void:
 		var m_desc: String = mode_spec[1]
 		var m_btn := _button(m_id.to_upper(), Color(0.14, 0.20, 0.32), IVORY)
 		m_btn.name = "AssistMode_" + m_id
-		m_btn.focus_mode = Control.FOCUS_NONE
+		m_btn.focus_mode = Control.FOCUS_ALL
 		m_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		m_btn.pressed.connect(func() -> void:
-			_assist_mode = m_id
-			_assist_summary.text = m_desc
-			emit_command("set_assist_mode", "assist_mode", {"assist_mode": m_id})
+			set_assist_mode(m_id)
+			if _panels != null:
+				_panels.set_accessibility({"assist_mode": m_id})
 		)
 		assist_row.add_child(m_btn)
 	body.add_child(_assist_summary)
@@ -644,6 +644,8 @@ func _on_accessibility_changed(settings: Dictionary) -> void:
 	_apply_accessibility()
 
 func _set_accessibility_local(settings: Dictionary) -> void:
+	if settings.get("assist_mode", "") in ["Story", "Cadet", "Expedition"]:
+		set_assist_mode(String(settings.assist_mode))
 	for key in _accessibility.keys():
 		if settings.has(key):
 			_accessibility[key] = bool(settings[key])

@@ -12,6 +12,7 @@ signal chapter_mission_inspected(chapter_num: int, mission_id: String)
 const SaveScript = preload("res://scripts/save/save_service.gd")
 const CampaignScript = preload("res://scripts/campaign/chapter1_campaign.gd")
 const AchievementsScript = preload("res://scripts/ui/achievements.gd")
+const ContentScript = preload("res://scripts/content/content_loader.gd")
 const ProgressionScript = preload("res://scripts/progression/cadet_progression.gd")
 
 const CHAPTER_CATALOG := [
@@ -150,6 +151,8 @@ var _tab_bar: HBoxContainer
 var _scroll: ScrollContainer
 var _body: VBoxContainer
 var _status_label: Label
+var _catalog: Dictionary = ContentScript.load_full()
+var _selected_mission := ""
 
 func _ready() -> void:
 	name = "ChapterSelectPanel"
@@ -176,7 +179,7 @@ func reload_from_save(override_snapshot: Variant = null) -> Dictionary:
 func unlocked_up_to_chapter() -> int:
 	if _snapshot.is_empty():
 		return 1
-	return clampi(int(_snapshot.get("current_chapter", _snapshot.get("chapter", 1))), 1, 8)
+	return AchievementsScript.chapter_number(_snapshot)
 
 func _build_ui() -> void:
 	var backdrop := ColorRect.new()
@@ -285,7 +288,8 @@ func _render_chapters_tab() -> void:
 	grid.add_theme_constant_override("v_separation", 12)
 	_body.add_child(grid)
 
-	for row in CHAPTER_CATALOG:
+	for base in CHAPTER_CATALOG:
+		var row := _chapter_spec(int(base.chapter))
 		var ch_num := int(row.chapter)
 		var unlocked := ch_num <= max_ch
 		var card := UiDesign.glass_panel(UiDesign.colour("accent" if (unlocked and ch_num == selected_chapter) else "border"))
@@ -326,7 +330,7 @@ func _render_chapters_tab() -> void:
 			box.add_child(locked_btn)
 
 	# Selected chapter mission list with stars and best results
-	var chosen_spec: Dictionary = CHAPTER_CATALOG[selected_chapter - 1]
+	var chosen_spec := _chapter_spec(selected_chapter)
 	var missions_panel := UiDesign.glass_panel(UiDesign.colour("accent"))
 	missions_panel.name = "SelectedChapterMissions"
 	_body.add_child(missions_panel)
@@ -336,13 +340,12 @@ func _render_chapters_tab() -> void:
 	missions_panel.add_child(m_box)
 	m_box.add_child(UiDesign.label("Missions in " + String(chosen_spec.title), "heading", "accent"))
 
-	var completed_missions: Array = _snapshot.get("completed_missions", []) if _snapshot.get("completed_missions") is Array else []
 	for m_row in chosen_spec.missions:
 		var mid := String(m_row.id)
-		var is_done := completed_missions.has(mid) or selected_chapter < max_ch
-		var stars := 3 if is_done else 0
-		var star_glyphs := "★ ★ ★" if stars == 3 else "☆ ☆ ☆"
-		var best_text := "Best result: Completed · 3 of 3 stars · All flight rules met" if is_done else "Best result: Not yet completed in this save"
+		var is_done := _mission_complete(m_row)
+		var score := _mission_score(mid)
+		var star_glyphs := "Score %d/3" % score if score >= 0 else ("Completed" if is_done else "Not complete")
+		var best_text := "Recorded result: %d of 3 stars" % score if score >= 0 else ("Completed - No star score recorded for this mission" if is_done else "Not yet completed in this save")
 		var row_card := UiDesign.glass_panel()
 		row_card.name = "MissionRow_" + mid
 		m_box.add_child(row_card)
@@ -356,8 +359,56 @@ func _render_chapters_tab() -> void:
 		left.add_child(UiDesign.label(best_text, "caption", "muted"))
 		var inspect_btn := UiDesign.button("View Summary")
 		inspect_btn.name = "Inspect_" + mid
-		inspect_btn.pressed.connect(func() -> void: chapter_mission_inspected.emit(selected_chapter, mid))
+		inspect_btn.pressed.connect(func() -> void:
+			_selected_mission = mid
+			show_tab("chapters")
+			chapter_mission_inspected.emit(selected_chapter, mid))
 		r_box.add_child(inspect_btn)
+
+
+	if not _selected_mission.is_empty():
+		for mission in chosen_spec.missions:
+			if mission.id == _selected_mission:
+				var details := UiDesign.glass_panel(UiDesign.colour("accent"))
+				details.name = "MissionSummaryDetails"
+				_body.add_child(details)
+				var summary := VBoxContainer.new()
+				details.add_child(summary)
+				summary.add_child(UiDesign.label(String(mission.title), "heading"))
+				summary.add_child(UiDesign.label(String(mission.get("goal", "")), "body"))
+				summary.add_child(UiDesign.label("Completed" if _mission_complete(mission) else "Still ahead in this expedition", "caption", "accent"))
+				_scroll.ensure_control_visible.call_deferred(details)
+
+func _chapter_spec(number: int) -> Dictionary:
+	var row: Dictionary = CHAPTER_CATALOG[number - 1].duplicate(true)
+	for chapter in _catalog.get("chapters", []):
+		if int(chapter.number) == number:
+			row.title = "Chapter %d - %s" % [number, chapter.title]
+			row.subtitle = chapter.subtitle
+	row.missions = []
+	for mission in _catalog.get("missions", []):
+		if int(mission.chapter_number) == number:
+			row.missions.append(mission)
+	return row
+
+func _mission_complete(mission: Dictionary) -> bool:
+	var scenes: Array = mission.get("scene_ids", [])
+	var completed: Array = _snapshot.get("completed_scene_ids", [])
+	return not scenes.is_empty() and scenes.all(func(id): return completed.has(id))
+
+func _mission_score(mission_id: String) -> int:
+	if mission_id != "EX-M0104":
+		return -1
+	var final := {}
+	var blackout := false
+	for receipt in _snapshot.get("receipts", {}).values():
+		for trace in receipt.get("trace", []):
+			blackout = blackout or bool(trace.get("blackout", false))
+			if int(trace.get("shift", 0)) == 7:
+				final = trace.get("after", {})
+	if final.is_empty():
+		return -1
+	return int(int(final.get("Z", 0)) <= 3) + int(not blackout) + int(int(final.get("H", 0)) > 0)
 
 func _render_progress_tab() -> void:
 	_body.add_child(UiDesign.label("Cadet Record Summary & Operational Skills", "heading"))

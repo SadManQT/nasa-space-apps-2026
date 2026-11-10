@@ -25,6 +25,7 @@ func _init() -> void:
 
 func _run() -> void:
 	_test_grading_and_skills()
+	_test_measured_job_report()
 	_test_jobs_catalog_and_unlocks()
 	_test_upgrades_and_loadout_weight()
 	_test_simulation_upgrade_modifiers()
@@ -74,6 +75,14 @@ func _test_grading_and_skills() -> void:
 	_check(String(card_partial.grade) in ["Completed", "Merit"] and String(card_partial.note).contains("never locked"), "lower report card grade still completes and never locks story")
 	_check(prog.all_skills_info().size() == 5, "all 5 cadet skills (navigation, handling, life_support, repair, observation) are defined")
 
+func _test_measured_job_report() -> void:
+	var prog := ProgressionScript.new()
+	var observations := {"elapsed_seconds": 38.0, "observations": [{"fixture": "service_power_panel", "battery": 14.0}]}
+	var result := prog.complete_job("JOB-CH01-01", 1, {"measured_metrics": observations})
+	var report: Dictionary = result.get("report_card", {})
+	_check(bool(result.get("accepted", false)) and report.get("measured_metrics", {}) == observations, "field reports retain only the measurements recorded by the runtime")
+	_check(String(report.get("grade", "")) == "Completed" and not report.has("care_score") and not report.has("science_score") and not report.has("average"), "ungraded field observations never manufacture care, science or timing grades")
+
 func _test_jobs_catalog_and_unlocks() -> void:
 	var prog := ProgressionScript.new()
 	for ch in range(1, 9):
@@ -108,7 +117,7 @@ func _test_upgrades_and_loadout_weight() -> void:
 	_check(bool(u7.accepted) and String(u7.upgrade_id) == "long_range_battery", "M3-8U: After-Ch7 Option B selects long_range_battery")
 
 	# Unlock Ch 4 ice_harvester (5.0 kg) to test loadout weight limit (10.0 kg max)
-	prog.choose_upgrade(4, "A")
+	prog.choose_upgrade(4, "A", [1, 2, 3, 4])
 	_check(bool(prog.equip_gear("moon_dirt_shelter").accepted), "equip moon_dirt_shelter (4.5 kg)")
 	_check(bool(prog.equip_gear("ice_harvester").accepted), "equip ice_harvester (5.0 kg, total 9.5 kg <= 10.0 kg)")
 	var overweight := prog.equip_gear("long_range_battery")
@@ -133,7 +142,7 @@ func _test_simulation_upgrade_modifiers() -> void:
 
 func _test_rest_and_persistence() -> void:
 	var prog := ProgressionScript.new()
-	prog.choose_upgrade(1, "B")
+	prog.choose_upgrade(1, "B", [1])
 	prog.equip_gear("fuel_cell")
 	prog.complete_job("JOB-CH01-02", 1)
 	var rest := prog.rest_at_bunk(3, 4)
@@ -147,7 +156,7 @@ func _test_rest_and_persistence() -> void:
 func _test_ui_panels_and_capture() -> void:
 	var prog := ProgressionScript.new()
 	for ch in range(1, 8):
-		prog.choose_upgrade(ch, "A" if ch % 2 == 1 else "B")
+		prog.choose_upgrade(ch, "A" if ch % 2 == 1 else "B", range(1, ch + 1))
 	prog.equip_gear("taller_mast")
 	prog.equip_gear("red_blue_leds")
 	prog.equip_gear("dust_shield")

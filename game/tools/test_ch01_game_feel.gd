@@ -34,6 +34,7 @@ func _run() -> void:
 	await _test_night_shift_tension_and_alo_posture()
 	await _test_rewards_and_golden_bloom()
 	await _test_live_campaign_feedback_integration()
+	_test_truthful_feedback()
 
 	print("CH01 GAME FEEL RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
@@ -187,7 +188,7 @@ func _test_live_campaign_feedback_integration() -> void:
 	campaign.hud.panels.open_panel("outcome", last_outcome)
 	await process_frame
 	var outcome_text := _collect_text(campaign.hud.panels)
-	_check(outcome_text.contains("What changed:") and outcome_text.contains("Nothing spilled on our watch"), "CampaignPanels 'outcome' view renders Chapter1Feedback consequence, why, next step, and crew reaction")
+	_check(outcome_text.contains("What changed:") and outcome_text.contains("Flow traced"), "CampaignPanels 'outcome' view renders Chapter1Feedback consequence, why, next step, and crew reaction")
 	campaign.hud.panels.close_panel()
 
 	# 2. Advance through S01/S02 to EX-CH01-S03 and verify P01Panel shows Chapter1Feedback on real step completion
@@ -315,3 +316,11 @@ func _check(condition: bool, label: String) -> void:
 	if not condition:
 		failures += 1
 		push_error("FAIL: " + label)
+
+func _test_truthful_feedback() -> void:
+	var initial := FeedbackScript.action_feedback("commission_route", {"resources": {"E": 14, "A": 6, "H": 6, "W": 0, "Z": 0}})
+	_check(not String(initial.meter_tick).contains("+2") and not String(initial.meter_tick).contains("20/20"), "Opening verification never claims resource changes the phase action does not make")
+	var stopped := FeedbackScript.outcome_reward_card({"safe_exposure": false, "no_blackout": false, "alo_alive": true}, 6, 5)
+	_check(stopped.tier == "RETRY_INVITATION", "A living Alo in a stopped mission cannot announce a safe blooming ending")
+	var ordinary := FeedbackScript.alo_posture(1, 0, 7, true)
+	_check(ordinary.stage == "First Open Flower", "An ordinary low-health bloom is not labelled Golden Bloom")

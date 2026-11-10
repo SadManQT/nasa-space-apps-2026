@@ -8,6 +8,9 @@ class_name JobsBoardPanel
 
 signal closed
 signal job_completed(result: Dictionary)
+signal job_started(result: Dictionary)
+var _runtime: Node
+var settings: Dictionary = {}
 
 var progression: CadetProgression
 var selected_chapter: int = 1
@@ -29,6 +32,13 @@ func bind_progression(value: CadetProgression, unlocked_up_to: int = 8) -> void:
 	selected_chapter = mini(selected_chapter, max_unlocked_chapter)
 	refresh()
 
+func bind_runtime(runtime: Node) -> void:
+	_runtime = runtime
+	var query: Dictionary = runtime.call("query")
+	settings = query.get("accessibility", {})
+	selected_chapter = clampi(int(String(query.get("chapter_id", "CH01")).trim_prefix("CH")), 1, 8)
+	bind_progression(runtime.get("progression"), selected_chapter)
+
 func _build() -> void:
 	_backdrop = ColorRect.new()
 	_backdrop.color = Color(0.02, 0.03, 0.06, 0.78)
@@ -37,12 +47,12 @@ func _build() -> void:
 
 	_panel = UiDesign.glass_panel(Color.TRANSPARENT, 24)
 	_panel.name = "JobsBoardGlass"
-	_panel.custom_minimum_size = Vector2(960, 580)
-	_panel.set_anchors_preset(Control.PRESET_CENTER)
-	_panel.offset_left = -480
-	_panel.offset_top = -290
-	_panel.offset_right = 480
-	_panel.offset_bottom = 290
+	_panel.custom_minimum_size = Vector2.ZERO
+	_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_panel.offset_left = 24
+	_panel.offset_top = 24
+	_panel.offset_right = -24
+	_panel.offset_bottom = -24
 	add_child(_panel)
 
 	var root_col := VBoxContainer.new()
@@ -69,6 +79,8 @@ func _build() -> void:
 	root_col.add_child(_chapter_row)
 
 	var scroll := ScrollContainer.new()
+	scroll.follow_focus = true
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root_col.add_child(scroll)
 
@@ -116,13 +128,24 @@ func refresh() -> void:
 			String(job.skill).replace("_", " ").capitalize(), int(job.xp), String(job.crew_note)
 		], "caption", "muted"))
 		var job_id := String(job.id)
-		var btn := UiDesign.button("Done" if done else "Run Job", 40)
+		var metrics: Dictionary = _runtime.call("job_metrics", job_id) if _runtime != null else {}
+		var ready := bool(metrics.get("complete", metrics.get("ready", false)))
+		var btn := UiDesign.button("Done" if done else ("File Report" if ready else "Begin Job"), 44)
+		btn.name = "Job_" + job_id
 		btn.disabled = done
 		btn.pressed.connect(func() -> void:
-			var res := progression.complete_job(job_id, max_unlocked_chapter)
+			var res: Dictionary
+			if _runtime == null:
+				res = progression.complete_job(job_id, max_unlocked_chapter)
+			elif ready:
+				res = _runtime.call("complete_job", job_id, _runtime.call("job_metrics", job_id))
+			else:
+				res = _runtime.call("begin_job", job_id)
+				if res.get("accepted", false):
+					job_started.emit(res)
 			_status_label.text = String(res.get("crew_note", res.get("reason", "")))
-			if bool(res.get("accepted", false)):
+			if bool(res.get("accepted", false)) and (_runtime == null or ready):
 				job_completed.emit(res)
 			refresh())
 		row.add_child(btn)
-	UiDesign.apply_type(self, get_viewport_rect().size.y if is_inside_tree() else 720.0, 1.0)
+	UiDesign.apply_type(self, get_viewport_rect().size.y if is_inside_tree() else 720.0, 1.5 if settings.get("large_text", false) else 1.0)
