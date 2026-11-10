@@ -156,6 +156,8 @@ func _physical_use() -> void:
 	_check(campaign.perform_target("calibrate_probe", Inputs.payload("calibrate_probe")).accepted, "physical input commits through existing proximity checks")
 	campaign.free()
 	await process_frame
+	# The audio mixing thread retires playback after its owning nodes are freed.
+	await create_timer(0.1).timeout
 
 func _check(condition: bool, message: String) -> void:
 	checks += 1
