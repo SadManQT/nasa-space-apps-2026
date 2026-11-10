@@ -7,6 +7,8 @@
 ## Windowed evidence: Godot --path game --windowed --resolution 1280x720 --script res://tools/test_chapter6_puzzles.gd -- --evidence
 extends SceneTree
 
+const PuzzleData = preload("res://scripts/puzzles/puzzle_data.gd")
+
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const RouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
@@ -135,6 +137,8 @@ func _build_entry_state() -> void:
 			break
 		for target in GateCatalog.targets_for_scene(scene_id):
 			var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+			if payload.is_empty():
+				payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
 			payload = Witness4.payload(String(target.target_id), director.snapshot(), payload)
 			var result: Dictionary = route.perform(target.target_id, payload)
 			ok = ok and bool(result.get("accepted", false))

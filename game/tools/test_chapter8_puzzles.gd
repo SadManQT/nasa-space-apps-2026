@@ -6,6 +6,8 @@
 ## panel's controls, focus, layout and commit flow behave headlessly.
 extends SceneTree
 
+const PuzzleData = preload("res://scripts/puzzles/puzzle_data.gd")
+
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const RouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
@@ -92,7 +94,7 @@ func _test_data_and_catalog() -> void:
 			labels_plain = labels_plain and not String(target.get("focus_label", "")).begins_with("P1")
 	_check(defaults_empty, "the gate catalog pre-fills nothing for Chapter 8")
 	_check(labels_plain, "Chapter 8 targets carry plain-words labels")
-	_check(not (GateCatalog.targets_for_scene("EX-CH07-S11")[0].get("payload_defaults", {}) as Dictionary).has("route") and GateCatalog._defaults("p13_commit_plan").has("water"), "Chapter 3–7 witness defaults are untouched")
+	_check(not (GateCatalog.targets_for_scene("EX-CH07-S11")[0].get("payload_defaults", {}) as Dictionary).has("route") and PuzzleData.gate_payload("p13_commit_plan").has("water"), "Chapter 8 route inputs stay separate from the authored Chapter 7 storm witness")
 
 # --- Validation ------------------------------------------------------------------
 
@@ -225,6 +227,8 @@ func _build_entry_state() -> void:
 			break
 		for target in GateCatalog.targets_for_scene(scene_id):
 			var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+			if payload.is_empty():
+				payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
 			payload = Witness4.payload(String(target.target_id), director.snapshot(), payload)
 			payload = Witness6.payload(String(target.target_id), director.snapshot(), payload)
 			var result: Dictionary = route.perform(target.target_id, payload)
