@@ -53,6 +53,10 @@ func set_phase(value: float) -> void:
 	_material.set_shader_parameter("earth_radius", g.re)
 	_material.set_shader_parameter("ring_width", float(g.re) * float(data.science.ring_width_of_earth_radius))
 	_material.set_shader_parameter("gain", exposure_gain(phase))
+	# M4-16 / M4-01: the red rim exists only at totality; gate the shader rim to ring_visible(phase)
+	# so ingress and egress show no red atmospheric ring. Both PR_EclipseMonitor LODs share this
+	# one live screen, so the gate covers both.
+	_material.set_shader_parameter("rim_visible", 1.0 if ring_visible(phase) else 0.0)
 	if _overlay:
 		_overlay.queue_redraw()
 
