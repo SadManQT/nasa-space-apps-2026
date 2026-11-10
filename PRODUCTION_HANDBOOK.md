@@ -320,6 +320,8 @@ Optional opening (from the gameplay entry flow): mustard fields to the Moon cham
 
 ## 10. Status (latest first)
 
+**10 Nov 2026 — Atik resumed M1-68 gate:** all117 mandatory suites started at frozen committed-source checkpointdaa0141 in an isolated APFS-cloned checkout, preserving the user workspace and prior evidence;50ms assertions unchanged. Full result pending. Original Ryzen/RTX and IntelArc access is unavailable (no configured SSH/remote connector or supplied collection route); hosted CI/Metal/headless cannot certify those hosts. [Live evidence and exact blockers](production/qa/perf/atik_batch_2026-11-10/resume_20261110/README.md).
+
 **10 Nov 2026 — Atik final audit merge/checks:** team auditb33d80d is preserved in merge9375330; mandatory focused P01 inputs319/0, loading29/0 and performance582/0 pass again, processes exit0. Calibration fixture audio-resource exit errors are removed by post-free mixing cleanup; four native RefCounted ObjectDB warnings remain unassigned (not an Arc timeout explanation). All four Atik IDs remain acceptance-incomplete with exact blockers; no new integrated full pass claimed. [Final evidence](production/qa/perf/atik_batch_2026-11-10/README.md).
 
 **10 Nov 2026 — Atik saved-work merge:** frozen verification checkpointd1f9a7a is published on work/atik-loading-20261110. Team work through7662115 is preserved by merge63e40e7; both handbook entries and both valid P01 fixture changes survive. Post-merge mandatory focused P01 inputs319/0, loading29/0 and performance582/0 pass. Full86/89 and its follow-ups remain tied to the earlier tested source; no latest integrated full pass or task completion claimed. [All task blockers and exact logs](production/qa/perf/atik_batch_2026-11-10/README.md).
