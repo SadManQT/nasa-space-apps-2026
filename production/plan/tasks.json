@@ -7930,6 +7930,35 @@
     "production/plan/test_board_batch.py",
     "PRODUCTION_HANDBOOK.md"
    ]
+  },
+  {
+   "id": "M4-17",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Apply saved upgrade choices to the 3D rover and verify the after-Chapter-4 and after-Chapter-6 pairs",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
+   "deps": [],
+   "paths": [
+    "game/scripts/rover/lunar_rover.gd",
+    "game/scripts/progression/cadet_progression.gd",
+    "game/tools/test_upgrade_pairs_ch4_ch6.gd",
+    "production/qa/evidence/M3-5U*",
+    "production/qa/evidence/M3-7U*"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-10.",
+   "evidence": "",
+   "updated": "2026-11-10",
+   "prompt": "Found 10 Nov while rechecking M3-5U/M3-7U (both formally wait on M1-19's gate): CampaignFieldSystems passes director.snapshot().upgrades ({choices: {\"4\": \"rover_lights_heater\"}}) to LunarRover.apply_preset, which only reads flat flags, so rover_lights_heater and long_range_battery never apply to the driven rover in the campaign. Fix it in apply_preset (accept both shapes). Add one focused suite proving the after-Chapter-4 and after-Chapter-6 pairs end to end: earned only after the chapter, exclusive, idempotent, saved and restored, modifier reaches the simulation (ice water +2 separate, K3 stack, heater draw), choice screen renders. Make the 4B card text state the applied numbers. Acceptance: the focused suite and test_rover, test_hazards, test_progression pass through game/tools/run_tests.sh; screenshots of both choice screens in production/qa/evidence/.",
+   "reserved_for": "sadman",
+   "effort": 1,
+   "edit_files": [
+    "game/scripts/rover/lunar_rover.gd",
+    "game/scripts/progression/cadet_progression.gd",
+    "game/tools/test_upgrade_pairs_ch4_ch6.gd"
+   ]
   }
  ],
  "requirements": [
@@ -8573,7 +8602,7 @@
  "implementation_batch": {
   "id": "2026-11-10-implementation",
   "active": true,
-  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred. User subsequently authorized Ramim to override owners for M1-125 integrated 117-suite repairs, preserving WIP.",
+  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred. User subsequently authorized Ramim to override owners for M1-125 integrated 117-suite repairs, preserving WIP. 10 Nov: Sadman told his own session to do the tasks his blocked tasks need; M4-17 (rover upgrade shape fix and after-Ch4/after-Ch6 pair verification) added to his row.",
   "priority_order": [
    "ramim",
    "sadman",
@@ -8617,7 +8646,8 @@
     "M3-5M",
     "M3-7P",
     "M3-7U",
-    "M3-7M"
+    "M3-7M",
+    "M4-17"
    ],
    "asif": [
     "M1-105",
