@@ -1,0 +1,483 @@
+## 📂 **A drawer that slides in from the side** — the bag, friend list or chat on a tablet or PC landscape screen.
+##
+## ```gdscript
+## var bag := GoDrawer.new()
+## add_child(bag)
+## bag.open("Bag")
+## bag.body.add_child(inventory_grid)
+##
+## bag.side = GoDrawer.Side.RIGHT     # from the right
+## ```
+##
+## ## 🔑 How it differs from `GoSheet`
+## `GoSheet` rises **from the bottom** — close to the thumb on a phone in portrait, using the full width.
+## A drawer comes **from the side** — on a wide screen it opens a list without covering the whole game view.
+## On a phone in portrait a drawer covers almost the entire screen, so a sheet is the better choice there.
+##
+## ## 🛑 The side is a screen side, not a text side
+## `LEFT` is the left of the screen in Arabic too. To follow the text direction, turn on `follow_text_direction` —
+## that flips it in RTL (for places where "the start side" carries meaning, such as a menu drawer).
+##
+## ## 🚪 A launcher hands over, it does not slide away first
+## `hand_over(action)` runs a row's action: when it opens a window, the drawer **steps aside in that same frame** (no
+## slide, nothing left under the window) and is back — as it was — when that window and anything it opened in turn have
+## closed **by the player** (`GoSurface.close_requests` — ✕, Escape, the back gesture, a scrim tap). Back from the
+## window retraces the path to the drawer. A window that closed itself (its job done — a teleport made) leaves the player
+## there: the drawer closes. An action that opens nothing (it acts on the screen behind) closes the drawer as usual.
+##
+## ## 🛑 It does not intrude on the safe area
+## On a device with a notch or rounded corners, a drawer that runs to the screen edge has its content clipped
+## at the corners. The background fills all the way out, but **the content stays inside the safe area**.
+@tool
+class_name GoDrawer
+extends CanvasLayer
+
+## It closed.
+signal closed
+## It opened.
+signal opened
+
+enum Side {
+	LEFT,   ## From the left of the screen
+	RIGHT,  ## From the right of the screen
+}
+
+## 🚪 Close when a window (a `GoSurface`) opens while the drawer is up — for a launcher drawer (an "all menus" list): the
+## window it leads to takes the screen whatever opened it (a tile, a hotkey, a voice command, a prompt from the game), so
+## it is never left UNDER the drawer, where the first Escape / back would close it unseen. A surface already open when the
+## drawer opened does not count. Off (the default): a surface sits wherever its layer puts it, as before.
+@export var close_when_surface_opens := false
+
+## Which side it comes in from.
+@export var side := Side.LEFT:
+	set(value):
+		side = value
+		_relayout()
+
+## Whether to flip sides with the text direction (RTL). 🔑 Turn it on where "the start side" carries meaning, such as a menu drawer.
+@export var follow_text_direction := false:
+	set(value):
+		follow_text_direction = value
+		_relayout()
+
+## Fraction of the screen **width** it takes up. On a narrow screen `max_width` binds first.
+@export_range(0.2, 1.0, 0.01) var width_ratio := 0.42:
+	set(value):
+		width_ratio = value
+		_relayout()
+
+## Maximum width (dp). Keeps the drawer from growing without limit on a wide monitor.
+@export var max_width := 420.0:
+	set(value):
+		max_width = value
+		_relayout()
+
+## The narrowest it gets (dp) — on a phone the ratio gives way to this, less a strip left to tap the drawer shut.
+## 🛑 42% of a 390dp phone is 164dp: "Potion 1" broke inside the word and so did the header's "Bag" (measured 2026-09-23).
+@export var min_width := 320.0:
+	set(value):
+		min_width = value
+		_relayout()
+
+## 🪟 **Opacity** of the drawer panel's ground (0.0~1.0). **Negative uses the card value the theme and settings decide** (default).
+## 🛑 Only the ground thins out — text, icons and buttons stay crisp.
+@export_range(-1.0, 1.0, 0.01) var alpha := -1.0:
+	set(value):
+		alpha = value
+		if panel != null: _restyle()
+
+## Whether tapping outside (the scrim) closes it.
+@export var dismissable := true
+
+## How long the slide-in takes (seconds). Ignored under `reduce_motion`.
+@export var motion_seconds := 0.2
+
+## The body (scrolls).
+var body: VBoxContainer
+## The header row.
+var header: HBoxContainer
+## The title.
+var title_label: Label
+## The panel being wrapped — reach for it directly when you need fine control.
+var panel: PanelContainer
+
+var _scrim: ColorRect
+var _root: Control
+var _scroll: GoScroll
+var _tween: Tween
+var _open := false
+## `GoSurface.open_surface_count()` when it opened (lowered as those close) — `close_when_surface_opens`.
+var _surfaces_at_open := 0
+## The side the panel face was last made for (`_restyle`).
+var _styled_left := true
+## A hand-over in progress (`hand_over`): {at, asks, serial, until, aside}. Empty when none.
+var _hand := {}
+## How long a hand-over waits, at most, for the window its action opens (`GoSurface.open_serial` — the window's own
+## open) before it reads "nothing opened" and closes — `GoSurface.HAND_OVER_SECONDS`, the one wait both launchers share.
+const HAND_OVER_SECONDS := GoSurface.HAND_OVER_SECONDS
+
+
+func _init() -> void:
+	layer = 80
+	visible = false
+
+	_root = Control.new()
+	_root.name = "DrawerRoot"
+	_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_root.layout_direction = Control.LAYOUT_DIRECTION_LTR
+	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_root)
+
+	_scrim = ColorRect.new()
+	_scrim.name = "Scrim"
+	_scrim.set_meta(&"go_scrim", true)   # a scrim says it is one (`GoStyle.style_scrim`)
+	_scrim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_scrim.mouse_filter = Control.MOUSE_FILTER_STOP
+	_scrim.gui_input.connect(_scrim_input)
+	GoScroll.contain(_scrim)   # leftover wheel turns and gestures stop at the drawer, as on GoSurface
+	_root.add_child(_scrim)
+
+	panel = PanelContainer.new()
+	panel.name = "Drawer"
+	panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	GoScroll.contain(panel)
+	_root.add_child(panel)
+
+	var pad := GoStyle.padding()
+	panel.add_child(pad)
+	var column := GoStyle.column()
+	column.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	pad.add_child(column)
+
+	header = GoStyle.row()
+	header.name = "Header"
+	# 🔤 The root is LTR so the panel's own place is measured on the screen; the header's content follows the language,
+	#    as the body's does (`GoScroll` hands its children the locale): in Arabic or Urdu the title stands at the right
+	#    and ✕ at the left, not an RTL title left-aligned beside a ✕ on the far side.
+	header.layout_direction = Control.LAYOUT_DIRECTION_APPLICATION_LOCALE
+	column.add_child(header)
+	title_label = GoStyle.label("", GoTheme.ROLE_TITLE)
+	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(title_label)
+	var close_button := GoIconButton.new()
+	close_button.icon_name = &"close"
+	close_button.tooltip_text_name = &"close"
+	close_button.pressed.connect(close)
+	header.add_child(close_button)
+
+	_scroll = GoScroll.new()
+	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	column.add_child(_scroll)
+	body = GoStyle.column()
+	body.name = "Body"
+	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_scroll.add_child(body)
+	# 🔑 The panel is as tall as the screen, re-applied whenever its minimum size changes — see `_on_panel_minimum`.
+	panel.minimum_size_changed.connect(_on_panel_minimum)
+
+
+func _ready() -> void:
+	_restyle()
+	set_process(false)
+	if not Engine.is_editor_hint():
+		get_viewport().size_changed.connect(_relayout)
+
+
+## `close_when_surface_opens`: watched only while open — a count compare a frame, nothing while closed.
+func _process(_delta: float) -> void:
+	if not _hand.is_empty():
+		_watch_hand_over()
+		return
+	if not _open:
+		set_process(false)
+		return
+	var count := GoSurface.open_surface_count()
+	if count > _surfaces_at_open: close()
+	else: _surfaces_at_open = count
+
+
+func _enter_tree() -> void:
+	# 🔑 Watched on every entry, not once in `_ready` — a widget taken out and put back (`remove_child` + `add_child`)
+	#    would otherwise stop following the look; on a re-entry it catches up with a look changed while it was out.
+	GoUi.watch(_on_ui_changed)
+	if is_node_ready(): _on_ui_changed()
+
+
+func _exit_tree() -> void:
+	GoUi.unwatch(_on_ui_changed)
+	# 🛑 Release the back-gesture claim — hold on to back after the drawer is gone and that screen cannot be left.
+	# 🛑 **Clear `_open` along with it.** Leave it set and the claim is released while the state still says
+	#    "open", so putting this back in the tree and calling `close()` sends `release` **a second time** and
+	#    eats another window's claim (after which that window no longer closes on back).
+	_hand = {}
+	if _open:
+		GoBackPolicy.release(get_tree())
+		GoSurface.hold_open(false)
+		_open = false
+		visible = false
+
+
+## Open the drawer. A `title`, if given, goes in the header row. The body is **not emptied** — whatever was put in stays.
+func open(title := "") -> void:
+	if not title.is_empty(): set_title(title)
+	if _open: return
+	_open = true
+	visible = true
+	_relayout()
+	_animate(true)
+	# 🛑 The pointer did not move, so the engine still thinks it is over the control that opened the drawer (its button):
+	#    that control's tooltip timer runs on and its tooltip pops up over the drawer — and in Godot 4.7 a click inside a
+	#    visible tooltip goes to the tooltip window, not to what is under it (a press picks any embedded window whose rect
+	#    holds the point, passthrough or not). An "all menus" drawer opened from a corner ☰ had the ☰ tooltip sitting on
+	#    its own ✕, which then did nothing (2026-10-19). Re-reading the hover now (a synthetic motion at the pointer) puts
+	#    it on the scrim / panel, and leaving the button cancels its tooltip. Deferred: `open()` usually runs inside that
+	#    button's press handling, and input must not be pushed from inside input.
+	if not Engine.is_editor_hint(): get_viewport().update_mouse_cursor_state.call_deferred()
+	GoBackPolicy.acquire(get_tree())
+	# 🔑 An open drawer is a window like a surface: the game's input pauses and a coach mark waits (`GoSurface.is_any_open`).
+	GoSurface.hold_open(true)
+	_surfaces_at_open = GoSurface.open_surface_count()
+	set_process(close_when_surface_opens and not Engine.is_editor_hint())
+	GoFeedback.opened()
+	opened.emit()
+
+
+func close() -> void:
+	if not _hand.is_empty() and bool(_hand.aside):
+		# Standing aside (`hand_over`): it was already off the screen — it only gives up coming back.
+		_hand = {}
+		set_process(false)
+		closed.emit()
+		return
+	_hand = {}
+	if not _open: return
+	_open = false
+	set_process(false)
+	_animate(false)
+	GoBackPolicy.release(get_tree())
+	GoSurface.hold_open(false)
+	GoFeedback.closed()
+	closed.emit()
+
+
+func is_open() -> bool:
+	return _open
+
+
+## Runs [param action] (a row's press) and hands the screen to the window it opens — see the header. 🔑 The window opens
+## while the drawer is still up and the drawer steps aside in the same frame, so the player sees one transition.
+## [param wait_seconds] is how long it waits for that window (its own open — `GoSurface.open_serial`); `0` is a row that
+## acts on the screen behind (a zoom, a toggle): the drawer closes at once so its effect shows, then the row runs.
+func hand_over(action: Callable, wait_seconds := HAND_OVER_SECONDS) -> void:
+	if not _open or wait_seconds <= 0.0:
+		if _open: close()
+		if action.is_valid(): action.call()
+		return
+	_hand = {at = GoSurface.path_count(), asks = GoSurface.close_requests(), serial = GoSurface.open_serial(),
+		until = Time.get_ticks_msec() + int(wait_seconds * 1000.0), aside = false}
+	if action.is_valid(): action.call()
+	_watch_hand_over()
+	if not _hand.is_empty(): set_process(not Engine.is_editor_hint())
+
+
+## Is the drawer standing aside for a window it handed the screen to (`hand_over`)?
+func is_handing_over() -> bool:
+	return not _hand.is_empty() and bool(_hand.aside)
+
+
+func _watch_hand_over() -> void:
+	if _hand.is_empty(): return
+	if not bool(_hand.aside):
+		if not _open:
+			_hand = {}   # the action closed the drawer itself
+		elif GoSurface.open_serial() != int(_hand.serial) and GoSurface.path_count() > int(_hand.at):
+			_step_aside()
+		elif Time.get_ticks_msec() >= int(_hand.until):
+			_hand = {}
+			close()   # nothing opened in time: the press acted on the screen behind — show it
+		return
+	# Another launcher opened while away (a second drawer): the player moved on — this one gives up coming back.
+	if GoSurface.is_any_held_open():
+		close()
+	elif GoSurface.path_count() <= int(_hand.at):
+		# Closed by itself, not by the player: its job is done — the drawer does not pop back over where it left them.
+		if GoSurface.close_requests() == int(_hand.asks): close()
+		else: _come_back()
+
+
+## Off the screen at once (no slide-out: the window is already on top), the back gesture and the held place handed to it.
+func _step_aside() -> void:
+	_hand.aside = true
+	_open = false
+	if is_instance_valid(_tween) and _tween.is_valid(): _tween.kill()
+	visible = false
+	GoBackPolicy.release(get_tree())
+	GoSurface.hold_open(false)
+
+
+## Back where it was, at once (the window that covered it just closed) — as `open()` without the slide-in, and without
+## `opened`: it never closed.
+func _come_back() -> void:
+	_hand = {}
+	_open = true
+	visible = true
+	_relayout()
+	var full := get_viewport().get_visible_rect()
+	panel.position.x = 0.0 if effective_side() == Side.LEFT else full.size.x - panel.size.x
+	_scrim.color = _scrim_color(true)
+	GoBackPolicy.acquire(get_tree())
+	GoSurface.hold_open(true)
+	_surfaces_at_open = GoSurface.open_surface_count()
+	set_process(close_when_surface_opens and not Engine.is_editor_hint())
+
+
+## Empty the body (for swapping pages).
+func clear() -> void:
+	for child in body.get_children(): child.queue_free()
+
+
+func set_title(value: String) -> void:
+	title_label.text = value
+	title_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	header.visible = not value.is_empty()
+
+
+func set_title_key(key: String) -> void:
+	title_label.text = key
+	title_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_ALWAYS
+	header.visible = not key.is_empty()
+
+
+## The side the drawer actually attaches to on the current screen (it can differ from `side`, since it may follow the text direction).
+## 🛑 Write the return type as `GoDrawer.Side` — write just `Side` and GDScript dies **at parse time** saying it
+##    "cannot return `GoDrawer.Side` as `Side`" (measured on 4.7).
+func effective_side() -> GoDrawer.Side:
+	if not follow_text_direction: return side
+	# 🛑 `get_tool_locale()` is **the editor's** language — it stays put when the player switches the game to
+	#    Arabic, and the drawer never flipped (2026-09-16). The language at run time is `get_locale()`.
+	var locale := TranslationServer.get_locale()
+	var rtl := locale.begins_with("ar") or locale.begins_with("he") \
+		or locale.begins_with("fa") or locale.begins_with("ur")
+	if not rtl: return side
+	return Side.RIGHT if side == Side.LEFT else Side.LEFT
+
+
+func _relayout() -> void:
+	if panel == null or not is_inside_tree(): return
+	var window := get_viewport()
+	if window == null: return
+	# 🛑 The background (the panel) runs **all the way** to the screen edge while the content stays inside the
+	#    safe area — pull the panel inward and a band of page colour appears at the edge, making the drawer look like it floats.
+	var full := window.get_visible_rect()
+	var area := GoSafeArea.usable_rect(window)
+	# The ratio on a wide screen, a readable floor on a narrow one — minus a strip of screen left to tap it shut.
+	var tap_away := float(GoUi.metric(GoTheme.TOUCH) + GoUi.metric(GoTheme.GAP_SMALL))
+	var width := maxf(full.size.x * width_ratio, minf(min_width, full.size.x - tap_away))
+	if max_width > 0.0: width = minf(width, max_width)
+	width = maxf(width, 160.0)
+	panel.size = Vector2(width, full.size.y)
+	var at_left := effective_side() == Side.LEFT
+	if at_left != _styled_left: _restyle()
+	panel.position = Vector2(0.0 if at_left else full.size.x - width, 0.0).round()
+
+	# Only the content moves inside the safe area — clear of the notch and the gesture bar.
+	var pad := panel.get_child(0) as MarginContainer
+	if pad != null:
+		var base := GoUi.metric(GoTheme.PADDING)
+		pad.add_theme_constant_override(&"margin_top", base + roundi(maxf(0.0, area.position.y - full.position.y)))
+		pad.add_theme_constant_override(&"margin_bottom", base + roundi(maxf(0.0, full.end.y - area.end.y)))
+		pad.add_theme_constant_override(&"margin_left",
+			base + (roundi(maxf(0.0, area.position.x - full.position.x)) if at_left else 0))
+		pad.add_theme_constant_override(&"margin_right",
+			base + (0 if at_left else roundi(maxf(0.0, full.end.x - area.end.x))))
+
+	if not _open: return
+	if is_instance_valid(_tween) and _tween.is_valid(): return
+	panel.position.x = 0.0 if at_left else full.size.x - width
+
+
+## 🛑 A drawer is built hidden, and containers do not lay out while hidden: at the instant `open()` shows it, the header has
+##    never been sorted, its title label (which wraps — `GoStyle.label`) is 0 wide and asks for one character per line,
+##    and the panel grows to that height. A Control never shrinks back by itself once its minimum drops after the sort, so
+##    the panel stayed taller than the screen and the body's last rows sat below the edge, unscrollable — a 13-tile menu
+##    on a 327dp-tall landscape phone lost its last group (2026-10-16). The panel's height is the screen's: whenever its
+##    minimum changes, lay it out again (next frame — after the containers have sorted).
+func _on_panel_minimum() -> void:
+	if not _open or not is_inside_tree(): return
+	var view := get_viewport()
+	if view != null and not is_equal_approx(panel.size.y, view.get_visible_rect().size.y): _relayout.call_deferred()
+
+
+func _animate(shown: bool) -> void:
+	if is_instance_valid(_tween) and _tween.is_valid(): _tween.kill()
+	var window := get_viewport()
+	var full := window.get_visible_rect() if window != null else Rect2()
+	var at_left := effective_side() == Side.LEFT
+	var rest := 0.0 if at_left else full.size.x - panel.size.x
+	var away := -panel.size.x if at_left else full.size.x
+
+	if GoUi.config.reduce_motion or motion_seconds <= 0.0 or not is_inside_tree():
+		panel.position.x = rest if shown else away
+		_scrim.color = _scrim_color(shown)
+		if not shown: visible = false
+		return
+
+	_tween = create_tween().set_parallel(true)
+	if shown:
+		panel.position.x = away
+		_scrim.color = _scrim_color(false)
+		_tween.tween_property(panel, "position:x", rest, motion_seconds).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		_tween.tween_property(_scrim, "color", _scrim_color(true), motion_seconds)
+	else:
+		_tween.tween_property(panel, "position:x", away, motion_seconds).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+		_tween.tween_property(_scrim, "color", _scrim_color(false), motion_seconds)
+		_tween.chain().tween_callback(func() -> void: visible = false)
+
+
+func _scrim_color(shown: bool) -> Color:
+	var base := GoUi.color(GoTheme.SCRIM)
+	return base if shown else Color(base, 0.0)
+
+
+
+
+func _scrim_input(event: InputEvent) -> void:
+	if not dismissable or not _open: return
+	var tapped := (event is InputEventScreenTouch and (event as InputEventScreenTouch).pressed) \
+		or (event is InputEventMouseButton and (event as InputEventMouseButton).pressed
+			and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT)
+	if not tapped: return
+	_scrim.accept_event()
+	close()
+
+
+func _restyle() -> void:
+	# The skin may round only the inner edge (`GoSkin.drawer_box`), so the face follows the side it is docked to.
+	_styled_left = effective_side() == Side.LEFT
+	panel.add_theme_stylebox_override(&"panel", GoUi.skin().drawer_box(_styled_left, alpha))
+	_scrim.color = _scrim_color(_open)
+	# A look may frost the game behind (`GoSkin.scrim_material`); the blur fades in with the scrim's colour.
+	_scrim.material = GoUi.skin().scrim_material_now()
+
+
+func _on_ui_changed() -> void:
+	_restyle()
+	_relayout()
+
+
+func _notification(what: int) -> void:
+	# Back (Android) and Escape close it — a drawer is a screen that "has to be leavable".
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST and _open and not GoSurface.is_any_surface_open():
+		close.call_deferred()
+
+
+## ⌨️ Escape (`ui_cancel`) closes an open drawer, as back does on Android — `GoSurface`'s rule (`close_on_back`).
+## 🛑 Until 2026-10-16 only the Android back request was handled while this file's notes promised Escape too: on a desktop
+##    Esc fell through to the game behind (a game that opens its pause menu on Esc opened it over the drawer). Handled in
+##    `_input`, so it is consumed before any `_unhandled_input` handler sees it; a surface opened over the drawer closes
+##    first (it is the top window).
+func _input(event: InputEvent) -> void:
+	if not _open or GoSurface.is_any_surface_open() or not GoUi.config.close_on_back: return
+	if event.is_action_pressed(&"ui_cancel") and not event.is_echo():
+		get_viewport().set_input_as_handled()
+		close()

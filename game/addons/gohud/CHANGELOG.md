@@ -1,0 +1,2494 @@
+# Changelog
+
+All notable changes to gohud are recorded here. Versions follow [Semantic Versioning](https://semver.org/).
+
+## [Unreleased]
+
+- The painted arcade skin falls back to its bundled symbol font when a host theme has no baked-font metadata, without logging a missing-metadata engine error.
+
+- Deferred focus checks the target when it runs. Closing a surface, a combobox, or a console, or moving a reorder grip in the same frame as its screen hides or leaves the tree no longer calls `grab_focus` on an unusable control. `GoUi.focus_later(control, quiet)` uses a weak reference and skips freed, hidden, detached, disabled and non-focusable controls.
+
+- A window opened with nothing focused (after a click, or after a game key) takes focus with the first key that moves it (Tab, Shift+Tab, an arrow; a gamepad d-pad): its default control, with the ring. Before, that key did nothing for a window on a `CanvasLayer` — with no focus owner the engine never looks inside a layer — so it could not be steered without the mouse.
+- Translated label paragraphs follow the application locale even when a sentence starts with a Latin name or its layout is pinned LTR. `GoStyle.label_key` follows locale by default; `label` and `line` opt in with the trailing `follow_locale` argument, or `GoStyle.locale_paragraph(label)` for an existing label. Existing labels refresh on language changes and tree entry without polling or a required autoload. Raw user content retains AUTO.
+
+- **`GoEditFrame`** (`Control`): the outline a layout editor draws round each thing the player can move — the
+  "customize controls" screen of a mobile shooter. `State.IDLE` a dashed `accent` outline ("this can move"),
+  `SELECTED` a solid one over a light wash with four handles, `WARNING` the same in `warning` ink (it overlaps another),
+  `GHOST` a dashed `muted` outline over a `scrim` veil with `EYE_OFF` in the middle (the player hid it). `circle` rings a
+  round thumb button instead of boxing it (handles on its compass points), `pad` (6) stands it off the rect the caller
+  gives it, `handles` turns the handles off, `frame_rect()` / `handle_points()` / `ink()` say what it draws. Never takes
+  input. New skin hooks `GoSkin.edit_frame_ink(state)` and `GoSkin.draw_edit_frame(canvas, rect, state, circle,
+  handles)`; arcade_light draws the one being edited in the training spotlight's gold.
+- **A scrim says it is one** (`GoStyle.scrim`, `GoStyle.style_scrim`): every scrim the kit makes or restyles carries the `go_scrim` meta (a window's own, a drawer's, one a screen lays in its own layer). A control holding one is a modal layer over what is behind it, so a fit or tap check can tell it from a panel that merely stops taps. Nothing draws differently.
+- **A long plain title shrinks before it loses a word** (`GoSurface`). A title without a plate wraps up to two lines and trimmed the rest with "…" — a sub-page title beside a labelled Back on a 341 dp phone lost its last word. It now steps its size down toward the fit floor (`GoStyle.fit_floor`, 0.7 of its size) until its words take those two lines; only a title still too long at the floor is trimmed.
+- **A row too wide as a whole folds its own buttons before the card hangs off the screen** (`GoSurface`, `GoPage`). The width fit re-wrapped only a one-line button wider than the card by itself; a row of several (a chat line `[input] [mic] [Send · Run]` in Urdu on a 341 dp phone) still pushed the card past both edges. Now, as a last step after the dense step and only while the content is still too wide, every one-line button whose row leaves it less room than its one-line width is re-fitted from its words (`GoStyle.fit_words`). Rows the dense step makes fit keep their labels on one line, as before.
+- **A page whose body scrolls itself keeps its scroll inside the card** (`GoPage`). A page built with `set_scrolls(false)` puts its own `GoScroll.use_panel_edge` scroll in the body; that edge kept the roomy padding while the card took the dense step (a phone held sideways, under 420 dp high), so the scroll ran 8 dp past the card. The page now hands the card's current padding to those edge scrolls on every relayout, as it already did for its own content scroll.
+- **A full-screen page never runs past the screen because of its content** (`GoPage`). A page's card fills the safe area, so it skipped the width fit a centred card gets: one row wider than the screen widened the whole page and pushed the header's ✕ past the right edge (a settings page on a 341 dp phone). The page now applies the same fit at its own width — one-line buttons wider than the inside are fitted again from their words, then the dense step — and says so once in debug builds when content is still too wide. Pages that fit are unchanged.
+- **`GoTouchButton.stick`**: a `drag_aim` button can wear the skin's joystick instead of its picture, a twin of `GoJoystick` — the dish stays put, tinted `stick_ink` (transparent: the skin's new `touch_stick_ink()`), the knob carries `stick_icon` (`stick_knob_share`, `stick_icon_share`) and leans the way of the pull (`knob()` reports where it is drawn), and while held the skin's new **`draw_aim_wedge(canvas, center, radius, pull)`** (colour `touch_aim_ink()`) points there. The name goes under the dish (`stick_label_drop`), the caption under it. `GoSkin.draw_joystick_art` takes an optional `ink` tint. arcade_light: light blue glass and a cyan wedge.
+- **A centred card never hangs off the screen because of its content** (`GoSurface.relayout`). A `Control` is never smaller than its minimum, so a row wider than the card's width forced the card open and, centred, it ran off both edges (a 327 dp phone cut the title's first letter). Now, only when the content is wider than the card: a one-line button in the toolbar, body, status or footer that is by itself wider than the card's inside is fitted again from the text it shows now (`GoStyle.fit_words` — a button built empty and filled later had stayed on one line; shorter buttons keep their line); the card takes the dense step (compact padding and gap) for width as it already did for height; and if it is still too wide, roomy segmented rows take small cells (**`GoStyle.tighten_segmented(line) -> bool`**: small button padding, touch-size floor, a font icon's room kept on the left). Content still wider says so once in debug builds, naming the widest section. `GoStyle.segmented` marks its row with the `go_segmented` meta (true when its cells are small already). Windows that fit are untouched.
+- **`GoRewardRow`** (`PanelContainer`): one thing a player earns by progress — a daily quest, an achievement, a season task: one line of a table with a picture, a title (at most two lines, shrinking to the fit floor), a bar with its `3 / 5`, the payment and the state (`IN_PROGRESS`, `READY` with a glowing claim pill, `CLAIMED` with a check, `LOCKED` with a padlock). Below `WIDE_WIDTH` (780 dp) the bar, its fraction and the payment move under the title. arcade_light paints it to stand beside a `GoScoreTable`: a plate per state, a chunky painted bar, full-colour pictures with no plate and the table's lettering; other looks use their own card, a glyph in a well and a dimmed claimed or locked row. `GoRewardRow.extent()` is every row's height under the current look and `GoConfig` at any width (70 dp in arcade_light), so it fits `GoListView.recycle` as well as a `GoScroll`. `claim_pressed(id)` hands back the row's `key` once per READY, and a press begun on a row that moves to other data is dropped.
+- **arcade_light reward art**: `GoSkinArcadePainted.ART_FOLDERS` gains `assets/arcade_light/rewards/`, so `GoSkin.widget_art` gives `row_cyan`, `row_gold`, `row_done`, `bar_track`, `bar_blue`, `bar_green`, `value_pill`, `coin`, `gift`, `quest_play`, `quest_medal`, `quest_magnet`, `quest_powerup`, `quest_star` and `quest_flame`. New theme types `GoRewardRow`, `GoRewardRowGold`, `GoRewardRowDone`, `GoRewardBar` and `GoRewardBarGreen`.
+- **`GoBar.set_faces(track, fill)`** and `has_faces()`: draws a bar from two 9-slice `StyleBox`es instead of the look's. A bar that never takes faces is unchanged and carries no extra node.
+- **arcade_light flashbang art**: the power-up icon `powerup_flashbang` (`assets/arcade_light/hud/`, 96 px) and its item key `btn_flashbang` (`assets/arcade_light/touch/`, 256 px, the purple glossy disc of `btn_banana`) — a toy stun grenade going off in a white-and-yellow burst, in the HUD's navy ink — both through `GoSkin.widget_art`, painted in code by `tools/paint_arcade_flashbang.gd`.
+- **`GoIconSet.DISCORD` outlined**: the Discord logo now has a thick black outline and black eyes, so it reads on any backdrop as a bare picture key: `GoIconButton.art = GoUi.icons().texture(GoIconSet.DISCORD)`.
+- **`GoIconSet.DISCORD`** (`&"discord"`): the Simple Icons Discord logo (CC0) in white, in arcade_light's icon set — a "join our Discord" key: `GoGlyphButton.make("", GoIconSet.DISCORD, &"GoInfoButton")`.
+- **`GoStyleBoxFrame.opacity`** (0..1, default 1): fades a framed face's dressing — the frame art's tint alpha and the shadow's alpha — as one value, leaving `tint`, `shadow_color`, the body and the draw rect as set (`art_modulate()` / `shadow_alpha()` report what is drawn). At 0 the face draws its body alone. `GoStyleBoxSprite` draws through `_draw_nine(canvas, rect, modulate)` (its `_draw` passes `tint`).
+- Deferred-gesture iPhone edge HUDs now expose a configurable 16-point bottom touch keep-out; form safe areas and non-deferred gestures keep their full inset.
+
+### Added
+
+- **`GoStyleBoxFrame`** (extends `GoStyleBoxSprite`): a framed face — a flat body drawn as a chamfered polygon (`bg_color`, `fill_inset`, `fill_cut`, radius 0) with an optional soft drop shadow (`shadow_color`, `shadow_size`, `shadow_offset`), under a transparent painted 9-slice frame drawn exactly as `GoStyleBoxSprite` draws it. One frame PNG serves every state. **`GoStyle.frame_states(normal, overrides, disabled, focus)`** derives `hover` (lighter body), `pressed` (darker body, dimmer frame), `focus` (the frame alone, drawn over the face) and `disabled` (a given cut, else a desaturated body); **`GoStyle.style_frame(control, states)`** puts them on a `Button`, `LineEdit` / `TextEdit` or `PanelContainer` under that control's own state names. Tests: `tests/gohud_stylebox_frame_test.gd`.
+- **Face helpers around it**: `GoStyle.frame_face(…)` builds a framed face in one call; `GoStyle.pad_faces(control, left, right, top, bottom)` gives a control its own copies of its state faces with new padding (shared faces stay untouched); `GoStyle.bare_button(button, pad_x)` clears every state face; `GoStyle.tint_field(line_edit, ink, placeholder, caret)` and `GoStyle.recolor_text(control, color)` colour text without touching roles; `GoStyle.tint_button` takes a trailing `disabled` ink; `GoStyle.frame_states` deepens the hover body for a negative `hover_shift`.
+
+- **The scale curve — `GoScale.curve(inputs)`**: one decision from `GoScale.device_inputs(window_px)`
+  (window, screen, dpi, reported OS scale, native/desktop identity, or a simulated device) to the scale factor,
+  breakpoint, gain, `dp_per_unit` and applied limit. `GoRuntime.scale_curve()` exposes the decision;
+  `GoRuntime.dp_per_unit()` exposes its dp ratio. With `scale_enabled` and the `DP` profile,
+  **`GoConfig.reference_short_side`** (px, 0 = off) enlarges a desktop canvas when the window's short side exceeds
+  the reference, up to **`max_window_scale`** (4.0); the OS scale remains a floor and the breakpoint stays in OS dp.
+  **`user_scale`** (1.0) sets the player's UI size and **`min_canvas_short`** (0 = no limit) sets the narrowest
+  supported canvas. The one-OS-dp floor takes precedence over that canvas limit. Changing these settings
+  re-applies through the runtime at once. Helpers: `GoScale.window_scale_for(short_px)`,
+  `GoScale.reported_scale(server, raw_scale)`, `SCALE_REPORTING_SERVERS` and `GoScale.simulation_serial()`.
+
+- **`GoPodium`** (`Control`): a leaderboard's top three on painted blocks — gold in the middle and tallest, silver
+  left, bronze right — a laurel medal over each, a name plate per block (`GoPodiumName` over `GoPodiumValue`), and a
+  sunburst and confetti behind (`show_decor`). `set_places([{name, value}, …])`, index 0 = 1st; a missing, `null` or
+  `{}` entry hides that place. It draws its design canvas (`DESIGN_SIZE` 1035 × 256) as large as fits, standing on its
+  bottom edge; the minimum size is `DESIGN_SIZE × minimum_scale` (0.75). Texts fit their plate
+  (`GoStyle.fit_font_size`), then ellipsize. Art by `widget_art`: `podium_gold/silver/bronze`,
+  `laurel_gold/silver/bronze`, `sunburst`, `confetti`; without it, token-coloured blocks and numbered discs. Blocks
+  stretch in three bands (`BLOCK_BANDS`) and reach `BLOCK_TUCK` below the canvas, so a table placed right under the
+  podium hides their bottom lip; name and value stand on `TEXT_MIDDLES` of the plate (gold `GOLD_TEXT`/`GOLD_VALUE`).
+- **`GoScoreTable`** (`PanelContainer`, `GoScoreTable`): a white, navy-rimmed ranking card — a blue head bar
+  (`GoScoreTableHead`, `GoScoreTableHeadLabel`, two column rules) over rows it scrolls itself (`scroll: GoScroll`,
+  vertical only; `rows: VBoxContainer`). `set_columns(rank, player, value)`, `add_row(rank, name, value, own) ->
+  Control`, `clear_rows()`, `row_count()`, `row_height` (44), `row_gap` (4), `font_size`, `head_font_size`,
+  `medal_size`. Rows are `GoScoreTableRow`, rank 1 `GoScoreTableRowGold`, the player's own `GoScoreTableRowOwn` (wins
+  over gold), text `GoScoreTableLabel`; ranks 1–3 show `medal_row_1/2/3` left of "#n". Texts fit their column.
+- **`GoBestBar`** (`PanelContainer`, `GoBestBar`): the player's best pinned under a board — "YOUR BEST"
+  (`label_text`, `GoBestBarLabel`), a pill tap target (`entry_button`, `GoBestBarEntry`, signal `entry_pressed`)
+  holding rank, name and value (`set_entry`) or "—  text  —" (`set_empty`, `is_empty()`), and a green PLAY
+  `GoGlyphButton` (`play_button`, primary with the play glyph, signal `play_pressed`).
+- **arcade_light leaderboard art folder**: `GoSkinArcadePainted.ART_FOLDERS` gains `assets/arcade_light/leaderboard/`.
+- **Leaderboard controls (arcade_light)** — **`GoCategoryButton`** (`Button`): a category key with `icon_art` on the
+  left; `selected` swaps `GoCategoryButton` (blue gloss, white outlined words) for `GoCategoryButtonSelected` (gold,
+  orange rim, navy words) and shows a chevron (`chevron_art`, else the skin's `chevron`, else the icon set's); the
+  words shrink to fit and break into two balanced lines when one line would shrink under 86 %, `text` untouched.
+  **`GoPageStepper`** (`HBoxContainer`): `text` on a cream `GoPagePlate` (`GoPageLabel`, fitted) between two
+  `GoArrowButton` keys, `page_count` dots under it (`page_index` dark), `previous_disabled` / `next_disabled`,
+  `previous_pressed` / `next_pressed`. **`GoStatePanel`** (`PanelContainer`): the pale card a board shows when empty,
+  failed or loading — `illustration`, `heading` (`GoStateHeading`), `body` (`GoStateBody`), a `GoGlyphButton`
+  (`button_text`, `button_variation`, `button_glyph`, `button_pressed`), `loading` (a ring of 12 fading blue dashes,
+  still under `reduce_motion`, no button), and an optional blue `GoStateHeader` strip (`set_header(icon, title,
+  pill_text)`, `clear_header()`). **`GoBoardTitle`** (`VBoxContainer`): a big white outlined title (`GoBoardTitle`)
+  with an `icon`, and a navy `GoBoardPill` (`pill_text`, `pill_icon`) tucked under it. **`GoGlyphButton.check_badge`**
+  (a round badge over the top-right corner, `badge_rect()`) and **`glow`** (a soft light behind the face). Skin hooks
+  `category_button_art()`, `page_plate_art()`, `page_dot_colors()`, `loading_ring_color()`, `button_glow_color()`;
+  arcade_light reads painted art from `assets/arcade_light/leaderboard/` when present and falls back to the
+  code-drawn faces. Sized to the reference board in the 1280 × 720 dp space: a category's words stay on one line and
+  shrink (`WRAP_BELOW` 0.78: they break only below 78 % or past the fit floor); the stepper's keys stand
+  `KEY_GAP_SHARE` off a full-height plate; the panel's heading wraps instead of widening the card, tucks the body up
+  under it (`HEADING_TUCK_SHARE`), takes `heading_scale` (1.0) and, as a `GoBoardTitle`, `BOARD_HEADING_SHARE`;
+  `padding` defaults to 20; `show_decor` (off) scatters faint stars and trophies over the card; the header pill's
+  clock is `PILL_ICON_SHARE` of its words. `GoBoardTitle`'s pill rides up into the title's descent
+  (`TITLE_TUCK_SHARE`); the title has a deep ink shadow.
+
+- **arcade_light flat zebra rows** — `GoScoreRowStripe`, `GoScoreRowStripeAlt` and `GoScoreRowStripeGold`
+  (`PanelContainer`): a flat fill of the `surface` token, of `surface_soft`, and of `surface` lerped 0.28 toward
+  `warning_fill` (a soft gold first place); no border, corner radius or shadow, content margins 10 left, 16 right, 0
+  above and below — rows stacked with no separation read as alternating light and grey stripes, not pills. With them
+  **`GoScoreRowLabel`** and **`GoScoreRowMutedLabel`** (`Label`): the body font (Nunito Bold and its CJK fallbacks) as
+  a `FontVariation` at `variation_embolden` 0.5 — lighter than `GoScoreLabel`'s 1.2 — in `GoScoreLabel`'s navy ink and
+  in the `muted` token, no outline; the caller sets the font size.
+- **`GoSurface.show_corner_close`** (off) and **`corner_close_size`** (72 dp): a big close key, `corner_close`, centred
+  on the card's own top-right corner and nudged `CORNER_CLOSE_NUDGE` (-6, +6) inward, so about half of it hangs past
+  the card. The close button's key (dressed by `GoSkin.dress_close_button`: arcade_light's painted red disc); a press
+  calls `request_close()` (`close_requested`), `close_enabled` off disables it. It hangs on a bare internal mount of the
+  card, so the card's layout never sees it, and it moves and scales with the card; a `SCALE` fit reserves its reach
+  (`fit_overhang()`). While it shows, the head's close button and the ribbon-end key (`show_close_key`) stay hidden.
+- **`GoGestureHint`** (`Control`): see-through ghost fingertips that play a touch gesture in a loop, for a tutorial
+  that teaches one. `Gesture.PINCH` (the only one so far): two fingertips appear close together near the middle, spread
+  apart along the diagonal (zoom in), pause, pinch back together (zoom out), pause and fade, every `loop_seconds`
+  (2.6), eased, with short fading trails. An arrow (a shaft and a big head, 1.8 × the fingertip's radius, white —
+  `GoSkin.gesture_arrow_fill()` — in a 3 dp `shadow` outline at 0.8) stands just outside each fingertip for as long as
+  the ghost shows: outward through the spread and the hold apart, inward through the pinch and the hold together,
+  dipping briefly as it turns (`arrow_direction()`, `arrow_alpha()`). `play()` (re)starts the loop, `stop()` hides it (nothing
+  drawn), `playing` tells which, `advance(delta)` drives it by hand (`auto_advance` off). It centres itself in its rect
+  and scales the travel (`reach` 0.34 / `near` 0.08 of the short side) and the fingertips (9.5 %, 20..38 dp) to it;
+  `ink` (the `accent` by default) rims them. A still frame (apart, a two-headed arrow at each) under `reduce_motion`. Never takes
+  input (`MOUSE_FILTER_IGNORE`) — the player pinches through it. New skin hooks `GoSkin.draw_gesture_touch()`,
+  `GoSkin.draw_gesture_arrow()` and `GoSkin.gesture_arrow_fill()`.
+- **`GoFoldTab`** (`Button`): the affordance that folds a HUD panel into a small pill and back (MIR4 / Lineage W /
+  Genshin). Unfolded, a slim handle (`tab_face`, 16×36) against the box's `side` edge (or the `tab_align` edge) with a
+  chevron toward `side`; folded, a pill (`pill_height`, 32, the box's width) reading [glyph][text][chevron] away from
+  `side` — `icon_name`, `pill_text` (as is, left to right, ellipsized) and a slim `meter` gauge (`meter_color`,
+  `success_fill` by default) — or, with neither, the handle with the chevron turned back. `fold_changed(folded)` only for
+  a press or `toggle()`, never for `folded` set from code; `locked` holds it folded and a press emits `locked_pressed`.
+  The face is `GoSkin.overlay_box` edged in `accent`, tinted on hover and press, with no frame on the rest of the touch
+  box and the theme's focus ring kept; touch widens to `GoUi.touch_size()`; `tooltip_fold_name` /
+  `tooltip_unfold_name` / `tooltip_locked_name` give the tooltip and screen-reader name per state through `GoUi.text`
+  (caller-supplied — no new kit strings). `GoFoldTab.fade_in(node, seconds)` (`FADE_SECONDS` 0.12): the short fade the
+  tab plays on its new face, for the panel a host shows again; instant under `reduce_motion`. The host owns the layout.
+  `pill_text` is cheap to set often (a folded HP share ticking in a fight): a new text updates only the label, the
+  tooltip and the screen-reader name; the face restyles only when it changes (a glyph-less tab turning between the
+  handle and the pill).
+- **arcade_light power-up art and item keys** — painted in the HUD's style: the power-up icons `powerup_banana`,
+  `powerup_trap`, `powerup_reflect`, `powerup_bomb` (`assets/arcade_light/hud/`, 96 px, for a `GoHudCard` or a notice)
+  and the item keys `btn_banana`, `btn_trap` (`assets/arcade_light/touch/`, 256 px, glossy discs like `btn_attract`),
+  all through `GoSkin.widget_art`. **`GoTouchButton.badge`** (`badge_size`, `badge_ink`, `badge_rect()`): a count on
+  the rim, up-right, on the skin's `badge_box` plate — an item key's charges left (`"×2"`).
+- **`GoSurface.bottom_reserve`** — canvas units kept clear at the bottom of the safe area for a strip the host docks
+  there (an anchored ad banner). A centred or anchored window lays out above it; under `SCALE` its `fit_flex` list gives
+  up height first, and `fit_scale` after a `relayout()` tells the host whether the card still reads well. A `BOTTOM`
+  sheet ignores it.
+- **`GoSafeArea.obstructions(view)`** — the screen's physical obstructions in UI units, for a HUD that runs edge to edge
+  instead of keeping the whole safe area: `holes` (Android's cutouts; an iPhone's notch / Dynamic Island derived from its
+  insets — Godot 4.7 names no cutouts on iOS), `corner_radius`, `gesture` (the iOS home strip), `screen` and `bars` (the
+  insets that stay whole — a status/nav bar, an iPad's status bar, the home strip). Pure helpers `ios_holes()`,
+  `hole_insets()`, `nearest_edge()`, `bar_insets()`, `corner_shift()` (a shape into the rounded corner's arc — diagonal or
+  along one axis) and `corner_keep()` (L-shaped bars for floating layouts). `GoConfig.corner_radius_ios` (55 pt),
+  `corner_radius_ios_tablet` (18 pt), `corner_radius_android` (32 dp) and `ios_cutout_lengths`. `GoScale.simulate` /
+  `GoRuntime.simulate` take `platform`, `cutouts`, `corner_radius`, `screen_scale` and `notch_side`; a simulated Android
+  device given only `cutouts` gets them as its insets (`usable_rect`), as Android reports an immersive window.
+
+- **arcade_light sign-in keys and marks** — `GoWhiteButton` and `GoBlackButton`: the glossy pill repainted white (ink
+  label, no outline) and black (white outlined label) by `tools/paint_arcade_sign_in.gd` (`btn_white.png`,
+  `btn_black.png`). Icons `GoIconSet.GOOGLE` (`&"google"`, the multi-colour Google G, drawn in its own colours),
+  `GoIconSet.APPLE` (`&"apple"`, the Simple Icons Apple logo, CC0, white) and `GoIconSet.MAIL` (`&"mail"`, an envelope
+  painted in the glyph style) in arcade_light's icon set. `GoGlyphButton.make("Google", GoIconSet.GOOGLE, &"GoWhiteButton")`.
+
+- **`GoPage` sub-pages** — `push(title, build)` / `push_key(key, build)` open a level **inside the page** (its own
+  title, the header's back button, a body that scrolls like a tab body, a pinned `sub_footer()`); `pop()` · `pop_to()` ·
+  `depth()` · `sub_body()` · signal `depth_changed(depth)`. Escape, the Android back gesture and the back button pop one
+  level; the page closes only from depth 0 (the ✕ closes from any depth). The rail and the root's footer step away while
+  a sub-page is up; focus returns to the control that pushed; `build` runs on push and a popped level is freed.
+- **`GoPage.confirm()` / `confirm_key()`** — `await` a yes/no inside the page (a pushed sub-page with [cancel] [confirm];
+  back / Escape / close answer `false`), the same arguments as `GoDialogs.confirm`.
+- **`GoPage.set_status_text()` / `set_status_key()` / `clear_status()`** — a sub-page has its own pinned status row
+  between its body and its pinned row (at depth 0 they are the surface's). The root's row steps away under a sub-page.
+- **`GoPage.set_page_title()` / `set_page_title_key()`** — the page's own title from any depth (under a sub-page it is
+  what the last pop shows); `set_title()` still re-titles the level shown.
+- **`GoPage.hold(on)` / `is_held()`** — a sub-page mid-send holds itself up: back, Escape, the back gesture and the ✕
+  do nothing until it releases (a code `pop()` / `close()` still works; `close_enabled` comes back as it was).
+- **`GoPage.hand_over(action)` and `GoDrawer.hand_over(action)`** — a row that opens a window the launcher cannot hold:
+  the launcher steps aside in the frame the window opens and comes back when it closes (a drawer whose tile opened
+  nothing closes, as before). `GoSurface.set_aside()` / `path_count()` / `held_count()` are the counts they share.
+  Only a close the player asked for brings the launcher back: **`GoSurface.close_requests()`** counts
+  `request_close()` calls (✕, Escape, back, scrim), and a window that closed itself (its job done) leaves the launcher
+  closed instead of popping it back over the new place. The wait for the window is its own open
+  (**`GoSurface.open_serial()`** / `last_opened()`), at most the wait given (**`GoSurface.HAND_OVER_SECONDS`** = 0.5 s —
+  was two frames, so a window opening a little late fell back to "launcher closes, then a window pops");
+  `GoDrawer.hand_over(action, 0.0)` is a row that acts on the screen behind (closes at once). **`GoPage.recall()`** brings
+  a page standing aside back by asking its window to close as the player would.
+- **`GoSurface.back_before_close`** (off) and **`GoSurface.request_back()`** — Escape and the Android back press a
+  showing back button before they close the window (GoPage turns it on). `request_back()` is that step for code (a voice
+  "close").
+- **`GoPage.set_tab_badge(id, badge, alert)`** changes one tab's count badge and red dot in place (no `set_tabs()`
+  rebuild — the shown tab, its body and the focus stay): a count that changes while the page is up.
+- **`GoDrawer.close_when_surface_opens`** (off): a launcher drawer closes when a surface opens while it is up (a tile,
+  a hotkey, a voice command, a prompt), so the window is never left under the drawer where the first Escape / back
+  closes it unseen. `GoSurface.open_surface_count()` is new (the count it compares).
+- **`GoPage` — a full-screen page** for menus that own the whole screen (settings, a bag, a character screen, mail):
+  a title with back and close, a category rail that sits on the left in landscape and becomes tabs along the top in
+  portrait (`set_tabs()` takes `{id, label, icon, badge}` data, `tab_changed(id)` fires per tab), an optional preview
+  beside the content (`set_preview()`), and the content area (`body`, scrolling unless `set_scrolls(false)`). The
+  chrome is a `GoSurface` filling the safe area, so back-gesture ownership, Escape / Android back closing only the
+  topmost window and focus restore are the surface's own; the ground behind is opaque by default (`opaque`), so a host
+  can stop drawing what a page covers. The card snaps to whole pixels inside the usable area and refits when its
+  content's minimum drops; the content scroll keeps the shared panel edge where its column meets the card's right
+  edge; a tab's glyph icon never wraps with the rail's labels. Tests: `tests/gohud_page_test.gd` (in `tools/check_all.sh`).
+- **`GoNoticeFeed.push_versus(left, picture, right, own, left_color, right_color)`**: a kill feed's
+  `[killer] [picture] [victim]` row — a new `Left` label before the icon (hidden by `push`), each name in its own
+  colour (alpha 0 keeps the theme's), an empty `left` leaving `[picture] [victim]`, a wide picture kept in shape at
+  `icon_size` high; the same pool, reuse, fade, own row and feedback as `push`.
+- **`GoNoticeFeed.max_row_width`** (0, no limit): a longer row shrinks both names by one shared scale until it fits
+  (icons keep their size; short rows stay compact), down to **`fit_min_scale`** (negative: `GoUi.config.fit_min_scale`);
+  **`font_size`** (0: the theme's) and **`row_alignment`** (left / centre / right → `SIZE_SHRINK_BEGIN` / `CENTER` / `END`).
+- **arcade_light's kill-feed glyphs** `GoIconSet.MAGNET_ARROW` (`&"magnet_arrow"`: the horseshoe magnet lying on its
+  side, poles to the right, three yellow force waves leaving them) and `GoIconSet.FALL` (`&"fall"`: a down arrow beside
+  the ledge it left), painted by `tools/paint_arcade_killfeed.gd`.
+- **arcade_light's `GoIconSet.MULTIPLAYER`** (`&"multiplayer"`): three white people, one in front of two, in the
+  painted glyph style (navy rim, pale lip) — a main menu's multiplayer button; painted by
+  `tools/paint_arcade_multiplayer.gd`. `GoIconSet.USERS` (the HUD's opponents count) is unchanged.
+- **`GoHudCard.show_panel`** (on): off draws no board at all — no `GoHudPanel`, no margins — so the icon, banner,
+  labels and bars sit bare on the 3D scene (a match HUD's status corner). A `gauge` keeps its board.
+- **`GoHudCard.icon_ink`** (transparent): tints the card's picture (`self_modulate`), so a white icon from the icon set
+  reads on the white board in a token colour — `GoIconSet.USERS` in `GoTheme.ACCENT`. Transparent leaves the picture's
+  own colours.
+- **`GoBar.icon_beside`** (off): the icon sits left of the bar, centred on it, and the bar (the plain fill or the
+  painted frame, ticks and all) takes the rest of the width; `icon_size` and `icon_gap` still apply, and the name row
+  hides while it has no name and no readout. `GoHudCard.add_bar` bars take it too.
+- **arcade_light's HUD `shield`** (`assets/arcade_light/hud/shield.png`, `GoUi.skin().widget_art(&"shield")`): a
+  solid 64 px shield in the painted bolt's style — the navy rim, a gold-to-orange face (the stability bar's paint), a
+  darker lip and ridge, a gloss on the upper left — drawn by `tools/paint_arcade_shield.gd`.
+- **`GoSignalBars`** (`PanelContainer`): a phone-style signal meter — `max_bars` (4) bars rising left to right, the
+  first `bars` lit in the reading's `tone` (`Tone.GOOD` / `FAIR` / `POOR` take `success_fill` / `warning_fill` /
+  `danger_fill`; `NONE`, no reading yet, leaves every bar a faded `muted_fill`), an optional `text` readout ("48 ms") in
+  the look's outlined HUD text (`GoOutlineLabel`, else the name plate's ink and edge); `bar_height` (24), `text_size`
+  (20), `text_width` (a fixed room that shrinks a long text with `GoStyle.fit_font_size`), `panel` (the `GoHudPanel`
+  board), `scale_factor`; `GoSignalBars.make(bars, tone)` and `set_reading(bars, tone, text)` (one rebuild). Display
+  only — the caller decides every value. A match HUD's ping.
+- **Skin hook** `GoSkin.draw_signal_bars(canvas, rects, lit, ink, dim)`: plain rounded bars by default; the arcade
+  looks paint each bar as a small key — the ink outline, the paint's gradient and gloss, no lip.
+- **`GoStarRow`** (`HBoxContainer`): a row of rating stars — `stars` (0) of `max_stars` (3) lit, the rest dim;
+  `star_size`, `gap`, `scale_factor`, `earned_texture` / `empty_texture`, `GoStarRow.make(earned, total, side)`.
+  arcade_light paints them (`assets/arcade_light/stage/star.png` and `star_empty.png`, drawn by
+  `tools/paint_arcade_stars.gd` in the style of the painted check, `GoSkin.widget_art` `star` / `star_empty`); a look
+  with no art draws the icon set's star in `warning_fill`, the unearned ones in a faded `muted_fill`. Both painted stars
+  are solid (a gold one with a navy rim and a gloss, a grey one), never an outline.
+- **arcade_light's icon set draws `GoIconSet.STAR` with the filled painted gold star** (it fell back to the default
+  set's outline star).
+- **`GoLevelCard.stars`** (0) and **`max_stars`** (3): a `GoStarRow` (`star_row`, `star_size` 22 — readable on a phone — `star_gap` 2) as a
+  third line under the subtitle, on an open, cleared or current tile; 0 shows no row and a locked tile never shows
+  one, so a card that never sets it is unchanged.
+- **The widgets speak their own UI cue** (`GoFeedback`, plugged into `GoFeedback.sound_handler`): every one has a
+  `feedback` export, the `GoFeedback` event it plays (an empty one is silent). `GoGlyphButton`, `GoLevelCard` and
+  `GoSwitch` say `tapped` on the player's press (never on a `button_pressed` set from code); `GoSlider` says the new
+  `stepped` (`slider_tick`) when the player moves it, not when code sets its value; `GoNoticeFeed.push()` says the new
+  `noticed` (`notice_pop`); `GoSurface.request_close()` says `closed` (`close_feedback`, on) and a surface says
+  `opened` when it shows if `open_feedback` is on (off). `GoIconButton` stays silent unless given a `feedback`.
+  `GoSheet`, `GoCombobox` and `GoDialogs` turn their surface's `close_feedback` off, so a close is one cue.
+  `GoFeedback.noticed()`, `GoFeedback.stepped()` and `GoConfig.sound_cues` `noticed` / `stepped` are new; `noticed`
+  and `stepped` never buzz.
+- **`GoSurface.fit_screen_share`** (0): under a centred `FitMode.SCALE` fit, the least share of the safe area (0–1)
+  the window covers. A smaller card grows past its own size (a scale above 1) until it and its overhang reach the
+  share across or down, whichever comes first, as far as the screen holds it — a room window that takes 70% of a
+  big screen. `GoFitBox.place()` takes the same `share`.
+- **`GoSkin.dress_search_clear(button)`**: a look dresses `GoSearchBar`'s clear button whenever the bar takes it.
+  The arcade looks make it their round red close key with the white cross (it was a pale tile with a navy cross);
+  every other look keeps its plain icon button. `GoSkin.undress_close_button(button)` (it was `GoSurface`'s own)
+  lifts a dressed close key off again.
+- **`GoIconButton.mirror`** (off): draws the picture (`art`) or the icon flipped left to right, so one PLAY picture
+  is both a "next" and a "previous" key. `GoIconButton.mirrored(texture)` makes the flipped copy once and shares it.
+- **`GoSurface.show_close_key`** (off): a close key in the head's other corner while the corner art stays — on the
+  right beside `arcade_light`'s magnet, on the left when `corner_on_left` is off (it mirrors the art, not the
+  language). It hangs past the card's corner as the art does (`GoSkin.window_close_key_rect()`), so the title and the
+  layout do not move, scales with the card under `FitMode.SCALE` (`fit_overhang()` reserves it) and calls
+  `request_close()`; `close_enabled` off disables it. `arcade_light` paints it (and a window's close button) as the
+  red disc `close_key.png` (btn_red's red and lip with no white glare, `tools/paint_arcade_close_key.gd`), round and
+  48 dp, with the white cross; `GoRibbonHeader.card_overhang()` takes a `close_key` flag.
+- **`arcade_light` paints `plus`, `minus` and `close`.** The glyph set had none of the three, so a - / + stepper or a
+  close key drew the default set's thin line icon on a painted pill. They are painted in the set's own style — a
+  white face, a navy outline and a pale lip under every lower edge — by `tools/paint_arcade_glyphs.gd`.
+- **`GoRibbonWideTitle`** (`arcade_light`): the title on a `GoRibbonWide` ribbon — `GoTitle` with the stage ribbons'
+  8 px outline (Magnet Mayhem's stage select and room list set it on the label by hand).
+- **`GoConfig.close_on_os_back`** (on): off leaves the Android back gesture to the game while Escape / `ui_cancel`
+  still close the top window. A game with its own Back handler closed two windows with one Back — its own and the
+  one under it, which the deferred `request_close()` then found on top.
+
+### Changed
+
+- `GoPage`'s content scroll also borrows the card's right padding in a right-to-left landscape page that has neither a
+  rail nor a preview on that side (its column meets the edge there).
+
+- **gohud loads only what the game uses** (a faster first frame). `GoUi.DEFAULT_THEME`, `LIGHT_THEME` and
+  `DEFAULT_ICONS` are read on first use, not preloaded the moment anything names `GoUi`; the backup theme is read only
+  when the current one lacks a token; `set_mobile_type()` and `set_font_locale()` no longer read the default theme
+  before a look is chosen. The default icon set lists its drawings as `paths`, so each SVG is read when first drawn.
+  Only the current locale's (and the fallback locale's) built-in translation is registered; another is read when the
+  game switches to it (`GoUi.set_locale()`, the `GoRuntime` autoload, `GoUi.text()`). New
+  `GoUi.add_locale_translations(code)` registers a language's piece without switching to it (a language picker).
+
+### Fixed
+
+- **Display scaling follows platform identity.** `GoScale.reported_scale()` uses reported desktop scale only
+  for `SCALE_REPORTING_SERVERS` (macOS, Wayland and web); Windows and X11 use the dpi fallback instead.
+  Native Android and iOS devices use handheld density regardless of diagonal. Explicit desktops keep desktop
+  density even when effective Windows DPI makes their computed diagonal look small; unknown devices retain
+  the physical-diagonal fallback.
+- **`GoRuntime` re-applies scale after a move to another monitor or a DPI change**, even without a resize.
+  A changed curve factor, including a new `user_scale`, also updates the window without requiring a resize.
+
+- **`GoForm` presses its back button once per Android Back, and never after it left the screen.** Two back
+  requests in one frame (a double tap, the gesture plus a tap) queued two deferred presses; when the first changed the
+  scene, the second ran the handler on the detached form, where `get_tree()` is null — a crash in a release export.
+  At most one press is queued now, and the form checks again at the end of the frame that it is still in the tree,
+  visible, holding Back under no open window, with an enabled button.
+
+- Fix arcade_light `GoBar` fills covering their outlines: clip the gradient and segment ticks to a separate rounded
+  inner track, reserving the skin's 3 px rim at every fill level. `GoSkin.bar_fill_clip_box()` supplies the inner mask.
+
+- **Right-to-left content inside a panel-edge scroll mirrors again.** `GoScroll.use_panel_edge` moves the content into
+  an inset that stays physically left to right (its margins hold the scrollbar gutter); the scroll handed the locale's
+  direction only to its own children, so content built before the scroll entered the tree — a `GoPage` body, a
+  `GoSurface` body — inherited the inset's LTR: under Arabic / Urdu the rail and header mirrored and the rows did not.
+  The inset's children are content roots too. Test: `gohud_page_test` "the page body mirrors".
+
+- **A `GoDrawer` keeps the screen's height after its first open.** A drawer is built hidden, and containers do not
+  lay out while hidden: when `open()` showed it, the header had never been sorted, its wrapping title was 0 wide and
+  asked for one character per line, and the panel grew to that height and never shrank back — the body's last rows
+  sat below the screen edge where no scroll reached them (a 13-tile menu on a 327dp-tall landscape phone, 2026-10-16).
+  The drawer lays the panel out again, a frame later, whenever its minimum size changes. Test: extra "drawer: a
+  wrapping title on first open keeps the panel the screen's height" (2971 vs 1670 before the fix).
+- **A tooltip of the button that opened a `GoDrawer` no longer pops up over the drawer and eats its taps.** The pointer
+  had not moved, so the engine still had it over the button: the button's tooltip appeared over the open drawer, and
+  in Godot 4.7 a click inside a visible tooltip goes to the tooltip window — an "all menus" drawer opened from a corner
+  button had that button's tooltip on its own ✕, which did nothing (2026-10-19). `open()` re-reads the hover at the
+  pointer (`Viewport.update_mouse_cursor_state`, deferred), so it lands on the scrim or the panel and the button's
+  tooltip is cancelled. Checked in a host's live drawer test (a desktop window; the headless suites have no tooltips).
+- **A `GoDrawer`'s header follows the text direction.** The drawer's root is left-to-right so the panel's place is
+  measured on the screen, and the header inherited it: in Arabic or Urdu the title stood left-aligned on the left and
+  ✕ on the far right while the body below ran right to left. The header row now takes the application locale's
+  direction (title at the right, ✕ at the left); the panel's side is still `side` / `follow_text_direction`. The
+  first-open height check also reads the drawer's viewport, not the window (a drawer in a SubViewport fits that).
+  Test: extra "drawer: right to left, ✕ stands left of the title" (✕ at x 352 right of the title before the fix).
+- **`GoStyle.section(text, translate, rtl)`** (trailing `rtl`, default `false`) mirrors the skin's heading face for a
+  right-to-left heading, and **`GoStyle.mirror_box(face)`** returns a face with left and right swapped (padding; on a
+  `StyleBoxFlat` also borders, overhang and corners). The sci-fi look marks a heading with an accent bar down its left
+  edge; in Urdu the heading is right-aligned and the bar stood a panel's width away from it. Like `edge_card`, the
+  caller passes `Control.is_layout_rtl()` of where the heading goes. Tests: extra "drawer" (mirror_box, section rtl).
+- **Escape closes an open `GoDrawer`, and an open drawer counts as an open window.** The drawer claimed Android back
+  but not Escape, so on a desktop Esc fell through to the game behind it (a pause menu opened over the drawer). And
+  `GoSurface.is_any_open()` counted only surfaces: with a drawer open a game's WASD still moved the hero and a
+  `GoCoachMark` kept pointing over it, then ate the Esc meant for the drawer (an "all menus" drawer in a HUD,
+  2026-10-16). `GoDrawer._input` now consumes `ui_cancel` (`close_on_back`; a surface over it goes first), and the
+  drawer holds a place in `is_any_open()` while open (`GoSurface.hold_open(on)`; surfaces alone:
+  `GoSurface.is_any_surface_open()`; held windows alone: `GoSurface.is_any_held_open()` — a game whose surfaces can let
+  play go on, a map overlay, still counts a drawer as blocking). Tests: extra "drawer" (Esc consumed and closes, window
+  count, held count).
+- **A window opened by pointer no longer rings its default button.** `GoSurface.initial_focus` (a dialog's confirm
+  button) took focus with its ring even when `suppress_pointer_focus_ring` was on, so every confirm opened by a click
+  wore the ring — on a filled button in the sci-fi look, dark corner brackets cut over its face (a quit confirm,
+  2026-10-16). The default control still takes focus, so Enter answers it; it just takes it without the ring
+  (`grab_focus(hide_focus)`), and the first Tab or arrow shows it. The device rule behind it now sorts keys: a key that
+  moves focus (`ui_focus_next/prev`, the `ui_` arrows) turns keyboard navigation on, an answer key (`ui_accept`,
+  `ui_select`, `ui_cancel`) keeps the mode, and any other key is the game's (walking with WASD) and counts like a
+  pointer. Tests: "after a click / a game key (W) / Tab / Tab then Enter / a click then Enter …" in `tests/gohud_test.gd` (next to the keyboard-only window checks).
+- **A tap on a text field inside a scroll reaches it with its release.** `GoScroll` holds the press on a control that
+  yields vertical drags (a `LineEdit`, a slider, a tab bar…) until the finger lifts or picks a direction, then replays
+  it. The replayed press left the viewport's "handled" flag up, so the engine dropped the event being dispatched right
+  then — the tap's release, or the first motion of a sideways drag. A field that already had focus never saw the
+  release, and `LineEdit` raises the phone keyboard on that release: after Back closed the keyboard, tapping the field
+  again did nothing (a character-name form on Android, 2026-10-15). `GoScroll._resolve` now replays the held events
+  and then the settling one in order, and marks the original handled. Test: "each finger tap on a focused field
+  reaches it with its release" (real screen touches, emulated mouse first as on a phone).
+- **A long title on a `SCALE` window's ribbon widens the card instead of folding.** The game's ribbon title never
+  wraps: past its smallest size (`GoSkin.title_plate_min_size()`) the card grows to the words and the fit shrinks the
+  whole window. `GoSurface` folded it to two lines inside the 400 dp card ("ENTRENAMIENTO COMPLETADO"). Under
+  `FitMode.SCROLL` the title still folds as before.
+- **`arcade_light`'s text fields tell a hint from typed text.** The hint (`font_placeholder_color`) was the ink of
+  typed text; it is now a grey (#666b87, 5.2:1 on the white field — the game's own engine grey reads at 1.2:1). A shut
+  field's text (`font_uneditable_color` / `font_readonly_color`) is the engine's pale grey, as the game's.
+
+- **The docs no longer say `title_paint` turns `arcade_light`'s ribbon red.** It only paints a code-drawn plate
+  (`arcade`, `arcade_dark`); `arcade_light`'s ribbon is a painted sprite. `theming.md` and `surfaces.md` now point at
+  `title_variation`.
+- **A `GoBar` takes no input.** Its fill (a `ProgressBar`, `MOUSE_FILTER_STOP` by default) swallowed a touch or a
+  click meant for what is under the HUD; every other part of the bar already ignored it.
+- **An open window re-centres when the safe area moves without a resize** (a phone turned 180° in landscape):
+  `GoSurface` now relayouts on `GoRuntime.safe_area_changed`, as `GoHudAnchor` and `GoSafeArea` did.
+- **A 180° turn moves the safe area.** In landscape a phone turned round keeps its window size, so no resize arrived
+  and `GoHudAnchor` and the `GoSafeArea` node stayed clear of a notch that was now on the other side. `GoRuntime` now
+  reads the safe area again every `GoConfig.safe_area_poll_seconds` (0.5 s, on a phone only; 0 never) and says
+  `safe_area_changed`. A run with no window also stops re-applying the scale every frame (the fallback size it
+  compared with was never the one it had stored).
+
+- **Widgets keep following the look after a reparent.** 43 widgets (`GoAppBar`, `GoBar`, `GoSurface`, `GoSlider`,
+  `GoSwitch`, `GoIconButton`, `GoJoystick`, …) called `GoUi.watch` only in `_ready` but `GoUi.unwatch` in
+  `_exit_tree`, so a widget taken out and put back (`remove_child` + `add_child`, no second `_ready`) never followed
+  `GoUi.use_preset()` again. They now watch in `_enter_tree` and, on a re-entry, restyle at once to catch a look that
+  changed while they were out. The first restyle still runs where it did, so nothing draws differently.
+- **`GoSlider` and `GoSwitch` follow the look's touch size.** Their height floor was set once, in `_init`, so after
+  a look change (`arcade_light`'s 44 against 48) they kept the old one, and a switch's width floor only ever grew.
+  The floor is now re-applied when the look changes, unless the caller set a `custom_minimum_size` of their own.
+- **`GoSwitch` puts its caption on the free side of a mirrored pill in RTL.** The side came from `button_pressed`
+  alone, but in RTL `pill_texture()` picks the `*_mirrored` pill, whose knob is on the other side, so the caption
+  landed under the knob (`arcade_dark`, the engine's default theme). `pill_is_mirrored()` tells a pill with real
+  mirrored art from one that shares the plain art (`arcade_light`), which draws as before.
+- **A touch button follows `GoUi.use_preset(...)`.** It set `theme` only in `_ready` and its look watcher never
+  re-assigned it, so after a look switch it kept the old theme (the label font and size). The watcher now takes
+  `GoUi.theme()` first, and the watch starts in `_enter_tree` (as `GoRibbonHeader`'s), so a button that was out of
+  the tree during a switch, or re-added after leaving, is on the current look and watching.
+- **A touch button's label-size cache holds one entry.** `label_font_size()` cached a size per text and only cleared
+  on a theme, language or size change, so `skill.text = "%.1f" % seconds_left` every frame added an entry each time.
+  It now keeps only the last text and its size.
+- **A touch button or stick that is hidden or removed under a finger lets go.** `GoTouchButton` kept `_held` and never
+  emitted `released` when it was hidden (or a parent was, as a pause menu hides the touch HUD) or left the tree with
+  a finger down, so the game saw ATTRACT held for ever. It now runs `cancel()` then: `released(true)` once, the
+  finger id cleared. `GoJoystick` had the same gap and now ends the drag the same way (`released`, then a zero
+  `moved`), so the character stops.
+- **Changing `scale_profile` at run time applies at once.** The property had no setter, so switching between `DP` and
+  `PER_INCH` did nothing until the window was next resized. It now re-applies through the `GoRuntime` autoload
+  (`GoRuntime.reapply()`, which anyone can also call after changing `scale_enabled`), and a value that is the same does
+  nothing.
+- **A bar's `ink` and `ink_end` setters no longer rebuild the bar.** Each one ran the whole restyle: a new `Gradient`
+  and `GradientTexture2D` on every call plus the label typography and the gap, so a HUD tinting HP each frame
+  allocated a texture and relaid the bar out every frame. A setter now returns when the value is the same, and
+  otherwise only repaints the fill: the gradient and its texture are built once and just get new colours. The labels
+  and the gap are left to a look change. The pixels are the same.
+- **`GoPerfReadout` stops restyling its label every sample.** `_rewrite` set the `font_color` override on each reading
+  even when the level was the same, and every override sends a theme change (reshape, minimum size, parent relayout)
+  four times a second. The ink is now set only when the level or the look changes (the text already was written only
+  when it changed). The readout also takes `GoUi.theme()` at the start of its restyle, so a look switch reaches it, and
+  watches `GoUi` from `_enter_tree` rather than `_ready`, so a readout moved in the tree keeps listening.
+- **The HUD widgets keep following the look after a reparent.** `GoTaskCard`, `GoCountdown`, `GoHudButton`,
+  `GoNameplate`, `GoNoticeFeed` and `GoSpotlight` watched `GoUi` in `_ready` and stopped in `_exit_tree`, so a node
+  moved with `remove_child` + `add_child` (no second `_ready`) no longer followed look changes. They now watch in
+  `_enter_tree`, like `GoRibbonHeader`, and restyle on re-entry in case the look changed while they were out of the tree.
+- **The HUD widgets take the new look's theme when the look changes.** `GoTaskCard`, `GoCountdown`, `GoHudButton`,
+  `GoNameplate`, `GoNoticeFeed` and `GoSpotlight` set `theme = GoUi.theme()` only in `_ready`, so after
+  `GoUi.use_preset(...)` a live widget repainted its skin parts but kept the old theme's boxes, font and inks. Their
+  `_restyle` now re-assigns the theme first, as `GoHudCard`, `GoIconButton`, `GoNotice` and `GoAppBar` do. A fixed look
+  draws as before.
+- **`GoIconButton.keyboard_focus` reads what the button is.** Left unset, the button takes the look's focus mode
+  (`FOCUS_NONE` under `arcade_light`), but the property still read its default `true`. It now reads
+  `focus_mode == FOCUS_ALL`: the look's mode until the project sets it, then that choice, which still pins the mode
+  through every look change. An unset value is no longer saved in a scene, so a button saved under `arcade_light` does
+  not load pinned out of the focus order.
+- **A window with nothing focusable no longer leaves focus on its opener.** Under `arcade_light` a sheet's close
+  button is `FOCUS_NONE`, yet `GoSurface` still called `grab_focus()` on it: the engine warned "This control can't grab
+  focus" and the early return skipped the search inside the window, so focus stayed on the control behind it and Enter
+  pressed the opener again. The close button is grabbed only when it can take focus; otherwise the first focusable
+  control inside takes it, and when there is none the focus owner outside the window is released.
+- **`GoStyle`'s plain controls follow a look change.** `GoStyle.skin_focus()` set the look's focus mode once, when
+  `button` / `style_button` / `toggle` / `checkbox` / `slider` / `picker` styled the control, and only the gohud widgets
+  re-applied it from a watcher of their own. A form built under `arcade_light` kept `FOCUS_NONE` after
+  `GoUi.use_preset()` to another look, so the keyboard and a gamepad reached none of its buttons, and the reverse kept
+  `FOCUS_ALL` and its focus rings in `arcade_light`. A styled control now joins a group that one `GoUi` watcher walks on
+  every change, and catches up when it enters the tree again; styling it twice hooks it once, and a freed one simply
+  leaves the group. A focus mode the project set itself is still left alone, and a fixed look is unchanged.
+- **`per_inch_factor` never drops below 1 when the base is shorter than `per_inch_min_height`.** The clamp's bounds
+  crossed (min above max) and returned `min_height`, so a 640x360 base gave a factor under 1 (0.818 at 2400x1080,
+  400 dpi) and `GoRuntime` drew the game smaller. The floor is now capped at the canvas height.
+- **`duplicate()` and a saved config keep whether the project chose `min_touch_size`.** The setter always marked the
+  size as chosen and `Resource.duplicate()` runs every stored property through its setter, so a duplicated, untouched
+  `GoConfig` lost the look's touch floor (`arcade_light`'s 44 became 48). The flag is now a stored property declared
+  after `min_touch_size`, so an unchosen config stays unchosen and a chosen one (even an explicit 48) stays chosen.
+- **A HUD card that changes nothing rebuilds nothing.** Every `GoHudCard` setter re-applied the card even for the
+  value it already had, and `set_clock` set its text every call, so a match clock driven from `_process` copied up to
+  two padded StyleBoxes, swapped the panel override and relaid the card out every frame. Setters now return when the
+  value is the same, `set_clock` repaints only when the `MM:SS` text or the warning changes, and the padded boards
+  are reused while their theme box and pad are the same (remade after a theme change), so the card draws as before.
+- **`arcade_light`'s fonts are Magnet Mayhem's current ones.** Nunito Bold and the four Noto Sans CJK Bold subsets
+  were copied again from the game, after its last re-subset of 2026-10-15 (the copy before predated four of them, so
+  the newest translated characters drew as empty boxes); the files are byte for byte the game's, so a label measures
+  what the game measures.
+- **A window's body clips only while it scrolls.** The body's `ScrollContainer` always clipped, which cut a part's
+  antialiased rim on a half pixel — the painted inset's top edge at 1.5x — where the game's plain column draws it.
+  `GoSurface` now clips the body only while its content overflows.
+
+- **A painted window samples its sprites like the game's dialog.** `PaintedDialog` draws with
+  `TEXTURE_FILTER_LINEAR_WITH_MIPMAPS`, so its 3x sprites stay smooth at about one unit per pixel; `GoSurface` used its
+  parent's filter, and every rim and button edge came out a shade sharper. New `GoSkin.window_texture_filter()`
+  (default `TEXTURE_FILTER_PARENT_NODE`, as before); `arcade_light` returns `LINEAR_WITH_MIPMAPS`.
+
+- **A painted window on a phone is the game's 400 wide.** `GoSurface` kept `SCREEN_MARGIN` and the portrait width
+  ratio off a centred window, so on the game's phone (407 units) the `arcade_light` card came out 353 wide where
+  `PaintedDialog` is 400. New `GoSkin.window_screen_margin()` (-1: the theme's margin, as before); `arcade_light`
+  returns 0, and a look's fixed `window_width()` with no margin is sized like a `CenterContainer`: that width, or the
+  whole screen when narrower.
+
+- **Shrink-to-fit under `arcade_light` is pinned to the game's measure.** A test now holds that
+  `GoStyle.fit_font_size()` with no font measures with the look's FontVariation and its four CJK fallbacks (KR, JP, SC,
+  TC), not a plain Nunito `FontFile`. Before a preset is applied the fit font is `ThemeDB.fallback_font`, which has no
+  fallbacks, so CJK widths measured then differ; under the preset nothing was lost.
+- **A done `GoTaskCard` chip's ✓ draws in the look's symbol font.** New skin hook `GoSkin.symbol_font()` (default
+  null: the theme's font alone); a chip's word gets the theme's text font with it as the first fallback. Under
+  `arcade_light` it is Noto Sans KR Bold (`assets/fonts/noto_sans_cjk/`, the file the theme's font falls back to), as Magnet Mayhem's
+  Nunito falls back to it — before, the ✓ came from whatever system font had it, and the chips after it shifted.
+
+- **GoSlot follows the look's touch floor.** Its box, fit and widened hit area read `GoUi.touch_size()` instead of
+  `GoConfig.min_touch_size`, so a look with its own `touch` metric (or a `metric_overrides` entry) sizes slots like
+  every other control; a floor the project sets still wins.
+
+- **A window, and every widget that fits the safe area, reads the viewport it is drawn in.** `GoSurface` measured its
+  room with `GoSafeArea.usable_rect(get_window())`, and `GoAppBar`, `GoCoachMark`, `GoConsole`, `GoDrawer`,
+  `GoEdgeBar`, `GoForm`, `GoFab`, `GoHudAnchor`, `GoNavBar` and `GoStyle`'s bottom bar passed `get_window()` too — which
+  inside a `SubViewport` (a preview, a render-to-texture, a parity harness) is the main window, so the card was sized
+  and centred for the wrong screen and the others laid out for the main window round it (a console 390 wide in a 600
+  viewport, a drawer 844 tall in a 400 one). `GoSafeArea.usable_rect`, `usable_rect_with_keyboard` and `px_to_units`
+  now take any `Viewport` (a `Window` still works): a `SubViewport` is its own whole rect with no safe area. `GoSurface`
+  and all of those widgets pass `get_viewport()`.
+
+- **`GoLevelCard` lays out its locked state and thumbnail as Magnet Mayhem's `StageCard`.** The padlock and LOCKED
+  sat 4 px apart only under the engine's default theme; under a gohud theme the column took its VBox gap (12) and both
+  sat lower. The gap is now the card's own (`lock_gap`, 4). The thumbnail slot clips, as the game's map preview does,
+  so on a scaled canvas (iPad, desktop) the well's last half row no longer shows under it.
+
+- **`GoGlyphButton` sizes and places its label exactly as Magnet Mayhem's `GlossButton`.** On the painted pills the
+  label's shift now moves padding from the far side to the near one (the far side never under 0), so a glyph-only
+  56 × 56 pill stays 56 wide (it grew to 67) and a pill at its minimum width is as wide as the game's. Only the
+  glyph's own side is clamped to `MIN_EDGE`. A face thinner than `MIN_EDGE` keeps the old centred layout.
+
+- **A scrolled list slides under a window's frame, not over it.** A window's body scroll borrows the card padding so
+  glows are not clipped (`GoScroll.use_panel_edge`), and on a card with no content margin of its own — a jelly window
+  with a 4dp outline, an inner line and a 6dp lip — it borrowed all of it: the clip landed on the card's outer edge and
+  rows scrolled **over** the outline (a popover menu in a kids-look game, 2026-10-07). The scroll now stops at the
+  frame's inner side on every side; where the frame is thicker than the padding it moves inside it. Content keeps its
+  place. Found and fixed in one place:
+  - `GoSkin.frame_margin(box, side)` — how far in a StyleBox draws its frame: a custom face's own `frame_margin(side)`
+    (`GoStyleBoxJelly` outline + inner line + lip, `GoStyleBoxArcade` outline + board frame + half the well line + lip,
+    `GoStyleBoxMedieval` border + bevel line), a `StyleBoxFlat`'s border, a `StyleBoxTexture`'s nine-slice margin, or
+    a `border_width` field.
+  - `GoScroll.set_panel_frame(frame)` — the frame per side; `GoSurface` passes its card's whenever the panel is restyled.
+- **A title glyph on a ribbon is drawn as large as the game's.** On a plate (the painted ribbon in `arcade_light`) the
+  glyph's cell is its side wide and as tall as the title's line, the art kept to its aspect — the game's `RibbonHeader`
+  row — so a tall glyph such as a lock fills the line instead of a side × side square; the glyph and words start on the
+  whole pixel an `HBoxContainer` picks (rounded down).
+
+### Changed
+
+- **Under `arcade_light` a window's title is the game's ribbon title: 34 dp on a 57 dp ribbon.** It shrinks to fit
+  the ribbon as drawn — past the card's sides, less its ends and the glyph, the game's `RibbonHeader` room — down to
+  24 dp (`fit_min_scale` of 34), and its glyph is 26 dp. The head is 57 dp whatever the font: a taller title grows the
+  ribbon down over the gap below (`OverhangPlate.sink`) instead of pushing the rows, as the game's ribbon does. The
+  glyph and the words centre on the ribbon as drawn. New `GoSkin` hooks: `title_plate_font_size()` (0: the role
+  size) and `title_plate_height()` (0: as tall as the title); `GoSkinArcadePainted.title_plate_min_size()` is 24.
+
+- **Under `arcade_light` a centred window is framed like Magnet Mayhem’s `PaintedDialog`.** A `GoSurface` wears the
+  painted card (`GoCard`, padded by its own face 24 / 20 / 22 with nothing added inside), is 400 dp wide and keeps its
+  head, its body’s rows and its footer 8 dp apart on every screen; it is centred the way a `CenterContainer` centres
+  (rounded down), so it lands on the game dialog’s pixel, and a ribbon over its top edge no longer pushes it down unless
+  the screen is too short. Other looks keep the window they had. New `GoSkin` hooks decide it:
+  `window_card_variation()`, `window_padding()`, `window_gap()` and `window_width()`. A window’s fitted height now also
+  counts the card face’s own padding, and a card padded by its face no longer pushes the body in by its 9-slice edge.
+- **`arcade_light`'s touch floor is the game's 44.** Its `touch` token was gohud's 48; it is now Magnet Mayhem's
+  `Cfg.Touch.MIN_TARGET` (44), the floor a look declares for its hit areas. Every other look keeps 48;
+  `GoConfig.min_touch_size` still sets the project's floor.
+
+- **`arcade_light` leaves tooltips, container gaps and scroll bars to the engine, as Magnet Mayhem does.** The game's
+  theme sets none of them and draws them all: its tooltips are the engine's dark box with light text, every box,
+  grid and flow container it does not override keeps the engine's 4 px gap (arcade_light had 12), and the controls
+  card and room list show the engine's scroll bar with no gap beside it. `TooltipPanel`, `TooltipLabel`, the six
+  container types, `ScrollContainer` and both scroll bars carry no item now.
+
+- **`arcade_light`'s dropdown keeps the engine's arrow, and its list the engine's radio marks and row padding, as
+  Magnet Mayhem's do.** The game paints only the dropdown's box, ink and 17 px label and the list's panel, hover row,
+  ink, size and 10 px rows; an `OptionButton`'s items are radio items, so the marks are drawn. The arcade's 16 px
+  arrow (16 from the edge), check and radio icons and 8 px row padding are gone. The disabled and right-to-left
+  faces stay painted: the game never draws them, and the engine's would be a dark box on a light theme.
+
+- **`arcade_light` leaves a plain `Button` to the engine, as Magnet Mayhem does.** The game's theme sets no `Button`
+  item; arcade_light's blue pill there painted plain buttons the game draws flat and leaked its outline (the chip's
+  label outlined in navy), its 10 dp gap and its disabled face into every `Button` variation that leaves those items
+  unset. Every painted key is a variation (`GoButton`, `GoPrimaryButton`, …) and keeps its look.
+
+- **`arcade_light` carries Magnet Mayhem’s flat parts too, so no game variation stays game-only.** `GoPanelFlat`
+  (`HudPanel`), `GoCardFlat` (`Card`), `GoChoiceButton` (`Diff`), `GoBigButton` (`Big`), `GoBigSecondaryButton`
+  (`BigSecondary`), `GoSmallLabel` (`SmallLabel`) and `GoBarLabel` (`BarLabel`) hold the game’s `UiTheme.box()` and
+  `_button_boxes()` values item for item; `tools/arcade_painted_map.json` maps them and its `game_only` list is empty.
+
+- **`arcade_light`’s switch label stays ink when it is on.** `CheckButton` no longer takes `Button`’s blue pressed
+  colours: its label is the ink in every state, its painted pill is untinted (white icon colours, the engine default
+  the game leaves) and it sits 4 dp from its label, as Magnet Mayhem’s does.
+
+- **`arcade_light`’s primary key is the green pill.** Magnet Mayhem’s main actions (PLAY, CONFIRM, SAVE) are green
+  (`GlossGreen`), so `GoPrimaryButton` — and every `GoStyle` primary button — now draws `btn_green.png`; the blue pill
+  (`GlossBlue`) moves to the new `GoInfoButton`. The map (`tools/arcade_painted_map.json`) names `GlossGreen →
+  GoPrimaryButton` and `GlossBlue → GoInfoButton`. `GoSuccessButton` stays green.
+
+- **`arcade_light` sets its text in Magnet Mayhem’s font.** Its `default_font` is the game’s `UiTheme.get_font()`: a
+  `FontVariation` of Nunito Bold with Noto Sans KR, JP, SC and TC Bold as fallbacks, in that order — the game’s own
+  files, now in `assets/fonts/nunito/` and `assets/fonts/noto_sans_cjk/` (SIL OFL 1.1, see `THIRD_PARTY_NOTICES.md`).
+  Labels set exactly as in the game. Through `GoUi.theme()` the font gives way to the project’s own when the project
+  sets one (`go_body_font_baked` metadata), as every preset’s body font does.
+- **GoIconButton takes the look's focus mode.** It calls `GoStyle.skin_focus()` on creation and on a look change, so
+  under arcade_light an icon button stays out of the focus order (`FOCUS_NONE`) like the game's; other looks keep
+  `FOCUS_ALL`. Setting `keyboard_focus` in the project pins that choice through every look change.
+
+- **arcade_light's controls stay out of the focus order, as Magnet Mayhem's do.** A new skin hook,
+  `GoSkin.control_focus_mode()`, sets the focus mode of `GoGlyphButton`, `GoSlider`, `GoSwitch`, `GoLevelCard` and
+  `GoStyle.button` / `toggle` / `checkbox` / `slider` / `picker` (through `GoStyle.skin_focus()`, again on a look change).
+  `GoSkinArcadePainted` answers `FOCUS_NONE`, like the game's `GlossButton`, `PaintedSlider`, `PaintedSwitch` and
+  `StageCard`. Every other look keeps `FOCUS_ALL`: `GoSlider` and `GoSwitch` were `FOCUS_NONE` in every look and the
+  keyboard and a gamepad reach them again. A `focus_mode` the project sets itself is left alone.
+
+- **The touch floor is the look's own until the project chooses one.** `GoUi.metric(GoTheme.TOUCH)` returned
+  `GoConfig.min_touch_size` (48) in every look and ignored each theme's `touch` token. Left unset, the floor is now that
+  token, so `arcade_light` can keep Magnet Mayhem's 44 while every other look stays at 48; a `min_touch_size` the
+  project sets still wins. New `GoUi.touch_size()`, `GoConfig.touch_size_chosen()` and
+  `GoConfig.follow_look_touch_size()`. The widgets that read `min_touch_size` directly (icon button, FAB, app bar,
+  coach mark, prompt card, level card, `GoStyle`) now read the token.
+
+- **`arcade_light` carries the rest of Magnet Mayhem’s painted variations.** New type variations, each with the game’s
+  exact values: `GoWindowBlue` (StageWindow), `GoRibbonWide` (StageRibbon), `GoLevelCard` / `GoLevelCardCurrent` /
+  `GoLevelCardLocked` (StageCard / StageCardNext / StageCardLocked), `GoSliderGreen` / `GoSliderCyan` (the slider with a green or cyan fill), `GoWell` (the map-preview well), `GoHudPanel`
+  (ArcadePanel), `GoBannerGold` (HudBanner), `GoNoticeGold` (NotifPlayer), `GoChipDark` (LangChip) and `GoIconOnly`
+  (PauseRound). Sizes the game takes from `Cfg` are written at their desktop value (`tools/arcade_painted_map.json`
+  `_cfg_sizes`). The game’s stage-select art is in `assets/arcade_light/stage/` (window, ribbon, three level cards,
+  well, and the check / lock / person / play-tag marks for a level card), and the skull and magnet glyphs join
+  `icons/arcade_light`. The artwork is distributed under this package’s MIT license.
+
+- **Under `arcade_light` a floating HUD board is the game’s HUD panel.** `floating_box(BOX_HUD)` — so
+  `GoStyle.floating()`, `GoStyle.hud_panel()` and `GoPromptCard` — draws white at 90 % with a blue rim and an 8 px
+  bottom edge instead of the painted card (which `GoStyle.floating()` could not use and replaced with a plain white
+  rectangle). `GoConfig.container_alpha` and `container_alpha_overrides` multiply that white, as they do the notice
+  pill.
+
+- **`arcade_light` now uses Magnet Mayhem’s painted artwork.** Its keys, cards, insets, ribbons, keycaps and badges
+  use nine-slice PNGs (`GoStyleBoxSprite`, `GoSkinArcadePainted`), with blue primary, green success, grey neutral and
+  red danger keys. The preset includes the game’s white glyphs with default-icon fallback, a frosted modal scrim
+  and six-chunk gauges; other controls retain arcade shapes. Existing `arcade_light` users will see the new look.
+  `arcade_dark` and all other presets are unchanged. The artwork is distributed under this package’s MIT license.
+
+- **The README is a tour in pictures.** It opens with what gohud is, a contents list, the fourteen looks side by side
+  (`www/img/themes/` — one 1920×1080 page of the YouTube reel per preset, each showing different widgets), the same
+  dialog in every look, the gallery on a phone in every preset, the AI-agent install prompt and the `/gohud:*`
+  commands, then a picture of each widget grouped by job (popups, HUD, buttons, forms, app screens, layouts, skins)
+  and an arcade, comic and kids section. The reference sections that follow are unchanged apart from
+  *Widgets* becoming *Widget reference*.
+- **The arcade looks, closer to a real arcade party game's menus.** Taken from a shipping game's painted UI (Magnet
+  Mayhem): every key is now a **pill** (corner 24; the small keys and the tabs 16) wearing a **candy gloss** — a soft
+  white sheen over the upper half, a glint round **both** top corners and a short dash between them (on a key at least
+  40dp tall, never on the ribbon, so it stays off the label) — and a board's
+  frame catches a glint on both shoulders. Tabs and segmented cells **stand apart** in their row (each drawn 2dp in
+  from its cell, so no size changes). The slider groove is a chunky 10dp tube (still inside the 20dp knob, so the
+  slider keeps its height) under a **white knob in a thick blue ring**; the switch track glints at both ends. A
+  window's title sits on a **gold ribbon with swallow tails** (dial `arcade_ribbon`, 0 = the plain banner; the title
+  keeps its height). A `GoBar` is **split into six chunks** by ink ticks (dial `arcade_bar_ticks`) and a `GoKbd`
+  hint is a **keycap** on a deep lip. Sizes are unchanged everywhere; every label still clears its contrast bar.
+
+### Added
+
+- **`GoStyle.menu_tile(icon, key, action, translate, glyph)`** — an icon-over-name tile for an "all menus" grid
+  (MMO "all menus" panels): at least touch × touch, the name wraps instead of trimming, the label is its accessible
+  name. **`GoStyle.set_tile_badge(tile, words, as_dot, color)`** hangs a `GoBadge` on its icon;
+  **`GoStyle.set_tile_keys(tile, keys)`** adds a `GoKbd` at the start corner (mirrored in RTL, hidden on handhelds).
+  Test: extra "menu tile".
+- **`GoSurface.title_variation` — another plate for a window's title.** The theme variation the title plate wears
+  instead of the look's; `&"GoRibbonRed"` under `arcade_light` is the game's red GAME OVER ribbon (`RibbonRed`, with the
+  gold one's height, rise, bleed and magnet), so `set_ribbon(&"RibbonRed", skull)` is
+  `title_variation = &"GoRibbonRed"` + `title_glyph`. Empty, or a variation the theme lacks: the look's plate.
+- **`GoFitBox` — the whole card on the screen.** Magnet Mayhem's `FitBox`: a card centred in the safe area and, when it
+  is too big, shrunk as one piece (`scale`, never above 1) with what it draws past its edges (`overhang`, by default the
+  look's for the `GoRibbonHeader` it holds); below `GoConfig.fit_min_scale` its `flex` list (`new_flex()`) gives up
+  height first, so a long list scrolls on a landscape phone. `pad`, `safe_area`, `fit_scale`, and the fit itself as
+  `place()` / `flex_height()`.
+- **`GoSurface.fit_mode = SCALE`.** A window fits the same way (default `SCROLL`, as before): the look's width, its
+  content's height, the whole card shrunk with its ribbon and magnet (`fit_overhang()`); `fit_flex` names the list that
+  scrolls (else the body's scroll). Under `arcade_light` it places a card where the game's `PaintedDialog` in its
+  `FitBox` sits, at the game's scale.
+- **`GoRibbonHeader.card_overhang(card, corner)`.** How far a card headed by the look's ribbon draws past its rect, from
+  `title_plate_overhang()` and `window_corner_rect()` — `(20, 41, 20, 0)` on `arcade_light`'s painted card, the game's.
+- **Skin hooks `window_fit_pad()` and `window_flex_min_height()`.** The fit's free room off the safe area (-1: the
+  `SCREEN_MARGIN` token) and its list's floor (96); `arcade_light` gives the game's 8 and 96.
+- **Anchored cards like the main menu's top-bar cards.** `GoSurface.anchor_width = 0` (its content's width, no narrower
+  than `anchor_min_width`), `anchor_align` (`AUTO` as before, `START`, `END`), `anchor_gap` (7), `anchor_edge` (8),
+  `fit_mode = SCALE` (shrunk to the safe area, no lower than the fit floor, moved up instead of opening upward),
+  `pass_anchor_taps` (a tap on the anchor reaches it, so its second tap closes the card) and `tap_through` (more
+  controls taps reach). `GoPopover.open()` takes them as `width` 0, `min_width`, `align`, `gap`, `edge`, `fit`,
+  `pass_anchor_taps`, `tap_through`. Every default keeps today's card.
+- **Three role colours: `GoTheme.HEADING`, `ALERT` and `MUTED_FILL`.** Magnet Mayhem draws three colours gohud had
+  no token for — its gold section titles (HUD_NAME `#B8860B`), its warning red (READY_RED `#E8332F`: the clock's last
+  seconds, a training hint) and its muted lavender grey (SECONDARY `#8A8FB3`: a room's subtitle, the grey big key).
+  `arcade_light` names them in its palette (`heading`, `alert`, `muted_fill`), so `GoUi.color(GoTheme.HEADING)` gives the
+  game's value. Every other look carries the colour each role was drawn in before — the accent, the danger ink, the
+  muted ink — written by `make_theme.py` when a palette leaves the key out, and a theme without them answers the same
+  through `GoUi.color` (`GoTheme.STAND_INS`), so nothing changes colour. `GoSkin.task_title_ink()`, `task_hint_ink()`
+  and `hud_alert_ink()` now read `heading`, `alert` and `alert` (the painted skin's own overrides went; it returns the
+  game's colours through the tokens). `check_contrast.py` holds `heading` and `alert` to the large-text bar and
+  `muted_fill` to the component bar (3:1).
+
+- **`arcade_light`: the `person` glyph.** Magnet Mayhem's white person glyph (its main menu's name key, the name
+  dialog's ribbon) joins `icons/arcade_light` as `&"person"`, imported as the other glyphs are (lossless, mipmaps), and
+  gohud's own `&"user"` points at it. Before, both names fell back to the default set's line icon.
+
+- **The current language's CJK font leads: `GoUi.set_locale(code)` and `GoUi.set_font_locale(code)`.** A Han
+  character shared by Chinese, Japanese and Korean takes the shape its reader expects only when that language's font
+  comes first among the fallbacks. `set_font_locale(code)` puts it first in the look's body font (`FontVariation`) and
+  the rest after it in the written order, and returns whether the order changed — it assigns `fallbacks` only then,
+  since every assignment re-shapes all the text on screen. `set_locale(code)` does that, then
+  `TranslationServer.set_locale(code)` when it differs, so the re-render finds the new order in place (Magnet Mayhem's
+  `Locale.apply`). `use_preset()` runs it for the current locale. The fonts come from the theme's `go_locale_fonts`
+  metadata (`GoUi.LOCALE_FONTS_META`); `arcade_light` writes the game's: `ko` → Noto Sans KR, `ja` → JP, `zh_CN` → SC,
+  `zh_TW` → TC (also `ko_KR`, `zh_HK`, `zh_Hant` …), any other language KR, JP, SC, TC — `UiTheme.set_locale_font()`
+  exactly. The painted skin's `symbol_font()` is the leading one. Looks without the metadata are untouched. The
+  `GoRuntime` autoload also follows a bare `TranslationServer.set_locale()` (`NOTIFICATION_TRANSLATION_CHANGED`).
+
+- **`arcade_light`: the scoreboard rows and the loading tiles.** Five more of Magnet Mayhem's variations, value for
+  value from its `UiTheme`, so the game drops its last own boxes: `GoScoreRow` (a round scoreboard row, white at 90 %
+  in a 3 px blue rim, 5 at the bottom, 14 px corners), `GoScoreRowGold` (the winner's: cream in gold), `GoScoreHead`
+  (the head row: draws nothing, keeps the rows' 12 px side margins so its labels sit over the columns) — all
+  `PanelContainer` — and `GoTile` / `GoTileLit` (the loading screen's floor block, navy in a dark rim, lit gold in
+  amber; `Panel`). `tools/arcade_painted_map.json` maps `ScoreRow`, `ScoreRowWin`, `ScoreHead`, `LoadTile` and
+  `LoadTileLit` to them. Every other look leaves them out (a node asking for one draws its base type), so nothing
+  else changes.
+- **Touch buttons and the stick can be driven from outside.** A game that routes every finger in one `_input` (a role
+  bound to each finger as it lands, events left unconsumed, the first touch counted while the controls are hidden —
+  Magnet Mayhem's `TouchControls`) turns `driven` on: `GoTouchButton` and `GoJoystick` then ignore input
+  (`mouse_filter` IGNORE) and the owner sets what they show — `drive_press(at)` / `drive_drag(at)` /
+  `drive_release(canceled)` and `drive_begin(at)` / `drive_drag(at)` / `drive_end()`, with `hits(at)`,
+  `button_center()`, `hit_radius()`, `center()` and `knob()` to hit-test and read back, all in the coordinates an
+  `_input` event carries. Hiding a driven widget keeps its state (the owner still sees the lift). What is drawn — the
+  art, the labels, the press look, the cooldown ring, the pulse, the aim ring — is the same code as before; `driven`
+  is off by default.
+- **`GoRuntime.simulate(device)` — a device stood in for tests and screenshots.** `{dpi, insets, handheld, size}`
+  (Magnet Mayhem's `DebugHooks.DEVICE_PROFILES` entries pass as they are: `mobile` reads as `handheld`): the
+  `PER_INCH` scale, the breakpoint and `GoSafeArea` read it, the window takes its `size` (not headless), and
+  `clear_simulation()` puts the real device back. `GoScale.simulate()` / `simulated()` hold it; `GoUi.reset()` clears it.
+- **The safe area as margins, and a signal when it moves.** `GoRuntime.safe_area_changed(margins: Vector4)` and
+  `safe_margins()`; `GoSafeArea.margins(view)`, `hud_rect(view, side_max)` and `inset_rect(area, insets_px,
+  window_px)`. `GoHudAnchor` and the `GoSafeArea` node relayout on the signal.
+- **`GoConfig.handheld_browsers`, `fallback_dpi` and `hud_side_inset_max`** (all off by default). Phone and tablet
+  browsers (`web_android`, `web_ios`) take the `PER_INCH` handheld profile (`GoScale.is_handheld_screen()`,
+  `handheld_from()`); a screen that reports no dpi uses `fallback_dpi` (`GoScale.screen_dpi()`, `dpi_from()`); and a
+  `GoHudAnchor`'s left and right safe insets are capped (Magnet Mayhem: 160 and 12). The numbers are checked against
+  Magnet Mayhem's `UiScale` on all 19 of its device profiles: the factor, the canvas, the safe and the HUD margins.
+- **`GoGlyphButton.fit_label`.** The label shrinks (`GoStyle.fit_font_size()`, never under the fit floor) to the
+  button's width less its normal face and `glyph_allowance()`, on every resize, text, glyph and look change — the sum
+  Magnet Mayhem's screens each did by hand. `fit_base_size` (0: the look's size), `fitted_font_size()`, `fit_now()`.
+- **`GoSpotlight.hold_dim`.** Keeps the dim at full for as long as it is on — a lesson about an area (where to look)
+  that must stay marked to the end, without stopping the clock with `auto_advance = false`.
+
+- **`GoRibbonHeader` — a screen's title ribbon.** The game's `RibbonHeader` for a screen built on a card (pause,
+  settings): put first in the card's column, it hangs the look's title plate over the card's top edge with a glyph and
+  the title (shrunk to fit) and the look's corner art. `make(text, icon, on_left)`, `title`, `glyph` / `glyph_icon`,
+  `ribbon_variation` (`GoRibbonRed`), `corner`, `corner_on_left`, `corner_art`. Under `arcade_light` it renders the
+  game's PAUSED and SETTINGS headers pixel for pixel.
+
+- **A window's parts, as the game's `PaintedDialog` builds them.** `GoSurface.add_inset()` (a pale inset holding a
+  column 4 dp apart), `add_line(text, font_size, parent, wrap)` (a centred, SMART-wrapping line; a stat passes
+  `wrap = false`), `add_row()` (buttons side by side) and `add_gloss(variation, icon, text)` (a `GoGlyphButton`), into
+  the body or a given parent. New `GoSkin` hooks size them: `window_inset_variation()`, `window_button_height()` and
+  `window_button_gap()` — `GoInsetPanel`, 46 dp and 10 dp under `arcade_light`.
+
+- **`GoConfig.scrim_blur` (true): the low quality tier's dim.** Off, a look that frosts its scrims (`arcade_light`'s
+  blur) draws the flat scrim colour instead — on every window, drawer and `GoStyle.scrim()` already open and every one
+  made after — as Magnet Mayhem's `UiTheme.set_blur(false)` does; under `arcade_light` that colour is the game's
+  OVERLAY. Widgets ask `GoSkin.scrim_material_now()`, which is `scrim_material()` while the switch is on.
+
+- **`GoSurface.corner` — the magnet in the corner instead of a close button.** `HeadCorner.LOOK` (the default) lets
+  the look decide (`GoSkin.window_corner()`), `CLOSE` shows the close button, `ART` a picture (`corner_art`, or the
+  look's `window_corner_art()`) placed by `window_corner_rect()` from the drawn plate's corner, and `NONE` nothing;
+  `corner_on_left` puts the art on either end, mirrored on the right. Without a close button Escape and Back still
+  ask to close. Under `arcade_light` a centred window carries the game's red magnet (58 × 56, 30 dp past the
+  ribbon's end and 24 above it) and no close button, as `RibbonHeader` does; sheets and popovers keep their close
+  button, and a close button the host hid stays hidden. `corner_now()` says what the corner holds.
+- **`arcade_light` carries the map thumbnail's box.** A `GoMapPreview` variation (base `Panel`) whose `panel` is
+  Magnet Mayhem's `MapPreview` box — `#18213a`, 6 px corners, a 1 px `#58627b` rim, no padding — so the look owns the
+  frame and a map-preview widget reads it from the theme. `arcade_painted_map.json` lists it under `_code_built`
+  (`MapPreview._init()`).
+- **`GoScale.Profile.PER_INCH` — a per-inch device profile.** With `GoConfig.scale_enabled` and
+  `scale_profile = PER_INCH`, `GoRuntime` keeps the project's base size and shrinks a handheld to about
+  `per_inch_units` (160) units per physical inch, never below `per_inch_min_height` (440) units tall and never below
+  factor 1 — a fixed-layout game HUD the same size in the hand on every phone. Pure helpers `per_inch_factor`,
+  `per_inch_canvas`, `web_dpi` and `cap_sides`. Matches Magnet Mayhem's `UiScale` figure for figure.
+- **`GoPerfReadout` — a performance band.** fps, frame time and the worst frame, triangles, draw calls, nodes, RAM
+  and VRAM in a small dark band; the ink turns from `GoSkin.perf_ink(0)` to `(1)` and `(2)` as fps drops. It samples
+  the engine itself (no allocation per frame, writes only when the text changed) or shows `show_stats()`; `one_line`
+  folds it to one slim line. Skin hooks `perf_box()`, `perf_ink(level)`, `perf_font()`. Under `arcade_light`
+  Magnet Mayhem's perf overlay matches pixel for pixel.
+- **`GoTaskCard` — a lesson's card.** A step line, a title shrunk to one line, what to do, one keycap chip per part that
+  ticks off (`set_parts`, `mark_part`; a done chip is `GoSkin.kbd_done_box` and reads "✓ word"), a hint when stuck
+  (`GoSkin.task_hint_ink`) and a footer; `compact` folds it to one row (`short_caption`, title, chips). Never takes
+  input. Under `arcade_light` Magnet Mayhem's training card and its phone strip match pixel for pixel.
+- **`GoSpotlight` — dim round one thing and ring it.** `light(rect)` or `follow(control)` (grown by `pad`), four dims
+  round the hole that fade after `dim_seconds`, and a ring that stays (`GoSkin.spotlight_dim`, `spotlight_ring_box`).
+  No card, no buttons, never takes input. Under `arcade_light` Magnet Mayhem's training spotlight matches pixel for pixel.
+- **`GoTouchButton` — a round thumb button.** A picture from the skin's art with its name under the icon (shrunk to
+  fit), a cooldown ring (`cooling`, `cooldown`), a pulse when ready, a press that shrinks and darkens, and `drag_aim`:
+  hold and drag to aim (`aimed(pull)`). `GoJoystick` draws the skin's painted dish and knob when it has them
+  (`GoSkin.joystick_art`, `draw_joystick_art`). Under `arcade_light` Magnet Mayhem's touch controls match pixel for pixel.
+- **`GoNoticeFeed` — a feed of one-line notices.** A kill feed: rows with an icon stack newest at the bottom, fade in
+  and go on their own; `push(text, own)` marks the player's own line. `max_items` rows are built up front and reused, so
+  a burst builds no controls. Rows use the theme's `GoNotice` / `GoNoticeGold` panels (else `GoSkin.notice_box()`);
+  under `arcade_light` Magnet Mayhem's elimination feed matches pixel for pixel.
+- **`GoNameplate` — a name plate over a character.** A small rounded tag in the character's colour (the player's own
+  in its own fill and ink) that widens to the whole name between `base_width` and `max_width`; `follow(camera, point)`
+  centres it on the projected point and hides it behind the camera. New skin hooks `nameplate_box(fill)`,
+  `nameplate_own_fill()`, `nameplate_ink(own)`, `nameplate_outline(own)` and `nameplate_outline_ink()`; under
+  `arcade_light` Magnet Mayhem's name plates match pixel for pixel.
+- **`GoHudButton` — a HUD corner button with its key.** A picture button (`GoIconButton.art`, never keeps focus) with
+  the key that does the same on a cap beside it; `show_hint = false` on a touch screen, `pressed` passes the press on.
+  New skin hooks `hud_key_hint_box()` and `hud_key_hint_ink()`; under `arcade_light` Magnet Mayhem's pause corner (the
+  slate "Esc" cap and the painted round pause button) matches pixel for pixel.
+- **`GoIconButton.art` — a picture that is the whole button.** It fills `visual_size`, draws no frame in any state,
+  shows the picture in its own colours and darkens it to the new skin hook `GoSkin.picture_press_tint()` while pressed
+  (arcade_light: the game's `PauseRound` tint). Under `arcade_light` the match HUD's painted pause button matches
+  Magnet Mayhem's pixel for pixel, at rest and pressed.
+- **`GoCountdown` — the match-start count.** 3 · 2 · 1 · GO! big on a disc (`show_step(text, final)`,
+  `hide_step()`), each step popping in (1.6× at 60 % settling over 0.35 s; none under `reduce_motion`). New skin hooks
+  `countdown_disc(final)` and `countdown_ink()`; under `arcade_light` it matches Magnet Mayhem's countdown pixel for
+  pixel (the gold digit on the blue badge, GO! on the green). Display only — the caller picks the step.
+- **`GoHudCard` — a match HUD's top-row board.** An icon, then a gold `GoBannerGold` name banner over HUD bars
+  (`add_bar`), a title beside a count (`Layout.INLINE`), a caption over a clock (`set_clock(seconds, warn)`,
+  `format_clock`), or a gauge (`gauge`, `set_lit`) whose rim lights when an ability is ready, dims while it cools and
+  pops when it lights. `padding` / `banner_padding` pack it tighter on a phone. New skin hooks `hud_gauge_box(lit)` and
+  `hud_alert_ink()`; under `arcade_light` the player card, opponents count, clock and repulse gauge match Magnet
+  Mayhem's HUD pixel for pixel. Display only — every value comes from the caller.
+- **`GoBar` draws the painted HUD's bar under `arcade_light`.** A new skin hook, `GoSkin.bar_frame_box()` (null by
+  default; `arcade_light`: Magnet Mayhem's `#d9deef` groove, corner 9, 3dp ink rim), turns the bar into a rounded frame
+  whose `ink` → `ink_end` gradient is clipped to it, with the six ink ticks over both — pixel-identical to the game's
+  stability and power bars. Other looks keep the `ProgressBar`. New members to lay a bar out like a HUD's:
+  `icon` / `icon_size` / `icon_gap` (an icon before the name), `label_size`, `label_ink`, `label_gap` (the room between
+  the name and the bar) and `lead` (room above the name); `frame_mode()` tells which way it draws.
+- **The match HUD's and the touch controls' painted art in `arcade_light`.** Magnet Mayhem's `assets/ui/hud` (the
+  player's head, the power bolt, the opponents badge, the stopwatch, the round pause key) is in
+  `assets/arcade_light/hud/`, and its `assets/ui/touch` (the ATTRACT, REPULSE and JUMP keys, the stick's base and knob)
+  in `assets/arcade_light/touch/`, imported as the game imports them (lossless, no mipmaps). `GoSkin.widget_art(name)`
+  answers them by their bare names (`stopwatch`, `btn_jump`, …) after the stage art; other looks still answer `null`.
+  The artwork is distributed under this package’s MIT license (`THIRD_PARTY_NOTICES.md`).
+- **`GoSlider`** (`HSlider`) — a slider drawn as Magnet Mayhem's `PaintedSlider`: the fill runs `FILL_PAST` past the
+  handle's centre (at least a track's height long) and a held handle is drawn `HELD_SCALE` larger. It draws the theme's
+  own HSlider parts, so `GoSliderGreen` / `GoSliderCyan` pick the fill. `make()`, `part()`, `handle_size()`,
+  `handle_center_x()`, `bar_rect()`, `fill_rect()`, `handle_rect()`. Test `gohud_painted_controls_test`, in `check_all`.
+- **`GoSwitch`** (`CheckButton`) — an on/off switch drawn as Magnet Mayhem's `PaintedSwitch`: the theme's pill centred
+  in its box and an ON / OFF caption beside the knob (`on_text`, `off_text`, `set_texts()`, shrunk with
+  `GoStyle.fit_font_size`). `make()`, `part()`, `pill_texture()`, `switch_rect()`, `caption_position()`.
+- **`GoMapPreview`** (`Control`) — a small map of a level drawn as Magnet Mayhem's `MapPreview`: areas (`add_rect`,
+  `add_circle`, `add_polygon`) filled and outlined, links (`add_link`) under them, start dots (`set_starts`), fitted and
+  centred in the flat dark box or the theme's well (`set_well()`); `locked` turns it a grey silhouette with no starts.
+  It clips to its box. The game passes only data.
+
+- **Painted widgets for `arcade_light`** (Magnet Mayhem's own screens, so it can drop its hand-made ones):
+  - **`GoStyleBoxSprite`** — a painted PNG drawn in nine slices (`texture`, `edge` in texture pixels, `pixels_per_unit`,
+    `tint`, `draw_center`, `face_color` for contrast checks, `frame_margin(side)`), line for line the game's `SpriteBox`.
+  - **`GoTextureSprite`** — a draw-only `Texture2D` for theme icons: it reports `draw_size` and draws the art, made at 3×,
+    scaled into it, so a slider handle or a switch pill is crisp at any canvas scale. It has no RID, so it is not for
+    `StyleBoxTexture`, `NinePatchRect` or shaders.
+  - **`GoSkinArcadePainted`** — the skin of `arcade_light`; `tools/theme_arcade_painted.py` writes its theme from
+    `tools/arcade_painted_map.json`.
+  - **A painted slider and switch** (`HSlider`, `CheckButton`) and the game's flat **`LineEdit` / `TextEdit` field**;
+    the `OptionButton` dropdown wears the painted box in RTL too. Tabs and the `VSlider` keep the arcade shapes.
+  - **`GoSliderGreen` / `GoSliderCyan`** — the slider with a green or cyan fill. `GoRangeSlider` now reads its own
+    `theme_type_variation` (falling back to `HSlider`), so it can wear them.
+  - **`GoLevelCard`** (`Button`) — the stage-select tile: `title`, `subtitle`, `state` (`OPEN`, `CLEARED`, `CURRENT`,
+    `LOCKED`), `selected`, `thumbnail` / `thumbnail_focus`, `locked_text`, `play_text` and art overrides; `GoLevelCard.make()`.
+  - **`GoKeyCluster`** (`Control`) — four keys in an inverted T (`WASD`, `ARROWS`), `picked` signal, `make()`,
+    `key_rects()`, `arrow_direction()`.
+  - **`GoCoverImage`** (`Control`) — a picture that covers its box (`object-fit: cover`) with a `focus` point;
+    `make()`, `cover_rect()`.
+  - **`GoGlyphButton`** (`Button`) — a glyph beside the label (`glyph` / `glyph_icon`), `make()`, `glyph_rect()`,
+    `glyph_allowance()`.
+  - **`GoKbd.done`** — a key already pressed: the caps turn green (`GoSkin.kbd_done_box()` · `kbd_done_ink()`).
+  - **`GoSurface.title_glyph`** / **`title_glyph_size`** (a glyph left of the title), **`opaque`** (a solid sky under the
+    window instead of the veil, for a menu opened before the world is drawn) and an **overhanging title plate**
+    (`title_overhang()`, `title_glyph_side()`).
+  - **`GoStyle.fit_font_size(texts, base, room)`** · `fit_floor(base)` · `row_width(font, texts, size)` — shrink text to
+    fit fixed art, never below `GoConfig.fit_min_scale` (0.7). `GoStyle.face_clearance(control, sideways)` can read
+    only the left and right of a frame.
+  - **Skin hooks** `GoSkin.widget_art(name)` (`check`, `lock`, `person`, `play_tag`, `pointer`) · `selection_ring_box()` ·
+    `key_cluster_box()` · `kbd_done_box()` · `kbd_done_ink()` · `title_plate_overhang()` · `opaque_backdrop_color()`.
+    `GoSkin.box_background()` answers a sprite's `face_color`.
+  - The new type variations are listed under *Changed* above (`GoSliderGreen`, `GoSliderCyan`, `GoWindowBlue`,
+    `GoRibbonWide`, `GoLevelCard*`, `GoWell`, `GoHudPanel`, `GoBannerGold`, `GoNoticeGold`, `GoChipDark`, `GoIconOnly`).
+  - Tests `gohud_stylebox_sprite_test`, `gohud_arcade_painted_assets_test`, `gohud_arcade_painted_theme_test`,
+    `gohud_arcade_painted_skin_test` and `gohud_painted_widgets_test`, all in `check_all`.
+
+- **`GoStyleBoxArcade.gloss`** (`enum Gloss { CANDY, STROKE }` — `STROKE` keeps 1.3.0's single stroke for one face),
+  **`tails`** / **`tail_drop`** / **`ribbon_tails(rect)`** (a ribbon: swallow-tailed ends folded behind a body that
+  stands in from them, drawn inside the face).
+- **`GoBar.segments`** (`-1` the look's choice, `0` smooth, `2`–`24` chunks) and `segment_count()`. Decoration only —
+  the fill still glides and the bar keeps its size.
+- **Skin hooks** `GoSkin.bar_ticks()` · `draw_bar_ticks(canvas, rect, count)` (the chunks of a bar; the default is a
+  smooth bar) and `kbd_box()` · `kbd_ink()` (a `GoKbd` cap; the default is the chip it always was). Dials
+  `GoSkinArcade.arcade_ribbon` (12) and `arcade_bar_ticks` (6), in the arcade palettes' `skin.dials` too.
+- **The parts a party game's painted menus needed** (taken from Magnet Mayhem's own UI, so it can drop its hand-made
+  one):
+  - **A frosted scrim.** `GoSkinArcade.arcade_scrim_blur` (0–4, default 0 — the plain veil) blurs the game behind a
+    modal window, a drawer and `GoStyle.scrim()`; the veil colour still tints it. Any skin can do the same through the
+    hook `GoSkin.scrim_material() -> Material` (default `null`) and the static `GoSkin.blur_material(strength)` (a
+    screen-texture blur, nine taps of a mip level). A `scrim_transparent` window never blurs.
+  - **Stickers.** `GoBadge.solid` (a filled, outlined badge — under the arcade looks a glossy key with a white
+    ink-outlined word), `icon` (a `GoIconSet` name drawn instead of the words — a round check mark), `tilt` (−45–45°,
+    turned round its centre) and `text_role`; `GoBadge.stick(host, words, color, degrees, icon)` pins one on a corner
+    (a tilted `PLAY!` on a stage card). Skin hooks `GoSkin.sticker_box(ink)` · `dress_sticker(label, ink)`.
+  - **A title in another paint.** `GoSurface.title_paint` — a red `GAME OVER` ribbon instead of the gold one (the paint
+    is moved until the white title still reads; transparent keeps the look's own).
+  - **A gauge that changes colour.** `GoBar.ink_end` and `GoStyleBoxArcade.end_color` — the fill runs from `ink` across
+    to this paint, left to right (an orange-to-yellow power gauge). The other looks keep one paint.
+- `tests/gohud_arcade_test.gd` checks the pills, the tabs standing apart, the slider groove inside its knob, the
+  ribbon's padding and height, the keycap's size and contrast, the bar's chunks and that the other looks keep their
+  smooth bars and chip key hints, the frosted scrim, the painted title, the gauge across and the stickers (313 checks).
+- `tests/site_widget_shots.gd` takes **`SHOT_LOOK`** (the look of the widgets and popups sets) — the 43 pictures under
+  `www/img/arcade/` are those sets shot in `arcade_light` / `arcade_dark`. The website's arcade pictures, gallery, popup
+  and skin shots are re-shot in the new look; the English and Korean front pages describe it.
+
+## [1.3.0] - 2026-10-06
+
+### Added
+
+- **Arcade looks: `arcade_light` and `arcade_dark` — `GoStyleBoxArcade`.** An arcade cabinet: **every key is
+  painted** — a top-to-bottom gradient, a white gloss stroke round its top-left corner, a deeper lip under it that
+  sinks when the key is pressed, and a navy ink outline. The primary key is green, the normal keys and the chosen tab
+  blue, the danger keys coral and red, the small keys and the other tabs lavender; every label on a paint is white with
+  an ink outline. **Boards are thick**: a coloured frame (6dp round a window, 4 round a card or a HUD card, 3 round a menu) with its
+  own gloss and lip, round a pale well with an ink line. Text fields and bar grooves are sunken wells, bar fills glossy
+  painted tubes, slots, chips and rows pale key caps. Sky blue by day, navy by night.
+  `GoSkinArcade` paints the parts gohud draws in code: a gold banner with a white ink-outlined title behind window
+  titles, a round red close key with a white cross, key-cap quick slots that light a gold rim, light badge plates,
+  alerts framed in their colour, a chosen choice card with a gold rim, a gold FAB, painted segments, vivid bar fills, a
+  glossy joystick with four arrows, a quick pop on every press; dials `arcade_edge`, `arcade_lip`, `arcade_gloss`.
+  - **Every label reads on its paint.** WCAG's note on 1.4.3 counts a letter's outline as part of the letter, so a
+    white label with an ink outline reads on whichever of the two stands off the paint more. Every paint — the theme's,
+    the hover and pressed faces', a paint you choose — is moved until that label clears 4.6:1 at five heights of its
+    gradient (`GoStyleBoxArcade.fit()`); `tools/check_contrast.py` now measures outlined labels that way, at every
+    height of a gradient face.
+  - **`GoStyle.arcade_paint(node, colour, deep := false)`** paints one key (or a board's frame) its own colour — an
+    orange shop key in a pause menu — with a lighter hover and a deeper press; the disabled face stays dim, and under
+    the other looks it does nothing.
+  - **`GoSkin.dress_title(label)`** — a new hook that dresses a window's title label (the arcade look outlines it in
+    ink). `GoSurface` lifts the previous look's outline before calling it, so the other looks get the plain title back.
+  - **`GoStyle.label_ink(button, colour, quiet := false)`** — the colour a button's label can take. A dark colour
+    asked for on a look that outlines its labels in ink would blur into the outline; on a painted key the label stays
+    white (faded when `quiet`, a placeholder), on any other face the colour is kept and the outline dropped.
+    `GoStyle.typography()` on a button, the chosen segment and `GoCombobox`'s placeholder go through it.
+  - A board padded too little for a 3dp frame (`GoStyleBoxArcade.MIN_FRAME`) is drawn as a key cap — no hairline
+    frame. By day a disabled label is a pale grey (a mid grey closed up inside its outline), a slider's fill is an
+    outlined tube, a quick slot's gloss is softer under its number and the title banner leaves room at its ends.
+  - `tests/gohud_arcade_test.gd` (235 checks, `check_all` step ①-m).
+- **Comic looks: `comic_light` and `comic_dark` — `GoStyleBoxComic`.** Every key, text field, list row, tab, folding
+  title, bar, slider and panel is inked like a comic panel: a bold outline in the palette's `border` colour around the
+  surface colour, and a hard, faint shadow dropped down and to the right of what stands off the page (keys, cards,
+  panels, chips, quick slots) — gone while a key is pressed (the face sinks a little), never under text fields, list
+  rows, tooltips or popup menus. Newsprint with navy ink by day, chalk ink on navy with a sunny primary at night.
+  `GoSkinComic` inks the parts gohud draws in code: speech-bubble chips, quick slots that light their ink while cooling
+  down, sticker badges, a yellow caption box behind window titles, an inked close disc, an inked joystick knob, an
+  inked segmented row with one shadow, the time picker's boxes, the wheel's band, the refresh disc, split buttons;
+  dial `comic_tint`.
+  - **One setting for every part.** The outline width, the shadow size and whether shadows show at all are not baked
+    into the theme: every comic face reads `GoConfig.comic_border_width` (3), `comic_shadow_size` (4) and
+    `comic_shadow` (true) when it is drawn, so one line restyles every part — including parts already on screen, which
+    redraw on their own (a dial only redraws; it does not re-dress the screen). Small parts take a share (rows, chips
+    and bars ⅔ of the outline, slider tubes ⅓, chips ½ of the shadow, panels 1.5× of it). Nothing moves: the outline is
+    drawn inside a part and the shadow outside it, and every face keeps the default look's padding.
+  - **One widget decides for itself:** `GoStyle.comic_shadow(node, on, deep := false)` keeps or drops one widget's
+    shadow whatever the setting says, `GoStyle.comic_border(node, width, deep := false)` sets its outline (negative
+    hands it back). They work before the widget is in the tree and outlive a change of the settings; a focus ring never
+    takes a shadow and moves inside the widget's own ink (`inset`), a disabled face stays flat, and `deep` leaves a
+    child that is flat on purpose (a text field, a row) flat. A face's own `outline`, `drop` and `shadow`
+    (`FOLLOW`/`ON`/`OFF`) do the same in code; the raised twins (`GoConfig.button_glow`, `GoStyle.glow()`) stand
+    higher (1.75× the shadow) and keep it with the setting off. Every focus ring is drawn just inside the ink
+    (`inner`), so a focused key, compact key or row keeps its outline; a pressed danger or compact key is pushed in, a
+    disabled compact key or row sits flat with faint ink.
+  - `GoStyleBoxComic`'s fields match `StyleBoxFlat` (`bg_color`, `border_color`, `draw_center`, `shadow_*`,
+    `expand_margin_*`; `border_width` and `shadow_size` report what is drawn) and `GoStyleBoxMedieval` (`radius`), so
+    `fade_box`, `box_background`, `_edge_fill` and the layout audit read it; `GoStyle.box()` turns it into a flat face
+    with the same ink and a crisp shadow (`to_flat()`), and so do `GoStyle.disc()` and `GoStyle.floating()`; the
+    choice column's fade, an input group's joined pieces and a table's striped rows read it too.
+    `tools/theme_comic.py` writes the faces (shape kind `comic`, skin base `comic` in a palette JSON).
+  - `tests/gohud_comic_test.gd` (164 checks, step ①-k of `check_all.sh`) — among them, every comic face against the
+    default look's padding, every state above, and the per-widget calls before the tree and across a dial change. The "filled buttons sit flat" check now
+    means level with a normal key — a look whose every key drops the same shadow does not single the filled one out.
+  - The website: a comic section on the presets page (the settings, the per-widget calls, the skin), the two looks in
+    the gallery, the popup looks and the front page, "fourteen presets" throughout, and the kids and comic dial tables
+    in every language.
+- **The website shows every widget, and has a guide to popups.** `tests/site_widget_shots.gd` photographs the kit on
+  the virtual monitor — each widget cropped to itself, the popups open over a small game with its HUD, one confirmation
+  in every look, the gallery in every look and the parts each skin draws — and `tools/site_images.py` turns the
+  shots into WebP files under `www/img/` (1.8 MB for 142 pictures) with `shots.json` holding their display sizes. The
+  All widgets page now shows a picture on 93 of its 97 cards, the topic pages show one under each widget heading, and
+  a new page, *Popups and dialogs* (`widgets-popups.html`), covers every overlay: which to pick, the parts of a window,
+  dialogs and their answers, `GoSurface` sizing and properties, sheets and drawers, popovers and menus, the popups that
+  never stop the game, tours and the console, layers, Back and input, every look, the `GoConfig` fields, recipes and
+  pitfalls. The overview and the presets page announce the Material 3 and kids looks with their own sections. All 17
+  languages.
+- **The front page shows the comic look, widget by widget.** A new *Comic* section on `index.html` (linked from the hero)
+  puts 30 widget pictures in `comic_light` and `comic_dark` — keys of every kind, toggles, radios, tabs, sliders, selects,
+  forms, tables, pickers, chips, quick slots, HUD bars, the joystick — and four popups next to the two galleries, then
+  explains how the look is drawn (one `GoStyleBoxComic` per face, pressed means flat, what `GoSkinComic` inks, window
+  captions, contrast, no layout change), the three `GoConfig` settings, the per-widget calls and how to make a comic
+  palette of your own. Pictures in `www/img/comic/`. All 17 languages.
+- **The kids looks are jelly candies — `GoStyleBoxJelly`.** Every key, list row, folding title, text field, bar, slider
+  and panel of `kids_light` / `kids_dark` is now drawn by a new StyleBox (`widgets/go_stylebox_jelly.gd`): the chunky
+  outline and the lip under it as before, plus a body light on top and deeper below and a white shine at the top left.
+  Pressed, the lip goes and the body sinks into its place; a text field is the same jelly turned in (the deep band on
+  top, as a shadow inside the well). Switches, checkboxes, radios and slider knobs got the same two tones and shine.
+  The skin's own parts follow — quick slots are candy blocks that sink while cooling down, chips and the navigation
+  pill are small jellies, an avatar disc is a round candy, alerts and notices are sticker notes with a solid rim, a
+  floating panel casts a soft shadow. 🛑 Sizes do not change: the outline and lip are drawn inside the rectangle and
+  every face keeps the padding the theme gave it (`keep_margins()`), so a host that pins its sizes measures the same
+  parts. A see-through face (a danger key's tint, a faded HUD panel) gets its outline as a ring, so the outline colour
+  never shows through it. Fields match `StyleBoxFlat` (`bg_color`, `border_color`, `draw_center`, `shadow_*`,
+  `expand_margin_*`) and `GoStyleBoxMedieval` (`border_width`, `radius`), so `fade_box`, `box_background`, `_edge_fill`
+  and `GoDatePicker`'s inset day work on it unchanged. The other looks are untouched.
+- **A look can dress a window's head and the feel of a press.** Three `GoSkin` hooks, doing nothing by default:
+  `title_plate_box()` (with `title_plate_ink()` and `title_plate_min_size()`) puts a plate behind a `GoSurface` title —
+  the title is centred on it and shrinks, down to 15, to stay on one line; `dress_close_button(button)` dresses its
+  close button; `press_feedback(control)` runs the moment a finger lands on a button gohud made (`GoStyle.style_button`,
+  `list_row`, `GoSlot`, `GoIconButton` — and `GoStyle.press_feel(button)` hands any other button to it). The surface
+  lifts what a look put on before the next look dresses it, and gives the title its own alignment back. `GoSkinKids`
+  answers all three: a sunny ribbon (mint at night) behind the title, a round candy close button in the danger crayon
+  with a white cross, and a jelly squish — wide and flat for 0.06 s, then an elastic spring back (only `scale` changes,
+  around the centre; `reduce_motion` and headless runs skip it).
+- `tests/gohud_jelly_test.gd` (71 checks, step ①-j of `check_all.sh`).
+- **The guided tour covers the whole kit — 31 chapters, and Fast shows every theme.** Eight chapters join the demo's
+  tour for the 28 widgets it never showed: *An app screen* (`GoScaffold` wiring `GoAppBar`, `GoSearchBar`, filter and
+  input chips, `GoNavBar` with a badge, `GoFab` and a `GoDrawer` with `GoNavBar.drawer_list`), *Actions in reach*
+  (`GoBanner`, `GoSplitButton`, `GoStyle.toolbar`, `GoStyle.bottom_app_bar`), *Bars on the edges* (`GoTopBar`,
+  `GoBottomBar`, `GoLeftSideBar`, `GoRightSideBar`, `GoChoiceColumn`, `GoGrid`), *Tabs & steps* (`GoTabView`,
+  `GoStepper`), *Dates & times* (`GoDatePicker`, `GoTimePicker`, `GoWheelPicker`), *Long lists* (`GoListView`,
+  `GoRefresh`, `GoSwipeRow`, `GoReorderList`), *Progress & ranges* (`GoProgress`, `GoLoadingIndicator`,
+  `GoRangeSlider`) and *Pinch & zoom* (`GoZoomView`) — each driven by the bot with real input and checked.
+  **Fast** now plays at 4.0× (up from 1.6×) and is the theme carousel: every chapter wears the next family, the whole
+  screen rebuilt in it, and the Theme dropdown at the top names it as it changes — a theme picked there mid-tour
+  dresses the current chapter and the carousel goes on from it; the tour ends back in the person's choice. The bot
+  now rolls the wheel where no list, map, slider or wheel inside the stage would take it, so it can reach what sits
+  below a nested list.
+- **The theme carousel at any speed — `--carousel`.** `godot -- --auto --cinema --carousel --exit` (or
+  `DEMO_CAROUSEL=1 bash examples/demo/run.sh --record <movie>`) puts every chapter of the tour in the next theme
+  family at Normal speed, so a recording shows each widget in a different look without Fast's hurry. The Comic family
+  joins the carousel and the showreel on its own — the demo reads its families from `themes/presets/`.
+- **`examples/youtube/` — the YouTube reel.** A separate project that runs at 1920×1080 and shows every preset for
+  five seconds: the theme's name across the top, then five pages of three widgets, one second a page — fourteen
+  presets with Arcade, 74.5 seconds. Dark presets show one set of fifteen widgets and light presets another, so each
+  family shows thirty. `bash examples/youtube/run.sh --record <movie>` records it at 60 fps, `-- --themes=a,b` shows
+  only those presets; the release ZIP leaves it out.
+- **Two themes for children — `kids_light` and `kids_dark`: the toy box.** Chunky outlines and a solid lip under every
+  key, which sinks when pressed; sunken text fields, bubble tabs, jelly bars with a shine; each family of controls in its
+  own crayon — grape primary, sky normal, sunshine pills (mint at night), mint folding titles, a sunshine line under
+  section headings; candy quick slots that sink while cooling down, sticker badges, a rainbow joystick with a candy
+  knob, crayon chart slices. Round plates (18 · 12 · 34), solid panels (the HUD at 88%), a cream-and-peach day and a
+  blueberry night. The shapes are `tools/theme_kids.py` (the controls the engine draws) and `GoSkinKids` (the parts
+  gohud draws in code). Sizes are the default family's — a lip sits inside its control and the content margins keep
+  their sum — and no font is overridden, so a host's Korean, Japanese or Chinese font still draws. Both pass
+  `tools/check_contrast.py` with nothing below the bar.
+- **`GoSkin.chart_colors()`** — the colours a chart cycles through for slices given none (`GoDonut`). A skin gives its
+  own; the default is the colours `GoDonut` used before, and the kids skin gives crayons.
+- **Layouts — `GoTopBar`, `GoBottomBar`, `GoLeftSideBar`, `GoRightSideBar` and `GoGrid`**: containers that draw
+  nothing and only place what they hold (the container ignores the mouse; its items keep their own filters, focus and
+  size flags).
+  - One engine, `GoEdgeBar`, lines items up along any edge — across a top or bottom bar, down a side bar — in one, two
+    or three slots (`add_start()`, `add_center()`, `add_end()`, several items per slot). The centre slot sits on the
+    centre while `max(start, end) + separation` fits in half of what the centre leaves; past that it moves aside only
+    as far as it must not to overlap a side, and when nothing fits the bar asks for the total length instead of
+    cutting an item. One slot places its run at the start, in the centre, at the end, or `Justify.SPACE_BETWEEN` —
+    the first and last items at the ends and the same gap between every pair — on a top bar as on a bottom bar; an
+    item marked `GoEdgeBar.GROW` takes the room left, by its share (size flags never make an item grow along a bar).
+  - `GoLeftSideBar` / `GoRightSideBar` (both `GoSideBar`) hold buttons and panels in one to three tiers — top, middle
+    on the bar's middle, bottom — or one tier at the top, middle or bottom. They keep their physical side and
+    top-to-bottom order in Arabic and Hebrew (`follow_text_direction` swaps the side), take a `thickness`, and
+    `clear_of([top, bottom])` keeps them between the top and bottom bars, following their height (`extent()`).
+  - Under a container a bar flows like any child; under anything else it pins itself to its edge (`pin_to_edge`:
+    `AUTO`, `ALWAYS` — even inside a container — or `NEVER`; `dock(host)`). With `safe_area` the bar pads by the part
+    of the notch or gesture bar its own rectangle covers, pinned or in the flow (not inside a scrolling page), so a top
+    bar's items sit below the notch and a bar already clear of it pads nothing. `avoid_keyboard` lifts a bottom bar
+    above the virtual keyboard.
+  - Labels and buttons that enter keep one line (no label folds to 1dp, inside a `GoForm` too) without touching any
+    size flag; a panel of prose marked `GoEdgeBar.KEEP_WRAP` is left to wrap. Side-by-side icon buttons are made each
+    other's `touch_peers` and let go when one leaves. A bar is never thinner than the touch token, and a bar or grid
+    keeps following the theme after it is moved (`_enter_tree`).
+  - `GoGrid` gives columns of exactly equal width, fixed (`GoGrid.make(3)`) or as many as fit a minimum cell width
+    (`GoGrid.make(1, 160.0)`), whatever size flags the children carry — a child's flags act only inside its cell. A
+    child wider than the minimum cell takes columns away, and a responsive grid narrows back after a wide window.
+    `GoStyle.responsive_grid()` stays as it was.
+- **Material 3 presets — `material_light` and `material_dark`** (`GoThemePresets.MATERIAL_LIGHT`, `MATERIAL_DARK`): the
+  M3 baseline (source `#6750A4`) for app screens. Pill buttons with a 40dp plate in the 48dp touch target (filled,
+  tonal, text, error and a 32dp extra-small button; a press shows the M3 state layer and pressed corner), 28dp dialogs and sheets,
+  borderless filled cards, 16dp menus, outlined text fields, primary tabs with the 3dp indicator, inverse-surface
+  tooltips, M3 switches, checkboxes and radio buttons, the Expressive slider (16dp track, bar handle), progress bars on
+  a `secondary-container` track, a 3dp `secondary` focus ring outside the plate, opaque surfaces, 24dp icons and the M3
+  type sizes with the M3 line heights. Text is the bundled Roboto (SIL OFL 1.1; button and tab labels at weight 500
+  through a `FontVariation`); body text uses it only while the project sets no font of its own
+  (`gui/theme/custom_font` or `gui/theme/custom`), so a project with a Korean, Japanese or Chinese font keeps it. Every
+  M3 colour role the gohud tokens do not already carry is a token too (`GoUi.color(&"md_secondary_container")`). The
+  colours pass every contrast gate as the M3 tokens give them; where a gate overrules the spec the README lists it. Set
+  `GoUi.config.shrink_type_on_mobile = false` to keep the M3 type sizes on phones.
+- **`GoSkinMaterial`** — the skin of the Material presets. The segmented control becomes the M3 Expressive connected
+  button group (pill ends, 8dp inner corners, a 2dp gap, the chosen cell a full pill in `secondary`; the small one keeps
+  its pill cells inside the floating toolbar), chips become 32dp M3 assist chips with an 18dp icon and a state layer
+  when pressable, dividers take `outline-variant`, badges are filled pills, the pill laid over the screen is the M3
+  floating toolbar, a drawer is the modal side sheet (16dp on the inner edge only), skeletons take
+  `surface-container-highest`, an icon button's glyph is 24dp, and choice cells take the card corner with an
+  `on-surface` hover layer. Dials: `segment_gap`, `segment_inner_radius`.
+- **App screens — eight new widgets for social, news and shopping app screens**, each drawn through a `GoSkin` hook so
+  every preset gives it its own shape and the Material presets the M3 component's:
+  `GoNavBar` (navigation bar, and `rail()` for a wide screen — indicator pill, badges, gesture-bar inset),
+  `GoAppBar` (top app bar that lifts once the page under it scrolls, status-bar inset), `GoFab` (40/56/80/96dp and the
+  extended FAB that folds while the list scrolls down; `float_in()` keeps it clear of a navigation bar),
+  `GoSearchBar`, `GoSplitButton`, `GoProgress` (linear or circular, wavy or flat, the 4dp gap and the stop dot,
+  indeterminate), `GoLoadingIndicator` (the Expressive shape that turns and morphs through seven shapes; still under
+  `reduce_motion`) and `GoDatePicker` (today, the pick, `min_date`/`max_date`, Sunday- or Monday-first; seven columns
+  fit a 320dp phone). Factories: `GoStyle.filter_chip()` / `restyle_filter_chip()`, `GoStyle.input_chip()` and
+  `GoStyle.toolbar()`. All are in the gallery, so the layout check measures them on every preset at 320, 390 and
+  1280dp, LTR and RTL.
+- **`GoSkin` hooks** for those parts — `nav_bar_box`, `nav_indicator_box`, `nav_ink`, `app_bar_box`, `fab_box`,
+  `fab_ink`, `search_bar_box`, `toolbar_box`, `split_button_box`, `filter_chip_box`, `filter_chip_ink`,
+  `loading_colors`, `date_cell_box`, `date_ink` — and for parts of existing widgets that only code could change:
+  `drawer_box`, `compact_segment_box`, `icon_button_glyph`, `chip_glyph_size`, `chip_text_role`, `chip_height`,
+  `chip_state_box`. Each default is the code the widget ran before, so a skin that overrides none draws exactly as
+  before.
+- **25 more built-in strings in 21 languages** — `menu`, `more`, `clear`, `previous_month`, `next_month`, the date
+  title format `date_month_year` (`{month} {year}`; `{year}년 {month}` in Korean), `month_1` … `month_12` and the
+  weekday marks `weekday_0` … `weekday_6`.
+- **`go_touch_floor`** meta for `GoStyle.audit_layout()`: a control that carries it may be that narrow (a calendar day
+  on a 320dp phone) but never shorter than the touch size.
+- **`material` shape for themes** — `"shape": "material"` in a palette JSON, built by the new `tools/theme_material.py`.
+  It only replaces the boxes and entries the generator already makes, so the other six themes are generated exactly
+  as before.
+- **From Flutter — the widgets a Flutter app reaches for that a game kit lacks**, each drawn through a `GoSkin` hook
+  (every preset's own shape, the M3 component's under Material): `GoScaffold` (app bar, a scrolling page, bottom bar,
+  FAB and drawer wired together), `GoListView` (builds only the rows in view, or rebinds a few with `recycle()`;
+  `end_reached` for the next page), `GoRefresh` (pull to refresh), `GoSwipeRow` (swipe a row aside — only a sideways
+  drag is the row's), `GoTabView` (tabs over swipeable pages), `GoReorderList` (drag rows into order by a grip or a
+  long press; Up/Down on a focused grip), `GoZoomView` (pinch, wheel and double tap to zoom, pan inside the edges),
+  `GoBanner`, `GoRangeSlider`, `GoStepper`, `GoTimePicker` (the M3 dial, 12 or 24 hours) and `GoWheelPicker`.
+  Added to existing parts: `GoDialogs.choose()` (one of a few options, a bottom sheet on a phone),
+  `GoDatePicker.range_mode` (`range_picked`, `get_range()`, `set_range()`), `GoStyle.Tone.OUTLINED`,
+  `GoStyle.bottom_app_bar()`, `GoNavBar.drawer_list()`, and `GoAppBar.Size` with `expanded_title()` (the large title
+  scrolls away under the bar). The skill's new `references/flutter.md` maps Flutter's catalogue to gohud and Godot.
+- **`GoSkin` hooks** for them — `outlined_button_box`, `outlined_button_ink`, `banner_box`, `refresh_disc_box`,
+  `step_marker_box`, `step_marker_ink`, `time_selector_box`, `time_ink`, `dial_colors`, `reorder_lift_box`,
+  `reorder_grip_ink`, `wheel_band_box`, `wheel_ink`; `date_cell_box`/`date_ink` take the kind `&"in_range"`; and
+  `variation_box(type, key)` is public and follows a type variation to its base (`GoButton` draws with `Button`'s
+  boxes).
+- **`GoScroll.SIDEWAYS`** — a control whose own drag is sideways (a range slider) keeps its press inside a scroll while
+  an up-and-down swipe from it still scrolls the list.
+- **`GoChoiceColumn`** — a short column of choices tapped once, for a HUD side bar (a summon list): a few rows at a
+  time, scrolled by drag, flick or wheel and resting on whole rows; **one tap on any row fires `item_pressed`**; the
+  game marks any number of rows chosen (`set_selected`) or greys them (`set_dimmed`); rows can draw themselves
+  (`item_drawer`); fade bands with an arrow where there is more. Keyboard focus is off by default over gameplay. Its
+  own checks (`tests/gohud_choice_column_test.gd`, every preset) run in `check_all.sh`.
+- **The AI skill covers the whole kit** (`skills/gohud/`):
+  - `references/catalog.md` — every widget and layout by name (97 entries), what it extends, one example and the
+    section with its members; generated from the same list as the All widgets page by `tools/site_catalog.py`, and
+    `check_all.sh` fails when the two drift (`site_catalog.py --check`).
+  - Two more templates, checked headless with the other five: `app_screen.gd` (Flutter's `Scaffold` — app bar with a
+    drawer menu and search, tabs over a lazy feed with pull to refresh and load more, a Saved list swiped away with
+    Undo, a navigation bar with a badge, a compose FAB) and `edge_bar_hud.gd` (a landscape HUD on `GoTopBar`,
+    `GoBottomBar` and both side bars, with a `GoChoiceColumn` summon list and quick slots — fits 844×390 dp).
+  - `SKILL.md`: a "Pick the widget" table by need (windows, messages, HUD, app screens, forms and layout) instead of a
+    paragraph; the description names the Material 3 Expressive presets, app screens, layouts and Flutter's widgets.
+  - `hud.md` §19 — composing a HUD with anchors or with edge bars; `style.md` §10 — the 40 lower-level `GoStyle`
+    functions that had no row; members that were missing (`GoSurface` status line, `GoDrawer`, `GoPopover.is_open`,
+    `GoScroll.reveal`/`SIDEWAYS`, `GoBadge.set_count`, `GoAppBar.expanded_title`, `GoConsole.run`, `GoConfig`'s
+    `extra_icons`, `surface_fit_max_height_ratio` and haptic amplitudes, the 46 built-in strings).
+- **The All widgets page** on the website — every widget and layout by name, what it extends and an example, in
+  all seventeen languages (`www/widgets-catalog.html`, generated by `tools/site_catalog.py`; the examples are checked
+  against the code by `tools/check_docs_api.py`).
+- **5 more built-in strings in 21 languages** — `am`, `pm`, `hour`, `minute` (the time picker) and `reorder` (a reorder
+  grip's name).
+
+- **`GoConfig.button_glow`** (off by default) and **`GoStyle.glow(button, on := true) -> Button`** — raise filled
+  buttons with the glow they used to have. They switch the button to the new type variations
+  **`GoPrimaryGlowButton`** and **`GoDangerSolidGlowButton`** (constants `GoTheme.VAR_PRIMARY_GLOW_BUTTON`,
+  `GoTheme.VAR_DANGER_SOLID_GLOW_BUTTON`), which hang off the flat ones and change only the faces, so text colours,
+  the focus ring and the disabled face stay shared. Other tones are left alone, and so is a button whose theme lacks
+  the variation. In a `.tscn`, type the variation name into *Theme Type Variation*.
+- **`GoScroll.OWNS_GESTURE`** — set this meta to `true` on a control that owns a competing drag (a pannable map, a
+  drawing pad) and the scroll leaves its `mouse_filter` alone. `GoScroll.owns_gesture(control)` gives the policy's
+  verdict.
+- **`GoScroll.audit_touch(root) -> Array[String]`** — for screen tests: reports a STOP control inside a scroll that
+  does not own a gesture, and a plain `ScrollContainer` under `root`. Empty means a finger can swipe every list.
+- The tests now drive the engine's own drag (touch emulation gives the headless run a touchscreen) instead of raising
+  `scroll_started` by hand, across buttons, cards, panels, `ColorRect`, text bodies, art, chips, item cards, alerts,
+  nested plates and a horizontal row inside a vertical sheet.
+- **`GoThemePresets.ARCADE_DARK`, `ARCADE_LIGHT`, `COMIC_DARK`, `COMIC_LIGHT`, `KIDS_DARK` and `KIDS_LIGHT`** — the six
+  new looks are built-in presets by name, next to `MATERIAL_*` (`GoUi.use_preset(GoThemePresets.ARCADE_DARK)`). The
+  order the pickers show is unchanged.
+- **`GoUi.project_has_font() -> bool`** — whether the project chose its own font (a custom theme or a custom font in
+  Project Settings → GUI → Theme). A preset that brings a body font (Material's Roboto) leaves such a project's font as
+  it is.
+- **`GoScroll.control_at(node, point) -> Control`** — the control a press at a viewport point reaches under a node,
+  found the way the GUI finds it (a clipping control hides what lies outside it); `null` when nothing there takes it.
+
+### Fixed
+
+- **The coach mark's Skip is a quiet key again.** It was styled with `GoStyle.typography()`, which swaps the theme
+  variation — the bare Skip key became a full button in every look. It now takes `GoStyle.font_role()` (size and
+  colour only) and keeps the touch height.
+- **A busy button's spinner shows.** `GoSpinner.busy()` drew the spinner in the button's text colour but disabled the
+  button, and a disabled face is pale on purpose — on every filled button (primary, solid danger) in all fourteen looks
+  the spinner sank into it (1.06–1.69:1; the kids theme's white spinner on a pale-pink face at 1.14:1). A busy button
+  now keeps its own face, the spinner reads the text colour as it draws (made busy before it was in the tree, it drew
+  in the engine's grey) and its track is that colour, faint. The button's own disabled face comes back afterwards. A button
+  that lays its own disabled face — `GoFab` does when it joins the tree and when it folds — keeps the normal face while
+  busy too, and gets its own face back afterwards.
+- **Loading shapes stand off every face.** `GoLoadingIndicator` and a free-standing `GoSpinner` push their colour
+  until it clears 3:1 against the background and every surface (`GoSkin.readable_on_faces()`) — the contained shape of
+  the default and sci-fi light looks sat at 2.9:1 on a card. Every loading mark in every look now measures 3.9:1 or more. The push is
+  worked out once per look, not every frame, and a spinner or loading indicator taken out of the tree and put back
+  follows the look again.
+- **The sci-fi danger glow button glows.** `GoDangerSolidGlowButton` had the same faces as `GoDangerSolidButton` in
+  `scifi_dark` and `scifi_light` — the generator gave the primary twin its glow and forgot the danger one. It now glows
+  in the danger colour (7dp, 10dp under the mouse), and the button-glow check holds both raised twins above their flat
+  ones in every look.
+- **Windows cast their whole shadow.** `GoSurface` clipped its card (`clip_contents`), and a clip cuts the clipping
+  item's own drawing too: the shadow vanished outside the card and showed as a dark square in the four corners the
+  rounded face leaves open — on every dialog, sheet, popover and window in every look. The content is now clipped one
+  level in, by the padding that fills the card, so it is clipped where it always was.
+- **A carousel page with a wrapping title fits its strip.** A page is first laid out 1dp wide, where its title stacks a
+  letter per line; the page kept that tall size after the real width arrived (1215dp for a 120dp strip), so a centred
+  title sat far below the visible strip and the banner showed blank. `GoCarousel` sizes its pages again whenever their
+  minimum size changes.
+- **The checks pass in a fresh project, so CI is green again.** The layout, later-widget, jelly and template checks set
+  the screen size through `content_scale_size`, which only moves the screen while stretch is on — a project that turns
+  it on (laryen3d) passed, while CI's empty host project left the `--headless` window at 64×64 and 100 checks failed on
+  every push. Each now turns stretch on with a 390×844 phone portrait when the host has it off (a host that stretches
+  keeps its own setting), and the pagination check lays its 700dp strip on a screen that wide. That also brought out a
+  real fault: the gallery's icon-group dropdown was as wide as its longest group ("Navigation & structure (14)", 287dp
+  in Godot's own font) and ran the page 21dp off a 320dp phone in every look but Material. It now has a line of its own,
+  as wide as the page, and a long title ends in "…".
+- **Text no longer turns white under the mouse — in every look.** A colour a theme leaves out is not borrowed from a
+  neighbouring state: the engine draws its own default theme's, made for a dark editor. No gohud theme had
+  `font_hover_pressed_color`, so hovering a switched-on toggle, a ticked checkbox, a selected list row or a pressed
+  toggle button turned its label white — gone on every light page, and white on the bright plate of a pressed
+  primary or filled danger button on every dark one. Every look now gives the hovered pressed face the pressed ink,
+  and also fills the other engine leaks behind the same kind of fault: icon tints for focus and hovered-pressed
+  (gohud icons are white artwork), the textarea's placeholder, caret and selection, a field's selected and read-only
+  text and clear button, `TabContainer`'s hovered and disabled tabs and tab icons, `LinkButton`'s text, the dropdown's
+  right-to-left faces (`*_mirrored` were the engine's dark plates) and the read-only textarea face. The pressed ink
+  itself must now read on the bare backdrop and cards too, since a checkbox, a switch and a text button lay it there
+  with no plate (medieval light was 3.85:1). `tools/check_contrast.py` looks a colour up the way the engine does —
+  the variation, the parent class, then the engine default — and measures the hovered-pressed face and the inputs'
+  placeholder; before, it fell back to `font_color` and stayed green. `gohud_test.gd` checks that every text and icon
+  colour of the controls gohud builds comes from the theme, on every preset.
+
+- **The kids looks pass the layout test again.** Chips and the navigation pill used a 999 radius, which the cell audit
+  reads as "the label needs 300dp of room" (24 faults on every width, both looks); list rows used a 12dp corner that a
+  table row's 4dp padding cannot hold. Chips and the pill take half their height (13 · 16), list rows a 6dp corner.
+
+- **A fit-content `GoSurface` no longer jitters between two sizes every frame.** `relayout()` chose the dense/normal
+  step from `_desired_height()` measured *before* the layout was sorted at the new width and padding, so a wrapping row
+  (reward cards in an `HFlowContainer`) read two-per-line, then one-per-line, then two again — title size, column
+  count, scrollbar and card height all flipped each frame. The step is now decided by measuring both candidates at
+  their own sorted layout (`_sort_now`) and keeping normal density only if it fits `room`; the `RELAX` slack
+  constant is gone (it could not stop a dense ≤ 0.85·room / normal > room cycle). Laryen repro:
+  `tests/crate_dialog_jitter_headless.gd` (36 width × height cases, 59 changes in 60 frames before, 0 after).
+
+- **The demo app shows every theme.** Its theme picker listed families from a hand-kept list, so the showreel never
+  rotated into Material and Kids appeared nowhere. `examples/demo/theme_picker.gd` now reads the families from
+  `themes/presets/` (each `<family>_dark`, paired with `<family>_light` for the Themes & icons chapter), and the
+  showreel rotates through the same list — Default, Sci-fi, Medieval, Material, Arcade, Comic and Kids today, and any theme
+  `tools/new_theme.py` adds later with no change to the demo.
+
+- **The safe area under the project's own stretch.** `GoSafeArea.usable_rect()` divided the screen-pixel safe area by
+  `content_scale_factor` alone, which is right only while the stretch ratio is 1 (`GoScale` on). Under the plain
+  `canvas_items` stretch the setup guide recommends, a Galaxy A12 (720×1600 on a 390×844 base) took its 45 px camera
+  cutout as 45 units instead of 24 — the top bar sat 39 px lower than it needed — and lost the bottom and right insets
+  outright: in reverse landscape the right side bar sat on the cutout and the ends of the top and bottom bars ran past
+  the safe area. The safe area and the keyboard height now come into UI units through the window's final transform
+  (`GoSafeArea.clip_to_safe`, `GoSafeArea.px_to_units`), so every widget that measures against it — the edge and side
+  bars, `GoNavBar`, `GoAppBar`, `GoFab`, `GoDrawer`, surfaces, `GoForm`, the snackbar — holds under any stretch.
+  Measured on the phone before and after, in portrait and reverse landscape, with and without `GoScale`.
+
+- **The AI skill's references, checked against the code** — what an agent copied from them now runs as written:
+  `container_alpha_overrides` takes a ratio (`0.95`, not `95`, which was clamped to opaque); `GoStyle.floating(…,
+  opaque = true)` was a named argument GDScript does not have; the context-menu recipe's code block swallowed the
+  prose after it; the tutorial recipe typed the HUD as `CanvasLayer` and failed to parse; the skin hook signatures
+  lacked the `alpha` parameter an override must carry; `GoRefresh.attach()` was shown on a list with no parent;
+  `alert()` queues (it was said to return at once); a snackbar catches taps by default; `toggle(key, false)` only
+  inherits the translation mode; Material's containers are opaque; the reward calendar reads `amount`/`label`;
+  stale counts and section links in `features.md`; `hud.md` had two §9.
+
+- **The Flutter widgets after a design review on every preset (2026-10-03):**
+  - `GoTabView` and `GoStyle.tabs(..., fill = true)` spread the tabs over the whole row, and every tab row draws its
+    line the full width — it used to stop after the last tab. The pages keep a gap from the tab line. Four tabs fit a
+    phone: the padding gives way (to 8 dp a side) before the row scrolls.
+  - `GoWheelPicker` keeps its band 6 dp in from the sides and no longer clips, so a theme's band edge and the focus
+    ring show whole; the ring is for keyboard focus only (a press hides it).
+  - `GoTimePicker`: AM and PM stand 8 dp apart instead of sharing one edge; Up / Down on a focused hour or minute box
+    turn it (the dial alone needed a pointer).
+  - `GoStepper`'s horizontal layout put the titles over the joints and pushed the last step off the screen — a step
+    head is sized to its marker and title now, the marker over the title, and the joints run level with the markers.
+  - `GoListView` keeps every row one extent tall: a `list_row` measured at zero width when it arrived wrapped its words
+    tall (213 dp) and the rows covered each other.
+  - `GoRangeSlider` lifts its track where the theme's is the page's own colour (medieval, the dark presets).
+  - The outlined button drops the fill of a skin's own face too (sci-fi's cut face, medieval's forged one) — it looked
+    like the normal button there.
+  - `GoZoomView` draws its focus ring inside its rect, which it clips.
+
+- **An up-and-down swipe that starts on a tab row, a list row, a progress bar, a field, a slider or a dropdown scrolls
+  the list.** Inside a `GoScroll` the swipe used to stop dead on a field, a horizontal slider, a dropdown or a tab row
+  (they keep their press), and a swipe that started on a tab switched the tab. The scroll now holds such a press until
+  the finger shows its way: up or down goes to the list, sideways or a lift goes to the control, so a slider still
+  drags and a tap still focuses, opens or switches (`GoScroll.yields_vertical`). In the engine's plain
+  `ScrollContainer` the gohud parts do it themselves: tab rows, progress bars, cards, panels, chips, alerts and
+  `GoIconButton` pass the swipe through while they sit in a scroll (`GoScroll.scroll_through`), and `GoStyle` fields,
+  sliders and dropdowns carry the same arbiter (`GoScroll.yield_vertical`). Spin boxes, vertical sliders, a
+  `TextEdit` that scrolls and anything marked `OWNS_GESTURE` keep the whole gesture. Measured with real touch on a
+  Galaxy A17 and A12.
+- **A tooltip's text takes the theme's tooltip colour** (`TooltipLabel/colors/font_color`, the colour paired with the
+  `TooltipPanel` plate and the one `tools/check_contrast.py` measures) instead of the body `TEXT` token. The six
+  earlier themes give both the same colour, so nothing changes there; a theme with a dark tooltip on a light page no
+  longer draws dark text on it.
+- **`GoInputGroup` drops a negative expand margin from the pieces it joins.** A button that draws its plate shorter
+  than its control (the Material presets draw a 40dp plate in the 48dp touch target) sat as a step beside the field.
+
+- **A finger swipe on a `GoScroll` scrolls it wherever it starts — not only on a button.** On phones, a swipe that
+  started on a card, a panel or a text body did nothing; only holding the thin scrollbar moved the list. Godot's
+  `ScrollContainer` starts a drag-to-scroll in its own `gui_input`, so it only sees what its children pass up, and
+  `MOUSE_FILTER_STOP` — the engine default for `PanelContainer`, `Panel`, `ColorRect` and `RichTextLabel` — stopped
+  the drag on the way. `GoScroll` used to turn only `Button`s to PASS. Its touch policy now turns every STOP
+  descendant to PASS, when it enters the scroll and once more a frame later (a caller that sets STOP right after
+  `add_child`, or a `_ready` that does, no longer wins). Controls whose own drag means something keep STOP:
+  `LineEdit`, `TextEdit`, a `RichTextLabel` with `selection_enabled`, `Range` controls other than progress bars,
+  `OptionButton`, `ItemList`, `Tree`, `GraphEdit`. Nothing changes outside a scroll, so a HUD control over the game
+  keeps STOP. Taps still land, a swipe that starts on a button still does not press it, a swipe that ends on a link
+  does not open it, and a carousel inside a sheet still turns its pages sideways while an up-and-down swipe scrolls
+  the sheet.
+- **A horizontal `GoScroll` standing alone no longer lets a press through to the game.** `GoScroll.horizontal()` was
+  always PASS, so a strip placed straight over the world (in a HUD, not in a window) handed every press nothing took —
+  on a card, in the gap between two chips, even on a button, which does not accept the press — on to
+  `_unhandled_input`, where the game read it as a tap on the world. A horizontal row is now PASS only while another
+  scroll holds it (an up-and-down swipe on it still scrolls the sheet), and STOP standing alone. It decides each time
+  it enters the tree, and a `mouse_filter` the caller sets after `horizontal()` is left alone.
+- **A row freed in the frame it entered no longer stops `GoScroll`'s second touch pass.** The queued row was assigned
+  to a typed loop variable, a script error that ended the pass and left every row queued after it STOP — seen in a
+  list rebuilt in place.
+- **A list rebuilt while the finger drags takes the mouse again.** The rows muted for a drag were walked with a typed
+  loop variable too; a freed one raised a script error that skipped the restore and kept a stale entry, so every later
+  drag left the new rows ignoring the mouse.
+- **A `GoSurface` subclass that replaces `relayout()` without calling `super()` is not laid out every frame.** The
+  dirty flags are cleared before the call as well as inside it; such a subclass laid out every frame, and after one
+  handle drag kept doing so for good.
+- **The arcade loading shape stands off its gold disc.** `GoSkinArcade.loading_colors(true)` drew the sky-blue accent
+  on a gold disc under 3:1; the accent is pushed until it clears 3:1 on the disc over the page.
+- **The `standalone` check skips the YouTube reel and never follows a symlink.** It scanned `examples/youtube/` — a
+  separate project left out of the release — and failed on its `res://youtube.gd`, so CI's Tests had been red since the
+  reel arrived. In a checkout it also followed the demo's and the reel's `addons/gohud` links back into the add-on, two
+  loops, and `tests/gohud_test.gd` was killed at 240s with no error.
+
+### Changed
+
+- **`kids_light` sits on darker sand.** The backdrop is `#F7E1B9` (was `#FFEDC9`), so the white cards stand off it.
+  The darker page needed two neighbours to move with it to keep every contrast check passing: the card plate is
+  `#FFD08C` (was `#FFD79B`) and the raised cell `#9AD0FF` (was `#9FD4FF`); the generator darkened the muted text and
+  the status and border colours a little to keep them readable.
+- **`tools/check_contrast.py` measures tab labels and checkbox and switch labels.** A tab names its faces and colours
+  differently (`tab_selected` with `font_selected_color` …) and a checkbox draws no plate (`StyleBoxEmpty`), so neither
+  produced a single row before. Tabs now pair each face with its own colour, and a face that draws nothing is measured
+  over the backdrop and the card. Every theme passes.
+- **`GoIconButton` takes its glyph size from the skin** (`GoSkin.icon_button_glyph`, 58% of `visual_size` as before;
+  24dp on the 36dp button under Material), and chips their icon size, label role and height (`chip_glyph_size`,
+  `chip_text_role`, `chip_height`) — unchanged on the existing presets.
+- **Filled buttons sit flat by default.** The primary button (`Tone.PRIMARY`) drew a soft accent shadow under its
+  plate — a glow on the sci-fi shape — and the filled danger button (`Tone.DANGER_SOLID`) a red one, the only depth
+  in a row of flat buttons. Every built-in theme now draws both flat in every state. The old look is one option
+  away: `GoConfig.button_glow = true` for every filled button, `GoStyle.glow(button)` for one. A theme generated
+  with `tools/make_theme.py` or `tools/new_theme.py` before this change keeps its shadow until it is generated again.
+- **`GoSurface` lays out when something changes, not every frame.** A `fit_content` surface used to run `relayout()`
+  every frame for as long as it was open, and once per drag event while its handle was dragged — 70–95 µs a frame on a
+  desktop CPU for an idle 23-row sheet, paid continuously on a phone. The layout fields (`placement`, `max_width`,
+  `max_height`, `height_ratio`, `max_height_ratio`, `fit_content`, `compact`, `anchor_*`) are setters that mark the
+  layout dirty when the value really changes, each section (`header`, `toolbar`, `body`, `status`, `footer`) reports
+  a new minimum size or visibility, and a handle drag is applied once per frame. Assigning a field without calling
+  `relayout()` still takes effect on the next frame. An `ANCHOR` popover still follows its anchor every frame.
+- **`GoSurface.height_changed` goes out once per frame, after the card has that height** — it used to fire once per
+  drag event, before the resize was applied.
+- `GoStyle.style_choice_card`'s `filter` argument is only for a card **outside** a scroll now; inside a `GoScroll`
+  the touch policy handles it.
+
+## [1.2.1] - 2026-09-28
+
+### Changed
+
+- **Tested on Godot 4.7; Godot 4.7 and newer are officially supported.** `GoUi.MIN_ENGINE` is now `[4, 7]`, CI runs
+  on 4.7-stable, and the READMEs, `plugin.cfg`, the store listing, the AI skill, the plugin manifests and the website
+  in all 17 languages say so. `tools/check_all.sh` no longer takes `GODOT_46`, and `/gohud:preview` skips engines
+  older than 4.7.
+
+### Fixed
+
+- **Loading gohud no longer ends every headless run with `ERROR: 1 resources still in use at exit`.** Since 1.2.0,
+  `GoIconSet.layers` was an exported `Array[GoIconSet]` — an array typed to its own class. Godot's editor build (so
+  every `godot --headless` run, CI included) caches each export's default value, here an empty array typed to
+  `go_icon_set.gd` itself, and never clears that cache, so the script kept itself alive and Godot printed the error at
+  exit. Games were unaffected, but a pipeline that stops on any `ERROR:` line stopped on it. `layers` is now a plain
+  `Array` whose export hint still offers only icon sets in the inspector; any array of sets can be assigned, as before,
+  and an entry that is not a set is skipped. A list assigned as `[a, b]` now stays a plain array, so reading it into
+  an `Array[GoIconSet]` variable needs `.assign()`. Icon sets saved by 1.2.0 load unchanged. The new
+  `tests/gohud_exit_test.gd` loads every gohud script, stacks icon sets and quits, and `tools/check_all.sh` fails when
+  anything under the add-on is still in use at exit (`GOHUD_EXIT_CLEAN=1` in `tools/run_tests.sh`).
+- **The demo's widget gallery no longer opens blank after an update.** The demo's doorway (`main.gd`) treated the
+  import cache as ready once it found `GoUi`, but running the game never refreshes that cache — so a demo imported
+  before 1.2.0 came up without `GoIconLibrary`, and the gallery, which uses it, failed to parse and stood empty. The
+  doorway now checks every `class_name` the project declares (and where it lives) and re-imports when one is missing;
+  home shows which script did not compile rather than an empty stage; and `tests/home_test.gd` checks each screen
+  opens with its script and its content, and that the doorway notices a stale cache.
+
+## [1.2.0] - 2026-09-24
+
+### Added
+
+- **`examples/icon_buttons` — buttons made from the icon library.** A toolbar of icon-only buttons, text buttons with
+  an icon in every tone, toggles whose icon follows the state, menu rows, a compact segmented choice, a whole group as
+  buttons (`names_in_group(&"weather")`) and buttons found by a live `search()`. Open it with `/gohud:preview icons`;
+  the extra tests check it draws what it claims and fits a 320dp phone, and `tests/icon_shots.gd` photographs it.
+- **The icon library — 1,000 more icons in 32 groups (`GoIconLibrary`).** Arrows, system and status, devices and
+  signal, media, messages, documents, commerce, currencies, map, buildings, vehicles, weather, nature, animals, food,
+  health, sport, games, faces, hands, shapes, symbols, zodiac, charts, math and more — Tabler Icons 3.46.0 path data
+  (MIT), the same 24 px grid and 2 px round stroke as the default set. `GoUi.add_icons(GoIconLibrary.icon_set())`
+  makes 1,271 names drawable (the library falls back to the game set). No brand logos, no letters or numbers, nothing
+  the game set already draws; a drawing that repeats a default icon became an alias of it (`x` → `close`). Built from
+  the table `tools/icon_library_data.py` by `tools/make_icon_library.py` (`--check`, `--import <tabler package>`).
+- **Extra icon sets that survive a preset — `GoConfig.extra_icons` and `GoUi.add_icons(set)`.** `GoUi.icons()` layers
+  them under the set in use, so the medieval preset keeps its engraved sword while the game set and the library fill
+  in the names it lacks. Before, plugging the game set into `config.icons` replaced the preset's set.
+- **Finding icons — `GoIconSet.search()`, `group_names()`, `names_in_group()`, `group_title()`, `group_of()`,
+  `canonical()`**, fed by the new data fields `aliases`, `groups`, `group_titles` and `tags` (every bundled set has
+  them; the default set's 84 names sit in nine groups). **`GoIconSet.from_folder(dir)`** makes a set of a folder of
+  pictures, file name = icon name.
+- **`GoIconSet.paths` (+ `folder`) — drawings loaded when first drawn**, and **`layers`** — more sets to look in.
+  A `.tres` holding 1,000 textures read them all on open (≈90 ms on a desktop); a table of paths reads in ≈5 ms and
+  each icon in ≈0.2 ms. The game set and the library use it.
+- **An Icons page on the website, in 17 languages** — the whole catalog with search, set and group filters and the code
+  to use a picked icon, then how a name is found, presets and extra sets, your own drawings, naming and licenses.
+- **One contract for content inside a pressable cell — `GoStyle.cell_body()`, `cell_inset()`, `center_in()`,
+  `face_clearance()` and `audit_cell_layout()`.** A `Button` is not a container: its face pads only its own text, and it
+  does not grow for a child, so every widget that stacked content inside one had to get padding, sizing and
+  centering right by hand — and the reward calendar did not (day numbers on the top border, amounts drawn below
+  the cell in the widget gallery). `cell_body(button)` lays the content behind padding (raised to what the skin's
+  face needs — a cut corner, a top edge line), keeps its spacing inside a `GoForm`, and grows the box to fit on
+  both axes. `center_in(node)` centers a mark by its own size. `audit_cell_layout(root)` lists the boxes that break
+  the contract (box smaller than its content, padding thinner than the face, text cut or folded, a mark off center);
+  the tests run it over every cell-shaped widget in all six looks, inside a form and out, left to right and right to left.
+- **`GoStyle.audit_layout(root)` — measures a whole laid-out screen.** It lists what a clipping parent cuts, what runs
+  past the side of the screen, what reaches outside a non-container parent, what is squeezed, a label folding inside a
+  word, text on its face's side and a button too small to press. Every widget had passed its own checks while the gallery
+  was broken on a phone; `tests/gohud_layout_test.gd` now opens the real gallery in all six looks at 320, 390 and 1280 dp,
+  in both directions and in German and Russian, and must find nothing — after proving each rule catches a built fault.
+- **`GoStyle.one_line(label)`** keeps a label on one line inside a `GoForm` too. A check fails any add-on code that sets
+  `AUTOWRAP_OFF` without it.
+- **`GoSkin.dot_box(ink, diameter)`** — a solid round mark for page dots, dot badges and legend keys — and
+  **`GoSkin.section_rhythm(face)`** for skins that draw their own section heading. **`GoDrawer.min_width`** (320).
+
+### Changed
+
+- **How a name is found: every set's own drawings first, then fallbacks, then one alias hop.** `GoIconSet` looks level by
+  level through the set, its `layers` and their `fallback`s, so a partial set whose fallback is the default set no longer
+  hides a medieval engraving layered after it. A plain fallback chain resolves exactly as before.
+- **The game set holds paths, not textures** (`GoGameIcons.icon_set().textures` is empty; read `paths`) — asking for the
+  set no longer reads its 187 drawings. It gained groups, search words and each Tabler row's Tabler name as an alias.
+- **The website counts icons from the sets.** The front page said "100 icons" and `v1.0.1` in 17 languages while there
+  were 287 icons and 1.1.0; badges and license lines now carry `data-n` counts that `tools/make_icons_page.py` rewrites.
+- **`GoStyle.form()` fills in only what a widget left unspecified.** A box whose spacing is not `gap` keeps it (an input
+  group's 0, a field's 4, a carousel's 8), and a button or field with its own height keeps it (a 36 dp icon button, a
+  48 dp compact button). Inside a form an input group had been torn 12 dp apart and icon buttons stretched to 36×52.
+- **`GoCarousel` is as tall as its tallest page, and its dots are one bar.** The pages' height is fed up, so a banner
+  is never sliced (a fixed 120 dp cut the gallery's banner title in half). The dots are solid and close together, the lit
+  one a longer pill; the bar is a finger tall — a press on a dot goes to that page, a press either side goes one page.
+- **`GoPagination` fits the width it is given** — fewer numbers on a narrow row, `‹ 5 / 12 ›` when not even three fit.
+  A 12-page pager needed 457 dp and pushed a 390 dp phone's whole gallery page 121 dp off the screen.
+- **`GoCodeInput` folds at its group breaks** (`cells_row` is now a flow row) instead of running past a phone's width.
+- **`GoDrawer` keeps a readable width on a phone** — 320 dp, or the screen less a strip to tap it shut; 42% of a
+  390 dp phone was 164 dp and broke words in two.
+- **Section headings sit closer to the group they open** — room above a heading is now larger than below, in all
+  three skins (the scifi accent bar is a flat face so the room does not stretch it).
+- **`GoBadge` text is picked against the face actually painted.** It was chosen against red but drawn on the surface
+  colour — 1.69:1 in the default dark theme. A dot badge is a solid dot; an attached badge re-centres when its count grows.
+- Every `GoStyle` button is at least the touch size both ways (a short word on a compact face was 46 dp wide); a
+  donut legend's key is a solid dot; the quick slot's
+  shortcut number keeps clear of the face's border and corner.
+
+- **`GoRewardCalendar` is laid out by its content.** Cells are square, padded, the same size and never below the
+  touch minimum; the picture is 24 dp (a positive `cell_size` is now a floor and sets the picture to 36% of it); the
+  amount reads a step larger than the day number. A row holds **at most** `columns` cells and wraps sooner — and
+  evenly — when the width runs out, so seven days fit a phone as 4 + 3 instead of running 170 dp off the screen
+  (`wrap_to_width = false` keeps the old fixed row). Claimed and upcoming days are dimmed by colour, not by
+  `modulate` alpha, and every number and amount keeps 4.5:1 on its face; the claimed check sits on the picture.
+  Every state has its face — pressing today's cell no longer showed the theme's empty face.
+- **`GoTable` rows keep their cells off the row's edge.** Selectable rows are padded and sized to their cells
+  (`cell_inset`); the header and plain rows take the same side padding so the columns still line up.
+
+### Fixed
+
+- **`GoStyle.apply_icon()` draws the icon on a button that sizes to its text.** With `expand_icon` on, the icon was
+  left out of the button's minimum width, so in a flow row or any shrink-to-fit place the button stayed as wide as its
+  text and the icon was never drawn. Up to the drawing's own size the icon is now scaled by `icon_max_width` alone and
+  counted in the width; only a larger icon still expands.
+- **`GoStyle.card()` wears the gohud card face in a project with no theme of its own.** It read its face before the
+  theme had settled on the new node and recorded the engine's bare panel — no padding, a 3 dp corner, text on the
+  border. The face is now read from the theme itself (`fade_panel`); a host project's own theme had been hiding it.
+- **A count badge, a key hint's `+` and a pager's `…` stay one line inside a `GoForm`** — the badge had grown to 65×65.
+- **Icon-font glyphs no longer wrap inside a `GoForm`.** A form turns wrapping on for every label unless told not
+  to, and a glyph label grew from 24 to 51 dp tall — the crown made day 7 of the gallery's calendar a size larger
+  than the other days. `GoIconSet.node()` marks its glyphs `go_no_wrap` (and `go_icon`).
+- **Carousel dots are round and centered.** They were a padded badge container (wider than the dot, so an oval)
+  placed by anchors alone (its corner on the center).
+- **A boxed `GoPromptCard` icon keeps its size.** A texture icon set stretched it over the whole 44 dp disc instead
+  of the 22 dp asked for.
+
+## [1.1.0] - 2026-09-23
+
+### Added
+
+- **Game icon set — 187 icons for inventories, shops and items.** `icons/game/` + `icons/gohud_icons_game.tres`,
+  names on the new `GoGameIcons` class in nine groups (inventory & storage, shop & trade, equipment & tools,
+  food & consumables, resources & materials, tech & space, buildings & furniture, creatures, rewards & social).
+  Plug it in with `GoUi.config.icons = GoGameIcons.icon_set()` after `use_preset()`; it falls back to the default
+  set, so `close`, `bag`, `coin` … still resolve, and no name redraws a default icon. Vector (`DPITexture`)
+  textures — sharp in a 64 dp cell. 171 icons use path data from **Tabler Icons 3.46.0 (MIT)**, 16 were drawn for
+  gohud where Tabler has none (ring, necklace, gloves, ore, crystal, ingot, oxygen tank, dome …); the MIT notice is
+  in `THIRD_PARTY_NOTICES.md`. One table in `tools/make_game_icons.py` generates the SVGs, the set and the name
+  constants (`--check` compares them; path data is kept in the script, nothing is downloaded). `microphone`,
+  `microphone_off` and `send` sit in the rewards & social group for voice and chat composers.
+- **`GoSlotGrid` — an inventory grid.** *N* `GoSlot` cells that wrap to the width: `set_cell(index, {icon, quantity,
+  accent, tooltip, disabled, timer})`, `{}` for a vacant cell, one `selected` cell, `slot_pressed(index)` and — with
+  `draggable` on, for mouse play — `slot_moved(from, to)`. It holds what to draw, never item data. Cells pass the
+  finger drag to the scroll they sit in.
+- **`GoSlot.icon_ink`** (and the `ink` key of a `GoSlotGrid` cell) colours the icon itself — an item's colour in a bag —
+  corrected for contrast against the slot face so the hue survives on any theme. From `visual_size` 56 up the
+  quantity badge uses the compact text size; the micro size turned into a speck on a 60 dp inventory cell.
+- **`GoStyle.segmented()` options may carry an icon**: `{"text", "icon", "tooltip"}` beside plain strings. The icon
+  follows the label's colour in every state, including the accent-filled chosen cell.
+- **`GoStyle.item_card(spec, framed := true)` — the picked item's detail card.** Icon on a disc (the item's colour,
+  contrast-corrected), title, subtitle, chips, a description, stat rows and an action row from one dictionary; every
+  key optional, parts named (`Icon`, `Title`, `Chips`, `Actions` …) for later updates. A shop, a crafting bench, a
+  quest log and a bag no longer assemble it by hand. `framed = false` inside a popover or a sheet.
+- **`GoStyle.restyle_list_row(row, selected, accent)`** marks the chosen list row with a tint and a 2 dp border (the
+  chosen `style_choice_card` face) or clears it — without rebuilding the row, so a server or language list can move
+  its pick. `list_button` had no selected state, and `toggle_mode` did not show one (the pressed face is the hover face).
+- **`GoSurface.max_height_ratio` / `GoSheet.max_height_ratio`** — this surface's own ceiling on `height_ratio`. A
+  `height_ratio` of 0.86 was cut to the global `surface_max_height_ratio` (0.72) without a word; now one sheet can
+  ask for the room, and a debug build warns once when a requested ratio is cut. `height_ratio_cap()` reads it.
+- **`keyboard_focus` on `GoIconButton` (default on), `GoHudAnchor` (default on) and `GoSlotGrid` (default on).** A
+  clicked HUD button kept keyboard focus and Space / Enter pressed it again instead of reaching the game. Off on the
+  anchor blocks focus for everything under it, later children included (`focus_behavior_recursive`); defaults are
+  unchanged.
+- **`GoUi.theme_color(name, type)` · `GoUi.theme_color_of(node, name)` · `GoTheme.color_in_chain()`** read a control
+  color from the theme resource, climbing the variation's base chain. `get_theme_color()` on a control that is not in
+  the tree yet returns the engine default even when the control's own `theme` is set (measured on Godot 4.7.2), and
+  `Theme.has_color()` does not look at a variation's base.
+- **Guided tour: 23 chapters.** *Inventory & items* (GoSlotGrid with item colours, icon segments as a filter, the
+  detail card, a tap route to move an item, the game icon set), *Popovers, menus & drawers* (GoPopover, GoContextMenu
+  by right-click, GoDrawer, GoConsole), *Tables & pages* (GoTable sorting and rows, GoPagination, a server list in a
+  sheet taller than 0.72 with `restyle_list_row`) and *Pick by picture* (`choice_grid`, `style_choice_card` cards, icon
+  segments in a pill over a map, HUD icon buttons with `keyboard_focus` off). `SimBot.right_click()` and
+  `press_key()`. The widget gallery gains an inventory section; the demo home lists `GoSlotGrid` and `GoGameIcons`.
+- **`GoSlot.selected`** (lit border without the cooldown's dimmed icon), **vacant cells** (no icon and
+  `quantity = NONE` draw faint), and a `visual_size` above the touch minimum now grows the slot's own box instead
+  of being clamped back to 48 dp.
+
+- **Showreel — the demo's 20-second trailer.** `examples/demo/showreel.gd` (home card `5`, `--open=showreel`)
+  walks the tour's chapters at one widget every half second, each step under a different preset —
+  default, sci-fi, medieval — with the bot pressing, dragging and typing for the half second the widget
+  is up. `bash examples/demo/run.sh --record-showreel /tmp/reel.avi` writes it at 1920×1080 / 60 fps and
+  quits; `--showreel-seconds=` `--showreel-step=` `--showreel-order=cycle|random` `--showreel-seed=`
+  tune it (28.5 s in `cycle` order shows every widget in every look). In a window a Replay card follows.
+  `tests/showreel_test.gd` runs from `tools/check_demo.sh`.
+- **Container opacity — the game stays visible behind a panel.** Popups, dialogs, sheets, cards, HUD panels,
+  alerts and snackbars now draw their face at **80% opacity** by default, so the fight carries on behind a
+  confirm dialog and the map shows under an inventory sheet. Only the *face* thins out: text, icons, buttons,
+  badges and quick slots stay sharp, and so do borders and shadows — a translucent panel reads as glass only
+  while its outline is crisp, and fading the content produces UI that cannot be read.
+  Five layers decide the value, most specific first: the argument at that call (`surface.alpha`,
+  `GoStyle.card(…, alpha)`, `GoPopover.open(…, {"alpha": …})`) → `GoConfig.container_alpha_overrides[kind]`
+  → `GoConfig.metric_overrides[<kind>_alpha]` → `GoConfig.container_alpha` → the theme's
+  `GoHud/constants/<kind>_alpha`. New tokens `panel_alpha` `card_alpha` `hud_alpha` `notice_alpha`
+  `popup_alpha` are **optional**: a theme that lacks them falls back to 100, so an older theme or someone
+  else's theme draws exactly as before. `GoUi.surface_alpha(variant)` reads the resolved value as a ratio;
+  `GoStyle.fade_panel(node, alpha)` applies the same rule to a panel gohud did not build (idempotent — the
+  original face is remembered, so repeated calls never stack), and `GoStyle.forget_face(node)` drops that
+  memory after a theme swap. `GoSkin.fade_box()` is the single place the alpha is multiplied in, which is
+  why faces drawn by hand — the cut-corner panel, the forged medieval frame — fade their background while
+  their glow, rivets and engraving keep full strength.
+  Things you press do **not** follow the value: buttons, quick slots, badges, segmented controls, choice
+  cells and chips stay solid, because a button whose state is washed out no longer says what it is. Popup
+  menus stay solid too (`popup_alpha` 100) — the engine may put one in its own window, where the OS does not
+  composite it with the game and translucency comes out black rather than see-through.
+  **Drag it yourself.** `examples/gallery/opacity_lab.gd` puts the value under a slider over a pattern — over
+  a flat colour a translucent panel is indistinguishable from a slightly different colour, which is why a
+  value check can never answer the only two questions that matter: does the world show through, and is the
+  text still readable? Three panels sit on that pattern, each reached by a different route (factory argument,
+  restyling a node in place, `fade_panel()` on a panel the add-on did not create), so one drag proves they all
+  land on the same result. The gallery hosts it with a **Busy background** toggle that patterns the whole
+  screen; the guided tour gained a sixteenth chapter where the bot drags the value and asserts the fill the
+  panel actually received; the demo home screen hosts it over its own patterned backdrop with a project-wide
+  **Apply to every panel**; and the medieval example hosts it on a face drawn by `_draw()`.
+  `GoStyle.card()` called with no arguments now follows the value as well — it reads the face the `GoCard`
+  theme variation draws and multiplies the opacity into that, so a host theme that redefines `GoCard` keeps
+  its shape while the default 80% still applies. At 100% the override is removed entirely and the face is
+  byte-for-byte what it was before these tokens existed.
+
+- **`GoSnackbar` — a snackbar that places itself, queues, and can carry a button.** It sits at the bottom
+  (or the top), above the safe area and the virtual keyboard, and goes away on its own.
+  `snack.show_text("Saved", GoTheme.SUCCESS)` for a line; `await snack.post({"text": "Item dropped",
+  "actions": ["Undo"]})` returns the index of the button that was pressed, or `-1` when it timed out.
+  This is what `GoNotice` structurally could not be: that widget turns input and focus off for its whole
+  subtree, so a button inside it can never be pressed, and the screen that owns it decides where it goes.
+  Messages **queue** instead of overwriting each other, repeats of the same line are merged (a server that
+  fails four times a second no longer stacks four minutes of alerts), and a snackbar with no button lets
+  input through so the game underneath keeps working.
+
+- **Six widgets that games reach for constantly.** `GoSpinner` (an indeterminate wait; `GoSpinner.busy(button,
+  true)` turns a button into a spinner in place, keeps its size, and blocks the double press that duplicates a
+  purchase), `GoBadge` (the unread dot, the NEW tag, `99+`; `GoBadge.attach(button, count)` hangs it on a
+  corner and hides itself at zero), `GoField` (label + control + hint + **per-field error**, so a sign-up form
+  can say which box is wrong instead of one line at the top), `GoInputGroup` (an input and its button welded
+  into one shape), `GoContextMenu` (long-press on touch, right-click on desktop, cancelled the moment the
+  finger moves so scrolling a list no longer pops menus), and `GoPopover` (`GoSurface`'s anchored placement in
+  one line, for item cards and skill descriptions — one open at a time).
+
+- **Four more that round out lists and screens.** `GoTable` (sortable headers and selectable rows; numeric
+  columns sort as numbers, so `9124` no longer outranks `91240`), `GoPagination` (numbered pages that keep the
+  current one centred, plus a mobile-friendly "more" row), `GoDrawer` (a panel that slides in from the left or
+  right for tablet and desktop layouts, where `GoSheet`'s bottom sheet covers too much), and `GoCombobox`
+  (a picker with a search line that matches **inside** names, not just their start — the difference between
+  finding "불꽃의 검" by typing "검" and finding nothing).
+
+- **Five shaped for games rather than for web forms.** `GoRewardCalendar` (daily attendance rewards — what
+  matters is which day you are on, not which date), `GoRadar` (the character stat pentagon, with a dashed
+  overlay to compare gear), `GoDonut` (damage share, currency split; collapses past five slices and carries a
+  legend with words, not only colour), `GoCodeInput` (coupon and gift codes — one hidden field receives the
+  text and the cells are drawn, so pasting `ABCD-EFGH-IJKL` works and IME input cannot lose a character), and
+  `GoCarousel` (store banners and character select; it does **not** advance on its own by default, and never
+  when `reduce_motion` is on).
+
+- **`GoUi.spoken(parts)`** joins the pieces a screen reader should hear as one phrase. Widgets were each
+  building `"%s %s"` inline, which both scattered the rule and leaked past the check that keeps display text
+  out of the code.
+
+- **`.github/workflows/tests.yml`** runs `tools/check_all.sh` on every push and pull request. Every check was
+  already headless; nothing ran them automatically, so a broken one could sit in the tree for days.
+
+- **`tests/gohud_extra_test.gd`** — 134 checks covering the widgets above, including one that would have
+  caught the theme bug below, and one that measures every fault the review turned up.
+
+- **`/gohud update`** and `setup.md` §7 — how to update the add-on **and** the skill, and how to tell when the
+  two have drifted apart. A skill that is ahead of the add-on makes an agent recommend APIs the project cannot
+  run; a skill that is behind hides the widgets that exist.
+
+- **The demo and the gallery show every new widget, live.** The gallery has sections for feedback, badges,
+  fields, lists, overlays and game shapes; the demo's home screen grew a *Newest widgets* card you can press,
+  plus cards for all eighteen classes. Nothing there is a picture — every button reports to the activity log.
+
+### Changed
+
+- **A release is one command: `tools/release.sh`.** Every check → the ZIP for the version in `package.json` →
+  that ZIP installed into an empty project, in that order, stopping at the first failure. The steps existed
+  before as three separate commands, and the one that got skipped was the last one — the ZIP itself.
+  Committing, tagging and uploading stay with a person; the closing lines say what to run.
+
+- **Packaging refuses a README that announces another version.** `README.md` and `README.ko.md` open the
+  repository the store page links to, and they had said 1.0.1 while 1.0.2 and 1.0.3 shipped. The line is not
+  written automatically — what is new in a release is a sentence a person writes — so packaging stops until
+  it is right.
+
+- **The release version is written in `package.json`, and `tools/package.sh` never raises it.** Every run used to
+  add one to the patch number (`--increase-minor-version` for the minor one), so rebuilding a ZIP meant a new
+  version. Now `{"version": "1.2.3"}` in `package.json` decides it: a run sets `plugin.cfg` and `GoUi.VERSION` to
+  that version, moves the Unreleased notes into a dated entry only the first time that version is packaged, and
+  running again with the same version rebuilds and replaces its ZIP. `--increase-minor-version` is gone, and
+  `package.json` stays out of the ZIP.
+
+- **`GoUi.text(name)` sends a name that is not in `text_keys` through the translation server** instead of returning
+  it as written. An icon button's tooltip can take the host's own translation key (`&"HUD_BAG"`) without registering
+  it in `text_keys`; plain words with no translation still come back unchanged. A host table with a message id equal
+  to such a name now translates it.
+
+- **The documentation site is nineteen pages instead of five, and the sidebar lists the pages of the
+  section you are in.** `widgets.html` had grown to 595 lines (40 KB) carrying thirty-two widgets, and
+  `theming.html` to 644 (44 KB): to read about one widget you scrolled past thirty-one others, and a link
+  you sent someone opened that whole page at a fragment. Each is now a **cover plus its sections** —
+  Widgets into eight pages (floating windows · telling the player · HUD · waiting, telling and counting ·
+  forms and lists · shapes games use · over the screen · GoStyle) and Theming into six (presets · tokens ·
+  opacity · skins · your own preset · readability). Pages are 7–15 KB.
+  The split is done by `tools/split_site.py` across all seventeen languages at once, and **no translation
+  was written for it**: the language editions share their `<section id>`s, so each section carries its own
+  translated prose, and every new page takes its `<h1>`, its `<meta description>` and its card blurb from
+  that language's own `<h2>` and first paragraph. The three original file names never move (released ZIPs
+  link to them); `tools/site_langs.py` gained the new names and `site_nav.py` now lights the **cover's**
+  menu entry while you read any page under it. `site/toc.js` lifts the in-page `<nav class="subnav">` to
+  the top of the sidebar, so the section's pages sit above this page's headings — and stay visible in the
+  body when JavaScript is off or the sidebar is folded on a narrow screen.
+  🛑 The reason this took so many asks: `site/toc.js` and `site_nav.py` both carried a rule saying *"do not
+  split further — the table of contents takes over from here"*, and that sentence was read as a settled
+  decision. A contents list guides you **within** a page; splitting shortens the page itself. Both comments
+  now say so.
+
+- **The documentation site is five pages instead of three, and its menu is generated.** `index.html` had
+  grown to 563 lines carrying a landing page, an install guide, a tutorial, a reference summary and the
+  repository's own tooling; it is now an overview that signposts [`install.html`](www/install.html) and a
+  new [`ai.html`](www/ai.html). The three original file names never move — released ZIPs link to them
+  absolutely — so pages are only ever added. `#install`, `#start` and `#ai` stay on the front page as
+  signposts, which keeps every published anchor working.
+
+  The header menu was the worse problem. It was hand-written in 51 files and had drifted: `www/ko/widgets.html`
+  was missing the `#messages` entry the other sixteen languages had, `#factory` read `GoStyle` everywhere
+  except Korean, and `#tokens` was `令牌` in Simplified Chinese but `Token` in Traditional. `check_site.py`
+  compares `<section id>` lists, so none of it was ever caught. The menu is now generated from
+  [`tools/site_nav.py`](tools/site_nav.py), which also records the four rules for what may appear there —
+  in particular that a section inside a document (`#medieval`, `#tokens`, `#own`) is not a global menu item.
+  That is the left-hand table of contents' job, and `toc.js` had in fact been hiding those links all along.
+
+- **The site leads with the AI skill.** The hero's first button and a bordered menu entry both open
+  [`ai.html`](www/ai.html), whose first section is the block to paste into a coding agent; the install page
+  opens with a card pointing at the same block. The block stays in English in all seventeen languages — it
+  is an instruction to an agent, and every command, path and folder name inside it is English — with the
+  reason, and the fact that you may ask your own questions in any language, written underneath in the
+  reader's language. Every line in it is checked against the repository: the plugin id against
+  `.claude-plugin/marketplace.json`, the three skill folders against `skills/gohud/commands/preview.md`.
+
+- **`GoDialogs.alert()` now queues instead of vanishing.** When a dialog was already open, the second
+  `alert()` returned in 0 ms without showing anything; because it returns `void`, the caller could not tell
+  and moved on believing the player had read it. Two server errors in a row meant the second was never seen.
+  Alerts now wait their turn. `confirm()` is unchanged and still returns `false` immediately — a question that
+  arrives late gets answered by someone who no longer knows what they are agreeing to, and the caller can see
+  the `false`. Set `queue_when_busy` to make questions queue too, and `clear_pending()` releases anything
+  waiting when you leave the screen.
+
+### Fixed
+
+- **Three checks stood red for reasons that were not the code, and hid the ones that were.**
+  ① `check_generated.py` compared theme `.tres` files byte for byte, so opening a theme in the Godot editor
+  and saving it — which writes uids, `10.0` for `10` and drops properties holding the engine default — was
+  reported as the themes having drifted from their palettes. A `.tres` is now compared by what it says
+  (`tools/tres_canonical.py`), references resolved by the content they point at, and the check names the
+  property that differs (`corner_radius_top_left 12 ≠ 13`) instead of a whole StyleBox.
+  ② The unit tests asked for a viewport size, but the **host project's** UI scale multiplied it: a request
+  for 844x390 was really measured at 667x308, and the size guard failed. The tests now ask for the stretch
+  base that lands on the size they wanted under that factor, so every screen size is checked at the size it
+  claims. ③ The website glossary was missing `GoGameIcons` and `GoSlotGrid`.
+
+- **Dragging a `GoScroll` by a row no longer drags the rows' highlight along.** On a phone the pressed row kept
+  its focus, its hover stuck to the finger and hopped from row to row as the finger passed over them, and pressing a
+  row half under the edge pulled the list to it before the finger moved. Once a finger drag starts the scroll now drops
+  the focus that press handed out and stops the rows taking the mouse until the list comes to rest; it follows
+  keyboard and gamepad focus only (`follow_keyboard_focus`, on by default — the engine's `follow_focus` is off).
+- `GoStyle.chip("")` with neither text nor icon raised `add_child(null)`; it now returns an empty chip.
+- **`GoSlotGrid.set_cell()` before the grid is in the tree failed with "Invalid assignment of index"** — the initial
+  `slot_count` never ran its setter, so the data array stayed empty until `_ready`. A `selected` set before the tree
+  was also dropped. The grid now follows a preset change (its gaps did not), a disabled cell no longer starts a drag,
+  and an `ink` / `accent` given as a colour string or `null` is read instead of raising a parse error.
+- **`GoSlot`** inside a form (`GoForm`, `GoStyle.form`) folded its count one character per line — the form turned
+  wrapping on for the badge label. Resizing after entering the tree left the count at the old text size; setting only `disabled` did not
+  fade the slot; the tooltip was the engine's default one; a screen reader got no name (now the tooltip, the count and
+  the time left).
+- **Icons in `GoStyle.segmented()`** took the `text` token instead of the button's text color — right only because the
+  built-in themes use the same value for both — and with a font icon set the glyph sat on top of the label and did not
+  repaint on the chosen cell. An icon-only cell is now named by its tooltip for screen readers.
+- `GoStyle.apply_icon()` with a font icon set on a button not yet in the tree colored the glyph with the engine default.
+- **Drag-resizing a sheet above the height ceiling** stored and reported (`height_changed`) a ratio up to 0.95 while the
+  sheet stopped growing at 0.72, so dragging back down did nothing until that invisible part was undone.
+- **Thirteen API mistakes in the documentation, two of which would not compile.** The new widgets were
+  written up from memory rather than from the source, so the docs told readers to call
+  `GoCodeInput.shake()` (there is no such method — `set_error()` marks the cells),
+  `GoPagination.Mode.MORE` (there is no such enum — `GoPagination.more(action)`), `GoTable.make(cols, rows,
+  1, false)` (the third argument is `selectable`; sorting is `sort_by()`), `console.register(name, action,
+  help)` (the order is `command, help, action`), `calendar.claim_requested` (the signal is `claimed`),
+  `field.control()` (a property, not a method), `GoDrawer.Side.START` (there are only `LEFT` and `RIGHT`;
+  RTL mirroring is `follow_text_direction`), `GoKbd.hide_on_touch` (it is `hide_on_handheld`) and
+  `GoConsole.allow_in_release` (it is `debug_only`), and it put `GoPopover` on layer 50 when it uses 95.
+  Two examples were worse than wrong — they **stopped the script from parsing**: a template instance
+  declared as `var hud: CanvasLayer` hides the template's own members, and `GoUi.runtime()` is typed `Node`
+  so `runtime.breakpoint_changed` cannot be reached with a dot (connect by name instead). Both were
+  confirmed against the engine: the correct script printed in one second, the copied one produced no output
+  at all and never exited.
+  `tools/check_docs_api.py` now compares every `GoX.y` in the docs — and every underscored name written in
+  prose — against the source, and `tools/check_all.sh` runs it as step ③-a.
+
+- **The five templates the skill hands out had no test at all.** `skills/gohud/assets/templates/` is code
+  people copy into their own project, and `SKILL.md` described it as "headless-tested", but nothing opened
+  those five files. `tests/gohud_templates_test.gd` now loads each one, stands it up in a tree and exercises
+  its public API (34 checks), and `check_all.sh` runs it as step ①-t. It earned its place immediately: the
+  first run caught a duplicate `_use()` that had just been introduced in `inventory_sheet.gd`, which made
+  the whole template fail to parse.
+
+- **The code "copy" button never appeared on a phone.** It was shown by `pre:hover`, and a finger has no
+  hover state — the trap this site's own widgets page warns about. Since copying the install block into an
+  agent is the shortest path through the whole site, the button now shows unconditionally where there is no
+  hover, at a 44px touch size.
+
+- **Long lines in Korean, Japanese and Chinese.** Body text was capped at `74ch`, but `ch` measures the
+  digit zero; full-width characters are twice that, so those pages ran 80–95 characters per line against a
+  45–75 recommendation. They are now capped in `em`, where one full-width character is 1em.
+
+- **Table headers were letter-spaced and uppercased in Arabic.** Arabic letters join, so extra tracking
+  pulls a word apart into separate glyphs, and the script has no case for `uppercase` to change. Both are
+  now off for Arabic, the CJK languages and Thai.
+
+- **The skin dial tables are collapsible.** All three open at once is 32 rows, and on a phone each row
+  becomes three stacked blocks — roughly 2,900px of scrolling to reach the next paragraph. The first skin
+  stays open; `site/ux.js` opens a collapsed one when a link points inside it.
+
+
+- **Changing the look at runtime now reaches widgets that are already on screen.** `GoUi.use_preset()`
+  promises that theme, skin and icons move together, but only newly created widgets changed: an HP bar and a
+  quick slot built before the switch kept the old accent colour and sat next to new ones in a second theme.
+  Only `GoSurface` and `GoForm` had registered `GoUi.watch()`; `GoBar`, `GoSlot`, `GoJoystick`, `GoNotice`,
+  `GoPromptCard`, `GoIconButton`, `GoCoachMark` and `GoHudAnchor` — which between them read theme values in
+  over ninety places — had not. They now re-read colours, icons and metrics in place, without rebuilding
+  their nodes.
+
+- **The `standalone` check no longer fails on files that are not part of the add-on.** It walked `builds/`
+  (unpacked copies of older releases, git-ignored) and `examples/usage/` (a separate project with its own
+  `project.godot`, carrying an add-on copy two versions behind), so it reported `res://` references that
+  belong to neither. It also fed those stale copies to `_own_symbols()`, which **weakened** the check by
+  accepting names that no longer exist. Both are skipped now.
+
+- **The `standalone` check recognises inner classes.** `class Ticket extends RefCounted` inside a file was not
+  counted as the add-on's own name, so using it read as a dependency on the host project.
+
+- **Twelve faults a five-AI review found, each confirmed against the code before it was touched.** Four of the
+  five reviewers were out of quota, so every claim the one that ran made was checked by hand or by running it —
+  and one was **disproved** (a lambda followed by an argument does parse; the button's tone was applied). What
+  survived: `GoCodeInput`'s hidden field sat in a container that pushed it into its own column, so tapping a
+  cell never opened the keyboard; `GoBadge`'s dot read as "Nothing here yet" to a screen reader — the exact
+  opposite of what a notification dot means; `GoSpinner` froze instead of pulsing under `reduce_motion`;
+  `GoSnackbar`'s repeat-merging answered a caller that was still waiting; `GoDialogs` and `GoSnackbar` left
+  `await` parked forever when their node left the tree; `GoDrawer` read the **editor's** locale, so RTL never
+  flipped it; `GoContextMenu`'s danger colour was applied to the whole menu; a long-pressed control could not
+  be re-attached; `GoCarousel`'s dots were below the touch minimum and kept animating while hidden;
+  `GoConsole` had Korean strings compiled in; and `GoTable` appended its sort arrow to a **translation key**.
+  Running the demo then turned up one more that no reviewer named: `get_meta(key, default)` logs an error when
+  the key is absent, so three widgets now ask `has_meta` first. Details and the disproof:
+  `.cowork/gohud-new-widgets/final-report.md`.
+
+- **Five layout faults that only a screenshot could find.** Every one passed the headless checks and was
+  caught by drawing the widgets on a virtual monitor: `GoTable` rows lost their text entirely (a wrapping
+  label first laid out at zero width froze its minimum height at 1 dp, leaving rows that were painted but
+  empty — table cells no longer wrap); `GoBadge.attach()` placed the badge outside its host, then on the
+  wrong corner (`Control.position` is parent-space and ignores anchors — it now sets `offset_*`, so the badge
+  follows a host whose size is decided later); `GoSpinner.busy()` put its spinner outside the button, leaving
+  a blank one; `GoKbd` broke `Ctrl` across two lines and let one cap eat the whole row; and `GoCodeInput`
+  pushed twelve cells past the edge of a 720 dp phone. The regression test now measures each of these.
+
+- **The demo app opens with `godot` alone, and starts on a home screen.** `examples/demo` now has
+  `main.tscn` as its main scene: a doorway that carries no gohud class name, so it still parses and draws when the
+  `addons/gohud` link or the import cache is missing — the state that used to leave an empty window and one
+  `Identifier "GoUi" not declared` line. In that state it says what is missing, makes the link, imports the project
+  once and reopens the window; otherwise it hands straight over to `home.tscn`.
+  The home screen is built from nothing but add-on widgets, and it is itself a tour of the kit. Four
+  `style_choice_card` buttons open the widget gallery, the 15-chapter guided tour, the showcase screen and the
+  medieval look inside the same window (`1`–`4`, or a click; a bar across the top names the screen and its source
+  file, and **Home** returns). Beside the pitch sits a live HUD — three `GoBar` gauges and four `GoSlot` quick slots
+  that answer each other. Below it, six cards of widgets to press (button tones and icon buttons; a field, a toggle
+  and a slider; segments, a picker and a colour grid; an avatar, list rows and a progress bar; the notice, dialog,
+  sheet, prompt and coach-mark buttons; and a live activity card that prints every callback they fire), then all 19
+  classes grouped by the job they do, each with its one-line description and the line of code that uses it.
+  Body text is held to a readable measure (1120 dp) rather than stretched to the window, every block sits in a
+  responsive grid so a wider window gains columns instead of longer lines, the wordmark row splits in two on a
+  phone, and a faint grid with two soft blooms — drawn from the current theme's own tokens — sits behind it all.
+  `godot -- --open=<gallery|tour|showcase|medieval>` skips the home screen; recording flags (`--auto`, `--cinema`,
+  `--exit`) open the tour with no shell around it, so `run.sh --record` is unchanged. `shot.gd` now takes
+  `SHOT_SCENE` and defaults to the home screen.
+
+- **`GoStyle.style_choice_card(node, accent, selected, toggle, dim_disabled, filter)`** gives a `Button` the faces of a
+  pick-one card. Every state has zero content margin — the card's inner `MarginContainer` pads once, so the chosen
+  card never grows and the row never shifts. The chosen state gets an accent border (0.9, 2 dp) and a 16 % accent
+  fill; hover tints only the border. Faces come from `surface()`, so chamfered and medieval skins keep their shape
+  and only change colour. With `toggle` on, the pressed state is the selection (group cards with a `ButtonGroup`);
+  with it off, `selected` draws a list that is rebuilt on every change. `dim_disabled = false` keeps the disabled
+  face identical to the normal one. `mouse_filter` is left alone unless `filter` is given — pass
+  `MOUSE_FILTER_PASS` for cards inside a scroll, and keep the default for buttons laid over the game.
+- **`GoStyle.card_body(card, padding, spacing)`** builds the content column inside a card whose own face has no
+  padding, such as a `style_choice_card` button: one inner margin, a vertical list, and a card height that follows
+  the content, wrapped text included. `GoStyle.let_input_through(node)` makes a subtree ignore the mouse, so the card
+  takes the press and shows its hover face instead of the text on it. `GoStyle.line(text, role, ink)` is a
+  one-line label that ellipsizes instead of wrapping.
+- **`GoStyle.chip` takes an icon and an urgency flag**: `chip(text, ink, translate, icon, icon_size, urgent)`. With an
+  icon and no text you get an icon-only chip, which is what a HUD buff row is made of; `urgent` swaps the border for
+  the danger colour so a buff about to expire reads as such without changing its shape. The face still comes from
+  `GoSkin.chip_box`, so a skin that redefines it keeps its own shape (its signature is unchanged).
+- **`GoStyle.style_chip_button(node, accent, filled, urgent)`** puts that same tinted pill face on every state of a
+  `Button` — the HUD's status buttons, badges and small list actions. `filled` paints the face in the accent for an
+  emphasised action; the caller sets the label colour. The focus face and `mouse_filter` are left alone, because a
+  button laid over the game must keep `MOUSE_FILTER_STOP` or its press leaks into the world.
+- **`GoStyle.style_chip_label(node, accent, urgent)`** puts the chip face on a `Label` you already built, for places
+  that measure their own width and cannot use the `chip()` container — a badge in a HUD status bar, for one.
+- **`GoStyle.hud_panel(accent, pad_x, pad_y)` and `GoStyle.chip_panel(accent, fill_alpha)`** are the container versions
+  of the floating and chip faces: a dock or status bar laid over the game, and a pill that holds more than one line (a
+  roster card with a name, a level and a gauge). The host adds children and never builds a face of its own. A HUD has
+  touch geometry fixed per screen, so `hud_panel` takes the inner padding as an argument (negative keeps the skin's
+  own) — do **not** wrap a `padding()` box around it as well. Two layers of padding halve the content width, and a
+  one-line label that ellipsizes then disappears entirely while an assertion on its `text` still passes.
+  `GoStyle.face_padding(face, pad_x, pad_y)` applies the same to a face you hold yourself; the shape (border, glow,
+  corners) is untouched, so chamfered and medieval skins keep theirs.
+- **`GoStyle.choice_grid(items, selected, action, translate)`** lays out swatch, icon or text cards and keeps exactly
+  one picked — for character colours, avatars or difficulty cards, where `segmented` (text only) and `chip`/`avatar`
+  (not pressable) do not fit. An item is `{color, icon, texture, text, tooltip}`; a colour swatch is drawn with the
+  real colour and the picked cell gets a thick accent border instead of a fill, so the swatch colour never shifts
+  and the choice is visible without relying on colour. Cells keep the touch minimum, pass drags to scrolls, keep the
+  same inset in every state, and keep their own style inside a `GoForm`. New skin faces `GoSkin.choice_box(state)`
+  and `GoSkin.swatch_box(diameter, color)` let a skin restyle them.
+- **Compact button padding tokens.** `compact_padding_x` and `compact_padding_y` (`GoTheme.COMPACT_PADDING_X` /
+  `COMPACT_PADDING_Y`) set the side and top/bottom content margin of the `GoCompactButton` style. They are separate
+  from `padding_compact`, which insets cards and notices, so changing one no longer moves the other. Built-in themes
+  keep 10 and 5 (no visual change), and a palette file can override both through its `shape`.
+- **`GoStyle.audit_compact_padding(root)`** lists compact buttons that show text but whose style has less side margin
+  than the token. That is how text ends up touching the capsule border when a host theme reuses an icon or close
+  style for compact buttons. Icon-only buttons and per-button overrides are skipped unless `include_overrides` is set;
+  a host that chains its own variation to `GoCompactButton` passes that name in `variations`.
+- **`GoDialogs` button layout.** `action_layout` chooses `VERTICAL` (default, unchanged), `HORIZONTAL` (one row, half
+  each) or `AUTO` (one row only when both labels fit half the card on one line, otherwise stacked). `action_gap` sets
+  the space between the buttons and `body_gap` the space between the message and the buttons, so the question and
+  the choice read as two parts. `set_next_action_layout()` changes only the next dialog. The row is built the first
+  time a dialog opens, so an autoloaded `GoDialogs` adds no nodes at startup, and `confirm()` / `alert()` keep their
+  signatures.
+- `GoSurface.section_gap()` and `GoSurface.content_inset()` return the gap and card padding actually applied (both
+  shrink one step on small screens).
+- `GoStyle.segmented(..., compact = true)` makes tight segments to sit inside a pill over a map or the game: each
+  segment is at least the touch size wide (instead of 1.5×), uses the compact button padding in every state so
+  pressing never changes its width, and only the selected segment is filled — unselected segments draw no face and
+  keyboard focus is a soft ring, so the pill and the segments never show two borders.
+- `GoSkin.overlay_box(h_margin, v_margin, fill_alpha)` is the pill face for controls laid over the game or a map —
+  the background color at 0.82 opacity with a 1 dp border, so text stays readable whatever is behind it.
+- `GoSheet.add_footer(node)` puts a node in the current page's footer and shows the footer; the next `open()`
+  removes it. `open()` only hides the footer, so a page that called `footer().add_child()` on every open stacked a
+  new Close button next to the old ones (the gallery's sheet did). Nodes added with `footer().add_child()` still stay
+  across pages, for sheet-wide parts such as a snackbar.
+- **`GoStyle.style_brand_button(node, fill, ink, edge, mark, gap, inset, base, mark_ink)`** puts the faces of a
+  provider's sign-in button on a `Button` — the one place where a review guideline, not the skin, owns the colour.
+  gohud holds the states and the caller holds the values: the face is painted `fill`, hover and press move it away
+  from that colour (a dark plate lightens, a light plate darkens, as the vendors' own bundles do), disabled pulls
+  toward grey, and focus empties the centre so only the border is left for the shared focus ring. `mark` caps the
+  mark with `icon_max_width` and `gap` is the space to the label; `inset` is the side padding (top and bottom go to
+  zero — the height belongs to the caller); `base` is a face to clone so the button keeps the *shape* of the screen's
+  other buttons while carrying the brand's colour; `mark_ink` stays white by default so a multi-colour official mark
+  (Google's four-colour G) is never tinted by the theme. Negative `mark`, `gap` and `inset` leave those alone.
+- **`GoStyle.center_button_content(node, min_inset)`** sets the mark and the label together in the middle of a
+  button — the shape both Google and Apple ship. 🛑 `icon_alignment = CENTER` draws the mark *on top of* the label;
+  this keeps the label left-aligned and writes the left padding `(width − mark − gap − text) / 2` into every state
+  instead, with `min_inset` (negative: the face's own left margin) as the floor. Call it on `resized`, on a language
+  change and when the mark arrives late; an unchanged value is not written back, so there is no resize loop.
+- **`GoStyle.apply_icon(..., inset)`** insets a font-set glyph from the button's left edge and widens the *both* side
+  text margins to the end of the icon, so a centred label in a narrow full-width button can no longer overlap it.
+  Negative (the default) keeps the previous behaviour, and texture sets are unaffected.
+- **`GoStyle.tint_button(node, ink, active)`** sets only the label and icon colours of a button that draws no face —
+  a links row or a quiet menu that speaks through colour. A transparent argument is left alone, so a button whose
+  resting colour already came from `typography()` can take just the pressed colour.
+- **`GoStyle.bare_panel(node)`** drops the face of a container and keeps its place, stacking and spacing. Removing
+  the node instead would take the paths and the assertions with it.
+- **`GoStyle.style_notice_panel(node, accent, tint, padding)`** puts the skin's `notice` face on a container you
+  already built (`alert()` builds its own): an accent border, and with `tint` the background pulled that far from
+  the background colour toward the accent — one semantic colour instead of a new palette.
+- **`GoStyle.style_mono_text(node, font, selection, selected_ink)`** makes a `RichTextLabel` a monospaced, selectable
+  block for a diagnostic code or a log line. gohud ships no font, so the caller passes one (a `SystemFont` that finds
+  the device's own is enough); `selection` and `selected_ink` replace the default light-grey selection that swallows
+  light text.
+- **`GoStyle.pin_font_size(node, size)`** nails a font size in pixels for the rare place where the size is fixed from
+  outside (a sign-in button whose guideline ties the text to the button height). Everything else should use a
+  `typography()` role, which follows the theme and the screen.
+- **`GoStyle.style_popup(popup, spacing)`** spaces a `PopupMenu`'s rows out to the touch minimum — popup text is body
+  size, so the rows come out thinner than a finger. The value survives clearing and refilling the items.
+- **`GoStyle.overlay_panel(pad_x, pad_y, fill_alpha)` and `GoStyle.style_overlay_panel(node, …)`** are the container
+  versions of `GoSkin.overlay_box` — the small pills that sit **on a drawing**, such as the title and the view switch
+  floating over a map. `hud_panel()` is the dock laid over the game; this one is the chrome laid over a picture, dark
+  enough that a label stays readable whatever the drawing does underneath. The same rule applies: do not wrap a
+  `padding()` box around it as well.
+- **`GoStyle.face_insets(face, left, top, right, bottom)`** sets a face's four sides separately, leaving any negative
+  side alone. `face_padding()` covers the symmetric case; this is for a pill whose right edge is already a 48 dp icon
+  button, where another face margin would push the row past the card.
+- **`GoStyle.hud_panel(…, variant)` and `GoStyle.style_hud_panel(node, accent, pad_x, pad_y, variant)`**: the floating
+  face can now be any token box (a sheet unfolded over the game is the `card` box with a shadow, not the HUD box), and
+  a `PanelContainer` you already built can be re-faced. A badge whose colour follows a value — green, amber or grey by
+  how much experience a place is worth — restyles instead of rebuilding its node. The existing signature is unchanged.
+- **`GoStyle.style_disc_button(node, diameter, accent, fill, fill_alpha, press_alpha)`** gives a `Button` the six
+  states of a round control — the zoom and recentre discs floating over a map. Content margin is zero in every state
+  and the corner radius is half the diameter, so the visible size is exactly what the caller asked for and pressing it
+  never shifts the row. Being round *is* the meaning here, so the face comes from `box()` rather than `surface()`: a
+  chamfered or forged skin would otherwise keep its outline and turn the circle into a square, as `style_hud_disc()`
+  already decided. `mouse_filter` and the focus ring behaviour follow `style_chip_button`: a button laid over the
+  game must keep `MOUSE_FILTER_STOP` or its press leaks into the world. `style_hud_disc()` remains the face for a
+  `panel`-keyed container; this is the button.
+- **`GoStyle.glyph_text(node, icons, …)` takes more than one icon**, joined by a space — a button whose meaning is
+  made of two glyphs (a list plus a chevron reads as "a list that unfolds"). **`GoStyle.glyph_width(icons, size, set)`**
+  measures what that text will be, so a layout can decide whether a cell folds without asking the button: a button's
+  minimum width depends on whether it currently shows a word or a glyph, so asking it feeds the decision its own
+  output and the cell flips back and forth on every press.
+- **`GoStyle.font_role(node, role, ink)`** sets a node's font size (and colour) from a role token **without touching
+  `theme_type_variation`**. `typography()` swaps the variation as well, so it cannot be used on a node whose variation
+  carries its face — a button, or one cell of a segmented control, loses its face entirely. It also clears the font
+  override, which is how a cell that `glyph_text()` switched to the icon font returns to ordinary words.
+- **`GoStyle.style_hud_disc(node, diameter, edge_width, edge_ink, fill, detail)`** puts the face of a round HUD button
+  on a `panel`-keyed container. The corner radius is half the **visible** diameter, so buttons of different sizes stay
+  round — a radius fixed in the theme turns a 104×64 control into a pill. With no `fill` the face does not draw its
+  centre: the disc itself is a shared gradient image drawn by a child, and painting the face as well lays another
+  colour over it. `detail` defaults to 1 because a HUD carries twenty of these and each corner otherwise costs a
+  triangle fan; pass 8 or 16 for a large disc that must read as a smooth circle.
+- **`GoStyle.style_slot_face(node, accent, lit)`** puts `GoSkin.slot_box` on any container, so a game whose slot stacks
+  its own rows (icon, count, remaining seconds) gets the same face as `GoSlot` without adopting its layout, and follows
+  a skin swap with it.
+- **`GoStyle.style_count_badge(node, fill, ink, edge, edge_width, radius, pad_x, detail)`** fills a small `Label` with a
+  meaning colour and rings it in a contrasting one — the count on a notification badge, which has to be seen.
+  `GoSkin.badge_box` is the quiet badge that sits on a surface; this is the loud one. The font size is **not** set here:
+  give the label a role with `typography()`, or pinning it leaves that one badge behind on a mobile type shrink.
+- **`GoStyle.glyph_type(node, size, ink, states)`** re-inks a node that already carries a glyph, for a button restyled
+  on every press, hover and toggle. A negative `size` is left alone — HUD glyph size is geometry proportional to the
+  touch diameter, not a token. On a `Button` the hover, pressed, hover-pressed and focus colours are set as well: miss
+  one and the glyph flips to the theme default the moment it is pressed with the pointer over it.
+- **`GoStyle.spacing(node, horizontal, vertical)` and `GoStyle.edge_insets(node, left, top, right, bottom)`** give a
+  container's separation and a `MarginContainer`'s margins as plain values, for the two cases a token cannot express:
+  a **negative** gap, where touch boxes are deliberately overlapped (48 dp slots stepped 40 apart), and a zero one,
+  where rows must meet with no seam. `edge_insets` leaves any negative side untouched, so a HUD pinned to one screen
+  edge sets only the sides it pads.
+- **`GoStyle.card(accent, border_alpha, border_width, pad)`** takes the emphasis of its border and its inner padding,
+  so a list can draw one card louder than the rest — the character last played, the warning that has to be read —
+  without the caller building a face. Negative values keep whatever the skin's own face carries, and the face still
+  comes from `surface()`, so chamfered and medieval skins keep their shape. The one-argument call is unchanged.
+- **`GoStyle.plate(variant, fill, edge, radius, border)`** is a `Panel` laid *behind* something: the tinted cell a
+  portrait sits in, or the visible surface of a HUD card that is shorter than its 48 dp touch box. `card()` and
+  `hud_panel()` hold children; this one is a single panel the caller anchors and sizes. Only the values given are
+  applied, the shadow and content margin are zeroed (a face laid behind another blurs the text above it), and it
+  ignores the mouse so a button on top still takes the press.
+- **`GoStyle.disc_panel(diameter, accent, fill_alpha, edge_alpha)` and `GoStyle.style_disc_panel(node, …)`** are the
+  container versions of `disc()` — the round play mark on a card, an avatar well — and `style_disc_panel` re-faces a
+  `Panel` already on screen, for a disc whose colour follows a choice (a preview that turns with the gender picked).
+  `GoStyle.style_disc_label(node, diameter, accent, fill_alpha, edge_alpha)` puts the same disc on a `Label` pinned by
+  anchors, which cannot use the container — an index badge in the corner of a thumbnail.
+- **`GoStyle.style_overlay_button(node, accent, fill_alpha)`** gives a `Button` laid over a card the faces of a press
+  area that draws no shape of its own: no border, no shadow, zero padding in every state, and a faint accent wash on
+  hover and press only. A whole card that is one tap is built this way — the card's own face already draws the border,
+  and a second one over it doubles it. `mouse_filter` is left alone.
+- **`GoStyle.text_shadow(node, ink, offset_y, offset_x)`** drops a shadow behind text that sits directly on the world
+  or a picture with no face under it — a HUD name and level. A negative offset leaves that axis to the theme.
+
+### Changed
+
+- **Documentation site moved to `www/`.** The site now lives in `www/` at the repository root, and a GitHub Actions
+  workflow publishes that folder as the top of https://thruthesky.github.io/gohud/ — pages are at `/gohud/`,
+  `/gohud/theming.html` and `/gohud/ko/` instead of under `/gohud/docs/www/`. `www/404.html` forwards the old
+  page addresses, and the deployed site keeps a copy of every image at its old `docs/www/img/` address, so the
+  READMEs inside released ZIPs still show their pictures. The add-on itself is unchanged.
+
+### Fixed
+
+- `GoSurface` counted the gaps between header, body and footer with the `gap` token even on small screens, where the
+  column uses `gap_small`, so short cards came out taller than their content and the space above the footer grew.
+- A reused `GoDialogs` kept the minimum button width of a long label when the next label was a single short word.
+- `GoSurface` placed centered and anchored cards at fractional positions (for example on a phone screen 349.09 units
+  wide). Godot stores a control's size as position plus size, so a 184-unit card became 183.99997, and the card
+  padding (a `MarginContainer`) rounds its child down to whole units — the body lost one unit and a one-line message
+  showed a scroll bar the first time a dialog opened. Card size and position are now whole units.
+- `GoStyle.box()` (and `floating()` / `disc()`, which build on it) returned an empty `StyleBoxFlat` when the skin gave
+  a custom StyleBox, as sci-fi and medieval do. The flat box had no content margin, so cards built through the legacy
+  API put their text against the border. It now copies the frame's content margin, background, border colour and
+  width, radius and shadow; only the chamfered or forged outline is lost.
+- A `GoForm` built in code stopped routing Android Back when `%BackButton` was owned by the form (or by a holder
+  that owned only the form and the button). The form moves its scroll into an edge frame in `_ready`, and Godot's
+  `reparent()` restores only the owners shared with the moved node, so the button's owner was cleared and the lookup
+  failed silently. `GoScroll.use_panel_edge()` now restores every descendant's owner after the move. Scenes saved as
+  `.tscn`, where the root owns every node, were not affected.
+- `GoDialogs` filled `{placeholders}` from `args` only in the body, so a title such as `Drop {item}?` showed the
+  braces. The title is now formatted with the same `args` (after translation for `confirm_key()` / `alert_key()`).
+
+## [1.0.3] - 2026-09-14
+
+### Added
+
+- **Showcase images on the homepage.** The English and Korean overview pages now open with medieval
+  (character, inventory and quests; forms, grids and prompt cards) and sci-fi (touch controls)
+  showcase images, served from `docs/www/img/showcase-*.webp`.
+
+### Changed
+
+- `LICENSE` names the copyright holder: Copyright (c) 2026 JaeHo Song.
+
+## [1.0.2] - 2026-09-13
+
+### Added
+
+- Both standalone demo scenes now have a top Theme dropdown for Default, Sci-fi and Medieval.
+  The simulation pauses its bot while choosing, safely rebuilds the current chapter and preserves
+  playback speed and pause state. Start, completion and explore screens support the same selector.
+
+- **Medieval presets:** `medieval_dark` (iron and leather) and `medieval_light` (parchment),
+  with antique-gold frames, restrained corner engraving, rivets, readable red/blue/olive bars,
+  16 original engraved icons and Cinzel headings (bundled with its OFL license). Default and
+  sci-fi resources remain unchanged. Try `examples/medieval/medieval.tscn` for character,
+  inventory and quest interfaces built with the existing widgets.
+- **Custom medieval themes:** palette JSON supports `shape.kind = "medieval"`, material grain,
+  ornaments, bevels and per-role fonts. Themes can inherit other JSON themes, preserving their
+  fonts, icon set and skin dials; inheritance cycles fail explicitly. Medieval skin dials cover
+  slots, rivets and metal highlights. English and Korean docs include usage and term popups.
+- **README and website brought up to date.** Both READMEs link the homepage
+  (https://thruthesky.github.io/gohud/), describe the six presets, the JSON theme blocks, the
+  `destructive` dialog flag, `keyboard_focus`, fill tokens and the latest verification run, and drop
+  the stale "no bundled font" and "84 icons" claims. The site's overview pages gain preset tables,
+  medieval screenshots, runnable examples and a checks/releases section; theming and widget pages
+  cover medieval shapes and icons, `GoStyleBoxMedieval`, dialog options, tour steps and two-line list rows.
+
+### Fixed
+
+- **Balanced list rows.** Rows with a title and description now use roomier, equal vertical
+  padding and center the text pair alongside the icons, including when the row grows taller.
+  Wrapped descriptions retain their spacing and the whole row remains tappable.
+- Exclude the standalone `examples/usage` project and its installed addon copy from release ZIPs.
+
+## [1.0.1] - 2026-09-13
+
+### Added
+
+- **Automatic package versions.** `tools/package.sh` increments the patch version by default;
+  `--increase-minor-version` increments minor and resets patch to zero. Successful packaging
+  updates `plugin.cfg`, `GoUi.VERSION` and dated changelog entries together. Failures preserve
+  the source version; checks exercise packaging in temporary copies without creating a release.
+
+- **GitHub Pages completion.** English-first documentation lives in `docs/www`, with Korean
+  counterparts, 27 documented skin dials, and a root entry for the configured `main / (root)`
+  deployment. Technical terms support hover, touch and keyboard access, including Escape and
+  focus restoration. Fixed responsive CSS, mobile code wrapping and table group labels.
+- **Reliable completion checks.** Theme freshness compares generated file contents in an isolated
+  copy; viewport failures now propagate through the aggregate checker. Site checks validate CSS
+  braces, local section links, the English entry and the absence of a tracked recursive demo link.
+  Demo setup generates that ignored link locally, fixing the previous Pages build loop.
+
+- **The site lists every skin dial, generated from the scripts.** The theming page said only what
+  *kinds* of numbers `skin.dials` accepts; the names themselves lived in the JSON (I-70). `make_site.py`
+  now reads each `@export var` and the `##` line above it from `GoSkin` and `GoSkinSciFi` and writes a
+  name · default · meaning table into `theming.html` (both languages) between `<!-- dials:begin/end -->`
+  markers, and adds every dial to the glossary so its name pops up anywhere on the site. `check_site.py`
+  fails when the table is stale, a marker is missing, or a dial has no English text.
+- **The site is photographed too.** `tools/site_shots.sh` renders every page of `docs/` at desktop and
+  phone width with headless Chrome (`GOHUD_CHECK_SITE_SHOTS=1` runs it from `check_all.sh`). Table widths,
+  glossary underlines and phone-width overflow are invisible in the HTML source; the first run showed every
+  table on a page ending at a different right edge, because tables were `display: block` and grew only to
+  their content — they now fill the column on desktop. The first phone-width render showed the other
+  half: a scrolling table at 400px collapses every column to one word per line and hides the third column
+  off-screen, so under 640px tables now stack each row as a card, headings hidden, with a small
+  "Default" label in front of generated dial values. (Headless Chrome will not lay out narrower than
+  500 CSS px, so the phone shots render the page inside a 400px iframe.)
+- **Floating cards sit visibly above the page.** The coach-mark and prompt cards used an 8dp, 35% shadow
+  lifted 2dp — over a panel of text the card barely read as "on top" (I-69). `GoSkin` now exposes the
+  depth as dials (`float_shadow_alpha` 0.45, `float_shadow_size` 14, `float_shadow_lift` 4) and, for
+  chamfered skins that cannot draw shadows, `float_glow_size` 10 raises the glow instead. All four are
+  JSON `skin.dials`, so a theme can flatten or deepen its floating cards without code.
+- **Skin numbers are dials, not code.** The values that were hard-coded in `GoSkin` and `GoSkinSciFi` —
+  slot border width and tint, badge padding and edge opacity, chip and alert opacity, joystick ring width
+  and opacity, and the sci-fi chamfer sizes, glow and bracket — are now `@export` properties. A theme's
+  JSON carries them under `skin.dials`; `make_theme.py` writes them into a per-theme skin resource, so a
+  designer changes a slot border from 2 to 3 without touching GDScript. `new_theme.py --new-skin`
+  scaffolds a `GoSkin` subclass for the cases where the drawing itself must change.
+  `tools/skin_dials.json` is generated by parsing the scripts' `@export` defaults — GDScript is the
+  single source — and a test keeps the parser honest.
+- **The demo is photographed too.** `tools/demo_shots.sh` opens every widget section of `examples/demo`
+  at phone and desktop size (and the dropdown open) — the four issues reported on 2026-09-13 all came
+  from the demo, which the gallery screenshots never covered. With `--play` it also runs the demo's own
+  bot through each section at 4× and captures every overlay the moment it appears (each coach-mark step,
+  notices, prompt cards, sheets), since a section opened by hand shows only disabled widgets and the
+  screen after the bot finishes is rebuilt grey again.
+- **A new theme is one file.** `tools/new_theme.py neon --from scifi_dark` writes `themes/palettes/neon.json`
+  and `themes/presets/neon.tres`; `make_theme.py neon` builds the theme and its control artwork. The JSON
+  spells out every value inherited from the parent theme, so it doubles as the list of what can be
+  changed — delete a key to keep the parent's value. `GoThemePresets` now scans `themes/presets/`, so the
+  preset appears in the picker and the project-setting dropdown without touching registry code.
+  Shape dictionaries (and the JSON `shape` block) can override `radius`, `radius_small`, `radius_large`,
+  `gap`, `gap_small`, `gap_large`, `padding`, `button_height` and `button_padding`; the values flow into
+  the theme's constant tokens so panels and widget maths stay in step. `tools/check_scaffold.sh` (run by
+  `check_all.sh`) creates a throwaway theme, changes its accent and radius, and verifies generation,
+  token propagation and a clean contrast pass.
+- **The theme builder now pushes the accent colour, not just text.** The first scaffold run found a theme
+  with only its accent changed failing eight contrast pairs — accent borders and focus rings at 2.2:1,
+  the primary button label at 2.7:1. The accent is now pushed until it clears 3:1 on the background and
+  4.5:1 under its own label; the label falls back to a dark candidate only if a light one cannot reach
+  the threshold. Built-in themes already cleared both, so their values are unchanged.
+- **Demo: explore any widget by hand.** The demo used to be a film — press Start and watch fifteen
+  chapters go by. It now has a sidebar listing every widget; picking one builds just that chapter and
+  leaves it alone for you to press, drag and type on, while the activity panel logs the callbacks your
+  own clicks fire. **Play this widget** runs the bot on that single chapter and hands the widget back
+  rebuilt afterwards. Picking a row mid-tour folds the tour; narrow windows get a **Widgets** menu in
+  the top bar instead of the sidebar; `--explore=<key>` opens the app straight onto one widget. Each
+  chapter is now a `build_`/`play_` pair, so anything only the bot used to trigger — data arriving,
+  a coach-mark tour starting, a sheet or popup opening — is a button a person can press too. The
+  integration check covers the new mode: Start-screen and sidebar selection, hands-on dialog use,
+  single-widget play, keyboard navigation, folding a running tour, and leaving a full-screen chapter.
+- **Demo: a showcase, not a test harness.** Dot-grid backdrop with two soft light pools, a logo mark
+  and version chip, a mode chip (READY · TOUR · EXPLORE · DONE), icon rows in the widget list, an
+  "about this widget" card with the explore hint, and an empty state in the activity log.
+
+- **`GoSlot.keyboard_focus`** — quick slots stay out of the Tab order by default (eight of them would sit
+  between a keyboard user and every settings control), but can now be reached by keyboard or gamepad when
+  that is the only input. The `FOCUS_NONE` was previously hard-coded with no way to opt in.
+- **Keyboard navigation is now tested, not assumed.** Three rules a finger never exercises: focus moves
+  into a window when it opens, focus that leaks outside is pulled back (otherwise Enter presses a button
+  nobody can see), and closing returns focus where it was. Tooltips are measured too — their panel and
+  their label are *different theme types*, so the existing per-type check could never have caught them.
+- **`GoStyle.Tone.DANGER_SOLID` — a filled button for irreversible actions.** The existing danger tone is a
+  faint tinted panel, and on a light theme the label has to darken to `#9B2626` to stay readable on it —
+  which reads as black text, not as danger. The filled variant carries white text at 5.7:1. `GoDialogs`
+  takes a `destructive` flag that uses it; the tone is re-applied on every dialog, since one window is
+  reused and a red confirm would otherwise persist into the next, ordinary one.
+- **`GoForm.avoid_hud` — content no longer slides under a floating HUD.** When a scrolling screen shares
+  the display with HUD pieces, the content passes *behind* them and the two sets of text overlap until
+  neither reads. Turning this on makes the form keep clear of every visible `GoHudAnchor`. It is off by
+  default, so existing screens are untouched. Each rectangle is avoided in whichever direction **costs the
+  least area** — a bar in the top-right is stepped around downwards on a portrait phone and sideways in
+  landscape, where avoiding it vertically would cost 27% of the screen. Ground already given up is
+  subtracted before the next rectangle is measured, so a corner HUD is not paid for twice.
+- **`GoHudAnchor.reserve_space`** — turn it off for HUD pieces that only appear under a finger, such as a
+  joystick with `hide_when_idle`. Left on, a panel that is not even visible costs the content a whole row.
+  It also decides who an `avoid_peers` anchor steps around: only fixtures.
+- **`GoHudAnchor.avoid_peers` — HUD pieces no longer land on each other.** The nine spots divide the screen
+  but do not guarantee the pieces miss: a wide snackbar at `TOP_CENTER` sat squarely on the health bar at
+  `TOP_RIGHT`, hiding the value. A transient anchor with this on settles clear of the fixed ones — **only
+  vertically**, so a centred toast does not appear somewhere new each time it shows, and only around
+  anchors that reserve space, so two transient pieces do not chase each other across the screen. A fixture
+  that moves or resizes wakes the pieces dodging it, since they have no other way to learn it changed.
+- **Translucent panels are measured against the worst backdrop they can land on.** A floating HUD is drawn
+  over whatever the game is showing — a snowfield or a cave — and a translucent panel takes on that colour.
+  The contrast check now composites every translucent `GoHud` StyleBox over **pure white and pure black**
+  before measuring the text on it, which is what exposed the `hud` panel above. 50 → **58 pairs**.
+- **The skin-contrast test now measures icons, not just labels.** It read the colour of every label a slot
+  draws and stopped there, so a glyph painted with a fixed colour sailed past it for eighteen iterations.
+- **`tools/check_contrast.py`** — WCAG contrast measurement for every theme, covering both plain token
+  pairs and **button state panels** (the label colour against the StyleBox background it is drawn on,
+  following `base_type` the way the engine resolves it). Decorative borders are scored separately (2:1),
+  since WCAG 1.4.11 does not apply its 3:1 rule to decoration.
+- **Surface layers are now distinguishable.** Measuring only text contrast had hidden a whole
+  dimension: panels and cards sat 1.07–1.14:1 against the background across all four themes, which is
+  why screens looked flat. Adjacent surfaces now differ by at least 1.18:1, so a sheet lifts off the
+  background and list rows separate from the card they sit in.
+- **Text and border colours are derived from the palette rather than taken from it.** Moving the surface
+  ramp one step pushed `muted` below the readable minimum in all four themes — hand-picked values break
+  every time the surfaces move. The palette entry is now a *starting point*: the builder pushes it until
+  it clears the threshold on **every** surface it can land on.
+- **A progress bar's track is now outlined, so you can see how much is left.** The track colour alone
+  could not guarantee this — a bar sits on the background, inside a card, or on a HUD panel, and those
+  three differ in brightness. On `scifi_dark` the track measured 1.003:1 against the background: the same
+  colour, in practice. An outline works whatever it sits on.
+- Sci-fi bars glow in **their own fill colour** — the glow follows `GoBar.ink`, so a red health bar does
+  not glow cyan.
+- **`GoSkin` carries WCAG maths, so runtime-built colours are checked too.** A Python pass over the
+  theme files cannot see colours a skin mixes while running — chips tint the panel with the *same* colour
+  as the label, and on light themes that fell to 3.5:1. `chip_ink()` and `slot_ink()` push the label until
+  it clears the threshold, and a `skin contrast` test section now measures it on every preset.
+  (`Color.get_luminance()` is not used: it skips gamma decoding and diverges from WCAG on dark colours.)
+- Section headings and dividers are skin decisions (`section_box`, `divider_color`,
+  `divider_thickness`). The default skin draws an empty box for headings, so the default look is
+  unchanged; the sci-fi presets add an accent bar to the left of each heading.
+- Dividers are a skin decision (`divider_color`, `divider_thickness`); the sci-fi presets draw them in the
+  accent colour.
+- **The default presets have depth.** Shape is unchanged — that is what makes them *default* — but a
+  primary button now lifts off the surface on an accent-tinted shadow and **sinks** when pressed (the
+  shadow drops to 3dp), and cards, popups and notices sit on a graded shadow scale. Shadows do not
+  affect `content_margin`, so no layout moved.
+- **The sci-fi presets actually glow now.** The outer glow was being multiplied down three times
+  (palette alpha, builder, draw) and landed at an effective 0.02 — written as decoration, invisible in
+  practice. Falloff is now quadratic (linear banding showed a hard edge), and glow is applied to primary
+  buttons, HUD panels, notices and the selected tab.
+- **Sci-fi focus is a targeting bracket, not a border.** `focus` and `focus_soft` in both sci-fi themes
+  use `GoStyleBoxBracket`, which marks the corners without enclosing the content.
+- `GoSlot` no longer dims empty/disabled slots by multiplying alpha. On a light theme that multiplied an
+  already-pale colour and the slot vanished; the colour is moved toward `muted` instead, which reads as
+  "dimmed but present" on any theme.
+- **Fill-only colour tokens** — `success_fill`, `warning_fill`, `danger_fill`, `info_fill`, `accent_fill`.
+  A status colour used as *text* must be dark enough to read on a light background; the same colour used
+  as a *bar fill* must be bright enough to notice. One token cannot be both, and the light theme's XP bar
+  went brown as a result. `GoUi.color()` falls back to the base name when a theme does not define the
+  `_fill` variant, so existing and third-party themes are unaffected.
+- **`tools/make_site.py`** — builds the documentation glossary **from the source tree** (class names and
+  their doc comments, theme tokens, type variations, preset ids), so term explanations cannot drift from
+  the code. Engine-level terms are the only hand-written entries.
+- **`docs/`** — a three-page GitHub Pages site with hover/tap **term popups** on 129 terms:
+  an overview, a theming guide (token reference, skin methods, building your own preset, the contrast
+  rules) and a widget reference. Terms are detected in prose *and* code blocks, and a popup shows the
+  inheritance chain where the glossary has one.
+- **An English edition of the site** at `docs//en/` — overview, theming and widgets — with its own glossary. Korean entries are
+  extracted from the source doc comments; English has no such source, so those descriptions are written
+  by hand and a term without one is simply left out — better absent than explained in the wrong language.
+- `tools/make_theme.py` **reports every colour it moved** (`muted #919bac → #a0a8b7 (surface contrast)`).
+  Adjusting silently leaves anyone supplying their own palette wondering why their colour did not survive.
+- **`tools/check_site.py`** — verifies local links and images resolve, the glossary is valid and complete,
+  every page loads the glossary and tooltip scripts, and the glossary has not drifted from the source.
+- **`tools/check_mutations.sh`** — measures what the test suite actually catches by breaking one rule at
+  a time and checking the suite notices. The count of passing tests says nothing about this: a check added
+  seven iterations earlier had been green no matter what it measured. Eleven rules are covered and all
+  eleven are caught; wire it in with `GOHUD_CHECK_MUTATIONS=1`.
+- **`tools/check_all.sh`** — one entry point for every check. The checks are split because they can see
+  different things (Godot for widget behaviour and runtime colours, Python for theme files and the site);
+  running them separately means eventually forgetting one. Also runs the suite on Godot 4.6 when
+  `GODOT_46` is set, and verifies the generated themes still match their source palettes.
+- **Godot 4.6 is the verified floor.** The suite runs against 4.6 stable and 4.7.2; `GoUi.MIN_ENGINE`,
+  `GoUi.engine_supported()` and a test assertion record it.
+- `tests/gallery_shots.gd` takes `--preset=<id>` and `--still` (motion off, so shots are reproducible and
+  can be compared pixel by pixel).
+- **Theme presets — pick colours *and* shape in one line.** `GoUi.use_preset(GoThemePresets.SCIFI_DARK)`
+  swaps the theme, the skin and the icon set together. Four ship: `default_dark`, `default_light`,
+  `scifi_dark`, `scifi_light`. Also selectable from **Project Settings → Gohud → Theme → Preset**, or
+  via the new `GoConfig.preset` field. Explicit `theme` / `skin` / `icons` still win over the preset.
+  Hosts register their own with `GoThemePresets.register()`.
+- **`GoSkin`** — the shapes a `Theme` cannot reach, in one resource: the joystick, quick-slot faces, the
+  coach-mark ring and pointer, chips, skeletons, alerts, segmented controls, discs and progress fills.
+  The base class is gohud's original look moved verbatim, so not setting a skin changes nothing
+  (verified pixel-identical across 18 gallery screenshots). Subclass and override only what you want.
+- **`GoStyleBoxCut` and `GoStyleBoxBracket`** — custom `StyleBox` classes for shapes `StyleBoxFlat`
+  cannot make: chamfered corners with an accent edge and outer glow, and corner-only targeting marks.
+  Both serialise into a `Theme` resource, so a theme can now change *shape*, not just colour.
+- **`GoStyle.surface()`** — like `box()` but returns whatever shape the skin produced, including custom
+  StyleBoxes. `box()`, `floating()` and `disc()` keep returning `StyleBoxFlat` as before.
+- **`tools/make_theme.py` separates palette from shape.** `SHAPE_DEFAULT` is the original geometry;
+  `SHAPE_CUT` drives both sci-fi themes, translating radii into chamfers, single-side borders into accent
+  edges and shadows into glow. Geometry is unchanged for the default themes — only their palettes moved
+  (see *Changed*).
+- **`GoDialogs._make_surface()`** — subclass hook for the dialog surface, like `GoSheet._make_surface()`.
+
+### Fixed
+
+- **The coach-mark card no longer covers the header or a floating HUD.** In landscape the card was sent
+  to the very top (or bottom) edge of the screen — exactly where headers and HUD pieces live — and in the
+  demo it sat on the header's controls. It now stays level with its target, steps around any
+  `GoHudAnchor` that reserves space, and can be told about other things to avoid via `keep_clear`
+  (a header bar, a toolbar). It moves the shortest distance that clears the obstacle without covering the
+  target, and stays put if the screen is too small to clear everything.
+- **Both dropdowns put their arrow in the same place.** `OptionButton` used the engine's 4px
+  `arrow_margin` while `MenuButton` drew its chevron inside the 16px panel padding, so the two arrows sat
+  12px apart when stacked. The theme now sets `arrow_margin` to the panel padding.
+- **Word-wrap on buttons is decided from the displayed text, not the translation key.** `button_key()`
+  stores the key and the engine translates at draw time; the rule saw a one-word key (`confirm`) and
+  switched wrapping off even when the translation was two words. It now reads `atr(text)`, and a form
+  re-applies the rule to its buttons on `NOTIFICATION_TRANSLATION_CHANGED`, so switching language cannot
+  leave a label split mid-word. `GoDialogs` re-applies it in `_retranslate()`.
+- **`dropdown()` (MenuButton) now lines up with `select()` (OptionButton).** Stacked in the demo, the two
+  looked like different parts — one left-aligned with a small chevron, the other centred with a larger
+  one. Both are left-aligned and the chevron is sized from the OptionButton's arrow icon.
+- **Short button labels split mid-word.** A button with wrapping enabled subtracts its text width from its
+  minimum size, so a natural-width button that got squeezed broke `Done` into `Don` / `e` (the coach mark's
+  last step). `GoStyle.fit_words()` now decides per label: a single word never wraps; several words wrap
+  but the longest word is guaranteed a full line. Buttons, toggles and `GoStyle.form()` all use it, and
+  the coach mark re-applies it after changing the label.
+- **A full-width button's glow was clipped on the left.** A scroll container clips at its bounds; the right
+  side only survived because the scrollbar gutter already pushed that edge out. `GoScroll` now borrows the
+  parent's padding on the left, top and bottom too — the clip edge moves 12dp outward and the content is
+  moved back by the same amount, so nothing shifts and glows and shadows have room.
+- **Quick slots were cramped.** Time, icon and count were stacked in three rows inside 48dp. The icon now
+  sits large in the centre, the shortcut top-left, the count as a bottom-right badge and the remaining time
+  as a badge over the (dimmed) icon. Badge panels come from `GoSkin.badge_box()`, so the sci-fi skin gets
+  chamfered badges for free.
+- **Dropdown menus were flat and the chosen item was invisible.** Item hover used the button panel (borders
+  and shadow included) and the radio marks were the engine's faint defaults. Menus now have their own soft
+  accent hover panel, the same radio/check artwork as checkboxes, a real separator style, and item height
+  sized for touch (27dp → ~44dp).
+- **Tooltips rendered one character per line.** The engine's default tooltip computed a width of 1dp with
+  wrapping on, so `settings` came out as a 186dp-tall column. `GoIconButton` now supplies its own
+  gohud-styled tooltip label (short text on one line, long text wrapped at a real width).
+  `GoStyle.icon_button()` gained a `tooltip_key` argument — the same value feeds the tooltip and the
+  accessibility name — and the gallery's icon buttons, which had no description at all, now use it.
+- **The focus ring was invisible on filled buttons.** A primary button's panel *is* the accent colour, and
+  the focus ring was drawn in that same colour — **1.00:1**, one colour over itself, in all four themes.
+  Moving by keyboard there was no way to tell where you were, which is exactly what WCAG 2.4.11 is about.
+  Filled buttons now take a ring that contrasts with their own panel: dark on dark themes, white on light
+  ones, a dark targeting bracket in sci-fi. The contrast checker measures focus rings against the panel
+  they sit on, so a palette change cannot quietly undo it.
+- **On a wide screen the content sat off-centre.** `GoForm.avoid_hud` measured overlap against the whole
+  safe area, so a form that was already centred by its width cap — nowhere near the corner HUD — was pushed
+  aside anyway: 214dp off-centre at 1280×800. Overlap is now measured against the space the form will
+  actually occupy, so a wide screen keeps its centred column and a phone still steps around the HUD.
+- **Progress fills went brown on light themes.** A status colour has to darken to stay readable as *text*
+  on a light background (`warning` sits at `#96500A`), and the bar fill inherited that — an experience bar
+  the colour of mud. Colour alone cannot fix it: yellow is intrinsically bright, so it clears 3:1 over no
+  grey track at all, and darkening the track made it **worse** (1.52 → 1.06). Fill colour and edge contrast
+  are now separate concerns — the light palettes carry vivid fill-only colours, and `GoSkin` draws a 1dp
+  outline on any fill that cannot reach 3:1 against its track, stepping the outline until it does. Sci-fi
+  fills were missing the outline entirely, since they are custom StyleBoxes and only the `StyleBoxFlat`
+  branch drew one.
+- **Quick-slot icons were hard-coded white, so they vanished on light themes.** `GoSlot` painted its
+  glyph with `Color.WHITE` regardless of the panel underneath — correct on a dark theme, invisible on a
+  light one (measured **1.11:1** on `default_light`, **1.20:1** on `scifi_light`; three of four slots in
+  the gallery were reduced to a faint outline). The icon now follows the same readability rule the slot's
+  labels already used. An icon set that declares its own `tint` still wins, so coloured artwork is never
+  repainted — but a white `tint` no longer counts as "a colour was chosen", since multiplying by white
+  changes nothing. The bundled icon set had exactly such a `tint` baked into its `.tres`; it is gone.
+- **Glyphs that fall back to a child label ignored the button's icon colour.** When an icon set has no
+  texture for a name — a font icon set, or a typo — `GoIconButton` and `GoStyle.apply_icon()` draw the
+  glyph as a child `Label`, and a Button's `icon_normal_color` does not reach a child. The glyph came out
+  white: **1.41:1** on `default_light`. Both now pick up the same colour the texture path uses.
+- **Floating panels lost contrast over bright backdrops.** The `hud` StyleBox was 82% opaque, so whatever
+  sits behind it bleeds through and shifts the panel's colour. Over a bright game scene the dark themes'
+  `muted` text fell to **3.74:1** and `secondary` to 4.21:1 — below the 4.5:1 body minimum. The panel is
+  now 92% opaque (0.88 is the break-even point), which keeps the glassy look and measures 5.26:1 against
+  the worst case.
+
+- **RTL is checked by position, not by property.** The previous test read `layout_direction` values,
+  which cannot tell "the setting is right but the screen did not mirror" apart from working code. The
+  suite now switches to Arabic and verifies a list row's icon actually sits to the *right* of its label,
+  and that the order returns when switching back. A bar's numeric readout is checked to stay
+  left-to-right — mirrored, current and maximum health swap places.
+- **The suite now runs at four screen sizes** (phone portrait and landscape, tablet, desktop) via
+  `GOHUD_VIEWPORT`. Landscape-only behaviour — the HUD anchor's alternate spot and the surface's
+  narrower landscape width — had no test at all, in either orientation.
+- Two rules were never exercised because the test viewport is a phone: the form's width cap does nothing
+  on mobile (where the cap is "unlimited"), and the virtual keyboard never appears on desktop. Both are
+  now tested by creating the conditions — a desktop-width viewport, and an injected keyboard height.
+- Three rules had no test behind them at all, found by the mutation run: chip label colour (the check
+  read the skin method rather than the widget's actual colour), label and button wrapping, and the touch
+  floor on a slot forced below 48dp.
+- **A test was passing without testing anything.** The `skin contrast` section accumulated its worst
+  measurement inside a lambda, and GDScript captures outer local variables **by value** — the assignment
+  never reached the outer scope, so the check was green whatever it measured. Switched to an array
+  (captured by reference); it immediately failed on all four presets, down to 2.91:1 on the light ones.
+- **Quick-slot text is now readable on whatever face the skin paints.** A skin decides how the slot face
+  is filled, but the label colours were fixed: following the documented example and filling the face with
+  an opaque accent put the quantity at 1.70:1 and an empty slot at 1.29:1. Even the shipped presets had an
+  empty slot at 3.97:1 while a cooldown ran. Quantity, timer and shortcut colours are now pushed to clear
+  the threshold on the face they sit on.
+- **The store package could not be built.** `docs/` was being included, and a shell example inside it
+  referenced `res://…/tests/gallery_shots.gd` — a path the store ZIP deliberately omits — which tripped
+  the broken-reference gate. `docs/` is the website, published through GitHub Pages; it is excluded from
+  the ZIP alongside `tools/`, which also keeps ~400KB of screenshots out of the add-on.
+- Glossary descriptions written by hand kept their markdown, so tooltips showed `**rounded**` with the
+  asterisks (the popup inserts text verbatim). Stripped at generation, and checked from now on.
+- **`GoStyle.responsive_grid()` cells collapsed to the width of a single character.** `GridContainer`
+  only hands spare width to children flagged `SIZE_EXPAND`, and cards defaulted to `SIZE_FILL`, so each
+  card shrank to its content's minimum width — and since labels inside wrap, that minimum is near zero.
+  Measured at 25px per card at *every* window width; the earlier note that it only happened at 430px was
+  wrong. Cards now measure 169–224px and titles sit on one line.
+- The gallery scene and script paths still pointed at `examples/gallery.tscn` after the move into
+  `examples/gallery/`, so the gallery failed to load from `tests/gallery_shots.gd` and
+  `tools/new_project_check.sh`.
+- A guided, English-only simulation in `examples/demo`: 15 chapters driven by real mouse and keyboard input,
+  including forms and HUD anchors. Start/replay, pause, previous/next, and cancellation are supported.
+- A larger presentation layout that scales with desktop windows, Cinema mode, a recording countdown,
+  fullscreen shortcuts, and `run.sh --record` for 1080p movie capture.
+- `tools/check_demo.sh` verifies the full tour and playback controls at desktop and portrait sizes.
+
+- **More subclass hooks** — `GoSurface._make_scroll()` / `_make_close_button()` and `GoSheet._make_surface()`,
+  same idea as the coach-mark and prompt-card hooks.
+- **Every on-screen string is customisable.** Widgets no longer build display text in code: the value
+  readouts (`GoBar`), the coach-mark step counter and the slot quantity now go through named strings like
+  the rest, so a host can reword or re-translate all of them. Formats are translatable because punctuation
+  is not universal — Turkish writes the percent sign in front (`%50`). Placeholders switched to `{name}`
+  so a translation that drops one renders instead of crashing. Digit grouping became a hook
+  (`GoConfig.number_formatter`) rather than a format string, because Korean/Japanese/Chinese break at
+  10,000 rather than 1,000 — the arithmetic differs, not just the text. A test now fails the build if any
+  literal display string appears in `widgets/`, `core/` or `services/`.
+- **Demo: a language card.** `examples/demo/demo.tscn` now ends with a card printing the built-in strings in
+  all 21 languages side by side, so a missing translation and a missing glyph are both visible at a glance.
+  `run.sh --languages` checks it headlessly and `run.sh --shot-languages` captures it. The check measures
+  glyphs through `TextServer` rather than `Font.has_char`, which ignores the system font fallback and so
+  reports Thai and CJK as missing while they render fine.
+- **Ten more built-in languages — 11 → 21.** Added Turkish, Vietnamese, Indonesian, Thai, Italian,
+  Polish, Ukrainian, Dutch, Traditional Chinese (`zh_TW`) and Hebrew to `i18n/gohud.csv` and
+  `GoUi.LOCALES`, matching the locale set used by web game portals. Hebrew joins Arabic as a
+  right-to-left locale; layout already follows the application locale, so nothing else changed.
+  Traditional Chinese uses Taiwanese wording (搜尋 · 載入中 · 略過), not converted Simplified.
+- **`GoCoachMark._should_pause()`** — hook that decides when the coach card hides (default: any `GoSurface` is open).
+  A host with its own modal system overrides it so the tour also pauses behind those.
+- **Subclass hooks for child widgets** — `GoCoachMark._make_scroll()` and `GoPromptCard._make_close_button()`
+  let a host that subclasses `GoScroll` / `GoIconButton` (its own type hints, its own close glyph) get those
+  subclasses inside the widgets. Defaults are unchanged.
+- **`GoIconButton.native_texture_size`** — draw a texture icon at its own pixel size instead of scaling it to
+  58 % of `visual_size`. Hosts that ship an SVG at exactly the size they want avoid the 1 px resampling difference.
+- **`GoScroll.as_horizontal(node)`** — the configuration step of `horizontal()`, so a subclass can rebuild the
+  factory with its own instance (`static func horizontal() -> MyScroll: return GoScroll.as_horizontal(MyScroll.new())`).
+  Static factories do not know the subclass, so `MyScroll.horizontal()` inherited from `GoScroll` would return a
+  plain `GoScroll` and fail to assign to a `MyScroll`-typed variable.
+
+- Demo popup selection now uses actual input and selects the intended item. Prompt cards use their real close
+  button; floating HUD controls and coach marks stay above the correct content. Scroll-to-control motion is
+  bounded and never reverses repeatedly. Grid cards retain their full cell width, and the compact
+  header keeps chapter counters on one line. Cancelling a chapter releases held input before restarting.
+
+- `GoIconButton` texture icons are centred explicitly (`icon_alignment` / `vertical_icon_alignment`). `Button`
+  defaults to left alignment, which showed as soon as a texture was drawn without `expand_icon`.
+- `GoNotice.set_content()` also sets `mouse_filter = IGNORE` on the whole content subtree.
+  `mouse_behavior_recursive` already blocked input, but code that reads `mouse_filter` (layout logic, host tests)
+  saw stale values.
+
+### Changed
+
+- **All four themes are now readable by measurement, not by eye.** A new contrast check
+  (`tools/check_contrast.py`) measures every colour pair against WCAG 2.2 and found **21 failures**:
+  `muted` text fell below the 4.5:1 body minimum in *all four* themes, and both light themes failed on
+  **button label text** (`on_accent` over `accent`). The palettes were corrected until the count reached
+  **zero**. Shapes and layout are untouched — only colours moved, so no widget geometry changed.
+  Affected tokens: `muted` (all four), `accent` · `success` · `warning` (light themes), `border` (all four,
+  so a card no longer dissolves into the background).
+- Alpha colours are composited over their real backdrop before measuring; measuring a translucent
+  border directly reports a better ratio than the screen actually shows.
+- **Button label colours are now derived, not hand-picked.** Putting accent-coloured text on an
+  accent-tinted panel (a pressed button, a danger button) looks good in a palette swatch and fails as
+  soon as it is measured — the two are the same hue, so there is no lightness difference. The theme
+  builder now pushes label lightness until it clears the threshold on the panel it actually sits on,
+  keeping hue and saturation, so a changed palette keeps its contrast automatically.
+
+## [1.0.0] — 2026-09-12
+
+First version. Rebuilt from a production game's shared UX layer into a standalone add-on that
+depends on nothing outside `addons/gohud/`.
+
+### Added
+
+- **Widgets** — `GoSurface`, `GoSheet`, `GoDialogs`, `GoForm`, `GoScroll`, `GoNotice`, `GoPromptCard`,
+  `GoCoachMark`, `GoHudAnchor`, `GoBar`, `GoSlot`, `GoJoystick`, `GoIconButton`.
+- **`GoStyle`** factories — buttons, labels, list rows, inputs, chips, cards, responsive grids,
+  foldable sections and empty states.
+- **`GoConfig`** — one settings resource for appearance, breakpoints, surface behaviour, feedback,
+  localization and accessibility. Every field has a working default.
+- **`GoIconSet`** — swappable icon sets (textures, icon fonts, partial `fallback` overrides), shipping
+  84 original MIT icons. **Themes** — dark and light, sharing 14 type variations.
+- **`GoRuntime`** optional autoload — breakpoint and keyboard events, optional 1 unit = 1 dp scaling.
+  **`GoFeedback`** routes sound cues to your audio system and plays haptics on Android/iOS.
+- Built-in strings in 11 languages; 48 dp touch targets, `reduce_motion`, keyboard-only focus rings.
+- `examples/demo/` (a complete screen, runnable as its own project), gallery, headless tests, packager.

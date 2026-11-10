@@ -5499,8 +5499,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Steam-quality settings, controls and saves",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Shanto/Antigravity",
    "deps": [
     "M1-54"
    ],
@@ -5533,6 +5533,14 @@
     "game/scripts/campaign/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-70*"
+   ],
+   "edit_files": [
+    "game/scripts/settings/game_settings.gd",
+    "game/scripts/ui/settings_menu.gd",
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/tools/test_settings.gd",
+    "production/qa/evidence/M3-70_settings_display_audio.png",
+    "production/qa/evidence/M3-70_settings_controls_saves.png"
    ]
   },
   {
@@ -5633,7 +5641,10 @@
     "game/scripts/save/save_service.gd",
     "game/scripts/save/save_slots.gd",
     "game/scripts/ui/save_slots.gd",
-    "game/tools/test_save_slots.gd"
+    "game/tools/test_save_slots.gd",
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "production/qa/evidence/M3-71_save_slots_corrupt_backup.png",
+    "production/qa/evidence/M3-71_save_slots_recovered.png"
    ]
   },
   {
@@ -8040,6 +8051,28 @@
    "prompt": "Owner request: production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-53_REVIEW_REQUEST.md (candidate ../M1-53_asset_geometry_owner.patch, reviewed not applied blindly). AssetGeometry.prepare() polls THREAD_LOAD_IN_PROGRESS without a bound. Deliver: one owner per raw path through PackedScene publication with overlapping callers sharing the outcome; polling bounded by PreparationWatchdog; on expiry the loading card and an independent decode that never joins the unfinished request; the late request retired and consumed once; an old coroutine stops publishing after takeover at every yield; valid-instance node lifetimes; missing files still fail without a card; eight-animation batches, cache policy and the 50 ms gate unchanged. Acceptance: a suite with real semaphore-held raw jobs that recover before the worker is released; test_loading and test_performance_runtime pass through run_tests.sh. Atik then runs the ten windowed probes and the full gate for M1-53.",
    "reserved_for": "sadman",
    "effort": 2
+  },
+  {
+   "id": "M4-19",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Install Godot UI skill and Gohud addon (user request)",
+   "status": "done",
+   "owner": "Ramim/codex",
+   "deps": [],
+   "paths": [
+    "game/addons/gohud/",
+    "game/project.godot",
+    "PRODUCTION_HANDBOOK.md"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-10.",
+   "evidence": "User-requested tools installed: godot-ui-integration and gohud skills in ~/.codex/skills; upstream Gohud 58c3780c vendored with authored DPI imports and licenses; plugin enabled. Commit b8ce793e pushed. Sci-fi gallery smoke PASS zero error lines; required project runner ui_kit PASS 522/0, 1/1 suites on warm cache. Initial cold setup exited 139 after editor-ready, no suites; raw local log retained, no crash fix/M1-85 closure claimed. No menu redesign or global theme change. See handbook status.",
+   "updated": "2026-11-10",
+   "prompt": "Explicit user assignment 10 Nov: install zimo-xiao-zheng/godot-ui-integration skill and thruthesky/gohud addon, enable editor plugin, read setup, verify import; no menu redesign.",
+   "reserved_for": "ramim",
+   "effort": 2
   }
  ],
  "requirements": [
@@ -8715,7 +8748,8 @@
     "M3-90",
     "M3-91",
     "M1-125",
-    "M4-18"
+    "M4-18",
+    "M4-19"
    ],
    "sadman": [
     "M4-16",
