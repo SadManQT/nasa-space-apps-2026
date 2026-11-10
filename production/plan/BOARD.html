@@ -353,11 +353,13 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M4-12">M4-12</a> Cache director.query() in nearby_target() and skip ToonMaterials warm-draw on PBR habitat_kit props <span class="chip ">any</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="tanvir"><b>Abu Sayem Mohammed Tanvir</b> <span class="id">tanvir</span><div class="meta">Garden collision/controller fixes and cold-import investigation · 6% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">3 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:0%"></i></div>
-<details open><summary>Blocked (3)</summary><ul>
+<div class="panel" data-member="tanvir"><b>Abu Sayem Mohammed Tanvir</b> <span class="id">tanvir</span><div class="meta">Garden collision/controller fixes and cold-import investigation · 6% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<details open><summary>Working now (2)</summary><ul>
+<li><a class="id" href="#M1-122">M1-122</a> Match garden collision to visible furniture and check return-lane clearance <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Tanvir/codex on 2026-11-10</div></li>
+<li><a class="id" href="#M1-123">M1-123</a> Reproduce garden return-to-center stop with the real player controller <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Tanvir/codex on 2026-11-10</div></li>
+</ul></details>
+<details open><summary>Blocked (1)</summary><ul>
 <li><a class="id" href="#M1-85">M1-85</a> Investigate Windows cold editor-import crash captured before UI tests <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">New frozen daa01414 corrected-collector recheck completed: five cold/warm observations clean; restoring1190sidecars (one non-CRLF Steel_Normal difference) produces285UID/file-acce…</div></li>
-<li><a class="id" href="#M1-122">M1-122</a> Match garden collision to visible furniture and check return-lane clearance <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Delivered collision e5ed6178 preserved; current f328c0c5 plus approved pilot patch passes mandatory Garden2/2 (19/0,54/0). Fresh post-HUD loading gate615/5 still fails: title52.10…</div></li>
-<li><a class="id" href="#M1-123">M1-123</a> Reproduce garden return-to-center stop with the real player controller <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">User approved exact test-file exception while preserving blocked status. Driver source verified by two ordinary mandatory Garden19/0+54/0 runs, standard native62/0 with8inspected …</div></li>
 </ul></details>
 <details><summary>Deferred: video, submission and manual QA (7)</summary><ul>
 <li><a class="id" href="#M1-21">M1-21</a> Chapter 1 full playthrough QA with screenshots <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -8501,7 +8503,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Match garden collision to visible furniture and check return-lane clearance",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
@@ -8511,7 +8513,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/qa/evidence/M1-122/"
    ],
    "refs": [],
-   "note": "10Nov ACTIVE BATCH: assigned to Tanvir; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Tanvir/codex on 2026-11-09.\n10 Nov 2026 explicit user batch reassignment to Tanvir only (M1-122/M1-123/M1-85). Exact source/test/evidence files above; no blanket folder ownership. Shared board and AI log changes scoped to these tasks. Existing active campaign/loading claims preserved; M1-85 investigates in a throwaway copy without source edits to those files. Manual QA/release/video deferred by user; automated tests remain required.\nCurrent50-task batch clarification: prior broad folder reservations are replaced by exact-file locks. Preserve the active source worker's actual edits and saved-work handoff; the new trace/evidence paths above are retained. Source integration paths are authorized only for this task after file reservation/handoff, not blanket folder ownership.",
+   "note": "10Nov ACTIVE BATCH: assigned to Tanvir; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Tanvir/codex on 2026-11-09.\n10 Nov 2026 explicit user batch reassignment to Tanvir only (M1-122/M1-123/M1-85). Exact source/test/evidence files above; no blanket folder ownership. Shared board and AI log changes scoped to these tasks. Existing active campaign/loading claims preserved; M1-85 investigates in a throwaway copy without source edits to those files. Manual QA/release/video deferred by user; automated tests remain required.\nCurrent50-task batch clarification: prior broad folder reservations are replaced by exact-file locks. Preserve the active source worker's actual edits and saved-work handoff; the new trace/evidence paths above are retained. Source integration paths are authorized only for this task after file reservation/handoff, not blanket folder ownership.\n10 Nov acceptance administration: exact shared PRODUCTION_HANDBOOK.md and production/AI_PROMPT_LOG.md added only for the repository-required status/attribution update; no game-source or folder-wide grant. Reserve them before editing and preserve all peer rows.",
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "M1-65 T02: Tanvir screenshot near SEED ARCHIVE / TARA INDOOR REFERENCE, goal Review how the night ended; he clarified movement BACK TOWARD ROOM CENTER. Exact runtime build, input vector and body coordinates are not recorded; static candidate contacts are not a reproduced deadlock. Source d59f426 (main0e266bc plus QA claim). QA evidence production/qa/playtests/first_impressions/collision_2026-11-09/README.md, probe_garden.gd/json, baseline_red and candidate_green. Measured real LOC-03: tara_bay collider reserves full1.7x1.6x1.1m, while visible bench is1.7x0.8x1.1 plus a central0.782m enclosure; collider fills empty upper air. PL_CropRack visual bounds z[0.576803,2.023197], current obstacle z[0.45,2.15], about12.7cm overhang at each end; X proxy is slightly too narrow. An unapplied conservative data patch is at proposed_LOC-03_collision.patch; git apply --check passes. Runtime-only candidate yields7/0 vs baseline7/2 for upper-air/rack-front clearance, while preserving solid bench/rack and already-clear west/front return path. This is a narrow geometry correction, not proof the original movement report is resolved. Apply/review within your owned room paths; check other nearby furniture proxies and provide a clearly navigable route back to center. Never disable furniture, shrink the global player capsule or bypass scene/gates. Navigation is built from obstacle data, so re-run mandatory habitat_rooms, relevant chapter room/staging tests and full runner after actual application; test nav clearance and real controller movement, collision enabled, around this corner and every Chapter1 door/route. Native before/after evidence required. Coordinate actual movement trace with Atik companion task. QA diagnostic captures are labeled non-live; provided user screenshot exists only in chat. Preserve original root checkout collision work.",
@@ -8533,9 +8535,22 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/qa/evidence/M1-122*",
     "production/qa/playtests/",
     "game/resources/campaign/rooms/",
-    "game/scripts/world/"
+    "game/scripts/world/",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
    ],
    "blocker": "Delivered collision e5ed6178 preserved; current f328c0c5 plus approved pilot patch passes mandatory Garden2/2 (19/0,54/0). Fresh post-HUD loading gate615/5 still fails: title52.109,campaign80.204,Garden64.977,cast59.503,terrain56.240ms, unchanged50ms limit. Frozen daa01414 full97/117 and all raw logs saved; newer UI/chapter/room/handoff/text/profile fixes supersede old failures, comms45/0 and P01inputs319/0 are clear. Dependency: active Ramim/M1-125 measured loading/content-query repair and Atik/M1-68 timing investigation; resume after published repair, green focused dependency check and complete current immutable full gate. Evidence production/qa/evidence/M1-122/current_acceptance_20261110/README.md. No owned geometry edit pending; manual QA deferred.",
+   "edit_files": [
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md",
+    "production/qa/evidence/M1-122/README.md",
+    "production/qa/evidence/M1-122/acceptance_blockers.md",
+    "production/qa/evidence/M1-122/review.md",
+    "production/qa/evidence/M1-122/acceptance_20261110_unblocked/README.md",
+    "production/qa/evidence/M1-122/acceptance_20261110_unblocked/validate_acceptance.py",
+    "production/qa/evidence/M1-122/acceptance_20261110_unblocked/validation.json",
+    "production/qa/evidence/M1-122/acceptance_20261110_unblocked/review.md"
+   ],
    "batch_phase": "implementation"
   },
   {
@@ -8544,7 +8559,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Reproduce garden return-to-center stop with the real player controller",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
@@ -8577,6 +8592,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/campaign/"
    ],
    "blocker": "User approved exact test-file exception while preserving blocked status. Driver source verified by two ordinary mandatory Garden19/0+54/0 runs, standard native62/0 with8inspected PNGs, and fresh post-HUD f328Garden2/2. Earlier54/2 brake drift and62/1native zero-input failure retained; no original input producer/focus cause invented. Both supplemental10FPS cases have54/0 but79GLES3cache-write errors despite exit0 and remain failed for log integrity. Current global loading615/5 and no complete green current full gate block acceptance. Dependency/resume: Ramim/M1-125 and Atik/M1-68 measured loading repair, focused retest then full mandatory runner. Saved source/provenance/16new inspected PNGs: production/qa/evidence/M1-123/current_pilot_20261110/README.md. Runtime/controller/capsule/limits unchanged; manual QA deferred.",
+   "edit_files": [
+    "production/qa/evidence/M1-123/README.md",
+    "production/qa/evidence/M1-123/review.md",
+    "production/qa/evidence/M1-123/acceptance_20261110_unblocked.md"
+   ],
    "batch_phase": "implementation"
   },
   {
