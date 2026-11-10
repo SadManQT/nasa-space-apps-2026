@@ -496,7 +496,7 @@ func _visible_sign(room: CampaignRoom, text: String) -> bool:
 # ---------------------------------------------------------------------------------------- re-staging, echoes
 
 ## One room instance re-staged scene after scene ends exactly as built: the annex returns to its base poses and words;
-## Chapter 1 has no staging; Chapters 6 and 7 keep what Chapter 3 left (the clamp, the gauge on its hook, the lineage
+## Chapter 1 keeps only its two plant nameplates; Chapters 6 and 7 keep what Chapter 3 left (the clamp, the gauge on its hook, the lineage
 ## board) and nothing else.
 func _check_restaging() -> void:
 	var annex := await _room("LOC-07")
@@ -530,7 +530,8 @@ func _check_restaging() -> void:
 	await process_frame
 	garden.set_scene_context("EX-CH01-S12")
 	await process_frame
-	_check(not garden.visual_root.has_node(Staging.ROOT_NAME) and (garden.visual_root.get_node("PL_Tara_Bloom") as Node3D).visible, "the Chapter 1 garden is unchanged after Chapter 3")
+	var chapter1 := garden.visual_root.get_node_or_null(Staging.ROOT_NAME)
+	_check(garden.stage().layers == ["ch01_nameplates_at_plants"] and chapter1 != null and chapter1.get_children().map(func(node): return String(node.name)) == ["alo_holder", "tara_holder"] and (garden.visual_root.get_node("PL_Tara_Bloom") as Node3D).visible, "the Chapter 1 garden restores only its two plant nameplates after Chapter 3")
 	garden.set_scene_context("EX-CH06-S12")
 	await process_frame
 	staged = garden.visual_root.get_node(Staging.ROOT_NAME)

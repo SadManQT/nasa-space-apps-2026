@@ -5954,12 +5954,12 @@
      "variant": "alo",
      "position": [
       2.4,
-      1.25,
-      2.18
+      0.65,
+      2.8
      ],
      "rotation_degrees": [
       90,
-      0,
+      180,
       0
      ],
      "scale": [
@@ -5975,8 +5975,8 @@
      "variant": "tara",
      "position": [
       -3.2,
-      1.18,
-      -0.88
+      0.65,
+      -0.95
      ],
      "rotation_degrees": [
       90,

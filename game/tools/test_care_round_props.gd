@@ -100,10 +100,10 @@ func _test_holders_at_plants() -> void:
 		and String(alo.get("variant", "")) == "alo", "holders: Alo's holder is the M3-99 prop, variant alo")
 	_check(String(tara.get("path", "")) == "res://assets/props/narrative/PR_LabelHolder.glb"
 		and String(tara.get("variant", "")) == "tara", "holders: Tara's holder is the M3-99 prop, variant tara")
-	_check(_at(alo, Vector3(2.4, 1.25, 2.18)) and _rotated(alo, Vector3(90, 0, 0)),
-		"holders: Alo's holder stands at the sealed glove port")
-	_check(_at(tara, Vector3(-3.2, 1.18, -0.88)) and _rotated(tara, Vector3(90, 0, 0)),
-		"holders: Tara's holder stands at the reference bay")
+	_check(_at(alo, Vector3(2.4, 0.65, 2.8)) and _rotated(alo, Vector3(90, 180, 0)),
+		"holders: Alo's holder mounts on the bench face below the sealed glove port")
+	_check(_at(tara, Vector3(-3.2, 0.65, -0.95)) and _rotated(tara, Vector3(90, 0, 0)),
+		"holders: Tara's holder mounts on the reference bench face")
 	var s05 := _layout("LOC-03", "EX-CH01-S05")
 	_check(not _prop(s05, "alo_holder").is_empty() and not _prop(s05, "tara_holder").is_empty(),
 		"holders: both holders stay for the second care day")
