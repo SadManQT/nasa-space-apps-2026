@@ -128,7 +128,7 @@
     "test_worker_b_world_missions.gd",
     "test_worker_c_content.gd"
   ],
-  "state": "complete",
+  "state": "interrupted_incomplete",
   "process_id": 75355,
   "exit_code": -15,
   "overall_timed_out": false,

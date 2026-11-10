@@ -1,0 +1,437 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  ok LOC-01 room contract validates
+  ok LOC-01 declares canonical dimensions and focus targets
+  ok LOC-01 reuses an existing approved asset: PR_MissionTable.glb
+  ok LOC-01 reuses an existing approved asset: PR_BatteryJar.glb
+  ok LOC-01 reuses an existing approved asset: PR_SeedPacket.glb
+  ok LOC-01 reuses an existing approved asset: PR_Mug.glb
+  ok LOC-01 reuses an existing approved asset: PR_CrewSeat.glb
+  ok LOC-01 room scene loads
+  ok LOC-01 exposes named visual_root
+  ok LOC-01 exposes named collision_root
+  ok LOC-01 exposes named focus_root
+  ok LOC-01 exposes named pressure_root
+  ok LOC-01 exposes named door_root
+  ok LOC-01 exposes named anchor_root
+  ok LOC-01 exposes named navigation_root
+  ok LOC-01 has independent collision geometry
+  ok LOC-01 has a visible floor for navigation
+  ok LOC-01 registers every focus target
+  ok LOC-01 registers pressure boundaries
+  ok LOC-02 room contract validates
+  ok LOC-02 declares canonical dimensions and focus targets
+  ok LOC-02 reuses an existing approved asset: PR_PowerPanel.glb
+  ok LOC-02 reuses an existing approved asset: PR_BatteryJar.glb
+  ok LOC-02 reuses an existing approved asset: PR_OxygenUnit.glb
+  ok LOC-02 reuses an existing approved asset: PR_ControlConsole.glb
+  ok LOC-02 reuses an existing approved asset: PR_WaterValve.glb
+  ok LOC-02 reuses an existing approved asset: PR_HandLight.glb
+  ok LOC-02 room scene loads
+  ok LOC-02 exposes named visual_root
+  ok LOC-02 exposes named collision_root
+  ok LOC-02 exposes named focus_root
+  ok LOC-02 exposes named pressure_root
+  ok LOC-02 exposes named door_root
+  ok LOC-02 exposes named anchor_root
+  ok LOC-02 exposes named navigation_root
+  ok LOC-02 has independent collision geometry
+  ok LOC-02 has a visible floor for navigation
+  ok LOC-02 registers every focus target
+  ok LOC-02 registers pressure boundaries
+  ok LOC-03 room contract validates
+  ok LOC-03 declares canonical dimensions and focus targets
+  ok LOC-03 reuses an existing approved asset: PR_GrowthChamber.glb
+  ok LOC-03 reuses an existing approved asset: PR_Glovebox.glb
+  ok LOC-03 reuses an existing approved asset: PL_CropRack.glb
+  ok LOC-03 reuses an existing approved asset: PL_Alo_Bud.glb
+  ok LOC-03 reuses an existing approved asset: PL_Tara_Bloom.glb
+  ok LOC-03 room scene loads
+  ok LOC-03 exposes named visual_root
+  ok LOC-03 exposes named collision_root
+  ok LOC-03 exposes named focus_root
+  ok LOC-03 exposes named pressure_root
+  ok LOC-03 exposes named door_root
+  ok LOC-03 exposes named anchor_root
+  ok LOC-03 exposes named navigation_root
+  ok LOC-03 has independent collision geometry
+  ok LOC-03 has a visible floor for navigation
+  ok LOC-03 registers every focus target
+  ok LOC-03 registers pressure boundaries
+  ok LOC-04 room contract validates
+  ok LOC-04 declares canonical dimensions and focus targets
+  ok LOC-04 reuses an existing approved asset: PR_CrewSeat.glb
+  ok LOC-04 reuses an existing approved asset: PR_WaterWallPanel.glb
+  ok LOC-04 reuses an existing approved asset: PR_SupplyBundles.glb
+  ok LOC-04 reuses an existing approved asset: PR_HatchDoor.glb
+  ok LOC-04 room scene loads
+  ok LOC-04 exposes named visual_root
+  ok LOC-04 exposes named collision_root
+  ok LOC-04 exposes named focus_root
+  ok LOC-04 exposes named pressure_root
+  ok LOC-04 exposes named door_root
+  ok LOC-04 exposes named anchor_root
+  ok LOC-04 exposes named navigation_root
+  ok LOC-04 has independent collision geometry
+  ok LOC-04 has a visible floor for navigation
+  ok LOC-04 registers every focus target
+  ok LOC-04 registers pressure boundaries
+  ok LOC-06 room contract validates
+  ok LOC-06 declares canonical dimensions and focus targets
+  ok LOC-06 reuses an existing approved asset: EN_ExteriorModule.glb
+  ok LOC-06 reuses an existing approved asset: EN_SolarMast.glb
+  ok LOC-06 reuses an existing approved asset: PR_Dosimeter.glb
+  ok LOC-06 reuses an existing approved asset: PR_Helmet.glb
+  ok LOC-06 room scene loads
+  ok LOC-06 exposes named visual_root
+  ok LOC-06 exposes named collision_root
+  ok LOC-06 exposes named focus_root
+  ok LOC-06 exposes named pressure_root
+  ok LOC-06 exposes named door_root
+  ok LOC-06 exposes named anchor_root
+  ok LOC-06 exposes named navigation_root
+  ok LOC-06 has independent collision geometry
+  ok LOC-06 has a visible floor for navigation
+  ok LOC-06 registers every focus target
+  ok LOC-06 registers pressure boundaries
+  ok all named Chapter 1 pressure boundaries validate
+  ok closed exterior airlock blocks direct movement
+  ok closed garden viewing shutter blocks chamber traversal
+  ok Commons route bounds contain its player origin
+  ok Service Rooms route bounds reject an outside point
+  ok WorldRoute preserves the closed airlock boundary
+  ok airlock preparation rejects missing suit check
+  ok airlock preparation accepts suit and exposure checks
+  ok prepared airlock permits safe exterior traversal
+  ok closed airlock blocks return traversal
+  ok garden shutter rejects an unverified chamber
+  ok verified garden shutter opens through the route service
+  ok authored base-room scene cut updates the world without bypassing the exterior airlock
+  ok B10 production roster and structured playable actor agree for EX-CH01-S01
+  ok B10 Ferreira arrival is honored for EX-CH01-S01
+  ok B10 production roster and structured playable actor agree for EX-CH01-S02
+  ok B10 Ferreira arrival is honored for EX-CH01-S02
+  ok B10 production roster and structured playable actor agree for EX-CH01-S03
+  ok B10 Ferreira arrival is honored for EX-CH01-S03
+  ok B10 production roster and structured playable actor agree for EX-CH01-S04
+  ok B10 Ferreira arrival is honored for EX-CH01-S04
+  ok B10 production roster and structured playable actor agree for EX-CH01-S05
+  ok B10 Ferreira arrival is honored for EX-CH01-S05
+  ok B10 production roster and structured playable actor agree for EX-CH01-S06
+  ok B10 Ferreira arrival is honored for EX-CH01-S06
+  ok B10 production roster and structured playable actor agree for EX-CH01-S07
+  ok B10 Ferreira arrival is honored for EX-CH01-S07
+  ok B10 production roster and structured playable actor agree for EX-CH01-S08
+  ok B10 Ferreira arrival is honored for EX-CH01-S08
+  ok B10 production roster and structured playable actor agree for EX-CH01-S09
+  ok B10 Ferreira arrival is honored for EX-CH01-S09
+  ok B10 production roster and structured playable actor agree for EX-CH01-S10
+  ok B10 Ferreira arrival is honored for EX-CH01-S10
+  ok B10 production roster and structured playable actor agree for EX-CH01-S11
+  ok B10 Ferreira arrival is honored for EX-CH01-S11
+  ok B10 production roster and structured playable actor agree for EX-CH01-S12
+  ok B10 Ferreira arrival is honored for EX-CH01-S12
+  ok B10 production roster and structured playable actor agree for EX-CH02-S01
+  ok B10 Ferreira arrival is honored for EX-CH02-S01
+  ok B10 production roster and structured playable actor agree for EX-CH02-S02
+  ok B10 Ferreira arrival is honored for EX-CH02-S02
+  ok B10 production roster and structured playable actor agree for EX-CH02-S03
+  ok B10 Ferreira arrival is honored for EX-CH02-S03
+  ok B10 production roster and structured playable actor agree for EX-CH02-S04
+  ok B10 Ferreira arrival is honored for EX-CH02-S04
+  ok B10 production roster and structured playable actor agree for EX-CH02-S05
+  ok B10 Ferreira arrival is honored for EX-CH02-S05
+  ok B10 production roster and structured playable actor agree for EX-CH02-S06
+  ok B10 Ferreira arrival is honored for EX-CH02-S06
+  ok B10 production roster and structured playable actor agree for EX-CH02-S07
+  ok B10 Ferreira arrival is honored for EX-CH02-S07
+  ok B10 production roster and structured playable actor agree for EX-CH02-S08
+  ok B10 Ferreira arrival is honored for EX-CH02-S08
+  ok B10 production roster and structured playable actor agree for EX-CH02-S09
+  ok B10 Ferreira arrival is honored for EX-CH02-S09
+  ok B10 production roster and structured playable actor agree for EX-CH02-S10
+  ok B10 Ferreira arrival is honored for EX-CH02-S10
+  ok B10 production roster and structured playable actor agree for EX-CH02-S11
+  ok B10 Ferreira arrival is honored for EX-CH02-S11
+  ok B10 production roster and structured playable actor agree for EX-CH02-S12
+  ok B10 Ferreira arrival is honored for EX-CH02-S12
+  ok B10 production roster and structured playable actor agree for EX-CH03-S01
+  ok B10 Ferreira arrival is honored for EX-CH03-S01
+  ok B10 production roster and structured playable actor agree for EX-CH03-S02
+  ok B10 Ferreira arrival is honored for EX-CH03-S02
+  ok B10 production roster and structured playable actor agree for EX-CH03-S03
+  ok B10 Ferreira arrival is honored for EX-CH03-S03
+  ok B10 production roster and structured playable actor agree for EX-CH03-S04
+  ok B10 Ferreira arrival is honored for EX-CH03-S04
+  ok B10 production roster and structured playable actor agree for EX-CH03-S05
+  ok B10 Ferreira arrival is honored for EX-CH03-S05
+  ok B10 production roster and structured playable actor agree for EX-CH03-S06
+  ok B10 Ferreira arrival is honored for EX-CH03-S06
+  ok B10 production roster and structured playable actor agree for EX-CH03-S07
+  ok B10 Ferreira arrival is honored for EX-CH03-S07
+  ok B10 production roster and structured playable actor agree for EX-CH03-S08
+  ok B10 Ferreira arrival is honored for EX-CH03-S08
+  ok B10 production roster and structured playable actor agree for EX-CH03-S09
+  ok B10 Ferreira arrival is honored for EX-CH03-S09
+  ok B10 production roster and structured playable actor agree for EX-CH03-S10
+  ok B10 Ferreira arrival is honored for EX-CH03-S10
+  ok B10 production roster and structured playable actor agree for EX-CH03-S11
+  ok B10 Ferreira arrival is honored for EX-CH03-S11
+  ok B10 production roster and structured playable actor agree for EX-CH03-S12
+  ok B10 Ferreira arrival is honored for EX-CH03-S12
+  ok B10 production roster and structured playable actor agree for EX-CH04-S01
+  ok B10 Ferreira arrival is honored for EX-CH04-S01
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S01
+  ok B10 production roster and structured playable actor agree for EX-CH04-S02
+  ok B10 Ferreira arrival is honored for EX-CH04-S02
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S02
+  ok B10 canonical rover team remains separate for EX-CH04-S02
+  ok B10 production roster and structured playable actor agree for EX-CH04-S03
+  ok B10 Ferreira arrival is honored for EX-CH04-S03
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S03
+  ok B10 canonical rover team remains separate for EX-CH04-S03
+  ok B10 production roster and structured playable actor agree for EX-CH04-S04
+  ok B10 Ferreira arrival is honored for EX-CH04-S04
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S04
+  ok B10 canonical rover team remains separate for EX-CH04-S04
+  ok B10 production roster and structured playable actor agree for EX-CH04-S05
+  ok B10 Ferreira arrival is honored for EX-CH04-S05
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S05
+  ok B10 canonical rover team remains separate for EX-CH04-S05
+  ok B10 production roster and structured playable actor agree for EX-CH04-S06
+  ok B10 Ferreira arrival is honored for EX-CH04-S06
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S06
+  ok B10 canonical rover team remains separate for EX-CH04-S06
+  ok B10 production roster and structured playable actor agree for EX-CH04-S07
+  ok B10 Ferreira arrival is honored for EX-CH04-S07
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S07
+  ok B10 canonical rover team remains separate for EX-CH04-S07
+  ok B10 production roster and structured playable actor agree for EX-CH04-S08
+  ok B10 Ferreira arrival is honored for EX-CH04-S08
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S08
+  ok B10 canonical rover team remains separate for EX-CH04-S08
+  ok B10 production roster and structured playable actor agree for EX-CH04-S09
+  ok B10 Ferreira arrival is honored for EX-CH04-S09
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S09
+  ok B10 canonical rover team remains separate for EX-CH04-S09
+  ok B10 production roster and structured playable actor agree for EX-CH04-S10
+  ok B10 Ferreira arrival is honored for EX-CH04-S10
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S10
+  ok B10 production roster and structured playable actor agree for EX-CH04-S11
+  ok B10 Ferreira arrival is honored for EX-CH04-S11
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S11
+  ok B10 production roster and structured playable actor agree for EX-CH04-S12
+  ok B10 Ferreira arrival is honored for EX-CH04-S12
+  ok B10 Mei and Amara remain at Aurora for EX-CH04-S12
+  ok B10 production roster and structured playable actor agree for EX-CH05-S01
+  ok B10 Ferreira arrival is honored for EX-CH05-S01
+  ok B10 production roster and structured playable actor agree for EX-CH05-S02
+  ok B10 Ferreira arrival is honored for EX-CH05-S02
+  ok B10 production roster and structured playable actor agree for EX-CH05-S03
+  ok B10 Ferreira arrival is honored for EX-CH05-S03
+  ok B10 production roster and structured playable actor agree for EX-CH05-S04
+  ok B10 Ferreira arrival is honored for EX-CH05-S04
+  ok B10 production roster and structured playable actor agree for EX-CH05-S05
+  ok B10 Ferreira arrival is honored for EX-CH05-S05
+  ok B10 production roster and structured playable actor agree for EX-CH05-S06
+  ok B10 Ferreira arrival is honored for EX-CH05-S06
+  ok B10 production roster and structured playable actor agree for EX-CH05-S07
+  ok B10 Ferreira arrival is honored for EX-CH05-S07
+  ok B10 production roster and structured playable actor agree for EX-CH05-S08
+  ok B10 Ferreira arrival is honored for EX-CH05-S08
+  ok B10 production roster and structured playable actor agree for EX-CH05-S09
+  ok B10 Ferreira arrival is honored for EX-CH05-S09
+  ok B10 production roster and structured playable actor agree for EX-CH05-S10
+  ok B10 Ferreira arrival is honored for EX-CH05-S10
+  ok B10 production roster and structured playable actor agree for EX-CH05-S11
+  ok B10 Ferreira arrival is honored for EX-CH05-S11
+  ok B10 production roster and structured playable actor agree for EX-CH05-S12
+  ok B10 Ferreira arrival is honored for EX-CH05-S12
+  ok B10 production roster and structured playable actor agree for EX-CH06-S01
+  ok B10 Ferreira arrival is honored for EX-CH06-S01
+  ok B10 production roster and structured playable actor agree for EX-CH06-S02
+  ok B10 Ferreira arrival is honored for EX-CH06-S02
+  ok B10 production roster and structured playable actor agree for EX-CH06-S03
+  ok B10 Ferreira arrival is honored for EX-CH06-S03
+  ok B10 production roster and structured playable actor agree for EX-CH06-S04
+  ok B10 Ferreira arrival is honored for EX-CH06-S04
+  ok B10 production roster and structured playable actor agree for EX-CH06-S05
+  ok B10 Ferreira arrival is honored for EX-CH06-S05
+  ok B10 production roster and structured playable actor agree for EX-CH06-S06
+  ok B10 Ferreira arrival is honored for EX-CH06-S06
+  ok B10 production roster and structured playable actor agree for EX-CH06-S07
+  ok B10 Ferreira arrival is honored for EX-CH06-S07
+  ok B10 production roster and structured playable actor agree for EX-CH06-S08
+  ok B10 Ferreira arrival is honored for EX-CH06-S08
+  ok B10 production roster and structured playable actor agree for EX-CH06-S09
+  ok B10 Ferreira arrival is honored for EX-CH06-S09
+  ok B10 production roster and structured playable actor agree for EX-CH06-S10
+  ok B10 Ferreira arrival is honored for EX-CH06-S10
+  ok B10 production roster and structured playable actor agree for EX-CH06-S11
+  ok B10 Ferreira arrival is honored for EX-CH06-S11
+  ok B10 production roster and structured playable actor agree for EX-CH06-S12
+  ok B10 Ferreira arrival is honored for EX-CH06-S12
+  ok B10 production roster and structured playable actor agree for EX-CH07-S01
+  ok B10 Ferreira arrival is honored for EX-CH07-S01
+  ok B10 production roster and structured playable actor agree for EX-CH07-S02
+  ok B10 Ferreira arrival is honored for EX-CH07-S02
+  ok B10 production roster and structured playable actor agree for EX-CH07-S03
+  ok B10 Ferreira arrival is honored for EX-CH07-S03
+  ok B10 production roster and structured playable actor agree for EX-CH07-S04
+  ok B10 Ferreira arrival is honored for EX-CH07-S04
+  ok B10 production roster and structured playable actor agree for EX-CH07-S05
+  ok B10 Ferreira arrival is honored for EX-CH07-S05
+  ok B10 production roster and structured playable actor agree for EX-CH07-S06
+  ok B10 Ferreira arrival is honored for EX-CH07-S06
+  ok B10 production roster and structured playable actor agree for EX-CH07-S07
+  ok B10 Ferreira arrival is honored for EX-CH07-S07
+  ok B10 production roster and structured playable actor agree for EX-CH07-S08
+  ok B10 Ferreira arrival is honored for EX-CH07-S08
+  ok B10 production roster and structured playable actor agree for EX-CH07-S09
+  ok B10 Ferreira arrival is honored for EX-CH07-S09
+  ok B10 production roster and structured playable actor agree for EX-CH07-S10
+  ok B10 Ferreira arrival is honored for EX-CH07-S10
+  ok B10 production roster and structured playable actor agree for EX-CH07-S11
+  ok B10 Ferreira arrival is honored for EX-CH07-S11
+  ok B10 production roster and structured playable actor agree for EX-CH07-S12
+  ok B10 Ferreira arrival is honored for EX-CH07-S12
+  ok B10 production roster and structured playable actor agree for EX-CH08-S01
+  ok B10 Ferreira arrival is honored for EX-CH08-S01
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S01
+  ok B10 canonical rover team remains separate for EX-CH08-S01
+  ok B10 production roster and structured playable actor agree for EX-CH08-S02
+  ok B10 Ferreira arrival is honored for EX-CH08-S02
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S02
+  ok B10 canonical rover team remains separate for EX-CH08-S02
+  ok B10 production roster and structured playable actor agree for EX-CH08-S03
+  ok B10 Ferreira arrival is honored for EX-CH08-S03
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S03
+  ok B10 canonical rover team remains separate for EX-CH08-S03
+  ok B10 production roster and structured playable actor agree for EX-CH08-S04
+  ok B10 Ferreira arrival is honored for EX-CH08-S04
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S04
+  ok B10 canonical rover team remains separate for EX-CH08-S04
+  ok B10 production roster and structured playable actor agree for EX-CH08-S05
+  ok B10 Ferreira arrival is honored for EX-CH08-S05
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S05
+  ok B10 canonical rover team remains separate for EX-CH08-S05
+  ok B10 production roster and structured playable actor agree for EX-CH08-S06
+  ok B10 Ferreira arrival is honored for EX-CH08-S06
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S06
+  ok B10 canonical rover team remains separate for EX-CH08-S06
+  ok B10 production roster and structured playable actor agree for EX-CH08-S07
+  ok B10 Ferreira arrival is honored for EX-CH08-S07
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S07
+  ok B10 canonical rover team remains separate for EX-CH08-S07
+  ok B10 production roster and structured playable actor agree for EX-CH08-S08
+  ok B10 Ferreira arrival is honored for EX-CH08-S08
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S08
+  ok B10 canonical rover team remains separate for EX-CH08-S08
+  ok B10 production roster and structured playable actor agree for EX-CH08-S09
+  ok B10 Ferreira arrival is honored for EX-CH08-S09
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S09
+  ok B10 canonical rover team remains separate for EX-CH08-S09
+  ok B10 production roster and structured playable actor agree for EX-CH08-S10
+  ok B10 Ferreira arrival is honored for EX-CH08-S10
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S10
+  ok B10 canonical rover team remains separate for EX-CH08-S10
+  ok B10 production roster and structured playable actor agree for EX-CH08-S11
+  ok B10 Ferreira arrival is honored for EX-CH08-S11
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S11
+  ok B10 canonical rover team remains separate for EX-CH08-S11
+  ok B10 production roster and structured playable actor agree for EX-CH08-S12
+  ok B10 Ferreira arrival is honored for EX-CH08-S12
+  ok B10 Mei and Amara remain at Aurora for EX-CH08-S12
+  ok B10 old saved rosters inherit the corrected physical arrival
+  ok staged route validation releases its dispatcher and director instead of leaking every autosave
+  ok Chapter 1 scene roster validates
+  ok Mei/Aurora cadets are physical while Ferreira remains Earth-side
+  ok co-located cadets can switch viewpoint
+  ok Earth-screen Ferreira cannot be freely selected as a lunar body
+  ok CH04 field/base roster preserves Kai/Rafi versus Mei/Amara
+  ok CH08 roster preserves Ferreira/Kai/Rafi rover and Mei/Amara home
+  ok interaction prerequisite rejects an uncalibrated target
+  ok focus succeeds after physical prerequisite
+  ok focus -> inspect -> use -> preview reaches a pure preview
+  ok interaction preview leaves authoritative revision unchanged
+  ok explicit confirm produces the physical state result
+  ok duplicate confirm returns one receipt without a second commit
+  ok cancel removes the pending physical confirmation
+  ok external command advances the revision for stale fixture
+  ok stale preview is rejected without mutation
+  ok pause is explicit and accepted
+  ok pause blocks a physical commit
+  ok physical fixture state survives primitive save/load
+  ok mission registry loads 32 canonical missions and exposes honest blocked gates
+  ok registry distinguishes the sixteen implemented missions (Chapters 1, 2, 5 and 7) from 16 unimplemented missions
+  ok Chapter 2 mission status exposes its three physical scene gates
+  ok EX-M0101 scene composition exposes its three canonical scenes
+  ok dialogue acknowledgement never completes the S01 physical gate
+  ok S01 commissioning route is a real interaction
+  ok S01 result inspection is a separate physical action
+  ok S01 charter acknowledgement is a physical card read
+  ok S01 advances only after all physical predicates
+  ok S02 physical action committed: classify_information
+  ok S02 physical action committed: roll_call
+  ok S02 physical action committed: practice_fault
+  ok S02 advances in canonical order
+BEGIN S03 calibrate_probe
+  ok S03 P-01 physical action committed: calibrate_probe
+BEGIN S03 span_probe
+  ok S03 P-01 physical action committed: span_probe
+BEGIN S03 recheck_probe
+  ok S03 P-01 physical action committed: recheck_probe
+BEGIN S03 inspect_packet
+  ok S03 P-01 physical action committed: inspect_packet
+BEGIN S03 compare_atmosphere
+  ok S03 P-01 physical action committed: compare_atmosphere
+  ok S03 advances only after calibration, provenance and atmosphere checks
+  ok S04 P-01/garden action committed: plant_alo
+  ok S04 P-01/garden action committed: plant_tara
+  ok S04 P-01/garden action committed: water_alo
+  ok S04 P-01/garden action committed: water_tara
+  ok S04 P-01/garden action committed: label_alo
+  ok S04 P-01/garden action committed: label_tara
+  ok S04 P-01/garden action committed: seal_alo
+  ok S04 P-01/garden action committed: seal_tara
+  ok S04 P-01/garden action committed: record_paired_conditions
+  ok S04 P-01/garden action committed: confirm_services
+  ok S04 plants both cassettes and advances
+  ok S05 dated-care action committed: test_hand_light
+  ok S05 dated-care action committed: care_montage
+  ok S05 dated-care action committed: confirm_date_transition
+  ok S05 requires explicit date transition
+  ok S06 timeline action committed: arrange_timeline
+  ok S06 timeline action committed: ack_schedule
+  ok S06 advances without dialogue-only completion
+  ok S07 role acknowledgement is a physical role-card check
+  ok P-02 shift 1 goes through PuzzleHost and ExpeditionSimulation
+  ok P-02 shift 2 preview is staged and paused without committing
+  ok staged shift 2 does not advance the authoritative shift
+  ok S07 requires committed shift 1 plus staged shift 2
+  ok S08 physical/P-02 action committed: shelter_drill
+  ok S08 physical/P-02 action committed: verify_drill_baseline
+  ok S08 physical/P-02 action committed: p02_shift2
+  ok S08 commits shift 2 only after no-cost drill verification
+  ok S09 physical/P-02 action committed: combine_cards
+  ok S09 physical/P-02 action committed: ack_earth_set
+  ok S09 physical/P-02 action committed: p02_shifts3_4
+  ok S09 resolves shifts 3-4 in order
+  ok S10 shelter/alarm action committed: confirm_four_sheltered
+  ok S10 shelter/alarm action committed: p02_shift5_alarm
+  ok S10 commits exactly one exclusive alarm response
+  ok S11 recovery/P-02 action committed: verify_exposure_order
+  ok S11 recovery/P-02 action committed: return_water
+  ok S11 recovery/P-02 action committed: p02_shifts6_7
+  ok S11 recovery/P-02 action committed: review_outcome
+  ok S11 produces a safe Bloom-family outcome
+  ok S11 advances after outcome review
+  ok S12 bloom/debrief action committed: verify_chamber
+  ok S12 bloom/debrief action committed: open_shutter
+  ok S12 bloom/debrief action committed: tag_bloom
+  ok S12 bloom/debrief action committed: inspect_tara
+  ok S12 bloom/debrief action committed: complete_debrief
+  ok S12 closes the Chapter 1 physical route
+  ok all twelve canonical scenes and CH02 readiness require physical gates
+  ok route snapshot contains room and mission primitive state
+WORKER B WORLD/MISSIONS RESULT: PASS (429 checks, 0 failures)

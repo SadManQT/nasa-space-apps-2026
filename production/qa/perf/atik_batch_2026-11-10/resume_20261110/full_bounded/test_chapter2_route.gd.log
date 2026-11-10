@@ -1,0 +1,107 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  ok B03 zero-energy Golden carryover can fund the entry profile
+  ok B03 installs the dated P-03 entry profile
+  ok Chapter 2 starts at the canonical first scene
+  ok route is at EX-CH02-S01
+  ok EX-CH02-S01 commits inspect_alo_identity
+  ok EX-CH02-S01 commits inspect_tara_identity
+  ok EX-CH02-S01 commits ack_live_link
+  ok EX-CH02-S01 commits open_pollination_protocol
+  ok EX-CH02-S01 physical gate is ready
+  ok EX-CH02-S01 advances in canonical order
+  ok route is at EX-CH02-S02
+  ok EX-CH02-S02 commits identify_anther
+  ok EX-CH02-S02 commits identify_stigma
+  ok EX-CH02-S02 commits assign_brush_directions
+  ok EX-CH02-S02 commits practice_transfer_model
+  ok EX-CH02-S02 physical gate is ready
+  ok EX-CH02-S02 advances in canonical order
+  ok route is at EX-CH02-S03
+  ok EX-CH02-S03 commits check_space_weather
+  ok EX-CH02-S03 commits prepare_closed_carrier
+  ok EX-CH02-S03 commits verify_transfer_boundaries
+  ok EX-CH02-S03 commits preview_cycle_budget
+  ok EX-CH02-S03 physical gate is ready
+  ok EX-CH02-S03 advances in canonical order
+  ok route is at EX-CH02-S04
+  ok EX-CH02-S04 commits p03_scan_tara
+  ok EX-CH02-S04 commits p03_collect_tara
+  ok EX-CH02-S04 commits p03_seal_a
+  ok EX-CH02-S04 commits p03_transfer_alo
+  ok B05 Chapter 2 retry checkpoint survives disk-shaped JSON
+  ok B05 current pollen transfer retry restores puzzle, world, resources and receipts together
+  ok EX-CH02-S04 commits p03_scan_alo
+  ok EX-CH02-S04 commits p03_collect_alo
+  ok EX-CH02-S04 commits p03_seal_b
+  ok EX-CH02-S04 commits p03_transfer_tara
+  ok EX-CH02-S04 commits p03_complete_run_1
+  ok B03 a reciprocal run is charged exactly once
+  ok EX-CH02-S04 physical gate is ready
+  ok EX-CH02-S04 advances in canonical order
+  ok route is at EX-CH02-S05
+  ok EX-CH02-S05 commits p03_care_day_2
+  ok EX-CH02-S05 commits p03_care_day_3
+  ok EX-CH02-S05 commits p03_run_2_forward
+  ok EX-CH02-S05 commits p03_run_2_reverse
+  ok EX-CH02-S05 commits p03_complete_run_2
+  ok B03 a reciprocal run is charged exactly once
+  ok EX-CH02-S05 commits p03_care_day_4
+  ok EX-CH02-S05 commits p03_care_day_5
+  ok EX-CH02-S05 commits p03_care_day_6
+  ok EX-CH02-S05 commits p03_care_day_7
+  ok EX-CH02-S05 commits p03_run_3_forward
+  ok EX-CH02-S05 commits p03_run_3_reverse
+  ok EX-CH02-S05 commits p03_complete_run_3
+  ok B03 a reciprocal run is charged exactly once
+  ok EX-CH02-S05 physical gate is ready
+  ok EX-CH02-S05 advances in canonical order
+  ok route is at EX-CH02-S06
+  ok EX-CH02-S06 commits record_stem_prediction
+  ok EX-CH02-S06 physical gate is ready
+  ok EX-CH02-S06 advances in canonical order
+  ok route is at EX-CH02-S07
+  ok EX-CH02-S07 commits order_lifecycle
+  ok EX-CH02-S07 commits separate_current_evidence
+  ok EX-CH02-S07 commits inspect_recorder_identifier
+  ok EX-CH02-S07 physical gate is ready
+  ok EX-CH02-S07 advances in canonical order
+  ok route is at EX-CH02-S08
+  ok EX-CH02-S08 commits collect_serial_card
+  ok EX-CH02-S08 commits collect_date_card
+  ok EX-CH02-S08 commits collect_trial_stage_card
+  ok EX-CH02-S08 commits exclude_identity_claim
+  ok EX-CH02-S08 physical gate is ready
+  ok EX-CH02-S08 advances in canonical order
+  ok route is at EX-CH02-S09
+  ok EX-CH02-S09 commits assign_date_token
+  ok EX-CH02-S09 commits assign_device_token
+  ok EX-CH02-S09 commits assign_channel_token
+  ok EX-CH02-S09 commits verify_local_checksum
+  ok EX-CH02-S09 commits open_reconstructed_transcript
+  ok EX-CH02-S09 physical gate is ready
+  ok EX-CH02-S09 advances in canonical order
+  ok route is at EX-CH02-S10
+  ok EX-CH02-S10 commits play_engineer_fragment
+  ok EX-CH02-S10 commits play_n_memory
+  ok EX-CH02-S10 commits classify_voice_inference
+  ok EX-CH02-S10 physical gate is ready
+  ok EX-CH02-S10 advances in canonical order
+  ok route is at EX-CH02-S11
+  ok EX-CH02-S11 commits send_fragment_copy
+  ok EX-CH02-S11 commits acknowledge_handover
+  ok EX-CH02-S11 physical gate is ready
+  ok EX-CH02-S11 advances in canonical order
+  ok route is at EX-CH02-S12
+  ok EX-CH02-S12 commits reach_interior_brace
+  ok EX-CH02-S12 commits account_four_cadets
+  ok EX-CH02-S12 commits finish_quake_beat
+  ok EX-CH02-S12 physical gate is ready
+  ok Chapter 2 closes only after all twelve physical gates
+  ok B05 persisted checkpoints never recursively contain older checkpoints
+  ok B02 P-03 restores JSON arrays into its typed lists
+  ok B02 malformed typed elements reject atomically
+  ok Chapter 2 readiness requires P-03 and P-04 evidence
+  ok Chapter 2 route restores primitive puzzle state
+  ok restored Chapter 2 remains at its final canonical scene
+CHAPTER 2 ROUTE RESULT: PASS (104 checks, 0 failures)
