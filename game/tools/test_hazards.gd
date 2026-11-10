@@ -90,6 +90,15 @@ func _test_ch07_solar_storm_dosimeter_and_family_mode() -> void:
 	_check(not bool(step1.get("untimed_family_mode", true)) and is_equal_approx(float(step1.get("time_remaining_s", 0.0)), 60.0) and float(step1.get("dosimeter_dose_shown", 0.0)) > 0.0, "outside shelter accumulates dose on dosimeter and counts down timer in Expedition mode")
 	var sheltered := timed_h.step_solar_storm_shelter_run(30.0, true, 4, 2, 0)
 	_check(int(sheltered.get("shelter_strength", 0)) == 6 and int(sheltered.get("six_step_shelter_dose", 99)) == 0 and bool(sheltered.get("within_exposure_limit", false)), "W4 + K2 = Shelter 6 gives 0 dose across all 6 P-14 storm steps")
+	var canon: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://resources/campaign/profiles/p13_campaign.json"))
+	_check(PackedInt32Array(timed_h.storm_step_multipliers) == PackedInt32Array(canon.get("multipliers", [])) and timed_h.storm_exposure_limit == int(canon.get("exposure_limit", -1)), "field hazards use the same six storm multipliers and exposure limit as P-13/P-14")
+	var warning_h := HazardsScript.new("Expedition", false)
+	var prep := warning_h.step_solar_storm_shelter_run(20.0, false, 4, 2, 0, true)
+	_check(is_zero_approx(warning_h.accumulated_outside_dose) and is_equal_approx(float(prep.time_remaining_s), 100.0), "early warning adds 30 seconds before exposure to the 90-second run")
+	warning_h.step_solar_storm_shelter_run(20.0, false, 4, 2, 0, true)
+	_check(is_equal_approx(warning_h.accumulated_outside_dose, 0.8 / 6.0), "a step crossing the preparation boundary counts only its exposed 10 seconds")
+	warning_h.step_solar_storm_shelter_run(60.0, true, 4, 2, 0, true)
+	_check(is_equal_approx(warning_h.accumulated_outside_dose, 0.8 / 6.0), "reaching shelter stops outside exposure even with early warning")
 
 	# Family / Story mode: untimed shelter run, dose still shown on dosimeter
 	var family_h := HazardsScript.new("Story", true)
@@ -103,12 +112,12 @@ func _test_hud_and_capture() -> void:
 	for item_id in h.items_to_secure.duplicate():
 		h.secure_quake_item(String(item_id))
 	h.annex_isolated_for_aftershock = true
-	h.step_cold_shadow(true, 15.0, false)
+	h.step_cold_shadow(true, 15.0, true, 8)
 	h.panel_dust_cleared = true
 	h.whipple_spur_patched = true
 	h.genuine_flashes_confirmed = 6
 	h.artifacts_rejected = 2
-	h.step_solar_storm_shelter_run(30.0, false, 4, 2, 0)
+	h.step_solar_storm_shelter_run(20.0, false, 3, 1, 0, true)
 
 	var hud := HazardHudScript.new()
 	root.add_child(hud)
@@ -118,6 +127,8 @@ func _test_hud_and_capture() -> void:
 
 	var problems := _scan_banned_ui_text(hud)
 	_check(problems.is_empty(), "HazardHudPanel contains no banned developer tokens")
+	var shown := _label_text(hud)
+	_check(shown.contains("Chapter 8") and shown.contains("Preparation: 10 s") and shown.contains("storm dose: 8 (limit 6)"), "hazard HUD shows current chapter, remaining preparation, actual dose and canonical limit")
 
 	if OS.get_cmdline_user_args().has("--capture"):
 		await RenderingServer.frame_post_draw
@@ -129,6 +140,12 @@ func _test_hud_and_capture() -> void:
 
 	hud.queue_free()
 	await process_frame
+
+func _label_text(node: Node) -> String:
+	var shown: String = node.text if node is Label else ""
+	for child in node.get_children():
+		shown += "\n" + _label_text(child)
+	return shown
 
 func _scan_banned_ui_text(node: Node) -> Array:
 	var out: Array = []

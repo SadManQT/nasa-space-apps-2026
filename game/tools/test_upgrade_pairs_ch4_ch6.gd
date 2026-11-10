@@ -24,6 +24,7 @@ func _run() -> void:
 	_test_pair(6, "storm_early_warning", "bigger_safe_room")
 	_test_simulation_modifiers()
 	_test_rover_reads_saved_choices()
+	_check(String(ProgressionScript.UPGRADE_PAIRS[6].A.after).contains("30"), "early-warning choice card states the applied 30-second preparation lead")
 	await _test_choice_screens()
 	print("UPGRADE PAIRS CH4 CH6 RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)

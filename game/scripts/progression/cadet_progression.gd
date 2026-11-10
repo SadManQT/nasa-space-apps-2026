@@ -57,7 +57,7 @@ const UPGRADE_PAIRS := {
 		"after_chapter": 6,
 		"title": "After Chapter 6 · The Red Ring",
 		"story_bridge": "Aurora rode out the five-hour red-ring eclipse; space-weather monitors now watch for the major storm.",
-		"A": {"id": "storm_early_warning", "label": "Particle early-warning sensor", "summary": "Earlier proton-flux trend alert before storm shelter runs.", "before": "Standard storm lead time", "after": "Early proton-flux warning"},
+		"A": {"id": "storm_early_warning", "label": "Particle early-warning sensor", "summary": "One extra 30-second preparation window before outside exposure; no solar income.", "before": "Shelter run: 90 seconds", "after": "Shelter run: 120 seconds, first 30 seconds before exposure"},
 		"B": {"id": "bigger_safe_room", "label": "Expanded Safe Room rack", "summary": "Full supply stack adds 3 crate shielding instead of 2 (cap 3).", "before": "Full supply stack: crates 2 (K2)", "after": "Full supply stack: crates 3 (K3)"},
 	},
 	7: {

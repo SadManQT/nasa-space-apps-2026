@@ -16,9 +16,10 @@ class_name LunarHazards
 ## 5. Solar storm shelter run & dosimeter (CH07, P-13 / P-14): proton-flux warning,
 ##    dosimeter reading outside shelter, shelter run to LOC-04 Safe Room (untimed
 ##    in Story / Family mode, dose still shown), and 6-step storm shelter profile
-##    (S6 = W4 + K2 -> 0 dose; limit <= 3).
+##    (S6 = W4 + K2 -> 0 dose; limit <= 6).
 
 const HAZARD_ORDER := ["moonquake", "cold_shadow", "impact_flashes", "darkness_budget", "solar_storm"]
+const STORM_WARNING_PREPARATION_S := 30.0
 
 var active_hazard: String = "moonquake"
 var family_mode: bool = false
@@ -37,6 +38,8 @@ var return_trunk_pressure: int = 100
 
 # 2. Cold shadow state (CH04)
 var shadow_warning_issued: bool = false
+var cold_shadow_chapter: int = 4
+var cold_shadow_heater_upgraded: bool = false
 var in_permanent_shadow: bool = false
 var ambient_temp_c: float = -45.0
 var shadow_temp_c: float = -210.0
@@ -65,11 +68,12 @@ var storm_warning_issued: bool = false
 var outside_shelter: bool = true
 var shelter_run_timer_s: float = 90.0
 var shelter_run_elapsed_s: float = 0.0
+var shelter_preparation_s: float = 0.0
 var dosimeter_rate_units_per_min: float = 0.8
 var accumulated_outside_dose: float = 0.0
 var storm_shelter_strength: int = 6 # W4 + K2 = S6
-var storm_step_multipliers: Array = [1, 2, 3, 2, 1, 1]
-var storm_exposure_limit: int = 3
+var storm_step_multipliers: Array = [1, 1, 2, 2, 1, 1]
+var storm_exposure_limit: int = 6
 
 func _init(mode: String = "Cadet", is_family: bool = false) -> void:
 	set_modes(mode, is_family)
@@ -100,8 +104,8 @@ func issue_warning(hazard_id: String) -> Dictionary:
 			return {
 				"accepted": true,
 				"hazard": "cold_shadow",
-				"chapter": 4,
-				"warning": "Cold-trap boundary ahead (-210 °C): suit heaters will draw 1.8x power. Keep instruments above -65 °C and the vault carrier sealed below -10 °C.",
+				"chapter": cold_shadow_chapter,
+				"warning": ("Dark relay road ahead: suit heaters will draw %sx power. Keep instruments above -65 °C." if cold_shadow_chapter == 8 else "Cold-trap boundary ahead (-210 °C): suit heaters will draw %sx power. Keep instruments above -65 °C and the vault carrier sealed below -10 °C.") % String.num(1.45 if cold_shadow_heater_upgraded else 1.8, 2),
 			}
 		"impact_flashes":
 			flash_warning_issued = true
@@ -161,7 +165,9 @@ func secure_quake_item(item_id: String) -> Dictionary:
 
 # --- 2. Cold shadow (CH04) ---
 
-func step_cold_shadow(in_shadow: bool, duration_min: float, rover_heater_upgrade: bool = false) -> Dictionary:
+func step_cold_shadow(in_shadow: bool, duration_min: float, rover_heater_upgrade: bool = false, chapter: int = 4) -> Dictionary:
+	cold_shadow_chapter = chapter
+	cold_shadow_heater_upgraded = rover_heater_upgrade
 	if not shadow_warning_issued:
 		issue_warning("cold_shadow")
 	in_permanent_shadow = in_shadow
@@ -232,30 +238,41 @@ func evaluate_darkness_budget(essentials: int, include_pump: bool, include_camer
 
 # --- 5. Solar storm dosimeter & shelter run (CH07) ---
 
-func step_solar_storm_shelter_run(delta_sec: float, reached_shelter: bool = false, water_units: int = 4, crate_units: int = 2, dirt_shelter_bonus: int = 0) -> Dictionary:
+func step_solar_storm_shelter_run(delta_sec: float, reached_shelter: bool = false, water_units: int = 4, crate_units: int = 2, dirt_shelter_bonus: int = 0, early_warning: bool = false) -> Dictionary:
 	if not storm_warning_issued:
 		issue_warning("solar_storm")
+	shelter_preparation_s = STORM_WARNING_PREPARATION_S if early_warning else 0.0
 	outside_shelter = not reached_shelter
 	storm_shelter_strength = mini(6, water_units + crate_units + dirt_shelter_bonus)
 	if outside_shelter and delta_sec > 0.0:
+		var exposed_before := maxf(0.0, shelter_run_elapsed_s - shelter_preparation_s)
 		shelter_run_elapsed_s += delta_sec
 		# Dose accumulates outside shelter on the dosimeter even when untimed in Family/Story mode
-		accumulated_outside_dose += (delta_sec / 60.0) * dosimeter_rate_units_per_min
+		var exposed_after := maxf(0.0, shelter_run_elapsed_s - shelter_preparation_s)
+		accumulated_outside_dose += ((exposed_after - exposed_before) / 60.0) * dosimeter_rate_units_per_min
 	var untimed := is_shelter_run_untimed()
-	var time_remaining_s := shelter_run_timer_s if untimed else maxf(0.0, shelter_run_timer_s - shelter_run_elapsed_s)
-	var step_dose_in_shelter := 0 if storm_shelter_strength >= 6 else (1 if storm_shelter_strength >= 4 else (2 if storm_shelter_strength >= 2 else 3))
-	var total_6step_shelter_dose := 0
-	for mult in storm_step_multipliers:
-		total_6step_shelter_dose += step_dose_in_shelter * int(mult)
+	var total_6step_shelter_dose := storm_shelter_dose()
 	return {
 		"accepted": true,
 		"warning_issued_first": storm_warning_issued,
 		"outside_shelter": outside_shelter,
 		"untimed_family_mode": untimed,
-		"time_remaining_s": snappedf(time_remaining_s, 0.1),
+		"time_remaining_s": snappedf(shelter_run_time_remaining_s(), 0.1),
+		"preparation_remaining_s": maxf(0.0, shelter_preparation_s - shelter_run_elapsed_s),
 		"dosimeter_rate_per_min": dosimeter_rate_units_per_min,
 		"dosimeter_dose_shown": snappedf(accumulated_outside_dose, 0.01),
 		"shelter_strength": storm_shelter_strength,
 		"six_step_shelter_dose": total_6step_shelter_dose,
 		"within_exposure_limit": total_6step_shelter_dose <= storm_exposure_limit,
 	}
+
+func shelter_run_time_remaining_s() -> float:
+	var available := shelter_run_timer_s + shelter_preparation_s
+	return available if is_shelter_run_untimed() else maxf(0.0, available - shelter_run_elapsed_s)
+
+func storm_shelter_dose() -> int:
+	var step_dose := 0 if storm_shelter_strength >= 6 else (1 if storm_shelter_strength >= 4 else (2 if storm_shelter_strength >= 2 else 3))
+	var total := 0
+	for mult in storm_step_multipliers:
+		total += step_dose * int(mult)
+	return total

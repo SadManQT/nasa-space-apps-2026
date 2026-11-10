@@ -1,6 +1,7 @@
 extends SceneTree
 
 const CampaignScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
+const FieldSystemsScript = preload("res://scripts/campaign/campaign_field_systems.gd")
 var checks := 0
 var failures := 0
 
@@ -37,6 +38,36 @@ func _run() -> void:
 		await process_frame
 		_check(is_equal_approx(resumed.eva_suit.oxygen, 63.5), "Continue restores remaining EVA oxygen without refilling")
 		resumed.free()
+	campaign._start_extended("EX-CH08-S03")
+	campaign._ui_paused = false
+	campaign.field_systems.step(1.0)
+	_check(campaign._is_scene_in_cold_shadow() and is_equal_approx(campaign.field_systems.hazards.heater_power_multiplier, 1.8), "Chapter 8 dark road steps the standard cold-shadow heater")
+	var choices: Dictionary = campaign.director.snapshot()
+	choices.upgrades.choices["4"] = "rover_lights_heater"
+	campaign.director.restore_snapshot(choices)
+	campaign.field_systems.rover.apply_preset("ch08_relay", choices.upgrades)
+	campaign.field_systems.step(1.0)
+	_check(is_equal_approx(campaign.field_systems.hazards.heater_power_multiplier, 1.45), "saved heater upgrade reaches the Chapter 8 dark road")
+	_check(int(campaign.field_systems.hazards.issue_warning("cold_shadow").get("chapter", 0)) == 8, "Chapter 8 cold-shadow warning identifies the current chapter")
+	_check(String(campaign.field_systems.hazards.issue_warning("cold_shadow").get("warning", "")).contains("1.45"), "Chapter 8 warning states the saved heater's actual draw")
+	campaign._start_extended("EX-CH07-S05")
+	choices = campaign.director.snapshot()
+	choices.upgrades.choices["6"] = "storm_early_warning"
+	campaign.director.restore_snapshot(choices)
+	campaign._ui_paused = false
+	campaign.field_systems._room_id = "LOC-01"
+	campaign.field_systems.hazards.accumulated_outside_dose = 0.0
+	campaign.field_systems.hazards.shelter_run_elapsed_s = 0.0
+	var resources: Dictionary = campaign.director.snapshot().resources.duplicate(true)
+	campaign.field_systems.step(20.0)
+	_check(is_zero_approx(campaign.field_systems.hazards.accumulated_outside_dose), "saved early warning gives preparation before outside exposure")
+	var restored_fields := FieldSystemsScript.new(campaign)
+	restored_fields.restore(campaign.field_systems.snapshot())
+	restored_fields.step(20.0)
+	_check(is_equal_approx(restored_fields.hazards.accumulated_outside_dose, 0.8 / 6.0) and is_equal_approx(restored_fields.hazards.shelter_run_time_remaining_s(), 80.0), "save/resume preserves spent preparation instead of granting another 30 seconds")
+	campaign.field_systems.step(20.0)
+	_check(is_equal_approx(campaign.field_systems.hazards.accumulated_outside_dose, 0.8 / 6.0), "early warning grants one 30-second preparation opportunity, not one per step")
+	_check(campaign.director.snapshot().resources == resources, "early warning does not change the puzzle ledger or invent solar income")
 	campaign.free()
 	await process_frame
 	print("CAMPAIGN FIELD SYSTEMS RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])

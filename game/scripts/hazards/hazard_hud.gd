@@ -84,7 +84,7 @@ func refresh_view() -> void:
 
 	# 2. CH04 Cold shadow card
 	_add_card(
-		"Chapter 4 · Permanent Cold Shadow (-210 °C)",
+		"Chapter %d · Cold Shadow (-210 °C)" % _hazards.cold_shadow_chapter,
 		"Ambient: %d °C · Suit heater draw: %sx\nInstrument temp: %s °C (limit %d °C) · Vault carrier sealed <= %d °C" % [
 			int(round(_hazards.ambient_temp_c)),
 			String.num(_hazards.heater_power_multiplier, 2),
@@ -117,14 +117,18 @@ func refresh_view() -> void:
 	)
 
 	# 5. CH07 Solar storm dosimeter & shelter run card
-	var storm_mode_str := "Untimed (Story / Family Mode — dose still shown)" if _hazards.is_shelter_run_untimed() else ("Timer: %s s" % String.num(_hazards.shelter_run_timer_s - _hazards.shelter_run_elapsed_s, 0))
+	var storm_mode_str := "Untimed (Story / Family Mode — dose still shown)" if _hazards.is_shelter_run_untimed() else ("Timer: %s s" % String.num(_hazards.shelter_run_time_remaining_s(), 0))
+	if _hazards.shelter_preparation_s > _hazards.shelter_run_elapsed_s:
+		storm_mode_str += " · Preparation: %s s before exposure" % String.num(_hazards.shelter_preparation_s - _hazards.shelter_run_elapsed_s, 0)
 	_add_card(
 		"Chapter 7 · Solar Storm Dosimeter & Shelter Run",
-		"Dosimeter outside dose: %s units (%s/min) · %s\nSafe Room Shelter: Level %d (Water 4 + Supplies 2) · 6-step storm dose: 0 (limit 3)" % [
+		"Dosimeter outside dose: %s units (%s/min) · %s\nSafe Room shield: %d of 6 · 6-step storm dose: %d (limit %d)" % [
 			String.num(_hazards.accumulated_outside_dose, 2),
 			String.num(_hazards.dosimeter_rate_units_per_min, 1),
 			storm_mode_str,
 			_hazards.storm_shelter_strength,
+			_hazards.storm_shelter_dose(),
+			_hazards.storm_exposure_limit,
 		],
 		"accent"
 	)

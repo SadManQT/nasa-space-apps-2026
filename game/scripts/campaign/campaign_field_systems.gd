@@ -130,13 +130,15 @@ func step(delta: float) -> void:
 		vehicle.in_shadow = _runtime._is_scene_in_cold_shadow()
 	if _runtime._ui_paused or _runtime.is_cutscene_active():
 		return
-	if _chapter == 4:
-		hazards.step_cold_shadow(_runtime._is_scene_in_cold_shadow(), delta / 60.0, rover.heater_upgrade)
+	if _chapter == 4 or _chapter == 8:
+		hazards.step_cold_shadow(_runtime._is_scene_in_cold_shadow(), delta / 60.0, rover.heater_upgrade, _chapter)
 	elif _chapter == 7:
 		var scene: String = _runtime.route.current_scene_id()
 		if scene >= "EX-CH07-S05" and scene <= "EX-CH07-S09":
-			var res: Dictionary = _runtime.director.snapshot().get("resources", {})
-			hazards.step_solar_storm_shelter_run(delta, _room_id == "LOC-04", int(res.get("W", 0)), int(res.get("K", 0)))
+			var snap: Dictionary = _runtime.director.snapshot()
+			var res: Dictionary = snap.get("resources", {})
+			var chosen: Array = snap.get("upgrades", {}).get("choices", {}).values()
+			hazards.step_solar_storm_shelter_run(delta, _room_id == "LOC-04", int(res.get("W", 0)), int(res.get("K", 0)), int(chosen.has("moon_dirt_shelter")), chosen.has("storm_early_warning"))
 
 func command(verb: String, payload: Dictionary) -> Dictionary:
 	if _runtime._player == null:
