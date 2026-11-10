@@ -12,6 +12,8 @@ signal panel_closed(panel_id: String)
 signal accessibility_changed(settings: Dictionary)
 signal ending_retry_requested
 signal ending_continue_requested
+## The Journal's Manual tab asks the HUD to open the Academy Manual.
+signal manual_requested
 
 const ScienceScript = preload("res://scripts/science/science_data.gd")
 const Explainers = preload("res://scripts/ui/science_explainers.gd")
@@ -123,6 +125,7 @@ const JOURNAL_TABS := [
 	{"id": "decisions", "label": "Decisions"},
 	{"id": "people", "label": "People"},
 	{"id": "science", "label": "Science"},
+	{"id": "manual", "label": "Manual"},
 ]
 const JOURNAL_PANEL_WIDTH := 1180.0
 const PANEL_WIDTH := 780.0
@@ -977,6 +980,18 @@ func _render_journal(value) -> void:
 			_render_people_tab(data)
 		"science":
 			_render_science_tab(data)
+		"manual":
+			_render_manual_tab()
+
+func _render_manual_tab() -> void:
+	_section("ACADEMY MANUAL")
+	_body.add_child(_card([
+		_label("One plain page for each of the twelve things a junior astronaut learns here: the clips, the real data card and your own decisions. There is no quiz.", 15, IVORY),
+	]))
+	var open_button := _button("Open the Academy Manual")
+	open_button.name = "OpenAcademyManual"
+	open_button.pressed.connect(func() -> void: manual_requested.emit())
+	_body.add_child(open_button)
 
 func _render_people_tab(data: Dictionary) -> void:
 	var people: Array = data.get("people", data.get("entries", [])) if data.get("people", data.get("entries", [])) is Array else []

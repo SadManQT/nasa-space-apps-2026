@@ -43,6 +43,8 @@ var _family_panel: Control
 var _family_backdrop: ColorRect
 var _family_focus: Control
 var _family_kind := ""
+## After the "What you learned" page closes, this chapter's upgrade choice opens.
+var _upgrade_after_learning := 0
 var _onboarding_queue: Array[String] = []
 
 # Goal card
@@ -156,6 +158,7 @@ func setup(value: Chapter1Campaign) -> void:
 	panels.set_command_sink(Callable(runtime, "handle_ui_command"))
 	panels.panel_opened.connect(_on_panel_opened)
 	panels.panel_closed.connect(_on_panel_closed)
+	panels.manual_requested.connect(func() -> void: open_family("manual"))
 	panels.ending_retry_requested.connect(func() -> void:
 		panels.close_panel()
 		runtime.retry_checkpoint())
@@ -180,7 +183,7 @@ func setup(value: Chapter1Campaign) -> void:
 			panels.close_panel()
 			_on_exit_pressed()},
 	]
-	for entry in [["cadet_record", "Cadet Record & Upgrades"], ["jobs", "Station Jobs"], ["discovery", "Discovery Log"], ["greenhouse", "Greenhouse"], ["coverage", "Coverage Map"], ["route_planner", "Rover Route Planner"], ["rover", "Rover Dashboard"], ["hazards", "Hazards Monitor"], ["field", "Field Equipment"], ["credits", "Credits"]]:
+	for entry in [["cadet_record", "Cadet Record & Upgrades"], ["manual", "Academy Manual"], ["jobs", "Station Jobs"], ["discovery", "Discovery Log"], ["greenhouse", "Greenhouse"], ["coverage", "Coverage Map"], ["route_planner", "Rover Route Planner"], ["rover", "Rover Dashboard"], ["hazards", "Hazards Monitor"], ["field", "Field Equipment"], ["credits", "Credits"]]:
 		var family_id: String = entry[0]
 		pause_actions.append({"label": entry[1], "name": "Open_" + family_id, "action": func(): open_family(family_id)})
 	panels.set_pause_actions(pause_actions)
@@ -1181,7 +1184,7 @@ func open_family(family_id: String) -> bool:
 		panels.open_panel("credits")
 		return true
 	var scripts := {"discovery": "res://scripts/ui/discovery_log_panel.gd", "greenhouse": "res://scripts/ui/greenhouse_panel.gd",
-		"cadet_record": "res://scripts/ui/cadet_record.gd", "jobs": "res://scripts/ui/jobs_board.gd",
+		"cadet_record": "res://scripts/ui/cadet_record.gd", "manual": "res://scripts/ui/academy_manual.gd", "jobs": "res://scripts/ui/jobs_board.gd",
 		"coverage": "res://scripts/network/coverage_map_panel.gd", "route_planner": "res://scripts/rover/rover_route_planner.gd",
 		"rover": "res://scripts/ui/rover_hud_panel.gd", "hazards": "res://scripts/hazards/hazard_hud.gd"}
 	if family_id != "field" and not scripts.has(family_id):
@@ -1238,6 +1241,17 @@ func open_family(family_id: String) -> bool:
 	elif family_id == "cadet_record":
 		panel.call("open_tab", "skills")
 		panel.connect("upgrade_chosen", func(_chapter, _option): close_family())
+	elif family_id == "manual":
+		panel.call("bind_snapshot", runtime.director.snapshot())
+		panel.call("set_accessibility", runtime.query().get("accessibility", {}))
+		panel.call("open_index")
+		panel.connect("data_card_requested", func(source_id: String) -> void:
+			close_family()
+			panels.open_panel("data_card", {"source_id": source_id}))
+		panel.connect("explainer_requested", func(explainer_id: String) -> void:
+			close_family()
+			panels.hint_player.set_settings(runtime.query().get("accessibility", {}))
+			panels.hint_player.watch(explainer_id))
 	elif family_id == "jobs":
 		panel.connect("job_started", func(_result): close_family())
 	elif family_id == "route_planner":
@@ -1256,6 +1270,17 @@ func open_family(family_id: String) -> bool:
 		if not button.disabled and button.is_visible_in_tree():
 			button.grab_focus()
 			break
+	return true
+
+## Chapter-end "What you learned" page; closing it opens that chapter's upgrade
+## choice when one is waiting.
+func open_chapter_learning(chapter: int, then_upgrade: int = 0) -> bool:
+	if not open_family("manual"):
+		return false
+	if not bool(_family_panel.call("open_chapter", chapter)):
+		close_family()
+		return false
+	_upgrade_after_learning = then_upgrade
 	return true
 
 func open_upgrade(chapter: int) -> bool:
@@ -1279,6 +1304,10 @@ func close_family() -> void:
 	else:
 		_last_result_button.grab_focus()
 	_family_focus = null
+	if _upgrade_after_learning > 0:
+		var chapter := _upgrade_after_learning
+		_upgrade_after_learning = 0
+		open_upgrade.call_deferred(chapter)
 
 func _field_action(verb: String, payload: Dictionary = {}) -> void:
 	var result: Dictionary = runtime.call("handle_field_command", {"verb": verb, "payload": payload})

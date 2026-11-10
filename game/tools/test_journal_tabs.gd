@@ -275,11 +275,11 @@ func _test_panel() -> void:
 	await process_frame
 	await process_frame
 	var tabs := panels._side.find_children("Tab_*", "Button", false, false)
-	_check(tabs.size() == 6 and tabs.all(func(tab): return tab.size.y >= 44.0 and tab.size.x >= 44.0), "six tab buttons at least 44 px tall")
+	_check(tabs.size() == 7 and tabs.all(func(tab): return tab.size.y >= 44.0 and tab.size.x >= 44.0), "seven tab buttons at least 44 px tall")
 	_check(root.gui_get_focus_owner() != null and root.gui_get_focus_owner().name == "Tab_now", "keyboard focus lands on the open tab")
 	_check(String(tabs[0].text).begins_with("› "), "the open tab carries a non-colour marker")
 	_check(root.get_visible_rect().encloses(panels._panel.get_global_rect()), "journal shell fits 1280x720")
-	_check(tabs[0].focus_neighbor_bottom == tabs[1].get_path() and tabs[4].focus_neighbor_bottom == tabs[5].get_path() and tabs[5].focus_neighbor_bottom == tabs[0].get_path(), "tab focus order runs Now → Evidence → Garden → Decisions → People → Science and wraps")
+	_check(tabs[0].focus_neighbor_bottom == tabs[1].get_path() and tabs[5].focus_neighbor_bottom == tabs[6].get_path() and tabs[6].focus_neighbor_bottom == tabs[0].get_path(), "tab focus order runs Now → Evidence → Garden → Decisions → People → Science → Manual and wraps")
 	var down := InputEventAction.new()
 	down.action = "ui_down"
 	down.pressed = true

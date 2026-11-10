@@ -260,11 +260,14 @@ func _scale() -> void:
 func _focus_first() -> void:
 	if not is_inside_tree() or not visible:
 		return
+	# Start at the top of every page. The index opens on Close so the first
+	# enabled row below the fold does not scroll the list away from its start.
 	var candidate := _body.find_child("ManualBack", true, false) as Button
 	if candidate == null:
-		candidate = _body.find_child("OpenCompetency_*", true, false) as Button
+		candidate = find_child("CloseAcademyManual", true, false) as Button
 	if candidate != null and not candidate.disabled:
 		candidate.grab_focus()
+	_scroll.scroll_vertical = 0
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not visible:

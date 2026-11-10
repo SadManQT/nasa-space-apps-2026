@@ -858,7 +858,10 @@ func advance_scene() -> Dictionary:
 	if hud != null:
 		hud.refresh_scene(result)
 		var pending := available_upgrade_chapter()
-		if (bool(result.get("chapter_complete", false)) or bool(result.get("upgrade_pending", false))) and pending > 0 and hud.has_method("open_upgrade"):
+		var learned_chapter := pending if pending > 0 else (8 if bool(result.get("campaign_complete", false)) else 0)
+		if bool(result.get("chapter_complete", false)) and learned_chapter > 0 and hud.has_method("open_chapter_learning") and hud.open_chapter_learning(learned_chapter, pending):
+			pass
+		elif (bool(result.get("chapter_complete", false)) or bool(result.get("upgrade_pending", false))) and pending > 0 and hud.has_method("open_upgrade"):
 			hud.open_upgrade(pending)
 	_save_campaign()
 	return result
