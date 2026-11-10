@@ -7210,9 +7210,15 @@
     }
    ],
    "integration_paths": [
+    "game/scripts/main.gd",
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-103*"
+   ],
+   "edit_files": [
+    "game/scripts/main.gd",
+    "game/scripts/missions/chapter1_route.gd",
+    "game/tools/test_class_session_bridge.gd"
    ]
   },
   {
@@ -7276,7 +7282,9 @@
     "game/scripts/missions/chapter2_gate_catalog.gd",
     "game/tools/test_chapter2_route.gd",
     "game/tools/test_campaign_interaction_input.gd",
-    "game/tools/test_chapter2_input_bridge.gd"
+    "game/tools/test_chapter2_input_bridge.gd",
+    "game/tools/test_p03_p04_content.gd",
+    "game/tools/test_extended_campaign_route.gd"
    ]
   },
   {
