@@ -307,11 +307,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 </div>
 <div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">3 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:0%"></i></div>
 <details open><summary>Working now (1)</summary><ul>
-<li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Atik/codex on 2026-11-10</div></li>
+<li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/codex on 2026-11-10</div></li>
 </ul></details>
 <details open><summary>Blocked (3)</summary><ul>
+<li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Explicit Sadman reviewed-change request published in5471e04 at resume_20261110/M1-53_REVIEW_REQUEST.md: exact raw blob, preserved8-clip batches, coalesced request/publication owne…</div></li>
 <li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Resumed source569e723 saves host-access recheck and starts all117 mandatory suites at frozen committed-source daa0141 in isolated APFS-cloned checkout. Full collection is still ru…</div></li>
-<li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">Native evidence saved through33e1593: failed300s first campaign attempt plus completed short M4/Metal probe, exit0 in84.126s, campaign max6607.878ms. No watchdog recovery or causa…</div></li>
 <li><a class="id" href="#M1-116">M1-116</a> Investigate post-result Forward+ exit timeout on Intel Arc laptop <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Collector and process-level tests saved inbd51096; final evidence published through33e1593. Recorded M4 Forward+/Metal real input44/0 with5PNG+trace, normal exit0 in9.225s. Origin…</div></li>
 </ul></details>
 <details><summary>Deferred: video, submission and manual QA (5)</summary><ul>
@@ -5175,7 +5175,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Rule out a threaded-loading deadlock at full-cast entry",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -5191,7 +5191,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Found 5 Nov during the round-3 rendered verification: one windowed run of game/tools/perf_probe.gd (--perf-probe, window on top) stopped right after the garden_rebuild transition, at the start of the full-cast stage: Godot idle (~2% CPU) with no progress for 17 minutes. The next run passed cleanly, so it is intermittent. Find whether the threaded preparation (ResourceLoader.load_threaded_request / WorkerThreadPool jobs in game/scripts/loading/, staged construction in campaign_room.gd and chapter1_campaign.gd) can wait forever: a job that never reports, a main-thread await on a status that never changes, a resource requested twice, or a deadlock with a mutex. Add a watchdog: any preparation step that exceeds a time limit logs its step and falls back to synchronous loading behind the loading card instead of hanging.\nAcceptance: run the windowed probe 10 times in a row (command in production/qa/perf_2026-11-04.md) with zero stalls; a test forces a stuck job and proves the fallback completes; run_tests.sh passes.",
-   "blocker": "Saved owned watchdog source072c9c7 and final evidence published through33e1593; current mandatory held-job/production recovery regression29/0. User explicitly leaves the raw AssetGeometry patch for Sadman. Unapplied/unverified review candidate retained with node-lifetime guard caveat; original saved branchf6285e4 preserved. Resume after reviewed raw request/publication recovery and held-raw tests, then ten full consecutive windowed probes and required integrated full gate. Original17-minute full-cast cause remains unassigned; native first-draw cost is separate M1-92. production/qa/perf/atik_batch_2026-11-10/M1-53.md and README.md.",
+   "blocker": "Explicit Sadman reviewed-change request published in5471e04 at resume_20261110/M1-53_REVIEW_REQUEST.md: exact raw blob, preserved8-clip batches, coalesced request/publication ownership, independent fallback and known freed-node guard issue. Current raw polling is still unbounded; no patch applied or reviewed delivery received. Original watchdog and saved candidate preserved. Held-raw tests and ten full consecutive windowed probes wait for the reviewed owner commit, then required full gate. No owner acceptance or task completion claimed.",
    "reserved_for": "atik",
    "effort": 2,
    "assignment_history": [
@@ -5215,11 +5215,6 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/qa/evidence/M1-53*",
     "production/qa/perf/",
     "game/tools/test_loading.gd.uid",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
-   ],
-   "edit_files": [
-    "production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-53_REVIEW_REQUEST.md",
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
@@ -7296,7 +7291,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "any",
    "title": "Profile and remove native first campaign draw hitch on M4",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -7331,6 +7326,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/AI_PROMPT_LOG.md"
    ],
    "blocker": "Native evidence saved through33e1593: failed300s first campaign attempt plus completed short M4/Metal probe, exit0 in84.126s, campaign max6607.878ms. No watchdog recovery or causal improvement established. The native title wait sample is unsymbolicated and not exact campaign correlation; xctrace unavailable on this CLT-only host. Matching native profiling, measured scoped first-draw fix, controlled before/after, loading screenshots and independent review remain required. Later team source preserved; no latest native or integrated full pass inferred. production/qa/perf/atik_batch_2026-11-10/M1-92.md.",
+   "edit_files": [
+    "production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-92_MATCHING_TOOLS.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
+   ],
    "batch_phase": "implementation"
   },
   {
