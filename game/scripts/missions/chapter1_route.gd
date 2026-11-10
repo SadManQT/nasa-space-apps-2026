@@ -5,6 +5,8 @@ const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const DispatcherScript = preload("res://scripts/interactions/interaction_dispatcher.gd")
 const WorldRouteScript = preload("res://scripts/world/world_route.gd")
 const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
+const RoomContractScript = preload("res://scripts/world/room_contract.gd")
+const CareRoundRuntimeScript = preload("res://scripts/campaign/care_round_runtime.gd")
 const P01Script = preload("res://scripts/missions/p01_commission_plant.gd")
 const PuzzleHostScript = preload("res://scripts/puzzles/puzzle_host.gd")
 const StateScript = preload("res://scripts/core/campaign_state.gd")
@@ -85,6 +87,7 @@ func p01_view(target_id: String) -> Dictionary:
 			view.merge({"accepted": true, "target_id": target_id, "action": target.puzzle_action, "scene_id": current_scene_id(), "missing_flags": missing, "prerequisite_reason": reason})
 			return view
 	return {"accepted": false, "reason": "This is not a P-01 target in the current scene."}
+
 
 ## The player's P-02 plan (P02MissionTable). The Mission Table UI edits it;
 ## P-02 gates commit exactly its plan.
@@ -565,6 +568,67 @@ func _commit_plant_care(individual_id: String, scene_id: String) -> void:
 		"payload": {"individual_id": individual_id, "care_id": "label", "scenario_datetime": String(query.get("scenario_datetime", "2046-04-25 00:00 UTC"))},
 	}
 	_director.commit(command)
+
+## M1-49: the Care Round visit spec for the current Chapter 1 scene (S04
+## "record_paired_conditions", S05 "care_montage"), for the scene layer to
+## open CareRoundPanel with (CareRoundRuntime.open_round). Moisture comes
+## from the P-01 calibrated probe; temperature has no authored source in the
+## repo, so the scene layer supplies the live chamber reading at open time
+## and this returns {} for it — never an invented value. Without both
+## readings the round is observe-only. {} when the scene has no visit.
+func care_round_visit(scene_id: String) -> Dictionary:
+	if scene_id != current_scene_id():
+		return {}
+	if RoomContractScript.care_round(scene_id).is_empty():
+		return {}
+	var p01: Dictionary = _p01.snapshot()
+	return {
+		"accepted": true,
+		"scene_id": scene_id,
+		"dates": CareRoundRuntimeScript.visit_dates(scene_id),
+		"care_round": RoomContractScript.care_round(scene_id),
+		"moisture": {"ALO-01": float(p01.get("moisture_alo", 0.0)), "TARA-01": float(p01.get("moisture_tara", 0.0))},
+		"temperature": {},
+		"care_options": CareRoundRuntimeScript.default_care_options(),
+	}
+
+## M1-49: true when the photo ledger holds a dated photo for both plants on
+## the visit date (the Care Round's dated evidence, before 25 Apr in CH01).
+func care_round_photographed(scene_id: String, date: String) -> bool:
+	var snapshot: Dictionary = _director.snapshot()
+	return CareRoundRuntimeScript.has_photo(snapshot, "ALO-01", date) and CareRoundRuntimeScript.has_photo(snapshot, "TARA-01", date)
+
+## M1-49: the S02 roll-call inventory lamp blink (doc 24 §2.9 CH01 S02->S03).
+## Returns the cue the scene layer fires with CampaignRoom.trigger_cue once
+## the roll call is complete in EX-CH01-S02; {} otherwise, and only once per
+## scene (the room refuses a second blink; this keeps the request single).
+func request_inventory_lamp_blink() -> Dictionary:
+	if current_scene_id() != "EX-CH01-S02" or not _flag_is_set("roll_call_complete"):
+		return {}
+	var flags: Dictionary = _scene_flags.get("EX-CH01-S02", {})
+	if bool(flags.get("inventory_lamp_requested", false)):
+		return {}
+	flags["inventory_lamp_requested"] = true
+	_scene_flags["EX-CH01-S02"] = flags
+	return {"cue_id": "inventory_lamp", "scene_id": "EX-CH01-S02", "sfx_id": "SFX_INVENTORY_LAMP_TICK"}
+
+## M1-49: the record_moment command that names the four commons mugs at the
+## end of EX-CH01-S12 (CH01-MUGS-NAMED). Only valid while S12 is current;
+## {} anywhere else. The moment never gates progress.
+func mugs_named_moment_command() -> Dictionary:
+	if current_scene_id() != "EX-CH01-S12":
+		return {}
+	var query: Dictionary = _director.query()
+	return {
+		"command_id": "moment:CH01-MUGS-NAMED",
+		"issuer": "chapter1_route",
+		"owning_mission_id": current_mission_id(),
+		"owning_scene_id": "EX-CH01-S12",
+		"expected_state_revision": int(query.get("state_revision", 0)),
+		"target_id": "CH01-MUGS-NAMED",
+		"verb": "record_moment",
+		"payload": {"moment_id": "CH01-MUGS-NAMED"},
+	}
 
 func _mark_flag(flag: String) -> void:
 	if flag.is_empty():

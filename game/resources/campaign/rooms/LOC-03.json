@@ -5929,6 +5929,55 @@
      "outline": 0
     }
    ]
+  },
+  {
+   "id": "ch01_nameplates_at_plants",
+   "from": "EX-CH01-S04",
+   "about": "M3-101 (doc 24 section 7.2, M3-99 PR_LabelHolder): Mei presses both names on in EX-CH01-S04, two empty circles filled. Each holder stays at its plant until its nameplate moves to the lineage board: Alo's is lifted onto the board in EX-CH03-S10, Tara's on 31 May in EX-CH03-S12.",
+   "props": [
+    {
+     "id": "alo_holder",
+     "path": "res://assets/props/narrative/PR_LabelHolder.glb",
+     "variant": "alo",
+     "position": [
+      2.4,
+      1.25,
+      2.18
+     ],
+     "rotation_degrees": [
+      90,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "until": "EX-CH03-S09"
+    },
+    {
+     "id": "tara_holder",
+     "path": "res://assets/props/narrative/PR_LabelHolder.glb",
+     "variant": "tara",
+     "position": [
+      -3.2,
+      1.18,
+      -0.88
+     ],
+     "rotation_degrees": [
+      90,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ],
+     "until": "EX-CH03-S11"
+    }
+   ]
   }
  ]
 }

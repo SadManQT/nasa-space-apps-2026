@@ -370,19 +370,20 @@ func _check_echoes() -> void:
 	commons.set_scene_context("EX-CH06-S06")
 	await process_frame
 	var staged := commons.visual_root.get_node(Staging.ROOT_NAME)
-	_check(not staged.has_node("ferreira_record") and not staged.has_node("n_holder_card"), "no echo objects without a recorded choice")
+	_check(not staged.has_node("ferreira_record") and _n_holder("EX-CH06-S06", {}).is_empty(), "no echo objects without a recorded choice")
 	commons.set_story_choices({"EX-CH05-S05-CHOICE": {"option_id": "EX-CH05-S05-OPT02"}, "EX-CH05-S11-CHOICE": {"option_id": "EX-CH05-S11-OPT02"}})
 	await process_frame
 	staged = commons.visual_root.get_node(Staging.ROOT_NAME)
 	_check(staged.has_node("ferreira_record") and String((staged.get_node("ferreira_record_title") as Label3D).text).begins_with("GREENHOUSE SERVICE NOTE"), "D9 'What came home?' leaves the greenhouse service note at Ferreira's place")
-	_check(staged.has_node("n_holder_card") and (staged.get_node("n_holder_text") as Label3D).text == "N.", "D10 'We kept a place for your work.' puts the N. holder at the table")
+	var holder := _n_holder("EX-CH06-S06", {"EX-CH05-S11-CHOICE": {"option_id": "EX-CH05-S11-OPT02"}})
+	_check(not holder.is_empty() and String(holder.get("variant", "")) == "n", "D10 'We kept a place for your work.' puts the N. holder at the table")
 	var mug := _bounds(commons, staged.get_node("commons_mug_5"))
 	var record := _bounds(commons, staged.get_node("ferreira_record"))
 	_check(record.has_point(Vector3(mug.get_center().x, record.get_center().y, mug.get_center().z)), "her mug stands on the record")
 	commons.set_story_choices({"EX-CH05-S05-CHOICE": {"option_id": "EX-CH05-S05-OPT01"}})
 	await process_frame
 	staged = commons.visual_root.get_node(Staging.ROOT_NAME)
-	_check(String((staged.get_node("ferreira_record_title") as Label3D).text).begins_with("ASCENT MANIFEST") and not staged.has_node("n_holder_card"), "D9 'Why did you wait?' leaves the ascent manifest; no holder without D10")
+	_check(String((staged.get_node("ferreira_record_title") as Label3D).text).begins_with("ASCENT MANIFEST") and _n_holder("EX-CH06-S06", {"EX-CH05-S05-CHOICE": {"option_id": "EX-CH05-S05-OPT01"}}).is_empty(), "D9 'Why did you wait?' leaves the ascent manifest; no holder without D10")
 	commons.free()
 	await process_frame
 	var amara := Crew.anchor_position("LOC-02", "amara", "EX-CH06-S10")
@@ -555,6 +556,16 @@ func _blank(image: Image) -> bool:
 func _ray(from: Vector3, to: Vector3) -> Dictionary:
 	var query := PhysicsRayQueryParameters3D.create(from, to, 1)
 	return root.get_world_3d().direct_space_state.intersect_ray(query)
+
+## M3-101: the D10 holder is the real M3-99 PR_LabelHolder "n" prop (a GLB),
+## so its presence is asserted at the data level: the staged layout either
+## carries the prop with variant "n" or it does not. The scene-level room
+## cannot load GLB props in the LFS-stub copy.
+func _n_holder(scene_id: String, choices: Dictionary) -> Dictionary:
+	for prop in Contract.staged_layout("LOC-01", scene_id, choices).props:
+		if String(prop.get("id", "")) == "n_holder":
+			return prop
+	return {}
 
 ## Visible mesh bounds of a node in room space (far LODs and hidden helpers skipped).
 func _bounds(room: CampaignRoom, node: Node) -> AABB:

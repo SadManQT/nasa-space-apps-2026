@@ -294,6 +294,16 @@ func _text(staged: Node, id: String) -> String:
 	var label := staged.get_node_or_null(id) as Label3D
 	return label.text if label != null and label.visible else ""
 
+## M3-101: the D10 holder is the real M3-99 PR_LabelHolder "n" prop (a GLB),
+## so its presence is asserted at the data level: the staged layout either
+## carries the prop with variant "n" or it does not. The scene-level room
+## cannot load GLB props in the LFS-stub copy.
+func _n_holder(scene_id: String, choices: Dictionary) -> Dictionary:
+	for prop in Contract.staged_layout("LOC-01", scene_id, choices).props:
+		if String(prop.get("id", "")) == "n_holder":
+			return prop
+	return {}
+
 func _practical_scale(room: CampaignRoom) -> float:
 	var practical := room.get_node("RoomLighting/Practical_0") as OmniLight3D
 	return practical.light_energy / float(practical.get_meta("base_energy", practical.light_energy))
@@ -495,15 +505,16 @@ func _check_echoes() -> void:
 	commons.set_story_choices({})
 	await process_frame
 	staged = commons.visual_root.get_node(Staging.ROOT_NAME)
-	_check(not staged.has_node("n_holder_card") and _text(staged, "composer_text").contains("HOW SHOULD THE INVITATION BEGIN?"), "before the choice the composer offers both openings and no holder waits")
+	_check(_n_holder("EX-CH05-S11", {}).is_empty() and _text(staged, "composer_text").contains("HOW SHOULD THE INVITATION BEGIN?"), "before the choice the composer offers both openings and no holder waits")
 	commons.set_story_choices({"EX-CH05-S11-CHOICE": {"option_id": "EX-CH05-S11-OPT01"}})
 	await process_frame
 	staged = commons.visual_root.get_node(Staging.ROOT_NAME)
-	_check(_text(staged, "composer_text").contains("WOULD YOU LIKE TO SEE WHAT GROWS NEXT?") and _text(staged, "composer_text").contains("DELIVERED ONCE") and not staged.has_node("n_holder_card"), "D10 OPT01: the chosen opening, delivered once, no reply yet; no holder")
+	_check(_text(staged, "composer_text").contains("WOULD YOU LIKE TO SEE WHAT GROWS NEXT?") and _text(staged, "composer_text").contains("DELIVERED ONCE") and _n_holder("EX-CH05-S11", {"EX-CH05-S11-CHOICE": {"option_id": "EX-CH05-S11-OPT01"}}).is_empty(), "D10 OPT01: the chosen opening, delivered once, no reply yet; no holder")
 	commons.set_story_choices({"EX-CH05-S11-CHOICE": {"option_id": "EX-CH05-S11-OPT02"}})
 	await process_frame
 	staged = commons.visual_root.get_node(Staging.ROOT_NAME)
-	_check(_text(staged, "composer_text").contains("WE KEPT A PLACE FOR YOUR WORK.") and _text(staged, "composer_text").contains("NO REPLY YET") and staged.has_node("n_holder_card"), "D10 OPT02: the seed-label holder marked N. sits at the table from S11")
+	var holder := _n_holder("EX-CH05-S11", {"EX-CH05-S11-CHOICE": {"option_id": "EX-CH05-S11-OPT02"}})
+	_check(_text(staged, "composer_text").contains("WE KEPT A PLACE FOR YOUR WORK.") and _text(staged, "composer_text").contains("NO REPLY YET") and not holder.is_empty() and String(holder.get("variant", "")) == "n", "D10 OPT02: the seed-label holder marked N. sits at the table from S11")
 	commons.free()
 	await process_frame
 

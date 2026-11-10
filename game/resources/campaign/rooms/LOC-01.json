@@ -933,7 +933,7 @@
     },
     {
      "id": "commons_mug_5",
-     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "path": "res://assets/props/narrative/PR_Mug_Named.glb",
      "rotation_degrees": [
       0,
       0,
@@ -950,11 +950,12 @@
       -0.6
      ],
      "from": "EX-CH05-S02",
-     "until": "EX-CH05-S05"
+     "until": "EX-CH05-S05",
+     "variant": "FERREIRA"
     },
     {
      "id": "commons_mug_5",
-     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "path": "res://assets/props/narrative/PR_Mug_Named.glb",
      "rotation_degrees": [
       0,
       0,
@@ -971,11 +972,12 @@
       -0.6
      ],
      "from": "EX-CH05-S11",
-     "until": "EX-CH07-S01"
+     "until": "EX-CH07-S01",
+     "variant": "FERREIRA"
     },
     {
      "id": "commons_mug_5",
-     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "path": "res://assets/props/narrative/PR_Mug_Named.glb",
      "position": [
       0.66,
       0.762,
@@ -992,11 +994,12 @@
       1
      ],
      "from": "EX-CH07-S02",
-     "until": "EX-CH07-S12"
+     "until": "EX-CH07-S12",
+     "variant": "FERREIRA"
     },
     {
      "id": "commons_mug_5",
-     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "path": "res://assets/props/narrative/PR_Mug_Named.glb",
      "position": [
       2.3,
       0.74,
@@ -1013,11 +1016,12 @@
       1
      ],
      "from": "EX-CH08-S01",
-     "until": "EX-CH08-S10"
+     "until": "EX-CH08-S10",
+     "variant": "FERREIRA"
     },
     {
      "id": "commons_mug_5",
-     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "path": "res://assets/props/narrative/PR_Mug_Named.glb",
      "position": [
       0.66,
       0.762,
@@ -1033,7 +1037,8 @@
       1,
       1
      ],
-     "from": "EX-CH08-S11"
+     "from": "EX-CH08-S11",
+     "variant": "FERREIRA"
     }
    ],
    "obstacles": [
@@ -1238,52 +1243,29 @@
     "choice_id": "EX-CH05-S11-CHOICE",
     "option_id": "EX-CH05-S11-OPT02"
    },
-   "about": "Doc 24 §5.2 D10: 'We kept a place for your work.' From EX-CH05-S11 (doc 24 5.2), a seed-label holder marked N. waits at the table until Noor speaks (EX-CH08-S10).",
-   "fixtures": [
+   "about": "Doc 24 section 5.2 D10: 'We kept a place for your work.' From EX-CH05-S11 (doc 24 5.2), a seed-label holder marked N. waits at the table until Noor speaks (EX-CH08-S10). M3-101: the real M3-99 PR_LabelHolder 'n' prop, not a fixture stand-in.",
+   "fixtures": [],
+   "signs": [],
+   "props": [
     {
-     "id": "n_holder_base",
+     "id": "n_holder",
+     "path": "res://assets/props/narrative/PR_LabelHolder.glb",
+     "variant": "n",
      "position": [
-      0.0,
-      0.7675,
+      0,
+      0.77,
       0.78
      ],
-     "size": [
-      0.09,
-      0.015,
-      0.035
+     "rotation_degrees": [
+      0,
+      0,
+      0
      ],
-     "color": "#1F2A44",
-     "transparent": false
-    },
-    {
-     "id": "n_holder_card",
-     "position": [
-      0.0,
-      0.8075,
-      0.775
-     ],
-     "size": [
-      0.08,
-      0.065,
-      0.004
-     ],
-     "color": "#ebe6d8",
-     "transparent": false,
-     "finish": "satin"
-    }
-   ],
-   "signs": [
-    {
-     "id": "n_holder_text",
-     "text": "N.",
-     "position": [
-      0.0,
-      0.8075,
-      0.7775
-     ],
-     "size": 0.0009,
-     "color": "#1b2433",
-     "outline": 0
+     "scale": [
+      1,
+      1,
+      1
+     ]
     }
    ]
   },
@@ -1388,7 +1370,7 @@
    "props": [
     {
      "id": "commons_mug_5",
-     "path": "res://assets/props/PR_Mug/PR_Mug.glb",
+     "path": "res://assets/props/narrative/PR_Mug_Named.glb",
      "rotation_degrees": [
       0,
       0,
@@ -1403,7 +1385,8 @@
       0.0,
       2.212,
       -0.55
-     ]
+     ],
+     "variant": "FERREIRA"
     }
    ],
    "review_views": {
@@ -7182,6 +7165,32 @@
      "wrap_m": 0.21,
      "pitch": -90,
      "text": "SENT IN DECEMBER, TO N.\nWE KEPT A PLACE FOR YOUR WORK."
+    }
+   ]
+  },
+  {
+   "id": "ch01_drawer_lid_note",
+   "from": "EX-CH01-S03",
+   "about": "M3-101 (doc 24 section 4 clue 2, M3-99 PR_DrawerLidNote): the pencil note under the dry-storage drawer lid, seen with the inspection camera in EX-CH01-S03. Mounted under the lid, writing side down.",
+   "props": [
+    {
+     "id": "drawer_lid_note",
+     "path": "res://assets/props/narrative/PR_DrawerLidNote.glb",
+     "position": [
+      -5,
+      1.38,
+      -4.8
+     ],
+     "rotation_degrees": [
+      180,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
     }
    ]
   }

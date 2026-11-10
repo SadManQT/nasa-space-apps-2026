@@ -226,6 +226,47 @@ static func story_echoes() -> Dictionary:
 		_story_echoes = _load_json(STORY_ECHOES_PATH)
 	return _story_echoes
 
+## True when one echo row fires for the recorded choices, moments and
+## completed scenes: a choice echo needs its option recorded in
+## story_log.choices, a moment echo needs its moment in story_log.moments,
+## and a scene-gated echo (D7) needs its required scene complete. A row with
+## no trigger never fires.
+static func _echo_fires(echo: Dictionary, choices: Dictionary, moments: Array, completed: Array) -> bool:
+	var moment_id := String(echo.get("moment_id", ""))
+	if not moment_id.is_empty():
+		return moments.has(moment_id)
+	var choice_id := String(echo.get("choice_id", ""))
+	if not choice_id.is_empty():
+		var recorded: Dictionary = choices.get(choice_id, {}) if choices.get(choice_id, {}) is Dictionary else {}
+		return String(recorded.get("option_id", "")) == String(echo.get("option_id", ""))
+	var required := String(echo.get("requires_completed_scene", ""))
+	if not required.is_empty():
+		return completed.has(required)
+	return false
+
+## Every echo row from the pack that fires in the given scene for this
+## snapshot: choice echoes whose option is recorded, moment echoes whose
+## moment is recorded, and scene-gated echoes (D7) whose required scene is
+## complete. Pure; tests may pass their own pack. It answers which echoes
+## would fire in that scene, not whether the player has reached it — the
+## journal's Decisions tab still applies _scene_allowed before showing one.
+static func echoes_for_scene(snapshot: Dictionary, scene_id: String, pack: Dictionary = {}) -> Array:
+	var data := pack if not pack.is_empty() else story_echoes()
+	var story_log: Dictionary = snapshot.get("story_log", {}) if snapshot.get("story_log", {}) is Dictionary else {}
+	var choices: Dictionary = story_log.get("choices", {}) if story_log.get("choices", {}) is Dictionary else {}
+	var moments: Array = story_log.get("moments", []) if story_log.get("moments", []) is Array else []
+	var completed: Array = snapshot.get("completed_scene_ids", []) if snapshot.get("completed_scene_ids", []) is Array else []
+	var out: Array = []
+	for raw in data.get("entries", []):
+		if not raw is Dictionary:
+			continue
+		var echo: Dictionary = raw
+		if String(echo.get("scene_id", "")) != scene_id:
+			continue
+		if _echo_fires(echo, choices, moments, completed):
+			out.append(echo.duplicate(true))
+	return out
+
 static func p02_table() -> Dictionary:
 	if _p02_table.is_empty():
 		_p02_table = _load_json(P02_TABLE_PATH)
@@ -744,7 +785,7 @@ static func _decisions_tab(ctx: Dictionary, shown: Array, chapter_pages: Array =
 		view["revision"] = int(recorded.get("state_revision", 0))
 		var echoes: Array = []
 		for echo in echo_table.get(choice_id, {}).get(option_id, []):
-			if echo is Dictionary and _scene_allowed(String(echo.get("scene_id", "")), ctx):
+			if echo is Dictionary and _echo_fires(echo, ctx.choices, ctx.moments, ctx.completed) and _scene_allowed(String(echo.get("scene_id", "")), ctx):
 				echoes.append({"id": String(echo.get("id", "")), "scene_id": String(echo.get("scene_id", "")), "scene_title": _scene_title(String(echo.get("scene_id", ""))), "text": String(echo.get("text", echo.get("body", "")))})
 		view["echoes"] = echoes
 	entries.sort_custom(func(a, b): return int(a.revision) < int(b.revision) if int(a.revision) != int(b.revision) else _oldest_first(a, b))

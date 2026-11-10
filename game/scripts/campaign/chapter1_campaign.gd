@@ -307,6 +307,20 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 				result[key] = result.result[key]
 	if bool(result.get("accepted", false)) and _room != null and _room.room_id == "LOC-08" and _room.garage() != null and target == _focus_node("garage_dock") and _room.garage().dock_state() == "SAFE TO OPEN":
 		route.world().set_boundary_state("garage_dock_hatch", {"airlock_ready": true, "open": true})
+	# M1-49: the S02 roll call blinks the inventory lamp once in the
+	# background (doc 24 §2.9 CH01 S02->S03); the room owns the single pulse
+	# and S03 opens on it. The tick plays through the audio director.
+	if bool(result.get("accepted", false)) and target_id == "roll_call" and route.current_scene_id() == "EX-CH01-S02" and route.has_method("request_inventory_lamp_blink"):
+		var blink: Dictionary = route.request_inventory_lamp_blink()
+		if not blink.is_empty() and _room != null:
+			var fired: Dictionary = _room.trigger_cue(String(blink.get("cue_id", "inventory_lamp")))
+			result["inventory_lamp_blink"] = fired
+			if bool(fired.get("accepted", false)) and audio != null:
+				audio.play_effect(String(fired.get("sfx_id", "SFX_INVENTORY_LAMP_TICK")))
+	# M1-49: the S04/S05 care targets hand the scene layer the Care Round
+	# visit (CareRoundRuntime.open_round opens the panel with it).
+	if bool(result.get("accepted", false)) and target_id in ["record_paired_conditions", "care_montage"] and route.has_method("care_round_visit"):
+		result["care_round"] = route.care_round_visit(route.current_scene_id())
 	var next_segment := _current_terrain_segment()
 	if bool(result.get("accepted", false)) and next_segment != prev_segment:
 		var cruise_card := _segment_cruise_card(prev_segment, next_segment)
@@ -678,11 +692,23 @@ func acknowledge_dialogue(line_id: String) -> Dictionary:
 func advance_scene() -> Dictionary:
 	if loading:
 		return {"accepted": false, "reason": "Preparing Aurora."}
+	# M1-49: at the end of EX-CH01-S12 the four mugs gain names
+	# (CH01-MUGS-NAMED). Recorded while S12 is still the current scene so
+	# the director accepts the moment; it never gates the advance.
+	var mugs_named: Dictionary = {}
+	if director != null and route != null and not is_chapter_complete() and route.current_scene_id() == "EX-CH01-S12" and route.has_method("mugs_named_moment_command"):
+		var moment: Dictionary = route.mugs_named_moment_command()
+		if not moment.is_empty():
+			mugs_named = director.commit(moment)
+			if not bool(mugs_named.get("accepted", false)):
+				push_warning("CH01-MUGS-NAMED was not recorded: " + String(mugs_named.get("reason", "unknown")))
 	var result: Dictionary
 	if is_chapter_complete():
 		result = _transition_after_chapter()
 	else:
 		result = route.advance_scene()
+	if not mugs_named.is_empty():
+		result["mugs_named"] = mugs_named
 	if bool(result.get("accepted", false)) and bool(result.get("chapter_complete", false)) and not bool(result.get("campaign_complete", false)):
 		_sync_route_projection()
 		result["next_chapter"] = _transition_after_chapter()

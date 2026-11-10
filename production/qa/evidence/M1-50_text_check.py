@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""M1-50 acceptance check for the Chapter 1 narrative text pack.
+"""M1-50 acceptance check for the Chapter 1 narrative text pack, extended by
+M3-95 for the Chapters 2-8 story-echo pack (doc 24 section 5.2, decisions
+D4-D13). The Chapter 1 journal checks are unchanged; the echo checks now also
+cover the D4-D13 rows, the dedication choice registered in campaign_state.gd
+(EX-CH03-S11-DEDICATION), the scene-gated D7 row (no choice; it fires when
+EX-CH04-S04 is complete) and the choice-less D8 decision (upgrade metadata,
+no scene echoes), and the same-scene D13 echo (chosen and shown in
+EX-CH08-S12, flagged same_scene).
 
 Run from the repository root:
     python3 -I production/qa/evidence/M1-50_text_check.py            # checks; prints every entry id
@@ -22,6 +29,7 @@ ECHOES = CONTENT / "story_echoes.json"
 STORY = ROOT / "full-game-story/story-data.json"
 CATALOG = CONTENT / "campaign_catalog.json"
 GATES = ROOT / "game/scripts/missions/chapter1_gate_catalog.gd"
+STATE = ROOT / "game/scripts/core/campaign_state.gd"
 REVIEW = ROOT / "production/qa/evidence/M1-50_text_for_review.md"
 
 # Doc 24 text the pack must carry word for word.
@@ -84,6 +92,13 @@ story_scenes = {s["id"]: s for c in story["chapters"] for s in c["scenes"]}
 catalog_scenes = {s["id"]: s for s in catalog["scenes"]}
 choice_options = {s["choice"]["id"]: {o["id"] for o in s["choice"]["options"]}
                   for s in catalog["scenes"] if isinstance(s.get("choice"), dict) and s["choice"].get("id")}
+# D6's dedication choice is not a catalog choice: it is registered in
+# campaign_state.gd EXTRA_STORY_CHOICE_OPTIONS (EX-CH03-S11-DEDICATION).
+state_source = STATE.read_text()
+extra_block = re.search(r"EXTRA_STORY_CHOICE_OPTIONS := \{(.*?)\n\}", state_source, re.S)
+if extra_block:
+    for m in re.finditer(r'"([^"]+)":\s*\[([^\]]*)\]', extra_block.group(1)):
+        choice_options[m.group(1)] = set(re.findall(r'"([^"]+)"', m.group(2)))
 gate_source = GATES.read_text()
 targets: dict[str, set] = {}
 current = ""
@@ -183,21 +198,34 @@ rows = echoes["entries"]
 row_ids = [r["id"] for r in rows]
 if len(row_ids) != len(set(row_ids)):
     fail("echoes: duplicate ids")
-if {d["id"] for d in echoes["decisions"]} != {"D1", "D2"}:
-    fail("echoes: decisions must be exactly D1 and D2")
+if {d["id"] for d in echoes["decisions"]} != {"D1", "D2", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12", "D13"}:
+    fail("echoes: decisions must be exactly D1, D2 and D4-D13 (D3 is the P-02 outcome, not a choice echo)")
 nested = [r for opts in echoes["choices"].values() for rs in opts.values() for r in rs] + \
-         [r for rs in echoes["moments"].values() for r in rs]
+         [r for rs in echoes["moments"].values() for r in rs] + \
+         [r for rs in echoes.get("scene_gated", {}).values() for r in rs]
 if sorted(json.dumps(r, sort_keys=True) for r in nested) != sorted(json.dumps(r, sort_keys=True) for r in rows):
-    fail("echoes: choices/moments maps and entries list differ")
+    fail("echoes: choices/moments/scene_gated maps and entries list differ")
 for d in echoes["decisions"]:
-    if d["choice_id"] not in choice_options:
-        fail(f"{d['id']}: unknown choice {d['choice_id']}")
-    for oid, opt in d["options"].items():
-        if oid not in choice_options.get(d["choice_id"], set()):
-            fail(f"{d['id']}: unknown option {oid}")
-        for echo_id in opt["echo_ids"]:
-            if echo_id not in row_ids:
-                fail(f"{d['id']}: echo {echo_id} not listed")
+    if d["choice_id"]:
+        if d["choice_id"] not in choice_options:
+            fail(f"{d['id']}: unknown choice {d['choice_id']}")
+        for oid, opt in d["options"].items():
+            if oid not in choice_options.get(d["choice_id"], set()):
+                fail(f"{d['id']}: unknown option {oid}")
+            for echo_id in opt["echo_ids"]:
+                if echo_id not in row_ids:
+                    fail(f"{d['id']}: echo {echo_id} not listed")
+    else:
+        # A decision with no choice (D7 beacons, D8 upgrade) has no options;
+        # its persistent state is the whole record, and any echo row for it
+        # must be gated on a completed scene instead of a recorded option.
+        if d["options"]:
+            fail(f"{d['id']}: choice-less decision must have no options")
+        if not d.get("persistent_state"):
+            fail(f"{d['id']}: choice-less decision needs persistent_state")
+        for r in rows:
+            if r["decision_id"] == d["id"] and not r.get("requires_completed_scene"):
+                fail(f"{d['id']}: echo {r['id']} has no choice and no required scene")
 for r in rows:
     if r["scene_id"] not in story_scenes:
         fail(f"{r['id']}: scene_id {r['scene_id']} not in story-data.json")
@@ -205,7 +233,15 @@ for r in rows:
         fail(f"{r['id']}: kind {r['kind']}")
     if r["choice_id"] and r["option_id"] not in choice_options.get(r["choice_id"], set()):
         fail(f"{r['id']}: unknown option {r['option_id']}")
-    if list(story_scenes).index(r["scene_id"]) <= list(story_scenes).index(r["source_scene_id"]):
+    required = r.get("requires_completed_scene", "")
+    if required and required not in story_scenes:
+        fail(f"{r['id']}: requires_completed_scene {required} not in story-data.json")
+    if not r["choice_id"] and not r.get("moment_id") and not required:
+        fail(f"{r['id']}: no choice, moment or required scene to fire on")
+    if r.get("same_scene"):
+        if r["scene_id"] != r["source_scene_id"]:
+            fail(f"{r['id']}: same_scene set but echo is not in its source scene")
+    elif list(story_scenes).index(r["scene_id"]) <= list(story_scenes).index(r["source_scene_id"]):
         fail(f"{r['id']}: echo is not after its source scene")
     for text in (r["text"], r.get("body", ""), r.get("title", "")):
         for word in BANNED + ["NASA"]:
@@ -280,7 +316,9 @@ if "--review" in sys.argv:
     lines += ["## Drawer-lid inscription (pencil, inside the lid)", "", f"> {journal['drawer_lid_note']['inscription']}", ""]
     lines += [f"## Story echoes ({len(rows)})", ""]
     for r in rows:
-        lines.append(f"- **{r['title']}** ({r.get('choice_id') or r.get('moment_id')} {r.get('option_id', '')} → {r['scene_id']}, {r['kind']}) — {r['text']}")
+        trigger = r.get('choice_id') or r.get('moment_id') or (
+            "after " + r['requires_completed_scene'] if r.get('requires_completed_scene') else "")
+        lines.append(f"- **{r['title']}** ({trigger} {r.get('option_id', '')} → {r['scene_id']}, {r['kind']}) — {r['text']}")
     REVIEW.write_text("\n".join(lines) + "\n")
     print(f"wrote {REVIEW.relative_to(ROOT)}")
 

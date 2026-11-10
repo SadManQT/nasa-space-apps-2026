@@ -2393,6 +2393,142 @@
     "p16_confirm_five_at_aurora": "garage_departure_boards",
     "p16_update_occupancy": "base_handover"
    }
+  },
+  {
+   "id": "ch08_d7_beacon_layer",
+   "from": "EX-CH08-S02",
+   "until": "EX-CH08-S02",
+   "about": "Doc 24 section 5.2 D7: the October ridge beacons drawn as a faint older layer on the garage route board, above the CH04 route cards. No choice gate: reaching EX-CH08-S02 means P-07 was completed in EX-CH04-S04, so the beacons are there for every player; the journal echo is gated on the completed scene instead.",
+   "fixtures": [
+    {
+     "id": "october_beacon_1",
+     "position": [
+      -1.9,
+      1.15,
+      -4.444
+     ],
+     "size": [
+      0.05,
+      0.05,
+      0.004
+     ],
+     "color": "#b8a86a",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "october_beacon_2",
+     "position": [
+      -1.5,
+      1.15,
+      -4.444
+     ],
+     "size": [
+      0.05,
+      0.05,
+      0.004
+     ],
+     "color": "#b8a86a",
+     "transparent": false,
+     "finish": "satin"
+    },
+    {
+     "id": "october_beacon_3",
+     "position": [
+      -1.1,
+      1.15,
+      -4.444
+     ],
+     "size": [
+      0.05,
+      0.05,
+      0.004
+     ],
+     "color": "#b8a86a",
+     "transparent": false,
+     "finish": "satin"
+    }
+   ],
+   "signs": [
+    {
+     "id": "october_beacons_text",
+     "text": "OCTOBER BEACONS - FIRST LAYER\nRIDGE MOUNTS FROM P-07",
+     "position": [
+      -1.5,
+      1.28,
+      -4.444
+     ],
+     "size": 0.0005,
+     "color": "#8a7d5a",
+     "outline": 0
+    }
+   ]
+  },
+  {
+   "id": "ch08_d11_rafi_clip",
+   "from": "EX-CH08-S01",
+   "until": "EX-CH08-S01",
+   "choice": {
+    "choice_id": "EX-CH06-S01-CHOICE",
+    "option_id": "EX-CH06-S01-OPT01"
+   },
+   "about": "Doc 24 section 5.2 D11: when the player chose Rafi in EX-CH06-S01, Rafi stands beside Kai and clips the hand light to his suit inside the cabin before the road; Kai carries the light on his hip from here on.",
+   "anchors": {
+    "rover_rafi": [
+     -0.35,
+     0,
+     -1.55
+    ]
+   },
+   "carried": {
+    "kai": {
+     "path": "res://assets/props/PR_HandLight/PR_HandLight.glb",
+     "bone": "mixamorig_Hips",
+     "position": [
+      -0.17,
+      0.93,
+      -0.04
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      90
+     ]
+    }
+   }
+  },
+  {
+   "id": "ch08_d11_amara_clip",
+   "from": "EX-CH08-S01",
+   "until": "EX-CH08-S01",
+   "choice": {
+    "choice_id": "EX-CH06-S01-CHOICE",
+    "option_id": "EX-CH06-S01-OPT02"
+   },
+   "about": "Doc 24 section 5.2 D11: when the player chose Amara in EX-CH06-S01, Amara stands beside Kai at the airlock side and clips the hand light to his suit before he boards; Kai carries the light on his hip from here on.",
+   "anchors": {
+    "rover_amara": [
+     -1.65,
+     0,
+     -1.55
+    ]
+   },
+   "carried": {
+    "kai": {
+     "path": "res://assets/props/PR_HandLight/PR_HandLight.glb",
+     "bone": "mixamorig_Hips",
+     "position": [
+      -0.17,
+      0.93,
+      -0.04
+     ],
+     "rotation_degrees": [
+      0,
+      0,
+      90
+     ]
+    }
+   }
   }
  ]
 }
