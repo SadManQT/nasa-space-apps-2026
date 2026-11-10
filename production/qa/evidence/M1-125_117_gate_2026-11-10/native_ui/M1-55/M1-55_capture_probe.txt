@@ -1,0 +1,105 @@
+ok   opening probe transfer before calibration
+ok   fresh guide opens
+ok   table guide is exposed after first-use teaching closes
+ok   guide1_air initial viewport shows teaching without manual scroll
+ok   guide1_air frame and footer fit
+guide1_air frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] footer=[P: (255.0, 642.0), S: (87.0, 44.0)] focus=Choice_1_air_production_0:<Button#1317648992105>
+screenshot M1-55_guide1_air.png (saved)
+ok   guide2_light initial viewport shows teaching without manual scroll
+ok   guide2_light frame and footer fit
+guide2_light frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] footer=[P: (255.0, 642.0), S: (87.0, 44.0)] focus=Choice_1_light_OFF:<Button#1381301749741>
+screenshot M1-55_guide2_light.png (saved)
+ok   guide3_try initial viewport shows teaching without manual scroll
+ok   guide3_try frame and footer fit
+guide3_try frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] footer=[P: (255.0, 642.0), S: (87.0, 44.0)] focus=Choice_1_light_FULL:<Button#1442253375800>
+screenshot M1-55_guide3_try.png (saved)
+ok   fresh real forecast Battery15 Air7 overflow2
+screenshot M1-55_shift1_forecast.png (saved)
+ok   fresh guide opens
+ok   table guide is exposed after first-use teaching closes
+ok   guide1_air_150 initial viewport shows teaching without manual scroll
+ok   guide1_air_150 frame and footer fit
+guide1_air_150 frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] footer=[P: (339.0, 638.0), S: (121.0, 48.0)] focus=Choice_1_air_production_0:<Button#1660726284991>
+screenshot M1-55_guide1_air_150.png (saved)
+ok   guide2_light_150 initial viewport shows teaching without manual scroll
+ok   guide2_light_150 frame and footer fit
+guide2_light_150 frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] footer=[P: (339.0, 638.0), S: (121.0, 48.0)] focus=Choice_1_light_OFF:<Button#1718876115966>
+screenshot M1-55_guide2_light_150.png (saved)
+ok   guide3_try_150 initial viewport shows teaching without manual scroll
+ok   guide3_try_150 frame and footer fit
+guide3_try_150 frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] footer=[P: (339.0, 638.0), S: (121.0, 48.0)] focus=Choice_1_light_FULL:<Button#1779542528781>
+screenshot M1-55_guide3_try_150.png (saved)
+ok   fresh real forecast Battery15 Air7 overflow2
+screenshot M1-55_shift1_forecast_150.png (saved)
+ok   approved cast portrait rendered for kai
+screenshot M1-55_crew_portrait_more.png (saved)
+screenshot M1-55_more_plan_a.png (saved)
+screenshot M1-55_shift1_confirm.png (saved)
+ok   the confirmed shift 1 commits exactly its preview
+ok   the HUD opens the alarm response
+screenshot M1-55_shift5_wait_forecast.png (saved)
+screenshot M1-55_shift5_pump_forecast.png (saved)
+screenshot M1-55_shift5_stack_task.png (saved)
+ok   shift5 task normal frame and footer fit
+shift5 task normal frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] footer=[P: (255.0, 642.0), S: (87.0, 44.0)] focus=Preview:<Button#3870805726015>
+screenshot M1-55_shift5_stack_task_150.png (saved)
+ok   shift5 task 150 frame and footer fit
+shift5 task 150 frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] footer=[P: (339.0, 638.0), S: (121.0, 48.0)] focus=Preview:<Button#3966536521006>
+ok   approved cast portrait rendered for rafi
+screenshot M1-55_crew_rafi_portrait.png (saved)
+ok   approved cast portrait rendered for mei
+screenshot M1-55_crew_mei_portrait.png (saved)
+screenshot M1-55_shift5_stack_preview.png (saved)
+ok   the table reopens at 150% text
+screenshot M1-55_shift5_150.png (saved)
+ok   shift5 150 frame and footer fit
+shift5 150 frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] footer=[P: (339.0, 638.0), S: (121.0, 48.0)] focus=Commit:<Button#4529613441300>
+screenshot M1-55_shift5_confirmation_150.png (saved)
+large text: viewport [P: (0.0, 0.0), S: (1280.0, 720.0)], frame [P: (12.0, 12.0), S: (1256.0, 696.0)], commit [P: (38.0, 34.0), S: (217.0, 48.0)]
+ok   the table and Commit stay on screen at 150% text
+ok   a complete STACK commits K2
+screenshot M1-55_shifts6_7_golden_projection.png (saved)
+screenshot M1-55_shifts6_7_confirm.png (saved)
+ok   the Golden plan earns GOLDEN BLOOM in the real campaign
+screenshot M1-55_ending_outcome.png (saved)
+ok   opening probe transfer before calibration
+screenshot M1-55_failing_forecast.png (saved)
+screenshot M1-55_failing_confirmation.png (saved)
+screenshot M1-55_failed_report.png (saved)
+ok   actual failed lock-in explains cause
+ok   actual failed-plan toast is visible after report close
+screenshot M1-55_failed_actual_toast.png (saved)
+screenshot M1-55_failed_last_result.png (saved)
+ok   trainer day_choices frame fits
+ok   trainer day_choices essential action fits
+ok   refreshed trainer day_choices
+trainer day_choices frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] action=[P: (255.0, 642.0), S: (87.0, 44.0)]
+ok   trainer real forecast and confirmation gate 0
+ok   trainer real lock-in gate 0
+ok   trainer dark_choices frame fits
+ok   trainer dark_choices essential action fits
+ok   refreshed trainer dark_choices
+trainer dark_choices frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] action=[P: (255.0, 642.0), S: (87.0, 44.0)]
+ok   trainer real forecast and confirmation gate 1
+ok   trainer real lock-in gate 1
+ok   trainer real forecast and confirmation gate 2
+ok   trainer real lock-in gate 2
+ok   trainer alarm_task frame fits
+ok   trainer alarm_task essential action fits
+ok   refreshed trainer alarm_task
+trainer alarm_task frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] action=[P: (255.0, 642.0), S: (87.0, 44.0)]
+ok   trainer real forecast and confirmation gate 3
+ok   trainer alarm_confirmation frame fits
+ok   trainer alarm_confirmation essential action fits
+ok   refreshed trainer alarm_confirmation
+trainer alarm_confirmation frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] action=[P: (129.0, 642.0), S: (123.0, 44.0)]
+ok   trainer real lock-in gate 3
+ok   trainer real forecast and confirmation gate 4
+ok   trainer real lock-in gate 4
+ok   trainer actual Retry reopens shared table
+ok   trainer retry_150 frame fits
+ok   trainer retry_150 essential action fits
+ok   refreshed trainer retry_150
+trainer retry_150 frame=[P: (12.0, 12.0), S: (1256.0, 696.0)] action=[P: (339.0, 638.0), S: (121.0, 48.0)]
+ok   title background preparation completes before teardown
+RESULT PASS (0 failures)

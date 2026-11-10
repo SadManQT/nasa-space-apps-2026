@@ -39,6 +39,9 @@ func _run() -> void:
 		campaign.route.mission_table().restore(fresh)
 		_set_large_text(large)
 		_expect(campaign.hud.open_mission_table("p02_shift1"), "fresh guide opens")
+		# The first-use How To has separate captures; dismiss it before table input.
+		campaign.hud.panels.hint_player.close()
+		_expect(not campaign.hud.panels.hint_player.is_open() and table.is_open(), "table guide is exposed after first-use teaching closes")
 		var suffix := "_150" if large else ""
 		await _guide_capture("guide1_air" + suffix, "GuideStep1")
 		table.choose(1, "air_production", 2)
@@ -161,6 +164,8 @@ func _goto(scene_id: String) -> void:
 		var current: String = campaign.route.current_scene_id()
 		var ids: Array = ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"] if current == "EX-CH01-S03" else GateCatalog.targets_for_scene(current).map(func(spec): return String(spec.target_id))
 		for target_id in ids:
+			if target_id == "calibrate_probe":
+				_expect(bool(PlantInput.complete_probe_transfer(campaign.route).get("accepted", false)), "opening probe transfer before calibration")
 			if TableScript.is_gate(target_id) and current == "EX-CH01-S10":
 				var alarm: Dictionary = campaign.route.mission_table().alarm_state()
 				if String(alarm.state) == "idle" and String(alarm.action) in ["PUMP", "STACK"]:
