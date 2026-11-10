@@ -119,7 +119,8 @@ class BatchBoardTests(unittest.TestCase):
     def test_actual_batch_matches_the_users_exact_assignments(self):
         expected = {
             'ramim': {'M3-61','M3-64','M3-62','M3-63','M3-65','M3-4P','M3-4U','M3-4M',
-                      'M3-6P','M3-6U','M3-6M','M3-8P','M3-8U','M3-8M','M1-18','M1-31','M3-67','M3-72','M3-90','M3-91'},
+                      'M3-6P','M3-6U','M3-6M','M3-8P','M3-8U','M3-8M','M1-18','M1-31','M3-67','M3-72','M3-90','M3-91',
+                      'M1-125'},  # Subsequent user-authorized integrated 117-suite repair.
             'sadman': {'M3-5P','M3-5U','M3-5M','M3-7P','M3-7U','M3-7M','M1-49','M3-95','M3-101','M1-108','M4-16'},
             'asif': {'M1-105','M3-2P','M3-2U','M3-2M','M1-103','M1-37','M3-3P','M3-3U','M3-3M','M3-69'},
             'atik': {'M1-68','M1-92','M1-53','M1-116'},

@@ -1,0 +1,54 @@
+{
+  "command": [
+    "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64_console.exe",
+    "--path",
+    "game",
+    "--rendering-method",
+    "gl_compatibility",
+    "--resolution",
+    "1280x720",
+    "--script",
+    "res://tools/test_garden_movement.gd",
+    "--",
+    "--capture"
+  ],
+  "pid": 20716,
+  "start_utc_epoch": 1794309581.9773557,
+  "duration_seconds": 128.19,
+  "timed_out": false,
+  "termination": {
+    "needed": false
+  },
+  "raw_exit_code": 1,
+  "unsigned_exit_hex": "0x1",
+  "effective_exit_code": 1,
+  "log_sha256": "2233d55c7a206dac8297c8f1174ea03bf06fb704b63ad61a85125fd1c6151b7e",
+  "test_log_dir": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-pilot-20261110/production/qa/evidence/M1-123/current_pilot_20261110/verification/native/capture",
+  "isolated_env": {
+    "APPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-pilot-20261110/.codex/task-tmp/m123-pilot-verify-20261110/native/roaming",
+    "LOCALAPPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-pilot-20261110/.codex/task-tmp/m123-pilot-verify-20261110/native/local",
+    "TEMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-pilot-20261110/.codex/task-tmp/m123-pilot-verify-20261110/native/tmp",
+    "TMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-pilot-20261110/.codex/task-tmp/m123-pilot-verify-20261110/native/tmp"
+  },
+  "script_error_lines": [],
+  "generic_error_lines": [],
+  "generic_error_count": 0,
+  "warning_count": 1,
+  "last_printed_reimport": null,
+  "suite_summary": [],
+  "setup_failure": false,
+  "native_crash_signature": false,
+  "audited_logs": [
+    {
+      "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\evidence\\M1-123\\current_pilot_20261110\\verification\\native\\native.txt",
+      "sha256": "2233d55c7a206dac8297c8f1174ea03bf06fb704b63ad61a85125fd1c6151b7e",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 1,
+      "last_printed_reimport": null,
+      "suite_summary": [],
+      "setup_failure": false,
+      "native_crash_signature": false
+    }
+  ]
+}

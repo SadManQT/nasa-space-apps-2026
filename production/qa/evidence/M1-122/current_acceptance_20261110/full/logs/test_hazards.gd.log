@@ -1,0 +1,22 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  ok CH03 moonquake warns before tremor and includes aftershock alert
+  ok CH03 quake tremor identifies 3 loose equipment items to secure
+  ok CH03 quake reproduces P-05 100/74/100 pressure witness
+  ok securing all 3 items stabilizes the room before aftershock
+  ok CH04 cold shadow warns before entering permanent shadow
+  ok CH04 shadow increases heater draw to 1.8x and keeps equipment above -65 C limit
+  ok rover_lights_heater upgrade reduces cold-shadow heater cost
+  ok CH05 meteoroid stream warns before observation window
+  ok P-10 identifies 6 genuine flashes and 2 artifacts but requires panel dust and Whipple maintenance
+  ok P-10 accepts once panel dust is cleared and Whipple spur is patched
+  ok dust_shield and whipple_bumper upgrades satisfy CH05 maintenance automatically
+  ok CH06 eclipse darkness warns before ingress
+  ok keeping decorative floods spends 10 and breaches the 7-unit eclipse allocation
+  ok P-11 5 essentials + 1 pump + 1 camera spends 7 of 14 and keeps 7 reserve
+  ok CH07 solar storm warns before proton arrival
+  ok outside shelter accumulates dose on dosimeter and counts down timer in Expedition mode
+  ok W4 + K2 = Shelter 6 gives 0 dose across all 6 P-14 storm steps
+  ok Family/Story mode shelter run is untimed while still showing accumulated dose on the dosimeter
+  ok HazardHudPanel contains no banned developer tokens
+HAZARDS RESULT: PASS (19 checks, 0 failures)

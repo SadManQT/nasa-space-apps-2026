@@ -1,0 +1,7 @@
+FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (615 checks, 5 failures)
+       FAIL production title main-thread interval <50 ms (52.109)
+       FAIL production new campaign main-thread interval <50 ms (80.204)
+       FAIL production garden entry main-thread interval <50 ms (64.977)
+       FAIL production full cast entry main-thread interval <50 ms (59.503)
+       FAIL production terrain exterior entry main-thread interval <50 ms (56.240)
+0/1 suites passed

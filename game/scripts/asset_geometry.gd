@@ -15,18 +15,25 @@ static var pinned: Array[String] = []
 static var _image_extension: GLTFDocumentExtension
 static var _raw_loader: ResourceFormatLoader
 static var _requests: Dictionary = {}
+# One owner per raw path from threaded request to PackedScene publication.
+# Overlapping callers share its {done, success, recovering} record.
+static var _preparing: Dictionary = {}
 
 static func request(path: String) -> Error:
 	if is_prepared(path) or _requests.has(path):
 		return OK
 	if not FileAccess.file_exists(path):
 		return ERR_FILE_NOT_FOUND
+	var key := path + ".lla_gltf"
+	# After a recovery no pool work is scheduled, and a quarantined request
+	# that has not finished is never joined again.
+	if PreparationWatchdog.synchronous or PreparationWatchdog.resource_is_retired(key):
+		return ERR_UNAVAILABLE
 	if _raw_loader == null:
 		_image_extension = preload("res://scripts/loading/raw_gltf_images.gd").new()
 		GLTFDocument.register_gltf_document_extension(_image_extension, true)
 		_raw_loader = preload("res://scripts/loading/raw_gltf_loader.gd").new()
 		ResourceLoader.add_resource_format_loader(_raw_loader, true)
-	var key := path + ".lla_gltf"
 	var error := ResourceLoader.load_threaded_request(key, "GLTFState", false, ResourceLoader.CACHE_MODE_IGNORE)
 	if error == OK:
 		_requests[path] = key
@@ -35,18 +42,78 @@ static func request(path: String) -> Error:
 static func is_prepared(path: String) -> bool:
 	return _scenes.has(path) and _scenes[path].modified == FileAccess.get_modified_time(path)
 
+## Bounded by PreparationWatchdog: a raw job that never reports is recovered
+## behind the loading card by an independent decode, and its late result is
+## reaped by the watchdog without ever being published.
 static func prepare(path: String, tree: SceneTree) -> bool:
 	if is_prepared(path):
 		return true
-	if request(path) != OK:
+	if _preparing.has(path):
+		var shared: Dictionary = _preparing[path]
+		if not await PreparationWatchdog.wait_until(tree, "geometry_queue:" + path, func(): return shared.done):
+			return await _recover(path, tree, shared)
+		return shared.success
+	var pending := {"done": false, "success": false, "recovering": false}
+	_preparing[path] = pending
+	var success := await _prepare_threaded(path, tree, pending)
+	if not pending.done:
+		_finish(path, pending, success)
+	return pending.success
+
+## Takes ownership from a stalled or half-published threaded load. The first
+## caller decodes; every other caller, including the old owner, shares it.
+static func _recover(path: String, tree: SceneTree, pending: Dictionary) -> bool:
+	if pending.recovering:
+		# The recovery is main-thread work behind the card; it cannot stall.
+		while not pending.done:
+			await tree.process_frame
+		return pending.success
+	pending.recovering = true
+	if _requests.has(path):
+		PreparationWatchdog.retire_resource(tree, _requests[path])
+		_requests.erase(path)
+	var success: bool = await PreparationWatchdog.fallback(tree, _prepare_sync.bind(path))
+	_finish(path, pending, success)
+	return success
+
+static func _finish(path: String, pending: Dictionary, success: bool) -> void:
+	pending.success = success
+	pending.done = true
+	# Never clear a newer owner's entry for the same path.
+	if is_same(_preparing.get(path), pending):
+		_preparing.erase(path)
+
+## Direct GLTFDocument decode: never joins the virtual .lla_gltf request.
+static func _prepare_sync(path: String) -> bool:
+	var instance := load_glb(path)
+	if instance == null:
+		return false
+	instance.free()
+	return is_prepared(path)
+
+## True when recovery took ownership while this coroutine yielded. The old
+## owner drops its half-built nodes and must not publish. `node` is untyped
+## because it may be null or already freed.
+static func _superseded(pending: Dictionary, node) -> bool:
+	if pending.recovering and is_instance_valid(node):
+		node.free()
+	return pending.recovering
+
+static func _prepare_threaded(path: String, tree: SceneTree, pending: Dictionary) -> bool:
+	var requested := request(path)
+	if requested == ERR_UNAVAILABLE:
+		return await _recover(path, tree, pending)
+	if requested != OK:
 		return false
 	var key: String = _requests[path]
-	while ResourceLoader.load_threaded_get_status(key) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-		await tree.process_frame
-	if ResourceLoader.load_threaded_get_status(key) != ResourceLoader.THREAD_LOAD_LOADED:
-		_requests.erase(path)
-		return false
-	var state := ResourceLoader.load_threaded_get(key) as GLTFState
+	var reported := await PreparationWatchdog.wait_until(tree, "raw_decode:" + path, func():
+		return pending.recovering or ResourceLoader.load_threaded_get_status(key) != ResourceLoader.THREAD_LOAD_IN_PROGRESS)
+	if pending.recovering or not reported:
+		return await _recover(path, tree, pending)
+	var status := ResourceLoader.load_threaded_get_status(key)
+	var state: GLTFState = null
+	if status == ResourceLoader.THREAD_LOAD_LOADED or status == ResourceLoader.THREAD_LOAD_FAILED:
+		state = ResourceLoader.load_threaded_get(key) as GLTFState
 	_requests.erase(path)
 	if state == null:
 		return false
@@ -55,6 +122,8 @@ static func prepare(path: String, tree: SceneTree) -> bool:
 		LoadTrace.steps.append({"step": "worker_mipmaps:" + path, "ms": state.get_meta("mipmaps_ms")})
 	# Node creation and packing always stay on the main thread.
 	await tree.process_frame
+	if _superseded(pending, null):
+		return await _recover(path, tree, pending)
 	var document := state.get_meta("raw_document") as GLTFDocument
 	var all_anims: Array[GLTFAnimation] = state.get_animations().duplicate()
 	var root: Node3D = null
@@ -83,6 +152,8 @@ static func prepare(path: String, tree: SceneTree) -> bool:
 		var offset := 0
 		while offset < all_anims.size():
 			await tree.process_frame
+			if _superseded(pending, root):
+				return await _recover(path, tree, pending)
 			var batch_stamp := Time.get_ticks_usec()
 			state.set_unique_names([])
 			state.set_unique_animation_names([])
@@ -110,16 +181,23 @@ static func prepare(path: String, tree: SceneTree) -> bool:
 		if LoadTrace.enabled:
 			LoadTrace.steps.append({"step": "glb_generate_scene:" + path, "ms": max_step_ms})
 	await tree.process_frame
+	if _superseded(pending, root):
+		return await _recover(path, tree, pending)
 	var stamp := LoadTrace.begin()
 	var scene := PackedScene.new()
 	var error := scene.pack(root)
 	LoadTrace.end("glb_pack:" + path, stamp)
 	await tree.process_frame
+	if _superseded(pending, root):
+		return await _recover(path, tree, pending)
 	root.free()
+	root = null
 	if error != OK:
 		return false
 	_remember(path, scene)
 	await tree.process_frame
+	if pending.recovering:
+		return await _recover(path, tree, pending)
 	return true
 
 static func _remember(path: String, scene: PackedScene) -> void:

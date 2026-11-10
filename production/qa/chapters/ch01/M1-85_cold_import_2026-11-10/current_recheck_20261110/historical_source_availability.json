@@ -1,0 +1,17 @@
+[
+  {
+    "revision": "046662cf278bd8b30ac5cbdcbbbafc08f00c61aa",
+    "game_object_available": false,
+    "exit_code": 128
+  },
+  {
+    "revision": "ed86d7b",
+    "game_object_available": true,
+    "exit_code": 0
+  },
+  {
+    "revision": "f1d02f6",
+    "game_object_available": true,
+    "exit_code": 0
+  }
+]

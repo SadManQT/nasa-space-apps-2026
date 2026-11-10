@@ -1,0 +1,41 @@
+{
+  "scope": "One external300s diagnostic watchdog on confirmed SCRIPT ERROR/hung UI suite only. Global mandatory runner SUITE_TIMEOUT1500 retained for long player_text. Forced termination is not native crash or normal runner-watchdog exit.",
+  "bound_seconds": 300,
+  "console_before": {
+    "pid": 8460,
+    "parent": 13544,
+    "created": "2026-11-10T09:41:08.9069230Z",
+    "command": "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64_console.exe --headless --path . --script res://tools/test_chapter1_ui_regressions.gd"
+  },
+  "children_before": [
+    {
+      "pid": 19312,
+      "parent": 8460,
+      "created": "2026-11-10T09:41:08.9222780Z",
+      "command": "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64.exe --headless --path . --script res://tools/test_chapter1_ui_regressions.gd"
+    }
+  ],
+  "complete": true,
+  "raw_log_preserved": "ui_script_error_before_termination.txt",
+  "age_seconds_before_kill": 300.519,
+  "console_immediate_recheck": {
+    "pid": 8460,
+    "parent": 13544,
+    "created": "2026-11-10T09:41:08.9069230Z",
+    "command": "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64_console.exe --headless --path . --script res://tools/test_chapter1_ui_regressions.gd"
+  },
+  "children_immediate_recheck": [
+    {
+      "pid": 19312,
+      "parent": 8460,
+      "created": "2026-11-10T09:41:08.9222780Z",
+      "command": "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64.exe --headless --path . --script res://tools/test_chapter1_ui_regressions.gd"
+    }
+  ],
+  "taskkill": {
+    "exit_code": 0,
+    "stdout": "SUCCESS: The process with PID 19312 (child process of PID 8460) has been terminated.\nSUCCESS: The process with PID 8460 (child process of PID 13544) has been terminated.\n",
+    "stderr": ""
+  },
+  "target_processes_gone": true
+}

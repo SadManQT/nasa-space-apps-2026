@@ -1173,8 +1173,12 @@
     "production/qa/evidence/M1-31*"
    ],
    "edit_files": [
-    "game/scripts/ui/chapter1_campaign_hud.gd",
-    "game/tools/test_ch01_game_feel.gd"
+    "game/tools/test_ch01_game_feel.gd",
+    "game/tools/test_chapter1_ui_regressions.gd",
+    "game/tools/test_main_menu_contrast.gd",
+    "game/tools/test_journal_tabs.gd",
+    "game/tools/test_outpost_status.gd",
+    "game/tools/test_player_text.gd"
    ]
   },
   {
@@ -2872,7 +2876,8 @@
    "integration_paths": [
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-5U*"
-   ]
+   ],
+   "blocker": "10 Nov recheck: the old reason is gone. The after-Chapter-4 choice screen, exclusivity, save/load and both modifiers work (M4-17: test_upgrade_pairs_ch4_ch6.gd 33/0; rover now reads the saved choice; production/qa/evidence/M3-5U_upgrade_after_ch04.png). Waits only on the board dependency M1-19 and the every-suite acceptance: integrated gate is 99/117 (M1-68 Atik, M1-125 Ramim in progress). Resume: when the full gate is green, rerun run_tests.sh and mark done. Follow-up M4-18 (Ramim): step the heater draw in Chapter 8 shadow."
   },
   {
    "id": "M3-5Q",
@@ -3045,7 +3050,7 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.\n10Nov acceptance verification on frozen daa0141 reproduced current full-run failures. Reopened only for regression repair; existing source/evidence and declared dependencies preserved. No feature rebuild.",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.\n10Nov acceptance verification on frozen daa0141 reproduced current full-run failures. Reopened only for regression repair; existing source/evidence and declared dependencies preserved. No feature rebuild.\n10 Nov mandatory focused mission and puzzle repairs saved/pushed5ad5017 with complete raw logs. Exact test reservations released; integrated full gate still pending M1-125.",
    "evidence": "production/qa/evidence/M3-61_ramim_audit.md",
    "updated": "2026-11-10",
    "prompt": "Goal: Chapter 6's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0601.md .. M0604.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH06 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §8 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §8 (§8.1–§8.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: a sortie to the arrays and the fault in darkness on an energy budget (§4.2, M3-65); report cards and messages via M3-64 and M1-56; follow §1 clarity rules.",
@@ -3065,9 +3070,6 @@
     "game/scripts/campaign/chapter1_campaign.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-6M*"
-   ],
-   "edit_files": [
-    "game/tools/test_ch06_missions.gd"
    ]
   },
   {
@@ -3481,7 +3483,8 @@
    "integration_paths": [
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-7U*"
-   ]
+   ],
+   "blocker": "10 Nov recheck: the after-Chapter-6 choice screen, exclusivity, save/load and bigger_safe_room (K3 cap) work (M4-17: test_upgrade_pairs_ch4_ch6.gd 33/0; production/qa/evidence/M3-7U_upgrade_after_ch06.png). Two things remain: (1) storm_early_warning is recorded but nothing consumes it; its consumer lives in LunarHazards / CampaignFieldSystems, which Ramim is repairing under M1-125, so it is filed as M4-18; (2) board dependency M1-19 and the every-suite acceptance (gate 99/117; M1-68 Atik, M1-125 Ramim). Resume: after M4-18 lands and the full gate is green, rerun run_tests.sh and mark done."
   },
   {
    "id": "M3-7Q",
@@ -3657,7 +3660,7 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.\n10Nov acceptance verification on frozen daa0141 reproduced current full-run failures. Reopened only for regression repair; existing source/evidence and declared dependencies preserved. No feature rebuild.",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.\n10Nov acceptance verification on frozen daa0141 reproduced current full-run failures. Reopened only for regression repair; existing source/evidence and declared dependencies preserved. No feature rebuild.\n10 Nov mandatory focused mission and puzzle repairs saved/pushed5ad5017 with complete raw logs. Exact test reservations released; integrated full gate still pending M1-125.",
    "evidence": "production/qa/evidence/M3-61_ramim_audit.md",
    "updated": "2026-11-10",
    "prompt": "Goal: Chapter 8's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0801.md .. M0804.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH08 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §10 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §10 (§10.1–§10.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: two teams on the 120 km relay road by rover on the CH04 markers, carrying the controller up the summit, and the voice arriving over the player's network (§4.4–§4.5); report cards and messages via M3-64 and M1-56; follow §1 clarity rules.",
@@ -3677,9 +3680,6 @@
     "game/scripts/campaign/chapter1_campaign.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-8M*"
-   ],
-   "edit_files": [
-    "game/tools/test_ch08_missions.gd"
    ]
   },
   {
@@ -3903,7 +3903,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "All 128 upgrade profiles complete the campaign",
-   "status": "done",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M3-8U"
@@ -3914,7 +3914,7 @@
    "refs": [
     "execution/QA_02_NUMERIC_AND_UPGRADES.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.\n10Nov verification: route-entry fixtures must consume published P09/P10/P13/P14 payload data; no simulation or canon change.",
    "evidence": "production/qa/evidence/M3-61_ramim_audit.md",
    "updated": "2026-11-10",
    "prompt": "Per execution/QA_02_NUMERIC_AND_UPGRADES.md: an automated headless test that runs the route under all 2^7 upgrade combinations and checks\nevery numeric contract and ending predicate. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.",
@@ -3932,6 +3932,9 @@
    "integration_paths": [
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-91*"
+   ],
+   "edit_files": [
+    "game/tools/test_upgrade_profiles.gd"
    ]
   },
   {
@@ -4576,7 +4579,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Rule out a threaded-loading deadlock at full-cast entry",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -4592,7 +4595,7 @@
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Found 5 Nov during the round-3 rendered verification: one windowed run of game/tools/perf_probe.gd (--perf-probe, window on top) stopped right after the garden_rebuild transition, at the start of the full-cast stage: Godot idle (~2% CPU) with no progress for 17 minutes. The next run passed cleanly, so it is intermittent. Find whether the threaded preparation (ResourceLoader.load_threaded_request / WorkerThreadPool jobs in game/scripts/loading/, staged construction in campaign_room.gd and chapter1_campaign.gd) can wait forever: a job that never reports, a main-thread await on a status that never changes, a resource requested twice, or a deadlock with a mutex. Add a watchdog: any preparation step that exceeds a time limit logs its step and falls back to synchronous loading behind the loading card instead of hanging.\nAcceptance: run the windowed probe 10 times in a row (command in production/qa/perf_2026-11-04.md) with zero stalls; a test forces a stuck job and proves the fallback completes; run_tests.sh passes.",
-   "blocker": "Saved owned watchdog source072c9c7 and final evidence published through33e1593; current mandatory held-job/production recovery regression29/0. User explicitly leaves the raw AssetGeometry patch for Sadman. Unapplied/unverified review candidate retained with node-lifetime guard caveat; original saved branchf6285e4 preserved. Resume after reviewed raw request/publication recovery and held-raw tests, then ten full consecutive windowed probes and required integrated full gate. Original17-minute full-cast cause remains unassigned; native first-draw cost is separate M1-92. production/qa/perf/atik_batch_2026-11-10/M1-53.md and README.md.",
+   "blocker": "Watchdog072c9c7 and saved raw patch preserved; fresh integrated loading29/0 at a236295. User leaves raw AssetGeometry change to Sadman. Reviewed request5471e04 is published at resume_20261110/M1-53_REVIEW_REQUEST.md; no delivery landed, raw blob17cb725681c9074ac8b66f64ed34df73e105bc1c remains unbounded. Resume after reviewed owner commit, including node-lifetime/publication ownership fixes and M1-120 batching preservation; then held-raw regressions before worker release, ten consecutive full windowed probes and full gate. No raw edit or skipped probe acceptance claimed.",
    "reserved_for": "atik",
    "effort": 2,
    "assignment_history": [
@@ -4616,11 +4619,6 @@
     "production/qa/evidence/M1-53*",
     "production/qa/perf/",
     "game/tools/test_loading.gd.uid",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
-   ],
-   "edit_files": [
-    "production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-53_REVIEW_REQUEST.md",
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ]
@@ -5028,7 +5026,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.\n10Nov acceptance verification on frozen daa0141 reproduced current full-run failures. Reopened only for regression repair; existing source/evidence and declared dependencies preserved. No feature rebuild.",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.\n10Nov acceptance verification on frozen daa0141 reproduced current full-run failures. Reopened only for regression repair; existing source/evidence and declared dependencies preserved. No feature rebuild.\n10 Nov user explicitly overrides owner restrictions for the integrated 117-suite repair. Ramim takes only the published campaign file at 6b8f835; prior Asif branch/WIP and all other reservations remain preserved. Changes are isolated and will be merged against the latest owner work.",
    "evidence": "production/qa/evidence/M3-61_ramim_audit.md",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.6: report cards after every sortie and job (training grades, never story gates); five cadet skills with\nthree ranks and visible small benefits plus a crew line per rank; gear loadout slots from the existing upgrade choices with a\nweight limit; a jobs board with optional deliveries, surveys, maintenance and science runs, each with a sender and reason in\nMessages; rest at the Safe Room bunks (save, messages, photos, record). Write at least 4 jobs per chapter region in jobs.json.\nTests: grading, rank thresholds, loadout weight, job unlocks.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
@@ -5053,7 +5051,9 @@
    "edit_files": [
     "game/tools/test_campaign_later_runtime.gd",
     "game/tools/test_chapter1_campaign_flow.gd",
-    "game/tools/test_chapter1_outcomes.gd"
+    "game/tools/test_chapter1_outcomes.gd",
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "game/scripts/campaign/campaign_progression.gd"
    ]
   },
   {
@@ -5914,7 +5914,7 @@
     "production/qa/perf/"
    ],
    "refs": [],
-   "note": "10Nov ACTIVE BATCH: assigned to Atik; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-06.\n6 Nov (Sadman/claude, macOS, Mac under load from two renders and the night shift): three full runs failed 2-3 main-thread interval checks, each time different ones, all just over 50 ms: Ferreira raw load 57.0; title 64.6; new campaign 64.7 / Amara 53.4; Mei 54.4; new campaign 52.8. Every other suite passes (37/38). Looks load-sensitive near the budget; worth measuring on an idle machine before changing the loader.\n6 Nov, Tanvir/Codex M1-65 baseline: test_performance_runtime failed five intervals: Amara 67.948 ms, Mei 52.398 ms, Rafi 54.455 ms, title 66.395 ms, new campaign 96.077 ms (all require <50 ms). Raw output: production/qa/evidence/M1-65_tests_clean.txt. No performance source changed.\n6 Nov Ramim: integrated M1-19 fullrun atce1fe28 was51/52 suites passed; performance537checks/8failures. First5 raw-load intervals Kai61.056ms, Amara89.549ms, Mei58.707ms, Rafi59.733ms, Ferreira60.649ms. See production/qa/evidence/M1-19_test_results.txt. No timing expectations changed.\n6 Nov Ramim final integrated66aed53 full:53/54 suites passed,954s, performance537checks/8timingfailures, sole failing suite. First5 raw Kai62.482ms, Amara61.641ms, Mei58.396ms, Rafi56.892ms, Ferreira57.187ms. Remaining3 details suppressed by runner and not inferred. Exact output production/qa/evidence/M1-55_test_results.txt. One Godot test runner, no concurrent team Godot/native captures. No timing or loader changes.\n7 Nov Ramim current integratedfbdcd67 full57/58 in833s (all58executed, setupcompleted). Sole failure performance537checks/2timings: productiontitle55.308ms,newcampaign100.068ms against50ms. Raw asset-load intervals passed in this run; this is not a fix claim. Windows AMD Ryzen7 7700/RTX4060/Godot4.7.2, one runner/no concurrent team Godot. Exact M1-64_full_results.txt. Separate pre-suite coldimport139/warmretry85 is M1-85; M1-80 fail-fast works.\n8Nov Ramim Windows full source15ff10a again reproduces three intervals; complete raw loading log production/qa/evidence/M1-83_performance_runtime.txt. M1-90 two fresh-process traces next; status unchanged.\n8 Nov, Ramim/codex: M1-90 is complete and independently reviewed with no findings. Original Windows evidence: production/qa/evidence/M1-68_windows/2026-11-08_0130_ramim/README.md. Run1 failed title51.869ms and campaign66.577ms; run2 failed campaign69.960ms, against50ms. Both setups succeeded; complete raw logs, hardware and source metadata are retained. Existing caches were kept. The current suite does not print per-stage LoadTrace durations, so causality remains unmeasured. Atik can resume M1-68 from this handoff; its status is unchanged.\n8 Nov Ramim M1-62 integrated full gate: source 3cf82b1 / game tree f5686325, 68/70 suites in 2223 s. Performance 537/5: Kai 51.215, title 78.668, new campaign 162.874, garden 60.623, full cast 56.103 ms against 50 ms limits. Complete raw log: production/qa/evidence/M1-62_performance_runtime.txt. Stage cause remains unknown; M1-97 is still needed before M1-98 recollection. The other failed suite, campaign_media 113/1, is Sadman M1-100. Your task status is unchanged.\n8 Nov M1-70 full candidate defddc9 / game tree 4e62dda9: 69/70 suites, 2349 s; performance 537/4: title 70.940, new campaign 148.775, garden 57.056, full cast 54.585 ms against unchanged 50 ms limits. Raw log production/qa/evidence/M1-70_performance_runtime.txt. This was before final Noor/garage integration; current focused UI check passes but no new full or performance cause is claimed. Your status remains unchanged; M1-97 traces are still required before M1-98 recollection.\n9NovM97: retained diagnostic current87b21b5 has16windows/322stages, all37retention checks pass; focused581/6 timingfailures: Amara50.394/title62.831/newcampaign152.698/garden73.106/fullcast81.398/terrain106.388ms against50. Dummy-renderer RID init/nullmesh errors atLoadingCard._process47 and1ObjectDBwarning retained; cause notassigned. Earlier415candidate title54.825/new98.655 only; named campaign_ui91.081ms suggests owned UI region to investigate, not proof of every heartbeat. See production/qa/perf/M1-97.md; M98/frozenfull next. M114audio guardnowpulled, no longer a missing-source blocker.\n9NovM98complete: two fresh retained original-host runs at12d8252/game108a384:581/7 and581/6; newcampaign117.181/92.002,garden56.510/58.306,terrain64.841/62.910ms; rawactor failures complete in production/qa/evidence/M1-68_windows/2026-11-09_retained_ramim/README.md. Both16windows/322stages, all37retention checks pass; 3178trackedgamebytes unchanged. Synchronous EVA generate_scene Rafi51.382ms(run1),Kai53.225/Rafi52.860ms(run2) are measured foreign-owner candidates; campaign_ui elapsed116.138/91.716 may span a yield, not pureCPU. Run2native RID errors retained, no script backtrace/sourcecause assigned. Owner request follows; no fix claimed.\n10Nov recheck: former missing-source prerequisite is published. Implementation/diagnosis may resume; acceptance still requires evidence. Previous blocker: Original Windows full e78f5bc/game108a384 now83/84, only performance581/7 fails: Amara54.235,Mei53.871,Rafi52.094,Ferreira50.908,new75.771,garden57.612,terrain66.295ms vs50. M97 done with16windows/322stages; source/profiles retained in production/qa/evidence/2026-11-09_ramim_atik_full/README.md. Atik/Ramim can diagnose actual main/worker regions; M98 two-process collection next. No threshold/asset/cache workaround. Remaining: measured scoped cause/fix and focused/full green; foreign AssetGeometry/asset changes require Sadman owner request. M98 collection is now complete and reviewed; use production/qa/evidence/M1-68_windows/2026-11-09_retained_ramim/. Foreign AssetGeometry owner request M1-120 for measured EVA generation costs; owned UI-phase subtiming/scheduling diagnosis can continue independently.",
+   "note": "10Nov ACTIVE BATCH: assigned to Atik; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-06.\n6 Nov (Sadman/claude, macOS, Mac under load from two renders and the night shift): three full runs failed 2-3 main-thread interval checks, each time different ones, all just over 50 ms: Ferreira raw load 57.0; title 64.6; new campaign 64.7 / Amara 53.4; Mei 54.4; new campaign 52.8. Every other suite passes (37/38). Looks load-sensitive near the budget; worth measuring on an idle machine before changing the loader.\n6 Nov, Tanvir/Codex M1-65 baseline: test_performance_runtime failed five intervals: Amara 67.948 ms, Mei 52.398 ms, Rafi 54.455 ms, title 66.395 ms, new campaign 96.077 ms (all require <50 ms). Raw output: production/qa/evidence/M1-65_tests_clean.txt. No performance source changed.\n6 Nov Ramim: integrated M1-19 fullrun atce1fe28 was51/52 suites passed; performance537checks/8failures. First5 raw-load intervals Kai61.056ms, Amara89.549ms, Mei58.707ms, Rafi59.733ms, Ferreira60.649ms. See production/qa/evidence/M1-19_test_results.txt. No timing expectations changed.\n6 Nov Ramim final integrated66aed53 full:53/54 suites passed,954s, performance537checks/8timingfailures, sole failing suite. First5 raw Kai62.482ms, Amara61.641ms, Mei58.396ms, Rafi56.892ms, Ferreira57.187ms. Remaining3 details suppressed by runner and not inferred. Exact output production/qa/evidence/M1-55_test_results.txt. One Godot test runner, no concurrent team Godot/native captures. No timing or loader changes.\n7 Nov Ramim current integratedfbdcd67 full57/58 in833s (all58executed, setupcompleted). Sole failure performance537checks/2timings: productiontitle55.308ms,newcampaign100.068ms against50ms. Raw asset-load intervals passed in this run; this is not a fix claim. Windows AMD Ryzen7 7700/RTX4060/Godot4.7.2, one runner/no concurrent team Godot. Exact M1-64_full_results.txt. Separate pre-suite coldimport139/warmretry85 is M1-85; M1-80 fail-fast works.\n8Nov Ramim Windows full source15ff10a again reproduces three intervals; complete raw loading log production/qa/evidence/M1-83_performance_runtime.txt. M1-90 two fresh-process traces next; status unchanged.\n8 Nov, Ramim/codex: M1-90 is complete and independently reviewed with no findings. Original Windows evidence: production/qa/evidence/M1-68_windows/2026-11-08_0130_ramim/README.md. Run1 failed title51.869ms and campaign66.577ms; run2 failed campaign69.960ms, against50ms. Both setups succeeded; complete raw logs, hardware and source metadata are retained. Existing caches were kept. The current suite does not print per-stage LoadTrace durations, so causality remains unmeasured. Atik can resume M1-68 from this handoff; its status is unchanged.\n8 Nov Ramim M1-62 integrated full gate: source 3cf82b1 / game tree f5686325, 68/70 suites in 2223 s. Performance 537/5: Kai 51.215, title 78.668, new campaign 162.874, garden 60.623, full cast 56.103 ms against 50 ms limits. Complete raw log: production/qa/evidence/M1-62_performance_runtime.txt. Stage cause remains unknown; M1-97 is still needed before M1-98 recollection. The other failed suite, campaign_media 113/1, is Sadman M1-100. Your task status is unchanged.\n8 Nov M1-70 full candidate defddc9 / game tree 4e62dda9: 69/70 suites, 2349 s; performance 537/4: title 70.940, new campaign 148.775, garden 57.056, full cast 54.585 ms against unchanged 50 ms limits. Raw log production/qa/evidence/M1-70_performance_runtime.txt. This was before final Noor/garage integration; current focused UI check passes but no new full or performance cause is claimed. Your status remains unchanged; M1-97 traces are still required before M1-98 recollection.\n9NovM97: retained diagnostic current87b21b5 has16windows/322stages, all37retention checks pass; focused581/6 timingfailures: Amara50.394/title62.831/newcampaign152.698/garden73.106/fullcast81.398/terrain106.388ms against50. Dummy-renderer RID init/nullmesh errors atLoadingCard._process47 and1ObjectDBwarning retained; cause notassigned. Earlier415candidate title54.825/new98.655 only; named campaign_ui91.081ms suggests owned UI region to investigate, not proof of every heartbeat. See production/qa/perf/M1-97.md; M98/frozenfull next. M114audio guardnowpulled, no longer a missing-source blocker.\n9NovM98complete: two fresh retained original-host runs at12d8252/game108a384:581/7 and581/6; newcampaign117.181/92.002,garden56.510/58.306,terrain64.841/62.910ms; rawactor failures complete in production/qa/evidence/M1-68_windows/2026-11-09_retained_ramim/README.md. Both16windows/322stages, all37retention checks pass; 3178trackedgamebytes unchanged. Synchronous EVA generate_scene Rafi51.382ms(run1),Kai53.225/Rafi52.860ms(run2) are measured foreign-owner candidates; campaign_ui elapsed116.138/91.716 may span a yield, not pureCPU. Run2native RID errors retained, no script backtrace/sourcecause assigned. Owner request follows; no fix claimed.\n10Nov recheck: former missing-source prerequisite is published. Implementation/diagnosis may resume; acceptance still requires evidence. Previous blocker: Original Windows full e78f5bc/game108a384 now83/84, only performance581/7 fails: Amara54.235,Mei53.871,Rafi52.094,Ferreira50.908,new75.771,garden57.612,terrain66.295ms vs50. M97 done with16windows/322stages; source/profiles retained in production/qa/evidence/2026-11-09_ramim_atik_full/README.md. Atik/Ramim can diagnose actual main/worker regions; M98 two-process collection next. No threshold/asset/cache workaround. Remaining: measured scoped cause/fix and focused/full green; foreign AssetGeometry/asset changes require Sadman owner request. M98 collection is now complete and reviewed; use production/qa/evidence/M1-68_windows/2026-11-09_retained_ramim/. Foreign AssetGeometry owner request M1-120 for measured EVA generation costs; owned UI-phase subtiming/scheduling diagnosis can continue independently.\n10Nov resumed gate: a fatal runtime SCRIPT ERROR leaves the UI-regression engine alive. Narrow runner/test ownership added for fail-fast fatal diagnostics, bounded owned-child teardown and an explicit text-only process guard; existing assertions/50ms budgets remain unchanged. No gameplay/puzzle repair scope added.",
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Ramim fresh baseline on Windows at main 990126b, Godot 4.7.2, fails the production loading performance gate before any feature source changes. Full game/tools/run_tests.sh: 35/37 suites passed; test_performance_runtime.gd reports 537 checks / 2 failures: production title main-thread interval 59.455ms and production new campaign interval 128.056ms (limit <50ms). The other failure is the separate missing-explainer request M1-67.\nA single focused retry through run_tests.sh performance_runtime after cache warmup fails 537 checks / 7 failures (0/1 suites passed). Runner prints the first five details: Kai raw load 51.280ms, Amara 50.826ms, Mei 57.054ms, Rafi 57.689ms, Ferreira 52.718ms; remaining two details were suppressed by the runner, so do not invent them. Logs: production/qa/evidence/M1-18_baseline.txt and M1-18_performance_retry.txt.\nInvestigate the shared loading/performance path and the Windows test/runtime behavior, then fix the cause within Atik-owned runtime/loading/performance paths. Profile whether scheduling/raw glTF import or timing measurement is responsible; do not silently relax/skip the 50ms gate or claim reference-Mac performance based on this PC. Any necessary Ramim UI or Sadman asset/test changes need owner requests. Preserve campaign/save behavior and incremental-loading contract. Publish the fix/evidence and notify Ramim to resume blocked M1-18.\nAcceptance: focused real production performance runner passes on the documented supported machine without weakening its intent; full run_tests.sh green after M1-67 also lands, with truthful hardware/timing evidence and no unrelated changes.",
@@ -5938,9 +5938,11 @@
     "production/qa/evidence/M1-68*",
     "production/qa/perf/",
     "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
+    "production/AI_PROMPT_LOG.md",
+    "game/tools/run_tests.sh",
+    "game/tools/test_runner.py"
    ],
-   "blocker": "Resumed source569e723 saves host-access recheck and starts all117 mandatory suites at frozen committed-source daa0141 in isolated APFS-cloned checkout. Full collection is still running under resume_20261110/full; no final result yet. Original Ryzen7/RTX4060 host is unavailable: no configured SSH/remote connector or supplied collection route; hosted CI is not original hardware. Need original-host two-process evidence plus a demonstrated cause/fix and fresh integrated full acceptance; Mac retries are not proof. Reclaim this exact task to publish the collection when it completes. Existing fixes/logs preserved."
+   "blocker": "Saved/pushed a236295 runner repair (six unittest methods /13 cases) and b0da693 complete fresh full evidence: source a236295/game e149235d,99/117 pass,18 fail,1785.970s, all117 logs, unchanged source/settings. Loading29/0 and performance582/0 (16 windows/326 stages) pass separately under unchanged50ms limits; no causal timing fix. Original Ryzen7/RTX4060 post-M1-120 two-process evidence unavailable: no host connection/remote route, GitHub runner discovery HTTP403. Last original581/7 and581/6 preserved. Exact18 owner failures and resume conditions in resume_20261110/README.md; require original-host evidence and fresh green integrated gate."
   },
   {
    "id": "M1-69",
@@ -6450,7 +6452,7 @@
     "game/scripts/loading/",
     "production/qa/perf/"
    ],
-   "blocker": "Evidence and review published in 2b848e34; status in 76621158. Historical setup exit 139 not reproduced in eight bounded native/runner invocations. Restored-sidecar setup has 440 UID/file-access errors despite exit 0; full audit supersedes outer success. No native crash cause or fix established. Needs original 198663-byte raw log/cache/native backtrace from original reporter, or a fresh bounded failing native reproduction sufficient for an owned fix/upstream-engine case. Resume condition and preserved manifests: production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/README.md. No game/asset/config/runner change claimed."
+   "blocker": "New frozen daa01414 corrected-collector recheck completed: five cold/warm observations clean; restoring1190sidecars (one non-CRLF Steel_Normal difference) produces285UID/file-access setup errors despite exit0/1of1, correctly failed, then clean retry. No historical native crash/cause reproduced. All2493warm-cache and1190input-sidecar hashes still match retained QA input; experiment copy explicitly post-retry. Original198663-byte raw log/cache/backtrace unidentified; September dump remains unlinked. Dependency: original reporting host/SDD-artifact holder (task filed Ramim/codex), or fresh bounded native failure with source/cache/backtrace; Tanvir owns follow-up. Resume on those diagnostics. Exact scripts/logs/blocker: production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/current_recheck_20261110/README.md. No asset/settings/crash fix claimed."
   },
   {
    "id": "M1-86",
@@ -6662,7 +6664,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Native evidence saved through33e1593: failed300s first campaign attempt plus completed short M4/Metal probe, exit0 in84.126s, campaign max6607.878ms. No watchdog recovery or causal improvement established. The native title wait sample is unsymbolicated and not exact campaign correlation; xctrace unavailable on this CLT-only host. Matching native profiling, measured scoped first-draw fix, controlled before/after, loading screenshots and independent review remain required. Later team source preserved; no latest native or integrated full pass inferred. production/qa/perf/atik_batch_2026-11-10/M1-92.md."
+   "blocker": "Exact4.7.2 arm64 UUID5EF81F68-A5CB-3B0C-82FF-E288702E954D checked; no supplied matching dSYM or xctrace/Xcode, atos remains unnamed. Evidence8f58114 at resume_20261110/M1-92_MATCHING_TOOLS.md. Original title-only unsymbolicated stack is not campaign-cause proof; native campaign6607.878ms and prior timeout retained. Fresh headless performance582/0 and full99/117 do not identify native draw cause. Resume with matching native campaign profiling and controlled same-host before/after; no shader/GPU/deadlock cause or repair claimed."
   },
   {
    "id": "M1-93",
@@ -7266,7 +7268,7 @@
     "game/scripts/missions/"
    ],
    "refs": [],
-   "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-08.",
+   "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-08.\n10 Nov user explicitly overrides owner restrictions for the integrated 117-suite repair. Ramim takes only the published campaign file at 6b8f835; prior Asif branch/WIP and all other reservations remain preserved. Changes are isolated and will be merged against the latest owner work.",
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "M3-2P read-only audit on main018b297: Chapter1Campaign.interact_nearby intercepts only P01/P02; P03/P04 fall through perform_target with catalog payload_defaults. Chapter2Route keeps authoritative _p03/_p04 state in snapshot but publishes no panel view. Saved origin/night/M3-2P tip5203a6f has a larger unlanded runtime patch; do not copy it wholesale or duplicate its temporary-director preview framework. Provide a bounded public chosen-input provider seam following current P01 pattern, for P03/P04 only: real nearby USE requests the owned Ramim panel and cannot commit prefilled correct inputs; a read-only primitive view exposes current target/action, authoritative P03/P04 progress and required inputs; preview/confirmation receives explicit player choices through existing forecast_target/perform_target/dispatcher and validates paused-modal handoff, scene/revision, range/line-of-sight/prerequisites, cancellation, malformed/missing/wrong choices, costs/idempotence, retry/save/load. Reuse the real pure puzzle models and existing forecast route; no second store/simulator and no assigning model state from UI. Publish exact signal/provider/view/payload API before UI implementation. Coordinate with Sadman authored P03/P04 data and Ramim changes to pure models; keep current normal campaign tests meaningful via explicit selected inputs, never auto-sign Class or introduce dependencies on unfinished Class mode for Solo. Do not edit Ramim UI/puzzles. Test actual nearby USE and chosen-input preview/confirm/save/retry in real Chapter2. Focused/full runner with honest M1-68/M1-100 limits. Saved source is reference only.",
@@ -7279,6 +7281,13 @@
      "owner": "Atik/antigravity",
      "status": "in_progress",
      "reason": "User-approved implementation batch"
+    },
+    {
+     "date": "2026-11-10",
+     "owner": "Asif/antigravity",
+     "reserved_for": "asif",
+     "status": "in_progress",
+     "reason": "10 Nov user explicitly overrides owner restrictions for the integrated 117-suite repair. Ramim takes only the published campaign file at 6b8f835; prior Asif branch/WIP and all other reservations remain preserved. Changes are isolated and will be merged against the latest owner work."
     }
    ],
    "integration_paths": [
@@ -7287,7 +7296,6 @@
     "production/qa/evidence/M1-105*"
    ],
    "edit_files": [
-    "game/scripts/campaign/chapter1_campaign.gd",
     "game/scripts/missions/chapter2_route.gd",
     "game/scripts/missions/chapter2_gate_catalog.gd",
     "game/tools/test_chapter2_route.gd",
@@ -7634,7 +7642,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Collector and process-level tests saved inbd51096; final evidence published through33e1593. Recorded M4 Forward+/Metal real input44/0 with5PNG+trace, normal exit0 in9.225s. Original Windows11 IntelArc130V post-PASS timeout not yet reproduced/retested on that host; run exact original-host Vulkan collector command in M1-116.md and retain process/thread diagnostics before choosing a fix. Latest headless P01 inputs319/0 exits0 but retains4 native RefCounted ObjectDB warnings with refcount0; cause unassigned, not an Arc timeout explanation. No clean production teardown or original-host repair claimed."
+   "blocker": "Original Arc Windows11/Vulkan44/0 then180.017s timeout124 remains failed; native/Compatibility manifests re-read and hashed in4722a26 resume_20261110/M1-116_ORIGINAL_HOST.md. No original-host connection, reachable process or Windows thread trace; GitHub runner discovery alsoHTTP403. Collector sampling is macOS-only. Fresh headless input319/0/full99/117 and prior Metal44/0 exit0 do not certify Arc. Resume on original host with exact PID/command/thread wait/module diagnostics during post-PASS hold, then cause-based repair and normal bounded Forward+ exit plus mandatory gate."
   },
   {
    "id": "M1-117",
@@ -7815,7 +7823,7 @@
     "game/resources/campaign/rooms/",
     "game/scripts/world/"
    ],
-   "blocker": "Source e5ed6178 and evidence pushed through 864ed263. Latest tested game d1436027: mandatory Garden 2/2 (19/0 collision, 54/0 movement); comms still 0/1 because its 45/0 output lacks the recognized marker. Recorded 8edef native RED 20/3 to GREEN 20/0; full attempt capped at 40 minutes after 89/115 reported (73 pass,16 fail), separate remaining26 targets24 pass/2 fail. Later teammate repairs preserved; older failures are snapshot observations. Resume after owners resolve remaining integration/marker/performance failures and a complete current mandatory full runner passes. Exact handoff: production/qa/evidence/M1-122/acceptance_blockers.md. No owned source edits pending; manual QA deferred."
+   "blocker": "Delivered collision e5ed6178 preserved; current f328c0c5 plus approved pilot patch passes mandatory Garden2/2 (19/0,54/0). Fresh post-HUD loading gate615/5 still fails: title52.109,campaign80.204,Garden64.977,cast59.503,terrain56.240ms, unchanged50ms limit. Frozen daa01414 full97/117 and all raw logs saved; newer UI/chapter/room/handoff/text/profile fixes supersede old failures, comms45/0 and P01inputs319/0 are clear. Dependency: active Ramim/M1-125 measured loading/content-query repair and Atik/M1-68 timing investigation; resume after published repair, green focused dependency check and complete current immutable full gate. Evidence production/qa/evidence/M1-122/current_acceptance_20261110/README.md. No owned geometry edit pending; manual QA deferred."
   },
   {
    "id": "M1-123",
@@ -7855,7 +7863,143 @@
     "game/scripts/player/",
     "game/scripts/campaign/"
    ],
-   "blocker": "Source 630c9278 and evidence pushed through 864ed263. Latest tested d1436027 actual campaign movement 54/0; recorded 8edef native 62/0 with four ending/input cases and eight inspected PNGs. Source guards and original-save hash pass. Global acceptance remains blocked: latest-tested comms 0/1 marker failure and no complete passing current full runner; 8edef full/continuation failures documented separately without claiming all persist after repairs. Resume when owners clear remaining global integration checks and complete mandatory current full gate passes. Evidence: production/qa/evidence/M1-123/README.md and M1-122/acceptance_blockers.md. Exact historical pose unknown, selected valid contact cases labeled; manual QA is deferred, not an invented blocker."
+   "blocker": "User approved exact test-file exception while preserving blocked status. Driver source verified by two ordinary mandatory Garden19/0+54/0 runs, standard native62/0 with8inspected PNGs, and fresh post-HUD f328Garden2/2. Earlier54/2 brake drift and62/1native zero-input failure retained; no original input producer/focus cause invented. Both supplemental10FPS cases have54/0 but79GLES3cache-write errors despite exit0 and remain failed for log integrity. Current global loading615/5 and no complete green current full gate block acceptance. Dependency/resume: Ramim/M1-125 and Atik/M1-68 measured loading repair, focused retest then full mandatory runner. Saved source/provenance/16new inspected PNGs: production/qa/evidence/M1-123/current_pilot_20261110/README.md. Runtime/controller/capsule/limits unchanged; manual QA deferred."
+  },
+  {
+   "id": "M1-124",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "M1-105 handoff: restore lunar gravity indoors for Ramim acceptance",
+   "status": "done",
+   "owner": "Ramim/codex",
+   "deps": [],
+   "paths": [
+    "game/scripts/campaign/chapter1_campaign.gd"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-10.",
+   "evidence": "User owner override applied to published campaign source c9bf18f. Moon gravity uses EvaSuitScript.MOON_G in pressurised rooms; mandatory focused campaign flow508checks/0, full evidence production/qa/evidence/M1-125_117_gate_2026-11-10/focused_handoff/. This closes the owner handoff request, not the separate full117 gate.",
+   "updated": "2026-11-10",
+   "prompt": "Owner change request, not a new active-batch claim. chapter1_campaign.gd is currently reserved by Asif/M1-105. Frozen daa0141 mandatory test_chapter1_campaign_flow fails production player uses lunar gravity: _bind_player_eva assigns9.8 indoors even though the habitat is on the Moon. Review the one-line proposed patch and raw log in production/qa/evidence/M1-31_acceptance_2026-11-10/owner_requests/. Apply through the current saved-work session or save/push/release the exact file for Ramim; preserve all Chapter2 input bridge work. Do not infer a full pass from this isolated change; rerun the mandatory campaign flow and integrated gate. Ramim has not edited this reserved source.",
+   "reserved_for": "asif",
+   "effort": 2
+  },
+  {
+   "id": "M1-125",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Repair and verify the integrated 117-suite gate under user owner override",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
+   "deps": [],
+   "paths": [
+    "game/scripts/",
+    "game/tools/",
+    "production/qa/evidence/M1-125*",
+    "game/resources/campaign/rooms/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-10.\n10 Nov integration progress: published chapter6/8 witness repairs5ad5017; UI prerequisite/focusaa632b2; room support/readability5d13dc0; lunar gravity and persisted upgrade/modal handoffc9bf18f; native panel probes0c985a4; eight-chapter text/native goal walk246a1f8. Profile serial run timed out1500s; a real single-profile diagnostic passed1017 checks in65.9s. All128 profiles are now executing in8 isolated engine processes; child cleanup/runner checks are under review. Performance615/2 diagnostic still fails newcampaign98.431ms andterrain59.351ms under concurrent model-test load. HUDsetup92.072ms is measured and split in saved repair worktree, not yet qualified or pushed. No full117 pass claimed. Unused extended route reservation released; measured flag reconstruction4.4/67.1s was not a sufficient cause to justify a speculative source edit.",
+   "evidence": "",
+   "updated": "2026-11-10",
+   "prompt": "User explicitly overrides owner restrictions for this repair batch and requires all 117 existing suites to pass. Preserve all published and unfinished owner work; reserve exact files before edits, diagnose failures, make minimal production or stale-fixture repairs without dropping checks or relaxing performance thresholds. Verify via game/tools/run_tests.sh and scripted visible UI. Sync and safely merge before pushing. Keep video/submission/manual QA deferred. Record source/hardware and raw baseline/final evidence; never claim a partial pass is full acceptance.",
+   "reserved_for": "ramim",
+   "effort": 2,
+   "edit_files": [
+    "game/scripts/loading/load_trace.gd",
+    "game/tools/test_performance_runtime.gd",
+    "game/resources/campaign/rooms/LOC-01.json",
+    "game/resources/campaign/rooms/LOC-03.json",
+    "game/tools/test_care_round_props.gd",
+    "game/tools/test_chapter2_rooms.gd",
+    "game/tools/test_chapter3_rooms.gd",
+    "game/tools/test_chapter6_rooms.gd",
+    "game/tools/capture_p01_panel.gd",
+    "game/tools/capture_m155_mission_table.gd",
+    "game/tools/capture_goals_m162.gd",
+    "production/plan/test_board_batch.py",
+    "PRODUCTION_HANDBOOK.md",
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/tools/run_tests.sh",
+    "game/tools/test_runner.py",
+    "game/scripts/loading/load_preparation.gd",
+    "game/scripts/companions/companion_roster.gd",
+    "game/scripts/world/world_route.gd"
+   ],
+   "integration_paths": [
+    "production/plan/test_board_batch.py",
+    "PRODUCTION_HANDBOOK.md"
+   ]
+  },
+  {
+   "id": "M4-17",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Apply saved upgrade choices to the 3D rover and verify the after-Chapter-4 and after-Chapter-6 pairs",
+   "status": "done",
+   "owner": "Sadman/claude",
+   "deps": [],
+   "paths": [
+    "game/scripts/rover/lunar_rover.gd",
+    "game/scripts/progression/cadet_progression.gd",
+    "game/tools/test_upgrade_pairs_ch4_ch6.gd",
+    "production/qa/evidence/M3-5U*",
+    "production/qa/evidence/M3-7U*"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-10.",
+   "evidence": "Focused suites through game/tools/run_tests.sh: test_upgrade_pairs_ch4_ch6.gd 33 checks, 0 failures (3 failures before the fix); test_rover 27/0; test_hazards 19/0; test_progression 72/0; test_campaign_progression 22/0; test_campaign_field_systems 6/0; test_ch07_missions 1038/0; test_ch08_missions 132/0. Full 117-suite gate not rerun here (M1-125, Ramim, in progress). Screenshots: production/qa/evidence/M3-5U_upgrade_after_ch04.png, production/qa/evidence/M3-7U_upgrade_after_ch06.png. Open: storm_early_warning consumer and Chapter 8 heater step filed as M4-18.",
+   "updated": "2026-11-10",
+   "prompt": "Found 10 Nov while rechecking M3-5U/M3-7U (both formally wait on M1-19's gate): CampaignFieldSystems passes director.snapshot().upgrades ({choices: {\"4\": \"rover_lights_heater\"}}) to LunarRover.apply_preset, which only reads flat flags, so rover_lights_heater and long_range_battery never apply to the driven rover in the campaign. Fix it in apply_preset (accept both shapes). Add one focused suite proving the after-Chapter-4 and after-Chapter-6 pairs end to end: earned only after the chapter, exclusive, idempotent, saved and restored, modifier reaches the simulation (ice water +2 separate, K3 stack, heater draw), choice screen renders. Make the 4B card text state the applied numbers. Acceptance: the focused suite and test_rover, test_hazards, test_progression pass through game/tools/run_tests.sh; screenshots of both choice screens in production/qa/evidence/.",
+   "reserved_for": "sadman",
+   "effort": 1
+  },
+  {
+   "id": "M4-18",
+   "milestone": "M4",
+   "priority": "P2",
+   "tool": "codex",
+   "title": "Consume storm_early_warning in the Chapter 7 shelter run, step the rover heater in Chapter 8 shadow, and align the hazard storm numbers with canon",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/hazards/lunar_hazards.gd",
+    "game/scripts/campaign/campaign_field_systems.gd",
+    "game/tools/test_hazards.gd"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-10.",
+   "evidence": "",
+   "updated": "2026-11-10",
+   "prompt": "Found by Sadman/claude on 10 Nov (M4-17). (1) storm_early_warning (after Chapter 6, Option A: 'one additional preparation opportunity, with no invented solar income', game-design/10 line 177) is set in ExpeditionSimulation modifiers but nothing reads it; the canon P-13 plan has no countable preparation slot, so the natural home is the shelter run in LunarHazards.step_solar_storm_shelter_run (the warning arrives earlier, so the crew gets more lead before exposure). Pass it from CampaignFieldSystems the way rover.heater_upgrade is passed. No energy income, no change to the P-13/P-14 ledger. (2) CampaignFieldSystems only calls step_cold_shadow when _chapter == 4, but rover_lights_heater is earned after Chapter 4, so its 1.8x to 1.45x heater draw is only felt on a Chapter 4 replay; step it on the dark Chapter 8 road segments too (the warning text must not say Chapter 4 there). (3) LunarHazards uses storm_step_multipliers [1,2,3,2,1,1] and storm_exposure_limit 3; canon (08 P-13/P-14, p13_campaign.json) is [1,1,2,2,1,1] and limit 6. Acceptance: test_hazards and game/tools/test_upgrade_pairs_ch4_ch6.gd pass through run_tests.sh, with a check for each of the three points; update the 6A card text in cadet_progression.gd to the applied number.",
+   "reserved_for": "ramim",
+   "effort": 1
+  },
+  {
+   "id": "M1-126",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Deliver the reviewed bounded raw-loading change in AssetGeometry that Atik's M1-53 requests",
+   "status": "done",
+   "owner": "Sadman/claude",
+   "deps": [],
+   "paths": [
+    "game/scripts/asset_geometry.gd",
+    "game/tools/test_asset_geometry_recovery.gd",
+    "production/qa/evidence/M1-53_owner_delivery.md"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-10.",
+   "evidence": "Through game/tools/run_tests.sh: test_asset_geometry_recovery.gd 49 checks, 0 failures (real semaphore-held raw jobs; 9 forced takeovers during publication); test_loading 29/0; test_performance_runtime 545/0 at the unchanged 50 ms limit; test_habitat_rooms 360/0; test_room_presentation 155/0. Full 117-suite gate, ten windowed probes and Windows host not run (Atik continues M1-53). production/qa/evidence/M1-53_owner_delivery.md",
+   "updated": "2026-11-10",
+   "prompt": "Owner request: production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-53_REVIEW_REQUEST.md (candidate ../M1-53_asset_geometry_owner.patch, reviewed not applied blindly). AssetGeometry.prepare() polls THREAD_LOAD_IN_PROGRESS without a bound. Deliver: one owner per raw path through PackedScene publication with overlapping callers sharing the outcome; polling bounded by PreparationWatchdog; on expiry the loading card and an independent decode that never joins the unfinished request; the late request retired and consumed once; an old coroutine stops publishing after takeover at every yield; valid-instance node lifetimes; missing files still fail without a card; eight-animation batches, cache policy and the 50 ms gate unchanged. Acceptance: a suite with real semaphore-held raw jobs that recover before the worker is released; test_loading and test_performance_runtime pass through run_tests.sh. Atik then runs the ten windowed probes and the full gate for M1-53.",
+   "reserved_for": "sadman",
+   "effort": 2
   }
  ],
  "requirements": [
@@ -8499,7 +8643,7 @@
  "implementation_batch": {
   "id": "2026-11-10-implementation",
   "active": true,
-  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred.",
+  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred. User subsequently authorized Ramim to override owners for M1-125 integrated 117-suite repairs, preserving WIP. 10 Nov: Sadman told his own session to do the tasks his blocked tasks need; M4-17 (rover upgrade shape fix and after-Ch4/after-Ch6 pair verification) added to his row. Sadman then approved doing the M1-53 owner request (M1-126).",
   "priority_order": [
    "ramim",
    "sadman",
@@ -8529,7 +8673,8 @@
     "M3-67",
     "M3-72",
     "M3-90",
-    "M3-91"
+    "M3-91",
+    "M1-125"
    ],
    "sadman": [
     "M4-16",
@@ -8542,7 +8687,9 @@
     "M3-5M",
     "M3-7P",
     "M3-7U",
-    "M3-7M"
+    "M3-7M",
+    "M4-17",
+    "M1-126"
    ],
    "asif": [
     "M1-105",

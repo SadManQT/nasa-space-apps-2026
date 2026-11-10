@@ -1,0 +1,369 @@
+{
+  "revision": "daa014145922e2646027140f3bd34c53a0afe3cb",
+  "collector_sha256": "84dea68f4e3ffa4fde98591081e76a89ede5660c793a609df194c52ef1416b3b",
+  "game_tree": "1c3a0dd3517226d7c9c3a79138249593e4955d2a",
+  "source_files": 3343,
+  "source_bytes": 1077145226,
+  "lfs_files": 1197,
+  "source_manifest_sha256": "ea1405505ebe8cab99cb9447440d20b0c4dbbd1ff011aea618b6cce0f8502ac4",
+  "godot_executable": "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64_console.exe",
+  "godot_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "hardware": {
+    "cpu": [
+      {
+        "Name": "Intel(R) Core(TM) Ultra 5 226V",
+        "NumberOfCores": 8,
+        "NumberOfLogicalProcessors": 8
+      }
+    ],
+    "gpu": [
+      {
+        "Name": "Intel(R) Arc(TM) 130V GPU (8GB)",
+        "DriverVersion": "32.0.101.9150"
+      }
+    ],
+    "os": {
+      "Caption": "Microsoft Windows 11 Home",
+      "Version": "10.0.26300",
+      "BuildNumber": "26300",
+      "TotalVisibleMemorySize": 16269228
+    }
+  },
+  "scratch_root": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs",
+  "scope": "Fresh project import cache and isolated appdata; OS filesystem cache is not evicted. Copies contain the frozen game tree, not user saves or production staging files.",
+  "pairs": [
+    {
+      "name": "native_first",
+      "before_cache": {
+        "exists": false,
+        "file_count": 0
+      },
+      "after_cache": {
+        "exists": true,
+        "file_count": 3460,
+        "global_script_class_cache.cfg": {
+          "bytes": 23795,
+          "sha256": "e67fb6cacee22c45c9c36f3cd4d9627c145802f484211feb8174cba9fa97c28e"
+        },
+        "uid_cache.bin": {
+          "bytes": 108197,
+          "sha256": "40988ac6650ce9f939967a91c87310b2aaa8bb034a2cb35c766569c6297b1b6e"
+        },
+        "editor/filesystem_cache10": {
+          "bytes": 499797,
+          "sha256": "bcd3bb73f95a90155795e0c3010522f31d46d4f84320d5f2a5163739f84c1993"
+        }
+      },
+      "runs": [
+        {
+          "command": [
+            "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64_console.exe",
+            "--headless",
+            "--path",
+            ".",
+            "--editor",
+            "--quit"
+          ],
+          "pid": 18128,
+          "start_utc_epoch": 1794307002.186661,
+          "duration_seconds": 300.296,
+          "timed_out": false,
+          "termination": {
+            "needed": false
+          },
+          "raw_exit_code": 0,
+          "unsigned_exit_hex": "0x0",
+          "effective_exit_code": 0,
+          "log_sha256": "d6da46189f0342f4ed09ef847a2cecc3ab47c7c91d409cce3cfa15605b70e159",
+          "test_log_dir": null,
+          "isolated_env": {
+            "APPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\roaming",
+            "LOCALAPPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\local",
+            "TEMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\tmp",
+            "TMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\tmp"
+          },
+          "script_error_lines": [],
+          "generic_error_lines": [],
+          "generic_error_count": 0,
+          "warning_count": 0,
+          "last_printed_reimport": "Executing post-reimport operations...",
+          "suite_summary": [],
+          "setup_failure": false,
+          "native_crash_signature": false,
+          "audited_logs": [
+            {
+              "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\native_first\\cold_editor.txt",
+              "sha256": "d6da46189f0342f4ed09ef847a2cecc3ab47c7c91d409cce3cfa15605b70e159",
+              "engine_errors": [],
+              "script_errors": [],
+              "warning_count": 0,
+              "last_printed_reimport": "Executing post-reimport operations...",
+              "suite_summary": [],
+              "setup_failure": false,
+              "native_crash_signature": false
+            }
+          ]
+        },
+        {
+          "command": [
+            "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64_console.exe",
+            "--headless",
+            "--path",
+            ".",
+            "--editor",
+            "--quit"
+          ],
+          "pid": 17168,
+          "start_utc_epoch": 1794307302.5791647,
+          "duration_seconds": 5.859,
+          "timed_out": false,
+          "termination": {
+            "needed": false
+          },
+          "raw_exit_code": 0,
+          "unsigned_exit_hex": "0x0",
+          "effective_exit_code": 0,
+          "log_sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b",
+          "test_log_dir": null,
+          "isolated_env": {
+            "APPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\roaming",
+            "LOCALAPPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\local",
+            "TEMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\tmp",
+            "TMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\tmp"
+          },
+          "script_error_lines": [],
+          "generic_error_lines": [],
+          "generic_error_count": 0,
+          "warning_count": 0,
+          "last_printed_reimport": null,
+          "suite_summary": [],
+          "setup_failure": false,
+          "native_crash_signature": false,
+          "audited_logs": [
+            {
+              "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\native_first\\warm_editor.txt",
+              "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b",
+              "engine_errors": [],
+              "script_errors": [],
+              "warning_count": 0,
+              "last_printed_reimport": null,
+              "suite_summary": [],
+              "setup_failure": false,
+              "native_crash_signature": false
+            }
+          ]
+        },
+        {
+          "command": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "tools/run_tests.sh",
+            "hint_player"
+          ],
+          "pid": 22096,
+          "start_utc_epoch": 1794307308.4401004,
+          "duration_seconds": 14.399,
+          "timed_out": false,
+          "termination": {
+            "needed": false
+          },
+          "raw_exit_code": 0,
+          "unsigned_exit_hex": "0x0",
+          "effective_exit_code": 0,
+          "log_sha256": "ac35165c48c5f0299f0f9eba21d33469e3ba81b8faf6c39e0e9c86dd19dd8454",
+          "test_log_dir": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\native_first\\warm_runner_logs",
+          "isolated_env": {
+            "APPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\roaming",
+            "LOCALAPPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\local",
+            "TEMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\tmp",
+            "TMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\tmp"
+          },
+          "script_error_lines": [],
+          "generic_error_lines": [],
+          "generic_error_count": 0,
+          "warning_count": 0,
+          "last_printed_reimport": null,
+          "suite_summary": [
+            "1/1 suites passed"
+          ],
+          "setup_failure": false,
+          "native_crash_signature": false,
+          "audited_logs": [
+            {
+              "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\native_first\\warm_runner_logs\\setup.log",
+              "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b",
+              "engine_errors": [],
+              "script_errors": [],
+              "warning_count": 0,
+              "last_printed_reimport": null,
+              "suite_summary": [],
+              "setup_failure": false,
+              "native_crash_signature": false
+            },
+            {
+              "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\native_first\\warm_runner_logs\\test_hint_player.gd.log",
+              "sha256": "6997369dcd9a6d2d40bad5e906f7c550ad3a7cf9daafe3b5b8ce1f04b1fcd395",
+              "engine_errors": [],
+              "script_errors": [],
+              "warning_count": 0,
+              "last_printed_reimport": null,
+              "suite_summary": [],
+              "setup_failure": false,
+              "native_crash_signature": false
+            }
+          ]
+        }
+      ],
+      "changed_sidecars": 0,
+      "failed_project_retained": false
+    },
+    {
+      "name": "runner_first",
+      "before_cache": {
+        "exists": false,
+        "file_count": 0
+      },
+      "after_cache": {
+        "exists": true,
+        "file_count": 3460,
+        "global_script_class_cache.cfg": {
+          "bytes": 23795,
+          "sha256": "e67fb6cacee22c45c9c36f3cd4d9627c145802f484211feb8174cba9fa97c28e"
+        },
+        "uid_cache.bin": {
+          "bytes": 108197,
+          "sha256": "40988ac6650ce9f939967a91c87310b2aaa8bb034a2cb35c766569c6297b1b6e"
+        },
+        "editor/filesystem_cache10": {
+          "bytes": 499797,
+          "sha256": "af3dec0f5487326cc50fdb3f78d2a9668b415a3f4e5ffb08a66d440c55f4106b"
+        }
+      },
+      "runs": [
+        {
+          "command": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "tools/run_tests.sh",
+            "hint_player"
+          ],
+          "pid": 2124,
+          "start_utc_epoch": 1794307329.0941303,
+          "duration_seconds": 286.309,
+          "timed_out": false,
+          "termination": {
+            "needed": false
+          },
+          "raw_exit_code": 0,
+          "unsigned_exit_hex": "0x0",
+          "effective_exit_code": 0,
+          "log_sha256": "ac35165c48c5f0299f0f9eba21d33469e3ba81b8faf6c39e0e9c86dd19dd8454",
+          "test_log_dir": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\runner_first\\cold_runner_logs",
+          "isolated_env": {
+            "APPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_runner_first\\isolated_user\\roaming",
+            "LOCALAPPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_runner_first\\isolated_user\\local",
+            "TEMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_runner_first\\isolated_user\\tmp",
+            "TMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_runner_first\\isolated_user\\tmp"
+          },
+          "script_error_lines": [],
+          "generic_error_lines": [],
+          "generic_error_count": 0,
+          "warning_count": 0,
+          "last_printed_reimport": "Executing post-reimport operations...",
+          "suite_summary": [
+            "1/1 suites passed"
+          ],
+          "setup_failure": false,
+          "native_crash_signature": false,
+          "audited_logs": [
+            {
+              "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\runner_first\\cold_runner_logs\\setup.log",
+              "sha256": "c765980077af692f6151a64365b11bbbd45e09ed1ae62dfb69a33c7ffc1369d6",
+              "engine_errors": [],
+              "script_errors": [],
+              "warning_count": 0,
+              "last_printed_reimport": "Executing post-reimport operations...",
+              "suite_summary": [],
+              "setup_failure": false,
+              "native_crash_signature": false
+            },
+            {
+              "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\runner_first\\cold_runner_logs\\test_hint_player.gd.log",
+              "sha256": "6997369dcd9a6d2d40bad5e906f7c550ad3a7cf9daafe3b5b8ce1f04b1fcd395",
+              "engine_errors": [],
+              "script_errors": [],
+              "warning_count": 0,
+              "last_printed_reimport": null,
+              "suite_summary": [],
+              "setup_failure": false,
+              "native_crash_signature": false
+            }
+          ]
+        },
+        {
+          "command": [
+            "C:/Program Files/Git/bin/bash.exe",
+            "tools/run_tests.sh",
+            "hint_player"
+          ],
+          "pid": 20004,
+          "start_utc_epoch": 1794307615.4925957,
+          "duration_seconds": 14.313,
+          "timed_out": false,
+          "termination": {
+            "needed": false
+          },
+          "raw_exit_code": 0,
+          "unsigned_exit_hex": "0x0",
+          "effective_exit_code": 0,
+          "log_sha256": "ac35165c48c5f0299f0f9eba21d33469e3ba81b8faf6c39e0e9c86dd19dd8454",
+          "test_log_dir": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\runner_first\\warm_runner_logs",
+          "isolated_env": {
+            "APPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_runner_first\\isolated_user\\roaming",
+            "LOCALAPPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_runner_first\\isolated_user\\local",
+            "TEMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_runner_first\\isolated_user\\tmp",
+            "TMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_runner_first\\isolated_user\\tmp"
+          },
+          "script_error_lines": [],
+          "generic_error_lines": [],
+          "generic_error_count": 0,
+          "warning_count": 0,
+          "last_printed_reimport": null,
+          "suite_summary": [
+            "1/1 suites passed"
+          ],
+          "setup_failure": false,
+          "native_crash_signature": false,
+          "audited_logs": [
+            {
+              "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\runner_first\\warm_runner_logs\\setup.log",
+              "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b",
+              "engine_errors": [],
+              "script_errors": [],
+              "warning_count": 0,
+              "last_printed_reimport": null,
+              "suite_summary": [],
+              "setup_failure": false,
+              "native_crash_signature": false
+            },
+            {
+              "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\runner_first\\warm_runner_logs\\test_hint_player.gd.log",
+              "sha256": "6997369dcd9a6d2d40bad5e906f7c550ad3a7cf9daafe3b5b8ce1f04b1fcd395",
+              "engine_errors": [],
+              "script_errors": [],
+              "warning_count": 0,
+              "last_printed_reimport": null,
+              "suite_summary": [],
+              "setup_failure": false,
+              "native_crash_signature": false
+            }
+          ]
+        }
+      ],
+      "changed_sidecars": 0,
+      "failed_project_retained": false
+    }
+  ],
+  "collection_complete": true,
+  "crash_reproduced": false,
+  "all_runs_successful": true
+}

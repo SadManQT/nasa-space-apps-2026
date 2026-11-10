@@ -4,11 +4,11 @@ This is the user's approved current assignment. `tasks.json` -> `implementation_
 
 ## What is active
 
-50 implementation tasks. Workload priority: Ramim > Sadman > Asif > Atik > Tanvir > Shanto. Counts below are the approved task allocation, not a token/time estimate; preserve later completed statuses and never rebuild valid work to fill a quota.
+50 original implementation tasks plus the subsequent user-authorized M1-125 integration repair (51 active IDs). Workload priority: Ramim > Sadman > Asif > Atik > Tanvir > Shanto. Counts below are the approved task allocation, not a token/time estimate; preserve later completed statuses and never rebuild valid work to fill a quota.
 
 | Member | Tasks | IDs |
 |---|---:|---|
-| Ramim | 20 | `M3-61`, `M3-64`, `M3-62`, `M3-63`, `M3-65`, `M3-4P`, `M3-4U`, `M3-4M`, `M3-6P`, `M3-6U`, `M3-6M`, `M3-8P`, `M3-8U`, `M3-8M`, `M1-18`, `M1-31`, `M3-67`, `M3-72`, `M3-90`, `M3-91` |
+| Ramim | 21 | `M3-61`, `M3-64`, `M3-62`, `M3-63`, `M3-65`, `M3-4P`, `M3-4U`, `M3-4M`, `M3-6P`, `M3-6U`, `M3-6M`, `M3-8P`, `M3-8U`, `M3-8M`, `M1-18`, `M1-31`, `M3-67`, `M3-72`, `M3-90`, `M3-91`, `M1-125` |
 | Sadman | 11 | `M4-16`, `M1-108`, `M1-49`, `M3-95`, `M3-101`, `M3-5P`, `M3-5U`, `M3-5M`, `M3-7P`, `M3-7U`, `M3-7M` |
 | Asif | 10 | `M1-105`, `M3-2P`, `M3-2U`, `M3-2M`, `M1-103`, `M1-37`, `M3-3P`, `M3-3U`, `M3-3M`, `M3-69` |
 | Atik | 4 | `M1-68`, `M1-53`, `M1-92`, `M1-116` |
@@ -67,3 +67,7 @@ Status changes require an explicit `--by Name/AI`; another member cannot clear y
 General take/next CLI selection is disabled during this batch. This also prevents older unattended night-shift pickers from starting workers under their outdated commit/ownership workflow. Use named agent sessions with explicit claims and published reservations; the row above is the binding assignment. Old role/folder names do not justify choosing an excluded task.
 
 Commit verified work under your own verified GitHub identity. Sync before implementation and each push, preserve local settings/imports and teammates' changes, use explicit staging paths, and never force-push. Keep unfinished work saved and disclosed.
+
+## Subsequent user override: integrated 117-suite gate
+
+On 10 November the user explicitly authorized Ramim to override task/folder ownership as needed to make all 117 existing suites pass. M1-125 is the additional Ramim integration task (51 active IDs total). Preserve other owners' published and unfinished work, record exact-file transfers/reservations, and merge against current main before publishing. Existing assignments and deferred video/submission/manual QA remain; no threshold relaxation or unverified completion is authorized.

@@ -1,0 +1,55 @@
+ok   tools/test_asset_showcase.gd :: SHOWCASE RESULT: PASS (2767 checks, 0 failures)
+ok   tools/test_campaign_boot.gd :: CAMPAIGN BOOT RESULT: PASS (5 checks, 0 failures)
+ok   tools/test_campaign_crew.gd :: CAMPAIGN CREW RESULT: PASS (903 checks, 0 failures)
+ok   tools/test_campaign_field_systems.gd :: CAMPAIGN FIELD SYSTEMS RESULT: PASS (6 checks, 0 failures)
+ok   tools/test_campaign_interaction_input.gd :: CAMPAIGN INTERACTION INPUT RESULT: PASS (39 checks, 0 failures)
+ok   tools/test_campaign_knowledge.gd :: CAMPAIGN KNOWLEDGE RESULT: PASS (47 checks, 0 failures)
+FAIL tools/test_campaign_later_runtime.gd :: exit 1 :: LATER CAMPAIGN RUNTIME RESULT: FAIL (78 checks, 30 failures)
+       ERROR: FAIL production controller crosses into Chapter 3
+       ERROR: FAIL Chapter 3 projection and service-room viewpoint are authoritative
+       ERROR: FAIL Chapter 3 exposes a physical P-05 gauge target
+       ERROR: FAIL P-05 operation commits through the production physical interaction
+       ERROR: FAIL B04 CH02 resumes after journal_discovery
+ok   tools/test_campaign_media.gd :: CAMPAIGN MEDIA RESULT: PASS (115 checks, 0 failures)
+ok   tools/test_campaign_messages.gd :: CAMPAIGN MESSAGES RESULT: PASS (28 checks, 0 failures)
+ok   tools/test_campaign_progression.gd :: CAMPAIGN PROGRESSION RESULT: PASS (22 checks, 0 failures)
+ok   tools/test_campaign_session.gd :: CAMPAIGN SESSION RESULT: PASS (15/15 checks, 0 failures)
+ok   tools/test_care_round_panel.gd :: CARE ROUND PANEL RESULT: PASS (32 checks, 0 failures)
+ok   tools/test_care_round_props.gd :: CARE ROUND PROPS RESULT: PASS (81 checks, 0 failures)
+ok   tools/test_care_round_runtime.gd :: CARE ROUND RUNTIME RESULT: PASS (86 checks, 0 failures)
+FAIL tools/test_ch01_game_feel.gd :: exit 1 :: CH01 GAME FEEL RESULT: FAIL (101 checks, 3 failures)
+       ERROR: FAIL: After dry-zero ('calibrate_probe'), P01Panel feedback reports only dry zero and directs to wet span (never claims wet-span/verification or watering yet)
+       ERROR: FAIL: After wet-span ('span_probe'), P01Panel feedback reports 110->100 and directs to recheck both references
+       ERROR: FAIL: After two-point recheck ('recheck_probe'), P01Panel feedback confirms verification and directs to seed packet
+       CH01 GAME FEEL RESULT: FAIL (101 checks, 3 failures)
+ok   tools/test_ch01_room_hooks.gd :: CH01 ROOM HOOKS RESULT: PASS (117 checks, 0 failures)
+ok   tools/test_ch01_s03_route.gd :: CH01 S03 ROUTE RESULT: PASS (8 checks, 0 failures)
+ok   tools/test_ch03_assets.gd :: CH03 ASSETS RESULT: PASS (328 checks, 0 failures)
+ok   tools/test_ch04_assets.gd :: CH04_ASSETS RESULT: PASS (314 checks, 0 failures)
+ok   tools/test_ch04_missions.gd :: CH04 MISSIONS RESULT: PASS (134 checks, 0 failures)
+ok   tools/test_ch05_assets.gd :: CH05 ASSETS RESULT: PASS (174 checks, 0 failures)
+ok   tools/test_ch05_missions.gd :: CHAPTER 5 MISSIONS RESULT: PASS (890 checks, 0 failures)
+FAIL tools/test_ch06_missions.gd :: exit 1 :: CH06 MISSIONS RESULT: FAIL (149 checks, 105 failures)
+       ERROR: FAIL Chapter 6 entry snapshot constructed from authoritative route
+       ERROR: FAIL campaign boots at EX-CH06-S01 in LOC-02
+       ERROR: FAIL physical campaign at EX-CH06-S01
+       ERROR: FAIL physical target exists: p11_charge_hand_light
+       ERROR: FAIL EX-CH06-S01 physical target p11_charge_hand_light commits -- This operation has no physical target in the current room.
+ok   tools/test_ch07_missions.gd :: CHAPTER 7 MISSIONS RESULT: PASS (1038 checks, 0 failures)
+FAIL tools/test_ch08_missions.gd :: exit 1 :: CH08 MISSIONS RESULT: FAIL (173 checks, 123 failures)
+       ERROR: FAIL Chapter 8 entry snapshot constructed from authoritative route
+       ERROR: FAIL campaign boots at EX-CH08-S01 in LOC-08
+       ERROR: FAIL physical campaign at EX-CH08-S01
+       ERROR: FAIL physical target exists: p15_confirm_teams
+       ERROR: FAIL EX-CH08-S01 physical target p15_confirm_teams commits
+FAIL tools/test_chapter1_campaign_flow.gd :: exit 1 :: CHAPTER 1 CAMPAIGN FLOW RESULT: FAIL (314 checks, 7 failures)
+       ERROR: FAIL production player uses lunar gravity
+       ERROR: FAIL EX-CH01-S12 choice cannot change after its real scene exit
+       ERROR: FAIL final Chapter 1 scene transitions into Chapter 2
+       ERROR: FAIL B03 handoff advances from bloom to the dated P-03 entry
+       ERROR: FAIL B03 real Bloom handoff installs E14/A10/H6/C8/R18
+ok   tools/test_chapter1_logic_regressions.gd :: CHAPTER 1 LOGIC REGRESSIONS: 34 checks, 0 failures
+FAIL tools/test_chapter1_outcomes.gd :: exit 1 :: CHAPTER 1 OUTCOMES RESULT: FAIL (134 checks, 2 failures)
+       ERROR: FAIL BLOOM Continue advances after all final gates
+       ERROR: FAIL GOLDEN Continue advances after all final gates
+       CHAPTER 1 OUTCOMES RESULT: FAIL (134 checks, 2 failures)

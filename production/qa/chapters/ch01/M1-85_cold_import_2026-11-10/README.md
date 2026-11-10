@@ -1,5 +1,11 @@
 # M1-85 - Windows editor-import investigation
 
+10 November2026 - [new corrected-collector engine recheck](current_recheck_20261110/README.md): five cold/warm observations are clean; restoring tracked sidecars in a clean warm control produces285UID/file-access errors despite exit0/1of1. This is correctly FAILED for import integrity. Unchanged retry is clean, with no historical native-crash reproduction or cause identified. Only Steel_Normal differs beyond line endings in this new comparison; the older440-error/two-file comparison below remains at its separate frozen inputs.
+
+All2493warm-input cache hashes and1190sidecar hashes still match the untouched QA source. The retained experiment copy is post-retry, not a frozen pre-error cache. Original full log/cache/backtrace are unidentified in the checked locations; the September minidump remains unlinked. M1-85 stays blocked on original or fresh failing native diagnostics.
+
+## Earlier investigation evidence
+
 10 November 2026, Tanvir. **Blocked: historical native crash not reproduced or diagnosed.** Bounded evidence and a reusable collector are delivered; no game, font, asset, renderer, runner, cache policy or timing threshold was changed.
 
 The historical observation was a mandatory setup exit 139, with GochiHand-Regular.ttf the last printed import. The [published excerpt](../../../evidence/M1-64_setup_failure.txt) records the original 198,663-byte log's SHA-256 `effac2b310a27c472845d20f7175dfd4ec35052c5f912919ffa433cf190f43ac`; that complete log, native backtrace and original cache are unavailable in this checkout. The last printed filename is not a cause diagnosis.
@@ -34,7 +40,7 @@ All three runner summaries report 1/1. Those summaries do **not** establish clea
 
 The exactly executed scripts are preserved under [executed_scripts/](executed_scripts/) and match their recorded run hashes. Their original `all_runs_successful=true` fields audited only the short runner stdout. **That field is superseded by the complete setup audit for the supplemental comparison.** The original cleanup consequently deleted the supplemental scratch despite its hidden setup errors; the raw logs, source/cache hashes and sidecar manifests remain, but that cache copy was not retained.
 
-The current [collector](cold_import_repro.py) now audits the runner's nested setup/suite logs before deciding whether a copy is clean or safe to delete. [Post-audit self-check](post_audit_selfcheck.json) verifies the actual 440-error log, an error-free control, detection of a stub nested error despite exit 0 / 1/1, and exact executed-script fingerprints. [Earlier bounded-process self-check](diagnostic_selfcheck.json) verifies timeout termination, overwrite refusal and independent log directories. These stub checks do not count as Godot runs. The current audit correction was tested against retained logs/stubs, not by repeating the complete import matrix.
+The current [collector](cold_import_repro.py) now audits the runner's nested setup/suite logs before deciding whether a copy is clean or safe to delete. [Post-audit self-check](post_audit_selfcheck.json) verifies the actual 440-error log, an error-free control, detection of a stub nested error despite exit 0 / 1/1, and exact executed-script fingerprints. [Earlier bounded-process self-check](diagnostic_selfcheck.json) verifies timeout termination, overwrite refusal and independent log directories. These stub checks do not count as Godot runs. At the original publication the audit correction had only retained-log/stub checks. The newer current_recheck_20261110 now exercises it on five clean cold/warm runs and a real285-error restored-sidecar setup despite exit0.
 
 [One preliminary attempt](preliminary_interrupted/) was intentionally stopped to finish collector review. It is explicitly labeled and excluded from crash/success statistics; it was not a game crash. Both final collectors completed without a native crash or timeout.
 

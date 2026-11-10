@@ -125,8 +125,11 @@ func apply_preset(preset: String, upgrades: Dictionary = {}) -> void:
 	one_way_allowance = float(spec.one_way_allowance)
 	provisions_hours = float(spec.provisions_hours)
 	passengers = (spec.roster as Array).duplicate()
-	long_range_battery_upgrade = bool(upgrades.get("long_range_battery", false))
-	heater_upgrade = bool(upgrades.get("rover_lights_heater", false))
+	# The campaign passes director.snapshot().upgrades ({"choices": {"4": id}});
+	# tests and the trainer pass flat flags. Read both.
+	var chosen: Array = upgrades.get("choices", {}).values() if upgrades.get("choices") is Dictionary else []
+	long_range_battery_upgrade = bool(upgrades.get("long_range_battery", false)) or chosen.has("long_range_battery")
+	heater_upgrade = bool(upgrades.get("rover_lights_heater", false)) or chosen.has("rover_lights_heater")
 	if preset_id == "ch08_relay" and long_range_battery_upgrade:
 		battery_capacity += 4.0
 	battery = battery_capacity

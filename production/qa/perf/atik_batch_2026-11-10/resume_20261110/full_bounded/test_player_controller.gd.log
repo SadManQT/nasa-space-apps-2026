@@ -1,0 +1,171 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PLAYER TEST Godot 4.7.2-stable (official)
+ROOT Agree distance=1.220700 m speed=0.093600 m/s (removed)
+ROOT Cheer distance=0.256177 m speed=0.086595 m/s (removed)
+ROOT KneelStand distance=0.373088 m speed=0.144421 m/s (removed)
+ROOT PickUp distance=0.317017 m speed=0.043979 m/s (removed)
+ROOT Push distance=0.978741 m speed=0.206051 m/s (removed)
+ROOT RunToWalk distance=2.918988 m speed=1.273740 m/s (removed)
+ROOT SitDown distance=1.215443 m speed=0.212924 m/s (removed)
+ROOT SprintStop distance=2.927942 m speed=1.463971 m/s (removed)
+ROOT StandUp distance=0.562202 m speed=0.090556 m/s (removed)
+ROOT TurnRunL distance=2.290534 m speed=1.409560 m/s (removed)
+ROOT TurnRunR distance=2.454483 m speed=1.510451 m/s (removed)
+ROOT TurnWalkL distance=1.745754 m speed=0.872877 m/s (removed)
+ROOT TurnWalkR distance=2.028554 m speed=0.918590 m/s (removed)
+ROOT Water distance=0.431812 m speed=0.086362 m/s (removed)
+  ok runtime GLTFDocument character and AnimationTree
+ASSET res://assets/characters/CH_Kai/CH_Kai.glb
+  ok 65-bone Mixamo rig
+  ok ClassDB TwoBoneIK3D available and configured
+  ok ClassDB LookAtModifier3D head and neck
+  ok walk reaches measured target
+FEET walk planted_samples=57 joint_mean=0.000003 joint_max=0.000057 m/s surface_samples=63 surface_mean=0.007629 surface_max=0.068494 m/s
+  planted boot surface samples=57 mean=0.001289 max=0.006269 m/s
+  ok walk has stance samples
+  ok walk stance foot world speed < 0.20 m/s
+  ok walk planted boot surface speed < 0.20 m/s
+FEET walk_to_run planted_samples=17 joint_mean=0.000006 joint_max=0.000029 m/s surface_samples=21 surface_mean=0.100740 surface_max=0.537187 m/s
+  planted boot surface samples=17 mean=0.044314 max=0.111181 m/s
+QUALITY_LIMIT walk_to_run touchdown/toe-off surface motion exceeds 0.20 m/s; run --strict-contact to enforce
+  ok walk_to_run has stance samples
+  ok walk_to_run stance foot world speed < 0.20 m/s
+  ok walk_to_run planted boot surface speed < 0.20 m/s
+FEET run planted_samples=28 joint_mean=0.000008 joint_max=0.000057 m/s surface_samples=35 surface_mean=0.134271 surface_max=0.537363 m/s
+  planted boot surface samples=28 mean=0.052423 max=0.111251 m/s
+QUALITY_LIMIT run touchdown/toe-off surface motion exceeds 0.20 m/s; run --strict-contact to enforce
+  ok run has stance samples
+  ok run stance foot world speed < 0.20 m/s
+  ok run planted boot surface speed < 0.20 m/s
+  ok run reaches measured target
+FEET run_to_walk planted_samples=30 joint_mean=0.000000 joint_max=0.000000 m/s surface_samples=33 surface_mean=0.009129 surface_max=0.104216 m/s
+  planted boot surface samples=30 mean=0.002513 max=0.006124 m/s
+  ok run_to_walk has stance samples
+  ok run_to_walk stance foot world speed < 0.20 m/s
+  ok run_to_walk planted boot surface speed < 0.20 m/s
+  ok smooth stop reaches rest
+TRANSITIONS max_speed_delta=0.171204 m/s/frame blend_error=0.000000 max_bone_rotation=15.000135 deg/frame max_joint_displacement=0.199429 m/frame
+  ok speed changes stay below 0.32 m/s/frame
+  ok blend position follows actual horizontal speed
+  ok start/stop/blend rotations stay below 16 degrees/frame
+  ok unknown action rejected
+  ok Wave action accepted
+  ok action fades in
+  ok AnimationTree one-shot active
+  ok full body action locks movement
+  ok one-shot releases back to locomotion
+  ok held input resumes after action
+  ok standing talk fades in
+  ok talk returns to idle
+  ok action fade finishes at zero weight
+ACTION max_bone_rotation=15.000082 deg/frame
+  ok action entry and return have bounded bone rotation
+  ok talk can crossfade to listen
+  ok idle variation crossfades in
+  ok movement fades out idle variation
+  ok full left stick selects run
+  ok partial left stick selects analog walk
+  ok E near test interactable starts Inspect
+  ok E near test interactable starts OpenDoor
+  ok foot placement can be disabled
+  ok gaze can be disabled
+  ok sprint selects the measured sprint gait with scaled cadence
+  ok a sprint stop blends down through the gaits (no flailing stop clip)
+  ok sprint stop reaches rest
+  ok controller animation copies strip horizontal action root motion
+PIVOT max_yaw_delta=8.486377 deg/frame final_speed=1.545124
+  ok reversal brakes, pivots smoothly and faces new input
+STAIRS position=(4.0, 0.900033, -6.019023)
+  ok controller climbs 18 cm stairs
+RAMP position=(-5.0, 0.878686, -5.421769)
+  ok controller walks up ramp
+CAMERA overlaps=0 nearest_wall_z_distance=0.293219 m
+  ok camera sphere remains outside wall through orbit
+  ok camera pitch clamped
+STRIDE WalkBasic_loop speed=1.545279 m/s period=1.083333 m/cycle=1.674052 stance_samples=76 source=1.083333 s
+  authored boot surface mean=1.545279 m/s contacts=36
+STRIDE RunBasic_loop speed=4.061924 m/s period=0.833333 m/cycle=3.384936 stance_samples=34 source=0.833333 s
+  authored boot surface mean=4.061924 m/s contacts=43
+  ok neutral gait aliases work without style or sprint clips
+ROOT SprintStop distance=2.927942 m speed=1.463971 m/s (removed)
+STRIDE Walk_loop speed=1.545279 m/s period=1.083333 m/cycle=1.674052 stance_samples=76 source=1.083333 s
+  authored boot surface mean=1.545279 m/s contacts=36
+STRIDE Run_loop speed=4.061924 m/s period=0.833333 m/cycle=3.384936 stance_samples=34 source=0.833333 s
+  authored boot surface mean=4.061924 m/s contacts=43
+  ok hold fixture prepares
+  ok hold 1 filters exactly its shoulder, arm, forearm, hand and 15 finger bones
+  ok hold 2 filters exactly its shoulder, arm, forearm, hand and 15 finger bones
+  ok set_hold does not jump the weights
+  ok hold reaches its target in 0.2 s (poses=false, mode=1)
+  ok set_hold does not jump the weights
+  ok hold reaches its target in 0.2 s (poses=false, mode=2)
+  ok set_hold does not jump the weights
+  ok hold reaches its target in 0.2 s (poses=false, mode=0)
+  ok hold weights ramp without jumps, including BOX to RIGHT
+  ok hold 1 speed 0.00 preserves legs, torso, head and unselected arm (poses=false)
+  ok hold 1 speed 1.55 preserves legs, torso, head and unselected arm (poses=false)
+  ok hold 1 speed 4.06 preserves legs, torso, head and unselected arm (poses=false)
+  ok hold 1 speed 4.67 preserves legs, torso, head and unselected arm (poses=false)
+  ok hold 2 speed 0.00 preserves legs, torso, head and unselected arm (poses=false)
+  ok hold 2 speed 1.55 preserves legs, torso, head and unselected arm (poses=false)
+  ok hold 2 speed 4.06 preserves legs, torso, head and unselected arm (poses=false)
+  ok hold 2 speed 4.67 preserves legs, torso, head and unselected arm (poses=false)
+ROOT SprintStop distance=2.927942 m speed=1.463971 m/s (removed)
+STRIDE Walk_loop speed=1.545279 m/s period=1.083333 m/cycle=1.674052 stance_samples=76 source=1.083333 s
+  authored boot surface mean=1.545279 m/s contacts=36
+STRIDE Run_loop speed=4.061924 m/s period=0.833333 m/cycle=3.384936 stance_samples=34 source=0.833333 s
+  authored boot surface mean=4.061924 m/s contacts=43
+  ok hold fixture prepares
+  ok hold 1 filters exactly its shoulder, arm, forearm, hand and 15 finger bones
+  ok hold 2 filters exactly its shoulder, arm, forearm, hand and 15 finger bones
+  ok set_hold does not jump the weights
+  ok hold reaches its target in 0.2 s (poses=true, mode=1)
+  ok set_hold does not jump the weights
+  ok hold reaches its target in 0.2 s (poses=true, mode=2)
+  ok set_hold does not jump the weights
+  ok hold reaches its target in 0.2 s (poses=true, mode=0)
+  ok hold weights ramp without jumps, including BOX to RIGHT
+  ok hold 1 speed 0.00 preserves legs, torso, head and unselected arm (poses=true)
+  ok hold 1 speed 1.55 preserves legs, torso, head and unselected arm (poses=true)
+  ok hold 1 speed 4.06 preserves legs, torso, head and unselected arm (poses=true)
+  ok hold 1 speed 4.67 preserves legs, torso, head and unselected arm (poses=true)
+  ok hold 2 speed 0.00 preserves legs, torso, head and unselected arm (poses=true)
+  ok hold 2 speed 1.55 preserves legs, torso, head and unselected arm (poses=true)
+  ok hold 2 speed 4.06 preserves legs, torso, head and unselected arm (poses=true)
+  ok hold 2 speed 4.67 preserves legs, torso, head and unselected arm (poses=true)
+  ok short pose loops without a _loop suffix
+  ok stop transition accepts input while holding
+  ok stop transition and hold layer run together
+  ok BOX caps sprint at run speed, even without a pose clip
+  ok RIGHT permits sprint
+PIVOT max_yaw_delta=8.486377 deg/frame final_speed=1.545124
+  ok reversal brakes, pivots smoothly and faces new input
+  ok hold survives braking, pivot and stop
+ROOT Agree distance=1.210064 m speed=0.092784 m/s (removed)
+ROOT Cheer distance=0.253945 m speed=0.085841 m/s (removed)
+ROOT KneelStand distance=0.369837 m speed=0.143163 m/s (removed)
+ROOT PickUp distance=0.269054 m speed=0.028075 m/s (removed)
+ROOT Push distance=0.970212 m speed=0.204255 m/s (removed)
+ROOT RunToWalk distance=2.893553 m speed=1.262641 m/s (removed)
+ROOT SitDown distance=1.204853 m speed=0.211069 m/s (removed)
+ROOT SprintStop distance=2.902430 m speed=1.451215 m/s (removed)
+ROOT StandUp distance=0.418294 m speed=0.088062 m/s (removed)
+ROOT TurnRunL distance=2.270577 m speed=1.397278 m/s (removed)
+ROOT TurnRunR distance=2.433097 m speed=1.497290 m/s (removed)
+ROOT TurnWalkL distance=1.730543 m speed=0.865272 m/s (removed)
+ROOT TurnWalkR distance=2.005229 m speed=0.540736 m/s (removed)
+ROOT Water distance=0.427506 m speed=0.085501 m/s (removed)
+  ok switch loads CH_Mei
+  ok CH_Mei keeps the spot, facing and camera
+  ok CH_Mei keeps the hold
+  ok CH_Mei gets face layers and hair springs
+FACE LIGHT CH_Mei radius 0.167 m
+  ok CH_Mei face light fitted to the drawn face
+  ok switch loads CH_Kai
+  ok CH_Kai keeps the spot, facing and camera
+  ok CH_Kai keeps the hold
+  ok CH_Kai gets face layers and hair springs
+FACE LIGHT CH_Kai radius 0.139 m
+  ok CH_Kai face light fitted to the drawn face
+PLAYER RESULT: PASS (105 checks, 0 failures)

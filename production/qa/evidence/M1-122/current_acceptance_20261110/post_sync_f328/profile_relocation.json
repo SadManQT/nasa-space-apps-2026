@@ -1,0 +1,7 @@
+{
+    "original_profile_root":  "D:\\The_Last_Braincell\\nasa-space-apps-2026\\q123-sync1110",
+    "retained_profile_root":  "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\q123-sync1110",
+    "file_count":  7,
+    "all_file_hashes_preserved":  true,
+    "reason":  "Generated isolated test profiles moved under ignored .codex after both engine invocations exited; no profile content changed."
+}

@@ -1,0 +1,9 @@
+{
+  "reason": "UI regression stalled beyond standard300s; preserve partial1500s collection, then restart full with standard guard. No runtime threshold changes.",
+  "runner_process_group": 75355,
+  "target_rows": [
+    "76791 75355       12:58 /tmp/last-light-tools/Godot.app/Contents/MacOS/Godot --headless --path . --script res://tools/test_chapter1_ui_regressions.gd"
+  ],
+  "epoch": 1794303480.483635,
+  "stdout_descriptor": "p76791\nf1\nn/private/var/folders/q5/jpk87qq94pdb4slhspw0kdz00000gn/T/tmp.BxPeIIDHZ5\n"
+}
