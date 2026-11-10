@@ -1,0 +1,9 @@
+# Independent review
+
+10 November 2026. Separate read-only GPT-family reviewer review_garden_collision, required by MASTER_PLAN section10. Source scope and tests reviewed against M1-122/M1-123 acceptance. No new production/test-logic defect found after the positive elevated-enclosure hit and authoritative ending/status assertions were added. Combined four-room body/nav/door-state coverage plus actual Garden input recovery was accepted for the bounded data correction; no claim of input-driven crossing of every doorway.
+
+Reviewer found stale pre-rebase native provenance. Current captures were therefore repeated after synchronization, with paired original/fixed obstacle data, preserving newer staging. It confirmed those JSON variants differ only in the intended obstacle changes. The launcher restores exact fixed bytes in finally, uses isolated profiles/exclusive destinations and targets only its launched process tree on timeout. Requested post-child source-hash recheck and full start/end timestamp bounds were implemented; all current run manifests pass those guards. Capture launching also requires full-attempt and continuation exit.
+
+Primary agent opened all10 current before/after/contact/return PNGs and verified real avatar/contact/center placement and dose6 on adverse cases. Current native counts20/0 collision and62/0 movement; baseline20/3 expected. The passing source results do not clear the global failed/incomplete full gate, historical unknown pose, deferred human qualification or other renderer limits. Keep both tasks blocked pending complete required global acceptance.
+
+Final evidence review passed with no material findings: 89 unique full-attempt verdicts (73 passed/16 failed), exactly26 remaining continuation targets (24 passed/2 failed), repeated terrain excluded; all10 current PNG/source guards, links and original-save hashes verified. Evidence ready to commit; keep both tasks blocked because no complete passing global gate exists.

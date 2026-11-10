@@ -1,0 +1,2 @@
+ok   tools/test_garden_movement.gd :: GARDEN MOVEMENT RESULT: PASS (50 checks, 0 failures)
+1/1 suites passed

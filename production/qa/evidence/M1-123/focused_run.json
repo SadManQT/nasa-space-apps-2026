@@ -1,0 +1,9 @@
+{
+  "command": [
+    "C:/Program Files/Git/bin/bash.exe",
+    "game/tools/run_tests.sh",
+    "garden_movement"
+  ],
+  "exit_code": 0,
+  "duration_seconds": 53.936
+}
