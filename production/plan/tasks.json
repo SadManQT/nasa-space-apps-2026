@@ -7924,7 +7924,13 @@
     "game/tools/test_chapter6_rooms.gd",
     "game/tools/capture_p01_panel.gd",
     "game/tools/capture_m155_mission_table.gd",
-    "game/tools/capture_goals_m162.gd"
+    "game/tools/capture_goals_m162.gd",
+    "production/plan/test_board_batch.py",
+    "PRODUCTION_HANDBOOK.md"
+   ],
+   "integration_paths": [
+    "production/plan/test_board_batch.py",
+    "PRODUCTION_HANDBOOK.md"
    ]
   }
  ],
