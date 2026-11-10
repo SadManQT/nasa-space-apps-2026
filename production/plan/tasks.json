@@ -6444,8 +6444,6 @@
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/execution.json",
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/collector_selfcheck.json",
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/README.md",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md",
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/cold/runner.json",
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/cold/runner.txt",
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/cold/before.json",
@@ -6500,7 +6498,8 @@
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/retry/runner_logs/setup.exit.txt",
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/retry/runner_logs/test_hint_player.gd.log",
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/retry/runner_logs/test_hint_player.gd.args0",
-    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/retry/runner_logs/test_hint_player.gd.exit.txt"
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/retry/runner_logs/test_hint_player.gd.exit.txt",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/executed_prepare.py"
    ]
   },
   {
