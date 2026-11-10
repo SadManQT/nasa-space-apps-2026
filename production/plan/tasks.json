@@ -5453,8 +5453,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "The junior-astronaut curriculum: competencies, the Academy manual and 'what you learned' debriefs",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Asif/codex",
    "deps": [
     "M3-64"
    ],
@@ -5488,6 +5488,12 @@
     "game/scripts/debrief/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-69*"
+   ],
+   "edit_files": [
+    "game/scripts/progression/curriculum.gd",
+    "game/resources/campaign/content/curriculum.json",
+    "game/scripts/ui/academy_manual.gd",
+    "game/tools/test_curriculum.gd"
    ]
   },
   {

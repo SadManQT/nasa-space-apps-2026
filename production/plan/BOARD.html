@@ -275,14 +275,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-120">M1-120</a> Investigate measured Windows EVA scene generation over the loading budget <span class="chip ">any</span> <span class="chip ">P0</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="asif"><b>Md. Asif Iqbal</b> <span class="id">asif</span><div class="meta">Class mode and Chapter 2/3 feature chains; curriculum · 20% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">6 todo</span></div><div class="bar"><i style="width:0%"></i></div>
-<details open><summary>Working now (3)</summary><ul>
+<div class="panel" data-member="asif"><b>Md. Asif Iqbal</b> <span class="id">asif</span><div class="meta">Class mode and Chapter 2/3 feature chains; curriculum · 20% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">4 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">5 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<details open><summary>Working now (4)</summary><ul>
 <li><a class="id" href="#M3-3P">M3-3P</a> Chapter 3 puzzles P-05 and P-06 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Asif/codex on 2026-11-10</div></li>
+<li><a class="id" href="#M3-69">M3-69</a> The junior-astronaut curriculum: competencies, the Academy manual and &#x27;what you learned&#x27; debriefs <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Asif/codex on 2026-11-10</div></li>
 <li><a class="id" href="#M1-103">M1-103</a> Expose the Solo/Class session and team-plan bridge for M1-37 <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Asif/antigravity on 2026-11-10</div></li>
 <li><a class="id" href="#M1-105">M1-105</a> Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2 <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Asif/antigravity on 2026-11-10</div></li>
-</ul></details>
-<details open><summary>Next up today (1)</summary><ul>
-<li><a class="id" href="#M3-69">M3-69</a> The junior-astronaut curriculum: competencies, the Academy manual and &#x27;what you learned&#x27; debriefs <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
 <details open><summary>Blocked (1)</summary><ul>
 <li><a class="id" href="#M1-37">M1-37</a> Four-player co-op Class mode: shared decisions, private role clues (as registered) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">9Nov all-branch audit M1-121: M1-102 core crew contract is DONE. Needs Atik M1-103 runtime/query/team-plan bridge. Saved origin/night/M1-37@8a792c1 includes reusable UI/print-card…</div></li>
@@ -6094,8 +6092,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "The junior-astronaut curriculum: competencies, the Academy manual and 'what you learned' debriefs",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Asif/codex",
    "deps": [
     "M3-64"
    ],
@@ -6129,6 +6127,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/debrief/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-69*"
+   ],
+   "edit_files": [
+    "game/scripts/progression/curriculum.gd",
+    "game/resources/campaign/content/curriculum.json",
+    "game/scripts/ui/academy_manual.gd",
+    "game/tools/test_curriculum.gd"
    ],
    "batch_phase": "implementation"
   },
