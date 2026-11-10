@@ -568,7 +568,7 @@ func _display(layout: Dictionary, prefix: String) -> Dictionary:
 
 # ---------------------------------------------------------------------------------------- re-staging, echoes
 
-## One room instance re-staged scene after scene ends exactly as built: Chapter 1 has no staging and its own
+## One room instance re-staged scene after scene ends with Chapter 1's two nameplates and its own
 ## navigation and stations, and Chapter 6 keeps the garden's Earth console but none of Chapter 2's bench.
 func _check_restaging() -> void:
 	var garden := await _room("LOC-03")
@@ -580,7 +580,8 @@ func _check_restaging() -> void:
 		var region := garden.navigation_root.get_node("NavigationRegion") as NavigationRegion3D
 		_check(garden.navigation_root.get_child_count() == 1, scene_id + " re-staging keeps one navigation map")
 		if scene_id == "EX-CH01-S12":
-			_check(garden.stage().layers.is_empty() and not garden.visual_root.has_node(Staging.ROOT_NAME), "Chapter 1 shows no Chapter 2 staging after re-staging")
+			var chapter1 := garden.visual_root.get_node_or_null(Staging.ROOT_NAME)
+			_check(garden.stage().layers == ["ch01_nameplates_at_plants"] and chapter1 != null and chapter1.get_children().map(func(node): return String(node.name)) == ["alo_holder", "tara_holder"], "Chapter 1 restores only its two plant nameplates after re-staging")
 			_check(region.navigation_mesh.get_polygon_count() == base_polys and garden.focus_root.get_child_count() == base_focus, "Chapter 1 navigation and stations return exactly")
 			_check(garden.fixture("earth_screen").is_empty(), "the Chapter 1 garden has no Earth console")
 		if scene_id == "EX-CH06-S12":

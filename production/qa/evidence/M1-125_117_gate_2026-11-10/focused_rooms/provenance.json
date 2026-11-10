@@ -1,0 +1,32 @@
+{
+  "base": "c112f88",
+  "engine": "4.7.stable.official.5b4e0cb0f",
+  "command": "game/tools/run_tests.sh <suite>, isolated APPDATA, complete TEST_LOG_DIR, SUITE_TIMEOUT=600",
+  "scope": "Focused room/support/readability/restaging checks. Physical holders mounted on existing bench faces; FERREIRA mug rotated toward the table-head walkway; exact baseline nameplate layer replaces obsolete no-staging assumptions. No support/readability threshold changed.",
+  "results": [
+    {
+      "suite": "test_care_round_props.gd",
+      "result": "CARE ROUND PROPS RESULT: PASS (81 checks, 0 failures)"
+    },
+    {
+      "suite": "test_chapter2_rooms.gd",
+      "result": "CHAPTER 2 ROOMS RESULT: PASS (3603 checks, 0 failures)"
+    },
+    {
+      "suite": "test_chapter3_rooms.gd",
+      "result": "CHAPTER 3 ROOMS RESULT: PASS (4717 checks, 0 failures)"
+    },
+    {
+      "suite": "test_chapter5_rooms.gd",
+      "result": "CHAPTER 5 ROOMS RESULT: PASS (2837 checks, 0 failures)"
+    },
+    {
+      "suite": "test_chapter6_rooms.gd",
+      "result": "CHAPTER 6 ROOMS RESULT: PASS (3579 checks, 0 failures)"
+    }
+  ],
+  "room_sha256": {
+    "LOC-01.json": "5914d51ac1e2ce8662b7702bc66ef3b9a1069ce572bcac354ee4b453a6ac5c8d",
+    "LOC-03.json": "182c9cbf4e20e767c6210ca59f73d5c74a8e6be9d76906c9a10702c1aad730f5"
+  }
+}

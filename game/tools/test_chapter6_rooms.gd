@@ -360,7 +360,8 @@ func _check_restaging() -> void:
 	await process_frame
 	var garden := await _room("LOC-03")
 	garden.set_scene_context("EX-CH01-S12")
-	_check(not garden.visual_root.has_node(Staging.ROOT_NAME) and (garden.visual_root.get_node("PL_Tara_Bloom") as Node3D).visible, "the Chapter 1 garden is unchanged")
+	var chapter1 := garden.visual_root.get_node_or_null(Staging.ROOT_NAME)
+	_check(garden.stage().layers == ["ch01_nameplates_at_plants"] and chapter1 != null and chapter1.get_children().map(func(node): return String(node.name)) == ["alo_holder", "tara_holder"] and (garden.visual_root.get_node("PL_Tara_Bloom") as Node3D).visible, "the Chapter 1 garden shows only its two plant nameplates")
 	garden.free()
 	await process_frame
 
