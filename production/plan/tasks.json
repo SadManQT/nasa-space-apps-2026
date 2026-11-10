@@ -5032,7 +5032,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.\n10Nov acceptance verification on frozen daa0141 reproduced current full-run failures. Reopened only for regression repair; existing source/evidence and declared dependencies preserved. No feature rebuild.",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.\n10Nov acceptance verification on frozen daa0141 reproduced current full-run failures. Reopened only for regression repair; existing source/evidence and declared dependencies preserved. No feature rebuild.\n10 Nov user explicitly overrides owner restrictions for the integrated 117-suite repair. Ramim takes only the published campaign file at 6b8f835; prior Asif branch/WIP and all other reservations remain preserved. Changes are isolated and will be merged against the latest owner work.",
    "evidence": "production/qa/evidence/M3-61_ramim_audit.md",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.6: report cards after every sortie and job (training grades, never story gates); five cadet skills with\nthree ranks and visible small benefits plus a crew line per rank; gear loadout slots from the existing upgrade choices with a\nweight limit; a jobs board with optional deliveries, surveys, maintenance and science runs, each with a sender and reason in\nMessages; rest at the Safe Room bunks (save, messages, photos, record). Write at least 4 jobs per chapter region in jobs.json.\nTests: grading, rank thresholds, loadout weight, job unlocks.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
@@ -5057,7 +5057,9 @@
    "edit_files": [
     "game/tools/test_campaign_later_runtime.gd",
     "game/tools/test_chapter1_campaign_flow.gd",
-    "game/tools/test_chapter1_outcomes.gd"
+    "game/tools/test_chapter1_outcomes.gd",
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "game/scripts/campaign/campaign_progression.gd"
    ]
   },
   {
@@ -7277,7 +7279,7 @@
     "game/scripts/missions/"
    ],
    "refs": [],
-   "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-08.",
+   "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-08.\n10 Nov user explicitly overrides owner restrictions for the integrated 117-suite repair. Ramim takes only the published campaign file at 6b8f835; prior Asif branch/WIP and all other reservations remain preserved. Changes are isolated and will be merged against the latest owner work.",
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "M3-2P read-only audit on main018b297: Chapter1Campaign.interact_nearby intercepts only P01/P02; P03/P04 fall through perform_target with catalog payload_defaults. Chapter2Route keeps authoritative _p03/_p04 state in snapshot but publishes no panel view. Saved origin/night/M3-2P tip5203a6f has a larger unlanded runtime patch; do not copy it wholesale or duplicate its temporary-director preview framework. Provide a bounded public chosen-input provider seam following current P01 pattern, for P03/P04 only: real nearby USE requests the owned Ramim panel and cannot commit prefilled correct inputs; a read-only primitive view exposes current target/action, authoritative P03/P04 progress and required inputs; preview/confirmation receives explicit player choices through existing forecast_target/perform_target/dispatcher and validates paused-modal handoff, scene/revision, range/line-of-sight/prerequisites, cancellation, malformed/missing/wrong choices, costs/idempotence, retry/save/load. Reuse the real pure puzzle models and existing forecast route; no second store/simulator and no assigning model state from UI. Publish exact signal/provider/view/payload API before UI implementation. Coordinate with Sadman authored P03/P04 data and Ramim changes to pure models; keep current normal campaign tests meaningful via explicit selected inputs, never auto-sign Class or introduce dependencies on unfinished Class mode for Solo. Do not edit Ramim UI/puzzles. Test actual nearby USE and chosen-input preview/confirm/save/retry in real Chapter2. Focused/full runner with honest M1-68/M1-100 limits. Saved source is reference only.",
@@ -7290,6 +7292,13 @@
      "owner": "Atik/antigravity",
      "status": "in_progress",
      "reason": "User-approved implementation batch"
+    },
+    {
+     "date": "2026-11-10",
+     "owner": "Asif/antigravity",
+     "reserved_for": "asif",
+     "status": "in_progress",
+     "reason": "10 Nov user explicitly overrides owner restrictions for the integrated 117-suite repair. Ramim takes only the published campaign file at 6b8f835; prior Asif branch/WIP and all other reservations remain preserved. Changes are isolated and will be merged against the latest owner work."
     }
    ],
    "integration_paths": [
@@ -7298,7 +7307,6 @@
     "production/qa/evidence/M1-105*"
    ],
    "edit_files": [
-    "game/scripts/campaign/chapter1_campaign.gd",
     "game/scripts/missions/chapter2_route.gd",
     "game/scripts/missions/chapter2_gate_catalog.gd",
     "game/tools/test_chapter2_route.gd",
