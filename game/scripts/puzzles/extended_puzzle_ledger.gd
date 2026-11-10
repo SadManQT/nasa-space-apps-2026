@@ -92,13 +92,17 @@ func _validate(puzzle_id: String, action: String, payload: Dictionary) -> String
 		"p09_commit_sequence":
 			if payload.get("order", []) != ["seedling_chart", "relay_fault", "evacuation_order", "boarding"] or String(payload.get("conclusion", "")) != "ALL_FOUR_RETURNED": return "P-09 requires the timestamp order and supported all-returned conclusion."
 		"p10_verify_flashes":
-			if int(payload.get("genuine", -1)) != 6 or int(payload.get("artifacts_rejected", -1)) != 2: return "P-10 requires six genuine flashes and both persistent artifacts rejected."
+			# 08: at least six verified flashes, both artifacts rejected; all
+			# eight with no false report is the Golden observation.
+			if int(payload.get("genuine", -1)) < 6 or int(payload.get("genuine", -1)) > 8 or int(payload.get("artifacts_rejected", -1)) != 2: return "P-10 requires six to eight genuine flashes and both persistent artifacts rejected."
 		"p11_commit_allocation":
 			if int(payload.get("total", -1)) != 7 or not bool(payload.get("essentials", false)) or not bool(payload.get("pump", false)) or not bool(payload.get("camera", false)): return "P-11 requires five essentials plus one pump and one camera for seven units."
 		"p12_reset_sequence":
 			if payload.get("sequence", []) != ["isolate", "zero", "reset", "reconnect", "camera_test"]: return "P-12 requires isolate, zero/fault check, reset, reconnect and camera-branch test."
 		"p13_commit_plan":
-			if int(payload.get("water", -1)) != 4 or int(payload.get("crate", -1)) != 2 or String(payload.get("heat", "")) != "COZY" or String(payload.get("light", "")) != "DIM" or int(payload.get("reserve", -1)) != 30: return "P-13 witness requires W4, K2, COZY/DIM and protected reserve 30."
+			# 08: W4/K2 is the witness; W5/K1 ends identically, so both commit.
+			# Water and crate share the shielding job: crate == 6 - water.
+			if int(payload.get("water", -1)) < 4 or int(payload.get("water", -1)) > 5 or int(payload.get("crate", -1)) != 6 - int(payload.get("water", -1)) or String(payload.get("heat", "")) != "COZY" or String(payload.get("light", "")) != "DIM" or int(payload.get("reserve", -1)) != 30: return "P-13 requires W4/K2 or W5/K1, COZY/DIM and protected reserve 30."
 		"p14_route_reading_1", "p14_route_reading_2":
 			if not (payload.get("reading") is int or payload.get("reading") is float) or not is_finite(float(payload.reading)) or float(payload.reading) < 0 or float(payload.reading) >= 1.0: return "P-14 route clearance requires a reading below 1."
 	return ""

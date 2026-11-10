@@ -252,10 +252,6 @@ static func _defaults(action: String) -> Dictionary:
 		"p08_warm_cold": return {"stage": "cool"}
 		"p08_warm_room": return {"stage": "room"}
 		"p08_inventory_12": return {"count": 12}
-		"p09_commit_sequence": return {"order": ["seedling_chart", "relay_fault", "evacuation_order", "boarding"], "conclusion": "ALL_FOUR_RETURNED"}
-		"p10_verify_flashes": return {"genuine": 6, "artifacts_rejected": 2}
 		"p11_commit_allocation": return {"total": 7, "essentials": true, "pump": true, "camera": true}
 		"p12_reset_sequence": return {"sequence": ["isolate", "zero", "reset", "reconnect", "camera_test"]}
-		"p13_commit_plan": return {"water": 4, "crate": 2, "heat": "COZY", "light": "DIM", "reserve": 30}
-		"p14_route_reading_1", "p14_route_reading_2": return {"reading": 0.4 if action.ends_with("1") else 0.3}
 	return {}
