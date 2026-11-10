@@ -320,6 +320,8 @@ Optional opening (from the gameplay entry flow): mustard fields to the Moon cham
 
 ## 10. Status (latest first)
 
+**10 Nov 2026 — Atik M1-116 original-host recheck:** the retained Arc Vulkan44/0 still times out at180.017s; no original-host access or Windows thread capture is available. Mac Metal/headless comparisons do not close it. Collector macOS sampling is explicitly not a Windows stack collector. No teardown/driver cause or repair claimed. [Evidence identity and exact resume conditions](production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-116_ORIGINAL_HOST.md).
+
 **10 Nov 2026 — Atik M1-68 runner follow-up:** the first117-suite collection is incomplete (28 reported, six failures, then a fatal UI script error left the engine alive). A bounded fatal-error/TERM/KILL runner repair is verified by six injected unittest methods; default300s remains, with an optional text-only guard. No gameplay or50ms assertion changed. A new frozen-source full run follows. [Preserved logs and scope](production/qa/perf/atik_batch_2026-11-10/resume_20261110/README.md).
 
 **10 Nov 2026 — Atik M1-92 matching-tool recheck:** exact arm64 build UUID5EF81F68-A5CB-3B0C-82FF-E288702E954D recorded; no supplied matching dSYM or xctrace found, and atos remains unnamed. The official expanded release list was checked without substituting Android/other-version symbols. No campaign-hitch cause or controlled fix claimed; old title wait is not campaign evidence. [Tool evidence and resume conditions](production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-92_MATCHING_TOOLS.md).
