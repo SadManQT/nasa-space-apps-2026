@@ -7927,7 +7927,8 @@
     "game/tools/capture_goals_m162.gd",
     "production/plan/test_board_batch.py",
     "PRODUCTION_HANDBOOK.md",
-    "game/scripts/ui/chapter1_campaign_hud.gd"
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/scripts/missions/extended_campaign_route.gd"
    ],
    "integration_paths": [
     "production/plan/test_board_batch.py",
