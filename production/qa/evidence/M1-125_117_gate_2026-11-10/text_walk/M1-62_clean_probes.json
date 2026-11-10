@@ -1,0 +1,698 @@
+{
+ "captures": {
+  "M1-62_clean_CH01_150.png": {
+   "captured_utc": "2026-11-10T10:42:01",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    261.0
+   ],
+   "goal": "Trace the power route at the Mission Table",
+   "large_text": true,
+   "scene": "EX-CH01-S01",
+   "target": "commission_route",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    81.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "Sunlight makes more power than the battery can store",
+   "why_bounds": [
+    0.0,
+    144.0,
+    350.0,
+    59.0
+   ]
+  },
+  "M1-62_clean_CH01_normal.png": {
+   "captured_utc": "2026-11-10T10:42:00",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    174.0
+   ],
+   "goal": "Trace the power route at the Mission Table",
+   "large_text": false,
+   "scene": "EX-CH01-S01",
+   "target": "commission_route",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    57.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "Sunlight makes more power than the battery can store",
+   "why_bounds": [
+    0.0,
+    82.0,
+    350.0,
+    43.0
+   ]
+  },
+  "M1-62_clean_CH02_150.png": {
+   "captured_utc": "2026-11-10T10:42:05",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    261.0
+   ],
+   "goal": "Read Alo's identity at the garden bay",
+   "large_text": true,
+   "scene": "EX-CH02-S01",
+   "target": "inspect_alo_identity",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    81.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "Compatible flowers are needed to make seeds",
+   "why_bounds": [
+    0.0,
+    144.0,
+    350.0,
+    59.0
+   ]
+  },
+  "M1-62_clean_CH02_normal.png": {
+   "captured_utc": "2026-11-10T10:42:04",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    151.0
+   ],
+   "goal": "Read Alo's identity at the garden bay",
+   "large_text": false,
+   "scene": "EX-CH02-S01",
+   "target": "inspect_alo_identity",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    57.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "Compatible flowers are needed to make seeds",
+   "why_bounds": [
+    0.0,
+    82.0,
+    350.0,
+    20.0
+   ]
+  },
+  "M1-62_clean_CH03_150.png": {
+   "captured_utc": "2026-11-10T10:42:12",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    232.0
+   ],
+   "goal": "Check the gauge at the service stand",
+   "large_text": true,
+   "scene": "EX-CH03-S01",
+   "target": "p05_equip_gauge",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    81.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "A warning needs an independent measurement",
+   "why_bounds": [
+    0.0,
+    115.0,
+    350.0,
+    59.0
+   ]
+  },
+  "M1-62_clean_CH03_normal.png": {
+   "captured_utc": "2026-11-10T10:42:12",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    151.0
+   ],
+   "goal": "Check the gauge at the service stand",
+   "large_text": false,
+   "scene": "EX-CH03-S01",
+   "target": "p05_equip_gauge",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    57.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "A warning needs an independent measurement",
+   "why_bounds": [
+    0.0,
+    82.0,
+    350.0,
+    20.0
+   ]
+  },
+  "M1-62_clean_CH04_150.png": {
+   "captured_utc": "2026-11-10T10:42:24",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    274.0
+   ],
+   "goal": "Compare the prediction at the garden rack",
+   "large_text": true,
+   "scene": "EX-CH04-S01",
+   "target": "p07_compare_prediction",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    123.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "An honest experiment keeps the original prediction visible",
+   "why_bounds": [
+    0.0,
+    157.0,
+    350.0,
+    59.0
+   ]
+  },
+  "M1-62_clean_CH04_normal.png": {
+   "captured_utc": "2026-11-10T10:42:24",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    174.0
+   ],
+   "goal": "Compare the prediction at the garden rack",
+   "large_text": false,
+   "scene": "EX-CH04-S01",
+   "target": "p07_compare_prediction",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    57.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "An honest experiment keeps the original prediction visible",
+   "why_bounds": [
+    0.0,
+    82.0,
+    350.0,
+    43.0
+   ]
+  },
+  "M1-62_clean_CH05_150.png": {
+   "captured_utc": "2026-11-10T10:42:40",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    261.0
+   ],
+   "goal": "Check the landing area at the airlock",
+   "large_text": true,
+   "scene": "EX-CH05-S01",
+   "target": "p09_check_lander_clearance",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    81.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "A welcome must wait for a clear approach",
+   "why_bounds": [
+    0.0,
+    144.0,
+    350.0,
+    59.0
+   ]
+  },
+  "M1-62_clean_CH05_normal.png": {
+   "captured_utc": "2026-11-10T10:42:39",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    151.0
+   ],
+   "goal": "Check the landing area at the airlock",
+   "large_text": false,
+   "scene": "EX-CH05-S01",
+   "target": "p09_check_lander_clearance",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    57.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "A welcome must wait for a clear approach",
+   "why_bounds": [
+    0.0,
+    82.0,
+    350.0,
+    20.0
+   ]
+  },
+  "M1-62_clean_CH06_150.png": {
+   "captured_utc": "2026-11-10T10:42:56",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    261.0
+   ],
+   "goal": "Charge the lamp at the power-room locker",
+   "large_text": true,
+   "scene": "EX-CH06-S01",
+   "target": "p11_charge_hand_light",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    81.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "Kai needs a reliable small light within reach",
+   "why_bounds": [
+    0.0,
+    144.0,
+    350.0,
+    59.0
+   ]
+  },
+  "M1-62_clean_CH06_normal.png": {
+   "captured_utc": "2026-11-10T10:42:56",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    151.0
+   ],
+   "goal": "Charge the lamp at the power-room locker",
+   "large_text": false,
+   "scene": "EX-CH06-S01",
+   "target": "p11_charge_hand_light",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    57.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "Kai needs a reliable small light within reach",
+   "why_bounds": [
+    0.0,
+    82.0,
+    350.0,
+    20.0
+   ]
+  },
+  "M1-62_clean_CH07_150.png": {
+   "captured_utc": "2026-11-10T10:43:15",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    261.0
+   ],
+   "goal": "Share the warning at the Mission Table",
+   "large_text": true,
+   "scene": "EX-CH07-S01",
+   "target": "p13_share_observations",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    81.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "Every specialist needs the current storm evidence",
+   "why_bounds": [
+    0.0,
+    144.0,
+    350.0,
+    59.0
+   ]
+  },
+  "M1-62_clean_CH07_normal.png": {
+   "captured_utc": "2026-11-10T10:43:13",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    151.0
+   ],
+   "goal": "Share the warning at the Mission Table",
+   "large_text": false,
+   "scene": "EX-CH07-S01",
+   "target": "p13_share_observations",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    57.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "Every specialist needs the current storm evidence",
+   "why_bounds": [
+    0.0,
+    82.0,
+    350.0,
+    20.0
+   ]
+  },
+  "M1-62_clean_CH08_150.png": {
+   "captured_utc": "2026-11-10T10:43:38",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    232.0
+   ],
+   "goal": "Check team names at the rover bay",
+   "large_text": true,
+   "scene": "EX-CH08-S01",
+   "target": "p15_confirm_teams",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    81.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "The rover and habitat both need a crew",
+   "why_bounds": [
+    0.0,
+    115.0,
+    350.0,
+    59.0
+   ]
+  },
+  "M1-62_clean_CH08_normal.png": {
+   "captured_utc": "2026-11-10T10:43:36",
+   "card": [
+    40.0,
+    40.0,
+    378.666656494141,
+    151.0
+   ],
+   "goal": "Check team names at the rover bay",
+   "large_text": false,
+   "scene": "EX-CH08-S01",
+   "target": "p15_confirm_teams",
+   "title": [
+    32.0,
+    0.0,
+    318.0,
+    57.0
+   ],
+   "viewport": [
+    1280,
+    720
+   ],
+   "why": "The rover and habitat both need a crew",
+   "why_bounds": [
+    0.0,
+    82.0,
+    350.0,
+    20.0
+   ]
+  },
+  "M1-62_job_nudge_150.png": {
+   "captured_utc": "2026-11-10T10:42:05",
+   "close": [
+    250.0,
+    16.0,
+    97.0,
+    44.0
+   ],
+   "large_text": true,
+   "png_sha256": "463670ff14f446f23d94af0c095110d120902e59283e3f3ec0035807d837b8eb",
+   "scene": "EX-CH02-S01",
+   "visible_text": [
+    "Hint 1 of 3 - Nudge",
+    "Compare the plant label with the protocol, not just its flower.",
+    "Reading pauses the clock. Hints never change your ending or rewards.",
+    "Request next hint",
+    "Close (Esc / B)"
+   ]
+  },
+  "M1-62_job_nudge_normal.png": {
+   "captured_utc": "2026-11-10T10:42:05",
+   "close": [
+    250.0,
+    16.0,
+    97.0,
+    44.0
+   ],
+   "large_text": false,
+   "png_sha256": "db040034320844b3c4cfd29e41e91df0af0f76a85f35c691da605e65cfe003dd",
+   "scene": "EX-CH02-S01",
+   "visible_text": [
+    "Hint 1 of 3 - Nudge",
+    "Compare the plant label with the protocol, not just its flower.",
+    "Reading pauses the clock. Hints never change your ending or rewards.",
+    "Request next hint",
+    "Close (Esc / B)"
+   ]
+  },
+  "M1-62_last_result_150.png": {
+   "captured_utc": "2026-11-10T10:42:14",
+   "close": [
+    875.0,
+    613.0,
+    127.0,
+    44.0
+   ],
+   "large_text": true,
+   "png_sha256": "e75ec9fd8f0ccf8d9e5bce2ce285c9eda91db7f697e2306529958cfe6e546ed7",
+   "scene": "EX-CH03-S01",
+   "visible_text": [
+    "Last result",
+    "What the last job changed.",
+    "Independent mechanical gauge reference checked.",
+    "Dated station ledger: Food 4.0 + scheduled supply 14.0 + mature crop harvest 0.0 - background consumption 0.0 = 18.0 crew-days. Sampled consumption is counted once.",
+    "Data cards · the evidence behind these numbers",
+    "Close · Esc"
+   ]
+  },
+  "M1-62_last_result_normal.png": {
+   "captured_utc": "2026-11-10T10:42:14",
+   "close": [
+    905.0,
+    613.0,
+    97.0,
+    44.0
+   ],
+   "large_text": false,
+   "png_sha256": "ace7ad5ba25514b20b34a078d034dec88167885b94ee13592e45b5b2cd2bafd6",
+   "scene": "EX-CH03-S01",
+   "visible_text": [
+    "Last result",
+    "What the last job changed.",
+    "Independent mechanical gauge reference checked.",
+    "Dated station ledger: Food 4.0 + scheduled supply 14.0 + mature crop harvest 0.0 - background consumption 0.0 = 18.0 crew-days. Sampled consumption is counted once.",
+    "Data cards · the evidence behind these numbers",
+    "Close · Esc"
+   ]
+  }
+ },
+ "checks": 627,
+ "engine": {
+  "build": "official",
+  "hash": "5b4e0cb0fd279832bbdd69fed5354d4e5ad26f88",
+  "hex": 263936,
+  "major": 4,
+  "minor": 7,
+  "patch": 0,
+  "status": "stable",
+  "string": "4.7-stable (official)",
+  "timestamp": 0
+ },
+ "failures": 0,
+ "representative_bounds": {
+  "CH01_150": {
+   "goal": "Trace the power route at the Mission Table",
+   "height": 261.0,
+   "jobs": 1,
+   "target": "commission_route",
+   "width": 378.666656494141
+  },
+  "CH01_normal": {
+   "goal": "Trace the power route at the Mission Table",
+   "height": 174.0,
+   "jobs": 1,
+   "target": "commission_route",
+   "width": 378.666656494141
+  },
+  "CH02_150": {
+   "goal": "Read Alo's identity at the garden bay",
+   "height": 261.0,
+   "jobs": 1,
+   "target": "inspect_alo_identity",
+   "width": 378.666656494141
+  },
+  "CH02_normal": {
+   "goal": "Read Alo's identity at the garden bay",
+   "height": 151.0,
+   "jobs": 1,
+   "target": "inspect_alo_identity",
+   "width": 378.666656494141
+  },
+  "CH03_150": {
+   "goal": "Check the gauge at the service stand",
+   "height": 232.0,
+   "jobs": 1,
+   "target": "p05_equip_gauge",
+   "width": 378.666656494141
+  },
+  "CH03_normal": {
+   "goal": "Check the gauge at the service stand",
+   "height": 151.0,
+   "jobs": 1,
+   "target": "p05_equip_gauge",
+   "width": 378.666656494141
+  },
+  "CH04_150": {
+   "goal": "Compare the prediction at the garden rack",
+   "height": 274.0,
+   "jobs": 1,
+   "target": "p07_compare_prediction",
+   "width": 378.666656494141
+  },
+  "CH04_normal": {
+   "goal": "Compare the prediction at the garden rack",
+   "height": 174.0,
+   "jobs": 1,
+   "target": "p07_compare_prediction",
+   "width": 378.666656494141
+  },
+  "CH05_150": {
+   "goal": "Check the landing area at the airlock",
+   "height": 261.0,
+   "jobs": 1,
+   "target": "p09_check_lander_clearance",
+   "width": 378.666656494141
+  },
+  "CH05_normal": {
+   "goal": "Check the landing area at the airlock",
+   "height": 151.0,
+   "jobs": 1,
+   "target": "p09_check_lander_clearance",
+   "width": 378.666656494141
+  },
+  "CH06_150": {
+   "goal": "Charge the lamp at the power-room locker",
+   "height": 261.0,
+   "jobs": 1,
+   "target": "p11_charge_hand_light",
+   "width": 378.666656494141
+  },
+  "CH06_normal": {
+   "goal": "Charge the lamp at the power-room locker",
+   "height": 151.0,
+   "jobs": 1,
+   "target": "p11_charge_hand_light",
+   "width": 378.666656494141
+  },
+  "CH07_150": {
+   "goal": "Share the warning at the Mission Table",
+   "height": 261.0,
+   "jobs": 1,
+   "target": "p13_share_observations",
+   "width": 378.666656494141
+  },
+  "CH07_normal": {
+   "goal": "Share the warning at the Mission Table",
+   "height": 151.0,
+   "jobs": 1,
+   "target": "p13_share_observations",
+   "width": 378.666656494141
+  },
+  "CH08_150": {
+   "goal": "Check team names at the rover bay",
+   "height": 232.0,
+   "jobs": 1,
+   "target": "p15_confirm_teams",
+   "width": 378.666656494141
+  },
+  "CH08_normal": {
+   "goal": "Check team names at the rover bay",
+   "height": 151.0,
+   "jobs": 1,
+   "target": "p15_confirm_teams",
+   "width": 378.666656494141
+  }
+ },
+ "scope": "Clean actual chapter-entry rooms and HUD; scripted catalog witnesses, not physical traversal. No injected prerequisite toast or target teleport.",
+ "source_sha256": {
+  "resources/campaign/content/ui_text.json": "be70aa3dd4fd0b5126c7d4579f217f4c87eddb7ea662c13e2c0c85664bf521af",
+  "scripts/ui/campaign_panels.gd": "e21b8ba1c78d215942e59d946609128c47673f171a0dcd6de76df1504ee74ac0",
+  "scripts/ui/chapter1_campaign_hud.gd": "b74c664d467401eb0ee552c4524627626e2256234a084c842bb7e02a5c9dc838",
+  "tools/capture_goals_m162.gd": "0ff85122d479852636033c7afb714f3152a2f4ed09a9d656155349015467790d",
+  "tools/test_player_text.gd": "93009ed6ea9e98451cd15d7eeb9395a6207ce156bfcb2a567a5ebf05dca15e95",
+  "tools/test_science_data.gd": "105ceb8312ae31e35f9d90565a1bfae0446e7702d0d59bdd81ab0fabbe53f192"
+ }
+}
