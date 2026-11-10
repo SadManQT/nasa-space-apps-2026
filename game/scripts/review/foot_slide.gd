@@ -29,6 +29,12 @@ var _extra_binds := PackedVector3Array()
 var _extra_weights := PackedFloat32Array()
 
 func setup(actor: Node3D, skeleton: Skeleton3D) -> void:
+	_setup_impl(actor, skeleton, null)
+
+func setup_incremental(actor: Node3D, skeleton: Skeleton3D, tree: SceneTree) -> void:
+	await _setup_impl(actor, skeleton, tree)
+
+func _setup_impl(actor: Node3D, skeleton: Skeleton3D, tree: SceneTree) -> void:
 	_actor = actor
 	_skeleton = skeleton
 	_boots.clear()
@@ -38,6 +44,7 @@ func setup(actor: Node3D, skeleton: Skeleton3D) -> void:
 		PackedInt32Array([_bone("LeftLeg"), _bone("LeftFoot"), _bone("LeftToeBase")]),
 		PackedInt32Array([_bone("RightLeg"), _bone("RightFoot"), _bone("RightToeBase")]),
 	]
+	var budget_start := Time.get_ticks_usec()
 	for instance: MeshInstance3D in actor.find_children("*", "MeshInstance3D", true, false):
 		if instance.skin == null or instance.get_node_or_null(instance.skeleton) != skeleton:
 			continue
@@ -47,6 +54,9 @@ func setup(actor: Node3D, skeleton: Skeleton3D) -> void:
 			for surface_entry in cached:
 				_boots.append(surface_entry)
 			continue
+		if tree != null and (Time.get_ticks_usec() - budget_start) > 12000:
+			await tree.process_frame
+			budget_start = Time.get_ticks_usec()
 		var skin := instance.skin
 		var bones := PackedInt32Array()
 		var binds: Array[Transform3D] = []
@@ -79,6 +89,9 @@ func setup(actor: Node3D, skeleton: Skeleton3D) -> void:
 			var influences := joints.size() / vertices.size()
 			var selected: Array[Dictionary] = []
 			for v in vertices.size():
+				if tree != null and (v & 511) == 511 and (Time.get_ticks_usec() - budget_start) > 12000:
+					await tree.process_frame
+					budget_start = Time.get_ticks_usec()
 				var base := v * influences
 				var left := 0.0
 				var right := 0.0

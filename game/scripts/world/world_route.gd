@@ -76,7 +76,7 @@ func restore(snapshot_data: Dictionary) -> Dictionary:
 			if typeof(value.get(key, null)) != typeof(defaults[key]):
 				return {"accepted": false, "reason": "Invalid boundary field " + key}
 	var room_id := String(snapshot_data.get("current_room_id", ""))
-	if RoomContract.room(room_id).is_empty():
+	if not RoomContract.room_ids().has(room_id):
 		return {"accepted": false, "reason": "World route snapshot names an unknown room."}
 	var roster_value = snapshot_data.get("roster", {})
 	if not roster_value is Dictionary or not bool(RosterContract.validate_roster(roster_value).get("valid", false)):
@@ -96,7 +96,7 @@ func restore(snapshot_data: Dictionary) -> Dictionary:
 	return {"accepted": true, "reason": "World route restored without teleporting an actor."}
 
 func transition_to(room_id: String, context: Dictionary = {}) -> Dictionary:
-	if RoomContract.room(room_id).is_empty():
+	if not RoomContract.room_ids().has(room_id):
 		return {"accepted": false, "reason": "Unknown room contract: " + room_id}
 	var result := NavigationContract.can_traverse(_current_room, room_id, _boundaries, context)
 	if not bool(result.get("accepted", false)):

@@ -195,6 +195,7 @@ func _test_loading_transitions() -> void:
 	_stop_monitor("production new campaign")
 	var campaign := main._campaign as Chapter1Campaign
 	_check(campaign.incremental_loading and not campaign.loading, "production uses incremental loader and completes")
+	_check(campaign.hud._scene_id == campaign.route.current_scene_id() and not campaign.hud._goal_info.is_empty(), "initial HUD goal is bound before loading completes")
 	_check(campaign._crew.bodies.size() == 5, "title prepares all five cast actors")
 	for id in campaign._crew.bodies:
 		_check(campaign._crew.bodies[id].character.find_children("*", "MeshInstance3D", true, false).size() > 0, id + " prepared body has visible geometry")
@@ -216,6 +217,7 @@ func _test_loading_transitions() -> void:
 	await process_frame
 	_stop_monitor("production full cast entry")
 	_check(campaign._crew.local_ids.size() == 5, "full cast is placed exactly once")
+	_check(campaign.hud._scene_id == campaign.route.current_scene_id(), "full-cast HUD refresh finishes before the loading card closes")
 	# A lamp must advance under the same frame pump used while workers load.
 	var card := LoadingCard.new()
 	root.add_child(card)
@@ -262,6 +264,7 @@ func _test_loading_transitions() -> void:
 	await process_frame
 	_stop_monitor("production terrain exterior entry")
 	_check(campaign._room.room_id == "LOC-10" and campaign._room.on_terrain() and campaign._terrain != null, "LOC-10 stands on the streamed LOLA terrain")
+	_check(campaign.hud._scene_id == campaign.route.current_scene_id(), "terrain HUD refresh finishes before the loading card closes")
 	_check(campaign._terrain != null and campaign._terrain.stream.settled() and campaign._terrain.stream.rocks.size() > 0, "terrain rocks and LOD settled before the card closes")
 	var ground := PhysicsRayQueryParameters3D.create(campaign._player.global_position + Vector3.UP * 5.0, campaign._player.global_position + Vector3.DOWN * 5.0, 1)
 	_check(not campaign._player.get_world_3d().direct_space_state.intersect_ray(ground).is_empty(), "player stands over terrain collision")

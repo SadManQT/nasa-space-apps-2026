@@ -134,6 +134,9 @@ func prepare_content() -> void:
 		LoadTrace.steps.append({"step": "worker_content_validation", "ms": result.ms})
 	if not validation.get("valid", false):
 		failed = "Campaign content could not be verified."
+	else:
+		# Publish only the completed result; a late watchdog worker keeps its data private.
+		Content._full_cache = content.duplicate(true)
 
 static func _content_job() -> Dictionary:
 	var start := Time.get_ticks_usec()
@@ -170,6 +173,11 @@ func prepare_campaign() -> void:
 				sample.free()
 				failed = "Crew motion could not be prepared."
 				break
+		await get_tree().process_frame
+		var skeletons := sample.find_children("*", "Skeleton3D", true, false)
+		if not skeletons.is_empty():
+			await LocomotionClips.FootSlideScript.new().setup_incremental(sample, skeletons[0] as Skeleton3D, get_tree())
+		await get_tree().process_frame
 		sample.free()
 		await get_tree().process_frame
 		await resource("res://resources/player/ch_%s.tres" % id)
@@ -297,7 +305,8 @@ func prepare_scene_outfits(room_id: String, scene_id: String) -> bool:
 		await get_tree().process_frame
 		var skeletons := sample.find_children("*", "Skeleton3D", true, false)
 		if not skeletons.is_empty():
-			LocomotionClips.FootSlideScript.new().setup(sample, skeletons[0] as Skeleton3D)
+			await LocomotionClips.FootSlideScript.new().setup_incremental(sample, skeletons[0] as Skeleton3D, get_tree())
+		await get_tree().process_frame
 		sample.free()
 		await get_tree().process_frame
 		await resource("res://resources/player/ch_%s.tres" % id)

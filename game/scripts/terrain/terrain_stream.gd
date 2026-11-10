@@ -81,6 +81,61 @@ func configure(region_id: String, start: Vector3 = Vector3.ZERO, clear_areas: Ar
 	move_focus(start, true)
 	return failures.is_empty()
 
+func configure_incremental(region_id: String, start: Vector3 = Vector3.ZERO, clear_areas: Array = [], prepared: TerrainHeightfield = null) -> bool:
+	var info := Region.tiles_info(region_id)
+	if info.is_empty() or not start.is_finite() or field != null or not is_inside_tree():
+		return false
+	var candidate := prepared if prepared != null else Heightfield.load_region(region_id, true)
+	if candidate == null:
+		return false
+	var ext := candidate.extent()
+	if start.x < ext.x_min or start.x > ext.x_max or start.z < ext.z_min or start.z > ext.z_max:
+		return false
+	field = candidate
+	_loads = Loads.new()
+	get_tree().root.add_child(_loads)
+	config = JSON.parse_string(FileAccess.get_file_as_string(PROFILE))
+	exclusions = clear_areas.duplicate(true)
+	_material = Region.make_material(region_id, {"detail": false})
+	_material.set_shader_parameter("use_detail", true)
+	await get_tree().process_frame
+	for parameter in ["detail_albedo", "detail_normal"]:
+		var texture := load(String(config[parameter])) as Texture2D
+		if texture != null:
+			_material.set_shader_parameter(parameter, texture)
+			var pixels := texture.get_image()
+			if pixels.is_compressed():
+				pixels.decompress()
+			if not pixels.has_mipmaps() and pixels.generate_mipmaps(parameter == "detail_normal") == OK:
+				_material.set_shader_parameter(parameter, ImageTexture.create_from_image(pixels))
+		await get_tree().process_frame
+	var entries: Array = info.get("tiles", []).duplicate(true)
+	if info.get("vista") is Dictionary:
+		var vista: Dictionary = info.vista.duplicate(true)
+		vista["id"] = "Vista"
+		entries.append(vista)
+	for entry in entries:
+		var id := String(entry.id)
+		var lods: Array = entry.lods
+		if lods.is_empty():
+			continue
+		var lod: Dictionary = lods[-1]
+		var node := _instantiate(lod, entry)
+		if node == null:
+			failures.append("Missing terrain tile: " + id)
+			continue
+		add_child(node)
+		tiles[id] = {"entry": entry, "node": node, "lod": int(lod.lod)}
+	await get_tree().process_frame
+	var vista_id := String(config.vista_regions.get(region_id, ""))
+	if not vista_id.is_empty():
+		var backdrop := Region.build(vista_id, {"lod": int(config.vista_lod)})
+		if backdrop != null:
+			add_child(backdrop)
+		await get_tree().process_frame
+	move_focus(start, true)
+	return failures.is_empty()
+
 func _instantiate(lod: Dictionary, entry: Dictionary, resource: Resource = null) -> Node3D:
 	var scene: Resource = resource if resource != null else load(String(lod.path))
 	if not scene is PackedScene:

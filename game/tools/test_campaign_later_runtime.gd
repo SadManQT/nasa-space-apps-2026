@@ -93,6 +93,9 @@ func _test_panels() -> void:
 	shortcut.pressed = true
 	_campaign.hud._unhandled_key_input(shortcut)
 	_check(_campaign.hud.panels.active_panel().is_empty() and not _campaign.query().paused, "loading ignores menu shortcuts until HUD setup is complete")
+	var voice_before: String = _campaign.audio.voice_line_id
+	_campaign.present_dialogue({"id": "loading-dialogue-fixture", "speaker": "Kai", "text": "Wait for the loading card."})
+	_check(_campaign.audio.voice_line_id == voice_before, "loading never starts the next dialogue before its HUD and scene are ready")
 	_campaign.hud.panels.close_panel()
 	_campaign.loading = false
 	for panel_id in ["journal_discovery", "pause", "settings_accessibility"]:

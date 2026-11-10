@@ -73,7 +73,7 @@ static func validate_roster(roster: Dictionary) -> Dictionary:
 		if not row.get("physical_location_id", null) is String:
 			continue
 		var location := String(row.physical_location_id)
-		if RoomContract.room(location).is_empty() and not (actor_id == "ferreira" and location == "EARTH_SCREEN"):
+		if not RoomContract.room_ids().has(location) and not (actor_id == "ferreira" and location == "EARTH_SCREEN"):
 			errors.append(actor_id + " has an invalid physical location")
 	return {"valid": errors.is_empty(), "errors": errors}
 

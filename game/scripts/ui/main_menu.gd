@@ -32,6 +32,7 @@ var _large_text := false
 var _query: Dictionary = {}
 var _command_sink: Callable
 var _panels: CampaignPanels
+var defer_panels := false
 var _modal_focus: Control
 var _modal_states: Dictionary = {}
 var _accessibility := {
@@ -208,6 +209,13 @@ func _build() -> void:
 
 	_build_briefing()
 	_build_science()
+	if not defer_panels:
+		attach_panels()
+	_apply_accessibility()
+
+func attach_panels() -> void:
+	if _panels != null:
+		return
 	_panels = PANELS_SCENE.instantiate() as CampaignPanels
 	_panels.name = "CampaignPanels"
 	_panels.bind_query(_query)

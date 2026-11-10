@@ -56,7 +56,7 @@ func _ready() -> void:
 	var snapshot := _load_campaign_snapshot()
 	await get_tree().process_frame
 	stamp = LoadTrace.begin()
-	await _show_title(snapshot)
+	await _show_title(snapshot, true)
 	LoadTrace.end("title_ui_save_validation", stamp)
 	await get_tree().process_frame
 	_loading_card.queue_free()
@@ -130,7 +130,7 @@ func _build_stage() -> void:
 	earth_mesh.mesh = sphere
 	earth_body.add_child(earth_mesh)
 
-func _show_title(preloaded_snapshot: Variant = null) -> void:
+func _show_title(preloaded_snapshot: Variant = null, incremental: bool = false) -> void:
 	if _campaign != null and is_instance_valid(_campaign):
 		if preparation != null and is_instance_valid(preparation.crew):
 			preparation.crew = null
@@ -145,6 +145,8 @@ func _show_title(preloaded_snapshot: Variant = null) -> void:
 	_menu_layer.name = "TitleLayer"
 	add_child(_menu_layer)
 	_menu = MENU_SCENE.instantiate() as MainMenu
+	if incremental:
+		_menu.defer_panels = true
 	_menu_layer.add_child(_menu)
 	_menu.new_expedition_requested.connect(_start_new_expedition)
 	_menu.continue_requested.connect(_continue_expedition)
@@ -155,6 +157,10 @@ func _show_title(preloaded_snapshot: Variant = null) -> void:
 	_menu.chapter_select_requested.connect(_open_chapter_select)
 	if is_inside_tree():
 		await get_tree().process_frame
+	if incremental and is_instance_valid(_menu):
+		_menu.attach_panels()
+		if is_inside_tree():
+			await get_tree().process_frame
 	var snapshot: Dictionary = preloaded_snapshot if preloaded_snapshot is Dictionary else _load_campaign_snapshot()
 	if is_inside_tree():
 		await get_tree().process_frame

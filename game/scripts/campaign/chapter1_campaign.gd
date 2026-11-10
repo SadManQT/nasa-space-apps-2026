@@ -21,6 +21,7 @@ const AudioRuntimeScript = preload("res://scripts/audio/audio_runtime.gd")
 const EvaSuitScript = preload("res://scripts/eva/eva_suit.gd")
 const CadetProgressionScript = preload("res://scripts/progression/cadet_progression.gd")
 const FieldSystemsScript = preload("res://scripts/campaign/campaign_field_systems.gd")
+const CampaignProgressionScript = preload("res://scripts/campaign/campaign_progression.gd")
 const HUDScene: PackedScene = preload("res://scenes/ui/chapter1_campaign_hud.tscn")
 const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 
@@ -75,6 +76,56 @@ func _ready() -> void:
 		_refresh_world()
 		_build_hud()
 		_save_campaign()
+
+func _start_session_incremental() -> void:
+	var stamp := LoadTrace.begin()
+	content = prepared_content if not prepared_content.is_empty() else ContentScript.load_full()
+	_dialogue = CampaignDialogueService.new(content)
+	var validation := preparation.validation if preparation != null and not prepared_content.is_empty() else ContentScript.validate_full(content)
+	if not bool(validation.get("valid", false)):
+		_fail_startup("Campaign content could not be verified.")
+		return
+	LoadTrace.end("content_validation", stamp)
+	await get_tree().process_frame
+	stamp = LoadTrace.begin()
+	save_service = SaveScript.new()
+	save_service.session_validator = restore_session
+	if initial_snapshot.is_empty():
+		director = DirectorScript.new()
+		if director.new_campaign(ContentScript.EXPECTED_CONTENT_REVISION).is_empty():
+			_fail_startup("The gameplay profile could not be verified.")
+			return
+		route = RouteScript.new(director)
+	else:
+		var session := restore_session(initial_snapshot)
+		if not bool(session.get("accepted", false)):
+			_fail_startup(String(session.get("reason", "The checkpoint could not be restored.")))
+			return
+		director = session.director
+		route = session.route
+		var saved_dock = initial_snapshot.get("route_runtime", {}).get("garage_dock", {}) if initial_snapshot.get("route_runtime", null) is Dictionary else {}
+		if saved_dock is Dictionary:
+			_saved_garage_dock = saved_dock.duplicate(true)
+	await get_tree().process_frame
+	var presentation := director.snapshot()
+	presentation["paused"] = false
+	for key in initial_accessibility:
+		presentation["accessibility"][key] = initial_accessibility[key]
+	director.restore_snapshot(presentation)
+	var assist_mode := String(presentation.get("accessibility", {}).get("assist_mode", "Cadet"))
+	eva_suit = EvaSuitScript.new(assist_mode)
+	progression = CadetProgressionScript.new()
+	field_systems = FieldSystemsScript.new(self)
+	var resume: Dictionary = initial_snapshot.get("presentation_resume", {})
+	field_systems.restore(resume.get("field_systems", {}))
+	_progression_flow = CampaignProgressionScript.new(self)
+	progression_flow = _progression_flow
+	_progression_flow.restore(resume)
+	progression = _progression_flow.model
+	_sync_route_projection()
+	LoadTrace.end("route_profile", stamp)
+	await get_tree().process_frame
+	_build_media()
 
 func _start_session() -> void:
 	var stamp := LoadTrace.begin()
@@ -154,7 +205,7 @@ func _ready_incremental() -> void:
 		_crew = preparation.crew
 		_crew.reparent(self)
 	await get_tree().process_frame
-	_start_session()
+	await _start_session_incremental()
 	await get_tree().process_frame
 	if _startup_error.is_empty():
 		await _refresh_world_incremental()
@@ -164,14 +215,15 @@ func _ready_incremental() -> void:
 		await get_tree().process_frame
 		_save_campaign()
 		await get_tree().process_frame
-	loading = false
-	var ready_stamp := LoadTrace.begin()
-	_on_scene_ready()
-	LoadTrace.end("campaign_scene_ready", ready_stamp)
 	if hud != null:
-		ready_stamp = LoadTrace.begin()
-		hud.refresh_scene()
+		var ready_stamp := LoadTrace.begin()
+		await hud.refresh_scene({}, true)
 		LoadTrace.end("campaign_hud_refresh", ready_stamp)
+	loading = false
+	_on_scene_ready()
+	if hud != null:
+		hud._render_caption()
+		hud._offer_resume_card()
 	_prefetch_next_room()
 
 func wait_loading() -> void:
@@ -1202,14 +1254,17 @@ func _rebuild_transition() -> void:
 	set_ui_paused(true)
 	await _refresh_world_incremental()
 	set_ui_paused(was_paused)
-	_on_scene_ready()
 	await get_tree().process_frame
 	if hud != null:
-		hud.refresh_scene({}, true)
+		await hud.refresh_scene({}, true)
 	await get_tree().process_frame
 	_transition_card.queue_free()
 	_transition_card = null
 	loading = false
+	_on_scene_ready()
+	if hud != null:
+		hud._render_caption()
+		hud._offer_resume_card()
 	_prefetch_next_room()
 
 ## Scene order is data-owned. Start the next room while the current scene is
@@ -1261,6 +1316,8 @@ func _build_hud() -> void:
 	LoadTrace.end("hud_setup", stamp)
 
 func present_dialogue(line: Dictionary) -> void:
+	if loading:
+		return
 	if _crew != null:
 		_crew.present_line(line, bool(director.snapshot().get("accessibility", {}).get("reduced_motion", false)))
 	if audio != null:

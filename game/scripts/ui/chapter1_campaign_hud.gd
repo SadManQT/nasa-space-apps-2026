@@ -261,6 +261,15 @@ func setup(value: Chapter1Campaign) -> void:
 	LoadTrace.end("hud_p01", stamp)
 	if runtime.incremental_loading:
 		await get_tree().process_frame
+		CampaignKnowledge.content()
+		await get_tree().process_frame
+		CampaignKnowledge.journal_text()
+		CampaignKnowledge.story_echoes()
+		CampaignKnowledge.p02_table()
+		await get_tree().process_frame
+		var decision: Dictionary = runtime.current_scene_data().get("choice", {})
+		CampaignState.story_choice_locked(runtime.director.snapshot(), String(decision.get("id", "")))
+		await get_tree().process_frame
 	stamp = LoadTrace.begin()
 	_refresh_query()
 	refresh_scene({})
@@ -282,11 +291,23 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 		_auto_timer = 0.0
 	_dialogue_index = _first_unacknowledged_line()
 	_decision_review.visible = next_scene.begins_with("EX-CH01-")
+	var stamp := LoadTrace.begin()
 	_sync_messages()
+	LoadTrace.end("hud_messages_refresh", stamp)
+	stamp = LoadTrace.begin()
 	_render_caption()
+	LoadTrace.end("hud_caption_refresh", stamp)
+	if during_loading and runtime.incremental_loading:
+		await get_tree().process_frame
+	stamp = LoadTrace.begin()
 	_build_targets()
+	LoadTrace.end("hud_targets_refresh", stamp)
+	if during_loading and runtime.incremental_loading:
+		await get_tree().process_frame
 	_refresh_query()
+	stamp = LoadTrace.begin()
 	apply_accessibility()
+	LoadTrace.end("hud_accessibility_refresh", stamp)
 	_offer_resume_card()
 	_flush_message_toasts()
 
@@ -1305,11 +1326,17 @@ func _on_exit_pressed() -> void:
 
 func _refresh_query() -> void:
 	if panels != null and runtime != null:
+		var stamp := LoadTrace.begin()
 		var query := runtime.query()
+		LoadTrace.end("hud_query_projection", stamp)
+		stamp = LoadTrace.begin()
 		panels.bind_query(query)
+		LoadTrace.end("hud_panels_bind", stamp)
 		if outpost != null:
+			stamp = LoadTrace.begin()
 			outpost.set_settings(query.get("accessibility", {}))
 			outpost.bind_query(query, _forecast)
+			LoadTrace.end("hud_outpost_bind", stamp)
 
 ## Applies captions and large text to every HUD element (panels do their own).
 func apply_accessibility() -> void:
