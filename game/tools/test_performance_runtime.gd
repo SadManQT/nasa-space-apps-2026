@@ -101,12 +101,20 @@ var _trace_windows: Array = []
 var _window_start := 0
 var _first_step := 0
 var _trace_enabled := false
+var _last_step := 0
+var _longest_interval: Dictionary = {}
 
 func _heartbeat() -> void:
 	if _last_tick == 0:
 		return
 	var now := Time.get_ticks_usec()
-	_longest_tick = maxf(_longest_tick, (now - _last_tick) / 1000.0)
+	var interval_ms := (now - _last_tick) / 1000.0
+	if interval_ms > _longest_tick:
+		_longest_tick = interval_ms
+		if _retain_trace:
+			_longest_interval = {"start_usec": _last_tick, "end_usec": now, "first_step": _last_step, "end_step": LoadTrace.steps.size()}
+	if _retain_trace:
+		_last_step = LoadTrace.steps.size()
 	_last_tick = now
 	_tick_count += 1
 
@@ -114,6 +122,8 @@ func _start_monitor() -> void:
 	if _retain_trace:
 		_first_step = LoadTrace.steps.size()
 		_trace_enabled = LoadTrace.enabled
+		_last_step = _first_step
+		_longest_interval = {}
 	_last_tick = Time.get_ticks_usec()
 	_window_start = _last_tick
 	_longest_tick = 0.0
@@ -125,7 +135,7 @@ func _stop_monitor(label: String) -> void:
 	_check(_tick_count > 1, label + " yields moving loading frames")
 	_check(_longest_tick < 50.0, label + " main-thread interval <50 ms (%.3f)" % _longest_tick)
 	if _retain_trace:
-		_trace_windows.append({"label": label, "start_usec": _window_start, "end_usec": end, "frames": _tick_count, "max_interval_ms": _longest_tick, "trace_enabled": _trace_enabled, "first_step": _first_step, "end_step": LoadTrace.steps.size()})
+		_trace_windows.append({"label": label, "start_usec": _window_start, "end_usec": end, "frames": _tick_count, "max_interval_ms": _longest_tick, "max_interval": _longest_interval, "trace_enabled": _trace_enabled, "first_step": _first_step, "end_step": LoadTrace.steps.size()})
 
 func _test_threaded_geometry() -> void:
 	process_frame.connect(_heartbeat)
@@ -265,7 +275,7 @@ func _test_loading_transitions() -> void:
 	LoadTrace.enabled = false
 	if _retain_trace:
 		# Serialize only after every measurement and optional look-ahead has finished.
-		var report := {"schema": 1, "process_id": OS.get_process_id(), "window_clock": "Time.get_ticks_usec; process-relative", "window_context": "SceneTree main-thread heartbeat", "stage_context": "Original LoadTrace records have names/ms only; stage timestamps and thread IDs are unavailable. Ranges group records appended during each window; nested/background stages are not additive frame costs.", "windows": _trace_windows, "steps": LoadTrace.steps}
+		var report := {"schema": 1, "process_id": OS.get_process_id(), "main_thread_id": OS.get_thread_caller_id(), "window_clock": "Time.get_ticks_usec; process-relative", "window_context": "SceneTree main-thread heartbeat; max_interval retains its exact endpoints and published-step range", "stage_context": "Clocked stages retain actual begin/end ticks and the end-caller thread_id; spans can include yields. Worker durations and animation-batch maxima remain duration-only. Step ranges mean publication order; overlapping/nested stages are not additive CPU costs.", "windows": _trace_windows, "steps": LoadTrace.steps}
 		var directory := OS.get_environment("TEST_LOG_DIR")
 		if not directory.is_empty():
 			var file := FileAccess.open(directory.path_join("loading_trace.json"), FileAccess.WRITE)
@@ -298,12 +308,19 @@ func _check_retained_trace() -> void:
 	if not report is Dictionary or not report.get("windows") is Array or not report.get("steps") is Array:
 		return
 	var complete: bool = report.steps.size() == LoadTrace.steps.size()
+	var clocked := 0
 	for index in mini(report.steps.size(), LoadTrace.steps.size()):
 		var saved: Dictionary = report.steps[index]
 		var original: Dictionary = LoadTrace.steps[index]
 		# JSON parsing can round by one ULP; 1e-9 ms is below the timer's 0.001 ms resolution.
 		complete = complete and saved.size() == original.size() and saved.step == original.step and absf(float(saved.ms) - float(original.ms)) < 0.000000001
+		if original.has("start_usec"):
+			clocked += 1
+			for field in ["start_usec", "end_usec", "thread_id"]:
+				complete = complete and saved.get(field) == original.get(field)
+			complete = complete and saved.end_usec >= saved.start_usec and absf(float(saved.ms) - (saved.end_usec - saved.start_usec) / 1000.0) < 0.000000001
 	_check(complete, "retained trace keeps every original stage at timer precision without invented fields")
+	_check(clocked > 0, "retained trace includes actual timed stage clocks")
 	var expected: Array = []
 	for id in ["Kai", "Amara", "Mei", "Rafi", "Ferreira", "PR_MissionTable"]:
 		expected.append(id + " raw load")
@@ -318,3 +335,8 @@ func _check_retained_trace() -> void:
 		var first := int(window.first_step)
 		var end := int(window.end_step)
 		_check(first >= 0 and first <= end and end <= report.steps.size() and (end > first if window.trace_enabled else first == end), "actual stage range linked: " + String(window.label))
+		var interval: Dictionary = window.get("max_interval", {})
+		var interval_start := int(interval.get("start_usec", 0))
+		var interval_end := int(interval.get("end_usec", 0))
+		_check(interval_start >= window.start_usec and interval_end <= window.end_usec and interval_end > interval_start and absf((interval_end - interval_start) / 1000.0 - float(window.max_interval_ms)) < 0.000000001, "longest heartbeat endpoints retained: " + String(window.label))
+		_check(int(interval.get("first_step", -1)) >= first and int(interval.get("end_step", -1)) >= int(interval.get("first_step", -1)) and int(interval.get("end_step", -1)) <= end, "longest heartbeat publication range retained: " + String(window.label))

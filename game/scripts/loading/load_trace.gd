@@ -10,4 +10,5 @@ static func begin() -> int:
 
 static func end(label: String, start: int) -> void:
 	if enabled and start > 0:
-		steps.append({"step": label, "ms": (Time.get_ticks_usec() - start) / 1000.0})
+		var finish := Time.get_ticks_usec()
+		steps.append({"step": label, "ms": (finish - start) / 1000.0, "start_usec": start, "end_usec": finish, "thread_id": OS.get_thread_caller_id()})

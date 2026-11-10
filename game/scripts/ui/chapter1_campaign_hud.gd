@@ -150,6 +150,7 @@ func _ready() -> void:
 
 func setup(value: Chapter1Campaign) -> void:
 	runtime = value
+	var stamp := LoadTrace.begin()
 	panels = PANELS_SCENE.instantiate() as CampaignPanels
 	add_child(panels)
 	panels.set_command_sink(Callable(runtime, "handle_ui_command"))
@@ -184,6 +185,10 @@ func setup(value: Chapter1Campaign) -> void:
 		pause_actions.append({"label": entry[1], "name": "Open_" + family_id, "action": func(): open_family(family_id)})
 	panels.set_pause_actions(pause_actions)
 	panels.set_content_top(float(UiDesign.px(64, get_viewport_rect().size.y)))
+	LoadTrace.end("hud_panels", stamp)
+	if runtime.incremental_loading:
+		await get_tree().process_frame
+	stamp = LoadTrace.begin()
 	comms_service = CommsServiceScript.new()
 	var director_ref = runtime.get("director") if runtime != null else null
 	var content_ref: Dictionary = runtime.content if runtime != null and runtime.get("content") is Dictionary else {}
@@ -205,6 +210,10 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table.commit_requested.connect(_on_mission_table_commit)
 	mission_table.payload_requested.connect(_on_payload_requested)
 	mission_table.hint_player = panels.hint_player
+	LoadTrace.end("hud_comms_mission_table", stamp)
+	if runtime.incremental_loading:
+		await get_tree().process_frame
+	stamp = LoadTrace.begin()
 	chapter4_panel = CHAPTER4_PANEL_SCENE.instantiate() as Chapter4PuzzlePanel
 	add_child(chapter4_panel)
 	chapter4_panel.opened.connect(func(_target: String) -> void: _on_panel_opened("chapter4_panel"))
@@ -220,6 +229,10 @@ func setup(value: Chapter1Campaign) -> void:
 	chapter8_panel.opened.connect(func(_target: String) -> void: _on_panel_opened("chapter8_panel"))
 	chapter8_panel.closed.connect(func(_target: String) -> void: _on_panel_closed("chapter8_panel"))
 	chapter8_panel.commit_requested.connect(_on_chapter8_commit)
+	LoadTrace.end("hud_chapter_panels", stamp)
+	if runtime.incremental_loading:
+		await get_tree().process_frame
+	stamp = LoadTrace.begin()
 	p01_panel = P01_SCENE.instantiate() as P01Panel
 	add_child(p01_panel)
 	p01_panel.hint_player = panels.hint_player
@@ -245,8 +258,13 @@ func setup(value: Chapter1Campaign) -> void:
 	if eva_visor != null and runtime.get("eva_suit") != null:
 		eva_visor.bind_suit(runtime.eva_suit)
 	_resume_pending = bool(runtime.incremental_loading) and not runtime.initial_snapshot.is_empty()
+	LoadTrace.end("hud_p01", stamp)
+	if runtime.incremental_loading:
+		await get_tree().process_frame
+	stamp = LoadTrace.begin()
 	_refresh_query()
 	refresh_scene({})
+	LoadTrace.end("hud_initial_query", stamp)
 
 ## Re-reads the current scene: goal card, jobs, dialogue and the strip.
 func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> void:
@@ -1365,6 +1383,8 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_set_modal_buttons(true, child)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if runtime == null or runtime.loading:
+		return
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	var key := (event as InputEventKey).physical_keycode
