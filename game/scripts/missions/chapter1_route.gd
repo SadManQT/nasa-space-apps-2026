@@ -32,6 +32,9 @@ var _last_result := {}
 var _ending := ""
 var _p02_table: RefCounted = MissionTableScript.new()
 var _table_simulation: RefCounted = SimulationScript.new()
+## Class approvals are route evidence, never a simulation input. Each record
+## names the exact crew, scene, state revision, selected plan and forecast.
+var _team_signoffs: Dictionary = {}
 
 func _init(director: RefCounted = null, skip_initial_scene: bool = false) -> void:
 	_gate_catalog = GateCatalog
@@ -104,6 +107,107 @@ func probe_job() -> RefCounted:
 func mission_table() -> RefCounted:
 	return _p02_table
 
+## Public provider contract for the Class Mission Table. A later puzzle panel
+## can use the same selected-plan/sign-off shape without owning this route's
+## simulation or save store. The selection is primitive and safe to hand back
+## to sign_team_plan after the player has reviewed the forecast.
+func team_plan_view(target_id: String) -> Dictionary:
+	if not MissionTableScript.is_gate(target_id) or not GateCatalog.targets_for_scene(current_scene_id()).any(func(item): return String(item.get("target_id", "")) == target_id):
+		return {"accepted": false, "reason": "This team plan is not in the current scene."}
+	var roles := _team_roles()
+	if roles.size() != 4:
+		return {"accepted": false, "reason": "The four role cards are unavailable."}
+	var crew: Dictionary = _director.crew()
+	var view: Dictionary = mission_table_view(target_id)
+	var forecast: Dictionary = view.get("gate_preview", {})
+	var block := String(view.get("block_reason", ""))
+	if block.is_empty():
+		block = String(view.get("prerequisite_reason", ""))
+	if block.is_empty() and bool(view.get("gate", {}).get("preview_only", false)):
+		block = "This shift is a preview and has no team commit."
+	if block.is_empty() and not bool(forecast.get("accepted", false)):
+		block = String(forecast.get("reason", "Preview this complete plan before signing."))
+	var selection := _team_selection(target_id, _p02_table.plan_for_gate(target_id), forecast) if block.is_empty() else {}
+	var signed: Array = []
+	var stale: Array = []
+	for role_id in roles:
+		if not _team_signoffs.has(role_id):
+			continue
+		if not selection.is_empty() and _team_signoffs[role_id] == selection:
+			signed.append(role_id)
+		else:
+			stale.append(role_id)
+	return {
+		"accepted": true,
+		"target_id": target_id,
+		"scene_id": current_scene_id(),
+		"crew": crew,
+		"input_revision": int(_director.query().get("state_revision", 0)),
+		"required_roles": roles,
+		"signed_roles": signed,
+		"stale_roles": stale,
+		"selection": selection,
+		"forecast": forecast.duplicate(true),
+		"block_reason": block,
+		"ready": block.is_empty(),
+	}
+
+## Signs only a selection that still matches the live model and forecast. The
+## panel must supply the selection it showed; no missing provider auto-signs.
+func sign_team_plan(role_id: String, target_id: String, reviewed_selection: Variant) -> Dictionary:
+	if String(_director.crew().get("mode", "solo")) != "class":
+		return {"accepted": false, "reason": "Team sign-off is available in Class mode only."}
+	var view: Dictionary = team_plan_view(target_id)
+	if not bool(view.get("accepted", false)):
+		return view
+	if not view.get("required_roles", []).has(role_id):
+		return {"accepted": false, "reason": "Unknown team-plan role: " + role_id}
+	if not bool(view.get("ready", false)):
+		return {"accepted": false, "reason": String(view.get("block_reason", "The plan is not ready."))}
+	if not reviewed_selection is Dictionary or reviewed_selection != view.selection:
+		return {"accepted": false, "reason": "The selected plan or forecast changed. Review it again."}
+	var duplicate: bool = _team_signoffs.get(role_id, {}) == view.selection
+	_team_signoffs[role_id] = view.selection.duplicate(true)
+	return {"accepted": true, "duplicate": duplicate, "role_id": role_id, "reason": "%s signed this exact team plan." % role_id.capitalize()}
+
+func _team_roles() -> Array:
+	var roles: Array = []
+	for card in MissionTableScript.data().get("role_cards", []):
+		var role_id := String(card.get("role_id", ""))
+		if role_id.is_empty() or roles.has(role_id):
+			return []
+		roles.append(role_id)
+	return roles
+
+func _team_selection(target_id: String, plan: Dictionary, forecast: Dictionary) -> Dictionary:
+	var state: Dictionary = _director.snapshot()
+	return {
+		"target_id": target_id,
+		"scene_id": current_scene_id(),
+		"crew": StateScript.crew_of(state),
+		"state_revision": int(state.get("state_revision", 0)),
+		"plan": plan.duplicate(true),
+		"forecast": {
+			"final_state": forecast.get("final_state", {}).duplicate(true),
+			"ending": String(forecast.get("ending", "")),
+			"unsafe_predicates": forecast.get("unsafe_predicates", []).duplicate(true),
+			"scenario_datetime": String(forecast.get("snapshot", {}).get("scenario_datetime", "")),
+		},
+	}
+
+func _team_commit_problem(target_id: String, supplied_plan: Dictionary) -> String:
+	var view: Dictionary = team_plan_view(target_id)
+	if not bool(view.get("accepted", false)):
+		return String(view.get("reason", "The Class team-plan provider is unavailable."))
+	if not bool(view.get("ready", false)):
+		return String(view.get("block_reason", "Review the team plan before committing."))
+	if supplied_plan != view.selection.plan:
+		return "The selected plan changed. Review and sign the current plan."
+	for role_id in view.required_roles:
+		if not view.signed_roles.has(role_id):
+			return "Class mode requires every role to sign the current team plan before committing."
+	return ""
+
 ## Everything the Mission Table shows for one P-02 gate, read-only. Both
 ## forecasts call ExpeditionSimulation.preview on the authoritative snapshot,
 ## the same pure function every P-02 commit runs, so preview and commit agree.
@@ -152,6 +256,7 @@ func start_at(scene_id: String) -> Dictionary:
 	var index := GateCatalog.SCENE_ORDER.find(scene_id)
 	if index < 0:
 		return {"accepted": false, "reason": "Unknown Chapter 1 scene: " + scene_id}
+	_team_signoffs.clear()
 	_scene_index = index
 	_set_current_scene(_scene_index)
 	return {"accepted": true, "scene_id": scene_id, "room_id": current_room_id()}
@@ -346,6 +451,7 @@ func retry() -> Dictionary:
 	var table: Dictionary = _p02_table.snapshot()
 	var result: Dictionary = super.retry()
 	if bool(result.get("accepted", false)):
+		_team_signoffs.clear()
 		_p02_table.restore(table)
 		if int(_director.query().get("current_shift", 0)) < int(MissionTableScript.data().get("alarm_shift", 5)):
 			_p02_table.reset_alarm_task()
@@ -485,6 +591,10 @@ func _submit_command(command: Dictionary, preview_only: bool) -> Dictionary:
 			_p02_hosts[command_id] = host
 		if preview_only:
 			return host.preview(plan)
+		if String(_director.crew().get("mode", "solo")) == "class":
+			var team_problem := _team_commit_problem(target_id, plan)
+			if not team_problem.is_empty():
+				return {"accepted": false, "reason": team_problem}
 		return host.commit(command_id, plan)
 	return _director.preview(command) if preview_only else _director.commit(command)
 
@@ -743,6 +853,7 @@ func _validate_local_snapshot(data: Dictionary) -> Dictionary:
 	return WorldRouteScript.new(_director).restore(data.world)
 
 func _restore_local(snapshot_data: Dictionary) -> void:
+	_team_signoffs.clear()
 	_scene_index = int(snapshot_data.get("current_scene_index", _scene_index))
 	_completed_scene_ids = snapshot_data.get("completed_scene_ids", []).duplicate()
 	_scene_flags = snapshot_data.get("scene_flags", {}).duplicate(true)
