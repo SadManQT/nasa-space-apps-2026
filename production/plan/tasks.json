@@ -4582,7 +4582,7 @@
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Found 5 Nov during the round-3 rendered verification: one windowed run of game/tools/perf_probe.gd (--perf-probe, window on top) stopped right after the garden_rebuild transition, at the start of the full-cast stage: Godot idle (~2% CPU) with no progress for 17 minutes. The next run passed cleanly, so it is intermittent. Find whether the threaded preparation (ResourceLoader.load_threaded_request / WorkerThreadPool jobs in game/scripts/loading/, staged construction in campaign_room.gd and chapter1_campaign.gd) can wait forever: a job that never reports, a main-thread await on a status that never changes, a resource requested twice, or a deadlock with a mutex. Add a watchdog: any preparation step that exceeds a time limit logs its step and falls back to synchronous loading behind the loading card instead of hanging.\nAcceptance: run the windowed probe 10 times in a row (command in production/qa/perf_2026-11-04.md) with zero stalls; a test forces a stuck job and proves the fallback completes; run_tests.sh passes.",
-   "blocker": "Saved source 072c9c7: owned watchdog components pass mandatory loading 29/0 and actual production full-cast recovery. User explicitly leaves raw AssetGeometry implementation for Sadman; unapplied review candidate production/qa/perf/atik_batch_2026-11-10/M1-53_asset_geometry_owner.patch, saved reference origin/night/M1-53 f6285e4. Resume after reviewed raw request/publication recovery and held-raw-job tests land, then ten full consecutive native probes plus full runner. Native first-draw stalls remain M1-92; no original-stall cause or complete M1-53 acceptance claimed. Full runner currently in progress.",
+   "blocker": "Saved owned watchdog source072c9c7 and final evidence published through33e1593; current mandatory held-job/production recovery regression29/0. User explicitly leaves the raw AssetGeometry patch for Sadman. Unapplied/unverified review candidate retained with node-lifetime guard caveat; original saved branchf6285e4 preserved. Resume after reviewed raw request/publication recovery and held-raw tests, then ten full consecutive windowed probes and required integrated full gate. Original17-minute full-cast cause remains unassigned; native first-draw cost is separate M1-92. production/qa/perf/atik_batch_2026-11-10/M1-53.md and README.md.",
    "reserved_for": "atik",
    "effort": 2,
    "assignment_history": [
@@ -5886,7 +5886,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -5920,17 +5920,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Saved verification 7942562: existing M1-120 source reused; focused M4 581/0, all 16 windows retained under production/qa/perf/atik_batch_2026-11-10/baseline. No original Ryzen7/RTX4060 Windows run is available after batching; original-host focused two-process collection and green full acceptance remain required. Resume command and cache/hardware conditions in M1-68.md. Current unsandboxed full running on M4; no Windows repair inferred.",
-   "edit_files": [
-    "game/tools/test_comms.gd",
-    "production/qa/perf/atik_batch_2026-11-10/README.md",
-    "production/qa/perf/atik_batch_2026-11-10/M1-68.md",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md",
-    "game/tools/test_p01_inputs.gd",
-    "game/tools/test_loading.gd",
-    "game/tools/test_performance_runtime.gd"
-   ]
+   "blocker": "Saved source/evidence published through33e1593; frozen checkpointd1f9a7a also on work/atik-loading-20261110. Original full86/89; its comms/P01/text failures have successful separate follow-ups. Latest audit-merged mandatory P01 inputs319/0, loading29/0 and performance582/0 pass at9375330. Earlier retained post-integration582/3 timing failure and two fresh582/0 passes do not establish a cause/fix. Resume with original Ryzen7/RTX4060 Windows two-process loading evidence, diagnose any remaining interval failures, and obtain a fresh integrated full gate. No latest full/Windows repair claimed. Exact artifacts/commands/blockers: production/qa/perf/atik_batch_2026-11-10/README.md."
   },
   {
    "id": "M1-69",
@@ -6652,7 +6642,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Saved native evidence a5c1448: 300s incomplete first attempt and completed Metal probe (exit0, 84.126s) with first-campaign max6607.878ms, title20169.285ms. Watchdog did not fire; no measured improvement/cause. Native main-thread wait sample is during title, not exact campaign correlation; Godot frames unsymbolicated and xcrun cannot provide xctrace on this CLT-only host. Resume with matching symbolicated native/Metal profile across real first room draw, then measured scoped fix, controlled before/after, loading screenshots, independent review and required green runner. All artifacts and limits in production/qa/perf/atik_batch_2026-11-10/M1-92.md."
+   "blocker": "Native evidence saved through33e1593: failed300s first campaign attempt plus completed short M4/Metal probe, exit0 in84.126s, campaign max6607.878ms. No watchdog recovery or causal improvement established. The native title wait sample is unsymbolicated and not exact campaign correlation; xctrace unavailable on this CLT-only host. Matching native profiling, measured scoped first-draw fix, controlled before/after, loading screenshots and independent review remain required. Later team source preserved; no latest native or integrated full pass inferred. production/qa/perf/atik_batch_2026-11-10/M1-92.md."
   },
   {
    "id": "M1-93",
@@ -7624,7 +7614,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Saved collector/native evidence bd51096: M4 Forward+/Metal actual input 44/0 plus five PNGs/trace exits0 in9.225s. Collector4tests/6distinctprocessconditions pass, including PASS followed by hung process. Original Windows11 IntelArc130V post-result timeout has not been retested on that host; no teardown/driver cause or runtime fix inferred. Resume exact Vulkan original-host command in production/qa/perf/atik_batch_2026-11-10/M1-116.md, retain termination diagnostics and fix only any reproduced cause. Mandatory input test38/0 already passed during ongoing full; complete final gate recorded separately."
+   "blocker": "Collector and process-level tests saved inbd51096; final evidence published through33e1593. Recorded M4 Forward+/Metal real input44/0 with5PNG+trace, normal exit0 in9.225s. Original Windows11 IntelArc130V post-PASS timeout not yet reproduced/retested on that host; run exact original-host Vulkan collector command in M1-116.md and retain process/thread diagnostics before choosing a fix. Latest headless P01 inputs319/0 exits0 but retains4 native RefCounted ObjectDB warnings with refcount0; cause unassigned, not an Arc timeout explanation. No clean production teardown or original-host repair claimed."
   },
   {
    "id": "M1-117",
