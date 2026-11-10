@@ -1,0 +1,424 @@
+{
+	"bridge_joins": [
+		{
+			"built_by": "chapter7_gate_catalog",
+			"carried_object": "january_active_region_image",
+			"carries": "The active-region image Rafi pinned in January; he stands up from breakfast without a joke",
+			"from": "EX-CH06-S12",
+			"join": "CH06→CH07",
+			"kinds": "O, P",
+			"status": "Fix",
+			"to": "EX-CH07-S01"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The labelled source and the shared observations",
+			"from": "EX-CH07-S01",
+			"join": "CH07 S01→S02",
+			"kinds": "T",
+			"status": "Holds",
+			"to": "EX-CH07-S02"
+		},
+		{
+			"built_by": "canon",
+			"carries": "Five seat markers on the shelter diagram",
+			"from": "EX-CH07-S02",
+			"join": "CH07 S02→S03",
+			"kinds": "O",
+			"status": "Holds",
+			"to": "EX-CH07-S03"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The return-water time in the plan",
+			"from": "EX-CH07-S03",
+			"join": "CH07 S03→S04",
+			"kinds": "T",
+			"status": "Holds",
+			"to": "EX-CH07-S04"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The latched 15 + 15 seed case",
+			"from": "EX-CH07-S04",
+			"join": "CH07 S04→S05",
+			"kinds": "O",
+			"status": "Holds",
+			"to": "EX-CH07-S05"
+		},
+		{
+			"built_by": "canon",
+			"carries": "Both hatch indications agree",
+			"from": "EX-CH07-S05",
+			"join": "CH07 S05→S06",
+			"kinds": "T",
+			"status": "Holds",
+			"to": "EX-CH07-S06"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The first wave ends; the lull",
+			"from": "EX-CH07-S06",
+			"join": "CH07 S06→S07",
+			"kinds": "D",
+			"status": "Holds",
+			"to": "EX-CH07-S07"
+		},
+		{
+			"built_by": "canon",
+			"carries": "'Four steps left'",
+			"from": "EX-CH07-S07",
+			"join": "CH07 S07→S08",
+			"kinds": "T",
+			"status": "Holds",
+			"to": "EX-CH07-S08"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The final line on the chart; Rao does not answer",
+			"from": "EX-CH07-S08",
+			"join": "CH07 S08→S09",
+			"kinds": "S",
+			"status": "Holds",
+			"to": "EX-CH07-S09"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The saved relay-bypass diagram",
+			"from": "EX-CH07-S09",
+			"join": "CH07 S09→S10",
+			"kinds": "O",
+			"status": "Holds",
+			"to": "EX-CH07-S10"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The spare controller from December, Kai's note still clipped inside",
+			"from": "EX-CH07-S10",
+			"join": "CH07 S10→S11",
+			"kinds": "O",
+			"status": "Holds",
+			"to": "EX-CH07-S11"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The packed equipment and the route",
+			"from": "EX-CH07-S11",
+			"join": "CH07 S11→S12",
+			"kinds": "O",
+			"status": "Holds",
+			"to": "EX-CH07-S12"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The duplicate checklists; 8 Apr 00:00",
+			"from": "EX-CH07-S12",
+			"join": "CH07→CH08",
+			"kinds": "O, D",
+			"status": "Holds",
+			"to": "EX-CH08-S01"
+		}
+	],
+	"chapter": 7,
+	"dates": "14 February–8 April 2047",
+	"gates": [
+		{
+			"decision_choice_id": "EX-CH07-S01-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S01-L01",
+				"EX-CH07-S01-L02",
+				"EX-CH07-S01-L03",
+				"EX-CH07-S01-L04"
+			],
+			"exit_condition": "All current observations shared and counterfactual source correctly described.",
+			"mission_id": "EX-M0701",
+			"point_of_view": "Rafi",
+			"predicate_id": "PRED-EX-CH07-S01-EXIT",
+			"required_physical": [
+				"p13_share_observations_done",
+				"p13_label_counterfactual_done",
+				"p13_record_current_state_done"
+			],
+			"room_id": "LOC-01",
+			"scene_id": "EX-CH07-S01",
+			"story_time": "14 February 2047, before 06:00",
+			"supported_option_id": "EX-CH07-S01-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH07-S02-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S02-L01",
+				"EX-CH07-S02-L02",
+				"EX-CH07-S02-L03",
+				"EX-CH07-S02-L04"
+			],
+			"exit_condition": "Five-person profile and complete shelter roster verified.",
+			"mission_id": "EX-M0701",
+			"point_of_view": "Amara",
+			"predicate_id": "PRED-EX-CH07-S02-EXIT",
+			"required_physical": [
+				"p13_confirm_five_person_profile_done",
+				"p13_confirm_shelter_roster_done",
+				"p13_confirm_shared_resources_done"
+			],
+			"room_id": "LOC-04",
+			"scene_id": "EX-CH07-S02",
+			"story_time": "14 February, forecast preparation",
+			"supported_option_id": "EX-CH07-S02-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH07-S03-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S03-L01",
+				"EX-CH07-S03-L02",
+				"EX-CH07-S03-L03",
+				"EX-CH07-S03-L04"
+			],
+			"exit_condition": "One feasible six-step plan preserves crew, garden, circulation and reserve.",
+			"mission_id": "EX-M0701",
+			"point_of_view": "Kai",
+			"predicate_id": "PRED-EX-CH07-S03-EXIT",
+			"required_physical": [
+				"p13_commit_plan_done"
+			],
+			"room_id": "LOC-04",
+			"scene_id": "EX-CH07-S03",
+			"story_time": "14 February, uncommitted six-step forecast",
+			"supported_option_id": "EX-CH07-S03-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH07-S04-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S04-L01",
+				"EX-CH07-S04-L02",
+				"EX-CH07-S04-L03",
+				"EX-CH07-S04-L04"
+			],
+			"exit_condition": "Founder 30 latched; shielding and after-exposure return order verified.",
+			"mission_id": "EX-M0702",
+			"point_of_view": "Mei",
+			"predicate_id": "PRED-EX-CH07-S04-EXIT",
+			"required_physical": [
+				"p13_latch_founder_reserve_done",
+				"p13_verify_water_shield_done",
+				"p13_verify_crate_shield_done",
+				"p13_verify_drain_order_done"
+			],
+			"room_id": "LOC-04",
+			"scene_id": "EX-CH07-S04",
+			"story_time": "14 February, final preparation",
+			"supported_option_id": "EX-CH07-S04-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH07-S05-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S05-L01",
+				"EX-CH07-S05-L02",
+				"EX-CH07-S05-L03",
+				"EX-CH07-S05-L04"
+			],
+			"exit_condition": "Five occupants confirmed, both hatch checks agree, first step ready.",
+			"mission_id": "EX-M0702",
+			"point_of_view": "Rafi",
+			"predicate_id": "PRED-EX-CH07-S05-EXIT",
+			"required_physical": [
+				"p14_confirm_five_occupants_done",
+				"p14_check_hatch_one_done",
+				"p14_check_hatch_two_done"
+			],
+			"room_id": "LOC-04",
+			"scene_id": "EX-CH07-S05",
+			"story_time": "14 February, first-wave readiness",
+			"supported_option_id": "EX-CH07-S05-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH07-S06-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S06-L01",
+				"EX-CH07-S06-L02",
+				"EX-CH07-S06-L03",
+				"EX-CH07-S06-L04"
+			],
+			"exit_condition": "Steps 1–2 committed, forecast comparison saved, founder case sealed.",
+			"mission_id": "EX-M0702",
+			"point_of_view": "Amara",
+			"predicate_id": "PRED-EX-CH07-S06-EXIT",
+			"required_physical": [
+				"p14_commit_steps_1_2_done",
+				"p14_save_forecast_comparison_done",
+				"p14_confirm_case_sealed_done"
+			],
+			"room_id": "LOC-04",
+			"scene_id": "EX-CH07-S06",
+			"story_time": "14 February 06:00 onward, steps 1–2",
+			"supported_option_id": "EX-CH07-S06-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH07-S07-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S07-L01",
+				"EX-CH07-S07-L02",
+				"EX-CH07-S07-L03",
+				"EX-CH07-S07-L04"
+			],
+			"exit_condition": "Final log understood; name and Academy origin resolved; bounded progress report saved.",
+			"mission_id": "EX-M0703",
+			"point_of_view": "Mei",
+			"predicate_id": "PRED-EX-CH07-S07-EXIT",
+			"required_physical": [
+				"p14_read_final_log_done",
+				"p14_record_academy_name_done",
+				"p14_save_progress_report_done"
+			],
+			"room_id": "LOC-04",
+			"scene_id": "EX-CH07-S07",
+			"story_time": "First-wave lull, after step 2",
+			"supported_option_id": "EX-CH07-S07-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH07-S08-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S08-L01",
+				"EX-CH07-S08-L02",
+				"EX-CH07-S08-L03",
+				"EX-CH07-S08-L04"
+			],
+			"exit_condition": "All six steps complete with crew, crops and founder 30 protected.",
+			"mission_id": "EX-M0703",
+			"point_of_view": "Kai",
+			"predicate_id": "PRED-EX-CH07-S08-EXIT",
+			"required_physical": [
+				"p14_commit_steps_3_6_done",
+				"p14_confirm_crops_safe_done",
+				"p14_confirm_reserve_30_done"
+			],
+			"room_id": "LOC-04",
+			"scene_id": "EX-CH07-S08",
+			"story_time": "Steps 3–6;14 February–16 February 01:12",
+			"supported_option_id": "EX-CH07-S08-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH07-S09-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S09-L01",
+				"EX-CH07-S09-L02",
+				"EX-CH07-S09-L03",
+				"EX-CH07-S09-L04"
+			],
+			"exit_condition": "External branch diagnosed; two route readings clear later work; no invented Earth reply.",
+			"mission_id": "EX-M0703",
+			"point_of_view": "Amara",
+			"predicate_id": "PRED-EX-CH07-S09-EXIT",
+			"required_physical": [
+				"p14_diagnose_external_branch_done",
+				"p14_route_reading_1_done",
+				"p14_route_reading_2_done"
+			],
+			"room_id": "LOC-01",
+			"scene_id": "EX-CH07-S09",
+			"story_time": "16 February, after 01:12 through the separated clearance-reading interval",
+			"supported_option_id": "EX-CH07-S09-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH07-S10-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S10-L01",
+				"EX-CH07-S10-L02",
+				"EX-CH07-S10-L03",
+				"EX-CH07-S10-L04"
+			],
+			"exit_condition": "Local stability and supplies reconciled through dated February-to-March gates.",
+			"mission_id": "EX-M0704",
+			"point_of_view": "Mei",
+			"predicate_id": "PRED-EX-CH07-S10-EXIT",
+			"required_physical": [
+				"p14_reconcile_local_stability_done",
+				"p14_reconcile_supplies_done",
+				"p14_date_march_gate_done"
+			],
+			"room_id": "LOC-01",
+			"scene_id": "EX-CH07-S10",
+			"story_time": "16 February–March, dated stable-operation gates",
+			"supported_option_id": "EX-CH07-S10-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH07-S11-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S11-L01",
+				"EX-CH07-S11-L02",
+				"EX-CH07-S11-L03",
+				"EX-CH07-S11-L04"
+			],
+			"exit_condition": "Compatible spare, battery, three-site route and bench-test record packed; field checks still required.",
+			"mission_id": "EX-M0704",
+			"point_of_view": "Rafi",
+			"predicate_id": "PRED-EX-CH07-S11-EXIT",
+			"required_physical": [
+				"p14_pack_controller_done",
+				"p14_pack_battery_done",
+				"p14_pack_three_site_route_done",
+				"p14_bench_test_done"
+			],
+			"room_id": "LOC-02",
+			"scene_id": "EX-CH07-S11",
+			"story_time": "March–7 April, authored preparation",
+			"supported_option_id": "EX-CH07-S11-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH07-S12-CHOICE",
+			"dialogue_ids": [
+				"EX-CH07-S12-L01",
+				"EX-CH07-S12-L02",
+				"EX-CH07-S12-L03",
+				"EX-CH07-S12-L04"
+			],
+			"exit_condition": "Team assignments, travel provisions, home occupancy and dated preparation all signed.",
+			"mission_id": "EX-M0704",
+			"point_of_view": "Mei",
+			"predicate_id": "PRED-EX-CH07-S12-EXIT",
+			"required_physical": [
+				"p14_assign_field_team_done",
+				"p14_assign_home_team_done",
+				"p14_sign_departure_prep_done"
+			],
+			"room_id": "LOC-08",
+			"scene_id": "EX-CH07-S12",
+			"story_time": "7 April to 8 April 00:00",
+			"supported_option_id": "EX-CH07-S12-OPT02"
+		}
+	],
+	"minutes": 105,
+	"predecessor_scene": "EX-CH06-S12",
+	"ramim_seams": [
+		{
+			"behaviour": "Rendered mission Report Card at the end of each Chapter 7 mission (debrief outcome, six-step ledger, bounded conclusion)",
+			"ramim_task": "M3-64",
+			"seam": "Chapter7Mission.report_card_payload(scene_id) builds the exact card data (outcome, deltas, debrief lines); report_ready() stays false until M3-64 renders it."
+		},
+		{
+			"behaviour": "Delivery and rendering of the Chapter 7 join messages (25 §5: at least 2 per join; game/resources/campaign/content/messages/ch07.json already carries 2 per join)",
+			"ramim_task": "M3-64",
+			"seam": "Message data is verified read-only by the mission tests; delivery/rendering waits on M3-64. No message text is authored here."
+		},
+		{
+			"behaviour": "EVA dosimeter use and outside preparation for the route-clear readings (EX-CH07-S09) and repeater field placement (EX-CH07-S11)",
+			"ramim_task": "M3-61",
+			"seam": "S09 readings are recorded as dosimeter ledger values (0.4, then 0.3, ten scenario minutes apart) via P-14; S11 placement is a surveyed-route simulator plan only. Physical EVA use plugs into these ledger actions when M3-61 lands."
+		},
+		{
+			"behaviour": "Rover drive, physical repeater placement and field chain test (EX-CH07-S11), and the rover loadout drive in EX-CH07-S12",
+			"ramim_task": "M3-62",
+			"seam": "S11 is a bench + simulator plan ('a bench pass is not field verification'); S12 is a checked loadout list. The rover itself and field verification wait on M3-62."
+		},
+		{
+			"behaviour": "Shared hazard-system runtime hooks for the storm (hazard state, EVA/rover exposure) and the shelter-run EVA systems (25 §4.3–§4.4, dosimeter, repeaters placed for the uplink)",
+			"ramim_task": "M3-65",
+			"seam": "Storm hazard multipliers live in the P-13/P-14 simulation profiles and the storm is presented instrument-led (no visible radiation projectiles); hazard-system runtime state waits on M3-65."
+		}
+	],
+	"title": "The Great Storm",
+	"upgrade_pair": [
+		"relay_parts_kit",
+		"long_range_battery"
+	]
+}
