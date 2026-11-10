@@ -1,0 +1,8 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+  ok groups Ponytail, Apron and Strap bones into spring chains
+  ok creates one configured SpringBoneSimulator3D setting per chain
+  ok adds head, neck and upper-back collision spheres
+  ok spring stiffness is bounded for gentle follow-through
+  ok missing skeleton is harmless
+PASS HairSprings (5 checks, 3 chains)
