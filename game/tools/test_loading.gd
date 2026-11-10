@@ -178,6 +178,9 @@ func _test_campaign() -> void:
 	await process_frame
 	_capture("recovered_full_cast")
 	main.free()
+	# Audio playback is retired by the mixing thread after its nodes are freed.
+	# Let that cleanup finish before this short fixture shuts down the engine.
+	await create_timer(0.1).timeout
 	for suffix in ["", ".bak", ".tmp"]:
 		if FileAccess.file_exists(slot + suffix):
 			DirAccess.remove_absolute(slot + suffix)

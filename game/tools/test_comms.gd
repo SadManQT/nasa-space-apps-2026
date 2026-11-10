@@ -32,7 +32,7 @@ func _run() -> void:
 		push_error("test_comms: %d/%d checks failed." % [_failures, _checks])
 		quit(1)
 		return
-	print("test_comms: PASS (%d checks, 0 failures)" % _checks)
+	print("COMMS RESULT: PASS (%d checks, 0 failures)" % _checks)
 	quit(0)
 
 

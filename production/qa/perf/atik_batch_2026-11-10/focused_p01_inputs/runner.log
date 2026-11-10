@@ -1,0 +1,4 @@
+FAIL tools/test_p01_inputs.gd :: exit 1 :: P01 INPUTS RESULT: FAIL (317 checks, 1 failures)
+       ERROR: FAIL campaign forecast has no live mutation
+       P01 INPUTS RESULT: FAIL (317 checks, 1 failures)
+0/1 suites passed

@@ -1,0 +1,62 @@
+[
+  {
+    "suite_filter": "comms",
+    "command": [
+      "bash",
+      "game/tools/run_tests.sh",
+      "comms"
+    ],
+    "exit_code": 0,
+    "seconds": 6.381298709000006
+  },
+  {
+    "suite_filter": "hazards",
+    "command": [
+      "bash",
+      "game/tools/run_tests.sh",
+      "hazards"
+    ],
+    "exit_code": 0,
+    "seconds": 3.3667489170000096
+  },
+  {
+    "suite_filter": "network",
+    "command": [
+      "bash",
+      "game/tools/run_tests.sh",
+      "network"
+    ],
+    "exit_code": 0,
+    "seconds": 3.1721568330000167
+  },
+  {
+    "suite_filter": "rover",
+    "command": [
+      "bash",
+      "game/tools/run_tests.sh",
+      "rover"
+    ],
+    "exit_code": 0,
+    "seconds": 3.352901875000015
+  },
+  {
+    "suite_filter": "upgrade_profiles",
+    "command": [
+      "bash",
+      "game/tools/run_tests.sh",
+      "upgrade_profiles"
+    ],
+    "exit_code": 0,
+    "seconds": 13.221076625000023
+  },
+  {
+    "suite_filter": "p01_inputs",
+    "command": [
+      "bash",
+      "game/tools/run_tests.sh",
+      "p01_inputs"
+    ],
+    "exit_code": 1,
+    "seconds": 6.393218165999997
+  }
+]

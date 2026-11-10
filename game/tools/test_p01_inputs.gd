@@ -125,6 +125,9 @@ func _physical_use() -> void:
 	_reach_calibration(campaign.route)
 	campaign._sync_route_projection()
 	campaign._refresh_world()
+	# Match production scene entry, including presentation-only message delivery,
+	# before snapshotting the live state that the forecast must preserve.
+	campaign.hud.refresh_scene()
 	await physics_frame
 	var target: Node3D = campaign.physical_target("calibrate_probe")
 	campaign._player.global_position = target.global_position + Vector3(0, 0, 1)

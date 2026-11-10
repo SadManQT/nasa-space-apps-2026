@@ -1,0 +1,575 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  ok full campaign catalog loads
+  ok full catalog validates source hashes, counts and predicates: 
+  ok campaign catalog revision and hash are frozen
+  ok catalog contains eight chapters
+  ok catalog contains thirty-two missions
+  ok catalog contains ninety-six scenes
+  ok catalog contains exactly 388 dialogue lines
+  ok chapter 1 has stable order ID
+  ok CH01 declares four missions and twelve scenes
+  ok chapter 2 has stable order ID
+  ok CH02 declares four missions and twelve scenes
+  ok chapter 3 has stable order ID
+  ok CH03 declares four missions and twelve scenes
+  ok chapter 4 has stable order ID
+  ok CH04 declares four missions and twelve scenes
+  ok chapter 5 has stable order ID
+  ok CH05 declares four missions and twelve scenes
+  ok chapter 6 has stable order ID
+  ok CH06 declares four missions and twelve scenes
+  ok chapter 7 has stable order ID
+  ok CH07 declares four missions and twelve scenes
+  ok chapter 8 has stable order ID
+  ok CH08 declares four missions and twelve scenes
+  ok mission order remains canonical: EX-M0101
+  ok EX-M0101 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0102
+  ok EX-M0102 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0103
+  ok EX-M0103 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0104
+  ok EX-M0104 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0201
+  ok EX-M0201 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0202
+  ok EX-M0202 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0203
+  ok EX-M0203 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0204
+  ok EX-M0204 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0301
+  ok EX-M0301 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0302
+  ok EX-M0302 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0303
+  ok EX-M0303 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0304
+  ok EX-M0304 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0401
+  ok EX-M0401 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0402
+  ok EX-M0402 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0403
+  ok EX-M0403 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0404
+  ok EX-M0404 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0501
+  ok EX-M0501 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0502
+  ok EX-M0502 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0503
+  ok EX-M0503 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0504
+  ok EX-M0504 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0601
+  ok EX-M0601 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0602
+  ok EX-M0602 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0603
+  ok EX-M0603 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0604
+  ok EX-M0604 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0701
+  ok EX-M0701 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0702
+  ok EX-M0702 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0703
+  ok EX-M0703 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0704
+  ok EX-M0704 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0801
+  ok EX-M0801 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0802
+  ok EX-M0802 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0803
+  ok EX-M0803 has three ordered scene IDs
+  ok mission order remains canonical: EX-M0804
+  ok EX-M0804 has three ordered scene IDs
+  ok scene order remains canonical: EX-CH01-S01
+  ok EX-CH01-S01 retains legacy provenance only
+  ok EX-CH01-S01 retains source/evidence labels
+  ok scene order remains canonical: EX-CH01-S02
+  ok EX-CH01-S02 retains legacy provenance only
+  ok EX-CH01-S02 retains source/evidence labels
+  ok scene order remains canonical: EX-CH01-S03
+  ok EX-CH01-S03 retains legacy provenance only
+  ok EX-CH01-S03 retains source/evidence labels
+  ok scene order remains canonical: EX-CH01-S04
+  ok EX-CH01-S04 retains legacy provenance only
+  ok EX-CH01-S04 retains source/evidence labels
+  ok scene order remains canonical: EX-CH01-S05
+  ok EX-CH01-S05 retains legacy provenance only
+  ok EX-CH01-S05 retains source/evidence labels
+  ok scene order remains canonical: EX-CH01-S06
+  ok EX-CH01-S06 retains legacy provenance only
+  ok EX-CH01-S06 retains source/evidence labels
+  ok scene order remains canonical: EX-CH01-S07
+  ok EX-CH01-S07 retains legacy provenance only
+  ok EX-CH01-S07 retains source/evidence labels
+  ok scene order remains canonical: EX-CH01-S08
+  ok EX-CH01-S08 retains legacy provenance only
+  ok EX-CH01-S08 retains source/evidence labels
+  ok scene order remains canonical: EX-CH01-S09
+  ok EX-CH01-S09 retains legacy provenance only
+  ok EX-CH01-S09 retains source/evidence labels
+  ok scene order remains canonical: EX-CH01-S10
+  ok EX-CH01-S10 retains legacy provenance only
+  ok EX-CH01-S10 retains source/evidence labels
+  ok scene order remains canonical: EX-CH01-S11
+  ok EX-CH01-S11 retains legacy provenance only
+  ok EX-CH01-S11 retains source/evidence labels
+  ok scene order remains canonical: EX-CH01-S12
+  ok EX-CH01-S12 retains legacy provenance only
+  ok EX-CH01-S12 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S01
+  ok EX-CH02-S01 retains legacy provenance only
+  ok EX-CH02-S01 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S02
+  ok EX-CH02-S02 retains legacy provenance only
+  ok EX-CH02-S02 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S03
+  ok EX-CH02-S03 retains legacy provenance only
+  ok EX-CH02-S03 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S04
+  ok EX-CH02-S04 retains legacy provenance only
+  ok EX-CH02-S04 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S05
+  ok EX-CH02-S05 retains legacy provenance only
+  ok EX-CH02-S05 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S06
+  ok EX-CH02-S06 retains legacy provenance only
+  ok EX-CH02-S06 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S07
+  ok EX-CH02-S07 retains legacy provenance only
+  ok EX-CH02-S07 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S08
+  ok EX-CH02-S08 retains legacy provenance only
+  ok EX-CH02-S08 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S09
+  ok EX-CH02-S09 retains legacy provenance only
+  ok EX-CH02-S09 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S10
+  ok EX-CH02-S10 retains legacy provenance only
+  ok EX-CH02-S10 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S11
+  ok EX-CH02-S11 retains legacy provenance only
+  ok EX-CH02-S11 retains source/evidence labels
+  ok scene order remains canonical: EX-CH02-S12
+  ok EX-CH02-S12 retains legacy provenance only
+  ok EX-CH02-S12 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S01
+  ok EX-CH03-S01 retains legacy provenance only
+  ok EX-CH03-S01 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S02
+  ok EX-CH03-S02 retains legacy provenance only
+  ok EX-CH03-S02 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S03
+  ok EX-CH03-S03 retains legacy provenance only
+  ok EX-CH03-S03 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S04
+  ok EX-CH03-S04 retains legacy provenance only
+  ok EX-CH03-S04 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S05
+  ok EX-CH03-S05 retains legacy provenance only
+  ok EX-CH03-S05 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S06
+  ok EX-CH03-S06 retains legacy provenance only
+  ok EX-CH03-S06 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S07
+  ok EX-CH03-S07 retains legacy provenance only
+  ok EX-CH03-S07 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S08
+  ok EX-CH03-S08 retains legacy provenance only
+  ok EX-CH03-S08 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S09
+  ok EX-CH03-S09 retains legacy provenance only
+  ok EX-CH03-S09 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S10
+  ok EX-CH03-S10 retains legacy provenance only
+  ok EX-CH03-S10 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S11
+  ok EX-CH03-S11 retains legacy provenance only
+  ok EX-CH03-S11 retains source/evidence labels
+  ok scene order remains canonical: EX-CH03-S12
+  ok EX-CH03-S12 retains legacy provenance only
+  ok EX-CH03-S12 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S01
+  ok EX-CH04-S01 retains legacy provenance only
+  ok EX-CH04-S01 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S02
+  ok EX-CH04-S02 retains legacy provenance only
+  ok EX-CH04-S02 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S03
+  ok EX-CH04-S03 retains legacy provenance only
+  ok EX-CH04-S03 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S04
+  ok EX-CH04-S04 retains legacy provenance only
+  ok EX-CH04-S04 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S05
+  ok EX-CH04-S05 retains legacy provenance only
+  ok EX-CH04-S05 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S06
+  ok EX-CH04-S06 retains legacy provenance only
+  ok EX-CH04-S06 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S07
+  ok EX-CH04-S07 retains legacy provenance only
+  ok EX-CH04-S07 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S08
+  ok EX-CH04-S08 retains legacy provenance only
+  ok EX-CH04-S08 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S09
+  ok EX-CH04-S09 retains legacy provenance only
+  ok EX-CH04-S09 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S10
+  ok EX-CH04-S10 retains legacy provenance only
+  ok EX-CH04-S10 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S11
+  ok EX-CH04-S11 retains legacy provenance only
+  ok EX-CH04-S11 retains source/evidence labels
+  ok scene order remains canonical: EX-CH04-S12
+  ok EX-CH04-S12 retains legacy provenance only
+  ok EX-CH04-S12 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S01
+  ok EX-CH05-S01 retains legacy provenance only
+  ok EX-CH05-S01 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S02
+  ok EX-CH05-S02 retains legacy provenance only
+  ok EX-CH05-S02 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S03
+  ok EX-CH05-S03 retains legacy provenance only
+  ok EX-CH05-S03 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S04
+  ok EX-CH05-S04 retains legacy provenance only
+  ok EX-CH05-S04 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S05
+  ok EX-CH05-S05 retains legacy provenance only
+  ok EX-CH05-S05 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S06
+  ok EX-CH05-S06 retains legacy provenance only
+  ok EX-CH05-S06 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S07
+  ok EX-CH05-S07 retains legacy provenance only
+  ok EX-CH05-S07 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S08
+  ok EX-CH05-S08 retains legacy provenance only
+  ok EX-CH05-S08 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S09
+  ok EX-CH05-S09 retains legacy provenance only
+  ok EX-CH05-S09 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S10
+  ok EX-CH05-S10 retains legacy provenance only
+  ok EX-CH05-S10 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S11
+  ok EX-CH05-S11 retains legacy provenance only
+  ok EX-CH05-S11 retains source/evidence labels
+  ok scene order remains canonical: EX-CH05-S12
+  ok EX-CH05-S12 retains legacy provenance only
+  ok EX-CH05-S12 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S01
+  ok EX-CH06-S01 retains legacy provenance only
+  ok EX-CH06-S01 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S02
+  ok EX-CH06-S02 retains legacy provenance only
+  ok EX-CH06-S02 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S03
+  ok EX-CH06-S03 retains legacy provenance only
+  ok EX-CH06-S03 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S04
+  ok EX-CH06-S04 retains legacy provenance only
+  ok EX-CH06-S04 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S05
+  ok EX-CH06-S05 retains legacy provenance only
+  ok EX-CH06-S05 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S06
+  ok EX-CH06-S06 retains legacy provenance only
+  ok EX-CH06-S06 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S07
+  ok EX-CH06-S07 retains legacy provenance only
+  ok EX-CH06-S07 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S08
+  ok EX-CH06-S08 retains legacy provenance only
+  ok EX-CH06-S08 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S09
+  ok EX-CH06-S09 retains legacy provenance only
+  ok EX-CH06-S09 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S10
+  ok EX-CH06-S10 retains legacy provenance only
+  ok EX-CH06-S10 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S11
+  ok EX-CH06-S11 retains legacy provenance only
+  ok EX-CH06-S11 retains source/evidence labels
+  ok scene order remains canonical: EX-CH06-S12
+  ok EX-CH06-S12 retains legacy provenance only
+  ok EX-CH06-S12 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S01
+  ok EX-CH07-S01 retains legacy provenance only
+  ok EX-CH07-S01 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S02
+  ok EX-CH07-S02 retains legacy provenance only
+  ok EX-CH07-S02 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S03
+  ok EX-CH07-S03 retains legacy provenance only
+  ok EX-CH07-S03 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S04
+  ok EX-CH07-S04 retains legacy provenance only
+  ok EX-CH07-S04 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S05
+  ok EX-CH07-S05 retains legacy provenance only
+  ok EX-CH07-S05 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S06
+  ok EX-CH07-S06 retains legacy provenance only
+  ok EX-CH07-S06 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S07
+  ok EX-CH07-S07 retains legacy provenance only
+  ok EX-CH07-S07 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S08
+  ok EX-CH07-S08 retains legacy provenance only
+  ok EX-CH07-S08 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S09
+  ok EX-CH07-S09 retains legacy provenance only
+  ok EX-CH07-S09 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S10
+  ok EX-CH07-S10 retains legacy provenance only
+  ok EX-CH07-S10 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S11
+  ok EX-CH07-S11 retains legacy provenance only
+  ok EX-CH07-S11 retains source/evidence labels
+  ok scene order remains canonical: EX-CH07-S12
+  ok EX-CH07-S12 retains legacy provenance only
+  ok EX-CH07-S12 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S01
+  ok EX-CH08-S01 retains legacy provenance only
+  ok EX-CH08-S01 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S02
+  ok EX-CH08-S02 retains legacy provenance only
+  ok EX-CH08-S02 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S03
+  ok EX-CH08-S03 retains legacy provenance only
+  ok EX-CH08-S03 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S04
+  ok EX-CH08-S04 retains legacy provenance only
+  ok EX-CH08-S04 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S05
+  ok EX-CH08-S05 retains legacy provenance only
+  ok EX-CH08-S05 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S06
+  ok EX-CH08-S06 retains legacy provenance only
+  ok EX-CH08-S06 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S07
+  ok EX-CH08-S07 retains legacy provenance only
+  ok EX-CH08-S07 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S08
+  ok EX-CH08-S08 retains legacy provenance only
+  ok EX-CH08-S08 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S09
+  ok EX-CH08-S09 retains legacy provenance only
+  ok EX-CH08-S09 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S10
+  ok EX-CH08-S10 retains legacy provenance only
+  ok EX-CH08-S10 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S11
+  ok EX-CH08-S11 retains legacy provenance only
+  ok EX-CH08-S11 retains source/evidence labels
+  ok scene order remains canonical: EX-CH08-S12
+  ok EX-CH08-S12 retains legacy provenance only
+  ok EX-CH08-S12 retains source/evidence labels
+  ok nested scene dialogue totals 388
+  ok global dialogue order totals 388
+  ok scene lookup resolves the final canonical scene
+  ok mission lookup resolves a three-scene mission
+  ok dialogue text is exact
+  ok speaker identity and origin are stable
+  ok N. stays an identified recording origin, not a live call
+  ok future Noor text is gated by the acquired identity flag
+  ok future knowledge text is not exposed before acquisition
+  ok first live Noor voice, her reply and Rao's channel wait for both relay flags
+  ok Rao opens the channel before Noor speaks and Noor answers Mei before Ferreira (stable ids, narrative order)
+  ok the approved tally line is in the catalog and voiced (M3-94R)
+  ok caption service preserves the exact first live line
+  ok acknowledgement is a dialogue-only command
+  ok acknowledgement does not grant future knowledge
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0101-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0102-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0103-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0104-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S01-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S02-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S03-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S04-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S05-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S06-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S07-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S08-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S09-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S10-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S11-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH01-S12-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0201-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0202-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0203-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0204-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S01-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S02-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S03-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S04-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S05-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S06-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S07-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S08-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S09-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S10-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S11-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH02-S12-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0301-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0302-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0303-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0304-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S01-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S02-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S03-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S04-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S05-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S06-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S07-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S08-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S09-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S10-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S11-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH03-S12-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0401-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0402-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0403-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0404-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S01-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S02-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S03-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S04-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S05-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S06-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S07-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S08-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S09-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S10-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S11-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH04-S12-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0501-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0502-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0503-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0504-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S01-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S02-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S03-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S04-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S05-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S06-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S07-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S08-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S09-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S10-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S11-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH05-S12-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0601-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0602-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0603-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0604-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S01-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S02-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S03-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S04-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S05-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S06-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S07-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S08-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S09-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S10-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S11-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH06-S12-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0701-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0702-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0703-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0704-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S01-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S02-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S03-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S04-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S05-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S06-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S07-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S08-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S09-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S10-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S11-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH07-S12-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0801-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0802-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0803-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-M0804-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S01-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S02-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S03-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S04-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S05-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S06-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S07-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S08-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S09-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S10-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S11-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-EX-CH08-S12-EXIT
+  ok predicate does not depend on dialogue acknowledgement: PRED-CH01-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-CH02-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-CH03-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-CH04-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-CH05-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-CH06-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-CH07-COMPLETE
+  ok predicate does not depend on dialogue acknowledgement: PRED-CH08-COMPLETE
+  ok missing runtime voice truthfully falls back to captions
+  ok voice metadata cannot promote a non-audio extension
+  ok music and SFX availability require supported existing files, not metadata booleans
+  ok runtime metadata lists all 18 installed OGVs (CS-01..CS-18)
+  ok installed CS-01 OGV is reported as playable media
+  ok installed CS-04 OGV is reported as playable media
+  ok missing cutscene file uses truthful text fallback even when metadata claims it
+  ok cutscene playback requires the supported OGV runtime format
+  ok cutscene playback requires an existing runtime file
+  ok cutscene skip never completes a predicate
+  ok UI emits the frozen primitive command fields
+  ok UI command emission does not mutate the read-only query
+  ok UI emits one dialogue command without a completion claim
+  ok captions-on and timer-free accessibility defaults are present
+  ok data-driven panel opens: objective
+  ok data-driven panel opens: dialogue_captions
+  ok data-driven panel opens: journal_discovery
+  ok data-driven panel opens: mission_table
+  ok data-driven panel opens: puzzle
+  ok data-driven panel opens: outcome
+  ok data-driven panel opens: chapter1_outcome
+  ok data-driven panel opens: pause
+  ok data-driven panel opens: settings_accessibility
+  ok data-driven panel opens: credits
+  ok data-driven panel opens: sources
+  ok data-driven panel opens: data_card
+  ok data-driven panel opens: resume
+  ok data-driven panel opens: what_now
+  ok large-text and reduced-motion settings are bindable
+  ok panel focus regression has a focused pre-open control
+  ok panel opens from a focused control
+  ok panel moves focus into its modal close control
+  ok panel close restores the pre-open focus
+  ok existing menu binds a read-only query and emits commands
+  ok main menu modal recursively disables nested background controls
+  ok main menu modal keeps nested modal controls focusable
+  ok main menu modal close restores the prior nested-control focus
+  ok campaign panel also traps focus from nested main-menu controls
+  ok campaign panel close restores main-menu focus safely
+  ok tampered campaign catalog revision is rejected
+  ok malformed/null campaign JSON types are rejected without trusting stale metadata
+  ok null campaign JSON is rejected safely
+  ok tampered dialogue catalog revision/hash is rejected
+  ok full validation rejects a tampered dialogue catalog
+  ok dialogue catalog revision and hash are frozen
+  ok checked-in dialogue catalog hash and revision validate
+WORKER C CONTENT RESULT: PASS (572 checks, 0 failures)

@@ -259,6 +259,9 @@ func _test_loading_transitions() -> void:
 	for step in LoadTrace.steps.slice(traced):
 		terrain_sync = terrain_sync or String(step.step).begins_with("glb_decode:")
 	_check(not terrain_sync, "terrain exterior entry never escapes to synchronous GLB decode")
+	# Every timed entry is complete. Drain existing optional look-ahead before
+	# destroying its owner; do not move or prewarm any measured entry work.
+	_check(await main.preparation.wait_idle(), "optional preparation drains before test teardown")
 	LoadTrace.enabled = false
 	if _retain_trace:
 		# Serialize only after every measurement and optional look-ahead has finished.
@@ -270,6 +273,8 @@ func _test_loading_transitions() -> void:
 				file.store_string(JSON.stringify(report, "\t", true, true) + "\n")
 				file.close()
 	main.free()
+	# Outside every measurement: let AudioServer retire freed playback handles.
+	await create_timer(0.1).timeout
 	for suffix in ["", ".bak", ".tmp"]:
 		if FileAccess.file_exists(slot + suffix):
 			DirAccess.remove_absolute(slot + suffix)

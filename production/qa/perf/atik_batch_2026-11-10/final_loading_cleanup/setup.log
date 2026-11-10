@@ -1,0 +1,108 @@
+WorkerThreadPool: 10 threads, 7 max low-priority.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+TextServer: Added interface "Dummy"
+TextServer: Added interface "ICU / HarfBuzz / Graphite (Built-in)"
+SDL: Init OK!
+Using "default" pen tablet driver...
+
+TextServer: Primary interface set to: "ICU / HarfBuzz / Graphite (Built-in)".
+Loading resource: res://default_bus_layout.tres remapped: res://default_bus_layout.tres
+Completed load for: 'res://default_bus_layout.tres' remapped 'res://default_bus_layout.tres' at thread -1
+CORE API HASH: 2004498165
+EDITOR API HASH: 1696660745
+SceneTreeFTI: traversal method DEFAULT
+Loading resource: /Users/atik130/Library/Application Support/Godot/editor_settings-4.7.tres remapped: /Users/atik130/Library/Application Support/Godot/editor_settings-4.7.tres
+Completed load for: '/Users/atik130/Library/Application Support/Godot/editor_settings-4.7.tres' remapped '/Users/atik130/Library/Application Support/Godot/editor_settings-4.7.tres' at thread -1
+EditorSettings: Load OK!
+EditorTheme: Generating new theme for the config '3810048042'.
+EditorTheme: Generating new icons.
+EditorTheme: Generating new fonts.
+EditorTheme: Generating new styles.
+Loading resource: /Users/atik130/Library/Caches/Godot/editor_doc_cache-4.7.res remapped: /Users/atik130/Library/Caches/Godot/editor_doc_cache-4.7.res
+Loaded system CA certificates
+Completed load for: '/Users/atik130/Library/Caches/Godot/editor_doc_cache-4.7.res' remapped '/Users/atik130/Library/Caches/Godot/editor_doc_cache-4.7.res' at thread -1
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+Loading resource: res://addons/runtime_assets/plugin.gd remapped: res://addons/runtime_assets/plugin.gd
+Completed load for: 'res://addons/runtime_assets/plugin.gd' remapped 'res://addons/runtime_assets/plugin.gd' at thread -1
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (2 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Reopening scenes...[39m[0m
+Loading resource: res://scenes/main.tscn remapped: res://scenes/main.tscn
+Loading resource: res://scripts/main.gd remapped: res://scripts/main.gd
+Loading resource: res://scenes/ui/main_menu.tscn remapped: res://scenes/ui/main_menu.tscn
+Loading resource: res://scripts/ui/main_menu.gd remapped: res://scripts/ui/main_menu.gd
+Loading resource: res://scenes/ui/campaign_panels.tscn remapped: res://scenes/ui/campaign_panels.tscn
+Loading resource: res://scripts/ui/campaign_panels.gd remapped: res://scripts/ui/campaign_panels.gd
+Loading resource: res://resources/campaign/profiles/campaign_rules.json remapped: res://resources/campaign/profiles/campaign_rules.json
+Completed load for: 'res://resources/campaign/profiles/campaign_rules.json' remapped 'res://resources/campaign/profiles/campaign_rules.json' at thread -1
+Loading resource: res://shaders/toon_character.gdshader remapped: res://shaders/toon_character.gdshader
+Loading resource: res://shaders/toon_ramp.gdshaderinc remapped: res://shaders/toon_ramp.gdshaderinc
+Completed load for: 'res://shaders/toon_ramp.gdshaderinc' remapped 'res://shaders/toon_ramp.gdshaderinc' at thread -1
+Completed load for: 'res://shaders/toon_character.gdshader' remapped 'res://shaders/toon_character.gdshader' at thread -1
+Loading resource: res://shaders/toon_world.gdshader remapped: res://shaders/toon_world.gdshader
+Completed load for: 'res://shaders/toon_world.gdshader' remapped 'res://shaders/toon_world.gdshader' at thread -1
+Loading resource: res://shaders/toon_outline.gdshader remapped: res://shaders/toon_outline.gdshader
+Completed load for: 'res://shaders/toon_outline.gdshader' remapped 'res://shaders/toon_outline.gdshader' at thread -1
+Completed load for: 'res://scripts/ui/campaign_panels.gd' remapped 'res://scripts/ui/campaign_panels.gd' at thread -1
+Completed load for: 'res://scenes/ui/campaign_panels.tscn' remapped 'res://scenes/ui/campaign_panels.tscn' at thread -1
+Completed load for: 'res://scripts/ui/main_menu.gd' remapped 'res://scripts/ui/main_menu.gd' at thread -1
+Completed load for: 'res://scenes/ui/main_menu.tscn' remapped 'res://scenes/ui/main_menu.tscn' at thread -1
+Loading resource: res://scenes/ui/chapter1_campaign_hud.tscn remapped: res://scenes/ui/chapter1_campaign_hud.tscn
+Loading resource: res://scripts/ui/chapter1_campaign_hud.gd remapped: res://scripts/ui/chapter1_campaign_hud.gd
+Loading resource: res://scenes/ui/mission_table_panel.tscn remapped: res://scenes/ui/mission_table_panel.tscn
+Completed load for: 'res://scenes/ui/mission_table_panel.tscn' remapped 'res://scenes/ui/mission_table_panel.tscn' at thread -1
+Loading resource: res://scenes/ui/p01_panel.tscn remapped: res://scenes/ui/p01_panel.tscn
+Loading resource: res://scripts/ui/p01_panel.gd remapped: res://scripts/ui/p01_panel.gd
+Loading resource: res://resources/campaign/campaign_clock.json remapped: res://resources/campaign/campaign_clock.json
+Completed load for: 'res://resources/campaign/campaign_clock.json' remapped 'res://resources/campaign/campaign_clock.json' at thread -1
+Completed load for: 'res://scripts/ui/p01_panel.gd' remapped 'res://scripts/ui/p01_panel.gd' at thread -1
+Completed load for: 'res://scenes/ui/p01_panel.tscn' remapped 'res://scenes/ui/p01_panel.tscn' at thread -1
+Loading resource: res://scenes/ui/chapter8_puzzle_panel.tscn remapped: res://scenes/ui/chapter8_puzzle_panel.tscn
+Loading resource: res://scripts/ui/chapter8_puzzle_panel.gd remapped: res://scripts/ui/chapter8_puzzle_panel.gd
+Completed load for: 'res://scripts/ui/chapter8_puzzle_panel.gd' remapped 'res://scripts/ui/chapter8_puzzle_panel.gd' at thread -1
+Completed load for: 'res://scenes/ui/chapter8_puzzle_panel.tscn' remapped 'res://scenes/ui/chapter8_puzzle_panel.tscn' at thread -1
+Loading resource: res://resources/ui/lla_theme.tres remapped: res://resources/ui/lla_theme.tres
+Completed load for: 'res://resources/ui/lla_theme.tres' remapped 'res://resources/ui/lla_theme.tres' at thread -1
+Loading resource: res://shaders/face_atlas.gdshader remapped: res://shaders/face_atlas.gdshader
+Completed load for: 'res://shaders/face_atlas.gdshader' remapped 'res://shaders/face_atlas.gdshader' at thread -1
+Loading resource: res://assets/environment/terrain/sky_env_earth.gdshader remapped: res://assets/environment/terrain/sky_env_earth.gdshader
+Completed load for: 'res://assets/environment/terrain/sky_env_earth.gdshader' remapped 'res://assets/environment/terrain/sky_env_earth.gdshader' at thread -1
+Loading resource: res://assets/environment/terrain/sky_env_stars.gdshader remapped: res://assets/environment/terrain/sky_env_stars.gdshader
+Completed load for: 'res://assets/environment/terrain/sky_env_stars.gdshader' remapped 'res://assets/environment/terrain/sky_env_stars.gdshader' at thread -1
+Loading resource: res://scenes/player/player.tscn remapped: res://scenes/player/player.tscn
+Completed load for: 'res://scenes/player/player.tscn' remapped 'res://scenes/player/player.tscn' at thread -1
+Loading resource: res://resources/campaign/content/scene_rosters.json remapped: res://resources/campaign/content/scene_rosters.json
+Completed load for: 'res://resources/campaign/content/scene_rosters.json' remapped 'res://resources/campaign/content/scene_rosters.json' at thread -1
+Completed load for: 'res://scripts/ui/chapter1_campaign_hud.gd' remapped 'res://scripts/ui/chapter1_campaign_hud.gd' at thread -1
+Completed load for: 'res://scenes/ui/chapter1_campaign_hud.tscn' remapped 'res://scenes/ui/chapter1_campaign_hud.tscn' at thread -1
+Loading resource: res://assets/environment/terrain/lola/terrain_lola.gdshader remapped: res://assets/environment/terrain/lola/terrain_lola.gdshader
+Completed load for: 'res://assets/environment/terrain/lola/terrain_lola.gdshader' remapped 'res://assets/environment/terrain/lola/terrain_lola.gdshader' at thread -1
+Completed load for: 'res://scripts/main.gd' remapped 'res://scripts/main.gd' at thread -1
+Completed load for: 'res://scenes/main.tscn' remapped 'res://scenes/main.tscn' at thread -1
+[  50% ] [90m[1mloading_editor_layout[22m | Loading central editor layout...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Loading plugin window layout...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Editor layout ready.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Unloading addon: res://addons/runtime_assets/plugin.cfg
+Script docs haven't been properly loaded or regenerated, so don't save them to disk.
+EditorSettings: Save OK!
+XR: Clearing primary interface
+XR: Removed interface "Native mobile"
+XR: Removed interface "OpenXR"
+Orphan StringName: Node (static: 3, total: 4)
+StringName: 1 unclaimed string names at exit.
