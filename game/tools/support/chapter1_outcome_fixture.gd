@@ -26,6 +26,9 @@ static func play(ending: String) -> RefCounted:
 		for target in targets:
 			if target == "review_outcome":
 				break
+			# M1-108: the probe transfer gates the dry-zero commit.
+			if target == "calibrate_probe":
+				PlantInput.complete_probe_transfer(route)
 			var result: Dictionary = route.perform(target, PlantInput.payload(target))
 			if not result.get("accepted", false):
 				push_error("Outcome fixture rejected %s: %s" % [target, str(result)])

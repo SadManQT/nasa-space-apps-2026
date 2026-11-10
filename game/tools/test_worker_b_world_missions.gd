@@ -210,6 +210,9 @@ func _test_chapter1_route_order_and_physical_gates() -> void:
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S03", "S02 advances in canonical order")
 	for target_id in ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"]:
 		print("BEGIN S03 ", target_id)
+		# M1-108: the probe transfer gates the dry-zero commit.
+		if target_id == "calibrate_probe":
+			PlantInput.complete_probe_transfer(route)
 		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S03 P-01 physical action committed: " + target_id)
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S04", "S03 advances only after calibration, provenance and atmosphere checks")
 	for target_id in ["plant_alo", "plant_tara", "water_alo", "water_tara", "label_alo", "label_tara", "seal_alo", "seal_tara", "record_paired_conditions", "confirm_services"]:

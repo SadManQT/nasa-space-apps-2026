@@ -18,6 +18,9 @@ func _run() -> void:
 		if route.current_scene_id() == "EX-CH01-S03":
 			ids = ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"]
 		for id in ids:
+			# M1-108: the probe transfer gates the dry-zero commit.
+			if id == "calibrate_probe":
+				PlantInput.complete_probe_transfer(route)
 			route.perform(id, PlantInput.payload(id))
 		route.advance_scene()
 	route.perform("role_cards")

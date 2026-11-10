@@ -111,6 +111,9 @@ func _run() -> void:
 				await _walk_probe(campaign, String(target.target_id))
 			if P02MissionTable.is_gate(String(target.target_id)):
 				await _walk_table(campaign, String(target.target_id))
+			# M1-108: the probe transfer gates the dry-zero commit.
+			if String(target.target_id) == "calibrate_probe":
+				PlantInput.complete_probe_transfer(campaign.route)
 			var result: Dictionary = campaign.route.perform(String(target.target_id), PlantInput.payload(String(target.target_id)))
 			hud.refresh_after_action(result)
 			await _walk_state(hud, "%s after %s" % [scene_id, target.target_id])
@@ -520,6 +523,9 @@ func _reach_route(route: RefCounted, destination: String) -> void:
 		var scene_id: String = route.current_scene_id()
 		var ids: Array = ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"] if scene_id == "EX-CH01-S03" else Gates.targets_for_scene(scene_id).map(func(spec): return String(spec.target_id))
 		for id in ids:
+			# M1-108: the probe transfer gates the dry-zero commit.
+			if id == "calibrate_probe":
+				PlantInput.complete_probe_transfer(route)
 			route.perform(id, PlantInput.payload(id))
 		if not route.advance_scene().accepted:
 			_check(false, "text walk reaches " + destination + " from " + scene_id)

@@ -12,6 +12,8 @@ func _init() -> void:
 
 func _run() -> void:
 	var route := _fresh()
+	# M1-108: the probe transfer gates the dry-zero commit.
+	_check(bool(Inputs.complete_probe_transfer(route).accepted), "probe transfer completes before calibration")
 	var view: Dictionary = route.p01_view("calibrate_probe")
 	_check(view.accepted and view.profile.references.dry.raw == 10 and view.profile.references.wet.raw == 110, "query exposes documented references")
 	view.state.probe_zeroed = true
@@ -123,6 +125,8 @@ func _physical_use() -> void:
 	root.add_child(campaign)
 	await process_frame
 	_reach_calibration(campaign.route)
+	# M1-108: the probe transfer gates the dry-zero commit.
+	_check(bool(Inputs.complete_probe_transfer(campaign.route).accepted), "probe transfer completes before physical calibration")
 	campaign._sync_route_projection()
 	campaign._refresh_world()
 	await physics_frame

@@ -2,6 +2,7 @@ extends SceneTree
 const Scene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 const Legacy = preload("res://scenes/dev/locomotion_test.tscn")
 const Gates = preload("res://scripts/missions/chapter1_gate_catalog.gd")
+const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 var storage = preload("res://tools/support/isolated_storage.gd").new()
 var campaign: Chapter1Campaign
 var checks := 0
@@ -45,6 +46,9 @@ func _run() -> void:
 	campaign._sync_route_projection()
 	campaign._refresh_world()
 	campaign.hud.refresh_scene()
+	# M1-108: the probe transfer gates the dry-zero commit, so the physical
+	# carry happens before the player opens the calibration panel.
+	_check(bool(PlantInput.complete_probe_transfer(campaign.route).accepted), "probe transfer completes before the dry-zero panel")
 	if not await _near("calibrate_probe"):
 		campaign.free()
 		_finish()

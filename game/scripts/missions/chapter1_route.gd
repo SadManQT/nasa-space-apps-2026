@@ -8,6 +8,7 @@ const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const RoomContractScript = preload("res://scripts/world/room_contract.gd")
 const CareRoundRuntimeScript = preload("res://scripts/campaign/care_round_runtime.gd")
 const P01Script = preload("res://scripts/missions/p01_commission_plant.gd")
+const ProbeJobScript = preload("res://scripts/payload/probe_calibration_job.gd")
 const PuzzleHostScript = preload("res://scripts/puzzles/puzzle_host.gd")
 const StateScript = preload("res://scripts/core/campaign_state.gd")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
@@ -21,6 +22,7 @@ const SimulationScript = preload("res://scripts/simulation/expedition_simulation
 ## never satisfy a scene gate.
 
 var _p01: RefCounted
+var _probe_job: RefCounted
 var _scene_index := 0
 var _scene_flags := {}
 var _dialogue_acks := {}
@@ -37,6 +39,7 @@ func _init(director: RefCounted = null, skip_initial_scene: bool = false) -> voi
 	_world = WorldRouteScript.new(_director)
 	_create_dispatcher(DispatcherScript)
 	_p01 = P01Script.new()
+	_probe_job = ProbeJobScript.new()
 	for scene_id in GateCatalog.scene_ids():
 		_scene_flags[scene_id] = {}
 		_dialogue_acks[scene_id] = []
@@ -85,9 +88,16 @@ func p01_view(target_id: String) -> Dictionary:
 			var messages: Dictionary = view.profile.prerequisite_messages
 			var reason := String(messages.get(missing[0], "Complete the preceding P-01 step first.")) if not missing.is_empty() else ""
 			view.merge({"accepted": true, "target_id": target_id, "action": target.puzzle_action, "scene_id": current_scene_id(), "missing_flags": missing, "prerequisite_reason": reason})
+			if target_id == "calibrate_probe":
+				view["probe_job"] = _probe_job.view()
 			return view
 	return {"accepted": false, "reason": "This is not a P-01 target in the current scene."}
 
+## M1-108 opening physical job: the probe's retrieve-and-place dry-zero
+## transfer at the bench in EX-CH01-S03. The transfer gates set_zero; the
+## route never mints the zero reading itself.
+func probe_job() -> RefCounted:
+	return _probe_job
 
 ## The player's P-02 plan (P02MissionTable). The Mission Table UI edits it;
 ## P-02 gates commit exactly its plan.
@@ -447,6 +457,11 @@ func _submit_command(command: Dictionary, preview_only: bool) -> Dictionary:
 		duplicate["duplicate"] = true
 		duplicate["snapshot"] = _director.snapshot()
 		return duplicate
+	# M1-108: the dry zero is set by the physical transfer, not by typing
+	# numbers. Preview and commit both refuse until the probe has been
+	# carried from its rack to the bench cradle and the zero observed.
+	if target.has("puzzle_action") and String(target.get("puzzle_action", "")) == "set_zero" and not bool(_probe_job.completed()):
+		return {"accepted": false, "duplicate": false, "reason": "Carry the probe from its rack to the bench cradle and read the dry zero first."}
 	var payload: Dictionary = command.get("payload", {}) if command.get("payload", {}) is Dictionary else {}
 	if target.has("puzzle_action"):
 		var plant_check: Dictionary = _p01.preview(String(target.puzzle_action), payload)
@@ -499,6 +514,8 @@ func _apply_target_result(target_id: String, payload: Dictionary, result: Dictio
 		var p01_result: Dictionary = _p01.commit(action, "p01:" + target_id, p01_payload)
 		if bool(p01_result.get("accepted", false)) or bool(p01_result.get("duplicate", false)):
 			_apply_p01_flag(action)
+			if action == "set_zero" and bool(p01_result.get("accepted", false)):
+				_mark_flag("probe_zero_observed")
 			if action == "plant_alo" and bool(p01_result.get("accepted", false)):
 				_commit_plant_care("ALO-01", target.get("owning_scene_id", current_scene_id()))
 			if action == "plant_tara" and bool(p01_result.get("accepted", false)):
@@ -645,6 +662,7 @@ func _local_snapshot() -> Dictionary:
 		"scene_flags": _scene_flags.duplicate(true),
 		"dialogue_acks": _dialogue_acks.duplicate(true),
 		"p01": _p01.snapshot(),
+		"probe_job": _probe_job.snapshot(),
 		"ending": _ending,
 		"world": _world.snapshot(),
 		"p02_table": _p02_table.snapshot(),
@@ -688,6 +706,12 @@ func _validate_local_snapshot(data: Dictionary) -> Dictionary:
 	var plant_check: Dictionary = P01Script.new().restore(data.p01)
 	if not bool(plant_check.get("accepted", false)):
 		return plant_check
+	# Saves written before the M1-108 probe job existed have no probe_job
+	# record; they resume with the transfer adopted from P-01 state below.
+	if data.has("probe_job"):
+		var probe_check: Dictionary = ProbeJobScript.new().restore(data.probe_job)
+		if not bool(probe_check.get("accepted", false)):
+			return probe_check
 	# Saves written before the Mission Table existed have no plan; they resume
 	# with an empty table rather than an invented plan.
 	if data.has("p02_table"):
@@ -725,6 +749,11 @@ func _restore_local(snapshot_data: Dictionary) -> void:
 	_dialogue_acks = snapshot_data.get("dialogue_acks", {}).duplicate(true)
 	_ending = String(snapshot_data.get("ending", ""))
 	_p01.restore(snapshot_data.get("p01", {}))
+	if snapshot_data.has("probe_job"):
+		_probe_job.restore(snapshot_data.get("probe_job", {}))
+	else:
+		_probe_job = ProbeJobScript.new()
+		_probe_job.restore_legacy_zero(bool(_p01.snapshot().get("probe_zeroed", false)))
 	_p02_table = MissionTableScript.new()
 	if snapshot_data.has("p02_table"):
 		_p02_table.restore(snapshot_data.p02_table)

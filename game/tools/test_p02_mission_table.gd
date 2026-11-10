@@ -104,6 +104,9 @@ func _test_witness_through_route(plan_id: String) -> void:
 		if scene_id == "EX-CH01-S12":
 			break
 		for target_id in _targets(scene_id):
+			# M1-108: the probe transfer gates the dry-zero commit.
+			if target_id == "calibrate_probe":
+				PlantInput.complete_probe_transfer(route)
 			if target_id == "p02_shift5_alarm":
 				_run_task(route)
 			if TableScript.is_gate(target_id) and target_id != "p02_stage_shift2":
@@ -350,6 +353,9 @@ func _test_campaign_integration() -> void:
 func _reach(route: RefCounted, scene_id: String) -> void:
 	while route.current_scene_id() != scene_id:
 		for target_id in _targets(route.current_scene_id()):
+			# M1-108: the probe transfer gates the dry-zero commit.
+			if target_id == "calibrate_probe":
+				PlantInput.complete_probe_transfer(route)
 			route.perform(target_id, PlantInput.payload(target_id))
 		if not bool(route.advance_scene().get("accepted", false)):
 			_check(false, "route reaches " + scene_id + " (stuck at " + route.current_scene_id() + ")")
@@ -360,6 +366,9 @@ func _play_until(route: RefCounted, scene_id: String) -> void:
 		if route.current_scene_id() == "EX-CH01-S10":
 			_run_task(route)
 		for target_id in _targets(route.current_scene_id()):
+			# M1-108: the probe transfer gates the dry-zero commit.
+			if target_id == "calibrate_probe":
+				PlantInput.complete_probe_transfer(route)
 			route.perform(target_id, PlantInput.payload(target_id))
 		if not bool(route.advance_scene().get("accepted", false)):
 			_check(false, "route plays to " + scene_id + " (stuck at " + route.current_scene_id() + ")")
