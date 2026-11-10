@@ -1,5 +1,13 @@
 # M1-85 - Windows editor-import investigation
 
+## Latest recovered-source replay - 10 November2026
+
+[Bounded exact-source investigation](recovered_repro_20261110/README.md) reconstructs originalGamef59fcc7b from recovered parent/patch. All8 focused calls show85/0 assertion markers/phase exits0 but remain FAILED on historical suite audio errors. The configured Git-filter restoration also emits2setup file-access errors despite exit0; copied retry has0setup errors. Original native139 remains unreproduced; no production fix/cause is claimed. Raw/source recovery is complete; remaining dependency is original pre-crash cache/host-linked native diagnostics or a fresh linked native failure. No supported native-crash fix is available from this pass.
+
+The older reports below keep their recorded snapshot/status. Their former missing-original-log/source statements are superseded by [recovery](recovered_original_20261110/README.md); they are not current blockers.
+
+## Earlier source-specific investigations (preserved)
+
 10 November2026 - [new corrected-collector engine recheck](current_recheck_20261110/README.md): five cold/warm observations are clean; restoring tracked sidecars in a clean warm control produces285UID/file-access errors despite exit0/1of1. This is correctly FAILED for import integrity. Unchanged retry is clean, with no historical native-crash reproduction or cause identified. Only Steel_Normal differs beyond line endings in this new comparison; the older440-error/two-file comparison below remains at its separate frozen inputs.
 
 All2493warm-input cache hashes and1190sidecar hashes still match the untouched QA source. The retained experiment copy is post-retry, not a frozen pre-error cache. Original full log/cache/backtrace are unidentified in the checked locations; the September minidump remains unlinked. M1-85 stays blocked on original or fresh failing native diagnostics.

@@ -183,7 +183,7 @@ func setup(value: Chapter1Campaign) -> void:
 			panels.close_panel()
 			_on_exit_pressed()},
 	]
-	for entry in [["cadet_record", "Cadet Record & Upgrades"], ["manual", "Academy Manual"], ["jobs", "Station Jobs"], ["discovery", "Discovery Log"], ["greenhouse", "Greenhouse"], ["coverage", "Coverage Map"], ["route_planner", "Rover Route Planner"], ["rover", "Rover Dashboard"], ["hazards", "Hazards Monitor"], ["field", "Field Equipment"], ["credits", "Credits"]]:
+	for entry in [["save_slots", "Save Slots"], ["settings_menu", "Settings & Controls"], ["cadet_record", "Cadet Record & Upgrades"], ["manual", "Academy Manual"], ["jobs", "Station Jobs"], ["discovery", "Discovery Log"], ["greenhouse", "Greenhouse"], ["coverage", "Coverage Map"], ["route_planner", "Rover Route Planner"], ["rover", "Rover Dashboard"], ["hazards", "Hazards Monitor"], ["field", "Field Equipment"], ["credits", "Credits"]]:
 		var family_id: String = entry[0]
 		pause_actions.append({"label": entry[1], "name": "Open_" + family_id, "action": func(): open_family(family_id)})
 	panels.set_pause_actions(pause_actions)
@@ -1186,7 +1186,8 @@ func open_family(family_id: String) -> bool:
 	var scripts := {"discovery": "res://scripts/ui/discovery_log_panel.gd", "greenhouse": "res://scripts/ui/greenhouse_panel.gd",
 		"cadet_record": "res://scripts/ui/cadet_record.gd", "manual": "res://scripts/ui/academy_manual.gd", "jobs": "res://scripts/ui/jobs_board.gd",
 		"coverage": "res://scripts/network/coverage_map_panel.gd", "route_planner": "res://scripts/rover/rover_route_planner.gd",
-		"rover": "res://scripts/ui/rover_hud_panel.gd", "hazards": "res://scripts/hazards/hazard_hud.gd"}
+		"rover": "res://scripts/ui/rover_hud_panel.gd", "hazards": "res://scripts/hazards/hazard_hud.gd",
+		"save_slots": "res://scripts/ui/save_slots.gd", "settings_menu": "res://scripts/ui/settings_menu.gd"}
 	if family_id != "field" and not scripts.has(family_id):
 		return false
 	var field = runtime.get("field_systems")
@@ -1206,8 +1207,21 @@ func open_family(family_id: String) -> bool:
 	panel.z_index = 95
 	if family_id == "greenhouse":
 		panel.call("bind_campaign", runtime)
-	elif family_id in ["cadet_record", "jobs"]:
+	elif family_id in ["cadet_record", "jobs", "settings_menu"]:
 		panel.call("bind_runtime", runtime)
+	elif family_id == "save_slots":
+		if runtime.get("save_slots") != null:
+			panel.set("_slots", runtime.get("save_slots"))
+			panel.set("save_path", String(runtime.get("save_path")))
+		if runtime.has_method("_save_snapshot"):
+			panel.call("bind_snapshot_provider", Callable(runtime, "_save_snapshot"))
+		if panel.has_signal("slot_loaded"):
+			panel.connect("slot_loaded", func(slot_id: String, _snap: Dictionary, _meta: Dictionary) -> void:
+				if runtime.has_method("load_from_slot"):
+					runtime.call("load_from_slot", slot_id)
+				close_family())
+		if panel.has_signal("exit_requested"):
+			panel.connect("exit_requested", close_family)
 	elif family_id == "coverage":
 		panel.call("bind_network", field.network)
 	elif family_id == "route_planner":
@@ -1445,30 +1459,36 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		return
 	var key := (event as InputEventKey).physical_keycode
 	var free: bool = not is_instance_valid(_family_panel) and panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (chapter4_panel == null or not chapter4_panel.is_open()) and (chapter6_panel == null or not chapter6_panel.is_open()) and (chapter8_panel == null or not chapter8_panel.is_open()) and (p01_panel == null or not p01_panel.is_open()) and (comms_panel == null or not bool(comms_panel.is_open()))
-	if key == KEY_ESCAPE and free:
+	var pause_pressed := key == KEY_ESCAPE or (InputMap.has_action("pause") and event.is_action_pressed("pause"))
+	var messages_pressed := key == KEY_M or (InputMap.has_action("messages") and event.is_action_pressed("messages"))
+	var what_now_pressed := key == (KEY_E if panels.bindings_snapshot().get("what_now", "H") == "E" else KEY_H) or (InputMap.has_action("what_now") and event.is_action_pressed("what_now"))
+	var journal_pressed := key == KEY_J or (InputMap.has_action("journal") and event.is_action_pressed("journal"))
+	var advance_pressed := (key == KEY_ENTER or key == KEY_KP_ENTER) or (InputMap.has_action("advance") and event.is_action_pressed("advance"))
+	var next_line_pressed := key == KEY_SPACE or (InputMap.has_action("next_line") and event.is_action_pressed("next_line"))
+	if pause_pressed and free:
 		panels.open_panel("pause")
 		get_viewport().set_input_as_handled()
-	elif key == KEY_M:
+	elif messages_pressed:
 		if free:
 			open_messages()
 			get_viewport().set_input_as_handled()
 		elif comms_panel != null and bool(comms_panel.is_open()):
 			comms_panel.close_inbox()
 			get_viewport().set_input_as_handled()
-	elif key == (KEY_E if panels.bindings_snapshot().get("what_now", "H") == "E" else KEY_H):
+	elif what_now_pressed:
 		if free:
 			panels.open_panel("what_now")
 			get_viewport().set_input_as_handled()
 		elif panels != null and panels.active_panel() == "what_now":
 			panels.close_panel()
 			get_viewport().set_input_as_handled()
-	elif key == KEY_J and free:
+	elif journal_pressed and free:
 		_on_journal_pressed()
 		get_viewport().set_input_as_handled()
-	elif (key == KEY_ENTER or key == KEY_KP_ENTER) and free and _advance.visible and not _advance.disabled:
+	elif advance_pressed and free and _advance.visible and not _advance.disabled:
 		_on_advance_pressed()
 		get_viewport().set_input_as_handled()
-	elif key == KEY_SPACE and free and _dialogue_bar.visible and not _next_line.disabled:
+	elif next_line_pressed and free and _dialogue_bar.visible and not _next_line.disabled:
 		_on_next_line()
 		get_viewport().set_input_as_handled()
 	elif key == KEY_F10 and OS.is_debug_build():
