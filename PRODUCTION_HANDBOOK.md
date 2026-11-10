@@ -320,6 +320,8 @@ Optional opening (from the gameplay entry flow): mustard fields to the Moon cham
 
 ## 10. Status (latest first)
 
+**10 Nov 2026 — Atik M1-92 matching-tool recheck:** exact arm64 build UUID5EF81F68-A5CB-3B0C-82FF-E288702E954D recorded; no supplied matching dSYM or xctrace found, and atos remains unnamed. The official expanded release list was checked without substituting Android/other-version symbols. No campaign-hitch cause or controlled fix claimed; old title wait is not campaign evidence. [Tool evidence and resume conditions](production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-92_MATCHING_TOOLS.md).
+
 **10 Nov 2026 — Atik M1-53 reviewed-change request:** [explicit request for Sadman](production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-53_REVIEW_REQUEST.md) identifies the current raw source blob, preserved batching, independent fallback/publication ownership, known freed-node guard hazard and required held-worker proof. No raw patch applied and no owner delivery claimed. Atik held-raw tests and ten full consecutive native probes wait for that reviewed change.
 
 **10 Nov 2026 — Atik resumed M1-68 gate:** all117 mandatory suites started at frozen committed-source checkpointdaa0141 in an isolated APFS-cloned checkout, preserving the user workspace and prior evidence;50ms assertions unchanged. Full result pending. Original Ryzen/RTX and IntelArc access is unavailable (no configured SSH/remote connector or supplied collection route); hosted CI/Metal/headless cannot certify those hosts. [Live evidence and exact blockers](production/qa/perf/atik_batch_2026-11-10/resume_20261110/README.md).
