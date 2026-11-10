@@ -22,6 +22,8 @@ func _run() -> void:
 	route.start_at("EX-CH01-S03")
 	var before := director.snapshot()
 	_check(not route.perform("inspect_packet").accepted and director.snapshot() == before, "unready evidence operation grants nothing")
+	# M1-108: the probe transfer gates the dry-zero commit.
+	_check(bool(PlantInput.complete_probe_transfer(route).accepted), "probe transfer completes before calibration")
 	for target in ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet"]:
 		_check(route.perform(target, PlantInput.payload(target)).accepted, "owning evidence operation " + target)
 	var acquired := director.snapshot()

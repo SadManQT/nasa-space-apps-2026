@@ -187,6 +187,8 @@ func _campaign() -> void:
 	while campaign.route.current_scene_id() != "EX-CH01-S10":
 		var current: String = campaign.route.current_scene_id()
 		var ids: Array = ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"] if current == "EX-CH01-S03" else Gates.targets_for_scene(current).map(func(spec): return String(spec.target_id))
+		if current == "EX-CH01-S03":
+			PlantInput.complete_probe_transfer(campaign.route)
 		for id in ids:
 			campaign.route.perform(id, PlantInput.payload(id))
 		if not bool(campaign.route.advance_scene().get("accepted", false)):

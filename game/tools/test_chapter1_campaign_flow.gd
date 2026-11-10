@@ -79,6 +79,9 @@ func _run() -> void:
 				_check(false, scene_id + " has physical target " + String(target_id))
 				_finish()
 				return
+			# M1-108: the probe transfer gates the dry-zero commit.
+			if String(target_id) == "calibrate_probe":
+				PlantInput.complete_probe_transfer(campaign.route)
 			campaign._player.global_position = Vector3(target.global_position.x, 0.0, target.global_position.z + 1.0)
 			campaign._player.velocity = Vector3.ZERO
 			await physics_frame

@@ -7,11 +7,15 @@ const WorldRouteScript = preload("res://scripts/world/world_route.gd")
 const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
 const LedgerScript = preload("res://scripts/puzzles/extended_puzzle_ledger.gd")
 const ResultScript = preload("res://scripts/core/command_result.gd")
+const Chapter4Script = preload("res://scripts/puzzles/chapter4_puzzles.gd")
+const Chapter6Script = preload("res://scripts/puzzles/chapter6_puzzles.gd")
 const Chapter8Script = preload("res://scripts/puzzles/chapter8_puzzles.gd")
 const ContentScript = preload("res://scripts/content/content_loader.gd")
 const ScienceScript = preload("res://scripts/science/science_data.gd")
 
 var _ledger: RefCounted
+var _chapter4: RefCounted
+var _chapter6: RefCounted
 var _chapter8: RefCounted
 var _science: RefCounted
 var _scene_index := 0
@@ -26,6 +30,8 @@ func _init(director: RefCounted = null, skip_initial_scene: bool = false) -> voi
 	_world = WorldRouteScript.new(_director)
 	_create_dispatcher(DispatcherScript)
 	_ledger = LedgerScript.new()
+	_chapter4 = Chapter4Script.new()
+	_chapter6 = Chapter6Script.new()
 	_chapter8 = Chapter8Script.new()
 	for scene_id in GateCatalog.scene_ids():
 		_scene_flags[scene_id] = {}
@@ -43,10 +49,92 @@ func world() -> RefCounted:
 func dispatcher() -> RefCounted:
 	return _dispatcher
 
+## The Chapter 4 puzzle model (P-07 and P-08): the player's selections, found
+## clues, hints and poll signatures. Presentation reads it; commits go through perform().
+func chapter4() -> RefCounted:
+	return _chapter4
+
+## The Chapter 6 puzzle model (P-11 and P-12): the player's selections, found
+## clues, hints and poll signatures. Presentation reads it; commits go through perform().
+func chapter6() -> RefCounted:
+	return _chapter6
+
 ## The Chapter 8 puzzle model (P-15 and P-16): the player's selections, found
 ## clues, hints and poll signatures. Presentation reads it; commits go through perform().
 func chapter8() -> RefCounted:
 	return _chapter8
+
+func chapter4_view(target_id: String) -> Dictionary:
+	return _chapter_puzzle_view(_chapter4, Chapter4Script, target_id)
+
+func chapter6_view(target_id: String) -> Dictionary:
+	return _chapter_puzzle_view(_chapter6, Chapter6Script, target_id)
+
+func _chapter_puzzle_view(model: RefCounted, script_ref, target_id: String) -> Dictionary:
+	var spec: Dictionary = script_ref.step(target_id)
+	if spec.is_empty():
+		return {}
+	var state: Dictionary = _director.snapshot()
+	var scene_id := String(spec.get("scene", ""))
+	var scene: Dictionary = script_ref.scene(scene_id)
+	var content: Dictionary = ContentScript.load_full()
+	var found: Array = model.found_clues(scene_id)
+	var clues: Array = []
+	for raw in scene.get("clues", []):
+		var clue: Dictionary = raw.duplicate(true)
+		var line_id := String(clue.get("line_id", ""))
+		if not line_id.is_empty():
+			var line: Dictionary = ContentScript.dialogue_by_id(content, line_id)
+			clue["speaker"] = String(line.get("speaker_label", line.get("speaker", "")))
+			clue["line"] = String(line.get("text", ""))
+			clue["origin"] = String(line.get("origin_label", ""))
+		var holders: Array = []
+		for holder in clue.get("holders", []):
+			holders.append(script_ref.role(String(holder)).get("name", String(holder)))
+		clue["holder_names"] = holders
+		clue["found"] = found.has(String(clue.get("id", "")))
+		clues.append(clue)
+	var context := chapter8_context(state)
+	var attempt: Dictionary = model.payload_for(target_id, context)
+	var puzzle_id: String = script_ref.puzzle_id_for_step(target_id)
+	var mission_id := String(scene.get("mission", current_mission_id()))
+	if _science == null:
+		_science = ScienceScript.new()
+	var prerequisite := ""
+	for target in targets_for_current_scene():
+		if String(target.get("target_id", "")) == target_id:
+			for flag in target.get("required_flags", []):
+				if not bool(_context_flags().get(String(flag), false)):
+					prerequisite = String(spec.get("prerequisite_text", "Complete the earlier step on this card first."))
+	return {
+		"target_id": target_id,
+		"step": spec,
+		"scene": scene,
+		"clues": clues,
+		"puzzle_id": puzzle_id,
+		"puzzle": script_ref.puzzle(puzzle_id),
+		"mission_id": mission_id,
+		"data_card": _science.mission_card(mission_id),
+		"scenario_datetime": String(state.get("scenario_datetime", "")),
+		"resources": state.get("resources", {}).duplicate(true),
+		"route": state.get("route", {}).duplicate(true),
+		"readings": context,
+		"selection": model.selection(target_id),
+		"attempt": attempt,
+		"hints": model.revealed_hints(target_id),
+		"hints_total": script_ref.hint_ladder(target_id).size(),
+		"attempts": model.attempts(target_id),
+		"signed": model.signed_roles(target_id),
+		"committed": _ledger.has_receipt(target_id),
+		"prerequisite_reason": prerequisite,
+		"first_time": not model.first_time_seen(puzzle_id),
+	}
+
+func chapter4_preview(target_id: String, payload: Dictionary) -> Dictionary:
+	return chapter8_preview(target_id, payload)
+
+func chapter6_preview(target_id: String, payload: Dictionary) -> Dictionary:
+	return chapter8_preview(target_id, payload)
 
 ## Everything the Chapter 8 puzzle panel renders for one operation: the step
 ## and scene content with canon lines resolved from the dialogue catalog, the
@@ -348,6 +436,8 @@ func snapshot() -> Dictionary:
 		"scene_flags": _scene_flags.duplicate(true),
 		"dialogue_acks": _dialogue_acks.duplicate(true),
 		"ledger": _ledger.snapshot(),
+		"chapter4": _chapter4.snapshot(),
+		"chapter6": _chapter6.snapshot(),
 		"chapter8": _chapter8.snapshot(),
 		"world": _world.snapshot(),
 		"chapter_ready": chapter_ready(),
@@ -364,6 +454,8 @@ func restore(data: Dictionary) -> Dictionary:
 			return nested
 	_world = staged.world
 	_ledger = staged.ledger
+	_chapter4 = staged.chapter4
+	_chapter6 = staged.chapter6
 	_chapter8 = staged.chapter8
 	_scene_index = GateCatalog.scene_ids().find(data.current_scene_id)
 	_completed_scene_ids = data.completed_scene_ids.duplicate()
@@ -382,14 +474,20 @@ func _stage(data: Dictionary) -> Dictionary:
 		return {"accepted": false, "reason": "Extended route snapshot requires its puzzle ledger."}
 	var world: RefCounted = WorldRouteScript.new(_director)
 	var ledger: RefCounted = LedgerScript.new()
+	var chapter4: RefCounted = Chapter4Script.new()
+	var chapter6: RefCounted = Chapter6Script.new()
 	var chapter8: RefCounted = Chapter8Script.new()
 	var restores: Array = [world.restore(data.world), ledger.restore(data.ledger)]
+	if data.get("chapter4", null) is Dictionary:
+		restores.append(chapter4.restore(data.chapter4))
+	if data.get("chapter6", null) is Dictionary:
+		restores.append(chapter6.restore(data.chapter6))
 	if data.get("chapter8", null) is Dictionary:
 		restores.append(chapter8.restore(data.chapter8))
 	for restored in restores:
 		if not bool(restored.get("accepted", false)):
 			return restored
-	return {"accepted": true, "world": world, "ledger": ledger, "chapter8": chapter8}
+	return {"accepted": true, "world": world, "ledger": ledger, "chapter4": chapter4, "chapter6": chapter6, "chapter8": chapter8}
 
 func _set_current_scene(index: int, project_clock: bool = true) -> Dictionary:
 	var scene_ids: Array = GateCatalog.scene_ids()
@@ -429,6 +527,10 @@ func _context_flags() -> Dictionary:
 					result[String(flag)] = true
 	for flag in _ledger.flags().keys():
 		result[String(flag)] = _ledger.flags()[flag]
+	for flag in _chapter4.flags().keys():
+		result[String(flag)] = _chapter4.flags()[flag]
+	for flag in _chapter6.flags().keys():
+		result[String(flag)] = _chapter6.flags()[flag]
 	for flag in _chapter8.flags().keys():
 		result[String(flag)] = _chapter8.flags()[flag]
 	return result

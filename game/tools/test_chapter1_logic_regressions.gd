@@ -43,6 +43,8 @@ func _targets(scene: String) -> Array:
 func _reach(route: RefCounted, scene: String) -> void:
 	while route.current_scene_id() != scene:
 		for target_id in _targets(route.current_scene_id()):
+			if target_id == "calibrate_probe":
+				PlantInput.complete_probe_transfer(route)
 			var action: Dictionary = route.perform(target_id, PlantInput.payload(target_id))
 			if not bool(action.get("accepted", false)):
 				_check(false, "fixture action rejected: " + target_id + " " + String(action.get("reason", "")))

@@ -11,6 +11,8 @@ const RouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
 const LedgerScript = preload("res://scripts/puzzles/extended_puzzle_ledger.gd")
 const PuzzleScript = preload("res://scripts/puzzles/chapter8_puzzles.gd")
+const Witness4 = preload("res://tools/support/chapter4_witness.gd")
+const Witness6 = preload("res://tools/support/chapter6_witness.gd")
 const Witness = preload("res://tools/support/chapter8_witness.gd")
 const ContentScript = preload("res://scripts/content/content_loader.gd")
 const PanelScene: PackedScene = preload("res://scenes/ui/chapter8_puzzle_panel.tscn")
@@ -222,7 +224,10 @@ func _build_entry_state() -> void:
 		if scene_id.begins_with("EX-CH08"):
 			break
 		for target in GateCatalog.targets_for_scene(scene_id):
-			var result: Dictionary = route.perform(target.target_id, target.get("payload_defaults", {}))
+			var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+			payload = Witness4.payload(String(target.target_id), director.snapshot(), payload)
+			payload = Witness6.payload(String(target.target_id), director.snapshot(), payload)
+			var result: Dictionary = route.perform(target.target_id, payload)
 			if not bool(result.get("accepted", false)):
 				print("FIXTURE DETAIL ", scene_id, " ", target.target_id, " ", result.get("reason", ""))
 			ok = ok and bool(result.get("accepted", false))

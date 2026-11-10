@@ -1,6 +1,29 @@
 extends RefCounted
 
 ## Explicit witness inputs for tests/captures only. Never used by the game.
+
+## M1-108: drives the opening probe transfer on a route (retrieve from the
+## rack, place at the bench cradle, read the dry zero). The transfer gates
+## set_zero, so suites that commit calibrate_probe complete it first.
+## Idempotent, and finishes a transfer from any stage: a route restored
+## mid-transfer resumes where the probe actually is.
+static func complete_probe_transfer(route: RefCounted) -> Dictionary:
+	var job: RefCounted = route.probe_job()
+	if bool(job.completed()):
+		return {"accepted": true, "reason": "Dry zero already set."}
+	var result: Dictionary = {}
+	if String(job.state()) == "at_rack":
+		result = job.retrieve()
+		if not bool(result.get("accepted", false)):
+			return result
+	if String(job.state()) == "held":
+		result = job.place_at_bench()
+		if not bool(result.get("accepted", false)):
+			return result
+	if String(job.state()) == "at_bench":
+		return job.observe_zero()
+	return {"accepted": false, "reason": "Probe transfer is in an unknown state."}
+
 static func payload(target: String) -> Dictionary:
 	match target:
 		"calibrate_probe", "set_zero": return {"reference": "dry", "raw_reading": 10, "calibrated_reading": 0}

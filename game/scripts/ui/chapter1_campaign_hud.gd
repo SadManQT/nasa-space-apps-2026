@@ -16,19 +16,28 @@ const MISSION_TABLE_SCENE: PackedScene = preload("res://scenes/ui/mission_table_
 const P01_SCENE: PackedScene = preload("res://scenes/ui/p01_panel.tscn")
 const Debrief = preload("res://scripts/debrief/chapter1_debrief.gd")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
+const CHAPTER4_PANEL_SCENE: PackedScene = preload("res://scenes/ui/chapter4_puzzle_panel.tscn")
+const Chapter4Script = preload("res://scripts/puzzles/chapter4_puzzles.gd")
+const CHAPTER6_PANEL_SCENE: PackedScene = preload("res://scenes/ui/chapter6_puzzle_panel.tscn")
+const Chapter6Script = preload("res://scripts/puzzles/chapter6_puzzles.gd")
 const CHAPTER8_PANEL_SCENE: PackedScene = preload("res://scenes/ui/chapter8_puzzle_panel.tscn")
 const Chapter8Script = preload("res://scripts/puzzles/chapter8_puzzles.gd")
 const CommsServiceScript = preload("res://scripts/comms/comms_service.gd")
 const CommsPanelScript = preload("res://scripts/ui/comms_panel.gd")
+const EvaVisorHudScript = preload("res://scripts/eva/eva_visor_hud.gd")
+const Chapter1FeedbackScript = preload("res://scripts/feedback/chapter1_feedback.gd")
 
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
 var mission_table: MissionTablePanel
+var chapter4_panel: Chapter4PuzzlePanel
+var chapter6_panel: Chapter6PuzzlePanel
 var chapter8_panel: Chapter8PuzzlePanel
 var p01_panel: P01Panel
 var comms_service: RefCounted
 var comms_panel: Control
 var outpost: OutpostStatus
+var eva_visor: EvaVisorHud
 var payload_activity: PayloadStackActivity
 
 # Goal card
@@ -187,6 +196,16 @@ func setup(value: Chapter1Campaign) -> void:
 	mission_table.commit_requested.connect(_on_mission_table_commit)
 	mission_table.payload_requested.connect(_on_payload_requested)
 	mission_table.hint_player = panels.hint_player
+	chapter4_panel = CHAPTER4_PANEL_SCENE.instantiate() as Chapter4PuzzlePanel
+	add_child(chapter4_panel)
+	chapter4_panel.opened.connect(func(_target: String) -> void: _on_panel_opened("chapter4_panel"))
+	chapter4_panel.closed.connect(func(_target: String) -> void: _on_panel_closed("chapter4_panel"))
+	chapter4_panel.commit_requested.connect(_on_chapter4_commit)
+	chapter6_panel = CHAPTER6_PANEL_SCENE.instantiate() as Chapter6PuzzlePanel
+	add_child(chapter6_panel)
+	chapter6_panel.opened.connect(func(_target: String) -> void: _on_panel_opened("chapter6_panel"))
+	chapter6_panel.closed.connect(func(_target: String) -> void: _on_panel_closed("chapter6_panel"))
+	chapter6_panel.commit_requested.connect(_on_chapter6_commit)
 	chapter8_panel = CHAPTER8_PANEL_SCENE.instantiate() as Chapter8PuzzlePanel
 	add_child(chapter8_panel)
 	chapter8_panel.opened.connect(func(_target: String) -> void: _on_panel_opened("chapter8_panel"))
@@ -214,6 +233,8 @@ func setup(value: Chapter1Campaign) -> void:
 	panels.hint_player.highlight_changed.connect(func(active):
 		_marker.z_index = 210 if active else 0
 		_update_world_overlay())
+	if eva_visor != null and runtime.get("eva_suit") != null:
+		eva_visor.bind_suit(runtime.eva_suit)
 	_resume_pending = bool(runtime.incremental_loading) and not runtime.initial_snapshot.is_empty()
 	_refresh_query()
 	refresh_scene({})
@@ -260,9 +281,41 @@ func refresh_after_action(result: Dictionary) -> void:
 		if not before.has(id):
 			newly_done.append(id)
 	if result.get("accepted", false):
-		_last_outcome = {"result": result.get("reason", "Done."), "changes": result.get("deltas", []), "notes": _result_notes(result.get("warnings", []) + result.get("ledger_summary", []))}
+		var done_id := String(newly_done[0]) if not newly_done.is_empty() else ""
+		if done_id.is_empty() and result.get("p01", null) is Dictionary:
+			done_id = String((result.get("p01", {}) as Dictionary).get("action", ""))
+		var notes_list := _result_notes(result.get("warnings", []) + result.get("ledger_summary", []))
+		var fb_dict := {}
+		var tension_dict := {}
+		var posture_dict := {}
+		if _scene_id.begins_with("EX-CH01-") and not done_id.is_empty():
+			var snap: Dictionary = runtime.director.snapshot() if runtime != null and runtime.director != null else {}
+			var route_snap: Dictionary = runtime.route.snapshot() if runtime != null and runtime.route != null and runtime.route.has_method("snapshot") else {}
+			var res: Dictionary = snap.get("resources", {}) if snap.get("resources", {}) is Dictionary else {}
+			var live_state := {"p01": route_snap.get("p01", {}), "resources": res}
+			fb_dict = Chapter1FeedbackScript.action_feedback(done_id, live_state)
+			var shift_idx := clampi(int(res.get("shift_index", 1)), 1, 7)
+			var alo_h := int(res.get("H", 6))
+			var water_w := int(res.get("W", 0))
+			var bloomed := _scene_id == "EX-CH01-S12" and alo_h > 0
+			tension_dict = Chapter1FeedbackScript.night_shift_tension(shift_idx)
+			posture_dict = Chapter1FeedbackScript.alo_posture(alo_h, water_w, shift_idx, bloomed)
+			notes_list.append("What changed: " + String(fb_dict.get("consequence", "")))
+			notes_list.append("Why: " + String(fb_dict.get("why", "")))
+			notes_list.append("Next step: " + String(fb_dict.get("next_step", "")))
+			notes_list.append("Meter tick: " + String(fb_dict.get("meter_tick", "")))
+			notes_list.append("%s: \"%s\"" % [String(fb_dict.get("crew_speaker", "Crew")), String(fb_dict.get("crew_reaction", ""))])
+			notes_list.append("Alo (%s): %s" % [String(posture_dict.get("stage", "")), String(posture_dict.get("posture_description", ""))])
+		_last_outcome = {
+			"result": result.get("reason", "Done."),
+			"changes": result.get("deltas", []),
+			"notes": notes_list,
+			"feedback": fb_dict,
+			"tension": tension_dict,
+			"alo_posture": posture_dict,
+		}
 		if not newly_done.is_empty() and result.get("result", result).get("unsafe_predicates", []).is_empty():
-			var line := _result_line(String(newly_done[0]))
+			var line := _result_line(done_id)
 			_last_outcome["result"] = line
 			show_status(line)
 		if panels != null and runtime != null:
@@ -384,6 +437,10 @@ func _build() -> void:
 	outpost = Outpost.new()
 	outpost.name = "OutpostStatus"
 	_column.add_child(outpost)
+	eva_visor = EvaVisorHudScript.new()
+	eva_visor.name = "EvaVisorHud"
+	eva_visor.visible = false
+	add_child(eva_visor)
 	# Dialogue, bottom centre.
 	_dialogue_bar = UiDesign.glass_panel(Color.TRANSPARENT, 14)
 	_dialogue_bar.name = "Dialogue"
@@ -797,13 +854,65 @@ func open_mission_table(target_id: String) -> bool:
 	mission_table.teach_first_use()
 	return true
 
+## Opens the Chapter 4 puzzle panel (P-07 / P-08) for one operation.
+func open_chapter4_panel(target_id: String) -> bool:
+	if runtime == null or chapter4_panel == null or runtime.is_chapter_complete() or not Chapter4Script.is_step(target_id):
+		return false
+	if runtime.is_cutscene_active() or chapter4_panel.is_open() or (chapter6_panel != null and chapter6_panel.is_open()) or (chapter8_panel != null and chapter8_panel.is_open()) or (mission_table != null and mission_table.is_open()) or (p01_panel != null and p01_panel.is_open()):
+		return false
+	if panels != null and not panels.active_panel().is_empty():
+		return false
+	if not runtime.route.has_method("chapter4_view"):
+		return false
+	var settings: Dictionary = runtime.query().get("accessibility", {}).duplicate(true)
+	chapter4_panel.open(runtime.route, target_id, settings)
+	return true
+
+func _on_chapter4_commit(target_id: String, payload: Dictionary) -> void:
+	if runtime == null:
+		return
+	var result := runtime.perform_target(target_id, payload)
+	if not bool(result.get("accepted", false)):
+		show_status("HELD · " + String(result.get("reason", "The operation was not recorded.")))
+		return
+	var title := Chapter4Script.focus_label(target_id)
+	_last_outcome = {"result": "%s · locked in" % title, "changes": result.get("deltas", []), "notes": result.get("warnings", []) + result.get("ledger_summary", [])}
+	show_status("%s · locked in. %s" % [title, String(result.get("reason", ""))])
+	panels.open_panel("outcome", _last_outcome)
+
+## Opens the Chapter 6 puzzle panel (P-11 / P-12) for one operation.
+func open_chapter6_panel(target_id: String) -> bool:
+	if runtime == null or chapter6_panel == null or runtime.is_chapter_complete() or not Chapter6Script.is_step(target_id):
+		return false
+	if runtime.is_cutscene_active() or chapter6_panel.is_open() or (chapter4_panel != null and chapter4_panel.is_open()) or (chapter8_panel != null and chapter8_panel.is_open()) or (mission_table != null and mission_table.is_open()) or (p01_panel != null and p01_panel.is_open()):
+		return false
+	if panels != null and not panels.active_panel().is_empty():
+		return false
+	if not runtime.route.has_method("chapter6_view"):
+		return false
+	var settings: Dictionary = runtime.query().get("accessibility", {}).duplicate(true)
+	chapter6_panel.open(runtime.route, target_id, settings)
+	return true
+
+func _on_chapter6_commit(target_id: String, payload: Dictionary) -> void:
+	if runtime == null:
+		return
+	var result := runtime.perform_target(target_id, payload)
+	if not bool(result.get("accepted", false)):
+		show_status("HELD · " + String(result.get("reason", "The operation was not recorded.")))
+		return
+	var title := Chapter6Script.focus_label(target_id)
+	_last_outcome = {"result": "%s · locked in" % title, "changes": result.get("deltas", []), "notes": result.get("warnings", []) + result.get("ledger_summary", [])}
+	show_status("%s · locked in. %s" % [title, String(result.get("reason", ""))])
+	panels.open_panel("outcome", _last_outcome)
+
 ## Opens the Chapter 8 puzzle panel (P-15 / P-16) for one operation. Reading
 ## and deciding pause the expedition; the physical commit happens only after
 ## the panel closes with LOCK IN.
 func open_chapter8_panel(target_id: String) -> bool:
 	if runtime == null or chapter8_panel == null or runtime.is_chapter_complete() or not Chapter8Script.is_step(target_id):
 		return false
-	if runtime.is_cutscene_active() or chapter8_panel.is_open() or (mission_table != null and mission_table.is_open()) or (p01_panel != null and p01_panel.is_open()):
+	if runtime.is_cutscene_active() or chapter8_panel.is_open() or (chapter4_panel != null and chapter4_panel.is_open()) or (chapter6_panel != null and chapter6_panel.is_open()) or (mission_table != null and mission_table.is_open()) or (p01_panel != null and p01_panel.is_open()):
 		return false
 	if panels != null and not panels.active_panel().is_empty():
 		return false
@@ -1031,7 +1140,7 @@ func apply_accessibility() -> void:
 	_caption_line.visible = captions
 	_caption_count.visible = captions
 	var scale := 1.5 if bool(settings.get("large_text", false)) else 1.0
-	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, chapter8_panel, p01_panel, comms_panel])
+	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, chapter4_panel, chapter6_panel, chapter8_panel, p01_panel, comms_panel])
 	if comms_panel != null:
 		comms_panel.set_text_scale(bool(settings.get("large_text", false)))
 	if runtime.audio != null:
@@ -1053,7 +1162,7 @@ func _on_panel_opened(_panel_id: String) -> void:
 func _on_panel_closed(_panel_id: String) -> void:
 	if p01_panel != null and p01_panel.is_open():
 		p01_panel.set_covered(not panels.active_panel().is_empty() or panels.hint_player.is_open())
-	var reading: bool = not panels.active_panel().is_empty() or mission_table.is_open() or (chapter8_panel != null and chapter8_panel.is_open()) or (p01_panel != null and p01_panel.is_open()) or (comms_panel != null and bool(comms_panel.is_open())) or panels.hint_player.is_open()
+	var reading: bool = not panels.active_panel().is_empty() or mission_table.is_open() or (chapter4_panel != null and chapter4_panel.is_open()) or (chapter6_panel != null and chapter6_panel.is_open()) or (chapter8_panel != null and chapter8_panel.is_open()) or (p01_panel != null and p01_panel.is_open()) or (comms_panel != null and bool(comms_panel.is_open())) or panels.hint_player.is_open()
 	runtime.set_ui_paused(reading or _reading_was_paused)
 	_modal_reading = reading
 	_set_modal_buttons(reading)
@@ -1067,6 +1176,8 @@ func _set_chrome_hidden(hidden: bool) -> void:
 	_goal_card.visible = not hidden
 	_marker.visible = _marker.visible and not hidden
 	_prompt.visible = _prompt.visible and not hidden
+	if eva_visor != null and hidden:
+		eva_visor.visible = false
 	if hidden:
 		_dialogue_bar.visible = false
 		_toast.visible = false
@@ -1082,7 +1193,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_modal_button_states.clear()
 		return
 	for child in node.get_children():
-		if child == panels or child == mission_table or child == chapter8_panel or child == p01_panel or child == comms_panel or child == _what_now_home:
+		if child == panels or child == mission_table or child == chapter4_panel or child == chapter6_panel or child == chapter8_panel or child == p01_panel or child == comms_panel or child == _what_now_home:
 			continue
 		if child is BaseButton:
 			if not _modal_button_states.has(child):
@@ -1094,7 +1205,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	var key := (event as InputEventKey).physical_keycode
-	var free: bool = panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (chapter8_panel == null or not chapter8_panel.is_open()) and (p01_panel == null or not p01_panel.is_open()) and (comms_panel == null or not bool(comms_panel.is_open()))
+	var free: bool = panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (chapter4_panel == null or not chapter4_panel.is_open()) and (chapter6_panel == null or not chapter6_panel.is_open()) and (chapter8_panel == null or not chapter8_panel.is_open()) and (p01_panel == null or not p01_panel.is_open()) and (comms_panel == null or not bool(comms_panel.is_open()))
 	if key == KEY_ESCAPE and free:
 		panels.open_panel("pause")
 		get_viewport().set_input_as_handled()
@@ -1136,6 +1247,14 @@ func _process(delta: float) -> void:
 		_auto_timer -= delta
 		if _auto_timer <= 0.0:
 			_on_next_line()
+	if eva_visor != null:
+		var suit = runtime.get("eva_suit")
+		if suit != null and eva_visor.suit != suit:
+			eva_visor.bind_suit(suit)
+		var show_visor: bool = suit != null and (not bool(suit.get("indoor")) or bool(suit.get("scanner_pulse_active"))) and not _chrome_hidden and not runtime.is_cutscene_active()
+		eva_visor.visible = show_visor
+		if show_visor:
+			eva_visor.refresh()
 	_update_world_overlay()
 
 ## Projects the goal marker (with distance) and the prompt on the object in reach.

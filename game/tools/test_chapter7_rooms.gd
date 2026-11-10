@@ -285,6 +285,16 @@ func _text(staged: Node, id: String) -> String:
 	var label := staged.get_node_or_null(id) as Label3D
 	return label.text if label != null and label.visible else ""
 
+## M3-101: the D10 holder is the real M3-99 PR_LabelHolder "n" prop (a GLB),
+## so its presence is asserted at the data level: the staged layout either
+## carries the prop with variant "n" or it does not. The scene-level room
+## cannot load GLB props in the LFS-stub copy.
+func _n_holder(scene_id: String, choices: Dictionary) -> Dictionary:
+	for prop in Contract.staged_layout("LOC-01", scene_id, choices).props:
+		if String(prop.get("id", "")) == "n_holder":
+			return prop
+	return {}
+
 func _screen(staged: Node, id: String, screen: String) -> String:
 	var node := staged.get_node_or_null(id)
 	if node == null or not node.get_meta("screen_text", {}).has(screen):
@@ -453,7 +463,7 @@ func _check_echoes() -> void:
 	commons.set_scene_context("EX-CH07-S10")
 	await process_frame
 	var staged := commons.visual_root.get_node(Staging.ROOT_NAME)
-	_check(not staged.has_node("ferreira_record") and not staged.has_node("outbox_photo_strip") and not staged.has_node("n_holder_card"), "no echo objects without a recorded choice")
+	_check(not staged.has_node("ferreira_record") and not staged.has_node("outbox_photo_strip") and _n_holder("EX-CH07-S10", {}).is_empty(), "no echo objects without a recorded choice")
 	for option in ["EX-CH05-S05-OPT01", "EX-CH05-S05-OPT02"]:
 		for scene_id in ["EX-CH07-S01", "EX-CH07-S10"]:
 			commons.set_story_choices({"EX-CH05-S05-CHOICE": {"option_id": option}})
@@ -466,11 +476,12 @@ func _check_echoes() -> void:
 	commons.set_story_choices({"EX-CH05-S11-CHOICE": {"option_id": "EX-CH05-S11-OPT01"}})
 	await process_frame
 	staged = commons.visual_root.get_node(Staging.ROOT_NAME)
-	_check(_text(staged, "outbox_photo_strip").contains("WHAT GROWS NEXT") and not staged.has_node("n_holder_card"), "D10 'Would you like to see what grows next?' queues Mei's photo strip for N.")
+	_check(_text(staged, "outbox_photo_strip").contains("WHAT GROWS NEXT") and _n_holder("EX-CH07-S10", {"EX-CH05-S11-CHOICE": {"option_id": "EX-CH05-S11-OPT01"}}).is_empty(), "D10 'Would you like to see what grows next?' queues Mei's photo strip for N.")
 	commons.set_story_choices({"EX-CH05-S11-CHOICE": {"option_id": "EX-CH05-S11-OPT02"}})
 	await process_frame
 	staged = commons.visual_root.get_node(Staging.ROOT_NAME)
-	_check(staged.has_node("n_holder_card") and not staged.has_node("outbox_photo_strip"), "D10 'We kept a place for your work.' keeps the N. holder at the table")
+	var holder := _n_holder("EX-CH07-S10", {"EX-CH05-S11-CHOICE": {"option_id": "EX-CH05-S11-OPT02"}})
+	_check(not holder.is_empty() and String(holder.get("variant", "")) == "n" and not staged.has_node("outbox_photo_strip"), "D10 'We kept a place for your work.' keeps the N. holder at the table")
 	commons.free()
 	await process_frame
 	# D12 packs on the rover loadout, which stands in the garage since M3-105 moved EX-CH07-S12 there.

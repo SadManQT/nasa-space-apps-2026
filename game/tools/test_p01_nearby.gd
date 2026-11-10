@@ -26,6 +26,8 @@ func _run() -> void:
 	await _near(campaign, "span_probe")
 	_check(campaign.p01_view("span_probe").missing_flags == ["p01_zeroed"], "unset dry zero cannot satisfy the wet-span prerequisite")
 	_check(campaign.nearby_target().get("target_id", "") != "span_probe", "unsatisfied prerequisites keep the next step unavailable")
+	# M1-108: the probe transfer gates the dry-zero commit.
+	_check(bool(Inputs.complete_probe_transfer(campaign.route).accepted), "probe transfer completes before calibration")
 	for id in ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"]:
 		_check(bool(campaign.route.perform(id, Inputs.payload(id)).get("accepted", false)), "real calibration/scan " + id)
 	_check(bool(campaign.route.advance_scene().get("accepted", false)), "normal route advance reaches planting")

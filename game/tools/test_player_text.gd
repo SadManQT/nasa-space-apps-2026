@@ -15,6 +15,7 @@ const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
 const CarePanel = preload("res://scripts/ui/care_round_panel.gd")
 const LaterGates = preload("res://scripts/missions/extended_gate_catalog.gd")
 const Chapter2Gates = preload("res://scripts/missions/chapter2_gate_catalog.gd")
+const PuzzleData = preload("res://scripts/puzzles/puzzle_data.gd")
 const PANELS := ["what_now", "pause", "settings_accessibility", "journal_discovery", "outcome", "puzzle", "dialogue_captions", "sources", "resume", "chapter1_outcome"]
 ## The HUD pieces that may show while the player walks (doc 25 §2.2).
 const FREE_MOVEMENT := ["GoalCard", "TopRight", "Prompt", "GoalMarker"]
@@ -110,6 +111,9 @@ func _run() -> void:
 				await _walk_probe(campaign, String(target.target_id))
 			if P02MissionTable.is_gate(String(target.target_id)):
 				await _walk_table(campaign, String(target.target_id))
+			# M1-108: the probe transfer gates the dry-zero commit.
+			if String(target.target_id) == "calibrate_probe":
+				PlantInput.complete_probe_transfer(campaign.route)
 			var result: Dictionary = campaign.route.perform(String(target.target_id), PlantInput.payload(String(target.target_id)))
 			hud.refresh_after_action(result)
 			await _walk_state(hud, "%s after %s" % [scene_id, target.target_id])
@@ -220,7 +224,7 @@ func _walk_later_chapters(campaign: Chapter1Campaign) -> void:
 				var before := campaign.director.snapshot()
 				campaign.route.focus(id)
 				campaign.route.inspect()
-				campaign.route.use(target.get("payload_defaults", {}).merged({"_puzzle_action": target.get("puzzle_action", "")}))
+				campaign.route.use(_player_payload(target).merged({"_puzzle_action": target.get("puzzle_action", "")}))
 				var preview: Dictionary = campaign.route.preview()
 				_check(preview.get("accepted", false) and campaign.director.snapshot() == before, id + " real preview preserves state")
 				hud.refresh_after_action(preview)
@@ -229,7 +233,7 @@ func _walk_later_chapters(campaign: Chapter1Campaign) -> void:
 				_check(hud._status.text == "Move closer to the checked target.", id + " rejection keeps its actual cause")
 				result = campaign.route.confirm()
 			else:
-				result = campaign.route.perform(id, target.get("payload_defaults", {}))
+				result = campaign.route.perform(id, _player_payload(target))
 			_check(result.get("accepted", false), id + " real route witness succeeds: " + String(result.get("reason", "")))
 			hud.refresh_after_action(result.get("result", result))
 			await _walk_state(hud, id + " result toast")
@@ -381,6 +385,15 @@ func _check(condition: bool, label: String) -> void:
 		failures += 1
 		push_error("FAIL " + label)
 
+## M3-5P/M3-7P: the Chapter 5/7 puzzle answers no longer come pre-filled
+## from the catalog. The walk acts as a player who made the decisions
+## recorded in the puzzle data files.
+func _player_payload(target: Dictionary) -> Dictionary:
+	var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+	if payload.is_empty():
+		payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
+	return payload
+
 func _finish() -> void:
 	if OS.get_cmdline_user_args().has("--capture"):
 		var file := FileAccess.open("res://../production/qa/evidence/M1-62_bounds.json", FileAccess.WRITE)
@@ -510,6 +523,9 @@ func _reach_route(route: RefCounted, destination: String) -> void:
 		var scene_id: String = route.current_scene_id()
 		var ids: Array = ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"] if scene_id == "EX-CH01-S03" else Gates.targets_for_scene(scene_id).map(func(spec): return String(spec.target_id))
 		for id in ids:
+			# M1-108: the probe transfer gates the dry-zero commit.
+			if id == "calibrate_probe":
+				PlantInput.complete_probe_transfer(route)
 			route.perform(id, PlantInput.payload(id))
 		if not route.advance_scene().accepted:
 			_check(false, "text walk reaches " + destination + " from " + scene_id)

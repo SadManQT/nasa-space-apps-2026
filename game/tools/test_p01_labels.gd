@@ -53,6 +53,9 @@ func _test_real_route() -> void:
 	for scene in ["EX-CH01-S01", "EX-CH01-S02", "EX-CH01-S03"]:
 		var ids: Array = ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"] if scene.ends_with("S03") else Gates.targets_for_scene(scene).map(func(spec): return String(spec.target_id))
 		for id in ids:
+			# M1-108: the probe transfer gates the dry-zero commit.
+			if id == "calibrate_probe":
+				Inputs.complete_probe_transfer(route)
 			_check(bool(route.perform(id, Inputs.payload(id)).get("accepted", false)), "real route setup " + id)
 		_check(bool(route.advance_scene().accepted), "real route advance " + scene)
 	for id in ["plant_alo", "plant_tara", "water_alo", "water_tara"]:

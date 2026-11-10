@@ -22,7 +22,10 @@ var _replace_dialog: ConfirmationDialog
 var _save_service: SaveService
 var _load_notice := ""
 var _trainer: Control
+var _moon_trainer: Control
+var _chapter_select: Control
 var trainer_results_path := "user://mission_trainer_results.json"
+var moon_trainer_results_path := "user://moon_trainer_results.json"
 var save_path: String = SaveScript.DEFAULT_PATH
 var legacy_save_path: String = LegacySave.SAVE_PATH
 
@@ -107,6 +110,25 @@ func _build_stage() -> void:
 	title.modulate = Color("#ECEEF0")
 	title.outline_size = 12
 	_stage_root.add_child(title)
+	# South-polar ridge horizon & Earth near the horizon backdrop cues (doc 25 §2.3)
+	var ridge := _add_box(Vector3(0.0, 0.9, -6.5), Vector3(22.0, 1.8, 1.2), Color("#1A2232"), false)
+	ridge.name = "SouthPolarRidgeBackdrop"
+	var earth_body := StaticBody3D.new()
+	earth_body.name = "EarthHorizonCue"
+	earth_body.position = Vector3(4.6, 2.8, -8.2)
+	_stage_root.add_child(earth_body)
+	var earth_mesh := MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.65
+	sphere.height = 1.3
+	var earth_mat := StandardMaterial3D.new()
+	earth_mat.albedo_color = Color("#4CA8FF")
+	earth_mat.emission_enabled = true
+	earth_mat.emission = Color("#20B8C9")
+	earth_mat.emission_energy_multiplier = 0.85
+	sphere.material = earth_mat
+	earth_mesh.mesh = sphere
+	earth_body.add_child(earth_mesh)
 
 func _show_title(preloaded_snapshot: Variant = null) -> void:
 	if _campaign != null and is_instance_valid(_campaign):
@@ -129,6 +151,8 @@ func _show_title(preloaded_snapshot: Variant = null) -> void:
 	_menu.science_requested.connect(_menu.open_science)
 	_menu.showcase_requested.connect(_open_showcase)
 	_menu.trainer_requested.connect(_open_trainer)
+	_menu.moon_trainer_requested.connect(_open_moon_trainer)
+	_menu.chapter_select_requested.connect(_open_chapter_select)
 	if is_inside_tree():
 		await get_tree().process_frame
 	var snapshot: Dictionary = preloaded_snapshot if preloaded_snapshot is Dictionary else _load_campaign_snapshot()
@@ -158,6 +182,52 @@ func _close_trainer() -> void:
 	_menu.process_mode = Node.PROCESS_MODE_INHERIT
 	_menu.show()
 	var entry := _menu.find_child("MissionTrainerEntry", true, false) as Control
+	if entry != null:
+		entry.grab_focus()
+
+func _open_moon_trainer() -> void:
+	if is_instance_valid(_moon_trainer) or is_instance_valid(_trainer) or is_instance_valid(_chapter_select) or _launching:
+		return
+	var script = load("res://scripts/trainer/moon_trainer.gd")
+	_moon_trainer = script.new()
+	_moon_trainer.set("settings", _menu.accessibility_settings())
+	_moon_trainer.set("results_path", moon_trainer_results_path)
+	_menu.hide()
+	_menu.process_mode = Node.PROCESS_MODE_DISABLED
+	_moon_trainer.connect("exit_requested", _close_moon_trainer)
+	_menu_layer.add_child(_moon_trainer)
+
+func _close_moon_trainer() -> void:
+	if is_instance_valid(_moon_trainer):
+		_moon_trainer.queue_free()
+		_moon_trainer = null
+	_menu.process_mode = Node.PROCESS_MODE_INHERIT
+	_menu.show()
+	var entry := _menu.find_child("MoonTrainerEntry", true, false) as Control
+	if entry != null:
+		entry.grab_focus()
+
+func _open_chapter_select() -> void:
+	if is_instance_valid(_chapter_select) or is_instance_valid(_trainer) or is_instance_valid(_moon_trainer) or _launching:
+		return
+	if not ResourceLoader.exists("res://scripts/ui/chapter_select.gd"):
+		return
+	var script = load("res://scripts/ui/chapter_select.gd")
+	_chapter_select = script.new()
+	_chapter_select.set("settings", _menu.accessibility_settings())
+	_chapter_select.set("save_path", save_path)
+	_menu.hide()
+	_menu.process_mode = Node.PROCESS_MODE_DISABLED
+	_chapter_select.connect("exit_requested", _close_chapter_select)
+	_menu_layer.add_child(_chapter_select)
+
+func _close_chapter_select() -> void:
+	if is_instance_valid(_chapter_select):
+		_chapter_select.queue_free()
+		_chapter_select = null
+	_menu.process_mode = Node.PROCESS_MODE_INHERIT
+	_menu.show()
+	var entry := _menu.find_child("ChapterSelectEntry", true, false) as Control
 	if entry != null:
 		entry.grab_focus()
 

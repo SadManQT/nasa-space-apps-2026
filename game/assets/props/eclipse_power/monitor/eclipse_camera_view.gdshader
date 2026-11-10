@@ -3,6 +3,8 @@
 // the Sun is hidden and only Earth's atmospheric rim is lit: refracted, reddened sunlight, brightest on the side
 // nearest the hidden Sun. Black sky, no stars, no atmosphere glow around the Sun (vacuum), no geography on Earth.
 // eclipse_monitor_screen.gd computes the geometry and the auto-exposure gain and sets the uniforms.
+// rim_visible is 1 only at totality (M4-01): before/after totality the Sun is still partly visible and
+// there is no red atmospheric rim to show.
 shader_type canvas_item;
 
 uniform vec2 frame_size = vec2(1152.0, 648.0);
@@ -12,6 +14,7 @@ uniform vec2 earth_center = vec2(0.6, 0.1);
 uniform float earth_radius = 0.30;
 uniform float ring_width = 0.0036;
 uniform float gain = 1.0;                       // auto exposure: rises as the visible Sun shrinks
+uniform float rim_visible = 1.0;                // 1 only while the Sun is fully hidden (totality); 0 otherwise
 uniform bool filter_in = true;
 uniform float noise_time = 0.0;                 // frozen while the frame is held
 
@@ -48,7 +51,7 @@ void fragment() {
 
 	colour = sun_tint * sun * (1.0 - earth);
 	colour = min(colour, vec3(1.0));
-	colour += rim * gain;
+	colour += rim * gain * rim_visible;   // M4-01: the refracted rim exists only at totality
 	colour += vec3(0.010, 0.012, 0.016) * earth * min(gain, 3.0) * 0.12;
 
 	// sensor noise, a hint of vignette and scan texture so it reads as an instrument picture

@@ -10,6 +10,8 @@ const RouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
 const RoomContract = preload("res://scripts/world/room_contract.gd")
 const RosterScript = preload("res://scripts/companions/companion_roster.gd")
+const Witness4 = preload("res://tools/support/chapter4_witness.gd")
+const Witness6 = preload("res://tools/support/chapter6_witness.gd")
 const Witness = preload("res://tools/support/chapter8_witness.gd")
 const LunarNetworkScript = preload("res://scripts/network/lunar_network.gd")
 const LunarRoverScript = preload("res://scripts/rover/lunar_rover.gd")
@@ -193,6 +195,8 @@ func _chapter8_entry_snapshot() -> Dictionary:
 			break
 		for target in GateCatalog.targets_for_scene(scene_id):
 			var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+			payload = Witness4.payload(String(target.target_id), director.snapshot(), payload)
+			payload = Witness6.payload(String(target.target_id), director.snapshot(), payload)
 			if not bool(route.perform(target.target_id, payload).get("accepted", false)):
 				return {}
 		var moved: Dictionary = route.advance_scene()

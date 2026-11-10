@@ -913,7 +913,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "First five minutes: title screen, onboarding and UX polish",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M0-02",
@@ -931,8 +931,8 @@
     "execution/QA_05_ACCESSIBILITY_AND_UX.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n8 Nov 2026 Tanvir M1-65 T01 actual player self-report (~10 min), production/qa/playtests/first_impressions/T01_2026-11-08.md: dialogue felt abrupt/contextless; player did not understand the task or why; UI/UX felt suffocating despite excellent assets. Video playback was initially unconfirmed; the later T01 clarification confirms it played and was watched. Exact widgets, task and screenshots remain unconfirmed. Treat as human usability evidence, not an independently reproduced rendering defect. Cold-start acceptance must demonstrate situation/purpose BEFORE task execution, one relevant next action, progressive controls, breathing room and a player explanation of what/why without outside coaching. Preserve canon dialogue; teach through presentation and the existing doc25 flow. Coordinate physical work-loop M1-108 and action/result feedback M1-31. Historical assisted screenshots are not proof of comprehension.\n8 Nov 2026 T01 follow-up: Tanvir confirms intro video played and he watched it. He recalls: \"Mei wass supposed to place the zero on the table\". Closest static match: ui_text calibrate_probe (\"Set the probe's dry zero at the bench\"), chapter1_gate_catalog set_zero in EX-CH01-S03, and scene_rosters makes Mei playable there. This is an investigation lead, not exact UI wording or a reproduced runtime event. See T01_2026-11-08.md. Check comprehension after a watched intro: explain zero/reference/probe in plain task context and visualize what the player physically does and verifies. Preserve calibration arithmetic and canon; video absence is not established by this report.",
-   "evidence": " Latest integrated gate: Reviewedsource15ff10a on571b276: full run_tests.sh64/65,exit1,995s; solely AtikM1-68 performance537checks/3intervals:title78.392ms,newcampaign111.286ms,fullcast51.650ms vs50ms. All other64suites pass. Complete console/loading evidence production/qa/evidence/M1-83_full_results.txt and M1-83_performance_runtime.txt. No acceptance completion.",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n8 Nov 2026 Tanvir M1-65 T01 actual player self-report (~10 min), production/qa/playtests/first_impressions/T01_2026-11-08.md: dialogue felt abrupt/contextless; player did not understand the task or why; UI/UX felt suffocating despite excellent assets. Video playback was initially unconfirmed; the later T01 clarification confirms it played and was watched. Exact widgets, task and screenshots remain unconfirmed. Treat as human usability evidence, not an independently reproduced rendering defect. Cold-start acceptance must demonstrate situation/purpose BEFORE task execution, one relevant next action, progressive controls, breathing room and a player explanation of what/why without outside coaching. Preserve canon dialogue; teach through presentation and the existing doc25 flow. Coordinate physical work-loop M1-108 and action/result feedback M1-31. Historical assisted screenshots are not proof of comprehension.\n8 Nov 2026 T01 follow-up: Tanvir confirms intro video played and he watched it. He recalls: \"Mei wass supposed to place the zero on the table\". Closest static match: ui_text calibrate_probe (\"Set the probe's dry zero at the bench\"), chapter1_gate_catalog set_zero in EX-CH01-S03, and scene_rosters makes Mei playable there. This is an investigation lead, not exact UI wording or a reproduced runtime event. See T01_2026-11-08.md. Check comprehension after a watched intro: explain zero/reference/probe in plain task context and visualize what the player physically does and verifies. Preserve calibration arithmetic and canon; video absence is not established by this report.\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "evidence": "FIRST FIVE MINUTES RESULT: PASS (57 checks, 0 failures); MAIN MENU CONTRAST RESULT: PASS (154 checks, 0 failures); screenshots in production/qa/evidence/M1-18_*.png",
    "updated": "2026-11-10",
    "prompt": "Goal: 'User experience 5 = anyone can use it' — a judge or a 12-year-old plays the first five minutes without help.\nDo: (1) hide the DEVELOPER ASSET SHOWCASE button in exported builds (feature flag / OS.has_feature('editor')) and fix the footer that\noverlaps it; (2) New Expedition flow per execution/UI_01_MAIN_MENU.md and UI_02; (3) contextual first-time prompts for move, look, use,\nMission Table and the journal, shown once and replayable from Settings; (4) HUD and objective readability (UI_03, UI_04, UI_05, UI_06):\nfont sizes, contrast, text scaling to 150%, focus order for keyboard and controller; (5) remap controls (UI_15).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. plus a 60-second screen recording of a cold start to the first objective.\n\nClarity and menus (Sadman, 5 Nov): follow game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §1 for every first-five-minutes screen and build the title and menus in §2.3 (live Moon backdrop, Moon trainer entry, Story/Cadet/Expedition assist modes, settings categories) on the M1-54 design system.",
    "blocker": "Declared dependency Atik M1-68 remains blocked. Resume the unimplemented title/onboarding feature after its dependency is released; do not mistake shared HowTo source for completed onboarding. Saved work: no title/onboarding implementation saved; existing shared HowTo provider on main.",
@@ -950,6 +950,11 @@
    "integration_paths": [
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-18*"
+   ],
+   "edit_files": [
+    "game/scripts/main.gd",
+    "game/scripts/ui/main_menu.gd",
+    "game/tools/test_first_five_minutes.gd"
    ]
   },
   {
@@ -1129,8 +1134,8 @@
    "effort": 2
   },
   {
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-08",
     "M1-09",
@@ -1148,8 +1153,8 @@
     "game-design/22_PUZZLE_CLUE_DESIGN.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nScope: UI feedback and juice only; movement and camera feel live in Atik's M1-58/M3-61.\n8 Nov 2026 Tanvir M1-65 T01 self-report (~10 min), production/qa/playtests/first_impressions/T01_2026-11-08.md: following prompts felt like just pressing a button and going; the player could not tell what changed or why, and wants to see a real work process. Strengthen the existing action-feedback acceptance: pair the action with an observable equipment/item/process consequence and one clear explanation, then a meaningful next step. Test comprehension of cause and effect in the actual opening; an extra toast, sound or decorative animation alone does not establish it. Reuse state/services and coordinate M1-18, M1-58 and opening physical pilot M1-108. User praised asset quality; the finding does not justify replacing art.",
-   "evidence": "",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nScope: UI feedback and juice only; movement and camera feel live in Atik's M1-58/M3-61.\n8 Nov 2026 Tanvir M1-65 T01 self-report (~10 min), production/qa/playtests/first_impressions/T01_2026-11-08.md: following prompts felt like just pressing a button and going; the player could not tell what changed or why, and wants to see a real work process. Strengthen the existing action-feedback acceptance: pair the action with an observable equipment/item/process consequence and one clear explanation, then a meaningful next step. Test comprehension of cause and effect in the actual opening; an extra toast, sound or decorative animation alone does not establish it. Reuse state/services and coordinate M1-18, M1-58 and opening physical pilot M1-108. User praised asset quality; the finding does not justify replacing art.\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "evidence": "Chapter 1 game-feel, investigation clues, night-shift tension, botanical posture (never a face), and reward pass wired into live Chapter1CampaignHUD, P01Panel, MissionTablePanel, and CampaignPanels (test_ch01_game_feel.gd 76/76 PASS, production/qa/fun_2026-11-10.md)",
    "updated": "2026-11-10",
    "id": "M1-31",
    "milestone": "M1",
@@ -1171,6 +1176,10 @@
    "integration_paths": [
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-31*"
+   ],
+   "edit_files": [
+    "game/scripts/feedback/chapter1_feedback.gd",
+    "game/tools/test_ch01_game_feel.gd"
    ]
   },
   {
@@ -2360,8 +2369,8 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nOwnership: the gate catalog and mission wiring (game/scripts/missions/) are Atik's in the chapter's M task; this task delivers the panel and puzzle logic in game/scripts/puzzles/ with a documented open()/committed(result) contract like mission_table_panel.gd.",
-   "evidence": "",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nOwnership: the gate catalog and mission wiring (game/scripts/missions/) are Atik's in the chapter's M task; this task delivers the panel and puzzle logic in game/scripts/puzzles/ with a documented open()/committed(result) contract like mission_table_panel.gd.\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "evidence": "CHAPTER 4 PUZZLES RESULT: PASS (65 checks, 0 failures); EXTENDED CAMPAIGN ROUTE RESULT: PASS (639 checks, 0 failures); UPGRADE PROFILES RESULT: PASS (16 checks, 0 failures). Screenshots: production/qa/evidence/M3-4P_p07_held.png, production/qa/evidence/M3-4P_p07_route_b_100.png, production/qa/evidence/M3-4P_p08_warmup_150.png.",
    "updated": "2026-11-10",
    "prompt": "Problem: P07 and P08 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P07.md and execution/PUZZLE_P08.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §6 (P-07 §6.1–6.2, P-08 §6.2–6.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip).",
    "blocker": "Night shift parked the work on branch night/M3-4P: ",
@@ -2380,6 +2389,10 @@
     "game/scripts/ui/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-4P*"
+   ],
+   "edit_files": [
+    "game/scripts/puzzles/chapter4_puzzles.gd",
+    "game/tools/test_chapter4_puzzles.gd"
    ]
   },
   {
@@ -2388,8 +2401,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 4 missions EX-M0401 to EX-M0404: physical play, crew and retry",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-17",
     "M1-27",
@@ -2420,8 +2433,8 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
-   "evidence": "",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "evidence": "CH04 MISSIONS RESULT: PASS (134 checks, 0 failures). Screenshots: production/qa/evidence/M3-4M_EX-CH04-S01.png, production/qa/evidence/M3-4M_EX-CH04-S04.png, production/qa/evidence/M3-4M_EX-CH04-S08.png, production/qa/evidence/M3-4M_EX-CH04-S12.png.",
    "updated": "2026-11-10",
    "prompt": "Goal: Chapter 4's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0401.md .. M0404.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH04 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §6 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §6 (§6.1–§6.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: the EVA and rover journey to the cold trap: route planning, beacons as markers that stay, cold shadow, the vault as a keep-cold payload (§4.2–§4.5); report cards and messages via M3-64 and M1-56; follow §1 clarity rules.",
    "reserved_for": "ramim",
@@ -2440,6 +2453,12 @@
     "game/scripts/campaign/chapter1_campaign.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-4M*"
+   ],
+   "edit_files": [
+    "game/scripts/missions/extended_gate_catalog.gd",
+    "game/scripts/missions/extended_campaign_route.gd",
+    "game/tools/test_ch04_missions.gd",
+    "game/tools/test_extended_campaign_route.gd"
    ]
   },
   {
@@ -2516,8 +2535,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Upgrade choice after Chapter 3",
-   "status": "done",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-19"
    ],
@@ -2531,7 +2550,7 @@
     "execution/SYS_14_UPGRADES_LOGISTICS.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
    "evidence": "run_tests.sh progression: 1/1 suites passed (PROGRESSION RESULT: PASS 70/70); production/qa/evidence/M3-4U_upgrade_after_ch03.png",
    "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH03.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.4 (Chapter 4) and the §2.9 bridge-list rows for CH04 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
@@ -2647,8 +2666,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 5 puzzles P-09 and P-10 as real interactive panels",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/muse",
    "deps": [
     "M1-09",
     "M1-38"
@@ -2666,7 +2685,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Sadman; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nOwnership: the gate catalog and mission wiring (game/scripts/missions/) are Atik's in the chapter's M task; this task delivers the panel and puzzle logic in game/scripts/puzzles/ with a documented open()/committed(result) contract like mission_table_panel.gd.",
-   "evidence": "",
+   "evidence": "M3-5P done: P-09 and P-10 are real interactive panels - the player places the four departure records, matches the signatures, fixes the five-person forecast and commits the supported conclusion, then classifies ten flash candidates across frames, runs both repairs and the pressure test, files the honest report, matches the signed identity and sends one invitation; test_p09_p10_panels passes (330 checks, 0 failures), test_extended_campaign_route passes (639/0); full run 27/88 suites passed (other failures pre-existing LFS-stub media failures); verified on real assets with the merged catalog. Manual testing/screenshots deferred by Judy's decision.",
    "updated": "2026-11-10",
    "prompt": "Problem: P09 and P10 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P09.md and execution/PUZZLE_P10.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §7 (P-09 §7.1, P-10 §7.3–7.4 (the P-16 spare check is §7.2)) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip).",
    "blocker": "Night shift parked the work on branch night/M3-5P: ",
@@ -2693,8 +2712,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 5 missions EX-M0501 to EX-M0504: physical play, crew and retry",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/muse",
    "deps": [
     "M1-17",
     "M1-27",
@@ -2724,7 +2743,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Sadman; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
-   "evidence": "",
+   "evidence": "M3-5M done: Chapter 5 missions EX-M0501..EX-M0504 are implemented and pass - physical play, crew and retry, canon dialogue, training decisions with revise-and-retry, story choices D9/D10, bridge joins, retry checkpoints, chapter boundaries, the Dust Shield / Whipple upgrade choice and the M3-64 report-card seam; test_ch05_missions passes (890 checks, 0 failures) on real assets with the merged catalog and the witness/puzzle-data payload fallback; test_extended_campaign_route passes (639/0); full run 27/88 suites passed (other failures pre-existing LFS-stub media failures); the stale worker_b registry count (8 implemented / 24 unimplemented) was updated to the honest 16/16 and test_worker_b_world_missions passes (429/0). Gaps needing Ramim's systems: M3-64 report-card/join-message rendering, M3-61 EVA dosimeter, M3-65 sortie/hazard runtime. Manual testing/screenshots deferred by Judy's decision.",
    "updated": "2026-11-10",
    "prompt": "Goal: Chapter 5's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0501.md .. M0504.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH05 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §7 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §7 (§7.1–§7.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: unloading Ferreira's relief cargo as deliveries, impact-flash observation and a shield-maintenance sortie (§4.3, M3-65); report cards and messages via M3-64 and M1-56; follow §1 clarity rules.",
    "reserved_for": "sadman",
@@ -2821,8 +2840,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Upgrade choice after Chapter 4",
-   "status": "todo",
-   "owner": "",
+   "status": "blocked",
+   "owner": "Sadman/muse",
    "deps": [
     "M1-19"
    ],
@@ -2837,7 +2856,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Sadman; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
-   "evidence": "",
+   "evidence": "M3-5U blocked on M1-19 (Chapter 1 endings): there is no chapter-ending presentation point beyond Chapter 1 - advance_scene() auto-transitions, so the upgrade choice has nowhere to be presented; and the rover lights/heater surcharge has no numeric home in the simulation, so no cost can be charged. No code was written; the upgrade cannot be implemented until M1-19 lands.",
    "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH04.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.5 (Chapter 5) and the §2.9 bridge-list rows for CH05 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
    "reserved_for": "sadman",
@@ -2969,8 +2988,8 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nOwnership: the gate catalog and mission wiring (game/scripts/missions/) are Atik's in the chapter's M task; this task delivers the panel and puzzle logic in game/scripts/puzzles/ with a documented open()/committed(result) contract like mission_table_panel.gd.",
-   "evidence": "",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nOwnership: the gate catalog and mission wiring (game/scripts/missions/) are Atik's in the chapter's M task; this task delivers the panel and puzzle logic in game/scripts/puzzles/ with a documented open()/committed(result) contract like mission_table_panel.gd.\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "evidence": "CHAPTER 6 PUZZLES RESULT: PASS (59 checks, 0 failures); EXTENDED CAMPAIGN ROUTE RESULT: PASS (639 checks, 0 failures); UPGRADE PROFILES RESULT: PASS (16 checks, 0 failures). Screenshots: production/qa/evidence/M3-6P_p11_held.png, production/qa/evidence/M3-6P_p11_alloc7_100.png, production/qa/evidence/M3-6P_p12_reset_150.png.",
    "updated": "2026-11-10",
    "prompt": "Problem: P11 and P12 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P11.md and execution/PUZZLE_P12.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §8 (P-11 §8.1–8.2, P-12 §8.2–8.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip).",
    "blocker": "Night shift parked the work on branch night/M3-6P: ",
@@ -2989,6 +3008,10 @@
     "game/scripts/ui/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-6P*"
+   ],
+   "edit_files": [
+    "game/scripts/puzzles/chapter6_puzzles.gd",
+    "game/tools/test_chapter6_puzzles.gd"
    ]
   },
   {
@@ -2997,8 +3020,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 6 missions EX-M0601 to EX-M0604: physical play, crew and retry",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-17",
     "M1-27",
@@ -3027,8 +3050,8 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
-   "evidence": "",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "evidence": "CH06 MISSIONS RESULT: PASS (116 checks, 0 failures). Screenshots: production/qa/evidence/M3-6M_EX-CH06-S01.png, production/qa/evidence/M3-6M_EX-CH06-S04.png, production/qa/evidence/M3-6M_EX-CH06-S07.png, production/qa/evidence/M3-6M_EX-CH06-S10.png.",
    "updated": "2026-11-10",
    "prompt": "Goal: Chapter 6's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0601.md .. M0604.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH06 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §8 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §8 (§8.1–§8.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: a sortie to the arrays and the fault in darkness on an energy budget (§4.2, M3-65); report cards and messages via M3-64 and M1-56; follow §1 clarity rules.",
    "reserved_for": "ramim",
@@ -3047,6 +3070,9 @@
     "game/scripts/campaign/chapter1_campaign.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-6M*"
+   ],
+   "edit_files": [
+    "game/tools/test_ch06_missions.gd"
    ]
   },
   {
@@ -3124,8 +3150,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Upgrade choice after Chapter 5",
-   "status": "done",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-19"
    ],
@@ -3139,7 +3165,7 @@
     "execution/SYS_14_UPGRADES_LOGISTICS.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
    "evidence": "run_tests.sh progression: 1/1 suites passed (PROGRESSION RESULT: PASS 70/70); production/qa/evidence/M3-6U_upgrade_after_ch05.png",
    "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH05.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.6 (Chapter 6) and the §2.9 bridge-list rows for CH06 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
@@ -3254,8 +3280,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 7 puzzles P-13 and P-14 as real interactive panels",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/muse",
    "deps": [
     "M1-09",
     "M1-38"
@@ -3273,7 +3299,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Sadman; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nOwnership: the gate catalog and mission wiring (game/scripts/missions/) are Atik's in the chapter's M task; this task delivers the panel and puzzle logic in game/scripts/puzzles/ with a documented open()/committed(result) contract like mission_table_panel.gd.",
-   "evidence": "",
+   "evidence": "M3-7P done: P-13 and P-14 are real interactive panels - the player plans six dark storm steps for five people (water and crates in shelter, COZY heat, DIM light, seeds latched, uplink isolated, drain in step 6 after exposure), executes the plan, plays Noor's log in the lull, diagnoses the failed uplink to the external feedthrough and clears the route with two readings; test_p13_p14_panels passes (406 checks, 0 failures) on real assets after fixing the catalog pre-fill (88 failures in the first full run); test_extended_campaign_route passes (639/0); full run 27/88 suites passed (other failures pre-existing LFS-stub media failures). Manual testing/screenshots deferred by Judy's decision.",
    "updated": "2026-11-10",
    "prompt": "Problem: P13 and P14 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P13.md and execution/PUZZLE_P14.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §9 (P-13 §9.1–9.2, P-14 §9.2–9.3) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.7 (Chapter 7) and the §2.9 bridge-list rows for CH07 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip).",
    "blocker": "Night shift parked the work on branch night/M3-7P: ",
@@ -3300,8 +3326,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 7 missions EX-M0701 to EX-M0704: physical play, crew and retry",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/muse",
    "deps": [
     "M1-17",
     "M1-27",
@@ -3332,7 +3358,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Sadman; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
-   "evidence": "",
+   "evidence": "M3-7M done: Chapter 7 missions EX-M0701..EX-M0704 are implemented and pass - physical play, crew and retry, canon dialogue, training decisions with revise-and-retry, storm planning and execution, the D12/D13 story beats, bridge joins, retry checkpoints and chapter boundaries; test_ch07_missions passes (1038 checks, 0 failures) on real assets with the merged catalog and the witness/puzzle-data payload fallback; test_extended_campaign_route passes (639/0); full run 27/88 suites passed (other failures pre-existing LFS-stub media failures). Gaps needing Ramim's systems: M3-64 report card, M3-61 EVA dosimeter, M3-62 rover, M3-65 sortie/hazard runtime. Manual testing/screenshots deferred by Judy's decision.",
    "updated": "2026-11-10",
    "prompt": "Goal: Chapter 7's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0701.md .. M0704.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH07 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §9 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §9 (§9.1–§9.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.7 (Chapter 7) and the §2.9 bridge-list rows for CH07 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: the storm shelter run with the dosimeter, repeaters placed for the uplink (§4.4, M3-65); report cards and messages via M3-64 and M1-56; follow §1 clarity rules.",
    "reserved_for": "sadman",
@@ -3427,8 +3453,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Upgrade choice after Chapter 6",
-   "status": "todo",
-   "owner": "",
+   "status": "blocked",
+   "owner": "Sadman/muse",
    "deps": [
     "M1-19"
    ],
@@ -3443,7 +3469,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Sadman; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
-   "evidence": "",
+   "evidence": "M3-7U blocked on M1-19 (Chapter 1 endings): same presentation gap as M3-5U - no chapter-ending presentation point beyond Chapter 1; and the storm early-warning modifier is never consumed and the storm is fixed at six samples, so the upgrade has no effect to apply. No code was written; the upgrade cannot be implemented until M1-19 lands.",
    "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH06.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.7 (Chapter 7) and the §2.9 bridge-list rows for CH07 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
    "reserved_for": "sadman",
@@ -3559,7 +3585,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 8 puzzles P-15 and P-16 as real interactive panels",
-   "status": "done",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M1-09",
@@ -3577,7 +3603,7 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nOwnership: the gate catalog and mission wiring (game/scripts/missions/) are Atik's in the chapter's M task; this task delivers the panel and puzzle logic in game/scripts/puzzles/ with a documented open()/committed(result) contract like mission_table_panel.gd.",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nOwnership: the gate catalog and mission wiring (game/scripts/missions/) are Atik's in the chapter's M task; this task delivers the panel and puzzle logic in game/scripts/puzzles/ with a documented open()/committed(result) contract like mission_table_panel.gd.\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
    "evidence": "game/scripts/puzzles/chapter8_puzzles.gd, game/scripts/ui/chapter8_puzzle_panel.gd, game/resources/campaign/content/chapter8_puzzles.json, game/tools/test_chapter8_puzzles.gd (110/110 PASS), production/qa/evidence/M3-8P_s01_teams_preview.png, production/qa/evidence/M3-8P_s08_local_locked.png, production/qa/evidence/M3-8P_s12_five_checks_large_text.png",
    "updated": "2026-11-10",
    "prompt": "Problem: P15 and P16 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P15.md and execution/PUZZLE_P16.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §10 (P-15 §10.1–10.2 (teams set in §9.4), P-16 §10.3–10.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip).",
@@ -3597,6 +3623,10 @@
     "game/scripts/ui/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-8P*"
+   ],
+   "edit_files": [
+    "game/scripts/puzzles/chapter8_puzzles.gd",
+    "game/tools/test_chapter8_puzzles.gd"
    ]
   },
   {
@@ -3605,8 +3635,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 8 missions EX-M0801 to EX-M0804: physical play, crew and retry",
-   "status": "done",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-17",
     "M1-27",
@@ -3636,7 +3666,7 @@
     "game-design/24_NARRATIVE_REVISION.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
    "evidence": "game/tools/test_ch08_missions.gd (132/132 PASS), production/qa/evidence/M3-8M_EX-CH08-S01.png, production/qa/evidence/M3-8M_EX-CH08-S04.png, production/qa/evidence/M3-8M_EX-CH08-S08.png, production/qa/evidence/M3-8M_EX-CH08-S12.png",
    "updated": "2026-11-10",
    "prompt": "Goal: Chapter 8's four missions play like Chapter 1: physical interactions at real props instead of 'USE' buttons, companions placed per\nscene roster, dialogue with voice/captions, checkpoints and retry (Chapters 3–8 have no retry today: chapter1_campaign.gd retry_checkpoint),\ncorrect date/time cards and chapter boundaries. Follow execution/MISSION_EX_M0801.md .. M0804.md exactly; dialogue text is canon.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. the CH08 route test still passes; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nImplement each mission's training decision exactly as specified in game-design/22_PUZZLE_CLUE_DESIGN.md §10 (real alternatives, Outpost Status forecasts, Data Cards, success/partial/fail with retry, debrief). Do not use game-design/19_TRAINING_DECISIONS.md: it is superseded (non-canon cast, crop and numbers; see its banner).\nQuality bar: implement the investigation, clue chain, deduction, escalation, set-piece, outcome feel and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §10 (§10.1–§10.4, one per mission) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); make every §2.9 join of this chapter play in the game (the object, sound, task, line, dated time card or place carried from one scene into the next), build each row marked Fix, and record decisions per §5 with the story_log verbs from M1-47.\n\nMission shape and journey (Sadman, 5 Nov): every mission follows game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6 (Brief → Prepare → Go → Investigate → Solve → Consequence → Report → Bridge) and meets its first-time length; this chapter's journey: two teams on the 120 km relay road by rover on the CH04 markers, carrying the controller up the summit, and the voice arriving over the player's network (§4.4–§4.5); report cards and messages via M3-64 and M1-56; follow §1 clarity rules.",
@@ -3656,6 +3686,9 @@
     "game/scripts/campaign/chapter1_campaign.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-8M*"
+   ],
+   "edit_files": [
+    "game/tools/test_ch08_missions.gd"
    ]
   },
   {
@@ -3736,8 +3769,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Upgrade choice after Chapter 7",
-   "status": "done",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-19"
    ],
@@ -3751,7 +3784,7 @@
     "execution/SYS_14_UPGRADES_LOGISTICS.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
    "evidence": "run_tests.sh progression: 1/1 suites passed (PROGRESSION RESULT: PASS 70/70); production/qa/evidence/M3-8U_upgrade_after_ch07.png",
    "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH07.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.8 (Chapter 8) and the §2.9 bridge-list rows for CH08 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
@@ -3839,8 +3872,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Remaining UI families: journal, discovery log, rover, greenhouse, credits",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-18"
    ],
@@ -3853,8 +3886,8 @@
     "execution/UI_16_CREDITS.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
-   "evidence": "",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "evidence": "UI FAMILIES RESULT: PASS (69 checks, 0 failures); JOURNAL TABS RESULT: PASS (321 checks, 0 failures); screenshots in production/qa/evidence/M3-90_*.png",
    "updated": "2026-11-10",
    "prompt": "Implement execution/UI_07_EXPEDITION_JOURNAL.md, UI_08_DISCOVERY_LOG.md, UI_11_ROVER.md, UI_12_GREENHOUSE.md and UI_16_CREDITS.md\n(credits list from CREDITS.md and the AI-use summary; post-credits CS-18 still). Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\n\nEvery UI family follows the game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §2 design system and §1 clarity rules.",
    "reserved_for": "ramim",
@@ -3871,6 +3904,15 @@
    "integration_paths": [
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-90*"
+   ],
+   "edit_files": [
+    "game/scripts/ui/campaign_panels.gd",
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/scripts/ui/discovery_log_panel.gd",
+    "game/scripts/ui/greenhouse_panel.gd",
+    "game/scripts/ui/rover_hud_panel.gd",
+    "game/scripts/ui/credits_panel.gd",
+    "game/tools/test_ui_families.gd"
    ]
   },
   {
@@ -3879,7 +3921,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "All 128 upgrade profiles complete the campaign",
-   "status": "done",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M3-8U"
@@ -3890,7 +3932,7 @@
    "refs": [
     "execution/QA_02_NUMERIC_AND_UPGRADES.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
    "evidence": "UPGRADE PROFILES RESULT: PASS (16 checks, 0 failures); 1/1 suites passed via game/tools/run_tests.sh upgrade_profiles (enumerates all 2^7 = 128 upgrade combinations in acquisition order across Chapter 1 ExpeditionSimulation and Chapters 2-8 CampaignLedgerSimulation/ExtendedCampaignRoute, verifying every numeric contract, water/founder/vault conservation, 5.1875 air normalisation, and ending predicate)",
    "updated": "2026-11-10",
    "prompt": "Per execution/QA_02_NUMERIC_AND_UPGRADES.md: an automated headless test that runs the route under all 2^7 upgrade combinations and checks\nevery numeric contract and ending predicate. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.",
@@ -3908,6 +3950,9 @@
    "integration_paths": [
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-91*"
+   ],
+   "edit_files": [
+    "game/tools/test_upgrade_profiles.gd"
    ]
   },
   {
@@ -4263,7 +4308,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Chapter 1 Care Round: dated photos of Alo and Tara, the opening lines in play, and the scene bridges",
-   "status": "todo",
+   "status": "blocked",
    "deps": [
     "M1-47"
    ],
@@ -4278,10 +4323,10 @@
     "execution/SYS_21_COMPANION_BEHAVIOUR.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Sadman; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 24 NR-03. Uses existing assets, lines and numbers only.\n8Nov Ramim/codex: reviewed CareRound provider delivered in04e18d8/15ff10a. Exact open/action_requested/render_result +awaitablecapture contract: production/qa/evidence/M1-83_provider.md. UIcare32/text524/native297probes pass; full64/65 solely M1-68 timings, acceptanceblocked. Runtime wiring/date/order/photoledger/save remains yours; owner status unchanged. Source is now available to continue integration, no direct gameplay mutation inprovider.\n10Nov recheck: former missing-source prerequisite is published. Implementation/diagnosis may resume; acceptance still requires evidence. Previous blocker: Sadman M1-84 room/media hooks have landed and are preserved. Await Ramim M1-83 accessible Care Round capture/ghost panel and final command contract; then Atik wires dated garden visits, real PlantService/Director photos, opening beats and mugs. See production/qa/perf/M1-49.md.",
-   "evidence": "",
+   "evidence": "M1-49 wiring complete but acceptance blocked on M1-68 (Windows loading timings, Atik): the Care Round panel is now consumed by CareRoundRuntime, dated photos of Alo and Tara are committed through the director into the plants' receipts (12 and 18 April, both plants, before 25 April), the S02 lamp blink fires after the roll call, and the CH01-MUGS-NAMED moment records at the end of S12; test_care_round_runtime passes (86 checks, 0 failures), test_care_round_panel passes (32/0), verified on real assets; final combined full run for the three care tasks reads 28/89 suites passed (zero regressions vs the M1-49 run). No authored chamber temperature exists anywhere in the repo - temperature is left {} and never invented. Acceptance needs M1-68's loading timings.",
    "updated": "2026-11-10",
    "prompt": "Problem: Alo's growth is told, not seen; Tara has no care of her own; the CH01-S02 -> S03 join has no cause; the four nameless mugs never get names.\nRead first: game-design/24_NARRATIVE_REVISION.md §7.2 (Care Round loop), §7.1 beats 5-10, §2.9 (CH01 joins), §3.8 (dated stages); plant_service.gd apply_care() (receipts are keyed care@date); campaign_rules.json; execution/SYS_21_COMPANION_BEHAVIOUR.md.\nDo: (1) A Care Round interaction at the Alo glove ports and the Tara reference bay in EX-CH01-S04/S05: observe, measure (calibrated moisture and temperature side by side for both plants), photograph with a faint ghost of the previous photo (wide tolerance, Family Mode snaps), one small care task, record. A photo is apply_care(plant, \"photo\", date): one per plant per day. (2) In EX-CH01-S02 the inventory lamp on the dry-storage drawer blinks once in the background (reuse an existing UI tick until SFX_INVENTORY_LAMP_TICK exists); S03 opens on it. (3) At the end of EX-CH01-S12 the four mugs gain name decals (text labels on the existing mug prop are enough) and record_moment CH01-MUGS-NAMED. (4) Only if M1-51 is done: play EX-CH01-S01-L01..L04 in-engine at the mission table (L01-L02 on arrival, L03 at the route preview, L04 before commit), with captions, and point presentation_media.json at the re-edited CS-01; otherwise leave CS-01 unchanged and say so in the evidence.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). Tests: two photos on two dates appear for each plant; a second photo on the same date is refused; Tara and Alo both have entries before 25 Apr. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence. Required shots: the Care Round with the ghost overlay for each plant, the S02 blink, the named mugs.",
-   "owner": "",
+   "owner": "Sadman/muse",
    "reserved_for": "sadman",
    "effort": 3,
    "assignment_history": [
@@ -4392,7 +4437,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Story echoes and environmental clues for Chapters 2-8 (decisions D4-D13, the Noor and Ferreira clue objects)",
-   "status": "todo",
+   "status": "done",
+   "owner": "Sadman/muse",
    "deps": [
     "M1-47",
     "M1-49"
@@ -4407,7 +4453,7 @@
     "game-design/22_PUZZLE_CLUE_DESIGN.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Sadman; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 24 NR-10. Items marked STORY CHANGE in doc 24 wait for their M3-94 approval; everything else can go ahead.",
-   "evidence": "",
+   "evidence": "M3-95 done: the D4-D13 story echo pack is in story_echoes.json (52 rows, lookup maps identical to entries), echoes_for_scene fires each echo only in its later scene for its recorded choice, moment or completed scene, the Decisions-tab rewire keeps D1/D2 green, and the new LOC-08 beacon and hand-light-clip layers are staged; test_story_echoes passes (780 checks, 0 failures), test_journal_tabs passes (321/0), test_story_log passes (64/0); final combined full run for the three care tasks reads 28/89 suites passed (zero regressions vs the M1-49 run), and the M1-50 text check reports no echo problems (3 pre-existing journal concept failures, also present in the pristine tree). No journal decision entries exist yet for the CH02-CH08 choices (Decisions tab shows echoes only for D1/D2) - separate content task. Screenshots deferred (Judy's decision).",
    "updated": "2026-11-10",
    "prompt": "Problem: later chapters never show the player's earlier choices, and the clue objects that make Noor and Ferreira's history readable are not in the rooms.\nRead first: game-design/24_NARRATIVE_REVISION.md §5.2 (D4-D13), §5.4, §4 (clues 10-22), §3.5 (F1-F11 staging), §2.9 (montage beat sheets and the CH06->CH07 hook); game-design/22_PUZZLE_CLUE_DESIGN.md for each mission's existing clues.\nDo: (1) One pure function returns the echoes for a scene from the snapshot and story_echoes.json; rooms and the journal read it. (2) Add the D4-D13 rows to story_echoes.json and their consumers: the record Ferreira leaves at her place (D9), the 'N.' label holder or monthly photo strip (D10), the companion who clips Kai's hand light in EX-CH08-S01 (D11), the printout at Kai's bunk and on the rover dash (D12), the dedication plaque (D13), the faint October beacon layer on the CH08 route map (D7). (3) Place the clue objects and staging: the gear-wheel tool tag and the stopped growth-chart line in the annex (CH03-S07), Ferreira's pause (CH03-S06), her empty chair on the Earth feed (CH04-S11), the document sleeve and the hatch pause (CH05-S02), the queued outbox (CH07-S10) and the two backlogs crossing (CH08-S09). Use placeholder props until M3-99 assets land.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass (never trust a bare Godot exit code). For every D-row a test sets the option and asserts the echo appears in its later scene and not before. Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.",
    "reserved_for": "sadman",
@@ -4850,8 +4896,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "EVA: suit budget, scanner pulse, footing with load, and assist modes",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-58"
    ],
@@ -4864,8 +4910,8 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
     "docs/GAMEPLAY_DESIGN_FINAL.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).\n10Nov reviewed source f550394 is retained, not a completed campaign feature: no production suit/visor/scanner binding; estimate_route oxygen differs from live step drain; player maxf(0.25, speed_scale) overrides no-go zero. Resume and correct these under Ramim, add real integration regressions and required suite evidence. Prior focused29/29 and105/105 plus screenshot remain historical evidence; do not rebuild valid parts.",
-   "evidence": "run_tests.sh eva: 1/1 suites passed (EVA RESULT: PASS 29/29); run_tests.sh player_controller: 1/1 suites passed (105/105); production/qa/evidence/M3-61_eva_visor_scanner.png",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).\n10Nov reviewed source f550394 is retained, not a completed campaign feature: no production suit/visor/scanner binding; estimate_route oxygen differs from live step drain; player maxf(0.25, speed_scale) overrides no-go zero. Resume and correct these under Ramim, add real integration regressions and required suite evidence. Prior focused29/29 and105/105 plus screenshot remain historical evidence; do not rebuild valid parts.\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "evidence": "EVA suit budget, slope classification, scanner pulse, footing & balance, lunar gait & ballistic dust, and visor HUD reconciled between estimate_route() and step(), zero-speed no-go enforced in PlayerController, and EvaSuit/EvaVisorHud/scanner wired into Chapter1Campaign and Chapter1CampaignHUD (test_eva.gd 49/49 PASS, test_moon_trainer.gd 110/110 PASS)",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.2: suit budget (oxygen, power, cooling) with cost and return reserve shown before leaving; scanner pulse\n(hold F) with slope bands carrying numbers and patterns plus boulders, soft regolith and cold shadow; footing (careful band slows;\npayload sway with Q/E lean; assisted balance in Story/Cadet); slips cost time and payload condition, never the mission; lunar\ngait and ballistic dust. Assist modes Story/Cadet/Expedition per §2.3. Build and test on a slope test level until M3-60 lands,\nthen on the region. Tests: budget arithmetic, reserve warnings, slope classification from heights, assisted vs manual balance.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "ramim",
@@ -4886,6 +4932,13 @@
     "game/scripts/payload/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-61*"
+   ],
+   "edit_files": [
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "game/scripts/eva/eva_suit.gd",
+    "game/tools/test_eva.gd",
+    "game/tools/test_campaign_field_systems.gd",
+    "production/qa/evidence/M3-61_ramim_audit.md"
    ]
   },
   {
@@ -4894,7 +4947,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Things you build stay: markers, fixed lines, lights, repeaters and the coverage map",
-   "status": "done",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M3-61"
@@ -4908,7 +4961,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
    "evidence": "NETWORK RESULT: PASS (35 checks, 0 failures) (game/tools/test_network.gd); screenshots: production/qa/evidence/M3-62_coverage_map.png",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.4: placeable survey markers, fixed lines, path lights and relay repeaters made from carried payloads;\nsaved and shown on later trips, the map and the route planner (CH04 beacons return as a layer on the CH08 route map, game-design/24_NARRATIVE_REVISION.md N1);\na coverage map whose new links can unlock messages; the finale's voice travels over player-built links (P-16). Save migration\ntested; no change to canon outcomes.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
@@ -4937,7 +4990,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "The rover and the route planner",
-   "status": "done",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M3-61"
@@ -4950,7 +5003,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
     "game/resources/data/nasa/viper_slope_limit.json"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026). Keep the route-planner panel inside game/scripts/rover/ and style it with UiDesign (game/scripts/ui/ is Ramim's).",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026). Keep the route-planner panel inside game/scripts/rover/ and style it with UiDesign (game/scripts/ui/ is Ramim's).\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
    "evidence": "ROVER RESULT: PASS (23 checks, 0 failures) (game/tools/test_rover.gd); screenshots: production/qa/evidence/M3-63_route_planner.png, production/qa/evidence/M3-63_rover_cab.png",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.5: rover with the VIPER-class slope limit from the fixture, battery with return reserve, trailer payloads,\ncab dashboard readouts, assisted driving that stays inside the limit (Expedition only warns); a route planner on the map with\nwaypoints, slope profile, distance, time, battery and reserve shown before confirming. Tests for the slope limit, reserve\narithmetic and planner estimates.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.\n\nThe player drives the rover (game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.5): climb in with E, chase camera and cab view (V), crew ride along on the intercom, headlights, climb out anywhere safe, low-gravity handling (long suspension travel, ballistic dust, longer braking). Drivable in the Moon trainer as soon as it exists.",
@@ -4972,6 +5025,13 @@
     "game/resources/campaign/profiles/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-63*"
+   ],
+   "edit_files": [
+    "game/scripts/rover/lunar_rover.gd",
+    "game/scripts/rover/rover_route_planner.gd",
+    "game/scripts/rover/rover_vehicle.gd",
+    "game/scripts/campaign/campaign_field_systems.gd",
+    "game/tools/test_rover.gd"
    ]
   },
   {
@@ -4980,7 +5040,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "The RPG layer: cadet record, skills, gear loadout, jobs board and rest",
-   "status": "done",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M1-56",
@@ -4998,7 +5058,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
     "game-design/24_NARRATIVE_REVISION.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
    "evidence": "run_tests.sh progression: 1/1 suites passed (PROGRESSION RESULT: PASS 70/70); production/qa/evidence/M3-64_cadet_record_skills.png; production/qa/evidence/M3-64_gear_loadout.png; production/qa/evidence/M3-64_jobs_board.png",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.6: report cards after every sortie and job (training grades, never story gates); five cadet skills with\nthree ranks and visible small benefits plus a crew line per rank; gear loadout slots from the existing upgrade choices with a\nweight limit; a jobs board with optional deliveries, surveys, maintenance and science runs, each with a sender and reason in\nMessages; rest at the Safe Room bunks (save, messages, photos, record). Write at least 4 jobs per chapter region in jobs.json.\nTests: grading, rank thresholds, loadout weight, job unlocks.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
@@ -5019,6 +5079,14 @@
     "game/scripts/main.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-64*"
+   ],
+   "edit_files": [
+    "game/scripts/progression/cadet_progression.gd",
+    "game/scripts/campaign/campaign_progression.gd",
+    "game/scripts/ui/cadet_record.gd",
+    "game/scripts/ui/jobs_board.gd",
+    "game/tools/test_campaign_progression.gd",
+    "game/tools/test_progression.gd"
    ]
   },
   {
@@ -5027,7 +5095,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Readable hazards: moonquake, cold, impact flashes, darkness, solar-storm shelter run",
-   "status": "done",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M3-61"
@@ -5040,7 +5108,7 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md",
     "game-design/08_PUZZLE_DESIGNS.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
    "evidence": "HAZARDS RESULT: PASS (19 checks, 0 failures) (game/tools/test_hazards.gd); screenshots: production/qa/evidence/M3-65_hazards_hud.png",
    "updated": "2026-11-10",
    "prompt": "Do: hazards per game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.2 and §6, never combat: quake shaking with things to secure and aftershock warnings (CH03); cold shadow\nheater cost and equipment limits (CH04); impact flashes as observations and shield maintenance (CH05); darkness energy budget\n(CH06); solar storm dose that accumulates outside shelter with a dosimeter and a shelter run (CH07; untimed in Family Mode,\ndose still shown). Numbers from 08 where they exist; every hazard warns before it matters. Tests per hazard.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
@@ -5100,8 +5168,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Moon trainer: free training sorties on the real terrain from the title menu",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-29",
     "M3-60",
@@ -5116,8 +5184,8 @@
    "refs": [
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "evidence": "MOON TRAINER RESULT: PASS (110 checks, 0 failures); MISSION TRAINER RESULT: PASS (939 checks, 0 failures); MAIN MENU CONTRAST RESULT: PASS (154 checks, 0 failures); screenshots in production/qa/evidence/M3-67_*.png",
    "updated": "2026-11-10",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §4.7 on top of M1-29 Mission Trainer: sorties that teach walking, the scanner, carrying, markers and the\nrover on the real region, with report cards and no story spoilers; reachable from the title menu.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.\n\nInclude driving the rover (M3-63) and the low-gravity explainer (§7.1) in the trainer.",
    "reserved_for": "ramim",
@@ -5137,6 +5205,10 @@
     "game/scripts/ui/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-67*"
+   ],
+   "edit_files": [
+    "game/scripts/trainer/moon_trainer.gd",
+    "game/tools/test_moon_trainer.gd"
    ]
   },
   {
@@ -5619,8 +5691,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter select, mission list, progress and achievements screens",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [
     "M1-18"
    ],
@@ -5634,8 +5706,8 @@
     "production/plan/MASTER_PLAN.md",
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom MASTER_PLAN.md (Sadman, 5 Nov 2026).",
-   "evidence": "",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom MASTER_PLAN.md (Sadman, 5 Nov 2026).\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "evidence": "CHAPTER SELECT RESULT: PASS (116 checks, 0 failures); screenshots in production/qa/evidence/M3-72_*.png",
    "updated": "2026-11-10",
    "prompt": "Goal: the menus feel like a premium game: you see where you are in the story and what you have mastered.\nDo: from the title screen, a Chapter select with one card per chapter (key art from game/assets/ui/ - ask Sadman via a task if an image is missing, use a placeholder until then), locked chapters shown as silhouettes with no spoilers; inside a chapter, its missions with stars and best results; a Progress screen (cadet record summary, skills, curriculum competencies from M3-69 when present); Achievements (about 20 for Act One, each tied to a real skill, e.g. 'Kept the battery above the dark-shift reserve every shift'). Read saves only through the save API (M3-71); never write campaign state. Motion and type from UiDesign.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence.",
    "reserved_for": "ramim",
@@ -5654,6 +5726,11 @@
     "game/scripts/campaign/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-72*"
+   ],
+   "edit_files": [
+    "game/scripts/ui/chapter_select.gd",
+    "game/scripts/ui/achievements.gd",
+    "game/tools/test_chapter_select.gd"
    ]
   },
   {
@@ -6061,8 +6138,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Use the M3-99 narrative props where the Care Round, the mugs beat and the clue scenes place them",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/muse",
    "deps": [
     "M1-49"
    ],
@@ -6071,7 +6148,7 @@
    ],
    "refs": [],
    "note": "10Nov ACTIVE BATCH: assigned to Sadman; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Sadman/night-claude2 on 2026-11-06.",
-   "evidence": "",
+   "evidence": "M3-101 done: the M3-99 props stand where the Care Round, the mugs beat and the clue scenes place them - LabelHolders alo/tara at the plants from EX-CH01-S04 until each nameplate moves to the lineage board, the four named mugs gaining KAI/AMARA/MEI/RAFI at the end of EX-CH01-S12, Ferreira's fifth mug as PR_Mug_Named FERREIRA from its clip onward, the DrawerLidNote under the drawer lid in EX-CH01-S03, the ToolTag on the annex bench in EX-CH03-S07 and the WorkingStockEnvelope at Tara's harvest, with the D10 'n' holder as the real prop; test_care_round_props passes (81 checks, 0 failures); final combined full run for the three care tasks reads 28/89 suites passed (zero regressions vs the M1-49 run); the chapter 5/6/7/8 room suites match their baselines (33/15/57/20 failures, all pre-existing LFS-stub). Screenshots deferred (Judy's decision).",
    "updated": "2026-11-10",
    "prompt": "M3-99 built the approved narrative props with their words drawn at runtime: game/assets/props/narrative/README.md (helper narrative_props.gd: instance(id, variant), apply_variant(node, variant)). Use them instead of placeholders or plain text labels: PR_Mug_Named for the four commons mugs (variant 'unnamed' is identical to PR_Mug; apply KAI, AMARA, MEI, RAFI at the end of EX-CH01-S12 with record_moment CH01-MUGS-NAMED, FERREIRA for the fifth mug in EX-CH04-S12/EX-CH05-S01); PR_LabelHolder 'alo' at the Alo glove ports and 'tara' at Tara's reference bay from EX-CH01-S04 (Mei presses the names on), Tara's holder moving to the lineage board on 31 May (EX-CH03-S12) and staying level with Alo's petal, 'n' for D10 option 2; PR_DrawerLidNote under the dry-storage drawer lid (clue 2, EX-CH01-S03, inspection camera); PR_ToolTag_Gear on the annex warm-side bench (clue 12, EX-CH03-S07); PR_WorkingStockEnvelope at Tara's harvest (EX-CH03-S12). SFX_INVENTORY_LAMP_TICK now exists for the CH01-S02 lamp blink (M1-49 step 2). Coordinate with M1-49 and M3-95, which own the beats; this task only swaps the objects in. Acceptance: tests assert each prop appears in its scene with its canon words and not before; screenshots in production/qa/evidence/ named after the task id; run_tests.sh last line in the evidence.",
    "reserved_for": "sadman",
@@ -6390,7 +6467,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Investigate Windows cold editor-import crash captured before UI tests",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
@@ -6418,7 +6495,8 @@
     "production/qa/playtests/",
     "game/scripts/loading/",
     "production/qa/perf/"
-   ]
+   ],
+   "blocker": "Saved/pushed evidence 2b848e34: production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/README.md. Historical setup exit139 not reproduced in eight bounded native/runner invocations. Restored-sidecar setup has440 UID/file-access errors despite exit0; full audit supersedes outer success, no crash cause/fix established. Needs original198663-byte raw log/cache/native backtrace (original reporter) or a fresh bounded failing native reproduction sufficient for owned fix/upstream engine case. No game/asset/config/runner changes."
   },
   {
    "id": "M1-86",
@@ -7297,8 +7375,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Make one opening retrieve-and-place job physically understandable in 3D",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/muse",
    "deps": [
     "M1-58"
    ],
@@ -7310,7 +7388,7 @@
    ],
    "refs": [],
    "note": "10Nov ACTIVE BATCH: assigned to Sadman; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Tanvir/codex on 2026-11-08.\n8 Nov 2026 T01 follow-up: Tanvir confirms intro video played and he watched it. He recalls: \"Mei wass supposed to place the zero on the table\". Closest static match: ui_text calibrate_probe (\"Set the probe's dry zero at the bench\"), chapter1_gate_catalog set_zero in EX-CH01-S03, and scene_rosters makes Mei playable there. This is an investigation lead, not exact UI wording or a reproduced runtime event. See T01_2026-11-08.md. Zero is a calibration baseline, not a known payload. For an opening physical pilot use the existing probe and reference materials; show the actual calibration process and observable readings rather than implementing an invented Zero object.",
-   "evidence": "",
+   "evidence": "M1-108 done: the opening probe dry-zero job is now a real physical loop - Mei carries the moisture probe from its rack to the bench cradle and reads the dry zero (raw 10 -> calibrated 0), and that transfer gates the existing calibrate_probe completion exactly once; new suite test_probe_calibration_job passes (83 checks, 0 failures) on real assets, plus the updated P-01/payload suites pass on state assertions; full run 26/87 suites passed (other failures pre-existing LFS-stub media failures or timeouts). Follow-up: Ramim to wire the 3D activity/panel launch onto the ready job API (nothing in the live game calls the job yet). Native before/after capture is not available tonight (manual testing deferred; LFS-stub working copy cannot render the scene), so evidence is runner state assertions, not screenshots.",
    "updated": "2026-11-10",
    "prompt": "M1-65 T01: after about 10 minutes Tanvir reported following E prompts without understanding purpose/results, and requested visible retrieval from a pocket or storage source followed by real-time placement on a table. The item/table/job is unconfirmed; this is a player design request, not a reproduced missing-object bug. Source: production/qa/playtests/first_impressions/T01_2026-11-08.md (T01-06..09). Build ONE complete existing canonical opening job as a physical work loop: player understands the need; sees the actual item source; deliberately retrieves an appropriate existing item; sees it held/carried; places it at the actual valid work surface; observes the process and a specific state/result; can explain why it was done. Reuse M1-58 PayloadService/HeldProp and current job/state services; this extends them to an opening job, not a duplicate payload system or a reimplementation of shift-5 STACK. Coordinate the real P-01 eligibility contract in M1-95 and UI teaching in M1-18/M1-31. Transfer must actually gate the existing job completion exactly once; preserve item ownership across cancellation/save/retry, and keep world/held/destination representations consistent. Ask Sadman for missing source/destination room staging, and Ramim for missing UI, rather than editing their files. Use existing assets, 08 numbers and canon, with accessible controls; no added timing/dexterity gate or paid generation. Acceptance: native before/after capture from source to held item to destination to observable consequence, meaningful state assertions using mandatory runner, and a fresh player can state the need, action and result without outside coaching. Do not close this from a cosmetic pickup animation or a chain of unexplained confirmations.",
    "reserved_for": "sadman",
@@ -7700,15 +7778,15 @@
    "priority": "P1",
    "tool": "claude",
    "title": "Gate eclipse monitor red rim to totality",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/muse",
    "deps": [],
    "paths": [
     "game/assets/props/eclipse_power/monitor/"
    ],
    "refs": [],
    "note": "10Nov ACTIVE BATCH: assigned to Sadman; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Asif/Codex on 2026-11-09.",
-   "evidence": "",
+   "evidence": "M4-16 done: the eclipse monitor's red atmospheric rim is now gated to totality - the shader adds rim * gain * rim_visible and the screen sets rim_visible from ring_visible(phase), so there is no red rim at ingress or egress and the red rim shows at totality, with the 3.5 Earth/Sun ratio, totality ring and conceptual inset unchanged; new regression test_eclipse_rim_gate passes (65 checks, 0 failures) and the full run reads 26/87 suites passed, the other failures being pre-existing LFS-stub media failures in this copy; verified again on real assets (1/1 suites passed); rendered ingress/totality frame checks and the both-LODs check still need a windowed capture, and manual testing/screenshots deferred by Judy's decision.",
    "updated": "2026-11-10",
    "prompt": "M3-6A_monitor_screen_ingress.png shows a faint red atmospheric ring around Earth before totality. M4-01 requires the red rim only at totality. The shared live screen in game/assets/props/eclipse_power/monitor/eclipse_camera_view.gdshader adds rim * gain unconditionally, although eclipse_monitor_screen.gd already computes ring_visible/visible_fraction. Gate the shader rim to totality for both PR_EclipseMonitor LODs, preserving the 3.5 Earth/Sun width ratio, the totality ring and the conceptual inset. Add a regression that checks rendered ingress and totality frames and run game/tools/run_tests.sh. Acceptance: no red atmospheric rim at ingress or egress, red rim visible at totality, all existing science labels intact. See production/review/visual_review.md M3-6A section.",
    "reserved_for": "sadman",

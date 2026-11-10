@@ -14,6 +14,9 @@ func _init() -> void:
 func _run() -> void:
 	var route := RouteScript.new(DirectorScript.new())
 	_check(bool(route.start_at("EX-CH01-S03").get("accepted", false)), "S03 starts")
+	# M1-108: the dry zero is set by the physical probe transfer, so the
+	# route commits calibrate_probe only after the transfer is done.
+	_check(bool(PlantInput.complete_probe_transfer(route).accepted), "probe transfer completes before calibration")
 	for target_id in ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"]:
 		var result: Dictionary = route.perform(target_id, PlantInput.payload(target_id))
 		_check(bool(result.get("accepted", false)), "S03 action commits: " + target_id)

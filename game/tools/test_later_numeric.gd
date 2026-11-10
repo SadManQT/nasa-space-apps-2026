@@ -4,6 +4,7 @@ const State = preload("res://scripts/core/campaign_state.gd")
 const Route = preload("res://scripts/missions/extended_campaign_route.gd")
 const Gate = preload("res://scripts/missions/extended_gate_catalog.gd")
 const Economy = preload("res://scripts/simulation/expedition_simulation.gd")
+const PuzzleData = preload("res://scripts/puzzles/puzzle_data.gd")
 var checks := 0
 var failures := 0
 
@@ -27,7 +28,12 @@ func _run() -> void:
 			route.start_at(scene_id)
 			for target in Gate.targets_for_scene(scene_id):
 				var input := director.snapshot()
-				var result: Dictionary = route.perform(target.target_id, target.get("payload_defaults", {}))
+				# M3-7P: the storm plan answers no longer come pre-filled
+				# from the catalog; the walk uses the recorded data payload.
+				var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+				if payload.is_empty():
+					payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
+				var result: Dictionary = route.perform(target.target_id, payload)
 				accepted = accepted and result.accepted
 				if not result.accepted:
 					print("UPGRADE DETAIL ", mask, " ", target.target_id, " ", result.get("reason", ""))

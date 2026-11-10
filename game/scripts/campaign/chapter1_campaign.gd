@@ -18,6 +18,7 @@ const TerrainSessionScript = preload("res://scripts/campaign/terrain_session.gd"
 const CompanionRosterScript = preload("res://scripts/companions/companion_roster.gd")
 const CutsceneRuntimeScript = preload("res://scripts/cutscenes/cutscene_runtime.gd")
 const AudioRuntimeScript = preload("res://scripts/audio/audio_runtime.gd")
+const EvaSuitScript = preload("res://scripts/eva/eva_suit.gd")
 const HUDScene: PackedScene = preload("res://scenes/ui/chapter1_campaign_hud.tscn")
 const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 
@@ -42,6 +43,9 @@ var hud: Chapter1CampaignHUD
 var _room: CampaignRoom
 var _crew: CampaignCrew
 var _player: PlayerController
+var eva_suit: EvaSuit
+var _last_eva_room_id := ""
+var _last_scan_origin := Vector3(INF, INF, INF)
 ## M1-36: the LOLA terrain under an exterior whose placement and lighting are ready (RoomContract.terrain_lighting).
 var _terrain: Node3D
 var _startup_error := ""
@@ -99,6 +103,8 @@ func _start_session() -> void:
 	for key in initial_accessibility:
 		presentation["accessibility"][key] = initial_accessibility[key]
 	director.restore_snapshot(presentation)
+	var assist_mode := String(presentation.get("accessibility", {}).get("assist_mode", "Cadet"))
+	eva_suit = EvaSuitScript.new(assist_mode)
 	_sync_route_projection()
 	LoadTrace.end("route_profile", stamp)
 	_build_media()
@@ -301,6 +307,20 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 				result[key] = result.result[key]
 	if bool(result.get("accepted", false)) and _room != null and _room.room_id == "LOC-08" and _room.garage() != null and target == _focus_node("garage_dock") and _room.garage().dock_state() == "SAFE TO OPEN":
 		route.world().set_boundary_state("garage_dock_hatch", {"airlock_ready": true, "open": true})
+	# M1-49: the S02 roll call blinks the inventory lamp once in the
+	# background (doc 24 §2.9 CH01 S02->S03); the room owns the single pulse
+	# and S03 opens on it. The tick plays through the audio director.
+	if bool(result.get("accepted", false)) and target_id == "roll_call" and route.current_scene_id() == "EX-CH01-S02" and route.has_method("request_inventory_lamp_blink"):
+		var blink: Dictionary = route.request_inventory_lamp_blink()
+		if not blink.is_empty() and _room != null:
+			var fired: Dictionary = _room.trigger_cue(String(blink.get("cue_id", "inventory_lamp")))
+			result["inventory_lamp_blink"] = fired
+			if bool(fired.get("accepted", false)) and audio != null:
+				audio.play_effect(String(fired.get("sfx_id", "SFX_INVENTORY_LAMP_TICK")))
+	# M1-49: the S04/S05 care targets hand the scene layer the Care Round
+	# visit (CareRoundRuntime.open_round opens the panel with it).
+	if bool(result.get("accepted", false)) and target_id in ["record_paired_conditions", "care_montage"] and route.has_method("care_round_visit"):
+		result["care_round"] = route.care_round_visit(route.current_scene_id())
 	var next_segment := _current_terrain_segment()
 	if bool(result.get("accepted", false)) and next_segment != prev_segment:
 		var cruise_card := _segment_cruise_card(prev_segment, next_segment)
@@ -418,6 +438,10 @@ func interact_nearby() -> Dictionary:
 		return {"accepted": true, "p01_panel_requested": true, "physical_commit": false, "reason": "Choose the P-01 inputs before confirming."}
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) == "P-02" and hud != null and hud.open_mission_table(String(selected.target_id)):
 		return {"accepted": true, "reason": "Mission Table open.", "mission_table": true}
+	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-07", "P-08"] and hud != null and hud.open_chapter4_panel(String(selected.target_id)):
+		return {"accepted": true, "reason": "Decision card open.", "chapter4_panel": true}
+	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-11", "P-12"] and hud != null and hud.open_chapter6_panel(String(selected.target_id)):
+		return {"accepted": true, "reason": "Decision card open.", "chapter6_panel": true}
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-15", "P-16"] and hud != null and hud.open_chapter8_panel(String(selected.target_id)):
 		return {"accepted": true, "reason": "Decision card open.", "chapter8_panel": true}
 	if not selected.is_empty():
@@ -439,8 +463,189 @@ func _physics_process(_delta: float) -> void:
 	_room.set_focus_target(String(selected.get("world_focus_id", "")))
 	if _terrain != null and _player != null:
 		_terrain.move_focus(_terrain.to_local(_player.global_position))
+	_step_campaign_eva()
 	if hud != null:
 		hud.show_nearby_forecast(String(selected.get("target_id", "")))
+
+func _step_campaign_eva() -> void:
+	if _player == null or eva_suit == null:
+		return
+	if not eva_suit.indoor:
+		var field: TerrainHeightfield = _terrain.stream.field if _terrain != null and _terrain.get("stream") != null and _terrain.stream.get("field") != null else null
+		if field != null:
+			var p: Vector3 = _terrain.origin + _terrain.turn * _terrain.to_local(_player.global_position)
+			_player.eva_slope_override_deg = field.slope_deg_at(p.x, p.z)
+			_player.eva_surface_tags = _terrain_surface_tags_at(_player.global_position.x, _player.global_position.z, field, _collect_real_boulder_zones(_player.global_position, 6.0), _is_scene_in_cold_shadow())
+		else:
+			_player.eva_slope_override_deg = -1.0
+			_player.eva_surface_tags = _fallback_surface_tags_at(_player.global_position.x, _player.global_position.z, _collect_real_boulder_zones(_player.global_position, 6.0), _is_scene_in_cold_shadow())
+		if eva_suit.scanner_pulse_active and (eva_suit.last_scan_samples.is_empty() or _player.global_position.distance_to(_last_scan_origin) > 1.5):
+			_last_scan_origin = _player.global_position
+			_scan_campaign_terrain(_player.global_position)
+	elif eva_suit.scanner_pulse_active and eva_suit.last_scan_samples.is_empty():
+		_last_scan_origin = _player.global_position
+		_scan_campaign_terrain(_player.global_position)
+
+func _scan_campaign_terrain(origin_world: Vector3) -> Array:
+	if eva_suit == null:
+		return []
+	var field: TerrainHeightfield = _terrain.stream.field if _terrain != null and _terrain.get("stream") != null and _terrain.stream.get("field") != null else null
+	var boulder_zones := _collect_real_boulder_zones(origin_world, 20.0)
+	var cold_shadow := _is_scene_in_cold_shadow()
+	var sample_h: Callable
+	var sample_tags: Callable
+	if field != null:
+		sample_h = func(wx: float, wz: float) -> float:
+			var local_pt := _terrain.to_local(Vector3(wx, 0.0, wz))
+			var region_pt: Vector3 = _terrain.origin + _terrain.turn * local_pt
+			return field.height_at(region_pt.x, region_pt.z)
+		sample_tags = func(wx: float, wz: float) -> Array:
+			return _terrain_surface_tags_at(wx, wz, field, boulder_zones, cold_shadow)
+	else:
+		sample_h = func(wx: float, wz: float) -> float:
+			return _sample_world_floor_height(wx, wz, origin_world.y)
+		sample_tags = func(wx: float, wz: float) -> Array:
+			return _fallback_surface_tags_at(wx, wz, boulder_zones, cold_shadow)
+	return eva_suit.scan_grid(origin_world, sample_h, sample_tags)
+
+func _sample_world_floor_height(wx: float, wz: float, fallback_y: float) -> float:
+	if _room != null:
+		return _room.global_position.y
+	if is_inside_tree() and get_world_3d() != null and get_world_3d().direct_space_state != null:
+		var exclude: Array[RID] = []
+		if _player != null:
+			exclude.append(_player.get_rid())
+		var query := PhysicsRayQueryParameters3D.create(
+			Vector3(wx, fallback_y + 12.0, wz),
+			Vector3(wx, fallback_y - 12.0, wz),
+			1,
+			exclude
+		)
+		var hit := get_world_3d().direct_space_state.intersect_ray(query)
+		if not hit.is_empty() and hit.get("position") is Vector3 and hit.get("normal") is Vector3:
+			if (hit.normal as Vector3).y > 0.7:
+				return (hit.position as Vector3).y
+	return fallback_y
+
+func _is_scene_in_cold_shadow() -> bool:
+	if eva_suit != null and eva_suit.in_cold_shadow:
+		return true
+	if route == null or eva_suit == null or eva_suit.indoor:
+		return false
+	var scene_id := String(route.current_scene_id())
+	var seg := _current_terrain_segment()
+	var row := RoomContract.Heightfield.scene_lighting(scene_id, seg)
+	if not row.is_empty():
+		return String(row.get("sun_state", "")) == "dark"
+	if _room != null:
+		var room_light := RoomContract.terrain_lighting(_room.room_id, scene_id, seg)
+		if String(room_light.get("sun_state", "")) == "dark":
+			return true
+	return false
+
+func _is_on_graded_fixture(wx: float, wz: float) -> bool:
+	if _room == null or _room.get("_layout") == null:
+		return false
+	var room_pt := _room.to_local(Vector3(wx, 0.0, wz))
+	var layout: Dictionary = _room._layout
+	for lane in layout.get("clear_lanes", []):
+		if lane is Dictionary and lane.get("from") is Array and lane.get("to") is Array:
+			var a := Vector2(float(lane.from[0]), float(lane.from[2]))
+			var b := Vector2(float(lane.to[0]), float(lane.to[2]))
+			var p := Vector2(room_pt.x, room_pt.z)
+			var ab := b - a
+			var len_sq := ab.length_squared()
+			var t := clampf((p - a).dot(ab) / len_sq, 0.0, 1.0) if len_sq > 0.0001 else 0.0
+			var closest := a + ab * t
+			if p.distance_to(closest) <= float(lane.get("radius_m", 3.0)):
+				return true
+	var stage_fixtures: Array = _room.stage().get("fixtures", []) if _room.has_method("stage") else []
+	for spec in layout.get("fixtures", []) + stage_fixtures:
+		if not spec is Dictionary or not spec.get("position") is Array or not spec.get("size") is Array:
+			continue
+		var id := String(spec.get("id", "")).to_lower()
+		if not (id.contains("road") or id.contains("pad") or id.contains("track") or id.contains("apron")):
+			continue
+		var pos: Array = spec.position
+		var sz: Array = spec.size
+		if absf(room_pt.x - float(pos[0])) <= float(sz[0]) * 0.5 and absf(room_pt.z - float(pos[2])) <= float(sz[2]) * 0.5:
+			return true
+	return false
+
+func _collect_real_boulder_zones(origin_world: Vector3, search_radius_m: float) -> Array[Dictionary]:
+	var zones: Array[Dictionary] = []
+	# 1. Real scattered lunar rocks from TerrainStream (LunarScatter placements on LOLA heightfield)
+	if _terrain != null and _terrain.get("stream") != null and _terrain.stream.get("field") != null and _terrain.stream.has_method("rock_records"):
+		var stream: Node3D = _terrain.stream
+		var chunk_m := float(stream.config.get("rock_chunk_m", 64.0))
+		if chunk_m > 0.0:
+			var center_local := _terrain.to_local(origin_world)
+			var center_reg: Vector3 = _terrain.origin + _terrain.turn * center_local
+			var min_cell := Vector2i(floori((center_reg.x - search_radius_m) / chunk_m), floori((center_reg.z - search_radius_m) / chunk_m))
+			var max_cell := Vector2i(floori((center_reg.x + search_radius_m) / chunk_m), floori((center_reg.z + search_radius_m) / chunk_m))
+			var inv_turn: Basis = _terrain.turn.inverse()
+			for cz in range(min_cell.y, max_cell.y + 1):
+				for cx in range(min_cell.x, max_cell.x + 1):
+					var records: Array = stream.call("rock_records", Vector2i(cx, cz))
+					for rec in records:
+						if not rec is Dictionary or not rec.get("position") is Vector3:
+							continue
+						var reg_pos: Vector3 = rec.position
+						var terrain_local: Vector3 = inv_turn * (reg_pos - _terrain.origin)
+						var world_pos: Vector3 = _terrain.to_global(terrain_local)
+						var rad := maxf(0.5, float(rec.get("radius_m", rec.get("size_m", 1.0))))
+						if Vector2(world_pos.x - origin_world.x, world_pos.z - origin_world.z).length() <= search_radius_m + rad:
+							zones.append({"x": world_pos.x, "z": world_pos.z, "radius_m": rad})
+	# 2. Real authored room obstacles and rock/boulder nodes in _room
+	if _room != null:
+		if _room.get("_layout") is Dictionary:
+			var stage_obs: Array = _room.stage().get("obstacles", []) if _room.has_method("stage") else []
+			for obs in _room._layout.get("obstacles", []) + stage_obs:
+				if not obs is Dictionary or not obs.get("position") is Array or not obs.get("size") is Array:
+					continue
+				var obs_local := Vector3(float(obs.position[0]), float(obs.position[1]), float(obs.position[2]))
+				var obs_world := _room.to_global(obs_local)
+				var obs_rad := maxf(float(obs.size[0]), float(obs.size[2])) * 0.5
+				if Vector2(obs_world.x - origin_world.x, obs_world.z - origin_world.z).length() <= search_radius_m + obs_rad:
+					zones.append({"x": obs_world.x, "z": obs_world.z, "radius_m": obs_rad})
+		if _room.visual_root != null:
+			for child in _room.visual_root.get_children():
+				if not child is Node3D:
+					continue
+				var cname := String(child.name).to_lower()
+				if cname.contains("rock") or cname.contains("boulder"):
+					var cpos := (child as Node3D).global_position
+					var crad := float(child.get_meta("radius_m", 1.5))
+					zones.append({"x": cpos.x, "z": cpos.z, "radius_m": crad})
+	return zones
+
+func _has_boulder_near(wx: float, wz: float, boulder_zones: Array[Dictionary]) -> bool:
+	var pt := Vector2(wx, wz)
+	for z in boulder_zones:
+		var center := Vector2(float(z.get("x", 0.0)), float(z.get("z", 0.0)))
+		if pt.distance_to(center) <= float(z.get("radius_m", 1.0)) + 1.5:
+			return true
+	return false
+
+func _terrain_surface_tags_at(wx: float, wz: float, field: TerrainHeightfield, boulder_zones: Array[Dictionary], cold_shadow: bool) -> Array:
+	var local_pt := _terrain.to_local(Vector3(wx, 0.0, wz))
+	var region_pt: Vector3 = _terrain.origin + _terrain.turn * local_pt
+	var tags: Array = []
+	if field.slope_deg_at(region_pt.x, region_pt.z) >= 8.0 and not _is_on_graded_fixture(wx, wz):
+		tags.append("soft_regolith")
+	if _has_boulder_near(wx, wz, boulder_zones):
+		tags.append("boulder")
+	if cold_shadow:
+		tags.append("cold_shadow")
+	return tags
+
+func _fallback_surface_tags_at(wx: float, wz: float, boulder_zones: Array[Dictionary], cold_shadow: bool) -> Array:
+	var tags: Array = []
+	if _has_boulder_near(wx, wz, boulder_zones):
+		tags.append("boulder")
+	if cold_shadow and not eva_suit.indoor:
+		tags.append("cold_shadow")
+	return tags
 
 func is_chapter_complete() -> bool:
 	if route == null:
@@ -487,11 +692,23 @@ func acknowledge_dialogue(line_id: String) -> Dictionary:
 func advance_scene() -> Dictionary:
 	if loading:
 		return {"accepted": false, "reason": "Preparing Aurora."}
+	# M1-49: at the end of EX-CH01-S12 the four mugs gain names
+	# (CH01-MUGS-NAMED). Recorded while S12 is still the current scene so
+	# the director accepts the moment; it never gates the advance.
+	var mugs_named: Dictionary = {}
+	if director != null and route != null and not is_chapter_complete() and route.current_scene_id() == "EX-CH01-S12" and route.has_method("mugs_named_moment_command"):
+		var moment: Dictionary = route.mugs_named_moment_command()
+		if not moment.is_empty():
+			mugs_named = director.commit(moment)
+			if not bool(mugs_named.get("accepted", false)):
+				push_warning("CH01-MUGS-NAMED was not recorded: " + String(mugs_named.get("reason", "unknown")))
 	var result: Dictionary
 	if is_chapter_complete():
 		result = _transition_after_chapter()
 	else:
 		result = route.advance_scene()
+	if not mugs_named.is_empty():
+		result["mugs_named"] = mugs_named
 	if bool(result.get("accepted", false)) and bool(result.get("chapter_complete", false)) and not bool(result.get("campaign_complete", false)):
 		_sync_route_projection()
 		result["next_chapter"] = _transition_after_chapter()
@@ -592,6 +809,8 @@ func handle_ui_command(command: Dictionary, preview_only: bool = false) -> Dicti
 		var next := director.snapshot()
 		next["accessibility"] = payload.duplicate(true)
 		var restored := director.restore_snapshot(next)
+		if eva_suit != null:
+			eva_suit.set_assist_mode(String(payload.get("assist_mode", eva_suit.assist_mode)))
 		_save_campaign()
 		if audio != null:
 			audio.captions_enabled = bool(payload.get("captions", true))
@@ -758,12 +977,32 @@ func _place_crew() -> void:
 	var story_log: Dictionary = director.snapshot().get("story_log", {}) if director != null else {}
 	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]), story_log.get("choices", {}), story_log.get("moments", []))
 	_player.generic_interaction_input = false
+	_bind_player_eva()
 	if _player != null and _player.follow_camera != null and _player.follow_camera.camera != null:
 		_player.follow_camera.camera.far = 30000.0 if _terrain != null else 4000.0  # kilometre views on the terrain
 	_crew.set_paused(_ui_paused)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_setup_garage_dock()
 	_sync_world_boundaries()
+
+func _bind_player_eva() -> void:
+	if eva_suit == null:
+		var mode := String(director.snapshot().get("accessibility", {}).get("assist_mode", "Cadet")) if director != null else "Cadet"
+		eva_suit = EvaSuitScript.new(mode)
+	var room_id: String = _room.room_id if _room != null else (String(route.current_room_id()) if route != null else "LOC-01")
+	var pressure := String(RoomContract.room(room_id).get("pressure", "pressurised"))
+	var was_indoor := eva_suit.indoor
+	var now_indoor := pressure != "vacuum"
+	eva_suit.indoor = now_indoor
+	if now_indoor or (was_indoor and not now_indoor and _last_eva_room_id != room_id):
+		eva_suit.reset_budget()
+	_last_eva_room_id = room_id
+	if _player != null:
+		_player.eva_suit = eva_suit
+		_player.gravity = EvaSuitScript.MOON_G if not now_indoor else 9.8
+		if now_indoor:
+			_player.eva_surface_tags = []
+			_player.eva_slope_override_deg = -1.0
 
 func _current_terrain_segment() -> String:
 	if route == null or route.current_scene_id() != "EX-CH04-S04":

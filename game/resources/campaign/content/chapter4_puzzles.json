@@ -1,0 +1,1138 @@
+{
+ "schema_version": 1,
+ "content_revision": "chapter4-puzzles-v1",
+ "source": "game-design/08_PUZZLE_DESIGNS.md P-07 and P-08; game-design/22_PUZZLE_CLUE_DESIGN.md section 6; game-design/24_NARRATIVE_REVISION.md section 2.4; game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md sections 1, 2 and 6; full-game-story/STORY_FULL.md EX-CH04-S01..S12. Spoken lines are referenced by id and read from the dialogue catalog, never retyped here. Answer keys live in profiles/campaign_rules.json (chapter4).",
+ "roles": {
+  "ferreira": {
+   "name": "Ferreira",
+   "role": "commander, Earth support desk",
+   "letter": "F"
+  },
+  "kai": {
+   "name": "Kai",
+   "role": "power and field scanner",
+   "letter": "K"
+  },
+  "amara": {
+   "name": "Amara",
+   "role": "atmosphere and base route desk",
+   "letter": "A"
+  },
+  "mei": {
+   "name": "Mei",
+   "role": "horticulture and archive",
+   "letter": "M"
+  },
+  "rafi": {
+   "name": "Rafi",
+   "role": "safety and field lead",
+   "letter": "R"
+  }
+ },
+ "puzzles": {
+  "P-07": {
+   "title": "Survey and Return",
+   "hints": [
+    "A short road may be too steep.",
+    "Check both the return cost and slope.",
+    "Choose B, use dry 2, then tag 18 and 19."
+   ],
+   "mastery": "Safe route and reserve at least 30, no blackout, all three beacons linked before their corners.",
+   "first_time_card": {
+    "title": "Survey and return",
+    "purpose": "Plan the cold-trap route, survey ice and keep the return reserve.",
+    "steps": [
+     "Compare the base slope card and the rover energy table.",
+     "Test each corner beacon before driving past it.",
+     "Calibrate the dry reference, then tag positive samples."
+    ],
+    "clip": "Cold-trap route and scanner threshold (explainer clip pending)"
+   }
+  },
+  "P-08": {
+   "title": "Recover Without Ruining",
+   "hints": [
+    "Keep it sealed until home.",
+    "Warm dry seeds in their closed container.",
+    "Complete sleeve/cradle, then three warm-up stages in the glovebox before opening."
+   ],
+   "mastery": "Sealed field recovery, three-stage dry warm-up with no condensation, twelve distinct vault specimens recorded and lid scanned.",
+   "first_time_card": {
+    "title": "Recover without ruining",
+    "purpose": "Bring a cold seed case home without condensation damage.",
+    "steps": [
+     "Probe, sleeve, cradle and latch the closed case in the field.",
+     "Warm the sealed container in three dry glovebox stages.",
+     "Confirm no condensation before opening and recording twelve specimens."
+    ],
+    "clip": "Glovebox warm-up and vault inventory (explainer clip pending)"
+   }
+  }
+ },
+ "scenes": {
+  "EX-CH04-S01": {
+   "id": "EX-CH04-S01",
+   "mission": "EX-M0401",
+   "title": "Make the Old Map Current",
+   "story_date": "21 October 2046 · descendant rack and prediction notebook",
+   "stage": "learn",
+   "goal": "Compare the May prediction against twelve current descendants",
+   "why": "A prediction stays useful when kept beside the actual sample.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Object + voice",
+     "text": "Twelve descendants with text trait tags: seven purple stems, five green.",
+     "where": "Descendant rack",
+     "holders": ["mei"],
+     "line_id": "EX-CH04-S01-L02"
+    },
+    {
+     "id": "c2",
+     "kind": "Log",
+     "text": "The saved May prediction, unchanged, beside the October observation panel.",
+     "where": "Prediction notebook",
+     "holders": ["amara"],
+     "line_id": "EX-CH04-S01-L01"
+    }
+   ],
+   "aha": "In this sample of twelve, seven purple and five green — not a promised ratio for every plant.",
+   "wrong_idea": "Claim that seven to five proves a universal rule beyond the twelve-plant sample.",
+   "flight_rules": [
+    "FR-06 · Keep original predictions unchanged and bound claims to the observed sample."
+   ],
+   "risk": {
+    "title": "Sample claimed as universal rule",
+    "likelihood": 3,
+    "consequence": 2,
+    "level": "MODERATE"
+   },
+   "set_piece": "Twelve descendant stems stand in the October rack beside the open May notebook."
+  },
+  "EX-CH04-S02": {
+   "id": "EX-CH04-S02",
+   "mission": "EX-M0401",
+   "title": "Two Ledgers, One Expedition",
+   "story_date": "22 October 2046 · rover bay and base handover screen",
+   "stage": "learn",
+   "goal": "Prepare the rover and separate the base and rover ledgers",
+   "why": "Two at base and two in the rover each use their own supplies.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Two people at base, two on the rover's independent 48-hour manifest.",
+     "where": "Handover screen",
+     "holders": ["amara"],
+     "line_id": "EX-CH04-S02-L03"
+    },
+    {
+     "id": "c2",
+     "kind": "Voice",
+     "text": "Ferreira confirms Rafi leads the field team and returning is part of the objective.",
+     "where": "Earth link",
+     "holders": ["ferreira", "rafi"],
+     "line_id": "EX-CH04-S02-L02"
+    }
+   ],
+   "aha": "Two at base, two in the rover. Each ledger counts its own people.",
+   "wrong_idea": "Charge four people at base and two again in the rover.",
+   "flight_rules": [
+    "FR-01 · Crew first, station second, science third.",
+    "FR-05 · Rover independent manifest covers the field team; never double-charge base air."
+   ],
+   "risk": {
+    "title": "Double-counted crew supplies",
+    "likelihood": 3,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "Two occupied rover seats and two voices at home share the handover screen."
+  },
+  "EX-CH04-S03": {
+   "id": "EX-CH04-S03",
+   "mission": "EX-M0401",
+   "title": "The Short Road and the Slope",
+   "story_date": "22 October 2046 · shared route preview",
+   "stage": "apply",
+   "goal": "Choose the route that meets both the slope limit and the return reserve",
+   "why": "A short road may be too steep; the return is already in the battery.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Log + voice",
+     "text": "Base slope card: route A max 24°, route B max 12°, route C max 18°. Rover limit is 15°.",
+     "where": "Base console",
+     "holders": ["amara"],
+     "line_id": "EX-CH04-S03-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument + voice",
+     "text": "Route energy cards from 100 units: A costs 35 each way (reserve 30), B ridge costs 30 each way (reserve 40), C shadow costs 40 each way (reserve 20).",
+     "where": "Shared route preview",
+     "holders": ["rafi", "kai"],
+     "line_id": "EX-CH04-S03-L02"
+    }
+   ],
+   "aha": "The short road looks fine on energy; it is the slope that blocks it. Route B keeps 40 reserve and stays at 12°.",
+   "wrong_idea": "Pick Route A because 100 minus 70 leaves 30: its 24° slope exceeds the 15° rover limit.",
+   "flight_rules": [
+    "FR-05 · Rover slope never above 15°; mandatory return reserve at least 30 of 100."
+   ],
+   "risk": {
+    "title": "Route A 24° slope",
+    "likelihood": 4,
+    "consequence": 5,
+    "level": "HIGH"
+   },
+   "set_piece": "The ridge bends out of sight beyond the rover window as the cabin heads toward the shadow."
+  },
+  "EX-CH04-S04": {
+   "id": "EX-CH04-S04",
+   "mission": "EX-M0402",
+   "title": "Three Corners on the Ridge",
+   "story_date": "22 October 2046 · surveyed ridge and three beacon positions",
+   "stage": "learn",
+   "goal": "Place and link-test all three ridge beacons before blind corners",
+   "why": "Placement is not communication; a beacon counts only when its link test passes.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Each corner requires a passed next-hop link test before driving past.",
+     "where": "Ridge pad",
+     "holders": ["rafi", "amara"],
+     "line_id": "EX-CH04-S04-L03"
+    }
+   ],
+   "aha": "Only if the link test says so.",
+   "wrong_idea": "Drive past a blind corner as soon as the beacon stands on its pad without testing the hop.",
+   "flight_rules": [
+    "FR-05 · Maintain a verified communication chain across every blind ridge corner."
+   ],
+   "risk": {
+    "title": "Link lost at a blind corner",
+    "likelihood": 3,
+    "consequence": 4,
+    "level": "HIGH"
+   },
+   "set_piece": "Three relay beacons stand along the ridge rim against the black lunar sky."
+  },
+  "EX-CH04-S05": {
+   "id": "EX-CH04-S05",
+   "mission": "EX-M0402",
+   "title": "Measure Before Claiming",
+   "story_date": "22 October 2046 · cold-trap reference and sample stations",
+   "stage": "apply",
+   "goal": "Calibrate the dry reference at 2, set threshold 12, tag 18 and 19, and keep 2 as negative control",
+   "why": "Keep the negative sample. It is what makes the two positives believable.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Voice",
+     "text": "Kai asks whether the bright patch is ice; Amara requires the calibrated scanner reading.",
+     "where": "Sample station",
+     "holders": ["kai", "amara"],
+     "line_id": "EX-CH04-S05-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument + voice",
+     "text": "Dry reference reads 2; threshold is reference plus 10 (12); sample points read 2, 18 and 19.",
+     "where": "Ice scanner",
+     "holders": ["amara", "rafi"],
+     "line_id": "EX-CH04-S05-L02"
+    }
+   ],
+   "aha": "Keep the negative sample. It is what makes the two positives believable.",
+   "wrong_idea": "Tag every bright patch as water ice without calibrating the dry reference.",
+   "flight_rules": [
+    "FR-06 · Calibrate dry reference before tagging positive samples; retain the negative control."
+   ],
+   "risk": {
+    "title": "Uncalibrated positive ice claim",
+    "likelihood": 3,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "The calibrated scanner chirps over the cold-trap floor under hard headlight beams."
+  },
+  "EX-CH04-S06": {
+   "id": "EX-CH04-S06",
+   "mission": "EX-M0402",
+   "title": "That Shape Did Not Grow There",
+   "story_date": "22 October 2046 · vault approach in shadow",
+   "stage": "twist",
+   "goal": "Seal the ice sample and verify the return route before approaching the case",
+   "why": "Two discoveries are two records, and curiosity stays inside the return reserve.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Object + voice",
+     "text": "A manufactured corner beyond the survey marker matches the 2034 deposit sheet.",
+     "where": "Vault approach",
+     "holders": ["kai", "mei"],
+     "line_id": "EX-CH04-S06-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument + voice",
+     "text": "Return reserve checked at 40 before recovery begins.",
+     "where": "Rover console",
+     "holders": ["amara", "rafi"],
+     "line_id": "EX-CH04-S06-L04"
+    }
+   ],
+   "aha": "Two discoveries are two separate records.",
+   "wrong_idea": "Combine the ice sample and the seed case into a single unsealed find.",
+   "flight_rules": [
+    "FR-05 · Verify return reserve before adding recovery work."
+   ],
+   "risk": {
+    "title": "Unsealed sample or unverified reserve",
+    "likelihood": 2,
+    "consequence": 4,
+    "level": "MODERATE"
+   },
+   "set_piece": "The headlight sweep finds a straight manufactured edge in a world of rock under a black sky."
+  },
+  "EX-CH04-S07": {
+   "id": "EX-CH04-S07",
+   "mission": "EX-M0403",
+   "title": "The Lid Can Wait",
+   "story_date": "22 October 2046 · vault recovery work boundary",
+   "stage": "learn",
+   "goal": "Read the external probe, fit the insulated sleeve, latch the cradle and secure the cargo mount",
+   "why": "Opening a cold seed case in warm humid air causes condensation.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "External probe reads the cold outer shell; inner biological seal is intact.",
+     "where": "Work boundary",
+     "holders": ["rafi", "amara"],
+     "line_id": "EX-CH04-S07-L04"
+    },
+    {
+     "id": "c2",
+     "kind": "Object + voice",
+     "text": "Probe, sleeve, cradle and mount keep the inner seal closed until home.",
+     "where": "Work boundary",
+     "holders": ["rafi", "mei"],
+     "line_id": "EX-CH04-S07-L03"
+    }
+   ],
+   "aha": "The lid can wait.",
+   "wrong_idea": "Open the biological seal in the field to save time later.",
+   "flight_rules": [
+    "FR-06 · Never open a cold biological container outside dry quarantine warm-up."
+   ],
+   "risk": {
+    "title": "Cold vault opened in cabin air",
+    "likelihood": 3,
+    "consequence": 4,
+    "level": "HIGH"
+   },
+   "set_piece": "The sealed case lifts continuously from its cold-trap deposit into the insulated cradle."
+  },
+  "EX-CH04-S08": {
+   "id": "EX-CH04-S08",
+   "mission": "EX-M0403",
+   "title": "Three Stages in the Glovebox",
+   "story_date": "23 October 2046 · Aurora airlock and dry quarantine glovebox",
+   "stage": "apply",
+   "goal": "Return with reserve intact, dock in the dry glovebox, warm cold to cool to room, check condensation and inventory twelve specimens",
+   "why": "Warm dry seeds in their closed container before opening the inner seal.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Mount shows closed and passes its lock test before the return leg.",
+     "where": "Cargo mount",
+     "holders": ["kai"],
+     "line_id": "EX-CH04-S08-L02"
+    },
+    {
+     "id": "c2",
+     "kind": "Instrument + voice",
+     "text": "Dry glovebox stages: cold to cool to room, condensation NONE, then open for twelve distinct specimen labels.",
+     "where": "Dry glovebox",
+     "holders": ["amara", "rafi"],
+     "line_id": "EX-CH04-S08-L04"
+    }
+   ],
+   "aha": "Stable and dry first; then open the inner seal inside the glovebox.",
+   "wrong_idea": "Skip the cool stage or open the inner seal before checking for condensation.",
+   "flight_rules": [
+    "FR-06 · Three-stage sealed warm-up and zero condensation check before opening."
+   ],
+   "risk": {
+    "title": "Condensation on dry seed lot",
+    "likelihood": 3,
+    "consequence": 4,
+    "level": "HIGH"
+   },
+   "set_piece": "Light shifts from rover-cabin blue to warm habitat white as the sealed case docks to the dry glovebox."
+  },
+  "EX-CH04-S09": {
+   "id": "EX-CH04-S09",
+   "mission": "EX-M0403",
+   "title": "Twelve in the Dark",
+   "story_date": "23 October 2046 · glovebox scan station",
+   "stage": "twist",
+   "goal": "Scan the lid inscription, record viability as pending, and transfer the case to quarantine storage",
+   "why": "Intact labels prove preservation, not germination; viability stays pending until tested.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Instrument + voice",
+     "text": "Saved reserve prediction kept beside the actual final reading of 40.",
+     "where": "Airlock log",
+     "holders": ["amara"],
+     "line_id": "EX-CH04-S09-L03"
+    }
+   ],
+   "aha": "Keep the forecast beside the actual reading, and mark viability pending until tested.",
+   "wrong_idea": "Mark all twelve recovered seed lots healthy before any germination test.",
+   "flight_rules": [
+    "FR-06 · Set quarantine status to pending viability evaluation, never assumed healthy."
+   ],
+   "risk": {
+    "title": "Unverified viability claim",
+    "likelihood": 3,
+    "consequence": 2,
+    "level": "MODERATE"
+   },
+   "set_piece": "Inside the dry glovebox, the lid scan resolves into a line of handwriting."
+  },
+  "EX-CH04-S10": {
+   "id": "EX-CH04-S10",
+   "mission": "EX-M0404",
+   "title": "Twelve Distinct Specimens",
+   "story_date": "23 October 2046 · quarantine ledger bench",
+   "stage": "learn",
+   "goal": "Reconcile the twelve-specimen manifest, confirm all four crew home, and complete quarantine records",
+   "why": "Physical seed stock and album records live in separate ledgers.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Object + voice",
+     "text": "Twelve distinct specimens with twelve condition entries, including cotton.",
+     "where": "Glovebox bench",
+     "holders": ["rafi", "kai"],
+     "line_id": "EX-CH04-S10-L02"
+    }
+   ],
+   "aha": "An album entry is a record; the vault holds twelve physical specimens.",
+   "wrong_idea": "Add collection album pages to the physical seed count.",
+   "flight_rules": [
+    "FR-06 · Keep physical vault inventory separate from the founder reserve and album entries."
+   ],
+   "risk": {
+    "title": "Album records mixed with seed stock",
+    "likelihood": 2,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "Twelve specimen wells sit in soft light inside the glovebox."
+  },
+  "EX-CH04-S11": {
+   "id": "EX-CH04-S11",
+   "mission": "EX-M0404",
+   "title": "Ask Commander Ferreira",
+   "story_date": "23 October 2046 · scan station and Earth console",
+   "stage": "apply",
+   "goal": "Send the reconciled manifest, record the lid question for Ferreira, and leave the writer's identity open",
+   "why": "The lid inscription supports a respectful question, not a verdict.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Log + voice",
+     "text": "The lid says: ask Commander Ferreira about Expedition Zero.",
+     "where": "Scan station",
+     "holders": ["mei"],
+     "line_id": "EX-CH04-S11-L01"
+    },
+    {
+     "id": "c2",
+     "kind": "Voice",
+     "text": "Rao confirms manifest receipt and unchanged safety support.",
+     "where": "Earth console",
+     "holders": ["amara", "rafi"],
+     "line_id": "EX-CH04-S11-L03"
+    }
+   ],
+   "aha": "The case was preserved on purpose, and the lid tells us who to ask.",
+   "wrong_idea": "Attach a final verdict about who was abandoned in 2034.",
+   "flight_rules": [
+    "FR-06 · Send exact evidence and the reconciled manifest; keep unverified names open."
+   ],
+   "risk": {
+    "title": "Unsupported accusation in official report",
+    "likelihood": 2,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "The Earth console holds a quiet pause before Rao answers."
+  },
+  "EX-CH04-S12": {
+   "id": "EX-CH04-S12",
+   "mission": "EX-M0404",
+   "title": "The Fifth Mug",
+   "story_date": "24 October to 12 December 2046 · mission table and prepared locker",
+   "stage": "twist",
+   "goal": "Verify Ferreira's relief flight schedule, prepare the fifth locker, and confirm the December transition",
+   "why": "A person cannot command from Earth and stand on the Moon without a transit flight.",
+   "clues": [
+    {
+     "id": "c1",
+     "kind": "Object + log",
+     "text": "Ferreira's relief flight departs Earth 8 December and arrives 12 December; the fifth mug waits on the table.",
+     "where": "Mission table",
+     "holders": ["kai", "amara"],
+     "line_id": "EX-CH04-S12-L01"
+    }
+   ],
+   "aha": "The fifth mug waits for the 12 December lander.",
+   "wrong_idea": "Assume Ferreira arrives without transit while still on the Earth console.",
+   "flight_rules": [
+    "FR-01 · Prepare five-person occupancy before the relief lander docks."
+   ],
+   "risk": {
+    "title": "Unprepared five-crew transition",
+    "likelihood": 2,
+    "consequence": 3,
+    "level": "MODERATE"
+   },
+   "set_piece": "The fifth mug sits on the Commons table beside a prepared locker."
+  }
+ },
+ "steps": {
+  "p07_compare_prediction": {
+   "id": "p07_compare_prediction",
+   "scene": "EX-CH04-S01",
+   "title": "Compare the May prediction",
+   "goal": "Keep the May stem-colour prediction beside the October observation",
+   "why": "A prediction is useful because it stays unchanged beside what grew.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "mei"]
+  },
+  "p07_inspect_twelve_descendants": {
+   "id": "p07_inspect_twelve_descendants",
+   "scene": "EX-CH04-S01",
+   "title": "Inspect twelve descendants",
+   "goal": "Count seven purple stems and five green stems in the current twelve-plant cohort",
+   "why": "Describe what grew in this sample of twelve.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "mei",
+   "poll": ["mei", "amara"]
+  },
+  "p07_record_trait_limits": {
+   "id": "p07_record_trait_limits",
+   "scene": "EX-CH04-S01",
+   "title": "Record sample scope",
+   "goal": "Record seven purple and five green as a twelve-plant sample, not a universal ratio",
+   "why": "Twelve plants do not prove a fixed law for every future tray.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "mei", "kai"]
+  },
+  "p07_check_rover_seal": {
+   "id": "p07_check_rover_seal",
+   "scene": "EX-CH04-S02",
+   "title": "Check rover cabin seal",
+   "goal": "Verify the pressurised rover cabin seal before departure",
+   "why": "The rover carries its own atmosphere for Kai and Rafi.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "kai"]
+  },
+  "p07_check_scanner": {
+   "id": "p07_check_scanner",
+   "scene": "EX-CH04-S02",
+   "title": "Check calibrated ice scanner",
+   "goal": "Verify the ice scanner is packed with its dry reference calibration card",
+   "why": "A bright patch is not a measurement without a calibrated scanner.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "kai"]
+  },
+  "p07_check_closed_carrier": {
+   "id": "p07_check_closed_carrier",
+   "scene": "EX-CH04-S02",
+   "title": "Check insulated sleeve and carrier",
+   "goal": "Confirm the insulated sleeve, cradle and sample cups are aboard",
+   "why": "Cold samples must travel sealed.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "mei"]
+  },
+  "p07_complete_base_handover": {
+   "id": "p07_complete_base_handover",
+   "scene": "EX-CH04-S02",
+   "title": "Separate base and rover ledgers",
+   "goal": "Confirm two cadets on the base ledger and two on the rover's 48-hour manifest",
+   "why": "Each ledger counts its own people once.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "mei", "rafi", "kai"]
+  },
+  "p07_choose_route_b": {
+   "id": "p07_choose_route_b",
+   "scene": "EX-CH04-S03",
+   "title": "Choose the cold-trap route",
+   "goal": "Select the route that stays within 15° slope and keeps at least 30 return reserve",
+   "why": "Both slope and round-trip reserve must pass before departure.",
+   "kind": "choice",
+   "payload_key": "route",
+   "options": [
+    {
+     "id": "A",
+     "label": "Route A · Short canyon (8 km, 35 each way, max 24°)",
+     "detail": "100 − 35 − 35 = 30 reserve, but 24° exceeds the 15° rover limit.",
+     "payload": {"route": "A"},
+     "feedback": "Route A is blocked by Flight Rule FR-05: its 24° slope exceeds the 15° rover limit even though its reserve reaches 30."
+    },
+    {
+     "id": "B",
+     "label": "Route B · Surveyed ridge (12 km, 30 each way, max 12°)",
+     "detail": "100 − 30 − 30 = 40 reserve (at least 30) and 12° is within the 15° limit.",
+     "payload": {"route": "B"}
+    },
+    {
+     "id": "C",
+     "label": "Route C · Shadow floor (10 km, 40 each way, max 18°)",
+     "detail": "100 − 40 − 40 = 20 reserve (below 30) and 18° exceeds the 15° limit.",
+     "payload": {"route": "C"},
+     "feedback": "Route C fails both constraints: 18° exceeds the 15° slope limit and 20 reserve is below the mandatory 30."
+    }
+   ],
+   "no_go_role": "amara",
+   "poll": ["amara", "rafi", "kai", "mei"]
+  },
+  "p07_verify_slope": {
+   "id": "p07_verify_slope",
+   "scene": "EX-CH04-S03",
+   "title": "Verify maximum route slope",
+   "goal": "Enter the maximum slope on Route B (12°, within the 15° limit)",
+   "why": "The base slope card and the rover headlight view must agree on a drivable grade.",
+   "kind": "number",
+   "payload_key": "slope",
+   "number": {
+    "label": "Maximum slope along Route B",
+    "min": 0,
+    "max": 30,
+    "step": 1,
+    "unit": "°"
+   },
+   "feedback": {
+    "wrong": "The surveyed ridge route has a 12° maximum slope, safely below the 15° rover limit.",
+    "low": "Enter a non-negative slope reading from the route card."
+   },
+   "no_go_role": "amara",
+   "poll": ["amara", "rafi"]
+  },
+  "p07_verify_return_reserve": {
+   "id": "p07_verify_return_reserve",
+   "scene": "EX-CH04-S03",
+   "title": "Verify round-trip return reserve",
+   "goal": "Enter the rover reserve remaining after 30 outbound and 30 return from 100 (40 units)",
+   "why": "100 minus 30 outbound minus 30 return leaves 40, above the mandatory 30 reserve.",
+   "kind": "number",
+   "payload_key": "reserve",
+   "number": {
+    "label": "Rover energy after round trip",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "units"
+   },
+   "feedback": {
+    "wrong": "Subtract 30 outbound and 30 return from 100: Route B leaves 40 reserve, above the 30 minimum.",
+    "low": "The rover must keep at least 30 return-reserve units."
+   },
+   "no_go_role": "rafi",
+   "poll": ["rafi", "kai", "amara"]
+  },
+  "p07_prepare_departure": {
+   "id": "p07_prepare_departure",
+   "scene": "EX-CH04-S03",
+   "title": "Commit ridge departure",
+   "goal": "Confirm both slope and reserve checks and depart for the surveyed ridge",
+   "why": "Returning is part of the objective.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "kai", "amara", "mei"]
+  },
+  "p07_place_beacon_1": {
+   "id": "p07_place_beacon_1",
+   "scene": "EX-CH04-S04",
+   "title": "Place and link-test beacon one",
+   "goal": "Mount beacon one on its approved pad and verify the link to Aurora before the first blind corner",
+   "why": "A beacon counts only when its next-hop link test passes.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "amara"]
+  },
+  "p07_place_beacon_2": {
+   "id": "p07_place_beacon_2",
+   "scene": "EX-CH04-S04",
+   "title": "Place and link-test beacon two",
+   "goal": "Align beacon two on the mid-ridge pad and pass the hop test to beacon one",
+   "why": "Each corner is a Go/No-Go on communication continuity.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "amara"]
+  },
+  "p07_place_beacon_3": {
+   "id": "p07_place_beacon_3",
+   "scene": "EX-CH04-S04",
+   "title": "Place and link-test beacon three",
+   "goal": "Mount beacon three at the cold-trap rim and verify the full three-beacon chain",
+   "why": "All three beacons link the shadow floor back to Aurora.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "amara", "kai"]
+  },
+  "p07_record_dry_reference": {
+   "id": "p07_record_dry_reference",
+   "scene": "EX-CH04-S05",
+   "title": "Record dry reference reading",
+   "goal": "Touch the scanner to the dry reference patch and record baseline signal 2",
+   "why": "Every positive claim depends on a known dry reference.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "kai"]
+  },
+  "p07_set_threshold_12": {
+   "id": "p07_set_threshold_12",
+   "scene": "EX-CH04-S05",
+   "title": "Set calibrated detection threshold",
+   "goal": "Choose dry reference 2 and detection threshold 2 + 10 = 12",
+   "why": "Only readings at or above reference plus 10 count as verified ice.",
+   "kind": "choice",
+   "options": [
+    {
+     "id": "uncalibrated",
+     "label": "Uncalibrated visual brightness (threshold 0)",
+     "detail": "Treat every bright surface patch as water ice.",
+     "payload": {"reference": 0, "threshold": 0},
+     "feedback": "Visual brightness alone cannot prove water ice. Use dry reference 2 plus 10 for threshold 12."
+    },
+    {
+     "id": "calibrated_12",
+     "label": "Calibrated threshold: dry reference 2 + 10 = 12",
+     "detail": "Baseline 2 plus the 10-unit margin sets the threshold at 12.",
+     "payload": {"reference": 2, "threshold": 12}
+    }
+   ],
+   "no_go_role": "amara",
+   "poll": ["amara", "kai", "rafi"]
+  },
+  "p07_tag_positive_18": {
+   "id": "p07_tag_positive_18",
+   "scene": "EX-CH04-S05",
+   "title": "Tag first positive sample (18)",
+   "goal": "Verify and tag sample reading 18 above the threshold of 12",
+   "why": "Reading 18 is six units above the calibrated threshold.",
+   "kind": "number",
+   "payload_key": "reading",
+   "number": {
+    "label": "First positive sample reading",
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "unit": "counts"
+   },
+   "feedback": {
+    "wrong": "Only readings 18 and 19 are above the threshold of 12 in the cold-trap survey.",
+    "low": "Reading 2 is at the dry baseline; choose a positive reading above 12."
+   },
+   "no_go_role": "kai",
+   "poll": ["kai", "amara"]
+  },
+  "p07_tag_positive_19": {
+   "id": "p07_tag_positive_19",
+   "scene": "EX-CH04-S05",
+   "title": "Tag second positive sample (19)",
+   "goal": "Verify and tag sample reading 19 above the threshold of 12",
+   "why": "Repeating and tagging the second positive reading confirms patchy ice.",
+   "kind": "number",
+   "payload_key": "reading",
+   "number": {
+    "label": "Second positive sample reading",
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "unit": "counts"
+   },
+   "feedback": {
+    "wrong": "Only readings 18 and 19 are positive in the supplied survey.",
+    "low": "Choose the second positive reading above threshold 12."
+   },
+   "no_go_role": "kai",
+   "poll": ["kai", "amara"]
+  },
+  "p07_retain_negative_2": {
+   "id": "p07_retain_negative_2",
+   "scene": "EX-CH04-S05",
+   "title": "Retain negative control (2)",
+   "goal": "Record sample reading 2 as the negative control alongside 18 and 19",
+   "why": "Keeping the negative sample is what makes the two positives believable.",
+   "kind": "number",
+   "payload_key": "reading",
+   "number": {
+    "label": "Negative control reading",
+    "min": 0,
+    "max": 25,
+    "step": 1,
+    "unit": "counts"
+   },
+   "feedback": {
+    "wrong": "Reading 2 is the negative control that matches the dry reference.",
+    "low": "Reading 2 is the negative control."
+   },
+   "no_go_role": "amara",
+   "poll": ["amara", "rafi"]
+  },
+  "p07_seal_sample": {
+   "id": "p07_seal_sample",
+   "scene": "EX-CH04-S06",
+   "title": "Seal positive ice sample",
+   "goal": "Seal one verified positive sample in its container separately from the vault case",
+   "why": "Two discoveries require two separate records.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "amara"]
+  },
+  "p07_commit_return_route": {
+   "id": "p07_commit_return_route",
+   "scene": "EX-CH04-S06",
+   "title": "Verify return reserve before recovery",
+   "goal": "Confirm the 40-unit return reserve on Route B before starting the vault recovery",
+   "why": "Curiosity stays inside the return plan.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "kai", "amara"]
+  },
+  "p08_read_external_probe": {
+   "id": "p08_read_external_probe",
+   "scene": "EX-CH04-S07",
+   "title": "Read external shell probe",
+   "goal": "Measure the cold outer shell while leaving the inner biological seal untouched",
+   "why": "Shell temperature is not a reason to open the case outside.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["rafi", "amara"]
+  },
+  "p08_fit_sleeve": {
+   "id": "p08_fit_sleeve",
+   "scene": "EX-CH04-S07",
+   "title": "Fit insulated sleeve",
+   "goal": "Slide the insulated thermal sleeve over the closed vault case",
+   "why": "The sleeve prevents rapid thermal shock during transport.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "kai"]
+  },
+  "p08_latch_cradle": {
+   "id": "p08_latch_cradle",
+   "scene": "EX-CH04-S07",
+   "title": "Latch transport cradle",
+   "goal": "Seat the sleeved case into the two-point transport cradle",
+   "why": "Probe, sleeve, cradle — inner seal stays closed.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "kai"]
+  },
+  "p08_secure_mount": {
+   "id": "p08_secure_mount",
+   "scene": "EX-CH04-S07",
+   "title": "Secure and lock-test rover mount",
+   "goal": "Latch the cradle to the rover cargo mount and verify the physical lock test",
+   "why": "An indicator showing closed is verified by a pull test.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "kai",
+   "poll": ["kai", "rafi"]
+  },
+  "p08_return_to_base": {
+   "id": "p08_return_to_base",
+   "scene": "EX-CH04-S08",
+   "title": "Return to Aurora airlock",
+   "goal": "Complete the return leg along the three-beacon ridge with 40 reserve remaining",
+   "why": "The saved reserve forecast is kept beside the actual arrival reading.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "kai", "amara"]
+  },
+  "p08_dock_dry_glovebox": {
+   "id": "p08_dock_dry_glovebox",
+   "scene": "EX-CH04-S08",
+   "title": "Dock sealed case in dry glovebox",
+   "goal": "Transfer the unopened case into the dry nitrogen quarantine glovebox",
+   "why": "Dry glovebox air prevents moisture from condensing on cold metal and seeds.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "mei"]
+  },
+  "p08_warm_cold": {
+   "id": "p08_warm_cold",
+   "scene": "EX-CH04-S08",
+   "title": "Begin sealed warm-up (cold stage)",
+   "goal": "Start the three-stage sealed warm-up from the cold baseline toward cool",
+   "why": "Gradual warming in a closed dry container protects dry seed coats.",
+   "kind": "choice",
+   "options": [
+    {
+     "id": "open_cold",
+     "label": "Open inner seal immediately while cold",
+     "detail": "Skip staged warming to inspect the seeds right away.",
+     "payload": {"stage": "open_now"},
+     "feedback": "Blocked by Flight Rule FR-06: opening a cold container before dry warm-up causes condensation on the dry specimens."
+    },
+    {
+     "id": "stage_cool",
+     "label": "Keep sealed and advance from cold to cool stage",
+     "detail": "First confirmed warm-up stage inside the dry glovebox.",
+     "payload": {"stage": "cool"}
+    }
+   ],
+   "no_go_role": "amara",
+   "poll": ["amara", "mei", "rafi"]
+  },
+  "p08_warm_cool": {
+   "id": "p08_warm_cool",
+   "scene": "EX-CH04-S08",
+   "title": "Hold cool equilibration stage",
+   "goal": "Confirm temperature stabilisation at the intermediate cool stage",
+   "why": "Each warm-up stage equilibrates before the next step.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "mei"]
+  },
+  "p08_warm_room": {
+   "id": "p08_warm_room",
+   "scene": "EX-CH04-S08",
+   "title": "Finish sealed warm-up (room stage)",
+   "goal": "Complete the third warm-up stage to room temperature while still sealed",
+   "why": "The sealed warm-up finishes at room stage before the condensation check.",
+   "kind": "choice",
+   "options": [
+    {
+     "id": "stay_cool",
+     "label": "Open while still cool",
+     "detail": "Stop before reaching room temperature.",
+     "payload": {"stage": "cool"},
+     "feedback": "The sealed warm-up must finish at room stage so no temperature differential remains when opened."
+    },
+    {
+     "id": "stage_room",
+     "label": "Equilibrate at room stage",
+     "detail": "Third confirmed warm-up stage complete.",
+     "payload": {"stage": "room"}
+    }
+   ],
+   "no_go_role": "amara",
+   "poll": ["amara", "mei"]
+  },
+  "p08_check_condensation": {
+   "id": "p08_check_condensation",
+   "scene": "EX-CH04-S08",
+   "title": "Verify zero condensation",
+   "goal": "Confirm no condensation formed during the three-stage dry warm-up",
+   "why": "Stable and dry is the gate to opening the inner biological seal.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "rafi"]
+  },
+  "p08_open_inner_seal": {
+   "id": "p08_open_inner_seal",
+   "scene": "EX-CH04-S08",
+   "title": "Open inner biological seal",
+   "goal": "Unlatch the inner biological seal inside the dry quarantine glovebox",
+   "why": "All three warm-up stages and the dry check have passed.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "mei",
+   "poll": ["mei", "amara", "rafi"]
+  },
+  "p08_inventory_12": {
+   "id": "p08_inventory_12",
+   "scene": "EX-CH04-S08",
+   "title": "Inventory twelve vault specimens",
+   "goal": "Count the 12 distinct physical seed specimens in the vault wells (separate from album pages)",
+   "why": "Twelve distinct specimens, twelve condition entries.",
+   "kind": "number",
+   "payload_key": "count",
+   "number": {
+    "label": "Distinct physical vault specimens",
+    "min": 0,
+    "max": 20,
+    "step": 1,
+    "unit": "specimens"
+   },
+   "feedback": {
+    "wrong": "Count only the twelve physical specimen wells in the vault case, not collection album pages.",
+    "low": "The vault inventory requires all twelve distinct specimens."
+   },
+   "no_go_role": "rafi",
+   "poll": ["rafi", "mei", "amara", "kai"]
+  },
+  "p08_scan_lid": {
+   "id": "p08_scan_lid",
+   "scene": "EX-CH04-S09",
+   "title": "Scan inner lid inscription",
+   "goal": "Scan the handwritten note inside the vault lid",
+   "why": "The lid says: ask Commander Ferreira about Expedition Zero.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "mei",
+   "poll": ["mei", "kai"]
+  },
+  "p08_save_viability_pending": {
+   "id": "p08_save_viability_pending",
+   "scene": "EX-CH04-S09",
+   "title": "Set quarantine viability status",
+   "goal": "Record the twelve dry specimens as pending viability evaluation, not assumed healthy",
+   "why": "Dry storage preserves labels and seed coats; germination requires its own later test.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "mei"]
+  },
+  "p08_transfer_case": {
+   "id": "p08_transfer_case",
+   "scene": "EX-CH04-S09",
+   "title": "Store vault lot in quarantine bay",
+   "goal": "Lock the twelve-specimen vault ledger separately from the thirty founder seeds",
+   "why": "Each seed collection keeps its own chain of custody.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "mei"]
+  },
+  "p08_manifest_reconciled": {
+   "id": "p08_manifest_reconciled",
+   "scene": "EX-CH04-S10",
+   "title": "Reconcile vault manifest",
+   "goal": "Match all twelve specimen labels to the 2034 vault ledger",
+   "why": "Every well matches its recorded cultivar and condition entry.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "amara", "mei"]
+  },
+  "p08_personnel_home": {
+   "id": "p08_personnel_home",
+   "scene": "EX-CH04-S10",
+   "title": "Confirm field team home",
+   "goal": "Close the rover manifest with Kai and Rafi safely back inside Aurora",
+   "why": "Both ledgers reconcile without double-charging.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "kai", "amara", "mei"]
+  },
+  "p08_quarantine_complete": {
+   "id": "p08_quarantine_complete",
+   "scene": "EX-CH04-S10",
+   "title": "Sign quarantine completion",
+   "goal": "Sign the dry-quarantine handover for the twelve vault specimens",
+   "why": "Cotton and eleven companion lots remain sealed pending approved planting.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "mei"]
+  },
+  "p08_send_manifest": {
+   "id": "p08_send_manifest",
+   "scene": "EX-CH04-S11",
+   "title": "Send reconciled manifest to Earth",
+   "goal": "Transmit the twelve-specimen manifest and lid scan to Earth support",
+   "why": "Exact evidence goes first.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "rafi"]
+  },
+  "p08_record_ferreira_question": {
+   "id": "p08_record_ferreira_question",
+   "scene": "EX-CH04-S11",
+   "title": "Include the lid question for Ferreira",
+   "goal": "Ask Commander Ferreira what happened to Expedition Zero's garden",
+   "why": "The inscription supports a question, not a verdict.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "mei",
+   "poll": ["mei", "kai"]
+  },
+  "p08_leave_identity_open": {
+   "id": "p08_leave_identity_open",
+   "scene": "EX-CH04-S11",
+   "title": "Keep the writer's name open",
+   "goal": "Leave the gardener's full name unguessed until signed evidence is shared",
+   "why": "An initial on a lid is not a full identity.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "mei"]
+  },
+  "p08_check_relief_flight": {
+   "id": "p08_check_relief_flight",
+   "scene": "EX-CH04-S12",
+   "title": "Check December relief flight schedule",
+   "goal": "Confirm Ferreira departs Earth 8 December and lands at Aurora 12 December",
+   "why": "Transit dates explain when the fifth crew member joins the station.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "amara",
+   "poll": ["amara", "kai"]
+  },
+  "p08_prepare_locker": {
+   "id": "p08_prepare_locker",
+   "scene": "EX-CH04-S12",
+   "title": "Prepare the fifth locker and mug",
+   "goal": "Ready the fifth locker and place Ferreira's mug at the Commons table",
+   "why": "Welcome the engineer home with a prepared station.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "kai",
+   "poll": ["kai", "mei"]
+  },
+  "p08_confirm_december_transition": {
+   "id": "p08_confirm_december_transition",
+   "scene": "EX-CH04-S12",
+   "title": "Confirm December handover",
+   "goal": "Close Chapter 4 with Route B verified, 12 vault specimens quarantined, and five-crew prep ready",
+   "why": "The station is ready for the December relief landing.",
+   "kind": "confirm",
+   "payload": {},
+   "no_go_role": "rafi",
+   "poll": ["rafi", "amara", "mei", "kai"]
+  }
+ }
+}

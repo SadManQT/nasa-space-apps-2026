@@ -187,7 +187,7 @@ func _test_registry_honesty() -> void:
 	var registry := RegistryScript.new()
 	var validation := registry.validate_honesty()
 	_check(bool(validation.get("valid", false)), "mission registry loads 32 canonical missions and exposes honest blocked gates")
-	_check(int(validation.get("status", {}).get("implemented_count", 0)) == 8 and int(validation.get("status", {}).get("unimplemented_count", 0)) == 24, "registry distinguishes the four Chapter 1 and four Chapter 2 adapters from 24 unimplemented missions")
+	_check(int(validation.get("status", {}).get("implemented_count", 0)) == 16 and int(validation.get("status", {}).get("unimplemented_count", 0)) == 16, "registry distinguishes the sixteen implemented missions (Chapters 1, 2, 5 and 7) from 16 unimplemented missions")
 	var later = registry.create("EX-M0201")
 	var later_status: Dictionary = later.status()
 	_check(String(later_status.get("status", "")) in ["ready", "active", "complete"] and later_status.get("missing_scene_ids", []).size() == 3, "Chapter 2 mission status exposes its three physical scene gates")
@@ -210,6 +210,9 @@ func _test_chapter1_route_order_and_physical_gates() -> void:
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S03", "S02 advances in canonical order")
 	for target_id in ["calibrate_probe", "span_probe", "recheck_probe", "inspect_packet", "compare_atmosphere"]:
 		print("BEGIN S03 ", target_id)
+		# M1-108: the probe transfer gates the dry-zero commit.
+		if target_id == "calibrate_probe":
+			PlantInput.complete_probe_transfer(route)
 		_check(bool(route.perform(target_id, PlantInput.payload(target_id)).get("accepted", false)), "S03 P-01 physical action committed: " + target_id)
 	_check(bool(route.advance_scene().get("accepted", false)) and route.current_scene_id() == "EX-CH01-S04", "S03 advances only after calibration, provenance and atmosphere checks")
 	for target_id in ["plant_alo", "plant_tara", "water_alo", "water_tara", "label_alo", "label_tara", "seal_alo", "seal_tara", "record_paired_conditions", "confirm_services"]:

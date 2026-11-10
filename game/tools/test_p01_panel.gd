@@ -31,6 +31,9 @@ func _run() -> void:
 	campaign._refresh_world()
 	campaign.hud.refresh_scene()
 	await physics_frame
+	# M1-108: the probe transfer gates the dry-zero commit and its panel
+	# forecast, so the physical carry happens before the panel opens.
+	_check(bool(Inputs.complete_probe_transfer(campaign.route).accepted), "probe transfer completes before the calibration panel")
 	await _near(campaign, "calibrate_probe")
 	var before: Dictionary = campaign.route.snapshot()
 	var receipts: Dictionary = campaign.director.snapshot().interaction_receipts

@@ -5,7 +5,10 @@ const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const DispatcherScript = preload("res://scripts/interactions/interaction_dispatcher.gd")
 const WorldRouteScript = preload("res://scripts/world/world_route.gd")
 const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
+const RoomContractScript = preload("res://scripts/world/room_contract.gd")
+const CareRoundRuntimeScript = preload("res://scripts/campaign/care_round_runtime.gd")
 const P01Script = preload("res://scripts/missions/p01_commission_plant.gd")
+const ProbeJobScript = preload("res://scripts/payload/probe_calibration_job.gd")
 const PuzzleHostScript = preload("res://scripts/puzzles/puzzle_host.gd")
 const StateScript = preload("res://scripts/core/campaign_state.gd")
 const MissionTableScript = preload("res://scripts/puzzles/p02_mission_table.gd")
@@ -19,6 +22,7 @@ const SimulationScript = preload("res://scripts/simulation/expedition_simulation
 ## never satisfy a scene gate.
 
 var _p01: RefCounted
+var _probe_job: RefCounted
 var _scene_index := 0
 var _scene_flags := {}
 var _dialogue_acks := {}
@@ -35,6 +39,7 @@ func _init(director: RefCounted = null, skip_initial_scene: bool = false) -> voi
 	_world = WorldRouteScript.new(_director)
 	_create_dispatcher(DispatcherScript)
 	_p01 = P01Script.new()
+	_probe_job = ProbeJobScript.new()
 	for scene_id in GateCatalog.scene_ids():
 		_scene_flags[scene_id] = {}
 		_dialogue_acks[scene_id] = []
@@ -83,8 +88,16 @@ func p01_view(target_id: String) -> Dictionary:
 			var messages: Dictionary = view.profile.prerequisite_messages
 			var reason := String(messages.get(missing[0], "Complete the preceding P-01 step first.")) if not missing.is_empty() else ""
 			view.merge({"accepted": true, "target_id": target_id, "action": target.puzzle_action, "scene_id": current_scene_id(), "missing_flags": missing, "prerequisite_reason": reason})
+			if target_id == "calibrate_probe":
+				view["probe_job"] = _probe_job.view()
 			return view
 	return {"accepted": false, "reason": "This is not a P-01 target in the current scene."}
+
+## M1-108 opening physical job: the probe's retrieve-and-place dry-zero
+## transfer at the bench in EX-CH01-S03. The transfer gates set_zero; the
+## route never mints the zero reading itself.
+func probe_job() -> RefCounted:
+	return _probe_job
 
 ## The player's P-02 plan (P02MissionTable). The Mission Table UI edits it;
 ## P-02 gates commit exactly its plan.
@@ -444,6 +457,11 @@ func _submit_command(command: Dictionary, preview_only: bool) -> Dictionary:
 		duplicate["duplicate"] = true
 		duplicate["snapshot"] = _director.snapshot()
 		return duplicate
+	# M1-108: the dry zero is set by the physical transfer, not by typing
+	# numbers. Preview and commit both refuse until the probe has been
+	# carried from its rack to the bench cradle and the zero observed.
+	if target.has("puzzle_action") and String(target.get("puzzle_action", "")) == "set_zero" and not bool(_probe_job.completed()):
+		return {"accepted": false, "duplicate": false, "reason": "Carry the probe from its rack to the bench cradle and read the dry zero first."}
 	var payload: Dictionary = command.get("payload", {}) if command.get("payload", {}) is Dictionary else {}
 	if target.has("puzzle_action"):
 		var plant_check: Dictionary = _p01.preview(String(target.puzzle_action), payload)
@@ -496,6 +514,8 @@ func _apply_target_result(target_id: String, payload: Dictionary, result: Dictio
 		var p01_result: Dictionary = _p01.commit(action, "p01:" + target_id, p01_payload)
 		if bool(p01_result.get("accepted", false)) or bool(p01_result.get("duplicate", false)):
 			_apply_p01_flag(action)
+			if action == "set_zero" and bool(p01_result.get("accepted", false)):
+				_mark_flag("probe_zero_observed")
 			if action == "plant_alo" and bool(p01_result.get("accepted", false)):
 				_commit_plant_care("ALO-01", target.get("owning_scene_id", current_scene_id()))
 			if action == "plant_tara" and bool(p01_result.get("accepted", false)):
@@ -566,6 +586,67 @@ func _commit_plant_care(individual_id: String, scene_id: String) -> void:
 	}
 	_director.commit(command)
 
+## M1-49: the Care Round visit spec for the current Chapter 1 scene (S04
+## "record_paired_conditions", S05 "care_montage"), for the scene layer to
+## open CareRoundPanel with (CareRoundRuntime.open_round). Moisture comes
+## from the P-01 calibrated probe; temperature has no authored source in the
+## repo, so the scene layer supplies the live chamber reading at open time
+## and this returns {} for it — never an invented value. Without both
+## readings the round is observe-only. {} when the scene has no visit.
+func care_round_visit(scene_id: String) -> Dictionary:
+	if scene_id != current_scene_id():
+		return {}
+	if RoomContractScript.care_round(scene_id).is_empty():
+		return {}
+	var p01: Dictionary = _p01.snapshot()
+	return {
+		"accepted": true,
+		"scene_id": scene_id,
+		"dates": CareRoundRuntimeScript.visit_dates(scene_id),
+		"care_round": RoomContractScript.care_round(scene_id),
+		"moisture": {"ALO-01": float(p01.get("moisture_alo", 0.0)), "TARA-01": float(p01.get("moisture_tara", 0.0))},
+		"temperature": {},
+		"care_options": CareRoundRuntimeScript.default_care_options(),
+	}
+
+## M1-49: true when the photo ledger holds a dated photo for both plants on
+## the visit date (the Care Round's dated evidence, before 25 Apr in CH01).
+func care_round_photographed(scene_id: String, date: String) -> bool:
+	var snapshot: Dictionary = _director.snapshot()
+	return CareRoundRuntimeScript.has_photo(snapshot, "ALO-01", date) and CareRoundRuntimeScript.has_photo(snapshot, "TARA-01", date)
+
+## M1-49: the S02 roll-call inventory lamp blink (doc 24 §2.9 CH01 S02->S03).
+## Returns the cue the scene layer fires with CampaignRoom.trigger_cue once
+## the roll call is complete in EX-CH01-S02; {} otherwise, and only once per
+## scene (the room refuses a second blink; this keeps the request single).
+func request_inventory_lamp_blink() -> Dictionary:
+	if current_scene_id() != "EX-CH01-S02" or not _flag_is_set("roll_call_complete"):
+		return {}
+	var flags: Dictionary = _scene_flags.get("EX-CH01-S02", {})
+	if bool(flags.get("inventory_lamp_requested", false)):
+		return {}
+	flags["inventory_lamp_requested"] = true
+	_scene_flags["EX-CH01-S02"] = flags
+	return {"cue_id": "inventory_lamp", "scene_id": "EX-CH01-S02", "sfx_id": "SFX_INVENTORY_LAMP_TICK"}
+
+## M1-49: the record_moment command that names the four commons mugs at the
+## end of EX-CH01-S12 (CH01-MUGS-NAMED). Only valid while S12 is current;
+## {} anywhere else. The moment never gates progress.
+func mugs_named_moment_command() -> Dictionary:
+	if current_scene_id() != "EX-CH01-S12":
+		return {}
+	var query: Dictionary = _director.query()
+	return {
+		"command_id": "moment:CH01-MUGS-NAMED",
+		"issuer": "chapter1_route",
+		"owning_mission_id": current_mission_id(),
+		"owning_scene_id": "EX-CH01-S12",
+		"expected_state_revision": int(query.get("state_revision", 0)),
+		"target_id": "CH01-MUGS-NAMED",
+		"verb": "record_moment",
+		"payload": {"moment_id": "CH01-MUGS-NAMED"},
+	}
+
 func _mark_flag(flag: String) -> void:
 	if flag.is_empty():
 		return
@@ -581,6 +662,7 @@ func _local_snapshot() -> Dictionary:
 		"scene_flags": _scene_flags.duplicate(true),
 		"dialogue_acks": _dialogue_acks.duplicate(true),
 		"p01": _p01.snapshot(),
+		"probe_job": _probe_job.snapshot(),
 		"ending": _ending,
 		"world": _world.snapshot(),
 		"p02_table": _p02_table.snapshot(),
@@ -624,6 +706,12 @@ func _validate_local_snapshot(data: Dictionary) -> Dictionary:
 	var plant_check: Dictionary = P01Script.new().restore(data.p01)
 	if not bool(plant_check.get("accepted", false)):
 		return plant_check
+	# Saves written before the M1-108 probe job existed have no probe_job
+	# record; they resume with the transfer adopted from P-01 state below.
+	if data.has("probe_job"):
+		var probe_check: Dictionary = ProbeJobScript.new().restore(data.probe_job)
+		if not bool(probe_check.get("accepted", false)):
+			return probe_check
 	# Saves written before the Mission Table existed have no plan; they resume
 	# with an empty table rather than an invented plan.
 	if data.has("p02_table"):
@@ -661,6 +749,11 @@ func _restore_local(snapshot_data: Dictionary) -> void:
 	_dialogue_acks = snapshot_data.get("dialogue_acks", {}).duplicate(true)
 	_ending = String(snapshot_data.get("ending", ""))
 	_p01.restore(snapshot_data.get("p01", {}))
+	if snapshot_data.has("probe_job"):
+		_probe_job.restore(snapshot_data.get("probe_job", {}))
+	else:
+		_probe_job = ProbeJobScript.new()
+		_probe_job.restore_legacy_zero(bool(_p01.snapshot().get("probe_zeroed", false)))
 	_p02_table = MissionTableScript.new()
 	if snapshot_data.has("p02_table"):
 		_p02_table.restore(snapshot_data.p02_table)

@@ -6,9 +6,14 @@ const Chapter1RouteScript = preload("res://scripts/missions/chapter1_route.gd")
 const Chapter1MissionScript = preload("res://scripts/missions/chapter1_mission.gd")
 const Chapter2RouteScript = preload("res://scripts/missions/chapter2_route.gd")
 const Chapter2MissionScript = preload("res://scripts/missions/chapter2_mission.gd")
+const ExtendedRouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
+const Chapter5MissionScript = preload("res://scripts/missions/chapter5_mission.gd")
+const Chapter7MissionScript = preload("res://scripts/missions/chapter7_mission.gd")
 const UnimplementedMissionScript = preload("res://scripts/missions/unimplemented_mission.gd")
 const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const Chapter2GateCatalog = preload("res://scripts/missions/chapter2_gate_catalog.gd")
+const Chapter5GateCatalog = preload("res://scripts/missions/chapter5_gate_catalog.gd")
+const Chapter7GateCatalog = preload("res://scripts/missions/chapter7_gate_catalog.gd")
 
 var _content := {}
 var _route: RefCounted
@@ -30,7 +35,7 @@ func definition(mission_id: String) -> Dictionary:
 	return ContentScript.mission_by_id(_content, mission_id)
 
 func is_implemented(mission_id: String) -> bool:
-	return GateCatalog.mission_ids().has(mission_id) or Chapter2GateCatalog.mission_ids().has(mission_id)
+	return GateCatalog.mission_ids().has(mission_id) or Chapter2GateCatalog.mission_ids().has(mission_id) or Chapter5GateCatalog.mission_ids().has(mission_id) or Chapter7GateCatalog.mission_ids().has(mission_id)
 
 func create(mission_id: String, director: RefCounted = null, route: RefCounted = null):
 	var selected_director := director if director != null else _director
@@ -43,6 +48,14 @@ func create(mission_id: String, director: RefCounted = null, route: RefCounted =
 		if selected_route == null:
 			selected_route = Chapter2RouteScript.new(selected_director)
 		return Chapter2MissionScript.new(mission_id, selected_route)
+	if Chapter5GateCatalog.mission_ids().has(mission_id):
+		if selected_route == null:
+			selected_route = ExtendedRouteScript.new(selected_director)
+		return Chapter5MissionScript.new(mission_id, selected_route)
+	if Chapter7GateCatalog.mission_ids().has(mission_id):
+		if selected_route == null:
+			selected_route = ExtendedRouteScript.new(selected_director)
+		return Chapter7MissionScript.new(mission_id, selected_route)
 	var mission_definition := definition(mission_id)
 	return UnimplementedMissionScript.new(mission_id, mission_definition)
 

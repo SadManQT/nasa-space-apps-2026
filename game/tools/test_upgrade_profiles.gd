@@ -12,6 +12,8 @@ const Chapter2GateCatalog = preload("res://scripts/missions/chapter2_gate_catalo
 const ExtendedRouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const ExtendedGateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
 const ProgressionScript = preload("res://scripts/progression/cadet_progression.gd")
+const Chapter4Witness = preload("res://tools/support/chapter4_witness.gd")
+const Chapter6Witness = preload("res://tools/support/chapter6_witness.gd")
 const Chapter8Witness = preload("res://tools/support/chapter8_witness.gd")
 
 var checks := 0
@@ -138,6 +140,8 @@ func _test_all_128_upgrade_profiles() -> void:
 			if not wanted.has(action_id):
 				continue
 			var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+			payload = Chapter4Witness.payload(action_id, {}, payload)
+			payload = Chapter6Witness.payload(action_id, {}, payload)
 			payload = Chapter8Witness.payload(action_id, {}, payload)
 			payload["_puzzle_action"] = action_id
 			cmds.append({

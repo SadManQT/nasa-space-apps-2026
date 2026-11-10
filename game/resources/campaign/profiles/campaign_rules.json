@@ -166,5 +166,44 @@
       "For every hand that kept the light",
       "For the gardens we leave for others"
     ]
+  },
+  "chapter4": {
+    "source": "game-design/08_PUZZLE_DESIGNS.md P-07 and P-08 (accepted solutions); game-design/22_PUZZLE_CLUE_DESIGN.md section 6.",
+    "valid_route": "B",
+    "max_slope_limit": 15,
+    "min_return_reserve": 30,
+    "rover_energy": 100,
+    "route_b_allowance": 30,
+    "route_b_reserve": 40,
+    "route_b_slope": 12,
+    "dry_reference": 2,
+    "scanner_threshold": 12,
+    "positive_readings": [
+      18,
+      19
+    ],
+    "negative_reading": 2,
+    "warm_stage_1": "cool",
+    "warm_stage_2": "room",
+    "condensation_status": "NONE",
+    "vault_inventory_count": 12
+  },
+  "chapter6": {
+    "source": "game-design/08_PUZZLE_DESIGNS.md P-11 and P-12 (accepted solutions); game-design/22_PUZZLE_CLUE_DESIGN.md section 8.",
+    "eclipse_allocation_limit": 7,
+    "eclipse_jar_total": 14,
+    "eclipse_recovery_reserve": 7,
+    "eclipse_segments": 5,
+    "essentials_required": true,
+    "pump_required": true,
+    "camera_required": true,
+    "floods_allowed": 0,
+    "feeder_reset_sequence": [
+      "isolate",
+      "zero",
+      "reset",
+      "reconnect",
+      "camera_test"
+    ]
   }
 }

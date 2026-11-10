@@ -1,0 +1,418 @@
+{
+	"bridge_joins": [
+		{
+			"built_by": "canon",
+			"carries": "The fifth mug; the 8–12 Dec flight",
+			"from": "EX-CH04-S12",
+			"join": "CH04→CH05",
+			"kinds": "O, D",
+			"status": "Holds",
+			"to": "EX-CH05-S01"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The five-person roster; her mug carried to the table",
+			"from": "EX-CH05-S01",
+			"join": "CH05 S01→S02",
+			"kinds": "O",
+			"status": "Holds",
+			"to": "EX-CH05-S02"
+		},
+		{
+			"built_by": "chapter5_gate_catalog",
+			"carried_object": "sealed_document_sleeve",
+			"carries": "Ferreira unpacks a sealed document sleeve from her cargo and leaves it on her shelf; on 14 Dec she brings it to the table",
+			"from": "EX-CH05-S02",
+			"join": "CH05 S02→S03",
+			"kinds": "O, D",
+			"status": "Fix",
+			"to": "EX-CH05-S03"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The photograph of frozen trays",
+			"from": "EX-CH05-S03",
+			"join": "CH05 S03→S04",
+			"kinds": "O",
+			"status": "Holds",
+			"to": "EX-CH05-S04"
+		},
+		{
+			"built_by": "canon",
+			"carries": "Mei's revised caption; Ferreira watching",
+			"from": "EX-CH05-S04",
+			"join": "CH05 S04→S05",
+			"kinds": "O",
+			"status": "Holds",
+			"to": "EX-CH05-S05"
+		},
+		{
+			"built_by": "chapter5_gate_catalog",
+			"carried_object": "d9_left_object",
+			"carries": "The disagreement kept visible; the object Ferreira left on the table (24 §5 D9)",
+			"from": "EX-CH05-S05",
+			"join": "CH05 S05→S06",
+			"kinds": "Q, O",
+			"status": "Holds",
+			"to": "EX-CH05-S06"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The repair procedure opens without Earth; the observation clock",
+			"from": "EX-CH05-S06",
+			"join": "CH05 S06→S07",
+			"kinds": "T",
+			"status": "Holds",
+			"to": "EX-CH05-S07"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The observation clock carried into maintenance",
+			"from": "EX-CH05-S07",
+			"join": "CH05 S07→S08",
+			"kinds": "T",
+			"status": "Holds",
+			"to": "EX-CH05-S08"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The completed report",
+			"from": "EX-CH05-S08",
+			"join": "CH05 S08→S09",
+			"kinds": "O",
+			"status": "Holds",
+			"to": "EX-CH05-S09"
+		},
+		{
+			"built_by": "canon",
+			"carries": "Mei: 'An initial leads us. A record finishes it.' (EX-CH05-S09-L04); Rao's call brings a signed page",
+			"from": "EX-CH05-S09",
+			"join": "CH05 S09→S10",
+			"kinds": "L, O",
+			"status": "Holds",
+			"to": "EX-CH05-S10"
+		},
+		{
+			"built_by": "canon",
+			"carries": "The journal expands N. into Noor's full name",
+			"from": "EX-CH05-S10",
+			"join": "CH05 S10→S11",
+			"kinds": "O",
+			"status": "Holds",
+			"to": "EX-CH05-S11"
+		},
+		{
+			"built_by": "canon",
+			"carries": "Delivered; no immediate voice; a text the next day",
+			"from": "EX-CH05-S11",
+			"join": "CH05 S11→S12",
+			"kinds": "Q, D",
+			"status": "Holds",
+			"to": "EX-CH05-S12"
+		},
+		{
+			"built_by": "canon",
+			"carries": "Kai's marker tape on the guide-light circuit",
+			"from": "EX-CH05-S12",
+			"join": "CH05→CH06",
+			"kinds": "O",
+			"status": "Holds",
+			"to": "EX-CH06-S01"
+		}
+	],
+	"chapter": 5,
+	"dates": "12–15 December 2046",
+	"gates": [
+		{
+			"decision_choice_id": "EX-CH05-S01-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S01-L01",
+				"EX-CH05-S01-L02",
+				"EX-CH05-S01-L03",
+				"EX-CH05-S01-L04"
+			],
+			"exit_condition": "Clearance, seals and five-person roster verified.",
+			"mission_id": "EX-M0501",
+			"point_of_view": "Rafi",
+			"predicate_id": "PRED-EX-CH05-S01-EXIT",
+			"required_physical": [
+				"p09_check_lander_clearance_done",
+				"p09_check_seals_done",
+				"p09_verify_five_person_roster_done"
+			],
+			"room_id": "LOC-08",
+			"scene_id": "EX-CH05-S01",
+			"story_time": "12 December 2046, scheduled arrival",
+			"supported_option_id": "EX-CH05-S01-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH05-S02-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S02-L01",
+				"EX-CH05-S02-L02",
+				"EX-CH05-S02-L03",
+				"EX-CH05-S02-L04"
+			],
+			"exit_condition": "Spare stored once, procedure available locally, readings reconciled.",
+			"mission_id": "EX-M0501",
+			"point_of_view": "Amara",
+			"predicate_id": "PRED-EX-CH05-S02-EXIT",
+			"required_physical": [
+				"p09_store_spare_once_done",
+				"p09_run_arrival_readings_done",
+				"p09_reconcile_readings_done"
+			],
+			"room_id": "LOC-02",
+			"scene_id": "EX-CH05-S02",
+			"story_time": "12 December, after arrival",
+			"supported_option_id": ""
+		},
+		{
+			"decision_choice_id": "EX-CH05-S03-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S03-L01",
+				"EX-CH05-S03-L02",
+				"EX-CH05-S03-L03",
+				"EX-CH05-S03-L04"
+			],
+			"exit_condition": "Supported sequence and all-crew-returned conclusion committed.",
+			"mission_id": "EX-M0501",
+			"point_of_view": "Amara",
+			"predicate_id": "PRED-EX-CH05-S03-EXIT",
+			"required_physical": [
+				"p09_commit_sequence_done"
+			],
+			"room_id": "LOC-01",
+			"scene_id": "EX-CH05-S03",
+			"story_time": "14 December, afternoon",
+			"supported_option_id": "EX-CH05-S03-OPT01"
+		},
+		{
+			"decision_choice_id": "EX-CH05-S04-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S04-L01",
+				"EX-CH05-S04-L02",
+				"EX-CH05-S04-L03",
+				"EX-CH05-S04-L04"
+			],
+			"exit_condition": "The old 2034 trial is documented as young unflowered seedlings only, without flower buds, pollination or seed production.",
+			"mission_id": "EX-M0502",
+			"point_of_view": "Mei",
+			"predicate_id": "PRED-EX-CH05-S04-EXIT",
+			"required_physical": [
+				"p10_document_young_trial_done",
+				"p10_exclude_flower_claim_done",
+				"p10_save_source_scope_done"
+			],
+			"room_id": "LOC-01",
+			"scene_id": "EX-CH05-S04",
+			"story_time": "14 December, afternoon",
+			"supported_option_id": "EX-CH05-S04-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH05-S05-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S05-L01",
+				"EX-CH05-S05-L02",
+				"EX-CH05-S05-L03",
+				"EX-CH05-S05-L04"
+			],
+			"exit_condition": "Both factual topics acknowledged; all safety information remains available.",
+			"mission_id": "EX-M0502",
+			"point_of_view": "Mei",
+			"predicate_id": "PRED-EX-CH05-S05-EXIT",
+			"required_physical": [
+				"p10_acknowledge_ferreira_facts_done",
+				"p10_acknowledge_personal_question_done",
+				"p10_preserve_safety_facts_done"
+			],
+			"room_id": "LOC-01",
+			"scene_id": "EX-CH05-S05",
+			"story_time": "14 December, late afternoon",
+			"supported_option_id": ""
+		},
+		{
+			"decision_choice_id": "EX-CH05-S06-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S06-L01",
+				"EX-CH05-S06-L02",
+				"EX-CH05-S06-L03",
+				"EX-CH05-S06-L04"
+			],
+			"exit_condition": "Both comparisons complete; spare unused and present radio working.",
+			"mission_id": "EX-M0502",
+			"point_of_view": "Kai",
+			"predicate_id": "PRED-EX-CH05-S06-EXIT",
+			"required_physical": [
+				"p10_compare_dust_repair_done",
+				"p10_compare_leak_repair_done",
+				"p10_keep_spare_present_done"
+			],
+			"room_id": "LOC-01",
+			"scene_id": "EX-CH05-S06",
+			"story_time": "14 December, before night observation",
+			"supported_option_id": ""
+		},
+		{
+			"decision_choice_id": "EX-CH05-S07-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S07-L01",
+				"EX-CH05-S07-L02",
+				"EX-CH05-S07-L03",
+				"EX-CH05-S07-L04"
+			],
+			"exit_condition": "Six genuine flashes verified and both artifacts rejected.",
+			"mission_id": "EX-M0503",
+			"point_of_view": "Rafi",
+			"predicate_id": "PRED-EX-CH05-S07-EXIT",
+			"required_physical": [
+				"p10_verify_flashes_done"
+			],
+			"room_id": "LOC-01",
+			"scene_id": "EX-CH05-S07",
+			"story_time": "14 December, night observation",
+			"supported_option_id": "EX-CH05-S07-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH05-S08-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S08-L01",
+				"EX-CH05-S08-L02",
+				"EX-CH05-S08-L03",
+				"EX-CH05-S08-L04"
+			],
+			"exit_condition": "Both repairs verified by relevant measurements; protection upgrade not owned until chapter completion.",
+			"mission_id": "EX-M0503",
+			"point_of_view": "Amara",
+			"predicate_id": "PRED-EX-CH05-S08-EXIT",
+			"required_physical": [
+				"p10_clean_panel_done",
+				"p10_patch_dome_spur_done",
+				"p10_verify_pressure_done"
+			],
+			"room_id": "LOC-02",
+			"scene_id": "EX-CH05-S08",
+			"story_time": "14 December, scheduled maintenance",
+			"supported_option_id": "EX-CH05-S08-OPT02"
+		},
+		{
+			"decision_choice_id": "EX-CH05-S09-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S09-L01",
+				"EX-CH05-S09-L02",
+				"EX-CH05-S09-L03",
+				"EX-CH05-S09-L04"
+			],
+			"exit_condition": "Complete report excludes the unsupported historical impact claim.",
+			"mission_id": "EX-M0503",
+			"point_of_view": "Rafi",
+			"predicate_id": "PRED-EX-CH05-S09-EXIT",
+			"required_physical": [
+				"p10_exclude_unsupported_impact_claim_done",
+				"p10_save_report_done"
+			],
+			"room_id": "LOC-01",
+			"scene_id": "EX-CH05-S09",
+			"story_time": "14 December, after maintenance",
+			"supported_option_id": ""
+		},
+		{
+			"decision_choice_id": "EX-CH05-S10-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S10-L01",
+				"EX-CH05-S10-L02",
+				"EX-CH05-S10-L03",
+				"EX-CH05-S10-L04"
+			],
+			"exit_condition": "Noor identity, survival and founder role established with consented evidence.",
+			"mission_id": "EX-M0504",
+			"point_of_view": "Mei",
+			"predicate_id": "PRED-EX-CH05-S10-EXIT",
+			"required_physical": [
+				"p10_match_noor_identity_done",
+				"p10_record_consent_done",
+				"p10_confirm_founder_role_done"
+			],
+			"room_id": "LOC-01",
+			"scene_id": "EX-CH05-S10",
+			"story_time": "14 December, later",
+			"supported_option_id": ""
+		},
+		{
+			"decision_choice_id": "EX-CH05-S11-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S11-L01",
+				"EX-CH05-S11-L02",
+				"EX-CH05-S11-L03",
+				"EX-CH05-S11-L04"
+			],
+			"exit_condition": "Invitation delivered once; first live Noor voice remains reserved for Chapter 8.",
+			"mission_id": "EX-M0504",
+			"point_of_view": "Mei",
+			"predicate_id": "PRED-EX-CH05-S11-EXIT",
+			"required_physical": [
+				"p10_send_invitation_done"
+			],
+			"room_id": "LOC-01",
+			"scene_id": "EX-CH05-S11",
+			"story_time": "14 December, after the reveal",
+			"supported_option_id": ""
+		},
+		{
+			"decision_choice_id": "EX-CH05-S12-CHOICE",
+			"dialogue_ids": [
+				"EX-CH05-S12-L01",
+				"EX-CH05-S12-L02",
+				"EX-CH05-S12-L03",
+				"EX-CH05-S12-L04"
+			],
+			"exit_condition": "Cotton planted Dec 15; eleven vault specimens and thirty founder seeds protected.",
+			"mission_id": "EX-M0504",
+			"point_of_view": "Mei",
+			"predicate_id": "PRED-EX-CH05-S12-EXIT",
+			"required_physical": [
+				"p10_plant_cotton_done",
+				"p10_protect_eleven_vault_done",
+				"p10_protect_founder_reserve_done"
+			],
+			"room_id": "LOC-03",
+			"scene_id": "EX-CH05-S12",
+			"story_time": "15 December; dated care into January",
+			"supported_option_id": "EX-CH05-S12-OPT01"
+		}
+	],
+	"minutes": 85,
+	"predecessor_scene": "EX-CH04-S12",
+	"ramim_seams": [
+		{
+			"behaviour": "Rendered mission Report Card at the end of each Chapter 5 mission (debrief outcome, ledger deltas, bounded conclusion)",
+			"ramim_task": "M3-64",
+			"seam": "Chapter5Mission.report_card_payload(scene_id) builds the exact card data (outcome, deltas, debrief lines); report_ready() stays false until M3-64 renders it."
+		},
+		{
+			"behaviour": "Delivery and rendering of the Chapter 5 join messages (25 §5: at least 2 per join; game/resources/campaign/content/messages/ch05.json already carries 2 per join)",
+			"ramim_task": "M3-64",
+			"seam": "Message data is verified read-only by the mission tests; delivery/rendering waits on M3-64. No message text is authored here."
+		},
+		{
+			"behaviour": "EVA dosimeter use and any outside preparation for the impact-flash observation (EX-CH05-S07)",
+			"ramim_task": "M3-61",
+			"seam": "S07 is instrument-led from inside by design ('nobody must rush outside for a better view'); the mission records no EVA step. Physical EVA dosimeter use plugs into the S07 observation log when M3-61 lands."
+		},
+		{
+			"behaviour": "Shield-maintenance sortie and relief-cargo delivery runtime (25 §4.3 journey: unloading Ferreira's relief cargo as deliveries)",
+			"ramim_task": "M3-65",
+			"seam": "Cargo is handled inside the chapter as physical targets (p09_check_seals, p09_store_spare_once); the delivery-system runtime and the sortie itself wait on M3-65."
+		},
+		{
+			"behaviour": "Shared hazard-system runtime hooks for the impact-flash hazard (hazard state, EVA exposure)",
+			"ramim_task": "M3-65",
+			"seam": "The hazard is presented as the P-10 teaching sequence (instrument view, amplified flashes, no meteor trails); hazard-system state hooks wait on M3-65."
+		}
+	],
+	"title": "Shooting Stars",
+	"upgrade_pair": [
+		"dust_shield",
+		"whipple_bumper"
+	]
+}

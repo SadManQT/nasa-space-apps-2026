@@ -1,0 +1,52 @@
+{
+  "command": [
+    "C:\\Program Files\\Python313\\python.exe",
+    "-c",
+    "import os,pathlib; pathlib.Path(os.environ['TEST_LOG_DIR'],'setup.log').write_text('ERROR: nested import fault\\n'); print('1/1 suites passed')"
+  ],
+  "pid": 24588,
+  "start_utc_epoch": 1794253219.0381222,
+  "duration_seconds": 0.087,
+  "timed_out": false,
+  "termination": {
+    "needed": false
+  },
+  "raw_exit_code": 0,
+  "unsigned_exit_hex": "0x0",
+  "effective_exit_code": 0,
+  "log_sha256": "7783882b3b424e4cae5b4487ab9f7a4196f5bfaa85bc1c461cecaa2e448ed85d",
+  "test_log_dir": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\collector_selfcheck\\nested_error_runner_logs",
+  "isolated_env": {
+    "APPDATA": "C:\\Users\\sayem\\AppData\\Roaming",
+    "LOCALAPPDATA": "C:\\Users\\sayem\\AppData\\Local",
+    "TEMP": "C:\\Users\\sayem\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\sayem\\AppData\\Local\\Temp"
+  },
+  "script_error_lines": [],
+  "generic_error_lines": [
+    "ERROR: nested import fault"
+  ],
+  "generic_error_count": 1,
+  "warning_count": 0,
+  "last_printed_reimport": null,
+  "suite_summary": [
+    "1/1 suites passed"
+  ],
+  "setup_failure": false,
+  "native_crash_signature": false,
+  "audited_logs": [
+    {
+      "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\collector_selfcheck\\nested_error_runner_logs\\setup.log",
+      "sha256": "bc9f012b4dfa38b5d5a27042bb6dd0ced5359bffac7e85d34db62e6aa943df37",
+      "engine_errors": [
+        "ERROR: nested import fault"
+      ],
+      "script_errors": [],
+      "warning_count": 0,
+      "last_printed_reimport": null,
+      "suite_summary": [],
+      "setup_failure": false,
+      "native_crash_signature": false
+    }
+  ]
+}
