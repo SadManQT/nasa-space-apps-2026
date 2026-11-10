@@ -2,6 +2,10 @@
 
 The user explicitly authorized Ramim to override former folder/task owners for this integration repair. Existing peer commits, claims and saved WIP remain preserved. Videos, submission, release packaging and manual qualification remain deferred.
 
+## Accepted final verification
+
+**119/119 suites pass across the user-accepted partitions: Ramim1-41 plus Sadman/Claude42-119.** The game tree is identical across both source commits. This is combined coverage across Windows and macOS, not one uninterrupted runner invocation. At the user's explicit request no game tests were repeated for finishing. [Exact results, raw local logs and limitations](combined119/README.md). M1-125 and Ramim's current implementation/acceptance rows are closed; original-host performance has separate two-run618/0 evidence. The checkpoints below remain historical and retain every prior failure.
+
 ## Continuation after Argon
 
 Argon0740b3de startup, terrain, HUD and dialogue work was preserved and merged with the published owner deliveries. Its [91 saved suite logs](full_117_0740b3de/provenance.json) are85pass/6setup failures, without a complete117-suite result. All six pass in the complete checkout without game changes. The current gate has119suites after the two new owner-delivery tests.

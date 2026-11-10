@@ -1,0 +1,893 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+  ok Chapter 5 catalog has twelve scenes
+  ok Chapter 5 catalog has four missions
+  ok EX-M0501 has three scenes
+  ok EX-M0501 first-time length is 20 minutes
+  ok EX-M0501 mission shape has a brief stage
+  ok EX-M0501 mission shape has a prepare stage
+  ok EX-M0501 mission shape has a go stage
+  ok EX-M0501 mission shape has a investigate stage
+  ok EX-M0501 mission shape has a solve stage
+  ok EX-M0501 mission shape has a consequence stage
+  ok EX-M0501 mission shape has a report stage
+  ok EX-M0501 mission shape has a bridge stage
+  ok EX-M0502 has three scenes
+  ok EX-M0502 first-time length is 20 minutes
+  ok EX-M0502 mission shape has a brief stage
+  ok EX-M0502 mission shape has a prepare stage
+  ok EX-M0502 mission shape has a go stage
+  ok EX-M0502 mission shape has a investigate stage
+  ok EX-M0502 mission shape has a solve stage
+  ok EX-M0502 mission shape has a consequence stage
+  ok EX-M0502 mission shape has a report stage
+  ok EX-M0502 mission shape has a bridge stage
+  ok EX-M0503 has three scenes
+  ok EX-M0503 first-time length is 25 minutes
+  ok EX-M0503 mission shape has a brief stage
+  ok EX-M0503 mission shape has a prepare stage
+  ok EX-M0503 mission shape has a go stage
+  ok EX-M0503 mission shape has a investigate stage
+  ok EX-M0503 mission shape has a solve stage
+  ok EX-M0503 mission shape has a consequence stage
+  ok EX-M0503 mission shape has a report stage
+  ok EX-M0503 mission shape has a bridge stage
+  ok EX-M0504 has three scenes
+  ok EX-M0504 first-time length is 20 minutes
+  ok EX-M0504 mission shape has a brief stage
+  ok EX-M0504 mission shape has a prepare stage
+  ok EX-M0504 mission shape has a go stage
+  ok EX-M0504 mission shape has a investigate stage
+  ok EX-M0504 mission shape has a solve stage
+  ok EX-M0504 mission shape has a consequence stage
+  ok EX-M0504 mission shape has a report stage
+  ok EX-M0504 mission shape has a bridge stage
+  ok Chapter 5 totals 85 first-time minutes
+  ok Chapter 5 earned upgrade pair is Dust Shield / Whipple bumper
+  ok EX-CH05-S01 belongs to a Chapter 5 mission
+  ok EX-CH05-S01 predicate id is canonical
+  ok EX-CH05-S01 has physical requirements
+  ok EX-CH05-S01 lists its required player actions
+  ok EX-CH05-S01 has an exit condition
+  ok EX-CH05-S01 has four canon dialogue lines
+  ok EX-CH05-S01-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S01-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S01-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S01-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S01 dialogue starts at L01
+  ok EX-CH05-S01 training decision offers two real alternatives
+  ok EX-CH05-S01 has three hint tiers
+  ok EX-CH05-S01 names its Data Cards
+  ok EX-CH05-S01 option EX-CH05-S01-OPT01 evaluates as revise
+  ok EX-CH05-S01 option feedback is specific
+  ok EX-CH05-S01 option EX-CH05-S01-OPT02 evaluates as supported
+  ok EX-CH05-S01 option feedback is specific
+  ok EX-CH05-S01 rejects an unknown decision option
+  ok EX-CH05-S01 hint tier 2 is defined
+  ok EX-CH05-S01 has no hint tier 4
+  ok EX-CH05-S01 places five people per the scene roster
+  ok EX-CH05-S01 roster includes Ferreira
+  ok EX-CH05-S01 dated time card is in December 2046
+  ok EX-CH05-S01 has a story time card
+  ok EX-CH05-S02 belongs to a Chapter 5 mission
+  ok EX-CH05-S02 predicate id is canonical
+  ok EX-CH05-S02 has physical requirements
+  ok EX-CH05-S02 lists its required player actions
+  ok EX-CH05-S02 has an exit condition
+  ok EX-CH05-S02 has four canon dialogue lines
+  ok EX-CH05-S02-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S02-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S02-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S02-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S02 dialogue starts at L01
+  ok EX-CH05-S02 training decision offers two real alternatives
+  ok EX-CH05-S02 has three hint tiers
+  ok EX-CH05-S02 names its Data Cards
+  ok EX-CH05-S02 option EX-CH05-S02-OPT01 evaluates as valid_alternative
+  ok EX-CH05-S02 option feedback is specific
+  ok EX-CH05-S02 option EX-CH05-S02-OPT02 evaluates as valid_alternative
+  ok EX-CH05-S02 option feedback is specific
+  ok EX-CH05-S02 rejects an unknown decision option
+  ok EX-CH05-S02 hint tier 2 is defined
+  ok EX-CH05-S02 has no hint tier 4
+  ok EX-CH05-S02 places five people per the scene roster
+  ok EX-CH05-S02 roster includes Ferreira
+  ok EX-CH05-S02 dated time card is in December 2046
+  ok EX-CH05-S02 has a story time card
+  ok EX-CH05-S03 belongs to a Chapter 5 mission
+  ok EX-CH05-S03 predicate id is canonical
+  ok EX-CH05-S03 has physical requirements
+  ok EX-CH05-S03 lists its required player actions
+  ok EX-CH05-S03 has an exit condition
+  ok EX-CH05-S03 has four canon dialogue lines
+  ok EX-CH05-S03-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S03-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S03-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S03-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S03 dialogue starts at L01
+  ok EX-CH05-S03 training decision offers two real alternatives
+  ok EX-CH05-S03 has three hint tiers
+  ok EX-CH05-S03 names its Data Cards
+  ok EX-CH05-S03 option EX-CH05-S03-OPT01 evaluates as supported
+  ok EX-CH05-S03 option feedback is specific
+  ok EX-CH05-S03 option EX-CH05-S03-OPT02 evaluates as revise
+  ok EX-CH05-S03 option feedback is specific
+  ok EX-CH05-S03 rejects an unknown decision option
+  ok EX-CH05-S03 hint tier 2 is defined
+  ok EX-CH05-S03 has no hint tier 4
+  ok EX-CH05-S03 places five people per the scene roster
+  ok EX-CH05-S03 roster includes Ferreira
+  ok EX-CH05-S03 dated time card is in December 2046
+  ok EX-CH05-S03 has a story time card
+  ok EX-CH05-S04 belongs to a Chapter 5 mission
+  ok EX-CH05-S04 predicate id is canonical
+  ok EX-CH05-S04 has physical requirements
+  ok EX-CH05-S04 lists its required player actions
+  ok EX-CH05-S04 has an exit condition
+  ok EX-CH05-S04 has four canon dialogue lines
+  ok EX-CH05-S04-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S04-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S04-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S04-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S04 dialogue starts at L01
+  ok EX-CH05-S04 training decision offers two real alternatives
+  ok EX-CH05-S04 has three hint tiers
+  ok EX-CH05-S04 names its Data Cards
+  ok EX-CH05-S04 option EX-CH05-S04-OPT01 evaluates as revise
+  ok EX-CH05-S04 option feedback is specific
+  ok EX-CH05-S04 option EX-CH05-S04-OPT02 evaluates as supported
+  ok EX-CH05-S04 option feedback is specific
+  ok EX-CH05-S04 rejects an unknown decision option
+  ok EX-CH05-S04 hint tier 2 is defined
+  ok EX-CH05-S04 has no hint tier 4
+  ok EX-CH05-S04 places five people per the scene roster
+  ok EX-CH05-S04 roster includes Ferreira
+  ok EX-CH05-S04 dated time card is in December 2046
+  ok EX-CH05-S04 has a story time card
+  ok EX-CH05-S05 belongs to a Chapter 5 mission
+  ok EX-CH05-S05 predicate id is canonical
+  ok EX-CH05-S05 has physical requirements
+  ok EX-CH05-S05 lists its required player actions
+  ok EX-CH05-S05 has an exit condition
+  ok EX-CH05-S05 has four canon dialogue lines
+  ok EX-CH05-S05-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S05-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S05-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S05-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S05 dialogue starts at L01
+  ok EX-CH05-S05 training decision offers two real alternatives
+  ok EX-CH05-S05 has three hint tiers
+  ok EX-CH05-S05 names its Data Cards
+  ok EX-CH05-S05 option EX-CH05-S05-OPT01 evaluates as valid_alternative
+  ok EX-CH05-S05 option feedback is specific
+  ok EX-CH05-S05 option EX-CH05-S05-OPT02 evaluates as valid_alternative
+  ok EX-CH05-S05 option feedback is specific
+  ok EX-CH05-S05 rejects an unknown decision option
+  ok EX-CH05-S05 hint tier 2 is defined
+  ok EX-CH05-S05 has no hint tier 4
+  ok EX-CH05-S05 places five people per the scene roster
+  ok EX-CH05-S05 roster includes Ferreira
+  ok EX-CH05-S05 dated time card is in December 2046
+  ok EX-CH05-S05 has a story time card
+  ok EX-CH05-S06 belongs to a Chapter 5 mission
+  ok EX-CH05-S06 predicate id is canonical
+  ok EX-CH05-S06 has physical requirements
+  ok EX-CH05-S06 lists its required player actions
+  ok EX-CH05-S06 has an exit condition
+  ok EX-CH05-S06 has four canon dialogue lines
+  ok EX-CH05-S06-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S06-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S06-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S06-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S06 dialogue starts at L01
+  ok EX-CH05-S06 training decision offers two real alternatives
+  ok EX-CH05-S06 has three hint tiers
+  ok EX-CH05-S06 names its Data Cards
+  ok EX-CH05-S06 option EX-CH05-S06-OPT01 evaluates as valid_alternative
+  ok EX-CH05-S06 option feedback is specific
+  ok EX-CH05-S06 option EX-CH05-S06-OPT02 evaluates as valid_alternative
+  ok EX-CH05-S06 option feedback is specific
+  ok EX-CH05-S06 rejects an unknown decision option
+  ok EX-CH05-S06 hint tier 2 is defined
+  ok EX-CH05-S06 has no hint tier 4
+  ok EX-CH05-S06 places five people per the scene roster
+  ok EX-CH05-S06 roster includes Ferreira
+  ok EX-CH05-S06 dated time card is in December 2046
+  ok EX-CH05-S06 has a story time card
+  ok EX-CH05-S07 belongs to a Chapter 5 mission
+  ok EX-CH05-S07 predicate id is canonical
+  ok EX-CH05-S07 has physical requirements
+  ok EX-CH05-S07 lists its required player actions
+  ok EX-CH05-S07 has an exit condition
+  ok EX-CH05-S07 has four canon dialogue lines
+  ok EX-CH05-S07-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S07-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S07-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S07-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S07 dialogue starts at L01
+  ok EX-CH05-S07 training decision offers two real alternatives
+  ok EX-CH05-S07 has three hint tiers
+  ok EX-CH05-S07 names its Data Cards
+  ok EX-CH05-S07 option EX-CH05-S07-OPT01 evaluates as revise
+  ok EX-CH05-S07 option feedback is specific
+  ok EX-CH05-S07 option EX-CH05-S07-OPT02 evaluates as supported
+  ok EX-CH05-S07 option feedback is specific
+  ok EX-CH05-S07 rejects an unknown decision option
+  ok EX-CH05-S07 hint tier 2 is defined
+  ok EX-CH05-S07 has no hint tier 4
+  ok EX-CH05-S07 places five people per the scene roster
+  ok EX-CH05-S07 roster includes Ferreira
+  ok EX-CH05-S07 dated time card is in December 2046
+  ok EX-CH05-S07 has a story time card
+  ok EX-CH05-S08 belongs to a Chapter 5 mission
+  ok EX-CH05-S08 predicate id is canonical
+  ok EX-CH05-S08 has physical requirements
+  ok EX-CH05-S08 lists its required player actions
+  ok EX-CH05-S08 has an exit condition
+  ok EX-CH05-S08 has four canon dialogue lines
+  ok EX-CH05-S08-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S08-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S08-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S08-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S08 dialogue starts at L01
+  ok EX-CH05-S08 training decision offers two real alternatives
+  ok EX-CH05-S08 has three hint tiers
+  ok EX-CH05-S08 names its Data Cards
+  ok EX-CH05-S08 option EX-CH05-S08-OPT01 evaluates as revise
+  ok EX-CH05-S08 option feedback is specific
+  ok EX-CH05-S08 option EX-CH05-S08-OPT02 evaluates as supported
+  ok EX-CH05-S08 option feedback is specific
+  ok EX-CH05-S08 rejects an unknown decision option
+  ok EX-CH05-S08 hint tier 2 is defined
+  ok EX-CH05-S08 has no hint tier 4
+  ok EX-CH05-S08 places five people per the scene roster
+  ok EX-CH05-S08 roster includes Ferreira
+  ok EX-CH05-S08 dated time card is in December 2046
+  ok EX-CH05-S08 has a story time card
+  ok EX-CH05-S09 belongs to a Chapter 5 mission
+  ok EX-CH05-S09 predicate id is canonical
+  ok EX-CH05-S09 has physical requirements
+  ok EX-CH05-S09 lists its required player actions
+  ok EX-CH05-S09 has an exit condition
+  ok EX-CH05-S09 has four canon dialogue lines
+  ok EX-CH05-S09-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S09-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S09-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S09-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S09 dialogue starts at L01
+  ok EX-CH05-S09 training decision offers two real alternatives
+  ok EX-CH05-S09 has three hint tiers
+  ok EX-CH05-S09 names its Data Cards
+  ok EX-CH05-S09 option EX-CH05-S09-OPT01 evaluates as valid_alternative
+  ok EX-CH05-S09 option feedback is specific
+  ok EX-CH05-S09 option EX-CH05-S09-OPT02 evaluates as valid_alternative
+  ok EX-CH05-S09 option feedback is specific
+  ok EX-CH05-S09 rejects an unknown decision option
+  ok EX-CH05-S09 hint tier 2 is defined
+  ok EX-CH05-S09 has no hint tier 4
+  ok EX-CH05-S09 places five people per the scene roster
+  ok EX-CH05-S09 roster includes Ferreira
+  ok EX-CH05-S09 dated time card is in December 2046
+  ok EX-CH05-S09 has a story time card
+  ok EX-CH05-S10 belongs to a Chapter 5 mission
+  ok EX-CH05-S10 predicate id is canonical
+  ok EX-CH05-S10 has physical requirements
+  ok EX-CH05-S10 lists its required player actions
+  ok EX-CH05-S10 has an exit condition
+  ok EX-CH05-S10 has four canon dialogue lines
+  ok EX-CH05-S10-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S10-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S10-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S10-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S10 dialogue starts at L01
+  ok EX-CH05-S10 training decision offers two real alternatives
+  ok EX-CH05-S10 has three hint tiers
+  ok EX-CH05-S10 names its Data Cards
+  ok EX-CH05-S10 option EX-CH05-S10-OPT01 evaluates as valid_alternative
+  ok EX-CH05-S10 option feedback is specific
+  ok EX-CH05-S10 option EX-CH05-S10-OPT02 evaluates as valid_alternative
+  ok EX-CH05-S10 option feedback is specific
+  ok EX-CH05-S10 rejects an unknown decision option
+  ok EX-CH05-S10 hint tier 2 is defined
+  ok EX-CH05-S10 has no hint tier 4
+  ok EX-CH05-S10 places five people per the scene roster
+  ok EX-CH05-S10 roster includes Ferreira
+  ok EX-CH05-S10 dated time card is in December 2046
+  ok EX-CH05-S10 has a story time card
+  ok EX-CH05-S11 belongs to a Chapter 5 mission
+  ok EX-CH05-S11 predicate id is canonical
+  ok EX-CH05-S11 has physical requirements
+  ok EX-CH05-S11 lists its required player actions
+  ok EX-CH05-S11 has an exit condition
+  ok EX-CH05-S11 has four canon dialogue lines
+  ok EX-CH05-S11-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S11-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S11-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S11-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S11 dialogue starts at L01
+  ok EX-CH05-S11 training decision offers two real alternatives
+  ok EX-CH05-S11 has three hint tiers
+  ok EX-CH05-S11 names its Data Cards
+  ok EX-CH05-S11 option EX-CH05-S11-OPT01 evaluates as valid_alternative
+  ok EX-CH05-S11 option feedback is specific
+  ok EX-CH05-S11 option EX-CH05-S11-OPT02 evaluates as valid_alternative
+  ok EX-CH05-S11 option feedback is specific
+  ok EX-CH05-S11 rejects an unknown decision option
+  ok EX-CH05-S11 hint tier 2 is defined
+  ok EX-CH05-S11 has no hint tier 4
+  ok EX-CH05-S11 places five people per the scene roster
+  ok EX-CH05-S11 roster includes Ferreira
+  ok EX-CH05-S11 dated time card is in December 2046
+  ok EX-CH05-S11 has a story time card
+  ok EX-CH05-S12 belongs to a Chapter 5 mission
+  ok EX-CH05-S12 predicate id is canonical
+  ok EX-CH05-S12 has physical requirements
+  ok EX-CH05-S12 lists its required player actions
+  ok EX-CH05-S12 has an exit condition
+  ok EX-CH05-S12 has four canon dialogue lines
+  ok EX-CH05-S12-L01 canon speaker and text match the mission docs
+  ok EX-CH05-S12-L02 canon speaker and text match the mission docs
+  ok EX-CH05-S12-L03 canon speaker and text match the mission docs
+  ok EX-CH05-S12-L04 canon speaker and text match the mission docs
+  ok EX-CH05-S12 dialogue starts at L01
+  ok EX-CH05-S12 training decision offers two real alternatives
+  ok EX-CH05-S12 has three hint tiers
+  ok EX-CH05-S12 names its Data Cards
+  ok EX-CH05-S12 option EX-CH05-S12-OPT01 evaluates as supported
+  ok EX-CH05-S12 option feedback is specific
+  ok EX-CH05-S12 option EX-CH05-S12-OPT02 evaluates as revise
+  ok EX-CH05-S12 option feedback is specific
+  ok EX-CH05-S12 rejects an unknown decision option
+  ok EX-CH05-S12 hint tier 2 is defined
+  ok EX-CH05-S12 has no hint tier 4
+  ok EX-CH05-S12 places five people per the scene roster
+  ok EX-CH05-S12 roster includes Ferreira
+  ok EX-CH05-S12 dated time card is in December 2046
+  ok EX-CH05-S12 has a story time card
+  ok Chapter 5 bridge list has thirteen joins
+  ok CH04→CH05 join names what it carries
+  ok CH05 S01→S02 join names what it carries
+  ok CH05 S02→S03 join names what it carries
+  ok CH05 S02→S03 Fix join is built with a named carried object
+  ok CH05 S03→S04 join names what it carries
+  ok CH05 S04→S05 join names what it carries
+  ok CH05 S05→S06 join names what it carries
+  ok CH05 S06→S07 join names what it carries
+  ok CH05 S07→S08 join names what it carries
+  ok CH05 S08→S09 join names what it carries
+  ok CH05 S09→S10 join names what it carries
+  ok CH05 S10→S11 join names what it carries
+  ok CH05 S11→S12 join names what it carries
+  ok CH05→CH06 join names what it carries
+  ok S02→S03 Fix join carries the sealed document sleeve to the 14 Dec table
+  ok S05→S06 join carries the D9 object Ferreira left on the table
+  ok Ramim seam names the waiting behaviour and the seam left
+  ok Ramim seam names the waiting behaviour and the seam left
+  ok Ramim seam names the waiting behaviour and the seam left
+  ok Ramim seam names the waiting behaviour and the seam left
+  ok Ramim seam names the waiting behaviour and the seam left
+  ok Chapter 5 Ramim seams cover M3-61, M3-64 and M3-65
+  ok Chapter 5 has no rover seam (M3-62 belongs to Chapter 7)
+  ok EX-M0501 is registered as implemented
+  ok EX-M0501 creates a Chapter5Mission
+  ok EX-M0501 starts ready
+  ok EX-M0502 is registered as implemented
+  ok EX-M0502 creates a Chapter5Mission
+  ok EX-M0502 starts ready
+  ok EX-M0503 is registered as implemented
+  ok EX-M0503 creates a Chapter5Mission
+  ok EX-M0503 starts ready
+  ok EX-M0504 is registered as implemented
+  ok EX-M0504 creates a Chapter5Mission
+  ok EX-M0504 starts ready
+  ok registry counts Chapters 1, 2, 5 and 7 as implemented
+  ok registry honesty validation passes with Chapters 5 and 7 implemented
+  ok EX-M0501 cannot begin before EX-CH04-S12
+  ok EX-M0502 cannot begin before EX-M0501
+  ok P-03 entry profile is explicit
+  ok dated Chapter 2 handoff operation inspect_alo_identity
+  ok dated Chapter 2 handoff operation inspect_tara_identity
+  ok dated Chapter 2 handoff operation ack_live_link
+  ok dated Chapter 2 handoff operation open_pollination_protocol
+  ok dated Chapter 2 handoff operation identify_anther
+  ok dated Chapter 2 handoff operation identify_stigma
+  ok dated Chapter 2 handoff operation assign_brush_directions
+  ok dated Chapter 2 handoff operation practice_transfer_model
+  ok dated Chapter 2 handoff operation check_space_weather
+  ok dated Chapter 2 handoff operation prepare_closed_carrier
+  ok dated Chapter 2 handoff operation verify_transfer_boundaries
+  ok dated Chapter 2 handoff operation preview_cycle_budget
+  ok dated Chapter 2 handoff operation p03_scan_tara
+  ok dated Chapter 2 handoff operation p03_collect_tara
+  ok dated Chapter 2 handoff operation p03_seal_a
+  ok dated Chapter 2 handoff operation p03_transfer_alo
+  ok dated Chapter 2 handoff operation p03_scan_alo
+  ok dated Chapter 2 handoff operation p03_collect_alo
+  ok dated Chapter 2 handoff operation p03_seal_b
+  ok dated Chapter 2 handoff operation p03_transfer_tara
+  ok dated Chapter 2 handoff operation p03_complete_run_1
+  ok dated Chapter 2 handoff operation p03_care_day_2
+  ok dated Chapter 2 handoff operation p03_care_day_3
+  ok dated Chapter 2 handoff operation p03_run_2_forward
+  ok dated Chapter 2 handoff operation p03_run_2_reverse
+  ok dated Chapter 2 handoff operation p03_complete_run_2
+  ok dated Chapter 2 handoff operation p03_care_day_4
+  ok dated Chapter 2 handoff operation p03_care_day_5
+  ok dated Chapter 2 handoff operation p03_care_day_6
+  ok dated Chapter 2 handoff operation p03_care_day_7
+  ok dated Chapter 2 handoff operation p03_run_3_forward
+  ok dated Chapter 2 handoff operation p03_run_3_reverse
+  ok dated Chapter 2 handoff operation p03_complete_run_3
+  ok dated Chapter 2 handoff operation record_stem_prediction
+  ok dated Chapter 2 handoff operation order_lifecycle
+  ok dated Chapter 2 handoff operation separate_current_evidence
+  ok dated Chapter 2 handoff operation inspect_recorder_identifier
+  ok dated Chapter 2 handoff operation collect_serial_card
+  ok dated Chapter 2 handoff operation collect_date_card
+  ok dated Chapter 2 handoff operation collect_trial_stage_card
+  ok dated Chapter 2 handoff operation exclude_identity_claim
+  ok dated Chapter 2 handoff operation assign_date_token
+  ok dated Chapter 2 handoff operation assign_device_token
+  ok dated Chapter 2 handoff operation assign_channel_token
+  ok dated Chapter 2 handoff operation verify_local_checksum
+  ok dated Chapter 2 handoff operation open_reconstructed_transcript
+  ok dated Chapter 2 handoff operation play_engineer_fragment
+  ok dated Chapter 2 handoff operation play_n_memory
+  ok dated Chapter 2 handoff operation classify_voice_inference
+  ok dated Chapter 2 handoff operation send_fragment_copy
+  ok dated Chapter 2 handoff operation acknowledge_handover
+  ok dated Chapter 2 handoff operation reach_interior_brace
+  ok dated Chapter 2 handoff operation account_four_cadets
+  ok dated Chapter 2 handoff operation finish_quake_beat
+  ok extended route starts at canonical Chapter 3
+  ok route is at EX-CH03-S01
+  ok EX-CH03-S01 commits p05_equip_gauge
+  ok EX-CH03-S01 commits p05_read_panel_warning
+  ok EX-CH03-S01 commits p05_identify_three_taps
+  ok EX-CH03-S01 physical gate is ready
+  ok EX-CH03-S01 advances in canonical order
+  ok route is at EX-CH03-S02
+  ok EX-CH03-S02 commits p05_read_main_t0
+  ok EX-CH03-S02 commits p05_read_garden_t0
+  ok EX-CH03-S02 commits p05_read_return_t0
+  ok EX-CH03-S02 commits p05_inspect_tank
+  ok EX-CH03-S02 commits p05_inspect_habitat
+  ok EX-CH03-S02 commits p05_inspect_garden
+  ok EX-CH03-S02 commits p05_inspect_return
+  ok EX-CH03-S02 commits p05_inspect_airlock
+  ok EX-CH03-S02 commits p05_inspect_annex
+  ok EX-CH03-S02 commits p05_read_main_t10
+  ok EX-CH03-S02 commits p05_read_garden_t10
+  ok EX-CH03-S02 commits p05_read_return_t10
+  ok EX-CH03-S02 commits p05_identify_garden_fall
+  ok EX-CH03-S02 physical gate is ready
+  ok EX-CH03-S02 advances in canonical order
+  ok route is at EX-CH03-S03
+  ok EX-CH03-S03 commits p05_verify_annex_isolation
+  ok EX-CH03-S03 commits p05_preview_garden_isolation
+  ok EX-CH03-S03 commits p05_rollback_check
+  ok EX-CH03-S03 physical gate is ready
+  ok EX-CH03-S03 advances in canonical order
+  ok route is at EX-CH03-S04
+  ok EX-CH03-S04 commits p05_isolate_garden
+  ok EX-CH03-S04 commits p05_verify_main_hold
+  ok EX-CH03-S04 commits p05_apply_garden_clamp
+  ok EX-CH03-S04 commits p05_reopen_garden_slow
+  ok EX-CH03-S04 commits p05_stable_read_1
+  ok EX-CH03-S04 commits p05_stable_read_2
+  ok EX-CH03-S04 commits p05_stable_read_3
+  ok EX-CH03-S04 commits p05_stable_read_4
+  ok EX-CH03-S04 commits p05_stable_read_5
+  ok EX-CH03-S04 physical gate is ready
+  ok EX-CH03-S04 advances in canonical order
+  ok route is at EX-CH03-S05
+  ok EX-CH03-S05 commits p05_reconcile_records
+  ok EX-CH03-S05 commits p05_save_monitoring_handover
+  ok EX-CH03-S05 physical gate is ready
+  ok EX-CH03-S05 advances in canonical order
+  ok route is at EX-CH03-S06
+  ok EX-CH03-S06 commits p05_isolate_annex_feed
+  ok EX-CH03-S06 commits p05_confirm_zero_differential
+  ok EX-CH03-S06 commits p05_inspect_annex_hatch
+  ok EX-CH03-S06 physical gate is ready
+  ok EX-CH03-S06 advances in canonical order
+  ok route is at EX-CH03-S07
+  ok EX-CH03-S07 commits p06_scan_growth_chart
+  ok EX-CH03-S07 commits p06_scan_vault_map
+  ok EX-CH03-S07 commits p06_exit_suit_check
+  ok EX-CH03-S07 commits p06_accept_maturity_montage
+  ok EX-CH03-S07 physical gate is ready
+  ok EX-CH03-S07 advances in canonical order
+  ok route is at EX-CH03-S08
+  ok EX-CH03-S08 commits p06_save_map_provenance
+  ok EX-CH03-S08 commits p06_record_future_checks
+  ok EX-CH03-S08 commits p06_confirm_care_transition
+  ok EX-CH03-S08 physical gate is ready
+  ok EX-CH03-S08 advances in canonical order
+  ok route is at EX-CH03-S09
+  ok EX-CH03-S09 commits p06_confirm_maturity
+  ok EX-CH03-S09 commits p06_configure_drydown
+  ok EX-CH03-S09 physical gate is ready
+  ok EX-CH03-S09 advances in canonical order
+  ok route is at EX-CH03-S10
+  ok EX-CH03-S10 commits p06_drydown_five_days
+  ok EX-CH03-S10 commits p06_open_six_pods
+  ok EX-CH03-S10 commits p06_count_42
+  ok EX-CH03-S10 commits p06_allocate_12_30
+  ok EX-CH03-S10 commits p06_sleeve_petal
+  ok EX-CH03-S10 physical gate is ready
+  ok EX-CH03-S10 advances in canonical order
+  ok route is at EX-CH03-S11
+  ok EX-CH03-S11 commits p06_plant_12_positions
+  ok EX-CH03-S11 commits p06_seal_reserve_30
+  ok EX-CH03-S11 commits p06_preserve_lineage
+  ok EX-CH03-S11 physical gate is ready
+  ok EX-CH03-S11 advances in canonical order
+  ok route is at EX-CH03-S12
+  ok EX-CH03-S12 commits p06_reconcile_continuity
+  ok EX-CH03-S12 commits p06_confirm_descendant_survey
+  ok EX-CH03-S12 physical gate is ready
+  ok EX-CH03-S12 closes its chapter boundary
+  ok route opens EX-CH04-S01
+  ok route is at EX-CH04-S01
+  ok EX-CH04-S01 commits p07_compare_prediction
+  ok EX-CH04-S01 commits p07_inspect_twelve_descendants
+  ok EX-CH04-S01 commits p07_record_trait_limits
+  ok EX-CH04-S01 physical gate is ready
+  ok EX-CH04-S01 advances in canonical order
+  ok route is at EX-CH04-S02
+  ok EX-CH04-S02 commits p07_check_rover_seal
+  ok EX-CH04-S02 commits p07_check_scanner
+  ok EX-CH04-S02 commits p07_check_closed_carrier
+  ok EX-CH04-S02 commits p07_complete_base_handover
+  ok EX-CH04-S02 physical gate is ready
+  ok EX-CH04-S02 advances in canonical order
+  ok route is at EX-CH04-S03
+  ok EX-CH04-S03 commits p07_choose_route_b
+  ok EX-CH04-S03 commits p07_verify_slope
+  ok EX-CH04-S03 commits p07_verify_return_reserve
+  ok EX-CH04-S03 commits p07_prepare_departure
+  ok EX-CH04-S03 physical gate is ready
+  ok EX-CH04-S03 advances in canonical order
+  ok route is at EX-CH04-S04
+  ok EX-CH04-S04 commits p07_place_beacon_1
+  ok EX-CH04-S04 commits p07_place_beacon_2
+  ok EX-CH04-S04 commits p07_place_beacon_3
+  ok EX-CH04-S04 physical gate is ready
+  ok EX-CH04-S04 advances in canonical order
+  ok route is at EX-CH04-S05
+  ok EX-CH04-S05 commits p07_record_dry_reference
+  ok EX-CH04-S05 commits p07_set_threshold_12
+  ok EX-CH04-S05 commits p07_tag_positive_18
+  ok EX-CH04-S05 commits p07_tag_positive_19
+  ok EX-CH04-S05 commits p07_retain_negative_2
+  ok EX-CH04-S05 physical gate is ready
+  ok EX-CH04-S05 advances in canonical order
+  ok route is at EX-CH04-S06
+  ok EX-CH04-S06 commits p07_seal_sample
+  ok EX-CH04-S06 commits p07_commit_return_route
+  ok EX-CH04-S06 physical gate is ready
+  ok EX-CH04-S06 advances in canonical order
+  ok route is at EX-CH04-S07
+  ok EX-CH04-S07 commits p08_read_external_probe
+  ok EX-CH04-S07 commits p08_fit_sleeve
+  ok EX-CH04-S07 commits p08_latch_cradle
+  ok EX-CH04-S07 commits p08_secure_mount
+  ok EX-CH04-S07 physical gate is ready
+  ok EX-CH04-S07 advances in canonical order
+  ok route is at EX-CH04-S08
+  ok EX-CH04-S08 commits p08_return_to_base
+  ok EX-CH04-S08 commits p08_dock_dry_glovebox
+  ok EX-CH04-S08 commits p08_warm_cold
+  ok EX-CH04-S08 commits p08_warm_cool
+  ok EX-CH04-S08 commits p08_warm_room
+  ok EX-CH04-S08 commits p08_check_condensation
+  ok EX-CH04-S08 commits p08_open_inner_seal
+  ok EX-CH04-S08 commits p08_inventory_12
+  ok EX-CH04-S08 physical gate is ready
+  ok EX-CH04-S08 advances in canonical order
+  ok route is at EX-CH04-S09
+  ok EX-CH04-S09 commits p08_scan_lid
+  ok EX-CH04-S09 commits p08_save_viability_pending
+  ok EX-CH04-S09 commits p08_transfer_case
+  ok EX-CH04-S09 physical gate is ready
+  ok EX-CH04-S09 advances in canonical order
+  ok route is at EX-CH04-S10
+  ok EX-CH04-S10 commits p08_manifest_reconciled
+  ok EX-CH04-S10 commits p08_personnel_home
+  ok EX-CH04-S10 commits p08_quarantine_complete
+  ok EX-CH04-S10 physical gate is ready
+  ok EX-CH04-S10 advances in canonical order
+  ok route is at EX-CH04-S11
+  ok EX-CH04-S11 commits p08_send_manifest
+  ok EX-CH04-S11 commits p08_record_ferreira_question
+  ok EX-CH04-S11 commits p08_leave_identity_open
+  ok EX-CH04-S11 physical gate is ready
+  ok EX-CH04-S11 advances in canonical order
+  ok route is at EX-CH04-S12
+  ok EX-CH04-S12 commits p08_check_relief_flight
+  ok EX-CH04-S12 commits p08_prepare_locker
+  ok EX-CH04-S12 commits p08_confirm_december_transition
+  ok EX-CH04-S12 physical gate is ready
+  ok EX-CH04-S12 closes its chapter boundary
+  ok route opens EX-CH05-S01
+  ok route arrives at Chapter 5 entry
+  ok EX-M0501 begins after its predecessor
+  ok Chapter 5 entry profile: EX-CH04-S12 complete, 12 December 2046
+  ok mission route is at EX-CH05-S01
+  ok EX-CH05-S01 plays in its canonical room
+  ok EX-CH05-S01 acknowledges EX-CH05-S01-L01
+  ok EX-CH05-S01 acknowledges EX-CH05-S01-L02
+  ok EX-CH05-S01 acknowledges EX-CH05-S01-L03
+  ok EX-CH05-S01 acknowledges EX-CH05-S01-L04
+  ok EX-CH05-S01 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S01 revise option is refused with a retry
+  ok EX-CH05-S01 revise feedback is the canon consequence
+  ok EX-CH05-S01 commits decision option EX-CH05-S01-OPT02
+  ok EX-CH05-S01 decision outcome is partial
+  ok EX-CH05-S01 refuses a target from another chapter
+  ok EX-CH05-S01 pauses
+  ok EX-CH05-S01 resumes
+  ok EX-CH05-S01 commits p09_check_lander_clearance
+  ok EX-CH05-S01 commits p09_check_seals
+  ok EX-CH05-S01 commits p09_verify_five_person_roster
+  ok EX-CH05-S01 physical gate is ready
+  ok EX-CH05-S01 advances in canonical order
+  ok mission route is at EX-CH05-S02
+  ok EX-CH05-S02 plays in its canonical room
+  ok EX-CH05-S02 acknowledges EX-CH05-S02-L01
+  ok EX-CH05-S02 acknowledges EX-CH05-S02-L02
+  ok EX-CH05-S02 acknowledges EX-CH05-S02-L03
+  ok EX-CH05-S02 acknowledges EX-CH05-S02-L04
+  ok EX-CH05-S02 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S02 commits decision option EX-CH05-S02-OPT01
+  ok EX-CH05-S02 decision outcome is success
+  ok CH05-HATCH-PAUSE moment recorded at the annex hatch
+  ok CH05-HATCH-PAUSE is in the story log
+  ok EX-CH05-S02 refuses a target from another chapter
+  ok EX-CH05-S02 pauses
+  ok EX-CH05-S02 resumes
+  ok EX-CH05-S02 commits p09_store_spare_once
+  ok EX-CH05-S02 commits p09_run_arrival_readings
+  ok EX-CH05-S02 commits p09_reconcile_readings
+  ok EX-CH05-S02 physical gate is ready
+  ok EX-CH05-S02 advances in canonical order
+  ok mission route is at EX-CH05-S03
+  ok EX-CH05-S03 plays in its canonical room
+  ok EX-CH05-S03 acknowledges EX-CH05-S03-L01
+  ok EX-CH05-S03 acknowledges EX-CH05-S03-L02
+  ok EX-CH05-S03 acknowledges EX-CH05-S03-L03
+  ok EX-CH05-S03 acknowledges EX-CH05-S03-L04
+  ok EX-CH05-S03 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S03 revise option is refused with a retry
+  ok EX-CH05-S03 revise feedback is the canon consequence
+  ok EX-CH05-S03 commits decision option EX-CH05-S03-OPT01
+  ok EX-CH05-S03 decision outcome is partial
+  ok EX-CH05-S03 refuses a target from another chapter
+  ok S03 refuses a chronology in the wrong timestamp order
+  ok EX-CH05-S03 pauses
+  ok EX-CH05-S03 resumes
+  ok EX-CH05-S03 commits p09_commit_sequence
+  ok EX-CH05-S03 physical gate is ready
+  ok EX-CH05-S03 advances in canonical order
+  ok EX-M0501 reports complete
+  ok EX-M0501 report payload carries its debrief decision
+  ok EX-M0501 rendered Report Card honestly waits on M3-64
+  ok EX-M0502 begins after its predecessor
+  ok mission route is at EX-CH05-S04
+  ok EX-CH05-S04 plays in its canonical room
+  ok EX-CH05-S04 acknowledges EX-CH05-S04-L01
+  ok EX-CH05-S04 acknowledges EX-CH05-S04-L02
+  ok EX-CH05-S04 acknowledges EX-CH05-S04-L03
+  ok EX-CH05-S04 acknowledges EX-CH05-S04-L04
+  ok EX-CH05-S04 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S04 revise option is refused with a retry
+  ok EX-CH05-S04 revise feedback is the canon consequence
+  ok EX-CH05-S04 commits decision option EX-CH05-S04-OPT02
+  ok EX-CH05-S04 decision outcome is partial
+  ok EX-CH05-S04 refuses a target from another chapter
+  ok EX-CH05-S04 pauses
+  ok EX-CH05-S04 resumes
+  ok EX-CH05-S04 commits p10_document_young_trial
+  ok EX-CH05-S04 commits p10_exclude_flower_claim
+  ok EX-CH05-S04 commits p10_save_source_scope
+  ok EX-CH05-S04 physical gate is ready
+  ok EX-CH05-S04 advances in canonical order
+  ok mission route is at EX-CH05-S05
+  ok EX-CH05-S05 plays in its canonical room
+  ok EX-CH05-S05 acknowledges EX-CH05-S05-L01
+  ok EX-CH05-S05 acknowledges EX-CH05-S05-L02
+  ok EX-CH05-S05 acknowledges EX-CH05-S05-L03
+  ok EX-CH05-S05 acknowledges EX-CH05-S05-L04
+  ok EX-CH05-S05 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S05 commits decision option EX-CH05-S05-OPT01
+  ok EX-CH05-S05 decision outcome is success
+  ok D9 recorded: Mei asks 'Why did you wait?' first
+  ok D9 OPT01 leaves the ascent manifest at Ferreira's place
+  ok EX-CH05-S05 refuses a target from another chapter
+  ok EX-CH05-S05 pauses
+  ok EX-CH05-S05 resumes
+  ok EX-CH05-S05 commits p10_acknowledge_ferreira_facts
+  ok EX-CH05-S05 commits p10_acknowledge_personal_question
+  ok EX-CH05-S05 commits p10_preserve_safety_facts
+  ok EX-CH05-S05 physical gate is ready
+  ok EX-CH05-S05 advances in canonical order
+  ok D9 locks after the EX-CH05-S05 exit
+  ok mission route is at EX-CH05-S06
+  ok EX-CH05-S06 plays in its canonical room
+  ok EX-CH05-S06 acknowledges EX-CH05-S06-L01
+  ok EX-CH05-S06 acknowledges EX-CH05-S06-L02
+  ok EX-CH05-S06 acknowledges EX-CH05-S06-L03
+  ok EX-CH05-S06 acknowledges EX-CH05-S06-L04
+  ok EX-CH05-S06 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S06 commits decision option EX-CH05-S06-OPT01
+  ok EX-CH05-S06 decision outcome is success
+  ok EX-CH05-S06 refuses a target from another chapter
+  ok EX-CH05-S06 pauses
+  ok EX-CH05-S06 resumes
+  ok EX-CH05-S06 commits p10_compare_dust_repair
+  ok EX-CH05-S06 commits p10_compare_leak_repair
+  ok EX-CH05-S06 commits p10_keep_spare_present
+  ok EX-CH05-S06 physical gate is ready
+  ok EX-CH05-S06 advances in canonical order
+  ok EX-M0502 reports complete
+  ok EX-M0502 report payload carries its debrief decision
+  ok EX-M0502 rendered Report Card honestly waits on M3-64
+  ok EX-M0503 begins after its predecessor
+  ok mission route is at EX-CH05-S07
+  ok EX-CH05-S07 plays in its canonical room
+  ok EX-CH05-S07 acknowledges EX-CH05-S07-L01
+  ok EX-CH05-S07 acknowledges EX-CH05-S07-L02
+  ok EX-CH05-S07 acknowledges EX-CH05-S07-L03
+  ok EX-CH05-S07 acknowledges EX-CH05-S07-L04
+  ok EX-CH05-S07 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S07 revise option is refused with a retry
+  ok EX-CH05-S07 revise feedback is the canon consequence
+  ok EX-CH05-S07 commits decision option EX-CH05-S07-OPT02
+  ok EX-CH05-S07 decision outcome is partial
+  ok EX-CH05-S07 refuses a target from another chapter
+  ok EX-CH05-S07 pauses
+  ok EX-CH05-S07 resumes
+  ok EX-CH05-S07 commits p10_verify_flashes
+  ok EX-CH05-S07 physical gate is ready
+  ok EX-CH05-S07 advances in canonical order
+  ok mission route is at EX-CH05-S08
+  ok EX-CH05-S08 plays in its canonical room
+  ok EX-CH05-S08 acknowledges EX-CH05-S08-L01
+  ok EX-CH05-S08 acknowledges EX-CH05-S08-L02
+  ok EX-CH05-S08 acknowledges EX-CH05-S08-L03
+  ok EX-CH05-S08 acknowledges EX-CH05-S08-L04
+  ok EX-CH05-S08 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S08 revise option is refused with a retry
+  ok EX-CH05-S08 revise feedback is the canon consequence
+  ok EX-CH05-S08 commits decision option EX-CH05-S08-OPT02
+  ok EX-CH05-S08 decision outcome is partial
+  ok EX-CH05-S08 refuses a target from another chapter
+  ok EX-CH05-S08 pauses
+  ok EX-CH05-S08 resumes
+  ok EX-CH05-S08 commits p10_clean_panel
+  ok B05 Chapter 5 retry checkpoint survives disk-shaped JSON at EX-CH05-S08
+  ok B05 retry restores the complete pre-operation checkpoint at EX-CH05-S08
+  ok EX-CH05-S08 commits p10_patch_dome_spur
+  ok EX-CH05-S08 commits p10_verify_pressure
+  ok EX-CH05-S08 physical gate is ready
+  ok EX-CH05-S08 advances in canonical order
+  ok mission route is at EX-CH05-S09
+  ok EX-CH05-S09 plays in its canonical room
+  ok EX-CH05-S09 acknowledges EX-CH05-S09-L01
+  ok EX-CH05-S09 acknowledges EX-CH05-S09-L02
+  ok EX-CH05-S09 acknowledges EX-CH05-S09-L03
+  ok EX-CH05-S09 acknowledges EX-CH05-S09-L04
+  ok EX-CH05-S09 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S09 commits decision option EX-CH05-S09-OPT01
+  ok EX-CH05-S09 decision outcome is success
+  ok EX-CH05-S09 refuses a target from another chapter
+  ok EX-CH05-S09 pauses
+  ok EX-CH05-S09 resumes
+  ok EX-CH05-S09 commits p10_exclude_unsupported_impact_claim
+  ok EX-CH05-S09 commits p10_save_report
+  ok EX-CH05-S09 physical gate is ready
+  ok EX-CH05-S09 advances in canonical order
+  ok EX-M0503 reports complete
+  ok EX-M0503 report payload carries its debrief decision
+  ok EX-M0503 rendered Report Card honestly waits on M3-64
+  ok EX-M0504 begins after its predecessor
+  ok mission route is at EX-CH05-S10
+  ok EX-CH05-S10 plays in its canonical room
+  ok EX-CH05-S10 acknowledges EX-CH05-S10-L01
+  ok EX-CH05-S10 acknowledges EX-CH05-S10-L02
+  ok EX-CH05-S10 acknowledges EX-CH05-S10-L03
+  ok EX-CH05-S10 acknowledges EX-CH05-S10-L04
+  ok EX-CH05-S10 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S10 commits decision option EX-CH05-S10-OPT01
+  ok EX-CH05-S10 decision outcome is success
+  ok EX-CH05-S10 refuses a target from another chapter
+  ok EX-CH05-S10 pauses
+  ok EX-CH05-S10 resumes
+  ok EX-CH05-S10 commits p10_match_noor_identity
+  ok EX-CH05-S10 commits p10_record_consent
+  ok EX-CH05-S10 commits p10_confirm_founder_role
+  ok EX-CH05-S10 physical gate is ready
+  ok EX-CH05-S10 advances in canonical order
+  ok mission route is at EX-CH05-S11
+  ok EX-CH05-S11 plays in its canonical room
+  ok EX-CH05-S11 acknowledges EX-CH05-S11-L01
+  ok EX-CH05-S11 acknowledges EX-CH05-S11-L02
+  ok EX-CH05-S11 acknowledges EX-CH05-S11-L03
+  ok EX-CH05-S11 acknowledges EX-CH05-S11-L04
+  ok EX-CH05-S11 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S11 commits decision option EX-CH05-S11-OPT02
+  ok EX-CH05-S11 decision outcome is success
+  ok D10 recorded: invitation opens 'We kept a place for your work.'
+  ok EX-CH05-S11 refuses a target from another chapter
+  ok EX-CH05-S11 pauses
+  ok EX-CH05-S11 resumes
+  ok EX-CH05-S11 commits p10_send_invitation
+  ok EX-CH05-S11 physical gate is ready
+  ok EX-CH05-S11 witness ends E16, A4.25, H6, C8, R13.5
+  ok EX-CH05-S11 advances in canonical order
+  ok mission route is at EX-CH05-S12
+  ok EX-CH05-S12 plays in its canonical room
+  ok EX-CH05-S12 acknowledges EX-CH05-S12-L01
+  ok EX-CH05-S12 acknowledges EX-CH05-S12-L02
+  ok EX-CH05-S12 acknowledges EX-CH05-S12-L03
+  ok EX-CH05-S12 acknowledges EX-CH05-S12-L04
+  ok EX-CH05-S12 duplicate acknowledgement adds no receipt
+  ok EX-CH05-S12 revise option is refused with a retry
+  ok EX-CH05-S12 revise feedback is the canon consequence
+  ok EX-CH05-S12 commits decision option EX-CH05-S12-OPT01
+  ok EX-CH05-S12 decision outcome is partial
+  ok EX-CH05-S12 refuses a target from another chapter
+  ok EX-CH05-S12 pauses
+  ok EX-CH05-S12 resumes
+  ok EX-CH05-S12 commits p10_plant_cotton
+  ok EX-CH05-S12 commits p10_protect_eleven_vault
+  ok EX-CH05-S12 commits p10_protect_founder_reserve
+  ok EX-CH05-S12 physical gate is ready
+  ok EX-CH05-S12 closes the Chapter 5 boundary
+  ok EX-M0504 reports complete
+  ok EX-M0504 report payload carries its debrief decision
+  ok EX-M0504 rendered Report Card honestly waits on M3-64
+  ok Chapter 5 reports complete after EX-CH05-S12
+  ok Chapter 5 ends on 15 December 2046
+  ok cotton is physically planted on December 15 in pressure
+  ok cotton uses one vault specimen, with eleven stored and founder thirty separate
+  ok chapter status lists all twelve Chapter 5 scenes complete
+  ok Chapter 5 upgrade rejects an option from another chapter
+  ok Chapter 5 upgrade choice applies Dust Shield once
+  ok Dust Shield is recorded as acquired in Chapter 5
+  ok Chapter 5 upgrade cannot be chosen twice
+  ok Chapter 5 route restores at the chapter end
+  ok restored route remains at EX-CH05-S12 with 36 completed scenes
+  ok Chapter 5 mission decision state restores
+  ok restored mission keeps its S12 decision outcome
+  ok route opens EX-CH06-S01 after the chapter boundary
+  ok Chapter 5 message file exists
+  ok Chapter 5 join CH05 S01→S02 carries at least 2 messages (25 §5)
+  ok Chapter 5 join CH05 S02→S03 carries at least 2 messages (25 §5)
+  ok Chapter 5 join CH05 S03→S04 carries at least 2 messages (25 §5)
+  ok Chapter 5 join CH05 S04→S05 carries at least 2 messages (25 §5)
+  ok Chapter 5 join CH05 S05→S06 carries at least 2 messages (25 §5)
+  ok Chapter 5 join CH05 S06→S07 carries at least 2 messages (25 §5)
+  ok Chapter 5 join CH05 S07→S08 carries at least 2 messages (25 §5)
+  ok Chapter 5 join CH05 S08→S09 carries at least 2 messages (25 §5)
+  ok Chapter 5 join CH05 S09→S10 carries at least 2 messages (25 §5)
+  ok Chapter 5 join CH05 S10→S11 carries at least 2 messages (25 §5)
+  ok Chapter 5 join CH05 S11→S12 carries at least 2 messages (25 §5)
+  ok Chapter 5 join CH05→CH06 carries at least 2 messages (25 §5)
+  ok No pre-reveal Chapter 5 message names Noor (25 §5)
+  ok Chapter 5 published gate map exists
+  ok published Chapter 5 gate map has twelve gates
+  ok published gate map matches the runtime catalog at EX-CH05-S01
+  ok published gate map matches the runtime catalog at EX-CH05-S02
+  ok published gate map matches the runtime catalog at EX-CH05-S03
+  ok published gate map matches the runtime catalog at EX-CH05-S04
+  ok published gate map matches the runtime catalog at EX-CH05-S05
+  ok published gate map matches the runtime catalog at EX-CH05-S06
+  ok published gate map matches the runtime catalog at EX-CH05-S07
+  ok published gate map matches the runtime catalog at EX-CH05-S08
+  ok published gate map matches the runtime catalog at EX-CH05-S09
+  ok published gate map matches the runtime catalog at EX-CH05-S10
+  ok published gate map matches the runtime catalog at EX-CH05-S11
+  ok published gate map matches the runtime catalog at EX-CH05-S12
+CHAPTER 5 MISSIONS RESULT: PASS (890 checks, 0 failures)

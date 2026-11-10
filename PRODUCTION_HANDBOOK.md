@@ -2,7 +2,7 @@
 
 **Read this first.** This is the single source of truth for making the game's assets and cutscenes: what is canon, what has been decided, how the pipeline works, what exists, and what is next. It is written for every team member and for AI agents (Claude Code, Codex, Antigravity). If you change a decision, change it here in the same commit.
 
-Last updated: 8 November 2026.
+Last updated: 10 November 2026.
 
 ---
 
@@ -319,6 +319,8 @@ Rules from the cinematic guide and the final story: cutscenes are short, embedde
 Optional opening (from the gameplay entry flow): mustard fields to the Moon chamber, 20–30 s, with no claim that Alo existed before the story.
 
 ## 10. Status (latest first)
+
+**10 Nov 2026 - final accepted119-suite coverage (Ramim integration / Sadman-Claude continuation):** user explicitly requested accepting Sadman's published42-119 result without rerunning. Ramim1-41 pass through the required runner, Sadman42-119 pass78/78; both committed game trees equal `e5c5d5ed86b88301088451b472e6be747d57ae69`. Combined119/119 is accepted for M1-125; it is not a single frozen full-run command. Original Windows performance separately passes618/0 twice at11722b7d, native loading31/0 and recovery53/0. All22 active Ramim implementation IDs and eleven source-delivered Ramim acceptance rows are closed with prior feature/native evidence preserved. Video/submission/manual QA remain deferred; M1-53 ten native probes, M1-92 original M4 draw profiling and M1-116 original Arc exit qualification remain open. No game tests repeated during finishing. [Combined result and exact qualifications](production/qa/evidence/M1-125_117_gate_2026-11-10/combined119/README.md).
 
 **10 Nov 2026 - original Windows loading cleanup (Ramim, M1-125,11722b7d):** measured synchronous private GLTF JSON release30-41ms (whole-state cleanup35-50ms) now drains root arrays in8ms batches on the main thread. Generated geometry, materials, animation clips, node deletion and Sadman's single-owner/recovery path stay intact. Controlled fresh-process performance618/0 twice; recovery53/0 includes a post-publication race that fails53/1 without its final guard. Native loading31/0, fallback card and recovered full-cast PNGs inspected. Original-host access is resolved; fresh immutable full119-suite acceptance is running, not yet passed. No50ms limit or cache policy changed. [Raw failed/final focused evidence](production/qa/evidence/M1-125_117_gate_2026-11-10/raw_cleanup/provenance.json).
 

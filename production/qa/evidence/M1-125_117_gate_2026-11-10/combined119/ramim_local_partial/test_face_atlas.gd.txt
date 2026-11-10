@@ -1,0 +1,20 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+  ok finds available face layers and tolerates missing FaceBrowR
+  ok atlas shader materials are installed on the layers
+  ok setup after _ready keeps each layer's own atlas
+  ok v7 left eye uses its own unmirrored atlas
+  ok repeated setup updates mirroring without replacing the material
+  ok face and character share the same shadow tint
+  ok repeated setup preserves the current speech mouth
+  ok untextured source gets a valid fallback atlas
+  ok loads the Kai Rhubarb cue JSON
+  ok anticipates the E cue by 40 ms
+  ok maps SS to the B mouth cell
+  ok loads a short timing fixture
+  ok holds each snapped mouth shape for at least two 30 fps frames
+  ok happy expression sets eye, brow and default mouth cells
+  ok blink scheduler enters a short half-close/closed sequence
+  ok blink interval remains within 2-6 seconds
+  ok expression mouth is used before speech starts
+PASS FaceAtlas (17 checks, 16 cue frames checked)

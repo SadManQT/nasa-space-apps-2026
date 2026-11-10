@@ -1,0 +1,642 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+  ok P-03 entry profile is explicit
+  ok dated Chapter 2 handoff operation inspect_alo_identity
+  ok dated Chapter 2 handoff operation inspect_tara_identity
+  ok dated Chapter 2 handoff operation ack_live_link
+  ok dated Chapter 2 handoff operation open_pollination_protocol
+  ok dated Chapter 2 handoff operation identify_anther
+  ok dated Chapter 2 handoff operation identify_stigma
+  ok dated Chapter 2 handoff operation assign_brush_directions
+  ok dated Chapter 2 handoff operation practice_transfer_model
+  ok dated Chapter 2 handoff operation check_space_weather
+  ok dated Chapter 2 handoff operation prepare_closed_carrier
+  ok dated Chapter 2 handoff operation verify_transfer_boundaries
+  ok dated Chapter 2 handoff operation preview_cycle_budget
+  ok dated Chapter 2 handoff operation p03_scan_tara
+  ok dated Chapter 2 handoff operation p03_collect_tara
+  ok dated Chapter 2 handoff operation p03_seal_a
+  ok dated Chapter 2 handoff operation p03_transfer_alo
+  ok dated Chapter 2 handoff operation p03_scan_alo
+  ok dated Chapter 2 handoff operation p03_collect_alo
+  ok dated Chapter 2 handoff operation p03_seal_b
+  ok dated Chapter 2 handoff operation p03_transfer_tara
+  ok pollination run preview preserves authoritative state
+  ok pollination run preview returns the actual projected resources and biology
+  ok dated Chapter 2 handoff operation p03_complete_run_1
+  ok dated Chapter 2 handoff operation p03_care_day_2
+  ok dated Chapter 2 handoff operation p03_care_day_3
+  ok dated Chapter 2 handoff operation p03_run_2_forward
+  ok dated Chapter 2 handoff operation p03_run_2_reverse
+  ok pollination run preview preserves authoritative state
+  ok pollination run preview returns the actual projected resources and biology
+  ok dated Chapter 2 handoff operation p03_complete_run_2
+  ok dated Chapter 2 handoff operation p03_care_day_4
+  ok dated Chapter 2 handoff operation p03_care_day_5
+  ok dated Chapter 2 handoff operation p03_care_day_6
+  ok dated Chapter 2 handoff operation p03_care_day_7
+  ok dated Chapter 2 handoff operation p03_run_3_forward
+  ok dated Chapter 2 handoff operation p03_run_3_reverse
+  ok pollination run preview preserves authoritative state
+  ok pollination run preview returns the actual projected resources and biology
+  ok dated Chapter 2 handoff operation p03_complete_run_3
+  ok dated Chapter 2 handoff operation record_stem_prediction
+  ok dated Chapter 2 handoff operation order_lifecycle
+  ok dated Chapter 2 handoff operation separate_current_evidence
+  ok dated Chapter 2 handoff operation inspect_recorder_identifier
+  ok dated Chapter 2 handoff operation collect_serial_card
+  ok dated Chapter 2 handoff operation collect_date_card
+  ok dated Chapter 2 handoff operation collect_trial_stage_card
+  ok dated Chapter 2 handoff operation exclude_identity_claim
+  ok dated Chapter 2 handoff operation assign_date_token
+  ok dated Chapter 2 handoff operation assign_device_token
+  ok dated Chapter 2 handoff operation assign_channel_token
+  ok dated Chapter 2 handoff operation verify_local_checksum
+  ok dated Chapter 2 handoff operation open_reconstructed_transcript
+  ok dated Chapter 2 handoff operation play_engineer_fragment
+  ok dated Chapter 2 handoff operation play_n_memory
+  ok dated Chapter 2 handoff operation classify_voice_inference
+  ok dated Chapter 2 handoff operation send_fragment_copy
+  ok dated Chapter 2 handoff operation acknowledge_handover
+  ok dated Chapter 2 handoff operation reach_interior_brace
+  ok dated Chapter 2 handoff operation account_four_cadets
+  ok dated Chapter 2 handoff operation finish_quake_beat
+  ok extended route starts at canonical Chapter 3
+  ok extended route contains all 72 Chapter 3–8 scenes
+  ok route is at EX-CH03-S01
+  ok EX-CH03-S01 commits p05_equip_gauge
+  ok B05 later checkpoint persists at EX-CH03-S01
+  ok B05 retry restores complete operation checkpoint at EX-CH03-S01
+  ok EX-CH03-S01 commits p05_read_panel_warning
+  ok B05 later checkpoint persists at EX-CH03-S01
+  ok B05 retry restores complete operation checkpoint at EX-CH03-S01
+  ok EX-CH03-S01 commits p05_identify_three_taps
+  ok B05 later checkpoint persists at EX-CH03-S01
+  ok B05 retry restores complete operation checkpoint at EX-CH03-S01
+  ok EX-CH03-S01 physical gate is ready
+  ok EX-CH03-S01 advances in canonical order
+  ok route is at EX-CH03-S02
+  ok EX-CH03-S02 commits p05_read_main_t0
+  ok EX-CH03-S02 commits p05_read_garden_t0
+  ok EX-CH03-S02 commits p05_read_return_t0
+  ok EX-CH03-S02 commits p05_inspect_tank
+  ok read-only real preview p05_inspect_habitat
+  ok real preview/commit equality p05_inspect_habitat
+  ok EX-CH03-S02 commits p05_inspect_habitat
+  ok EX-CH03-S02 commits p05_inspect_garden
+  ok EX-CH03-S02 commits p05_inspect_return
+  ok EX-CH03-S02 commits p05_inspect_airlock
+  ok EX-CH03-S02 commits p05_inspect_annex
+  ok EX-CH03-S02 commits p05_read_main_t10
+  ok EX-CH03-S02 commits p05_read_garden_t10
+  ok EX-CH03-S02 commits p05_read_return_t10
+  ok EX-CH03-S02 commits p05_identify_garden_fall
+  ok EX-CH03-S02 physical gate is ready
+  ok EX-CH03-S02 advances in canonical order
+  ok route is at EX-CH03-S03
+  ok EX-CH03-S03 commits p05_verify_annex_isolation
+  ok EX-CH03-S03 commits p05_preview_garden_isolation
+  ok EX-CH03-S03 commits p05_rollback_check
+  ok EX-CH03-S03 physical gate is ready
+  ok EX-CH03-S03 advances in canonical order
+  ok route is at EX-CH03-S04
+  ok EX-CH03-S04 commits p05_isolate_garden
+  ok EX-CH03-S04 commits p05_verify_main_hold
+  ok EX-CH03-S04 commits p05_apply_garden_clamp
+  ok EX-CH03-S04 commits p05_reopen_garden_slow
+  ok EX-CH03-S04 commits p05_stable_read_1
+  ok EX-CH03-S04 commits p05_stable_read_2
+  ok EX-CH03-S04 commits p05_stable_read_3
+  ok EX-CH03-S04 commits p05_stable_read_4
+  ok read-only real preview p05_stable_read_5
+  ok real preview/commit equality p05_stable_read_5
+  ok EX-CH03-S04 commits p05_stable_read_5
+  ok P-05 budget phases preserve the approved story date
+  ok EX-CH03-S04 source endpoint E = 18
+  ok EX-CH03-S04 source endpoint A = 3
+  ok EX-CH03-S04 source endpoint H = 6
+  ok EX-CH03-S04 source endpoint C = 8
+  ok EX-CH03-S04 source endpoint R = 13.2
+  ok EX-CH03-S04 physical gate is ready
+  ok EX-CH03-S04 advances in canonical order
+  ok route is at EX-CH03-S05
+  ok EX-CH03-S05 commits p05_reconcile_records
+  ok EX-CH03-S05 commits p05_save_monitoring_handover
+  ok EX-CH03-S05 physical gate is ready
+  ok EX-CH03-S05 advances in canonical order
+  ok route is at EX-CH03-S06
+  ok EX-CH03-S06 commits p05_isolate_annex_feed
+  ok EX-CH03-S06 commits p05_confirm_zero_differential
+  ok EX-CH03-S06 commits p05_inspect_annex_hatch
+  ok EX-CH03-S06 physical gate is ready
+  ok EX-CH03-S06 advances in canonical order
+  ok route is at EX-CH03-S07
+  ok EX-CH03-S07 commits p06_scan_growth_chart
+  ok EX-CH03-S07 commits p06_scan_vault_map
+  ok EX-CH03-S07 commits p06_exit_suit_check
+  ok EX-CH03-S07 commits p06_accept_maturity_montage
+  ok EX-CH03-S07 physical gate is ready
+  ok EX-CH03-S07 advances in canonical order
+  ok route is at EX-CH03-S08
+  ok EX-CH03-S08 commits p06_save_map_provenance
+  ok EX-CH03-S08 commits p06_record_future_checks
+  ok EX-CH03-S08 commits p06_confirm_care_transition
+  ok EX-CH03-S08 physical gate is ready
+  ok EX-CH03-S08 advances in canonical order
+  ok route is at EX-CH03-S09
+  ok EX-CH03-S09 commits p06_confirm_maturity
+  ok read-only real preview p06_configure_drydown
+  ok real preview/commit equality p06_configure_drydown
+  ok EX-CH03-S09 commits p06_configure_drydown
+  ok May 16 maturity and irrigation stop are real biology
+  ok EX-CH03-S09 physical gate is ready
+  ok EX-CH03-S09 advances in canonical order
+  ok route is at EX-CH03-S10
+  ok EX-CH03-S10 commits p06_drydown_five_days
+  ok read-only real preview p06_open_six_pods
+  ok real preview/commit equality p06_open_six_pods
+  ok EX-CH03-S10 commits p06_open_six_pods
+  ok EX-CH03-S10 commits p06_count_42
+  ok EX-CH03-S10 commits p06_allocate_12_30
+  ok EX-CH03-S10 commits p06_sleeve_petal
+  ok May 21 harvest archives the original, without revival
+  ok physical founder harvest conserves forty-two as twelve plus thirty
+  ok EX-CH03-S10 physical gate is ready
+  ok EX-CH03-S10 advances in canonical order
+  ok route is at EX-CH03-S11
+  ok read-only real preview p06_plant_12_positions
+  ok real preview/commit equality p06_plant_12_positions
+  ok EX-CH03-S11 commits p06_plant_12_positions
+  ok EX-CH03-S11 commits p06_seal_reserve_30
+  ok EX-CH03-S11 commits p06_preserve_lineage
+  ok EX-CH03-S11 physical gate is ready
+  ok EX-CH03-S11 advances in canonical order
+  ok route is at EX-CH03-S12
+  ok EX-CH03-S12 commits p06_reconcile_continuity
+  ok EX-CH03-S12 commits p06_confirm_descendant_survey
+  ok October sample has twelve replacement descendants, seven purple and five green
+  ok dated descendant bridge never spends protected founder seeds
+  ok Tara's pods are mature and her watering stops on 26 May
+  ok Tara's 31 May harvest archives her nameplate with no headline count
+  ok the working stock is Tara x Alo, sealed, with no count
+  ok founder 42 = 12 + 30 (15 + 15) is unchanged after Tara's harvest
+  ok EX-CH03-S12 physical gate is ready
+  ok EX-CH03-S12 closes its chapter boundary
+  ok route opens EX-CH04-S01
+  ok route is at EX-CH04-S01
+  ok EX-CH04-S01 commits p07_compare_prediction
+  ok EX-CH04-S01 commits p07_inspect_twelve_descendants
+  ok EX-CH04-S01 commits p07_record_trait_limits
+  ok EX-CH04-S01 physical gate is ready
+  ok EX-CH04-S01 advances in canonical order
+  ok route is at EX-CH04-S02
+  ok EX-CH04-S02 commits p07_check_rover_seal
+  ok EX-CH04-S02 commits p07_check_scanner
+  ok EX-CH04-S02 commits p07_check_closed_carrier
+  ok EX-CH04-S02 commits p07_complete_base_handover
+  ok EX-CH04-S02 physical gate is ready
+  ok EX-CH04-S02 advances in canonical order
+  ok route is at EX-CH04-S03
+  ok EX-CH04-S03 commits p07_choose_route_b
+  ok EX-CH04-S03 commits p07_verify_slope
+  ok EX-CH04-S03 commits p07_verify_return_reserve
+  ok EX-CH04-S03 commits p07_prepare_departure
+  ok EX-CH04-S03 physical gate is ready
+  ok EX-CH04-S03 advances in canonical order
+  ok route is at EX-CH04-S04
+  ok EX-CH04-S04 commits p07_place_beacon_1
+  ok B05 later checkpoint persists at EX-CH04-S04
+  ok B05 retry restores complete operation checkpoint at EX-CH04-S04
+  ok EX-CH04-S04 commits p07_place_beacon_2
+  ok B05 later checkpoint persists at EX-CH04-S04
+  ok B05 retry restores complete operation checkpoint at EX-CH04-S04
+  ok EX-CH04-S04 commits p07_place_beacon_3
+  ok B05 later checkpoint persists at EX-CH04-S04
+  ok B05 retry restores complete operation checkpoint at EX-CH04-S04
+  ok EX-CH04-S04 physical gate is ready
+  ok EX-CH04-S04 advances in canonical order
+  ok route is at EX-CH04-S05
+  ok EX-CH04-S05 commits p07_record_dry_reference
+  ok EX-CH04-S05 commits p07_set_threshold_12
+  ok EX-CH04-S05 commits p07_tag_positive_18
+  ok EX-CH04-S05 commits p07_tag_positive_19
+  ok EX-CH04-S05 commits p07_retain_negative_2
+  ok EX-CH04-S05 physical gate is ready
+  ok EX-CH04-S05 advances in canonical order
+  ok route is at EX-CH04-S06
+  ok EX-CH04-S06 commits p07_seal_sample
+  ok EX-CH04-S06 commits p07_commit_return_route
+  ok EX-CH04-S06 physical gate is ready
+  ok EX-CH04-S06 advances in canonical order
+  ok route is at EX-CH04-S07
+  ok EX-CH04-S07 commits p08_read_external_probe
+  ok EX-CH04-S07 commits p08_fit_sleeve
+  ok EX-CH04-S07 commits p08_latch_cradle
+  ok EX-CH04-S07 commits p08_secure_mount
+  ok EX-CH04-S07 physical gate is ready
+  ok EX-CH04-S07 advances in canonical order
+  ok route is at EX-CH04-S08
+  ok EX-CH04-S08 commits p08_return_to_base
+  ok EX-CH04-S08 commits p08_dock_dry_glovebox
+  ok EX-CH04-S08 commits p08_warm_cold
+  ok EX-CH04-S08 commits p08_warm_cool
+  ok EX-CH04-S08 commits p08_warm_room
+  ok EX-CH04-S08 commits p08_check_condensation
+  ok EX-CH04-S08 commits p08_open_inner_seal
+  ok read-only real preview p08_inventory_12
+  ok real preview/commit equality p08_inventory_12
+  ok EX-CH04-S08 commits p08_inventory_12
+  ok survey return conserves rover and twelve distinct specimens
+  ok EX-CH04-S08 source endpoint E = 18
+  ok EX-CH04-S08 source endpoint A = 7
+  ok EX-CH04-S08 source endpoint H = 6
+  ok EX-CH04-S08 source endpoint C = 8
+  ok EX-CH04-S08 source endpoint R = 16.8
+  ok EX-CH04-S08 physical gate is ready
+  ok EX-CH04-S08 advances in canonical order
+  ok route is at EX-CH04-S09
+  ok EX-CH04-S09 commits p08_scan_lid
+  ok EX-CH04-S09 commits p08_save_viability_pending
+  ok EX-CH04-S09 commits p08_transfer_case
+  ok EX-CH04-S09 physical gate is ready
+  ok EX-CH04-S09 advances in canonical order
+  ok route is at EX-CH04-S10
+  ok EX-CH04-S10 commits p08_manifest_reconciled
+  ok EX-CH04-S10 commits p08_personnel_home
+  ok EX-CH04-S10 commits p08_quarantine_complete
+  ok EX-CH04-S10 physical gate is ready
+  ok EX-CH04-S10 advances in canonical order
+  ok route is at EX-CH04-S11
+  ok EX-CH04-S11 commits p08_send_manifest
+  ok EX-CH04-S11 commits p08_record_ferreira_question
+  ok EX-CH04-S11 commits p08_leave_identity_open
+  ok EX-CH04-S11 physical gate is ready
+  ok EX-CH04-S11 advances in canonical order
+  ok route is at EX-CH04-S12
+  ok EX-CH04-S12 commits p08_check_relief_flight
+  ok EX-CH04-S12 commits p08_prepare_locker
+  ok EX-CH04-S12 commits p08_confirm_december_transition
+  ok EX-CH04-S12 physical gate is ready
+  ok EX-CH04-S12 closes its chapter boundary
+  ok route opens EX-CH05-S01
+  ok route is at EX-CH05-S01
+  ok EX-CH05-S01 commits p09_check_lander_clearance
+  ok B05 later checkpoint persists at EX-CH05-S01
+  ok B05 retry restores complete operation checkpoint at EX-CH05-S01
+  ok EX-CH05-S01 commits p09_check_seals
+  ok B05 later checkpoint persists at EX-CH05-S01
+  ok B05 retry restores complete operation checkpoint at EX-CH05-S01
+  ok EX-CH05-S01 commits p09_verify_five_person_roster
+  ok B05 later checkpoint persists at EX-CH05-S01
+  ok B05 retry restores complete operation checkpoint at EX-CH05-S01
+  ok EX-CH05-S01 physical gate is ready
+  ok EX-CH05-S01 advances in canonical order
+  ok route is at EX-CH05-S02
+  ok EX-CH05-S02 commits p09_store_spare_once
+  ok EX-CH05-S02 commits p09_run_arrival_readings
+  ok EX-CH05-S02 commits p09_reconcile_readings
+  ok EX-CH05-S02 physical gate is ready
+  ok EX-CH05-S02 advances in canonical order
+  ok route is at EX-CH05-S03
+  ok EX-CH05-S03 commits p09_commit_sequence
+  ok EX-CH05-S03 physical gate is ready
+  ok EX-CH05-S03 advances in canonical order
+  ok route is at EX-CH05-S04
+  ok EX-CH05-S04 commits p10_document_young_trial
+  ok EX-CH05-S04 commits p10_exclude_flower_claim
+  ok EX-CH05-S04 commits p10_save_source_scope
+  ok EX-CH05-S04 physical gate is ready
+  ok EX-CH05-S04 advances in canonical order
+  ok route is at EX-CH05-S05
+  ok EX-CH05-S05 commits p10_acknowledge_ferreira_facts
+  ok EX-CH05-S05 commits p10_acknowledge_personal_question
+  ok EX-CH05-S05 commits p10_preserve_safety_facts
+  ok EX-CH05-S05 physical gate is ready
+  ok EX-CH05-S05 advances in canonical order
+  ok route is at EX-CH05-S06
+  ok EX-CH05-S06 commits p10_compare_dust_repair
+  ok EX-CH05-S06 commits p10_compare_leak_repair
+  ok EX-CH05-S06 commits p10_keep_spare_present
+  ok EX-CH05-S06 physical gate is ready
+  ok EX-CH05-S06 advances in canonical order
+  ok route is at EX-CH05-S07
+  ok EX-CH05-S07 commits p10_verify_flashes
+  ok EX-CH05-S07 physical gate is ready
+  ok EX-CH05-S07 advances in canonical order
+  ok route is at EX-CH05-S08
+  ok EX-CH05-S08 commits p10_clean_panel
+  ok EX-CH05-S08 commits p10_patch_dome_spur
+  ok read-only real preview p10_verify_pressure
+  ok real preview/commit equality p10_verify_pressure
+  ok EX-CH05-S08 commits p10_verify_pressure
+  ok EX-CH05-S08 physical gate is ready
+  ok EX-CH05-S08 advances in canonical order
+  ok route is at EX-CH05-S09
+  ok EX-CH05-S09 commits p10_exclude_unsupported_impact_claim
+  ok EX-CH05-S09 commits p10_save_report
+  ok EX-CH05-S09 physical gate is ready
+  ok EX-CH05-S09 advances in canonical order
+  ok route is at EX-CH05-S10
+  ok EX-CH05-S10 commits p10_match_noor_identity
+  ok EX-CH05-S10 commits p10_record_consent
+  ok EX-CH05-S10 commits p10_confirm_founder_role
+  ok EX-CH05-S10 physical gate is ready
+  ok EX-CH05-S10 advances in canonical order
+  ok route is at EX-CH05-S11
+  ok EX-CH05-S11 commits p10_send_invitation
+  ok EX-CH05-S11 source endpoint E = 16
+  ok EX-CH05-S11 source endpoint A = 4.25
+  ok EX-CH05-S11 source endpoint H = 6
+  ok EX-CH05-S11 source endpoint C = 8
+  ok EX-CH05-S11 source endpoint R = 13.5
+  ok EX-CH05-S11 physical gate is ready
+  ok EX-CH05-S11 advances in canonical order
+  ok route is at EX-CH05-S12
+  ok read-only real preview p10_plant_cotton
+  ok real preview/commit equality p10_plant_cotton
+  ok EX-CH05-S12 commits p10_plant_cotton
+  ok EX-CH05-S12 commits p10_protect_eleven_vault
+  ok EX-CH05-S12 commits p10_protect_founder_reserve
+  ok cotton is physically planted on December 15 in pressure
+  ok cotton uses one vault specimen, with eleven stored and founder thirty separate
+  ok EX-CH05-S12 physical gate is ready
+  ok EX-CH05-S12 closes its chapter boundary
+  ok route opens EX-CH06-S01
+  ok route is at EX-CH06-S01
+  ok EX-CH06-S01 commits p11_charge_hand_light
+  ok B05 later checkpoint persists at EX-CH06-S01
+  ok B05 retry restores complete operation checkpoint at EX-CH06-S01
+  ok EX-CH06-S01 commits p11_assign_companion
+  ok B05 later checkpoint persists at EX-CH06-S01
+  ok B05 retry restores complete operation checkpoint at EX-CH06-S01
+  ok EX-CH06-S01 commits p11_check_locker
+  ok B05 later checkpoint persists at EX-CH06-S01
+  ok B05 retry restores complete operation checkpoint at EX-CH06-S01
+  ok EX-CH06-S01 physical gate is ready
+  ok EX-CH06-S01 advances in canonical order
+  ok route is at EX-CH06-S02
+  ok EX-CH06-S02 commits p11_read_personal_log
+  ok EX-CH06-S02 commits p11_identify_protected_path
+  ok EX-CH06-S02 commits p11_identify_fault_method
+  ok EX-CH06-S02 physical gate is ready
+  ok EX-CH06-S02 advances in canonical order
+  ok route is at EX-CH06-S03
+  ok read-only real preview p11_commit_allocation
+  ok real preview/commit equality p11_commit_allocation
+  ok EX-CH06-S03 commits p11_commit_allocation
+  ok EX-CH06-S03 physical gate is ready
+  ok EX-CH06-S03 advances in canonical order
+  ok route is at EX-CH06-S04
+  ok EX-CH06-S04 commits p11_remove_decorative_floods
+  ok EX-CH06-S04 commits p11_protect_guide_light
+  ok EX-CH06-S04 commits p11_protect_reserve
+  ok EX-CH06-S04 physical gate is ready
+  ok EX-CH06-S04 advances in canonical order
+  ok route is at EX-CH06-S05
+  ok EX-CH06-S05 commits p12_test_branch
+  ok EX-CH06-S05 commits p12_verify_protected_services
+  ok EX-CH06-S05 commits p12_record_rehearsal
+  ok EX-CH06-S05 physical gate is ready
+  ok EX-CH06-S05 advances in canonical order
+  ok route is at EX-CH06-S06
+  ok EX-CH06-S06 commits p12_check_four_roles
+  ok EX-CH06-S06 commits p12_check_five_segments
+  ok EX-CH06-S06 commits p12_ready_camera
+  ok EX-CH06-S06 physical gate is ready
+  ok EX-CH06-S06 advances in canonical order
+  ok route is at EX-CH06-S07
+  ok EX-CH06-S07 commits p12_log_ingress
+  ok EX-CH06-S07 commits p12_log_ring
+  ok EX-CH06-S07 physical gate is ready
+  ok EX-CH06-S07 advances in canonical order
+  ok route is at EX-CH06-S08
+  ok EX-CH06-S08 commits p12_deliver_family_contact
+  ok EX-CH06-S08 commits p12_preserve_observation_qualifications
+  ok EX-CH06-S08 physical gate is ready
+  ok EX-CH06-S08 advances in canonical order
+  ok route is at EX-CH06-S09
+  ok EX-CH06-S09 commits p12_store_known_noor_text
+  ok EX-CH06-S09 commits p12_reserve_live_voice
+  ok EX-CH06-S09 physical gate is ready
+  ok EX-CH06-S09 advances in canonical order
+  ok route is at EX-CH06-S10
+  ok EX-CH06-S10 commits p12_reset_sequence
+  ok EX-CH06-S10 physical gate is ready
+  ok EX-CH06-S10 advances in canonical order
+  ok route is at EX-CH06-S11
+  ok EX-CH06-S11 commits p12_record_egress
+  ok EX-CH06-S11 commits p12_reconcile_recovery_reserve
+  ok EX-CH06-S11 commits p12_save_recovery
+  ok EX-CH06-S11 source endpoint E = 7
+  ok EX-CH06-S11 physical gate is ready
+  ok EX-CH06-S11 advances in canonical order
+  ok route is at EX-CH06-S12
+  ok EX-CH06-S12 commits p12_reconcile_monitoring
+  ok EX-CH06-S12 commits p12_date_february_warning
+  ok EX-CH06-S12 commits p12_confirm_care_ledger
+  ok EX-CH06-S12 physical gate is ready
+  ok EX-CH06-S12 closes its chapter boundary
+  ok route opens EX-CH07-S01
+  ok route is at EX-CH07-S01
+  ok EX-CH07-S01 commits p13_share_observations
+  ok EX-CH07-S01 commits p13_label_counterfactual
+  ok EX-CH07-S01 commits p13_record_current_state
+  ok EX-CH07-S01 physical gate is ready
+  ok EX-CH07-S01 advances in canonical order
+  ok route is at EX-CH07-S02
+  ok EX-CH07-S02 commits p13_confirm_five_person_profile
+  ok EX-CH07-S02 commits p13_confirm_shelter_roster
+  ok EX-CH07-S02 commits p13_confirm_shared_resources
+  ok EX-CH07-S02 physical gate is ready
+  ok EX-CH07-S02 advances in canonical order
+  ok route is at EX-CH07-S03
+  ok read-only real preview p13_commit_plan
+  ok real preview/commit equality p13_commit_plan
+  ok EX-CH07-S03 commits p13_commit_plan
+  ok EX-CH07-S03 physical gate is ready
+  ok EX-CH07-S03 advances in canonical order
+  ok route is at EX-CH07-S04
+  ok EX-CH07-S04 commits p13_latch_founder_reserve
+  ok EX-CH07-S04 commits p13_verify_water_shield
+  ok EX-CH07-S04 commits p13_verify_crate_shield
+  ok EX-CH07-S04 commits p13_verify_drain_order
+  ok EX-CH07-S04 physical gate is ready
+  ok EX-CH07-S04 advances in canonical order
+  ok route is at EX-CH07-S05
+  ok EX-CH07-S05 commits p14_confirm_five_occupants
+  ok B05 later checkpoint persists at EX-CH07-S05
+  ok B05 retry restores complete operation checkpoint at EX-CH07-S05
+  ok EX-CH07-S05 commits p14_check_hatch_one
+  ok B05 later checkpoint persists at EX-CH07-S05
+  ok B05 retry restores complete operation checkpoint at EX-CH07-S05
+  ok EX-CH07-S05 commits p14_check_hatch_two
+  ok B05 later checkpoint persists at EX-CH07-S05
+  ok B05 retry restores complete operation checkpoint at EX-CH07-S05
+  ok EX-CH07-S05 physical gate is ready
+  ok EX-CH07-S05 advances in canonical order
+  ok route is at EX-CH07-S06
+  ok read-only real preview p14_commit_steps_1_2
+  ok real preview/commit equality p14_commit_steps_1_2
+  ok EX-CH07-S06 commits p14_commit_steps_1_2
+  ok EX-CH07-S06 commits p14_save_forecast_comparison
+  ok EX-CH07-S06 commits p14_confirm_case_sealed
+  ok EX-CH07-S06 physical gate is ready
+  ok EX-CH07-S06 advances in canonical order
+  ok route is at EX-CH07-S07
+  ok EX-CH07-S07 commits p14_read_final_log
+  ok EX-CH07-S07 commits p14_record_academy_name
+  ok EX-CH07-S07 commits p14_save_progress_report
+  ok EX-CH07-S07 physical gate is ready
+  ok EX-CH07-S07 advances in canonical order
+  ok route is at EX-CH07-S08
+  ok read-only real preview p14_commit_steps_3_6
+  ok real preview/commit equality p14_commit_steps_3_6
+  ok player ledger notes contain actual numeric readings
+  ok EX-CH07-S08 commits p14_commit_steps_3_6
+  ok EX-CH07-S08 commits p14_confirm_crops_safe
+  ok EX-CH07-S08 commits p14_confirm_reserve_30
+  ok six storm steps reach February 16 01:12 exactly
+  ok final drain follows exposure and crates remain installed
+  ok EX-CH07-S08 source endpoint E = 6
+  ok EX-CH07-S08 source endpoint A = 2.5
+  ok EX-CH07-S08 source endpoint H = 1
+  ok EX-CH07-S08 source endpoint C = 3
+  ok EX-CH07-S08 source endpoint R = 9
+  ok EX-CH07-S08 source endpoint Z = 0
+  ok EX-CH07-S08 source endpoint W = 2
+  ok EX-CH07-S08 source endpoint K = 2
+  ok storm scene cannot complete from receipts when authoritative air is unsafe
+  ok EX-CH07-S08 physical gate is ready
+  ok EX-CH07-S08 advances in canonical order
+  ok route is at EX-CH07-S09
+  ok EX-CH07-S09 commits p14_diagnose_external_branch
+  ok EX-CH07-S09 commits p14_route_reading_1
+  ok EX-CH07-S09 commits p14_route_reading_2
+  ok route readings are separated by ten scenario minutes
+  ok EX-CH07-S09 physical gate is ready
+  ok EX-CH07-S09 advances in canonical order
+  ok route is at EX-CH07-S10
+  ok EX-CH07-S10 commits p14_reconcile_local_stability
+  ok EX-CH07-S10 commits p14_reconcile_supplies
+  ok EX-CH07-S10 commits p14_date_march_gate
+  ok EX-CH07-S10 physical gate is ready
+  ok EX-CH07-S10 advances in canonical order
+  ok route is at EX-CH07-S11
+  ok EX-CH07-S11 commits p14_pack_controller
+  ok EX-CH07-S11 commits p14_pack_battery
+  ok EX-CH07-S11 commits p14_pack_three_site_route
+  ok EX-CH07-S11 commits p14_bench_test
+  ok EX-CH07-S11 physical gate is ready
+  ok EX-CH07-S11 advances in canonical order
+  ok route is at EX-CH07-S12
+  ok EX-CH07-S12 commits p14_assign_field_team
+  ok EX-CH07-S12 commits p14_assign_home_team
+  ok EX-CH07-S12 commits p14_sign_departure_prep
+  ok EX-CH07-S12 physical gate is ready
+  ok EX-CH07-S12 closes its chapter boundary
+  ok route opens EX-CH08-S01
+  ok route is at EX-CH08-S01
+  ok EX-CH08-S01 commits p15_confirm_teams
+  ok EX-CH08-S01 commits p15_confirm_loadout
+  ok EX-CH08-S01 commits p15_confirm_roundtrip_provisions
+  ok EX-CH08-S01 physical gate is ready
+  ok EX-CH08-S01 advances in canonical order
+  ok route is at EX-CH08-S02
+  ok read-only real preview p15_choose_surveyed_route
+  ok real preview/commit equality p15_choose_surveyed_route
+  ok EX-CH08-S02 commits p15_choose_surveyed_route
+  ok EX-CH08-S02 commits p15_confirm_return_reserve
+  ok EX-CH08-S02 physical gate is ready
+  ok EX-CH08-S02 advances in canonical order
+  ok route is at EX-CH08-S03
+  ok EX-CH08-S03 commits p15_reach_marker_two
+  ok B05 later checkpoint persists at EX-CH08-S03
+  ok B05 retry restores complete operation checkpoint at EX-CH08-S03
+  ok EX-CH08-S03 commits p15_set_brake
+  ok B05 later checkpoint persists at EX-CH08-S03
+  ok B05 retry restores complete operation checkpoint at EX-CH08-S03
+  ok EX-CH08-S03 commits p15_save_position_packet
+  ok B05 later checkpoint persists at EX-CH08-S03
+  ok B05 retry restores complete operation checkpoint at EX-CH08-S03
+  ok EX-CH08-S03 physical gate is ready
+  ok EX-CH08-S03 advances in canonical order
+  ok route is at EX-CH08-S04
+  ok EX-CH08-S04 commits p15_restore_marker_2
+  ok EX-CH08-S04 commits p15_test_repeater_chain
+  ok EX-CH08-S04 commits p15_reach_approach
+  ok EX-CH08-S04 physical gate is ready
+  ok EX-CH08-S04 advances in canonical order
+  ok route is at EX-CH08-S05
+  ok EX-CH08-S05 commits p15_confirm_home_occupancy
+  ok EX-CH08-S05 commits p15_confirm_segment_forecast
+  ok EX-CH08-S05 commits p15_confirm_home_pressure
+  ok confirming the home forecast preserves current reserves
+  ok home preview forecasts the source endpoint E
+  ok home preview forecasts the source endpoint A
+  ok home preview forecasts the source endpoint H
+  ok home preview forecasts the source endpoint C
+  ok home preview forecasts the source endpoint R
+  ok EX-CH08-S05 physical gate is ready
+  ok EX-CH08-S05 advances in canonical order
+  ok route is at EX-CH08-S06
+  ok EX-CH08-S06 commits p15_confirm_summit
+  ok EX-CH08-S06 commits p15_confirm_home_checks
+  ok EX-CH08-S06 commits p15_receive_summit_packet
+  ok EX-CH08-S06 physical gate is ready
+  ok EX-CH08-S06 advances in canonical order
+  ok route is at EX-CH08-S07
+  ok EX-CH08-S07 commits p16_isolate_power
+  ok EX-CH08-S07 commits p16_zero_test
+  ok read-only real preview p16_install_controller
+  ok real preview/commit equality p16_install_controller
+  ok EX-CH08-S07 commits p16_install_controller
+  ok EX-CH08-S07 commits p16_close_housing
+  ok EX-CH08-S07 commits p16_restore_power
+  ok EX-CH08-S07 physical gate is ready
+  ok EX-CH08-S07 advances in canonical order
+  ok route is at EX-CH08-S08
+  ok EX-CH08-S08 commits p16_local_bearing
+  ok EX-CH08-S08 commits p16_earth_bearing
+  ok EX-CH08-S08 commits p16_stable_lock
+  ok EX-CH08-S08 physical gate is ready
+  ok EX-CH08-S08 advances in canonical order
+  ok route is at EX-CH08-S09
+  ok EX-CH08-S09 commits p16_checksum
+  ok EX-CH08-S09 commits p16_confirm_path_records
+  ok EX-CH08-S09 commits p16_voice_verification_ready
+  ok EX-CH08-S09 physical gate is ready
+  ok EX-CH08-S09 advances in canonical order
+  ok route is at EX-CH08-S10
+  ok EX-CH08-S10 commits p16_noor_live_voice
+  ok EX-CH08-S10 commits p16_confirm_telemetry
+  ok EX-CH08-S10 commits p16_start_return
+  ok EX-CH08-S10 physical gate is ready
+  ok EX-CH08-S10 advances in canonical order
+  ok route is at EX-CH08-S11
+  ok EX-CH08-S11 commits p16_confirm_return_24h
+  ok EX-CH08-S11 commits p16_confirm_five_at_aurora
+  ok EX-CH08-S11 commits p16_update_occupancy
+  ok EX-CH08-S11 physical gate is ready
+  ok EX-CH08-S11 advances in canonical order
+  ok route is at EX-CH08-S12
+  ok EX-CH08-S12 commits p16_save_final_records
+  ok EX-CH08-S12 commits p16_save_photo
+  ok EX-CH08-S12 commits p16_save_dedication
+  ok EX-CH08-S12 commits p16_make_credits_available
+  ok actual rover return is fourteen minus five minus five with fifty-one of seventy-two hours consumed
+  ok home occupancy and final dawn follow the dated 33+3-hour night
+  ok three repeaters and Earth leg retain independent verified state
+  ok final cotton lives while original Alo stays archived
+  ok EX-CH08-S12 source endpoint E = 5
+  ok EX-CH08-S12 source endpoint A = 5.1875
+  ok EX-CH08-S12 source endpoint H = 1
+  ok EX-CH08-S12 source endpoint C = 8
+  ok EX-CH08-S12 source endpoint R = 14.625
+  ok EX-CH08-S12 physical gate is ready
+  ok EX-CH08-S12 closes its chapter boundary
+  ok EX-CH08-S12 closes the full campaign
+  ok all 72 extended scenes retain physical completion receipts
+  ok final extended route reports campaign readiness
+  ok extended route restores world and puzzle ledger state
+  ok restored route remains at final campaign scene
+EXTENDED CAMPAIGN ROUTE RESULT: PASS (639 checks, 0 failures)
