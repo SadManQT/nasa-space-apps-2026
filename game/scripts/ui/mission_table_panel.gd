@@ -50,6 +50,7 @@ var _portraits := {}
 var _portrait_loading := {}
 const Simulation = preload("res://scripts/simulation/expedition_simulation.gd")
 const Debrief = preload("res://scripts/debrief/chapter1_debrief.gd")
+const Chapter1FeedbackScript = preload("res://scripts/feedback/chapter1_feedback.gd")
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -592,6 +593,16 @@ func _render_forecast() -> Control:
 	_forecast_bar(column, "Shelter", now.shelter_capacity, later.shelter_capacity, now.shelter_max, "shielding units", not after.is_empty(), "Storm shelter")
 	_forecast_bar(column, "Radiation", float(resources.get("Z", 0)), float(after.get("Z", resources.get("Z", 0))), 3, "training units · safe limit 3", not after.is_empty(), "Radiation dose")
 	column.add_child(_wrap("Water in wall: %s of %s → %s · Supplies: %s of %s → %s" % [_amount(resources.get("W", 0)), _amount(resources.get("water_capacity", 0)), _amount(after.get("W", resources.get("W", 0))), _amount(resources.get("K", 0)), _amount(resources.get("crate_capacity", 0)), _amount(after.get("K", resources.get("K", 0)))], 13, MUTED))
+	var active_shift := int(shifts.front()) if not shifts.is_empty() else clampi(_committed() + 1, 1, 7)
+	var tension := Chapter1FeedbackScript.night_shift_tension(active_shift)
+	var after_state := after if not after.is_empty() else resources
+	var posture := Chapter1FeedbackScript.alo_posture(int(after_state.get("H", 6)), int(after_state.get("W", 0)), active_shift, false)
+	var tension_lbl := _wrap("Atmosphere · %s · %s · %s" % [String(tension.get("countdown_label", "")), String(tension.get("lights_state", "")), String(tension.get("fans_state", ""))], 12, MUTED)
+	tension_lbl.name = "ForecastTension"
+	column.add_child(tension_lbl)
+	var posture_lbl := _wrap("Alo posture (%s): %s" % [String(posture.get("stage", "")), String(posture.get("posture_description", ""))], 12, CYAN)
+	posture_lbl.name = "ForecastAloPosture"
+	column.add_child(posture_lbl)
 
 	if not after.is_empty():
 		var consequence := _wrap(_consequence(forecast), 15, RED if not forecast.get("unsafe_predicates", []).is_empty() else MUSTARD)

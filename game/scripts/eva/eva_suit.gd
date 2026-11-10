@@ -158,48 +158,110 @@ static func classify_slope(slope_deg: float) -> Dictionary:
 			return out
 	return SLOPE_BANDS.back().duplicate(true)
 
-## Pre-departure suit budget estimate and return reserve check (doc 25 §4.2, 22 T4).
-func estimate_route(distance_m: float, avg_slope_deg: float = 4.0, shadow_fraction: float = 0.0, carried_kg: float = 0.0) -> Dictionary:
-	var band := classify_slope(avg_slope_deg)
-	var walk_speed_m_s := 1.45 * maxf(0.35, float(band.speed_scale))
-	if carried_kg > 8.0:
-		walk_speed_m_s *= 0.85
-	var one_way_min := (maxf(0.0, distance_m) / walk_speed_m_s) / 60.0
-	var round_trip_min := one_way_min * 2.0
+## Computes the combined terrain-feature speed scale for a surface tag list.
+static func surface_speed_scale(surface_tags: Array) -> float:
+	var scale := 1.0
+	for tag in surface_tags:
+		if TERRAIN_FEATURES.has(tag):
+			scale *= float(TERRAIN_FEATURES[tag].get("speed_scale", 1.0))
+	return scale
+
+## Computes the effective load speed multiplier (`0.85` when carried mass > 8 kg, else `1.0`).
+static func load_speed_scale(mass_kg: float) -> float:
+	return 0.85 if mass_kg > 8.0 else 1.0
+
+## Computes the effective speed scale for a slope band, surface tags, carried mass, and slip cooldown.
+static func effective_speed_scale(band: Dictionary, surface_tags: Array = [], mass_kg: float = 0.0, cooldown_s: float = 0.0) -> float:
+	var scale := float(band.get("speed_scale", 1.0))
+	if scale <= 0.0 or String(band.get("id", "")) == "no_go":
+		return 0.0
+	scale *= surface_speed_scale(surface_tags)
+	scale *= load_speed_scale(mass_kg)
+	if cooldown_s > 0.0:
+		scale *= 0.4
+	return scale
+
+## Shared per-minute drain rates used by both `estimate_route()` and `step()` so
+## route forecasts and live consumption always match across movement effort,
+## slope band, terrain tags, carried load, shadow fraction, and life_support_rank.
+func compute_rates_per_min(moving_speed: float, band: Dictionary, shadow_fraction: float, mass_kg: float, headlamp: bool, scanner_active: bool = false) -> Dictionary:
+	var effort := 0.45 + clampf(moving_speed / 2.2, 0.0, 1.2)
+	var load_mult := 1.0 + clampf(maxf(0.0, mass_kg) / 24.0, 0.0, 0.45)
 	var skill_scale := 1.0 - 0.05 * float(clampi(life_support_rank, 0, 3))
-	var load_mult := 1.0 + clampf(carried_kg / 24.0, 0.0, 0.45)
-	var ox_cost := round_trip_min * base_oxygen_per_min * float(band.oxygen_mult) * load_mult * skill_scale
 	var shadow_clamped := clampf(shadow_fraction, 0.0, 1.0)
-	var pwr_mult := 1.0 + shadow_clamped * 0.85 + (0.25 if headlamp_on or shadow_clamped > 0.1 else 0.0)
-	var pwr_cost := round_trip_min * base_power_per_min * pwr_mult * skill_scale
-	var cool_mult := (1.0 - shadow_clamped * 0.35) * load_mult
-	var cool_cost := round_trip_min * base_cooling_per_min * maxf(0.5, cool_mult) * skill_scale
+	var ox_per_min := base_oxygen_per_min * effort * float(band.get("oxygen_mult", 1.0)) * load_mult * skill_scale
+	var pwr_mult := 1.0 + shadow_clamped * 0.8 + (0.25 if headlamp else 0.0) + (0.15 if scanner_active else 0.0)
+	var pwr_per_min := base_power_per_min * pwr_mult * skill_scale
+	var cool_mult := lerpf(1.15, 0.65, shadow_clamped) * effort * load_mult
+	var cool_per_min := base_cooling_per_min * cool_mult * skill_scale
+	return {
+		"effort": effort,
+		"load_mult": load_mult,
+		"skill_scale": skill_scale,
+		"oxygen_per_min": ox_per_min,
+		"power_per_min": pwr_per_min,
+		"cooling_per_min": cool_per_min,
+	}
+
+## Pre-departure suit budget estimate and return reserve check (doc 25 §4.2, 22 T4).
+## Reconciled with `step()` so movement effort, slope band, surface tags, load,
+## and `life_support_rank` produce identical oxygen, power, and cooling consumption.
+func estimate_route(distance_m: float, avg_slope_deg: float = 4.0, shadow_fraction: float = 0.0, carried_kg: float = -1.0, surface_tags: Array = [], base_walk_speed_m_s: float = 1.45) -> Dictionary:
+	var band := classify_slope(avg_slope_deg)
+	var band_id := String(band.get("id", "flat"))
+	var effective_mass_kg := payload_mass_kg if carried_kg < 0.0 else carried_kg
+	var effective_tags := current_surface_tags.duplicate() if surface_tags.is_empty() and not current_surface_tags.is_empty() else surface_tags.duplicate()
+	var shadow_clamped := clampf(shadow_fraction, 0.0, 1.0)
+	if shadow_clamped >= 1.0 and not effective_tags.has("cold_shadow"):
+		effective_tags.append("cold_shadow")
+	var speed_scale := effective_speed_scale(band, effective_tags, effective_mass_kg, 0.0)
+	var walk_speed_m_s := maxf(0.1, base_walk_speed_m_s) * speed_scale
+	var round_trip_min := 0.0
+	if walk_speed_m_s > 0.0001:
+		var one_way_min := (maxf(0.0, distance_m) / walk_speed_m_s) / 60.0
+		round_trip_min = one_way_min * 2.0
+	var headlamp_effective := headlamp_on or shadow_clamped > 0.1
+	var rates := compute_rates_per_min(walk_speed_m_s, band, shadow_clamped, effective_mass_kg, headlamp_effective, false)
+	var ox_cost := round_trip_min * float(rates.oxygen_per_min) if speed_scale > 0.0 else oxygen_max
+	var pwr_cost := round_trip_min * float(rates.power_per_min) if speed_scale > 0.0 else power_max
+	var cool_cost := round_trip_min * float(rates.cooling_per_min) if speed_scale > 0.0 else cooling_max
 
 	var ox_after := maxf(0.0, oxygen - ox_cost)
 	var pwr_after := maxf(0.0, power - pwr_cost)
 	var cool_after := maxf(0.0, cooling - cool_cost)
 	var lowest_after := minf(ox_after, minf(pwr_after, cool_after))
-	var band_id := String(band.get("id", "flat"))
-	var reserve_ok: bool = lowest_after >= return_reserve_pct and band_id != "no_go"
+	var reserve_ok: bool = speed_scale > 0.0 and band_id != "no_go" and lowest_after >= return_reserve_pct
 	var warning := ""
-	if band_id == "no_go":
+	if band_id == "no_go" or speed_scale <= 0.0:
 		warning = "Slope %d° is in the No-go band (4). Pick a gentler route." % int(round(avg_slope_deg))
 	elif not reserve_ok:
-		warning = "Return reserve warning: projected lowest level is %d%% (need %d%% reserve)." % [int(round(lowest_after)), int(round(return_reserve_pct))]
+		warning = "Return reserve warning: projected lowest level is %d%% (need %d%% reserve)." % [int(floor(lowest_after)), int(round(return_reserve_pct))]
 	else:
-		warning = "Return reserve safe: %d%% remaining after round trip (reserve line %d%%)." % [int(round(lowest_after)), int(round(return_reserve_pct))]
+		warning = "Return reserve safe: %d%% remaining after round trip (reserve line %d%%)." % [int(floor(lowest_after)), int(round(return_reserve_pct))]
 
 	return {
 		"distance_m": distance_m,
-		"round_trip_min": snappedf(round_trip_min, 0.1),
+		"walk_speed_m_s": snappedf(walk_speed_m_s, 0.001),
+		"speed_scale": snappedf(speed_scale, 0.001),
+		"round_trip_min": snappedf(round_trip_min, 0.01),
+		"round_trip_s": round_trip_min * 60.0,
 		"band": band,
+		"surface_tags": effective_tags,
+		"carried_kg": effective_mass_kg,
 		"oxygen_cost": snappedf(ox_cost, 0.1),
 		"power_cost": snappedf(pwr_cost, 0.1),
 		"cooling_cost": snappedf(cool_cost, 0.1),
+		"oxygen_cost_exact": ox_cost,
+		"power_cost_exact": pwr_cost,
+		"cooling_cost_exact": cool_cost,
 		"oxygen_after": snappedf(ox_after, 0.1),
 		"power_after": snappedf(pwr_after, 0.1),
 		"cooling_after": snappedf(cool_after, 0.1),
+		"oxygen_after_exact": ox_after,
+		"power_after_exact": pwr_after,
+		"cooling_after_exact": cool_after,
 		"lowest_after": snappedf(lowest_after, 0.1),
+		"lowest_after_exact": lowest_after,
 		"return_reserve_pct": return_reserve_pct,
 		"reserve_ok": reserve_ok,
 		"warning": warning,
@@ -233,14 +295,11 @@ func step(delta: float, moving_speed: float = 0.0, slope_deg: float = 0.0, lean_
 	# 2. Suit budget drain (0 indoors)
 	if not indoor and delta > 0.0:
 		var minutes := delta / 60.0
-		var effort := 0.45 + clampf(moving_speed / 2.2, 0.0, 1.2)
-		var load_mult := 1.0 + clampf(payload_mass_kg / 24.0, 0.0, 0.45)
-		var skill_scale := 1.0 - 0.05 * float(clampi(life_support_rank, 0, 3))
-		var ox_drain := minutes * base_oxygen_per_min * effort * float(current_band.oxygen_mult) * load_mult * skill_scale
-		var pwr_mult := 1.0 + (0.8 if in_cold_shadow else 0.0) + (0.25 if headlamp_on else 0.0) + (0.15 if scanner_pulse_active else 0.0)
-		var pwr_drain := minutes * base_power_per_min * pwr_mult * skill_scale
-		var cool_mult := (0.65 if in_cold_shadow else 1.15) * effort * load_mult
-		var cool_drain := minutes * base_cooling_per_min * cool_mult * skill_scale
+		var shadow_frac := 1.0 if in_cold_shadow else 0.0
+		var rates := compute_rates_per_min(moving_speed, current_band, shadow_frac, payload_mass_kg, headlamp_on, scanner_pulse_active)
+		var ox_drain := minutes * float(rates.oxygen_per_min)
+		var pwr_drain := minutes * float(rates.power_per_min)
+		var cool_drain := minutes * float(rates.cooling_per_min)
 		oxygen = maxf(0.0, oxygen - ox_drain)
 		power = maxf(0.0, power - pwr_drain)
 		cooling = maxf(0.0, cooling - cool_drain)
@@ -249,15 +308,11 @@ func step(delta: float, moving_speed: float = 0.0, slope_deg: float = 0.0, lean_
 	if slip_cooldown > 0.0:
 		slip_cooldown = maxf(0.0, slip_cooldown - delta)
 
-	var speed_scale := float(current_band.speed_scale)
+	var speed_scale := effective_speed_scale(current_band, current_surface_tags, payload_mass_kg, slip_cooldown)
 	var extra_sway := 0.0
 	for tag in current_surface_tags:
 		if TERRAIN_FEATURES.has(tag):
-			speed_scale *= float(TERRAIN_FEATURES[tag].get("speed_scale", 1.0))
 			extra_sway += float(TERRAIN_FEATURES[tag].get("sway_bonus", 0.0))
-
-	if slip_cooldown > 0.0:
-		speed_scale *= 0.4
 
 	var heavy_or_tall := payload_mass_kg >= 6.0 or payload_tall
 	var handling_scale := 1.0 - 0.12 * float(clampi(handling_rank, 0, 3))

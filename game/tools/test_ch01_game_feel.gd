@@ -12,9 +12,7 @@
 extends SceneTree
 
 const FeedbackScript = preload("res://scripts/feedback/chapter1_feedback.gd")
-const P01PanelScene: PackedScene = preload("res://scenes/ui/p01_panel.tscn")
-const MissionTableScene: PackedScene = preload("res://scenes/ui/mission_table_panel.tscn")
-const CampaignPanelsScene: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
+const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
 
 var checks := 0
 var failures := 0
@@ -35,6 +33,7 @@ func _run() -> void:
 	await _test_investigations_and_clues()
 	await _test_night_shift_tension_and_alo_posture()
 	await _test_rewards_and_golden_bloom()
+	await _test_live_campaign_feedback_integration()
 
 	print("CH01 GAME FEEL RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
@@ -82,14 +81,6 @@ func _test_investigations_and_clues() -> void:
 		_check(not String(inv.get("set_piece", "")).is_empty(), mid + " defines set-piece payoff")
 		var hints: Array = inv.get("hints", [])
 		_check(hints.size() == 3, mid + " defines 3-tier hint ladder (H1, H2, H3)")
-
-	# Verify P-01 panel & investigation visual
-	var p01 := P01PanelScene.instantiate()
-	root.add_child(p01)
-	await process_frame
-	await _maybe_capture("M1-31_p01_investigation.png")
-	p01.queue_free()
-	await process_frame
 
 func _test_night_shift_tension_and_alo_posture() -> void:
 	var day_s1: Dictionary = FeedbackScript.night_shift_tension(1)
@@ -157,6 +148,104 @@ func _test_rewards_and_golden_bloom() -> void:
 	await process_frame
 
 	_check(FileAccess.file_exists(ProjectSettings.globalize_path("res://../production/qa/fun_2026-11-10.md")), "production/qa/fun_2026-11-10.md report exists")
+
+func _test_live_campaign_feedback_integration() -> void:
+	var temp_save := "user://test_ch01_feel_campaign.save"
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(temp_save))
+	var campaign := CampaignScene.instantiate() as Chapter1Campaign
+	campaign.save_path = temp_save
+	root.add_child(campaign)
+	await process_frame
+	await process_frame
+
+	# 1. Perform real Chapter 1 S01 action (commission_route) and verify HUD _last_outcome + outcome panel
+	var target_node := campaign.physical_target("commission_route")
+	if target_node != null and campaign._player != null:
+		campaign._player.global_position = target_node.global_position + Vector3(0.0, 0.0, 1.2)
+		campaign._player.look_at(target_node.global_position, Vector3.UP)
+	await physics_frame
+	var res := campaign.perform_target("commission_route")
+	_check(bool(res.get("accepted", false)), "Live campaign perform_target('commission_route') succeeds")
+	var last_outcome: Dictionary = campaign.hud._last_outcome
+	_check(last_outcome.has("feedback") and String(last_outcome.feedback.get("canonical_id", "")) == "route_spare_power", "Chapter1CampaignHUD.refresh_after_action attaches Chapter1Feedback for 'commission_route'")
+	_check(last_outcome.has("alo_posture") and not bool(last_outcome.alo_posture.get("has_face_or_eyes", true)), "Chapter1CampaignHUD attaches non-anthropomorphic Alo botanical posture")
+	campaign.hud.panels.open_panel("outcome", last_outcome)
+	await process_frame
+	var outcome_text := _collect_text(campaign.hud.panels)
+	_check(outcome_text.contains("What changed:") and outcome_text.contains("Nothing spilled on our watch"), "CampaignPanels 'outcome' view renders Chapter1Feedback consequence, why, next step, and crew reaction")
+	campaign.hud.panels.close_panel()
+
+	# 2. Advance through S01/S02 to EX-CH01-S03 and verify P01Panel shows Chapter1Feedback on real step completion
+	var Gates := preload("res://scripts/missions/chapter1_gate_catalog.gd")
+	var Inputs := preload("res://tools/support/p01_input_fixture.gd")
+	while campaign.route.current_scene_id() != "EX-CH01-S03":
+		for spec in Gates.targets_for_scene(campaign.route.current_scene_id()):
+			campaign.route.perform(String(spec.target_id), Inputs.payload(String(spec.target_id)))
+		campaign.route.advance_scene()
+	campaign._sync_route_projection()
+	campaign._refresh_world()
+	campaign.hud.refresh_scene({})
+	await process_frame
+	await physics_frame
+	var probe_node := campaign.physical_target("calibrate_probe")
+	if probe_node != null and campaign._player != null:
+		campaign._player.global_position = probe_node.global_position + Vector3(0.0, 0.0, 1.0)
+		campaign._player.velocity = Vector3.ZERO
+	await physics_frame
+	if probe_node != null and campaign._player != null:
+		campaign._player.get_viewport().get_camera_3d().look_at(probe_node.global_position)
+	await physics_frame
+	var opened_p01 := campaign.hud.p01_panel.open(campaign, "calibrate_probe")
+	_check(opened_p01, "P01Panel opens on 'calibrate_probe' in live EX-CH01-S03 scene")
+	for key in Inputs.payload("calibrate_probe"):
+		campaign.hud.p01_panel.choose(key, Inputs.payload("calibrate_probe")[key])
+	campaign.hud.p01_panel.preview()
+	campaign.hud.p01_panel.request_commit()
+	campaign.hud.p01_panel.confirm_commit()
+	await process_frame
+	var p01_text := _collect_text(campaign.hud.p01_panel)
+	_check(p01_text.contains("What changed:") and p01_text.contains("Zero and span checked against both cups"), "P01Panel.show_result renders Chapter1Feedback cause-and-effect and Rafi's reaction")
+	campaign.hud.p01_panel.discard()
+
+	# 3. Jump to EX-CH01-S07 and verify MissionTablePanel renders night_shift_tension and alo_posture
+	campaign.route.start_at("EX-CH01-S07")
+	campaign._sync_route_projection()
+	campaign._refresh_world()
+	campaign.hud.refresh_scene({})
+	await process_frame
+	var opened_mt := campaign.hud.open_mission_table("p02_shift1")
+	_check(opened_mt, "MissionTablePanel opens for 'p02_shift1' in live EX-CH01-S07 scene")
+	await process_frame
+	var mt_text := _collect_text(campaign.hud.mission_table)
+	_check(mt_text.contains("Atmosphere ·") and mt_text.contains("Alo posture ("), "MissionTablePanel displays Chapter1Feedback shift tension and Alo botanical posture")
+	campaign.hud.mission_table.close()
+
+	# 4. Verify CampaignPanels._render_chapter1_outcome includes outcome_reward_card and alo_posture
+	var debrief_data := {
+		"title": "GOLDEN_BLOOM",
+		"summary": "Golden Bloom achieved.",
+		"safe_ending": true,
+		"ending": "GOLDEN_BLOOM",
+		"star_count": 3,
+		"retry_shift": 5,
+		"can_retry": true,
+		"retry_reason": "",
+		"can_continue": true,
+		"continue_reason": "",
+		"resources": {"E": 6, "A": 5, "H": 6, "C": 8, "R": 10, "W": 0, "K": 2, "Z": 0},
+		"stars": {"safe_exposure": true, "no_blackout": true, "alo_alive": true},
+		"replay": [],
+		"lessons": [],
+	}
+	campaign.hud.panels.open_chapter1_outcome(debrief_data, "summary")
+	await process_frame
+	var ch1_out_text := _collect_text(campaign.hud.panels)
+	_check(ch1_out_text.contains("GOLDEN BLOOM") and ch1_out_text.contains("Alo botanical posture"), "CampaignPanels chapter1_outcome summary renders Chapter1Feedback reward celebration and Alo posture")
+	campaign.hud.panels.close_panel()
+
+	campaign.free()
+	await process_frame
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(temp_save))
 
 func _collect_text(node: Node) -> String:
 	var parts: Array[String] = []

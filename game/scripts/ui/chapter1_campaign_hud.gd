@@ -24,6 +24,8 @@ const CHAPTER8_PANEL_SCENE: PackedScene = preload("res://scenes/ui/chapter8_puzz
 const Chapter8Script = preload("res://scripts/puzzles/chapter8_puzzles.gd")
 const CommsServiceScript = preload("res://scripts/comms/comms_service.gd")
 const CommsPanelScript = preload("res://scripts/ui/comms_panel.gd")
+const EvaVisorHudScript = preload("res://scripts/eva/eva_visor_hud.gd")
+const Chapter1FeedbackScript = preload("res://scripts/feedback/chapter1_feedback.gd")
 
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
@@ -35,6 +37,7 @@ var p01_panel: P01Panel
 var comms_service: RefCounted
 var comms_panel: Control
 var outpost: OutpostStatus
+var eva_visor: EvaVisorHud
 var payload_activity: PayloadStackActivity
 
 # Goal card
@@ -230,6 +233,8 @@ func setup(value: Chapter1Campaign) -> void:
 	panels.hint_player.highlight_changed.connect(func(active):
 		_marker.z_index = 210 if active else 0
 		_update_world_overlay())
+	if eva_visor != null and runtime.get("eva_suit") != null:
+		eva_visor.bind_suit(runtime.eva_suit)
 	_resume_pending = bool(runtime.incremental_loading) and not runtime.initial_snapshot.is_empty()
 	_refresh_query()
 	refresh_scene({})
@@ -276,9 +281,37 @@ func refresh_after_action(result: Dictionary) -> void:
 		if not before.has(id):
 			newly_done.append(id)
 	if result.get("accepted", false):
-		_last_outcome = {"result": result.get("reason", "Done."), "changes": result.get("deltas", []), "notes": _result_notes(result.get("warnings", []) + result.get("ledger_summary", []))}
+		var done_id := String(newly_done[0]) if not newly_done.is_empty() else ""
+		var notes_list := _result_notes(result.get("warnings", []) + result.get("ledger_summary", []))
+		var fb_dict := {}
+		var tension_dict := {}
+		var posture_dict := {}
+		if _scene_id.begins_with("EX-CH01-") and not done_id.is_empty():
+			fb_dict = Chapter1FeedbackScript.action_feedback(done_id)
+			var snap: Dictionary = runtime.director.snapshot() if runtime != null and runtime.director != null else {}
+			var res: Dictionary = snap.get("resources", {}) if snap.get("resources", {}) is Dictionary else {}
+			var shift_idx := clampi(int(res.get("shift_index", 1)), 1, 7)
+			var alo_h := int(res.get("H", 6))
+			var water_w := int(res.get("W", 0))
+			var bloomed := _scene_id == "EX-CH01-S12" and alo_h > 0
+			tension_dict = Chapter1FeedbackScript.night_shift_tension(shift_idx)
+			posture_dict = Chapter1FeedbackScript.alo_posture(alo_h, water_w, shift_idx, bloomed)
+			notes_list.append("What changed: " + String(fb_dict.get("consequence", "")))
+			notes_list.append("Why: " + String(fb_dict.get("why", "")))
+			notes_list.append("Next step: " + String(fb_dict.get("next_step", "")))
+			notes_list.append("Meter tick: " + String(fb_dict.get("meter_tick", "")))
+			notes_list.append("%s: \"%s\"" % [String(fb_dict.get("crew_speaker", "Crew")), String(fb_dict.get("crew_reaction", ""))])
+			notes_list.append("Alo (%s): %s" % [String(posture_dict.get("stage", "")), String(posture_dict.get("posture_description", ""))])
+		_last_outcome = {
+			"result": result.get("reason", "Done."),
+			"changes": result.get("deltas", []),
+			"notes": notes_list,
+			"feedback": fb_dict,
+			"tension": tension_dict,
+			"alo_posture": posture_dict,
+		}
 		if not newly_done.is_empty() and result.get("result", result).get("unsafe_predicates", []).is_empty():
-			var line := _result_line(String(newly_done[0]))
+			var line := _result_line(done_id)
 			_last_outcome["result"] = line
 			show_status(line)
 		if panels != null and runtime != null:
@@ -400,6 +433,10 @@ func _build() -> void:
 	outpost = Outpost.new()
 	outpost.name = "OutpostStatus"
 	_column.add_child(outpost)
+	eva_visor = EvaVisorHudScript.new()
+	eva_visor.name = "EvaVisorHud"
+	eva_visor.visible = false
+	add_child(eva_visor)
 	# Dialogue, bottom centre.
 	_dialogue_bar = UiDesign.glass_panel(Color.TRANSPARENT, 14)
 	_dialogue_bar.name = "Dialogue"
@@ -1135,6 +1172,8 @@ func _set_chrome_hidden(hidden: bool) -> void:
 	_goal_card.visible = not hidden
 	_marker.visible = _marker.visible and not hidden
 	_prompt.visible = _prompt.visible and not hidden
+	if eva_visor != null and hidden:
+		eva_visor.visible = false
 	if hidden:
 		_dialogue_bar.visible = false
 		_toast.visible = false
@@ -1204,6 +1243,14 @@ func _process(delta: float) -> void:
 		_auto_timer -= delta
 		if _auto_timer <= 0.0:
 			_on_next_line()
+	if eva_visor != null:
+		var suit = runtime.get("eva_suit")
+		if suit != null and eva_visor.suit != suit:
+			eva_visor.bind_suit(suit)
+		var show_visor: bool = suit != null and (not bool(suit.get("indoor")) or bool(suit.get("scanner_pulse_active"))) and not _chrome_hidden and not runtime.is_cutscene_active()
+		eva_visor.visible = show_visor
+		if show_visor:
+			eva_visor.refresh()
 	_update_world_overlay()
 
 ## Projects the goal marker (with distance) and the prompt on the object in reach.

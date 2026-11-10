@@ -16,6 +16,7 @@ signal ending_continue_requested
 const ScienceScript = preload("res://scripts/science/science_data.gd")
 const Explainers = preload("res://scripts/ui/science_explainers.gd")
 const ChartScript = preload("res://scripts/ui/data_chart.gd")
+const Chapter1FeedbackScript = preload("res://scripts/feedback/chapter1_feedback.gd")
 var science = ScienceScript.new()
 
 const INK := Color("#05060A")
@@ -1548,6 +1549,10 @@ func _render_chapter1_outcome(value) -> void:
 		for item in [["safe_exposure", "Training radiation dose 3 or under"], ["no_blackout", "No blackout"], ["alo_alive", "Alo alive"]]:
 			_card_text(("Met: " if stars.get(item[0], false) else "Not met: ") + item[1])
 		_card_text(String(UiDesign.text().chapter1_debrief.golden_requirement))
+		var reward := Chapter1FeedbackScript.outcome_reward_card(stars, int(resources.get("H", 0)), int(data.get("retry_shift", 5)))
+		var posture := Chapter1FeedbackScript.alo_posture(int(resources.get("H", 0)), int(resources.get("W", 0)), 7, int(resources.get("H", 0)) > 0)
+		_card_text("%s\n%s\n%s" % [String(reward.get("title", "")), String(reward.get("celebration", "")), String(reward.get("retry_prompt", ""))])
+		_card_text("Alo botanical posture (%s) · %s" % [String(posture.get("stage", "")), String(posture.get("posture_description", ""))])
 		_ending_button("Review decisions \u00b7 shift by shift", "ReviewDecisions", func(): _ending_go("replay", "ReplayNext"), replay.is_empty())
 		if replay.is_empty():
 			_card_text("This older checkpoint has no shift receipts to replay.")

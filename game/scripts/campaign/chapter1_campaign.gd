@@ -18,6 +18,7 @@ const TerrainSessionScript = preload("res://scripts/campaign/terrain_session.gd"
 const CompanionRosterScript = preload("res://scripts/companions/companion_roster.gd")
 const CutsceneRuntimeScript = preload("res://scripts/cutscenes/cutscene_runtime.gd")
 const AudioRuntimeScript = preload("res://scripts/audio/audio_runtime.gd")
+const EvaSuitScript = preload("res://scripts/eva/eva_suit.gd")
 const HUDScene: PackedScene = preload("res://scenes/ui/chapter1_campaign_hud.tscn")
 const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 
@@ -42,6 +43,9 @@ var hud: Chapter1CampaignHUD
 var _room: CampaignRoom
 var _crew: CampaignCrew
 var _player: PlayerController
+var eva_suit: EvaSuit
+var _last_eva_room_id := ""
+var _last_scan_origin := Vector3(INF, INF, INF)
 ## M1-36: the LOLA terrain under an exterior whose placement and lighting are ready (RoomContract.terrain_lighting).
 var _terrain: Node3D
 var _startup_error := ""
@@ -99,6 +103,8 @@ func _start_session() -> void:
 	for key in initial_accessibility:
 		presentation["accessibility"][key] = initial_accessibility[key]
 	director.restore_snapshot(presentation)
+	var assist_mode := String(presentation.get("accessibility", {}).get("assist_mode", "Cadet"))
+	eva_suit = EvaSuitScript.new(assist_mode)
 	_sync_route_projection()
 	LoadTrace.end("route_profile", stamp)
 	_build_media()
@@ -443,8 +449,59 @@ func _physics_process(_delta: float) -> void:
 	_room.set_focus_target(String(selected.get("world_focus_id", "")))
 	if _terrain != null and _player != null:
 		_terrain.move_focus(_terrain.to_local(_player.global_position))
+	_step_campaign_eva()
 	if hud != null:
 		hud.show_nearby_forecast(String(selected.get("target_id", "")))
+
+func _step_campaign_eva() -> void:
+	if _player == null or eva_suit == null:
+		return
+	if not eva_suit.indoor:
+		var field: TerrainHeightfield = _terrain.stream.field if _terrain != null and _terrain.get("stream") != null and _terrain.stream.get("field") != null else null
+		if field != null:
+			var p: Vector3 = _terrain.origin + _terrain.turn * _terrain.to_local(_player.global_position)
+			_player.eva_slope_override_deg = field.slope_deg_at(p.x, p.z)
+		if eva_suit.scanner_pulse_active and (eva_suit.last_scan_samples.is_empty() or _player.global_position.distance_to(_last_scan_origin) > 1.5):
+			_last_scan_origin = _player.global_position
+			_scan_campaign_terrain(_player.global_position)
+	elif eva_suit.scanner_pulse_active and eva_suit.last_scan_samples.is_empty():
+		_last_scan_origin = _player.global_position
+		_scan_campaign_terrain(_player.global_position)
+
+func _scan_campaign_terrain(origin_world: Vector3) -> Array:
+	if eva_suit == null:
+		return []
+	var field: TerrainHeightfield = _terrain.stream.field if _terrain != null and _terrain.get("stream") != null and _terrain.stream.get("field") != null else null
+	var sample_h: Callable
+	var sample_tags: Callable
+	if field != null:
+		sample_h = func(wx: float, wz: float) -> float:
+			var local_pt := _terrain.to_local(Vector3(wx, 0.0, wz))
+			var region_pt: Vector3 = _terrain.origin + _terrain.turn * local_pt
+			return field.height_at(region_pt.x, region_pt.z)
+		sample_tags = func(wx: float, wz: float) -> Array:
+			var local_pt := _terrain.to_local(Vector3(wx, 0.0, wz))
+			var region_pt: Vector3 = _terrain.origin + _terrain.turn * local_pt
+			var tags: Array = []
+			if field.slope_deg_at(region_pt.x, region_pt.z) >= 8.0:
+				tags.append("soft_regolith")
+			if int(absf(region_pt.x) + absf(region_pt.z)) % 11 == 0:
+				tags.append("boulder")
+			if eva_suit.in_cold_shadow:
+				tags.append("cold_shadow")
+			return tags
+	else:
+		var base_slope := tan(deg_to_rad(maxf(0.0, eva_suit.current_slope_deg)))
+		sample_h = func(wx: float, wz: float) -> float:
+			return (wx - origin_world.x) * base_slope + (wz - origin_world.z) * 0.04
+		sample_tags = func(wx: float, _wz: float) -> Array:
+			var tags: Array = eva_suit.current_surface_tags.duplicate()
+			if wx > origin_world.x + 2.0 and not tags.has("boulder"):
+				tags.append("boulder")
+			elif not tags.has("soft_regolith"):
+				tags.append("soft_regolith")
+			return tags
+	return eva_suit.scan_grid(origin_world, sample_h, sample_tags)
 
 func is_chapter_complete() -> bool:
 	if route == null:
@@ -596,6 +653,8 @@ func handle_ui_command(command: Dictionary, preview_only: bool = false) -> Dicti
 		var next := director.snapshot()
 		next["accessibility"] = payload.duplicate(true)
 		var restored := director.restore_snapshot(next)
+		if eva_suit != null:
+			eva_suit.set_assist_mode(String(payload.get("assist_mode", eva_suit.assist_mode)))
 		_save_campaign()
 		if audio != null:
 			audio.captions_enabled = bool(payload.get("captions", true))
@@ -762,12 +821,32 @@ func _place_crew() -> void:
 	var story_log: Dictionary = director.snapshot().get("story_log", {}) if director != null else {}
 	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]), story_log.get("choices", {}), story_log.get("moments", []))
 	_player.generic_interaction_input = false
+	_bind_player_eva()
 	if _player != null and _player.follow_camera != null and _player.follow_camera.camera != null:
 		_player.follow_camera.camera.far = 30000.0 if _terrain != null else 4000.0  # kilometre views on the terrain
 	_crew.set_paused(_ui_paused)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_setup_garage_dock()
 	_sync_world_boundaries()
+
+func _bind_player_eva() -> void:
+	if eva_suit == null:
+		var mode := String(director.snapshot().get("accessibility", {}).get("assist_mode", "Cadet")) if director != null else "Cadet"
+		eva_suit = EvaSuitScript.new(mode)
+	var room_id: String = _room.room_id if _room != null else (String(route.current_room_id()) if route != null else "LOC-01")
+	var pressure := String(RoomContract.room(room_id).get("pressure", "pressurised"))
+	var was_indoor := eva_suit.indoor
+	var now_indoor := pressure != "vacuum"
+	eva_suit.indoor = now_indoor
+	if now_indoor or (was_indoor and not now_indoor and _last_eva_room_id != room_id):
+		eva_suit.reset_budget()
+	_last_eva_room_id = room_id
+	if _player != null:
+		_player.eva_suit = eva_suit
+		_player.gravity = EvaSuitScript.MOON_G if not now_indoor else 9.8
+		if now_indoor:
+			_player.eva_surface_tags = []
+			_player.eva_slope_override_deg = -1.0
 
 func _current_terrain_segment() -> String:
 	if route == null or route.current_scene_id() != "EX-CH04-S04":

@@ -39,6 +39,7 @@ var _gaze_target: Node3D
 var _gaze_modifiers: Array[SkeletonModifier3D] = []
 var eva_suit: RefCounted
 var eva_surface_tags: Array = []
+var eva_slope_override_deg: float = -1.0
 
 func _ready() -> void:
 	floor_snap_length = 0.3
@@ -209,16 +210,28 @@ func _physics_process(delta: float) -> void:
 		desired_speed = minf(desired_speed, tuning.run_speed * input.length())
 	if animation.movement_locked:
 		desired_speed *= animation.action_movement_scale
+	var eva_scale := 1.0
 	if eva_suit != null and eva_suit.has_method("step"):
-		var floor_slope_deg := rad_to_deg(get_floor_angle()) if is_on_floor() else 0.0
+		var floor_slope_deg := eva_slope_override_deg if eva_slope_override_deg >= 0.0 else (rad_to_deg(get_floor_angle()) if is_on_floor() else 0.0)
 		var lean_axis := 0.0
 		if Input.is_physical_key_pressed(KEY_Q):
 			lean_axis -= 1.0
 		if Input.is_physical_key_pressed(KEY_E) and not generic_interaction_input:
 			lean_axis += 1.0
-		eva_suit.set("scanner_holding", Input.is_physical_key_pressed(KEY_F))
+		if Input.is_physical_key_pressed(KEY_F):
+			eva_suit.set("scanner_holding", true)
+		elif not bool(eva_suit.get("scanner_holding")):
+			eva_suit.set("scanner_holding", false)
 		var eva_res: Dictionary = eva_suit.call("step", delta, horizontal_speed, floor_slope_deg, lean_axis, eva_surface_tags)
-		desired_speed *= maxf(0.25, float(eva_res.get("speed_scale", 1.0)))
+		eva_scale = clampf(float(eva_res.get("speed_scale", 1.0)), 0.0, 1.0)
+		desired_speed *= eva_scale
+		if eva_scale <= 0.0:
+			desired_speed = 0.0
+			_speed = 0.0
+			_speed_derivative = 0.0
+			horizontal_speed = 0.0
+			velocity.x = 0.0
+			velocity.z = 0.0
 	var angle := angle_difference(_yaw, atan2(direction.x, direction.z)) if direction.length_squared() > 0.001 else 0.0
 	if absf(angle) > deg_to_rad(105.0):
 		_pivoting = true
@@ -238,7 +251,12 @@ func _physics_process(delta: float) -> void:
 	# stopping and slowing from a run blend down through the gaits like a walk stop; the library's sudden-stop and
 	# run-to-walk clips flail the arms (up to 57 degrees in a frame), so they are not played
 	_previous_input = input
-	_smooth_speed(delta)
+	if eva_scale <= 0.0:
+		desired_speed = 0.0
+		_speed = 0.0
+		_speed_derivative = 0.0
+	else:
+		_smooth_speed(delta)
 	var forward := Vector3(sin(_yaw), 0.0, cos(_yaw))
 	velocity.x = forward.x * _speed
 	velocity.z = forward.z * _speed

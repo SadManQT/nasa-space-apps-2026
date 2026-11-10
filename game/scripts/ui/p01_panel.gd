@@ -2,6 +2,7 @@ extends Control
 class_name P01Panel
 
 const PREDICTION_PROMPT := "Choose your values, then try them. The real equipment stays unchanged during a prediction."
+const Chapter1FeedbackScript = preload("res://scripts/feedback/chapter1_feedback.gd")
 
 ## Local selections only. The campaign owns forecasts, validation and physical commits.
 signal opened(target_id: String)
@@ -239,6 +240,16 @@ func _render() -> void:
 		_button(equipment, "Back to prediction", "BackToPrediction", cancel_confirm)
 	elif _observed:
 		_label(equipment, "Action complete. Close this panel and follow the next goal.")
+		var fb := Chapter1FeedbackScript.action_feedback(_target)
+		var fb_label := _label(equipment, "What changed: %s\nWhy: %s\nNext step: %s\n%s · %s: \"%s\"" % [
+			String(fb.get("consequence", "")),
+			String(fb.get("why", "")),
+			String(fb.get("next_step", "")),
+			String(fb.get("meter_tick", "")),
+			String(fb.get("crew_speaker", "Crew")),
+			String(fb.get("crew_reaction", "")),
+		], "caption")
+		fb_label.name = "ProbeActionFeedback"
 	else:
 		_render_inputs(equipment)
 	var forecast := _column(columns, "Projected result")

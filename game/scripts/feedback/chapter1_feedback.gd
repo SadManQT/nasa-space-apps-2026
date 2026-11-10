@@ -109,6 +109,61 @@ const MISSION_INVESTIGATIONS := {
 	},
 }
 
+const TARGET_ALIAS_MAP := {
+	"commission_route": "route_spare_power",
+	"commission_result": "route_spare_power",
+	"charter_card": "route_spare_power",
+	"classify_information": "classify_information",
+	"roll_call": "roll_call",
+	"practice_fault": "practice_fault",
+	"inspect_packet": "calibrate_probe",
+	"scan_packet": "calibrate_probe",
+	"calibrate_probe": "calibrate_probe",
+	"set_zero": "calibrate_probe",
+	"span_probe": "calibrate_probe",
+	"set_span": "calibrate_probe",
+	"recheck_probe": "calibrate_probe",
+	"recheck": "calibrate_probe",
+	"compare_atmosphere": "calibrate_probe",
+	"plant_alo": "plant_and_seal_cassettes",
+	"plant_tara": "plant_and_seal_cassettes",
+	"water_alo": "plant_and_seal_cassettes",
+	"water_tara": "plant_and_seal_cassettes",
+	"label_alo": "plant_and_seal_cassettes",
+	"label_alo_external": "plant_and_seal_cassettes",
+	"label_tara": "plant_and_seal_cassettes",
+	"label_tara_indoor": "plant_and_seal_cassettes",
+	"seal_alo": "plant_and_seal_cassettes",
+	"seal_tara": "plant_and_seal_cassettes",
+	"record_paired_conditions": "plant_and_seal_cassettes",
+	"confirm_services": "plant_and_seal_cassettes",
+	"test_hand_light": "care_and_night_schedule",
+	"care_montage": "care_and_night_schedule",
+	"confirm_date_transition": "care_and_night_schedule",
+	"arrange_timeline": "care_and_night_schedule",
+	"ack_schedule": "care_and_night_schedule",
+	"role_cards": "route_spare_power",
+	"p02_shift1": "route_spare_power",
+	"p02_stage_shift2": "stage_shelter_water",
+	"shelter_drill": "stage_shelter_water",
+	"verify_drill_baseline": "stage_shelter_water",
+	"p02_shift2": "route_spare_power",
+	"combine_cards": "stage_shelter_water",
+	"ack_earth_set": "stage_shelter_water",
+	"p02_shifts3_4": "stage_shelter_water",
+	"confirm_four_sheltered": "stage_shelter_water",
+	"p02_shift5_alarm": "stage_shelter_water",
+	"verify_exposure_order": "return_garden_water",
+	"return_water": "return_garden_water",
+	"p02_shifts6_7": "return_garden_water",
+	"review_outcome": "return_garden_water",
+	"verify_chamber": "dawn_bloom_payoff",
+	"open_shutter": "dawn_bloom_payoff",
+	"tag_bloom": "dawn_bloom_payoff",
+	"inspect_tara": "dawn_bloom_payoff",
+	"complete_debrief": "dawn_bloom_payoff",
+}
+
 const ACTION_FEEDBACK_CATALOG := {
 	"route_spare_power": {
 		"consequence": "Spare mast current flows into the O₂ electrolyser instead of spilling past the full 20-unit battery jar.",
@@ -117,6 +172,33 @@ const ACTION_FEEDBACK_CATALOG := {
 		"meter_tick": "Power E: 20/20 (0 spilled) · Air A: +2 stored",
 		"crew_speaker": "Amara",
 		"crew_reaction": "Surplus line locked to the air tank. Nothing spilled on our watch.",
+		"sfx": "SFX_UI_SHIFT_COMMIT",
+	},
+	"classify_information": {
+		"consequence": "The Safe Room practice panel tags each feed as LOCAL SENSOR, STORED GUIDANCE, or LIVE LINK.",
+		"why": "Knowing which instruments work without Earth's live radio prevents confusion when the horizon blocks communications.",
+		"next_step": "Complete the four-person roll call on the Safe Room board.",
+		"meter_tick": "Autonomy: Local Sensor + Stored Guidance verified",
+		"crew_speaker": "Amara",
+		"crew_reaction": "Local sensors and stored rules stay with us even when Earth sets.",
+		"sfx": "SFX_UI_SHIFT_COMMIT",
+	},
+	"roll_call": {
+		"consequence": "All four name tokens (Amara, Mei, Rafi, Kai) are latched on the Safe Room board.",
+		"why": "Every shelter procedure accounts for all four crew members before any valve or hatch is operated.",
+		"next_step": "Resolve the disconnected practice fault using local sensor and stored guidance.",
+		"meter_tick": "Crew Roll Call: 4/4 accounted for",
+		"crew_speaker": "Rafi",
+		"crew_reaction": "These are names. We do not spend them.",
+		"sfx": "SFX_UI_SHIFT_COMMIT",
+	},
+	"practice_fault": {
+		"consequence": "The practice fault clears using local sensor readings and stored flight rules while the live link stays disconnected.",
+		"why": "Practising autonomous fault recovery during daylight prepares the crew for the Earth-set window in Shift 4.",
+		"next_step": "Move to the calibration bench in the Commons and inspect the seed packet.",
+		"meter_tick": "Drill Status: Autonomous recovery verified",
+		"crew_speaker": "Kai",
+		"crew_reaction": "Local sensor plus stored rule — we didn't need to wait for Earth.",
 		"sfx": "SFX_UI_SHIFT_COMMIT",
 	},
 	"calibrate_probe": {
@@ -137,6 +219,15 @@ const ACTION_FEEDBACK_CATALOG := {
 		"crew_reaction": "Two cassettes sealed, two records started. Alo and Tara have a home.",
 		"sfx": "SFX_GLOVE_PORT",
 	},
+	"care_and_night_schedule": {
+		"consequence": "The backup hand light is hung handle-out, 14 dated care entries are logged, and the Sun/Earth/Station tracks align on the Mission Table.",
+		"why": "Laying the solar, radio, and water timelines side by side reveals that shelter water must have a scheduled return time.",
+		"next_step": "Open Shift 1 on the Mission Table to bank daylight air before sunset.",
+		"meter_tick": "Care Log: 14 entries · Night Timeline: 7 shifts mapped",
+		"crew_speaker": "Mei",
+		"crew_reaction": "Fourteen dated care entries, and the water return is on the same timeline as the storm.",
+		"sfx": "SFX_UI_SHIFT_COMMIT",
+	},
 	"stage_shelter_water": {
 		"consequence": "Four water units transfer from the garden reservoir into the Safe Room bladder wall (W=4, Shielding S=6 with K=2).",
 		"why": "Water and stowage mass absorb solar energetic protons (20 g/cm² at S=6), cutting storm shift dose to 0 while borrowing garden moisture temporarily.",
@@ -155,6 +246,15 @@ const ACTION_FEEDBACK_CATALOG := {
 		"crew_reaction": "Water is back in the root tray — look at Alo's leaves lifting toward the lamp!",
 		"sfx": "SFX_SHUTTER_OPEN",
 	},
+	"dawn_bloom_payoff": {
+		"consequence": "Chamber pressure and moisture pass verification, the viewing shutter opens to Alo's bright yellow four-petal flower, and N.'s 2034 recording plays.",
+		"why": "Verifying chamber safety before opening the shutter protects the plant and completes the paired scientific record with Tara.",
+		"next_step": "Review the Chapter 1 debrief and continue to Chapter 2.",
+		"meter_tick": "Alo: First Open Flower · Tara: Reference Intact",
+		"crew_speaker": "Mei",
+		"crew_reaction": "Four yellow petals facing the lamp — Alo made it through the night!",
+		"sfx": "SFX_SHUTTER_OPEN",
+	},
 }
 
 static func mission_investigation(mission_id: String) -> Dictionary:
@@ -164,9 +264,15 @@ static func all_mission_ids() -> Array[String]:
 	return ["EX-M0101", "EX-M0102", "EX-M0103", "EX-M0104"]
 
 static func action_feedback(action_id: String) -> Dictionary:
-	if ACTION_FEEDBACK_CATALOG.has(action_id):
-		return ACTION_FEEDBACK_CATALOG[action_id].duplicate(true)
+	var canonical := String(TARGET_ALIAS_MAP.get(action_id, action_id))
+	if ACTION_FEEDBACK_CATALOG.has(canonical):
+		var out: Dictionary = ACTION_FEEDBACK_CATALOG[canonical].duplicate(true)
+		out["action_id"] = action_id
+		out["canonical_id"] = canonical
+		return out
 	return {
+		"action_id": action_id,
+		"canonical_id": canonical,
 		"consequence": "Station instrumentation updated for " + action_id + ".",
 		"why": "Every committed step updates the shared station ledger.",
 		"next_step": "Check the Outpost Status bar and Mission Table forecast.",
