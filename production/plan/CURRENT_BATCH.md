@@ -4,12 +4,12 @@ This is the user's approved current assignment. `tasks.json` -> `implementation_
 
 ## What is active
 
-50 original implementation tasks plus the subsequent user-authorized M1-125 integration repair (51 active IDs). Workload priority: Ramim > Sadman > Asif > Atik > Tanvir > Shanto. Counts below are the approved task allocation, not a token/time estimate; preserve later completed statuses and never rebuild valid work to fill a quota.
+50 original implementation tasks plus the subsequent M1-125 integration repair, published Sadman owner deliveries M4-17/M1-126, and existing Ramim upgrade-consumer follow-up M4-18 (54 active IDs). Workload priority: Ramim > Sadman > Asif > Atik > Tanvir > Shanto. Counts below are the approved task allocation, not a token/time estimate; preserve later completed statuses and never rebuild valid work to fill a quota.
 
 | Member | Tasks | IDs |
 |---|---:|---|
-| Ramim | 21 | `M3-61`, `M3-64`, `M3-62`, `M3-63`, `M3-65`, `M3-4P`, `M3-4U`, `M3-4M`, `M3-6P`, `M3-6U`, `M3-6M`, `M3-8P`, `M3-8U`, `M3-8M`, `M1-18`, `M1-31`, `M3-67`, `M3-72`, `M3-90`, `M3-91`, `M1-125` |
-| Sadman | 11 | `M4-16`, `M1-108`, `M1-49`, `M3-95`, `M3-101`, `M3-5P`, `M3-5U`, `M3-5M`, `M3-7P`, `M3-7U`, `M3-7M` |
+| Ramim | 22 | `M3-61`, `M3-64`, `M3-62`, `M3-63`, `M3-65`, `M3-4P`, `M3-4U`, `M3-4M`, `M3-6P`, `M3-6U`, `M3-6M`, `M3-8P`, `M3-8U`, `M3-8M`, `M1-18`, `M1-31`, `M3-67`, `M3-72`, `M3-90`, `M3-91`, `M1-125`, `M4-18` |
+| Sadman | 13 | `M4-16`, `M1-108`, `M1-49`, `M3-95`, `M3-101`, `M3-5P`, `M3-5U`, `M3-5M`, `M3-7P`, `M3-7U`, `M3-7M`, `M4-17`, `M1-126` |
 | Asif | 10 | `M1-105`, `M3-2P`, `M3-2U`, `M3-2M`, `M1-103`, `M1-37`, `M3-3P`, `M3-3U`, `M3-3M`, `M3-69` |
 | Atik | 4 | `M1-68`, `M1-53`, `M1-92`, `M1-116` |
 | Tanvir | 3 | `M1-122`, `M1-123`, `M1-85` |
@@ -70,4 +70,4 @@ Commit verified work under your own verified GitHub identity. Sync before implem
 
 ## Subsequent user override: integrated 117-suite gate
 
-On 10 November the user explicitly authorized Ramim to override task/folder ownership as needed to make all 117 existing suites pass. M1-125 is the additional Ramim integration task (51 active IDs total). Preserve other owners' published and unfinished work, record exact-file transfers/reservations, and merge against current main before publishing. Existing assignments and deferred video/submission/manual QA remain; no threshold relaxation or unverified completion is authorized.
+On 10 November the user explicitly authorized Ramim to override task/folder ownership as needed to make all 117 existing suites pass. M1-125 is the additional Ramim integration task. The current required gate has 119 suites after the two published owner-delivery suites; keep both. On the subsequent continue request, Ramim also resumes the existing M4-18 upgrade-consumer follow-up (54 active IDs total, including Sadman's M4-17/M1-126 deliveries). Preserve other owners' published and unfinished work, record exact-file transfers/reservations, and merge against current main before publishing. Existing assignments and deferred video/submission/manual QA remain; no threshold relaxation or unverified completion is authorized.
