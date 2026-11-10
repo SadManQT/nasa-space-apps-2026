@@ -7865,6 +7865,26 @@
     "game/scripts/campaign/"
    ],
    "blocker": "Source 630c9278 and evidence pushed through 864ed263. Latest tested d1436027 actual campaign movement 54/0; recorded 8edef native 62/0 with four ending/input cases and eight inspected PNGs. Source guards and original-save hash pass. Global acceptance remains blocked: latest-tested comms 0/1 marker failure and no complete passing current full runner; 8edef full/continuation failures documented separately without claiming all persist after repairs. Resume when owners clear remaining global integration checks and complete mandatory current full gate passes. Evidence: production/qa/evidence/M1-123/README.md and M1-122/acceptance_blockers.md. Exact historical pose unknown, selected valid contact cases labeled; manual QA is deferred, not an invented blocker."
+  },
+  {
+   "id": "M1-124",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "M1-105 handoff: restore lunar gravity indoors for Ramim acceptance",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/campaign/chapter1_campaign.gd"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-10.",
+   "evidence": "",
+   "updated": "2026-11-10",
+   "prompt": "Owner change request, not a new active-batch claim. chapter1_campaign.gd is currently reserved by Asif/M1-105. Frozen daa0141 mandatory test_chapter1_campaign_flow fails production player uses lunar gravity: _bind_player_eva assigns9.8 indoors even though the habitat is on the Moon. Review the one-line proposed patch and raw log in production/qa/evidence/M1-31_acceptance_2026-11-10/owner_requests/. Apply through the current saved-work session or save/push/release the exact file for Ramim; preserve all Chapter2 input bridge work. Do not infer a full pass from this isolated change; rerun the mandatory campaign flow and integrated gate. Ramim has not edited this reserved source.",
+   "reserved_for": "asif",
+   "effort": 2
   }
  ],
  "requirements": [
