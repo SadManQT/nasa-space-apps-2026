@@ -1,14 +1,29 @@
 extends RefCounted
 class_name ExtendedPuzzleLedger
 
+const P05 = preload("res://scripts/puzzles/p05_falling_pressure.gd")
+const P06 = preload("res://scripts/puzzles/p06_harvest_future.gd")
 const Chapter4 = preload("res://scripts/puzzles/chapter4_puzzles.gd")
 const Chapter6 = preload("res://scripts/puzzles/chapter6_puzzles.gd")
 const Chapter8 = preload("res://scripts/puzzles/chapter8_puzzles.gd")
 
 var _receipts := {}
+var _p05: RefCounted = P05.new()
+var _p06: RefCounted = P06.new()
+
+## The panel and the ledger use the same authoritative Chapter 3 selections.
+func p05() -> RefCounted:
+	return _p05
+
+func p06() -> RefCounted:
+	return _p06
 
 func preview(puzzle_id: String, action: String, payload: Dictionary = {}) -> Dictionary:
 	if _receipts.has(action):
+		if action.begins_with("p05_") or action.begins_with("p06_"):
+			var receipt: Dictionary = _receipts[action]
+			if String(receipt.get("puzzle_id", "")) != puzzle_id or receipt.get("payload", {}) != payload:
+				return {"accepted": false, "duplicate": false, "reason": "That Chapter 3 action is already recorded with a different decision."}
 		return {"accepted": true, "duplicate": true, "reason": "Puzzle action already has a receipt."}
 	var error := _validate(puzzle_id, action, payload)
 	if not error.is_empty():
@@ -34,20 +49,59 @@ func flags() -> Dictionary:
 	return result
 
 func snapshot() -> Dictionary:
-	return {"schema_version": 1, "receipts": _receipts.duplicate(true)}
+	return {"schema_version": 1, "receipts": _receipts.duplicate(true), "p05": _p05.snapshot(), "p06": _p06.snapshot()}
 
 func restore(data: Dictionary) -> Dictionary:
-	var version = data.get("schema_version", 1)
+	var version = data.get("schema_version", null)
 	if not (version is int or version is float) or float(version) != 1.0:
 		return {"accepted": false, "reason": "Extended puzzle ledger snapshot is incompatible."}
-	if not data.get("receipts", {}) is Dictionary:
+	if not data.get("receipts", null) is Dictionary:
 		return {"accepted": false, "reason": "Extended puzzle receipts must be a Dictionary."}
+	var receipts: Dictionary = data.receipts
+	var staged_p05: RefCounted = P05.new()
+	var staged_p06: RefCounted = P06.new()
+	for action in receipts:
+		if not action is String or not receipts[action] is Dictionary:
+			return {"accepted": false, "reason": "Extended puzzle receipt has an invalid action."}
+		var receipt: Dictionary = receipts[action]
+		if not receipt.get("puzzle_id", null) is String or not receipt.get("payload", null) is Dictionary:
+			return {"accepted": false, "reason": "Extended puzzle receipt has an invalid payload."}
+		if String(action).begins_with("p05_") or String(action).begins_with("p06_"):
+			var is_p05 := String(action).begins_with("p05_")
+			var model: RefCounted = staged_p05 if is_p05 else staged_p06
+			if String(receipt.puzzle_id) != ("P-05" if is_p05 else "P-06") or not model.is_step(action) or not String(model.validate_action(action, receipt.payload)).is_empty():
+				return {"accepted": false, "reason": "Chapter 3 save contains an invalid puzzle receipt."}
+	if data.has("p05"):
+		if not data.p05 is Dictionary:
+			return {"accepted": false, "reason": "P-05 save state must be a Dictionary."}
+		var p05_result: Dictionary = staged_p05.restore(data.p05)
+		if not bool(p05_result.get("accepted", false)):
+			return p05_result
+	if data.has("p06"):
+		if not data.p06 is Dictionary:
+			return {"accepted": false, "reason": "P-06 save state must be a Dictionary."}
+		var p06_result: Dictionary = staged_p06.restore(data.p06)
+		if not bool(p06_result.get("accepted", false)):
+			return p06_result
 	_receipts = data.get("receipts", {}).duplicate(true)
+	_p05 = staged_p05
+	_p06 = staged_p06
 	return {"accepted": true, "reason": "Extended puzzle ledger restored."}
 
 func _validate(puzzle_id: String, action: String, payload: Dictionary) -> String:
 	if puzzle_id.is_empty() or action.is_empty():
 		return "Every extended puzzle action needs a stable puzzle and action ID."
+	if action.begins_with("p05_") or action.begins_with("p06_"):
+		var model: RefCounted = _p05 if action.begins_with("p05_") else _p06
+		var expected_id := "P-05" if action.begins_with("p05_") else "P-06"
+		if puzzle_id != expected_id:
+			return "Puzzle ID does not match this Chapter 3 operation."
+		var reason: String = model.validate_action(action, payload)
+		if not reason.is_empty():
+			return reason
+		if action.begins_with("p05_"):
+			return _validate_p05_sequence(action, payload)
+		return ""
 	# P-07, P-08, P-11, P-12, P-15 and P-16: the player's own decisions, checked against
 	# the answer keys in res://resources/campaign/profiles/campaign_rules.json (never pre-filled).
 	if Chapter4.is_step(action):
@@ -57,20 +111,6 @@ func _validate(puzzle_id: String, action: String, payload: Dictionary) -> String
 	if Chapter8.is_step(action):
 		return Chapter8.validate(action, payload)
 	match action:
-		"p05_read_main_t0", "p05_read_main_t10":
-			if int(payload.get("reading", -1)) != 100: return "The main trunk witness must read 100."
-		"p05_read_garden_t0":
-			if int(payload.get("reading", -1)) != 82: return "The first garden witness must read 82."
-		"p05_read_garden_t10":
-			if int(payload.get("reading", -1)) != 74: return "The falling garden witness must read 74."
-		"p05_read_return_t0", "p05_read_return_t10":
-			if int(payload.get("reading", -1)) != 100: return "The return trunk witness must read 100."
-		"p05_stable_read_1", "p05_stable_read_2", "p05_stable_read_3", "p05_stable_read_4", "p05_stable_read_5":
-			if int(payload.get("main", -1)) != 100 or int(payload.get("garden", -1)) != 100 or int(payload.get("return", -1)) != 100: return "Every post-repair check must read 100/100/100."
-		"p06_count_42":
-			if int(payload.get("total", -1)) != 42 or int(payload.get("wells", -1)) != 6: return "P-06 requires six wells totalling exactly 42 seeds."
-		"p06_allocate_12_30":
-			if int(payload.get("planted", -1)) != 12 or int(payload.get("reserve", -1)) != 30: return "P-06 allocation must preserve 12 planted and 30 reserve seeds."
 		"p07_choose_route_b":
 			if String(payload.get("route", "")) != "B": return "Route B is the only route within both slope and return-reserve limits."
 		"p07_verify_slope":
@@ -105,4 +145,40 @@ func _validate(puzzle_id: String, action: String, payload: Dictionary) -> String
 			if int(payload.get("water", -1)) < 4 or int(payload.get("water", -1)) > 5 or int(payload.get("crate", -1)) != 6 - int(payload.get("water", -1)) or String(payload.get("heat", "")) != "COZY" or String(payload.get("light", "")) != "DIM" or int(payload.get("reserve", -1)) != 30: return "P-13 requires W4/K2 or W5/K1, COZY/DIM and protected reserve 30."
 		"p14_route_reading_1", "p14_route_reading_2":
 			if not (payload.get("reading") is int or payload.get("reading") is float) or not is_finite(float(payload.reading)) or float(payload.reading) < 0 or float(payload.reading) >= 1.0: return "P-14 route clearance requires a reading below 1."
+	return ""
+
+func _validate_p05_sequence(action: String, payload: Dictionary) -> String:
+	if action.begins_with("p05_inspect_") and String(_p05.step(action).get("scene", "")) == "EX-CH03-S02":
+		var value = payload.get("phase", null)
+		if not (value is int or value is float) or not is_finite(float(value)) or float(value) != float(int(value)):
+			return "Choose a whole-number investigation phase."
+		var phase := int(value)
+		var protocol: Dictionary = _p05.data().get("simulation", {})
+		var phase_limit := int(protocol.get("investigation_phases", 4))
+		var capacity := int(protocol.get("max_inspections_per_phase", 2))
+		if phase < 1 or phase > phase_limit:
+			return "Use one of the four investigation phases."
+		var inspected := 0
+		for recorded in _receipts:
+			if String(recorded).begins_with("p05_inspect_") and String(_p05.step(String(recorded)).get("scene", "")) == "EX-CH03-S02":
+				inspected += 1
+		var expected_phase := int(inspected / capacity) + 1
+		if phase != expected_phase:
+			return "Use phase %d for this check. The simulator advances after each pair of inspections; phase four is the repair." % expected_phase
+		if action == "p05_inspect_annex" and phase < 2:
+			return "The annex branch indicator changes after the phase-two aftershock."
+	if action == "p05_read_main_t10":
+		var inspections := 0
+		for recorded in _receipts:
+			if String(recorded).begins_with("p05_inspect_"):
+				inspections += 1
+		if inspections != 6:
+			return "Inspect all six candidates before the t10 comparison."
+	if action == "p05_verify_annex_isolation" and not _receipts.has("p05_inspect_annex"):
+		return "Inspect the annex branch before verifying its automatic isolation."
+	if action.begins_with("p05_stable_read_"):
+		var index := int(action.trim_prefix("p05_stable_read_"))
+		var previous := "p05_reopen_garden_slow" if index == 1 else "p05_stable_read_%d" % (index - 1)
+		if not _receipts.has(previous):
+			return "Reopen slowly, then log five steady checks in order."
 	return ""
