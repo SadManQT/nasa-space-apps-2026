@@ -1,0 +1,4 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+  FAIL: early-warning choice card states the applied 30-second preparation lead
+UPGRADE PAIRS CH4 CH6 RESULT: FAIL (34 checks, 1 failures)
