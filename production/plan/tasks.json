@@ -3068,7 +3068,8 @@
     "production/qa/evidence/M3-6M*"
    ],
    "edit_files": [
-    "game/tools/test_ch06_missions.gd"
+    "game/tools/test_ch06_missions.gd",
+    "game/tools/test_chapter6_puzzles.gd"
    ]
   },
   {
@@ -3680,7 +3681,8 @@
     "production/qa/evidence/M3-8M*"
    ],
    "edit_files": [
-    "game/tools/test_ch08_missions.gd"
+    "game/tools/test_ch08_missions.gd",
+    "game/tools/test_chapter8_puzzles.gd"
    ]
   },
   {
@@ -3904,7 +3906,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "All 128 upgrade profiles complete the campaign",
-   "status": "done",
+   "status": "in_progress",
    "owner": "Ramim/codex",
    "deps": [
     "M3-8U"
@@ -3915,7 +3917,7 @@
    "refs": [
     "execution/QA_02_NUMERIC_AND_UPGRADES.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.",
+   "note": "10Nov ACTIVE BATCH: assigned to Ramim; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n\n10Nov Ramim/codex user-authorized comprehensive repair audit reopened this delivered task; existing evidence retained, dependencies unchanged. Await current integration/full gate before closure.\n10Nov verification: route-entry fixtures must consume published P09/P10/P13/P14 payload data; no simulation or canon change.",
    "evidence": "production/qa/evidence/M3-61_ramim_audit.md",
    "updated": "2026-11-10",
    "prompt": "Per execution/QA_02_NUMERIC_AND_UPGRADES.md: an automated headless test that runs the route under all 2^7 upgrade combinations and checks\nevery numeric contract and ending predicate. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.",
@@ -3933,6 +3935,9 @@
    "integration_paths": [
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-91*"
+   ],
+   "edit_files": [
+    "game/tools/test_upgrade_profiles.gd"
    ]
   },
   {
