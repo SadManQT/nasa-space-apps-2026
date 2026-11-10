@@ -5886,7 +5886,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -5920,7 +5920,12 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Saved source/evidence published through33e1593; frozen checkpointd1f9a7a also on work/atik-loading-20261110. Original full86/89; its comms/P01/text failures have successful separate follow-ups. Latest audit-merged mandatory P01 inputs319/0, loading29/0 and performance582/0 pass at9375330. Earlier retained post-integration582/3 timing failure and two fresh582/0 passes do not establish a cause/fix. Resume with original Ryzen7/RTX4060 Windows two-process loading evidence, diagnose any remaining interval failures, and obtain a fresh integrated full gate. No latest full/Windows repair claimed. Exact artifacts/commands/blockers: production/qa/perf/atik_batch_2026-11-10/README.md."
+   "blocker": "Saved source/evidence published through33e1593; frozen checkpointd1f9a7a also on work/atik-loading-20261110. Original full86/89; its comms/P01/text failures have successful separate follow-ups. Latest audit-merged mandatory P01 inputs319/0, loading29/0 and performance582/0 pass at9375330. Earlier retained post-integration582/3 timing failure and two fresh582/0 passes do not establish a cause/fix. Resume with original Ryzen7/RTX4060 Windows two-process loading evidence, diagnose any remaining interval failures, and obtain a fresh integrated full gate. No latest full/Windows repair claimed. Exact artifacts/commands/blockers: production/qa/perf/atik_batch_2026-11-10/README.md.",
+   "edit_files": [
+    "production/qa/perf/atik_batch_2026-11-10/resume_20261110/README.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
+   ]
   },
   {
    "id": "M1-69",
