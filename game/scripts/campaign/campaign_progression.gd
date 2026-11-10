@@ -80,7 +80,6 @@ func choose_upgrade(chapter: int, option: String) -> Dictionary:
 		var choices: Dictionary = upgrades.get("choices", {}).duplicate(true)
 		var acq: Dictionary = upgrades.get("acquisition_chapter", {}).duplicate(true)
 		choices[str(chapter)] = String(result.get("upgrade_id", ""))
-		choices[chapter] = String(result.get("option", ""))
 		acq[str(chapter)] = "CH%02d" % chapter
 		upgrades["choices"] = choices
 		upgrades["acquisition_chapter"] = acq
