@@ -1,0 +1,78 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+  ok rules hold Tara's dated schedule: day 45 (26 May), five-day dry-down, 31 May harvest
+  ok rules keep founder 42 = 12 + 30, compartments 15 + 15
+  ok rules describe the working stock as Tara x Alo with no count
+  ok archived_nameplate is a terminal stage parallel to archived_petal
+  ok Tara is created with mature_days 45 from the rules and her 30 April bloom
+  ok Tara blooms on 30 April
+  ok the 6 May reciprocal run pollinates Tara
+  ok Tara shows pods from 8 May
+  ok on 25 May Tara is still pod bearing (Alo's day-35 maturity does not apply to her)
+  ok Tara reaches mature_pods on 26 May 2046 (day 45)
+  ok harvest before Tara's confirmation and dry-down is rejected without change
+  ok Tara's watering stops on 26 May, the 20th day after the last pollination run
+  ok on 30 May Tara is still drying and alive
+  ok a 30 May harvest is premature and leaves Tara unchanged
+  ok Tara's pods are dry on 31 May (day 50) and she is still alive for her last photo
+  ok Tara's last photo on 31 May is a dated observation
+  ok the 31 May harvest archives Tara as a nameplate
+  ok Tara's harvest books to the working stock, not the founder ledger, with no headline count
+  ok the working stock record is Tara x Alo, sealed on 31 May
+  ok the working stock carries no seed count anywhere
+  ok founder 42 = 12 + 30 (15 + 15) is identical before and after Tara's harvest
+  ok the vault ledger is untouched by Tara's harvest
+  ok Tara's lineage record keeps the reciprocal parents
+  ok a second Tara harvest is a duplicate and changes nothing
+  ok the archived nameplate is terminal and never revived
+  ok no care is accepted after Tara's archive
+  ok the archived Tara record validates
+  ok Alo keeps day-35 maturity and the founder 42
+  ok an unpollinated Tara sets no pods and is still alive on 31 May
+  ok an unpollinated Tara completes her annual life on 1 June (day 51) with no harvest
+  ok Tara is created with mature_days 45 from the rules and her 30 April bloom
+  ok Tara blooms on 30 April
+  ok the 6 May reciprocal run pollinates Tara
+  ok a dry Tara nobody harvested by 1 June ends naturally, as Alo does on 22 May
+  ok Alo is mature on 16 May and his watering stops
+  ok Alo's vigil photos are accepted on every day from 16 through 21 May
+  ok a second photo on the same day is refused
+  ok Alo's 21 May harvest still books 42 to the founder ledger as the petal archive
+  ok no photo after Alo's archive
+  ok an unharvested Alo has completed his life by 22 May, so no later photo
+  ok the campaign clock has a scene dated after 31 May 2046
+  ok fixture: Alo harvested on 21 May
+  ok Tara is created with mature_days 45 from the rules and her 30 April bloom
+  ok Tara blooms on 30 April
+  ok the 6 May reciprocal run pollinates Tara
+  ok fixture: Tara is pod bearing on 21 May
+  ok entering CH03-S12 on 21 May leaves Tara growing and no working stock yet
+  ok the ledger clock can jump from 21 May past Tara's harvest (EX-CH04-S02)
+  ok the simulation harvests Tara on 31 May and archives her nameplate
+  ok the simulation dates Tara's maturity and watering stop on 26 May even across a clock jump
+  ok the inventories hold a sealed Tara x Alo working stock with no headline count
+  ok founder 42 = 12 + 30 is identical before and after the working stock is booked
+  ok the vault ledger is identical before and after
+  ok the ledger book records the 26 May watering stop and the 31 May working-stock harvest
+  ok the snapshot with the working stock validates
+  ok re-entering the scene never harvests Tara twice
+  ok fixture: Alo harvested on 21 May
+  ok Tara is created with mature_days 45 from the rules and her 30 April bloom
+  ok Tara blooms on 30 April
+  ok the 6 May reciprocal run pollinates Tara
+  ok fixture: Tara is pod bearing on 21 May
+  ok fixture: Alo harvested on 21 May
+  ok Tara is created with mature_days 45 from the rules and her 30 April bloom
+  ok Tara blooms on 30 April
+  ok the 6 May reciprocal run pollinates Tara
+  ok fixture: Tara is pod bearing on 21 May
+  ok a Tara that was never pollinated sets no working stock and ends naturally
+  ok fixture: Alo harvested on 21 May
+  ok Tara is created with mature_days 45 from the rules and her 30 April bloom
+  ok Tara blooms on 30 April
+  ok the 6 May reciprocal run pollinates Tara
+  ok fixture: Tara is pod bearing on 21 May
+  ok a pre-change save with a naturally dead Tara still passes migration
+  ok a pre-change save writes and loads with Tara unchanged and no working stock
+  ok advancing a pre-change save never invents a harvest for a Tara who already ended
+TARA LIFECYCLE RESULT: PASS (75 checks, 0 failures)

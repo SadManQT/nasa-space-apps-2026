@@ -1,0 +1,142 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+  ok content and answer keys load from data files
+  ok every one of the 38 Chapter 8 operations has exactly one step card
+  ok every step uses a supported kind and names its scene
+  ok every clue line id is a canon line of its own scene (text is read from the catalog)
+  ok every NO-GO role is on its step's poll
+  ok no scene codes, puzzle codes or bare variable letters in player text
+  ok the gate catalog pre-fills nothing for Chapter 8
+  ok Chapter 8 targets carry plain-words labels
+ERROR: FAIL Chapter 3–7 witness defaults are untouched
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_chapter8_puzzles.gd:564)
+       [1] _test_data_and_catalog (res://tools/test_chapter8_puzzles.gd:95)
+       [2] _run (res://tools/test_chapter8_puzzles.gd:35)
+  ok the 08 witness is accepted for all 38 operations
+  ok ledger accepts the surveyed road with reserve 4
+  ok ledger rejects the 22° shortcut even with more energy left
+  ok ledger rejects an empty route payload (nothing is pre-filled)
+  ok every wrong-but-reasonable answer is rejected with a plain reason
+  ok an exact but older echo is rejected
+  ok provisions boundary: 50 rejected, 51 and 72 accepted, 73 rejected
+  ok reserve boundary: 1 rejected, exactly 2 accepted
+  ok reserve arithmetic: 14−5−5 = 4 and 18−5−5 = 8 accepted, 14−5 = 9 rejected
+  ok marker bearing boundary: within 2° accepted, 174.9° and the silhouette rejected
+  ok home air prediction: 2.5 rejected, 2.8125 accepted
+  ok zero test accepts only a zero reading
+  ok steps without a graded answer accept the player's own confirmation
+  ok an empty team board has no payload (nothing hidden)
+  ok a fourth name cannot take a rover seat
+  ok five placed names become the exact roster payload
+  ok Mei on the rover gets the garden feedback, not a generic error
+  ok the procedure card holds out-of-order steps and distractors with their feedback, counting attempts
+  ok a completed card is the exact repair sequence
+  ok dial readings pair strength with an obstruction sentence; presets are an equal alternative
+  ok the dial wraps and a bearing within tolerance maps to its preset
+  ok a 2.9-second hold is not yet a lock
+  ok exactly 3 seconds locks
+  ok the reserve stepper is clamped to the data bounds
+  ok the reserve payload carries the departure battery, not the battery after the outward leg
+  ok the 08 hint ladder is verbatim and finite
+  ok scene hints from the clue design follow the 08 hints
+  ok clues file once; unknown clues are refused
+  ok only polled roles can sign
+  ok model state survives JSON reconstruction
+  ok a hint level outside the ladder is refused on restore
+FIXTURE DETAIL EX-CH05-S03 p09_commit_sequence P-09 requires the timestamp order and supported all-returned conclusion.
+FIXTURE DETAIL EX-CH05-S04 p10_document_young_trial Target p10_document_young_trial is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S04 p10_exclude_flower_claim Target p10_exclude_flower_claim is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S04 p10_save_source_scope Target p10_save_source_scope is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S05 p10_acknowledge_ferreira_facts Target p10_acknowledge_ferreira_facts is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S05 p10_acknowledge_personal_question Target p10_acknowledge_personal_question is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S05 p10_preserve_safety_facts Target p10_preserve_safety_facts is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S06 p10_compare_dust_repair Target p10_compare_dust_repair is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S06 p10_compare_leak_repair Target p10_compare_leak_repair is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S06 p10_keep_spare_present Target p10_keep_spare_present is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S07 p10_verify_flashes Target p10_verify_flashes is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S08 p10_clean_panel Target p10_clean_panel is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S08 p10_patch_dome_spur Target p10_patch_dome_spur is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S08 p10_verify_pressure Target p10_verify_pressure is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S09 p10_exclude_unsupported_impact_claim Target p10_exclude_unsupported_impact_claim is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S09 p10_save_report Target p10_save_report is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S10 p10_match_noor_identity Target p10_match_noor_identity is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S10 p10_record_consent Target p10_record_consent is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S10 p10_confirm_founder_role Target p10_confirm_founder_role is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S11 p10_send_invitation Target p10_send_invitation is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S12 p10_plant_cotton Target p10_plant_cotton is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S12 p10_protect_eleven_vault Target p10_protect_eleven_vault is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH05-S12 p10_protect_founder_reserve Target p10_protect_founder_reserve is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S01 p11_charge_hand_light Target p11_charge_hand_light is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S01 p11_assign_companion Target p11_assign_companion is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S01 p11_check_locker Target p11_check_locker is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S02 p11_read_personal_log Target p11_read_personal_log is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S02 p11_identify_protected_path Target p11_identify_protected_path is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S02 p11_identify_fault_method Target p11_identify_fault_method is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S03 p11_commit_allocation Target p11_commit_allocation is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S04 p11_remove_decorative_floods Target p11_remove_decorative_floods is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S04 p11_protect_guide_light Target p11_protect_guide_light is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S04 p11_protect_reserve Target p11_protect_reserve is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S05 p12_test_branch Target p12_test_branch is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S05 p12_verify_protected_services Target p12_verify_protected_services is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S05 p12_record_rehearsal Target p12_record_rehearsal is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S06 p12_check_four_roles Target p12_check_four_roles is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S06 p12_check_five_segments Target p12_check_five_segments is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S06 p12_ready_camera Target p12_ready_camera is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S07 p12_log_ingress Target p12_log_ingress is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S07 p12_log_ring Target p12_log_ring is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S08 p12_deliver_family_contact Target p12_deliver_family_contact is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S08 p12_preserve_observation_qualifications Target p12_preserve_observation_qualifications is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S09 p12_store_known_noor_text Target p12_store_known_noor_text is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S09 p12_reserve_live_voice Target p12_reserve_live_voice is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S10 p12_reset_sequence Target p12_reset_sequence is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S11 p12_record_egress Target p12_record_egress is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S11 p12_reconcile_recovery_reserve Target p12_reconcile_recovery_reserve is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S11 p12_save_recovery Target p12_save_recovery is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S12 p12_reconcile_monitoring Target p12_reconcile_monitoring is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S12 p12_date_february_warning Target p12_date_february_warning is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH06-S12 p12_confirm_care_ledger Target p12_confirm_care_ledger is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S01 p13_share_observations Target p13_share_observations is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S01 p13_label_counterfactual Target p13_label_counterfactual is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S01 p13_record_current_state Target p13_record_current_state is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S02 p13_confirm_five_person_profile Target p13_confirm_five_person_profile is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S02 p13_confirm_shelter_roster Target p13_confirm_shelter_roster is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S02 p13_confirm_shared_resources Target p13_confirm_shared_resources is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S03 p13_commit_plan Target p13_commit_plan is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S04 p13_latch_founder_reserve Target p13_latch_founder_reserve is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S04 p13_verify_water_shield Target p13_verify_water_shield is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S04 p13_verify_crate_shield Target p13_verify_crate_shield is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S04 p13_verify_drain_order Target p13_verify_drain_order is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S05 p14_confirm_five_occupants Target p14_confirm_five_occupants is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S05 p14_check_hatch_one Target p14_check_hatch_one is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S05 p14_check_hatch_two Target p14_check_hatch_two is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S06 p14_commit_steps_1_2 Target p14_commit_steps_1_2 is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S06 p14_save_forecast_comparison Target p14_save_forecast_comparison is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S06 p14_confirm_case_sealed Target p14_confirm_case_sealed is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S07 p14_read_final_log Target p14_read_final_log is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S07 p14_record_academy_name Target p14_record_academy_name is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S07 p14_save_progress_report Target p14_save_progress_report is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S08 p14_commit_steps_3_6 Target p14_commit_steps_3_6 is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S08 p14_confirm_crops_safe Target p14_confirm_crops_safe is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S08 p14_confirm_reserve_30 Target p14_confirm_reserve_30 is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S09 p14_diagnose_external_branch Target p14_diagnose_external_branch is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S09 p14_route_reading_1 Target p14_route_reading_1 is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S09 p14_route_reading_2 Target p14_route_reading_2 is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S10 p14_reconcile_local_stability Target p14_reconcile_local_stability is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S10 p14_reconcile_supplies Target p14_reconcile_supplies is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S10 p14_date_march_gate Target p14_date_march_gate is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S11 p14_pack_controller Target p14_pack_controller is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S11 p14_pack_battery Target p14_pack_battery is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S11 p14_pack_three_site_route Target p14_pack_three_site_route is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S11 p14_bench_test Target p14_bench_test is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S12 p14_assign_field_team Target p14_assign_field_team is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S12 p14_assign_home_team Target p14_assign_home_team is not part of EX-CH05-S03.
+FIXTURE DETAIL EX-CH07-S12 p14_sign_departure_prep Target p14_sign_departure_prep is not part of EX-CH05-S03.
+ERROR: FAIL the campaign reaches the Chapter 8 departure board
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_chapter8_puzzles.gd:564)
+       [1] _build_entry_state (res://tools/test_chapter8_puzzles.gd:237)
+       [2] _run (res://tools/test_chapter8_puzzles.gd:38)
+CHAPTER 8 PUZZLES RESULT: FAIL (41 checks, 2 failures)

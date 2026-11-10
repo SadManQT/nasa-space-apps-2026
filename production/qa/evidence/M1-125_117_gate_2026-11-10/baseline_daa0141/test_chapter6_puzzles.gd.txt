@@ -1,0 +1,32 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+ERROR: Couldn't open directory at path "C:/Users/User/.codex/worktrees/nasa-ramim-acceptance-20261110/.superpowers/appdata/Godot/app_userdata/Last Light Academy/shader_cache".
+   at: get_directories_at (core/io/dir_access.cpp:588)
+   GDScript backtrace (most recent call first):
+       [0] _prepare_cache_directories (res://tools/support/isolated_storage.gd:29)
+       [1] prepare_rendering_cache (res://tools/support/isolated_storage.gd:24)
+       [2] _init (res://tools/test_chapter6_puzzles.gd:32)
+  ok content and answer keys load from data files
+  ok every one of the 29 Chapter 6 operations has a step card
+  ok every step uses a supported kind and names its scene
+  ok every clue line id is a canon line of its own scene
+  ok every NO-GO role is on its step's poll
+  ok the gate catalog pre-fills nothing for Chapter 6
+  ok Chapter 6 targets carry plain-words labels
+  ok the 08 witness is accepted for all 29 Chapter 6 operations
+  ok ledger accepts 7-unit eclipse allocation
+  ok ledger rejects 9-unit allocation with decorative floods
+  ok ledger rejects live reset before isolation
+  ok ledger rejects empty allocation payload
+  ok empty allocation has no payload
+  ok selecting 7-unit allocation builds exact payload
+  ok P-12 procedure card holds out-of-order steps and distractors
+  ok completed P-12 sequence matches 5-step reset
+  ok P-11 hint ladder has 3 tiers and stops
+ERROR: FAIL the campaign reaches Chapter 6 S01
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_chapter6_puzzles.gd:353)
+       [1] _build_entry_state (res://tools/test_chapter6_puzzles.gd:144)
+       [2] _run (res://tools/test_chapter6_puzzles.gd:39)
+CHAPTER 6 PUZZLES RESULT: FAIL (18 checks, 1 failures)

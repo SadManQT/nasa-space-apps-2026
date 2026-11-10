@@ -1,0 +1,841 @@
+{
+  "started_dhaka": "2026-11-10T15:23:24.318208+06:00",
+  "source_commit": "daa014145922e2646027140f3bd34c53a0afe3cb",
+  "game_tree": "1c3a0dd3517226d7c9c3a79138249593e4955d2a",
+  "godot": "4.7.stable.official.5b4e0cb0f",
+  "hardware": "AMD Ryzen 7 7700 / NVIDIA GeForce RTX 4060 / Windows",
+  "command": "GODOT=<console executable> APPDATA=<isolated directory> TEST_LOG_DIR=<full-gate> SUITE_TIMEOUT=1500 game/tools/run_tests.sh",
+  "suite_files": [
+    "test_asset_showcase.gd",
+    "test_campaign_boot.gd",
+    "test_campaign_crew.gd",
+    "test_campaign_field_systems.gd",
+    "test_campaign_interaction_input.gd",
+    "test_campaign_knowledge.gd",
+    "test_campaign_later_runtime.gd",
+    "test_campaign_media.gd",
+    "test_campaign_messages.gd",
+    "test_campaign_progression.gd",
+    "test_campaign_session.gd",
+    "test_care_round_panel.gd",
+    "test_care_round_props.gd",
+    "test_care_round_runtime.gd",
+    "test_ch01_game_feel.gd",
+    "test_ch01_room_hooks.gd",
+    "test_ch01_s03_route.gd",
+    "test_ch03_assets.gd",
+    "test_ch04_assets.gd",
+    "test_ch04_missions.gd",
+    "test_ch05_assets.gd",
+    "test_ch05_missions.gd",
+    "test_ch06_missions.gd",
+    "test_ch07_missions.gd",
+    "test_ch08_missions.gd",
+    "test_chapter1_campaign_flow.gd",
+    "test_chapter1_logic_regressions.gd",
+    "test_chapter1_outcomes.gd",
+    "test_chapter1_ui_regressions.gd",
+    "test_chapter2_rooms.gd",
+    "test_chapter2_route.gd",
+    "test_chapter3_rooms.gd",
+    "test_chapter4_puzzles.gd",
+    "test_chapter4_rooms.gd",
+    "test_chapter5_rooms.gd",
+    "test_chapter6_puzzles.gd",
+    "test_chapter6_rooms.gd",
+    "test_chapter7_assets.gd",
+    "test_chapter7_rooms.gd",
+    "test_chapter8_assets.gd",
+    "test_chapter8_puzzles.gd",
+    "test_chapter8_rooms.gd",
+    "test_chapter_select.gd",
+    "test_comms.gd",
+    "test_cutscene_choice_card.gd",
+    "test_director_message_metadata.gd",
+    "test_earth_screen.gd",
+    "test_eclipse_props.gd",
+    "test_eclipse_rim_gate.gd",
+    "test_en_airlock.gd",
+    "test_eva.gd",
+    "test_explainers.gd",
+    "test_extended_campaign_route.gd",
+    "test_exterior_terrain.gd",
+    "test_face_atlas.gd",
+    "test_face_expression.gd",
+    "test_first_five_minutes.gd",
+    "test_garden_collision.gd",
+    "test_garden_movement.gd",
+    "test_habitat_kit.gd",
+    "test_habitat_rooms.gd",
+    "test_hair_springs.gd",
+    "test_hazards.gd",
+    "test_hint_player.gd",
+    "test_hud_world_lifetime.gd",
+    "test_journal_tabs.gd",
+    "test_later_numeric.gd",
+    "test_lip_sync.gd",
+    "test_loading.gd",
+    "test_lunar_kit.gd",
+    "test_m155_mission_table.gd",
+    "test_main_menu_contrast.gd",
+    "test_mission_table_lifetime.gd",
+    "test_mission_trainer.gd",
+    "test_moon_region.gd",
+    "test_moon_trainer.gd",
+    "test_narrative_props.gd",
+    "test_network.gd",
+    "test_outpost_status.gd",
+    "test_p01_inputs.gd",
+    "test_p01_labels.gd",
+    "test_p01_nearby.gd",
+    "test_p01_panel.gd",
+    "test_p02_mission_table.gd",
+    "test_p03_p04_content.gd",
+    "test_p09_p10_panels.gd",
+    "test_p13_p14_panels.gd",
+    "test_payload.gd",
+    "test_performance_runtime.gd",
+    "test_plant_seedlings.gd",
+    "test_player_controller.gd",
+    "test_player_text.gd",
+    "test_probe_calibration_job.gd",
+    "test_progression.gd",
+    "test_review_scene.gd",
+    "test_room_presentation.gd",
+    "test_route_messages.gd",
+    "test_rover.gd",
+    "test_save_service_recovery.gd",
+    "test_science_data.gd",
+    "test_science_watch.gd",
+    "test_session_crew.gd",
+    "test_sound_captions.gd",
+    "test_story_echoes.gd",
+    "test_story_log.gd",
+    "test_tara_lifecycle.gd",
+    "test_terrain.gd",
+    "test_terrain_lola.gd",
+    "test_terrain_session.gd",
+    "test_terrain_work_lights.gd",
+    "test_toon_materials.gd",
+    "test_ui_families.gd",
+    "test_ui_kit.gd",
+    "test_upgrade_profiles.gd",
+    "test_worker_a_systems.gd",
+    "test_worker_b_world_missions.gd",
+    "test_worker_c_content.gd"
+  ],
+  "scope": "11 Ramim acceptance-only rows; game timing assertions unchanged; foreign source unchanged",
+  "suite_count": 117,
+  "result": "98/117 suites passed",
+  "exit": 1,
+  "notes": [
+    "The chapter1_ui_regressions owned child process was stopped after an unrecoverable null-instance SCRIPT ERROR; it is a failure, not a clean completion.",
+    "LFS assets hydrated and mandatory import/setup completed. Saved source and thresholds unchanged.",
+    "Repair checkout setup-only failures are separate attempts and are not suite passes.",
+    "Some diagnostic work/file hydration overlapped functional suites; reproduce timing failures in controlled isolated processes before causal claims."
+  ],
+  "suites": [
+    {
+      "suite": "test_asset_showcase.gd",
+      "passed": true,
+      "result": "SHOWCASE RESULT: PASS (2767 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_campaign_boot.gd",
+      "passed": true,
+      "result": "CAMPAIGN BOOT RESULT: PASS (5 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_campaign_crew.gd",
+      "passed": true,
+      "result": "CAMPAIGN CREW RESULT: PASS (903 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_campaign_field_systems.gd",
+      "passed": true,
+      "result": "CAMPAIGN FIELD SYSTEMS RESULT: PASS (6 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_campaign_interaction_input.gd",
+      "passed": true,
+      "result": "CAMPAIGN INTERACTION INPUT RESULT: PASS (39 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_campaign_knowledge.gd",
+      "passed": true,
+      "result": "CAMPAIGN KNOWLEDGE RESULT: PASS (47 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_campaign_later_runtime.gd",
+      "passed": false,
+      "result": "LATER CAMPAIGN RUNTIME RESULT: FAIL (78 checks, 30 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_campaign_media.gd",
+      "passed": true,
+      "result": "CAMPAIGN MEDIA RESULT: PASS (115 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_campaign_messages.gd",
+      "passed": true,
+      "result": "CAMPAIGN MESSAGES RESULT: PASS (28 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_campaign_progression.gd",
+      "passed": true,
+      "result": "CAMPAIGN PROGRESSION RESULT: PASS (22 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_campaign_session.gd",
+      "passed": true,
+      "result": "CAMPAIGN SESSION RESULT: PASS (15/15 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_care_round_panel.gd",
+      "passed": true,
+      "result": "CARE ROUND PANEL RESULT: PASS (32 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_care_round_props.gd",
+      "passed": true,
+      "result": "CARE ROUND PROPS RESULT: PASS (81 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_care_round_runtime.gd",
+      "passed": true,
+      "result": "CARE ROUND RUNTIME RESULT: PASS (86 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ch01_game_feel.gd",
+      "passed": false,
+      "result": "CH01 GAME FEEL RESULT: FAIL (101 checks, 3 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ch01_room_hooks.gd",
+      "passed": true,
+      "result": "CH01 ROOM HOOKS RESULT: PASS (117 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ch01_s03_route.gd",
+      "passed": true,
+      "result": "CH01 S03 ROUTE RESULT: PASS (8 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ch03_assets.gd",
+      "passed": true,
+      "result": "CH03 ASSETS RESULT: PASS (328 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ch04_assets.gd",
+      "passed": true,
+      "result": "CH04_ASSETS RESULT: PASS (314 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ch04_missions.gd",
+      "passed": true,
+      "result": "CH04 MISSIONS RESULT: PASS (134 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ch05_assets.gd",
+      "passed": true,
+      "result": "CH05 ASSETS RESULT: PASS (174 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ch05_missions.gd",
+      "passed": true,
+      "result": "CHAPTER 5 MISSIONS RESULT: PASS (890 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ch06_missions.gd",
+      "passed": false,
+      "result": "CH06 MISSIONS RESULT: FAIL (149 checks, 105 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ch07_missions.gd",
+      "passed": true,
+      "result": "CHAPTER 7 MISSIONS RESULT: PASS (1038 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ch08_missions.gd",
+      "passed": false,
+      "result": "CH08 MISSIONS RESULT: FAIL (173 checks, 123 failures)",
+      "script_error": true
+    },
+    {
+      "suite": "test_chapter1_campaign_flow.gd",
+      "passed": false,
+      "result": "CHAPTER 1 CAMPAIGN FLOW RESULT: FAIL (314 checks, 7 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter1_logic_regressions.gd",
+      "passed": true,
+      "result": "CHAPTER 1 LOGIC REGRESSIONS: 34 checks, 0 failures",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter1_outcomes.gd",
+      "passed": false,
+      "result": "CHAPTER 1 OUTCOMES RESULT: FAIL (134 checks, 2 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter1_ui_regressions.gd",
+      "passed": false,
+      "result": "",
+      "script_error": true
+    },
+    {
+      "suite": "test_chapter2_rooms.gd",
+      "passed": false,
+      "result": "CHAPTER 2 ROOMS RESULT: FAIL (3603 checks, 7 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter2_route.gd",
+      "passed": true,
+      "result": "CHAPTER 2 ROUTE RESULT: PASS (104 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter3_rooms.gd",
+      "passed": false,
+      "result": "CHAPTER 3 ROOMS RESULT: FAIL (4717 checks, 3 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter4_puzzles.gd",
+      "passed": true,
+      "result": "CHAPTER 4 PUZZLES RESULT: PASS (66 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter4_rooms.gd",
+      "passed": true,
+      "result": "CHAPTER 4 ROOMS RESULT: PASS (2450 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter5_rooms.gd",
+      "passed": false,
+      "result": "CHAPTER 5 ROOMS RESULT: FAIL (2837 checks, 32 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter6_puzzles.gd",
+      "passed": false,
+      "result": "CHAPTER 6 PUZZLES RESULT: FAIL (18 checks, 1 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter6_rooms.gd",
+      "passed": false,
+      "result": "CHAPTER 6 ROOMS RESULT: FAIL (3579 checks, 33 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter7_assets.gd",
+      "passed": true,
+      "result": "CHAPTER7 ASSETS RESULT: PASS (254 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter7_rooms.gd",
+      "passed": true,
+      "result": "CHAPTER 7 ROOMS RESULT: PASS (3373 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter8_assets.gd",
+      "passed": true,
+      "result": "CHAPTER8 ASSETS RESULT: PASS (219 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter8_puzzles.gd",
+      "passed": false,
+      "result": "CHAPTER 8 PUZZLES RESULT: FAIL (41 checks, 2 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter8_rooms.gd",
+      "passed": true,
+      "result": "CHAPTER 8 ROOMS RESULT: PASS (1328 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_chapter_select.gd",
+      "passed": true,
+      "result": "CHAPTER SELECT RESULT: PASS (119 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_comms.gd",
+      "passed": true,
+      "result": "COMMS RESULT: PASS (45 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_cutscene_choice_card.gd",
+      "passed": true,
+      "result": "CUTSCENE CHOICE CARD RESULT: PASS (47 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_director_message_metadata.gd",
+      "passed": true,
+      "result": "DIRECTOR MESSAGE METADATA RESULT: PASS (76 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_earth_screen.gd",
+      "passed": true,
+      "result": "EARTH SCREEN RESULT: PASS (49 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_eclipse_props.gd",
+      "passed": true,
+      "result": "ECLIPSE PROPS RESULT: PASS (567 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_eclipse_rim_gate.gd",
+      "passed": true,
+      "result": "ECLIPSE RIM GATE RESULT: PASS (65 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_en_airlock.gd",
+      "passed": true,
+      "result": "EN_AIRLOCK RESULT: PASS (145 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_eva.gd",
+      "passed": true,
+      "result": "EVA RESULT: PASS (54 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_explainers.gd",
+      "passed": true,
+      "result": "EXPLAINERS RESULT: PASS (321 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_extended_campaign_route.gd",
+      "passed": true,
+      "result": "EXTENDED CAMPAIGN ROUTE RESULT: PASS (639 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_exterior_terrain.gd",
+      "passed": true,
+      "result": "EXTERIOR TERRAIN RESULT: PASS (1109 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_face_atlas.gd",
+      "passed": true,
+      "result": "PASS FaceAtlas (17 checks, 16 cue frames checked)",
+      "script_error": false
+    },
+    {
+      "suite": "test_face_expression.gd",
+      "passed": true,
+      "result": "PASS FaceExpression / HeadAccent (68 checks, including runtime Kai GLTF integration)",
+      "script_error": false
+    },
+    {
+      "suite": "test_first_five_minutes.gd",
+      "passed": true,
+      "result": "FIRST FIVE MINUTES RESULT: PASS (59 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_garden_collision.gd",
+      "passed": true,
+      "result": "GARDEN COLLISION RESULT: PASS (19 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_garden_movement.gd",
+      "passed": true,
+      "result": "GARDEN MOVEMENT RESULT: PASS (54 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_habitat_kit.gd",
+      "passed": true,
+      "result": "HABITAT KIT RESULT: PASS (225 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_habitat_rooms.gd",
+      "passed": true,
+      "result": "HABITAT ROOMS RESULT: PASS (360 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_hair_springs.gd",
+      "passed": true,
+      "result": "PASS HairSprings (5 checks, 3 chains)",
+      "script_error": false
+    },
+    {
+      "suite": "test_hazards.gd",
+      "passed": true,
+      "result": "HAZARDS RESULT: PASS (19 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_hint_player.gd",
+      "passed": true,
+      "result": "HINT PLAYER RESULT: PASS (124 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_hud_world_lifetime.gd",
+      "passed": true,
+      "result": "HUD WORLD LIFETIME RESULT: PASS (13 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_journal_tabs.gd",
+      "passed": false,
+      "result": "JOURNAL TABS RESULT: FAIL (320 checks, 94 failures)",
+      "script_error": true
+    },
+    {
+      "suite": "test_later_numeric.gd",
+      "passed": true,
+      "result": "LATER NUMERIC RESULT: PASS (388 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_lip_sync.gd",
+      "passed": true,
+      "result": "PASS LipSync coarticulation, closures, loudness, release and errors",
+      "script_error": false
+    },
+    {
+      "suite": "test_loading.gd",
+      "passed": true,
+      "result": "LOADING WATCHDOG RESULT: PASS (29 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_lunar_kit.gd",
+      "passed": true,
+      "result": "LUNAR KIT RESULT: PASS (89 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_m155_mission_table.gd",
+      "passed": true,
+      "result": "M155 MISSION TABLE RESULT: PASS (109 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_main_menu_contrast.gd",
+      "passed": false,
+      "result": "MAIN MENU CONTRAST RESULT: FAIL (154 checks, 12 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_mission_table_lifetime.gd",
+      "passed": true,
+      "result": "MISSION TABLE LIFETIME RESULT: PASS (11 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_mission_trainer.gd",
+      "passed": true,
+      "result": "MISSION TRAINER RESULT: PASS (951 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_moon_region.gd",
+      "passed": true,
+      "result": "MOON REGION RESULT: PASS (511 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_moon_trainer.gd",
+      "passed": true,
+      "result": "MOON TRAINER RESULT: PASS (136 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_narrative_props.gd",
+      "passed": true,
+      "result": "NARRATIVE PROPS RESULT: PASS (401 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_network.gd",
+      "passed": true,
+      "result": "NETWORK RESULT: PASS (35 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_outpost_status.gd",
+      "passed": false,
+      "result": "OUTPOST STATUS RESULT: FAIL (62 checks, 29 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_p01_inputs.gd",
+      "passed": true,
+      "result": "P01 INPUTS RESULT: PASS (319 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_p01_labels.gd",
+      "passed": true,
+      "result": "P01 LABELS RESULT: PASS (104 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_p01_nearby.gd",
+      "passed": true,
+      "result": "P01 NEARBY RESULT: PASS (30 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_p01_panel.gd",
+      "passed": true,
+      "result": "P01 PANEL RESULT: PASS (140 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_p02_mission_table.gd",
+      "passed": true,
+      "result": "P02 MISSION TABLE RESULT: PASS (78 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_p03_p04_content.gd",
+      "passed": true,
+      "result": "P03 P04 CONTENT RESULT: PASS (303 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_p09_p10_panels.gd",
+      "passed": true,
+      "result": "P09 P10 PANELS RESULT: PASS (330 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_p13_p14_panels.gd",
+      "passed": true,
+      "result": "P13 P14 PANELS RESULT: PASS (406 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_payload.gd",
+      "passed": true,
+      "result": "PAYLOAD RESULT: PASS (162 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_performance_runtime.gd",
+      "passed": false,
+      "result": "PERFORMANCE RUNTIME RESULT: FAIL (545 checks, 2 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_plant_seedlings.gd",
+      "passed": true,
+      "result": "PLANT SEEDLINGS RESULT: PASS (86 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_player_controller.gd",
+      "passed": true,
+      "result": "PLAYER RESULT: PASS (105 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_player_text.gd",
+      "passed": false,
+      "result": "PLAYER TEXT RESULT: FAIL (18162 checks, 3026 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_probe_calibration_job.gd",
+      "passed": true,
+      "result": "PROBE CALIBRATION JOB RESULT: PASS (83 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_progression.gd",
+      "passed": true,
+      "result": "PROGRESSION RESULT: PASS (72 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_review_scene.gd",
+      "passed": true,
+      "result": "REVIEW RESULT: PASS (447 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_room_presentation.gd",
+      "passed": true,
+      "result": "ROOM PRESENTATION RESULT: PASS (155 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_route_messages.gd",
+      "passed": true,
+      "result": "ROUTE MESSAGES RESULT: PASS (31 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_rover.gd",
+      "passed": true,
+      "result": "ROVER RESULT: PASS (27 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_save_service_recovery.gd",
+      "passed": true,
+      "result": "SAVE RECOVERY RESULT: 92/92 checks, 0 failures",
+      "script_error": false
+    },
+    {
+      "suite": "test_science_data.gd",
+      "passed": true,
+      "result": "SCIENCE DATA RESULT: PASS (206 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_science_watch.gd",
+      "passed": true,
+      "result": "SCIENCE WATCH RESULT: PASS (65 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_session_crew.gd",
+      "passed": true,
+      "result": "RESULT test_session_crew: 135 checks, 0 failures",
+      "script_error": false
+    },
+    {
+      "suite": "test_sound_captions.gd",
+      "passed": true,
+      "result": "SOUND CAPTIONS RESULT: PASS (82 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_story_echoes.gd",
+      "passed": true,
+      "result": "STORY ECHOES RESULT: PASS (780 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_story_log.gd",
+      "passed": true,
+      "result": "STORY LOG RESULT: PASS (64 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_tara_lifecycle.gd",
+      "passed": true,
+      "result": "TARA LIFECYCLE RESULT: PASS (75 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_terrain.gd",
+      "passed": true,
+      "result": "TERRAIN STREAM RESULT: PASS (104 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_terrain_lola.gd",
+      "passed": true,
+      "result": "TERRAIN LOLA RESULT: PASS (1404 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_terrain_session.gd",
+      "passed": true,
+      "result": "TERRAIN SESSION RESULT: PASS (78 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_terrain_work_lights.gd",
+      "passed": true,
+      "result": "TERRAIN WORK LIGHTS RESULT: PASS (1045 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_toon_materials.gd",
+      "passed": true,
+      "result": "PASS ToonMaterials (12 checks, 2 swapped materials)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ui_families.gd",
+      "passed": true,
+      "result": "UI FAMILIES RESULT: PASS (84 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_ui_kit.gd",
+      "passed": true,
+      "result": "UI KIT RESULT: PASS (522 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_upgrade_profiles.gd",
+      "passed": false,
+      "result": "UPGRADE PROFILES RESULT: FAIL (3180 checks, 129 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_worker_a_systems.gd",
+      "passed": true,
+      "result": "WORKER A SYSTEMS RESULT: PASS (108 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_worker_b_world_missions.gd",
+      "passed": true,
+      "result": "WORKER B WORLD/MISSIONS RESULT: PASS (429 checks, 0 failures)",
+      "script_error": false
+    },
+    {
+      "suite": "test_worker_c_content.gd",
+      "passed": true,
+      "result": "WORKER C CONTENT RESULT: PASS (572 checks, 0 failures)",
+      "script_error": false
+    }
+  ]
+}
