@@ -1,0 +1,14 @@
+test_existing_failure_checks_remain_effective (game.tools.test_runner.RunnerTests.test_existing_failure_checks_remain_effective) ... ok
+test_failed_setup_stops_before_any_suite (game.tools.test_runner.RunnerTests.test_failed_setup_stops_before_any_suite) ... ok
+test_fatal_error_reaps_engine_that_ignores_term (game.tools.test_runner.RunnerTests.test_fatal_error_reaps_engine_that_ignores_term) ... skipped 'POSIX ignored-signal fixture; Windows host still needs real verification'
+test_fatal_script_error_stops_live_engine_before_its_timeout (game.tools.test_runner.RunnerTests.test_fatal_script_error_stops_live_engine_before_its_timeout) ... ok
+test_long_text_guard_does_not_raise_other_suite_limits (game.tools.test_runner.RunnerTests.test_long_text_guard_does_not_raise_other_suite_limits) ... ok
+test_profile_guard_is_isolated_from_other_suites (game.tools.test_runner.RunnerTests.test_profile_guard_is_isolated_from_other_suites) ... ok
+test_runner_stops_its_engine_descendants (game.tools.test_runner.RunnerTests.test_runner_stops_its_engine_descendants) ... ok
+test_successful_setup_runs_suite (game.tools.test_runner.RunnerTests.test_successful_setup_runs_suite) ... ok
+test_windows_selects_git_bash_before_wsl (game.tools.test_runner.RunnerTests.test_windows_selects_git_bash_before_wsl) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 21.733s
+
+OK (skipped=1)

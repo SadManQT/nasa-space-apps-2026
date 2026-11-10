@@ -4,6 +4,8 @@
 ## conserved inventories and the living-garden ending. UI acquisition is separate.
 extends SceneTree
 
+const PuzzleData = preload("res://scripts/puzzles/puzzle_data.gd")
+
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const SimulationScript = preload("res://scripts/simulation/expedition_simulation.gd")
 const Chapter1RouteScript = preload("res://scripts/missions/chapter1_route.gd")
@@ -23,9 +25,21 @@ func _init() -> void:
 	call_deferred("_run")
 
 func _run() -> void:
-	_test_baseline_witnesses()
-	_test_all_128_upgrade_profiles()
-	_test_boundary_and_deterministic_replay()
+	var args := OS.get_cmdline_user_args()
+	if not args.is_empty():
+		var valid := args.size() == 3 and args[0] == "--profile-batch" and args[1].is_valid_int() and args[2].is_valid_int()
+		valid = valid and int(args[1]) >= 0 and int(args[1]) < int(args[2]) and int(args[2]) <= 128
+		_check(valid, "child profile range is bounded and nonempty")
+		if valid:
+			var completed := 0
+			for mask in range(int(args[1]), int(args[2])):
+				if _play_upgrade_profile(mask):
+					completed += 1
+			print("UPGRADE PROFILE BATCH: " + JSON.stringify({"first": int(args[1]), "end": int(args[2]), "completed": completed, "checks": checks, "failures": failures}))
+	else:
+		_test_baseline_witnesses()
+		await _test_all_128_upgrade_profiles()
+		_test_boundary_and_deterministic_replay()
 	print("UPGRADE PROFILES RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
 
@@ -57,11 +71,44 @@ func _test_baseline_witnesses() -> void:
 	_check(golden_preview.accepted and golden_preview.ending == "GOLDEN" and base == before, "baseline Golden witness is accepted and pure")
 
 func _test_all_128_upgrade_profiles() -> void:
+	# Independent engine processes keep mutable model/static caches isolated.
+	var workers := mini(8, maxi(1, OS.get_processor_count()))
+	var batch_size := ceili(128.0 / workers)
+	var batches: Array = []
+	for first in range(0, 128, batch_size):
+		var end := mini(first + batch_size, 128)
+		var thread := Thread.new()
+		var started := thread.start(_run_profile_batch.bind(first, end, ProjectSettings.globalize_path("res://")))
+		_check(started == OK, "profile worker starts for %d..%d" % [first, end - 1])
+		if started == OK:
+			batches.append({"first": first, "end": end, "thread": thread})
+	while batches.any(func(batch): return batch.thread.is_alive()):
+		await process_frame
 	var complete_profiles := 0
-	for mask in range(128):
-		if _play_upgrade_profile(mask):
-			complete_profiles += 1
+	for batch in batches:
+		var result: Dictionary = batch.thread.wait_to_finish()
+		var output := String(result.get("output", ""))
+		print(output)
+		var report: Dictionary = {}
+		for line in output.split("\n"):
+			if line.begins_with("UPGRADE PROFILE BATCH: "):
+				var parsed = JSON.parse_string(line.trim_prefix("UPGRADE PROFILE BATCH: "))
+				if parsed is Dictionary:
+					report = parsed
+		var valid := int(result.get("exit", -1)) == 0 and not output.contains("SCRIPT ERROR") and not output.contains("Parse Error") and not output.contains("Could not find type") and not output.contains("Failed to load script")
+		valid = valid and report.get("first", -1) == batch.first and report.get("end", -1) == batch.end and report.get("completed", 0) == batch.end - batch.first and report.get("checks", 0) > 0 and report.get("failures", -1) == 0
+		_check(valid, "all real scene checks complete in profile range %d..%d" % [batch.first, batch.end - 1])
+		checks += int(report.get("checks", 0))
+		failures += maxi(0, int(report.get("failures", 0)))
+		if valid:
+			complete_profiles += int(report.completed)
 	_check(complete_profiles == 128, "all 128 profiles complete all 96 route scenes, with upgrades acquired only after their chapters")
+
+static func _run_profile_batch(first: int, end: int, project_path: String) -> Dictionary:
+	var output: Array = []
+	var args := PackedStringArray(["--headless", "--path", project_path, "--script", "res://tools/test_upgrade_profiles.gd", "--", "--profile-batch", str(first), str(end)])
+	var exit_code := OS.execute(OS.get_executable_path(), args, output, true)
+	return {"exit": exit_code, "output": "\n".join(output)}
 
 ## Route/balance coverage: input fixtures stand in for player selections, not
 ## for any route action, scene gate or upgrade acquisition UI.
@@ -102,6 +149,9 @@ func _play_upgrade_profile(mask: int) -> bool:
 				if not _profile_check(not bool(skipped.get("accepted", false)) and director.snapshot() == state, mask, scene_id + " refuses an operation before its prerequisites"):
 					return false
 			for target in targets:
+				if String(target.target_id) == "calibrate_probe":
+					if not _profile_check(bool(PlantInput.complete_probe_transfer(route).get("accepted", false)), mask, "opening probe transfer before calibration"):
+						return false
 				var result: Dictionary = route.perform(String(target.target_id), _profile_payload(target, director.snapshot()))
 				if not _profile_check(bool(result.get("accepted", false)), mask, scene_id + " / " + String(target.target_id) + ": " + String(result.get("reason", ""))):
 					return false
@@ -132,6 +182,8 @@ func _play_upgrade_profile(mask: int) -> bool:
 func _profile_payload(target: Dictionary, state: Dictionary) -> Dictionary:
 	var target_id := String(target.target_id)
 	var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true)
+	if payload.is_empty():
+		payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
 	payload.merge(PlantInput.payload(target_id), true)
 	payload = Chapter4Witness.payload(target_id, state, payload)
 	payload = Chapter6Witness.payload(target_id, state, payload)
