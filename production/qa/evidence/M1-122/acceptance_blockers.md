@@ -1,57 +1,29 @@
-# Recorded acceptance blockers and saved work
+# Tanvir acceptance handoff - current scoped state
 
-10 November 2026, Tanvir. Work is limited to M1-122, M1-123 and M1-85. The collision correction is published in e5ed6178 and actual-input regression in 630c9278; M1-85 evidence/status are published in 2b848e34/76621158. No other task is claimed or repaired.
+10 November2026. Work remains only M1-122,M1-123,M1-85. No extra claim; all three remain blocked. Source collisione5ed6178 and movement630c9278 are preserved. The new user-approved driver edit is confined to test_garden_movement.gd and does not change runtime/controller/capsule/solids or acceptance limits.
 
-The synchronized test snapshot is game tree `8edef085d1dcc51ee5c4b6974c31905cd6441da1`, source 2b848e34 (the later status-only commit 76621158 has the same game tree). New care props, opening activity, campaign/player changes and other members' work were preserved. The tested local import metadata and pre-existing project blank-line edit are retained in run metadata; this is not a pristine committed-import baseline.
+## Latest required dependency check
 
-## Latest synchronization check
+At sourcef328c0c5 (game base5da9f5ea1a308313e5e0411ad3411c37e8f3301f) plus the recorded approved driver diff, mandatory Garden passes2/2 (19/0,54/0). Loading fails615/5: title52.109,campaign80.204,Garden64.977,fullcast59.503,terrain56.240ms against unchanged<50ms. Setup/suite logs have0engine/script errors; source/save guards pass. [Current commands/guards](current_acceptance_20261110/post_sync_f328/run.json), [raw timing log](current_acceptance_20261110/post_sync_f328/performance/runner_logs/test_performance_runtime.gd.log). These are fresh measurements after the HUD-splitting repair, not the old nine intervals automatically carried forward.
 
-After later teammate integration, the latest tested game tree is `d1436027711ea9bf1721ac7dd4bf4f01564ef197` (source bf19dff7, containing the final upstream sync plus evidence-only commits). A fresh mandatory Garden runner passes **2/2: collision19/0, movement54/0**. The fresh comms runner still fails **0/1** because its45/0 assertion output lacks the recognized result marker. [Latest commands/source](final_sync/run.json), [Garden](final_sync/garden/runner.txt), [comms](final_sync/comms/runner.txt).
+Dependency/owner: Ramim/M1-125 has the active measured loading/content-query work and exact reservations; Atik/M1-68 owns the timing investigation. Preserve Asif's main/route and Ramim's campaign/progression/room reservations. A current full gate becomes ready after the required loading check is green. Resume with a safe sync, focused retest of published changes, then the complete mandatory immutable-source runner. Historical folder-owner names are not blockers.
 
-The native and broader diagnostics below deliberately remain tied to their recorded **8edef** snapshot. They do not claim full/native verification of the later34-file upstream repair. Some older failures may have been repaired there; the latest comms blocker and absence of a complete current full pass still prevent Done.
+## M1-123 saved source and verification
 
-## Focused checks
+[Approved driver and native handoff](../M1-123/current_pilot_20261110/README.md) records unchanged360sampling/25cm bounds, two fresh ordinary mandatory54/0 movement passes, ordinary native62/0 with8inspected PNGs, and a further current-source54/0 pass. It preserves an earlier54/2braking observation and62/1native input-loss failure. All16new native PNGs were inspected. The later runs recorded0key-resync events, so no lost-input producer/focus cause is claimed. The original screenshot pose/input/yaw remain unknown.
 
-The mandatory garden runner passes 2/2 suites: collision 19/0 and real-input movement 54/0. Mandatory habitat_rooms passes 360/0. The same Garden and habitat suites pass inside the broader attempt. First-five-minutes 57/0, Chapter1 room hooks 117/0 and outcome134/0 also pass. These are actual production campaign/body checks; they are not a human playthrough or an exact replay of the unrecorded historical screenshot pose.
+Both supplemental10FPS runs have54/0 movement assertions and2corrective arrivals, but79GLES3shader-cache errors each despite exit0. They remain failed for log integrity; shorter paths did not establish a cause. This is separate from ordinary native success, production rendering qualification and the historical cold-import crash.
 
-## Full attempt and continuation are separate
+## Full-run evidence and superseded blockers
 
-`game/tools/run_tests.sh` ran with mandatory setup, unchanged 300-second per-suite timeout and unchanged 50ms performance limits. A separate diagnostic wrapper stopped the whole collection at **2,400.220 seconds**, during player-text. **89/115 suites reported: 73 passed, 16 failed. No full-suite summary was emitted.** The collection cap is not a game-test budget or the runner's per-suite timeout. [Invocation/source](regression_post_sync/run.json), [raw runner](regression_post_sync/full/runner.txt), [complete retained-log audit](regression_post_sync/log_audit.json), [interrupted raw player-text log](regression_post_sync/outer_timeout_logs/).
+The complete frozen Windows invocation atdaa01414/game1c3a0dd3 reports97/117, exit1, all117unique verdicts. Its one already-script-failed UI child has an explicitly recorded external300s guard. A separate10800s outer cap was not reached. Sixty-two engine-generated import sidecars changed bytewise; no gameplay/test/project source changed. Original save unchanged. [Full report and complete raw evidence](current_acceptance_20261110/README.md).
 
-The 26 unreported targets were then evaluated through separate mandatory-runner filters: **24 passed, 2 failed**, in 23 invocations. The terrain substring also rechecks an earlier exterior suite; it is retained and excluded from the 26-target count. [Continuation state](regression_post_sync/continuation/state.json), [target verdicts](regression_post_sync/diagnostic_summary.json). This gives every frozen-source suite a verdict across separate invocations; it is **not** one complete full-run pass, and no completion gate is claimed.
+Newer published repairs include chapter prerequisites, UI probe fixtures/focus, props/room staging, gravity/handoff, earned-upgrade text routes and bounded complete-profile batches. Their exact source/host qualifications are linked from the report. Do not repeat older failures as current solely from the frozen list. Comms45/0 and P01inputs319/0 pass inside the frozen full, and their original marker/baseline blockers are cleared.
 
-The earlier pre-sync full runner completed **91/95** on a different game tree. Its long wall-clock gap is explicitly recorded; its total duration is not a controlled benchmark. [Earlier run](regression/run.json), [clock observation](regression/clock_observation.json). Do not substitute that older result for the current 115-suite source.
+The older8edef source retains its separate native20/3RED to20/0GREEN and62/0movement evidence,89/115reported incomplete full attempt and24/26separate continuation. [Older diagnostic summary](regression_post_sync/diagnostic_summary.json). Those separate invocations are not a complete full pass and do not replace the later117-suite evidence.
 
-## Current recorded failures
+## M1-85
 
-The 16 failures reported by the full attempt are:
+[New bounded import report](../../chapters/ch01/M1-85_cold_import_2026-11-10/current_recheck_20261110/README.md): five clean cold/warm observations,285restored-sidecar errors despite outer exit0, clean retry, original native crash unreproduced. Exact blocker: original198663-byte raw log/cache/backtrace or a new failing native attempt is required to identify a supported importer/native boundary and an owned fix/upstream case. Dependency/owner: original reporting host/SDD-artifact holder; Tanvir owns the follow-up. Verified retained inputs and exact executed scripts are saved; no asset/settings/crash fix is invented.
 
-- [test_ch01_game_feel.gd](regression_post_sync/full/logs/test_ch01_game_feel.gd.log): exit 1 :: CH01 GAME FEEL RESULT: FAIL (98 checks, 3 failures)
-- [test_ch06_missions.gd](regression_post_sync/full/logs/test_ch06_missions.gd.log): exit 1 :: CH06 MISSIONS RESULT: FAIL (149 checks, 105 failures)
-- [test_ch08_missions.gd](regression_post_sync/full/logs/test_ch08_missions.gd.log): exit 1 :: CH08 MISSIONS RESULT: FAIL (173 checks, 123 failures)
-- [test_chapter1_campaign_flow.gd](regression_post_sync/full/logs/test_chapter1_campaign_flow.gd.log): exit 1 :: CHAPTER 1 CAMPAIGN FLOW RESULT: FAIL (502 checks, 1 failures)
-- [test_chapter1_ui_regressions.gd](regression_post_sync/full/logs/test_chapter1_ui_regressions.gd.log): exit 124 ::
-- [test_chapter2_rooms.gd](regression_post_sync/full/logs/test_chapter2_rooms.gd.log): exit 1 :: CHAPTER 2 ROOMS RESULT: FAIL (3603 checks, 7 failures)
-- [test_chapter3_rooms.gd](regression_post_sync/full/logs/test_chapter3_rooms.gd.log): exit 1 :: CHAPTER 3 ROOMS RESULT: FAIL (4717 checks, 3 failures)
-- [test_chapter5_rooms.gd](regression_post_sync/full/logs/test_chapter5_rooms.gd.log): exit 1 :: CHAPTER 5 ROOMS RESULT: FAIL (2837 checks, 32 failures)
-- [test_chapter6_puzzles.gd](regression_post_sync/full/logs/test_chapter6_puzzles.gd.log): exit 1 :: CHAPTER 6 PUZZLES RESULT: FAIL (18 checks, 1 failures)
-- [test_chapter6_rooms.gd](regression_post_sync/full/logs/test_chapter6_rooms.gd.log): exit 1 :: CHAPTER 6 ROOMS RESULT: FAIL (3579 checks, 33 failures)
-- [test_chapter8_puzzles.gd](regression_post_sync/full/logs/test_chapter8_puzzles.gd.log): exit 1 :: CHAPTER 8 PUZZLES RESULT: FAIL (41 checks, 2 failures)
-- [test_comms.gd](regression_post_sync/full/logs/test_comms.gd.log): no result line
-- [test_journal_tabs.gd](regression_post_sync/full/logs/test_journal_tabs.gd.log): exit 1 :: JOURNAL TABS RESULT: FAIL (320 checks, 94 failures)
-- [test_outpost_status.gd](regression_post_sync/full/logs/test_outpost_status.gd.log): exit 1 :: OUTPOST STATUS RESULT: FAIL (62 checks, 29 failures)
-- [test_p01_inputs.gd](regression_post_sync/full/logs/test_p01_inputs.gd.log): exit 1 :: P01 INPUTS RESULT: FAIL (319 checks, 1 failures)
-- [test_performance_runtime.gd](regression_post_sync/full/logs/test_performance_runtime.gd.log): exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (544 checks, 3 failures)
-
-The separate continuation adds:
-
-- [player-text](regression_post_sync/continuation/player_text/runner.txt): runner exit124 after its own unchanged 300-second limit; route-B witness/current-goal assertions are retained in the raw suite log. This is distinct from the earlier whole-collection interruption.
-- [upgrade profiles](regression_post_sync/continuation/upgrade_profiles/runner.txt): P-09 commit-sequence witnesses reject timestamp/conclusion inputs across profile masks.
-
-P-01 feedback, forecast purity, prerequisite fixtures, UI null access, lunar-gravity assertion, Chapter6/8 campaign entry/puzzles, visible narrative-prop support/labels, comms output marker and performance need their respective owners' integration follow-up. The comms script prints45/0 but lacks the marker the mandatory runner recognizes; this is not a claim that those45 assertions failed. Current M1-68 failures are campaign77.264ms, garden50.784ms and full-cast51.851ms against50ms.
-
-Read-only staging inspection shows the newly added Alo/Tara nameholders are visual props from M3-101. The support test measures visible mesh surfaces, not the three obstacle volumes changed here. Their placement/lifecycle and R/E label failures are retained for the narrative/puzzle owners; no staging or test expectation was changed to hide them.
-
-## Resume condition
-
-M1-122 and M1-123 remain **blocked on required global acceptance**, with verified narrow source work saved/pushed. Owners must resolve any remaining campaign/UI/staging/fixture/marker/performance failures, including the latest confirmed comms marker failure, then a complete current mandatory full runner must pass. The older failure list is evidence at8edef, not an assertion that every failure persists after later upstream repairs. No additional runtime-controller cause has been established in the recorded Garden contact cases. The original screenshot's exact transform/input/camera were not recorded, and the selected candidate starts are labeled honestly. Manual QA, release packaging, submission and video work remain deferred; they are not invented blockers here.
+M1-122/M1-123 resume after measured loading repair and a complete current green required gate. M1-85 resumes on original/fresh native diagnostics. Manual QA, videos, submission and release packaging remain deferred; they are not invented blockers. The locked shared handbook is preserved; a proposed progress paragraph is saved with the pilot evidence for its active writer.

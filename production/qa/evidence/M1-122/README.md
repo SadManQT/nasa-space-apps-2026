@@ -1,5 +1,11 @@
 # M1-122 - Garden furniture collision correction
 
+10 November2026 - latest scoped handoff: collision sourcee5ed6178 is preserved. Current post-sync sourcef328c0c5 plus the approved M1-123 pilot refinement passes mandatory Garden2/2 (19/0,54/0). The fresh loading dependency check fails615/5 after the HUD repair: title52.109,campaign80.204,Garden64.977,fullcast59.503,terrain56.240ms against unchanged<50ms. No current full pass is claimed. [Latest/frozen results and newer owner repairs](current_acceptance_20261110/README.md), [exact current commands](current_acceptance_20261110/post_sync_f328/run.json), [pilot/native handoff](../M1-123/current_pilot_20261110/README.md).
+
+The complete frozen Windows run atdaa01414 is97/117, not the older incomplete115-suite attempt. Subsequent published UI/chapter/room/handoff/text/profile repairs supersede corresponding older failures; comms45/0 and P01inputs319/0 are confirmed passes. M1-122 remains blocked on the measured loading repair and a complete green current gate, not on old comms reporting or historical folder ownership.
+
+## Earlier delivered source and evidence
+
 10 November 2026, Tanvir. **Source delivered; acceptance blocked on the global automated gate.** Published source: e5ed6178. Explicit user reassignment authorizes only LOC-03.json, the new collision regression/UID and this evidence; other members' source and newer care/narrative props are preserved.
 
 Tara's full-width upper-air box is replaced by its solid 0.8m-high bench and a separate conservative 0.8m enclosure box. The crop-rack proxy is 0.73 x 2.01 x 1.46m, covering the measured visible bounds with a small margin instead of extending about12.7cm beyond each end. The adjacent Seed Archive proxy already matches its visible dimensions. This task changes no art, story, puzzle numbers, global capsule or controller/runtime code.
@@ -8,7 +14,7 @@ The regression restores an actual EX-CH01-S11 production CampaignScene checkpoin
 
 The habitat suite covers all four Chapter1 story rooms using scripted PlayerController-body traversal, navigation to interaction/door approaches and open/closed pressure-door rays. It does not claim full-capsule or input-driven crossings of every doorway. Actual input, camera and contact recovery are exercised at the Garden corner by M1-123.
 
-## Latest synchronization check
+## Earlier d143 synchronization check
 
 After later teammate integration, the latest tested game tree is `d1436027711ea9bf1721ac7dd4bf4f01564ef197` (source bf19dff7, containing the final upstream sync plus evidence-only commits). A fresh mandatory Garden runner passes **2/2: collision19/0, movement54/0**. The fresh comms runner still fails **0/1** because its45/0 assertion output lacks the recognized result marker. [Latest commands/source](final_sync/run.json), [Garden](final_sync/garden/runner.txt), [comms](final_sync/comms/runner.txt).
 

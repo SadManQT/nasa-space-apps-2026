@@ -1,0 +1,2 @@
+ok   tools/test_p01_inputs.gd :: P01 INPUTS RESULT: PASS (319 checks, 0 failures)
+1/1 suites passed
