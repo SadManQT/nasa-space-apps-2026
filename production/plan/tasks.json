@@ -5499,8 +5499,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Steam-quality settings, controls and saves",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Shanto/Antigravity",
    "deps": [
     "M1-54"
    ],
@@ -5533,6 +5533,14 @@
     "game/scripts/campaign/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-70*"
+   ],
+   "edit_files": [
+    "game/scripts/settings/game_settings.gd",
+    "game/scripts/ui/settings_menu.gd",
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/tools/test_settings.gd",
+    "production/qa/evidence/M3-70_settings_display_audio.png",
+    "production/qa/evidence/M3-70_settings_controls_saves.png"
    ]
   },
   {
@@ -5633,7 +5641,10 @@
     "game/scripts/save/save_service.gd",
     "game/scripts/save/save_slots.gd",
     "game/scripts/ui/save_slots.gd",
-    "game/tools/test_save_slots.gd"
+    "game/tools/test_save_slots.gd",
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "production/qa/evidence/M3-71_save_slots_corrupt_backup.png",
+    "production/qa/evidence/M3-71_save_slots_recovered.png"
    ]
   },
   {
