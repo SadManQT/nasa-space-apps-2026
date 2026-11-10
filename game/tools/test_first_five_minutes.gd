@@ -86,6 +86,7 @@ func _test_title_and_new_expedition() -> void:
 	_check(menu.assist_mode() == "Cadet", "UI_02 default Assist Mode is Cadet")
 	menu.set_assist_mode("Story")
 	_check(menu.assist_mode() == "Story" and menu._assist_summary.text.contains("Story Mode"), "UI_02 selects Story Assist Mode")
+	_check(menu.accessibility_settings().get("assist_mode", "") == "Story", "Selected assist mode is included in real campaign launch settings")
 	menu.set_assist_mode("Expedition")
 	_check(menu.assist_mode() == "Expedition" and menu._assist_summary.text.contains("Expedition Mode"), "UI_02 selects Expedition Assist Mode")
 	menu.set_assist_mode("Cadet")
@@ -154,6 +155,9 @@ func _test_settings_remap_and_replay() -> void:
 	var after_bindings: Dictionary = panels.bindings_snapshot()
 	_check(bool(swap_res.get("accepted", false)) and String(swap_res.get("swapped_with", "")) == "what_now", "Remapping Use to H swaps conflict with What now")
 	_check(String(after_bindings.get("use", "")) == "H" and String(after_bindings.get("what_now", "")) == "E", "Swapped bindings are Use=H and What now=E")
+	var use_event := InputEventKey.new()
+	use_event.physical_keycode = KEY_H
+	_check(InputMap.event_is_action(use_event, "interact"), "Supported Use/What now swap updates the actual interact input")
 	await _maybe_capture("M1-18_settings_remap.png")
 
 	# Two-step reset confirmation

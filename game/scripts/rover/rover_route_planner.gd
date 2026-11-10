@@ -23,13 +23,13 @@ const CANDIDATE_ROUTES := {
 		{
 			"id": "A",
 			"label": "Route A · Direct Crater Rim",
-			"waypoints": ["Aurora Garage", "North Rim Crest", "Steep Chute (19°)", "Vault Shelf"],
-			"slope_profile_deg": [6.0, 14.0, 19.0, 11.0],
-			"max_slope_deg": 19.0,
-			"distance_km": 8.4,
+			"waypoints": ["Aurora Garage", "North Rim Crest", "Steep Chute (24°)", "Vault Shelf"],
+			"slope_profile_deg": [6.0, 14.0, 24.0, 11.0],
+			"max_slope_deg": 24.0,
+			"distance_km": 8.0,
 			"round_trip_hours": 14.0,
-			"one_way_energy": 9.0,
-			"summary": "Shorter direct path, but the 19° chute exceeds the 15° VIPER slope limit.",
+			"one_way_energy": 35.0,
+			"summary": "Shorter direct path, but the 24° chute exceeds the 15° VIPER slope limit.",
 		},
 		{
 			"id": "B",
@@ -37,21 +37,21 @@ const CANDIDATE_ROUTES := {
 			"waypoints": ["Aurora Garage", "Beacon 1 · Ridge Saddle", "Beacon 2 · Shadow Rim", "Beacon 3 · Cold-Trap Shelf"],
 			"slope_profile_deg": [5.0, 9.0, 11.0, 12.0],
 			"max_slope_deg": 12.0,
-			"distance_km": 11.2,
+			"distance_km": 12.0,
 			"round_trip_hours": 18.0,
-			"one_way_energy": 10.0,
-			"summary": "Follows the 12° surveyed switchback; keeps 40 of 60 battery (above the 30 reserve).",
+			"one_way_energy": 30.0,
+			"summary": "Follows the 12° surveyed switchback; keeps 40 of 100 battery (above the 30 reserve).",
 		},
 		{
 			"id": "C",
-			"label": "Route C · Wide South Detour",
+			"label": "Route C · Shadow Floor",
 			"waypoints": ["Aurora Garage", "South Apron", "Long Basin Floor", "Cold-Trap Shelf"],
-			"slope_profile_deg": [4.0, 7.0, 8.0, 10.0],
-			"max_slope_deg": 10.0,
-			"distance_km": 19.5,
+			"slope_profile_deg": [4.0, 7.0, 18.0, 10.0],
+			"max_slope_deg": 18.0,
+			"distance_km": 10.0,
 			"round_trip_hours": 32.0,
-			"one_way_energy": 17.0,
-			"summary": "Gentle slopes, but round-trip cost (34) leaves only 26 battery (below the 30 reserve).",
+			"one_way_energy": 40.0,
+			"summary": "The 18° shadow floor exceeds the slope limit; its 80-unit round trip leaves 20 (below the 30 reserve).",
 		},
 	],
 	"ch08_relay": [
@@ -69,13 +69,13 @@ const CANDIDATE_ROUTES := {
 		{
 			"id": "UNSURVEYED_SHORTCUT",
 			"label": "Unsurveyed East Scarp Shortcut",
-			"waypoints": ["Aurora Garage", "East Scarp Wall (18°)", "Malapert Summit"],
-			"slope_profile_deg": [8.0, 18.0, 16.0],
-			"max_slope_deg": 18.0,
+			"waypoints": ["Aurora Garage", "East Scarp Wall (22°)", "Malapert Summit"],
+			"slope_profile_deg": [8.0, 22.0, 16.0],
+			"max_slope_deg": 22.0,
 			"distance_km": 92.0,
 			"round_trip_hours": 44.0,
-			"one_way_energy": 5.0,
-			"summary": "Crosses an 18° scarp above the 15° VIPER limit and bypasses Marker Two.",
+			"one_way_energy": 3.5,
+			"summary": "Crosses an 22° scarp above the 15° VIPER limit and bypasses Marker Two.",
 		},
 		{
 			"id": "LOW_VALLEY_DETOUR",
@@ -91,6 +91,8 @@ const CANDIDATE_ROUTES := {
 	],
 }
 
+var _network: RefCounted
+var _beacon_label: Label
 var _rover: RefCounted
 var _selected_route_id: String = "B"
 var _cab_status_label: Label
@@ -112,6 +114,10 @@ func bind_rover(rover: RefCounted) -> void:
 		_selected_route_id = "SURVEYED" if String(_rover.preset_id) == "ch08_relay" else "B"
 	refresh_view()
 
+func bind_network(value: RefCounted) -> void:
+	_network = value
+	refresh_view()
+
 ## Pure route evaluation against VIPER 15° slope limit, battery return reserve, and provisions.
 func evaluate_route(route_id: String) -> Dictionary:
 	if _rover == null:
@@ -129,12 +135,13 @@ func evaluate_route(route_id: String) -> Dictionary:
 	var limit_deg := float(_rover.max_incline_deg)
 	var slope_ok := max_slope <= limit_deg
 	var one_way := float(chosen.get("one_way_energy", _rover.one_way_allowance))
-	var round_trip_cost := one_way * 2.0
-	var remaining_battery := float(_rover.battery_capacity) - round_trip_cost
+	var hours := float(chosen.get("round_trip_hours", 18.0))
+	var journey: Dictionary = _rover.estimate_journey(float(chosen.get("distance_km", 0.0)) * 1000.0, one_way, hours)
+	var round_trip_cost := float(journey.round_trip_energy)
+	var remaining_battery := float(journey.battery_after_round_trip)
 	var reserve_needed := float(_rover.return_reserve)
 	var reserve_ok := remaining_battery >= reserve_needed
-	var hours := float(chosen.get("round_trip_hours", 18.0))
-	var provisions_ok := hours <= float(_rover.provisions_hours)
+	var provisions_ok := bool(journey.provisions_ok)
 	var accepted := slope_ok and reserve_ok and provisions_ok
 
 	var reason := ""
@@ -185,6 +192,8 @@ func confirm_selected_route() -> Dictionary:
 	if bool(est.get("accepted", false)) and _rover != null:
 		_rover.planned_route_id = String(est.get("route_id", _selected_route_id))
 		_rover.planned_waypoints = est.get("waypoints", []).duplicate()
+		_rover.planned_one_way_distance_m = float(est.distance_km) * 1000.0
+		_rover.planned_one_way_energy = float(est.one_way_energy)
 		_confirm_feedback_label.text = "Confirmed: " + String(est.get("reason", ""))
 		route_confirmed.emit(_selected_route_id, est)
 	else:
@@ -280,6 +289,10 @@ func _build_ui() -> void:
 	_route_details_label.name = "RouteEstimateDetailsLabel"
 	right_vbox.add_child(_route_details_label)
 
+	_beacon_label = Design.label("", "caption", "safe")
+	_beacon_label.name = "PersistentBeaconLayer"
+	right_vbox.add_child(_beacon_label)
+
 	var action_row := HBoxContainer.new()
 	action_row.add_theme_constant_override("separation", 12)
 	right_vbox.add_child(action_row)
@@ -296,6 +309,11 @@ func refresh_view() -> void:
 	if _rover == null:
 		_rover = RoverScript.new()
 	var dash: Dictionary = _rover.dashboard_readout()
+	var beacon_names: Array[String] = []
+	if _network != null:
+		for beacon in _network.ch04_beacon_layer():
+			beacon_names.append(String(beacon.get("label", "Survey beacon")))
+	_beacon_label.text = "Saved survey beacons: " + ", ".join(beacon_names) if not beacon_names.is_empty() else "No saved survey beacons on this route."
 	_cab_status_label.text = "Speed: %s km/h · Slope: %s° / %d° VIPER limit · Battery: %s / %s (Return reserve %s) · View: %s · Headlights: %s" % [
 		String.num(float(dash.speed_km_h), 1),
 		String.num(float(dash.slope_deg), 1),

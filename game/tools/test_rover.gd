@@ -24,6 +24,7 @@ func _run() -> void:
 	_test_viper_slope_limit_and_assist_modes()
 	_test_battery_and_return_reserve_arithmetic()
 	_test_controls_intercom_and_low_g_handling()
+	_test_live_journey_matches_forecast()
 	_test_trailer_payloads()
 	await _test_route_planner_ui_and_capture()
 	print("ROVER RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
@@ -34,19 +35,19 @@ func _test_viper_slope_limit_and_assist_modes() -> void:
 	_check(is_equal_approx(rover.max_incline_deg, 15.0), "VIPER slope limit is 15 degrees from viper_slope_limit.json")
 	rover.board_rover()
 	var cadet_step := rover.step_drive(1.0, 1.0, 19.0, false)
-	_check(bool(cadet_step.get("slope_warning_active", false)) and is_equal_approx(float(cadet_step.get("slope_deg", 0.0)), 15.0), "Cadet assisted driving stays inside the 15-degree slope limit")
+	_check(bool(cadet_step.get("slope_warning_active", false)) and is_equal_approx(float(cadet_step.get("slope_deg", 0.0)), 19.0) and is_zero_approx(rover.distance_driven_m), "Cadet assistance reports the real 19-degree slope and prevents unsafe travel")
 
 	var story_rover := RoverScript.new("Story", "ch04_survey")
 	story_rover.board_rover()
 	var story_step := story_rover.step_drive(1.0, 1.0, 21.0, false)
-	_check(is_equal_approx(float(story_step.get("slope_deg", 0.0)), 15.0), "Story assisted driving stays inside the 15-degree slope limit")
+	_check(is_equal_approx(float(story_step.get("slope_deg", 0.0)), 21.0) and is_zero_approx(story_rover.distance_driven_m), "Story assistance reports the real unsafe slope without driving onto it")
 
 	var exp_rover := RoverScript.new("Expedition", "ch04_survey")
 	exp_rover.board_rover()
 	var exp_step := exp_rover.step_drive(1.0, 1.0, 19.0, false)
 	_check(bool(exp_step.get("slope_warning_active", false)) and is_equal_approx(float(exp_step.get("slope_deg", 0.0)), 19.0) and not bool(exp_step.get("slope_within_limit", true)), "Expedition mode only warns on >15-degree slope without clamping")
 	_check(not bool(exp_rover.disembark_rover().get("accepted", true)), "cannot disembark on an unsafe >15-degree slope")
-	exp_rover.step_drive(0.5, 0.0, 8.0, false)
+	exp_rover.step_drive(5.0, 0.0, 8.0, false)
 	_check(bool(exp_rover.disembark_rover().get("accepted", false)), "can disembark anywhere safe (<=15 degrees)")
 
 func _test_battery_and_return_reserve_arithmetic() -> void:
@@ -58,8 +59,9 @@ func _test_battery_and_return_reserve_arithmetic() -> void:
 	_check(not bool(route_a.get("accepted", true)) and not bool(route_a.get("slope_ok", true)), "CH04 Route A rejected because 19-degree chute exceeds 15-degree VIPER limit")
 
 	var route_c := planner.evaluate_route("C")
-	_check(not bool(route_c.get("accepted", true)) and not bool(route_c.get("reserve_ok", true)) and is_equal_approx(float(route_c.get("battery_after_round_trip", 0.0)), 26.0), "CH04 Route C rejected because 26 remaining battery breaches 30 return reserve")
+	_check(not bool(route_c.get("accepted", true)) and not bool(route_c.get("reserve_ok", true)) and is_equal_approx(float(route_c.get("battery_after_round_trip", 0.0)), 20.0), "CH04 Route C rejected because 20 remaining battery breaches 30 return reserve")
 
+	_check(is_equal_approx(ch4_rover.battery_capacity, 100.0), "CH04 starts with the canonical 100-unit rover resource")
 	var route_b := planner.evaluate_route("B")
 	_check(bool(route_b.get("accepted", false)) and is_equal_approx(float(route_b.get("max_slope_deg", 0.0)), 12.0) and is_equal_approx(float(route_b.get("battery_after_round_trip", 0.0)), 40.0), "CH04 Route B accepted with 12-degree max slope and 40 remaining battery (>= 30 reserve)")
 
@@ -76,6 +78,30 @@ func _test_battery_and_return_reserve_arithmetic() -> void:
 	planner.bind_rover(ch8_rover)
 	var ch8_upgraded := planner.evaluate_route("SURVEYED")
 	_check(bool(ch8_upgraded.get("accepted", false)) and is_equal_approx(float(ch8_upgraded.get("battery_capacity", 0.0)), 18.0) and is_equal_approx(float(ch8_upgraded.get("battery_after_round_trip", 0.0)), 8.0), "CH08 with long_range_battery upgrade starts at 18 and keeps 8 after round trip")
+	planner.free()
+
+func _test_live_journey_matches_forecast() -> void:
+	var rover := RoverScript.new("Cadet", "ch04_survey")
+	var planner := PlannerScript.new()
+	planner.bind_rover(rover)
+	rover.battery = 75.0
+	var depleted := planner.evaluate_route("B")
+	_check(not bool(depleted.get("accepted", true)) and is_equal_approx(float(depleted.get("battery_after_round_trip", 0.0)), 15.0), "Route B reserve forecast uses current charge instead of full capacity")
+	rover.battery = rover.battery_capacity
+	planner.select_route("B")
+	var estimate := planner.confirm_selected_route()
+	rover.board_rover()
+	var distance_m := float(estimate.get("distance_km", 0.0)) * 2000.0
+	var target_speed := rover.max_speed_m_s * (1.0 - 12.0 / 30.0)
+	while rover.distance_driven_m < distance_m - 0.0001:
+		var remaining := distance_m - rover.distance_driven_m
+		rover.speed_m_s = target_speed
+		rover.step_drive(minf(1.0, remaining / target_speed), 1.0, 12.0, true)
+	_check(is_equal_approx(rover.battery, float(estimate.get("battery_after_round_trip", -1.0))), "Driving the planned round-trip distance consumes the exact forecast battery budget")
+	rover.battery = 0.0
+	var before := rover.distance_driven_m
+	rover.step_drive(1.0, 1.0, 0.0, false)
+	_check(is_zero_approx(rover.speed_m_s) and is_equal_approx(before, rover.distance_driven_m), "An empty rover battery cannot drive farther")
 	planner.free()
 
 func _test_controls_intercom_and_low_g_handling() -> void:

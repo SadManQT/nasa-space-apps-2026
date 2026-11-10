@@ -14,6 +14,7 @@ signal panel_closed
 signal care_action_emitted(plant_id: String, action_id: String)
 signal harvest_requested(plant_id: String)
 
+var _campaign
 var active_tab := "chambers"
 var date_label := "2046-04-18 · Aurora Greenhouse Dome (LOC-02)"
 var settings: Dictionary = {
@@ -85,6 +86,34 @@ func _ready() -> void:
 	theme = UiKit.theme()
 	_build_ui()
 	show_tab(active_tab)
+
+func bind_campaign(campaign: Node) -> void:
+	_campaign = campaign
+	var query: Dictionary = campaign.call("query")
+	settings = query.get("accessibility", {}).duplicate(true)
+	date_label = String(query.get("scenario_datetime", ""))
+	plants = []
+	for specimen in query.get("plants", []):
+		var id := String(specimen.get("individual_id", ""))
+		var stage := String(specimen.get("stage", "seed"))
+		var stress: Dictionary = specimen.get("stress", {})
+		var causes: Array[String] = []
+		for cause in stress:
+			if int(stress[cause]) > 0:
+				causes.append(String(cause).capitalize() + ": " + str(stress[cause]))
+		plants.append({"id": id, "name": {"ALO-01": "Alo", "TARA-01": "Tara", "COTTON-01": "Cotton"}.get(id, id),
+			"lineage": String(specimen.get("lineage_id", "")).trim_prefix("LINEAGE-").replace("-", " x "),
+			"stage": stage.replace("_", " ").capitalize(), "mature": stage == "mature_dry" and not bool(specimen.get("harvested", false)),
+			"is_archived_founder": stage in ["archived_petal", "archived_nameplate"], "alive": specimen.get("alive", false),
+			"stress_cause": "; ".join(causes), "conditions": "Dated plant record - Instrument temperature/moisture readings are not recorded here.",
+			"summary": "Planted: %s - Last care: %s" % [specimen.get("planted_at", ""), specimen.get("last_care_at", "Not yet recorded")]})
+	show_tab(active_tab)
+
+func _submit(verb: String, plant_id: String, extra: Dictionary = {}) -> void:
+	var command: Dictionary = _campaign.hud.panels.command_for(verb, plant_id, extra.merged({"individual_id": plant_id}, true))
+	var result: Dictionary = _campaign.handle_ui_command(command)
+	bind_campaign(_campaign)
+	_feedback_label.text = String(result.get("reason", "Care recorded." if result.get("accepted", false) else "This care action is unavailable."))
 
 func set_plant_maturity(plant_id: String, is_mature: bool, stage_label: String = "") -> void:
 	for p in plants:
@@ -176,15 +205,10 @@ func _render_chambers_tab() -> void:
 		box.add_child(heading)
 
 		box.add_child(UiDesign.label("Lineage: " + String(p.get("lineage", "")), "body"))
-		box.add_child(UiDesign.label(
-			"Conditions: %.1f °C · Moisture %d%% · Date: %s" % [
-				float(p.get("temperature_c", 22.0)),
-				int(p.get("moisture_pct", 65)),
-				date_label.split("·")[0].strip_edges()
-			],
-			"caption",
-			"muted"
-		))
+		var conditions := String(p.get("conditions", ""))
+		if conditions.is_empty():
+			conditions = "Conditions: %.1f C - Moisture %d%% - Date: %s" % [float(p.get("temperature_c", 22.0)), int(p.get("moisture_pct", 65)), date_label]
+		box.add_child(UiDesign.label(conditions, "caption", "muted"))
 
 		if not stress.is_empty():
 			var stress_lbl := UiDesign.label("⚠ STRESS CAUSE: " + stress, "body", "caution")
@@ -201,9 +225,13 @@ func _render_chambers_tab() -> void:
 		actions.add_theme_constant_override("separation", 8)
 		box.add_child(actions)
 
-		var mist_btn := UiDesign.button("Mist & Balance Moisture")
+		var mist_btn := UiDesign.button("Record Water Care" if _campaign != null else "Mist & Balance Moisture")
+		mist_btn.disabled = _campaign != null and not bool(p.get("alive", false))
 		mist_btn.name = "CareMist_" + pid
 		mist_btn.pressed.connect(func() -> void:
+			if _campaign != null:
+				_submit("plant_care", pid, {"care_id": "water"})
+				return
 			p["moisture_pct"] = 66
 			p["temperature_c"] = 22.0
 			p["stress_cause"] = ""
@@ -218,6 +246,9 @@ func _render_chambers_tab() -> void:
 		harvest_btn.disabled = not is_mature
 		harvest_btn.pressed.connect(func() -> void:
 			if is_mature:
+				if _campaign != null:
+					_submit("harvest_plant", pid)
+					return
 				_feedback_label.text = "Harvested mature pods from %s." % String(p.get("name", ""))
 				harvest_requested.emit(pid)
 		)
@@ -233,7 +264,7 @@ func _render_chambers_tab() -> void:
 
 func _render_comparison_tab() -> void:
 	_body.add_child(UiDesign.label("Founder Archive vs Descendant Lineages", "heading"))
-	_body.add_child(UiDesign.label("Mature Alo archive is kept visibly distinct from G1 descendants and the 2034 vault cotton specimen.", "caption", "muted"))
+	_body.add_child(UiDesign.label("Compare the specimens recorded at this point in the expedition." if _campaign != null else "Mature Alo archive is kept visibly distinct from G1 descendants and the 2034 vault cotton specimen.", "caption", "muted"))
 
 	var grid := GridContainer.new()
 	grid.name = "GreenhouseComparisonGrid"
@@ -251,4 +282,4 @@ func _render_comparison_tab() -> void:
 		grid.add_child(UiDesign.label("FOUNDER ARCHIVE" if is_archive else "ACTIVE CHAMBER", "caption", "good" if is_archive else "ivory"))
 		grid.add_child(UiDesign.label(String(p.get("lineage", "")), "caption"))
 		grid.add_child(UiDesign.label(String(p.get("stage", "")), "caption"))
-		grid.add_child(UiDesign.label("%.1f °C · %d%%" % [float(p.get("temperature_c", 22.0)), int(p.get("moisture_pct", 65))], "caption", "muted"))
+		grid.add_child(UiDesign.label("No instrument record" if p.has("conditions") else "%.1f C - %d%%" % [float(p.get("temperature_c", 22.0)), int(p.get("moisture_pct", 65))], "caption", "muted"))

@@ -19,6 +19,8 @@ const CompanionRosterScript = preload("res://scripts/companions/companion_roster
 const CutsceneRuntimeScript = preload("res://scripts/cutscenes/cutscene_runtime.gd")
 const AudioRuntimeScript = preload("res://scripts/audio/audio_runtime.gd")
 const EvaSuitScript = preload("res://scripts/eva/eva_suit.gd")
+const CadetProgressionScript = preload("res://scripts/progression/cadet_progression.gd")
+const FieldSystemsScript = preload("res://scripts/campaign/campaign_field_systems.gd")
 const HUDScene: PackedScene = preload("res://scenes/ui/chapter1_campaign_hud.tscn")
 const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 
@@ -44,6 +46,10 @@ var _room: CampaignRoom
 var _crew: CampaignCrew
 var _player: PlayerController
 var eva_suit: EvaSuit
+var progression: RefCounted
+var field_systems: RefCounted
+var progression_flow: RefCounted
+var _progression_flow: RefCounted
 var _last_eva_room_id := ""
 var _last_scan_origin := Vector3(INF, INF, INF)
 ## M1-36: the LOLA terrain under an exterior whose placement and lighting are ready (RoomContract.terrain_lighting).
@@ -105,6 +111,16 @@ func _start_session() -> void:
 	director.restore_snapshot(presentation)
 	var assist_mode := String(presentation.get("accessibility", {}).get("assist_mode", "Cadet"))
 	eva_suit = EvaSuitScript.new(assist_mode)
+	progression = CadetProgressionScript.new()
+	field_systems = FieldSystemsScript.new(self)
+	var resume: Dictionary = initial_snapshot.get("presentation_resume", {})
+	field_systems.restore(resume.get("field_systems", {}))
+	var flow_script = load("res://scripts/campaign/campaign_progression.gd")
+	if flow_script != null:
+		_progression_flow = flow_script.new(self)
+		progression_flow = _progression_flow
+		_progression_flow.restore(resume)
+		progression = _progression_flow.model
 	_sync_route_projection()
 	LoadTrace.end("route_profile", stamp)
 	_build_media()
@@ -227,7 +243,15 @@ func query() -> Dictionary:
 	result["objective"] = current_scene_data().get("playerActions", [])
 	result["dialogue_lines"] = current_dialogue()
 	result["journal_entries"] = CampaignKnowledge.journal(director.snapshot())
-	result["accessibility"] = director.snapshot().get("accessibility", {})
+	var current := director.snapshot()
+	result["accessibility"] = current.get("accessibility", {})
+	for key in ["plants", "scenario_datetime", "current_shift", "completed_scene_ids", "resources"]:
+		result[key] = current.get(key)
+	result["route_runtime"] = route.snapshot()
+	result["cadet_progression"] = progression.snapshot() if progression != null else {}
+	result["completed_chapters"] = completed_chapters()
+	result["available_upgrade_chapter"] = available_upgrade_chapter()
+	result["field_systems"] = field_systems.snapshot() if field_systems != null else {}
 	var puzzle_ids: Array = []
 	for target in targets_for_current_scene():
 		var puzzle_id := String(target.get("puzzle_id", ""))
@@ -340,6 +364,8 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 		_crew.react(result, bool(director.snapshot().get("accessibility", {}).get("reduced_motion", false)))
 	if hud != null:
 		hud.refresh_after_action(result)
+	if bool(result.get("accepted", false)) and field_systems != null:
+		field_systems.sync_route()
 	_save_campaign()
 	return result
 
@@ -454,7 +480,7 @@ func interact_nearby() -> Dictionary:
 		hud.show_status(result.reason)
 	return result
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if loading:
 		return
 	if _room == null:
@@ -464,6 +490,10 @@ func _physics_process(_delta: float) -> void:
 	if _terrain != null and _player != null:
 		_terrain.move_focus(_terrain.to_local(_player.global_position))
 	_step_campaign_eva()
+	if field_systems != null:
+		field_systems.step(delta)
+	if _progression_flow != null and not _ui_paused and not is_cutscene_active():
+		_progression_flow.step(delta)
 	if hud != null:
 		hud.show_nearby_forecast(String(selected.get("target_id", "")))
 
@@ -528,8 +558,6 @@ func _sample_world_floor_height(wx: float, wz: float, fallback_y: float) -> floa
 	return fallback_y
 
 func _is_scene_in_cold_shadow() -> bool:
-	if eva_suit != null and eva_suit.in_cold_shadow:
-		return true
 	if route == null or eva_suit == null or eva_suit.indoor:
 		return false
 	var scene_id := String(route.current_scene_id())
@@ -702,6 +730,7 @@ func advance_scene() -> Dictionary:
 			mugs_named = director.commit(moment)
 			if not bool(mugs_named.get("accepted", false)):
 				push_warning("CH01-MUGS-NAMED was not recorded: " + String(mugs_named.get("reason", "unknown")))
+	var previous_mission: String = route.current_mission_id()
 	var result: Dictionary
 	if is_chapter_complete():
 		result = _transition_after_chapter()
@@ -719,8 +748,13 @@ func advance_scene() -> Dictionary:
 		_queue_cutscenes("campaign_complete")
 		if audio != null:
 			audio.play_credits()
+	if bool(result.get("accepted", false)) and _progression_flow != null and (route.current_mission_id() != previous_mission or is_chapter_complete()):
+		_progression_flow.record_mission(previous_mission)
 	if hud != null:
 		hud.refresh_scene(result)
+		var pending := available_upgrade_chapter()
+		if (bool(result.get("chapter_complete", false)) or bool(result.get("upgrade_pending", false))) and pending > 0 and hud.has_method("open_upgrade"):
+			hud.open_upgrade(pending)
 	_save_campaign()
 	return result
 
@@ -738,6 +772,9 @@ func _start_chapter2() -> Dictionary:
 	return started
 
 func _transition_after_chapter() -> Dictionary:
+	var pending := available_upgrade_chapter()
+	if pending > 0:
+		return {"accepted": false, "upgrade_pending": true, "chapter": pending, "reason": "Choose your earned upgrade before the next chapter."}
 	var chapter := _chapter_number()
 	if chapter == 1:
 		return _start_chapter2()
@@ -807,7 +844,11 @@ func handle_ui_command(command: Dictionary, preview_only: bool = false) -> Dicti
 		return acknowledge_dialogue(String(payload.get("line_id", command.get("target_id", ""))))
 	if verb == "set_accessibility":
 		var next := director.snapshot()
-		next["accessibility"] = payload.duplicate(true)
+		var accessibility: Dictionary = next.get("accessibility", {}).duplicate(true)
+		accessibility.merge(payload, true)
+		if accessibility.has("assist_mode") and not String(accessibility.assist_mode) in ["Story", "Cadet", "Expedition"]:
+			return {"accepted": false, "reason": "Choose Story, Cadet or Expedition assistance."}
+		next["accessibility"] = accessibility
 		var restored := director.restore_snapshot(next)
 		if eva_suit != null:
 			eva_suit.set_assist_mode(String(payload.get("assist_mode", eva_suit.assist_mode)))
@@ -817,6 +858,14 @@ func handle_ui_command(command: Dictionary, preview_only: bool = false) -> Dicti
 		if hud != null:
 			hud.apply_accessibility()
 		return restored
+	if verb == "set_assist_mode":
+		return handle_ui_command({"verb": "set_accessibility", "payload": {"assist_mode": String(payload.get("mode", payload.get("assist_mode", "Cadet")))}})
+	if verb in ["plant_care", "harvest_plant"]:
+		return _plant_ui_command(verb, payload, preview_only)
+	if verb in ["board_rover", "exit_rover", "toggle_rover_camera", "toggle_headlights", "pickup_supply", "place_structure", "secure_item"]:
+		if preview_only:
+			return {"accepted": false, "reason": "Use the live field controls to perform this action."}
+		return handle_field_command(command)
 	return {"accepted": false, "reason": "The campaign runtime does not own UI command " + verb}
 
 ## Leaves only after the checkpoint is written. A failed save keeps the live
@@ -836,6 +885,13 @@ func _save_snapshot() -> Dictionary:
 	snapshot["paused"] = false
 	snapshot["route_runtime"] = route.snapshot()
 	snapshot["route_runtime"]["chapter"] = _chapter_number()
+	var resume: Dictionary = snapshot.get("presentation_resume", {}).duplicate(true)
+	if field_systems != null:
+		resume["field_systems"] = field_systems.snapshot()
+		resume["lunar_network"] = field_systems.network.to_dict()
+	if _progression_flow != null:
+		resume.merge(_progression_flow.snapshot(), true)
+	snapshot["presentation_resume"] = resume
 	if _room != null and _room.room_id == "LOC-08" and _room.garage() != null:
 		snapshot["route_runtime"]["garage_dock"] = _room.garage().dock_snapshot()
 	return snapshot
@@ -910,8 +966,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	elif event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		_player.follow_camera.look(event.screen_relative * _player.follow_camera.mouse_sensitivity)
+		if hud != null and hud.has_method("offer_first_time"):
+			hud.offer_first_time("look")
 	elif event.is_action_pressed("interact") and not event.is_echo():
-		interact_nearby()
+		var job_result: Dictionary = _progression_flow.interact_job() if _progression_flow != null else {}
+		if not bool(job_result.get("handled", false)):
+			if field_systems != null and field_systems.rover.aboard:
+				handle_field_command({"verb": "exit_rover", "payload": {}})
+			else:
+				interact_nearby()
+		elif hud != null:
+			hud.show_status(String(job_result.get("reason", "")))
+		if hud != null and hud.has_method("offer_first_time"):
+			hud.offer_first_time("use")
 		get_viewport().set_input_as_handled()
 
 func _refresh_world() -> void:
@@ -978,6 +1045,8 @@ func _place_crew() -> void:
 	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]), story_log.get("choices", {}), story_log.get("moments", []))
 	_player.generic_interaction_input = false
 	_bind_player_eva()
+	if field_systems != null:
+		field_systems.bind_scene()
 	if _player != null and _player.follow_camera != null and _player.follow_camera.camera != null:
 		_player.follow_camera.camera.far = 30000.0 if _terrain != null else 4000.0  # kilometre views on the terrain
 	_crew.set_paused(_ui_paused)
@@ -994,7 +1063,7 @@ func _bind_player_eva() -> void:
 	var was_indoor := eva_suit.indoor
 	var now_indoor := pressure != "vacuum"
 	eva_suit.indoor = now_indoor
-	if now_indoor or (was_indoor and not now_indoor and _last_eva_room_id != room_id):
+	if _last_eva_room_id != room_id and (now_indoor or was_indoor):
 		eva_suit.reset_budget()
 	_last_eva_room_id = room_id
 	if _player != null:
@@ -1227,3 +1296,65 @@ func _set_cinematic(value: bool) -> void:
 	if _crew != null:
 		_crew.set_paused(value or _ui_paused)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func completed_chapters() -> Array:
+	return _progression_flow.completed_chapters() if _progression_flow != null else []
+
+func available_upgrade_chapter() -> int:
+	return _progression_flow.available_upgrade_chapter() if _progression_flow != null else 0
+
+func choose_upgrade(chapter: int, option: String) -> Dictionary:
+	if _progression_flow == null:
+		return {"accepted": false, "reason": "The cadet record is unavailable."}
+	var result: Dictionary = _progression_flow.choose_upgrade(chapter, option)
+	if bool(result.get("accepted", false)) and bool(result.get("persisted", true)) and chapter == _chapter_number() and is_chapter_complete():
+		result["next_chapter"] = _transition_after_chapter()
+		if hud != null:
+			hud.refresh_scene(result)
+	return result
+
+func rest_at_bunk() -> Dictionary:
+	return _progression_flow.rest_at_bunk() if _progression_flow != null else {"accepted": false}
+
+func begin_job(job_id: String) -> Dictionary:
+	return _progression_flow.begin_job(job_id) if _progression_flow != null else {"accepted": false}
+
+func job_metrics(job_id: String) -> Dictionary:
+	return _progression_flow.job_metrics(job_id) if _progression_flow != null else {}
+
+func complete_job(job_id: String, performance: Dictionary = {}) -> Dictionary:
+	return _progression_flow.complete_job(job_id, performance) if _progression_flow != null else {"accepted": false}
+
+func save_progression() -> Dictionary:
+	return _progression_flow.save_progression() if _progression_flow != null else {"accepted": false}
+
+func handle_field_command(command: Dictionary) -> Dictionary:
+	if field_systems == null or loading:
+		return {"accepted": false, "reason": "The field is not ready."}
+	var result: Dictionary = field_systems.command(String(command.get("verb", "")), command.get("payload", {}))
+	if bool(result.get("accepted", false)):
+		_save_campaign()
+	if hud != null:
+		hud.show_status(String(result.get("reason", "Field equipment updated.")))
+	return result
+
+func eva_forecast(distance_m: float) -> Dictionary:
+	return eva_suit.estimate_route(distance_m, eva_suit.current_slope_deg, 1.0 if _is_scene_in_cold_shadow() else 0.0, eva_suit.payload_mass_kg, eva_suit.current_surface_tags)
+
+func _plant_ui_command(verb: String, payload: Dictionary, preview_only: bool) -> Dictionary:
+	var current := director.snapshot()
+	var projected := current.duplicate(true)
+	projected["paused"] = false
+	var staged = DirectorScript.new()
+	staged.restore_snapshot(projected)
+	var command := {"verb": verb, "payload": payload.duplicate(true), "command_id": "plant-%d-%s" % [int(current.state_revision), str(payload)],
+		"issuer": "player", "owning_mission_id": route.current_mission_id(), "owning_scene_id": route.current_scene_id(), "target_id": String(payload.get("individual_id", "")), "expected_state_revision": int(current.state_revision)}
+	var result: Dictionary = staged.preview(command) if preview_only else staged.commit(command)
+	if bool(result.get("accepted", false)) and not preview_only:
+		var next: Dictionary = staged.snapshot()
+		next["paused"] = bool(current.get("paused", false))
+		director.restore_snapshot(next)
+		_sync_world_boundaries()
+		_save_campaign()
+	return result

@@ -175,7 +175,7 @@ func query_snapshot() -> Dictionary:
 	return _query.duplicate(true)
 
 func accessibility_settings() -> Dictionary:
-	return _settings.duplicate(true)
+	return _settings.merged({"assist_mode": _assist_mode, "bindings": _bindings.duplicate(true)}, true)
 
 func set_accessibility(settings: Dictionary) -> void:
 	_set_settings(settings, true)
@@ -614,7 +614,7 @@ func _render_settings() -> void:
 	assist_btn.pressed.connect(func() -> void:
 		var order := ["Story", "Cadet", "Expedition"]
 		_assist_mode = order[(order.find(_assist_mode) + 1) % order.size()]
-		emit_command("set_assist_mode", "assist_mode", {"assist_mode": _assist_mode}, "accessibility")
+		_set_settings({"assist_mode": _assist_mode}, true)
 		if _active_panel == "settings_accessibility":
 			_render_active_panel()
 	)
@@ -661,8 +661,8 @@ func _render_settings() -> void:
 	_body.add_child(notes)
 
 func remap_binding(action_id: String, new_key: String) -> Dictionary:
-	if not _bindings.has(action_id):
-		return {"accepted": false}
+	if action_id not in ["use", "what_now"] or new_key not in ["E", "H"]:
+		return {"accepted": false, "reason": "This shortcut swaps Use and What now between E and H."}
 	var old_key := String(_bindings[action_id])
 	var swapped_with := ""
 	for other_id in _bindings.keys():
@@ -671,6 +671,8 @@ func remap_binding(action_id: String, new_key: String) -> Dictionary:
 			swapped_with = String(other_id)
 			break
 	_bindings[action_id] = new_key
+	_apply_bindings()
+	_set_settings({}, true)
 	_onboarding_notice = (
 		"Remapped %s to %s (swapped conflict with %s → %s)." % [action_id, new_key, swapped_with, old_key]
 		if not swapped_with.is_empty()
@@ -697,6 +699,7 @@ func reset_bindings_and_settings(confirmed: bool = true) -> bool:
 		"journal": "J",
 		"pause": "Esc",
 	}
+	_apply_bindings()
 	_onboarding_notice = "Bindings and accessibility settings restored to defaults."
 	_set_settings({
 		"captions": true,
@@ -715,6 +718,13 @@ func _set_settings(settings: Dictionary, emit_change: bool) -> void:
 	for key in _settings.keys():
 		if settings.has(key):
 			_settings[key] = bool(settings[key])
+	if settings.get("assist_mode", "") in ["Story", "Cadet", "Expedition"]:
+		_assist_mode = String(settings.assist_mode)
+	var bindings = settings.get("bindings", {})
+	if bindings is Dictionary and bindings.get("use", "") in ["E", "H"] and bindings.get("what_now", "") in ["E", "H"] and bindings.use != bindings.what_now:
+		_bindings["use"] = bindings.use
+		_bindings["what_now"] = bindings.what_now
+	_apply_bindings()
 	_apply_accessibility()
 	if _active_panel == "journal_discovery":
 		# Column stacking and photo strips depend on the text scale.
@@ -724,7 +734,7 @@ func _set_settings(settings: Dictionary, emit_change: bool) -> void:
 		if keep_tab:
 			_focus_journal_tab(_journal_tab)
 	if emit_change:
-		var copy := _settings.duplicate(true)
+		var copy := accessibility_settings()
 		accessibility_changed.emit(copy)
 		emit_command("set_accessibility", "accessibility", copy, "accessibility")
 		if _active_panel == "settings_accessibility":
@@ -732,6 +742,15 @@ func _set_settings(settings: Dictionary, emit_change: bool) -> void:
 			var next_focus := _body.get_node_or_null(focus_key) as Control if not focus_key.is_empty() else null
 			if next_focus != null:
 				next_focus.grab_focus()
+
+func _apply_bindings() -> void:
+	# Full remapping is M3-70; this existing shortcut changes only the supported E/H pair.
+	for event in InputMap.action_get_events("interact"):
+		if event is InputEventKey:
+			InputMap.action_erase_event("interact", event)
+	var event := InputEventKey.new()
+	event.physical_keycode = KEY_H if _bindings.use == "H" else KEY_E
+	InputMap.action_add_event("interact", event)
 
 func _setting_label(key: String) -> String:
 	return {
@@ -1549,8 +1568,8 @@ func _render_chapter1_outcome(value) -> void:
 		for item in [["safe_exposure", "Training radiation dose 3 or under"], ["no_blackout", "No blackout"], ["alo_alive", "Alo alive"]]:
 			_card_text(("Met: " if stars.get(item[0], false) else "Not met: ") + item[1])
 		_card_text(String(UiDesign.text().chapter1_debrief.golden_requirement))
-		var reward := Chapter1FeedbackScript.outcome_reward_card(stars, int(resources.get("H", 0)), int(data.get("retry_shift", 5)))
-		var posture := Chapter1FeedbackScript.alo_posture(int(resources.get("H", 0)), int(resources.get("W", 0)), 7, int(resources.get("H", 0)) > 0)
+		var reward := Chapter1FeedbackScript.outcome_reward_card(stars, int(resources.get("H", 0)), int(data.get("retry_shift", 5)), String(data.get("ending", "")))
+		var posture := Chapter1FeedbackScript.alo_posture(int(resources.get("H", 0)), int(resources.get("W", 0)), 7 if bool(data.get("safe_ending", false)) else int(data.get("retry_shift", 1)), bool(data.get("safe_ending", false)))
 		_card_text("%s\n%s\n%s" % [String(reward.get("title", "")), String(reward.get("celebration", "")), String(reward.get("retry_prompt", ""))])
 		_card_text("Alo botanical posture (%s) · %s" % [String(posture.get("stage", "")), String(posture.get("posture_description", ""))])
 		_ending_button("Review decisions \u00b7 shift by shift", "ReviewDecisions", func(): _ending_go("replay", "ReplayNext"), replay.is_empty())
@@ -1630,5 +1649,8 @@ func _ending_actions(data: Dictionary) -> void:
 func _render_credits(value = {}) -> void:
 	var credits_script := preload("res://scripts/ui/credits_panel.gd")
 	var credits := credits_script.new()
+	credits.embedded = true
+	credits.settings = accessibility_settings()
+	_body.add_child(credits)
 	credits.populate_into(_body)
-	credits.free()
+	credits.return_to_garden_requested.connect(close_panel)

@@ -115,8 +115,9 @@ func _test_validation_witness_wrong_boundary() -> void:
 		var reason := PuzzleScript.validate(String(id), wrong[id])
 		wrong_ok = wrong_ok and not reason.is_empty()
 	_check(wrong_ok, "every wrong-but-reasonable answer is rejected with a plain reason")
-	_check(PuzzleScript.validate("p07_verify_slope", {"slope": 15}) == "" and PuzzleScript.validate("p07_verify_slope", {"slope": 16}) != "", "slope boundary: 15 deg accepted, 16 deg rejected")
-	_check(PuzzleScript.validate("p07_verify_return_reserve", {"reserve": 30}) == "" and PuzzleScript.validate("p07_verify_return_reserve", {"reserve": 29}) != "", "reserve boundary: 30 accepted, 29 rejected")
+	_check(PuzzleScript.validate("p07_verify_slope", {"slope": 12}) == "" and PuzzleScript.validate("p07_verify_slope", {"slope": 0}) != "" and PuzzleScript.validate("p07_verify_slope", {"slope": 15}) != "", "the measured Route B slope is 12 degrees, not any value below the design limit")
+	_check(PuzzleScript.validate("p07_verify_return_reserve", {"reserve": 40}) == "" and PuzzleScript.validate("p07_verify_return_reserve", {"reserve": 30}) != "" and PuzzleScript.validate("p07_verify_return_reserve", {"reserve": 100}) != "", "the calculated Route B reserve is 40, not any value above the safety minimum")
+	_check(not bool(ledger.preview("P-07", "p07_tag_positive_18", {"reading": 19}).accepted) and not bool(ledger.preview("P-07", "p07_tag_positive_19", {"reading": 18}).accepted), "each positive sample must retain its own reading so the survey cannot tag the same reading twice")
 	_check(PuzzleScript.validate("p08_inventory_12", {"count": 12}) == "" and PuzzleScript.validate("p08_inventory_12", {"count": 11}) != "", "inventory boundary: 12 specimens accepted, 11 rejected")
 
 func _test_model_selections() -> void:

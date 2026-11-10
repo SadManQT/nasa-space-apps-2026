@@ -39,6 +39,11 @@ var comms_panel: Control
 var outpost: OutpostStatus
 var eva_visor: EvaVisorHud
 var payload_activity: PayloadStackActivity
+var _family_panel: Control
+var _family_backdrop: ColorRect
+var _family_focus: Control
+var _family_kind := ""
+var _onboarding_queue: Array[String] = []
 
 # Goal card
 var _goal_card: PanelContainer
@@ -158,9 +163,9 @@ func setup(value: Chapter1Campaign) -> void:
 			show_chapter1_outcome()
 			return
 		panels.close_panel()
-		runtime.advance_scene())
+		_on_advance_pressed())
 	panels.set_panel_builder("what_now", _build_what_now)
-	panels.set_pause_actions([
+	var pause_actions: Array = [
 		{"label": String(_words.get("what_now", "What now")), "name": "WhatNow", "action": func() -> void: panels.open_panel("what_now")},
 		{"label": String(_words.get("messages", "Messages")), "name": "Messages", "action": func() -> void:
 			panels.close_panel()
@@ -173,7 +178,11 @@ func setup(value: Chapter1Campaign) -> void:
 		{"label": String(_words.get("save_and_quit", "Save and quit")), "name": "SaveAndQuit", "action": func() -> void:
 			panels.close_panel()
 			_on_exit_pressed()},
-	])
+	]
+	for entry in [["cadet_record", "Cadet Record & Upgrades"], ["jobs", "Station Jobs"], ["discovery", "Discovery Log"], ["greenhouse", "Greenhouse"], ["coverage", "Coverage Map"], ["route_planner", "Rover Route Planner"], ["rover", "Rover Dashboard"], ["hazards", "Hazards Monitor"], ["field", "Field Equipment"], ["credits", "Credits"]]:
+		var family_id: String = entry[0]
+		pause_actions.append({"label": entry[1], "name": "Open_" + family_id, "action": func(): open_family(family_id)})
+	panels.set_pause_actions(pause_actions)
 	panels.set_content_top(float(UiDesign.px(64, get_viewport_rect().size.y)))
 	comms_service = CommsServiceScript.new()
 	var director_ref = runtime.get("director") if runtime != null else null
@@ -294,7 +303,7 @@ func refresh_after_action(result: Dictionary) -> void:
 			var res: Dictionary = snap.get("resources", {}) if snap.get("resources", {}) is Dictionary else {}
 			var live_state := {"p01": route_snap.get("p01", {}), "resources": res}
 			fb_dict = Chapter1FeedbackScript.action_feedback(done_id, live_state)
-			var shift_idx := clampi(int(res.get("shift_index", 1)), 1, 7)
+			var shift_idx := clampi(int(snap.get("current_shift", 0)), 1, 7)
 			var alo_h := int(res.get("H", 6))
 			var water_w := int(res.get("W", 0))
 			var bloomed := _scene_id == "EX-CH01-S12" and alo_h > 0
@@ -1049,6 +1058,7 @@ func _on_journal_pressed() -> void:
 	if runtime != null and panels != null:
 		_refresh_query()
 		panels.open_journal("now")
+		offer_first_time("journal")
 
 ## Opens the full-screen Messages inbox (5 threads: Crew, Commander, Earth, Academy, Archive).
 func open_messages(preferred_thread: String = "", preferred_message_id: String = "") -> bool:
@@ -1114,6 +1124,159 @@ func _offer_resume_card() -> void:
 func _on_resume_cutscene_closed(_result: Dictionary) -> void:
 	_offer_resume_card.call_deferred()
 
+func offer_first_time(lesson_id: String) -> void:
+	if panels != null and not panels.hint_player.has_seen(lesson_id) and not _onboarding_queue.has(lesson_id):
+		_onboarding_queue.append(lesson_id)
+
+func _flush_onboarding() -> void:
+	if _onboarding_queue.is_empty() or _chrome_hidden or runtime.is_cutscene_active() or _is_dialogue_active():
+		return
+	var lesson: String = _onboarding_queue.pop_front()
+	panels.hint_player.set_settings(runtime.query().get("accessibility", {}))
+	panels.hint_player.show_how_to(lesson, true)
+
+func open_family(family_id: String) -> bool:
+	if runtime == null or runtime.is_cutscene_active() or is_instance_valid(_family_panel):
+		return false
+	if family_id == "credits":
+		panels.open_panel("credits")
+		return true
+	var scripts := {"discovery": "res://scripts/ui/discovery_log_panel.gd", "greenhouse": "res://scripts/ui/greenhouse_panel.gd",
+		"cadet_record": "res://scripts/ui/cadet_record.gd", "jobs": "res://scripts/ui/jobs_board.gd",
+		"coverage": "res://scripts/network/coverage_map_panel.gd", "route_planner": "res://scripts/rover/rover_route_planner.gd",
+		"rover": "res://scripts/ui/rover_hud_panel.gd", "hazards": "res://scripts/hazards/hazard_hud.gd"}
+	if family_id != "field" and not scripts.has(family_id):
+		return false
+	var field = runtime.get("field_systems")
+	if family_id in ["coverage", "route_planner", "rover", "hazards", "field"] and field == null:
+		show_status("Field systems are not available in this checkpoint.")
+		return false
+	_family_focus = get_viewport().gui_get_focus_owner()
+	panels.close_panel()
+	_family_kind = family_id
+	_family_backdrop = ColorRect.new()
+	_family_backdrop.color = UiDesign.colour("ink")
+	_family_backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_family_backdrop.z_index = 90
+	add_child(_family_backdrop)
+	var panel: Control = UiDesign.glass_panel() if family_id == "field" else load(scripts[family_id]).new()
+	_family_panel = panel
+	panel.z_index = 95
+	if family_id == "greenhouse":
+		panel.call("bind_campaign", runtime)
+	elif family_id in ["cadet_record", "jobs"]:
+		panel.call("bind_runtime", runtime)
+	elif family_id == "coverage":
+		panel.call("bind_network", field.network)
+	elif family_id == "route_planner":
+		panel.call("bind_rover", field.rover)
+	elif family_id == "hazards":
+		panel.call("bind_hazards", field.hazards)
+	elif family_id == "rover":
+		panel.set("campaign_bound", true)
+		panel.set("rover", field.rover)
+		panel.set("settings", runtime.query().get("accessibility", {}))
+		panel.set("at_validated_stop", false)
+		panel.set("next_marker_label", "Planned destination")
+		panel.set("next_marker_distance_m", maxf(0.0, float(field.rover.planned_one_way_distance_m) - float(field.rover.distance_driven_m)))
+		panel.set("local_link_status", "Verified relay chain" if field.network.is_local_chain_complete() else "Relay chain not yet verified")
+	add_child(panel)
+	if family_id in ["coverage", "route_planner", "hazards", "field"]:
+		panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		panel.offset_left = 24
+		panel.offset_top = 24
+		panel.offset_right = -24
+		panel.offset_bottom = -24
+	if panel.has_signal("panel_closed"):
+		panel.connect("panel_closed", close_family)
+	elif panel.has_signal("closed"):
+		panel.connect("closed", close_family)
+	if family_id == "discovery":
+		var query := runtime.query()
+		var entries: Array = query.get("journal_entries", {}).get("tabs", {}).get("evidence", {}).get("entries", [])
+		panel.set("settings", query.get("accessibility", {}))
+		panel.call("configure", String(query.get("scene_id", "")), entries, false)
+	elif family_id == "cadet_record":
+		panel.call("open_tab", "skills")
+		panel.connect("upgrade_chosen", func(_chapter, _option): close_family())
+	elif family_id == "jobs":
+		panel.connect("job_started", func(_result): close_family())
+	elif family_id == "route_planner":
+		panel.connect("route_confirmed", func(_route, _estimate): runtime.save_campaign())
+	elif family_id == "rover":
+		panel.connect("driving_requested", close_family)
+		panel.connect("camera_toggle_requested", func(): _field_action("toggle_rover_camera"))
+		panel.connect("route_decision_requested", func(_route): close_family(); open_family("route_planner"))
+		panel.connect("repair_decision_requested", func(_stop): close_family(); show_status("Leave the rover at a marked work site and use the equipment there."))
+	elif family_id == "field":
+		_build_field_actions(panel)
+	UiDesign.apply_type(panel, get_viewport_rect().size.y, 1.5 if runtime.query().get("accessibility", {}).get("large_text", false) else 1.0)
+	_on_panel_opened("family")
+	var buttons := panel.find_children("*", "Button", true, false)
+	for button in buttons:
+		if not button.disabled and button.is_visible_in_tree():
+			button.grab_focus()
+			break
+	return true
+
+func open_upgrade(chapter: int) -> bool:
+	if not open_family("cadet_record"):
+		return false
+	_family_panel.call("open_tab", "upgrades", chapter)
+	return true
+
+func close_family() -> void:
+	if not is_instance_valid(_family_panel):
+		return
+	_family_panel.hide()
+	_family_panel.queue_free()
+	_family_panel = null
+	_family_backdrop.hide()
+	_family_backdrop.queue_free()
+	_family_backdrop = null
+	_on_panel_closed("family")
+	if is_instance_valid(_family_focus) and _family_focus.is_visible_in_tree():
+		_family_focus.grab_focus()
+	else:
+		_last_result_button.grab_focus()
+	_family_focus = null
+
+func _field_action(verb: String, payload: Dictionary = {}) -> void:
+	var result: Dictionary = runtime.call("handle_field_command", {"verb": verb, "payload": payload})
+	close_family()
+	show_status(String(result.get("reason", "Equipment updated." if result.get("accepted", false) else "Move to the marked work site first.")))
+
+func _build_field_actions(panel: Control) -> void:
+	var scroll := ScrollContainer.new()
+	scroll.follow_focus = true
+	panel.add_child(scroll)
+	var body := VBoxContainer.new()
+	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(body)
+	body.add_child(UiDesign.label("Field Equipment", "heading"))
+	body.add_child(UiDesign.label("Walk to the marked work site. Equipment checks your distance, carried supply and the current scene before acting.", "body"))
+	for entry in [["board_rover", "Board rover"], ["exit_rover", "Leave rover"], ["toggle_rover_camera", "Cab / chase view"], ["toggle_headlights", "Headlights"]]:
+		var verb: String = entry[0]
+		var button := UiDesign.button(entry[1])
+		button.pressed.connect(func(): _field_action(verb))
+		body.add_child(button)
+	for kind in ["marker", "fixed_line", "path_light", "repeater"]:
+		for verb in ["pickup_supply", "place_structure"]:
+			var button := UiDesign.button(("Pick up " if verb == "pickup_supply" else "Place ") + String(kind).replace("_", " "))
+			button.pressed.connect(func(): _field_action(verb, {"kind": kind}))
+			body.add_child(button)
+	var close := UiDesign.button("Close (Esc)")
+	close.pressed.connect(close_family)
+	body.add_child(close)
+
+func _input(event: InputEvent) -> void:
+	if not is_instance_valid(_family_panel):
+		return
+	var back: bool = event.is_action_pressed("ui_cancel") or (event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_B)
+	if back and not event.is_echo():
+		close_family()
+		get_viewport().set_input_as_handled()
+
 func _on_save_pressed() -> void:
 	if runtime != null:
 		runtime.save_campaign()
@@ -1162,7 +1325,7 @@ func _on_panel_opened(_panel_id: String) -> void:
 func _on_panel_closed(_panel_id: String) -> void:
 	if p01_panel != null and p01_panel.is_open():
 		p01_panel.set_covered(not panels.active_panel().is_empty() or panels.hint_player.is_open())
-	var reading: bool = not panels.active_panel().is_empty() or mission_table.is_open() or (chapter4_panel != null and chapter4_panel.is_open()) or (chapter6_panel != null and chapter6_panel.is_open()) or (chapter8_panel != null and chapter8_panel.is_open()) or (p01_panel != null and p01_panel.is_open()) or (comms_panel != null and bool(comms_panel.is_open())) or panels.hint_player.is_open()
+	var reading: bool = is_instance_valid(_family_panel) or not panels.active_panel().is_empty() or mission_table.is_open() or (chapter4_panel != null and chapter4_panel.is_open()) or (chapter6_panel != null and chapter6_panel.is_open()) or (chapter8_panel != null and chapter8_panel.is_open()) or (p01_panel != null and p01_panel.is_open()) or (comms_panel != null and bool(comms_panel.is_open())) or panels.hint_player.is_open()
 	runtime.set_ui_paused(reading or _reading_was_paused)
 	_modal_reading = reading
 	_set_modal_buttons(reading)
@@ -1193,7 +1356,7 @@ func _set_modal_buttons(disabled: bool, node: Node = self) -> void:
 		_modal_button_states.clear()
 		return
 	for child in node.get_children():
-		if child == panels or child == mission_table or child == chapter4_panel or child == chapter6_panel or child == chapter8_panel or child == p01_panel or child == comms_panel or child == _what_now_home:
+		if child == _family_panel or child == _family_backdrop or child == panels or child == mission_table or child == chapter4_panel or child == chapter6_panel or child == chapter8_panel or child == p01_panel or child == comms_panel or child == _what_now_home:
 			continue
 		if child is BaseButton:
 			if not _modal_button_states.has(child):
@@ -1205,7 +1368,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	var key := (event as InputEventKey).physical_keycode
-	var free: bool = panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (chapter4_panel == null or not chapter4_panel.is_open()) and (chapter6_panel == null or not chapter6_panel.is_open()) and (chapter8_panel == null or not chapter8_panel.is_open()) and (p01_panel == null or not p01_panel.is_open()) and (comms_panel == null or not bool(comms_panel.is_open()))
+	var free: bool = not is_instance_valid(_family_panel) and panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (chapter4_panel == null or not chapter4_panel.is_open()) and (chapter6_panel == null or not chapter6_panel.is_open()) and (chapter8_panel == null or not chapter8_panel.is_open()) and (p01_panel == null or not p01_panel.is_open()) and (comms_panel == null or not bool(comms_panel.is_open()))
 	if key == KEY_ESCAPE and free:
 		panels.open_panel("pause")
 		get_viewport().set_input_as_handled()
@@ -1216,13 +1379,16 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		elif comms_panel != null and bool(comms_panel.is_open()):
 			comms_panel.close_inbox()
 			get_viewport().set_input_as_handled()
-	elif key == KEY_H:
+	elif key == (KEY_E if panels.bindings_snapshot().get("what_now", "H") == "E" else KEY_H):
 		if free:
 			panels.open_panel("what_now")
 			get_viewport().set_input_as_handled()
 		elif panels != null and panels.active_panel() == "what_now":
 			panels.close_panel()
 			get_viewport().set_input_as_handled()
+	elif key == KEY_J and free:
+		_on_journal_pressed()
+		get_viewport().set_input_as_handled()
 	elif (key == KEY_ENTER or key == KEY_KP_ENTER) and free and _advance.visible and not _advance.disabled:
 		_on_advance_pressed()
 		get_viewport().set_input_as_handled()
@@ -1255,6 +1421,9 @@ func _process(delta: float) -> void:
 		eva_visor.visible = show_visor
 		if show_visor:
 			eva_visor.refresh()
+	if runtime._player != null and runtime._player.velocity.length_squared() > 0.01:
+		offer_first_time("move")
+	_flush_onboarding()
 	_update_world_overlay()
 
 ## Projects the goal marker (with distance) and the prompt on the object in reach.

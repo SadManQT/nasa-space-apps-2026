@@ -166,21 +166,21 @@ const TARGET_ALIAS_MAP := {
 
 const ACTION_FEEDBACK_CATALOG := {
 	"route_spare_power": {
-		"consequence": "Spare mast current flows into the O₂ electrolyser instead of spilling past the full 20-unit battery jar.",
-		"why": "A full battery store cannot hold extra daylight charge, so routing surplus power into air production banks breathable O₂ for the 36-hour night.",
+		"consequence": "The commissioning diagram is traced from the mast, through battery storage, to the air tank.",
+		"why": "Tracing the diagram shows where surplus daylight power could make air. This introductory check leaves the fixed night reserves unchanged.",
 		"next_step": "Inspect the commissioning result on the Mission Table.",
-		"meter_tick": "Power E: 20/20 (0 spilled) · Air A: +2 stored",
+		"meter_tick": "Commissioning flow checked - Night reserves unchanged",
 		"crew_speaker": "Amara",
-		"crew_reaction": "Surplus line locked to the air tank. Nothing spilled on our watch.",
+		"crew_reaction": "Flow traced. Read the real reserves before planning the night.",
 		"sfx": "SFX_UI_SHIFT_COMMIT",
 	},
 	"commission_result": {
-		"consequence": "The commissioning ledger confirms the mast overflow arrow is cleared and the extra daylight current is stored as air.",
-		"why": "Verifying the ledger after routing power proves the station is banking resources rather than venting surplus energy.",
+		"consequence": "The commissioning diagram and its storage limits have been inspected.",
+		"why": "Checking the diagram separates a possible resource route from the real reserves used in the night plan.",
 		"next_step": "Read and acknowledge the station charter and emergency limits card.",
-		"meter_tick": "Commissioning Ledger: Verified (0 overflow)",
+		"meter_tick": "Commissioning diagram inspected - Night reserves unchanged",
 		"crew_speaker": "Kai",
-		"crew_reaction": "Jar at 20, overflow at zero, and the air line is climbing.",
+		"crew_reaction": "Diagram checked. The night plan will show its actual resource changes.",
 		"sfx": "SFX_UI_SHIFT_COMMIT",
 	},
 	"charter_card": {
@@ -607,12 +607,12 @@ const ACTION_FEEDBACK_CATALOG := {
 		"sfx": "SFX_WATER_TRANSFER",
 	},
 	"return_garden_water": {
-		"consequence": "After shift-6 storm exposure resolves, the borrowed water drains back from the Safe Room wall to Alo's garden reservoir (W=0).",
-		"why": "Returning the water immediately after the radiation gate clears relieves garden thirst before dawn.",
+		"consequence": "The water-return instruction is acknowledged. The real drain resolves with the confirmed shift plan, after storm exposure.",
+		"why": "Exposure must resolve before ordinary drain; the shift forecast shows whether and when garden water returns.",
 		"next_step": "Resolve final dark shifts 6 and 7 on the Mission Table, then verify chamber conditions at dawn.",
-		"meter_tick": "Water W: 4→0 (Garden reservoir restored) · Alo H: 6/10",
+		"meter_tick": "Water-return instruction acknowledged - Read the committed shift for actual transfer",
 		"crew_speaker": "Mei",
-		"crew_reaction": "Water is back in the root tray — look at Alo's leaves lifting toward the lamp!",
+		"crew_reaction": "Return instruction logged. Check exposure and the drain in the final shift forecast.",
 		"sfx": "SFX_SHUTTER_OPEN",
 	},
 	"dawn_bloom_payoff": {
@@ -716,6 +716,8 @@ static func _apply_live_state_feedback(canonical: String, out: Dictionary, state
 				out["next_step"] = "Close Alo's cassette transfer seal to complete the paired planting." if not alo_sealed else "Record the paired baseline conditions and first photographs."
 
 	var res: Dictionary = state.get("resources", {}) if state.get("resources", null) is Dictionary else {}
+	if not res.is_empty() and canonical in ["route_spare_power", "commission_result"]:
+		out["meter_tick"] = "Reserves unchanged: Battery E:%d - Air A:%d" % [int(res.get("E", 0)), int(res.get("A", 0))]
 	if not res.is_empty() and canonical in ["p02_shift1", "p02_shift2", "p02_shifts3_4", "p02_shift5_alarm", "p02_shifts6_7", "return_garden_water"]:
 		out["meter_tick"] = "Power E:%d · Air A:%d · Water Wall W:%d · Alo H:%d · Dose Z:%d" % [
 			int(res.get("E", 0)),
@@ -746,7 +748,7 @@ static func alo_posture(alo_health: int, water_in_wall: int, shift_index: int, b
 	## Canon rule: Alo's progress is felt through botanical posture and growth — NEVER a face or eyes.
 	var stage := "Seedling"
 	var posture := "Upright hypocotyl stem, cotyledons level under the chamber lamp."
-	if bloomed or shift_index >= 7 and alo_health >= 5:
+	if (bloomed or shift_index >= 7) and alo_health >= 5:
 		stage = "Golden Four-Petal Bloom"
 		posture = "Sturdy upright stem leaning into the warm lamp; four bright yellow Brassica rapa petals open wide above turgid true leaves."
 	elif bloomed or (shift_index >= 7 and alo_health > 0):
@@ -765,12 +767,13 @@ static func alo_posture(alo_health: int, water_in_wall: int, shift_index: int, b
 		"botanical_note": "Observed through stem angle, leaf turgor, and floral bud opening (never anthropomorphic).",
 	}
 
-static func outcome_reward_card(stars: Dictionary, alo_health: int, retry_shift: int = 5) -> Dictionary:
+static func outcome_reward_card(stars: Dictionary, alo_health: int, retry_shift: int = 5, ending: String = "") -> Dictionary:
 	var safe_exp := bool(stars.get("safe_exposure", false))
 	var no_blackout := bool(stars.get("no_blackout", false))
 	var alo_alive := bool(stars.get("alo_alive", alo_health > 0))
 	var star_count := (1 if safe_exp else 0) + (1 if no_blackout else 0) + (1 if alo_alive else 0)
-	var is_golden := star_count == 3 and alo_health >= 5
+	var stopped := ending in ["MISSION_STOPPED", "ALO_LOST"] or not safe_exp
+	var is_golden := not stopped and star_count == 3 and alo_health >= 5
 	if is_golden:
 		return {
 			"tier": "GOLDEN_BLOOM",
@@ -781,7 +784,7 @@ static func outcome_reward_card(stars: Dictionary, alo_health: int, retry_shift:
 			"retry_prompt": "Replay any shift from the Mission Trainer to test an alternate trade study.",
 			"sfx": "SFX_UI_SHIFT_COMMIT",
 		}
-	elif alo_alive and star_count >= 1:
+	elif not stopped and alo_alive and star_count >= 1:
 		return {
 			"tier": "BLOOM",
 			"title": "★".repeat(star_count) + "☆".repeat(3 - star_count) + "  FIRST FLOWER AT DAWN",

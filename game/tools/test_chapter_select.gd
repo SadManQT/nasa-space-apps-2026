@@ -82,15 +82,27 @@ func _run() -> void:
 
 	# Unlock up to Chapter 4 in memory (without writing save file) to inspect multi-chapter mission stars
 	var ch4_snap := saved.duplicate(true)
-	ch4_snap["current_chapter"] = 4
-	ch4_snap["completed_missions"] = ["EX-M0101", "EX-M0102", "EX-M0103", "EX-M0104", "EX-M0401", "EX-M0402"]
+	ch4_snap["chapter_id"] = "CH04"
+	ch4_snap["completed_scene_ids"] = []
+	for chapter in range(1, 4):
+		for scene in range(1, 13):
+			ch4_snap["completed_scene_ids"].append("EX-CH%02d-S%02d" % [chapter, scene])
+	for scene in range(1, 7):
+		ch4_snap["completed_scene_ids"].append("EX-CH04-S%02d" % scene)
 	panel.reload_from_save(ch4_snap)
+	_check(panel.unlocked_up_to_chapter() == 4, "Production chapter_id unlocks Chapter 4 without invented current_chapter field")
 	_check(panel.select_chapter(4), "unlocked Chapter 4 can be selected")
 	await process_frame
 	var m401 := panel.find_child("MissionRow_EX-M0401", true, false)
 	var m404 := panel.find_child("MissionRow_EX-M0404", true, false)
 	_check(m401 != null and m404 != null, "Chapter 4 mission list renders EX-M0401..EX-M0404 with stars and best results")
 
+	var inspect_btn := panel.find_child("Inspect_EX-M0401", true, false) as Button
+	if inspect_btn != null:
+		inspect_btn.pressed.emit()
+		await process_frame
+	_check(panel.find_child("MissionSummaryDetails", true, false) != null, "View Summary opens a visible mission summary")
+	_check(not _collect_text(panel).contains("All flight rules met"), "Mission completion does not invent perfect scores or flight-rule results")
 	# Progress tab
 	panel.show_tab("progress")
 	await process_frame
@@ -145,3 +157,11 @@ func _check(condition: bool, message: String) -> void:
 	if not condition:
 		failures += 1
 		push_error("FAIL: " + message)
+
+func _collect_text(node: Node) -> String:
+	var result := ""
+	if node is Label:
+		result = node.text + "\n"
+	for child in node.get_children():
+		result += _collect_text(child)
+	return result

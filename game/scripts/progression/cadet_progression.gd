@@ -98,6 +98,20 @@ static func max_gear_mass_kg() -> float:
 
 ## Evaluates a sortie or job into a training report card (never locks story).
 func record_sortie_report(entry: Dictionary) -> Dictionary:
+	if entry.has("measured_metrics") and entry.measured_metrics is Dictionary:
+		var measured_card := {
+			"id": String(entry.get("id", "SORTIE-%02d" % (report_cards.size() + 1))),
+			"title": String(entry.get("title", "Field Sortie")),
+			"chapter": int(entry.get("chapter", 1)),
+			"grade": "Completed",
+			"measured_metrics": (entry.measured_metrics as Dictionary).duplicate(true),
+			"note": "Training grade only — story progress is never locked by a report card.",
+		}
+		report_cards.append(measured_card)
+		var measured_skill := String(entry.get("skill", ""))
+		if skill_points.has(measured_skill):
+			add_skill_xp(measured_skill, int(entry.get("xp", 1)))
+		return measured_card
 	var time_ratio := float(entry.get("actual_minutes", 15.0)) / maxf(1.0, float(entry.get("planned_minutes", 15.0)))
 	var time_score := 100 if time_ratio <= 1.15 else (80 if time_ratio <= 1.4 else 60)
 	var condition_score := 100 if bool(entry.get("payload_intact", true)) else 65
@@ -201,7 +215,7 @@ func choose_upgrade(after_chapter: int, option: String, completed_chapters: Arra
 	var clean := option.strip_edges().to_upper()
 	if not clean in ["A", "B"]:
 		return {"accepted": false, "reason": "Choose Option A or Option B."}
-	if not completed_chapters.is_empty() and not completed_chapters.has(after_chapter):
+	if not completed_chapters.has(after_chapter) and not unlocked_upgrades.has(str(after_chapter)):
 		return {"accepted": false, "reason": "Complete Chapter %d before choosing its upgrade." % after_chapter}
 	var key := str(after_chapter)
 	if unlocked_upgrades.has(key) and String(unlocked_upgrades[key]) != clean:
@@ -333,7 +347,7 @@ func complete_job(job_id: String, max_unlocked_chapter: int = 8, performance: Di
 		return {"accepted": false, "reason": "Job already completed."}
 	var skill_id := String(spec.get("skill", "observation"))
 	var xp := int(spec.get("xp", 1))
-	var report := record_sortie_report({
+	var report_entry := {
 		"id": job_id,
 		"title": String(spec.get("title", job_id)),
 		"chapter": ch,
@@ -345,7 +359,10 @@ func complete_job(job_id: String, max_unlocked_chapter: int = 8, performance: Di
 		"care_score": int(performance.get("care_score", 96)),
 		"science_score": int(performance.get("science_score", 94)),
 		"reserve_kept_pct": float(performance.get("reserve_kept_pct", 32.0)),
-	})
+	}
+	if performance.has("measured_metrics") and performance.measured_metrics is Dictionary:
+		report_entry["measured_metrics"] = (performance.measured_metrics as Dictionary).duplicate(true)
+	var report := record_sortie_report(report_entry)
 	completed_jobs[job_id] = {
 		"completed_at": String(performance.get("when", "2046-04-25T12:00Z")),
 		"grade": String(report.grade),

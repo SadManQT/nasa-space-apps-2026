@@ -149,7 +149,8 @@ func _test_assisted_vs_manual_balance_and_slips() -> void:
 			slipped = true
 			break
 	_check(slipped and exp_suit.slip_count == 1 and exp_suit.slip_time_cost_s >= 3.0, "un-countered sway in Expedition mode causes a non-lethal slip that costs time")
-	_check(not bool(inv.item("optics_crate").condition.intact), "slip scuffs fragile payload condition without ending the mission")
+	_check(bool(inv.deliver("optics_crate", "mast").get("accepted", false)), "EVA scuffs cost condition and time without permanently blocking fragile-payload delivery")
+	_check(exp_suit.payload_scuffs == 1 and bool(inv.item("optics_crate").condition.intact), "slip records a grading scuff while the fragile payload remains usable")
 
 	# Counter-leaning with Q/E in Expedition mode prevents the slip
 	var exp_lean := SuitScript.new("Expedition")

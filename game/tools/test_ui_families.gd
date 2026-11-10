@@ -36,6 +36,7 @@ func _run() -> void:
 	await _test_ui11_rover_hud()
 	await _test_ui12_greenhouse()
 	await _test_ui16_credits()
+	await _test_campaign_family_entries()
 
 	print("UI FAMILIES RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
@@ -78,6 +79,9 @@ func _test_ui08_discovery_log() -> void:
 	root.add_child(dl)
 	await process_frame
 
+	# A fresh campaign cannot know future recorder, harvest or vault results.
+	dl.configure("EX-CH01-S01")
+	_check(dl.find_child("EvidenceCard_EV-CH02-RECORDER", true, false) == null and dl.find_child("EvidenceCard_EV-CH04-VAULT", true, false) == null, "Discovery filters future records by their acquisition scene")
 	# Before EX-CH05-S10: Noor's name must stay hidden
 	dl.configure("EX-CH05-S09")
 	await process_frame
@@ -226,6 +230,11 @@ func _test_ui16_credits() -> void:
 	await process_frame
 	var panel_credits_text := _collect_text(panels)
 	_check(panel_credits_text.contains("Team The Last BrainCell") and panel_credits_text.contains("NASA does not endorse this game"), "UI_16 CampaignPanels renders CreditsPanel sections")
+	var drawer := panels.find_child("InspectMarsDrawerButton", true, false) as Button
+	if drawer != null:
+		drawer.pressed.emit()
+	_check(_collect_text(panels).contains("MARS TRANSIT STUDY"), "Embedded credits retain a live optional-drawer controller")
+	_check(panels.find_child("SkipCreditsButton", true, false) != null, "Actual credits modal provides its Skip control")
 	panels.close_panel()
 	panels.queue_free()
 	await process_frame
@@ -260,3 +269,31 @@ func _check(condition: bool, label: String) -> void:
 	if not condition:
 		failures += 1
 		push_error("FAIL: " + label)
+
+func _test_campaign_family_entries() -> void:
+	var campaign = preload("res://scenes/campaign/chapter1_campaign.tscn").instantiate()
+	var campaign_path := "user://test_ui_families_campaign_%d.json" % OS.get_process_id()
+	campaign.save_path = campaign_path
+	root.add_child(campaign)
+	await process_frame
+	await process_frame
+	var hud = campaign.hud
+	_check(hud.has_method("open_family"), "Live campaign HUD exposes bound UI families")
+	if hud.has_method("open_family"):
+		for family in ["discovery", "greenhouse", "cadet_record", "jobs"]:
+			_check(bool(hud.call("open_family", family)), "Live campaign opens family: " + family)
+			await process_frame
+			_check(hud.get("_family_panel") != null, "Family is attached to the live HUD: " + family)
+			if family == "greenhouse":
+				_check(_collect_text(hud.get("_family_panel")).contains("Seed"), "New campaign greenhouse shows actual seed stage rather than future fixture plants")
+			if family == "cadet_record":
+				var record = hud.get("_family_panel")
+				_check(record.progression == campaign.get("progression"), "Cadet record binds the authoritative live progression")
+				record.open_tab("upgrades", 7)
+				var future := record.find_child("ChooseOption_A", true, false) as Button
+				_check(future != null and future.disabled, "Unfinished future chapter cannot grant an upgrade")
+			hud.call("close_family")
+	campaign.free()
+	await process_frame
+	for suffix in ["", ".bak", ".tmp"]:
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(campaign_path + suffix))

@@ -10,6 +10,8 @@ signal closed
 signal upgrade_chosen(chapter: int, option: String)
 signal rest_requested
 
+var _runtime: Node
+var settings: Dictionary = {}
 var progression: CadetProgression
 var active_tab: String = "skills"
 var upgrade_chapter: int = 3
@@ -30,6 +32,12 @@ func bind_progression(value: CadetProgression) -> void:
 	progression = value
 	refresh()
 
+func bind_runtime(runtime: Node) -> void:
+	_runtime = runtime
+	progression = runtime.get("progression")
+	settings = runtime.call("query").get("accessibility", {})
+	refresh()
+
 func open_tab(tab: String = "skills", chapter_for_upgrade: int = 3) -> void:
 	active_tab = tab
 	upgrade_chapter = chapter_for_upgrade
@@ -44,12 +52,12 @@ func _build() -> void:
 
 	_panel = UiDesign.glass_panel(Color.TRANSPARENT, 24)
 	_panel.name = "CadetRecordGlass"
-	_panel.custom_minimum_size = Vector2(960, 580)
-	_panel.set_anchors_preset(Control.PRESET_CENTER)
-	_panel.offset_left = -480
-	_panel.offset_top = -290
-	_panel.offset_right = 480
-	_panel.offset_bottom = 290
+	_panel.custom_minimum_size = Vector2.ZERO
+	_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_panel.offset_left = 24
+	_panel.offset_top = 24
+	_panel.offset_right = -24
+	_panel.offset_bottom = -24
 	add_child(_panel)
 
 	var root_col := VBoxContainer.new()
@@ -95,6 +103,8 @@ func _build() -> void:
 		_tabs_row.add_child(btn)
 
 	var scroll := ScrollContainer.new()
+	scroll.follow_focus = true
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root_col.add_child(scroll)
 
@@ -125,7 +135,7 @@ func refresh() -> void:
 			_render_upgrades()
 		"rest":
 			_render_rest()
-	UiDesign.apply_type(self, get_viewport_rect().size.y if is_inside_tree() else 720.0, 1.0)
+	UiDesign.apply_type(self, get_viewport_rect().size.y if is_inside_tree() else 720.0, 1.5 if settings.get("large_text", false) else 1.0)
 
 func _render_skills() -> void:
 	_title_label.text = "Cadet Skills"
@@ -179,6 +189,10 @@ func _render_loadout() -> void:
 		btn.pressed.connect(func() -> void:
 			var res := progression.unequip_gear(gear_id) if is_eq else progression.equip_gear(gear_id)
 			_status_label.text = String(res.get("reason", ""))
+			if _runtime != null and res.get("accepted", false):
+				var saved: Dictionary = _runtime.call("save_progression")
+				if not saved.get("accepted", false):
+					_status_label.text += " - Not saved: " + String(saved.get("reason", "Try Save again."))
 			refresh())
 		row.add_child(btn)
 
@@ -193,6 +207,13 @@ func _render_reports() -> void:
 		_body.add_child(card)
 		var col := VBoxContainer.new()
 		card.add_child(col)
+		if card_data.has("measured_metrics"):
+			col.add_child(UiDesign.label("%s - Completed" % String(card_data.get("title", "Field job")), "heading", "accent"))
+			var measured: Dictionary = card_data.measured_metrics
+			for metric in ["elapsed_seconds", "observations", "payload_condition", "reserve_kept_pct"]:
+				if measured.has(metric):
+					col.add_child(UiDesign.label("%s: %s" % [metric.replace("_", " ").capitalize(), str(measured[metric])], "body"))
+			continue
 		col.add_child(UiDesign.label("%s · Grade: %s (%s%%)" % [
 			String(card_data.title), String(card_data.grade), UiDesign.number(float(card_data.average))
 		], "heading", "accent"))
@@ -233,9 +254,9 @@ func _render_upgrades() -> void:
 		col.add_child(UiDesign.label("Before → After: %s  →  %s" % [String(opt.before), String(opt.after)], "caption", "muted"))
 		var select_btn := UiDesign.button("Locked in" if chosen else "Choose Option " + opt_key, 40)
 		select_btn.name = "ChooseOption_" + opt_key
-		select_btn.disabled = not current_choice.is_empty()
+		select_btn.disabled = not current_choice.is_empty() or (_runtime != null and not _runtime.call("completed_chapters").has(upgrade_chapter))
 		select_btn.pressed.connect(func() -> void:
-			var res := progression.choose_upgrade(upgrade_chapter, opt_key)
+			var res: Dictionary = _runtime.call("choose_upgrade", upgrade_chapter, opt_key) if _runtime != null else progression.choose_upgrade(upgrade_chapter, opt_key)
 			_status_label.text = String(res.get("summary", res.get("reason", "")))
 			if bool(res.get("accepted", false)):
 				upgrade_chosen.emit(upgrade_chapter, opt_key)
@@ -255,8 +276,8 @@ func _render_rest() -> void:
 	var rest_btn := UiDesign.button("Rest & Save at Safe Room Bunk", 44)
 	rest_btn.name = "RestAtBunkButton"
 	rest_btn.pressed.connect(func() -> void:
-		var res := progression.rest_at_bunk()
-		_status_label.text = String(res.get("summary", ""))
+		var res: Dictionary = _runtime.call("rest_at_bunk") if _runtime != null else progression.rest_at_bunk()
+		_status_label.text = String(res.get("summary", res.get("reason", "")))
 		rest_requested.emit()
 		refresh())
 	col.add_child(rest_btn)

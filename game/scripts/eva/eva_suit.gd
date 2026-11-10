@@ -350,12 +350,7 @@ func _register_slip(payload_inventory: RefCounted = null, payload_id: String = "
 	slip_time_cost_s += 3.0
 	if payload_mass_kg > 0.0:
 		payload_scuffs += 1
-		if payload_inventory != null and not payload_id.is_empty() and payload_inventory.has_method("update_condition"):
-			# A slip scuffs fragile payloads; never kills the cadet or ends the mission.
-			var item: Dictionary = payload_inventory.call("item", payload_id)
-			var handling: Array = item.get("definition", {}).get("handling", [])
-			if handling.has("fragile"):
-				payload_inventory.call("update_condition", payload_id, {"intact": false})
+		# Scuffs lower the report grade; binary cargo damage would block delivery forever.
 	last_slip_reason = "Footing slip on %s: +3 s recovery%s. Mission continues." % [
 		current_band.label,
 		", payload scuffed" if payload_mass_kg > 0.0 else ""

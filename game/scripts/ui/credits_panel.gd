@@ -20,6 +20,8 @@ signal return_to_garden_requested
 signal closed_drawer_inspected
 signal panel_closed
 
+var embedded := false
+var _scroll_position := 0.0
 var auto_scroll := true
 var scroll_speed_px_s := 28.0
 var drawer_opened := false
@@ -67,6 +69,8 @@ const NASA_DATASETS := [
 
 func _ready() -> void:
 	name = "CreditsPanel"
+	if embedded:
+		return
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	theme = UiKit.theme()
 	if bool(settings.get("reduced_motion", false)):
@@ -75,10 +79,16 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if auto_scroll and _scroll != null and is_visible_in_tree() and not bool(settings.get("reduced_motion", false)):
-		_scroll.scroll_vertical += int(round(scroll_speed_px_s * delta))
+		if absf(float(_scroll.scroll_vertical) - _scroll_position) > 2.0:
+			_scroll_position = float(_scroll.scroll_vertical)
+		_scroll_position += scroll_speed_px_s * delta
+		_scroll.scroll_vertical = int(_scroll_position)
 
 func populate_into(container: VBoxContainer) -> void:
-	# Allows CampaignPanels ("credits") to embed the exact CREDITS.md §9 sections + CS-18 card.
+	_scroll = container.get_parent() as ScrollContainer
+	var controls := HFlowContainer.new()
+	container.add_child(controls)
+	_build_controls(controls)
 	_build_sections_into(container)
 
 func skip_to_post_credits() -> void:
@@ -110,6 +120,25 @@ func _build_ui() -> void:
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(title)
 
+	_build_controls(header)
+
+	_scroll = ScrollContainer.new()
+	_scroll.name = "CreditsScroll"
+	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_scroll.follow_focus = true
+	stack.add_child(_scroll)
+
+	_content = VBoxContainer.new()
+	_content.name = "CreditsContent"
+	_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_content.add_theme_constant_override("separation", 12)
+	_scroll.add_child(_content)
+
+	_build_sections_into(_content)
+	UiDesign.apply_type(self, get_viewport_rect().size.y, 1.5 if bool(settings.get("large_text", false)) else 1.0)
+
+func _build_controls(header: Container) -> void:
 	_auto_btn = UiDesign.button("Auto-Scroll: ON" if auto_scroll else "Auto-Scroll: OFF")
 	_auto_btn.name = "ToggleAutoScroll"
 	_auto_btn.pressed.connect(func() -> void:
@@ -130,22 +159,6 @@ func _build_ui() -> void:
 		panel_closed.emit()
 	)
 	header.add_child(garden_btn)
-
-	_scroll = ScrollContainer.new()
-	_scroll.name = "CreditsScroll"
-	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	_scroll.follow_focus = true
-	stack.add_child(_scroll)
-
-	_content = VBoxContainer.new()
-	_content.name = "CreditsContent"
-	_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_content.add_theme_constant_override("separation", 12)
-	_scroll.add_child(_content)
-
-	_build_sections_into(_content)
-	UiDesign.apply_type(self, get_viewport_rect().size.y, 1.5 if bool(settings.get("large_text", false)) else 1.0)
 
 func _build_sections_into(target: VBoxContainer) -> void:
 	# Photo + Dedication card
@@ -211,7 +224,7 @@ func _build_sections_into(target: VBoxContainer) -> void:
 	b5.add_child(UiDesign.label("5. Made with Godot Engine", "heading", "accent"))
 	var license_text := Engine.get_license_text().strip_edges()
 	var copy_info := Engine.get_copyright_info()
-	b5.add_child(UiDesign.label("Godot Engine MIT Licence (%d third-party copyright notices loaded at runtime; includes Open Sans SIL OFL 1.1):\n%s" % [copy_info.size(), license_text.substr(0, 360) + "…"], "caption", "muted"))
+	b5.add_child(UiDesign.label("Godot Engine MIT Licence (%d third-party copyright notices loaded at runtime; includes Open Sans SIL OFL 1.1):\n%s" % [copy_info.size(), license_text], "caption", "muted"))
 
 	# 6. Tools
 	var s6 := UiDesign.glass_panel()

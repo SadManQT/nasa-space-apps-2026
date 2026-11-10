@@ -11,7 +11,7 @@ const ACHIEVEMENTS := [
 		"title": "Night Watch Margin",
 		"skill": "life_support",
 		"chapter": 1,
-		"description": "Kept the battery above the dark-shift reserve every shift during the 36-hour Commissioning Night."
+		"description": "Completed all seven commissioning shifts without a blackout."
 	},
 	{
 		"id": "ach_alo_commissioned",
@@ -169,84 +169,51 @@ static func unlocked_count(snapshot: Dictionary) -> int:
 			count += 1
 	return count
 
+static func chapter_number(snapshot: Dictionary) -> int:
+	return clampi(int(String(snapshot.get("chapter_id", "CH01")).trim_prefix("CH")), 1, 8)
+
 static func _unlocked_ids(snapshot: Dictionary) -> Dictionary:
-	var out: Dictionary = {}
-	if snapshot.is_empty():
-		return out
-	var chapter := int(snapshot.get("current_chapter", snapshot.get("chapter", 1)))
-	var completed_missions: Array = []
-	if snapshot.get("completed_missions") is Array:
-		completed_missions = snapshot.get("completed_missions")
-	var book: Dictionary = snapshot.get("campaign_ledgers", {}) if snapshot.get("campaign_ledgers") is Dictionary else {}
-	var puzzles: Dictionary = book.get("puzzles", {}) if book.get("puzzles") is Dictionary else {}
-	var ops: Dictionary = book.get("operations", {}) if book.get("operations") is Dictionary else {}
-	var route: Dictionary = snapshot.get("route", {}) if snapshot.get("route") is Dictionary else {}
-	var resources: Dictionary = snapshot.get("resources", {}) if snapshot.get("resources") is Dictionary else {}
-
-	# Chapter 1 checks
-	if chapter > 1 or completed_missions.has("EX-M0101") or puzzles.has("P-01"):
-		out["ach_alo_commissioned"] = true
-	if chapter > 1 or completed_missions.has("EX-M0103") or float(resources.get("S", 0.0)) >= 4.0:
-		out["ach_shelter_wall_stacked"] = true
-	if chapter > 1 or (completed_missions.has("EX-M0104") and float(resources.get("E", 0.0)) >= 4.0):
+	var out := {}
+	var completed: Array = snapshot.get("completed_scene_ids", [])
+	# Every listed scene has an authoritative physical exit gate; merely entering a chapter earns nothing.
+	var gates := {
+		"ach_alo_commissioned": "EX-CH01-S04",
+		"ach_shelter_wall_stacked": "EX-CH01-S10",
+		"ach_cross_pollination": "EX-CH02-S05",
+		"ach_recorder_reconstructed": "EX-CH02-S12",
+		"ach_pressure_isolated": "EX-CH03-S03",
+		"ach_founder_harvest_42": "EX-CH03-S10",
+		"ach_viper_slope_route_b": "EX-CH04-S04",
+		"ach_three_ridge_beacons": "EX-CH04-S02",
+		"ach_cold_trap_warmup": "EX-CH04-S10",
+		"ach_coincidence_126": "EX-CH05-S07",
+		"ach_founder_reserve_30": "EX-CH05-S12",
+		"ach_eclipse_reserve_7": "EX-CH06-S03",
+		"ach_feeder_five_steps": "EX-CH06-S09",
+		"ach_storm_shelter_run": "EX-CH07-S03",
+		"ach_tara_relay_verified": "EX-CH07-S09",
+		"ach_malapert_road_4_reserve": "EX-CH08-S04",
+		"ach_dual_link_alo42": "EX-CH08-S09",
+		"ach_golden_bloom": "EX-CH08-S12",
+	}
+	for achievement in gates:
+		if completed.has(gates[achievement]):
+			out[achievement] = true
+	var night_complete := false
+	var blackout := false
+	for receipt in snapshot.get("receipts", {}).values():
+		for trace in receipt.get("trace", []):
+			blackout = blackout or bool(trace.get("blackout", false))
+			night_complete = night_complete or int(trace.get("shift", 0)) == 7
+	if night_complete and not blackout:
 		out["ach_dark_shift_reserve"] = true
-
-	# Chapter 2 checks
-	if chapter > 2 or puzzles.has("P-03") or completed_missions.has("EX-M0202"):
-		out["ach_cross_pollination"] = true
-	if chapter > 2 or puzzles.has("P-04") or completed_missions.has("EX-M0204"):
-		out["ach_recorder_reconstructed"] = true
-
-	# Chapter 3 checks
-	if chapter > 3 or puzzles.has("P-05") or completed_missions.has("EX-M0302"):
-		out["ach_pressure_isolated"] = true
-	if chapter > 3 or puzzles.has("P-06") or completed_missions.has("EX-M0304"):
-		out["ach_founder_harvest_42"] = true
-
-	# Chapter 4 checks
-	if chapter > 4 or puzzles.has("P-07") or String(route.get("ch04_route", "")) == "B":
-		out["ach_viper_slope_route_b"] = true
-	if chapter > 4 or (ops.has("p07_place_beacon_1") and ops.has("p07_place_beacon_2") and ops.has("p07_place_beacon_3")):
-		out["ach_three_ridge_beacons"] = true
-	if chapter > 4 or puzzles.has("P-08") or completed_missions.has("EX-M0404"):
-		out["ach_cold_trap_warmup"] = true
-
-	# Chapter 5 checks
-	if chapter > 5 or puzzles.has("P-09") or completed_missions.has("EX-M0502"):
-		out["ach_coincidence_126"] = true
-	if chapter > 5 or puzzles.has("P-10") or completed_missions.has("EX-M0504"):
-		out["ach_founder_reserve_30"] = true
-
-	# Chapter 6 checks
-	if chapter > 6 or puzzles.has("P-11") or completed_missions.has("EX-M0602"):
-		out["ach_eclipse_reserve_7"] = true
-	if chapter > 6 or puzzles.has("P-12") or completed_missions.has("EX-M0604"):
-		out["ach_feeder_five_steps"] = true
-
-	# Chapter 7 checks
-	if chapter > 7 or puzzles.has("P-13") or completed_missions.has("EX-M0702"):
-		out["ach_storm_shelter_run"] = true
-	if chapter > 7 or puzzles.has("P-14") or completed_missions.has("EX-M0704"):
-		out["ach_tara_relay_verified"] = true
-
-	# Chapter 8 checks
-	if puzzles.has("P-15") or completed_missions.has("EX-M0801") or String(route.get("ch08_route", "")) == "SURVEYED":
-		out["ach_malapert_road_4_reserve"] = true
-	if puzzles.has("P-16") or completed_missions.has("EX-M0803") or String(route.get("earth_leg", "")) == "verified":
-		out["ach_dual_link_alo42"] = true
-	if completed_missions.has("EX-M0804") or String(snapshot.get("ending", "")) in ["BLOOM", "GOLDEN"]:
-		out["ach_golden_bloom"] = true
-
-	# Skill progression check
-	var resume: Dictionary = snapshot.get("presentation_resume", {}) if snapshot.get("presentation_resume") is Dictionary else {}
-	var prog_dict: Dictionary = resume.get("cadet_progression", {}) if resume.get("cadet_progression") is Dictionary else {}
-	var prog := CadetProgression.new()
-	prog.restore(prog_dict)
+	var resume: Dictionary = snapshot.get("presentation_resume", {})
+	var progression := CadetProgression.new()
+	progression.restore(resume.get("cadet_progression", {}))
 	var all_ranked := true
 	for skill_id in ["navigation", "handling", "life_support", "repair", "observation"]:
-		if prog.skill_rank(skill_id) < 1 and chapter < 6:
+		if progression.skill_rank(skill_id) < 1:
 			all_ranked = false
 	if all_ranked:
 		out["ach_all_five_skills"] = true
-
 	return out
