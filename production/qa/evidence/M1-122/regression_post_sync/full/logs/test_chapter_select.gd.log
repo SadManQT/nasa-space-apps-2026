@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Couldn't open directory at path "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-qa-20261106/.codex/task-tmp/garden-regression-post-sync/roaming/Godot/app_userdata/Last Light Academy/shader_cache".
+   at: get_directories_at (core/io/dir_access.cpp:588)
+   GDScript backtrace (most recent call first):
+       [0] _prepare_cache_directories (res://tools/support/isolated_storage.gd:29)
+       [1] prepare_rendering_cache (res://tools/support/isolated_storage.gd:24)
+       [2] _run (res://tools/test_chapter_select.gd:32)
+CHAPTER SELECT RESULT: PASS (116 checks, 0 failures)
+WARNING: 1 ObjectDB instance was leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)

@@ -1,0 +1,71 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  ok   exprNeutral fade at quarter duration
+  ok   exprNeutral reaches target on time
+  ok   exprNeutral fades down from current weight
+  ok   exprNeutral returns to rest
+  ok   exprSerious fade at quarter duration
+  ok   exprSerious reaches target on time
+  ok   exprSerious fades down from current weight
+  ok   exprSerious returns to rest
+  ok   browUp fade at quarter duration
+  ok   browUp reaches target on time
+  ok   browUp fades down from current weight
+  ok   browUp returns to rest
+  ok   browDown fade at quarter duration
+  ok   browDown reaches target on time
+  ok   browDown fades down from current weight
+  ok   browDown returns to rest
+  ok   retargeting a fade stays continuous
+  ok   immediate values clamp and unknown expressions are skipped
+  ok   manual closure works with automatic blinks disabled
+  ok   blink gaps are random within 2-6 seconds
+  ok   eyes stay open before scheduled blink
+  ok   blink reaches full closure at 40 ms
+  ok   blink holds full closure through 60 ms
+  ok   blink opens smoothly
+  ok   blink finishes at 120 ms and reschedules
+  ok   double blink has an open inter-blink gap
+  ok   second blink closes after its 80 ms gap
+  ok   double blink ends after exactly two blinks
+  ok   double-blink probability near 15 percent (got 305 / 2000)
+  ok   disabling blinks reopens the eyes immediately
+  ok   blink stays brief with visible closure at 30 fps
+  ok   blink stays brief with visible closure at 60 fps
+  ok   blink stays brief with visible closure at 120 fps
+  ok   speech and expression both reach the mesh
+  ok   overlapping shape sums speech 0.3 + expression 0.4
+  ok   combined weights clamp at 1
+  ok   LipSync does not overwrite the mixer's result
+  ok   stopping speech preserves expression
+  ok   removing FaceExpression restores standalone LipSync
+  ok   standalone LipSync writes again after mixer removal
+  ok   partial mesh skips absent expressions, visemes and eyelids
+  ok   mesh with no blend shapes is harmless
+  ok   missing mesh and LipSync are harmless
+  ok   freed speech source leaves expressions working
+  ok   head accent is off by default
+  ok   enabling on constant loudness does not invent an onset
+  ok   loudness onset produces a smoothed head nod and smaller neck accent
+  ok   repeated onsets stay within 4 degrees total (max 2.683)
+  ok   modifier stack restores animated input pose without accumulation
+  ok   sustained loudness settles without retriggering
+  ok   out-of-range settings cannot exceed the hard rotation cap
+  ok   disabling removes the accent and resets its state
+  ok   missing head and neck bones are skipped
+  ok   real scene processing composes current-frame speech despite sibling order
+  ok   real scene processing preserves expression during speech release
+  ok   Kai GLB fixture exists
+  ok   GLTFDocument loads Kai at runtime (error 0)
+  ok   GLTFDocument generates Kai scene
+  ok   Kai face uses the legacy morph or current face-atlas contract
+  ok   Kai skeleton has 65 bones
+  ok   Kai face-atlas layer FaceEyeL exists
+  ok   Kai face-atlas layer FaceEyeR exists
+  ok   Kai face-atlas layer FaceMouth exists
+  ok   Kai face-atlas layer is shader-driven: FaceEyeL
+  ok   Kai face-atlas layer is shader-driven: FaceEyeR
+  ok   Kai face-atlas layer is shader-driven: FaceMouth
+  ok   Kai face-atlas expression selects mouth frame
+  ok   Kai face-atlas head bone resolves
+PASS FaceExpression / HeadAccent (68 checks, including runtime Kai GLTF integration)

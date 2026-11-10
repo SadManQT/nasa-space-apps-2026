@@ -1,0 +1,1530 @@
+{
+  "source_game_tree": "8edef085d1dcc51ee5c4b6974c31905cd6441da1",
+  "full_exit_code": 124,
+  "full_timed_out": true,
+  "full_summary_present": false,
+  "expected_suite_count": 115,
+  "reported_suite_count": 89,
+  "unreported_suite_names": [
+    "test_player_text.gd",
+    "test_probe_calibration_job.gd",
+    "test_progression.gd",
+    "test_review_scene.gd",
+    "test_room_presentation.gd",
+    "test_route_messages.gd",
+    "test_rover.gd",
+    "test_save_service_recovery.gd",
+    "test_science_data.gd",
+    "test_science_watch.gd",
+    "test_session_crew.gd",
+    "test_sound_captions.gd",
+    "test_story_echoes.gd",
+    "test_story_log.gd",
+    "test_tara_lifecycle.gd",
+    "test_terrain.gd",
+    "test_terrain_lola.gd",
+    "test_terrain_session.gd",
+    "test_terrain_work_lights.gd",
+    "test_toon_materials.gd",
+    "test_ui_families.gd",
+    "test_ui_kit.gd",
+    "test_upgrade_profiles.gd",
+    "test_worker_a_systems.gd",
+    "test_worker_b_world_missions.gd",
+    "test_worker_c_content.gd"
+  ],
+  "scope": "Complete setup and suite logs; printed mandatory runner result retained separately from generic engine diagnostics.",
+  "runner_summary": null,
+  "failed_suites": [
+    "FAIL tools/test_ch01_game_feel.gd :: exit 1 :: CH01 GAME FEEL RESULT: FAIL (98 checks, 3 failures)",
+    "FAIL tools/test_ch06_missions.gd :: exit 1 :: CH06 MISSIONS RESULT: FAIL (149 checks, 105 failures)",
+    "FAIL tools/test_ch08_missions.gd :: exit 1 :: CH08 MISSIONS RESULT: FAIL (173 checks, 123 failures)",
+    "FAIL tools/test_chapter1_campaign_flow.gd :: exit 1 :: CHAPTER 1 CAMPAIGN FLOW RESULT: FAIL (502 checks, 1 failures)",
+    "FAIL tools/test_chapter1_ui_regressions.gd :: exit 124 :: ",
+    "FAIL tools/test_chapter2_rooms.gd :: exit 1 :: CHAPTER 2 ROOMS RESULT: FAIL (3603 checks, 7 failures)",
+    "FAIL tools/test_chapter3_rooms.gd :: exit 1 :: CHAPTER 3 ROOMS RESULT: FAIL (4717 checks, 3 failures)",
+    "FAIL tools/test_chapter5_rooms.gd :: exit 1 :: CHAPTER 5 ROOMS RESULT: FAIL (2837 checks, 32 failures)",
+    "FAIL tools/test_chapter6_puzzles.gd :: exit 1 :: CHAPTER 6 PUZZLES RESULT: FAIL (18 checks, 1 failures)",
+    "FAIL tools/test_chapter6_rooms.gd :: exit 1 :: CHAPTER 6 ROOMS RESULT: FAIL (3579 checks, 33 failures)",
+    "FAIL tools/test_chapter8_puzzles.gd :: exit 1 :: CHAPTER 8 PUZZLES RESULT: FAIL (41 checks, 2 failures)",
+    "FAIL tools/test_comms.gd :: no result line",
+    "FAIL tools/test_journal_tabs.gd :: exit 1 :: JOURNAL TABS RESULT: FAIL (320 checks, 94 failures)",
+    "FAIL tools/test_outpost_status.gd :: exit 1 :: OUTPOST STATUS RESULT: FAIL (62 checks, 29 failures)",
+    "FAIL tools/test_p01_inputs.gd :: exit 1 :: P01 INPUTS RESULT: FAIL (319 checks, 1 failures)",
+    "FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (544 checks, 3 failures)"
+  ],
+  "engine_error_count": 337,
+  "script_error_count": 4,
+  "logs": [
+    {
+      "file": "full/logs/setup.log",
+      "bytes": 1033,
+      "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": []
+    },
+    {
+      "file": "full/logs/test_asset_showcase.gd.log",
+      "bytes": 162520,
+      "sha256": "570bc9e13d3ded36494d55f84363a3103c99ded356b41392aab13fc1e092651a",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "SHOWCASE RESULT: PASS (2767 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_campaign_boot.gd.log",
+      "bytes": 7867,
+      "sha256": "c7155803a87a7f3236c0d4f9633dd8385872d600740d55e3e42c7e7cb9812adf",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "CAMPAIGN BOOT RESULT: PASS (5 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_campaign_crew.gd.log",
+      "bytes": 88329,
+      "sha256": "3925e153e19b69b1ee38381e89e189a0c0850923d2410b5d3cf1aeb9fa84c4ab",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 95,
+      "result_lines": [
+        "CAMPAIGN CREW RESULT: PASS (903 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_campaign_interaction_input.gd.log",
+      "bytes": 10569,
+      "sha256": "e436c6818c05ae371fe6d7fc6765f9e87e574286104f4ce2e31720922eb428a7",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "CAMPAIGN INTERACTION INPUT RESULT: PASS (39 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_campaign_knowledge.gd.log",
+      "bytes": 11287,
+      "sha256": "5f07be89d1187437ecfd1a318bba56828efe29129c1312cdeac3c23baca218a5",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "CAMPAIGN KNOWLEDGE RESULT: PASS (47 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_campaign_later_runtime.gd.log",
+      "bytes": 55311,
+      "sha256": "e0a39a94b7bb109be5d67e18a2d22f6671b187fd22ec0d86367589d58d4b5e0e",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 60,
+      "result_lines": [
+        "LATER CAMPAIGN RUNTIME RESULT: PASS (79 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_campaign_media.gd.log",
+      "bytes": 20272,
+      "sha256": "0b279792040a7b3cd159ead0f54b0c63ae9e0bb9e1244e1f4ba032c70c574a4e",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 14,
+      "result_lines": [
+        "CAMPAIGN MEDIA RESULT: PASS (115 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_campaign_messages.gd.log",
+      "bytes": 590,
+      "sha256": "c608f985a0cd221ba1ec1c418b299a9db594670d88f694eb33fa7eb569fc47f6",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 2,
+      "result_lines": [
+        "CAMPAIGN MESSAGES RESULT: PASS (28 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_campaign_session.gd.log",
+      "bytes": 10477,
+      "sha256": "aaf5a6c09bf7fb6ed3e33486ba8c6c7fd53d58042a86046c37cb7344294b55e4",
+      "engine_errors": [
+        "ERROR: 1 RID allocations of type 'N13RendererDummy15MaterialStorage13DummyMaterialE' were leaked at exit.",
+        "ERROR: 1 RID allocations of type 'N13RendererDummy15MaterialStorage11DummyShaderE' were leaked at exit.",
+        "ERROR: 1 RID allocations of type 'N13RendererDummy9DummyMeshE' were leaked at exit.",
+        "ERROR: 3 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.",
+        "ERROR: 1 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.",
+        "ERROR: Pages in use exist at exit in PagedAllocator: N20RasterizerSceneDummy21GeometryInstanceDummyE"
+      ],
+      "script_errors": [],
+      "warning_count": 15,
+      "result_lines": [
+        "CAMPAIGN SESSION RESULT: PASS (15/15 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_care_round_panel.gd.log",
+      "bytes": 130,
+      "sha256": "a80d486a1e78bf228faf02d17593ac2c9f265d64a8ed8908f4decd8e78b80078",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CARE ROUND PANEL RESULT: PASS (32 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_care_round_props.gd.log",
+      "bytes": 130,
+      "sha256": "747e37cad5253e3a43fe9a355ddfcf0411cbb013b869a5e55a758fb9530e342e",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CARE ROUND PROPS RESULT: PASS (81 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_care_round_runtime.gd.log",
+      "bytes": 375,
+      "sha256": "aaa60be7e745ce4417434f50068adaa819f2b9386bc5441e77beaaa260b605ba",
+      "engine_errors": [
+        "ERROR: Parameter \"t\" is null."
+      ],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CARE ROUND RUNTIME RESULT: PASS (86 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_ch01_game_feel.gd.log",
+      "bytes": 13579,
+      "sha256": "0c1d293510455c71cdc03d8806b8247bfc42e94f0aff6d06f4c1a2c47d27eb43",
+      "engine_errors": [
+        "ERROR: FAIL: After dry-zero ('calibrate_probe'), P01Panel feedback reports only dry zero and directs to wet span (never claims wet-span/verification or watering yet)",
+        "ERROR: FAIL: After wet-span ('span_probe'), P01Panel feedback reports 110->100 and directs to recheck both references",
+        "ERROR: FAIL: After two-point recheck ('recheck_probe'), P01Panel feedback confirms verification and directs to seed packet"
+      ],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "CH01 GAME FEEL RESULT: FAIL (98 checks, 3 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_ch01_room_hooks.gd.log",
+      "bytes": 9458,
+      "sha256": "9ee2668d2938b266ee2ae44db2f85e4cf780cec21b4d8492f9cc85869d78a1fb",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 18,
+      "result_lines": [
+        "CH01 ROOM HOOKS RESULT: PASS (117 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_ch01_s03_route.gd.log",
+      "bytes": 432,
+      "sha256": "af1c1edd94d87ec34e6289e935dfd01d9e23bcb110f35b7f88a51888cfa05686",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CH01 S03 ROUTE RESULT: PASS (8 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_ch03_assets.gd.log",
+      "bytes": 4006,
+      "sha256": "e9571c2e72dce6a804fa8f7d0bb427e1c656343f8b9e6566c4e335fa4d81e3ba",
+      "engine_errors": [
+        "ERROR: HelmetRoles: unknown role noor"
+      ],
+      "script_errors": [],
+      "warning_count": 4,
+      "result_lines": [
+        "CH03 ASSETS RESULT: PASS (328 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_ch04_assets.gd.log",
+      "bytes": 21251,
+      "sha256": "248a5a1c8726bae32abfebd48b619e84552ff4a4123e4a5d69d1ec7f68f5653a",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 30,
+      "result_lines": [
+        "CH04_ASSETS RESULT: PASS (314 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_ch04_missions.gd.log",
+      "bytes": 40817,
+      "sha256": "888d7ac57344867f13c0cd45f0671af4d91b223dac4e1664b197075adfd11141",
+      "engine_errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-qa-20261106/.codex/task-tmp/garden-regression-post-sync/roaming/Godot/app_userdata/Last Light Academy/shader_cache\"."
+      ],
+      "script_errors": [],
+      "warning_count": 38,
+      "result_lines": [
+        "CH04 MISSIONS RESULT: PASS (134 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_ch05_assets.gd.log",
+      "bytes": 126,
+      "sha256": "4072e74c4b361afa1a11bb65221b35c13c3ff10e3f57b54f02cb3851e790ed86",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CH05 ASSETS RESULT: PASS (174 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_ch05_missions.gd.log",
+      "bytes": 44287,
+      "sha256": "baa0af280a663f0abe1f3423e9118e1a4aa9b25c3d77803c766870fa55f94c00",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CHAPTER 5 MISSIONS RESULT: PASS (890 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_ch06_missions.gd.log",
+      "bytes": 50805,
+      "sha256": "e6cf9ee3f18f7baa46704a656af564a88bbc58ab76e71c3b34359bb6ee7c4d82",
+      "engine_errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-qa-20261106/.codex/task-tmp/garden-regression-post-sync/roaming/Godot/app_userdata/Last Light Academy/shader_cache\".",
+        "ERROR: FAIL Chapter 6 entry snapshot constructed from authoritative route",
+        "ERROR: FAIL campaign boots at EX-CH06-S01 in LOC-02",
+        "ERROR: FAIL physical campaign at EX-CH06-S01",
+        "ERROR: FAIL physical target exists: p11_charge_hand_light",
+        "ERROR: FAIL EX-CH06-S01 physical target p11_charge_hand_light commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p11_charge_hand_light",
+        "ERROR: FAIL EX-CH06-S01 target p11_charge_hand_light commits cleanly after retry",
+        "ERROR: FAIL physical target exists: p11_assign_companion",
+        "ERROR: FAIL EX-CH06-S01 physical target p11_assign_companion commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p11_check_locker",
+        "ERROR: FAIL EX-CH06-S01 physical target p11_check_locker commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL EX-CH06-S01 gate ready after physical operations",
+        "ERROR: FAIL EX-CH06-S01 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH06-S02",
+        "ERROR: FAIL physical target exists: p11_read_personal_log",
+        "ERROR: FAIL EX-CH06-S02 physical target p11_read_personal_log commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p11_identify_protected_path",
+        "ERROR: FAIL EX-CH06-S02 physical target p11_identify_protected_path commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p11_identify_fault_method",
+        "ERROR: FAIL EX-CH06-S02 physical target p11_identify_fault_method commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL EX-CH06-S02 gate ready after physical operations",
+        "ERROR: FAIL EX-CH06-S02 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH06-S03",
+        "ERROR: FAIL physical target exists: p11_commit_allocation",
+        "ERROR: FAIL EX-CH06-S03 physical target p11_commit_allocation commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL EX-CH06-S03 gate ready after physical operations",
+        "ERROR: FAIL EX-CH06-S03 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH06-S04",
+        "ERROR: FAIL physical target exists: p11_remove_decorative_floods",
+        "ERROR: FAIL EX-CH06-S04 physical target p11_remove_decorative_floods commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p11_remove_decorative_floods",
+        "ERROR: FAIL EX-CH06-S04 target p11_remove_decorative_floods commits cleanly after retry",
+        "ERROR: FAIL physical target exists: p11_protect_guide_light",
+        "ERROR: FAIL EX-CH06-S04 physical target p11_protect_guide_light commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p11_protect_reserve",
+        "ERROR: FAIL EX-CH06-S04 physical target p11_protect_reserve commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL EX-CH06-S04 gate ready after physical operations",
+        "ERROR: FAIL EX-CH06-S04 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH06-S05",
+        "ERROR: FAIL physical target exists: p12_test_branch",
+        "ERROR: FAIL EX-CH06-S05 physical target p12_test_branch commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_verify_protected_services",
+        "ERROR: FAIL EX-CH06-S05 physical target p12_verify_protected_services commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_record_rehearsal",
+        "ERROR: FAIL EX-CH06-S05 physical target p12_record_rehearsal commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL EX-CH06-S05 gate ready after physical operations",
+        "ERROR: FAIL EX-CH06-S05 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH06-S06",
+        "ERROR: FAIL physical target exists: p12_check_four_roles",
+        "ERROR: FAIL EX-CH06-S06 physical target p12_check_four_roles commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_check_five_segments",
+        "ERROR: FAIL EX-CH06-S06 physical target p12_check_five_segments commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_ready_camera",
+        "ERROR: FAIL EX-CH06-S06 physical target p12_ready_camera commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL EX-CH06-S06 gate ready after physical operations",
+        "ERROR: FAIL EX-CH06-S06 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH06-S07",
+        "ERROR: FAIL physical target exists: p12_log_ingress",
+        "ERROR: FAIL EX-CH06-S07 physical target p12_log_ingress commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_log_ingress",
+        "ERROR: FAIL EX-CH06-S07 target p12_log_ingress commits cleanly after retry",
+        "ERROR: FAIL physical target exists: p12_log_ring",
+        "ERROR: FAIL EX-CH06-S07 physical target p12_log_ring commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL EX-CH06-S07 gate ready after physical operations",
+        "ERROR: FAIL EX-CH06-S07 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH06-S08",
+        "ERROR: FAIL physical target exists: p12_deliver_family_contact",
+        "ERROR: FAIL EX-CH06-S08 physical target p12_deliver_family_contact commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_preserve_observation_qualifications",
+        "ERROR: FAIL EX-CH06-S08 physical target p12_preserve_observation_qualifications commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL EX-CH06-S08 gate ready after physical operations",
+        "ERROR: FAIL EX-CH06-S08 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH06-S09",
+        "ERROR: FAIL physical target exists: p12_store_known_noor_text",
+        "ERROR: FAIL EX-CH06-S09 physical target p12_store_known_noor_text commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_reserve_live_voice",
+        "ERROR: FAIL EX-CH06-S09 physical target p12_reserve_live_voice commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL EX-CH06-S09 gate ready after physical operations",
+        "ERROR: FAIL EX-CH06-S09 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH06-S10",
+        "ERROR: FAIL physical target exists: p12_reset_sequence",
+        "ERROR: FAIL EX-CH06-S10 physical target p12_reset_sequence commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_reset_sequence",
+        "ERROR: FAIL EX-CH06-S10 target p12_reset_sequence commits cleanly after retry",
+        "ERROR: FAIL EX-CH06-S10 gate ready after physical operations",
+        "ERROR: FAIL EX-CH06-S10 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH06-S11",
+        "ERROR: FAIL physical target exists: p12_record_egress",
+        "ERROR: FAIL EX-CH06-S11 physical target p12_record_egress commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_reconcile_recovery_reserve",
+        "ERROR: FAIL EX-CH06-S11 physical target p12_reconcile_recovery_reserve commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_save_recovery",
+        "ERROR: FAIL EX-CH06-S11 physical target p12_save_recovery commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL EX-CH06-S11 gate ready after physical operations",
+        "ERROR: FAIL EX-CH06-S11 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH06-S12",
+        "ERROR: FAIL physical target exists: p12_reconcile_monitoring",
+        "ERROR: FAIL EX-CH06-S12 physical target p12_reconcile_monitoring commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_date_february_warning",
+        "ERROR: FAIL EX-CH06-S12 physical target p12_date_february_warning commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL physical target exists: p12_confirm_care_ledger",
+        "ERROR: FAIL EX-CH06-S12 physical target p12_confirm_care_ledger commits -- This operation has no physical target in the current room.",
+        "ERROR: FAIL EX-CH06-S12 gate ready after physical operations",
+        "ERROR: FAIL Chapter 6 final battery reserve matches 08 witness (E = 7; got 14.0)",
+        "ERROR: FAIL EX-CH06-S12 completes Chapter 6"
+      ],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "CH06 MISSIONS RESULT: FAIL (149 checks, 105 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_ch07_missions.gd.log",
+      "bytes": 51541,
+      "sha256": "348255ba69ef663f5cfed9668b5bd6e416ee11416feb33e221d9345e1594f705",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CHAPTER 7 MISSIONS RESULT: PASS (1038 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_ch08_missions.gd.log",
+      "bytes": 55216,
+      "sha256": "2fe7aacac039d14df38251845cf95f42f1d2d15129f6119440870c467a9066f0",
+      "engine_errors": [
+        "ERROR: FAIL Chapter 8 entry snapshot constructed from authoritative route",
+        "ERROR: FAIL campaign boots at EX-CH08-S01 in LOC-08",
+        "ERROR: FAIL physical campaign at EX-CH08-S01",
+        "ERROR: FAIL physical target exists: p15_confirm_teams",
+        "ERROR: FAIL EX-CH08-S01 physical target p15_confirm_teams commits",
+        "ERROR: FAIL physical target exists: p15_confirm_teams",
+        "ERROR: FAIL EX-CH08-S01 target p15_confirm_teams commits cleanly after retry",
+        "ERROR: FAIL physical target exists: p15_confirm_loadout",
+        "ERROR: FAIL EX-CH08-S01 physical target p15_confirm_loadout commits",
+        "ERROR: FAIL physical target exists: p15_confirm_roundtrip_provisions",
+        "ERROR: FAIL EX-CH08-S01 physical target p15_confirm_roundtrip_provisions commits",
+        "ERROR: FAIL EX-CH08-S01 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S01 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH08-S02",
+        "ERROR: FAIL physical target exists: p15_choose_surveyed_route",
+        "ERROR: FAIL EX-CH08-S02 physical target p15_choose_surveyed_route commits",
+        "ERROR: FAIL physical target exists: p15_confirm_return_reserve",
+        "ERROR: FAIL EX-CH08-S02 physical target p15_confirm_return_reserve commits",
+        "ERROR: FAIL EX-CH08-S02 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S02 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH08-S03",
+        "ERROR: FAIL physical target exists: p15_reach_marker_two",
+        "ERROR: FAIL EX-CH08-S03 physical target p15_reach_marker_two commits",
+        "ERROR: FAIL physical target exists: p15_set_brake",
+        "ERROR: FAIL EX-CH08-S03 physical target p15_set_brake commits",
+        "ERROR: FAIL physical target exists: p15_save_position_packet",
+        "ERROR: FAIL EX-CH08-S03 physical target p15_save_position_packet commits",
+        "ERROR: FAIL EX-CH08-S03 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S03 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH08-S04",
+        "ERROR: FAIL physical target exists: p15_restore_marker_2",
+        "ERROR: FAIL EX-CH08-S04 physical target p15_restore_marker_2 commits",
+        "ERROR: FAIL physical target exists: p15_restore_marker_2",
+        "ERROR: FAIL EX-CH08-S04 target p15_restore_marker_2 commits cleanly after retry",
+        "ERROR: FAIL physical target exists: p15_test_repeater_chain",
+        "ERROR: FAIL EX-CH08-S04 physical target p15_test_repeater_chain commits",
+        "ERROR: FAIL physical target exists: p15_reach_approach",
+        "ERROR: FAIL EX-CH08-S04 physical target p15_reach_approach commits",
+        "ERROR: FAIL EX-CH08-S04 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S04 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH08-S05",
+        "ERROR: FAIL physical target exists: p15_confirm_home_occupancy",
+        "ERROR: FAIL EX-CH08-S05 physical target p15_confirm_home_occupancy commits",
+        "ERROR: FAIL physical target exists: p15_confirm_segment_forecast",
+        "ERROR: FAIL EX-CH08-S05 physical target p15_confirm_segment_forecast commits",
+        "ERROR: FAIL physical target exists: p15_confirm_home_pressure",
+        "ERROR: FAIL EX-CH08-S05 physical target p15_confirm_home_pressure commits",
+        "ERROR: FAIL EX-CH08-S05 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S05 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH08-S06",
+        "ERROR: FAIL physical target exists: p15_confirm_summit",
+        "ERROR: FAIL EX-CH08-S06 physical target p15_confirm_summit commits",
+        "ERROR: FAIL physical target exists: p15_confirm_home_checks",
+        "ERROR: FAIL EX-CH08-S06 physical target p15_confirm_home_checks commits",
+        "ERROR: FAIL physical target exists: p15_receive_summit_packet",
+        "ERROR: FAIL EX-CH08-S06 physical target p15_receive_summit_packet commits",
+        "ERROR: FAIL EX-CH08-S06 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S06 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH08-S07",
+        "ERROR: FAIL physical target exists: p16_isolate_power",
+        "ERROR: FAIL EX-CH08-S07 physical target p16_isolate_power commits",
+        "ERROR: FAIL physical target exists: p16_isolate_power",
+        "ERROR: FAIL EX-CH08-S07 target p16_isolate_power commits cleanly after retry",
+        "ERROR: FAIL physical target exists: p16_zero_test",
+        "ERROR: FAIL EX-CH08-S07 physical target p16_zero_test commits",
+        "ERROR: FAIL physical target exists: p16_install_controller",
+        "ERROR: FAIL EX-CH08-S07 physical target p16_install_controller commits",
+        "ERROR: FAIL physical target exists: p16_close_housing",
+        "ERROR: FAIL EX-CH08-S07 physical target p16_close_housing commits",
+        "ERROR: FAIL physical target exists: p16_restore_power",
+        "ERROR: FAIL EX-CH08-S07 physical target p16_restore_power commits",
+        "ERROR: FAIL EX-CH08-S07 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S07 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH08-S08",
+        "ERROR: FAIL physical target exists: p16_local_bearing",
+        "ERROR: FAIL EX-CH08-S08 physical target p16_local_bearing commits",
+        "ERROR: FAIL physical target exists: p16_earth_bearing",
+        "ERROR: FAIL EX-CH08-S08 physical target p16_earth_bearing commits",
+        "ERROR: FAIL physical target exists: p16_stable_lock",
+        "ERROR: FAIL EX-CH08-S08 physical target p16_stable_lock commits",
+        "ERROR: FAIL EX-CH08-S08 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S08 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH08-S09",
+        "ERROR: FAIL physical target exists: p16_checksum",
+        "ERROR: FAIL EX-CH08-S09 physical target p16_checksum commits",
+        "ERROR: FAIL physical target exists: p16_confirm_path_records",
+        "ERROR: FAIL EX-CH08-S09 physical target p16_confirm_path_records commits",
+        "ERROR: FAIL physical target exists: p16_voice_verification_ready",
+        "ERROR: FAIL EX-CH08-S09 physical target p16_voice_verification_ready commits",
+        "ERROR: FAIL EX-CH08-S09 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S09 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH08-S10",
+        "ERROR: FAIL physical target exists: p16_noor_live_voice",
+        "ERROR: FAIL EX-CH08-S10 physical target p16_noor_live_voice commits",
+        "ERROR: FAIL physical target exists: p16_noor_live_voice",
+        "ERROR: FAIL EX-CH08-S10 target p16_noor_live_voice commits cleanly after retry",
+        "ERROR: FAIL physical target exists: p16_confirm_telemetry",
+        "ERROR: FAIL EX-CH08-S10 physical target p16_confirm_telemetry commits",
+        "ERROR: FAIL physical target exists: p16_start_return",
+        "ERROR: FAIL EX-CH08-S10 physical target p16_start_return commits",
+        "ERROR: FAIL EX-CH08-S10 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S10 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH08-S11",
+        "ERROR: FAIL physical target exists: p16_confirm_return_24h",
+        "ERROR: FAIL EX-CH08-S11 physical target p16_confirm_return_24h commits",
+        "ERROR: FAIL physical target exists: p16_confirm_five_at_aurora",
+        "ERROR: FAIL EX-CH08-S11 physical target p16_confirm_five_at_aurora commits",
+        "ERROR: FAIL physical target exists: p16_update_occupancy",
+        "ERROR: FAIL EX-CH08-S11 physical target p16_update_occupancy commits",
+        "ERROR: FAIL EX-CH08-S11 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S11 advances to next scene",
+        "ERROR: FAIL physical campaign at EX-CH08-S12",
+        "ERROR: FAIL physical target exists: p16_save_final_records",
+        "ERROR: FAIL EX-CH08-S12 physical target p16_save_final_records commits",
+        "ERROR: FAIL physical target exists: p16_save_photo",
+        "ERROR: FAIL EX-CH08-S12 physical target p16_save_photo commits",
+        "ERROR: FAIL physical target exists: p16_save_dedication",
+        "ERROR: FAIL EX-CH08-S12 physical target p16_save_dedication commits",
+        "ERROR: FAIL physical target exists: p16_make_credits_available",
+        "ERROR: FAIL EX-CH08-S12 physical target p16_make_credits_available commits",
+        "ERROR: FAIL EX-CH08-S12 gate ready after physical operations",
+        "ERROR: FAIL EX-CH08-S12 completes the campaign",
+        "ERROR: FAIL Chapter 8 final home resources match 08 witness (E5, A5.1875, H1)"
+      ],
+      "script_errors": [
+        "SCRIPT ERROR: Invalid access to property or key 'energy' on a base object of type 'Dictionary'."
+      ],
+      "warning_count": 11,
+      "result_lines": [
+        "CH08 MISSIONS RESULT: FAIL (173 checks, 123 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter1_campaign_flow.gd.log",
+      "bytes": 48868,
+      "sha256": "10d6ef440aaa56d2188c96745c263cea3c08552e659f8b40a0cc0bc2df2817a8",
+      "engine_errors": [
+        "ERROR: FAIL production player uses lunar gravity"
+      ],
+      "script_errors": [],
+      "warning_count": 18,
+      "result_lines": [
+        "CHAPTER 1 CAMPAIGN FLOW RESULT: FAIL (502 checks, 1 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter1_logic_regressions.gd.log",
+      "bytes": 2532,
+      "sha256": "8f66efbebf20ec8c411d2bc653c53428779a2d171512be3675c750d0d7bd63f3",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CHAPTER 1 LOGIC REGRESSIONS: 34 checks, 0 failures"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter1_outcomes.gd.log",
+      "bytes": 11300,
+      "sha256": "553032f580c59afd79d25ff7547beace94273a0055ce1b329c3e0fd424b46cdd",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 12,
+      "result_lines": [
+        "CHAPTER 1 OUTCOMES RESULT: PASS (134 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter1_ui_regressions.gd.log",
+      "bytes": 17135,
+      "sha256": "75bb5266992353fe91c003754a6ffbeab315e5f5b1e58dbb97313ec6f73d1f50",
+      "engine_errors": [
+        "ERROR: Traversal failed: calibrate_probe { \"accepted\": false, \"trace\": { \"focus\": { \"accepted\": true, \"focused\": true, \"target\": { \"target_id\": \"calibrate_probe\", \"room_id\": \"LOC-01\", \"focus_label\": \"Calibrate dry and wet references\", \"world_focus_id\": \"commons_mission_table\", \"verb\": \"Use\", \"command_verb\": \"set_phase\", \"command_target_id\": \"WORLD_PHYSICAL\", \"command_id\": \"physical:calibrate_probe\", \"owning_mission_id\": \"EX-M0101\", \"owning_scene_id\": \"EX-CH01-S03\", \"physical_flag\": \"\", \"required_flags\": [], \"unmet_reason\": \"Complete the preceding physical check before using this target.\", \"readout\": \"Calibrate dry and wet references\", \"range_m\": 3.0, \"line_of_sight_required\": false, \"puzzle_id\": \"P-01\", \"puzzle_action\": \"set_zero\" } }, \"inspect\": { \"accepted\": true, \"phase\": \"inspect\", \"target_id\": \"calibrate_probe\", \"label\": \"Calibrate dry and wet references\", \"readout\": \"Calibrate dry and wet references\", \"evidence_tag\": \"Simulated\", \"command_emitted\": false }, \"use\": { \"accepted\": true, \"phase\": \"use\", \"target_id\": \"calibrate_probe\", \"payload\": { \"reference\": \"dry\", \"raw_reading\": 10, \"calibrated_reading\": 0, \"_puzzle_action\": \"set_zero\" }, \"next\": \"preview\", \"command_emitted\": false }, \"preview\": { \"accepted\": false, \"duplicate\": false, \"reason\": \"Carry the probe from its rack to the bench cradle and read the dry zero first.\" } }, \"reason\": \"Carry the probe from its rack to the bench cradle and read the dry zero first.\" }",
+        "ERROR: Traversal failed: span_probe { \"accepted\": false, \"trace\": { \"focus\": { \"accepted\": false, \"duplicate\": false, \"reason\": \"Complete the preceding physical check before using this target.\", \"command_emitted\": false } }, \"reason\": \"Complete the preceding physical check before using this target.\" }",
+        "ERROR: Traversal failed: recheck_probe { \"accepted\": false, \"trace\": { \"focus\": { \"accepted\": false, \"duplicate\": false, \"reason\": \"Complete the preceding physical check before using this target.\", \"command_emitted\": false } }, \"reason\": \"Complete the preceding physical check before using this target.\" }",
+        "ERROR: Traversal failed: inspect_packet { \"accepted\": false, \"trace\": { \"focus\": { \"accepted\": false, \"duplicate\": false, \"reason\": \"Complete the preceding physical check before using this target.\", \"command_emitted\": false } }, \"reason\": \"Complete the preceding physical check before using this target.\" }",
+        "ERROR: Traversal failed: compare_atmosphere { \"accepted\": false, \"trace\": { \"focus\": { \"accepted\": false, \"duplicate\": false, \"reason\": \"Complete the preceding physical check before using this target.\", \"command_emitted\": false } }, \"reason\": \"Complete the preceding physical check before using this target.\" }",
+        "ERROR: Node not found: \"PL_Alo_Bud\" (relative to \"/root/LastLightAcademy/Chapter1Campaign/Commons/VisualRoot\").",
+        "ERROR: BUG: Unreferenced static string to 0: NavMapBuilder3D",
+        "ERROR: BUG: Unreferenced static string to 0: _exit_world",
+        "ERROR: BUG: Unreferenced static string to 0: current_state",
+        "ERROR: BUG: Unreferenced static string to 0: prev_xfading",
+        "ERROR: BUG: Unreferenced static string to 0: prev_index",
+        "ERROR: BUG: Unreferenced static string to 0: current_index",
+        "ERROR: BUG: Unreferenced static string to 0: transition_request",
+        "ERROR: BUG: Unreferenced static string to 0: sub_amount",
+        "ERROR: BUG: Unreferenced static string to 0: add_amount",
+        "ERROR: BUG: Unreferenced static string to 0: seek_request",
+        "ERROR: BUG: Unreferenced static string to 0: _compression",
+        "ERROR: BUG: Unreferenced static string to 0: Physics3DConstraintSolveIslands",
+        "ERROR: BUG: Unreferenced static string to 0: Physics3DConstraintSetup",
+        "ERROR: BUG: Unreferenced static string to 0: _request_gizmo_for_id",
+        "ERROR: BUG: Unreferenced static string to 0: servers",
+        "ERROR: BUG: Unreferenced static string to 0: _enter_world",
+        "ERROR: BUG: Unreferenced static string to 0: @warning_ignore_restore",
+        "ERROR: BUG: Unreferenced static string to 0: @warning_ignore_start",
+        "ERROR: BUG: Unreferenced static string to 0: @warning_ignore",
+        "ERROR: BUG: Unreferenced static string to 0: @export_flags",
+        "ERROR: BUG: Unreferenced static string to 0: @export_node_path",
+        "ERROR: BUG: Unreferenced static string to 0: @export_placeholder",
+        "ERROR: BUG: Unreferenced static string to 0: @export_multiline",
+        "ERROR: BUG: Unreferenced static string to 0: @export_enum",
+        "ERROR: BUG: Unreferenced static string to 0: @icon",
+        "ERROR: 7 RID allocations of type '23NavMeshGeometryParser2D' were leaked at exit.",
+        "ERROR: 6 RID allocations of type '23NavMeshGeometryParser3D' were leaked at exit.",
+        "ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools11BucketLargeE"
+      ],
+      "script_errors": [
+        "SCRIPT ERROR: Invalid access to property or key 'visible' on a base object of type 'null instance'."
+      ],
+      "warning_count": 12,
+      "result_lines": []
+    },
+    {
+      "file": "full/logs/test_chapter2_rooms.gd.log",
+      "bytes": 28901,
+      "sha256": "61eca5db1f406f6daac2ff782c428053e93422fd916b0eac78679951e9505304",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 47,
+      "result_lines": [
+        "FAIL EX-CH02-S01 staged object rests on the deck, a wall or a surface (base 1.231 m): alo_holder",
+        "FAIL EX-CH02-S01 staged object rests on the deck, a wall or a surface (base 1.161 m): tara_holder",
+        "FAIL EX-CH02-S02 staged object rests on the deck, a wall or a surface (base 1.231 m): alo_holder",
+        "FAIL EX-CH02-S02 staged object rests on the deck, a wall or a surface (base 1.161 m): tara_holder",
+        "FAIL EX-CH02-S06 staged object rests on the deck, a wall or a surface (base 1.231 m): alo_holder",
+        "FAIL EX-CH02-S06 staged object rests on the deck, a wall or a surface (base 1.161 m): tara_holder",
+        "FAIL Chapter 1 shows no Chapter 2 staging after re-staging",
+        "CHAPTER 2 ROOMS RESULT: FAIL (3603 checks, 7 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter2_route.gd.log",
+      "bytes": 4831,
+      "sha256": "c93ea39e04ffde384d7dcc80b27ea67246361f80d100c8a659bcf999446cb0b3",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CHAPTER 2 ROUTE RESULT: PASS (104 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter3_rooms.gd.log",
+      "bytes": 29736,
+      "sha256": "5f19d03f8ddff150e84ccff258f1fdbf46b29df33b0f25a59a76dc3b11630f6a",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 43,
+      "result_lines": [
+        "FAIL EX-CH03-S09 staged label reads from walkable deck: ALO",
+        "FAIL EX-CH03-S09 staged label reads from walkable deck: ALO-01  |  purple stem",
+        "FAIL the Chapter 1 garden is unchanged after Chapter 3",
+        "CHAPTER 3 ROOMS RESULT: FAIL (4717 checks, 3 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter4_puzzles.gd.log",
+      "bytes": 16079,
+      "sha256": "aef37423c487e24f91191393e15d74b52d99755a6ef72ef7751ebb536685cdeb",
+      "engine_errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-qa-20261106/.codex/task-tmp/garden-regression-post-sync/roaming/Godot/app_userdata/Last Light Academy/shader_cache\"."
+      ],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "CHAPTER 4 PUZZLES RESULT: PASS (65 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter4_rooms.gd.log",
+      "bytes": 68236,
+      "sha256": "42950f70cac0b3614b5e27db107f2fdd2a1b231c131b7d8535cdba976d5d3b29",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 120,
+      "result_lines": [
+        "CHAPTER 4 ROOMS RESULT: PASS (2450 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter5_rooms.gd.log",
+      "bytes": 35548,
+      "sha256": "8d4dd4da7cdeee03695a09b83d6f4b7c618b32580c7b3a2e4047a1e952508c7e",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 57,
+      "result_lines": [
+        "FAIL EX-CH05-S03 staged label reads from walkable deck: F",
+        "FAIL EX-CH05-S03 staged label reads from walkable deck: E",
+        "FAIL EX-CH05-S03 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S03 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S03 staged label reads from walkable deck: E",
+        "FAIL EX-CH05-S03 staged label reads from walkable deck: I",
+        "FAIL EX-CH05-S03 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S03 staged label reads from walkable deck: A",
+        "FAIL EX-CH05-S04 staged label reads from walkable deck: F",
+        "FAIL EX-CH05-S04 staged label reads from walkable deck: E",
+        "FAIL EX-CH05-S04 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S04 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S04 staged label reads from walkable deck: E",
+        "FAIL EX-CH05-S04 staged label reads from walkable deck: I",
+        "FAIL EX-CH05-S04 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S04 staged label reads from walkable deck: A",
+        "FAIL EX-CH05-S05 staged label reads from walkable deck: F",
+        "FAIL EX-CH05-S05 staged label reads from walkable deck: E",
+        "FAIL EX-CH05-S05 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S05 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S05 staged label reads from walkable deck: E",
+        "FAIL EX-CH05-S05 staged label reads from walkable deck: I",
+        "FAIL EX-CH05-S05 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S05 staged label reads from walkable deck: A",
+        "FAIL EX-CH05-S11 staged label reads from walkable deck: F",
+        "FAIL EX-CH05-S11 staged label reads from walkable deck: E",
+        "FAIL EX-CH05-S11 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S11 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S11 staged label reads from walkable deck: E",
+        "FAIL EX-CH05-S11 staged label reads from walkable deck: I",
+        "FAIL EX-CH05-S11 staged label reads from walkable deck: R",
+        "FAIL EX-CH05-S11 staged label reads from walkable deck: A",
+        "CHAPTER 5 ROOMS RESULT: FAIL (2837 checks, 32 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter6_puzzles.gd.log",
+      "bytes": 1942,
+      "sha256": "e9b989d41aaeae27fc3d3c9f7cc3a59f964cf7504ee3fe5a61894b0e5d56d3f9",
+      "engine_errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-qa-20261106/.codex/task-tmp/garden-regression-post-sync/roaming/Godot/app_userdata/Last Light Academy/shader_cache\".",
+        "ERROR: FAIL the campaign reaches Chapter 6 S01"
+      ],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CHAPTER 6 PUZZLES RESULT: FAIL (18 checks, 1 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter6_rooms.gd.log",
+      "bytes": 31917,
+      "sha256": "2e4c53fc6f9f6b7115adea67a7ac9ed2643b8c9bfb9850c6894ceac4e2ab8384",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 44,
+      "result_lines": [
+        "FAIL EX-CH06-S06 staged label reads from walkable deck: F",
+        "FAIL EX-CH06-S06 staged label reads from walkable deck: E",
+        "FAIL EX-CH06-S06 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S06 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S06 staged label reads from walkable deck: E",
+        "FAIL EX-CH06-S06 staged label reads from walkable deck: I",
+        "FAIL EX-CH06-S06 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S06 staged label reads from walkable deck: A",
+        "FAIL EX-CH06-S07 staged label reads from walkable deck: F",
+        "FAIL EX-CH06-S07 staged label reads from walkable deck: E",
+        "FAIL EX-CH06-S07 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S07 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S07 staged label reads from walkable deck: E",
+        "FAIL EX-CH06-S07 staged label reads from walkable deck: I",
+        "FAIL EX-CH06-S07 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S07 staged label reads from walkable deck: A",
+        "FAIL EX-CH06-S08 staged label reads from walkable deck: F",
+        "FAIL EX-CH06-S08 staged label reads from walkable deck: E",
+        "FAIL EX-CH06-S08 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S08 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S08 staged label reads from walkable deck: E",
+        "FAIL EX-CH06-S08 staged label reads from walkable deck: I",
+        "FAIL EX-CH06-S08 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S08 staged label reads from walkable deck: A",
+        "FAIL EX-CH06-S09 staged label reads from walkable deck: F",
+        "FAIL EX-CH06-S09 staged label reads from walkable deck: E",
+        "FAIL EX-CH06-S09 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S09 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S09 staged label reads from walkable deck: E",
+        "FAIL EX-CH06-S09 staged label reads from walkable deck: I",
+        "FAIL EX-CH06-S09 staged label reads from walkable deck: R",
+        "FAIL EX-CH06-S09 staged label reads from walkable deck: A",
+        "FAIL the Chapter 1 garden is unchanged",
+        "CHAPTER 6 ROOMS RESULT: FAIL (3579 checks, 33 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter7_assets.gd.log",
+      "bytes": 8556,
+      "sha256": "59816514538439582ec16e8503775febf5271702521c43de96b3c0496e3b195b",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 16,
+      "result_lines": [
+        "CHAPTER7 ASSETS RESULT: PASS (254 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter7_rooms.gd.log",
+      "bytes": 43795,
+      "sha256": "60e0d9692a9751c5398dee88c02e639ebc978b0a9c26198c8a22aa9639c27937",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 71,
+      "result_lines": [
+        "CHAPTER 7 ROOMS RESULT: PASS (3373 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter8_assets.gd.log",
+      "bytes": 10323,
+      "sha256": "fd1354a7977a6d43d35b6ea19a04ec539bfb7b753e4047b24510ecf0077ca1ed",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 18,
+      "result_lines": [
+        "CHAPTER8 ASSETS RESULT: PASS (219 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter8_puzzles.gd.log",
+      "bytes": 12915,
+      "sha256": "3def9557b9b466d4c1ceaa4798befa63c924732a2daed438d0055233ae98ba20",
+      "engine_errors": [
+        "ERROR: FAIL Chapter 3\u20137 witness defaults are untouched",
+        "ERROR: FAIL the campaign reaches the Chapter 8 departure board"
+      ],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CHAPTER 8 PUZZLES RESULT: FAIL (41 checks, 2 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter8_rooms.gd.log",
+      "bytes": 84497,
+      "sha256": "a971aaaaf43d944b2dd13ff0865e52cd67cf19d43fac0fbf42be168ee46470ae",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 158,
+      "result_lines": [
+        "CHAPTER 8 ROOMS RESULT: PASS (1328 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_chapter_select.gd.log",
+      "bytes": 812,
+      "sha256": "9513fdc2dd9363fce2b52b144c8cedfa01090e236699d76f2baaf666dff64b49",
+      "engine_errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-qa-20261106/.codex/task-tmp/garden-regression-post-sync/roaming/Godot/app_userdata/Last Light Academy/shader_cache\"."
+      ],
+      "script_errors": [],
+      "warning_count": 1,
+      "result_lines": [
+        "CHAPTER SELECT RESULT: PASS (116 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_comms.gd.log",
+      "bytes": 11228,
+      "sha256": "554173b9a38668d3ca1e46a8e6ce27628d53618f5a68f0a5df3c0eacfa97ca0d",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "test_comms: PASS (45 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_cutscene_choice_card.gd.log",
+      "bytes": 2708,
+      "sha256": "954b935f28b93883f041287fb06e4cf6ca032b0b0cff7b6f352ff9eaf6da46f7",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "CUTSCENE CHOICE CARD RESULT: PASS (47 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_director_message_metadata.gd.log",
+      "bytes": 4496,
+      "sha256": "ba8ce03c41ec8a8e0639219259145fd00da0a23343ae7b2a17e0e552255db50b",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "DIRECTOR MESSAGE METADATA RESULT: PASS (76 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_earth_screen.gd.log",
+      "bytes": 13429,
+      "sha256": "58c88fb445a209012d236cb4ab160865c5c3eb9290bceff25a34a48a2be86ec7",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "EARTH SCREEN RESULT: PASS (49 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_eclipse_props.gd.log",
+      "bytes": 9624,
+      "sha256": "18d45653e5863a8d6b26df4618a73556795040255b021f827f5b5edb75b11848",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 18,
+      "result_lines": [
+        "ECLIPSE PROPS RESULT: PASS (567 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_eclipse_rim_gate.gd.log",
+      "bytes": 130,
+      "sha256": "7e3a41b87c727e68607e84a463f0462836c295bec550f5062c021e07e6cf8960",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "ECLIPSE RIM GATE RESULT: PASS (65 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_en_airlock.gd.log",
+      "bytes": 9927,
+      "sha256": "991fae4ec03d77884dad4438a1eb619de4c6e968bcecf3b640784a557da16edb",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 14,
+      "result_lines": [
+        "EN_AIRLOCK RESULT: PASS (145 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_eva.gd.log",
+      "bytes": 17394,
+      "sha256": "6646607a04df516099b53ec3af2d82fa58dc8238d9271923de5f8b07c35dfc1b",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 17,
+      "result_lines": [
+        "EVA RESULT: PASS (53 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_explainers.gd.log",
+      "bytes": 125,
+      "sha256": "dba7c0280471bc2819afc305a79c7f92ce23ceb4a661366a1310aef9b3e3e519",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "EXPLAINERS RESULT: PASS (321 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_extended_campaign_route.gd.log",
+      "bytes": 30422,
+      "sha256": "c2868d2df27811df6856c0e9502c104a7a0c56d7ddc036957a84b016fbeede53",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "EXTENDED CAMPAIGN ROUTE RESULT: PASS (639 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_exterior_terrain.gd.log",
+      "bytes": 226945,
+      "sha256": "617c70e89a567cf2a9b5a2901ed290a458dc1e11bc5815fa6d9147951bd5c5e5",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 251,
+      "result_lines": [
+        "EXTERIOR TERRAIN RESULT: PASS (1109 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_face_atlas.gd.log",
+      "bytes": 1018,
+      "sha256": "da5af4deb3332d29cce3ef418c471371a97315152115b4c14588e6e7fac127b5",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": []
+    },
+    {
+      "file": "full/logs/test_face_expression.gd.log",
+      "bytes": 3608,
+      "sha256": "813fc97a21b92f0a66a58c4d0fd8c47e0d2a65ef7986be177255b92857bec278",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": []
+    },
+    {
+      "file": "full/logs/test_first_five_minutes.gd.log",
+      "bytes": 132,
+      "sha256": "df7ccf18da2063201265ff3fb6192dcb98f59c925c76b82f7a0f85ad645f00c3",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "FIRST FIVE MINUTES RESULT: PASS (57 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_garden_collision.gd.log",
+      "bytes": 8677,
+      "sha256": "4ed21f0637ded39d4061e7465799849526fd1d5c99c5fc365f74d339fb36fda0",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "GARDEN COLLISION RESULT: PASS (19 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_garden_movement.gd.log",
+      "bytes": 11480,
+      "sha256": "1b87dc84ea460946b896922d97d25a5d0587ee83f4647f85230a698f7b65858e",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 14,
+      "result_lines": [
+        "GARDEN MOVEMENT RESULT: PASS (54 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_habitat_kit.gd.log",
+      "bytes": 12312,
+      "sha256": "9ca16e2cbfc8bc6d28aba587a41ec566816b631ff369c562729cdc671acc5c63",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 22,
+      "result_lines": [
+        "HABITAT KIT RESULT: PASS (225 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_habitat_rooms.gd.log",
+      "bytes": 7039,
+      "sha256": "0e2535c0185ed85b9b05e772236b21940f360adddca72c57cc33a47ac42d90b4",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 15,
+      "result_lines": [
+        "HABITAT ROOMS RESULT: PASS (360 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_hair_springs.gd.log",
+      "bytes": 397,
+      "sha256": "5624830a56942c4a92ed402a1ac37a6459d77d3f1755e8b32d91a20ad0582fd4",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": []
+    },
+    {
+      "file": "full/logs/test_hazards.gd.log",
+      "bytes": 1508,
+      "sha256": "384b7de90a3c937c3139cce3461895bcfcfad7b01d0f8fa0a461a4e59128cfc5",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "HAZARDS RESULT: PASS (19 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_hint_player.gd.log",
+      "bytes": 11787,
+      "sha256": "6e5b069d1b74e4f3884e4b3005af8ff2172fbff66a533ace56aa0b44ff811690",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "HINT PLAYER RESULT: PASS (124 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_hud_world_lifetime.gd.log",
+      "bytes": 10604,
+      "sha256": "1876f5f7f2c940939af72d13446c0b0c83480e58e6901ad5be3b363f8a1f33b8",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 12,
+      "result_lines": [
+        "HUD WORLD LIFETIME RESULT: PASS (13 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_journal_tabs.gd.log",
+      "bytes": 17734,
+      "sha256": "d62a892532fc2a3adbfead4235942635fafd11825220c7a78d7f15b94bd3ef7f",
+      "engine_errors": [
+        "ERROR: Can't take value from empty array.",
+        "ERROR: Node not found: \"LifecycleTrack\" (relative to \"/root/CampaignPanels/@PanelContainer@3/@MarginContainer@4/@VBoxContainer@5/@HBoxContainer@9/@ScrollContainer@12/@VBoxContainer@13\")."
+      ],
+      "script_errors": [
+        "SCRIPT ERROR: Invalid access to property or key 'frames' on a base object of type 'Nil'.",
+        "SCRIPT ERROR: Cannot call method 'get_children' on a null value."
+      ],
+      "warning_count": 11,
+      "result_lines": [
+        "JOURNAL TABS RESULT: FAIL (320 checks, 94 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_later_numeric.gd.log",
+      "bytes": 128,
+      "sha256": "d4924a6ed87f950bf3586667fcc6189b84ff6ed2b4ad2b89bda916445bdf56f3",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "LATER NUMERIC RESULT: PASS (388 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_lip_sync.gd.log",
+      "bytes": 1285,
+      "sha256": "3a526b52af399797652c22f81bcf4521cf71c2f70303e698ef54404b67e824d5",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 2,
+      "result_lines": []
+    },
+    {
+      "file": "full/logs/test_loading.gd.log",
+      "bytes": 36097,
+      "sha256": "4dc977b8dcc1c4e01bf9302b6f29d3a90b7f64d85f1c944488c91f4a3259b986",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 54,
+      "result_lines": [
+        "LOADING WATCHDOG RESULT: PASS (29 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_lunar_kit.gd.log",
+      "bytes": 123,
+      "sha256": "ceb4e3307aa99d2b7cdcce6002fd7e66e2a4105c9e3d98adedcd7ee1a99029eb",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "LUNAR KIT RESULT: PASS (89 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_m155_mission_table.gd.log",
+      "bytes": 133,
+      "sha256": "8ca3f9268808d0abad469b02e1c9dc877271fe570935e28a6c21afc4a67fa02e",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "M155 MISSION TABLE RESULT: PASS (109 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_main_menu_contrast.gd.log",
+      "bytes": 705,
+      "sha256": "239165a9470efc2b5d9b91d02796d1cab8bcbc8c4fe22f176a4303174646dd4a",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "MAIN MENU CONTRAST RESULT: PASS (154 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_mission_table_lifetime.gd.log",
+      "bytes": 136,
+      "sha256": "795614995fe4c996a95f6559715459b2b2b8a6559c2bd83de10269ecae18a030",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "MISSION TABLE LIFETIME RESULT: PASS (11 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_mission_trainer.gd.log",
+      "bytes": 683,
+      "sha256": "bda7d2758159170ba301db302f4892e6845f05e54fbf9554054998ef479318a4",
+      "engine_errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-qa-20261106/.codex/task-tmp/garden-regression-post-sync/roaming/Godot/app_userdata/Last Light Academy/shader_cache\"."
+      ],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "MISSION TRAINER RESULT: PASS (951 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_moon_region.gd.log",
+      "bytes": 28557,
+      "sha256": "e682f28d15cb27b7d3b7503018128c34cd2b22431f154c0cfae31f60f06a2896",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 35,
+      "result_lines": [
+        "MOON REGION RESULT: PASS (511 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_moon_trainer.gd.log",
+      "bytes": 46445,
+      "sha256": "82512e8e8170f8f83ab908dc8c2091c1d699ed7b2413738623fb033e85fd254d",
+      "engine_errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-qa-20261106/.codex/task-tmp/garden-regression-post-sync/roaming/Godot/app_userdata/Last Light Academy/shader_cache\".",
+        "ERROR: Initializing already initialized RID",
+        "ERROR: Parameter \"mem\" is null.",
+        "ERROR: Parameter \"material\" is null.",
+        "ERROR: Parameter \"material\" is null.",
+        "ERROR: Attempting to initialize the wrong RID",
+        "ERROR: Parameter \"mem\" is null.",
+        "ERROR: Attempting to use an uninitialized RID",
+        "ERROR: Parameter \"m\" is null.",
+        "ERROR: Attempting to use an uninitialized RID",
+        "ERROR: Parameter \"m\" is null.",
+        "ERROR: Attempting to use an uninitialized RID",
+        "ERROR: Parameter \"m\" is null.",
+        "ERROR: Parameter \"m\" is null.",
+        "ERROR: Parameter \"material\" is null.",
+        "ERROR: 6 RID allocations of type 'N13RendererDummy15MaterialStorage13DummyMaterialE' were leaked at exit.",
+        "ERROR: 2 RID allocations of type 'N13RendererDummy15MaterialStorage11DummyShaderE' were leaked at exit.",
+        "ERROR: 6 RID allocations of type 'N13RendererDummy9DummyMeshE' were leaked at exit.",
+        "ERROR: 8 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.",
+        "ERROR: 6 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.",
+        "ERROR: Pages in use exist at exit in PagedAllocator: N20RasterizerSceneDummy21GeometryInstanceDummyE"
+      ],
+      "script_errors": [],
+      "warning_count": 42,
+      "result_lines": [
+        "MOON TRAINER RESULT: PASS (110 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_narrative_props.gd.log",
+      "bytes": 5596,
+      "sha256": "f6123dfed157355b46a2b867cfd42c21a19e21c1dd0646dadd611f8c0694f5ca",
+      "engine_errors": [
+        "ERROR: Unknown narrative prop variant: PR_Mug_Named/NOBODY"
+      ],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "NARRATIVE PROPS RESULT: PASS (401 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_network.gd.log",
+      "bytes": 1973,
+      "sha256": "8197232f984db99ff0ec864265d08179397e381de20097b677b378ca740a2318",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "NETWORK RESULT: PASS (35 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_outpost_status.gd.log",
+      "bytes": 18680,
+      "sha256": "b0d6261f1597cadf9ef4866a90718df68b3c7b49e5a2b51e6fc8b7d2a485f320",
+      "engine_errors": [
+        "ERROR: FAIL setup follows real prerequisite: calibrate_probe",
+        "ERROR: FAIL setup follows real prerequisite: span_probe",
+        "ERROR: FAIL setup follows real prerequisite: recheck_probe",
+        "ERROR: FAIL setup follows real prerequisite: inspect_packet",
+        "ERROR: FAIL setup follows real prerequisite: compare_atmosphere",
+        "ERROR: FAIL setup advances real scene: EX-CH01-S03",
+        "ERROR: FAIL setup follows real prerequisite: plant_alo",
+        "ERROR: FAIL setup follows real prerequisite: plant_tara",
+        "ERROR: FAIL setup follows real prerequisite: water_alo",
+        "ERROR: FAIL setup follows real prerequisite: water_tara",
+        "ERROR: FAIL setup follows real prerequisite: label_alo",
+        "ERROR: FAIL setup follows real prerequisite: label_tara",
+        "ERROR: FAIL setup follows real prerequisite: seal_alo",
+        "ERROR: FAIL setup follows real prerequisite: seal_tara",
+        "ERROR: FAIL setup follows real prerequisite: record_paired_conditions",
+        "ERROR: FAIL setup follows real prerequisite: confirm_services",
+        "ERROR: FAIL setup advances real scene: EX-CH01-S04",
+        "ERROR: FAIL setup follows real prerequisite: test_hand_light",
+        "ERROR: FAIL setup follows real prerequisite: care_montage",
+        "ERROR: FAIL setup follows real prerequisite: confirm_date_transition",
+        "ERROR: FAIL setup advances real scene: EX-CH01-S05",
+        "ERROR: FAIL setup follows real prerequisite: arrange_timeline",
+        "ERROR: FAIL setup follows real prerequisite: ack_schedule",
+        "ERROR: FAIL setup advances real scene: EX-CH01-S06",
+        "ERROR: FAIL read the shift role facts before forecasting",
+        "ERROR: FAIL P-02 forecast preserves resources, receipts, time and biology",
+        "ERROR: FAIL power preview includes an arrow and signed delta",
+        "ERROR: FAIL food preview shows the real ration cost",
+        "ERROR: FAIL forecast and the real commit agree for every resource"
+      ],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "OUTPOST STATUS RESULT: FAIL (62 checks, 29 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_p01_inputs.gd.log",
+      "bytes": 11483,
+      "sha256": "91988d98d4a7d3324b01e3bc25ef5a61540eaf9cedc9117b2ee4079eac03194a",
+      "engine_errors": [
+        "ERROR: FAIL campaign forecast has no live mutation"
+      ],
+      "script_errors": [],
+      "warning_count": 12,
+      "result_lines": [
+        "P01 INPUTS RESULT: FAIL (319 checks, 1 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_p01_labels.gd.log",
+      "bytes": 125,
+      "sha256": "1e939423664f6cf0ba6fe64501b821b6a43057471737b45845bb189dff73177c",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "P01 LABELS RESULT: PASS (104 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_p01_nearby.gd.log",
+      "bytes": 10510,
+      "sha256": "d61165ab9eeee3ef99dd0d2d7736da1bd5440b7b419db02044a5b07e9c20245a",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 12,
+      "result_lines": [
+        "P01 NEARBY RESULT: PASS (30 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_p01_panel.gd.log",
+      "bytes": 10366,
+      "sha256": "c76b25e541b3e6a170006b97164e32994e896b7af1235d75a257dcd2f2396b84",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "P01 PANEL RESULT: PASS (140 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_p02_mission_table.gd.log",
+      "bytes": 17022,
+      "sha256": "bb7bafd3d3455d1c76b6b28c756278cca0ffe5ddb1619380229876ecc6599639",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "P02 MISSION TABLE RESULT: PASS (78 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_p03_p04_content.gd.log",
+      "bytes": 130,
+      "sha256": "1a1406b21bfb691cffab12d0cd2f1e6da2700527eff40070f38738e583e6ca7c",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "P03 P04 CONTENT RESULT: PASS (303 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_p09_p10_panels.gd.log",
+      "bytes": 129,
+      "sha256": "c56f719790f0967d94d323172398c9c3a722159094dbc86768aa5d641ad70cf8",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "P09 P10 PANELS RESULT: PASS (330 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_p13_p14_panels.gd.log",
+      "bytes": 129,
+      "sha256": "066c850842549cd83444e906db7c44b5dd52f8e89b71679cffddcf03cd329151",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "P13 P14 PANELS RESULT: PASS (406 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_payload.gd.log",
+      "bytes": 10958,
+      "sha256": "983cd9d6a94fa756c9aae341c04ff92a2d176cd495a21ce2750d5a3571d9c3a2",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "PAYLOAD RESULT: PASS (162 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_performance_runtime.gd.log",
+      "bytes": 17519,
+      "sha256": "038a138da4267ce143f35e8ccdcdbf234467bbdb7c577d22421037a9028e69b1",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 15,
+      "result_lines": [
+        "FAIL production new campaign main-thread interval <50 ms (77.264)",
+        "FAIL production garden entry main-thread interval <50 ms (50.784)",
+        "FAIL production full cast entry main-thread interval <50 ms (51.851)",
+        "PERFORMANCE RUNTIME RESULT: FAIL (544 checks, 3 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_plant_seedlings.gd.log",
+      "bytes": 7748,
+      "sha256": "ea64f1626f61ceabae5914a109ef49f683757f5a2fb8d3ba208746019d12bfd6",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 8,
+      "result_lines": [
+        "PLANT SEEDLINGS RESULT: PASS (86 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "full/logs/test_player_controller.gd.log",
+      "bytes": 10081,
+      "sha256": "f6eae7c566514c891dca7fb29c0996ea31fd58e0d941af6ca99eee18f1349291",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": [
+        "PLAYER RESULT: PASS (105 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "garden/logs/setup.log",
+      "bytes": 46123,
+      "sha256": "d0b5db3c2df7c5547876946cbf0bb5fd41a06b50cdacba077fb0ec9b839c964d",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": []
+    },
+    {
+      "file": "garden/logs/test_garden_collision.gd.log",
+      "bytes": 8677,
+      "sha256": "4ed21f0637ded39d4061e7465799849526fd1d5c99c5fc365f74d339fb36fda0",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 11,
+      "result_lines": [
+        "GARDEN COLLISION RESULT: PASS (19 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "garden/logs/test_garden_movement.gd.log",
+      "bytes": 11480,
+      "sha256": "1b87dc84ea460946b896922d97d25a5d0587ee83f4647f85230a698f7b65858e",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 14,
+      "result_lines": [
+        "GARDEN MOVEMENT RESULT: PASS (54 checks, 0 failures)"
+      ]
+    },
+    {
+      "file": "habitat_rooms/logs/setup.log",
+      "bytes": 1033,
+      "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "result_lines": []
+    },
+    {
+      "file": "habitat_rooms/logs/test_habitat_rooms.gd.log",
+      "bytes": 7039,
+      "sha256": "0e2535c0185ed85b9b05e772236b21940f360adddca72c57cc33a47ac42d90b4",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 15,
+      "result_lines": [
+        "HABITAT ROOMS RESULT: PASS (360 checks, 0 failures)"
+      ]
+    }
+  ]
+}

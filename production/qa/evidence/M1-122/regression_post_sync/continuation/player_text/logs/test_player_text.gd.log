@@ -1,0 +1,2160 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: 'res://assets/environment/kit/EN_Kit_BulkheadRing_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_player_text.gd:47)
+       [4] _walk_care_round (res://tools/test_player_text.gd:342)
+WARNING: 'res://assets/environment/kit/EN_Kit_CableRun_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_player_text.gd:47)
+       [4] _walk_care_round (res://tools/test_player_text.gd:342)
+WARNING: 'res://assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_player_text.gd:47)
+       [4] _walk_care_round (res://tools/test_player_text.gd:342)
+WARNING: 'res://assets/environment/kit/EN_Kit_DoorFrame_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_player_text.gd:47)
+       [4] _walk_care_round (res://tools/test_player_text.gd:342)
+WARNING: 'res://assets/environment/kit/EN_Kit_FloorTile_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_player_text.gd:47)
+       [4] _walk_care_round (res://tools/test_player_text.gd:342)
+WARNING: 'res://assets/environment/kit/EN_Kit_Hatch_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_player_text.gd:47)
+       [4] _walk_care_round (res://tools/test_player_text.gd:342)
+WARNING: 'res://assets/environment/kit/EN_Kit_PipeRun_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_player_text.gd:47)
+       [4] _walk_care_round (res://tools/test_player_text.gd:342)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_player_text.gd:47)
+       [4] _walk_care_round (res://tools/test_player_text.gd:342)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_player_text.gd:47)
+       [4] _walk_care_round (res://tools/test_player_text.gd:342)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_player_text.gd:47)
+       [4] _walk_care_round (res://tools/test_player_text.gd:342)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Window_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_player_text.gd:47)
+       [4] _walk_care_round (res://tools/test_player_text.gd:342)
+ROOT Agree distance=1.220700 m speed=0.093600 m/s (removed)
+ROOT Cheer distance=0.256177 m speed=0.086595 m/s (removed)
+ROOT KneelStand distance=0.373088 m speed=0.144421 m/s (removed)
+ROOT PickUp distance=0.317017 m speed=0.043979 m/s (removed)
+ROOT Push distance=0.978741 m speed=0.206051 m/s (removed)
+ROOT RunToWalk distance=2.918988 m speed=1.273740 m/s (removed)
+ROOT SitDown distance=1.215443 m speed=0.212924 m/s (removed)
+ROOT SprintStop distance=2.927942 m speed=1.463971 m/s (removed)
+ROOT StandUp distance=0.562202 m speed=0.090556 m/s (removed)
+ROOT TurnRunL distance=2.290534 m speed=1.409560 m/s (removed)
+ROOT TurnRunR distance=2.454483 m speed=1.510451 m/s (removed)
+ROOT TurnWalkL distance=1.745754 m speed=0.872877 m/s (removed)
+ROOT TurnWalkR distance=2.028554 m speed=0.918590 m/s (removed)
+ROOT Water distance=0.431812 m speed=0.086362 m/s (removed)
+ROOT Agree distance=1.205120 m speed=0.092405 m/s (removed)
+ROOT Cheer distance=0.252908 m speed=0.085490 m/s (removed)
+ROOT KneelStand distance=0.368326 m speed=0.142578 m/s (removed)
+ROOT PickUp distance=0.267955 m speed=0.027961 m/s (removed)
+ROOT Push distance=0.966248 m speed=0.203421 m/s (removed)
+ROOT RunToWalk distance=2.881732 m speed=1.257483 m/s (removed)
+ROOT SitDown distance=1.199930 m speed=0.210207 m/s (removed)
+ROOT SprintStop distance=2.890571 m speed=1.445286 m/s (removed)
+ROOT StandUp distance=0.416585 m speed=0.087702 m/s (removed)
+ROOT TurnRunL distance=2.261299 m speed=1.391568 m/s (removed)
+ROOT TurnRunR distance=2.423155 m speed=1.491173 m/s (removed)
+ROOT TurnWalkL distance=1.723472 m speed=0.861736 m/s (removed)
+ROOT TurnWalkR distance=1.997036 m speed=0.538527 m/s (removed)
+ROOT Water distance=0.427766 m speed=0.085553 m/s (removed)
+ROOT Agree distance=1.210064 m speed=0.092784 m/s (removed)
+ROOT Cheer distance=0.253945 m speed=0.085841 m/s (removed)
+ROOT KneelStand distance=0.369837 m speed=0.143163 m/s (removed)
+ROOT PickUp distance=0.269054 m speed=0.028075 m/s (removed)
+ROOT Push distance=0.970212 m speed=0.204255 m/s (removed)
+ROOT RunToWalk distance=2.893553 m speed=1.262641 m/s (removed)
+ROOT SitDown distance=1.204853 m speed=0.211069 m/s (removed)
+ROOT SprintStop distance=2.902430 m speed=1.451215 m/s (removed)
+ROOT StandUp distance=0.418294 m speed=0.088062 m/s (removed)
+ROOT TurnRunL distance=2.270577 m speed=1.397278 m/s (removed)
+ROOT TurnRunR distance=2.433097 m speed=1.497290 m/s (removed)
+ROOT TurnWalkL distance=1.730543 m speed=0.865272 m/s (removed)
+ROOT TurnWalkR distance=2.005229 m speed=0.540736 m/s (removed)
+ROOT Water distance=0.427506 m speed=0.085501 m/s (removed)
+ROOT Agree distance=1.278081 m speed=0.098000 m/s (removed)
+ROOT Cheer distance=0.268219 m speed=0.090666 m/s (removed)
+ROOT KneelStand distance=0.390625 m speed=0.151210 m/s (removed)
+ROOT PickUp distance=0.331919 m speed=0.046047 m/s (removed)
+ROOT Push distance=1.024748 m speed=0.215736 m/s (removed)
+ROOT RunToWalk distance=3.056199 m speed=1.333614 m/s (removed)
+ROOT SitDown distance=1.272577 m speed=0.222933 m/s (removed)
+ROOT SprintStop distance=3.065574 m speed=1.532787 m/s (removed)
+ROOT StandUp distance=0.588629 m speed=0.094813 m/s (removed)
+ROOT TurnRunL distance=2.398204 m speed=1.475818 m/s (removed)
+ROOT TurnRunR distance=2.569859 m speed=1.581452 m/s (removed)
+ROOT TurnWalkL distance=1.827816 m speed=0.913908 m/s (removed)
+ROOT TurnWalkR distance=2.123908 m speed=0.961770 m/s (removed)
+ROOT Water distance=0.454003 m speed=0.090801 m/s (removed)
+M1-62 TEXT WALK: EX-CH02-S01 after 0 later jobs
+M1-62 TEXT WALK: EX-CH03-S01 after 54 later jobs
+M1-62 TEXT WALK: EX-CH04-S01 after 106 later jobs
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S03 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S03 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH04-S04
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S04 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S04 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH04-S05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S05 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S05 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH04-S06
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S06 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S06 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH04-S07
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S07 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S07 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH04-S08
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S08 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S08 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH04-S09
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S09 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S09 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH04-S10
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S10 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S10 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH04-S11
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S11 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S11 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH04-S12
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S12 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH04-S12 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH05-S01
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+M1-62 TEXT WALK: EX-CH05-S01 after 153 later jobs
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real preview preserves state
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:229)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH05-S01 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH05-S01 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH05-S02
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH05-S02 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH05-S02 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH05-S03
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_choose_route_b actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_slope actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_verify_return_reserve actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure is the actual current goal
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:186)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure HUD uses authored goal and why
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:187)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual hint shows job nudge
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:211)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure real route witness succeeds: Complete the preceding evidence step before using this target.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:237)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure authored success result
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:240)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL p07_prepare_departure actual Last result uses authored success
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:245)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH05-S03 route witness ready
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:252)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL EX-CH05-S03 text walk advances
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:256)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: FAIL text walk reaches EX-CH05-S04
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_player_text.gd:386)
+       [1] _walk_later_chapters (res://tools/test_player_text.gd:163)
+       [2] _walk_state (res://tools/test_player_text.gd:305)
+ERROR: BUG: Unreferenced static string to 0: _exit_world
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: Physics3DConstraintSolveIslands
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: Physics3DConstraintSetup
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: NavMapBuilder3D
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: _request_gizmo_for_id
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: current_state
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: prev_xfading
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: prev_index
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: current_index
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: transition_request
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: sub_amount
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: add_amount
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: seek_request
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: _compression
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: _enter_world
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: servers
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @warning_ignore_restore
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @warning_ignore_start
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @warning_ignore
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @export_flags
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @export_node_path
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @export_range
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @export_placeholder
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @export_multiline
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @export_enum
+   at: unref (core/string/string_name.cpp:118)
+ERROR: BUG: Unreferenced static string to 0: @icon
+   at: unref (core/string/string_name.cpp:118)
+WARNING: A Thread object is being destroyed without its completion having been realized.
+Please call wait_to_finish() on it to ensure correct cleanup.
+   at: ~Thread (core/os/thread.cpp:116)
+ERROR: 7 RID allocations of type '23NavMeshGeometryParser2D' were leaked at exit.
+ERROR: 6 RID allocations of type '23NavMeshGeometryParser3D' were leaked at exit.
+ERROR: Pages in use exist at exit in PagedAllocator: N12VariantPools11BucketLargeE
+   at: ~PagedAllocator (./core/templates/paged_allocator.h:170)
+TIMEOUT after 300s

@@ -1,0 +1,697 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  ok EX-CH01-S01 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S01 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S01 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S02 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S02 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S02 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S03 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S03 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S03 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S04 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S04 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S04 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S05 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S05 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S05 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S06 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S06 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S06 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S07 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S07 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S07 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S08 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S08 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S08 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S09 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S09 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S09 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S10 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S10 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S10 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S11 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S11 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S11 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S12 (1280, 720) normal text decision panel fits viewport
+  ok EX-CH01-S12 (1280, 720) normal text close control stays visible
+  ok EX-CH01-S12 (1280, 720) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S01 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S01 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S01 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S02 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S02 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S02 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S03 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S03 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S03 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S04 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S04 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S04 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S05 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S05 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S05 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S06 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S06 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S06 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S07 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S07 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S07 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S08 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S08 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S08 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S09 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S09 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S09 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S10 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S10 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S10 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S11 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S11 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S11 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S12 (1280, 720) 150% text decision panel fits viewport
+  ok EX-CH01-S12 (1280, 720) 150% text close control stays visible
+  ok EX-CH01-S12 (1280, 720) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S01 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S01 (640, 480) normal text close control stays visible
+  ok EX-CH01-S01 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S02 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S02 (640, 480) normal text close control stays visible
+  ok EX-CH01-S02 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S03 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S03 (640, 480) normal text close control stays visible
+  ok EX-CH01-S03 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S04 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S04 (640, 480) normal text close control stays visible
+  ok EX-CH01-S04 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S05 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S05 (640, 480) normal text close control stays visible
+  ok EX-CH01-S05 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S06 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S06 (640, 480) normal text close control stays visible
+  ok EX-CH01-S06 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S07 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S07 (640, 480) normal text close control stays visible
+  ok EX-CH01-S07 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S08 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S08 (640, 480) normal text close control stays visible
+  ok EX-CH01-S08 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S09 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S09 (640, 480) normal text close control stays visible
+  ok EX-CH01-S09 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S10 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S10 (640, 480) normal text close control stays visible
+  ok EX-CH01-S10 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S11 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S11 (640, 480) normal text close control stays visible
+  ok EX-CH01-S11 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S12 (640, 480) normal text decision panel fits viewport
+  ok EX-CH01-S12 (640, 480) normal text close control stays visible
+  ok EX-CH01-S12 (640, 480) normal text confirmation scrolls into view on focus
+  ok EX-CH01-S01 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S01 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S01 (640, 480) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S02 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S02 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S02 (640, 480) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S03 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S03 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S03 (640, 480) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S04 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S04 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S04 (640, 480) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S05 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S05 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S05 (640, 480) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S06 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S06 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S06 (640, 480) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S07 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S07 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S07 (640, 480) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S08 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S08 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S08 (640, 480) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S09 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S09 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S09 (640, 480) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S10 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S10 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S10 (640, 480) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S11 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S11 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S11 (640, 480) 150% text confirmation scrolls into view on focus
+  ok EX-CH01-S12 (640, 480) 150% text decision panel fits viewport
+  ok EX-CH01-S12 (640, 480) 150% text close control stays visible
+  ok EX-CH01-S12 (640, 480) 150% text confirmation scrolls into view on focus
+WARNING: 'res://assets/environment/kit/EN_Kit_BulkheadRing_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:42)
+       [4] _test_decision_review_layout (res://tools/test_chapter1_campaign_flow.gd:162)
+WARNING: 'res://assets/environment/kit/EN_Kit_CableRun_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:42)
+       [4] _test_decision_review_layout (res://tools/test_chapter1_campaign_flow.gd:162)
+WARNING: 'res://assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:42)
+       [4] _test_decision_review_layout (res://tools/test_chapter1_campaign_flow.gd:162)
+WARNING: 'res://assets/environment/kit/EN_Kit_DoorFrame_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:42)
+       [4] _test_decision_review_layout (res://tools/test_chapter1_campaign_flow.gd:162)
+WARNING: 'res://assets/environment/kit/EN_Kit_FloorTile_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:42)
+       [4] _test_decision_review_layout (res://tools/test_chapter1_campaign_flow.gd:162)
+WARNING: 'res://assets/environment/kit/EN_Kit_Hatch_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:42)
+       [4] _test_decision_review_layout (res://tools/test_chapter1_campaign_flow.gd:162)
+WARNING: 'res://assets/environment/kit/EN_Kit_PipeRun_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:42)
+       [4] _test_decision_review_layout (res://tools/test_chapter1_campaign_flow.gd:162)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:42)
+       [4] _test_decision_review_layout (res://tools/test_chapter1_campaign_flow.gd:162)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:42)
+       [4] _test_decision_review_layout (res://tools/test_chapter1_campaign_flow.gd:162)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:42)
+       [4] _test_decision_review_layout (res://tools/test_chapter1_campaign_flow.gd:162)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Window_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:42)
+       [4] _test_decision_review_layout (res://tools/test_chapter1_campaign_flow.gd:162)
+ROOT Agree distance=1.220700 m speed=0.093600 m/s (removed)
+ROOT Cheer distance=0.256177 m speed=0.086595 m/s (removed)
+ROOT KneelStand distance=0.373088 m speed=0.144421 m/s (removed)
+ROOT PickUp distance=0.317017 m speed=0.043979 m/s (removed)
+ROOT Push distance=0.978741 m speed=0.206051 m/s (removed)
+ROOT RunToWalk distance=2.918988 m speed=1.273740 m/s (removed)
+ROOT SitDown distance=1.215443 m speed=0.212924 m/s (removed)
+ROOT SprintStop distance=2.927942 m speed=1.463971 m/s (removed)
+ROOT StandUp distance=0.562202 m speed=0.090556 m/s (removed)
+ROOT TurnRunL distance=2.290534 m speed=1.409560 m/s (removed)
+ROOT TurnRunR distance=2.454483 m speed=1.510451 m/s (removed)
+ROOT TurnWalkL distance=1.745754 m speed=0.872877 m/s (removed)
+ROOT TurnWalkR distance=2.028554 m speed=0.918590 m/s (removed)
+ROOT Water distance=0.431812 m speed=0.086362 m/s (removed)
+ROOT Agree distance=1.205120 m speed=0.092405 m/s (removed)
+ROOT Cheer distance=0.252908 m speed=0.085490 m/s (removed)
+ROOT KneelStand distance=0.368326 m speed=0.142578 m/s (removed)
+ROOT PickUp distance=0.267955 m speed=0.027961 m/s (removed)
+ROOT Push distance=0.966248 m speed=0.203421 m/s (removed)
+ROOT RunToWalk distance=2.881732 m speed=1.257483 m/s (removed)
+ROOT SitDown distance=1.199930 m speed=0.210207 m/s (removed)
+ROOT SprintStop distance=2.890571 m speed=1.445286 m/s (removed)
+ROOT StandUp distance=0.416585 m speed=0.087702 m/s (removed)
+ROOT TurnRunL distance=2.261299 m speed=1.391568 m/s (removed)
+ROOT TurnRunR distance=2.423155 m speed=1.491173 m/s (removed)
+ROOT TurnWalkL distance=1.723472 m speed=0.861736 m/s (removed)
+ROOT TurnWalkR distance=1.997036 m speed=0.538527 m/s (removed)
+ROOT Water distance=0.427766 m speed=0.085553 m/s (removed)
+ROOT Agree distance=1.210064 m speed=0.092784 m/s (removed)
+ROOT Cheer distance=0.253945 m speed=0.085841 m/s (removed)
+ROOT KneelStand distance=0.369837 m speed=0.143163 m/s (removed)
+ROOT PickUp distance=0.269054 m speed=0.028075 m/s (removed)
+ROOT Push distance=0.970212 m speed=0.204255 m/s (removed)
+ROOT RunToWalk distance=2.893553 m speed=1.262641 m/s (removed)
+ROOT SitDown distance=1.204853 m speed=0.211069 m/s (removed)
+ROOT SprintStop distance=2.902430 m speed=1.451215 m/s (removed)
+ROOT StandUp distance=0.418294 m speed=0.088062 m/s (removed)
+ROOT TurnRunL distance=2.270577 m speed=1.397278 m/s (removed)
+ROOT TurnRunR distance=2.433097 m speed=1.497290 m/s (removed)
+ROOT TurnWalkL distance=1.730543 m speed=0.865272 m/s (removed)
+ROOT TurnWalkR distance=2.005229 m speed=0.540736 m/s (removed)
+ROOT Water distance=0.427506 m speed=0.085501 m/s (removed)
+ROOT Agree distance=1.278081 m speed=0.098000 m/s (removed)
+ROOT Cheer distance=0.268219 m speed=0.090666 m/s (removed)
+ROOT KneelStand distance=0.390625 m speed=0.151210 m/s (removed)
+ROOT PickUp distance=0.331919 m speed=0.046047 m/s (removed)
+ROOT Push distance=1.024748 m speed=0.215736 m/s (removed)
+ROOT RunToWalk distance=3.056199 m speed=1.333614 m/s (removed)
+ROOT SitDown distance=1.272577 m speed=0.222933 m/s (removed)
+ROOT SprintStop distance=3.065574 m speed=1.532787 m/s (removed)
+ROOT StandUp distance=0.588629 m speed=0.094813 m/s (removed)
+ROOT TurnRunL distance=2.398204 m speed=1.475818 m/s (removed)
+ROOT TurnRunR distance=2.569859 m speed=1.581452 m/s (removed)
+ROOT TurnWalkL distance=1.827816 m speed=0.913908 m/s (removed)
+ROOT TurnWalkR distance=2.123908 m speed=0.961770 m/s (removed)
+ROOT Water distance=0.454003 m speed=0.090801 m/s (removed)
+ERROR: FAIL production player uses lunar gravity
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tools/test_chapter1_campaign_flow.gd:178)
+       [1] _run (res://tools/test_chapter1_campaign_flow.gd:49)
+  ok controller enters EX-CH01-S01
+  ok EX-CH01-S01 decision review requires an explicit selection
+  ok EX-CH01-S01 UI preview adds no choice or receipt
+  ok EX-CH01-S01 preview enables confirmation
+  ok EX-CH01-S01 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S01 confirmation autosaves the choice
+  ok EX-CH01-S01 advance control stays onscreen
+  ok EX-CH01-S01: commission_route — Command committed once.
+  ok EX-CH01-S01: commission_result — Command committed once.
+  ok EX-CH01-S01: charter_card — Command committed once.
+  ok EX-CH01-S01 advances through the production controller
+  ok EX-CH01-S01 choice cannot change after its real scene exit
+  ok controller enters EX-CH01-S02
+  ok EX-CH01-S02 decision review requires an explicit selection
+  ok EX-CH01-S02 UI preview adds no choice or receipt
+  ok EX-CH01-S02 preview enables confirmation
+  ok EX-CH01-S02 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S02 confirmation autosaves the choice
+  ok EX-CH01-S02 advance control stays onscreen
+  ok EX-CH01-S02: classify_information — Command committed once.
+  ok EX-CH01-S02: roll_call — Command committed once.
+  ok EX-CH01-S02: practice_fault — Command committed once.
+  ok EX-CH01-S02 advances through the production controller
+  ok EX-CH01-S02 choice cannot change after its real scene exit
+  ok controller enters EX-CH01-S03
+  ok EX-CH01-S03 decision review requires an explicit selection
+  ok EX-CH01-S03 UI preview adds no choice or receipt
+  ok EX-CH01-S03 preview enables confirmation
+  ok EX-CH01-S03 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S03 confirmation autosaves the choice
+  ok EX-CH01-S03 advance control stays onscreen
+  ok EX-CH01-S03: calibrate_probe — Command committed once.
+  ok EX-CH01-S03: span_probe — Command committed once.
+  ok EX-CH01-S03: recheck_probe — Command committed once.
+  ok EX-CH01-S03: inspect_packet — Command committed once.
+  ok EX-CH01-S03: compare_atmosphere — Command committed once.
+  ok EX-CH01-S03 advances through the production controller
+  ok EX-CH01-S03 choice cannot change after its real scene exit
+  ok controller enters EX-CH01-S04
+  ok EX-CH01-S04 decision review requires an explicit selection
+  ok EX-CH01-S04 UI preview adds no choice or receipt
+  ok EX-CH01-S04 preview enables confirmation
+  ok EX-CH01-S04 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S04 confirmation autosaves the choice
+  ok EX-CH01-S04 advance control stays onscreen
+  ok EX-CH01-S04: plant_alo — Command committed once.
+  ok EX-CH01-S04: plant_tara — Command committed once.
+  ok EX-CH01-S04: water_alo — Command committed once.
+  ok EX-CH01-S04: water_tara — Command committed once.
+  ok EX-CH01-S04: label_alo — Command committed once.
+  ok EX-CH01-S04: label_tara — Command committed once.
+  ok EX-CH01-S04: seal_alo — Command committed once.
+  ok EX-CH01-S04: seal_tara — Command committed once.
+  ok EX-CH01-S04: record_paired_conditions — Command committed once.
+  ok EX-CH01-S04: confirm_services — Command committed once.
+  ok garden checkpoint saves
+  ok garden checkpoint loads
+WARNING: 'res://assets/environment/kit/EN_Kit_Hatch_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:104)
+WARNING: 'res://assets/environment/kit/EN_Kit_PipeRun_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] _ready (res://scripts/campaign/chapter1_campaign.gd:69)
+       [3] _run (res://tools/test_chapter1_campaign_flow.gd:104)
+  ok garden physical evidence survives runtime reload
+  ok EX-CH01-S04 advances through the production controller
+  ok EX-CH01-S04 choice cannot change after its real scene exit
+  ok controller enters EX-CH01-S05
+  ok EX-CH01-S05 decision review requires an explicit selection
+  ok EX-CH01-S05 UI preview adds no choice or receipt
+  ok EX-CH01-S05 preview enables confirmation
+  ok EX-CH01-S05 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S05 confirmation autosaves the choice
+  ok EX-CH01-S05 advance control stays onscreen
+  ok EX-CH01-S05: test_hand_light — Command committed once.
+  ok EX-CH01-S05: care_montage — Command committed once.
+  ok EX-CH01-S05: confirm_date_transition — Command committed once.
+  ok EX-CH01-S05 advances through the production controller
+  ok EX-CH01-S05 choice cannot change after its real scene exit
+  ok controller enters EX-CH01-S06
+  ok EX-CH01-S06 decision review requires an explicit selection
+  ok EX-CH01-S06 UI preview adds no choice or receipt
+  ok EX-CH01-S06 preview enables confirmation
+  ok EX-CH01-S06 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S06 confirmation autosaves the choice
+  ok EX-CH01-S06 advance control stays onscreen
+  ok EX-CH01-S06: arrange_timeline — Command committed once.
+  ok EX-CH01-S06: ack_schedule — Command committed once.
+  ok EX-CH01-S06 advances through the production controller
+  ok EX-CH01-S06 choice cannot change after its real scene exit
+  ok controller enters EX-CH01-S07
+  ok EX-CH01-S07 decision review requires an explicit selection
+  ok EX-CH01-S07 UI preview adds no choice or receipt
+  ok EX-CH01-S07 preview enables confirmation
+  ok EX-CH01-S07 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S07 confirmation autosaves the choice
+  ok EX-CH01-S07 advance control stays onscreen
+  ok EX-CH01-S07: role_cards — Command committed once.
+  ok EX-CH01-S07: p02_shift1 — P-02 transition committed once.
+  ok EX-CH01-S07: p02_stage_shift2 — 
+  ok EX-CH01-S07 advances through the production controller
+  ok EX-CH01-S07 choice cannot change after its real scene exit
+  ok controller enters EX-CH01-S08
+  ok EX-CH01-S08 decision review requires an explicit selection
+  ok EX-CH01-S08 UI preview adds no choice or receipt
+  ok EX-CH01-S08 preview enables confirmation
+  ok EX-CH01-S08 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S08 confirmation autosaves the choice
+  ok EX-CH01-S08 advance control stays onscreen
+  ok EX-CH01-S08: shelter_drill — Command committed once.
+  ok EX-CH01-S08: verify_drill_baseline — Command committed once.
+  ok EX-CH01-S08: p02_shift2 — P-02 transition committed once.
+  ok EX-CH01-S08 advances through the production controller
+  ok EX-CH01-S08 choice cannot change after its real scene exit
+  ok controller enters EX-CH01-S09
+  ok EX-CH01-S09 decision review requires an explicit selection
+  ok EX-CH01-S09 UI preview adds no choice or receipt
+  ok EX-CH01-S09 preview enables confirmation
+  ok EX-CH01-S09 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S09 confirmation autosaves the choice
+  ok EX-CH01-S09 advance control stays onscreen
+  ok EX-CH01-S09: combine_cards — Command committed once.
+  ok EX-CH01-S09: ack_earth_set — Command committed once.
+  ok EX-CH01-S09: p02_shifts3_4 — P-02 transition committed once.
+  ok EX-CH01-S09 advances through the production controller
+  ok EX-CH01-S09 choice cannot change after its real scene exit
+  ok controller enters EX-CH01-S10
+  ok EX-CH01-S10 decision review requires an explicit selection
+  ok EX-CH01-S10 UI preview adds no choice or receipt
+  ok EX-CH01-S10 preview enables confirmation
+  ok EX-CH01-S10 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S10 confirmation autosaves the choice
+  ok EX-CH01-S10 advance control stays onscreen
+  ok EX-CH01-S10: confirm_four_sheltered — Command committed once.
+  ok EX-CH01-S10: p02_shift5_alarm — P-02 transition committed once.
+  ok EX-CH01-S10 advances through the production controller
+  ok EX-CH01-S10 choice cannot change after its real scene exit
+  ok controller enters EX-CH01-S11
+  ok EX-CH01-S11 decision review requires an explicit selection
+  ok EX-CH01-S11 UI preview adds no choice or receipt
+  ok EX-CH01-S11 preview enables confirmation
+  ok EX-CH01-S11 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S11 confirmation autosaves the choice
+  ok EX-CH01-S11 advance control stays onscreen
+  ok EX-CH01-S11: verify_exposure_order — Command committed once.
+  ok EX-CH01-S11: return_water — Command committed once.
+  ok EX-CH01-S11: p02_shifts6_7 — P-02 transition committed once.
+  ok EX-CH01-S11: review_outcome — Command committed once.
+  ok EX-CH01-S11 advances through the production controller
+  ok EX-CH01-S11 choice cannot change after its real scene exit
+  ok controller enters EX-CH01-S12
+  ok EX-CH01-S12 decision review requires an explicit selection
+  ok EX-CH01-S12 UI preview adds no choice or receipt
+  ok EX-CH01-S12 preview enables confirmation
+  ok EX-CH01-S12 UI confirmation records exactly one choice with commit metadata
+  ok EX-CH01-S12 confirmation autosaves the choice
+  ok EX-CH01-S12 advance control stays onscreen
+  ok EX-CH01-S12: verify_chamber — Command committed once.
+  ok EX-CH01-S12: open_shutter — Command committed once.
+  ok EX-CH01-S12: tag_bloom — Command committed once.
+  ok EX-CH01-S12: inspect_tara — Command committed once.
+  ok EX-CH01-S12: complete_debrief — Command committed once.
+  ok completed chapter reaches its canonical bloom date
+  ok physical debrief starts with the real decision replay
+  ok EX-CH01-S12 advances through the production controller
+  ok EX-CH01-S12 choice cannot change after its real scene exit
+  ok final Chapter 1 scene transitions into Chapter 2
+  ok all twelve Chapter 1 confirmed choices survive the garden reload and Chapter 2 handoff
+  ok Chapter 2 advance stays disabled until its physical gate is ready
+  ok B03 handoff advances from bloom to the dated P-03 entry
+  ok B03 real Bloom handoff installs E14/A10/H6/C8/R18
+  ok B01 Chapter 2 exposes its operations through the production controller and HUD
+  ok production Chapter 2 reaches EX-CH02-S01
+  ok B01 physical target exists: inspect_alo_identity
+  ok Chapter 2 operation uses its authored room station: inspect_alo_identity
+  ok production Chapter 2 commits inspect_alo_identity (Command committed once.)
+  ok B01 physical target exists: inspect_tara_identity
+  ok Chapter 2 operation uses its authored room station: inspect_tara_identity
+  ok production Chapter 2 commits inspect_tara_identity (Command committed once.)
+  ok B01 physical target exists: ack_live_link
+  ok Chapter 2 operation uses its authored room station: ack_live_link
+  ok production Chapter 2 commits ack_live_link (Command committed once.)
+  ok B01 physical target exists: open_pollination_protocol
+  ok Chapter 2 operation uses its authored room station: open_pollination_protocol
+  ok production Chapter 2 commits open_pollination_protocol (Command committed once.)
+  ok production Chapter 2 advances EX-CH02-S01
+  ok production Chapter 2 reaches EX-CH02-S02
+  ok B01 physical target exists: identify_anther
+  ok Chapter 2 operation uses its authored room station: identify_anther
+  ok production Chapter 2 commits identify_anther (Command committed once.)
+  ok B01 physical target exists: identify_stigma
+  ok Chapter 2 operation uses its authored room station: identify_stigma
+  ok production Chapter 2 commits identify_stigma (Command committed once.)
+  ok B01 physical target exists: assign_brush_directions
+  ok Chapter 2 operation uses its authored room station: assign_brush_directions
+  ok production Chapter 2 commits assign_brush_directions (Command committed once.)
+  ok B01 physical target exists: practice_transfer_model
+  ok Chapter 2 operation uses its authored room station: practice_transfer_model
+  ok production Chapter 2 commits practice_transfer_model (Command committed once.)
+WARNING: 'res://assets/environment/EN_Airlock/EN_Airlock_SuitLocker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] advance_scene (res://scripts/campaign/chapter1_campaign.gd:717)
+       [3] _test_chapter2_handoff (res://tools/test_chapter1_campaign_flow.gd:222)
+WARNING: 'res://assets/environment/EN_Airlock/EN_Airlock_Bench_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] advance_scene (res://scripts/campaign/chapter1_campaign.gd:717)
+       [3] _test_chapter2_handoff (res://tools/test_chapter1_campaign_flow.gd:222)
+WARNING: 'res://assets/environment/EN_Airlock/EN_Airlock_PassThrough_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] advance_scene (res://scripts/campaign/chapter1_campaign.gd:717)
+       [3] _test_chapter2_handoff (res://tools/test_chapter1_campaign_flow.gd:222)
+WARNING: 'res://assets/environment/EN_Airlock/EN_Airlock_InterlockPanel_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _refresh_world_now (res://scripts/campaign/chapter1_campaign.gd:949)
+       [1] _refresh_world (res://scripts/campaign/chapter1_campaign.gd:930)
+       [2] advance_scene (res://scripts/campaign/chapter1_campaign.gd:717)
+       [3] _test_chapter2_handoff (res://tools/test_chapter1_campaign_flow.gd:222)
+  ok production Chapter 2 advances EX-CH02-S02
+  ok production Chapter 2 reaches EX-CH02-S03
+  ok B01 physical target exists: check_space_weather
+  ok Chapter 2 operation uses its authored room station: check_space_weather
+  ok production Chapter 2 commits check_space_weather (Command committed once.)
+  ok B01 physical target exists: prepare_closed_carrier
+  ok Chapter 2 operation uses its authored room station: prepare_closed_carrier
+  ok production Chapter 2 commits prepare_closed_carrier (Command committed once.)
+  ok B01 physical target exists: verify_transfer_boundaries
+  ok Chapter 2 operation uses its authored room station: verify_transfer_boundaries
+  ok production Chapter 2 commits verify_transfer_boundaries (Command committed once.)
+  ok B01 physical target exists: preview_cycle_budget
+  ok Chapter 2 operation uses its authored room station: preview_cycle_budget
+  ok production Chapter 2 commits preview_cycle_budget (Command committed once.)
+  ok production Chapter 2 advances EX-CH02-S03
+  ok production Chapter 2 reaches EX-CH02-S04
+  ok B01 physical target exists: p03_scan_tara
+  ok Chapter 2 operation uses its authored room station: p03_scan_tara
+  ok production Chapter 2 commits p03_scan_tara (Command committed once.)
+  ok B01 physical target exists: p03_collect_tara
+  ok Chapter 2 operation uses its authored room station: p03_collect_tara
+  ok production Chapter 2 commits p03_collect_tara (Command committed once.)
+  ok B01 physical target exists: p03_seal_a
+  ok Chapter 2 operation uses its authored room station: p03_seal_a
+  ok production Chapter 2 commits p03_seal_a (Command committed once.)
+  ok B01 physical target exists: p03_transfer_alo
+  ok Chapter 2 operation uses its authored room station: p03_transfer_alo
+  ok production Chapter 2 commits p03_transfer_alo (Command committed once.)
+  ok B01 physical target exists: p03_scan_alo
+  ok Chapter 2 operation uses its authored room station: p03_scan_alo
+  ok production Chapter 2 commits p03_scan_alo (Command committed once.)
+  ok B01 physical target exists: p03_collect_alo
+  ok Chapter 2 operation uses its authored room station: p03_collect_alo
+  ok production Chapter 2 commits p03_collect_alo (Command committed once.)
+  ok B01 physical target exists: p03_seal_b
+  ok Chapter 2 operation uses its authored room station: p03_seal_b
+  ok production Chapter 2 commits p03_seal_b (Command committed once.)
+  ok B01 physical target exists: p03_transfer_tara
+  ok Chapter 2 operation uses its authored room station: p03_transfer_tara
+  ok production Chapter 2 commits p03_transfer_tara (Command committed once.)
+  ok B01 physical target exists: p03_complete_run_1
+  ok Chapter 2 operation uses its authored room station: p03_complete_run_1
+  ok production Chapter 2 commits p03_complete_run_1 (Command committed once.)
+  ok production Chapter 2 advances EX-CH02-S04
+  ok production Chapter 2 reaches EX-CH02-S05
+  ok B01 physical target exists: p03_care_day_2
+  ok Chapter 2 operation uses its authored room station: p03_care_day_2
+  ok production Chapter 2 commits p03_care_day_2 (Command committed once.)
+  ok B01 physical target exists: p03_care_day_3
+  ok Chapter 2 operation uses its authored room station: p03_care_day_3
+  ok production Chapter 2 commits p03_care_day_3 (Command committed once.)
+  ok B01 physical target exists: p03_run_2_forward
+  ok Chapter 2 operation uses its authored room station: p03_run_2_forward
+  ok production Chapter 2 commits p03_run_2_forward (Command committed once.)
+  ok B01 physical target exists: p03_run_2_reverse
+  ok Chapter 2 operation uses its authored room station: p03_run_2_reverse
+  ok production Chapter 2 commits p03_run_2_reverse (Command committed once.)
+  ok B01 physical target exists: p03_complete_run_2
+  ok Chapter 2 operation uses its authored room station: p03_complete_run_2
+  ok production Chapter 2 commits p03_complete_run_2 (Command committed once.)
+  ok B01 physical target exists: p03_care_day_4
+  ok Chapter 2 operation uses its authored room station: p03_care_day_4
+  ok production Chapter 2 commits p03_care_day_4 (Command committed once.)
+  ok B01 physical target exists: p03_care_day_5
+  ok Chapter 2 operation uses its authored room station: p03_care_day_5
+  ok production Chapter 2 commits p03_care_day_5 (Command committed once.)
+  ok B01 physical target exists: p03_care_day_6
+  ok Chapter 2 operation uses its authored room station: p03_care_day_6
+  ok production Chapter 2 commits p03_care_day_6 (Command committed once.)
+  ok B01 physical target exists: p03_care_day_7
+  ok Chapter 2 operation uses its authored room station: p03_care_day_7
+  ok production Chapter 2 commits p03_care_day_7 (Command committed once.)
+  ok B01 physical target exists: p03_run_3_forward
+  ok Chapter 2 operation uses its authored room station: p03_run_3_forward
+  ok production Chapter 2 commits p03_run_3_forward (Command committed once.)
+  ok B01 physical target exists: p03_run_3_reverse
+  ok Chapter 2 operation uses its authored room station: p03_run_3_reverse
+  ok production Chapter 2 commits p03_run_3_reverse (Command committed once.)
+  ok B01 physical target exists: p03_complete_run_3
+  ok Chapter 2 operation uses its authored room station: p03_complete_run_3
+  ok production Chapter 2 commits p03_complete_run_3 (Command committed once.)
+  ok B03 sampled reciprocal operations end E16/A4/H9/C10/R14.4
+  ok B02 production Chapter 2 JSON save loads
+  ok B02 production JSON restore preserves typed pollen actions and care dates
+  ok production Chapter 2 advances EX-CH02-S05
+  ok production Chapter 2 reaches EX-CH02-S06
+  ok B01 physical target exists: record_stem_prediction
+  ok Chapter 2 operation uses its authored room station: record_stem_prediction
+  ok production Chapter 2 commits record_stem_prediction (Command committed once.)
+  ok B03 separate dated background ledger supplies 14 and consumes the unsampled share of 28
+  ok production Chapter 2 advances EX-CH02-S06
+  ok production Chapter 2 reaches EX-CH02-S07
+  ok B01 physical target exists: order_lifecycle
+  ok Chapter 2 operation uses its authored room station: order_lifecycle
+  ok production Chapter 2 commits order_lifecycle (Command committed once.)
+  ok B01 physical target exists: separate_current_evidence
+  ok Chapter 2 operation uses its authored room station: separate_current_evidence
+  ok production Chapter 2 commits separate_current_evidence (Command committed once.)
+  ok B01 physical target exists: inspect_recorder_identifier
+  ok Chapter 2 operation uses its authored room station: inspect_recorder_identifier
+  ok production Chapter 2 commits inspect_recorder_identifier (Command committed once.)
+  ok production Chapter 2 advances EX-CH02-S07
+  ok production Chapter 2 reaches EX-CH02-S08
+  ok B01 physical target exists: collect_serial_card
+  ok Chapter 2 operation uses its authored room station: collect_serial_card
+  ok production Chapter 2 commits collect_serial_card (Command committed once.)
+  ok B01 physical target exists: collect_date_card
+  ok Chapter 2 operation uses its authored room station: collect_date_card
+  ok production Chapter 2 commits collect_date_card (Command committed once.)
+  ok B01 physical target exists: collect_trial_stage_card
+  ok Chapter 2 operation uses its authored room station: collect_trial_stage_card
+  ok production Chapter 2 commits collect_trial_stage_card (Command committed once.)
+  ok B01 physical target exists: exclude_identity_claim
+  ok Chapter 2 operation uses its authored room station: exclude_identity_claim
+  ok production Chapter 2 commits exclude_identity_claim (Command committed once.)
+  ok production Chapter 2 advances EX-CH02-S08
+  ok production Chapter 2 reaches EX-CH02-S09
+  ok B01 physical target exists: assign_date_token
+  ok Chapter 2 operation uses its authored room station: assign_date_token
+  ok production Chapter 2 commits assign_date_token (Command committed once.)
+  ok B01 physical target exists: assign_device_token
+  ok Chapter 2 operation uses its authored room station: assign_device_token
+  ok production Chapter 2 commits assign_device_token (Command committed once.)
+  ok B01 physical target exists: assign_channel_token
+  ok Chapter 2 operation uses its authored room station: assign_channel_token
+  ok production Chapter 2 commits assign_channel_token (Command committed once.)
+  ok B01 physical target exists: verify_local_checksum
+  ok Chapter 2 operation uses its authored room station: verify_local_checksum
+  ok production Chapter 2 commits verify_local_checksum (Command committed once.)
+  ok B01 physical target exists: open_reconstructed_transcript
+  ok Chapter 2 operation uses its authored room station: open_reconstructed_transcript
+  ok production Chapter 2 commits open_reconstructed_transcript (Command committed once.)
+  ok production Chapter 2 advances EX-CH02-S09
+  ok production Chapter 2 reaches EX-CH02-S10
+  ok B01 physical target exists: play_engineer_fragment
+  ok Chapter 2 operation uses its authored room station: play_engineer_fragment
+  ok production Chapter 2 commits play_engineer_fragment (Command committed once.)
+  ok B01 physical target exists: play_n_memory
+  ok Chapter 2 operation uses its authored room station: play_n_memory
+  ok production Chapter 2 commits play_n_memory (Command committed once.)
+  ok B01 physical target exists: classify_voice_inference
+  ok Chapter 2 operation uses its authored room station: classify_voice_inference
+  ok production Chapter 2 commits classify_voice_inference (Command committed once.)
+  ok production Chapter 2 advances EX-CH02-S10
+  ok production Chapter 2 reaches EX-CH02-S11
+  ok B01 physical target exists: send_fragment_copy
+  ok Chapter 2 operation uses its authored room station: send_fragment_copy
+  ok production Chapter 2 commits send_fragment_copy (Command committed once.)
+  ok B01 physical target exists: acknowledge_handover
+  ok Chapter 2 operation uses its authored room station: acknowledge_handover
+  ok production Chapter 2 commits acknowledge_handover (Command committed once.)
+  ok production Chapter 2 advances EX-CH02-S11
+  ok production Chapter 2 reaches EX-CH02-S12
+  ok B01 physical target exists: reach_interior_brace
+  ok Chapter 2 operation uses its authored room station: reach_interior_brace
+  ok production Chapter 2 commits reach_interior_brace (Command committed once.)
+  ok B01 physical target exists: account_four_cadets
+  ok Chapter 2 operation uses its authored room station: account_four_cadets
+  ok production Chapter 2 commits account_four_cadets (Command committed once.)
+  ok B01 physical target exists: finish_quake_beat
+  ok Chapter 2 operation uses its authored room station: finish_quake_beat
+  ok production Chapter 2 commits finish_quake_beat (Command committed once.)
+  ok production Chapter 2 advances EX-CH02-S12
+  ok real Chapter 2 gameplay hands off to Chapter 3
+  ok full-flow fixture cleans its isolated saves
+CHAPTER 1 CAMPAIGN FLOW RESULT: FAIL (502 checks, 1 failures)
+WARNING: 1 ObjectDB instance was leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)

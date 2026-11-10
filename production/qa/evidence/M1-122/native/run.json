@@ -1,0 +1,36 @@
+{
+  "command": [
+    "D:/Godot/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe",
+    "--path",
+    "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\game",
+    "--rendering-method",
+    "gl_compatibility",
+    "--fixed-fps",
+    "60",
+    "--script",
+    "res://tools/test_garden_collision.gd",
+    "--",
+    "--capture"
+  ],
+  "exit_code": 0,
+  "duration_seconds": 12.246,
+  "start_utc_epoch": 1794250763.8001592,
+  "markers": [
+    "GARDEN COLLISION RESULT: PASS (20 checks, 0 failures)"
+  ],
+  "source_sha256": {
+    "game/resources/campaign/rooms/LOC-03.json": "586ffb08785f4d436de3e5ed33c12963254dbe59b3d34467e5b1111f1c418530",
+    "game/tools/test_garden_collision.gd": "1bd91068a897950775668357967ae35067a384deaabe19e35a7c23fea0daac9e",
+    "game/tools/test_garden_movement.gd": "59005bfe791a362ae40d087e6d76956e4cc30be2665bf4a9d5833822f255dd18",
+    "game/scripts/player/player_controller.gd": "fbbef7381ba19d0ae2cb0952409cc3302b6d596a222ce8ff0990167bcd772364",
+    "game/scripts/campaign/chapter1_campaign.gd": "d1fdd05e65951b1f498688245615b747266e1bc9c61170de4c4383b4aeb49046"
+  },
+  "captures": [
+    {
+      "file": "M1-122_garden.png",
+      "sha256": "890f58863541cb38bb29687bea30c6825a7b2953d57d75daab5b66c9158a874d",
+      "mtime_epoch": 1794250775.3559098
+    }
+  ],
+  "capture_checks_passed": true
+}

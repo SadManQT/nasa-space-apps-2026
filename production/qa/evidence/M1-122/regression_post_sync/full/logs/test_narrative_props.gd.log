@@ -1,0 +1,65 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: 'res://assets/environment/kit/EN_Kit_BulkheadRing_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _check_garden (res://tools/test_narrative_props.gd:162)
+       [1] _run (res://tools/test_narrative_props.gd:52)
+WARNING: 'res://assets/environment/kit/EN_Kit_CableRun_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _check_garden (res://tools/test_narrative_props.gd:162)
+       [1] _run (res://tools/test_narrative_props.gd:52)
+WARNING: 'res://assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _check_garden (res://tools/test_narrative_props.gd:162)
+       [1] _run (res://tools/test_narrative_props.gd:52)
+WARNING: 'res://assets/environment/kit/EN_Kit_DoorFrame_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _check_garden (res://tools/test_narrative_props.gd:162)
+       [1] _run (res://tools/test_narrative_props.gd:52)
+WARNING: 'res://assets/environment/kit/EN_Kit_FloorTile_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _check_garden (res://tools/test_narrative_props.gd:162)
+       [1] _run (res://tools/test_narrative_props.gd:52)
+WARNING: 'res://assets/environment/kit/EN_Kit_Hatch_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _check_garden (res://tools/test_narrative_props.gd:162)
+       [1] _run (res://tools/test_narrative_props.gd:52)
+WARNING: 'res://assets/environment/kit/EN_Kit_PipeRun_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _check_garden (res://tools/test_narrative_props.gd:162)
+       [1] _run (res://tools/test_narrative_props.gd:52)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _check_garden (res://tools/test_narrative_props.gd:162)
+       [1] _run (res://tools/test_narrative_props.gd:52)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _check_garden (res://tools/test_narrative_props.gd:162)
+       [1] _run (res://tools/test_narrative_props.gd:52)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _check_garden (res://tools/test_narrative_props.gd:162)
+       [1] _run (res://tools/test_narrative_props.gd:52)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Window_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _check_garden (res://tools/test_narrative_props.gd:162)
+       [1] _run (res://tools/test_narrative_props.gd:52)
+ERROR: Unknown narrative prop variant: PR_Mug_Named/NOBODY
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] apply_variant (res://assets/props/narrative/narrative_props.gd:83)
+       [1] _check_props (res://tools/test_narrative_props.gd:238)
+       [2] _run (res://tools/test_narrative_props.gd:53)
+       [3] _check_garden (res://tools/test_narrative_props.gd:190)
+NARRATIVE PROPS RESULT: PASS (401 checks, 0 failures)
