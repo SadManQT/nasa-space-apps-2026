@@ -65,9 +65,10 @@ func p06() -> RefCounted:
 	return _p06
 
 func chapter3_view(target_id: String) -> Dictionary:
-	if target_id.begins_with("p05_"):
-		return _chapter_puzzle_view(_p05, P05Script, target_id)
-	return _chapter_puzzle_view(_p06, P06Script, target_id)
+	# The Chapter 3 models are instances (their content accessors are not static),
+	# so each stands in for both the model and the content source.
+	var model: RefCounted = _p05 if target_id.begins_with("p05_") else _p06
+	return _chapter_puzzle_view(model, model, target_id)
 
 func chapter3_preview(target_id: String, payload: Dictionary) -> Dictionary:
 	return chapter8_preview(target_id, payload)
