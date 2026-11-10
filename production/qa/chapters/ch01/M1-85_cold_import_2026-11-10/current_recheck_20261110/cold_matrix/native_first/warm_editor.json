@@ -1,0 +1,49 @@
+{
+  "command": [
+    "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64_console.exe",
+    "--headless",
+    "--path",
+    ".",
+    "--editor",
+    "--quit"
+  ],
+  "pid": 17168,
+  "start_utc_epoch": 1794307302.5791647,
+  "duration_seconds": 5.859,
+  "timed_out": false,
+  "termination": {
+    "needed": false
+  },
+  "raw_exit_code": 0,
+  "unsigned_exit_hex": "0x0",
+  "effective_exit_code": 0,
+  "log_sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b",
+  "test_log_dir": null,
+  "isolated_env": {
+    "APPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\roaming",
+    "LOCALAPPDATA": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\local",
+    "TEMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\tmp",
+    "TMP": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\scratch\\lla-m185-m9e38cjs\\project_native_first\\isolated_user\\tmp"
+  },
+  "script_error_lines": [],
+  "generic_error_lines": [],
+  "generic_error_count": 0,
+  "warning_count": 0,
+  "last_printed_reimport": null,
+  "suite_summary": [],
+  "setup_failure": false,
+  "native_crash_signature": false,
+  "audited_logs": [
+    {
+      "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-qa-20261106\\.codex\\task-tmp\\tanvir-m185-current-20261110\\cold_matrix\\native_first\\warm_editor.txt",
+      "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "last_printed_reimport": null,
+      "suite_summary": [],
+      "setup_failure": false,
+      "native_crash_signature": false
+    }
+  ]
+}

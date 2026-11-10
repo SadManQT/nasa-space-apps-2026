@@ -1,0 +1,251 @@
+{
+  "artifact_count": 49,
+  "scope": "Raw logs/manifests/exact executed scripts only. No scratch caches, user saves or native memory dump.",
+  "artifacts": [
+    {
+      "file": "cold_matrix/native_first/after_cold.json",
+      "bytes": 454,
+      "sha256": "8d25a4e1cd5e5c6b086e67945eb2f2560afc519e6844eddb25ee4f927f3eadeb"
+    },
+    {
+      "file": "cold_matrix/native_first/before.json",
+      "bytes": 41,
+      "sha256": "64eb61735e4fc07197cd7b8b7b674ef13e5767da09e691a23dba5ac33f004370"
+    },
+    {
+      "file": "cold_matrix/native_first/changed_sidecars.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "file": "cold_matrix/native_first/cold_editor.json",
+      "bytes": 2249,
+      "sha256": "5bf9e3a077fdd29b0be92dbede0fad4f5c238d10e69b0b5e194de46b64cd7f90"
+    },
+    {
+      "file": "cold_matrix/native_first/cold_editor.txt",
+      "bytes": 452264,
+      "sha256": "d6da46189f0342f4ed09ef847a2cecc3ab47c7c91d409cce3cfa15605b70e159"
+    },
+    {
+      "file": "cold_matrix/native_first/warm_editor.json",
+      "bytes": 2178,
+      "sha256": "3e4f29b2c23a13f295b4199cde4b6b7d907b6dab4422fd0cd306e2b57fec5f1f"
+    },
+    {
+      "file": "cold_matrix/native_first/warm_editor.txt",
+      "bytes": 1033,
+      "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+    },
+    {
+      "file": "cold_matrix/native_first/warm_runner.json",
+      "bytes": 2848,
+      "sha256": "e8644d30fb0ea6e0008d97cd45bc93d645ff0bfd7c4b1ccb1edea03a1a7feac6"
+    },
+    {
+      "file": "cold_matrix/native_first/warm_runner.txt",
+      "bytes": 102,
+      "sha256": "ac35165c48c5f0299f0f9eba21d33469e3ba81b8faf6c39e0e9c86dd19dd8454"
+    },
+    {
+      "file": "cold_matrix/native_first/warm_runner_logs/setup.log",
+      "bytes": 1033,
+      "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+    },
+    {
+      "file": "cold_matrix/native_first/warm_runner_logs/test_hint_player.gd.log",
+      "bytes": 3670,
+      "sha256": "6997369dcd9a6d2d40bad5e906f7c550ad3a7cf9daafe3b5b8ce1f04b1fcd395"
+    },
+    {
+      "file": "cold_matrix/repro_state.json",
+      "bytes": 18364,
+      "sha256": "247e162cac6c8e28f4eae436810455089906604017dd537b8d4a9ab8581f4662"
+    },
+    {
+      "file": "cold_matrix/runner_first/after_cold.json",
+      "bytes": 454,
+      "sha256": "07912dc973bd4c8056a3ae28e7a3ef6595dcba43e1b7e173f8d916865d4fbe37"
+    },
+    {
+      "file": "cold_matrix/runner_first/before.json",
+      "bytes": 41,
+      "sha256": "64eb61735e4fc07197cd7b8b7b674ef13e5767da09e691a23dba5ac33f004370"
+    },
+    {
+      "file": "cold_matrix/runner_first/changed_sidecars.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "file": "cold_matrix/runner_first/cold_runner.json",
+      "bytes": 2918,
+      "sha256": "490622a8a9b8a5232d9ed0065ac57a9e279ebfec62ec893a57b8342848a9cb13"
+    },
+    {
+      "file": "cold_matrix/runner_first/cold_runner.txt",
+      "bytes": 102,
+      "sha256": "ac35165c48c5f0299f0f9eba21d33469e3ba81b8faf6c39e0e9c86dd19dd8454"
+    },
+    {
+      "file": "cold_matrix/runner_first/cold_runner_logs/setup.log",
+      "bytes": 452599,
+      "sha256": "c765980077af692f6151a64365b11bbbd45e09ed1ae62dfb69a33c7ffc1369d6"
+    },
+    {
+      "file": "cold_matrix/runner_first/cold_runner_logs/test_hint_player.gd.log",
+      "bytes": 3670,
+      "sha256": "6997369dcd9a6d2d40bad5e906f7c550ad3a7cf9daafe3b5b8ce1f04b1fcd395"
+    },
+    {
+      "file": "cold_matrix/runner_first/warm_runner.json",
+      "bytes": 2848,
+      "sha256": "8a49f4dc1fa83cf9fbc6c76ba8c5fecf4838a08e71ded61665b0c6bc831eda31"
+    },
+    {
+      "file": "cold_matrix/runner_first/warm_runner.txt",
+      "bytes": 102,
+      "sha256": "ac35165c48c5f0299f0f9eba21d33469e3ba81b8faf6c39e0e9c86dd19dd8454"
+    },
+    {
+      "file": "cold_matrix/runner_first/warm_runner_logs/setup.log",
+      "bytes": 1033,
+      "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+    },
+    {
+      "file": "cold_matrix/runner_first/warm_runner_logs/test_hint_player.gd.log",
+      "bytes": 3670,
+      "sha256": "6997369dcd9a6d2d40bad5e906f7c550ad3a7cf9daafe3b5b8ce1f04b1fcd395"
+    },
+    {
+      "file": "cold_matrix/source_manifest.json",
+      "bytes": 816064,
+      "sha256": "ea1405505ebe8cab99cb9447440d20b0c4dbbd1ff011aea618b6cce0f8502ac4"
+    },
+    {
+      "file": "cold_matrix_launcher.txt",
+      "bytes": 375,
+      "sha256": "12963cc18f2428a2b8858b99564ae9d66283acaabd4369d3439d3beb1d59a97d"
+    },
+    {
+      "file": "collection.json",
+      "bytes": 2982,
+      "sha256": "51fedf22bd35be0a03ae919ecc3eae043fcd9f4a0e61bdfc4a520c938439b0ed"
+    },
+    {
+      "file": "diagnostic_availability.json",
+      "bytes": 1230,
+      "sha256": "889085f1f582a8525c0c2b09f417774e6f4038a80247e9945c61f4f1c5812328"
+    },
+    {
+      "file": "executed_scripts/cold_import_repro.py",
+      "bytes": 14407,
+      "sha256": "84dea68f4e3ffa4fde98591081e76a89ede5660c793a609df194c52ef1416b3b"
+    },
+    {
+      "file": "executed_scripts/sidecar_restore_repro.py",
+      "bytes": 7492,
+      "sha256": "0d64b83b67acf458e54ead12314003348ba4794ecb95bd5b366d5d7b30ceed2e"
+    },
+    {
+      "file": "historical_source_availability.json",
+      "bytes": 326,
+      "sha256": "08ab35ddae62452644ec7e8ca2cda3e184cbe9fa436cae3f3e21e7565239cadf"
+    },
+    {
+      "file": "retained_input_validation.json",
+      "bytes": 771,
+      "sha256": "d607ad50bc78f28fdf10594fc593e03e188621cf46ec609b13af4bd173e70d9d"
+    },
+    {
+      "file": "sidecar_restore/cache_input_manifest.json",
+      "bytes": 493980,
+      "sha256": "4c54bcb13b0854be9d3db197d9f6b0ad7f37616e11d391ebdfb8d6be10484bc9"
+    },
+    {
+      "file": "sidecar_restore/control_sidecars.json",
+      "bytes": 287095,
+      "sha256": "9a939fe6f2bd08849a2fe993eacc1cba639e8436c4a8bf3d368094e159261825"
+    },
+    {
+      "file": "sidecar_restore/restored_sidecars.json",
+      "bytes": 370394,
+      "sha256": "b41af46dd3ffb02e7d8889874b1bba55248375006b5f702b045ddec3a7efb7b7"
+    },
+    {
+      "file": "sidecar_restore/restored_sidecars_runner.json",
+      "bytes": 41186,
+      "sha256": "1d441e5178761bcf2c17240f8ce36031c360c21809cb96248f9973b9612f12d7"
+    },
+    {
+      "file": "sidecar_restore/restored_sidecars_runner.txt",
+      "bytes": 102,
+      "sha256": "ac35165c48c5f0299f0f9eba21d33469e3ba81b8faf6c39e0e9c86dd19dd8454"
+    },
+    {
+      "file": "sidecar_restore/restored_sidecars_runner_logs/setup.log",
+      "bytes": 669074,
+      "sha256": "8660c6ce2948f6ad6f76a6f1728f0c7ad0c35d084c5d6b6a4447374bc26efe82"
+    },
+    {
+      "file": "sidecar_restore/restored_sidecars_runner_logs/test_hint_player.gd.log",
+      "bytes": 3670,
+      "sha256": "6997369dcd9a6d2d40bad5e906f7c550ad3a7cf9daafe3b5b8ce1f04b1fcd395"
+    },
+    {
+      "file": "sidecar_restore/state.json",
+      "bytes": 52603,
+      "sha256": "9e72fd1055c601f8dd836506fbb0c0b5a807705fc36e9a89e1df6026a3aa4e9e"
+    },
+    {
+      "file": "sidecar_restore/unchanged_retry_runner.json",
+      "bytes": 2794,
+      "sha256": "37554f03dfd9214c8a03696180015a0aa2ea8785213f92cfc6f61c45eec22ff1"
+    },
+    {
+      "file": "sidecar_restore/unchanged_retry_runner.txt",
+      "bytes": 102,
+      "sha256": "ac35165c48c5f0299f0f9eba21d33469e3ba81b8faf6c39e0e9c86dd19dd8454"
+    },
+    {
+      "file": "sidecar_restore/unchanged_retry_runner_logs/setup.log",
+      "bytes": 1033,
+      "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+    },
+    {
+      "file": "sidecar_restore/unchanged_retry_runner_logs/test_hint_player.gd.log",
+      "bytes": 3670,
+      "sha256": "6997369dcd9a6d2d40bad5e906f7c550ad3a7cf9daafe3b5b8ce1f04b1fcd395"
+    },
+    {
+      "file": "sidecar_restore/warm_control_runner.json",
+      "bytes": 2858,
+      "sha256": "09a65ec94f1b1736ecfa8726ca881621aa1f7160c2b0c0a5dba1409ea3cf6533"
+    },
+    {
+      "file": "sidecar_restore/warm_control_runner.txt",
+      "bytes": 102,
+      "sha256": "ac35165c48c5f0299f0f9eba21d33469e3ba81b8faf6c39e0e9c86dd19dd8454"
+    },
+    {
+      "file": "sidecar_restore/warm_control_runner_logs/setup.log",
+      "bytes": 125583,
+      "sha256": "57f1406e5334aee13e5ebd877a58b3944fdc6a86a8575a5ac482fc1e95ecd000"
+    },
+    {
+      "file": "sidecar_restore/warm_control_runner_logs/test_hint_player.gd.log",
+      "bytes": 17655,
+      "sha256": "1b97818b608e7d68b4896b6f20901924220ab62868d0c452c82d355888297f26"
+    },
+    {
+      "file": "sidecar_restore_launcher.txt",
+      "bytes": 254,
+      "sha256": "72b6f3463fe88f20072b74a9b6e3b075948d832932cc63b4a7175fdf15cde98e"
+    },
+    {
+      "file": "warm_input_sidecar_payloads.json",
+      "bytes": 1347,
+      "sha256": "5b7ae4e6a9ef3220217fa192f5bfad72b55a3bbf720165fdb93801916a55944f"
+    }
+  ]
+}
