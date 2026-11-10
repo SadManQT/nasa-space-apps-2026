@@ -275,13 +275,13 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-120">M1-120</a> Investigate measured Windows EVA scene generation over the loading budget <span class="chip ">any</span> <span class="chip ">P0</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="asif"><b>Md. Asif Iqbal</b> <span class="id">asif</span><div class="meta">Class mode and Chapter 2/3 feature chains; curriculum · 20% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">7 todo</span></div><div class="bar"><i style="width:0%"></i></div>
-<details open><summary>Working now (2)</summary><ul>
+<div class="panel" data-member="asif"><b>Md. Asif Iqbal</b> <span class="id">asif</span><div class="meta">Class mode and Chapter 2/3 feature chains; curriculum · 20% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">6 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<details open><summary>Working now (3)</summary><ul>
+<li><a class="id" href="#M3-3P">M3-3P</a> Chapter 3 puzzles P-05 and P-06 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Asif/codex on 2026-11-10</div></li>
 <li><a class="id" href="#M1-103">M1-103</a> Expose the Solo/Class session and team-plan bridge for M1-37 <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Asif/antigravity on 2026-11-10</div></li>
 <li><a class="id" href="#M1-105">M1-105</a> Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2 <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Asif/antigravity on 2026-11-10</div></li>
 </ul></details>
-<details open><summary>Next up today (2)</summary><ul>
-<li><a class="id" href="#M3-3P">M3-3P</a> Chapter 3 puzzles P-05 and P-06 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span></li>
+<details open><summary>Next up today (1)</summary><ul>
 <li><a class="id" href="#M3-69">M3-69</a> The junior-astronaut curriculum: competencies, the Academy manual and &#x27;what you learned&#x27; debriefs <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
 <details open><summary>Blocked (1)</summary><ul>
@@ -2578,8 +2578,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 3 puzzles P-05 and P-06 as real interactive panels",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Asif/codex",
    "deps": [
     "M1-09",
     "M1-38"
@@ -2615,7 +2615,21 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "integration_paths": [
     "game/scripts/ui/",
     "game/tools/test_*.gd",
-    "production/qa/evidence/M3-3P*"
+    "production/qa/evidence/M3-3P*",
+    "game/resources/campaign/content/p05_falling_pressure.json",
+    "game/resources/campaign/content/p06_harvest_future.json",
+    "game/scripts/missions/extended_gate_catalog.gd"
+   ],
+   "edit_files": [
+    "game/scripts/puzzles/p05_falling_pressure.gd",
+    "game/scripts/puzzles/p06_harvest_future.gd",
+    "game/scripts/puzzles/extended_puzzle_ledger.gd",
+    "game/scripts/ui/chapter3_puzzle_panel.gd",
+    "game/scenes/ui/chapter3_puzzle_panel.tscn",
+    "game/resources/campaign/content/p05_falling_pressure.json",
+    "game/resources/campaign/content/p06_harvest_future.json",
+    "game/scripts/missions/extended_gate_catalog.gd",
+    "game/tools/test_p05_p06_puzzles.gd"
    ],
    "batch_phase": "implementation"
   },
@@ -7963,6 +7977,13 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-105*"
+   ],
+   "edit_files": [
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "game/scripts/missions/chapter2_route.gd",
+    "game/scripts/missions/chapter2_gate_catalog.gd",
+    "game/tools/test_chapter2_route.gd",
+    "game/tools/test_campaign_interaction_input.gd"
    ],
    "batch_phase": "implementation"
   },

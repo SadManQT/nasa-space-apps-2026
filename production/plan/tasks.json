@@ -2041,8 +2041,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 3 puzzles P-05 and P-06 as real interactive panels",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Asif/codex",
    "deps": [
     "M1-09",
     "M1-38"
@@ -2078,7 +2078,21 @@
    "integration_paths": [
     "game/scripts/ui/",
     "game/tools/test_*.gd",
-    "production/qa/evidence/M3-3P*"
+    "production/qa/evidence/M3-3P*",
+    "game/resources/campaign/content/p05_falling_pressure.json",
+    "game/resources/campaign/content/p06_harvest_future.json",
+    "game/scripts/missions/extended_gate_catalog.gd"
+   ],
+   "edit_files": [
+    "game/scripts/puzzles/p05_falling_pressure.gd",
+    "game/scripts/puzzles/p06_harvest_future.gd",
+    "game/scripts/puzzles/extended_puzzle_ledger.gd",
+    "game/scripts/ui/chapter3_puzzle_panel.gd",
+    "game/scenes/ui/chapter3_puzzle_panel.tscn",
+    "game/resources/campaign/content/p05_falling_pressure.json",
+    "game/resources/campaign/content/p06_harvest_future.json",
+    "game/scripts/missions/extended_gate_catalog.gd",
+    "game/tools/test_p05_p06_puzzles.gd"
    ]
   },
   {
@@ -7249,6 +7263,13 @@
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-105*"
+   ],
+   "edit_files": [
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "game/scripts/missions/chapter2_route.gd",
+    "game/scripts/missions/chapter2_gate_catalog.gd",
+    "game/tools/test_chapter2_route.gd",
+    "game/tools/test_campaign_interaction_input.gd"
    ]
   },
   {
