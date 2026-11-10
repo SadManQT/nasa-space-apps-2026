@@ -4618,7 +4618,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Rule out a threaded-loading deadlock at full-cast entry",
-   "status": "blocked",
+   "status": "done",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -4631,8 +4631,8 @@
     "game/scripts/loading/load_preparation.gd"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Atik; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n | 5 Nov 02:30: earlier attempt was blocked only because the Codex sandbox cannot open a window; write production/qa/evidence/M1-53_capture.sh to run the 10 windowed probes (the night shift runs it outside the sandbox).",
-   "evidence": "",
-   "updated": "2026-11-10",
+   "evidence": "10/10 consecutive windowed Metal perf_probe runs, zero stalls/recoveries, full_cast_enter 1.47-1.65 s; forced-stall 29/0; held-raw recovery PASS; production/qa/evidence/M1-53_acceptance.md (Mac only; original Windows host and M1-92 not claimed)",
+   "updated": "2026-11-11",
    "prompt": "Found 5 Nov during the round-3 rendered verification: one windowed run of game/tools/perf_probe.gd (--perf-probe, window on top) stopped right after the garden_rebuild transition, at the start of the full-cast stage: Godot idle (~2% CPU) with no progress for 17 minutes. The next run passed cleanly, so it is intermittent. Find whether the threaded preparation (ResourceLoader.load_threaded_request / WorkerThreadPool jobs in game/scripts/loading/, staged construction in campaign_room.gd and chapter1_campaign.gd) can wait forever: a job that never reports, a main-thread await on a status that never changes, a resource requested twice, or a deadlock with a mutex. Add a watchdog: any preparation step that exceeds a time limit logs its step and falls back to synchronous loading behind the loading card instead of hanging.\nAcceptance: run the windowed probe 10 times in a row (command in production/qa/perf_2026-11-04.md) with zero stalls; a test forces a stuck job and proves the fallback completes; run_tests.sh passes.",
    "blocker": "10 Nov integration recheck under the user owner override: Sadman owner deliveryccd04a71/M1-126 is merged; its earlier missing-delivery blocker is resolved. Ramim11722b7d preserves its single-owner/node-lifetime recovery and bounds private JSON cleanup. Actual original-Windows held-raw recovery53/0 (including post-publication takeover) and native loading31/0 pass; evidence and prior failures are retained at production/qa/evidence/M1-125_117_gate_2026-11-10/raw_cleanup/. Still needs the task-specific ten consecutive full windowed perf_probe runs with zero stalls and the complete119-suite gate, which is currently running under M1-125. The one native fixture is not a substitute for those ten probes; resume that collection on the documented native host, retaining all attempts. Owner remains Atik; no Done or original Mac draw/Arc teardown claim.",
    "reserved_for": "sadman",

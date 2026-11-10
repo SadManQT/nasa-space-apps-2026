@@ -1,0 +1,1402 @@
+{
+	"cpu_only": false,
+	"events": [
+		{
+			"duration_ms": 2324.537,
+			"event": "title_build",
+			"max_frame_interval_ms": 1309.547,
+			"steps": [
+				{
+					"ms": 97.272,
+					"step": "worker_decode:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 5.735,
+					"step": "worker_mipmaps:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"end_usec": 1825474,
+					"ms": 1.577,
+					"start_usec": 1823897,
+					"step": "glb_generate_scene:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 1952038,
+					"ms": 0.192,
+					"start_usec": 1951846,
+					"step": "glb_pack:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 1952582,
+					"ms": 0.015,
+					"start_usec": 1952567,
+					"step": "glb_free_nodes:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 1952631,
+					"ms": 0.047,
+					"start_usec": 1952584,
+					"step": "glb_publish_cache:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 1957785,
+					"ms": 0.004,
+					"start_usec": 1957781,
+					"step": "glb_release_animations:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 1957815,
+					"ms": 0.02,
+					"start_usec": 1957795,
+					"step": "glb_release_json:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 1973953,
+					"ms": 0.032,
+					"start_usec": 1973921,
+					"step": "glb_release_state:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"ms": 128.744,
+					"step": "worker_decode:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 5.696,
+					"step": "worker_mipmaps:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"end_usec": 2141541,
+					"ms": 1.107,
+					"start_usec": 2140434,
+					"step": "glb_generate_scene:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2157572,
+					"ms": 0.107,
+					"start_usec": 2157465,
+					"step": "glb_pack:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2173832,
+					"ms": 0.026,
+					"start_usec": 2173806,
+					"step": "glb_free_nodes:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2173878,
+					"ms": 0.043,
+					"start_usec": 2173835,
+					"step": "glb_publish_cache:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2190457,
+					"ms": 0.003,
+					"start_usec": 2190454,
+					"step": "glb_release_animations:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2190490,
+					"ms": 0.025,
+					"start_usec": 2190465,
+					"step": "glb_release_json:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2207244,
+					"ms": 0.03,
+					"start_usec": 2207214,
+					"step": "glb_release_state:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"ms": 47.605,
+					"step": "worker_decode:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 2.311,
+					"step": "worker_mipmaps:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"end_usec": 2274065,
+					"ms": 0.207,
+					"start_usec": 2273858,
+					"step": "glb_generate_scene:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2291168,
+					"ms": 0.179,
+					"start_usec": 2290989,
+					"step": "glb_pack:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2307246,
+					"ms": 0.029,
+					"start_usec": 2307217,
+					"step": "glb_free_nodes:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2307316,
+					"ms": 0.066,
+					"start_usec": 2307250,
+					"step": "glb_publish_cache:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2324031,
+					"ms": 0.003,
+					"start_usec": 2324028,
+					"step": "glb_release_animations:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2324074,
+					"ms": 0.031,
+					"start_usec": 2324043,
+					"step": "glb_release_json:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2340687,
+					"ms": 0.034,
+					"start_usec": 2340653,
+					"step": "glb_release_state:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"ms": 135.014,
+					"step": "worker_content_validation"
+				},
+				{
+					"end_usec": 2509241,
+					"ms": 0.823,
+					"start_usec": 2508418,
+					"step": "toon:PR_MissionTable",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2509280,
+					"ms": 0.016,
+					"start_usec": 2509264,
+					"step": "toon:PR_BatteryJar",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2509308,
+					"ms": 0.012,
+					"start_usec": 2509296,
+					"step": "toon:PR_SeedPacket",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2509493,
+					"ms": 2.418,
+					"start_usec": 2507075,
+					"step": "title_stage",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 3930676,
+					"ms": 67.985,
+					"start_usec": 3862691,
+					"step": "title_ui_save_validation",
+					"thread_id": 1
+				}
+			],
+			"transition_frames": 55
+		},
+		{
+			"duration_ms": 1336.93,
+			"event": "new_campaign",
+			"max_frame_interval_ms": 462.503,
+			"steps": [
+				{
+					"end_usec": 24042344,
+					"ms": 0.114,
+					"start_usec": 24042230,
+					"step": "campaign_scene_instance",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24084321,
+					"ms": 6.702,
+					"start_usec": 24077619,
+					"step": "content_validation",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24167947,
+					"ms": 76.765,
+					"start_usec": 24091182,
+					"step": "route_profile",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24251977,
+					"ms": 3.218,
+					"start_usec": 24248759,
+					"step": "room_shell:LOC-01",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24471853,
+					"ms": 219.872,
+					"start_usec": 24251981,
+					"step": "room_fixtures_doors:LOC-01",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24472931,
+					"ms": 1.075,
+					"start_usec": 24471856,
+					"step": "room_navigation:LOC-01",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24473711,
+					"ms": 231.497,
+					"start_usec": 24242214,
+					"step": "room_rebuild",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24976857,
+					"ms": 18.342,
+					"start_usec": 24958515,
+					"step": "campaign_place_crew",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24991723,
+					"ms": 0.098,
+					"start_usec": 24991625,
+					"step": "hud_instantiate",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24995746,
+					"ms": 4.017,
+					"start_usec": 24991729,
+					"step": "hud_ready",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25088045,
+					"ms": 2.399,
+					"start_usec": 25085646,
+					"step": "hud_panels",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25110652,
+					"ms": 10.179,
+					"start_usec": 25100473,
+					"step": "hud_comms_mission_table",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25161752,
+					"ms": 0.439,
+					"start_usec": 25161313,
+					"step": "hud_chapter_panels",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25181528,
+					"ms": 0.154,
+					"start_usec": 25181374,
+					"step": "hud_p01",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25253186,
+					"ms": 6.155,
+					"start_usec": 25247031,
+					"step": "hud_query_projection",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25253534,
+					"ms": 0.347,
+					"start_usec": 25253187,
+					"step": "hud_panels_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25254105,
+					"ms": 0.57,
+					"start_usec": 25253535,
+					"step": "hud_outpost_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25254137,
+					"ms": 7.108,
+					"start_usec": 25247029,
+					"step": "hud_initial_query",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25254140,
+					"ms": 168.504,
+					"start_usec": 25085636,
+					"step": "hud_setup",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25254144,
+					"ms": 262.554,
+					"start_usec": 24991590,
+					"step": "campaign_ui",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25268098,
+					"ms": 5.083,
+					"start_usec": 25263015,
+					"step": "campaign_save",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25280650,
+					"ms": 0.843,
+					"start_usec": 25279807,
+					"step": "hud_messages_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25284221,
+					"ms": 3.57,
+					"start_usec": 25280651,
+					"step": "hud_caption_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25310503,
+					"ms": 15.618,
+					"start_usec": 25294885,
+					"step": "hud_targets_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25318167,
+					"ms": 2.894,
+					"start_usec": 25315273,
+					"step": "hud_query_projection",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25318606,
+					"ms": 0.438,
+					"start_usec": 25318168,
+					"step": "hud_panels_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25319178,
+					"ms": 0.572,
+					"start_usec": 25318606,
+					"step": "hud_outpost_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25323564,
+					"ms": 4.356,
+					"start_usec": 25319208,
+					"step": "hud_accessibility_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25323575,
+					"ms": 43.933,
+					"start_usec": 25279642,
+					"step": "campaign_hud_refresh",
+					"thread_id": 1
+				}
+			],
+			"transition_frames": 41
+		},
+		{
+			"duration_ms": 1003.983,
+			"event": "garden_enter",
+			"max_frame_interval_ms": 248.732,
+			"steps": [
+				{
+					"ms": 39.885,
+					"step": "worker_decode:res://assets/props/narrative/PR_LabelHolder.glb"
+				},
+				{
+					"ms": 0.624,
+					"step": "worker_mipmaps:res://assets/props/narrative/PR_LabelHolder.glb"
+				},
+				{
+					"end_usec": 66108187,
+					"ms": 0.496,
+					"start_usec": 66107691,
+					"step": "glb_generate_scene:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66125632,
+					"ms": 0.369,
+					"start_usec": 66125263,
+					"step": "glb_pack:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66141413,
+					"ms": 0.079,
+					"start_usec": 66141334,
+					"step": "glb_free_nodes:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66141587,
+					"ms": 0.164,
+					"start_usec": 66141423,
+					"step": "glb_publish_cache:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66158345,
+					"ms": 0.008,
+					"start_usec": 66158337,
+					"step": "glb_release_animations:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66158461,
+					"ms": 0.09,
+					"start_usec": 66158371,
+					"step": "glb_release_json:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66174575,
+					"ms": 0.09,
+					"start_usec": 66174485,
+					"step": "glb_release_state:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66206502,
+					"ms": 2.166,
+					"start_usec": 66204336,
+					"step": "room_shell:LOC-03",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66211929,
+					"ms": 5.425,
+					"start_usec": 66206504,
+					"step": "room_fixtures_doors:LOC-03",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66212531,
+					"ms": 0.599,
+					"start_usec": 66211932,
+					"step": "room_navigation:LOC-03",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66213675,
+					"ms": 22.543,
+					"start_usec": 66191132,
+					"step": "room_rebuild",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66586681,
+					"ms": 12.03,
+					"start_usec": 66574651,
+					"step": "campaign_place_crew",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66882624,
+					"ms": 0.754,
+					"start_usec": 66881870,
+					"step": "hud_messages_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66882819,
+					"ms": 0.194,
+					"start_usec": 66882625,
+					"step": "hud_caption_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66911093,
+					"ms": 15.398,
+					"start_usec": 66895695,
+					"step": "hud_targets_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66918774,
+					"ms": 2.661,
+					"start_usec": 66916113,
+					"step": "hud_query_projection",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66919432,
+					"ms": 0.657,
+					"start_usec": 66918775,
+					"step": "hud_panels_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66919935,
+					"ms": 0.502,
+					"start_usec": 66919433,
+					"step": "hud_outpost_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 66924319,
+					"ms": 4.359,
+					"start_usec": 66919960,
+					"step": "hud_accessibility_refresh",
+					"thread_id": 1
+				}
+			],
+			"transition_frames": 33
+		},
+		{
+			"duration_ms": 54.897,
+			"event": "garden_rebuild",
+			"max_frame_interval_ms": 39.118,
+			"steps": [
+				{
+					"end_usec": 107625839,
+					"ms": 1.271,
+					"start_usec": 107624568,
+					"step": "room_shell:LOC-03",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 107628187,
+					"ms": 2.346,
+					"start_usec": 107625841,
+					"step": "room_fixtures_doors:LOC-03",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 107628629,
+					"ms": 0.441,
+					"start_usec": 107628188,
+					"step": "room_navigation:LOC-03",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 107638747,
+					"ms": 8.929,
+					"start_usec": 107629818,
+					"step": "campaign_place_crew",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 107638750,
+					"ms": 21.766,
+					"start_usec": 107616984,
+					"step": "room_rebuild",
+					"thread_id": 1
+				}
+			],
+			"transition_frames": 2
+		},
+		{
+			"duration_ms": 1471.015,
+			"event": "full_cast_enter",
+			"max_frame_interval_ms": 29.578,
+			"steps": [
+				{
+					"ms": 54.572,
+					"step": "worker_decode:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb"
+				},
+				{
+					"ms": 2.457,
+					"step": "worker_mipmaps:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb"
+				},
+				{
+					"end_usec": 108341345,
+					"ms": 0.297,
+					"start_usec": 108341048,
+					"step": "glb_generate_scene:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108358009,
+					"ms": 0.231,
+					"start_usec": 108357778,
+					"step": "glb_pack:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108374531,
+					"ms": 0.018,
+					"start_usec": 108374513,
+					"step": "glb_free_nodes:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108374596,
+					"ms": 0.063,
+					"start_usec": 108374533,
+					"step": "glb_publish_cache:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108391104,
+					"ms": 0.002,
+					"start_usec": 108391102,
+					"step": "glb_release_animations:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108391135,
+					"ms": 0.023,
+					"start_usec": 108391112,
+					"step": "glb_release_json:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108407870,
+					"ms": 0.029,
+					"start_usec": 108407841,
+					"step": "glb_release_state:res://assets/props/PR_RepairClamp/PR_RepairClamp.glb",
+					"thread_id": 1
+				},
+				{
+					"ms": 63.929,
+					"step": "worker_decode:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb"
+				},
+				{
+					"ms": 2.591,
+					"step": "worker_mipmaps:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb"
+				},
+				{
+					"end_usec": 108491364,
+					"ms": 0.346,
+					"start_usec": 108491018,
+					"step": "glb_generate_scene:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108508238,
+					"ms": 0.192,
+					"start_usec": 108508046,
+					"step": "glb_pack:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108524395,
+					"ms": 0.024,
+					"start_usec": 108524371,
+					"step": "glb_free_nodes:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108524485,
+					"ms": 0.087,
+					"start_usec": 108524398,
+					"step": "glb_publish_cache:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108540431,
+					"ms": 0.003,
+					"start_usec": 108540428,
+					"step": "glb_release_animations:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108540467,
+					"ms": 0.025,
+					"start_usec": 108540442,
+					"step": "glb_release_json:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108557124,
+					"ms": 0.037,
+					"start_usec": 108557087,
+					"step": "glb_release_state:res://assets/props/PR_ManualGauge/PR_ManualGauge.glb",
+					"thread_id": 1
+				},
+				{
+					"ms": 132.288,
+					"step": "worker_decode:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb"
+				},
+				{
+					"ms": 0.0,
+					"step": "worker_mipmaps:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb"
+				},
+				{
+					"end_usec": 108710095,
+					"ms": 0.999,
+					"start_usec": 108709096,
+					"step": "glb_generate_scene:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108725885,
+					"ms": 0.445,
+					"start_usec": 108725440,
+					"step": "glb_pack:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108742346,
+					"ms": 0.122,
+					"start_usec": 108742224,
+					"step": "glb_free_nodes:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108742701,
+					"ms": 0.343,
+					"start_usec": 108742358,
+					"step": "glb_publish_cache:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108759042,
+					"ms": 0.01,
+					"start_usec": 108759032,
+					"step": "glb_release_animations:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108759261,
+					"ms": 0.19,
+					"start_usec": 108759071,
+					"step": "glb_release_json:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108774530,
+					"ms": 0.057,
+					"start_usec": 108774473,
+					"step": "glb_release_state:res://assets/props/PR_DocumentSleeve/PR_DocumentSleeve.glb",
+					"thread_id": 1
+				},
+				{
+					"ms": 115.888,
+					"step": "worker_decode:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb"
+				},
+				{
+					"ms": 0.0,
+					"step": "worker_mipmaps:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb"
+				},
+				{
+					"end_usec": 108908964,
+					"ms": 1.22,
+					"start_usec": 108907744,
+					"step": "glb_generate_scene:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108925342,
+					"ms": 0.48,
+					"start_usec": 108924862,
+					"step": "glb_pack:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108942689,
+					"ms": 0.143,
+					"start_usec": 108942546,
+					"step": "glb_free_nodes:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108943203,
+					"ms": 0.502,
+					"start_usec": 108942701,
+					"step": "glb_publish_cache:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108957895,
+					"ms": 0.009,
+					"start_usec": 108957886,
+					"step": "glb_release_animations:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108958137,
+					"ms": 0.217,
+					"start_usec": 108957920,
+					"step": "glb_release_json:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 108975844,
+					"ms": 0.14,
+					"start_usec": 108975704,
+					"step": "glb_release_state:res://assets/props/PR_WatchDesk/PR_WatchDesk.glb",
+					"thread_id": 1
+				},
+				{
+					"ms": 151.3,
+					"step": "worker_decode:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb"
+				},
+				{
+					"ms": 0.0,
+					"step": "worker_mipmaps:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb"
+				},
+				{
+					"end_usec": 109162371,
+					"ms": 3.926,
+					"start_usec": 109158445,
+					"step": "glb_generate_scene:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109177677,
+					"ms": 2.107,
+					"start_usec": 109175570,
+					"step": "glb_pack:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109192871,
+					"ms": 0.652,
+					"start_usec": 109192219,
+					"step": "glb_free_nodes:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109193158,
+					"ms": 0.267,
+					"start_usec": 109192891,
+					"step": "glb_publish_cache:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109208292,
+					"ms": 0.008,
+					"start_usec": 109208284,
+					"step": "glb_release_animations:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109208780,
+					"ms": 0.465,
+					"start_usec": 109208315,
+					"step": "glb_release_json:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109225622,
+					"ms": 0.492,
+					"start_usec": 109225130,
+					"step": "glb_release_state:res://assets/props/PR_RelayCrate/PR_RelayCrate.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109256138,
+					"ms": 2.823,
+					"start_usec": 109253315,
+					"step": "room_shell:LOC-02",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109259011,
+					"ms": 2.871,
+					"start_usec": 109256140,
+					"step": "room_fixtures_doors:LOC-02",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109259642,
+					"ms": 0.629,
+					"start_usec": 109259013,
+					"step": "room_navigation:LOC-02",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109259906,
+					"ms": 18.444,
+					"start_usec": 109241462,
+					"step": "room_rebuild",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109475123,
+					"ms": 17.714,
+					"start_usec": 109457409,
+					"step": "campaign_place_crew",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109526560,
+					"ms": 1.246,
+					"start_usec": 109525314,
+					"step": "hud_messages_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109526806,
+					"ms": 0.244,
+					"start_usec": 109526562,
+					"step": "hud_caption_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109571644,
+					"ms": 17.776,
+					"start_usec": 109553868,
+					"step": "hud_targets_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109577947,
+					"ms": 3.063,
+					"start_usec": 109574884,
+					"step": "hud_query_projection",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109578847,
+					"ms": 0.899,
+					"start_usec": 109577948,
+					"step": "hud_panels_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109579558,
+					"ms": 0.71,
+					"start_usec": 109578848,
+					"step": "hud_outpost_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109584427,
+					"ms": 4.828,
+					"start_usec": 109579599,
+					"step": "hud_accessibility_refresh",
+					"thread_id": 1
+				}
+			],
+			"transition_frames": 86
+		},
+		{
+			"cpu_ms": 8.486,
+			"event": "video_open_CS-01"
+		},
+		{
+			"event": "video_position_CS-01",
+			"seconds": 20.0413970000001
+		},
+		{
+			"cpu_ms": 6.4,
+			"event": "video_open_CS-02"
+		},
+		{
+			"event": "video_position_CS-02",
+			"seconds": 20.008038
+		},
+		{
+			"cpu_ms": 7.216,
+			"event": "video_open_CS-03"
+		},
+		{
+			"event": "video_position_CS-03",
+			"seconds": 20.000395
+		},
+		{
+			"cpu_ms": 6.114,
+			"event": "video_open_CS-04"
+		},
+		{
+			"event": "video_position_CS-04",
+			"seconds": 20.011159
+		},
+		{
+			"cpu_ms": 7.48,
+			"event": "video_open_CS-05"
+		},
+		{
+			"event": "video_position_CS-05",
+			"seconds": 20.0061430000001
+		},
+		{
+			"cpu_ms": 7.413,
+			"event": "video_open_CS-06"
+		},
+		{
+			"event": "video_position_CS-06",
+			"seconds": 19.992784
+		},
+		{
+			"cpu_ms": 7.033,
+			"event": "video_open_CS-07"
+		},
+		{
+			"event": "video_position_CS-07",
+			"seconds": 20.008199
+		},
+		{
+			"cpu_ms": 6.297,
+			"event": "video_open_CS-08"
+		},
+		{
+			"event": "video_position_CS-08",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 6.804,
+			"event": "video_open_CS-09"
+		},
+		{
+			"event": "video_position_CS-09",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 7.408,
+			"event": "video_open_CS-10"
+		},
+		{
+			"event": "video_position_CS-10",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 6.618,
+			"event": "video_open_CS-11"
+		},
+		{
+			"event": "video_position_CS-11",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 6.672,
+			"event": "video_open_CS-12"
+		},
+		{
+			"event": "video_position_CS-12",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 7.908,
+			"event": "video_open_CS-13"
+		},
+		{
+			"event": "video_position_CS-13",
+			"seconds": 20.0168580000001
+		},
+		{
+			"cpu_ms": 7.602,
+			"event": "video_open_CS-14"
+		},
+		{
+			"event": "video_position_CS-14",
+			"seconds": 20.0059830000001
+		},
+		{
+			"cpu_ms": 9.153,
+			"event": "video_open_CS-15"
+		},
+		{
+			"event": "video_position_CS-15",
+			"seconds": 19.9788850000001
+		},
+		{
+			"cpu_ms": 6.528,
+			"event": "video_open_CS-16"
+		},
+		{
+			"event": "video_position_CS-16",
+			"seconds": 0.0
+		},
+		{
+			"cpu_ms": 10.748,
+			"event": "video_open_CS-17"
+		},
+		{
+			"event": "video_position_CS-17",
+			"seconds": 20.0030040000001
+		},
+		{
+			"cpu_ms": 6.727,
+			"event": "video_open_CS-18"
+		},
+		{
+			"event": "video_position_CS-18",
+			"seconds": 0.0
+		}
+	],
+	"metadata": {
+		"chapter1_room_sweep": false,
+		"cpu": "Apple M4",
+		"cpu_only": false,
+		"display": "macOS",
+		"driver": "metal",
+		"engine": {
+			"build": "official",
+			"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+			"hex": 263938,
+			"major": 4,
+			"minor": 7,
+			"patch": 2,
+			"status": "stable",
+			"string": "4.7.2-stable (official)",
+			"timestamp": 0
+		},
+		"gpu": "Apple M4 (Apple9)",
+		"max_fps": 0,
+		"os": "macOS",
+		"physics_ticks": 60,
+		"renderer": "forward_plus",
+		"seconds": 20.0,
+		"transition_schema": 3,
+		"vsync": 1,
+		"window": "(1280, 720)"
+	},
+	"preparation_recoveries": [],
+	"summaries": [
+		{
+			"frames_or_calls": 1124,
+			"max_ms": 429.019,
+			"over_33ms": 7,
+			"p50_ms": 16.669,
+			"p95_ms": 17.809,
+			"p99_ms": 28.261,
+			"sample": "title"
+		},
+		{
+			"frames_or_calls": 1201,
+			"max_ms": 42.103,
+			"over_33ms": 1,
+			"p50_ms": 16.618,
+			"p95_ms": 18.024,
+			"p99_ms": 18.629,
+			"sample": "hub_walk"
+		},
+		{
+			"frames_or_calls": 1200,
+			"max_ms": 31.037,
+			"over_33ms": 0,
+			"p50_ms": 16.601,
+			"p95_ms": 18.091,
+			"p99_ms": 19.049,
+			"sample": "hub_panels"
+		},
+		{
+			"frames_or_calls": 1200,
+			"max_ms": 35.66,
+			"over_33ms": 2,
+			"p50_ms": 16.644,
+			"p95_ms": 17.979,
+			"p99_ms": 18.693,
+			"sample": "garden_walk"
+		},
+		{
+			"frames_or_calls": 1200,
+			"max_ms": 30.109,
+			"over_33ms": 0,
+			"p50_ms": 16.679,
+			"p95_ms": 18.14,
+			"p99_ms": 19.948,
+			"sample": "garden_panels"
+		},
+		{
+			"frames_or_calls": 1198,
+			"max_ms": 38.835,
+			"over_33ms": 4,
+			"p50_ms": 16.643,
+			"p95_ms": 18.309,
+			"p99_ms": 19.5,
+			"sample": "full_cast_walk"
+		},
+		{
+			"frames_or_calls": 1141,
+			"max_ms": 39.475,
+			"over_33ms": 8,
+			"p50_ms": 17.232,
+			"p95_ms": 19.896,
+			"p99_ms": 31.535,
+			"sample": "full_cast_panels"
+		},
+		{
+			"frames_or_calls": 1078,
+			"max_ms": 34.634,
+			"over_33ms": 10,
+			"p50_ms": 18.111,
+			"p95_ms": 21.961,
+			"p99_ms": 32.955,
+			"sample": "video_CS-01"
+		},
+		{
+			"frames_or_calls": 1024,
+			"max_ms": 35.672,
+			"over_33ms": 16,
+			"p50_ms": 18.912,
+			"p95_ms": 25.664,
+			"p99_ms": 33.935,
+			"sample": "video_CS-02"
+		},
+		{
+			"frames_or_calls": 994,
+			"max_ms": 35.53,
+			"over_33ms": 17,
+			"p50_ms": 19.456,
+			"p95_ms": 27.64,
+			"p99_ms": 34.012,
+			"sample": "video_CS-03"
+		},
+		{
+			"frames_or_calls": 995,
+			"max_ms": 34.825,
+			"over_33ms": 16,
+			"p50_ms": 19.543,
+			"p95_ms": 26.675,
+			"p99_ms": 33.31,
+			"sample": "video_CS-04"
+		},
+		{
+			"frames_or_calls": 991,
+			"max_ms": 35.625,
+			"over_33ms": 16,
+			"p50_ms": 19.853,
+			"p95_ms": 27.834,
+			"p99_ms": 33.776,
+			"sample": "video_CS-05"
+		},
+		{
+			"frames_or_calls": 1022,
+			"max_ms": 35.45,
+			"over_33ms": 10,
+			"p50_ms": 19.243,
+			"p95_ms": 24.09,
+			"p99_ms": 32.949,
+			"sample": "video_CS-06"
+		},
+		{
+			"frames_or_calls": 1035,
+			"max_ms": 34.851,
+			"over_33ms": 5,
+			"p50_ms": 18.841,
+			"p95_ms": 23.159,
+			"p99_ms": 32.437,
+			"sample": "video_CS-07"
+		},
+		{
+			"frames_or_calls": 1023,
+			"max_ms": 34.791,
+			"over_33ms": 14,
+			"p50_ms": 18.951,
+			"p95_ms": 25.434,
+			"p99_ms": 33.096,
+			"sample": "video_CS-08"
+		},
+		{
+			"frames_or_calls": 1061,
+			"max_ms": 34.695,
+			"over_33ms": 6,
+			"p50_ms": 18.533,
+			"p95_ms": 22.541,
+			"p99_ms": 32.425,
+			"sample": "video_CS-09"
+		},
+		{
+			"frames_or_calls": 1059,
+			"max_ms": 34.407,
+			"over_33ms": 12,
+			"p50_ms": 18.463,
+			"p95_ms": 22.262,
+			"p99_ms": 33.061,
+			"sample": "video_CS-10"
+		},
+		{
+			"frames_or_calls": 1053,
+			"max_ms": 34.833,
+			"over_33ms": 8,
+			"p50_ms": 18.651,
+			"p95_ms": 22.461,
+			"p99_ms": 32.36,
+			"sample": "video_CS-11"
+		},
+		{
+			"frames_or_calls": 1061,
+			"max_ms": 34.155,
+			"over_33ms": 13,
+			"p50_ms": 18.314,
+			"p95_ms": 22.192,
+			"p99_ms": 33.041,
+			"sample": "video_CS-12"
+		},
+		{
+			"frames_or_calls": 1059,
+			"max_ms": 34.869,
+			"over_33ms": 9,
+			"p50_ms": 18.606,
+			"p95_ms": 22.275,
+			"p99_ms": 32.864,
+			"sample": "video_CS-13"
+		},
+		{
+			"frames_or_calls": 1051,
+			"max_ms": 35.324,
+			"over_33ms": 10,
+			"p50_ms": 18.658,
+			"p95_ms": 22.585,
+			"p99_ms": 32.871,
+			"sample": "video_CS-14"
+		},
+		{
+			"frames_or_calls": 1034,
+			"max_ms": 36.222,
+			"over_33ms": 12,
+			"p50_ms": 18.736,
+			"p95_ms": 25.779,
+			"p99_ms": 33.192,
+			"sample": "video_CS-15"
+		},
+		{
+			"frames_or_calls": 1062,
+			"max_ms": 34.861,
+			"over_33ms": 8,
+			"p50_ms": 18.506,
+			"p95_ms": 22.037,
+			"p99_ms": 32.771,
+			"sample": "video_CS-16"
+		},
+		{
+			"frames_or_calls": 1049,
+			"max_ms": 35.173,
+			"over_33ms": 16,
+			"p50_ms": 18.583,
+			"p95_ms": 22.991,
+			"p99_ms": 33.767,
+			"sample": "video_CS-17"
+		},
+		{
+			"frames_or_calls": 1053,
+			"max_ms": 35.478,
+			"over_33ms": 11,
+			"p50_ms": 18.368,
+			"p95_ms": 24.26,
+			"p99_ms": 33.124,
+			"sample": "video_CS-18"
+		}
+	]
+}

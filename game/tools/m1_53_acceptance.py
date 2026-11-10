@@ -40,10 +40,12 @@ def valid_log(path, marker):
 
 
 def valid_png(path):
-    """Require a PNG header and the requested 1280 by 720 viewport."""
+    """Require a PNG header and a 16:9 viewport of at least 1280 by 720 (the game applies the
+    player's display setting, 1920 by 1080 by default, once a campaign starts)."""
     data = path.read_bytes()
-    require(len(data) > 1000 and data[:8] == b"\x89PNG\r\n\x1a\n" and
-            struct.unpack(">II", data[16:24]) == (1280, 720), f"Invalid screenshot: {path.name}")
+    require(len(data) > 1000 and data[:8] == b"\x89PNG\r\n\x1a\n", f"Invalid screenshot: {path.name}")
+    width, height = struct.unpack(">II", data[16:24])
+    require(width >= 1280 and height >= 720 and width * 9 == height * 16, f"Invalid screenshot size {width}x{height}: {path.name}")
 
 
 def validate_forced(evidence):
