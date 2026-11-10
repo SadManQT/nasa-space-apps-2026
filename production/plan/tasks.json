@@ -8073,6 +8073,54 @@
    "prompt": "Explicit user assignment 10 Nov: install zimo-xiao-zheng/godot-ui-integration skill and thruthesky/gohud addon, enable editor plugin, read setup, verify import; no menu redesign.",
    "reserved_for": "ramim",
    "effort": 2
+  },
+  {
+   "id": "M4-20",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Industrial UI visual and usability polish (user request)",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/ui_design.gd",
+    "game/scripts/ui/ui_kit.gd",
+    "game/scripts/ui/main_menu.gd",
+    "game/scenes/ui/main_menu.tscn",
+    "game/resources/ui/",
+    "game/assets/ui/title/",
+    "game/tools/test_ui_polish.gd",
+    "game/tools/capture_ui_polish.gd",
+    "production/qa/evidence/M4-20/",
+    "production/plan/ui_polish_20261110.md",
+    "PRODUCTION_HANDBOOK.md"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-10.",
+   "evidence": "",
+   "updated": "2026-11-10",
+   "prompt": "User delegates complete visual polish using approved DOOM-inspired direction, safe merges/pushes and an update after every push. Improve shared typography/themes/states and authored main menu, preserve other member locks and all gameplay/save/accessibility contracts. Validate actual native screenshots, 150% text and keyboard navigation.",
+   "reserved_for": "ramim",
+   "effort": 2,
+   "edit_files": [
+    "game/scripts/ui/ui_design.gd",
+    "game/scripts/ui/ui_kit.gd",
+    "game/scripts/ui/main_menu.gd",
+    "game/scenes/ui/main_menu.tscn",
+    "game/resources/ui/ui_design.json",
+    "game/resources/ui/lla_theme.tres",
+    "game/assets/ui/title/aurora_title.jpg",
+    "game/assets/ui/title/aurora_title.jpg.import",
+    "game/tools/test_ui_polish.gd",
+    "game/tools/capture_ui_polish.gd",
+    "production/qa/evidence/M4-20/menu.png",
+    "production/qa/evidence/M4-20/menu_large.png",
+    "production/qa/evidence/M4-20/settings.png",
+    "production/qa/evidence/M4-20/README.md",
+    "production/plan/ui_polish_20261110.md",
+    "PRODUCTION_HANDBOOK.md"
+   ]
   }
  ],
  "requirements": [
@@ -8749,7 +8797,8 @@
     "M3-91",
     "M1-125",
     "M4-18",
-    "M4-19"
+    "M4-19",
+    "M4-20"
    ],
    "sadman": [
     "M4-16",
