@@ -6467,7 +6467,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Investigate Windows cold editor-import crash captured before UI tests",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
@@ -6495,7 +6495,8 @@
     "production/qa/playtests/",
     "game/scripts/loading/",
     "production/qa/perf/"
-   ]
+   ],
+   "blocker": "Saved/pushed evidence 2b848e34: production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/README.md. Historical setup exit139 not reproduced in eight bounded native/runner invocations. Restored-sidecar setup has440 UID/file-access errors despite exit0; full audit supersedes outer success, no crash cause/fix established. Needs original198663-byte raw log/cache/native backtrace (original reporter) or a fresh bounded failing native reproduction sufficient for owned fix/upstream engine case. No game/asset/config/runner changes."
   },
   {
    "id": "M1-86",
