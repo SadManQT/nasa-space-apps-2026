@@ -6499,7 +6499,11 @@
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/retry/runner_logs/test_hint_player.gd.log",
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/retry/runner_logs/test_hint_player.gd.args0",
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/retry/runner_logs/test_hint_player.gd.exit.txt",
-    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/executed_prepare.py"
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/executed_prepare.py",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/continued_repro.py",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/continuation.json",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/continuation_selfcheck.json",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/recovered_repro_20261110/retained_inputs.json"
    ]
   },
   {
