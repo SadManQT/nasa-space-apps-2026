@@ -452,6 +452,9 @@ func apply_controls() -> void:
 		var action_id: String = spec.id
 		if not InputMap.has_action(action_id):
 			InputMap.add_action(action_id)
+		# Remapping replaces the key and the button only. The project's analog
+		# bindings (left stick, triggers) are not remappable here and must survive.
+		var analog: Array = InputMap.action_get_events(action_id).filter(func(event): return event is InputEventJoypadMotion)
 		InputMap.action_erase_events(action_id)
 		var keycode := int(keyboard_bindings.get(action_id, DEFAULT_KEYBOARD_BINDINGS[action_id]))
 		var key_ev := InputEventKey.new()
@@ -462,6 +465,8 @@ func apply_controls() -> void:
 		var joy_ev := InputEventJoypadButton.new()
 		joy_ev.button_index = joy_btn as JoyButton
 		InputMap.action_add_event(action_id, joy_ev)
+		for event in analog:
+			InputMap.action_add_event(action_id, event)
 	# Keep "sprint" synchronized with "run" so PlayerController and EvaSuit see the same binding.
 	if not InputMap.has_action("sprint"):
 		InputMap.add_action("sprint")

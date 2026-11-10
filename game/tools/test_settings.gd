@@ -138,6 +138,11 @@ func _test_remapping_conflicts_and_glyphs() -> void:
 	ev_e.keycode = KEY_E
 	_check(InputMap.event_is_action(ev_h, "interact"), "InputMap maps KEY_H to interact after remap")
 	_check(InputMap.event_is_action(ev_e, "what_now"), "InputMap maps KEY_E to what_now after swap")
+	# Remapping keeps the project's analog left-stick bindings (movement must not need a D-pad).
+	var stick := InputEventJoypadMotion.new()
+	stick.axis = JOY_AXIS_LEFT_Y
+	stick.axis_value = -1.0
+	_check(InputMap.event_is_action(stick, "move_forward"), "left stick still moves forward after controls are applied")
 
 	# Remap controller with conflict: bind 'interact' (currently A) to JOY_BUTTON_Y (currently 'what_now')
 	var pad_swap := gs.remap_controller("interact", JOY_BUTTON_Y)
