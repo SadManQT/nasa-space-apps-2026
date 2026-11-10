@@ -1,8 +1,12 @@
 # M1-122 - Garden furniture collision correction
 
+## Latest player clarification - 10 November 2026
+
+The player [withdrew the original obstacle report](user_report_withdrawn_20261110.md) after exploring the game. No further movement fix is requested; M1-122 remains Done with existing bounded evidence preserved. Separately, teammate5e3fdf82 recovered M1-85's original crash artifacts and returned it to Todo for investigation; the old missing-raw-artifact blocker is resolved. No game code changes accompany this clarification.
+
 ## Accepted integration closure - 10 November 2026
 
-**M1-122 is Done for its bounded implementation scope.** [Current acceptance record](acceptance_20261110_unblocked/README.md) combines the existing source/focused/native evidence with the explicitly accepted119-suite coverage on the identical current game tree. Two original-Windows performance checks now pass618/0; the earlier615/5/comms/full-gate blockers are superseded. No game source was changed for this closure. Exact-pose, native-snapshot, peer-report and failed sparse-diagnostic limits remain documented. M1-85 remains separately blocked on original/fresh native-crash diagnostics.
+**M1-122 is Done for its bounded implementation scope.** [Current acceptance record](acceptance_20261110_unblocked/README.md) combines the existing source/focused/native evidence with the explicitly accepted119-suite coverage on the identical current game tree. Two original-Windows performance checks now pass618/0; the earlier615/5/comms/full-gate blockers are superseded. No game source was changed for this closure. Exact-pose, native-snapshot, peer-report and failed sparse-diagnostic limits remain documented. M1-85 has since returned to Todo after original-artifact recovery; see the latest clarification above.
 
 ## Historical source-specific handoffs (preserved)
 
