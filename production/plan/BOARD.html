@@ -377,12 +377,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-93">M1-93</a> Capture 1080p Chapter 1 room performance on the Intel Arc laptop <span class="chip ">any</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="shanto"><b>Shahariar Rahman Shanto</b> <span class="id">shanto</span><div class="meta">Save slots, autosave/migrations, settings and controls · 4% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">1 todo</span></div><div class="bar"><i style="width:0%"></i></div>
-<details open><summary>Working now (1)</summary><ul>
+<div class="panel" data-member="shanto"><b>Shahariar Rahman Shanto</b> <span class="id">shanto</span><div class="meta">Save slots, autosave/migrations, settings and controls · 4% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<details open><summary>Working now (2)</summary><ul>
+<li><a class="id" href="#M3-70">M3-70</a> Steam-quality settings, controls and saves <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Shanto/Antigravity on 2026-11-10</div></li>
 <li><a class="id" href="#M3-71">M3-71</a> Save slots, autosave and versioned save migrations at Steam quality <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Shanto/Antigravity on 2026-11-10</div></li>
-</ul></details>
-<details open><summary>Next up today (1)</summary><ul>
-<li><a class="id" href="#M3-70">M3-70</a> Steam-quality settings, controls and saves <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
 <div class="panel" data-member=""><b>Unassigned / earlier work</b><div class="meta">Done before the team split, or by someone not on the member list</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:0%"></i></div>
@@ -6149,8 +6147,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Steam-quality settings, controls and saves",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Shanto/Antigravity",
    "deps": [
     "M1-54"
    ],
@@ -6183,6 +6181,14 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/campaign/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-70*"
+   ],
+   "edit_files": [
+    "game/scripts/settings/game_settings.gd",
+    "game/scripts/ui/settings_menu.gd",
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/tools/test_settings.gd",
+    "production/qa/evidence/M3-70_settings_display_audio.png",
+    "production/qa/evidence/M3-70_settings_controls_saves.png"
    ],
    "batch_phase": "implementation"
   },
@@ -6286,7 +6292,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/save/save_service.gd",
     "game/scripts/save/save_slots.gd",
     "game/scripts/ui/save_slots.gd",
-    "game/tools/test_save_slots.gd"
+    "game/tools/test_save_slots.gd",
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "production/qa/evidence/M3-71_save_slots_corrupt_backup.png",
+    "production/qa/evidence/M3-71_save_slots_recovered.png"
    ],
    "batch_phase": "implementation"
   },
