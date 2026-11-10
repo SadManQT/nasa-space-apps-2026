@@ -346,13 +346,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M4-12">M4-12</a> Cache director.query() in nearby_target() and skip ToonMaterials warm-draw on PBR habitat_kit props <span class="chip ">any</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="tanvir"><b>Abu Sayem Mohammed Tanvir</b> <span class="id">tanvir</span><div class="meta">Garden collision/controller fixes and cold-import investigation · 6% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:0%"></i></div>
-<details open><summary>Working now (2)</summary><ul>
-<li><a class="id" href="#M1-122">M1-122</a> Match garden collision to visible furniture and check return-lane clearance <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Tanvir/codex on 2026-11-10</div></li>
-<li><a class="id" href="#M1-123">M1-123</a> Reproduce garden return-to-center stop with the real player controller <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Tanvir/codex on 2026-11-10</div></li>
-</ul></details>
-<details open><summary>Blocked (1)</summary><ul>
-<li><a class="id" href="#M1-85">M1-85</a> Investigate Windows cold editor-import crash captured before UI tests <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Saved/pushed evidence 2b848e34: production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/README.md. Historical setup exit139 not reproduced in eight bounded native/runner invocati…</div></li>
+<div class="panel" data-member="tanvir"><b>Abu Sayem Mohammed Tanvir</b> <span class="id">tanvir</span><div class="meta">Garden collision/controller fixes and cold-import investigation · 6% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">3 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:0%"></i></div>
+<details open><summary>Blocked (3)</summary><ul>
+<li><a class="id" href="#M1-85">M1-85</a> Investigate Windows cold editor-import crash captured before UI tests <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Evidence and review published in 2b848e34; status in 76621158. Historical setup exit 139 not reproduced in eight bounded native/runner invocations. Restored-sidecar setup has 440 …</div></li>
+<li><a class="id" href="#M1-122">M1-122</a> Match garden collision to visible furniture and check return-lane clearance <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Source e5ed6178 and evidence pushed through 864ed263. Latest tested game d1436027: mandatory Garden 2/2 (19/0 collision, 54/0 movement); comms still 0/1 because its 45/0 output la…</div></li>
+<li><a class="id" href="#M1-123">M1-123</a> Reproduce garden return-to-center stop with the real player controller <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Source 630c9278 and evidence pushed through 864ed263. Latest tested d1436027 actual campaign movement 54/0; recorded 8edef native 62/0 with four ending/input cases and eight inspe…</div></li>
 </ul></details>
 <details><summary>Deferred: video, submission and manual QA (7)</summary><ul>
 <li><a class="id" href="#M1-21">M1-21</a> Chapter 1 full playthrough QA with screenshots <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -7116,7 +7114,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/loading/",
     "production/qa/perf/"
    ],
-   "blocker": "Saved/pushed evidence 2b848e34: production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/README.md. Historical setup exit139 not reproduced in eight bounded native/runner invocations. Restored-sidecar setup has440 UID/file-access errors despite exit0; full audit supersedes outer success, no crash cause/fix established. Needs original198663-byte raw log/cache/native backtrace (original reporter) or a fresh bounded failing native reproduction sufficient for owned fix/upstream engine case. No game/asset/config/runner changes.",
+   "blocker": "Evidence and review published in 2b848e34; status in 76621158. Historical setup exit 139 not reproduced in eight bounded native/runner invocations. Restored-sidecar setup has 440 UID/file-access errors despite exit 0; full audit supersedes outer success. No native crash cause or fix established. Needs original 198663-byte raw log/cache/native backtrace from original reporter, or a fresh bounded failing native reproduction sufficient for an owned fix/upstream-engine case. Resume condition and preserved manifests: production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/README.md. No game/asset/config/runner change claimed.",
    "batch_phase": "implementation"
   },
   {
@@ -8496,7 +8494,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Match garden collision to visible furniture and check return-lane clearance",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
@@ -8530,6 +8528,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/resources/campaign/rooms/",
     "game/scripts/world/"
    ],
+   "blocker": "Source e5ed6178 and evidence pushed through 864ed263. Latest tested game d1436027: mandatory Garden 2/2 (19/0 collision, 54/0 movement); comms still 0/1 because its 45/0 output lacks the recognized marker. Recorded 8edef native RED 20/3 to GREEN 20/0; full attempt capped at 40 minutes after 89/115 reported (73 pass,16 fail), separate remaining26 targets24 pass/2 fail. Later teammate repairs preserved; older failures are snapshot observations. Resume after owners resolve remaining integration/marker/performance failures and a complete current mandatory full runner passes. Exact handoff: production/qa/evidence/M1-122/acceptance_blockers.md. No owned source edits pending; manual QA deferred.",
    "batch_phase": "implementation"
   },
   {
@@ -8538,7 +8537,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Reproduce garden return-to-center stop with the real player controller",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
@@ -8570,6 +8569,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/player/",
     "game/scripts/campaign/"
    ],
+   "blocker": "Source 630c9278 and evidence pushed through 864ed263. Latest tested d1436027 actual campaign movement 54/0; recorded 8edef native 62/0 with four ending/input cases and eight inspected PNGs. Source guards and original-save hash pass. Global acceptance remains blocked: latest-tested comms 0/1 marker failure and no complete passing current full runner; 8edef full/continuation failures documented separately without claiming all persist after repairs. Resume when owners clear remaining global integration checks and complete mandatory current full gate passes. Evidence: production/qa/evidence/M1-123/README.md and M1-122/acceptance_blockers.md. Exact historical pose unknown, selected valid contact cases labeled; manual QA is deferred, not an invented blocker.",
    "batch_phase": "implementation"
   }
  ],
