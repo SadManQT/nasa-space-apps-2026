@@ -1,0 +1,96 @@
+{
+  "command": [
+    "C:\\Program Files\\Git\\bin\\bash.exe",
+    "game/tools/run_tests.sh",
+    "hint_player"
+  ],
+  "pid": 12968,
+  "start_utc_epoch": 1794332284.9619563,
+  "duration_seconds": 290.326,
+  "timed_out": false,
+  "termination": {
+    "needed": false
+  },
+  "raw_exit_code": 0,
+  "unsigned_exit_hex": "0x0",
+  "effective_exit_code": 0,
+  "log_sha256": "887b617f03552976258b886b26261ad4343524864cd6c2f8cc3c421b5e063941",
+  "test_log_dir": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\recovered_repro_20261110\\filtered_restore\\runner_logs",
+  "isolated_env": {
+    "APPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185r1110/profiles/d/roaming",
+    "LOCALAPPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185r1110/profiles/d/local",
+    "TEMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185r1110/profiles/d/tmp",
+    "TMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185r1110/profiles/d/tmp"
+  },
+  "script_error_lines": [],
+  "generic_error_lines": [
+    "ERROR: Condition \"f.is_null()\" is true. Continuing.",
+    "ERROR: Condition \"f.is_null()\" is true. Continuing.",
+    "ERROR: Resumed function '_stream()' after await, but class instance is gone. At script: res://scripts/audio/audio_director.gd:283"
+  ],
+  "generic_error_count": 3,
+  "warning_count": 1,
+  "last_printed_reimport": "Executing post-reimport operations...",
+  "suite_summary": [
+    "1/1 suites passed"
+  ],
+  "setup_failure": false,
+  "native_crash_signature": false,
+  "audited_logs": [
+    {
+      "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\recovered_repro_20261110\\filtered_restore\\runner_logs\\setup.log",
+      "sha256": "d3e156a0339662373e796636c14b8e3dbf74fe369e2466f9b51fedfbac2254a1",
+      "engine_errors": [
+        "ERROR: Condition \"f.is_null()\" is true. Continuing.",
+        "ERROR: Condition \"f.is_null()\" is true. Continuing."
+      ],
+      "script_errors": [],
+      "warning_count": 0,
+      "last_printed_reimport": "Executing post-reimport operations...",
+      "suite_summary": [],
+      "setup_failure": false,
+      "native_crash_signature": false
+    },
+    {
+      "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\recovered_repro_20261110\\filtered_restore\\runner_logs\\test_hint_player.gd.log",
+      "sha256": "a0905510bf80789517f6bfe1e2d592c90157b7a91a8b60950556217401967151",
+      "engine_errors": [
+        "ERROR: Resumed function '_stream()' after await, but class instance is gone. At script: res://scripts/audio/audio_director.gd:283"
+      ],
+      "script_errors": [],
+      "warning_count": 1,
+      "last_printed_reimport": null,
+      "suite_summary": [],
+      "setup_failure": false,
+      "native_crash_signature": false
+    }
+  ],
+  "phase_exit_codes": {
+    "setup": 0,
+    "test_hint_player.gd": 0
+  },
+  "forwarded_args": {
+    "setup": [
+      "--headless",
+      "--path",
+      ".",
+      "--editor",
+      "--quit"
+    ],
+    "test_hint_player.gd": [
+      "--headless",
+      "--path",
+      ".",
+      "--script",
+      "res://tools/test_hint_player.gd"
+    ]
+  },
+  "setup_engine_errors": 2,
+  "setup_script_errors": 0,
+  "suite_engine_errors": 1,
+  "setup_clean": false,
+  "import_control_eligible": false,
+  "overall_clean": false,
+  "any_native_failure": false,
+  "same_setup_exit139_signature": false
+}

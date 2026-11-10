@@ -1,0 +1,25 @@
+{
+  "original_raw_bytes": 198663,
+  "sha256": "effac2b310a27c472845d20f7175dfd4ec35052c5f912919ffa433cf190f43ac",
+  "native_setup_exit": 139,
+  "suites_executed": 0,
+  "engine_error_lines": [],
+  "script_error_lines": [],
+  "native_signature_lines": [
+    "game/tools/run_tests.sh: line 19:  1528 Segmentation fault      \"$GODOT\" --headless --path . --editor --quit > \"$setup_log\" 2>&1",
+    "FAIL setup: Godot class-cache/import refresh failed (exit 139); no suites were run."
+  ],
+  "last_lines": [
+    "[  99% ] reimport | Preparing files to reimport...",
+    "[   0% ] reimport | Executing pre-reimport operations...",
+    "[   0% ] preload_reimporting_scene | Started Preparing scenes for reload (1 steps)",
+    "[   0% ] preload_reimporting_scene | Analyzing scene [empty]",
+    "[  50% ] preload_reimporting_scene | Preparation done.",
+    "[ DONE ] preload_reimporting_scene",
+    "",
+    "[   0% ] reimport | GochiHand-Regular.ttf"
+  ],
+  "backtrace_emitted": false,
+  "last_printed_import_is_not_cause": true,
+  "original_hardware_and_precrash_cache": "Not supplied by the recovered log; no same-host/cache equivalence assumed."
+}

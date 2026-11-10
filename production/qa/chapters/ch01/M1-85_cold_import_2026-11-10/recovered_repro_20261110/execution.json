@@ -1,0 +1,103 @@
+{
+  "source_game_tree": "f59fcc7b080618dc5388cf84c56fd5938ced76ab",
+  "any_native_failure": false,
+  "same_setup_exit139_signature_observed": false,
+  "runs": [
+    {
+      "label": "cold",
+      "project": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185r1110\\a",
+      "result": {
+        "command": [
+          "C:\\Program Files\\Git\\bin\\bash.exe",
+          "game/tools/run_tests.sh",
+          "hint_player"
+        ],
+        "pid": 26832,
+        "start_utc_epoch": 1794330696.506863,
+        "duration_seconds": 274.964,
+        "timed_out": false,
+        "termination": {
+          "needed": false
+        },
+        "raw_exit_code": 0,
+        "unsigned_exit_hex": "0x0",
+        "effective_exit_code": 0,
+        "log_sha256": "887b617f03552976258b886b26261ad4343524864cd6c2f8cc3c421b5e063941",
+        "test_log_dir": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\recovered_repro_20261110\\cold\\runner_logs",
+        "isolated_env": {
+          "APPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185r1110/profiles/a/roaming",
+          "LOCALAPPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185r1110/profiles/a/local",
+          "TEMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185r1110/profiles/a/tmp",
+          "TMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185r1110/profiles/a/tmp"
+        },
+        "script_error_lines": [],
+        "generic_error_lines": [
+          "ERROR: Resumed function '_stream()' after await, but class instance is gone. At script: res://scripts/audio/audio_director.gd:283"
+        ],
+        "generic_error_count": 1,
+        "warning_count": 1,
+        "last_printed_reimport": "Executing post-reimport operations...",
+        "suite_summary": [
+          "1/1 suites passed"
+        ],
+        "setup_failure": false,
+        "native_crash_signature": false,
+        "audited_logs": [
+          {
+            "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\recovered_repro_20261110\\cold\\runner_logs\\setup.log",
+            "sha256": "48b80d3b4e03f686e2f7a2b413c1c0b7b46130a05b457880b0681c10ceb58bbf",
+            "engine_errors": [],
+            "script_errors": [],
+            "warning_count": 0,
+            "last_printed_reimport": "Executing post-reimport operations...",
+            "suite_summary": [],
+            "setup_failure": false,
+            "native_crash_signature": false
+          },
+          {
+            "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\recovered_repro_20261110\\cold\\runner_logs\\test_hint_player.gd.log",
+            "sha256": "a0905510bf80789517f6bfe1e2d592c90157b7a91a8b60950556217401967151",
+            "engine_errors": [
+              "ERROR: Resumed function '_stream()' after await, but class instance is gone. At script: res://scripts/audio/audio_director.gd:283"
+            ],
+            "script_errors": [],
+            "warning_count": 1,
+            "last_printed_reimport": null,
+            "suite_summary": [],
+            "setup_failure": false,
+            "native_crash_signature": false
+          }
+        ],
+        "forwarded_args": {
+          "setup": [
+            "--headless",
+            "--path",
+            ".",
+            "--editor",
+            "--quit"
+          ],
+          "test_hint_player.gd": [
+            "--headless",
+            "--path",
+            ".",
+            "--script",
+            "res://tools/test_hint_player.gd"
+          ]
+        },
+        "phase_exit_codes": {
+          "setup": 0,
+          "test_hint_player.gd": 0
+        },
+        "any_native_failure": false,
+        "same_setup_exit139_signature": false
+      },
+      "clean": false,
+      "generated_import_changes": 0
+    }
+  ],
+  "collection_complete": false,
+  "all_runs_clean": false,
+  "original_save_sha256": "7500982b1be85d08848421a6e1d3b4386c344a59d6a74f05a7b8504e77d47b51",
+  "protocol": "Cold mandatory hint and warm share profilea. Cloned warm control and tracked-sidecar restore share profileb copied froma. Retry copies Game and profileb toc; new absolute path is an explicit limit. Stop on native failure or unexpected control failure; retain every project. Matching setup139 would establish the same exit/phase signature, not identical cause.",
+  "stop_reason": "Unexpected cold/warm failure: project retained; no automatic retry"
+}
