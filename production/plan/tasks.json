@@ -5566,7 +5566,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Steam-quality settings, controls and saves",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Shanto/Antigravity",
    "deps": [
     "M1-54"
@@ -5580,8 +5580,8 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Shanto; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
-   "updated": "2026-11-10",
+   "evidence": "1/1 suites passed (ok tools/test_settings.gd 79/79) + 2/2 save suites passed + chapter_select/story_log/ui_families/first_five_minutes passed; screenshots: production/qa/evidence/M3-70_settings_display_audio.png, production/qa/evidence/M3-70_settings_controls_saves.png; no generative AI assets created",
+   "updated": "2026-11-11",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §11: resolution, window mode, V-sync, frame cap, quality preset, field of view; master/music/voice/effects\nvolume; full keyboard and controller remapping with matching button glyphs; captions and subtitle size; assist modes (§2.3);\nautosave at every scene change, three manual slots, Continue, chapter select after completion, safe migration from the M1-47\nschema; pause anywhere; skip any cutscene after the first viewing. Tests for settings persistence, remapping conflicts and save\nslots.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "shanto",
    "effort": 2,
@@ -5600,14 +5600,6 @@
     "game/scripts/campaign/",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-70*"
-   ],
-   "edit_files": [
-    "game/scripts/settings/game_settings.gd",
-    "game/scripts/ui/settings_menu.gd",
-    "game/scripts/ui/chapter1_campaign_hud.gd",
-    "game/tools/test_settings.gd",
-    "production/qa/evidence/M3-70_settings_display_audio.png",
-    "production/qa/evidence/M3-70_settings_controls_saves.png"
    ]
   },
   {
@@ -5670,7 +5662,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Save slots, autosave and versioned save migrations at Steam quality",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Shanto/Antigravity",
    "deps": [
     "M1-54"
@@ -5683,8 +5675,8 @@
     "production/plan/MASTER_PLAN.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Shanto; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom MASTER_PLAN.md (Sadman, 5 Nov 2026).",
-   "evidence": "",
-   "updated": "2026-11-10",
+   "evidence": "2/2 suites passed (ok tools/test_save_service_recovery.gd 92/92, ok tools/test_save_slots.gd 68/68); screenshots: production/qa/evidence/M3-71_save_slots_corrupt_backup.png, production/qa/evidence/M3-71_save_slots_recovered.png",
+   "updated": "2026-11-11",
    "prompt": "Goal: progress is never lost and saves survive updates.\nDo: three manual slots plus autosave at every scene join and mission end; atomic writes (temp file then rename) and one backup; a schema version with forward migrations (the existing story_log schema 3 stays readable); a corrupt save is detected and the backup offered; save metadata (chapter, story date, play time, thumbnail path) for the menus Ramim builds (M3-72) through a small read-only API in game/scripts/save/.\nWrite game/tools/test_save_slots.gd (round trip, migration from schema 3, corrupt file falls back to the backup).\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence.",
    "reserved_for": "shanto",
    "effort": 2,
@@ -5703,15 +5695,6 @@
     "game/scripts/ui/save_slots.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M3-71*"
-   ],
-   "edit_files": [
-    "game/scripts/save/save_service.gd",
-    "game/scripts/save/save_slots.gd",
-    "game/scripts/ui/save_slots.gd",
-    "game/tools/test_save_slots.gd",
-    "game/scripts/campaign/chapter1_campaign.gd",
-    "production/qa/evidence/M3-71_save_slots_corrupt_backup.png",
-    "production/qa/evidence/M3-71_save_slots_recovered.png"
    ]
   },
   {
