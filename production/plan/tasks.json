@@ -7895,6 +7895,32 @@
    "prompt": "Owner change request, not a new active-batch claim. chapter1_campaign.gd is currently reserved by Asif/M1-105. Frozen daa0141 mandatory test_chapter1_campaign_flow fails production player uses lunar gravity: _bind_player_eva assigns9.8 indoors even though the habitat is on the Moon. Review the one-line proposed patch and raw log in production/qa/evidence/M1-31_acceptance_2026-11-10/owner_requests/. Apply through the current saved-work session or save/push/release the exact file for Ramim; preserve all Chapter2 input bridge work. Do not infer a full pass from this isolated change; rerun the mandatory campaign flow and integrated gate. Ramim has not edited this reserved source.",
    "reserved_for": "asif",
    "effort": 2
+  },
+  {
+   "id": "M1-125",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Repair and verify the integrated 117-suite gate under user owner override",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
+   "deps": [],
+   "paths": [
+    "game/scripts/",
+    "game/tools/",
+    "production/qa/evidence/M1-125*"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-10.",
+   "evidence": "",
+   "updated": "2026-11-10",
+   "prompt": "User explicitly overrides owner restrictions for this repair batch and requires all 117 existing suites to pass. Preserve all published and unfinished owner work; reserve exact files before edits, diagnose failures, make minimal production or stale-fixture repairs without dropping checks or relaxing performance thresholds. Verify via game/tools/run_tests.sh and scripted visible UI. Sync and safely merge before pushing. Keep video/submission/manual QA deferred. Record source/hardware and raw baseline/final evidence; never claim a partial pass is full acceptance.",
+   "reserved_for": "ramim",
+   "effort": 2,
+   "edit_files": [
+    "game/scripts/loading/load_trace.gd",
+    "game/tools/test_performance_runtime.gd"
+   ]
   }
  ],
  "requirements": [
@@ -8538,7 +8564,7 @@
  "implementation_batch": {
   "id": "2026-11-10-implementation",
   "active": true,
-  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred.",
+  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred. User subsequently authorized Ramim to override owners for M1-125 integrated 117-suite repairs, preserving WIP.",
   "priority_order": [
    "ramim",
    "sadman",
@@ -8568,7 +8594,8 @@
     "M3-67",
     "M3-72",
     "M3-90",
-    "M3-91"
+    "M3-91",
+    "M1-125"
    ],
    "sadman": [
     "M4-16",

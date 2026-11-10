@@ -67,3 +67,7 @@ Status changes require an explicit `--by Name/AI`; another member cannot clear y
 General take/next CLI selection is disabled during this batch. This also prevents older unattended night-shift pickers from starting workers under their outdated commit/ownership workflow. Use named agent sessions with explicit claims and published reservations; the row above is the binding assignment. Old role/folder names do not justify choosing an excluded task.
 
 Commit verified work under your own verified GitHub identity. Sync before implementation and each push, preserve local settings/imports and teammates' changes, use explicit staging paths, and never force-push. Keep unfinished work saved and disclosed.
+
+## Subsequent user override: integrated 117-suite gate
+
+On 10 November the user explicitly authorized Ramim to override task/folder ownership as needed to make all 117 existing suites pass. M1-125 is the additional Ramim integration task (51 active IDs total). Preserve other owners' published and unfinished work, record exact-file transfers/reservations, and merge against current main before publishing. Existing assignments and deferred video/submission/manual QA remain; no threshold relaxation or unverified completion is authorized.

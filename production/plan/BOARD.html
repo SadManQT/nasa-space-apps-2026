@@ -86,13 +86,14 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up lists assigned ready tasks; claim one exact ID. Deferred and acceptance work stays visible separately.</p>
 <div class="grid team">
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">Shared gameplay; Chapters 4/6/8; opening and progression UI · 40% share</div><div class="counts"><span class="chip s-done">15 done</span><span class="chip s-in_progress">5 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:75%"></i></div>
-<details open><summary>Working now (5)</summary><ul>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">Shared gameplay; Chapters 4/6/8; opening and progression UI · 40% share</div><div class="counts"><span class="chip s-done">15 done</span><span class="chip s-in_progress">6 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:71%"></i></div>
+<details open><summary>Working now (6)</summary><ul>
 <li><a class="id" href="#M1-31">M1-31</a> Make it fun: Chapter 1 game-feel and reward pass <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
 <li><a class="id" href="#M3-6M">M3-6M</a> Chapter 6 missions EX-M0601 to EX-M0604: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
 <li><a class="id" href="#M3-8M">M3-8M</a> Chapter 8 missions EX-M0801 to EX-M0804: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
 <li><a class="id" href="#M3-91">M3-91</a> All 128 upgrade profiles complete the campaign <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
 <li><a class="id" href="#M3-64">M3-64</a> The RPG layer: cadet record, skills, gear loadout, jobs board and rest <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
+<li><a class="id" href="#M1-125">M1-125</a> Repair and verify the integrated 117-suite gate under user owner override <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
 </ul></details>
 <details><summary>Done (15)</summary><ul>
 <li><a class="id" href="#M1-18">M1-18</a> First five minutes: title screen, onboarding and UX polish <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">production/qa/evidence/M3-61_ramim_audit.md</div></li>
@@ -8634,6 +8635,33 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "reserved_for": "asif",
    "effort": 2,
    "batch_phase": "unplanned"
+  },
+  {
+   "id": "M1-125",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Repair and verify the integrated 117-suite gate under user owner override",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
+   "deps": [],
+   "paths": [
+    "game/scripts/",
+    "game/tools/",
+    "production/qa/evidence/M1-125*"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-10.",
+   "evidence": "",
+   "updated": "2026-11-10",
+   "prompt": "User explicitly overrides owner restrictions for this repair batch and requires all 117 existing suites to pass. Preserve all published and unfinished owner work; reserve exact files before edits, diagnose failures, make minimal production or stale-fixture repairs without dropping checks or relaxing performance thresholds. Verify via game/tools/run_tests.sh and scripted visible UI. Sync and safely merge before pushing. Keep video/submission/manual QA deferred. Record source/hardware and raw baseline/final evidence; never claim a partial pass is full acceptance.",
+   "reserved_for": "ramim",
+   "effort": 2,
+   "edit_files": [
+    "game/scripts/loading/load_trace.gd",
+    "game/tools/test_performance_runtime.gd"
+   ],
+   "batch_phase": "implementation"
   }
  ],
  "requirements": [
@@ -9277,7 +9305,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
  "implementation_batch": {
   "id": "2026-11-10-implementation",
   "active": true,
-  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred.",
+  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred. User subsequently authorized Ramim to override owners for M1-125 integrated 117-suite repairs, preserving WIP.",
   "priority_order": [
    "ramim",
    "sadman",
@@ -9307,7 +9335,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "M3-67",
     "M3-72",
     "M3-90",
-    "M3-91"
+    "M3-91",
+    "M1-125"
    ],
    "sadman": [
     "M4-16",
