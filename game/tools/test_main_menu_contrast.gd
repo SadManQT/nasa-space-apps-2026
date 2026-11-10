@@ -76,11 +76,18 @@ func _run() -> void:
 			_mouse(Vector2(1, 1))
 			await process_frame
 			await _contrast(menu._briefing_start_button, "normal", "briefing_150_scrolled_focus", true)
-		_key(KEY_TAB)
-		await process_frame
-		_check(root.gui_get_focus_owner().text == "CANCEL", "briefing Tab stays inside modal " + suffix)
-		_key(KEY_TAB)
-		await process_frame
+		var briefing_controls: Array[Control] = []
+		for _step in 8:
+			_key(KEY_TAB)
+			await process_frame
+			var focused := root.gui_get_focus_owner()
+			_check(focused != null and menu._briefing.is_ancestor_of(focused), "briefing Tab stays inside modal " + suffix)
+			if focused == menu._briefing_start_button:
+				break
+			briefing_controls.append(focused)
+		for mode in ["Story", "Cadet", "Expedition"]:
+			_check(briefing_controls.has(menu.find_child("AssistMode_" + mode, true, false)), "briefing keyboard reaches " + mode + " assistance " + suffix)
+		_check(briefing_controls.any(func(control): return control is Button and control.text == "CANCEL"), "briefing keyboard reaches Cancel " + suffix)
 		_check(root.gui_get_focus_owner() == menu._briefing_start_button, "briefing Tab returns to primary action " + suffix)
 		var launches: Array = []
 		menu.new_expedition_requested.connect(func(): launches.append(true))

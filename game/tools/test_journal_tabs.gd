@@ -111,6 +111,8 @@ func _test_pure_and_spoiler_free() -> void:
 			var compare: Dictionary = targets.pop_at(3)
 			targets.push_back(compare)
 		for target in targets:
+			if String(target.target_id) == "calibrate_probe":
+				_check(bool(PlantInput.complete_probe_transfer(route).get("accepted", false)), "opening probe transfer is complete before calibration")
 			if scene_id == "EX-CH01-S05" and target.target_id == "confirm_date_transition":
 				var mid := director.snapshot()
 				mid["scene_id"] = scene_id

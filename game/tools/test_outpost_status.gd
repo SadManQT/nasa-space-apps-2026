@@ -92,6 +92,8 @@ func _run() -> void:
 			var comparison = targets.pop_at(3)
 			targets.push_back(comparison)
 		for target in targets:
+			if String(target.target_id) == "calibrate_probe":
+				_check(bool(PlantInput.complete_probe_transfer(runtime.route).get("accepted", false)), "opening probe transfer is complete before calibration")
 			_check(runtime.route.perform(target.target_id, PlantInput.payload(String(target.target_id))).get("accepted", false), "setup follows real prerequisite: " + target.target_id)
 		_check(runtime.route.advance_scene().get("accepted", false), "setup advances real scene: " + scene_id)
 	var first = Gates.targets_for_scene("EX-CH01-S07")[0]

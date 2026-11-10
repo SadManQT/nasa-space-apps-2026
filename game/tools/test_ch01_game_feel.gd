@@ -198,6 +198,7 @@ func _test_live_campaign_feedback_integration() -> void:
 		for spec in Gates.targets_for_scene(campaign.route.current_scene_id()):
 			campaign.route.perform(String(spec.target_id), Inputs.payload(String(spec.target_id)))
 		campaign.route.advance_scene()
+	_check(bool(Inputs.complete_probe_transfer(campaign.route).get("accepted", false)), "Opening probe is retrieved, placed and observed before calibration feedback")
 	campaign._sync_route_projection()
 	campaign._refresh_world()
 	campaign.hud.refresh_scene({})
