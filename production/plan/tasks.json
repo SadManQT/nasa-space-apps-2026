@@ -1906,8 +1906,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Upgrade choice after Chapter 1",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude",
    "deps": [
     "M1-19"
    ],
@@ -1922,7 +1922,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
-   "evidence": "",
+   "evidence": "test_upgrade_pairs_ch1_ch2 35 checks, 0 failures (taller mast +2, fuel cell cap 26 and +4 entry, exclusive, saved/restored) through run_tests.sh; fuel cell card corrected 22 to 26; test_player_text 13092/0; accepted combined 119/119 gate. production/qa/evidence/M3-2U_M3-3U_acceptance.md; production/qa/evidence/M3-2U_upgrade_after_ch01.png",
    "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH01.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.2 (Chapter 2) and the §2.9 bridge-list rows for CH02 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
    "reserved_for": "sadman",
@@ -2231,8 +2231,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Upgrade choice after Chapter 2",
-   "status": "todo",
-   "owner": "",
+   "status": "done",
+   "owner": "Sadman/claude",
    "deps": [
     "M1-19"
    ],
@@ -2247,7 +2247,7 @@
     "game-design/24_NARRATIVE_REVISION.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n",
-   "evidence": "",
+   "evidence": "test_upgrade_pairs_ch1_ch2 35 checks, 0 failures (red-blue LEDs FULL 2 to 1, blankets remove COOL damage, exclusive, saved/restored) through run_tests.sh; test_player_text 13092/0; accepted combined 119/119 gate. production/qa/evidence/M3-2U_M3-3U_acceptance.md; production/qa/evidence/M3-3U_upgrade_after_ch02.png",
    "updated": "2026-11-10",
    "prompt": "Implement execution/UPGRADE_AFTER_CH02.md: the earned pair, the player's choice screen, the modifier applied through the simulation\n(never by editing canon numbers), its visible appearance and save/load. Acceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); tie the upgrade choice to the §5 decision-consequence map where it applies.",
    "reserved_for": "sadman",

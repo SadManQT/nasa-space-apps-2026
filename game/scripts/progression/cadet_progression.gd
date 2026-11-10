@@ -23,7 +23,7 @@ const UPGRADE_PAIRS := {
 		"title": "After Chapter 1 · Night One",
 		"story_bridge": "Sunrise warms the ridge. Choose one station improvement before the pollination window opens.",
 		"A": {"id": "taller_mast", "label": "Taller solar mast", "summary": "+2 daylight battery income in solar planning (cap 20).", "before": "Daylight income: +8 battery per shift", "after": "Daylight income: +10 battery per shift (capped at 20)"},
-		"B": {"id": "fuel_cell", "label": "Auxiliary fuel cell", "summary": "+4 starting battery and capacity raised from 20 to 22.", "before": "Battery start 14 / capacity 20", "after": "Battery start 18 / capacity 22"},
+		"B": {"id": "fuel_cell", "label": "Auxiliary fuel cell", "summary": "+4 entry charge and battery capacity raised from 20 to 26.", "before": "Battery start 14 / capacity 20", "after": "Battery start 18 / capacity 26"},
 	},
 	2: {
 		"after_chapter": 2,
