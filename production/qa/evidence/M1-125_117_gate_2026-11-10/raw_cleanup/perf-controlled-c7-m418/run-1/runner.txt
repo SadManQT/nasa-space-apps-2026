@@ -1,0 +1,4 @@
+FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (618 checks, 1 failures)
+       FAIL Kai raw load main-thread interval <50 ms (58.484)
+       PERFORMANCE RUNTIME RESULT: FAIL (618 checks, 1 failures)
+0/1 suites passed

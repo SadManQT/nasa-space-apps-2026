@@ -1,0 +1,39 @@
+﻿diff --git a/game/tools/test_performance_runtime.gd b/game/tools/test_performance_runtime.gd
+index cbb24f08..aae543ec 100644
+--- a/game/tools/test_performance_runtime.gd
++++ b/game/tools/test_performance_runtime.gd
+@@ -141,10 +141,12 @@ func _test_threaded_geometry() -> void:
+ 	process_frame.connect(_heartbeat)
+ 	for id in ["Kai", "Amara", "Mei", "Rafi", "Ferreira", "PR_MissionTable"]:
+ 		var path := "res://assets/characters/CH_%s/CH_%s.glb" % [id, id] if not id.begins_with("PR_") else "res://assets/props/%s/%s.glb" % [id, id]
++		LoadTrace.enabled = _retain_trace
+ 		_start_monitor()
+ 		_check(await AssetGeometry.prepare(path, self), id + " threaded raw preparation succeeds")
+ 		await process_frame
+ 		_stop_monitor(id + " raw load")
++		LoadTrace.enabled = false
+ 		var threaded := AssetGeometry.load_glb(path)
+ 		# Independent original decoder catches omitted mesh-conversion extensions,
+ 		# transforms, skeletons, face layers or clip tracks, not just cached copies.
+@@ -169,17 +171,20 @@ func _test_threaded_geometry() -> void:
+ 					_check(source.albedo_texture.get_size() == expected.albedo_texture.get_size(), id + " full texture resolution " + a.name)
+ 					_check(source.albedo_texture.get_image().get_data().slice(0, expected.albedo_texture.get_image().get_data().size()) == expected.albedo_texture.get_image().get_data(), id + " unchanged base pixels " + a.name)
+ 		if not id.begins_with("PR_"):
++			LoadTrace.enabled = _retain_trace
+ 			_start_monitor()
+ 			_check(await LocomotionClips.prewarm(threaded, path, self), id + " gait worker succeeds")
+ 			await process_frame
+ 			_stop_monitor(id + " gait worker")
++			LoadTrace.enabled = false
+ 		threaded.free()
+ 		original.free()
+ 
+ func _test_loading_transitions() -> void:
+ 	_check(not await AssetGeometry.prepare("res://missing-perf-model.glb", self), "missing threaded GLB fails without blocking")
+ 	LoadTrace.enabled = true
+-	LoadTrace.steps.clear()
++	if not _retain_trace:
++		LoadTrace.steps.clear()
+ 	var main := preload("res://scenes/main.tscn").instantiate()
+ 	var slot := OS.get_temp_dir().path_join("lla-perf-runtime-%d.json" % OS.get_process_id())
+ 	main.save_path = slot

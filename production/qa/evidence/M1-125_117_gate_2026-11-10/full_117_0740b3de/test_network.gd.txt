@@ -1,0 +1,38 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+  ok Navigation rank 0 has base marker capacity 6
+  ok Navigation rank 3 raises marker capacity to 9
+  ok register payload for marker
+  ok carry payload for marker
+  ok cannot place marker at wrong site
+  ok carrying and delivering payload builds marker
+  ok register payload for fixed_line
+  ok carry payload for fixed_line
+  ok cannot place fixed_line at wrong site
+  ok carrying and delivering payload builds fixed_line
+  ok register payload for path_light
+  ok carry payload for path_light
+  ok cannot place path_light at wrong site
+  ok carrying and delivering payload builds path_light
+  ok register payload for repeater
+  ok carry payload for repeater
+  ok cannot place repeater at wrong site
+  ok carrying and delivering payload builds repeater
+  ok all four structure types (marker, fixed_line, path_light, repeater) persist
+  ok duplicate structure id is rejected
+  ok three Chapter 4 survey beacons recorded
+  ok CH04 beacons return as a persistent layer on the CH08 route map (doc 24 N1)
+  ok new coverage hop unlocks its message
+  ok unlocked message is recorded in CampaignDirector.message_metadata
+  ok activating all 4 local repeater hops completes the local chain
+  ok all 4 hop message links are unlocked once
+  ok finale voice requires the 4-hop local repeater chain first
+  ok wrong local bearing L1 is rejected
+  ok wrong known-content echo is rejected
+  ok P-16 dual-link verification carries Noor's live voice over the player's repeater network
+  ok SaveService validates and saves snapshot with lunar_network
+  ok SaveService loads snapshot with lunar_network
+  ok restored LunarNetwork preserves CH04 beacons, fixed lines, path lights, hops and P-16 voice readiness
+  ok v2 save migration preserves lunar_network structures and links
+  ok CoverageMapPanel contains no banned developer tokens
+NETWORK RESULT: PASS (35 checks, 0 failures)

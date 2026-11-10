@@ -2,6 +2,14 @@
 
 The user explicitly authorized Ramim to override former folder/task owners for this integration repair. Existing peer commits, claims and saved WIP remain preserved. Videos, submission, release packaging and manual qualification remain deferred.
 
+## Continuation after Argon
+
+Argon0740b3de startup, terrain, HUD and dialogue work was preserved and merged with the published owner deliveries. Its [91 saved suite logs](full_117_0740b3de/provenance.json) are85pass/6setup failures, without a complete117-suite result. All six pass in the complete checkout without game changes. The current gate has119suites after the two new owner-delivery tests.
+
+M4-18 consumes the earned warning/heater choices and corrects field storm constants; [focused/native evidence](upgrade_consumers/provenance.json) passes24/0,14/0,34/0, with three inspected PNGs.
+
+At11722b7d, measured raw JSON teardown is now bounded across frames. [Complete timing/cleanup evidence](raw_cleanup/provenance.json) includes all failed diagnostic attempts, two controlled original-host618/0 performance runs, the cleanup-takeover53/0 regression (RED53/1), and native loading31/0 with two inspected PNGs. All50ms assertions and full asset-fidelity comparisons remain. A new frozen full119-suite gate is running; **no full pass is claimed yet**. Earlier remaining-verification entries below are historical checkpoints, superseded only by these source-specific results.
+
 ## Current gate
 
 The frozen original-Windows baseline at `daa0141` ran all117suites: **98/117passed**, with complete setup/suite logs in [baseline_daa0141](baseline_daa0141/provenance.json). The Chapter1UI null-instance failure was stopped and retained as a failure. No full117pass is claimed by the focused results below.

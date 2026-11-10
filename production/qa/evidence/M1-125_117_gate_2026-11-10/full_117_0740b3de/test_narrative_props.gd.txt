@@ -1,0 +1,10 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+ERROR: Unknown narrative prop variant: PR_Mug_Named/NOBODY
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] apply_variant (res://assets/props/narrative/narrative_props.gd:83)
+       [1] _check_props (res://tools/test_narrative_props.gd:238)
+       [2] _run (res://tools/test_narrative_props.gd:53)
+       [3] _check_garden (res://tools/test_narrative_props.gd:190)
+NARRATIVE PROPS RESULT: PASS (401 checks, 0 failures)
