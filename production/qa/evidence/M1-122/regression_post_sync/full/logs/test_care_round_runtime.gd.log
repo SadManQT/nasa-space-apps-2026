@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (./servers/rendering/dummy/storage/texture_storage.h:110)
+   GDScript backtrace (most recent call first):
+       [0] <anonymous lambda> (res://scripts/campaign/care_round_runtime.gd:206)
+CARE ROUND RUNTIME RESULT: PASS (86 checks, 0 failures)

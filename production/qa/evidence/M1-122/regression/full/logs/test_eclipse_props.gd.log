@@ -1,0 +1,111 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: 'res://assets/props/eclipse_power/PR_EclipseBoard_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _test_prop (res://tools/test_eclipse_props.gd:70)
+       [1] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_EclipseBoard_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/props/eclipse_power/eclipse_props.gd:70)
+       [1] instance (res://assets/props/eclipse_power/eclipse_props.gd:92)
+       [2] _test_prop (res://tools/test_eclipse_props.gd:71)
+       [3] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_SegmentCard_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _test_prop (res://tools/test_eclipse_props.gd:70)
+       [1] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_SegmentCard_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/props/eclipse_power/eclipse_props.gd:70)
+       [1] instance (res://assets/props/eclipse_power/eclipse_props.gd:92)
+       [2] _test_prop (res://tools/test_eclipse_props.gd:71)
+       [3] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_ServiceTag_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _test_prop (res://tools/test_eclipse_props.gd:70)
+       [1] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_ServiceTag_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/props/eclipse_power/eclipse_props.gd:70)
+       [1] instance (res://assets/props/eclipse_power/eclipse_props.gd:92)
+       [2] _test_prop (res://tools/test_eclipse_props.gd:71)
+       [3] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_GuideLightBranch_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _test_prop (res://tools/test_eclipse_props.gd:70)
+       [1] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_GuideLightBranch_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/props/eclipse_power/eclipse_props.gd:70)
+       [1] instance (res://assets/props/eclipse_power/eclipse_props.gd:92)
+       [2] _test_prop (res://tools/test_eclipse_props.gd:71)
+       [3] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_GuideLightRun_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _test_prop (res://tools/test_eclipse_props.gd:70)
+       [1] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_GuideLightRun_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/props/eclipse_power/eclipse_props.gd:70)
+       [1] instance (res://assets/props/eclipse_power/eclipse_props.gd:92)
+       [2] _test_prop (res://tools/test_eclipse_props.gd:71)
+       [3] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_DecorativeFlood_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _test_prop (res://tools/test_eclipse_props.gd:70)
+       [1] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_DecorativeFlood_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/props/eclipse_power/eclipse_props.gd:70)
+       [1] instance (res://assets/props/eclipse_power/eclipse_props.gd:92)
+       [2] _test_prop (res://tools/test_eclipse_props.gd:71)
+       [3] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_ProtectedBusPanel_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _test_prop (res://tools/test_eclipse_props.gd:70)
+       [1] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_ProtectedBusPanel_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/props/eclipse_power/eclipse_props.gd:70)
+       [1] instance (res://assets/props/eclipse_power/eclipse_props.gd:92)
+       [2] _test_prop (res://tools/test_eclipse_props.gd:71)
+       [3] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_FilteredCamera_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _test_prop (res://tools/test_eclipse_props.gd:70)
+       [1] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_FilteredCamera_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/props/eclipse_power/eclipse_props.gd:70)
+       [1] instance (res://assets/props/eclipse_power/eclipse_props.gd:92)
+       [2] _test_prop (res://tools/test_eclipse_props.gd:71)
+       [3] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_EclipseMonitor_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _test_prop (res://tools/test_eclipse_props.gd:70)
+       [1] _run (res://tools/test_eclipse_props.gd:35)
+WARNING: 'res://assets/props/eclipse_power/PR_EclipseMonitor_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/props/eclipse_power/eclipse_props.gd:70)
+       [1] instance (res://assets/props/eclipse_power/eclipse_props.gd:92)
+       [2] _test_prop (res://tools/test_eclipse_props.gd:71)
+       [3] _run (res://tools/test_eclipse_props.gd:35)
+ECLIPSE PROPS RESULT: PASS (567 checks, 0 failures)

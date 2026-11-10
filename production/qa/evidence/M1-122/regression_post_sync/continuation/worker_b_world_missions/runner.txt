@@ -1,0 +1,2 @@
+ok   tools/test_worker_b_world_missions.gd :: WORKER B WORLD/MISSIONS RESULT: PASS (429 checks, 0 failures)
+1/1 suites passed

@@ -1,0 +1,1703 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+LOC-09 B3 visible ground minus heightfield (m): ridge_player +0.11, ridge_rafi +0.07, ridge_kai +0.12, ridge_beacon_pad +0.07, ice_scanner +0.02, ridge_sample_points -0.04, beacon_mast +0.06, return_marker -0.01, slope_sign -0.31, reference_plate +0.03, PR_IceScanner +0.03, sample_stake_1 -0.02, sample_stake_2 -0.07, sample_stake_3 -0.07, VH_Rover +0.08
+LOC-09 visible ground minus heightfield (m): ridge_player +0.13, ridge_rafi +0.14, ridge_kai +0.10, ridge_beacon_pad +0.17, ice_scanner +0.17, ridge_sample_points +0.10, beacon_mast +0.18, return_marker +0.12, slope_sign +0.14, reference_plate +0.21, PR_IceScanner +0.21, sample_stake_1 +0.14, sample_stake_2 +0.11, sample_stake_3 +0.06, VH_Rover +0.03
+LOC-10 visible ground minus heightfield (m): vault_player +0.17, vault_kai +0.14, vault_rafi +0.29, vault_case +0.09, vault_probe +0.07, vault_sleeve +0.09, vault_marker +0.10, vault_sample +0.27, vault_rover -0.01, vault_case +0.05, marker_2034 +0.19, tether_anchor_1 +0.13, tether_anchor_2 +0.23, PR_VaultCarrier +0.10, PR_VaultProbe +0.09, sample_stake +0.39, PR_SampleHolder +0.38, VH_Rover -0.01
+LOC-11 visible ground minus heightfield (m): relay_kai -0.02, relay_rafi -0.00, relay_ferreira -0.01, relay_player -0.00, repeater_chain -0.01, repeater_r2 -0.02, pad_tether -0.01, bypass_slope_sign +0.00, bypass_barrier -0.00, pad_marker_1 +0.00, pad_marker_2 +0.05, pad_marker_3 -0.00, pad_marker_4 -0.03, pad_marker_5 -0.00, pad_marker_6 +0.00, pad_marker_7 -0.01, pad_marker_8 -0.00, guide_light_1 -0.02, guide_light_2 -0.00, guide_light_3 +0.04, guide_light_4 +0.02
+WARNING: 'res://assets/environment/EN_ColdTrap/EN_ColdTrap_BeaconMast_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/environment/kit/habitat_kit.gd:89)
+       [1] instance_entry (res://assets/environment/kit/habitat_kit.gd:112)
+       [2] instance (res://assets/environment/kit/habitat_kit.gd:100)
+       [3] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [4] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [5] build_room (res://scripts/world/campaign_room.gd:123)
+       [6] _ready (res://scripts/world/campaign_room.gd:70)
+       [7] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [8] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+       [9] _run (res://tools/test_terrain_work_lights.gd:100)
+WARNING: 'res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReturnMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/environment/kit/habitat_kit.gd:89)
+       [1] instance_entry (res://assets/environment/kit/habitat_kit.gd:112)
+       [2] instance (res://assets/environment/kit/habitat_kit.gd:100)
+       [3] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [4] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [5] build_room (res://scripts/world/campaign_room.gd:123)
+       [6] _ready (res://scripts/world/campaign_room.gd:70)
+       [7] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [8] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+       [9] _run (res://tools/test_terrain_work_lights.gd:100)
+WARNING: 'res://assets/environment/EN_ColdTrap/EN_ColdTrap_SlopeSign_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/environment/kit/habitat_kit.gd:89)
+       [1] instance_entry (res://assets/environment/kit/habitat_kit.gd:112)
+       [2] instance (res://assets/environment/kit/habitat_kit.gd:100)
+       [3] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [4] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [5] build_room (res://scripts/world/campaign_room.gd:123)
+       [6] _ready (res://scripts/world/campaign_room.gd:70)
+       [7] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [8] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+       [9] _run (res://tools/test_terrain_work_lights.gd:100)
+WARNING: 'res://assets/environment/EN_ColdTrap/EN_ColdTrap_ReferencePlate_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/environment/kit/habitat_kit.gd:89)
+       [1] instance_entry (res://assets/environment/kit/habitat_kit.gd:112)
+       [2] instance (res://assets/environment/kit/habitat_kit.gd:100)
+       [3] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [4] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [5] build_room (res://scripts/world/campaign_room.gd:123)
+       [6] _ready (res://scripts/world/campaign_room.gd:70)
+       [7] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [8] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+       [9] _run (res://tools/test_terrain_work_lights.gd:100)
+WARNING: 'res://assets/environment/EN_ColdTrap/EN_ColdTrap_SampleStake_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/environment/kit/habitat_kit.gd:89)
+       [1] instance_entry (res://assets/environment/kit/habitat_kit.gd:112)
+       [2] instance (res://assets/environment/kit/habitat_kit.gd:100)
+       [3] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [4] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [5] build_room (res://scripts/world/campaign_room.gd:123)
+       [6] _ready (res://scripts/world/campaign_room.gd:70)
+       [7] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [8] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+       [9] _run (res://tools/test_terrain_work_lights.gd:100)
+WARNING: 'res://assets/environment/EN_ColdTrap/EN_ColdTrap_SurveyMarker2034_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/environment/kit/habitat_kit.gd:89)
+       [1] instance_entry (res://assets/environment/kit/habitat_kit.gd:112)
+       [2] instance (res://assets/environment/kit/habitat_kit.gd:100)
+       [3] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [4] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [5] build_room (res://scripts/world/campaign_room.gd:123)
+       [6] _ready (res://scripts/world/campaign_room.gd:70)
+       [7] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [8] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_ColdTrap/EN_ColdTrap_TetherAnchor_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/environment/kit/habitat_kit.gd:89)
+       [1] instance_entry (res://assets/environment/kit/habitat_kit.gd:112)
+       [2] instance (res://assets/environment/kit/habitat_kit.gd:100)
+       [3] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [4] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [5] build_room (res://scripts/world/campaign_room.gd:123)
+       [6] _ready (res://scripts/world/campaign_room.gd:70)
+       [7] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [8] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rig (res://tools/test_terrain_work_lights.gd:488)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:563)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_rooms (res://tools/test_terrain_work_lights.gd:564)
+LOC-09 B3 EX-CH04-S04 direct light: target ridge_beacon_pad 0.79 (RoofFlood_R), approach ridge_beacon_pad 0.77 (RoofFlood_R), prop beacon_mast 0.75 (RoofFlood_R), prop return_marker 0.57 (RoofFlood_R), prop slope_sign 0.36 (Headlight_R), crew ridge_player 0.86 (RoofFlood_R), crew ridge_rafi 0.93 (RoofFlood_R), crew ridge_kai 2.46 (Headlight_L)
+LOC-09 EX-CH04-S05 direct light: target ice_scanner 0.74 (RoofFlood_R), approach ice_scanner 0.85 (RoofFlood_R), target ridge_sample_points 1.24 (RoofFlood_R), approach ridge_sample_points 1.43 (RoofFlood_R), prop reference_plate 0.74 (RoofFlood_R), prop PR_IceScanner 0.74 (RoofFlood_R), prop sample_stake_1 1.09 (RoofFlood_R), prop sample_stake_2 1.23 (RoofFlood_R), prop sample_stake_3 1.52 (Headlight_R), crew ridge_player 0.86 (RoofFlood_R), crew ridge_rafi 0.92 (RoofFlood_R), crew ridge_kai 3.35 (Headlight_L)
+LOC-10 EX-CH04-S06 direct light: target vault_case 1.24 (RoofFlood_L), approach vault_case 1.17 (RoofFlood_L), target vault_marker 0.81 (RoofFlood_L), approach vault_marker 1.05 (RoofFlood_L), target vault_sample 1.98 (RoofFlood_R), approach vault_sample 1.58 (RoofFlood_R), prop vault_case 1.33 (RoofFlood_L), prop marker_2034 0.86 (RoofFlood_L), prop tether_anchor_1 1.12 (RoofFlood_L), prop tether_anchor_2 0.85 (RoofFlood_L), prop sample_stake 1.94 (RoofFlood_R), prop PR_SampleHolder 1.94 (RoofFlood_R), crew vault_player 0.96 (RoofFlood_R), crew vault_kai 1.18 (RoofFlood_R), crew vault_rafi 0.72 (RoofFlood_L)
+LOC-10 EX-CH04-S07 direct light: target vault_case 1.24 (RoofFlood_L), approach vault_case 1.17 (RoofFlood_L), target vault_probe 0.51 (HandLightBeam), approach vault_probe 1.18 (RoofFlood_L), target vault_sleeve 0.53 (RoofFlood_R), approach vault_sleeve 1.23 (RoofFlood_L), target vault_marker 0.81 (RoofFlood_L), approach vault_marker 1.05 (RoofFlood_L), prop vault_case 0.99 (HandLightBeam), prop marker_2034 0.86 (RoofFlood_L), prop tether_anchor_1 1.12 (RoofFlood_L), prop tether_anchor_2 0.85 (RoofFlood_L), prop PR_VaultCarrier 1.35 (RoofFlood_L), prop PR_VaultProbe 0.40 (RoofFlood_R), crew vault_player 0.96 (RoofFlood_R), crew vault_kai 1.18 (RoofFlood_R), crew vault_rafi 0.72 (RoofFlood_L)
+LOC-10 EX-CH04-S08 direct light: target vault_case 1.24 (RoofFlood_L), approach vault_case 1.17 (RoofFlood_L), target vault_probe 0.51 (HandLightBeam), approach vault_probe 1.18 (RoofFlood_L), target vault_sleeve 0.53 (RoofFlood_R), approach vault_sleeve 1.23 (RoofFlood_L), target vault_marker 0.81 (RoofFlood_L), approach vault_marker 1.05 (RoofFlood_L), prop vault_case 0.99 (HandLightBeam), prop marker_2034 0.86 (RoofFlood_L), prop tether_anchor_1 1.12 (RoofFlood_L), prop tether_anchor_2 0.85 (RoofFlood_L), prop PR_VaultCarrier 1.35 (RoofFlood_L), prop PR_VaultProbe 0.40 (RoofFlood_R), crew vault_player 0.96 (RoofFlood_R), crew vault_kai 1.18 (RoofFlood_R), crew vault_rafi 0.72 (RoofFlood_L)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+LOC-11 EX-CH08-S03 direct light: target repeater_chain 1.25 (Headlight_R), approach repeater_chain 1.41 (Headlight_R), prop repeater_r2 1.22 (Headlight_R), prop pad_tether 0.43 (Headlight_L), prop bypass_slope_sign 0.00 (), prop bypass_barrier 0.00 (), prop pad_marker_1 0.00 (), prop pad_marker_2 0.00 (), prop pad_marker_3 0.00 (), prop pad_marker_4 0.00 (), prop pad_marker_5 0.00 (), prop pad_marker_6 0.11 (Headlight_L), prop pad_marker_7 0.77 (Headlight_R), prop pad_marker_8 0.08 (Headlight_R), prop guide_light_1 0.00 (), prop guide_light_2 0.00 (), prop guide_light_3 0.00 (), prop guide_light_4 0.00 (), crew relay_player 1.68 (Headlight_R)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_Repeater_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_TetherAnchor_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_SlopeSign_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_TurnbackBarrier_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_MalapertSummit/EN_MalapertSummit_PerimeterMarker_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+WARNING: 'res://assets/environment/EN_RelayRoad/EN_RelayRoad_GuideLight_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] instance (res://assets/environment/EN_MalapertSummit/chapter8_assets.gd:32)
+       [1] _add_approved_asset (res://scripts/world/campaign_room.gd:549)
+       [2] _load_approved_assets (res://scripts/world/campaign_room.gd:506)
+       [3] build_room (res://scripts/world/campaign_room.gd:123)
+       [4] _ready (res://scripts/world/campaign_room.gd:70)
+       [5] _make_room (res://tools/test_terrain_work_lights.gd:145)
+       [6] _check_coverage (res://tools/test_terrain_work_lights.gd:693)
+LOC-11 EX-CH08-S04 direct light: target repeater_chain 2.77 (RoofFlood_R), approach repeater_chain 2.38 (RoofFlood_R), prop repeater_r2 2.70 (RoofFlood_R), prop pad_tether 1.07 (RoofFlood_R), prop bypass_slope_sign 0.00 (), prop bypass_barrier 0.00 (), prop pad_marker_1 0.00 (), prop pad_marker_2 0.00 (), prop pad_marker_3 0.00 (), prop pad_marker_4 0.00 (), prop pad_marker_5 0.05 (RoofFlood_R), prop pad_marker_6 0.82 (RoofFlood_R), prop pad_marker_7 0.82 (RoofFlood_R), prop pad_marker_8 0.05 (RoofFlood_L), prop guide_light_1 0.00 (), prop guide_light_2 0.00 (), prop guide_light_3 0.00 (), prop guide_light_4 0.00 (), crew relay_kai 2.52 (RoofFlood_R), crew relay_rafi 0.89 (RoofFlood_R), crew relay_player 3.63 (Headlight_L)
+TERRAIN WORK LIGHTS RESULT: PASS (1045 checks, 0 failures)

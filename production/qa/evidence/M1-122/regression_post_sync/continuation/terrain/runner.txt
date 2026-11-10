@@ -1,0 +1,6 @@
+ok   tools/test_exterior_terrain.gd :: EXTERIOR TERRAIN RESULT: PASS (1109 checks, 0 failures)
+ok   tools/test_terrain.gd :: TERRAIN STREAM RESULT: PASS (104 checks, 0 failures)
+ok   tools/test_terrain_lola.gd :: TERRAIN LOLA RESULT: PASS (1404 checks, 0 failures)
+ok   tools/test_terrain_session.gd :: TERRAIN SESSION RESULT: PASS (78 checks, 0 failures)
+ok   tools/test_terrain_work_lights.gd :: TERRAIN WORK LIGHTS RESULT: PASS (1045 checks, 0 failures)
+5/5 suites passed

@@ -1,0 +1,471 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+REVIEW TEST Godot 4.7.2-stable (official)
+CHARACTER CH_Kai
+  ok runtime GLTFDocument load
+  ok current approved character bone count
+  ok current face presentation contract
+  ok required body clips and hand poses; missing=[]
+  ok frame step pauses and advances exactly 1/30 s
+  ok back step subtracts 1/30 s
+  ok half speed: 0.2 s advances 0.1 s
+  ok pause holds time
+  ok one-shot holds exact last time
+  ok one-shot holds last bone pose
+  ok loop wraps
+  ok loop off stops at end
+  ok unknown clip rejected
+  ok UI clip selection samples new clip immediately
+  ok HandRelaxed left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandRelaxed right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandRelaxed both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandOpen left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandOpen right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandOpen both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandGrip left preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandGrip right preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandGrip both preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandFist left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandFist right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandFist both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandPoint left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPoint right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPoint both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPinch left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok HandPinch right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok HandPinch both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok overlay removal restores animated body without accumulated curls
+  ok real seed packet attaches left
+  ok BoneAttachment3D resolves LeftHand
+  ok prop follows animated hand transform
+  ok real seed packet attaches right
+  ok BoneAttachment3D resolves RightHand
+  ok prop follows animated hand transform
+  ok prop offsets update live, rotations accept degrees
+  ok remove props clears attachment
+  ok prop picker includes props, plants and vehicles
+  ok bone-line overlay builds
+  ok LipSync play_line starts audio; scrub spans full line
+  ok lip panel pause
+  ok LipSync seek updates current weights
+  ok lip panel resumes
+WALK CH_Kai duration=1.083333 samples=32 dt=1/30 root_mean=0.000000 hip_mean=0.140480 m/s
+  ok Walk_loop has measured floor contacts in the sampled cycle
+  ok Walk_loop has finite left floor measurements
+  L contact_frames=4 slide_mean=1.708518 slide_max=2.086311 ankle_mean=1.354227 m/s sole_y=[-0.002618, 0.146274] m
+  ok Walk_loop has finite right floor measurements
+  R contact_frames=3 slide_mean=1.675677 slide_max=1.810163 ankle_mean=1.337384 m/s sole_y=[0.003628, 0.135467] m
+  ok measurement control: 10 cm / 100 ms = 1 m/s root
+  ok measurement control: planted left surface moves at 1 m/s
+  ok measurement control: planted right surface moves at 1 m/s
+CHARACTER CH_Amara
+  ok runtime GLTFDocument load
+  ok current approved character bone count
+  ok current face presentation contract
+  ok required body clips and hand poses; missing=[]
+  ok frame step pauses and advances exactly 1/30 s
+  ok back step subtracts 1/30 s
+  ok half speed: 0.2 s advances 0.1 s
+  ok pause holds time
+  ok one-shot holds exact last time
+  ok one-shot holds last bone pose
+  ok loop wraps
+  ok loop off stops at end
+  ok unknown clip rejected
+  ok UI clip selection samples new clip immediately
+  ok HandRelaxed left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandRelaxed right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandRelaxed both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandOpen left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandOpen right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandOpen both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandGrip left preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandGrip right preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandGrip both preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandFist left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandFist right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandFist both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandPoint left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPoint right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPoint both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPinch left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok HandPinch right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok HandPinch both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok overlay removal restores animated body without accumulated curls
+  ok real seed packet attaches left
+  ok BoneAttachment3D resolves LeftHand
+  ok prop follows animated hand transform
+  ok real seed packet attaches right
+  ok BoneAttachment3D resolves RightHand
+  ok prop follows animated hand transform
+  ok prop offsets update live, rotations accept degrees
+  ok remove props clears attachment
+  ok prop picker includes props, plants and vehicles
+  ok bone-line overlay builds
+  ok LipSync play_line starts audio; scrub spans full line
+  ok lip panel pause
+  ok LipSync seek updates current weights
+  ok lip panel resumes
+WALK CH_Amara duration=1.083333 samples=32 dt=1/30 root_mean=0.000000 hip_mean=0.138687 m/s
+  ok Walk_loop has measured floor contacts in the sampled cycle
+  ok Walk_loop has finite left floor measurements
+  L contact_frames=18 slide_mean=1.532022 slide_max=3.245837 ankle_mean=1.399613 m/s sole_y=[-0.001308, 0.095702] m
+  ok Walk_loop has finite right floor measurements
+  R contact_frames=8 slide_mean=1.205241 slide_max=1.489437 ankle_mean=1.358554 m/s sole_y=[0.011852, 0.116450] m
+  ok measurement control: 10 cm / 100 ms = 1 m/s root
+  ok measurement control: planted left surface moves at 1 m/s
+  ok measurement control: planted right surface moves at 1 m/s
+CHARACTER CH_Mei
+  ok runtime GLTFDocument load
+  ok current approved character bone count
+  ok current face presentation contract
+  ok required body clips and hand poses; missing=[]
+  ok frame step pauses and advances exactly 1/30 s
+  ok back step subtracts 1/30 s
+  ok half speed: 0.2 s advances 0.1 s
+  ok pause holds time
+  ok one-shot holds exact last time
+  ok one-shot holds last bone pose
+  ok loop wraps
+  ok loop off stops at end
+  ok unknown clip rejected
+  ok UI clip selection samples new clip immediately
+  ok HandRelaxed left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandRelaxed right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandRelaxed both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandOpen left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandOpen right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandOpen both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandGrip left preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandGrip right preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandGrip both preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandFist left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandFist right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandFist both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandPoint left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPoint right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPoint both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPinch left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok HandPinch right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok HandPinch both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok overlay removal restores animated body without accumulated curls
+  ok real seed packet attaches left
+  ok BoneAttachment3D resolves LeftHand
+  ok prop follows animated hand transform
+  ok real seed packet attaches right
+  ok BoneAttachment3D resolves RightHand
+  ok prop follows animated hand transform
+  ok prop offsets update live, rotations accept degrees
+  ok remove props clears attachment
+  ok prop picker includes props, plants and vehicles
+  ok bone-line overlay builds
+  ok LipSync play_line starts audio; scrub spans full line
+  ok lip panel pause
+  ok LipSync seek updates current weights
+  ok lip panel resumes
+WALK CH_Mei duration=1.083333 samples=32 dt=1/30 root_mean=0.000000 hip_mean=0.139256 m/s
+  ok Walk_loop has measured floor contacts in the sampled cycle
+  ok Walk_loop has finite left floor measurements
+  L contact_frames=4 slide_mean=1.562943 slide_max=1.749147 ankle_mean=1.239279 m/s sole_y=[0.011326, 0.103009] m
+  ok Walk_loop has finite right floor measurements
+  R contact_frames=6 slide_mean=1.464331 slide_max=1.617187 ankle_mean=1.232715 m/s sole_y=[-0.001142, 0.128385] m
+  ok measurement control: 10 cm / 100 ms = 1 m/s root
+  ok measurement control: planted left surface moves at 1 m/s
+  ok measurement control: planted right surface moves at 1 m/s
+CHARACTER CH_Rafi
+  ok runtime GLTFDocument load
+  ok current approved character bone count
+  ok current face presentation contract
+  ok required body clips and hand poses; missing=[]
+  ok frame step pauses and advances exactly 1/30 s
+  ok back step subtracts 1/30 s
+  ok half speed: 0.2 s advances 0.1 s
+  ok pause holds time
+  ok one-shot holds exact last time
+  ok one-shot holds last bone pose
+  ok loop wraps
+  ok loop off stops at end
+  ok unknown clip rejected
+  ok UI clip selection samples new clip immediately
+  ok HandRelaxed left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandRelaxed right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandRelaxed both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandOpen left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandOpen right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandOpen both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandGrip left preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandGrip right preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandGrip both preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandFist left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandFist right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandFist both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandPoint left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPoint right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPoint both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPinch left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok HandPinch right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok HandPinch both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok overlay removal restores animated body without accumulated curls
+  ok real seed packet attaches left
+  ok BoneAttachment3D resolves LeftHand
+  ok prop follows animated hand transform
+  ok real seed packet attaches right
+  ok BoneAttachment3D resolves RightHand
+  ok prop follows animated hand transform
+  ok prop offsets update live, rotations accept degrees
+  ok remove props clears attachment
+  ok prop picker includes props, plants and vehicles
+  ok bone-line overlay builds
+  ok LipSync play_line starts audio; scrub spans full line
+  ok lip panel pause
+  ok LipSync seek updates current weights
+  ok lip panel resumes
+WALK CH_Rafi duration=1.083333 samples=32 dt=1/30 root_mean=0.000000 hip_mean=0.147083 m/s
+  ok Walk_loop has measured floor contacts in the sampled cycle
+  ok Walk_loop has finite left floor measurements
+  L contact_frames=2 slide_mean=1.925469 slide_max=2.355621 ankle_mean=1.461886 m/s sole_y=[-0.002702, 0.202503] m
+  ok Walk_loop has finite right floor measurements
+  R contact_frames=0 slide_mean=0.000000 slide_max=0.000000 ankle_mean=1.426480 m/s sole_y=[0.054137, 0.137192] m
+  ok measurement control: 10 cm / 100 ms = 1 m/s root
+  ok measurement control: planted left surface moves at 1 m/s
+  ok measurement control: planted right surface moves at 1 m/s
+CHARACTER CH_Ferreira
+  ok runtime GLTFDocument load
+  ok current approved character bone count
+  ok current face presentation contract
+  ok required body clips and hand poses; missing=[]
+  ok frame step pauses and advances exactly 1/30 s
+  ok back step subtracts 1/30 s
+  ok half speed: 0.2 s advances 0.1 s
+  ok pause holds time
+  ok one-shot holds exact last time
+  ok one-shot holds last bone pose
+  ok loop wraps
+  ok loop off stops at end
+  ok unknown clip rejected
+  ok UI clip selection samples new clip immediately
+  ok HandRelaxed left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandRelaxed right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandRelaxed both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandRelaxed rotations
+  ok removing overlay restores body pose
+  ok HandOpen left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandOpen right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandOpen both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandOpen rotations
+  ok removing overlay restores body pose
+  ok HandGrip left preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandGrip right preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandGrip both preserves other bones (0 changed, 0 outside)
+  ok overlay matches authored HandGrip rotations
+  ok removing overlay restores body pose
+  ok HandFist left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandFist right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandFist both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandFist rotations
+  ok removing overlay restores body pose
+  ok HandPoint left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPoint right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPoint both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandPoint rotations
+  ok removing overlay restores body pose
+  ok HandPinch left preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok HandPinch right preserves other bones (15 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok HandPinch both preserves other bones (30 changed, 0 outside)
+  ok overlay matches authored HandPinch rotations
+  ok removing overlay restores body pose
+  ok overlay removal restores animated body without accumulated curls
+  ok real seed packet attaches left
+  ok BoneAttachment3D resolves LeftHand
+  ok prop follows animated hand transform
+  ok real seed packet attaches right
+  ok BoneAttachment3D resolves RightHand
+  ok prop follows animated hand transform
+  ok prop offsets update live, rotations accept degrees
+  ok remove props clears attachment
+  ok prop picker includes props, plants and vehicles
+  ok bone-line overlay builds
+  ok LipSync play_line starts audio; scrub spans full line
+  ok lip panel pause
+  ok LipSync seek updates current weights
+  ok lip panel resumes
+WALK CH_Ferreira duration=1.083333 samples=32 dt=1/30 root_mean=0.000000 hip_mean=0.143247 m/s
+  ok Walk_loop has measured floor contacts in the sampled cycle
+  ok Walk_loop has finite left floor measurements
+  L contact_frames=2 slide_mean=1.463708 slide_max=1.470534 ankle_mean=1.389175 m/s sole_y=[-0.000392, 0.135796] m
+  ok Walk_loop has finite right floor measurements
+  R contact_frames=0 slide_mean=0.000000 slide_max=0.000000 ankle_mean=1.400842 m/s sole_y=[0.031340, 0.131683] m
+  ok measurement control: 10 cm / 100 ms = 1 m/s root
+  ok measurement control: planted left surface moves at 1 m/s
+  ok measurement control: planted right surface moves at 1 m/s
+  ok attach before character replacement
+  ok reload after attachment, then attach again
+REVIEW RESULT: PASS (447 checks, 0 failures)

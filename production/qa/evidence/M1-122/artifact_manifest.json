@@ -1,0 +1,1712 @@
+[
+  {
+    "file": ".gitattributes",
+    "bytes": 143,
+    "sha256": "d51d70890c1ecb38264e67c4f5f5a76b898e24f069354394d96f8a0099a1235e"
+  },
+  {
+    "file": "audit_regression.py",
+    "bytes": 2710,
+    "sha256": "e1d49964199ad6e16e1115a0c2cff42924048ffbd7cc8156675c1e4d2a308a3a"
+  },
+  {
+    "file": "before_native/capture.txt",
+    "bytes": 9043,
+    "sha256": "ceea35c5ad657a980ec814f93f74dcbf1a7bf916084b38d8baa6e8d5c7bae728"
+  },
+  {
+    "file": "before_native/collision_trace.json",
+    "bytes": 3066,
+    "sha256": "796424f83e27a4cc816ae0136d6703c237b3c0507fa96900fcd1b0da6c5f1443"
+  },
+  {
+    "file": "before_native/M1-122_garden.png",
+    "bytes": 1352122,
+    "sha256": "0c122f5876e4d737cf0d9ae91fc0ae9868ac76f0ff6ca6220801011d23f5486d"
+  },
+  {
+    "file": "before_native/run.json",
+    "bytes": 643,
+    "sha256": "b39ac272621791d5cb090a17521f0863566307ffb78996c8b53c825b1a29ce53"
+  },
+  {
+    "file": "before_native_post_sync/capture.txt",
+    "bytes": 9096,
+    "sha256": "8c5409fb4dac453f576b121d02c1ae7af70766144dd2db488870185e31de1419"
+  },
+  {
+    "file": "before_native_post_sync/collision_trace.json",
+    "bytes": 3066,
+    "sha256": "44ed1b62928209d50730d93617d65c326cdc22d8f403fada073c2fadd21ee0b8"
+  },
+  {
+    "file": "before_native_post_sync/M1-122_garden.png",
+    "bytes": 1351373,
+    "sha256": "9d655248ae920f27e403437ce4b4782e75ed6732bcf3740a7ffed930c9dec9b8"
+  },
+  {
+    "file": "before_native_post_sync/run.json",
+    "bytes": 5759,
+    "sha256": "2c6dba479f2de6b44104e189c489e8218411b614671020602c88fc03db4cd5fc"
+  },
+  {
+    "file": "capture_post_sync.py",
+    "bytes": 5504,
+    "sha256": "7f9bd713f3f093153a7db77d9f41acdb52f6edbbc5aa682e2b9e59ca32c5eaaf"
+  },
+  {
+    "file": "final_focused/logs/collision_trace.json",
+    "bytes": 2872,
+    "sha256": "0ba7dd313f6fe67833116b440704a788eb202280854a7e211daea8f8b7fff10b"
+  },
+  {
+    "file": "final_focused/logs/movement_trace.json",
+    "bytes": 157113,
+    "sha256": "438fbb4ad410664d76f0218bed5e3ecc02060594ebc54c792a2bdeaee864e012"
+  },
+  {
+    "file": "final_focused/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "final_focused/logs/test_garden_collision.gd.log",
+    "bytes": 13550,
+    "sha256": "4dbeb0a6d5a30c56922fa2243e41b539d9288e47d9ed75511b743259777dbad8"
+  },
+  {
+    "file": "final_focused/logs/test_garden_movement.gd.log",
+    "bytes": 18253,
+    "sha256": "4b460f4bc4c5fc9df65c0e69328174bcda5fe856879556e6e4a79030a8822323"
+  },
+  {
+    "file": "final_focused/run.json",
+    "bytes": 251,
+    "sha256": "9aee97f7610aa77af00d9abf62c6cb0109ae2df7f05534a4e1c6044b4eac392e"
+  },
+  {
+    "file": "final_focused/runner.txt",
+    "bytes": 202,
+    "sha256": "c74c39cbf105d99470b19c3a051e6f54db677c549eaa0ed3325947700613defd"
+  },
+  {
+    "file": "final_red/logs/collision_trace.json",
+    "bytes": 3066,
+    "sha256": "43cf6f9280bbd1e5e7047078f3c5ede28e14b43da27d2b5da9cd2e1e31a3f9b3"
+  },
+  {
+    "file": "final_red/logs/setup.log",
+    "bytes": 1315,
+    "sha256": "97d3a98b638bde96129f72c0aa2c73756b531bcc790e7a75a73508fdf8f980e1"
+  },
+  {
+    "file": "final_red/logs/test_garden_collision.gd.log",
+    "bytes": 13715,
+    "sha256": "65569edc220c1e6af1338b6c4d7cf97d5b7c38a4f93b7fe9051a8e8f33775c74"
+  },
+  {
+    "file": "final_red/run.json",
+    "bytes": 261,
+    "sha256": "fb1c6cc55f53dc33d3e45e6ff617b89385dacfea96d6d952d37d953729b80b46"
+  },
+  {
+    "file": "final_red/runner.txt",
+    "bytes": 365,
+    "sha256": "d7f05a941ccdbf6026444e21b01b0d52168a9104d8c284e7fd6b268c70822249"
+  },
+  {
+    "file": "final_sync/comms/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "final_sync/comms/logs/test_comms.gd.log",
+    "bytes": 16696,
+    "sha256": "9ff7c808a265c805f4dddf5fe73bb934318e88919d8922532bd3a3eee63a0785"
+  },
+  {
+    "file": "final_sync/comms/runner.txt",
+    "bytes": 61,
+    "sha256": "e2580ff1944d64e36d7bf2624c75f4ca50a472adb01761e09c3c3affb306eb07"
+  },
+  {
+    "file": "final_sync/garden/logs/collision_trace.json",
+    "bytes": 2872,
+    "sha256": "0ba7dd313f6fe67833116b440704a788eb202280854a7e211daea8f8b7fff10b"
+  },
+  {
+    "file": "final_sync/garden/logs/movement_trace.json",
+    "bytes": 157132,
+    "sha256": "c01f2f693312c124742cdb5a1f336df206d4ae7783f1875a84b578aed67ec51b"
+  },
+  {
+    "file": "final_sync/garden/logs/setup.log",
+    "bytes": 42087,
+    "sha256": "ee444ee390aef1cee2009275dcc6819aaf61efe73ec12521a1d01ec83fcfbc5b"
+  },
+  {
+    "file": "final_sync/garden/logs/test_garden_collision.gd.log",
+    "bytes": 8688,
+    "sha256": "423610a8c1f0fd7e8be060b52283f1c06734b0cedbfc873e17a8e4ea682025b5"
+  },
+  {
+    "file": "final_sync/garden/logs/test_garden_movement.gd.log",
+    "bytes": 11494,
+    "sha256": "e7934402262e64b94fb68bcc0763b7fd0bf4efcfc46981ed6f7745330d5cf303"
+  },
+  {
+    "file": "final_sync/garden/runner.txt",
+    "bytes": 202,
+    "sha256": "c74c39cbf105d99470b19c3a051e6f54db677c549eaa0ed3325947700613defd"
+  },
+  {
+    "file": "final_sync/run.json",
+    "bytes": 934,
+    "sha256": "f1ea78b14c62e02b13c9d8c26aaf68532bf0b7b5ec7c12c16d2c76efa563d334"
+  },
+  {
+    "file": "green/collision_trace.json",
+    "bytes": 2872,
+    "sha256": "b6e0fff3b7ea52b76fa50af9ab05460c52426694b39ce35c4c41f26ad695134f"
+  },
+  {
+    "file": "green/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "green/test_garden_collision.gd.log",
+    "bytes": 13550,
+    "sha256": "a45b989e072f92f199e42b514b4513ac88a6df9266cbed73aea066a16d1bab1c"
+  },
+  {
+    "file": "green_run.json",
+    "bytes": 175,
+    "sha256": "9d4c0cb878d6e36f55d76e3938125b41620e7f79214b7e9f4b47d4a2885e066d"
+  },
+  {
+    "file": "green_runner.txt",
+    "bytes": 111,
+    "sha256": "8c5a99a92f788444f778333a9c0be8463e55b7e577264c9b1d284898abff44b8"
+  },
+  {
+    "file": "native/capture.txt",
+    "bytes": 13804,
+    "sha256": "6fd5c7ad05fc05eea6d03757423c6f72f2517130fb15daefb85f0da0ee085cbb"
+  },
+  {
+    "file": "native/collision_trace.json",
+    "bytes": 2872,
+    "sha256": "7dc7c702be9ca02bf2a71fb20f65579983d580e42e04d8c9d77871fd864bc65a"
+  },
+  {
+    "file": "native/M1-122_garden.png",
+    "bytes": 1351272,
+    "sha256": "890f58863541cb38bb29687bea30c6825a7b2953d57d75daab5b66c9158a874d"
+  },
+  {
+    "file": "native/run.json",
+    "bytes": 1410,
+    "sha256": "e85943344a76f47405c02c94220a29ae365186e61abbdcb480b6690198ba69d7"
+  },
+  {
+    "file": "native_post_sync/capture.txt",
+    "bytes": 8931,
+    "sha256": "8ecaad96b07b330a4d8c96d586f9f3415bec99adf89c33c150d83856775bb1b7"
+  },
+  {
+    "file": "native_post_sync/collision_trace.json",
+    "bytes": 2872,
+    "sha256": "7dc7c702be9ca02bf2a71fb20f65579983d580e42e04d8c9d77871fd864bc65a"
+  },
+  {
+    "file": "native_post_sync/M1-122_garden.png",
+    "bytes": 1351386,
+    "sha256": "c3648d0dfefb0b23b0a6b9f9b552bec0d1fe744a72086770d435e286a5712cb2"
+  },
+  {
+    "file": "native_post_sync/run.json",
+    "bytes": 4929,
+    "sha256": "de8a57b05a0e8986ea5ecfe7a20ea5326b32cd049d787c62b0ef6703be567e55"
+  },
+  {
+    "file": "red/collision_trace.json",
+    "bytes": 3066,
+    "sha256": "ccedf7095db61d4c78cd232b72738948b1ca687d23a595cf76422fddce23f6d7"
+  },
+  {
+    "file": "red/setup.log",
+    "bytes": 40131,
+    "sha256": "11450d2d0b5df8721d1f02bdfb9726ecfbec2d0fffce24e46eb282c8f38ab3f3"
+  },
+  {
+    "file": "red/test_garden_collision.gd.log",
+    "bytes": 8789,
+    "sha256": "9a50080763562dcf8716a4a198e8e98f57e9e8e610f8ff2eae837df16ca3d62e"
+  },
+  {
+    "file": "red_run.json",
+    "bytes": 175,
+    "sha256": "f483ba8bfb78c6019a81e5067d6a4983b818b759b3ce2c3418ae50207da80c21"
+  },
+  {
+    "file": "red_runner.txt",
+    "bytes": 306,
+    "sha256": "76db745425695f455611198bc6d53cfdb7d4a1fbc1b363451a390df35056c7d1"
+  },
+  {
+    "file": "regression/clock_observation.json",
+    "bytes": 700,
+    "sha256": "a6a5770a926b97a414290abc30161957bee30a290fb0ef832edb8896ecb4ee05"
+  },
+  {
+    "file": "regression/full/logs/collision_trace.json",
+    "bytes": 2872,
+    "sha256": "0ba7dd313f6fe67833116b440704a788eb202280854a7e211daea8f8b7fff10b"
+  },
+  {
+    "file": "regression/full/logs/input_trace.json",
+    "bytes": 9772,
+    "sha256": "f659b7d1a6e5c971c6de1695f96eed7752929739d6a0222f10c84598594965cb"
+  },
+  {
+    "file": "regression/full/logs/movement_trace.json",
+    "bytes": 156961,
+    "sha256": "d6f400d450906ca1b7048b54ec15e5c0c23f663d43642c9885679cd90dbf9a74"
+  },
+  {
+    "file": "regression/full/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression/full/logs/test_asset_showcase.gd.log",
+    "bytes": 162520,
+    "sha256": "570bc9e13d3ded36494d55f84363a3103c99ded356b41392aab13fc1e092651a"
+  },
+  {
+    "file": "regression/full/logs/test_campaign_boot.gd.log",
+    "bytes": 7867,
+    "sha256": "c7155803a87a7f3236c0d4f9633dd8385872d600740d55e3e42c7e7cb9812adf"
+  },
+  {
+    "file": "regression/full/logs/test_campaign_crew.gd.log",
+    "bytes": 88329,
+    "sha256": "d98828bdcfe9aadfb9c3ebfcc0e9fece2accb26b55c064d6b47dce9507a5377f"
+  },
+  {
+    "file": "regression/full/logs/test_campaign_interaction_input.gd.log",
+    "bytes": 10569,
+    "sha256": "3732ad50f51669d8791d3d59469c906092244cd82d1ec49dfc181d95d62cc17c"
+  },
+  {
+    "file": "regression/full/logs/test_campaign_knowledge.gd.log",
+    "bytes": 11287,
+    "sha256": "e12b287caab03e055edcd0a165c0414422925f52506b935838389630063f0d12"
+  },
+  {
+    "file": "regression/full/logs/test_campaign_later_runtime.gd.log",
+    "bytes": 55311,
+    "sha256": "1dd221f247c926a348dabed193506e341da7eca419651c7408c861a62e83350e"
+  },
+  {
+    "file": "regression/full/logs/test_campaign_media.gd.log",
+    "bytes": 20272,
+    "sha256": "eff61da82b1540a1d74ae538397fa4787f0feb1275dfe296246fc51afdd17b48"
+  },
+  {
+    "file": "regression/full/logs/test_campaign_messages.gd.log",
+    "bytes": 590,
+    "sha256": "bcbcbb2a91b5b1589131f579a4af08c0811f2cacde52d6540bfdfb87127b5618"
+  },
+  {
+    "file": "regression/full/logs/test_campaign_session.gd.log",
+    "bytes": 10476,
+    "sha256": "5bb6ce5ee516fd322c4735f936a0607db132b1c56386d5e805504abdc1e7fe90"
+  },
+  {
+    "file": "regression/full/logs/test_care_round_panel.gd.log",
+    "bytes": 130,
+    "sha256": "a80d486a1e78bf228faf02d17593ac2c9f265d64a8ed8908f4decd8e78b80078"
+  },
+  {
+    "file": "regression/full/logs/test_ch01_room_hooks.gd.log",
+    "bytes": 9458,
+    "sha256": "9ee2668d2938b266ee2ae44db2f85e4cf780cec21b4d8492f9cc85869d78a1fb"
+  },
+  {
+    "file": "regression/full/logs/test_ch01_s03_route.gd.log",
+    "bytes": 382,
+    "sha256": "3eab1bc4b3b7d9321a96b387a26a09ab4bc2797036df167c8bf8558b82f0e16c"
+  },
+  {
+    "file": "regression/full/logs/test_ch03_assets.gd.log",
+    "bytes": 4006,
+    "sha256": "e9571c2e72dce6a804fa8f7d0bb427e1c656343f8b9e6566c4e335fa4d81e3ba"
+  },
+  {
+    "file": "regression/full/logs/test_ch04_assets.gd.log",
+    "bytes": 21251,
+    "sha256": "248a5a1c8726bae32abfebd48b619e84552ff4a4123e4a5d69d1ec7f68f5653a"
+  },
+  {
+    "file": "regression/full/logs/test_ch05_assets.gd.log",
+    "bytes": 126,
+    "sha256": "4072e74c4b361afa1a11bb65221b35c13c3ff10e3f57b54f02cb3851e790ed86"
+  },
+  {
+    "file": "regression/full/logs/test_chapter1_campaign_flow.gd.log",
+    "bytes": 48620,
+    "sha256": "d634e87ef8bca2762ad3786d480d9f3c1324cd07b614bd7857ad2c363cde994c"
+  },
+  {
+    "file": "regression/full/logs/test_chapter1_logic_regressions.gd.log",
+    "bytes": 2532,
+    "sha256": "8f66efbebf20ec8c411d2bc653c53428779a2d171512be3675c750d0d7bd63f3"
+  },
+  {
+    "file": "regression/full/logs/test_chapter1_outcomes.gd.log",
+    "bytes": 11300,
+    "sha256": "22ecb78376dc9a319cd40e206def53d1620cad0f19d3670ab025a50bedd7db5c"
+  },
+  {
+    "file": "regression/full/logs/test_chapter1_ui_regressions.gd.log",
+    "bytes": 11285,
+    "sha256": "36a82d3939fa6619f85b6f46ff85400b04bd8d85799cf9840e2fd3fa718f4a2c"
+  },
+  {
+    "file": "regression/full/logs/test_chapter2_rooms.gd.log",
+    "bytes": 28250,
+    "sha256": "a45e6ab406f78d03b990f60ddddd3137e77adccde7915e672c8ba95b5a849dc2"
+  },
+  {
+    "file": "regression/full/logs/test_chapter2_route.gd.log",
+    "bytes": 4831,
+    "sha256": "c93ea39e04ffde384d7dcc80b27ea67246361f80d100c8a659bcf999446cb0b3"
+  },
+  {
+    "file": "regression/full/logs/test_chapter3_rooms.gd.log",
+    "bytes": 29539,
+    "sha256": "b7f10a557459dfc7c5f9809b40183e31fce983e49d58ef2bb2b28ac0c17aaa4e"
+  },
+  {
+    "file": "regression/full/logs/test_chapter4_rooms.gd.log",
+    "bytes": 68236,
+    "sha256": "e50a87a246843fec8a475c2f260ddbc1825076556f66f8f6588ff6eedf8c3370"
+  },
+  {
+    "file": "regression/full/logs/test_chapter5_rooms.gd.log",
+    "bytes": 33659,
+    "sha256": "56995b71afd0b8916463ed0b53cc37c922b55687f509f13cf91e7d0e28e10638"
+  },
+  {
+    "file": "regression/full/logs/test_chapter6_rooms.gd.log",
+    "bytes": 29988,
+    "sha256": "f17119b760e9283f95fdead8e40367a1b38c14055cd6fc683540b22358bda1fd"
+  },
+  {
+    "file": "regression/full/logs/test_chapter7_assets.gd.log",
+    "bytes": 8556,
+    "sha256": "59816514538439582ec16e8503775febf5271702521c43de96b3c0496e3b195b"
+  },
+  {
+    "file": "regression/full/logs/test_chapter7_rooms.gd.log",
+    "bytes": 43795,
+    "sha256": "027d7d30e3dc2d1a335eef213ff44ee4fcd12349bb75054250127f8d00fa9890"
+  },
+  {
+    "file": "regression/full/logs/test_chapter8_assets.gd.log",
+    "bytes": 10323,
+    "sha256": "fd1354a7977a6d43d35b6ea19a04ec539bfb7b753e4047b24510ecf0077ca1ed"
+  },
+  {
+    "file": "regression/full/logs/test_chapter8_rooms.gd.log",
+    "bytes": 84497,
+    "sha256": "fc13e2d7f247222581693341e427bc49b8c3c7712f563775baf6187fb8e0b0a0"
+  },
+  {
+    "file": "regression/full/logs/test_comms.gd.log",
+    "bytes": 11228,
+    "sha256": "d15fe462c5a3df65957cc944b2551c8ce7ac4face6bbbf1124e6bd9084908cd5"
+  },
+  {
+    "file": "regression/full/logs/test_cutscene_choice_card.gd.log",
+    "bytes": 2708,
+    "sha256": "0cec363d8b5fc4b25a1f92609fd27fd5ab638dbc1f26525a7bc2e37020f1174b"
+  },
+  {
+    "file": "regression/full/logs/test_director_message_metadata.gd.log",
+    "bytes": 4496,
+    "sha256": "ba8ce03c41ec8a8e0639219259145fd00da0a23343ae7b2a17e0e552255db50b"
+  },
+  {
+    "file": "regression/full/logs/test_earth_screen.gd.log",
+    "bytes": 13429,
+    "sha256": "6f72c770e643d3a9093e6d94c46962d658fecec92ea7e2c76462e3d369332d98"
+  },
+  {
+    "file": "regression/full/logs/test_eclipse_props.gd.log",
+    "bytes": 9624,
+    "sha256": "18d45653e5863a8d6b26df4618a73556795040255b021f827f5b5edb75b11848"
+  },
+  {
+    "file": "regression/full/logs/test_en_airlock.gd.log",
+    "bytes": 9927,
+    "sha256": "991fae4ec03d77884dad4438a1eb619de4c6e968bcecf3b640784a557da16edb"
+  },
+  {
+    "file": "regression/full/logs/test_eva.gd.log",
+    "bytes": 117,
+    "sha256": "0bdbfe30509dcc26fc12cd926381bd91478f5f342afd2c0d511a08085c0034fc"
+  },
+  {
+    "file": "regression/full/logs/test_explainers.gd.log",
+    "bytes": 125,
+    "sha256": "dba7c0280471bc2819afc305a79c7f92ce23ceb4a661366a1310aef9b3e3e519"
+  },
+  {
+    "file": "regression/full/logs/test_extended_campaign_route.gd.log",
+    "bytes": 30422,
+    "sha256": "c2868d2df27811df6856c0e9502c104a7a0c56d7ddc036957a84b016fbeede53"
+  },
+  {
+    "file": "regression/full/logs/test_exterior_terrain.gd.log",
+    "bytes": 235187,
+    "sha256": "382a23912101c6ba20be15f1b7e0202f1b750968c598170b8b0017530bf151ea"
+  },
+  {
+    "file": "regression/full/logs/test_face_atlas.gd.log",
+    "bytes": 1018,
+    "sha256": "da5af4deb3332d29cce3ef418c471371a97315152115b4c14588e6e7fac127b5"
+  },
+  {
+    "file": "regression/full/logs/test_face_expression.gd.log",
+    "bytes": 3608,
+    "sha256": "813fc97a21b92f0a66a58c4d0fd8c47e0d2a65ef7986be177255b92857bec278"
+  },
+  {
+    "file": "regression/full/logs/test_garden_collision.gd.log",
+    "bytes": 8677,
+    "sha256": "73bdc65b49fa465ceeb0c0f1b8c60723f39915956056458557a820a0a6d198f6"
+  },
+  {
+    "file": "regression/full/logs/test_garden_movement.gd.log",
+    "bytes": 11480,
+    "sha256": "b96ed26e572be2cdeee78639c936780f2f775a5855c3ff95249333ffc0cbf658"
+  },
+  {
+    "file": "regression/full/logs/test_habitat_kit.gd.log",
+    "bytes": 12312,
+    "sha256": "9ca16e2cbfc8bc6d28aba587a41ec566816b631ff369c562729cdc671acc5c63"
+  },
+  {
+    "file": "regression/full/logs/test_habitat_rooms.gd.log",
+    "bytes": 7039,
+    "sha256": "0e2535c0185ed85b9b05e772236b21940f360adddca72c57cc33a47ac42d90b4"
+  },
+  {
+    "file": "regression/full/logs/test_hair_springs.gd.log",
+    "bytes": 397,
+    "sha256": "5624830a56942c4a92ed402a1ac37a6459d77d3f1755e8b32d91a20ad0582fd4"
+  },
+  {
+    "file": "regression/full/logs/test_hazards.gd.log",
+    "bytes": 1508,
+    "sha256": "384b7de90a3c937c3139cce3461895bcfcfad7b01d0f8fa0a461a4e59128cfc5"
+  },
+  {
+    "file": "regression/full/logs/test_hint_player.gd.log",
+    "bytes": 11787,
+    "sha256": "e358ff9a90cca664a16b0246f3727291246fc74765438762df3714d0fe2f407b"
+  },
+  {
+    "file": "regression/full/logs/test_hud_world_lifetime.gd.log",
+    "bytes": 10604,
+    "sha256": "9e05a562a49aeabdae0b8d841440710e61db2f0ac52eead66c4fb71ef236f28c"
+  },
+  {
+    "file": "regression/full/logs/test_journal_tabs.gd.log",
+    "bytes": 11964,
+    "sha256": "fb07a674e8fb9696057483b3c949519a66677325e6a0ed1be028f2ce852dcb9d"
+  },
+  {
+    "file": "regression/full/logs/test_later_numeric.gd.log",
+    "bytes": 128,
+    "sha256": "d4924a6ed87f950bf3586667fcc6189b84ff6ed2b4ad2b89bda916445bdf56f3"
+  },
+  {
+    "file": "regression/full/logs/test_lip_sync.gd.log",
+    "bytes": 1285,
+    "sha256": "3a526b52af399797652c22f81bcf4521cf71c2f70303e698ef54404b67e824d5"
+  },
+  {
+    "file": "regression/full/logs/test_loading.gd.log",
+    "bytes": 36087,
+    "sha256": "7603961777fe6456e61b54272eaab5c2d8be4a890839aca347783568b33fbd8a"
+  },
+  {
+    "file": "regression/full/logs/test_lunar_kit.gd.log",
+    "bytes": 123,
+    "sha256": "ceb4e3307aa99d2b7cdcce6002fd7e66e2a4105c9e3d98adedcd7ee1a99029eb"
+  },
+  {
+    "file": "regression/full/logs/test_m155_mission_table.gd.log",
+    "bytes": 133,
+    "sha256": "8ca3f9268808d0abad469b02e1c9dc877271fe570935e28a6c21afc4a67fa02e"
+  },
+  {
+    "file": "regression/full/logs/test_main_menu_contrast.gd.log",
+    "bytes": 705,
+    "sha256": "24387be203780a499867a40a37ce670f01abe56d7504a2586bf2d5fe8f64af6a"
+  },
+  {
+    "file": "regression/full/logs/test_mission_table_lifetime.gd.log",
+    "bytes": 136,
+    "sha256": "795614995fe4c996a95f6559715459b2b2b8a6559c2bd83de10269ecae18a030"
+  },
+  {
+    "file": "regression/full/logs/test_mission_trainer.gd.log",
+    "bytes": 2434,
+    "sha256": "0bbfbaaaadaa7d7ba76276832a179aab29322bb2a77fad6a4edd6f09e7abd0a6"
+  },
+  {
+    "file": "regression/full/logs/test_moon_region.gd.log",
+    "bytes": 28557,
+    "sha256": "9a9ee9bea326481ad78a06351557aa6234a420c90c119891bed6dde768292d47"
+  },
+  {
+    "file": "regression/full/logs/test_narrative_props.gd.log",
+    "bytes": 5596,
+    "sha256": "f6123dfed157355b46a2b867cfd42c21a19e21c1dd0646dadd611f8c0694f5ca"
+  },
+  {
+    "file": "regression/full/logs/test_network.gd.log",
+    "bytes": 1973,
+    "sha256": "8197232f984db99ff0ec864265d08179397e381de20097b677b378ca740a2318"
+  },
+  {
+    "file": "regression/full/logs/test_outpost_status.gd.log",
+    "bytes": 10425,
+    "sha256": "0b6c9b9d4960f09fd22513ac06849bd318f88070b882dc484af8d3ee5fba00c1"
+  },
+  {
+    "file": "regression/full/logs/test_p01_inputs.gd.log",
+    "bytes": 11483,
+    "sha256": "073d91da7dbbeea5b817702d5c970836c73e73007936a5cee083d19480e032ac"
+  },
+  {
+    "file": "regression/full/logs/test_p01_labels.gd.log",
+    "bytes": 125,
+    "sha256": "1e939423664f6cf0ba6fe64501b821b6a43057471737b45845bb189dff73177c"
+  },
+  {
+    "file": "regression/full/logs/test_p01_nearby.gd.log",
+    "bytes": 10510,
+    "sha256": "70fe5ac5aa1ef97dc5ad219f7fe81ff60afb7988d3b4ce65bb8e9a4dc7017184"
+  },
+  {
+    "file": "regression/full/logs/test_p01_panel.gd.log",
+    "bytes": 10366,
+    "sha256": "9abc88dba14191d08dd4dbd8d2ba9e34f8aa31d68d083853a5e876fcb02638ce"
+  },
+  {
+    "file": "regression/full/logs/test_p02_mission_table.gd.log",
+    "bytes": 17022,
+    "sha256": "fe81150b770cc6081d3cdf6bd675463f72bffe42d56a293d4d3a69e358896831"
+  },
+  {
+    "file": "regression/full/logs/test_p03_p04_content.gd.log",
+    "bytes": 130,
+    "sha256": "1a1406b21bfb691cffab12d0cd2f1e6da2700527eff40070f38738e583e6ca7c"
+  },
+  {
+    "file": "regression/full/logs/test_payload.gd.log",
+    "bytes": 10958,
+    "sha256": "dea99b4b7238604498f63e9d0ea38bdca86d6d30051b7864244ab3b9ed9a928e"
+  },
+  {
+    "file": "regression/full/logs/test_performance_runtime.gd.log",
+    "bytes": 17773,
+    "sha256": "fc1f6dbadfa410db51c48bfc7d947bffa2c94faf86af42e7d8b8dfe22798c355"
+  },
+  {
+    "file": "regression/full/logs/test_plant_seedlings.gd.log",
+    "bytes": 7748,
+    "sha256": "ea64f1626f61ceabae5914a109ef49f683757f5a2fb8d3ba208746019d12bfd6"
+  },
+  {
+    "file": "regression/full/logs/test_player_controller.gd.log",
+    "bytes": 10081,
+    "sha256": "f6eae7c566514c891dca7fb29c0996ea31fd58e0d941af6ca99eee18f1349291"
+  },
+  {
+    "file": "regression/full/logs/test_player_text.gd.log",
+    "bytes": 25644,
+    "sha256": "a0add6647350d8ad2a7a26e7b630c75a6ae70bbad387c3b61f40dd616fa33758"
+  },
+  {
+    "file": "regression/full/logs/test_progression.gd.log",
+    "bytes": 125,
+    "sha256": "31fc4ad7dafac50c88fed472b682887cbe0ab238e5e3bcf21648cb399dec909f"
+  },
+  {
+    "file": "regression/full/logs/test_review_scene.gd.log",
+    "bytes": 23902,
+    "sha256": "dca27b235869261008c23d0040b379e7c37cff85e168238944e6699ee38ca406"
+  },
+  {
+    "file": "regression/full/logs/test_room_presentation.gd.log",
+    "bytes": 17771,
+    "sha256": "6ae60e5a086de553970c20c06d0496dd37f9001f298d8567fe05d1828280f324"
+  },
+  {
+    "file": "regression/full/logs/test_route_messages.gd.log",
+    "bytes": 128,
+    "sha256": "28d5bbf92a26e8c0616d0f7d821f6de231da38990c4ea40bf4d4b612ac81e0e9"
+  },
+  {
+    "file": "regression/full/logs/test_rover.gd.log",
+    "bytes": 1658,
+    "sha256": "a6570fe07414ddd14889f88289dd02f867073e3841b5e684b5608b14c384673f"
+  },
+  {
+    "file": "regression/full/logs/test_save_service_recovery.gd.log",
+    "bytes": 5899,
+    "sha256": "fdc2b303d4352bc4ef82ef2532aac38184fa04c9a73c376323ba645a7250022a"
+  },
+  {
+    "file": "regression/full/logs/test_science_data.gd.log",
+    "bytes": 12679,
+    "sha256": "35dc6b38ba0445df6cc15edabf6b291b4e9704536dece14aff747a07d6e9eb63"
+  },
+  {
+    "file": "regression/full/logs/test_science_watch.gd.log",
+    "bytes": 11139,
+    "sha256": "ca86ed863f739e27028d6d70f5fd25191c114e58ecd7eb4ec9dac95a753ab1ef"
+  },
+  {
+    "file": "regression/full/logs/test_session_crew.gd.log",
+    "bytes": 125,
+    "sha256": "7f50be9333f4072680eab5afa9babed8d9f275d166979c452ecb55521dff77ca"
+  },
+  {
+    "file": "regression/full/logs/test_sound_captions.gd.log",
+    "bytes": 10425,
+    "sha256": "85f7d70d302c1fa8fe991c0e5bffddd82b3b7916f2ebdb58eb87d2d3f9ae363f"
+  },
+  {
+    "file": "regression/full/logs/test_story_log.gd.log",
+    "bytes": 3821,
+    "sha256": "09e30849e107f7a1c78dcaae15878743ecb0ad0ef06a8fed83011e48cb257fb9"
+  },
+  {
+    "file": "regression/full/logs/test_tara_lifecycle.gd.log",
+    "bytes": 4751,
+    "sha256": "cb9fe8e3dc7d50dbceea323565010639f0095011fcbc1c892f13e8266c81e57f"
+  },
+  {
+    "file": "regression/full/logs/test_terrain.gd.log",
+    "bytes": 129,
+    "sha256": "219e883f916a429351d480cce9dc38836ff6b442c51260f446b8ed38ec38e2bb"
+  },
+  {
+    "file": "regression/full/logs/test_terrain_lola.gd.log",
+    "bytes": 128,
+    "sha256": "3e89888ea9c8103014f4d7a3290ee0c98f2455a5454a56d96880bfb0d0d6ddc1"
+  },
+  {
+    "file": "regression/full/logs/test_terrain_session.gd.log",
+    "bytes": 1168,
+    "sha256": "dc05b0c98703da9179959c41326a04dcc16dff3a4d57a4b8bfb145107b1f2340"
+  },
+  {
+    "file": "regression/full/logs/test_terrain_work_lights.gd.log",
+    "bytes": 150951,
+    "sha256": "48fb8867940560f83c97dea71e9bc9bcce66e52bc5cc5f9ff86b1df8079abd9a"
+  },
+  {
+    "file": "regression/full/logs/test_toon_materials.gd.log",
+    "bytes": 771,
+    "sha256": "b56be8e775a9cc8363bcf38fef4239e6af7ea143fd3ac7853f48b6289abb1acb"
+  },
+  {
+    "file": "regression/full/logs/test_ui_kit.gd.log",
+    "bytes": 372,
+    "sha256": "1807bf59d9febe6465b613ea87d310070b5661f68e52b417d7d7f6c359ba5c99"
+  },
+  {
+    "file": "regression/full/logs/test_upgrade_profiles.gd.log",
+    "bytes": 1332,
+    "sha256": "c2689740135006b419d795d87bebc5e6d2d69eb4eced714769859ae7f92d21db"
+  },
+  {
+    "file": "regression/full/logs/test_worker_a_systems.gd.log",
+    "bytes": 6557,
+    "sha256": "f7135d68d534715970caea8196475a44811c0a9a155af6b83a5c2b33bfdd7976"
+  },
+  {
+    "file": "regression/full/logs/test_worker_b_world_missions.gd.log",
+    "bytes": 31415,
+    "sha256": "691132abc200f292bb73b61e3fdd63ee1310418803b2508e81b84af7be71097e"
+  },
+  {
+    "file": "regression/full/logs/test_worker_c_content.gd.log",
+    "bytes": 32896,
+    "sha256": "98ca66abff94444f2af5da84df5327661ebd9dbd73a43f3708ff1f5aae054f01"
+  },
+  {
+    "file": "regression/full/runner.txt",
+    "bytes": 8967,
+    "sha256": "d0b92bdcbc32480b5d27b9d4e3805a9ab032b94d43c3604ecec07bf3378876da"
+  },
+  {
+    "file": "regression/habitat_rooms/logs/setup.log",
+    "bytes": 40960,
+    "sha256": "ca7fac770fb271d0b811bca31fb0709046ae706bcb607b9d09bd66bdc51cb1c7"
+  },
+  {
+    "file": "regression/habitat_rooms/logs/test_habitat_rooms.gd.log",
+    "bytes": 7039,
+    "sha256": "0e2535c0185ed85b9b05e772236b21940f360adddca72c57cc33a47ac42d90b4"
+  },
+  {
+    "file": "regression/habitat_rooms/runner.txt",
+    "bytes": 106,
+    "sha256": "4998527cf47be14f9e47d9b15827e40792a4c7faffae3080d05699fe99e77129"
+  },
+  {
+    "file": "regression/log_audit.json",
+    "bytes": 41310,
+    "sha256": "214c372b520ae977787e59715a1f9c8478dc8a8409d2fe95d6cba41ea867c0d9"
+  },
+  {
+    "file": "regression/run.json",
+    "bytes": 4253,
+    "sha256": "97faaf0bc61fc8f3c2e1b3325feaf0c53937f3ebf73c2ae8a799d767b5f8db8e"
+  },
+  {
+    "file": "regression_post_sync/continuation/player_text/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/player_text/logs/test_player_text.gd.log",
+    "bytes": 134990,
+    "sha256": "5b57eb92df58b46924ee9ee95e88f6b7c970b85f8b45f922f1a87600d21bc19b"
+  },
+  {
+    "file": "regression_post_sync/continuation/player_text/runner.txt",
+    "bytes": 474,
+    "sha256": "67ec940093b87a6cb3a76eb79b4850558ce0c73cfa33380a0f3e699223c5da62"
+  },
+  {
+    "file": "regression_post_sync/continuation/probe_calibration_job/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/probe_calibration_job/logs/test_probe_calibration_job.gd.log",
+    "bytes": 6797,
+    "sha256": "1e25d5777423fa2474d16fcfa427e3a41f5a432e041707577ad73007a4cf36e5"
+  },
+  {
+    "file": "regression_post_sync/continuation/probe_calibration_job/runner.txt",
+    "bytes": 121,
+    "sha256": "a7ebcaec55207aaaa4c6b456f979287b990e0af71c81f12d9c36c7a7bf18db2a"
+  },
+  {
+    "file": "regression_post_sync/continuation/progression/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/progression/logs/test_progression.gd.log",
+    "bytes": 125,
+    "sha256": "31fc4ad7dafac50c88fed472b682887cbe0ab238e5e3bcf21648cb399dec909f"
+  },
+  {
+    "file": "regression_post_sync/continuation/progression/runner.txt",
+    "bytes": 101,
+    "sha256": "0078253a96a9b015f55e5636a1700a67801616465c61705815d907df0a94877f"
+  },
+  {
+    "file": "regression_post_sync/continuation/review_scene/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/review_scene/logs/test_review_scene.gd.log",
+    "bytes": 23902,
+    "sha256": "dca27b235869261008c23d0040b379e7c37cff85e168238944e6699ee38ca406"
+  },
+  {
+    "file": "regression_post_sync/continuation/review_scene/runner.txt",
+    "bytes": 98,
+    "sha256": "2cd93d43b4c375828ef1f3918a085e91b651f10c1f65cefdaecc2353bff9ab8a"
+  },
+  {
+    "file": "regression_post_sync/continuation/room_presentation/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/room_presentation/logs/test_room_presentation.gd.log",
+    "bytes": 17771,
+    "sha256": "6ae60e5a086de553970c20c06d0496dd37f9001f298d8567fe05d1828280f324"
+  },
+  {
+    "file": "regression_post_sync/continuation/room_presentation/runner.txt",
+    "bytes": 114,
+    "sha256": "415563facf721ff277aa2ade392b0dc0894faf887a49dbaac787b733a5a65d3f"
+  },
+  {
+    "file": "regression_post_sync/continuation/route_messages/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/route_messages/logs/test_route_messages.gd.log",
+    "bytes": 128,
+    "sha256": "28d5bbf92a26e8c0616d0f7d821f6de231da38990c4ea40bf4d4b612ac81e0e9"
+  },
+  {
+    "file": "regression_post_sync/continuation/route_messages/runner.txt",
+    "bytes": 107,
+    "sha256": "34c080ebe6e02029414061f8d428e65f4d5e8e1c19212c621aed3adc1e6a9577"
+  },
+  {
+    "file": "regression_post_sync/continuation/rover/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/rover/logs/test_rover.gd.log",
+    "bytes": 1658,
+    "sha256": "a6570fe07414ddd14889f88289dd02f867073e3841b5e684b5608b14c384673f"
+  },
+  {
+    "file": "regression_post_sync/continuation/rover/runner.txt",
+    "bytes": 89,
+    "sha256": "9af5574c5152b2bec718f1be84397ddd341818b33ad3eee81db9bdfa650bdb38"
+  },
+  {
+    "file": "regression_post_sync/continuation/save_service_recovery/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/save_service_recovery/logs/test_save_service_recovery.gd.log",
+    "bytes": 5899,
+    "sha256": "fdc2b303d4352bc4ef82ef2532aac38184fa04c9a73c376323ba645a7250022a"
+  },
+  {
+    "file": "regression_post_sync/continuation/save_service_recovery/runner.txt",
+    "bytes": 109,
+    "sha256": "0f517f30f5e20702aaf1749aef43ad7c2c60f3bb2d3b22fe603571c0204f85d3"
+  },
+  {
+    "file": "regression_post_sync/continuation/science_data/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/science_data/logs/test_science_data.gd.log",
+    "bytes": 12679,
+    "sha256": "1b4eadd3b050a004d4e5c64b04493ea341990c786efc7a58d11e33a04c7ba1e7"
+  },
+  {
+    "file": "regression_post_sync/continuation/science_data/runner.txt",
+    "bytes": 104,
+    "sha256": "c993f3a4b78cdb636dd508bf89feffd84ece2da2fcbfba00743104f9e1ce8958"
+  },
+  {
+    "file": "regression_post_sync/continuation/science_watch/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/science_watch/logs/test_science_watch.gd.log",
+    "bytes": 11139,
+    "sha256": "6f8bb9e96e2926da969be770a8f5dce9d21c338aba4d44d9052bbc9e80695a86"
+  },
+  {
+    "file": "regression_post_sync/continuation/science_watch/runner.txt",
+    "bytes": 105,
+    "sha256": "833e706acbc188db43ab8a7992281f672895b5796666321d27bf2b6d59d46943"
+  },
+  {
+    "file": "regression_post_sync/continuation/session_crew/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/session_crew/logs/test_session_crew.gd.log",
+    "bytes": 125,
+    "sha256": "7f50be9333f4072680eab5afa9babed8d9f275d166979c452ecb55521dff77ca"
+  },
+  {
+    "file": "regression_post_sync/continuation/session_crew/runner.txt",
+    "bytes": 102,
+    "sha256": "5a6cbaf295b0166268724c11ef4373e07dd361169c9eaaea3e8c798a65113b35"
+  },
+  {
+    "file": "regression_post_sync/continuation/sound_captions/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/sound_captions/logs/test_sound_captions.gd.log",
+    "bytes": 10425,
+    "sha256": "92f77245066b66809ad2c775ff89a1872511d97b73beb92cdb346fac02f68256"
+  },
+  {
+    "file": "regression_post_sync/continuation/sound_captions/runner.txt",
+    "bytes": 107,
+    "sha256": "69fa48e76c49c09b17ff5d8b271f7201ea4ae37781a01a48c196d144e5861725"
+  },
+  {
+    "file": "regression_post_sync/continuation/state.json",
+    "bytes": 13329,
+    "sha256": "e6b624bd27af980400314021bfca537f2765d4f2e0ab9458e565263f465b67f0"
+  },
+  {
+    "file": "regression_post_sync/continuation/story_echoes/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/story_echoes/logs/test_story_echoes.gd.log",
+    "bytes": 127,
+    "sha256": "7791dd36841969fb1a98ce2faf4dbb57f94ecb7abf3e327866816f2784eacd67"
+  },
+  {
+    "file": "regression_post_sync/continuation/story_echoes/runner.txt",
+    "bytes": 104,
+    "sha256": "323b1f4ccc413166f65ad934747e1e17f47dd860cca124467a4b1577f59276cc"
+  },
+  {
+    "file": "regression_post_sync/continuation/story_log/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/story_log/logs/test_story_log.gd.log",
+    "bytes": 3821,
+    "sha256": "09e30849e107f7a1c78dcaae15878743ecb0ad0ef06a8fed83011e48cb257fb9"
+  },
+  {
+    "file": "regression_post_sync/continuation/story_log/runner.txt",
+    "bytes": 97,
+    "sha256": "9b61d7cc67804d7ddd8c6a54b36780f1ff5411348352cd58922beb5ee0bb3f82"
+  },
+  {
+    "file": "regression_post_sync/continuation/tara_lifecycle/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/tara_lifecycle/logs/test_tara_lifecycle.gd.log",
+    "bytes": 4751,
+    "sha256": "cb9fe8e3dc7d50dbceea323565010639f0095011fcbc1c892f13e8266c81e57f"
+  },
+  {
+    "file": "regression_post_sync/continuation/tara_lifecycle/runner.txt",
+    "bytes": 107,
+    "sha256": "3bd695acec93be17cbd8f4525c6fba445a5c4681f01ca817345d30e3a9ebd64a"
+  },
+  {
+    "file": "regression_post_sync/continuation/terrain/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/terrain/logs/test_exterior_terrain.gd.log",
+    "bytes": 226945,
+    "sha256": "617c70e89a567cf2a9b5a2901ed290a458dc1e11bc5815fa6d9147951bd5c5e5"
+  },
+  {
+    "file": "regression_post_sync/continuation/terrain/logs/test_terrain.gd.log",
+    "bytes": 129,
+    "sha256": "219e883f916a429351d480cce9dc38836ff6b442c51260f446b8ed38ec38e2bb"
+  },
+  {
+    "file": "regression_post_sync/continuation/terrain/logs/test_terrain_lola.gd.log",
+    "bytes": 128,
+    "sha256": "3e89888ea9c8103014f4d7a3290ee0c98f2455a5454a56d96880bfb0d0d6ddc1"
+  },
+  {
+    "file": "regression_post_sync/continuation/terrain/logs/test_terrain_session.gd.log",
+    "bytes": 4070,
+    "sha256": "f9f1f8d63ae84b99db1b75c947521291c3ffac67186c05e4d947c2d0169037af"
+  },
+  {
+    "file": "regression_post_sync/continuation/terrain/logs/test_terrain_work_lights.gd.log",
+    "bytes": 150951,
+    "sha256": "cbbab75d1c7364d7aa306e26c83b0f396b2cbd373aed20f0a9a2ce1dee729473"
+  },
+  {
+    "file": "regression_post_sync/continuation/terrain/runner.txt",
+    "bytes": 475,
+    "sha256": "25701eafe354a13a3d383921c59a72443f2818da63bb0e43746a219f8fc6a10d"
+  },
+  {
+    "file": "regression_post_sync/continuation/toon_materials/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/toon_materials/logs/test_toon_materials.gd.log",
+    "bytes": 771,
+    "sha256": "b56be8e775a9cc8363bcf38fef4239e6af7ea143fd3ac7853f48b6289abb1acb"
+  },
+  {
+    "file": "regression_post_sync/continuation/toon_materials/runner.txt",
+    "bytes": 107,
+    "sha256": "9af46f280b0feee251ad4efb6f48a97779fc2a236b7ebf85e0863d3c028bfb3a"
+  },
+  {
+    "file": "regression_post_sync/continuation/ui_families/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/ui_families/logs/test_ui_families.gd.log",
+    "bytes": 125,
+    "sha256": "ab26c595958d9d3690634626686432c8ea3000d50ab37a0b5dce762e22f86a5e"
+  },
+  {
+    "file": "regression_post_sync/continuation/ui_families/runner.txt",
+    "bytes": 101,
+    "sha256": "9d11d6da36f7774d5600c9522cd3c9cd02ee712dca5fb248d868487bf8cc0a71"
+  },
+  {
+    "file": "regression_post_sync/continuation/ui_kit/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/ui_kit/logs/test_ui_kit.gd.log",
+    "bytes": 372,
+    "sha256": "1807bf59d9febe6465b613ea87d310070b5661f68e52b417d7d7f6c359ba5c99"
+  },
+  {
+    "file": "regression_post_sync/continuation/ui_kit/runner.txt",
+    "bytes": 92,
+    "sha256": "f04407b5f8e5bb7de8f502edc57d372573331ba6e89aaeb61fcbf90dd65a6d03"
+  },
+  {
+    "file": "regression_post_sync/continuation/upgrade_profiles/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/upgrade_profiles/logs/test_upgrade_profiles.gd.log",
+    "bytes": 21776,
+    "sha256": "af1cbde94320e9648117008e09b6fe36c67f94bbb3568209cc0dfd2c02aac787"
+  },
+  {
+    "file": "regression_post_sync/continuation/upgrade_profiles/runner.txt",
+    "bytes": 881,
+    "sha256": "d411c68ee771076ff9f27ae01fc306eb5f3ad6a94360b61f6263ae877222381e"
+  },
+  {
+    "file": "regression_post_sync/continuation/worker_a_systems/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/worker_a_systems/logs/test_worker_a_systems.gd.log",
+    "bytes": 6557,
+    "sha256": "f7135d68d534715970caea8196475a44811c0a9a155af6b83a5c2b33bfdd7976"
+  },
+  {
+    "file": "regression_post_sync/continuation/worker_a_systems/runner.txt",
+    "bytes": 112,
+    "sha256": "4ed93367f378e004ee1378c5a2077ac476d7c9980a9227df59c6f398cce9d185"
+  },
+  {
+    "file": "regression_post_sync/continuation/worker_b_world_missions/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/worker_b_world_missions/logs/test_worker_b_world_missions.gd.log",
+    "bytes": 31426,
+    "sha256": "2e43c9e085e7476c5f864e5703bd17253c148f13cfd1a01019d3594dac1cc708"
+  },
+  {
+    "file": "regression_post_sync/continuation/worker_b_world_missions/runner.txt",
+    "bytes": 126,
+    "sha256": "e2ed705a19c0656a222b960af869a004b7e1258f6f029c146ebff90d924701a4"
+  },
+  {
+    "file": "regression_post_sync/continuation/worker_c_content/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/continuation/worker_c_content/logs/test_worker_c_content.gd.log",
+    "bytes": 32896,
+    "sha256": "98ca66abff94444f2af5da84df5327661ebd9dbd73a43f3708ff1f5aae054f01"
+  },
+  {
+    "file": "regression_post_sync/continuation/worker_c_content/runner.txt",
+    "bytes": 112,
+    "sha256": "a4216075adba9ccbcd0b5256ecb4b96e4854e2e412fbdc6573c35685988ad8a3"
+  },
+  {
+    "file": "regression_post_sync/diagnostic_summary.json",
+    "bytes": 6508,
+    "sha256": "3524934a4dc3cb1872bb6dcda139e50cca6662add30b2746bf2849e3c3971199"
+  },
+  {
+    "file": "regression_post_sync/full/logs/collision_trace.json",
+    "bytes": 2872,
+    "sha256": "0ba7dd313f6fe67833116b440704a788eb202280854a7e211daea8f8b7fff10b"
+  },
+  {
+    "file": "regression_post_sync/full/logs/input_trace.json",
+    "bytes": 9772,
+    "sha256": "e6f131f0b3a7b42027ef7f5d28ad2771378dc018aa0154140c357045112d544a"
+  },
+  {
+    "file": "regression_post_sync/full/logs/movement_trace.json",
+    "bytes": 156986,
+    "sha256": "03419546141c4b63ce29654ec1bc873bec3bdc95e5100b61a14ef107ba4935fc"
+  },
+  {
+    "file": "regression_post_sync/full/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_asset_showcase.gd.log",
+    "bytes": 162520,
+    "sha256": "570bc9e13d3ded36494d55f84363a3103c99ded356b41392aab13fc1e092651a"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_campaign_boot.gd.log",
+    "bytes": 7867,
+    "sha256": "c7155803a87a7f3236c0d4f9633dd8385872d600740d55e3e42c7e7cb9812adf"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_campaign_crew.gd.log",
+    "bytes": 88329,
+    "sha256": "3925e153e19b69b1ee38381e89e189a0c0850923d2410b5d3cf1aeb9fa84c4ab"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_campaign_interaction_input.gd.log",
+    "bytes": 10569,
+    "sha256": "e436c6818c05ae371fe6d7fc6765f9e87e574286104f4ce2e31720922eb428a7"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_campaign_knowledge.gd.log",
+    "bytes": 11287,
+    "sha256": "5f07be89d1187437ecfd1a318bba56828efe29129c1312cdeac3c23baca218a5"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_campaign_later_runtime.gd.log",
+    "bytes": 55311,
+    "sha256": "e0a39a94b7bb109be5d67e18a2d22f6671b187fd22ec0d86367589d58d4b5e0e"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_campaign_media.gd.log",
+    "bytes": 20272,
+    "sha256": "0b279792040a7b3cd159ead0f54b0c63ae9e0bb9e1244e1f4ba032c70c574a4e"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_campaign_messages.gd.log",
+    "bytes": 590,
+    "sha256": "c608f985a0cd221ba1ec1c418b299a9db594670d88f694eb33fa7eb569fc47f6"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_campaign_session.gd.log",
+    "bytes": 10477,
+    "sha256": "aaf5a6c09bf7fb6ed3e33486ba8c6c7fd53d58042a86046c37cb7344294b55e4"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_care_round_panel.gd.log",
+    "bytes": 130,
+    "sha256": "a80d486a1e78bf228faf02d17593ac2c9f265d64a8ed8908f4decd8e78b80078"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_care_round_props.gd.log",
+    "bytes": 130,
+    "sha256": "747e37cad5253e3a43fe9a355ddfcf0411cbb013b869a5e55a758fb9530e342e"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_care_round_runtime.gd.log",
+    "bytes": 375,
+    "sha256": "aaa60be7e745ce4417434f50068adaa819f2b9386bc5441e77beaaa260b605ba"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_ch01_game_feel.gd.log",
+    "bytes": 13579,
+    "sha256": "0c1d293510455c71cdc03d8806b8247bfc42e94f0aff6d06f4c1a2c47d27eb43"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_ch01_room_hooks.gd.log",
+    "bytes": 9458,
+    "sha256": "9ee2668d2938b266ee2ae44db2f85e4cf780cec21b4d8492f9cc85869d78a1fb"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_ch01_s03_route.gd.log",
+    "bytes": 432,
+    "sha256": "af1c1edd94d87ec34e6289e935dfd01d9e23bcb110f35b7f88a51888cfa05686"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_ch03_assets.gd.log",
+    "bytes": 4006,
+    "sha256": "e9571c2e72dce6a804fa8f7d0bb427e1c656343f8b9e6566c4e335fa4d81e3ba"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_ch04_assets.gd.log",
+    "bytes": 21251,
+    "sha256": "248a5a1c8726bae32abfebd48b619e84552ff4a4123e4a5d69d1ec7f68f5653a"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_ch04_missions.gd.log",
+    "bytes": 40817,
+    "sha256": "888d7ac57344867f13c0cd45f0671af4d91b223dac4e1664b197075adfd11141"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_ch05_assets.gd.log",
+    "bytes": 126,
+    "sha256": "4072e74c4b361afa1a11bb65221b35c13c3ff10e3f57b54f02cb3851e790ed86"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_ch05_missions.gd.log",
+    "bytes": 44287,
+    "sha256": "baa0af280a663f0abe1f3423e9118e1a4aa9b25c3d77803c766870fa55f94c00"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_ch06_missions.gd.log",
+    "bytes": 50805,
+    "sha256": "e6cf9ee3f18f7baa46704a656af564a88bbc58ab76e71c3b34359bb6ee7c4d82"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_ch07_missions.gd.log",
+    "bytes": 51541,
+    "sha256": "348255ba69ef663f5cfed9668b5bd6e416ee11416feb33e221d9345e1594f705"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_ch08_missions.gd.log",
+    "bytes": 55216,
+    "sha256": "2fe7aacac039d14df38251845cf95f42f1d2d15129f6119440870c467a9066f0"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter1_campaign_flow.gd.log",
+    "bytes": 48868,
+    "sha256": "10d6ef440aaa56d2188c96745c263cea3c08552e659f8b40a0cc0bc2df2817a8"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter1_logic_regressions.gd.log",
+    "bytes": 2532,
+    "sha256": "8f66efbebf20ec8c411d2bc653c53428779a2d171512be3675c750d0d7bd63f3"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter1_outcomes.gd.log",
+    "bytes": 11300,
+    "sha256": "553032f580c59afd79d25ff7547beace94273a0055ce1b329c3e0fd424b46cdd"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter1_ui_regressions.gd.log",
+    "bytes": 17135,
+    "sha256": "75bb5266992353fe91c003754a6ffbeab315e5f5b1e58dbb97313ec6f73d1f50"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter2_rooms.gd.log",
+    "bytes": 28901,
+    "sha256": "61eca5db1f406f6daac2ff782c428053e93422fd916b0eac78679951e9505304"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter2_route.gd.log",
+    "bytes": 4831,
+    "sha256": "c93ea39e04ffde384d7dcc80b27ea67246361f80d100c8a659bcf999446cb0b3"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter3_rooms.gd.log",
+    "bytes": 29736,
+    "sha256": "5f19d03f8ddff150e84ccff258f1fdbf46b29df33b0f25a59a76dc3b11630f6a"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter4_puzzles.gd.log",
+    "bytes": 16079,
+    "sha256": "aef37423c487e24f91191393e15d74b52d99755a6ef72ef7751ebb536685cdeb"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter4_rooms.gd.log",
+    "bytes": 68236,
+    "sha256": "42950f70cac0b3614b5e27db107f2fdd2a1b231c131b7d8535cdba976d5d3b29"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter5_rooms.gd.log",
+    "bytes": 35548,
+    "sha256": "8d4dd4da7cdeee03695a09b83d6f4b7c618b32580c7b3a2e4047a1e952508c7e"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter6_puzzles.gd.log",
+    "bytes": 1942,
+    "sha256": "e9b989d41aaeae27fc3d3c9f7cc3a59f964cf7504ee3fe5a61894b0e5d56d3f9"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter6_rooms.gd.log",
+    "bytes": 31917,
+    "sha256": "2e4c53fc6f9f6b7115adea67a7ac9ed2643b8c9bfb9850c6894ceac4e2ab8384"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter7_assets.gd.log",
+    "bytes": 8556,
+    "sha256": "59816514538439582ec16e8503775febf5271702521c43de96b3c0496e3b195b"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter7_rooms.gd.log",
+    "bytes": 43795,
+    "sha256": "60e0d9692a9751c5398dee88c02e639ebc978b0a9c26198c8a22aa9639c27937"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter8_assets.gd.log",
+    "bytes": 10323,
+    "sha256": "fd1354a7977a6d43d35b6ea19a04ec539bfb7b753e4047b24510ecf0077ca1ed"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter8_puzzles.gd.log",
+    "bytes": 12915,
+    "sha256": "3def9557b9b466d4c1ceaa4798befa63c924732a2daed438d0055233ae98ba20"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter8_rooms.gd.log",
+    "bytes": 84497,
+    "sha256": "a971aaaaf43d944b2dd13ff0865e52cd67cf19d43fac0fbf42be168ee46470ae"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_chapter_select.gd.log",
+    "bytes": 812,
+    "sha256": "9513fdc2dd9363fce2b52b144c8cedfa01090e236699d76f2baaf666dff64b49"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_comms.gd.log",
+    "bytes": 11228,
+    "sha256": "554173b9a38668d3ca1e46a8e6ce27628d53618f5a68f0a5df3c0eacfa97ca0d"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_cutscene_choice_card.gd.log",
+    "bytes": 2708,
+    "sha256": "954b935f28b93883f041287fb06e4cf6ca032b0b0cff7b6f352ff9eaf6da46f7"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_director_message_metadata.gd.log",
+    "bytes": 4496,
+    "sha256": "ba8ce03c41ec8a8e0639219259145fd00da0a23343ae7b2a17e0e552255db50b"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_earth_screen.gd.log",
+    "bytes": 13429,
+    "sha256": "58c88fb445a209012d236cb4ab160865c5c3eb9290bceff25a34a48a2be86ec7"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_eclipse_props.gd.log",
+    "bytes": 9624,
+    "sha256": "18d45653e5863a8d6b26df4618a73556795040255b021f827f5b5edb75b11848"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_eclipse_rim_gate.gd.log",
+    "bytes": 130,
+    "sha256": "7e3a41b87c727e68607e84a463f0462836c295bec550f5062c021e07e6cf8960"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_en_airlock.gd.log",
+    "bytes": 9927,
+    "sha256": "991fae4ec03d77884dad4438a1eb619de4c6e968bcecf3b640784a557da16edb"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_eva.gd.log",
+    "bytes": 17394,
+    "sha256": "6646607a04df516099b53ec3af2d82fa58dc8238d9271923de5f8b07c35dfc1b"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_explainers.gd.log",
+    "bytes": 125,
+    "sha256": "dba7c0280471bc2819afc305a79c7f92ce23ceb4a661366a1310aef9b3e3e519"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_extended_campaign_route.gd.log",
+    "bytes": 30422,
+    "sha256": "c2868d2df27811df6856c0e9502c104a7a0c56d7ddc036957a84b016fbeede53"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_exterior_terrain.gd.log",
+    "bytes": 226945,
+    "sha256": "617c70e89a567cf2a9b5a2901ed290a458dc1e11bc5815fa6d9147951bd5c5e5"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_face_atlas.gd.log",
+    "bytes": 1018,
+    "sha256": "da5af4deb3332d29cce3ef418c471371a97315152115b4c14588e6e7fac127b5"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_face_expression.gd.log",
+    "bytes": 3608,
+    "sha256": "813fc97a21b92f0a66a58c4d0fd8c47e0d2a65ef7986be177255b92857bec278"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_first_five_minutes.gd.log",
+    "bytes": 132,
+    "sha256": "df7ccf18da2063201265ff3fb6192dcb98f59c925c76b82f7a0f85ad645f00c3"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_garden_collision.gd.log",
+    "bytes": 8677,
+    "sha256": "4ed21f0637ded39d4061e7465799849526fd1d5c99c5fc365f74d339fb36fda0"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_garden_movement.gd.log",
+    "bytes": 11480,
+    "sha256": "1b87dc84ea460946b896922d97d25a5d0587ee83f4647f85230a698f7b65858e"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_habitat_kit.gd.log",
+    "bytes": 12312,
+    "sha256": "9ca16e2cbfc8bc6d28aba587a41ec566816b631ff369c562729cdc671acc5c63"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_habitat_rooms.gd.log",
+    "bytes": 7039,
+    "sha256": "0e2535c0185ed85b9b05e772236b21940f360adddca72c57cc33a47ac42d90b4"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_hair_springs.gd.log",
+    "bytes": 397,
+    "sha256": "5624830a56942c4a92ed402a1ac37a6459d77d3f1755e8b32d91a20ad0582fd4"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_hazards.gd.log",
+    "bytes": 1508,
+    "sha256": "384b7de90a3c937c3139cce3461895bcfcfad7b01d0f8fa0a461a4e59128cfc5"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_hint_player.gd.log",
+    "bytes": 11787,
+    "sha256": "6e5b069d1b74e4f3884e4b3005af8ff2172fbff66a533ace56aa0b44ff811690"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_hud_world_lifetime.gd.log",
+    "bytes": 10604,
+    "sha256": "1876f5f7f2c940939af72d13446c0b0c83480e58e6901ad5be3b363f8a1f33b8"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_journal_tabs.gd.log",
+    "bytes": 17734,
+    "sha256": "d62a892532fc2a3adbfead4235942635fafd11825220c7a78d7f15b94bd3ef7f"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_later_numeric.gd.log",
+    "bytes": 128,
+    "sha256": "d4924a6ed87f950bf3586667fcc6189b84ff6ed2b4ad2b89bda916445bdf56f3"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_lip_sync.gd.log",
+    "bytes": 1285,
+    "sha256": "3a526b52af399797652c22f81bcf4521cf71c2f70303e698ef54404b67e824d5"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_loading.gd.log",
+    "bytes": 36097,
+    "sha256": "4dc977b8dcc1c4e01bf9302b6f29d3a90b7f64d85f1c944488c91f4a3259b986"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_lunar_kit.gd.log",
+    "bytes": 123,
+    "sha256": "ceb4e3307aa99d2b7cdcce6002fd7e66e2a4105c9e3d98adedcd7ee1a99029eb"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_m155_mission_table.gd.log",
+    "bytes": 133,
+    "sha256": "8ca3f9268808d0abad469b02e1c9dc877271fe570935e28a6c21afc4a67fa02e"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_main_menu_contrast.gd.log",
+    "bytes": 705,
+    "sha256": "239165a9470efc2b5d9b91d02796d1cab8bcbc8c4fe22f176a4303174646dd4a"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_mission_table_lifetime.gd.log",
+    "bytes": 136,
+    "sha256": "795614995fe4c996a95f6559715459b2b2b8a6559c2bd83de10269ecae18a030"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_mission_trainer.gd.log",
+    "bytes": 683,
+    "sha256": "bda7d2758159170ba301db302f4892e6845f05e54fbf9554054998ef479318a4"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_moon_region.gd.log",
+    "bytes": 28557,
+    "sha256": "e682f28d15cb27b7d3b7503018128c34cd2b22431f154c0cfae31f60f06a2896"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_moon_trainer.gd.log",
+    "bytes": 46445,
+    "sha256": "82512e8e8170f8f83ab908dc8c2091c1d699ed7b2413738623fb033e85fd254d"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_narrative_props.gd.log",
+    "bytes": 5596,
+    "sha256": "f6123dfed157355b46a2b867cfd42c21a19e21c1dd0646dadd611f8c0694f5ca"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_network.gd.log",
+    "bytes": 1973,
+    "sha256": "8197232f984db99ff0ec864265d08179397e381de20097b677b378ca740a2318"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_outpost_status.gd.log",
+    "bytes": 18680,
+    "sha256": "b0d6261f1597cadf9ef4866a90718df68b3c7b49e5a2b51e6fc8b7d2a485f320"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_p01_inputs.gd.log",
+    "bytes": 11483,
+    "sha256": "91988d98d4a7d3324b01e3bc25ef5a61540eaf9cedc9117b2ee4079eac03194a"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_p01_labels.gd.log",
+    "bytes": 125,
+    "sha256": "1e939423664f6cf0ba6fe64501b821b6a43057471737b45845bb189dff73177c"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_p01_nearby.gd.log",
+    "bytes": 10510,
+    "sha256": "d61165ab9eeee3ef99dd0d2d7736da1bd5440b7b419db02044a5b07e9c20245a"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_p01_panel.gd.log",
+    "bytes": 10366,
+    "sha256": "c76b25e541b3e6a170006b97164e32994e896b7af1235d75a257dcd2f2396b84"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_p02_mission_table.gd.log",
+    "bytes": 17022,
+    "sha256": "bb7bafd3d3455d1c76b6b28c756278cca0ffe5ddb1619380229876ecc6599639"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_p03_p04_content.gd.log",
+    "bytes": 130,
+    "sha256": "1a1406b21bfb691cffab12d0cd2f1e6da2700527eff40070f38738e583e6ca7c"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_p09_p10_panels.gd.log",
+    "bytes": 129,
+    "sha256": "c56f719790f0967d94d323172398c9c3a722159094dbc86768aa5d641ad70cf8"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_p13_p14_panels.gd.log",
+    "bytes": 129,
+    "sha256": "066c850842549cd83444e906db7c44b5dd52f8e89b71679cffddcf03cd329151"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_payload.gd.log",
+    "bytes": 10958,
+    "sha256": "983cd9d6a94fa756c9aae341c04ff92a2d176cd495a21ce2750d5a3571d9c3a2"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_performance_runtime.gd.log",
+    "bytes": 17519,
+    "sha256": "038a138da4267ce143f35e8ccdcdbf234467bbdb7c577d22421037a9028e69b1"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_plant_seedlings.gd.log",
+    "bytes": 7748,
+    "sha256": "ea64f1626f61ceabae5914a109ef49f683757f5a2fb8d3ba208746019d12bfd6"
+  },
+  {
+    "file": "regression_post_sync/full/logs/test_player_controller.gd.log",
+    "bytes": 10081,
+    "sha256": "f6eae7c566514c891dca7fb29c0996ea31fd58e0d941af6ca99eee18f1349291"
+  },
+  {
+    "file": "regression_post_sync/full/runner.txt",
+    "bytes": 12337,
+    "sha256": "790476b0885dd5de4a77f9e0f13479c2b73e5af1cc8f3eb23087765dad4d1ad2"
+  },
+  {
+    "file": "regression_post_sync/garden/logs/collision_trace.json",
+    "bytes": 2872,
+    "sha256": "0ba7dd313f6fe67833116b440704a788eb202280854a7e211daea8f8b7fff10b"
+  },
+  {
+    "file": "regression_post_sync/garden/logs/movement_trace.json",
+    "bytes": 157749,
+    "sha256": "8f524590de7cb51f950d984b1c6a5d1a3e0e31e955b51b43208a4bcc76b34d89"
+  },
+  {
+    "file": "regression_post_sync/garden/logs/setup.log",
+    "bytes": 46123,
+    "sha256": "d0b5db3c2df7c5547876946cbf0bb5fd41a06b50cdacba077fb0ec9b839c964d"
+  },
+  {
+    "file": "regression_post_sync/garden/logs/test_garden_collision.gd.log",
+    "bytes": 8677,
+    "sha256": "4ed21f0637ded39d4061e7465799849526fd1d5c99c5fc365f74d339fb36fda0"
+  },
+  {
+    "file": "regression_post_sync/garden/logs/test_garden_movement.gd.log",
+    "bytes": 11480,
+    "sha256": "1b87dc84ea460946b896922d97d25a5d0587ee83f4647f85230a698f7b65858e"
+  },
+  {
+    "file": "regression_post_sync/garden/runner.txt",
+    "bytes": 202,
+    "sha256": "c74c39cbf105d99470b19c3a051e6f54db677c549eaa0ed3325947700613defd"
+  },
+  {
+    "file": "regression_post_sync/habitat_rooms/logs/setup.log",
+    "bytes": 1033,
+    "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+  },
+  {
+    "file": "regression_post_sync/habitat_rooms/logs/test_habitat_rooms.gd.log",
+    "bytes": 7039,
+    "sha256": "0e2535c0185ed85b9b05e772236b21940f360adddca72c57cc33a47ac42d90b4"
+  },
+  {
+    "file": "regression_post_sync/habitat_rooms/runner.txt",
+    "bytes": 106,
+    "sha256": "4998527cf47be14f9e47d9b15827e40792a4c7faffae3080d05699fe99e77129"
+  },
+  {
+    "file": "regression_post_sync/log_audit.json",
+    "bytes": 73234,
+    "sha256": "62e9d783f725f53c1d451decd87a21747fd630b503776e61612153d5f090e81d"
+  },
+  {
+    "file": "regression_post_sync/outer_timeout_logs/origin.json",
+    "bytes": 376,
+    "sha256": "1d7b4478fdeab1ef2b54fefb408ac074a7084883e769725af292df0ba9a3bbce"
+  },
+  {
+    "file": "regression_post_sync/outer_timeout_logs/tmp.TBuyfAuWX7",
+    "bytes": 11226,
+    "sha256": "b6ec4a5e63686f51969e8ec067622a591581e865b5dd79667e26e1f4f9400f35"
+  },
+  {
+    "file": "regression_post_sync/run.json",
+    "bytes": 4831,
+    "sha256": "0d7599fd8999de0a2f3958bac5f15d5950807a072fe04193548f0f533216978b"
+  },
+  {
+    "file": "run_continuation.py",
+    "bytes": 3505,
+    "sha256": "3aed057685295a9e89b2b662391dfa19b16f5f8afbc903e1d719afad46552d36"
+  },
+  {
+    "file": "run_post_sync_regressions.py",
+    "bytes": 2801,
+    "sha256": "bd547fa8f18a14c5bfcef2e2f4b2f8a5ca69275ac1ffbe6f8a378de29cb6b05d"
+  },
+  {
+    "file": "save_guard.json",
+    "bytes": 472,
+    "sha256": "eed5c3532f335791bcb9624e2922732620c8b3b64b6ee6c6b566b7936a6fa03e"
+  }
+]

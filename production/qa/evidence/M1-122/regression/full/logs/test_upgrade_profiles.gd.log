@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  ok baseline Bloom witness is accepted and pure
+  ok baseline Golden witness is accepted and pure
+  ok Chapter 2 pollination entry profile is ready
+  ok all 128 upgrade profiles complete Chapter 1 safely
+  ok all 128 upgrade profiles satisfy Chapter 3 P-05/P-06 numeric and founder 42=12+30 contracts
+  ok all 128 upgrade profiles conserve Chapter 4 rover energy, provisions and 12 vault specimens
+  ok all 128 upgrade profiles satisfy Chapter 5 shield/dust maintenance and 11+1 cotton vault split
+  ok all 128 upgrade profiles preserve Chapter 6 eclipse reserve
+  ok all 128 upgrade profiles survive Chapter 7 6-step solar storm with conserved water
+  ok all 128 upgrade profiles satisfy Chapter 8 5.1875 air normalisation, rover reserve, and ending predicates
+  ok all 128 upgrade combinations complete the entire campaign in acquisition order
+  ok ExtendedCampaignRoute closes campaign at EX-CH08-S12 for mask 0
+  ok ExtendedCampaignRoute closes campaign at EX-CH08-S12 for mask 127
+  ok P-05 air with pre-applied moon_dirt_shelter equals 3.0
+  ok P-05 air with pre-applied flexible_seals equals 4.5
+  ok identical upgrade profile and input trace produce bit-identical state hashes
+UPGRADE PROFILES RESULT: PASS (16 checks, 0 failures)

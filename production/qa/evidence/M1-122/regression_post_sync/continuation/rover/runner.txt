@@ -1,0 +1,2 @@
+ok   tools/test_rover.gd :: ROVER RESULT: PASS (23 checks, 0 failures)
+1/1 suites passed

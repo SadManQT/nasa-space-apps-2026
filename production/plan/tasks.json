@@ -6440,7 +6440,7 @@
     "game/scripts/loading/",
     "production/qa/perf/"
    ],
-   "blocker": "Saved/pushed evidence 2b848e34: production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/README.md. Historical setup exit139 not reproduced in eight bounded native/runner invocations. Restored-sidecar setup has440 UID/file-access errors despite exit0; full audit supersedes outer success, no crash cause/fix established. Needs original198663-byte raw log/cache/native backtrace (original reporter) or a fresh bounded failing native reproduction sufficient for owned fix/upstream engine case. No game/asset/config/runner changes."
+   "blocker": "Evidence and review published in 2b848e34; status in 76621158. Historical setup exit 139 not reproduced in eight bounded native/runner invocations. Restored-sidecar setup has 440 UID/file-access errors despite exit 0; full audit supersedes outer success. No native crash cause or fix established. Needs original 198663-byte raw log/cache/native backtrace from original reporter, or a fresh bounded failing native reproduction sufficient for an owned fix/upstream-engine case. Resume condition and preserved manifests: production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/README.md. No game/asset/config/runner change claimed."
   },
   {
    "id": "M1-86",
@@ -7210,9 +7210,15 @@
     }
    ],
    "integration_paths": [
+    "game/scripts/main.gd",
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-103*"
+   ],
+   "edit_files": [
+    "game/scripts/main.gd",
+    "game/scripts/missions/chapter1_route.gd",
+    "game/tools/test_class_session_bridge.gd"
    ]
   },
   {
@@ -7275,7 +7281,10 @@
     "game/scripts/missions/chapter2_route.gd",
     "game/scripts/missions/chapter2_gate_catalog.gd",
     "game/tools/test_chapter2_route.gd",
-    "game/tools/test_campaign_interaction_input.gd"
+    "game/tools/test_campaign_interaction_input.gd",
+    "game/tools/test_chapter2_input_bridge.gd",
+    "game/tools/test_p03_p04_content.gd",
+    "game/tools/test_extended_campaign_route.gd"
    ]
   },
   {
@@ -7762,7 +7771,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Match garden collision to visible furniture and check return-lane clearance",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
@@ -7795,7 +7804,8 @@
     "production/qa/playtests/",
     "game/resources/campaign/rooms/",
     "game/scripts/world/"
-   ]
+   ],
+   "blocker": "Source e5ed6178 and evidence pushed through 864ed263. Latest tested game d1436027: mandatory Garden 2/2 (19/0 collision, 54/0 movement); comms still 0/1 because its 45/0 output lacks the recognized marker. Recorded 8edef native RED 20/3 to GREEN 20/0; full attempt capped at 40 minutes after 89/115 reported (73 pass,16 fail), separate remaining26 targets24 pass/2 fail. Later teammate repairs preserved; older failures are snapshot observations. Resume after owners resolve remaining integration/marker/performance failures and a complete current mandatory full runner passes. Exact handoff: production/qa/evidence/M1-122/acceptance_blockers.md. No owned source edits pending; manual QA deferred."
   },
   {
    "id": "M1-123",
@@ -7803,7 +7813,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Reproduce garden return-to-center stop with the real player controller",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
@@ -7834,7 +7844,8 @@
     "production/qa/playtests/",
     "game/scripts/player/",
     "game/scripts/campaign/"
-   ]
+   ],
+   "blocker": "Source 630c9278 and evidence pushed through 864ed263. Latest tested d1436027 actual campaign movement 54/0; recorded 8edef native 62/0 with four ending/input cases and eight inspected PNGs. Source guards and original-save hash pass. Global acceptance remains blocked: latest-tested comms 0/1 marker failure and no complete passing current full runner; 8edef full/continuation failures documented separately without claiming all persist after repairs. Resume when owners clear remaining global integration checks and complete mandatory current full gate passes. Evidence: production/qa/evidence/M1-123/README.md and M1-122/acceptance_blockers.md. Exact historical pose unknown, selected valid contact cases labeled; manual QA is deferred, not an invented blocker."
   }
  ],
  "requirements": [

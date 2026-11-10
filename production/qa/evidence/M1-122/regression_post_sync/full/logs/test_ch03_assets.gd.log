@@ -1,0 +1,54 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: 'res://assets/environment/kit/EN_Kit_FloorTile_LOD1.glb': In external resource #1, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/environment/kit/habitat_kit.gd:89)
+       [1] instance_entry (res://assets/environment/kit/habitat_kit.gd:112)
+       [2] instance (res://assets/environment/kit/habitat_kit.gd:100)
+       [3] place (res://assets/environment/kit/habitat_kit.gd:133)
+       [4] _annex_sample (res://tools/test_ch03_assets.gd:518)
+       [5] _test_assembly (res://tools/test_ch03_assets.gd:225)
+       [6] _run (res://tools/test_ch03_assets.gd:48)
+       [7] _test_moving_parts (res://tools/test_ch03_assets.gd:222)
+WARNING: 'res://assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/environment/kit/habitat_kit.gd:89)
+       [1] instance_entry (res://assets/environment/kit/habitat_kit.gd:112)
+       [2] instance (res://assets/environment/kit/habitat_kit.gd:100)
+       [3] place (res://assets/environment/kit/habitat_kit.gd:133)
+       [4] _annex_sample (res://tools/test_ch03_assets.gd:519)
+       [5] _test_assembly (res://tools/test_ch03_assets.gd:225)
+       [6] _run (res://tools/test_ch03_assets.gd:48)
+       [7] _test_moving_parts (res://tools/test_ch03_assets.gd:222)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/environment/kit/habitat_kit.gd:89)
+       [1] instance_entry (res://assets/environment/kit/habitat_kit.gd:112)
+       [2] instance (res://assets/environment/kit/habitat_kit.gd:100)
+       [3] place (res://assets/environment/kit/habitat_kit.gd:133)
+       [4] _annex_sample (res://tools/test_ch03_assets.gd:522)
+       [5] _test_assembly (res://tools/test_ch03_assets.gd:225)
+       [6] _run (res://tools/test_ch03_assets.gd:48)
+       [7] _test_moving_parts (res://tools/test_ch03_assets.gd:222)
+WARNING: 'res://assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb': In external resource #4, invalid UID: 'uid://dwd3423mo0cjb' - using text path instead: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png'.
+   at: open (core/io/resource_format_binary.cpp:1025)
+   GDScript backtrace (most recent call first):
+       [0] _scene (res://assets/environment/kit/habitat_kit.gd:89)
+       [1] instance_entry (res://assets/environment/kit/habitat_kit.gd:112)
+       [2] instance (res://assets/environment/kit/habitat_kit.gd:100)
+       [3] place (res://assets/environment/kit/habitat_kit.gd:133)
+       [4] _annex_sample (res://tools/test_ch03_assets.gd:524)
+       [5] _test_assembly (res://tools/test_ch03_assets.gd:225)
+       [6] _run (res://tools/test_ch03_assets.gd:48)
+       [7] _test_moving_parts (res://tools/test_ch03_assets.gd:222)
+ERROR: HelmetRoles: unknown role noor
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] apply_role (res://assets/props/PR_Helmet_Roles/helmet_roles.gd:59)
+       [1] _test_helmet (res://tools/test_ch03_assets.gd:293)
+       [2] _run (res://tools/test_ch03_assets.gd:49)
+       [3] _test_assembly (res://tools/test_ch03_assets.gd:256)
+CH03 ASSETS RESULT: PASS (328 checks, 0 failures)

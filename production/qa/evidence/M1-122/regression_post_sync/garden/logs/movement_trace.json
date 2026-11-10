@@ -1,0 +1,6396 @@
+{
+ "checks": 54,
+ "failures": 0,
+ "trace": [
+  {
+   "action": "",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 26,
+   "placement_frames": 0,
+   "position": [
+    0.0,
+    0.0,
+    0.5
+   ],
+   "speed": 0.0,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, 0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "approach_contact",
+   "physics_frame": 38,
+   "placement_frames": 0,
+   "position": [
+    -4.37542724609375,
+    0.0000471116509288549,
+    -2.17542576789856
+   ],
+   "speed": 0.546344518661499,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/tara_bay",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, 0.707107)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "actual_bench_contact",
+   "physics_frame": 46,
+   "placement_frames": 0,
+   "position": [
+    -4.32266187667847,
+    0.000815663312096149,
+    -2.10056376457214
+   ],
+   "speed": 0.583481378853321,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/tara_bay",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 48,
+   "placement_frames": 0,
+   "position": [
+    -4.32059144973755,
+    0.000845697242766619,
+    -2.08717226982117
+   ],
+   "speed": 0.326607003808022,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 58,
+   "placement_frames": 0,
+   "position": [
+    -4.32038640975952,
+    0.000827231153380126,
+    -2.06860685348511
+   ],
+   "speed": 0.0498326669912785,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 68,
+   "placement_frames": 0,
+   "position": [
+    -4.32084465026855,
+    0.000831890909466892,
+    -2.06200981140137
+   ],
+   "speed": 0.02032492950093,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 78,
+   "placement_frames": 0,
+   "position": [
+    -4.333655834198,
+    0.0000370752532035112,
+    -2.06024432182312
+   ],
+   "speed": 0.2923977188766,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 88,
+   "placement_frames": 0,
+   "position": [
+    -4.45310735702515,
+    0.0000435113324783742,
+    -2.0759289264679
+   ],
+   "speed": 1.0123735293746,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 98,
+   "placement_frames": 0,
+   "position": [
+    -4.63807153701782,
+    0.000832093122880906,
+    -2.08428978919983
+   ],
+   "speed": 0.944398194551468,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(-4.65, 0.0, -2.068607)",
+   "physics_frame": 105,
+   "placement_frames": 0,
+   "position": [
+    -4.71069860458374,
+    0.000832585559692234,
+    -2.08431649208069
+   ],
+   "speed": 0.414679935202003,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 108,
+   "placement_frames": 0,
+   "position": [
+    -4.72987937927246,
+    0.0000411519431509078,
+    -2.08215236663818
+   ],
+   "speed": 0.402469402179122,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 118,
+   "placement_frames": 0,
+   "position": [
+    -4.79440879821777,
+    0.000832769786939025,
+    -1.99137485027313
+   ],
+   "speed": 0.971044935286045,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.514998199464482,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, 0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 128,
+   "placement_frames": 0,
+   "position": [
+    -4.77782392501831,
+    0.00083269109018147,
+    -1.79765975475311
+   ],
+   "speed": 1.28620751202106,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.01492184878139,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, 0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 138,
+   "placement_frames": 0,
+   "position": [
+    -4.72740840911865,
+    0.00083244702545926,
+    -1.57847058773041
+   ],
+   "speed": 1.38499237596989,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.45494683042838,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 148,
+   "placement_frames": 0,
+   "position": [
+    -4.72452878952026,
+    0.00083233678014949,
+    -1.34497809410095
+   ],
+   "speed": 1.4110616594553,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.78842192180702,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 158,
+   "placement_frames": 0,
+   "position": [
+    -4.70440721511841,
+    0.000831770244985819,
+    -1.11003935337067
+   ],
+   "speed": 1.4173898845911,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -2.05839156863665,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 168,
+   "placement_frames": 0,
+   "position": [
+    -4.69244718551636,
+    0.000831103185191751,
+    -0.874737083911896
+   ],
+   "speed": 1.41885202378035,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -2.22320566327286,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 178,
+   "placement_frames": 0,
+   "position": [
+    -4.6247730255127,
+    0.000831012497656047,
+    -0.648186445236206
+   ],
+   "speed": 1.4191734418273,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -2.36835954883379,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 188,
+   "placement_frames": 0,
+   "position": [
+    -4.5813946723938,
+    0.000830946490168571,
+    -0.459907293319702
+   ],
+   "speed": 0.759465135633945,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -2.42010306808112,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(-4.65, 0.0, -0.5)",
+   "physics_frame": 192,
+   "placement_frames": 0,
+   "position": [
+    -4.57425975799561,
+    0.000830957957077771,
+    -0.423361778259277
+   ],
+   "speed": 0.452488772571087,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -2.45551404668043,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 198,
+   "placement_frames": 0,
+   "position": [
+    -4.55370569229126,
+    0.000830700621008873,
+    -0.382365494966507
+   ],
+   "speed": 0.570524074137211,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -2.33191093758205,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 208,
+   "placement_frames": 0,
+   "position": [
+    -4.41485929489136,
+    0.000830879376735538,
+    -0.34478548169136
+   ],
+   "speed": 1.10375437885523,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -2.15060211649827,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 218,
+   "placement_frames": 0,
+   "position": [
+    -4.20805883407593,
+    0.000831632758490741,
+    -0.367525637149811
+   ],
+   "speed": 1.3303766772151,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.98634842254811,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 228,
+   "placement_frames": 0,
+   "position": [
+    -3.98410129547119,
+    0.000831754470709711,
+    -0.414705604314804
+   ],
+   "speed": 1.39694441109896,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.84222770530014,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 238,
+   "placement_frames": 0,
+   "position": [
+    -3.75894403457642,
+    0.000832446909043938,
+    -0.479372888803482
+   ],
+   "speed": 1.41399934887886,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.81628696424856,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 248,
+   "placement_frames": 0,
+   "position": [
+    -3.5267391204834,
+    0.0000442183227278292,
+    -0.446822971105576
+   ],
+   "speed": 1.41791984438896,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.82752424173339,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 258,
+   "placement_frames": 0,
+   "position": [
+    -3.30084586143494,
+    0.000833141326438636,
+    -0.376986801624298
+   ],
+   "speed": 1.41900077462196,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.82883060071656,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 268,
+   "placement_frames": 0,
+   "position": [
+    -3.07249736785889,
+    0.000833301281090826,
+    -0.315371751785278
+   ],
+   "speed": 1.41921367496252,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.82793886610122,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 278,
+   "placement_frames": 0,
+   "position": [
+    -2.84352946281433,
+    0.000833625381346792,
+    -0.256004512310028
+   ],
+   "speed": 1.41924329102039,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.81755412650495,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 288,
+   "placement_frames": 0,
+   "position": [
+    -2.61282396316528,
+    0.000834233418572694,
+    -0.20652286708355
+   ],
+   "speed": 1.41926821321249,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.75056703417433,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 298,
+   "placement_frames": 0,
+   "position": [
+    -2.37718510627747,
+    0.000834036385640502,
+    -0.224588260054588
+   ],
+   "speed": 1.41927178949118,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.74136302644341,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 308,
+   "placement_frames": 0,
+   "position": [
+    -2.14302706718445,
+    0.000833946804050356,
+    -0.19346684217453
+   ],
+   "speed": 1.41926743090153,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.74675354378193,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 318,
+   "placement_frames": 0,
+   "position": [
+    -1.91104924678802,
+    0.000834128586575389,
+    -0.147226721048355
+   ],
+   "speed": 1.41926787793636,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.69149814071317,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 328,
+   "placement_frames": 0,
+   "position": [
+    -1.67735457420349,
+    0.00083727139281109,
+    -0.166331306099892
+   ],
+   "speed": 1.41926374286413,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.6589124504569,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 338,
+   "placement_frames": 0,
+   "position": [
+    -1.44176244735718,
+    0.000836254621390253,
+    -0.176038652658463
+   ],
+   "speed": 1.41927100718021,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.66160747462207,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 348,
+   "placement_frames": 0,
+   "position": [
+    -1.20650184154511,
+    0.0008352444274351,
+    -0.152067735791206
+   ],
+   "speed": 1.41926608979702,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.58000756853282,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 358,
+   "placement_frames": 0,
+   "position": [
+    -0.982180178165436,
+    0.00083269365131855,
+    -0.219881221652031
+   ],
+   "speed": 1.41926262527704,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.54302006044637,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 368,
+   "placement_frames": 0,
+   "position": [
+    -0.750465929508209,
+    0.0000125558581203222,
+    -0.260904312133789
+   ],
+   "speed": 1.41926731914282,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.54470662054884,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 378,
+   "placement_frames": 0,
+   "position": [
+    -0.514201045036316,
+    -0.000827004376333207,
+    -0.265119135379791
+   ],
+   "speed": 1.41886007040739,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.42422722724213,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 390,
+   "placement_frames": 0,
+   "position": [
+    -0.269140750169754,
+    -0.00000606279354542494,
+    -0.402572751045227
+   ],
+   "speed": 1.41926474869251,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.39549704947225,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 400,
+   "placement_frames": 0,
+   "position": [
+    -0.0456516407430172,
+    0.000839310989249498,
+    -0.469895452260971
+   ],
+   "speed": 1.33487362414598,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.40851767941955,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 410,
+   "placement_frames": 0,
+   "position": [
+    0.0910743549466133,
+    0.000833388767205179,
+    -0.48608860373497
+   ],
+   "speed": 0.452501652762294,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.40851767941955,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(0.0, 0.0, -0.5)",
+   "physics_frame": 410,
+   "placement_frames": 0,
+   "position": [
+    0.0910743549466133,
+    0.000833388767205179,
+    -0.48608860373497
+   ],
+   "speed": 0.452501652762294,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -1.53164366787723,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 420,
+   "placement_frames": 0,
+   "position": [
+    0.169733911752701,
+    0.000499355955980718,
+    -0.443927496671677
+   ],
+   "speed": 0.814736802130938,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -1.85135227200213,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 430,
+   "placement_frames": 0,
+   "position": [
+    0.180983930826187,
+    0.000110165507066995,
+    -0.269672483205795
+   ],
+   "speed": 1.22539188712835,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.19017323930177,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 440,
+   "placement_frames": 0,
+   "position": [
+    0.108880311250687,
+    0.000827768177259713,
+    -0.0627648234367371
+   ],
+   "speed": 1.36759534478188,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.42796687119726,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 450,
+   "placement_frames": 0,
+   "position": [
+    0.0634350404143333,
+    0.0000617377809248865,
+    0.163146167993546
+   ],
+   "speed": 1.406663171947,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.58050821225387,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 460,
+   "placement_frames": 0,
+   "position": [
+    0.059237040579319,
+    0.000833131547551602,
+    0.398539185523987
+   ],
+   "speed": 1.41634963452816,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.72661244243806,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 470,
+   "placement_frames": 0,
+   "position": [
+    0.0349665321409702,
+    0.00083798443665728,
+    0.577440202236176
+   ],
+   "speed": 0.671292599290609,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.76596842671489,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(0.0, 0.0, 0.5)",
+   "physics_frame": 473,
+   "placement_frames": 0,
+   "position": [
+    0.0306417644023895,
+    0.000833196623716503,
+    0.603093802928925
+   ],
+   "speed": 0.452128490433097,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.8261203072355,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 480,
+   "placement_frames": 0,
+   "position": [
+    0.0253934189677238,
+    0.000839095388073474,
+    0.633535981178284
+   ],
+   "speed": 0.161526119336486,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.8261203072355,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 490,
+   "placement_frames": 0,
+   "position": [
+    0.0232573207467794,
+    0.000833330443128943,
+    0.645792841911316
+   ],
+   "speed": 0.0321687455289066,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.45754, 0.45754)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "approach_contact",
+   "physics_frame": 638,
+   "placement_frames": 0,
+   "position": [
+    -4.39788150787354,
+    0.000831617799121886,
+    -2.19788265228271
+   ],
+   "speed": 0.0828438461758196,
+   "stick": [
+    0.494974732398987,
+    0.494974732398987
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.401212758505073,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.588063, 0.269939)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "approach_contact",
+   "physics_frame": 648,
+   "placement_frames": 0,
+   "position": [
+    -4.35417652130127,
+    0.000832870253361762,
+    -2.15417742729187
+   ],
+   "speed": 0.58520732447505,
+   "stick": [
+    0.636177361011505,
+    0.292024612426758
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.656614881526965,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/tara_bay",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.637851, 0.108773)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "actual_bench_contact",
+   "physics_frame": 654,
+   "placement_frames": 0,
+   "position": [
+    -4.31555557250977,
+    0.000800420821178705,
+    -2.10759329795837
+   ],
+   "speed": 0.396643448621035,
+   "stick": [
+    0.69003838300705,
+    0.117673069238663
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.695812619559222,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 658,
+   "placement_frames": 0,
+   "position": [
+    -4.31734323501587,
+    0.000821861089207232,
+    -2.09866285324097
+   ],
+   "speed": 0.106113615911454,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.695812619559222,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.498034, 0.413095)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 668,
+   "placement_frames": 0,
+   "position": [
+    -4.31858539581299,
+    0.000831581011880189,
+    -2.08652591705322
+   ],
+   "speed": 0.0589057034812868,
+   "stick": [
+    -0.538782119750977,
+    0.446893572807312
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.695812619559222,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.504537, 0.405126)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 678,
+   "placement_frames": 0,
+   "position": [
+    -4.3193187713623,
+    0.0000365773448720574,
+    -2.08207607269287
+   ],
+   "speed": 0.0122979152365588,
+   "stick": [
+    -0.545817494392395,
+    0.438273102045059
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.596710312607416,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.525518, 0.377513)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 688,
+   "placement_frames": 0,
+   "position": [
+    -4.3366847038269,
+    0.000831622863188386,
+    -2.08210206031799
+   ],
+   "speed": 0.301238056272268,
+   "stick": [
+    -0.568514585494995,
+    0.40840083360672
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.175925008168259,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.628729, 0.152922)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 698,
+   "placement_frames": 0,
+   "position": [
+    -4.42788791656494,
+    0.0000439531286247075,
+    -2.09526824951172
+   ],
+   "speed": 0.711213368922472,
+   "stick": [
+    -0.68017041683197,
+    0.16543360054493
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.187930038590221,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 708,
+   "placement_frames": 0,
+   "position": [
+    -4.56236171722412,
+    0.000832544581498951,
+    -2.09515428543091
+   ],
+   "speed": 0.846911743283272,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.491966029276218,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 718,
+   "placement_frames": 0,
+   "position": [
+    -4.65615081787109,
+    0.000832908728625625,
+    -2.0880401134491
+   ],
+   "speed": 0.323012424632907,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.518829717069188,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(-4.65, 0.0, -2.088616)",
+   "physics_frame": 719,
+   "placement_frames": 0,
+   "position": [
+    -4.66083765029907,
+    0.000832246383652091,
+    -2.0876362323761
+   ],
+   "speed": 0.282252123579383,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.820684061183641,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.440375, 0.474083)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 728,
+   "placement_frames": 0,
+   "position": [
+    -4.70183372497559,
+    0.000832795456517488,
+    -2.05999851226807
+   ],
+   "speed": 0.486022979021072,
+   "stick": [
+    -0.476405560970306,
+    0.512872099876404
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 1.29348030589085,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.604615, 0.23049)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 738,
+   "placement_frames": 0,
+   "position": [
+    -4.70594024658203,
+    0.0000430158106610179,
+    -1.95115494728088
+   ],
+   "speed": 0.775742679834366,
+   "stick": [
+    -0.654083609580994,
+    0.249348387122154
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 1.70676719193998,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.645403, -0.046265)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 748,
+   "placement_frames": 0,
+   "position": [
+    -4.68650674819946,
+    0.000832599063869566,
+    -1.81203734874725
+   ],
+   "speed": 0.879907719790936,
+   "stick": [
+    -0.698208391666412,
+    -0.0500503294169903
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.01283944280771,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.598823, -0.245146)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 758,
+   "placement_frames": 0,
+   "position": [
+    -4.68096733093262,
+    0.000043335952796042,
+    -1.66233563423157
+   ],
+   "speed": 0.908909328281879,
+   "stick": [
+    -0.647817194461823,
+    -0.265203386545181
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.25118717700344,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.522549, -0.381612)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 768,
+   "placement_frames": 0,
+   "position": [
+    -4.67847776412964,
+    0.000832671648822725,
+    -1.51006984710693
+   ],
+   "speed": 0.916159227490425,
+   "stick": [
+    -0.565303266048431,
+    -0.412834346294403
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.44216223549796,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.438706, -0.475628)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 778,
+   "placement_frames": 0,
+   "position": [
+    -4.67433214187622,
+    0.000831982702948153,
+    -1.35724461078644
+   ],
+   "speed": 0.917860195040703,
+   "stick": [
+    -0.474599927663803,
+    -0.514543414115906
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.59384644634202,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.359739, -0.537841)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 788,
+   "placement_frames": 0,
+   "position": [
+    -4.66982650756836,
+    0.00083188817370683,
+    -1.20429217815399
+   ],
+   "speed": 0.918242186307907,
+   "stick": [
+    -0.389172464609146,
+    -0.581845998764038
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.71372073320805,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.29116, -0.57785)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 798,
+   "placement_frames": 0,
+   "position": [
+    -4.66549968719482,
+    0.000831982702948153,
+    -1.05130386352539
+   ],
+   "speed": 0.918325837701559,
+   "stick": [
+    -0.314982563257217,
+    -0.62512880563736
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.80859100016606,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.233791, -0.603347)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 808,
+   "placement_frames": 0,
+   "position": [
+    -4.66121673583984,
+    0.00083131663268432,
+    -0.898307621479034
+   ],
+   "speed": 0.91834606602788,
+   "stick": [
+    -0.25291907787323,
+    -0.652711272239685
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.88374685668905,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.186742, -0.619526)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 818,
+   "placement_frames": 0,
+   "position": [
+    -4.65691232681274,
+    0.000831190787721425,
+    -0.745310306549072
+   ],
+   "speed": 0.918347742408514,
+   "stick": [
+    -0.202021181583405,
+    -0.670214474201202
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.94327204893846,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 828,
+   "placement_frames": 0,
+   "position": [
+    -4.65260791778564,
+    0.000831265992019325,
+    -0.592571496963501
+   ],
+   "speed": 0.902839433401823,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.99040831990347,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 838,
+   "placement_frames": 0,
+   "position": [
+    -4.64983081817627,
+    0.000830703356768936,
+    -0.493997573852539
+   ],
+   "speed": 0.33538936637342,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.99454491709643,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(-4.65, 0.0, -0.5)",
+   "physics_frame": 839,
+   "placement_frames": 0,
+   "position": [
+    -4.64969301223755,
+    0.0000461000017821789,
+    -0.489119589328766
+   ],
+   "speed": 0.292795831337571,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.11398004800409,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.645826, 0.039917)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 848,
+   "placement_frames": 0,
+   "position": [
+    -4.62423086166382,
+    0.000830659701023251,
+    -0.445900321006775
+   ],
+   "speed": 0.488496478646994,
+   "stick": [
+    -0.69866669178009,
+    0.0431832931935787
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.42896319625701,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.628528, -0.153746)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 858,
+   "placement_frames": 0,
+   "position": [
+    -4.51557874679565,
+    0.000830990495160222,
+    -0.43793573975563
+   ],
+   "speed": 0.776235200464725,
+   "stick": [
+    -0.67995285987854,
+    -0.166325241327286
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.72026146933728,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.553977, -0.334357)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 868,
+   "placement_frames": 0,
+   "position": [
+    -4.37603282928467,
+    0.00083123950753361,
+    -0.45437490940094
+   ],
+   "speed": 0.880007296800613,
+   "stick": [
+    -0.599302291870117,
+    -0.36171367764473
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.93052153113759,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.468814, -0.44598)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 878,
+   "placement_frames": 0,
+   "position": [
+    -4.22624540328979,
+    0.000831271754577756,
+    -0.457257986068726
+   ],
+   "speed": 0.908919833600521,
+   "stick": [
+    -0.507171750068665,
+    -0.482469499111176
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.09328511938697,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.388654, -0.517333)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 888,
+   "placement_frames": 0,
+   "position": [
+    -4.07395696640015,
+    0.000831959769129753,
+    -0.457266360521317
+   ],
+   "speed": 0.91616889461875,
+   "stick": [
+    -0.420452684164047,
+    -0.559660255908966
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.2241794186043,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.316181, -0.564548)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 898,
+   "placement_frames": 0,
+   "position": [
+    -3.92108297348022,
+    0.000831891491543502,
+    -0.458756864070892
+   ],
+   "speed": 0.917864944785833,
+   "stick": [
+    -0.342050552368164,
+    -0.610738396644592
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.32816847789801,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.254377, -0.59496)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 908,
+   "placement_frames": 0,
+   "position": [
+    -3.76807451248169,
+    0.000831982993986458,
+    -0.460515290498734
+   ],
+   "speed": 0.918243415653706,
+   "stick": [
+    -0.275189429521561,
+    -0.643638670444489
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.41031974845517,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.203494, -0.614227)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 918,
+   "placement_frames": 0,
+   "position": [
+    -3.6150336265564,
+    0.0000434216926805675,
+    -0.462128281593323
+   ],
+   "speed": 0.918323155492544,
+   "stick": [
+    -0.220143541693687,
+    -0.664482355117798
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.47534440655346,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.162195, -0.626401)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 928,
+   "placement_frames": 0,
+   "position": [
+    -3.46198749542236,
+    0.000832766643725336,
+    -0.463717222213745
+   ],
+   "speed": 0.918338242918253,
+   "stick": [
+    -0.175465255975723,
+    -0.677651822566986
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.52685605285265,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.128957, -0.634078)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 938,
+   "placement_frames": 0,
+   "position": [
+    -3.30893802642822,
+    0.000832768797408789,
+    -0.465320497751236
+   ],
+   "speed": 0.918338801711798,
+   "stick": [
+    -0.139508247375488,
+    -0.685957312583923
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.5676502873695,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.102375, -0.638909)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 948,
+   "placement_frames": 0,
+   "position": [
+    -3.15588855743408,
+    0.000833845057059079,
+    -0.466926008462906
+   ],
+   "speed": 0.918338745832443,
+   "stick": [
+    -0.110750675201416,
+    -0.691183269023895
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.59995291493501,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.081197, -0.641944)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 958,
+   "placement_frames": 0,
+   "position": [
+    -3.00283908843994,
+    0.000833249418064952,
+    -0.468530058860779
+   ],
+   "speed": 0.918338689953089,
+   "stick": [
+    -0.0878400877118111,
+    -0.694466829299927
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.62553278236306,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.064362, -0.64385)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 968,
+   "placement_frames": 0,
+   "position": [
+    -2.84978938102722,
+    0.000834467238746583,
+    -0.470133870840073
+   ],
+   "speed": 0.918338689953089,
+   "stick": [
+    -0.0696284472942352,
+    -0.696528434753418
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.64578940188619,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.050999, -0.645046)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 978,
+   "placement_frames": 0,
+   "position": [
+    -2.69674015045166,
+    0.000833841506391764,
+    -0.471737742424011
+   ],
+   "speed": 0.918338689953089,
+   "stick": [
+    -0.0551721677184105,
+    -0.697822272777557
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.66183043703883,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.040402, -0.645796)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 988,
+   "placement_frames": 0,
+   "position": [
+    -2.5436909198761,
+    0.000834562000818551,
+    -0.473341703414917
+   ],
+   "speed": 0.91835293918848,
+   "stick": [
+    -0.043707087635994,
+    -0.698634207248688
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.67453315120249,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.032001, -0.646267)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 998,
+   "placement_frames": 0,
+   "position": [
+    -2.39064145088196,
+    0.00083519535837695,
+    -0.474945515394211
+   ],
+   "speed": 0.91835293918848,
+   "stick": [
+    -0.0346194468438625,
+    -0.699143409729004
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.68459230726819,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.025345, -0.646562)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1008,
+   "placement_frames": 0,
+   "position": [
+    -2.23759269714355,
+    0.000834146107081324,
+    -0.476549416780472
+   ],
+   "speed": 0.918338689953089,
+   "stick": [
+    -0.0274191442877054,
+    -0.699462831020355
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.69255806006808,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.020073, -0.646747)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1018,
+   "placement_frames": 0,
+   "position": [
+    -2.08454370498657,
+    0.000833563972264528,
+    -0.478153347969055
+   ],
+   "speed": 0.91835293918848,
+   "stick": [
+    -0.0217149555683136,
+    -0.699663102626801
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.69997697555437,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.015161, -0.646881)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1030,
+   "placement_frames": 0,
+   "position": [
+    -1.9008846282959,
+    0.00083320657722652,
+    -0.480089455842972
+   ],
+   "speed": 0.918347574770451,
+   "stick": [
+    -0.0164009593427181,
+    -0.699807822704315
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.70476466476305,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.011981, -0.646948)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1040,
+   "placement_frames": 0,
+   "position": [
+    -1.74783515930176,
+    0.000833059020806104,
+    -0.481711387634277
+   ],
+   "speed": 0.918346177786589,
+   "stick": [
+    -0.0129608036950231,
+    -0.699879944324493
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.70852867215392,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.009486, -0.646989)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1050,
+   "placement_frames": 0,
+   "position": [
+    -1.59478569030762,
+    0.000834232138004154,
+    -0.483312904834747
+   ],
+   "speed": 0.918352603912354,
+   "stick": [
+    -0.0102623589336872,
+    -0.699924767017365
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.71150703416007,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.007515, -0.647015)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1060,
+   "placement_frames": 0,
+   "position": [
+    -1.4417359828949,
+    0.00083263247506693,
+    -0.48491245508194
+   ],
+   "speed": 0.918352771550417,
+   "stick": [
+    -0.00812965910881758,
+    -0.699952840805054
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.71386835833303,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.005951, -0.647032)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1070,
+   "placement_frames": 0,
+   "position": [
+    -1.28869354724884,
+    0.000835520739201456,
+    -0.486514031887054
+   ],
+   "speed": 0.918352827429771,
+   "stick": [
+    -0.0064378441311419,
+    -0.699970424175262
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.71573850638304,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.004712, -0.647042)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1080,
+   "placement_frames": 0,
+   "position": [
+    -1.13564395904541,
+    0.000241005618590862,
+    -0.488115847110748
+   ],
+   "speed": 0.918352827429771,
+   "stick": [
+    -0.00509793404489756,
+    -0.699981510639191
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.7172191640464,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.003732, -0.647048)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1090,
+   "placement_frames": 0,
+   "position": [
+    -0.98259437084198,
+    0.000838508771266788,
+    -0.489717453718185
+   ],
+   "speed": 0.918349251151085,
+   "stick": [
+    -0.00403685634955764,
+    -0.69998836517334
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.71839165908712,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.002955, -0.647052)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1100,
+   "placement_frames": 0,
+   "position": [
+    -0.829544842243195,
+    0.00026511843316257,
+    -0.491318970918655
+   ],
+   "speed": 0.918345674872398,
+   "stick": [
+    -0.00319680967368186,
+    -0.699992716312408
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.71932018901981,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.00234, -0.647054)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1110,
+   "placement_frames": 0,
+   "position": [
+    -0.676495254039764,
+    0.000839128799270839,
+    -0.49292066693306
+   ],
+   "speed": 0.918345674872398,
+   "stick": [
+    -0.00253151752986014,
+    -0.699995398521423
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.72005548092581,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.001853, -0.647056)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1120,
+   "placement_frames": 0,
+   "position": [
+    -0.523445606231689,
+    0.000821014458779246,
+    -0.494522213935852
+   ],
+   "speed": 0.918349251151085,
+   "stick": [
+    -0.00200490071438253,
+    -0.699997067451477
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.7206377600927,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.001468, -0.647057)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1130,
+   "placement_frames": 0,
+   "position": [
+    -0.370396018028259,
+    0.000832421064842492,
+    -0.496123850345612
+   ],
+   "speed": 0.918349251151085,
+   "stick": [
+    -0.0015876772813499,
+    -0.699998140335083
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.72109887236272,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.001162, -0.647058)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1140,
+   "placement_frames": 0,
+   "position": [
+    -0.217346414923668,
+    0.00083276373334229,
+    -0.497725456953049
+   ],
+   "speed": 0.918348357081413,
+   "stick": [
+    -0.00125733995810151,
+    -0.69999885559082
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.72146406378138,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1150,
+   "placement_frames": 0,
+   "position": [
+    -0.0654652789235115,
+    0.000836676394101232,
+    -0.499314874410629
+   ],
+   "speed": 0.863741878420115,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.72175330220824,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1160,
+   "placement_frames": 0,
+   "position": [
+    0.023627195507288,
+    0.000834874575957656,
+    -0.500247299671173
+   ],
+   "speed": 0.29279513284564,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.72175330220824,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(0.0, 0.0, -0.5)",
+   "physics_frame": 1160,
+   "placement_frames": 0,
+   "position": [
+    0.023627195507288,
+    0.000834874575957656,
+    -0.500247299671173
+   ],
+   "speed": 0.29279513284564,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.61252158069764,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.64704, -0.004977)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1170,
+   "placement_frames": 0,
+   "position": [
+    0.0719357654452324,
+    0.000839008076582104,
+    -0.468702912330627
+   ],
+   "speed": 0.527182314544916,
+   "stick": [
+    0.699979305267334,
+    -0.005384077783674
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.30521653535454,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.619886, -0.185543)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1180,
+   "placement_frames": 0,
+   "position": [
+    0.0703239813446999,
+    0.000819303561002016,
+    -0.355257034301758
+   ],
+   "speed": 0.792900882661343,
+   "stick": [
+    0.670604109764099,
+    -0.200723931193352
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.02505238996003,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.533943, -0.365499)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1190,
+   "placement_frames": 0,
+   "position": [
+    0.0443586893379688,
+    -0.0000650908914394677,
+    -0.215626627206802
+   ],
+   "speed": 0.884914733469486,
+   "stick": [
+    0.577629566192627,
+    -0.3954037129879
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.82651858890526,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.44632, -0.468491)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1200,
+   "placement_frames": 0,
+   "position": [
+    0.0335872247815132,
+    0.000701910990756005,
+    -0.0657862424850464
+   ],
+   "speed": 0.910193827003241,
+   "stick": [
+    0.482837200164795,
+    -0.506821751594543
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.6738802953915,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.370235, -0.530671)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1210,
+   "placement_frames": 0,
+   "position": [
+    0.0262276027351618,
+    0.000689283828251064,
+    0.0864278823137283
+   ],
+   "speed": 0.916460528969765,
+   "stick": [
+    0.400526762008667,
+    -0.574089169502258
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.550239096158,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.301213, -0.572675)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1220,
+   "placement_frames": 0,
+   "position": [
+    0.0168092679232359,
+    -0.000135985144879669,
+    0.239042893052101
+   ],
+   "speed": 0.917897243052721,
+   "stick": [
+    0.325857400894165,
+    -0.619529664516449
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.4515667425289,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.241053, -0.600482)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1230,
+   "placement_frames": 0,
+   "position": [
+    0.00679224729537964,
+    0.000839576299767941,
+    0.391739159822464
+   ],
+   "speed": 0.91825632378459,
+   "stick": [
+    0.260775923728943,
+    -0.649612069129944
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.37371485553603,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1240,
+   "placement_frames": 0,
+   "position": [
+    -0.000138959134346806,
+    0.000834914448205382,
+    0.499580174684525
+   ],
+   "speed": 0.382679002359509,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.36021965515463,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(0.0, 0.0, 0.5)",
+   "physics_frame": 1242,
+   "placement_frames": 0,
+   "position": [
+    -0.000807086005806923,
+    0.000834414095152169,
+    0.510028064250946
+   ],
+   "speed": 0.292782224714756,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.34734086836162,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1250,
+   "placement_frames": 0,
+   "position": [
+    -0.00217803963460028,
+    0.000833577592857182,
+    0.53147941827774
+   ],
+   "speed": 0.0895319343544543,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "bloom_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1270,
+   "placement_frames": 0,
+   "position": [
+    0.0,
+    0.0,
+    0.5
+   ],
+   "speed": 0.0,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, 0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "approach_contact",
+   "physics_frame": 1282,
+   "placement_frames": 0,
+   "position": [
+    -4.39512634277344,
+    0.0000341029954142869,
+    -2.19512462615967
+   ],
+   "speed": 0.204631383530796,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, 0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "approach_contact",
+   "physics_frame": 1292,
+   "placement_frames": 0,
+   "position": [
+    -4.31866693496704,
+    0.0000490716192871332,
+    -2.11866664886475
+   ],
+   "speed": 0.960503071546555,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/tara_bay",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, 0.707107)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "actual_bench_contact",
+   "physics_frame": 1294,
+   "placement_frames": 0,
+   "position": [
+    -4.32266187667847,
+    0.000815663312096149,
+    -2.10056376457214
+   ],
+   "speed": 0.583481378853321,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1302,
+   "placement_frames": 0,
+   "position": [
+    -4.32009744644165,
+    0.000824809889309108,
+    -2.07242059707642
+   ],
+   "speed": 0.0686531653627753,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1312,
+   "placement_frames": 0,
+   "position": [
+    -4.3206901550293,
+    0.000832434801850468,
+    -2.06350064277649
+   ],
+   "speed": 0.0360953633207828,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1322,
+   "placement_frames": 0,
+   "position": [
+    -4.32195091247559,
+    0.000833338184747845,
+    -2.06107330322266
+   ],
+   "speed": 0.0256970833288506,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1332,
+   "placement_frames": 0,
+   "position": [
+    -4.39159202575684,
+    0.000043003645259887,
+    -2.06771969795227
+   ],
+   "speed": 0.778026133775711,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1342,
+   "placement_frames": 0,
+   "position": [
+    -4.56732702255249,
+    0.0000437520211562514,
+    -2.083167552948
+   ],
+   "speed": 1.20304998010397,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1352,
+   "placement_frames": 0,
+   "position": [
+    -4.70378732681274,
+    0.0000419371644966304,
+    -2.08434391021729
+   ],
+   "speed": 0.473673418164253,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(-4.65, 0.0, -2.068607)",
+   "physics_frame": 1353,
+   "placement_frames": 0,
+   "position": [
+    -4.71069860458374,
+    0.000832585559692234,
+    -2.08431649208069
+   ],
+   "speed": 0.414679935202003,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": 0.0,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1362,
+   "placement_frames": 0,
+   "position": [
+    -4.77576780319214,
+    0.000832267163787037,
+    -2.04731178283691
+   ],
+   "speed": 0.745899863541126,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnIdleR",
+   "camera_yaw": -0.273822396876954,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1372,
+   "placement_frames": 0,
+   "position": [
+    -4.79124450683594,
+    0.0000437966082245111,
+    -1.88027846813202
+   ],
+   "speed": 1.19780916720629,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.824883220583218,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, 0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1382,
+   "placement_frames": 0,
+   "position": [
+    -4.74426555633545,
+    0.0000439620343968272,
+    -1.66861414909363
+   ],
+   "speed": 1.35964013636112,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.29237468062408,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1392,
+   "placement_frames": 0,
+   "position": [
+    -4.72679805755615,
+    0.000832462799735367,
+    -1.4388473033905
+   ],
+   "speed": 1.40463564544916,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.66201444887452,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1402,
+   "placement_frames": 0,
+   "position": [
+    -4.71022510528564,
+    0.000831781071610749,
+    -1.20429182052612
+   ],
+   "speed": 1.4158720895648,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.96635045736911,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1412,
+   "placement_frames": 0,
+   "position": [
+    -4.70574235916138,
+    0.000831778394058347,
+    -0.968282580375671
+   ],
+   "speed": 1.41850501298904,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -2.16272406391203,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1422,
+   "placement_frames": 0,
+   "position": [
+    -4.65276765823364,
+    0.000830991833936423,
+    -0.73855447769165
+   ],
+   "speed": 1.41909766942263,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -2.31240788548604,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1432,
+   "placement_frames": 0,
+   "position": [
+    -4.59348917007446,
+    0.000830825825687498,
+    -0.519013166427612
+   ],
+   "speed": 1.15584198385477,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -2.42010306808112,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(-4.65, 0.0, -0.5)",
+   "physics_frame": 1440,
+   "placement_frames": 0,
+   "position": [
+    -4.57425975799561,
+    0.000830957957077771,
+    -0.423361778259277
+   ],
+   "speed": 0.452488772571087,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -2.44128320552625,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1442,
+   "placement_frames": 0,
+   "position": [
+    -4.57080364227295,
+    0.000830912496894598,
+    -0.410176932811737
+   ],
+   "speed": 0.406403001397848,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -2.39958843717707,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1452,
+   "placement_frames": 0,
+   "position": [
+    -4.48403072357178,
+    0.000830631412100047,
+    -0.34950852394104
+   ],
+   "speed": 0.925636366009712,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -2.22122140735846,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1462,
+   "placement_frames": 0,
+   "position": [
+    -4.29448843002319,
+    0.000830915872938931,
+    -0.35517343878746
+   ],
+   "speed": 1.26892637461424,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -2.05081513088021,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1472,
+   "placement_frames": 0,
+   "position": [
+    -4.07411861419678,
+    0.000831741839647293,
+    -0.392384082078934
+   ],
+   "speed": 1.38011947274208,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.89063553791418,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1482,
+   "placement_frames": 0,
+   "position": [
+    -3.85057401657104,
+    0.000832327641546726,
+    -0.458405762910843
+   ],
+   "speed": 1.40983119606972,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.81535466070214,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1492,
+   "placement_frames": 0,
+   "position": [
+    -3.61818289756775,
+    0.000832991674542427,
+    -0.47059953212738
+   ],
+   "speed": 1.41709931194782,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.82402901827459,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1502,
+   "placement_frames": 0,
+   "position": [
+    -3.39141893386841,
+    0.000832555000670254,
+    -0.404272347688675
+   ],
+   "speed": 1.41877435147762,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.82908331745068,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1512,
+   "placement_frames": 0,
+   "position": [
+    -3.16403889656067,
+    0.000832839286886156,
+    -0.339282274246216
+   ],
+   "speed": 1.41916885972023,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.82818144977331,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1522,
+   "placement_frames": 0,
+   "position": [
+    -2.93509483337402,
+    0.00083404197357595,
+    -0.279839038848877
+   ],
+   "speed": 1.41923893243074,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.82785896869712,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1532,
+   "placement_frames": 0,
+   "position": [
+    -2.70624756813049,
+    0.000833520316518843,
+    -0.219996765255928
+   ],
+   "speed": 1.41925290226936,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.77229717468164,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1542,
+   "placement_frames": 0,
+   "position": [
+    -2.47166156768799,
+    0.00083446002099663,
+    -0.220501855015755
+   ],
+   "speed": 1.41926351934671,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkL",
+   "camera_yaw": -1.74014595780283,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1552,
+   "placement_frames": 0,
+   "position": [
+    -2.23606491088867,
+    0.000834017817396671,
+    -0.210661247372627
+   ],
+   "speed": 1.41925670206547,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.7452266898722,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1562,
+   "placement_frames": 0,
+   "position": [
+    -2.00393438339233,
+    0.000834241101983935,
+    -0.165248557925224
+   ],
+   "speed": 1.41926061362028,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.72298580585658,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1572,
+   "placement_frames": 0,
+   "position": [
+    -1.77006125450134,
+    0.000834749545902014,
+    -0.147421330213547
+   ],
+   "speed": 1.41925759613514,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.66344674564678,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1582,
+   "placement_frames": 0,
+   "position": [
+    -1.53627300262451,
+    0.000834173348266631,
+    -0.179929465055466
+   ],
+   "speed": 1.41927000135183,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.66144886368138,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1592,
+   "placement_frames": 0,
+   "position": [
+    -1.30065846443176,
+    0.000833878177218139,
+    -0.160871043801308
+   ],
+   "speed": 1.41926810145378,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.62053509944386,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1602,
+   "placement_frames": 0,
+   "position": [
+    -1.06911623477936,
+    0.000837026396766305,
+    -0.182566672563553
+   ],
+   "speed": 1.4192683249712,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.54723549074005,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1612,
+   "placement_frames": 0,
+   "position": [
+    -0.844803333282471,
+    0.0000440584844909608,
+    -0.254137963056564
+   ],
+   "speed": 1.41926430165768,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.54707263954823,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1622,
+   "placement_frames": 0,
+   "position": [
+    -0.608552873134613,
+    0.000832249352242798,
+    -0.260508835315704
+   ],
+   "speed": 1.41926363110542,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.4938037964407,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1632,
+   "placement_frames": 0,
+   "position": [
+    -0.385263442993164,
+    0.000839643238577992,
+    -0.32120817899704
+   ],
+   "speed": 1.41926418989897,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.40115249848729,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, -1.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1642,
+   "placement_frames": 0,
+   "position": [
+    -0.18238128721714,
+    -0.0000743249547667801,
+    -0.439966589212418
+   ],
+   "speed": 1.41926519572735,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.399701177353,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1652,
+   "placement_frames": 0,
+   "position": [
+    0.0273076388984919,
+    0.000834480684716254,
+    -0.479383587837219
+   ],
+   "speed": 0.952536575496197,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "",
+   "camera_yaw": -1.40851767941955,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(0.0, 0.0, -0.5)",
+   "physics_frame": 1658,
+   "placement_frames": 0,
+   "position": [
+    0.0910743549466133,
+    0.000833388767205179,
+    -0.48608860373497
+   ],
+   "speed": 0.452501652762294,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -1.42811323860244,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1662,
+   "placement_frames": 0,
+   "position": [
+    0.119372263550758,
+    0.000695529626682401,
+    -0.484395742416382
+   ],
+   "speed": 0.464141210541129,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -1.64750152851425,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1672,
+   "placement_frames": 0,
+   "position": [
+    0.18866440653801,
+    -0.000111165572889149,
+    -0.38399663567543
+   ],
+   "speed": 1.02223981171846,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -1.9897059385524,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(1.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1682,
+   "placement_frames": 0,
+   "position": [
+    0.158939510583878,
+    0.000389081134926528,
+    -0.187487810850143
+   ],
+   "speed": 1.30336169153452,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.30451831544324,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1692,
+   "placement_frames": 0,
+   "position": [
+    0.0788068771362305,
+    0.000685656676068902,
+    0.0242240503430367
+   ],
+   "speed": 1.38964578509331,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.49129370068691,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.707107, -0.707107)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1702,
+   "placement_frames": 0,
+   "position": [
+    0.0636999532580376,
+    -0.0000336879747919738,
+    0.257168680429459
+   ],
+   "speed": 1.4122112095356,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.64092391470256,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1712,
+   "placement_frames": 0,
+   "position": [
+    0.0488483607769012,
+    0.000839417800307274,
+    0.487810701131821
+   ],
+   "speed": 1.2501348182559,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.76596842671489,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(0.0, 0.0, 0.5)",
+   "physics_frame": 1721,
+   "placement_frames": 0,
+   "position": [
+    0.0306417644023895,
+    0.000833196623716503,
+    0.603093802928925
+   ],
+   "speed": 0.452128490433097,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.778538219067,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1722,
+   "placement_frames": 0,
+   "position": [
+    0.0295365285128355,
+    0.000833462167065591,
+    0.609556019306183
+   ],
+   "speed": 0.393362995237112,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.8261203072355,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1732,
+   "placement_frames": 0,
+   "position": [
+    0.0241259355098009,
+    0.000833607860840857,
+    0.640814542770386
+   ],
+   "speed": 0.0859634298831224,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_keyboard"
+  },
+  {
+   "action": "TurnWalkR",
+   "camera_yaw": -2.8261203072355,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1742,
+   "placement_frames": 0,
+   "position": [
+    0.0230105817317963,
+    0.000833305763080716,
+    0.647205948829651
+   ],
+   "speed": 0.016405776841566,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.107429880936137,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.481715, 0.432013)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "approach_contact",
+   "physics_frame": 1890,
+   "placement_frames": 0,
+   "position": [
+    -4.38774538040161,
+    0.000832622114103287,
+    -2.18774628639221
+   ],
+   "speed": 0.298733487725258,
+   "stick": [
+    0.521128594875336,
+    0.467359572649002
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.575421453720018,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.626619, 0.161349)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "approach_contact",
+   "physics_frame": 1900,
+   "placement_frames": 0,
+   "position": [
+    -4.32269048690796,
+    0.000831460813060403,
+    -2.12269139289856
+   ],
+   "speed": 0.711283721029758,
+   "stick": [
+    0.677888095378876,
+    0.174550145864487
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.656614881526965,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/tara_bay",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.637851, 0.108773)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "actual_bench_contact",
+   "physics_frame": 1902,
+   "placement_frames": 0,
+   "position": [
+    -4.31555557250977,
+    0.000800420821178705,
+    -2.10759329795837
+   ],
+   "speed": 0.396643448621035,
+   "stick": [
+    0.69003838300705,
+    0.117673069238663
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.695812619559222,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1910,
+   "placement_frames": 0,
+   "position": [
+    -4.31831789016724,
+    0.000824196555186063,
+    -2.09295701980591
+   ],
+   "speed": 0.0746780494228005,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.695812619559222,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.501976, 0.408295)",
+   "movement_locked": false,
+   "on_wall": true,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1920,
+   "placement_frames": 0,
+   "position": [
+    -4.31894540786743,
+    0.000831573968753219,
+    -2.08377838134766
+   ],
+   "speed": 0.0328322569839656,
+   "stick": [
+    -0.543046832084656,
+    0.44170144200325
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.695812619559222,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.505091, 0.404436)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1930,
+   "placement_frames": 0,
+   "position": [
+    -4.31996774673462,
+    0.000831854355055839,
+    -2.08169364929199
+   ],
+   "speed": 0.0181594071909785,
+   "stick": [
+    -0.546416580677032,
+    0.437525868415833
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.418118928178404,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.582687, 0.281354)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1940,
+   "placement_frames": 0,
+   "position": [
+    -4.3650369644165,
+    0.000832115358207375,
+    -2.0868091583252
+   ],
+   "speed": 0.503665879368782,
+   "stick": [
+    -0.630361974239349,
+    0.30437433719635
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": -0.0244221224998111,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.643211, 0.070465)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1950,
+   "placement_frames": 0,
+   "position": [
+    -4.47888517379761,
+    0.000832406512927264,
+    -2.0976414680481
+   ],
+   "speed": 0.793803725391626,
+   "stick": [
+    -0.695836842060089,
+    0.0762307047843933
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.317431181785653,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 1960,
+   "placement_frames": 0,
+   "position": [
+    -4.61133146286011,
+    0.000832601392176002,
+    -2.09172630310059
+   ],
+   "speed": 0.650937259197235,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.518829717069188,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(-4.65, 0.0, -2.088616)",
+   "physics_frame": 1967,
+   "placement_frames": 0,
+   "position": [
+    -4.66083765029907,
+    0.000832246383652091,
+    -2.0876362323761
+   ],
+   "speed": 0.282252123579383,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 0.603045871149666,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.344616, 0.547654)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1970,
+   "placement_frames": 0,
+   "position": [
+    -4.67360734939575,
+    0.000832232413813472,
+    -2.08513069152832
+   ],
+   "speed": 0.269415518268943,
+   "stick": [
+    -0.372812271118164,
+    0.592461884021759
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 1.00400715067122,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.513618, 0.39355)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1980,
+   "placement_frames": 0,
+   "position": [
+    -4.71164464950562,
+    0.000833158846944571,
+    -2.02294373512268
+   ],
+   "speed": 0.630116052925587,
+   "stick": [
+    -0.555641651153564,
+    0.425749182701111
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 1.47308539370772,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.637091, 0.113141)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 1990,
+   "placement_frames": 0,
+   "position": [
+    -4.69690370559692,
+    0.000832500751130283,
+    -1.89769184589386
+   ],
+   "speed": 0.832619145512581,
+   "stick": [
+    -0.689216017723084,
+    0.122398212552071
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 1.8397861908642,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.632754, -0.135305)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2000,
+   "placement_frames": 0,
+   "position": [
+    -4.68305444717407,
+    0.000833302503451705,
+    -1.7527562379837
+   ],
+   "speed": 0.896248240023851,
+   "stick": [
+    -0.684524893760681,
+    -0.146375179290771
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.11462664738423,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.570287, -0.305709)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2010,
+   "placement_frames": 0,
+   "position": [
+    -4.68014669418335,
+    0.000832678226288408,
+    -1.60156226158142
+   ],
+   "speed": 0.913062617182732,
+   "stick": [
+    -0.616946637630463,
+    -0.330721735954285
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.33274831366353,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.489072, -0.423667)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2020,
+   "placement_frames": 0,
+   "position": [
+    -4.67695951461792,
+    0.00083266053115949,
+    -1.44896793365479
+   ],
+   "speed": 0.917135048657656,
+   "stick": [
+    -0.529087066650391,
+    -0.458330512046814
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.50713847901054,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.406077, -0.503772)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2030,
+   "placement_frames": 0,
+   "position": [
+    -4.67251253128052,
+    0.000832544930744916,
+    -1.29607129096985
+   ],
+   "speed": 0.918078068643808,
+   "stick": [
+    -0.439301311969757,
+    -0.544990181922913
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.64519958645221,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.330951, -0.556019)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2040,
+   "placement_frames": 0,
+   "position": [
+    -4.66808032989502,
+    0.000831878918688744,
+    -1.14309906959534
+   ],
+   "speed": 0.918285436928272,
+   "stick": [
+    -0.358028590679169,
+    -0.601511001586914
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.75434034442062,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.266899, -0.589449)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2050,
+   "placement_frames": 0,
+   "position": [
+    -4.66378831863403,
+    0.000831312558148056,
+    -0.99010568857193
+   ],
+   "speed": 0.918335784226656,
+   "stick": [
+    -0.288736164569855,
+    -0.637676656246185
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.84076840213443,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.213803, -0.610716)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2060,
+   "placement_frames": 0,
+   "position": [
+    -4.65949630737305,
+    0.00083119998453185,
+    -0.837108671665192
+   ],
+   "speed": 0.918347742408514,
+   "stick": [
+    -0.231295540928841,
+    -0.660683274269104
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.90923471924486,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.170518, -0.624186)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2070,
+   "placement_frames": 0,
+   "position": [
+    -4.65518760681152,
+    0.000831190671306103,
+    -0.684111416339874
+   ],
+   "speed": 0.918348524719477,
+   "stick": [
+    -0.184469133615494,
+    -0.675256311893463
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.9634552808177,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 2080,
+   "placement_frames": 0,
+   "position": [
+    -4.65115118026733,
+    0.000830665521789342,
+    -0.540860176086426
+   ],
+   "speed": 0.682305805385113,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 2.99454491709643,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(-4.65, 0.0, -0.5)",
+   "physics_frame": 2087,
+   "placement_frames": 0,
+   "position": [
+    -4.64969301223755,
+    0.0000461000017821789,
+    -0.489119589328766
+   ],
+   "speed": 0.292795831337571,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.0136194314679,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.640708, 0.090434)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2090,
+   "placement_frames": 0,
+   "position": [
+    -4.64789199829102,
+    0.000830772158224136,
+    -0.475843608379364
+   ],
+   "speed": 0.275912471115589,
+   "stick": [
+    -0.693129539489746,
+    0.0978335589170456
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.22890280466208,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.646485, -0.027257)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2100,
+   "placement_frames": 0,
+   "position": [
+    -4.58756542205811,
+    0.000830410863272846,
+    -0.43440505862236
+   ],
+   "speed": 0.631404351443052,
+   "stick": [
+    -0.699378669261932,
+    -0.0294876266270876
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.55618950087898,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.602938, -0.234842)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2110,
+   "placement_frames": 0,
+   "position": [
+    -4.46189880371094,
+    0.00083112611901015,
+    -0.445737332105637
+   ],
+   "speed": 0.83287725225091,
+   "stick": [
+    -0.652269303798676,
+    -0.254056364297867
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.81216432870324,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.519524, -0.385721)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2120,
+   "placement_frames": 0,
+   "position": [
+    -4.31669235229492,
+    0.000831168203148991,
+    -0.456717282533646
+   ],
+   "speed": 0.896294452250004,
+   "stick": [
+    -0.562030076980591,
+    -0.417279660701752
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.9999524981928,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.436045, -0.478069)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2130,
+   "placement_frames": 0,
+   "position": [
+    -4.16546535491943,
+    0.000831965357065201,
+    -0.45709303021431
+   ],
+   "speed": 0.913069099187851,
+   "stick": [
+    -0.471721529960632,
+    -0.517183482646942
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.1491558389755,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.35853, -0.538647)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2140,
+   "placement_frames": 0,
+   "position": [
+    -4.0128378868103,
+    0.000831965473480523,
+    -0.457746356725693
+   ],
+   "speed": 0.917140077799559,
+   "stick": [
+    -0.387864649295807,
+    -0.58271861076355
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.26873343598867,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.290103, -0.578382)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2150,
+   "placement_frames": 0,
+   "position": [
+    -3.85988688468933,
+    0.000832668214570731,
+    -0.459477752447128
+   ],
+   "speed": 0.918079409748316,
+   "stick": [
+    -0.313838720321655,
+    -0.625703811645508
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.36336126523981,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.232775, -0.603739)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2160,
+   "placement_frames": 0,
+   "position": [
+    -3.70685982704163,
+    0.000832604651805013,
+    -0.461171418428421
+   ],
+   "speed": 0.918282475322485,
+   "stick": [
+    -0.251819878816605,
+    -0.653136014938354
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.43815965023724,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.185911, -0.619776)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2170,
+   "placement_frames": 0,
+   "position": [
+    -3.55381488800049,
+    0.0000434610992670059,
+    -0.462762027978897
+   ],
+   "speed": 0.918337516486645,
+   "stick": [
+    -0.201122283935547,
+    -0.670484781265259
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.50266114393681,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.144622, -0.63069)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2181,
+   "placement_frames": 0,
+   "position": [
+    -3.38546395301819,
+    0.000832913676276803,
+    -0.464560747146606
+   ],
+   "speed": 0.918330252170563,
+   "stick": [
+    -0.156454846262932,
+    -0.682291626930237
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.54856171328639,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.114821, -0.63679)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2191,
+   "placement_frames": 0,
+   "position": [
+    -3.23241496086121,
+    0.000832916877698153,
+    -0.466220051050186
+   ],
+   "speed": 0.918339751660824,
+   "stick": [
+    -0.124215587973595,
+    -0.688890755176544
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.58482797726598,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.091105, -0.640613)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2201,
+   "placement_frames": 0,
+   "position": [
+    -3.07936501502991,
+    0.000833217229228467,
+    -0.46781799197197
+   ],
+   "speed": 0.918352100998163,
+   "stick": [
+    -0.0985590592026711,
+    -0.693026781082153
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.61354231205323,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.072241, -0.643014)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2211,
+   "placement_frames": 0,
+   "position": [
+    -2.92631530761719,
+    0.000833384750876576,
+    -0.469411969184875
+   ],
+   "speed": 0.918352548032999,
+   "stick": [
+    -0.0781519487500191,
+    -0.695623695850372
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.63628890378673,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.057252, -0.644521)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2221,
+   "placement_frames": 0,
+   "position": [
+    -2.77326536178589,
+    0.000833554891869426,
+    -0.471011996269226
+   ],
+   "speed": 0.918352771550417,
+   "stick": [
+    -0.0619360245764256,
+    -0.697254538536072
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.65430205870175,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.045358, -0.645467)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2231,
+   "placement_frames": 0,
+   "position": [
+    -2.62021636962891,
+    0.000835346116218716,
+    -0.472612351179123
+   ],
+   "speed": 0.918338410556316,
+   "stick": [
+    -0.0490695126354694,
+    -0.69827800989151
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.66856569935074,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.03593, -0.64606)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2241,
+   "placement_frames": 0,
+   "position": [
+    -2.46716666221619,
+    0.00083367497427389,
+    -0.47421208024025
+   ],
+   "speed": 0.918367020785809,
+   "stick": [
+    -0.0388695858418942,
+    -0.698919951915741
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.67986089600866,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.028458, -0.646433)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2251,
+   "placement_frames": 0,
+   "position": [
+    -2.31411695480347,
+    0.000833856291137636,
+    -0.475811779499054
+   ],
+   "speed": 0.918352659791708,
+   "stick": [
+    -0.0307863485068083,
+    -0.699322640895844
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.68880551940929,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.022538, -0.646666)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2261,
+   "placement_frames": 0,
+   "position": [
+    -2.16106677055359,
+    0.000835558108519763,
+    -0.477411508560181
+   ],
+   "speed": 0.918352715671062,
+   "stick": [
+    -0.0243823435157537,
+    -0.699575245380402
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.6958886783352,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.017849, -0.646812)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2271,
+   "placement_frames": 0,
+   "position": [
+    -2.00801706314087,
+    0.000833388650789857,
+    -0.479011297225952
+   ],
+   "speed": 0.918352715671062,
+   "stick": [
+    -0.0193095933645964,
+    -0.69973361492157
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.70149774886906,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.014135, -0.646904)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2281,
+   "placement_frames": 0,
+   "position": [
+    -1.85496759414673,
+    0.000836686522234231,
+    -0.480611085891724
+   ],
+   "speed": 0.918345563113689,
+   "stick": [
+    -0.0152916945517063,
+    -0.69983297586441
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.70593950764401,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.011194, -0.646962)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2291,
+   "placement_frames": 0,
+   "position": [
+    -1.7019180059433,
+    0.000832879391964525,
+    -0.482210874557495
+   ],
+   "speed": 0.918345563113689,
+   "stick": [
+    -0.0121096363291144,
+    -0.699895262718201
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.70945688451069,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.008865, -0.646998)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2301,
+   "placement_frames": 0,
+   "position": [
+    -1.54886829853058,
+    0.000044049636926502,
+    -0.483810663223267
+   ],
+   "speed": 0.918352715671062,
+   "stick": [
+    -0.00958983227610588,
+    -0.699934244155884
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.71224225436816,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.00702, -0.647021)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2311,
+   "placement_frames": 0,
+   "position": [
+    -1.39582026004791,
+    0.000832759949844331,
+    -0.485410332679749
+   ],
+   "speed": 0.918345563113689,
+   "stick": [
+    -0.00759396748617291,
+    -0.699958801269531
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.71444796252097,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.005559, -0.647035)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2321,
+   "placement_frames": 0,
+   "position": [
+    -1.24277067184448,
+    0.000831810932140797,
+    -0.487010061740875
+   ],
+   "speed": 0.918345563113689,
+   "stick": [
+    -0.00601390283554792,
+    -0.699974119663239
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.71619464066431,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.004402, -0.647044)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2331,
+   "placement_frames": 0,
+   "position": [
+    -1.08972120285034,
+    0.000038457103073597,
+    -0.488609820604324
+   ],
+   "speed": 0.918352715671062,
+   "stick": [
+    -0.00476222671568394,
+    -0.699983835220337
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.717577814891,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.003486, -0.647049)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2341,
+   "placement_frames": 0,
+   "position": [
+    -0.936671912670136,
+    0.000818014959804714,
+    -0.490209549665451
+   ],
+   "speed": 0.918349139392376,
+   "stick": [
+    -0.00377125735394657,
+    -0.699989855289459
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.71867313670256,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.002761, -0.647053)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2351,
+   "placement_frames": 0,
+   "position": [
+    -0.783622264862061,
+    0.000684999627992511,
+    -0.491809278726578
+   ],
+   "speed": 0.918349139392376,
+   "stick": [
+    -0.00298651773482561,
+    -0.699993669986725
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.71954051201639,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.002186, -0.647055)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2361,
+   "placement_frames": 0,
+   "position": [
+    -0.630572557449341,
+    0.000837966741528362,
+    -0.493408977985382
+   ],
+   "speed": 0.918349139392376,
+   "stick": [
+    -0.00236505223438144,
+    -0.699995934963226
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.7202273898336,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.001731, -0.647057)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2371,
+   "placement_frames": 0,
+   "position": [
+    -0.477522969245911,
+    -0.0000713991466909647,
+    -0.495008707046509
+   ],
+   "speed": 0.918347351253033,
+   "stick": [
+    -0.00187273998744786,
+    -0.699997544288635
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.72077132552737,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.001371, -0.647057)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2381,
+   "placement_frames": 0,
+   "position": [
+    -0.324475347995758,
+    -0.000207068980671465,
+    -0.496608436107636
+   ],
+   "speed": 0.918347351253033,
+   "stick": [
+    -0.00148287368938327,
+    -0.699998378753662
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.72120205374301,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(-0.001086, -0.647058)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2391,
+   "placement_frames": 0,
+   "position": [
+    -0.171425685286522,
+    0.000717837770935148,
+    -0.498208194971085
+   ],
+   "speed": 0.918347351253033,
+   "stick": [
+    -0.0011744104558602,
+    -0.69999897480011
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.7215431216059,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 2401,
+   "placement_frames": 0,
+   "position": [
+    -0.0281252488493919,
+    0.000833371479529887,
+    -0.499706029891968
+   ],
+   "speed": 0.682306755334139,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.72173868382169,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(0.0, 0.0, -0.5)",
+   "physics_frame": 2408,
+   "placement_frames": 0,
+   "position": [
+    0.0236331019550562,
+    0.000835180340800434,
+    -0.500246942043304
+   ],
+   "speed": 0.292795160785317,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.71458479932513,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.646572, 0.02508)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2411,
+   "placement_frames": 0,
+   "position": [
+    0.036968756467104,
+    0.00083443964831531,
+    -0.498959362506866
+   ],
+   "speed": 0.275914622470737,
+   "stick": [
+    0.699473917484283,
+    0.0271317902952433
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.53055387122737,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.645435, -0.045815)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2421,
+   "placement_frames": 0,
+   "position": [
+    0.0794916450977325,
+    0.000833206751849502,
+    -0.439886599779129
+   ],
+   "speed": 0.631415527313948,
+   "stick": [
+    0.698243141174316,
+    -0.0495629869401455
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 4.21177207414409,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.59782, -0.247582)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2431,
+   "placement_frames": 0,
+   "position": [
+    0.0614394284784794,
+    -0.000168805185239762,
+    -0.315201580524445
+   ],
+   "speed": 0.83287674933672,
+   "stick": [
+    0.646732151508331,
+    -0.267838686704636
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.9585157815327,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.506167, -0.403088)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2441,
+   "placement_frames": 0,
+   "position": [
+    0.0398740768432617,
+    0.000823878508526832,
+    -0.171212285757065
+   ],
+   "speed": 0.896298084408045,
+   "stick": [
+    0.547581136226654,
+    -0.436067551374435
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.7771587110203,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.422625, -0.489973)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2451,
+   "placement_frames": 0,
+   "position": [
+    0.0315364114940166,
+    0.000329697271808982,
+    -0.0202217828482389
+   ],
+   "speed": 0.913067646324635,
+   "stick": [
+    0.457203358411789,
+    -0.530061364173889
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.63397849786602,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.348765, -0.545021)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2461,
+   "placement_frames": 0,
+   "position": [
+    0.0235826727002859,
+    0.0000726464204490185,
+    0.132198840379715
+   ],
+   "speed": 0.917140245437622,
+   "stick": [
+    0.37730011343956,
+    -0.589613854885101
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.51816074411403,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.282128, -0.582314)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "recover",
+   "physics_frame": 2471,
+   "placement_frames": 0,
+   "position": [
+    0.0137959867715836,
+    0.0000491378013975918,
+    0.284846603870392
+   ],
+   "speed": 0.918080303817987,
+   "stick": [
+    0.305211126804352,
+    -0.629957318305969
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.42624789865893,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 2481,
+   "placement_frames": 0,
+   "position": [
+    0.00402813218533993,
+    0.000833920668810606,
+    0.434589892625809
+   ],
+   "speed": 0.809886809438467,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.36021239300922,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "leg_end:(0.0, 0.0, 0.5)",
+   "physics_frame": 2490,
+   "placement_frames": 0,
+   "position": [
+    -0.000807205913588405,
+    0.000833325670100749,
+    0.510029196739197
+   ],
+   "speed": 0.292778760194778,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.35369780570489,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 2491,
+   "placement_frames": 0,
+   "position": [
+    -0.00107807817403227,
+    0.000835304264910519,
+    0.514265954494476
+   ],
+   "speed": 0.254724472761154,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  },
+  {
+   "action": "",
+   "camera_yaw": 3.34733368347948,
+   "contacts": [
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision",
+    "/root/Chapter1Campaign/Garden/CollisionRoot/FloorCollision"
+   ],
+   "input": "(0.0, 0.0)",
+   "movement_locked": false,
+   "on_wall": false,
+   "pending_action": "",
+   "phase": "released",
+   "physics_frame": 2501,
+   "placement_frames": 0,
+   "position": [
+    -0.00238815974444151,
+    0.000839175190776587,
+    0.534765422344208
+   ],
+   "speed": 0.0556600245181471,
+   "stick": [
+    0.0,
+    0.0
+   ],
+   "trial": "mission_stopped_controller"
+  }
+ ]
+}
