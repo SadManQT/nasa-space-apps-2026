@@ -1,5 +1,13 @@
 # M1-123 - Real campaign Garden contact recovery
 
+## Accepted integration closure - 10 November 2026
+
+**M1-123 acceptance is verified; final board reconciliation pending.** [Current acceptance record](acceptance_20261110_unblocked.md) combines the existing source/focused/native evidence with the explicitly accepted119-suite coverage on the identical current game tree. Two original-Windows performance checks now pass618/0; the earlier615/5/comms/full-gate blockers are superseded. No game source was changed for this closure. Exact-pose, native-snapshot, peer-report and failed sparse-diagnostic limits remain documented. M1-85 remains separately blocked on original/fresh native-crash diagnostics.
+
+## Historical source-specific handoffs (preserved)
+
+The reports below describe their recorded snapshots and earlier blocked status; they do not override the current acceptance record above.
+
 10 November2026 - [approved current pilot refinement and verification](current_pilot_20261110/README.md): normal input now settles before the unchanged25cm arrival check, corrects within the same360sampling iterations and compares intended/live keys. Two ordinary mandatory Garden runs pass19/0+54/0; standard native passes62/0 with8inspected PNGs. Post-HUD-repair Garden atf328 passes2/2 again. The user authorized the one test file while keeping M1-123 blocked; no runtime/controller/capsule/solid change or task reopening was made.
 
 The earlier62/1native failure remains visible. Both supplemental10FPS diagnostics pass54movement checks but fail log integrity with79shader-cache errors despite exit0; the shorter-profile repeat did not resolve them. No cache/renderer cause or game-input producer is invented. Current required integration remains blocked on fresh615/5loading timings and no complete passing current full gate. [Current integration evidence](../M1-122/current_acceptance_20261110/README.md).
