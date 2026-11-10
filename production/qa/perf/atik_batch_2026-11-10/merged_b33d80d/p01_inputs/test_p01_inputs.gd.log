@@ -1,0 +1,683 @@
+WorkerThreadPool: 10 threads, 3 max low-priority.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+TextServer: Added interface "Dummy"
+TextServer: Added interface "ICU / HarfBuzz / Graphite (Built-in)"
+SDL: Init OK!
+Using "default" pen tablet driver...
+
+TextServer: Primary interface set to: "ICU / HarfBuzz / Graphite (Built-in)".
+Loading resource: res://default_bus_layout.tres remapped: res://default_bus_layout.tres
+Completed load for: 'res://default_bus_layout.tres' remapped 'res://default_bus_layout.tres' at thread -1
+CORE API HASH: 2004498165
+EDITOR API HASH: 1696660745
+Loading resource: res://tools/test_p01_inputs.gd remapped: res://tools/test_p01_inputs.gd
+Loading resource: res://scenes/campaign/chapter1_campaign.tscn remapped: res://scenes/campaign/chapter1_campaign.tscn
+Loading resource: res://scripts/campaign/chapter1_campaign.gd remapped: res://scripts/campaign/chapter1_campaign.gd
+Loading resource: res://scenes/ui/chapter1_campaign_hud.tscn remapped: res://scenes/ui/chapter1_campaign_hud.tscn
+Loading resource: res://scripts/ui/chapter1_campaign_hud.gd remapped: res://scripts/ui/chapter1_campaign_hud.gd
+Loading resource: res://scenes/ui/campaign_panels.tscn remapped: res://scenes/ui/campaign_panels.tscn
+Loading resource: res://scripts/ui/campaign_panels.gd remapped: res://scripts/ui/campaign_panels.gd
+Loading resource: res://resources/campaign/profiles/campaign_rules.json remapped: res://resources/campaign/profiles/campaign_rules.json
+Completed load for: 'res://resources/campaign/profiles/campaign_rules.json' remapped 'res://resources/campaign/profiles/campaign_rules.json' at thread -1
+Loading resource: res://shaders/toon_character.gdshader remapped: res://shaders/toon_character.gdshader
+Loading resource: res://shaders/toon_ramp.gdshaderinc remapped: res://shaders/toon_ramp.gdshaderinc
+Completed load for: 'res://shaders/toon_ramp.gdshaderinc' remapped 'res://shaders/toon_ramp.gdshaderinc' at thread -1
+Completed load for: 'res://shaders/toon_character.gdshader' remapped 'res://shaders/toon_character.gdshader' at thread -1
+Loading resource: res://shaders/toon_world.gdshader remapped: res://shaders/toon_world.gdshader
+Completed load for: 'res://shaders/toon_world.gdshader' remapped 'res://shaders/toon_world.gdshader' at thread -1
+Loading resource: res://shaders/toon_outline.gdshader remapped: res://shaders/toon_outline.gdshader
+Completed load for: 'res://shaders/toon_outline.gdshader' remapped 'res://shaders/toon_outline.gdshader' at thread -1
+Completed load for: 'res://scripts/ui/campaign_panels.gd' remapped 'res://scripts/ui/campaign_panels.gd' at thread -1
+Completed load for: 'res://scenes/ui/campaign_panels.tscn' remapped 'res://scenes/ui/campaign_panels.tscn' at thread -1
+Loading resource: res://scenes/ui/mission_table_panel.tscn remapped: res://scenes/ui/mission_table_panel.tscn
+Completed load for: 'res://scenes/ui/mission_table_panel.tscn' remapped 'res://scenes/ui/mission_table_panel.tscn' at thread -1
+Loading resource: res://scenes/ui/p01_panel.tscn remapped: res://scenes/ui/p01_panel.tscn
+Loading resource: res://scripts/ui/p01_panel.gd remapped: res://scripts/ui/p01_panel.gd
+Loading resource: res://resources/campaign/campaign_clock.json remapped: res://resources/campaign/campaign_clock.json
+Completed load for: 'res://resources/campaign/campaign_clock.json' remapped 'res://resources/campaign/campaign_clock.json' at thread -1
+Completed load for: 'res://scripts/ui/p01_panel.gd' remapped 'res://scripts/ui/p01_panel.gd' at thread -1
+Completed load for: 'res://scenes/ui/p01_panel.tscn' remapped 'res://scenes/ui/p01_panel.tscn' at thread -1
+Loading resource: res://scenes/ui/chapter4_puzzle_panel.tscn remapped: res://scenes/ui/chapter4_puzzle_panel.tscn
+Loading resource: res://scripts/ui/chapter4_puzzle_panel.gd remapped: res://scripts/ui/chapter4_puzzle_panel.gd
+Completed load for: 'res://scripts/ui/chapter4_puzzle_panel.gd' remapped 'res://scripts/ui/chapter4_puzzle_panel.gd' at thread -1
+Completed load for: 'res://scenes/ui/chapter4_puzzle_panel.tscn' remapped 'res://scenes/ui/chapter4_puzzle_panel.tscn' at thread -1
+Loading resource: res://scenes/ui/chapter6_puzzle_panel.tscn remapped: res://scenes/ui/chapter6_puzzle_panel.tscn
+Loading resource: res://scripts/ui/chapter6_puzzle_panel.gd remapped: res://scripts/ui/chapter6_puzzle_panel.gd
+Completed load for: 'res://scripts/ui/chapter6_puzzle_panel.gd' remapped 'res://scripts/ui/chapter6_puzzle_panel.gd' at thread -1
+Completed load for: 'res://scenes/ui/chapter6_puzzle_panel.tscn' remapped 'res://scenes/ui/chapter6_puzzle_panel.tscn' at thread -1
+Loading resource: res://scenes/ui/chapter8_puzzle_panel.tscn remapped: res://scenes/ui/chapter8_puzzle_panel.tscn
+Completed load for: 'res://scenes/ui/chapter8_puzzle_panel.tscn' remapped 'res://scenes/ui/chapter8_puzzle_panel.tscn' at thread -1
+Loading resource: res://resources/ui/lla_theme.tres remapped: res://resources/ui/lla_theme.tres
+Completed load for: 'res://resources/ui/lla_theme.tres' remapped 'res://resources/ui/lla_theme.tres' at thread -1
+Loading resource: res://shaders/face_atlas.gdshader remapped: res://shaders/face_atlas.gdshader
+Completed load for: 'res://shaders/face_atlas.gdshader' remapped 'res://shaders/face_atlas.gdshader' at thread -1
+Loading resource: res://assets/environment/terrain/sky_env_earth.gdshader remapped: res://assets/environment/terrain/sky_env_earth.gdshader
+Completed load for: 'res://assets/environment/terrain/sky_env_earth.gdshader' remapped 'res://assets/environment/terrain/sky_env_earth.gdshader' at thread -1
+Loading resource: res://assets/environment/terrain/sky_env_stars.gdshader remapped: res://assets/environment/terrain/sky_env_stars.gdshader
+Completed load for: 'res://assets/environment/terrain/sky_env_stars.gdshader' remapped 'res://assets/environment/terrain/sky_env_stars.gdshader' at thread -1
+Loading resource: res://scenes/player/player.tscn remapped: res://scenes/player/player.tscn
+Completed load for: 'res://scenes/player/player.tscn' remapped 'res://scenes/player/player.tscn' at thread -1
+Loading resource: res://resources/campaign/content/scene_rosters.json remapped: res://resources/campaign/content/scene_rosters.json
+Completed load for: 'res://resources/campaign/content/scene_rosters.json' remapped 'res://resources/campaign/content/scene_rosters.json' at thread -1
+Completed load for: 'res://scripts/ui/chapter1_campaign_hud.gd' remapped 'res://scripts/ui/chapter1_campaign_hud.gd' at thread -1
+Completed load for: 'res://scenes/ui/chapter1_campaign_hud.tscn' remapped 'res://scenes/ui/chapter1_campaign_hud.tscn' at thread -1
+Loading resource: res://assets/environment/terrain/lola/terrain_lola.gdshader remapped: res://assets/environment/terrain/lola/terrain_lola.gdshader
+Completed load for: 'res://assets/environment/terrain/lola/terrain_lola.gdshader' remapped 'res://assets/environment/terrain/lola/terrain_lola.gdshader' at thread -1
+Completed load for: 'res://scripts/campaign/chapter1_campaign.gd' remapped 'res://scripts/campaign/chapter1_campaign.gd' at thread -1
+Completed load for: 'res://scenes/campaign/chapter1_campaign.tscn' remapped 'res://scenes/campaign/chapter1_campaign.tscn' at thread -1
+Loading resource: res://scenes/ui/main_menu.tscn remapped: res://scenes/ui/main_menu.tscn
+Loading resource: res://scripts/ui/main_menu.gd remapped: res://scripts/ui/main_menu.gd
+Completed load for: 'res://scripts/ui/main_menu.gd' remapped 'res://scripts/ui/main_menu.gd' at thread -1
+Completed load for: 'res://scenes/ui/main_menu.tscn' remapped 'res://scenes/ui/main_menu.tscn' at thread -1
+Completed load for: 'res://tools/test_p01_inputs.gd' remapped 'res://tools/test_p01_inputs.gd' at thread -1
+SceneTreeFTI: traversal method DEFAULT
+Loaded system CA certificates
+Loading resource: res://scripts/campaign/campaign_progression.gd remapped: res://scripts/campaign/campaign_progression.gd
+Completed load for: 'res://scripts/campaign/campaign_progression.gd' remapped 'res://scripts/campaign/campaign_progression.gd' at thread -1
+Loading resource: res://scenes/campaign/rooms/commons.tscn remapped: res://scenes/campaign/rooms/commons.tscn
+Loading resource: res://scenes/campaign/rooms/habitat_kit_preload.tscn remapped: res://scenes/campaign/rooms/habitat_kit_preload.tscn
+Loading resource: res://assets/environment/kit/EN_Kit_BulkheadRing_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_BulkheadRing_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_BulkheadRing_LOD0.glb-d07c70af04c9a13be7493dd35ae2da7f.scn remapped: res://.godot/imported/EN_Kit_BulkheadRing_LOD0.glb-d07c70af04c9a13be7493dd35ae2da7f.scn
+Loading resource: res://assets/environment/kit/textures/T_Kit_Quilt_BaseColor.png remapped: res://assets/environment/kit/textures/T_Kit_Quilt_BaseColor.png
+Loading resource: res://.godot/imported/T_Kit_Quilt_BaseColor.png-ac05fb5b2f12b81b3f425a26db8c7d37.s3tc.ctex remapped: res://.godot/imported/T_Kit_Quilt_BaseColor.png-ac05fb5b2f12b81b3f425a26db8c7d37.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_Quilt_BaseColor.png' remapped 'res://assets/environment/kit/textures/T_Kit_Quilt_BaseColor.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_Quilt_ORM.png remapped: res://assets/environment/kit/textures/T_Kit_Quilt_ORM.png
+Loading resource: res://.godot/imported/T_Kit_Quilt_ORM.png-7dcaa734b97dce46fe63228a7fba07ad.s3tc.ctex remapped: res://.godot/imported/T_Kit_Quilt_ORM.png-7dcaa734b97dce46fe63228a7fba07ad.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_Quilt_ORM.png' remapped 'res://assets/environment/kit/textures/T_Kit_Quilt_ORM.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_Quilt_Normal.png remapped: res://assets/environment/kit/textures/T_Kit_Quilt_Normal.png
+Loading resource: res://.godot/imported/T_Kit_Quilt_Normal.png-629566a236edc95176808a1c9dc778a2.s3tc.ctex remapped: res://.godot/imported/T_Kit_Quilt_Normal.png-629566a236edc95176808a1c9dc778a2.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_Quilt_Normal.png' remapped 'res://assets/environment/kit/textures/T_Kit_Quilt_Normal.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_PaintGrey_BaseColor.png remapped: res://assets/environment/kit/textures/T_Kit_PaintGrey_BaseColor.png
+Loading resource: res://.godot/imported/T_Kit_PaintGrey_BaseColor.png-49242d5ed3cbf56db5386f13293004b9.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintGrey_BaseColor.png-49242d5ed3cbf56db5386f13293004b9.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_PaintGrey_BaseColor.png' remapped 'res://assets/environment/kit/textures/T_Kit_PaintGrey_BaseColor.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_Paint_ORM.png remapped: res://assets/environment/kit/textures/T_Kit_Paint_ORM.png
+Loading resource: res://.godot/imported/T_Kit_Paint_ORM.png-7df1b9cabe5e8cea1020bfec22b9ddb2.s3tc.ctex remapped: res://.godot/imported/T_Kit_Paint_ORM.png-7df1b9cabe5e8cea1020bfec22b9ddb2.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_Paint_ORM.png' remapped 'res://assets/environment/kit/textures/T_Kit_Paint_ORM.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_Paint_Normal.png remapped: res://assets/environment/kit/textures/T_Kit_Paint_Normal.png
+Loading resource: res://.godot/imported/T_Kit_Paint_Normal.png-f9f0f565b05eef587831aa2f82226146.s3tc.ctex remapped: res://.godot/imported/T_Kit_Paint_Normal.png-f9f0f565b05eef587831aa2f82226146.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_Paint_Normal.png' remapped 'res://assets/environment/kit/textures/T_Kit_Paint_Normal.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_PaintNavy_BaseColor.png remapped: res://assets/environment/kit/textures/T_Kit_PaintNavy_BaseColor.png
+Loading resource: res://.godot/imported/T_Kit_PaintNavy_BaseColor.png-7cf31c8cb05697b6bbbd3b06d65cdbce.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintNavy_BaseColor.png-7cf31c8cb05697b6bbbd3b06d65cdbce.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_PaintNavy_BaseColor.png' remapped 'res://assets/environment/kit/textures/T_Kit_PaintNavy_BaseColor.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_PaintOrange_BaseColor.png remapped: res://assets/environment/kit/textures/T_Kit_PaintOrange_BaseColor.png
+Loading resource: res://.godot/imported/T_Kit_PaintOrange_BaseColor.png-10e76c55679073d76dbb685c4536bce2.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintOrange_BaseColor.png-10e76c55679073d76dbb685c4536bce2.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_PaintOrange_BaseColor.png' remapped 'res://assets/environment/kit/textures/T_Kit_PaintOrange_BaseColor.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_Steel_BaseColor.png remapped: res://assets/environment/kit/textures/T_Kit_Steel_BaseColor.png
+Loading resource: res://.godot/imported/T_Kit_Steel_BaseColor.png-5b84f907f4b065cfc53dc5c119eeeec3.s3tc.ctex remapped: res://.godot/imported/T_Kit_Steel_BaseColor.png-5b84f907f4b065cfc53dc5c119eeeec3.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_Steel_BaseColor.png' remapped 'res://assets/environment/kit/textures/T_Kit_Steel_BaseColor.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_Steel_ORM.png remapped: res://assets/environment/kit/textures/T_Kit_Steel_ORM.png
+Loading resource: res://.godot/imported/T_Kit_Steel_ORM.png-08ebd242a559dfebc1e0e1d03ec7dd2d.s3tc.ctex remapped: res://.godot/imported/T_Kit_Steel_ORM.png-08ebd242a559dfebc1e0e1d03ec7dd2d.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_Steel_ORM.png' remapped 'res://assets/environment/kit/textures/T_Kit_Steel_ORM.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_Steel_Normal.png remapped: res://assets/environment/kit/textures/T_Kit_Steel_Normal.png
+Loading resource: res://.godot/imported/T_Kit_Steel_Normal.png-a2829a615e94de0331b43b88f316a1be.s3tc.ctex remapped: res://.godot/imported/T_Kit_Steel_Normal.png-a2829a615e94de0331b43b88f316a1be.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_Steel_Normal.png' remapped 'res://assets/environment/kit/textures/T_Kit_Steel_Normal.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_Floor_BaseColor.png remapped: res://assets/environment/kit/textures/T_Kit_Floor_BaseColor.png
+Loading resource: res://.godot/imported/T_Kit_Floor_BaseColor.png-3b967f4a68c6765cd26fd2928f075968.s3tc.ctex remapped: res://.godot/imported/T_Kit_Floor_BaseColor.png-3b967f4a68c6765cd26fd2928f075968.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_Floor_BaseColor.png' remapped 'res://assets/environment/kit/textures/T_Kit_Floor_BaseColor.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_Floor_ORM.png remapped: res://assets/environment/kit/textures/T_Kit_Floor_ORM.png
+Loading resource: res://.godot/imported/T_Kit_Floor_ORM.png-57e48cb821867a1398c87032c2a0f1fd.s3tc.ctex remapped: res://.godot/imported/T_Kit_Floor_ORM.png-57e48cb821867a1398c87032c2a0f1fd.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_Floor_ORM.png' remapped 'res://assets/environment/kit/textures/T_Kit_Floor_ORM.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_Floor_Normal.png remapped: res://assets/environment/kit/textures/T_Kit_Floor_Normal.png
+Loading resource: res://.godot/imported/T_Kit_Floor_Normal.png-c410175bd353249c55b2ed53595b76b2.s3tc.ctex remapped: res://.godot/imported/T_Kit_Floor_Normal.png-c410175bd353249c55b2ed53595b76b2.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_Floor_Normal.png' remapped 'res://assets/environment/kit/textures/T_Kit_Floor_Normal.png' at thread -1
+Completed load for: 'res://assets/environment/kit/EN_Kit_BulkheadRing_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_BulkheadRing_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_BulkheadRing_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_BulkheadRing_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_BulkheadRing_LOD1.glb-98b4d6e54a886adc8d675e0f25b34ce0.scn remapped: res://.godot/imported/EN_Kit_BulkheadRing_LOD1.glb-98b4d6e54a886adc8d675e0f25b34ce0.scn
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_Quilt_BaseColor_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_Quilt_BaseColor_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_Quilt_BaseColor_LOD1.png-e8eaa6fa0ff68f7d3e3eedd3e9c67f90.s3tc.ctex remapped: res://.godot/imported/T_Kit_Quilt_BaseColor_LOD1.png-e8eaa6fa0ff68f7d3e3eedd3e9c67f90.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_Quilt_BaseColor_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_Quilt_BaseColor_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_Quilt_ORM_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_Quilt_ORM_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_Quilt_ORM_LOD1.png-4799f16e902c00d4e3d553b493a6c5d7.s3tc.ctex remapped: res://.godot/imported/T_Kit_Quilt_ORM_LOD1.png-4799f16e902c00d4e3d553b493a6c5d7.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_Quilt_ORM_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_Quilt_ORM_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_Quilt_Normal_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_Quilt_Normal_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_Quilt_Normal_LOD1.png-6afda22557926c10a94c92b972768166.s3tc.ctex remapped: res://.godot/imported/T_Kit_Quilt_Normal_LOD1.png-6afda22557926c10a94c92b972768166.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_Quilt_Normal_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_Quilt_Normal_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_PaintGrey_BaseColor_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_PaintGrey_BaseColor_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_PaintGrey_BaseColor_LOD1.png-0d2f2f668dcdface302ab3230b3fd3f3.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintGrey_BaseColor_LOD1.png-0d2f2f668dcdface302ab3230b3fd3f3.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_PaintGrey_BaseColor_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_PaintGrey_BaseColor_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_Paint_ORM_LOD1.png-0668d5d8ddcada5d09a1af00ecabb9d8.s3tc.ctex remapped: res://.godot/imported/T_Kit_Paint_ORM_LOD1.png-0668d5d8ddcada5d09a1af00ecabb9d8.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_ORM_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_Paint_Normal_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_Paint_Normal_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_Paint_Normal_LOD1.png-8843a0839e758007fbd13cbbfbc15645.s3tc.ctex remapped: res://.godot/imported/T_Kit_Paint_Normal_LOD1.png-8843a0839e758007fbd13cbbfbc15645.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_Normal_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_Paint_Normal_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_PaintNavy_BaseColor_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_PaintNavy_BaseColor_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_PaintNavy_BaseColor_LOD1.png-8c8500071972654a6da4c14170809e07.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintNavy_BaseColor_LOD1.png-8c8500071972654a6da4c14170809e07.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_PaintNavy_BaseColor_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_PaintNavy_BaseColor_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_PaintOrange_BaseColor_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_PaintOrange_BaseColor_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_PaintOrange_BaseColor_LOD1.png-91086113acd7c1c1bc101eb463e19192.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintOrange_BaseColor_LOD1.png-91086113acd7c1c1bc101eb463e19192.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_PaintOrange_BaseColor_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_PaintOrange_BaseColor_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_Steel_BaseColor_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_Steel_BaseColor_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_Steel_BaseColor_LOD1.png-5887c6c364ac68f830286911f1ecd462.s3tc.ctex remapped: res://.godot/imported/T_Kit_Steel_BaseColor_LOD1.png-5887c6c364ac68f830286911f1ecd462.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_Steel_BaseColor_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_Steel_BaseColor_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_Steel_ORM_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_Steel_ORM_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_Steel_ORM_LOD1.png-09506b97a91bd46193eb0fd32a28dfef.s3tc.ctex remapped: res://.godot/imported/T_Kit_Steel_ORM_LOD1.png-09506b97a91bd46193eb0fd32a28dfef.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_Steel_ORM_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_Steel_ORM_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_Steel_Normal_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_Steel_Normal_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_Steel_Normal_LOD1.png-b4834d9f7dd3d09490752a3a2896fda0.s3tc.ctex remapped: res://.godot/imported/T_Kit_Steel_Normal_LOD1.png-b4834d9f7dd3d09490752a3a2896fda0.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_Steel_Normal_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_Steel_Normal_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_Floor_BaseColor_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_Floor_BaseColor_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_Floor_BaseColor_LOD1.png-40cb849112ac953138a84354039a1f45.s3tc.ctex remapped: res://.godot/imported/T_Kit_Floor_BaseColor_LOD1.png-40cb849112ac953138a84354039a1f45.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_Floor_BaseColor_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_Floor_BaseColor_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_Floor_ORM_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_Floor_ORM_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_Floor_ORM_LOD1.png-d86a5a4cb10c89183c3dc23d2db5111c.s3tc.ctex remapped: res://.godot/imported/T_Kit_Floor_ORM_LOD1.png-d86a5a4cb10c89183c3dc23d2db5111c.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_Floor_ORM_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_Floor_ORM_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_Floor_Normal_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_Floor_Normal_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_Floor_Normal_LOD1.png-93ccb102e49b773da1f1ce1deeaa2822.s3tc.ctex remapped: res://.godot/imported/T_Kit_Floor_Normal_LOD1.png-93ccb102e49b773da1f1ce1deeaa2822.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_Floor_Normal_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_Floor_Normal_LOD1.png' at thread -1
+Completed load for: 'res://assets/environment/kit/EN_Kit_BulkheadRing_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_BulkheadRing_LOD1.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_CableRun_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_CableRun_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_CableRun_LOD0.glb-e604f0c56f1846d8436e1a3eff01319a.scn remapped: res://.godot/imported/EN_Kit_CableRun_LOD0.glb-e604f0c56f1846d8436e1a3eff01319a.scn
+Loading resource: res://assets/environment/kit/textures/T_Kit_PaintWhite_BaseColor.png remapped: res://assets/environment/kit/textures/T_Kit_PaintWhite_BaseColor.png
+Loading resource: res://.godot/imported/T_Kit_PaintWhite_BaseColor.png-df24deb2c2df4d9335607b69a24c9151.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintWhite_BaseColor.png-df24deb2c2df4d9335607b69a24c9151.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_PaintWhite_BaseColor.png' remapped 'res://assets/environment/kit/textures/T_Kit_PaintWhite_BaseColor.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_PaintBlue_BaseColor.png remapped: res://assets/environment/kit/textures/T_Kit_PaintBlue_BaseColor.png
+Loading resource: res://.godot/imported/T_Kit_PaintBlue_BaseColor.png-6d83b3ff152fa91eb22a9613acbf0475.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintBlue_BaseColor.png-6d83b3ff152fa91eb22a9613acbf0475.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_PaintBlue_BaseColor.png' remapped 'res://assets/environment/kit/textures/T_Kit_PaintBlue_BaseColor.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/T_Kit_PaintDark_BaseColor.png remapped: res://assets/environment/kit/textures/T_Kit_PaintDark_BaseColor.png
+Loading resource: res://.godot/imported/T_Kit_PaintDark_BaseColor.png-7d287d01a62f97457de73efec7c192fd.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintDark_BaseColor.png-7d287d01a62f97457de73efec7c192fd.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/T_Kit_PaintDark_BaseColor.png' remapped 'res://assets/environment/kit/textures/T_Kit_PaintDark_BaseColor.png' at thread -1
+Completed load for: 'res://assets/environment/kit/EN_Kit_CableRun_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_CableRun_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_CableRun_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_CableRun_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_CableRun_LOD1.glb-f92615ea3b72950286584ab6c3eaed52.scn remapped: res://.godot/imported/EN_Kit_CableRun_LOD1.glb-f92615ea3b72950286584ab6c3eaed52.scn
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_PaintWhite_BaseColor_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_PaintWhite_BaseColor_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_PaintWhite_BaseColor_LOD1.png-4d29d3697e08144fa427efbff5784ee3.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintWhite_BaseColor_LOD1.png-4d29d3697e08144fa427efbff5784ee3.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_PaintWhite_BaseColor_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_PaintWhite_BaseColor_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_PaintBlue_BaseColor_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_PaintBlue_BaseColor_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_PaintBlue_BaseColor_LOD1.png-93bc900011b4cd22bbed7e04632e15ec.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintBlue_BaseColor_LOD1.png-93bc900011b4cd22bbed7e04632e15ec.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_PaintBlue_BaseColor_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_PaintBlue_BaseColor_LOD1.png' at thread -1
+Loading resource: res://assets/environment/kit/textures/lod1/T_Kit_PaintDark_BaseColor_LOD1.png remapped: res://assets/environment/kit/textures/lod1/T_Kit_PaintDark_BaseColor_LOD1.png
+Loading resource: res://.godot/imported/T_Kit_PaintDark_BaseColor_LOD1.png-b0bb5e690556a5dc6c598db44eddc855.s3tc.ctex remapped: res://.godot/imported/T_Kit_PaintDark_BaseColor_LOD1.png-b0bb5e690556a5dc6c598db44eddc855.s3tc.ctex
+Completed load for: 'res://assets/environment/kit/textures/lod1/T_Kit_PaintDark_BaseColor_LOD1.png' remapped 'res://assets/environment/kit/textures/lod1/T_Kit_PaintDark_BaseColor_LOD1.png' at thread -1
+Completed load for: 'res://assets/environment/kit/EN_Kit_CableRun_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_CableRun_LOD1.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_CeilingTile_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_CeilingTile_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_CeilingTile_LOD0.glb-709da18862bf1204787f02777e6f1423.scn remapped: res://.godot/imported/EN_Kit_CeilingTile_LOD0.glb-709da18862bf1204787f02777e6f1423.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_CeilingTile_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_CeilingTile_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_CeilingTile_LOD1.glb-7bb21d076845ee5665df25e44ddeb807.scn remapped: res://.godot/imported/EN_Kit_CeilingTile_LOD1.glb-7bb21d076845ee5665df25e44ddeb807.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_CeilingTile_LOD1.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_DoorFrame_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_DoorFrame_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_DoorFrame_LOD0.glb-e74af5acf58fb3867b6e5c5600447607.scn remapped: res://.godot/imported/EN_Kit_DoorFrame_LOD0.glb-e74af5acf58fb3867b6e5c5600447607.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_DoorFrame_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_DoorFrame_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_DoorFrame_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_DoorFrame_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_DoorFrame_LOD1.glb-ddcb53053eb403647b5eb954cdb66e59.scn remapped: res://.godot/imported/EN_Kit_DoorFrame_LOD1.glb-ddcb53053eb403647b5eb954cdb66e59.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_DoorFrame_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_DoorFrame_LOD1.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_FloorTile_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_FloorTile_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_FloorTile_LOD0.glb-5ee48b66dab39ee3d87922f122065077.scn remapped: res://.godot/imported/EN_Kit_FloorTile_LOD0.glb-5ee48b66dab39ee3d87922f122065077.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_FloorTile_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_FloorTile_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_FloorTile_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_FloorTile_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_FloorTile_LOD1.glb-cd5f13f8a4b3e34e3645b0970897ab00.scn remapped: res://.godot/imported/EN_Kit_FloorTile_LOD1.glb-cd5f13f8a4b3e34e3645b0970897ab00.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_FloorTile_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_FloorTile_LOD1.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_Hatch_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_Hatch_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_Hatch_LOD0.glb-74d3dc52f71c854945482decb231dcda.scn remapped: res://.godot/imported/EN_Kit_Hatch_LOD0.glb-74d3dc52f71c854945482decb231dcda.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_Hatch_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_Hatch_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_Hatch_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_Hatch_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_Hatch_LOD1.glb-c48a4a9f8ef6e1de00b1c8fb3dd669b4.scn remapped: res://.godot/imported/EN_Kit_Hatch_LOD1.glb-c48a4a9f8ef6e1de00b1c8fb3dd669b4.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_Hatch_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_Hatch_LOD1.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_LightStrip_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_LightStrip_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_LightStrip_LOD0.glb-a6c8a8006c99d1bab35ccde22178e07d.scn remapped: res://.godot/imported/EN_Kit_LightStrip_LOD0.glb-a6c8a8006c99d1bab35ccde22178e07d.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_LightStrip_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_LightStrip_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_LightStrip_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_LightStrip_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_LightStrip_LOD1.glb-72775ec60f0e6e765c24f18f7e49d93e.scn remapped: res://.godot/imported/EN_Kit_LightStrip_LOD1.glb-72775ec60f0e6e765c24f18f7e49d93e.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_LightStrip_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_LightStrip_LOD1.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_PipeRun_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_PipeRun_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_PipeRun_LOD0.glb-0dd6add837f72969e1849555d1e56a02.scn remapped: res://.godot/imported/EN_Kit_PipeRun_LOD0.glb-0dd6add837f72969e1849555d1e56a02.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_PipeRun_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_PipeRun_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_PipeRun_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_PipeRun_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_PipeRun_LOD1.glb-c860bdbb99e1c0fc61c46a5e91bc898a.scn remapped: res://.godot/imported/EN_Kit_PipeRun_LOD1.glb-c860bdbb99e1c0fc61c46a5e91bc898a.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_PipeRun_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_PipeRun_LOD1.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_Wall_Corner_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_Wall_Corner_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_Wall_Corner_LOD0.glb-9cd26749f4a6a076afa29aa55b5a73ca.scn remapped: res://.godot/imported/EN_Kit_Wall_Corner_LOD0.glb-9cd26749f4a6a076afa29aa55b5a73ca.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_Wall_Corner_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_Wall_Corner_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_Wall_Corner_LOD1.glb-8760fd9aef8fbd40416316aa3622ddc6.scn remapped: res://.godot/imported/EN_Kit_Wall_Corner_LOD1.glb-8760fd9aef8fbd40416316aa3622ddc6.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_Wall_Corner_LOD1.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_Wall_EquipBay_LOD0.glb-06feb611ed99b09c28ef26c290a1ff64.scn remapped: res://.godot/imported/EN_Kit_Wall_EquipBay_LOD0.glb-06feb611ed99b09c28ef26c290a1ff64.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_Wall_EquipBay_LOD1.glb-ef23118b9315df727877a27babee43f0.scn remapped: res://.godot/imported/EN_Kit_Wall_EquipBay_LOD1.glb-ef23118b9315df727877a27babee43f0.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_Wall_EquipBay_LOD1.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_Wall_Straight_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_Wall_Straight_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_Wall_Straight_LOD0.glb-84928434d7ee6771b830782a67c1aa9f.scn remapped: res://.godot/imported/EN_Kit_Wall_Straight_LOD0.glb-84928434d7ee6771b830782a67c1aa9f.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_Wall_Straight_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_Wall_Straight_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_Wall_Straight_LOD1.glb-2399f55dd995401dd7a8e96f53518829.scn remapped: res://.godot/imported/EN_Kit_Wall_Straight_LOD1.glb-2399f55dd995401dd7a8e96f53518829.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_Wall_Straight_LOD1.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_Wall_Window_LOD0.glb remapped: res://assets/environment/kit/EN_Kit_Wall_Window_LOD0.glb
+Loading resource: res://.godot/imported/EN_Kit_Wall_Window_LOD0.glb-cd93d73f5016fa8ea8c76b25f38699c9.scn remapped: res://.godot/imported/EN_Kit_Wall_Window_LOD0.glb-cd93d73f5016fa8ea8c76b25f38699c9.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_Wall_Window_LOD0.glb' remapped 'res://assets/environment/kit/EN_Kit_Wall_Window_LOD0.glb' at thread -1
+Loading resource: res://assets/environment/kit/EN_Kit_Wall_Window_LOD1.glb remapped: res://assets/environment/kit/EN_Kit_Wall_Window_LOD1.glb
+Loading resource: res://.godot/imported/EN_Kit_Wall_Window_LOD1.glb-c380566f799bbacdedd3bf84a0350e7a.scn remapped: res://.godot/imported/EN_Kit_Wall_Window_LOD1.glb-c380566f799bbacdedd3bf84a0350e7a.scn
+Completed load for: 'res://assets/environment/kit/EN_Kit_Wall_Window_LOD1.glb' remapped 'res://assets/environment/kit/EN_Kit_Wall_Window_LOD1.glb' at thread -1
+Completed load for: 'res://scenes/campaign/rooms/habitat_kit_preload.tscn' remapped 'res://scenes/campaign/rooms/habitat_kit_preload.tscn' at thread -1
+Completed load for: 'res://scenes/campaign/rooms/commons.tscn' remapped 'res://scenes/campaign/rooms/commons.tscn' at thread -1
+Loading resource: res://assets/environment/kit/materials/M_Kit_PaintWhite.tres remapped: res://assets/environment/kit/materials/M_Kit_PaintWhite.tres
+Completed load for: 'res://assets/environment/kit/materials/M_Kit_PaintWhite.tres' remapped 'res://assets/environment/kit/materials/M_Kit_PaintWhite.tres' at thread -1
+glTF: Total buffers: 1
+glTF: Total buffer views: 7
+glTF: Total accessors: 4
+glTF: Total images: 3
+Total materials: 1
+glTF: Parsing mesh: 0
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Total meshes: 1
+glTF: Creating mesh for: tripo_node_578b1cb3-a045-436e-a5aa-e4e16813cc43
+glTF: Total buffers: 1
+glTF: Total buffer views: 7
+glTF: Total accessors: 4
+glTF: Total images: 3
+Total materials: 1
+glTF: Parsing mesh: 0
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Total meshes: 1
+glTF: Creating mesh for: tripo_node_581dfeee-6b52-443d-9fef-3ad068d8d249
+glTF: Total buffers: 1
+glTF: Total buffer views: 7
+glTF: Total accessors: 4
+glTF: Total images: 3
+Total materials: 1
+glTF: Parsing mesh: 0
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Total meshes: 1
+glTF: Creating mesh for: tripo_node_b505ef2a-6bde-4f6e-94a8-bd796232bb6c
+glTF: Total buffers: 1
+glTF: Total buffer views: 7
+glTF: Total accessors: 4
+glTF: Total images: 3
+Total materials: 1
+glTF: Parsing mesh: 0
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Total meshes: 1
+glTF: Creating mesh for: tripo_node_0f0544bc-75da-428f-83cd-b03ca734eb58
+glTF: Total buffers: 1
+glTF: Total buffer views: 7
+glTF: Total accessors: 4
+glTF: Total images: 3
+Total materials: 1
+glTF: Parsing mesh: 0
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Total meshes: 1
+glTF: Creating mesh for: tripo_node_25ed618a-d6a5-4509-8e49-3f9cf9924373
+glTF: Total buffers: 1
+glTF: Total buffer views: 7739
+glTF: Total accessors: 7731
+glTF: Total images: 8
+Total materials: 6
+glTF: Total skins: 1
+glTF: Parsing mesh: 0
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 1
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 2
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 3
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 4
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 5
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Total meshes: 6
+glTF: Total animations '44'.
+glTF: Converting spatial: Armature
+glTF: Creating mesh for: Body
+glTF: Creating mesh for: FaceEyeL
+glTF: Creating mesh for: FaceEyeR
+glTF: Creating mesh for: FaceMouth
+glTF: Creating mesh for: PatchAuroraR
+glTF: Creating mesh for: PatchFlagL
+Loading resource: res://resources/player/ch_kai.tres remapped: res://resources/player/ch_kai.tres
+Completed load for: 'res://resources/player/ch_kai.tres' remapped 'res://resources/player/ch_kai.tres' at thread -1
+ROOT Agree distance=1.220700 m speed=0.093600 m/s (removed)
+ROOT Cheer distance=0.256177 m speed=0.086595 m/s (removed)
+ROOT KneelStand distance=0.373088 m speed=0.144421 m/s (removed)
+ROOT PickUp distance=0.317017 m speed=0.043979 m/s (removed)
+ROOT Push distance=0.978741 m speed=0.206051 m/s (removed)
+ROOT RunToWalk distance=2.918988 m speed=1.273740 m/s (removed)
+ROOT SitDown distance=1.215443 m speed=0.212924 m/s (removed)
+ROOT SprintStop distance=2.927942 m speed=1.463971 m/s (removed)
+ROOT StandUp distance=0.562202 m speed=0.090556 m/s (removed)
+ROOT TurnRunL distance=2.290534 m speed=1.409560 m/s (removed)
+ROOT TurnRunR distance=2.454483 m speed=1.510451 m/s (removed)
+ROOT TurnWalkL distance=1.745754 m speed=0.872877 m/s (removed)
+ROOT TurnWalkR distance=2.028554 m speed=0.918590 m/s (removed)
+ROOT Water distance=0.431812 m speed=0.086362 m/s (removed)
+glTF: Total buffers: 1
+glTF: Total buffer views: 7758
+glTF: Total accessors: 7748
+glTF: Total images: 10
+Total materials: 8
+glTF: Total skins: 1
+glTF: Parsing mesh: 0
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 1
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 2
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 3
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 4
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 5
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 6
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 7
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Total meshes: 8
+glTF: Total animations '44'.
+glTF: Converting spatial: Armature
+glTF: Creating mesh for: Body
+glTF: Creating mesh for: FaceBrowL
+glTF: Creating mesh for: FaceBrowR
+glTF: Creating mesh for: FaceEyeL
+glTF: Creating mesh for: FaceEyeR
+glTF: Creating mesh for: FaceMouth
+glTF: Creating mesh for: PatchAuroraR
+glTF: Creating mesh for: PatchFlagL
+Loading resource: res://resources/player/ch_amara.tres remapped: res://resources/player/ch_amara.tres
+Completed load for: 'res://resources/player/ch_amara.tres' remapped 'res://resources/player/ch_amara.tres' at thread -1
+ROOT Agree distance=1.205120 m speed=0.092405 m/s (removed)
+ROOT Cheer distance=0.252908 m speed=0.085490 m/s (removed)
+ROOT KneelStand distance=0.368326 m speed=0.142578 m/s (removed)
+ROOT PickUp distance=0.267955 m speed=0.027961 m/s (removed)
+ROOT Push distance=0.966248 m speed=0.203421 m/s (removed)
+ROOT RunToWalk distance=2.881732 m speed=1.257483 m/s (removed)
+ROOT SitDown distance=1.199930 m speed=0.210207 m/s (removed)
+ROOT SprintStop distance=2.890571 m speed=1.445286 m/s (removed)
+ROOT StandUp distance=0.416585 m speed=0.087702 m/s (removed)
+ROOT TurnRunL distance=2.261299 m speed=1.391568 m/s (removed)
+ROOT TurnRunR distance=2.423155 m speed=1.491173 m/s (removed)
+ROOT TurnWalkL distance=1.723472 m speed=0.861736 m/s (removed)
+ROOT TurnWalkR distance=1.997036 m speed=0.538527 m/s (removed)
+ROOT Water distance=0.427766 m speed=0.085553 m/s (removed)
+glTF: Total buffers: 1
+glTF: Total buffer views: 8120
+glTF: Total accessors: 8112
+glTF: Total images: 8
+Total materials: 6
+glTF: Total skins: 1
+glTF: Parsing mesh: 0
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 1
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 2
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 3
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 4
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 5
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Total meshes: 6
+glTF: Total animations '44'.
+glTF: Converting spatial: Armature
+glTF: Creating mesh for: Body
+glTF: Creating mesh for: FaceEyeL
+glTF: Creating mesh for: FaceEyeR
+glTF: Creating mesh for: FaceMouth
+glTF: Creating mesh for: PatchAuroraR
+glTF: Creating mesh for: PatchFlagL
+Loading resource: res://resources/player/ch_mei.tres remapped: res://resources/player/ch_mei.tres
+Completed load for: 'res://resources/player/ch_mei.tres' remapped 'res://resources/player/ch_mei.tres' at thread -1
+ROOT Agree distance=1.210064 m speed=0.092784 m/s (removed)
+ROOT Cheer distance=0.253945 m speed=0.085841 m/s (removed)
+ROOT KneelStand distance=0.369837 m speed=0.143163 m/s (removed)
+ROOT PickUp distance=0.269054 m speed=0.028075 m/s (removed)
+ROOT Push distance=0.970212 m speed=0.204255 m/s (removed)
+ROOT RunToWalk distance=2.893553 m speed=1.262641 m/s (removed)
+ROOT SitDown distance=1.204853 m speed=0.211069 m/s (removed)
+ROOT SprintStop distance=2.902430 m speed=1.451215 m/s (removed)
+ROOT StandUp distance=0.418294 m speed=0.088062 m/s (removed)
+ROOT TurnRunL distance=2.270577 m speed=1.397278 m/s (removed)
+ROOT TurnRunR distance=2.433097 m speed=1.497290 m/s (removed)
+ROOT TurnWalkL distance=1.730543 m speed=0.865272 m/s (removed)
+ROOT TurnWalkR distance=2.005229 m speed=0.540736 m/s (removed)
+ROOT Water distance=0.427506 m speed=0.085501 m/s (removed)
+glTF: Total buffers: 1
+glTF: Total buffer views: 7778
+glTF: Total accessors: 7768
+glTF: Total images: 10
+Total materials: 8
+glTF: Total skins: 1
+glTF: Parsing mesh: 0
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 1
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 2
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 3
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 4
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 5
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 6
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Parsing mesh: 7
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Total meshes: 8
+glTF: Total animations '44'.
+glTF: Converting spatial: Armature
+glTF: Creating mesh for: Body
+glTF: Creating mesh for: FaceBrowL
+glTF: Creating mesh for: FaceBrowR
+glTF: Creating mesh for: FaceEyeL
+glTF: Creating mesh for: FaceEyeR
+glTF: Creating mesh for: FaceMouth
+glTF: Creating mesh for: PatchAuroraR
+glTF: Creating mesh for: PatchFlagL
+Loading resource: res://resources/player/ch_rafi.tres remapped: res://resources/player/ch_rafi.tres
+Completed load for: 'res://resources/player/ch_rafi.tres' remapped 'res://resources/player/ch_rafi.tres' at thread -1
+ROOT Agree distance=1.278081 m speed=0.098000 m/s (removed)
+ROOT Cheer distance=0.268219 m speed=0.090666 m/s (removed)
+ROOT KneelStand distance=0.390625 m speed=0.151210 m/s (removed)
+ROOT PickUp distance=0.331919 m speed=0.046047 m/s (removed)
+ROOT Push distance=1.024748 m speed=0.215736 m/s (removed)
+ROOT RunToWalk distance=3.056199 m speed=1.333614 m/s (removed)
+ROOT SitDown distance=1.272577 m speed=0.222933 m/s (removed)
+ROOT SprintStop distance=3.065574 m speed=1.532787 m/s (removed)
+ROOT StandUp distance=0.588629 m speed=0.094813 m/s (removed)
+ROOT TurnRunL distance=2.398204 m speed=1.475818 m/s (removed)
+ROOT TurnRunR distance=2.569859 m speed=1.581452 m/s (removed)
+ROOT TurnWalkL distance=1.827816 m speed=0.913908 m/s (removed)
+ROOT TurnWalkR distance=2.123908 m speed=0.961770 m/s (removed)
+ROOT Water distance=0.454003 m speed=0.090801 m/s (removed)
+Loading resource: res://assets/ui/kit/icons/goal.svg remapped: res://assets/ui/kit/icons/goal.svg
+Loading resource: res://.godot/imported/goal.svg-1ed5a4c8a1680225b1a4a993e6b4f608.ctex remapped: res://.godot/imported/goal.svg-1ed5a4c8a1680225b1a4a993e6b4f608.ctex
+Completed load for: 'res://assets/ui/kit/icons/goal.svg' remapped 'res://assets/ui/kit/icons/goal.svg' at thread -1
+Loading resource: res://scenes/campaign/rooms/commons.tscn remapped: res://scenes/campaign/rooms/commons.tscn
+Loading resource: res://scenes/campaign/rooms/habitat_kit_preload.tscn remapped: res://scenes/campaign/rooms/habitat_kit_preload.tscn
+Completed load for: 'res://scenes/campaign/rooms/habitat_kit_preload.tscn' remapped 'res://scenes/campaign/rooms/habitat_kit_preload.tscn' at thread -1
+Completed load for: 'res://scenes/campaign/rooms/commons.tscn' remapped 'res://scenes/campaign/rooms/commons.tscn' at thread -1
+glTF: Total buffers: 1
+glTF: Total buffer views: 7
+glTF: Total accessors: 4
+glTF: Total images: 3
+Total materials: 1
+glTF: Parsing mesh: 0
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+WARNING: glTF import: Buffer view byte stride should be declared for vertex attributes. Assuming packed data and reading anyway.
+glTF: Total meshes: 1
+glTF: Creating mesh for: PR_DrawerLidNote
+glTF: Converting spatial: Text_Note
+Loading resource: res://assets/audio/sfx/SFX_FAN_NORMAL.ogg remapped: res://assets/audio/sfx/SFX_FAN_NORMAL.ogg
+Loading resource: res://assets/audio/voice/Mei/VO_EX-CH01-S03-L01.ogg remapped: res://assets/audio/voice/Mei/VO_EX-CH01-S03-L01.ogg
+Loading resource: res://.godot/imported/SFX_FAN_NORMAL.ogg-bb9122edbebc6e1284840ebe4070e22a.oggvorbisstr remapped: res://.godot/imported/SFX_FAN_NORMAL.ogg-bb9122edbebc6e1284840ebe4070e22a.oggvorbisstr
+Loading resource: res://.godot/imported/VO_EX-CH01-S03-L01.ogg-68517825dbb3f506619348ff8ee84e8c.oggvorbisstr remapped: res://.godot/imported/VO_EX-CH01-S03-L01.ogg-68517825dbb3f506619348ff8ee84e8c.oggvorbisstr
+Completed load for: 'res://assets/audio/sfx/SFX_FAN_NORMAL.ogg' remapped 'res://assets/audio/sfx/SFX_FAN_NORMAL.ogg' at thread 1
+Completed load for: 'res://assets/audio/voice/Mei/VO_EX-CH01-S03-L01.ogg' remapped 'res://assets/audio/voice/Mei/VO_EX-CH01-S03-L01.ogg' at thread 2
+Loading resource: res://assets/audio/sfx/SFX_UI_CONFIRM.ogg remapped: res://assets/audio/sfx/SFX_UI_CONFIRM.ogg
+Loading resource: res://.godot/imported/SFX_UI_CONFIRM.ogg-5634b6524ffa6d5a29fa4bf67a6fd2d1.oggvorbisstr remapped: res://.godot/imported/SFX_UI_CONFIRM.ogg-5634b6524ffa6d5a29fa4bf67a6fd2d1.oggvorbisstr
+Completed load for: 'res://assets/audio/sfx/SFX_UI_CONFIRM.ogg' remapped 'res://assets/audio/sfx/SFX_UI_CONFIRM.ogg' at thread 4
+Loading resource: res://assets/audio/sfx/SFX_UI_SOFT_ERROR.ogg remapped: res://assets/audio/sfx/SFX_UI_SOFT_ERROR.ogg
+Loading resource: res://.godot/imported/SFX_UI_SOFT_ERROR.ogg-bb674412351f9dc719bda2ebf24c862b.oggvorbisstr remapped: res://.godot/imported/SFX_UI_SOFT_ERROR.ogg-bb674412351f9dc719bda2ebf24c862b.oggvorbisstr
+Completed load for: 'res://assets/audio/sfx/SFX_UI_SOFT_ERROR.ogg' remapped 'res://assets/audio/sfx/SFX_UI_SOFT_ERROR.ogg' at thread 5
+P01 INPUTS RESULT: PASS (319 checks, 0 failures)
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+XR: Clearing primary interface
+XR: Removed interface "Native mobile"
+XR: Removed interface "OpenXR"
+Leaked instance: RefCounted:9223373302074968327 - Reference count: 0
+Leaked instance: RefCounted:9223373298199433175 - Reference count: 0
+Leaked instance: RefCounted:9223373294827212983 - Reference count: 0
+Leaked instance: RefCounted:9223373294961430714 - Reference count: 0
+Hint: Leaked instances typically happen when nodes are removed from the scene tree (with `remove_child()`) but not freed (with `free()` or `queue_free()`).

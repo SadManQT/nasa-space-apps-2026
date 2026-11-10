@@ -112,3 +112,22 @@ The extra P01 checks come from the team's newly integrated calibration job.
 These are scoped smoke checks, not a fresh integrated full run of the expanding
 team source. The earlier full86/89 and its separate successful follow-ups remain
 reported at their original revisions. No task is marked Done.
+
+
+## Final audit integration checkpoint
+
+Audit commitb33d80d was preserved in merge9375330. Mandatory scoped checks at that
+merge pass again: **P01 inputs319/0, loading29/0, performance582/0**, all process
+exits0. Exact source hashes and complete logs are in `merged_b33d80d/`.
+
+The calibration fixture now gives the mixing thread100ms after freeing its world,
+just as the other short fixtures do. This removes the preceding Ogg-resource
+still-in-use diagnostics; both attempts are preserved. Its verbose final run
+still reports **four native RefCounted ObjectDB instances with reference count0**.
+Their cause is not assigned, and clean production teardown is not certified.
+This is separate from the original Intel Arc post-PASS timeout. Loading and
+performance test teardown remains free of the earlier audio leak diagnostics.
+
+Final acceptance remains open for all four IDs. No ready implementation is
+claimed outside Atik's list, no teammate's completed status is overwritten, and
+file reservations are released after the saved source/evidence is pushed.
