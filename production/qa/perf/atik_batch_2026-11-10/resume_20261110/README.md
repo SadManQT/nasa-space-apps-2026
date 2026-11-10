@@ -55,3 +55,29 @@ runner/red.txt reproduces the old live-engine hang in two injected scenarios.
 runner/green.txt records all six unittest methods (13 scenarios), including
 fatal errors after PASS, ignored TERM, and the text-only guard isolation.
 A frozen-source full rerun will be recorded separately under full_bounded/.
+
+## Additional original-host route check
+
+The gh CLI is not installed. A noninteractive read-only request using the
+repository credential to the GitHub self-hosted-runners API returned HTTP403:
+“You must have repository read permissions or have the repository runners
+fine-grained permission.” This does not prove no self-hosted runner exists;
+it means this credential cannot enumerate or establish access through that route.
+No workflow was launched and no hosted runner was substituted for either host.
+The user’s instruction to proceed autonomously supplied no host connection data.
+
+## Frozen bounded full rerun (running)
+
+Source a2362955f204601d04d09e3e4e4073ee2e452a61, game tree
+e149235dd5277ea93f7dc4b3058b878d52ab3b8c; all117 suites. This uses committed
+settings and existing cloned caches. SUITE_TIMEOUT=300 and
+PLAYER_TEXT_TIMEOUT=1500; loading assertions remain50ms. The5400s overall guard
+still treats interruption as incomplete, never green. Source hashes, exact
+manifest, raw logs and final result will be retained under full_bounded/.
+The same fatal UI script error was stopped with process exit143, recorded as
+failed, and the runner continued. Project settings still match committed source.
+
+[M1-53 reviewed owner request](M1-53_REVIEW_REQUEST.md),
+[M1-92 matching tools](M1-92_MATCHING_TOOLS.md), and
+[M1-116 original-host evidence](M1-116_ORIGINAL_HOST.md) preserve each separate
+resume condition. None of the four tasks is marked Done.
