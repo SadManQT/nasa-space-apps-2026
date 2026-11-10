@@ -1,0 +1,629 @@
+{
+ "head": "54be6a6f",
+ "results": [
+  {
+   "n": 42,
+   "suite": "tools/test_chapter8_puzzles.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 24.1,
+   "line": "CHAPTER 8 PUZZLES RESULT: PASS (110 checks, 0 failures)"
+  },
+  {
+   "n": 43,
+   "suite": "tools/test_chapter8_rooms.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 230.8,
+   "line": "CHAPTER 8 ROOMS RESULT: PASS (1328 checks, 0 failures)"
+  },
+  {
+   "n": 44,
+   "suite": "tools/test_chapter_select.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 3.0,
+   "line": "CHAPTER SELECT RESULT: PASS (119 checks, 0 failures)"
+  },
+  {
+   "n": 45,
+   "suite": "tools/test_comms.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 4.0,
+   "line": "COMMS RESULT: PASS (45 checks, 0 failures)"
+  },
+  {
+   "n": 46,
+   "suite": "tools/test_cutscene_choice_card.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 11.0,
+   "line": "CUTSCENE CHOICE CARD RESULT: PASS (47 checks, 0 failures)"
+  },
+  {
+   "n": 47,
+   "suite": "tools/test_director_message_metadata.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 2.0,
+   "line": "DIRECTOR MESSAGE METADATA RESULT: PASS (76 checks, 0 failures)"
+  },
+  {
+   "n": 48,
+   "suite": "tools/test_earth_screen.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 3.0,
+   "line": "EARTH SCREEN RESULT: PASS (49 checks, 0 failures)"
+  },
+  {
+   "n": 49,
+   "suite": "tools/test_eclipse_props.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "ECLIPSE PROPS RESULT: PASS (567 checks, 0 failures)"
+  },
+  {
+   "n": 50,
+   "suite": "tools/test_eclipse_rim_gate.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "ECLIPSE RIM GATE RESULT: PASS (65 checks, 0 failures)"
+  },
+  {
+   "n": 51,
+   "suite": "tools/test_en_airlock.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "EN_AIRLOCK RESULT: PASS (145 checks, 0 failures)"
+  },
+  {
+   "n": 52,
+   "suite": "tools/test_eva.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 6.0,
+   "line": "EVA RESULT: PASS (54 checks, 0 failures)"
+  },
+  {
+   "n": 53,
+   "suite": "tools/test_explainers.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 5.0,
+   "line": "EXPLAINERS RESULT: PASS (321 checks, 0 failures)"
+  },
+  {
+   "n": 54,
+   "suite": "tools/test_extended_campaign_route.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 24.1,
+   "line": "EXTENDED CAMPAIGN ROUTE RESULT: PASS (639 checks, 0 failures)"
+  },
+  {
+   "n": 55,
+   "suite": "tools/test_exterior_terrain.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 89.4,
+   "line": "EXTERIOR TERRAIN RESULT: PASS (1109 checks, 0 failures)"
+  },
+  {
+   "n": 56,
+   "suite": "tools/test_face_atlas.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "PASS FaceAtlas (17 checks, 16 cue frames checked)"
+  },
+  {
+   "n": 57,
+   "suite": "tools/test_face_expression.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 7.0,
+   "line": "PASS FaceExpression / HeadAccent (68 checks, including runtime Kai GLTF integration)"
+  },
+  {
+   "n": 58,
+   "suite": "tools/test_first_five_minutes.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 2.0,
+   "line": "FIRST FIVE MINUTES RESULT: PASS (59 checks, 0 failures)"
+  },
+  {
+   "n": 59,
+   "suite": "tools/test_garden_collision.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 7.0,
+   "line": "GARDEN COLLISION RESULT: PASS (19 checks, 0 failures)"
+  },
+  {
+   "n": 60,
+   "suite": "tools/test_garden_movement.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 46.2,
+   "line": "GARDEN MOVEMENT RESULT: PASS (54 checks, 0 failures)"
+  },
+  {
+   "n": 61,
+   "suite": "tools/test_habitat_kit.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "HABITAT KIT RESULT: PASS (225 checks, 0 failures)"
+  },
+  {
+   "n": 62,
+   "suite": "tools/test_habitat_rooms.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 31.1,
+   "line": "HABITAT ROOMS RESULT: PASS (360 checks, 0 failures)"
+  },
+  {
+   "n": 63,
+   "suite": "tools/test_hair_springs.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "PASS HairSprings (5 checks, 3 chains)"
+  },
+  {
+   "n": 64,
+   "suite": "tools/test_hazards.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "HAZARDS RESULT: PASS (24 checks, 0 failures)"
+  },
+  {
+   "n": 65,
+   "suite": "tools/test_hint_player.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 5.0,
+   "line": "HINT PLAYER RESULT: PASS (124 checks, 0 failures)"
+  },
+  {
+   "n": 66,
+   "suite": "tools/test_hud_world_lifetime.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 4.0,
+   "line": "HUD WORLD LIFETIME RESULT: PASS (13 checks, 0 failures)"
+  },
+  {
+   "n": 67,
+   "suite": "tools/test_journal_tabs.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 5.0,
+   "line": "JOURNAL TABS RESULT: PASS (322 checks, 0 failures)"
+  },
+  {
+   "n": 68,
+   "suite": "tools/test_later_numeric.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 9.0,
+   "line": "LATER NUMERIC RESULT: PASS (388 checks, 0 failures)"
+  },
+  {
+   "n": 69,
+   "suite": "tools/test_lip_sync.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "PASS LipSync coarticulation, closures, loudness, release and errors"
+  },
+  {
+   "n": 70,
+   "suite": "tools/test_loading.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 7.0,
+   "line": "LOADING WATCHDOG RESULT: PASS (29 checks, 0 failures)"
+  },
+  {
+   "n": 71,
+   "suite": "tools/test_lunar_kit.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "LUNAR KIT RESULT: PASS (89 checks, 0 failures)"
+  },
+  {
+   "n": 72,
+   "suite": "tools/test_m155_mission_table.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 2.0,
+   "line": "M155 MISSION TABLE RESULT: PASS (109 checks, 0 failures)"
+  },
+  {
+   "n": 73,
+   "suite": "tools/test_main_menu_contrast.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 2.0,
+   "line": "MAIN MENU CONTRAST RESULT: PASS (170 checks, 0 failures)"
+  },
+  {
+   "n": 74,
+   "suite": "tools/test_mission_table_lifetime.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "MISSION TABLE LIFETIME RESULT: PASS (11 checks, 0 failures)"
+  },
+  {
+   "n": 75,
+   "suite": "tools/test_mission_trainer.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 3.0,
+   "line": "MISSION TRAINER RESULT: PASS (951 checks, 0 failures)"
+  },
+  {
+   "n": 76,
+   "suite": "tools/test_moon_region.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 9.0,
+   "line": "MOON REGION RESULT: PASS (511 checks, 0 failures)"
+  },
+  {
+   "n": 77,
+   "suite": "tools/test_moon_trainer.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 142.6,
+   "line": "MOON TRAINER RESULT: PASS (136 checks, 0 failures)"
+  },
+  {
+   "n": 78,
+   "suite": "tools/test_narrative_props.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 2.0,
+   "line": "NARRATIVE PROPS RESULT: PASS (401 checks, 0 failures)"
+  },
+  {
+   "n": 79,
+   "suite": "tools/test_network.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "NETWORK RESULT: PASS (35 checks, 0 failures)"
+  },
+  {
+   "n": 80,
+   "suite": "tools/test_outpost_status.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 5.0,
+   "line": "OUTPOST STATUS RESULT: PASS (63 checks, 0 failures)"
+  },
+  {
+   "n": 81,
+   "suite": "tools/test_p01_inputs.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 4.0,
+   "line": "P01 INPUTS RESULT: PASS (319 checks, 0 failures)"
+  },
+  {
+   "n": 82,
+   "suite": "tools/test_p01_labels.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "P01 LABELS RESULT: PASS (104 checks, 0 failures)"
+  },
+  {
+   "n": 83,
+   "suite": "tools/test_p01_nearby.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 5.0,
+   "line": "P01 NEARBY RESULT: PASS (30 checks, 0 failures)"
+  },
+  {
+   "n": 84,
+   "suite": "tools/test_p01_panel.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 7.0,
+   "line": "P01 PANEL RESULT: PASS (140 checks, 0 failures)"
+  },
+  {
+   "n": 85,
+   "suite": "tools/test_p02_mission_table.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 6.0,
+   "line": "P02 MISSION TABLE RESULT: PASS (78 checks, 0 failures)"
+  },
+  {
+   "n": 86,
+   "suite": "tools/test_p03_p04_content.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "P03 P04 CONTENT RESULT: PASS (303 checks, 0 failures)"
+  },
+  {
+   "n": 87,
+   "suite": "tools/test_p09_p10_panels.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "P09 P10 PANELS RESULT: PASS (330 checks, 0 failures)"
+  },
+  {
+   "n": 88,
+   "suite": "tools/test_p13_p14_panels.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "P13 P14 PANELS RESULT: PASS (406 checks, 0 failures)"
+  },
+  {
+   "n": 89,
+   "suite": "tools/test_payload.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 5.0,
+   "line": "PAYLOAD RESULT: PASS (162 checks, 0 failures)"
+  },
+  {
+   "n": 90,
+   "suite": "tools/test_performance_runtime.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 21.1,
+   "line": "PERFORMANCE RUNTIME RESULT: PASS (548 checks, 0 failures)"
+  },
+  {
+   "n": 91,
+   "suite": "tools/test_plant_seedlings.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "PLANT SEEDLINGS RESULT: PASS (86 checks, 0 failures)"
+  },
+  {
+   "n": 92,
+   "suite": "tools/test_player_controller.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 6.0,
+   "line": "PLAYER RESULT: PASS (105 checks, 0 failures)"
+  },
+  {
+   "n": 93,
+   "suite": "tools/test_player_text.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 469.3,
+   "line": "PLAYER TEXT RESULT: PASS (13092 checks, 0 failures)"
+  },
+  {
+   "n": 94,
+   "suite": "tools/test_probe_calibration_job.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "PROBE CALIBRATION JOB RESULT: PASS (83 checks, 0 failures)"
+  },
+  {
+   "n": 95,
+   "suite": "tools/test_progression.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "PROGRESSION RESULT: PASS (72 checks, 0 failures)"
+  },
+  {
+   "n": 96,
+   "suite": "tools/test_review_scene.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 4.0,
+   "line": "REVIEW RESULT: PASS (447 checks, 0 failures)"
+  },
+  {
+   "n": 97,
+   "suite": "tools/test_room_presentation.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 5.0,
+   "line": "ROOM PRESENTATION RESULT: PASS (155 checks, 0 failures)"
+  },
+  {
+   "n": 98,
+   "suite": "tools/test_route_messages.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "ROUTE MESSAGES RESULT: PASS (31 checks, 0 failures)"
+  },
+  {
+   "n": 99,
+   "suite": "tools/test_rover.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "ROVER RESULT: PASS (27 checks, 0 failures)"
+  },
+  {
+   "n": 100,
+   "suite": "tools/test_save_service_recovery.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 2.0,
+   "line": "SAVE RECOVERY RESULT: 92/92 checks, 0 failures"
+  },
+  {
+   "n": 101,
+   "suite": "tools/test_science_data.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 4.0,
+   "line": "SCIENCE DATA RESULT: PASS (206 checks, 0 failures)"
+  },
+  {
+   "n": 102,
+   "suite": "tools/test_science_watch.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 5.0,
+   "line": "SCIENCE WATCH RESULT: PASS (65 checks, 0 failures)"
+  },
+  {
+   "n": 103,
+   "suite": "tools/test_session_crew.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "RESULT test_session_crew: 135 checks, 0 failures"
+  },
+  {
+   "n": 104,
+   "suite": "tools/test_sound_captions.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 9.0,
+   "line": "SOUND CAPTIONS RESULT: PASS (82 checks, 0 failures)"
+  },
+  {
+   "n": 105,
+   "suite": "tools/test_story_echoes.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "STORY ECHOES RESULT: PASS (780 checks, 0 failures)"
+  },
+  {
+   "n": 106,
+   "suite": "tools/test_story_log.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 2.0,
+   "line": "STORY LOG RESULT: PASS (64 checks, 0 failures)"
+  },
+  {
+   "n": 107,
+   "suite": "tools/test_tara_lifecycle.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "TARA LIFECYCLE RESULT: PASS (75 checks, 0 failures)"
+  },
+  {
+   "n": 108,
+   "suite": "tools/test_terrain.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 4.0,
+   "line": "TERRAIN STREAM RESULT: PASS (104 checks, 0 failures)"
+  },
+  {
+   "n": 109,
+   "suite": "tools/test_terrain_lola.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 5.0,
+   "line": "TERRAIN LOLA RESULT: PASS (1404 checks, 0 failures)"
+  },
+  {
+   "n": 110,
+   "suite": "tools/test_terrain_session.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 3.0,
+   "line": "TERRAIN SESSION RESULT: PASS (78 checks, 0 failures)"
+  },
+  {
+   "n": 111,
+   "suite": "tools/test_terrain_work_lights.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 5.0,
+   "line": "TERRAIN WORK LIGHTS RESULT: PASS (1045 checks, 0 failures)"
+  },
+  {
+   "n": 112,
+   "suite": "tools/test_toon_materials.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "PASS ToonMaterials (12 checks, 2 swapped materials)"
+  },
+  {
+   "n": 113,
+   "suite": "tools/test_ui_families.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 4.0,
+   "line": "UI FAMILIES RESULT: PASS (84 checks, 0 failures)"
+  },
+  {
+   "n": 114,
+   "suite": "tools/test_ui_kit.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "UI KIT RESULT: PASS (522 checks, 0 failures)"
+  },
+  {
+   "n": 115,
+   "suite": "tools/test_upgrade_pairs_ch4_ch6.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "UPGRADE PAIRS CH4 CH6 RESULT: PASS (34 checks, 0 failures)"
+  },
+  {
+   "n": 116,
+   "suite": "tools/test_upgrade_profiles.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 776.7,
+   "line": "UPGRADE PROFILES RESULT: PASS (130308 checks, 0 failures)"
+  },
+  {
+   "n": 117,
+   "suite": "tools/test_worker_a_systems.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "WORKER A SYSTEMS RESULT: PASS (108 checks, 0 failures)"
+  },
+  {
+   "n": 118,
+   "suite": "tools/test_worker_b_world_missions.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 2.0,
+   "line": "WORKER B WORLD/MISSIONS RESULT: PASS (429 checks, 0 failures)"
+  },
+  {
+   "n": 119,
+   "suite": "tools/test_worker_c_content.gd",
+   "ok": true,
+   "rc": 0,
+   "sec": 1.0,
+   "line": "WORKER C CONTENT RESULT: PASS (572 checks, 0 failures)"
+  }
+ ]
+}
