@@ -309,12 +309,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 </div>
 <div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">0 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">3 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:0%"></i></div>
 <details open><summary>Working now (1)</summary><ul>
-<li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/codex on 2026-11-10</div></li>
+<li><a class="id" href="#M1-116">M1-116</a> Investigate post-result Forward+ exit timeout on Intel Arc laptop <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Atik/codex on 2026-11-10</div></li>
 </ul></details>
 <details open><summary>Blocked (3)</summary><ul>
 <li><a class="id" href="#M1-53">M1-53</a> Rule out a threaded-loading deadlock at full-cast entry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Explicit Sadman reviewed-change request published in5471e04 at resume_20261110/M1-53_REVIEW_REQUEST.md: exact raw blob, preserved8-clip batches, coalesced request/publication owne…</div></li>
+<li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Runner repair a236295 verified six unittest methods /13 injected scenarios; first frozen full interrupted with raw logs preserved in66dbc1b. New117-suite frozen full running at a2…</div></li>
 <li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">Resumed matching-tool check published in8f58114: exact arm64UUID5EF81F68-A5CB-3B0C-82FF-E288702E954D, no supplied matching dSYM/indexed result or xctrace; atos remains unnamed. Of…</div></li>
-<li><a class="id" href="#M1-116">M1-116</a> Investigate post-result Forward+ exit timeout on Intel Arc laptop <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Collector and process-level tests saved inbd51096; final evidence published through33e1593. Recorded M4 Forward+/Metal real input44/0 with5PNG+trace, normal exit0 in9.225s. Origin…</div></li>
 </ul></details>
 <details><summary>Deferred: video, submission and manual QA (5)</summary><ul>
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -6559,7 +6559,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -6595,14 +6595,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/tools/run_tests.sh",
     "game/tools/test_runner.py"
    ],
-   "blocker": "Resumed source569e723 saves host-access recheck and starts all117 mandatory suites at frozen committed-source daa0141 in isolated APFS-cloned checkout. Full collection is still running under resume_20261110/full; no final result yet. Original Ryzen7/RTX4060 host is unavailable: no configured SSH/remote connector or supplied collection route; hosted CI is not original hardware. Need original-host two-process evidence plus a demonstrated cause/fix and fresh integrated full acceptance; Mac retries are not proof. Reclaim this exact task to publish the collection when it completes. Existing fixes/logs preserved.",
-   "edit_files": [
-    "game/tools/run_tests.sh",
-    "game/tools/test_runner.py",
-    "production/qa/perf/atik_batch_2026-11-10/resume_20261110/README.md",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
-   ],
+   "blocker": "Runner repair a236295 verified six unittest methods /13 injected scenarios; first frozen full interrupted with raw logs preserved in66dbc1b. New117-suite frozen full running at a236295, default300s and text-only1500s guard, unchanged50ms assertions. Original Ryzen7/RTX4060 collection cannot be obtained: no configured original-host connection or supplied route. Resume after full result and original-host two-process evidence; no causal timing fix or task completion claimed.",
    "batch_phase": "implementation"
   },
   {
@@ -8337,7 +8330,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Investigate post-result Forward+ exit timeout on Intel Arc laptop",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -8370,6 +8363,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/AI_PROMPT_LOG.md"
    ],
    "blocker": "Collector and process-level tests saved inbd51096; final evidence published through33e1593. Recorded M4 Forward+/Metal real input44/0 with5PNG+trace, normal exit0 in9.225s. Original Windows11 IntelArc130V post-PASS timeout not yet reproduced/retested on that host; run exact original-host Vulkan collector command in M1-116.md and retain process/thread diagnostics before choosing a fix. Latest headless P01 inputs319/0 exits0 but retains4 native RefCounted ObjectDB warnings with refcount0; cause unassigned, not an Arc timeout explanation. No clean production teardown or original-host repair claimed.",
+   "edit_files": [
+    "production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-116_ORIGINAL_HOST.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
+   ],
    "batch_phase": "implementation"
   },
   {

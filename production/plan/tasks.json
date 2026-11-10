@@ -5906,7 +5906,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -5942,14 +5942,7 @@
     "game/tools/run_tests.sh",
     "game/tools/test_runner.py"
    ],
-   "blocker": "Resumed source569e723 saves host-access recheck and starts all117 mandatory suites at frozen committed-source daa0141 in isolated APFS-cloned checkout. Full collection is still running under resume_20261110/full; no final result yet. Original Ryzen7/RTX4060 host is unavailable: no configured SSH/remote connector or supplied collection route; hosted CI is not original hardware. Need original-host two-process evidence plus a demonstrated cause/fix and fresh integrated full acceptance; Mac retries are not proof. Reclaim this exact task to publish the collection when it completes. Existing fixes/logs preserved.",
-   "edit_files": [
-    "game/tools/run_tests.sh",
-    "game/tools/test_runner.py",
-    "production/qa/perf/atik_batch_2026-11-10/resume_20261110/README.md",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
-   ]
+   "blocker": "Runner repair a236295 verified six unittest methods /13 injected scenarios; first frozen full interrupted with raw logs preserved in66dbc1b. New117-suite frozen full running at a236295, default300s and text-only1500s guard, unchanged50ms assertions. Original Ryzen7/RTX4060 collection cannot be obtained: no configured original-host connection or supplied route. Resume after full result and original-host two-process evidence; no causal timing fix or task completion claimed."
   },
   {
    "id": "M1-69",
@@ -7611,7 +7604,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Investigate post-result Forward+ exit timeout on Intel Arc laptop",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -7643,7 +7636,12 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Collector and process-level tests saved inbd51096; final evidence published through33e1593. Recorded M4 Forward+/Metal real input44/0 with5PNG+trace, normal exit0 in9.225s. Original Windows11 IntelArc130V post-PASS timeout not yet reproduced/retested on that host; run exact original-host Vulkan collector command in M1-116.md and retain process/thread diagnostics before choosing a fix. Latest headless P01 inputs319/0 exits0 but retains4 native RefCounted ObjectDB warnings with refcount0; cause unassigned, not an Arc timeout explanation. No clean production teardown or original-host repair claimed."
+   "blocker": "Collector and process-level tests saved inbd51096; final evidence published through33e1593. Recorded M4 Forward+/Metal real input44/0 with5PNG+trace, normal exit0 in9.225s. Original Windows11 IntelArc130V post-PASS timeout not yet reproduced/retested on that host; run exact original-host Vulkan collector command in M1-116.md and retain process/thread diagnostics before choosing a fix. Latest headless P01 inputs319/0 exits0 but retains4 native RefCounted ObjectDB warnings with refcount0; cause unassigned, not an Arc timeout explanation. No clean production teardown or original-host repair claimed.",
+   "edit_files": [
+    "production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-116_ORIGINAL_HOST.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
+   ]
   },
   {
    "id": "M1-117",
