@@ -6,6 +6,7 @@ const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const RouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
 const PuzzleData = preload("res://scripts/puzzles/puzzle_data.gd")
+const Witness3 = preload("res://tools/support/chapter3_witness.gd")
 const Witness4 = preload("res://tools/support/chapter4_witness.gd")
 const Witness6 = preload("res://tools/support/chapter6_witness.gd")
 const Witness = preload("res://tools/support/chapter8_witness.gd")
@@ -61,6 +62,7 @@ func _run() -> void:
 			# the decisions recorded in the puzzle data files.
 			if payload.is_empty():
 				payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
+			payload = Witness3.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 			payload = Witness4.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 			payload = Witness6.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 			payload = Witness.payload(String(target.get("target_id", "")), director.snapshot(), payload)

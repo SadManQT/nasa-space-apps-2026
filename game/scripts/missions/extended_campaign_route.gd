@@ -7,6 +7,8 @@ const WorldRouteScript = preload("res://scripts/world/world_route.gd")
 const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
 const LedgerScript = preload("res://scripts/puzzles/extended_puzzle_ledger.gd")
 const ResultScript = preload("res://scripts/core/command_result.gd")
+const P05Script = preload("res://scripts/puzzles/p05_falling_pressure.gd")
+const P06Script = preload("res://scripts/puzzles/p06_harvest_future.gd")
 const Chapter4Script = preload("res://scripts/puzzles/chapter4_puzzles.gd")
 const Chapter6Script = preload("res://scripts/puzzles/chapter6_puzzles.gd")
 const Chapter8Script = preload("res://scripts/puzzles/chapter8_puzzles.gd")
@@ -14,6 +16,8 @@ const ContentScript = preload("res://scripts/content/content_loader.gd")
 const ScienceScript = preload("res://scripts/science/science_data.gd")
 
 var _ledger: RefCounted
+var _p05: RefCounted
+var _p06: RefCounted
 var _chapter4: RefCounted
 var _chapter6: RefCounted
 var _chapter8: RefCounted
@@ -30,6 +34,8 @@ func _init(director: RefCounted = null, skip_initial_scene: bool = false) -> voi
 	_world = WorldRouteScript.new(_director)
 	_create_dispatcher(DispatcherScript)
 	_ledger = LedgerScript.new()
+	_p05 = P05Script.new()
+	_p06 = P06Script.new()
 	_chapter4 = Chapter4Script.new()
 	_chapter6 = Chapter6Script.new()
 	_chapter8 = Chapter8Script.new()
@@ -48,6 +54,23 @@ func world() -> RefCounted:
 
 func dispatcher() -> RefCounted:
 	return _dispatcher
+
+## The Chapter 3 puzzle models (P-05 falling pressure, P-06 harvest the future):
+## the player's selections, found clues, hints and poll signatures. Presentation
+## reads them; commits go through perform().
+func p05() -> RefCounted:
+	return _p05
+
+func p06() -> RefCounted:
+	return _p06
+
+func chapter3_view(target_id: String) -> Dictionary:
+	if target_id.begins_with("p05_"):
+		return _chapter_puzzle_view(_p05, P05Script, target_id)
+	return _chapter_puzzle_view(_p06, P06Script, target_id)
+
+func chapter3_preview(target_id: String, payload: Dictionary) -> Dictionary:
+	return chapter8_preview(target_id, payload)
 
 ## The Chapter 4 puzzle model (P-07 and P-08): the player's selections, found
 ## clues, hints and poll signatures. Presentation reads it; commits go through perform().
@@ -436,6 +459,8 @@ func snapshot() -> Dictionary:
 		"scene_flags": _scene_flags.duplicate(true),
 		"dialogue_acks": _dialogue_acks.duplicate(true),
 		"ledger": _ledger.snapshot(),
+		"p05": _p05.snapshot(),
+		"p06": _p06.snapshot(),
 		"chapter4": _chapter4.snapshot(),
 		"chapter6": _chapter6.snapshot(),
 		"chapter8": _chapter8.snapshot(),
@@ -454,6 +479,8 @@ func restore(data: Dictionary) -> Dictionary:
 			return nested
 	_world = staged.world
 	_ledger = staged.ledger
+	_p05 = staged.p05
+	_p06 = staged.p06
 	_chapter4 = staged.chapter4
 	_chapter6 = staged.chapter6
 	_chapter8 = staged.chapter8
@@ -474,10 +501,16 @@ func _stage(data: Dictionary) -> Dictionary:
 		return {"accepted": false, "reason": "Extended route snapshot requires its puzzle ledger."}
 	var world: RefCounted = WorldRouteScript.new(_director)
 	var ledger: RefCounted = LedgerScript.new()
+	var p05: RefCounted = P05Script.new()
+	var p06: RefCounted = P06Script.new()
 	var chapter4: RefCounted = Chapter4Script.new()
 	var chapter6: RefCounted = Chapter6Script.new()
 	var chapter8: RefCounted = Chapter8Script.new()
 	var restores: Array = [world.restore(data.world), ledger.restore(data.ledger)]
+	if data.get("p05", null) is Dictionary:
+		restores.append(p05.restore(data.p05))
+	if data.get("p06", null) is Dictionary:
+		restores.append(p06.restore(data.p06))
 	if data.get("chapter4", null) is Dictionary:
 		restores.append(chapter4.restore(data.chapter4))
 	if data.get("chapter6", null) is Dictionary:
@@ -487,7 +520,7 @@ func _stage(data: Dictionary) -> Dictionary:
 	for restored in restores:
 		if not bool(restored.get("accepted", false)):
 			return restored
-	return {"accepted": true, "world": world, "ledger": ledger, "chapter4": chapter4, "chapter6": chapter6, "chapter8": chapter8}
+	return {"accepted": true, "world": world, "ledger": ledger, "p05": p05, "p06": p06, "chapter4": chapter4, "chapter6": chapter6, "chapter8": chapter8}
 
 func _set_current_scene(index: int, project_clock: bool = true) -> Dictionary:
 	var scene_ids: Array = GateCatalog.scene_ids()
@@ -527,6 +560,10 @@ func _context_flags() -> Dictionary:
 					result[String(flag)] = true
 	for flag in _ledger.flags().keys():
 		result[String(flag)] = _ledger.flags()[flag]
+	for flag in _p05.flags().keys():
+		result[String(flag)] = _p05.flags()[flag]
+	for flag in _p06.flags().keys():
+		result[String(flag)] = _p06.flags()[flag]
 	for flag in _chapter4.flags().keys():
 		result[String(flag)] = _chapter4.flags()[flag]
 	for flag in _chapter6.flags().keys():

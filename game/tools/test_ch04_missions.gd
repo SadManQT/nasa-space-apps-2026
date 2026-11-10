@@ -5,6 +5,8 @@
 ## and rover/network/RPG integration (M3-62, M3-63, M3-64).
 extends SceneTree
 
+const Witness3 = preload("res://tools/support/chapter3_witness.gd")
+const Witness2 = preload("res://tools/support/chapter2_witness.gd")
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const RouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
@@ -172,7 +174,7 @@ func _chapter4_entry_snapshot() -> Dictionary:
 	pollination.start_at("EX-CH02-S01")
 	for scene_id in preload("res://scripts/missions/chapter2_gate_catalog.gd").SCENE_ORDER:
 		for target in pollination.targets_for_current_scene():
-			pollination.perform(target.target_id)
+			pollination.perform(target.target_id, Witness2.payload(String(target.get("puzzle_action", ""))))
 		pollination.advance_scene()
 	var route := RouteScript.new(director)
 	route.start_at("EX-CH03-S01")
@@ -181,6 +183,7 @@ func _chapter4_entry_snapshot() -> Dictionary:
 			break
 		for target in GateCatalog.targets_for_scene(scene_id):
 			var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+			payload = Witness3.payload(String(target.target_id), director.snapshot(), payload)
 			if not bool(route.perform(target.target_id, payload).get("accepted", false)):
 				return {}
 		var moved: Dictionary = route.advance_scene()

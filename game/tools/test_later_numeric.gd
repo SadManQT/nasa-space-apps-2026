@@ -1,4 +1,5 @@
 extends SceneTree
+const Witness3 = preload("res://tools/support/chapter3_witness.gd")
 const Director = preload("res://scripts/core/campaign_director.gd")
 const State = preload("res://scripts/core/campaign_state.gd")
 const Route = preload("res://scripts/missions/extended_campaign_route.gd")
@@ -33,6 +34,7 @@ func _run() -> void:
 				var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
 				if payload.is_empty():
 					payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
+				payload = Witness3.payload(String(target.target_id), director.snapshot(), payload)
 				var result: Dictionary = route.perform(target.target_id, payload)
 				accepted = accepted and result.accepted
 				if not result.accepted:

@@ -8,6 +8,9 @@ const Chapter6 = preload("res://scripts/puzzles/chapter6_puzzles.gd")
 const Chapter8 = preload("res://scripts/puzzles/chapter8_puzzles.gd")
 
 var _receipts := {}
+## Actions already committed elsewhere (the simulation's book) that sequence
+## rules, such as the P-05 inspection phases, must count alongside _receipts.
+var prior_actions: Array = []
 var _p05: RefCounted = P05.new()
 var _p06: RefCounted = P06.new()
 
@@ -147,6 +150,14 @@ func _validate(puzzle_id: String, action: String, payload: Dictionary) -> String
 			if not (payload.get("reading") is int or payload.get("reading") is float) or not is_finite(float(payload.reading)) or float(payload.reading) < 0 or float(payload.reading) >= 1.0: return "P-14 route clearance requires a reading below 1."
 	return ""
 
+## Receipts here plus actions the simulation's book has already committed.
+func _committed_actions() -> Array:
+	var committed: Array = _receipts.keys()
+	for earlier in prior_actions:
+		if not committed.has(earlier):
+			committed.append(earlier)
+	return committed
+
 func _validate_p05_sequence(action: String, payload: Dictionary) -> String:
 	if action.begins_with("p05_inspect_") and String(_p05.step(action).get("scene", "")) == "EX-CH03-S02":
 		var value = payload.get("phase", null)
@@ -159,7 +170,7 @@ func _validate_p05_sequence(action: String, payload: Dictionary) -> String:
 		if phase < 1 or phase > phase_limit:
 			return "Use one of the four investigation phases."
 		var inspected := 0
-		for recorded in _receipts:
+		for recorded in _committed_actions():
 			if String(recorded).begins_with("p05_inspect_") and String(_p05.step(String(recorded)).get("scene", "")) == "EX-CH03-S02":
 				inspected += 1
 		var expected_phase := int(inspected / capacity) + 1
@@ -169,16 +180,16 @@ func _validate_p05_sequence(action: String, payload: Dictionary) -> String:
 			return "The annex branch indicator changes after the phase-two aftershock."
 	if action == "p05_read_main_t10":
 		var inspections := 0
-		for recorded in _receipts:
+		for recorded in _committed_actions():
 			if String(recorded).begins_with("p05_inspect_"):
 				inspections += 1
 		if inspections != 6:
 			return "Inspect all six candidates before the t10 comparison."
-	if action == "p05_verify_annex_isolation" and not _receipts.has("p05_inspect_annex"):
+	if action == "p05_verify_annex_isolation" and not _committed_actions().has("p05_inspect_annex"):
 		return "Inspect the annex branch before verifying its automatic isolation."
 	if action.begins_with("p05_stable_read_"):
 		var index := int(action.trim_prefix("p05_stable_read_"))
 		var previous := "p05_reopen_garden_slow" if index == 1 else "p05_stable_read_%d" % (index - 1)
-		if not _receipts.has(previous):
+		if not _committed_actions().has(previous):
 			return "Reopen slowly, then log five steady checks in order."
 	return ""
