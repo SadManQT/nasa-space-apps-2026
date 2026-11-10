@@ -2069,7 +2069,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Chapter 3 puzzles P-05 and P-06 as real interactive panels",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-09",
@@ -2088,8 +2088,8 @@
     "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nOwnership: the gate catalog and mission wiring (game/scripts/missions/) are Atik's in the chapter's M task; this task delivers the panel and puzzle logic in game/scripts/puzzles/ with a documented open()/committed(result) contract like mission_table_panel.gd.",
-   "evidence": "",
-   "updated": "2026-11-10",
+   "evidence": "Chapter 3 panels from Asif's branch (01f1f075, 8fd6849b) hooked into the route, HUD and nearby USE: test_p05_p06_puzzles 69/0, test_chapter3_panel_wiring 17/0, test_extended_campaign_route 639/0, later chapter suites green. Screenshot production/qa/evidence/M3-3P_chapter3_panel.png. Gate: production/qa/evidence/M3-3P_M3-69_M1-105_gate.md (full run of 128 suites on 1f98a3a3: 124 passed; the 4 failures resolved or explained; related suites re-run green). Notes: production/qa/evidence/M3-3P.md",
+   "updated": "2026-11-11",
    "prompt": "Problem: P05 and P06 are receipt gates: game/scripts/missions/extended_gate_catalog.gd _defaults() pre-fills the correct payload and\nextended_puzzle_ledger.gd checks it. Goal: the player makes every decision, with preview/feedback/hints and Data Cards, exactly per\nexecution/PUZZLE_P05.md and execution/PUZZLE_P06.md and the numbers in game-design/08_PUZZLE_DESIGNS.md. Move the answers out of code\ninto game/resources/campaign/ data; remove the pre-filled payloads for these two puzzles only.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. tests for correct, wrong and boundary inputs; Save screenshots of every changed screen or room to production/qa/evidence/ (name them after the task id) and list them in the evidence.\nQuality bar: implement the investigation (clues and Class-mode holders), deduction, wrong-but-reasonable answer, NASA-way decision, escalation, set-piece and hint tiers from game-design/22_PUZZLE_CLUE_DESIGN.md §5 (P-05 §5.1–5.2, P-06 §5.2–5.4) and the shared systems in §2; it must feel like a professional game, not a form to fill in.\n\nStory continuity (Sadman, 5 Nov: no scene may be disconnected from the next): read game-design/24_NARRATIVE_REVISION.md §2.3 (Chapter 3) and the §2.9 bridge-list rows for CH03 (including the join into the next chapter); use §2.10 (learning challenges, mistakes and failure) for the panels' teaching, feedback and retry text.\n\nPuzzles run in three stages (Learn, Apply, Twist) with the first-time length targets in game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §6, and every panel follows §1 and the §2 design system (plain words, before→after previews, one guided first use with an explainer clip).",
    "blocker": "Night shift parked the work on branch night/M3-3P: ",
    "reserved_for": "sadman",
@@ -5510,7 +5510,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "The junior-astronaut curriculum: competencies, the Academy manual and 'what you learned' debriefs",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M3-64"
@@ -5527,8 +5527,8 @@
     "docs/GAMEPLAY_DESIGN_FINAL.md"
    ],
    "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFrom doc 25 (Sadman, 5 Nov 2026).",
-   "evidence": "",
-   "updated": "2026-11-10",
+   "evidence": "Curriculum from Asif's branch (8cf5ea81) wired into the Journal Manual tab, pause menu, chapter end and cadet record: test_curriculum 183/0, test_academy_manual_wiring 15/0, test_journal_tabs 322/0. Screenshots production/qa/evidence/M3-69_manual_index.png, M3-69_what_you_learned_ch01.png, M3-69_cadet_record_learning.png. Gate: production/qa/evidence/M3-3P_M3-69_M1-105_gate.md (full run of 128 suites on 1f98a3a3: 124 passed; the 4 failures resolved or explained; related suites re-run green). Notes: production/qa/evidence/M3-69_curriculum.md",
+   "updated": "2026-11-11",
    "prompt": "Do: implement game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md §10: the twelve competencies in curriculum.json, each mapped to the missions that teach, practise and prove it\n(learned / practised / proved moments recorded in the cadet record); Journal → Manual with one plain-language page per competency\n(its explainer clips, the real data card and the cadet's own decisions); a \"what you learned\" page at every chapter end (three\nthings, the data behind them, one decision replayed). Fun first: no quizzes or exams. Test: every competency has at least one\nteach, practise and prove moment in the campaign data.\nAcceptance: Run game/tools/run_tests.sh and paste its last line into the evidence; every suite must pass. Save screenshots of every changed screen to production/qa/evidence/<task id>_*.png and list them in the evidence. Log every AI generation in production/AI_PROMPT_LOG.md.",
    "reserved_for": "sadman",
    "effort": 3,
@@ -7349,7 +7349,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Expose the Solo/Class session and team-plan bridge for M1-37",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [
     "M1-102"
@@ -7360,8 +7360,8 @@
    ],
    "refs": [],
    "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-08.",
-   "evidence": "",
-   "updated": "2026-11-10",
+   "evidence": "Class crew and P-02 sign-off bridge landed from Asif's branch (ef23dc45): test_class_session_bridge 29/0, test_session_crew 135/0, chapter1_campaign_flow 512/0. Gate: production/qa/evidence/M3-3P_M3-69_M1-105_gate.md (full run of 128 suites on 1f98a3a3: 124 passed; the 4 failures resolved or explained; related suites re-run green). Contract: production/qa/evidence/M1-103.md. The Class UI itself (M1-37) is not built.",
+   "updated": "2026-11-11",
    "prompt": "M1-37 saved UI on origin/night/M1-37 (8a792c1) depends on unlanded runtime initial_crew, query().crew and a crew-aware P-02 commit path. Ramim cannot edit campaign/missions. After the bounded core configuration contract, expose fresh New Expedition crew configuration, query a primitive crew view, and preserve the saved crew on Continue and gameplay retry through the existing save store. Publish exact UI registration/selected-plan contract for private role cards and all-role team-plan sign-offs (P-02 first, reusable for later puzzle panels). A plain physical USE/default payload must not silently bypass the Class confirmation; stale sign-offs must not authorize a changed forecast/revision/crew. Reuse existing authoritative model/dispatcher validation and make any absent Ramim provider fail clearly rather than auto-sign or auto-fill. Do not edit Ramim UI/puzzles or invent a second simulator/store. Coordinate a small provider seam that can be tested independently before the UI port; do not claim the complete Class experience from a bridge test. Never use restore_snapshot merely to update presentation configuration mid-shift. Saved night source includes that unsafe approach and is only a reference. Test fresh/continue/legacy-save/retry and malformed/missing/stale sign-off cases through real routes; run focused and full runner without relaxing known timing gates. Publish handoff and unblock Ramim implementation when the public contract is available.",
    "reserved_for": "sadman",
    "effort": 1,
@@ -7421,7 +7421,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -7430,8 +7430,8 @@
    ],
    "refs": [],
    "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-08.\n10 Nov user explicitly overrides owner restrictions for the integrated 117-suite repair. Ramim takes only the published campaign file at 6b8f835; prior Asif branch/WIP and all other reservations remain preserved. Changes are isolated and will be merged against the latest owner work.",
-   "evidence": "",
-   "updated": "2026-11-10",
+   "evidence": "Chosen-input P-03/P-04 route (Asif 31e60ada) plus the missing campaign side: test_chapter2_input_bridge 41/0, test_chapter2_route 220/0, test_p03_p04_content 307/0, flow 512/0. Gate: production/qa/evidence/M3-3P_M3-69_M1-105_gate.md (full run of 128 suites on 1f98a3a3: 124 passed; the 4 failures resolved or explained; related suites re-run green). Contract: production/qa/evidence/M1-105.md. The panel UI is M3-2P (not built).",
+   "updated": "2026-11-11",
    "prompt": "M3-2P read-only audit on main018b297: Chapter1Campaign.interact_nearby intercepts only P01/P02; P03/P04 fall through perform_target with catalog payload_defaults. Chapter2Route keeps authoritative _p03/_p04 state in snapshot but publishes no panel view. Saved origin/night/M3-2P tip5203a6f has a larger unlanded runtime patch; do not copy it wholesale or duplicate its temporary-director preview framework. Provide a bounded public chosen-input provider seam following current P01 pattern, for P03/P04 only: real nearby USE requests the owned Ramim panel and cannot commit prefilled correct inputs; a read-only primitive view exposes current target/action, authoritative P03/P04 progress and required inputs; preview/confirmation receives explicit player choices through existing forecast_target/perform_target/dispatcher and validates paused-modal handoff, scene/revision, range/line-of-sight/prerequisites, cancellation, malformed/missing/wrong choices, costs/idempotence, retry/save/load. Reuse the real pure puzzle models and existing forecast route; no second store/simulator and no assigning model state from UI. Publish exact signal/provider/view/payload API before UI implementation. Coordinate with Sadman authored P03/P04 data and Ramim changes to pure models; keep current normal campaign tests meaningful via explicit selected inputs, never auto-sign Class or introduce dependencies on unfinished Class mode for Solo. Do not edit Ramim UI/puzzles. Test actual nearby USE and chosen-input preview/confirm/save/retry in real Chapter2. Focused/full runner with honest M1-68/M1-100 limits. Saved source is reference only.",
    "reserved_for": "sadman",
    "effort": 1,
