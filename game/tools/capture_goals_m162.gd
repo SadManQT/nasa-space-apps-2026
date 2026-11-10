@@ -17,7 +17,9 @@ func _run() -> void:
 	for target in campaign.targets_for_current_scene():
 		_check(campaign.route.perform(String(target.target_id)).get("accepted", false), "clean capture Chapter1 final witness " + String(target.target_id))
 	_check(campaign.route.advance_scene().get("accepted", false), "clean capture Chapter1 closes")
-	_check(campaign._start_chapter2().get("accepted", false), "clean capture enters Chapter2")
+	campaign._sync_route_projection()
+	var chosen := campaign.choose_upgrade(1, "A")
+	_check(chosen.get("accepted", false) and chosen.get("persisted", false) and campaign.route.current_scene_id() == "EX-CH02-S01", "clean capture enters Chapter2 after saving its earned upgrade")
 	for scene_id in Chapter2Gates.scene_ids() + LaterGates.scene_ids():
 		if campaign.loading:
 			await campaign.wait_loading()
@@ -29,7 +31,7 @@ func _run() -> void:
 				await _job_nudge(campaign)
 			if target.target_id == "p05_equip_gauge":
 				campaign.hud.refresh_scene()
-			var result: Dictionary = campaign.route.perform(String(target.target_id), target.get("payload_defaults", {}))
+			var result: Dictionary = campaign.route.perform(String(target.target_id), _player_payload(target, campaign.director.snapshot()))
 			_check(result.get("accepted", false), "clean capture real witness " + String(target.target_id) + ": " + String(result.get("reason", "")))
 			if target.target_id == "p05_equip_gauge":
 				campaign.hud.refresh_after_action(result.get("result", result))
@@ -37,7 +39,10 @@ func _run() -> void:
 		var advanced: Dictionary = campaign.route.advance_scene()
 		_check(advanced.get("accepted", false), "clean capture advances " + String(scene_id))
 		if advanced.get("chapter_complete", false) and not advanced.get("campaign_complete", false):
-			_check(campaign._start_extended("EX-CH%02d-S01" % (int(String(scene_id).substr(5, 2)) + 1)).get("accepted", false), "clean capture opens next chapter")
+			var chapter := int(String(scene_id).substr(5, 2))
+			campaign._sync_route_projection()
+			chosen = campaign.choose_upgrade(chapter, "A")
+			_check(chosen.get("accepted", false) and chosen.get("persisted", false) and campaign.route.current_scene_id() == "EX-CH%02d-S01" % (chapter + 1), "clean capture opens next chapter after saving its earned upgrade")
 		else:
 			campaign._sync_route_projection()
 	var hashes := {}

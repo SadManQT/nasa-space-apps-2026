@@ -16,6 +16,9 @@ const CarePanel = preload("res://scripts/ui/care_round_panel.gd")
 const LaterGates = preload("res://scripts/missions/extended_gate_catalog.gd")
 const Chapter2Gates = preload("res://scripts/missions/chapter2_gate_catalog.gd")
 const PuzzleData = preload("res://scripts/puzzles/puzzle_data.gd")
+const Chapter4Witness = preload("res://tools/support/chapter4_witness.gd")
+const Chapter6Witness = preload("res://tools/support/chapter6_witness.gd")
+const Chapter8Witness = preload("res://tools/support/chapter8_witness.gd")
 const PANELS := ["what_now", "pause", "settings_accessibility", "journal_discovery", "outcome", "puzzle", "dialogue_captions", "sources", "resume", "chapter1_outcome"]
 ## The HUD pieces that may show while the player walks (doc 25 §2.2).
 const FREE_MOVEMENT := ["GoalCard", "TopRight", "Prompt", "GoalMarker"]
@@ -154,7 +157,10 @@ func _run() -> void:
 func _walk_later_chapters(campaign: Chapter1Campaign) -> void:
 	var hud := campaign.hud
 	var moved := campaign.advance_scene()
-	_check(moved.get("accepted", false), "text walk enters Chapter 2")
+	_check(moved.get("upgrade_pending", false) and campaign.available_upgrade_chapter() == 1, "text walk reaches the earned Chapter 1 upgrade")
+	var chosen := campaign.choose_upgrade(1, "A")
+	_check(chosen.get("accepted", false) and chosen.get("persisted", false) and campaign.route.current_scene_id() == "EX-CH02-S01", "text walk enters Chapter 2 after saving the player's upgrade")
+	_check(not is_instance_valid(hud._family_panel) and not campaign.query().paused, "runtime closes the earned upgrade and resumes the next chapter")
 	var scene_count := 0
 	var target_count := 0
 	for scene_id in Chapter2Gates.scene_ids() + LaterGates.scene_ids():
@@ -224,7 +230,7 @@ func _walk_later_chapters(campaign: Chapter1Campaign) -> void:
 				var before := campaign.director.snapshot()
 				campaign.route.focus(id)
 				campaign.route.inspect()
-				campaign.route.use(_player_payload(target).merged({"_puzzle_action": target.get("puzzle_action", "")}))
+				campaign.route.use(_player_payload(target, campaign.director.snapshot()).merged({"_puzzle_action": target.get("puzzle_action", "")}))
 				var preview: Dictionary = campaign.route.preview()
 				_check(preview.get("accepted", false) and campaign.director.snapshot() == before, id + " real preview preserves state")
 				hud.refresh_after_action(preview)
@@ -233,7 +239,7 @@ func _walk_later_chapters(campaign: Chapter1Campaign) -> void:
 				_check(hud._status.text == "Move closer to the checked target.", id + " rejection keeps its actual cause")
 				result = campaign.route.confirm()
 			else:
-				result = campaign.route.perform(id, _player_payload(target))
+				result = campaign.route.perform(id, _player_payload(target, campaign.director.snapshot()))
 			_check(result.get("accepted", false), id + " real route witness succeeds: " + String(result.get("reason", "")))
 			hud.refresh_after_action(result.get("result", result))
 			await _walk_state(hud, id + " result toast")
@@ -255,13 +261,12 @@ func _walk_later_chapters(campaign: Chapter1Campaign) -> void:
 		var advanced: Dictionary = campaign.route.advance_scene()
 		_check(advanced.get("accepted", false), scene_id + " text walk advances")
 		if advanced.get("chapter_complete", false) and not advanced.get("campaign_complete", false):
-			var next_scene := "EX-CH%02d-S01" % (int(String(scene_id).substr(5, 2)) + 1)
-			if campaign.route is Chapter2Route:
-				campaign._start_extended(next_scene)
-			else:
-				campaign.route.start_at(next_scene)
-				campaign._sync_route_projection()
-				campaign._refresh_world()
+			var chapter := int(String(scene_id).substr(5, 2))
+			campaign._sync_route_projection()
+			_check(campaign.available_upgrade_chapter() == chapter, "text walk earns Chapter %d upgrade" % chapter)
+			chosen = campaign.choose_upgrade(chapter, "A")
+			_check(chosen.get("accepted", false) and chosen.get("persisted", false), "text walk saves Chapter %d upgrade before departure" % chapter)
+			_check(not is_instance_valid(hud._family_panel) and not campaign.query().paused, "runtime resumes after Chapter %d upgrade" % chapter)
 		else:
 			campaign._sync_route_projection()
 		hud.refresh_scene()
@@ -388,11 +393,14 @@ func _check(condition: bool, label: String) -> void:
 ## M3-5P/M3-7P: the Chapter 5/7 puzzle answers no longer come pre-filled
 ## from the catalog. The walk acts as a player who made the decisions
 ## recorded in the puzzle data files.
-func _player_payload(target: Dictionary) -> Dictionary:
+func _player_payload(target: Dictionary, state: Dictionary) -> Dictionary:
 	var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
 	if payload.is_empty():
 		payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
-	return payload
+	var target_id := String(target.target_id)
+	payload = Chapter4Witness.payload(target_id, state, payload)
+	payload = Chapter6Witness.payload(target_id, state, payload)
+	return Chapter8Witness.payload(target_id, state, payload)
 
 func _finish() -> void:
 	if OS.get_cmdline_user_args().has("--capture"):

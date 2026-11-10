@@ -1,0 +1,54 @@
+{
+  "engine": "4.7.stable.official.5b4e0cb0f",
+  "text_result": "PLAYER TEXT RESULT: PASS (13092 checks, 0 failures)",
+  "coverage": "All8 chapters/96scenes and283laterjobs; actual route/HUD/panels at both text scales, catalog witnesses not physical traversal.",
+  "runner_exit": 1,
+  "runner_issue": "During the long focused run, run_tests.sh was synced/edited in the checkout. The engine completed and printed PASS, but the shell then re-read changed lines and failed with command/syntax errors. This is not a clean passing runner invocation or integrated gate; a fresh immutable full rerun remains required.",
+  "native_result": {
+    "task": "M1-62",
+    "command": [
+      "E:/godot exe/Godot_v4.7-stable_win64_console.exe",
+      "--path",
+      "C:\\Users\\User\\.codex\\worktrees\\nasa-ramim-acceptance-repairs-20261110\\game",
+      "--windowed",
+      "--resolution",
+      "1280x720",
+      "--script",
+      "res://tools/capture_goals_m162.gd",
+      "--",
+      "--capture"
+    ],
+    "exit": 0,
+    "timeout": false,
+    "passed": true,
+    "result": "M1-62 CLEAN CAPTURE RESULT: PASS (627 checks, 0 failures)",
+    "elapsed_s": 134.24,
+    "artifacts": [
+      "M1-62_clean_CH01_150.png",
+      "M1-62_clean_CH01_normal.png",
+      "M1-62_clean_CH02_150.png",
+      "M1-62_clean_CH02_normal.png",
+      "M1-62_clean_CH03_150.png",
+      "M1-62_clean_CH03_normal.png",
+      "M1-62_clean_CH04_150.png",
+      "M1-62_clean_CH04_normal.png",
+      "M1-62_clean_CH05_150.png",
+      "M1-62_clean_CH05_normal.png",
+      "M1-62_clean_CH06_150.png",
+      "M1-62_clean_CH06_normal.png",
+      "M1-62_clean_CH07_150.png",
+      "M1-62_clean_CH07_normal.png",
+      "M1-62_clean_CH08_150.png",
+      "M1-62_clean_CH08_normal.png",
+      "M1-62_clean_probes.json",
+      "M1-62_job_nudge_150.png",
+      "M1-62_job_nudge_normal.png",
+      "M1-62_last_result_150.png",
+      "M1-62_last_result_normal.png"
+    ]
+  },
+  "source_sha256": {
+    "game/tools/test_player_text.gd": "93009ed6ea9e98451cd15d7eeb9395a6207ce156bfcb2a567a5ebf05dca15e95",
+    "game/tools/capture_goals_m162.gd": "0ff85122d479852636033c7afb714f3152a2f4ed09a9d656155349015467790d"
+  }
+}
