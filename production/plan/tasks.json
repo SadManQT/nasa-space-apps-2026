@@ -7963,8 +7963,8 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Consume storm_early_warning in the Chapter 7 shelter run, step the rover heater in Chapter 8 shadow, and align the hazard storm numbers with canon",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/hazards/lunar_hazards.gd",
@@ -7972,12 +7972,27 @@
     "game/tools/test_hazards.gd"
    ],
    "refs": [],
-   "note": "Filed by Sadman/claude on 2026-11-10.",
+   "note": "Filed by Sadman/claude on 2026-11-10.\n10 Nov user continue authorizes necessary fixes after preserving Argon 0740b3de. M4-18 is the existing upgrade-consumer follow-up; no Argon implementation will be rebuilt. Current source clean for these exact files; no published lock conflicts. Added explicitly to the active Ramim batch under the existing owner override.",
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Found by Sadman/claude on 10 Nov (M4-17). (1) storm_early_warning (after Chapter 6, Option A: 'one additional preparation opportunity, with no invented solar income', game-design/10 line 177) is set in ExpeditionSimulation modifiers but nothing reads it; the canon P-13 plan has no countable preparation slot, so the natural home is the shelter run in LunarHazards.step_solar_storm_shelter_run (the warning arrives earlier, so the crew gets more lead before exposure). Pass it from CampaignFieldSystems the way rover.heater_upgrade is passed. No energy income, no change to the P-13/P-14 ledger. (2) CampaignFieldSystems only calls step_cold_shadow when _chapter == 4, but rover_lights_heater is earned after Chapter 4, so its 1.8x to 1.45x heater draw is only felt on a Chapter 4 replay; step it on the dark Chapter 8 road segments too (the warning text must not say Chapter 4 there). (3) LunarHazards uses storm_step_multipliers [1,2,3,2,1,1] and storm_exposure_limit 3; canon (08 P-13/P-14, p13_campaign.json) is [1,1,2,2,1,1] and limit 6. Acceptance: test_hazards and game/tools/test_upgrade_pairs_ch4_ch6.gd pass through run_tests.sh, with a check for each of the three points; update the 6A card text in cadet_progression.gd to the applied number.",
    "reserved_for": "ramim",
-   "effort": 1
+   "effort": 1,
+   "integration_paths": [
+    "game/scripts/progression/cadet_progression.gd",
+    "game/scripts/hazards/hazard_hud.gd",
+    "game/tools/test_campaign_field_systems.gd",
+    "game/tools/test_upgrade_pairs_ch4_ch6.gd"
+   ],
+   "edit_files": [
+    "game/scripts/hazards/lunar_hazards.gd",
+    "game/scripts/campaign/campaign_field_systems.gd",
+    "game/scripts/progression/cadet_progression.gd",
+    "game/scripts/hazards/hazard_hud.gd",
+    "game/tools/test_hazards.gd",
+    "game/tools/test_campaign_field_systems.gd",
+    "game/tools/test_upgrade_pairs_ch4_ch6.gd"
+   ]
   },
   {
    "id": "M1-126",
@@ -8674,7 +8689,8 @@
     "M3-72",
     "M3-90",
     "M3-91",
-    "M1-125"
+    "M1-125",
+    "M4-18"
    ],
    "sadman": [
     "M4-16",

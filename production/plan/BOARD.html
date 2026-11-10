@@ -86,14 +86,15 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up lists assigned ready tasks; claim one exact ID. Deferred and acceptance work stays visible separately.</p>
 <div class="grid team">
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">Shared gameplay; Chapters 4/6/8; opening and progression UI · 40% share</div><div class="counts"><span class="chip s-done">15 done</span><span class="chip s-in_progress">6 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:71%"></i></div>
-<details open><summary>Working now (6)</summary><ul>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">Shared gameplay; Chapters 4/6/8; opening and progression UI · 40% share</div><div class="counts"><span class="chip s-done">15 done</span><span class="chip s-in_progress">7 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:68%"></i></div>
+<details open><summary>Working now (7)</summary><ul>
 <li><a class="id" href="#M1-31">M1-31</a> Make it fun: Chapter 1 game-feel and reward pass <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
 <li><a class="id" href="#M3-6M">M3-6M</a> Chapter 6 missions EX-M0601 to EX-M0604: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
 <li><a class="id" href="#M3-8M">M3-8M</a> Chapter 8 missions EX-M0801 to EX-M0804: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
 <li><a class="id" href="#M3-91">M3-91</a> All 128 upgrade profiles complete the campaign <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
 <li><a class="id" href="#M3-64">M3-64</a> The RPG layer: cadet record, skills, gear loadout, jobs board and rest <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
 <li><a class="id" href="#M1-125">M1-125</a> Repair and verify the integrated 117-suite gate under user owner override <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
+<li><a class="id" href="#M4-18">M4-18</a> Consume storm_early_warning in the Chapter 7 shelter run, step the rover heater in Chapter 8 shadow, and align the hazard storm numbers with canon <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
 </ul></details>
 <details><summary>Done (15)</summary><ul>
 <li><a class="id" href="#M1-18">M1-18</a> First five minutes: title screen, onboarding and UX polish <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">production/qa/evidence/M3-61_ramim_audit.md</div></li>
@@ -140,9 +141,6 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-112">M1-112</a> Wire the shift-5 STACK Mission Table button to the physical carry activity (M1-58 hook) <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-118">M1-118</a> Guard Mission Table layout focus when its panel is freed <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-121">M1-121</a> Re-audit all saved branches and prioritize explainer UI blockers <span class="chip ">codex</span> <span class="chip ">P0</span></li>
-</ul></details>
-<details><summary>Unplanned: requires explicit batch assignment (1)</summary><ul>
-<li><a class="id" href="#M4-18">M4-18</a> Consume storm_early_warning in the Chapter 7 shelter run, step the rover heater in Chapter 8 shadow, and align the hazard storm numbers with canon <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 </ul></details>
 </div>
 <div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Chapters 5/7; Care Round and physical story integration · 22% share</div><div class="counts"><span class="chip s-done">10 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">3 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:77%"></i></div>
@@ -8706,8 +8704,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P2",
    "tool": "codex",
    "title": "Consume storm_early_warning in the Chapter 7 shelter run, step the rover heater in Chapter 8 shadow, and align the hazard storm numbers with canon",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
    "deps": [],
    "paths": [
     "game/scripts/hazards/lunar_hazards.gd",
@@ -8715,13 +8713,28 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/tools/test_hazards.gd"
    ],
    "refs": [],
-   "note": "Filed by Sadman/claude on 2026-11-10.",
+   "note": "Filed by Sadman/claude on 2026-11-10.\n10 Nov user continue authorizes necessary fixes after preserving Argon 0740b3de. M4-18 is the existing upgrade-consumer follow-up; no Argon implementation will be rebuilt. Current source clean for these exact files; no published lock conflicts. Added explicitly to the active Ramim batch under the existing owner override.",
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Found by Sadman/claude on 10 Nov (M4-17). (1) storm_early_warning (after Chapter 6, Option A: 'one additional preparation opportunity, with no invented solar income', game-design/10 line 177) is set in ExpeditionSimulation modifiers but nothing reads it; the canon P-13 plan has no countable preparation slot, so the natural home is the shelter run in LunarHazards.step_solar_storm_shelter_run (the warning arrives earlier, so the crew gets more lead before exposure). Pass it from CampaignFieldSystems the way rover.heater_upgrade is passed. No energy income, no change to the P-13/P-14 ledger. (2) CampaignFieldSystems only calls step_cold_shadow when _chapter == 4, but rover_lights_heater is earned after Chapter 4, so its 1.8x to 1.45x heater draw is only felt on a Chapter 4 replay; step it on the dark Chapter 8 road segments too (the warning text must not say Chapter 4 there). (3) LunarHazards uses storm_step_multipliers [1,2,3,2,1,1] and storm_exposure_limit 3; canon (08 P-13/P-14, p13_campaign.json) is [1,1,2,2,1,1] and limit 6. Acceptance: test_hazards and game/tools/test_upgrade_pairs_ch4_ch6.gd pass through run_tests.sh, with a check for each of the three points; update the 6A card text in cadet_progression.gd to the applied number.",
    "reserved_for": "ramim",
    "effort": 1,
-   "batch_phase": "unplanned"
+   "integration_paths": [
+    "game/scripts/progression/cadet_progression.gd",
+    "game/scripts/hazards/hazard_hud.gd",
+    "game/tools/test_campaign_field_systems.gd",
+    "game/tools/test_upgrade_pairs_ch4_ch6.gd"
+   ],
+   "edit_files": [
+    "game/scripts/hazards/lunar_hazards.gd",
+    "game/scripts/campaign/campaign_field_systems.gd",
+    "game/scripts/progression/cadet_progression.gd",
+    "game/scripts/hazards/hazard_hud.gd",
+    "game/tools/test_hazards.gd",
+    "game/tools/test_campaign_field_systems.gd",
+    "game/tools/test_upgrade_pairs_ch4_ch6.gd"
+   ],
+   "batch_phase": "implementation"
   },
   {
    "id": "M1-126",
@@ -9419,7 +9432,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "M3-72",
     "M3-90",
     "M3-91",
-    "M1-125"
+    "M1-125",
+    "M4-18"
    ],
    "sadman": [
     "M4-16",
