@@ -1173,7 +1173,6 @@
     "production/qa/evidence/M1-31*"
    ],
    "edit_files": [
-    "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_ch01_game_feel.gd",
     "game/tools/test_chapter1_ui_regressions.gd"
    ]
