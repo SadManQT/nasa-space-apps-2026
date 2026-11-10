@@ -5,6 +5,8 @@
 ## and rover/network integration (M3-62, M3-63, M3-64).
 extends SceneTree
 
+const PuzzleData = preload("res://scripts/puzzles/puzzle_data.gd")
+
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const RouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
@@ -91,6 +93,9 @@ func _test_physical_play_and_retry() -> void:
 	CampaignCutscenePlayer.autoplay = false
 	var entry := _chapter8_entry_snapshot()
 	_check(not entry.is_empty(), "Chapter 8 entry snapshot constructed from authoritative route")
+	if entry.is_empty():
+		storage.cleanup()
+		return
 	var campaign := CampaignScene.instantiate() as Chapter1Campaign
 	storage.configure(campaign)
 	campaign.initial_snapshot = entry
@@ -195,9 +200,13 @@ func _chapter8_entry_snapshot() -> Dictionary:
 			break
 		for target in GateCatalog.targets_for_scene(scene_id):
 			var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
+			if payload.is_empty():
+				payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
 			payload = Witness4.payload(String(target.target_id), director.snapshot(), payload)
 			payload = Witness6.payload(String(target.target_id), director.snapshot(), payload)
-			if not bool(route.perform(target.target_id, payload).get("accepted", false)):
+			var performed: Dictionary = route.perform(target.target_id, payload)
+			if not bool(performed.get("accepted", false)):
+				push_error("Chapter 8 fixture rejected %s / %s: %s" % [scene_id, String(target.target_id), String(performed.get("reason", ""))])
 				return {}
 		var moved: Dictionary = route.advance_scene()
 		if bool(moved.get("chapter_complete", false)):
