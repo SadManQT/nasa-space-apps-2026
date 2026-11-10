@@ -1,0 +1,1420 @@
+{
+  "schema_version": 1,
+  "content_revision": "p05_falling_pressure-player-v2",
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-05; game-design/22_PUZZLE_CLUE_DESIGN.md 5.1?5.2; full-game-story/STORY_FULL.md EX-CH03-S01..S06",
+  "puzzle_id": "P-05",
+  "roles": {
+    "amara": {
+      "name": "Amara",
+      "role": "life support",
+      "letter": "A"
+    },
+    "kai": {
+      "name": "Kai",
+      "role": "power and piping",
+      "letter": "K"
+    },
+    "mei": {
+      "name": "Mei",
+      "role": "garden and lineage",
+      "letter": "M"
+    },
+    "rafi": {
+      "name": "Rafi",
+      "role": "safety and seismic",
+      "letter": "R"
+    },
+    "ferreira": {
+      "name": "Ferreira",
+      "role": "Earth support",
+      "letter": "F"
+    }
+  },
+  "puzzles": {
+    "P-05": {
+      "title": "Find the Falling Pressure",
+      "hints": [
+        "Which tap changes over time?",
+        "Compare the independent GARDEN readings at t0 and t10.",
+        "Close GARDEN only, clamp its feedthrough, reopen slowly and verify five steady checks."
+      ],
+      "mastery": "Six candidates within a two-per-phase limit, safe garden isolation and five steady 100/100/100 readings.",
+      "first_time_card": {
+        "title": "Find the falling pressure",
+        "purpose": "Test the panel warning with an independent gauge before any valve move.",
+        "steps": [
+          "Read MAIN, GARDEN and RETURN at t0 and t10.",
+          "Inspect six candidates with at most two in each investigation phase.",
+          "Verify annex isolation, close GARDEN only and check the repaired line five times."
+        ],
+        "clip": "Differential pressure isolation (explainer clip pending)"
+      }
+    }
+  },
+  "scenes": {
+    "EX-CH03-S01": {
+      "id": "EX-CH03-S01",
+      "mission": "EX-M0301",
+      "title": "The Warning and the Gauge",
+      "story_date": "6 May 2046 ? after the shallow moonquake",
+      "stage": "learn",
+      "goal": "Use an independent gauge before isolating any air line.",
+      "why": "The electronic panel names a tank, but its diagnosis is unverified.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Instrument",
+          "where": "Air console",
+          "text": "Electronic panel warns of a tank fault; the manual gauge is independent.",
+          "holders": [
+            "amara"
+          ],
+          "line_id": "EX-CH03-S01-L01"
+        },
+        {
+          "id": "c2",
+          "kind": "Voice",
+          "where": "Service room",
+          "text": "A colour on a panel is not a pipe diagnosis.",
+          "holders": [
+            "rafi"
+          ],
+          "line_id": "EX-CH03-S01-L03"
+        }
+      ],
+      "aha": "Use an independent gauge before isolating any air line.",
+      "wrong_idea": "Close the red main reserve valve on the panel warning alone.",
+      "flight_rules": [
+        "FR-02 ? Protect the main air reserve; verify with an independent gauge."
+      ],
+      "risk": {
+        "title": "Crew air cut by an unverified diagnosis",
+        "likelihood": 2,
+        "consequence": 4,
+        "level": "HIGH"
+      }
+    },
+    "EX-CH03-S02": {
+      "id": "EX-CH03-S02",
+      "mission": "EX-M0301",
+      "title": "Six Places, Three Taps",
+      "story_date": "6 May 2046 ? four abstract investigation phases",
+      "stage": "apply",
+      "goal": "Find the falling branch with t0 and t10 readings; inspect two candidates each in phases one to three, then repair in phase four.",
+      "why": "Only the garden branch falls over the ten-second manual comparison.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Instrument",
+          "where": "Three-tap manifold",
+          "text": "MAIN 100?100, GARDEN 82?74, RETURN 100?100 relative units.",
+          "holders": [
+            "amara"
+          ],
+          "line_id": "EX-CH03-S02-L02"
+        },
+        {
+          "id": "c2",
+          "kind": "Object",
+          "where": "Candidate collar",
+          "text": "A shaken garden feedthrough collar is downstream of the garden branch valve.",
+          "holders": [
+            "kai",
+            "mei"
+          ],
+          "line_id": "EX-CH03-S02-L01"
+        }
+      ],
+      "aha": "Find the falling branch with t0 and t10 readings; inspect at most two candidates in each phase.",
+      "wrong_idea": "Treat a noisy warning as proof that the main tank leaks.",
+      "flight_rules": [
+        "FR-02 ? Inspect at most two locations per phase; keep crew air on."
+      ],
+      "risk": {
+        "title": "Missed leak or unnecessary trunk isolation",
+        "likelihood": 2,
+        "consequence": 4,
+        "level": "HIGH"
+      }
+    },
+    "EX-CH03-S03": {
+      "id": "EX-CH03-S03",
+      "mission": "EX-M0301",
+      "title": "The Smallest Safe Boundary",
+      "story_date": "6 May 2046 ? after phase-two aftershock",
+      "stage": "apply",
+      "goal": "Verify annex auto-isolation, compare boundaries, and agree on rollback.",
+      "why": "The aftershock changes the annex indicator; the garden leak remains the supported fault.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Instrument",
+          "where": "Annex indicator",
+          "text": "The annex branch auto-isolates after the phase-two aftershock.",
+          "holders": [
+            "kai"
+          ],
+          "line_id": "EX-CH03-S03-L04"
+        },
+        {
+          "id": "c2",
+          "kind": "Voice",
+          "where": "Flight rule desk",
+          "text": "Keep the habitat supplied; isolate the smallest supported boundary.",
+          "holders": [
+            "rafi"
+          ],
+          "line_id": "EX-CH03-S03-L01"
+        }
+      ],
+      "aha": "Verify annex auto-isolation, compare boundaries, and agree on rollback.",
+      "wrong_idea": "Isolate the habitat trunk to stop both the leak and crew air.",
+      "flight_rules": [
+        "FR-02 ? Keep protected crew air online and verify rollback before isolation."
+      ],
+      "risk": {
+        "title": "Habitat breathing supply interrupted",
+        "likelihood": 2,
+        "consequence": 4,
+        "level": "HIGH"
+      }
+    },
+    "EX-CH03-S04": {
+      "id": "EX-CH03-S04",
+      "mission": "EX-M0302",
+      "title": "Controlled Garden Repair",
+      "story_date": "7 May 2046 ? controlled repair",
+      "stage": "twist",
+      "goal": "Close GARDEN only, verify the hold, clamp from the safe side and log five steady checks.",
+      "why": "A clamp seated is not a verified repair.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Instrument",
+          "where": "Garden isolation valve",
+          "text": "After isolation MAIN holds 100 and GARDEN holds 74.",
+          "holders": [
+            "amara"
+          ],
+          "line_id": "EX-CH03-S04-L02"
+        },
+        {
+          "id": "c2",
+          "kind": "Voice",
+          "where": "Feedthrough collar",
+          "text": "Seat the clamp and then reopen slowly.",
+          "holders": [
+            "kai"
+          ],
+          "line_id": "EX-CH03-S04-L01"
+        }
+      ],
+      "aha": "Close GARDEN only, verify the hold, clamp from the safe side and log five steady checks.",
+      "wrong_idea": "Clamp the pressurised collar or reopen it fast.",
+      "flight_rules": [
+        "FR-02 ? Verify hold before clamp and five steady checks two seconds apart."
+      ],
+      "risk": {
+        "title": "Pressure surge at a fresh clamp",
+        "likelihood": 2,
+        "consequence": 4,
+        "level": "HIGH"
+      }
+    },
+    "EX-CH03-S05": {
+      "id": "EX-CH03-S05",
+      "mission": "EX-M0302",
+      "title": "The Wrong Note",
+      "story_date": "7 May 2046 ? handover",
+      "stage": "twist",
+      "goal": "Correct a copied paper note to match five physical checks.",
+      "why": "The tested valve setting is supported; the copied note is wrong.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Log",
+          "where": "Repair record",
+          "text": "Five consecutive 100/100/100 mechanical checks are saved.",
+          "holders": [
+            "amara"
+          ],
+          "line_id": "EX-CH03-S05-L01"
+        },
+        {
+          "id": "c2",
+          "kind": "Voice",
+          "where": "Paper handover",
+          "text": "Correct the note, not the tested valve.",
+          "holders": [
+            "kai",
+            "rafi"
+          ],
+          "line_id": "EX-CH03-S05-L02"
+        }
+      ],
+      "aha": "Correct a copied paper note to match five physical checks.",
+      "wrong_idea": "Change a tested valve to match an unverified paper note.",
+      "flight_rules": [
+        "FR-02 ? Keep verified valve position and preserve the monitoring record."
+      ],
+      "risk": {
+        "title": "New leak introduced by clerical correction",
+        "likelihood": 2,
+        "consequence": 4,
+        "level": "HIGH"
+      }
+    },
+    "EX-CH03-S06": {
+      "id": "EX-CH03-S06",
+      "mission": "EX-M0302",
+      "title": "The N.R. Hatch",
+      "story_date": "7 May 2046 ? annex boundary",
+      "stage": "twist",
+      "goal": "Isolate the annex feed, confirm zero differential and look by camera.",
+      "why": "An isolated hatch can be inspected without authorising entry.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Object",
+          "where": "N.R. hatch",
+          "text": "The annex door bears N.R.; the feed is isolated for boundary checks.",
+          "holders": [
+            "mei"
+          ],
+          "line_id": "EX-CH03-S06-L01"
+        },
+        {
+          "id": "c2",
+          "kind": "Voice",
+          "where": "Viewing port",
+          "text": "Use a camera before suited entry.",
+          "holders": [
+            "rafi"
+          ],
+          "line_id": "EX-CH03-S06-L02"
+        }
+      ],
+      "aha": "Isolate the annex feed, confirm zero differential and look by camera.",
+      "wrong_idea": "Open the hatch before measuring the pressure differential.",
+      "flight_rules": [
+        "FR-02 ? Confirm zero differential before camera inspection; entry remains uncleared."
+      ],
+      "risk": {
+        "title": "Unverified hatch opening",
+        "likelihood": 2,
+        "consequence": 4,
+        "level": "HIGH"
+      }
+    }
+  },
+  "steps": {
+    "p05_equip_gauge": {
+      "scene": "EX-CH03-S01",
+      "kind": "choice",
+      "title": "Choose the instrument",
+      "goal": "Equip an independent mechanical pressure gauge.",
+      "why": "The electronic diagnosis may be wrong.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Connect the independent mechanical gauge",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "instrument": "mechanical_gauge"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Trust the noisy electronic tank label",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "instrument": "electronic_panel"
+          },
+          "feedback": "The panel label is not a mechanical measurement."
+        }
+      ],
+      "wrong_reason": "The panel label is not a mechanical measurement."
+    },
+    "p05_read_panel_warning": {
+      "scene": "EX-CH03-S01",
+      "kind": "choice",
+      "title": "Classify the panel warning",
+      "goal": "Keep the warning as a hypothesis.",
+      "why": "A tank label needs a tap comparison.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Record unverified tank warning",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "status": "unverified"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Record confirmed main-tank leak",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "status": "confirmed"
+          },
+          "feedback": "A warning does not identify a leaking branch."
+        }
+      ],
+      "wrong_reason": "A warning does not identify a leaking branch."
+    },
+    "p05_identify_three_taps": {
+      "scene": "EX-CH03-S01",
+      "kind": "choice",
+      "title": "Find the three test taps",
+      "goal": "Identify MAIN, GARDEN and RETURN.",
+      "why": "A differential comparison needs all three taps.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "MAIN / GARDEN / RETURN",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "taps": [
+              "MAIN",
+              "GARDEN",
+              "RETURN"
+            ]
+          }
+        },
+        {
+          "id": "held",
+          "label": "MAIN / AIRLOCK / ANNEX",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "taps": [
+              "MAIN",
+              "AIRLOCK",
+              "ANNEX"
+            ]
+          },
+          "feedback": "Use the three independent manifold taps."
+        }
+      ],
+      "wrong_reason": "Use the three independent manifold taps."
+    },
+    "p05_read_main_t0": {
+      "scene": "EX-CH03-S02",
+      "kind": "number",
+      "title": "Read MAIN T0",
+      "goal": "Copy the mechanical gauge reading.",
+      "why": "Compare the same tap at t0 and t10.",
+      "number": {
+        "label": "Mechanical gauge reading",
+        "min": 0,
+        "max": 120,
+        "unit": "relative test units",
+        "step": 1,
+        "samples": [
+          100,
+          82,
+          74
+        ]
+      },
+      "payload_key": "reading",
+      "formula": "Use the recorded mechanical tap, not the noisy panel.",
+      "wrong_reason": "Use the mechanical tap witness: MAIN and RETURN hold 100, GARDEN moves from 82 to 74."
+    },
+    "p05_read_garden_t0": {
+      "scene": "EX-CH03-S02",
+      "kind": "number",
+      "title": "Read GARDEN T0",
+      "goal": "Copy the mechanical gauge reading.",
+      "why": "Compare the same tap at t0 and t10.",
+      "number": {
+        "label": "Mechanical gauge reading",
+        "min": 0,
+        "max": 120,
+        "unit": "relative test units",
+        "step": 1,
+        "samples": [
+          100,
+          82,
+          74
+        ]
+      },
+      "payload_key": "reading",
+      "formula": "Use the recorded mechanical tap, not the noisy panel.",
+      "wrong_reason": "Use the mechanical tap witness: MAIN and RETURN hold 100, GARDEN moves from 82 to 74."
+    },
+    "p05_read_return_t0": {
+      "scene": "EX-CH03-S02",
+      "kind": "number",
+      "title": "Read RETURN T0",
+      "goal": "Copy the mechanical gauge reading.",
+      "why": "Compare the same tap at t0 and t10.",
+      "number": {
+        "label": "Mechanical gauge reading",
+        "min": 0,
+        "max": 120,
+        "unit": "relative test units",
+        "step": 1,
+        "samples": [
+          100,
+          82,
+          74
+        ]
+      },
+      "payload_key": "reading",
+      "formula": "Use the recorded mechanical tap, not the noisy panel.",
+      "wrong_reason": "Use the mechanical tap witness: MAIN and RETURN hold 100, GARDEN moves from 82 to 74."
+    },
+    "p05_read_main_t10": {
+      "scene": "EX-CH03-S02",
+      "kind": "number",
+      "title": "Read MAIN T10",
+      "goal": "Copy the mechanical gauge reading.",
+      "why": "Compare the same tap at t0 and t10.",
+      "number": {
+        "label": "Mechanical gauge reading",
+        "min": 0,
+        "max": 120,
+        "unit": "relative test units",
+        "step": 1,
+        "samples": [
+          100,
+          82,
+          74
+        ]
+      },
+      "payload_key": "reading",
+      "formula": "Use the recorded mechanical tap, not the noisy panel.",
+      "wrong_reason": "Use the mechanical tap witness: MAIN and RETURN hold 100, GARDEN moves from 82 to 74."
+    },
+    "p05_read_garden_t10": {
+      "scene": "EX-CH03-S02",
+      "kind": "number",
+      "title": "Read GARDEN T10",
+      "goal": "Copy the mechanical gauge reading.",
+      "why": "Compare the same tap at t0 and t10.",
+      "number": {
+        "label": "Mechanical gauge reading",
+        "min": 0,
+        "max": 120,
+        "unit": "relative test units",
+        "step": 1,
+        "samples": [
+          100,
+          82,
+          74
+        ]
+      },
+      "payload_key": "reading",
+      "formula": "Use the recorded mechanical tap, not the noisy panel.",
+      "wrong_reason": "Use the mechanical tap witness: MAIN and RETURN hold 100, GARDEN moves from 82 to 74."
+    },
+    "p05_read_return_t10": {
+      "scene": "EX-CH03-S02",
+      "kind": "number",
+      "title": "Read RETURN T10",
+      "goal": "Copy the mechanical gauge reading.",
+      "why": "Compare the same tap at t0 and t10.",
+      "number": {
+        "label": "Mechanical gauge reading",
+        "min": 0,
+        "max": 120,
+        "unit": "relative test units",
+        "step": 1,
+        "samples": [
+          100,
+          82,
+          74
+        ]
+      },
+      "payload_key": "reading",
+      "formula": "Use the recorded mechanical tap, not the noisy panel.",
+      "wrong_reason": "Use the mechanical tap witness: MAIN and RETURN hold 100, GARDEN moves from 82 to 74."
+    },
+    "p05_inspect_tank": {
+      "scene": "EX-CH03-S02",
+      "kind": "choice",
+      "title": "Inspect main tank",
+      "goal": "File a location witness without exceeding two checks per phase.",
+      "why": "The simulator advances after every two candidate inspections. The fourth phase is reserved for the controlled repair.",
+      "options": [
+        {
+          "id": "phase_1",
+          "label": "Inspect in phase 1",
+          "detail": "Main tank shell holds steady. At most two candidates per phase.",
+          "payload": {
+            "candidate": "tank",
+            "phase": 1
+          }
+        },
+        {
+          "id": "phase_2",
+          "label": "Inspect in phase 2",
+          "detail": "Main tank shell holds steady. At most two candidates per phase.",
+          "payload": {
+            "candidate": "tank",
+            "phase": 2
+          }
+        },
+        {
+          "id": "phase_3",
+          "label": "Inspect in phase 3",
+          "detail": "Main tank shell holds steady. At most two candidates per phase.",
+          "payload": {
+            "candidate": "tank",
+            "phase": 3
+          }
+        }
+      ],
+      "wrong_reason": "Record this candidate in a valid investigation phase; at most two inspections fit each phase."
+    },
+    "p05_inspect_habitat": {
+      "scene": "EX-CH03-S02",
+      "kind": "choice",
+      "title": "Inspect habitat trunk",
+      "goal": "File a location witness without exceeding two checks per phase.",
+      "why": "The simulator advances after every two candidate inspections. The fourth phase is reserved for the controlled repair.",
+      "options": [
+        {
+          "id": "phase_1",
+          "label": "Inspect in phase 1",
+          "detail": "Trunk supplies the breathing habitat. At most two candidates per phase.",
+          "payload": {
+            "candidate": "habitat",
+            "phase": 1
+          }
+        },
+        {
+          "id": "phase_2",
+          "label": "Inspect in phase 2",
+          "detail": "Trunk supplies the breathing habitat. At most two candidates per phase.",
+          "payload": {
+            "candidate": "habitat",
+            "phase": 2
+          }
+        },
+        {
+          "id": "phase_3",
+          "label": "Inspect in phase 3",
+          "detail": "Trunk supplies the breathing habitat. At most two candidates per phase.",
+          "payload": {
+            "candidate": "habitat",
+            "phase": 3
+          }
+        }
+      ],
+      "wrong_reason": "Record this candidate in a valid investigation phase; at most two inspections fit each phase."
+    },
+    "p05_inspect_garden": {
+      "scene": "EX-CH03-S02",
+      "kind": "choice",
+      "title": "Inspect garden feedthrough",
+      "goal": "File a location witness without exceeding two checks per phase.",
+      "why": "The simulator advances after every two candidate inspections. The fourth phase is reserved for the controlled repair.",
+      "options": [
+        {
+          "id": "phase_1",
+          "label": "Inspect in phase 1",
+          "detail": "Collar is shaken and downstream of falling GARDEN tap. At most two candidates per phase.",
+          "payload": {
+            "candidate": "garden",
+            "phase": 1
+          }
+        },
+        {
+          "id": "phase_2",
+          "label": "Inspect in phase 2",
+          "detail": "Collar is shaken and downstream of falling GARDEN tap. At most two candidates per phase.",
+          "payload": {
+            "candidate": "garden",
+            "phase": 2
+          }
+        },
+        {
+          "id": "phase_3",
+          "label": "Inspect in phase 3",
+          "detail": "Collar is shaken and downstream of falling GARDEN tap. At most two candidates per phase.",
+          "payload": {
+            "candidate": "garden",
+            "phase": 3
+          }
+        }
+      ],
+      "wrong_reason": "Record this candidate in a valid investigation phase; at most two inspections fit each phase."
+    },
+    "p05_inspect_return": {
+      "scene": "EX-CH03-S02",
+      "kind": "choice",
+      "title": "Inspect return manifold",
+      "goal": "File a location witness without exceeding two checks per phase.",
+      "why": "The simulator advances after every two candidate inspections. The fourth phase is reserved for the controlled repair.",
+      "options": [
+        {
+          "id": "phase_1",
+          "label": "Inspect in phase 1",
+          "detail": "Return holds steady. At most two candidates per phase.",
+          "payload": {
+            "candidate": "return",
+            "phase": 1
+          }
+        },
+        {
+          "id": "phase_2",
+          "label": "Inspect in phase 2",
+          "detail": "Return holds steady. At most two candidates per phase.",
+          "payload": {
+            "candidate": "return",
+            "phase": 2
+          }
+        },
+        {
+          "id": "phase_3",
+          "label": "Inspect in phase 3",
+          "detail": "Return holds steady. At most two candidates per phase.",
+          "payload": {
+            "candidate": "return",
+            "phase": 3
+          }
+        }
+      ],
+      "wrong_reason": "Record this candidate in a valid investigation phase; at most two inspections fit each phase."
+    },
+    "p05_inspect_airlock": {
+      "scene": "EX-CH03-S02",
+      "kind": "choice",
+      "title": "Inspect airlock seal",
+      "goal": "File a location witness without exceeding two checks per phase.",
+      "why": "The simulator advances after every two candidate inspections. The fourth phase is reserved for the controlled repair.",
+      "options": [
+        {
+          "id": "phase_1",
+          "label": "Inspect in phase 1",
+          "detail": "Seal remains seated. At most two candidates per phase.",
+          "payload": {
+            "candidate": "airlock",
+            "phase": 1
+          }
+        },
+        {
+          "id": "phase_2",
+          "label": "Inspect in phase 2",
+          "detail": "Seal remains seated. At most two candidates per phase.",
+          "payload": {
+            "candidate": "airlock",
+            "phase": 2
+          }
+        },
+        {
+          "id": "phase_3",
+          "label": "Inspect in phase 3",
+          "detail": "Seal remains seated. At most two candidates per phase.",
+          "payload": {
+            "candidate": "airlock",
+            "phase": 3
+          }
+        }
+      ],
+      "wrong_reason": "Record this candidate in a valid investigation phase; at most two inspections fit each phase."
+    },
+    "p05_inspect_annex": {
+      "scene": "EX-CH03-S02",
+      "kind": "choice",
+      "title": "Inspect annex branch",
+      "goal": "File a location witness without exceeding two checks per phase.",
+      "why": "The simulator advances after every two candidate inspections. The fourth phase is reserved for the controlled repair.",
+      "options": [
+        {
+          "id": "phase_1",
+          "label": "Inspect in phase 1",
+          "detail": "Aftershock auto-isolates the annex indicator. At most two candidates per phase.",
+          "payload": {
+            "candidate": "annex",
+            "phase": 1
+          }
+        },
+        {
+          "id": "phase_2",
+          "label": "Inspect in phase 2",
+          "detail": "Aftershock auto-isolates the annex indicator. At most two candidates per phase.",
+          "payload": {
+            "candidate": "annex",
+            "phase": 2
+          }
+        },
+        {
+          "id": "phase_3",
+          "label": "Inspect in phase 3",
+          "detail": "Aftershock auto-isolates the annex indicator. At most two candidates per phase.",
+          "payload": {
+            "candidate": "annex",
+            "phase": 3
+          }
+        }
+      ],
+      "wrong_reason": "Record this candidate in a valid investigation phase; at most two inspections fit each phase."
+    },
+    "p05_identify_garden_fall": {
+      "scene": "EX-CH03-S02",
+      "kind": "choice",
+      "title": "Name the falling branch",
+      "goal": "Compare t0 to t10 and identify the leak.",
+      "why": "Only 82 to 74 falls.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "GARDEN falls from 82 to 74",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "branch": "GARDEN"
+          }
+        },
+        {
+          "id": "held",
+          "label": "MAIN falls from 100 to 100",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "branch": "MAIN"
+          },
+          "feedback": "Only the garden branch falls over time."
+        }
+      ],
+      "wrong_reason": "Only the garden branch falls over time."
+    },
+    "p05_verify_annex_isolation": {
+      "scene": "EX-CH03-S03",
+      "kind": "choice",
+      "title": "Verify the annex aftershock state",
+      "goal": "Check the phase-two automatic isolation.",
+      "why": "The indicator changes during the aftershock.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Annex feed is auto-isolated",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "annex": "isolated"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Reopen annex feed before checking",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "annex": "reopened"
+          },
+          "feedback": "Verify the automatic branch isolation first."
+        }
+      ],
+      "wrong_reason": "Verify the automatic branch isolation first."
+    },
+    "p05_preview_garden_isolation": {
+      "scene": "EX-CH03-S03",
+      "kind": "choice",
+      "title": "Compare isolation boundaries",
+      "goal": "Keep the crew habitat supplied.",
+      "why": "The smallest supported boundary is GARDEN.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Isolate GARDEN only",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "boundary": "GARDEN"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Isolate habitat trunk",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "boundary": "HABITAT"
+          },
+          "feedback": "Closing the trunk stops crew breathing air too."
+        }
+      ],
+      "wrong_reason": "Closing the trunk stops crew breathing air too."
+    },
+    "p05_rollback_check": {
+      "scene": "EX-CH03-S03",
+      "kind": "choice",
+      "title": "Agree on rollback",
+      "goal": "Set the pressure-drop rollback before touching the valve.",
+      "why": "A reversible procedure protects crew air.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Reopen GARDEN and recheck MAIN if pressure falls",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "rollback": "reopen_garden_check_main"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Close MAIN reserve if pressure falls",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "rollback": "close_main"
+          },
+          "feedback": "FR-02 protects the main reserve; use the garden rollback."
+        }
+      ],
+      "wrong_reason": "FR-02 protects the main reserve; use the garden rollback."
+    },
+    "p05_isolate_garden": {
+      "scene": "EX-CH03-S04",
+      "kind": "choice",
+      "title": "Close the leaking branch",
+      "goal": "Close GARDEN while MAIN stays online.",
+      "why": "This isolates only the falling tap.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Close GARDEN valve only",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "valve": "GARDEN"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Close MAIN reserve valve",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "valve": "MAIN"
+          },
+          "feedback": "Protected reserve warning: MAIN must stay open."
+        }
+      ],
+      "wrong_reason": "Protected reserve warning: MAIN must stay open.",
+      "poll": [
+        "amara",
+        "kai",
+        "mei",
+        "rafi"
+      ],
+      "no_go_role": "rafi"
+    },
+    "p05_verify_main_hold": {
+      "scene": "EX-CH03-S04",
+      "kind": "choice",
+      "title": "Read the isolation hold",
+      "goal": "Verify MAIN 100 and isolated GARDEN 74.",
+      "why": "A clamp is safe only after the hold test.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "MAIN 100 / GARDEN 74",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "main": 100,
+            "garden": 74
+          }
+        },
+        {
+          "id": "held",
+          "label": "MAIN 100 / GARDEN 82",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "main": 100,
+            "garden": 82
+          },
+          "feedback": "The isolated garden witness is 74, not its earlier t0 reading."
+        }
+      ],
+      "wrong_reason": "The isolated garden witness is 74, not its earlier t0 reading."
+    },
+    "p05_apply_garden_clamp": {
+      "scene": "EX-CH03-S04",
+      "kind": "choice",
+      "title": "Seat the collar clamp",
+      "goal": "Work from the safe side of isolated GARDEN.",
+      "why": "A pressurised collar cannot latch cleanly.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Clamp garden feedthrough from safe side",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "clamp": "garden_safe_side"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Clamp return line while pressurised",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "clamp": "return_pressurised"
+          },
+          "feedback": "The return line held steady; isolate GARDEN first."
+        }
+      ],
+      "wrong_reason": "The return line held steady; isolate GARDEN first."
+    },
+    "p05_reopen_garden_slow": {
+      "scene": "EX-CH03-S04",
+      "kind": "choice",
+      "title": "Reopen slowly",
+      "goal": "Protect the new seal from a pressure surge.",
+      "why": "The hold test already passed.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Slow controlled GARDEN reopening",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "reopen": "slow"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Snap GARDEN open",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "reopen": "fast"
+          },
+          "feedback": "A fast reopen hammers the newly clamped collar."
+        }
+      ],
+      "wrong_reason": "A fast reopen hammers the newly clamped collar."
+    },
+    "p05_stable_read_1": {
+      "scene": "EX-CH03-S04",
+      "kind": "choice",
+      "title": "Steady check 1 of 5",
+      "goal": "Read MAIN/GARDEN/RETURN at the next two-second interval.",
+      "why": "Every check must hold all three taps steady.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "100 / 100 / 100",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "main": 100,
+            "garden": 100,
+            "return": 100
+          }
+        },
+        {
+          "id": "held",
+          "label": "100 / 96 / 100",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "main": 100,
+            "garden": 96,
+            "return": 100
+          },
+          "feedback": "Any falling branch means the repair has not passed verification."
+        }
+      ],
+      "wrong_reason": "Any falling branch means the repair has not passed verification."
+    },
+    "p05_stable_read_2": {
+      "scene": "EX-CH03-S04",
+      "kind": "choice",
+      "title": "Steady check 2 of 5",
+      "goal": "Read MAIN/GARDEN/RETURN at the next two-second interval.",
+      "why": "Every check must hold all three taps steady.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "100 / 100 / 100",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "main": 100,
+            "garden": 100,
+            "return": 100
+          }
+        },
+        {
+          "id": "held",
+          "label": "100 / 96 / 100",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "main": 100,
+            "garden": 96,
+            "return": 100
+          },
+          "feedback": "Any falling branch means the repair has not passed verification."
+        }
+      ],
+      "wrong_reason": "Any falling branch means the repair has not passed verification."
+    },
+    "p05_stable_read_3": {
+      "scene": "EX-CH03-S04",
+      "kind": "choice",
+      "title": "Steady check 3 of 5",
+      "goal": "Read MAIN/GARDEN/RETURN at the next two-second interval.",
+      "why": "Every check must hold all three taps steady.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "100 / 100 / 100",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "main": 100,
+            "garden": 100,
+            "return": 100
+          }
+        },
+        {
+          "id": "held",
+          "label": "100 / 96 / 100",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "main": 100,
+            "garden": 96,
+            "return": 100
+          },
+          "feedback": "Any falling branch means the repair has not passed verification."
+        }
+      ],
+      "wrong_reason": "Any falling branch means the repair has not passed verification."
+    },
+    "p05_stable_read_4": {
+      "scene": "EX-CH03-S04",
+      "kind": "choice",
+      "title": "Steady check 4 of 5",
+      "goal": "Read MAIN/GARDEN/RETURN at the next two-second interval.",
+      "why": "Every check must hold all three taps steady.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "100 / 100 / 100",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "main": 100,
+            "garden": 100,
+            "return": 100
+          }
+        },
+        {
+          "id": "held",
+          "label": "100 / 96 / 100",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "main": 100,
+            "garden": 96,
+            "return": 100
+          },
+          "feedback": "Any falling branch means the repair has not passed verification."
+        }
+      ],
+      "wrong_reason": "Any falling branch means the repair has not passed verification."
+    },
+    "p05_stable_read_5": {
+      "scene": "EX-CH03-S04",
+      "kind": "choice",
+      "title": "Steady check 5 of 5",
+      "goal": "Read MAIN/GARDEN/RETURN at the next two-second interval.",
+      "why": "Every check must hold all three taps steady.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "100 / 100 / 100",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "main": 100,
+            "garden": 100,
+            "return": 100
+          }
+        },
+        {
+          "id": "held",
+          "label": "100 / 96 / 100",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "main": 100,
+            "garden": 96,
+            "return": 100
+          },
+          "feedback": "Any falling branch means the repair has not passed verification."
+        }
+      ],
+      "wrong_reason": "Any falling branch means the repair has not passed verification."
+    },
+    "p05_reconcile_records": {
+      "scene": "EX-CH03-S05",
+      "kind": "choice",
+      "title": "Reconcile the paper note",
+      "goal": "Keep the tested valve setting and correct the copied note.",
+      "why": "Five checks outrank one copied line.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Correct paper note to tested valve",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "record": "correct_note"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Change tested valve to match paper",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "record": "change_valve"
+          },
+          "feedback": "Physical evidence supports the valve; correct the note."
+        }
+      ],
+      "wrong_reason": "Physical evidence supports the valve; correct the note."
+    },
+    "p05_save_monitoring_handover": {
+      "scene": "EX-CH03-S05",
+      "kind": "choice",
+      "title": "Save a monitoring handover",
+      "goal": "Keep the five readings and garden follow-up visible.",
+      "why": "A cleared alert still needs observation.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Save five readings and garden monitoring",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "handover": "five_checks_and_monitoring"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Discard checks after alert clears",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "handover": "discard_checks"
+          },
+          "feedback": "Retain the verified readings and follow-up plan."
+        }
+      ],
+      "wrong_reason": "Retain the verified readings and follow-up plan."
+    },
+    "p05_isolate_annex_feed": {
+      "scene": "EX-CH03-S06",
+      "kind": "choice",
+      "title": "Isolate annex feed",
+      "goal": "Set an independent boundary before inspecting N.R.",
+      "why": "The annex hatch is not cleared for entry.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Close annex feed for checks",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "annex_feed": "isolated"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Open annex hatch to find the valve",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "annex_feed": "open"
+          },
+          "feedback": "Close the feed before assessing the hatch."
+        }
+      ],
+      "wrong_reason": "Close the feed before assessing the hatch."
+    },
+    "p05_confirm_zero_differential": {
+      "scene": "EX-CH03-S06",
+      "kind": "choice",
+      "title": "Measure the hatch differential",
+      "goal": "Require zero before camera inspection.",
+      "why": "A sealed hatch can still hide a pressure difference.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Zero differential confirmed",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "differential": 0
+          }
+        },
+        {
+          "id": "held",
+          "label": "Assume equal pressure without a reading",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "differential": 1
+          },
+          "feedback": "Measure zero differential before inspection."
+        }
+      ],
+      "wrong_reason": "Measure zero differential before inspection."
+    },
+    "p05_inspect_annex_hatch": {
+      "scene": "EX-CH03-S06",
+      "kind": "choice",
+      "title": "Look through the N.R. hatch",
+      "goal": "Use the camera; leave suited entry uncleared.",
+      "why": "Safe inspection is not permission to enter.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Inspect by camera only",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "inspection": "camera_only"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Open hatch and enter",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "inspection": "enter"
+          },
+          "feedback": "The boundary check permits camera inspection only."
+        }
+      ],
+      "wrong_reason": "The boundary check permits camera inspection only."
+    }
+  },
+  "answers": {
+    "p05_equip_gauge": {
+      "instrument": "mechanical_gauge"
+    },
+    "p05_read_panel_warning": {
+      "status": "unverified"
+    },
+    "p05_identify_three_taps": {
+      "taps": [
+        "MAIN",
+        "GARDEN",
+        "RETURN"
+      ]
+    },
+    "p05_read_main_t0": {
+      "reading": 100
+    },
+    "p05_read_garden_t0": {
+      "reading": 82
+    },
+    "p05_read_return_t0": {
+      "reading": 100
+    },
+    "p05_read_main_t10": {
+      "reading": 100
+    },
+    "p05_read_garden_t10": {
+      "reading": 74
+    },
+    "p05_read_return_t10": {
+      "reading": 100
+    },
+    "p05_inspect_tank": {
+      "candidate": "tank"
+    },
+    "p05_inspect_habitat": {
+      "candidate": "habitat"
+    },
+    "p05_inspect_garden": {
+      "candidate": "garden"
+    },
+    "p05_inspect_return": {
+      "candidate": "return"
+    },
+    "p05_inspect_airlock": {
+      "candidate": "airlock"
+    },
+    "p05_inspect_annex": {
+      "candidate": "annex"
+    },
+    "p05_identify_garden_fall": {
+      "branch": "GARDEN"
+    },
+    "p05_verify_annex_isolation": {
+      "annex": "isolated"
+    },
+    "p05_preview_garden_isolation": {
+      "boundary": "GARDEN"
+    },
+    "p05_rollback_check": {
+      "rollback": "reopen_garden_check_main"
+    },
+    "p05_isolate_garden": {
+      "valve": "GARDEN"
+    },
+    "p05_verify_main_hold": {
+      "main": 100,
+      "garden": 74
+    },
+    "p05_apply_garden_clamp": {
+      "clamp": "garden_safe_side"
+    },
+    "p05_reopen_garden_slow": {
+      "reopen": "slow"
+    },
+    "p05_stable_read_1": {
+      "main": 100,
+      "garden": 100,
+      "return": 100
+    },
+    "p05_stable_read_2": {
+      "main": 100,
+      "garden": 100,
+      "return": 100
+    },
+    "p05_stable_read_3": {
+      "main": 100,
+      "garden": 100,
+      "return": 100
+    },
+    "p05_stable_read_4": {
+      "main": 100,
+      "garden": 100,
+      "return": 100
+    },
+    "p05_stable_read_5": {
+      "main": 100,
+      "garden": 100,
+      "return": 100
+    },
+    "p05_reconcile_records": {
+      "record": "correct_note"
+    },
+    "p05_save_monitoring_handover": {
+      "handover": "five_checks_and_monitoring"
+    },
+    "p05_isolate_annex_feed": {
+      "annex_feed": "isolated"
+    },
+    "p05_confirm_zero_differential": {
+      "differential": 0
+    },
+    "p05_inspect_annex_hatch": {
+      "inspection": "camera_only"
+    }
+  },
+  "simulation": {
+    "entry_resources": {
+      "E": 14,
+      "A": 10,
+      "H": 6,
+      "C": 8,
+      "R": 18
+    },
+    "witness_resources": {
+      "E": 18,
+      "A": 3,
+      "H": 6,
+      "C": 8,
+      "R": 13.2
+    },
+    "investigation_phases": 4,
+    "max_inspections_per_phase": 2,
+    "phase_hours_as_abstract_budget": 7.2,
+    "stable_interval_seconds": 2,
+    "taps": {
+      "MAIN": {
+        "t0": 100,
+        "t10": 100
+      },
+      "GARDEN": {
+        "t0": 82,
+        "t10": 74
+      },
+      "RETURN": {
+        "t0": 100,
+        "t10": 100
+      }
+    }
+  }
+}

@@ -1,0 +1,949 @@
+{
+  "schema_version": 1,
+  "content_revision": "p06_harvest_future-player-v2",
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-06; game-design/22_PUZZLE_CLUE_DESIGN.md 5.3?5.4; full-game-story/STORY_FULL.md EX-CH03-S07..S12",
+  "puzzle_id": "P-06",
+  "roles": {
+    "amara": {
+      "name": "Amara",
+      "role": "life support",
+      "letter": "A"
+    },
+    "kai": {
+      "name": "Kai",
+      "role": "power and piping",
+      "letter": "K"
+    },
+    "mei": {
+      "name": "Mei",
+      "role": "garden and lineage",
+      "letter": "M"
+    },
+    "rafi": {
+      "name": "Rafi",
+      "role": "safety and seismic",
+      "letter": "R"
+    },
+    "ferreira": {
+      "name": "Ferreira",
+      "role": "Earth support",
+      "letter": "F"
+    }
+  },
+  "puzzles": {
+    "P-06": {
+      "title": "A Harvest With a Future",
+      "hints": [
+        "Confirm pod maturity before changing irrigation.",
+        "Keep Tara watered; dry Alo, then protect twelve planted and thirty reserve.",
+        "Six wells of seven give 42; plant 12, seal 30 as 15 plus 15."
+      ],
+      "mastery": "Mature pods, five-day selective dry-down to moisture 20, six-by-seven count and 12/30 founder split.",
+      "first_time_card": {
+        "title": "A harvest with a future",
+        "purpose": "Preserve a living descendant line and its founder reserve.",
+        "steps": [
+          "Separate old seedling evidence from Alo mature pods.",
+          "Stop Alo-only irrigation and wait for the five-day dry-down.",
+          "Count six wells, plant twelve and seal thirty with lineage intact."
+        ],
+        "clip": "Selective dry-down and founder-seed count (explainer clip pending)"
+      }
+    }
+  },
+  "scenes": {
+    "EX-CH03-S07": {
+      "id": "EX-CH03-S07",
+      "mission": "EX-M0303",
+      "title": "Young Leaves, Old Map",
+      "story_date": "8 May 2046 ? cold annex",
+      "stage": "learn",
+      "goal": "Classify the cold annex seedlings and scan the vault map without disturbing them.",
+      "why": "Curled day-12 seedlings are not flowers or mature pods.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Log",
+          "where": "Growth chart",
+          "text": "The cold annex image is a day-12 seedling-stage record.",
+          "holders": [
+            "mei",
+            "amara"
+          ],
+          "line_id": "EX-CH03-S07-L01"
+        },
+        {
+          "id": "c2",
+          "kind": "Object",
+          "where": "Vault map",
+          "text": "The N.R. map is an archive lead, not a route clearance.",
+          "holders": [
+            "rafi"
+          ],
+          "line_id": "EX-CH03-S07-L03"
+        }
+      ],
+      "aha": "Classify the cold annex seedlings and scan the vault map without disturbing them.",
+      "wrong_idea": "Call curled seedlings failed flowers and handle the archive material.",
+      "flight_rules": [
+        "FR-06 ? Preserve living material and distinguish observation from inference."
+      ],
+      "risk": {
+        "title": "Premature plant handling",
+        "likelihood": 2,
+        "consequence": 3,
+        "level": "MODERATE"
+      }
+    },
+    "EX-CH03-S08": {
+      "id": "EX-CH03-S08",
+      "mission": "EX-M0303",
+      "title": "A Map Is a Preparation List",
+      "story_date": "8 May 2046 ? archive handover",
+      "stage": "learn",
+      "goal": "Keep map provenance and list present-day route checks.",
+      "why": "An old location can guide a survey, but departure still needs slope, reserve and communications.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Log",
+          "where": "Vault map",
+          "text": "The map predates the retreat and points to the N.R. archive.",
+          "holders": [
+            "amara"
+          ],
+          "line_id": "EX-CH03-S08-L03"
+        },
+        {
+          "id": "c2",
+          "kind": "Voice",
+          "where": "Return desk",
+          "text": "The map is evidence for a route; a verified return plan is still required.",
+          "holders": [
+            "rafi"
+          ],
+          "line_id": "EX-CH03-S08-L02"
+        }
+      ],
+      "aha": "Keep map provenance and list present-day route checks.",
+      "wrong_idea": "Treat the map as permission to depart.",
+      "flight_rules": [
+        "FR-05 ? Verify slope, return reserve and link before any future field route."
+      ],
+      "risk": {
+        "title": "Archive mistaken for route clearance",
+        "likelihood": 2,
+        "consequence": 3,
+        "level": "MODERATE"
+      }
+    },
+    "EX-CH03-S09": {
+      "id": "EX-CH03-S09",
+      "mission": "EX-M0303",
+      "title": "Alo Is Mature",
+      "story_date": "16 May 2046 ? plant day 35",
+      "stage": "apply",
+      "goal": "Confirm mature brown pods before stopping Alo-only irrigation.",
+      "why": "Mature pods need a controlled five-day dry-down; Tara keeps her own water.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Object",
+          "where": "Alo glove port",
+          "text": "Day-35 pods are plump and brown; the flower photograph belongs to the earlier stage.",
+          "holders": [
+            "mei"
+          ],
+          "line_id": "EX-CH03-S09-L01"
+        },
+        {
+          "id": "c2",
+          "kind": "Voice",
+          "where": "Growth chart",
+          "text": "This is maturity, not the old cold alarm.",
+          "holders": [
+            "amara"
+          ],
+          "line_id": "EX-CH03-S09-L03"
+        }
+      ],
+      "aha": "Confirm mature brown pods before stopping Alo-only irrigation.",
+      "wrong_idea": "Stop both Alo and Tara irrigation before checking maturity.",
+      "flight_rules": [
+        "FR-06 ? Confirm maturity and isolate Alo irrigation only."
+      ],
+      "risk": {
+        "title": "Premature harvest or Tara dehydration",
+        "likelihood": 2,
+        "consequence": 3,
+        "level": "MODERATE"
+      }
+    },
+    "EX-CH03-S10": {
+      "id": "EX-CH03-S10",
+      "mission": "EX-M0304",
+      "title": "Five Days and Forty-Two Seeds",
+      "story_date": "21 May 2046 ? five-day dry-down complete",
+      "stage": "apply",
+      "goal": "Reach moisture 20 or lower, count six wells of seven and choose a 12/30 split.",
+      "why": "The 42-seed parent line must supply both descendants and a sealed founder reserve.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Instrument",
+          "where": "Dry-down chart",
+          "text": "Alo moisture falls from 70 to 20 over five days while Tara irrigation stays on.",
+          "holders": [
+            "mei"
+          ],
+          "line_id": "EX-CH03-S10-L01"
+        },
+        {
+          "id": "c2",
+          "kind": "Object",
+          "where": "Counting wells",
+          "text": "Six pod wells each contain seven seeds: 42 in total.",
+          "holders": [
+            "amara"
+          ],
+          "line_id": "EX-CH03-S10-L05"
+        }
+      ],
+      "aha": "Reach moisture 20 or lower, count six wells of seven and choose a 12/30 split.",
+      "wrong_idea": "Open damp pods early or spend all 42 seeds on planting.",
+      "flight_rules": [
+        "FR-06 ? Dry mature pods to 20 or lower; protect founder reserve."
+      ],
+      "risk": {
+        "title": "Wet seed storage or lost founder reserve",
+        "likelihood": 2,
+        "consequence": 3,
+        "level": "MODERATE"
+      }
+    },
+    "EX-CH03-S11": {
+      "id": "EX-CH03-S11",
+      "mission": "EX-M0304",
+      "title": "Two Places for a Lineage",
+      "story_date": "21 May 2046 ? seed split",
+      "stage": "apply",
+      "goal": "Plant 12 positions, seal 30 founder seeds and preserve the parent-line label.",
+      "why": "The sealed reserve is 15 plus 15; the planting tray carries twelve.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Log",
+          "where": "Lineage label",
+          "text": "Parent line reads Alo times Tara before any dedication.",
+          "holders": [
+            "amara"
+          ],
+          "line_id": "EX-CH03-S11-L01"
+        },
+        {
+          "id": "c2",
+          "kind": "Object",
+          "where": "Reserve case",
+          "text": "Thirty founder seeds are sealed as two compartments of fifteen.",
+          "holders": [
+            "rafi"
+          ],
+          "line_id": "EX-CH03-S11-L02"
+        }
+      ],
+      "aha": "Plant 12 positions, seal 30 founder seeds and preserve the parent-line label.",
+      "wrong_idea": "Rename or plant reserve seeds before the parent line is recorded.",
+      "flight_rules": [
+        "FR-06 ? Keep 12 planted and 30 sealed with the original lineage."
+      ],
+      "risk": {
+        "title": "Lineage or reserve lost",
+        "likelihood": 2,
+        "consequence": 3,
+        "level": "MODERATE"
+      }
+    },
+    "EX-CH03-S12": {
+      "id": "EX-CH03-S12",
+      "mission": "EX-M0304",
+      "title": "The October Hand-off",
+      "story_date": "21 May?October 2046 ? care montage",
+      "stage": "twist",
+      "goal": "Reconcile the living descendants with the founder reserve and survey preparation.",
+      "why": "Alo continues in descendants and preserved seed, not as the same living plant.",
+      "clues": [
+        {
+          "id": "c1",
+          "kind": "Log",
+          "where": "Continuity ledger",
+          "text": "Twelve descendants grow; the 30 founder seeds remain sealed.",
+          "holders": [
+            "mei"
+          ],
+          "line_id": "EX-CH03-S12-L03"
+        },
+        {
+          "id": "c2",
+          "kind": "Voice",
+          "where": "Map board",
+          "text": "The map has a preparation list, not a departure stamp.",
+          "holders": [
+            "rafi"
+          ],
+          "line_id": "EX-CH03-S12-L04"
+        }
+      ],
+      "aha": "Reconcile the living descendants with the founder reserve and survey preparation.",
+      "wrong_idea": "Present the old map as a completed route permission.",
+      "flight_rules": [
+        "FR-06 ? Keep the living lineage and reserve distinct in the handover."
+      ],
+      "risk": {
+        "title": "Continuity claim unsupported",
+        "likelihood": 2,
+        "consequence": 3,
+        "level": "MODERATE"
+      }
+    }
+  },
+  "steps": {
+    "p06_scan_growth_chart": {
+      "scene": "EX-CH03-S07",
+      "kind": "choice",
+      "title": "Classify the cold annex record",
+      "goal": "Separate day-12 seedlings from a mature harvest.",
+      "why": "The curled leaves were young, not flowers.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Record young seedlings",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "stage": "seedling"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Record failed mature flowers",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "stage": "failed_flower"
+          },
+          "feedback": "The growth chart identifies seedlings."
+        }
+      ],
+      "wrong_reason": "The growth chart identifies seedlings."
+    },
+    "p06_scan_vault_map": {
+      "scene": "EX-CH03-S07",
+      "kind": "choice",
+      "title": "Read the N.R. vault map",
+      "goal": "File map provenance without authorising departure.",
+      "why": "The map is an archive lead.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Scan and preserve the old map",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "map": "archive_lead"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Treat map as route clearance",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "map": "route_clearance"
+          },
+          "feedback": "A route needs current slope, reserve and link checks."
+        }
+      ],
+      "wrong_reason": "A route needs current slope, reserve and link checks."
+    },
+    "p06_exit_suit_check": {
+      "scene": "EX-CH03-S07",
+      "kind": "choice",
+      "title": "Leave the annex safely",
+      "goal": "Keep the boundary and material undisturbed.",
+      "why": "The old map can be studied at base.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Exit with sealed suit check",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "suit": "sealed_exit"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Handle seedling material before exit",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "suit": "open_handling"
+          },
+          "feedback": "Preserve the annex material and complete suit checks."
+        }
+      ],
+      "wrong_reason": "Preserve the annex material and complete suit checks."
+    },
+    "p06_accept_maturity_montage": {
+      "scene": "EX-CH03-S07",
+      "kind": "choice",
+      "title": "Mark the care interval",
+      "goal": "Keep day-12 seedlings distinct from Alo day-35 maturity.",
+      "why": "The story advances through care, not instant growth.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Record care interval to May 16",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "timeline": "care_to_day_35"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Call day-12 seedlings mature pods",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "timeline": "instant_maturity"
+          },
+          "feedback": "Alo reaches pod maturity on plant day 35."
+        }
+      ],
+      "wrong_reason": "Alo reaches pod maturity on plant day 35."
+    },
+    "p06_save_map_provenance": {
+      "scene": "EX-CH03-S08",
+      "kind": "choice",
+      "title": "Save map provenance",
+      "goal": "Keep the N.R. deposit date beside the route lead.",
+      "why": "An old map needs a source and date.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Save archive origin and date",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "provenance": "archived_dated"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Replace old date with current survey date",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "provenance": "overwritten"
+          },
+          "feedback": "Preserve the archive provenance."
+        }
+      ],
+      "wrong_reason": "Preserve the archive provenance."
+    },
+    "p06_record_future_checks": {
+      "scene": "EX-CH03-S08",
+      "kind": "choice",
+      "title": "List future route checks",
+      "goal": "Require slope, reserve and communications before a trip.",
+      "why": "The map itself does not clear the route.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "List slope / return reserve / link",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "checks": [
+              "slope",
+              "return_reserve",
+              "link"
+            ]
+          }
+        },
+        {
+          "id": "held",
+          "label": "List map bearing only",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "checks": [
+              "bearing"
+            ]
+          },
+          "feedback": "Future departure needs all three current checks."
+        }
+      ],
+      "wrong_reason": "Future departure needs all three current checks."
+    },
+    "p06_confirm_care_transition": {
+      "scene": "EX-CH03-S08",
+      "kind": "choice",
+      "title": "Return to garden care",
+      "goal": "Continue Alo and Tara care until maturity.",
+      "why": "The archive lead can wait.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Return to living garden care",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "priority": "garden_care"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Depart for vault immediately",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "priority": "depart_now"
+          },
+          "feedback": "The map is not a departure stamp."
+        }
+      ],
+      "wrong_reason": "The map is not a departure stamp."
+    },
+    "p06_confirm_maturity": {
+      "scene": "EX-CH03-S09",
+      "kind": "choice",
+      "title": "Check Alo pod maturity",
+      "goal": "Confirm plump brown pods on plant day 35.",
+      "why": "Dry-down begins only after maturity.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Day-35 mature brown pods",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "maturity": "day_35_brown_pods"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Day-12 curled seedlings",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "maturity": "day_12_seedlings"
+          },
+          "feedback": "Alo is mature on May 16, plant day 35."
+        }
+      ],
+      "wrong_reason": "Alo is mature on May 16, plant day 35."
+    },
+    "p06_configure_drydown": {
+      "scene": "EX-CH03-S09",
+      "kind": "choice",
+      "title": "Configure selective irrigation",
+      "goal": "Stop Alo only; keep Tara watered.",
+      "why": "Dry mature Alo pods without harming Tara.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Alo OFF / Tara ON",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "alo": "OFF",
+            "tara": "ON"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Alo OFF / Tara OFF",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "alo": "OFF",
+            "tara": "OFF"
+          },
+          "feedback": "Tara irrigation must stay on."
+        }
+      ],
+      "wrong_reason": "Tara irrigation must stay on.",
+      "poll": [
+        "mei",
+        "amara",
+        "rafi"
+      ],
+      "no_go_role": "rafi"
+    },
+    "p06_drydown_five_days": {
+      "scene": "EX-CH03-S10",
+      "kind": "choice",
+      "title": "Read the five-day dry-down",
+      "goal": "Confirm May 16?21 and moisture at or below 20.",
+      "why": "The pods must dry before opening.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Five days / moisture 20",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "days": 5,
+            "moisture": 20
+          }
+        },
+        {
+          "id": "held",
+          "label": "Two days / moisture 45",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "days": 2,
+            "moisture": 45
+          },
+          "feedback": "Wet pods are not ready for sealed seed storage."
+        }
+      ],
+      "wrong_reason": "Wet pods are not ready for sealed seed storage."
+    },
+    "p06_open_six_pods": {
+      "scene": "EX-CH03-S10",
+      "kind": "choice",
+      "title": "Open mature pods into wells",
+      "goal": "Keep each pod in its own counting well.",
+      "why": "Separation makes the count auditable.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Six dry pods into six wells",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "pods": 6,
+            "wells": 6
+          }
+        },
+        {
+          "id": "held",
+          "label": "Pool damp pods in one tray",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "pods": 6,
+            "wells": 1
+          },
+          "feedback": "Use six separate wells after dry-down."
+        }
+      ],
+      "wrong_reason": "Use six separate wells after dry-down."
+    },
+    "p06_count_42": {
+      "scene": "EX-CH03-S10",
+      "kind": "choice",
+      "title": "Count six wells of seven",
+      "goal": "Calculate the total seed count.",
+      "why": "Six times seven is the physical witness.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "6 ? 7 = 42",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "wells": 6,
+            "total": 42
+          }
+        },
+        {
+          "id": "held",
+          "label": "6 ? 6 = 36",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "wells": 6,
+            "total": 36
+          },
+          "feedback": "Each of six wells has seven seeds: 42 total."
+        }
+      ],
+      "wrong_reason": "Each of six wells has seven seeds: 42 total."
+    },
+    "p06_allocate_12_30": {
+      "scene": "EX-CH03-S10",
+      "kind": "choice",
+      "title": "Divide the founder seeds",
+      "goal": "Plant twelve and seal thirty as reserve.",
+      "why": "Both living descendants and founder reserve matter.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "12 planted / 30 sealed",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "planted": 12,
+            "reserve": 30
+          }
+        },
+        {
+          "id": "held",
+          "label": "21 planted / 21 sealed",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "planted": 21,
+            "reserve": 21
+          },
+          "feedback": "The founder plan requires 12 planted and 30 sealed."
+        }
+      ],
+      "wrong_reason": "The founder plan requires 12 planted and 30 sealed.",
+      "poll": [
+        "mei",
+        "amara",
+        "rafi"
+      ],
+      "no_go_role": "rafi"
+    },
+    "p06_sleeve_petal": {
+      "scene": "EX-CH03-S10",
+      "kind": "choice",
+      "title": "Preserve Alo petal",
+      "goal": "Sleeve the petal after the seed count.",
+      "why": "The specimen keeps its identity and lineage.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Sleeve and label the petal",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "petal": "sleeved_labelled"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Leave it loose in the tray",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "petal": "loose"
+          },
+          "feedback": "The petal needs its own labelled sleeve."
+        }
+      ],
+      "wrong_reason": "The petal needs its own labelled sleeve."
+    },
+    "p06_plant_12_positions": {
+      "scene": "EX-CH03-S11",
+      "kind": "choice",
+      "title": "Plant the descendant tray",
+      "goal": "Place twelve seeds in twelve positions.",
+      "why": "The planting tray is separate from founder reserve.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Twelve labelled positions",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "positions": 12
+          }
+        },
+        {
+          "id": "held",
+          "label": "Plant all forty-two seeds",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "positions": 42
+          },
+          "feedback": "Keep thirty founder seeds sealed."
+        }
+      ],
+      "wrong_reason": "Keep thirty founder seeds sealed."
+    },
+    "p06_seal_reserve_30": {
+      "scene": "EX-CH03-S11",
+      "kind": "choice",
+      "title": "Seal the founder reserve",
+      "goal": "Use two compartments of fifteen.",
+      "why": "A split reserve is auditable and protected.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "30 sealed as 15 + 15",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "reserve": 30,
+            "compartments": [
+              15,
+              15
+            ]
+          }
+        },
+        {
+          "id": "held",
+          "label": "30 loose in one open tray",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "reserve": 30,
+            "compartments": [
+              30
+            ]
+          },
+          "feedback": "Seal two compartments of fifteen."
+        }
+      ],
+      "wrong_reason": "Seal two compartments of fifteen."
+    },
+    "p06_preserve_lineage": {
+      "scene": "EX-CH03-S11",
+      "kind": "choice",
+      "title": "Write the parent line first",
+      "goal": "Keep Alo ? Tara on the lineage label.",
+      "why": "Dedication follows the biological record.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Record Alo ? Tara, then dedicate",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "lineage": "Alo x Tara"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Replace parent line with a nickname",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "lineage": "nickname_only"
+          },
+          "feedback": "The original parent line must remain legible."
+        }
+      ],
+      "wrong_reason": "The original parent line must remain legible."
+    },
+    "p06_reconcile_continuity": {
+      "scene": "EX-CH03-S12",
+      "kind": "choice",
+      "title": "Reconcile continuity",
+      "goal": "Distinguish descendants from sealed founder reserve.",
+      "why": "Alo continues through lineage, not the same living pot.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "12 descendants and 30 sealed founders",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "continuity": "12_descendants_30_founders"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Alo itself survives in the October tray",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "continuity": "alo_same_plant"
+          },
+          "feedback": "The tray contains descendants; founder reserve stays sealed."
+        }
+      ],
+      "wrong_reason": "The tray contains descendants; founder reserve stays sealed."
+    },
+    "p06_confirm_descendant_survey": {
+      "scene": "EX-CH03-S12",
+      "kind": "choice",
+      "title": "Hand over the later survey",
+      "goal": "Treat the old map as preparation, not departure permission.",
+      "why": "Future route checks remain required.",
+      "options": [
+        {
+          "id": "supported",
+          "label": "Save survey preparation list",
+          "detail": "Supported by the scene evidence and flight rule.",
+          "payload": {
+            "survey": "preparation_only"
+          }
+        },
+        {
+          "id": "held",
+          "label": "Mark departure cleared by map alone",
+          "detail": "Test this idea against the witness before acting.",
+          "payload": {
+            "survey": "depart_now"
+          },
+          "feedback": "The map has a preparation list, not a departure stamp."
+        }
+      ],
+      "wrong_reason": "The map has a preparation list, not a departure stamp."
+    }
+  },
+  "answers": {
+    "p06_scan_growth_chart": {
+      "stage": "seedling"
+    },
+    "p06_scan_vault_map": {
+      "map": "archive_lead"
+    },
+    "p06_exit_suit_check": {
+      "suit": "sealed_exit"
+    },
+    "p06_accept_maturity_montage": {
+      "timeline": "care_to_day_35"
+    },
+    "p06_save_map_provenance": {
+      "provenance": "archived_dated"
+    },
+    "p06_record_future_checks": {
+      "checks": [
+        "slope",
+        "return_reserve",
+        "link"
+      ]
+    },
+    "p06_confirm_care_transition": {
+      "priority": "garden_care"
+    },
+    "p06_confirm_maturity": {
+      "maturity": "day_35_brown_pods"
+    },
+    "p06_configure_drydown": {
+      "alo": "OFF",
+      "tara": "ON"
+    },
+    "p06_drydown_five_days": {
+      "days": 5,
+      "moisture": 20
+    },
+    "p06_open_six_pods": {
+      "pods": 6,
+      "wells": 6
+    },
+    "p06_count_42": {
+      "wells": 6,
+      "total": 42
+    },
+    "p06_allocate_12_30": {
+      "planted": 12,
+      "reserve": 30
+    },
+    "p06_sleeve_petal": {
+      "petal": "sleeved_labelled"
+    },
+    "p06_plant_12_positions": {
+      "positions": 12
+    },
+    "p06_seal_reserve_30": {
+      "reserve": 30,
+      "compartments": [
+        15,
+        15
+      ]
+    },
+    "p06_preserve_lineage": {
+      "lineage": "Alo x Tara"
+    },
+    "p06_reconcile_continuity": {
+      "continuity": "12_descendants_30_founders"
+    },
+    "p06_confirm_descendant_survey": {
+      "survey": "preparation_only"
+    }
+  },
+  "simulation": {
+    "plant_day_mature": 35,
+    "maturity_date": "2046-05-16",
+    "harvest_date": "2046-05-21",
+    "initial_moisture": 70,
+    "target_moisture": 20,
+    "drydown_days": 5,
+    "pods": 6,
+    "wells": 6,
+    "seeds_per_well": 7,
+    "total_seeds": 42,
+    "planted": 12,
+    "reserve": 30,
+    "reserve_compartments": [
+      15,
+      15
+    ]
+  }
+}

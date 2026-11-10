@@ -3,6 +3,8 @@ class_name ExtendedGateCatalog
 
 const Chapter2Catalog = preload("res://scripts/missions/chapter2_gate_catalog.gd")
 const RoomContract = preload("res://scripts/world/room_contract.gd")
+const P05 = preload("res://scripts/puzzles/p05_falling_pressure.gd")
+const P06 = preload("res://scripts/puzzles/p06_harvest_future.gd")
 const Chapter4 = preload("res://scripts/puzzles/chapter4_puzzles.gd")
 const Chapter6 = preload("res://scripts/puzzles/chapter6_puzzles.gd")
 const Chapter8 = preload("res://scripts/puzzles/chapter8_puzzles.gd")
@@ -66,19 +68,27 @@ static func targets_for_scene(scene_id: String) -> Array:
 	var result: Array = []
 	for action in _actions(chapter, order):
 		var required: Array = previous.duplicate()
-		for prior in result:
-			required.append(String(prior.get("physical_flag", "")))
+		if chapter == 3 and order == 2 and String(action).begins_with("p05_inspect_"):
+			# The six candidates can be inspected in any order. Phase capacity is
+			# checked by the ledger; all six remain required before the t10 taps.
+			required.append("p05_read_return_t0_done")
+		else:
+			for prior in result:
+				required.append(String(prior.get("physical_flag", "")))
 		result.append(_target(String(action), room_id, String(action).replace("_", " ").capitalize(), mission_id, scene_id, puzzle_id, required, _defaults(String(action))))
 	return result
 
 static func _target(action: String, room_id: String, label: String, mission_id: String, scene_id: String, puzzle_id: String, required: Array, defaults: Dictionary) -> Dictionary:
+	if action.begins_with("p05_"):
+		label = P05.new().focus_label(action)
+	if action.begins_with("p06_"):
+		label = P06.new().focus_label(action)
 	if Chapter4.is_step(action) and not Chapter4.focus_label(action).is_empty():
 		label = Chapter4.focus_label(action)
 	if Chapter6.is_step(action) and not Chapter6.focus_label(action).is_empty():
 		label = Chapter6.focus_label(action)
 	if Chapter8.is_step(action) and not Chapter8.focus_label(action).is_empty():
 		label = Chapter8.focus_label(action)
-	label = {"p05_inspect_tank": "Inspect main tank candidate", "p05_inspect_habitat": "Inspect habitat trunk candidate", "p05_inspect_garden": "Inspect garden feedthrough candidate", "p05_inspect_return": "Inspect return line candidate", "p05_inspect_airlock": "Inspect airlock seal candidate", "p05_inspect_annex": "Inspect annex branch candidate"}.get(action, label)
 	return {"target_id": action, "room_id": room_id, "world_focus_id": _world_focus_id(action, room_id), "focus_label": label, "verb": "Use", "command_verb": "campaign_operation", "command_target_id": puzzle_id, "command_id": "extended:%s" % action, "owning_mission_id": mission_id, "owning_scene_id": scene_id, "physical_flag": action + "_done", "required_flags": required.filter(func(value): return not String(value).is_empty()), "unmet_reason": "Complete the preceding evidence step before using this target.", "readout": label, "range_m": 3.0, "line_of_sight_required": false, "puzzle_id": puzzle_id, "puzzle_action": action, "payload_defaults": defaults}
 
 static func _world_focus_id(action: String, room_id: String) -> String:
@@ -235,13 +245,9 @@ static func _actions(chapter: int, order: int) -> Array:
 static func _defaults(action: String) -> Dictionary:
 	if Chapter4.is_step(action) or Chapter6.is_step(action) or Chapter8.is_step(action):
 		return {}
+	if action.begins_with("p05_") or action.begins_with("p06_"):
+		return {}
 	match action:
-		"p05_read_main_t0", "p05_read_main_t10", "p05_read_return_t0", "p05_read_return_t10": return {"reading": 100}
-		"p05_read_garden_t0": return {"reading": 82}
-		"p05_read_garden_t10": return {"reading": 74}
-		"p05_stable_read_1", "p05_stable_read_2", "p05_stable_read_3", "p05_stable_read_4", "p05_stable_read_5": return {"main": 100, "garden": 100, "return": 100}
-		"p06_count_42": return {"total": 42, "wells": 6}
-		"p06_allocate_12_30": return {"planted": 12, "reserve": 30}
 		"p07_choose_route_b": return {"route": "B"}
 		"p07_verify_slope": return {"slope": 12}
 		"p07_verify_return_reserve": return {"reserve": 40}
