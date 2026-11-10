@@ -240,7 +240,8 @@ func _render() -> void:
 		_button(equipment, "Back to prediction", "BackToPrediction", cancel_confirm)
 	elif _observed:
 		_label(equipment, "Action complete. Close this panel and follow the next goal.")
-		var fb := Chapter1FeedbackScript.action_feedback(_target)
+		var p01_state: Dictionary = _view.get("state", {}) if _view.get("state", null) is Dictionary else {}
+		var fb := Chapter1FeedbackScript.action_feedback(_target, p01_state)
 		var fb_label := _label(equipment, "What changed: %s\nWhy: %s\nNext step: %s\n%s · %s: \"%s\"" % [
 			String(fb.get("consequence", "")),
 			String(fb.get("why", "")),

@@ -218,10 +218,7 @@ func _physics_process(delta: float) -> void:
 			lean_axis -= 1.0
 		if Input.is_physical_key_pressed(KEY_E) and not generic_interaction_input:
 			lean_axis += 1.0
-		if Input.is_physical_key_pressed(KEY_F):
-			eva_suit.set("scanner_holding", true)
-		elif not bool(eva_suit.get("scanner_holding")):
-			eva_suit.set("scanner_holding", false)
+		eva_suit.set("scanner_holding", Input.is_physical_key_pressed(KEY_F) or (InputMap.has_action("eva_scanner") and Input.is_action_pressed("eva_scanner")))
 		var eva_res: Dictionary = eva_suit.call("step", delta, horizontal_speed, floor_slope_deg, lean_axis, eva_surface_tags)
 		eva_scale = clampf(float(eva_res.get("speed_scale", 1.0)), 0.0, 1.0)
 		desired_speed *= eva_scale

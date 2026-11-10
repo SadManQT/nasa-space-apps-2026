@@ -42,6 +42,9 @@ func _test_action_feedback_and_banner() -> void:
 	for action_id in [
 		"route_spare_power",
 		"calibrate_probe",
+		"span_probe",
+		"recheck_probe",
+		"inspect_packet",
 		"plant_and_seal_cassettes",
 		"stage_shelter_water",
 		"return_garden_water",
@@ -53,10 +56,22 @@ func _test_action_feedback_and_banner() -> void:
 		_check(not String(fb.get("meter_tick", "")).is_empty(), action_id + " has meter tick")
 		_check(not String(fb.get("crew_reaction", "")).is_empty(), action_id + " has crew reaction line")
 
+	# Step-specific calibration feedback checks: set_zero must NOT claim wet-span or verification is already done
+	var fb_zero := FeedbackScript.action_feedback("calibrate_probe", {"probe_zeroed": true, "probe_spanned": false, "probe_rechecked": false})
+	_check(String(fb_zero.get("canonical_id", "")) == "set_zero", "calibrate_probe maps to set_zero step feedback")
+	_check(String(fb_zero.get("consequence", "")).contains("10 to 0") and not String(fb_zero.get("consequence", "")).contains("spanned on the wet"), "set_zero consequence reports only dry zero (10->0), not wet span")
+	_check(String(fb_zero.get("next_step", "")).contains("wet reference span") and not String(fb_zero.get("next_step", "")).contains("Fill Alo"), "set_zero next_step directs player to set wet reference span, not water cassettes")
+
+	var fb_span := FeedbackScript.action_feedback("span_probe", {"probe_zeroed": true, "probe_spanned": true, "probe_rechecked": false})
+	_check(String(fb_span.get("canonical_id", "")) == "set_span" and String(fb_span.get("next_step", "")).contains("Recheck"), "span_probe reports wet span (110->100) and directs player to recheck both references")
+
+	var fb_recheck := FeedbackScript.action_feedback("recheck_probe", {"probe_zeroed": true, "probe_spanned": true, "probe_rechecked": true, "packet_scanned": false})
+	_check(String(fb_recheck.get("canonical_id", "")) == "recheck" and String(fb_recheck.get("next_step", "")).contains("seed packet"), "recheck_probe confirms two-point verification and directs player to inspect the seed packet")
+
 	var host := Control.new()
 	host.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.add_child(host)
-	var banner := FeedbackScript.build_feedback_banner(host, "calibrate_probe", 2, 6, 0, false)
+	var banner := FeedbackScript.build_feedback_banner(host, "recheck_probe", 2, 6, 0, false)
 	banner.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 	banner.custom_minimum_size = Vector2(920, 320)
 	banner.position = Vector2(180, 200)
@@ -204,7 +219,30 @@ func _test_live_campaign_feedback_integration() -> void:
 	campaign.hud.p01_panel.confirm_commit()
 	await process_frame
 	var p01_text := _collect_text(campaign.hud.p01_panel)
-	_check(p01_text.contains("What changed:") and p01_text.contains("Zero and span checked against both cups"), "P01Panel.show_result renders Chapter1Feedback cause-and-effect and Rafi's reaction")
+	_check(p01_text.contains("What changed:") and p01_text.contains("Dry cup zeroed at 0") and p01_text.contains("wet reference span") and not p01_text.contains("Fill Alo"), "After dry-zero ('calibrate_probe'), P01Panel feedback reports only dry zero and directs to wet span (never claims wet-span/verification or watering yet)")
+	campaign.hud.p01_panel.discard()
+
+	# Also verify span_probe and recheck_probe step-by-step in live campaign
+	campaign.hud.p01_panel.open(campaign, "span_probe")
+	for key in Inputs.payload("span_probe"):
+		campaign.hud.p01_panel.choose(key, Inputs.payload("span_probe")[key])
+	campaign.hud.p01_panel.preview()
+	campaign.hud.p01_panel.request_commit()
+	campaign.hud.p01_panel.confirm_commit()
+	await process_frame
+	var span_text := _collect_text(campaign.hud.p01_panel)
+	_check(span_text.contains("110 to 100") and span_text.contains("Recheck both"), "After wet-span ('span_probe'), P01Panel feedback reports 110->100 and directs to recheck both references")
+	campaign.hud.p01_panel.discard()
+
+	campaign.hud.p01_panel.open(campaign, "recheck_probe")
+	for key in Inputs.payload("recheck_probe"):
+		campaign.hud.p01_panel.choose(key, Inputs.payload("recheck_probe")[key])
+	campaign.hud.p01_panel.preview()
+	campaign.hud.p01_panel.request_commit()
+	campaign.hud.p01_panel.confirm_commit()
+	await process_frame
+	var recheck_text := _collect_text(campaign.hud.p01_panel)
+	_check(recheck_text.contains("Zero and span checked against both cups") and recheck_text.contains("seed packet"), "After two-point recheck ('recheck_probe'), P01Panel feedback confirms verification and directs to seed packet")
 	campaign.hud.p01_panel.discard()
 
 	# 3. Jump to EX-CH01-S07 and verify MissionTablePanel renders night_shift_tension and alo_posture

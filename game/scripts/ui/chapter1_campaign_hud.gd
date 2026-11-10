@@ -282,14 +282,18 @@ func refresh_after_action(result: Dictionary) -> void:
 			newly_done.append(id)
 	if result.get("accepted", false):
 		var done_id := String(newly_done[0]) if not newly_done.is_empty() else ""
+		if done_id.is_empty() and result.get("p01", null) is Dictionary:
+			done_id = String((result.get("p01", {}) as Dictionary).get("action", ""))
 		var notes_list := _result_notes(result.get("warnings", []) + result.get("ledger_summary", []))
 		var fb_dict := {}
 		var tension_dict := {}
 		var posture_dict := {}
 		if _scene_id.begins_with("EX-CH01-") and not done_id.is_empty():
-			fb_dict = Chapter1FeedbackScript.action_feedback(done_id)
 			var snap: Dictionary = runtime.director.snapshot() if runtime != null and runtime.director != null else {}
+			var route_snap: Dictionary = runtime.route.snapshot() if runtime != null and runtime.route != null and runtime.route.has_method("snapshot") else {}
 			var res: Dictionary = snap.get("resources", {}) if snap.get("resources", {}) is Dictionary else {}
+			var live_state := {"p01": route_snap.get("p01", {}), "resources": res}
+			fb_dict = Chapter1FeedbackScript.action_feedback(done_id, live_state)
 			var shift_idx := clampi(int(res.get("shift_index", 1)), 1, 7)
 			var alo_h := int(res.get("H", 6))
 			var water_w := int(res.get("W", 0))

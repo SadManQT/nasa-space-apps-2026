@@ -272,14 +272,60 @@ func _test_player_controller_and_campaign_eva_integration() -> void:
 	campaign.hud._process(0.05)
 	_check(campaign.hud.eva_visor.visible, "EvaVisorHud becomes visible on the campaign HUD during exterior EVA")
 
-	# Hold F scanner pulse in campaign populates last_scan_samples via _step_campaign_eva()
-	campaign.eva_suit.scanner_holding = true
+	# Hold F scanner pulse in campaign populates last_scan_samples via _step_campaign_eva(),
+	# and releasing F clears scanner_holding so the scanner does not repeatedly re-trigger.
+	if not InputMap.has_action("eva_scanner"):
+		InputMap.add_action("eva_scanner")
+	Input.action_press("eva_scanner")
 	for _i in 10:
 		campaign._player._physics_process(0.05)
 		campaign._physics_process(0.05)
-	campaign.eva_suit.scanner_holding = false
-	_check(campaign.eva_suit.scanner_pulse_active and campaign.eva_suit.last_scan_samples.size() == 48, "Holding F on campaign player fires scanner pulse and scans 48 surrounding terrain samples")
+	_check(campaign.eva_suit.scanner_holding and campaign.eva_suit.scanner_pulse_active and campaign.eva_suit.last_scan_samples.size() == 48, "Holding F (eva_scanner) on campaign player fires scanner pulse and scans 48 surrounding terrain samples")
+	Input.action_release("eva_scanner")
+	campaign._player._physics_process(0.05)
+	_check(not campaign.eva_suit.scanner_holding, "Releasing F (eva_scanner) immediately clears scanner_holding to false")
+	for _i in 60:
+		campaign._player._physics_process(0.05)
+		campaign._physics_process(0.05)
+	_check(not campaign.eva_suit.scanner_pulse_active and is_equal_approx(campaign.eva_suit.scanner_charge, 0.0), "After releasing F, scanner pulse finishes and does not re-trigger")
 	_check(campaign.eva_suit.oxygen < 100.0 and campaign.eva_suit.power < 100.0, "Stepping outdoors in campaign drains suit oxygen and power")
+
+	# Verify _scan_campaign_terrain uses real scene/terrain data (no coordinate-hash boulders or fake fallback hazards)
+	var fallback_samples := campaign._scan_campaign_terrain(campaign._player.global_position)
+	var fake_boulders_far := 0
+	var fake_soft_regolith := 0
+	var far_slope_sum := 0.0
+	for s in fallback_samples:
+		var spos: Vector3 = s.world
+		var stags: Array = s.tags
+		if stags.has("soft_regolith"):
+			fake_soft_regolith += 1
+		# Far from any authored obstacle on flat fallback floor, there must be no synthetic boulder or slope
+		if spos.distance_to(campaign._player.global_position) > 8.0:
+			far_slope_sum += float(s.slope_deg)
+			if stags.has("boulder"):
+				fake_boulders_far += 1
+	_check(fake_soft_regolith == 0 and fake_boulders_far == 0 and is_equal_approx(far_slope_sum, 0.0), "Flat staging floor fallback reports 0 deg slope and zero synthetic boulder/soft_regolith hazards")
+
+	# Place a real rock node in _room.visual_root and verify scanner detects it at its real position only
+	var real_rock := Node3D.new()
+	real_rock.name = "LunarBoulderTest"
+	real_rock.set_meta("radius_m", 1.2)
+	campaign._room.visual_root.add_child(real_rock)
+	var rock_target_pos := campaign._player.global_position + Vector3(4.0, 0.0, 0.0)
+	real_rock.global_position = rock_target_pos
+	var rock_samples := campaign._scan_campaign_terrain(campaign._player.global_position)
+	var detected_at_rock := false
+	var detected_opposite := false
+	for s in rock_samples:
+		var spos: Vector3 = s.world
+		var stags: Array = s.tags
+		if Vector2(spos.x - rock_target_pos.x, spos.z - rock_target_pos.z).length() < 1.0 and stags.has("boulder"):
+			detected_at_rock = true
+		if Vector2(spos.x - (campaign._player.global_position.x - 12.0), spos.z - campaign._player.global_position.z).length() < 1.0 and stags.has("boulder"):
+			detected_opposite = true
+	_check(detected_at_rock and not detected_opposite, "Campaign terrain scanner detects boulder tag at real rock object position and not at empty opposite coordinates")
+	real_rock.free()
 
 	# Verify no_go slope (speed_scale == 0.0) prevents player movement (fixes 0.25 override)
 	var player := campaign._player
