@@ -1,0 +1,49 @@
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/case.py:621: ResourceWarning: unclosed file <_io.TextIOWrapper name=5 encoding='UTF-8'>
+  outcome.errors.clear()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/case.py:621: ResourceWarning: unclosed file <_io.TextIOWrapper name=8 encoding='UTF-8'>
+  outcome.errors.clear()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/case.py:621: ResourceWarning: unclosed file <_io.TextIOWrapper name=4 encoding='UTF-8'>
+  outcome.errors.clear()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/case.py:621: ResourceWarning: unclosed file <_io.TextIOWrapper name=6 encoding='UTF-8'>
+  outcome.errors.clear()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+======================================================================
+ERROR: test_fatal_script_error_stops_live_engine_before_its_timeout (__main__.RunnerTests) (mode='suite_runtime_hang')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/atik130/Desktop/Hackathon/NASA/nasa-space-apps-2026/game/tools/test_runner.py", line 87, in test_fatal_script_error_stops_live_engine_before_its_timeout
+    result, _ = self.run_case(mode, suite_timeout="20")
+  File "/Users/atik130/Desktop/Hackathon/NASA/nasa-space-apps-2026/game/tools/test_runner.py", line 61, in run_case
+    stdout, stderr = process.communicate(timeout=12)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 1134, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 1980, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 1178, in _check_timeout
+    raise TimeoutExpired(
+subprocess.TimeoutExpired: Command '['bash', '/var/folders/q5/jpk87qq94pdb4slhspw0kdz00000gn/T/lla-runner-dv8b41d0/game/tools/run_tests.sh']' timed out after 12 seconds
+
+======================================================================
+ERROR: test_fatal_script_error_stops_live_engine_before_its_timeout (__main__.RunnerTests) (mode='suite_pass_runtime_hang')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/atik130/Desktop/Hackathon/NASA/nasa-space-apps-2026/game/tools/test_runner.py", line 87, in test_fatal_script_error_stops_live_engine_before_its_timeout
+    result, _ = self.run_case(mode, suite_timeout="20")
+  File "/Users/atik130/Desktop/Hackathon/NASA/nasa-space-apps-2026/game/tools/test_runner.py", line 61, in run_case
+    stdout, stderr = process.communicate(timeout=12)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 1134, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 1980, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 1178, in _check_timeout
+    raise TimeoutExpired(
+subprocess.TimeoutExpired: Command '['bash', '/var/folders/q5/jpk87qq94pdb4slhspw0kdz00000gn/T/lla-runner-3poyou6q/game/tools/run_tests.sh']' timed out after 12 seconds
+
+----------------------------------------------------------------------
+Ran 1 test in 24.041s
+
+FAILED (errors=2)

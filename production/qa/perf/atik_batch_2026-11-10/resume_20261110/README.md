@@ -2,7 +2,7 @@
 
 Priority: M1-68. This run preserves the earlier batch evidence and fixes.
 
-## Fresh integrated Mac gate (running)
+## First fresh integrated Mac gate (interrupted)
 
 The full mandatory runner uses an isolated detached checkout of daa014145922e2646027140f3bd34c53a0afe3cb (game tree 1c3a0dd3517226d7c9c3a79138249593e4955d2a). All117 discovered suites are included. Runtime source and settings come from the committed checkout; the user's local import/settings edits remain in the original workspace. APFS copy-on-write clones preserve the3052 existing LFS files and existing import cache. No cache is deleted; no cold-cache or original-Windows result is inferred.
 
@@ -35,3 +35,23 @@ M1-92 requires matching native campaign profiling and controlled measurements;
 the previous unsymbolicated title sample is not campaign-cause proof. M1-116
 requires the original Arc Windows/Vulkan host and process/thread diagnostics.
 No task is marked Done by starting this collection.
+
+The first collection was stopped after 1005.463s: 28 suites reported, six failed,
+and the next UI suite printed a null-node SCRIPT ERROR then remained alive.
+Its partial log, exact failures, interruption record and unchanged source hashes
+are retained in full/. This is incomplete, not a full-suite result. Ramim has
+active reservations for the affected gameplay/fixture files.
+
+## Bounded runner repair
+
+The runner now fails and stops its own child promptly after the same fatal
+script diagnostics it already rejected at exit. TERM has a three-second grace
+then KILL and reap, so a failed teardown cannot block the remaining gate.
+The normal process guard remains 300s. PLAYER_TEXT_TIMEOUT optionally changes
+only test_player_text.gd; the next full run uses 1500s for that known long walk.
+No assertion, loading limit or gameplay was changed.
+
+runner/red.txt reproduces the old live-engine hang in two injected scenarios.
+runner/green.txt records all six unittest methods (13 scenarios), including
+fatal errors after PASS, ignored TERM, and the text-only guard isolation.
+A frozen-source full rerun will be recorded separately under full_bounded/.
