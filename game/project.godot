@@ -99,7 +99,7 @@ common/physics_interpolation=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/runtime_assets/plugin.cfg")
+enabled=PackedStringArray("res://addons/runtime_assets/plugin.cfg", "res://addons/gohud/plugin.cfg")
 
 [rendering]
 
