@@ -4566,7 +4566,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Rule out a threaded-loading deadlock at full-cast entry",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -4606,6 +4606,11 @@
     "production/qa/evidence/M1-53*",
     "production/qa/perf/",
     "game/tools/test_loading.gd.uid",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
+   ],
+   "edit_files": [
+    "production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-53_REVIEW_REQUEST.md",
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ]
@@ -5886,7 +5891,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -5920,12 +5925,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Saved source/evidence published through33e1593; frozen checkpointd1f9a7a also on work/atik-loading-20261110. Original full86/89; its comms/P01/text failures have successful separate follow-ups. Latest audit-merged mandatory P01 inputs319/0, loading29/0 and performance582/0 pass at9375330. Earlier retained post-integration582/3 timing failure and two fresh582/0 passes do not establish a cause/fix. Resume with original Ryzen7/RTX4060 Windows two-process loading evidence, diagnose any remaining interval failures, and obtain a fresh integrated full gate. No latest full/Windows repair claimed. Exact artifacts/commands/blockers: production/qa/perf/atik_batch_2026-11-10/README.md.",
-   "edit_files": [
-    "production/qa/perf/atik_batch_2026-11-10/resume_20261110/README.md",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
-   ]
+   "blocker": "Resumed source569e723 saves host-access recheck and starts all117 mandatory suites at frozen committed-source daa0141 in isolated APFS-cloned checkout. Full collection is still running under resume_20261110/full; no final result yet. Original Ryzen7/RTX4060 host is unavailable: no configured SSH/remote connector or supplied collection route; hosted CI is not original hardware. Need original-host two-process evidence plus a demonstrated cause/fix and fresh integrated full acceptance; Mac retries are not proof. Reclaim this exact task to publish the collection when it completes. Existing fixes/logs preserved."
   },
   {
    "id": "M1-69",
