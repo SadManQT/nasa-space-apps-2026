@@ -1,0 +1,14 @@
+{
+  "engine": "4.7.stable.official.5b4e0cb0f",
+  "hardware": "Windows Ryzen7 7700 / RTX4060 / 32GB",
+  "scope": "HUD construction is yielded only during incremental loading; normal synchronous fixtures remain synchronous. Awaited setup completes before card removal. Keyboard loading guard verified RED89/7 then GREEN89/0. Native real loading/watchdog smoke31/0, both PNGs inspected. This is not a claim that the still-failing50ms timing gate has passed.",
+  "diagnostic_before_split": "Instrumented615/2 while a separate CPU-bound full-profile process was active. Newcampaign98.431ms interval contains synchronous hud_setup92.072ms onthread1. Terrain59.351ms untraced. Retention checks passed; raw timing failures preserved.",
+  "pending": "Two controlled original-host performance runs after active128-profile workers finish, then a fresh immutable117-suite gate. Native held-worker fixture does not close the different original raw-loader blocker.",
+  "source_sha256": {
+    "game/scripts/campaign/chapter1_campaign.gd": "2bc68b405b435363b93265bb7d439c7a1c4263d152c529a5564bc589717a1f54",
+    "game/scripts/ui/chapter1_campaign_hud.gd": "fe1fd392e9f501d0e8d37c1e4d060b34ce31116a3fd86c6a4716159fc36f0831",
+    "game/scripts/loading/load_trace.gd": "248fcf871030e0074d460e8beb771a989018b880d8e6175dea00f011b6912f5e",
+    "game/tools/test_performance_runtime.gd": "7ed30e19d6efc350e6103241a1c4ebddf37cb5760b2d5cb2a1d2a6943b88f3f7",
+    "game/tools/test_campaign_later_runtime.gd": "0c1d95349408f9e2847b7e7b1c6e71fcff5af69fe5f52fb3e50d291cf4b27df6"
+  }
+}

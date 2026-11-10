@@ -87,6 +87,14 @@ func _check(condition: bool, message: String) -> void:
 
 func _test_panels() -> void:
 	var chapter: String = _campaign.director.query().chapter_id
+	_campaign.loading = true
+	var shortcut := InputEventKey.new()
+	shortcut.physical_keycode = KEY_ESCAPE
+	shortcut.pressed = true
+	_campaign.hud._unhandled_key_input(shortcut)
+	_check(_campaign.hud.panels.active_panel().is_empty() and not _campaign.query().paused, "loading ignores menu shortcuts until HUD setup is complete")
+	_campaign.hud.panels.close_panel()
+	_campaign.loading = false
 	for panel_id in ["journal_discovery", "pause", "settings_accessibility"]:
 		_campaign.hud.panels.open_panel(panel_id, {})
 		_check(_campaign.director.query().paused and _campaign._player.process_mode == Node.PROCESS_MODE_DISABLED, "B04 " + chapter + " pauses for " + panel_id)

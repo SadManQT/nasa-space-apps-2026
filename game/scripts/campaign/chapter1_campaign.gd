@@ -165,9 +165,13 @@ func _ready_incremental() -> void:
 		_save_campaign()
 		await get_tree().process_frame
 	loading = false
+	var ready_stamp := LoadTrace.begin()
 	_on_scene_ready()
+	LoadTrace.end("campaign_scene_ready", ready_stamp)
 	if hud != null:
+		ready_stamp = LoadTrace.begin()
 		hud.refresh_scene()
+		LoadTrace.end("campaign_hud_refresh", ready_stamp)
 	_prefetch_next_room()
 
 func wait_loading() -> void:
@@ -927,7 +931,9 @@ func _sync_route_projection() -> void:
 func _save_campaign() -> Dictionary:
 	if not _startup_error.is_empty():
 		return {"accepted": false, "reason": _startup_error}
+	var stamp := LoadTrace.begin()
 	var result: Dictionary = save_service.save(_save_snapshot(), save_path)
+	LoadTrace.end("campaign_save", stamp)
 	if bool(result.get("accepted", false)):
 		_exit_without_save_armed = false
 	else:
@@ -1027,6 +1033,7 @@ func _refresh_world_now(incremental_assets: bool = false) -> void:
 	LoadTrace.end("room_rebuild", stamp)
 
 func _place_crew() -> void:
+	var stamp := LoadTrace.begin()
 	var anchors: Dictionary = RoomContract.anchors(route.current_room_id())
 	var anchor_id: String = {"LOC-01": "commons_player", "LOC-02": "service_player", "LOC-03": "garden_player", "LOC-04": "safe_player", "LOC-06": "exterior_player"}.get(route.current_room_id(), "")
 	var player_anchor: Array = anchors.get(anchor_id, [])
@@ -1053,6 +1060,7 @@ func _place_crew() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_setup_garage_dock()
 	_sync_world_boundaries()
+	LoadTrace.end("campaign_place_crew", stamp)
 
 func _bind_player_eva() -> void:
 	if eva_suit == null:
@@ -1240,11 +1248,17 @@ func _build_hud() -> void:
 	var layer := CanvasLayer.new()
 	layer.name = "CampaignHUDLayer"
 	add_child(layer)
+	var stamp := LoadTrace.begin()
 	hud = HUDScene.instantiate() as Chapter1CampaignHUD
+	LoadTrace.end("hud_instantiate", stamp)
+	stamp = LoadTrace.begin()
 	layer.add_child(hud)
+	LoadTrace.end("hud_ready", stamp)
 	if incremental_loading and is_inside_tree():
 		await get_tree().process_frame
-	hud.setup(self)
+	stamp = LoadTrace.begin()
+	await hud.setup(self)
+	LoadTrace.end("hud_setup", stamp)
 
 func present_dialogue(line: Dictionary) -> void:
 	if _crew != null:
