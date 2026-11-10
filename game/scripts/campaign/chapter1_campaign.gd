@@ -4,6 +4,9 @@ class_name Chapter1Campaign
 signal exit_requested
 ## Ramim's panel subscribes here. Opening/cancelling never submits choices.
 signal p01_panel_requested(view: Dictionary)
+## Chapter 2 decision panel (P-03 and P-04). Opening, previewing and cancelling
+## never commit; only confirm_chapter2_choice with the previewed choices does.
+signal chapter2_panel_requested(view: Dictionary)
 ## A cutscene closed (watched to the end, skipped, or its text card dismissed).
 signal cutscene_closed(result: Dictionary)
 
@@ -57,6 +60,8 @@ var _last_scan_origin := Vector3(INF, INF, INF)
 var _terrain: Node3D
 var _startup_error := ""
 var _ui_paused := false
+## The open Chapter 2 panel and the exact choices last previewed for it.
+var _chapter2_pending: Dictionary = {}
 var _exit_without_save_armed := false
 var save_path: String = SaveScript.DEFAULT_PATH
 var cutscenes: CampaignCutsceneRuntime
@@ -353,6 +358,40 @@ func p01_view(target_id: String) -> Dictionary:
 		return {"accepted": false, "reason": "P-01 is unavailable in this chapter."}
 	return route.p01_view(target_id)
 
+## Read-only forecast of the player's chosen Chapter 2 inputs. Needs the open,
+## paused panel for this target. Any rejected preview forgets the earlier one.
+func preview_chapter2_choice(target_id: String, payload: Dictionary) -> Dictionary:
+	if _chapter2_pending.is_empty() or String(_chapter2_pending.get("target_id", "")) != target_id or not _ui_paused:
+		return {"accepted": false, "reason": "Open this Chapter 2 panel first; previews need the paused panel."}
+	var forecast := forecast_target(target_id, payload)
+	if not bool(forecast.get("accepted", false)):
+		_chapter2_pending["previewed"] = null
+		return forecast
+	_chapter2_pending["previewed"] = payload.duplicate(true)
+	_chapter2_pending["input_revision"] = int(forecast.get("input_revision", -1))
+	return forecast
+
+## Commits exactly the previewed choices, once, at the physical target.
+func confirm_chapter2_choice(target_id: String, payload: Dictionary) -> Dictionary:
+	if _chapter2_pending.is_empty() or String(_chapter2_pending.get("target_id", "")) != target_id:
+		return {"accepted": false, "reason": "Open this Chapter 2 panel and preview your choice first."}
+	if _ui_paused:
+		return {"accepted": false, "reason": "Close the panel's pause before confirming."}
+	var previewed = _chapter2_pending.get("previewed", null)
+	if not previewed is Dictionary or previewed != payload:
+		return {"accepted": false, "reason": "Preview these exact choices before confirming."}
+	if int(_chapter2_pending.get("input_revision", -2)) != int(director.snapshot().get("state_revision", -1)):
+		return {"accepted": false, "reason": "The expedition changed since the preview. Preview again."}
+	if String(nearby_target().get("target_id", "")) != target_id:
+		return {"accepted": false, "reason": "Walk up to the target and face it to confirm."}
+	var result := perform_target(target_id, payload)
+	if bool(result.get("accepted", false)):
+		_chapter2_pending = {}
+	return result
+
+func cancel_chapter2_choice() -> void:
+	_chapter2_pending = {}
+
 func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 	if loading or not _startup_error.is_empty() or route == null:
 		return {"accepted": false, "reason": "The expedition is unavailable."}
@@ -518,6 +557,15 @@ func interact_nearby() -> Dictionary:
 			return view
 		p01_panel_requested.emit(view)
 		return {"accepted": true, "p01_panel_requested": true, "physical_commit": false, "reason": "Choose the P-01 inputs before confirming."}
+	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-03", "P-04"] and route != null and route.has_method("puzzle_view"):
+		var view: Dictionary = route.puzzle_view(String(selected.target_id))
+		if not view.get("accepted", false):
+			return view
+		if chapter2_panel_requested.get_connections().is_empty():
+			return {"accepted": false, "reason": "The Chapter 2 decision panel is unavailable, so nothing was committed."}
+		_chapter2_pending = {"target_id": String(selected.target_id), "input_revision": int(view.get("input_revision", -1)), "previewed": null}
+		chapter2_panel_requested.emit(view)
+		return {"accepted": true, "chapter2_panel_requested": true, "physical_commit": false, "reason": "Choose the inputs before confirming."}
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) == "P-02" and hud != null and hud.open_mission_table(String(selected.target_id)):
 		return {"accepted": true, "reason": "Mission Table open.", "mission_table": true}
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-07", "P-08"] and hud != null and hud.open_chapter4_panel(String(selected.target_id)):
@@ -754,6 +802,7 @@ func set_ui_paused(value: bool) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func retry_checkpoint() -> Dictionary:
+	_chapter2_pending = {}
 	var result: Dictionary = route.retry()
 	if bool(result.get("accepted", false)):
 		_sync_route_projection()

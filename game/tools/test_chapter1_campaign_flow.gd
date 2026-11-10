@@ -205,7 +205,10 @@ func _test_chapter2_handoff() -> void:
 			campaign._player.global_position = approach
 			campaign._player.velocity = Vector3.ZERO
 			await physics_frame
-			var action := campaign.perform_target(target_id)
+			# P-03 and P-04 take the player's chosen inputs, never catalog defaults.
+			var choices := {"record_stem_prediction": {"prediction": "Both visible colours may appear", "reason": "Alo has purple and Tara has green stems; the complete genotype is not established.", "future_test": "Compare descendant stem observations after seed harvest."},
+				"assign_date_token": {"value": "2034-04"}, "assign_device_token": {"value": "HORT-01"}, "assign_channel_token": {"value": "ENGINEERING"}}
+			var action := campaign.perform_target(target_id, choices.get(target_id, {}))
 			_check(bool(action.get("accepted", false)), "production Chapter 2 commits " + target_id + " (" + String(action.get("reason", "")) + ")")
 			if not bool(action.get("accepted", false)): return
 		if number == 5:
