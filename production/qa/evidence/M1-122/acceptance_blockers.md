@@ -1,8 +1,14 @@
-# Current-source acceptance blockers and saved work
+# Recorded acceptance blockers and saved work
 
 10 November 2026, Tanvir. Work is limited to M1-122, M1-123 and M1-85. The collision correction is published in e5ed6178 and actual-input regression in 630c9278; M1-85 evidence/status are published in 2b848e34/76621158. No other task is claimed or repaired.
 
 The synchronized test snapshot is game tree `8edef085d1dcc51ee5c4b6974c31905cd6441da1`, source 2b848e34 (the later status-only commit 76621158 has the same game tree). New care props, opening activity, campaign/player changes and other members' work were preserved. The tested local import metadata and pre-existing project blank-line edit are retained in run metadata; this is not a pristine committed-import baseline.
+
+## Latest synchronization check
+
+After later teammate integration, the latest tested game tree is `d1436027711ea9bf1721ac7dd4bf4f01564ef197` (source bf19dff7, containing the final upstream sync plus evidence-only commits). A fresh mandatory Garden runner passes **2/2: collision19/0, movement54/0**. The fresh comms runner still fails **0/1** because its45/0 assertion output lacks the recognized result marker. [Latest commands/source](final_sync/run.json), [Garden](final_sync/garden/runner.txt), [comms](final_sync/comms/runner.txt).
+
+The native and broader diagnostics below deliberately remain tied to their recorded **8edef** snapshot. They do not claim full/native verification of the later34-file upstream repair. Some older failures may have been repaired there; the latest comms blocker and absence of a complete current full pass still prevent Done.
 
 ## Focused checks
 
@@ -48,4 +54,4 @@ Read-only staging inspection shows the newly added Alo/Tara nameholders are visu
 
 ## Resume condition
 
-M1-122 and M1-123 remain **blocked on required global acceptance**, with verified narrow source work saved/pushed. Owners must resolve the listed campaign/UI/staging/fixture/marker/performance failures, then a complete mandatory full runner must pass. No additional runtime-controller cause has been established in the recorded Garden contact cases. The original screenshot's exact transform/input/camera were not recorded, and the selected candidate starts are labeled honestly. Manual QA, release packaging, submission and video work remain deferred; they are not invented blockers here.
+M1-122 and M1-123 remain **blocked on required global acceptance**, with verified narrow source work saved/pushed. Owners must resolve any remaining campaign/UI/staging/fixture/marker/performance failures, including the latest confirmed comms marker failure, then a complete current mandatory full runner must pass. The older failure list is evidence at8edef, not an assertion that every failure persists after later upstream repairs. No additional runtime-controller cause has been established in the recorded Garden contact cases. The original screenshot's exact transform/input/camera were not recorded, and the selected candidate starts are labeled honestly. Manual QA, release packaging, submission and video work remain deferred; they are not invented blockers here.

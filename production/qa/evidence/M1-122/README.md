@@ -8,7 +8,13 @@ The regression restores an actual EX-CH01-S11 production CampaignScene checkpoin
 
 The habitat suite covers all four Chapter1 story rooms using scripted PlayerController-body traversal, navigation to interaction/door approaches and open/closed pressure-door rays. It does not claim full-capsule or input-driven crossings of every doorway. Actual input, camera and contact recovery are exercised at the Garden corner by M1-123.
 
-## Current synchronized verification
+## Latest synchronization check
+
+After later teammate integration, the latest tested game tree is `d1436027711ea9bf1721ac7dd4bf4f01564ef197` (source bf19dff7, containing the final upstream sync plus evidence-only commits). A fresh mandatory Garden runner passes **2/2: collision19/0, movement54/0**. The fresh comms runner still fails **0/1** because its45/0 assertion output lacks the recognized result marker. [Latest commands/source](final_sync/run.json), [Garden](final_sync/garden/runner.txt), [comms](final_sync/comms/runner.txt).
+
+The native and broader diagnostics below deliberately remain tied to their recorded **8edef** snapshot. They do not claim full/native verification of the later34-file upstream repair. Some older failures may have been repaired there; the latest comms blocker and absence of a complete current full pass still prevent Done.
+
+## Recorded 8edef verification
 
 Game tree `8edef085d1dcc51ee5c4b6974c31905cd6441da1`; source2b848e34, with status-only HEAD76621158 at capture time. [Commands, local metadata and isolated profile](regression_post_sync/run.json).
 
@@ -28,7 +34,7 @@ Both current before/after PNGs were opened and inspected. They show the real cam
 
 ## Acceptance blocker and history
 
-[Complete blocker handoff](acceptance_blockers.md) separates current failures, the continuous-attempt cap, all26 continuation targets and the earlier source. Current failures cover calibration/UI/fixture integration, Chapter6/8 mission entry, visible narrative/puzzle staging, gravity, comms marker, performance, player-text timeout and upgrade-profile witnesses. Owners must repair them and a complete mandatory full runner must pass before Done. No test, setup guard, physics mask, pressure solid or timing limit was weakened.
+[Complete blocker handoff](acceptance_blockers.md) separates current failures, the continuous-attempt cap, all26 continuation targets and the earlier source. Recorded failures cover calibration/UI/fixture integration, Chapter6/8 mission entry, visible narrative/puzzle staging, gravity, comms marker, performance, player-text timeout and upgrade-profile witnesses. Any remaining failures need owner repair, and a complete current mandatory full runner must pass before Done. No test, setup guard, physics mask, pressure solid or timing limit was weakened.
 
 Earlier retained evidence is explicitly **pre-sync**, not the current campaign fingerprint: [headless RED19/3](final_red/runner.txt), [Garden2/2](final_focused/runner.txt), [older baseline native19/2](before_native/run.json), [older corrected native20/0](native/run.json), and [older full91/95](regression/run.json). The baseline19/2 predates the review-added positive enclosure assertion. The old full spans a [large wall-clock gap](regression/clock_observation.json); aggregate duration is not a controlled benchmark.
 

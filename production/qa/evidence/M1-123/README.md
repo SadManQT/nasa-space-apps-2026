@@ -6,7 +6,13 @@ The regression uses actual SaveService save/load in isolated storage, restores p
 
 For each ending/input pair, one fixture placement starts outside furniture near the photographed corner. Injected input reaches a named tara_bay contact. Recovery changes only movement input: reverse away, steer around the outer side and clear front lane, return to the center. No transform, velocity, facing or animation is written during recovery. Normal camera recenter/steering/step-up, world+crew collision mask3 and capsule radius0.27m remain active. Each trial checks grounded arrival, unpaused/unlocked control and unchanged mission gates/resources.
 
-## Current synchronized verification
+## Latest synchronization check
+
+After later teammate integration, the latest tested game tree is `d1436027711ea9bf1721ac7dd4bf4f01564ef197` (source bf19dff7, containing the final upstream sync plus evidence-only commits). A fresh mandatory Garden runner passes **2/2: collision19/0, movement54/0**. The fresh comms runner still fails **0/1** because its45/0 assertion output lacks the recognized result marker. [Latest commands/source](../M1-122/final_sync/run.json), [Garden](../M1-122/final_sync/garden/runner.txt), [comms](../M1-122/final_sync/comms/runner.txt).
+
+The native and broader diagnostics below deliberately remain tied to their recorded **8edef** snapshot. They do not claim full/native verification of the later34-file upstream repair. Some older failures may have been repaired there; the latest comms blocker and absence of a complete current full pass still prevent Done.
+
+## Recorded 8edef verification
 
 Game tree `8edef085d1dcc51ee5c4b6974c31905cd6441da1`; current native manifests include before/after source hashes and bounded capture timestamps.
 

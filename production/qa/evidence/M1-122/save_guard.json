@@ -4,5 +4,7 @@
   "sha256_before_full_run": "7500982b1be85d08848421a6e1d3b4386c344a59d6a74f05a7b8504e77d47b51",
   "exists_after_all_runs": true,
   "sha256_after_all_runs": "7500982b1be85d08848421a6e1d3b4386c344a59d6a74f05a7b8504e77d47b51",
-  "unchanged": true
+  "unchanged": true,
+  "sha256_after_final_sync_checks": "7500982b1be85d08848421a6e1d3b4386c344a59d6a74f05a7b8504e77d47b51",
+  "unchanged_after_final_sync": true
 }

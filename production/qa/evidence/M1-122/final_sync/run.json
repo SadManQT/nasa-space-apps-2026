@@ -1,0 +1,31 @@
+{
+  "source_commit": "bf19dff738ba2b112e2bd93f93cdb8a2f708ae82",
+  "game_tree": "d1436027711ea9bf1721ac7dd4bf4f01564ef197",
+  "scope": "Post-final-sync focused current-source checks; earlier native/full evidence remains frozen at its recorded tree.",
+  "runs": [
+    {
+      "name": "garden",
+      "command": [
+        "C:/Program Files/Git/bin/bash.exe",
+        "game/tools/run_tests.sh",
+        "garden"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_seconds": 85.841,
+      "runner_sha256": "c74c39cbf105d99470b19c3a051e6f54db677c549eaa0ed3325947700613defd"
+    },
+    {
+      "name": "comms",
+      "command": [
+        "C:/Program Files/Git/bin/bash.exe",
+        "game/tools/run_tests.sh",
+        "comms"
+      ],
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_seconds": 16.505,
+      "runner_sha256": "e2580ff1944d64e36d7bf2624c75f4ca50a472adb01761e09c3c3affb306eb07"
+    }
+  ]
+}
