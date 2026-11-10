@@ -16,6 +16,7 @@ var _campaign: Chapter1Campaign
 var _original_user_dir := ""
 
 func _init() -> void:
+	CampaignCutscenePlayer.autoplay = false
 	if not storage.setup("test_campaign_later_runtime"):
 		push_error("Unable to isolate test storage.")
 		quit(1)
@@ -45,7 +46,11 @@ func _run() -> void:
 	_check(_campaign.route != null and _campaign.route.current_scene_id() == "EX-CH02-S12", "production runtime restores a Chapter 2 checkpoint")
 	_test_panels()
 	var transition: Dictionary = _campaign.advance_scene()
-	_check(bool(transition.get("accepted", false)) and _campaign.route.current_scene_id() == "EX-CH03-S01", "production controller crosses into Chapter 3")
+	_check(bool(transition.get("upgrade_pending", false)) and _campaign.available_upgrade_chapter() == 2, "Chapter 2 completion offers its earned upgrade before departure")
+	var chosen: Dictionary = _campaign.choose_upgrade(2, "A")
+	_check(bool(chosen.get("persisted", false)), "Chapter 2 upgrade is saved before departure")
+	_check(bool(chosen.get("accepted", false)) and _campaign.route.current_scene_id() == "EX-CH03-S01", "production controller crosses into Chapter 3 after the player chooses an upgrade")
+	_check(not is_instance_valid(_campaign.hud._family_panel) and not _campaign.query().paused, "runtime closes the upgrade family before entering Chapter 3")
 	_check(String(_campaign.director.snapshot().get("chapter_id", "")) == "CH03" and _campaign.route.current_room_id() == "LOC-02", "Chapter 3 projection and service-room viewpoint are authoritative")
 	var target: Node3D = _campaign.physical_target("p05_equip_gauge")
 	_check(target != null, "Chapter 3 exposes a physical P-05 gauge target")

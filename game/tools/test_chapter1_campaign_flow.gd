@@ -111,6 +111,10 @@ func _run() -> void:
 			campaign.hud.panels.close_panel()
 		var advance := campaign.advance_scene()
 		_check(bool(advance.get("accepted", false)), scene_id + " advances through the production controller")
+		if index == ACTIONS.size() - 1:
+			_check(campaign.available_upgrade_chapter() == 1, "Chapter 1 offers its earned upgrade at the real boundary")
+			_check(bool(campaign.choose_upgrade(1, "A").get("accepted", false)), "Player chooses the earned Chapter 1 upgrade before the Chapter 2 handoff")
+			_check(not is_instance_valid(campaign.hud._family_panel) and not campaign.query().paused, "Chapter 1 upgrade handoff closes its modal and resumes gameplay")
 		var locked: Dictionary = campaign.director.commit({"command_id": "change-after-exit:" + scene_id, "issuer": "test", "owning_mission_id": campaign.director.query().mission_id, "owning_scene_id": scene_id, "expected_state_revision": campaign.director.query().state_revision, "target_id": choice_id, "verb": "record_choice", "payload": {"choice_id": choice_id, "option_id": scene_id + "-OPT02"}})
 		_check(not locked.get("accepted", true) and String(locked.get("reason", "")).contains("locked"), scene_id + " choice cannot change after its real scene exit")
 		if not bool(advance.get("accepted", false)):
@@ -220,5 +224,9 @@ func _test_chapter2_handoff() -> void:
 		if number == 6:
 			_check(is_equal_approx(campaign.director.snapshot().resources.R, 4.0), "B03 separate dated background ledger supplies 14 and consumes the unsampled share of 28")
 		_check(bool(campaign.advance_scene().get("accepted", false)), "production Chapter 2 advances " + scene_id)
+		if number == 12:
+			_check(campaign.available_upgrade_chapter() == 2, "Chapter 2 offers its earned upgrade before Chapter 3")
+			_check(bool(campaign.choose_upgrade(2, "A").get("accepted", false)), "Player chooses the earned Chapter 2 upgrade before Chapter 3")
+			_check(not is_instance_valid(campaign.hud._family_panel) and not campaign.query().paused, "Chapter 2 upgrade handoff closes its modal and resumes gameplay")
 		await process_frame
 	_check(campaign.route.current_scene_id() == "EX-CH03-S01", "real Chapter 2 gameplay hands off to Chapter 3")

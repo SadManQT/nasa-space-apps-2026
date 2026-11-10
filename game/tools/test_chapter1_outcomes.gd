@@ -147,6 +147,10 @@ func _test_ui() -> void:
 			safe_campaign.hud.show_chapter1_outcome()
 			_check(not (safe_campaign.hud.panels.find_child("EndingContinue", true, false) as Button).disabled, "%s ready physical gate enables Continue at large=%s" % [safe_ending, large])
 		(safe_campaign.hud.panels.find_child("EndingContinue", true, false) as Button).pressed.emit()
+		_check(safe_campaign.available_upgrade_chapter() == 1 and safe_campaign.route.current_scene_id() == "EX-CH01-S12", safe_ending + " Continue offers the earned upgrade without choosing for the player")
+		var chosen: Dictionary = safe_campaign.choose_upgrade(1, "A")
+		_check(bool(chosen.get("accepted", false)), safe_ending + " earned upgrade choice commits through the real runtime")
+		_check(bool(chosen.get("persisted", false)), safe_ending + " earned upgrade persists before the chapter handoff")
 		_check(safe_campaign.route.current_scene_id() == "EX-CH02-S01", safe_ending + " Continue advances after all final gates")
 		safe_campaign.free()
 	for ending in ["ALO_LOST", "MISSION_STOPPED"]:

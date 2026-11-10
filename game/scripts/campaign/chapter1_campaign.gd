@@ -1068,7 +1068,7 @@ func _bind_player_eva() -> void:
 	_last_eva_room_id = room_id
 	if _player != null:
 		_player.eva_suit = eva_suit
-		_player.gravity = EvaSuitScript.MOON_G if not now_indoor else 9.8
+		_player.gravity = EvaSuitScript.MOON_G
 		if now_indoor:
 			_player.eva_surface_tags = []
 			_player.eva_slope_override_deg = -1.0
@@ -1309,6 +1309,8 @@ func choose_upgrade(chapter: int, option: String) -> Dictionary:
 		return {"accepted": false, "reason": "The cadet record is unavailable."}
 	var result: Dictionary = _progression_flow.choose_upgrade(chapter, option)
 	if bool(result.get("accepted", false)) and bool(result.get("persisted", true)) and chapter == _chapter_number() and is_chapter_complete():
+		if hud != null:
+			hud.close_family()
 		result["next_chapter"] = _transition_after_chapter()
 		if hud != null:
 			hud.refresh_scene(result)

@@ -1,0 +1,20 @@
+{
+  "engine": "4.7.stable.official.5b4e0cb0f",
+  "command": "game/tools/run_tests.sh <suite>; isolated APPDATA, TEST_LOG_DIR=green-handoff, SUITE_TIMEOUT=600",
+  "scope": "Focused real campaign/HUD handoff and persistence checks. Tested with additional disabled-by-default LoadTrace diagnostic spans, committed separately. No performance/full-gate claim.",
+  "results": [
+    {
+      "suite": "test_chapter1_outcomes.gd",
+      "result": "CHAPTER 1 OUTCOMES RESULT: PASS (140 checks, 0 failures)"
+    },
+    {
+      "suite": "test_campaign_later_runtime.gd",
+      "result": "LATER CAMPAIGN RUNTIME RESULT: PASS (82 checks, 0 failures)"
+    },
+    {
+      "suite": "test_chapter1_campaign_flow.gd",
+      "result": "CHAPTER 1 CAMPAIGN FLOW RESULT: PASS (508 checks, 0 failures)"
+    }
+  ],
+  "review": "Independent read-only review; new assertions require runtime itself to close upgrade modal and restore unpaused gameplay."
+}
